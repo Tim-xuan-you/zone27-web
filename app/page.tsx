@@ -1,4 +1,6 @@
 import Link from "next/link";
+import Nav from "@/components/Nav";
+import Footer from "@/components/Footer";
 
 export default function Home() {
   // ── ZONE 27 首頁靈魂 ───────────────────────────────
@@ -24,36 +26,7 @@ export default function Home() {
 
   return (
     <div className="flex flex-col flex-1 min-h-screen">
-      {/* ── TOP NAV ────────────────────────────────── */}
-      <nav className="w-full border-b border-line/60 backdrop-blur-sm">
-        <div className="mx-auto max-w-6xl px-6 sm:px-10 py-5 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-3 group">
-            <span className="font-mono text-gold text-xl tracking-[0.22em] font-medium group-hover:opacity-80">
-              ZONE
-            </span>
-            <span className="font-mono text-bone text-xl tracking-[0.22em] font-medium group-hover:opacity-80">
-              27
-            </span>
-          </Link>
-          <div className="flex items-center gap-6 text-sm">
-            <Link
-              href="/matches"
-              className="font-mono text-mute hover:text-gold text-xs tracking-[0.22em] transition-colors"
-            >
-              MATCHES
-            </Link>
-            <Link
-              href="/founders"
-              className="font-mono text-mute hover:text-gold text-xs tracking-[0.22em] transition-colors"
-            >
-              FOUNDERS · 27
-            </Link>
-            <button className="px-4 py-2 border border-gold/30 text-gold text-xs tracking-[0.18em] hover:bg-gold/10 transition-colors">
-              LOGIN
-            </button>
-          </div>
-        </div>
-      </nav>
+      <Nav active="home" />
 
       {/* ── HERO ───────────────────────────────────── */}
       <section className="mx-auto max-w-5xl px-6 sm:px-10 pt-24 pb-12 text-center">
@@ -238,19 +211,7 @@ export default function Home() {
         </Link>
       </section>
 
-      {/* ── FOOTER ─────────────────────────────────── */}
-      <footer className="mt-auto border-t border-line/40">
-        <div className="mx-auto max-w-6xl px-6 sm:px-10 py-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-3">
-            <span className="font-mono text-gold text-sm tracking-[0.22em]">ZONE</span>
-            <span className="font-mono text-bone text-sm tracking-[0.22em]">27</span>
-            <span className="text-mute text-xs ml-2">© 2026</span>
-          </div>
-          <p className="font-mono text-mute/70 text-[10px] tracking-[0.25em]">
-            BUILT FOR THOSE WHO READ THE NUMBERS.
-          </p>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }
