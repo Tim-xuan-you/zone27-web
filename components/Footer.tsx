@@ -38,7 +38,7 @@ export default function Footer() {
           )}
         </div>
 
-        {/* Bottom row: brand + tagline */}
+        {/* Bottom row: brand + tagline + version chip */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-6">
           <div className="flex items-center gap-3">
             <span className="font-mono text-gold text-sm tracking-[0.22em]">ZONE</span>
@@ -48,6 +48,14 @@ export default function Footer() {
           <p className="font-mono text-mute/70 text-[10px] tracking-[0.25em] text-center">
             BUILT FOR THOSE WHO READ THE NUMBERS.
           </p>
+          <a
+            href="/changelog"
+            className="inline-flex items-center gap-2 font-mono text-[10px] tracking-[0.3em] text-mute hover:text-gold transition-colors"
+            title="View full changelog"
+          >
+            <span className="w-1.5 h-1.5 rounded-full bg-gold/70 glow-gold" />
+            <span>v0.13 · 13 RELEASES</span>
+          </a>
         </div>
       </div>
     </footer>
