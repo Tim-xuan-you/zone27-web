@@ -1,34 +1,9 @@
 import Link from "next/link";
-
-// 今日 CPBL 賽事(2026/05/19 · 週二)
-const todaysMatches = [
-  {
-    id: "cpbl-260519-01",
-    league: "CPBL",
-    venue: "台中洲際",
-    time: "18:35",
-    home: { name: "中信兄弟", en: "BROTHERS", pitcher: "德保拉", era: "2.84", win: 62 },
-    away: { name: "統一獅", en: "LIONS", pitcher: "古林睿煬", era: "3.41", win: 38 },
-  },
-  {
-    id: "cpbl-260519-02",
-    league: "CPBL",
-    venue: "新莊棒球場",
-    time: "18:35",
-    home: { name: "富邦悍將", en: "GUARDIANS", pitcher: "羅戈", era: "3.92", win: 47 },
-    away: { name: "樂天桃猿", en: "MONKEYS", pitcher: "魔神樂", era: "2.61", win: 53 },
-  },
-  {
-    id: "cpbl-260519-03",
-    league: "CPBL",
-    venue: "天母棒球場",
-    time: "18:35",
-    home: { name: "台鋼雄鷹", en: "HAWKS", pitcher: "賈斯汀", era: "4.08", win: 41 },
-    away: { name: "味全龍", en: "DRAGONS", pitcher: "伍鐸", era: "3.05", win: 59 },
-  },
-];
+import { matches, type Match } from "@/lib/matches";
 
 export default function MatchesPage() {
+  const todaysMatches = matches;
+
   return (
     <div className="flex flex-col flex-1 min-h-screen">
       {/* ── NAV ─────────────────────────────── */}
@@ -106,36 +81,20 @@ export default function MatchesPage() {
 }
 
 // ── MiniMatchCard ──────────────────────────────────────
-type Team = {
-  name: string;
-  en: string;
-  pitcher: string;
-  era: string;
-  win: number;
-};
-
-function MiniMatchCard({
-  match,
-}: {
-  match: {
-    id: string;
-    league: string;
-    venue: string;
-    time: string;
-    home: Team;
-    away: Team;
-  };
-}) {
-  const homeFavored = match.home.win > match.away.win;
+function MiniMatchCard({ match }: { match: Match }) {
+  const homeFavored = match.home.winRate > match.away.winRate;
   return (
-    <div className="bg-slate/60 border border-line/70 hover:border-gold/40 transition-colors p-6 group">
+    <Link
+      href={`/matches/${match.id}`}
+      className="block bg-slate/60 border border-line/70 hover:border-gold/40 transition-colors p-6 group"
+    >
       {/* meta */}
       <div className="flex items-center justify-between mb-5">
         <span className="font-mono text-gold text-[10px] tracking-[0.3em]">
           {match.league}
         </span>
         <span className="font-mono text-mute text-[10px] tracking-[0.25em]">
-          {match.venue} · {match.time}
+          {match.venue.replace("棒球場", "").replace("洲際", "洲際")} · {match.startTime}
         </span>
       </div>
 
@@ -162,7 +121,7 @@ function MiniMatchCard({
             homeFavored ? "text-gold" : "text-mute"
           }`}
         >
-          {match.home.win}
+          {match.home.winRate}
           <span className="text-xs opacity-60 ml-0.5">%</span>
         </span>
         <span
@@ -170,7 +129,7 @@ function MiniMatchCard({
             !homeFavored ? "text-gold" : "text-mute"
           }`}
         >
-          {match.away.win}
+          {match.away.winRate}
           <span className="text-xs opacity-60 ml-0.5">%</span>
         </span>
       </div>
@@ -179,26 +138,26 @@ function MiniMatchCard({
       <div className="relative h-[2px] bg-line/80">
         <div
           className="absolute top-0 left-0 h-full bg-gold glow-gold"
-          style={{ width: `${match.home.win}%` }}
+          style={{ width: `${match.home.winRate}%` }}
         />
         <div
           className="absolute -top-1 h-[10px] w-px bg-gold/80"
-          style={{ left: `${match.home.win}%` }}
+          style={{ left: `${match.home.winRate}%` }}
         />
       </div>
 
       {/* pitcher line */}
       <div className="mt-5 pt-4 border-t border-line/50 flex justify-between text-xs">
         <div>
-          <p className="text-bone">{match.home.pitcher}</p>
+          <p className="text-bone">{match.home.pitcher.name}</p>
           <p className="font-mono text-gold/60 tabular mt-0.5">
-            ERA · {match.home.era}
+            ERA · {match.home.pitcher.era}
           </p>
         </div>
         <div className="text-right">
-          <p className="text-bone">{match.away.pitcher}</p>
+          <p className="text-bone">{match.away.pitcher.name}</p>
           <p className="font-mono text-gold/60 tabular mt-0.5">
-            ERA · {match.away.era}
+            ERA · {match.away.pitcher.era}
           </p>
         </div>
       </div>
@@ -210,6 +169,6 @@ function MiniMatchCard({
           BREAKDOWN →
         </span>
       </div>
-    </div>
+    </Link>
   );
 }
