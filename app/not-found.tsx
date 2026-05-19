@@ -48,13 +48,13 @@ export default function NotFound() {
             href="/matches"
             className="px-8 py-3 bg-gold text-navy text-xs tracking-[0.3em] hover:bg-gold-soft transition-colors font-medium"
           >
-            ← BACK TO TODAY&apos;S BOARD
+            ← 回到今日賽事板
           </Link>
           <Link
             href="/"
             className="px-8 py-3 border border-gold/40 text-gold text-xs tracking-[0.3em] hover:bg-gold/10 transition-colors"
           >
-            HOME
+            回首頁
           </Link>
         </div>
 

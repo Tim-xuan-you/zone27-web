@@ -216,7 +216,7 @@ export default function TermsPage() {
           href="/privacy"
           className="inline-block mt-10 px-8 py-3 border border-gold text-gold text-xs tracking-[0.3em] hover:bg-gold hover:text-navy transition-colors"
         >
-          READ PRIVACY POLICY →
+          閱讀隱私政策 →
         </Link>
       </section>
 

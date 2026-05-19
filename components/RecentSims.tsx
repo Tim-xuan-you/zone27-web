@@ -50,7 +50,7 @@ export default function RecentSims() {
   function handleClear() {
     if (
       typeof window !== "undefined" &&
-      window.confirm("Clear all local sim history? This only affects this browser.")
+      window.confirm("確定清除所有本地模擬紀錄?(只影響這個瀏覽器)")
     ) {
       clearSimHistory();
       setHistory([]);
@@ -61,13 +61,13 @@ export default function RecentSims() {
     <section className="mt-12 pt-10 border-t border-line/40">
       <div className="flex items-baseline justify-between mb-6">
         <p className="font-mono text-gold/70 text-[10px] tracking-[0.35em]">
-          / RECENT SIMS · YOUR LOCAL HISTORY
+          / 最近模擬 · 您的本地紀錄
         </p>
         <button
           onClick={handleClear}
           className="font-mono text-mute/60 hover:text-loss text-[10px] tracking-[0.3em] transition-colors"
         >
-          CLEAR
+          清除
         </button>
       </div>
 
@@ -78,7 +78,7 @@ export default function RecentSims() {
       </div>
 
       <p className="font-mono text-mute/40 text-[10px] tracking-[0.25em] mt-6">
-        STORED LOCALLY IN YOUR BROWSER · NEVER SENT TO US
+        儲存於您的瀏覽器 · 從不傳給我們
       </p>
     </section>
   );
@@ -98,7 +98,7 @@ function HistoryRow({ entry }: { entry: SimHistoryEntry }) {
           )}
         </p>
         <p className="font-mono text-mute/60 text-[10px] tracking-[0.25em] mt-1">
-          {relativeTime(entry.ranAt)} · {entry.totalSims.toLocaleString()} SIMS
+          {relativeTime(entry.ranAt)} · {entry.totalSims.toLocaleString()} 場模擬
         </p>
       </div>
 

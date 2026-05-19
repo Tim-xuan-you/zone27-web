@@ -24,10 +24,10 @@ export default function LabPage() {
       {/* ── HERO ─────────────────────────────────── */}
       <section className="mx-auto max-w-4xl w-full px-6 sm:px-10 pt-20 pb-10 text-center">
         <div className="inline-flex items-center gap-2 mb-8 font-mono text-[10px] tracking-[0.35em]">
-          <span className="text-gold">LIVE AI LABORATORY</span>
+          <span className="text-gold">即時 AI 實驗室</span>
           <span className="text-mute/60">·</span>
           <span className="px-1.5 py-0.5 border border-gold/40 text-gold">
-            v0.3 · REAL AT-BAT + REPLAY
+            v0.3 · 真實打席 + 重播
           </span>
         </div>
         <h1 className="text-4xl sm:text-5xl md:text-6xl font-light leading-[1.1] tracking-tight text-bone">
@@ -47,7 +47,7 @@ export default function LabPage() {
       {/* ── MATCH SELECTOR ───────────────────────── */}
       <section className="mx-auto max-w-4xl w-full px-6 sm:px-10 pb-8">
         <p className="font-mono text-gold/70 text-[10px] tracking-[0.35em] mb-4">
-          / 01 · SELECT A MATCHUP
+          / 01 · 選擇比賽
         </p>
         <div className="grid sm:grid-cols-3 gap-3">
           {matches.map((m) => {
@@ -72,7 +72,7 @@ export default function LabPage() {
                   {m.away.name}
                 </p>
                 <p className="font-mono text-[10px] text-gold/70 tabular mt-3 tracking-[0.2em]">
-                  HISTORICAL · {m.home.winRate}% / {m.away.winRate}%
+                  歷史鎖定 · {m.home.winRate}% / {m.away.winRate}%
                 </p>
               </button>
             );
@@ -94,7 +94,7 @@ export default function LabPage() {
           <div className="flex items-center justify-between flex-wrap gap-4">
             <div>
               <p className="font-mono text-gold/70 text-[10px] tracking-[0.35em] mb-2">
-                POWER USER · CUSTOM MODE
+                進階模式 · 自訂投手
               </p>
               <h3 className="text-xl sm:text-2xl text-bone font-light tracking-tight">
                 想自己當總教練?
@@ -105,7 +105,7 @@ export default function LabPage() {
               </p>
             </div>
             <span className="font-mono text-gold text-xs tracking-[0.3em] group-hover:translate-x-1 transition-transform inline-flex items-center gap-2">
-              TRY CUSTOM MATCHUP →
+              自訂對戰 →
             </span>
           </div>
         </Link>

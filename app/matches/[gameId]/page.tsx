@@ -269,7 +269,7 @@ export default async function MatchDetailPage({
             href="/founders"
             className="inline-block px-8 py-3 bg-gold text-navy text-xs tracking-[0.3em] hover:bg-gold-soft transition-colors"
           >
-            UNLOCK FOR NT$ 2,700 →
+            NT$ 2,700 解鎖終身會員 →
           </Link>
         </div>
       </section>
@@ -280,7 +280,7 @@ export default async function MatchDetailPage({
           href="/matches"
           className="font-mono text-mute hover:text-gold text-[10px] tracking-[0.4em] transition-colors"
         >
-          ← BACK TO TODAY&apos;S BOARD
+          ← 回到今日賽事板
         </Link>
       </section>
 

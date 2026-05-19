@@ -127,13 +127,13 @@ export default function FoundersPage() {
           href="#waitlist"
           className="inline-block mt-10 px-12 py-4 bg-gold text-navy text-xs tracking-[0.3em] hover:bg-gold-soft transition-colors font-medium"
         >
-          ↑ JOIN THE WAITLIST
+          ↑ 加入等候名單
         </Link>
         <Link
           href="/about"
           className="block mt-6 font-mono text-mute hover:text-gold text-[10px] tracking-[0.3em] transition-colors"
         >
-          READ THE MANIFESTO →
+          閱讀完整品牌方法論 →
         </Link>
       </section>
 

@@ -146,10 +146,10 @@ export default function MatchSimulator({ match }: Props) {
           }`}
         >
           {running
-            ? `▸ SIMULATING ${stats.completed.toLocaleString()} / ${TOTAL_SIMS.toLocaleString()}`
+            ? `▸ 模擬中 ${stats.completed.toLocaleString()} / ${TOTAL_SIMS.toLocaleString()}`
             : done
-            ? "▸ RUN AGAIN"
-            : "▶ RUN 10,000 SIMULATIONS"}
+            ? "▸ 再跑一次"
+            : "▶ 跑 10,000 次模擬"}
         </button>
 
         <div className="relative mt-3 h-[2px] bg-line/80">
@@ -168,14 +168,14 @@ export default function MatchSimulator({ match }: Props) {
       {/* ── LIVE WIN PROBABILITY ─────────────────── */}
       <section className="pb-14">
         <p className="font-mono text-gold/70 text-[10px] tracking-[0.35em] mb-6">
-          / LIVE WIN PROBABILITY
+          / 即時勝率
         </p>
 
         <div className="bg-slate/70 border border-line/80 glow-soft p-8 sm:p-10">
           <div className="flex items-baseline justify-between mb-3">
             <div>
               <p className="font-mono text-mute text-[10px] tracking-[0.3em] mb-1">
-                HOME · {match.home.name}
+                主隊 · {match.home.name}
               </p>
               <p
                 className={`font-mono tabular tracking-tight text-5xl sm:text-6xl font-light ${
@@ -189,7 +189,7 @@ export default function MatchSimulator({ match }: Props) {
             </div>
             <div className="text-right">
               <p className="font-mono text-mute text-[10px] tracking-[0.3em] mb-1">
-                {match.away.name} · AWAY
+                {match.away.name} · 客隊
               </p>
               <p
                 className={`font-mono tabular tracking-tight text-5xl sm:text-6xl font-light ${
@@ -226,18 +226,18 @@ export default function MatchSimulator({ match }: Props) {
           {/* Counters */}
           <div className="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-6">
             <Counter
-              label="HOME WINS"
+              label="主隊勝場"
               value={stats.homeWins}
               color={homePct >= awayPct ? "gold" : "mute"}
             />
             <Counter
-              label="AWAY WINS"
+              label="客隊勝場"
               value={stats.awayWins}
               color={awayPct > homePct ? "gold" : "mute"}
             />
-            <Counter label="TIES" value={stats.ties} color="mute" />
+            <Counter label="平手" value={stats.ties} color="mute" />
             <Counter
-              label="AVG TOTAL RUNS"
+              label="平均總得分"
               value={avgRuns}
               decimals={2}
               color="bone"
@@ -249,13 +249,13 @@ export default function MatchSimulator({ match }: Props) {
       {/* ── SCORE DISTRIBUTION ───────────────────── */}
       <section className="pb-14">
         <p className="font-mono text-gold/70 text-[10px] tracking-[0.35em] mb-6">
-          / EMERGING SCORE DISTRIBUTION
+          / 比分分布(收斂中)
         </p>
 
         {distribution.length === 0 ? (
           <div className="bg-slate/40 border border-line/60 p-10 text-center">
             <p className="font-mono text-mute text-xs tracking-[0.25em]">
-              PRESS RUN TO BEGIN SAMPLING.
+              按下「跑模擬」開始採樣
             </p>
           </div>
         ) : (
@@ -291,7 +291,7 @@ export default function MatchSimulator({ match }: Props) {
         <section className="pb-14">
           <div className="bg-slate/40 border border-gold/50 p-10 text-center">
             <p className="font-mono text-gold text-[10px] tracking-[0.4em] mb-4">
-              ✓ SIMULATION COMPLETE · N = 10,000 · v0.2 ENGINE
+              ✓ 模擬完成 · N = 10,000 · v0.2 引擎
             </p>
             <h3 className="text-2xl text-bone font-light tracking-tight mb-4">
               逐打席引擎收斂:

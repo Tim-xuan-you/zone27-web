@@ -462,13 +462,13 @@ export default function ChangelogPage() {
             rel="noopener noreferrer"
             className="px-8 py-3 border border-gold text-gold text-xs tracking-[0.3em] hover:bg-gold hover:text-navy transition-colors"
           >
-            VIEW SOURCE →
+            查看原始碼 →
           </a>
           <Link
             href="/founders"
             className="px-8 py-3 bg-gold text-navy text-xs tracking-[0.3em] hover:bg-gold-soft transition-colors"
           >
-            JOIN THE WAITLIST →
+            加入等候名單 →
           </Link>
         </div>
       </section>

@@ -112,7 +112,7 @@ const CATEGORIES: Category[] = [
               href="/founders"
               className="inline-block mt-3 font-mono text-gold text-[10px] tracking-[0.3em] underline underline-offset-4"
             >
-              JOIN WAITLIST →
+              加入等候名單 →
             </Link>
           </>
         ),
@@ -330,13 +330,13 @@ export default function FaqPage() {
             href="/lab"
             className="px-8 py-3 border border-gold text-gold text-xs tracking-[0.3em] hover:bg-gold hover:text-navy transition-colors"
           >
-            ENTER THE LAB →
+            進入實驗室 →
           </Link>
           <Link
             href="/founders"
             className="px-8 py-3 bg-gold text-navy text-xs tracking-[0.3em] hover:bg-gold-soft transition-colors"
           >
-            JOIN THE WAITLIST →
+            加入等候名單 →
           </Link>
         </div>
       </section>

@@ -201,10 +201,10 @@ function CustomLabInner() {
       {/* ── HERO ─────────────────────────────────── */}
       <section className="mx-auto max-w-4xl w-full px-6 sm:px-10 pt-20 pb-10 text-center">
         <div className="inline-flex items-center gap-2 mb-8 font-mono text-[10px] tracking-[0.35em]">
-          <span className="text-gold">LIVE AI LABORATORY</span>
+          <span className="text-gold">即時 AI 實驗室</span>
           <span className="text-mute/60">·</span>
           <span className="px-1.5 py-0.5 border border-gold/40 text-gold">
-            CUSTOM MODE
+            自訂模式
           </span>
         </div>
         <h1 className="text-4xl sm:text-5xl md:text-6xl font-light leading-[1.1] tracking-tight text-bone">
@@ -223,7 +223,7 @@ function CustomLabInner() {
       {/* ── PRESETS ──────────────────────────────── */}
       <section className="mx-auto max-w-4xl w-full px-6 sm:px-10 pb-8">
         <p className="font-mono text-gold/70 text-[10px] tracking-[0.35em] mb-4">
-          / 01 · QUICK PRESETS
+          / 01 · 快速範本
         </p>
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
           {PRESETS.map((p) => (
@@ -244,7 +244,7 @@ function CustomLabInner() {
       {/* ── INPUT FORM ───────────────────────────── */}
       <section className="mx-auto max-w-4xl w-full px-6 sm:px-10 pb-8">
         <p className="font-mono text-gold/70 text-[10px] tracking-[0.35em] mb-4">
-          / 02 · PITCHER STATS
+          / 02 · 投手數據
         </p>
 
         <div className="grid sm:grid-cols-2 gap-6">
@@ -273,14 +273,14 @@ function CustomLabInner() {
                 : "bg-gold text-navy hover:bg-gold-soft"
             }`}
           >
-            {builtMatch ? "MATCH BUILT" : "▶ BUILD & SIMULATE"}
+            {builtMatch ? "已建立比賽" : "▶ 建立比賽並開始模擬"}
           </button>
           {builtMatch && (
             <button
               onClick={reset}
               className="px-6 py-4 border border-line/60 text-mute hover:border-gold/40 hover:text-gold text-xs tracking-[0.3em] transition-colors"
             >
-              RESET
+              重置
             </button>
           )}
         </div>
@@ -291,7 +291,7 @@ function CustomLabInner() {
         <section className="mx-auto max-w-4xl w-full px-6 sm:px-10 pb-16 border-t border-line/40 pt-12">
           <div className="flex items-baseline justify-between flex-wrap gap-4 mb-6">
             <p className="font-mono text-gold/70 text-[10px] tracking-[0.35em]">
-              / 03 · YOUR SIMULATION
+              / 03 · 您的模擬
             </p>
             <button
               onClick={copyShareLink}
@@ -302,7 +302,7 @@ function CustomLabInner() {
               }`}
               aria-label="Copy a shareable link to this scenario"
             >
-              {copied ? "✓ COPIED" : "🔗 COPY SCENARIO LINK"}
+              {copied ? "✓ 已複製" : "🔗 複製分享連結"}
             </button>
           </div>
           <MatchSimulator key={builtMatch.id} match={builtMatch} />
@@ -317,7 +317,7 @@ function CustomLabInner() {
       {/* ── BACK + ROADMAP NOTE ──────────────────── */}
       <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 py-16 text-center border-t border-line/40">
         <p className="font-mono text-gold text-[10px] tracking-[0.4em] mb-6">
-          POWER USER MODE · v0.16
+          進階模式 · v0.16
         </p>
         <p className="text-mute text-sm max-w-md mx-auto leading-relaxed">
           目前自訂模式只接受投手 K/9 · BB/9 · HR/9 三項。
@@ -337,7 +337,7 @@ function CustomLabInner() {
             href="/lab"
             className="px-6 py-2.5 border border-gold/40 text-gold text-[10px] tracking-[0.3em] hover:bg-gold/10 transition-colors"
           >
-            ← BACK TO PRESET LAB
+            ← 回到預設比賽
           </Link>
         </div>
       </section>
@@ -362,12 +362,12 @@ function PitcherForm({
   return (
     <div className="bg-slate/60 border border-line/70 p-6">
       <p className="font-mono text-gold text-[10px] tracking-[0.35em] mb-5">
-        {side} PITCHER
+        {side === "HOME" ? "主隊投手" : "客隊投手"}
       </p>
 
       <label className="block mb-4">
         <span className="font-mono text-mute text-[9px] tracking-[0.3em] block mb-1.5">
-          NAME
+          姓名
         </span>
         <input
           type="text"

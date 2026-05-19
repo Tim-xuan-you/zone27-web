@@ -124,7 +124,7 @@ export default function ReplayBroadcast({
       {/* Header + control */}
       <div className="flex items-baseline justify-between flex-wrap gap-4 mb-6">
         <p className="font-mono text-gold/70 text-[10px] tracking-[0.35em]">
-          / 04 · REPLAY ONE GAME
+          / 04 · 重播一場比賽
         </p>
         <button
           onClick={startReplay}
@@ -136,10 +136,10 @@ export default function ReplayBroadcast({
           }`}
         >
           {running
-            ? "▸ BROADCASTING ..."
+            ? "▸ 直播中 ..."
             : log.length === 0
-            ? "▶ REPLAY ONE GAME"
-            : "▶ REPLAY ANOTHER GAME"}
+            ? "▶ 重播一場比賽"
+            : "▶ 重播另一場"}
         </button>
       </div>
 
@@ -152,7 +152,7 @@ export default function ReplayBroadcast({
       {log.length === 0 && (
         <div className="bg-slate/40 border border-line/60 p-10 text-center">
           <p className="font-mono text-mute text-xs tracking-[0.25em]">
-            PRESS REPLAY TO SIMULATE A FULL 9 INNINGS — STREAMED PITCH-BY-PITCH.
+            按下重播 — 完整 9 局逐打席文字直播
           </p>
         </div>
       )}
@@ -164,7 +164,7 @@ export default function ReplayBroadcast({
           <div className="border-b border-line/70 px-6 py-4 flex items-center justify-between bg-ink/40">
             <div>
               <p className="font-mono text-mute text-[10px] tracking-[0.3em] mb-1">
-                CURRENT
+                目前
               </p>
               <p className="font-mono text-gold text-lg tracking-[0.2em]">
                 {inningLabel}
@@ -194,7 +194,7 @@ export default function ReplayBroadcast({
           {final && (
             <div className="border-t border-gold/40 px-6 py-6 text-center bg-gold/5">
               <p className="font-mono text-gold text-[10px] tracking-[0.4em] mb-3">
-                ✓ FINAL · 9 INNINGS COMPLETE
+                ✓ 終局 · 9 局結束
               </p>
               <p className="font-mono text-bone text-3xl sm:text-4xl tabular tracking-tight">
                 {awayEn}{" "}

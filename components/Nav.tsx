@@ -14,11 +14,11 @@ const NAV_ITEMS: {
   label: string;
   badge?: string;
 }[] = [
-  { key: "matches", href: "/matches", label: "MATCHES" },
-  { key: "lab", href: "/lab", label: "LAB", badge: "BETA" },
-  { key: "leaderboard", href: "/leaderboard", label: "THE 27 WALL" },
-  { key: "founders", href: "/founders", label: "FOUNDERS · 27" },
-  { key: "about", href: "/about", label: "ABOUT" },
+  { key: "matches", href: "/matches", label: "賽事" },
+  { key: "lab", href: "/lab", label: "實驗室", badge: "BETA" },
+  { key: "leaderboard", href: "/leaderboard", label: "27 之牆" },
+  { key: "founders", href: "/founders", label: "創始會員" },
+  { key: "about", href: "/about", label: "關於" },
 ];
 
 export default function Nav({ active }: { active?: NavKey }) {
@@ -54,7 +54,7 @@ export default function Nav({ active }: { active?: NavKey }) {
             </Link>
           ))}
           <button className="hidden sm:inline-block px-4 py-2 border border-gold/30 text-gold text-xs tracking-[0.18em] hover:bg-gold/10 transition-colors">
-            LOGIN
+            登入
           </button>
         </div>
       </div>

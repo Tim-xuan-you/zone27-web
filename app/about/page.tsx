@@ -228,7 +228,7 @@ export default function AboutPage() {
           href="/founders"
           className="inline-block mt-10 px-12 py-4 bg-gold text-navy text-xs tracking-[0.3em] hover:bg-gold-soft transition-colors font-medium"
         >
-          CLAIM YOUR NUMBER →
+          認領我的編號 →
         </Link>
       </section>
 

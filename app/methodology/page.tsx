@@ -358,13 +358,13 @@ N = 10,000, p ≈ 0.6  →  SE ≈ 0.49%
             href="/lab"
             className="px-8 py-3 border border-gold text-gold text-xs tracking-[0.3em] hover:bg-gold hover:text-navy transition-colors"
           >
-            FULL LAB →
+            完整實驗室 →
           </Link>
           <Link
             href="/founders"
             className="px-8 py-3 bg-gold text-navy text-xs tracking-[0.3em] hover:bg-gold-soft transition-colors"
           >
-            JOIN THE WAITLIST →
+            加入等候名單 →
           </Link>
         </div>
       </section>

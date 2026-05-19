@@ -179,13 +179,13 @@ export default function SignalBoardPage() {
             href="/lab"
             className="px-8 py-3 border border-gold text-gold text-xs tracking-[0.3em] hover:bg-gold hover:text-navy transition-colors"
           >
-            ENTER THE LAB →
+            進入實驗室 →
           </Link>
           <Link
             href="/founders"
             className="px-8 py-3 bg-gold text-navy text-xs tracking-[0.3em] hover:bg-gold-soft transition-colors"
           >
-            JOIN THE WAITLIST →
+            加入等候名單 →
           </Link>
         </div>
       </section>
@@ -249,7 +249,7 @@ function SignalRow({ match, tier }: { match: Match; tier: Tier }) {
           href={`/matches/${match.id}`}
           className="font-mono text-gold text-[10px] tracking-[0.3em] hover:opacity-80"
         >
-          VIEW BREAKDOWN →
+          完整分析 →
         </Link>
       </div>
 

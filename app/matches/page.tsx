@@ -13,7 +13,7 @@ export default function MatchesPage() {
       {/* ── HEADER ──────────────────────────── */}
       <section className="mx-auto max-w-6xl w-full px-6 sm:px-10 pt-16 pb-10">
         <p className="font-mono text-gold/70 text-[10px] tracking-[0.4em] mb-3">
-          DAILY BOARD · {todaysMatches[0].league}
+          今日賽事板 · {todaysMatches[0].league}
         </p>
         <div className="flex items-end justify-between flex-wrap gap-4">
           <h1 className="text-4xl sm:text-5xl text-bone font-light tracking-tight">
@@ -21,7 +21,7 @@ export default function MatchesPage() {
             <span className="text-mute text-2xl sm:text-3xl">· 週二</span>
           </h1>
           <p className="font-mono text-mute text-xs tracking-[0.25em]">
-            {todaysMatches.length} GAMES · AI MODELS LOCKED 15:00
+            {todaysMatches.length} 場比賽 · AI 模型 15:00 鎖定
           </p>
         </div>
         <div className="mt-6 w-full h-px bg-line/60" />
@@ -125,9 +125,9 @@ function MiniMatchCard({ match }: { match: Match }) {
 
       {/* footer cta */}
       <div className="mt-5 flex items-center justify-between text-[10px] font-mono tracking-[0.25em]">
-        <span className="text-mute">10,000 SIMS</span>
+        <span className="text-mute">10,000 場模擬</span>
         <span className="text-gold/70 group-hover:text-gold transition-colors">
-          BREAKDOWN →
+          完整分析 →
         </span>
       </div>
     </Link>

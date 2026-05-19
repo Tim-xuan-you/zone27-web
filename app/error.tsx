@@ -76,13 +76,13 @@ export default function GlobalError({
             onClick={reset}
             className="px-8 py-3 bg-gold text-navy text-xs tracking-[0.3em] hover:bg-gold-soft transition-colors font-medium"
           >
-            ▶ TRY AGAIN
+            ▶ 再試一次
           </button>
           <Link
             href="/"
             className="px-8 py-3 border border-gold/40 text-gold text-xs tracking-[0.3em] hover:bg-gold/10 transition-colors"
           >
-            HOME
+            回首頁
           </Link>
         </div>
 

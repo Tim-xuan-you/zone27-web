@@ -186,7 +186,7 @@ export default function PrivacyPage() {
           href="/terms"
           className="inline-block mt-10 px-8 py-3 border border-gold text-gold text-xs tracking-[0.3em] hover:bg-gold hover:text-navy transition-colors"
         >
-          READ TERMS OF SERVICE →
+          閱讀服務條款 →
         </Link>
       </section>
 

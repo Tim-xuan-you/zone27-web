@@ -17,7 +17,7 @@ function SubmitButton() {
           : "bg-gold text-navy hover:bg-gold-soft"
       }`}
     >
-      {pending ? "▸ RESERVING ..." : "RESERVE YOUR PLACE →"}
+      {pending ? "▸ 正在預留位置 ..." : "立即預留我的位置 →"}
     </button>
   );
 }
@@ -35,7 +35,7 @@ export default function WaitlistForm() {
     return (
       <div className="bg-slate/70 border border-gold/60 glow-soft p-10 text-center">
         <p className="font-mono text-gold text-[10px] tracking-[0.4em] mb-4">
-          {state.alreadyReserved ? "✓ ALREADY ON THE LIST" : "✓ RESERVATION RECEIVED"}
+          {state.alreadyReserved ? "✓ 您已在等候名單上" : "✓ 預留成功"}
         </p>
         <h3 className="text-2xl sm:text-3xl text-bone font-light tracking-tight mb-3">
           您在等候名單上的位置
@@ -48,7 +48,7 @@ export default function WaitlistForm() {
           您的位置已被保留。
         </p>
         <p className="font-mono text-mute/50 text-[10px] tracking-[0.3em] mt-8">
-          NO PAYMENT TAKEN · NO COMMITMENT YET
+          目前不收費 · 不綁定 · 隨時可退出
         </p>
       </div>
     );
@@ -61,7 +61,7 @@ export default function WaitlistForm() {
       className="bg-slate/70 border border-gold/40 glow-soft p-8 sm:p-10"
     >
       <p className="font-mono text-gold text-[10px] tracking-[0.4em] mb-2">
-        FOUNDERS 27 · PRE-LAUNCH WAITLIST
+        創始會員 · 預售等候名單
       </p>
       <h3 className="text-2xl sm:text-3xl text-bone font-light tracking-tight mb-2">
         留下 email,保留您的位置
@@ -74,7 +74,7 @@ export default function WaitlistForm() {
       {/* Email field */}
       <label className="block mb-5">
         <span className="font-mono text-mute text-[10px] tracking-[0.3em] block mb-2">
-          EMAIL *
+          EMAIL · 必填
         </span>
         <input
           type="email"
@@ -89,7 +89,7 @@ export default function WaitlistForm() {
       {/* Name field (optional) */}
       <label className="block mb-8">
         <span className="font-mono text-mute text-[10px] tracking-[0.3em] block mb-2">
-          稱呼 (OPTIONAL)
+          稱呼 · 選填
         </span>
         <input
           type="text"
@@ -112,7 +112,7 @@ export default function WaitlistForm() {
       )}
 
       <p className="font-mono text-mute/50 text-[10px] tracking-[0.25em] mt-6 text-center">
-        WE WILL NEVER SHARE YOUR EMAIL · UNSUBSCRIBE ANYTIME
+        我們永遠不會分享您的 email · 隨時可退出
       </p>
     </form>
   );

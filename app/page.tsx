@@ -47,7 +47,7 @@ export default function Home() {
 
         {/* Tiny note under card */}
         <p className="text-center font-mono text-mute/50 text-[10px] tracking-[0.25em] mt-6">
-          AI MODELS PROBABILITY. NOT FORTUNE.
+          AI 計算的是機率,不是命運
         </p>
       </section>
 
@@ -91,7 +91,7 @@ export default function Home() {
           href="/founders"
           className="inline-block mt-8 px-10 py-3 bg-gold text-navy text-xs tracking-[0.3em] hover:bg-gold-soft transition-colors"
         >
-          CLAIM YOUR NUMBER →
+          認領我的編號 →
         </Link>
       </section>
 

@@ -1,19 +1,19 @@
 import Link from "next/link";
 
 const SECONDARY_LINKS = [
-  { label: "ABOUT", href: "/about", external: false },
-  { label: "METHODOLOGY", href: "/methodology", external: false },
-  { label: "GLOSSARY", href: "/glossary", external: false },
-  { label: "FAQ", href: "/faq", external: false },
-  { label: "CHANGELOG", href: "/changelog", external: false },
-  { label: "LAB", href: "/lab", external: false },
-  { label: "SIGNAL BOARD", href: "/signal-board", external: false },
-  { label: "SOURCE", href: "https://github.com/Tim-xuan-you/zone27-web", external: true },
+  { label: "關於", href: "/about", external: false },
+  { label: "方法論", href: "/methodology", external: false },
+  { label: "詞彙表", href: "/glossary", external: false },
+  { label: "常見問題", href: "/faq", external: false },
+  { label: "版本紀錄", href: "/changelog", external: false },
+  { label: "實驗室", href: "/lab", external: false },
+  { label: "每日早報", href: "/signal-board", external: false },
+  { label: "GitHub 開源", href: "https://github.com/Tim-xuan-you/zone27-web", external: true },
 ];
 
 const LEGAL_LINKS = [
-  { label: "PRIVACY", href: "/privacy" },
-  { label: "TERMS", href: "/terms" },
+  { label: "隱私政策", href: "/privacy" },
+  { label: "服務條款", href: "/terms" },
 ];
 
 export default function Footer() {
@@ -66,7 +66,7 @@ export default function Footer() {
             <span className="text-mute text-xs ml-2">© 2026</span>
           </div>
           <p className="font-mono text-mute/70 text-[10px] tracking-[0.25em] text-center">
-            BUILT FOR THOSE WHO READ THE NUMBERS.
+            為讀懂數字的人而建 · BUILT FOR THOSE WHO READ THE NUMBERS
           </p>
           <a
             href="/changelog"
@@ -74,7 +74,7 @@ export default function Footer() {
             title="View full changelog"
           >
             <span className="w-1.5 h-1.5 rounded-full bg-gold/70 glow-gold" />
-            <span>v0.23 · BUILT IN PUBLIC</span>
+            <span>v0.24 · 全站繁中化</span>
           </a>
         </div>
       </div>

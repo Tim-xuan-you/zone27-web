@@ -74,8 +74,8 @@ export default function HeroLiveCard({ match }: { match: Match }) {
           />
           <span className="font-mono text-gold text-[10px] tracking-[0.35em]">
             {phase === "simulating"
-              ? "● LIVE · SIMULATING"
-              : "● LIVE AI MODEL · CONVERGED"}
+              ? "● 即時模擬中"
+              : "● AI 模型 · 已收斂"}
           </span>
         </div>
         <span className="font-mono text-mute text-[10px] tracking-[0.25em]">
@@ -153,11 +153,11 @@ export default function HeroLiveCard({ match }: { match: Match }) {
 
       {/* Methodology line — with live counter */}
       <p className="font-mono text-mute/80 text-[10px] tracking-[0.25em] mt-5 tabular">
-        MONTE CARLO ·{" "}
+        蒙地卡羅 ·{" "}
         <span className="text-gold/80">
           {stats.completed.toLocaleString()}
         </span>{" "}
-        / {TOTAL_HERO_SIMS.toLocaleString()} SIMS · LIVE IN YOUR BROWSER
+        / {TOTAL_HERO_SIMS.toLocaleString()} 場 · 在您瀏覽器即時運算
       </p>
 
       {/* Pitcher matchup */}
@@ -188,13 +188,13 @@ export default function HeroLiveCard({ match }: { match: Match }) {
           href="/matches"
           className="px-8 py-3 border border-gold text-gold text-xs tracking-[0.3em] hover:bg-gold hover:text-navy transition-colors"
         >
-          VIEW ALL TODAY&apos;S BOARD →
+          查看今日完整賽事板 →
         </Link>
         <Link
           href={`/matches/${match.id}`}
           className="px-8 py-3 border border-line/60 text-mute hover:text-gold hover:border-gold/40 text-xs tracking-[0.3em] transition-colors"
         >
-          FULL BREAKDOWN →
+          完整分析 →
         </Link>
       </div>
     </div>
