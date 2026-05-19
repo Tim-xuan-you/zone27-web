@@ -2,6 +2,7 @@ import Link from "next/link";
 
 const SECONDARY_LINKS = [
   { label: "ABOUT", href: "/about", external: false },
+  { label: "GLOSSARY", href: "/glossary", external: false },
   { label: "CHANGELOG", href: "/changelog", external: false },
   { label: "LAB", href: "/lab", external: false },
   { label: "SOURCE", href: "https://github.com/Tim-xuan-you/zone27-web", external: true },
