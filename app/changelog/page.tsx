@@ -22,6 +22,175 @@ type Release = {
 
 const RELEASES: Release[] = [
   {
+    version: "v0.22",
+    title: "CI/CD AUTO-DEPLOY LIVE · 魔法時光機啟動",
+    date: "2026 · 05 · 19",
+    tag: "infra",
+    body: "Vercel ↔ GitHub auto-deploy 連接終於關掉 — Task #11 從 v0.5 第一次部署那天 pending 了 17 個版本,今天 closed。從這刻起每次 git push 自動觸發 ~60 秒部署。",
+    bullets: [
+      "GitHub Webhook → Vercel build → live 全自動,不再手動 vercel CLI",
+      "Push 後 ~90 秒上線,實測通過",
+      "Future PRs 自動產生 preview URL · Rollback 一鍵可用",
+    ],
+  },
+  {
+    version: "v0.21",
+    title: "首頁 LIVE Hero · 演算法在訪客眼前跑",
+    date: "2026 · 05 · 19",
+    tag: "feature",
+    body: "首頁勝率條從靜態升級成 LIVE。訪客打開首頁的第一秒,1000 場 mini-Monte-Carlo 在他眼前跑出收斂,從 50/50 滑到約 62/38。",
+    bullets: [
+      "components/HeroLiveCard.tsx — client-side 真實隨機採樣",
+      "每次刷新略微不同(±2%),證明 RNG 是真的而非寫死",
+      "Apple keynote 等級的 first-frame impression",
+    ],
+  },
+  {
+    version: "v0.20",
+    title: "Local Sim History · Spotify「最近播放」棒球版",
+    date: "2026 · 05 · 19",
+    tag: "feature",
+    body: "localStorage 記錄訪客最近 5 場跑過的模擬。返訪者在 /lab 與 /lab/custom 底部看到自己的研究足跡,有「累積感」。",
+    bullets: [
+      "lib/sim-history.ts + components/RecentSims.tsx",
+      "相對時間標籤(剛剛/3 分鐘前/昨天)",
+      "完全 client-side,不離開瀏覽器,符合 /privacy 承諾",
+    ],
+  },
+  {
+    version: "v0.19",
+    title: "Signal Board · Bloomberg-style 每日量化早報",
+    date: "2026 · 05 · 19",
+    tag: "content",
+    body: "新 /signal-board 路由 — 把每天 CPBL 三場賽事整合成研究員 morning brief。HIGH/MODERATE/NEUTRAL 信心評等、edge 強度、自動生成的 WHY 編輯框。",
+    bullets: [
+      "演算法分類:edge ≥ 20 PP + confidence ≥ 65 → HIGH",
+      "編輯框依 K/9 / ERA / WHIP 差異自動選角度",
+      "頂部統計 + 排名 + 編輯焦點 三段式",
+    ],
+  },
+  {
+    version: "v0.18",
+    title: "Shareable Scenarios · /lab/custom 可分享 URL",
+    date: "2026 · 05 · 19",
+    tag: "feature",
+    body: "Power user 自訂的投手對決現在可一鍵複製成 URL。朋友點開直接看一模一樣的場景,模擬器自動 build。每個分享是免費的品牌曝光。",
+    bullets: [
+      "useSearchParams 預填表單 + 自動 trigger build",
+      "🔗 COPY SCENARIO LINK 按鈕 + clipboard API + 「✓ COPIED」反饋",
+      "Suspense 包裝符合 Next.js 16 規範",
+    ],
+  },
+  {
+    version: "v0.17",
+    title: "Privacy + Terms · 法務雙頁",
+    date: "2026 · 05 · 19",
+    tag: "content",
+    body: "Launch-ready blocker 之一打勾。/privacy 8 章節 + /terms 9 章節,寫給 ZONE 27 真實情境 — 非模板。CPBL 真實爬蟲探勘失敗後的戰術轉折。",
+    bullets: [
+      "/privacy 明確「WHAT WE DON'T COLLECT」❌ 列表(no GA / FB Pixel / IP)",
+      "/terms Founders 27 非綁定聲明 + AI 預測娛樂用途免責",
+      "Footer 新增 LEGAL 第三條連結列",
+    ],
+  },
+  {
+    version: "v0.16",
+    title: "Custom Lab · Power User 自訂投手",
+    date: "2026 · 05 · 19",
+    tag: "feature",
+    body: "新 /lab/custom 路由 — 訪客變成總教練。輸入任意兩位投手的 K/9 BB/9 HR/9,引擎即時構造合成 Match 物件丟給 MatchSimulator 跑。",
+    bullets: [
+      "4 個 quick presets(FLAMETHROWER / STAR vs ROOKIE / ACE DUEL / MIDDLE)",
+      "證明引擎不是只能跑 3 場 hardcoded CPBL,是真實 pluggable",
+      "/lab 主頁加 CTA 導引「TRY CUSTOM MATCHUP →」",
+    ],
+  },
+  {
+    version: "v0.15",
+    title: "Methodology Whitepaper · 學術論文等級",
+    date: "2026 · 05 · 19",
+    tag: "content",
+    body: "新 /methodology 路由 — ~2000 字 9 章節技術白皮書。從此其他所有頁面提到 AI 都連回這裡作為 canonical 來源。",
+    bullets: [
+      "中央極限定理證明為什麼 N=10,000 是計算成本與精度的最佳平衡",
+      "誠實列出 6 個 v0.2 限制(無打者品質 / 無 platoon / 無牛棚...)",
+      "/07 TRY IT 章節內嵌真實 MatchSimulator,邊讀邊試",
+      "Bill James / Pete Palmer / FanGraphs 參考文獻",
+    ],
+  },
+  {
+    version: "v0.14",
+    title: "Polish Trifecta · 收尾品質三件套",
+    date: "2026 · 05 · 19",
+    tag: "design",
+    body: "客製 404 + 客製 Error Boundary + Footer 版本徽章。Apple/Linear/Stripe 都做這 3 件事 — 訪客打錯字也有品牌體驗。",
+    bullets: [
+      "app/not-found.tsx「STRIKE THREE. YOU'RE OUT.」棒球意象",
+      "app/error.tsx「OUR MODEL JUST STRUCK OUT SWINGING」+ TRY AGAIN",
+      "Footer 🟡 v0.X · N RELEASES 徽章,連 /changelog",
+    ],
+  },
+  {
+    version: "v0.13",
+    title: "Per-page Dynamic OG · 每個 URL 自己的分享卡",
+    date: "2026 · 05 · 19",
+    tag: "design",
+    body: "每場比賽、/lab、/founders 都有自己的動態 Open Graph 預覽圖。任何分享出去的 URL 在 LINE/FB 看到的不再是通用品牌卡,而是上下文相關的精準卡。",
+    bullets: [
+      "/matches/[id]/opengraph-image — 每場黑金對戰預測卡(動態 SSG)",
+      "/founders/opengraph-image — 巨型 270 LIFETIME MEMBERS 銷售卡",
+      "/lab/opengraph-image — 巨型 10,000 SIMULATIONS 邀請卡",
+    ],
+  },
+  {
+    version: "v0.12",
+    title: "FAQ · 12 個預先掃雷",
+    date: "2026 · 05 · 19",
+    tag: "content",
+    body: "新 /faq 路由 — 4 個主題分組共 12 個誠實到不能再誠實的 Q&A。每題都是導流節點,連回對應深度頁。",
+    bullets: [
+      "「是博彩嗎?」「NT$2,700 為什麼這麼便宜?」「還會有第二批嗎?」",
+      "答案 inline 連到 /about /lab /glossary /changelog 等深度頁",
+      "結尾 CTA 雙路徑:Enter the Lab + Join the Waitlist",
+    ],
+  },
+  {
+    version: "v0.11",
+    title: "MatchSimulator · 跨產品整合",
+    date: "2026 · 05 · 19",
+    tag: "engine",
+    body: "把 /lab 的核心模擬 UI 抽出來成共用元件。每場詳情頁(/matches/[id])也內嵌完整 Live Sim — 訪客在讀靜態分析時可以「親手跑跑看」。",
+    bullets: [
+      "components/MatchSimulator.tsx 共用,/lab 從 400 行瘦身到 120 行",
+      "/matches/[id] 新增「/ 05 · RUN IT YOURSELF」區塊",
+      "Server Component 內嵌 Client Component — Next.js boundary 完美運作",
+    ],
+  },
+  {
+    version: "v0.10",
+    title: "Glossary · 27 種棒球進階數據詞彙表",
+    date: "2026 · 05 · 19",
+    tag: "content",
+    body: "新 /glossary 路由 — 對應品牌數字「27」的 27 個進階指標,白話拆解 + 聯盟均值對照 + ZONE 27 視角註解。",
+    bullets: [
+      "PITCHING 10(ERA · WHIP · K/9 · FIP · xERA · ERA+ ...)",
+      "BATTING 10(AVG · OBP · SLG · OPS · wOBA · wRC+ ...)",
+      "TRACKMAN 7(WAR · PR · Exit Velocity · Spin Rate ...)",
+    ],
+  },
+  {
+    version: "v0.9",
+    title: "Changelog Public Build Log",
+    date: "2026 · 05 · 19",
+    tag: "content",
+    body: "新 /changelog 路由 — Linear-style 公開版本紀錄。Build-in-public 招牌動作。每筆 release 有 tag 顏色編碼。",
+    bullets: [
+      "含 UP NEXT 透明路線圖",
+      "Footer 新增次要連結列(ABOUT / CHANGELOG / LAB / SOURCE)",
+      "GitHub source 連結放在最顯眼處",
+    ],
+  },
+  {
     version: "v0.8",
     title: "REPLAY MODE · 文字直播",
     date: "2026 · 05 · 19",
@@ -123,23 +292,35 @@ const RELEASES: Release[] = [
 const ROADMAP = [
   {
     item: "Lab v0.4 · Trackman 球速與轉軸先驗",
-    note: "把投手的 K/9 等率轉換成更逼近真實的球速分布",
+    note: "把投手的 K/9 等率轉換成更逼近真實的球速 / 轉速 / 進壘角度條件機率",
+  },
+  {
+    item: "Lab v0.3 · 打者個別 OPS · wRC+ · Platoon Splits",
+    note: "目前所有打者假設聯盟平均,v0.3 加入個別打擊品質細化機率矩陣",
   },
   {
     item: "CPBL 賽程 ISR 自動更新",
-    note: "每小時 revalidate,網頁始終顯示當天最新對戰組合",
+    note: "每小時 revalidate,網頁始終顯示當天最新對戰組合(需 headless browser 或官方 API 變動)",
   },
   {
     item: "Waitlist 升級至 Supabase / Vercel KV",
-    note: "從 console.log 換成永久資料庫,加入創始編號自動鎖定",
+    note: "從 console.log 換成永久資料庫,加入創始編號自動鎖定 + 寄送驗證信",
   },
   {
     item: "支付整合(Stripe / TapPay / Newebpay)",
     note: "Founders 27 正式開放預訂,$2,700 一次性鎖定終身會員",
   },
   {
-    item: "/glossary · 27 種進階棒球數據詞彙表",
-    note: "對應 27 概念,從 OPS 到 wRC+ 到 FIP 到 Trackman 指標",
+    item: "正式品牌網域(zone27.tw / zone27.app)",
+    note: "從 zone27-web.vercel.app 升級到專屬網域,SEO 與品牌記憶度提升",
+  },
+  {
+    item: "SEO 解封 · Search Console 提交",
+    note: "等以上前 4 項全部完成才解封,目前刻意 stealth mode",
+  },
+  {
+    item: "社群帳號 + 上線推廣文",
+    note: "Tim 明確指示啟動時才動作,目前完全凍結",
   },
 ];
 
