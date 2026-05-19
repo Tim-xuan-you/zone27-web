@@ -1,0 +1,107 @@
+@import "tailwindcss";
+
+/* ============================================
+   ZONE 27 — Brand Design System
+   深藏青 × 冷金 × 量化分析師美學
+   ============================================ */
+
+:root {
+  /* Core Palette */
+  --zone-ink: #0A0F1C;          /* 極致深底 */
+  --zone-navy: #0F1A2E;         /* 深藏青(主背景) */
+  --zone-slate: #131F38;        /* 卡片底色 */
+  --zone-line: #1E2A47;         /* 分隔線 */
+  --zone-gold: #D4AF37;         /* 冷金(品牌色) */
+  --zone-gold-soft: #BFA15A;    /* 柔金(次要) */
+  --zone-bone: #F5F2EA;         /* 骨白(主文字) */
+  --zone-mute: #8A93A8;         /* 灰藍(次要文字) */
+  --zone-win: #4ADE80;          /* 勝(綠) */
+  --zone-loss: #F87171;         /* 負(紅) */
+
+  --background: var(--zone-navy);
+  --foreground: var(--zone-bone);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-ink: var(--zone-ink);
+  --color-navy: var(--zone-navy);
+  --color-slate: var(--zone-slate);
+  --color-line: var(--zone-line);
+  --color-gold: var(--zone-gold);
+  --color-gold-soft: var(--zone-gold-soft);
+  --color-bone: var(--zone-bone);
+  --color-mute: var(--zone-mute);
+  --color-win: var(--zone-win);
+  --color-loss: var(--zone-loss);
+
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+/* Force dark UI — ZONE 27 has no light mode */
+html {
+  color-scheme: dark;
+  background: var(--zone-navy);
+}
+
+body {
+  background:
+    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(212, 175, 55, 0.08), transparent 60%),
+    radial-gradient(ellipse 60% 40% at 50% 110%, rgba(212, 175, 55, 0.04), transparent 60%),
+    var(--zone-navy);
+  color: var(--zone-bone);
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  font-feature-settings: "ss01", "cv11";
+  letter-spacing: -0.011em;
+  min-height: 100vh;
+}
+
+/* Mono digits — financial terminal feel */
+.font-mono,
+.tabular {
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Hairline gold divider */
+.gold-line {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(212, 175, 55, 0.4) 50%,
+    transparent 100%
+  );
+  height: 1px;
+}
+
+/* Glow utilities for the signature progress bar */
+.glow-gold {
+  box-shadow:
+    0 0 24px rgba(212, 175, 55, 0.35),
+    0 0 60px rgba(212, 175, 55, 0.15);
+}
+
+.glow-soft {
+  box-shadow:
+    0 0 0 1px rgba(212, 175, 55, 0.18) inset,
+    0 8px 40px rgba(0, 0, 0, 0.45);
+}
+
+/* Subtle gold shimmer for the win bar */
+@keyframes shimmer {
+  0%, 100% { opacity: 0.85; }
+  50%      { opacity: 1; }
+}
+
+.shimmer {
+  animation: shimmer 3.2s ease-in-out infinite;
+}
+
+/* Selection */
+::selection {
+  background: rgba(212, 175, 55, 0.35);
+  color: var(--zone-bone);
+}
