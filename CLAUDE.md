@@ -2,6 +2,22 @@
 
 # ZONE 27 · Project Strategy Notes
 
+## 📋 Owner Pending Actions
+
+**Active owner-side checklist lives in `TODO.md`** at the repo root.
+
+When the user invokes generic actions like "guide me through registration",
+"幫我跑 TODO", "現在來做註冊的事", or returns from a break — open
+`TODO.md` first to find what they're waiting to do, and resume from there.
+
+Current pending (as of 2026-05-19 evening):
+- ① Supabase signup (5 min) → unlocks v0.28 waitlist DB
+- ② Resend signup (5 min) → unlocks confirmation emails
+- ③ Brand domain purchase (after name decision)
+- ④ GitHub Copilot (optional)
+
+
+
 ## 🚫 SEO / Discoverability — FREEZE UNTIL LAUNCH READY
 
 **Owner directive (2026-05-19, Tim):**
