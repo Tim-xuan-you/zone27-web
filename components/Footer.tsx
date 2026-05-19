@@ -7,6 +7,7 @@ const SECONDARY_LINKS = [
   { label: "FAQ", href: "/faq", external: false },
   { label: "CHANGELOG", href: "/changelog", external: false },
   { label: "LAB", href: "/lab", external: false },
+  { label: "SIGNAL BOARD", href: "/signal-board", external: false },
   { label: "SOURCE", href: "https://github.com/Tim-xuan-you/zone27-web", external: true },
 ];
 
@@ -73,7 +74,7 @@ export default function Footer() {
             title="View full changelog"
           >
             <span className="w-1.5 h-1.5 rounded-full bg-gold/70 glow-gold" />
-            <span>v0.18 · 18 RELEASES</span>
+            <span>v0.19 · 19 RELEASES</span>
           </a>
         </div>
       </div>
