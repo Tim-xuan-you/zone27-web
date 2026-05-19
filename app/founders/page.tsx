@@ -1,10 +1,7 @@
 import Link from "next/link";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
-
-const TOTAL = 270;
-const CLAIMED = 7; // 早鳥已入會
-const REMAINING = TOTAL - CLAIMED;
+import WaitlistForm from "@/components/WaitlistForm";
 
 const benefits = [
   {
@@ -46,17 +43,19 @@ const benefits = [
 ];
 
 export default function FoundersPage() {
-  const claimedPct = (CLAIMED / TOTAL) * 100;
-
   return (
     <div className="flex flex-col flex-1 min-h-screen">
       <Nav active="founders" />
 
       {/* ── HERO ─────────────────────────── */}
-      <section className="mx-auto max-w-4xl w-full px-6 sm:px-10 pt-24 pb-16 text-center">
-        <p className="font-mono text-gold text-[10px] tracking-[0.45em] mb-8">
-          FOUNDERS · 27 · LIMITED EDITION
-        </p>
+      <section className="mx-auto max-w-4xl w-full px-6 sm:px-10 pt-24 pb-12 text-center">
+        <div className="inline-flex items-center gap-2 mb-8 font-mono text-[10px] tracking-[0.4em]">
+          <span className="text-gold">FOUNDERS · 27</span>
+          <span className="text-mute/60">·</span>
+          <span className="px-1.5 py-0.5 border border-gold/40 text-gold">
+            PRE-LAUNCH WAITLIST
+          </span>
+        </div>
 
         <h1 className="text-5xl sm:text-6xl md:text-7xl font-light leading-[1.05] tracking-tight text-bone">
           僅限<span className="text-gold mx-3">270</span>位
@@ -73,55 +72,17 @@ export default function FoundersPage() {
           <br />
           一次入會,終身免費。售完即永久關閉,不會有第二批。
         </p>
+        <p className="mt-4 max-w-xl mx-auto text-mute/70 text-sm leading-relaxed">
+          付款系統預計 2026 Q3 開放。先加入等候名單,優先取得購買權。
+        </p>
       </section>
 
-      {/* ── SCARCITY DASHBOARD ───────────── */}
-      <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-20">
-        <div className="bg-slate/70 border border-gold/40 glow-soft p-10">
-          <div className="flex items-center justify-between mb-2">
-            <span className="font-mono text-gold text-[10px] tracking-[0.35em]">
-              CLAIMED · {CLAIMED} / {TOTAL}
-            </span>
-            <span className="font-mono text-gold text-[10px] tracking-[0.35em]">
-              REMAINING · {REMAINING}
-            </span>
-          </div>
-
-          {/* gold bar */}
-          <div className="relative h-[3px] bg-line/80 mt-4 mb-6">
-            <div
-              className="absolute top-0 left-0 h-full bg-gold glow-gold shimmer"
-              style={{ width: `${claimedPct}%` }}
-            />
-          </div>
-
-          <div className="flex items-baseline justify-between">
-            <div>
-              <p className="font-mono text-mute text-[10px] tracking-[0.3em] mb-1">
-                NEXT BADGE
-              </p>
-              <p className="font-mono text-gold text-4xl tabular tracking-tight">
-                #{String(CLAIMED + 1).padStart(3, "0")}
-              </p>
-            </div>
-            <div className="text-right">
-              <p className="font-mono text-mute text-[10px] tracking-[0.3em] mb-1">
-                ONE-TIME FEE
-              </p>
-              <p className="font-mono text-bone text-4xl tabular tracking-tight">
-                NT$ 2,700
-              </p>
-            </div>
-          </div>
-
-          <button className="mt-10 w-full py-4 bg-gold text-navy text-xs tracking-[0.3em] hover:bg-gold-soft transition-colors font-medium">
-            CLAIM #{String(CLAIMED + 1).padStart(3, "0")} →
-          </button>
-        </div>
-
-        <p className="text-center font-mono text-mute/60 text-[10px] tracking-[0.25em] mt-6">
-          NUMBER ASSIGNED AT CHECKOUT · NON-TRANSFERABLE
-        </p>
+      {/* ── WAITLIST FORM (was: dead claim button) ── */}
+      <section
+        id="waitlist"
+        className="mx-auto max-w-2xl w-full px-6 sm:px-10 pb-20 scroll-mt-20"
+      >
+        <WaitlistForm />
       </section>
 
       {/* ── BENEFITS GRID ────────────────── */}
@@ -159,14 +120,20 @@ export default function FoundersPage() {
         <h3 className="text-3xl sm:text-4xl text-bone font-light tracking-tight">
           當 #270 被認領,這扇門將永遠關閉。
         </h3>
-        <button className="mt-10 px-12 py-4 bg-gold text-navy text-xs tracking-[0.3em] hover:bg-gold-soft transition-colors font-medium">
-          CLAIM YOUR NUMBER →
-        </button>
+        <p className="mt-6 text-mute max-w-md mx-auto text-sm leading-relaxed">
+          現在加入等候名單,在正式開放預訂時擁有第一順位。
+        </p>
         <Link
-          href="/"
+          href="#waitlist"
+          className="inline-block mt-10 px-12 py-4 bg-gold text-navy text-xs tracking-[0.3em] hover:bg-gold-soft transition-colors font-medium"
+        >
+          ↑ JOIN THE WAITLIST
+        </Link>
+        <Link
+          href="/about"
           className="block mt-6 font-mono text-mute hover:text-gold text-[10px] tracking-[0.3em] transition-colors"
         >
-          ← BACK TO HOME
+          READ THE MANIFESTO →
         </Link>
       </section>
 
