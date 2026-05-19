@@ -1,9 +1,21 @@
 import Link from "next/link";
 
-type NavKey = "home" | "matches" | "leaderboard" | "founders" | "about";
+type NavKey =
+  | "home"
+  | "matches"
+  | "lab"
+  | "leaderboard"
+  | "founders"
+  | "about";
 
-const NAV_ITEMS: { key: Exclude<NavKey, "home">; href: string; label: string }[] = [
+const NAV_ITEMS: {
+  key: Exclude<NavKey, "home">;
+  href: string;
+  label: string;
+  badge?: string;
+}[] = [
   { key: "matches", href: "/matches", label: "MATCHES" },
+  { key: "lab", href: "/lab", label: "LAB", badge: "BETA" },
   { key: "leaderboard", href: "/leaderboard", label: "THE 27 WALL" },
   { key: "founders", href: "/founders", label: "FOUNDERS · 27" },
   { key: "about", href: "/about", label: "ABOUT" },
@@ -27,13 +39,18 @@ export default function Nav({ active }: { active?: NavKey }) {
             <Link
               key={item.key}
               href={item.href}
-              className={`font-mono text-[10px] sm:text-xs tracking-[0.22em] whitespace-nowrap transition-colors ${
+              className={`font-mono text-[10px] sm:text-xs tracking-[0.22em] whitespace-nowrap transition-colors inline-flex items-center gap-1.5 ${
                 active === item.key
                   ? "text-gold"
                   : "text-mute hover:text-gold"
               }`}
             >
               {item.label}
+              {item.badge && (
+                <span className="px-1 py-px text-[8px] tracking-[0.15em] border border-gold/40 text-gold">
+                  {item.badge}
+                </span>
+              )}
             </Link>
           ))}
           <button className="hidden sm:inline-block px-4 py-2 border border-gold/30 text-gold text-xs tracking-[0.18em] hover:bg-gold/10 transition-colors">
