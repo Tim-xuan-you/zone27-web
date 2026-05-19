@@ -1,15 +1,52 @@
+import Link from "next/link";
+
+const SECONDARY_LINKS = [
+  { label: "ABOUT", href: "/about", external: false },
+  { label: "CHANGELOG", href: "/changelog", external: false },
+  { label: "LAB", href: "/lab", external: false },
+  { label: "SOURCE", href: "https://github.com/Tim-xuan-you/zone27-web", external: true },
+];
+
 export default function Footer() {
   return (
     <footer className="mt-auto border-t border-line/40">
-      <div className="mx-auto max-w-6xl px-6 sm:px-10 py-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-        <div className="flex items-center gap-3">
-          <span className="font-mono text-gold text-sm tracking-[0.22em]">ZONE</span>
-          <span className="font-mono text-bone text-sm tracking-[0.22em]">27</span>
-          <span className="text-mute text-xs ml-2">© 2026</span>
+      <div className="mx-auto max-w-6xl px-6 sm:px-10 py-10">
+        {/* Top row: secondary links */}
+        <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3 pb-6 border-b border-line/30">
+          {SECONDARY_LINKS.map((link) =>
+            link.external ? (
+              <a
+                key={link.href}
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-mono text-mute hover:text-gold text-[10px] tracking-[0.3em] transition-colors"
+              >
+                {link.label}
+              </a>
+            ) : (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="font-mono text-mute hover:text-gold text-[10px] tracking-[0.3em] transition-colors"
+              >
+                {link.label}
+              </Link>
+            )
+          )}
         </div>
-        <p className="font-mono text-mute/70 text-[10px] tracking-[0.25em] text-center">
-          BUILT FOR THOSE WHO READ THE NUMBERS.
-        </p>
+
+        {/* Bottom row: brand + tagline */}
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-6">
+          <div className="flex items-center gap-3">
+            <span className="font-mono text-gold text-sm tracking-[0.22em]">ZONE</span>
+            <span className="font-mono text-bone text-sm tracking-[0.22em]">27</span>
+            <span className="text-mute text-xs ml-2">© 2026</span>
+          </div>
+          <p className="font-mono text-mute/70 text-[10px] tracking-[0.25em] text-center">
+            BUILT FOR THOSE WHO READ THE NUMBERS.
+          </p>
+        </div>
       </div>
     </footer>
   );
