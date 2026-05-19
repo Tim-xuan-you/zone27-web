@@ -2,6 +2,7 @@ import Link from "next/link";
 
 const SECONDARY_LINKS = [
   { label: "ABOUT", href: "/about", external: false },
+  { label: "METHODOLOGY", href: "/methodology", external: false },
   { label: "GLOSSARY", href: "/glossary", external: false },
   { label: "FAQ", href: "/faq", external: false },
   { label: "CHANGELOG", href: "/changelog", external: false },
@@ -54,7 +55,7 @@ export default function Footer() {
             title="View full changelog"
           >
             <span className="w-1.5 h-1.5 rounded-full bg-gold/70 glow-gold" />
-            <span>v0.13 · 13 RELEASES</span>
+            <span>v0.15 · 15 RELEASES</span>
           </a>
         </div>
       </div>
