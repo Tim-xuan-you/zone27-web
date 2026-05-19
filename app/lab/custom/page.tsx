@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import MatchSimulator from "@/components/MatchSimulator";
@@ -116,10 +117,42 @@ function buildCustomMatch(home: PitcherInput, away: PitcherInput): Match {
   };
 }
 
+// Wrap the page in Suspense so useSearchParams works in production
 export default function CustomLabPage() {
-  const [home, setHome] = useState<PitcherInput>(DEFAULT_HOME);
-  const [away, setAway] = useState<PitcherInput>(DEFAULT_AWAY);
+  return (
+    <Suspense fallback={null}>
+      <CustomLabInner />
+    </Suspense>
+  );
+}
+
+function CustomLabInner() {
+  const params = useSearchParams();
+
+  // Read URL params once on mount, fall back to defaults
+  const [home, setHome] = useState<PitcherInput>(() => ({
+    name: params.get("h_name") ?? DEFAULT_HOME.name,
+    k9: params.get("h_k9") ?? DEFAULT_HOME.k9,
+    bb9: params.get("h_bb9") ?? DEFAULT_HOME.bb9,
+    hr9: params.get("h_hr9") ?? DEFAULT_HOME.hr9,
+  }));
+  const [away, setAway] = useState<PitcherInput>(() => ({
+    name: params.get("a_name") ?? DEFAULT_AWAY.name,
+    k9: params.get("a_k9") ?? DEFAULT_AWAY.k9,
+    bb9: params.get("a_bb9") ?? DEFAULT_AWAY.bb9,
+    hr9: params.get("a_hr9") ?? DEFAULT_AWAY.hr9,
+  }));
   const [builtMatch, setBuiltMatch] = useState<Match | null>(null);
+  const [copied, setCopied] = useState(false);
+
+  // If user arrived with URL params, auto-build immediately so they
+  // see the simulator without needing to press the button
+  useEffect(() => {
+    if (params.toString().length > 0 && !builtMatch) {
+      setBuiltMatch(buildCustomMatch(home, away));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   function applyPreset(p: Preset) {
     setHome(p.home);
@@ -135,6 +168,29 @@ export default function CustomLabPage() {
     setHome(DEFAULT_HOME);
     setAway(DEFAULT_AWAY);
     setBuiltMatch(null);
+    setCopied(false);
+  }
+
+  async function copyShareLink() {
+    if (typeof window === "undefined") return;
+    const url = new URL(window.location.origin + "/lab/custom");
+    url.searchParams.set("h_name", home.name);
+    url.searchParams.set("h_k9", home.k9);
+    url.searchParams.set("h_bb9", home.bb9);
+    url.searchParams.set("h_hr9", home.hr9);
+    url.searchParams.set("a_name", away.name);
+    url.searchParams.set("a_k9", away.k9);
+    url.searchParams.set("a_bb9", away.bb9);
+    url.searchParams.set("a_hr9", away.hr9);
+
+    try {
+      await navigator.clipboard.writeText(url.toString());
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      // Older browsers / iframes — fallback select
+      prompt("Copy this link:", url.toString());
+    }
   }
 
   return (
@@ -229,12 +285,25 @@ export default function CustomLabPage() {
         </div>
       </section>
 
-      {/* ── THE SIMULATOR ────────────────────────── */}
+      {/* ── THE SIMULATOR + SHARE ────────────────── */}
       {builtMatch && (
         <section className="mx-auto max-w-4xl w-full px-6 sm:px-10 pb-16 border-t border-line/40 pt-12">
-          <p className="font-mono text-gold/70 text-[10px] tracking-[0.35em] mb-4">
-            / 03 · YOUR SIMULATION
-          </p>
+          <div className="flex items-baseline justify-between flex-wrap gap-4 mb-6">
+            <p className="font-mono text-gold/70 text-[10px] tracking-[0.35em]">
+              / 03 · YOUR SIMULATION
+            </p>
+            <button
+              onClick={copyShareLink}
+              className={`px-5 py-2.5 font-mono text-[10px] tracking-[0.3em] transition-colors border ${
+                copied
+                  ? "border-gold bg-gold text-navy"
+                  : "border-gold/40 text-gold hover:bg-gold/10"
+              }`}
+              aria-label="Copy a shareable link to this scenario"
+            >
+              {copied ? "✓ COPIED" : "🔗 COPY SCENARIO LINK"}
+            </button>
+          </div>
           <MatchSimulator key={builtMatch.id} match={builtMatch} />
         </section>
       )}
