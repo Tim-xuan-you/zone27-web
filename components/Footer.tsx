@@ -55,7 +55,7 @@ export default function Footer() {
             title="View full changelog"
           >
             <span className="w-1.5 h-1.5 rounded-full bg-gold/70 glow-gold" />
-            <span>v0.15 · 15 RELEASES</span>
+            <span>v0.16 · 16 RELEASES</span>
           </a>
         </div>
       </div>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import MatchSimulator from "@/components/MatchSimulator";
@@ -79,8 +80,34 @@ export default function LabPage() {
       </section>
 
       {/* ── THE SIMULATOR (shared component) ─────── */}
-      <section className="mx-auto max-w-4xl w-full px-6 sm:px-10 pb-16">
+      <section className="mx-auto max-w-4xl w-full px-6 sm:px-10 pb-12">
         <MatchSimulator key={match.id} match={match} />
+      </section>
+
+      {/* ── CUSTOM MODE CTA ──────────────────────── */}
+      <section className="mx-auto max-w-4xl w-full px-6 sm:px-10 pb-16">
+        <Link
+          href="/lab/custom"
+          className="block bg-slate/40 border border-gold/30 hover:border-gold/70 transition-colors p-6 sm:p-8 group"
+        >
+          <div className="flex items-center justify-between flex-wrap gap-4">
+            <div>
+              <p className="font-mono text-gold/70 text-[10px] tracking-[0.35em] mb-2">
+                POWER USER · CUSTOM MODE
+              </p>
+              <h3 className="text-xl sm:text-2xl text-bone font-light tracking-tight">
+                想自己當總教練?
+              </h3>
+              <p className="text-mute text-sm mt-2 max-w-xl">
+                輸入任意兩位投手的 K/9 · BB/9 · HR/9,引擎會即時構造一場
+                全新虛擬比賽。「3000 三振王」對「火球菜鳥」?一鍵就跑。
+              </p>
+            </div>
+            <span className="font-mono text-gold text-xs tracking-[0.3em] group-hover:translate-x-1 transition-transform inline-flex items-center gap-2">
+              TRY CUSTOM MATCHUP →
+            </span>
+          </div>
+        </Link>
       </section>
 
       {/* ── METHODOLOGY NOTE ─────────────────────── */}
