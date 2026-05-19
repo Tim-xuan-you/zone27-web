@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Home() {
   // ── ZONE 27 首頁靈魂 ───────────────────────────────
   // 中信兄弟(主隊) 62%  /  統一獅(客隊) 38%
@@ -25,18 +27,29 @@ export default function Home() {
       {/* ── TOP NAV ────────────────────────────────── */}
       <nav className="w-full border-b border-line/60 backdrop-blur-sm">
         <div className="mx-auto max-w-6xl px-6 sm:px-10 py-5 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <span className="font-mono text-gold text-xl tracking-[0.22em] font-medium">
+          <Link href="/" className="flex items-center gap-3 group">
+            <span className="font-mono text-gold text-xl tracking-[0.22em] font-medium group-hover:opacity-80">
               ZONE
             </span>
-            <span className="font-mono text-bone text-xl tracking-[0.22em] font-medium">
+            <span className="font-mono text-bone text-xl tracking-[0.22em] font-medium group-hover:opacity-80">
               27
             </span>
-          </div>
+          </Link>
           <div className="flex items-center gap-6 text-sm">
-            <span className="text-mute hidden sm:inline">CPBL · MLB · NBA · NPB</span>
+            <Link
+              href="/matches"
+              className="font-mono text-mute hover:text-gold text-xs tracking-[0.22em] transition-colors"
+            >
+              MATCHES
+            </Link>
+            <Link
+              href="/founders"
+              className="font-mono text-mute hover:text-gold text-xs tracking-[0.22em] transition-colors"
+            >
+              FOUNDERS · 27
+            </Link>
             <button className="px-4 py-2 border border-gold/30 text-gold text-xs tracking-[0.18em] hover:bg-gold/10 transition-colors">
-              MEMBER LOGIN
+              LOGIN
             </button>
           </div>
         </div>
@@ -166,9 +179,12 @@ export default function Home() {
 
           {/* CTA */}
           <div className="mt-10 flex justify-center">
-            <button className="px-8 py-3 border border-gold text-gold text-xs tracking-[0.3em] hover:bg-gold hover:text-navy transition-colors">
-              VIEW FULL AI BREAKDOWN →
-            </button>
+            <Link
+              href="/matches"
+              className="px-8 py-3 border border-gold text-gold text-xs tracking-[0.3em] hover:bg-gold hover:text-navy transition-colors"
+            >
+              VIEW ALL TODAY&apos;S BOARD →
+            </Link>
           </div>
         </div>
 
@@ -214,9 +230,12 @@ export default function Home() {
           一次性 NT$ 2,700 終身會員資格 · 個人 ID 鑲入 #001 ~ #270 編號徽章
           ·售完永久關閉。
         </p>
-        <button className="mt-8 px-10 py-3 bg-gold text-navy text-xs tracking-[0.3em] hover:bg-gold-soft transition-colors">
-          CLAIM YOUR NUMBER
-        </button>
+        <Link
+          href="/founders"
+          className="inline-block mt-8 px-10 py-3 bg-gold text-navy text-xs tracking-[0.3em] hover:bg-gold-soft transition-colors"
+        >
+          CLAIM YOUR NUMBER →
+        </Link>
       </section>
 
       {/* ── FOOTER ─────────────────────────────────── */}
