@@ -6,6 +6,63 @@
 
 ---
 
+## 🚀 開新對話窗時 · 複製這段過去就好
+
+**為什麼需要這段:** 新的 Claude 對話沒有我們累積 27 個版本的脈絡。
+這段 prompt 讓新 Claude 一秒接上,不必重講歷史。
+
+**Copy-paste 完整 prompt:**
+
+```
+我們在繼續開發 ZONE 27 — 給台灣硬核棒球迷打造的暗黑黃金級量化分析品牌。
+
+📂 工作目錄:C:\Users\tatay\Desktop\Second\zone27-web
+🌐 正式網址:https://zone27-web.vercel.app
+📦 GitHub:https://github.com/Tim-xuan-you/zone27-web
+
+請先讀這兩份必讀文件:
+- CLAUDE.md → 我們的三條鐵律(SEO/社群凍結 + 預算分級)
+- TODO.md → 我目前的代辦事項清單
+
+目前狀態:v0.27 已上線,Vercel ↔ GitHub auto-deploy 已啟動。
+24 個 routes,MLB Stats API 真實資料 + Lab Monte Carlo 引擎合體上線。
+
+我的互動風格:常說「沒想法...您決定!」— 您在三條鐵律內全權決定最高槓桿動作。
+SEO/社群凍結令模糊指令絕不解封。
+預算 TIER 1(免費 + 註冊 + 小錢)您可主動推進並引導我;
+TIER 2(交易費 + 中等月費)必須問我;
+TIER 3(NT$3K 以上 / 法律 / 廣告)絕不主動建議。
+
+今天我要做的事:[ 這裡填入您今天要的具體任務,或留空 ]
+```
+
+**簡短版**(如果上面太長):
+
+```
+繼續 ZONE 27 開發。專案在 C:\Users\tatay\Desktop\Second\zone27-web。
+請先讀 CLAUDE.md 和 TODO.md。目前 v0.27,自動部署已啟動。
+今天我要做:① Supabase 註冊。
+```
+
+---
+
+## 🛡️ 已驗證不走的路線(避免新對話窗踩雷)
+
+### ❌ 台灣運彩(article.sportslottery.com.tw)爬蟲
+- **技術:** HTML 不含賽事資料,需 headless browser
+- **戰略:** 從博彩平台抓資料會綁定 ZONE 27 與博彩,違反 /about /faq 已寫死的定位
+- **結論:** 不爬。同邏輯也適用報馬仔(fengyuncai.com)
+
+### ❌ 寄生任何台灣運彩 / 報馬仔 / 殺手平台
+- 同上,品牌信譽自殺
+
+### ✅ 可走的真實資料來源
+- **MLB Stats API**(已上線)
+- **手動 CPBL 示範資料**(已上線 + 已標記)
+- **未來 stats.cpbl.com.tw 官方公開資料**(需 headless 或等他們開 API)
+
+---
+
 ## 🌅 明早優先 · 共需 ~10 分鐘 · 全部 TIER 1 免費
 
 ### ① Supabase 註冊(5 分鐘) · 🔥 最高優先
