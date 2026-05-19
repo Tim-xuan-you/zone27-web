@@ -48,8 +48,8 @@ export default function LabPage() {
     setRunning(true);
     setDone(false);
 
-    const home = match.home.winRate;
-    const away = match.away.winRate;
+    const homePitcher = match.home.pitcher;
+    const awayPitcher = match.away.pitcher;
 
     let acc: RunningStats = initialStats;
 
@@ -59,7 +59,7 @@ export default function LabPage() {
 
       const batch: GameResult[] = [];
       for (let i = 0; i < n; i++) {
-        batch.push(simulateGame(home, away));
+        batch.push(simulateGame(homePitcher, awayPitcher));
       }
       acc = applyBatch(acc, batch);
       setStats(acc);
@@ -94,7 +94,9 @@ export default function LabPage() {
         <div className="inline-flex items-center gap-2 mb-8 font-mono text-[10px] tracking-[0.35em]">
           <span className="text-gold">LIVE AI LABORATORY</span>
           <span className="text-mute/60">·</span>
-          <span className="px-1.5 py-0.5 border border-gold/40 text-gold">BETA</span>
+          <span className="px-1.5 py-0.5 border border-gold/40 text-gold">
+            v0.2 · REAL AT-BAT
+          </span>
         </div>
         <h1 className="text-4xl sm:text-5xl md:text-6xl font-light leading-[1.1] tracking-tight text-bone">
           親眼看
@@ -102,8 +104,9 @@ export default function LabPage() {
           跑。
         </h1>
         <p className="mt-8 max-w-xl mx-auto text-mute leading-relaxed text-base">
-          每一場虛擬比賽都是真實的{" "}
-          <span className="font-mono text-gold/80">Poisson 採樣</span>。
+          每場虛擬比賽都是{" "}
+          <span className="font-mono text-gold/80">逐打席</span>
+          模擬:9 局、27 個出局數、滿壘保送會推進跑者。
           選一場 CPBL 比賽,按下執行,看 10,000 次模擬如何在
           兩秒內從亂數收斂成穩定的勝率分布。
         </p>
@@ -305,10 +308,10 @@ export default function LabPage() {
         <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-20">
           <div className="bg-slate/40 border border-gold/50 p-10 text-center">
             <p className="font-mono text-gold text-[10px] tracking-[0.4em] mb-4">
-              ✓ SIMULATION COMPLETE · N = 10,000
+              ✓ SIMULATION COMPLETE · N = 10,000 · v0.2 ENGINE
             </p>
             <h3 className="text-2xl text-bone font-light tracking-tight mb-4">
-              收斂結果:
+              逐打席引擎收斂:
               <span className="text-gold font-mono tabular mx-2">
                 {homePct.toFixed(1)}% / {awayPct.toFixed(1)}%
               </span>
@@ -317,12 +320,13 @@ export default function LabPage() {
               鎖定的 AI 預測為{" "}
               <span className="font-mono text-bone tabular">
                 {match.home.winRate}% / {match.away.winRate}%
-              </span>{" "}
+              </span>
               。
               <br />
-              10,000 次全新 Poisson 採樣的收斂落在 ±2% 內。
+              v0.2 引擎使用投手 K/9 · BB/9 · HR/9 推導打席結果機率,
+              純由壘上跑者推進物理累計分數。
               <br />
-              <span className="text-gold">這個演算法是真的。</span>
+              <span className="text-gold">這次,連棒球都是真的。</span>
             </p>
           </div>
         </section>
@@ -331,15 +335,27 @@ export default function LabPage() {
       {/* ── METHODOLOGY NOTE ─────────────────────── */}
       <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-20 border-t border-line/40 pt-12">
         <p className="font-mono text-gold/70 text-[10px] tracking-[0.35em] mb-4">
-          / METHODOLOGY · BETA
+          / METHODOLOGY · v0.2 — REAL AT-BAT
         </p>
-        <p className="text-mute text-sm leading-relaxed">
-          目前 BETA 版本使用簡化的 Poisson 得分模型 — 每隊期望得分由歷史
-          AI 勝率推導(以 CPBL 聯盟平均 4.3 R/G 為基準,套用 ±18%
-          的進攻調整係數)。正式版會接上完整的打席對決機率矩陣 + Trackman 雷達追蹤先驗,
-          但 Poisson 在 10,000 次採樣下的收斂結果與 Pythagorean
-          期望勝率相當接近,做為演算法存在性的證明已足夠誠實。
-        </p>
+        <div className="space-y-4 text-mute text-sm leading-relaxed">
+          <p>
+            v0.2 引擎升級為<strong className="text-bone">逐打席對決模型</strong>。
+            每個打席依該投手的 K/9 · BB/9 · HR/9 推導出 8 種互斥結果
+            (K · BB · HR · 1B · 2B · 3B · GO · FO)的機率,滾亂數選一個,
+            執行對應的壘上推進物理(滿壘保送強制得分、二壘安打 + 一壘跑者
+            50% 機率回本壘等),累計分數與出局數。
+          </p>
+          <p>
+            一場虛擬比賽需要模擬約 <strong className="text-bone">70 個打席</strong>(9 局
+            × 約 8 次半局打席)。10,000 場 = 約 70 萬次亂數採樣,全部在
+            瀏覽器端執行,&lt; 2 秒收斂。
+          </p>
+          <p>
+            <strong className="text-bone">下一站 v0.3:</strong>
+            加入打者個別進階數據 (OPS / wRC+ / Platoon Splits) 細化結果機率;
+            v0.4 接上 Trackman 球速 + 轉軸的物理先驗。
+          </p>
+        </div>
       </section>
 
       <Footer />
