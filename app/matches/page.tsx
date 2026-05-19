@@ -36,12 +36,41 @@ export default function MatchesPage() {
       </section>
 
       {/* ── MATCH GRID ──────────────────────── */}
-      <section className="mx-auto max-w-6xl w-full px-6 sm:px-10 pb-24">
+      <section className="mx-auto max-w-6xl w-full px-6 sm:px-10 pb-12">
         <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
           {todaysMatches.map((m) => (
             <MiniMatchCard key={m.id} match={m} />
           ))}
         </div>
+      </section>
+
+      {/* ── MLB CTA(即時資料) ───────────────── */}
+      <section className="mx-auto max-w-6xl w-full px-6 sm:px-10 pb-24">
+        <Link
+          href="/matches/mlb"
+          className="block bg-slate/40 border border-win/30 hover:border-win/70 transition-colors p-6 sm:p-8 group"
+        >
+          <div className="flex items-center justify-between flex-wrap gap-4">
+            <div>
+              <div className="flex items-baseline gap-2 mb-2 font-mono text-[10px] tracking-[0.35em]">
+                <span className="text-win">MLB · 即時資料</span>
+                <span className="px-1.5 py-0.5 border border-win/40 text-win">
+                  LIVE
+                </span>
+              </div>
+              <h3 className="text-xl sm:text-2xl text-bone font-light tracking-tight">
+                想看美國職棒今日全部賽程?
+              </h3>
+              <p className="text-mute text-sm mt-2 max-w-xl">
+                資料直接來自 MLB 官方 Stats API,每 10 分鐘更新。
+                ~15 場比賽含戰績、開賽時間(台北時區)、即時比分。
+              </p>
+            </div>
+            <span className="font-mono text-win text-xs tracking-[0.3em] group-hover:translate-x-1 transition-transform inline-flex items-center gap-2">
+              今日 MLB 賽程 →
+            </span>
+          </div>
+        </Link>
       </section>
 
       <Footer />
