@@ -1,0 +1,334 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
+import ReplayBroadcast from "@/components/ReplayBroadcast";
+import type { Match } from "@/lib/matches";
+import {
+  simulateGame,
+  applyBatch,
+  initialStats,
+  topScores,
+  type RunningStats,
+  type GameResult,
+} from "@/lib/simulator";
+
+// ── ZONE 27 · Match Simulator (shared) ────────────────
+// 把 /lab 的核心互動 UI 抽出來,讓任何給定一場比賽的頁面
+// (例如 /matches/[gameId])都可以內嵌完整的 Live Sim 體驗。
+//
+// 內含:
+//   - RUN 10,000 SIMULATIONS 按鈕 + 進度條
+//   - Live Win Probability 區塊
+//   - Score Distribution 區塊
+//   - Completion Card(收斂結果與鎖定 AI 預測對比)
+//   - ReplayBroadcast(整場 9 局文字直播)
+//
+// 因為 match 在父層改變時應該完全重置,推薦在父層用 key={match.id}
+// 強制 remount(這版的 state 用 match.id 重置也已 work,雙保險)。
+// ─────────────────────────────────────────────────────
+
+const TOTAL_SIMS = 10_000;
+const BATCH = 200;
+
+type Props = {
+  match: Match;
+};
+
+export default function MatchSimulator({ match }: Props) {
+  const [stats, setStats] = useState<RunningStats>(initialStats);
+  const [running, setRunning] = useState(false);
+  const [done, setDone] = useState(false);
+  const rafRef = useRef<number | null>(null);
+
+  // Reset everything when matchup changes (defense in depth even
+  // when parent already uses key={match.id})
+  useEffect(() => {
+    if (rafRef.current !== null) {
+      cancelAnimationFrame(rafRef.current);
+      rafRef.current = null;
+    }
+    setStats(initialStats);
+    setRunning(false);
+    setDone(false);
+  }, [match.id]);
+
+  // Cleanup on unmount
+  useEffect(() => {
+    return () => {
+      if (rafRef.current !== null) cancelAnimationFrame(rafRef.current);
+    };
+  }, []);
+
+  function start() {
+    if (running) return;
+    setStats(initialStats);
+    setRunning(true);
+    setDone(false);
+
+    const homePitcher = match.home.pitcher;
+    const awayPitcher = match.away.pitcher;
+
+    let acc: RunningStats = initialStats;
+
+    const tick = () => {
+      const remaining = TOTAL_SIMS - acc.completed;
+      const n = Math.min(BATCH, remaining);
+
+      const batch: GameResult[] = [];
+      for (let i = 0; i < n; i++) {
+        batch.push(simulateGame(homePitcher, awayPitcher));
+      }
+      acc = applyBatch(acc, batch);
+      setStats(acc);
+
+      if (acc.completed < TOTAL_SIMS) {
+        rafRef.current = requestAnimationFrame(tick);
+      } else {
+        setRunning(false);
+        setDone(true);
+        rafRef.current = null;
+      }
+    };
+
+    rafRef.current = requestAnimationFrame(tick);
+  }
+
+  const progressPct = (stats.completed / TOTAL_SIMS) * 100;
+  const totalDecided = stats.homeWins + stats.awayWins;
+  const homePct =
+    totalDecided > 0 ? (stats.homeWins / totalDecided) * 100 : 50;
+  const awayPct = 100 - homePct;
+  const avgRuns =
+    stats.completed > 0 ? stats.totalRuns / stats.completed : 0;
+  const distribution = topScores(stats.scoreCounts, 5);
+
+  return (
+    <>
+      {/* ── RUN BUTTON ───────────────────────────── */}
+      <section className="pb-10">
+        <button
+          onClick={start}
+          disabled={running}
+          className={`w-full py-6 border text-sm tracking-[0.35em] font-medium transition-colors ${
+            running
+              ? "border-gold/40 text-gold/60 cursor-not-allowed bg-gold/5"
+              : "border-gold bg-gold text-navy hover:bg-gold-soft"
+          }`}
+        >
+          {running
+            ? `▸ SIMULATING ${stats.completed.toLocaleString()} / ${TOTAL_SIMS.toLocaleString()}`
+            : done
+            ? "▸ RUN AGAIN"
+            : "▶ RUN 10,000 SIMULATIONS"}
+        </button>
+
+        <div className="relative mt-3 h-[2px] bg-line/80">
+          <div
+            className={`absolute top-0 left-0 h-full bg-gold ${
+              running ? "glow-gold" : ""
+            }`}
+            style={{
+              width: `${progressPct}%`,
+              transition: "width 80ms linear",
+            }}
+          />
+        </div>
+      </section>
+
+      {/* ── LIVE WIN PROBABILITY ─────────────────── */}
+      <section className="pb-14">
+        <p className="font-mono text-gold/70 text-[10px] tracking-[0.35em] mb-6">
+          / LIVE WIN PROBABILITY
+        </p>
+
+        <div className="bg-slate/70 border border-line/80 glow-soft p-8 sm:p-10">
+          <div className="flex items-baseline justify-between mb-3">
+            <div>
+              <p className="font-mono text-mute text-[10px] tracking-[0.3em] mb-1">
+                HOME · {match.home.name}
+              </p>
+              <p
+                className={`font-mono tabular tracking-tight text-5xl sm:text-6xl font-light ${
+                  homePct >= awayPct ? "text-gold" : "text-mute"
+                }`}
+                style={{ transition: "color 200ms ease" }}
+              >
+                {homePct.toFixed(1)}
+                <span className="text-xl opacity-60 ml-0.5">%</span>
+              </p>
+            </div>
+            <div className="text-right">
+              <p className="font-mono text-mute text-[10px] tracking-[0.3em] mb-1">
+                {match.away.name} · AWAY
+              </p>
+              <p
+                className={`font-mono tabular tracking-tight text-5xl sm:text-6xl font-light ${
+                  awayPct > homePct ? "text-gold" : "text-mute"
+                }`}
+                style={{ transition: "color 200ms ease" }}
+              >
+                {awayPct.toFixed(1)}
+                <span className="text-xl opacity-60 ml-0.5">%</span>
+              </p>
+            </div>
+          </div>
+
+          {/* Live bar */}
+          <div className="relative h-1 bg-line/80 mt-4">
+            <div
+              className={`absolute top-0 left-0 h-full bg-gold ${
+                running || done ? "glow-gold" : ""
+              } ${done ? "shimmer" : ""}`}
+              style={{
+                width: `${homePct}%`,
+                transition: "width 120ms ease-out",
+              }}
+            />
+            <div
+              className="absolute -top-1.5 h-[16px] w-px bg-gold"
+              style={{
+                left: `${homePct}%`,
+                transition: "left 120ms ease-out",
+              }}
+            />
+          </div>
+
+          {/* Counters */}
+          <div className="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-6">
+            <Counter
+              label="HOME WINS"
+              value={stats.homeWins}
+              color={homePct >= awayPct ? "gold" : "mute"}
+            />
+            <Counter
+              label="AWAY WINS"
+              value={stats.awayWins}
+              color={awayPct > homePct ? "gold" : "mute"}
+            />
+            <Counter label="TIES" value={stats.ties} color="mute" />
+            <Counter
+              label="AVG TOTAL RUNS"
+              value={avgRuns}
+              decimals={2}
+              color="bone"
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* ── SCORE DISTRIBUTION ───────────────────── */}
+      <section className="pb-14">
+        <p className="font-mono text-gold/70 text-[10px] tracking-[0.35em] mb-6">
+          / EMERGING SCORE DISTRIBUTION
+        </p>
+
+        {distribution.length === 0 ? (
+          <div className="bg-slate/40 border border-line/60 p-10 text-center">
+            <p className="font-mono text-mute text-xs tracking-[0.25em]">
+              PRESS RUN TO BEGIN SAMPLING.
+            </p>
+          </div>
+        ) : (
+          <div className="space-y-3">
+            {distribution.map((row, i) => (
+              <div key={row.score} className="flex items-center gap-4">
+                <span className="font-mono text-mute text-[10px] tracking-[0.3em] w-8">
+                  / {String(i + 1).padStart(2, "0")}
+                </span>
+                <span className="font-mono text-bone tabular text-lg w-20">
+                  {row.score.replace("-", " : ")}
+                </span>
+                <div className="flex-1 relative h-[2px] bg-line/80">
+                  <div
+                    className="absolute top-0 left-0 h-full bg-gold glow-gold"
+                    style={{
+                      width: `${Math.min(100, (row.pct / 20) * 100)}%`,
+                      transition: "width 200ms ease-out",
+                    }}
+                  />
+                </div>
+                <span className="font-mono text-gold tabular text-sm w-20 text-right">
+                  {row.pct.toFixed(1)}%
+                </span>
+              </div>
+            ))}
+          </div>
+        )}
+      </section>
+
+      {/* ── COMPLETION CARD ──────────────────────── */}
+      {done && (
+        <section className="pb-14">
+          <div className="bg-slate/40 border border-gold/50 p-10 text-center">
+            <p className="font-mono text-gold text-[10px] tracking-[0.4em] mb-4">
+              ✓ SIMULATION COMPLETE · N = 10,000 · v0.2 ENGINE
+            </p>
+            <h3 className="text-2xl text-bone font-light tracking-tight mb-4">
+              逐打席引擎收斂:
+              <span className="text-gold font-mono tabular mx-2">
+                {homePct.toFixed(1)}% / {awayPct.toFixed(1)}%
+              </span>
+            </h3>
+            <p className="text-mute text-sm max-w-md mx-auto leading-relaxed">
+              鎖定的 AI 預測為{" "}
+              <span className="font-mono text-bone tabular">
+                {match.home.winRate}% / {match.away.winRate}%
+              </span>
+              。
+              <br />
+              v0.2 引擎使用投手 K/9 · BB/9 · HR/9 推導打席結果機率,
+              純由壘上跑者推進物理累計分數。
+              <br />
+              <span className="text-gold">這次,連棒球都是真的。</span>
+            </p>
+          </div>
+        </section>
+      )}
+
+      {/* ── REPLAY MODE ──────────────────────────── */}
+      <section className="pb-10 border-t border-line/40 pt-12">
+        <ReplayBroadcast
+          homeName={match.home.name}
+          homeEn={match.home.en}
+          homePitcher={match.home.pitcher}
+          awayName={match.away.name}
+          awayEn={match.away.en}
+          awayPitcher={match.away.pitcher}
+          keyId={match.id}
+        />
+      </section>
+    </>
+  );
+}
+
+// ── Counter mini-component ─────────────────────────────
+function Counter({
+  label,
+  value,
+  decimals = 0,
+  color,
+}: {
+  label: string;
+  value: number;
+  decimals?: number;
+  color: "gold" | "bone" | "mute";
+}) {
+  const colorClass =
+    color === "gold"
+      ? "text-gold"
+      : color === "bone"
+      ? "text-bone"
+      : "text-mute";
+  return (
+    <div>
+      <p className="font-mono text-mute text-[10px] tracking-[0.3em] mb-1">
+        {label}
+      </p>
+      <p className={`font-mono tabular text-2xl ${colorClass}`}>
+        {decimals > 0
+          ? value.toFixed(decimals)
+          : value.toLocaleString()}
+      </p>
+    </div>
+  );
+}

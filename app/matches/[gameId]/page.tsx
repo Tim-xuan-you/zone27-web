@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
+import MatchSimulator from "@/components/MatchSimulator";
 import { getMatchById, getAllMatchIds, type Match } from "@/lib/matches";
 
 // ── Pre-render all match pages at build time ───────────
@@ -236,6 +237,19 @@ export default async function MatchDetailPage({
             body="統計 10,000 場虛擬比賽中各隊獲勝次數與最終比分,輸出本頁所有機率與信心指標。"
           />
         </div>
+      </section>
+
+      {/* ── /05 · RUN IT YOURSELF (embedded live sim) ─ */}
+      <section className="mx-auto max-w-4xl w-full px-6 sm:px-10 pb-20 border-t border-line/40 pt-16">
+        <h2 className="font-mono text-gold text-[10px] tracking-[0.4em] mb-3">
+          / 05 · RUN IT YOURSELF
+        </h2>
+        <p className="text-mute text-sm leading-relaxed mb-10 max-w-xl">
+          別只看我們的數字。直接在瀏覽器裡跑一輪完整的 Monte Carlo,
+          看 10,000 次模擬從亂數收斂成穩定的勝率分布,再按 REPLAY
+          看一場 9 局逐打席文字直播。
+        </p>
+        <MatchSimulator key={m.id} match={m} />
       </section>
 
       {/* ── DISCUSSION LOCK ────────────────────────── */}
