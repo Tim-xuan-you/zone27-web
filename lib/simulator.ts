@@ -188,6 +188,190 @@ function simulateHalfInning(probs: AtBatProbs): number {
   return runs;
 }
 
+// ── Verbose half-inning (for replay mode) ──────────────
+// Same logic as above, but records every plate appearance as a
+// PlayLog entry so we can stream them back to the UI like a real
+// CPBL text broadcast.
+
+export type PlayLog = {
+  inning: number;
+  half: "top" | "bottom";
+  battingTeam: "home" | "away";
+  /** 1..9, cycling through the lineup */
+  batterNum: number;
+  outcome: AtBatOutcome;
+  /** outs in the half-inning AFTER this plate appearance (0-3) */
+  outsAfter: number;
+  /** runs scored on THIS plate appearance */
+  runsScored: number;
+  /** cumulative scores AFTER this play */
+  homeScoreAfter: number;
+  awayScoreAfter: number;
+  /** baserunner state AFTER this play */
+  basesAfter: Bases;
+};
+
+type HalfInningCtx = {
+  inning: number;
+  half: "top" | "bottom";
+  battingTeam: "home" | "away";
+  /** starting batter index for this half-inning (0..8) */
+  startingBatter: number;
+  homeScoreBefore: number;
+  awayScoreBefore: number;
+};
+
+function simulateHalfInningVerbose(
+  probs: AtBatProbs,
+  ctx: HalfInningCtx
+): { runs: number; nextBatter: number; log: PlayLog[] } {
+  let outs = 0;
+  let bases: Bases = [...EMPTY] as Bases;
+  let runs = 0;
+  let batterIdx = ctx.startingBatter;
+  const log: PlayLog[] = [];
+
+  while (outs < 3) {
+    const outcome = sampleAtBat(probs);
+    const res = applyOutcome(outcome, bases);
+    bases = res.bases;
+    runs += res.runs;
+    outs += res.outs;
+
+    log.push({
+      inning: ctx.inning,
+      half: ctx.half,
+      battingTeam: ctx.battingTeam,
+      batterNum: batterIdx + 1, // 1..9 for display
+      outcome,
+      outsAfter: outs,
+      runsScored: res.runs,
+      homeScoreAfter:
+        ctx.battingTeam === "home"
+          ? ctx.homeScoreBefore + runs
+          : ctx.homeScoreBefore,
+      awayScoreAfter:
+        ctx.battingTeam === "away"
+          ? ctx.awayScoreBefore + runs
+          : ctx.awayScoreBefore,
+      basesAfter: [...bases] as Bases,
+    });
+
+    batterIdx = (batterIdx + 1) % 9;
+  }
+
+  return { runs, nextBatter: batterIdx, log };
+}
+
+/**
+ * Like simulateGame() but also returns a play-by-play log of every
+ * plate appearance — for /lab REPLAY MODE.
+ *
+ * Lineups cycle 1..9 continuously through each half-inning.
+ */
+export function simulateGameWithLog(
+  homePitcher: PitcherStats,
+  awayPitcher: PitcherStats
+): { result: GameResult; log: PlayLog[] } {
+  const homeOnMound = atBatProbs(homePitcher);
+  const awayOnMound = atBatProbs(awayPitcher);
+
+  let homeRuns = 0;
+  let awayRuns = 0;
+  let homeNextBatter = 0;
+  let awayNextBatter = 0;
+  const log: PlayLog[] = [];
+
+  for (let inning = 1; inning <= 9; inning++) {
+    // ── Top of inning: away batting against home pitcher ──
+    const top = simulateHalfInningVerbose(homeOnMound, {
+      inning,
+      half: "top",
+      battingTeam: "away",
+      startingBatter: awayNextBatter,
+      homeScoreBefore: homeRuns,
+      awayScoreBefore: awayRuns,
+    });
+    awayRuns += top.runs;
+    awayNextBatter = top.nextBatter;
+    log.push(...top.log);
+
+    // ── Bottom of inning: home batting against away pitcher ──
+    const bot = simulateHalfInningVerbose(awayOnMound, {
+      inning,
+      half: "bottom",
+      battingTeam: "home",
+      startingBatter: homeNextBatter,
+      homeScoreBefore: homeRuns,
+      awayScoreBefore: awayRuns,
+    });
+    homeRuns += bot.runs;
+    homeNextBatter = bot.nextBatter;
+    log.push(...bot.log);
+  }
+
+  return {
+    result: {
+      homeRuns,
+      awayRuns,
+      winner:
+        homeRuns > awayRuns
+          ? "home"
+          : awayRuns > homeRuns
+          ? "away"
+          : "tie",
+    },
+    log,
+  };
+}
+
+// ── Human-readable description for a single play (for UI) ──
+
+const OUTCOME_VERB: Record<AtBatOutcome, string> = {
+  K: "strikes out",
+  BB: "walks",
+  HR: "homers",
+  "1B": "singles",
+  "2B": "doubles",
+  "3B": "triples",
+  GO: "grounds out",
+  FO: "flies out",
+};
+
+const OUTCOME_TIER: Record<
+  AtBatOutcome,
+  "out" | "onbase" | "extra" | "homer"
+> = {
+  K: "out",
+  GO: "out",
+  FO: "out",
+  BB: "onbase",
+  "1B": "onbase",
+  "2B": "extra",
+  "3B": "extra",
+  HR: "homer",
+};
+
+export function describePlay(
+  play: PlayLog,
+  teamLabel: "BROTHERS" | string,
+  awayLabel?: string
+): string {
+  void awayLabel;
+  const verb = OUTCOME_VERB[play.outcome];
+  let base = `${teamLabel} #${play.batterNum} ${verb}`;
+  if (play.runsScored > 0) {
+    base += `, ${play.runsScored} run${play.runsScored > 1 ? "s" : ""} score${
+      play.runsScored > 1 ? "" : "s"
+    }`;
+  }
+  return base;
+}
+
+export function outcomeTier(o: AtBatOutcome) {
+  return OUTCOME_TIER[o];
+}
+
 // ── Public API ─────────────────────────────────────────
 
 export type GameResult = {

@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
+import ReplayBroadcast from "@/components/ReplayBroadcast";
 import { matches } from "@/lib/matches";
 import {
   simulateGame,
@@ -301,6 +302,19 @@ export default function LabPage() {
             ))}
           </div>
         )}
+      </section>
+
+      {/* ── REPLAY MODE ──────────────────────────── */}
+      <section className="mx-auto max-w-4xl w-full px-6 sm:px-10 pb-20 border-t border-line/40 pt-16">
+        <ReplayBroadcast
+          homeName={match.home.name}
+          homeEn={match.home.en}
+          homePitcher={match.home.pitcher}
+          awayName={match.away.name}
+          awayEn={match.away.en}
+          awayPitcher={match.away.pitcher}
+          keyId={match.id}
+        />
       </section>
 
       {/* ── COMPLETION CARD ──────────────────────── */}
