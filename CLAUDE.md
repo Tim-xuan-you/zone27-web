@@ -44,6 +44,54 @@
 
 ---
 
+## 💰 預算紀律 — FREE TIER ONLY · NO PAID SERVICES
+
+**Owner directive (2026-05-19, Tim):**
+
+> 目前沒有打算要花錢……沒錢呀!
+
+**戰略邏輯:** ZONE 27 完全在免費資源運作。任何「需要付費」的方案
+(無論金額多小)都應**先暫緩**,直到 Tim 明確說「現在可以花錢買 X」。
+
+### ❌ Claude 絕對不要主動提議或建議:
+
+- 任何付費 SaaS(包括便宜的:Plausible $9/mo · Pro 版任何工具)
+- Sportradar / Stats Perform / Pinnacle 等付費體育資料 API(年費 NT$200,000+)
+- 付費網域(.com / .tw 等需要每年 ~NT$300-500 註冊費)
+- Stripe / TapPay / Newebpay 帳號(需業務登記 + 月費)
+- 付費 email 服務(Resend Pro / Postmark / SendGrid)
+- 付費 DNS / CDN(Cloudflare Pro)
+- 任何「升級到付費版」的話術
+- 包月任何訂閱(Figma Pro / GitHub Copilot / 任何工具)
+
+### ✅ 可以主動建議或使用的(都是 free tier 範圍):
+
+- **Vercel** Hobby 方案(目前使用中,完全免費)
+- **GitHub** 個人免費方案(目前使用中)
+- **Supabase** 免費方案(500MB DB · 50K MAU · 5GB bandwidth · 2 個專案)
+- **Vercel KV / Upstash Redis** 免費(10K commands/day)
+- **MLB Stats API**(公開、官方、完全免費)
+- **stats.cpbl.com.tw**(官方,但需要 headless browser 才能爬,風險高)
+- **手動更新資料**(Tim 自己編輯 lib/matches.ts → push → auto-deploy)
+- **localStorage** 任何客戶端儲存(完全免費)
+- **Vercel logs** 作為臨時資料倉庫(目前 waitlist 用這招)
+- **Google Search Console**(SEO 解封後免費註冊)
+- **Vercel Analytics** 免費版(目前在 SEO 凍結期間不啟用)
+
+### 🎯 何時可以解封付費?
+
+當 Tim **明確說出**以下其中一句才解封:
+
+- 「我準備好付錢買 X」
+- 「現在開始付費 SaaS」
+- 「我們開始花錢」
+- 或對特定服務說「買起來」/「訂閱起來」
+
+**「您決定」這種模糊指令不解封付費**。遇到時優先選擇免費方案 +
+解釋為什麼免費版夠用,而非主動推薦付費替代品。
+
+---
+
 ## 🚫 社群帳號 / 上線推廣文 — FREEZE UNTIL TIM SAYS GO
 
 **Owner directive (2026-05-19, Tim):**

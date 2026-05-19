@@ -74,7 +74,7 @@ export default function Footer() {
             title="View full changelog"
           >
             <span className="w-1.5 h-1.5 rounded-full bg-gold/70 glow-gold" />
-            <span>v0.24 · 全站繁中化</span>
+            <span>v0.25 · 誠實標示資料來源</span>
           </a>
         </div>
       </div>

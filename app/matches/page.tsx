@@ -12,9 +12,14 @@ export default function MatchesPage() {
 
       {/* ── HEADER ──────────────────────────── */}
       <section className="mx-auto max-w-6xl w-full px-6 sm:px-10 pt-16 pb-10">
-        <p className="font-mono text-gold/70 text-[10px] tracking-[0.4em] mb-3">
-          今日賽事板 · {todaysMatches[0].league}
-        </p>
+        <div className="flex items-baseline gap-3 mb-3 flex-wrap">
+          <p className="font-mono text-gold/70 text-[10px] tracking-[0.4em]">
+            今日賽事板 · {todaysMatches[0].league}
+          </p>
+          <span className="font-mono text-[9px] tracking-[0.3em] px-1.5 py-0.5 border border-gold/30 text-gold/70">
+            示範資料
+          </span>
+        </div>
         <div className="flex items-end justify-between flex-wrap gap-4">
           <h1 className="text-4xl sm:text-5xl text-bone font-light tracking-tight">
             2026 · 05 · 19{" "}
@@ -24,6 +29,9 @@ export default function MatchesPage() {
             {todaysMatches.length} 場比賽 · AI 模型 15:00 鎖定
           </p>
         </div>
+        <p className="mt-3 font-mono text-mute/60 text-[10px] tracking-[0.25em]">
+          目前 stealth mode 階段,資料為示範用途;正式上線後將為當日真實 CPBL 賽程
+        </p>
         <div className="mt-6 w-full h-px bg-line/60" />
       </section>
 

@@ -83,16 +83,21 @@ export default function SignalBoardPage() {
       <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pt-20 pb-10">
         <div className="flex items-baseline justify-between flex-wrap gap-4 mb-6">
           <div>
-            <p className="font-mono text-gold text-[10px] tracking-[0.45em] mb-3">
-              SIGNAL BOARD · DAILY QUANT BRIEF
-            </p>
+            <div className="flex items-baseline gap-3 mb-3 flex-wrap">
+              <p className="font-mono text-gold text-[10px] tracking-[0.45em]">
+                每日量化早報
+              </p>
+              <span className="font-mono text-[9px] tracking-[0.3em] px-1.5 py-0.5 border border-gold/30 text-gold/70">
+                示範資料
+              </span>
+            </div>
             <h1 className="text-4xl sm:text-5xl text-bone font-light tracking-tight">
               2026 · 05 · 19
             </h1>
           </div>
           <div className="text-right">
             <p className="font-mono text-mute text-[10px] tracking-[0.3em]">
-              UPDATED · TODAY 15:00
+              最後更新 · 今日 15:00
             </p>
           </div>
         </div>
