@@ -44,51 +44,56 @@
 
 ---
 
-## 💰 預算紀律 — FREE TIER ONLY · NO PAID SERVICES
+## 💰 預算紀律 v2 — 三級分類(2026-05-19 v2 更新)
 
-**Owner directive (2026-05-19, Tim):**
+**Owner directive update (2026-05-19, Tim):**
 
-> 目前沒有打算要花錢……沒錢呀!
+> 如果只是要註冊或者花一點錢,這些我都可以接受!花大錢,目前生不出來。
 
-**戰略邏輯:** ZONE 27 完全在免費資源運作。任何「需要付費」的方案
-(無論金額多小)都應**先暫緩**,直到 Tim 明確說「現在可以花錢買 X」。
+**戰略邏輯:** ZONE 27 預算規則從「全凍結」改為**三級分類**。
+小錢可以、註冊可以,但「大錢」依然 OFF。
 
-### ❌ Claude 絕對不要主動提議或建議:
+### 🟢 TIER 1 · 可以主動建議 + 主動執行(註冊免費 / 必要小成本)
 
-- 任何付費 SaaS(包括便宜的:Plausible $9/mo · Pro 版任何工具)
-- Sportradar / Stats Perform / Pinnacle 等付費體育資料 API(年費 NT$200,000+)
-- 付費網域(.com / .tw 等需要每年 ~NT$300-500 註冊費)
-- Stripe / TapPay / Newebpay 帳號(需業務登記 + 月費)
-- 付費 email 服務(Resend Pro / Postmark / SendGrid)
-- 付費 DNS / CDN(Cloudflare Pro)
-- 任何「升級到付費版」的話術
-- 包月任何訂閱(Figma Pro / GitHub Copilot / 任何工具)
+- **Supabase 註冊**(free tier 完全夠用,需 Tim 動 5 分鐘建帳號)
+- **Vercel KV / Upstash Redis** 免費 tier(10K commands/day)
+- **Resend 註冊**(free tier 100 emails/day · 給 waitlist 寄通知信夠用)
+- **Plausible Analytics**($9/mo · 解封 SEO 時再啟用)
+- **Cloudflare 免費 plan**(DNS + 基本 CDN)
+- **品牌網域註冊**(.com / .tw ~NT$300-500/年 · Tim 已表態這算「小錢可接受」)
+- **GitHub Copilot** 個人版($10/mo · 如果 Tim 想加速自己改程式碼)
 
-### ✅ 可以主動建議或使用的(都是 free tier 範圍):
+### 🟡 TIER 2 · 需明確同意才執行(中等成本 · 通常按交易收費)
 
-- **Vercel** Hobby 方案(目前使用中,完全免費)
-- **GitHub** 個人免費方案(目前使用中)
-- **Supabase** 免費方案(500MB DB · 50K MAU · 5GB bandwidth · 2 個專案)
-- **Vercel KV / Upstash Redis** 免費(10K commands/day)
-- **MLB Stats API**(公開、官方、完全免費)
-- **stats.cpbl.com.tw**(官方,但需要 headless browser 才能爬,風險高)
-- **手動更新資料**(Tim 自己編輯 lib/matches.ts → push → auto-deploy)
-- **localStorage** 任何客戶端儲存(完全免費)
-- **Vercel logs** 作為臨時資料倉庫(目前 waitlist 用這招)
-- **Google Search Console**(SEO 解封後免費註冊)
-- **Vercel Analytics** 免費版(目前在 SEO 凍結期間不啟用)
+- **TapPay / Newebpay / 綠界**(支付閘道 · 設定費 NT$1-3K + 抽 2-3% 每筆)
+- **Stripe**(設定免費但每筆 3.4% + NT$10)
+- **付費 Vercel Pro**($20/mo · 目前 Hobby 完全夠用,不需升級)
+- **Supabase Pro**($25/mo · 等 waitlist 突破 50K 才需要)
+- **Postmark / SendGrid 付費版**(MAU 突破 free tier 才需)
 
-### 🎯 何時可以解封付費?
+### 🔴 TIER 3 · 永遠先問再說(大錢)
 
-當 Tim **明確說出**以下其中一句才解封:
+- **Sportradar / Stats Perform / Pinnacle**(體育資料 API · 年費 NT$200K+)
+- **公司登記 / 商業執照**(NT$10K+ 與會計持續成本)
+- **付費律師審查 Privacy / Terms**(NT$50K+)
+- **付費品牌設計師 / 攝影 / 影片**(NT$30K-300K+)
+- **付費廣告投放**(任何 ad spend)
+- **任何單筆超過 NT$ 3,000 的 SaaS 訂閱**
 
-- 「我準備好付錢買 X」
-- 「現在開始付費 SaaS」
-- 「我們開始花錢」
-- 或對特定服務說「買起來」/「訂閱起來」
+### 🎯 解封觸發
 
-**「您決定」這種模糊指令不解封付費**。遇到時優先選擇免費方案 +
-解釋為什麼免費版夠用,而非主動推薦付費替代品。
+- **TIER 1**:Claude 在「您決定」這種模糊指令下**可以主動建議**並 walk Tim through 註冊步驟,但**最後執行還是要 Tim 動手**(畢竟是他的帳號)。
+- **TIER 2**:遇到時 Claude **必須明確列出費用** + **問 Tim「這個錢您現在能花嗎?」** · 不假設同意。
+- **TIER 3**:Claude **絕對不主動建議**。遇到 Tim 提到時,先列出**所有 free / TIER 1 替代方案**,確認他真的要花大錢才動。
+
+### 📊 目前已上線的 TIER 0(完全免費)資源
+
+- ✅ Vercel Hobby(部署)
+- ✅ GitHub 個人(原始碼)
+- ✅ MLB Stats API(資料)
+- ✅ Vercel logs(臨時 waitlist)
+- ✅ localStorage(sim history)
+- ⏳ Supabase(待 Tim 註冊後接入 — v0.28 建議)
 
 ---
 
