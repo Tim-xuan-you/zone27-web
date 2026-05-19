@@ -74,7 +74,7 @@ export default function Footer() {
             title="View full changelog"
           >
             <span className="w-1.5 h-1.5 rounded-full bg-gold/70 glow-gold" />
-            <span>v0.19 · 19 RELEASES</span>
+            <span>v0.20 · 20 RELEASES</span>
           </a>
         </div>
       </div>

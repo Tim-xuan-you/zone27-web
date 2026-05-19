@@ -11,6 +11,7 @@ import {
   type RunningStats,
   type GameResult,
 } from "@/lib/simulator";
+import { saveSimHistory } from "@/lib/sim-history";
 
 // ── ZONE 27 · Match Simulator (shared) ────────────────
 // 把 /lab 的核心互動 UI 抽出來,讓任何給定一場比賽的頁面
@@ -58,6 +59,35 @@ export default function MatchSimulator({ match }: Props) {
       if (rafRef.current !== null) cancelAnimationFrame(rafRef.current);
     };
   }, []);
+
+  // When a simulation completes, save a snapshot to localStorage so the
+  // user can see "RECENT SIMS" on revisit. Doesn't fire on initial mount.
+  const homePctForSave =
+    stats.completed > 0 && stats.homeWins + stats.awayWins > 0
+      ? (stats.homeWins / (stats.homeWins + stats.awayWins)) * 100
+      : 50;
+  const awayPctForSave = 100 - homePctForSave;
+  useEffect(() => {
+    if (!done) return;
+    if (stats.completed < 10_000) return;
+    saveSimHistory({
+      matchId: match.id,
+      matchupName: `${match.home.name} vs ${match.away.name}`,
+      homePct: Math.round(homePctForSave * 10) / 10,
+      awayPct: Math.round(awayPctForSave * 10) / 10,
+      homeName: match.home.name,
+      awayName: match.away.name,
+      ranAt: Date.now(),
+      totalSims: stats.completed,
+      isCustom: match.id.startsWith("custom-"),
+    });
+    // Dispatch a custom event so RecentSims components on the same page
+    // can refresh without polling.
+    if (typeof window !== "undefined") {
+      window.dispatchEvent(new CustomEvent("zone27:sim-history-updated"));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [done]);
 
   function start() {
     if (running) return;

@@ -5,6 +5,7 @@ import Link from "next/link";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import MatchSimulator from "@/components/MatchSimulator";
+import RecentSims from "@/components/RecentSims";
 import { matches } from "@/lib/matches";
 
 // ── /lab · Live AI Laboratory ──────────────────────────
@@ -108,6 +109,11 @@ export default function LabPage() {
             </span>
           </div>
         </Link>
+      </section>
+
+      {/* ── RECENT SIMS (local history) ──────────── */}
+      <section className="mx-auto max-w-4xl w-full px-6 sm:px-10">
+        <RecentSims />
       </section>
 
       {/* ── METHODOLOGY NOTE ─────────────────────── */}

@@ -6,6 +6,7 @@ import { useSearchParams } from "next/navigation";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import MatchSimulator from "@/components/MatchSimulator";
+import RecentSims from "@/components/RecentSims";
 import type { Match, PitcherStats, TeamSide } from "@/lib/matches";
 
 // ── ZONE 27 · /lab/custom · Power User Mode ────────────
@@ -307,6 +308,11 @@ function CustomLabInner() {
           <MatchSimulator key={builtMatch.id} match={builtMatch} />
         </section>
       )}
+
+      {/* ── RECENT SIMS (local history) ──────────── */}
+      <section className="mx-auto max-w-4xl w-full px-6 sm:px-10">
+        <RecentSims />
+      </section>
 
       {/* ── BACK + ROADMAP NOTE ──────────────────── */}
       <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 py-16 text-center border-t border-line/40">
