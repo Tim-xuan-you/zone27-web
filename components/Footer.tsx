@@ -74,7 +74,7 @@ export default function Footer() {
             title="View full changelog"
           >
             <span className="w-1.5 h-1.5 rounded-full bg-gold/70 glow-gold" />
-            <span>v0.26 · MLB 即時資料上線</span>
+            <span>v0.27 · MLB × 引擎合體</span>
           </a>
         </div>
       </div>

@@ -100,7 +100,7 @@ function MlbCard({ game }: { game: MlbGame }) {
   const stateClass = STATE_COLOR[game.state];
 
   return (
-    <article className="bg-slate/60 border border-line/70 hover:border-gold/40 transition-colors p-5">
+    <article className="bg-slate/60 border border-line/70 hover:border-gold/40 transition-colors p-5 flex flex-col">
       {/* meta */}
       <div className="flex items-center justify-between mb-4">
         <span
@@ -119,7 +119,7 @@ function MlbCard({ game }: { game: MlbGame }) {
         <TeamRow label="HOME" team={game.home} />
       </div>
 
-      {/* venue + status detail */}
+      {/* venue + date */}
       <div className="pt-4 border-t border-line/40 flex items-baseline justify-between">
         <span className="font-mono text-mute/70 text-[10px] tracking-[0.2em] truncate">
           {game.venue}
@@ -128,6 +128,16 @@ function MlbCard({ game }: { game: MlbGame }) {
           {game.dateTaipei}
         </span>
       </div>
+
+      {/* SIMULATE CTA — only if both probable pitchers + stats available */}
+      {game.simulateUrl && (
+        <Link
+          href={game.simulateUrl}
+          className="mt-4 block font-mono text-[10px] tracking-[0.3em] text-center text-gold border border-gold/40 px-3 py-2.5 hover:bg-gold hover:text-navy transition-colors"
+        >
+          ▶ 用引擎模擬這場 →
+        </Link>
+      )}
     </article>
   );
 }
@@ -140,19 +150,34 @@ function TeamRow({
   team: MlbGame["home"];
 }) {
   return (
-    <div className="flex items-center justify-between gap-2">
-      <div className="flex items-baseline gap-3 min-w-0">
-        <span className="font-mono text-gold/60 text-[9px] tracking-[0.25em] shrink-0 w-10">
-          {label}
-        </span>
-        <span className="text-bone text-base truncate">{team.zhName}</span>
-        <span className="font-mono text-mute/50 text-[10px] tracking-[0.2em] shrink-0">
-          {team.abbr}
+    <div>
+      <div className="flex items-center justify-between gap-2">
+        <div className="flex items-baseline gap-3 min-w-0">
+          <span className="font-mono text-gold/60 text-[9px] tracking-[0.25em] shrink-0 w-10">
+            {label}
+          </span>
+          <span className="text-bone text-base truncate">{team.zhName}</span>
+          <span className="font-mono text-mute/50 text-[10px] tracking-[0.2em] shrink-0">
+            {team.abbr}
+          </span>
+        </div>
+        <span className="font-mono text-mute/70 text-xs tabular shrink-0">
+          {team.wins}-{team.losses}
         </span>
       </div>
-      <span className="font-mono text-mute/70 text-xs tabular shrink-0">
-        {team.wins}-{team.losses}
-      </span>
+      {/* Probable pitcher row */}
+      {team.probablePitcher && (
+        <p className="font-mono text-mute/60 text-[10px] tracking-[0.2em] mt-1 pl-[3.25rem] flex items-baseline gap-2">
+          <span className="text-bone/80 normal-case">
+            {team.probablePitcher.fullName}
+          </span>
+          {team.probablePitcher.era !== "—" && (
+            <span className="text-gold/60 tabular">
+              ERA {team.probablePitcher.era}
+            </span>
+          )}
+        </p>
+      )}
     </div>
   );
 }

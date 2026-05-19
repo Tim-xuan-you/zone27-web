@@ -25,6 +25,9 @@ export type MlbGame = {
   home: MlbTeamSide;
   away: MlbTeamSide;
   venue: string;
+  /** Pre-built URL into /lab/custom with the two probable pitchers' stats
+   *  pre-filled (or null if no probable pitchers announced yet). */
+  simulateUrl: string | null;
 };
 
 export type MlbTeamSide = {
@@ -39,6 +42,21 @@ export type MlbTeamSide = {
   /** Season record at game time */
   wins: number;
   losses: number;
+  /** Probable starting pitcher (null if not announced yet) */
+  probablePitcher: MlbPitcher | null;
+};
+
+export type MlbPitcher = {
+  id: number;
+  fullName: string;
+  /** Strikeouts per 9 innings — string from API e.g. "10.23" */
+  k9: string;
+  /** Walks per 9 — e.g. "2.25" */
+  bb9: string;
+  /** Home runs per 9 — e.g. "0.41" */
+  hr9: string;
+  /** ERA — e.g. "0.82" */
+  era: string;
 };
 
 // ── Chinese team-name map (most common 30 MLB teams) ──
@@ -136,28 +154,134 @@ export async function fetchTodayMlb(): Promise<MlbGame[]> {
 }
 
 /**
- * Fetch MLB schedule for a specific YYYY-MM-DD (treated as the MLB schedule
- * date — this is the official game date, which roughly maps to US local date).
+ * Fetch MLB schedule for a specific YYYY-MM-DD with probable pitchers + stats.
+ *
+ * Strategy:
+ *   1. Schedule call with hydrate=probablePitcher → game shells + pitcher IDs
+ *   2. Collect unique pitcher IDs across all games
+ *   3. Single batched call to /people?personIds=A,B,C&hydrate=stats(...)
+ *      pulls every pitcher's season K/9 · BB/9 · HR/9 in one HTTP request
+ *   4. Map back into game objects
+ *
+ * Total HTTP requests per ISR refresh: 2 (regardless of how many games).
  */
 export async function fetchMlbForDate(dateYmd: string): Promise<MlbGame[]> {
-  const url = `${MLB_API}/schedule?sportId=1&date=${dateYmd}`;
+  const scheduleUrl = `${MLB_API}/schedule?sportId=1&date=${dateYmd}&hydrate=probablePitcher`;
   try {
-    const res = await fetch(url, {
+    const res = await fetch(scheduleUrl, {
       next: { revalidate: REVALIDATE_SECONDS },
-      headers: { "User-Agent": "ZONE-27/0.26 (+zone27-web.vercel.app)" },
+      headers: { "User-Agent": "ZONE-27/0.27 (+zone27-web.vercel.app)" },
     });
     if (!res.ok) {
-      console.error(`[ZONE27 · MLB] fetch failed status=${res.status}`);
+      console.error(`[ZONE27 · MLB] schedule fetch failed status=${res.status}`);
       return [];
     }
     const data = (await res.json()) as MlbScheduleResponse;
     const dates = data.dates ?? [];
-    const games = dates.flatMap((d) => d.games ?? []);
-    return games.map(mapGame);
+    const rawGames = dates.flatMap((d) => d.games ?? []);
+
+    // Collect all unique probable-pitcher IDs across both sides of every game
+    const pitcherIds = new Set<number>();
+    for (const g of rawGames) {
+      const h = g.teams.home.probablePitcher?.id;
+      const a = g.teams.away.probablePitcher?.id;
+      if (h) pitcherIds.add(h);
+      if (a) pitcherIds.add(a);
+    }
+
+    // Batch fetch all pitcher season stats
+    const pitcherStats = await fetchPitcherStatsBatch(
+      [...pitcherIds],
+      dateYmd
+    );
+
+    return rawGames.map((g) => mapGame(g, pitcherStats));
   } catch (err) {
     console.error("[ZONE27 · MLB] fetch threw", err);
     return [];
   }
+}
+
+/**
+ * Single batched fetch for many pitchers' season stats.
+ * Returns a Map<pitcherId, MlbPitcher (stats portion)>.
+ */
+async function fetchPitcherStatsBatch(
+  ids: number[],
+  dateYmd: string
+): Promise<Map<number, MlbPitcher>> {
+  const out = new Map<number, MlbPitcher>();
+  if (ids.length === 0) return out;
+
+  // MLB people endpoint accepts comma-separated personIds
+  const season = dateYmd.slice(0, 4);
+  const url = `${MLB_API}/people?personIds=${ids.join(
+    ","
+  )}&hydrate=stats(group=[pitching],type=[season],season=${season})`;
+  try {
+    const res = await fetch(url, {
+      next: { revalidate: REVALIDATE_SECONDS },
+      headers: { "User-Agent": "ZONE-27/0.27 (+zone27-web.vercel.app)" },
+    });
+    if (!res.ok) {
+      console.error(`[ZONE27 · MLB] people fetch failed status=${res.status}`);
+      return out;
+    }
+    const data = (await res.json()) as MlbPeopleResponse;
+    for (const p of data.people ?? []) {
+      const seasonStat = p.stats
+        ?.flatMap((s) => s.splits ?? [])
+        .find((sp) => sp?.stat);
+      const stat = seasonStat?.stat;
+      if (!stat) continue;
+      out.set(p.id, {
+        id: p.id,
+        fullName: p.fullName,
+        k9: stat.strikeoutsPer9Inn ?? "—",
+        bb9: stat.walksPer9Inn ?? "—",
+        hr9: stat.homeRunsPer9 ?? "—",
+        era: stat.era ?? "—",
+      });
+    }
+  } catch (err) {
+    console.error("[ZONE27 · MLB] people fetch threw", err);
+  }
+  return out;
+}
+
+/**
+ * Build a deep link to /lab/custom with both probable pitchers' stats
+ * pre-filled. Returns null if either side has no probable pitcher.
+ *
+ * URL shape matches lib/lab/custom's useSearchParams reader (v0.18).
+ */
+function buildSimulateUrl(home: MlbTeamSide, away: MlbTeamSide): string | null {
+  const hp = home.probablePitcher;
+  const ap = away.probablePitcher;
+  if (!hp || !ap) return null;
+  // Only build URL if we actually have numeric stats (the "—" fallback
+  // means the pitcher hasn't pitched this season — skip them)
+  if (
+    hp.k9 === "—" ||
+    hp.bb9 === "—" ||
+    hp.hr9 === "—" ||
+    ap.k9 === "—" ||
+    ap.bb9 === "—" ||
+    ap.hr9 === "—"
+  ) {
+    return null;
+  }
+  const params = new URLSearchParams({
+    h_name: hp.fullName,
+    h_k9: hp.k9,
+    h_bb9: hp.bb9,
+    h_hr9: hp.hr9,
+    a_name: ap.fullName,
+    a_k9: ap.k9,
+    a_bb9: ap.bb9,
+    a_hr9: ap.hr9,
+  });
+  return `/lab/custom?${params.toString()}`;
 }
 
 // ── Internal mapper ───────────────────────────────────
@@ -165,6 +289,7 @@ export async function fetchMlbForDate(dateYmd: string): Promise<MlbGame[]> {
 type RawTeam = {
   team: { id: number; name: string };
   leagueRecord?: { wins?: number; losses?: number };
+  probablePitcher?: { id: number; fullName: string };
 };
 
 type RawGame = {
@@ -179,8 +304,30 @@ type MlbScheduleResponse = {
   dates: { date: string; games: RawGame[] }[];
 };
 
-function mapGame(g: RawGame): MlbGame {
+type MlbPeopleResponse = {
+  people: {
+    id: number;
+    fullName: string;
+    stats?: {
+      splits?: {
+        stat?: {
+          strikeoutsPer9Inn?: string;
+          walksPer9Inn?: string;
+          homeRunsPer9?: string;
+          era?: string;
+        };
+      }[];
+    }[];
+  }[];
+};
+
+function mapGame(
+  g: RawGame,
+  pitcherStats: Map<number, MlbPitcher>
+): MlbGame {
   const taipei = toTaipeiTime(g.gameDate);
+  const home = makeSide(g.teams.home, pitcherStats);
+  const away = makeSide(g.teams.away, pitcherStats);
   return {
     gamePk: g.gamePk,
     startUTC: g.gameDate,
@@ -188,14 +335,31 @@ function mapGame(g: RawGame): MlbGame {
     dateTaipei: taipei.date,
     state: classifyState(g.status.abstractGameState),
     statusDetail: g.status.detailedState ?? g.status.abstractGameState,
-    home: makeSide(g.teams.home),
-    away: makeSide(g.teams.away),
+    home,
+    away,
     venue: g.venue?.name ?? "—",
+    simulateUrl: buildSimulateUrl(home, away),
   };
 }
 
-function makeSide(t: RawTeam): MlbTeamSide {
+function makeSide(
+  t: RawTeam,
+  pitcherStats: Map<number, MlbPitcher>
+): MlbTeamSide {
   const zh = teamZh(t.team.id, t.team.name);
+  let probablePitcher: MlbPitcher | null = null;
+  if (t.probablePitcher?.id) {
+    // Prefer stats-enriched version from batch lookup; fall back to bare name
+    probablePitcher =
+      pitcherStats.get(t.probablePitcher.id) ?? {
+        id: t.probablePitcher.id,
+        fullName: t.probablePitcher.fullName,
+        k9: "—",
+        bb9: "—",
+        hr9: "—",
+        era: "—",
+      };
+  }
   return {
     id: t.team.id,
     enName: t.team.name,
@@ -203,5 +367,6 @@ function makeSide(t: RawTeam): MlbTeamSide {
     abbr: zh.abbr,
     wins: t.leagueRecord?.wins ?? 0,
     losses: t.leagueRecord?.losses ?? 0,
+    probablePitcher,
   };
 }
