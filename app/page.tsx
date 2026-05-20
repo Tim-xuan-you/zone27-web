@@ -64,7 +64,17 @@ export default function Home() {
             <CredibilityCell
               label="DATA"
               zh="資料來源"
-              body="MLB Stats API · CPBL 公開賽程"
+              body={
+                <>
+                  MLB Stats API · CPBL{" "}
+                  <Link
+                    href="/coverage"
+                    className="text-gold hover:underline"
+                  >
+                    親手 curate
+                  </Link>
+                </>
+              }
             />
             <CredibilityCell
               label="ENGINE"
@@ -72,7 +82,7 @@ export default function Home() {
               body={
                 <>
                   Monte Carlo ×{" "}
-                  <span className="text-bone tabular">10,000</span> · 真實打席引擎
+                  <span className="text-bone tabular">10,000</span> · 真實打席 · 在您瀏覽器跑
                 </>
               }
             />
@@ -81,7 +91,14 @@ export default function Home() {
               zh="方法論"
               body={
                 <>
-                  完整公開於{" "}
+                  全部公開於{" "}
+                  <Link
+                    href="/audit"
+                    className="text-gold hover:underline"
+                  >
+                    /audit
+                  </Link>
+                  {" + "}
                   <Link
                     href="/methodology"
                     className="text-gold hover:underline"
