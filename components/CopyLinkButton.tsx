@@ -1,6 +1,20 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState, useSyncExternalStore } from "react";
+
+// Client-side feature detection helpers · React 19 idiomatic.
+// useSyncExternalStore handles SSR / hydration correctly: server
+// always sees `false`, client snapshot reflects real navigator state
+// at hydration time. No setState-in-effect warning.
+function subscribeNoop() {
+  return () => {};
+}
+function getShareApiSnapshot(): boolean {
+  return typeof navigator !== "undefined" && typeof navigator.share === "function";
+}
+function getShareApiServerSnapshot(): boolean {
+  return false;
+}
 
 // ── ZONE 27 · Copy/Share Link Button ───────────────────
 // Indie-stealth distribution lever. Since SEO is frozen and social
@@ -35,15 +49,13 @@ type Phase = "idle" | "done";
 
 export default function CopyLinkButton({ refTag }: CopyLinkButtonProps = {}) {
   const [phase, setPhase] = useState<Phase>("idle");
-  // Web Share API detected client-side only — prevents SSR/CSR
-  // label mismatch + respects browsers that hide it behind flags.
-  const [hasShareApi, setHasShareApi] = useState(false);
-
-  useEffect(() => {
-    setHasShareApi(
-      typeof navigator !== "undefined" && typeof navigator.share === "function",
-    );
-  }, []);
+  // Web Share API detected via useSyncExternalStore — React 19
+  // idiomatic for browser-feature detection without setState-in-effect.
+  const hasShareApi = useSyncExternalStore(
+    subscribeNoop,
+    getShareApiSnapshot,
+    getShareApiServerSnapshot,
+  );
 
   function buildUrl(): string {
     if (typeof window === "undefined") return "";
