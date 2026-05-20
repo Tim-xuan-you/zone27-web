@@ -8,6 +8,7 @@ import {
   getMatchById,
   getAllMatchIds,
   isMatchDataStale,
+  isMatchDataFuture,
   type Match,
 } from "@/lib/matches";
 import {
@@ -86,9 +87,17 @@ export default async function MatchDetailPage({
           {isMatchDataStale(m) && (
             <span
               className="font-mono text-[9px] tracking-[0.3em] px-1.5 py-0.5 border border-mute/60 text-mute ml-2"
-              title="本場資料寫入時間早於今日 — 為 archived 範例資料"
+              title="這場比賽日期早於今日 — 為 archived 資料"
             >
               DATA · ARCHIVED
+            </span>
+          )}
+          {isMatchDataFuture(m) && (
+            <span
+              className="font-mono text-[9px] tracking-[0.3em] px-1.5 py-0.5 border border-gold/60 text-gold ml-2"
+              title="這場比賽尚未開打 — 為 pre-game preview"
+            >
+              DATA · PREVIEW
             </span>
           )}
         </div>

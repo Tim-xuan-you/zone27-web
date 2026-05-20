@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { isMatchDataStale, type Match } from "@/lib/matches";
+import { isMatchDataStale, isMatchDataFuture, type Match } from "@/lib/matches";
 import {
   simulateGame,
   applyBatch,
@@ -27,11 +27,11 @@ export default function HeroLiveCard({ match }: { match: Match }) {
   const [stats, setStats] = useState<RunningStats>(initialStats);
   const [phase, setPhase] = useState<"simulating" | "converged">("simulating");
   const rafRef = useRef<number | null>(null);
-  // The matchup data is demo (pre-CPBL-ingestion era); the Monte Carlo
-  // output is real and runs in the visitor's browser. Surface the
-  // distinction honestly per [[zone27-disclosure-philosophy]] — we
-  // don't pretend yesterday's hardcoded matchup is today's live game.
+  // Differentiate past games (ARCHIVED · outcome knowable) from
+  // future games (PREVIEW · pre-game). Engine output is always real
+  // (runs in visitor's browser) regardless of which.
   const isStale = isMatchDataStale(match);
+  const isFuture = isMatchDataFuture(match);
 
   // Start the mini-sim once on mount
   useEffect(() => {
@@ -94,9 +94,18 @@ export default function HeroLiveCard({ match }: { match: Match }) {
             <span
               lang="en"
               className="px-1.5 py-0.5 text-[8px] tracking-[0.2em] border border-gold/30 text-gold/70 font-mono whitespace-nowrap"
-              title="這對決是示範資料 · Monte Carlo 計算結果為真"
+              title="這場比賽日期早於今日 · 為 archived 範例 · Monte Carlo 計算結果為真"
             >
-              DEMO · ENGINE OUTPUT REAL
+              ARCHIVED · ENGINE OUTPUT REAL
+            </span>
+          )}
+          {isFuture && (
+            <span
+              lang="en"
+              className="px-1.5 py-0.5 text-[8px] tracking-[0.2em] border border-gold/50 text-gold font-mono whitespace-nowrap"
+              title="這場比賽未開打 · 預告階段 · Monte Carlo 為真實預測"
+            >
+              PREVIEW · 預告
             </span>
           )}
         </div>

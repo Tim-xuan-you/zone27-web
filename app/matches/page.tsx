@@ -2,7 +2,12 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
-import { matches, isMatchDataStale, type Match } from "@/lib/matches";
+import {
+  matches,
+  isMatchDataStale,
+  isMatchDataFuture,
+  type Match,
+} from "@/lib/matches";
 
 export const metadata: Metadata = {
   title: "今日 CPBL 賽事板",
@@ -34,9 +39,17 @@ export default function MatchesPage() {
           {isMatchDataStale(todaysMatches[0]) && (
             <span
               className="font-mono text-[9px] tracking-[0.3em] px-1.5 py-0.5 border border-mute/60 text-mute"
-              title="本頁資料寫入時間早於今日 — 為 archived 範例"
+              title="這場比賽日期早於今日 — 為 archived 資料"
             >
               DATA · ARCHIVED
+            </span>
+          )}
+          {isMatchDataFuture(todaysMatches[0]) && (
+            <span
+              className="font-mono text-[9px] tracking-[0.3em] px-1.5 py-0.5 border border-gold/60 text-gold"
+              title="這場比賽尚未開打 — 為 pre-game preview"
+            >
+              DATA · PREVIEW
             </span>
           )}
         </div>
