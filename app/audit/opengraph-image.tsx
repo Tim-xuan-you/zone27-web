@@ -15,7 +15,7 @@ import { BRAND, OG_SIZE, OG_CONTENT_TYPE } from "@/lib/brand";
 
 export const size = OG_SIZE;
 export const contentType = OG_CONTENT_TYPE;
-export const alt = "ZONE 27 · Model Report · Engine v0.27";
+export const alt = "ZONE 27 · Model Report v0.27 · Engine v0.2";
 
 export default async function AuditOgImage() {
   return new ImageResponse(
@@ -93,7 +93,7 @@ export default async function AuditOgImage() {
               display: "flex",
             }}
           >
-            ZONE 27 ENGINE
+            MODEL REPORT
           </span>
           <span
             style={{
@@ -118,7 +118,7 @@ export default async function AuditOgImage() {
               display: "flex",
             }}
           >
-            全部假設、輸入、限制 · 公開可審
+            ZONE 27 Engine · Real At-Bat v0.2 · 全部假設公開可審
           </span>
         </div>
 
