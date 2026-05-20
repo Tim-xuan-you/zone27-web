@@ -11,6 +11,37 @@ export const metadata: Metadata = {
     "Bloomberg-style 每日量化研究早報。今日 CPBL 三場賽事的信心評等、edge 強度、AI 模型評語、操盤焦點建議。",
 };
 
+// Re-render hourly so the "today" framing updates as time passes —
+// even with hardcoded match data, the date stamp stays current.
+// When the cron auto-pull is wired (v0.28+), this drops to revalidate=60
+// or becomes fully dynamic.
+export const revalidate = 3600;
+
+// Data stamp for the currently shown matches. Hardcoded until the
+// daily MLB-Stats-API + CPBL ingestion cron is wired. The page surfaces
+// this via the FRESHNESS row so visitors can see the gap honestly.
+const DATA_STAMP = "2026-05-19";
+
+function getTaipeiTodayParts(): { year: string; month: string; day: string; iso: string } {
+  const now = new Date();
+  const parts = new Intl.DateTimeFormat("en-CA", {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    timeZone: "Asia/Taipei",
+  }).formatToParts(now);
+  const year = parts.find((p) => p.type === "year")?.value ?? "2026";
+  const month = parts.find((p) => p.type === "month")?.value ?? "01";
+  const day = parts.find((p) => p.type === "day")?.value ?? "01";
+  return { year, month, day, iso: `${year}-${month}-${day}` };
+}
+
+function daysBetween(fromISO: string, toISO: string): number {
+  const from = new Date(`${fromISO}T00:00:00+08:00`).getTime();
+  const to = new Date(`${toISO}T00:00:00+08:00`).getTime();
+  return Math.max(0, Math.round((to - from) / (24 * 60 * 60 * 1000)));
+}
+
 // ── Confidence tiers ──────────────────────────────────
 type Tier = "high" | "moderate" | "neutral";
 
@@ -60,6 +91,10 @@ function whyEditorial(m: Match): string {
 
 export default function SignalBoardPage() {
   const today = matches;
+  const { year, month, day, iso: todayISO } = getTaipeiTodayParts();
+  const heroDate = `${year} · ${month} · ${day}`;
+  const dataAgeDays = daysBetween(DATA_STAMP, todayISO);
+  const isStale = dataAgeDays >= 1;
 
   // Aggregate stats
   const tiers = today.map((m) => ({ match: m, tier: classifyMatch(m) }));
@@ -95,13 +130,34 @@ export default function SignalBoardPage() {
                 示範資料
               </span>
             </div>
-            <h1 className="text-4xl sm:text-5xl text-bone font-light tracking-tight">
-              2026 · 05 · 19
+            <h1 className="text-4xl sm:text-5xl text-bone font-light tracking-tight tabular">
+              {heroDate}
             </h1>
           </div>
-          <div className="text-right">
-            <p className="font-mono text-mute text-[10px] tracking-[0.3em]">
-              最後更新 · 今日 15:00
+          <div className="text-right space-y-1">
+            <p
+              lang="en"
+              className="font-mono text-mute text-[10px] tracking-[0.3em]"
+            >
+              {isStale ? "⚠ FRESHNESS · STALE" : "● FRESHNESS · CURRENT"}
+            </p>
+            <p
+              lang="en"
+              className="font-mono text-bone text-[10px] tracking-[0.25em] tabular"
+            >
+              DATA STAMP · {DATA_STAMP}
+              {isStale && (
+                <>
+                  {" · "}
+                  <span className="text-loss">{dataAgeDays}d OLD</span>
+                </>
+              )}
+            </p>
+            <p
+              lang="en"
+              className="font-mono text-mute/70 text-[9px] tracking-[0.25em]"
+            >
+              AUTO-CRON · PENDING v0.28
             </p>
           </div>
         </div>
