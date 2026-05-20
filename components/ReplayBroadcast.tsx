@@ -9,7 +9,7 @@ import {
 } from "@/lib/simulator";
 import type { PitcherStats } from "@/lib/matches";
 
-// ── ZONE 27 · Lab v0.3 · Replay Mode ───────────────────
+// ── ZONE 27 · Lab v0.2 · Replay Mode ───────────────────
 // 完成 10,000 次批次模擬後出現的「重播一場虛擬比賽」區塊。
 // 每按一次按鈕,就在前端跑一場全新的 simulateGameWithLog(),
 // 把 ~70 個打席的 PlayLog 用 setInterval 一條一條動畫呈現,

@@ -364,12 +364,12 @@ function CustomLabInner() {
       {/* ── BACK + ROADMAP NOTE ──────────────────── */}
       <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 py-16 text-center border-t border-line/40">
         <p className="font-mono text-gold text-[10px] tracking-[0.4em] mb-6">
-          進階模式 · v0.16
+          進階模式 · ENGINE v0.2
         </p>
         <p className="text-mute text-sm max-w-md mx-auto leading-relaxed">
           目前自訂模式只接受投手 K/9 · BB/9 · HR/9 三項。
-          v0.4 路線圖將開放打者個別 OPS、左右打對左右投拆解、Trackman 球速。
-          詳見{" "}
+          v0.3 計畫加入打者個別 OPS / wRC+ · v0.5 模型先發換投與牛棚切換。
+          路線圖屬於計畫 · 非承諾,詳見{" "}
           <Link
             href="/methodology"
             className="text-gold underline-offset-4 hover:underline"
