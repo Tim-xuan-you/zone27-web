@@ -4,6 +4,7 @@ const SECONDARY_LINKS = [
   { label: "關於", href: "/about", external: false },
   { label: "方法論", href: "/methodology", external: false },
   { label: "模型報告", href: "/audit", external: false },
+  { label: "覆蓋範圍", href: "/coverage", external: false },
   { label: "詞彙表", href: "/glossary", external: false },
   { label: "常見問題", href: "/faq", external: false },
   { label: "版本紀錄", href: "/changelog", external: false },

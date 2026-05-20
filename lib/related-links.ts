@@ -27,14 +27,14 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
       title: "完整工程白皮書",
     },
     {
+      href: "/coverage",
+      kicker: "coverage",
+      title: "我們覆蓋哪些賽事",
+    },
+    {
       href: "/faq",
       kicker: "faq",
       title: "14 題誠實掃雷",
-    },
-    {
-      href: "/glossary",
-      kicker: "glossary",
-      title: "27 種進階數據",
     },
   ],
   "/methodology": [
@@ -44,14 +44,31 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
       title: "精簡版 Model Report",
     },
     {
+      href: "/coverage",
+      kicker: "coverage",
+      title: "覆蓋範圍 · open ledger",
+    },
+    {
       href: "/glossary",
       kicker: "glossary",
       title: "27 種進階數據",
     },
+  ],
+  "/coverage": [
     {
-      href: "/signal-board",
-      kicker: "signal-board",
-      title: "今日量化早報",
+      href: "/audit",
+      kicker: "audit",
+      title: "Model Report · 全部假設公開",
+    },
+    {
+      href: "/methodology",
+      kicker: "methodology",
+      title: "完整工程白皮書",
+    },
+    {
+      href: "/faq",
+      kicker: "faq",
+      title: "14 題誠實掃雷",
     },
   ],
   "/about": [
