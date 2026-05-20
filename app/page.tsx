@@ -153,6 +153,53 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ── BRAND INVERSION THESIS ───────────────────
+          The 4 brand axioms built across 2026-05-20 memory work
+          (monetization / disclosure / coverage / musk-methodology)
+          were spread across detail pages. Homepage TLDR makes the
+          inversion thesis articulable in 5 seconds. Hub-and-spoke
+          to each detail page for visitors who want the proof. */}
+      <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 py-24 border-t border-line/40">
+        <p
+          lang="en"
+          className="font-mono text-gold text-[10px] tracking-[0.45em] mb-8 text-center"
+        >
+          INVERTED BY DESIGN
+        </p>
+        <h2 className="text-3xl sm:text-4xl text-bone font-light tracking-tight text-center mb-16 max-w-2xl mx-auto leading-snug">
+          每個「我們不做」,
+          <br />
+          都是「我們是誰」的證明
+        </h2>
+
+        <div className="space-y-8 sm:space-y-10">
+          <InversionRow
+            industry="藏 model weights"
+            zone27="完整公開引擎"
+            href="/audit"
+            hrefLabel="/audit 8 sections"
+          />
+          <InversionRow
+            industry="收 per-use 費用"
+            zone27="工具免費,身分付費"
+            href="/lab/custom"
+            hrefLabel="/lab/custom"
+          />
+          <InversionRow
+            industry="覆蓋全部博彩賽事"
+            zone27="引擎能誠實算的才覆蓋"
+            href="/coverage"
+            hrefLabel="/coverage"
+          />
+          <InversionRow
+            industry="追蹤訪客行為"
+            zone27="0 第三方 cookies"
+            href="/privacy"
+            hrefLabel="/privacy Section 03"
+          />
+        </div>
+      </section>
+
       {/* ── FOUNDERS 27 STRIP ──────────────────────── */}
       <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 py-16 text-center border-t border-line/40">
         <p className="font-mono text-gold text-[10px] tracking-[0.4em] mb-4">
@@ -206,6 +253,51 @@ function Pillar({
         {en}
       </p>
       <p className="text-mute text-sm leading-relaxed">{body}</p>
+    </div>
+  );
+}
+
+function InversionRow({
+  industry,
+  zone27,
+  href,
+  hrefLabel,
+}: {
+  industry: string;
+  zone27: string;
+  href: string;
+  hrefLabel: string;
+}) {
+  return (
+    <div className="grid grid-cols-2 gap-4 sm:gap-8 items-baseline">
+      <div>
+        <p
+          lang="en"
+          className="font-mono text-mute/60 text-[9px] sm:text-[10px] tracking-[0.3em] mb-2"
+        >
+          INDUSTRY
+        </p>
+        <p className="text-mute text-sm sm:text-base leading-snug line-through decoration-mute/40">
+          {industry}
+        </p>
+      </div>
+      <div>
+        <p
+          lang="en"
+          className="font-mono text-gold/80 text-[9px] sm:text-[10px] tracking-[0.3em] mb-2"
+        >
+          ZONE 27
+        </p>
+        <p className="text-bone text-sm sm:text-base leading-snug">
+          {zone27}
+        </p>
+        <Link
+          href={href}
+          className="inline-block mt-1 font-mono text-gold/70 hover:text-gold text-[10px] tracking-[0.2em] transition-colors"
+        >
+          {hrefLabel} →
+        </Link>
+      </div>
     </div>
   );
 }
