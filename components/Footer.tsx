@@ -1,5 +1,19 @@
 import Link from "next/link";
 
+// Server-side Taipei today. Footer is a server component, so this
+// re-evaluates on each render — meaning every static-built page is
+// fresh as of the most recent deploy, and every ISR page is fresh
+// as of the most recent revalidate. Replaces a hardcoded date that
+// was already 1+ day stale by the time anyone saw it.
+function getTaipeiTodayChip(): string {
+  return new Intl.DateTimeFormat("en-CA", {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    timeZone: "Asia/Taipei",
+  }).format(new Date());
+}
+
 const SECONDARY_LINKS = [
   { label: "關於", href: "/about", external: false },
   { label: "方法論", href: "/methodology", external: false },
@@ -77,7 +91,9 @@ export default function Footer() {
             title="View full changelog"
           >
             <span className="chip-dot w-1.5 h-1.5 rounded-full bg-gold/70 glow-gold" />
-            <span>v0.27 · 2026-05-19 TPE · MLB × 引擎合體</span>
+            <span>
+              v0.27 · {getTaipeiTodayChip()} TPE · MLB × 引擎合體
+            </span>
           </a>
         </div>
       </div>
