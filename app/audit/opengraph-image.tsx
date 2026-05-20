@@ -147,7 +147,7 @@ export default async function AuditOgImage() {
           <DataRow label="ENGINE" value="Real At-Bat v0.2" />
           <DataRow label="ITERATIONS / SIM" value="10,000" />
           <DataRow label="STANDARD ERROR" value="± 0.5%" />
-          <DataRow label="LAST REVIEWED" value="2026-05-19" />
+          <DataRow label="LAST REVIEWED" value="2026-05-20" />
         </div>
 
         {/* ── COUNTS ROW · what we disclose ──────────── */}
