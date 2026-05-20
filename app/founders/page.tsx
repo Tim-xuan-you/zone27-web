@@ -255,6 +255,122 @@ export default async function FoundersPage({
         <WaitlistForm waitlistCount={waitlistCount} refSource={refSource} />
       </section>
 
+      {/* ── WHAT YOU'RE NOT BUYING ────────────
+          Pre-empts the silent objection: "if engine is free + GitHub is
+          public, what am I actually paying NT$ 2,700 for?" That doubt
+          lives in every visitor's head and (today, 2026-05-20) lived in
+          Tim's too. The 6 BENEFITS grid below answers what they GET; this
+          section reframes the question itself — you're not buying utility
+          (commoditized), you're buying identity (finite, founder-forged,
+          fork-proof). Aligns with [[zone27-monetization-philosophy]] and
+          /manifesto Section II MONETIZATION. */}
+      <section
+        aria-labelledby="not-buying-engine-heading"
+        className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-24 border-t border-line/40 pt-20"
+      >
+        <p className="font-mono text-gold text-[10px] tracking-[0.4em] mb-6 text-center">
+          / 您不是在買引擎
+        </p>
+        <h2
+          id="not-buying-engine-heading"
+          className="text-3xl sm:text-4xl text-bone font-light tracking-tight text-center mb-4"
+        >
+          引擎免費 · 永遠免費。
+        </h2>
+        <p className="text-mute text-center text-sm sm:text-base mb-14 max-w-xl mx-auto leading-relaxed">
+          您不必為引擎付錢 — 任何時候、任何方式都不用。
+          <br />
+          Founders 27 賣的不是工具,是 {FOUNDERS_TOTAL} 個 fork 不走的位置。
+        </p>
+
+        <div className="grid sm:grid-cols-2 gap-6 sm:gap-8">
+          {/* ── 左欄 · FREE FOREVER ── */}
+          <div className="border border-line/60 p-6 sm:p-7 bg-slate/30">
+            <p
+              lang="en"
+              className="font-mono text-mute text-[10px] tracking-[0.3em] mb-5"
+            >
+              FREE FOREVER · 永遠免費
+            </p>
+            <ul className="space-y-3 text-mute text-sm leading-relaxed list-none pl-0">
+              <NotBuyingItem>
+                跑無限次 10,000 場 Monte Carlo 模擬
+              </NotBuyingItem>
+              <NotBuyingItem>
+                自訂任意投手對戰(K/9 · BB/9 · HR/9)
+              </NotBuyingItem>
+              <NotBuyingItem>
+                讀完整 model report(/audit 8 sections)
+              </NotBuyingItem>
+              <NotBuyingItem>
+                讀完整 methodology(/methodology)
+              </NotBuyingItem>
+              <NotBuyingItem>
+                Fork 整個 codebase(GitHub 公開)
+              </NotBuyingItem>
+              <NotBuyingItem>
+                自己 host 一份私有版本
+              </NotBuyingItem>
+            </ul>
+            <p className="mt-6 pt-4 border-t border-line/40 font-mono text-mute/80 text-[10px] tracking-[0.25em] leading-relaxed">
+              引擎跑在您的 CPU · ZONE 27 伺服器零運算
+            </p>
+          </div>
+
+          {/* ── 右欄 · NT$ 2,700 BUYS ── */}
+          <div className="border border-gold/40 p-6 sm:p-7 bg-gold/5 glow-soft">
+            <p
+              lang="en"
+              className="font-mono text-gold text-[10px] tracking-[0.3em] mb-5"
+            >
+              NT$ 2,700 · 一次 · 終身
+            </p>
+            <ul className="space-y-3 text-bone text-sm leading-relaxed list-none pl-0">
+              <NotBuyingItem gold>
+                #001–#{FOUNDERS_TOTAL} 編號(世界永遠只有 {FOUNDERS_TOTAL} 個)
+              </NotBuyingItem>
+              <NotBuyingItem gold>
+                Tim 親手 onboarding(個人簽名證書)
+              </NotBuyingItem>
+              <NotBuyingItem gold>
+                Founders 27 LINE 群終身 access
+              </NotBuyingItem>
+              <NotBuyingItem gold>
+                BOTTOM 27 創始限定球員卡(Tim 的遊戲)
+              </NotBuyingItem>
+              <NotBuyingItem gold>
+                恆美 × 伶 Kopi 紅茶招待 QR(台南實體)
+              </NotBuyingItem>
+              <NotBuyingItem gold>
+                模型迭代提前 7 天試用 + 投票權
+              </NotBuyingItem>
+            </ul>
+            <p className="mt-6 pt-4 border-t border-gold/30 font-mono text-gold text-[10px] tracking-[0.25em] leading-relaxed">
+              Tim 親手 forge 每一位 · 不外包
+            </p>
+          </div>
+        </div>
+
+        <p
+          className="mt-12 text-center text-bone text-base sm:text-lg font-light max-w-2xl mx-auto leading-relaxed"
+          style={{ textWrap: "balance" }}
+        >
+          工具可以被複製、被 fork、被自己 host。
+          <br />
+          <span className="text-gold">
+            {FOUNDERS_TOTAL} 個編號 · {FOUNDERS_TOTAL} 段第一手關係 · 不能。
+          </span>
+        </p>
+
+        <p className="mt-8 text-center font-mono text-mute text-[10px] tracking-[0.3em]">
+          完整論證見{" "}
+          <Link href="/manifesto" className="text-gold hover:underline">
+            /manifesto
+          </Link>{" "}
+          倒置 II · MONETIZATION
+        </p>
+      </section>
+
       {/* ── BENEFITS GRID ────────────────── */}
       <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-24 border-t border-line/40 pt-20">
         <h2 className="text-3xl sm:text-4xl text-bone font-light tracking-tight text-center mb-4">
@@ -595,6 +711,28 @@ function DesktopRowGroup({
         </div>
       ))}
     </>
+  );
+}
+
+function NotBuyingItem({
+  children,
+  gold = false,
+}: {
+  children: React.ReactNode;
+  gold?: boolean;
+}) {
+  return (
+    <li className="flex items-baseline gap-3">
+      <span
+        aria-hidden="true"
+        className={`font-mono text-[10px] tracking-[0.2em] shrink-0 ${
+          gold ? "text-gold" : "text-mute/60"
+        }`}
+      >
+        ▸
+      </span>
+      <span className="flex-1">{children}</span>
+    </li>
   );
 }
 
