@@ -173,6 +173,23 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
       title: "看完了 · 加入 270 名創始會員",
     },
   ],
+  "/discipline": [
+    {
+      href: "/manifesto",
+      kicker: "manifesto",
+      title: "倒置宣言 · 4 個品牌軸線",
+    },
+    {
+      href: "/audit",
+      kicker: "audit",
+      title: "Model Report · 紀律的執行證據",
+    },
+    {
+      href: "/about",
+      kicker: "about",
+      title: "品牌方法論 · 6 章節",
+    },
+  ],
 };
 
 export function getRelatedLinks(currentPath: string): RelatedLink[] {
