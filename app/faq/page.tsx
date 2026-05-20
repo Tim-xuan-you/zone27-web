@@ -205,10 +205,34 @@ const CATEGORIES: Category[] = [
         q: "我的 email 會被怎麼處理?",
         a: (
           <>
-            Founders 27 等候名單期間,所有報名 email 暫存在 Vercel 後台 logs
-            (僅創辦人 Tim 可存取)。正式付款開放後會遷移到 Supabase 加密儲存。
+            <strong className="text-bone">更新 2026-05-20:</strong>{" "}
+            所有報名 email 存在{" "}
+            <span className="font-mono text-gold/90">Supabase Tokyo</span> 加密 PostgreSQL,
+            並啟用 Row-Level Security lock-down —{" "}
+            <strong className="text-bone">沒有任何角色能直接讀全表</strong>,
+            連我們的公開 publishable key 都無法繞過 RLS。所有讀取只能透過{" "}
+            <span className="font-mono text-gold/90">SECURITY DEFINER</span>{" "}
+            函式且該函式只回傳 COUNT,從不回傳 email/姓名。
+            <br />
+            <br />
             我們承諾<strong className="text-bone">不分享、不販售、不轉手</strong>
-            任何第三方。隨時可寄信要求刪除。
+            任何第三方。完整 SQL schema 公開於{" "}
+            <a
+              href="https://github.com/Tim-xuan-you/zone27-web/blob/main/supabase/migrations/0001_waitlist.sql"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gold underline-offset-4 hover:underline"
+            >
+              supabase/migrations/0001_waitlist.sql
+            </a>
+            ,任何人可審計 — 詳見{" "}
+            <Link
+              href="/privacy"
+              className="text-gold underline-offset-4 hover:underline"
+            >
+              /privacy Section 04
+            </Link>
+            。
           </>
         ),
       },
@@ -243,9 +267,21 @@ const CATEGORIES: Category[] = [
         q: "我可以取消等候名單嗎?",
         a: (
           <>
-            可以,隨時。寄信給我們任何官方聯絡管道(launch 後公布)即可。
+            可以,隨時。目前(pre-launch)透過{" "}
+            <a
+              href="https://github.com/Tim-xuan-you/zone27-web/issues"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gold underline-offset-4 hover:underline"
+            >
+              GitHub Issues
+            </a>
+            {" "}留下您要刪除的 email · 創辦人 Tim 收到後 24 小時內
+            從 Supabase 永久刪除您的 row(<strong className="text-bone">不留備份</strong>)。
+            <br />
+            <br />
             等候名單本身<strong className="text-bone">不收費、不簽約、不綁定</strong>,
-            純粹是優先權的標記。
+            純粹是優先權的標記。退出沒有任何懲罰或保留期。
           </>
         ),
       },
