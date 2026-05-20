@@ -29,23 +29,29 @@ export const metadata: Metadata = {
     default: "ZONE 27 — 不靠直覺,只看演算法",
     template: "%s · ZONE 27",
   },
+  // Root description · inherited by every page that doesn't override.
+  // Honest copy aligned with homepage hero body + /faq Q3 brand stance:
+  // - "數據俱樂部" not "預測社群" (we're not gambling-adjacent)
+  // - Tiered commission honest (0% Founders / 5% BLACK CARD vs flat "零手續費")
+  // - "git 不可篡改" specific (matches Pillar 02 wording)
   description:
-    "全台第一個為硬核棒球迷打造的暗黑黃金級數據俱樂部。蒙地卡羅 AI 模擬器、不可篡改的勝率紀錄、零手續費的會員制預測社群。",
+    "全台第一個為硬核棒球迷打造的暗黑黃金級數據俱樂部。蒙地卡羅模擬器 · git 不可篡改紀錄 · 創作者抽成 0%(Founders 27)/ 5%(BLACK CARD)。",
   keywords: [
     "中華職棒",
     "CPBL",
     "MLB",
-    "AI 預測",
+    "Monte Carlo",
     "蒙地卡羅",
     "棒球數據",
     "Sabermetrics",
     "ZONE 27",
+    "量化棒球",
   ],
   authors: [{ name: "ZONE 27" }],
   openGraph: {
     title: "ZONE 27 — We Don't Guess. We Compute.",
     description:
-      "全台最帥的暗黑黃金級體育預測社群 · 蒙地卡羅 AI 模擬器 · 零手續費會員制",
+      "為硬核棒球迷打造的暗黑黃金級數據俱樂部 · 蒙地卡羅模擬器 · 270 個終身席位",
     type: "website",
     locale: "zh_TW",
     siteName: "ZONE 27",
@@ -53,7 +59,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "ZONE 27 — We Don't Guess. We Compute.",
-    description: "全台最帥的暗黑黃金級體育預測社群",
+    description: "為硬核棒球迷打造的暗黑黃金級數據俱樂部 · 270 finite founders",
   },
 };
 
