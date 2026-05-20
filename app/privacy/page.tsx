@@ -6,7 +6,7 @@ import Footer from "@/components/Footer";
 export const metadata: Metadata = {
   title: "Privacy Policy — 我們收什麼、不收什麼、永遠不會做什麼",
   description:
-    "ZONE 27 隱私政策。我們只收 waitlist 的 email,暫存在 Vercel 後台 logs,永遠不分享、不販售、不轉手。",
+    "ZONE 27 隱私政策。我們只收 waitlist 的 email + 稱呼 + 通道標籤,存在 Supabase Tokyo 區 RLS-locked 資料庫,永遠不分享、不販售、不轉手。",
 };
 
 export default function PrivacyPage() {
@@ -49,13 +49,45 @@ export default function PrivacyPage() {
         </p>
         <ul className="space-y-3">
           <li>
-            <strong className="text-bone">Founders 27 等候名單 email</strong> ─
-            您主動填寫的 email,以及您選擇填寫的稱呼(可選)。
-            時間戳記與 queue position 一併紀錄。
+            <strong className="text-bone">Email · 必填</strong> ─
+            您填的 email 字串,正規化為小寫並 trim。用於正式開賣時通知您。
+          </li>
+          <li>
+            <strong className="text-bone">稱呼 · 選填</strong> ─
+            如果您填寫,我們會存。不填就是 <Code>null</Code>。
+          </li>
+          <li>
+            <strong className="text-bone">Queue position</strong> ─
+            您加入時系統自動分配的順序號(<Code>bigint generated always as identity</Code>),
+            用於告訴您「您是第 N 位」。
+          </li>
+          <li>
+            <strong className="text-bone">Created timestamp</strong> ─
+            您加入的時間(UTC),用於排序與「最近 24 小時新增多少」這類匿名彙總。
+          </li>
+          <li>
+            <strong className="text-bone">Channel source(若有)</strong> ─
+            如果您點進來的 URL 帶有 <Code>?ref=reserve-NNN</Code> 參數,
+            <strong className="text-bone">我們會把該標籤存下</strong>(例如:
+            <Code>reserve-001</Code>)。這是<strong className="text-bone">通道歸因</strong>,
+            告訴創辦人「#001 那位會員的分享連結帶來了多少新報名」。
+            <strong className="text-bone">這 NOT 是個人追蹤</strong>:我們不知道
+            <em>哪位特定訪客</em>透過該連結進來,只知道「總共多少報名來自該通道」。
+            sanitize regex 限制 <Code>[a-z0-9-]{"{1,40}"}</Code>,防止 injection 與超長字串。
           </li>
         </ul>
         <p className="text-mute/80 mt-6">
-          就這樣。我們沒有任何其他資料收集機制。
+          就這 5 個欄位。我們沒有任何其他資料收集機制。
+          完整 schema 開放在{" "}
+          <a
+            href="https://github.com/Tim-xuan-you/zone27-web/blob/main/supabase/migrations/0001_waitlist.sql"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-gold underline-offset-4 hover:underline"
+          >
+            supabase/migrations/0001_waitlist.sql
+          </a>
+          ,任何人都可以審計。
         </p>
       </Section>
 
@@ -81,13 +113,47 @@ export default function PrivacyPage() {
       {/* ── 04 HOW WE STORE ─────────────────────── */}
       <Section no="04" label="HOW WE STORE" zh="儲存方式">
         <p>
-          目前 pre-launch 階段,所有 waitlist email 暫存在
-          <Code>Vercel 後台 logs</Code> ── 僅創辦人 Tim 可存取的服務端日誌。
-          這是過渡方案。
+          <strong className="text-bone">更新 2026-05-20:</strong>{" "}
+          waitlist 資料庫已從 Vercel logs(過渡方案)遷移至{" "}
+          <Code>Supabase Tokyo (ap-northeast-1)</Code> PostgreSQL,
+          並啟用 <strong className="text-bone">Row-Level Security (RLS) lock-down</strong>:
         </p>
+        <ul className="space-y-3">
+          <li>
+            ▸ <strong className="text-bone">沒有任何角色能直接讀 / 寫 waitlist 表</strong>。
+            連我們的公開 <Code>publishable key</Code>(放在前端 JS 裡)
+            都無法繞過 RLS。
+          </li>
+          <li>
+            ▸ 所有寫入只能透過{" "}
+            <Code>SECURITY DEFINER</Code> 函式{" "}
+            <Code>reserve_waitlist_spot()</Code> ──
+            該函式驗證 email 格式 + 去重 + sanitize source tag,
+            然後 INSERT。
+          </li>
+          <li>
+            ▸ 所有讀取也只能透過{" "}
+            <Code>SECURITY DEFINER</Code> 函式 <Code>get_waitlist_count()</Code> ──
+            <strong className="text-bone">永遠只回傳 COUNT,從不回傳 email/姓名</strong>。
+          </li>
+          <li>
+            ▸ 只有 <Code>service_role</Code>(僅創辦人 Tim 透過 Supabase Studio 持有)
+            能繞過 RLS 看全部資料。瀏覽器端永遠拿不到這把鑰匙。
+          </li>
+        </ul>
         <p>
-          當正式付款系統開放(預計 2026 Q3),所有 email 將遷移至 Supabase
-          加密資料庫,並以 row-level security 保護。
+          這個架構代表:即使我們公開的 <Code>NEXT_PUBLIC_SUPABASE_ANON_KEY</Code>{" "}
+          被任何人撿到,他<strong className="text-bone">依然無法 exfiltrate
+          任何一個 email</strong>。RLS 是物理防線,不是嘴炮。完整 SQL schema 公開於{" "}
+          <a
+            href="https://github.com/Tim-xuan-you/zone27-web/blob/main/supabase/migrations/0001_waitlist.sql"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-gold underline-offset-4 hover:underline"
+          >
+            supabase/migrations/0001_waitlist.sql
+          </a>
+          。
         </p>
       </Section>
 
@@ -175,7 +241,7 @@ export default function PrivacyPage() {
       {/* ── FINAL ───────────────────────────────── */}
       <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 py-16 text-center border-t border-line/40">
         <p className="font-mono text-gold text-[10px] tracking-[0.4em] mb-6">
-          POLICY EFFECTIVE 2026 · 05 · 19
+          POLICY EFFECTIVE 2026 · 05 · 20 · SUPABASE MIGRATION
         </p>
         <p className="text-mute leading-relaxed max-w-md mx-auto">
           所有政策變動會公開於{" "}
