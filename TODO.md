@@ -30,63 +30,88 @@
 
 ## 🚀 開新對話窗時 · 複製這段過去就好
 
-**為什麼需要這段:** 新的 Claude 對話沒有累積 16 輪的脈絡。
+**為什麼需要這段:** 新的 Claude 對話沒有累積本對話窗的脈絡。
 這段 prompt 讓新 Claude 一秒接上,不必重講歷史。
+(個人 MEMORY.md 會自動載入 8 個 brand axiom · 此 prompt 只需點到專案狀態)
 
-**Copy-paste 完整 prompt(v2 · 含 2026-05-19 晚 16 輪迭代脈絡):**
+**Copy-paste 完整 prompt(v3 · 含 2026-05-20 整日 40+ commit 迭代脈絡):**
 
 ```
-我們在繼續開發 ZONE 27 — 給台灣硬核棒球迷打造的暗黑黃金級量化分析品牌。
+繼續開發 ZONE 27 — 台灣硬核棒球迷的暗黑黃金級量化分析品牌。
 
 📂 工作目錄:C:\Users\tatay\Desktop\Second\zone27-web
 🌐 正式網址:https://zone27-web.vercel.app
 📦 GitHub:https://github.com/Tim-xuan-you/zone27-web
 
-請按以下順序讀完(每份檔案都有重要脈絡):
+【請按以下順序讀完】每份檔都有重要脈絡:
 
 1. CLAUDE.md → 三條鐵律(SEO/社群凍結 + 預算分級 + 品牌/設計鐵律)
 2. AGENTS.md → Next.js 16 breaking changes 警告(別寫過時程式碼)
-3. WHILE-YOU-WERE-OUT.md → 上一晚 16 輪研究 + 迭代完整紀錄
+3. WHILE-YOU-WERE-OUT.md → 2026-05-19 晚 16 輪研究 + 迭代紀錄
 4. KNOWN-ISSUES.md → 已知但刻意延後的事項(別重新挖)
 5. ADMIN-PLAN.md → 會員管理 + 數據三階段策略
-6. TODO.md → 我的代辦事項清單(您正在讀這份)
+6. docs/MANUAL-ONBOARDING.md → Founders 27 手工 onboarding 完整流程
+7. supabase/migrations/0001_waitlist.sql → DB schema(RLS-locked + SECURITY DEFINER 函式)
+8. TODO.md → 您正在讀這份(代辦事項清單)
 
-目前技術狀態:
-- 28 個 routes(含 7 個 custom OG cards)
-- Build ✅ Lint ✅(0 errors / 0 warnings)
-- WCAG AA 對比 22 處 fail → 0
-- 全站 lang="en" + touch-action: manipulation + themeColor
-- 完整 trust artifact 體系(/audit Model Report + /methodology)
-- 完整轉換體系(/founders + ScarcityStrip + CopyLinkButton)
-- 防禦性編程(matches[0] 空陣列 · button type · input mobile UX)
-- Footer 仍顯示 v0.27 · 16 輪迭代未升版 chip(您決定何時 bump)
-- 全部未 commit · 等我手動 push 才會部署
+【MEMORY.md 自動載入 8 個 brand axiom · 您不必再讀】:
+  · user_tim · feedback_phone_vs_computer · feedback_persona_invocation
+  · zone27-supabase-architecture · zone27-coverage-philosophy
+  · zone27-monetization-philosophy · zone27-disclosure-philosophy
+  · zone27-musk-methodology · zone27-payment-architecture
+  · feedback_auto_push_zone27 · feedback_no_rest_zone27
 
-商業狀態:
-- Founders 27 設定:NT$ 2,700 一次性 · 限量 270 名 · 5.4 個月 break-even
-- 7 位 forged · 263 名額 · 下一個 #008(寫在 lib/founders-stats.ts)
-- Supabase / Resend 還沒接(我明天會跟您做 ① · 見 TODO.md)
-- BLACK CARD 預計 2026 Q3 上線
+【目前技術狀態(2026-05-20 收盤)】:
+- 14 user-visible routes + 7 custom OG cards · Build/Lint/TSC strict 三綠
+- Supabase Tokyo 上線:waitlist 表 + 2 個 SECURITY DEFINER 函式
+  + RLS lock-down + Vercel env vars 已設(NEXT_PUBLIC_SUPABASE_URL + ANON_KEY)
+- /founders WaitlistForm 接 DB · WAITLIST · N · LIVE 指示器
+- Channel attribution(?ref= → DB source)+ CopyLinkButton 帶 Web Share API
+- 4 個 brand axiom 全部反映在 trust artifact 頁:
+  /audit (Section 08 disclosure) · /methodology · /coverage (CPBL HAND-CURATED)
+  /privacy (Supabase 完整揭露) · /terms · /faq · /signal-board (FRESHNESS)
+- 首頁加 BRAND INVERSION THESIS section(4 個 INDUSTRY vs ZONE 27 對比)
+  + hero dual CTA(加入創始名冊 + 親手跑一場引擎)
+- 手機 nav 收斂:wordmark + 創始會員 → CTA + Row 2 (4 個 secondary 連結)
+- Footer 動態日期 · /changelog 70 行精簡(GitHub commits 是 source of truth)
+- WCAG AA 0 fail · prefers-reduced-motion 完整支援 · 21 個 aria-label
 
-我的互動風格:常說「沒想法...您決定!」— 您在三條鐵律內全權決定最高槓桿動作。
-SEO/社群凍結令對模糊指令絕不解封。
-預算 TIER 1(免費 + 註冊 + 小錢)您可主動推進並引導我;
-TIER 2(交易費 + 中等月費)必須問我;
-TIER 3(NT$3K 以上 / 法律 / 廣告)絕不主動建議。
+【商業狀態】:
+- Founders 27:NT$ 2,700 一次性 · 限量 270 名 · **手工銀行轉帳(per
+  [[zone27-payment-architecture]])** · 5.4 個月 break-even
+- 7 位 forged(hardcoded · 待 Q3 2026 manual onboarding 啟動)· 263 名額
+- BLACK CARD:NT$ 499/月 · TapPay 訂閱 · 預計 2026 Q3 上線
+- 自動 push 政策:Claude 直接 push zone27-web · 不問 Tim · 直到買品牌域名
+- 鐵律:Claude **永遠不說「休息 / 明天 / 晚安 / take a break」**
 
-我可能在電腦前 · 也可能在外面用手機 — 如果我訊息很短/很 casual,
-請先問「您現在在電腦前嗎?」再決定要不要 walk-through 註冊步驟。
+【三條 TIER 預算】:
+- TIER 1(免費 + 註冊 + 小錢)→ Claude 可主動推進
+- TIER 2(交易費 + 中等月費)→ 必須問 Tim
+- TIER 3(NT$3K 以上 / 法律 / 廣告)→ 絕不主動建議
+
+【未完成的 Tim 親自動作】:
+- ② Resend 註冊(5 min · 解 confirmation email · 仍 pending)
+- CPBL 真實資料 ingestion(3 min 截圖 cpbl.com.tw 給 Claude)
+- Footer 版本 chip bump v0.27 → v0.28(Tim 拍板的時機)
+- 品牌域名購買(等 Tim 決定名稱:zone27.tw / .app / .cc / .io)
+
+【手機 vs 電腦 規則】:
+Tim 可能在電腦前或外面用手機 · 訊息很短/casual 時請先問
+「您現在在電腦前嗎?」再決定要不要 walk-through 註冊步驟。
 
 今天我要做的事:[ 這裡填入您今天要的具體任務,或留空讓 Claude 接 TODO ]
 ```
 
-**最短版**(如果上面太長 · 但會少很多脈絡):
+**最短版**(如果您只想快速接上):
 
 ```
 繼續 ZONE 27 開發。專案在 C:\Users\tatay\Desktop\Second\zone27-web。
 請依序讀 CLAUDE.md → AGENTS.md → WHILE-YOU-WERE-OUT.md → KNOWN-ISSUES.md → TODO.md。
-已 16 輪迭代,Build/Lint 雙綠,28 routes,全部未 commit。
-今天我要做:① Supabase 註冊。
+MEMORY.md 自動載入 brand axiom · 不必再讀。
+2026-05-20 完成 40+ commit:Supabase 上線、4 brand axiom 落地、手機 UX 大改、
+brand inversion section 上線、Web Share API 上 CopyLinkButton。
+Build/Lint/TSC strict 三綠。Footer 仍 v0.27 等 Tim bump。
+今天我要做:[ 填入任務,或留空讓 Claude 接 TODO ]
 ```
 
 ---
