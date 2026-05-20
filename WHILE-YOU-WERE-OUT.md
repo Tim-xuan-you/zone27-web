@@ -1,12 +1,120 @@
 # 🌙 您休息時 Claude 做了什麼
 
-> Tim · 2026-05-19 晚上 · **十六波迭代** Round 1 → Round 16
->
-> 您把網站全權交給我自主迭代一整晚。在三條鐵律(SEO 凍結/社群凍結/預算分級)內,我完成了**五輪 research-backed iterations**。
->
-> **底線:Build ✅ Lint ✅ 25 routes 全過。** 沒動 Supabase / Resend(那是您明天的事)。沒做任何 SEO 或社群推廣動作。
+> Tim · 2026-05-20 晚上 · **Day 2 · 21 commits since /manifesto**
+> Tim · 2026-05-19 晚上 · 十六波迭代 Round 1 → Round 16 (底下)
 
 ---
+
+## 🚀 DAY 2 (2026-05-20) · 攻頂模式 · 21 commits
+
+您把網站全權交給我自主迭代一整晚 · 在三條鐵律(SEO 凍結 / 社群凍結 / 預算分級)內 ·
+完成 21 個 build-clean commits · 全部 research-backed 或 honesty-driven。
+
+**Build · Lint · TSC strict 三綠 · 18 routes · 14 custom OG cards · 6 trust artifact pages**
+
+### 📚 4 個新 canonical 內容頁
+
+| 路徑 | 內容 |
+|---|---|
+| `/manifesto` | 6-section 倒置宣言 + Section V 「方法公開 · 品味私藏」synthesis(brand IP 結晶) |
+| `/learn` | 5-minute primer · 3 chapters · 給沒聽過 Bill James 的入門訪客 |
+| `/discipline` | Buffett · Musk · Costco 5 個鐵律 canonical page(Tim 拍板要求) |
+| `首頁 BY THE NUMBERS bento` | 6 個 verifiable proof tiles · 每個連到 evidence |
+| `首頁 TRUST STACK section` | 6 trust artifact pages 視覺集合 |
+| `/founders Founders 27 reframe` | 「您不是在買引擎」section |
+| `/founders BLACK CARD reframe` | 「月費賣的是什麼」section |
+
+### 🧹 honesty sweep · 13 處 fix
+
+**「Trackman + stats.cpbl + 後端引擎」over-claim 全 repo 流水尾清空(7 處):**
+
+1. `/about` Ch 3 method steps
+2. `/glossary` PR + Spin Rate entries
+3. `/glossary` TRACKMAN section label
+4. `/methodology` S08 v0.4 roadmap
+5. `/lab/custom` v0.4 roadmap blurb
+6. `/matches/[gameId]` Section 04 method steps(高 blast 半徑:每場 URL 都帶這段)
+7. `/methodology` 「CPBL 新上線」虛構 + `/lab` v0.4 標 aspirational
+
+**版本 invariant 全站對齊(2 處):**
+
+- `/lab/custom` v0.16 stale → ENGINE v0.2
+- `ReplayBroadcast.tsx` v0.3 → v0.2 comment
+
+**首頁 over-claim(2 處):**
+
+- Hero body「零手續費」→「0%(Founders)/ 5%(BLACK CARD)」
+- Pillar 03 三個不存在的功能(戰力雷達/走勢曲線/偏差復盤)→ 對齊真實功能
+
+**`/matches/[gameId]` BLACK CARD mislabel(1 處):**
+
+- 「BLACK CARD CHAT · 僅限 #001-#270」邏輯衝突 → 「FOUNDERS + BLACK CARD ROOM」雙層
+
+**`/audit` h1 version disambiguation(1 處):**
+
+- 「Engine v0.27」與 MetaPair v0.2 衝突 → REPORT v0.27 + ENGINE v0.2 拆開顯示
+
+### 🖼️ 6 個新 custom OG cards(8 → 14)
+
+`/manifesto`(2×2 axiom grid)· `/about`(letter quote)· `/coverage`(Bloomberg ledger)·
+`/privacy`(✕ list)· `/lab/custom`(input mockup)· `/faq`(featured Q3)·
+`/discipline`(3-philosopher grid)· `/signal-board`(daily brief)
+
+### 🛠️ 元件 + 基礎建設
+
+- **`<StatTerm>`** Baseball-Savant inline glossary tooltip(13 stat 字典 · 應用 4 個頁面)
+- **`<TrustCard>`** + **`<ProofTile>`** + **`<BlackCardItem>`** + **`<SynthItem>`** + **`<NotBuyingItem>`**
+- Footer **FUNDED BY FOUNDERS · NO VC · NO ADS · NO TRACKERS**(Plausible inspired)
+- Footer secondary nav 新增「5 分鐘入門」+「鐵律」
+- `/glossary` anchor IDs(`#k-9`, `#bb-9` 等)讓 StatTerm tooltip deep-link 可用
+- **a11y fix** · WaitlistForm 加 `role="alert" aria-live="polite"` 錯誤訊息(WCAG 4.1.3)
+
+### 🔬 上網吸收的世界級研究(全部已應用)
+
+| 來源 | 採用模式 | 應用點 |
+|---|---|---|
+| **Linear** | Modular card scrolling + 微互動 | BY THE NUMBERS + TRUST STACK |
+| **Plausible** | Anti-VC funding transparency | Footer trust line |
+| **Anthropic** | Declarative governance visibility | `/audit` + `/discipline` section structure |
+| **Baseball Savant** | Inline glossary at point-of-use | StatTerm component |
+| **Stripe** | Bento grid hairline dividers | BY THE NUMBERS + TRUST STACK |
+| **Vercel** | Typographic hierarchy + dark restraint | All new section spacing |
+| **HEY** | Philosophical reframing of problem | Founders + BLACK CARD reframes |
+| **Berkshire / Buffett** | Owner's letter 13 principles | `/discipline` Section 01 |
+| **Costco** | 14% markup + membership > merchandise | `/discipline` Section 03 |
+| **Musk** | 5-step algorithm + Idiot Index | `/discipline` Section 02 |
+
+### 💎 Day 2 的策略對話結晶(全部寫進品牌 IP)
+
+今天 Tim 4 次深度提問引發的策略對話,每個都結晶成具體 site content:
+
+| Tim 問的 | 策略答 | 寫進哪 |
+|---|---|---|
+| 「我怎麼賺錢?」 | 您不是賣引擎,是賣 270 個 fork 不走的位置 | `/founders` Founders 27 reframe |
+| 「270 之後誰訂閱?」 | 訂閱者買的是 community + curation,不是工具 | `/founders` BLACK CARD reframe |
+| 「Bill James 也是您說我才知道」 | 教育是 ZONE 27 真正的產品 | `/learn` 5-min primer |
+| 「不需要坦承吧?」 | 方法公開 · 品味私藏 | `/manifesto` Section V SYNTHESIS |
+| 「Buffett + Musk + Costco 怎做事?」 | 三個世界級品牌都不靠秘密 · 靠紀律 | `/discipline` canonical page |
+
+### 🎯 Day 2 留下的 8 字品牌 grammar
+
+> **「方法公開 · 品味私藏」**
+> **SHOW YOUR WORK · KEEP YOUR SOUL**
+
+寫在 `/manifesto` Section V · 是 ZONE 27 全部品牌哲學的 8 字濃縮。
+
+### ⏳ 仍待 Tim 親自處理(2026-05-20 收盤)
+
+- ② Resend 5 min 註冊 → confirmation emails
+- CPBL 真實資料截圖 → 引擎活水
+- Footer 版本 chip bump v0.27 → v0.28(您拍板的時機)
+- 品牌域名(您決定名稱:zone27.tw / .app / .cc / .io)
+
+---
+
+## 🌙 DAY 1 (2026-05-19) — 十六波迭代 Round 1 → Round 16
+
+
 
 ## 🧠 ROUND 16 — 心理學驅動的精確改動 + handoff prompt 更新
 
