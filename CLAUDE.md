@@ -10,11 +10,14 @@ When the user invokes generic actions like "guide me through registration",
 "幫我跑 TODO", "現在來做註冊的事", or returns from a break — open
 `TODO.md` first to find what they're waiting to do, and resume from there.
 
-Current pending (as of 2026-05-19 evening):
-- ① Supabase signup (5 min) → unlocks v0.28 waitlist DB
-- ② Resend signup (5 min) → unlocks confirmation emails
-- ③ Brand domain purchase (after name decision)
-- ④ GitHub Copilot (optional)
+Current pending (as of 2026-05-20 DAY 2 collapse):
+
+✅ ① Supabase signup — **DONE** · RLS-locked + 2 SECURITY DEFINER 函式 · Tokyo region
+⏳ ② Resend signup (5 min) → unlocks confirmation emails
+⏳ ③ Brand domain purchase (after name decision · zone27.tw / .app / .cc / .io)
+⏳ ④ Footer chip bump v0.27 → v0.28 (Tim 拍板 milestone)
+⏳ ⑤ CPBL screenshots ongoing → Tim 截圖 + Claude ingest(已 ship 第一場 2026-05-21 統一 vs 富邦)
+⏳ ⑥ Optional · 截圖 cpbl 球員 profile 右滑顯示 K/BB 真實值 → 升級 estimate 為真實數據
 
 
 
@@ -185,25 +188,59 @@ ZONE 27 與 **BOTTOM 27**(Tim 的棒球手遊)是雙生品牌:
 
 ---
 
-## 🗺️ 當前路由(v0.5)
+## 🗺️ 當前路由(v0.27 · DAY 2 收盤 2026-05-20)
 
 ```
-/                        首頁
-/matches                 賽事列表
-/matches/[gameId]        SSG 詳情頁(目前 3 場 CPBL)
-/lab                     ★ 即時 Monte Carlo 模擬器(BETA)
-/leaderboard             THE 27 WALL · 270 創始席位視覺化
-/founders                Founders 27 銷售頁
+首頁 + Hero
+/                        首頁 · BY THE NUMBERS bento + TRUST STACK + Brand Inversion + Live HeroLiveCard
+/learn                   5 分鐘入門 primer · 給沒聽過 Bill James 的人(3 chapters)
+
+Brand IP(canonical)
+/manifesto               倒置宣言 · 6 sections + Section V SYNTHESIS「方法公開·品味私藏」
+/discipline              鐵律 · Buffett + Musk + Costco 三人共識(5 sections)
 /about                   六章節品牌方法論
+
+Trust artifacts(40+ sections of disclosure)
+/audit                   Model Report · 8 sections(含 Section 08 Disclosure Philosophy)
+/methodology             技術白皮書 · 10 sections + 路線圖
+/coverage                覆蓋範圍 · 6 sections + NEVER list
+/privacy                 隱私政策 · 8 sections(含 anti-tracking inventory)
+/terms                   服務條款
+/faq                     14 honest answers
+
+Engine + 賽事
+/lab                     即時 Monte Carlo 模擬器(逐打席模型 v0.2)
+/lab/custom              自訂任意投手對戰
+/matches                 今日賽事板(CPBL)
+/matches/[gameId]        SSG 詳情(目前 4 場:第 1 場是 2026-05-21 真實 CPBL 統一 vs 富邦)
+/matches/mlb             MLB 即時資料(每 10 分鐘 ISR)
+/signal-board            每日量化早報
+/leaderboard             THE 27 WALL · 270 創始席位視覺化
+/founders                Founders 27 銷售頁(含 2 個 reframe sections)
+/glossary                27 種進階數據詞彙(StatTerm tooltip 整合)
+/changelog               精簡版本紀錄 · GitHub commits 為 source of truth
+
+OG + favicon
 /icon                    Z27 monogram favicon
-/opengraph-image         動態社群分享預覽卡
+/opengraph-image         全站 fallback OG card
+/[14 routes]/opengraph-image  14 個 custom OG cards
 ```
 
 ## 📦 技術棧
 
 - Next.js 16.2.6 (App Router + Turbopack)
-- TypeScript 5
+- TypeScript 5 (strict mode)
 - Tailwind CSS 4(於 `globals.css` 用 `@theme inline`,**沒有** `tailwind.config.js`)
 - Geist Sans + Geist Mono(`next/font/google`)
 - Vercel(部署) · GitHub(原始碼)
-- 後端: 尚未接入(計畫採用 Supabase 或 Vercel Postgres)
+- 後端: **Supabase Tokyo (ap-northeast-1)** · waitlist 表 RLS-locked + 2 個 SECURITY DEFINER 函式(reserve_waitlist_spot + get_waitlist_count) · NEXT_PUBLIC_SUPABASE_URL + ANON_KEY 在 Vercel env vars
+- MLB 資料:MLB Stats API(免費官方)· 每 10 分鐘 ISR
+- CPBL 資料:**Tim 手動截圖 + Claude 解析 ingest**(暫定 path C · cpbl.com.tw 是 Vue SPA · 沒有 public API)
+- 引擎 v0.2:逐打席 Monte Carlo · client-side(訪客瀏覽器內跑 10K sims · ~2 秒收斂)
+
+## 🎯 8 字品牌 grammar(寫進 /manifesto Section V)
+
+> **「方法公開 · 品味私藏」**
+> **SHOW YOUR WORK · KEEP YOUR SOUL**
+
+> **「不靠秘密賺錢 · 靠紀律」**(/discipline · Buffett + Musk + Costco 共識)
