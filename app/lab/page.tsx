@@ -14,12 +14,49 @@ import { matches } from "@/lib/matches";
 // ─────────────────────────────────────────────────────
 
 export default function LabPage() {
-  const [matchId, setMatchId] = useState(matches[0].id);
-  const match = matches.find((m) => m.id === matchId)!;
+  // Defense: matches.length === 0 case (lib/matches.ts in migration).
+  // Hooks must be called unconditionally — useState gets a stable empty
+  // string fallback, then we guard on match below.
+  const initialId = matches[0]?.id ?? "";
+  const [matchId, setMatchId] = useState(initialId);
+  const match = matches.find((m) => m.id === matchId);
+
+  if (!match) {
+    return (
+      <div className="flex flex-col flex-1 min-h-screen">
+        <Nav active="lab" />
+        <main id="main">
+          <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pt-20 pb-12 text-center">
+            <p
+              lang="en"
+              className="font-mono text-gold/70 text-[10px] tracking-[0.4em] mb-8"
+            >
+              ENGINE READY · NO MATCHES LOADED
+            </p>
+            <h1 className="text-3xl sm:text-4xl text-bone font-light tracking-tight">
+              範例賽事尚未排定
+            </h1>
+            <p className="mt-8 text-mute leading-relaxed max-w-md mx-auto">
+              範例 CPBL 比賽資料目前不可用,但您仍可自訂任意兩位投手,讓引擎跑模擬。
+            </p>
+            <Link
+              href="/lab/custom"
+              className="inline-block mt-10 px-10 py-3 bg-gold text-navy text-xs tracking-[0.3em] hover:bg-gold-soft transition-colors"
+            >
+              進階模式 · 自訂投手 →
+            </Link>
+          </section>
+        </main>
+        <Footer />
+      </div>
+    );
+  }
 
   return (
     <div className="flex flex-col flex-1 min-h-screen">
       <Nav active="lab" />
+
+      <main id="main">
 
       {/* ── HERO ─────────────────────────────────── */}
       <section className="mx-auto max-w-4xl w-full px-6 sm:px-10 pt-20 pb-10 text-center">
@@ -55,6 +92,7 @@ export default function LabPage() {
             return (
               <button
                 key={m.id}
+                type="button"
                 onClick={() => setMatchId(m.id)}
                 className={`text-left p-4 border transition-colors ${
                   active
@@ -143,6 +181,8 @@ export default function LabPage() {
           </p>
         </div>
       </section>
+
+      </main>
 
       <Footer />
     </div>

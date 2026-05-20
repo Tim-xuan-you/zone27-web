@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
+import RelatedReading from "@/components/RelatedReading";
 import { matches, type Match } from "@/lib/matches";
 
 export const metadata: Metadata = {
@@ -66,18 +67,21 @@ export default function SignalBoardPage() {
   const moderateCount = tiers.filter((t) => t.tier === "moderate").length;
   const neutralCount = tiers.filter((t) => t.tier === "neutral").length;
 
-  // Find strongest and weakest
+  // Find strongest and weakest — undefined-safe when array is empty
+  // (defense against future schema migration / empty-data states)
   const sorted = [...today].sort(
     (a, b) =>
       Math.abs(b.home.winRate - b.away.winRate) -
       Math.abs(a.home.winRate - a.away.winRate)
   );
   const strongest = sorted[0];
-  const weakest = sorted[sorted.length - 1];
+  const weakest = sorted.length > 1 ? sorted[sorted.length - 1] : undefined;
 
   return (
     <div className="flex flex-col flex-1 min-h-screen">
       <Nav />
+
+      <main id="main">
 
       {/* ── HERO ─────────────────────────────────── */}
       <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pt-20 pb-10">
@@ -147,20 +151,30 @@ export default function SignalBoardPage() {
         </p>
 
         <div className="bg-slate/60 border border-line/70 p-8 space-y-6">
-          <FocusItem
-            label="STRONGEST EDGE TODAY"
-            match={strongest}
-            note={`+${Math.abs(strongest.home.winRate - strongest.away.winRate)} PP · 模型信心 ${strongest.aiConfidence}/100`}
-          />
-          <div className="w-full h-px bg-line/40" />
-          <FocusItem
-            label="WEAKEST SIGNAL"
-            match={weakest}
-            note={`僅 +${Math.abs(weakest.home.winRate - weakest.away.winRate)} PP · 模型信心 ${weakest.aiConfidence}/100 — 接近 coin flip`}
-          />
+          {strongest ? (
+            <FocusItem
+              label="STRONGEST EDGE TODAY"
+              match={strongest}
+              note={`+${Math.abs(strongest.home.winRate - strongest.away.winRate)} PP · 模型信心 ${strongest.aiConfidence}/100`}
+            />
+          ) : (
+            <p className="font-mono text-mute text-xs tracking-[0.25em] text-center py-4">
+              無排定賽事 · 編輯焦點待補
+            </p>
+          )}
+          {weakest && (
+            <>
+              <div className="w-full h-px bg-line/40" />
+              <FocusItem
+                label="WEAKEST SIGNAL"
+                match={weakest}
+                note={`僅 +${Math.abs(weakest.home.winRate - weakest.away.winRate)} PP · 模型信心 ${weakest.aiConfidence}/100 — 接近 coin flip`}
+              />
+            </>
+          )}
         </div>
 
-        <p className="font-mono text-mute/60 text-[10px] tracking-[0.25em] mt-6">
+        <p className="font-mono text-mute text-[10px] tracking-[0.25em] mt-6">
           BRIEF 由演算法每日自動生成 · 非預測保證 · 詳見{" "}
           <Link
             href="/methodology"
@@ -170,6 +184,8 @@ export default function SignalBoardPage() {
           </Link>
         </p>
       </section>
+
+      <RelatedReading currentPath="/signal-board" />
 
       {/* ── FINAL CTA ────────────────────────────── */}
       <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 py-16 text-center border-t border-line/40">
@@ -194,6 +210,8 @@ export default function SignalBoardPage() {
           </Link>
         </div>
       </section>
+
+      </main>
 
       <Footer />
     </div>

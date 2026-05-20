@@ -56,24 +56,18 @@ export default function ReplayBroadcast({
   const intervalRef = useRef<number | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
 
-  // Reset whenever the matchup changes
-  useEffect(() => {
-    setLog([]);
-    setShown(0);
-    setFinal(null);
-    setRunning(false);
-    if (intervalRef.current !== null) {
-      clearInterval(intervalRef.current);
-      intervalRef.current = null;
-    }
-  }, [keyId]);
-
-  // Cleanup on unmount
+  // ReplayBroadcast lives inside MatchSimulator, which remounts on
+  // match change via its parent's `key={match.id}` — that's enough to
+  // reset state. No explicit keyId-watching effect needed.
+  // Cleanup any in-flight interval on unmount.
   useEffect(() => {
     return () => {
       if (intervalRef.current !== null) clearInterval(intervalRef.current);
     };
   }, []);
+  // `keyId` kept in props for backward compat with existing callers
+  // and as a documentation hint that this component is matchup-scoped.
+  void keyId;
 
   // Auto-scroll to bottom as new plays come in
   useEffect(() => {
@@ -127,6 +121,7 @@ export default function ReplayBroadcast({
           / 04 · 重播一場比賽
         </p>
         <button
+          type="button"
           onClick={startReplay}
           disabled={running}
           className={`px-6 py-2.5 font-mono text-[10px] tracking-[0.3em] transition-colors border ${

@@ -45,6 +45,8 @@
 html {
   color-scheme: dark;
   background: var(--zone-navy);
+  /* Variable fonts — opt into optical-sizing axis (Geist Sans is variable) */
+  font-optical-sizing: auto;
 }
 
 body {
@@ -59,11 +61,45 @@ body {
   min-height: 100vh;
 }
 
-/* Mono digits — financial terminal feel */
+/* Headings — text-wrap balance prevents widowed last words */
+h1, h2, h3 {
+  text-wrap: balance;
+}
+
+/* Mobile tap-target — `touch-action: manipulation` removes the
+   ~300ms double-tap-to-zoom delay on iOS Safari. Buttons + links
+   become as snappy as native. Zero JS, zero visual cost. */
+button,
+a,
+[role="button"] {
+  touch-action: manipulation;
+}
+
+/* Body prose — text-wrap pretty avoids orphan last lines */
+p, li {
+  text-wrap: pretty;
+}
+
+/* Mono digits — financial terminal feel.
+   slashed-zero is the unsung hero: distinguishes 0 from O at a glance,
+   the visual cue that makes a stat sheet read as "trader-grade." */
 .font-mono,
 .tabular {
   font-family: var(--font-geist-mono), ui-monospace, monospace;
-  font-variant-numeric: tabular-nums;
+  font-variant-numeric: tabular-nums lining-nums slashed-zero;
+}
+
+/* CJK kerning — Chrome 119+ ships text-spacing-trim. Fixes the awkward
+   gap after 「 」, 、 , etc. per CLREQ rules. Single most powerful
+   Traditional Chinese polish available in 2026. */
+:where([lang^="zh"], html[lang^="zh"]) {
+  text-spacing-trim: trim-start;
+}
+
+/* Safari-only but harmless elsewhere — pulls opening quote outside
+   the text block. Edward-Tufte-grade typography. */
+blockquote {
+  hanging-punctuation: first last;
 }
 
 /* Hairline gold divider */
@@ -104,4 +140,257 @@ body {
 ::selection {
   background: rgba(212, 175, 55, 0.35);
   color: var(--zone-bone);
+}
+
+/* ============================================
+   Focus-visible ring · keyboard accessibility
+   Brand-matched (gold), only shows on keyboard nav
+   ============================================ */
+:where(a, button, input, select, textarea, [tabindex]):focus-visible {
+  outline: 2px solid var(--zone-gold);
+  outline-offset: 2px;
+  border-radius: 1px;
+}
+
+/* Skip-link helper (hidden until focused) */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 1rem;
+  z-index: 999;
+}
+.skip-link:focus {
+  left: 1rem;
+  padding: 0.5rem 1rem;
+  background: var(--zone-gold);
+  color: var(--zone-navy);
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+}
+
+/* ============================================
+   Scintillation · empty-seat shimmer on /leaderboard
+   1-2 random seats glint per cycle, makes wall feel alive
+   ============================================ */
+@keyframes scintillate {
+  0%, 92%, 100% { opacity: 1; }
+  94% {
+    opacity: 1;
+    box-shadow: inset 0 0 0 1px rgba(212, 175, 55, 0.25);
+  }
+  96% {
+    opacity: 0.95;
+    box-shadow: inset 0 0 0 1px rgba(212, 175, 55, 0.45);
+  }
+}
+
+.scintillate {
+  animation: scintillate 8s ease-in-out infinite;
+}
+
+/* Stagger the scintillation so seats glint at different times */
+.scintillate-1 { animation-delay: 0s; }
+.scintillate-2 { animation-delay: 1.3s; }
+.scintillate-3 { animation-delay: 2.7s; }
+.scintillate-4 { animation-delay: 4.1s; }
+.scintillate-5 { animation-delay: 5.5s; }
+.scintillate-6 { animation-delay: 6.8s; }
+
+/* Respect users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .scintillate,
+  .shimmer {
+    animation: none;
+  }
+}
+
+/* ============================================
+   Chip-pop · native CSS spring on footer version chip
+   Uses linear() easing — Baseline since 2024.
+   Gives the gold heartbeat dot a single physical bounce
+   on hover. Zero JS.
+   ============================================ */
+@keyframes chip-pop {
+  0%   { transform: scale(1); }
+  100% { transform: scale(1.08); }
+}
+.chip-pop:hover .chip-dot {
+  animation: chip-pop 320ms linear(
+    0, 0.4 8%, 0.9 24%, 1.12 38%, 1.04 52%, 1.0 68%, 1.0
+  ) forwards;
+}
+
+/* ============================================
+   Scroll-driven reveal · gold hairline draws under
+   each section heading on /audit (or any .section-reveal)
+   as the viewer scrolls past. Native CSS scroll-driven
+   animations — compositor thread, smooth even mid-sim.
+   ============================================ */
+@supports (animation-timeline: view()) {
+  .section-reveal::after {
+    content: "";
+    display: block;
+    height: 1px;
+    margin-top: 0.5rem;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(212, 175, 55, 0.55),
+      transparent
+    );
+    transform-origin: left;
+    transform: scaleX(0);
+    animation: rule-in linear both;
+    animation-timeline: view();
+    animation-range: entry 10% cover 30%;
+  }
+  @keyframes rule-in {
+    to {
+      transform: scaleX(1);
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chip-pop:hover .chip-dot {
+    animation: none;
+  }
+  .section-reveal::after {
+    animation: none;
+    transform: scaleX(1);
+  }
+}
+
+/* ============================================
+   Print stylesheet · /audit is meant to be
+   screenshotted + shared. Make Cmd+P output a clean
+   academic PDF — invert dark mode, hide chrome,
+   disable animations. Very few sites do this — high
+   craft signal.
+   ============================================ */
+@media print {
+  /* Hide chrome — nav, scarcity strip, footer, skip-link */
+  nav,
+  footer,
+  .skip-link,
+  [data-print-hide="true"] {
+    display: none !important;
+  }
+
+  /* Invert dark mode → light academic paper */
+  html {
+    color-scheme: light !important;
+    background: #ffffff !important;
+  }
+  html body {
+    background: #ffffff !important;
+    color: #111111 !important;
+    font-feature-settings: normal;
+  }
+
+  /* Background gradient → off */
+  body {
+    background-image: none !important;
+  }
+
+  /* Disable all animations */
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+
+  /* Convert brand colors to print-friendly equivalents */
+  .text-gold,
+  .text-gold\/70,
+  .text-gold\/80,
+  .text-gold\/60,
+  .text-gold\/50 {
+    color: #7a5d00 !important;
+  }
+  .text-bone,
+  .text-mute,
+  .text-mute\/70,
+  .text-mute\/80,
+  .text-mute\/60,
+  .text-mute\/50,
+  .text-mute\/40 {
+    color: #1a1a1a !important;
+  }
+
+  /* Code blocks: light bg, dark text */
+  code,
+  pre {
+    background: #f3f3f3 !important;
+    color: #111 !important;
+    border-color: #cccccc !important;
+  }
+
+  /* Borders: visible gray on white */
+  [class*="border-line"],
+  [class*="border-gold"] {
+    border-color: #999999 !important;
+  }
+
+  /* Backgrounds: transparent or white */
+  [class*="bg-slate"],
+  [class*="bg-ink"],
+  [class*="bg-navy"] {
+    background: transparent !important;
+  }
+
+  /* Section breaks */
+  section,
+  article {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  /* Hide CTAs / interactive elements in print */
+  button,
+  [role="button"] {
+    display: none !important;
+  }
+
+  /* Make links visible as URLs in print (academic style) */
+  a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.85em;
+    color: #555;
+    font-weight: normal;
+  }
+
+  /* Show print-only blocks (hidden by default) */
+  .print-only {
+    display: block !important;
+  }
+
+  /* Tabular numerics survive print — keep stat alignment */
+  .tabular,
+  .font-mono,
+  [class*="tabular"] {
+    font-variant-numeric: tabular-nums lining-nums !important;
+  }
+
+  /* Page setup — A4 with academic margins */
+  @page {
+    size: A4;
+    margin: 2cm 2cm 2.4cm 2cm;
+  }
+
+  /* Keep section headers with their content */
+  h1, h2, h3 {
+    break-after: avoid-page;
+  }
+}
+
+/* Hide print-only blocks on screen */
+@media screen {
+  .print-only {
+    display: none;
+  }
 }

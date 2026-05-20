@@ -3,6 +3,7 @@
 import { useActionState } from "react";
 import { useFormStatus } from "react-dom";
 import { reserveSpot, type WaitlistResult } from "@/lib/waitlist";
+import CopyLinkButton from "@/components/CopyLinkButton";
 
 // ── Submit button — disables while pending, shows spinner ───
 function SubmitButton() {
@@ -23,11 +24,26 @@ function SubmitButton() {
 }
 
 // ── Main form ──────────────────────────────────────────
-export default function WaitlistForm() {
+type WaitlistFormProps = {
+  // Aggregate waitlist count fetched server-side. -1 means the DB call
+  // failed; in that case we hide the indicator entirely rather than
+  // showing a misleading "0".
+  waitlistCount?: number;
+  // Channel-attribution tag captured from URL ?ref=… on /founders.
+  // Stored in DB as `source` so Tim's future admin view can group by
+  // share channel. Falls back to a default if not provided.
+  refSource?: string;
+};
+
+export default function WaitlistForm({
+  waitlistCount = -1,
+  refSource,
+}: WaitlistFormProps) {
   const [state, formAction] = useActionState<WaitlistResult | null, FormData>(
     reserveSpot,
     null
   );
+  const showLiveCount = Number.isFinite(waitlistCount) && waitlistCount >= 0;
 
   // ── Success state ────────────────────────────────────
   if (state?.ok) {
@@ -47,9 +63,23 @@ export default function WaitlistForm() {
           當付款系統正式開放(預計 Q3 2026),我們會優先通知您。
           您的位置已被保留。
         </p>
-        <p className="font-mono text-mute/50 text-[10px] tracking-[0.3em] mt-8">
+        <p className="font-mono text-mute text-[10px] tracking-[0.3em] mt-8">
           目前不收費 · 不綁定 · 隨時可退出
         </p>
+
+        {/* Commitment-consistency: ride the momentum.
+            User just made a small commitment (email). They're now in
+            highest-affinity state. The lowest-friction next action is
+            sharing the URL — let them do it without extra friction.
+            The refTag tags this share back to this user's queue position
+            so future signups via this URL can be attributed in DB. */}
+        <div className="mt-10 pt-6 border-t border-line/40">
+          <p className="font-mono text-mute text-[10px] tracking-[0.3em] mb-4">
+            把這扇門傳給可能在意的朋友 ·
+            <span lang="en"> SHARE THE WALL</span>
+          </p>
+          <CopyLinkButton refTag={`reserve-${pos}`} />
+        </div>
       </div>
     );
   }
@@ -60,15 +90,38 @@ export default function WaitlistForm() {
       action={formAction}
       className="bg-slate/70 border border-gold/40 glow-soft p-8 sm:p-10"
     >
-      <p className="font-mono text-gold text-[10px] tracking-[0.4em] mb-2">
-        創始會員 · 預售等候名單
-      </p>
+      {/* Hidden channel-attribution tag. Captures ?ref= from URL so the
+          DB knows which share channel produced this signup. */}
+      {refSource && <input type="hidden" name="ref" value={refSource} />}
+      <div className="flex items-center justify-between gap-3 flex-wrap mb-2">
+        <p className="font-mono text-gold text-[10px] tracking-[0.4em]">
+          創始會員 · 預售等候名單
+        </p>
+        {showLiveCount && (
+          <p
+            lang="en"
+            className="font-mono text-mute text-[10px] tracking-[0.3em] flex items-center gap-2"
+            aria-label={`Live waitlist count: ${waitlistCount} readers`}
+          >
+            <span
+              className="w-1 h-1 rounded-full bg-gold/80 shrink-0"
+              style={{ boxShadow: "0 0 6px rgba(212, 175, 55, 0.6)" }}
+              aria-hidden="true"
+            />
+            <span className="tabular">
+              WAITLIST · {waitlistCount} · LIVE
+            </span>
+          </p>
+        )}
+      </div>
       <h3 className="text-2xl sm:text-3xl text-bone font-light tracking-tight mb-2">
         留下 email,保留您的位置
       </h3>
       <p className="text-mute text-sm mb-8 leading-relaxed">
-        付款系統尚未開放。先進入等候名單,我們會在正式開放預訂時 email
-        您。**不收費、不綁定、隨時可退出。**
+        付款系統尚未開放。先進入等候名單,我們會在正式開放預訂時 email 您。
+        <span className="text-bone font-medium">
+          {" "}不收費、不綁定、隨時可退出。
+        </span>
       </p>
 
       {/* Email field */}
@@ -82,7 +135,7 @@ export default function WaitlistForm() {
           required
           placeholder="you@example.com"
           autoComplete="email"
-          className="w-full bg-ink/60 border border-line/70 focus:border-gold/70 text-bone px-4 py-3 outline-none transition-colors placeholder:text-mute/40 font-mono text-sm"
+          className="w-full bg-ink/60 border border-line/70 focus:border-gold/70 text-bone px-4 py-3 outline-none transition-colors placeholder:text-mute/70 font-mono text-sm"
         />
       </label>
 
@@ -96,7 +149,7 @@ export default function WaitlistForm() {
           name="name"
           placeholder="Tim"
           autoComplete="given-name"
-          className="w-full bg-ink/60 border border-line/70 focus:border-gold/70 text-bone px-4 py-3 outline-none transition-colors placeholder:text-mute/40 font-mono text-sm"
+          className="w-full bg-ink/60 border border-line/70 focus:border-gold/70 text-bone px-4 py-3 outline-none transition-colors placeholder:text-mute/70 font-mono text-sm"
         />
       </label>
 
@@ -107,11 +160,13 @@ export default function WaitlistForm() {
         <p className="mt-4 font-mono text-loss text-[10px] tracking-[0.3em] text-center">
           {state.error === "missing_email"
             ? "請填寫 EMAIL"
-            : "EMAIL 格式不正確"}
+            : state.error === "invalid_email"
+            ? "EMAIL 格式不正確"
+            : "系統暫時無法處理 · 請稍後再試"}
         </p>
       )}
 
-      <p className="font-mono text-mute/50 text-[10px] tracking-[0.25em] mt-6 text-center">
+      <p className="font-mono text-mute text-[10px] tracking-[0.25em] mt-6 text-center">
         我們永遠不會分享您的 email · 隨時可退出
       </p>
     </form>

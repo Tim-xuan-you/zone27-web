@@ -14,6 +14,8 @@ export default function PrivacyPage() {
     <div className="flex flex-col flex-1 min-h-screen">
       <Nav />
 
+      <main id="main">
+
       {/* ── HERO ─────────────────────────────────── */}
       <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pt-20 pb-12 text-center">
         <p className="font-mono text-gold text-[10px] tracking-[0.45em] mb-8">
@@ -189,6 +191,8 @@ export default function PrivacyPage() {
           閱讀服務條款 →
         </Link>
       </section>
+
+      </main>
 
       <Footer />
     </div>

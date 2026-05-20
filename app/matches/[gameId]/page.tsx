@@ -4,7 +4,23 @@ import type { Metadata } from "next";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import MatchSimulator from "@/components/MatchSimulator";
-import { getMatchById, getAllMatchIds, type Match } from "@/lib/matches";
+import {
+  getMatchById,
+  getAllMatchIds,
+  isMatchDataStale,
+  type Match,
+} from "@/lib/matches";
+import {
+  FOUNDERS_TOTAL,
+  FOUNDERS_CLAIMED,
+  FOUNDERS_NEXT,
+  formatBadge,
+} from "@/lib/founders-stats";
+
+// ── ISR · Re-render daily so updates to lib/matches.ts ship within
+// 24h without a full redeploy. Pairs with isMatchDataStale() rendering
+// an "ARCHIVED" badge when data is no longer today's slate.
+export const revalidate = 86400; // 24 hours
 
 // ── Pre-render all match pages at build time ───────────
 export function generateStaticParams() {
@@ -43,6 +59,8 @@ export default async function MatchDetailPage({
     <div className="flex flex-col flex-1 min-h-screen">
       <Nav active="matches" />
 
+      <main id="main">
+
       {/* ── BREADCRUMB ─────────────────────────────── */}
       <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pt-10">
         <div className="flex items-center gap-2 font-mono text-[10px] tracking-[0.3em] text-mute">
@@ -60,11 +78,19 @@ export default async function MatchDetailPage({
 
       {/* ── HERO: TEAMS + META ─────────────────────── */}
       <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pt-10 pb-6">
-        <div className="flex items-center gap-3 mb-8">
+        <div className="flex items-center gap-3 mb-8 flex-wrap">
           <span className="w-1.5 h-1.5 rounded-full bg-gold shimmer" />
           <span className="font-mono text-gold text-[10px] tracking-[0.35em]">
             LIVE AI MODEL · {m.league} · {m.date}
           </span>
+          {isMatchDataStale(m) && (
+            <span
+              className="font-mono text-[9px] tracking-[0.3em] px-1.5 py-0.5 border border-mute/60 text-mute ml-2"
+              title="本場資料寫入時間早於今日 — 為 archived 範例資料"
+            >
+              DATA · ARCHIVED
+            </span>
+          )}
         </div>
 
         <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-6 sm:gap-12">
@@ -193,7 +219,7 @@ export default async function MatchDetailPage({
             <ScoreRow key={s.score} rank={i + 1} score={s.score} pct={s.probability} />
           ))}
         </div>
-        <p className="font-mono text-mute/60 text-[10px] tracking-[0.25em] mt-6">
+        <p className="font-mono text-mute text-[10px] tracking-[0.25em] mt-6">
           AGGREGATED FROM 10,000 SIMULATED FULL GAMES.
         </p>
       </section>
@@ -252,24 +278,28 @@ export default async function MatchDetailPage({
         <MatchSimulator key={m.id} match={m} />
       </section>
 
-      {/* ── DISCUSSION LOCK ────────────────────────── */}
+      {/* ── DISCUSSION LOCK (pre-launch · honest state) ─── */}
       <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-20">
         <div className="bg-slate/40 border border-gold/30 p-10 text-center">
           <p className="font-mono text-gold text-[10px] tracking-[0.4em] mb-4">
-            BLACK CARD · LIVE DEBATE
+            PRE-LAUNCH · BLACK CARD CHAT
           </p>
           <h3 className="text-2xl text-bone font-light tracking-tight mb-3">
-            7 位創始會員正在熱議這場比賽
+            即時討論室將在創始名冊滿員後上線
           </h3>
-          <p className="text-mute text-sm mb-8 max-w-md mx-auto">
-            黑金會員專屬即時討論室。看 #001 ~ #007 的創始 ID
-            如何拆解今晚 AI 模型的關鍵變數。
+          <p className="text-mute text-sm mb-4 max-w-md mx-auto leading-relaxed">
+            僅限 {formatBadge(1)} ~ {formatBadge(FOUNDERS_TOTAL)} 編號徽章持有者進入,
+            專注拆解每晚的 AI 模型輸出。沒有 LINE 群組黑箱,沒有刪文截圖。
+          </p>
+          <p className="font-mono text-mute/70 text-[10px] tracking-[0.3em] mb-8 tabular">
+            CURRENT · {FOUNDERS_CLAIMED} / {FOUNDERS_TOTAL} FORGED ·
+            NEXT IS {formatBadge(FOUNDERS_NEXT)}
           </p>
           <Link
             href="/founders"
             className="inline-block px-8 py-3 bg-gold text-navy text-xs tracking-[0.3em] hover:bg-gold-soft transition-colors"
           >
-            NT$ 2,700 解鎖終身會員 →
+            加入創始名冊 →
           </Link>
         </div>
       </section>
@@ -283,6 +313,8 @@ export default async function MatchDetailPage({
           ← 回到今日賽事板
         </Link>
       </section>
+
+      </main>
 
       <Footer />
     </div>

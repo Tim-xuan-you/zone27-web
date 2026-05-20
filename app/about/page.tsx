@@ -2,6 +2,8 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
+import RelatedReading from "@/components/RelatedReading";
+import { FOUNDERS_NEXT, formatBadge } from "@/lib/founders-stats";
 
 export const metadata: Metadata = {
   title: "About — 我們不是博彩公司,是相信數字比運氣誠實的棒球迷",
@@ -13,6 +15,8 @@ export default function AboutPage() {
   return (
     <div className="flex flex-col flex-1 min-h-screen">
       <Nav active="about" />
+
+      <main id="main">
 
       {/* ── HERO ─────────────────────────────────── */}
       <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pt-24 pb-16 text-center">
@@ -216,21 +220,29 @@ export default function AboutPage() {
         </p>
       </Chapter>
 
+      <RelatedReading currentPath="/about" />
+
       {/* ── FINAL CTA ────────────────────────────── */}
       <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 py-20 text-center border-t border-line/40">
         <p className="font-mono text-gold text-[10px] tracking-[0.4em] mb-6">
           THE 27 ARE BEING FORGED.
         </p>
         <h3 className="text-3xl sm:text-4xl text-bone font-light tracking-tight">
-          您準備好成為 #008 嗎?
+          您準備好成為{" "}
+          <span className="text-gold tabular mx-1">
+            {formatBadge(FOUNDERS_NEXT)}
+          </span>{" "}
+          嗎?
         </h3>
         <Link
           href="/founders"
           className="inline-block mt-10 px-12 py-4 bg-gold text-navy text-xs tracking-[0.3em] hover:bg-gold-soft transition-colors font-medium"
         >
-          認領我的編號 →
+          加入創始名冊 →
         </Link>
       </section>
+
+      </main>
 
       <Footer />
     </div>

@@ -1,4 +1,5 @@
 import { ImageResponse } from "next/og";
+import { BRAND, OG_SIZE, OG_CONTENT_TYPE } from "@/lib/brand";
 
 // ── ZONE 27 · /lab Dynamic OG ──────────────────────────
 // 當有人把 https://zone27-web.vercel.app/lab 貼到任何平台,
@@ -6,8 +7,8 @@ import { ImageResponse } from "next/og";
 // 直接是一張「點進來會看到很酷的東西」的視覺承諾。
 // ─────────────────────────────────────────────────────
 
-export const size = { width: 1200, height: 630 };
-export const contentType = "image/png";
+export const size = OG_SIZE;
+export const contentType = OG_CONTENT_TYPE;
 export const alt = "ZONE 27 · Live AI Laboratory";
 
 export default async function LabOgImage() {
@@ -17,7 +18,7 @@ export default async function LabOgImage() {
         style={{
           width: "100%",
           height: "100%",
-          background: "#0F1A2E",
+          background: BRAND.navy,
           backgroundImage:
             "radial-gradient(ellipse 80% 50% at 50% 0%, rgba(212,175,55,0.16), transparent 60%), radial-gradient(ellipse 80% 50% at 50% 100%, rgba(212,175,55,0.08), transparent 60%)",
           display: "flex",
@@ -41,7 +42,7 @@ export default async function LabOgImage() {
           <span
             style={{
               fontSize: 26,
-              color: "#D4AF37",
+              color: BRAND.gold,
               letterSpacing: "0.22em",
               fontWeight: 500,
             }}
@@ -51,7 +52,7 @@ export default async function LabOgImage() {
           <span
             style={{
               fontSize: 26,
-              color: "#F5F2EA",
+              color: BRAND.bone,
               letterSpacing: "0.22em",
               fontWeight: 500,
             }}
@@ -84,7 +85,7 @@ export default async function LabOgImage() {
           <span
             style={{
               fontSize: 12,
-              color: "#D4AF37",
+              color: BRAND.gold,
               letterSpacing: "0.3em",
               border: "1px solid rgba(212,175,55,0.4)",
               padding: "2px 6px",
@@ -118,7 +119,7 @@ export default async function LabOgImage() {
           <div
             style={{
               fontSize: 230,
-              color: "#D4AF37",
+              color: BRAND.gold,
               fontWeight: 300,
               letterSpacing: "-0.04em",
               lineHeight: 1,
@@ -132,7 +133,7 @@ export default async function LabOgImage() {
           <div
             style={{
               fontSize: 28,
-              color: "#F5F2EA",
+              color: BRAND.bone,
               fontWeight: 300,
               letterSpacing: "-0.01em",
               marginTop: 8,
@@ -183,7 +184,9 @@ export default async function LabOgImage() {
           <span style={{ color: "rgba(245,242,234,0.55)", display: "flex" }}>
             REAL AT-BAT ENGINE · v0.2
           </span>
-          <span style={{ color: "#D4AF37", fontWeight: 500, display: "flex" }}>
+          <span
+            style={{ color: BRAND.gold, fontWeight: 500, display: "flex" }}
+          >
             ▶ RUN IT YOURSELF →
           </span>
         </div>

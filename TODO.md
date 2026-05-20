@@ -6,12 +6,34 @@
 
 ---
 
+## 🌙 您休息時 Claude 跑了九輪深度迭代
+
+**完整報告:[WHILE-YOU-WERE-OUT.md](WHILE-YOU-WERE-OUT.md)**
+**已知未做事項:[KNOWN-ISSUES.md](KNOWN-ISSUES.md)** — 給您明天 onboarding 看「我知道但沒做」的清單
+
+底線:Build ✅ Lint ✅ **26 routes** ✅。在三條鐵律內,**沒做任何 SEO / 社群動作**。
+
+九輪總結:
+- **Round 1-2** · macro polish + trust artifact(ScarcityStrip · /audit Model Report · /founders 對比表 + math + FAQ)
+- **Round 3-4** · integrity 修 + craft polish(假社群清白 · Environmental Impact · 印刷樣式 · slashed-zero)
+- **Round 5-6** · 真實 bug 抓 + 可訪問性債(SSG 凍結炸彈 · WCAG AA 22→0 · lang="en")
+- **Round 7-8** · 可分享資產 + 內容網路(/audit OG · 矛盾引言 · CopyLinkButton · Related Reading hub-and-spoke)
+- **Round 9** · 收尾文件化(KNOWN-ISSUES.md · perf audit · 最後 lang sweep)
+
+**明早您坐到電腦前,建議流程:**
+1. `npm run dev` → 開 http://localhost:3000 看實際效果
+2. 翻 [KNOWN-ISSUES.md](KNOWN-ISSUES.md) 知道我刻意沒做什麼 + 為什麼
+3. 跟我說「**開始 ① Supabase**」開始下面的事項
+4. 不喜歡任何改動,跟我說我立刻改
+
+---
+
 ## 🚀 開新對話窗時 · 複製這段過去就好
 
-**為什麼需要這段:** 新的 Claude 對話沒有我們累積 27 個版本的脈絡。
+**為什麼需要這段:** 新的 Claude 對話沒有累積 16 輪的脈絡。
 這段 prompt 讓新 Claude 一秒接上,不必重講歷史。
 
-**Copy-paste 完整 prompt:**
+**Copy-paste 完整 prompt(v2 · 含 2026-05-19 晚 16 輪迭代脈絡):**
 
 ```
 我們在繼續開發 ZONE 27 — 給台灣硬核棒球迷打造的暗黑黃金級量化分析品牌。
@@ -20,27 +42,50 @@
 🌐 正式網址:https://zone27-web.vercel.app
 📦 GitHub:https://github.com/Tim-xuan-you/zone27-web
 
-請先讀這兩份必讀文件:
-- CLAUDE.md → 我們的三條鐵律(SEO/社群凍結 + 預算分級)
-- TODO.md → 我目前的代辦事項清單
+請按以下順序讀完(每份檔案都有重要脈絡):
 
-目前狀態:v0.27 已上線,Vercel ↔ GitHub auto-deploy 已啟動。
-24 個 routes,MLB Stats API 真實資料 + Lab Monte Carlo 引擎合體上線。
+1. CLAUDE.md → 三條鐵律(SEO/社群凍結 + 預算分級 + 品牌/設計鐵律)
+2. AGENTS.md → Next.js 16 breaking changes 警告(別寫過時程式碼)
+3. WHILE-YOU-WERE-OUT.md → 上一晚 16 輪研究 + 迭代完整紀錄
+4. KNOWN-ISSUES.md → 已知但刻意延後的事項(別重新挖)
+5. ADMIN-PLAN.md → 會員管理 + 數據三階段策略
+6. TODO.md → 我的代辦事項清單(您正在讀這份)
+
+目前技術狀態:
+- 28 個 routes(含 7 個 custom OG cards)
+- Build ✅ Lint ✅(0 errors / 0 warnings)
+- WCAG AA 對比 22 處 fail → 0
+- 全站 lang="en" + touch-action: manipulation + themeColor
+- 完整 trust artifact 體系(/audit Model Report + /methodology)
+- 完整轉換體系(/founders + ScarcityStrip + CopyLinkButton)
+- 防禦性編程(matches[0] 空陣列 · button type · input mobile UX)
+- Footer 仍顯示 v0.27 · 16 輪迭代未升版 chip(您決定何時 bump)
+- 全部未 commit · 等我手動 push 才會部署
+
+商業狀態:
+- Founders 27 設定:NT$ 2,700 一次性 · 限量 270 名 · 5.4 個月 break-even
+- 7 位 forged · 263 名額 · 下一個 #008(寫在 lib/founders-stats.ts)
+- Supabase / Resend 還沒接(我明天會跟您做 ① · 見 TODO.md)
+- BLACK CARD 預計 2026 Q3 上線
 
 我的互動風格:常說「沒想法...您決定!」— 您在三條鐵律內全權決定最高槓桿動作。
-SEO/社群凍結令模糊指令絕不解封。
+SEO/社群凍結令對模糊指令絕不解封。
 預算 TIER 1(免費 + 註冊 + 小錢)您可主動推進並引導我;
 TIER 2(交易費 + 中等月費)必須問我;
 TIER 3(NT$3K 以上 / 法律 / 廣告)絕不主動建議。
 
-今天我要做的事:[ 這裡填入您今天要的具體任務,或留空 ]
+我可能在電腦前 · 也可能在外面用手機 — 如果我訊息很短/很 casual,
+請先問「您現在在電腦前嗎?」再決定要不要 walk-through 註冊步驟。
+
+今天我要做的事:[ 這裡填入您今天要的具體任務,或留空讓 Claude 接 TODO ]
 ```
 
-**簡短版**(如果上面太長):
+**最短版**(如果上面太長 · 但會少很多脈絡):
 
 ```
 繼續 ZONE 27 開發。專案在 C:\Users\tatay\Desktop\Second\zone27-web。
-請先讀 CLAUDE.md 和 TODO.md。目前 v0.27,自動部署已啟動。
+請依序讀 CLAUDE.md → AGENTS.md → WHILE-YOU-WERE-OUT.md → KNOWN-ISSUES.md → TODO.md。
+已 16 輪迭代,Build/Lint 雙綠,28 routes,全部未 commit。
 今天我要做:① Supabase 註冊。
 ```
 

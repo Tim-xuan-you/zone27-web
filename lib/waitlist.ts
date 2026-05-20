@@ -1,28 +1,27 @@
 "use server";
 
 // ── ZONE 27 · Founders 27 Pre-launch Waitlist ──────────
-// 在我們架好支付系統與正式資料庫之前的中繼方案。
+// Server Action that persists waitlist signups to Supabase.
 //
-// 流程:
-//   1. 訪客填 email(+ 可選 name) → reserveSpot()
-//   2. 驗證 email 格式
-//   3. 把報名資訊寫到 console.log → Vercel 後台 logs 永久保存
-//   4. 回傳 queue position 給前端
-//
-// 友善降級:目前用 module-level counter,冷啟動會重置。
-// 升級到 Vercel KV / Upstash Redis 只要把 counter 與 dedup
-// 邏輯抽出來 — 介面(reserveSpot 簽名)保持不變。
+// Flow:
+//   1. Visitor submits email (+ optional name) → reserveSpot()
+//   2. Email is validated client-side here for fast feedback
+//   3. We call public.reserve_waitlist_spot() RPC — the SQL function
+//      validates again, dedupes by email, and returns the queue position
+//   4. The RPC runs as security definer, so anon never touches the table
+//      directly — all access goes through this single doorway
+//   5. We also console.log to Vercel for defense in depth
 // ─────────────────────────────────────────────────────
 
-let queueCounter = 0;
-const seenEmails = new Set<string>();
+import { revalidatePath } from "next/cache";
+import { supabase } from "@/lib/supabase";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
 export type WaitlistResult =
   | { ok: true; queuePos: number; alreadyReserved: false }
   | { ok: true; queuePos: number; alreadyReserved: true }
-  | { ok: false; error: "missing_email" | "invalid_email" };
+  | { ok: false; error: "missing_email" | "invalid_email" | "server_error" };
 
 export async function reserveSpot(
   _prev: WaitlistResult | null,
@@ -30,6 +29,7 @@ export async function reserveSpot(
 ): Promise<WaitlistResult> {
   const emailRaw = formData.get("email");
   const nameRaw = formData.get("name");
+  const refRaw = formData.get("ref");
 
   if (typeof emailRaw !== "string" || emailRaw.trim().length === 0) {
     return { ok: false, error: "missing_email" };
@@ -43,25 +43,64 @@ export async function reserveSpot(
       ? nameRaw.trim()
       : null;
 
-  // Already on the list? Be friendly, return the same-ish slot
-  // (we can't know their real prior slot in this minimal version)
-  if (seenEmails.has(email)) {
-    console.log(
-      `[ZONE27 · WAITLIST · DUPE] email=${email} ts=${new Date().toISOString()}`
+  // Channel attribution: if the visitor arrived via ?ref=<tag> on /founders,
+  // record that as the source. Falls back to a generic identifier so the
+  // DB always knows the entry came from the form (not a manual insert).
+  // Sanitize: only allow [a-z0-9-]{1,40} to prevent injection / abuse.
+  const refClean =
+    typeof refRaw === "string" && /^[a-z0-9-]{1,40}$/i.test(refRaw)
+      ? refRaw.toLowerCase()
+      : null;
+  const source = refClean ?? "founders-page";
+
+  const { data, error } = await supabase.rpc("reserve_waitlist_spot", {
+    p_email: email,
+    p_name: name,
+    p_source: source,
+  });
+
+  if (error) {
+    const message = error.message ?? "";
+    if (message.includes("missing_email")) {
+      return { ok: false, error: "missing_email" };
+    }
+    if (message.includes("invalid_email")) {
+      return { ok: false, error: "invalid_email" };
+    }
+    console.error(
+      `[ZONE27 · WAITLIST · ERROR] email=${email} error=${message} ts=${new Date().toISOString()}`
     );
-    return { ok: true, queuePos: queueCounter, alreadyReserved: true };
+    return { ok: false, error: "server_error" };
   }
 
-  queueCounter++;
-  seenEmails.add(email);
+  const row = Array.isArray(data) ? data[0] : data;
+  const queuePos = Number(row?.queue_position);
+  if (!Number.isFinite(queuePos)) {
+    console.error(
+      `[ZONE27 · WAITLIST · ERROR] malformed RPC response email=${email} data=${JSON.stringify(
+        data
+      )} ts=${new Date().toISOString()}`
+    );
+    return { ok: false, error: "server_error" };
+  }
 
-  // This log is the persistence layer for now.
-  // Tim can recover all signups from Vercel project → Logs → Filter "ZONE27 · WAITLIST".
+  const alreadyReserved = row?.was_existing === true;
+
   console.log(
-    `[ZONE27 · WAITLIST · NEW] queue=${queueCounter} email=${email} name=${
+    `[ZONE27 · WAITLIST · ${
+      alreadyReserved ? "DUPE" : "NEW"
+    }] queue=${queuePos} email=${email} name=${
       name ?? "—"
     } ts=${new Date().toISOString()}`
   );
 
-  return { ok: true, queuePos: queueCounter, alreadyReserved: false };
+  if (alreadyReserved) {
+    return { ok: true, queuePos, alreadyReserved: true };
+  }
+
+  // Purge the /founders ISR cache so the WAITLIST · N · LIVE counter
+  // reflects this new signup on the next visit, not 60 seconds later.
+  revalidatePath("/founders");
+
+  return { ok: true, queuePos, alreadyReserved: false };
 }

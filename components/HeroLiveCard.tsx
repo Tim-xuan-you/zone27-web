@@ -63,16 +63,24 @@ export default function HeroLiveCard({ match }: { match: Match }) {
   const homeFav = homePct >= awayPct;
 
   return (
-    <div className="bg-slate/70 border border-line/80 glow-soft p-8 sm:p-12">
+    <article
+      aria-label={`Live Monte Carlo simulation: ${match.home.name} versus ${match.away.name}`}
+      className="bg-slate/70 border border-line/80 glow-soft p-8 sm:p-12"
+    >
       {/* Card header */}
       <div className="flex items-center justify-between mb-10 flex-wrap gap-3">
         <div className="flex items-center gap-3">
           <span
+            aria-hidden="true"
             className={`w-1.5 h-1.5 rounded-full bg-gold ${
               phase === "simulating" ? "shimmer" : ""
             } glow-gold`}
           />
-          <span className="font-mono text-gold text-[10px] tracking-[0.35em]">
+          <span
+            role="status"
+            aria-live="polite"
+            className="font-mono text-gold text-[10px] tracking-[0.35em]"
+          >
             {phase === "simulating"
               ? "● 即時模擬中"
               : "● AI 模型 · 已收斂"}
@@ -164,7 +172,7 @@ export default function HeroLiveCard({ match }: { match: Match }) {
       <div className="mt-10 grid grid-cols-2 gap-6 pt-6 border-t border-line/60">
         <div>
           <p className="font-mono text-mute text-[10px] tracking-[0.3em] mb-2">
-            STARTING PITCHER
+            HOME STARTER
           </p>
           <p className="text-bone text-lg">{match.home.pitcher.name}</p>
           <p className="font-mono text-gold/70 text-xs tabular mt-1">
@@ -173,7 +181,7 @@ export default function HeroLiveCard({ match }: { match: Match }) {
         </div>
         <div className="text-right">
           <p className="font-mono text-mute text-[10px] tracking-[0.3em] mb-2">
-            STARTING PITCHER
+            AWAY STARTER
           </p>
           <p className="text-bone text-lg">{match.away.pitcher.name}</p>
           <p className="font-mono text-gold/70 text-xs tabular mt-1">
@@ -197,6 +205,6 @@ export default function HeroLiveCard({ match }: { match: Match }) {
           完整分析 →
         </Link>
       </div>
-    </div>
+    </article>
   );
 }

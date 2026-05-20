@@ -3,6 +3,7 @@ import Link from "next/link";
 const SECONDARY_LINKS = [
   { label: "關於", href: "/about", external: false },
   { label: "方法論", href: "/methodology", external: false },
+  { label: "模型報告", href: "/audit", external: false },
   { label: "詞彙表", href: "/glossary", external: false },
   { label: "常見問題", href: "/faq", external: false },
   { label: "版本紀錄", href: "/changelog", external: false },
@@ -51,7 +52,7 @@ export default function Footer() {
             <Link
               key={link.href}
               href={link.href}
-              className="font-mono text-mute/60 hover:text-gold/80 text-[9px] tracking-[0.35em] transition-colors"
+              className="font-mono text-mute hover:text-gold text-[9px] tracking-[0.35em] transition-colors"
             >
               {link.label}
             </Link>
@@ -66,15 +67,16 @@ export default function Footer() {
             <span className="text-mute text-xs ml-2">© 2026</span>
           </div>
           <p className="font-mono text-mute/70 text-[10px] tracking-[0.25em] text-center">
-            為讀懂數字的人而建 · BUILT FOR THOSE WHO READ THE NUMBERS
+            為讀懂數字的人而建 ·{" "}
+            <span lang="en">BUILT FOR THOSE WHO READ THE NUMBERS</span>
           </p>
           <a
             href="/changelog"
-            className="inline-flex items-center gap-2 font-mono text-[10px] tracking-[0.3em] text-mute hover:text-gold transition-colors"
+            className="chip-pop inline-flex items-center gap-2 font-mono text-[10px] tracking-[0.3em] text-mute hover:text-gold transition-colors"
             title="View full changelog"
           >
-            <span className="w-1.5 h-1.5 rounded-full bg-gold/70 glow-gold" />
-            <span>v0.27 · MLB × 引擎合體</span>
+            <span className="chip-dot w-1.5 h-1.5 rounded-full bg-gold/70 glow-gold" />
+            <span>v0.27 · 2026-05-19 TPE · MLB × 引擎合體</span>
           </a>
         </div>
       </div>

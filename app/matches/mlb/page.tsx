@@ -20,6 +20,8 @@ export default async function MlbMatchesPage() {
     <div className="flex flex-col flex-1 min-h-screen">
       <Nav />
 
+      <main id="main">
+
       {/* ── HEADER ──────────────────────────── */}
       <section className="mx-auto max-w-6xl w-full px-6 sm:px-10 pt-16 pb-10">
         <div className="flex items-baseline gap-3 mb-3 flex-wrap">
@@ -41,7 +43,7 @@ export default async function MlbMatchesPage() {
             時間以台北時區顯示 · 每 10 分鐘更新
           </p>
         </div>
-        <p className="mt-3 font-mono text-mute/60 text-[10px] tracking-[0.25em]">
+        <p className="mt-3 font-mono text-mute text-[10px] tracking-[0.25em]">
           資料來源:MLB Stats API(官方公開、完全免費) ·
           ZONE 27 不修改任何原始資料
         </p>
@@ -89,6 +91,8 @@ export default async function MlbMatchesPage() {
         </Link>
       </section>
 
+      </main>
+
       <Footer />
     </div>
   );
@@ -124,7 +128,7 @@ function MlbCard({ game }: { game: MlbGame }) {
         <span className="font-mono text-mute/70 text-[10px] tracking-[0.2em] truncate">
           {game.venue}
         </span>
-        <span className="font-mono text-mute/60 text-[9px] tracking-[0.2em] shrink-0 ml-2">
+        <span className="font-mono text-mute text-[9px] tracking-[0.2em] shrink-0 ml-2">
           {game.dateTaipei}
         </span>
       </div>
@@ -157,7 +161,7 @@ function TeamRow({
             {label}
           </span>
           <span className="text-bone text-base truncate">{team.zhName}</span>
-          <span className="font-mono text-mute/50 text-[10px] tracking-[0.2em] shrink-0">
+          <span className="font-mono text-mute text-[10px] tracking-[0.2em] shrink-0">
             {team.abbr}
           </span>
         </div>
@@ -167,7 +171,7 @@ function TeamRow({
       </div>
       {/* Probable pitcher row */}
       {team.probablePitcher && (
-        <p className="font-mono text-mute/60 text-[10px] tracking-[0.2em] mt-1 pl-[3.25rem] flex items-baseline gap-2">
+        <p className="font-mono text-mute text-[10px] tracking-[0.2em] mt-1 pl-[3.25rem] flex items-baseline gap-2">
           <span className="text-bone/80 normal-case">
             {team.probablePitcher.fullName}
           </span>

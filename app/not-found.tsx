@@ -59,7 +59,7 @@ export default function NotFound() {
         </div>
 
         {/* Tiny meta */}
-        <p className="mt-16 font-mono text-mute/50 text-[10px] tracking-[0.3em]">
+        <p className="mt-16 font-mono text-mute text-[10px] tracking-[0.3em]">
           STRIKE THREE. YOU&apos;RE OUT.
         </p>
       </section>

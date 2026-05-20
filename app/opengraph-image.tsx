@@ -1,4 +1,5 @@
 import { ImageResponse } from "next/og";
+import { BRAND, OG_SIZE, OG_CONTENT_TYPE } from "@/lib/brand";
 
 // ── ZONE 27 · Global Open Graph Image ──────────────────
 // 當任何人把 zone27-web.vercel.app 貼上 LINE、FB、Threads、Discord、Slack、Twitter
@@ -6,8 +7,8 @@ import { ImageResponse } from "next/og";
 // 1200 x 630 是 OG 標準尺寸。
 // ─────────────────────────────────────────────────────
 
-export const size = { width: 1200, height: 630 };
-export const contentType = "image/png";
+export const size = OG_SIZE;
+export const contentType = OG_CONTENT_TYPE;
 export const alt = "ZONE 27 — 不靠直覺,只看演算法";
 
 export default async function OgImage() {
@@ -17,7 +18,7 @@ export default async function OgImage() {
         style={{
           width: "100%",
           height: "100%",
-          background: "#0F1A2E",
+          background: BRAND.navy,
           backgroundImage:
             "radial-gradient(ellipse 60% 40% at 50% 0%, rgba(212,175,55,0.18), transparent 60%), radial-gradient(ellipse 60% 40% at 50% 100%, rgba(212,175,55,0.08), transparent 60%)",
           display: "flex",
@@ -41,7 +42,7 @@ export default async function OgImage() {
           <span
             style={{
               fontSize: 28,
-              color: "#D4AF37",
+              color: BRAND.gold,
               letterSpacing: "0.25em",
               fontWeight: 500,
             }}
@@ -51,7 +52,7 @@ export default async function OgImage() {
           <span
             style={{
               fontSize: 28,
-              color: "#F5F2EA",
+              color: BRAND.bone,
               letterSpacing: "0.25em",
               fontWeight: 500,
             }}
@@ -87,7 +88,7 @@ export default async function OgImage() {
           <div
             style={{
               fontSize: 110,
-              color: "#F5F2EA",
+              color: BRAND.bone,
               fontWeight: 300,
               letterSpacing: "-0.02em",
               lineHeight: 1.05,
@@ -99,7 +100,7 @@ export default async function OgImage() {
           <div
             style={{
               fontSize: 110,
-              color: "#D4AF37",
+              color: BRAND.gold,
               fontWeight: 300,
               letterSpacing: "-0.02em",
               lineHeight: 1.05,
@@ -165,13 +166,13 @@ export default async function OgImage() {
               width: 8,
               height: 8,
               borderRadius: 9999,
-              background: "#D4AF37",
+              background: BRAND.gold,
             }}
           />
           <span
             style={{
               fontSize: 16,
-              color: "#D4AF37",
+              color: BRAND.gold,
               letterSpacing: "0.35em",
             }}
           >

@@ -1,6 +1,17 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+
+// ── Viewport · themeColor + colorScheme (Next.js 16 pattern) ──
+// In Next 14+, themeColor / colorScheme were deprecated from
+// metadata and moved to a separate Viewport export. Setting
+// themeColor to deep navy makes iOS Safari address bar match
+// the brand. colorScheme: dark prevents flash-of-white on
+// initial paint and tells the OS to use dark scrollbars.
+export const viewport: Viewport = {
+  themeColor: "#0F1A2E",
+  colorScheme: "dark",
+};
 
 const geistSans = Geist({
   variable: "--font-geist-sans",

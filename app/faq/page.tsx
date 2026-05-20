@@ -2,11 +2,12 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
+import RelatedReading from "@/components/RelatedReading";
 
 export const metadata: Metadata = {
-  title: "FAQ — 預先掃雷的 12 個問題",
+  title: "FAQ — 預先掃雷的 14 個問題",
   description:
-    "ZONE 27 是什麼?是博彩嗎?Founders 27 跟 Black Card 差別?付款什麼時候開放?12 個誠實到不能再誠實的回答。",
+    "ZONE 27 是什麼?是博彩嗎?Founders 27 跟 Black Card 差別?付款什麼時候開放?14 個誠實到不能再誠實的回答 — 包括「你們會追蹤我嗎?」(不會)。",
 };
 
 type QA = {
@@ -212,6 +213,33 @@ const CATEGORIES: Category[] = [
         ),
       },
       {
+        q: "你們會追蹤我的使用行為嗎?",
+        a: (
+          <>
+            <strong className="text-bone">不會。</strong>{" "}
+            ZONE 27 沒有裝 Google Analytics、Facebook Pixel、Hotjar 錄影,
+            也沒有任何第三方追蹤 cookies。
+            <br />
+            <br />
+            您在{" "}
+            <Link href="/lab" className="text-gold underline-offset-4 hover:underline">
+              /lab
+            </Link>{" "}
+            跑過幾次 Monte Carlo、看了哪場比賽、停留多久 ——
+            只存在您自己的瀏覽器(localStorage),沒有伺服器副本。
+            <strong className="text-bone">我們連數都不數。</strong>
+            <br />
+            <br />
+            這不是技術限制,是品牌哲學。在競爭對手都在追蹤的市場,我們刻意選了相反方向。
+            完整清單見{" "}
+            <Link href="/privacy" className="text-gold underline-offset-4 hover:underline">
+              /privacy
+            </Link>{" "}
+            第 03 節。
+          </>
+        ),
+      },
+      {
         q: "我可以取消等候名單嗎?",
         a: (
           <>
@@ -244,6 +272,8 @@ export default function FaqPage() {
     <div className="flex flex-col flex-1 min-h-screen">
       <Nav />
 
+      <main id="main">
+
       {/* ── HERO ─────────────────────────────────── */}
       <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pt-20 pb-12 text-center">
         <p className="font-mono text-gold text-[10px] tracking-[0.45em] mb-8">
@@ -252,7 +282,8 @@ export default function FaqPage() {
         <h1 className="text-4xl sm:text-5xl md:text-6xl font-light leading-[1.1] tracking-tight text-bone">
           預先掃雷的
           <br />
-          <span className="text-gold">12 個問題</span>
+          <span className="text-gold tabular">{TOTAL_QAS}</span>{" "}
+          個問題
         </h1>
         <p className="mt-8 max-w-xl mx-auto text-mute leading-relaxed">
           您在 30 秒內可能會猶豫的所有問題,我們在這裡先回答完。
@@ -298,7 +329,10 @@ export default function FaqPage() {
             <span className="font-mono text-gold/70 text-[10px] tracking-[0.35em]">
               / {String(ci + 1).padStart(2, "0")}
             </span>
-            <span className="font-mono text-mute text-[10px] tracking-[0.35em]">
+            <span
+              lang="en"
+              className="font-mono text-mute text-[10px] tracking-[0.35em]"
+            >
               {c.label}
             </span>
           </div>
@@ -313,6 +347,8 @@ export default function FaqPage() {
           </div>
         </section>
       ))}
+
+      <RelatedReading currentPath="/faq" />
 
       {/* ── FINAL CTA ────────────────────────────── */}
       <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 py-16 text-center border-t border-line/40">
@@ -340,6 +376,8 @@ export default function FaqPage() {
           </Link>
         </div>
       </section>
+
+      </main>
 
       <Footer />
     </div>

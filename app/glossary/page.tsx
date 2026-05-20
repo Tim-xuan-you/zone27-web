@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
+import RelatedReading from "@/components/RelatedReading";
 
 export const metadata: Metadata = {
   title: "Glossary — 27 種棒球進階數據",
@@ -236,6 +237,8 @@ export default function GlossaryPage() {
     <div className="flex flex-col flex-1 min-h-screen">
       <Nav />
 
+      <main id="main">
+
       {/* ── HERO ─────────────────────────────────── */}
       <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pt-20 pb-12 text-center">
         <p className="font-mono text-gold text-[10px] tracking-[0.45em] mb-8">
@@ -250,6 +253,9 @@ export default function GlossaryPage() {
         <p className="mt-8 max-w-xl mx-auto text-mute leading-relaxed">
           為什麼 K/9 比三振次數重要?WHIP 為什麼是投手的金線?
           每個進階指標都用白話拆解,並附上聯盟平均與頂級數值對照。
+        </p>
+        <p className="mt-4 max-w-xl mx-auto font-mono text-gold/70 text-[10px] tracking-[0.3em]">
+          27 STATS · 27 OUTS · 27 IS THE LANGUAGE OF PRECISION
         </p>
       </section>
 
@@ -310,6 +316,8 @@ export default function GlossaryPage() {
         </section>
       ))}
 
+      <RelatedReading currentPath="/glossary" />
+
       {/* ── FINAL CTA ────────────────────────────── */}
       <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 py-16 text-center border-t border-line/40">
         <p className="font-mono text-gold text-[10px] tracking-[0.4em] mb-6">
@@ -325,6 +333,8 @@ export default function GlossaryPage() {
           進入實驗室 →
         </Link>
       </section>
+
+      </main>
 
       <Footer />
     </div>

@@ -65,7 +65,7 @@ export default function GlobalError({
 
         {/* Tiny error digest for debugging if Vercel includes it */}
         {error.digest && (
-          <p className="mt-6 font-mono text-mute/50 text-[10px] tracking-[0.25em]">
+          <p className="mt-6 font-mono text-mute text-[10px] tracking-[0.25em]">
             DIGEST · {error.digest}
           </p>
         )}
@@ -73,6 +73,7 @@ export default function GlobalError({
         {/* CTAs */}
         <div className="mt-12 flex flex-wrap gap-4 justify-center">
           <button
+            type="button"
             onClick={reset}
             className="px-8 py-3 bg-gold text-navy text-xs tracking-[0.3em] hover:bg-gold-soft transition-colors font-medium"
           >
@@ -86,7 +87,7 @@ export default function GlobalError({
           </Link>
         </div>
 
-        <p className="mt-16 font-mono text-mute/50 text-[10px] tracking-[0.3em]">
+        <p className="mt-16 font-mono text-mute text-[10px] tracking-[0.3em]">
           EVEN MONTE CARLO HAS BAD INNINGS.
         </p>
       </div>

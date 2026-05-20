@@ -1,6 +1,6 @@
 "use client";
 
-import { Suspense, useEffect, useState } from "react";
+import { Suspense, useState } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import Nav from "@/components/Nav";
@@ -131,29 +131,29 @@ function CustomLabInner() {
   const params = useSearchParams();
 
   // Read URL params once on mount, fall back to defaults
-  const [home, setHome] = useState<PitcherInput>(() => ({
+  const initialHome: PitcherInput = {
     name: params.get("h_name") ?? DEFAULT_HOME.name,
     k9: params.get("h_k9") ?? DEFAULT_HOME.k9,
     bb9: params.get("h_bb9") ?? DEFAULT_HOME.bb9,
     hr9: params.get("h_hr9") ?? DEFAULT_HOME.hr9,
-  }));
-  const [away, setAway] = useState<PitcherInput>(() => ({
+  };
+  const initialAway: PitcherInput = {
     name: params.get("a_name") ?? DEFAULT_AWAY.name,
     k9: params.get("a_k9") ?? DEFAULT_AWAY.k9,
     bb9: params.get("a_bb9") ?? DEFAULT_AWAY.bb9,
     hr9: params.get("a_hr9") ?? DEFAULT_AWAY.hr9,
-  }));
-  const [builtMatch, setBuiltMatch] = useState<Match | null>(null);
-  const [copied, setCopied] = useState(false);
+  };
+  const arrivedWithParams = params.toString().length > 0;
 
-  // If user arrived with URL params, auto-build immediately so they
-  // see the simulator without needing to press the button
-  useEffect(() => {
-    if (params.toString().length > 0 && !builtMatch) {
-      setBuiltMatch(buildCustomMatch(home, away));
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const [home, setHome] = useState<PitcherInput>(initialHome);
+  const [away, setAway] = useState<PitcherInput>(initialAway);
+  // If user arrived with URL params, auto-build on mount so they see the
+  // simulator immediately without pressing the button. Lazy init pattern —
+  // no useEffect needed.
+  const [builtMatch, setBuiltMatch] = useState<Match | null>(() =>
+    arrivedWithParams ? buildCustomMatch(initialHome, initialAway) : null
+  );
+  const [copied, setCopied] = useState(false);
 
   function applyPreset(p: Preset) {
     setHome(p.home);
@@ -198,6 +198,8 @@ function CustomLabInner() {
     <div className="flex flex-col flex-1 min-h-screen">
       <Nav active="lab" />
 
+      <main id="main">
+
       {/* ── HERO ─────────────────────────────────── */}
       <section className="mx-auto max-w-4xl w-full px-6 sm:px-10 pt-20 pb-10 text-center">
         <div className="inline-flex items-center gap-2 mb-8 font-mono text-[10px] tracking-[0.35em]">
@@ -229,6 +231,7 @@ function CustomLabInner() {
           {PRESETS.map((p) => (
             <button
               key={p.label}
+              type="button"
               onClick={() => applyPreset(p)}
               className="text-left p-4 border border-line/60 text-mute hover:border-gold/40 hover:text-bone transition-colors"
             >
@@ -265,6 +268,7 @@ function CustomLabInner() {
         {/* Action buttons */}
         <div className="mt-8 flex flex-wrap gap-3">
           <button
+            type="button"
             onClick={build}
             disabled={builtMatch !== null}
             className={`flex-1 min-w-[200px] py-4 text-xs tracking-[0.3em] font-medium transition-colors ${
@@ -277,6 +281,7 @@ function CustomLabInner() {
           </button>
           {builtMatch && (
             <button
+              type="button"
               onClick={reset}
               className="px-6 py-4 border border-line/60 text-mute hover:border-gold/40 hover:text-gold text-xs tracking-[0.3em] transition-colors"
             >
@@ -294,6 +299,7 @@ function CustomLabInner() {
               / 03 · 您的模擬
             </p>
             <button
+              type="button"
               onClick={copyShareLink}
               className={`px-5 py-2.5 font-mono text-[10px] tracking-[0.3em] transition-colors border ${
                 copied
@@ -342,6 +348,8 @@ function CustomLabInner() {
         </div>
       </section>
 
+      </main>
+
       <Footer />
     </div>
   );
@@ -371,6 +379,8 @@ function PitcherForm({
         </span>
         <input
           type="text"
+          autoComplete="off"
+          spellCheck={false}
           value={data.name}
           onChange={(e) => onChange({ ...data, name: e.target.value })}
           disabled={disabled}
@@ -436,6 +446,8 @@ function NumberField({
       </span>
       <input
         type="number"
+        inputMode="decimal"
+        autoComplete="off"
         value={value}
         onChange={(e) => onChange(e.target.value)}
         disabled={disabled}

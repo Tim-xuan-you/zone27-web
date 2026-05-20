@@ -27,6 +27,12 @@ export default function RecentSims() {
   const [hydrated, setHydrated] = useState(false);
 
   useEffect(() => {
+    // Canonical "read external state on mount + subscribe to changes"
+    // pattern. The modern API is useSyncExternalStore, but it requires
+    // getSimHistory() to return a stable reference per state — which
+    // would require caching in lib/sim-history.ts. Filed as follow-up;
+    // keeping this useEffect approach for now (works correctly).
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setHistory(getSimHistory());
     setHydrated(true);
 
@@ -64,8 +70,9 @@ export default function RecentSims() {
           / 最近模擬 · 您的本地紀錄
         </p>
         <button
+          type="button"
           onClick={handleClear}
-          className="font-mono text-mute/60 hover:text-loss text-[10px] tracking-[0.3em] transition-colors"
+          className="font-mono text-mute hover:text-loss text-[10px] tracking-[0.3em] transition-colors"
         >
           清除
         </button>
@@ -77,7 +84,7 @@ export default function RecentSims() {
         ))}
       </div>
 
-      <p className="font-mono text-mute/40 text-[10px] tracking-[0.25em] mt-6">
+      <p className="font-mono text-mute text-[10px] tracking-[0.25em] mt-6">
         儲存於您的瀏覽器 · 從不傳給我們
       </p>
     </section>
@@ -97,7 +104,7 @@ function HistoryRow({ entry }: { entry: SimHistoryEntry }) {
             </span>
           )}
         </p>
-        <p className="font-mono text-mute/60 text-[10px] tracking-[0.25em] mt-1">
+        <p className="font-mono text-mute text-[10px] tracking-[0.25em] mt-1">
           {relativeTime(entry.ranAt)} · {entry.totalSims.toLocaleString()} 場模擬
         </p>
       </div>

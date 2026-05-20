@@ -42,18 +42,35 @@ export function getSimHistory(): SimHistoryEntry[] {
     const parsed = JSON.parse(raw);
     if (!Array.isArray(parsed)) return [];
     return parsed
-      .filter(
-        (e): e is SimHistoryEntry =>
-          typeof e === "object" &&
-          e !== null &&
-          typeof e.matchId === "string" &&
-          typeof e.matchupName === "string" &&
-          typeof e.ranAt === "number"
-      )
+      .filter(isValidEntry)
       .slice(0, MAX_ENTRIES);
   } catch {
     return [];
   }
+}
+
+// Type-narrowing validator — guards against:
+//   - corrupted localStorage (manual tampering)
+//   - future schema migration (v1 → v2)
+//   - NaN/Infinity in numeric fields (would crash .toFixed())
+function isValidEntry(e: unknown): e is SimHistoryEntry {
+  if (typeof e !== "object" || e === null) return false;
+  const o = e as Record<string, unknown>;
+  return (
+    typeof o.matchId === "string" &&
+    typeof o.matchupName === "string" &&
+    typeof o.homePct === "number" &&
+    Number.isFinite(o.homePct) &&
+    typeof o.awayPct === "number" &&
+    Number.isFinite(o.awayPct) &&
+    typeof o.homeName === "string" &&
+    typeof o.awayName === "string" &&
+    typeof o.ranAt === "number" &&
+    Number.isFinite(o.ranAt) &&
+    typeof o.totalSims === "number" &&
+    Number.isFinite(o.totalSims) &&
+    typeof o.isCustom === "boolean"
+  );
 }
 
 export function saveSimHistory(entry: SimHistoryEntry): SimHistoryEntry[] {

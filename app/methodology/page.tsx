@@ -3,6 +3,8 @@ import type { Metadata } from "next";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import MatchSimulator from "@/components/MatchSimulator";
+import CopyLinkButton from "@/components/CopyLinkButton";
+import RelatedReading from "@/components/RelatedReading";
 import { matches } from "@/lib/matches";
 
 export const metadata: Metadata = {
@@ -12,11 +14,14 @@ export const metadata: Metadata = {
 };
 
 export default function MethodologyPage() {
+  // Defensive — fall back gracefully if matches.ts is mid-migration.
   const demoMatch = matches[0];
 
   return (
     <div className="flex flex-col flex-1 min-h-screen">
       <Nav />
+
+      <main id="main">
 
       {/* ── HERO ─────────────────────────────────── */}
       <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pt-20 pb-12 text-center">
@@ -57,6 +62,20 @@ export default function MethodologyPage() {
             lib/simulator.ts
           </a>
           。
+        </p>
+        <p className="text-mute/80">
+          <strong className="text-bone">想要兩分鐘的速覽版?</strong> 完整 model
+          report 在{" "}
+          <Link
+            href="/audit"
+            className="text-gold underline-offset-4 hover:underline"
+          >
+            /audit
+          </Link>
+          {" "} — 含 Anthropic Transparency Hub 結構的六大固定 section
+          (含明確列出我們{" "}
+          <strong className="text-bone">刻意排除</strong>
+          {" "}的 10 個輸入)。
         </p>
       </Section>
 
@@ -186,6 +205,28 @@ hitsInPlay = remaining × 0.35   → 1B×0.75, 2B×0.20, 3B×0.05
         </p>
       </Section>
 
+      {/* ── SHAREABLE PULL-QUOTE ──────────────
+          Contradiction-shaped trust artifact. The number sounds good,
+          the disclaimer undercuts it. That tension is what gets
+          screenshotted. */}
+      <blockquote
+        className="mx-auto max-w-3xl w-full px-6 sm:px-10 mt-8 mb-12"
+        style={{ textWrap: "balance" }}
+      >
+        <div className="border-l-2 border-gold/60 pl-6 sm:pl-8 py-2 font-light text-bone text-2xl sm:text-3xl leading-snug">
+          &ldquo;
+          <span className="font-mono text-gold tabular">10,000</span>{" "}
+          次模擬 · 標準誤差{" "}
+          <span className="font-mono text-gold tabular">±0.5%</span>{" "}
+          ·{" "}
+          <span className="font-mono text-gold tabular">n=3</span>{" "}
+          樣本 — 數字看起來好,我們承認樣本太小,不該下重注。&rdquo;
+          <footer className="mt-4 font-mono text-mute text-[10px] tracking-[0.3em] not-italic">
+            — ZONE 27 ENGINE WHITEPAPER · v0.2 · 詳見 Section 05 + Section 06
+          </footer>
+        </div>
+      </blockquote>
+
       {/* ── 05 VALIDATION ────────────────────────── */}
       <Section no="05" label="VALIDATION" zh="收斂驗證">
         <p>為什麼是 10,000 次而非 1,000 或 100,000?</p>
@@ -254,9 +295,22 @@ N = 10,000, p ≈ 0.6  →  SE ≈ 0.49%
           再按 <Mono>REPLAY ONE GAME</Mono> 看一場 9 局逐打席文字直播 ──
           完全在您的瀏覽器端執行,可離線運作,沒有任何 API 呼叫。
         </p>
-        <div className="mt-8">
-          <MatchSimulator key={demoMatch.id} match={demoMatch} />
-        </div>
+        {demoMatch ? (
+          <div className="mt-8">
+            <MatchSimulator key={demoMatch.id} match={demoMatch} />
+          </div>
+        ) : (
+          <p className="mt-8 text-mute italic">
+            範例賽事資料目前不可用 —請至{" "}
+            <Link
+              href="/lab/custom"
+              className="text-gold underline-offset-4 hover:underline"
+            >
+              /lab/custom
+            </Link>{" "}
+            自訂投手測試。
+          </p>
+        )}
       </Section>
 
       {/* ── 08 ROADMAP ───────────────────────────── */}
@@ -345,9 +399,14 @@ N = 10,000, p ≈ 0.6  →  SE ≈ 0.49%
         </ul>
       </Section>
 
+      <RelatedReading currentPath="/methodology" />
+
       {/* ── FINAL CTA ────────────────────────────── */}
       <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 py-16 text-center border-t border-line/40">
-        <p className="font-mono text-gold text-[10px] tracking-[0.4em] mb-6">
+        <p
+          lang="en"
+          className="font-mono text-gold text-[10px] tracking-[0.4em] mb-6"
+        >
           THE NUMBERS ARE THE STORY.
         </p>
         <h3 className="text-3xl text-bone font-light tracking-tight">
@@ -364,10 +423,17 @@ N = 10,000, p ≈ 0.6  →  SE ≈ 0.49%
             href="/founders"
             className="px-8 py-3 bg-gold text-navy text-xs tracking-[0.3em] hover:bg-gold-soft transition-colors"
           >
-            加入等候名單 →
+            加入創始名冊 →
           </Link>
         </div>
+
+        {/* ── Share this whitepaper · private-DM lever ── */}
+        <div className="mt-12 pt-8 border-t border-line/40 flex items-center justify-center">
+          <CopyLinkButton />
+        </div>
       </section>
+
+      </main>
 
       <Footer />
     </div>

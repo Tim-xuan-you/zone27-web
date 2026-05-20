@@ -24,8 +24,10 @@ import { saveSimHistory } from "@/lib/sim-history";
 //   - Completion Card(收斂結果與鎖定 AI 預測對比)
 //   - ReplayBroadcast(整場 9 局文字直播)
 //
-// 因為 match 在父層改變時應該完全重置,推薦在父層用 key={match.id}
-// 強制 remount(這版的 state 用 match.id 重置也已 work,雙保險)。
+// Parent MUST pass `key={match.id}` so the component remounts on
+// matchup change — that's how internal state resets cleanly.
+// All current callers (/lab, /lab/custom, /matches/[gameId],
+// /methodology) already do this.
 // ─────────────────────────────────────────────────────
 
 const TOTAL_SIMS = 10_000;
@@ -39,21 +41,14 @@ export default function MatchSimulator({ match }: Props) {
   const [stats, setStats] = useState<RunningStats>(initialStats);
   const [running, setRunning] = useState(false);
   const [done, setDone] = useState(false);
+  const [liveMsg, setLiveMsg] = useState("");
   const rafRef = useRef<number | null>(null);
+  // Tracks which 25% milestone we've already announced to screen readers.
+  // Polite ARIA region only updates at 25/50/75/100% — not on every tick.
+  const lastMilestoneRef = useRef(0);
 
-  // Reset everything when matchup changes (defense in depth even
-  // when parent already uses key={match.id})
-  useEffect(() => {
-    if (rafRef.current !== null) {
-      cancelAnimationFrame(rafRef.current);
-      rafRef.current = null;
-    }
-    setStats(initialStats);
-    setRunning(false);
-    setDone(false);
-  }, [match.id]);
-
-  // Cleanup on unmount
+  // Cleanup any in-flight RAF on unmount (covers normal unmount AND
+  // the remount triggered by parent's key change).
   useEffect(() => {
     return () => {
       if (rafRef.current !== null) cancelAnimationFrame(rafRef.current);
@@ -94,6 +89,10 @@ export default function MatchSimulator({ match }: Props) {
     setStats(initialStats);
     setRunning(true);
     setDone(false);
+    lastMilestoneRef.current = 0;
+    setLiveMsg(
+      `Starting Monte Carlo simulation: ${TOTAL_SIMS.toLocaleString()} games for ${match.home.name} versus ${match.away.name}.`
+    );
 
     const homePitcher = match.home.pitcher;
     const awayPitcher = match.away.pitcher;
@@ -111,12 +110,34 @@ export default function MatchSimulator({ match }: Props) {
       acc = applyBatch(acc, batch);
       setStats(acc);
 
+      // Announce milestone progress to screen readers (polite, every 25%)
+      const milestone = Math.floor(acc.completed / 2500);
+      if (milestone > lastMilestoneRef.current && milestone <= 4) {
+        lastMilestoneRef.current = milestone;
+        const totalDecided = acc.homeWins + acc.awayWins;
+        if (totalDecided > 0) {
+          const home = ((acc.homeWins / totalDecided) * 100).toFixed(1);
+          const away = (100 - parseFloat(home)).toFixed(1);
+          setLiveMsg(
+            `${milestone * 25}% complete. ${match.home.name} ${home}%, ${match.away.name} ${away}%.`
+          );
+        }
+      }
+
       if (acc.completed < TOTAL_SIMS) {
         rafRef.current = requestAnimationFrame(tick);
       } else {
         setRunning(false);
         setDone(true);
         rafRef.current = null;
+        const totalDecided = acc.homeWins + acc.awayWins;
+        if (totalDecided > 0) {
+          const home = ((acc.homeWins / totalDecided) * 100).toFixed(1);
+          const away = (100 - parseFloat(home)).toFixed(1);
+          setLiveMsg(
+            `Simulation complete. Final: ${match.home.name} ${home}%, ${match.away.name} ${away}%.`
+          );
+        }
       }
     };
 
@@ -134,11 +155,27 @@ export default function MatchSimulator({ match }: Props) {
 
   return (
     <>
+      {/* ── ARIA LIVE REGION (screen-reader only) ───
+          Announces milestone progress at 25 / 50 / 75 / 100%
+          rather than on every batch — polite, not assertive.
+      */}
+      <div role="status" aria-live="polite" aria-atomic="true" className="sr-only">
+        {liveMsg}
+      </div>
+
       {/* ── RUN BUTTON ───────────────────────────── */}
       <section className="pb-10">
         <button
+          type="button"
           onClick={start}
           disabled={running}
+          aria-label={
+            running
+              ? `Running ${stats.completed.toLocaleString()} of ${TOTAL_SIMS.toLocaleString()} simulations`
+              : done
+              ? `Re-run ${TOTAL_SIMS.toLocaleString()} Monte Carlo simulations`
+              : `Run ${TOTAL_SIMS.toLocaleString()} Monte Carlo simulations for ${match.home.name} vs ${match.away.name}`
+          }
           className={`w-full py-6 border text-sm tracking-[0.35em] font-medium transition-colors ${
             running
               ? "border-gold/40 text-gold/60 cursor-not-allowed bg-gold/5"

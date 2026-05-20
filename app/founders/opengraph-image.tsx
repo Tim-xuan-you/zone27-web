@@ -1,4 +1,11 @@
 import { ImageResponse } from "next/og";
+import { BRAND, OG_SIZE, OG_CONTENT_TYPE } from "@/lib/brand";
+import {
+  FOUNDERS_TOTAL,
+  FOUNDERS_REMAINING,
+  FOUNDERS_NEXT,
+  formatBadge,
+} from "@/lib/founders-stats";
 
 // ── ZONE 27 · /founders Dynamic OG ─────────────────────
 // 當有人把 https://zone27-web.vercel.app/founders 貼到 LINE/FB,
@@ -6,14 +13,9 @@ import { ImageResponse } from "next/og";
 // 銷售情境卡 — 直接是 sales pitch in image form。
 // ─────────────────────────────────────────────────────
 
-export const size = { width: 1200, height: 630 };
-export const contentType = "image/png";
+export const size = OG_SIZE;
+export const contentType = OG_CONTENT_TYPE;
 export const alt = "ZONE 27 · Founders 27 · Lifetime Membership";
-
-const TOTAL = 270;
-const CLAIMED = 7;
-const REMAINING = TOTAL - CLAIMED;
-const NEXT = CLAIMED + 1;
 
 export default async function FoundersOgImage() {
   return new ImageResponse(
@@ -22,7 +24,7 @@ export default async function FoundersOgImage() {
         style={{
           width: "100%",
           height: "100%",
-          background: "#0F1A2E",
+          background: BRAND.navy,
           backgroundImage:
             "radial-gradient(ellipse 80% 50% at 50% 0%, rgba(212,175,55,0.18), transparent 60%), radial-gradient(ellipse 60% 40% at 50% 100%, rgba(212,175,55,0.06), transparent 60%)",
           display: "flex",
@@ -46,7 +48,7 @@ export default async function FoundersOgImage() {
           <span
             style={{
               fontSize: 26,
-              color: "#D4AF37",
+              color: BRAND.gold,
               letterSpacing: "0.22em",
               fontWeight: 500,
             }}
@@ -56,7 +58,7 @@ export default async function FoundersOgImage() {
           <span
             style={{
               fontSize: 26,
-              color: "#F5F2EA",
+              color: BRAND.bone,
               letterSpacing: "0.22em",
               fontWeight: 500,
             }}
@@ -105,7 +107,7 @@ export default async function FoundersOgImage() {
           <div
             style={{
               fontSize: 220,
-              color: "#D4AF37",
+              color: BRAND.gold,
               fontWeight: 300,
               letterSpacing: "-0.04em",
               lineHeight: 1,
@@ -113,13 +115,13 @@ export default async function FoundersOgImage() {
               display: "flex",
             }}
           >
-            270
+            {FOUNDERS_TOTAL}
           </div>
 
           <div
             style={{
               fontSize: 32,
-              color: "#F5F2EA",
+              color: BRAND.bone,
               fontWeight: 300,
               letterSpacing: "-0.01em",
               marginTop: 6,
@@ -152,7 +154,7 @@ export default async function FoundersOgImage() {
             <span
               style={{
                 fontSize: 48,
-                color: "#F5F2EA",
+                color: BRAND.bone,
                 fontWeight: 300,
                 letterSpacing: "-0.02em",
               }}
@@ -187,16 +189,16 @@ export default async function FoundersOgImage() {
           }}
         >
           <span style={{ color: "rgba(245,242,234,0.55)", display: "flex" }}>
-            {REMAINING} OF {TOTAL} REMAINING
+            {FOUNDERS_REMAINING} OF {FOUNDERS_TOTAL} REMAINING
           </span>
           <span
             style={{
-              color: "#D4AF37",
+              color: BRAND.gold,
               fontWeight: 500,
               display: "flex",
             }}
           >
-            CLAIM #{String(NEXT).padStart(3, "0")} →
+            CLAIM {formatBadge(FOUNDERS_NEXT)} →
           </span>
         </div>
       </div>

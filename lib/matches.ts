@@ -175,3 +175,42 @@ export function getMatchById(id: string): Match | undefined {
 export function getAllMatchIds(): string[] {
   return matches.map((m) => m.id);
 }
+
+// ── Staleness detection ───────────────────────────────
+// CPBL match data is hardcoded above (transitional · pre-Supabase).
+// SSG pages bake at build time and don't auto-refresh unless we
+// export `revalidate`. These helpers let pages show a "DATA · ARCHIVED"
+// badge when the static data has aged past today (Taipei TZ).
+//
+// Runs on the server during render — re-evaluated on each ISR refresh.
+// ─────────────────────────────────────────────────────
+
+/** YYYY-MM-DD in Asia/Taipei timezone. Stable across server / edge / Node. */
+export function getTodayTaipei(): string {
+  return new Intl.DateTimeFormat("en-CA", {
+    timeZone: "Asia/Taipei",
+  }).format(new Date());
+}
+
+/** Extract the YYYY-MM-DD portion from match.date format
+ *  ("2026 · 05 · 19  ·  星期二" → "2026-05-19").
+ *  Returns null if the format doesn't match. */
+export function getMatchDateIso(match: Match): string | null {
+  const parts = match.date.split("·").map((s) => s.trim()).filter(Boolean);
+  if (parts.length < 3) return null;
+  const [y, m, d] = parts;
+  if (!/^\d{4}$/.test(y)) return null;
+  if (!/^\d{1,2}$/.test(m)) return null;
+  if (!/^\d{1,2}$/.test(d)) return null;
+  return `${y}-${m.padStart(2, "0")}-${d.padStart(2, "0")}`;
+}
+
+/** True when the match's hardcoded date is no longer "today" in Taipei.
+ *  Used to render an honest "DATA · ARCHIVED" badge — the same brand
+ *  pattern as the BLACK CARD CHAT pre-launch lock. */
+export function isMatchDataStale(match: Match | undefined): boolean {
+  if (!match) return false;
+  const matchDate = getMatchDateIso(match);
+  if (!matchDate) return false;
+  return matchDate !== getTodayTaipei();
+}
