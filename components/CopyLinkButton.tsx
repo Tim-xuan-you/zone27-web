@@ -1,64 +1,117 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-// ── ZONE 27 · Copy Link Button ─────────────────────────
-// Indie-stealth distribution lever. Since SEO is frozen and
-// social is frozen, the only growth channel is private-DM share.
-// Make the URL itself the share unit (Pieter Levels pattern).
+// ── ZONE 27 · Copy/Share Link Button ───────────────────
+// Indie-stealth distribution lever. Since SEO is frozen and social
+// is frozen, the only growth channel is private-DM share. Make the
+// URL itself the share unit (Pieter Levels pattern) and make the
+// SHARE act friction-minimal.
 //
-// Used on /audit and /methodology — the two pages most worth
-// sharing in a private DM with friends or colleagues.
+// Platform-adaptive behavior:
+//   - Mobile (Web Share API supported): clicking opens the OS
+//     share sheet directly — user picks LINE / Messages / etc.
+//     and the URL is auto-inserted. Zero copy-paste steps.
+//   - Desktop (Web Share API not available): fall back to clipboard
+//     copy. User pastes manually.
 //
 // Brand-consistent style: mono 11px uppercase, line border, gold hover.
 //
 // Channel attribution (NOT individual tracking):
-//   If `refTag` is provided, the copied URL gets `?ref=<refTag>` appended.
-//   When the next visitor lands on the page and fills the WaitlistForm,
-//   the DB stores `source = <refTag>`. Aggregated across many shares,
-//   this tells Tim WHICH share channels actually convert — without
-//   identifying any individual.
+//   If `refTag` is provided, the shared URL gets `?ref=<refTag>`
+//   appended. When the next visitor lands on the page and fills the
+//   WaitlistForm, the DB stores `source = <refTag>`. Aggregated
+//   across many shares, this tells Tim WHICH share channels actually
+//   convert — without identifying any individual.
 // ─────────────────────────────────────────────────────
 
 type CopyLinkButtonProps = {
-  // Optional channel-attribution tag appended as ?ref=<refTag>
+  // Optional channel-attribution tag appended as ?ref=<refTag>.
   // Pass something like "reserve-001" or "audit-share".
   refTag?: string;
 };
 
-export default function CopyLinkButton({ refTag }: CopyLinkButtonProps = {}) {
-  const [copied, setCopied] = useState(false);
+type Phase = "idle" | "done";
 
-  async function handleCopy() {
-    if (typeof window === "undefined") return;
-    let url = window.location.href;
-    if (refTag) {
+export default function CopyLinkButton({ refTag }: CopyLinkButtonProps = {}) {
+  const [phase, setPhase] = useState<Phase>("idle");
+  // Web Share API detected client-side only — prevents SSR/CSR
+  // label mismatch + respects browsers that hide it behind flags.
+  const [hasShareApi, setHasShareApi] = useState(false);
+
+  useEffect(() => {
+    setHasShareApi(
+      typeof navigator !== "undefined" && typeof navigator.share === "function",
+    );
+  }, []);
+
+  function buildUrl(): string {
+    if (typeof window === "undefined") return "";
+    const base = window.location.href;
+    if (!refTag) return base;
+    try {
+      const u = new URL(base);
+      u.searchParams.set("ref", refTag);
+      return u.toString();
+    } catch {
+      return base;
+    }
+  }
+
+  async function handleShare() {
+    const url = buildUrl();
+    if (!url) return;
+
+    // Try Web Share API first (mobile-friendly · one tap to LINE / iMessage)
+    if (hasShareApi && navigator.share) {
       try {
-        const u = new URL(url);
-        u.searchParams.set("ref", refTag);
-        url = u.toString();
-      } catch {
-        // Malformed location — fall through to plain href
+        await navigator.share({
+          title: "ZONE 27",
+          text: "不靠直覺,只看演算法 · A QUANTITATIVE SPORTS INTELLIGENCE CLUB",
+          url,
+        });
+        setPhase("done");
+        window.setTimeout(() => setPhase("idle"), 2000);
+        return;
+      } catch (e) {
+        // User cancelled — don't fall back, just stay idle
+        if (e instanceof Error && e.name === "AbortError") return;
+        // Real failure — fall through to clipboard
       }
     }
+
+    // Clipboard fallback (desktop · or browsers without share API)
     try {
       await navigator.clipboard.writeText(url);
-      setCopied(true);
-      window.setTimeout(() => setCopied(false), 2000);
+      setPhase("done");
+      window.setTimeout(() => setPhase("idle"), 2000);
     } catch {
       window.prompt("Copy this link:", url);
     }
   }
 
+  const isDone = phase === "done";
+  const idleLabel = hasShareApi ? "Share" : "Copy Link";
+  const doneLabel = hasShareApi ? "Shared" : "Copied";
+  const idleIcon = "⌁";
+  const doneIcon = "✓";
+  const ariaLabel = isDone
+    ? hasShareApi
+      ? "Link shared"
+      : "Link copied to clipboard"
+    : hasShareApi
+      ? "Share this page via LINE / Messages / other"
+      : "Copy this page link to clipboard";
+
   return (
     <button
       type="button"
-      onClick={handleCopy}
-      aria-label={copied ? "Link copied to clipboard" : "Copy page link to clipboard"}
+      onClick={handleShare}
+      aria-label={ariaLabel}
       className="inline-flex items-center gap-2 px-4 py-2 border border-line/60 hover:border-gold/60 text-mute hover:text-gold transition-colors font-mono text-[11px] tracking-[0.25em] uppercase"
     >
-      <span aria-hidden="true">{copied ? "✓" : "⌁"}</span>
-      <span lang="en">{copied ? "Copied" : "Copy Link"}</span>
+      <span aria-hidden="true">{isDone ? doneIcon : idleIcon}</span>
+      <span lang="en">{isDone ? doneLabel : idleLabel}</span>
     </button>
   );
 }
