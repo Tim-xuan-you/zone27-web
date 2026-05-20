@@ -156,6 +156,23 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
       title: "Privacy · 倒置 IV 的完整清單",
     },
   ],
+  "/learn": [
+    {
+      href: "/lab",
+      kicker: "lab",
+      title: "親手跑一場 Monte Carlo 模擬",
+    },
+    {
+      href: "/glossary",
+      kicker: "glossary",
+      title: "27 種進階數據完整詞彙",
+    },
+    {
+      href: "/founders",
+      kicker: "founders",
+      title: "看完了 · 加入 270 名創始會員",
+    },
+  ],
 };
 
 export function getRelatedLinks(currentPath: string): RelatedLink[] {

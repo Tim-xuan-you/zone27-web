@@ -68,6 +68,19 @@ export default function Home() {
             親手跑一場引擎 →
           </Link>
         </div>
+
+        {/* Newcomer entry — for visitors who don't yet know what K/9 is.
+            Quiet text link · doesn't compete with the 2 primary CTAs ·
+            but gives "I'm curious but uninitiated" visitors a non-
+            intimidating door. /learn is the 5-min primer page. */}
+        <div className="mt-6">
+          <Link
+            href="/learn"
+            className="inline-block font-mono text-mute hover:text-gold text-[10px] sm:text-[11px] tracking-[0.3em] transition-colors"
+          >
+            沒聽過 Bill James? · 5 分鐘入門 →
+          </Link>
+        </div>
       </section>
 
       {/* ── CREDIBILITY STRIP ──────────────────────── */}

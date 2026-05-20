@@ -15,6 +15,7 @@ function getTaipeiTodayChip(): string {
 }
 
 const SECONDARY_LINKS = [
+  { label: "5 分鐘入門", href: "/learn", external: false },
   { label: "關於", href: "/about", external: false },
   { label: "倒置宣言", href: "/manifesto", external: false },
   { label: "方法論", href: "/methodology", external: false },
