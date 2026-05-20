@@ -21,6 +21,7 @@ const SECONDARY_LINKS = [
   { label: "覆蓋範圍", href: "/coverage", external: false },
   { label: "詞彙表", href: "/glossary", external: false },
   { label: "常見問題", href: "/faq", external: false },
+  { label: "版本紀錄", href: "/changelog", external: false },
   { label: "實驗室", href: "/lab", external: false },
   { label: "每日早報", href: "/signal-board", external: false },
   { label: "GitHub 開源", href: "https://github.com/Tim-xuan-you/zone27-web", external: true },
