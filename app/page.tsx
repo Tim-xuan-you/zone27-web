@@ -164,7 +164,7 @@ export default function Home() {
       </section>
 
       {/* ── THREE PILLARS ──────────────────────────── */}
-      <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 py-20 border-t border-line/40">
+      <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 py-24 border-t border-line/40">
         <div className="grid sm:grid-cols-3 gap-12">
           <Pillar
             no="01"
@@ -409,16 +409,22 @@ export default function Home() {
       </section>
 
       {/* ── FOUNDERS 27 STRIP ──────────────────────── */}
-      <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 py-16 text-center border-t border-line/40">
+      <section
+        aria-labelledby="founders-strip-heading"
+        className="mx-auto max-w-5xl w-full px-6 sm:px-10 py-16 text-center border-t border-line/40"
+      >
         <p className="font-mono text-gold text-[10px] tracking-[0.4em] mb-4">
           FOUNDERS · 27
         </p>
-        <h3 className="text-3xl sm:text-4xl text-bone font-light tracking-tight">
+        <h2
+          id="founders-strip-heading"
+          className="text-3xl sm:text-4xl text-bone font-light tracking-tight"
+        >
           僅限 270 位創始會員
-        </h3>
+        </h2>
         <p className="text-mute mt-4 max-w-md mx-auto leading-relaxed">
           一次性 NT$ 2,700 終身會員資格 · 個人 ID 鑲入 #001 ~ #270 編號徽章
-          ·售完永久關閉。
+          · 售完永久關閉。
         </p>
         <Link
           href="/founders"
