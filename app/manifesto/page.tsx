@@ -367,7 +367,7 @@ export default function ManifestoPage() {
                   <SynthItem>方法論 · 假設 · 排除清單</SynthItem>
                   <SynthItem>商業模式 · 完整定價結構</SynthItem>
                   <SynthItem>不收集什麼 · 不做什麼</SynthItem>
-                  <SynthItem>本身就是公開的事(Bill James 1985)</SynthItem>
+                  <SynthItem>本身就是公開的事(sabermetric 累積知識 · 圖書館 / Wikipedia)</SynthItem>
                 </ul>
                 <p className="mt-6 pt-4 border-t border-line/40 font-mono text-mute/80 text-[10px] tracking-[0.25em] leading-relaxed">
                   公開的事 fork 走無意義 · 信任卻能換來

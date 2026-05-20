@@ -400,13 +400,13 @@ export default function AuditPage() {
             <DataTable>
               <DataRow
                 label="OUR MATH"
-                value="Bill James 1985"
-                note="sabermetrics · 圖書館 / Wikipedia 全公開"
+                value="rate stats + Monte Carlo"
+                note="per-9 rate stats(20 世紀標準)· Monte Carlo(Metropolis 1953)· 圖書館全公開"
               />
               <DataRow
                 label="OUR INPUTS"
                 value="K/9 · BB/9 · HR/9"
-                note="Baseball Reference 任何人可查"
+                note="Baseball Reference / MLB Stats API · 任何人可查"
               />
               <DataRow
                 label="OUR ENGINE"
