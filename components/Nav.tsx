@@ -33,7 +33,7 @@ export default function Nav({ active }: { active?: NavKey }) {
         aria-label="Primary"
         className="w-full border-b border-line/60 backdrop-blur-sm"
       >
-        <div className="mx-auto max-w-6xl px-6 sm:px-10 py-5 flex items-center justify-between gap-4">
+        <div className="mx-auto max-w-6xl px-6 sm:px-10 pt-5 pb-3 sm:py-5 flex items-center justify-between gap-4">
           <Link
             href="/"
             aria-label="ZONE 27 home"
@@ -48,9 +48,8 @@ export default function Nav({ active }: { active?: NavKey }) {
             </span>
           </Link>
 
-          {/* Desktop nav · inline list. Hidden on phones to avoid the
-              horizontal-scroll overcrowding that previously hid items
-              behind a non-discoverable swipe gesture. */}
+          {/* Desktop nav · inline list with 5 items + 登入 button.
+              Hidden on phones — mobile has a 2-row layout below. */}
           <div className="hidden sm:flex items-center gap-4 sm:gap-6 text-sm">
             {NAV_ITEMS.map((item) => (
               <Link
@@ -84,12 +83,48 @@ export default function Nav({ active }: { active?: NavKey }) {
             </button>
           </div>
 
-          {/* Mobile · primary CTA + hamburger overlay (client component) */}
+          {/* Mobile · 創始會員 gold CTA only (always visible). The
+              secondary nav lives below on its own row to keep this
+              line uncramped. */}
           <MobileNavToggle
             items={NAV_ITEMS}
             active={active}
             className="sm:hidden"
           />
+        </div>
+
+        {/* Mobile · 2nd row: 4 secondary nav links (excluding founders
+            which is the always-visible gold pill above). Light,
+            breathing, no horizontal-scroll trap — wraps cleanly if a
+            phone is narrow enough. Hidden on desktop. */}
+        <div className="sm:hidden mx-auto max-w-6xl px-6 pb-3">
+          <ul className="flex items-center justify-between gap-2 text-[10px] font-mono">
+            {NAV_ITEMS.filter((item) => item.key !== "founders").map(
+              (item) => (
+                <li key={item.key}>
+                  <Link
+                    href={item.href}
+                    aria-current={active === item.key ? "page" : undefined}
+                    className={`tracking-[0.18em] whitespace-nowrap transition-colors inline-flex items-center gap-1 ${
+                      active === item.key
+                        ? "text-gold"
+                        : "text-mute hover:text-gold"
+                    }`}
+                  >
+                    {item.label}
+                    {item.badge && (
+                      <span
+                        aria-label={`${item.label} 是 ${item.badge} 階段功能`}
+                        className="px-1 py-px text-[7px] tracking-[0.15em] border border-gold/40 text-gold"
+                      >
+                        {item.badge}
+                      </span>
+                    )}
+                  </Link>
+                </li>
+              ),
+            )}
+          </ul>
         </div>
       </nav>
       <ScarcityStrip />
