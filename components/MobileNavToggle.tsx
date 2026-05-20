@@ -28,10 +28,10 @@ type Props = {
 };
 
 const TRUST_LINKS: { href: string; label: string }[] = [
-  { href: "/audit", label: "Model Report · 全部假設公開" },
-  { href: "/methodology", label: "完整工程白皮書" },
-  { href: "/coverage", label: "覆蓋範圍 · 我們做哪些賽事" },
-  { href: "/faq", label: "14 題誠實掃雷" },
+  { href: "/audit", label: "Model Report" },
+  { href: "/methodology", label: "方法論" },
+  { href: "/coverage", label: "覆蓋範圍" },
+  { href: "/faq", label: "常見問題" },
 ];
 
 export default function MobileNavToggle({
@@ -106,8 +106,9 @@ export default function MobileNavToggle({
             backgroundColor: "rgba(15, 26, 46, 0.97)",
           }}
         >
-          <div className="relative px-6 pt-8 pb-16 max-w-md mx-auto min-h-full">
-            <div className="flex items-center justify-between mb-10">
+          <div className="relative px-8 pt-10 pb-20 max-w-md mx-auto min-h-full">
+            {/* ── HEADER · breathing single row ─────────── */}
+            <div className="flex items-center justify-between mb-16">
               <Link
                 href="/"
                 onClick={close}
@@ -115,10 +116,10 @@ export default function MobileNavToggle({
                 lang="en"
                 className="flex items-center gap-3"
               >
-                <span className="font-mono text-gold text-lg tracking-[0.22em] font-medium">
+                <span className="font-mono text-gold text-xl tracking-[0.22em] font-medium">
                   ZONE
                 </span>
-                <span className="font-mono text-bone text-lg tracking-[0.22em] font-medium">
+                <span className="font-mono text-bone text-xl tracking-[0.22em] font-medium">
                   27
                 </span>
               </Link>
@@ -126,10 +127,10 @@ export default function MobileNavToggle({
                 type="button"
                 onClick={close}
                 aria-label="關閉選單"
-                className="w-10 h-10 inline-flex items-center justify-center border border-gold/40 text-gold hover:bg-gold/10 transition-colors"
+                className="w-11 h-11 inline-flex items-center justify-center border border-gold/40 text-gold hover:bg-gold/10 transition-colors"
               >
                 <span
-                  className="font-mono text-base leading-none"
+                  className="font-mono text-lg leading-none"
                   aria-hidden="true"
                 >
                   ✕
@@ -137,68 +138,99 @@ export default function MobileNavToggle({
               </button>
             </div>
 
-            <p
-              lang="en"
-              className="font-mono text-gold/80 text-[10px] tracking-[0.45em] mb-5"
-            >
-              NAVIGATION
-            </p>
+            {/* ── PRIMARY NAV · magazine-grade typography ──
+                Each item is a big breathing target (text-3xl)
+                in Sans (Geist), not Mono — readable, premium,
+                tap-friendly. Gold accent reserved for the
+                active page; founders gets a star bullet so the
+                primary CTA stands out without screaming. */}
+            <nav aria-label="主導覽">
+              <ul className="flex flex-col gap-1">
+                {items.map((item) => {
+                  const isActive = active === item.key;
+                  const isFounders = item.key === "founders";
+                  return (
+                    <li key={item.key}>
+                      <Link
+                        href={item.href}
+                        onClick={close}
+                        aria-current={isActive ? "page" : undefined}
+                        className={`flex items-baseline justify-between py-5 text-3xl font-light tracking-tight transition-colors ${
+                          isActive
+                            ? "text-gold"
+                            : isFounders
+                              ? "text-gold/95 hover:text-gold"
+                              : "text-bone hover:text-gold"
+                        }`}
+                      >
+                        <span className="flex items-baseline gap-3">
+                          {isFounders && (
+                            <span
+                              aria-hidden="true"
+                              className="text-gold text-xl"
+                            >
+                              ★
+                            </span>
+                          )}
+                          {item.label}
+                        </span>
+                        <span className="inline-flex items-center gap-3">
+                          {item.badge && (
+                            <span
+                              lang="en"
+                              className="px-1.5 py-0.5 text-[10px] tracking-[0.15em] border border-gold/40 text-gold font-mono"
+                            >
+                              {item.badge}
+                            </span>
+                          )}
+                          <span
+                            aria-hidden="true"
+                            className="text-gold/40 text-2xl font-light"
+                          >
+                            →
+                          </span>
+                        </span>
+                      </Link>
+                    </li>
+                  );
+                })}
+              </ul>
+            </nav>
 
-            <div className="flex flex-col">
-              {items.map((item) => (
-                <Link
-                  key={item.key}
-                  href={item.href}
-                  onClick={close}
-                  aria-current={active === item.key ? "page" : undefined}
-                  className={`py-4 border-b border-line/40 font-mono tracking-[0.2em] flex items-center justify-between ${
-                    active === item.key ? "text-gold" : "text-bone"
-                  }`}
-                >
-                  <span className="text-base">{item.label}</span>
-                  {item.badge && (
-                    <span
-                      lang="en"
-                      className="px-1.5 py-0.5 text-[9px] tracking-[0.15em] border border-gold/40 text-gold font-mono"
-                    >
-                      {item.badge}
-                    </span>
-                  )}
-                </Link>
-              ))}
-            </div>
-
-            <div className="mt-10 pt-6 border-t border-line/40">
+            {/* ── TRUST ROW · simple inline strip, no /path uglies ── */}
+            <div className="mt-16 pt-8 border-t border-line/40">
               <p
                 lang="en"
-                className="font-mono text-mute text-[10px] tracking-[0.45em] mb-3"
+                className="font-mono text-gold/70 text-[10px] tracking-[0.4em] mb-5"
               >
-                TRUST ARTIFACTS
+                TRANSPARENCY
               </p>
-              {TRUST_LINKS.map((it) => (
-                <Link
-                  key={it.href}
-                  href={it.href}
-                  onClick={close}
-                  className="block py-3 text-mute hover:text-gold text-sm transition-colors"
-                >
-                  <span
-                    lang="en"
-                    className="font-mono text-mute/60 text-[10px] tracking-[0.2em] mr-2"
-                  >
-                    {it.href}
-                  </span>
-                  {it.label}
-                </Link>
-              ))}
+              <ul className="flex flex-col gap-1">
+                {TRUST_LINKS.map((it) => (
+                  <li key={it.href}>
+                    <Link
+                      href={it.href}
+                      onClick={close}
+                      className="block py-3 text-mute hover:text-gold text-base transition-colors"
+                    >
+                      {it.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
             </div>
 
-            <p
-              lang="en"
-              className="font-mono text-mute/60 text-[9px] tracking-[0.3em] mt-12 text-center"
-            >
-              ZONE 27 · WE DON&apos;T GUESS · WE COMPUTE
-            </p>
+            {/* ── BRAND TAGLINE — closing the menu like the site footer ── */}
+            <div className="mt-20 text-center">
+              <p
+                lang="en"
+                className="font-mono text-gold/60 text-[10px] tracking-[0.45em]"
+              >
+                WE DON&apos;T GUESS
+                <br />
+                WE COMPUTE
+              </p>
+            </div>
           </div>
         </div>
       )}
