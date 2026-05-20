@@ -373,7 +373,7 @@ export default function Home() {
             href="/methodology"
             title="技術白皮書"
             subtitle="METHODOLOGY"
-            sections="9 sections"
+            sections="10 sections"
             desc="蒙地卡羅引擎 · PA 機率推導 · 收斂驗證 · 路線圖"
           />
           <TrustCard

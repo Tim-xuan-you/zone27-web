@@ -133,6 +133,7 @@ export default function WaitlistForm({
           type="email"
           name="email"
           required
+          aria-required="true"
           placeholder="you@example.com"
           autoComplete="email"
           className="w-full bg-ink/60 border border-line/70 focus:border-gold/70 text-bone px-4 py-3 outline-none transition-colors placeholder:text-mute/70 font-mono text-sm"
@@ -155,16 +156,22 @@ export default function WaitlistForm({
 
       <SubmitButton />
 
-      {/* Inline error */}
-      {state && !state.ok && (
-        <p className="mt-4 font-mono text-loss text-[10px] tracking-[0.3em] text-center">
-          {state.error === "missing_email"
-            ? "請填寫 EMAIL"
-            : state.error === "invalid_email"
-            ? "EMAIL 格式不正確"
-            : "系統暫時無法處理 · 請稍後再試"}
-        </p>
-      )}
+      {/* Inline error · role="alert" + aria-live for screen readers
+          to announce submission failure immediately. Without these,
+          a blind user submitting an invalid email would see no feedback
+          (the visual text never makes it to assistive tech). Caught by
+          3rd-pass audit · WCAG 2.1 SC 4.1.3 Status Messages compliance. */}
+      <div role="alert" aria-live="polite" aria-atomic="true" className="min-h-[1rem]">
+        {state && !state.ok && (
+          <p className="mt-4 font-mono text-loss text-[10px] tracking-[0.3em] text-center">
+            {state.error === "missing_email"
+              ? "請填寫 EMAIL"
+              : state.error === "invalid_email"
+              ? "EMAIL 格式不正確"
+              : "系統暫時無法處理 · 請稍後再試"}
+          </p>
+        )}
+      </div>
 
       <p className="font-mono text-mute text-[10px] tracking-[0.25em] mt-6 text-center">
         我們永遠不會分享您的 email · 隨時可退出
