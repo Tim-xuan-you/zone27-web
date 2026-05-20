@@ -16,6 +16,7 @@ function getTaipeiTodayChip(): string {
 
 const SECONDARY_LINKS = [
   { label: "關於", href: "/about", external: false },
+  { label: "倒置宣言", href: "/manifesto", external: false },
   { label: "方法論", href: "/methodology", external: false },
   { label: "模型報告", href: "/audit", external: false },
   { label: "覆蓋範圍", href: "/coverage", external: false },

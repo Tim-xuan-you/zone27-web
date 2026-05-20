@@ -22,6 +22,11 @@ export type RelatedLink = {
 export const RELATED_LINKS: Record<string, RelatedLink[]> = {
   "/audit": [
     {
+      href: "/manifesto",
+      kicker: "manifesto",
+      title: "倒置宣言 · 4 個刻意倒置",
+    },
+    {
       href: "/methodology",
       kicker: "methodology",
       title: "完整工程白皮書",
@@ -31,11 +36,6 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
       kicker: "coverage",
       title: "我們覆蓋哪些賽事",
     },
-    {
-      href: "/faq",
-      kicker: "faq",
-      title: "14 題誠實掃雷",
-    },
   ],
   "/methodology": [
     {
@@ -44,9 +44,9 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
       title: "精簡版 Model Report",
     },
     {
-      href: "/coverage",
-      kicker: "coverage",
-      title: "覆蓋範圍 · open ledger",
+      href: "/manifesto",
+      kicker: "manifesto",
+      title: "倒置宣言 · 為何完整公開",
     },
     {
       href: "/glossary",
@@ -55,6 +55,11 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
     },
   ],
   "/coverage": [
+    {
+      href: "/manifesto",
+      kicker: "manifesto",
+      title: "倒置宣言 · 為何不擴大覆蓋",
+    },
     {
       href: "/audit",
       kicker: "audit",
@@ -65,13 +70,13 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
       kicker: "methodology",
       title: "完整工程白皮書",
     },
-    {
-      href: "/faq",
-      kicker: "faq",
-      title: "14 題誠實掃雷",
-    },
   ],
   "/about": [
+    {
+      href: "/manifesto",
+      kicker: "manifesto",
+      title: "倒置宣言 · 4 個刻意倒置",
+    },
     {
       href: "/audit",
       kicker: "audit",
@@ -82,13 +87,13 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
       kicker: "methodology",
       title: "蒙地卡羅引擎白皮書",
     },
-    {
-      href: "/faq",
-      kicker: "faq",
-      title: "14 題誠實掃雷",
-    },
   ],
   "/faq": [
+    {
+      href: "/manifesto",
+      kicker: "manifesto",
+      title: "倒置宣言 · 為何這樣做",
+    },
     {
       href: "/audit",
       kicker: "audit",
@@ -98,11 +103,6 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
       href: "/methodology",
       kicker: "methodology",
       title: "完整工程白皮書",
-    },
-    {
-      href: "/about",
-      kicker: "about",
-      title: "六章節品牌方法論",
     },
   ],
   "/glossary": [
@@ -117,9 +117,9 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
       title: "Model Report · 哪些 stat 我們不用",
     },
     {
-      href: "/faq",
-      kicker: "faq",
-      title: "14 題誠實掃雷",
+      href: "/manifesto",
+      kicker: "manifesto",
+      title: "倒置宣言 · 4 個刻意倒置",
     },
   ],
   "/signal-board": [
@@ -134,9 +134,26 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
       title: "Model Report · 已知失效模式",
     },
     {
-      href: "/faq",
-      kicker: "faq",
-      title: "14 題誠實掃雷",
+      href: "/manifesto",
+      kicker: "manifesto",
+      title: "倒置宣言 · 為何這樣做",
+    },
+  ],
+  "/manifesto": [
+    {
+      href: "/audit",
+      kicker: "audit",
+      title: "Model Report · 倒置 I 的完整證據",
+    },
+    {
+      href: "/coverage",
+      kicker: "coverage",
+      title: "Coverage · 倒置 III 的完整清單",
+    },
+    {
+      href: "/privacy",
+      kicker: "privacy",
+      title: "Privacy · 倒置 IV 的完整清單",
     },
   ],
 };

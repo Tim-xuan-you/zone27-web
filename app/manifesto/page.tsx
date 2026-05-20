@@ -1,0 +1,539 @@
+import Link from "next/link";
+import type { Metadata } from "next";
+import Nav from "@/components/Nav";
+import Footer from "@/components/Footer";
+import CopyLinkButton from "@/components/CopyLinkButton";
+import RelatedReading from "@/components/RelatedReading";
+
+export const metadata: Metadata = {
+  title: "倒置宣言 · ZONE 27 Manifesto",
+  description:
+    "四個我們刻意倒置的行業預設:完整公開引擎(不藏 weights)· 工具免費身分付費(不收 per-use)· 引擎能算的才覆蓋(不擴大博彩面)· 零第三方追蹤(不做行為定向)。每一個倒置都有代價,代價就是品牌。",
+};
+
+// ── ZONE 27 · /manifesto · 倒置宣言 ────────────────────
+// Canonical long-form home for the 4 brand axioms that are
+// otherwise scattered across /audit, /privacy, /coverage,
+// /lab/custom and the homepage Brand Inversion section.
+//
+// Why a standalone page?
+//   - Homepage TLDR shows the 4 rows in 60 seconds — no argument
+//   - /audit Section 08 covers disclosure axiom only
+//   - /coverage covers coverage axiom only
+//   - /privacy covers privacy axiom only
+//   - There is no single canonical URL where someone can read the
+//     FULL inverted-positioning argument and screenshot a 5-min
+//     read that explains who ZONE 27 is. This is that page.
+//
+// Voice contract:
+//   - Match /audit Section 08 tone: declarative + structural
+//   - English mono kickers + zh prose body (bilingual scaffold)
+//   - No marketing language, no slogans, no exhortation
+//   - Each axiom = INDUSTRY pattern + ZONE 27 inverse + 4-layer
+//     argument (why industry does it · who loses · what it costs us
+//     · why we accept the cost) + canonical citation
+// ─────────────────────────────────────────────────────
+
+const MANIFESTO_DATE = "2026-05-20";
+const MANIFESTO_VERSION = "v0.27";
+
+export default function ManifestoPage() {
+  return (
+    <div className="flex flex-col flex-1 min-h-screen">
+      <Nav />
+
+      <main id="main">
+        <article className="mx-auto max-w-3xl w-full px-6 sm:px-10 pt-20 pb-12">
+          {/* ── PRINT-ONLY ATTRIBUTION ─────────────────── */}
+          <div
+            lang="en"
+            className="print-only mb-6 pb-3 border-b border-line/60 font-mono text-[10px] uppercase tracking-[0.2em]"
+          >
+            <div className="flex justify-between gap-4">
+              <span>ZONE 27 — MANIFESTO {MANIFESTO_VERSION}</span>
+              <span>PRINTED · zone27-web.vercel.app/manifesto</span>
+            </div>
+          </div>
+
+          {/* ── HEADER ──────────────────────────────── */}
+          <header className="pb-10 border-b border-line/60">
+            <p
+              lang="en"
+              className="font-mono text-gold text-[10px] tracking-[0.45em] mb-6"
+            >
+              INVERTED BY DESIGN
+            </p>
+            <h1 className="text-4xl sm:text-5xl text-bone font-light tracking-tight leading-[1.1] mb-6">
+              倒置宣言
+              <span className="block mt-3 font-mono text-gold text-lg sm:text-xl tracking-[0.25em]">
+                THE FOUR INVERSIONS
+              </span>
+            </h1>
+            <p className="text-mute text-base leading-relaxed mb-8 max-w-2xl">
+              四個我們刻意倒置的行業預設。每一個倒置都有代價,代價就是品牌。
+              這份宣言列出我們的選擇、放棄的選項,以及為什麼。
+            </p>
+
+            <dl className="grid grid-cols-2 sm:grid-cols-3 gap-x-6 gap-y-4 font-mono text-[11px] tracking-[0.05em]">
+              <MetaPair label="VERSION" value={MANIFESTO_VERSION} />
+              <MetaPair label="PUBLISHED" value={MANIFESTO_DATE} />
+              <MetaPair label="AUTHOR" value="Tim · 創辦人" />
+            </dl>
+          </header>
+
+          {/* ── OPENING NOTE ────────────────────────── */}
+          <section className="pt-12 pb-2 space-y-5 text-mute text-base leading-relaxed max-w-2xl">
+            <P>
+              ZONE 27 是台灣硬核棒球迷的暗黑黃金級量化分析品牌。
+              我們做的事不獨特:Monte Carlo 模擬器、勝率分布、賽事資料。
+              <strong className="text-bone">獨特的是我們刻意不做什麼。</strong>
+            </P>
+            <P>
+              下方四個段落,每一段都是行業正統做法 vs ZONE 27 倒置版本。
+              不是「我們還沒做到」,是「我們刻意倒置之」。
+              每一個倒置都讓我們失去某些東西 — 通常是某種規模、某種收入流、
+              某種行銷管道。我們接受這些代價,因為它們換來的東西
+              更稀有:可被驗證的信任。
+            </P>
+          </section>
+
+          {/* ── I · DISCLOSURE ──────────────────────── */}
+          <AxiomSection
+            roman="I"
+            label="DISCLOSURE"
+            zh="完整公開引擎"
+            industry="藏 model weights · 藏 training data · 藏 fine-tuning"
+            zone27="把整個演算法、所有輸入、所有限制全部寫進公開 model report"
+          >
+            <P>
+              <strong className="text-bone">行業為什麼藏:</strong>{" "}
+              OpenAI / Anthropic / Google 的商業模式核心是 API 計費 ·
+              算法是會被複製的資產。藏 weights = 對手不能立刻 fork =
+              billions of dollars 的 R&amp;D 不會在 24 小時內歸零。
+              對封閉式 AI 公司,商業邏輯成立。
+            </P>
+            <P>
+              <strong className="text-bone">誰因此受害:</strong>{" "}
+              訪客被迫信任不可驗證的黑盒。「我們的模型在 X 個 benchmark 上
+              拿到 Y 分」這種主張無法獨立檢驗 ·
+              使用者只能接受或拒絕,沒有第三條路。
+            </P>
+            <P>
+              <strong className="text-bone">這個倒置讓我們失去什麼:</strong>{" "}
+              任何工程師閱讀{" "}
+              <Link
+                href="/methodology"
+                className="text-gold hover:underline underline-offset-4"
+              >
+                /methodology
+              </Link>{" "}
+              + 30 分鐘 fork 我們的{" "}
+              <ExtLink href="https://github.com/Tim-xuan-you/zone27-web">
+                GitHub repository
+              </ExtLink>
+              ,就可以複製出功能等效的引擎。沒有算法護城河。
+            </P>
+            <P>
+              <strong className="text-bone">為什麼我們接受這個代價:</strong>{" "}
+              因為 ZONE 27 賣的不是演算法,是身分。
+              <Link href="/founders" className="text-gold hover:underline underline-offset-4">
+                Founders 27
+              </Link>{" "}
+              的價值是 #001 ~ #270 終身編號 + 創辦人親手 onboarding +
+              建立期社群的位置 —{" "}
+              <strong className="text-bone">這些東西 fork 不走</strong>。
+              算法本來就沒有可藏的價值,硬藏 = 假裝有秘密 = 對訪客撒謊
+              = 品牌信用自殺。
+            </P>
+            <P className="text-mute/70">
+              完整論證見{" "}
+              <Link href="/audit" className="text-gold hover:underline">
+                /audit
+              </Link>{" "}
+              Section 08 · DISCLOSURE PHILOSOPHY。
+            </P>
+          </AxiomSection>
+
+          {/* ── II · MONETIZATION ───────────────────── */}
+          <AxiomSection
+            roman="II"
+            label="MONETIZATION"
+            zh="工具免費,身分付費"
+            industry="工具 per-use 計費 (SaaS) 或免費釣魚後抽佣 (運彩平台)"
+            zone27="引擎完全免費 · 收費僅在身分層 (Founders 27 + BLACK CARD)"
+          >
+            <P>
+              <strong className="text-bone">行業為什麼這樣收費:</strong>{" "}
+              SaaS 模式收入隨使用量線性成長,投資人估值模型友善
+              (LTV / CAC / Net Revenue Retention 都有現成公式)。
+              運彩平台則用免費工具當釣餌,賺真錢靠賭注抽佣 30-50% —
+              這種比例只有在「使用者看不見」的地方才可能。
+            </P>
+            <P>
+              <strong className="text-bone">誰因此受害:</strong>{" "}
+              偶爾使用者每月被 charge 卻沒用到那個錢的價值 ·
+              重度使用者繳的也覆蓋不了他造成的真實服務成本(被攤平了)·
+              而運彩用戶最大的受害是不知道自己一年付了多少抽佣
+              (隱藏在每筆下注的賠率裡)。
+            </P>
+            <P>
+              <strong className="text-bone">這個倒置讓我們失去什麼:</strong>{" "}
+              我們永遠不會有「ARR 50x 線性成長」的故事可以講給創投。
+              收入上限 = 270 位 Founders × NT$ 2,700 + N 位 BLACK CARD ×
+              NT$ 499/月。這是一個{" "}
+              <Link href="/about" className="text-gold hover:underline underline-offset-4">
+                俱樂部規模的事業
+              </Link>
+              ,不是 unicorn 路線。
+            </P>
+            <P>
+              <strong className="text-bone">為什麼我們接受這個代價:</strong>{" "}
+              因為我們蓋的不是消耗品 SaaS,是 270 人封閉俱樂部 + 一個
+              開放給所有人的精緻工具。引擎免費讓任何懷疑者可以親手驗證 ·
+              身分付費讓真正想成為品牌一部分的人有專屬位置。
+              這兩件事不能反過來:免費身分 + 收費工具 = 我們變成普通 SaaS。
+            </P>
+            <P className="text-mute/70">
+              現場版完整聲明見{" "}
+              <Link
+                href="/lab/custom"
+                className="text-gold hover:underline underline-offset-4"
+              >
+                /lab/custom
+              </Link>{" "}
+              hero footer。
+            </P>
+          </AxiomSection>
+
+          {/* ── III · COVERAGE ──────────────────────── */}
+          <AxiomSection
+            roman="III"
+            label="COVERAGE"
+            zh="引擎能誠實算的才覆蓋"
+            industry="覆蓋全部可下注賽事 (越多上架 · 越多抽佣機會)"
+            zone27="只覆蓋引擎驗證過、誠實能算的賽事 · 拒絕為了量犧牲信號品質"
+          >
+            <P>
+              <strong className="text-bone">行業為什麼覆蓋全部:</strong>{" "}
+              運彩 / 報馬仔平台的收入線性綁定上架賽事數 — 多一場 CPBL
+              次級聯盟 · 多一場 K-League · 多一場非洲冠軍盃 = 多一條抽佣管道。
+              這套商業模式底下,
+              <strong className="text-bone">引擎能不能算 ≠ 該不該上架</strong>。
+            </P>
+            <P>
+              <strong className="text-bone">誰因此受害:</strong>{" "}
+              當訪客拿到「兄弟 vs 統一 62 : 38」這種輸出 · 看起來跟
+              「非洲第三聯賽 A vs B 55 : 45」一模一樣的卡片 · 但事實上
+              第二場引擎根本沒有可信的輸入資料,輸出是隨機數加包裝。
+              訪客以為兩者同等可信 · 押的賭注是在被誤導之上。
+            </P>
+            <P>
+              <strong className="text-bone">這個倒置讓我們失去什麼:</strong>{" "}
+              當下{" "}
+              <Link href="/coverage" className="text-gold hover:underline underline-offset-4">
+                /coverage
+              </Link>{" "}
+              頁面承認我們只覆蓋 MLB + 3 場 CPBL 範例 —
+              比運彩平台的數百場少了兩個數量級。
+              這個小覆蓋面意味著流量上限低 · 訪客回訪率低 ·
+              「來 ZONE 27 看今天有什麼」這個習慣難以建立。
+            </P>
+            <P>
+              <strong className="text-bone">為什麼我們接受這個代價:</strong>{" "}
+              品牌的核心資產是訊號品質。一旦我們上架一場引擎其實算不準的賽事 ·
+              說服力立刻全面打折 — 所有頁面上的 K/9 · BB/9 · HR/9 數字都
+              變得「可能也是這樣亂寫的」。
+              <strong className="text-bone">覆蓋率可以慢慢長 · 信任一旦丟就回不來</strong>。
+            </P>
+            <P className="text-mute/70">
+              完整 curation 名單見{" "}
+              <Link href="/coverage" className="text-gold hover:underline">
+                /coverage · CPBL HAND-CURATED
+              </Link>
+              。
+            </P>
+          </AxiomSection>
+
+          {/* ── IV · PRIVACY ────────────────────────── */}
+          <AxiomSection
+            roman="IV"
+            label="PRIVACY"
+            zh="零第三方追蹤"
+            industry="Google Analytics + Facebook Pixel + Hotjar + 全套廣告 retargeting"
+            zone27="0 第三方 cookies · 0 trackers · 0 pixels · 0 session recording"
+          >
+            <P>
+              <strong className="text-bone">行業為什麼追蹤:</strong>{" "}
+              個人化能讓轉換率提升 15-30% · retargeting 廣告 ROAS 平均高
+              5-8 倍 · A/B testing 讓產品決策有數據根據。
+              現代行銷的整套 playbook 就是建立在「我們知道訪客每一步動作」這個前提上。
+            </P>
+            <P>
+              <strong className="text-bone">誰因此受害:</strong>{" "}
+              訪客 — 但他們大多不知道。
+              一次造訪可能在背後觸發 8-12 個追蹤腳本 · 把 IP、瀏覽器指紋、
+              滑鼠軌跡、停留時間全部送進 Google / Meta / TikTok 的廣告聯播網。
+              這些資料後續被用來在訪客其他網站做 retargeting · 在他
+              不知情的狀態下持續追蹤一輩子。
+            </P>
+            <P>
+              <strong className="text-bone">這個倒置讓我們失去什麼:</strong>{" "}
+              我們無法做 A/B testing(看不到使用者行為差異)·
+              無法做 retargeting 廣告(沒有 audience pool)·
+              無法精細測量行銷 funnel 各階段轉換率。
+              這些是現代行銷 SaaS 的標準動作,我們全部放棄。
+            </P>
+            <P>
+              <strong className="text-bone">為什麼我們接受這個代價:</strong>{" "}
+              因為我們本來就不打廣告 — 沒有 audience profiling 的需求 ·
+              沒有 retargeting 的對象。
+              真正的回饋管道是 Founders 27 直接寫信給創辦人 ·
+              這比任何 heatmap 都精確一千倍。
+              <strong className="text-bone">放棄追蹤的代價剛好是 0</strong> —
+              我們失去的能力本來就不在我們的成長路徑上。
+            </P>
+            <P className="text-mute/70">
+              完整不追蹤清單見{" "}
+              <Link href="/privacy" className="text-gold hover:underline">
+                /privacy
+              </Link>{" "}
+              Section 03 · WHAT WE DELIBERATELY DON&apos;T COLLECT。
+            </P>
+          </AxiomSection>
+
+          {/* ── SHAREABLE PULL-QUOTE ──────────────────── */}
+          <blockquote
+            className="mt-16 mx-auto max-w-2xl border-l-2 border-gold/60 pl-6 sm:pl-8 py-2 font-light text-bone text-2xl sm:text-3xl leading-snug"
+            style={{ textWrap: "balance" }}
+          >
+            &ldquo;每一個{" "}
+            <span className="text-gold">「我們不做」</span>,
+            都是{" "}
+            <span className="text-gold">「我們是誰」</span>{" "}
+            的證明。&rdquo;
+            <footer className="mt-4 font-mono text-mute text-[10px] tracking-[0.3em] not-italic">
+              — ZONE 27 倒置宣言 {MANIFESTO_VERSION} · 上方四個倒置詳列
+            </footer>
+          </blockquote>
+
+          {/* ── CLOSING · WHO IS THIS FOR ────────────── */}
+          <section className="pt-16 pb-2 mt-12 border-t border-line/40">
+            <div className="flex items-baseline gap-4 mb-6">
+              <span className="font-mono text-gold/70 text-[11px] tabular tracking-[0.3em]">
+                V
+              </span>
+              <h2 className="font-mono text-bone text-[11px] tracking-[0.3em]">
+                WHO THIS IS FOR
+              </h2>
+            </div>
+            <div className="space-y-5 text-mute text-base leading-relaxed max-w-2xl">
+              <P>
+                這份宣言不是寫給所有人。
+                <strong className="text-bone">是寫給三種人:</strong>
+              </P>
+              <List>
+                <Item label="硬核棒球迷">
+                  看比賽時自己會算 wOBA、WAR、xFIP 的人。對運彩平台的色情化包裝
+                  反感、想要乾淨的數據與透明的方法論。
+                </Item>
+                <Item label="工程師同好">
+                  習慣讀 paper、檢查 source code、會 fork repo 自己跑驗證的人。
+                  你 30 分鐘可以複製我們的引擎 — 我們知道。
+                </Item>
+                <Item label="厭惡掠奪式平台的人">
+                  曾經被「保證命中」「大師明牌」這類話術騙過,
+                  想找一個明確說「我們只算機率,不保證任何結果」的品牌。
+                </Item>
+              </List>
+              <P>
+                如果你不屬於這三種,
+                <strong className="text-bone">ZONE 27 不適合你</strong> —
+                我們不打算說服你。市場上有很多適合所有人的平台。
+              </P>
+            </div>
+          </section>
+
+          {/* ── FOOTER · SIGN-OFF ─────────────────────── */}
+          <footer className="pt-12 mt-12 border-t border-line/60">
+            <p className="font-mono text-mute text-[11px] tracking-[0.25em] mb-6">
+              VERIFY THIS MANIFESTO
+            </p>
+            <ul className="space-y-3 text-sm text-mute leading-relaxed">
+              <li>
+                ▸ 倒置 I · 完整 model report:{" "}
+                <Link href="/audit" className="text-gold hover:underline">
+                  /audit
+                </Link>{" "}
+                — 8 sections · 列出每一個假設
+              </li>
+              <li>
+                ▸ 倒置 II · 引擎工具免費:{" "}
+                <Link href="/lab" className="text-gold hover:underline">
+                  /lab
+                </Link>{" "}
+                + {" "}
+                <Link href="/lab/custom" className="text-gold hover:underline">
+                  /lab/custom
+                </Link>{" "}
+                — 在您瀏覽器內跑 10,000 場模擬
+              </li>
+              <li>
+                ▸ 倒置 III · 親手 curation 範圍:{" "}
+                <Link href="/coverage" className="text-gold hover:underline">
+                  /coverage
+                </Link>
+              </li>
+              <li>
+                ▸ 倒置 IV · 不追蹤清單:{" "}
+                <Link href="/privacy" className="text-gold hover:underline">
+                  /privacy
+                </Link>{" "}
+                Section 03
+              </li>
+              <li>
+                ▸ 完整原始碼:{" "}
+                <ExtLink href="https://github.com/Tim-xuan-you/zone27-web">
+                  github.com/Tim-xuan-you/zone27-web
+                </ExtLink>
+              </li>
+            </ul>
+
+            <p className="mt-12 font-mono text-mute text-[10px] tracking-[0.25em]">
+              本文件採 ZONE 27 Engineering Disclosure 規範 · 任何版本變動
+              於 GitHub commits 留存 · 不可被刪除
+            </p>
+
+            <div className="mt-10 flex items-center justify-center">
+              <CopyLinkButton />
+            </div>
+          </footer>
+        </article>
+
+        <RelatedReading currentPath="/manifesto" />
+      </main>
+
+      <Footer />
+    </div>
+  );
+}
+
+// ── Sub-components ─────────────────────────────────────
+
+function MetaPair({ label, value }: { label: string; value: string }) {
+  return (
+    <div>
+      <dt className="text-mute/70 mb-1 tracking-[0.25em]">{label}</dt>
+      <dd className="text-bone tabular">{value}</dd>
+    </div>
+  );
+}
+
+function AxiomSection({
+  roman,
+  label,
+  zh,
+  industry,
+  zone27,
+  children,
+}: {
+  roman: string;
+  label: string;
+  zh: string;
+  industry: string;
+  zone27: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <section className="pt-12 pb-2 mt-12 border-t border-line/40">
+      <div className="flex items-baseline gap-4 mb-3 section-reveal">
+        <span className="font-mono text-gold/70 text-[11px] tabular tracking-[0.3em]">
+          {roman}
+        </span>
+        <h2 className="font-mono text-bone text-[11px] tracking-[0.3em]">
+          {label}
+        </h2>
+      </div>
+      <h3 className="text-2xl sm:text-3xl text-bone font-light tracking-tight leading-tight mb-8">
+        {zh}
+      </h3>
+
+      {/* INDUSTRY ❌ vs ZONE 27 ✓ row */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-10 mb-10 border-y border-line/30 py-6">
+        <div>
+          <p
+            lang="en"
+            className="font-mono text-mute/60 text-[10px] tracking-[0.3em] mb-2"
+          >
+            INDUSTRY
+          </p>
+          <p className="text-mute text-sm leading-snug line-through decoration-mute/40">
+            {industry}
+          </p>
+        </div>
+        <div>
+          <p
+            lang="en"
+            className="font-mono text-gold/80 text-[10px] tracking-[0.3em] mb-2"
+          >
+            ZONE 27
+          </p>
+          <p className="text-bone text-sm leading-snug">{zone27}</p>
+        </div>
+      </div>
+
+      <div className="space-y-5 text-mute text-base leading-relaxed max-w-2xl">
+        {children}
+      </div>
+    </section>
+  );
+}
+
+function P({
+  children,
+  className = "",
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) {
+  return <p className={`leading-relaxed ${className}`}>{children}</p>;
+}
+
+function ExtLink({
+  href,
+  children,
+}: {
+  href: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="text-gold underline-offset-4 hover:underline"
+    >
+      {children}
+    </a>
+  );
+}
+
+function List({ children }: { children: React.ReactNode }) {
+  return <ul className="space-y-2.5 list-none pl-0">{children}</ul>;
+}
+
+function Item({
+  label,
+  children,
+}: {
+  label: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <li className="flex items-baseline gap-3 sm:gap-4 text-sm sm:text-base">
+      <span className="font-mono text-gold/70 text-[11px] tracking-[0.15em] shrink-0 sm:w-44 sm:max-w-44">
+        {label}
+      </span>
+      <span className="text-mute leading-relaxed flex-1">{children}</span>
+    </li>
+  );
+}

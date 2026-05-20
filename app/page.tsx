@@ -219,6 +219,19 @@ export default function Home() {
             hrefLabel="/privacy Section 03"
           />
         </div>
+
+        {/* CTA into the long-form canonical version. The 4 rows above
+            are the 5-second TLDR · /manifesto is the 5-minute read with
+            the full "why we accept the cost" argument. */}
+        <div className="mt-14 text-center">
+          <Link
+            href="/manifesto"
+            className="inline-flex items-center gap-3 font-mono text-gold text-[10px] sm:text-[11px] tracking-[0.3em] hover:opacity-80 transition-opacity"
+          >
+            <span>完整宣言 · 5 分鐘讀懂這 4 個倒置</span>
+            <span aria-hidden="true">→</span>
+          </Link>
+        </div>
       </section>
 
       {/* ── FOUNDERS 27 STRIP ──────────────────────── */}
