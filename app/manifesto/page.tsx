@@ -316,11 +316,127 @@ export default function ManifestoPage() {
             </footer>
           </blockquote>
 
-          {/* ── CLOSING · WHO IS THIS FOR ────────────── */}
+          {/* ── V · SYNTHESIS · 方法公開 · 品味私藏 ─────
+              Crystallizes the 4 axioms into a single operational
+              principle. The 8-character framing distinguishes ZONE
+              27 from BOTH closed AI labs (藏一切) AND naive
+              "everything public" indie projects (沒可賣的東西).
+              Public + Private coexist intentionally · this is
+              what makes the model defensible. */}
           <section className="pt-16 pb-2 mt-12 border-t border-line/40">
             <div className="flex items-baseline gap-4 mb-6">
               <span className="font-mono text-gold/70 text-[11px] tabular tracking-[0.3em]">
                 V
+              </span>
+              <h2 className="font-mono text-bone text-[11px] tracking-[0.3em]">
+                SYNTHESIS · 方法公開 · 品味私藏
+              </h2>
+            </div>
+            <h3 className="text-3xl sm:text-4xl text-bone font-light tracking-tight leading-snug mb-8">
+              SHOW YOUR WORK ·
+              <br />
+              <span className="text-gold">KEEP YOUR SOUL.</span>
+            </h3>
+
+            <div className="space-y-5 text-mute text-base leading-relaxed max-w-2xl">
+              <P>
+                4 個倒置濃縮成一句話:
+                <strong className="text-bone">
+                  「公開複製不走的算法,藏複製不走的人 + 品味 + 社群」
+                </strong>
+                。
+              </P>
+              <P>
+                這跟「全部公開」(naive indie)不一樣,也跟「全部藏」(closed AI lab)
+                不一樣。是兩個世界都要:
+              </P>
+            </div>
+
+            {/* ── 2-column SHOW vs KEEP ──────────────── */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8 mt-10 mb-10">
+              {/* 公開 */}
+              <div className="border border-line/60 p-6 sm:p-7 bg-slate/30">
+                <p
+                  lang="en"
+                  className="font-mono text-mute text-[10px] tracking-[0.3em] mb-5"
+                >
+                  PUBLIC · 攤陽光下 · 訪客可驗證
+                </p>
+                <ul className="space-y-2.5 text-mute text-sm leading-relaxed list-none pl-0">
+                  <SynthItem>演算法 · 程式碼 · GitHub source</SynthItem>
+                  <SynthItem>方法論 · 假設 · 排除清單</SynthItem>
+                  <SynthItem>商業模式 · 完整定價結構</SynthItem>
+                  <SynthItem>不收集什麼 · 不做什麼</SynthItem>
+                  <SynthItem>本身就是公開的事(Bill James 1985)</SynthItem>
+                </ul>
+                <p className="mt-6 pt-4 border-t border-line/40 font-mono text-mute/80 text-[10px] tracking-[0.25em] leading-relaxed">
+                  公開的事 fork 走無意義 · 信任卻能換來
+                </p>
+              </div>
+
+              {/* 私藏 */}
+              <div className="border border-gold/40 p-6 sm:p-7 bg-gold/5 glow-soft">
+                <p
+                  lang="en"
+                  className="font-mono text-gold text-[10px] tracking-[0.3em] mb-5"
+                >
+                  PRIVATE · 訪客買不到的特權 · 限定身分
+                </p>
+                <ul className="space-y-2.5 text-bone text-sm leading-relaxed list-none pl-0">
+                  <SynthItem gold>
+                    270 個 Founders 身分(全宇宙只有 270 個)
+                  </SynthItem>
+                  <SynthItem gold>
+                    Founders LINE 群對話(關門的)
+                  </SynthItem>
+                  <SynthItem gold>
+                    Tim 每日策展焦點(人工 · BLACK CARD 訂閱限定)
+                  </SynthItem>
+                  <SynthItem gold>
+                    每週工程筆記(BLACK CARD 訂閱限定)
+                  </SynthItem>
+                  <SynthItem gold>
+                    線上工作坊 + 模型 voting / preview(訂閱限定)
+                  </SynthItem>
+                </ul>
+                <p className="mt-6 pt-4 border-t border-gold/30 font-mono text-gold text-[10px] tracking-[0.25em] leading-relaxed">
+                  Tim 本人 · 27 年品味 · 不可能 fork
+                </p>
+              </div>
+            </div>
+
+            <div className="space-y-5 text-mute text-base leading-relaxed max-w-2xl">
+              <P>
+                <strong className="text-bone">這個 framing 解決兩個矛盾:</strong>
+              </P>
+              <List>
+                <Item label="假厲害 vs 真厲害">
+                  「藏算法」是假厲害(對手 30 分鐘 fork 就拆穿)。
+                  「藏 270 個身分 + Tim 的品味」是真厲害(本來就 fork 不走)。
+                </Item>
+                <Item label="信任 vs 神秘感">
+                  「全部攤」訪客信任你(可驗證)。
+                  「保留訂閱者特權」訪客還是想加入(因為神秘感)。
+                </Item>
+                <Item label="紅海 vs 藍海">
+                  「假裝有秘密」進的是紅海(LINE 老師 / 報馬仔 / 殺手平台 50+ 個競品)。
+                  「公開方法 + 私藏身分」進的是藍海(0 競品)。
+                </Item>
+              </List>
+              <P className="text-mute/70">
+                世界級案例驗證這套模式:Patagonia(供應鏈公開 · 品牌身分認同)·
+                Plausible(source code 在 GitHub · 收 $19/月) · Stratechery
+                (內容半免費 · USD $12/月)· Signal(完全開源 · 靠捐款 + 信任活)·
+                The Athletic(比分免費 · 訂閱買編輯品味)。
+              </P>
+            </div>
+          </section>
+
+          {/* ── VI · CLOSING · WHO IS THIS FOR ────────── */}
+          <section className="pt-16 pb-2 mt-12 border-t border-line/40">
+            <div className="flex items-baseline gap-4 mb-6">
+              <span className="font-mono text-gold/70 text-[11px] tabular tracking-[0.3em]">
+                VI
               </span>
               <h2 className="font-mono text-bone text-[11px] tracking-[0.3em]">
                 WHO THIS IS FOR
@@ -496,6 +612,28 @@ function P({
   className?: string;
 }) {
   return <p className={`leading-relaxed ${className}`}>{children}</p>;
+}
+
+function SynthItem({
+  children,
+  gold = false,
+}: {
+  children: React.ReactNode;
+  gold?: boolean;
+}) {
+  return (
+    <li className="flex items-baseline gap-3">
+      <span
+        aria-hidden="true"
+        className={`font-mono text-[10px] tracking-[0.2em] shrink-0 ${
+          gold ? "text-gold" : "text-mute/60"
+        }`}
+      >
+        ▸
+      </span>
+      <span className="flex-1">{children}</span>
+    </li>
+  );
 }
 
 function ExtLink({
