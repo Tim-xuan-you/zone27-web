@@ -45,7 +45,7 @@ export default function Home() {
         <p className="mt-10 max-w-xl mx-auto text-mute leading-relaxed">
           全台第一個為硬核棒球迷打造的暗黑黃金級數據俱樂部。
           <br />
-          蒙地卡羅 AI 模擬器 · 不可篡改的勝率紀錄 · 零手續費的會員制社群。
+          蒙地卡羅模擬器 · git 不可篡改紀錄 · 創作者抽成 0%(Founders 27)/ 5%(BLACK CARD)。
         </p>
 
         {/* Hero CTAs · 5-second-test compliance · visitors get an
@@ -168,21 +168,21 @@ export default function Home() {
         <div className="grid sm:grid-cols-3 gap-12">
           <Pillar
             no="01"
-            zh="會員制零抽成"
-            en="ZERO COMMISSION"
-            body="拋開玩運彩 30-50% 的剝奪式抽成。黑金會員月費 NT$ 499,大神賣明牌 100% 全拿。"
+            zh="會員制低抽成"
+            en="LOW COMMISSION"
+            body="運彩 / 報馬仔 30-50% 抽成 · ZONE 27 創始會員 0% / 黑金會員 5%。創作者賣明牌的錢絕大部分回到自己口袋。"
           />
           <Pillar
             no="02"
             zh="不可篡改紀錄"
             en="TRANSPARENT BY DESIGN"
-            body="勝率寫死在系統。沒有 LINE 群組的黑箱、沒有刪文截圖,只有殘酷而誠實的數據。"
+            body="預測一旦寫進 git commits · 永久公開於 GitHub。沒有 LINE 群組刪文 · 沒有截圖造假 · 只有可被任何人 cross-check 的歷史。"
           />
           <Pillar
             no="03"
-            zh="量化視覺化"
-            en="WALL-STREET GRADE"
-            body="戰力雷達、走勢曲線、模擬偏差復盤 —— 看盤體驗精緻得像高階經紀商的儀表板。"
+            zh="即時 Monte Carlo"
+            en="LIVE IN-BROWSER ENGINE"
+            body="10,000 場模擬 ~2 秒在您 CPU 收斂 · REPLAY 一場 9 局逐打席文字直播 · 引擎 GitHub 全開源。"
           />
         </div>
       </section>
@@ -319,6 +319,92 @@ export default function Home() {
 
         <p className="mt-10 text-center font-mono text-mute text-[10px] tracking-[0.3em] max-w-xl mx-auto leading-relaxed">
           每個 tile 點進去都能驗證 · 沒有「相信我們」這 4 個字
+        </p>
+      </section>
+
+      {/* ── TRUST STACK · 6 trust artifact pages ────
+          The site's full disclosure infrastructure visualized as
+          one grid. Visitors see "there are 6 deep documents you
+          can read" instead of "there's an about page." Each card
+          links to the full artifact. Discoverability + scale signal
+          combined.
+          Pattern source: Anthropic transparency hub navigation +
+          Plausible "Funded by · Owned by" footer stack. */}
+      <section
+        aria-labelledby="trust-stack-heading"
+        className="mx-auto max-w-5xl w-full px-6 sm:px-10 py-24 border-t border-line/40"
+      >
+        <p className="font-mono text-gold text-[10px] tracking-[0.45em] mb-3 text-center">
+          TRUST STACK · 6 DEEP DOCUMENTS
+        </p>
+        <h2
+          id="trust-stack-heading"
+          className="text-3xl sm:text-4xl text-bone font-light tracking-tight text-center mb-4 max-w-xl mx-auto leading-snug"
+        >
+          這個品牌的<span className="text-gold">每一個主張</span>,
+          <br />
+          都有一份完整文件當證據。
+        </h2>
+        <p className="text-center text-mute text-sm mb-14 max-w-xl mx-auto leading-relaxed">
+          競爭品牌通常有 1 頁「About」+ 1 頁「Privacy」。
+          ZONE 27 有 6 個 trust artifact pages · 累積 40+ sections。
+        </p>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-line/30">
+          <TrustCard
+            no="01"
+            href="/manifesto"
+            title="倒置宣言"
+            subtitle="MANIFESTO"
+            sections="6 sections"
+            desc="4 個刻意倒置軸線 + 方法公開 · 品味私藏 framing"
+          />
+          <TrustCard
+            no="02"
+            href="/audit"
+            title="模型報告"
+            subtitle="MODEL REPORT"
+            sections="8 sections"
+            desc="假設 · 輸入 · 排除清單 · 已知失效模式 · 環境衝擊"
+            gold
+          />
+          <TrustCard
+            no="03"
+            href="/methodology"
+            title="技術白皮書"
+            subtitle="METHODOLOGY"
+            sections="9 sections"
+            desc="蒙地卡羅引擎 · PA 機率推導 · 收斂驗證 · 路線圖"
+          />
+          <TrustCard
+            no="04"
+            href="/coverage"
+            title="覆蓋範圍"
+            subtitle="COVERAGE"
+            sections="6 sections"
+            desc="active / tracked / requested / never · 完整 ledger"
+          />
+          <TrustCard
+            no="05"
+            href="/privacy"
+            title="隱私政策"
+            subtitle="PRIVACY"
+            sections="8 sections"
+            desc="我們收什麼(5 個欄位) + 不收什麼(7 大項)"
+            gold
+          />
+          <TrustCard
+            no="06"
+            href="/discipline"
+            title="鐵律"
+            subtitle="DISCIPLINE"
+            sections="5 sections"
+            desc="Buffett 信譽 + Musk 第一原理 + Costco 會員制"
+          />
+        </div>
+
+        <p className="mt-10 text-center font-mono text-mute text-[10px] tracking-[0.3em] max-w-xl mx-auto leading-relaxed">
+          每份文件都可以截圖傳給朋友 · 不需要您解釋一個字
         </p>
       </section>
 
@@ -468,6 +554,75 @@ function CredibilityCell({
       </p>
       <p className="text-mute text-xs sm:text-sm leading-relaxed">{body}</p>
     </div>
+  );
+}
+
+// Card component for the "TRUST STACK" grid · linkable to each
+// of the 6 canonical trust artifact pages. Subtly different
+// from ProofTile (which shows numbers, not document references).
+function TrustCard({
+  no,
+  href,
+  title,
+  subtitle,
+  sections,
+  desc,
+  gold = false,
+}: {
+  no: string;
+  href: string;
+  title: string;
+  subtitle: string;
+  sections: string;
+  desc: string;
+  gold?: boolean;
+}) {
+  return (
+    <Link
+      href={href}
+      className="block bg-navy p-6 sm:p-7 group transition-colors hover:bg-slate/40"
+    >
+      <div className="flex items-baseline justify-between mb-4">
+        <span
+          className={`font-mono tabular text-[10px] tracking-[0.3em] ${
+            gold ? "text-gold" : "text-mute"
+          }`}
+        >
+          / {no}
+        </span>
+        <span
+          lang="en"
+          className={`font-mono text-[9px] tracking-[0.25em] ${
+            gold ? "text-gold/70" : "text-mute/60"
+          }`}
+        >
+          {sections}
+        </span>
+      </div>
+      <h3
+        className={`text-2xl font-light tracking-tight mb-1 ${
+          gold ? "text-gold" : "text-bone"
+        } group-hover:text-gold transition-colors`}
+      >
+        {title}
+      </h3>
+      <p
+        lang="en"
+        className="font-mono text-mute text-[10px] tracking-[0.3em] mb-4 group-hover:text-gold/80 transition-colors"
+      >
+        {subtitle}
+      </p>
+      <p className="text-mute text-sm leading-relaxed mb-4 group-hover:text-bone transition-colors">
+        {desc}
+      </p>
+      <p
+        className={`font-mono text-[10px] tracking-[0.3em] ${
+          gold ? "text-gold" : "text-mute/70"
+        } group-hover:text-gold transition-colors`}
+      >
+        讀完整文件 →
+      </p>
+    </Link>
   );
 }
 
