@@ -47,6 +47,27 @@ export default function Home() {
           <br />
           蒙地卡羅 AI 模擬器 · 不可篡改的勝率紀錄 · 零手續費的會員制社群。
         </p>
+
+        {/* Hero CTAs · 5-second-test compliance · visitors get an
+            action point immediately after the slogan + description.
+            Primary CTA drives to /founders (highest conversion intent);
+            secondary lets quant-curious visitors taste the engine first
+            (typical for premium founder-led brands · Linear, Stripe,
+            Plaid all have dual hero CTAs). */}
+        <div className="mt-12 flex flex-wrap gap-3 sm:gap-4 justify-center">
+          <Link
+            href="/founders"
+            className="px-7 sm:px-9 py-3 bg-gold text-navy text-xs tracking-[0.3em] hover:bg-gold-soft transition-colors font-medium"
+          >
+            加入創始名冊 →
+          </Link>
+          <Link
+            href="/lab"
+            className="px-7 sm:px-9 py-3 border border-gold/50 text-gold text-xs tracking-[0.3em] hover:bg-gold/10 transition-colors"
+          >
+            親手跑一場引擎 →
+          </Link>
+        </div>
       </section>
 
       {/* ── CREDIBILITY STRIP ──────────────────────── */}
