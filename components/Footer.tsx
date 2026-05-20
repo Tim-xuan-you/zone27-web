@@ -21,7 +21,6 @@ const SECONDARY_LINKS = [
   { label: "覆蓋範圍", href: "/coverage", external: false },
   { label: "詞彙表", href: "/glossary", external: false },
   { label: "常見問題", href: "/faq", external: false },
-  { label: "版本紀錄", href: "/changelog", external: false },
   { label: "實驗室", href: "/lab", external: false },
   { label: "每日早報", href: "/signal-board", external: false },
   { label: "GitHub 開源", href: "https://github.com/Tim-xuan-you/zone27-web", external: true },
@@ -86,9 +85,11 @@ export default function Footer() {
             <span lang="en">BUILT FOR THOSE WHO READ THE NUMBERS</span>
           </p>
           <a
-            href="/changelog"
+            href="https://github.com/Tim-xuan-you/zone27-web/commits/main"
+            target="_blank"
+            rel="noopener noreferrer"
             className="chip-pop inline-flex items-center gap-2 font-mono text-[10px] tracking-[0.3em] text-mute hover:text-gold transition-colors"
-            title="View full changelog"
+            title="完整版本歷史 — GitHub commits (source of truth)"
           >
             <span className="chip-dot w-1.5 h-1.5 rounded-full bg-gold/70 glow-gold" />
             <span>
