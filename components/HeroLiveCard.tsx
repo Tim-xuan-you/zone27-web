@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import type { Match } from "@/lib/matches";
+import { isMatchDataStale, type Match } from "@/lib/matches";
 import {
   simulateGame,
   applyBatch,
@@ -27,6 +27,11 @@ export default function HeroLiveCard({ match }: { match: Match }) {
   const [stats, setStats] = useState<RunningStats>(initialStats);
   const [phase, setPhase] = useState<"simulating" | "converged">("simulating");
   const rafRef = useRef<number | null>(null);
+  // The matchup data is demo (pre-CPBL-ingestion era); the Monte Carlo
+  // output is real and runs in the visitor's browser. Surface the
+  // distinction honestly per [[zone27-disclosure-philosophy]] — we
+  // don't pretend yesterday's hardcoded matchup is today's live game.
+  const isStale = isMatchDataStale(match);
 
   // Start the mini-sim once on mount
   useEffect(() => {
@@ -69,7 +74,7 @@ export default function HeroLiveCard({ match }: { match: Match }) {
     >
       {/* Card header */}
       <div className="flex items-center justify-between mb-10 flex-wrap gap-3">
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 flex-wrap">
           <span
             aria-hidden="true"
             className={`w-1.5 h-1.5 rounded-full bg-gold ${
@@ -85,6 +90,15 @@ export default function HeroLiveCard({ match }: { match: Match }) {
               ? "● 即時模擬中"
               : "● AI 模型 · 已收斂"}
           </span>
+          {isStale && (
+            <span
+              lang="en"
+              className="px-1.5 py-0.5 text-[8px] tracking-[0.2em] border border-gold/30 text-gold/70 font-mono whitespace-nowrap"
+              title="這對決是示範資料 · Monte Carlo 計算結果為真"
+            >
+              DEMO · ENGINE OUTPUT REAL
+            </span>
+          )}
         </div>
         <span className="font-mono text-mute text-[10px] tracking-[0.25em]">
           {match.date} · {match.startTime}
