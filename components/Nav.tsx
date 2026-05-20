@@ -94,11 +94,13 @@ export default function Nav({ active }: { active?: NavKey }) {
         </div>
 
         {/* Mobile · 2nd row: 4 secondary nav links (excluding founders
-            which is the always-visible gold pill above) + a '更多 ↓'
-            anchor that smooth-scrolls to the footer where ALL routes
-            live (model report · 方法論 · 覆蓋範圍 · FAQ · 詞彙表 ·
-            每日早報 · GitHub 開源). Light, breathing, no horizontal-
-            scroll trap. Hidden on desktop. */}
+            which is the always-visible gold pill above). Light,
+            breathing, no horizontal-scroll trap. No '更多 ↓' anchor
+            — Apple/Stripe/Linear all skip the 'see more' hint on
+            mobile marketing pages. Visitors who want deeper pages
+            scroll to footer or follow inline content links; we
+            don't telegraph 'we have more pages we're hiding' which
+            would contradict the [[disclosure-philosophy]] axis. */}
         <div className="sm:hidden mx-auto max-w-6xl px-6 pb-3">
           <ul className="flex items-center justify-between gap-2 text-[10px] font-mono">
             {NAV_ITEMS.filter((item) => item.key !== "founders").map(
@@ -126,16 +128,6 @@ export default function Nav({ active }: { active?: NavKey }) {
                 </li>
               ),
             )}
-            <li>
-              <a
-                href="#site-footer"
-                aria-label="跳到頁尾找更多頁面"
-                className="tracking-[0.18em] whitespace-nowrap text-mute/70 hover:text-gold transition-colors inline-flex items-center gap-0.5"
-              >
-                更多
-                <span aria-hidden="true">↓</span>
-              </a>
-            </li>
           </ul>
         </div>
       </nav>
