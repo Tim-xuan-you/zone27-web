@@ -101,7 +101,7 @@ export default function LabPage() {
                 key={m.id}
                 type="button"
                 onClick={() => setMatchId(m.id)}
-                className={`text-left p-4 border transition-colors ${
+                className={`text-left p-4 border transition-colors duration-150 cursor-pointer ${
                   active
                     ? "border-gold bg-gold/10 text-bone"
                     : "border-line/60 text-mute hover:border-gold/40 hover:text-bone"

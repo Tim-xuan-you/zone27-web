@@ -119,7 +119,7 @@ export default function Nav({ active }: { active?: NavKey }) {
                     {item.badge && (
                       <span
                         aria-label={`${item.label} 是 ${item.badge} 階段功能`}
-                        className="px-1 py-px text-[7px] tracking-[0.15em] border border-gold/40 text-gold"
+                        className="px-1 py-px text-[8px] tracking-[0.15em] border border-gold/40 text-gold"
                       >
                         {item.badge}
                       </span>
