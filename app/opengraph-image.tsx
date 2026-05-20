@@ -135,7 +135,11 @@ export default async function OgImage() {
           </div>
         </div>
 
-        {/* BOTTOM LEFT: positioning */}
+        {/* BOTTOM LEFT: positioning · matches homepage hero body
+            "全台第一個為硬核棒球迷打造的暗黑黃金級數據俱樂部" · honest
+            positioning (we're a quant club, not a "prediction" community
+            — the latter is gambling-adjacent language). Removed "最帥"
+            marketing fluff that violated disclosure philosophy. */}
         <div
           style={{
             position: "absolute",
@@ -147,7 +151,7 @@ export default async function OgImage() {
             display: "flex",
           }}
         >
-          全台最帥的暗黑黃金級體育預測社群
+          為硬核棒球迷打造的暗黑黃金級數據俱樂部
         </div>
 
         {/* BOTTOM RIGHT: live model badge */}

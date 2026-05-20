@@ -235,13 +235,14 @@ function CustomLabInner() {
             WHY PITCHERS ONLY · 為什麼只看投手?
           </p>
           <p className="text-mute text-sm leading-relaxed mb-3">
-            Bill James 1985 sabermetrics 核心發現 ——
+            sabermetric 累積研究(Bill James 1985 起始 ·
+            Tango/Lichtman/Dolphin 2007 THE BOOK 系統化)指出 ——
             短期棒球比賽方差,
-            <span className="text-bone font-medium">投手品質佔 &gt; 60%</span>,
-            其他(打者、守備、場、氣、審)全部加起來才 40%。
+            <span className="text-bone font-medium">投手品質佔最大宗(估 ~50-60%)</span>,
+            其他(打者、守備、場、氣、審)合計 40-50%。
           </p>
           <p className="text-mute text-sm leading-relaxed">
-            ZONE 27 對 60% 那部分做
+            ZONE 27 對最大宗那部分做
             <span className="text-bone font-medium">精準計算</span>,
             不是對 100% 做
             <span className="text-bone font-medium">不準計算</span>。
