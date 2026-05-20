@@ -30,11 +30,13 @@ export const metadata: Metadata = {
 
 const LAST_REVIEWED = "2026-05-20";
 
-type StatusKey = "READY" | "DEMO" | "AVAILABLE" | "PENDING" | "NEVER";
+type StatusKey = "READY" | "HAND_CURATED" | "DEMO" | "AVAILABLE" | "PENDING" | "NEVER";
 
 const STATUS_STYLE: Record<StatusKey, string> = {
   READY:
     "text-gold border-gold/60 bg-gold/5",
+  HAND_CURATED:
+    "text-gold border-gold/50 bg-gold/5",
   DEMO:
     "text-bone border-bone/60 bg-bone/5",
   AVAILABLE:
@@ -76,10 +78,10 @@ const ACTIVE_LEAGUES: LeagueRow[] = [
   {
     code: "CPBL",
     zh: "中華職棒",
-    source: "stats.cpbl.com.tw · 官方公開資料 · 目前以示範資料展示",
-    sampleNote: "目標 ~240 場/年 · 示範樣本 n=3",
-    status: "DEMO",
-    statusLabel: "DEMO DATA",
+    source: "stats.cpbl.com.tw · 官方公開資料 · 由 Tim 親手讀過每一場 + 寫進引擎",
+    sampleNote: "目標 ~240 場/年 · 創辦人親自 curate · 自動化等 Founders 27 滿員後啟動",
+    status: "HAND_CURATED",
+    statusLabel: "HAND-CURATED",
   },
 ];
 
@@ -341,8 +343,8 @@ export default function CoveragePage() {
               <SourceRow
                 league="CPBL"
                 source="stats.cpbl.com.tw"
-                license="官方公開展示 · 無 API · 計畫透過 RSS 或 Cloudflare Worker 解析"
-                status="DEMO"
+                license="官方公開展示 · 無 API · 創辦人親手讀每場比賽 → 寫進引擎 · 自動化等規模到時再評估"
+                status="HAND_CURATED"
               />
               <SourceRow
                 league="NPB"
