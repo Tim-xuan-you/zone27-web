@@ -371,6 +371,118 @@ export default async function FoundersPage({
         </p>
       </section>
 
+      {/* ── BLACK CARD VALUE REFRAME ──────────
+          Pre-empts the second-order visitor objection that comes
+          AFTER they accept "Founders 27 is finite identity, not
+          engine access":
+            "OK but after 270 are forged, BLACK CARD月費賣的是什麼?
+             我自己 host 引擎不就同樣免費?"
+          Same answer pattern as Founders reframe section above,
+          but specifically for monthly subscription value props.
+          Aligned with industry parallels (Stratechery / Athletic /
+          Bankless Premium / TradingView Pro): tool free · paid
+          tier sells community + curation + creator relationship.
+          ENGINE = lead magnet · BLACK CARD = recurring community. */}
+      <section
+        aria-labelledby="black-card-reframe-heading"
+        className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-24 border-t border-line/40 pt-20"
+      >
+        <p className="font-mono text-gold text-[10px] tracking-[0.4em] mb-6 text-center">
+          / BLACK CARD · 月費賣的是什麼
+        </p>
+        <h2
+          id="black-card-reframe-heading"
+          className="text-3xl sm:text-4xl text-bone font-light tracking-tight text-center mb-4"
+        >
+          您不是在訂閱引擎,
+          <br />
+          您在訂閱<span className="text-gold">社群與策展</span>。
+        </h2>
+        <p className="text-mute text-center text-sm sm:text-base mb-14 max-w-xl mx-auto leading-relaxed">
+          引擎免費 · 永遠免費。BLACK CARD 月費 NT$ 499 訂閱的是 6 件
+          自架引擎複製不了的事。對標 Stratechery · The Athletic ·
+          TradingView Pro — 工具免費,訂閱買的是創作者的角度 + 社群 + 策展。
+        </p>
+
+        <div className="grid sm:grid-cols-2 gap-6 sm:gap-8">
+          {/* ── 左欄 · 自架可做的事 ── */}
+          <div className="border border-line/60 p-6 sm:p-7 bg-slate/30">
+            <p
+              lang="en"
+              className="font-mono text-mute text-[10px] tracking-[0.3em] mb-5"
+            >
+              SELF-HOST · 自己 fork 也可以做的
+            </p>
+            <ul className="space-y-3 text-mute text-sm leading-relaxed list-none pl-0">
+              <BlackCardItem>跑無限次 Monte Carlo 模擬</BlackCardItem>
+              <BlackCardItem>自訂任意投手對戰</BlackCardItem>
+              <BlackCardItem>讀完整 /audit + /methodology</BlackCardItem>
+              <BlackCardItem>Fork GitHub 整個 codebase</BlackCardItem>
+              <BlackCardItem>用我們的方法做自己分析</BlackCardItem>
+            </ul>
+            <p className="mt-6 pt-4 border-t border-line/40 font-mono text-mute/80 text-[10px] tracking-[0.25em] leading-relaxed">
+              工具層 · commoditize
+            </p>
+          </div>
+
+          {/* ── 右欄 · BLACK CARD 月費 fork 不走 ── */}
+          <div className="border border-gold/40 p-6 sm:p-7 bg-gold/5 glow-soft">
+            <p
+              lang="en"
+              className="font-mono text-gold text-[10px] tracking-[0.3em] mb-5"
+            >
+              NT$ 499/月 · 持續性訂閱 · 預計 2026 Q3
+            </p>
+            <ul className="space-y-3 text-bone text-sm leading-relaxed list-none pl-0">
+              <BlackCardItem gold>
+                <strong>創辦人每日策展焦點</strong> — Tim 親手挑當日 edge
+                最強的 1-2 場 + 一段「為什麼今天看這場」
+              </BlackCardItem>
+              <BlackCardItem gold>
+                <strong>每週工程筆記</strong> — 模型為何改 v0.3 ·
+                下一版設計討論 · 內部視角
+              </BlackCardItem>
+              <BlackCardItem gold>
+                <strong>量化棒球 LINE 社群</strong> — 與其他硬核同好直接交流
+                · 經邀請才能進
+              </BlackCardItem>
+              <BlackCardItem gold>
+                <strong>明牌交易市場</strong> — 您也是創作者?平台抽 5%
+                (Founders 27 享 0%)
+              </BlackCardItem>
+              <BlackCardItem gold>
+                <strong>季度線上工作坊</strong> — 進階 sabermetrics +
+                個案 deep-dive · 只給訂閱者
+              </BlackCardItem>
+              <BlackCardItem gold>
+                <strong>模型迭代優先試用 + 投票權</strong> — 比 free tier
+                早試 · 影響下一版設計
+              </BlackCardItem>
+            </ul>
+            <p className="mt-6 pt-4 border-t border-gold/30 font-mono text-gold text-[10px] tracking-[0.25em] leading-relaxed">
+              意義層 · monopolize
+            </p>
+          </div>
+        </div>
+
+        <p
+          className="mt-12 text-center text-bone text-base sm:text-lg font-light max-w-2xl mx-auto leading-relaxed"
+          style={{ textWrap: "balance" }}
+        >
+          工具<span className="text-mute">能被複製</span>,意義
+          <span className="text-gold">不能</span>。
+          <br />
+          <span className="text-gold">ENGINE = LEAD MAGNET</span>
+          <span className="text-mute mx-3">·</span>
+          <span className="text-gold">BLACK CARD = 持續社群</span>
+        </p>
+
+        <p className="mt-8 text-center font-mono text-mute text-[10px] tracking-[0.3em] max-w-2xl mx-auto leading-relaxed">
+          同模式經濟學 · STRATECHERY USD $12/月 · THE ATHLETIC USD $7.99/月
+          · BANKLESS PREMIUM USD $22/月 · TRADINGVIEW PRO USD $30/月
+        </p>
+      </section>
+
       {/* ── BENEFITS GRID ────────────────── */}
       <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-24 border-t border-line/40 pt-20">
         <h2 className="text-3xl sm:text-4xl text-bone font-light tracking-tight text-center mb-4">
@@ -732,6 +844,28 @@ function NotBuyingItem({
         ▸
       </span>
       <span className="flex-1">{children}</span>
+    </li>
+  );
+}
+
+function BlackCardItem({
+  children,
+  gold = false,
+}: {
+  children: React.ReactNode;
+  gold?: boolean;
+}) {
+  return (
+    <li className="flex items-baseline gap-3">
+      <span
+        aria-hidden="true"
+        className={`font-mono text-[10px] tracking-[0.2em] shrink-0 ${
+          gold ? "text-gold" : "text-mute/60"
+        }`}
+      >
+        ▸
+      </span>
+      <span className="flex-1 leading-relaxed">{children}</span>
     </li>
   );
 }
