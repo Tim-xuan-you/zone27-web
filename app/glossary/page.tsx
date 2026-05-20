@@ -341,10 +341,26 @@ export default function GlossaryPage() {
   );
 }
 
+// Convert "K/9" → "k-9", "OPS+" → "ops-plus", "wRC+" → "wrc-plus", "K%" → "k-pct"
+// for use as URL anchors that match lib/stat-definitions.ts slugs.
+function anchorize(abbr: string): string {
+  return abbr
+    .toLowerCase()
+    .replace(/%/g, "-pct")
+    .replace(/\+/g, "-plus")
+    .replace(/\//g, "-")
+    .replace(/\s+/g, "-")
+    .replace(/-+/g, "-")
+    .replace(/^-|-$/g, "");
+}
+
 // ── Sub-component: single stat card ────────────────────
 function StatEntry({ stat }: { stat: Stat }) {
   return (
-    <div className="border-l-2 border-gold/30 pl-5 sm:pl-6 py-1">
+    <div
+      id={anchorize(stat.abbr)}
+      className="border-l-2 border-gold/30 pl-5 sm:pl-6 py-1 scroll-mt-24"
+    >
       <div className="flex items-baseline flex-wrap gap-3 mb-2">
         <span className="font-mono text-gold tabular text-2xl tracking-tight">
           {stat.abbr}

@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import MatchSimulator from "@/components/MatchSimulator";
 import CopyLinkButton from "@/components/CopyLinkButton";
 import RelatedReading from "@/components/RelatedReading";
+import StatTerm from "@/components/StatTerm";
 import { matches } from "@/lib/matches";
 
 export const metadata: Metadata = {
@@ -46,7 +47,8 @@ export default function MethodologyPage() {
         <p>
           ZONE 27 採用蒙地卡羅(Monte Carlo)模擬法估算 CPBL 比賽的勝率分布。
           引擎 v0.2 為逐打席對決模型(Real At-Bat),每場虛擬比賽包含
-          約 70 個打席,以投手 K/9 · BB/9 · HR/9 三項進階指標推導 8 種互斥結果的條件機率,
+          約 70 個打席,以投手 <StatTerm term="K/9" /> · <StatTerm term="BB/9" />{" "}
+          · <StatTerm term="HR/9" /> 三項進階指標推導 8 種互斥結果的條件機率,
           配合壘上跑者推進物理累計分數。10,000 次採樣的收斂結果通常與歷史鎖定 AI
           預測落在 <Mono>±2%</Mono> 內。
         </p>
@@ -148,7 +150,8 @@ hitsInPlay = remaining × 0.35   → 1B×0.75, 2B×0.20, 3B×0.05
         </Pre>
         <p>
           選擇 <Mono>38</Mono> 為「每 9 局期望打席數」的常數,基於 CPBL 過去 10 年平均(約 36-40)。
-          <Mono>clamp</Mono> 邊界值用於防範極端投手數據(如菜鳥首登 K/9 = 0)造成的數值崩潰。
+          <Mono>clamp</Mono> 邊界值用於防範極端投手數據(如菜鳥首登{" "}
+          <StatTerm term="K/9" /> = 0)造成的數值崩潰。
         </p>
         <p>
           剩餘 65% / 35% 拆分(場內出局 vs 場內安打)與 CPBL 聯盟 BABIP ~.300 一致。
@@ -315,17 +318,27 @@ N = 10,000, p ≈ 0.6  →  SE ≈ 0.49%
 
       {/* ── 08 ROADMAP ───────────────────────────── */}
       <Section no="08" label="ROADMAP" zh="v0.4 路線圖">
-        <p>下兩個主要版本的計畫:</p>
+        <p>下個主要版本的計畫(條件式 · 依資料可用性):</p>
         <ul className="space-y-4">
           <li>
             <strong className="text-bone">v0.3 (Batter Quality)</strong> ─
-            每位打者導入 OPS / wRC+ / K%,改寫 PA 機率模型成
+            每位打者導入 <StatTerm term="OPS" /> / <StatTerm term="wRC+" />{" "}
+            ,改寫 PA 機率模型成
             <Mono>P(outcome | pitcher × batter)</Mono> 的雙條件矩陣。
+            <span className="block mt-1 text-mute/70 text-xs">
+              觸發條件:CPBL 公開資料 OK,MLB 透過 Stats API 已 OK · 可在現有資料上路。
+            </span>
           </li>
           <li>
-            <strong className="text-bone">v0.4 (Trackman Priors)</strong> ─
-            接入 stats.cpbl.com.tw 公開的雷達追蹤資料(球速、轉軸、進壘角度),
-            把投手 K/9 等率取代為更精細的<Mono>球路 × 區位</Mono>條件機率。
+            <strong className="text-bone">v0.4 (Statcast Priors)</strong>{" "}
+            <span className="font-mono text-mute text-[10px] tracking-[0.2em] ml-2">
+              ASPIRATIONAL
+            </span>{" "}
+            ─ 若 CPBL 未來公開 Statcast 等級雷達追蹤資料(球速、轉軸、進壘角度),
+            把投手 <StatTerm term="K/9" /> 等率取代為更精細的{" "}
+            <Mono>球路 × 區位</Mono> 條件機率。MLB 已 Statcast 全公開 ·
+            CPBL <strong className="text-bone">尚未公開此維度</strong>,
+            因此此版本依賴 CPBL 資料開放 · 等同無條件式承諾。
           </li>
           <li>
             <strong className="text-bone">v0.5 (Bullpen + Fatigue)</strong> ─
@@ -333,7 +346,8 @@ N = 10,000, p ≈ 0.6  →  SE ≈ 0.49%
           </li>
           <li>
             <strong className="text-bone">v0.6 (Defense + Park)</strong> ─
-            各隊守備效率 (DRS) 調整 BABIP,各球場 HR/9 + 得分環境因子。
+            各隊守備效率 (DRS) 調整 <StatTerm term="BABIP" />,
+            各球場 <StatTerm term="HR/9" /> + 得分環境因子。
           </li>
         </ul>
         <p>
@@ -342,6 +356,11 @@ N = 10,000, p ≈ 0.6  →  SE ≈ 0.49%
             /changelog
           </Link>
           ,所有變動 commit message 公開可審。
+          路線圖屬於計畫 · 不是承諾 · 詳見{" "}
+          <Link href="/audit" className="text-gold underline-offset-4 hover:underline">
+            /audit
+          </Link>
+          {" "}Section 03 排除清單。
         </p>
       </Section>
 

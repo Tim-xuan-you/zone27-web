@@ -4,6 +4,7 @@ import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import CopyLinkButton from "@/components/CopyLinkButton";
 import RelatedReading from "@/components/RelatedReading";
+import StatTerm from "@/components/StatTerm";
 
 export const metadata: Metadata = {
   title: "Model Report — ZONE 27 Engine Audit",
@@ -100,7 +101,8 @@ export default function AuditPage() {
             <P>
               ZONE 27 Engine 是逐打席對決 Monte Carlo 模型,用於估算棒球比賽
               的勝率分布。每場虛擬比賽模擬 9 局共 ~70 個獨立打席,每個打席依
-              投手 <Code>K/9</Code> · <Code>BB/9</Code> · <Code>HR/9</Code> 推
+              投手 <StatTerm term="K/9" /> · <StatTerm term="BB/9" /> ·{" "}
+              <StatTerm term="HR/9" /> 推
               導 8 種互斥結果(<Code>K · BB · HR · 1B · 2B · 3B · GO · FO</Code>)
               的條件機率,滾亂數選一個,執行壘上推進物理累計分數。
             </P>

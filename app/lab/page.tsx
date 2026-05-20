@@ -7,6 +7,7 @@ import Footer from "@/components/Footer";
 import MatchSimulator from "@/components/MatchSimulator";
 import RecentSims from "@/components/RecentSims";
 import EngineFreeBrandBlock from "@/components/EngineFreeBrandBlock";
+import StatTerm from "@/components/StatTerm";
 import { matches } from "@/lib/matches";
 
 // ── /lab · Live AI Laboratory ──────────────────────────
@@ -169,7 +170,8 @@ export default function LabPage() {
           <p>
             v0.2 引擎升級為
             <strong className="text-bone">逐打席對決模型</strong>。
-            每個打席依該投手的 K/9 · BB/9 · HR/9 推導出 8 種互斥結果
+            每個打席依該投手的 <StatTerm term="K/9" /> · <StatTerm term="BB/9" />{" "}
+            · <StatTerm term="HR/9" /> 推導出 8 種互斥結果
             (K · BB · HR · 1B · 2B · 3B · GO · FO)的機率,滾亂數選一個,
             執行對應的壘上推進物理(滿壘保送強制得分、二壘安打 + 一壘跑者
             50% 機率回本壘等),累計分數與出局數。
