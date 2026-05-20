@@ -247,6 +247,81 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ── BY THE NUMBERS · proof bento ─────────────
+          Stripe + Linear modular bento pattern · research-driven.
+          Each tile = concrete number + verifiable source link.
+          Converts abstract trust claims into clickable evidence.
+          Aligned with /manifesto Section V (公開複製不走的算法)
+          + Section I (DISCLOSURE) — every claim has a citation. */}
+      <section
+        aria-labelledby="proof-numbers-heading"
+        className="mx-auto max-w-5xl w-full px-6 sm:px-10 py-24 border-t border-line/40"
+      >
+        <p className="font-mono text-gold text-[10px] tracking-[0.45em] mb-3 text-center">
+          BY THE NUMBERS · 訪客可逐一驗證
+        </p>
+        <h2
+          id="proof-numbers-heading"
+          className="text-3xl sm:text-4xl text-bone font-light tracking-tight text-center mb-12 max-w-xl mx-auto leading-snug"
+        >
+          每個數字都連到證據,
+          <br className="sm:hidden" />
+          不是行銷詞。
+        </h2>
+
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-px bg-line/30">
+          <ProofTile
+            big="270"
+            label="Founders 27 限量名額"
+            verify="LEADERBOARD"
+            href="/leaderboard"
+            note="全宇宙 270 個 · 售完永久關閉"
+          />
+          <ProofTile
+            big="10,000"
+            label="每次模擬虛擬比賽數"
+            verify="LAB · LIVE"
+            href="/lab"
+            note="在您本機 CPU 跑 · ~2 秒收斂"
+            gold
+          />
+          <ProofTile
+            big="8"
+            label="Audit 公開 sections"
+            verify="MODEL REPORT"
+            href="/audit"
+            note="假設 · 輸入 · 排除 · 失敗模式全列"
+          />
+          <ProofTile
+            big="27"
+            label="進階指標完整解釋"
+            verify="GLOSSARY"
+            href="/glossary"
+            note="K/9 · WHIP · wOBA · BABIP · ..."
+          />
+          <ProofTile
+            big="0"
+            label="第三方 trackers 安裝"
+            verify="PRIVACY · S03"
+            href="/privacy"
+            note="無 GA · 無 Pixel · 無 Hotjar · 無 cookies"
+            gold
+          />
+          <ProofTile
+            big="MIT"
+            label="完整原始碼開源"
+            verify="GITHUB"
+            href="https://github.com/Tim-xuan-you/zone27-web"
+            note="200 行 simulator.ts · 30 分鐘可 fork"
+            external
+          />
+        </div>
+
+        <p className="mt-10 text-center font-mono text-mute text-[10px] tracking-[0.3em] max-w-xl mx-auto leading-relaxed">
+          每個 tile 點進去都能驗證 · 沒有「相信我們」這 4 個字
+        </p>
+      </section>
+
       {/* ── FOUNDERS 27 STRIP ──────────────────────── */}
       <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 py-16 text-center border-t border-line/40">
         <p className="font-mono text-gold text-[10px] tracking-[0.4em] mb-4">
@@ -393,5 +468,74 @@ function CredibilityCell({
       </p>
       <p className="text-mute text-xs sm:text-sm leading-relaxed">{body}</p>
     </div>
+  );
+}
+
+// Tile component for the "BY THE NUMBERS" bento grid.
+// gap-px on the parent + bg-line/30 creates a 1px hairline divider
+// between tiles · standard Stripe/Vercel bento technique.
+function ProofTile({
+  big,
+  label,
+  verify,
+  href,
+  note,
+  gold = false,
+  external = false,
+}: {
+  big: string;
+  label: string;
+  verify: string;
+  href: string;
+  note: string;
+  gold?: boolean;
+  external?: boolean;
+}) {
+  const content = (
+    <>
+      <p
+        className={`font-mono tabular text-5xl sm:text-6xl font-light tracking-tight leading-none mb-3 ${
+          gold ? "text-gold" : "text-bone"
+        } group-hover:text-gold transition-colors`}
+      >
+        {big}
+      </p>
+      <p className="text-mute text-sm leading-snug mb-3 group-hover:text-bone transition-colors">
+        {label}
+      </p>
+      <p className="font-mono text-mute/60 text-[9px] tracking-[0.2em] leading-relaxed mb-4">
+        ▸ {note}
+      </p>
+      <p
+        lang="en"
+        className={`font-mono text-[9px] tracking-[0.3em] ${
+          gold ? "text-gold/80" : "text-mute/70"
+        } group-hover:text-gold transition-colors`}
+      >
+        {verify} →
+      </p>
+    </>
+  );
+
+  const className =
+    "block bg-navy p-6 sm:p-8 group transition-colors hover:bg-slate/40";
+
+  if (external) {
+    return (
+      <a
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={className}
+      >
+        {content}
+      </a>
+    );
+  }
+
+  return (
+    <Link href={href} className={className}>
+      {content}
+    </Link>
   );
 }
