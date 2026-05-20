@@ -42,8 +42,7 @@ export default function MatchesPage() {
         </div>
         <div className="flex items-end justify-between flex-wrap gap-4">
           <h1 className="text-4xl sm:text-5xl text-bone font-light tracking-tight">
-            2026 · 05 · 19{" "}
-            <span className="text-mute text-2xl sm:text-3xl">· 星期二</span>
+            {todaysMatches[0]?.date ?? "—"}
           </h1>
           <p className="font-mono text-mute text-xs tracking-[0.25em]">
             {todaysMatches.length} 場比賽 · AI 模型 15:00 鎖定

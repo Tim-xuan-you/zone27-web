@@ -29,7 +29,7 @@ export const metadata: Metadata = {
 //   06 Last calibration run
 // ─────────────────────────────────────────────────────
 
-const LAST_REVIEWED = "2026-05-19";
+const LAST_REVIEWED = "2026-05-20";
 const ENGINE_VERSION = "v0.2 · Real At-Bat";
 const ITERATIONS = "10,000";
 const STANDARD_ERROR = "±0.5%";
@@ -61,15 +61,22 @@ export default function AuditPage() {
 
           {/* ── HEADER ──────────────────────────────── */}
           <header className="pb-10 border-b border-line/60">
-            <p
-              lang="en"
-              className="font-mono text-gold text-[10px] tracking-[0.45em] mb-6"
-            >
-              MODEL REPORT
-            </p>
+            <div className="flex items-baseline justify-between gap-4 mb-6 flex-wrap">
+              <p
+                lang="en"
+                className="font-mono text-gold text-[10px] tracking-[0.45em]"
+              >
+                MODEL REPORT
+              </p>
+              <p
+                lang="en"
+                className="font-mono text-mute text-[10px] tracking-[0.35em] tabular"
+              >
+                REPORT v0.27
+              </p>
+            </div>
             <h1 className="text-4xl sm:text-5xl text-bone font-light tracking-tight leading-[1.1] mb-6">
-              ZONE 27 Engine{" "}
-              <span className="font-mono text-gold tabular">v0.27</span>
+              ZONE 27 Engine
             </h1>
             <p className="text-mute text-base leading-relaxed mb-8 max-w-2xl">
               本頁列出 ZONE 27 模型的全部假設、使用的輸入、刻意排除的輸入、
@@ -359,7 +366,7 @@ export default function AuditPage() {
               <DataRow
                 label="引擎程式碼最後變動"
                 value="v0.2 (Real At-Bat)"
-                note="逐打席模型升級 · 詳見 /changelog v0.6"
+                note="逐打席模型升級 · 完整變動見 /changelog"
               />
               <DataRow
                 label="預定下次審閱"

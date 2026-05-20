@@ -106,24 +106,34 @@ export default function AboutPage() {
           <li className="flex gap-4">
             <span className="font-mono text-gold/70 tabular shrink-0">A.</span>
             <span>
-              <strong className="text-bone">Trackman 雷達追蹤先驗。</strong>{" "}
-              從 stats.cpbl.com.tw 拉取投手球路轉速、進壘角度,以及打者本壘板紀律(PR)作為機率矩陣的初始參數。
+              <strong className="text-bone">公開資料先驗。</strong>{" "}
+              先發投手的 K/9 · BB/9 · HR/9
+              三個基礎指標 — 從 MLB Stats API 取得(MLB)或創辦人親手 curate
+              (CPBL,詳見{" "}
+              <Link href="/coverage" className="text-gold hover:underline">
+                /coverage
+              </Link>
+              )。
             </span>
           </li>
           <li className="flex gap-4">
             <span className="font-mono text-gold/70 tabular shrink-0">B.</span>
             <span>
               <strong className="text-bone">投打對決機率矩陣。</strong>{" "}
-              每個打席計算「三振 / 保送 / 一壘安打 / 長打 / 全壘打 /
-              出局」的條件機率,左右投對左右打獨立拆解。
+              每個打席依投手三項指標推導 8 種互斥結果(K · BB · HR · 1B · 2B · 3B · GO · FO)
+              的條件機率,滾亂數選一個。
             </span>
           </li>
           <li className="flex gap-4">
             <span className="font-mono text-gold/70 tabular shrink-0">C.</span>
             <span>
               <strong className="text-bone">蒙地卡羅萬次推演。</strong>{" "}
-              後端引擎以 &lt; 1
-              ms 跑完一場完整虛擬比賽(含換投、代打、跑壘推進),連續執行 10,000 次。
+              引擎在<strong className="text-bone">您的瀏覽器內</strong>跑 10,000 場虛擬 9 局比賽
+              (~ 1.5 - 2.0 秒收斂),ZONE 27 伺服器零運算 — 詳見{" "}
+              <Link href="/audit" className="text-gold hover:underline">
+                /audit
+              </Link>
+              {" "}Section 06 ENVIRONMENTAL IMPACT。
             </span>
           </li>
           <li className="flex gap-4">
@@ -135,8 +145,13 @@ export default function AboutPage() {
             </span>
           </li>
         </ol>
-        <p className="text-mute/80 italic">
-          當預測不準時,我們不藏。會主動公布偏差值報告,告訴會員模型在哪一個變數失算,並把這個變數寫進下一次迭代。
+        <p className="text-mute/80">
+          這 4 步驟<strong className="text-bone">刻意排除</strong>的輸入(打者個別差異、Platoon、投手疲勞、球場因素、氣象、主審好球帶傾向、代打換投決策)
+          在{" "}
+          <Link href="/audit" className="text-gold hover:underline">
+            /audit
+          </Link>
+          {" "}Section 03 完整列出 — 我們不掩飾極簡模型的限制,反而把限制公開當作品牌資產。
         </p>
       </Chapter>
 

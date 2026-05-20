@@ -98,7 +98,7 @@ export default function Footer() {
           >
             <span className="chip-dot w-1.5 h-1.5 rounded-full bg-gold/70 glow-gold" />
             <span>
-              v0.27 · {getTaipeiTodayChip()} TPE · MLB × 引擎合體
+              v0.27 · {getTaipeiTodayChip()} TPE
             </span>
           </a>
         </div>

@@ -65,7 +65,7 @@ export default function LabPage() {
           <span className="text-gold">即時 AI 實驗室</span>
           <span className="text-mute/60">·</span>
           <span className="px-1.5 py-0.5 border border-gold/40 text-gold">
-            v0.3 · 真實打席 + 重播
+            v0.2 · 真實打席 + 重播
           </span>
         </div>
         <h1 className="text-4xl sm:text-5xl md:text-6xl font-light leading-[1.1] tracking-tight text-bone">
