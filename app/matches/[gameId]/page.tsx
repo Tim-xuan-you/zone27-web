@@ -244,18 +244,18 @@ export default async function MatchDetailPage({
         <div className="space-y-6">
           <MethodStep
             no="A"
-            title="Trackman 雷達追蹤先驗"
-            body="從 stats.cpbl.com.tw 拉取投手球路轉速、進壘角度,以及打者本壘板紀律(PR)作為機率矩陣的初始參數。"
+            title="公開資料先驗"
+            body="投手 K/9 · BB/9 · HR/9 三項基礎指標 — MLB Stats API(MLB)或創辦人親手 curate(CPBL,詳見 /coverage)。"
           />
           <MethodStep
             no="B"
             title="投打對決機率矩陣"
-            body="每個打席計算「三振 / 保送 / 一壘安打 / 長打 / 全壘打 / 出局」的條件機率,左右投對左右打獨立拆解。"
+            body="每個打席依投手三項指標推導 8 種互斥結果(K · BB · HR · 1B · 2B · 3B · GO · FO)的條件機率,滾亂數選一個。"
           />
           <MethodStep
             no="C"
             title="蒙地卡羅萬次推演"
-            body="後端引擎以 < 1 ms 跑完一場完整虛擬比賽(含換投、代打、跑壘推進),連續執行 10,000 次。"
+            body="引擎在您的瀏覽器內跑 10,000 場虛擬 9 局比賽(~ 1.5 - 2.0 秒收斂),ZONE 27 伺服器零運算。"
           />
           <MethodStep
             no="D"
@@ -263,6 +263,19 @@ export default async function MatchDetailPage({
             body="統計 10,000 場虛擬比賽中各隊獲勝次數與最終比分,輸出本頁所有機率與信心指標。"
           />
         </div>
+
+        <p className="mt-6 font-mono text-mute/70 text-[10px] tracking-[0.25em] leading-relaxed">
+          ▸ 刻意排除的輸入(打者個別品質 / Platoon / 投手疲勞 / 球場因素 / 代打換投決策)
+          完整列於{" "}
+          <Link href="/audit" className="text-gold hover:underline">
+            /audit
+          </Link>{" "}
+          Section 03 · 完整工程白皮書見{" "}
+          <Link href="/methodology" className="text-gold hover:underline">
+            /methodology
+          </Link>
+          。
+        </p>
       </section>
 
       {/* ── /05 · RUN IT YOURSELF (embedded live sim) ─ */}
@@ -282,14 +295,14 @@ export default async function MatchDetailPage({
       <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-20">
         <div className="bg-slate/40 border border-gold/30 p-10 text-center">
           <p className="font-mono text-gold text-[10px] tracking-[0.4em] mb-4">
-            PRE-LAUNCH · BLACK CARD CHAT
+            PRE-LAUNCH · FOUNDERS + BLACK CARD ROOM
           </p>
           <h3 className="text-2xl text-bone font-light tracking-tight mb-3">
-            即時討論室將在創始名冊滿員後上線
+            即時討論室將在創始名冊啟動時上線
           </h3>
           <p className="text-mute text-sm mb-4 max-w-md mx-auto leading-relaxed">
-            僅限 {formatBadge(1)} ~ {formatBadge(FOUNDERS_TOTAL)} 編號徽章持有者進入,
-            專注拆解每晚的 AI 模型輸出。沒有 LINE 群組黑箱,沒有刪文截圖。
+            Founders 27(終身)+ BLACK CARD(月費)兩層訂閱者皆可進入,
+            拆解每晚 AI 模型輸出。沒有 LINE 群組黑箱,沒有刪文截圖。
           </p>
           <p className="font-mono text-mute/70 text-[10px] tracking-[0.3em] mb-8 tabular">
             CURRENT · {FOUNDERS_CLAIMED} / {FOUNDERS_TOTAL} FORGED ·
