@@ -184,8 +184,10 @@ export default function LabPage() {
           </p>
           <p>
             <strong className="text-bone">下一站 v0.3:</strong>
-            加入打者個別進階數據 (OPS / wRC+ / Platoon Splits) 細化結果機率;
-            v0.4 接上 Trackman 球速 + 轉軸的物理先驗。
+            加入打者個別進階數據 (
+            <StatTerm term="OPS" /> · <StatTerm term="wRC+" />
+            ) 細化結果機率(可在現有資料上路);
+            v0.4(aspirational · 等 CPBL 公開 Statcast 等級資料)接上球速 + 轉軸物理先驗。
           </p>
         </div>
       </section>

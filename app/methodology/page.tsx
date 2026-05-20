@@ -413,7 +413,7 @@ N = 10,000, p ≈ 0.6  →  SE ≈ 0.49%
             >
               stats.cpbl.com.tw
             </a>
-            {" "}— CPBL 官方進階數據站(2026 年新上線)。
+            {" "}— CPBL 官方資料站 · 基礎統計(進階 / Statcast 等級資料尚未公開)。
           </li>
         </ul>
       </Section>
