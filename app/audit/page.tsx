@@ -427,6 +427,13 @@ export default function AuditPage() {
               「您憑什麼信任 ZONE 27?」這個問題的具體回答。
               讀完您可以一行一行驗證 — 任何宣稱「我們有黑盒 AI 模型,你看不到」的對手,正好證明他們的立場跟我們是反的。
             </P>
+            <P className="text-mute/70">
+              完整論證見{" "}
+              <Link href="/manifesto" className="text-gold hover:underline">
+                /manifesto
+              </Link>{" "}
+              · DISCLOSURE 只是 4 個倒置之一,其他 3 個(monetization · coverage · privacy)同樣公開。
+            </P>
           </ReportSection>
 
           {/* ── FOOTER NOTE ───────────────────────── */}
