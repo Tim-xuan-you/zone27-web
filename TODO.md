@@ -1,30 +1,37 @@
 # 📋 ZONE 27 · Owner Pending Actions
 
-> Tim 明早回到電腦前要做的事(整理於 2026-05-19 晚上)
->
-> ✨ **今晚不用做任何事** — 您可以休息。整份代辦事項放這裡,等您。
+> Tim 明早回到電腦前要做的事
+> 整理於 2026-05-19 晚上(DAY 1)+ 2026-05-20 整日(DAY 2 · 24 commits)
 
 ---
 
-## 🌙 您休息時 Claude 跑了九輪深度迭代
+## 🚀 DAY 2 (2026-05-20) 收盤 · 24 commits since /manifesto
 
-**完整報告:[WHILE-YOU-WERE-OUT.md](WHILE-YOU-WERE-OUT.md)**
-**已知未做事項:[KNOWN-ISSUES.md](KNOWN-ISSUES.md)** — 給您明天 onboarding 看「我知道但沒做」的清單
+**完整 DAY 2 scroll:[WHILE-YOU-WERE-OUT.md](WHILE-YOU-WERE-OUT.md)**(已 prepend DAY 2 區塊)
+**已知未做事項:[KNOWN-ISSUES.md](KNOWN-ISSUES.md)** — 給您 onboarding 看「我知道但沒做」清單
 
-底線:Build ✅ Lint ✅ **26 routes** ✅。在三條鐵律內,**沒做任何 SEO / 社群動作**。
+**底線:Build ✅ Lint ✅ TSC strict ✅ · 18 routes · 14 custom OG cards · 6 trust artifact pages · WCAG AA 0 fails**
 
-九輪總結:
-- **Round 1-2** · macro polish + trust artifact(ScarcityStrip · /audit Model Report · /founders 對比表 + math + FAQ)
-- **Round 3-4** · integrity 修 + craft polish(假社群清白 · Environmental Impact · 印刷樣式 · slashed-zero)
-- **Round 5-6** · 真實 bug 抓 + 可訪問性債(SSG 凍結炸彈 · WCAG AA 22→0 · lang="en")
-- **Round 7-8** · 可分享資產 + 內容網路(/audit OG · 矛盾引言 · CopyLinkButton · Related Reading hub-and-spoke)
-- **Round 9** · 收尾文件化(KNOWN-ISSUES.md · perf audit · 最後 lang sweep)
+5 輪 audit pass 連續結論 = **PRODUCTION-READY**
+
+**DAY 2 核心 ship:**
+- **4 個新 canonical 頁面**:`/manifesto`(6 sections 倒置宣言)· `/learn`(5-min primer)· `/discipline`(Buffett · Musk · Costco 鐵律)· 首頁 BY THE NUMBERS + TRUST STACK
+- **`/founders` 兩個 reframe section**:「您不是在買引擎」+「BLACK CARD · 月費賣的是什麼」(回答訪客最深的疑問)
+- **13 處 honesty fix**(7 處 Trackman over-claim 全 repo grep-verified purged · 2 處版本 invariant · 2 處首頁 over-claim · 1 處 BLACK CARD mislabel · 1 處 /audit h1)
+- **6 個新 OG cards**(/manifesto · /about · /coverage · /privacy · /lab/custom · /faq · /discipline · /signal-board)
+- **`<StatTerm>`** Baseball-Savant pattern tooltip(13 stat 字典)
+- **WCAG 4.1.3** WaitlistForm a11y fix(role="alert" + aria-live)
+- **Footer FUNDED BY FOUNDERS · NO VC · NO ADS · NO TRACKERS** trust line
+- **`/manifesto` Section V** SYNTHESIS:**「方法公開 · 品味私藏」**(8 字 framing)
+
+**10 個世界級研究全部 applied:** Linear · Plausible · Anthropic · Baseball Savant · Stripe · Vercel · HEY · Berkshire/Buffett · Costco · Musk · Muji(validation)
 
 **明早您坐到電腦前,建議流程:**
 1. `npm run dev` → 開 http://localhost:3000 看實際效果
-2. 翻 [KNOWN-ISSUES.md](KNOWN-ISSUES.md) 知道我刻意沒做什麼 + 為什麼
-3. 跟我說「**開始 ① Supabase**」開始下面的事項
-4. 不喜歡任何改動,跟我說我立刻改
+2. 重點看 `/manifesto`(Section V)· `/learn` · `/discipline` · 首頁 TRUST STACK 6 個 trust 文件集合
+3. 翻 [KNOWN-ISSUES.md](KNOWN-ISSUES.md) 知道我刻意沒做什麼 + 為什麼
+4. 跟我說「**開始 ② Resend**」啟動 confirmation email 流程
+5. 不喜歡任何改動,跟我說我立刻改
 
 ---
 
@@ -61,20 +68,21 @@
   · zone27-musk-methodology · zone27-payment-architecture
   · feedback_auto_push_zone27 · feedback_no_rest_zone27
 
-【目前技術狀態(2026-05-20 收盤)】:
-- 14 user-visible routes + 7 custom OG cards · Build/Lint/TSC strict 三綠
-- Supabase Tokyo 上線:waitlist 表 + 2 個 SECURITY DEFINER 函式
-  + RLS lock-down + Vercel env vars 已設(NEXT_PUBLIC_SUPABASE_URL + ANON_KEY)
+【目前技術狀態(2026-05-20 收盤 DAY 2 v4)】:
+- **18 user-visible routes** + **14 custom OG cards** · Build/Lint/TSC strict 三綠 · 5 輪 audit pass PRODUCTION-READY
+- Supabase Tokyo 上線:waitlist 表 + 2 個 SECURITY DEFINER 函式 + RLS lock-down + Vercel env vars 已設
+- **6 個 trust artifact pages**(40+ sections of disclosure):
+  /audit(8s)· /methodology(10s)· /coverage(6s)· /privacy(8s)· /manifesto(6s + Section V SYNTHESIS)· /discipline(5s · Buffett+Musk+Costco)
+- **5 個新 brand-defining 內容**(全部 DAY 2):
+  /manifesto 倒置宣言 · /learn 入門 primer · /discipline 鐵律 · /founders 2 reframes · 首頁 BY THE NUMBERS + TRUST STACK
+- **8 字品牌 grammar 寫進品牌 IP:「方法公開 · 品味私藏」(SHOW YOUR WORK · KEEP YOUR SOUL)**
+- StatTerm tooltip(Baseball Savant pattern · 13 stat 字典)
+- Footer FUNDED BY FOUNDERS · NO VC · NO ADS · NO TRACKERS(Plausible 風格 anti-VC trust line)
+- WCAG 4.1.3 Status Messages compliance(WaitlistForm aria-live)
 - /founders WaitlistForm 接 DB · WAITLIST · N · LIVE 指示器
 - Channel attribution(?ref= → DB source)+ CopyLinkButton 帶 Web Share API
-- 4 個 brand axiom 全部反映在 trust artifact 頁:
-  /audit (Section 08 disclosure) · /methodology · /coverage (CPBL HAND-CURATED)
-  /privacy (Supabase 完整揭露) · /terms · /faq · /signal-board (FRESHNESS)
-- 首頁加 BRAND INVERSION THESIS section(4 個 INDUSTRY vs ZONE 27 對比)
-  + hero dual CTA(加入創始名冊 + 親手跑一場引擎)
-- 手機 nav 收斂:wordmark + 創始會員 → CTA + Row 2 (4 個 secondary 連結)
-- Footer 動態日期 · /changelog 70 行精簡(GitHub commits 是 source of truth)
-- WCAG AA 0 fail · prefers-reduced-motion 完整支援 · 21 個 aria-label
+- Trackman over-claim grep-verified purged from 7 places(/about /glossary /methodology /lab/custom /matches[gameId] /methodology REF /lab)
+- 版本 invariant 全站對齊(REPORT v0.27 · ENGINE v0.2 · LAST_REVIEWED 2026-05-20)
 
 【商業狀態】:
 - Founders 27:NT$ 2,700 一次性 · 限量 270 名 · **手工銀行轉帳(per

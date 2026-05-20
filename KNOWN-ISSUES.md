@@ -7,16 +7,17 @@
 
 ---
 
-## 🟡 Pending owner actions(您明天該做的)
+## 🟡 Pending owner actions(您該做的)
 
-從 [TODO.md](TODO.md) 引用:
+從 [TODO.md](TODO.md) 引用 · **以 DAY 2 結束狀態 (2026-05-20 晚)**:
 
-- **① Supabase 註冊**(5 分鐘)— 解鎖 v0.28 waitlist DB · ScarcityStrip 換真實計數
-- **② Resend 註冊**(5 分鐘)— 解鎖 confirmation emails
-- **③ 品牌網域購買**(等名稱決定)
-- **④ GitHub Copilot 訂閱**(可選)
+- ✅ **① Supabase 註冊** — **DONE**(2026-05-20 上午 · waitlist DB 上線 · RLS-locked + 2 個 SECURITY DEFINER 函式)
+- **② Resend 註冊**(5 分鐘)— 仍 pending · 解鎖 confirmation emails
+- **③ 品牌網域購買**(等名稱決定:zone27.tw / .app / .cc / .io)
+- **④ Footer 版本 chip bump** v0.27 → v0.28(您拍板的時機 · DAY 2 算 v0.28 milestone)
+- **⑤ CPBL 截圖**(3 分鐘 cpbl.com.tw)— 解鎖真實 CPBL ingestion
 
-完整步驟見 TODO.md · 我會在您說「開始 ① Supabase」時一步步帶您走。
+完整步驟見 TODO.md · 我會在您說「開始 ② Resend」時一步步帶您走。
 
 ---
 
@@ -89,9 +90,13 @@
 
 ### F. 「我們刻意不追蹤」是否升級為網站宣言
 
-[ADMIN-PLAN.md](ADMIN-PLAN.md) 最後一節提議:把 `/privacy` 第 03 節的「不追蹤」清單,**升格**為網站宣言式區塊(放到 `/about` 或 `/faq` 顯眼處)。
+✅ **UPGRADED in DAY 2(2026-05-20)** · 完整列在以下 3 處:
 
-**為什麼沒做:** 涉及您聲音的內容。Round 6 已在 `/faq` 加了 Q4「你們會追蹤我嗎?」(不會)— 該層次的揭露已足夠。要再升級為「全站宣言」需要您拍板。
+1. **Footer 全站常駐 trust line**: 「FUNDED BY FOUNDERS · NO VC · NO ADS · NO TRACKERS」
+2. **/manifesto Section IV PRIVACY**: 完整 4 層論證(為什麼藏 / 誰受害 / 我們失去什麼 / 為什麼接受)
+3. **/privacy 自訂 OG card**: ✕ list 顯示 0 install / 0 set / 0 storage
+
+升格完成 · 不再是 deferred item。原始 Round 6 /faq Q4 仍保留。
 
 ---
 
