@@ -4,10 +4,20 @@
 //
 // 為保護隱私,只公布編號與認領日,絕不公布身分。
 //
-// When Supabase is wired up (per TODO.md ① — owner action item),
-// replace `claimedFounders` with a DB query. Every consumer below
-// is already importing the derived constants, so the migration is
-// a one-file change.
+// Status: still hardcoded by design. The 7 founders below are
+// placeholder until Tim manually onboards real Founders 27 members
+// (per [[zone27-payment-architecture]] memory · manual bank
+// transfer · ~Q3 2026 launch). At that point, build a
+// `public.founders` Supabase table parallel to `waitlist`, and
+// migrate this file to read its `claimedFounders` from a
+// SECURITY DEFINER aggregate function (mirror of get_waitlist_count
+// pattern in supabase/migrations/0001_waitlist.sql). Every consumer
+// of this file imports the derived constants, so the migration
+// stays a one-file change.
+//
+// Note: waitlist DB was migrated to Supabase on 2026-05-20
+// (see [[zone27-supabase-architecture]]). The founders table is
+// a separate piece of work tied to payment-system launch.
 // ─────────────────────────────────────────────────────
 
 export const FOUNDERS_TOTAL = 270;

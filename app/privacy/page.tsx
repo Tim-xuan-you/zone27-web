@@ -208,12 +208,21 @@ export default function PrivacyPage() {
       {/* ── 07 SECURITY ─────────────────────────── */}
       <Section no="07" label="SECURITY" zh="資料安全">
         <p>
-          我們把 Vercel 與 Supabase(未來)當成基礎設施,
+          我們把 <Code>Vercel</Code> 與{" "}
+          <Code>Supabase Tokyo</Code> 當成基礎設施,
           享有它們提供的企業級加密與存取控制。具體來說:
         </p>
         <ul className="space-y-3">
           <li>▸ 所有傳輸採 HTTPS / TLS 1.3 加密</li>
-          <li>▸ Vercel logs 採 SOC 2 Type II 級別保護</li>
+          <li>
+            ▸ Supabase 採 SOC 2 Type II + ISO 27001 級別保護 ·{" "}
+            <Code>service_role</Code> 鑰匙不離開 Tim 的本機
+          </li>
+          <li>
+            ▸ RLS lock-down +{" "}
+            <Code>SECURITY DEFINER</Code> 函式架構,即使公開{" "}
+            <Code>publishable key</Code> 也無法繞過存取邊界
+          </li>
           <li>▸ 創辦人本機不留任何 email 副本</li>
           <li>▸ 若發生資料外洩,72 小時內公開揭露於 /changelog</li>
         </ul>

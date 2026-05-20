@@ -1,6 +1,11 @@
 // ── ZONE 27 · Shared Match Data ────────────────────────
-// 今日 CPBL 賽事(2026/05/19)
-// 未來這層會被 Supabase + CPBL 爬蟲取代,介面保持不變。
+// 今日 CPBL 賽事 — placeholder until founder hand-curates real data.
+// 未來會 transition 到 Supabase + 手工 ingestion(per
+// [[zone27-coverage-philosophy]]: hand-curated by founder · NOT
+// scraped from gambling platforms). The TypeScript interface
+// below stays stable across both states — only the data source
+// swaps. See docs/MANUAL-ONBOARDING.md for the future CPBL daily
+// ingestion flow.
 
 export type PitcherStats = {
   name: string;
