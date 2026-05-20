@@ -97,9 +97,16 @@ export default function MobileNavToggle({
           role="dialog"
           aria-modal="true"
           aria-label="主選單"
-          className="fixed inset-0 z-50 bg-navy/95 backdrop-blur-md overflow-y-auto"
+          className="fixed inset-0 z-50 overflow-y-auto"
+          style={{
+            // Inline solid background — Tailwind 4 + @theme inline + opacity
+            // modifier (bg-navy/95) was rendering transparent in production,
+            // making the nav items visually merge with the blurred body
+            // beneath. Inline rgba is the bulletproof fix.
+            backgroundColor: "rgba(15, 26, 46, 0.97)",
+          }}
         >
-          <div className="relative px-6 pt-8 pb-16 max-w-md mx-auto">
+          <div className="relative px-6 pt-8 pb-16 max-w-md mx-auto min-h-full">
             <div className="flex items-center justify-between mb-10">
               <Link
                 href="/"
