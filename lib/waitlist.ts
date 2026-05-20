@@ -46,9 +46,11 @@ export async function reserveSpot(
   // Channel attribution: if the visitor arrived via ?ref=<tag> on /founders,
   // record that as the source. Falls back to a generic identifier so the
   // DB always knows the entry came from the form (not a manual insert).
-  // Sanitize: only allow [a-z0-9-]{1,40} to prevent injection / abuse.
+  // Sanitize: lowercase + only allow [a-z0-9-]{1,40} to prevent injection / abuse.
+  // (Lowercase the input BEFORE regex test, then drop the regex's case-
+  // insensitive flag — clearer intent, single source of truth.)
   const refClean =
-    typeof refRaw === "string" && /^[a-z0-9-]{1,40}$/i.test(refRaw)
+    typeof refRaw === "string" && /^[a-z0-9-]{1,40}$/.test(refRaw.toLowerCase())
       ? refRaw.toLowerCase()
       : null;
   const source = refClean ?? "founders-page";

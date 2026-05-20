@@ -21,15 +21,7 @@ import Link from "next/link";
 //   4. Top stays minimum-cognitive-load · maximum reading focus
 // ─────────────────────────────────────────────────────
 
-type NavItem = {
-  key: string;
-  href: string;
-  label: string;
-  badge?: string;
-};
-
 type Props = {
-  items?: NavItem[]; // retained but unused — kept so Nav.tsx signature is unchanged
   active?: string;
   className?: string;
 };

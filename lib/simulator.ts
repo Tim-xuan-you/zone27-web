@@ -52,35 +52,56 @@ export type AtBatProbs = {
   FO: number;
 };
 
+// ── Model constants ────────────────────────────────────
+// 公開於 /audit Section 02 (INPUTS WE USE) + /methodology Section 03.
+// 抽出為 named constants 而非 magic numbers · 一個地方改 = 模型行為改。
+const PA_PER_9 = 38;            // CPBL/MLB 平均每 9 局期望打席數
+
+// Outcome rate clamps · 防範極端投手數據造成的數值崩潰
+const K_RATE_MIN = 0.15, K_RATE_MAX = 0.35;
+const BB_RATE_MIN = 0.04, BB_RATE_MAX = 0.16;
+const HR_RATE_MIN = 0.008, HR_RATE_MAX = 0.06;
+
+// In-play split · 剩餘機率分配給「場內出局」vs「場內安打」
+const OUTS_IN_PLAY_RATIO = 0.65;  // CPBL 聯盟 BABIP ~.300 對應
+const HITS_IN_PLAY_RATIO = 0.35;
+
+// Hit-type distribution · 場內安打的細分
+const SINGLE_RATIO = 0.75;
+const DOUBLE_RATIO = 0.20;
+const TRIPLE_RATIO = 0.05;
+
+// Out-type distribution · 場內出局的滾飛比
+const GROUND_OUT_RATIO = 0.55;
+const FLY_OUT_RATIO = 0.45;
+
 /**
  * 從投手的 K/9 · BB/9 · HR/9 推導每打席的結果機率。
  * 大聯盟 CPBL 平均 ~38 PA / 9 innings (全棒次數)。
  *
  * 模型刻意保守:
  * - 直接把率/9 除以 38 得到該結果機率
- * - 剩餘機率 65% 給場內出局(GO + FO,4:3 分),35% 給場內安打
+ * - 剩餘機率 65% 給場內出局(GO + FO,55:45 分),35% 給場內安打
  * - 場內安打中 75% 一壘安打、20% 二壘安打、5% 三壘安打
  */
 export function atBatProbs(pitcher: PitcherStats): AtBatProbs {
-  const PA_PER_9 = 38;
-
-  const kRate = clamp(parseFloat(pitcher.k9) / PA_PER_9, 0.15, 0.35);
-  const bbRate = clamp(parseFloat(pitcher.bb9) / PA_PER_9, 0.04, 0.16);
-  const hrRate = clamp(parseFloat(pitcher.hr9) / PA_PER_9, 0.008, 0.06);
+  const kRate = clamp(parseFloat(pitcher.k9) / PA_PER_9, K_RATE_MIN, K_RATE_MAX);
+  const bbRate = clamp(parseFloat(pitcher.bb9) / PA_PER_9, BB_RATE_MIN, BB_RATE_MAX);
+  const hrRate = clamp(parseFloat(pitcher.hr9) / PA_PER_9, HR_RATE_MIN, HR_RATE_MAX);
 
   const remaining = Math.max(0, 1 - kRate - bbRate - hrRate);
-  const outsInPlay = remaining * 0.65;
-  const hitsInPlay = remaining * 0.35;
+  const outsInPlay = remaining * OUTS_IN_PLAY_RATIO;
+  const hitsInPlay = remaining * HITS_IN_PLAY_RATIO;
 
   return {
     K: kRate,
     BB: bbRate,
     HR: hrRate,
-    "1B": hitsInPlay * 0.75,
-    "2B": hitsInPlay * 0.20,
-    "3B": hitsInPlay * 0.05,
-    GO: outsInPlay * 0.55,
-    FO: outsInPlay * 0.45,
+    "1B": hitsInPlay * SINGLE_RATIO,
+    "2B": hitsInPlay * DOUBLE_RATIO,
+    "3B": hitsInPlay * TRIPLE_RATIO,
+    GO: outsInPlay * GROUND_OUT_RATIO,
+    FO: outsInPlay * FLY_OUT_RATIO,
   };
 }
 

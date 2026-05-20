@@ -87,7 +87,6 @@ export default function Nav({ active }: { active?: NavKey }) {
               secondary nav lives below on its own row to keep this
               line uncramped. */}
           <MobileNavToggle
-            items={NAV_ITEMS}
             active={active}
             className="sm:hidden"
           />
