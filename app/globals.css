@@ -47,6 +47,9 @@ html {
   background: var(--zone-navy);
   /* Variable fonts — opt into optical-sizing axis (Geist Sans is variable) */
   font-optical-sizing: auto;
+  /* Smooth scroll for in-page anchor links (e.g. mobile nav '更多 ↓'
+     jumps to footer); respects prefers-reduced-motion automatically. */
+  scroll-behavior: smooth;
 }
 
 body {

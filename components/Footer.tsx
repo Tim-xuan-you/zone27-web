@@ -34,7 +34,10 @@ const LEGAL_LINKS = [
 
 export default function Footer() {
   return (
-    <footer className="mt-auto border-t border-line/40">
+    <footer
+      id="site-footer"
+      className="mt-auto border-t border-line/40 scroll-mt-4"
+    >
       <div className="mx-auto max-w-6xl px-6 sm:px-10 py-10">
         {/* Top row: secondary links */}
         <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3 pb-4">
