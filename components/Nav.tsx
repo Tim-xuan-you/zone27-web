@@ -1,5 +1,6 @@
 import Link from "next/link";
 import ScarcityStrip from "@/components/ScarcityStrip";
+import MobileNavToggle from "@/components/MobileNavToggle";
 
 type NavKey =
   | "home"
@@ -47,7 +48,10 @@ export default function Nav({ active }: { active?: NavKey }) {
             </span>
           </Link>
 
-          <div className="flex items-center gap-4 sm:gap-6 text-sm overflow-x-auto">
+          {/* Desktop nav · inline list. Hidden on phones to avoid the
+              horizontal-scroll overcrowding that previously hid items
+              behind a non-discoverable swipe gesture. */}
+          <div className="hidden sm:flex items-center gap-4 sm:gap-6 text-sm">
             {NAV_ITEMS.map((item) => (
               <Link
                 key={item.key}
@@ -74,11 +78,18 @@ export default function Nav({ active }: { active?: NavKey }) {
               type="button"
               aria-label="登入(尚未開放,等候 Founders 27 上線)"
               disabled
-              className="hidden sm:inline-block px-4 py-2 border border-gold/30 text-gold/70 text-xs tracking-[0.18em] hover:bg-gold/10 transition-colors disabled:cursor-not-allowed disabled:opacity-60"
+              className="px-4 py-2 border border-gold/30 text-gold/70 text-xs tracking-[0.18em] hover:bg-gold/10 transition-colors disabled:cursor-not-allowed disabled:opacity-60"
             >
               登入
             </button>
           </div>
+
+          {/* Mobile · primary CTA + hamburger overlay (client component) */}
+          <MobileNavToggle
+            items={NAV_ITEMS}
+            active={active}
+            className="sm:hidden"
+          />
         </div>
       </nav>
       <ScarcityStrip />
