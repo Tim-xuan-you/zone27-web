@@ -374,6 +374,61 @@ export default function AuditPage() {
             </DataTable>
           </ReportSection>
 
+          {/* ── 08 DISCLOSURE PHILOSOPHY ──────────────
+              Tim asked 2026-05-20: "AI 公司不公開模型,我們為什麼要?"
+              Answer: ZONE 27 sells identity, not algorithm access.
+              There's no algorithmic moat to protect, so radical
+              transparency IS the moat — the inverse positioning of
+              every closed AI lab. Surfacing this rationale as Section
+              08 turns the entire report's existence into the closing
+              trust artifact. */}
+          <ReportSection no="08" label="DISCLOSURE PHILOSOPHY">
+            <P>
+              為什麼我們把整份 model report 公開到這個程度?
+              <strong className="text-bone"> 因為我們沒有商業機密。</strong>
+            </P>
+
+            <DataTable>
+              <DataRow
+                label="OUR MATH"
+                value="Bill James 1985"
+                note="sabermetrics · 圖書館 / Wikipedia 全公開"
+              />
+              <DataRow
+                label="OUR INPUTS"
+                value="K/9 · BB/9 · HR/9"
+                note="Baseball Reference 任何人可查"
+              />
+              <DataRow
+                label="OUR ENGINE"
+                value="GitHub 開源"
+                note="JavaScript Monte Carlo · 任何工程師 30 分鐘可複製"
+              />
+              <DataRow
+                label="OUR MOAT"
+                value="信任,不是算法"
+                note="您能驗證 → 您才有理由信"
+              />
+            </DataTable>
+
+            <P>
+              OpenAI 藏 weights · Anthropic 藏 training data · Google 藏 fine-tuning —
+              他們的商業模式靠藏算法,
+              <strong className="text-bone">不藏對手立刻複製,億元 R&amp;D 化為烏有</strong>。
+            </P>
+            <P>
+              <strong className="text-bone">ZONE 27 是 AI 公司的倒影</strong> —
+              我們賣身分(<Link href="/founders" className="text-gold hover:underline">Founders 27</Link>)+ 社群(BLACK CARD),
+              引擎是免費送的工具,本來就沒有可藏的價值。
+              硬藏算法 = 假裝有秘密 = 對訪客撒謊 = 品牌信用自殺。
+            </P>
+            <P className="text-mute/70">
+              這份 model report 整份的存在本身,就是我們對
+              「您憑什麼信任 ZONE 27?」這個問題的具體回答。
+              讀完您可以一行一行驗證 — 任何宣稱「我們有黑盒 AI 模型,你看不到」的對手,正好證明他們的立場跟我們是反的。
+            </P>
+          </ReportSection>
+
           {/* ── FOOTER NOTE ───────────────────────── */}
           <footer className="pt-12 mt-12 border-t border-line/60">
             <p className="font-mono text-mute text-[11px] tracking-[0.25em] mb-6">
