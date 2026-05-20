@@ -222,25 +222,38 @@ function CustomLabInner() {
         </p>
 
         {/* Pre-emptive trust artifact: anticipate "shouldn't this be paid?"
-            and convert it into brand positioning. The engine being free
-            is a deliberate inversion of the standard SaaS model —
-            tool free, identity paid. */}
+            and convert it into brand positioning. Includes the architectural
+            reason ("runs in your browser") that makes free unlimited
+            sustainable — not generosity, just physics. */}
         <div className="mt-10 max-w-xl mx-auto pt-6 border-t border-line/40">
           <p
             lang="en"
-            className="font-mono text-gold/80 text-[10px] tracking-[0.38em] mb-3"
+            className="font-mono text-gold/80 text-[10px] tracking-[0.32em] mb-3"
           >
-            ENGINE · FREE FOREVER · NO PAYWALL · NO RATE LIMIT
+            ENGINE · FREE · UNLIMITED · RUNS IN YOUR BROWSER
+          </p>
+          <p className="text-mute text-sm leading-relaxed mb-3">
+            您點 RUN,Monte Carlo 在
+            <span className="text-bone font-medium">您本機 CPU</span>
+            {" "}跑 10,000 次,ZONE 27 伺服器一行運算都不做 —{" "}
+            <Link
+              href="/audit"
+              className="text-gold hover:text-gold-soft transition-colors"
+            >
+              詳見 /audit Section 07
+            </Link>
+            (碳排 &lt; 0.1g / sim)。
           </p>
           <p className="text-mute text-sm leading-relaxed">
-            我們不靠引擎收費。工具給每個人,身分留給入會的人 ——{" "}
+            因為架構零邊際成本,所以沒有 paywall 也沒有 rate limit。
+            我們靠{" "}
             <Link
               href="/founders"
               className="text-gold hover:text-gold-soft transition-colors"
             >
               Founders 27 終身名冊
             </Link>
-            {" "}與未來 BLACK CARD 月費社群,才是 ZONE 27 的收入來源。
+            {" "}與未來 BLACK CARD 月費社群運作 —— 工具給每個人,身分留給入會的人。
           </p>
         </div>
       </section>
