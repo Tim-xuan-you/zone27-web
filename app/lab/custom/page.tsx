@@ -220,6 +220,29 @@ function CustomLabInner() {
           想看「3000 三振王」對上「火球菜鳥」的勝率分布?
           一鍵就跑。
         </p>
+
+        {/* Pre-emptive trust artifact: anticipate "shouldn't this be paid?"
+            and convert it into brand positioning. The engine being free
+            is a deliberate inversion of the standard SaaS model —
+            tool free, identity paid. */}
+        <div className="mt-10 max-w-xl mx-auto pt-6 border-t border-line/40">
+          <p
+            lang="en"
+            className="font-mono text-gold/80 text-[10px] tracking-[0.38em] mb-3"
+          >
+            ENGINE · FREE FOREVER · NO PAYWALL · NO RATE LIMIT
+          </p>
+          <p className="text-mute text-sm leading-relaxed">
+            我們不靠引擎收費。工具給每個人,身分留給入會的人 ——{" "}
+            <Link
+              href="/founders"
+              className="text-gold hover:text-gold-soft transition-colors"
+            >
+              Founders 27 終身名冊
+            </Link>
+            {" "}與未來 BLACK CARD 月費社群,才是 ZONE 27 的收入來源。
+          </p>
+        </div>
       </section>
 
       {/* ── PRESETS ──────────────────────────────── */}
