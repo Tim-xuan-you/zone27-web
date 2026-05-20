@@ -66,7 +66,7 @@ export default function Footer() {
         </div>
 
         {/* Legal links row */}
-        <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 pb-6 border-b border-line/30">
+        <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 pb-3">
           {LEGAL_LINKS.map((link) => (
             <Link
               key={link.href}
@@ -76,6 +76,25 @@ export default function Footer() {
               {link.label}
             </Link>
           ))}
+        </div>
+
+        {/* Funding transparency row · Plausible-inspired anti-VC trust signal.
+            Quiet, declarative, single line — visitors scrolling to footer
+            silently absorb the financing model without it competing with
+            navigation. Matches /manifesto Section II MONETIZATION axiom
+            ("we sell identity, not utility"). */}
+        <div className="text-center pb-6 border-b border-line/30">
+          <p className="font-mono text-mute/70 text-[9px] tracking-[0.3em] leading-relaxed">
+            由<span className="text-gold mx-1">創始會員</span>出資
+            <span className="mx-2 text-mute/40">·</span>
+            無創投 · 無廣告 · 無第三方追蹤
+          </p>
+          <p
+            lang="en"
+            className="font-mono text-mute/40 text-[9px] tracking-[0.3em] mt-1.5"
+          >
+            FUNDED BY FOUNDERS · NO VC · NO ADS · NO TRACKERS
+          </p>
         </div>
 
         {/* Bottom row: brand + tagline + version chip */}

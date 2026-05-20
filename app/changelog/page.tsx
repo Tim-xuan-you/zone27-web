@@ -23,15 +23,15 @@ const GH_COMMITS_URL =
 const MILESTONES: { date: string; title: string; detail: string }[] = [
   {
     date: "2026-05-20",
-    title: "Supabase 後端上線 + 4 個 brand-axiom memories 鎖入系統",
+    title: "/manifesto 倒置宣言 + /founders 「您不是在買引擎」reframe + audit honesty sweep",
     detail:
-      "RLS-locked waitlist DB + 2 個 SECURITY DEFINER 函式 · channel attribution(?ref= → DB.source)· /coverage 第 4 個 trust artifact · /audit Section 08 disclosure philosophy · /lab/custom 3 軸 brand 壓縮 · 手機 hamburger nav · /signal-board FRESHNESS · Footer 動態日期 · Musk 方法論成為操作系統。",
+      "/manifesto canonical 4-軸長文宣言上線(disclosure · monetization · coverage · privacy 四個倒置論證 + WHO THIS IS FOR + 8th custom OG card)· /founders 加 reframe section 直接回答「引擎免費為什麼還要付錢」· /about Chapter 03 method 步驟對齊 /audit Section 03 排除清單(刪 Trackman + stats.cpbl + 後端引擎 + 換投/代打 over-claim)· /audit Section 08 backlink 到 /manifesto · /audit header 釐清 REPORT v0.27 vs ENGINE v0.2 雙版本 · /lab hero version chip v0.3 → v0.2 honesty · /matches hardcoded date → dynamic · Footer chip 移除「MLB × 引擎合體」stale tagline · /glossary PR / Spin Rate / Pythag / TRACKMAN section 對齊真實狀態。",
   },
   {
-    date: "2026-05-19",
-    title: "v0.27 · 16 輪 trust-artifact + craft polish 收尾",
+    date: "2026-05-19 / 2026-05-20 上半天",
+    title: "Supabase 後端上線 + 4 個 brand-axiom memories 鎖入系統",
     detail:
-      "ScarcityStrip 全站常駐 · /audit Model Report 7 sections(含 Environmental Impact 領先 98% ML model cards)· 7 個 custom OG cards · WCAG AA 22→0 fails · lang sweep + touch-action manipulation · Related Reading hub-and-spoke · 詳見 WHILE-YOU-WERE-OUT.md 完整 round 1-16 紀錄。",
+      "RLS-locked waitlist DB + 2 個 SECURITY DEFINER 函式 · channel attribution(?ref= → DB.source)· /coverage 第 4 個 trust artifact · /audit Section 08 disclosure philosophy · /lab/custom 3 軸 brand 壓縮 · 手機 hamburger nav 重設計 · /signal-board FRESHNESS · Footer 動態日期 · brand inversion thesis section 上首頁 · 16 輪 trust-artifact + craft polish 收尾 · ScarcityStrip 全站常駐 · /audit Model Report 8 sections(含 Environmental Impact 領先 98% ML model cards)· 7 個 custom OG cards · WCAG AA 22→0 fails · lang sweep + touch-action manipulation · Related Reading hub-and-spoke。",
   },
   {
     date: "2026-05-18 之前",

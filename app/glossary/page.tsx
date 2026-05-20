@@ -183,8 +183,8 @@ const ADVANCED: Stat[] = [
     abbr: "PR",
     enFull: "Plate Discipline",
     zh: "本壘板紀律",
-    body: "打者在好球帶內外的揮棒選擇。CPBL 2026 新進階站台 stats.cpbl.com.tw 開始公開此維度。",
-    note: "Lab v0.4 計畫把 PR 接入打席結果機率矩陣。",
+    body: "打者在好球帶內外的揮棒選擇 — Swing% · Chase% · Contact% · Whiff% 四維。MLB Statcast 完整公開,CPBL 目前未公開此維度。",
+    note: "Lab 路線圖:當 CPBL 開始公開 PR 資料 → 接入打席結果機率矩陣。",
   },
   {
     abbr: "EV",
@@ -204,9 +204,9 @@ const ADVANCED: Stat[] = [
     abbr: "Spin",
     enFull: "Spin Rate",
     zh: "球路轉速",
-    body: "投手球路的轉數(rpm)。直球轉速高 = 看起來會浮起來,變化球轉速影響落差。",
+    body: "投手球路的轉數(rpm)。直球轉速高 = 看起來會浮起來,變化球轉速影響落差。MLB Statcast 提供;CPBL 暫未公開。",
     bench: "Fastball avg: ~2,300 rpm · Elite: >2,500",
-    note: "Lab v0.4 路線圖:把 Spin Rate 加入投手機率推導。",
+    note: "Lab 路線圖(aspirational):加入投手機率推導 — 待 CPBL 公開資料時上路。",
   },
   {
     abbr: "Barrel%",
@@ -219,15 +219,15 @@ const ADVANCED: Stat[] = [
     abbr: "Pythag",
     enFull: "Pythagorean Win %",
     zh: "Pythagorean 期望勝率",
-    body: "勝率 = 得分² / (得分² + 失分²)。預期勝率 vs 實際勝率落差大,代表有運氣成分。",
-    note: "ZONE 27 用此公式校準 Lab 引擎的收斂結果。",
+    body: "Bill James 公式 · 勝率 = 得分² / (得分² + 失分²)。預期勝率 vs 實際勝率落差大,代表有運氣成分。",
+    note: "Lab 引擎輸出可與此公式對照(目前 reader 自行對照,未自動嵌入)。",
   },
 ];
 
 const ALL_GROUPS = [
   { key: "pitching", label: "PITCHING", zh: "投手", stats: PITCHING },
   { key: "batting", label: "BATTING", zh: "打者", stats: BATTING },
-  { key: "advanced", label: "ADVANCED / TRACKMAN", zh: "進階與雷達追蹤", stats: ADVANCED },
+  { key: "advanced", label: "ADVANCED · STATCAST", zh: "進階指標", stats: ADVANCED },
 ] as const;
 
 export default function GlossaryPage() {
