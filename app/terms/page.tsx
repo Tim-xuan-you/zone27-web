@@ -19,7 +19,7 @@ export default function TermsPage() {
       {/* ── HERO ─────────────────────────────────── */}
       <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pt-20 pb-12 text-center">
         <p className="font-mono text-gold text-[10px] tracking-[0.45em] mb-8">
-          TERMS OF SERVICE · v0.17 · MAY 2026
+          TERMS OF SERVICE · MAY 2026 · UPDATED 2026-05-20
         </p>
         <h1 className="text-4xl sm:text-5xl md:text-6xl font-light leading-[1.1] tracking-tight text-bone">
           我們的<span className="text-gold">承諾</span>。
@@ -97,6 +97,20 @@ export default function TermsPage() {
           <li>
             <strong className="text-bone">可隨時退出。</strong>
             寄信即可從 waitlist 移除,沒有任何違約金或保留期。
+            您的 row 從{" "}
+            <Code>Supabase</Code> 永久刪除,
+            創辦人本機與雲端無任何備份。
+          </li>
+          <li>
+            <strong className="text-bone">通道歸因標籤。</strong>
+            若您透過某創始會員的分享連結進入(<Code>?ref=reserve-NNN</Code>),
+            該標籤會存進您的 waitlist row(<Code>source</Code> 欄位)。
+            這是<strong className="text-bone">通道層的彙總</strong>,不是個人追蹤 —
+            完整解釋見{" "}
+            <Link href="/privacy" className="text-gold underline-offset-4 hover:underline">
+              /privacy Section 02
+            </Link>
+            。
           </li>
         </ul>
       </Section>
@@ -177,7 +191,10 @@ export default function TermsPage() {
         <ul className="space-y-3">
           <li>▸ 您因 AI 預測結果產生的任何金錢損失</li>
           <li>▸ 網站宕機或資料暫時無法取用</li>
-          <li>▸ 第三方平台(GitHub / Vercel / 未來的 Supabase)的服務中斷或資料事故</li>
+          <li>
+            ▸ 第三方平台(<Code>GitHub</Code> · <Code>Vercel</Code> ·{" "}
+            <Code>Supabase</Code>(Tokyo ap-northeast-1))的服務中斷或資料事故
+          </li>
           <li>▸ 您自身違反本服務條款導致的後果</li>
         </ul>
       </Section>
@@ -200,7 +217,7 @@ export default function TermsPage() {
       {/* ── FINAL ───────────────────────────────── */}
       <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 py-16 text-center border-t border-line/40">
         <p className="font-mono text-gold text-[10px] tracking-[0.4em] mb-6">
-          TERMS EFFECTIVE 2026 · 05 · 19
+          TERMS EFFECTIVE 2026 · 05 · 20 · SUPABASE MIGRATION
         </p>
         <p className="text-mute leading-relaxed max-w-md mx-auto">
           如有疑問請開{" "}
