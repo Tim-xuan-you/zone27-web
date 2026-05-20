@@ -202,6 +202,19 @@ export default async function FoundersPage({
         <p className="mt-4 max-w-xl mx-auto text-mute/70 text-sm leading-relaxed">
           付款系統預計 2026 Q3 開放。先加入等候名單,優先取得購買權。
         </p>
+
+        {/* Hero anchor CTA — visitors landing here from homepage hero
+            CTA shouldn't have to scroll-read the founder note before
+            reaching the form. This anchor jumps straight to #waitlist
+            via the global smooth-scroll behavior. Brand-on minimal
+            (text link, not a heavy pill) so it doesn't compete with
+            the hero typography. */}
+        <a
+          href="#waitlist"
+          className="inline-block mt-10 font-mono text-gold text-[11px] tracking-[0.4em] hover:text-gold-soft transition-colors"
+        >
+          ↓ 跳到等候名單
+        </a>
       </section>
 
       {/* ── FROM THE FOUNDER ──────────────
