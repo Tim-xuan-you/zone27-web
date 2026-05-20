@@ -14,20 +14,74 @@ function getTaipeiTodayChip(): string {
   }).format(new Date());
 }
 
-const SECONDARY_LINKS = [
-  { label: "5 分鐘入門", href: "/learn", external: false },
-  { label: "關於", href: "/about", external: false },
-  { label: "倒置宣言", href: "/manifesto", external: false },
-  { label: "鐵律", href: "/discipline", external: false },
-  { label: "方法論", href: "/methodology", external: false },
-  { label: "模型報告", href: "/audit", external: false },
-  { label: "覆蓋範圍", href: "/coverage", external: false },
-  { label: "詞彙表", href: "/glossary", external: false },
-  { label: "常見問題", href: "/faq", external: false },
-  { label: "版本紀錄", href: "/changelog", external: false },
-  { label: "實驗室", href: "/lab", external: false },
-  { label: "每日早報", href: "/signal-board", external: false },
-  { label: "GitHub 開源", href: "https://github.com/Tim-xuan-you/zone27-web", external: true },
+// ── Footer link groups · 4-column grid pattern ───────────
+// Research source: Stripe.com, Linear.app, Vercel.com all use
+// multi-column grouped footers (Stripe Sessions 2026 docs +
+// Vercel Geist design system). Previous single-row flex-wrap
+// got cluttered at 13 links — visitors scanning Footer have
+// no logical anchors, just an alphabet soup.
+//
+// Grouping principle: by user intent + journey stage:
+//   ENTRY · for newcomers landing for the first time
+//   BRAND IP · the philosophy / canon pages
+//   TRUST DOCS · the verification / disclosure artifacts
+//   ENGINE · the actual product + reference + external
+// ─────────────────────────────────────────────────────
+
+type FooterLink = {
+  label: string;
+  href: string;
+  external?: boolean;
+};
+
+type FooterGroup = {
+  label: string;
+  enLabel: string;
+  links: FooterLink[];
+};
+
+const FOOTER_GROUPS: FooterGroup[] = [
+  {
+    label: "入門",
+    enLabel: "ENTRY",
+    links: [
+      { label: "5 分鐘入門", href: "/learn" },
+      { label: "關於 ZONE 27", href: "/about" },
+      { label: "常見問題", href: "/faq" },
+    ],
+  },
+  {
+    label: "品牌 IP",
+    enLabel: "BRAND",
+    links: [
+      { label: "倒置宣言", href: "/manifesto" },
+      { label: "鐵律", href: "/discipline" },
+      { label: "版本紀錄", href: "/changelog" },
+    ],
+  },
+  {
+    label: "信任文件",
+    enLabel: "DOCS",
+    links: [
+      { label: "模型報告", href: "/audit" },
+      { label: "技術白皮書", href: "/methodology" },
+      { label: "覆蓋範圍", href: "/coverage" },
+      { label: "27 種進階指標", href: "/glossary" },
+    ],
+  },
+  {
+    label: "工具",
+    enLabel: "ENGINE",
+    links: [
+      { label: "實驗室", href: "/lab" },
+      { label: "每日早報", href: "/signal-board" },
+      {
+        label: "GitHub 開源",
+        href: "https://github.com/Tim-xuan-you/zone27-web",
+        external: true,
+      },
+    ],
+  },
 ];
 
 const LEGAL_LINKS = [
@@ -41,34 +95,51 @@ export default function Footer() {
       id="site-footer"
       className="mt-auto border-t border-line/40 scroll-mt-4"
     >
-      <div className="mx-auto max-w-6xl px-6 sm:px-10 py-10">
-        {/* Top row: secondary links */}
-        <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3 pb-4">
-          {SECONDARY_LINKS.map((link) =>
-            link.external ? (
-              <a
-                key={link.href}
-                href={link.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="font-mono text-mute hover:text-gold text-[10px] tracking-[0.3em] transition-colors"
+      <div className="mx-auto max-w-6xl px-6 sm:px-10 py-12">
+        {/* ── 4-column grouped grid (Stripe/Linear/Vercel pattern) ──
+            Desktop · 4 columns · Tablet · 2 · Mobile · 1
+            Each group has English kicker + zh group label + 3-4 items. */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-10 pb-10">
+          {FOOTER_GROUPS.map((group) => (
+            <div key={group.enLabel}>
+              <p
+                lang="en"
+                className="font-mono text-gold/80 text-[10px] tracking-[0.35em] mb-1"
               >
-                {link.label}
-              </a>
-            ) : (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="font-mono text-mute hover:text-gold text-[10px] tracking-[0.3em] transition-colors"
-              >
-                {link.label}
-              </Link>
-            )
-          )}
+                {group.enLabel}
+              </p>
+              <p className="font-mono text-mute/60 text-[9px] tracking-[0.3em] mb-5">
+                {group.label}
+              </p>
+              <ul className="space-y-3">
+                {group.links.map((link) => (
+                  <li key={link.href}>
+                    {link.external ? (
+                      <a
+                        href={link.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="font-mono text-mute hover:text-gold text-[11px] tracking-[0.18em] transition-colors"
+                      >
+                        {link.label}
+                      </a>
+                    ) : (
+                      <Link
+                        href={link.href}
+                        className="font-mono text-mute hover:text-gold text-[11px] tracking-[0.18em] transition-colors"
+                      >
+                        {link.label}
+                      </Link>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
 
         {/* Legal links row */}
-        <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 pb-3">
+        <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 pt-6 pb-3 border-t border-line/30">
           {LEGAL_LINKS.map((link) => (
             <Link
               key={link.href}
