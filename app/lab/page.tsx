@@ -6,6 +6,7 @@ import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import MatchSimulator from "@/components/MatchSimulator";
 import RecentSims from "@/components/RecentSims";
+import EngineFreeBrandBlock from "@/components/EngineFreeBrandBlock";
 import { matches } from "@/lib/matches";
 
 // ── /lab · Live AI Laboratory ──────────────────────────
@@ -79,6 +80,11 @@ export default function LabPage() {
           選一場 CPBL 比賽,按下執行,看 10,000 次模擬如何在
           兩秒內從亂數收斂成穩定的勝率分布 — 再按 REPLAY 看一場 9 局文字直播。
         </p>
+
+        {/* Universal engine-free brand block — same on /lab/custom.
+            Brand axiom visible at engine entry point, not buried in
+            /lab/custom only. Algorithm Step 3 (SIMPLIFY): one source. */}
+        <EngineFreeBrandBlock />
       </section>
 
       {/* ── MATCH SELECTOR ───────────────────────── */}
