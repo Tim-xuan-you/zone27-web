@@ -221,10 +221,44 @@ function CustomLabInner() {
           一鍵就跑。
         </p>
 
-        {/* Pre-emptive trust artifact: anticipate "shouldn't this be paid?"
-            and convert it into brand positioning. Includes the architectural
-            reason ("runs in your browser") that makes free unlimited
-            sustainable — not generosity, just physics. */}
+        {/* Pre-emptive trust artifact #1: WHY PITCHERS ONLY?
+            The interface asks only for pitcher stats. Visitors silently
+            wonder "where's the hitter input?" — answering that here
+            (instead of burying it in /audit) prevents the doubt from
+            becoming a conversion drag. */}
+        <div className="mt-10 max-w-xl mx-auto pt-6 border-t border-line/40">
+          <p
+            lang="en"
+            className="font-mono text-gold/80 text-[10px] tracking-[0.38em] mb-3"
+          >
+            WHY PITCHERS ONLY · 為什麼只看投手?
+          </p>
+          <p className="text-mute text-sm leading-relaxed mb-3">
+            Bill James 1985 sabermetrics 核心發現 ——
+            短期棒球比賽方差,
+            <span className="text-bone font-medium">投手品質佔 &gt; 60%</span>,
+            其他(打者、守備、場、氣、審)全部加起來才 40%。
+          </p>
+          <p className="text-mute text-sm leading-relaxed">
+            ZONE 27 對 60% 那部分做
+            <span className="text-bone font-medium">精準計算</span>,
+            不是對 100% 做
+            <span className="text-bone font-medium">不準計算</span>。
+            加入打者 = 模型複雜度 ×3 + 錯誤 bar 從 ±1% 放大到 ±5% —
+            雜訊吃掉訊號。少做,做好 →{" "}
+            <Link
+              href="/audit"
+              className="text-gold hover:text-gold-soft transition-colors"
+            >
+              /audit Section 03 完整 10 項排除清單
+            </Link>
+          </p>
+        </div>
+
+        {/* Pre-emptive trust artifact #2: WHY FREE & UNLIMITED?
+            Same psychological move applied to the pricing question.
+            Together these two blocks close the two biggest visitor
+            doubts at the moment of engine first-use. */}
         <div className="mt-10 max-w-xl mx-auto pt-6 border-t border-line/40">
           <p
             lang="en"
