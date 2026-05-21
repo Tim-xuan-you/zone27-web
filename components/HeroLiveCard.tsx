@@ -394,10 +394,16 @@ function PhaseBadge({
   }
 
   if (phase === "today-live") {
+    // Round 29 Wave 10 polish · adds subtle shimmer(opacity 0.85↔1.0 over
+    // 3.2s · per globals.css)so the LIVE badge feels「actively pulsing」
+    // during the game window · brand IP「engine is alive」visual signal。
+    // 反差 today-pregame(also shimmer) · 但 today-live 加 shimmer 更對 ·
+    // LIVE 應該比 PREGAME 視覺強度更高 · 不是平等。Tonight 22:00+ 之前的
+    // 18:35-22:00 window · badge will be in this state · brand 物理時刻 visible。
     return (
       <span
         lang="en"
-        className="px-1.5 py-0.5 text-[8px] tracking-[0.2em] border border-gold text-gold font-mono whitespace-nowrap"
+        className="px-1.5 py-0.5 text-[8px] tracking-[0.2em] border border-gold text-gold font-mono whitespace-nowrap shimmer"
         title="賽事進行中 · 引擎預測已無法再改 · 結果出爐後自動入帳"
       >
         LIVE · 賽事進行中
