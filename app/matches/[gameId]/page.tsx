@@ -17,6 +17,7 @@ import {
 import StatTerm from "@/components/StatTerm";
 import RelatedReading from "@/components/RelatedReading";
 import FollowMatchButton from "@/components/FollowMatchButton";
+import MatchNoteEditor from "@/components/MatchNoteEditor";
 import {
   FOUNDERS_TOTAL,
   FOUNDERS_CLAIMED,
@@ -408,6 +409,9 @@ export default async function MatchDetailPage({
         </p>
         <MatchSimulator key={m.id} match={m} />
       </section>
+
+      {/* ── Round 30 Wave 9 · Personal note editor · logged-in only ─── */}
+      <MatchNoteEditor matchId={m.id} />
 
       {/* ── DISCUSSION LOCK (pre-launch · honest state) ─── */}
       <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-20">
