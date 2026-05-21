@@ -209,7 +209,7 @@ Trust artifacts(post-Round-7 compressed)
 /coverage                覆蓋範圍 · 6 sections + NEVER list
 /privacy                 隱私政策 · 8 sections(含 anti-tracking inventory)
 /terms                   服務條款
-/faq                     14 honest answers
+/faq                     honest answers(動態計數)
 /track-record            公開戰績 ledger · PROVED + DIVERGED 等大 · N=0 honest empty state
 
 Engine + 賽事(只 1 場真實 cpbl-260521-01 · per Day 3 placeholder purge)

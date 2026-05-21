@@ -196,7 +196,7 @@ export default function LearnPage() {
               kicker="AUDIT"
               zh="讀完整 model report"
               href="/audit"
-              note="8 sections · 全部假設 + 排除清單公開"
+              note="5 sections · 引擎範圍 + 揭露哲學"
             />
             <NextStep
               kicker="FOUNDERS"

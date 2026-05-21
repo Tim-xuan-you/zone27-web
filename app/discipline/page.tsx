@@ -298,7 +298,7 @@ export default function DisciplinePage() {
             <SynthRow
               axis="C · 信任 > 行銷"
               examples="Buffett owner's letter 每年寫實話 · Musk Twitter 透明溝通 · Costco 拒打廣告 90% 續訂"
-              z27="/audit 8 sections + /manifesto 4 axioms · 沒 ad spend · footer FUNDED BY FOUNDERS"
+              z27="/audit 5 sections + /manifesto 4 axioms · 沒 ad spend · footer FUNDED BY FOUNDERS"
             />
             <SynthRow
               axis="D · 守紀律拒絕容易"
