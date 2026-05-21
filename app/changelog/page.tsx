@@ -23,6 +23,12 @@ const GH_COMMITS_URL =
 
 const MILESTONES: { date: string; title: string; detail: string }[] = [
   {
+    date: "2026-05-21 · Round 6-9 (consolidated)",
+    title: "Pratfall reversal · /founders airline-grade · 完成度提升 · 4 rounds polished",
+    detail:
+      "Round 6 我嘗試用 Pratfall (Aronson 1966) + Costly Signaling (Spence 1973) defend 27 limitation items 跨 3 頁。Round 7 派 agent fact-check 我引用的 5 premium brands · 結果 0 of 5 actually publish structured limitation pages (Stratechery 沒 limitations 頁只在文章內 admit · 37signals homepage 無 · Plausible 是 GA-comparison positioning · Berkshire 30 頁年信不是 marketing page · Apple 0 limitations 在 marketing 頁)。我承認 over-cited · 大刀 cut:/audit 8→5 sections (含 S03+S04→1 個 ENGINE SCOPE 5 items) · /methodology 10→4 sections · /roadmap BRAND BOUNDARIES 6→3 items · 17 個 visible refs 更新。Memory 寫入 pratfall-brand-ip 規矩 = limitation list 最多 5-7 items in ONE place。Round 8 派 3 agents · /founders airline-grade polish:hero 加 live FOUNDERS_REMAINING / 270 scarcity + sticky CTA destination mobile compress + FROM THE FOUNDER 移到 form 後 + 刪 BLACK CARD reframe 整 section (114 行 · agent C 指出 2 個 reframe 重複) + 5 個 stale section refs 修。Mobile path:1500px → 600px (60% 縮短)。Round 9 完成度提升:ESLint 2 errors+1 warning 全綠 · CLAUDE.md 路由表更新 8→5 sections + 加 /roadmap /track-record /not-found /loading · 5 個 user-visible stale 「8 sections」refs 統一 5。Build / Lint / TSC strict 三綠。最大 lesson:Tim 連續 push 同方向 2+ 次 = canary 我 over-defended · research-backed defense 前提是 research fact-checked 不是 memory 引用。",
+  },
+  {
     date: "2026-05-21 · Round 5",
     title: "Mobile-first 重塑 · 8→3 viewports + sticky Founders CTA bar (+30% conversion)",
     detail:

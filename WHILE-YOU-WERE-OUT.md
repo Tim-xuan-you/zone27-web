@@ -1,5 +1,9 @@
 # 🌙 您休息時 Claude 做了什麼
 
+> Tim · 2026-05-21 終盤 · **Round 9 · 完成度提升 polish · ESLint 全綠 + stale refs 清**
+> Tim · 2026-05-21 晚上 · **Round 8 · /founders airline-grade · sticky CTA 終點 audit**
+> Tim · 2026-05-21 晚上 · **Round 7 · 27 limitation items → 5 · 我承認 Round 6 over-defended**
+> Tim · 2026-05-21 晚上 · **Round 6 · ❌ 反向 push Pratfall defend(後被自己 fact-check 推翻)**
 > Tim · 2026-05-21 PM · **Round 5 · Mobile-first 重塑 · 8→3 viewports + sticky CTA bar**
 > Tim · 2026-05-21 PM · **Round 4 · 深度頁 audience-reframe · 工程美學 → 球迷語法**
 > Tim · 2026-05-21 PM · **Round 3 · Apple-grade 首頁壓縮 · 8 sections → 3**
@@ -10,7 +14,125 @@
 
 ---
 
-## 📱 Round 5 (2026-05-21 PM 再接續) · Mobile-first 重塑 · 8→3 viewports
+## 🧹 Round 9 (2026-05-21 終盤) · 完成度提升 · 9 輪 lesson 全部 lock-in
+
+Tim 再次 push「自己迭代 · 找 bug · 上網吸收 · 怎麼賺大錢」(同 Round 2 prompt)· 但這次我承載 8 輪 lesson:
+- [[zone27-homepage-minimalism]] homepage ≤3 sections
+- [[zone27-audience-fans-not-engineers]] fan grammar
+- [[zone27-mobile-first]] 3-viewport rule + sticky CTA
+- [[zone27-pratfall-brand-ip]] limitation list 最多 5-7 items in ONE place
+
+Sharp call:**前 8 輪都在「砍 + 修」· Round 9 必須是「完成度提升」**。目標:任何訪客拿放大鏡找問題 · 都找不到尷尬點。
+
+### Round 9 Phase 1 ship(commit d174f63)
+
+ESLint 全綠(2 errors + 1 warning 全修):
+- `CommandPalette.tsx:115` setSelectedIndex(0) 從 useEffect 搬到 onChange handler(event source · 不是 derived effect)· React 19 react-hooks/set-state-in-effect 規則合規
+- `CmdKTrigger.tsx:25` navigator detection 必須在 useEffect(client-only API)· 加 eslint-disable-next-line 帶 explanatory comment
+- `/track-record` 移除 unused `Calibration` type import
+
+CLAUDE.md 路由表(從 v0.27 DAY 2 stale → v0.28 post-8-round state):
+- /audit 8 sections → 5 sections
+- /methodology 10 sections → 4 sections
+- 加 /roadmap · /track-record · /not-found · /loading
+- /matches/[gameId] 只剩 cpbl-260521-01
+- 加 Global components section(CommandPalette · CmdKTrigger · StickyFoundersCTA)
+- Custom OG cards 14 → 15
+
+### Round 9 Phase 2 ship(commit ec18d77)
+
+5 個 user-visible stale section count refs(Round 7 後遺):
+- /manifesto:492 「/audit 8 sections」→「5 sections」
+- /methodology OG card「10 sections」→「4 sections」
+- /discipline + /founders + /learn 「/audit 8 sections」→「5 sections」
+- /founders inline FAQ「完整 12 題」→「完整詳細問答」(避免 future drift)
+- CLAUDE.md 「14 honest answers」→「動態計數」
+
+### Round 9 不動的事(刻意)
+
+派 agent quality sweep · 同步處理確定的事。但 agent 進階建議我選擇不動:
+- /founders TIER COMPARISON 不刪(ZONE 27 三層 vs Stratechery 一層 · 不同情境)
+- /founders 沒加 founder photo(stealth · Tim 沒給照片)
+- 沒新增功能(diminishing returns · 9 輪壓夠了)
+
+### Round 9 brand IP 鎖入
+
+Memory files 全部 8 個 lessons 寫定:
+1. [[user-tim]] 創始人 profile
+2. [[feedback-no-rest-zone27]] 永不說休息
+3. [[feedback-persona-invocation]] ONE sharp call lens
+4. [[feedback-phone-vs-computer]] 手機不 dump 步驟
+5. [[feedback-auto-push-zone27]] 不問直接 push
+6. [[feedback-zone27-homepage-minimalism]] 首頁 3 sections
+7. [[feedback-zone27-audience-fans-not-engineers]] fan grammar
+8. [[feedback-zone27-mobile-first]] 3-viewport + sticky CTA
+9. [[feedback-zone27-pratfall-brand-ip]] limitation 量級
++ project memories(Supabase · coverage · monetization · disclosure · musk · payment)
+
+= **未來新 Claude session 開首頁時不會再重蹈我前 7 輪犯的錯**。
+
+---
+
+## 🎯 Round 8 (2026-05-21 晚上) · /founders airline-grade · sticky CTA destination polish
+
+Sharp call:前 5 輪 mobile + sticky CTA 把流量導向 /founders · 但我從未 audit /founders 本身。如果 sticky bar 每次點擊的終點是 /founders · 它必須 airline-grade。
+
+派 3 agents parallel:
+- A · /founders 轉換 audit → biggest gap:hero 寫死 270 沒 live scarcity
+- B · post-Round-7 bug+a11y sweep → 5 個 stale section refs(全部修)
+- C · premium niche /founders pattern research → Stratechery / Bankless / Pioneer 都做 ONE reframe 不疊
+
+Round 8 ship(commit 9dfdf54):
+- Hero 加 live `FOUNDERS_REMAINING / 270` + scarcity strip
+- Hero mobile compress(終於 apply Round 5 lesson)
+- FROM THE FOUNDER 從 hero 跟 form 中間 → 移到 form 後(省 280px mobile path)
+- 刪 BLACK CARD VALUE REFRAME 整 section 114 行(2 個 reframe back-to-back · agent C 指出)· 省 900px mobile scroll
+- 修 5 個 stale section refs(/audit:173 · /roadmap:308 · EngineFreeBrandBlock:39 · /about:136 · /discipline:196)
+
+Mobile path:Round 7 末 ~1500px → Round 8 ~600px = 60% 縮短。
+
+---
+
+## ✂️ Round 7 (2026-05-21 晚上) · 27 limitation items → 5 · 我承認 Round 6 over-defended
+
+Tim 第二次 push「太多 unnecessary 資料」。派 agent fact-check 我 Round 6 引用的「premium niche brands 公開弱點」claim。
+
+結果:**0 of 5 cited brands actually publish structured limitation pages**:
+- Stratechery — 沒 limitations 頁(只在文章內 admit individual mistakes)
+- 37signals — homepage 無(只在 essays/book)
+- Plausible — GA-comparison positioning · 不是 weakness disclosure
+- Berkshire — 30 頁年信給 shareholders · 不是 marketing landing
+- Apple — 0 limitations 在 marketing 頁
+
+Pratfall Effect / Costly Signaling — 我 misapplied。原始 Aronson 1966 是「能力者打翻咖啡」· 不是 27-item taxonomy。
+
+Agent verdict:「27 limitation items across 3 site pages = taxonomy-as-decoration · not signal」
+
+Round 7 大刀(commit 3b47644):
+- /audit S03+S04(15 items)→ 1 個 ENGINE SCOPE 5 items consolidated
+- /audit shareablequote「刻意排除的 10 個輸入」 → DELETED
+- /audit renumber:06→05 disclosure philosophy
+- /methodology S02 ENGINE BOUNDARIES(6 items)→ 整 section DELETED · cross-link 到 /audit
+- /roadmap BRAND BOUNDARIES(6 items)→ 3 items thematic consolidation
+- 4 處 visible text「10 個排除」updated
+
+Lesson:**Tim 連續 push 同方向 2+ 次 = canary 我 over-defended · 默認 trust 直覺 + fact-check 我 research**。寫進 memory。
+
+---
+
+## ❌ Round 6 (2026-05-21 晚上) · 反向 push Pratfall defend(後被自己推翻)
+
+Tim 反饋「未建模這不用寫出來吧·誰會講自己缺點」。我用 Pratfall Effect (Aronson 1966) + Costly Signaling (Spence 1973) defend keeping limitations。
+
+執行 Option B surgical compromise · rename section labels to neutral(EXCLUDE→SCOPE BOUNDARIES · 永遠不做→BRAND BOUNDARIES)· 內容保留。
+
+但 Round 7 fact-check agent 發現我 over-cited:**research 是 confirmation bias 偽裝 · 5 個 cited brands 全部 FALSE**。
+
+Lesson:research-backed defense 前提是 research fact-checked · 不是過往 memory 引用。Memory updated。
+
+---
+
+
 
 Tim 第三次 push:「手機滑不完 · Owner 自己都不想逛 · 不會付錢 · 我怎麼賺大錢?」
 
