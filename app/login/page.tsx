@@ -1,10 +1,13 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import { createSupabaseBrowserClient } from "@/lib/supabase/browser";
+
+const EMAIL_CACHE_KEY = "zone27_last_login_email";
+const RESEND_COOLDOWN_SEC = 30;
 
 // ── ZONE 27 · /login ───────────────────────────────────
 // Round 30 Wave 5 · 2026-05-21 evening · Phase 1 magic link auth ·
@@ -41,19 +44,72 @@ type SubmitState =
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [state, setState] = useState<SubmitState>({ kind: "idle" });
-  // Round 30 Wave 6 · ?next= forwarding · so FollowMatchButton anonymous
-  // visitor 從 match page 登入 → magic link → /auth/callback?next=/matches/X
-  // → 自動回原 match page。 Internal-only redirect(只接 /-prefixed path ·
-  // 拒外部 URL · 防 open-redirect 漏洞)。
+  // Round 30 Wave 13 · session probe on mount · 已登入訪客顯示「您已
+  // logged in as X」 + 跳 /member 連結 · 不重複 magic link 寄信。
+  const [existingEmail, setExistingEmail] = useState<string | null>(null);
+  // Round 30 Wave 13 · resend cooldown countdown · 防混淆多 email
+  // (Tim 之前一晚 3 封 confusing email · UX bug)
+  const [cooldown, setCooldown] = useState(0);
+  const cooldownTimerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  // Round 30 Wave 6 · ?next= forwarding
   const [nextPath, setNextPath] = useState<string | null>(null);
+
+  // ── On mount: session probe + email cache + next param ──
   useEffect(() => {
     if (typeof window === "undefined") return;
-    const sp = new URLSearchParams(window.location.search);
-    const raw = sp.get("next");
-    if (raw && raw.startsWith("/") && !raw.startsWith("//")) {
-      setNextPath(raw);
-    }
+    let cancelled = false;
+    (async () => {
+      // Restore last-used email from localStorage(Round 30 Wave 13 ·
+      // 重訪不重打)。
+      try {
+        const cached = window.localStorage.getItem(EMAIL_CACHE_KEY);
+        if (cached && /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(cached)) {
+          setEmail(cached);
+        }
+      } catch {
+        // localStorage blocked · 不擋
+      }
+      // Parse ?next=
+      const sp = new URLSearchParams(window.location.search);
+      const raw = sp.get("next");
+      if (raw && raw.startsWith("/") && !raw.startsWith("//")) {
+        setNextPath(raw);
+      }
+      // Probe existing session(已登入訪客不需重 register)
+      try {
+        const supabase = createSupabaseBrowserClient();
+        const { data } = await supabase.auth.getSession();
+        if (!cancelled && data.session?.user.email) {
+          setExistingEmail(data.session.user.email);
+        }
+      } catch {
+        // Network blocked / Supabase down · degrade silently
+      }
+    })();
+    return () => {
+      cancelled = true;
+      if (cooldownTimerRef.current) {
+        clearInterval(cooldownTimerRef.current);
+      }
+    };
   }, []);
+
+  function startCooldown() {
+    setCooldown(RESEND_COOLDOWN_SEC);
+    if (cooldownTimerRef.current) clearInterval(cooldownTimerRef.current);
+    cooldownTimerRef.current = setInterval(() => {
+      setCooldown((s) => {
+        if (s <= 1) {
+          if (cooldownTimerRef.current) {
+            clearInterval(cooldownTimerRef.current);
+            cooldownTimerRef.current = null;
+          }
+          return 0;
+        }
+        return s - 1;
+      });
+    }, 1000);
+  }
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -62,7 +118,6 @@ export default function LoginPage() {
       setState({ kind: "error", message: "請輸入 email" });
       return;
     }
-    // Mirror the same regex as supabase migration 0001_waitlist.sql
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(trimmed)) {
       setState({ kind: "error", message: "email 格式有誤" });
       return;
@@ -90,10 +145,45 @@ export default function LoginPage() {
         });
         return;
       }
+      // Round 30 Wave 13 · cache email + start cooldown
+      try {
+        window.localStorage.setItem(EMAIL_CACHE_KEY, trimmed);
+      } catch {
+        // 不擋
+      }
+      startCooldown();
       setState({ kind: "sent", email: trimmed });
     } catch (err) {
       const message =
         err instanceof Error ? err.message : "未知錯誤 · 請稍候再試";
+      setState({ kind: "error", message });
+    }
+  }
+
+  async function handleResend() {
+    if (cooldown > 0 || state.kind !== "sent") return;
+    const targetEmail = state.email;
+    setState({ kind: "sending" });
+    try {
+      const supabase = createSupabaseBrowserClient();
+      const callbackUrl = new URL("/auth/callback", window.location.origin);
+      if (nextPath) callbackUrl.searchParams.set("next", nextPath);
+      const { error } = await supabase.auth.signInWithOtp({
+        email: targetEmail,
+        options: { emailRedirectTo: callbackUrl.toString() },
+      });
+      if (error) {
+        setState({
+          kind: "error",
+          message: error.message || "重發失敗 · 請稍候再試",
+        });
+        return;
+      }
+      startCooldown();
+      setState({ kind: "sent", email: targetEmail });
+    } catch (err) {
+      const message =
+        err instanceof Error ? err.message : "未知錯誤";
       setState({ kind: "error", message });
     }
   }
@@ -121,10 +211,42 @@ export default function LoginPage() {
           </p>
         </section>
 
+        {/* ── ALREADY LOGGED IN · Round 30 Wave 13 ──────
+            Session probe on mount detected existing session · 不重複 ship
+            magic link · 直接 link 到 /member。 Tim's pain:多次點 /login
+            其實 session 已 active · UI 沒告訴他 · 重複寄 confusing emails。 */}
+        {existingEmail && state.kind !== "sent" && state.kind !== "sending" && (
+          <section className="mx-auto max-w-md w-full px-6 sm:px-10 pb-6">
+            <div className="bg-gold/5 border border-gold/60 glow-soft p-5">
+              <p
+                lang="en"
+                className="font-mono text-gold text-[10px] tracking-[0.4em] mb-2 shimmer"
+              >
+                ✓ ALREADY LOGGED IN
+              </p>
+              <p className="text-mute text-sm leading-relaxed mb-4">
+                您本 device 已 logged in as{" "}
+                <span className="font-mono text-gold">{existingEmail}</span> ·
+                不需重新註冊。
+              </p>
+              <Link
+                href="/member"
+                className="inline-block px-5 py-2 bg-gold text-navy font-mono text-[10px] tracking-[0.3em] hover:bg-gold-soft transition-colors"
+              >
+                → 進您 /member dashboard
+              </Link>
+            </div>
+          </section>
+        )}
+
         {/* ── FORM ─────────────────────────────────── */}
         <section className="mx-auto max-w-md w-full px-6 sm:px-10 pb-12">
           {state.kind === "sent" ? (
-            <SentState email={state.email} />
+            <SentState
+              email={state.email}
+              cooldown={cooldown}
+              onResend={handleResend}
+            />
           ) : (
             <form
               onSubmit={handleSubmit}
@@ -172,12 +294,17 @@ export default function LoginPage() {
               )}
 
               <div className="pt-3 border-t border-line/40">
+                <p className="font-mono text-loss/90 text-[10px] tracking-[0.25em] leading-relaxed mb-2">
+                  ⚠ <span className="text-loss font-medium">關鍵</span>:必須在<span className="text-bone">同一個 device</span>開 magic link
+                  <br />
+                  (e.g. 手機 /login → 手機 Gmail open · 不能 desktop 填 · 手機開 email)
+                </p>
                 <p className="font-mono text-mute/80 text-[10px] tracking-[0.25em] leading-relaxed">
-                  ▸ 我們不要密碼 · 不要 social login · 不要 OAuth
+                  ▸ 1 個欄位 · 沒密碼 · 沒 OAuth · 沒 social login
                   <br />
-                  ▸ Email = 您的會員 identifier · 不需第二個欄位
+                  ▸ Magic link 點 1 次 · 30 分鐘內有效 · 過期重發
                   <br />
-                  ▸ Magic link 點 1 次 = 您 session 啟動 · 不用再 sign-in
+                  ▸ Email 多封 · click 最新一封(舊的 token 已失效)
                   <br />
                   ▸ 想登出 · /member 內有「登出」按鈕
                 </p>
@@ -236,31 +363,72 @@ export default function LoginPage() {
   );
 }
 
-function SentState({ email }: { email: string }) {
+function SentState({
+  email,
+  cooldown,
+  onResend,
+}: {
+  email: string;
+  cooldown: number;
+  onResend: () => void;
+}) {
   return (
-    <div className="bg-gold/5 border border-gold/60 glow-soft p-6 sm:p-8 text-center">
+    <div className="bg-gold/5 border border-gold/60 glow-soft p-6 sm:p-8">
       <p
         lang="en"
-        className="font-mono text-gold text-[10px] tracking-[0.45em] mb-4 shimmer"
+        className="font-mono text-gold text-[10px] tracking-[0.45em] mb-4 shimmer text-center"
       >
         ✓ MAGIC LINK SENT
       </p>
-      <h2 className="text-2xl sm:text-3xl text-bone font-light tracking-tight mb-4">
+      <h2 className="text-2xl sm:text-3xl text-bone font-light tracking-tight mb-4 text-center">
         寄出了 · 1 分鐘內看您信箱
       </h2>
-      <p className="text-mute text-sm sm:text-base leading-relaxed mb-6">
+      <p className="text-mute text-sm sm:text-base leading-relaxed mb-5 text-center">
         Magic link 寄到{" "}
-        <span className="font-mono text-gold">{email}</span> ·
-        點開後您 session 啟動 · 自動轉到{" "}
-        <span className="font-mono text-bone">/member</span>。
+        <span className="font-mono text-gold">{email}</span>
       </p>
-      <div className="bg-navy/40 border border-line/60 p-4 text-left">
+
+      {/* ⚠ Cross-device + multi-email guidance · Round 30 W13 · Tim 痛點 */}
+      <div className="bg-loss/5 border border-loss/40 p-4 mb-4">
+        <p className="font-mono text-loss text-[10px] tracking-[0.3em] mb-2">
+          ⚠ 關鍵 · 2 件事很容易踩
+        </p>
+        <p className="text-mute text-xs sm:text-sm leading-relaxed">
+          <strong className="text-bone">①</strong>{" "}
+          開 email 必須<strong className="text-bone">在這個 device + browser</strong>。
+          手機 /login → 手機 Gmail open。 不能 desktop /login · 手機開 email
+          (session 會落 wrong device)。
+          <br />
+          <br />
+          <strong className="text-bone">②</strong>{" "}
+          Gmail 可能有<strong className="text-bone">多封 ZONE 27 email</strong>
+          (之前送的 link token 已用)· 找<strong className="text-bone">最新一封</strong>點 ·
+          舊的會 expired。
+        </p>
+      </div>
+
+      {/* ── Resend button + countdown · Round 30 W13 ── */}
+      <div className="text-center mb-4">
+        <button
+          type="button"
+          onClick={onResend}
+          disabled={cooldown > 0}
+          className="px-6 py-2.5 border border-gold text-gold font-mono text-[10px] tracking-[0.3em] hover:bg-gold/10 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+        >
+          {cooldown > 0
+            ? `⌛ Resend · 等 ${cooldown}s`
+            : "↻ 沒收到 · Resend magic link"}
+        </button>
+      </div>
+
+      <div className="bg-navy/40 border border-line/60 p-4">
         <p className="font-mono text-mute/80 text-[10px] tracking-[0.25em] leading-relaxed">
-          ▸ 沒收到?看垃圾信夾 · 或 1 分鐘後重發
+          ▸ 點開 link → 自動轉{" "}
+          <span className="font-mono text-bone">/member?welcome=true</span>
           <br />
-          ▸ Email typo?關掉此頁 · 重 /login 重輸入
+          ▸ Magic link 30 分鐘內有效 · 過期 Resend
           <br />
-          ▸ 收到但連結失效?Magic link 30 分鐘內有效 · 過期重發
+          ▸ Email 找不到看垃圾信夾 · 或 30 秒後 Resend
         </p>
       </div>
     </div>
