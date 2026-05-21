@@ -36,7 +36,7 @@ export default function EngineFreeBrandBlock() {
           href="/audit"
           className="text-gold hover:text-gold-soft transition-colors"
         >
-          詳見 /audit Section 07
+          詳見 /audit Section 04 ENVIRONMENTAL IMPACT
         </Link>
         (碳排 &lt; 0.1g / sim)。
       </p>

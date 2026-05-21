@@ -170,7 +170,7 @@ export default function AuditPage() {
               <Link href="/methodology" className="text-gold hover:underline">
                 /methodology
               </Link>{" "}
-              第 09 節 REFERENCES。
+              第 03 節 WHAT&apos;S NEXT。
             </P>
           </ReportSection>
 

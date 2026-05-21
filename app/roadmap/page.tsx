@@ -305,7 +305,7 @@ export default function RoadmapPage() {
             lang="en"
             className="font-mono text-gold text-[10px] tracking-[0.4em] mb-4"
           >
-            FROM /AUDIT · SECTION 08
+            FROM /AUDIT · SECTION 05
           </p>
           <p className="text-bone text-xl sm:text-2xl font-light tracking-tight leading-snug mb-3">
             「沒有商業機密 · 沒有 closed weights · 沒有未來計劃藏起來。」

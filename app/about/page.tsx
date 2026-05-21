@@ -133,7 +133,7 @@ export default function AboutPage() {
               <Link href="/audit" className="text-gold hover:underline">
                 /audit
               </Link>
-              {" "}Section 06 ENVIRONMENTAL IMPACT。
+              {" "}Section 04 ENVIRONMENTAL IMPACT。
             </span>
           </li>
           <li className="flex gap-4">

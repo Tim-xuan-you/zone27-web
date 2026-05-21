@@ -193,7 +193,7 @@ export default function DisciplinePage() {
                 <Link href="/audit" className="text-gold hover:underline">
                   /audit
                 </Link>{" "}
-                Section 06 Environmental Impact)。
+                Section 04 Environmental Impact)。
               </Item>
               <Item label="從零想 quant baseball 品牌">
                 沒有抄 LINE 老師 / 殺手平台模式 · 從零問「what&apos;s a quant baseball

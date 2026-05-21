@@ -4,7 +4,12 @@ import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import WaitlistForm from "@/components/WaitlistForm";
 import CopyLinkButton from "@/components/CopyLinkButton";
-import { FOUNDERS_TOTAL, formatBadge } from "@/lib/founders-stats";
+import {
+  FOUNDERS_TOTAL,
+  FOUNDERS_CLAIMED,
+  FOUNDERS_REMAINING,
+  formatBadge,
+} from "@/lib/founders-stats";
 import { getWaitlistCount } from "@/lib/waitlist-stats";
 
 export const metadata: Metadata = {
@@ -153,9 +158,14 @@ export default async function FoundersPage({
       <Nav active="founders" />
 
       <main id="main">
-      {/* ── HERO ─────────────────────────── */}
-      <section className="mx-auto max-w-4xl w-full px-6 sm:px-10 pt-24 pb-12 text-center">
-        <div className="inline-flex items-center gap-2 mb-8 font-mono text-[10px] tracking-[0.4em]">
+      {/* ── HERO · Round 8 mobile compress (per Round 5 lesson) ─────
+          Previously pt-24 + text-5xl on mobile = ~800px hero alone.
+          Visitors arriving via sticky CTA bar from another page were
+          seeing only "FOUNDERS · 27" badge in first viewport · had
+          to scroll twice before reaching the offer. Compressed to
+          ~400px on mobile · 0 desktop change. */}
+      <section className="mx-auto max-w-4xl w-full px-6 sm:px-10 pt-10 sm:pt-24 pb-8 sm:pb-12 text-center">
+        <div className="inline-flex items-center gap-2 mb-5 sm:mb-8 font-mono text-[9px] sm:text-[10px] tracking-[0.4em]">
           <span className="text-gold">FOUNDERS · 27</span>
           <span className="text-mute/60">·</span>
           <span className="px-1.5 py-0.5 border border-gold/40 text-gold">
@@ -163,24 +173,39 @@ export default async function FoundersPage({
           </span>
         </div>
 
-        <h1 className="text-5xl sm:text-6xl md:text-7xl font-light leading-[1.05] tracking-tight text-bone">
-          僅限
-          <span className="text-gold mx-3 tabular">{FOUNDERS_TOTAL}</span>
-          位
+        <h1 className="text-4xl sm:text-6xl md:text-7xl font-light leading-[1.05] tracking-tight text-bone">
+          <span className="text-gold tabular">{FOUNDERS_REMAINING}</span>
+          {" "}席剩
           <br />
-          創始會員。
+          <span className="text-3xl sm:text-4xl md:text-5xl text-mute">
+            (共 {FOUNDERS_TOTAL} 名 · 永不再開)
+          </span>
         </h1>
+
+        {/* Live scarcity strip · directly under headline · matches what
+            sticky CTA bar promised on the prior page (per Round 8 agent
+            audit). Without this, mobile visitor arriving via sticky bar
+            lost the「X / 270」context they just tapped. */}
+        <p className="mt-4 sm:mt-5 font-mono text-bone text-sm sm:text-base tabular tracking-[0.2em]">
+          <span className="text-gold">{FOUNDERS_CLAIMED}</span>
+          <span className="text-mute/60"> / </span>
+          <span>{FOUNDERS_TOTAL}</span>
+          <span className="text-mute mx-2">·</span>
+          NT$ 2,700
+          <span className="text-mute mx-2">·</span>
+          終身
+        </p>
 
         <p
           lang="en"
-          className="font-mono text-mute text-sm tracking-[0.3em] mt-8"
+          className="font-mono text-mute text-xs sm:text-sm tracking-[0.3em] mt-3 sm:mt-5"
         >
-          NT$ 2,700 · ONE-TIME · LIFETIME · NEVER REOPENS
+          ONE-TIME · LIFETIME · NEVER REOPENS
         </p>
 
         {/* Break-even math line — research-backed LTD trust signal.
             「5.4 個月損益平衡」是 2026 LTD 文案最常被引用的轉換句型。 */}
-        <p className="mt-6 max-w-xl mx-auto text-bone text-sm leading-relaxed">
+        <p className="mt-5 sm:mt-6 max-w-xl mx-auto text-bone text-sm leading-relaxed">
           與 BLACK CARD 月費 NT$ 499 比較,
           <span className="font-mono text-gold tabular mx-1">5.4</span>
           個月即達損益平衡 ·
@@ -194,34 +219,45 @@ export default async function FoundersPage({
           NO AUTO-RENEW · NO HIDDEN FEES · NEVER REOPENS
         </p>
 
-        <p className="mt-10 max-w-xl mx-auto text-mute leading-relaxed">
+        <p className="mt-6 sm:mt-10 max-w-xl mx-auto text-mute leading-relaxed text-sm sm:text-base">
           這 {FOUNDERS_TOTAL} 個編號將是 ZONE 27 永遠的傳教士。
           <br />
           一次入會,終身免費。售完即永久關閉,不會有第二批。
         </p>
-        <p className="mt-4 max-w-xl mx-auto text-mute/70 text-sm leading-relaxed">
+        <p className="mt-3 sm:mt-4 max-w-xl mx-auto text-mute/70 text-xs sm:text-sm leading-relaxed">
           付款系統預計 2026 Q3 開放。先加入等候名單,優先取得購買權。
         </p>
 
-        {/* Hero anchor CTA — visitors landing here from homepage hero
-            CTA shouldn't have to scroll-read the founder note before
-            reaching the form. This anchor jumps straight to #waitlist
-            via the global smooth-scroll behavior. Brand-on minimal
-            (text link, not a heavy pill) so it doesn't compete with
-            the hero typography. */}
+        {/* Hero anchor CTA — visitors landing here from sticky CTA on
+            another page shouldn't have to scroll-read the founder note
+            before reaching the form. Brand-on minimal text link. */}
         <a
           href="#waitlist"
-          className="inline-block mt-10 font-mono text-gold text-[11px] tracking-[0.4em] hover:text-gold-soft transition-colors"
+          className="inline-block mt-6 sm:mt-10 font-mono text-gold text-[11px] tracking-[0.4em] hover:text-gold-soft transition-colors"
         >
           ↓ 跳到等候名單
         </a>
       </section>
 
-      {/* ── FROM THE FOUNDER ──────────────
+      {/* ── WAITLIST FORM · Round 8 moved up to be 2nd block ────
+          Was 3rd block (after FROM THE FOUNDER) · per Round 8 agent
+          audit "+280px mobile scroll inserted between sticky-bar tap
+          and form submission". Now form is the second touchpoint —
+          sticky bar tap → hero scarcity → form. FROM THE FOUNDER
+          moved below form so it warms returning visitors but doesn't
+          block the conversion path. */}
+      <section
+        id="waitlist"
+        className="mx-auto max-w-2xl w-full px-6 sm:px-10 pb-12 sm:pb-20 scroll-mt-20"
+      >
+        <WaitlistForm waitlistCount={waitlistCount} refSource={refSource} />
+      </section>
+
+      {/* ── FROM THE FOUNDER · Round 8 moved below form ──
           Excerpted closing line from /about Chapter 5 (Tim's voice).
-          Placement above waitlist form is research-backed (Saaspo 2026 LTD
-          founder-letter section pattern). 1px gold/20 border + uppercase
-          mono label is the high-trust premium SaaS convention. */}
+          Warm trust signal · now appears AFTER visitors submit (or
+          choose not to). 1px gold/20 border + uppercase mono label
+          is the high-trust premium SaaS convention. */}
       <section className="mx-auto max-w-2xl w-full px-6 sm:px-10 pb-10">
         <div className="border border-gold/20 p-6 sm:p-8">
           <p
@@ -245,14 +281,6 @@ export default async function FoundersPage({
             </Link>
           </div>
         </div>
-      </section>
-
-      {/* ── WAITLIST FORM ───────────────── */}
-      <section
-        id="waitlist"
-        className="mx-auto max-w-2xl w-full px-6 sm:px-10 pb-20 scroll-mt-20"
-      >
-        <WaitlistForm waitlistCount={waitlistCount} refSource={refSource} />
       </section>
 
       {/* ── WHAT YOU'RE NOT BUYING ────────────
@@ -371,117 +399,15 @@ export default async function FoundersPage({
         </p>
       </section>
 
-      {/* ── BLACK CARD VALUE REFRAME ──────────
-          Pre-empts the second-order visitor objection that comes
-          AFTER they accept "Founders 27 is finite identity, not
-          engine access":
-            "OK but after 270 are forged, BLACK CARD月費賣的是什麼?
-             我自己 host 引擎不就同樣免費?"
-          Same answer pattern as Founders reframe section above,
-          but specifically for monthly subscription value props.
-          Aligned with industry parallels (Stratechery / Athletic /
-          Bankless Premium / TradingView Pro): tool free · paid
-          tier sells community + curation + creator relationship.
-          ENGINE = lead magnet · BLACK CARD = recurring community. */}
-      <section
-        aria-labelledby="black-card-reframe-heading"
-        className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-24 border-t border-line/40 pt-20"
-      >
-        <p className="font-mono text-gold text-[10px] tracking-[0.4em] mb-6 text-center">
-          / BLACK CARD · 月費賣的是什麼
-        </p>
-        <h2
-          id="black-card-reframe-heading"
-          className="text-3xl sm:text-4xl text-bone font-light tracking-tight text-center mb-4"
-        >
-          您不是在訂閱引擎,
-          <br />
-          您在訂閱<span className="text-gold">社群與策展</span>。
-        </h2>
-        <p className="text-mute text-center text-sm sm:text-base mb-14 max-w-xl mx-auto leading-relaxed">
-          引擎免費 · 永遠免費。BLACK CARD 月費 NT$ 499 訂閱的是 6 件
-          自架引擎複製不了的事。對標 Stratechery · The Athletic ·
-          TradingView Pro — 工具免費,訂閱買的是創作者的角度 + 社群 + 策展。
-        </p>
-
-        <div className="grid sm:grid-cols-2 gap-6 sm:gap-8">
-          {/* ── 左欄 · 自架可做的事 ── */}
-          <div className="border border-line/60 p-6 sm:p-7 bg-slate/30">
-            <p
-              lang="en"
-              className="font-mono text-mute text-[10px] tracking-[0.3em] mb-5"
-            >
-              SELF-HOST · 自己 fork 也可以做的
-            </p>
-            <ul className="space-y-3 text-mute text-sm leading-relaxed list-none pl-0">
-              <BlackCardItem>跑無限次 Monte Carlo 模擬</BlackCardItem>
-              <BlackCardItem>自訂任意投手對戰</BlackCardItem>
-              <BlackCardItem>讀完整 /audit + /methodology</BlackCardItem>
-              <BlackCardItem>Fork GitHub 整個 codebase</BlackCardItem>
-              <BlackCardItem>用我們的方法做自己分析</BlackCardItem>
-            </ul>
-            <p className="mt-6 pt-4 border-t border-line/40 font-mono text-mute/80 text-[10px] tracking-[0.25em] leading-relaxed">
-              工具層 · commoditize
-            </p>
-          </div>
-
-          {/* ── 右欄 · BLACK CARD 月費 fork 不走 ── */}
-          <div className="border border-gold/40 p-6 sm:p-7 bg-gold/5 glow-soft">
-            <p
-              lang="en"
-              className="font-mono text-gold text-[10px] tracking-[0.3em] mb-5"
-            >
-              NT$ 499/月 · 持續性訂閱 · 預計 2026 Q3
-            </p>
-            <ul className="space-y-3 text-bone text-sm leading-relaxed list-none pl-0">
-              <BlackCardItem gold>
-                <strong>創辦人每日策展焦點</strong> — Tim 親手挑當日 edge
-                最強的 1-2 場 + 一段「為什麼今天看這場」
-              </BlackCardItem>
-              <BlackCardItem gold>
-                <strong>每週工程筆記</strong> — 模型為何改 v0.3 ·
-                下一版設計討論 · 內部視角
-              </BlackCardItem>
-              <BlackCardItem gold>
-                <strong>量化棒球 LINE 社群</strong> — 與其他硬核同好直接交流
-                · 經邀請才能進
-              </BlackCardItem>
-              <BlackCardItem gold>
-                <strong>明牌交易市場</strong> — 您也是創作者?平台抽 5%
-                (Founders 27 享 0%)
-              </BlackCardItem>
-              <BlackCardItem gold>
-                <strong>季度線上工作坊</strong> — 進階 sabermetrics +
-                個案 deep-dive · 只給訂閱者
-              </BlackCardItem>
-              <BlackCardItem gold>
-                <strong>模型迭代優先試用 + 投票權</strong> — 比 free tier
-                早試 · 影響下一版設計
-              </BlackCardItem>
-            </ul>
-            <p className="mt-6 pt-4 border-t border-gold/30 font-mono text-gold text-[10px] tracking-[0.25em] leading-relaxed">
-              意義層 · monopolize
-            </p>
-          </div>
-        </div>
-
-        <p
-          className="mt-12 text-center text-bone text-base sm:text-lg font-light max-w-2xl mx-auto leading-relaxed"
-          style={{ textWrap: "balance" }}
-        >
-          工具<span className="text-mute">能被複製</span>,意義
-          <span className="text-gold">不能</span>。
-          <br />
-          <span className="text-gold">ENGINE = LEAD MAGNET</span>
-          <span className="text-mute mx-3">·</span>
-          <span className="text-gold">BLACK CARD = 持續社群</span>
-        </p>
-
-        <p className="mt-8 text-center font-mono text-mute text-[10px] tracking-[0.3em] max-w-2xl mx-auto leading-relaxed">
-          同模式經濟學 · STRATECHERY USD $12/月 · THE ATHLETIC USD $7.99/月
-          · BANKLESS PREMIUM USD $22/月 · TRADINGVIEW PRO USD $30/月
-        </p>
-      </section>
+      {/* Round 8: BLACK CARD VALUE REFRAME section (114 lines · 2nd
+          reframe back-to-back with 「您不是在買引擎」) removed.
+          Agent #3 (premium /founders research): "premium pages do
+          ONE reframe block, not stacked. Pick the sharper one."
+          Kept: 「您不是在買引擎」(closer to Founders 27 brand IP).
+          BLACK CARD context still in /manifesto Section II MONETIZATION
+          (link already exists above) — visitors curious about BLACK
+          CARD specifically can read the full reframe there.
+          Saves ~900px mobile scroll. */}
 
       {/* ── BENEFITS GRID ────────────────── */}
       <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-24 border-t border-line/40 pt-20">
@@ -848,27 +774,8 @@ function NotBuyingItem({
   );
 }
 
-function BlackCardItem({
-  children,
-  gold = false,
-}: {
-  children: React.ReactNode;
-  gold?: boolean;
-}) {
-  return (
-    <li className="flex items-baseline gap-3">
-      <span
-        aria-hidden="true"
-        className={`font-mono text-[10px] tracking-[0.2em] shrink-0 ${
-          gold ? "text-gold" : "text-mute/60"
-        }`}
-      >
-        ▸
-      </span>
-      <span className="flex-1 leading-relaxed">{children}</span>
-    </li>
-  );
-}
+// Round 8: BlackCardItem helper removed with the BLACK CARD reframe
+// section. No other call sites in this file.
 
 function CalcRow({
   label,
