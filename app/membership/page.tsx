@@ -165,73 +165,55 @@ export default async function MembershipPage({
 
         <div className="mx-auto w-32 gold-line mb-12" />
 
-        {/* ── MEMBER SYSTEM MAP · Round 30 Wave 4 ───────
-            Tim 第 2 次同 prompt(R29 W2 已 ship /member + /admin · Tim
-            訪客第一眼看不到答案聚合)= Pratfall canary fire · 不 over-
-            defend「我已 ship」 · 把 4 個 reflexive question 做成 single
-            visible MAP block · 放在訪客 hero 下第一眼可見處 · 不用滾。
-            Each Q: verdict band + body + direct anchor link · 答案散在
-            /membership Creator Permissions / /member / /member/
-            calibration / /admin · MAP 是 single source of truth · 不重
-            複內容 · 純導航。 Brand pure:gold-bordered slate panel ·
-            mono kicker · pratfall-safe(承認 4 個 reflexive Q 反覆被問
-            是 brand acknowledgment 不是 noise)。 */}
+        {/* ── MEMBER SYSTEM MAP · Wave 8 COMPRESSED ──
+            原 ~80 lines + 60-word body/card · 砍到 ~25-word body/card ·
+            intro paragraph 全刪 · 4 Q + verdict + 短句 + CTA(s)。 */}
         <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-16">
           <div className="bg-slate/40 border border-gold/40 p-6 sm:p-10">
-            <div className="flex items-baseline justify-between mb-3 flex-wrap gap-3">
-              <p
-                lang="en"
-                className="font-mono text-gold text-[10px] tracking-[0.45em]"
-              >
-                / MEMBER SYSTEM MAP · 4 個反覆被問的問題
-              </p>
-              <p className="font-mono text-mute/70 text-[10px] tracking-[0.3em]">
-                Round 30 W4 · single answer hub
-              </p>
-            </div>
-            <p className="text-mute/80 text-sm leading-relaxed mb-8 max-w-3xl">
-              Tim 反覆被訪客 + 自己問:現在能加入嗎?在哪發文?Tim 管理介面在哪?
-              心理學角度做什麼?答案散在 4-5 個頁面 · 這個 MAP 是 single
-              answer hub · 每個 Q 附 verdict + 直接 anchor。
+            <p
+              lang="en"
+              className="font-mono text-gold text-[10px] tracking-[0.45em] mb-8"
+            >
+              / MEMBER SYSTEM MAP · 4 個反覆被問的問題
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <MapRow
-                question="Q1 · 一般會員現在能加入嗎? 為什麼要等 Q3?"
-                verdict="✓ 現在 magic link 註冊 · 不再是 email 預訂"
+                question="Q1 · 現在能加入嗎? 為什麼要等 Q3?"
+                verdict="✓ 現在 · /login magic link"
                 verdictTone="gold"
-                body="Round 30 W5(2026-05-21)ship Phase 1 magic link auth · 從 Q3 promise 加速到 NOW。 /login 輸入 email · 1 分鐘內收到 magic link · 點開後您 session 啟用 · /member 變您真實 dashboard(不是 preview)· 終身免費 · 永不調漲。 純訂閱通知 email 不要 session 的也可以走老路徑 #waitlist。"
+                body="W5 ship Phase 1 auth(從 Q3 加速到 NOW)· 1 分鐘 magic link · 終身免費。"
                 ctas={[
-                  { label: "→ /login · magic link 註冊", href: "/login" },
-                  { label: "↓ 純訂閱通知 email", href: "#waitlist" },
+                  { label: "→ /login", href: "/login" },
+                  { label: "↓ 純訂閱 email", href: "#waitlist" },
                 ]}
               />
               <MapRow
-                question="Q2 · 會員在哪裡發文 + 推薦賽事?"
+                question="Q2 · 會員在哪發文 + 推薦賽事?"
                 verdict="⏳ BLACK CARD Q3 · Founders 27 預售中"
                 verdictTone="bone"
-                body="FREE TIER ❌ 無法發文(防 LINE 老師 archetype · 玩運彩 / 報馬仔 生態 manual gate)。 BLACK CARD ✓ 可發文 / 推薦賽事 / 創作者抽成 5% (Q3 2026 開放)。 Founders 27 ✓ 可發文 / 0% 抽成終身 (現在預售中 · 限量 270)。"
+                body="FREE TIER ❌ 防 LINE 老師 · BLACK CARD ✓ 5% · Founders 27 ✓ 0% 終身。"
                 ctas={[
-                  { label: "↓ Creator Permissions FAQ", href: "#creator-permissions" },
+                  { label: "↓ Creator Permissions", href: "#creator-permissions" },
                 ]}
               />
               <MapRow
-                question="Q3 · Tim 如何管理會員 · 會員自己頁面在哪?"
-                verdict="✓ 都有 · 路徑列在右"
+                question="Q3 · Tim 管理介面 · 會員頁面?"
+                verdict="✓ /admin · /member · /member/calibration"
                 verdictTone="gold"
-                body="Tim ops dashboard: /admin (noindex · Tim 自用 · live KPI · Stage 1 Supabase Studio 連結 + Stage 2 自家後台 mockup)。 會員 individual preview: /member (4 cognitive bias driven · localStorage data 當 preview)。 Calibration mirror: /member/calibration (sabermetric 45° reliability diagram)。"
+                body="Tim ops: /admin(noindex)· 會員 dashboard: /member · epistemic mirror: /member/calibration。"
                 ctas={[
-                  { label: "→ /member · 會員個人頁", href: "/member" },
-                  { label: "→ /admin · Tim ops (noindex)", href: "/admin" },
+                  { label: "→ /member", href: "/member" },
+                  { label: "→ /admin", href: "/admin" },
                 ]}
               />
               <MapRow
-                question="Q4 · 會員頁面 psychology 角度能做什麼?"
-                verdict="✓ 4 cognitive bias + epistemic mirror"
+                question="Q4 · psychology 角度能做什麼?"
+                verdict="✓ 4 bias + epistemic mirror"
                 verdictTone="gold"
-                body="Endowment Effect(您的引擎時間軸 · 您自己的 sim history 累積)· IKEA Effect(您 vote 決定引擎下一步 · drag-rank)· Loss Aversion(您 follow 的賽事 + 個人 calibration record)· Collection(您自己的 trophy)。 + epistemic mirror /member/calibration · ZONE 27 唯一發布會員自己 calibration drift 的高端 sports 品牌。"
+                body="Endowment + IKEA + Loss + Collection driven · 加 sabermetric 45° reliability diagram。"
                 ctas={[
-                  { label: "→ /member 完整 preview", href: "/member" },
-                  { label: "→ /member/calibration · epistemic mirror", href: "/member/calibration" },
+                  { label: "→ /member", href: "/member" },
+                  { label: "→ /member/calibration", href: "/member/calibration" },
                 ]}
               />
             </div>

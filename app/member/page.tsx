@@ -236,15 +236,8 @@ export default async function MemberPage({
               </Link>
             </div>
           )}
-          <p className="mt-4 font-mono text-mute/80 text-[10px] tracking-[0.25em] leading-relaxed max-w-2xl">
-            4 個 cognitive bias 同時 fire ·{" "}
-            <span lang="en">ENDOWMENT EFFECT</span> · IKEA EFFECT · LOSS AVERSION ·
-            COLLECTION。會員 stickiness 不在「功能多」 · 在
-            <strong className="text-bone">「data ownership」</strong>
-            (per /manifesto Section II)。
-          </p>
           <div className="mt-6">
-            <ArticleMeta readingMin={4} />
+            <ArticleMeta readingMin={3} />
           </div>
         </section>
 
@@ -301,7 +294,13 @@ export default async function MemberPage({
           <MemberDashboardPreview />
         </section>
 
-        {/* ── HOW THIS DIFFERS FROM SAAS ───────────── */}
+        {/* ── HOW THIS DIFFERS FROM SAAS · Wave 8 COMPRESSED ────
+            原 Round 29 ✕/✓ + Round 30 W2A 3-col + W2B deepest call · 4 個
+            sub-block · 共 ~110 lines。 Wave 8 compress 到 3 elements:
+            (1) inline ✕/✓ binary statement(無解釋 prose)·(2) 3-col
+            comparison(視覺主角 · 保留 highlight 對照)·(3) deepest call
+            quote(1 line · 不再 paragraph 解釋)。 砍 ~70 lines 文字 ·
+            保留 brand statement soul。 */}
         <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-16 pt-12 border-t border-line/40">
           <p
             lang="en"
@@ -309,179 +308,78 @@ export default async function MemberPage({
           >
             / WHY THIS IS NOT TYPICAL SAAS DASHBOARD
           </p>
-          <h2 className="text-2xl sm:text-3xl text-bone font-light tracking-tight text-center mb-8">
-            倒置 SaaS 預設的會員設計
-          </h2>
-          <div className="space-y-6 text-mute text-sm sm:text-base leading-relaxed">
-            <div className="border-l-2 border-gold/40 pl-5 sm:pl-6">
-              <p className="font-mono text-mute text-[10px] tracking-[0.3em] mb-2">
-                ✕ SaaS 預設:「付費 → 開更多 features」
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10">
+            <div className="border-l-2 border-mute/40 pl-4">
+              <p className="font-mono text-mute/80 text-[10px] tracking-[0.3em] mb-2">
+                ✕ SaaS 預設
               </p>
-              <p>
-                典型 SaaS 用 paywall gate 鎖功能 · 付得起的用 · 付不起的看著流口水。
-                會員的 stickiness 來自<strong className="text-bone">不付會失去什麼</strong>。
+              <p className="text-mute text-sm leading-snug">
+                付費 → 開更多 features · stickiness 來自不付會失去什麼。
               </p>
             </div>
-            <div className="border-l-2 border-gold pl-5 sm:pl-6 bg-gold/5 py-3 -ml-px">
+            <div className="border-l-2 border-gold pl-4 bg-gold/5 py-2 -ml-px">
               <p className="font-mono text-gold text-[10px] tracking-[0.3em] mb-2">
-                ✓ ZONE 27 反向:「累積 → 您的 data 變您的 trophy」
+                ✓ ZONE 27 反向
               </p>
-              <p>
-                會員的 stickiness 來自<strong className="text-bone">累積</strong>:
-                您跑過的 sims · 您 follow 的賽事 · 您的個人 calibration score。
-                這些是<strong className="text-bone">您自己的歷史</strong> · 不是
-                我們給您的 features。離開帳號 = 失去 history(Loss Aversion)·
-                您投票決定的 feature 上線 = 您是共同建造者(IKEA Effect)。
+              <p className="text-mute text-sm leading-snug">
+                累積 → 您 data 變您 trophy · stickiness 來自 data ownership。
               </p>
             </div>
-            <p className="mt-6 text-mute/80 text-sm">
-              這個倒置是<strong className="text-bone">brand IP 級別的 commitment</strong>:
-              我們承諾會員的 data 是會員的(不是我們的) · 我們承諾 feature
-              roadmap 是會員 vote 決定的(不是 product team 決定的)。
-              對齊 /manifesto Section I DISCLOSURE + Section II MONETIZATION。
-            </p>
           </div>
 
-          {/* ── Round 30 Wave 2 · 3-col concrete brand comparison ──
-              Tim 直擊「人家也都有會員系統呀!我們的呢?」+ Apple Store
-              login + cart screenshots = 隱含「我們需要 features 跟他們
-              一樣多」framing。誠實答案不是 features-arms-race · 是 ZONE 27
-              跟 Apple/Spotify/Stratechery 根本不同物種:Apple = 交易史
-              ·   Spotify = 消費史 · Stratechery = 訂閱史 · ZONE 27 = 思辨史。
-              Brand IP statement · 不是 feature list。 */}
-          <div className="mt-12 pt-8 border-t border-line/30">
-            <p
-              lang="en"
-              className="font-mono text-gold text-[10px] tracking-[0.35em] mb-4 text-center"
-            >
-              / WHAT THIS MEANS · 跟其他會員系統比較
-            </p>
-            <p className="text-mute text-sm sm:text-base mb-8 text-center leading-relaxed max-w-2xl mx-auto">
-              Tim 反覆被問:「人家也都有會員系統呀!我們的呢?」誠實答案不是「ZONE 27
-              feature 比他們多」 · 是<strong className="text-bone"> ZONE 27 跟其他會員系統根本不同物種</strong>:
-            </p>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-              <ComparisonCard
-                brand="Apple Store 會員"
-                type="COMMERCE · 交易史"
-                give="付費 + 訂單史"
-                get="下次購買更快 · 收藏 · 退換貨"
-                reward="重複購買"
-                track="全部購買行為 + 設備指紋"
-              />
-              <ComparisonCard
-                brand="Spotify Premium"
-                type="CONSUMPTION · 消費史"
-                give="月費 + 收聽行為"
-                get="更精準推薦 · skip 無上限"
-                reward="重複收聽"
-                track="全部播放行為 + 跨平台"
-              />
-              <ComparisonCard
-                brand="ZONE 27 會員"
-                type="EPISTEMIC · 思辨史"
-                give="email + 您自己跑過的 sim"
-                get="您歷史的所有權"
-                reward="重複思辨"
-                track="0 · 寫進 /privacy"
-                highlight
-              />
-            </div>
-            <p className="mt-8 text-mute/85 text-sm sm:text-base leading-relaxed max-w-2xl mx-auto">
-              ZONE 27 會員系統 = <strong className="text-bone">epistemic relationship archive</strong>(思辨關係的可信備份)。
-              您跑過的 sim 是您過去思辨的物理痕跡 · 累積 = <strong className="text-bone">您自己的 trophy</strong> ·
-              不是我們給您的 feature。
-            </p>
-            <p className="mt-3 text-mute/75 text-xs sm:text-sm leading-relaxed max-w-2xl mx-auto">
-              我們從來不是 Apple · 我們從來不會是 Apple。
-              想知道我們會員系統<strong className="text-bone">技術上</strong>怎麼接 ·
-              看 <Link href="/now" className="text-gold underline-offset-4 hover:underline">/now</Link>{" "}
-              · 想看 4-tier ladder 價格軸 · 看 <Link href="/membership" className="text-gold underline-offset-4 hover:underline">/membership</Link>。
-            </p>
-
-            {/* ── Round 30 Wave 2B · deepest sharp call CTA ──
-                Agent research synthesis: 「The dashboard isn't a feature
-                stack. It's an epistemic mirror.」 The /member/calibration
-                page is where this stance lives as physical artifact ·
-                sabermetric reliability diagram(45° line)· 唯一一個高端
-                sports 品牌 publish 會員自己 calibration drift 的。 */}
-            <div className="mt-10 pt-6 border-t border-gold/30 text-center">
-              <p
-                lang="en"
-                className="font-mono text-gold text-[10px] tracking-[0.4em] mb-3"
-              >
-                / DEEPEST SHARP CALL
-              </p>
-              <p className="text-bone text-lg sm:text-xl font-light tracking-tight leading-snug mb-3 max-w-xl mx-auto">
-                這個 dashboard 不是 feature stack · 是{" "}
-                <span className="text-gold">epistemic mirror</span>。
-              </p>
-              <p className="text-mute/85 text-sm leading-relaxed max-w-xl mx-auto mb-5">
-                這個 stance 的物理產出 = sabermetric reliability diagram ·
-                45° 線 · 引擎跟現實的可信對照。
-              </p>
-              <Link
-                href="/member/calibration"
-                className="inline-block px-8 py-3 border border-gold text-gold text-xs tracking-[0.3em] hover:bg-gold hover:text-navy transition-colors"
-              >
-                → /member/calibration · 看 mirror
-              </Link>
-            </div>
+          {/* 3-col concrete brand comparison · 視覺主角保留 */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <ComparisonCard
+              brand="Apple Store 會員"
+              type="COMMERCE · 交易史"
+              give="付費 + 訂單史"
+              get="下次購買更快 · 收藏 · 退換貨"
+              reward="重複購買"
+              track="全部購買行為 + 設備指紋"
+            />
+            <ComparisonCard
+              brand="Spotify Premium"
+              type="CONSUMPTION · 消費史"
+              give="月費 + 收聽行為"
+              get="更精準推薦 · skip 無上限"
+              reward="重複收聽"
+              track="全部播放行為 + 跨平台"
+            />
+            <ComparisonCard
+              brand="ZONE 27 會員"
+              type="EPISTEMIC · 思辨史"
+              give="email + 您自己跑過的 sim"
+              get="您歷史的所有權"
+              reward="重複思辨"
+              track="0 · 寫進 /privacy"
+              highlight
+            />
           </div>
-        </section>
 
-        {/* ── WHEN AUTH LANDS · NEXT STEPS ─────────── */}
-        <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-16 pt-12 border-t border-line/40">
-          <p
-            lang="en"
-            className="font-mono text-gold text-[10px] tracking-[0.45em] mb-6"
-          >
-            / WHEN AUTH LANDS · 您下一步要做什麼
-          </p>
-          <h2 className="text-2xl sm:text-3xl text-bone font-light tracking-tight mb-6">
-            Auth 上線時 · 同 1 個 email 動作就 sync
-          </h2>
-          <p className="text-mute text-base leading-relaxed mb-8">
-            您現在如果加入 FREE TIER · 您留的 email 就是未來會員帳號的 identifier。
-            launch 那一天 · 您點 magic link → 您 localStorage 的 sim history 自動同步 ·
-            您 follow 的賽事自動轉到 cloud · 不需 migration ·
-            不需重新註冊 · 不需「升級」。
-          </p>
-          <div className="flex flex-wrap items-center gap-4">
+          {/* Deepest sharp call · 1-line quote + 1-CTA · no elaboration */}
+          <div className="mt-10 pt-6 border-t border-gold/30 text-center">
+            <p className="text-bone text-lg sm:text-xl font-light tracking-tight leading-snug mb-5 max-w-xl mx-auto">
+              不是 feature stack · 是{" "}
+              <span className="text-gold">epistemic mirror</span>。
+            </p>
             <Link
-              href="/membership#waitlist"
-              className="inline-block px-8 py-3 bg-gold text-navy text-xs tracking-[0.3em] hover:bg-gold-soft transition-colors font-medium"
+              href="/member/calibration"
+              className="inline-block px-8 py-3 border border-gold text-gold text-xs tracking-[0.3em] hover:bg-gold hover:text-navy transition-colors"
             >
-              ↓ 加入 FREE TIER ·  保留我的位置
-            </Link>
-            <Link
-              href="/lab"
-              className="inline-block px-6 py-3 border border-line/60 text-mute hover:text-gold hover:border-gold/40 text-xs tracking-[0.3em] transition-colors"
-            >
-              先跑幾場 · /lab →
+              → /member/calibration · 看 mirror
             </Link>
           </div>
-          <p className="font-mono text-mute/60 text-[10px] tracking-[0.3em] mt-6 leading-relaxed">
-            ▸ 您現在在 /lab 跑的 sim · 都會在 auth 上線後 sync 到您的雲端帳號 ·
-            不會白跑。
-          </p>
         </section>
 
         <FounderSignOff>
           <p>
-            這頁是我給「您頁面在哪?」這個問題的<strong>誠實答案</strong>。
-            目前是 preview · 不是 functional · 不假裝。但 4 個心理學原則
-            (Endowment · IKEA · Loss Aversion · Collection)已經 wired in design。
+            Auth 已上(Round 30 W5)· Follow 已開(W6)· 雲端 sim sync 還沒
+            (per /now UNRESOLVED)。 不假裝 functional 之外的事。
           </p>
           <p>
-            Auth 上線那一天 · 您在 /lab 跑過的所有 sims · 您 follow 過的賽事 ·
-            您看到的 calibration record · 全部都會接得上 · 因為這個 schema 從
-            <strong>第一天就是這樣設計的</strong>。
-          </p>
-          <p>
-            我承諾這頁的 launch timeline 寫進 /now · 任何 timing 偏差 ·
-            /changelog 看得到 git commit diff。沒有「即將推出 · 敬請期待」 ·
-            只有寫死的 phase + 實際的 commit。
+            任何 timing 偏差在{" "}
+            <strong>/changelog git commit diff</strong> 看得到 ·
+            沒有「即將推出 · 敬請期待」 · 只有實際的 commit。
           </p>
         </FounderSignOff>
 

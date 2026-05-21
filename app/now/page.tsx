@@ -32,10 +32,16 @@ export const metadata: Metadata = {
 // "不打擾就是禮物" applies to maintainer commitment too).
 // ─────────────────────────────────────────────────────
 
-const LAST_UPDATED = "2026-05-21";
-const CYCLE = "Round 28-30 · 2026-05-21 late evening · 同日 23+ waves · Phase 1 auth + Follow + minimalism explainer";
+const LAST_UPDATED = "2026-05-22";
+const CYCLE = "Round 28-30 · 2026-05-22 ~00:30 TPE · 同日 24+ waves · 收尾 compression pass";
 
 const SHIPPED_THIS_CYCLE: { title: string; body: string; href?: string }[] = [
+  // ── ✂️ Round 30 Wave 8 · Compression pass · reverse prose 過剩 ──
+  {
+    title: "[R30 W8] ✂️ Compression pass · 反 W2A/W2B/W4/W7 prose 過剩 · ~270 lines deleted",
+    body: "Tim 第 9 次 canary fire(同日)「網站很雜!一堆字!到處都是字!沒人想看!」 = direct critique 我今天加的 prose 過量。 IRONY:W7 我加 60-line WHY-MINIMAL block 解釋為什麼少文字 = 自我矛盾 brand IP。 Sharp call:「Method public」 ≠「Explain on every page」。 Deep pages(/audit · /methodology · /manifesto · /coverage · /privacy)可以 prose · entry pages(/login · /membership · /member · /member/calibration)interface IS message · Apple/Stratechery/Plausible 全部如此。 Compression cuts:(1) /login DELETE W7 WHY-MINIMAL 整 block · MinimalRow sub-component 也清。 WHAT YOU GET 5-bullet 從 ~200 字壓到 ~25 字(各 bullet 1 短句)+ trust signal 1-liner 加 /privacy 連結。 (2) /member DELETE WHEN AUTH LANDS 整 section(stale · auth landed in W5)· COMPRESS HOW THIS DIFFERS:✕/✓ 各 1 句(原 4-6 句)· 刪 brand-IP commitment paragraph + Apple 重複 paragraph + DEEPEST CALL elaboration paragraph · 保留 3-col comparison 視覺 + epistemic mirror 1-line quote + CTA。 FounderSignOff 3 paragraphs → 2。 4-bias intro paragraph 刪。 (3) /member/calibration WHY THIS PAGE EXISTS blockquote 4 paragraphs → 1 quote + 1 短句 · HOW TO READ 6 steps → 4(merge over/under-confident)。 (4) /membership MAP intro paragraph 刪 · 4 Q-card body 各 ~50 字 → ~25 字。 Total: ~270 lines prose deleted · 0 interactive elements 動 · 0 brand statement soul 損。",
+    href: "/member",
+  },
   // ── 🧠 Round 30 Wave 7 · /login WHY THIS IS MINIMAL · psychology block ──
   {
     title: "[R30 W7] /login WHY THIS IS MINIMAL · psychology design defense block · Apple vs ZONE 27 explainer",
@@ -218,6 +224,11 @@ const SHIPPED_THIS_CYCLE: { title: string; body: string; href?: string }[] = [
 ];
 
 const DISCOVERED_THIS_CYCLE: { title: string; body: string }[] = [
+  // ── Round 30 Wave 8 discovery ──
+  {
+    title: "[R30 W8] 「Method public」≠「Explain on every page」· entry vs deep page text density 是不同 axiom",
+    body: "Wave 7 IRONY:我加 60-line block 解釋為什麼我們 minimal · 自我矛盾。 Tim 9th canary fire surface 一個之前沒明確的 axiom:brand-IP「方法公開」適用於 deep pages(/audit / /methodology / /manifesto)· 不適用 entry pages(/login / /membership / /member)。 Entry pages 的 brand statement 是 interface itself · 不是 prose。 Apple / Stratechery / Plausible /login 都不寫一行字解釋。 訪客 confusion 的修法不是加 more text · 是 cross-link 到 deep page。 寫進 axiom:any new entry-page prose block 永遠先問「interface 已經說了嗎?」 yes 砍 · no 加 1 行 cross-link。 brand IP 自我修正能力 = canary canon。",
+  },
   // ── Round 30 Wave 7 discovery ──
   {
     title: "[R30 W7] 「越少 fields 越正式」brand-IP-倒置 需要 explicit explainer · 不藏 = trust signal",

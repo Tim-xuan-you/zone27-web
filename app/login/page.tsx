@@ -186,141 +186,27 @@ export default function LoginPage() {
           )}
         </section>
 
-        {/* ── Round 30 Wave 7 · WHY THIS IS MINIMAL ────
-            Tim 第 5 次 canary fire: Apple 註冊截圖「為什麼我們不像 Apple」 ·
-            = 訪客看到只 1 個欄位會想「奇怪 · 太簡單 · 是不是 bug?」 · 這個
-            confusion moment 是 brand IP 教學黃金。 不解釋 = 訪客誤判忘記
-            寫 · 解釋 = trust signal。 Pratfall + Costly Signaling + 訪客
-            expectation reversal: 普通常識「越多 fields 越正式」 ·
-            ZONE 27 倒置「越少 fields 越正式」 · 因為少存 = 少漏。 */}
-        <section className="mx-auto max-w-2xl w-full px-6 sm:px-10 pb-12">
-          <div className="bg-slate/40 border border-gold/40 p-6 sm:p-8">
-            <p
-              lang="en"
-              className="font-mono text-gold text-[10px] tracking-[0.45em] mb-3"
+        {/* ── Round 30 Wave 8 · COMPRESSED · 1-line trust signal ──
+            原 Wave 7 是 60-line WHY MINIMAL block(自我矛盾 — 加文字解釋
+            為什麼少文字)· Tim 第 9 次 canary fire「太多字 · 沒人想看」 ·
+            砍到 1 行 + 5-bullet what-you-get(各 1 字)。 Trust signal 保留 ·
+            elaboration 全砍。 訪客想知 detail click /privacy。 */}
+        <section className="mx-auto max-w-md w-full px-6 sm:px-10 pb-16">
+          <p className="font-mono text-mute/70 text-[10px] tracking-[0.3em] leading-relaxed text-center mb-6">
+            1 個欄位 · 不問姓名 / 國家 / 生日 · 因為我們 0 tracking 延伸到註冊本身。{" "}
+            <Link
+              href="/privacy"
+              className="text-gold underline-offset-4 hover:underline"
             >
-              / WHY THIS IS MINIMAL · 不是 bug · 是 brand IP
-            </p>
-            <p className="text-mute text-sm sm:text-base leading-relaxed mb-5">
-              Apple / Google / Microsoft 註冊問您 5-8 個 fields
-              (姓名 · 國家 · 生日 · 密碼 · 安全問題...)· ZONE 27 問{" "}
-              <strong className="text-bone">1 個</strong>(email)。
-              <strong className="text-bone"> 不是我們忘了寫 · 是結構性決定。</strong>
-            </p>
-
-            {/* 5-row comparison · why we deliberately don't ask */}
-            <div className="space-y-3 mb-6">
-              <MinimalRow
-                field="姓名"
-                whyNotAsk="會員 identifier = email · 不是真名 · 您可以匿名"
-              />
-              <MinimalRow
-                field="國家 / 地區"
-                whyNotAsk="沒地理 targeting · 沒 IP-based recommendation"
-              />
-              <MinimalRow
-                field="出生日期"
-                whyNotAsk="沒人口統計 · 不會根據年齡推內容"
-              />
-              <MinimalRow
-                field="密碼"
-                whyNotAsk="magic link = passwordless · 沒密碼可外洩 · 沒 phishing 攻擊面"
-              />
-              <MinimalRow
-                field="安全問題"
-                whyNotAsk="沒 account recovery 攻擊面 · 遺失 magic link 重發即可"
-              />
-            </div>
-
-            {/* Why Apple does · why we don't */}
-            <div className="border-l-2 border-gold/40 pl-4 sm:pl-5 mb-5">
-              <p className="text-mute text-sm leading-relaxed">
-                Apple 要這些 fields 是因為 Apple{" "}
-                <strong className="text-bone">賣您東西</strong> ·
-                iPhone 配送需地址 · iCloud 訂閱需付款方式 · 是 commerce platform
-                必要 collection。
-              </p>
-              <p className="text-mute text-sm leading-relaxed mt-3">
-                ZONE 27 <strong className="text-bone">不賣您東西</strong>
-                (engine free per{" "}
-                <Link
-                  href="/manifesto"
-                  className="text-gold underline-offset-4 hover:underline"
-                >
-                  /manifesto Section II
-                </Link>
-                )· 我們給您 epistemic mirror。 您給 1 個 email · 我們連住址都不要。
-              </p>
-            </div>
-
-            {/* Brand IP closing statement */}
-            <p
-              lang="en"
-              className="font-mono text-gold text-[10px] tracking-[0.4em] mb-2"
-            >
-              / THE AXIOM
-            </p>
-            <p className="text-bone text-base sm:text-lg font-light tracking-tight leading-snug mb-2">
-              「0 tracking」延伸到註冊本身:
-            </p>
-            <p className="text-gold text-base sm:text-lg font-light tracking-tight leading-snug mb-4">
-              少存 = 少漏 · 不存 = 不漏。
-            </p>
-            <p className="font-mono text-mute/80 text-[10px] tracking-[0.25em] leading-relaxed">
-              這是 Costly Signaling · 刻意的 friction-by-omission ·
-              對齊{" "}
-              <Link
-                href="/privacy"
-                className="text-gold underline-offset-4 hover:underline"
-              >
-                /privacy
-              </Link>
-              (0 GA · 0 Pixel · 0 Hotjar)+ Footer 「FUNDED BY FOUNDERS · NO
-              TRACKERS」brand line。
-            </p>
-          </div>
-        </section>
-
-        {/* ── PSYCHOLOGY / COMMITMENT REAFFIRM ──────── */}
-        <section className="mx-auto max-w-2xl w-full px-6 sm:px-10 pb-16">
-          <div className="bg-slate/30 border-l-2 border-gold/50 pl-5 sm:pl-6 py-4">
-            <p
-              lang="en"
-              className="font-mono text-gold text-[10px] tracking-[0.4em] mb-3"
-            >
-              / WHAT YOU GET · FREE TIER 承諾
-            </p>
-            <ul className="text-mute text-sm leading-relaxed space-y-2 list-none pl-0">
-              <li>
-                ▸{" "}
-                <span className="text-bone">終身免費</span>
-                {" · "}永不調漲(Stratechery / Plausible 同 model)
-              </li>
-              <li>
-                ▸{" "}
-                <span className="text-bone">/member 個人 dashboard</span>
-                {" · "}localStorage sim history + 您的引擎時間軸(Endowment
-                Effect · 您 vote 引擎下一步 · Loss Aversion · 個人 calibration)
-              </li>
-              <li>
-                ▸{" "}
-                <span className="text-bone">/member/calibration</span>
-                {" · "}sabermetric 45° reliability diagram · 您 follow 賽事
-                的 personal mirror(會員系統 deepest sharp call)
-              </li>
-              <li>
-                ▸{" "}
-                <span className="text-bone">模型重要迭代 email 通知</span>
-                {" · "}Founders 27 預售開放優先通知 · 不寄行銷信
-              </li>
-              <li>
-                ▸{" "}
-                <span className="text-bone">0 tracking</span>
-                {" · "}Footer FUNDED BY FOUNDERS · NO GA · NO PIXEL · NO HOTJAR
-                ·   per /privacy 寫死
-              </li>
-            </ul>
-          </div>
+              /privacy
+            </Link>
+          </p>
+          <ul className="text-mute/80 text-xs font-mono tracking-[0.15em] space-y-1.5 list-none pl-0 text-center">
+            <li>▸ 終身免費</li>
+            <li>▸ /member dashboard + /member/calibration mirror</li>
+            <li>▸ 模型迭代 email 通知</li>
+            <li>▸ 0 GA · 0 Pixel · 0 Hotjar · 0 cookies</li>
+          </ul>
         </section>
 
         {/* ── ALT PATH ──────────────────────────────── */}
@@ -346,27 +232,6 @@ export default function LoginPage() {
       </main>
 
       <Footer />
-    </div>
-  );
-}
-
-// Round 30 Wave 7 · One row in「為什麼我們刻意不問」 list · field name
-// + 為什麼 we don't ask · brand-pure mono kicker + body text。
-function MinimalRow({
-  field,
-  whyNotAsk,
-}: {
-  field: string;
-  whyNotAsk: string;
-}) {
-  return (
-    <div className="flex items-baseline gap-3 flex-wrap">
-      <span className="font-mono text-loss/80 text-[11px] tracking-[0.25em] tabular shrink-0 min-w-[80px]">
-        ✕ {field}
-      </span>
-      <span className="text-mute text-xs sm:text-sm leading-relaxed flex-1 min-w-0">
-        {whyNotAsk}
-      </span>
     </div>
   );
 }

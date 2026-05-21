@@ -199,82 +199,51 @@ export default function CalibrationPage() {
           ) : null}
         </section>
 
-        {/* ── HOW TO READ ──────────────────────────── */}
+        {/* ── HOW TO READ · Wave 8 COMPRESSED 6 steps → 4 ── */}
         <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-16 border-t border-line/40 pt-12">
           <p
             lang="en"
             className="font-mono text-gold text-[10px] tracking-[0.45em] mb-8"
           >
-            / HOW TO READ THIS DIAGRAM
+            / HOW TO READ
           </p>
-          <div className="space-y-6">
+          <div className="space-y-5">
             <ReadingStep
               no="01"
-              title="X 軸 · 引擎賽前機率(favorite side)"
-              body="每場 ZONE 27 公開預測過的 CPBL/MLB 比賽 · 引擎跑 10K Monte Carlo 收斂後 favorite 那邊的 win% · 賽前鎖定不再改。"
+              title="X 軸 · 引擎賽前 favorite 機率"
+              body="10K Monte Carlo 收斂後 · 賽前鎖定不再改。"
             />
             <ReadingStep
               no="02"
               title="Y 軸 · actual frequency"
-              body="同 x 軸區間的賽事 · favorite 真的贏的比例 · 從 cpbl.com.tw 最終比分 derived。"
+              body="同 x 軸區間 · favorite 真的贏的比例 · 從 cpbl 最終比分 derived。"
             />
             <ReadingStep
               no="03"
-              title="45° 金線 · 完美 calibration"
-              body="引擎 say 60% 的場 · 真的有 60% favorite wins → 點落在 45° 線上 = 完美校準。"
+              title="45° 金線 = 完美 · 高於 = under-confident · 低於 = over-confident"
+              body="點偏離 45° 越多 · 引擎這個機率區間越需 calibration。"
             />
             <ReadingStep
               no="04"
-              title="高於 45° → 引擎 under-confident"
-              body="引擎 say 55% · 但實際 favorite 贏 65% · 點在 (55, 65) → engine 太保守 · favorite weight 可上調。"
-            />
-            <ReadingStep
-              no="05"
-              title="低於 45° → 引擎 over-confident"
-              body="引擎 say 70% · 但實際 favorite 贏 55% · 點在 (70, 55) → engine 太自信 · favorite weight 可下調。"
-            />
-            <ReadingStep
-              no="06"
-              title="點的大小 = bin 內 sample 數"
-              body="同 x 軸區間的賽事越多 · dot 越大 · trust 越高。N=1 的 bin 是雜訊;N=10 開始有信號。"
+              title="點大小 = bin sample 數"
+              body="同區間賽越多點越大。N<10 多是雜訊;N≥30 進統計顯著。"
             />
           </div>
         </section>
 
-        {/* ── DEEPEST CALL ─────────────────────────── */}
+        {/* ── DEEPEST CALL · Wave 8 COMPRESSED ──────
+            原 4-paragraph elaboration 砍到 1 quote + 1 短句。 Brand statement
+            soul 保留 · 「explainer 段落」全砍。 */}
         <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-16 border-t border-line/40 pt-12">
-          <p
-            lang="en"
-            className="font-mono text-gold text-[10px] tracking-[0.45em] mb-6 text-center"
-          >
-            / WHY THIS PAGE EXISTS
-          </p>
           <blockquote className="border-l-2 border-gold pl-6 sm:pl-8 py-3">
             <p className="text-bone text-xl sm:text-2xl font-light tracking-tight leading-snug mb-4">
-              這個 dashboard 不是 feature stack · 是{" "}
+              不是 feature stack · 是{" "}
               <span className="text-gold">epistemic mirror</span>。
             </p>
-            <p className="text-mute text-sm sm:text-base leading-relaxed mb-3">
-              FanGraphs / Baseball Savant / The Athletic 給您{" "}
-              <strong className="text-bone">team stats · player advanced metrics ·
-              league averages</strong> — 都是「別人的」數據。 Stratechery / HEY /
-              Linear 給您他們<strong className="text-bone">自己</strong>的{" "}
-              archive · build progress · founder voice。
-            </p>
-            <p className="text-mute text-sm sm:text-base leading-relaxed mb-3">
-              ZONE 27 是唯一一個 structurally positioned to surface 會員{" "}
-              <strong className="text-bone">自己的</strong> epistemic track
-              record back to them — Pratfall axiom forcing publication of bins
-              where 您 intuition diverged · Costly Signaling axiom forcing
-              publication of bins where the ENGINE diverged from reality。
-            </p>
-            <p className="text-mute text-sm sm:text-base leading-relaxed mb-3">
-              這 feature literally cannot exist on any platform that wants 2026
-              mass-market growth — 因為 mass market 要的是「我覺得不錯」 ·
-              不是「我哪裡看錯了」。
-            </p>
             <p className="text-mute text-sm sm:text-base leading-relaxed">
-              <strong className="text-bone">這就是為什麼 ZONE 27 應該 build it。</strong>
+              別人給您 team stats / 別人的 archive。 ZONE 27 唯一 surface
+              會員<strong className="text-bone">自己</strong>的 calibration drift —
+              Pratfall + Costly Signaling 公開 bin diverged。
             </p>
           </blockquote>
         </section>
