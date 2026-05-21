@@ -33,9 +33,15 @@ export const metadata: Metadata = {
 // ─────────────────────────────────────────────────────
 
 const LAST_UPDATED = "2026-05-21";
-const CYCLE = "Round 28-30 · 2026-05-21 late evening · 同日 22+ waves · Phase 1 auth + Follow ship";
+const CYCLE = "Round 28-30 · 2026-05-21 late evening · 同日 23+ waves · Phase 1 auth + Follow + minimalism explainer";
 
 const SHIPPED_THIS_CYCLE: { title: string; body: string; href?: string }[] = [
+  // ── 🧠 Round 30 Wave 7 · /login WHY THIS IS MINIMAL · psychology block ──
+  {
+    title: "[R30 W7] /login WHY THIS IS MINIMAL · psychology design defense block · Apple vs ZONE 27 explainer",
+    body: "Tim 第 5 次 canary fire(同日第 8 次發 prompt)送 Apple 帳號建立 screenshot 問「為什麼我們不像 Apple 這麼複雜?不就像 Apple 那樣輸入這些?我們網站發生甚麼事?」 = 訪客看到只 1 個 email 欄位的 confusion 瞬間 surface。 Sharp call:Apple 註冊問 5-8 個 fields(姓名 · 國家 · 生日 · 密碼 · 安全問題)· ZONE 27 問 1(email)· 不是 bug 是 Costly Signaling 結構性決定。 訪客 confusion = brand IP 教學黃金:不解釋 = 訪客誤判我們忘記寫 = 信任流失 · 解釋 = trust signal。 Ship /login「WHY THIS IS MINIMAL」section · 緊跟 form 下方 · 5-row「為什麼我們刻意不問」 list(姓名 / 國家 / 生日 / 密碼 / 安全問題 · 每行給「不問是因為」 brand-axiom-aligned 理由)+ 「Apple 賣您東西 → 需 fields · ZONE 27 不賣您東西 → 不需 fields」 對照 + brand axiom 結尾「0 tracking 延伸到註冊本身 · 少存 = 少漏 · 不存 = 不漏」 + Costly Signaling 命名(刻意 friction-by-omission)。 MinimalRow sub-component(field + whyNotAsk)· cross-link 到 /privacy + /manifesto Section II + Footer NO TRACKERS。 Lesson 寫進 /now DISCOVERED:Brand-IP-倒置「越少 fields 越正式」 需要 explicit explainer · 不然訪客用 default mental model「越多 fields 越正式」 誤判我們 broken。 訪客 expectation reversal moment = brand IP 教學黃金 · 不能藏起來。",
+    href: "/login",
+  },
   // ── ★ Round 30 Wave 6 · Follow Match · first unlock feature ──
   {
     title: "[R30 W6] ★ Follow Match · first unlock feature · 4th canary fire 後 ship 真實 functionality",
@@ -212,6 +218,11 @@ const SHIPPED_THIS_CYCLE: { title: string; body: string; href?: string }[] = [
 ];
 
 const DISCOVERED_THIS_CYCLE: { title: string; body: string }[] = [
+  // ── Round 30 Wave 7 discovery ──
+  {
+    title: "[R30 W7] 「越少 fields 越正式」brand-IP-倒置 需要 explicit explainer · 不藏 = trust signal",
+    body: "Tim 第 5 次 canary fire 揭露一個本來沒注意的 brand-IP-倒置 gap:visitor default mental model 是「Apple/Google/Microsoft = 越多 fields 越正式 / 越專業」。 ZONE 27 倒置(只問 email = 最少 fields)· 但沒 explicit 告訴訪客「這是 brand IP · 不是 bug」。 訪客自己會用 default model 解讀 = 「ZONE 27 註冊好簡單 · 是不是不認真?」 = 誤判流失。 修法不是加 fields(那毀 brand IP)· 是 explicit 解釋 minimalism。 W7 /login psychology block 把這個 expectation reversal moment 升 visible brand statement。 Lesson:任何 brand-IP-倒置都需要對應的 explicit explainer · 不能假設訪客「自己會懂」 · default mental model 會勝出 unless 我們 surface 我們的 inverted model。 Pratfall + Costly Signaling pattern 延伸到 form-design itself。",
+  },
   // ── Round 30 Wave 5 discovery ──
   {
     title: "[R30 W5] Pratfall canary 3rd fire = ship-surfacing-bug 變 ship-actual-functionality-bug",
