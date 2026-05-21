@@ -33,9 +33,27 @@ export const metadata: Metadata = {
 // ─────────────────────────────────────────────────────
 
 const LAST_UPDATED = "2026-05-21";
-const CYCLE = "Round 28-29 · 2026-05-21 evening · 同日 10+ waves";
+const CYCLE = "Round 28-29 · 2026-05-21 evening · 同日 14+ waves";
 
 const SHIPPED_THIS_CYCLE: { title: string; body: string; href?: string }[] = [
+  // ── Round 29 Wave 14 ship(2026-05-21 evening · post-W13)──
+  {
+    title: "[R29 W14] Founders 27 onboarding · 4-phase psychology framework · 3 NEW docs",
+    body: "Tim 問「以心理學角度去出發?」+「每個人內容都回一樣對吧?」surface Founders 27 onboarding workload anxiety + brand IP question。Ship docs/EMAIL-TEMPLATES.md(351 lines · 4 phase × cognitive bias · 4 personal line trigger pattern)+ docs/PDF-CERTIFICATE-SPEC.md(267 lines · 9 design elements with psychology rationale · Pratfall imperfection 4 選 1)+ update docs/MANUAL-ONBOARDING.md(加 framework + cross-refs · 時間 revised 90-100hr → 45-54hr)。80/20 template framework:Cialdini RECIPROCITY(18-26h wait · NOT instant)· IDENTITY THREAT RESOLUTION(20% personal line)· Spence COSTLY SIGNALING(10 min bank transfer)· Thaler ENDOWMENT EFFECT(PDF 證書 + LINE 群)。",
+    href: "https://github.com/Tim-xuan-you/zone27-web/blob/main/docs/EMAIL-TEMPLATES.md",
+  },
+  // ── Round 29 Wave 13 ship ──
+  {
+    title: "[R29 W13] CPBL pre-game ingestion · 3 場 2026-05-22",
+    body: "Tim 截圖 2026/05/22 賽程 3 場 18:35。新增 cpbl-260522-01(富邦 @ 樂天 · 樂天桃園)· cpbl-260522-02(統一 @ 兄弟 · 大巨蛋)· cpbl-260522-03(味全 @ 台鋼 · 澄清湖)到 lib/matches.ts · 用 /audit ESTIMATION DISCLOSURE pattern explicit 標 estimate path(隊伍 W-L 真實 · 投手 K/9·BB/9·HR/9·ERA 從聯盟均值反推)。winRate 從 record gap + home advantage + SP gap 估算。PRE-GAME · 沒 finalResult · /track-record 不入帳 until 賽後 Tim 截 box score。",
+    href: "/matches",
+  },
+  // ── Round 29 Wave 12 ship ──
+  {
+    title: "[R29 W12] /roadmap BRAND BOUNDARIES · 永遠不做「Launch loudly playbook」canonical",
+    body: "把 Wave 10B research agent surface 的「Launch loudly to warm list」72-hour blitz playbook 從 /now UNRESOLVED ephemeral 升到 /roadmap BRAND BOUNDARIES canonical · 跟其他 3 個永遠不做(GA/Pixel/Hotjar · 創投/廣告/上市 · 寄生運彩)同 level。是 axiom-conflict 不是 strategic preference — 跟 stealth + audience-fans-not-engineers + monetization-philosophy 三個 axiom 同時衝突。",
+    href: "/roadmap",
+  },
   // ── Round 29 Wave 10 ships(2026-05-21 evening · agent-research-driven)──
   {
     title: "[R29 W10C] /founders 「THIS ISN'T A CHECKOUT」 handshake framing",
