@@ -38,9 +38,6 @@ export const metadata: Metadata = {
 
 const LAST_REVIEWED = "2026-05-21";
 const ENGINE_VERSION = "v0.2 · Real At-Bat";
-const ITERATIONS = "10,000";
-const STANDARD_ERROR = "±0.5%";
-const CI_95 = "±1.0%";
 
 export default function AuditPage() {
   // Live counts — these refresh on every build / ISR revalidate.
@@ -96,35 +93,18 @@ export default function AuditPage() {
               ZONE 27 Engine
             </h1>
             <p className="text-mute text-base leading-relaxed mb-8 max-w-2xl">
-              本頁列出 ZONE 27 模型的全部假設、使用的輸入、刻意排除的輸入、
-              基準效能、已知失效模式,以及最後一次校準時間。沒有行銷語言。
+              引擎能算什麼 · 不能算什麼 · 為什麼公開全部。
             </p>
 
-            {/* Meta strip — Anthropic-style timestamp/version line.
-                SAMPLE SIZE + BUILD COMMIT promoted into the header as
-                live constants (not hardcoded strings). Per Plausible /
-                Buffer dashboard pattern: numbers that change every
-                deploy = literal disclosure, not metaphor. */}
-            <dl className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-x-6 gap-y-4 font-mono text-[11px] tracking-[0.05em]">
+            {/* Compact meta strip — 3 items only.
+                Round 4: dropped ITERATIONS / STANDARD ERROR (engineer-y)
+                and BUILD chip (moved to footer for die-hards) per
+                audience-reframe critique. Kept the 3 that matter to a
+                baseball fan evaluating «can I trust this analyst?». */}
+            <dl className="grid grid-cols-3 gap-x-6 gap-y-4 font-mono text-[11px] tracking-[0.05em]">
               <MetaPair label="LAST REVIEWED" value={LAST_REVIEWED} />
               <MetaPair label="ENGINE" value={ENGINE_VERSION} />
-              <MetaPair label="ITERATIONS / SIM" value={ITERATIONS} />
-              <MetaPair label="STANDARD ERROR" value={STANDARD_ERROR} />
               <MetaPair label="SAMPLE SIZE" value={sampleSize} />
-              <MetaPair
-                label="BUILD"
-                value={
-                  <a
-                    href={COMMIT_PERMALINK}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-bone hover:text-gold underline-offset-4 hover:underline"
-                    title={`This page built from commit ${COMMIT_SHA} · deployed ${DEPLOYED_AT}`}
-                  >
-                    {COMMIT_SHA} · {DEPLOYED_AT}
-                  </a>
-                }
-              />
             </dl>
           </header>
 
@@ -234,52 +214,14 @@ export default function AuditPage() {
             </List>
           </ReportSection>
 
-          {/* ── 04 BENCHMARK PERFORMANCE ─────────────── */}
-          <ReportSection no="04" label="BENCHMARK PERFORMANCE">
-            <P>標準效能指標(2026-05 內部驗證):</P>
-
-            <DataTable>
-              <DataRow
-                label="樣本量 (N)"
-                value={ITERATIONS}
-                note="每次模擬的虛擬比賽數"
-              />
-              <DataRow
-                label="標準誤差 (SE)"
-                value={STANDARD_ERROR}
-                note="勝率估計的單樣本 SE"
-              />
-              <DataRow
-                label="95% 信心區間"
-                value={CI_95}
-                note="收斂結果的真實勝率範圍"
-              />
-              <DataRow
-                label="收斂時間"
-                value="~ 1.5 - 2.0 秒"
-                note="現代瀏覽器, M1 / Intel i5 以上"
-              />
-              <DataRow
-                label="vs 歷史鎖定 AI 預測"
-                value="—"
-                note="N=1 開始 · 2026-05-21 ingestion 起 · 完整 ledger 見 /track-record · 待 N≥30 才有統計意義"
-              />
-              <DataRow
-                label="可重現性"
-                value="100%"
-                note="同樣的 (投手, batch size) 給同樣的期望值"
-              />
-            </DataTable>
-
-            <P>
-              中央極限定理保證:在 <Code>N=10,000</Code> · <Code>p≈0.5</Code> 下,
-              <Code>SE = sqrt(p(1-p)/n) ≈ 0.5%</Code>。
-              這已足以分辨「兄弟 62%」與「兄弟 60%」這種等級的差異。
-            </P>
-          </ReportSection>
-
-          {/* ── 05 KNOWN FAILURE MODES ───────────────── */}
-          <ReportSection no="05" label="KNOWN FAILURE MODES">
+          {/* ── 04 KNOWN FAILURE MODES ───────────────── */}
+          {/* Round 4 audience-reframe:
+              - Section 04 BENCHMARK PERFORMANCE (CLT proof + SE math) → removed
+                Fans don't need the σ=0.5% derivation; engineers can read
+                lib/simulator.ts for that. The «10,000 iterations» number
+                stays elsewhere (HeroLiveCard methodology line).
+              - Renumbered: was 05 → now 04. */}
+          <ReportSection no="04" label="KNOWN FAILURE MODES">
             <P>下列情境下,模型輸出已知會偏離真實:</P>
             <List>
               <Item label="極端投手數據">
@@ -331,12 +273,14 @@ export default function AuditPage() {
             </footer>
           </blockquote>
 
-          {/* ── 06 ENVIRONMENTAL IMPACT ──────────────────
-              Inspired by Hugging Face model card template's Environmental Impact
-              section. 98% of model cards on HF skip this field. ZONE 27's "no
-              backend" architecture means we can disclose it honestly and end up
-              ahead of Anthropic + OpenAI on this dimension. */}
-          <ReportSection no="06" label="ENVIRONMENTAL IMPACT">
+          {/* ── 05 ENVIRONMENTAL IMPACT ──────────────────
+              Round 4: renumbered 06 → 05 after Section 04 BENCHMARK
+              removed. Inspired by Hugging Face model card template's
+              Environmental Impact section. 98% of model cards on HF
+              skip this field. ZONE 27's "no backend" architecture means
+              we can disclose it honestly and end up ahead of Anthropic
+              + OpenAI on this dimension. */}
+          <ReportSection no="05" label="ENVIRONMENTAL IMPACT">
             <P>
               ZONE 27 Engine 完全在使用者瀏覽器內執行,
               <strong className="text-bone">沒有任何後端 API 呼叫、沒有 datacenter 訓練</strong>。
@@ -382,48 +326,17 @@ export default function AuditPage() {
             </P>
           </ReportSection>
 
-          {/* ── 07 LAST CALIBRATION RUN ──────────────── */}
-          <ReportSection no="07" label="LAST CALIBRATION RUN">
-            <P>本份 model report 的審閱與更新紀錄:</P>
+          {/* ── 06 DISCLOSURE PHILOSOPHY ──────────────
+              Round 4: renumbered 08 → 06. Section 07 LAST CALIBRATION
+              RUN removed entirely — that engineering version-metadata
+              table is redundant with the LAST REVIEWED header chip +
+              /changelog page. Canonical disclosure philosophy stays —
+              this is the brand-IP anchor per [[zone27-disclosure-philosophy]].
 
-            <DataTable>
-              <DataRow
-                label="本份報告版本"
-                value="v0.28"
-                note="與網站版本同步"
-              />
-              <DataRow
-                label="最後審閱日期"
-                value={LAST_REVIEWED}
-                note="人工審閱 · Tim · 創辦人"
-              />
-              <DataRow
-                label="引擎程式碼最後變動"
-                value="v0.2 (Real At-Bat)"
-                note="逐打席模型升級 · 完整變動見 /changelog"
-              />
-              <DataRow
-                label="預定下次審閱"
-                value="模型升級至 v0.3 時"
-                note="加入打者個別品質後立即重新校準"
-              />
-              <DataRow
-                label="連續審閱政策"
-                value="rolling"
-                note="任何模型變動 → 同步更新本頁"
-              />
-            </DataTable>
-          </ReportSection>
-
-          {/* ── 08 DISCLOSURE PHILOSOPHY ──────────────
-              Tim asked 2026-05-20: "AI 公司不公開模型,我們為什麼要?"
+              Original Tim ask 2026-05-20: "AI 公司不公開模型,我們為什麼要?"
               Answer: ZONE 27 sells identity, not algorithm access.
-              There's no algorithmic moat to protect, so radical
-              transparency IS the moat — the inverse positioning of
-              every closed AI lab. Surfacing this rationale as Section
-              08 turns the entire report's existence into the closing
-              trust artifact. */}
-          <ReportSection no="08" label="DISCLOSURE PHILOSOPHY">
+              No algorithmic moat → radical transparency IS the moat. */}
+          <ReportSection no="06" label="DISCLOSURE PHILOSOPHY">
             <P>
               為什麼我們把整份 model report 公開到這個程度?
               <strong className="text-bone"> 因為我們沒有商業機密。</strong>
@@ -527,6 +440,23 @@ export default function AuditPage() {
             <p className="mt-12 font-mono text-mute text-[10px] tracking-[0.25em]">
               本頁採用 Anthropic Transparency Hub model-report 結構為設計範本 ·
               零行銷語言原則
+            </p>
+
+            {/* Build provenance · Round 4 moved from header MetaPair
+                (where it was loud) to here (quiet · only die-hards
+                find it). Engineers can click through to the exact
+                commit that built this page. */}
+            <p className="mt-3 font-mono text-mute/60 text-[10px] tracking-[0.2em] tabular">
+              BUILD ·{" "}
+              <a
+                href={COMMIT_PERMALINK}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-mute/80 hover:text-gold underline-offset-4 hover:underline"
+                title={`This page built from commit ${COMMIT_SHA} · deployed ${DEPLOYED_AT}`}
+              >
+                {COMMIT_SHA} · {DEPLOYED_AT}
+              </a>
             </p>
 
             {/* ── Share this report · private-DM lever ──
