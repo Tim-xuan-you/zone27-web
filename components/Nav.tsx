@@ -50,30 +50,46 @@ export default function Nav({ active }: { active?: NavKey }) {
           </Link>
 
           {/* Desktop nav · inline list with 5 items + 登入 button.
-              Hidden on phones — mobile has a 2-row layout below. */}
+              Hidden on phones — mobile has a 2-row layout below.
+
+              Round 22 fix(Tim 問「按哪裡加入會員?」)· 5 nav items 視覺
+              等重 · "創始會員" 不像 CTA · 訪客 wayfinding 失敗。Mobile
+              已用 gold 填色 pill 凸顯。Desktop 改用 gold-outlined pill
+              (less aggressive than mobile filled · 維持 hierarchy 但
+              signal CTA) · 一眼可辨「這是 membership 入口」。 */}
           <div className="hidden sm:flex items-center gap-4 sm:gap-6 text-sm">
-            {NAV_ITEMS.map((item) => (
-              <Link
-                key={item.key}
-                href={item.href}
-                aria-current={active === item.key ? "page" : undefined}
-                className={`font-mono text-[10px] sm:text-xs tracking-[0.22em] whitespace-nowrap transition-colors inline-flex items-center gap-1.5 ${
-                  active === item.key
-                    ? "text-gold"
-                    : "text-mute hover:text-gold"
-                }`}
-              >
-                {item.label}
-                {item.badge && (
-                  <span
-                    aria-label={`${item.label} 是 ${item.badge} 階段功能`}
-                    className="px-1 py-px text-[8px] tracking-[0.15em] border border-gold/40 text-gold"
-                  >
-                    {item.badge}
-                  </span>
-                )}
-              </Link>
-            ))}
+            {NAV_ITEMS.map((item) => {
+              const isMembershipCta = item.key === "founders";
+              return (
+                <Link
+                  key={item.key}
+                  href={item.href}
+                  aria-current={active === item.key ? "page" : undefined}
+                  aria-label={
+                    isMembershipCta ? "加入會員 · Founders 27 預售名單 + FREE TIER 訂閱" : undefined
+                  }
+                  className={`font-mono text-[10px] sm:text-xs tracking-[0.22em] whitespace-nowrap transition-colors inline-flex items-center gap-1.5 ${
+                    isMembershipCta
+                      ? active === item.key
+                        ? "px-3 py-1.5 border border-gold bg-gold/10 text-gold"
+                        : "px-3 py-1.5 border border-gold/50 text-gold hover:bg-gold/5 hover:border-gold"
+                      : active === item.key
+                      ? "text-gold"
+                      : "text-mute hover:text-gold"
+                  }`}
+                >
+                  {item.label}
+                  {item.badge && (
+                    <span
+                      aria-label={`${item.label} 是 ${item.badge} 階段功能`}
+                      className="px-1 py-px text-[8px] tracking-[0.15em] border border-gold/40 text-gold"
+                    >
+                      {item.badge}
+                    </span>
+                  )}
+                </Link>
+              );
+            })}
             <CmdKTrigger />
             {/* 登入 button removed in Round 3 (Apple-minimalism pass):
                 disabled button is a choice-paradox item (visitor sees it,
