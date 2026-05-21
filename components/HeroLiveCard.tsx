@@ -20,6 +20,8 @@ import {
 import {
   FOUNDERS_REMAINING,
   FOUNDERS_TOTAL,
+  FOUNDERS_NEXT,
+  formatBadge,
 } from "@/lib/founders-stats";
 import UncertaintyStripe from "@/components/UncertaintyStripe";
 
@@ -328,13 +330,22 @@ export default function HeroLiveCard({ match }: { match: Match }) {
         </Link>
       </div>
       {FOUNDERS_REMAINING > 0 && (
-        <p className="mt-5 sm:mt-6 text-center font-mono text-mute/70 text-[10px] tracking-[0.3em] tabular">
+        // Round 29 Wave 10C · Agent research Pattern #1 specificity-over-aggregate.
+        // Patek Philippe identity-stamp pattern translated to indie SaaS · 2026
+        // conversion research(Lead Alchemists · BowTied Life)confirms specific
+        // unit number 比 aggregate「263 / 270 剩」conversion lift。原本「想成為
+        // 263/270 位之一?」改為「想成為 #008?」 — identity stamp 取代 scarcity
+        // pressure。Title attribute 保留 aggregate context 給 hover 訪客。
+        <p
+          className="mt-5 sm:mt-6 text-center font-mono text-mute/70 text-[10px] tracking-[0.3em] tabular"
+          title={`Founders 27 · 限量 ${FOUNDERS_TOTAL} 名 · 已認領 ${FOUNDERS_TOTAL - FOUNDERS_REMAINING} 名 · NEXT IS ${formatBadge(FOUNDERS_NEXT)} · 一次性 NT$ 2,700 · 終身`}
+        >
           想成為{" "}
           <Link
             href="/founders"
             className="text-gold hover:text-gold-soft underline-offset-4 hover:underline transition-colors"
           >
-            {FOUNDERS_REMAINING}/{FOUNDERS_TOTAL} 位之一
+            {formatBadge(FOUNDERS_NEXT)}
           </Link>
           ?
         </p>

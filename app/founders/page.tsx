@@ -500,6 +500,35 @@ export default async function FoundersPage({
           </Link>{" "}
           倒置 II · MONETIZATION
         </p>
+
+        {/* Round 29 Wave 10C · Agent research Pattern #3:Manual Bank
+            Transfer 不是 conversion friction · 是 Costly Signaling
+            ritual。Spence 1973 + Cialdini commitment principle + 2026
+            luxury-friction-design research 共同方向 · 「不解釋 friction
+            而道歉 → 解釋 friction 為什麼是 the product itself」。
+            短簽名 Tim note · 不放 sales-script · 把 handshake framing
+            寫成 brand statement。 */}
+        <div className="mt-12 max-w-2xl mx-auto border-l-2 border-gold/40 pl-5 sm:pl-6 py-1">
+          <p
+            lang="en"
+            className="font-mono text-gold/70 text-[10px] tracking-[0.4em] mb-3"
+          >
+            ▌ THIS ISN&apos;T A CHECKOUT · 這不是結帳
+          </p>
+          <p className="text-mute/90 text-sm sm:text-base leading-relaxed">
+            銀行匯款 not Apple Pay · 是<strong className="text-bone">刻意的</strong>。
+            我親手 verify 每一筆轉帳 · 24 小時內 DM 您 Founders 27 編號 ·
+            然後您就<strong className="text-bone">永遠是 #00X 了</strong>。
+            <br />
+            <br />
+            這不是 checkout · 是 handshake。Apple Pay 一秒鐘的 commitment ·
+            跟 10 分鐘手工匯款的 commitment 不是同一個東西。
+            <strong className="text-bone">我們選後者 · 因為它 filter 的是對的人</strong>。
+          </p>
+          <p className="font-mono text-mute text-[10px] tracking-[0.3em] mt-4 tabular">
+            — TIM · FOUNDER · 2026-05-21
+          </p>
+        </div>
       </section>
 
       {/* Round 8: BLACK CARD VALUE REFRAME section (114 lines · 2nd
