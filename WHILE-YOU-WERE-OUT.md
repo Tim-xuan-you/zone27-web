@@ -1,5 +1,6 @@
 # 🌙 您休息時 Claude 做了什麼
 
+> Tim · 2026-05-21 下午 · **Round 21 · Tim 3 個 brand-architecture 問題 · 「加入會員一定要付錢?」= NO insight · ship FREE TIER permanence clarifier between WaitlistForm + FROM THE FOUNDER · Stratechery / Plausible / Substack 4-tier model 寫死**
 > Tim · 2026-05-21 下午 · **Round 20 · Tim 第 4 次 push 同 prompt = trust direction · 2 fresh agents (Asian premium + 2026 indie) · 12 patterns 評估 · 0 clean ship candidate · honest conclusion: ZONE 27 at 2026 frontier · research-only deliverable**
 > Tim · 2026-05-21 中午後 · **Round 19 · Tim 第 3 次 push 同 prompt = Pratfall canary · 從 polish 切換到 SOUL-level · /about Chapter 00 PROLOGUE + /manifesto cross-ref + homepage Tim signature · 3 個 entry point 都有 founder anchor**
 > Tim · 2026-05-21 中午後 · **Round 18 · Tim 再 AFK · 2nd autonomous iteration · 2 fresh agents · Phase 1 section-reveal x4 + JSX>fix + 5 stale 23→24 · Phase 2 @starting-style entry on dynamic cards**

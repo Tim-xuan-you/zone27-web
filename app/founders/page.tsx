@@ -280,9 +280,77 @@ export default async function FoundersPage({
           block the conversion path. */}
       <section
         id="waitlist"
-        className="mx-auto max-w-2xl w-full px-6 sm:px-10 pb-12 sm:pb-20 scroll-mt-20"
+        className="mx-auto max-w-2xl w-full px-6 sm:px-10 pb-8 sm:pb-12 scroll-mt-20"
       >
         <WaitlistForm waitlistCount={waitlistCount} refSource={refSource} />
+      </section>
+
+      {/* ── FREE EMAIL TIER CLARIFICATION · Round 21 ────────
+          Tim 直覺(Round 21 三問之第 3):「加入會員一定要付錢?」
+          答:不一定。WaitlistForm 目前被 framed 為「PRE-LAUNCH
+          WAITLIST」· 訪客可能誤以為 launch 後就 expire 必須升級。
+          實際 launch 後免費 email 層永遠存在(Stratechery /
+          Plausible / Substack model)· launch 後從「waitlist」變成
+          「free subscriber tier」 · 永久免費 · 隨時升級或退出。
+          這個 clarifier 寫死 free tier permanence · 給「想留 email
+          不想付錢」的人 explicit pathway · 對齊 [[zone27-monetization-
+          philosophy]] 「engine FREE forever · identity PAID」 — 把
+          「email 訂閱」明確列入 FREE side。 */}
+      <section className="mx-auto max-w-2xl w-full px-6 sm:px-10 pb-12 sm:pb-16">
+        <div className="border-l-2 border-gold/40 pl-5 sm:pl-6 py-2">
+          <p
+            lang="en"
+            className="font-mono text-gold/70 text-[10px] tracking-[0.4em] mb-3"
+          >
+            / FREE TIER · 免費永久訂閱
+          </p>
+          <p className="text-bone text-base sm:text-lg leading-relaxed mb-4 font-light">
+            留 email 就是進入 <strong className="text-gold">ZONE 27 免費訂閱層</strong>。
+            不只 pre-launch · launch 後也存在 · 永久免費。
+          </p>
+          <ul className="space-y-2.5 text-mute text-sm leading-relaxed list-none pl-0">
+            <li className="flex items-baseline gap-3">
+              <span
+                aria-hidden="true"
+                className="font-mono text-gold/70 text-[10px] tracking-[0.2em] shrink-0"
+              >
+                ▸
+              </span>
+              <span className="flex-1">
+                <strong className="text-bone">模型重要迭代</strong> · 您是第一波知道的
+              </span>
+            </li>
+            <li className="flex items-baseline gap-3">
+              <span
+                aria-hidden="true"
+                className="font-mono text-gold/70 text-[10px] tracking-[0.2em] shrink-0"
+              >
+                ▸
+              </span>
+              <span className="flex-1">
+                <strong className="text-bone">/track-record 重大 entry 提醒</strong> ·
+                例如 N=30 統計門檻 · 大型 PROVED/DIVERGED
+              </span>
+            </li>
+            <li className="flex items-baseline gap-3">
+              <span
+                aria-hidden="true"
+                className="font-mono text-gold/70 text-[10px] tracking-[0.2em] shrink-0"
+              >
+                ▸
+              </span>
+              <span className="flex-1">
+                <strong className="text-bone">不寄行銷信 · 不轉售 email</strong> ·
+                隨時 reply UNSUBSCRIBE 退出
+              </span>
+            </li>
+          </ul>
+          <p className="mt-5 text-mute/80 text-xs sm:text-sm leading-relaxed">
+            想升級成 Founders 27(NT$ 2,700 終身)或 BLACK CARD(NT$ 499/月 · 預計
+            Q3 2026 開放)· 任時可選。也可<strong className="text-mute">永遠停在這層</strong>·
+            <span className="text-gold"> 我們不催</span>。
+          </p>
+        </div>
       </section>
 
       {/* ── FROM THE FOUNDER · Round 8 moved below form ──
