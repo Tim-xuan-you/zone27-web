@@ -1,6 +1,5 @@
 import { ImageResponse } from "next/og";
 import { BRAND, OG_SIZE, OG_CONTENT_TYPE } from "@/lib/brand";
-import { FOUNDERS_TOTAL, FOUNDERS_REMAINING } from "@/lib/founders-stats";
 
 // ── ZONE 27 · /membership Dynamic OG ──────────────────
 // 當有人把 https://zone27-web.vercel.app/membership 貼到 LINE/FB,

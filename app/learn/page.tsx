@@ -170,9 +170,9 @@ export default function LearnPage() {
             <strong className="text-bone">每個機率都有 50% 的相反可能 · 不要把 ZONE 27 當保證</strong>。
           </p>
           <ChapterFooter
-            cta="完整品牌方法論 →"
-            href="/about"
-            note="6 章節 · 為什麼 ZONE 27 存在 · 創辦人筆記"
+            cta="ZONE 27 4-tier 會員制 →"
+            href="/membership"
+            note="從匿名免費到 NT$ 2,700 終身 · 任時可選 · 我們不催"
           />
         </Chapter>
 

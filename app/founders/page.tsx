@@ -367,7 +367,10 @@ export default async function FoundersPage({
             FROM THE FOUNDER · 親筆說明
           </p>
           <blockquote className="text-bone text-lg sm:text-xl font-light leading-snug">
-            ZONE 27 是我給這群人 —— 包括我自己 —— 的一封情書。
+            台灣的棒球資訊產業,卻長期停留在「直覺說書人」的階段。
+            <span className="block mt-3 text-mute/90 text-base sm:text-lg">
+              這群熱愛棒球的硬核球迷,值得擁有自己的 Bloomberg。
+            </span>
           </blockquote>
           <div className="mt-6 flex items-baseline justify-between gap-4 flex-wrap pt-5 border-t border-line/40">
             <p className="font-mono text-mute text-[10px] tracking-[0.3em]">

@@ -6,7 +6,7 @@ import Link from "next/link";
 //  Tim flagged the overlay as "very cramped, ugly".)
 //
 // Mobile minimal-nav pattern · Linear / Stripe / Apple marketing:
-//   - Top header: ZONE 27 wordmark + 創始會員 CTA · nothing else
+//   - Top header: ZONE 27 wordmark + 會員 CTA · nothing else
 //   - All secondary nav lives in Footer + inline content links +
 //     Related Reading hub-and-spoke on trust-artifact pages
 //   - ScarcityStrip continues to render directly under Nav

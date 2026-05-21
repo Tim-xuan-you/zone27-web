@@ -6,7 +6,6 @@ import WaitlistForm from "@/components/WaitlistForm";
 import RelatedReading from "@/components/RelatedReading";
 import {
   FOUNDERS_TOTAL,
-  FOUNDERS_CLAIMED,
   FOUNDERS_REMAINING,
   FOUNDERS_NEXT,
   formatBadge,

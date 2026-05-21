@@ -130,6 +130,62 @@ export default function LabPage() {
         <MatchSimulator key={match.id} match={match} />
       </section>
 
+      {/* ── POST-SIM TRUST LOOP ────────────────────
+          Round 28 · Agent C P1.2 fix: hardcore baseball fan 跑完
+          10K 收斂後,下一個 instinct 是「show me where this engine
+          has been wrong」· 沒有 /track-record CTA = 高 trust visitor
+          無處可去。這兩張卡完成 trust loop:看引擎跑 → 看引擎過去
+          PROVED/DIVERGED 紀錄 → Founders 27。和 CUSTOM MODE CTA
+          視覺上分層 · 那是「power-user 再玩」· 這是「verify the
+          engine has receipts」. */}
+      <section
+        aria-labelledby="post-sim-trust-heading"
+        className="mx-auto max-w-4xl w-full px-6 sm:px-10 pb-12"
+      >
+        <p
+          id="post-sim-trust-heading"
+          className="font-mono text-gold/70 text-[10px] tracking-[0.35em] mb-4"
+        >
+          / 引擎跑完了 · 接下來?
+        </p>
+        <div className="grid sm:grid-cols-2 gap-3">
+          <Link
+            href="/track-record"
+            className="block p-5 sm:p-6 border border-line/60 hover:border-gold/60 transition-colors group bg-slate/20"
+          >
+            <p
+              lang="en"
+              className="font-mono text-mute group-hover:text-gold text-[10px] tracking-[0.35em] mb-2 transition-colors"
+            >
+              TRACK RECORD · 公開戰績
+            </p>
+            <h3 className="text-lg text-bone font-light tracking-tight mb-2">
+              看引擎過去哪場 PROVED · 哪場 DIVERGED →
+            </h3>
+            <p className="font-mono text-mute/70 text-[10px] tracking-[0.25em]">
+              不藏 miss · 等大列出 · sample 累積中
+            </p>
+          </Link>
+          <Link
+            href="/founders"
+            className="block p-5 sm:p-6 border border-gold/40 hover:border-gold transition-colors group bg-gold/5"
+          >
+            <p
+              lang="en"
+              className="font-mono text-gold/70 group-hover:text-gold text-[10px] tracking-[0.35em] mb-2 transition-colors"
+            >
+              FOUNDERS 27 · 創始席位
+            </p>
+            <h3 className="text-lg text-bone font-light tracking-tight mb-2">
+              引擎免費 · 270 個位置不免費 →
+            </h3>
+            <p className="font-mono text-mute/70 text-[10px] tracking-[0.25em]">
+              NT$ 2,700 一次性 · 終身 · 限量
+            </p>
+          </Link>
+        </div>
+      </section>
+
       {/* ── CUSTOM MODE CTA ──────────────────────── */}
       <section className="mx-auto max-w-4xl w-full px-6 sm:px-10 pb-16">
         <Link

@@ -165,6 +165,32 @@ export default function AuditPage() {
                 寫死的條件機率 (1B: 60%/20% · 2B: 50% · 3B: 100%)
               </Item>
             </List>
+            {/* Round 28 · Agent C P3.2 Pratfall surface · K/9 · BB/9 是估算的事實
+                從 lib/matches.ts 註解(GitHub 公開可見)主動 surface 到 /audit ·
+                埋著=自我入罪 · 主動標=courageous disclosure。Pratfall axiom
+                applied correctly = it BECOMES the trust artifact. */}
+            <div className="mt-6 border border-loss/30 bg-loss/5 p-5 sm:p-6">
+              <p
+                lang="en"
+                className="font-mono text-loss text-[10px] tracking-[0.4em] mb-3"
+              >
+                ▲ ESTIMATION DISCLOSURE
+              </p>
+              <p className="text-mute text-sm leading-relaxed">
+                CPBL 不公開投手 plate-appearance 級 K/9 · BB/9 · HR/9 真值。
+                ZONE 27 從球速 + ERA + 聯盟均值反推 estimate ·{" "}
+                <ExtLink href="https://github.com/Tim-xuan-you/zone27-web/blob/main/lib/matches.ts">
+                  lib/matches.ts
+                </ExtLink>
+                {" "}註解 explicit 標每位投手的 estimate path(如「~7.0 · 從 146 km/h
+                球速 + ERA 推估」)· 不藏。任何 CPBL data 工作者可透過 GitHub
+                PR 提供修正真值 · 引擎輸出立即重算。
+              </p>
+              <p className="text-mute/70 text-xs leading-relaxed mt-3">
+                這個 caveat 是 disclosure philosophy 的物理產出 ·
+                /audit Section 05 解釋為什麼把弱點貼在門口而不是藏起來。
+              </p>
+            </div>
             <P className="text-mute/70">
               所有資料來源與引用見{" "}
               <Link href="/methodology" className="text-gold hover:underline">

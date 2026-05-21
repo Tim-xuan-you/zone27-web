@@ -5,7 +5,6 @@ import { useActionState } from "react";
 import { useFormStatus } from "react-dom";
 import { reserveSpot, type WaitlistResult } from "@/lib/waitlist";
 import CopyLinkButton from "@/components/CopyLinkButton";
-import { FOUNDERS_REMAINING } from "@/lib/founders-stats";
 
 // ── Submit button — disables while pending, shows spinner ───
 function SubmitButton() {

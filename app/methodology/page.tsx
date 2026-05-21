@@ -49,8 +49,21 @@ export default function MethodologyPage() {
           引擎 v0.2 為逐打席對決模型(Real At-Bat),每場虛擬比賽包含
           約 70 個打席,以投手 <StatTerm term="K/9" /> · <StatTerm term="BB/9" />{" "}
           · <StatTerm term="HR/9" /> 三項進階指標推導 8 種互斥結果的條件機率,
-          配合壘上跑者推進物理累計分數。10,000 次採樣的收斂結果通常與歷史鎖定 AI
-          預測落在 <Mono>±2%</Mono> 內。
+          配合壘上跑者推進物理累計分數。10,000 次採樣的收斂結果,引擎內部
+          會穩定在 <Mono>±2%</Mono> 標準差(亂數採樣的天花板)。
+        </p>
+        <p className="text-mute/80">
+          <strong className="text-bone">這只是「引擎自己的內部一致性」</strong> —
+          引擎對 CPBL 實際比賽結果的 calibration 還在累積樣本,目前未達
+          統計顯著門檻(N ≥ 30 · Z27 LEXICON「SAMPLE DEBT」)。賽後收據持續
+          累積在{" "}
+          <Link
+            href="/track-record"
+            className="text-gold underline-offset-4 hover:underline"
+          >
+            /track-record
+          </Link>
+          ,PROVED ✓ 與 DIVERGED ✕ 等大列出 · 不藏 miss。
         </p>
         <p>
           本白皮書解釋這個引擎的每一個內部決策、簡化假設、與已知限制。

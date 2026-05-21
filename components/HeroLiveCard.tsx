@@ -179,13 +179,28 @@ export default function HeroLiveCard({ match }: { match: Match }) {
         />
       </div>
 
-      {/* Methodology line — with live counter · tighter mt on mobile */}
-      <p className="font-mono text-mute/80 text-[10px] tracking-[0.25em] mt-3 sm:mt-5 tabular">
-        蒙地卡羅 ·{" "}
+      {/* Methodology line — with live counter · tighter mt on mobile.
+          Round 28 Agent C fixes (P2.1 · P2.2 · P4.2): (1) "蒙地卡羅" 是
+          /learn 入口,讓 friend-referred 休閒球迷有 on-ramp(此前只能從
+          footer 找)·(2) "不接受下注" defang gambling-card grammar 誤判 ·
+          (3) "賽後收據在 /track-record" permanent 連結讓 skeptic 任何時候
+          (pre-game · live · final 都看得到)都有 above-the-fold 證據路徑. */}
+      <p className="font-mono text-mute/80 text-[10px] tracking-[0.25em] mt-3 sm:mt-5 tabular leading-relaxed">
+        <Link href="/learn" className="text-mute/80 hover:text-gold underline-offset-4 hover:underline transition-colors" title="5 分鐘看懂蒙地卡羅 → /learn">
+          蒙地卡羅
+        </Link>
+        {" "}·{" "}
         <span className="text-gold/80">
           {stats.completed.toLocaleString()}
         </span>{" "}
-        / {TOTAL_HERO_SIMS.toLocaleString()} 場 · 在您瀏覽器即時運算
+        / {TOTAL_HERO_SIMS.toLocaleString()} 場 · 在您瀏覽器即時運算 · 不接受下注
+        <span className="block mt-1 text-mute/60">
+          賽後收據在{" "}
+          <Link href="/track-record" className="text-mute/60 hover:text-gold underline-offset-4 hover:underline transition-colors">
+            /track-record
+          </Link>
+          {" "}累積中
+        </span>
       </p>
 
       {/* Calibration receipt — only when finalResult ingested.
