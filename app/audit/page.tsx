@@ -340,7 +340,11 @@ export default function AuditPage() {
               <Link href="/track-record" className="text-gold hover:underline">
                 /track-record
               </Link>
-              {" "}— 每場引擎公開預測賽後實際結果(PROVED ✓ / DIVERGED ✕)等大列出 ·
+              {" "}— 每場引擎公開預測賽後實際結果(
+              <Link href="/glossary#proved" className="text-gold underline-offset-4 hover:underline">PROVED</Link>
+              {" "}✓ /{" "}
+              <Link href="/glossary#diverged" className="text-gold underline-offset-4 hover:underline">DIVERGED</Link>
+              {" "}✕)等大列出 ·
               不刪、不修飾、不過濾。揭露哲學 = 文字理論;公開戰績 = 文字理論的物理產出。
             </P>
             <P className="text-mute/70">

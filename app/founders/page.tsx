@@ -8,6 +8,7 @@ import {
   FOUNDERS_TOTAL,
   FOUNDERS_CLAIMED,
   FOUNDERS_REMAINING,
+  FOUNDERS_NEXT,
   formatBadge,
 } from "@/lib/founders-stats";
 import { getWaitlistCount } from "@/lib/waitlist-stats";
@@ -182,11 +183,22 @@ export default async function FoundersPage({
           </span>
         </h1>
 
+        {/* Round 14 brand-IP amplification (Agent A #1 · Patek/Cartier
+            serial-number specificity). Visitor sees their concrete
+            future number — not abstract "263 remaining" but specific
+            "you'd be #008". Identity hook stronger than count.
+            Low Patek-numbers trade at premium (#001 > #150); this
+            specificity is what makes Founders 27 a numbered artefact
+            vs a generic membership. */}
+        <p className="mt-3 sm:mt-4 font-mono text-gold text-[11px] sm:text-xs tracking-[0.45em] tabular">
+          · NEXT IS {formatBadge(FOUNDERS_NEXT)} ·
+        </p>
+
         {/* Live scarcity strip · directly under headline · matches what
             sticky CTA bar promised on the prior page (per Round 8 agent
             audit). Without this, mobile visitor arriving via sticky bar
             lost the「X / 270」context they just tapped. */}
-        <p className="mt-4 sm:mt-5 font-mono text-bone text-sm sm:text-base tabular tracking-[0.2em]">
+        <p className="mt-3 sm:mt-4 font-mono text-bone text-sm sm:text-base tabular tracking-[0.2em]">
           <span className="text-gold">{FOUNDERS_CLAIMED}</span>
           <span className="text-mute/60"> / </span>
           <span>{FOUNDERS_TOTAL}</span>

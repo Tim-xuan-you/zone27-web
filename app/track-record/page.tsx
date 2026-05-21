@@ -242,13 +242,21 @@ export default function TrackRecordPage() {
 
         <p className="mt-8 font-mono text-mute text-[10px] tracking-[0.25em] leading-relaxed">
           完整 Brier score / log loss 後續會接 ·
-          目前先用最直觀的 binary verdict 跑 N → 30 sample size。
+          目前先用最直觀的 binary verdict 跑 N → 30 sample size(<Link href="/glossary#sample-debt" className="text-gold hover:underline">SAMPLE DEBT</Link> warning until N≥30)。
           完整 calibration 方法論見{" "}
           <Link
             href="/methodology"
             className="text-gold underline-offset-4 hover:underline"
           >
             /methodology
+          </Link>
+          {" · "}
+          PROVED / DIVERGED / PUSH 等 verdict 詞彙定義見{" "}
+          <Link
+            href="/glossary#z27-lexicon"
+            className="text-gold underline-offset-4 hover:underline"
+          >
+            /glossary Z27 LEXICON
           </Link>
           。
         </p>
