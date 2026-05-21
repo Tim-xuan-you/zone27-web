@@ -1,5 +1,6 @@
 # 🌙 您休息時 Claude 做了什麼
 
+> Tim · 2026-05-21 late evening · **Round 30 · pre-22:00 hardening · 1 critical bug fix · `getFeaturedMatch` priority order 跟自己 doc-comment 矛盾 · 今晚 22:00+ Tim ingest 後 homepage HeroLiveCard 會跳去 cpbl-260522-01 future preview · 不顯示剛 ingest 的 receipt cinematic = brand IP 物理時刻只在 /track-record 不在最高流量首頁 · Round 10 introduce 起 silent 至今 · 加 ISR revalidate = 600 到 homepage 順手解凌晨 today→tomorrow rollover lag · /now Wave 1 entry · build/lint/tsc 全綠**
 > Tim · 2026-05-21 evening · **Round 29 · 同日 2 wave 補建會員 + admin 層 · 3 commits · Wave 1 MLM 結構防線(/manifesto + /faq)· Wave 2 NEW /member psychology-driven preview + NEW /admin noindex preview + MemberDashboardPreview client component · Wave 3 drift cleanup + /now Round 29 update + docs sync · 25→27 visitor-discoverable routes · 17→18 OG cards · 21→22 components**
 > Tim · 2026-05-21 evening · **Round 28 · AFK + 持續 push「請盡可能地迭代」+「以您世界級行銷設計專家經驗」 = 3-agent parallel reconnaissance + 5-wave ship · 4 commits · 27 → 28 routes · 17 OG cards · 21 components · 3 NEW components(UncertaintyStripe · FounderSignOff · ArticleMeta)+ /now NEW route · 2026 canonical visual moat shipped**
 > Tim · 2026-05-21 下午 · **Round 27 · /membership 進 Footer ENTRY group + /learn final CTA reframe 為 4-tier ladder(取代「升級成 Founders 27」單路徑)**

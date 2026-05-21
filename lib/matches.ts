@@ -458,29 +458,51 @@ export function getTodayAndFutureMatches(): Match[] {
 }
 
 /** Pick the BEST match to feature on the homepage HeroLiveCard.
- *  Priority order:
- *   1. Today's match (pregame OR live · highest engagement value)
- *   2. Closest future match (pre-game prediction · "next up")
- *   3. Most recent finalized match (receipt mode · shows engine
- *      track record · "yesterday we predicted X · result was Y")
- *   4. Most recent stale-archived (fallback · should rarely happen
- *      since matches with no finalResult become orphan after the date)
+ *  Priority order(Round 30 Wave 1 · order alignment with doc-comment):
+ *   1. Today's match in active window(pregame OR live · live engagement)
+ *   2. Today's finalized — the receipt cinematic window. Tim ingests at
+ *      ~22:00 + the match date is still TODAY for the rest of the night.
+ *      Without this slot, the FirstReceiptHero cinematic only fires on
+ *      /track-record but the homepage(highest-traffic entry point)would
+ *      jump straight to tomorrow's future preview · brand soul moment lost.
+ *   3. Most recent finalized — receipt mode beats abstract future preview.
+ *      PROVED/DIVERGED concrete history is a STRONGER conversion signal
+ *      than an upcoming prediction visitors can't verify yet.
+ *   4. Closest future(only when no receipt exists anywhere · cold start)
+ *   5. Any match(orphan fallback · should rarely happen)
  *
- *  Brand reasoning: ZONE 27's soul = engine + receipt. When there's
- *  a live prediction, show it. When there isn't, show the most recent
- *  proof the engine works (a finalized match in receipt mode is
- *  actually a STRONGER conversion signal than an upcoming prediction
- *  — visitors see PROVED/DIVERGED concrete history vs an abstract
- *  probability they can't verify yet). */
+ *  Brand reasoning: ZONE 27's soul = engine + receipt. When the engine is
+ *  actively running, show it. When it isn't, prefer proof-of-work(filed
+ *  receipt)over promise-of-future(unverifiable prediction). This is the
+ *  inverse of typical sports app heuristics which always lead with
+ *  「next game」 — for ZONE 27, demonstrating engine track record is the
+ *  conversion lever, not abstract upcoming probability.
+ *
+ *  Round 30 fix(2026-05-21):earlier ordering placed step 4 future before
+ *  step 2/3 finalized · contradicting this very doc-comment and causing
+ *  the homepage to drop the receipt cinematic the moment Tim ingested
+ *  tonight's cpbl-260521-01 box score(brand IP physical moment killed). */
 export function getFeaturedMatch(): Match | undefined {
-  // 1. Today's match
-  const today = matches.find((m) => {
+  // 1. Today's active match (pregame OR live)
+  const todayActive = matches.find((m) => {
     const phase = getMatchPhase(m);
     return phase === "today-pregame" || phase === "today-live";
   });
-  if (today) return today;
+  if (todayActive) return todayActive;
 
-  // 2. Closest future
+  // 2. Today's finalized — cinematic window post-ingest, pre-midnight.
+  const today = getTodayTaipei();
+  const todayFinal = matches.find((m) => {
+    if (!m.finalResult) return false;
+    return getMatchDateIso(m) === today;
+  });
+  if (todayFinal) return todayFinal;
+
+  // 3. Most recent finalized (any date, receipt mode)
+  const finalized = getFinalizedMatches();
+  if (finalized.length > 0) return finalized[0];
+
+  // 4. Closest future (only when no receipts exist at all)
   const future = matches
     .filter((m) => getMatchPhase(m) === "future")
     .sort((a, b) => {
@@ -490,10 +512,6 @@ export function getFeaturedMatch(): Match | undefined {
     })[0];
   if (future) return future;
 
-  // 3. Most recent finalized (receipt mode)
-  const finalized = getFinalizedMatches();
-  if (finalized.length > 0) return finalized[0];
-
-  // 4. Any match (orphan fallback)
+  // 5. Any match (orphan fallback)
   return matches[0];
 }

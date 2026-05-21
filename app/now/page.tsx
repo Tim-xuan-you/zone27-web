@@ -33,9 +33,15 @@ export const metadata: Metadata = {
 // ─────────────────────────────────────────────────────
 
 const LAST_UPDATED = "2026-05-21";
-const CYCLE = "Round 28-29 · 2026-05-21 evening · 同日 14+ waves";
+const CYCLE = "Round 28-30 · 2026-05-21 evening · 同日 15+ waves";
 
 const SHIPPED_THIS_CYCLE: { title: string; body: string; href?: string }[] = [
+  // ── Round 30 Wave 1 ship(2026-05-21 late evening · pre-22:00 hardening)──
+  {
+    title: "[R30 W1] getFeaturedMatch priority fix · 今晚 22:00+ receipt cinematic 會出現在首頁",
+    body: "Round 10 引入 getFeaturedMatch 時 priority order 跟自己 doc-comment 矛盾:closest future(step 2)在 most-recent-finalized(step 3)之前 fired。Brand IP 影響:今晚 22:00 Tim ingest cpbl-260521-01 後 · homepage HeroLiveCard 會直接跳去 cpbl-260522-01 future preview · 不顯示剛 ingest 的 receipt cinematic = brand soul 物理時刻只在 /track-record · 不在最高流量首頁。Fix:今天 active(pregame/live) → 今天 final(post-ingest cinematic window) → 最近 finalized 任何日期(receipt mode > future per doc-comment) → closest future → orphan。同時加 ISR revalidate = 600 到 app/page.tsx · 解凌晨 00:00 today→tomorrow rollover lag(原本完全 SSG 凍結 · 不 push 不更新)。Build / Lint / TSC strict 全綠。",
+    href: "/",
+  },
   // ── Round 29 Wave 14 ship(2026-05-21 evening · post-W13)──
   {
     title: "[R29 W14] Founders 27 onboarding · 4-phase psychology framework · 3 NEW docs",
@@ -164,6 +170,15 @@ const SHIPPED_THIS_CYCLE: { title: string; body: string; href?: string }[] = [
 ];
 
 const DISCOVERED_THIS_CYCLE: { title: string; body: string }[] = [
+  // ── Round 30 discovery ──
+  {
+    title: "[R30] getFeaturedMatch priority order 跟自己 doc-comment 直接矛盾(自 Round 10 introduced)",
+    body: "Bug 從 Round 10 introduce match lifecycle 那天起一直存在 · 但只有今晚 22:00+ Tim ingest 那瞬間才會觸發可見的 brand IP 損失。每次跑 audit 都沒抓到 · 因為 audit 看 doc-comment 跟 code 都「合理」 · 沒人 cross-reference 兩者一致性。Lesson:doc-comment 寫了「receipt mode is a STRONGER signal than future」但 code 把 future 放 step 2 = doc-comment 是 wish · code 是 reality · 兩者不一致 = silent regression vector。Round 30 Wave 1 修正 + 把 doc-comment 升為 binding contract(代碼順序鏡像 narrative)。",
+  },
+  {
+    title: "[R30] homepage 完全 SSG · 沒 revalidate · 凌晨 rollover 不會自動發生",
+    body: "app/page.tsx 全靠 git push 觸發 Vercel build 才會更新 featured match selection。Tim 22:00 push 時會 fresh build OK · 但凌晨 00:00 today→tomorrow rollover 不會自動發生 · 隔日早上 visitor 進首頁可能看到「TODAY · 今晚開賽」+ 昨天日期 · 全靠 phase string 跟 date 看 stale。對比:/matches /track-record /signal-board /matches/mlb 全有 revalidate · 只有 / 沒設。Round 30 Wave 1 加 revalidate = 600(10 min · 跟 /matches/mlb 同 lifecycle-state cadence)。",
+  },
   // ── Round 29 discoveries ──
   {
     title: "[R29] ZONE 27 surface pattern 跟 MLM 視覺重疊 · disambiguation 從沒主動 surface",

@@ -8,6 +8,20 @@ import {
   FOUNDERS_REMAINING,
 } from "@/lib/founders-stats";
 
+// ── ISR · re-evaluate featured match every 10 minutes. ─────
+// Without revalidate the homepage is fully static · frozen at
+// build time · which breaks every lifecycle transition that
+// isn't accompanied by a git push:
+//   · 18:35 today-pregame → today-live(badge stays as PREGAME)
+//   · 22:00+ today-live → today-final WHEN Tim's ingest runs
+//     a git push(handled · build refreshes)BUT also when Tim
+//     ingests via Supabase Studio without a deploy(future state)
+//   · 00:00 day rollover · today → stale-archived · next-day
+//     future → today-pregame(homepage shows yesterday's data
+//     all morning until manual deploy)
+// 600 s mirrors /matches/mlb · same「lifecycle-state page」cadence.
+export const revalidate = 600;
+
 // ── ZONE 27 · Homepage(Round 3 · Apple-grade compression)──
 //
 // Round 1-2 had 8 sections trying to prove credibility on the
@@ -58,15 +72,18 @@ import {
 // ─────────────────────────────────────────────────────
 
 export default function Home() {
-  // Round 10: getFeaturedMatch picks via lifecycle priority:
-  //   today-pregame/live → future → most-recent-finalized → orphan
-  // After game day · cpbl-260521-01 transitions from "today" to
-  // "final" automatically (if Tim ingested finalResult) · homepage
-  // then features the next day's match · or shows yesterday's
-  // receipt if no new match is yet ingested.
-  // Receipt-mode (showing PROVED/DIVERGED) is a STRONGER conversion
-  // signal than upcoming-prediction-mode · so this fallback chain
-  // is brand-IP-aligned: engine + receipt = the soul.
+  // Round 30 Wave 1: getFeaturedMatch picks via lifecycle priority,
+  // now aligned with brand reasoning(receipt > future):
+  //   1. today-pregame OR today-live(engine actively running)
+  //   2. today-final(post-ingest cinematic window · brand soul)
+  //   3. most-recent-finalized(receipt mode any date)
+  //   4. closest future(abstract pregame · only as cold-start fallback)
+  //   5. orphan
+  // Tonight 22:00+ Tim ingests cpbl-260521-01 → phase flips to「final」
+  // with matchDate === today → step 2 keeps the receipt cinematic on
+  // the homepage HeroLiveCard for the rest of the night(not just on
+  // /track-record). After midnight TPE, cpbl-260522-01 hits step 1
+  // as today-pregame · receipt of yesterday moves to /track-record.
   const featuredMatch = getFeaturedMatch();
 
   return (
