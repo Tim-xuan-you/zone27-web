@@ -205,12 +205,12 @@ export default async function MembershipPage({
               tier="匿名訪客 / FREE TIER"
               status="❌ 無法發文"
               detail="可閱讀所有公開內容 + 跑 /lab 引擎 · 但無法在賽事頁討論室發言 / 推薦賽事 / 賣明牌。"
-              reason="我們刻意把發文權給付費會員 · 防 LINE 老師 archetype 進來(輸了刪文 · 贏了截圖 · 那不是 ZONE 27)。Solo founder 也需要 manual moderation · gate 讓 Tim 可控。"
+              reason="我們刻意把發文權給付費會員 · 防 LINE 老師 archetype 進來(玩運彩 playsport.cc · 報馬仔 fengyuncai.com 的 tipster ranking 生態 · 「輸了刪文 / 贏了截圖 / 月抽 30-50%」mechanism · 那不是 ZONE 27)。Solo founder 也需要 manual moderation · gate 讓 Tim 可控。"
             />
             <PermissionRow
               tier="BLACK CARD(Q3 2026 開放)"
               status="✅ 可發文 / 5% 抽成"
-              detail="在 /matches/[gameId] 賽事討論室發言 · 推薦賽事 · 賣明牌。創作者抽成 5%(vs 業界 LINE 老師 / 殺手平台 30-50%)。"
+              detail="在 /matches/[gameId] 賽事討論室發言 · 推薦賽事 · 賣明牌。創作者抽成 5%(vs 玩運彩 / 報馬仔 / LINE 老師平台普遍 30-50% · 5% 是降維打擊)。"
               reason="月費 NT$ 499 = 我們 manual 審帳號的成本 · 也是 brand IP「會員制 = 言論權的 gate」的具體實踐(Costco / Stratechery / Bankless 同邏輯)。"
             />
             <PermissionRow

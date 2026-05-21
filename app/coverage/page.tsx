@@ -131,6 +131,10 @@ const NEVER_COVER: { name: string; reason: string }[] = [
     reason: "博彩平台 · 抓資料會綁定 ZONE 27 與運彩,違反 /about /faq /privacy 已寫死的定位",
   },
   {
+    name: "玩運彩 playsport.cc/forum",
+    reason: "Taiwan 最大運彩討論區 · tipster ranking + 牌支戰績 + 「老師」生態 · 跟 ZONE 27 brand IP 結構相反(我們 0 % 創作者抽成 · 不販售明牌 · 不排 tipster)· Round 30 加 · per [[zone27-coverage-philosophy]]「reject gambling-platform scraping」",
+  },
+  {
     name: "報馬仔 fengyuncai.com",
     reason: "明牌販售平台 · 同上邏輯",
   },

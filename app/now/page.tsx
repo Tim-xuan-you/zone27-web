@@ -33,9 +33,15 @@ export const metadata: Metadata = {
 // ─────────────────────────────────────────────────────
 
 const LAST_UPDATED = "2026-05-21";
-const CYCLE = "Round 28-30 · 2026-05-21 late evening · 同日 17+ waves";
+const CYCLE = "Round 28-30 · 2026-05-21 late evening · 同日 18+ waves";
 
 const SHIPPED_THIS_CYCLE: { title: string; body: string; href?: string }[] = [
+  // ── Round 30 Wave 2C ship(2026-05-21 late evening · Spy-Trackers specific naming)──
+  {
+    title: "[R30 W2C] /coverage NEVER 加 玩運彩 playsport.cc + /membership 加具體站名 · Pratfall Spy-Trackers pattern",
+    body: "Tim 送 玩運彩 (playsport.cc/forum) + 運彩報馬仔 (fengyuncai.com) screenshots 問「會員系統需要參考這 2 大舊歷史權威?他們可以吸收的部分?」 grep 後 surface 一個 gap:報馬仔 fengyuncai.com 已在 /coverage NEVER list(line 134)+ 5 個 visitor-facing pages 提及 · 但 玩運彩 playsport.cc(Taiwan 最大運彩討論區)沒被具體 named · 只籠統「運彩 / 報馬仔 / 殺手平台」。 Sharp call:不 absorb · 因為 ZONE 27 brand IP 結構性反對(他們 tipster ranking + 牌支戰績 + 老師 30-50% 抽成 · vs ZONE 27 0% creator share + epistemic mirror + curation gate)· 但要把它 named。 Ship:(1) /coverage NEVER 加 第 2 條 玩運彩 playsport.cc/forum entry(放在台灣運彩 + 報馬仔 之間 · 同 Taiwan-gambling-ecosystem 群組);(2) /membership PermissionRow 從抽象「LINE 老師 archetype」升 specific 命名「玩運彩 playsport.cc · 報馬仔 fengyuncai.com 的 tipster ranking 生態 · 輸了刪文 / 贏了截圖 / 月抽 30-50% mechanism」+ 5% 抽成 wording 從「業界 LINE 老師 / 殺手平台」 升 「玩運彩 / 報馬仔 / LINE 老師平台普遍 30-50%」。 HEY「Spy Trackers」+ Footer「FUNDED BY FOUNDERS · NO GA · NO PIXEL · NO HOTJAR」 same Costly-Signaling Spy-Trackers pattern。 Tim 第 3 個「絕對 NO」 framing 推回(Apple commerce / Spotify consumption / 玩運彩 gambling-tipster)· 三層 brand boundary 全完成。",
+    href: "/coverage",
+  },
   // ── Round 30 Wave 2B ship(2026-05-21 late evening · agent-research deepest call)──
   {
     title: "[R30 W2B] /member/calibration NEW · sabermetric reliability diagram · epistemic mirror brand statement",
@@ -182,6 +188,11 @@ const SHIPPED_THIS_CYCLE: { title: string; body: string; href?: string }[] = [
 ];
 
 const DISCOVERED_THIS_CYCLE: { title: string; body: string }[] = [
+  // ── Round 30 Wave 2C discovery ──
+  {
+    title: "[R30 W2C] 玩運彩 playsport.cc gap · canonical NEVER list 漏第二大 Taiwan 運彩討論區",
+    body: "報馬仔 fengyuncai.com 已在 /coverage NEVER + 5 個 visitor-facing pages · 但 玩運彩 playsport.cc 從沒被具體 named · 只籠統「運彩 / 報馬仔 / 殺手平台」覆蓋。 兩個是 different sites(playsport.cc = discussion forum + tipster · sportslottery.com.tw = 官方運彩平台)· 在 Taiwan 棒球迷視覺裡兩者是不同實體 · brand boundary 應該獨立命名。 W2C 修補。 Lesson:Pratfall Spy-Trackers 命名 specific 競品時 · 同類但不同實體要逐一 named · 不能依賴抽象 cover-all。",
+  },
   // ── Round 30 Wave 2 discoveries ──
   {
     title: "[R30 W2] 「features-arms-race」framing trap · Tim Apple screenshots surface 了",
