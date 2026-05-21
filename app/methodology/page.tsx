@@ -74,10 +74,10 @@ export default function MethodologyPage() {
           >
             /audit
           </Link>
-          {" "} — 含 Anthropic Transparency Hub 結構的六大固定 section
+          {" "} — 含 Anthropic Transparency Hub 結構的 8 個固定 section
           (含明確列出我們{" "}
           <strong className="text-bone">刻意排除</strong>
-          {" "}的 10 個輸入)。
+          {" "}的 10 個輸入 + DISCLOSURE PHILOSOPHY)。
         </p>
       </Section>
 
@@ -222,8 +222,8 @@ hitsInPlay = remaining × 0.35   → 1B×0.75, 2B×0.20, 3B×0.05
           次模擬 · 標準誤差{" "}
           <span className="font-mono text-gold tabular">±0.5%</span>{" "}
           ·{" "}
-          <span className="font-mono text-gold tabular">n=3</span>{" "}
-          樣本 — 數字看起來好,我們承認樣本太小,不該下重注。&rdquo;
+          <span className="font-mono text-gold tabular">n=1</span>{" "}
+          樣本起跳 — 數字看起來好,我們承認樣本太小,不該下重注。&rdquo;
           <footer className="mt-4 font-mono text-mute text-[10px] tracking-[0.3em] not-italic">
             — ZONE 27 ENGINE WHITEPAPER · v0.2 · 詳見 Section 05 + Section 06
           </footer>

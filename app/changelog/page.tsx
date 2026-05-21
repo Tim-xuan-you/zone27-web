@@ -1,3 +1,4 @@
+import Link from "next/link";
 import type { Metadata } from "next";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
@@ -73,14 +74,22 @@ export default function ChangelogPage() {
               </strong>
               。本頁列出近期里程碑當 reference;完整逐 commit 歷史請看下方按鈕。
             </p>
-            <a
-              href={GH_COMMITS_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-5 py-3 border border-gold text-gold hover:bg-gold hover:text-navy transition-colors font-mono text-[11px] tracking-[0.3em]"
-            >
-              <span lang="en">VIEW ALL COMMITS ON GITHUB →</span>
-            </a>
+            <div className="flex flex-wrap gap-3">
+              <a
+                href={GH_COMMITS_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-5 py-3 border border-gold text-gold hover:bg-gold hover:text-navy transition-colors font-mono text-[11px] tracking-[0.3em]"
+              >
+                <span lang="en">VIEW ALL COMMITS ON GITHUB →</span>
+              </a>
+              <Link
+                href="/roadmap"
+                className="inline-flex items-center gap-2 px-5 py-3 border border-line/60 text-mute hover:text-gold hover:border-gold/40 transition-colors font-mono text-[11px] tracking-[0.3em]"
+              >
+                <span lang="en">/ROADMAP · 未來承諾 →</span>
+              </Link>
+            </div>
           </header>
 
           <section className="py-12">

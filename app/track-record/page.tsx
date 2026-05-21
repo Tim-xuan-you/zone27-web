@@ -9,6 +9,7 @@ import {
   getCalibration,
   getEnginePctOnWinner,
   getMatchDateIso,
+  getTodayTaipei,
   type Match,
   type Calibration,
 } from "@/lib/matches";
@@ -35,13 +36,17 @@ export default function TrackRecordPage() {
 
   // Matches that ran but never had a final ingested — visible debt.
   // Brand-honest: surface this gap rather than silently skipping it.
+  // Uses getTodayTaipei() (Asia/Taipei) — same source-of-truth as
+  // every other date comparison in the codebase. Earlier draft used
+  // raw UTC slice which drifts up to 8 hours behind Taipei wall
+  // clock, causing morning-Taipei renders to misclassify yesterday's
+  // unfiled matches.
+  const todayTaipei = getTodayTaipei();
   const unfiledArchived = matches.filter((m) => {
     if (m.finalResult) return false;
     const iso = getMatchDateIso(m);
     if (!iso) return false;
-    // Use lexicographic compare against a server-side "today" surrogate.
-    // We don't need wall-clock precision here · ISR refreshes daily.
-    return iso < new Date().toISOString().slice(0, 10);
+    return iso < todayTaipei;
   }).length;
 
   return (
@@ -62,7 +67,7 @@ export default function TrackRecordPage() {
           <span
             lang="en"
             className="font-mono text-[9px] tracking-[0.3em] px-1.5 py-0.5 border border-gold/40 text-gold/80"
-            title="這頁刻意從 N=1 開始 · 沒有 cherry-picked 歷史 · 沒有 backdated 入帳"
+            title="這頁從 N=0 開始 · 沒有 cherry-picked 歷史 · 沒有 backdated 入帳 · 第一筆預定今晚收錄"
           >
             START · N={finalized.length}
           </span>
@@ -172,9 +177,9 @@ export default function TrackRecordPage() {
           <EmptyLedger />
         ) : (
           <div className="border border-line/70">
-            {/* Bloomberg-style table header */}
+            {/* Bloomberg-style table header · hidden on mobile (stacked cards below) */}
             <div
-              className="grid grid-cols-[110px_1fr_120px_140px_110px_50px] gap-3 px-5 py-3 bg-slate/50 border-b border-line/60 font-mono text-mute text-[9px] tracking-[0.3em]"
+              className="hidden lg:grid grid-cols-[110px_1fr_120px_140px_110px_50px] gap-3 px-5 py-3 bg-slate/50 border-b border-line/60 font-mono text-mute text-[9px] tracking-[0.3em]"
               role="row"
             >
               <span lang="en">DATE</span>
@@ -353,60 +358,122 @@ function LedgerRow({ match }: { match: Match }) {
 
   const dateIso = getMatchDateIso(match) ?? "—";
 
+  const verdictColor =
+    cal === "proved"
+      ? "text-gold"
+      : cal === "diverged"
+      ? "text-loss"
+      : "text-mute";
+
   return (
-    <div
-      role="row"
-      className="grid grid-cols-[110px_1fr_120px_140px_110px_50px] gap-3 px-5 py-4 border-b border-line/40 last:border-b-0 hover:bg-slate/40 transition-colors"
-    >
-      <span className="font-mono text-mute text-xs tabular tracking-[0.05em] self-center">
-        {dateIso}
-      </span>
-      <div className="self-center">
-        <p className="text-bone text-sm leading-snug">
-          <span className="text-gold">{favoriteName}</span>
-          <span className="text-mute mx-1.5 text-xs">favored</span>
-          <span className="text-mute text-xs">vs</span>{" "}
-          <span className="text-mute">{dogName}</span>
-        </p>
-        <p className="font-mono text-mute text-[10px] tracking-[0.2em] mt-1 tabular">
-          ENGINE · {favoritePct}% / {100 - favoritePct}% · CONF {match.aiConfidence}/100
-        </p>
-      </div>
-      <span className="font-mono text-bone text-base tabular self-center text-right">
-        {fr.homeScore}:{fr.awayScore}
-        <span className="block text-[9px] text-mute tracking-[0.2em] mt-0.5">
-          {fr.winner === "home"
-            ? `${match.home.en} W`
-            : fr.winner === "away"
-            ? `${match.away.en} W`
-            : "TIE"}
+    <>
+      {/* ── DESKTOP · Bloomberg-style table row ── */}
+      <div
+        role="row"
+        className="hidden lg:grid grid-cols-[110px_1fr_120px_140px_110px_50px] gap-3 px-5 py-4 border-b border-line/40 last:border-b-0 hover:bg-slate/40 transition-colors"
+      >
+        <span className="font-mono text-mute text-xs tabular tracking-[0.05em] self-center">
+          {dateIso}
         </span>
-      </span>
-      <span
-        className={`font-mono tabular text-sm self-center text-right ${
-          cal === "proved"
-            ? "text-gold"
-            : cal === "diverged"
-            ? "text-loss"
-            : "text-mute"
-        }`}
-      >
-        {enginePctOnWinner !== null ? `${enginePctOnWinner}%` : "—"}
-      </span>
-      <span
-        lang="en"
-        className={`font-mono text-[10px] tracking-[0.25em] border px-2 py-1 self-center text-center ${verdictStyles[cal as Calibration]}`}
-      >
-        {verdictLabel[cal as Calibration]}
-      </span>
+        <div className="self-center">
+          <p className="text-bone text-sm leading-snug">
+            <span className="text-gold">{favoriteName}</span>
+            <span className="text-mute mx-1.5 text-xs">favored</span>
+            <span className="text-mute text-xs">vs</span>{" "}
+            <span className="text-mute">{dogName}</span>
+          </p>
+          <p className="font-mono text-mute text-[10px] tracking-[0.2em] mt-1 tabular">
+            ENGINE · {favoritePct}% / {100 - favoritePct}% · CONF {match.aiConfidence}/100
+          </p>
+        </div>
+        <span className="font-mono text-bone text-base tabular self-center text-right">
+          {fr.homeScore}:{fr.awayScore}
+          <span className="block text-[9px] text-mute tracking-[0.2em] mt-0.5">
+            {fr.winner === "home"
+              ? `${match.home.en} W`
+              : fr.winner === "away"
+              ? `${match.away.en} W`
+              : "TIE"}
+          </span>
+        </span>
+        <span
+          className={`font-mono tabular text-sm self-center text-right ${verdictColor}`}
+        >
+          {enginePctOnWinner !== null ? `${enginePctOnWinner}%` : "—"}
+        </span>
+        <span
+          lang="en"
+          className={`font-mono text-[10px] tracking-[0.25em] border px-2 py-1 self-center text-center ${verdictStyles[cal]}`}
+        >
+          {verdictLabel[cal]}
+        </span>
+        <Link
+          href={`/matches/${match.id}`}
+          className="self-center text-gold/70 hover:text-gold text-right font-mono text-[10px] tracking-[0.3em]"
+          aria-label={`Full breakdown for ${favoriteName} vs ${dogName}`}
+        >
+          →
+        </Link>
+      </div>
+
+      {/* ── MOBILE · Stacked card · same info, no horizontal overflow ── */}
       <Link
         href={`/matches/${match.id}`}
-        className="self-center text-gold/70 hover:text-gold text-right font-mono text-[10px] tracking-[0.3em]"
+        className="lg:hidden block px-5 py-5 border-b border-line/40 last:border-b-0 hover:bg-slate/40 transition-colors"
         aria-label={`Full breakdown for ${favoriteName} vs ${dogName}`}
       >
-        →
+        <div className="flex items-baseline justify-between gap-2 mb-3">
+          <span className="font-mono text-mute text-[10px] tabular tracking-[0.2em]">
+            {dateIso}
+          </span>
+          <span
+            lang="en"
+            className={`font-mono text-[10px] tracking-[0.25em] border px-2 py-0.5 ${verdictStyles[cal]}`}
+          >
+            {verdictLabel[cal]}
+          </span>
+        </div>
+        <p className="text-bone text-base leading-snug mb-2">
+          <span className="text-gold">{favoriteName}</span>
+          <span className="text-mute mx-1.5 text-[11px]">favored</span>
+          <span className="text-mute text-[11px]">vs</span>{" "}
+          <span className="text-mute">{dogName}</span>
+        </p>
+        <div className="grid grid-cols-3 gap-3 mt-3 pt-3 border-t border-line/40">
+          <div>
+            <p className="font-mono text-mute text-[9px] tracking-[0.25em] mb-1">
+              ENGINE %
+            </p>
+            <p className="font-mono text-bone text-sm tabular">
+              {favoritePct}% / {100 - favoritePct}%
+            </p>
+          </div>
+          <div>
+            <p className="font-mono text-mute text-[9px] tracking-[0.25em] mb-1">
+              FINAL
+            </p>
+            <p className="font-mono text-bone text-sm tabular">
+              {fr.homeScore}:{fr.awayScore}
+              <span className="block text-[9px] text-mute mt-0.5">
+                {fr.winner === "home"
+                  ? `${match.home.en} W`
+                  : fr.winner === "away"
+                  ? `${match.away.en} W`
+                  : "TIE"}
+              </span>
+            </p>
+          </div>
+          <div>
+            <p className="font-mono text-mute text-[9px] tracking-[0.25em] mb-1">
+              ON WINNER
+            </p>
+            <p className={`font-mono text-sm tabular ${verdictColor}`}>
+              {enginePctOnWinner !== null ? `${enginePctOnWinner}%` : "—"}
+            </p>
+          </div>
+        </div>
       </Link>
-    </div>
+    </>
   );
 }
 

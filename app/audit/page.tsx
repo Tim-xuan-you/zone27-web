@@ -35,7 +35,7 @@ const ENGINE_VERSION = "v0.2 · Real At-Bat";
 const ITERATIONS = "10,000";
 const STANDARD_ERROR = "±0.5%";
 const CI_95 = "±1.0%";
-const SAMPLE_SIZE = "n = 3 · CPBL 2026-05";
+const SAMPLE_SIZE = "n = 1 · CPBL 2026-05-21 起";
 
 export default function AuditPage() {
   return (

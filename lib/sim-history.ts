@@ -10,9 +10,9 @@ const STORAGE_KEY = "zone27_sim_history_v1";
 const MAX_ENTRIES = 10;
 
 export type SimHistoryEntry = {
-  /** Stable identifier for the matchup (e.g. cpbl-260519-01 or custom-<hash>) */
+  /** Stable identifier for the matchup (e.g. cpbl-260521-01 or custom-<hash>) */
   matchId: string;
-  /** Display label (e.g. "中信兄弟 vs 統一獅") */
+  /** Display label (e.g. "統一獅 vs 富邦悍將") */
   matchupName: string;
   /** Final convergence: home win % (0-100) */
   homePct: number;

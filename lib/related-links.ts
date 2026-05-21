@@ -173,6 +173,23 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
       title: "鐵律 · Buffett「track record visible」",
     },
   ],
+  "/roadmap": [
+    {
+      href: "/changelog",
+      kicker: "changelog",
+      title: "過去的事實 · git source of truth",
+    },
+    {
+      href: "/manifesto",
+      kicker: "manifesto",
+      title: "倒置宣言 · 為何公開「永遠不做」",
+    },
+    {
+      href: "/audit",
+      kicker: "audit",
+      title: "Model Report · DISCLOSURE 完整證據",
+    },
+  ],
   "/learn": [
     {
       href: "/lab",

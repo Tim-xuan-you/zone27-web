@@ -56,6 +56,7 @@ const FOOTER_GROUPS: FooterGroup[] = [
     links: [
       { label: "倒置宣言", href: "/manifesto" },
       { label: "鐵律", href: "/discipline" },
+      { label: "公開路線圖", href: "/roadmap" },
       { label: "版本紀錄", href: "/changelog" },
     ],
   },

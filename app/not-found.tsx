@@ -4,65 +4,132 @@ import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "404 — 這個頁面不在板上",
-  description: "您要找的頁面沒有出現在今日的賽程板上。",
+  title: "K · 三振 · 404 · ZONE 27",
+  description:
+    "這條 URL 不在 ZONE 27 的 ledger 上 — 可能是引擎還沒覆蓋、可能是 URL 已搬家、可能是手滑。三振也是統計的一部分。",
 };
+
+// ── ZONE 27 · Not-Found Page ───────────────────────────
+// 訪客打錯 URL / 點到已搬家的舊連結 / 從外部 stale link 過來,
+// 看到的不是 Next.js 預設 404,而是 brand-pure terminal-aesthetic
+// 三振卡。"K" 在棒球記錄符號中代表三振 — 用最 ZONE-27-specific
+// 的方式說「404」+ 用 K/9(引擎三大基礎指標之一)做主視覺。
+//
+// 設計原則(per 敢於突破 brand IP):
+//   - 不裝可愛(no oops / sorry / 😢)· 不用感嘆號
+//   - 用 sabermetric 符號(K · 三振)而不是通用「STRIKE THREE」棒球諺語
+//   - 4 個 canonical 路徑而不只是「回首頁」
+//   - Footer 自動帶上整站 trust chrome(per layout)
+// ─────────────────────────────────────────────────────
 
 export default function NotFound() {
   return (
     <div className="flex flex-col flex-1 min-h-screen">
       <Nav />
 
-      {/* ── 404 HERO ─────────────────────────────── */}
-      <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pt-32 pb-12 text-center flex-1 flex flex-col items-center justify-center">
-        <p className="font-mono text-gold/70 text-[10px] tracking-[0.45em] mb-8">
-          ERROR · ROUTE NOT FOUND
-        </p>
-
-        {/* The massive 4 0 4 */}
-        <div
-          className="font-mono tabular text-gold font-light leading-none tracking-[0.05em]"
-          style={{
-            fontSize: "clamp(120px, 20vw, 220px)",
-            textShadow: "0 0 80px rgba(212,175,55,0.35)",
-          }}
-        >
-          4 0 4
-        </div>
-
-        <h1 className="mt-10 text-2xl sm:text-3xl text-bone font-light tracking-tight">
-          這個頁面不在板上。
-        </h1>
-
-        <p className="mt-4 font-mono text-mute text-sm tracking-[0.3em]">
-          LIKE A WILD PITCH — OVERTHROWN THE ZONE.
-        </p>
-
-        <p className="mt-8 max-w-md mx-auto text-mute leading-relaxed">
-          您可能打錯了網址,或這個頁面已經被引退。回今日賽程板繼續看球。
-        </p>
-
-        {/* CTAs */}
-        <div className="mt-12 flex flex-wrap gap-4 justify-center">
-          <Link
-            href="/matches"
-            className="px-8 py-3 bg-gold text-navy text-xs tracking-[0.3em] hover:bg-gold-soft transition-colors font-medium"
+      <main id="main" className="flex-1">
+        <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pt-20 sm:pt-28 pb-20 sm:pb-28 text-center">
+          {/* Scoring symbol kicker · sabermetric literate */}
+          <p
+            lang="en"
+            className="font-mono text-gold/70 text-[10px] sm:text-xs tracking-[0.45em] mb-8"
           >
-            ← 回到今日賽事板
-          </Link>
-          <Link
-            href="/"
-            className="px-8 py-3 border border-gold/40 text-gold text-xs tracking-[0.3em] hover:bg-gold/10 transition-colors"
-          >
-            回首頁
-          </Link>
-        </div>
+            SCORING NOTATION · STRIKEOUT
+          </p>
 
-        {/* Tiny meta */}
-        <p className="mt-16 font-mono text-mute text-[10px] tracking-[0.3em]">
-          STRIKE THREE. YOU&apos;RE OUT.
-        </p>
-      </section>
+          {/* The massive "K" · gold tabular · the sabermetric symbol
+              for strikeout. Real baseball scorekeepers use K (forward)
+              for swinging K and ꓘ (reverse) for looking. We render
+              forward — universally readable as "letter K" by anyone,
+              with the sabermetric layer for those who know. */}
+          <p
+            className="font-mono text-gold tabular leading-none mb-4 select-none"
+            style={{
+              fontSize: "clamp(140px, 36vw, 320px)",
+              fontWeight: 300,
+              letterSpacing: "-0.04em",
+              textShadow: "0 0 80px rgba(212, 175, 55, 0.3)",
+            }}
+            aria-hidden="true"
+          >
+            K
+          </p>
+
+          <p
+            lang="en"
+            className="font-mono text-gold/60 text-xs sm:text-sm tracking-[0.4em] mb-12"
+          >
+            404 · OUT OF ZONE
+          </p>
+
+          {/* Honest explanation · brand tone */}
+          <h1 className="text-3xl sm:text-4xl text-bone font-light tracking-tight leading-snug mb-4 max-w-xl mx-auto">
+            這條 URL <span className="text-gold">不在 ledger 上</span>
+          </h1>
+          <p className="text-mute text-sm sm:text-base leading-relaxed max-w-md mx-auto mb-12">
+            可能是引擎還沒覆蓋、可能是 URL 已搬家、可能是手滑。
+            三振也是統計的一部分 — 我們不假裝它沒發生。
+          </p>
+
+          {/* Four canonical paths · brand IP entry points */}
+          <div className="flex flex-wrap gap-3 justify-center mb-14">
+            <Link
+              href="/"
+              className="px-6 py-2.5 border border-gold text-gold text-xs tracking-[0.3em] hover:bg-gold hover:text-navy transition-colors"
+            >
+              回首頁 →
+            </Link>
+            <Link
+              href="/lab"
+              className="px-6 py-2.5 border border-line/60 text-mute hover:text-gold hover:border-gold/40 text-xs tracking-[0.3em] transition-colors"
+            >
+              即時引擎 →
+            </Link>
+            <Link
+              href="/track-record"
+              className="px-6 py-2.5 border border-line/60 text-mute hover:text-gold hover:border-gold/40 text-xs tracking-[0.3em] transition-colors"
+            >
+              公開戰績 →
+            </Link>
+            <Link
+              href="/manifesto"
+              className="px-6 py-2.5 border border-line/60 text-mute hover:text-gold hover:border-gold/40 text-xs tracking-[0.3em] transition-colors"
+            >
+              倒置宣言 →
+            </Link>
+          </div>
+
+          {/* Secondary · for visitors who landed here from a stale share */}
+          <div className="pt-10 border-t border-line/40 max-w-md mx-auto">
+            <p
+              lang="en"
+              className="font-mono text-mute text-[10px] tracking-[0.35em] mb-4"
+            >
+              / IF YOU FOLLOWED A LINK
+            </p>
+            <p className="text-mute text-xs leading-relaxed">
+              所有 ZONE 27 路由的完整列表在{" "}
+              <Link
+                href="/changelog"
+                className="text-gold underline-offset-4 hover:underline"
+              >
+                /changelog
+              </Link>
+              。
+              真正過往連結的 source of truth 是{" "}
+              <a
+                href="https://github.com/Tim-xuan-you/zone27-web/commits/main"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gold underline-offset-4 hover:underline"
+              >
+                GitHub commits
+              </a>
+              。
+            </p>
+          </div>
+        </section>
+      </main>
 
       <Footer />
     </div>

@@ -161,7 +161,7 @@ export default async function MethodologyOgImage() {
           }}
         >
           <span style={{ color: "rgba(245,242,234,0.6)", display: "flex" }}>
-            9 sections · n=3 CPBL demo · honest limitations
+            10 sections · n=1 CPBL start · honest limitations
           </span>
           <span style={{ color: BRAND.gold, fontWeight: 500, display: "flex" }}>
             親手驗證 → /lab

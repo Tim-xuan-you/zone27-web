@@ -59,7 +59,7 @@ export default function MatchesPage() {
           </p>
         </div>
         <p className="mt-3 font-mono text-mute text-[10px] tracking-[0.25em]">
-          目前 stealth mode 階段,資料為示範用途;正式上線後將為當日真實 CPBL 賽程
+          目前 stealth mode 階段 · cpbl-260521-01 為 ZONE 27 第一筆真實 CPBL 截圖 ingestion · 每場引擎覆蓋的比賽以 phase badge 標示
         </p>
         <div className="mt-6 w-full h-px bg-line/60" />
       </section>
