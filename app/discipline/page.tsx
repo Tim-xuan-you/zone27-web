@@ -338,7 +338,7 @@ export default function DisciplinePage() {
               <Link href="/manifesto" className="text-gold hover:underline">
                 /manifesto
               </Link>{" "}
-              V「方法公開」)· 不取 · aesthetic > 實質(我們是量化品牌 · 不是視覺品牌)·
+              V「方法公開」)· 不取 · aesthetic {">"} 實質(我們是量化品牌 · 不是視覺品牌)·
               不取。<strong className="text-bone">取 craft + subtraction · 拒 personality + secrecy</strong>。
             </P>
           </RuleSection>

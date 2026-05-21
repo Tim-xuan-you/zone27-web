@@ -196,10 +196,12 @@ export default function RoadmapPage() {
         aria-labelledby="locked-heading"
         className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-16"
       >
+        {/* Round 18 motion polish · section-reveal scroll-driven CSS
+            animation extends /audit + /coverage + /manifesto pattern. */}
         <p
           lang="en"
           id="locked-heading"
-          className="font-mono text-gold text-[10px] tracking-[0.4em] mb-2"
+          className="font-mono text-gold text-[10px] tracking-[0.4em] mb-2 section-reveal"
         >
           / 01 · LOCKED
         </p>
@@ -242,7 +244,7 @@ export default function RoadmapPage() {
         <p
           lang="en"
           id="exploring-heading"
-          className="font-mono text-gold text-[10px] tracking-[0.4em] mb-2"
+          className="font-mono text-gold text-[10px] tracking-[0.4em] mb-2 section-reveal"
         >
           / 02 · EXPLORING
         </p>
@@ -278,7 +280,7 @@ export default function RoadmapPage() {
         <p
           lang="en"
           id="explicit-no-heading"
-          className="font-mono text-gold text-[10px] tracking-[0.4em] mb-2"
+          className="font-mono text-gold text-[10px] tracking-[0.4em] mb-2 section-reveal"
         >
           / 03 · BRAND BOUNDARIES · 不變的鐵律
         </p>

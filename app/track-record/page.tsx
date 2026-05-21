@@ -56,7 +56,10 @@ export default function TrackRecordPage() {
 
       {/* ── HERO ─────────────────────────────────── */}
       <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pt-20 pb-12">
-        <div className="flex items-baseline gap-3 mb-4 flex-wrap">
+        {/* Round 18 motion polish · section-reveal scroll-driven gold
+            hairline draws under the kicker. Native CSS · 0 JS · auto
+            prefers-reduced-motion safe via globals.css @media guard. */}
+        <div className="flex items-baseline gap-3 mb-4 flex-wrap section-reveal">
           <p
             lang="en"
             className="font-mono text-gold text-[10px] tracking-[0.45em]"
@@ -167,7 +170,7 @@ export default function TrackRecordPage() {
       <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-16">
         <p
           lang="en"
-          className="font-mono text-gold/70 text-[10px] tracking-[0.35em] mb-8"
+          className="font-mono text-gold/70 text-[10px] tracking-[0.35em] mb-8 section-reveal"
         >
           / LEDGER · NEWEST FIRST · 不刪不修飾
         </p>
@@ -207,7 +210,7 @@ export default function TrackRecordPage() {
       <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-16 border-t border-line/40 pt-12">
         <p
           lang="en"
-          className="font-mono text-gold/70 text-[10px] tracking-[0.35em] mb-6"
+          className="font-mono text-gold/70 text-[10px] tracking-[0.35em] mb-6 section-reveal"
         >
           / HOW WE GRADE
         </p>

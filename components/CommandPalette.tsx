@@ -11,7 +11,7 @@ import {
 
 // ── ZONE 27 · Command Palette ──────────────────────────
 // Premium-tier navigation primitive. Cmd-K / Ctrl-K opens a
-// modal with all 23 user-visible routes searchable in one place.
+// modal with all 24 user-visible routes searchable in one place.
 // Arrow keys navigate · Enter opens · Esc closes.
 //
 // Design principles (per [[zone27-disclosure-philosophy]]):

@@ -93,7 +93,7 @@ export default function Nav({ active }: { active?: NavKey }) {
         {/* Mobile · 2nd row: 4 secondary nav links + ⌕ palette trigger.
             Round 9 hid '更多 ↓' anchor (Apple/Stripe/Linear pattern).
             Round 12 funnel-audit: mobile visitors had NO way to access
-            the 23-route Cmd-K palette (CmdKTrigger was desktop-only).
+            the 24-route Cmd-K palette (CmdKTrigger was desktop-only).
             Skeptics on phones couldn't reach /manifesto · /audit ·
             /methodology without footer-digging. Adding a tiny ⌕ icon
             as the 5th item exposes verification routes without

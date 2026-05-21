@@ -261,7 +261,13 @@ function Section({
 }) {
   return (
     <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-16 pt-10 border-t border-line/40">
-      <div className="flex items-baseline gap-4 mb-2">
+      {/* Round 18 motion polish · section-reveal scroll-driven CSS
+          animation draws a soft gold hairline under the kicker as the
+          section scrolls into view. Native CSS animation-timeline ·
+          0 JS · respects prefers-reduced-motion via @media guard in
+          globals.css. Aligned with /audit + /coverage + /manifesto
+          sections which already use this pattern. */}
+      <div className="flex items-baseline gap-4 mb-2 section-reveal">
         <span className="font-mono text-gold/70 text-[10px] tracking-[0.35em]">
           / {no}
         </span>
