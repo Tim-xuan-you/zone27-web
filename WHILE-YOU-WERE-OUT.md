@@ -1,5 +1,6 @@
 # 🌙 您休息時 Claude 做了什麼
 
+> Tim · 2026-05-21 下午 · **Round 26 · /membership 自己的 OG card(4-tier ladder 視覺)+ 5 處 stale 24→25 routes refs 修 + related-links.ts 加 /membership entry(否則 RelatedReading 顯示空)**
 > Tim · 2026-05-21 下午 · **Round 25 · Tim 揭示「一般會員頁面在哪?創作者去哪發文?」 · NEW /membership route · 4-tier ladder 平等視覺權重 + Creator Permissions FAQ · Nav 「會員」href 改 /membership · /founders 保留為 Founders 27 deep dive**
 > Tim · 2026-05-21 下午 · **Round 24.2 · /founders inline FAQ 「等候名單階段」drift · reframe 為 dual-purpose 對齊 4-tier ladder**
 > Tim · 2026-05-21 下午 · **Round 24 · 主動 drift hunt · WaitlistForm kicker「創始會員 · 預售等候名單」+ email subject「NT$ 2,700 終身」reframe dual-purpose · post-Round-21+23 連帶清**

@@ -245,6 +245,28 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
       title: "品牌方法論 · 6 章節",
     },
   ],
+  // Round 26 · /membership 新 route(Round 25 ship)需要 RelatedReading
+  // entries · 否則 page 內 component 顯示空 array。3 個 sibling 選:
+  // /founders(自然下一步:Founders 27 deep dive)· /manifesto(為什麼
+  // 4-tier 結構 · 倒置 II MONETIZATION)· /track-record(物理 proof
+  // points 給 FREE TIER 訂閱者「為什麼相信這個 ladder」)。
+  "/membership": [
+    {
+      href: "/founders",
+      kicker: "founders",
+      title: "Founders 27 詳情頁 · 限量 270 · 終身",
+    },
+    {
+      href: "/manifesto",
+      kicker: "manifesto",
+      title: "倒置宣言 · 為什麼工具免費 · 身分付費",
+    },
+    {
+      href: "/track-record",
+      kicker: "track-record",
+      title: "公開戰績 · 訂閱前先看 N 場 PROVED",
+    },
+  ],
 };
 
 export function getRelatedLinks(currentPath: string): RelatedLink[] {
