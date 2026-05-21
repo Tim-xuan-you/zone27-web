@@ -23,6 +23,12 @@ const GH_COMMITS_URL =
 
 const MILESTONES: { date: string; title: string; detail: string }[] = [
   {
+    date: "2026-05-21 · Round 4",
+    title: "深度頁 audience-reframe · 工程美學 → 球迷語法 · /audit + /methodology compressed",
+    detail:
+      "Tim 反饋:「不只首頁雜 · 深度頁也是 · 不是每人都工程師」。Persona sharp call:我寫網站時 internalized 觀眾 = 「懷疑的科技記者 / 合規官 / 工程師」· Tim 真實觀眾 = 「硬核棒球迷想要 smart sport content」。Same truth · different audience grammar。Round 4 Phase 1 ship:/audit 8→6 sections (移除 BENCHMARK PERFORMANCE · KNOWN FAILURE MODES merged · LAST CALIBRATION RUN · MetaPair 6→3 items · BUILD chip 從 header → footer 小字)、/methodology 10→5 sections (移除 WHY BASEBALL · PLATE APPEARANCE MODEL · BASERUNNER PHYSICS · VALIDATION CLT proof · 重複的 ROADMAP)。Psychology backing:Cognitive Load Theory (Sweller 1988) · Information Foraging (Pirolli & Card 1995) · Choice Overload (Iyengar & Lepper 2000) · Empathy Gap。工程細節留 GitHub · 網站留 fan-relevant。/manifesto · /coverage · /discipline · /roadmap 不動 — 那些是 opt-in 深度頁 (NN/g Berkshire annual letter pattern)。Memory 寫入 feedback-zone27-audience-fans-not-engineers 給未來 Claude session。",
+  },
+  {
     date: "2026-05-21 · Round 3",
     title: "Apple-grade 首頁壓縮 · 8 sections → 3 · NN/g research-validated",
     detail:

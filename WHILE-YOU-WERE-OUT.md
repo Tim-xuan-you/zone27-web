@@ -1,5 +1,6 @@
 # 🌙 您休息時 Claude 做了什麼
 
+> Tim · 2026-05-21 PM · **Round 4 · 深度頁 audience-reframe · 工程美學 → 球迷語法**
 > Tim · 2026-05-21 PM · **Round 3 · Apple-grade 首頁壓縮 · 8 sections → 3**
 > Tim · 2026-05-21 接續 · **Round 2 · 自主多輪迭代 · 4 commits**
 > Tim · 2026-05-21 開盤 · **Day 3 · /track-record + match lifecycle**
@@ -8,7 +9,76 @@
 
 ---
 
-## 🍎 Round 3 (2026-05-21 PM) · Apple-grade 首頁壓縮 · NN/g research-validated
+## 🪶 Round 4 (2026-05-21 PM 接續) · 深度頁 audience-reframe · 工程美學 → 球迷語法
+
+Tim Round 3 後再 push:「不只首頁雜 · 深度頁也是 · 不是每人都工程師 · 多 psychology 角度分析」。
+
+Persona lens sharp call:
+> **我寫網站時 internalized 觀眾 = 「懷疑的科技記者 / 合規官 / 工程師」· Tim 真實觀眾 = 「硬核棒球迷想要 smart sport content」**。
+> Brand IP「publish everything」沒錯 · 但 FORMAT 必須對齊 fan grammar 不是 academic-model-card aesthetic。
+> Same truth · different audience grammar。
+
+Psychology backing:
+- **Cognitive Load Theory** (Sweller 1988):工作記憶 4-9 chunks
+- **Information Foraging** (Pirolli & Card 1995):low-value 頁面被棄
+- **Choice Overload** (Iyengar & Lepper 2000):6 options conversion 高 10x
+- **Empathy Gap**:builder 內隱讀者跟自己有相同 context
+
+### Round 4 Phase 1 ship list (commit e7da2f5)
+
+**/audit 8 sections → 6 sections:**
+- ❌ Section 04 BENCHMARK PERFORMANCE(CLT proof + SE math · 工程師東西)
+- ❌ Section 05 KNOWN FAILURE MODES(merged 進 Section 03 排除清單)
+- ❌ Section 07 LAST CALIBRATION RUN(version meta-data · 跟 LAST_REVIEWED chip 重複)
+- MetaPair 從 6 items 縮到 3(drop ITERATIONS · STANDARD ERROR · BUILD)
+- BUILD chip 從 header → 移到 page footer 小字(只給 die-hard engineers)
+- Renumber:06→05 · 08→06
+
+**/methodology 10 sections → 5 sections:**
+- ❌ Section 01 WHY BASEBALL(discrete events / Markov / agent-based theory)
+- ❌ Section 03 PLATE APPEARANCE MODEL(clamp + Poisson math)
+- ❌ Section 04 BASERUNNER PHYSICS(推進條件機率 table)
+- ❌ Section 05 VALIDATION(CLT + SE derivation)
+- ❌ Section 08 ROADMAP(duplicate · /roadmap 已存在)
+- shareablequote with SE formula removed
+- Section 09 REFERENCES(6 books + 3 sites)→ compressed inline
+- Renumber:02→01 · 06→02 · 07→03 · 09→04
+
+Kept(fan-relevant):
+- ABSTRACT(compressed)
+- HOW IT WORKS(4-step + 1 code snippet · 仍有引擎流程)
+- WHAT IT CAN'T SEE(was LIMITATIONS · honesty signal · /audit + /methodology 都留)
+- TRY IT(MatchSimulator embed · interactive · 球迷喜歡)
+- WHAT'S NEXT(roadmap link + 3 cited references inline)
+- DISCLOSURE PHILOSOPHY · /audit 06 · CANONICAL [[zone27-disclosure-philosophy]]
+
+工程細節(simulator.ts · Monte Carlo proof · clamp boundaries)永遠在 GitHub · 不在網站。
+
+### Round 4 不動的頁面(opt-in 深度)
+
+按 NN/g research(Berkshire annual letter pattern)· depth-after-opt-in 是 OK 的。Round 3 homepage minimalism 已 hide 它們 in first-touch path 外 · 訪客點進去 = 自願深度。
+
+不壓:**/manifesto** · **/coverage** · **/discipline** · **/roadmap** · **/track-record** · **/founders** · **/faq** · **/glossary** · **/learn** · **/about** · **/signal-board** · **/leaderboard**。
+
+這些頁面在 Round 1-3 已完成 fan-facing reframing(或本來就 fan-facing) · Round 4 不再二次處理 · 避免品牌 IP 過度刪減。
+
+### Round 4 brand IP 強化
+
+1. **Engineering aesthetic 消除** 從首頁(Round 3)→ 深度頁(Round 4)· 兩層保護
+2. **「方法公開」brand IP 不破** · /audit S06 disclosure-philosophy 保留 · GitHub 全部開源 · 只是不再「拍給工程師看」
+3. **Memory 寫入** [[feedback-zone27-audience-fans-not-engineers]] · 未來新 Claude session 開首頁時會知道 anti-pattern signals(CLT 公式 · VALIDATION section · BUILD chip in hero)
+
+### Round 4 您回來建議流程
+
+1. `npm run dev` → 開 /audit + /methodology 看新 compress
+2. /audit MetaPair 從 6 items → 3 items(BUILD chip 移到 footer 小字)
+3. /methodology 從 10 sections → 5 sections(沒有 Poisson 公式了)
+4. 試打 ⌘K「audit」/ 「methodology」確認頁面仍可達
+5. 其他頁面(/manifesto · /coverage · /discipline 等)維持不動 — 那些是您「想看就點」的 opt-in 深度
+
+---
+
+
 
 您 push 回來「網站好雜...走極簡風...Apple...心理學怎麼看?」· 我用 persona lens 給一句 sharp call:
 
