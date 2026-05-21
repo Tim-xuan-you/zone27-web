@@ -171,6 +171,60 @@ const BATTING: Stat[] = [
   },
 ];
 
+// ── ZONE 27 自有詞彙(Round 13 新增) ──────────────
+// Defines terms ZONE 27 coined or specifically uses with our own
+// semantic loading. These are NOT industry-standard sabermetrics
+// (those live in PITCHING / BATTING / ADVANCED above) — these are
+// the words our trust artifacts depend on, defined here so the
+// vocabulary is owned. Visitors arguing using OUR terms market
+// the brand for free (FanGraphs pattern · "the site that owns
+// vocabulary owns the discourse").
+//
+// Brand IP per [[zone27-disclosure-philosophy]]: every term cited
+// across /audit · /methodology · /track-record · /matches/[gameId]
+// has a canonical definition here · no hidden vocabulary.
+const Z27_LEXICON: Stat[] = [
+  {
+    abbr: "PROVED",
+    enFull: "Engine Verdict · Favorite Won",
+    zh: "引擎言中",
+    body: "賽前引擎指向的 favorite(winRate > 50%)在實際比賽中獲勝。記入 /track-record ledger 一行,gold 標記。51% PROVED 仍是 PROVED,但 ledger 會顯示「僅 51%→WIN」讓視覺權重誠實反映 confidence。",
+    bench: "視覺權重等同 DIVERGED · 不過濾、不修飾、不重新加權",
+    note: "Calibration verdict 三種之一(其他:DIVERGED · PUSH)。",
+  },
+  {
+    abbr: "DIVERGED",
+    enFull: "Engine Verdict · Favorite Lost",
+    zh: "引擎落空",
+    body: "賽前引擎指向的 favorite 在實際比賽中輸了。等大等亮列入 /track-record · loss color 標記 · 永遠不刪。引擎方向落空是品牌 IP 的物理產出 — 不藏 miss 是 disclosure philosophy 的具體 demonstration。",
+    bench: "視覺權重等同 PROVED · 不藏不修飾",
+    note: "/track-record 存在的核心理由 · 「方法公開」物理證據。",
+  },
+  {
+    abbr: "PUSH",
+    enFull: "Engine Verdict · Tie or No Favorite",
+    zh: "平手或無 favorite",
+    body: "兩種情境:(a) 實際比賽平局(罕見;CPBL/MLB 鮮少出現)(b) 引擎輸出剛好 50/50,無 favorite 可驗證。Mute color 標記,不算 PROVED 也不算 DIVERGED — verdict 二元 binary 之外的第三狀態。",
+    bench: "罕見 · 視覺權重最低",
+  },
+  {
+    abbr: "SAMPLE DEBT",
+    enFull: "Sample Size Below Statistical Threshold",
+    zh: "樣本債",
+    body: "ZONE 27 自有詞彙。N < 30 時,PROVED rate 受 sample bias 影響大,任何百分比皆需打折判讀。/track-record 顯示「樣本債警告」直到累積 N≥30。這個詞框住「我們知道我們的樣本還不夠 — 但會誠實計數累進」的承諾,而非藏 metric 直到 statistically safe 才公開。",
+    bench: "解除門檻 · N ≥ 30",
+    note: "Bill James 1985 sabermetrics 文化 · 從不掩飾樣本不足。",
+  },
+  {
+    abbr: "RECEIPT",
+    enFull: "Final Score Ingestion · Engine Receipt",
+    zh: "引擎收據",
+    body: "賽後實際比分被 Tim 親手截圖 + 寫入 lib/matches.ts finalResult · 觸發 /track-record ledger 新增一行 + /matches/[gameId] 顯示 ENGINE RECEIPT 區塊 + HeroLiveCard badge 切換為 PROVED/DIVERGED。完整流程詳見 docs/MANUAL-ONBOARDING.md FINAL SCORE INGEST 5-step。",
+    bench: "Tim 一人手工 · 不外包 · 不自動化(per coverage philosophy)",
+    note: "/track-record 物理產出 · 每場一張 receipt。",
+  },
+];
+
 const ADVANCED: Stat[] = [
   {
     abbr: "WAR",
@@ -228,10 +282,25 @@ const ALL_GROUPS = [
   { key: "pitching", label: "PITCHING", zh: "投手", stats: PITCHING },
   { key: "batting", label: "BATTING", zh: "打者", stats: BATTING },
   { key: "advanced", label: "ADVANCED · STATCAST", zh: "進階指標", stats: ADVANCED },
+  // Round 13 brand-IP amplification (Agent A #4 · FanGraphs glossary moat
+  // pattern): proprietary terms get their own group at the bottom · doesn't
+  // touch the "27 種" branding (industry stats stay at 27) · gives ZONE 27-
+  // coined vocabulary a canonical home. Fans arguing using OUR words market
+  // the brand for free.
+  {
+    key: "z27-lexicon",
+    label: "Z27 LEXICON",
+    zh: "ZONE 27 自有詞彙",
+    stats: Z27_LEXICON,
+  },
 ] as const;
 
 export default function GlossaryPage() {
-  const total = PITCHING.length + BATTING.length + ADVANCED.length;
+  // Industry stats (27) intentionally separate from Z27 LEXICON so the
+  // "27 種" branding stays integer-perfect. Lexicon is additive,
+  // appears as 4th group below, not in the headline count.
+  const industryTotal = PITCHING.length + BATTING.length + ADVANCED.length;
+  const z27Total = Z27_LEXICON.length;
 
   return (
     <div className="flex flex-col flex-1 min-h-screen">
@@ -242,7 +311,7 @@ export default function GlossaryPage() {
       {/* ── HERO ─────────────────────────────────── */}
       <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pt-20 pb-12 text-center">
         <p className="font-mono text-gold text-[10px] tracking-[0.45em] mb-8">
-          GLOSSARY · {total} STATS
+          GLOSSARY · {industryTotal} STATS + {z27Total} Z27 LEXICON
         </p>
         <h1 className="text-4xl sm:text-5xl md:text-6xl font-light leading-[1.1] tracking-tight text-bone">
           <span className="text-gold tabular">27</span>{" "}
@@ -256,6 +325,14 @@ export default function GlossaryPage() {
         </p>
         <p className="mt-4 max-w-xl mx-auto font-mono text-gold/70 text-[10px] tracking-[0.3em]">
           27 STATS · 27 OUTS · 27 IS THE LANGUAGE OF PRECISION
+        </p>
+        <p className="mt-5 max-w-xl mx-auto font-mono text-mute/70 text-[10px] tracking-[0.25em] leading-relaxed">
+          + {z27Total} 個 ZONE 27 自有詞彙(PROVED · DIVERGED · PUSH · SAMPLE DEBT · RECEIPT)
+          <span className="block mt-1">
+            <a href="#z27-lexicon" className="text-gold hover:underline">
+              直接跳到 Z27 LEXICON →
+            </a>
+          </span>
         </p>
       </section>
 

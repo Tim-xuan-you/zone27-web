@@ -488,16 +488,40 @@ function EmptyLedger() {
       <h3 className="text-2xl text-bone font-light tracking-tight mb-3">
         第一筆 entry 預定今晚收錄
       </h3>
-      <p className="text-mute text-sm leading-relaxed max-w-md mx-auto mb-6">
+      <p className="text-mute text-sm leading-relaxed max-w-md mx-auto mb-8">
         ZONE 27 不 backfill 歷史預測 — 沒有 cherry-picked 過往 ·
         沒有事後找出引擎曾經言中的場次。
         Ledger 從 <span className="text-gold">cpbl-260521-01</span>{" "}
         統一 vs 富邦 開始記錄 · 賽後最終比分 ingest 後第一筆會亮起。
       </p>
-      <p className="font-mono text-mute/70 text-[10px] tracking-[0.3em] tabular">
-        STARTING DATE · 2026-05-21 · CPBL · 新莊 18:35
-      </p>
-      <div className="mt-8 flex flex-wrap gap-3 justify-center">
+
+      {/* Round 13 cinematic moment · FIRST PITCH → FIRST RECEIPT
+          visual journey. Brand-honest timestamp (NO countdown · NO fake
+          urgency · these are real wall-clock anchors). 18:35 = game
+          start · 22:00+ = Tim's typical post-game ingest window. */}
+      <div className="flex items-center justify-center gap-3 sm:gap-5 flex-wrap font-mono text-[10px] tabular tracking-[0.28em]">
+        <div className="text-center">
+          <p className="text-gold/80">FIRST PITCH</p>
+          <p className="text-bone mt-1">18:35 TPE</p>
+          <p className="text-mute/60 text-[9px] tracking-[0.2em] mt-0.5">2026-05-21 · 新莊</p>
+        </div>
+        <span aria-hidden="true" className="text-mute/40 text-base hidden sm:inline">→</span>
+        <span aria-hidden="true" className="text-mute/40 text-base sm:hidden">↓</span>
+        <div className="text-center">
+          <p className="text-gold/80">ENGINE RUN</p>
+          <p className="text-bone mt-1">18:30 → 22:00 TPE</p>
+          <p className="text-mute/60 text-[9px] tracking-[0.2em] mt-0.5">10K Monte Carlo · 賽前公開鎖定</p>
+        </div>
+        <span aria-hidden="true" className="text-mute/40 text-base hidden sm:inline">→</span>
+        <span aria-hidden="true" className="text-mute/40 text-base sm:hidden">↓</span>
+        <div className="text-center">
+          <p className="text-gold/80">FIRST RECEIPT</p>
+          <p className="text-bone mt-1">22:00+ TPE</p>
+          <p className="text-mute/60 text-[9px] tracking-[0.2em] mt-0.5">PROVED ✓ 或 DIVERGED ✕</p>
+        </div>
+      </div>
+
+      <div className="mt-10 flex flex-wrap gap-3 justify-center">
         <Link
           href="/matches/cpbl-260521-01"
           className="px-6 py-2.5 border border-gold text-gold text-xs tracking-[0.3em] hover:bg-gold hover:text-navy transition-colors"
