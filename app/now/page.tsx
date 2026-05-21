@@ -33,9 +33,39 @@ export const metadata: Metadata = {
 // ─────────────────────────────────────────────────────
 
 const LAST_UPDATED = "2026-05-21";
-const CYCLE = "Round 28-29 · 2026-05-21 evening · 同日 6+ waves";
+const CYCLE = "Round 28-29 · 2026-05-21 evening · 同日 10+ waves";
 
 const SHIPPED_THIS_CYCLE: { title: string; body: string; href?: string }[] = [
+  // ── Round 29 Wave 10 ships(2026-05-21 evening · agent-research-driven)──
+  {
+    title: "[R29 W10C] /founders 「THIS ISN'T A CHECKOUT」 handshake framing",
+    body: "Agent 研究 Pattern #3 · Spence 1973 signaling + Cialdini commitment + 2026 luxury-friction-design:「不解釋 friction 而道歉 → 解釋 friction 為什麼是 the product itself」。短簽名 Tim note 在 /founders「您不是在買引擎」section 後加:「銀行匯款 not Apple Pay · 是刻意的 · 這不是 checkout · 是 handshake · Apple Pay 一秒鐘的 commitment 跟 10 分鐘手工匯款的 commitment 不是同一個東西 · 我們選後者 · 因為它 filter 的是對的人」。Costly Signaling 從 operational detail 升 brand statement。",
+    href: "/founders",
+  },
+  {
+    title: "[R29 W10C] HeroLiveCard tertiary CTA Patek specificity",
+    body: "Agent 研究 Pattern #1 · Lead Alchemists + BowTied Life 2026 conversion research:specific unit number 比 aggregate「263 / 270 remaining」conversion lift。原本「想成為 263/270 位之一?」改「想成為 #008?」 — identity stamp 取代 scarcity pressure。Title attribute 保留 aggregate context 給 hover · /founders /leaderboard 仍可看 remaining count。",
+    href: "/",
+  },
+  {
+    title: "[R29 W10A] HeroLiveCard today-live PhaseBadge shimmer",
+    body: "1-line polish fix · today-pregame badge 有 shimmer · today-live badge 沒有(反直覺 · LIVE 應該比 PREGAME 視覺強度更高)。Tonight 18:35-22:00 cpbl-260521-01 game window · LIVE badge 現在會 subtle 脈動 · brand「engine is alive during the game」visual signal · 22:00+ Tim ingest 後 phase 自動切換 final · shimmer 停 · 物理時刻 visual transition 更明顯。",
+  },
+  // ── Round 29 Wave 9 ship ──
+  {
+    title: "[R29 W9] ArticleMeta consistency across 5 long-form trust docs",
+    body: "Round 28 Wave 2C 加 ArticleMeta 到 7 trust docs · Wave 9 補完剩 5 個 long-form:/manifesto(14 min)· /discipline(14 min)· /about(8 min)· /learn(5 min)· /privacy(6 min)。12 trust artifact pages 全帶 reading-time chip · 跟原有 visual rhythm 統一 · 不是「加新東西」 · 是「補上應該已經有的」consistency closure。",
+  },
+  // ── Round 29 Wave 8 ship ──
+  {
+    title: "[R29 W8] Production audit fixes(1 agent + self-audit · 4 bugs caught)",
+    body: "派 Explore agent 深度 audit Round 28-29 ships · 17 items · 15 clean · 2 🟡 MEDIUM · 「safe to ship tonight 🎯」。Ship 4 fixes:(1) /admin waitlistCount === -1 graceful fallback(原本顯示「-1 個 email」現在顯示「—」+「Supabase RPC 暫時不可達」)·(2) /faq#mlm anchor self-found broken(QAEntry 沒 id 屬性 · 加 anchorId prop)·(3) FirstReceiptHero defensive aiConfidence ?? 0 ·(4) RoadmapVotingPanel ▲▼ tap targets 36px → 40px(Apple HIG)。",
+  },
+  // ── Round 29 Wave 7 ship ──
+  {
+    title: "[R29 W7] Self-audit · bug fix + visible polish + docs backfill",
+    body: "13 commits 後真實 self-audit。Bug fix:RoadmapVotingPanel 初次 hydration 觸發 false-positive「✓ saved local」flash · 加 hydrated flag 只在 hydration done 後 persist。Polish:/track-record HERO badge 「START · N=0」 → conditional「WAITING · N=0」 with shimmer + glow-gold + 強 border · 視覺 continuity with EmptyLedger「waiting 第一筆」framing · N≥1 後切回正常 earned state。Docs backfill:WHILE-YOU-WERE-OUT.md Wave 4-6 detail + TODO.md drift。",
+  },
   // ── Round 29 Wave 6 ship(2026-05-21 evening · post-Wave-5)──
   {
     title: "[R29 W6] /lab Run Differential Histogram · score-level uncertainty",
@@ -145,6 +175,11 @@ const DISCOVERED_THIS_CYCLE: { title: string; body: string }[] = [
 ];
 
 const UNRESOLVED: { title: string; body: string }[] = [
+  // ── Round 29 Wave 10B agent anti-pattern flag ──
+  {
+    title: "[R29 W10] 「Launch loudly to warm list」playbook · permanently wrong for ZONE 27",
+    body: "Agent 主動 flag · 2026 #1 indie launch playbook(Tom Orbach $50K/72h · 70% revenue in 72 hours · warm 5K+ email list blitz)wrong for ZONE 27:(1) stealth axiom forbid「loud」half ·(2) audience axiom(hardcore baseball fans 不在 IndieHackers Twitter crowd)。Right shape:slow trickle to #270 over 6-18 months · /founders 第 1 天跟第 400 天看起來一樣 · just a different number · slowness IS the curation proof。寫入 brand permanent decision · 將來如果想 launch-blitz 先回看這條。",
+  },
   // ── Round 29 new unresolved ──
   {
     title: "[R29] FREE TIER auth + cloud sync · Phase 1 Q3 2026 target",
