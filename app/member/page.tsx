@@ -7,6 +7,13 @@ import FounderSignOff from "@/components/FounderSignOff";
 import ArticleMeta from "@/components/ArticleMeta";
 import MemberDashboardPreview from "@/components/MemberDashboardPreview";
 import { getSession } from "@/lib/supabase/server";
+import { readFollowsFromMeta } from "@/lib/follows";
+import {
+  getMatchById,
+  getMatchPhase,
+  getCalibration,
+  type Match,
+} from "@/lib/matches";
 
 export const metadata: Metadata = {
   title: "Member · 您的引擎時間軸 · FREE TIER dashboard preview",
@@ -50,6 +57,15 @@ export default async function MemberPage({
   const params = await searchParams;
   const justArrived = params.welcome === "true";
   const email = session?.user.email ?? null;
+  // Round 30 Wave 6 · pull followed match IDs from user_metadata · server-
+  // side render so logged-in members see their follows list immediately ·
+  // anonymous visitors see empty array (no UI for follows section)。
+  const followIds = readFollowsFromMeta(
+    session?.user.user_metadata as Record<string, unknown> | undefined
+  );
+  const followedMatches = followIds
+    .map((id) => getMatchById(id))
+    .filter((m): m is Match => !!m);
 
   return (
     <div className="flex flex-col flex-1 min-h-screen">
@@ -148,6 +164,55 @@ export default async function MemberPage({
             </div>
           )}
 
+          {/* ── Round 30 Wave 6 · FIRST-ACTION ONBOARDING ───
+              當 logged-in 但還沒 follow 任何賽事 · 顯示大 CTA「您的第一
+              個動作」指 /matches。 Day One「first journal entry」 / Linear
+              「create first ticket」 / HEY「write first email」same pattern。
+              已 follow 過的 logged-in user 不顯示此 block · 改顯示下方
+              follows list。 */}
+          {session && followedMatches.length === 0 && (
+            <div className="mt-6 bg-slate/40 border-2 border-gold/60 glow-soft p-6 sm:p-8">
+              <p
+                lang="en"
+                className="font-mono text-gold text-[10px] tracking-[0.45em] mb-3 shimmer"
+              >
+                / YOUR FIRST ACTION · 第一個動作
+              </p>
+              <h2 className="text-2xl sm:text-3xl text-bone font-light tracking-tight leading-snug mb-4">
+                Follow 您的第一場 ZONE 27 賽事
+              </h2>
+              <p className="text-mute text-sm sm:text-base leading-relaxed mb-5 max-w-2xl">
+                您剛註冊 FREE TIER · 但 dashboard 是空的。
+                <strong className="text-bone"> Day-1 retention 的黃金一招</strong>
+                ·{" "}
+                <strong className="text-bone">
+                  Follow 一場 ZONE 27 公開預測過的賽事
+                </strong>{" "}
+                · 賽後 PROVED / DIVERGED 自動進您 dashboard · 您的
+                personal calibration mirror 從這場開始累積。
+              </p>
+              <div className="flex flex-wrap gap-3">
+                <Link
+                  href="/matches"
+                  className="inline-block px-6 py-3 bg-gold text-navy font-mono text-xs tracking-[0.3em] hover:bg-gold-soft transition-colors"
+                >
+                  → 今日賽事板 · follow 第一場
+                </Link>
+                <Link
+                  href="/track-record"
+                  className="inline-block px-6 py-3 border border-gold/50 text-gold font-mono text-xs tracking-[0.3em] hover:bg-gold/10 transition-colors"
+                >
+                  → 引擎過去戰績 ledger
+                </Link>
+              </div>
+              <p className="font-mono text-mute/60 text-[10px] tracking-[0.25em] mt-5 leading-relaxed">
+                ▸ Follow = explicit 動作 · 不是被動 recommendation algorithm
+                <br />
+                ▸ 您 follow 哪場是您的事 · 我們不推薦 · 不排名 · 0 tracking
+              </p>
+            </div>
+          )}
+
           {/* ── Round 30 Wave 5 · CTA to /login if not authenticated ── */}
           {!session && (
             <div className="mt-6 bg-slate/40 border border-gold/40 p-5 sm:p-6">
@@ -184,6 +249,52 @@ export default async function MemberPage({
         </section>
 
         <div className="mx-auto w-32 gold-line mb-12" />
+
+        {/* ── Round 30 Wave 6 · YOUR FOLLOWED MATCHES ───
+            Logged-in 會員 + 有 follow 過時顯示。 每行 = 一場 follow ·
+            phase chip + verdict chip(if final)+ score(if final)+
+            連結到 /matches/[gameId]。 Endowment Effect cranked — 您
+            手動 follow 的 collection · 累積 = 您的 trophy。 */}
+        {session && followedMatches.length > 0 && (
+          <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-12">
+            <div className="flex items-baseline justify-between mb-6 flex-wrap gap-3">
+              <p
+                lang="en"
+                className="font-mono text-gold text-[10px] tracking-[0.45em]"
+              >
+                / YOUR FOLLOWED MATCHES · 您 follow 的 {followedMatches.length} 場
+              </p>
+              <Link
+                href="/matches"
+                className="font-mono text-mute hover:text-gold text-[10px] tracking-[0.3em] underline-offset-4 hover:underline transition-colors"
+              >
+                + follow 更多 · /matches
+              </Link>
+            </div>
+            <div className="border border-line/60 bg-slate/30">
+              {followedMatches.map((m, i) => (
+                <FollowedMatchRow
+                  key={m.id}
+                  match={m}
+                  isFirst={i === 0}
+                  isLast={i === followedMatches.length - 1}
+                />
+              ))}
+            </div>
+            <p className="font-mono text-mute/70 text-[10px] tracking-[0.25em] mt-4 leading-relaxed">
+              ▸ 賽後 finalized 的場 · verdict(PROVED ✓ / DIVERGED ✕)在每行顯示
+              <br />
+              ▸ 您 personal calibration mirror 從這些 followed-and-finalized
+              matches 累積{" "}
+              <Link
+                href="/member/calibration"
+                className="text-gold underline-offset-4 hover:underline"
+              >
+                /member/calibration
+              </Link>
+            </p>
+          </section>
+        )}
 
         {/* ── PSYCHOLOGY-DRIVEN DASHBOARD PREVIEW ── */}
         <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-16">
@@ -402,6 +513,108 @@ export default async function MemberPage({
 }
 
 // ── Sub-components ─────────────────────────────────────
+
+// Round 30 Wave 6 · One row in the「您 follow 的賽事」list on /member。
+// Server-rendered(no client state needed since auth + follows already
+// read server-side)· phase + verdict chip + score(if final)· entire
+// row links to /matches/[gameId]。 Endowment Effect visual:gold-tinted
+// hover · 每場 felt-as-owned。
+function FollowedMatchRow({
+  match,
+  isFirst,
+  isLast,
+}: {
+  match: Match;
+  isFirst: boolean;
+  isLast: boolean;
+}) {
+  const phase = getMatchPhase(match);
+  const calibration = getCalibration(match);
+  const fr = match.finalResult;
+  const homeFav = match.home.winRate >= match.away.winRate;
+
+  const verdictColor = {
+    proved: "text-gold border-gold/60",
+    diverged: "text-loss border-loss/60",
+    push: "text-mute border-mute/60",
+  };
+  const verdictLabel = {
+    proved: "✓ PROVED",
+    diverged: "✕ DIVERGED",
+    push: "= PUSH",
+  };
+
+  return (
+    <Link
+      href={`/matches/${match.id}`}
+      className={`block px-5 py-4 hover:bg-gold/5 transition-colors ${
+        isLast ? "" : "border-b border-line/40"
+      } ${isFirst ? "" : ""}`}
+    >
+      <div className="flex items-baseline justify-between gap-3 flex-wrap mb-2">
+        <p className="font-mono text-mute text-[10px] tracking-[0.25em] tabular">
+          {match.date} · {match.startTime}
+        </p>
+        {fr && calibration ? (
+          <span
+            lang="en"
+            className={`font-mono text-[10px] tracking-[0.25em] px-1.5 py-0.5 border ${verdictColor[calibration]}`}
+          >
+            {verdictLabel[calibration]}
+          </span>
+        ) : phase === "today-live" ? (
+          <span
+            lang="en"
+            className="font-mono text-[10px] tracking-[0.25em] px-1.5 py-0.5 border border-gold text-gold shimmer"
+          >
+            LIVE
+          </span>
+        ) : phase === "today-pregame" ? (
+          <span
+            lang="en"
+            className="font-mono text-[10px] tracking-[0.25em] px-1.5 py-0.5 border border-gold text-gold"
+          >
+            TODAY · 今晚開賽
+          </span>
+        ) : phase === "future" ? (
+          <span
+            lang="en"
+            className="font-mono text-[10px] tracking-[0.25em] px-1.5 py-0.5 border border-gold/60 text-gold/80"
+          >
+            PREVIEW
+          </span>
+        ) : (
+          <span
+            lang="en"
+            className="font-mono text-[10px] tracking-[0.25em] px-1.5 py-0.5 border border-mute/60 text-mute"
+          >
+            ARCHIVED
+          </span>
+        )}
+      </div>
+      <p className="text-bone text-base sm:text-lg font-light leading-snug">
+        <span className={homeFav ? "text-gold" : ""}>{match.home.name}</span>
+        <span className="text-mute mx-2 text-xs">vs</span>
+        <span className={!homeFav ? "text-gold" : ""}>{match.away.name}</span>
+      </p>
+      <div className="mt-2 flex items-baseline justify-between flex-wrap gap-2">
+        <p className="font-mono text-mute text-[10px] tracking-[0.2em] tabular">
+          ENGINE · {homeFav ? match.home.winRate : match.away.winRate}% ·{" "}
+          {homeFav ? match.home.en : match.away.en} 領先
+        </p>
+        {fr ? (
+          <p className="font-mono text-bone text-sm tabular">
+            FINAL · {fr.homeScore}:{fr.awayScore}
+          </p>
+        ) : (
+          <p className="font-mono text-mute/60 text-[10px] tracking-[0.2em]">
+            賽後 receipt 自動入帳
+          </p>
+        )}
+      </div>
+    </Link>
+  );
+}
 
 // Round 30 Wave 2 · 3-col member-system comparison card.
 // Brand-IP focused · NOT a feature-arms-race。 Each card surfaces 4 axes:

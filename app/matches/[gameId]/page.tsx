@@ -16,6 +16,7 @@ import {
 } from "@/lib/matches";
 import StatTerm from "@/components/StatTerm";
 import RelatedReading from "@/components/RelatedReading";
+import FollowMatchButton from "@/components/FollowMatchButton";
 import {
   FOUNDERS_TOTAL,
   FOUNDERS_CLAIMED,
@@ -149,6 +150,20 @@ export default async function MatchDetailPage({
         <div className="mt-8 flex items-center justify-between font-mono text-[10px] tracking-[0.3em] text-mute">
           <span>{m.venue}</span>
           <span>FIRST PITCH · {m.startTime}</span>
+        </div>
+
+        {/* ── Round 30 Wave 6 · FOLLOW BUTTON ───────────────
+            First unlock feature for FREE TIER members(per Tim 4th
+            canary「使用 · 解鎖功能」)。 Anonymous visitors 看「→ 登入
+            解鎖 FOLLOW」連到 /login(帶 next param 登入後回此頁)。
+            Logged-in 看「☆ FOLLOW」 / 「★ FOLLOWED」 toggle。 賽後
+            這場 finalized 進您 /member follows list · /member/calibration
+            personal mode(Round 30+)的資料 source。 */}
+        <div className="mt-6 flex items-center justify-between flex-wrap gap-3 pt-4 border-t border-line/40">
+          <p className="font-mono text-mute/80 text-[10px] tracking-[0.3em] leading-snug">
+            ★ Follow 這場 · 賽後 receipt 自動進您 <span lang="en">/member</span>
+          </p>
+          <FollowMatchButton matchId={m.id} />
         </div>
       </section>
 

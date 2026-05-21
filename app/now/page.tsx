@@ -33,9 +33,15 @@ export const metadata: Metadata = {
 // ─────────────────────────────────────────────────────
 
 const LAST_UPDATED = "2026-05-21";
-const CYCLE = "Round 28-30 · 2026-05-21 late evening · 同日 21+ waves · Phase 1 auth 已 ship";
+const CYCLE = "Round 28-30 · 2026-05-21 late evening · 同日 22+ waves · Phase 1 auth + Follow ship";
 
 const SHIPPED_THIS_CYCLE: { title: string; body: string; href?: string }[] = [
+  // ── ★ Round 30 Wave 6 · Follow Match · first unlock feature ──
+  {
+    title: "[R30 W6] ★ Follow Match · first unlock feature · 4th canary fire 後 ship 真實 functionality",
+    body: "Tim 第 4 次 canary:「我要現在就能讓所有人註冊!不用等!使用、解鎖功能?」 = W5 /login ship 了 · 但登入後跟 anon visitor 看到一樣的 preview · 「unlock」是空話。 Sharp call:per 2026 frontier first-action pattern(Day One first journal · Linear first ticket · HEY first email)· 登入後立刻給訪客「第一個具體動作」 = day-1 retention 黃金。 ZONE 27 first action = Follow 第一場 ZONE 27 公開預測賽事。 Ship:(1) lib/follows.ts · 用 Supabase auth.users.user_metadata.followed_matches JSONB 存 · 0 migration · 0 Tim 動作。 helpers:getMyFollows / toggleFollow / readFollowsFromMeta(server-side)。 (2) NEW components/FollowMatchButton.tsx · client component · 3 states(loading / anonymous / ready)· anonymous renders 「→ 登入解鎖 FOLLOW」連結到 /login?next=/matches/X(post-magic-link 回原 match page)· logged-in renders ☆ / ★ toggle。(3) /matches/[gameId] 加 FollowMatchButton row · 在 HERO meta 下方 · 「★ Follow 這場 · 賽後 receipt 自動進您 /member」。(4) /member 加 YOUR FOLLOWED MATCHES section(when 登入 + has follows)· server-rendered FollowedMatchRow · phase chip + verdict chip(if final)+ score(if final)+ entire row link。(5) /member welcome state 加 FIRST-ACTION onboarding(when 登入 + 0 follows)· 大 gold-bordered glow-soft block「您的第一個動作 · Follow 一場 → 您 calibration mirror 從這場開始累積」 + 2 CTAs。(6) /login 加 ?next= forwarding(防 open-redirect 漏洞 · 只接 /-prefixed internal path)+ /auth/callback 已 support next param。 4 cognitive bias 同時 fire:Endowment(您 follow 的 collection 是您 trophy)· IKEA(explicit 動作不是 algorithm push)· Loss Aversion(離開帳號 = 失去 follow history)· Costly Signaling(explicit follow click vs surveillance tracking)。 Lesson:1st canary(R29) = 沒看到 · 2nd(R30 W4) = 看不到答案 hub · 3rd(R30 W5) = 答案是 IOU · 4th(R30 W6) = unlock 是空話 · 修是 ship the actual feature 不是 reframe wording。 Functionality ladder closed:click + 輸入 + 註冊 + ★ FOLLOW = 真實 unlocked。",
+    href: "/matches",
+  },
   // ── 🔐 Round 30 Wave 5 ship · Phase 1 magic link auth(2026-05-21 deep evening)──
   {
     title: "[R30 W5] 🔐 NEW /login + /auth · Phase 1 magic link auth · 從 Q3 promise 加速到 NOW",
@@ -292,8 +298,8 @@ const UNRESOLVED: { title: string; body: string }[] = [
   },
   // ── Round 29 new unresolved ──
   {
-    title: "[R30 W5 partial] FREE TIER auth ✅ DONE · cloud sync 仍 UNRESOLVED",
-    body: "Round 30 W5 ship Phase 1 magic link auth(/login + /auth/callback + /auth/signout + /member auth-aware)· 從 Q3 2026 publicly-promised timeline 加速到 NOW(2026-05-21 deep evening)。 Auth ✅ DONE。 但 localStorage sim history → Supabase cloud sync(讓 cross-device member 看到同一份 data)仍 UNRESOLVED · 需要 (1) Supabase public.user_sims table + RLS policies · (2) sync logic on /lab simulator complete · (3) /member 從 localStorage read 改 server read。 Round 30+ 啟動候選 · 等 Tim 明示或下次 pratfall canary fire。",
+    title: "[R30 W5+W6 partial] FREE TIER auth + Follow ✅ DONE · sim history cloud sync 仍 UNRESOLVED",
+    body: "Round 30 W5 ship Phase 1 magic link auth · W6 ship Follow Match feature(follows cloud-synced via user_metadata · 0 migration)。 Auth + Follow ✅ DONE。 但 /lab sim history → Supabase cloud sync(讓 cross-device member 看到同一份 sim data)仍 UNRESOLVED · 需要 (1) public.user_sims table + RLS · (2) /lab simulator sync logic · (3) /member 從 localStorage read 改 server read。 Round 30+ · 等 Tim 明示或下次 pratfall canary fire。",
   },
   {
     title: "[R29] BLACK CARD TapPay 訂閱 · Phase 2 Q3+ target · TIER 2 budget",

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
@@ -41,6 +41,19 @@ type SubmitState =
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [state, setState] = useState<SubmitState>({ kind: "idle" });
+  // Round 30 Wave 6 · ?next= forwarding · so FollowMatchButton anonymous
+  // visitor 從 match page 登入 → magic link → /auth/callback?next=/matches/X
+  // → 自動回原 match page。 Internal-only redirect(只接 /-prefixed path ·
+  // 拒外部 URL · 防 open-redirect 漏洞)。
+  const [nextPath, setNextPath] = useState<string | null>(null);
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const sp = new URLSearchParams(window.location.search);
+    const raw = sp.get("next");
+    if (raw && raw.startsWith("/") && !raw.startsWith("//")) {
+      setNextPath(raw);
+    }
+  }, []);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -59,10 +72,15 @@ export default function LoginPage() {
 
     try {
       const supabase = createSupabaseBrowserClient();
+      const callbackUrl = new URL(
+        "/auth/callback",
+        window.location.origin
+      );
+      if (nextPath) callbackUrl.searchParams.set("next", nextPath);
       const { error } = await supabase.auth.signInWithOtp({
         email: trimmed,
         options: {
-          emailRedirectTo: `${window.location.origin}/auth/callback`,
+          emailRedirectTo: callbackUrl.toString(),
         },
       });
       if (error) {
