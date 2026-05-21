@@ -15,6 +15,7 @@ import {
   type Calibration,
 } from "@/lib/matches";
 import StatTerm from "@/components/StatTerm";
+import RelatedReading from "@/components/RelatedReading";
 import {
   FOUNDERS_TOTAL,
   FOUNDERS_CLAIMED,
@@ -419,7 +420,13 @@ export default async function MatchDetailPage({
         </div>
       </section>
 
-      {/* ── BACK ───────────────────────────────────── */}
+      {/* ── RELATED READING · Round 11 audit fix ──────
+          Was: lone「← 回到今日賽事板」retreat link · dead-end.
+          Per Round 11 agent: visitor scrolled past Founders CTA ·
+          died at back link. Now forward CTAs · loss-aversion respect. */}
+      <RelatedReading currentPath="/matches/[gameId]" />
+
+      {/* ── BACK · subdued footnote · was the only nav ───────── */}
       <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-24 text-center">
         <Link
           href="/matches"

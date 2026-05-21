@@ -151,9 +151,30 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
       title: "Model Report · 倒置 I 的完整證據",
     },
     {
-      href: "/discipline",
-      kicker: "discipline",
-      title: "鐵律 · Buffett+Musk+Costco 共識",
+      // Round 11 agent finding: visitors who read full manifesto are
+      // warmest possible · /founders bridge was missing from this 3-link
+      // slot. Swapped /discipline (still in Footer + Cmd-K) for the
+      // conversion-warmth link.
+      href: "/founders",
+      kicker: "founders",
+      title: "讀完了 · 加入 270 個席位之一",
+    },
+  ],
+  "/matches/[gameId]": [
+    {
+      href: "/track-record",
+      kicker: "track-record",
+      title: "公開戰績 · 引擎每場預測 vs 實際",
+    },
+    {
+      href: "/lab",
+      kicker: "lab",
+      title: "親手跑一場 Monte Carlo",
+    },
+    {
+      href: "/founders",
+      kicker: "founders",
+      title: "加入 270 個終身席位",
     },
   ],
   "/track-record": [

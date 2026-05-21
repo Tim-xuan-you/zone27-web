@@ -3,6 +3,10 @@ import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import HeroLiveCard from "@/components/HeroLiveCard";
 import { getFeaturedMatch } from "@/lib/matches";
+import {
+  FOUNDERS_TOTAL,
+  FOUNDERS_REMAINING,
+} from "@/lib/founders-stats";
 
 // ── ZONE 27 · Homepage(Round 3 · Apple-grade compression)──
 //
@@ -101,6 +105,27 @@ export default function Home() {
 
         <p className="mt-6 sm:mt-10 max-w-md mx-auto text-mute leading-relaxed text-sm sm:text-base">
           引擎為您跑這場 · 結果存進公開戰績。
+        </p>
+
+        {/* Round 11 agent fix: desktop hero had no Founders CTA above
+            the fold · sticky CTA covered mobile but desktop visitors
+            had to scan Nav to find /founders. Add inline scarcity
+            anchor (desktop-visible · mobile too · doesn't conflict
+            with sticky bar). One-line · brand-pure · text link only. */}
+        <p className="mt-6 sm:mt-8 font-mono text-mute text-xs sm:text-sm tracking-[0.2em] tabular">
+          <Link
+            href="/founders"
+            className="hover:text-gold transition-colors"
+            aria-label={`Founders 27 · ${FOUNDERS_REMAINING} of ${FOUNDERS_TOTAL} seats remain`}
+          >
+            <span className="text-gold">FOUNDERS · 27</span>
+            <span className="text-mute/60 mx-2">·</span>
+            <span className="text-bone">{FOUNDERS_REMAINING}</span>
+            <span className="text-mute/60">/{FOUNDERS_TOTAL}</span>
+            <span className="text-mute/60 mx-2">·</span>
+            NT$ 2,700 終身
+            <span className="text-gold/70 ml-2">→</span>
+          </Link>
         </p>
       </section>
 

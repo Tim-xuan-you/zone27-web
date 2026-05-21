@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useActionState } from "react";
 import { useFormStatus } from "react-dom";
 import { reserveSpot, type WaitlistResult } from "@/lib/waitlist";
@@ -67,18 +68,67 @@ export default function WaitlistForm({
           目前不收費 · 不綁定 · 隨時可退出
         </p>
 
-        {/* Commitment-consistency: ride the momentum.
-            User just made a small commitment (email). They're now in
-            highest-affinity state. The lowest-friction next action is
-            sharing the URL — let them do it without extra friction.
-            The refTag tags this share back to this user's queue position
-            so future signups via this URL can be attributed in DB. */}
-        <div className="mt-10 pt-6 border-t border-line/40">
-          <p className="font-mono text-mute text-[10px] tracking-[0.3em] mb-4">
-            把這扇門傳給可能在意的朋友 ·
-            <span lang="en"> SHARE THE WALL</span>
+        {/* Round 11 · ONE BIG THING fix:
+            Post-submit was dead-end with only CopyLinkButton.
+            Visitor in peak commitment-consistency state (Cialdini)
+            deserves 3 CTAs · not 1. Per Round 11 agent finding:
+            "highest-trust moment in funnel" → was dead-end → now hub.
+
+            Order intentional:
+            1. /matches/cpbl-260521-01 · fulfill credibility promise the
+               brand was built on (see today's engine prediction)
+            2. /lab · engagement lever (deepen into engine demo)
+            3. CopyLinkButton · tertiary share-the-wall (commitment-
+               consistency · "the next ask after waitlist") */}
+        <div className="mt-10 pt-6 border-t border-line/40 space-y-4">
+          <p className="font-mono text-gold text-[10px] tracking-[0.4em] mb-2">
+            您可以接著做的事
           </p>
-          <CopyLinkButton refTag={`reserve-${pos}`} />
+          <div className="grid sm:grid-cols-2 gap-3">
+            <Link
+              href="/matches/cpbl-260521-01"
+              className="block border border-gold/40 hover:border-gold p-4 group transition-colors text-left"
+            >
+              <p
+                lang="en"
+                className="font-mono text-gold/70 text-[9px] tracking-[0.3em] mb-1"
+              >
+                / TONIGHT
+              </p>
+              <p className="text-bone text-sm leading-snug group-hover:text-gold transition-colors">
+                看今晚引擎預測這場 →
+              </p>
+              <p className="font-mono text-mute text-[10px] tracking-[0.2em] mt-1 tabular">
+                統一 vs 富邦 · 18:35 新莊
+              </p>
+            </Link>
+            <Link
+              href="/lab"
+              className="block border border-line/60 hover:border-gold/40 p-4 group transition-colors text-left"
+            >
+              <p
+                lang="en"
+                className="font-mono text-mute text-[9px] tracking-[0.3em] mb-1"
+              >
+                / ENGINE
+              </p>
+              <p className="text-bone text-sm leading-snug group-hover:text-gold transition-colors">
+                在 /lab 親手跑一場 →
+              </p>
+              <p className="font-mono text-mute text-[10px] tracking-[0.2em] mt-1">
+                10,000 場 Monte Carlo · 在您瀏覽器
+              </p>
+            </Link>
+          </div>
+
+          {/* Tertiary: share-the-wall (was the only action · now footnote) */}
+          <div className="pt-4 border-t border-line/40">
+            <p className="font-mono text-mute text-[10px] tracking-[0.3em] mb-3 text-center">
+              或把這扇門傳給朋友 ·
+              <span lang="en"> SHARE THE WALL</span>
+            </p>
+            <CopyLinkButton refTag={`reserve-${pos}`} />
+          </div>
         </div>
       </div>
     );
