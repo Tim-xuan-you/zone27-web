@@ -198,11 +198,32 @@ export const COMMAND_ITEMS: CommandItem[] = [
 
   // ── 工具 · 外部 ────────────────────────────────────
   {
-    label: "Founders 27 · 270 個終身席位",
+    label: "會員 · Founders 27 + FREE TIER + BLACK CARD 三層 ladder",
     kicker: "/founders",
     path: "/founders",
     group: "工具 · 外部",
-    keywords: ["founders", "創始", "27", "lifetime", "終身", "預訂"],
+    keywords: [
+      "founders",
+      "創始",
+      "27",
+      "lifetime",
+      "終身",
+      "預訂",
+      // Round 23 keywords expansion(per Tim「一般人加入會員找不到」):
+      // 加「會員」「加入」「訂閱」「free」「免費」「membership」 ·
+      // 涵蓋非-Founders-27 訪客的搜尋詞 · Nav label 改 "會員" 後
+      // Cmd-K 也要對應。
+      "會員",
+      "加入會員",
+      "membership",
+      "tier",
+      "訂閱",
+      "free tier",
+      "免費",
+      "免費訂閱",
+      "black card",
+      "黑金",
+    ],
   },
   {
     label: "27 之牆 · 270 席位視覺化",

@@ -36,11 +36,16 @@ export default function MobileNavToggle({
       <Link
         href="/founders"
         aria-current={isFoundersActive ? "page" : undefined}
+        aria-label="加入會員 · FREE TIER 免費訂閱 + BLACK CARD + Founders 27 三層 ladder"
         /* Round 9: py-1.5 → py-3 ensures ≥44px tap target per
-           Apple HIG / WCAG 2.5.5. Pill height was ~28-32px before. */
+           Apple HIG / WCAG 2.5.5. Pill height was ~28-32px before.
+           Round 23(Tim 問「一般人加入會員從哪裡按」)· "創始會員 →"
+           label → "會員 →" · 一般訪客 wayfinding 修(per Nav.tsx
+           comment)· FREE TIER 等所有 tier 在 /founders 都有。Pill
+           gold-filled 維持 brand IP visual hierarchy(mobile 主 CTA)。 */
         className="px-3.5 py-3 bg-gold text-navy text-[10px] tracking-[0.22em] font-mono font-medium whitespace-nowrap hover:bg-gold-soft transition-colors"
       >
-        創始會員 →
+        會員 →
       </Link>
     </div>
   );

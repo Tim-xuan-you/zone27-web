@@ -20,7 +20,15 @@ const NAV_ITEMS: {
   { key: "matches", href: "/matches", label: "賽事" },
   { key: "lab", href: "/lab", label: "實驗室", badge: "BETA" },
   { key: "leaderboard", href: "/leaderboard", label: "27 之牆" },
-  { key: "founders", href: "/founders", label: "創始會員" },
+  // Round 23 label fix(Tim 問「一般人要加入會員從哪裡按?找不到」):
+  // "創始會員" → "會員" · 一般訪客讀「創始會員」覺得 NT$ 2,700
+  // 限量 270 跟自己無關 · bounce 在 Nav 沒進 /founders 看 4-tier
+  // ladder。改成「會員」(neutral noun · 同 /audit /coverage pattern)·
+  // 覆蓋全 4 層(FREE TIER + BLACK CARD + Founders 27)· 進去後再
+  // 看詳細 hierarchy。Sticky bottom CTA + 首頁 pill 維持 paid-focused
+  // (Founders 27 specific)· Nav 為 inclusive 入口。Key 不改(保
+  // 持 active state 對應 /founders URL)。
+  { key: "founders", href: "/founders", label: "會員" },
   { key: "about", href: "/about", label: "關於" },
 ];
 
@@ -66,7 +74,7 @@ export default function Nav({ active }: { active?: NavKey }) {
                   href={item.href}
                   aria-current={active === item.key ? "page" : undefined}
                   aria-label={
-                    isMembershipCta ? "加入會員 · Founders 27 預售名單 + FREE TIER 訂閱" : undefined
+                    isMembershipCta ? "加入會員 · FREE TIER 免費訂閱 + BLACK CARD + Founders 27 三層 ladder" : undefined
                   }
                   className={`font-mono text-[10px] sm:text-xs tracking-[0.22em] whitespace-nowrap transition-colors inline-flex items-center gap-1.5 ${
                     isMembershipCta
