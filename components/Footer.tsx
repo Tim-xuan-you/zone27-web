@@ -114,7 +114,7 @@ export default function Footer() {
               >
                 {group.enLabel}
               </p>
-              <p className="font-mono text-mute/60 text-[9px] tracking-[0.3em] mb-5">
+              <p className="font-mono text-mute/80 text-[9px] tracking-[0.3em] mb-5">
                 {group.label}
               </p>
               <ul className="space-y-3">
@@ -170,7 +170,7 @@ export default function Footer() {
           </p>
           <p
             lang="en"
-            className="font-mono text-mute/40 text-[9px] tracking-[0.3em] mt-1.5"
+            className="font-mono text-mute/70 text-[9px] tracking-[0.3em] mt-1.5"
           >
             FUNDED BY FOUNDERS · NO VC · NO ADS · NO TRACKERS
           </p>

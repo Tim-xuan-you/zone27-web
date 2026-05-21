@@ -139,14 +139,14 @@ export const COMMAND_ITEMS: CommandItem[] = [
 
   // ── 信任文件 ───────────────────────────────────────
   {
-    label: "Model Report · 8 sections 全部假設公開",
+    label: "Model Report · 5 sections · 引擎範圍 + 揭露哲學",
     kicker: "/audit",
     path: "/audit",
     group: "信任文件",
     keywords: ["audit", "model", "report", "稽核", "report"],
   },
   {
-    label: "技術白皮書 · 10 sections + 路線圖",
+    label: "技術白皮書 · 4 sections + GitHub 程式碼",
     kicker: "/methodology",
     path: "/methodology",
     group: "信任文件",

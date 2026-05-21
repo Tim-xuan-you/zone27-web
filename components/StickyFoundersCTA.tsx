@@ -36,10 +36,12 @@ import {
 export default function StickyFoundersCTA() {
   const pathname = usePathname();
   // Hide on /founders (would compete with the page's own CTA form)
-  // and on /lab (engine demo gets focus, CTA bar would obscure controls).
-  // Note: usePathname() is null during the brief server-render phase ·
-  // we render the bar by default and let CSS hide as needed on hydration.
-  if (pathname === "/founders" || pathname === "/lab") return null;
+  // and on /lab + /lab/custom (engine demo + power-user form gets
+  // focus · CTA bar would obscure controls).
+  // Round 9 fix: was `pathname === "/lab"` exact match · missed
+  // /lab/custom · agent flagged that sticky CTA was overlaying the
+  // power-user pitcher input form (per Round 9 audit agent finding 9).
+  if (pathname === "/founders" || pathname?.startsWith("/lab")) return null;
   if (FOUNDERS_REMAINING === 0) return null;
 
   return (

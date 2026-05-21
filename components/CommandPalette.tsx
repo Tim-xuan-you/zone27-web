@@ -239,6 +239,11 @@ export default function CommandPalette() {
               ESC
             </button>
           </div>
+          {/* Round 9 a11y: aria-live for screen readers · announces
+              filter result count without visible UI clutter. */}
+          <span role="status" aria-live="polite" className="sr-only">
+            {flat.length} 個結果
+          </span>
         </div>
 
         {/* ── Results list ── */}

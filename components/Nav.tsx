@@ -106,7 +106,10 @@ export default function Nav({ active }: { active?: NavKey }) {
                   <Link
                     href={item.href}
                     aria-current={active === item.key ? "page" : undefined}
-                    className={`tracking-[0.18em] whitespace-nowrap transition-colors inline-flex items-center gap-1 ${
+                    /* Round 9: py-2.5 ensures ≥44px tap target per
+                       Apple HIG / WCAG 2.5.5. Was zero v-padding · agent
+                       flagged 14-16px tap target. */
+                    className={`py-2.5 -my-1.5 tracking-[0.18em] whitespace-nowrap transition-colors inline-flex items-center gap-1 ${
                       active === item.key
                         ? "text-gold"
                         : "text-mute hover:text-gold"

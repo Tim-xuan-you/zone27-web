@@ -36,7 +36,9 @@ export default function MobileNavToggle({
       <Link
         href="/founders"
         aria-current={isFoundersActive ? "page" : undefined}
-        className="px-3.5 py-1.5 bg-gold text-navy text-[10px] tracking-[0.22em] font-mono font-medium whitespace-nowrap hover:bg-gold-soft transition-colors"
+        /* Round 9: py-1.5 → py-3 ensures ≥44px tap target per
+           Apple HIG / WCAG 2.5.5. Pill height was ~28-32px before. */
+        className="px-3.5 py-3 bg-gold text-navy text-[10px] tracking-[0.22em] font-mono font-medium whitespace-nowrap hover:bg-gold-soft transition-colors"
       >
         創始會員 →
       </Link>

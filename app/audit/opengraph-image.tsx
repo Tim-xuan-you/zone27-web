@@ -160,9 +160,11 @@ export default async function AuditOgImage() {
             borderTop: "1px solid rgba(212,175,55,0.2)",
           }}
         >
-          <Stat n="7" label="INPUTS · USED" />
-          <Stat n="10" label="INPUTS · EXCLUDED" />
-          <Stat n="7" label="FAILURE MODES" />
+          {/* Round 7 consolidated: was 7 USED + 10 EXCLUDED + 7 FAILURE
+              MODES = 24 itemized stats. Now 3 (USED + SCOPE + ENV) ·
+              Round 7 ledger shows compression numbers honestly. */}
+          <Stat n="3" label="INPUTS · USED" />
+          <Stat n="5" label="SCOPE BOUNDARY" />
           <Stat n="1" label="ENV. IMPACT" gold />
         </div>
 
