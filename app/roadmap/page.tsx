@@ -145,6 +145,16 @@ const EXPLICIT_NO: RoadmapItem[] = [
     evidenceHref: "/coverage",
     evidenceLabel: "/coverage",
   },
+  // Round 29 Wave 10B research agent surface · 2026 #1 indie launch
+  // playbook(Tom Orbach $50K/72h · 70% revenue in 72 hours · warm
+  // 5K+ email list blitz)wrong for ZONE 27 · 升 /now UNRESOLVED ephemeral
+  // 為 /roadmap BRAND BOUNDARIES canonical permanent decision。
+  {
+    title: "永遠不做「Launch loudly to warm list」72-hour blitz",
+    body: "2026 #1 indie launch playbook(Tom Orbach $50K/72h · 70% revenue in 72 hours · warm email list 5K+ simultaneous blitz)對 ZONE 27 wrong:(1) stealth axiom forbid「loud」half ·(2) hardcore baseball fans 不在 IndieHackers Twitter crowd · 72-hour reach 不到 right audience。Right shape:slow trickle to #270 over 6-18 months · /founders 第 1 天跟第 400 天看起來一樣 · just a different number · slowness IS the curation proof。",
+    evidenceHref: "/now",
+    evidenceLabel: "/now UNRESOLVED · Wave 10B agent finding",
+  },
 ];
 
 export default function RoadmapPage() {
