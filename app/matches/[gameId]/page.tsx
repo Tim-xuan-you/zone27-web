@@ -18,12 +18,6 @@ import StatTerm from "@/components/StatTerm";
 import RelatedReading from "@/components/RelatedReading";
 import FollowMatchButton from "@/components/FollowMatchButton";
 import MatchNoteEditor from "@/components/MatchNoteEditor";
-import {
-  FOUNDERS_TOTAL,
-  FOUNDERS_CLAIMED,
-  FOUNDERS_NEXT,
-  formatBadge,
-} from "@/lib/founders-stats";
 
 // ── ISR · Re-render daily so updates to lib/matches.ts ship within
 // 24h without a full redeploy. Pairs with isMatchDataStale() rendering
@@ -413,31 +407,13 @@ export default async function MatchDetailPage({
       {/* ── Round 30 Wave 9 · Personal note editor · logged-in only ─── */}
       <MatchNoteEditor matchId={m.id} />
 
-      {/* ── DISCUSSION LOCK (pre-launch · honest state) ─── */}
-      <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-20">
-        <div className="bg-slate/40 border border-gold/30 p-10 text-center">
-          <p className="font-mono text-gold text-[10px] tracking-[0.4em] mb-4">
-            PRE-LAUNCH · FOUNDERS + BLACK CARD ROOM
-          </p>
-          <h3 className="text-2xl text-bone font-light tracking-tight mb-3">
-            即時討論室將在創始名冊啟動時上線
-          </h3>
-          <p className="text-mute text-sm mb-4 max-w-md mx-auto leading-relaxed">
-            Founders 27(終身)+ BLACK CARD(月費)兩層訂閱者皆可進入,
-            拆解每晚 AI 模型輸出。沒有 LINE 群組黑箱,沒有刪文截圖。
-          </p>
-          <p className="font-mono text-mute/70 text-[10px] tracking-[0.3em] mb-8 tabular">
-            CURRENT · {FOUNDERS_CLAIMED} / {FOUNDERS_TOTAL} FORGED ·
-            NEXT IS {formatBadge(FOUNDERS_NEXT)}
-          </p>
-          <Link
-            href="/founders"
-            className="inline-block px-8 py-3 bg-gold text-navy text-xs tracking-[0.3em] hover:bg-gold-soft transition-colors"
-          >
-            加入創始名冊 →
-          </Link>
-        </div>
-      </section>
+      {/* ── Round 30 Wave 11 · DELETED · DISCUSSION LOCK placeholder ──
+          原 large gold-bordered「PRE-LAUNCH · FOUNDERS + BLACK CARD ROOM」
+          panel(10+ lines · 「即時討論室將在創始名冊啟動時上線」)違反 brand
+          axiom「沒有『即將推出 · 敬請期待』」。 而且 W6 ★ Follow · W9 ✏️ Note ·
+          W10 ↗ Submit · W10 Personal Mirror 已 ship 真實 unlocks · placeholder
+          完全多餘。 Conversion path 到 /founders 保留在 RelatedReading +
+          Footer + Cmd-K · 此 section 刪除無損 conversion。 */}
 
       {/* ── RELATED READING · Round 11 audit fix ──────
           Was: lone「← 回到今日賽事板」retreat link · dead-end.
