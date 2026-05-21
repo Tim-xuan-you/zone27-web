@@ -1,11 +1,28 @@
 # Founders 27 · Manual Onboarding Flow
 
 > Tim 親自接 270 位創始會員的 onboarding checklist。
-> 寫於 2026-05-20。
+> 寫於 2026-05-20 · Round 29 Wave 14 (2026-05-21) 加 4-phase psychology framework + cross-ref。
 
-每一位 Founders 27 都由 Tim 親手 confirm。**這不是「省 NT$ 70 transaction fee」的工程選型,是「親手 onboard 就是創始體驗的核心」的品牌設計。**
+每一位 Founders 27 都由 Tim 親手 confirm。**這不是「省 NT$ 70 transaction fee」的工程選型 · 是「親手 onboard 就是創始體驗的核心」的品牌設計。**
 
 完整架構契約見 memory `[[zone27-payment-architecture]]`。
+
+---
+
+## 🧠 4-Phase Psychological Journey(Round 29 Wave 14 framework)
+
+每位 Founder 從申請到入會 · 經過 4 個 phase · 每 phase 刻意觸發**一個主導 cognitive bias**:
+
+| Phase | Tim Action | Primary Bias |
+|---|---|---|
+| 1 · ANTICIPATION | 訪客填表後 · Tim 故意等 **18-26h** 才回(NOT instant auto-reply) | RECIPROCITY(Cialdini 1984) |
+| 2 · FIRST REPLY | Tim 親手寫 email · 80% template + 20% personal line | IDENTITY THREAT RESOLUTION |
+| 3 · TRANSFER | 訪客 10 分鐘手工銀行匯款 + 拍截圖回 | COSTLY SIGNALING(Spence 1973)+ SUNK COST |
+| 4 · FORGE | Tim 24h 內確認 + 寄 PDF 證書 + LINE 群邀請 | ENDOWMENT EFFECT + HEIRLOOM ANCHOR |
+
+**Total Tim time per founder: ~10 min**(原本估 12-15 min · 80/20 template 化 + psychology framework 後 · brand IP 不減反強)。
+
+完整 email templates 見 [docs/EMAIL-TEMPLATES.md](EMAIL-TEMPLATES.md) · PDF 證書 design spec 見 [docs/PDF-CERTIFICATE-SPEC.md](PDF-CERTIFICATE-SPEC.md)。
 
 ---
 
@@ -26,12 +43,22 @@
 
 → Supabase RPC `reserve_founders_spot()`(未來建)→ 寫入 `founders` 表 + state = `pending_payment`。
 
-### Step 2 · Tim 收到 Supabase notification(自動推送)
+### Step 2 · Tim 收到 Supabase notification(自動推送 · 但您不立即回)
 
 設定方式(未來建):Supabase webhook → Resend / Vercel notification → Tim 的 Gmail。
 Email subject 格式:`[ZONE 27 · NEW FOUNDER PENDING] #00X · {訪客 email}`
 
-### Step 3 · Tim 寄 personal onboarding email(8-10 分鐘人工)
+⚠️ **重要:您收到通知後 · 不要立即回 email**。
+
+**故意等 18-26 小時才回** · per Phase 1 ANTICIPATION psychology(Cialdini reciprocity)。Visitor 大腦處理為「Tim 花了一整天讀我的資料 + 想清楚才回」 = reciprocity 啟動。Instant reply = template machine 處理 = brand IP 死。
+
+**Suggested workflow:** 每天 22:00 固定處理前一天 18:00-22:00 申請 = 自然 22-28h delay = wait 落在 18-26h sweet spot。
+
+詳細 anticipation phase psychology rationale 見 [docs/EMAIL-TEMPLATES.md](EMAIL-TEMPLATES.md) Phase 1 section。
+
+### Step 3 · Tim 寄 personal onboarding email(8-10 分鐘人工 · 80/20 template)
+
+**80% template + 20% personal line** · 完整 template skeleton + 4 種 personal line trigger pattern(對方填稱呼 / ref / handle / 什麼都沒填)見 [docs/EMAIL-TEMPLATES.md](EMAIL-TEMPLATES.md) Phase 2 section。
 
 **Template:**
 
@@ -91,7 +118,10 @@ where id = '{uuid}';
 
 → `/leaderboard` 即時更新(從 8 → 9 forged)→ ScarcityStrip 即時更新 → 你的 dashboard 自動進度。
 
-### Step 5 · Tim 寄第二封 personal email(5 分鐘人工)
+### Step 5 · Tim 寄第二封 personal email(5 分鐘人工)+ PDF 證書附件
+
+**Phase 4 ENDOWMENT EFFECT trigger.** 24h 內收款確認後寄 · 不要等 7 天。
+PDF 證書 design spec 見 [docs/PDF-CERTIFICATE-SPEC.md](PDF-CERTIFICATE-SPEC.md) · email template skeleton 見 [docs/EMAIL-TEMPLATES.md](EMAIL-TEMPLATES.md) Phase 4 section。
 
 **Template:**
 
@@ -132,17 +162,29 @@ Tim
 
 ---
 
-## 預估時間投入
+## 預估時間投入(Round 29 Wave 14 · 80/20 template 化後 revised)
 
-| 階段 | 每位創始者 | 270 位總計 |
+### Per founder Tim time(80/20 framework)
+
+| Phase | Tim 時間 | Visitor 時間 |
 |---|---|---|
-| Email confirm + send | 12-15 分鐘 | ~60-70 小時 |
-| Supabase update | 2-3 分鐘 | ~10 小時 |
-| 證書生成(template 化) | 1-2 分鐘 | ~5 小時 |
-| LINE 群成員管理 | 偶爾 5 分鐘 | ~20 小時 |
-| **總計** | **~20 分鐘/位** | **~90-100 小時(3-6 月分散)** |
+| 1 · ANTICIPATION wait | 0 min(silent · 您不寄信) | 18-26h wait |
+| 2 · FIRST REPLY(80% template + 20% personal) | 5-6 min | < 1 min(讀) |
+| 3 · TRANSFER(visitor 行動) | 0 min | 10 min(匯款) |
+| 4 · FORGE CONFIRMATION + PDF 證書 | 4-5 min | < 1 min(讀) |
+| Supabase state update | 1-2 min | 0 |
+| **總計 per founder Tim time** | **~10-12 min** | **~30 min total** |
 
-90-100 小時 · 散佈在 Q3 2026 - Q4 2026 約半年內 · 每月 ~15-17 小時(每週 4 小時)= **完全可控**。
+### 270 founders 全 lifecycle
+
+| 項目 | 時間 |
+|---|---|
+| **每 founder ~10-12 min × 270** | **~45-54 hours total** |
+| 分佈在 6-18 個月(slow trickle)| 每月 ~3-6 hours |
+| 等於每週 ~45-90 分鐘 | **完全可控** |
+
+(原本 docs 估 12-15 min per founder × 270 = 60-70 hr · 加上 PDF 證書 / LINE 群 / Supabase = 90-100 hr。
+Round 29 Wave 14 80/20 framework 後 = 45-54 hr · **不到一半時間 · brand IP 反而強化** because psychology framework 真正被 framework 化。)
 
 ---
 
