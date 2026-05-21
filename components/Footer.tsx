@@ -47,6 +47,9 @@ const FOOTER_GROUPS: FooterGroup[] = [
     links: [
       { label: "5 分鐘入門", href: "/learn" },
       { label: "關於 ZONE 27", href: "/about" },
+      // Round 27 · /membership 加入 footer ENTRY group · 訪客滾到 footer
+      // 也能看到 4-tier ladder 入口 · 不只靠 Nav pill 進入。
+      { label: "會員制 · 4 tier", href: "/membership" },
       { label: "常見問題", href: "/faq" },
     ],
   },

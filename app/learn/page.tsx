@@ -199,10 +199,10 @@ export default function LearnPage() {
               note="5 sections · 引擎範圍 + 揭露哲學"
             />
             <NextStep
-              kicker="FOUNDERS"
-              zh="加入 270 名創始會員"
-              href="/founders"
-              note="NT$ 2,700 · 一次 · 終身"
+              kicker="MEMBERSHIP"
+              zh="ZONE 27 4-tier 會員制"
+              href="/membership"
+              note="從免費到 NT$ 2,700 終身 · 任時可選"
               gold
             />
           </div>
