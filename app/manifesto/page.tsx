@@ -96,6 +96,18 @@ export default function ManifestoPage() {
               某種行銷管道。我們接受這些代價,因為它們換來的東西
               更稀有:可被驗證的信任。
             </P>
+            <P className="text-mute/70">
+              這份宣言是<strong className="text-bone">系統論證版</strong>。
+              想看為什麼一個 27 年中華職棒球迷會做這品牌的<strong className="text-bone">個人起源</strong>?
+              請見{" "}
+              <Link
+                href="/about"
+                className="text-gold underline-offset-4 hover:underline"
+              >
+                /about Chapter 00 PROLOGUE
+              </Link>
+              。
+            </P>
           </section>
 
           {/* ── I · DISCLOSURE ──────────────────────── */}

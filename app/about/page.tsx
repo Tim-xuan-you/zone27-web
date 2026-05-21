@@ -41,6 +41,66 @@ export default function AboutPage() {
 
       <div className="mx-auto w-32 gold-line mb-20" />
 
+      {/* ── 00 PROLOGUE · Round 19 soul addition ──────
+          Per [[zone27-pratfall-brand-ip]] · /about previously buried
+          Tim's emotional anchor in Chapter 05 (FOUNDER NOTE) · after
+          4 chapters of systematic argument. Top niche brands
+          (Stratechery / HEY / Bankless) lead with WHY · then unfold
+          WHAT/HOW. Round 19 inserts PROLOGUE as Chapter 00 = personal
+          founder hook BEFORE the systematic chapters. The systematic
+          chapters become the methodology version of the love letter
+          introduced here · not the unrelated front loader of a buried
+          emotional moment. Per Round 19 Tim ask · soul-level addition. */}
+      <Chapter
+        no="00"
+        en="PROLOGUE"
+        zh="起源"
+        kicker="我寫這封情書的原因"
+      >
+        <p>
+          過去 20 多年 · 我見過台灣棒球商業形態的所有版本:
+        </p>
+        <ul className="space-y-2.5 text-mute leading-relaxed list-none pl-0">
+          <li className="flex items-baseline gap-3">
+            <span className="font-mono text-gold/70 text-[10px] tracking-[0.2em] shrink-0">▸</span>
+            <span className="flex-1">
+              <strong className="text-bone">LINE 老師</strong>收會員費 ·
+              輸了刪文 · 群組解散後重新開另一個
+            </span>
+          </li>
+          <li className="flex items-baseline gap-3">
+            <span className="font-mono text-gold/70 text-[10px] tracking-[0.2em] shrink-0">▸</span>
+            <span className="flex-1">
+              <strong className="text-bone">報馬仔網站</strong>每月收 NT$ 3,000 ·
+              殺手平台抽成 30-50% · 贏家帳號被砍
+            </span>
+          </li>
+          <li className="flex items-baseline gap-3">
+            <span className="font-mono text-gold/70 text-[10px] tracking-[0.2em] shrink-0">▸</span>
+            <span className="flex-1">
+              <strong className="text-bone">免費論壇</strong>資訊雜亂 ·
+              沒人為 prediction 負責 · 信任歸零
+            </span>
+          </li>
+        </ul>
+        <p>
+          我不是學者 · 不是工程師 · 不是博彩業者。
+          我是看 27 年中華職棒的球迷 ·{" "}
+          <strong className="text-bone">受不了這套劇本反覆上演</strong>。
+        </p>
+        <p>
+          ZONE 27 是用「不靠秘密 · 靠紀律」這套方法 ·
+          試著做一個<strong className="text-gold">不背叛球迷的平台</strong>。
+        </p>
+        <p className="text-mute/80">
+          下方 6 章節 · 是這個嘗試的<strong className="text-bone">完整方法論版</strong>。
+          您可以從問題、賭注、方法、承諾、創辦人筆記、為什麼是 27 任一處進入。
+        </p>
+        <p className="font-mono text-mute text-[10px] tracking-[0.3em] mt-8">
+          — TIM · 創辦人 · CPBL 球迷 27 年
+        </p>
+      </Chapter>
+
       {/* ── 01 THE PROBLEM ───────────────────────── */}
       <Chapter
         no="01"

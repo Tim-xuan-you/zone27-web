@@ -153,6 +153,22 @@ export default function Home() {
         <p className="text-center font-mono text-mute text-[10px] tracking-[0.25em] mt-8">
           AI 計算的是機率 · 不是命運
         </p>
+
+        {/* Round 19 soul addition · Tim signature 取代 homepage 從前的
+            「100% product · 0 founder」狀態。極小 mute/60 一行 · 不破
+            Apple-grade 3-section minimalism · 卻給整個首頁人性錨點。
+            Links to /about Chapter 00 PROLOGUE — full founder narrative
+            一鍵可達。Per Round 19 Tim 直覺「我們缺必要靈魂」之回應。 */}
+        <p className="text-center font-mono text-mute/60 text-[9px] tracking-[0.3em] mt-3">
+          —{" "}
+          <Link
+            href="/about"
+            className="hover:text-gold transition-colors"
+            aria-label="讀 Tim 創辦人筆記 · /about Chapter 00 PROLOGUE"
+          >
+            TIM · CPBL 球迷 27 年
+          </Link>
+        </p>
       </section>
 
       {/* Round 5: Founders 27 strip REMOVED from homepage.
