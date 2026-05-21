@@ -2,7 +2,7 @@ import Link from "next/link";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import HeroLiveCard from "@/components/HeroLiveCard";
-import { matches } from "@/lib/matches";
+import { getFeaturedMatch } from "@/lib/matches";
 
 // ── ZONE 27 · Homepage(Round 3 · Apple-grade compression)──
 //
@@ -54,10 +54,16 @@ import { matches } from "@/lib/matches";
 // ─────────────────────────────────────────────────────
 
 export default function Home() {
-  // matches[0] is undefined-safe — if lib/matches.ts is empty
-  // (migration in progress), the Hero falls back to EmptyHeroCard
-  // instead of crashing.
-  const featuredMatch = matches[0];
+  // Round 10: getFeaturedMatch picks via lifecycle priority:
+  //   today-pregame/live → future → most-recent-finalized → orphan
+  // After game day · cpbl-260521-01 transitions from "today" to
+  // "final" automatically (if Tim ingested finalResult) · homepage
+  // then features the next day's match · or shows yesterday's
+  // receipt if no new match is yet ingested.
+  // Receipt-mode (showing PROVED/DIVERGED) is a STRONGER conversion
+  // signal than upcoming-prediction-mode · so this fallback chain
+  // is brand-IP-aligned: engine + receipt = the soul.
+  const featuredMatch = getFeaturedMatch();
 
   return (
     <div className="flex flex-col flex-1 min-h-screen">

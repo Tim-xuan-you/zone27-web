@@ -282,3 +282,65 @@ export function getFinalizedMatches(): Match[] {
       return db.localeCompare(da);
     });
 }
+
+/** Matches scheduled today or in the future, sorted by date.
+ *  Powers /matches list page · post-game matches drop off this view
+ *  but stay accessible via /matches/[gameId] permalink (receipt mode)
+ *  and /track-record ledger. */
+export function getTodayAndFutureMatches(): Match[] {
+  return matches
+    .filter((m) => {
+      const phase = getMatchPhase(m);
+      return (
+        phase === "today-pregame" ||
+        phase === "today-live" ||
+        phase === "future"
+      );
+    })
+    .sort((a, b) => {
+      const da = getMatchDateIso(a) ?? "";
+      const db = getMatchDateIso(b) ?? "";
+      return da.localeCompare(db);
+    });
+}
+
+/** Pick the BEST match to feature on the homepage HeroLiveCard.
+ *  Priority order:
+ *   1. Today's match (pregame OR live · highest engagement value)
+ *   2. Closest future match (pre-game prediction · "next up")
+ *   3. Most recent finalized match (receipt mode · shows engine
+ *      track record · "yesterday we predicted X · result was Y")
+ *   4. Most recent stale-archived (fallback · should rarely happen
+ *      since matches with no finalResult become orphan after the date)
+ *
+ *  Brand reasoning: ZONE 27's soul = engine + receipt. When there's
+ *  a live prediction, show it. When there isn't, show the most recent
+ *  proof the engine works (a finalized match in receipt mode is
+ *  actually a STRONGER conversion signal than an upcoming prediction
+ *  — visitors see PROVED/DIVERGED concrete history vs an abstract
+ *  probability they can't verify yet). */
+export function getFeaturedMatch(): Match | undefined {
+  // 1. Today's match
+  const today = matches.find((m) => {
+    const phase = getMatchPhase(m);
+    return phase === "today-pregame" || phase === "today-live";
+  });
+  if (today) return today;
+
+  // 2. Closest future
+  const future = matches
+    .filter((m) => getMatchPhase(m) === "future")
+    .sort((a, b) => {
+      const da = getMatchDateIso(a) ?? "";
+      const db = getMatchDateIso(b) ?? "";
+      return da.localeCompare(db);
+    })[0];
+  if (future) return future;
+
+  // 3. Most recent finalized (receipt mode)
+  const finalized = getFinalizedMatches();
+  if (finalized.length > 0) return finalized[0];
+
+  // 4. Any match (orphan fallback)
+  return matches[0];
+}

@@ -3,9 +3,10 @@ import type { Metadata } from "next";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import {
-  matches,
   getMatchPhase,
   getCalibration,
+  getTodayAndFutureMatches,
+  getFinalizedMatches,
   type Match,
   type MatchPhase,
   type Calibration,
@@ -21,7 +22,12 @@ export const metadata: Metadata = {
 export const revalidate = 86400; // 24 hours
 
 export default function MatchesPage() {
-  const todaysMatches = matches;
+  // Round 10: filter to today + future only.
+  // Past matches with finalResult become RECEIPTS · they live on
+  // /track-record + permalink /matches/[gameId] · not in this list.
+  // This is the "daily refresh" UX visitors expect from a sport page.
+  const upcomingMatches = getTodayAndFutureMatches();
+  const recentReceipts = getFinalizedMatches().slice(0, 3);
 
   return (
     <div className="flex flex-col flex-1 min-h-screen">
@@ -33,15 +39,14 @@ export default function MatchesPage() {
       <section className="mx-auto max-w-6xl w-full px-6 sm:px-10 pt-16 pb-10">
         <div className="flex items-baseline gap-3 mb-3 flex-wrap">
           <p className="font-mono text-gold/70 text-[10px] tracking-[0.4em]">
-            今日賽事板 · {todaysMatches[0]?.league ?? "CPBL"}
+            今日賽事板 · {upcomingMatches[0]?.league ?? "CPBL"}
           </p>
-          <span className="font-mono text-[9px] tracking-[0.3em] px-1.5 py-0.5 border border-gold/30 text-gold/70">
-            示範資料
-          </span>
-          <PhaseChip
-            phase={getMatchPhase(todaysMatches[0])}
-            calibration={getCalibration(todaysMatches[0])}
-          />
+          {upcomingMatches[0] && (
+            <PhaseChip
+              phase={getMatchPhase(upcomingMatches[0])}
+              calibration={getCalibration(upcomingMatches[0])}
+            />
+          )}
           <Link
             href="/track-record"
             className="font-mono text-[9px] tracking-[0.3em] px-1.5 py-0.5 border border-gold/30 text-gold/70 hover:border-gold hover:text-gold transition-colors"
@@ -52,37 +57,72 @@ export default function MatchesPage() {
         </div>
         <div className="flex items-end justify-between flex-wrap gap-4">
           <h1 className="text-4xl sm:text-5xl text-bone font-light tracking-tight">
-            {todaysMatches[0]?.date ?? "—"}
+            {upcomingMatches[0]?.date ?? "今日無覆蓋場次"}
           </h1>
           <p className="font-mono text-mute text-xs tracking-[0.25em]">
-            {todaysMatches.length} 場比賽 · AI 模型 15:00 鎖定
+            {upcomingMatches.length} 場引擎覆蓋 · AI 模型 15:00 鎖定
           </p>
         </div>
         <p className="mt-3 font-mono text-mute text-[10px] tracking-[0.25em]">
-          目前 stealth mode 階段 · cpbl-260521-01 為 ZONE 27 第一筆真實 CPBL 截圖 ingestion · 每場引擎覆蓋的比賽以 phase badge 標示
+          引擎只覆蓋親手 ingest 過的場次(per /coverage philosophy)· 賽後過期卡會自動移到 /track-record receipt ledger
         </p>
         <div className="mt-6 w-full h-px bg-line/60" />
       </section>
 
       {/* ── MATCH GRID ──────────────────────── */}
       <section className="mx-auto max-w-6xl w-full px-6 sm:px-10 pb-12">
-        {todaysMatches.length === 0 ? (
-          <div className="bg-slate/40 border border-line/60 p-12 text-center">
+        {upcomingMatches.length === 0 ? (
+          <div className="bg-slate/40 border border-line/60 p-10 sm:p-12 text-center">
             <p className="font-mono text-mute text-xs tracking-[0.25em] mb-4">
-              今日 CPBL · 無排定賽事
+              今日 CPBL · 無引擎覆蓋場次
             </p>
-            <p className="text-mute text-sm leading-relaxed max-w-md mx-auto">
-              可能是季外或休賽日。改看美國職棒今日全部賽程?
+            <p className="text-mute text-sm leading-relaxed max-w-md mx-auto mb-8">
+              可能是季外、休賽日 · 或 Tim 還沒截圖 ingest 明日場次。
+              引擎過去的預測結果已收進 ledger:
             </p>
+            <Link
+              href="/track-record"
+              className="inline-block px-6 py-3 border border-gold text-gold text-xs tracking-[0.3em] hover:bg-gold hover:text-navy transition-colors"
+            >
+              看 /track-record 公開戰績 →
+            </Link>
           </div>
         ) : (
           <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-            {todaysMatches.map((m) => (
+            {upcomingMatches.map((m) => (
               <MiniMatchCard key={m.id} match={m} />
             ))}
           </div>
         )}
       </section>
+
+      {/* ── RECENT RECEIPTS · brand IP signal ──
+          When there's an upcoming match, also show 1-3 past receipts
+          as "engine track record" signal. Brand-IP: 引擎 + 收據 visible
+          together is the conversion lever. */}
+      {upcomingMatches.length > 0 && recentReceipts.length > 0 && (
+        <section className="mx-auto max-w-6xl w-full px-6 sm:px-10 pb-16">
+          <div className="flex items-baseline justify-between flex-wrap gap-3 mb-6">
+            <p
+              lang="en"
+              className="font-mono text-gold/70 text-[10px] tracking-[0.35em]"
+            >
+              / RECENT RECEIPTS · 引擎過去戰績
+            </p>
+            <Link
+              href="/track-record"
+              className="font-mono text-mute hover:text-gold text-[10px] tracking-[0.3em] transition-colors"
+            >
+              完整 ledger →
+            </Link>
+          </div>
+          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+            {recentReceipts.map((m) => (
+              <MiniMatchCard key={m.id} match={m} />
+            ))}
+          </div>
+        </section>
+      )}
 
       {/* ── MLB CTA(即時資料) ───────────────── */}
       <section className="mx-auto max-w-6xl w-full px-6 sm:px-10 pb-24">
