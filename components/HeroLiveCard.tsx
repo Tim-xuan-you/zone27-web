@@ -17,6 +17,10 @@ import {
   type RunningStats,
   type GameResult,
 } from "@/lib/simulator";
+import {
+  FOUNDERS_REMAINING,
+  FOUNDERS_TOTAL,
+} from "@/lib/founders-stats";
 
 // ── ZONE 27 · Hero Live Card ───────────────────────────
 // 首頁的活化版預測卡。Mount 時 client-side 跑 1000 場
@@ -264,7 +268,13 @@ export default function HeroLiveCard({ match }: { match: Match }) {
       {/* CTA — single CTA on mobile (the one that drives engagement),
           two on desktop. Mobile: tap card link → /matches/[gameId] for
           the full breakdown; the sticky bottom Founders CTA handles
-          the conversion ask without competing here. */}
+          the conversion ask without competing here.
+
+          Round 12 funnel-audit: card earned the right to ask once.
+          Tertiary text line below the buttons routes high-intent
+          visitors (just saw engine converge live) → /founders. Brand-
+          pure: 10px mono · doesn't compete with primary CTAs · respects
+          card's existing visual rhythm. */}
       <div className="mt-6 sm:mt-10 flex flex-wrap gap-3 justify-center">
         <Link
           href={`/matches/${match.id}`}
@@ -279,6 +289,18 @@ export default function HeroLiveCard({ match }: { match: Match }) {
           查看今日完整賽事板 →
         </Link>
       </div>
+      {FOUNDERS_REMAINING > 0 && (
+        <p className="mt-5 sm:mt-6 text-center font-mono text-mute/70 text-[10px] tracking-[0.3em] tabular">
+          想成為{" "}
+          <Link
+            href="/founders"
+            className="text-gold hover:text-gold-soft underline-offset-4 hover:underline transition-colors"
+          >
+            {FOUNDERS_REMAINING}/{FOUNDERS_TOTAL} 位之一
+          </Link>
+          ?
+        </p>
+      )}
     </article>
   );
 }

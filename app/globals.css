@@ -61,7 +61,11 @@ body {
   font-family: var(--font-geist-sans), system-ui, sans-serif;
   font-feature-settings: "ss01", "cv11";
   letter-spacing: -0.011em;
+  /* Round 12 bug audit · dvh respects iOS Safari address bar collapse +
+     notched landscape. vh fallback for older browsers (Baseline 2024+
+     for dvh · ~95% support); both lines keep older Chrome/Firefox alive. */
   min-height: 100vh;
+  min-height: 100dvh;
 }
 
 /* Headings — text-wrap balance prevents widowed last words */

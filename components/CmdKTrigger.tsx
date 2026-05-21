@@ -14,7 +14,17 @@ import { useEffect, useState } from "react";
 // why a Windows-style Ctrl chip appears on their machine.
 // ─────────────────────────────────────────────────────
 
-export default function CmdKTrigger({ className = "" }: { className?: string }) {
+type Props = {
+  className?: string;
+  /** "chip" = bordered chip with ⌘K + label (desktop nav default).
+   *  "icon" = bare ⌕ glyph for mobile nav row (no border, fits inline).
+   *  Round 12 funnel-audit: mobile visitors had no way to access the
+   *  23-route palette · verification path for skeptics broken. Adding
+   *  the icon variant exposes the trigger without crowding mobile nav. */
+  variant?: "chip" | "icon";
+};
+
+export default function CmdKTrigger({ className = "", variant = "chip" }: Props) {
   const [isMac, setIsMac] = useState(false);
 
   useEffect(() => {
@@ -34,6 +44,21 @@ export default function CmdKTrigger({ className = "" }: { className?: string }) 
   const open = () => {
     document.dispatchEvent(new CustomEvent("zone27:open-palette"));
   };
+
+  if (variant === "icon") {
+    return (
+      <button
+        type="button"
+        onClick={open}
+        aria-label="Open command palette · 全站快搜"
+        title="全站快搜 · 23 個頁面"
+        className={`py-2.5 -my-1.5 tracking-[0.18em] inline-flex items-center gap-1 text-mute hover:text-gold transition-colors font-mono text-[14px] leading-none ${className}`}
+      >
+        <span aria-hidden="true">⌕</span>
+        <span className="sr-only">搜尋</span>
+      </button>
+    );
+  }
 
   return (
     <button

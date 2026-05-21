@@ -203,18 +203,38 @@ export default async function FoundersPage({
           ONE-TIME · LIFETIME · NEVER REOPENS
         </p>
 
-        {/* Break-even math line — research-backed LTD trust signal.
-            「5.4 個月損益平衡」是 2026 LTD 文案最常被引用的轉換句型。 */}
-        <p className="mt-5 sm:mt-6 max-w-xl mx-auto text-bone text-sm leading-relaxed">
-          與 BLACK CARD 月費 NT$ 499 比較,
-          <span className="font-mono text-gold tabular mx-1">5.4</span>
-          個月即達損益平衡 ·
-          之後每年省下{" "}
-          <span className="font-mono text-gold tabular">NT$ 5,988</span>
+        {/* Break-even math · Round 12 funnel-audit lifted the numbers
+            out of body copy into a 3-cell bento. Mobile visitors skim
+            (Kahneman System 1) · body copy was System 2 territory ·
+            sharpest rational-buyer argument was invisible at the
+            decision moment. Now the 3 numbers grab attention; the
+            descriptive caption stays below as supporting text. */}
+        <div className="mt-5 sm:mt-7 grid grid-cols-3 gap-2 sm:gap-3 max-w-xl mx-auto">
+          <BreakEvenCell
+            value="5.4"
+            unit="個月"
+            en="MONTHS TO BREAK-EVEN"
+          />
+          <BreakEvenCell
+            value="2,700"
+            unit="NT$ 一次"
+            en="ONE-TIME · LIFETIME"
+            gold
+          />
+          <BreakEvenCell
+            value="5,988"
+            unit="NT$ /年省"
+            en="SAVED PER YEAR"
+          />
+        </div>
+        <p className="mt-4 max-w-xl mx-auto text-mute text-xs sm:text-sm leading-relaxed text-center">
+          與 BLACK CARD 月費 NT$ 499 比較 ·{" "}
+          <span className="text-gold">5.4 個月即達損益平衡</span> ·
+          之後每年省下 NT$ 5,988
         </p>
         <p
           lang="en"
-          className="mt-2 font-mono text-mute text-[10px] tracking-[0.3em]"
+          className="mt-2 font-mono text-mute text-[10px] tracking-[0.3em] text-center"
         >
           NO AUTO-RENEW · NO HIDDEN FEES · NEVER REOPENS
         </p>
@@ -801,6 +821,57 @@ function CalcRow({
         </p>
       </div>
       <div className="text-right flex-1">{children}</div>
+    </div>
+  );
+}
+
+// ── Break-even bento cell · Round 12 funnel-audit lift ────
+// Visual treatment for the 3-number break-even math row in /founders
+// hero. Mirrors the hairline-border + gold-accent idiom used in the
+// TIER comparison grid below for visual continuity. The HIGHLIGHTED
+// (gold) cell is the price itself — anchor number that everything
+// else compares against.
+function BreakEvenCell({
+  value,
+  unit,
+  en,
+  gold = false,
+}: {
+  value: string;
+  unit: string;
+  en: string;
+  gold?: boolean;
+}) {
+  return (
+    <div
+      className={`text-center p-3 sm:p-4 border ${
+        gold
+          ? "border-gold/50 bg-gold/5"
+          : "border-line/60 bg-slate/30"
+      }`}
+    >
+      <p
+        className={`font-mono tabular tracking-tight text-2xl sm:text-3xl font-light leading-none ${
+          gold ? "text-gold" : "text-bone"
+        }`}
+      >
+        {value}
+      </p>
+      <p
+        className={`text-[10px] sm:text-[11px] tracking-tight leading-tight mt-1.5 ${
+          gold ? "text-gold/80" : "text-mute"
+        }`}
+      >
+        {unit}
+      </p>
+      <p
+        lang="en"
+        className={`font-mono text-[8px] sm:text-[9px] tracking-[0.2em] leading-tight mt-1 ${
+          gold ? "text-gold/60" : "text-mute/60"
+        }`}
+      >
+        {en}
+      </p>
     </div>
   );
 }

@@ -157,24 +157,34 @@ export default function Footer() {
           ))}
         </div>
 
-        {/* Funding transparency row · Plausible-inspired anti-VC trust signal.
-            Quiet, declarative, single line — visitors scrolling to footer
-            silently absorb the financing model without it competing with
-            navigation. Matches /manifesto Section II MONETIZATION axiom
-            ("we sell identity, not utility"). */}
-        <div className="text-center pb-6 border-b border-line/30">
-          <p className="font-mono text-mute/70 text-[9px] tracking-[0.3em] leading-relaxed">
+        {/* Funding transparency row · Plausible/HEY anti-VC trust signal.
+            Quiet, declarative — visitors scrolling to footer silently
+            absorb the financing model. Matches /manifesto Section II
+            MONETIZATION axiom ("we sell identity, not utility").
+
+            Round 12 brand-IP amplification (Agent A #3 · HEY Spy Trackers
+            pattern): upgrade from generic "無第三方追蹤" to SPECIFIC
+            tracker names (GA · FB Pixel · Hotjar). Each named absence
+            is a hardcoded commitment we can never quietly install
+            later · the specificity IS the trophy. Whole strip links
+            to /privacy where the full anti-tracker inventory lives. */}
+        <Link
+          href="/privacy"
+          className="block text-center pb-6 border-b border-line/30 group hover:bg-slate/10 transition-colors -mx-6 sm:-mx-10 px-6 sm:px-10 py-2"
+          aria-label="我們不追蹤您 · 完整 anti-tracker inventory 見 /privacy Section 03"
+        >
+          <p className="font-mono text-mute/70 group-hover:text-mute text-[9px] tracking-[0.3em] leading-relaxed transition-colors">
             由<span className="text-gold mx-1">創始會員</span>出資
             <span className="mx-2 text-mute/40">·</span>
-            無創投 · 無廣告 · 無第三方追蹤
+            <span lang="en">0 GA · 0 FB Pixel · 0 Hotjar · 0 cookies set</span>
           </p>
           <p
             lang="en"
-            className="font-mono text-mute/70 text-[9px] tracking-[0.3em] mt-1.5"
+            className="font-mono text-mute/70 group-hover:text-mute text-[9px] tracking-[0.3em] mt-1.5 transition-colors"
           >
-            FUNDED BY FOUNDERS · NO VC · NO ADS · NO TRACKERS
+            FUNDED BY FOUNDERS · NO GA · NO PIXEL · NO HOTJAR · 0 COOKIES SET
           </p>
-        </div>
+        </Link>
 
         {/* Bottom row: brand + tagline + version chip */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-6">

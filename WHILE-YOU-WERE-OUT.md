@@ -1,5 +1,8 @@
 # 🌙 您休息時 Claude 做了什麼
 
+> Tim · 2026-05-21 接續 AM · **Round 12 · Tim AFK 全權交給 Claude · 3-agent 偵察 + 4-wave ship · 15 個 conversion + brand IP 提升**
+> Tim · 2026-05-21 終盤 · **Round 11 · Agent UX flow audit · 4 conversion-leak fixes**
+> Tim · 2026-05-21 終盤 · **Round 10 · 補完 match lifecycle routing · /matches filter + featured-match logic**
 > Tim · 2026-05-21 終盤 · **Round 9 · 完成度提升 polish · ESLint 全綠 + stale refs 清**
 > Tim · 2026-05-21 晚上 · **Round 8 · /founders airline-grade · sticky CTA 終點 audit**
 > Tim · 2026-05-21 晚上 · **Round 7 · 27 limitation items → 5 · 我承認 Round 6 over-defended**
@@ -11,6 +14,137 @@
 > Tim · 2026-05-21 開盤 · **Day 3 · /track-record + match lifecycle**
 > Tim · 2026-05-20 晚上 · **Day 2 · 37 commits since /manifesto**
 > Tim · 2026-05-19 晚上 · 十六波迭代 Round 1 → Round 16 (底下)
+
+---
+
+## 🚀 Round 12 (2026-05-21 接續 AM) · Tim AFK 全權交給 Claude · 3-agent 偵察 + 4-wave ship
+
+Tim prompt:「您自己迭代這網站!全權交給您!讓這網站極致完美吧!」+ 真實 persona invocation「以您世界級敢於突破的行銷設計專家經驗」+ 明確「請盡可能地迭代」「上網吸收新知識」。
+
+**Sharp call:** Tim 持續 push 同方向(canary: 別 over-defend) + 真實 persona invocation = think-harder lens 套到每個決定 · 不是 ONE sharp call · 多 wave ship。
+
+### Phase 1 · 偵察(3 agents parallel · ~15 min)
+
+派 3 agents in 同訊息平行跑:
+- **Agent A · World-class brand & UX research**(general-purpose · web-research-heavy)
+  → 7 ranked patterns from Stratechery / Baseball Savant / Pinnacle / HEY / Plausible / Patek / Cartier
+- **Agent B · Production bug + a11y sweep**(Explore agent · code-thorough)
+  → 6 real bugs identified · 2 HIGH severity · 4 MEDIUM/LOW
+- **Agent C · Conversion funnel UX audit**(general-purpose · code-walk + persona-walk)
+  → 8 conversion-leak fixes ranked by revenue impact
+
+Baseline:Build / Lint / TSC strict 三綠 confirmed before any edits。
+
+### Phase 2 · Synthesize sharp call list
+
+Filtered against 13 brand axioms · rejected:
+- Bankless Citizen NFT badges(gamification + crypto)
+- Marc Lou public revenue dashboard(taste-private 違反)
+- Robinhood Gold high-saturation(冷金 minimalism 違反)
+- PrizePicks card-pyramid sticky(已有 sticky · 不疊)
+
+Selected 4 waves(15 items total):
+
+### Phase 3 · Wave 1 · Conversion funnel + Provenance(9 fixes)
+
+| # | Fix | File | Source |
+|---|---|---|---|
+| 1 | Lab sticky CTA refined · /lab restored · /lab/custom kept hidden | StickyFoundersCTA.tsx:44 | Agent C #1 BIGGEST LEAK |
+| 2 | Homepage hero CTA wrapped in hairline pill(Fitts's Law fix) | app/page.tsx:115 | Agent C #2 |
+| 3 | HeroLiveCard tertiary「想成為 N/270 位之一?」link | HeroLiveCard.tsx 結尾 | Agent C #3 |
+| 4 | WaitlistForm counter reframe · "X EARLY · YOU'D BE #N+1"(loss-aversion frame for sub-30 N) | WaitlistForm.tsx:150 | Agent C #4 anti-social-proof inversion |
+| 5 | CmdKTrigger 加 variant="icon" + Nav mobile ⌕ palette trigger | CmdKTrigger.tsx + Nav.tsx | Agent C #5 verification moat unlock |
+| 6 | WaitlistForm post-submit grid · SHARE PROMOTED to primary · /lab DEMOTED to footnote | WaitlistForm.tsx success state | Agent C #6 commitment-consistency peak |
+| 7 | /founders 5.4 個月 lifted from body copy → 3-cell BreakEvenCell bento | app/founders/page.tsx:208 | Agent C #7 Kahneman System 1 fix |
+| 8 | /manifesto Section VI 加 soft Founders nudge(條件式「如果...點頭超過 3 次」 · Pratfall-safe) | app/manifesto/page.tsx:478 | Agent C #8 manifesto-to-founders gradient |
+| 9 | NEW `<ProvenanceStamp />` · ENGINE v0.2 · BUILD {SHA} · MATCH {id} · 引擎產出可截圖引用 · Patek/Bloomberg/Academic citation pattern · 自動加到 MatchSimulator(用於 /lab + /lab/custom + /matches/[gameId]) | NEW components/ProvenanceStamp.tsx + MatchSimulator.tsx | Agent A #6 |
+
+### Phase 3 · Wave 1 Phase 2 · Bug + a11y sweep(Agent B)
+
+| # | Severity | Fix | File |
+|---|---|---|---|
+| 10 | HIGH | command-palette-data 註解 "23-row list" → "24-row list" 對齊實際長度 | lib/command-palette-data.ts:13 |
+| 11 | HIGH | signal-board DATA_STAMP 2026-05-19 → 2026-05-21 對齊 cpbl-260521-01 ingestion | app/signal-board/page.tsx:23 |
+| 12 | MEDIUM | globals.css body min-height 100vh + 100dvh fallback(iOS Safari address bar collapse) | app/globals.css:64 |
+| 13 | MEDIUM | StickyFoundersCTA safe-area-inset 加 left/right(landscape iPhone notch · 已在 Wave 1 #1 同檔合併) | components/StickyFoundersCTA.tsx:55 |
+
+(Agent B 還有 LOW: prefers-reduced-motion .shimmer guard 已存在 line 204-209 · matches.ts recent W/L estimate marker 屬 TODO ⑥ · 暫不處理)
+
+### Phase 3 · Wave 2 · Winners Welcome statement(Agent A #5)
+
+加 Pinnacle-pattern 一句話 audience filter 到 /coverage hero · h1 之後:
+
+> ZONE 27 不為娛樂下注者優化。
+> 我們服務的是想看見模型誠實程度的硬核棒球迷。
+
+Border-l-2 gold pull-quote 視覺重量 · 補強 Section 01-06 既有的 coverage philosophy。Pratfall-safe(repel 錯誤訪客 strengthen 對的訪客)。
+
+### Phase 3 · Wave 3 · Anti-tracker trophy footer(Agent A #3)
+
+Footer trust line 從通用 → 具體:
+- Old: "由 創始會員 出資 · 無創投 · 無廣告 · 無第三方追蹤"
+- New: "由 創始會員 出資 · 0 GA · 0 FB Pixel · 0 Hotjar · 0 cookies set"
+- English: "FUNDED BY FOUNDERS · NO GA · NO PIXEL · NO HOTJAR · 0 COOKIES SET"
+
+整 strip 變 `<Link href="/privacy">` · click 帶到 anti-tracker 完整 inventory。具體名稱(GA · FB Pixel · Hotjar)= hardcoded commitment we can never quietly install later · specificity IS the trophy(HEY Spy Trackers pattern)。
+
+### Round 12 deferred(刻意不做)
+
+Agent A 還有 5 個 patterns 我選擇延後:
+- **#1 Engraved Serial Numbers polish** · Founders 27 #001-270 已存在 · 進一步 Cartier-grade rendering 需要 design time · 留下次
+- **#2 Weekly Thursday Ritual** · 內容生產 commitment · Tim 一人 · 不適合 stealth 期 · 留 Q3 launch 後
+- **#4 Glossary 自有專有名詞** · 需要 research time + 寫定義 · 留下次
+- **#7 Anti-Roadmap 我們永遠不會做** · Pratfall risk(Round 6→7 教訓)· 已有 /coverage NEVER COVER + /roadmap BRAND BOUNDARIES · 再加會 over-extend
+
+### Round 12 brand IP 鎖入
+
+新 memory `[[zone27-provenance-stamp]]` 應寫入:
+- Patek/Bloomberg/academic citation pattern
+- 每場引擎產出可截圖引用
+- ENGINE version + BUILD SHA + MATCH ID 三件 = citable artifact
+- "method public" 物理 demonstration
+
+### Round 12 收盤狀態
+
+- User-visible routes:**21**(沒變 · 沒新增 · 沒移除)
+- Custom OG cards:**15**(沒變)
+- Components:**17**(+1 ProvenanceStamp)
+- Trust artifact pages:**8**(沒變)
+- Build / Lint / TSC strict 三綠(2 build checks during Wave 1+2+3)
+- 0 ESLint warnings
+
+### Tim 回來建議流程
+
+1. `npm run dev` → 開 http://localhost:3000
+2. 首頁 hero 看 FOUNDERS pill(Round 12 新 bordered affordance)
+3. 滾到 HeroLiveCard 看 tertiary「想成為 N/270 位之一?」
+4. `/founders` 看 5.4mo bento 3-cell · 視覺重量比舊版顯著
+5. `/coverage` 看 Winners Welcome pull-quote · hero h1 之後
+6. Footer 看新的 anti-tracker 列表 · click 帶到 /privacy
+7. **手機開** /lab → 找右上 ⌕ palette trigger(Round 12 新 mobile)
+8. **手機開** 任何頁面 → 滑到底看 Footer FUNDED BY trust strip 變 link
+9. 在 /lab 跑模擬 · 滑到底看 NEW ProvenanceStamp · 點 BUILD {SHA} 進 GitHub commit
+10. 在 WaitlistForm 填表 → 看 success state · SHARE card 是 primary 不再藏底部
+11. 在 /lab 跑完模擬 → completion card 底下看「喜歡這個引擎? · 加入 N 個剩下的位置 →」
+
+### Round 12 lesson map(寫進記憶)
+
+12. **Tim 真實 persona invocation = think-harder lens 套到每個決定 · 不是 ONE sharp call** · 跟之前 [[feedback-persona-invocation]] 認知衝突 · 補充 nuance:invocation 出現時 + Tim 明確 AFK + 「請盡可能地迭代」 = 多 wave execution
+
+13. **3 parallel agents 分工 = 偵察 layer · 我自己 = synthesis layer** · agent 輸出當原料 · 我 filter 過 13 brand axioms · 不照單全收(reject 6 個 agent A 建議 + 1 個 agent B 誤判 = filtering matters)
+
+14. **Pratfall 重複教訓:Agent A 給 7 patterns · 我只挑 3 個(disclosure-amplifying + audience-filtering + provenance)· 不疊 4 個以上「我們不做」清單** · per [[feedback-zone27-pratfall-brand-ip]]
+
+---
+
+## 🔧 Round 10-11(2026-05-21 終盤 · 補錄)
+
+(commit log details · 詳細 scroll 見 git log:)
+- **Round 10**(commit `06a8f2f`):補完 match lifecycle routing · /matches filter + featured-match logic · 修今晚 cpbl-260521-01 由 today-pregame → today-live → final 過 phase 不會 break · 補 archive fallback
+- **Round 11 Phase 1**(commit `2d3d134`):self-work 3 micro-polishes · ScarcityStrip · subtle a11y
+- **Round 11 Phase 2**(commit `c871b3b`):派 agent UX flow audit · WaitlistForm dead-end → 3-CTA momentum hub(/matches today + /lab + share)· 4 conversion-leak fixes
+
+(Round 10-11 entries 沒進 docs · Round 12 補錄)
 
 ---
 

@@ -90,14 +90,16 @@ export default function Nav({ active }: { active?: NavKey }) {
           />
         </div>
 
-        {/* Mobile · 2nd row: 4 secondary nav links (excluding founders
-            which is the always-visible gold pill above). Light,
-            breathing, no horizontal-scroll trap. No '更多 ↓' anchor
-            — Apple/Stripe/Linear all skip the 'see more' hint on
-            mobile marketing pages. Visitors who want deeper pages
-            scroll to footer or follow inline content links; we
-            don't telegraph 'we have more pages we're hiding' which
-            would contradict the [[disclosure-philosophy]] axis. */}
+        {/* Mobile · 2nd row: 4 secondary nav links + ⌕ palette trigger.
+            Round 9 hid '更多 ↓' anchor (Apple/Stripe/Linear pattern).
+            Round 12 funnel-audit: mobile visitors had NO way to access
+            the 23-route Cmd-K palette (CmdKTrigger was desktop-only).
+            Skeptics on phones couldn't reach /manifesto · /audit ·
+            /methodology without footer-digging. Adding a tiny ⌕ icon
+            as the 5th item exposes verification routes without
+            telegraphing "we have hidden pages" (icon-only · power-
+            user signal · same affordance as Linear / Notion / Raycast
+            mobile pattern). */}
         <div className="sm:hidden mx-auto max-w-6xl px-6 pb-3">
           <ul className="flex items-center justify-between gap-2 text-[10px] font-mono">
             {NAV_ITEMS.filter((item) => item.key !== "founders").map(
@@ -128,6 +130,9 @@ export default function Nav({ active }: { active?: NavKey }) {
                 </li>
               ),
             )}
+            <li>
+              <CmdKTrigger variant="icon" />
+            </li>
           </ul>
         </div>
       </nav>

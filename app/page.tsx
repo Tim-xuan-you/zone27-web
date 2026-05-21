@@ -111,11 +111,16 @@ export default function Home() {
             the fold · sticky CTA covered mobile but desktop visitors
             had to scan Nav to find /founders. Add inline scarcity
             anchor (desktop-visible · mobile too · doesn't conflict
-            with sticky bar). One-line · brand-pure · text link only. */}
-        <p className="mt-6 sm:mt-8 font-mono text-mute text-xs sm:text-sm tracking-[0.2em] tabular">
+            with sticky bar).
+            Round 12 conversion-funnel agent: bare mono text at -0.2em
+            tracking parsed as label, not CTA (Fitts's Law violation).
+            Wrap in hairline-bordered pill — still brand-pure (canonical
+            ZONE 27 visual idiom), now reads as interactive at first
+            glance without breaking minimalism. */}
+        <p className="mt-6 sm:mt-8">
           <Link
             href="/founders"
-            className="hover:text-gold transition-colors"
+            className="inline-block px-5 py-2.5 border border-gold/40 hover:border-gold hover:bg-gold/5 transition-colors font-mono text-xs sm:text-sm tracking-[0.2em] tabular"
             aria-label={`Founders 27 · ${FOUNDERS_REMAINING} of ${FOUNDERS_TOTAL} seats remain`}
           >
             <span className="text-gold">FOUNDERS · 27</span>
@@ -123,7 +128,7 @@ export default function Home() {
             <span className="text-bone">{FOUNDERS_REMAINING}</span>
             <span className="text-mute/60">/{FOUNDERS_TOTAL}</span>
             <span className="text-mute/60 mx-2">·</span>
-            NT$ 2,700 終身
+            <span className="text-mute">NT$ 2,700 終身</span>
             <span className="text-gold/70 ml-2">→</span>
           </Link>
         </p>

@@ -1,7 +1,9 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
 import ReplayBroadcast from "@/components/ReplayBroadcast";
+import ProvenanceStamp from "@/components/ProvenanceStamp";
 import type { Match } from "@/lib/matches";
 import {
   simulateGame,
@@ -12,6 +14,7 @@ import {
   type GameResult,
 } from "@/lib/simulator";
 import { saveSimHistory } from "@/lib/sim-history";
+import { FOUNDERS_REMAINING } from "@/lib/founders-stats";
 
 // ── ZONE 27 · Match Simulator (shared) ────────────────
 // 把 /lab 的核心互動 UI 抽出來,讓任何給定一場比賽的頁面
@@ -348,6 +351,22 @@ export default function MatchSimulator({ match }: Props) {
               <br />
               <span className="text-gold">這次,連棒球都是真的。</span>
             </p>
+            {/* Round 12 funnel-audit: completion card is THE highest-
+                intent moment in the funnel · visitor just watched
+                10K sims converge in 2s · commitment-consistency peak
+                (Cialdini). Tertiary Founders link catches the dopamine
+                spike inside the card · doesn't compete with /matches CTA. */}
+            {FOUNDERS_REMAINING > 0 && (
+              <p className="mt-6 pt-5 border-t border-gold/20 font-mono text-mute/80 text-[10px] tracking-[0.3em] tabular">
+                喜歡這個引擎? ·{" "}
+                <Link
+                  href="/founders"
+                  className="text-gold hover:text-gold-soft underline-offset-4 hover:underline transition-colors"
+                >
+                  加入 {FOUNDERS_REMAINING} 個剩下的位置 →
+                </Link>
+              </p>
+            )}
           </div>
         </section>
       )}
@@ -362,6 +381,17 @@ export default function MatchSimulator({ match }: Props) {
           awayEn={match.away.en}
           awayPitcher={match.away.pitcher}
           keyId={match.id}
+        />
+      </section>
+
+      {/* ── PROVENANCE STAMP ─────────────────────────────
+          Round 12 brand-IP amplification (Agent A #6 · Patek/Bloomberg
+          citation pattern). Every screenshot of engine output now
+          carries the commit SHA + match ID — verifiable, citable,
+          fork-able. The provenance IS the proof of "method public". */}
+      <section className="pb-10 border-t border-line/30 pt-8">
+        <ProvenanceStamp
+          matchId={match.id.startsWith("custom-") ? "synthetic" : match.id}
         />
       </section>
     </>

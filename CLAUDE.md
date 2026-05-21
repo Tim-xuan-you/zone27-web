@@ -231,11 +231,14 @@ OG + favicon + chrome
 /loading.tsx             Brand-pure suspense skeleton(Round 2)
 ```
 
-## ⚙️ Global components(Round 2/5 加入)
+## ⚙️ Global components(Round 2/5/12)
 
-- `<CommandPalette />` · 全站 ⌘K/Ctrl-K palette · 23 routes 索引(layout.tsx)
-- `<CmdKTrigger />` · Nav 右上方 ⌘K 提示按鈕
-- `<StickyFoundersCTA />` · 行動版 sticky bottom CTA bar · 全頁顯示(除 /founders + /lab)
+- `<CommandPalette />` · 全站 ⌘K/Ctrl-K palette · **24 routes** 索引(layout.tsx)
+- `<CmdKTrigger />` · 雙 variant:
+  - `variant="chip"` (default) · Nav 右上方 ⌘K 提示按鈕(desktop)
+  - `variant="icon"` (Round 12) · Nav mobile 2nd row 右側 ⌕ 圖示(palette 全站可達)
+- `<StickyFoundersCTA />` · 行動版 sticky bottom CTA bar · 全頁顯示(**除 /founders + /lab/custom · Round 12 fix:/lab 復原 sticky · /lab/custom 仍隱藏因有 power-user form**)
+- `<ProvenanceStamp />` (Round 12) · ENGINE v0.2 · BUILD {SHA} · MATCH {id} citation footer · 自動加在 MatchSimulator 內 → 用於 /lab + /lab/custom + /matches/[gameId] · Patek/Bloomberg/academic citation pattern
 
 ## 📦 技術棧
 

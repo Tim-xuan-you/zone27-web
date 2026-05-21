@@ -36,12 +36,17 @@ import {
 export default function StickyFoundersCTA() {
   const pathname = usePathname();
   // Hide on /founders (would compete with the page's own CTA form)
-  // and on /lab + /lab/custom (engine demo + power-user form gets
-  // focus · CTA bar would obscure controls).
-  // Round 9 fix: was `pathname === "/lab"` exact match · missed
-  // /lab/custom · agent flagged that sticky CTA was overlaying the
-  // power-user pitcher input form (per Round 9 audit agent finding 9).
-  if (pathname === "/founders" || pathname?.startsWith("/lab")) return null;
+  // and on /lab/custom (power-user pitcher input form has bottom
+  // controls · sticky CTA would obscure them).
+  //
+  // Round 9 hid /lab + /lab/custom both. Round 12 agent (conversion
+  // funnel audit) flagged that as over-correction: /lab itself has
+  // NO bottom controls — its completion card is THE highest-intent
+  // moment in funnel (visitor just watched engine converge live).
+  // Suppressing the sticky CTA there killed the dopamine-spike →
+  // conversion handoff. /lab/custom still suppresses (real bottom
+  // form). One-line refinement of Round 9.
+  if (pathname === "/founders" || pathname === "/lab/custom") return null;
   if (FOUNDERS_REMAINING === 0) return null;
 
   return (
@@ -51,7 +56,12 @@ export default function StickyFoundersCTA() {
       data-print-hide="true"
       className="fixed bottom-0 inset-x-0 z-30 sm:hidden border-t border-gold/40 bg-ink/85 backdrop-blur-md"
       style={{
+        // All four insets honored for landscape iPhone notches (USB-C
+        // side cutout). Apple HIG requires safe-area on every edge,
+        // not just bottom. Round 12 a11y sweep finding.
         paddingBottom: "env(safe-area-inset-bottom, 0px)",
+        paddingLeft: "env(safe-area-inset-left, 0px)",
+        paddingRight: "env(safe-area-inset-right, 0px)",
       }}
     >
       <Link

@@ -4,6 +4,7 @@ import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import CopyLinkButton from "@/components/CopyLinkButton";
 import RelatedReading from "@/components/RelatedReading";
+import { FOUNDERS_REMAINING } from "@/lib/founders-stats";
 
 export const metadata: Metadata = {
   title: "倒置宣言 · ZONE 27 Manifesto",
@@ -475,6 +476,25 @@ export default function ManifestoPage() {
                 <strong className="text-bone">ZONE 27 不適合你</strong> —
                 我們不打算說服你。市場上有很多適合所有人的平台。
               </P>
+              {/* Round 12 funnel-audit: manifesto is the strongest self-
+                  selection filter in the funnel. Anyone finishing it
+                  has self-identified as fit. Leaving them with only
+                  footer links wastes the highest-quality conversion
+                  moment in the entire funnel. The conditional framing
+                  ("如果...點頭超過 3 次") preserves Pratfall voice — it
+                  still explicitly tells unfit visitors to skip. */}
+              {FOUNDERS_REMAINING > 0 && (
+                <P className="mt-8 text-mute/80">
+                  如果這 4 個倒置讓您點頭超過 3 次 ·{" "}
+                  <Link
+                    href="/founders"
+                    className="text-gold underline-offset-4 hover:underline"
+                  >
+                    這 {FOUNDERS_REMAINING} 個位置是為您留的
+                  </Link>
+                  。
+                </P>
+              )}
             </div>
           </section>
 

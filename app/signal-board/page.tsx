@@ -20,7 +20,10 @@ export const revalidate = 3600;
 // Data stamp for the currently shown matches. Hardcoded until the
 // daily MLB-Stats-API + CPBL ingestion cron is wired. The page surfaces
 // this via the FRESHNESS row so visitors can see the gap honestly.
-const DATA_STAMP = "2026-05-19";
+// Round 12 bug audit · sync to 2026-05-21 · matches lib/matches.ts
+// cpbl-260521-01 ingestion date (was stale at 2026-05-19 misleading
+// visitors about model freshness).
+const DATA_STAMP = "2026-05-21";
 
 function getTaipeiTodayParts(): { year: string; month: string; day: string; iso: string } {
   const now = new Date();

@@ -5,6 +5,7 @@ import { useActionState } from "react";
 import { useFormStatus } from "react-dom";
 import { reserveSpot, type WaitlistResult } from "@/lib/waitlist";
 import CopyLinkButton from "@/components/CopyLinkButton";
+import { FOUNDERS_REMAINING } from "@/lib/founders-stats";
 
 // ── Submit button — disables while pending, shows spinner ───
 function SubmitButton() {
@@ -68,30 +69,46 @@ export default function WaitlistForm({
           目前不收費 · 不綁定 · 隨時可退出
         </p>
 
-        {/* Round 11 · ONE BIG THING fix:
-            Post-submit was dead-end with only CopyLinkButton.
-            Visitor in peak commitment-consistency state (Cialdini)
-            deserves 3 CTAs · not 1. Per Round 11 agent finding:
-            "highest-trust moment in funnel" → was dead-end → now hub.
+        {/* Round 11 · ONE BIG THING fix: post-submit was dead-end.
+            Round 12 conversion-funnel audit refined the hub ordering.
+            Commitment-consistency peaks within seconds of submit
+            (Cialdini & Trope 1976) — the FIRST ask must be the
+            highest-leverage one. For a stealth-mode no-ads brand,
+            that's the share-the-wall act (each signup must produce
+            2-3 referrals to compound waitlist growth).
 
-            Order intentional:
-            1. /matches/cpbl-260521-01 · fulfill credibility promise the
-               brand was built on (see today's engine prediction)
-            2. /lab · engagement lever (deepen into engine demo)
-            3. CopyLinkButton · tertiary share-the-wall (commitment-
-               consistency · "the next ask after waitlist") */}
+            Round 12 order:
+            1. SHARE (PROMOTED · primary grid · gold-filled card) ·
+               peak-moment referral capture
+            2. /matches/cpbl-260521-01 (still primary · receipt promise)
+            3. /lab (DEMOTED to tertiary footnote · engagement-not-
+               acquisition action) */}
         <div className="mt-10 pt-6 border-t border-line/40 space-y-4">
           <p className="font-mono text-gold text-[10px] tracking-[0.4em] mb-2">
             您可以接著做的事
           </p>
           <div className="grid sm:grid-cols-2 gap-3">
+            {/* SHARE card (PRIMARY · gold-filled · highest-leverage) */}
+            <div className="border border-gold/50 bg-gold/5 p-4 text-left">
+              <p
+                lang="en"
+                className="font-mono text-gold text-[9px] tracking-[0.3em] mb-1"
+              >
+                / SHARE
+              </p>
+              <p className="text-bone text-sm leading-snug mb-3">
+                傳給 27 位真懂的人 →
+              </p>
+              <CopyLinkButton refTag={`reserve-${pos}`} />
+            </div>
+            {/* TONIGHT card (still primary · receipt-promise route) */}
             <Link
               href="/matches/cpbl-260521-01"
-              className="block border border-gold/40 hover:border-gold p-4 group transition-colors text-left"
+              className="block border border-line/60 hover:border-gold/40 p-4 group transition-colors text-left"
             >
               <p
                 lang="en"
-                className="font-mono text-gold/70 text-[9px] tracking-[0.3em] mb-1"
+                className="font-mono text-mute text-[9px] tracking-[0.3em] mb-1"
               >
                 / TONIGHT
               </p>
@@ -102,32 +119,16 @@ export default function WaitlistForm({
                 統一 vs 富邦 · 18:35 新莊
               </p>
             </Link>
-            <Link
-              href="/lab"
-              className="block border border-line/60 hover:border-gold/40 p-4 group transition-colors text-left"
-            >
-              <p
-                lang="en"
-                className="font-mono text-mute text-[9px] tracking-[0.3em] mb-1"
-              >
-                / ENGINE
-              </p>
-              <p className="text-bone text-sm leading-snug group-hover:text-gold transition-colors">
-                在 /lab 親手跑一場 →
-              </p>
-              <p className="font-mono text-mute text-[10px] tracking-[0.2em] mt-1">
-                10,000 場 Monte Carlo · 在您瀏覽器
-              </p>
-            </Link>
           </div>
 
-          {/* Tertiary: share-the-wall (was the only action · now footnote) */}
-          <div className="pt-4 border-t border-line/40">
-            <p className="font-mono text-mute text-[10px] tracking-[0.3em] mb-3 text-center">
-              或把這扇門傳給朋友 ·
-              <span lang="en"> SHARE THE WALL</span>
-            </p>
-            <CopyLinkButton refTag={`reserve-${pos}`} />
+          {/* /lab demoted to tertiary footnote text link */}
+          <div className="pt-4 border-t border-line/40 text-center">
+            <Link
+              href="/lab"
+              className="font-mono text-mute hover:text-gold text-[10px] tracking-[0.3em] transition-colors"
+            >
+              或在 /lab 親手跑一場 10,000 場模擬 →
+            </Link>
           </div>
         </div>
       </div>
@@ -151,15 +152,30 @@ export default function WaitlistForm({
           <p
             lang="en"
             className="font-mono text-mute text-[10px] tracking-[0.3em] flex items-center gap-2"
-            aria-label={`Live waitlist count: ${waitlistCount} readers`}
+            aria-label={
+              waitlistCount === 0
+                ? "Waitlist is empty · be the first in line"
+                : waitlistCount < 30
+                ? `${waitlistCount} people earlier than you · you would be queue position ${waitlistCount + 1}`
+                : `Live waitlist count: ${waitlistCount} readers`
+            }
           >
             <span
               className="w-1 h-1 rounded-full bg-gold/80 shrink-0"
               style={{ boxShadow: "0 0 6px rgba(212, 175, 55, 0.6)" }}
               aria-hidden="true"
             />
+            {/* Round 12 funnel-audit: small absolute N reads as anti-
+                social-proof ("only 7 care"). Reframe sub-30 as queue
+                position — "X earlier · you would be #N+1" triggers loss
+                aversion (Cialdini Ch.4 · Robinson 2003). At N≥30 absolute
+                count starts working as social proof on its own. */}
             <span className="tabular">
-              WAITLIST · {waitlistCount} · LIVE
+              {waitlistCount === 0
+                ? "WAITLIST · BE THE FIRST IN LINE"
+                : waitlistCount < 30
+                ? `${waitlistCount} EARLY · YOU'D BE #${String(waitlistCount + 1).padStart(3, "0")}`
+                : `WAITLIST · ${waitlistCount} · LIVE`}
             </span>
           </p>
         )}

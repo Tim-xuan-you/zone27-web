@@ -171,10 +171,24 @@ export default function CoveragePage() {
               我們覆蓋哪些賽事 ·{" "}
               <span className="text-mute">為什麼不覆蓋全部</span>
             </h1>
+
+            {/* Round 12 brand-IP amplification (Agent A #5 · Pinnacle
+                "Winners Welcome" pattern). One-line audience filter
+                crystallizes the 6-section policy below. Pratfall-safe:
+                explicitly repelling娛樂下注者 strengthens hardcore-fan
+                signal (Aronson 1966 / Spence 1973 costly signaling). */}
+            <p className="text-bone text-lg sm:text-xl leading-relaxed mb-6 border-l-2 border-gold/60 pl-5 sm:pl-6 max-w-2xl">
+              <strong>ZONE 27 不為娛樂下注者優化。</strong>
+              <br />
+              <span className="text-mute">
+                我們服務的是想看見<span className="text-gold">模型誠實程度</span>的硬核棒球迷。
+              </span>
+            </p>
+
             <p className="text-mute text-base leading-relaxed mb-8 max-w-2xl">
-              ZONE 27 不是「所有可下注賽事的預測 vending machine」。
-              我們只覆蓋引擎能誠實計算的比賽。本頁完整公開:作用中的聯盟、
-              追蹤但未啟用的、創始會員可投票請求的、以及**我們永遠不會覆蓋的**。
+              這頁列出我們覆蓋什麼 · 不覆蓋什麼 · 為什麼。
+              ZONE 27 不是「所有可下注賽事的預測 vending machine」 ·
+              只覆蓋引擎能誠實計算的比賽。
             </p>
 
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-x-6 gap-y-3 pt-4 font-mono text-[10px] tracking-[0.18em] section-reveal">
