@@ -215,6 +215,63 @@ export default function ManifestoPage() {
               身分付費讓真正想成為品牌一部分的人有專屬位置。
               這兩件事不能反過來:免費身分 + 收費工具 = 我們變成普通 SaaS。
             </P>
+            {/* Round 29 Wave 1 · MLM disambiguation brand defense.
+                台灣訪客看到「限量 270 + 親手 onboard + 終身 + LINE 群 +
+                未來實體聚會」很容易 surface-level 聯想到 MLM/安麗式
+                「限量早期合夥人」框架 · 但 ZONE 27 經濟結構跟 MLM 完全
+                相反。先前這個 disambiguation 埋在 /founders + /audit +
+                /manifesto 多處 · 沒有任何一處主動 surface。Pratfall +
+                Costly Signaling pattern · 主動 distance 比 reactive
+                clarify 強。 */}
+            <div className="mt-8 border border-loss/30 bg-loss/5 p-5 sm:p-6">
+              <p
+                lang="en"
+                className="font-mono text-loss text-[10px] tracking-[0.4em] mb-3"
+              >
+                ▲ NOT MLM · 結構防線
+              </p>
+              <P className="!mb-3">
+                <strong className="text-bone">這結構長得像 MLM 嗎?</strong>{" "}
+                表面有幾個 visual cue 確實會被聯想:限量名額(270)·
+                終身會員 · Tim 親手 onboard · 未來 LINE 群 + 實體聚會。
+                但 ZONE 27 的經濟結構跟 MLM / 安麗式平台
+                <strong className="text-bone">完全相反</strong>。
+              </P>
+              <ul className="list-none pl-0 space-y-2 text-sm font-mono text-mute">
+                <li>
+                  <span className="text-loss/80">✕</span> MLM downline 抽佣 →{" "}
+                  <span className="text-bone">ZONE 27 · 零 multi-level compensation</span>
+                </li>
+                <li>
+                  <span className="text-loss/80">✕</span> MLM 推薦獎金 / referral bonus →{" "}
+                  <span className="text-bone">ZONE 27 · 沒有任何推薦獎金</span>
+                </li>
+                <li>
+                  <span className="text-loss/80">✕</span> MLM 業績 quota →{" "}
+                  <span className="text-bone">Founders 27 一次性付款 · 沒 quota</span>
+                </li>
+                <li>
+                  <span className="text-loss/80">✕</span> MLM 強制庫存 →{" "}
+                  <span className="text-bone">沒實體商品 · 引擎免費</span>
+                </li>
+                <li>
+                  <span className="text-loss/80">✕</span> MLM「成功學」/ 畫餅訓練 →{" "}
+                  <span className="text-bone">沒任何 sales-script · 沒洗腦營</span>
+                </li>
+                <li>
+                  <span className="text-loss/80">✕</span> MLM 無限招募下線 →{" "}
+                  <span className="text-bone">限量 270 · 一次性 · #270 認領那秒永久關閉</span>
+                </li>
+              </ul>
+              <P className="text-mute/70 !mb-0 mt-4 text-sm">
+                BLACK CARD 創作者抽成 5% = platform fee(類 Stripe / Spotify) ·
+                Founders 27 創作者抽成 0%(把「未來不抽您佣」當 perk · 不是 referral kick-back)。
+                限量 270 是 <strong className="text-bone">Costly Signaling</strong> · 不是招募階梯。
+                終身會員是
+                <strong className="text-bone">扛了品牌風險的早期支持者的補償</strong> ·
+                不是未來業績的領先指標。
+              </P>
+            </div>
             <P className="text-mute/70">
               現場版完整聲明見{" "}
               <Link
@@ -223,7 +280,14 @@ export default function ManifestoPage() {
               >
                 /lab/custom
               </Link>{" "}
-              hero footer。
+              hero footer · FAQ 對照清單見{" "}
+              <Link
+                href="/faq#mlm"
+                className="text-gold hover:underline underline-offset-4"
+              >
+                /faq · ZONE 27 跟傳銷有什麼不同
+              </Link>
+              。
             </P>
           </AxiomSection>
 

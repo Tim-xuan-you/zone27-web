@@ -5,9 +5,9 @@ import Footer from "@/components/Footer";
 import RelatedReading from "@/components/RelatedReading";
 
 export const metadata: Metadata = {
-  title: "FAQ — 預先掃雷的 14 個問題",
+  title: "FAQ — 預先掃雷的 15 個問題",
   description:
-    "ZONE 27 是什麼?是博彩嗎?Founders 27 跟 Black Card 差別?付款什麼時候開放?14 個誠實到不能再誠實的回答 — 包括「你們會追蹤我嗎?」(不會)。",
+    "ZONE 27 是什麼?是博彩嗎?是傳銷嗎?Founders 27 跟 Black Card 差別?付款什麼時候開放?15 個誠實到不能再誠實的回答 — 包括「你們會追蹤我嗎?」(不會)+「跟 MLM 有什麼不同?」(全方位不同)。",
 };
 
 type QA = {
@@ -136,6 +136,70 @@ const CATEGORIES: Category[] = [
               /leaderboard
             </Link>{" "}
             三處。
+          </>
+        ),
+      },
+      {
+        q: "ZONE 27 跟傳銷(MLM / 直銷 / 安麗式)有什麼不同?",
+        a: (
+          <>
+            <strong className="text-bone">經濟結構完全相反。</strong>{" "}
+            MLM 的核心收入靠下線抽佣 + 推薦獎金(您介紹的人賺多少 · 您拿一部分)·
+            ZONE 27 完全
+            <strong className="text-bone">沒有 downline 結構</strong>。
+            <br />
+            <br />
+            <span className="block font-mono text-mute text-[10px] tracking-[0.3em] mb-3">
+              ✕ 我們不做的 vs ZONE 27 對應結構
+            </span>
+            <ul className="space-y-2 list-none pl-0 text-sm">
+              <li>
+                <span className="text-loss/80 mr-2">✕</span>
+                MLM 多層次抽佣 ·{" "}
+                <span className="text-bone">ZONE 27 零 multi-level compensation</span>
+              </li>
+              <li>
+                <span className="text-loss/80 mr-2">✕</span>
+                MLM 推薦獎金 ·{" "}
+                <span className="text-bone">ZONE 27 沒有任何 referral bonus</span>
+              </li>
+              <li>
+                <span className="text-loss/80 mr-2">✕</span>
+                MLM 業績 quota ·{" "}
+                <span className="text-bone">Founders 27 一次性付款 · 沒 quota</span>
+              </li>
+              <li>
+                <span className="text-loss/80 mr-2">✕</span>
+                MLM 強制庫存 ·{" "}
+                <span className="text-bone">沒實體商品 · 引擎免費</span>
+              </li>
+              <li>
+                <span className="text-loss/80 mr-2">✕</span>
+                MLM「成功學」訓練 ·{" "}
+                <span className="text-bone">沒任何 sales-script · 沒洗腦營</span>
+              </li>
+              <li>
+                <span className="text-loss/80 mr-2">✕</span>
+                MLM 無限招募下線 ·{" "}
+                <span className="text-bone">限量 270 · 一次性 · #270 認領那秒永久關閉</span>
+              </li>
+            </ul>
+            <br />
+            BLACK CARD 創作者抽成 5% 是 <strong className="text-bone">platform fee</strong>
+            (類 Stripe / Spotify · 不是 multi-level)· Founders 27 創作者抽成 0%
+            (把「未來不抽您佣」當 perk · 不是 referral kick-back)。
+            <br />
+            <br />
+            表面 visual cue(限量 / 親手 onboard / LINE 群)有重疊 ·
+            但結構是 <strong className="text-bone">Costly Signaling + 早期支持者補償</strong> ·
+            不是招募階梯。完整 monetization philosophy 見{" "}
+            <Link
+              href="/manifesto"
+              className="text-gold underline-offset-4 hover:underline"
+            >
+              /manifesto Section II
+            </Link>
+            。
           </>
         ),
       },
