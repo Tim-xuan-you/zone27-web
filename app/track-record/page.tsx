@@ -185,6 +185,17 @@ export default function TrackRecordPage() {
 
         {finalized.length === 0 ? (
           <EmptyLedger />
+        ) : finalized.length === 1 ? (
+          // Round 29 Wave 5A · First Receipt cinematic. When N=1 the
+          // single ledger entry is rendered with elevated treatment ·
+          // gold 2px border · "★ FIRST RECEIPT · 1 OF 270 PROJECTED"
+          // band · larger verdict visual · slow gold glow. This is
+          // designed for tonight's cpbl-260521-01 ingest moment ·
+          // the physical brand-IP event of the week.
+          // PROVED and DIVERGED get equal visual weight per axiom ·
+          // no emoji / no celebration animation that biases toward
+          // PROVED outcome.
+          <FirstReceiptHero match={finalized[0]} />
         ) : (
           <div className="border border-line/70">
             {/* Bloomberg-style table header · hidden on mobile (stacked cards below) */}
@@ -507,6 +518,180 @@ function LedgerRow({ match }: { match: Match }) {
         </div>
       </Link>
     </>
+  );
+}
+
+// ── First Receipt Hero · N=1 cinematic ──────────────────
+// Round 29 Wave 5A · 為今晚 cpbl-260521-01 ingest 設計的專屬 brand
+// 物理時刻。當 finalized.length === 1 時 · 唯一那筆 ledger entry 用
+// elevated treatment 顯示:
+//   - 2px gold border + soft glow(brand glow-gold class)
+//   - 「★ FIRST RECEIPT · 1 OF 270 PROJECTED」kicker band
+//   - 大字 team names + engine prediction + actual final score
+//   - PROVED/DIVERGED 等大視覺權重(per /audit Section 05 disclosure
+//     philosophy · 不藏 miss · 不偏向 PROVED outcome)
+//   - 底部 tagline: 「269 more will follow as the engine runs through
+//     the CPBL season」 — accumulating-over-time framing(Endowment
+//     Effect · per Agent A Pattern #1 lightweight 版)
+// 當 N>1 切回正常 ledger 表格(no cinematic for row 2+)。
+function FirstReceiptHero({ match }: { match: Match }) {
+  const cal = getCalibration(match);
+  const enginePctOnWinner = getEnginePctOnWinner(match);
+  const fr = match.finalResult;
+  if (!fr || !cal) return null;
+
+  const homeFavored = match.home.winRate > match.away.winRate;
+  const favoriteName = homeFavored ? match.home.name : match.away.name;
+  const favoritePct = Math.max(match.home.winRate, match.away.winRate);
+  const dateIso = getMatchDateIso(match) ?? "—";
+
+  const verdictColor = {
+    proved: "text-gold",
+    diverged: "text-loss",
+    push: "text-mute",
+  }[cal];
+  const verdictBorder = {
+    proved: "border-gold",
+    diverged: "border-loss/70",
+    push: "border-mute/60",
+  }[cal];
+  const verdictLabel = {
+    proved: "✓ PROVED · ENGINE 言中",
+    diverged: "✕ DIVERGED · ENGINE 落空",
+    push: "= PUSH · 平局或無 favorite",
+  }[cal];
+
+  return (
+    <article
+      aria-label="First receipt · the inaugural ZONE 27 calibration entry"
+      className="border-2 border-gold/70 glow-soft bg-slate/30 enter-fade-up"
+    >
+      {/* ── KICKER BAND ─────────────────────── */}
+      <div className="border-b border-gold/40 bg-gold/5 px-5 sm:px-8 py-4 flex items-baseline justify-between flex-wrap gap-3">
+        <p
+          lang="en"
+          className="font-mono text-gold text-[10px] sm:text-xs tracking-[0.4em] shimmer"
+          title="這是 ZONE 27 公開戰績 ledger 的第一筆 · 物理時刻 · 不會重來"
+        >
+          ★ FIRST RECEIPT · 1 OF 270 PROJECTED
+        </p>
+        <p className="font-mono text-mute text-[10px] tracking-[0.3em] tabular">
+          {dateIso} · INGEST
+        </p>
+      </div>
+
+      {/* ── MATCH SUMMARY ──────────────────────── */}
+      <div className="px-5 sm:px-8 pt-7 pb-6">
+        <p className="font-mono text-mute text-[10px] tracking-[0.35em] mb-3">
+          / MATCHUP
+        </p>
+        <h2 className="text-2xl sm:text-3xl text-bone font-light tracking-tight leading-snug mb-1">
+          <span className="text-gold">{match.home.name}</span>
+          <span className="text-mute/60 mx-3 text-base">vs</span>
+          <span className="text-mute">{match.away.name}</span>
+        </h2>
+        <p className="font-mono text-mute text-[10px] tracking-[0.25em] mt-1">
+          {match.home.en} <span className="text-mute/40">·</span>{" "}
+          {match.away.en}
+        </p>
+      </div>
+
+      {/* ── ENGINE vs ACTUAL GRID ───────────── */}
+      <div className="px-5 sm:px-8 pb-7">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-8">
+          <div className="border-l-2 border-gold/30 pl-5 pr-2 py-2">
+            <p
+              lang="en"
+              className="font-mono text-mute text-[10px] tracking-[0.35em] mb-2"
+            >
+              ENGINE PREDICTED · 賽前鎖定
+            </p>
+            <p className="font-mono text-bone tabular text-3xl sm:text-4xl font-light tracking-tight leading-none">
+              {favoritePct}
+              <span className="text-lg opacity-60 ml-1">%</span>
+              <span className="text-mute text-base ml-3">
+                {homeFavored ? match.home.en : match.away.en}
+              </span>
+            </p>
+            <p className="font-mono text-mute text-[10px] tracking-[0.25em] mt-3 tabular">
+              FAVORITE · {favoriteName} · CONF {match.aiConfidence}/100
+            </p>
+          </div>
+          <div className="border-l-2 border-bone/30 pl-5 pr-2 py-2 sm:text-right sm:border-l-0 sm:border-r-2 sm:pr-5 sm:pl-2">
+            <p
+              lang="en"
+              className="font-mono text-mute text-[10px] tracking-[0.35em] mb-2"
+            >
+              ACTUAL RESULT · 賽後
+            </p>
+            <p className="font-mono text-bone tabular text-3xl sm:text-4xl font-light tracking-tight leading-none">
+              {fr.homeScore}:{fr.awayScore}
+              <span className="text-mute text-base ml-3">
+                {fr.winner === "home"
+                  ? `${match.home.en} W`
+                  : fr.winner === "away"
+                  ? `${match.away.en} W`
+                  : "TIE"}
+              </span>
+            </p>
+            <p className="font-mono text-mute text-[10px] tracking-[0.25em] mt-3 tabular">
+              {fr.innings ?? 9} 局 · {fr.ingestedAt} INGEST
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* ── VERDICT BAND ──────────────────────── */}
+      <div
+        className={`border-t-2 ${verdictBorder} px-5 sm:px-8 py-6 sm:py-7 text-center`}
+      >
+        <p
+          lang="en"
+          className={`font-mono ${verdictColor} text-lg sm:text-2xl tracking-[0.3em] font-medium`}
+        >
+          {verdictLabel}
+        </p>
+        {enginePctOnWinner !== null && (
+          <p
+            className={`font-mono ${verdictColor} text-[11px] sm:text-xs tracking-[0.3em] tabular mt-3 opacity-80`}
+          >
+            {cal === "proved" && (
+              <>
+                <span lang="en">ENGINE %{" "}ON WINNER</span> · {enginePctOnWinner}%{" "}
+                <span className="text-mute mx-2">→</span>
+                <span lang="en">CORRECT FAVORITE</span>
+              </>
+            )}
+            {cal === "diverged" && (
+              <>
+                <span lang="en">ENGINE %{" "}ON ACTUAL WINNER</span> · 僅{enginePctOnWinner}%{" "}
+                <span className="text-mute mx-2">→</span>
+                <span lang="en">UNDERDOG WON</span>
+              </>
+            )}
+            {cal === "push" && (
+              <>
+                <span lang="en">NO FAVORITE 或 TIE</span> · 引擎 verdict 不可驗證
+              </>
+            )}
+          </p>
+        )}
+      </div>
+
+      {/* ── TAGLINE FOOTER ─────────────────── */}
+      <div className="border-t border-line/30 px-5 sm:px-8 py-4 bg-navy/40">
+        <p className="font-mono text-mute/70 text-[10px] tracking-[0.25em] leading-relaxed text-center">
+          ▌ <span lang="en">269 more will follow as the engine runs through
+          the CPBL season</span> · 不刪 · 不修飾 · 不重新加權 ·{" "}
+          <Link
+            href={`/matches/${match.id}`}
+            className="text-gold hover:text-gold-soft underline-offset-4 hover:underline transition-colors"
+          >
+            完整 breakdown →
+          </Link>
+        </p>
+      </div>
+    </article>
   );
 }
 

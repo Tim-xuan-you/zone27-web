@@ -1,12 +1,99 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import {
   getSimHistory,
   relativeTime,
   type SimHistoryEntry,
 } from "@/lib/sim-history";
+
+// ── Roadmap voting state · Round 29 Wave 5B(Agent A Pattern #5)──
+// Linear / PostHog 2025-2026 從 upvote 轉 drag-rank · 「ranked
+// prioritization」比 thumb-up 心理投資高 · 訪客 think like an engineer.
+// 因 mobile drag-drop 不穩 + brand「no deps」axiom · 用 ▲▼ arrow
+// buttons swap-with-neighbor 取代 HTML5 drag(Linear column reorder
+// 同模式 · mobile-safe)。localStorage 持久 · auth 上線後 sync。
+
+type RoadmapItem = {
+  id: string;
+  title: string;
+  body: string;
+  tier: string;
+  disabled?: boolean;
+};
+
+const ROADMAP_ITEMS: RoadmapItem[] = [
+  {
+    id: "v3-park",
+    title: "v0.3 · 加入球場因素 (park factor)",
+    body: "目前所有球場用聯盟均值 · 加入 park factor 後 · 統一桃園 vs 統一新莊 主場優勢會有真實 home/away winRate 影響。",
+    tier: "BLACK CARD + Founders 27",
+  },
+  {
+    id: "v3-batter",
+    title: "v0.3 · 加入打者個別品質 (隊伍 wOBA)",
+    body: "目前所有打者假設聯盟平均 · 加入隊伍 wOBA 後 · 強打線 vs 二軍 winRate gap 會反映真實。",
+    tier: "BLACK CARD + Founders 27",
+  },
+  {
+    id: "v4-statcast",
+    title: "v0.4 · 球速 + 轉軸物理 (待 CPBL 公開 Statcast)",
+    body: "aspirational · 等 CPBL 開始公開 PA 級 K/BB + EV/LA 等 Statcast 資料 · 我們才接得上去。",
+    tier: "尚未開放投票 · 等資料就緒",
+    disabled: true,
+  },
+];
+
+const VOTE_STORAGE_KEY = "zone27_engine_voting_v1";
+
+type VotingState = {
+  order: string[];
+  because: string;
+};
+
+function defaultVotingState(): VotingState {
+  return { order: ROADMAP_ITEMS.map((r) => r.id), because: "" };
+}
+
+function loadVotingState(): VotingState {
+  if (typeof window === "undefined") return defaultVotingState();
+  try {
+    const raw = window.localStorage.getItem(VOTE_STORAGE_KEY);
+    if (!raw) return defaultVotingState();
+    const parsed = JSON.parse(raw);
+    if (
+      parsed &&
+      typeof parsed === "object" &&
+      Array.isArray(parsed.order) &&
+      parsed.order.every((id: unknown) => typeof id === "string") &&
+      typeof parsed.because === "string"
+    ) {
+      // Re-validate IDs match current roadmap (drop unknown · add missing at end)
+      const validIds = new Set(ROADMAP_ITEMS.map((r) => r.id));
+      const filtered = parsed.order.filter((id: string) => validIds.has(id));
+      const missing = ROADMAP_ITEMS.map((r) => r.id).filter(
+        (id) => !filtered.includes(id)
+      );
+      return {
+        order: [...filtered, ...missing],
+        because: parsed.because.slice(0, 280),
+      };
+    }
+  } catch {
+    /* fall through */
+  }
+  return defaultVotingState();
+}
+
+function saveVotingState(state: VotingState): void {
+  if (typeof window === "undefined") return;
+  try {
+    window.localStorage.setItem(VOTE_STORAGE_KEY, JSON.stringify(state));
+  } catch {
+    /* ignore quota errors */
+  }
+}
 
 // ── ZONE 27 · Member Dashboard Preview ─────────────────
 // Round 29 Wave 2 · Tim 直擊:「會員他們自己的頁面又在哪裡?」
@@ -28,21 +115,19 @@ import {
 // ─────────────────────────────────────────────────────
 
 export default function MemberDashboardPreview() {
-  // Mount flag for SSR hydration safety · single setState in useEffect
-  // (acceptable pattern per React docs for one-time mount transitions ·
-  // alternative is useSyncExternalStore but localStorage doesn't emit
-  // change events so subscribe would be noop).
+  // Mount flag + capture-once timestamp for SSR hydration safety.
+  // Date.now() can't live in useMemo (react-hooks/purity rule) so we
+  // capture it once on mount into state · then derive daysSinceFirst
+  // from it. Single useEffect setState is the canonical SSR-safe pattern
+  // for browser-API access(localStorage 沒 same-window change events ·
+  // useSyncExternalStore subscribe 是 noop · Object.is comparison thrash).
   const [mounted, setMounted] = useState(false);
+  const [mountTime, setMountTime] = useState<number>(0);
 
-  // One-time mount transition for SSR-safe localStorage access.
-  // useSyncExternalStore would be the lint-preferred alternative but
-  // localStorage doesn't emit same-window change events · subscribe would
-  // be a noop · and getSnapshot returning a new array each render would
-  // cause Object.is comparison thrash. Mount flag pattern is the
-  // canonical approach for SSR-safe browser-API access per React docs.
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setMounted(true);
+    setMountTime(Date.now());
   }, []);
 
   // Derive history from mounted state · only reads localStorage post-mount ·
@@ -51,6 +136,21 @@ export default function MemberDashboardPreview() {
     () => (mounted ? getSimHistory() : []),
     [mounted]
   );
+
+  // Days since oldest sim · used in memory resurfacing strip
+  // (Pattern #1 lightweight · Day One「what I have accumulated」framing).
+  // Math.max(1, ...) avoids 「0 天」 framing for same-day runs.
+  // Uses mountTime captured at mount(react-hooks/purity rule prevents
+  // Date.now() inside useMemo).
+  // ALL hooks must run BEFORE any early return (rules-of-hooks).
+  const daysSinceFirst = useMemo<number>(() => {
+    if (!mounted || mountTime === 0 || history.length === 0) return 0;
+    const oldest = Math.min(...history.map((h) => h.ranAt));
+    return Math.max(
+      1,
+      Math.floor((mountTime - oldest) / (1000 * 60 * 60 * 24))
+    );
+  }, [mounted, mountTime, history]);
 
   // SSR fallback — show "what your dashboard will contain" generic version
   // Mounted state guards localStorage access for hydration safety.
@@ -85,6 +185,45 @@ export default function MemberDashboardPreview() {
         <span className="text-mute/40">·</span>{" "}
         <span lang="en">我們看不到 · 0 cookies · 0 GA · 0 pixel</span>
       </div>
+
+      {/* ── MEMORY RESURFACING STRIP ─────────────────
+          Agent A 2026 research Pattern #1 lightweight · Day One
+         「On This Day」accumulating-over-time framing。Loss aversion
+          says「don't lose this」· memory resurfacing 升一級 says
+         「look how much you already own」。Strava Annual Best Efforts
+          + GitHub contribution graph 同邏輯 · 視覺化 visitor 已累積的
+          投入(Endowment Effect 真正的 trigger 是「我擁有 X 」 ·
+          不是「我可能會擁有 X」)。
+          只在 history.length > 0 才 render · first-time visitor 不看見。 */}
+      {history.length > 0 && (
+        <div className="border-l-2 border-gold/50 pl-4 sm:pl-5 py-3 bg-gold/5">
+          <p
+            lang="en"
+            className="font-mono text-gold/70 text-[10px] tracking-[0.35em] mb-1"
+          >
+            ▌ YOU&apos;VE ACCUMULATED · 您已累積
+          </p>
+          <p className="text-bone text-base sm:text-lg leading-snug">
+            <span className="font-mono text-gold tabular text-2xl sm:text-3xl">
+              {history.length}
+            </span>
+            <span className="ml-2 text-mute">場引擎 sim</span>
+            {daysSinceFirst > 0 && (
+              <>
+                {" · over "}
+                <span className="font-mono text-bone tabular text-xl sm:text-2xl">
+                  {daysSinceFirst}
+                </span>
+                <span className="ml-1 text-mute">{daysSinceFirst === 1 ? " day" : " 天"}</span>
+              </>
+            )}
+          </p>
+          <p className="font-mono text-mute/70 text-[10px] tracking-[0.3em] mt-2 leading-relaxed">
+            ▸ <span lang="en">ENDOWMENT + MEMORY</span> · 這是您的累積 ·
+            離開帳號 = 失去這份 history(per /manifesto Section II MONETIZATION)
+          </p>
+        </div>
+      )}
 
       {/* ── 01 · 您的引擎時間軸 ───────────────────── */}
       <Section
@@ -164,32 +303,17 @@ export default function MemberDashboardPreview() {
         no="03"
         en="VOTE THE ENGINE FORWARD"
         zh="您能投票決定的引擎下一步"
-        psychology="IKEA Effect"
-        kicker="從 /roadmap EXPLORING 區拉出來 · BLACK CARD + Founders 27 會員投票決定 priority"
+        psychology="IKEA Effect · drag-rank"
+        kicker="如果您是 ZONE 27 工程師 · 您會先做哪個?"
       >
-        <div className="space-y-3">
-          <VoteRow
-            title="v0.3 · 加入球場因素 (park factor)"
-            body="目前所有球場用聯盟均值 · 加入 park factor 後 · 統一桃園 vs 統一新莊 主場優勢會有真實 home/away winRate 影響。"
-            tier="BLACK CARD + Founders 27"
-          />
-          <VoteRow
-            title="v0.3 · 加入打者個別品質 (隊伍 wOBA)"
-            body="目前所有打者假設聯盟平均 · 加入隊伍 wOBA 後 · 強打線 vs 二軍 winRate gap 會反映真實。"
-            tier="BLACK CARD + Founders 27"
-          />
-          <VoteRow
-            title="v0.4 · 球速 + 轉軸物理 (待 CPBL 公開 Statcast)"
-            body="aspirational · 等 CPBL 開始公開 PA 級 K/BB + EV/LA 等 Statcast 資料 · 我們才接得上去。"
-            tier="尚未開放投票 · 等資料就緒"
-            disabled
-          />
-        </div>
+        <RoadmapVotingPanel mounted={mounted} />
         <FootNote>
           <strong className="text-bone">這不是 marketing「我們會聽您的」</strong> ·
           是 Founders 27 / BLACK CARD 會員每月 voting 真實 input ·
           結果寫進 /roadmap LOCKED · /changelog commit 公開所有 vote tally。
-          <strong className="text-bone">您投票 = 您是這引擎共同建造者</strong>(IKEA Effect)。
+          drag-rank(per Linear / PostHog 2025-2026)比 thumb-up 心理投資高 ·{" "}
+          <strong className="text-bone">您排序 = 您是這引擎共同建造者</strong>
+          (IKEA Effect cranked)。
         </FootNote>
       </Section>
 
@@ -393,42 +517,208 @@ function EmptyState({
   );
 }
 
-function VoteRow({
-  title,
-  body,
-  tier,
-  disabled,
+function RoadmapVotingPanel({ mounted }: { mounted: boolean }) {
+  const [order, setOrder] = useState<string[]>(() =>
+    ROADMAP_ITEMS.map((r) => r.id)
+  );
+  const [because, setBecause] = useState<string>("");
+  const [saved, setSaved] = useState<boolean>(false);
+
+  // Hydrate from localStorage post-mount (avoids SSR hydration mismatch).
+  useEffect(() => {
+    if (!mounted) return;
+    const state = loadVotingState();
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setOrder(state.order);
+    setBecause(state.because);
+  }, [mounted]);
+
+  // Persist whenever state changes (skip initial mount to avoid overwriting fresh load).
+  useEffect(() => {
+    if (!mounted) return;
+    saveVotingState({ order, because });
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setSaved(true);
+    const t = window.setTimeout(() => setSaved(false), 1200);
+    return () => window.clearTimeout(t);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [order, because]);
+
+  // Find item by id with current position.
+  const orderedItems = useMemo(() => {
+    return order
+      .map((id) => ROADMAP_ITEMS.find((r) => r.id === id))
+      .filter((r): r is RoadmapItem => Boolean(r));
+  }, [order]);
+
+  // Move handlers respect disabled lock(disabled items can't move · also
+  // a non-disabled item can't swap INTO a disabled position).
+  const moveUp = useCallback(
+    (idx: number) => {
+      if (idx <= 0) return;
+      const item = orderedItems[idx];
+      const above = orderedItems[idx - 1];
+      if (item.disabled || above.disabled) return;
+      setOrder((prev) => {
+        const next = [...prev];
+        [next[idx - 1], next[idx]] = [next[idx], next[idx - 1]];
+        return next;
+      });
+    },
+    [orderedItems]
+  );
+
+  const moveDown = useCallback(
+    (idx: number) => {
+      if (idx >= orderedItems.length - 1) return;
+      const item = orderedItems[idx];
+      const below = orderedItems[idx + 1];
+      if (item.disabled || below.disabled) return;
+      setOrder((prev) => {
+        const next = [...prev];
+        [next[idx], next[idx + 1]] = [next[idx + 1], next[idx]];
+        return next;
+      });
+    },
+    [orderedItems]
+  );
+
+  return (
+    <div className="space-y-3">
+      <p className="font-mono text-mute/70 text-[10px] tracking-[0.3em] mb-2">
+        ▸ 用 ▲▼ 按鈕排序 · 第 1 名 = 您最想引擎先做的 · 結果只存您本機 · launch 後 sync
+      </p>
+      {orderedItems.map((item, idx) => (
+        <RankedItemRow
+          key={item.id}
+          item={item}
+          rank={idx + 1}
+          canMoveUp={
+            idx > 0 && !item.disabled && !orderedItems[idx - 1].disabled
+          }
+          canMoveDown={
+            idx < orderedItems.length - 1 &&
+            !item.disabled &&
+            !orderedItems[idx + 1].disabled
+          }
+          onMoveUp={() => moveUp(idx)}
+          onMoveDown={() => moveDown(idx)}
+        />
+      ))}
+
+      {/* ── BECAUSE textarea ──────────────────── */}
+      <div className="mt-6 border border-line/60 bg-slate/20 p-4 sm:p-5">
+        <label
+          htmlFor="vote-because"
+          className="font-mono text-mute/80 text-[10px] tracking-[0.3em] block mb-3"
+        >
+          因為 ___ <span className="text-mute/50">(optional · 一行解釋 · 1-280 字)</span>
+        </label>
+        <textarea
+          id="vote-because"
+          value={because}
+          onChange={(e) => setBecause(e.target.value.slice(0, 280))}
+          placeholder="例如:強打線 vs 二軍 winRate gap 是我最常 raise 的 question · 想看真實數字"
+          rows={2}
+          maxLength={280}
+          className="w-full bg-navy/40 border border-line/40 focus:border-gold/60 px-3 py-2 text-bone text-sm font-mono leading-relaxed outline-none transition-colors placeholder:text-mute/40"
+        />
+        <div className="flex items-baseline justify-between mt-2 flex-wrap gap-2">
+          <p className="font-mono text-mute/60 text-[10px] tracking-[0.25em] tabular">
+            {because.length} / 280
+          </p>
+          <p
+            className={`font-mono text-[10px] tracking-[0.3em] transition-opacity ${
+              saved ? "text-gold opacity-100" : "text-mute/40 opacity-60"
+            }`}
+            aria-live="polite"
+          >
+            {saved ? "✓ saved local" : "auto-saved · localStorage"}
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function RankedItemRow({
+  item,
+  rank,
+  canMoveUp,
+  canMoveDown,
+  onMoveUp,
+  onMoveDown,
 }: {
-  title: string;
-  body: string;
-  tier: string;
-  disabled?: boolean;
+  item: RoadmapItem;
+  rank: number;
+  canMoveUp: boolean;
+  canMoveDown: boolean;
+  onMoveUp: () => void;
+  onMoveDown: () => void;
 }) {
+  const isDisabled = Boolean(item.disabled);
   return (
     <div
-      className={`border ${disabled ? "border-line/30 bg-slate/10" : "border-line/60 bg-slate/20"} p-4 sm:p-5`}
+      className={`grid grid-cols-[auto_1fr_auto] gap-3 sm:gap-4 items-start border ${
+        isDisabled
+          ? "border-line/30 bg-slate/10"
+          : "border-line/60 bg-slate/20 hover:border-gold/40 transition-colors"
+      } p-4 sm:p-5`}
     >
-      <p
-        className={`text-base sm:text-lg ${disabled ? "text-mute/70" : "text-bone"} font-light tracking-tight mb-2`}
+      {/* Rank badge */}
+      <div
+        className={`flex flex-col items-center font-mono tabular ${
+          isDisabled ? "text-mute/40" : "text-gold"
+        }`}
       >
-        {title}
-      </p>
-      <p className="text-mute text-sm leading-relaxed mb-3">{body}</p>
-      <div className="flex items-baseline justify-between flex-wrap gap-3 pt-3 border-t border-line/30">
-        <p className="font-mono text-mute/70 text-[10px] tracking-[0.3em]">
-          投票權 · {tier}
+        <span className="text-[9px] tracking-[0.25em] mb-1">RANK</span>
+        <span className="text-2xl leading-none">
+          {isDisabled ? "—" : rank}
+        </span>
+      </div>
+
+      {/* Body */}
+      <div>
+        <p
+          className={`text-base sm:text-lg font-light tracking-tight mb-2 ${
+            isDisabled ? "text-mute/70" : "text-bone"
+          }`}
+        >
+          {item.title}
         </p>
+        <p className="text-mute text-sm leading-relaxed mb-3">{item.body}</p>
+        <p className="font-mono text-mute/70 text-[10px] tracking-[0.3em]">
+          投票權 · {item.tier}
+        </p>
+      </div>
+
+      {/* Arrow controls */}
+      <div className="flex flex-col gap-1.5">
         <button
           type="button"
-          disabled
-          className={`font-mono text-[10px] tracking-[0.3em] px-3 py-1.5 border ${
-            disabled
-              ? "border-mute/30 text-mute/40 cursor-not-allowed"
-              : "border-gold/30 text-gold/60 cursor-not-allowed"
+          onClick={onMoveUp}
+          disabled={!canMoveUp}
+          aria-label={`把「${item.title}」往上移`}
+          className={`w-9 h-9 border font-mono text-xs flex items-center justify-center transition-colors ${
+            canMoveUp
+              ? "border-gold/40 text-gold hover:border-gold hover:bg-gold/10 cursor-pointer"
+              : "border-line/30 text-mute/30 cursor-not-allowed"
           }`}
-          title="voting 待 BLACK CARD 上線後啟用 · 目前是 preview"
         >
-          {disabled ? "等資料" : "投票中(尚未啟用)"}
+          ▲
+        </button>
+        <button
+          type="button"
+          onClick={onMoveDown}
+          disabled={!canMoveDown}
+          aria-label={`把「${item.title}」往下移`}
+          className={`w-9 h-9 border font-mono text-xs flex items-center justify-center transition-colors ${
+            canMoveDown
+              ? "border-gold/40 text-gold hover:border-gold hover:bg-gold/10 cursor-pointer"
+              : "border-line/30 text-mute/30 cursor-not-allowed"
+          }`}
+        >
+          ▼
         </button>
       </div>
     </div>
