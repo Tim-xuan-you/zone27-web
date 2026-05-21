@@ -287,24 +287,45 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
       title: "倒置宣言 · 為什麼當下的工藝也是 brand IP",
     },
   ],
-  // Round 29 Wave 2 · /member NEW · 3 sibling: /membership(4-tier
-  // ladder 全景 · 從 free 到 NT$2700)· /now(這頁工程現狀)·
-  // /manifesto(為什麼 data ownership 是 brand IP 不是 feature)。
+  // Round 29 Wave 2 · /member NEW · 3 sibling
+  // Round 30 Wave 2B updated · 把 /now sibling 換 /member/calibration ·
+  // /member 的下一步是 epistemic mirror · 不是工程現狀(/now 仍在 Footer
+  // + Cmd-K 主動 reach)。
   "/member": [
+    {
+      href: "/member/calibration",
+      kicker: "calibration",
+      title: "您的 epistemic mirror · sabermetric 45° reliability diagram",
+    },
     {
       href: "/membership",
       kicker: "membership",
       title: "4-tier ladder 全景 · 從匿名到 NT$ 2,700 終身",
     },
     {
-      href: "/now",
-      kicker: "now",
-      title: "這頁的工程現狀 · 為什麼還沒 auth-gated",
-    },
-    {
       href: "/manifesto",
       kicker: "manifesto",
       title: "為什麼 data ownership 是 brand IP 不是 feature",
+    },
+  ],
+  // Round 30 Wave 2B · /member/calibration NEW · 3 sibling: /track-record
+  // (data source · 同一份 finalized matches drive both)· /methodology
+  // (calibration math 完整白皮書)· /member(回 4-bias dashboard preview)。
+  "/member/calibration": [
+    {
+      href: "/track-record",
+      kicker: "track-record",
+      title: "完整 receipt ledger · diagram data source",
+    },
+    {
+      href: "/methodology",
+      kicker: "methodology",
+      title: "完整 calibration math 白皮書",
+    },
+    {
+      href: "/member",
+      kicker: "member",
+      title: "回 4-bias 會員儀表板 preview",
     },
   ],
 };

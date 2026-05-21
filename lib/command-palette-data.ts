@@ -10,7 +10,7 @@
 // Inspired by Linear / Vercel / Stripe command palettes,
 // but DELIBERATELY thin: no fuse.js, no telemetry, no
 // recently-used persistence. Simple substring filter on a
-// hand-curated 27-row list is sufficient and brand-pure
+// hand-curated 28-row list is sufficient and brand-pure
 // (per [[zone27-disclosure-philosophy]]: no hidden ranking).
 // (/admin is intentionally NOT indexed here · Tim bookmarks it ·
 // keeping it out of visitor Cmd-K aligns with its noindex framing.)
@@ -281,6 +281,28 @@ export const COMMAND_ITEMS: CommandItem[] = [
       "endowment",
       "psychology",
       "preview",
+    ],
+  },
+  {
+    label: "Calibration · epistemic mirror · reliability diagram",
+    kicker: "/member/calibration",
+    path: "/member/calibration",
+    group: "工具 · 外部",
+    keywords: [
+      "calibration",
+      "校準",
+      "reliability",
+      "diagram",
+      "45 度",
+      "45°",
+      "epistemic",
+      "mirror",
+      "鏡子",
+      "sabermetric",
+      "fangraphs",
+      "savant",
+      "drift",
+      "校準曲線",
     ],
   },
   {

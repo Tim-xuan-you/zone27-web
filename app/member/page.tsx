@@ -186,6 +186,35 @@ export default function MemberPage() {
               看 <Link href="/now" className="text-gold underline-offset-4 hover:underline">/now</Link>{" "}
               · 想看 4-tier ladder 價格軸 · 看 <Link href="/membership" className="text-gold underline-offset-4 hover:underline">/membership</Link>。
             </p>
+
+            {/* ── Round 30 Wave 2B · deepest sharp call CTA ──
+                Agent research synthesis: 「The dashboard isn't a feature
+                stack. It's an epistemic mirror.」 The /member/calibration
+                page is where this stance lives as physical artifact ·
+                sabermetric reliability diagram(45° line)· 唯一一個高端
+                sports 品牌 publish 會員自己 calibration drift 的。 */}
+            <div className="mt-10 pt-6 border-t border-gold/30 text-center">
+              <p
+                lang="en"
+                className="font-mono text-gold text-[10px] tracking-[0.4em] mb-3"
+              >
+                / DEEPEST SHARP CALL
+              </p>
+              <p className="text-bone text-lg sm:text-xl font-light tracking-tight leading-snug mb-3 max-w-xl mx-auto">
+                這個 dashboard 不是 feature stack · 是{" "}
+                <span className="text-gold">epistemic mirror</span>。
+              </p>
+              <p className="text-mute/85 text-sm leading-relaxed max-w-xl mx-auto mb-5">
+                這個 stance 的物理產出 = sabermetric reliability diagram ·
+                45° 線 · 引擎跟現實的可信對照。
+              </p>
+              <Link
+                href="/member/calibration"
+                className="inline-block px-8 py-3 border border-gold text-gold text-xs tracking-[0.3em] hover:bg-gold hover:text-navy transition-colors"
+              >
+                → /member/calibration · 看 mirror
+              </Link>
+            </div>
           </div>
         </section>
 

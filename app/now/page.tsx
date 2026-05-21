@@ -33,9 +33,21 @@ export const metadata: Metadata = {
 // ─────────────────────────────────────────────────────
 
 const LAST_UPDATED = "2026-05-21";
-const CYCLE = "Round 28-30 · 2026-05-21 evening · 同日 15+ waves";
+const CYCLE = "Round 28-30 · 2026-05-21 late evening · 同日 17+ waves";
 
 const SHIPPED_THIS_CYCLE: { title: string; body: string; href?: string }[] = [
+  // ── Round 30 Wave 2B ship(2026-05-21 late evening · agent-research deepest call)──
+  {
+    title: "[R30 W2B] /member/calibration NEW · sabermetric reliability diagram · epistemic mirror brand statement",
+    body: "Agent 90-min 研究 2026 frontier member-system patterns(Stratechery / HEY / Linear / Patek / Hermès / FanGraphs / Day One / Anthropic Pro / Plausible)→ TOP 5 ADD + TOP 3 NEVER + deepest sharp call。 Deepest call:「The dashboard isn't a feature stack. It's an epistemic mirror.」ZONE 27 是唯一一個 structurally positioned to surface 會員自己的 calibration drift 的高端 sports 品牌。 FanGraphs / Baseball Savant 給 team stats · Stratechery 給 archive · ZONE 27 給您「您過去思辨的可信對照」。 New route: /member/calibration · inline SVG 400×400 reliability diagram(45° gold dashed line · grid · empty bin ghosts · axis labels · ENGINE PROBABILITY vs ACTUAL FREQUENCY)· N=0 empty scaffold + Pratfall waiting state(「今晚 22:00+ 第一個 dot 落點 · cpbl-260521-01」)。 N≥1 自動轉 plot · dot size ∝ sample count。 N<30 SAMPLE DEBT warning。 6 reading steps · WHY THIS PAGE EXISTS blockquote · GLOBAL vs PERSONAL 2-phase timeline。 FounderSignOff + RelatedReading + back nav。 1d revalidate · 0 deps · 0 cookies · 0 GA。 28 visitor-discoverable routes(was 27)· 22 components 不變 · CLAUDE.md route table + Cmd-K + related-links 三檔同步。 Agent #2 #3 #5(Founder number reservation · Public vote tally · 140-char bio)留 Tim 啟動 Founders 27 launch 時 ship。 Agent #4(Counterfactual card)留 follow-list 出現後 ship。 3 NEVERS(Wrapped report · Streak counter · AI chatbot)全部 align canonical anti-pattern axiom · 不需動。",
+    href: "/member/calibration",
+  },
+  // ── Round 30 Wave 2A ship(2026-05-21 late evening · brand-IP inversion)──
+  {
+    title: "[R30 W2A] /member 3-col brand comparison · Apple commerce / Spotify consumption / ZONE 27 epistemic",
+    body: "Tim 送 Apple Store login + cart screenshots「人家也都有會員系統呀, 我們的呢?」 = 隱含「features-arms-race」framing。 Sharp call:不是 features 比他們多 · 是 ZONE 27 跟其他會員系統根本不同物種。 Apple = COMMERCE 交易史 · Spotify = CONSUMPTION 消費史 · ZONE 27 = EPISTEMIC 思辨史。 3-col 對照卡 grid 加到 /member「WHY THIS IS NOT TYPICAL SAAS DASHBOARD」section · 4 axes(您給他們 / 他們給您 / 獎勵 / 追蹤)· highlight ZONE 27 card 金 border + glow + 0-tracking 標金色 cell · 對齊 Footer「FUNDED BY FOUNDERS · NO GA · NO PIXEL」brand line。 Sharp call paragraph「ZONE 27 會員系統 = epistemic relationship archive · 您跑過的 sim 是您過去思辨的物理痕跡 · 累積 = 您自己的 trophy · 不是我們給您的 feature · 我們從來不是 Apple · 我們從來不會是 Apple」寫死。 W2B deepest call CTA(epistemic mirror → /member/calibration)在 same section 結尾。",
+    href: "/member",
+  },
   // ── Round 30 Wave 1 ship(2026-05-21 late evening · pre-22:00 hardening)──
   {
     title: "[R30 W1] getFeaturedMatch priority fix · 今晚 22:00+ receipt cinematic 會出現在首頁",
@@ -170,7 +182,16 @@ const SHIPPED_THIS_CYCLE: { title: string; body: string; href?: string }[] = [
 ];
 
 const DISCOVERED_THIS_CYCLE: { title: string; body: string }[] = [
-  // ── Round 30 discovery ──
+  // ── Round 30 Wave 2 discoveries ──
+  {
+    title: "[R30 W2] 「features-arms-race」framing trap · Tim Apple screenshots surface 了",
+    body: "Tim 送 Apple Store login + cart screenshots「人家也都有會員系統呀」 = 隱含「我們需要 features 跟他們一樣多」framing trap。 如果接住這個 framing → ZONE 27 變 me-too SaaS · brand IP 倒置全部 collapse。 Sharp call:Apple = commerce(交易史)· Spotify = consumption(消費史)· ZONE 27 = epistemic(思辨史)· 不同物種 · 不可比 features。 W2A 把這個 inversion 寫死成 3-col brand comparison。 Lesson:對 Tim 拋出的「人家也有」 framing 永遠先 fact-check 是否真的可比 · 通常不可比。",
+  },
+  {
+    title: "[R30 W2] reliability diagram 是 ZONE 27 唯一結構上 unique 的 brand differentiator(從沒人 frame 這個)",
+    body: "Agent 90-min 研究後 surface 的 deepest call:沒有任何高端 sports 分析平台 publishes 會員自己的 calibration drift。 FanGraphs/Savant 給 team stats · Stratechery 給 archive · 都是「別人的」數據。 ZONE 27 brand 結構(Pratfall + Costly Signaling + 0-tracking + Engine-Free + Identity-Paid + audience = hardcore sabermetric fans)同時對齊 → reliability diagram literally cannot exist on any platform that wants mass-market growth。 W2B 把這個寫死成 /member/calibration physical artifact。 Lesson:有時最大 brand differentiator 不在「我們做了什麼別人沒做」 · 在「我們結構上能做別人結構上做不到的」。",
+  },
+  // ── Round 30 Wave 1 discoveries ──
   {
     title: "[R30] getFeaturedMatch priority order 跟自己 doc-comment 直接矛盾(自 Round 10 introduced)",
     body: "Bug 從 Round 10 introduce match lifecycle 那天起一直存在 · 但只有今晚 22:00+ Tim ingest 那瞬間才會觸發可見的 brand IP 損失。每次跑 audit 都沒抓到 · 因為 audit 看 doc-comment 跟 code 都「合理」 · 沒人 cross-reference 兩者一致性。Lesson:doc-comment 寫了「receipt mode is a STRONGER signal than future」但 code 把 future 放 step 2 = doc-comment 是 wish · code 是 reality · 兩者不一致 = silent regression vector。Round 30 Wave 1 修正 + 把 doc-comment 升為 binding contract(代碼順序鏡像 narrative)。",
@@ -208,6 +229,23 @@ const DISCOVERED_THIS_CYCLE: { title: string; body: string }[] = [
 ];
 
 const UNRESOLVED: { title: string; body: string }[] = [
+  // ── Round 30 Wave 2 agent research backlog ──
+  {
+    title: "[R30 W2] Agent #2 Pre-Auth Founder Number Reservation · 等 Tim 啟動 Founders 27 launch",
+    body: "Agent 研究 #2 sharp call:Day-1 visitor 能 reserve 特定 #NNN(e.g.「我要 #027 因為 27」)· /leaderboard 即時顯示 RESERVED · pending wire。 Patek allocation + Hermès quota + Mirror.xyz wallet-as-identity pattern。 Costly Signaling cranked。 但 requires Founders 27 launch 啟動才有意義 — 目前是 preorder waitlist 框架。 等 Tim 完成 docs/FOUNDERS-27-LAUNCH-CHECKLIST.md 5 prerequisites + 明說「啟動 Founders 27 reframe」trigger 才 ship。",
+  },
+  {
+    title: "[R30 W2] Agent #3 Public Personal Roadmap Vote Tally · 等 auth + BLACK CARD 上線",
+    body: "Agent 研究 #3:把 MemberDashboardPreview drag-rank voting 的 localStorage data 升 cloud + public aggregate · 每個 Founders 27 #NNN 的 vote PUBLIC under member identity。 IKEA Effect cranked。 需要 auth + cloud sync(Phase 1 Q3)+ Founders 27 真實會員入帳(後)。 兩個 dependencies 都 wait Tim 拍板 trigger。",
+  },
+  {
+    title: "[R30 W2] Agent #4 Counterfactual Memory Card · 等 follow-list functionality 出現",
+    body: "Agent 研究 #4:Day One「On This Day」 applied to forecasts。「您 follow 這場時 · 引擎 said 62% · 結果 PROVED · 但您沒下注 · 您只是看著它收斂」。 需要 follow-list action 在 /matches/[gameId] 出現 + localStorage `follows` 累積 + 賽後自動 surface。 Phase 1 Q3 auth 後 sync。 短期可考慮 localStorage-only MVP · 但會有 cross-device gap。",
+  },
+  {
+    title: "[R30 W2] Agent #5 140-char Public Member Bio · 等 Founders 27 onboarding 啟動",
+    body: "Agent 研究 #5:每位 Founders 27 holder 一句 ≤140 字公開 bio in /leaderboard。 Patek Owner Newsletter + Are.na profile minimalism + HEY anti-CRM。 Tim curates additions(Stratechery Guest Post pattern)。 需要 Founders 27 onboarding 啟動才有第一筆 bio · 等 Tim 啟動 trigger。",
+  },
   // ── Round 29 Wave 10B agent anti-pattern flag ──
   {
     title: "[R29 W10] 「Launch loudly to warm list」playbook · permanently wrong for ZONE 27",
