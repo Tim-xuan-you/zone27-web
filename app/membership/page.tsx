@@ -165,62 +165,16 @@ export default async function MembershipPage({
 
         <div className="mx-auto w-32 gold-line mb-12" />
 
-        {/* ── MEMBER SYSTEM MAP · Wave 8 COMPRESSED ──
-            原 ~80 lines + 60-word body/card · 砍到 ~25-word body/card ·
-            intro paragraph 全刪 · 4 Q + verdict + 短句 + CTA(s)。 */}
-        <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-16">
-          <div className="bg-slate/40 border border-gold/40 p-6 sm:p-10">
-            <p
-              lang="en"
-              className="font-mono text-gold text-[10px] tracking-[0.45em] mb-8"
-            >
-              / MEMBER SYSTEM MAP · 4 個反覆被問的問題
-            </p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              <MapRow
-                question="Q1 · 現在能加入嗎? 為什麼要等 Q3?"
-                verdict="✓ 現在 · /login magic link"
-                verdictTone="gold"
-                body="W5 ship Phase 1 auth(從 Q3 加速到 NOW)· 1 分鐘 magic link · 終身免費。"
-                ctas={[
-                  { label: "→ /login", href: "/login" },
-                  { label: "↓ 純訂閱 email", href: "#waitlist" },
-                ]}
-              />
-              <MapRow
-                question="Q2 · 會員在哪發文 + 推薦賽事?"
-                verdict="⏳ BLACK CARD Q3 · Founders 27 預售中"
-                verdictTone="bone"
-                body="FREE TIER ❌ 防 LINE 老師 · BLACK CARD ✓ 5% · Founders 27 ✓ 0% 終身。"
-                ctas={[
-                  { label: "↓ Creator Permissions", href: "#creator-permissions" },
-                ]}
-              />
-              <MapRow
-                question="Q3 · Tim 管理介面 · 會員頁面?"
-                verdict="✓ /admin · /member · /member/calibration"
-                verdictTone="gold"
-                body="Tim ops: /admin(noindex)· 會員 dashboard: /member · epistemic mirror: /member/calibration。"
-                ctas={[
-                  { label: "→ /member", href: "/member" },
-                  { label: "→ /admin", href: "/admin" },
-                ]}
-              />
-              <MapRow
-                question="Q4 · psychology 角度能做什麼?"
-                verdict="✓ 4 bias + epistemic mirror"
-                verdictTone="gold"
-                body="Endowment + IKEA + Loss + Collection driven · 加 sabermetric 45° reliability diagram。"
-                ctas={[
-                  { label: "→ /member", href: "/member" },
-                  { label: "→ /member/calibration", href: "/member/calibration" },
-                ]}
-              />
-            </div>
-          </div>
-        </section>
+        {/* ── Round 30 Wave 11b · DELETED MEMBER SYSTEM MAP ──
+            Agent deepest call「every section must be true right now」+
+            Merge #2 logic:MAP block(W4)was answer hub when /admin /member
+            /member/calibration /member/submit 都還沒 真實 ship。 現在 W5
+            /login · W6 follow · W9 note · W10 submit + personal mirror 全部
+            shipped real flows · MAP 變 meta-documentation noise · 砍。
+            Conversion path 仍清晰:visitor 看 4-tier cards 直接點 · 不需
+            second-pass MAP digest。 */}
 
-        {/* ── 4-TIER CARDS ───────────────────────── */}
+        {/* ── 4-TIER CARDS · 唯一 hero 後第一個 conversion 元件 ── */}
         <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-16">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
             {TIERS.map((t) => (
@@ -240,54 +194,45 @@ export default async function MembershipPage({
           <WaitlistForm waitlistCount={waitlistCount} refSource={refSource} />
         </section>
 
-        {/* ── 創作者 / 發文 / 推薦賽事 FAQ ─────────── */}
+        {/* ── Creator Permissions · Wave 11b COMPRESSED ──
+            Agent Cut #3:edge-case copy on top-of-funnel page · 砍 4 PermissionRow
+            的 100+ word paragraph 各 · 變 4-line compact table · 同 info 1/5
+            字數。 H2 + 「Tim 反覆被問」 intro 刪。 完整 inversion logic 連回
+            /manifesto + /coverage。 */}
         <section
           id="creator-permissions"
-          className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-16 border-t border-line/40 pt-16 scroll-mt-20"
+          className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-16 border-t border-line/40 pt-12 scroll-mt-20"
         >
           <p
             lang="en"
             className="font-mono text-gold text-[10px] tracking-[0.45em] mb-6 text-center"
           >
-            / CREATOR PERMISSIONS · 發文與推薦賽事
+            / CREATOR PERMISSIONS · 一般會員可以發文嗎?
           </p>
-          <h2 className="text-3xl sm:text-4xl text-bone font-light tracking-tight text-center mb-4">
-            一般會員可以發文嗎?
-          </h2>
-          <p className="text-mute text-center text-sm sm:text-base leading-relaxed mb-12 max-w-xl mx-auto">
-            這是 Tim 反覆被問的問題 · 直接回答 · 不繞圈。
-          </p>
-
-          <div className="space-y-8">
-            <PermissionRow
-              tier="匿名訪客 / FREE TIER"
-              status="❌ 無法發文"
-              detail="可閱讀所有公開內容 + 跑 /lab 引擎 · 但無法在賽事頁討論室發言 / 推薦賽事 / 賣明牌。"
-              reason="我們刻意把發文權給付費會員 · 防 LINE 老師 archetype 進來(玩運彩 playsport.cc · 報馬仔 fengyuncai.com 的 tipster ranking 生態 · 「輸了刪文 / 贏了截圖 / 月抽 30-50%」mechanism · 那不是 ZONE 27)。Solo founder 也需要 manual moderation · gate 讓 Tim 可控。"
+          <div className="space-y-2 font-mono text-sm leading-relaxed max-w-2xl mx-auto">
+            <PermLine
+              tier="匿名 / FREE TIER"
+              status="❌"
+              detail="無法發文 · 防 LINE 老師(玩運彩 / 報馬仔 生態)"
             />
-            <PermissionRow
-              tier="BLACK CARD(Q3 2026 開放)"
-              status="✅ 可發文 / 5% 抽成"
-              detail="在 /matches/[gameId] 賽事討論室發言 · 推薦賽事 · 賣明牌。創作者抽成 5%(vs 玩運彩 / 報馬仔 / LINE 老師平台普遍 30-50% · 5% 是降維打擊)。"
-              reason="月費 NT$ 499 = 我們 manual 審帳號的成本 · 也是 brand IP「會員制 = 言論權的 gate」的具體實踐(Costco / Stratechery / Bankless 同邏輯)。"
+            <PermLine
+              tier="BLACK CARD · Q3+"
+              status="✅ 5%"
+              detail="可發文 / 推薦 · 5% 抽成(業界 30-50% 降維)"
             />
-            <PermissionRow
-              tier="Founders 27(預售中 · 限 270)"
-              status="✅ 可發文 / 0% 抽成終身"
-              detail="BLACK CARD 全權限 + 創作者抽成 0%(永遠)。NT$ 2,700 一次性 · 終身。"
-              reason="270 創始者 = ZONE 27 永遠的傳教士 · Tim 親手 onboarding 每位。0% 抽成 = 對「跟我們一起 build 從零」的真實 reward。"
+            <PermLine
+              tier="Founders 27 · 預售中"
+              status="✅ 0%"
+              detail="BLACK CARD 全權限 + 0% 抽成終身"
             />
-            <PermissionRow
-              tier="未來 · FREE TIER 投稿(規劃中)"
-              status="⏳ Tim 親手 curate"
-              detail="post-Q3-launch 規劃:FREE TIER 訂閱者可投稿文章 / 賽事分析 · Tim 每週親手 curate 1 篇上 /signal-board。不付費可上稿 · 但無創作者抽成(您寫的是「作品」· 不是「商業預測」)。"
-              reason="Stratechery Guest Post pattern + Bankless 社群 essay 模式。Tim solo founder 必須 curation rate-limit · 約定 1/週上稿。不承諾時程 · 待 BLACK CARD 啟動後規劃。"
+            <PermLine
+              tier="FREE TIER 投稿"
+              status="⏳"
+              detail="Tim curate 1/週(/member/submit · W10 已 ship)"
             />
           </div>
-
-          <p className="mt-12 font-mono text-mute/70 text-[10px] tracking-[0.3em] leading-relaxed text-center">
-            完整商業邏輯 + 為什麼倒置 / 4 個 inversion(disclosure · monetization · coverage · privacy)·
-            見{" "}
+          <p className="mt-6 font-mono text-mute/70 text-[10px] tracking-[0.3em] leading-relaxed text-center">
+            完整 4 個 inversion 邏輯見{" "}
             <Link
               href="/manifesto"
               className="text-gold underline-offset-4 hover:underline"
@@ -299,7 +244,7 @@ export default async function MembershipPage({
               href="/coverage"
               className="text-gold underline-offset-4 hover:underline"
             >
-              /coverage NEVER COVER list
+              /coverage NEVER list
             </Link>
           </p>
         </section>
@@ -418,84 +363,29 @@ function TierCard({ tier }: { tier: Tier }) {
   );
 }
 
-// Round 30 Wave 4 · MAP row sub-component。 4 Q-cards used in MEMBER
-// SYSTEM MAP block at top of /membership · 每個 question 一張卡 · verdict
-// band + body + 1-2 direct anchor link · pratfall-safe(承認被反覆問
-// 是 brand acknowledgment 不是 noise)。
-function MapRow({
-  question,
-  verdict,
-  verdictTone,
-  body,
-  ctas,
-}: {
-  question: string;
-  verdict: string;
-  verdictTone: "gold" | "bone" | "loss" | "mute";
-  body: string;
-  ctas: { label: string; href: string }[];
-}) {
-  const verdictColor = {
-    gold: "text-gold",
-    bone: "text-bone",
-    loss: "text-loss",
-    mute: "text-mute",
-  }[verdictTone];
-  return (
-    <div className="border-l-2 border-gold/50 pl-5 sm:pl-6 py-1">
-      <p className="font-mono text-bone text-xs sm:text-sm tracking-[0.15em] leading-snug mb-3">
-        {question}
-      </p>
-      <p
-        className={`font-mono ${verdictColor} text-sm sm:text-base tracking-[0.1em] mb-3 font-medium`}
-      >
-        {verdict}
-      </p>
-      <p className="text-mute text-sm leading-relaxed mb-4">{body}</p>
-      <div className="flex flex-wrap gap-x-4 gap-y-2">
-        {ctas.map((cta, i) => (
-          <Link
-            key={cta.href}
-            href={cta.href}
-            className={`inline-block font-mono text-[10px] tracking-[0.3em] underline-offset-4 hover:underline ${
-              i === 0
-                ? "text-gold hover:text-gold-soft"
-                : "text-gold/70 hover:text-gold"
-            }`}
-          >
-            {cta.label}
-          </Link>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-function PermissionRow({
+// Round 30 Wave 11b · PermLine · compact replacement for PermissionRow ·
+// 3-col grid · tier label + status chip + 1-line detail · 4-paragraph
+// PermissionRow 砍到 1-line PermLine。
+function PermLine({
   tier,
   status,
   detail,
-  reason,
 }: {
   tier: string;
   status: string;
   detail: string;
-  reason: string;
 }) {
   return (
-    <div className="border-l-2 border-gold/30 pl-5 sm:pl-6 py-1">
-      <div className="flex items-baseline justify-between gap-3 flex-wrap mb-2">
-        <p className="font-mono text-bone text-[11px] sm:text-xs tracking-[0.25em]">
-          {tier}
-        </p>
-        <p className="font-mono text-gold text-[11px] sm:text-xs tracking-[0.3em]">
-          {status}
-        </p>
-      </div>
-      <p className="text-mute text-sm leading-relaxed mb-2">{detail}</p>
-      <p className="text-mute/70 text-xs leading-relaxed italic">
-        為什麼: {reason}
-      </p>
+    <div className="grid grid-cols-[auto_auto_1fr] gap-3 sm:gap-4 items-baseline border-l-2 border-gold/30 pl-4 py-1.5">
+      <span className="text-bone text-[11px] sm:text-xs tracking-[0.15em] whitespace-nowrap">
+        {tier}
+      </span>
+      <span className="text-gold text-[11px] sm:text-xs tracking-[0.2em] tabular whitespace-nowrap">
+        {status}
+      </span>
+      <span className="text-mute text-xs sm:text-sm leading-snug">
+        {detail}
+      </span>
     </div>
   );
 }

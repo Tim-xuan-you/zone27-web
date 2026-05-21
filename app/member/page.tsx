@@ -5,7 +5,6 @@ import Footer from "@/components/Footer";
 import RelatedReading from "@/components/RelatedReading";
 import FounderSignOff from "@/components/FounderSignOff";
 import ArticleMeta from "@/components/ArticleMeta";
-import MemberDashboardPreview from "@/components/MemberDashboardPreview";
 import { getSession } from "@/lib/supabase/server";
 import { readFollowsFromMeta } from "@/lib/follows";
 import { readNotesFromMeta } from "@/lib/notes";
@@ -325,43 +324,26 @@ export default async function MemberPage({
           </section>
         )}
 
-        {/* ── PSYCHOLOGY-DRIVEN DASHBOARD PREVIEW ── */}
-        <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-16">
-          <MemberDashboardPreview />
-        </section>
+        {/* ── Round 30 Wave 11b · DELETED MemberDashboardPreview ────
+            Agent research deepest call:「strip future-tense scaffolding from
+            present-tense pages」 = 4-bias preview block was「preview of a
+            dashboard」 · 現在 W6 真實 YOUR FOLLOWED MATCHES + W10 personal
+            calibration mirror 已 ship · preview 變 future-tense scaffolding
+            on present-tense page · 砍。 Component file 保留(import 移除)· 將
+            來如果需要 marketing surface 還可用。 */}
 
-        {/* ── HOW THIS DIFFERS FROM SAAS · Wave 8 COMPRESSED ────
-            原 Round 29 ✕/✓ + Round 30 W2A 3-col + W2B deepest call · 4 個
-            sub-block · 共 ~110 lines。 Wave 8 compress 到 3 elements:
-            (1) inline ✕/✓ binary statement(無解釋 prose)·(2) 3-col
-            comparison(視覺主角 · 保留 highlight 對照)·(3) deepest call
-            quote(1 line · 不再 paragraph 解釋)。 砍 ~70 lines 文字 ·
-            保留 brand statement soul。 */}
+        {/* ── MEMBER SYSTEM, INVERTED · Wave 11b MERGED ──
+            Agent Merge #1:原 ✕/✓ blocks + 3-col + deepest call CTA 三 sub-block
+            合一。 Stratechery「one core argument per article」· ✕/✓ 跟 3-col
+            argue 同一件事兩次 · 砍 ✕/✓ · 留 3-col(視覺主角)+ 1-line quote
+            + CTA。 9 sections → 7 sections per Cowan 4-chunk ceiling。 */}
         <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-16 pt-12 border-t border-line/40">
           <p
             lang="en"
-            className="font-mono text-gold text-[10px] tracking-[0.45em] mb-6 text-center"
+            className="font-mono text-gold text-[10px] tracking-[0.45em] mb-8 text-center"
           >
-            / WHY THIS IS NOT TYPICAL SAAS DASHBOARD
+            / MEMBER SYSTEM · INVERTED
           </p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10">
-            <div className="border-l-2 border-mute/40 pl-4">
-              <p className="font-mono text-mute/80 text-[10px] tracking-[0.3em] mb-2">
-                ✕ SaaS 預設
-              </p>
-              <p className="text-mute text-sm leading-snug">
-                付費 → 開更多 features · stickiness 來自不付會失去什麼。
-              </p>
-            </div>
-            <div className="border-l-2 border-gold pl-4 bg-gold/5 py-2 -ml-px">
-              <p className="font-mono text-gold text-[10px] tracking-[0.3em] mb-2">
-                ✓ ZONE 27 反向
-              </p>
-              <p className="text-mute text-sm leading-snug">
-                累積 → 您 data 變您 trophy · stickiness 來自 data ownership。
-              </p>
-            </div>
-          </div>
 
           {/* 3-col concrete brand comparison · 視覺主角保留 */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">

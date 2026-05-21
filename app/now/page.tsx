@@ -33,9 +33,15 @@ export const metadata: Metadata = {
 // ─────────────────────────────────────────────────────
 
 const LAST_UPDATED = "2026-05-22";
-const CYCLE = "Round 28-30 · 2026-05-22 · 同日 25+ waves · 9 features · 6 routes · 1 first receipt";
+const CYCLE = "Round 28-30 · 2026-05-22 · 同日 26+ waves · 4-cut compression Wave 11";
 
 const SHIPPED_THIS_CYCLE: { title: string; body: string; href?: string }[] = [
+  // ── 🗑️ Round 30 Wave 11 · Agent-research-driven 4-cut compression ──
+  {
+    title: "[R30 W11] 🗑️ Agent UX research → 4 cuts · 「one tense per page」axiom 寫死",
+    body: "Tim 11th canary fire(同日)「我們的網頁,充斥著複雜、麻煩!多上網查詢一些統計資料?」 = 結構性 complexity 累積 even after W8 prose compression。 派 60-min agent 跑 2026 UX 統計研究 · 帶回 hard data:Baymard form-field cliff(5→7 fields = -34% conversion)· specflux 2026 study(12→5 sections = 83% conversion lift)· Unbounce 18K-page 分析(single-CTA 13.5% vs 3+ CTA 10.5%)· Cowan 2026 working-memory 從 7±2 下修 4-chunk · benchmark 比較:Apple Account 3-4 blocks · Stratechery 2 · HEY 1 · Linear 3 · ChatGPT 1 · ZONE 27 /member 9-10 = 2.5× minimalist peers。 DEEPEST sharp call 寫進 brand axiom:「complexity isn't a section problem · it's a tense problem · every section must be true right now · future-tense → /roadmap · past → /track-record · live page = present-tense only」。 SHIP 4 cuts:(W11a)/matches/[gameId] DISCUSSION LOCK placeholder 砍(future-tense「即時討論室將上線」違反「沒有即將推出」axiom · W6/W9/W10 已 ship 真實 unlocks)· (W11b·1) /member MemberDashboardPreview 4-bias preview block 砍(future-tense scaffolding · W6 真實 YOUR FOLLOWED MATCHES 已存在)· (W11b·2) /member ✕/✓ blocks 砍 · 合一為「MEMBER SYSTEM · INVERTED」 single section(3-col 視覺主角 + deepest call CTA · Stratechery one-core-argument)· (W11b·3) /membership Creator Permissions FAQ 從 4 PermissionRow 100-word paragraphs → 4 PermLine 15-word 1-liners(PermissionRow sub-comp 刪 · 新 PermLine 替代)· (W11b·4) /membership MEMBER SYSTEM MAP block 整刪(W4 ship · meta-documentation 當時有用 · 現在 W5/W6/W9/W10 真實 ship 後 MAP 變 second-pass digest noise · 砍 + MapRow sub-comp 清)。 預計 effect:/matches/[gameId] 9→7 sections · /member 9-10→6 sections · /membership 10→7 sections。 Lesson canonical · 寫進 axiom:**「one tense per page」** + **「strip future-tense scaffolding from present-tense pages」** = ZONE 27 結構簡化的 single principle · auto-generate 未來所有 cuts。",
+    href: "/member",
+  },
   // ── ⚡ Round 30 Wave 10 · MEGA TIER 1 push ──
   {
     title: "[R30 W10] ⚡ MEGA push · 5 features 1 commit · Tim「不用什麼都在等」directive 全動",
@@ -230,6 +236,11 @@ const SHIPPED_THIS_CYCLE: { title: string; body: string; href?: string }[] = [
 ];
 
 const DISCOVERED_THIS_CYCLE: { title: string; body: string }[] = [
+  // ── Round 30 Wave 11 discovery · canonical axiom ──
+  {
+    title: "[R30 W11] BRAND AXIOM · 「one tense per page」· complexity 不是 section 問題是 tense 問題",
+    body: "Agent UX research deepest call 升 canonical brand axiom:visitor 同時 carry 3 個 tense(現在 / 未來 / 過去) on 一頁 = 真正 cognitive load。 修法不是砍 sections · 是 strip future-tense scaffolding from present-tense pages。 Future-tense → /roadmap · past → /track-record / /changelog · 現在 page = 純 present-tense only。 W11 4 cuts 都套此 axiom:DISCUSSION LOCK(future-tense placeholder)· MemberDashboardPreview(preview = future-tense)· MAP block(meta-doc · 不是當下 user task)· ✕/✓ + 3-col 重複(saying same thing two tenses)。 此 axiom auto-generate 未來所有 cuts · 不需再 case-by-case judge。 Pratfall sections(audit-EXCLUDE · methodology-LIMITS · roadmap-BOUNDARIES · track-record-DIVERGED)仍留 · 因為 honest present-tense 關於 present-tense limitations。 Lesson:Pratfall ≠ aspirational placeholder · Pratfall = present-tense honesty about present-tense gap。 寫進 axiom 永久避免再 add future-tense scaffolding 到 entry pages。",
+  },
   // ── Round 30 Wave 8 discovery ──
   {
     title: "[R30 W8] 「Method public」≠「Explain on every page」· entry vs deep page text density 是不同 axiom",
