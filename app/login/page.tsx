@@ -39,6 +39,7 @@ type SubmitState =
   | { kind: "idle" }
   | { kind: "sending" }
   | { kind: "sent"; email: string }
+  | { kind: "verifying"; email: string }
   | { kind: "error"; message: string };
 
 export default function LoginPage() {
@@ -188,6 +189,47 @@ export default function LoginPage() {
     }
   }
 
+  // Round 30 Wave 13b · Linear pattern OTP code fallback。
+  // Per 2026 auth UX agent research deepest call:keep magic link · add OTP
+  // 6-digit code 同封 email · 跨 device 也 work · PKCE constraint bypass。
+  // Same brand axiom(0 password · 0 OAuth · 1-field /login)· 純 SentState
+  // 加 OTP input · 不動 form structure。
+  async function handleVerifyOtp(token: string) {
+    if (state.kind !== "sent") return;
+    const targetEmail = state.email;
+    const trimmed = token.replace(/\s/g, "");
+    if (!/^\d{6}$/.test(trimmed)) {
+      setState({
+        kind: "error",
+        message: "6 碼 code 必須是 6 個數字",
+      });
+      return;
+    }
+    setState({ kind: "verifying", email: targetEmail });
+    try {
+      const supabase = createSupabaseBrowserClient();
+      const { error } = await supabase.auth.verifyOtp({
+        email: targetEmail,
+        token: trimmed,
+        type: "email",
+      });
+      if (error) {
+        setState({
+          kind: "error",
+          message: friendlyOtpError(error.message),
+        });
+        return;
+      }
+      // Session set via @supabase/ssr cookies · redirect to /member or next
+      const dest = nextPath ?? "/member?welcome=true";
+      window.location.assign(dest);
+    } catch (err) {
+      const message =
+        err instanceof Error ? err.message : "未知錯誤";
+      setState({ kind: "error", message });
+    }
+  }
+
   return (
     <div className="flex flex-col flex-1 min-h-screen">
       <Nav />
@@ -241,11 +283,13 @@ export default function LoginPage() {
 
         {/* ── FORM ─────────────────────────────────── */}
         <section className="mx-auto max-w-md w-full px-6 sm:px-10 pb-12">
-          {state.kind === "sent" ? (
+          {state.kind === "sent" || state.kind === "verifying" ? (
             <SentState
-              email={state.email}
+              email={state.kind === "sent" ? state.email : state.email}
               cooldown={cooldown}
               onResend={handleResend}
+              onVerifyOtp={handleVerifyOtp}
+              verifying={state.kind === "verifying"}
             />
           ) : (
             <form
@@ -367,70 +411,120 @@ function SentState({
   email,
   cooldown,
   onResend,
+  onVerifyOtp,
+  verifying,
 }: {
   email: string;
   cooldown: number;
   onResend: () => void;
+  onVerifyOtp: (token: string) => Promise<void>;
+  verifying: boolean;
 }) {
+  const [otpInput, setOtpInput] = useState("");
+
   return (
     <div className="bg-gold/5 border border-gold/60 glow-soft p-6 sm:p-8">
       <p
         lang="en"
         className="font-mono text-gold text-[10px] tracking-[0.45em] mb-4 shimmer text-center"
       >
-        ✓ MAGIC LINK SENT
+        ✓ EMAIL SENT · 2 個 path 任選
       </p>
       <h2 className="text-2xl sm:text-3xl text-bone font-light tracking-tight mb-4 text-center">
         寄出了 · 1 分鐘內看您信箱
       </h2>
       <p className="text-mute text-sm sm:text-base leading-relaxed mb-5 text-center">
-        Magic link 寄到{" "}
+        Email 寄到{" "}
         <span className="font-mono text-gold">{email}</span>
       </p>
 
-      {/* ⚠ Cross-device + multi-email guidance · Round 30 W13 · Tim 痛點 */}
-      <div className="bg-loss/5 border border-loss/40 p-4 mb-4">
-        <p className="font-mono text-loss text-[10px] tracking-[0.3em] mb-2">
-          ⚠ 關鍵 · 2 件事很容易踩
+      {/* ── PATH A · CLICK MAGIC LINK(same device only) ── */}
+      <div className="bg-navy/40 border border-line/60 p-4 mb-3">
+        <p
+          lang="en"
+          className="font-mono text-gold/80 text-[10px] tracking-[0.35em] mb-2"
+        >
+          ① CLICK LINK · 同 device 開 email
         </p>
         <p className="text-mute text-xs sm:text-sm leading-relaxed">
-          <strong className="text-bone">①</strong>{" "}
-          開 email 必須<strong className="text-bone">在這個 device + browser</strong>。
-          手機 /login → 手機 Gmail open。 不能 desktop /login · 手機開 email
-          (session 會落 wrong device)。
-          <br />
-          <br />
-          <strong className="text-bone">②</strong>{" "}
-          Gmail 可能有<strong className="text-bone">多封 ZONE 27 email</strong>
-          (之前送的 link token 已用)· 找<strong className="text-bone">最新一封</strong>點 ·
-          舊的會 expired。
+          email 在<strong className="text-bone">這個 device + browser</strong>
+          開 · 點 link → 自動轉 /member。 PKCE 限制 · 換 device / 換 browser
+          不 work · 用 ② path。
         </p>
       </div>
 
-      {/* ── Resend button + countdown · Round 30 W13 ── */}
-      <div className="text-center mb-4">
+      {/* ── PATH B · TYPE 6-DIGIT CODE(cross-device 也 work) ── */}
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          onVerifyOtp(otpInput);
+        }}
+        className="bg-gold/5 border border-gold/40 p-4 mb-4"
+      >
+        <p
+          lang="en"
+          className="font-mono text-gold text-[10px] tracking-[0.35em] mb-2"
+        >
+          ② TYPE CODE · 跨 device 也 work · Linear pattern
+        </p>
+        <p className="text-mute text-xs leading-relaxed mb-3">
+          Email 裡有 6 位數 code · 貼到下方 verify · 不限 device · session
+          落您現在 browser。
+        </p>
+        <div className="flex items-baseline gap-2 flex-wrap">
+          <input
+            type="text"
+            inputMode="numeric"
+            pattern="\d{6}"
+            maxLength={6}
+            autoComplete="one-time-code"
+            value={otpInput}
+            onChange={(e) =>
+              setOtpInput(e.target.value.replace(/\D/g, "").slice(0, 6))
+            }
+            placeholder="000000"
+            className="flex-1 min-w-[110px] bg-navy/60 border border-line/70 px-3 py-2 text-bone text-xl tabular tracking-[0.4em] text-center focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold/30 transition-colors font-mono"
+            disabled={verifying}
+          />
+          <button
+            type="submit"
+            disabled={verifying || otpInput.length !== 6}
+            className="px-4 py-2 bg-gold text-navy font-mono text-[10px] tracking-[0.3em] hover:bg-gold-soft transition-colors disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
+          >
+            {verifying ? "● 驗證" : "→ Verify"}
+          </button>
+        </div>
+      </form>
+
+      {/* ── Resend button + countdown ── */}
+      <div className="text-center mb-3">
         <button
           type="button"
           onClick={onResend}
-          disabled={cooldown > 0}
-          className="px-6 py-2.5 border border-gold text-gold font-mono text-[10px] tracking-[0.3em] hover:bg-gold/10 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          disabled={cooldown > 0 || verifying}
+          className="px-6 py-2.5 border border-line/60 text-mute font-mono text-[10px] tracking-[0.3em] hover:bg-gold/5 hover:text-gold hover:border-gold/40 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {cooldown > 0
             ? `⌛ Resend · 等 ${cooldown}s`
-            : "↻ 沒收到 · Resend magic link"}
+            : "↻ 沒收到 · Resend email"}
         </button>
       </div>
 
-      <div className="bg-navy/40 border border-line/60 p-4">
-        <p className="font-mono text-mute/80 text-[10px] tracking-[0.25em] leading-relaxed">
-          ▸ 點開 link → 自動轉{" "}
-          <span className="font-mono text-bone">/member?welcome=true</span>
-          <br />
-          ▸ Magic link 30 分鐘內有效 · 過期 Resend
-          <br />
-          ▸ Email 找不到看垃圾信夾 · 或 30 秒後 Resend
-        </p>
-      </div>
+      <p className="font-mono text-mute/70 text-[10px] tracking-[0.25em] leading-relaxed text-center">
+        ▸ Link + code 同 1 小時內有效 · 過期 Resend
+        <br />
+        ▸ 找不到 email · 看垃圾信夾 · 或 30s 後 Resend
+      </p>
     </div>
   );
+}
+
+function friendlyOtpError(raw: string): string {
+  const lower = raw.toLowerCase();
+  if (lower.includes("expired")) return "Code 過期(1 小時)· Resend 取新 code";
+  if (lower.includes("invalid") || lower.includes("not found"))
+    return "Code 錯誤 · 看最新 email · 6 碼數字";
+  if (lower.includes("rate"))
+    return "太快 · 等 30 秒後再試";
+  return raw.slice(0, 200);
 }
