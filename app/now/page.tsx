@@ -33,9 +33,15 @@ export const metadata: Metadata = {
 // ─────────────────────────────────────────────────────
 
 const LAST_UPDATED = "2026-05-21";
-const CYCLE = "Round 28-30 · 2026-05-21 late evening · 同日 18+ waves";
+const CYCLE = "Round 28-30 · 2026-05-21 late evening · 同日 19+ waves · 第一筆 receipt 已 ingest";
 
 const SHIPPED_THIS_CYCLE: { title: string; body: string; href?: string }[] = [
+  // ── 🎯 Round 30 Wave 3 · BRAND IP 物理時刻(2026-05-21 ~22:30 TPE)──
+  {
+    title: "[R30 W3] 🎯 FIRST RECEIPT · cpbl-260521-01 · 統一 2:6 富邦 · ENGINE PROVED ✓ · N=0→N=1",
+    body: "ZONE 27 第一筆公開戰績 receipt。 Tim 在 cpbl.com.tw 截 box score 後立刻貼 Claude → 解析 → ingest finalResult into lib/matches.ts。 統一獅(away)2 R 8 H 0 E · 富邦悍將(home)6 R 9 H 0 E · 9 局完整 · 新莊。 勝投 李東洛(7 IP · 2 K · 0 失分 · 4-time MVP)· 敗投 郭俊麟 · 救援成功 張奕。 Engine 賽前 say 60% home · 實際 home win → PROVED ✓ · engine_pct_on_winner = 60%。 整條 cascade fire(無人工干預):(1) /track-record N=0 → N=1 · FirstReceiptHero cinematic 自動 render(2px gold border + ★ FIRST RECEIPT · 1 OF 270 PROJECTED + ENGINE vs ACTUAL grid + PROVED verdict band)·(2) homepage HeroLiveCard 切「today-final」mode(per W1 fix)· receipt block 顯示 6:2 + ENGINE PROVED · 不跳去 cpbl-260522-01 future preview ·(3) /matches/cpbl-260521-01 calibration block 自動展開 ·(4) /member/calibration 第一個 gold dot 落點(centerPct=65 · favoriteActualPct=100% · 因為 favorite won 1/1)·(5) /admin live KPI · /audit SAMPLE_SIZE · ScarcityStrip 全 dynamic re-read。 這就是 W2B docs 寫的「empty scaffold + Pratfall waiting state」 兌現的瞬間 · 也是 W1 priority fix 真正 fire 的瞬間。 brand IP「方法公開 · 不刪不修飾」物理產出第一行。",
+    href: "/track-record",
+  },
   // ── Round 30 Wave 2C ship(2026-05-21 late evening · Spy-Trackers specific naming)──
   {
     title: "[R30 W2C] /coverage NEVER 加 玩運彩 playsport.cc + /membership 加具體站名 · Pratfall Spy-Trackers pattern",

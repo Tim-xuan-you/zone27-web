@@ -121,6 +121,19 @@ export const matches: Match[] = [
       { score: "2 : 4", probability: 9.2 },
     ],
     aiConfidence: 65,
+    // ── FINAL · 2026-05-21 ~22:30 TPE · brand IP 物理時刻 ──
+    // 統一 2 : 6 富邦 · 9 局完整 · 新莊
+    // 勝投 李東洛(7 IP · 2 K · 0 失分 · 4-time MVP)
+    // 敗投 郭俊麟 · 救援成功 張奕
+    // Innings: away(統一)0 0 0 0 0 0 0 0 2 · home(富邦)3 2 0 0 0 0 1 0 X
+    // Engine 賽前 say 60% home → home win → PROVED ✓ · ZONE 27 第一筆 receipt。
+    finalResult: {
+      homeScore: 6,
+      awayScore: 2,
+      winner: "home",
+      ingestedAt: "2026-05-21",
+      innings: 9,
+    },
   },
 
   // ── 2026-05-22 · 第二批 CPBL pre-game ingestion · 3 場 ──

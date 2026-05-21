@@ -11,8 +11,9 @@
 > **Tim 仍 pending 親手動作:**
 > - ② Resend ✅ DONE Round 16(production · Gmail Inbox 已驗收)
 > - ③ 品牌域名 · Tim-cued only(per [[feedback_zone27_domain_deferred]])
-> - ⑤ **今晚 22:00+ CPBL ingest** · cpbl-260521-01 box score → /track-record
->   第一筆 → FirstReceiptHero cinematic 自動 fire(brand 物理時刻 of the week)
+> - ⑤ CPBL ingest ✅ **DONE 2026-05-21 ~22:30 TPE** · cpbl-260521-01 · 統一 2:6 富邦
+>   · ENGINE PROVED ✓ · /track-record N=0→N=1 · FirstReceiptHero cinematic 自動 fire
+>   · /member/calibration 第一個 gold dot 落點(bin 65 · favoriteActualPct=100%)
 > - ⑥ K/BB profile screenshot · optional · 升 estimate 為真實值
 
 ---
