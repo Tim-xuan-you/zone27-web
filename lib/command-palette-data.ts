@@ -10,7 +10,7 @@
 // Inspired by Linear / Vercel / Stripe command palettes,
 // but DELIBERATELY thin: no fuse.js, no telemetry, no
 // recently-used persistence. Simple substring filter on a
-// hand-curated 25-row list is sufficient and brand-pure
+// hand-curated 26-row list is sufficient and brand-pure
 // (per [[zone27-disclosure-philosophy]]: no hidden ranking).
 // ─────────────────────────────────────────────────────
 
@@ -135,6 +135,23 @@ export const COMMAND_ITEMS: CommandItem[] = [
     path: "/changelog",
     group: "品牌 IP",
     keywords: ["changelog", "版本", "git", "歷史", "log"],
+  },
+  {
+    label: "Now · 現在 craft journal · SHIPPED / DISCOVERED / UNRESOLVED",
+    kicker: "/now",
+    path: "/now",
+    group: "品牌 IP",
+    keywords: [
+      "now",
+      "現在",
+      "craft",
+      "journal",
+      "linear",
+      "本週",
+      "this week",
+      "蜘蛛網",
+      "工藝",
+    ],
   },
 
   // ── 信任文件 ───────────────────────────────────────

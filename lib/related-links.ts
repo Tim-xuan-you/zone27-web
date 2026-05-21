@@ -267,6 +267,26 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
       title: "公開戰績 · 訂閱前先看 N 場 PROVED",
     },
   ],
+  // Round 28 Wave 4 · /now NEW · 3 sibling: /changelog(過去事實 · git
+  // SOURCE)· /roadmap(未來承諾 · BRAND BOUNDARIES)· /manifesto(現在
+  // 的工藝為什麼是 brand IP · 倒置 SaaS scheduled marketing)。
+  "/now": [
+    {
+      href: "/changelog",
+      kicker: "changelog",
+      title: "過去的事實 · git source of truth",
+    },
+    {
+      href: "/roadmap",
+      kicker: "roadmap",
+      title: "未來的承諾 · BRAND BOUNDARIES",
+    },
+    {
+      href: "/manifesto",
+      kicker: "manifesto",
+      title: "倒置宣言 · 為什麼當下的工藝也是 brand IP",
+    },
+  ],
 };
 
 export function getRelatedLinks(currentPath: string): RelatedLink[] {

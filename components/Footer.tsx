@@ -60,6 +60,10 @@ const FOOTER_GROUPS: FooterGroup[] = [
       { label: "倒置宣言", href: "/manifesto" },
       { label: "鐵律", href: "/discipline" },
       { label: "公開路線圖", href: "/roadmap" },
+      // Round 28 Wave 4 · /now NEW · craft journal 現在 · 位於
+      // /changelog(過去)+ /roadmap(未來)中間。Linear /now + Derek
+      // Sivers /now movement 對標 · 倒置 SaaS scheduled marketing。
+      { label: "現在 · craft journal", href: "/now" },
       { label: "版本紀錄", href: "/changelog" },
     ],
   },
