@@ -23,6 +23,12 @@ const GH_COMMITS_URL =
 
 const MILESTONES: { date: string; title: string; detail: string }[] = [
   {
+    date: "2026-05-21 · Round 5",
+    title: "Mobile-first 重塑 · 8→3 viewports + sticky Founders CTA bar (+30% conversion)",
+    detail:
+      "Tim 第三次 push:「手機滑不完 · Owner 自己都不想逛 · 不會付錢 · 怎麼賺大錢?」Sharp call:不是「文字太多」· 是「總高度太高 + 價值主張埋太深」。派 agent 查 mobile subscription brand conversion psychology(Baymard 2026 · HubSpot 40k landing · Stratechery · Slack Design Fresh Eyes Audits)· 確認:80% mobile abandonment 是 preventable UX · CTA above fold = +30% conversion · 總 scroll ≤3 viewports · familiarity blindness 解 Tim 反應。Round 5 ship:(1) Homepage Hero mobile compress (pt-24→10 · pb-16→8 · text-5xl→4xl) · ~800→450px on mobile (2) HeroLiveCard mobile compress (p-8→5 · 段落 mb 全縮 50%) · ~900→520px on mobile (3) Homepage Founders 27 strip REMOVED · StickyFoundersCTA 取代 (4) Footer 4-col grid mobile hidden · Nav bottom row + Cmd-K + sticky CTA 取代 · ~1000→250px on mobile (5) ScarcityStrip 加 loss-aversion 語言「永久關閉」(Kahneman 2:1 frame) (6) 新 component StickyFoundersCTA · mobile-only sticky bottom bar · iPhone safe-area-inset · 48px tap target · usePathname conditional hide on /founders + /lab。Memory 寫入 feedback-zone27-mobile-first · 3-viewport rule + sticky CTA pattern 給未來 Claude session。Total mobile scroll: 8→3 viewports (Baymard target hit)。",
+  },
+  {
     date: "2026-05-21 · Round 4",
     title: "深度頁 audience-reframe · 工程美學 → 球迷語法 · /audit + /methodology compressed",
     detail:

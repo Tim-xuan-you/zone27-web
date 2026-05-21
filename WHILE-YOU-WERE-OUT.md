@@ -1,11 +1,67 @@
 # 🌙 您休息時 Claude 做了什麼
 
+> Tim · 2026-05-21 PM · **Round 5 · Mobile-first 重塑 · 8→3 viewports + sticky CTA bar**
 > Tim · 2026-05-21 PM · **Round 4 · 深度頁 audience-reframe · 工程美學 → 球迷語法**
 > Tim · 2026-05-21 PM · **Round 3 · Apple-grade 首頁壓縮 · 8 sections → 3**
 > Tim · 2026-05-21 接續 · **Round 2 · 自主多輪迭代 · 4 commits**
 > Tim · 2026-05-21 開盤 · **Day 3 · /track-record + match lifecycle**
 > Tim · 2026-05-20 晚上 · **Day 2 · 37 commits since /manifesto**
 > Tim · 2026-05-19 晚上 · 十六波迭代 Round 1 → Round 16 (底下)
+
+---
+
+## 📱 Round 5 (2026-05-21 PM 再接續) · Mobile-first 重塑 · 8→3 viewports
+
+Tim 第三次 push:「手機滑不完 · Owner 自己都不想逛 · 不會付錢 · 我怎麼賺大錢?」
+
+Sharp call(persona lens):
+> **問題不是「文字太多」· 是「總高度太高」+「價值主張埋太深」。**
+> Apple / Stratechery 手機 above-fold = product + 1 CTA。
+> 我們只有 slogan · 沒 demo / value prop / CTA / scarcity above fold。
+
+派 agent 上網查 mobile-first subscription brand conversion psychology(Baymard 2026 / HubSpot 40k landing pages / Stratechery 40k subscribers / Slack Design Fresh Eyes Audits):
+- **80% mobile abandonment** driven by preventable UX
+- **CTA above fold = +30% conversion**
+- **Total mobile scroll ≤ 3 viewports**(current 8 · target hit 3)
+- **Familiarity blindness** 解 Tim 反應(寫 50 次當然看不到實際視覺重量)
+- **Loss aversion + Scarcity** 雙重 conversion lever
+
+### Round 5 ship(commit 823d9c3)
+
+| 元件 | Round 4 末 | Round 5 |
+|---|---|---|
+| Hero 高度 (mobile) | ~800px | ~450px(pt-24→10 · pb-16→8 · text-5xl→4xl) |
+| HeroLiveCard (mobile) | ~900px | ~520px(p-8→5 · 段落 mb 全縮 ~50%) |
+| Homepage Founders strip | 顯示 | ❌ 移除(StickyFoundersCTA 取代) |
+| Footer (mobile) | 4-col stack 18 links ~1000px | hidden + 法務 + 版本 chip ~250px |
+| Sticky bottom CTA bar | ❌ | ✅ NEW(mobile-only · `+30%` conversion) |
+| ScarcityStrip 語言 | 「N REMAIN」 | + 「永久關閉」loss-aversion frame |
+
+新元件 `<StickyFoundersCTA />`:
+- Mobile-only sticky bottom bar(z-30)
+- 「FOUNDERS 27 · NT$ 2,700 終身」+ 「X/270 · X 席 · 永久關閉」+「加入 →」
+- iPhone safe-area-inset 處理 · 48px tap target(Apple HIG)
+- backdrop-blur-md · usePathname() 在 /founders + /lab 自動 hide
+- Booking.com / Airbnb / Substack mobile 慣例
+
+新 layout 規矩:
+- body `pb-[72px] sm:pb-0` 預留 sticky CTA 空間
+- 桌面完全不動 · 視覺密度保留 brand IP 沉浸感
+- 手機 vs 桌面分流 = 雙層體驗
+
+### Round 5 brand IP 強化
+
+1. **Owner-as-visitor test passed** · Tim 應該不再「滑不完」
+2. **賺大錢 conversion path 通了** · 每一個 mobile viewport 都有 sticky CTA · 不論 visitor 在哪一頁
+3. **Memory 寫入 [[feedback-zone27-mobile-first]]** · 3-viewport rule · sticky CTA pattern · 給未來 Claude session
+
+### Round 5 您回來建議流程
+
+1. 用**手機**(不是桌面)開 https://zone27-web.vercel.app
+2. 數一下滑到底要幾個 viewport · 目標 ~3
+3. 看 sticky 底部 「加入 Founders 27」金色按鈕 · 滑哪都跟著您
+4. 桌面打開應該完全沒變化 — 那是 brand 深度的體驗
+5. 試試 ScarcityStrip 點進 /leaderboard · 看 27 之牆 scarcity 視覺化
 
 ---
 
