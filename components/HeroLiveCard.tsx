@@ -21,6 +21,7 @@ import {
   FOUNDERS_REMAINING,
   FOUNDERS_TOTAL,
 } from "@/lib/founders-stats";
+import UncertaintyStripe from "@/components/UncertaintyStripe";
 
 // ── ZONE 27 · Hero Live Card ───────────────────────────
 // 首頁的活化版預測卡。Mount 時 client-side 跑 1000 場
@@ -178,6 +179,28 @@ export default function HeroLiveCard({ match }: { match: Match }) {
           }}
         />
       </div>
+
+      {/* Round 28 Wave 3 · Uncertainty Stripe (Agent A #1 canonical
+          2026 visual moat for quantitative analytics brands). Thin
+          gradient band beneath the signature bar shows the 50% (dark)
+          and 90% (light) binomial confidence intervals around homePct.
+          Renders only when N≥30 (matches Z27 LEXICON SAMPLE DEBT
+          threshold). Bank of England fan-chart convention applied to
+          baseball forecast. Makes the brand IP「AI 計算的是機率 · 不是
+          命運」 VISUAL not text. */}
+      <div className="mt-1">
+        <UncertaintyStripe estimate={homePct} n={stats.completed} height={4} />
+      </div>
+      {simPhase === "converged" && stats.completed >= 30 && (
+        <p
+          aria-hidden="true"
+          className="font-mono text-mute/50 text-[9px] tracking-[0.25em] mt-1 tabular leading-relaxed"
+        >
+          /\ 軌跡 = 引擎不確定度 ·{" "}
+          <span lang="en" className="text-mute/60">深 = 50% CI · 淺 = 90% CI</span>
+          {" "}· 引擎只給機率 · 不給命運
+        </p>
+      )}
 
       {/* Methodology line — with live counter · tighter mt on mobile.
           Round 28 Agent C fixes (P2.1 · P2.2 · P4.2): (1) "蒙地卡羅" 是

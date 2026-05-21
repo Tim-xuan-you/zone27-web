@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import ReplayBroadcast from "@/components/ReplayBroadcast";
 import ProvenanceStamp from "@/components/ProvenanceStamp";
+import UncertaintyStripe from "@/components/UncertaintyStripe";
 import type { Match } from "@/lib/matches";
 import {
   simulateGame,
@@ -261,6 +262,16 @@ export default function MatchSimulator({ match }: Props) {
                 transition: "left 120ms ease-out",
               }}
             />
+          </div>
+
+          {/* Round 28 Wave 3 · Uncertainty Stripe (Agent A #1 · canonical
+              2026 visual moat). 10K Monte Carlo gives a tight binomial
+              CI (~±0.8% at 90%) · stripe is subtle but present as brand
+              IP statement「AI 計算的是機率 · 不是命運」 turned VISUAL.
+              No legend here (already explained on homepage HeroLiveCard);
+              keeps power-user surface clean. */}
+          <div className="mt-2">
+            <UncertaintyStripe estimate={homePct} n={stats.completed} height={4} />
           </div>
 
           {/* Counters */}
