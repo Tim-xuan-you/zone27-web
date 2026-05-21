@@ -110,10 +110,10 @@ export default function CommandPalette() {
     }
   }, [isOpen]);
 
-  // ── Keep selectedIndex within bounds when filter changes ──
-  useEffect(() => {
-    setSelectedIndex(0);
-  }, [query]);
+  // selectedIndex is reset in the query change handler below
+  // (not via useEffect — React 19 react-hooks/set-state-in-effect rule
+  // catches cascading-render anti-pattern · the reset belongs at the
+  // event source, not as a downstream effect).
 
   // ── Scroll selected into view ──
   useEffect(() => {
@@ -213,7 +213,10 @@ export default function CommandPalette() {
             <input
               ref={inputRef}
               value={query}
-              onChange={(e) => setQuery(e.target.value)}
+              onChange={(e) => {
+                setQuery(e.target.value);
+                setSelectedIndex(0);
+              }}
               onKeyDown={onInputKeyDown}
               placeholder="搜尋頁面 · 工具 · 文件 · 球員..."
               className="flex-1 bg-transparent text-bone placeholder:text-mute/60 outline-none text-base sm:text-lg font-light"

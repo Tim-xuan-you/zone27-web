@@ -188,43 +188,54 @@ ZONE 27 與 **BOTTOM 27**(Tim 的棒球手遊)是雙生品牌:
 
 ---
 
-## 🗺️ 當前路由(v0.27 · DAY 2 收盤 2026-05-20)
+## 🗺️ 當前路由(v0.28 · 8 rounds compressed · 2026-05-21)
 
 ```
-首頁 + Hero
-/                        首頁 · BY THE NUMBERS bento + TRUST STACK + Brand Inversion + Live HeroLiveCard
+首頁 + 動線
+/                        首頁 · 3 sections (Round 3 Apple-style: Hero + HeroLiveCard + Founders strip)
+                         · Round 5 mobile 3-viewport · Round 8 sticky CTA via StickyFoundersCTA
 /learn                   5 分鐘入門 primer · 給沒聽過 Bill James 的人(3 chapters)
+/not-found               K-strikeout 404 · sabermetric notation
 
-Brand IP(canonical)
+Brand IP(canonical · opt-in 深度)
 /manifesto               倒置宣言 · 6 sections + Section V SYNTHESIS「方法公開·品味私藏」
 /discipline              鐵律 · Buffett + Musk + Costco 三人共識(5 sections)
 /about                   六章節品牌方法論
+/roadmap                 公開路線圖 · LOCKED / EXPLORING / BRAND BOUNDARIES (Round 6+7 compressed to 3 items)
 
-Trust artifacts(40+ sections of disclosure)
-/audit                   Model Report · 8 sections(含 Section 08 Disclosure Philosophy)
-/methodology             技術白皮書 · 10 sections + 路線圖
+Trust artifacts(post-Round-7 compressed)
+/audit                   Model Report · 5 sections(Round 7 · 含 Section 05 Disclosure Philosophy canonical)
+/methodology             技術白皮書 · 4 sections(Round 7 · 00 ABSTRACT · 01 HOW IT WORKS · 02 TRY IT · 03 WHAT'S NEXT)
 /coverage                覆蓋範圍 · 6 sections + NEVER list
 /privacy                 隱私政策 · 8 sections(含 anti-tracking inventory)
 /terms                   服務條款
 /faq                     14 honest answers
+/track-record            公開戰績 ledger · PROVED + DIVERGED 等大 · N=0 honest empty state
 
-Engine + 賽事
+Engine + 賽事(只 1 場真實 cpbl-260521-01 · per Day 3 placeholder purge)
 /lab                     即時 Monte Carlo 模擬器(逐打席模型 v0.2)
 /lab/custom              自訂任意投手對戰
 /matches                 今日賽事板(CPBL)
-/matches/[gameId]        SSG 詳情(目前 4 場:第 1 場是 2026-05-21 真實 CPBL 統一 vs 富邦)
+/matches/[gameId]        SSG 詳情 · cpbl-260521-01 統一 vs 富邦 2026-05-21 18:35 新莊
 /matches/mlb             MLB 即時資料(每 10 分鐘 ISR)
 /signal-board            每日量化早報
 /leaderboard             THE 27 WALL · 270 創始席位視覺化
-/founders                Founders 27 銷售頁(含 2 個 reframe sections)
+/founders                Founders 27 銷售頁(Round 8 polish · live scarcity in hero · sticky CTA destination)
 /glossary                27 種進階數據詞彙(StatTerm tooltip 整合)
 /changelog               精簡版本紀錄 · GitHub commits 為 source of truth
 
-OG + favicon
+OG + favicon + chrome
 /icon                    Z27 monogram favicon
 /opengraph-image         全站 fallback OG card
-/[14 routes]/opengraph-image  14 個 custom OG cards
+/[15 routes]/opengraph-image  15 個 custom OG cards(post-Round-2 · 含 /track-record + /roadmap)
+/loading.tsx             Brand-pure suspense skeleton(Round 2)
 ```
+
+## ⚙️ Global components(Round 2/5 加入)
+
+- `<CommandPalette />` · 全站 ⌘K/Ctrl-K palette · 23 routes 索引(layout.tsx)
+- `<CmdKTrigger />` · Nav 右上方 ⌘K 提示按鈕
+- `<StickyFoundersCTA />` · 行動版 sticky bottom CTA bar · 全頁顯示(除 /founders + /lab)
 
 ## 📦 技術棧
 

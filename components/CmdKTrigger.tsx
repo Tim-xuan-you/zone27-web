@@ -21,7 +21,12 @@ export default function CmdKTrigger({ className = "" }: { className?: string }) 
     // navigator.platform is deprecated but still the only sync way to
     // detect macOS reliably in 2026 · userAgentData is async + behind
     // a flag in Firefox. Acceptable since this is purely cosmetic.
+    // Setting state in useEffect is intentional here — the value
+    // genuinely depends on client-only API (navigator) which is
+    // undefined during SSR · this is the canonical pattern for
+    // platform detection that React 19's strict rule overflags.
     if (typeof navigator !== "undefined") {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setIsMac(/Mac|iPhone|iPad/i.test(navigator.platform || ""));
     }
   }, []);
