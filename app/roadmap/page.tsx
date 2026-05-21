@@ -28,7 +28,7 @@ export const metadata: Metadata = {
 
 const LAST_REVIEWED = "2026-05-21";
 
-type Status = "locked" | "exploring" | "no";
+type RoadmapStatus = "locked" | "exploring" | "no";
 
 type RoadmapItem = {
   title: string;
@@ -39,10 +39,20 @@ type RoadmapItem = {
 
 const LOCKED: { quarter: string; items: RoadmapItem[] }[] = [
   {
-    quarter: "現在 · 2026 Q2(May-Jun)",
+    quarter: "現在 · 2026 Q2(May-Jun)· 部分已 SHIPPED",
     items: [
       {
-        title: "CPBL 每日 ingestion + /track-record ledger 累積",
+        title: "✓ SHIPPED · /track-record 公開戰績 ledger",
+        body: "2026-05-21 上線 · Bloomberg-terminal aesthetic · PROVED 跟 DIVERGED 等大列出 · 從 N=0 honest empty state 起跳。第一筆預定今晚收錄。",
+        evidenceHref: "/track-record",
+        evidenceLabel: "/track-record",
+      },
+      {
+        title: "✓ SHIPPED · Cmd-K 全站快搜 palette",
+        body: "2026-05-21 上線 · 23 routes 索引化 · ⌘K (Mac) / Ctrl-K (Win) 開啟 · ↑↓ 導航 · ↵ 開啟。無 fuse.js 無 telemetry 無 recently-used (per disclosure philosophy)。",
+      },
+      {
+        title: "CPBL 每日 ingestion 持續累積 ledger",
         body: "Tim 每天截圖 cpbl.com.tw 賽前資料 + 賽後最終比分 → Claude 解析 → 寫入 finalResult。目標 90 天內 N≥30 場 · 進入 statistical-meaningful 區間。",
         evidenceHref: "/track-record",
         evidenceLabel: "/track-record",
@@ -96,10 +106,6 @@ const EXPLORING: RoadmapItem[] = [
     body: "MLB(已上)+ CPBL(已上)後 · NPB / KBO 是邏輯延伸。但 coverage philosophy 要求「引擎能誠實算的才覆蓋」,所以要先評估資料品質。",
     evidenceHref: "/coverage",
     evidenceLabel: "/coverage philosophy",
-  },
-  {
-    title: "Cmd-K 全站搜尋 + 鍵盤導航",
-    body: "Linear / Vercel / Stripe 都有的 power-user feature。19 個 user-facing 路由 + 27 個 sabermetric 詞彙,值得快速跳轉。",
   },
   {
     title: "View Transitions API · 頁面切換 morph",
@@ -225,7 +231,7 @@ export default function RoadmapPage() {
               </p>
               <div className="space-y-8">
                 {bucket.items.map((item) => (
-                  <Status status="locked" key={item.title} item={item} />
+                  <RoadmapRow status="locked" key={item.title} item={item} />
                 ))}
               </div>
             </div>
@@ -259,7 +265,7 @@ export default function RoadmapPage() {
 
         <div className="space-y-8">
           {EXPLORING.map((item) => (
-            <Status status="exploring" key={item.title} item={item} />
+            <RoadmapRow status="exploring" key={item.title} item={item} />
           ))}
         </div>
       </section>
@@ -291,7 +297,7 @@ export default function RoadmapPage() {
 
         <div className="space-y-8">
           {EXPLICIT_NO.map((item) => (
-            <Status status="no" key={item.title} item={item} />
+            <RoadmapRow status="no" key={item.title} item={item} />
           ))}
         </div>
       </section>
@@ -342,11 +348,11 @@ export default function RoadmapPage() {
 
 // ── Sub-component ─────────────────────────────────────
 
-function Status({
+function RoadmapRow({
   status,
   item,
 }: {
-  status: "locked" | "exploring" | "no";
+  status: RoadmapStatus;
   item: RoadmapItem;
 }) {
   const dotColor =

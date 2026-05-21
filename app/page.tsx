@@ -335,7 +335,7 @@ export default function Home() {
         className="mx-auto max-w-5xl w-full px-6 sm:px-10 py-24 border-t border-line/40"
       >
         <p className="font-mono text-gold text-[10px] tracking-[0.45em] mb-3 text-center">
-          TRUST STACK · 7 DEEP DOCUMENTS
+          TRUST STACK · 8 DEEP DOCUMENTS
         </p>
         <h2
           id="trust-stack-heading"
@@ -347,7 +347,7 @@ export default function Home() {
         </h2>
         <p className="text-center text-mute text-sm mb-14 max-w-xl mx-auto leading-relaxed">
           競爭品牌通常有 1 頁「About」+ 1 頁「Privacy」。
-          ZONE 27 有 7 個 trust artifact pages · 含 1 個 LIVE 公開戰績 · 累積 45+ sections。
+          ZONE 27 有 8 個 trust artifact pages · 含 1 個 LIVE 公開戰績 + 1 個公開路線圖 · 累積 50+ sections。
         </p>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-line/30">
@@ -409,6 +409,14 @@ export default function Home() {
             sections="LIVE · 隨時間長"
             desc="引擎每場預測賽後實際結果 · PROVED 跟 DIVERGED 等大列出"
             gold
+          />
+          <TrustCard
+            no="08"
+            href="/roadmap"
+            title="公開路線圖"
+            subtitle="ROADMAP"
+            sections="3 stages · 含「永遠不做」"
+            desc="LOCKED / EXPLORING / EXPLICIT NO 三段 · 對標 Anthropic RSP"
           />
         </div>
 

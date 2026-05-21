@@ -33,6 +33,10 @@ export default function CommandPalette() {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const inputRef = useRef<HTMLInputElement>(null);
   const listRef = useRef<HTMLDivElement>(null);
+  // Element to return focus to on close — captured before open.
+  // Keyboard users rely on this · without it focus drops to document.body
+  // and Tab navigation restarts from the top of the page (jarring).
+  const triggerRef = useRef<HTMLElement | null>(null);
   const router = useRouter();
 
   // ── Filtered + grouped items ──
@@ -42,6 +46,14 @@ export default function CommandPalette() {
 
   // ── Open / close handlers ──
   const open = useCallback(() => {
+    // Capture the currently-focused element so we can restore on close.
+    // Skip if focus is already inside this palette (re-open during open).
+    if (typeof document !== "undefined") {
+      const active = document.activeElement;
+      if (active instanceof HTMLElement && active !== document.body) {
+        triggerRef.current = active;
+      }
+    }
     setIsOpen(true);
     setQuery("");
     setSelectedIndex(0);
@@ -49,12 +61,24 @@ export default function CommandPalette() {
 
   const close = useCallback(() => {
     setIsOpen(false);
+    // Restore focus on the element that opened the palette · keyboard
+    // continuity. Defer to next frame so React unmounts modal first.
+    if (triggerRef.current) {
+      const target = triggerRef.current;
+      requestAnimationFrame(() => target.focus());
+      triggerRef.current = null;
+    }
   }, []);
 
   // ── Global keyboard shortcut · ⌘K / Ctrl-K ──
+  // Note: we intentionally preventDefault on Cmd/Ctrl+K everywhere,
+  // including inside `<input>` / `<textarea>`. This swallows Chrome's
+  // default address-bar focus shortcut · ZONE 27 owns this key on
+  // its own pages (per power-user palette convention · Linear /
+  // Vercel / Raycast all do this). External sites are unaffected
+  // since this listener only lives within zone27-web.vercel.app.
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
-      // Cmd-K (Mac) or Ctrl-K (Win/Linux)
       if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
         e.preventDefault();
         if (isOpen) {
@@ -63,7 +87,6 @@ export default function CommandPalette() {
           open();
         }
       }
-      // Esc closes if open
       if (e.key === "Escape" && isOpen) {
         e.preventDefault();
         close();

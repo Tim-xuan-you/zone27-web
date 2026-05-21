@@ -23,16 +23,25 @@ export const COMMIT_SHA_FULL =
 /** Branch ref · "main" in production. */
 export const COMMIT_BRANCH = process.env.VERCEL_GIT_COMMIT_REF ?? "main";
 
-/** YYYY-MM-DD when this build evaluated. Module-eval time on each
- *  build = effectively "deploy timestamp" for static-rendered pages.
- *  ISR-revalidated pages will refresh on their own cadence. */
-export const DEPLOYED_AT = new Date().toISOString().slice(0, 10);
+/** YYYY-MM-DD (Asia/Taipei) when this build evaluated. Module-eval
+ *  time on each build = effectively "deploy timestamp" for static-
+ *  rendered pages. Uses Taipei TZ for consistency with the rest of
+ *  the codebase (matches lib/matches.ts getTodayTaipei pattern) —
+ *  raw UTC would drift up to 8h behind for morning-Taipei deploys. */
+export const DEPLOYED_AT = new Intl.DateTimeFormat("en-CA", {
+  timeZone: "Asia/Taipei",
+}).format(new Date());
 
 /** Owner/repo for constructing GitHub permalinks. */
 export const GH_OWNER_REPO = "Tim-xuan-you/zone27-web";
 
-/** Direct link to the commit that produced this bundle. */
-export const COMMIT_PERMALINK = `https://github.com/${GH_OWNER_REPO}/commit/${COMMIT_SHA_FULL}`;
+/** Direct link to the commit that produced this bundle.
+ *  Fallback to repo root when SHA is "local" (npm run dev) — clicking
+ *  the BUILD chip on /audit would 404 otherwise.  */
+export const COMMIT_PERMALINK =
+  COMMIT_SHA === "local"
+    ? `https://github.com/${GH_OWNER_REPO}`
+    : `https://github.com/${GH_OWNER_REPO}/commit/${COMMIT_SHA_FULL}`;
 
 /** Direct link to the changelog showing all commits. */
 export const COMMITS_PERMALINK = `https://github.com/${GH_OWNER_REPO}/commits/${COMMIT_BRANCH}`;
