@@ -287,6 +287,26 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
       title: "倒置宣言 · 為什麼當下的工藝也是 brand IP",
     },
   ],
+  // Round 29 Wave 2 · /member NEW · 3 sibling: /membership(4-tier
+  // ladder 全景 · 從 free 到 NT$2700)· /now(這頁工程現狀)·
+  // /manifesto(為什麼 data ownership 是 brand IP 不是 feature)。
+  "/member": [
+    {
+      href: "/membership",
+      kicker: "membership",
+      title: "4-tier ladder 全景 · 從匿名到 NT$ 2,700 終身",
+    },
+    {
+      href: "/now",
+      kicker: "now",
+      title: "這頁的工程現狀 · 為什麼還沒 auth-gated",
+    },
+    {
+      href: "/manifesto",
+      kicker: "manifesto",
+      title: "為什麼 data ownership 是 brand IP 不是 feature",
+    },
+  ],
 };
 
 export function getRelatedLinks(currentPath: string): RelatedLink[] {

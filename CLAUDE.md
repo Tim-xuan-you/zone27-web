@@ -188,7 +188,7 @@ ZONE 27 與 **BOTTOM 27**(Tim 的棒球手遊)是雙生品牌:
 
 ---
 
-## 🗺️ 當前路由(v0.29 · Round 28 加 /now · 2026-05-21 evening)
+## 🗺️ 當前路由(v0.29 · Round 29 加 /member + /admin · 2026-05-21 evening)
 
 ```
 首頁 + 動線
@@ -239,16 +239,28 @@ Engine + 賽事(只 1 場真實 cpbl-260521-01 · per Day 3 placeholder purge)
 /glossary                27 industry stats(10+10+7)+ 5 Z27 LEXICON = 32 entries(Round 13 加 lexicon)
 /changelog               精簡版本紀錄 · GitHub commits 為 source of truth
 
+Member + Ops(Round 29)
+/member                  **NEW Round 29** · FREE TIER 會員儀表板 PUBLIC PREVIEW ·
+                         4 sections · 4 cognitive bias driven(Endowment + IKEA +
+                         Loss Aversion + Collection)· localStorage sim history 當
+                         preview data · 不假裝 functionality 已存在 · Pratfall surface
+                         工程現狀 · launch timeline 公開(Phase 1 Q3 auth · Phase 2 Q3+
+                         TapPay · Phase 3 Q4+ CMS)
+/admin                   **NEW Round 29 · noindex** · Tim's ops dashboard preview ·
+                         live KPI numbers(waitlist · founders state · ingest queue)·
+                         Stage 1 reality(Supabase Studio 連結)+ Stage 2 mockup ·
+                         不出現在 Cmd-K · 對齊 noindex 框架
+
 OG + favicon + chrome
 /icon                    Z27 monogram favicon
 /opengraph-image         全站 fallback OG card
-/[17 routes]/opengraph-image  17 個 custom OG cards(Round 28 加 /now)
+/[18 routes]/opengraph-image  18 個 custom OG cards(Round 29 加 /member · /admin 無 OG · 因 noindex)
 /loading.tsx             Brand-pure suspense skeleton(Round 2)
 ```
 
 ## ⚙️ Global components(Round 2/5/12/28)
 
-- `<CommandPalette />` · 全站 ⌘K/Ctrl-K palette · **26 routes** 索引(Round 28 加 /now 後)(layout.tsx)
+- `<CommandPalette />` · 全站 ⌘K/Ctrl-K palette · **27 visitor-discoverable routes** 索引(Round 29 加 /member 後 · /admin noindex 不在 palette)(layout.tsx)
 - `<CmdKTrigger />` · 雙 variant:
   - `variant="chip"` (default) · Nav 右上方 ⌘K 提示按鈕(desktop)
   - `variant="icon"` (Round 12) · Nav mobile 2nd row 右側 ⌕ 圖示(palette 全站可達)
@@ -256,7 +268,8 @@ OG + favicon + chrome
 - `<ProvenanceStamp />` (Round 12) · ENGINE v0.2 · BUILD {SHA} · MATCH {id} citation footer · 自動加在 MatchSimulator 內 → 用於 /lab + /lab/custom + /matches/[gameId] · Patek/Bloomberg/academic citation pattern
 - `<UncertaintyStripe />` (Round 28) · Binomial CI gradient bar · 50% (dark) + 90% (light) 在 win-probability % 下方 · HeroLiveCard + MatchSimulator · Bank of England fan-chart convention · 2026 canonical visual moat for quantitative analytics brand
 - `<FounderSignOff />` (Round 28) · 3-sentence first-person paragraph + signed `— TIM · FOUNDER · {date}` · 5 trust docs(/audit · /methodology · /coverage · /track-record · /roadmap)+ /now · patio11/DHH pattern
-- `<ArticleMeta />` (Round 28) · Reading-time chip + optional N= SAMPLE DEBT chip(Z27 LEXICON UI primitive · threshold 30 Bill James 慣例)· /methodology · /coverage · /roadmap · /track-record · /now
+- `<ArticleMeta />` (Round 28) · Reading-time chip + optional N= SAMPLE DEBT chip(Z27 LEXICON UI primitive · threshold 30 Bill James 慣例)· /methodology · /coverage · /roadmap · /track-record · /now · /member · /admin
+- `<MemberDashboardPreview />` (Round 29) · client component · 把 visitor localStorage sim history 用「您的引擎時間軸」 framing 顯示(Endowment Effect)· 4 sections · 4 cognitive bias driven · 用於 /member · SSR-safe mount flag pattern
 
 ## 📦 技術棧
 

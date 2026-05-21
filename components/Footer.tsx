@@ -50,6 +50,9 @@ const FOOTER_GROUPS: FooterGroup[] = [
       // Round 27 · /membership 加入 footer ENTRY group · 訪客滾到 footer
       // 也能看到 4-tier ladder 入口 · 不只靠 Nav pill 進入。
       { label: "會員制 · 4 tier", href: "/membership" },
+      // Round 29 Wave 2 · /member NEW · FREE TIER dashboard preview ·
+      // Tim 反覆被問「會員頁面在哪?」這是答案 entry。
+      { label: "會員儀表板預覽", href: "/member" },
       { label: "常見問題", href: "/faq" },
     ],
   },
