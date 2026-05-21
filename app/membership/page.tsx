@@ -165,6 +165,78 @@ export default async function MembershipPage({
 
         <div className="mx-auto w-32 gold-line mb-12" />
 
+        {/* ── MEMBER SYSTEM MAP · Round 30 Wave 4 ───────
+            Tim 第 2 次同 prompt(R29 W2 已 ship /member + /admin · Tim
+            訪客第一眼看不到答案聚合)= Pratfall canary fire · 不 over-
+            defend「我已 ship」 · 把 4 個 reflexive question 做成 single
+            visible MAP block · 放在訪客 hero 下第一眼可見處 · 不用滾。
+            Each Q: verdict band + body + direct anchor link · 答案散在
+            /membership Creator Permissions / /member / /member/
+            calibration / /admin · MAP 是 single source of truth · 不重
+            複內容 · 純導航。 Brand pure:gold-bordered slate panel ·
+            mono kicker · pratfall-safe(承認 4 個 reflexive Q 反覆被問
+            是 brand acknowledgment 不是 noise)。 */}
+        <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-16">
+          <div className="bg-slate/40 border border-gold/40 p-6 sm:p-10">
+            <div className="flex items-baseline justify-between mb-3 flex-wrap gap-3">
+              <p
+                lang="en"
+                className="font-mono text-gold text-[10px] tracking-[0.45em]"
+              >
+                / MEMBER SYSTEM MAP · 4 個反覆被問的問題
+              </p>
+              <p className="font-mono text-mute/70 text-[10px] tracking-[0.3em]">
+                Round 30 W4 · single answer hub
+              </p>
+            </div>
+            <p className="text-mute/80 text-sm leading-relaxed mb-8 max-w-3xl">
+              Tim 反覆被訪客 + 自己問:現在能加入嗎?在哪發文?Tim 管理介面在哪?
+              心理學角度做什麼?答案散在 4-5 個頁面 · 這個 MAP 是 single
+              answer hub · 每個 Q 附 verdict + 直接 anchor。
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <MapRow
+                question="Q1 · 一般會員現在能加入嗎? 為什麼要等 Q3?"
+                verdict="✓ 現在就能 · FREE TIER 永久免費"
+                verdictTone="gold"
+                body="留 email · 1 秒鐘 · 不需付費 · 不會升級 · Stratechery / Plausible / Substack 同 model。 您要等的不是「加入會員」 — 是 BLACK CARD 付費訂閱 + 雲端 sync dashboard(Phase 2 Q3+ · TapPay 上線後)。 FREE TIER 是 Day 1 就開的入口 · 跟付費功能不是同一條 timeline。"
+                ctas={[
+                  { label: "↓ 立刻加入 FREE TIER", href: "#waitlist" },
+                ]}
+              />
+              <MapRow
+                question="Q2 · 會員在哪裡發文 + 推薦賽事?"
+                verdict="⏳ BLACK CARD Q3 · Founders 27 預售中"
+                verdictTone="bone"
+                body="FREE TIER ❌ 無法發文(防 LINE 老師 archetype · 玩運彩 / 報馬仔 生態 manual gate)。 BLACK CARD ✓ 可發文 / 推薦賽事 / 創作者抽成 5% (Q3 2026 開放)。 Founders 27 ✓ 可發文 / 0% 抽成終身 (現在預售中 · 限量 270)。"
+                ctas={[
+                  { label: "↓ Creator Permissions FAQ", href: "#creator-permissions" },
+                ]}
+              />
+              <MapRow
+                question="Q3 · Tim 如何管理會員 · 會員自己頁面在哪?"
+                verdict="✓ 都有 · 路徑列在右"
+                verdictTone="gold"
+                body="Tim ops dashboard: /admin (noindex · Tim 自用 · live KPI · Stage 1 Supabase Studio 連結 + Stage 2 自家後台 mockup)。 會員 individual preview: /member (4 cognitive bias driven · localStorage data 當 preview)。 Calibration mirror: /member/calibration (sabermetric 45° reliability diagram)。"
+                ctas={[
+                  { label: "→ /member · 會員個人頁", href: "/member" },
+                  { label: "→ /admin · Tim ops (noindex)", href: "/admin" },
+                ]}
+              />
+              <MapRow
+                question="Q4 · 會員頁面 psychology 角度能做什麼?"
+                verdict="✓ 4 cognitive bias + epistemic mirror"
+                verdictTone="gold"
+                body="Endowment Effect(您的引擎時間軸 · 您自己的 sim history 累積)· IKEA Effect(您 vote 決定引擎下一步 · drag-rank)· Loss Aversion(您 follow 的賽事 + 個人 calibration record)· Collection(您自己的 trophy)。 + epistemic mirror /member/calibration · ZONE 27 唯一發布會員自己 calibration drift 的高端 sports 品牌。"
+                ctas={[
+                  { label: "→ /member 完整 preview", href: "/member" },
+                  { label: "→ /member/calibration · epistemic mirror", href: "/member/calibration" },
+                ]}
+              />
+            </div>
+          </div>
+        </section>
+
         {/* ── 4-TIER CARDS ───────────────────────── */}
         <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-16">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
@@ -186,7 +258,10 @@ export default async function MembershipPage({
         </section>
 
         {/* ── 創作者 / 發文 / 推薦賽事 FAQ ─────────── */}
-        <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-16 border-t border-line/40 pt-16">
+        <section
+          id="creator-permissions"
+          className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-16 border-t border-line/40 pt-16 scroll-mt-20"
+        >
           <p
             lang="en"
             className="font-mono text-gold text-[10px] tracking-[0.45em] mb-6 text-center"
@@ -356,6 +431,59 @@ function TierCard({ tier }: { tier: Tier }) {
           您現在就是這層
         </p>
       )}
+    </div>
+  );
+}
+
+// Round 30 Wave 4 · MAP row sub-component。 4 Q-cards used in MEMBER
+// SYSTEM MAP block at top of /membership · 每個 question 一張卡 · verdict
+// band + body + 1-2 direct anchor link · pratfall-safe(承認被反覆問
+// 是 brand acknowledgment 不是 noise)。
+function MapRow({
+  question,
+  verdict,
+  verdictTone,
+  body,
+  ctas,
+}: {
+  question: string;
+  verdict: string;
+  verdictTone: "gold" | "bone" | "loss" | "mute";
+  body: string;
+  ctas: { label: string; href: string }[];
+}) {
+  const verdictColor = {
+    gold: "text-gold",
+    bone: "text-bone",
+    loss: "text-loss",
+    mute: "text-mute",
+  }[verdictTone];
+  return (
+    <div className="border-l-2 border-gold/50 pl-5 sm:pl-6 py-1">
+      <p className="font-mono text-bone text-xs sm:text-sm tracking-[0.15em] leading-snug mb-3">
+        {question}
+      </p>
+      <p
+        className={`font-mono ${verdictColor} text-sm sm:text-base tracking-[0.1em] mb-3 font-medium`}
+      >
+        {verdict}
+      </p>
+      <p className="text-mute text-sm leading-relaxed mb-4">{body}</p>
+      <div className="flex flex-wrap gap-x-4 gap-y-2">
+        {ctas.map((cta, i) => (
+          <Link
+            key={cta.href}
+            href={cta.href}
+            className={`inline-block font-mono text-[10px] tracking-[0.3em] underline-offset-4 hover:underline ${
+              i === 0
+                ? "text-gold hover:text-gold-soft"
+                : "text-gold/70 hover:text-gold"
+            }`}
+          >
+            {cta.label}
+          </Link>
+        ))}
+      </div>
     </div>
   );
 }

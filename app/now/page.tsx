@@ -33,9 +33,15 @@ export const metadata: Metadata = {
 // ─────────────────────────────────────────────────────
 
 const LAST_UPDATED = "2026-05-21";
-const CYCLE = "Round 28-30 · 2026-05-21 late evening · 同日 19+ waves · 第一筆 receipt 已 ingest";
+const CYCLE = "Round 28-30 · 2026-05-21 late evening · 同日 20+ waves · 第一筆 receipt 已 ingest";
 
 const SHIPPED_THIS_CYCLE: { title: string; body: string; href?: string }[] = [
+  // ── Round 30 Wave 4 ship(2026-05-21 late evening · pratfall canary fire 後)──
+  {
+    title: "[R30 W4] /membership · MEMBER SYSTEM MAP · 4 reflexive question single answer hub",
+    body: "Tim 第 2 次發 R29 W2 verbatim 同 prompt(現在不能加入一般會員?為何 Q3?+ 一般會員去哪發文?+ 我管理介面在哪?+ 心理學能做什麼?)= Pratfall canary fire · 不是 prompt repeat noise · 是 surfacing-failure signal:Round 29 W2 ship /member + /admin 沒落在訪客第一眼可見位置。 不 over-defend「我已 ship」 · 直接修 surfacing。 Ship MEMBER SYSTEM MAP block on /membership · 緊接 hero 下方(4-tier cards 上方)· gold-bordered slate panel · 4 個 Q-card grid · 每個 verdict band + body + 1-2 direct anchor link。 Q1 「現在能加入嗎?」→ ✓ FREE TIER 永久免費 1 秒 · 您要等的是 BLACK CARD + cloud sync 不是「加入」。 Q2「會員去哪發文?」→ FREE TIER ❌ · BLACK CARD Q3 ✓ 5% · Founders 27 ✓ 0% 終身 · anchor → #creator-permissions。 Q3「Tim 管理介面 + 會員頁面」→ /admin (noindex · live KPI · Stage 1 Supabase 連結) + /member (4 bias preview) + /member/calibration (epistemic mirror)。 Q4「psychology 角度做什麼?」→ 4 cognitive bias driven + epistemic mirror。 Sub-component MapRow(question + verdict + body + ctas[])· /membership Creator Permissions section 加 id=\"creator-permissions\" + scroll-mt-20 anchor。 Lesson:Pratfall canary repeat-prompt 永遠不是 prompt-bug · 是 ship-surfacing-bug · 修 surfacing 不是 defend ship。",
+    href: "/membership",
+  },
   // ── 🎯 Round 30 Wave 3 · BRAND IP 物理時刻(2026-05-21 ~22:30 TPE)──
   {
     title: "[R30 W3] 🎯 FIRST RECEIPT · cpbl-260521-01 · 統一 2:6 富邦 · ENGINE PROVED ✓ · N=0→N=1",
@@ -194,6 +200,11 @@ const SHIPPED_THIS_CYCLE: { title: string; body: string; href?: string }[] = [
 ];
 
 const DISCOVERED_THIS_CYCLE: { title: string; body: string }[] = [
+  // ── Round 30 Wave 4 discovery ──
+  {
+    title: "[R30 W4] Pratfall canary repeat-prompt = 永遠是 ship-surfacing-bug · 不是 prompt 噪音",
+    body: "Tim 同 prompt 在 R29 W2 跟 R30 W4 兩次發 verbatim「現在不能加入一般會員?為何 Q3?+ 一般會員去哪發文?+ 我管理介面在哪?+ 心理學能做什麼?」 即使我已經 ship 過 /member + /admin · 仍是 valid canary。 Tim 直覺不在 noise · 在「我訪客第一眼看不到答案 hub」這個 real surfacing-failure signal。 修 surfacing 不是 defend ship · 也不是「告訴 Tim 我已 ship」 · 是把答案推到第一眼看得到的位置 · ship single MAP block。 Lesson:repeat-prompt 是最高 leverage signal · 比 explicit complaint 還 honest · 因為 Tim 連抱怨都不抱怨 · 直接 re-ask = 上一次 ship 沒 land · 重 ship 答案 hub。",
+  },
   // ── Round 30 Wave 2C discovery ──
   {
     title: "[R30 W2C] 玩運彩 playsport.cc gap · canonical NEVER list 漏第二大 Taiwan 運彩討論區",
