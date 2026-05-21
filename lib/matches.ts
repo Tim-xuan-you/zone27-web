@@ -70,12 +70,15 @@ export const matches: Match[] = [
   //   · WHIP  · 推估自 K/9 + BB/9 + 被打擊率
   //   · recent 5 · CPBL 球隊近 5 場戰績 Tim 下次截圖時補
   //
-  // 工程注記:這是 ZONE 27 唯一收錄的 CPBL 比賽。DAY 1 placeholder
-  // (cpbl-260519-01/02/03)在 DAY 3 purged — 那 3 場是無真實 ingestion
-  // 的 demo · 一旦有真實 ingestion (cpbl-260521-01) 後就變成 coverage
+  // 工程注記:DAY 3 first ingestion(cpbl-260521-01)· Round 29 Wave 13
+  // 加 3 場 cpbl-260522-0X pre-game preview(Tim 截圖 2026-05-22 賽程)。
+  // 每次 Tim 截圖就是這個陣列加 1 行 · 不是 backfill 歷史。
+  // 1 場 today + 3 場 tomorrow = 4 場 ingested · 0 場 finalized (until tonight 22:00+)。
+  //
+  // DAY 1 placeholder(cpbl-260519-01/02/03)在 DAY 3 purged — 那 3 場是
+  // 無真實 ingestion 的 demo · 一旦有真實 ingestion 後就變成 coverage
   // 假象,違反 [[zone27-coverage-philosophy]]「cover engine-validated
-  // games, NOT all bettable games」。每次 Tim 下次截圖就是這個陣列加
-  // 1 行 · 不是 backfill 歷史。
+  // games, NOT all bettable games」。
   {
     id: "cpbl-260521-01",
     league: "CPBL",
@@ -118,6 +121,156 @@ export const matches: Match[] = [
       { score: "2 : 4", probability: 9.2 },
     ],
     aiConfidence: 65,
+  },
+
+  // ── 2026-05-22 · 第二批 CPBL pre-game ingestion · 3 場 ──
+  // 來源:Tim 截圖 cpbl.com.tw 一軍賽程 2026/05/22 比賽 #113-115
+  //
+  // 真實數據(從 screenshot 直接抓):
+  //   · 隊伍 W-L:富邦 19-14-0 · 樂天 14-19-1 · 統一 23-13-0 ·
+  //             兄弟 11-23-1 · 味全 18-16-1 · 台鋼 18-18-1
+  //   · 場地 + 時間(全部 18:35)+ 天氣
+  //   · 投手姓名(SP only · 不含 K/BB/HR/ERA stats)
+  //
+  // Estimated(per /audit Section 02 ESTIMATION DISCLOSURE):
+  //   · 所有 pitcher K/9 · BB/9 · HR/9 · ERA · WHIP 從聯盟均值 +
+  //     洋將/本土 + W-L gap 反推
+  //   · winRate 從 record gap + home advantage(2-3%) + SP gap 估算
+  //   · topScores 從 CPBL 一般 close-game distribution(real sim 在
+  //     visitor /lab 跑時動態 generate · 此處 placeholder 給 /matches/
+  //     [gameId] meta strip)
+  //   · 任何 CPBL data 工作者可發 PR 提供修正真值 · 引擎輸出立即重算
+  //
+  // PRE-GAME · 沒 finalResult · /track-record 不入帳(until 賽後 Tim
+  // 截 box score → ingest)。
+  {
+    id: "cpbl-260522-01",
+    league: "CPBL",
+    date: "2026 · 05 · 22  ·  星期五",
+    startTime: "18:35",
+    venue: "樂天桃園棒球場",
+    home: {
+      name: "樂天桃猿",
+      en: "MONKEYS",
+      pitcher: {
+        name: "曾家輝",
+        era: "4.50",       // estimate · 本土 mid-tier
+        k9: "7.0",         // estimate · 聯盟均值
+        whip: "1.40",      // estimate
+        bb9: "3.5",        // estimate
+        hr9: "1.20",       // estimate
+      },
+      recent: ["L", "W", "L", "L", "W"],  // estimate · 14-19 mid-bottom
+      winRate: 46,
+    },
+    away: {
+      name: "富邦悍將",
+      en: "GUARDIANS",
+      pitcher: {
+        name: "魔力藍",
+        era: "3.80",       // estimate · 洋將
+        k9: "8.5",         // estimate
+        whip: "1.30",      // estimate
+        bb9: "3.0",        // estimate
+        hr9: "0.90",       // estimate
+      },
+      recent: ["W", "W", "L", "W", "W"],  // estimate · 19-14 winning side
+      winRate: 54,
+    },
+    topScores: [
+      { score: "4 : 3", probability: 14.2 },
+      { score: "3 : 2", probability: 12.8 },
+      { score: "5 : 3", probability: 10.5 },
+      { score: "3 : 4", probability: 9.8 },
+      { score: "4 : 2", probability: 8.9 },
+    ],
+    aiConfidence: 58,
+  },
+  {
+    id: "cpbl-260522-02",
+    league: "CPBL",
+    date: "2026 · 05 · 22  ·  星期五",
+    startTime: "18:35",
+    venue: "臺北大巨蛋",
+    home: {
+      name: "中信兄弟",
+      en: "BROTHERS",
+      pitcher: {
+        name: "羅戈",
+        era: "4.80",       // estimate · 洋將 mid-tier
+        k9: "7.5",         // estimate
+        whip: "1.45",      // estimate
+        bb9: "3.5",        // estimate
+        hr9: "1.10",       // estimate
+      },
+      recent: ["L", "L", "L", "W", "L"],  // estimate · 11-23 last place
+      winRate: 40,
+    },
+    away: {
+      name: "統一7-ELEVEn獅",
+      en: "LIONS",
+      pitcher: {
+        name: "魔神龍",
+        era: "3.50",       // estimate · 洋將 strong
+        k9: "8.0",         // estimate
+        whip: "1.25",      // estimate
+        bb9: "2.8",        // estimate
+        hr9: "0.85",       // estimate
+      },
+      recent: ["W", "W", "L", "W", "W"],  // estimate · 23-13 league leader
+      winRate: 60,
+    },
+    topScores: [
+      { score: "5 : 3", probability: 13.5 },
+      { score: "4 : 2", probability: 11.7 },
+      { score: "6 : 3", probability: 10.1 },
+      { score: "4 : 3", probability: 9.4 },
+      { score: "5 : 2", probability: 8.6 },
+    ],
+    aiConfidence: 70,
+  },
+  {
+    id: "cpbl-260522-03",
+    league: "CPBL",
+    date: "2026 · 05 · 22  ·  星期五",
+    startTime: "18:35",
+    venue: "澄清湖棒球場",
+    home: {
+      name: "台鋼雄鷹",
+      en: "HAWKS",
+      pitcher: {
+        name: "艾速特",
+        era: "3.95",       // estimate · 洋將
+        k9: "8.2",         // estimate
+        whip: "1.30",      // estimate
+        bb9: "3.0",        // estimate
+        hr9: "0.95",       // estimate
+      },
+      recent: ["W", "L", "W", "L", "W"],  // estimate · 18-18 mid-table
+      winRate: 51,
+    },
+    away: {
+      name: "味全龍",
+      en: "DRAGONS",
+      pitcher: {
+        name: "獅帝芬",
+        era: "4.10",       // estimate · 洋將
+        k9: "7.8",         // estimate
+        whip: "1.35",      // estimate
+        bb9: "3.2",        // estimate
+        hr9: "1.00",       // estimate
+      },
+      recent: ["L", "W", "W", "L", "W"],  // estimate · 18-16 slightly above .500
+      winRate: 49,
+    },
+    topScores: [
+      { score: "4 : 3", probability: 13.8 },
+      { score: "3 : 4", probability: 12.5 },
+      { score: "5 : 4", probability: 9.7 },
+      { score: "4 : 5", probability: 8.9 },
+      { score: "3 : 2", probability: 8.3 },
+    ],
+    aiConfidence: 52,
   },
 ];
 
