@@ -129,6 +129,64 @@ export default function MemberPage() {
               對齊 /manifesto Section I DISCLOSURE + Section II MONETIZATION。
             </p>
           </div>
+
+          {/* ── Round 30 Wave 2 · 3-col concrete brand comparison ──
+              Tim 直擊「人家也都有會員系統呀!我們的呢?」+ Apple Store
+              login + cart screenshots = 隱含「我們需要 features 跟他們
+              一樣多」framing。誠實答案不是 features-arms-race · 是 ZONE 27
+              跟 Apple/Spotify/Stratechery 根本不同物種:Apple = 交易史
+              ·   Spotify = 消費史 · Stratechery = 訂閱史 · ZONE 27 = 思辨史。
+              Brand IP statement · 不是 feature list。 */}
+          <div className="mt-12 pt-8 border-t border-line/30">
+            <p
+              lang="en"
+              className="font-mono text-gold text-[10px] tracking-[0.35em] mb-4 text-center"
+            >
+              / WHAT THIS MEANS · 跟其他會員系統比較
+            </p>
+            <p className="text-mute text-sm sm:text-base mb-8 text-center leading-relaxed max-w-2xl mx-auto">
+              Tim 反覆被問:「人家也都有會員系統呀!我們的呢?」誠實答案不是「ZONE 27
+              feature 比他們多」 · 是<strong className="text-bone"> ZONE 27 跟其他會員系統根本不同物種</strong>:
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <ComparisonCard
+                brand="Apple Store 會員"
+                type="COMMERCE · 交易史"
+                give="付費 + 訂單史"
+                get="下次購買更快 · 收藏 · 退換貨"
+                reward="重複購買"
+                track="全部購買行為 + 設備指紋"
+              />
+              <ComparisonCard
+                brand="Spotify Premium"
+                type="CONSUMPTION · 消費史"
+                give="月費 + 收聽行為"
+                get="更精準推薦 · skip 無上限"
+                reward="重複收聽"
+                track="全部播放行為 + 跨平台"
+              />
+              <ComparisonCard
+                brand="ZONE 27 會員"
+                type="EPISTEMIC · 思辨史"
+                give="email + 您自己跑過的 sim"
+                get="您歷史的所有權"
+                reward="重複思辨"
+                track="0 · 寫進 /privacy"
+                highlight
+              />
+            </div>
+            <p className="mt-8 text-mute/85 text-sm sm:text-base leading-relaxed max-w-2xl mx-auto">
+              ZONE 27 會員系統 = <strong className="text-bone">epistemic relationship archive</strong>(思辨關係的可信備份)。
+              您跑過的 sim 是您過去思辨的物理痕跡 · 累積 = <strong className="text-bone">您自己的 trophy</strong> ·
+              不是我們給您的 feature。
+            </p>
+            <p className="mt-3 text-mute/75 text-xs sm:text-sm leading-relaxed max-w-2xl mx-auto">
+              我們從來不是 Apple · 我們從來不會是 Apple。
+              想知道我們會員系統<strong className="text-bone">技術上</strong>怎麼接 ·
+              看 <Link href="/now" className="text-gold underline-offset-4 hover:underline">/now</Link>{" "}
+              · 想看 4-tier ladder 價格軸 · 看 <Link href="/membership" className="text-gold underline-offset-4 hover:underline">/membership</Link>。
+            </p>
+          </div>
         </section>
 
         {/* ── WHEN AUTH LANDS · NEXT STEPS ─────────── */}
@@ -187,6 +245,7 @@ export default function MemberPage() {
         </FounderSignOff>
 
         <RelatedReading currentPath="/member" />
+        {/* sub-component:見檔尾 ComparisonCard */}
 
         {/* ── BACK ─────────────────────────────────── */}
         <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-24 text-center">
@@ -208,6 +267,87 @@ export default function MemberPage() {
       </main>
 
       <Footer />
+    </div>
+  );
+}
+
+// ── Sub-components ─────────────────────────────────────
+
+// Round 30 Wave 2 · 3-col member-system comparison card.
+// Brand-IP focused · NOT a feature-arms-race。 Each card surfaces 4 axes:
+// give/get/reward/track。 Highlight version(ZONE 27)gold-bordered with
+// 0 tracking visible as gold cell · 對齊 Footer「FUNDED BY FOUNDERS · NO
+// GA · NO PIXEL」inversion brand line。
+function ComparisonCard({
+  brand,
+  type,
+  give,
+  get,
+  reward,
+  track,
+  highlight = false,
+}: {
+  brand: string;
+  type: string;
+  give: string;
+  get: string;
+  reward: string;
+  track: string;
+  highlight?: boolean;
+}) {
+  return (
+    <div
+      className={`p-5 border flex flex-col h-full ${
+        highlight
+          ? "border-gold/60 bg-gold/5 glow-soft"
+          : "border-line/50 bg-slate/30"
+      }`}
+    >
+      <p
+        lang="en"
+        className={`font-mono text-[9px] tracking-[0.25em] mb-2 ${
+          highlight ? "text-gold" : "text-mute/70"
+        }`}
+      >
+        {type}
+      </p>
+      <h3
+        className={`text-base sm:text-lg font-light tracking-tight mb-4 ${
+          highlight ? "text-gold" : "text-bone"
+        }`}
+      >
+        {brand}
+      </h3>
+      <dl className="space-y-3 text-xs sm:text-sm">
+        <div>
+          <dt className="font-mono text-mute/70 text-[9px] tracking-[0.25em] mb-0.5">
+            您給他們
+          </dt>
+          <dd className="text-bone/90 leading-snug">{give}</dd>
+        </div>
+        <div>
+          <dt className="font-mono text-mute/70 text-[9px] tracking-[0.25em] mb-0.5">
+            他們給您
+          </dt>
+          <dd className="text-bone/90 leading-snug">{get}</dd>
+        </div>
+        <div>
+          <dt className="font-mono text-mute/70 text-[9px] tracking-[0.25em] mb-0.5">
+            獎勵您的
+          </dt>
+          <dd className="text-bone/90 leading-snug">{reward}</dd>
+        </div>
+        <div>
+          <dt className="font-mono text-mute/70 text-[9px] tracking-[0.25em] mb-0.5">
+            追蹤您的
+          </dt>
+          <dd
+            className={`leading-snug ${highlight ? "text-gold" : "text-bone/90"}`}
+          >
+            {track}
+          </dd>
+        </div>
+      </dl>
     </div>
   );
 }
