@@ -188,7 +188,7 @@ ZONE 27 與 **BOTTOM 27**(Tim 的棒球手遊)是雙生品牌:
 
 ---
 
-## 🗺️ 當前路由(v0.29 · Round 29 加 /member + /admin · 2026-05-21 evening)
+## 🗺️ 當前路由(v0.28 · Round 29 加 /member + /admin · 2026-05-21 evening · v0.29 等 Tim 拍板 milestone)
 
 ```
 首頁 + 動線

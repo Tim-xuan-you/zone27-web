@@ -1,5 +1,6 @@
 # 🌙 您休息時 Claude 做了什麼
 
+> Tim · 2026-05-21 evening · **Round 29 · 同日 2 wave 補建會員 + admin 層 · 3 commits · Wave 1 MLM 結構防線(/manifesto + /faq)· Wave 2 NEW /member psychology-driven preview + NEW /admin noindex preview + MemberDashboardPreview client component · Wave 3 drift cleanup + /now Round 29 update + docs sync · 25→27 visitor-discoverable routes · 17→18 OG cards · 21→22 components**
 > Tim · 2026-05-21 evening · **Round 28 · AFK + 持續 push「請盡可能地迭代」+「以您世界級行銷設計專家經驗」 = 3-agent parallel reconnaissance + 5-wave ship · 4 commits · 27 → 28 routes · 17 OG cards · 21 components · 3 NEW components(UncertaintyStripe · FounderSignOff · ArticleMeta)+ /now NEW route · 2026 canonical visual moat shipped**
 > Tim · 2026-05-21 下午 · **Round 27 · /membership 進 Footer ENTRY group + /learn final CTA reframe 為 4-tier ladder(取代「升級成 Founders 27」單路徑)**
 > Tim · 2026-05-21 下午 · **Round 26 · /membership 自己的 OG card(4-tier ladder 視覺)+ 5 處 stale 24→25 routes refs 修 + related-links.ts 加 /membership entry(否則 RelatedReading 顯示空)**
@@ -31,6 +32,87 @@
 > Tim · 2026-05-21 開盤 · **Day 3 · /track-record + match lifecycle**
 > Tim · 2026-05-20 晚上 · **Day 2 · 37 commits since /manifesto**
 > Tim · 2026-05-19 晚上 · 十六波迭代 Round 1 → Round 16 (底下)
+
+---
+
+## 🚀 Round 29 (2026-05-21 evening · post-Round-28) · 補建會員 + admin 層 · 3 wave
+
+Tim prompt 序列:
+1.「您知道安麗?台灣著名的老鼠會?... 有我們可以學習借鑒的地方?會員制度呢?」 = MLM 研究 + brand defense gap
+2.「現在不能加入一般會員?為何要等到 3 季?然後一般會員可以在哪裡發佈文章及推薦賽事?我要如何管理會員?會員他們自己的頁面在哪裡?多以心理學的角度去出發及處理!」 = 4 個基礎 product 問題 · 「沒想法...您決定!以您世界級...行銷設計專家經驗」persona invocation
+3.「您自己迭代這網站!全權交給您!」(same Round 28 prompt) = AFK 多 wave
+
+**Sharp call:** Tim 已 5+ 次同方向 push · 完全 trust direction · Round 12+ multi-wave 鎖定。Round 28 留下 deferred items 跟 Tim 直擊的 product gaps 可以順著做。
+
+### Round 29 Wave 1 · MLM disambiguation 結構防線(commit `162e890`)
+
+Tim 提問:「安麗 / 老鼠會有沒有我們可以學的?」
+
+Synthesis: MLM 心理學機制(tribal identity · personal mentorship · status ladder · gatherings)ZONE 27 已有等效(不同結構)· MLM 經濟結構(downline 抽佣 · referral bonus · quota · 庫存) ZONE 27 完全反向已寫死(BLACK CARD 5% = platform fee 類 Stripe · 不是 multi-level)。
+
+**Brand 防線缺口:** Taiwan 訪客看「限量 270 + 親手 onboard + 終身 + LINE 群」很容易 surface 聯想 MLM。disambiguation 之前埋在多頁 · 沒主動 surface。Pratfall + Costly Signaling pattern · 主動 distance 比 reactive clarify 強(同 /coverage NEVER + /roadmap BRAND BOUNDARIES 邏輯延伸)。
+
+| File | Change |
+|---|---|
+| `/manifesto` Section II MONETIZATION | NEW NOT MLM 結構防線 block · 6-row ✕ list(downline / referral / quota / inventory / sales-script / unlimited recruitment) |
+| `/faq` pricing category | 新 Q&A「ZONE 27 跟傳銷(MLM / 直銷 / 安麗式)有什麼不同?」+ 6-row 對照清單 |
+| `/faq` metadata | TOTAL_QAS dynamic 自動 bump 14 → 15 · description 加 MLM 提及 |
+
+### Round 29 Wave 2 · /member + /admin preview(commit `6dca6c7`)
+
+Tim 直擊 4 個基礎 product 問題 — honest answer:網站目前是 brand + trust artifact + waitlist capture 層 · member functions 是下一層還沒蓋。Tim 訪客看 4-tier ladder 會以為一切已 functional · 是真實 overpromise + underbuilt gap。
+
+**Psychology-first design**(per Tim「多以心理學角度」 ask):4 個 cognitive bias 同時 fire 在 /member 4 sections:
+
+| Section | 心理學原則 | 怎麼實現 |
+|---|---|---|
+| 01 · 您的引擎時間軸 | ψ Endowment Effect | localStorage sim history 當 preview data · visitor 看到「我的 data」立刻有 ownership feeling |
+| 02 · 您 follow 的賽事 + 個人 calibration | ψ Loss Aversion + Collection | Strava activity log + GitHub contribution graph 模式 · 個人 trophy |
+| 03 · 您能投票決定的引擎下一步 | ψ IKEA Effect | 從 /roadmap EXPLORING 拉 · BLACK CARD + Founders 27 每月真實 voting · 結果寫進 /changelog |
+| 04 · LAUNCH TIMELINE | Pratfall + Costly Signaling | Phase 1 Q3 auth · Phase 2 Q3+ TapPay · Phase 3 Q4+ CMS · 公開寫死 |
+
+**Ship list:**
+
+- NEW `app/member/page.tsx` · FREE TIER 會員儀表板 PUBLIC PREVIEW · 「WHY THIS IS NOT TYPICAL SAAS DASHBOARD」section(✕ paywall gate features → ✓ 累積 = 您的 trophy)+ 「WHEN AUTH LANDS」cross-page 承諾(同 email 動作就 sync · 不需 migration)+ FounderSignOff
+- NEW `components/MemberDashboardPreview.tsx` · client component · SSR-safe mount flag pattern(useEffect setMounted + useMemo derived history)· 7 sub-components(SimHistoryRow · EmptyState · VoteRow · CalibrationStat · TimelineRow · FootNote · Section)
+- NEW `app/admin/page.tsx` · Tim's ops dashboard preview · `noindex` meta · live KPI cards(waitlist · founders state · ingest queue · engine version)+ Stage 1 reality(Supabase Studio 連結)+ Stage 2 mockup(6 feature cards)+ Stage 3 远期(Plausible 三條件 trigger)+ FounderSignOff
+- NEW `app/member/opengraph-image.tsx` · "您的引擎時間軸 · 您自己的 trophy" + 4 BiasChip(ENDOWMENT · IKEA · LOSS · COLLECTION)· punchline「Member stickiness is data ownership, not features」
+- Wire-up: Cmd-K +/member(/admin intentionally NOT indexed · 對齊 noindex)· Footer ENTRY group + /member · related-links.ts /member key 3 siblings · CommandPalette comment 26→27 visitor-discoverable
+- CLAUDE.md: route table + Member/Ops section · OG count 17→18 · 22 components 結構更新
+
+### Round 29 Wave 3 · drift cleanup + /now update + docs sync(this commit)
+
+| File | Change |
+|---|---|
+| `app/page.tsx:30` | comment「25 routes indexed」→「27 visitor-discoverable routes indexed」(post-Round-29 drift) |
+| `app/roadmap/page.tsx:54` | LOCKED Cmd-K body「25 routes 索引化」→「27 visitor-discoverable routes 索引化」+ 加 /admin noindex 註解 |
+| `CLAUDE.md` route table | v0.29 → v0.28 + 加「等 Tim 拍板 milestone」註解(我 Round 28 自己 introduced 的 drift · 全站其他地方仍 v0.28) |
+| `/now` SHIPPED_THIS_CYCLE | PREPEND 3 個 Round 29 ships(MLM disambiguation · /member · /admin)· CYCLE constant 改 "Round 28-29 · 2026-05-21 evening · 同日 2 round" |
+| `/now` DISCOVERED_THIS_CYCLE | PREPEND 3 個 Round 29 discoveries(MLM surface gap · member page product gap · CLAUDE.md v0.29 self-introduced drift) |
+| `/now` UNRESOLVED | PREPEND 3 個 Round 29 unresolved(FREE TIER auth Phase 1 Q3 · BLACK CARD TapPay Phase 2 Q3+ · Founders 27 「preorder」 framing 可以「現在開」) |
+| WHILE-YOU-WERE-OUT.md | ToC prepend Round 29 line + detailed scroll(本 section) |
+
+### Round 29 收盤狀態
+
+- **27 visitor-discoverable routes** + **1 noindex `/admin`** = 28 total page routes
+- **18 custom OG cards**(+/member · /admin noindex no OG)
+- **22 reusable components**(+ MemberDashboardPreview)
+- **Build / Lint / TSC strict: 3 commits 全程綠**
+- **6 trust docs 有 founder sign-off**(/audit · /methodology · /coverage · /track-record · /roadmap · /now · /member · /admin = actually 8 if count /now /member /admin)
+- **/member psychology-driven dashboard preview shipped**(4 cognitive bias driven · 倒置 SaaS「付費 → 開更多 features」)
+- **/admin noindex ops preview shipped**(Tim 自己看 · Stage 1 Supabase Studio + Stage 2 mockup + Stage 3 远期)
+- **MLM 結構防線 shipped**(Pratfall + Costly Signaling · 對 Taiwan brand context 是真實 trust 缺口補上)
+
+### Round 29 lesson map
+
+1. **Tim 提問裡藏 brand 防線缺口** · 「安麗」這種看似 unrelated 提問 · 其實是「Founders 27 surface patterns 在 Taiwan 語境下可能被誤聯想 MLM」這個從沒明說的 anxiety 的 surface。Founder 自己 surface 缺口 · Claude 接住 · 是 brand IP 建立的 critical loop。
+2. **Product gap vs Brand gap 是不同層** · Round 28 補 brand IP(Uncertainty Stripe · founder sign-offs · /now)· Round 29 補 product gap(/member · /admin)· 倒置 SaaS 預設「先有 product 再有 brand」 — ZONE 27 brand 先 · product preview 後 · 因為 stealth 期 brand IP 是 differentiator · product 是 deliverable。兩個都重要 · 順序對。
+3. **Psychology-driven 比 feature-list 強** · /member 不是「FREE TIER 會員可以做 A · B · C」 · 是「會員 stickiness 不在功能多 · 在 data ownership」。同樣的 page 可以是 paywall pitch 或 brand statement · 看 framing。
+4. **Pratfall 在 product gap 工作得很漂亮** · /member 寫「這是 preview · 不是 functional · launch timeline 公開」 · 比「Coming Soon!」誠實十倍。倒置 SaaS「即將推出 · 敬請期待」 vague 話術。
+5. **Self-introduced drift 也算 lesson** · Round 28 Wave 5 我自己把 CLAUDE.md 改 v0.29 但其他全站 v0.28 · 是「docs sync 副作用 leaked」的典型錯。版本 bump 是 brand decision 必須等 Tim 拍板 · 不是 routine docs work。
+6. **/admin noindex 是 disclosure philosophy 的有趣 edge case** · ZONE 27 brand IP 是「方法公開」 · 但 admin 後台 mockup 也算「方法」嗎?Decision: 是 · 公開 design (ADMIN-PLAN.md + /admin preview 都 open)· 但不 SEO index 因為「不是給訪客看」 · 兩者並存 · 不衝突。
+
+完整 Round 29 ship 內容 + 對話脈絡 in /now SHIPPED + DISCOVERED + UNRESOLVED · visitor 可直接讀。
 
 ---
 

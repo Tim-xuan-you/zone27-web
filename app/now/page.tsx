@@ -33,11 +33,28 @@ export const metadata: Metadata = {
 // ─────────────────────────────────────────────────────
 
 const LAST_UPDATED = "2026-05-21";
-const CYCLE = "Round 28 · 2026-05-21 PM-evening";
+const CYCLE = "Round 28-29 · 2026-05-21 evening · 同日 2 round";
 
 const SHIPPED_THIS_CYCLE: { title: string; body: string; href?: string }[] = [
+  // ── Round 29 ships(2026-05-21 evening · post-Round-28)──
   {
-    title: "Uncertainty Stripe · 2026 canonical visual moat",
+    title: "[R29] /member NEW · FREE TIER 會員儀表板 PUBLIC PREVIEW",
+    body: "Tim 直擊「會員他們自己的頁面又在哪裡?多以心理學角度去出發。」答案 = 4 cognitive bias 同時 fire 的 preview · ψ Endowment Effect(用 visitor 自己 localStorage sim history 當 preview data)· ψ IKEA Effect(投票引擎下一步)· ψ Loss Aversion(個人 calibration record)· ψ Collection(您自己的 trophy)。不假裝 functionality 已存在 · launch timeline 公開(Phase 1 Q3 auth · Phase 2 Q3+ TapPay · Phase 3 Q4+ CMS)。",
+    href: "/member",
+  },
+  {
+    title: "[R29] /admin NEW · Tim's ops dashboard preview · noindex",
+    body: "Tim 直擊「我要如何管理會員?操作介面在哪裡?」答案 = Stage 1 是 Supabase Studio 直接登入(已 ready · 連結在頁面)· Stage 2 自家 /admin 還沒寫(trigger = waitlist > 100 人)· Stage 3 Plausible analytics 三條件 trigger(月活 > 1000 · BLACK CARD 上線 · Tim 要做產品決策)。Live KPI 顯示真實 numbers · mockup 顯示 Stage 2 dashboard 會長怎樣。",
+    href: "/admin",
+  },
+  {
+    title: "[R29] MLM 結構防線 · 主動 surface「我們不是傳銷」",
+    body: "Tim 問「安麗 / 老鼠會有可以學的嗎?」Synthesis:MLM 心理學機制 (tribal identity · personal mentorship · status ladder) ZONE 27 已有等效(不同結構)· MLM 經濟結構(downline 抽佣 · referral bonus · quota · 庫存) ZONE 27 完全反向已寫死。/manifesto Section II 加 6-row ✕ MLM 對照清單 + /faq 加新 Q&A。Pratfall + Costly Signaling pattern · 主動 distance 比 reactive clarify 強。",
+    href: "/manifesto",
+  },
+  // ── Round 28 ships(2026-05-21 PM-evening · same day earlier)──
+  {
+    title: "[R28] Uncertainty Stripe · 2026 canonical visual moat",
     body: "10K Monte Carlo 給的是分布,不只 point estimate。新增 hairline gradient band 在 HeroLiveCard + MatchSimulator 顯示 50% (深) / 90% (淺) binomial confidence interval。Bank of England fan-chart convention 套到 baseball forecast。",
     href: "/",
   },
@@ -71,8 +88,22 @@ const SHIPPED_THIS_CYCLE: { title: string; body: string; href?: string }[] = [
 ];
 
 const DISCOVERED_THIS_CYCLE: { title: string; body: string }[] = [
+  // ── Round 29 discoveries ──
   {
-    title: "/founders FROM THE FOUNDER 引用跟 /about Chapter 05 完全重複",
+    title: "[R29] ZONE 27 surface pattern 跟 MLM 視覺重疊 · disambiguation 從沒主動 surface",
+    body: "「限量 270 + 終身 + Tim 親手 onboard + LINE 群 + 實體聚會」這幾個 visual cue 在 Taiwan 語境下會被聯想到 MLM/安麗式「限量早期合夥人」框架。雖然結構完全相反(無 downline / 無 quota / 無 referral)· 但 disambiguation 之前埋在 /founders + /audit + /manifesto 多處 · 沒任何一處主動 surface = 真實 brand 防線缺口。Pratfall + Costly Signaling 補上(本 cycle Wave 1)。",
+  },
+  {
+    title: "[R29] Tim 直擊:「會員他們自己的頁面在哪裡?」 = 真實 product gap",
+    body: "網站到 Round 28 為止是 brand 層 + trust artifacts + waitlist capture · member functions 是下一層 · 還沒蓋。訪客看 4-tier ladder 會以為一切已 functional · 是 overpromise + underbuilt gap。/member preview 設計 with 4 cognitive bias driven sections · Pratfall surface 工程現狀(本 cycle Wave 2)。",
+  },
+  {
+    title: "[R29] CLAUDE.md 我自己 introduce 的 v0.28 → v0.29 drift",
+    body: "Round 28 Wave 5 docs sync 時我把 CLAUDE.md route table 寫成「v0.29」但其他全站(Footer · /audit · /manifesto · /discipline · /coverage · /founders FAQ · signal-board)還是 v0.28 · v0.29 應該等 Tim 拍板 milestone。Wave 3 修正:CLAUDE.md 回 v0.28 + 加「等 Tim 拍板」註解。Lesson:版本 bump 是 brand decision · 不是 docs sync 的副作用。",
+  },
+  // ── Round 28 discoveries ──
+  {
+    title: "[R28] /founders FROM THE FOUNDER 引用跟 /about Chapter 05 完全重複",
     body: "「ZONE 27 是我給這群人 —— 包括我自己 —— 的一封情書」這句話 verbatim 出現在兩頁。Skeptic 看到會覺得 scripted,不是 honest。改為 Chapter 05 另一句更具體的「台灣的棒球資訊產業卻長期停留在『直覺說書人』的階段」+ Bloomberg analog。",
   },
   {
@@ -86,8 +117,22 @@ const DISCOVERED_THIS_CYCLE: { title: string; body: string }[] = [
 ];
 
 const UNRESOLVED: { title: string; body: string }[] = [
+  // ── Round 29 new unresolved ──
   {
-    title: "MatchSimulator N=10K · Uncertainty Stripe 太窄",
+    title: "[R29] FREE TIER auth + cloud sync · Phase 1 Q3 2026 target",
+    body: "Supabase magic link auth 接入 · /member 變 auth-gated · visitor localStorage sim history sync 到 cloud。技術上免費(Supabase free tier 涵蓋) · 但是 build · 不是 copy。Round 30+ 啟動候選之一 · 等 Tim 明示「啟動 auth」trigger。",
+  },
+  {
+    title: "[R29] BLACK CARD TapPay 訂閱 · Phase 2 Q3+ target · TIER 2 budget",
+    body: "TapPay 訂閱通道需 setup fee NT$ 1-3K + 每筆 2-3% 抽佣 = TIER 2 預算 · 必須明確 Tim 同意才執行(per 預算紀律 v2)。Tim 尚未明示。BLACK CARD 月費功能(發文 / 推薦賽事 / 5% 創作者抽成)全部 gate 在此後面。",
+  },
+  {
+    title: "[R29] Founders 27 仍框 framing「preorder/waitlist」· 其實可以「現在開」",
+    body: "Founders 27 不需要 system(銀行轉帳手工 onboard · per docs/MANUAL-ONBOARDING)· 可以今天就第一個會員入帳。但目前 /founders 仍是 waitlist 框架(收 email · 等開賣通知)。Round 30+ 可考慮 reframe 為「現在 actively accepting reservations · Tim 親手 confirm」。Brand decision · 等 Tim 拍板「我準備好接第一筆轉帳」。",
+  },
+  // ── Round 28 still-unresolved ──
+  {
+    title: "[R28] MatchSimulator N=10K · Uncertainty Stripe 太窄",
     body: "10K trials 給的 binomial CI 是 ±0.8% (90%) · 視覺上勉強看見。HeroLiveCard N=1000 的 CI ±2.5% 較明顯。長期可能要顯示 score-differential distribution(從 scoreCounts 已存資料)而不是 winRate CI · 暴露更廣的 uncertainty。",
   },
   {
