@@ -23,6 +23,12 @@ const GH_COMMITS_URL =
 
 const MILESTONES: { date: string; title: string; detail: string }[] = [
   {
+    date: "2026-05-21 · Round 3",
+    title: "Apple-grade 首頁壓縮 · 8 sections → 3 · NN/g research-validated",
+    detail:
+      "Tim 反饋「網站好雜 · 走極簡風 · 心理學怎麼看」· 派 agent 上網查 NN/g + Apple + Stratechery + Bret Victor research 確認直覺有 hard psychology backing(NN/g 指出 trust badges 在 research-phase 訪客面前 ~90% invisible · Hick's Law · F-pattern reading)。首頁從 8 sections 壓到 3:Hero(精簡 · 0 CTA · HeroLiveCard 自帶 CTA)+ HeroLiveCard(THE 靈魂)+ Founders 27 strip(唯一的 ask)。移除 5 sections(CREDIBILITY STRIP · THREE PILLARS · BRAND INVERSION TLDR · BY THE NUMBERS bento · TRUST STACK 8-doc)· 內容全保留在 /manifesto · /audit · /coverage · /track-record · /roadmap 深度頁 · Cmd-K palette + Footer + RelatedReading hub-and-spoke 仍可達。Nav 移除 disabled 「登入」button(choice paradox + Apple-anti-pattern)。「我們的靈魂是什麼?」具體答案:引擎 + 收據。Stratechery model 落地。",
+  },
+  {
     date: "2026-05-21 · Round 2",
     title: "自主多輪迭代 · /roadmap + Cmd-K palette + /audit live dashboard + StatTerm 擴展",
     detail:

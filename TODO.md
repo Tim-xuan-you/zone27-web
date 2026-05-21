@@ -7,6 +7,25 @@
 
 ---
 
+## 🍎 Round 3 (2026-05-21 PM) · Apple-grade 首頁壓縮
+
+您 push「網站好雜 · 走極簡 · 心理學怎麼看」· 我:
+- 派 agent 上網查 NN/g + Apple + Stratechery + Bret Victor research
+- 確認 Tim 的直覺有 hard psychology backing(NN/g trust badges 在 research-phase 訪客面前 ~90% invisible)
+- 用 Apple/Stratechery model 重蓋首頁:**8 sections → 3 sections**
+
+**Round 3 ship list:**
+- 首頁僅保留 3 件事:Hero(精簡 · 0 CTA)· HeroLiveCard(引擎+收據 · 靈魂)· Founders 27 strip(唯一的 ask)
+- 移除 5 sections(CREDIBILITY STRIP · THREE PILLARS · BRAND INVERSION · BY THE NUMBERS · TRUST STACK)→ 內容存在 /manifesto · /audit · /track-record · /coverage 等深度頁
+- Nav 移除 disabled「登入」button(choice paradox + Apple-anti-pattern)
+- 完整 reversibility · `git revert` 一指令帶回 Round 2 layout
+
+**「我們的靈魂是什麼?」答案:引擎 + 收據。**
+
+完整 Round 3 scroll 在 WHILE-YOU-WERE-OUT.md。
+
+---
+
 ## 🚀 Round 2 (2026-05-21 同日) · 自主多輪迭代 · 4 commits
 
 **完整 Round 2 scroll:[WHILE-YOU-WERE-OUT.md](WHILE-YOU-WERE-OUT.md)** — Round 2 prepended

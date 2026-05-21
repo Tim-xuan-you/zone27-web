@@ -1,9 +1,77 @@
 # 🌙 您休息時 Claude 做了什麼
 
+> Tim · 2026-05-21 PM · **Round 3 · Apple-grade 首頁壓縮 · 8 sections → 3**
 > Tim · 2026-05-21 接續 · **Round 2 · 自主多輪迭代 · 4 commits**
 > Tim · 2026-05-21 開盤 · **Day 3 · /track-record + match lifecycle**
 > Tim · 2026-05-20 晚上 · **Day 2 · 37 commits since /manifesto**
 > Tim · 2026-05-19 晚上 · 十六波迭代 Round 1 → Round 16 (底下)
+
+---
+
+## 🍎 Round 3 (2026-05-21 PM) · Apple-grade 首頁壓縮 · NN/g research-validated
+
+您 push 回來「網站好雜...走極簡風...Apple...心理學怎麼看?」· 我用 persona lens 給一句 sharp call:
+
+> **我框錯了 · 您對。Apple 的「極簡」不是「少功能」· 是「ONE thing per screen」。**
+> ZONE 27 的靈魂 = **引擎 + 收據**。不是「關於引擎的 8 份文件」。
+
+派 1 個 agent 上網查 NN/g + Apple + Stratechery + Bret Victor 心理學 research · 確認 Tim 的直覺有 hard psychology backing:
+
+**Research validation(全部來自 NN/g · Baymard · Apple 官方 design philosophy):**
+- **Hick's Law** · choices 增加 → decision time logarithmic 上升
+- **NN/g trust-signal timing** · research-phase 訪客「largely ignore trust signals」· trust attention 發生在 evaluation/decision stage · ~90% credential walls 是 invisible(在 F-pattern scan 外)
+- **F-pattern reading** · 8 個 trust 文件擠首頁 · 90% 訪客滑過去看不到
+- **Bezos work-backwards** · 首頁 job-to-be-done = 「is this analyst worth my mental bandwidth?」· 不是 「verify credentials」
+- **Apple 40→4 products** · saying no IS the design
+
+**Round 3 ship · 首頁 8 sections → 3 sections:**
+
+| Section | Round 2 末狀態 | Round 3 結果 |
+|---|---|---|
+| Hero | slogan + 2 CTAs + /learn link | slogan + 1 line body + 0 CTA(HeroLiveCard 自己有 CTA)|
+| CREDIBILITY STRIP(3-cell) | 顯示 | ❌ 移除(HeroLiveCard 已含 methodology line) |
+| HeroLiveCard | 顯示 | ✅ 保留(THE 靈魂)|
+| THREE PILLARS(3-cell) | 顯示 | ❌ 移除(內容在 /manifesto + /discipline) |
+| BRAND INVERSION THESIS(4 rows) | 顯示 | ❌ 移除(/manifesto canonical) |
+| BY THE NUMBERS bento(6 tiles) | 顯示 | ❌ 移除(/audit + /track-record) |
+| TRUST STACK(8 cards) | 顯示 | ❌ 移除(Footer + Cmd-K + /audit) |
+| FOUNDERS 27 strip | 顯示 | ✅ 保留 + 加 quiet door 到 /manifesto |
+
+**Nav 也順便清:**
+- 移除 disabled 「登入」button · choice-paradox + Apple-anti-pattern
+- 保留 5 個主 nav item + CmdKTrigger(在 Hick's Law 5-7 cap 之內)
+
+**深度 content 全保留 · 不刪 · 只移:**
+- 訪客要 depth 走:Cmd-K palette(23 routes)→ Footer 4-col nav → /manifesto · /audit · /coverage · /privacy · /track-record · /roadmap · /discipline · /methodology
+- 每個深度頁的 RelatedReading hub-and-spoke 仍指向 sibling 深度頁
+- /manifesto Section II SYNTHESIS「方法公開 · 品味私藏」依然是 brand IP 結晶
+- 「方法公開」沒被打破 · 只是不再 SHOUTED 在首頁
+
+**Reversibility:** 1 個 git revert 把 Round 2 的 8-section homepage 帶回來。所有 components 是 inline · 不留 orphan code。
+
+### Round 3 brand IP 強化
+
+1. **「我們的靈魂是什麼?」**的具體答案:**引擎 + 收據**。首頁變成這兩件事的物理 demonstration:
+   - Hero(text)= 為什麼存在
+   - HeroLiveCard = 引擎(soul-1)
+   - HeroLiveCard 內嵌的 「賽後 RECEIPT」block(當 finalResult ingested 後)= 收據(soul-2)
+   - Founders 27 = 唯一的 ask
+
+2. **Stratechery model 落地** · 首頁 = 一句話 + 最新一篇 + subscribe。ZONE 27 = 一句話 + 引擎跑這場 + Founders 27。
+
+3. **「深度可達 · 不擠首頁」**成為新 design discipline · 寫進 lib/page.tsx 開頭 comment block 作為 governance contract。
+
+### Round 3 您回來建議流程
+
+1. `npm run dev` → http://localhost:3000
+2. 首頁就 3 件事:slogan · HeroLiveCard · Founders 27 strip
+3. 試 ⌘K 找任何「消失」的 section · 都還在
+4. 翻 /audit /manifesto /roadmap · 深度頁完全不動
+5. Nav 沒了「登入」disabled button · 清爽
+
+---
+
+
 
 ---
 

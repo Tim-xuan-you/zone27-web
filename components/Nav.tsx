@@ -75,14 +75,10 @@ export default function Nav({ active }: { active?: NavKey }) {
               </Link>
             ))}
             <CmdKTrigger />
-            <button
-              type="button"
-              aria-label="登入(尚未開放,等候 Founders 27 上線)"
-              disabled
-              className="px-4 py-2 border border-gold/30 text-gold/70 text-xs tracking-[0.18em] hover:bg-gold/10 transition-colors disabled:cursor-not-allowed disabled:opacity-60"
-            >
-              登入
-            </button>
+            {/* 登入 button removed in Round 3 (Apple-minimalism pass):
+                disabled button is a choice-paradox item (visitor sees it,
+                wonders why, gets no payoff). Login UI returns when
+                Founders 27 Q3 2026 onboarding requires it. */}
           </div>
 
           {/* Mobile · 創始會員 gold CTA only (always visible). The
