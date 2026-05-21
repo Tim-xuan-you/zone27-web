@@ -5,6 +5,12 @@ import Footer from "@/components/Footer";
 import CopyLinkButton from "@/components/CopyLinkButton";
 import RelatedReading from "@/components/RelatedReading";
 import StatTerm from "@/components/StatTerm";
+import { matches, getFinalizedMatches } from "@/lib/matches";
+import {
+  COMMIT_SHA,
+  COMMIT_PERMALINK,
+  DEPLOYED_AT,
+} from "@/lib/build-meta";
 
 export const metadata: Metadata = {
   title: "Model Report — ZONE 27 Engine Audit",
@@ -35,9 +41,19 @@ const ENGINE_VERSION = "v0.2 · Real At-Bat";
 const ITERATIONS = "10,000";
 const STANDARD_ERROR = "±0.5%";
 const CI_95 = "±1.0%";
-const SAMPLE_SIZE = "n = 1 · CPBL 2026-05-21 起";
 
 export default function AuditPage() {
+  // Live counts — these refresh on every build / ISR revalidate.
+  // Replaces hardcoded "n = 3 · CPBL 2026-05" with the actual matches
+  // array length. Brand-honest: the number on this page IS the same
+  // number /track-record reads · they can't drift.
+  const ingestedCount = matches.length;
+  const finalizedCount = getFinalizedMatches().length;
+  const sampleSize =
+    finalizedCount === 0
+      ? `n = 0 · ${ingestedCount} ingested · 第一筆收錄今晚`
+      : `n = ${finalizedCount} · ${ingestedCount} ingested · CPBL 2026-05-21 起`;
+
   return (
     <div className="flex flex-col flex-1 min-h-screen">
       <Nav />
@@ -85,14 +101,30 @@ export default function AuditPage() {
             </p>
 
             {/* Meta strip — Anthropic-style timestamp/version line.
-                SAMPLE SIZE promoted into the header (rather than hidden in body)
-                — surfacing the limitation as a craft signal, not a caveat. */}
-            <dl className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-x-6 gap-y-4 font-mono text-[11px] tracking-[0.05em]">
+                SAMPLE SIZE + BUILD COMMIT promoted into the header as
+                live constants (not hardcoded strings). Per Plausible /
+                Buffer dashboard pattern: numbers that change every
+                deploy = literal disclosure, not metaphor. */}
+            <dl className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-x-6 gap-y-4 font-mono text-[11px] tracking-[0.05em]">
               <MetaPair label="LAST REVIEWED" value={LAST_REVIEWED} />
               <MetaPair label="ENGINE" value={ENGINE_VERSION} />
               <MetaPair label="ITERATIONS / SIM" value={ITERATIONS} />
               <MetaPair label="STANDARD ERROR" value={STANDARD_ERROR} />
-              <MetaPair label="SAMPLE SIZE" value={SAMPLE_SIZE} />
+              <MetaPair label="SAMPLE SIZE" value={sampleSize} />
+              <MetaPair
+                label="BUILD"
+                value={
+                  <a
+                    href={COMMIT_PERMALINK}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-bone hover:text-gold underline-offset-4 hover:underline"
+                    title={`This page built from commit ${COMMIT_SHA} · deployed ${DEPLOYED_AT}`}
+                  >
+                    {COMMIT_SHA} · {DEPLOYED_AT}
+                  </a>
+                }
+              />
             </dl>
           </header>
 
@@ -516,7 +548,13 @@ export default function AuditPage() {
 
 // ── Sub-components ─────────────────────────────────────
 
-function MetaPair({ label, value }: { label: string; value: string }) {
+function MetaPair({
+  label,
+  value,
+}: {
+  label: string;
+  value: React.ReactNode;
+}) {
   return (
     <div>
       <dt className="text-mute/70 mb-1 tracking-[0.25em]">{label}</dt>

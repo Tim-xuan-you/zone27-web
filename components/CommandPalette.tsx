@@ -1,0 +1,344 @@
+"use client";
+
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useRouter } from "next/navigation";
+import {
+  COMMAND_ITEMS,
+  COMMAND_GROUP_ORDER,
+  filterCommandItems,
+  type CommandItem,
+} from "@/lib/command-palette-data";
+
+// ── ZONE 27 · Command Palette ──────────────────────────
+// Premium-tier navigation primitive. Cmd-K / Ctrl-K opens a
+// modal with all 23 user-visible routes searchable in one place.
+// Arrow keys navigate · Enter opens · Esc closes.
+//
+// Design principles (per [[zone27-disclosure-philosophy]]):
+//   - No external deps (no cmdk · no fuse.js · no telemetry)
+//   - Plain substring filter on hand-curated 23-row list
+//   - No recently-used / personalization (would require tracking)
+//   - No hidden ranking · alphabetical-within-group · group-order
+//     is editorial (entry → engine → brand → trust → tools)
+//   - Visible to keyboard + screen reader + mobile (tap open)
+//   - Brand chrome: navy panel + cold-gold border + Geist Mono shortcuts
+//
+// Reference inspiration: Linear / Vercel / Raycast Cmd-K patterns,
+// stripped to the brand-pure minimum.
+// ─────────────────────────────────────────────────────
+
+export default function CommandPalette() {
+  const [isOpen, setIsOpen] = useState(false);
+  const [query, setQuery] = useState("");
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const listRef = useRef<HTMLDivElement>(null);
+  const router = useRouter();
+
+  // ── Filtered + grouped items ──
+  const filtered = useMemo(() => filterCommandItems(query), [query]);
+  // Flat array for arrow-key navigation across groups
+  const flat = filtered;
+
+  // ── Open / close handlers ──
+  const open = useCallback(() => {
+    setIsOpen(true);
+    setQuery("");
+    setSelectedIndex(0);
+  }, []);
+
+  const close = useCallback(() => {
+    setIsOpen(false);
+  }, []);
+
+  // ── Global keyboard shortcut · ⌘K / Ctrl-K ──
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      // Cmd-K (Mac) or Ctrl-K (Win/Linux)
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
+        e.preventDefault();
+        if (isOpen) {
+          close();
+        } else {
+          open();
+        }
+      }
+      // Esc closes if open
+      if (e.key === "Escape" && isOpen) {
+        e.preventDefault();
+        close();
+      }
+    };
+    document.addEventListener("keydown", handler);
+    return () => document.removeEventListener("keydown", handler);
+  }, [isOpen, open, close]);
+
+  // ── Focus input + lock body scroll on open ──
+  useEffect(() => {
+    if (isOpen) {
+      // Defer focus to next tick so the input is mounted
+      requestAnimationFrame(() => inputRef.current?.focus());
+      // Lock body scroll
+      const prev = document.body.style.overflow;
+      document.body.style.overflow = "hidden";
+      return () => {
+        document.body.style.overflow = prev;
+      };
+    }
+  }, [isOpen]);
+
+  // ── Keep selectedIndex within bounds when filter changes ──
+  useEffect(() => {
+    setSelectedIndex(0);
+  }, [query]);
+
+  // ── Scroll selected into view ──
+  useEffect(() => {
+    if (!isOpen) return;
+    const el = listRef.current?.querySelector<HTMLElement>(
+      `[data-cmd-index="${selectedIndex}"]`
+    );
+    el?.scrollIntoView({ block: "nearest" });
+  }, [selectedIndex, isOpen]);
+
+  // ── Listen for custom global event so external triggers (e.g.
+  //    Nav chip click) can open the palette without managing state. ──
+  useEffect(() => {
+    const handler = () => open();
+    document.addEventListener("zone27:open-palette", handler);
+    return () => document.removeEventListener("zone27:open-palette", handler);
+  }, [open]);
+
+  // ── Execute selected item ──
+  const execute = useCallback(
+    (item: CommandItem) => {
+      close();
+      if (item.external) {
+        window.open(item.path, "_blank", "noopener,noreferrer");
+      } else {
+        router.push(item.path);
+      }
+    },
+    [close, router]
+  );
+
+  // ── Input keyboard handlers ──
+  const onInputKeyDown = useCallback(
+    (e: React.KeyboardEvent) => {
+      if (e.key === "ArrowDown") {
+        e.preventDefault();
+        setSelectedIndex((i) => Math.min(i + 1, flat.length - 1));
+      } else if (e.key === "ArrowUp") {
+        e.preventDefault();
+        setSelectedIndex((i) => Math.max(i - 1, 0));
+      } else if (e.key === "Enter") {
+        e.preventDefault();
+        const item = flat[selectedIndex];
+        if (item) execute(item);
+      }
+    },
+    [flat, selectedIndex, execute]
+  );
+
+  if (!isOpen) return null;
+
+  // ── Render ──
+  // Build a Map of group → items in encounter order, then iterate
+  // COMMAND_GROUP_ORDER so empty groups render nothing while groups
+  // with matches appear in editorial sequence.
+  const byGroup = new Map<string, { items: CommandItem[]; offsets: number[] }>();
+  flat.forEach((item, i) => {
+    const entry = byGroup.get(item.group);
+    if (entry) {
+      entry.items.push(item);
+      entry.offsets.push(i);
+    } else {
+      byGroup.set(item.group, { items: [item], offsets: [i] });
+    }
+  });
+
+  return (
+    <div
+      role="dialog"
+      aria-modal="true"
+      aria-label="Command palette · 全站快搜"
+      className="fixed inset-0 z-50 backdrop-blur-md bg-ink/70 flex items-start justify-center pt-[8vh] sm:pt-[12vh] px-4 animate-fade-in"
+      onMouseDown={(e) => {
+        // Click outside panel closes
+        if (e.target === e.currentTarget) close();
+      }}
+    >
+      <div
+        className="w-full max-w-2xl bg-navy border border-gold/40 shadow-[0_24px_80px_-12px_rgba(0,0,0,0.6),0_0_60px_-12px_rgba(212,175,55,0.15)] animate-cmd-pop"
+        onMouseDown={(e) => e.stopPropagation()}
+      >
+        {/* ── Input row ── */}
+        <div className="border-b border-line/60 px-4 sm:px-5 py-3.5">
+          <div className="flex items-center gap-3">
+            <span
+              aria-hidden="true"
+              className="font-mono text-gold/80 text-[10px] tracking-[0.35em] hidden sm:inline"
+            >
+              ⌘K
+            </span>
+            <span
+              aria-hidden="true"
+              className="font-mono text-gold/80 text-[10px] tracking-[0.35em] sm:hidden"
+            >
+              ⌕
+            </span>
+            <input
+              ref={inputRef}
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              onKeyDown={onInputKeyDown}
+              placeholder="搜尋頁面 · 工具 · 文件 · 球員..."
+              className="flex-1 bg-transparent text-bone placeholder:text-mute/60 outline-none text-base sm:text-lg font-light"
+              aria-label="Command palette search input"
+              aria-controls="cmd-listbox"
+              aria-activedescendant={
+                flat[selectedIndex] ? `cmd-item-${selectedIndex}` : undefined
+              }
+              autoComplete="off"
+              autoCorrect="off"
+              autoCapitalize="off"
+              spellCheck={false}
+            />
+            <button
+              type="button"
+              onClick={close}
+              className="font-mono text-mute hover:text-gold text-[10px] tracking-[0.25em] px-2 py-1 border border-line/60 hover:border-gold/40 transition-colors"
+              aria-label="Close command palette"
+            >
+              ESC
+            </button>
+          </div>
+        </div>
+
+        {/* ── Results list ── */}
+        <div
+          ref={listRef}
+          id="cmd-listbox"
+          role="listbox"
+          className="max-h-[60vh] overflow-y-auto py-2"
+        >
+          {flat.length === 0 ? (
+            <div className="px-5 py-12 text-center">
+              <p className="font-mono text-mute text-[11px] tracking-[0.3em] mb-2">
+                NO MATCHES
+              </p>
+              <p className="text-mute text-sm">
+                搜尋「<span className="text-gold">{query}</span>」找不到結果。
+                試試「manifesto」「audit」「founder」「lab」「公開戰績」。
+              </p>
+            </div>
+          ) : (
+            COMMAND_GROUP_ORDER.map((group) => {
+              const bucket = byGroup.get(group);
+              if (!bucket) return null;
+              return (
+                <div key={group} className="mb-2 last:mb-0">
+                  <p
+                    lang="en"
+                    className="font-mono text-mute text-[9px] tracking-[0.3em] px-5 pt-3 pb-2 uppercase"
+                  >
+                    {group}
+                  </p>
+                  <ul role="presentation">
+                    {bucket.items.map((item, j) => {
+                      const flatIndex = bucket.offsets[j] ?? 0;
+                      const selected = flatIndex === selectedIndex;
+                      return (
+                        <li key={item.path} role="presentation">
+                          <button
+                            type="button"
+                            role="option"
+                            id={`cmd-item-${flatIndex}`}
+                            data-cmd-index={flatIndex}
+                            aria-selected={selected}
+                            onClick={() => execute(item)}
+                            onMouseEnter={() => setSelectedIndex(flatIndex)}
+                            className={`w-full text-left px-5 py-2.5 flex items-baseline gap-3 transition-colors ${
+                              selected
+                                ? "bg-gold/10 text-bone"
+                                : "text-mute hover:bg-slate/40"
+                            }`}
+                          >
+                            <span
+                              aria-hidden="true"
+                              className={`flex-shrink-0 w-1.5 h-1.5 rounded-full ${
+                                selected
+                                  ? "bg-gold glow-gold"
+                                  : "bg-mute/30"
+                              } translate-y-[-2px]`}
+                            />
+                            <span className="flex-1 min-w-0">
+                              <span
+                                className={`block text-sm sm:text-base leading-snug ${
+                                  selected ? "text-bone" : "text-bone/85"
+                                }`}
+                              >
+                                {item.label}
+                              </span>
+                              <span
+                                lang="en"
+                                className={`block font-mono text-[10px] tracking-[0.2em] mt-0.5 ${
+                                  selected ? "text-gold/80" : "text-mute/70"
+                                }`}
+                              >
+                                {item.kicker}
+                                {item.external && (
+                                  <span className="ml-2 opacity-80">↗</span>
+                                )}
+                              </span>
+                            </span>
+                            {selected && (
+                              <span
+                                lang="en"
+                                aria-hidden="true"
+                                className="font-mono text-gold/70 text-[10px] tracking-[0.25em] flex-shrink-0"
+                              >
+                                ↵
+                              </span>
+                            )}
+                          </button>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </div>
+              );
+            })
+          )}
+        </div>
+
+        {/* ── Footer hint row ── */}
+        <div className="border-t border-line/60 px-4 sm:px-5 py-2.5 flex items-center justify-between gap-3 text-[10px] font-mono text-mute tracking-[0.22em]">
+          <div className="flex items-center gap-3 sm:gap-4">
+            <span className="flex items-center gap-1.5">
+              <kbd className="border border-line/60 px-1.5 py-0.5 text-[9px] tracking-normal">
+                ↑↓
+              </kbd>
+              <span className="hidden sm:inline">選擇</span>
+            </span>
+            <span className="flex items-center gap-1.5">
+              <kbd className="border border-line/60 px-1.5 py-0.5 text-[9px] tracking-normal">
+                ↵
+              </kbd>
+              <span className="hidden sm:inline">開啟</span>
+            </span>
+            <span className="flex items-center gap-1.5">
+              <kbd className="border border-line/60 px-1.5 py-0.5 text-[9px] tracking-normal">
+                ESC
+              </kbd>
+              <span className="hidden sm:inline">關閉</span>
+            </span>
+          </div>
+          <span lang="en" className="text-mute/70">
+            {flat.length} / {COMMAND_ITEMS.length}
+          </span>
+        </div>
+      </div>
+    </div>
+  );
+}

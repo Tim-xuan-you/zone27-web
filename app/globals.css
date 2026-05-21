@@ -225,6 +225,39 @@ blockquote {
 }
 
 /* ============================================
+   Command Palette · Cmd-K modal animations
+   Used by components/CommandPalette.tsx. Both reduced-motion safe.
+   ============================================ */
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.animate-fade-in {
+  animation: fade-in 180ms ease-out both;
+}
+
+@keyframes cmd-pop {
+  from {
+    opacity: 0;
+    transform: scale(0.97) translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+.animate-cmd-pop {
+  animation: cmd-pop 220ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-in,
+  .animate-cmd-pop {
+    animation: none;
+  }
+}
+
+/* ============================================
    Scroll-driven reveal · gold hairline draws under
    each section heading on /audit (or any .section-reveal)
    as the viewer scrolls past. Native CSS scroll-driven

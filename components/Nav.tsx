@@ -1,6 +1,7 @@
 import Link from "next/link";
 import ScarcityStrip from "@/components/ScarcityStrip";
 import MobileNavToggle from "@/components/MobileNavToggle";
+import CmdKTrigger from "@/components/CmdKTrigger";
 
 type NavKey =
   | "home"
@@ -73,6 +74,7 @@ export default function Nav({ active }: { active?: NavKey }) {
                 )}
               </Link>
             ))}
+            <CmdKTrigger />
             <button
               type="button"
               aria-label="登入(尚未開放,等候 Founders 27 上線)"

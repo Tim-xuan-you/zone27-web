@@ -178,12 +178,13 @@ function NotCollected({ label, en }: { label: string; en: string }) {
         style={{
           color: BRAND.loss,
           fontSize: 22,
-          fontWeight: 500,
+          fontWeight: 700,
           minWidth: 30,
+          letterSpacing: "0em",
           display: "flex",
         }}
       >
-        ✕
+        ×
       </span>
       <span
         style={{

@@ -1,23 +1,21 @@
 import { ImageResponse } from "next/og";
 import { BRAND, OG_SIZE, OG_CONTENT_TYPE } from "@/lib/brand";
 
-// ── ZONE 27 · /faq Dynamic OG ──────────────────────────
-// Specific to the FAQ page. Distinct from sales / disclosure OG.
-// Featured pattern: 4 sample questions in muted gray, one
-// highlighted in gold ("是博彩平台嗎?") with the answer "❌ 不是".
-// Tells visitor: "we answer the hardest question first · no
-// hiding behind marketing copy."
+// ── ZONE 27 · /roadmap Dynamic OG ───────────────────────
+// 當有人把 https://zone27-web.vercel.app/roadmap 貼出去 · 預覽顯示
+// 一張「公開路線圖 · 含永遠不做清單」snapshot。
 //
-// Why this OG matters: /faq is the page visitors share when
-// privately recommending ZONE 27 — "before you ask, here's
-// what they say." Need a visual that's instantly readable.
+// 設計關鍵:三段 LOCKED · EXPLORING · EXPLICIT NO 等大陳列。
+// 重點 punchline:「公開說 NO 比公開說 YES 更難」— 對標 Anthropic
+// Responsible Scaling Policy 的 transparency signal。
 // ─────────────────────────────────────────────────────
 
 export const size = OG_SIZE;
 export const contentType = OG_CONTENT_TYPE;
-export const alt = "ZONE 27 · FAQ · 14 個誠實到不能再誠實的回答";
+export const alt =
+  "ZONE 27 · /roadmap · 公開路線圖 · LOCKED / EXPLORING / EXPLICIT NO 三段";
 
-export default async function FaqOgImage() {
+export default async function RoadmapOgImage() {
   return new ImageResponse(
     (
       <div
@@ -34,7 +32,7 @@ export default async function FaqOgImage() {
           fontFamily: "monospace",
         }}
       >
-        {/* TOP */}
+        {/* ── TOP ROW · brand + path ─────────────────── */}
         <div
           style={{
             display: "flex",
@@ -72,17 +70,16 @@ export default async function FaqOgImage() {
               display: "flex",
             }}
           >
-            FAQ · 14 HONEST ANSWERS
+            / ROADMAP
           </span>
         </div>
 
-        {/* Headline */}
+        {/* ── HEADLINE ─────────────────────────────── */}
         <div
           style={{
             display: "flex",
             flexDirection: "column",
-            marginTop: 30,
-            marginBottom: 30,
+            marginTop: 40,
           }}
         >
           <span
@@ -94,11 +91,11 @@ export default async function FaqOgImage() {
               display: "flex",
             }}
           >
-            BEFORE YOU ASK
+            PUBLIC ROADMAP · 公開路線圖
           </span>
           <span
             style={{
-              fontSize: 72,
+              fontSize: 56,
               color: BRAND.bone,
               fontWeight: 300,
               letterSpacing: "-0.02em",
@@ -106,101 +103,62 @@ export default async function FaqOgImage() {
               display: "flex",
             }}
           >
-            14 個誠實到
+            接下來在做什麼 · 在評估什麼 ·
           </span>
           <span
             style={{
-              fontSize: 72,
+              fontSize: 56,
               color: BRAND.gold,
               fontWeight: 300,
               letterSpacing: "-0.02em",
               lineHeight: 1.05,
               marginTop: 4,
               display: "flex",
+              textShadow: "0 0 60px rgba(212,175,55,0.25)",
             }}
           >
-            不能再誠實的回答
+            永遠不做什麼
           </span>
         </div>
 
-        {/* Featured Q · answered with red X */}
+        {/* ── DIVIDER ──────────────────────────────── */}
+        <div
+          style={{
+            width: "100%",
+            height: 1,
+            background:
+              "linear-gradient(90deg, transparent, rgba(212,175,55,0.5), transparent)",
+            marginTop: 40,
+            marginBottom: 32,
+          }}
+        />
+
+        {/* ── 3-stage status row · equal visual weight ─ */}
         <div
           style={{
             display: "flex",
-            flexDirection: "column",
-            padding: "18px 22px",
-            border: `1px solid ${BRAND.gold}`,
-            background: "rgba(212,175,55,0.08)",
-            marginBottom: 14,
+            justifyContent: "space-around",
+            alignItems: "flex-start",
           }}
         >
-          <span
-            style={{
-              color: BRAND.gold,
-              fontSize: 11,
-              letterSpacing: "0.3em",
-              marginBottom: 6,
-              display: "flex",
-            }}
-          >
-            Q3 · 最常被問
-          </span>
-          <span
-            style={{
-              color: BRAND.bone,
-              fontSize: 24,
-              fontWeight: 400,
-              letterSpacing: "-0.01em",
-              marginBottom: 8,
-              display: "flex",
-            }}
-          >
-            ZONE 27 是博彩平台嗎?
-          </span>
-          <div
-            style={{
-              display: "flex",
-              alignItems: "baseline",
-              gap: 12,
-            }}
-          >
-            <span
-              style={{
-                color: BRAND.loss,
-                fontSize: 26,
-                fontWeight: 700,
-                display: "flex",
-              }}
-            >
-              ×
-            </span>
-            <span
-              style={{
-                color: BRAND.bone,
-                fontSize: 20,
-                letterSpacing: "-0.01em",
-                display: "flex",
-              }}
-            >
-              不是。不接受下注 · 不出彩金 · 不撮合對賭。
-            </span>
-          </div>
+          <Stage
+            label="LOCKED"
+            zh="時程 + 邏輯都已定"
+            tone="full"
+          />
+          <Stage
+            label="EXPLORING"
+            zh="在研究的 · 可能 NO"
+            tone="dim"
+          />
+          <Stage
+            label="EXPLICIT NO"
+            zh="永遠不做 · 品牌防線"
+            tone="line"
+          />
         </div>
 
-        {/* 3 more sample questions */}
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            gap: 6,
-          }}
-        >
-          <FaqLine n="Q6" q="NT$ 2,700 為什麼這麼便宜?" />
-          <FaqLine n="Q9" q="你們的 AI 預測準確率多高?" />
-          <FaqLine n="Q14" q="你們會追蹤我嗎?" highlight />
-        </div>
-
-        {/* Bottom */}
+        {/* ── BOTTOM · differentiator punchline ──────── */}
         <div
           style={{
             position: "absolute",
@@ -216,11 +174,11 @@ export default async function FaqOgImage() {
             style={{
               fontSize: 16,
               color: "rgba(245,242,234,0.6)",
-              letterSpacing: "0.02em",
+              letterSpacing: "0.04em",
               display: "flex",
             }}
           >
-            最硬的問題,在頁面前 3 個就答完
+            Saying NO publicly is harder than saying YES.
           </span>
           <span
             style={{
@@ -231,7 +189,7 @@ export default async function FaqOgImage() {
               display: "flex",
             }}
           >
-            /faq →
+            /roadmap →
           </span>
         </div>
       </div>
@@ -240,47 +198,68 @@ export default async function FaqOgImage() {
   );
 }
 
-function FaqLine({
-  n,
-  q,
-  highlight = false,
+// ── Sub-component ────────────────────────────────────
+
+function Stage({
+  label,
+  zh,
+  tone,
 }: {
-  n: string;
-  q: string;
-  highlight?: boolean;
+  label: string;
+  zh: string;
+  tone: "full" | "dim" | "line";
 }) {
+  const dotColor =
+    tone === "full"
+      ? BRAND.gold
+      : tone === "dim"
+      ? "rgba(212,175,55,0.45)"
+      : "rgba(138,147,168,0.6)";
+  const textColor =
+    tone === "full"
+      ? BRAND.gold
+      : tone === "dim"
+      ? "rgba(212,175,55,0.7)"
+      : "rgba(138,147,168,0.85)";
   return (
     <div
       style={{
         display: "flex",
-        alignItems: "baseline",
-        gap: 18,
-        padding: "10px 22px",
-        background: highlight ? "rgba(212,175,55,0.04)" : "transparent",
-        borderBottom: "1px solid rgba(212,175,55,0.08)",
+        flexDirection: "column",
+        alignItems: "center",
+        gap: 14,
       }}
     >
       <span
         style={{
-          color: highlight ? BRAND.gold : "rgba(212,175,55,0.6)",
-          fontSize: 11,
-          letterSpacing: "0.25em",
-          minWidth: 36,
+          width: 12,
+          height: 12,
+          borderRadius: 100,
+          background: dotColor,
+          display: "flex",
+        }}
+      />
+      <span
+        style={{
+          color: textColor,
+          fontSize: 30,
+          fontWeight: 500,
+          letterSpacing: "0.15em",
           display: "flex",
         }}
       >
-        {n}
+        {label}
       </span>
       <span
         style={{
-          color: highlight ? BRAND.bone : "rgba(245,242,234,0.55)",
-          fontSize: 18,
-          letterSpacing: "-0.01em",
-          flex: 1,
+          color: "rgba(245,242,234,0.55)",
+          fontSize: 14,
+          letterSpacing: "0.05em",
+          textAlign: "center",
           display: "flex",
         }}
       >
-        {q}
+        {zh}
       </span>
     </div>
   );
