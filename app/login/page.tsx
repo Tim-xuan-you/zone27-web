@@ -8,6 +8,7 @@ import { createSupabaseBrowserClient } from "@/lib/supabase/browser";
 
 const EMAIL_CACHE_KEY = "zone27_last_login_email";
 const RESEND_COOLDOWN_SEC = 30;
+const MIN_PASSWORD_LEN = 8;
 
 // ── ZONE 27 · /login ───────────────────────────────────
 // Round 30 Wave 5 · 2026-05-21 evening · Phase 1 magic link auth ·
@@ -35,24 +36,28 @@ const RESEND_COOLDOWN_SEC = 30;
 //   - 「終身免費 · 永不調漲」 (re-affirm commitment)
 // ─────────────────────────────────────────────────────
 
+type AuthMode = "password" | "magic_link";
+
 type SubmitState =
   | { kind: "idle" }
-  | { kind: "sending" }
-  | { kind: "sent"; email: string }
+  | { kind: "submitting" }
+  | { kind: "signup_confirm_sent"; email: string }
+  | { kind: "magic_link_sent"; email: string }
   | { kind: "verifying"; email: string }
   | { kind: "error"; message: string };
 
 export default function LoginPage() {
+  // Round 30 Wave 14 · Apple-pattern · email + password 主 path · magic
+  // link 降 secondary(忘記密碼用)· per Tim 5+ time canary fire 拒
+  // magic link · 我 over-defended 自己 W7 axiom 太久。 「0 password」 不在
+  // canonical brand IP memory · 砍。
   const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [mode, setMode] = useState<AuthMode>("password");
   const [state, setState] = useState<SubmitState>({ kind: "idle" });
-  // Round 30 Wave 13 · session probe on mount · 已登入訪客顯示「您已
-  // logged in as X」 + 跳 /member 連結 · 不重複 magic link 寄信。
   const [existingEmail, setExistingEmail] = useState<string | null>(null);
-  // Round 30 Wave 13 · resend cooldown countdown · 防混淆多 email
-  // (Tim 之前一晚 3 封 confusing email · UX bug)
   const [cooldown, setCooldown] = useState(0);
   const cooldownTimerRef = useRef<ReturnType<typeof setInterval> | null>(null);
-  // Round 30 Wave 6 · ?next= forwarding
   const [nextPath, setNextPath] = useState<string | null>(null);
 
   // ── On mount: session probe + email cache + next param ──
@@ -124,8 +129,102 @@ export default function LoginPage() {
       return;
     }
 
-    setState({ kind: "sending" });
+    // Cache email regardless of mode
+    try {
+      window.localStorage.setItem(EMAIL_CACHE_KEY, trimmed);
+    } catch {
+      // localStorage blocked · 不擋
+    }
 
+    if (mode === "magic_link") {
+      return submitMagicLink(trimmed);
+    }
+    return submitPassword(trimmed);
+  }
+
+  // Round 30 Wave 14 · Apple-pattern smart sign-in-or-sign-up:
+  // 1. Try signInWithPassword(existing account)
+  // 2. If「Invalid login credentials」(could be wrong password OR new user)·
+  //    try signUp · if signUp 成功 → "check email to confirm" state
+  // 3. 若 signUp 也 fail(e.g. account exists · password 確實錯)· show error
+  async function submitPassword(trimmedEmail: string) {
+    if (password.length < MIN_PASSWORD_LEN) {
+      setState({
+        kind: "error",
+        message: `密碼至少 ${MIN_PASSWORD_LEN} 個字元`,
+      });
+      return;
+    }
+    setState({ kind: "submitting" });
+    try {
+      const supabase = createSupabaseBrowserClient();
+      // Try sign in first
+      const signInResult = await supabase.auth.signInWithPassword({
+        email: trimmedEmail,
+        password,
+      });
+      if (!signInResult.error) {
+        // Success · session set · redirect
+        const dest = nextPath ?? "/member?welcome=true";
+        window.location.assign(dest);
+        return;
+      }
+
+      // Sign in failed · check if it's "user not found" → try signUp
+      const errMsg = (signInResult.error.message || "").toLowerCase();
+      const looksLikeNewUser =
+        errMsg.includes("invalid login credentials") ||
+        errMsg.includes("user not found") ||
+        errMsg.includes("invalid email or password");
+
+      if (looksLikeNewUser) {
+        const callbackUrl = new URL(
+          "/auth/callback",
+          window.location.origin
+        );
+        if (nextPath) callbackUrl.searchParams.set("next", nextPath);
+        const signUpResult = await supabase.auth.signUp({
+          email: trimmedEmail,
+          password,
+          options: {
+            emailRedirectTo: callbackUrl.toString(),
+          },
+        });
+        if (signUpResult.error) {
+          // Real sign up error(account already exists w/ different password · etc.)
+          setState({
+            kind: "error",
+            message: friendlyPasswordError(signUpResult.error.message),
+          });
+          return;
+        }
+        // Check if email confirmation needed(Supabase default = yes)
+        const session = signUpResult.data.session;
+        if (session) {
+          // Auto-confirmed(Supabase project has email confirmation off)·
+          // redirect directly
+          const dest = nextPath ?? "/member?welcome=true";
+          window.location.assign(dest);
+          return;
+        }
+        // Email confirmation pending
+        setState({ kind: "signup_confirm_sent", email: trimmedEmail });
+        return;
+      }
+      // Other error(rate limit · network · etc.)
+      setState({
+        kind: "error",
+        message: friendlyPasswordError(signInResult.error.message),
+      });
+    } catch (err) {
+      const message =
+        err instanceof Error ? err.message : "未知錯誤 · 請稍候再試";
+      setState({ kind: "error", message });
+    }
+  }
+
+  async function submitMagicLink(trimmedEmail: string) {
+    setState({ kind: "submitting" });
     try {
       const supabase = createSupabaseBrowserClient();
       const callbackUrl = new URL(
@@ -134,7 +233,7 @@ export default function LoginPage() {
       );
       if (nextPath) callbackUrl.searchParams.set("next", nextPath);
       const { error } = await supabase.auth.signInWithOtp({
-        email: trimmed,
+        email: trimmedEmail,
         options: {
           emailRedirectTo: callbackUrl.toString(),
         },
@@ -146,14 +245,8 @@ export default function LoginPage() {
         });
         return;
       }
-      // Round 30 Wave 13 · cache email + start cooldown
-      try {
-        window.localStorage.setItem(EMAIL_CACHE_KEY, trimmed);
-      } catch {
-        // 不擋
-      }
       startCooldown();
-      setState({ kind: "sent", email: trimmed });
+      setState({ kind: "magic_link_sent", email: trimmedEmail });
     } catch (err) {
       const message =
         err instanceof Error ? err.message : "未知錯誤 · 請稍候再試";
@@ -162,13 +255,21 @@ export default function LoginPage() {
   }
 
   async function handleResend() {
-    if (cooldown > 0 || state.kind !== "sent") return;
+    if (
+      cooldown > 0 ||
+      (state.kind !== "magic_link_sent" &&
+        state.kind !== "signup_confirm_sent")
+    )
+      return;
     const targetEmail = state.email;
-    setState({ kind: "sending" });
+    const wasSignupMode = state.kind === "signup_confirm_sent";
+    setState({ kind: "submitting" });
     try {
       const supabase = createSupabaseBrowserClient();
       const callbackUrl = new URL("/auth/callback", window.location.origin);
       if (nextPath) callbackUrl.searchParams.set("next", nextPath);
+      // For signup mode, also resend via signInWithOtp(Supabase will resend
+      // confirmation if user not yet confirmed)
       const { error } = await supabase.auth.signInWithOtp({
         email: targetEmail,
         options: { emailRedirectTo: callbackUrl.toString() },
@@ -181,7 +282,10 @@ export default function LoginPage() {
         return;
       }
       startCooldown();
-      setState({ kind: "sent", email: targetEmail });
+      setState({
+        kind: wasSignupMode ? "signup_confirm_sent" : "magic_link_sent",
+        email: targetEmail,
+      });
     } catch (err) {
       const message =
         err instanceof Error ? err.message : "未知錯誤";
@@ -189,13 +293,15 @@ export default function LoginPage() {
     }
   }
 
-  // Round 30 Wave 13b · Linear pattern OTP code fallback。
-  // Per 2026 auth UX agent research deepest call:keep magic link · add OTP
-  // 6-digit code 同封 email · 跨 device 也 work · PKCE constraint bypass。
-  // Same brand axiom(0 password · 0 OAuth · 1-field /login)· 純 SentState
-  // 加 OTP input · 不動 form structure。
+  // Round 30 Wave 13b · Linear pattern OTP code fallback。 Works for both
+  // magic_link_sent + signup_confirm_sent · Supabase verifyOtp 對 email
+  // type 適用兩個 case。
   async function handleVerifyOtp(token: string) {
-    if (state.kind !== "sent") return;
+    if (
+      state.kind !== "magic_link_sent" &&
+      state.kind !== "signup_confirm_sent"
+    )
+      return;
     const targetEmail = state.email;
     const trimmed = token.replace(/\s/g, "");
     if (!/^\d{6}$/.test(trimmed)) {
@@ -241,15 +347,14 @@ export default function LoginPage() {
             lang="en"
             className="font-mono text-gold text-[10px] tracking-[0.45em] mb-6"
           >
-            / LOGIN · MAGIC LINK · FREE TIER 註冊
+            / LOGIN · FREE TIER · 登入或註冊
           </p>
           <h1 className="text-4xl sm:text-5xl text-bone font-light tracking-tight leading-[1.1]">
-            一封 email · 一個 link · 您正式{" "}
             <span className="text-gold">加入 ZONE 27</span>
           </h1>
           <p className="mt-6 text-mute text-base leading-relaxed max-w-xl mx-auto">
-            這是真的註冊 · 不是 email 預訂。1 分鐘內您信箱會收到 magic link ·
-            點開您就有 session · /member 即時變成您的 dashboard。
+            Email + 密碼 · Apple/Google 標準。 新帳號自動建立 · 已有帳號自動登入。
+            終身免費 · 永不調漲 · 0 tracking。
           </p>
         </section>
 
@@ -257,7 +362,11 @@ export default function LoginPage() {
             Session probe on mount detected existing session · 不重複 ship
             magic link · 直接 link 到 /member。 Tim's pain:多次點 /login
             其實 session 已 active · UI 沒告訴他 · 重複寄 confusing emails。 */}
-        {existingEmail && state.kind !== "sent" && state.kind !== "sending" && (
+        {existingEmail &&
+          state.kind !== "magic_link_sent" &&
+          state.kind !== "signup_confirm_sent" &&
+          state.kind !== "submitting" &&
+          state.kind !== "verifying" && (
           <section className="mx-auto max-w-md w-full px-6 sm:px-10 pb-6">
             <div className="bg-gold/5 border border-gold/60 glow-soft p-5">
               <p
@@ -281,11 +390,20 @@ export default function LoginPage() {
           </section>
         )}
 
-        {/* ── FORM ─────────────────────────────────── */}
+        {/* ── FORM · Round 30 Wave 14 · Apple-pattern email + password ── */}
         <section className="mx-auto max-w-md w-full px-6 sm:px-10 pb-12">
-          {state.kind === "sent" || state.kind === "verifying" ? (
+          {state.kind === "magic_link_sent" ||
+          state.kind === "signup_confirm_sent" ||
+          state.kind === "verifying" ? (
             <SentState
-              email={state.kind === "sent" ? state.email : state.email}
+              email={
+                state.kind === "verifying"
+                  ? state.email
+                  : state.kind === "magic_link_sent"
+                  ? state.email
+                  : state.email
+              }
+              isSignupConfirm={state.kind === "signup_confirm_sent"}
               cooldown={cooldown}
               onResend={handleResend}
               onVerifyOtp={handleVerifyOtp}
@@ -313,18 +431,43 @@ export default function LoginPage() {
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="you@example.com"
                   className="w-full bg-navy/60 border border-line/70 px-4 py-3 text-bone text-base focus:border-gold focus:outline-none focus:ring-2 focus:ring-gold/20 transition-colors"
-                  disabled={state.kind === "sending"}
+                  disabled={state.kind === "submitting"}
                 />
               </div>
 
+              {mode === "password" && (
+                <div>
+                  <label
+                    htmlFor="password"
+                    className="block font-mono text-mute text-[10px] tracking-[0.3em] mb-2"
+                  >
+                    PASSWORD · 密碼 (≥ {MIN_PASSWORD_LEN} 字元)
+                  </label>
+                  <input
+                    id="password"
+                    type="password"
+                    autoComplete="current-password"
+                    required
+                    minLength={MIN_PASSWORD_LEN}
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    placeholder="••••••••"
+                    className="w-full bg-navy/60 border border-line/70 px-4 py-3 text-bone text-base focus:border-gold focus:outline-none focus:ring-2 focus:ring-gold/20 transition-colors"
+                    disabled={state.kind === "submitting"}
+                  />
+                </div>
+              )}
+
               <button
                 type="submit"
-                disabled={state.kind === "sending"}
+                disabled={state.kind === "submitting"}
                 className="w-full px-6 py-3 bg-gold text-navy font-mono text-sm tracking-[0.3em] hover:bg-gold-soft transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                {state.kind === "sending"
-                  ? "● 寄送中 ..."
-                  : "→ 寄 magic link 給我"}
+                {state.kind === "submitting"
+                  ? "● 處理中 ..."
+                  : mode === "password"
+                  ? "→ 登入 / 註冊"
+                  : "→ 寄 magic link"}
               </button>
 
               {state.kind === "error" && (
@@ -337,20 +480,37 @@ export default function LoginPage() {
                 </p>
               )}
 
-              <div className="pt-3 border-t border-line/40">
-                <p className="font-mono text-loss/90 text-[10px] tracking-[0.25em] leading-relaxed mb-2">
-                  ⚠ <span className="text-loss font-medium">關鍵</span>:必須在<span className="text-bone">同一個 device</span>開 magic link
+              {/* ── Mode toggle ── */}
+              <div className="pt-3 border-t border-line/40 flex flex-col gap-2">
+                {mode === "password" ? (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setMode("magic_link");
+                      setState({ kind: "idle" });
+                    }}
+                    className="font-mono text-mute hover:text-gold text-[10px] tracking-[0.25em] text-left underline-offset-4 hover:underline transition-colors"
+                  >
+                    ↳ 忘記密碼 / 不想用密碼? 改用 magic link →
+                  </button>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setMode("password");
+                      setState({ kind: "idle" });
+                    }}
+                    className="font-mono text-mute hover:text-gold text-[10px] tracking-[0.25em] text-left underline-offset-4 hover:underline transition-colors"
+                  >
+                    ↳ 改用密碼登入 / 註冊 →
+                  </button>
+                )}
+                <p className="font-mono text-mute/70 text-[10px] tracking-[0.25em] leading-relaxed mt-2">
+                  ▸ 新 email = 自動建帳號 · 寄確認 email · 點 link 完成 register
                   <br />
-                  (e.g. 手機 /login → 手機 Gmail open · 不能 desktop 填 · 手機開 email)
-                </p>
-                <p className="font-mono text-mute/80 text-[10px] tracking-[0.25em] leading-relaxed">
-                  ▸ 1 個欄位 · 沒密碼 · 沒 OAuth · 沒 social login
+                  ▸ 已有 email = 用密碼登入 · session 落本 browser
                   <br />
-                  ▸ Magic link 點 1 次 · 30 分鐘內有效 · 過期重發
-                  <br />
-                  ▸ Email 多封 · click 最新一封(舊的 token 已失效)
-                  <br />
-                  ▸ 想登出 · /member 內有「登出」按鈕
+                  ▸ 沒 social login · 沒 OAuth · 沒 tracking · per /privacy
                 </p>
               </div>
             </form>
@@ -409,12 +569,14 @@ export default function LoginPage() {
 
 function SentState({
   email,
+  isSignupConfirm,
   cooldown,
   onResend,
   onVerifyOtp,
   verifying,
 }: {
   email: string;
+  isSignupConfirm: boolean;
   cooldown: number;
   onResend: () => void;
   onVerifyOtp: (token: string) => Promise<void>;
@@ -428,10 +590,14 @@ function SentState({
         lang="en"
         className="font-mono text-gold text-[10px] tracking-[0.45em] mb-4 shimmer text-center"
       >
-        ✓ EMAIL SENT · 2 個 path 任選
+        {isSignupConfirm
+          ? "✓ ACCOUNT CREATED · 等 email 確認"
+          : "✓ EMAIL SENT · 2 個 path 任選"}
       </p>
       <h2 className="text-2xl sm:text-3xl text-bone font-light tracking-tight mb-4 text-center">
-        寄出了 · 1 分鐘內看您信箱
+        {isSignupConfirm
+          ? "帳號建好了 · 請確認 email"
+          : "寄出了 · 1 分鐘內看您信箱"}
       </h2>
       <p className="text-mute text-sm sm:text-base leading-relaxed mb-5 text-center">
         Email 寄到{" "}
@@ -526,5 +692,23 @@ function friendlyOtpError(raw: string): string {
     return "Code 錯誤 · 看最新 email · 6 碼數字";
   if (lower.includes("rate"))
     return "太快 · 等 30 秒後再試";
+  return raw.slice(0, 200);
+}
+
+// Round 30 Wave 14 · friendly password error mapping。
+function friendlyPasswordError(raw: string): string {
+  const lower = raw.toLowerCase();
+  if (lower.includes("already") && lower.includes("registered"))
+    return "此 email 已註冊 · 密碼錯了 · 點下方「忘記密碼」改 magic link";
+  if (lower.includes("user already exists"))
+    return "此 email 已註冊 · 密碼錯了 · 點下方「忘記密碼」改 magic link";
+  if (lower.includes("password should be at least"))
+    return `密碼至少 ${MIN_PASSWORD_LEN} 字元`;
+  if (lower.includes("weak"))
+    return "密碼太弱 · 加長 / 加數字 / 加符號";
+  if (lower.includes("rate"))
+    return "太快 · 等 30 秒後再試";
+  if (lower.includes("network") || lower.includes("fetch"))
+    return "網路問題 · 重試";
   return raw.slice(0, 200);
 }
