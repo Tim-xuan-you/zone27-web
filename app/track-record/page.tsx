@@ -3,6 +3,8 @@ import type { Metadata } from "next";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import RelatedReading from "@/components/RelatedReading";
+import FounderSignOff from "@/components/FounderSignOff";
+import ArticleMeta from "@/components/ArticleMeta";
 import {
   matches,
   getFinalizedMatches,
@@ -85,6 +87,12 @@ export default function TrackRecordPage() {
           <span className="text-bone">PROVED ✓ 跟 DIVERGED ✕ 等大等亮列出</span>,
           不藏、不修飾、不重新加權。
         </p>
+        <div className="mt-6 mb-2">
+          <ArticleMeta
+            readingMin={3}
+            sample={{ current: finalized.length, threshold: 30 }}
+          />
+        </div>
         <p className="mt-4 font-mono text-mute/80 text-[10px] tracking-[0.25em] leading-relaxed max-w-2xl">
           多數運動分析平台選擇藏起這頁;ZONE 27 把它放在 footer 主導航 ·
           因為公開戰績是品牌 IP 的物理證據(per{" "}
@@ -289,6 +297,21 @@ export default function TrackRecordPage() {
           </p>
         </div>
       </section>
+
+      <FounderSignOff>
+        <p>
+          這個 ledger 從 <strong>N=0</strong> 開始。
+          每場 ZONE 27 公開預測過的 CPBL 賽事 · 我會在賽後 24 小時內手動 ingest box score。
+        </p>
+        <p>
+          PROVED 跟 DIVERGED <strong>等大列出</strong> · 連 PUSH 都不藏。
+          這是我能給的最物理的承諾 — 不是文案 · 是 git commit。
+        </p>
+        <p>
+          您看到的每一行 · 在 GitHub commit history 裡都有對應的「~XX:XX TPE
+          ingest」紀錄 · 沒有後補 · 沒有 backdate。
+        </p>
+      </FounderSignOff>
 
       <RelatedReading currentPath="/track-record" />
 

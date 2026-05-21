@@ -295,6 +295,117 @@ export default function AboutPage() {
         </p>
       </Chapter>
 
+      {/* ── 07 OPERATIONS ──────────────────────────
+          Round 28 Wave 2E · Agent C Persona 3 P3.3 fix. Industry
+          insider lands on /about from a DM and asks: "who's accountable?
+          solo or team? what's their day job?" The site says
+          "我不是學者 · 不是工程師" but doesn't surface solo-founder as
+          a *commitment* (vs. team behind a curtain). This chapter
+          frames solo-as-discipline · 3-row mono-grid · radically
+          honest about response cadence. */}
+      <Chapter
+        no="07"
+        en="OPERATIONS"
+        zh="這個品牌怎麼跑"
+        kicker="solo founder · 不藏"
+      >
+        <p>
+          ZONE 27 是<strong className="text-bone">一個人</strong>在跑的品牌 — 不是團隊背後的 marketing
+          套版。下面是 ZONE 27 的後台真實樣貌:
+        </p>
+        <div className="mt-8 border border-gold/30 divide-y divide-line/40">
+          <div className="grid grid-cols-1 sm:grid-cols-[200px_1fr] gap-2 sm:gap-6 p-5 sm:p-6">
+            <p
+              lang="en"
+              className="font-mono text-gold/70 text-[10px] tracking-[0.35em] pt-1"
+            >
+              MAINTAINER
+            </p>
+            <p className="text-bone text-base">
+              Tim · solo founder · CPBL 球迷 27 年 · 非工程師(寫 prompts 不寫 ts)
+            </p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-[200px_1fr] gap-2 sm:gap-6 p-5 sm:p-6">
+            <p
+              lang="en"
+              className="font-mono text-gold/70 text-[10px] tracking-[0.35em] pt-1"
+            >
+              BUILD CADENCE
+            </p>
+            <p className="text-bone text-base">
+              daily commits ·{" "}
+              <a
+                href="https://github.com/Tim-xuan-you/zone27-web/commits/main"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gold underline-offset-4 hover:underline"
+              >
+                GitHub
+              </a>
+              {" "}為 source of truth · 沒有 backdate · 沒有「行銷上線一次性 push」
+            </p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-[200px_1fr] gap-2 sm:gap-6 p-5 sm:p-6">
+            <p
+              lang="en"
+              className="font-mono text-gold/70 text-[10px] tracking-[0.35em] pt-1"
+            >
+              RESPONSE TIME
+            </p>
+            <p className="text-bone text-base">
+              email / DM 24 小時內 Taipei time · 不外包客服 · 不批次回覆
+            </p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-[200px_1fr] gap-2 sm:gap-6 p-5 sm:p-6">
+            <p
+              lang="en"
+              className="font-mono text-gold/70 text-[10px] tracking-[0.35em] pt-1"
+            >
+              SCORE INGEST
+            </p>
+            <p className="text-bone text-base">
+              Tim 親手截圖 cpbl.com.tw box score · 寫入 lib/matches.ts · 沒有
+              cron · 沒有外包(per /coverage philosophy)
+            </p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-[200px_1fr] gap-2 sm:gap-6 p-5 sm:p-6">
+            <p
+              lang="en"
+              className="font-mono text-gold/70 text-[10px] tracking-[0.35em] pt-1"
+            >
+              FOUNDER ONBOARDING
+            </p>
+            <p className="text-bone text-base">
+              Founders 27 全 270 位 Tim 親手 onboard · 銀行轉帳 · personal email
+              ·{" "}
+              <a
+                href="https://github.com/Tim-xuan-you/zone27-web/blob/main/docs/MANUAL-ONBOARDING.md"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gold underline-offset-4 hover:underline"
+              >
+                docs/MANUAL-ONBOARDING.md
+              </a>
+              {" "}寫死流程
+            </p>
+          </div>
+        </div>
+        <p className="mt-8 text-mute/80 text-sm sm:text-base leading-relaxed">
+          這不是「等規模化後再升級」的 SaaS 預設思維。
+          <strong className="text-bone">手工 = 識別性</strong> ·
+          每位 #00X 跟 Tim 的 first-name-basis 聯繫是核心 deliverable。
+          詳細的「為什麼不自動化」見{" "}
+          <Link href="/manifesto" className="text-gold underline-offset-4 hover:underline">
+            /manifesto Section II
+          </Link>
+          {" "}MONETIZATION 倒置 + memory{" "}
+          <code className="font-mono text-bone bg-slate/40 px-1.5 py-0.5 rounded-sm">
+            [[zone27-payment-architecture]]
+          </code>
+          。
+        </p>
+      </Chapter>
+
       <RelatedReading currentPath="/about" />
 
       {/* ── FINAL CTA ────────────────────────────── */}

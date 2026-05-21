@@ -5,6 +5,8 @@ import Footer from "@/components/Footer";
 import MatchSimulator from "@/components/MatchSimulator";
 import CopyLinkButton from "@/components/CopyLinkButton";
 import RelatedReading from "@/components/RelatedReading";
+import FounderSignOff from "@/components/FounderSignOff";
+import ArticleMeta from "@/components/ArticleMeta";
 import StatTerm from "@/components/StatTerm";
 import { matches } from "@/lib/matches";
 
@@ -38,6 +40,9 @@ export default function MethodologyPage() {
           我們不寫公關稿,只寫技術筆記。
           這是 ZONE 27 蒙地卡羅引擎完整的內部運作說明。
         </p>
+        <div className="mt-8 flex justify-center">
+          <ArticleMeta readingMin={6} />
+        </div>
       </section>
 
       <div className="mx-auto w-32 gold-line mb-12" />
@@ -217,6 +222,22 @@ repeat 10,000 times → aggregate
           。
         </p>
       </Section>
+
+      <FounderSignOff>
+        <p>
+          這份白皮書沒有打算讓所有人讀完。寫給的對象是
+          <strong>「想自己 fork 來改」的工程師朋友</strong>。
+        </p>
+        <p>
+          <code className="font-mono text-bone bg-slate/40 px-1.5 py-0.5 rounded-sm">lib/simulator.ts</code>
+          {" "}是真實程式碼 · 不是 marketing pseudo-code ·
+          您比我更懂的話請發 PR 修我們。
+        </p>
+        <p>
+          ABSTRACT 裡的 ±2% 是引擎內部一致性 · 不是 calibration accuracy ·
+          這個區別寫死了再改一遍 · 不藏。
+        </p>
+      </FounderSignOff>
 
       <RelatedReading currentPath="/methodology" />
 

@@ -3,6 +3,8 @@ import type { Metadata } from "next";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import RelatedReading from "@/components/RelatedReading";
+import FounderSignOff from "@/components/FounderSignOff";
+import ArticleMeta from "@/components/ArticleMeta";
 
 export const metadata: Metadata = {
   title: "Roadmap · 公開路線圖 · 含品牌鐵律",
@@ -185,6 +187,9 @@ export default function RoadmapPage() {
           BRAND BOUNDARIES(品牌守則 · 不變的鐵律)。對標 Anthropic Responsible
           Scaling Policy + Plausible「principled boundaries」。
         </p>
+        <div className="mt-6">
+          <ArticleMeta readingMin={4} />
+        </div>
       </section>
 
       <div className="mx-auto max-w-5xl w-full px-6 sm:px-10 mb-12">
@@ -324,6 +329,21 @@ export default function RoadmapPage() {
           </p>
         </div>
       </section>
+
+      <FounderSignOff>
+        <p>
+          寫公開 roadmap 是<strong>逼自己的承諾機制</strong>。
+        </p>
+        <p>
+          EXPLORING 區塊那幾項都還沒落地 · BRAND BOUNDARIES 區塊那幾項
+          是我已經想清楚不做。任何項目 timing 偏差 · /changelog 會看得到 ·
+          因為 git history 不可改。
+        </p>
+        <p>
+          沒有「即將推出」的銷售話術 · 只有 LOCKED / EXPLORING /
+          BRAND BOUNDARIES 三類 · 寫進來等於穿上枷鎖。
+        </p>
+      </FounderSignOff>
 
       <RelatedReading currentPath="/roadmap" />
 

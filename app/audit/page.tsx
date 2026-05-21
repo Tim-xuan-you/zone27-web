@@ -4,6 +4,7 @@ import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import CopyLinkButton from "@/components/CopyLinkButton";
 import RelatedReading from "@/components/RelatedReading";
+import FounderSignOff from "@/components/FounderSignOff";
 import StatTerm from "@/components/StatTerm";
 import { matches, getFinalizedMatches } from "@/lib/matches";
 import {
@@ -451,6 +452,20 @@ export default function AuditPage() {
             </div>
           </footer>
         </article>
+
+        <FounderSignOff>
+          <p>
+            我把整個引擎攤在這裡 · 不是因為它完美 ·
+            是因為我相信<strong>公開錯誤比藏起來更值得</strong>。
+          </p>
+          <p>
+            上面 ESTIMATION DISCLOSURE 那一段 · 是寫程式時跟自己拉鋸出來的
+            「我們現在做不到什麼」清單 · 寫進來反而踏實。
+          </p>
+          <p>
+            您比我更懂的話可以發 PR 修我們。
+          </p>
+        </FounderSignOff>
 
         <RelatedReading currentPath="/audit" />
       </main>

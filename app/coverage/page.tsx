@@ -4,6 +4,8 @@ import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import CopyLinkButton from "@/components/CopyLinkButton";
 import RelatedReading from "@/components/RelatedReading";
+import FounderSignOff from "@/components/FounderSignOff";
+import ArticleMeta from "@/components/ArticleMeta";
 
 export const metadata: Metadata = {
   title: "Coverage — 我們覆蓋哪些賽事 · 為什麼不覆蓋全部",
@@ -184,6 +186,9 @@ export default function CoveragePage() {
                 我們服務的是想看見<span className="text-gold">模型誠實程度</span>的硬核棒球迷。
               </span>
             </p>
+            <div className="mb-6">
+              <ArticleMeta readingMin={8} />
+            </div>
 
             <p className="text-mute text-base leading-relaxed mb-8 max-w-2xl">
               這頁列出我們覆蓋什麼 · 不覆蓋什麼 · 為什麼。
@@ -424,6 +429,21 @@ export default function CoveragePage() {
               <CopyLinkButton refTag="coverage-share" />
             </div>
           </section>
+
+          <FounderSignOff>
+            <p>
+              我不覆蓋所有 CPBL 比賽 · 也不打算。
+              <strong>引擎能算出有意義數字的</strong>才上 /matches ·
+              算不出的就誠實 mark 為 PREVIEW。
+            </p>
+            <p>
+              這個 filter 是我的品味 · 也是 ZONE 27 的牆。
+              覆蓋越廣不等於越強 · 倒置 SaaS 預設「全包才贏」。
+            </p>
+            <p>
+              想看哪場我沒覆蓋的 · 您填表單告訴我 · 我會評估能不能誠實算。
+            </p>
+          </FounderSignOff>
 
           <RelatedReading currentPath="/coverage" />
         </article>
