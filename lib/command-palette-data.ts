@@ -197,32 +197,47 @@ export const COMMAND_ITEMS: CommandItem[] = [
   },
 
   // ── 工具 · 外部 ────────────────────────────────────
+  // Round 25 split(Tim 揭示 wayfinding):/membership 跟 /founders 各自獨立 ·
+  // 各自 keyword set · 訪客搜「會員」優先 /membership(ladder overview)·
+  // 搜「founders」「創始」「終身」優先 /founders(Founders 27 deep dive)。
   {
-    label: "會員 · Founders 27 + FREE TIER + BLACK CARD 三層 ladder",
-    kicker: "/founders",
-    path: "/founders",
+    label: "會員制 · 4-tier ladder 總覽 · FREE TIER + BLACK CARD + Founders 27",
+    kicker: "/membership",
+    path: "/membership",
     group: "工具 · 外部",
     keywords: [
-      "founders",
-      "創始",
-      "27",
-      "lifetime",
-      "終身",
-      "預訂",
-      // Round 23 keywords expansion(per Tim「一般人加入會員找不到」):
-      // 加「會員」「加入」「訂閱」「free」「免費」「membership」 ·
-      // 涵蓋非-Founders-27 訪客的搜尋詞 · Nav label 改 "會員" 後
-      // Cmd-K 也要對應。
       "會員",
+      "會員制",
       "加入會員",
       "membership",
       "tier",
+      "ladder",
       "訂閱",
       "free tier",
       "免費",
       "免費訂閱",
       "black card",
       "黑金",
+      "一般會員",
+      "free",
+      "subscribe",
+    ],
+  },
+  {
+    label: "Founders 27 · 創始終身 · 限量 270 預售詳情",
+    kicker: "/founders",
+    path: "/founders",
+    group: "工具 · 外部",
+    keywords: [
+      "founders",
+      "創始",
+      "創始會員",
+      "27",
+      "lifetime",
+      "終身",
+      "預訂",
+      "2700",
+      "270",
     ],
   },
   {

@@ -20,15 +20,15 @@ const NAV_ITEMS: {
   { key: "matches", href: "/matches", label: "賽事" },
   { key: "lab", href: "/lab", label: "實驗室", badge: "BETA" },
   { key: "leaderboard", href: "/leaderboard", label: "27 之牆" },
-  // Round 23 label fix(Tim 問「一般人要加入會員從哪裡按?找不到」):
-  // "創始會員" → "會員" · 一般訪客讀「創始會員」覺得 NT$ 2,700
-  // 限量 270 跟自己無關 · bounce 在 Nav 沒進 /founders 看 4-tier
-  // ladder。改成「會員」(neutral noun · 同 /audit /coverage pattern)·
-  // 覆蓋全 4 層(FREE TIER + BLACK CARD + Founders 27)· 進去後再
-  // 看詳細 hierarchy。Sticky bottom CTA + 首頁 pill 維持 paid-focused
-  // (Founders 27 specific)· Nav 為 inclusive 入口。Key 不改(保
-  // 持 active state 對應 /founders URL)。
-  { key: "founders", href: "/founders", label: "會員" },
+  // Round 23 label fix → Round 25 路徑 fix(Tim 揭示「我就只看到加入
+  // 創始會員的頁面 · 哪裡可以加入一般會員? 頁面在哪裡?」):
+  // Round 23 改 label「創始會員」→「會員」但 href 仍 /founders ·
+  // /founders 視覺上仍是 Founders 27 sales page · ladder 看不到。
+  // Round 25 開新 route /membership = 4-tier ladder 平等視覺權重的
+  // 入口頁 · Nav「會員」改指 /membership(inclusive)· /founders
+  // 保留為 Founders 27 deep-dive。Key 不改(保持 active state 通用
+  // 於 /membership 與 /founders 兩頁 · 都屬「會員」family)。
+  { key: "founders", href: "/membership", label: "會員" },
   { key: "about", href: "/about", label: "關於" },
 ];
 
