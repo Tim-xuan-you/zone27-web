@@ -10,11 +10,16 @@
 //      validates again, dedupes by email, and returns the queue position
 //   4. The RPC runs as security definer, so anon never touches the table
 //      directly — all access goes through this single doorway
-//   5. We also console.log to Vercel for defense in depth
+//   5. NEW (2026-05-21): on successful new insert (not dupe), we send a
+//      brand-tone confirmation email via Resend · lib/email.ts handles
+//      that. Email failure does NOT fail the waitlist signup — visitor
+//      still sees queue position, we just log the email failure.
+//   6. We also console.log to Vercel for defense in depth
 // ─────────────────────────────────────────────────────
 
 import { revalidatePath } from "next/cache";
 import { supabase } from "@/lib/supabase";
+import { sendWaitlistConfirmation } from "@/lib/email";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
@@ -103,6 +108,24 @@ export async function reserveSpot(
   // Purge the /founders ISR cache so the WAITLIST · N · LIVE counter
   // reflects this new signup on the next visit, not 60 seconds later.
   revalidatePath("/founders");
+
+  // Send brand-tone confirmation email · Resend free tier · 100/day cap.
+  // Awaited (not fire-and-forget) so serverless function doesn't drop
+  // the request mid-send · adds ~1-2s to action time · visitor sees
+  // "正在預留位置 ..." for that extra moment which is appropriate UX
+  // for a "saving + confirming" action. If RESEND_API_KEY missing or
+  // Resend API errors out, we log + continue — waitlist insert is the
+  // critical action · email is bonus.
+  const emailResult = await sendWaitlistConfirmation({
+    to: email,
+    name,
+    queuePos,
+  });
+  if (!emailResult.ok) {
+    console.warn(
+      `[ZONE27 · WAITLIST · EMAIL_FAILED] queue=${queuePos} email=${email} reason=${emailResult.error}`
+    );
+  }
 
   return { ok: true, queuePos, alreadyReserved: false };
 }
