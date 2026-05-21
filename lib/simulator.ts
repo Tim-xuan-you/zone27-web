@@ -504,3 +504,126 @@ export function topScores(
     .sort((a, b) => b.count - a.count)
     .slice(0, limit);
 }
+
+// ── Run differential distribution buckets ──────────────
+// Round 29 Wave 6 · resolves Round 28 UNRESOLVED:「MatchSimulator
+// N=10K Uncertainty Stripe 太窄」。
+//
+// 10K trials 給的 binomial CI 是 ±0.8% — visually 勉強看見。但
+// 真正的 uncertainty 在 score-level:同樣 winRate 62% / 38% ·
+// 可能 4:3 也可能 12:1。從 scoreCounts 已存資料(免費 · 10K samples
+// 自帶 distribution)拉出 7-bucket histogram 暴露這個更廣的真實 spread。
+//
+// 對標 Bank of England fan-charts + Baseball Savant exit velocity
+// distribution。視覺上 winRate stripe 是 narrow dot · run differential
+// histogram 是 wide curve · 兩者並存 = 完整的 uncertainty story。
+
+export type RunDiffBucket = {
+  /** Stable id for React keys */
+  id: string;
+  /** Display label (Chinese) */
+  label: string;
+  /** Display label (English mono · bilingual scaffold) */
+  labelEn: string;
+  /** Trial count in this bucket */
+  count: number;
+  /** Percentage of total trials (0-100) */
+  pct: number;
+  /** Which side won in this bucket · drives visual color */
+  side: "home" | "tie" | "away";
+};
+
+/**
+ * Group game results by home_runs - away_runs into 7 buckets.
+ * Symmetric around 0 (tie) · 各 side 三層級 (1-3 / 4-6 / 7+).
+ * 7+ tail captures rare blowouts (visualize Pratfall: 極端 outcomes
+ * 真的存在 · 不藏)。
+ */
+export function buildRunDiffBuckets(
+  scoreCounts: Record<string, number>
+): RunDiffBucket[] {
+  const total = Object.values(scoreCounts).reduce((s, n) => s + n, 0);
+  if (total === 0) return [];
+
+  let home7Plus = 0;
+  let home46 = 0;
+  let home13 = 0;
+  let tie = 0;
+  let away13 = 0;
+  let away46 = 0;
+  let away7Plus = 0;
+
+  for (const [score, count] of Object.entries(scoreCounts)) {
+    const parts = score.split("-").map(Number);
+    if (parts.length !== 2) continue;
+    const [home, away] = parts;
+    if (!Number.isFinite(home) || !Number.isFinite(away)) continue;
+    const diff = home - away;
+    if (diff >= 7) home7Plus += count;
+    else if (diff >= 4) home46 += count;
+    else if (diff >= 1) home13 += count;
+    else if (diff === 0) tie += count;
+    else if (diff >= -3) away13 += count;
+    else if (diff >= -6) away46 += count;
+    else away7Plus += count;
+  }
+
+  return [
+    {
+      id: "home-7plus",
+      label: "主場 大勝 7+ 分",
+      labelEn: "HOME · BLOWOUT 7+",
+      count: home7Plus,
+      pct: (home7Plus / total) * 100,
+      side: "home",
+    },
+    {
+      id: "home-46",
+      label: "主場 領先 4-6 分",
+      labelEn: "HOME · LEAD 4-6",
+      count: home46,
+      pct: (home46 / total) * 100,
+      side: "home",
+    },
+    {
+      id: "home-13",
+      label: "主場 險勝 1-3 分",
+      labelEn: "HOME · TIGHT 1-3",
+      count: home13,
+      pct: (home13 / total) * 100,
+      side: "home",
+    },
+    {
+      id: "tie",
+      label: "平手",
+      labelEn: "TIE · 9TH-INN END",
+      count: tie,
+      pct: (tie / total) * 100,
+      side: "tie",
+    },
+    {
+      id: "away-13",
+      label: "客場 險勝 1-3 分",
+      labelEn: "AWAY · TIGHT 1-3",
+      count: away13,
+      pct: (away13 / total) * 100,
+      side: "away",
+    },
+    {
+      id: "away-46",
+      label: "客場 領先 4-6 分",
+      labelEn: "AWAY · LEAD 4-6",
+      count: away46,
+      pct: (away46 / total) * 100,
+      side: "away",
+    },
+    {
+      id: "away-7plus",
+      label: "客場 大勝 7+ 分",
+      labelEn: "AWAY · BLOWOUT 7+",
+      count: away7Plus,
+      pct: (away7Plus / total) * 100,
+      side: "away",
+    },
+  ];
+}

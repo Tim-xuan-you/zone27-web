@@ -33,12 +33,40 @@ export const metadata: Metadata = {
 // ─────────────────────────────────────────────────────
 
 const LAST_UPDATED = "2026-05-21";
-const CYCLE = "Round 28-29 · 2026-05-21 evening · 同日 2 round";
+const CYCLE = "Round 28-29 · 2026-05-21 evening · 同日 6+ waves";
 
 const SHIPPED_THIS_CYCLE: { title: string; body: string; href?: string }[] = [
-  // ── Round 29 ships(2026-05-21 evening · post-Round-28)──
+  // ── Round 29 Wave 6 ship(2026-05-21 evening · post-Wave-5)──
   {
-    title: "[R29] /member NEW · FREE TIER 會員儀表板 PUBLIC PREVIEW",
+    title: "[R29 W6] /lab Run Differential Histogram · score-level uncertainty",
+    body: "解 Round 28 UNRESOLVED「MatchSimulator N=10K Uncertainty Stripe 太窄」。10K trials 自帶 distribution · 從 scoreCounts 拉 7-bucket histogram(主場 7+/4-6/1-3 · TIE · 客場 1-3/4-6/7+)· 0 額外 compute。Bank of England fan-chart + Baseball Savant EV distribution 結合。視覺上 winRate stripe 是 narrow dot · run differential histogram 是 wide curve · 兩者並存完整 uncertainty story。",
+    href: "/lab",
+  },
+  // ── Round 29 Wave 5 ships ──
+  {
+    title: "[R29 W5A] /track-record N=1 First Receipt cinematic",
+    body: "為今晚 22:00+ Tim ingest 第一場 CPBL cpbl-260521-01 設計的 brand 物理時刻。N=0 → N=1 transition 自動 fire 專屬 FirstReceiptHero(2px gold border + soft glow + entry animation · 「★ FIRST RECEIPT · 1 OF 270 PROJECTED」shimmer band · 大字 ENGINE PREDICTED vs ACTUAL · 等大 PROVED/DIVERGED/PUSH verdict)。N>1 自動切回正常 Bloomberg ledger。",
+    href: "/track-record",
+  },
+  {
+    title: "[R29 W5B] /member drag-rank IKEA voting",
+    body: "Linear/PostHog 2025-2026 從 thumb-up 轉 drag-rank pattern。/member Section 03 改 ▲▼ arrow buttons swap-with-neighbor(mobile-safe · 不需 drag-drop dep)· localStorage 持久 · 「因為 ___」textarea 280 字 · ranked prioritization 比 binary vote 心理投資高(IKEA Effect cranked)。",
+    href: "/member",
+  },
+  {
+    title: "[R29 W5C] /member memory resurfacing strip",
+    body: "Day One「On This Day」accumulating-over-time framing 的 lightweight 版。只在 history.length > 0 才 render · 顯示「YOU'VE ACCUMULATED · 您已累積 N 場 over D 天」 · Endowment Effect 真正 trigger 是「我擁有 X」不是「我會失去 X」。Strava Annual Best Efforts + GitHub contribution graph 同邏輯。",
+    href: "/member",
+  },
+  // ── Round 29 Wave 4 ships ──
+  {
+    title: "[R29 W4] /member 2026 research-driven patterns (Agent A #2/#3/#4)",
+    body: "Pattern #2 Context Metadata Strip(Atlassian + Vercel + MIT Tech Review April 2026)· Pratfall + Costly Signaling · 「資料位置 · localStorage · 上次寫入 · 我們看不到 · 0 cookies · 0 GA · 0 pixel」visible-presence trust signal。Pattern #3 Differentiated Empty State(NN/g 2026 guidelines)· first-time visitor vs filtered-zero 不同 copy · 不放 marketing。Pattern #4「近況 · 引擎」3-dated-lines micro-rail(Stratechery Plus + Patreon Jun-26 + GitHub release-info)· 純 dated facts · 不是 gamification。",
+    href: "/member",
+  },
+  // ── Round 29 Wave 1-2 ships(earlier same day)──
+  {
+    title: "[R29 W2] /member NEW · FREE TIER 會員儀表板 PUBLIC PREVIEW",
     body: "Tim 直擊「會員他們自己的頁面又在哪裡?多以心理學角度去出發。」答案 = 4 cognitive bias 同時 fire 的 preview · ψ Endowment Effect(用 visitor 自己 localStorage sim history 當 preview data)· ψ IKEA Effect(投票引擎下一步)· ψ Loss Aversion(個人 calibration record)· ψ Collection(您自己的 trophy)。不假裝 functionality 已存在 · launch timeline 公開(Phase 1 Q3 auth · Phase 2 Q3+ TapPay · Phase 3 Q4+ CMS)。",
     href: "/member",
   },
@@ -131,10 +159,9 @@ const UNRESOLVED: { title: string; body: string }[] = [
     body: "Founders 27 不需要 system(銀行轉帳手工 onboard · per docs/MANUAL-ONBOARDING)· 可以今天就第一個會員入帳。但目前 /founders 仍是 waitlist 框架(收 email · 等開賣通知)。Round 30+ 可考慮 reframe 為「現在 actively accepting reservations · Tim 親手 confirm」。Brand decision · 等 Tim 拍板「我準備好接第一筆轉帳」。",
   },
   // ── Round 28 still-unresolved ──
-  {
-    title: "[R28] MatchSimulator N=10K · Uncertainty Stripe 太窄",
-    body: "10K trials 給的 binomial CI 是 ±0.8% (90%) · 視覺上勉強看見。HeroLiveCard N=1000 的 CI ±2.5% 較明顯。長期可能要顯示 score-differential distribution(從 scoreCounts 已存資料)而不是 winRate CI · 暴露更廣的 uncertainty。",
-  },
+  // (「MatchSimulator N=10K Uncertainty Stripe 太窄」 已 Wave 6 RESOLVED ·
+  // 新加 Run Differential Histogram 暴露 score-level distribution · 已從
+  // UNRESOLVED 移除 · entry 在上方 SHIPPED [R29 W6])
   {
     title: "/now 本身沒 weekly schedule promise",
     body: "Stratechery 的 cadence-promise pattern(每週五 18:00 TPE)會 commit Tim 到 weekly workload · brand IP「不打擾就是禮物」可能不喜歡 schedule-driven。決定 defer 給 Tim brand 拍板。此頁 cadence = 「有東西可以說的時候才更新」。",

@@ -11,8 +11,10 @@ import {
   applyBatch,
   initialStats,
   topScores,
+  buildRunDiffBuckets,
   type RunningStats,
   type GameResult,
+  type RunDiffBucket,
 } from "@/lib/simulator";
 import { saveSimHistory } from "@/lib/sim-history";
 import { FOUNDERS_REMAINING } from "@/lib/founders-stats";
@@ -156,6 +158,12 @@ export default function MatchSimulator({ match }: Props) {
   const avgRuns =
     stats.completed > 0 ? stats.totalRuns / stats.completed : 0;
   const distribution = topScores(stats.scoreCounts, 5);
+  const diffBuckets = buildRunDiffBuckets(stats.scoreCounts);
+  // Max bucket pct for normalizing bar widths in histogram
+  const maxBucketPct = diffBuckets.reduce(
+    (m, b) => Math.max(m, b.pct),
+    0
+  );
 
   return (
     <>
@@ -337,6 +345,56 @@ export default function MatchSimulator({ match }: Props) {
         )}
       </section>
 
+      {/* ── RUN DIFFERENTIAL HISTOGRAM ────────────
+          Round 29 Wave 6 · Resolves Round 28 UNRESOLVED「N=10K
+          Uncertainty Stripe 太窄」(±0.8% CI 視覺不可見)。10K trials
+          自帶 score-level distribution · 從 scoreCounts 拉 7-bucket
+          histogram(主場 7+/4-6/1-3 · TIE · 客場 1-3/4-6/7+)·
+          暴露真實 spread。
+          視覺:HOME 領先 gold gradient · TIE neutral · AWAY 領先 mute ·
+          center-anchored layout(0 line 在中央 · 對稱兩側)·
+          Bank of England fan chart + Baseball Savant EV histogram 結合。
+          只 render when 至少有 1 場 sim · 同 score distribution 條件。 */}
+      {diffBuckets.length > 0 && diffBuckets.some((b) => b.count > 0) && (
+        <section className="pb-14" aria-labelledby="run-diff-heading">
+          <div className="flex items-baseline justify-between flex-wrap gap-2 mb-2">
+            <p
+              id="run-diff-heading"
+              className="font-mono text-gold/70 text-[10px] tracking-[0.35em]"
+            >
+              / 比分差距分布(score-level uncertainty)
+            </p>
+            <p
+              lang="en"
+              className="font-mono text-mute/60 text-[9px] tracking-[0.3em]"
+              title="N=10K trials 自帶 distribution · 不需 bootstrap · 不需額外 sims"
+            >
+              N = {stats.completed.toLocaleString()} · 0 EXTRA COMPUTE
+            </p>
+          </div>
+          <p className="font-mono text-mute/70 text-[10px] tracking-[0.25em] mb-6 leading-relaxed">
+            ▸ Round 28 Uncertainty Stripe 顯示 winRate 的 ±0.8% binomial CI
+            (太窄) · 這裡顯示真正的 spread:同樣 winRate 可能 4:3 也可能 12:1。
+          </p>
+          <div className="bg-slate/40 border border-line/70 p-5 sm:p-7">
+            <ul className="space-y-2.5 list-none pl-0">
+              {diffBuckets.map((bucket) => (
+                <RunDiffRow
+                  key={bucket.id}
+                  bucket={bucket}
+                  maxPct={maxBucketPct}
+                />
+              ))}
+            </ul>
+            <p className="font-mono text-mute/60 text-[9px] tracking-[0.3em] leading-relaxed mt-5 pt-4 border-t border-line/40">
+              ▸ <span lang="en">GOLD</span> = 主場勝 ·{" "}
+              <span lang="en">MUTE</span> = 客場勝 · TIE = 9 局結束 0:0(極罕見)
+              · 7+ 分差 = blowout tail(不藏)
+            </p>
+          </div>
+        </section>
+      )}
+
       {/* ── COMPLETION CARD ──────────────────────── */}
       {done && (
         <section className="pb-14">
@@ -410,6 +468,73 @@ export default function MatchSimulator({ match }: Props) {
         />
       </section>
     </>
+  );
+}
+
+// ── Run Differential Histogram row ─────────────────────
+// Round 29 Wave 6 · One row in the 7-bucket run-differential histogram.
+// Bar width normalized against the max bucket pct in the set so visual
+// differences read clearly even at low sample counts.
+function RunDiffRow({
+  bucket,
+  maxPct,
+}: {
+  bucket: RunDiffBucket;
+  maxPct: number;
+}) {
+  const widthPct = maxPct > 0 ? (bucket.pct / maxPct) * 100 : 0;
+  const sideColor =
+    bucket.side === "home"
+      ? "bg-gold"
+      : bucket.side === "tie"
+      ? "bg-bone/60"
+      : "bg-mute/70";
+  const labelColor =
+    bucket.side === "home"
+      ? "text-gold"
+      : bucket.side === "tie"
+      ? "text-bone/80"
+      : "text-mute";
+  const pctColor =
+    bucket.side === "home"
+      ? "text-gold"
+      : bucket.side === "tie"
+      ? "text-bone/80"
+      : "text-mute";
+  return (
+    <li className="grid grid-cols-[140px_1fr_60px] sm:grid-cols-[180px_1fr_70px] gap-3 items-center">
+      <div>
+        <p className={`text-xs sm:text-sm leading-tight ${labelColor}`}>
+          {bucket.label}
+        </p>
+        <p
+          lang="en"
+          className="font-mono text-mute/60 text-[9px] tracking-[0.2em] mt-0.5"
+        >
+          {bucket.labelEn}
+        </p>
+      </div>
+      <div
+        className="relative h-2 bg-line/40 rounded-sm overflow-hidden"
+        role="img"
+        aria-label={`${bucket.label} · ${bucket.pct.toFixed(1)}% of 10K trials`}
+      >
+        <div
+          className={`absolute top-0 left-0 h-full ${sideColor} ${
+            bucket.side === "home" ? "glow-gold" : ""
+          }`}
+          style={{
+            width: `${widthPct}%`,
+            transition: "width 250ms ease-out",
+          }}
+        />
+      </div>
+      <span
+        className={`font-mono tabular text-xs sm:text-sm text-right ${pctColor}`}
+      >
+        {bucket.pct.toFixed(1)}%
+      </span>
+    </li>
   );
 }
 
