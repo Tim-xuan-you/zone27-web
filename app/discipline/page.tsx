@@ -6,9 +6,9 @@ import CopyLinkButton from "@/components/CopyLinkButton";
 import RelatedReading from "@/components/RelatedReading";
 
 export const metadata: Metadata = {
-  title: "鐵律 · Operating Discipline · Buffett · Musk · Costco",
+  title: "鐵律 · Operating Discipline · Buffett · Musk · Costco · Jobs",
   description:
-    "ZONE 27 從 Buffett 的長期主義 + Musk 的第一原理 + Costco 的會員制與品牌完整性,提煉的 5 個我們不能違反的操作鐵律。三位都不靠秘密賺錢 · 都靠紀律。這頁是我們的 owner's manual。",
+    "ZONE 27 從 Buffett 的長期主義 + Musk 的第一原理 + Costco 的會員制 + Jobs 的「Say-NO 是設計」+ insanely great 細節,提煉的 4 個我們不能違反的操作鐵律。四位都不靠秘密賺錢 · 都靠紀律。這頁是我們的 owner's manual。",
 };
 
 // ── ZONE 27 · /discipline — Operating Iron Rules ────────
@@ -68,13 +68,13 @@ export default function DisciplinePage() {
             <h1 className="text-4xl sm:text-5xl text-bone font-light tracking-tight leading-[1.1] mb-6">
               鐵律
               <span className="block mt-3 font-mono text-gold text-lg sm:text-xl tracking-[0.25em]">
-                BUFFETT · MUSK · COSTCO
+                BUFFETT · MUSK · COSTCO · JOBS
               </span>
             </h1>
             <p className="text-mute text-base leading-relaxed mb-8 max-w-2xl">
               ZONE 27 不靠秘密賺錢 · 靠紀律。
-              這頁是我們的 owner&apos;s manual — 5 個提煉自 Buffett 長期主義 +
-              Musk 第一原理 + Costco 會員制的操作鐵律,
+              這頁是我們的 owner&apos;s manual — 4 個提煉自 Buffett 長期主義 +
+              Musk 第一原理 + Costco 會員制 + Jobs「Say-NO 是設計」的操作鐵律,
               <strong className="text-bone">違反任何一條 · ZONE 27 就不再是 ZONE 27</strong>。
             </p>
 
@@ -83,7 +83,7 @@ export default function DisciplinePage() {
               className="font-mono text-mute/70 text-[10px] tracking-[0.3em] leading-relaxed"
             >
               NOT ASPIRATIONAL · NOT FANBOY · NOT CORPORATE WORSHIP ·
-              JUST 5 RULES WE WILL NOT VIOLATE
+              JUST 4 RULES WE WILL NOT VIOLATE
             </p>
           </header>
 
@@ -259,12 +259,96 @@ export default function DisciplinePage() {
             </List>
           </RuleSection>
 
+          {/* ── 04 JOBS ────────────────────────────── */}
+          <RuleSection
+            no="04"
+            label="JOBS"
+            zh="Say-NO 是設計 + insanely great 細節"
+            quote="Innovation is saying no to a thousand things."
+            source="— Steve Jobs · Apple WWDC 1997"
+          >
+            <P>
+              Apple 1996 年距離破產 90 天。Jobs 1997 重返後 · 第一件事不是「加新產品」·
+              是<strong className="text-bone">砍</strong>。把 350+ 個 product SKU
+              全砍 · 留下一個 2×2 矩陣(consumer / pro × desktop / portable)·
+              一年內公司轉盈。<strong className="text-bone">Subtraction = strategy。</strong>
+            </P>
+            <P>
+              13 年後(1997 → 2010)Apple 從 bankruptcy 邊緣變成世界市值最高公司。
+              核心方法不是「加功能」 — 是「拒絕 / 對齊 / 細節到瘋」。
+            </P>
+
+            <Subhead>ZONE 27 應用</Subhead>
+            <List>
+              <Item label="Say-NO is the design">
+                我們的 brand IP 結晶寫進{" "}
+                <Link href="/manifesto" className="text-gold hover:underline">
+                  /manifesto
+                </Link>{" "}
+                4 倒置 ·{" "}
+                <Link href="/coverage" className="text-gold hover:underline">
+                  /coverage
+                </Link>{" "}
+                NEVER COVER list ·{" "}
+                <Link href="/roadmap" className="text-gold hover:underline">
+                  /roadmap
+                </Link>{" "}
+                BRAND BOUNDARIES — 全是 Jobs subtraction lens 的體現。「我們不做的事」
+                就是設計本身。
+              </Item>
+              <Item label="End-to-end ownership">
+                Apple 做硬體 + 軟體 + 零售店 · 全棧自己控。ZONE 27 同邏輯 · Tim 親手
+                onboard 每位 Founder(per{" "}
+                <code className="font-mono text-gold/90 text-[12px] px-1 py-px bg-ink/40 border border-line/60">
+                  docs/MANUAL-ONBOARDING.md
+                </code>
+                )· 親手 ingest 每場 CPBL box score · 親手 curate Z27 LEXICON。
+                <strong className="text-bone">不外包</strong>。
+              </Item>
+              <Item label="Quality of 1 > Quantity of 100">
+                Jobs 名言「我寧願有 1 個 A 級人才,不要 100 個 B 級」。
+                ZONE 27 結構化版:270 限量席位 = concentrate effort on 270 個關係 ·
+                不擴張到 10,000 用戶。每位 Founder Tim 投資 12-15 分鐘
+                onboarding · 270 × 15 min = ~70 小時 · 完全可控。
+              </Item>
+              <Item label="Design is how it works">
+                Jobs 1996 WIRED:「Design is not just what it looks like and feels
+                like. Design is how it works.」ZONE 27 物理證據:focus-visible 金色
+                ring(only on 鍵盤 nav)· Geist Mono slashed-zero(0 vs O 一眼分)·
+                Chinese text-spacing-trim(CJK 標點修正)·{" "}
+                <Link href="/audit" className="text-gold hover:underline">
+                  /audit
+                </Link>{" "}
+                @media print(學術 PDF 級輸出)— 都是「功能 = 美學」對齊。
+              </Item>
+              <Item label="Insanely Great 細節">
+                Jobs 著名為「別人不會注意的細節」抓狂。ZONE 27 同樣執著:Cmd-K palette
+                沒裝 fuse.js / 沒 telemetry / 沒 recently-used(per disclosure
+                philosophy)· ProvenanceStamp 在每場引擎輸出底下加 commit SHA(可截圖
+                citable)· chip-pop spring animation 只有 hover footer 才看得到 ·
+                scintillate seats 在 /leaderboard 隨機輕閃。<strong className="text-bone">
+                這些細節 90% 訪客沒注意 · 但 10% die-hard fans 看到後會知道我們認真</strong>。
+              </Item>
+            </List>
+
+            <P className="text-mute/70 mt-8">
+              <strong className="text-bone">什麼不取(同 Musk methodology filter):</strong>
+              {" "}reality distortion field 跟「不靠直覺只看演算法」反向 · 不取 ·
+              公開羞辱員工(我們 solo 沒員工)· 不取 · 商業機密狂熱(直接打{" "}
+              <Link href="/manifesto" className="text-gold hover:underline">
+                /manifesto
+              </Link>{" "}
+              V「方法公開」)· 不取 · aesthetic > 實質(我們是量化品牌 · 不是視覺品牌)·
+              不取。<strong className="text-bone">取 craft + subtraction · 拒 personality + secrecy</strong>。
+            </P>
+          </RuleSection>
+
           {/* ── SHAREABLE PULL-QUOTE ─────────────────── */}
           <blockquote
             className="mt-16 mx-auto max-w-2xl border-l-2 border-gold/60 pl-6 sm:pl-8 py-2 font-light text-bone text-2xl sm:text-3xl leading-snug"
             style={{ textWrap: "balance" }}
           >
-            &ldquo;三個世界級品牌 · 三套不同方法 ·{" "}
+            &ldquo;四個世界級品牌 · 四套不同方法 ·{" "}
             <span className="text-gold">同一個共識</span>:
             <span className="block mt-3">
               不靠<span className="text-gold">秘密</span>賺錢 · 靠
@@ -275,47 +359,47 @@ export default function DisciplinePage() {
             </footer>
           </blockquote>
 
-          {/* ── 04 SYNTHESIS ───────────────────────── */}
+          {/* ── 05 SYNTHESIS ───────────────────────── */}
           <RuleSection
-            no="04"
+            no="05"
             label="SYNTHESIS"
-            zh="三人共同 4 軸"
+            zh="四人共同 4 軸"
             quote="The secret to long-term success isn&apos;t a secret at all."
-            source="— ZONE 27 synthesis · derived from Buffett · Musk · Costco"
+            source="— ZONE 27 synthesis · derived from Buffett · Musk · Costco · Jobs"
           >
-            <P>三個案例三套 playbook · 但 4 個共同軸線高度重疊:</P>
+            <P>四個案例四套 playbook · 但 4 個共同軸線高度重疊:</P>
 
             <SynthRow
               axis="A · 長期 > 短期"
-              examples="Buffett 26 年持 Coca-Cola · Musk 10-year SpaceX roadmap · Costco 7 年才漲一次會費"
+              examples="Buffett 26 年持 Coca-Cola · Musk 10-year SpaceX roadmap · Costco 7 年才漲一次會費 · Jobs iPhone 從 2000 概念到 2007 發布 7 年"
               z27="270 終身席位 · 不收量化分數 · 拒絕季度 KPI 誘惑"
             />
             <SynthRow
               axis="B · 集中 > 分散"
-              examples="Buffett 重押少數標的 · Musk 砍 90% 不必要 · Costco SKU < 4,000 vs Walmart 100K"
-              z27="只覆蓋 MLB + 3 CPBL · 不擴張到不能誠實算的賽事"
+              examples="Buffett 重押少數標的 · Musk 砍 90% 不必要 · Costco SKU < 4,000 vs Walmart 100K · Jobs 350 SKU → 4 product matrix"
+              z27="只覆蓋 MLB + 1 CPBL · 不擴張到不能誠實算的賽事"
             />
             <SynthRow
               axis="C · 信任 > 行銷"
-              examples="Buffett owner's letter 每年寫實話 · Musk Twitter 透明溝通 · Costco 拒打廣告 90% 續訂"
+              examples="Buffett owner's letter 每年寫實話 · Musk Twitter 透明溝通 · Costco 拒打廣告 90% 續訂 · Jobs Apple Stores 直營 · 不靠 wholesale ad spend"
               z27="/audit 5 sections + /manifesto 4 axioms · 沒 ad spend · footer FUNDED BY FOUNDERS"
             />
             <SynthRow
               axis="D · 守紀律拒絕容易"
-              examples="Buffett 拒網路泡沫 · Musk 親手算每零件 cost · Costco 14% 毛利上限自綁"
-              z27="拒 LINE 老師模式 · 拒運彩抽佣 · 拒博彩寄生 · 拒 user tracking"
+              examples="Buffett 拒網路泡沫 · Musk 親手算每零件 cost · Costco 14% 毛利上限自綁 · Jobs 拒 stylus (iPhone 2007) · 拒 netbook · 拒 7-inch tablet"
+              z27="拒 LINE 老師模式 · 拒運彩抽佣 · 拒博彩寄生 · 拒 user tracking · 拒 multi-engine paywall"
             />
 
             <P className="text-mute/70">
-              我們不是在「假裝是 Buffett」 — 我們在
+              我們不是在「假裝是 Buffett / Jobs」 — 我們在
               <strong className="text-bone">借用同一套紀律邏輯</strong>,
-              因為它跨三個產業都成立 = 大概是對的。
+              因為它跨四個產業都成立 = 大概是對的。
             </P>
           </RuleSection>
 
-          {/* ── 05 WHAT THIS PAGE IS NOT ────────────── */}
+          {/* ── 06 WHAT THIS PAGE IS NOT ────────────── */}
           <RuleSection
-            no="05"
+            no="06"
             label="DISCLAIMER"
             zh="這頁不是什麼"
             quote="The most dangerous thing for a brand is to sound like every other brand."
@@ -323,7 +407,7 @@ export default function DisciplinePage() {
           >
             <List>
               <Item label="不是吹捧">
-                我們不認為自己是 Buffett / Musk / Costco · 也不假裝有他們的規模或視野。
+                我們不認為自己是 Buffett / Musk / Costco / Jobs · 也不假裝有他們的規模或視野。
               </Item>
               <Item label="不是 aspirational">
                 這 5 條鐵律是<strong className="text-bone">已執行的</strong>事 · 寫在 /audit /privacy /coverage /about · 不是「願景」。
@@ -367,6 +451,16 @@ export default function DisciplinePage() {
                 </ExtLink>
               </li>
               <li>
+                ▸ Jobs subtraction strategy:{" "}
+                <ExtLink href="https://en.wikipedia.org/wiki/Steve_Jobs_(book)">
+                  Walter Isaacson · Steve Jobs biography 2011
+                </ExtLink>
+                {" + "}
+                <ExtLink href="https://www.wired.com/1996/02/jobs-2/">
+                  WIRED 1996 Jobs interview
+                </ExtLink>
+              </li>
+              <li>
                 ▸ ZONE 27 對應的執行頁:{" "}
                 <Link href="/audit" className="text-gold hover:underline">
                   /audit
@@ -388,7 +482,8 @@ export default function DisciplinePage() {
 
             <p className="mt-12 font-mono text-mute text-[10px] tracking-[0.25em]">
               本頁採 Buffett 1996 Owner&apos;s Manual + Costco Code of Ethics
-              + Musk 5-step algorithm 三套 primary source · 零吹捧語言原則
+              + Musk 5-step algorithm + Jobs Isaacson 2011 biography 四套
+              primary source · 零吹捧語言原則
             </p>
 
             <div className="mt-10 flex items-center justify-center">
