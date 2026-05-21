@@ -111,9 +111,11 @@ export default async function AdminPage() {
             <KpiCard
               label="WAITLIST"
               zh="等候名單"
-              value={waitlistCount}
+              value={waitlistCount === -1 ? "—" : waitlistCount}
               hint={
-                waitlistCount === 0
+                waitlistCount === -1
+                  ? "Supabase RPC 暫時不可達 · 請開 Supabase Studio 確認"
+                  : waitlistCount === 0
                   ? "尚無人加入 · 第一個就會是 #001"
                   : `${waitlistCount} 個 email · Supabase Tokyo`
               }

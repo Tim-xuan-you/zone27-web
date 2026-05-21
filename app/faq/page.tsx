@@ -13,6 +13,8 @@ export const metadata: Metadata = {
 type QA = {
   q: string;
   a: React.ReactNode;
+  /** Optional anchor id · enables /faq#mlm style deep links */
+  id?: string;
 };
 
 type Category = {
@@ -141,6 +143,7 @@ const CATEGORIES: Category[] = [
       },
       {
         q: "ZONE 27 跟傳銷(MLM / 直銷 / 安麗式)有什麼不同?",
+        id: "mlm",
         a: (
           <>
             <strong className="text-bone">經濟結構完全相反。</strong>{" "}
@@ -442,7 +445,13 @@ export default function FaqPage() {
 
           <div className="space-y-10">
             {c.qas.map((qa, qi) => (
-              <QAEntry key={qi} num={qi + 1} q={qa.q} a={qa.a} />
+              <QAEntry
+                key={qi}
+                num={qi + 1}
+                q={qa.q}
+                a={qa.a}
+                anchorId={qa.id}
+              />
             ))}
           </div>
         </section>
@@ -489,13 +498,20 @@ function QAEntry({
   num,
   q,
   a,
+  anchorId,
 }: {
   num: number;
   q: string;
   a: React.ReactNode;
+  anchorId?: string;
 }) {
   return (
-    <article className="border-l-2 border-gold/30 pl-5 sm:pl-6">
+    <article
+      id={anchorId}
+      className={`border-l-2 border-gold/30 pl-5 sm:pl-6 ${
+        anchorId ? "scroll-mt-24" : ""
+      }`}
+    >
       <div className="flex items-baseline gap-3 mb-3">
         <span className="font-mono text-gold/70 text-[10px] tracking-[0.3em] tabular">
           Q · {String(num).padStart(2, "0")}

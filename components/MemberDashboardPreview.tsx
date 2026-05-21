@@ -707,7 +707,7 @@ function RankedItemRow({
           onClick={onMoveUp}
           disabled={!canMoveUp}
           aria-label={`把「${item.title}」往上移`}
-          className={`w-9 h-9 border font-mono text-xs flex items-center justify-center transition-colors ${
+          className={`w-10 h-10 border font-mono text-xs flex items-center justify-center transition-colors ${
             canMoveUp
               ? "border-gold/40 text-gold hover:border-gold hover:bg-gold/10 cursor-pointer"
               : "border-line/30 text-mute/30 cursor-not-allowed"
@@ -720,7 +720,7 @@ function RankedItemRow({
           onClick={onMoveDown}
           disabled={!canMoveDown}
           aria-label={`把「${item.title}」往下移`}
-          className={`w-9 h-9 border font-mono text-xs flex items-center justify-center transition-colors ${
+          className={`w-10 h-10 border font-mono text-xs flex items-center justify-center transition-colors ${
             canMoveDown
               ? "border-gold/40 text-gold hover:border-gold hover:bg-gold/10 cursor-pointer"
               : "border-line/30 text-mute/30 cursor-not-allowed"

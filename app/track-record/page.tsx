@@ -626,7 +626,7 @@ function FirstReceiptHero({ match }: { match: Match }) {
               </span>
             </p>
             <p className="font-mono text-mute text-[10px] tracking-[0.25em] mt-3 tabular">
-              FAVORITE · {favoriteName} · CONF {match.aiConfidence}/100
+              FAVORITE · {favoriteName} · CONF {match.aiConfidence ?? 0}/100
             </p>
           </div>
           <div className="border-l-2 border-bone/30 pl-5 pr-2 py-2 sm:text-right sm:border-l-0 sm:border-r-2 sm:pr-5 sm:pl-2">
