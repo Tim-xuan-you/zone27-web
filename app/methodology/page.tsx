@@ -167,12 +167,12 @@ repeat 10,000 times → aggregate
           BOUNDARIES deleted (consolidated into /audit Section 03). */}
       <Section no="03" label="WHAT'S NEXT" zh="路線圖 + 出處">
         <p>
-          未來引擎版本(v0.3 加打者品質 · v0.4 加球場因素 · v0.5 加牛棚切換)
+          未來引擎版本(v0.3 加球場因素 + 打者品質 · v0.4 球場細節 · v0.5 牛棚切換)
           的計畫已公開在
           <Link href="/roadmap" className="text-gold underline-offset-4 hover:underline mx-1">
             /roadmap
           </Link>
-          · 含 LOCKED / EXPLORING / EXPLICIT NO 三段。
+          · 含 LOCKED / EXPLORING / BRAND BOUNDARIES 三段。
           每次升級都出現在
           <Link href="/changelog" className="text-gold underline-offset-4 hover:underline mx-1">
             /changelog

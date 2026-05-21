@@ -43,13 +43,13 @@ const LOCKED: { quarter: string; items: RoadmapItem[] }[] = [
     items: [
       {
         title: "✓ SHIPPED · /track-record 公開戰績 ledger",
-        body: "2026-05-21 上線 · Bloomberg-terminal aesthetic · PROVED 跟 DIVERGED 等大列出 · 從 N=0 honest empty state 起跳。第一筆預定今晚收錄。",
+        body: "2026-05-21 上線 · Bloomberg-terminal aesthetic · PROVED 跟 DIVERGED(定義見 /glossary Z27 LEXICON)等大列出 · 從 N=0 honest empty state 起跳。第一筆預定今晚收錄。",
         evidenceHref: "/track-record",
         evidenceLabel: "/track-record",
       },
       {
         title: "✓ SHIPPED · Cmd-K 全站快搜 palette",
-        body: "2026-05-21 上線 · 23 routes 索引化 · ⌘K (Mac) / Ctrl-K (Win) 開啟 · ↑↓ 導航 · ↵ 開啟。無 fuse.js 無 telemetry 無 recently-used (per disclosure philosophy)。",
+        body: "2026-05-21 上線 · 24 routes 索引化 · ⌘K (Mac) / Ctrl-K (Win) 開啟 · ↑↓ 導航 · ↵ 開啟 · mobile ⌕ icon trigger (Round 12)。無 fuse.js 無 telemetry 無 recently-used (per disclosure philosophy)。",
       },
       {
         title: "CPBL 每日 ingestion 持續累積 ledger",
