@@ -97,11 +97,15 @@ export default function Footer() {
       id="site-footer"
       className="mt-auto border-t border-line/40 scroll-mt-4"
     >
-      <div className="mx-auto max-w-6xl px-6 sm:px-10 py-12">
+      <div className="mx-auto max-w-6xl px-6 sm:px-10 py-8 sm:py-12">
         {/* ── 4-column grouped grid (Stripe/Linear/Vercel pattern) ──
-            Desktop · 4 columns · Tablet · 2 · Mobile · 1
-            Each group has English kicker + zh group label + 3-4 items. */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-10 pb-10">
+            Desktop · 4 columns · Tablet · 2 · Mobile · HIDDEN
+            Round 5: stacking 18 links on mobile = 1.5 viewport of
+            scroll for the footer alone. Nav already has mobile
+            bottom row with 4 main items; this grid duplicates that.
+            Mobile users navigate via Nav + Cmd-K + sticky CTA;
+            footer on mobile = legal + brand only. */}
+        <div className="hidden sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-10 pb-10">
           {FOOTER_GROUPS.map((group) => (
             <div key={group.enLabel}>
               <p

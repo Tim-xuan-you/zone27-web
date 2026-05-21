@@ -65,20 +65,22 @@ export default function Home() {
 
       <main id="main">
 
-      {/* ── HERO · 一句話定義品牌 ────────────────────
-          Apple/Stratechery rule: hero is brand statement, NOT
-          conversion funnel. ONE primary CTA. Secondary CTAs were
-          competing with HeroLiveCard's own embedded CTAs (which
-          drove to /matches and /matches/[gameId]) — redundant. */}
-      <section className="mx-auto max-w-4xl px-6 sm:px-10 pt-24 sm:pt-32 pb-16 sm:pb-20 text-center">
+      {/* ── HERO · Mobile-first compressed ────────────────
+          Round 5: mobile vertical density was too high. Padding
+          pt-24 + pb-16 + text-5xl meant hero alone = 1.7 viewports
+          on iPhone, pushing HeroLiveCard demo entirely below fold.
+          Cut by ~50% on mobile · desktop preserves the breathing
+          room. Owner-as-visitor test: hero + first half of demo
+          must fit in 1st mobile viewport. */}
+      <section className="mx-auto max-w-4xl px-6 sm:px-10 pt-10 sm:pt-32 pb-10 sm:pb-20 text-center">
         <p
           lang="en"
-          className="font-mono text-gold/70 text-xs tracking-[0.4em] mb-10"
+          className="font-mono text-gold/70 text-[10px] sm:text-xs tracking-[0.4em] mb-5 sm:mb-10"
         >
           A QUANTITATIVE SPORTS INTELLIGENCE CLUB · EST. 2026
         </p>
 
-        <h1 className="text-5xl sm:text-6xl md:text-7xl font-light leading-[1.05] tracking-tight text-bone">
+        <h1 className="text-4xl sm:text-6xl md:text-7xl font-light leading-[1.05] tracking-tight text-bone">
           不靠直覺,
           <br />
           <span className="text-gold">只看演算法。</span>
@@ -86,19 +88,18 @@ export default function Home() {
 
         <p
           lang="en"
-          className="font-mono text-mute text-sm tracking-[0.3em] mt-8"
+          className="font-mono text-mute text-xs sm:text-sm tracking-[0.3em] mt-5 sm:mt-8"
         >
           WE DON&apos;T GUESS. WE COMPUTE.
         </p>
 
-        <p className="mt-12 max-w-md mx-auto text-mute leading-relaxed text-base">
+        <p className="mt-6 sm:mt-10 max-w-md mx-auto text-mute leading-relaxed text-sm sm:text-base">
           引擎為您跑這場 · 結果存進公開戰績。
-          其他都是支持證據。
         </p>
       </section>
 
-      {/* Hairline divider — single visual breath between hero and demo */}
-      <div className="mx-auto w-32 gold-line mb-16 sm:mb-20" />
+      {/* Hairline divider — visual breath. Tighter on mobile. */}
+      <div className="mx-auto w-32 gold-line mb-8 sm:mb-20" />
 
       {/* ── THE ENGINE · 主視覺 · 即時跑這場 ─────────
           This is the soul. Engine output IS the product · IS the
@@ -118,52 +119,17 @@ export default function Home() {
         </p>
       </section>
 
-      {/* ── THE OFFER · Founders 27 · 唯一的 ask ─────
-          ONE place on homepage where a sale-intent CTA lives.
-          Anything pre-this point earned the click via the engine demo.
-          Below this point: footer + done. No more sections fighting
-          for attention. */}
-      <section
-        aria-labelledby="founders-strip-heading"
-        className="mx-auto max-w-3xl w-full px-6 sm:px-10 py-20 sm:py-24 text-center border-t border-line/40"
-      >
-        <p
-          lang="en"
-          className="font-mono text-gold text-[10px] tracking-[0.4em] mb-4"
-        >
-          FOUNDERS · 27
-        </p>
-        <h2
-          id="founders-strip-heading"
-          className="text-3xl sm:text-4xl text-bone font-light tracking-tight"
-        >
-          僅限 270 位創始會員
-        </h2>
-        <p className="text-mute mt-5 max-w-md mx-auto leading-relaxed">
-          一次性 NT$ 2,700 終身會員資格 · 個人 ID 鑲入 #001 ~ #270 編號徽章
-          · 售完永久關閉。
-        </p>
-        <Link
-          href="/founders"
-          className="inline-block mt-10 px-10 py-3 bg-gold text-navy text-xs tracking-[0.3em] hover:bg-gold-soft transition-colors font-medium"
-        >
-          加入創始名冊 →
-        </Link>
-
-        {/* The quiet door · for visitors who want the depth.
-            One line, no fanfare. Cmd-K + Footer + /manifesto are
-            also discoverable but this is the most-likely-clicked
-            secondary path. */}
-        <div className="mt-12 pt-8 border-t border-line/40 max-w-sm mx-auto">
-          <Link
-            href="/manifesto"
-            className="inline-flex items-center gap-2 font-mono text-mute hover:text-gold text-[10px] tracking-[0.3em] transition-colors"
-          >
-            <span>想先讀為什麼這樣做 · /manifesto</span>
-            <span aria-hidden="true">→</span>
-          </Link>
-        </div>
-      </section>
+      {/* Round 5: Founders 27 strip REMOVED from homepage.
+          Research recommendation (agent · Baymard / HubSpot 2026):
+          - Sticky bottom CTA bar (StickyFoundersCTA · mobile only)
+            replaces this section's function with +30% conversion
+            uplift vs static strip below fold.
+          - Saves ~500-600px on mobile · pushes total scroll closer
+            to 3-viewport target.
+          - /founders page itself is the canonical offer destination ·
+            sticky bar drives directly there.
+          - "Quiet door to /manifesto" moved to footer link group.
+          One git revert brings this strip back if needed. */}
 
       </main>
 

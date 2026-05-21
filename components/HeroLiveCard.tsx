@@ -80,10 +80,10 @@ export default function HeroLiveCard({ match }: { match: Match }) {
   return (
     <article
       aria-label={`Live Monte Carlo simulation: ${match.home.name} versus ${match.away.name}`}
-      className="bg-slate/70 border border-line/80 glow-soft p-8 sm:p-12"
+      className="bg-slate/70 border border-line/80 glow-soft p-5 sm:p-12"
     >
-      {/* Card header */}
-      <div className="flex items-center justify-between mb-10 flex-wrap gap-3">
+      {/* Card header — tighter mb on mobile */}
+      <div className="flex items-center justify-between mb-5 sm:mb-10 flex-wrap gap-3">
         <div className="flex items-center gap-3 flex-wrap">
           <span
             aria-hidden="true"
@@ -107,51 +107,51 @@ export default function HeroLiveCard({ match }: { match: Match }) {
         </span>
       </div>
 
-      {/* Team labels */}
-      <div className="grid grid-cols-2 gap-6 mb-6">
+      {/* Team labels — tighter on mobile */}
+      <div className="grid grid-cols-2 gap-4 sm:gap-6 mb-4 sm:mb-6">
         <div>
-          <p className="font-mono text-mute text-[10px] tracking-[0.3em] mb-2">
+          <p className="font-mono text-mute text-[9px] sm:text-[10px] tracking-[0.3em] mb-1 sm:mb-2">
             HOME
           </p>
-          <h2 className="text-2xl sm:text-3xl text-bone font-light tracking-tight">
+          <h2 className="text-xl sm:text-3xl text-bone font-light tracking-tight">
             {match.home.name}
           </h2>
-          <p className="font-mono text-gold/60 text-xs tracking-[0.25em] mt-1">
+          <p className="font-mono text-gold/60 text-[10px] sm:text-xs tracking-[0.25em] mt-1">
             {match.home.en}
           </p>
         </div>
         <div className="text-right">
-          <p className="font-mono text-mute text-[10px] tracking-[0.3em] mb-2">
+          <p className="font-mono text-mute text-[9px] sm:text-[10px] tracking-[0.3em] mb-1 sm:mb-2">
             AWAY
           </p>
-          <h2 className="text-2xl sm:text-3xl text-bone font-light tracking-tight">
+          <h2 className="text-xl sm:text-3xl text-bone font-light tracking-tight">
             {match.away.name}
           </h2>
-          <p className="font-mono text-gold/60 text-xs tracking-[0.25em] mt-1">
+          <p className="font-mono text-gold/60 text-[10px] sm:text-xs tracking-[0.25em] mt-1">
             {match.away.en}
           </p>
         </div>
       </div>
 
-      {/* Live win percentages */}
-      <div className="flex items-baseline justify-between mb-3">
+      {/* Live win percentages — smaller on mobile to keep card compact */}
+      <div className="flex items-baseline justify-between mb-2 sm:mb-3">
         <span
-          className={`font-mono text-3xl sm:text-4xl tabular tracking-tight ${
+          className={`font-mono text-2xl sm:text-4xl tabular tracking-tight ${
             homeFav ? "text-gold" : "text-mute"
           }`}
           style={{ transition: "color 200ms ease" }}
         >
           {homePct.toFixed(1)}
-          <span className="text-base opacity-60 ml-0.5">%</span>
+          <span className="text-sm sm:text-base opacity-60 ml-0.5">%</span>
         </span>
         <span
-          className={`font-mono text-3xl sm:text-4xl tabular tracking-tight ${
+          className={`font-mono text-2xl sm:text-4xl tabular tracking-tight ${
             !homeFav ? "text-gold" : "text-mute"
           }`}
           style={{ transition: "color 200ms ease" }}
         >
           {awayPct.toFixed(1)}
-          <span className="text-base opacity-60 ml-0.5">%</span>
+          <span className="text-sm sm:text-base opacity-60 ml-0.5">%</span>
         </span>
       </div>
 
@@ -175,8 +175,8 @@ export default function HeroLiveCard({ match }: { match: Match }) {
         />
       </div>
 
-      {/* Methodology line — with live counter */}
-      <p className="font-mono text-mute/80 text-[10px] tracking-[0.25em] mt-5 tabular">
+      {/* Methodology line — with live counter · tighter mt on mobile */}
+      <p className="font-mono text-mute/80 text-[10px] tracking-[0.25em] mt-3 sm:mt-5 tabular">
         蒙地卡羅 ·{" "}
         <span className="text-gold/80">
           {stats.completed.toLocaleString()}
@@ -239,41 +239,44 @@ export default function HeroLiveCard({ match }: { match: Match }) {
         </div>
       )}
 
-      {/* Pitcher matchup */}
-      <div className="mt-10 grid grid-cols-2 gap-6 pt-6 border-t border-line/60">
+      {/* Pitcher matchup — tighter mt + pt on mobile */}
+      <div className="mt-5 sm:mt-10 grid grid-cols-2 gap-4 sm:gap-6 pt-4 sm:pt-6 border-t border-line/60">
         <div>
-          <p className="font-mono text-mute text-[10px] tracking-[0.3em] mb-2">
+          <p className="font-mono text-mute text-[9px] sm:text-[10px] tracking-[0.3em] mb-1 sm:mb-2">
             HOME STARTER
           </p>
-          <p className="text-bone text-lg">{match.home.pitcher.name}</p>
-          <p className="font-mono text-gold/70 text-xs tabular mt-1">
+          <p className="text-bone text-base sm:text-lg">{match.home.pitcher.name}</p>
+          <p className="font-mono text-gold/70 text-[10px] sm:text-xs tabular mt-1">
             ERA · {match.home.pitcher.era}
           </p>
         </div>
         <div className="text-right">
-          <p className="font-mono text-mute text-[10px] tracking-[0.3em] mb-2">
+          <p className="font-mono text-mute text-[9px] sm:text-[10px] tracking-[0.3em] mb-1 sm:mb-2">
             AWAY STARTER
           </p>
-          <p className="text-bone text-lg">{match.away.pitcher.name}</p>
-          <p className="font-mono text-gold/70 text-xs tabular mt-1">
+          <p className="text-bone text-base sm:text-lg">{match.away.pitcher.name}</p>
+          <p className="font-mono text-gold/70 text-[10px] sm:text-xs tabular mt-1">
             ERA · {match.away.pitcher.era}
           </p>
         </div>
       </div>
 
-      {/* CTA */}
-      <div className="mt-10 flex flex-wrap gap-3 justify-center">
-        <Link
-          href="/matches"
-          className="px-8 py-3 border border-gold text-gold text-xs tracking-[0.3em] hover:bg-gold hover:text-navy transition-colors"
-        >
-          查看今日完整賽事板 →
-        </Link>
+      {/* CTA — single CTA on mobile (the one that drives engagement),
+          two on desktop. Mobile: tap card link → /matches/[gameId] for
+          the full breakdown; the sticky bottom Founders CTA handles
+          the conversion ask without competing here. */}
+      <div className="mt-6 sm:mt-10 flex flex-wrap gap-3 justify-center">
         <Link
           href={`/matches/${match.id}`}
-          className="px-8 py-3 border border-line/60 text-mute hover:text-gold hover:border-gold/40 text-xs tracking-[0.3em] transition-colors"
+          className="px-6 sm:px-8 py-3 border border-gold text-gold text-xs tracking-[0.3em] hover:bg-gold hover:text-navy transition-colors"
         >
           完整分析 →
+        </Link>
+        <Link
+          href="/matches"
+          className="hidden sm:inline-block px-8 py-3 border border-line/60 text-mute hover:text-gold hover:border-gold/40 text-xs tracking-[0.3em] transition-colors"
+        >
+          查看今日完整賽事板 →
         </Link>
       </div>
     </article>

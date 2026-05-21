@@ -63,6 +63,9 @@ export default function ScarcityStrip() {
             <span className="tabular">
               <span className="text-bone">{FOUNDERS_REMAINING}</span> REMAIN
             </span>
+            <span className="text-mute/30" aria-hidden="true">·</span>
+            <span className="hidden sm:inline">售完永久關閉</span>
+            <span className="sm:hidden">永久關閉</span>
             <span className="hidden md:inline text-mute/30" aria-hidden="true">·</span>
             <span className="hidden md:inline tabular text-mute group-hover:text-gold transition-colors">
               NEXT {formatBadge(FOUNDERS_NEXT)} →

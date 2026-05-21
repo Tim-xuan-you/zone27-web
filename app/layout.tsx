@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import CommandPalette from "@/components/CommandPalette";
+import StickyFoundersCTA from "@/components/StickyFoundersCTA";
 import "./globals.css";
 
 // ── Viewport · themeColor + colorScheme (Next.js 16 pattern) ──
@@ -74,9 +75,10 @@ export default function RootLayout({
       lang="zh-Hant"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">
+      <body className="min-h-full flex flex-col pb-[72px] sm:pb-0">
         {children}
         <CommandPalette />
+        <StickyFoundersCTA />
       </body>
     </html>
   );
