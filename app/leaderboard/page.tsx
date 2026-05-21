@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
+import FounderPickForm from "@/components/FounderPickForm";
 import {
   FOUNDERS_TOTAL,
   FOUNDERS_CLAIMED,
@@ -12,6 +13,7 @@ import {
   isClaimed,
   formatBadge,
 } from "@/lib/founders-stats";
+import { getReservedNumbersServer } from "@/lib/founder-reservations-server";
 
 export const metadata: Metadata = {
   title: "The 27 Wall — 創始會員之牆",
@@ -42,8 +44,14 @@ const SCINTILLATE_SEATS = new Map<number, string>([
   [261, "scintillate-6"],
 ]);
 
-export default function LeaderboardPage() {
+export default async function LeaderboardPage() {
   const slots = Array.from({ length: FOUNDERS_TOTAL }, (_, i) => i + 1);
+  // Round 30 Wave 12 · server-side fetch reserved numbers · graceful
+  // degrade to [] if migration 0002 not yet applied(Tim 5-min Supabase
+  // Studio task)。
+  const reservedSlots = await getReservedNumbersServer();
+  const reservedSet = new Set(reservedSlots.map((r) => r.number));
+  const reservedNumbers = Array.from(reservedSet);
 
   return (
     <div className="flex flex-col flex-1 min-h-screen">
@@ -113,11 +121,26 @@ export default function LeaderboardPage() {
               key={n}
               n={n}
               claimed={isClaimed(n)}
+              reserved={reservedSet.has(n)}
               isNext={n === FOUNDERS_NEXT}
               scintillateClass={SCINTILLATE_SEATS.get(n)}
             />
           ))}
         </div>
+      </section>
+
+      {/* ── Round 30 Wave 12 · Founder Pick Form ──────
+          Patek allocation pattern · logged-in member 可選 008-270 ·
+          公開 RESERVED 落 wall above。 Anon / no-reservation / has-
+          reservation 三 state · graceful degrade if migration 未 apply。 */}
+      <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-16">
+        <p
+          lang="en"
+          className="font-mono text-gold text-[10px] tracking-[0.45em] mb-4 text-center"
+        >
+          / RESERVE YOUR NUMBER · Patek allocation
+        </p>
+        <FounderPickForm reservedNumbers={reservedNumbers} />
       </section>
 
       {/* ── RECENT ACTIVITY ──────────────────────── */}
@@ -204,11 +227,13 @@ function Stat({
 function Slot({
   n,
   claimed,
+  reserved,
   isNext,
   scintillateClass,
 }: {
   n: number;
   claimed: boolean;
+  reserved: boolean;
   isNext: boolean;
   scintillateClass?: string;
 }) {
@@ -226,6 +251,26 @@ function Slot({
         </span>
         <span className="text-[7px] sm:text-[8px] tracking-[0.15em] mt-0.5 opacity-70">
           FORGED
+        </span>
+      </div>
+    );
+  }
+
+  if (reserved) {
+    // Round 30 Wave 12 · Patek allocation pattern · 「RESERVED · pending
+    // wire」 = visitor 已 reserved · 等銀行轉帳 confirm · Costly Signaling
+    // 公開 commitment 在轉帳之前。
+    return (
+      <div
+        title={`Founder #${label} · reserved · pending wire`}
+        aria-label={`Founder seat ${label} · reserved · pending wire transfer`}
+        className="aspect-square flex flex-col items-center justify-center border border-gold/50 bg-gold/5 text-gold/80 font-mono shimmer"
+      >
+        <span className="text-[11px] sm:text-sm tabular leading-none">
+          {label}
+        </span>
+        <span className="text-[7px] sm:text-[8px] tracking-[0.15em] mt-0.5 opacity-80">
+          RESERVED
         </span>
       </div>
     );
