@@ -1,5 +1,9 @@
 # 🌙 您休息時 Claude 做了什麼
 
+> Tim · 2026-05-21 下午 · **Round 24.2 · /founders inline FAQ 「等候名單階段」drift · reframe 為 dual-purpose 對齊 4-tier ladder**
+> Tim · 2026-05-21 下午 · **Round 24 · 主動 drift hunt · WaitlistForm kicker「創始會員 · 預售等候名單」+ email subject「NT$ 2,700 終身」reframe dual-purpose · post-Round-21+23 連帶清**
+> Tim · 2026-05-21 下午 · **Round 23 · Tim 問「一般人加入會員從哪裡按 · 找不到」· Nav label「創始會員」→「會員」 + Cmd-K keywords +10 個(會員 · 免費 · membership · etc.)**
+> Tim · 2026-05-21 下午 · **Round 22 · Tim 問「按哪裡加入會員」· desktop Nav 「創始會員」加 gold-outlined CTA pill · 視覺從 plain text 升 wayfinding affordance**
 > Tim · 2026-05-21 下午 · **Round 21 · Tim 3 個 brand-architecture 問題 · 「加入會員一定要付錢?」= NO insight · ship FREE TIER permanence clarifier between WaitlistForm + FROM THE FOUNDER · Stratechery / Plausible / Substack 4-tier model 寫死**
 > Tim · 2026-05-21 下午 · **Round 20 · Tim 第 4 次 push 同 prompt = trust direction · 2 fresh agents (Asian premium + 2026 indie) · 12 patterns 評估 · 0 clean ship candidate · honest conclusion: ZONE 27 at 2026 frontier · research-only deliverable**
 > Tim · 2026-05-21 中午後 · **Round 19 · Tim 第 3 次 push 同 prompt = Pratfall canary · 從 polish 切換到 SOUL-level · /about Chapter 00 PROLOGUE + /manifesto cross-ref + homepage Tim signature · 3 個 entry point 都有 founder anchor**
