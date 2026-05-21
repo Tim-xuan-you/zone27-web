@@ -49,7 +49,7 @@ const LOCKED: { quarter: string; items: RoadmapItem[] }[] = [
       },
       {
         title: "✓ SHIPPED · Cmd-K 全站快搜 palette",
-        body: "2026-05-21 上線 · 24 routes 索引化 · ⌘K (Mac) / Ctrl-K (Win) 開啟 · ↑↓ 導航 · ↵ 開啟 · mobile ⌕ icon trigger (Round 12)。無 fuse.js 無 telemetry 無 recently-used (per disclosure philosophy)。",
+        body: "2026-05-21 上線 · 25 routes 索引化 · ⌘K (Mac) / Ctrl-K (Win) 開啟 · ↑↓ 導航 · ↵ 開啟 · mobile ⌕ icon trigger (Round 12) · /membership 加入後 Round 25 達 25 entries。無 fuse.js 無 telemetry 無 recently-used (per disclosure philosophy)。",
       },
       {
         title: "CPBL 每日 ingestion 持續累積 ledger",

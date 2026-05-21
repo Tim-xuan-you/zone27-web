@@ -233,7 +233,7 @@ OG + favicon + chrome
 
 ## ⚙️ Global components(Round 2/5/12)
 
-- `<CommandPalette />` · 全站 ⌘K/Ctrl-K palette · **24 routes** 索引(layout.tsx)
+- `<CommandPalette />` · 全站 ⌘K/Ctrl-K palette · **25 routes** 索引(Round 25 加 /membership 後)(layout.tsx)
 - `<CmdKTrigger />` · 雙 variant:
   - `variant="chip"` (default) · Nav 右上方 ⌘K 提示按鈕(desktop)
   - `variant="icon"` (Round 12) · Nav mobile 2nd row 右側 ⌕ 圖示(palette 全站可達)
