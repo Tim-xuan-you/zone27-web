@@ -5,9 +5,9 @@ import Footer from "@/components/Footer";
 import RelatedReading from "@/components/RelatedReading";
 
 export const metadata: Metadata = {
-  title: "Roadmap · 公開路線圖 · 含「永遠不做」清單",
+  title: "Roadmap · 公開路線圖 · 含品牌鐵律",
   description:
-    "ZONE 27 接下來在做什麼 · 在評估什麼 · 永遠不做什麼。/changelog 是過去的記錄;這頁是未來的承諾。沒有「即將推出」的銷售話術,只有 LOCKED / EXPLORING / EXPLICIT NO 三類。",
+    "ZONE 27 接下來在做什麼 · 在評估什麼 · 不變的品牌鐵律是什麼。/changelog 是過去的記錄;這頁是未來的承諾。沒有「即將推出」的銷售話術,只有 LOCKED / EXPLORING / BRAND BOUNDARIES 三類。",
 };
 
 // ── ZONE 27 · /roadmap ───────────────────────────────
@@ -178,21 +178,21 @@ export default function RoadmapPage() {
           </span>
         </div>
         <h1 className="text-4xl sm:text-5xl text-bone font-light tracking-tight max-w-3xl">
-          接下來在做什麼 · 在評估什麼 · <span className="text-gold">永遠不做什麼</span>
+          接下來在做什麼 · 在評估什麼 · <span className="text-gold">不變的鐵律是什麼</span>
         </h1>
         <p className="mt-6 text-mute leading-relaxed max-w-2xl">
           <Link href="/changelog" className="text-gold underline-offset-4 hover:underline">
             /changelog
           </Link>
           {" "}是過去的事實(git 為 source of truth)· 這頁是未來的承諾。
-          <strong className="text-bone">公開說 NO 比公開說 YES 更難</strong> —
-          所以底下有一個「永遠不做」section · 跟 LOCKED / EXPLORING 同等視覺權重。
+          <strong className="text-bone">公開鐵律比含糊承諾更難</strong> —
+          所以底下有一個「BRAND BOUNDARIES」section · 跟 LOCKED / EXPLORING 同等視覺權重。
         </p>
         <p className="mt-4 font-mono text-mute/80 text-[10px] tracking-[0.25em] leading-relaxed max-w-2xl">
           沒有「即將推出 · 敬請期待」的銷售話術 · 沒有「正在規劃」的模糊承諾 ·
-          只有 LOCKED(時程 + 邏輯都已定)· EXPLORING(在研究的 · 可能 NO)·
-          EXPLICIT NO(品牌防線 · 永遠不會做)。對標 Anthropic Responsible
-          Scaling Policy + Plausible「what we won&apos;t build」。
+          只有 LOCKED(時程 + 邏輯都已定)· EXPLORING(在研究的)·
+          BRAND BOUNDARIES(品牌守則 · 不變的鐵律)。對標 Anthropic Responsible
+          Scaling Policy + Plausible「principled boundaries」。
         </p>
       </section>
 
@@ -260,7 +260,7 @@ export default function RoadmapPage() {
         </h2>
         <p className="text-mute text-sm mb-12 max-w-xl">
           我們有興趣但還沒確認是否會做的事。沒有時程 · 沒有承諾 ·
-          研究中發現不該做就會搬到 EXPLICIT NO,有信心就搬到 LOCKED。
+          研究中發現不該做就會搬到 BRAND BOUNDARIES,有信心就搬到 LOCKED。
         </p>
 
         <div className="space-y-8">
@@ -274,7 +274,12 @@ export default function RoadmapPage() {
         <div className="w-full h-px bg-line/40" />
       </div>
 
-      {/* ── EXPLICIT NO ───────────────────────────── */}
+      {/* ── BRAND BOUNDARIES · 不變的鐵律 ───────────
+          Round 6 surgical reframe: was "EXPLICIT NO · 永遠不做".
+          Same content (Buffett/Plausible/Anthropic-style boundary
+          commitments backed by Pratfall + Costly Signaling research).
+          Neutral framing as "boundaries we hold" instead of explicit
+          negation — same forcing-function value, dignified tone. */}
       <section
         aria-labelledby="explicit-no-heading"
         className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-20"
@@ -284,15 +289,15 @@ export default function RoadmapPage() {
           id="explicit-no-heading"
           className="font-mono text-gold text-[10px] tracking-[0.4em] mb-2"
         >
-          / 03 · EXPLICIT NO · 永遠不做
+          / 03 · BRAND BOUNDARIES · 不變的鐵律
         </p>
         <h2 className="text-2xl sm:text-3xl text-bone font-light tracking-tight mb-4">
           這頁的最重要 section
         </h2>
         <p className="text-mute text-sm mb-12 max-w-xl">
-          公開說 NO 是品牌 IP 的物理證據。
-          這 section 寫進去後 · 任何相反操作都會被讀者拿出來 grep 反駁 ·
-          所以這也是「強制紀律」機制。
+          公開承諾的鐵律是品牌 IP 的物理證據。
+          這 section 寫進去後 · 任何相反操作都會被讀者拿出來對照 ·
+          所以這也是「強制紀律」機制 · 讀者也是品牌守護者。
         </p>
 
         <div className="space-y-8">

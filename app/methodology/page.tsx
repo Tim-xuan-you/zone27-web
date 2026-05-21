@@ -125,9 +125,14 @@ repeat 10,000 times → aggregate
           Section 01 HOW IT WORKS above (high-level) · engineers go to
           GitHub. */}
 
-      {/* ── 02 LIMITATIONS · 引擎看不見的事 ─────── */}
-      <Section no="02" label="WHAT IT CAN'T SEE" zh="引擎看不見的事">
-        <p>v0.2 的誠實清單:</p>
+      {/* ── 02 ENGINE BOUNDARIES · 引擎邊界 ─────
+          Round 6 surgical reframe: was "WHAT IT CAN'T SEE" / "引擎看不見的事".
+          Same content (Pratfall + Costly Signaling research backs keeping
+          the honest list — premium niche brands like Stratechery / 37signals
+          / Plausible all publish their limitations). Just neutral framing
+          via "boundaries" instead of "can't see". */}
+      <Section no="02" label="ENGINE BOUNDARIES" zh="引擎邊界">
+        <p>v0.2 引擎邊界外的項目:</p>
         <ul className="space-y-3">
           <li>
             <strong className="text-bone">無打者個別品質</strong> ─

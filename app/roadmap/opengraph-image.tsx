@@ -13,7 +13,7 @@ import { BRAND, OG_SIZE, OG_CONTENT_TYPE } from "@/lib/brand";
 export const size = OG_SIZE;
 export const contentType = OG_CONTENT_TYPE;
 export const alt =
-  "ZONE 27 · /roadmap · 公開路線圖 · LOCKED / EXPLORING / EXPLICIT NO 三段";
+  "ZONE 27 · /roadmap · 公開路線圖 · LOCKED / EXPLORING / BRAND BOUNDARIES 三段";
 
 export default async function RoadmapOgImage() {
   return new ImageResponse(
@@ -117,7 +117,7 @@ export default async function RoadmapOgImage() {
               textShadow: "0 0 60px rgba(212,175,55,0.25)",
             }}
           >
-            永遠不做什麼
+            不變的鐵律是什麼
           </span>
         </div>
 
@@ -152,8 +152,8 @@ export default async function RoadmapOgImage() {
             tone="dim"
           />
           <Stage
-            label="EXPLICIT NO"
-            zh="永遠不做 · 品牌防線"
+            label="BOUNDARIES"
+            zh="不變的鐵律 · 品牌守則"
             tone="line"
           />
         </div>

@@ -174,11 +174,18 @@ export default function AuditPage() {
             </P>
           </ReportSection>
 
-          {/* ── 03 INPUTS WE DELIBERATELY EXCLUDE ────── */}
-          <ReportSection no="03" label="INPUTS WE DELIBERATELY EXCLUDE">
+          {/* ── 03 ENGINE SCOPE BOUNDARIES ────────────
+              Round 6 surgical reframe: was "INPUTS WE DELIBERATELY
+              EXCLUDE" — Pratfall Effect (Aronson 1966) + Costly
+              Signaling (Spence 1973) still apply (the list itself
+              is the brand IP · "we publish what we don't model"
+              still costs more than competitors who hide). Just the
+              section label softened to neutral scope language.
+              List content unchanged. */}
+          <ReportSection no="03" label="ENGINE SCOPE BOUNDARIES">
             <P>
-              下列輸入<strong className="text-bone">不在模型中</strong>。
-              不是「下一版會加」(那是路線圖),是「目前明確排除」:
+              引擎 v0.2 涵蓋投手三項基礎指標。下列項目<strong className="text-bone">目前在引擎邊界外</strong> —
+              不是路線圖,是 v0.2 範圍。透明列出讓您可調整自己對輸出的信心。
             </P>
             <List>
               <Item label="打者個別品質">
@@ -214,14 +221,15 @@ export default function AuditPage() {
             </List>
           </ReportSection>
 
-          {/* ── 04 KNOWN FAILURE MODES ───────────────── */}
-          {/* Round 4 audience-reframe:
-              - Section 04 BENCHMARK PERFORMANCE (CLT proof + SE math) → removed
-                Fans don't need the σ=0.5% derivation; engineers can read
-                lib/simulator.ts for that. The «10,000 iterations» number
-                stays elsewhere (HeroLiveCard methodology line).
-              - Renumbered: was 05 → now 04. */}
-          <ReportSection no="04" label="KNOWN FAILURE MODES">
+          {/* ── 04 WHEN TO QUESTION OUR OUTPUT ─────────
+              Round 4: removed BENCHMARK PERFORMANCE + KNOWN FAILURE
+              MODES section labels. Round 6 surgical reframe: was
+              "KNOWN FAILURE MODES" — now "WHEN TO QUESTION OUR OUTPUT"
+              · same honest content (the brand-IP self-criticism stays
+              per [[zone27-disclosure-philosophy]]), positioned as
+              «when 訪客 should override the engine» — fan-facing
+              decision-aid framing instead of academic taxonomy. */}
+          <ReportSection no="04" label="WHEN TO QUESTION OUR OUTPUT">
             <P>下列情境下,模型輸出已知會偏離真實:</P>
             <List>
               <Item label="極端投手數據">
