@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
+import ArticleMeta from "@/components/ArticleMeta";
 
 export const metadata: Metadata = {
   title: "Privacy Policy — 我們收什麼、不收什麼、永遠不會做什麼",
@@ -29,6 +30,9 @@ export default function PrivacyPage() {
         <p className="mt-8 max-w-xl mx-auto text-mute leading-relaxed">
           不是法務模板。是寫給 ZONE 27 真實情境的隱私政策。
         </p>
+        <div className="mt-6 flex justify-center">
+          <ArticleMeta readingMin={6} />
+        </div>
       </section>
 
       <div className="mx-auto w-32 gold-line mb-12" />

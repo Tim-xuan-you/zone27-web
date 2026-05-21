@@ -4,6 +4,7 @@ import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import CopyLinkButton from "@/components/CopyLinkButton";
 import RelatedReading from "@/components/RelatedReading";
+import ArticleMeta from "@/components/ArticleMeta";
 
 export const metadata: Metadata = {
   title: "鐵律 · Operating Discipline · Buffett · Musk · Costco · Jobs",
@@ -85,6 +86,9 @@ export default function DisciplinePage() {
               NOT ASPIRATIONAL · NOT FANBOY · NOT CORPORATE WORSHIP ·
               JUST 4 RULES WE WILL NOT VIOLATE
             </p>
+            <div className="mt-6">
+              <ArticleMeta readingMin={14} />
+            </div>
           </header>
 
           {/* ── 01 BUFFETT ─────────────────────────── */}

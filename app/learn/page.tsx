@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import RelatedReading from "@/components/RelatedReading";
+import ArticleMeta from "@/components/ArticleMeta";
 import StatTerm from "@/components/StatTerm";
 
 export const metadata: Metadata = {
@@ -55,6 +56,9 @@ export default function LearnPage() {
           <p className="mt-4 max-w-xl mx-auto font-mono text-mute/70 text-[10px] tracking-[0.3em]">
             3 CHAPTERS · NO STATS DEGREE REQUIRED · NO PREVIOUS BASEBALL VOCAB
           </p>
+          <div className="mt-6 flex justify-center">
+            <ArticleMeta readingMin={5} />
+          </div>
         </section>
 
         <div className="mx-auto w-32 gold-line mb-12" />

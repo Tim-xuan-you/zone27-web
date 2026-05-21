@@ -4,6 +4,7 @@ import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import CopyLinkButton from "@/components/CopyLinkButton";
 import RelatedReading from "@/components/RelatedReading";
+import ArticleMeta from "@/components/ArticleMeta";
 import { FOUNDERS_REMAINING } from "@/lib/founders-stats";
 
 export const metadata: Metadata = {
@@ -80,6 +81,9 @@ export default function ManifestoPage() {
               <MetaPair label="PUBLISHED" value={MANIFESTO_DATE} />
               <MetaPair label="AUTHOR" value="Tim · 創辦人" />
             </dl>
+            <div className="mt-5">
+              <ArticleMeta readingMin={14} />
+            </div>
           </header>
 
           {/* ── OPENING NOTE ────────────────────────── */}

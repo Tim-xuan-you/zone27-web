@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import RelatedReading from "@/components/RelatedReading";
+import ArticleMeta from "@/components/ArticleMeta";
 import { FOUNDERS_NEXT, formatBadge } from "@/lib/founders-stats";
 
 export const metadata: Metadata = {
@@ -37,6 +38,9 @@ export default function AboutPage() {
         <p className="font-mono text-mute text-xs tracking-[0.3em] mt-10">
           A QUIET REBELLION AGAINST GUT-FEEL.
         </p>
+        <div className="mt-6 flex justify-center">
+          <ArticleMeta readingMin={8} />
+        </div>
       </section>
 
       <div className="mx-auto w-32 gold-line mb-20" />
