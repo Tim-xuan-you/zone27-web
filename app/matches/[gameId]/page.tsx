@@ -84,12 +84,28 @@ export default async function MatchDetailPage({
         </div>
       </section>
 
-      {/* ── HERO: TEAMS + META ─────────────────────── */}
+      {/* ── HERO: TEAMS + META ───────────────────────
+          Round 11: header label was static "LIVE AI MODEL" · misleading
+          for past matches in receipt mode or stale-archived state.
+          Now phase-aware: shows ENGINE RECEIPT / LIVE AI MODEL /
+          ARCHIVED based on actual phase. Heartbeat dot only animates
+          when phase is "live" or "today-pregame" (signals true live). */}
       <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pt-10 pb-6">
         <div className="flex items-center gap-3 mb-8 flex-wrap">
-          <span className="w-1.5 h-1.5 rounded-full bg-gold shimmer" />
+          <span
+            className={`w-1.5 h-1.5 rounded-full bg-gold ${
+              phase === "today-pregame" || phase === "today-live"
+                ? "shimmer"
+                : ""
+            }`}
+            aria-hidden="true"
+          />
           <span className="font-mono text-gold text-[10px] tracking-[0.35em]">
-            LIVE AI MODEL · {m.league} · {m.date}
+            {phase === "final"
+              ? `ENGINE RECEIPT · ${m.league} · ${m.date}`
+              : phase === "stale-archived"
+              ? `ARCHIVED · ${m.league} · ${m.date}`
+              : `LIVE AI MODEL · ${m.league} · ${m.date}`}
           </span>
           <PhaseBadgeLg phase={phase} calibration={calibration} />
         </div>

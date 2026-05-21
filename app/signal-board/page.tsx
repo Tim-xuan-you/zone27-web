@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import RelatedReading from "@/components/RelatedReading";
-import { matches, type Match } from "@/lib/matches";
+import { getTodayAndFutureMatches, type Match } from "@/lib/matches";
 
 export const metadata: Metadata = {
   title: "Signal Board — 今日量化早報",
@@ -90,7 +90,9 @@ function whyEditorial(m: Match): string {
 }
 
 export default function SignalBoardPage() {
-  const today = matches;
+  // Round 11: same lifecycle filter as /matches. Past matches with
+  // finalResult roll off the "今日早報" view · stay on /track-record.
+  const today = getTodayAndFutureMatches();
   const { year, month, day, iso: todayISO } = getTaipeiTodayParts();
   const heroDate = `${year} · ${month} · ${day}`;
   const dataAgeDays = daysBetween(DATA_STAMP, todayISO);

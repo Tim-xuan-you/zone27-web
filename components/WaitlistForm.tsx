@@ -63,7 +63,7 @@ export default function WaitlistForm({
           當付款系統正式開放(預計 Q3 2026),我們會優先通知您。
           您的位置已被保留。
         </p>
-        <p className="font-mono text-mute text-[10px] tracking-[0.3em] mt-8">
+        <p className="font-mono text-mute text-[11px] sm:text-[12px] tracking-[0.3em] mt-8">
           目前不收費 · 不綁定 · 隨時可退出
         </p>
 
@@ -163,7 +163,7 @@ export default function WaitlistForm({
           3rd-pass audit · WCAG 2.1 SC 4.1.3 Status Messages compliance. */}
       <div role="alert" aria-live="polite" aria-atomic="true" className="min-h-[1rem]">
         {state && !state.ok && (
-          <p className="mt-4 font-mono text-loss text-[10px] tracking-[0.3em] text-center">
+          <p className="mt-4 font-mono text-loss text-xs sm:text-sm tracking-[0.2em] text-center">
             {state.error === "missing_email"
               ? "請填寫 EMAIL"
               : state.error === "invalid_email"
