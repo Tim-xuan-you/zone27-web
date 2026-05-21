@@ -146,12 +146,12 @@ export default function AboutPage() {
           </li>
         </ol>
         <p className="text-mute/80">
-          這 4 步驟<strong className="text-bone">刻意排除</strong>的輸入(打者個別差異、Platoon、投手疲勞、球場因素、氣象、主審好球帶傾向、代打換投決策)
-          在{" "}
+          這 4 步驟刻意保持極簡 — 範圍外的事項(打者個別差異 · 球場因素 · 投手疲勞 · 牛棚切換等)
+          consolidated 在{" "}
           <Link href="/audit" className="text-gold hover:underline">
             /audit
           </Link>
-          {" "}Section 03 完整列出 — 我們不掩飾極簡模型的限制,反而把限制公開當作品牌資產。
+          {" "}Section 03 ENGINE SCOPE — 不掩飾極簡模型的限制,反而把限制公開當作品牌資產。
         </p>
       </Chapter>
 

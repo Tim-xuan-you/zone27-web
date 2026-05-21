@@ -252,7 +252,7 @@ function CustomLabInner() {
               href="/audit"
               className="text-gold hover:text-gold-soft transition-colors"
             >
-              /audit Section 03 完整 10 項排除清單
+              /audit Section 03 引擎範圍說明
             </Link>
           </p>
         </div>

@@ -352,8 +352,7 @@ export default async function MatchDetailPage({
         </div>
 
         <p className="mt-6 font-mono text-mute/70 text-[10px] tracking-[0.25em] leading-relaxed">
-          ▸ 刻意排除的輸入(打者個別品質 / Platoon / 投手疲勞 / 球場因素 / 代打換投決策)
-          完整列於{" "}
+          ▸ 引擎範圍說明(範圍外事項 · 訪客判讀時可加上直觀調整)在{" "}
           <Link href="/audit" className="text-gold hover:underline">
             /audit
           </Link>{" "}

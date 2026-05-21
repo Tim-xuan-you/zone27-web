@@ -120,8 +120,8 @@ export default function DisciplinePage() {
                 <Link href="/audit" className="text-gold hover:underline">
                   /audit
                 </Link>{" "}
-                Section 03 列出 10 個刻意排除的輸入 · Section 05 列出 7 個已知失效模式。
-                不藏 · 因為「壞消息粉飾 = 信譽歸零」是 Buffett 第一守則。
+                Section 03 ENGINE SCOPE 列出引擎範圍外的主要事項 · 不藏 ·
+                因為「壞消息粉飾 = 信譽歸零」是 Buffett 第一守則。
               </Item>
               <Item label="拒絕短期 KPI">
                 沒裝 Google Analytics(per{" "}
@@ -185,7 +185,7 @@ export default function DisciplinePage() {
                 <Link href="/audit" className="text-gold hover:underline">
                   /audit
                 </Link>{" "}
-                Section 03 列了 10 個我們刻意排除的輸入 — 那是 Step 2 「刪除」的證據。
+                Section 03 ENGINE SCOPE 是 Step 2「刪除」的證據。
               </Item>
               <Item label="0 後端 server">
                 Idiot Index 應用 · 引擎在訪客 CPU 跑 · 我們的 infrastructure cost ≈ 0 ·

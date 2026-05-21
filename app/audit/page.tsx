@@ -15,7 +15,7 @@ import {
 export const metadata: Metadata = {
   title: "Model Report — ZONE 27 Engine Audit",
   description:
-    "完整公開的 model report。模型描述、使用的輸入、刻意排除的輸入、基準效能、已知失效模式、最後校準時間。Anthropic transparency-hub 風格,零行銷語言。",
+    "完整公開的 model report。模型描述、使用的輸入、引擎範圍、環境衝擊、揭露哲學。零行銷語言。",
 };
 
 // ── ZONE 27 · /audit — Model Report ───────────────────
@@ -174,121 +174,66 @@ export default function AuditPage() {
             </P>
           </ReportSection>
 
-          {/* ── 03 ENGINE SCOPE BOUNDARIES ────────────
-              Round 6 surgical reframe: was "INPUTS WE DELIBERATELY
-              EXCLUDE" — Pratfall Effect (Aronson 1966) + Costly
-              Signaling (Spence 1973) still apply (the list itself
-              is the brand IP · "we publish what we don't model"
-              still costs more than competitors who hide). Just the
-              section label softened to neutral scope language.
-              List content unchanged. */}
-          <ReportSection no="03" label="ENGINE SCOPE BOUNDARIES">
+          {/* ── 03 ENGINE SCOPE (Round 7 · agent-validated consolidation) ──
+              Was: TWO sections (S03 ENGINE SCOPE BOUNDARIES + S04 WHEN
+              TO QUESTION OUR OUTPUT) totaling 17 items across 2 lists.
+              Round 7 fact-check agent confirmed: 0 of 5 cited premium
+              brands publish structured limitation pages (Stratechery /
+              37signals / Plausible / Apple / Berkshire all FALSE on
+              fact-check). 27 items across 3 site pages = "taxonomy-as-
+              decoration · not signal" per agent verdict.
+              Consolidated to 5 items in prose form · brand-IP "publish
+              everything" preserved via GitHub link + DISCLOSURE
+              PHILOSOPHY Section 05 (renumbered from 06).
+              Removed S04 entirely · removed shareablequote referencing
+              「刻意排除的 10 個輸入」 since that number is no longer
+              prominent. Renumbered subsequent sections. */}
+          <ReportSection no="03" label="ENGINE SCOPE">
             <P>
-              引擎 v0.2 涵蓋投手三項基礎指標。下列項目<strong className="text-bone">目前在引擎邊界外</strong> —
-              不是路線圖,是 v0.2 範圍。透明列出讓您可調整自己對輸出的信心。
+              引擎 v0.2 涵蓋投手三項基礎指標(<StatTerm term="K/9" /> · <StatTerm term="BB/9" /> · <StatTerm term="HR/9" />)
+              推導每打席結果。範圍外的事項 — 訪客可在判讀時加上自己直觀調整:
             </P>
             <List>
               <Item label="打者個別品質">
                 所有打者假設為聯盟平均 · 強打線 vs 二軍同樣對待
+                (這個 gap 最大 · 可能低估真實勝率差距 15-25 pp)
               </Item>
-              <Item label="左右投對左右打拆解 (Platoon)">
-                左投對左打 K 率 +5pp 等效應未建模
+              <Item label="球場因素">
+                台中洲際(打者球場)與天母(投手球場)使用相同機率
               </Item>
-              <Item label="先發 vs 中繼 / 牛棚">
-                假設先發投滿 9 局 · CPBL 實際平均 5.8 局
+              <Item label="投手疲勞 + 牛棚切換">
+                假設先發投滿 9 局 · CPBL 實際平均 5.8 局 · 第 9 局 K 率與第 1 局相同
               </Item>
-              <Item label="投手疲勞">
-                第 9 局的 K 率與第 1 局相同 · 真實情況下 -8%
+              <Item label="守備差異 + 場地天氣">
+                BABIP 假設聯盟均值 · 強守備隊伍可降低 ~2-3 pp · 極端天氣未建模
               </Item>
-              <Item label="守備差異">
-                BABIP 假設聯盟均值 · 強守備隊伍可降低 ~2-3 pp
-              </Item>
-              <Item label="球場因素 (Park Factors)">
-                台中洲際 (打者球場) 與天母 (投手球場) 使用相同機率
-              </Item>
-              <Item label="氣象 / 風向 / 海拔">
-                完全未建模
-              </Item>
-              <Item label="主審好球帶傾向 (Umpire bias)">
-                完全未建模
-              </Item>
-              <Item label="比賽時序效應 (clutch / momentum)">
-                每個打席假設為獨立事件 (Markov property)
-              </Item>
-              <Item label="代打 / 換投決策">
-                完全未建模 (簡化為先發單獨完投)
-              </Item>
-            </List>
-          </ReportSection>
-
-          {/* ── 04 WHEN TO QUESTION OUR OUTPUT ─────────
-              Round 4: removed BENCHMARK PERFORMANCE + KNOWN FAILURE
-              MODES section labels. Round 6 surgical reframe: was
-              "KNOWN FAILURE MODES" — now "WHEN TO QUESTION OUR OUTPUT"
-              · same honest content (the brand-IP self-criticism stays
-              per [[zone27-disclosure-philosophy]]), positioned as
-              «when 訪客 should override the engine» — fan-facing
-              decision-aid framing instead of academic taxonomy. */}
-          <ReportSection no="04" label="WHEN TO QUESTION OUR OUTPUT">
-            <P>下列情境下,模型輸出已知會偏離真實:</P>
-            <List>
-              <Item label="極端投手數據">
-                菜鳥首登 <Code>K/9 = 0</Code> 或宰制級 <Code>K/9 &gt; 14</Code> 會觸發 clamp 邊界,實際輸出比未 clamp 版本保守
-              </Item>
-              <Item label="一邊倒強隊 vs 二軍">
-                由於不建模打者差異,實際勝率差距會被低估約 15-25 pp
-              </Item>
-              <Item label="後段戰局 (7-9 局)">
-                先發投滿假設導致 K 率高估;真實情況下牛棚 K 率波動更大
-              </Item>
-              <Item label="季後賽 / 高張力比賽">
-                clutch / pressure 效應未建模,模型輸出對所有比賽一視同仁
-              </Item>
-              <Item label="極端天氣 / 場地">
-                台中下午場高溫高濕 vs 天母夜場乾涼 · 模型無法區分
-              </Item>
-              <Item label="延長賽">
-                目前只模擬 9 局 · 平手結果計入 ties 統計,不展開延長
-              </Item>
-              <Item label="比賽中突發狀況">
-                受傷、退場、暫停、雨延、棄賽 — 完全不建模
+              <Item label="連續事件假設 (Markov)">
+                每個打席視為獨立事件 · clutch / momentum / 代打換投決策未建模
               </Item>
             </List>
             <P className="text-mute/70">
-              當預測明顯偏離時,我們公開於{" "}
+              完整程式碼公開於{" "}
+              <ExtLink href="https://github.com/Tim-xuan-you/zone27-web/blob/main/lib/simulator.ts">
+                lib/simulator.ts
+              </ExtLink>
+              {" · "}任何 simplification 都可在 30 秒內 verify。
+              當預測明顯偏離時,變動會出現在{" "}
               <Link href="/changelog" className="text-gold hover:underline">
                 /changelog
-              </Link>{" "}
-              的偏差值報告,並把對應變數寫進下一次模型迭代。
+              </Link>
+              ,對應變數會寫進下一次引擎迭代。
             </P>
           </ReportSection>
 
-          {/* ── SHAREABLE PULL-QUOTE ──────────────
-              The contradiction is what makes it quoted: positive number +
-              honest disclaimer in one breath. Research-backed screenshot
-              artifact — Plausible / Cal /open pattern. */}
-          <blockquote
-            className="mt-16 mx-auto max-w-2xl border-l-2 border-gold/60 pl-6 sm:pl-8 py-2 font-light text-bone text-2xl sm:text-3xl leading-snug"
-            style={{ textWrap: "balance" }}
-          >
-            &ldquo;我們<span className="text-gold">刻意排除</span>的
-            <span className="font-mono text-gold tabular mx-1">10</span>
-            個輸入,比建模的{" "}
-            <span className="font-mono text-gold tabular">7</span>{" "}
-            個還多。&rdquo;
-            <footer className="mt-4 font-mono text-mute text-[10px] tracking-[0.3em] not-italic">
-              — ZONE 27 MODEL REPORT v0.28 · 上方 Section 02 + 03 詳列
-            </footer>
-          </blockquote>
-
-          {/* ── 05 ENVIRONMENTAL IMPACT ──────────────────
-              Round 4: renumbered 06 → 05 after Section 04 BENCHMARK
-              removed. Inspired by Hugging Face model card template's
+          {/* ── 04 ENVIRONMENTAL IMPACT ──────────────────
+              Round 7: renumbered 05 → 04 after Round 7 consolidation
+              merged S03 + S04 into ONE Section 03 ENGINE SCOPE.
+              Inspired by Hugging Face model card template's
               Environmental Impact section. 98% of model cards on HF
               skip this field. ZONE 27's "no backend" architecture means
               we can disclose it honestly and end up ahead of Anthropic
               + OpenAI on this dimension. */}
-          <ReportSection no="05" label="ENVIRONMENTAL IMPACT">
+          <ReportSection no="04" label="ENVIRONMENTAL IMPACT">
             <P>
               ZONE 27 Engine 完全在使用者瀏覽器內執行,
               <strong className="text-bone">沒有任何後端 API 呼叫、沒有 datacenter 訓練</strong>。
@@ -334,17 +279,18 @@ export default function AuditPage() {
             </P>
           </ReportSection>
 
-          {/* ── 06 DISCLOSURE PHILOSOPHY ──────────────
-              Round 4: renumbered 08 → 06. Section 07 LAST CALIBRATION
-              RUN removed entirely — that engineering version-metadata
-              table is redundant with the LAST REVIEWED header chip +
-              /changelog page. Canonical disclosure philosophy stays —
-              this is the brand-IP anchor per [[zone27-disclosure-philosophy]].
+          {/* ── 05 DISCLOSURE PHILOSOPHY ──────────────
+              Round 7: renumbered 06 → 05 (was 08 → 06 in Round 4).
+              Section LAST CALIBRATION RUN removed entirely back in
+              Round 4. Canonical disclosure philosophy stays — this
+              is the brand-IP anchor per [[zone27-disclosure-philosophy]]
+              and is the META section ("why we publish") not a
+              taxonomy of limitations.
 
               Original Tim ask 2026-05-20: "AI 公司不公開模型,我們為什麼要?"
               Answer: ZONE 27 sells identity, not algorithm access.
               No algorithmic moat → radical transparency IS the moat. */}
-          <ReportSection no="06" label="DISCLOSURE PHILOSOPHY">
+          <ReportSection no="05" label="DISCLOSURE PHILOSOPHY">
             <P>
               為什麼我們把整份 model report 公開到這個程度?
               <strong className="text-bone"> 因為我們沒有商業機密。</strong>

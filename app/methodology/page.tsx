@@ -74,10 +74,7 @@ export default function MethodologyPage() {
           >
             /audit
           </Link>
-          {" "} — 含 Anthropic Transparency Hub 結構的 8 個固定 section
-          (含明確列出我們{" "}
-          <strong className="text-bone">刻意排除</strong>
-          {" "}的 10 個輸入 + DISCLOSURE PHILOSOPHY)。
+          {" "} — 5 個 section · 含引擎範圍說明 + DISCLOSURE PHILOSOPHY。
         </p>
       </Section>
 
@@ -125,48 +122,16 @@ repeat 10,000 times → aggregate
           Section 01 HOW IT WORKS above (high-level) · engineers go to
           GitHub. */}
 
-      {/* ── 02 ENGINE BOUNDARIES · 引擎邊界 ─────
-          Round 6 surgical reframe: was "WHAT IT CAN'T SEE" / "引擎看不見的事".
-          Same content (Pratfall + Costly Signaling research backs keeping
-          the honest list — premium niche brands like Stratechery / 37signals
-          / Plausible all publish their limitations). Just neutral framing
-          via "boundaries" instead of "can't see". */}
-      <Section no="02" label="ENGINE BOUNDARIES" zh="引擎邊界">
-        <p>v0.2 引擎邊界外的項目:</p>
-        <ul className="space-y-3">
-          <li>
-            <strong className="text-bone">無打者個別品質</strong> ─
-            所有打者假設為聯盟平均。一支全壘打強打線跟全菜鳥的二軍同樣對待。
-          </li>
-          <li>
-            <strong className="text-bone">無左右投對左右打拆解(Platoon Splits)</strong> ─
-            真實棒球中左投對左打 K 率 +5pp,本模型忽略。
-          </li>
-          <li>
-            <strong className="text-bone">無中繼/牛棚切換</strong> ─
-            假設先發投手投滿 9 局。實際 CPBL 平均先發投 5.8 局,後段由風格不同的牛棚投。
-          </li>
-          <li>
-            <strong className="text-bone">無守備差異</strong> ─
-            BABIP 假設聯盟均值。實際強守備隊伍會把更多場內球轉換成出局。
-          </li>
-          <li>
-            <strong className="text-bone">無球場因素(Park Factors)</strong> ─
-            台中洲際(打者球場)與天母(投手球場)用同一機率模型。
-          </li>
-          <li>
-            <strong className="text-bone">無投手疲勞</strong> ─
-            第 9 局的 K 率與第 1 局相同;真實情況下第 7 局後 K 率下降約 8%。
-          </li>
-        </ul>
-        <p>
-          這些限制都明確,且都列入 v0.4 路線圖。
-          我們相信誠實列出弱點,比假裝模型完美更值得信任。
-        </p>
-      </Section>
+      {/* Round 7 (agent fact-check validated):
+          Section 02 ENGINE BOUNDARIES (6-item limitations list)
+          REMOVED entirely. Same content duplicated /audit Section 03
+          ENGINE SCOPE — 27 limitation items across 3 site pages was
+          "taxonomy-as-decoration · not signal" per agent verdict.
+          Cross-link to /audit Section 03 below instead. Round 4-6
+          renumbering history kept in comments where relevant. */}
 
-      {/* ── 03 TRY IT · MatchSimulator embed ───────────────── */}
-      <Section no="03" label="TRY IT" zh="親手驗證">
+      {/* ── 02 TRY IT · MatchSimulator embed ───────────────── */}
+      <Section no="02" label="TRY IT" zh="親手驗證">
         <p>
           以上所有理論,在下方的引擎裡實際執行。
           按 <Mono>RUN 10,000 SIMULATIONS</Mono> 看真實的 Poisson 採樣與壘上推進物理,
@@ -197,8 +162,10 @@ repeat 10,000 times → aggregate
           Replaced with compact Section 04 below pointing to /roadmap
           for future work and listing only the most-cited reference. */}
 
-      {/* ── 04 WHAT'S NEXT · 路線圖 + 參考 ──────────── */}
-      <Section no="04" label="WHAT'S NEXT" zh="路線圖 + 出處">
+      {/* ── 03 WHAT'S NEXT · 路線圖 + 參考 ────────────
+          Round 7: renumbered 04 → 03 after Section 02 ENGINE
+          BOUNDARIES deleted (consolidated into /audit Section 03). */}
+      <Section no="03" label="WHAT'S NEXT" zh="路線圖 + 出處">
         <p>
           未來引擎版本(v0.3 加打者品質 · v0.4 加球場因素 · v0.5 加牛棚切換)
           的計畫已公開在

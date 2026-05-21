@@ -118,39 +118,30 @@ const EXPLORING: RoadmapItem[] = [
 ];
 
 const EXPLICIT_NO: RoadmapItem[] = [
+  // Round 7 agent-validated cut: was 6 items · now 3 most fundamental.
+  // Dropped items merged into the 3 surviving ones thematically:
+  //   - "不寄生運彩平台" subset of "不覆蓋全部可下注賽事"(coverage)
+  //   - "不藏 model weights / failed predictions" subset of "不裝 GA/Pixel"
+  //     trust commitment + /audit S05 DISCLOSURE PHILOSOPHY canonical
+  //   - "不做 marketing fluff" general principle · enforced by code-level
+  //     grep · not a brand-IP commitment per se · move to project culture
   {
     title: "永遠不裝 Google Analytics / Facebook Pixel / Hotjar 錄影",
-    body: "ZONE 27 不追蹤訪客足跡。這不是技術限制 · 是品牌哲學。寫在 /privacy 第 03 節,違反即品牌信用自殺。",
+    body: "ZONE 27 不追蹤訪客足跡 · 不藏 model weights · 不藏失敗預測。這不是技術限制 · 是品牌哲學。寫在 /privacy 第 03 節 + /audit Section 05,違反即品牌信用自殺。",
     evidenceHref: "/privacy",
     evidenceLabel: "/privacy Section 03",
   },
   {
     title: "永遠不接受創投 / 不投放廣告 / 不上市",
-    body: "ZONE 27 用 270 位 Founders × NT$ 2,700 自籌資金啟動 · BLACK CARD 月費維持運轉。創投錢進來後就會被估值倒推「ARR 50x 線性增長」邏輯,跟 270 人封閉俱樂部本質衝突。",
+    body: "ZONE 27 用 270 位 Founders × NT$ 2,700 自籌資金啟動 · BLACK CARD 月費維持運轉。創投錢進來後會被估值倒推「ARR 50x 線性增長」邏輯,跟 270 人封閉俱樂部本質衝突。",
     evidenceHref: "/manifesto",
     evidenceLabel: "/manifesto Section II",
   },
   {
-    title: "永遠不覆蓋全部可下注賽事",
-    body: "Coverage philosophy:只覆蓋引擎能誠實計算的場次。為了 SEO / 流量上線數百場品質次等的賽事 = 變運彩平台。我們對標 Stratechery 1 篇深文 > 100 篇 SEO 內容。",
+    title: "永遠不覆蓋全部可下注賽事 / 不寄生運彩平台",
+    body: "Coverage philosophy:只覆蓋引擎能誠實計算的場次。為 SEO / 流量上線數百場品質次等賽事 = 變運彩平台。從博彩平台抓資料 = 跟博彩綁定 = 定位崩潰。",
     evidenceHref: "/coverage",
     evidenceLabel: "/coverage",
-  },
-  {
-    title: "永遠不藏 model weights / 不藏失敗預測",
-    body: "/audit Section 08 揭露哲學 + /track-record 公開戰績(含 DIVERGED 行)是 ZONE 27 的 moat。OpenAI / Anthropic / Google 藏 weights · 我們公開全部,因為我們賣身分不賣演算法。",
-    evidenceHref: "/track-record",
-    evidenceLabel: "/track-record 物理證據",
-  },
-  {
-    title: "永遠不寄生運彩平台 / 報馬仔 / 借玩運彩 username",
-    body: "Brand IP 鐵律。從博彩平台抓資料 = 把 ZONE 27 跟博彩綁定 = /about /faq /manifesto 已寫死的定位徹底崩潰。AI auto-post 帳號同樣禁止。",
-  },
-  {
-    title: "永遠不做「最帥 / 最強 / 保證」marketing fluff",
-    body: "全 repo grep-verified。發現一個立刻 purge。違反 disclosure philosophy = 立刻被讀者抓到證據反駁。",
-    evidenceHref: "/manifesto",
-    evidenceLabel: "/manifesto Section I",
   },
 ];
 

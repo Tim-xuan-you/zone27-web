@@ -159,7 +159,7 @@ export default function ManifestoPage() {
               <Link href="/audit" className="text-gold hover:underline">
                 /audit
               </Link>{" "}
-              Section 08 · DISCLOSURE PHILOSOPHY。
+              Section 05 · DISCLOSURE PHILOSOPHY。
             </P>
           </AxiomSection>
 
