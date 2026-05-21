@@ -148,8 +148,15 @@ export default function WaitlistForm({
           DB knows which share channel produced this signup. */}
       {refSource && <input type="hidden" name="ref" value={refSource} />}
       <div className="flex items-center justify-between gap-3 flex-wrap mb-2">
+        {/* Round 24 stale-ref fix(post-Round-21 FREE TIER · Round-23 Nav
+            "會員")· kicker 從「創始會員 · 預售等候名單」改成 dual-purpose
+            framing · 訪客現在 1 個動作填表 = 自動進入 2 個 tier:免費
+            訂閱層(永久)+ Founders 27 預售名單(限量 270 · 開放時優
+            先)。原 kicker 把表單框成「只有想當創始會員才填」· bounce
+            掉真正只想留 email 的訪客 · 跟下方 Round 21 FREE TIER
+            clarifier 邏輯衝突。 */}
         <p className="font-mono text-gold text-[10px] tracking-[0.4em]">
-          創始會員 · 預售等候名單
+          ZONE 27 訂閱 · 免費 + Founders 27 預售
         </p>
         {showLiveCount && (
           <p
@@ -184,13 +191,23 @@ export default function WaitlistForm({
         )}
       </div>
       <h3 className="text-2xl sm:text-3xl text-bone font-light tracking-tight mb-2">
-        留下 email,保留您的位置
+        留下 email · 加入 ZONE 27
       </h3>
       <p className="text-mute text-sm mb-8 leading-relaxed">
-        付款系統尚未開放。先進入等候名單,我們會在正式開放預訂時 email 您。
+        1 個動作 · 同時加入:
         <span className="text-bone font-medium">
-          {" "}不收費、不綁定、隨時可退出。
+          {" "}免費訂閱層(永久免費)
         </span>
+        {" "}+{" "}
+        <span className="text-bone font-medium">
+          Founders 27 預售名單
+        </span>
+        (開放時優先取得購買權)。
+        <br />
+        <span className="text-bone font-medium">
+          不收費、不綁定、隨時可退出。
+        </span>{" "}
+        升級或永遠停在免費層 — 任時您決定。
       </p>
 
       {/* Email field */}

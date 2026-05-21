@@ -58,7 +58,11 @@ export async function sendWaitlistConfirmation({
   const pos = String(queuePos).padStart(3, "0");
   // Greeting: use provided name if any, else first part of email (pre-@)
   const greeting = name ?? to.split("@")[0];
-  const subject = `✓ ZONE 27 等候名單 · 您是 #${pos} · NT$ 2,700 終身`;
+  // Round 24 subject reframe(post-Round-21 FREE TIER · Round-23 Nav「會員」)·
+  // 原 subject 「ZONE 27 等候名單 · 您是 #N · NT$ 2,700 終身」隱含
+  // 「訂閱者是想付錢的人」 · FREE TIER 訂閱者讀到會困惑「我又沒要付錢」。
+  // 新 framing dual-purpose · 跟 WaitlistForm kicker 對齊。
+  const subject = `✓ ZONE 27 · 您是 #${pos} · 免費訂閱 + Founders 27 預售`;
 
   const html = buildHtmlBody({ greeting, queuePos, pos });
   const text = buildTextBody({ greeting, queuePos, pos });
@@ -129,9 +133,9 @@ function buildHtmlBody({
 <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="max-width:560px;background:#131F38;border:1px solid #1E2A47;">
 <tr><td style="padding:40px 32px;">
 
-<!-- Brand kicker -->
+<!-- Brand kicker · Round 24 dual-purpose framing -->
 <p style="margin:0 0 6px 0;font-family:${mono};color:#D4AF37;font-size:11px;letter-spacing:5px;text-transform:uppercase;">ZONE · 27</p>
-<p style="margin:0 0 32px 0;font-family:${mono};color:#8A93A8;font-size:10px;letter-spacing:4px;text-transform:uppercase;">FOUNDERS 27 · PRE-LAUNCH WAITLIST</p>
+<p style="margin:0 0 32px 0;font-family:${mono};color:#8A93A8;font-size:10px;letter-spacing:4px;text-transform:uppercase;">FREE TIER + FOUNDERS 27 PRE-LAUNCH</p>
 
 <!-- Queue position headline -->
 <p style="margin:0;color:#F5F2EA;font-size:14px;letter-spacing:0.5px;">您已預留位置 ·</p>
@@ -181,7 +185,7 @@ function buildTextBody({
   queuePos: number;
   pos: string;
 }): string {
-  return `ZONE 27 · 創始會員等候名單
+  return `ZONE 27 · 免費訂閱 + Founders 27 預售名單
 
 您已預留位置 · 第 ${queuePos} 位
 #${pos}
