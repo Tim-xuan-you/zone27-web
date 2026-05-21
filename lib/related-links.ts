@@ -328,6 +328,26 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
       title: "回 4-bias 會員儀表板 preview",
     },
   ],
+  // Round 30 Wave 5 · /login NEW · Phase 1 magic link auth。 3 sibling:
+  // /member(註冊後 session 啟動會去的地方)· /membership(4-tier ladder
+  // 全景 · 為什麼要註冊)· /privacy(0-tracking · email 怎麼處理)。
+  "/login": [
+    {
+      href: "/member",
+      kicker: "member",
+      title: "註冊後 session 啟動 · /member 變您 dashboard",
+    },
+    {
+      href: "/membership",
+      kicker: "membership",
+      title: "4-tier ladder 全景 · 為什麼您要註冊",
+    },
+    {
+      href: "/privacy",
+      kicker: "privacy",
+      title: "我們 0 tracking · email 只用於 magic link + 通知",
+    },
+  ],
 };
 
 export function getRelatedLinks(currentPath: string): RelatedLink[] {

@@ -10,7 +10,7 @@
 // Inspired by Linear / Vercel / Stripe command palettes,
 // but DELIBERATELY thin: no fuse.js, no telemetry, no
 // recently-used persistence. Simple substring filter on a
-// hand-curated 28-row list is sufficient and brand-pure
+// hand-curated 29-row list is sufficient and brand-pure
 // (per [[zone27-disclosure-philosophy]]: no hidden ranking).
 // (/admin is intentionally NOT indexed here · Tim bookmarks it ·
 // keeping it out of visitor Cmd-K aligns with its noindex framing.)
@@ -267,7 +267,29 @@ export const COMMAND_ITEMS: CommandItem[] = [
     keywords: ["leaderboard", "wall", "27", "席位", "之牆"],
   },
   {
-    label: "Member · 您的引擎時間軸(FREE TIER dashboard preview)",
+    label: "Login · magic link 註冊 · FREE TIER 會員",
+    kicker: "/login",
+    path: "/login",
+    group: "工具 · 外部",
+    keywords: [
+      "login",
+      "登入",
+      "註冊",
+      "register",
+      "signup",
+      "sign in",
+      "magic link",
+      "magic",
+      "link",
+      "freetier",
+      "free tier",
+      "加入",
+      "加入會員",
+      "auth",
+    ],
+  },
+  {
+    label: "Member · 您的引擎時間軸(authenticated 或 preview)",
     kicker: "/member",
     path: "/member",
     group: "工具 · 外部",

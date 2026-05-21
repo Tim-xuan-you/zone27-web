@@ -188,7 +188,7 @@ ZONE 27 與 **BOTTOM 27**(Tim 的棒球手遊)是雙生品牌:
 
 ---
 
-## 🗺️ 當前路由(v0.28 · Round 30 加 /member/calibration · 2026-05-21 late evening · v0.29 等 Tim 拍板 milestone)
+## 🗺️ 當前路由(v0.28 · Round 30 W5 加 /login + /auth · Phase 1 magic link auth · 2026-05-21 late evening · v0.29 等 Tim 拍板 milestone)
 
 ```
 首頁 + 動線
@@ -239,20 +239,32 @@ Engine + 賽事(只 1 場真實 cpbl-260521-01 · per Day 3 placeholder purge)
 /glossary                27 industry stats(10+10+7)+ 5 Z27 LEXICON = 32 entries(Round 13 加 lexicon)
 /changelog               精簡版本紀錄 · GitHub commits 為 source of truth
 
-Member + Ops(Round 29-30)
-/member                  **Round 29** · FREE TIER 會員儀表板 PUBLIC PREVIEW ·
-                         4 sections · 4 cognitive bias driven(Endowment + IKEA +
-                         Loss Aversion + Collection)· localStorage sim history 當
-                         preview data · 不假裝 functionality 已存在 · Pratfall surface
-                         工程現狀 · launch timeline 公開(Phase 1 Q3 auth · Phase 2 Q3+
-                         TapPay · Phase 3 Q4+ CMS)· Round 30 Wave 2A 加 3-col Apple
-                         /Spotify/ZONE 27 brand comparison + epistemic mirror CTA
-/member/calibration      **NEW Round 30** · agent-research deepest call · sabermetric
+Member + Ops + Auth(Round 29-30)
+/member                  **Round 29 → Round 30 W5 auth-aware** · 動態 ƒ(cookies)·
+                         Session 存在 = 真實 FREE TIER 會員 dashboard(歡迎 banner +
+                         登出 button + AUTHENTICATED chip)· 無 session = 4 sections
+                         psychology-driven preview + /login CTA · Pratfall surface
+                         工程現狀 · launch timeline 公開(Phase 1 ✅ DONE R30 W5 ·
+                         Phase 2 Q3+ TapPay · Phase 3 Q4+ CMS)· Round 30 Wave 2A
+                         加 3-col Apple/Spotify/ZONE 27 brand comparison + epistemic
+                         mirror CTA
+/member/calibration      **NEW Round 30 W2B** · agent-research deepest call · sabermetric
                          reliability diagram(45° line)· ZONE 27 是唯一發布會員自己
                          calibration drift 的高端 sports 品牌 · Pratfall + Costly
-                         Signaling axiom 同時 fire · 現在 N=0 empty scaffold + waiting
-                         state · 今晚 22:00+ 第一個 dot 落點 · personal 版 Phase 1
-                         Q3 auth 後接 · inline SVG 0 deps · 1d revalidate
+                         Signaling axiom 同時 fire · 現在 N=1(cpbl-260521-01 PROVED
+                         · 第一個 gold dot 落點 65 bin)· personal 版 Phase 2 雲端
+                         sync 後接 · inline SVG 0 deps · 1d revalidate
+/login                   **NEW Round 30 W5** · Phase 1 magic link auth · Tim Pratfall
+                         canary 3rd fire 之後從 Q3 promise 加速到 NOW · /login email
+                         入口 + Supabase signInWithOtp · 沒密碼 / 沒 OAuth / 沒 social
+                         login · 1 個欄位 1 個動作 1 封 email · client component
+/auth/callback           **NEW Round 30 W5 · internal redirect** · 收 magic link
+                         ?code= → exchangeCodeForSession → 設 HTTP-only cookies →
+                         redirect /member?welcome=true · 失敗 redirect /login?error=...
+                         · 不在 Cmd-K · 純技術路徑
+/auth/signout            **NEW Round 30 W5 · internal redirect** · POST 路徑 · /member
+                         登出 button submit 過來 · clear session cookies + redirect
+                         / · 不在 Cmd-K
 /admin                   **Round 29 · noindex** · Tim's ops dashboard preview ·
                          live KPI numbers(waitlist · founders state · ingest queue)·
                          Stage 1 reality(Supabase Studio 連結)+ Stage 2 mockup ·
@@ -267,7 +279,7 @@ OG + favicon + chrome
 
 ## ⚙️ Global components(Round 2/5/12/28)
 
-- `<CommandPalette />` · 全站 ⌘K/Ctrl-K palette · **28 visitor-discoverable routes** 索引(Round 30 加 /member/calibration 後 · /admin noindex 不在 palette)(layout.tsx)
+- `<CommandPalette />` · 全站 ⌘K/Ctrl-K palette · **29 visitor-discoverable routes** 索引(Round 30 W5 加 /login Phase 1 auth 後 · /admin · /auth/* 不在 palette)(layout.tsx)
 - `<CmdKTrigger />` · 雙 variant:
   - `variant="chip"` (default) · Nav 右上方 ⌘K 提示按鈕(desktop)
   - `variant="icon"` (Round 12) · Nav mobile 2nd row 右側 ⌕ 圖示(palette 全站可達)

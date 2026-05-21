@@ -197,11 +197,12 @@ export default async function MembershipPage({
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <MapRow
                 question="Q1 · 一般會員現在能加入嗎? 為什麼要等 Q3?"
-                verdict="✓ 現在就能 · FREE TIER 永久免費"
+                verdict="✓ 現在 magic link 註冊 · 不再是 email 預訂"
                 verdictTone="gold"
-                body="留 email · 1 秒鐘 · 不需付費 · 不會升級 · Stratechery / Plausible / Substack 同 model。 您要等的不是「加入會員」 — 是 BLACK CARD 付費訂閱 + 雲端 sync dashboard(Phase 2 Q3+ · TapPay 上線後)。 FREE TIER 是 Day 1 就開的入口 · 跟付費功能不是同一條 timeline。"
+                body="Round 30 W5(2026-05-21)ship Phase 1 magic link auth · 從 Q3 promise 加速到 NOW。 /login 輸入 email · 1 分鐘內收到 magic link · 點開後您 session 啟用 · /member 變您真實 dashboard(不是 preview)· 終身免費 · 永不調漲。 純訂閱通知 email 不要 session 的也可以走老路徑 #waitlist。"
                 ctas={[
-                  { label: "↓ 立刻加入 FREE TIER", href: "#waitlist" },
+                  { label: "→ /login · magic link 註冊", href: "/login" },
+                  { label: "↓ 純訂閱通知 email", href: "#waitlist" },
                 ]}
               />
               <MapRow

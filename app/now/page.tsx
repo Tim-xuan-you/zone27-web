@@ -33,9 +33,15 @@ export const metadata: Metadata = {
 // ─────────────────────────────────────────────────────
 
 const LAST_UPDATED = "2026-05-21";
-const CYCLE = "Round 28-30 · 2026-05-21 late evening · 同日 20+ waves · 第一筆 receipt 已 ingest";
+const CYCLE = "Round 28-30 · 2026-05-21 late evening · 同日 21+ waves · Phase 1 auth 已 ship";
 
 const SHIPPED_THIS_CYCLE: { title: string; body: string; href?: string }[] = [
+  // ── 🔐 Round 30 Wave 5 ship · Phase 1 magic link auth(2026-05-21 deep evening)──
+  {
+    title: "[R30 W5] 🔐 NEW /login + /auth · Phase 1 magic link auth · 從 Q3 promise 加速到 NOW",
+    body: "Tim 第 3 次 pratfall canary:「我點下去又不能註冊...都只會跑到寄 mail 那邊...我要加入會員呀...我們真的有會員系統可以讓使用者註冊?我很懷疑...」 = WaitlistForm 是 email collection · 不是 auth · 帳號註冊不存在。 Tim 完全是對的 · 連 W4 MAP block 的「✓ 現在能加入 FREE TIER」 都是 misleading wording。 Sharp call:不 paper over · ship 真實 Phase 1 magic link auth · 從 publicly-promised Q3 2026 timeline 加速到 NOW(同日 late evening)。 NEW infra:(1) install @supabase/ssr(cookie-aware SSR client)·(2) lib/supabase/browser.ts + lib/supabase/server.ts + getSession helper ·(3) NEW /login route · client component · email input + Supabase signInWithOtp · 1 個欄位 1 個動作 1 封 email · 沒密碼 / 沒 OAuth / 沒 social login(Pratfall + Costly Signaling deliberate minimalism)·(4) NEW /auth/callback route handler · exchangeCodeForSession + redirect /member?welcome=true ·(5) NEW /auth/signout POST route · clear session + redirect /。 /member 升 auth-aware(server component · getSession + searchParams)· Session 存在 → AUTHENTICATED chip + 歡迎 email banner + 登出 button + 「您正式是 FREE TIER 會員」 framing。 無 session → 保留 4 cognitive bias preview + 新加 /login CTA。 /membership MAP Q1 從「✓ 現在 #waitlist」reframe「✓ 現在 /login magic link 註冊」 + 「↓ 純訂閱通知 email」secondary path。 28→29 visitor-discoverable routes(/login)+ 2 internal redirect routes(/auth/callback · /auth/signout)。 Email 走 Supabase 預設 SMTP(free tier 2/hr · Tim 自測夠 · 量起來換 Resend SMTP custom · Round 16 已 production)。 Lesson:repeat-prompt canary 第 3 次 = ship-surfacing-bug 變 ship-actual-functionality-bug · 修不是 surfacing 是 build the real thing。",
+    href: "/login",
+  },
   // ── Round 30 Wave 4 ship(2026-05-21 late evening · pratfall canary fire 後)──
   {
     title: "[R30 W4] /membership · MEMBER SYSTEM MAP · 4 reflexive question single answer hub",
@@ -200,6 +206,11 @@ const SHIPPED_THIS_CYCLE: { title: string; body: string; href?: string }[] = [
 ];
 
 const DISCOVERED_THIS_CYCLE: { title: string; body: string }[] = [
+  // ── Round 30 Wave 5 discovery ──
+  {
+    title: "[R30 W5] Pratfall canary 3rd fire = ship-surfacing-bug 變 ship-actual-functionality-bug",
+    body: "Tim 第 3 次同方向 push:「我點下去又不能註冊...我們真的有會員系統可以讓使用者註冊?我很懷疑」。 W4 MAP block 把答案 surface 了 · 但 Tim 點下去發現:答案是「FREE TIER 留 email」 · 但實際只是 waitlist 不是註冊。 Pratfall canary 3rd fire 升級 — 已經不是 surfacing-bug · 是 actual-functionality-bug。 修不是搬位置 · 是 build the real thing(Phase 1 magic link auth · 從 publicly-promised Q3 加速到 NOW)。 Lesson:1st canary 修「沒看到」 · 2nd canary 修「看不到答案 hub」 · 3rd canary = 「答案本身是 IOU」 · 修不是 promise reframe 而是 ship 真實 functionality。 Tim 從沒明說「我懷疑你」前 · 不要繼續 reframe wording · 要 ship 真 product。",
+  },
   // ── Round 30 Wave 4 discovery ──
   {
     title: "[R30 W4] Pratfall canary repeat-prompt = 永遠是 ship-surfacing-bug · 不是 prompt 噪音",
@@ -281,8 +292,8 @@ const UNRESOLVED: { title: string; body: string }[] = [
   },
   // ── Round 29 new unresolved ──
   {
-    title: "[R29] FREE TIER auth + cloud sync · Phase 1 Q3 2026 target",
-    body: "Supabase magic link auth 接入 · /member 變 auth-gated · visitor localStorage sim history sync 到 cloud。技術上免費(Supabase free tier 涵蓋) · 但是 build · 不是 copy。Round 30+ 啟動候選之一 · 等 Tim 明示「啟動 auth」trigger。",
+    title: "[R30 W5 partial] FREE TIER auth ✅ DONE · cloud sync 仍 UNRESOLVED",
+    body: "Round 30 W5 ship Phase 1 magic link auth(/login + /auth/callback + /auth/signout + /member auth-aware)· 從 Q3 2026 publicly-promised timeline 加速到 NOW(2026-05-21 deep evening)。 Auth ✅ DONE。 但 localStorage sim history → Supabase cloud sync(讓 cross-device member 看到同一份 data)仍 UNRESOLVED · 需要 (1) Supabase public.user_sims table + RLS policies · (2) sync logic on /lab simulator complete · (3) /member 從 localStorage read 改 server read。 Round 30+ 啟動候選 · 等 Tim 明示或下次 pratfall canary fire。",
   },
   {
     title: "[R29] BLACK CARD TapPay 訂閱 · Phase 2 Q3+ target · TIER 2 budget",

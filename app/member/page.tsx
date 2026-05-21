@@ -6,6 +6,7 @@ import RelatedReading from "@/components/RelatedReading";
 import FounderSignOff from "@/components/FounderSignOff";
 import ArticleMeta from "@/components/ArticleMeta";
 import MemberDashboardPreview from "@/components/MemberDashboardPreview";
+import { getSession } from "@/lib/supabase/server";
 
 export const metadata: Metadata = {
   title: "Member · 您的引擎時間軸 · FREE TIER dashboard preview",
@@ -37,7 +38,19 @@ export const metadata: Metadata = {
 //   /member     = 個人預覽 + 心理學 product gap surface
 // ─────────────────────────────────────────────────────
 
-export default function MemberPage() {
+export default async function MemberPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ welcome?: string }>;
+}) {
+  // Round 30 Wave 5 · auth-aware /member。 Session present = 真實註冊
+  // 會員 · 顯示 welcome 區塊 + 登出 button · PREVIEW chip 切 AUTHENTICATED。
+  // No session = preview mode (existing behavior) · 不假裝 functionality 已存在。
+  const session = await getSession();
+  const params = await searchParams;
+  const justArrived = params.welcome === "true";
+  const email = session?.user.email ?? null;
+
   return (
     <div className="flex flex-col flex-1 min-h-screen">
       <Nav active="founders" />
@@ -50,26 +63,114 @@ export default function MemberPage() {
               lang="en"
               className="font-mono text-gold text-[10px] tracking-[0.45em]"
             >
-              / MEMBER · 您的引擎時間軸
+              {session
+                ? "/ MEMBER · 您的 dashboard"
+                : "/ MEMBER · 您的引擎時間軸"}
             </p>
-            <span
-              lang="en"
-              className="font-mono text-[9px] tracking-[0.3em] px-1.5 py-0.5 border border-loss/40 text-loss/80"
-              title="本頁是 public preview · 尚未 auth-gated · launch 在 2026 Q3 規劃"
-            >
-              PREVIEW · NOT YET AUTH-GATED
-            </span>
+            {session ? (
+              <span
+                lang="en"
+                className="font-mono text-[9px] tracking-[0.3em] px-1.5 py-0.5 border border-gold/60 text-gold shimmer"
+                title="您已登入 · session 啟用 · Round 30 Wave 5 ship 的 Phase 1 magic link auth"
+              >
+                ✓ AUTHENTICATED · FREE TIER
+              </span>
+            ) : (
+              <span
+                lang="en"
+                className="font-mono text-[9px] tracking-[0.3em] px-1.5 py-0.5 border border-loss/40 text-loss/80"
+                title="本頁尚未 auth-gated · 您是 visitor / preview state · 想正式註冊 → /login"
+              >
+                PREVIEW · 您尚未登入
+              </span>
+            )}
           </div>
           <h1 className="text-4xl sm:text-5xl text-bone font-light tracking-tight max-w-3xl">
-            FREE TIER 會員儀表板 ·{" "}
-            <span className="text-gold">預覽版</span>
+            {session ? (
+              <>
+                FREE TIER ·{" "}
+                <span className="text-gold">您的 dashboard</span>
+              </>
+            ) : (
+              <>
+                FREE TIER 會員儀表板 ·{" "}
+                <span className="text-gold">預覽版</span>
+              </>
+            )}
           </h1>
-          <p className="mt-6 text-mute leading-relaxed max-w-2xl">
-            Tim 反覆被問:「會員他們自己的頁面在哪裡?能做什麼?」
-            <strong className="text-bone">這頁就是答案的 preview</strong> · 用
-            您 localStorage 裡已有的 sim history 當 preview data ·
-            不假裝 functionality 已存在。
-          </p>
+          {session ? (
+            <p className="mt-6 text-mute leading-relaxed max-w-2xl">
+              歡迎 · 您正式是{" "}
+              <span className="font-mono text-gold">{email}</span> ·
+              ZONE 27 FREE TIER 會員 · 終身免費 · 永不調漲。
+            </p>
+          ) : (
+            <p className="mt-6 text-mute leading-relaxed max-w-2xl">
+              Tim 反覆被問:「會員他們自己的頁面在哪裡?能做什麼?」
+              <strong className="text-bone">這頁就是答案的 preview</strong> · 用
+              您 localStorage 裡已有的 sim history 當 preview data ·
+              不假裝 functionality 已存在。
+            </p>
+          )}
+
+          {/* ── Round 30 Wave 5 · Welcome flash + logout · only when session ── */}
+          {session && (
+            <div className="mt-6 bg-gold/5 border border-gold/50 p-5 sm:p-6">
+              <div className="flex items-baseline justify-between gap-3 flex-wrap mb-3">
+                <p
+                  lang="en"
+                  className={`font-mono text-gold text-[10px] tracking-[0.4em] ${
+                    justArrived ? "shimmer" : ""
+                  }`}
+                >
+                  {justArrived
+                    ? "✓ MAGIC LINK · 登入成功"
+                    : "✓ SESSION ACTIVE"}
+                </p>
+                <form action="/auth/signout" method="post">
+                  <button
+                    type="submit"
+                    className="font-mono text-mute hover:text-loss text-[10px] tracking-[0.3em] underline-offset-4 hover:underline transition-colors"
+                  >
+                    登出 →
+                  </button>
+                </form>
+              </div>
+              <p className="text-mute/85 text-sm leading-relaxed">
+                您的 session 用 HTTP-only cookies 寫進瀏覽器 ·
+                {justArrived
+                  ? " 剛剛 magic link 點開時設定的 ·"
+                  : ""}{" "}
+                直到您點「登出」或 cookie 過期。 您 /lab 之前跑過的 sim history
+                還在 localStorage · Phase 2 雲端 sync(尚未 ship · per /now
+                UNRESOLVED)後會自動 sync 到您 account · 不需手動 migration。
+              </p>
+            </div>
+          )}
+
+          {/* ── Round 30 Wave 5 · CTA to /login if not authenticated ── */}
+          {!session && (
+            <div className="mt-6 bg-slate/40 border border-gold/40 p-5 sm:p-6">
+              <p
+                lang="en"
+                className="font-mono text-gold text-[10px] tracking-[0.4em] mb-3"
+              >
+                / WANT REAL DASHBOARD?
+              </p>
+              <p className="text-mute text-sm leading-relaxed mb-4">
+                這頁目前是 preview。想<strong className="text-bone">真實註冊
+                FREE TIER 會員</strong> · magic link 1 分鐘內收到 · 點開後本頁
+                自動變成<strong className="text-bone">您的 dashboard</strong> ·
+                Round 30 Wave 5 剛 ship · Phase 1 timeline 從 Q3 加速到 NOW。
+              </p>
+              <Link
+                href="/login"
+                className="inline-block px-6 py-2.5 bg-gold text-navy font-mono text-xs tracking-[0.3em] hover:bg-gold-soft transition-colors"
+              >
+                → /login · magic link 註冊
+              </Link>
+            </div>
+          )}
           <p className="mt-4 font-mono text-mute/80 text-[10px] tracking-[0.25em] leading-relaxed max-w-2xl">
             4 個 cognitive bias 同時 fire ·{" "}
             <span lang="en">ENDOWMENT EFFECT</span> · IKEA EFFECT · LOSS AVERSION ·
