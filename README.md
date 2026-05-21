@@ -38,7 +38,7 @@ npx eslint .   # lint check
 ```
 app/
   page.tsx                      # 首頁 + LIVE HeroLiveCard
-  matches/[gameId]/page.tsx     # 賽事詳情(SSG 3 場 CPBL 範例)
+  matches/[gameId]/page.tsx     # 賽事詳情(SSG · Tim 親手 ingest 的 CPBL 場次)
   matches/mlb/page.tsx          # MLB 即時賽程
   lab/page.tsx                  # 即時 Monte Carlo 模擬器
   lab/custom/page.tsx           # Power user mode · 自訂投手
@@ -66,7 +66,7 @@ components/
 lib/
   brand.ts                      # 品牌色票常數(OG 圖共用)
   founders-stats.ts             # 創始名額單一資料源
-  matches.ts                    # 3 場硬編碼 CPBL 比賽 + 型別
+  matches.ts                    # Tim 親手 ingest 的 CPBL 場次 + 5-phase lifecycle + finalResult 型別
   mlb.ts                        # MLB Stats API client
   simulator.ts                  # 蒙地卡羅引擎(at-bat by at-bat)
   sim-history.ts                # localStorage 模擬紀錄 wrapper

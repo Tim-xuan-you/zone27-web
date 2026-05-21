@@ -229,8 +229,8 @@ export default function AuditPage() {
               />
               <DataRow
                 label="vs 歷史鎖定 AI 預測"
-                value="±2.0%"
-                note="2026-05 三場 CPBL 範例 · n=3"
+                value="—"
+                note="N=1 開始 · 2026-05-21 ingestion 起 · 完整 ledger 見 /track-record · 待 N≥30 才有統計意義"
               />
               <DataRow
                 label="可重現性"

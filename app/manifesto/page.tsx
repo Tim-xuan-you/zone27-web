@@ -242,7 +242,7 @@ export default function ManifestoPage() {
               <Link href="/coverage" className="text-gold hover:underline underline-offset-4">
                 /coverage
               </Link>{" "}
-              頁面承認我們只覆蓋 MLB + 3 場 CPBL 範例 —
+              頁面承認我們只覆蓋 MLB + Tim 親手 ingest 過的 CPBL 場次(目前 N=1)—
               比運彩平台的數百場少了兩個數量級。
               這個小覆蓋面意味著流量上限低 · 訪客回訪率低 ·
               「來 ZONE 27 看今天有什麼」這個習慣難以建立。

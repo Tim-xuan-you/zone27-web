@@ -8,7 +8,7 @@ import { matches, type Match } from "@/lib/matches";
 export const metadata: Metadata = {
   title: "Signal Board — 今日量化早報",
   description:
-    "Bloomberg-style 每日量化研究早報。今日 CPBL 三場賽事的信心評等、edge 強度、AI 模型評語、操盤焦點建議。",
+    "Bloomberg-style 每日量化研究早報。今日 CPBL 引擎覆蓋場次的信心評等、edge 強度、AI 模型評語、操盤焦點建議。",
 };
 
 // Re-render hourly so the "today" framing updates as time passes —
@@ -163,7 +163,7 @@ export default function SignalBoardPage() {
         </div>
 
         <p className="text-mute leading-relaxed max-w-xl">
-          每日量化研究早報。今日 CPBL 三場賽事的信心評等、
+          每日量化研究早報。今日 CPBL 引擎覆蓋場次的信心評等、
           edge 強度、模型評語、操盤焦點建議 ——
           一個畫面決定要看哪場、要研究哪一隊。
         </p>

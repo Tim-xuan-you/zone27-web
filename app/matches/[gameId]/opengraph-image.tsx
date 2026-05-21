@@ -2,9 +2,9 @@ import { ImageResponse } from "next/og";
 import { getMatchById } from "@/lib/matches";
 
 // ── ZONE 27 · Per-match Dynamic Open Graph Image ───────
-// 當有人把 https://zone27-web.vercel.app/matches/cpbl-260519-01
+// 當有人把 https://zone27-web.vercel.app/matches/cpbl-260521-01
 // 貼到 LINE / FB / Threads / X / Slack / Discord 等任何平台,
-// 預覽卡片會自動帶上「中信兄弟 62% vs 統一獅 38%」這場
+// 預覽卡片會自動帶上「統一獅 40% vs 富邦悍將 60%」這場
 // 比賽的專屬黑金預測卡 — 不再是全站通用 slogan 卡。
 // ─────────────────────────────────────────────────────
 

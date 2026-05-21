@@ -13,7 +13,7 @@ import type { Match, PitcherStats, TeamSide } from "@/lib/matches";
 // ── ZONE 27 · /lab/custom · Power User Mode ────────────
 // 自訂任意兩位投手的 K/9 · BB/9 · HR/9,構造合成 Match
 // 物件丟給 MatchSimulator 跑 10,000 場 + REPLAY。
-// 證明引擎不是只能跑 hardcoded 3 場 CPBL 比賽,而是可以模擬
+// 證明引擎不是只能跑 Tim 親手 ingest 的 CPBL 比賽,而是可以模擬
 // 任何合法投手組合。
 // ─────────────────────────────────────────────────────
 
