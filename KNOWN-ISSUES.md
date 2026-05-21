@@ -9,13 +9,14 @@
 
 ## 🟡 Pending owner actions(您該做的)
 
-從 [TODO.md](TODO.md) 引用 · **以 DAY 2 結束狀態 (2026-05-20 晚)**:
+從 [TODO.md](TODO.md) 引用 · **以 DAY 3 開盤狀態 (2026-05-21)**:
 
-- ✅ **① Supabase 註冊** — **DONE**(2026-05-20 上午 · waitlist DB 上線 · RLS-locked + 2 個 SECURITY DEFINER 函式)
+- ✅ **① Supabase 註冊** — **DONE**(2026-05-20 上午)
+- ✅ **④ Footer 版本 chip bump** — **DONE**(2026-05-21 · v0.27 → v0.28 全 repo · LAST_REVIEWED 2026-05-21)
 - **② Resend 註冊**(5 分鐘)— 仍 pending · 解鎖 confirmation emails
 - **③ 品牌網域購買**(等名稱決定:zone27.tw / .app / .cc / .io)
-- **④ Footer 版本 chip bump** v0.27 → v0.28(您拍板的時機 · DAY 2 算 v0.28 milestone)
-- **⑤ CPBL 截圖**(3 分鐘 cpbl.com.tw)— 解鎖真實 CPBL ingestion
+- **⑤ CPBL 截圖** — DAY 3 持續路徑 · 今晚 22:00 後截 cpbl-260521-01 box score → /track-record 第一筆 ledger entry
+- **⑥ 球員 K/BB profile screenshot**(optional)— 升級 4 個 estimate 為真實值
 
 完整步驟見 TODO.md · 我會在您說「開始 ② Resend」時一步步帶您走。
 

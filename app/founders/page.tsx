@@ -128,7 +128,7 @@ const COMPARE_ROWS = [
 const INLINE_FAQ = [
   {
     q: "我怎麼知道這不是 vaporware?",
-    a: "原始碼公開在 GitHub(連結在 footer)。蒙地卡羅引擎已經在 /lab 跑得到,您可以親自跑 10,000 次模擬看收斂過程。版本紀錄在 /changelog 從 v0.1 到 v0.27 都看得到 — 每一個版本都是真的上線。",
+    a: "原始碼公開在 GitHub(連結在 footer)。蒙地卡羅引擎已經在 /lab 跑得到,您可以親自跑 10,000 次模擬看收斂過程。版本紀錄在 /changelog 從 v0.1 到 v0.28 都看得到 — 每一個版本都是真的上線。賽後實際結果則在 /track-record 公開累積。",
   },
   {
     q: "等候名單階段就要付錢嗎?",

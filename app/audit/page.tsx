@@ -30,7 +30,7 @@ export const metadata: Metadata = {
 //   06 Last calibration run
 // ─────────────────────────────────────────────────────
 
-const LAST_REVIEWED = "2026-05-20";
+const LAST_REVIEWED = "2026-05-21";
 const ENGINE_VERSION = "v0.2 · Real At-Bat";
 const ITERATIONS = "10,000";
 const STANDARD_ERROR = "±0.5%";
@@ -53,7 +53,7 @@ export default function AuditPage() {
             className="print-only mb-6 pb-3 border-b border-line/60 font-mono text-[10px] uppercase tracking-[0.2em]"
           >
             <div className="flex justify-between gap-4">
-              <span>ZONE 27 — MODEL REPORT v0.27</span>
+              <span>ZONE 27 — MODEL REPORT v0.28</span>
               <span>
                 PRINTED · zone27-web.vercel.app/audit
               </span>
@@ -73,7 +73,7 @@ export default function AuditPage() {
                 lang="en"
                 className="font-mono text-mute text-[10px] tracking-[0.35em] tabular"
               >
-                REPORT v0.27
+                REPORT v0.28
               </p>
             </div>
             <h1 className="text-4xl sm:text-5xl text-bone font-light tracking-tight leading-[1.1] mb-6">
@@ -295,7 +295,7 @@ export default function AuditPage() {
             <span className="font-mono text-gold tabular">7</span>{" "}
             個還多。&rdquo;
             <footer className="mt-4 font-mono text-mute text-[10px] tracking-[0.3em] not-italic">
-              — ZONE 27 MODEL REPORT v0.27 · 上方 Section 02 + 03 詳列
+              — ZONE 27 MODEL REPORT v0.28 · 上方 Section 02 + 03 詳列
             </footer>
           </blockquote>
 
@@ -357,7 +357,7 @@ export default function AuditPage() {
             <DataTable>
               <DataRow
                 label="本份報告版本"
-                value="v0.27"
+                value="v0.28"
                 note="與網站版本同步"
               />
               <DataRow
@@ -435,6 +435,14 @@ export default function AuditPage() {
               這份 model report 整份的存在本身,就是我們對
               「您憑什麼信任 ZONE 27?」這個問題的具體回答。
               讀完您可以一行一行驗證 — 任何宣稱「我們有黑盒 AI 模型,你看不到」的對手,正好證明他們的立場跟我們是反的。
+            </P>
+            <P className="text-mute/70">
+              <strong className="text-bone">物理證據在</strong>{" "}
+              <Link href="/track-record" className="text-gold hover:underline">
+                /track-record
+              </Link>
+              {" "}— 每場引擎公開預測賽後實際結果(PROVED ✓ / DIVERGED ✕)等大列出 ·
+              不刪、不修飾、不過濾。揭露哲學 = 文字理論;公開戰績 = 文字理論的物理產出。
             </P>
             <P className="text-mute/70">
               完整論證見{" "}

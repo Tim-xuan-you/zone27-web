@@ -22,6 +22,12 @@ const GH_COMMITS_URL =
 
 const MILESTONES: { date: string; title: string; detail: string }[] = [
   {
+    date: "2026-05-21",
+    title: "/track-record 公開戰績 ledger + match lifecycle (PRE/LIVE/FINAL) + calibration 收據",
+    detail:
+      "第 7 個 trust artifact /track-record 上線(Bloomberg-terminal ledger · PROVED ✓ 跟 DIVERGED ✕ 等大列出 · 從 N=0 honest empty state 起跳)· Match lifecycle 完整 5-phase 狀態(future · today-pregame · today-live · final · stale-archived · 取代舊 2-state stale/future binary)· HeroLiveCard + /matches/[gameId] 加 phase-aware badge + 賽後 calibration receipt block(僅當 finalResult ingested · 等大顯示 PROVED 或 DIVERGED)· /track-record OG card(8→15 個 custom OG)· homepage TRUST STACK 6→7-doc + grid lg:3→lg:4 · footer DOCS 加「公開戰績」· /audit Section 08 + /manifesto Section I inline link 到 /track-record · related-links hub-and-spoke 更新 · Match type 加 finalResult optional field + 5 個 helpers(isMatchDataToday · getMatchPhase · getCalibration · getEnginePctOnWinner · getFinalizedMatches)。版本 invariant 全站對齊(REPORT v0.28 · ENGINE v0.2 · LAST_REVIEWED 2026-05-21)。",
+  },
+  {
     date: "2026-05-20",
     title: "/manifesto 倒置宣言 + /founders 「您不是在買引擎」reframe + audit honesty sweep",
     detail:

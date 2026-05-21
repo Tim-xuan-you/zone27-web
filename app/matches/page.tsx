@@ -4,9 +4,11 @@ import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import {
   matches,
-  isMatchDataStale,
-  isMatchDataFuture,
+  getMatchPhase,
+  getCalibration,
   type Match,
+  type MatchPhase,
+  type Calibration,
 } from "@/lib/matches";
 
 export const metadata: Metadata = {
@@ -36,22 +38,17 @@ export default function MatchesPage() {
           <span className="font-mono text-[9px] tracking-[0.3em] px-1.5 py-0.5 border border-gold/30 text-gold/70">
             示範資料
           </span>
-          {isMatchDataStale(todaysMatches[0]) && (
-            <span
-              className="font-mono text-[9px] tracking-[0.3em] px-1.5 py-0.5 border border-mute/60 text-mute"
-              title="這場比賽日期早於今日 — 為 archived 資料"
-            >
-              DATA · ARCHIVED
-            </span>
-          )}
-          {isMatchDataFuture(todaysMatches[0]) && (
-            <span
-              className="font-mono text-[9px] tracking-[0.3em] px-1.5 py-0.5 border border-gold/60 text-gold"
-              title="這場比賽尚未開打 — 為 pre-game preview"
-            >
-              DATA · PREVIEW
-            </span>
-          )}
+          <PhaseChip
+            phase={getMatchPhase(todaysMatches[0])}
+            calibration={getCalibration(todaysMatches[0])}
+          />
+          <Link
+            href="/track-record"
+            className="font-mono text-[9px] tracking-[0.3em] px-1.5 py-0.5 border border-gold/30 text-gold/70 hover:border-gold hover:text-gold transition-colors"
+            title="所有有最終結果的比賽公開戰績"
+          >
+            公開戰績 →
+          </Link>
         </div>
         <div className="flex items-end justify-between flex-wrap gap-4">
           <h1 className="text-4xl sm:text-5xl text-bone font-light tracking-tight">
@@ -126,16 +123,21 @@ export default function MatchesPage() {
 // ── MiniMatchCard ──────────────────────────────────────
 function MiniMatchCard({ match }: { match: Match }) {
   const homeFavored = match.home.winRate > match.away.winRate;
+  const phase = getMatchPhase(match);
+  const calibration = getCalibration(match);
   return (
     <Link
       href={`/matches/${match.id}`}
       className="block bg-slate/60 border border-line/70 hover:border-gold/40 transition-colors p-6 group"
     >
       {/* meta */}
-      <div className="flex items-center justify-between mb-5">
-        <span className="font-mono text-gold text-[10px] tracking-[0.3em]">
-          {match.league}
-        </span>
+      <div className="flex items-center justify-between mb-5 gap-2 flex-wrap">
+        <div className="flex items-center gap-2 flex-wrap">
+          <span className="font-mono text-gold text-[10px] tracking-[0.3em]">
+            {match.league}
+          </span>
+          <PhaseChip phase={phase} calibration={calibration} compact />
+        </div>
         <span className="font-mono text-mute text-[10px] tracking-[0.25em]">
           {match.venue.replace("棒球場", "").replace("洲際", "洲際")} · {match.startTime}
         </span>
@@ -213,5 +215,92 @@ function MiniMatchCard({ match }: { match: Match }) {
         </span>
       </div>
     </Link>
+  );
+}
+
+// ── PhaseChip ─────────────────────────────────────────
+// Shared chip used at page-header (large) and per-card (compact). Same
+// 5-phase logic as HeroLiveCard's PhaseBadge — just sized for context.
+
+function PhaseChip({
+  phase,
+  calibration,
+  compact = false,
+}: {
+  phase: MatchPhase | null;
+  calibration: Calibration | null;
+  compact?: boolean;
+}) {
+  if (!phase) return null;
+  const baseSize = compact
+    ? "text-[8px] tracking-[0.25em] px-1 py-0.5"
+    : "text-[9px] tracking-[0.3em] px-1.5 py-0.5";
+
+  if (phase === "final" && calibration) {
+    const styles = {
+      proved: "border-gold text-gold",
+      diverged: "border-loss/70 text-loss",
+      push: "border-mute/60 text-mute",
+    } as const;
+    const labels = {
+      proved: "✓ PROVED",
+      diverged: "✕ DIVERGED",
+      push: "= PUSH",
+    } as const;
+    return (
+      <span
+        lang="en"
+        className={`font-mono ${baseSize} border ${styles[calibration]}`}
+        title="賽後實際結果"
+      >
+        {labels[calibration]}
+      </span>
+    );
+  }
+
+  if (phase === "today-pregame") {
+    return (
+      <span
+        lang="en"
+        className={`font-mono ${baseSize} border border-gold text-gold shimmer`}
+        title="今晚開賽 · 預測已公開鎖定"
+      >
+        TODAY · 今晚開賽
+      </span>
+    );
+  }
+
+  if (phase === "today-live") {
+    return (
+      <span
+        lang="en"
+        className={`font-mono ${baseSize} border border-gold text-gold`}
+        title="賽事進行中 · 引擎預測已無法再改"
+      >
+        LIVE · 賽事中
+      </span>
+    );
+  }
+
+  if (phase === "future") {
+    return (
+      <span
+        lang="en"
+        className={`font-mono ${baseSize} border border-gold/60 text-gold`}
+        title="尚未開打 · pre-game preview"
+      >
+        PREVIEW
+      </span>
+    );
+  }
+
+  return (
+    <span
+      lang="en"
+      className={`font-mono ${baseSize} border border-mute/60 text-mute`}
+      title="已結束 · 未補錄收據"
+    >
+      ARCHIVED · 無收據
+    </span>
   );
 }

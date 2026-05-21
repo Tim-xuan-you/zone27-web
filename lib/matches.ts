@@ -29,6 +29,18 @@ export type ScoreBucket = {
   probability: number;      // 0-100
 };
 
+// Real final score ingested by founder after game ends.
+// Only set on matches where Tim has personally screenshot the
+// box score and Claude has parsed it in. Drives /track-record
+// calibration ledger (engine predicted X% → actual outcome).
+export type FinalResult = {
+  homeScore: number;
+  awayScore: number;
+  winner: "home" | "away" | "tie";
+  ingestedAt: string;       // ISO date · when Tim's screenshot was processed
+  innings?: number;         // 9 standard · note extra-innings if other
+};
+
 export type Match = {
   id: string;
   league: "CPBL" | "MLB" | "NPB" | "NBA";
@@ -39,6 +51,7 @@ export type Match = {
   away: TeamSide;
   topScores: ScoreBucket[]; // AI 模擬的常見終局比分(top 5)
   aiConfidence: number;     // 0-100 模型對自己預測的信心
+  finalResult?: FinalResult; // set after game · powers /track-record receipt
 };
 
 export const matches: Match[] = [
@@ -291,4 +304,108 @@ export function isMatchDataFuture(match: Match | undefined): boolean {
   const matchDate = getMatchDateIso(match);
   if (!matchDate) return false;
   return matchDate > getTodayTaipei();
+}
+
+/** True when the match's date IS today in Taipei timezone.
+ *  Today bifurcates further into pregame vs live via getMatchPhase(). */
+export function isMatchDataToday(match: Match | undefined): boolean {
+  if (!match) return false;
+  const matchDate = getMatchDateIso(match);
+  if (!matchDate) return false;
+  return matchDate === getTodayTaipei();
+}
+
+/** Current Taipei wall-clock as minutes-since-midnight. Used to compare
+ *  against match.startTime ("18:35" → 1115) for today-pregame vs today-live.
+ *  Stable across server / edge / Node renderings. */
+export function getTaipeiNowMinutes(): number {
+  const parts = new Intl.DateTimeFormat("en-GB", {
+    timeZone: "Asia/Taipei",
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
+  }).formatToParts(new Date());
+  const h = parseInt(parts.find((p) => p.type === "hour")?.value ?? "0", 10);
+  const m = parseInt(parts.find((p) => p.type === "minute")?.value ?? "0", 10);
+  return h * 60 + m;
+}
+
+/** Parse "HH:MM" → minutes-since-midnight. Returns 0 on malformed input. */
+function parseHHMM(t: string): number {
+  const [hStr, mStr] = t.split(":");
+  const h = parseInt(hStr ?? "", 10);
+  const m = parseInt(mStr ?? "", 10);
+  if (Number.isNaN(h) || Number.isNaN(m)) return 0;
+  return h * 60 + m;
+}
+
+/** The full match lifecycle phase. Five states bound to two timelines —
+ *  match.date (compared against Taipei today) and match.finalResult
+ *  (whether the founder has ingested a final score yet).
+ *
+ *  Priority: finalResult set wins over any date comparison. A "today"
+ *  match that already has finalResult is 'final' (e.g. matinee + late
+ *  ingestion). The date-based states only matter pre-ingestion. */
+export type MatchPhase =
+  | "final"           // finalResult present · /track-record candidate
+  | "today-pregame"   // matchDate === today AND now < startTime
+  | "today-live"      // matchDate === today AND now ≥ startTime (no result yet)
+  | "future"          // matchDate > today
+  | "stale-archived"; // matchDate < today AND no finalResult ingested
+
+export function getMatchPhase(match: Match | undefined): MatchPhase | null {
+  if (!match) return null;
+  if (match.finalResult) return "final";
+  const matchDate = getMatchDateIso(match);
+  if (!matchDate) return null;
+  const today = getTodayTaipei();
+  if (matchDate < today) return "stale-archived";
+  if (matchDate > today) return "future";
+  // matchDate === today
+  return getTaipeiNowMinutes() < parseHHMM(match.startTime)
+    ? "today-pregame"
+    : "today-live";
+}
+
+/** Calibration verdict — did the engine's pre-game favorite actually win?
+ *  Returns null when there's no final result yet (most matches). This is
+ *  the public receipt that powers /track-record. Brand-honest: PROVED
+ *  and DIVERGED render at equal visual weight in the ledger. */
+export type Calibration = "proved" | "diverged" | "push";
+
+export function getCalibration(match: Match | undefined): Calibration | null {
+  if (!match?.finalResult) return null;
+  const { winner } = match.finalResult;
+  if (winner === "tie") return "push";
+  const homePicked = match.home.winRate > match.away.winRate;
+  const awayPicked = match.away.winRate > match.home.winRate;
+  // Exact 50/50 engine output — no favorite was implied, so the result
+  // can't be PROVED or DIVERGED against a non-existent prediction.
+  if (!homePicked && !awayPicked) return "push";
+  if (homePicked && winner === "home") return "proved";
+  if (awayPicked && winner === "away") return "proved";
+  return "diverged";
+}
+
+/** The percentage the engine assigned to the side that actually won.
+ *  Returns null when no final result. Used in /track-record to render
+ *  "engine 60.5% → ACTUAL HOME WIN" — exposes near-misses honestly.
+ *  A 51% PROVED is still PROVED, but the ledger shows it was close. */
+export function getEnginePctOnWinner(match: Match | undefined): number | null {
+  if (!match?.finalResult) return null;
+  const { winner } = match.finalResult;
+  if (winner === "tie") return null;
+  return winner === "home" ? match.home.winRate : match.away.winRate;
+}
+
+/** All matches with an ingested final result, sorted newest-first by date.
+ *  Powers /track-record ledger rows. Pure helper — no side effects. */
+export function getFinalizedMatches(): Match[] {
+  return matches
+    .filter((m): m is Match & { finalResult: FinalResult } => !!m.finalResult)
+    .sort((a, b) => {
+      const da = getMatchDateIso(a) ?? "";
+      const db = getMatchDateIso(b) ?? "";
+      return db.localeCompare(da);
+    });
 }

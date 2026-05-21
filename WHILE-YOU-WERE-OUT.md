@@ -1,7 +1,101 @@
 # 🌙 您休息時 Claude 做了什麼
 
-> Tim · 2026-05-20 晚上 · **Day 2 · 21 commits since /manifesto**
+> Tim · 2026-05-21 開盤 · **Day 3 · /track-record + match lifecycle**
+> Tim · 2026-05-20 晚上 · **Day 2 · 37 commits since /manifesto**
 > Tim · 2026-05-19 晚上 · 十六波迭代 Round 1 → Round 16 (底下)
+
+---
+
+## 🚀 DAY 3 (2026-05-21) · 公開戰績 ledger + match lifecycle
+
+您把 DAY 3 全權交給我接 TODO + 加 persona「敢於突破的行銷設計專家」lens · 我做了 1 個 sharp call:
+
+> **A++ · 公開戰績 `/track-record` 第 7 個 trust artifact 上線 + match 完整 5-phase lifecycle + 賽後 calibration 收據** —
+> 全世界的運動分析/明牌平台都「藏 miss · 秀 hit」· ZONE 27 day 3 在還沒有 track record 時就建一個公開 ledger · 第一筆裸體上場 · N=1 honest empty state · 這是 Buffett「我會犯錯」+ /manifesto Section II「verifiable receipts」+ /audit Section 08 揭露哲學的 visual rendering。
+
+### 📚 1 個新 canonical trust artifact
+
+| 路徑 | 內容 |
+|---|---|
+| `/track-record` | Bloomberg-terminal 公開戰績 ledger · PROVED ✓ 跟 DIVERGED ✕ 等大列出 · 從 N=0 honest empty state 起跳 · 5-step GRADING 方法論 · 「Most prediction platforms hide their misses. We file them.」punchline · 7-doc TRUST STACK 第 7 個 |
+
+### ⚙️ Engineering 完整 5-phase match lifecycle
+
+替代舊的 2-state binary(stale-only / future-only):
+
+| Phase | 觸發條件 | UI 表現 |
+|---|---|---|
+| `future` | matchDate > today | 「PREVIEW · 預告」金色 badge |
+| `today-pregame` | matchDate === today AND now < startTime | 「TODAY · 今晚開賽」金色 shimmer badge |
+| `today-live` | matchDate === today AND now ≥ startTime · 無 finalResult | 「LIVE · 賽事進行中」金色 badge |
+| `final` | finalResult 已 ingest | calibration 動態 badge:「✓ PROVED」gold / 「✕ DIVERGED」loss-red / 「= PUSH」mute |
+| `stale-archived` | matchDate < today AND 無 finalResult | 「ARCHIVED · 無收據」灰色 badge |
+
+`lib/matches.ts` 新加 helpers:
+- `isMatchDataToday(match)` — 第 3 個 date 比較
+- `getTaipeiNowMinutes()` — 解 Taipei 時區當下分鐘數(用於 today-pregame vs today-live 區分)
+- `getMatchPhase(match)` — 統一 5-phase 邏輯入口
+- `getCalibration(match)` — 'proved' | 'diverged' | 'push' | null
+- `getEnginePctOnWinner(match)` — 引擎在實際贏家身上下了幾 %
+- `getFinalizedMatches()` — `/track-record` ledger 用的 finalized-only filter
+
+`Match` type 新加:
+- `finalResult?: FinalResult`(homeScore · awayScore · winner · ingestedAt · innings)
+- 該欄 optional · 賽後 Tim 截圖 ingest 後才填
+
+### 🎯 賽後 calibration 收據區塊
+
+當 `finalResult` 存在,以下兩個位置自動 render:
+
+1. **HeroLiveCard 首頁卡片底部** · 新加 `/ RECEIPT · ENGINE vs ACTUAL` 區塊(對齊 /audit S08 disclosure philosophy)
+2. **`/matches/[gameId]` Section / 00** · 比原 / 01 ~ / 05 sections 更上方 · 巨型 prediction-vs-actual block · 含 CalibrationVerdictLg + Link to /track-record
+
+兩處都「等大顯示 PROVED 跟 DIVERGED」,不藏 miss(brand IP)。
+
+### 🖼️ 1 個新 custom OG card(14 → 15)
+
+`/track-record` · Bloomberg-style 3-stat 等大佈局 · PROVED + DIVERGED + TOTAL 並排 ·「Most prediction platforms hide their misses. We file them.」punchline。
+
+### 🔗 Connector 網絡
+
+- 首頁 **TRUST STACK** 從 6-doc 升 7-doc · grid `lg:grid-cols-3` 改 `lg:grid-cols-4` · 加 /track-record 第 7 卡(gold-flagged)
+- Footer **DOCS** 群組加「公開戰績」(4 → 5 items)
+- **/audit Section 08** disclosure philosophy 加 inline link「物理證據在 /track-record」
+- **/manifesto Section I** disclosure 加 inline link「物理產出在 /track-record」
+- **related-links.ts** 加 /track-record entry + 加進 /audit + /manifesto 的 3-link list
+
+### 🔢 版本 invariant 全 repo 對齊
+
+REPORT v0.27 → v0.28 · LAST_REVIEWED 2026-05-20 → 2026-05-21 · 全部 grep-verified bumped:
+
+| 檔案 | 變更 |
+|---|---|
+| `app/discipline/page.tsx` | PAGE_VERSION + PAGE_DATE |
+| `app/discipline/opengraph-image.tsx` | OPERATING DISCIPLINE · v0.28 |
+| `app/manifesto/page.tsx` | MANIFESTO_DATE + MANIFESTO_VERSION |
+| `app/manifesto/opengraph-image.tsx` | MANIFESTO · v0.28 |
+| `app/audit/page.tsx` | LAST_REVIEWED + 4 個 v0.27 → v0.28 |
+| `app/audit/opengraph-image.tsx` | LAST_REVIEWED + v0.27 → v0.28 |
+| `app/coverage/page.tsx` | LAST_REVIEWED + 2 個 v0.27 → v0.28 |
+| `components/Footer.tsx` | version chip v0.27 → v0.28 |
+| `app/founders/page.tsx` | FAQ「v0.1 到 v0.27」→「v0.1 到 v0.28 + /track-record」 |
+| `app/changelog/page.tsx` | 加 v0.28 milestone entry |
+
+### 📋 docs 更新
+
+- `docs/MANUAL-ONBOARDING.md` 新加 FINAL SCORE INGEST section · 5-step 賽後 3 分鐘流程 · 含異常處理表
+- `TODO.md` · `KNOWN-ISSUES.md` · `WHILE-YOU-WERE-OUT.md` DAY 3 entry
+
+### 🌅 您回來建議流程
+
+1. `npm run dev` → 看實際效果
+2. 重點看 `/track-record`(空 ledger empty state 是 brand IP)· 首頁 TRUST STACK 7-doc · `/matches/cpbl-260521-01` PHASE badge
+3. **18:35 後**(賽事真的進行中):看 HeroLiveCard badge 轉 LIVE
+4. **22:00 後**(賽事結束):截 cpbl.com.tw 那場 box score → 貼給我 + 一句「ingest cpbl-260521-01」→ 我 3 分鐘 ingest → ledger 第一筆亮起
+
+---
+
+
 
 ---
 

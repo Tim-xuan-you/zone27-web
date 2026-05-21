@@ -66,6 +66,7 @@ const FOOTER_GROUPS: FooterGroup[] = [
       { label: "模型報告", href: "/audit" },
       { label: "技術白皮書", href: "/methodology" },
       { label: "覆蓋範圍", href: "/coverage" },
+      { label: "公開戰績", href: "/track-record" },
       { label: "27 種進階指標", href: "/glossary" },
     ],
   },
@@ -190,7 +191,7 @@ export default function Footer() {
           >
             <span className="chip-dot w-1.5 h-1.5 rounded-full bg-gold/70 glow-gold" />
             <span>
-              v0.27 · {getTaipeiTodayChip()} TPE
+              v0.28 · {getTaipeiTodayChip()} TPE
             </span>
           </a>
         </div>

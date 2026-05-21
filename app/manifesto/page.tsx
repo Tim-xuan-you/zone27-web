@@ -34,8 +34,8 @@ export const metadata: Metadata = {
 //     · why we accept the cost) + canonical citation
 // ─────────────────────────────────────────────────────
 
-const MANIFESTO_DATE = "2026-05-20";
-const MANIFESTO_VERSION = "v0.27";
+const MANIFESTO_DATE = "2026-05-21";
+const MANIFESTO_VERSION = "v0.28";
 
 export default function ManifestoPage() {
   return (
@@ -144,6 +144,15 @@ export default function ManifestoPage() {
               <strong className="text-bone">這些東西 fork 不走</strong>。
               算法本來就沒有可藏的價值,硬藏 = 假裝有秘密 = 對訪客撒謊
               = 品牌信用自殺。
+            </P>
+            <P className="text-mute/70">
+              <strong className="text-bone">物理產出在</strong>{" "}
+              <Link href="/track-record" className="text-gold hover:underline">
+                /track-record
+              </Link>
+              {" "}— 每場引擎賽前公開預測 + 賽後實際結果 ·
+              PROVED ✓ 跟 DIVERGED ✕ 等大列出 · 不刪、不修飾、不過濾。
+              倒置 I 是文字理論,這頁是文字理論每天加一行的物理證據。
             </P>
             <P className="text-mute/70">
               完整論證見{" "}

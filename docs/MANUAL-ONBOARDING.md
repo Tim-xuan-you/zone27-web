@@ -207,5 +207,93 @@ Channel attribution (top 5):
 
 ---
 
-最後更新:2026-05-20 · 由 Claude(以 Tim-xuan-you 身分) 寫入。
+---
+
+## ⚡ FINAL SCORE INGEST · 賽後 3 分鐘流程(2026-05-21 新增)
+
+當 ZONE 27 公開預測的 CPBL 賽事結束後 · Tim 用以下流程把最終比分寫入 `match.finalResult` · `/track-record` 公開戰績 ledger 自動長一行。
+
+### 為什麼這個流程重要
+
+`/track-record` 是 ZONE 27 第 7 個 trust artifact · 也是 4 個倒置(disclosure)的物理產出。空著或舊資料 = 整個 brand IP 失重。每場比賽結束後 24 小時內 ingest 是 Tim 親自完成的 daily ritual。
+
+### 觸發時機
+
+CPBL 一軍賽事每天 6 場 · 全部 ~18:30 開賽 · 21:30-22:30 結束。Tim 在賽後最簡單 ritual:看到某場結束 → 開 cpbl.com.tw 那場 box score → 截 1 張圖 → 貼給 Claude。
+
+### Step 1 · Tim 截圖 box score(30 秒)
+
+在 cpbl.com.tw 或 CPBL 官方 app 找到剛結束的那場 → 看「即時比分」頁面 → 截一張包含以下資訊的圖:
+- 兩隊最終得分
+- 比賽局數(9 局 / 延長賽幾局)
+- 比賽日期確認(2026-05-21)
+
+### Step 2 · Tim 貼給 Claude(30 秒)
+
+直接貼到對話框,加一句:「ingest 賽後比分,gameId 是 `cpbl-260521-01`」(把 gameId 換成那場的真實 id)。
+
+### Step 3 · Claude 解析並寫入 lib/matches.ts(1-2 分鐘)
+
+Claude 從截圖讀出:
+- `homeScore` / `awayScore`(從 box score 直接抓)
+- `winner`: `"home"` | `"away"` | `"tie"`(誰多就誰贏)
+- `ingestedAt`: 今天 ISO date(e.g. `"2026-05-21"`)
+- `innings`(預設 9 · 延長賽寫實際局數)
+
+然後在 lib/matches.ts 該場 Match 物件加上 `finalResult` field:
+
+```ts
+finalResult: {
+  homeScore: 5,
+  awayScore: 4,
+  winner: "home",
+  ingestedAt: "2026-05-21",
+  innings: 9,
+},
+```
+
+### Step 4 · Claude build + commit + push(1-2 分鐘)
+
+自動三步:
+1. `npm run build` 確保 TypeScript 沒抱怨
+2. `git commit -m "🎯 FINAL ingest · cpbl-260521-01 · 5:4 HOME WIN · ENGINE PROVED ✓"` (按結果 PROVED 或 DIVERGED)
+3. `git push origin main`(per feedback_auto_push_zone27 不問 Tim)
+
+### Step 5 · 自動效果(0 動作)
+
+- `/track-record` 頁面新增 1 行 · PROVED ✓ 或 DIVERGED ✕
+- `/matches/[gameId]` 加上「/ 00 · ENGINE RECEIPT」block
+- HeroLiveCard 卡片右上 badge 從「LIVE · 賽事進行中」變成「✓ PROVED」或「✕ DIVERGED」
+- ScarcityStrip / Footer / 任何 stats display 自動 reflect 新 sample
+- ISR 24h 內全站更新(實際上 build 一發 deploy 立即 fresh)
+
+### 異常處理
+
+| 情境 | 處理 |
+|---|---|
+| Tim 截圖比賽尚未結束(延長賽) | 等比賽真的完了再截 · 不寫 partial result |
+| 比分截圖跟 cpbl 官網有差 | 以 cpbl.com.tw 官方為準 · Tim 截 cpbl 官方頁面那張 |
+| 某場 ZONE 27 沒做預測但 Tim 想記錄 | 不要 · /track-record 只記錄引擎公開預測過的比賽(per coverage philosophy) |
+| 引擎預測結果為「dead tie 50/50」(極罕見) | winner 設那場真實贏家 · calibration 自動算 PUSH |
+| 延長賽結束 12 局 5:4 home | `innings: 12` 寫進 finalResult |
+
+### 不要做的事
+
+- ❌ 賽後修改引擎預測 winRate(那會違反「賽前鎖定」的承諾)
+- ❌ 賽後給某場「補一個 BLACK CARD 才有的深度分析」(那是 SaaS 邏輯 · ZONE 27 倒置)
+- ❌ Backfill 歷史比賽(已結束、未公開預測過的 · 不能事後加進 ledger)
+- ❌ 刪除 DIVERGED 行(那是 brand suicide · /track-record 的存在就是公開 miss)
+
+### 升級時機
+
+當 CPBL 每天 6 場全 ingest 變成負擔(估 ~10 min/天)· 評估:
+- **Cron + cpbl 官方 RSS** · 如果他們開放(目前沒)
+- **Tim 一日批次 ingest** · 隔天早上批次處理前一天 6 場(降低 daily churn)
+- **Founders 27 投票 daily「需要追哪場」** · 訂閱者選擇 · 不全 ingest
+
+但即使 partial ingest · 任何已 ingest 的場次都不能刪、不能改 — 那是 /track-record 的 core invariant。
+
+---
+
+最後更新:2026-05-21 · 由 Claude(以 Tim-xuan-you 身分) 寫入。
 未來 Tim 親自修訂時直接編輯本文件。

@@ -2,7 +2,14 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { isMatchDataStale, isMatchDataFuture, type Match } from "@/lib/matches";
+import {
+  getMatchPhase,
+  getCalibration,
+  getEnginePctOnWinner,
+  type Match,
+  type MatchPhase,
+  type Calibration,
+} from "@/lib/matches";
 import {
   simulateGame,
   applyBatch,
@@ -25,13 +32,16 @@ const BATCH = 50;
 
 export default function HeroLiveCard({ match }: { match: Match }) {
   const [stats, setStats] = useState<RunningStats>(initialStats);
-  const [phase, setPhase] = useState<"simulating" | "converged">("simulating");
+  const [simPhase, setSimPhase] = useState<"simulating" | "converged">(
+    "simulating"
+  );
   const rafRef = useRef<number | null>(null);
-  // Differentiate past games (ARCHIVED · outcome knowable) from
-  // future games (PREVIEW · pre-game). Engine output is always real
-  // (runs in visitor's browser) regardless of which.
-  const isStale = isMatchDataStale(match);
-  const isFuture = isMatchDataFuture(match);
+  // Five-state lifecycle: future · today-pregame · today-live · stale-archived · final.
+  // Engine output is always real (runs in visitor's browser); the badge
+  // tells visitors which timeline this prediction sits in.
+  const matchPhase: MatchPhase | null = getMatchPhase(match);
+  const calibration = getCalibration(match); // proved | diverged | push | null
+  const enginePctOnWinner = getEnginePctOnWinner(match);
 
   // Start the mini-sim once on mount
   useEffect(() => {
@@ -49,7 +59,7 @@ export default function HeroLiveCard({ match }: { match: Match }) {
       if (acc.completed < TOTAL_HERO_SIMS) {
         rafRef.current = requestAnimationFrame(tick);
       } else {
-        setPhase("converged");
+        setSimPhase("converged");
         rafRef.current = null;
       }
     };
@@ -78,7 +88,7 @@ export default function HeroLiveCard({ match }: { match: Match }) {
           <span
             aria-hidden="true"
             className={`w-1.5 h-1.5 rounded-full bg-gold ${
-              phase === "simulating" ? "shimmer" : ""
+              simPhase === "simulating" ? "shimmer" : ""
             } glow-gold`}
           />
           <span
@@ -86,28 +96,11 @@ export default function HeroLiveCard({ match }: { match: Match }) {
             aria-live="polite"
             className="font-mono text-gold text-[10px] tracking-[0.35em]"
           >
-            {phase === "simulating"
+            {simPhase === "simulating"
               ? "● 即時模擬中"
               : "● AI 模型 · 已收斂"}
           </span>
-          {isStale && (
-            <span
-              lang="en"
-              className="px-1.5 py-0.5 text-[8px] tracking-[0.2em] border border-gold/30 text-gold/70 font-mono whitespace-nowrap"
-              title="這場比賽日期早於今日 · 為 archived 範例 · Monte Carlo 計算結果為真"
-            >
-              ARCHIVED · ENGINE OUTPUT REAL
-            </span>
-          )}
-          {isFuture && (
-            <span
-              lang="en"
-              className="px-1.5 py-0.5 text-[8px] tracking-[0.2em] border border-gold/50 text-gold font-mono whitespace-nowrap"
-              title="這場比賽未開打 · 預告階段 · Monte Carlo 為真實預測"
-            >
-              PREVIEW · 預告
-            </span>
-          )}
+          <PhaseBadge phase={matchPhase} calibration={calibration} />
         </div>
         <span className="font-mono text-mute text-[10px] tracking-[0.25em]">
           {match.date} · {match.startTime}
@@ -166,7 +159,7 @@ export default function HeroLiveCard({ match }: { match: Match }) {
       <div className="relative h-[3px] bg-line/80 overflow-visible">
         <div
           className={`absolute top-0 left-0 h-full bg-gold glow-gold ${
-            phase === "converged" ? "shimmer" : ""
+            simPhase === "converged" ? "shimmer" : ""
           }`}
           style={{
             width: `${homePct}%`,
@@ -190,6 +183,61 @@ export default function HeroLiveCard({ match }: { match: Match }) {
         </span>{" "}
         / {TOTAL_HERO_SIMS.toLocaleString()} 場 · 在您瀏覽器即時運算
       </p>
+
+      {/* Calibration receipt — only when finalResult ingested.
+          Equal visual weight for PROVED and DIVERGED per /audit S08
+          disclosure philosophy. This is the public receipt that powers
+          /track-record · single source of truth for engine track record. */}
+      {match.finalResult && calibration && (
+        <div className="mt-8 pt-6 border-t border-gold/30">
+          <p className="font-mono text-gold text-[10px] tracking-[0.4em] mb-4">
+            / RECEIPT · ENGINE vs ACTUAL
+          </p>
+          <div className="grid grid-cols-2 gap-6">
+            <div>
+              <p className="font-mono text-mute text-[10px] tracking-[0.3em] mb-2">
+                ENGINE PREDICTED
+              </p>
+              <p className="font-mono text-bone text-2xl tabular tracking-tight">
+                {Math.max(match.home.winRate, match.away.winRate)}
+                <span className="text-sm opacity-60 ml-0.5">%</span>{" "}
+                <span className="text-mute text-sm">
+                  {match.home.winRate >= match.away.winRate
+                    ? match.home.en
+                    : match.away.en}
+                </span>
+              </p>
+            </div>
+            <div className="text-right">
+              <p className="font-mono text-mute text-[10px] tracking-[0.3em] mb-2">
+                ACTUAL RESULT
+              </p>
+              <p className="font-mono text-bone text-2xl tabular tracking-tight">
+                {match.finalResult.homeScore}:{match.finalResult.awayScore}{" "}
+                <span className="text-mute text-sm">
+                  {match.finalResult.winner === "home"
+                    ? match.home.en + " W"
+                    : match.finalResult.winner === "away"
+                    ? match.away.en + " W"
+                    : "TIE"}
+                </span>
+              </p>
+            </div>
+          </div>
+          <div className="mt-5 flex items-center justify-between flex-wrap gap-3">
+            <CalibrationVerdict
+              calibration={calibration}
+              enginePctOnWinner={enginePctOnWinner}
+            />
+            <Link
+              href="/track-record"
+              className="font-mono text-gold text-[10px] tracking-[0.3em] hover:opacity-80"
+            >
+              完整公開戰績 →
+            </Link>
+          </div>
+        </div>
+      )}
 
       {/* Pitcher matchup */}
       <div className="mt-10 grid grid-cols-2 gap-6 pt-6 border-t border-line/60">
@@ -229,5 +277,128 @@ export default function HeroLiveCard({ match }: { match: Match }) {
         </Link>
       </div>
     </article>
+  );
+}
+
+// ── Phase badge ────────────────────────────────────────
+// Five visually distinct badges, one per MatchPhase. Gold-intensity
+// scales with prediction stakes: future is dim (still abstract),
+// today-pregame full-bright (this is the moment), today-live full-
+// bright shimmer (clock running), final goes to calibration colors,
+// stale-archived dims to grey (no receipt was ever filed).
+
+function PhaseBadge({
+  phase,
+  calibration,
+}: {
+  phase: MatchPhase | null;
+  calibration: Calibration | null;
+}) {
+  if (!phase) return null;
+
+  if (phase === "final" && calibration) {
+    const styles = {
+      proved: "border-gold text-gold",
+      diverged: "border-loss/70 text-loss",
+      push: "border-mute/60 text-mute",
+    } as const;
+    const labels = {
+      proved: "✓ PROVED · 引擎言中",
+      diverged: "✕ DIVERGED · 引擎落空",
+      push: "= PUSH · 平局",
+    } as const;
+    return (
+      <span
+        lang="en"
+        className={`px-1.5 py-0.5 text-[8px] tracking-[0.2em] border font-mono whitespace-nowrap ${styles[calibration]}`}
+        title="賽後實際結果 · /track-record 公開戰績有完整收據"
+      >
+        {labels[calibration]}
+      </span>
+    );
+  }
+
+  if (phase === "today-pregame") {
+    return (
+      <span
+        lang="en"
+        className="px-1.5 py-0.5 text-[8px] tracking-[0.2em] border border-gold text-gold font-mono whitespace-nowrap shimmer"
+        title="今晚開賽 · 預測已公開鎖定 · 賽後將進入 /track-record"
+      >
+        TODAY · 今晚開賽
+      </span>
+    );
+  }
+
+  if (phase === "today-live") {
+    return (
+      <span
+        lang="en"
+        className="px-1.5 py-0.5 text-[8px] tracking-[0.2em] border border-gold text-gold font-mono whitespace-nowrap"
+        title="賽事進行中 · 引擎預測已無法再改 · 結果出爐後自動入帳"
+      >
+        LIVE · 賽事進行中
+      </span>
+    );
+  }
+
+  if (phase === "future") {
+    return (
+      <span
+        lang="en"
+        className="px-1.5 py-0.5 text-[8px] tracking-[0.2em] border border-gold/50 text-gold font-mono whitespace-nowrap"
+        title="這場比賽未開打 · 預告階段 · Monte Carlo 為真實預測"
+      >
+        PREVIEW · 預告
+      </span>
+    );
+  }
+
+  // stale-archived
+  return (
+    <span
+      lang="en"
+      className="px-1.5 py-0.5 text-[8px] tracking-[0.2em] border border-mute/60 text-mute font-mono whitespace-nowrap"
+      title="這場比賽已結束 · 未補錄最終比分 · 不會出現在 /track-record"
+    >
+      ARCHIVED · 無收據
+    </span>
+  );
+}
+
+function CalibrationVerdict({
+  calibration,
+  enginePctOnWinner,
+}: {
+  calibration: Calibration;
+  enginePctOnWinner: number | null;
+}) {
+  const styles = {
+    proved: "text-gold border-gold",
+    diverged: "text-loss border-loss/70",
+    push: "text-mute border-mute/60",
+  } as const;
+  const labels = {
+    proved: "✓ ENGINE PROVED · 引擎方向言中",
+    diverged: "✕ ENGINE DIVERGED · 引擎方向落空",
+    push: "= PUSH · 無 favorite 或平局",
+  } as const;
+  return (
+    <span
+      lang="en"
+      className={`font-mono text-[10px] tracking-[0.3em] px-2 py-1 border ${styles[calibration]}`}
+    >
+      {labels[calibration]}
+      {enginePctOnWinner !== null && calibration === "proved" && (
+        <span className="ml-2 opacity-70">
+          ({enginePctOnWinner}% → WIN)
+        </span>
+      )}
+      {enginePctOnWinner !== null && calibration === "diverged" && (
+        <span className="ml-2 opacity-70">
+          (僅 {enginePctOnWinner}% → 卻贏)
+        </span>
+      )}
+    </span>
   );
 }

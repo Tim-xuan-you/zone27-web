@@ -28,8 +28,8 @@ export const metadata: Metadata = {
 //     aspiration / fanboy / corporate worship
 // ─────────────────────────────────────────────────────
 
-const PAGE_VERSION = "v0.27";
-const PAGE_DATE = "2026-05-20";
+const PAGE_VERSION = "v0.28";
+const PAGE_DATE = "2026-05-21";
 
 export default function DisciplinePage() {
   return (

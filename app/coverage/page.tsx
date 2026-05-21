@@ -28,7 +28,7 @@ export const metadata: Metadata = {
 //   06 Data Sources (open ledger of where data comes from)
 // ─────────────────────────────────────────────────────
 
-const LAST_REVIEWED = "2026-05-20";
+const LAST_REVIEWED = "2026-05-21";
 
 type StatusKey = "READY" | "HAND_CURATED" | "DEMO" | "AVAILABLE" | "PENDING" | "NEVER";
 
@@ -154,7 +154,7 @@ export default function CoveragePage() {
             className="print-only mb-6 pb-3 border-b border-line/60 font-mono text-[10px] uppercase tracking-[0.2em]"
           >
             <div className="flex justify-between gap-4">
-              <span>ZONE 27 — COVERAGE LEDGER v0.27</span>
+              <span>ZONE 27 — COVERAGE LEDGER v0.28</span>
               <span>PRINTED · zone27-web.vercel.app/coverage</span>
             </div>
           </div>
@@ -180,7 +180,7 @@ export default function CoveragePage() {
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-x-6 gap-y-3 pt-4 font-mono text-[10px] tracking-[0.18em] section-reveal">
               <div>
                 <span lang="en" className="text-mute block mb-1">VERSION</span>
-                <span className="text-bone tabular">v0.27</span>
+                <span className="text-bone tabular">v0.28</span>
               </div>
               <div>
                 <span lang="en" className="text-mute block mb-1">ACTIVE LEAGUES</span>

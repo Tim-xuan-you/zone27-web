@@ -1,11 +1,35 @@
 # 📋 ZONE 27 · Owner Pending Actions
 
 > Tim 明早回到電腦前要做的事
-> 整理於 2026-05-19 晚上(DAY 1)+ 2026-05-20 整日(DAY 2 · 24 commits)
+> 整理於 2026-05-19 晚上(DAY 1)+ 2026-05-20 整日(DAY 2 · 37 commits)
+> + 2026-05-21 開盤(DAY 3 · `/track-record` ledger + match lifecycle)
 
 ---
 
-## 🚀 DAY 2 (2026-05-20) 收盤 · 24 commits since /manifesto
+## 🚀 DAY 3 (2026-05-21) 開盤 · 主動推進 ledger + lifecycle
+
+**完整 DAY 3 scroll:[WHILE-YOU-WERE-OUT.md](WHILE-YOU-WERE-OUT.md)** — DAY 3 prepended
+
+**DAY 3 核心 ship(全程 TIER 1 · Tim 完全沒動手 · Claude 自主推進):**
+
+- **新 trust artifact `/track-record`** · Bloomberg-terminal 公開戰績 ledger · PROVED ✓ 跟 DIVERGED ✕ 等大列出 · 從 N=0 honest empty state 起跳 · custom OG card(8→15)
+- **Match 5-phase lifecycle**:future / today-pregame / today-live / final / stale-archived(取代舊 2-state stale/future binary)· 解今晚 18:35 開賽後 HeroLiveCard 沒 badge 的 bug
+- **Calibration receipt block** · HeroLiveCard + /matches/[gameId] 賽後自動顯示「ENGINE 預測 X% → 實際 N:N · PROVED/DIVERGED」· 等大顯示不藏 miss
+- **lib/matches.ts** 加 5 個 helpers · `isMatchDataToday` · `getMatchPhase` · `getCalibration` · `getEnginePctOnWinner` · `getFinalizedMatches` · Match type 加 `finalResult?` optional field
+- **Connectors** · homepage TRUST STACK 6→7-doc + grid lg:3→lg:4 · footer DOCS 加「公開戰績」· /audit Section 08 + /manifesto Section I inline link 到 /track-record · related-links 更新
+- **版本 invariant 全站對齊** · REPORT v0.27 → v0.28 · LAST_REVIEWED 2026-05-20 → 2026-05-21(/audit · /coverage · /discipline · /manifesto + 4 個對應 OG cards + footer chip + /founders FAQ)
+- **`/changelog`** 加 v0.28 milestone entry · git 仍為 source of truth
+- **`docs/MANUAL-ONBOARDING.md`** 加 FINAL SCORE INGEST section(3 分鐘賽後流程)
+
+**Tim 明早回來建議流程:**
+1. `npm run dev` → 開 http://localhost:3000 看實際效果
+2. 重點看 `/track-record`(空 ledger empty state)· 首頁 TRUST STACK 7-doc · `/matches/cpbl-260521-01` PHASE badge
+3. **18:35 後**(賽事真的進行中)看 HeroLiveCard badge 轉 LIVE
+4. **22:00 後**(賽事結束)截 cpbl.com.tw 那場 box score → 貼給我 → 我 3 分鐘 ingest finalResult → ledger 第一筆亮起 · PROVED 或 DIVERGED
+
+---
+
+## 🚀 DAY 2 (2026-05-20) 收盤 · 37 commits since /manifesto
 
 **完整 DAY 2 scroll:[WHILE-YOU-WERE-OUT.md](WHILE-YOU-WERE-OUT.md)**(已 prepend DAY 2 區塊)
 **已知未做事項:[KNOWN-ISSUES.md](KNOWN-ISSUES.md)** — 給您 onboarding 看「我知道但沒做」清單

@@ -22,6 +22,11 @@ export type RelatedLink = {
 export const RELATED_LINKS: Record<string, RelatedLink[]> = {
   "/audit": [
     {
+      href: "/track-record",
+      kicker: "track-record",
+      title: "公開戰績 · 引擎預測 vs 實際",
+    },
+    {
       href: "/manifesto",
       kicker: "manifesto",
       title: "倒置宣言 · 4 個刻意倒置",
@@ -30,11 +35,6 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
       href: "/methodology",
       kicker: "methodology",
       title: "完整工程白皮書",
-    },
-    {
-      href: "/coverage",
-      kicker: "coverage",
-      title: "我們覆蓋哪些賽事",
     },
   ],
   "/methodology": [
@@ -141,19 +141,36 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
   ],
   "/manifesto": [
     {
+      href: "/track-record",
+      kicker: "track-record",
+      title: "公開戰績 · 倒置 II receipts 的物理證據",
+    },
+    {
       href: "/audit",
       kicker: "audit",
       title: "Model Report · 倒置 I 的完整證據",
     },
     {
-      href: "/coverage",
-      kicker: "coverage",
-      title: "Coverage · 倒置 III 的完整清單",
+      href: "/discipline",
+      kicker: "discipline",
+      title: "鐵律 · Buffett+Musk+Costco 共識",
+    },
+  ],
+  "/track-record": [
+    {
+      href: "/manifesto",
+      kicker: "manifesto",
+      title: "倒置宣言 · 為何公開戰績是品牌 IP",
     },
     {
-      href: "/privacy",
-      kicker: "privacy",
-      title: "Privacy · 倒置 IV 的完整清單",
+      href: "/audit",
+      kicker: "audit",
+      title: "Model Report · 全部假設公開",
+    },
+    {
+      href: "/discipline",
+      kicker: "discipline",
+      title: "鐵律 · Buffett「track record visible」",
     },
   ],
   "/learn": [

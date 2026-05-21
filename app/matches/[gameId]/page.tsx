@@ -7,9 +7,12 @@ import MatchSimulator from "@/components/MatchSimulator";
 import {
   getMatchById,
   getAllMatchIds,
-  isMatchDataStale,
-  isMatchDataFuture,
+  getMatchPhase,
+  getCalibration,
+  getEnginePctOnWinner,
   type Match,
+  type MatchPhase,
+  type Calibration,
 } from "@/lib/matches";
 import {
   FOUNDERS_TOTAL,
@@ -55,6 +58,9 @@ export default async function MatchDetailPage({
 
   const m = match as Match;
   const homeFavored = m.home.winRate > m.away.winRate;
+  const phase = getMatchPhase(m);
+  const calibration = getCalibration(m);
+  const enginePctOnWinner = getEnginePctOnWinner(m);
 
   return (
     <div className="flex flex-col flex-1 min-h-screen">
@@ -84,22 +90,7 @@ export default async function MatchDetailPage({
           <span className="font-mono text-gold text-[10px] tracking-[0.35em]">
             LIVE AI MODEL · {m.league} · {m.date}
           </span>
-          {isMatchDataStale(m) && (
-            <span
-              className="font-mono text-[9px] tracking-[0.3em] px-1.5 py-0.5 border border-mute/60 text-mute ml-2"
-              title="這場比賽日期早於今日 — 為 archived 資料"
-            >
-              DATA · ARCHIVED
-            </span>
-          )}
-          {isMatchDataFuture(m) && (
-            <span
-              className="font-mono text-[9px] tracking-[0.3em] px-1.5 py-0.5 border border-gold/60 text-gold ml-2"
-              title="這場比賽尚未開打 — 為 pre-game preview"
-            >
-              DATA · PREVIEW
-            </span>
-          )}
+          <PhaseBadgeLg phase={phase} calibration={calibration} />
         </div>
 
         <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-6 sm:gap-12">
@@ -204,6 +195,92 @@ export default async function MatchDetailPage({
           </div>
         </div>
       </section>
+
+      {/* ── CALIBRATION RECEIPT (only when finalResult ingested) ──
+          Largest single-purpose disclosure block on the page when
+          present. Renders engine prediction vs actual outcome at
+          equal visual weight. Maps to /audit S08 + /manifesto S II
+          + /discipline Section 01 (Buffett "track record visible").
+          Section "/ 00" intentionally precedes the canonical /01-/05
+          flow — it's the receipt headline when one exists. */}
+      {m.finalResult && calibration && (
+        <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-16">
+          <h2 className="font-mono text-gold text-[10px] tracking-[0.4em] mb-8">
+            / 00 · ENGINE RECEIPT · 預測 vs 實際
+          </h2>
+          <div
+            className={`bg-slate/70 border p-8 sm:p-12 ${
+              calibration === "proved"
+                ? "border-gold/60 glow-soft"
+                : calibration === "diverged"
+                ? "border-loss/50"
+                : "border-line/70"
+            }`}
+          >
+            <div className="grid sm:grid-cols-2 gap-10 mb-10">
+              <div>
+                <p className="font-mono text-mute text-[10px] tracking-[0.35em] mb-4">
+                  ENGINE PREDICTED · PRE-GAME
+                </p>
+                <p className="font-mono text-bone text-5xl sm:text-6xl tabular tracking-tight font-light">
+                  {Math.max(m.home.winRate, m.away.winRate)}
+                  <span className="text-2xl sm:text-3xl opacity-60 ml-1">
+                    %
+                  </span>
+                </p>
+                <p className="font-mono text-gold/70 text-sm tracking-[0.25em] mt-3">
+                  {m.home.winRate >= m.away.winRate
+                    ? `${m.home.name} (HOME)`
+                    : `${m.away.name} (AWAY)`}{" "}
+                  WIN
+                </p>
+                <p className="font-mono text-mute text-[10px] tracking-[0.25em] mt-2">
+                  N = 10,000 · 10K Monte Carlo · 賽前公開鎖定
+                </p>
+              </div>
+              <div className="sm:text-right">
+                <p className="font-mono text-mute text-[10px] tracking-[0.35em] mb-4">
+                  ACTUAL RESULT · POST-GAME
+                </p>
+                <p className="font-mono text-bone text-5xl sm:text-6xl tabular tracking-tight font-light">
+                  {m.finalResult.homeScore}
+                  <span className="text-mute mx-3">:</span>
+                  {m.finalResult.awayScore}
+                </p>
+                <p className="font-mono text-gold/70 text-sm tracking-[0.25em] mt-3">
+                  {m.finalResult.winner === "home"
+                    ? `${m.home.name} W`
+                    : m.finalResult.winner === "away"
+                    ? `${m.away.name} W`
+                    : "TIE"}
+                </p>
+                <p className="font-mono text-mute text-[10px] tracking-[0.25em] mt-2">
+                  {m.finalResult.innings ?? 9} 局 · 收錄 ·{" "}
+                  {m.finalResult.ingestedAt}
+                </p>
+              </div>
+            </div>
+
+            <div className="border-t border-line/50 pt-8">
+              <CalibrationVerdictLg
+                calibration={calibration}
+                enginePctOnWinner={enginePctOnWinner}
+              />
+              <p className="font-mono text-mute text-[10px] tracking-[0.3em] mt-6 leading-relaxed">
+                這條收據永遠在公開頁面 · 不刪 · 不修飾 · 不過濾。
+                所有 ZONE 27 引擎產生的預測,賽後都會在{" "}
+                <Link
+                  href="/track-record"
+                  className="text-gold underline-offset-4 hover:underline"
+                >
+                  /track-record
+                </Link>{" "}
+                找到對應的 PROVED 或 DIVERGED 行 — 含這場。
+              </p>
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* ── PITCHER MATCHUP ────────────────────────── */}
       <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-20">
@@ -470,6 +547,136 @@ function MethodStep({
         <h4 className="text-bone text-lg font-light tracking-tight mb-2">{title}</h4>
         <p className="text-mute text-sm leading-relaxed">{body}</p>
       </div>
+    </div>
+  );
+}
+
+// ── PhaseBadgeLg ─────────────────────────────────────
+// Larger version of HeroLiveCard's badge — same 5 phases · sized for
+// the detail page hero. Phase logic is identical · only sizing diverges.
+
+function PhaseBadgeLg({
+  phase,
+  calibration,
+}: {
+  phase: MatchPhase | null;
+  calibration: Calibration | null;
+}) {
+  if (!phase) return null;
+
+  if (phase === "final" && calibration) {
+    const styles = {
+      proved: "border-gold text-gold",
+      diverged: "border-loss/70 text-loss",
+      push: "border-mute/60 text-mute",
+    } as const;
+    const labels = {
+      proved: "✓ PROVED · 引擎言中",
+      diverged: "✕ DIVERGED · 引擎落空",
+      push: "= PUSH · 平局",
+    } as const;
+    return (
+      <span
+        lang="en"
+        className={`font-mono text-[9px] tracking-[0.3em] px-1.5 py-0.5 border ml-2 ${styles[calibration]}`}
+        title="賽後實際結果 · /track-record 公開戰績有完整收據"
+      >
+        {labels[calibration]}
+      </span>
+    );
+  }
+
+  if (phase === "today-pregame") {
+    return (
+      <span
+        lang="en"
+        className="font-mono text-[9px] tracking-[0.3em] px-1.5 py-0.5 border border-gold text-gold ml-2 shimmer"
+        title="今晚開賽 · 預測已公開鎖定 · 賽後將進入 /track-record"
+      >
+        TODAY · 今晚開賽
+      </span>
+    );
+  }
+
+  if (phase === "today-live") {
+    return (
+      <span
+        lang="en"
+        className="font-mono text-[9px] tracking-[0.3em] px-1.5 py-0.5 border border-gold text-gold ml-2"
+        title="賽事進行中 · 引擎預測已無法再改 · 結果出爐後自動入帳"
+      >
+        LIVE · 賽事進行中
+      </span>
+    );
+  }
+
+  if (phase === "future") {
+    return (
+      <span
+        lang="en"
+        className="font-mono text-[9px] tracking-[0.3em] px-1.5 py-0.5 border border-gold/60 text-gold ml-2"
+        title="這場比賽尚未開打 — 為 pre-game preview"
+      >
+        DATA · PREVIEW
+      </span>
+    );
+  }
+
+  // stale-archived
+  return (
+    <span
+      lang="en"
+      className="font-mono text-[9px] tracking-[0.3em] px-1.5 py-0.5 border border-mute/60 text-mute ml-2"
+      title="這場比賽日期早於今日 — 為 archived 資料(未補錄收據)"
+    >
+      ARCHIVED · 無收據
+    </span>
+  );
+}
+
+function CalibrationVerdictLg({
+  calibration,
+  enginePctOnWinner,
+}: {
+  calibration: Calibration;
+  enginePctOnWinner: number | null;
+}) {
+  const styles = {
+    proved: "text-gold border-gold",
+    diverged: "text-loss border-loss/70",
+    push: "text-mute border-mute/60",
+  } as const;
+  const headlines = {
+    proved: "✓ ENGINE PROVED",
+    diverged: "✕ ENGINE DIVERGED",
+    push: "= PUSH",
+  } as const;
+  const subtexts = {
+    proved: "引擎方向言中 · 賽前公開預測命中實際贏家",
+    diverged: "引擎方向落空 · 賽前公開預測與實際贏家相反 · 寫進公開戰績不修飾",
+    push: "平局或 50/50 預測 · 無方向可驗證",
+  } as const;
+  return (
+    <div className="flex items-start gap-6 flex-wrap">
+      <span
+        lang="en"
+        className={`font-mono text-sm tracking-[0.35em] px-3 py-2 border ${styles[calibration]}`}
+      >
+        {headlines[calibration]}
+        {enginePctOnWinner !== null && calibration === "proved" && (
+          <span className="ml-2 opacity-70 text-xs">
+            ({enginePctOnWinner}%→W)
+          </span>
+        )}
+        {enginePctOnWinner !== null && calibration === "diverged" && (
+          <span className="ml-2 opacity-70 text-xs">
+            (僅 {enginePctOnWinner}%→W)
+          </span>
+        )}
+      </span>
+      <p className="text-mute text-sm leading-relaxed flex-1 max-w-md mt-1">
+        {subtexts[calibration]}
+      </p>
     </div>
   );
 }

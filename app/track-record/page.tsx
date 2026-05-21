@@ -1,0 +1,474 @@
+import Link from "next/link";
+import type { Metadata } from "next";
+import Nav from "@/components/Nav";
+import Footer from "@/components/Footer";
+import RelatedReading from "@/components/RelatedReading";
+import {
+  matches,
+  getFinalizedMatches,
+  getCalibration,
+  getEnginePctOnWinner,
+  getMatchDateIso,
+  type Match,
+  type Calibration,
+} from "@/lib/matches";
+
+export const metadata: Metadata = {
+  title: "公開戰績 · ZONE 27 引擎預測 vs 實際結果",
+  description:
+    "ZONE 27 引擎所有公開預測的賽後追蹤。PROVED 跟 DIVERGED 等大等亮地列出 — 不刪、不修飾、不過濾。多數運動分析平台選擇藏起這頁;ZONE 27 把它放在 footer 主導航。",
+};
+
+// ── ISR · re-render daily so today's match flips to FINAL when
+// Tim ingests box score · without full redeploy.
+export const revalidate = 86400;
+
+export default function TrackRecordPage() {
+  const finalized = getFinalizedMatches();
+  const proved = finalized.filter((m) => getCalibration(m) === "proved").length;
+  const diverged = finalized.filter(
+    (m) => getCalibration(m) === "diverged"
+  ).length;
+  const push = finalized.filter((m) => getCalibration(m) === "push").length;
+  const decided = proved + diverged;
+  const provedPct = decided > 0 ? Math.round((proved / decided) * 100) : null;
+
+  // Matches that ran but never had a final ingested — visible debt.
+  // Brand-honest: surface this gap rather than silently skipping it.
+  const unfiledArchived = matches.filter((m) => {
+    if (m.finalResult) return false;
+    const iso = getMatchDateIso(m);
+    if (!iso) return false;
+    // Use lexicographic compare against a server-side "today" surrogate.
+    // We don't need wall-clock precision here · ISR refreshes daily.
+    return iso < new Date().toISOString().slice(0, 10);
+  }).length;
+
+  return (
+    <div className="flex flex-col flex-1 min-h-screen">
+      <Nav />
+
+      <main id="main">
+
+      {/* ── HERO ─────────────────────────────────── */}
+      <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pt-20 pb-12">
+        <div className="flex items-baseline gap-3 mb-4 flex-wrap">
+          <p
+            lang="en"
+            className="font-mono text-gold text-[10px] tracking-[0.45em]"
+          >
+            / TRACK RECORD · 公開戰績
+          </p>
+          <span
+            lang="en"
+            className="font-mono text-[9px] tracking-[0.3em] px-1.5 py-0.5 border border-gold/40 text-gold/80"
+            title="這頁刻意從 N=1 開始 · 沒有 cherry-picked 歷史 · 沒有 backdated 入帳"
+          >
+            START · N={finalized.length}
+          </span>
+        </div>
+        <h1 className="text-4xl sm:text-5xl text-bone font-light tracking-tight max-w-3xl">
+          每一場引擎的公開預測 · 賽後實際結果在這
+        </h1>
+        <p className="mt-6 text-mute leading-relaxed max-w-2xl">
+          ZONE 27 引擎賽前在 <Link href="/matches" className="text-gold underline-offset-4 hover:underline">/matches</Link>
+          {" "}+ <Link href="/" className="text-gold underline-offset-4 hover:underline">首頁 HeroLiveCard</Link>
+          {" "}公開鎖定一個機率分布(N=10K Monte Carlo)。
+          賽後 Tim 親手截圖最終比分 → 解析後加進此表 →{" "}
+          <span className="text-bone">PROVED ✓ 跟 DIVERGED ✕ 等大等亮列出</span>,
+          不藏、不修飾、不重新加權。
+        </p>
+        <p className="mt-4 font-mono text-mute/80 text-[10px] tracking-[0.25em] leading-relaxed max-w-2xl">
+          多數運動分析平台選擇藏起這頁;ZONE 27 把它放在 footer 主導航 ·
+          因為公開戰績是品牌 IP 的物理證據(per{" "}
+          <Link
+            href="/manifesto"
+            className="text-gold underline-offset-4 hover:underline"
+          >
+            /manifesto Section II
+          </Link>
+          {" / "}
+          <Link
+            href="/discipline"
+            className="text-gold underline-offset-4 hover:underline"
+          >
+            /discipline Section 01
+          </Link>
+          )。
+        </p>
+      </section>
+
+      <div className="mx-auto max-w-5xl w-full px-6 sm:px-10 mb-12">
+        <div className="w-full h-px bg-line/60" />
+      </div>
+
+      {/* ── HEADLINE STATS ───────────────────────── */}
+      <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-16">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 bg-slate/40 border border-line/70 p-6 sm:p-8">
+          <LedgerStat label="TOTAL · 已收錄" value={String(finalized.length)} />
+          <LedgerStat
+            label="PROVED · 引擎言中"
+            value={String(proved)}
+            tone="gold"
+          />
+          <LedgerStat
+            label="DIVERGED · 引擎落空"
+            value={String(diverged)}
+            tone="loss"
+          />
+          <LedgerStat
+            label="PROVED RATE · 言中比例"
+            value={provedPct === null ? "—" : `${provedPct}%`}
+            small={provedPct === null}
+            tone={
+              provedPct === null
+                ? "mute"
+                : provedPct >= 60
+                ? "gold"
+                : provedPct >= 50
+                ? "bone"
+                : "loss"
+            }
+          />
+        </div>
+        <p className="mt-4 font-mono text-mute/70 text-[10px] tracking-[0.25em] leading-relaxed">
+          {finalized.length === 0 && (
+            <span>
+              ⚠ 樣本數 0 · 第一筆 entry 預定今晚 (2026-05-21) cpbl-260521-01
+              統一 vs 富邦 賽後收錄 · 請明天回來
+            </span>
+          )}
+          {finalized.length > 0 && finalized.length < 30 && (
+            <span>
+              ⚠ 樣本數小 · N={finalized.length} · 任何 PROVED rate
+              皆受 sample bias 影響大 · 建議至少 N≥30 才有統計意義 · 完整
+              calibration 方法見 <Link href="/methodology" className="text-gold hover:underline">/methodology</Link>
+            </span>
+          )}
+          {finalized.length >= 30 && (
+            <span>
+              N≥30 · sample 進入 statistically meaningful 區間 · 完整
+              calibration 方法見 <Link href="/methodology" className="text-gold hover:underline">/methodology</Link>
+            </span>
+          )}
+          {push > 0 && (
+            <>
+              {" · "}{push} PUSH(平局或 50/50 無 favorite)
+            </>
+          )}
+        </p>
+      </section>
+
+      {/* ── LEDGER ROWS ──────────────────────────── */}
+      <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-16">
+        <p
+          lang="en"
+          className="font-mono text-gold/70 text-[10px] tracking-[0.35em] mb-8"
+        >
+          / LEDGER · NEWEST FIRST · 不刪不修飾
+        </p>
+
+        {finalized.length === 0 ? (
+          <EmptyLedger />
+        ) : (
+          <div className="border border-line/70">
+            {/* Bloomberg-style table header */}
+            <div
+              className="grid grid-cols-[110px_1fr_120px_140px_110px_50px] gap-3 px-5 py-3 bg-slate/50 border-b border-line/60 font-mono text-mute text-[9px] tracking-[0.3em]"
+              role="row"
+            >
+              <span lang="en">DATE</span>
+              <span lang="en">MATCHUP · ENGINE PREDICTION</span>
+              <span lang="en" className="text-right">FINAL</span>
+              <span lang="en" className="text-right">ENGINE % ON WINNER</span>
+              <span lang="en" className="text-right">VERDICT</span>
+              <span className="sr-only">link</span>
+            </div>
+            {finalized.map((m) => (
+              <LedgerRow key={m.id} match={m} />
+            ))}
+          </div>
+        )}
+
+        {unfiledArchived > 0 && (
+          <p className="mt-6 font-mono text-mute/70 text-[10px] tracking-[0.25em] leading-relaxed">
+            ⚠ {unfiledArchived} 場已結束但未補錄最終比分 · 引擎預測已不可驗證 ·
+            維持 ARCHIVED 狀態 · 不會出現在此表(per coverage philosophy:
+            {" "}<Link href="/coverage" className="text-gold hover:underline">/coverage</Link>)
+          </p>
+        )}
+      </section>
+
+      {/* ── METHODOLOGY ──────────────────────────── */}
+      <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-16 border-t border-line/40 pt-12">
+        <p
+          lang="en"
+          className="font-mono text-gold/70 text-[10px] tracking-[0.35em] mb-6"
+        >
+          / HOW WE GRADE
+        </p>
+
+        <div className="space-y-6">
+          <GradingStep
+            no="01"
+            title="引擎賽前公開預測"
+            body="每場 CPBL 賽前 (與 MLB · 排程公開) 跑 10K Monte Carlo · 輸出主隊勝率 / 客隊勝率 · 公開在 /matches 與首頁 · 鎖定不再改。"
+          />
+          <GradingStep
+            no="02"
+            title="favorite = winRate 大於 50%"
+            body="引擎指向誰贏 · 純機率比較 · 不引入第二層信心係數(刻意保持 verdict 二元 · 不規避歸類)。"
+          />
+          <GradingStep
+            no="03"
+            title="賽後 Tim 親手截圖最終比分"
+            body="Tim 在 cpbl.com.tw 或 cpbl 官方 app 截圖最終比分 + 局數 · Claude 解析 → 寫入 match.finalResult。"
+          />
+          <GradingStep
+            no="04"
+            title="計算 verdict · 三種"
+            body="favorite 贏 → PROVED ✓(gold)· favorite 輸 → DIVERGED ✕(loss color)· 平局或 50/50 → PUSH =(mute)。三者視覺權重相同 · 完全沒有「藏 miss」。"
+          />
+          <GradingStep
+            no="05"
+            title="此頁是 single source of truth"
+            body="所有 PROVED / DIVERGED 行永遠留在這 · 不刪、不修飾、不重新加權。如果未來規則改變,舊行不重算 — 直接加 changelog 行。"
+          />
+        </div>
+
+        <p className="mt-8 font-mono text-mute text-[10px] tracking-[0.25em] leading-relaxed">
+          完整 Brier score / log loss 後續會接 ·
+          目前先用最直觀的 binary verdict 跑 N → 30 sample size。
+          完整 calibration 方法論見{" "}
+          <Link
+            href="/methodology"
+            className="text-gold underline-offset-4 hover:underline"
+          >
+            /methodology
+          </Link>
+          。
+        </p>
+      </section>
+
+      {/* ── PHILOSOPHY FOOTER ────────────────────── */}
+      <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-16">
+        <div className="bg-slate/40 border border-gold/30 p-8 text-center">
+          <p
+            lang="en"
+            className="font-mono text-gold text-[10px] tracking-[0.4em] mb-4"
+          >
+            FROM /MANIFESTO · SECTION II
+          </p>
+          <p className="text-bone text-xl sm:text-2xl font-light tracking-tight leading-snug mb-3">
+            「方法公開 · 品味私藏」
+          </p>
+          <p
+            lang="en"
+            className="font-mono text-gold/70 text-sm tracking-[0.25em] mb-6"
+          >
+            SHOW YOUR WORK · KEEP YOUR SOUL
+          </p>
+          <p className="text-mute text-sm leading-relaxed max-w-md mx-auto">
+            這頁的存在 = 方法公開的具體 demonstration。
+            DIVERGED 行不會被刪 — 那不是 bug · 是品牌 IP。
+          </p>
+        </div>
+      </section>
+
+      <RelatedReading currentPath="/track-record" />
+
+      {/* ── BACK ─────────────────────────────────── */}
+      <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-24 text-center">
+        <Link
+          href="/matches"
+          className="font-mono text-mute hover:text-gold text-[10px] tracking-[0.4em] transition-colors"
+        >
+          ← 回到今日賽事板
+        </Link>
+      </section>
+
+      </main>
+
+      <Footer />
+    </div>
+  );
+}
+
+// ── Sub-components ─────────────────────────────────────
+
+function LedgerStat({
+  label,
+  value,
+  tone = "bone",
+  small = false,
+}: {
+  label: string;
+  value: string;
+  tone?: "bone" | "gold" | "loss" | "mute";
+  small?: boolean;
+}) {
+  const toneColor = {
+    bone: "text-bone",
+    gold: "text-gold",
+    loss: "text-loss",
+    mute: "text-mute",
+  }[tone];
+  return (
+    <div>
+      <p className="font-mono text-mute text-[9px] sm:text-[10px] tracking-[0.3em] mb-2">
+        {label}
+      </p>
+      <p
+        className={`font-mono tabular tracking-tight ${
+          small ? "text-xl" : "text-2xl sm:text-3xl"
+        } ${toneColor}`}
+      >
+        {value}
+      </p>
+    </div>
+  );
+}
+
+function LedgerRow({ match }: { match: Match }) {
+  const cal = getCalibration(match);
+  const enginePctOnWinner = getEnginePctOnWinner(match);
+  const fr = match.finalResult;
+  if (!fr || !cal) return null;
+
+  const homeFavored = match.home.winRate > match.away.winRate;
+  const favoriteName = homeFavored ? match.home.name : match.away.name;
+  const dogName = homeFavored ? match.away.name : match.home.name;
+  const favoritePct = Math.max(match.home.winRate, match.away.winRate);
+
+  const verdictStyles = {
+    proved: "text-gold border-gold",
+    diverged: "text-loss border-loss/70",
+    push: "text-mute border-mute/60",
+  } as const;
+  const verdictLabel = {
+    proved: "✓ PROVED",
+    diverged: "✕ DIVERGED",
+    push: "= PUSH",
+  } as const;
+
+  const dateIso = getMatchDateIso(match) ?? "—";
+
+  return (
+    <div
+      role="row"
+      className="grid grid-cols-[110px_1fr_120px_140px_110px_50px] gap-3 px-5 py-4 border-b border-line/40 last:border-b-0 hover:bg-slate/40 transition-colors"
+    >
+      <span className="font-mono text-mute text-xs tabular tracking-[0.05em] self-center">
+        {dateIso}
+      </span>
+      <div className="self-center">
+        <p className="text-bone text-sm leading-snug">
+          <span className="text-gold">{favoriteName}</span>
+          <span className="text-mute mx-1.5 text-xs">favored</span>
+          <span className="text-mute text-xs">vs</span>{" "}
+          <span className="text-mute">{dogName}</span>
+        </p>
+        <p className="font-mono text-mute text-[10px] tracking-[0.2em] mt-1 tabular">
+          ENGINE · {favoritePct}% / {100 - favoritePct}% · CONF {match.aiConfidence}/100
+        </p>
+      </div>
+      <span className="font-mono text-bone text-base tabular self-center text-right">
+        {fr.homeScore}:{fr.awayScore}
+        <span className="block text-[9px] text-mute tracking-[0.2em] mt-0.5">
+          {fr.winner === "home"
+            ? `${match.home.en} W`
+            : fr.winner === "away"
+            ? `${match.away.en} W`
+            : "TIE"}
+        </span>
+      </span>
+      <span
+        className={`font-mono tabular text-sm self-center text-right ${
+          cal === "proved"
+            ? "text-gold"
+            : cal === "diverged"
+            ? "text-loss"
+            : "text-mute"
+        }`}
+      >
+        {enginePctOnWinner !== null ? `${enginePctOnWinner}%` : "—"}
+      </span>
+      <span
+        lang="en"
+        className={`font-mono text-[10px] tracking-[0.25em] border px-2 py-1 self-center text-center ${verdictStyles[cal as Calibration]}`}
+      >
+        {verdictLabel[cal as Calibration]}
+      </span>
+      <Link
+        href={`/matches/${match.id}`}
+        className="self-center text-gold/70 hover:text-gold text-right font-mono text-[10px] tracking-[0.3em]"
+        aria-label={`Full breakdown for ${favoriteName} vs ${dogName}`}
+      >
+        →
+      </Link>
+    </div>
+  );
+}
+
+function EmptyLedger() {
+  return (
+    <div className="border border-dashed border-gold/30 bg-slate/30 p-12 text-center">
+      <p
+        lang="en"
+        className="font-mono text-gold text-[10px] tracking-[0.4em] mb-4"
+      >
+        N = 0 · LEDGER EMPTY · BY DESIGN
+      </p>
+      <h3 className="text-2xl text-bone font-light tracking-tight mb-3">
+        第一筆 entry 預定今晚收錄
+      </h3>
+      <p className="text-mute text-sm leading-relaxed max-w-md mx-auto mb-6">
+        ZONE 27 不 backfill 歷史預測 — 沒有 cherry-picked 過往 ·
+        沒有事後找出引擎曾經言中的場次。
+        Ledger 從 <span className="text-gold">cpbl-260521-01</span>{" "}
+        統一 vs 富邦 開始記錄 · 賽後最終比分 ingest 後第一筆會亮起。
+      </p>
+      <p className="font-mono text-mute/70 text-[10px] tracking-[0.3em] tabular">
+        STARTING DATE · 2026-05-21 · CPBL · 新莊 18:35
+      </p>
+      <div className="mt-8 flex flex-wrap gap-3 justify-center">
+        <Link
+          href="/matches/cpbl-260521-01"
+          className="px-6 py-2.5 border border-gold text-gold text-xs tracking-[0.3em] hover:bg-gold hover:text-navy transition-colors"
+        >
+          看今晚的預測 →
+        </Link>
+        <Link
+          href="/manifesto"
+          className="px-6 py-2.5 border border-line/60 text-mute hover:text-gold hover:border-gold/40 text-xs tracking-[0.3em] transition-colors"
+        >
+          為什麼這樣做 →
+        </Link>
+      </div>
+    </div>
+  );
+}
+
+function GradingStep({
+  no,
+  title,
+  body,
+}: {
+  no: string;
+  title: string;
+  body: string;
+}) {
+  return (
+    <div className="flex gap-5">
+      <span className="font-mono text-gold/70 text-sm tabular w-8 pt-1">
+        {no}
+      </span>
+      <div className="flex-1">
+        <h4 className="text-bone text-base sm:text-lg font-light tracking-tight mb-2">
+          {title}
+        </h4>
+        <p className="text-mute text-sm leading-relaxed">{body}</p>
+      </div>
+    </div>
+  );
+}

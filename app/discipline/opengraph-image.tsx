@@ -68,7 +68,7 @@ export default async function DisciplineOgImage() {
               display: "flex",
             }}
           >
-            OPERATING DISCIPLINE · v0.27
+            OPERATING DISCIPLINE · v0.28
           </span>
         </div>
 
