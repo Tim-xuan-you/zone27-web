@@ -1,8 +1,123 @@
 # 🌙 您休息時 Claude 做了什麼
 
+> Tim · 2026-05-21 接續 · **Round 2 · 自主多輪迭代 · 4 commits**
 > Tim · 2026-05-21 開盤 · **Day 3 · /track-record + match lifecycle**
 > Tim · 2026-05-20 晚上 · **Day 2 · 37 commits since /manifesto**
 > Tim · 2026-05-19 晚上 · 十六波迭代 Round 1 → Round 16 (底下)
+
+---
+
+## 🚀 Round 2 (2026-05-21 同日) · 自主多輪迭代 · Persona「敢於突破設計專家」
+
+您給的指令:「全權交給您 · 上網吸收新知識 · 找 bug · 視覺/UX 升級 · 攻頂 · 賺大錢」。
+
+我用 research → 應用 → 驗證的節奏 · 派 2 個 parallel agent(1 抓 bug · 1 上網研究 world-class founder brand)· 同時手動推進。Round 2 共 **4 commits · 50+ files touched · 1800+ insertions**。
+
+### Phase 1 (a01b2fd) · /roadmap + K-strikeout 404 + 8 bug fixes
+
+**新 canonical · `/roadmap` 第 8 個 trust artifact:**
+- 3 段公開路線圖 · LOCKED / EXPLORING / **EXPLICIT NO**
+- 「永遠不做」section 對標 Anthropic Responsible Scaling Policy + Plausible 「what we won't build」
+- 「公開說 NO 比公開說 YES 更難」brand IP punchline
+- /changelog → /roadmap bidirectional CTA(時間軸雙向封閉)
+
+**`/not-found` 升級:**
+- 從「4 0 4 · WILD PITCH」改成「K · STRIKEOUT · OUT OF ZONE」(K 是 sabermetric notation · 比 strike three 更品牌純粹)
+- 4 個 canonical 入口(/ /lab /track-record /manifesto)
+
+**8 個 bug fixes(audit agent grep-driven · DAY 3 purge 後遺):**
+- /audit `SAMPLE_SIZE n=3 → n=1` · /methodology「六大固定 section」→「8 個 section」· ShareableQuote n=3 → n=1 · OG card「9 sections · n=3」→「10 sections · n=1」
+- /track-record title attr 對齊 display(N=0)· UTC date → Taipei TZ · LedgerRow mobile 雙渲染 responsive
+- /matches「資料為示範用途」→「cpbl-260521-01 為第一筆真實 ingestion」
+- sim-history.ts JSDoc 範例更新
+
+### Phase 2-3 (ca3f12c) · Cmd-K palette + /audit live dashboard
+
+**Cmd-K 全站快搜 palette(research-driven · Linear/Vercel/Raycast 慣例):**
+- `components/CommandPalette.tsx` · 全站 modal · backdrop-blur + cmd-pop 動畫
+- `lib/command-palette-data.ts` · 23 routes 索引 · 5 editorial groups · 中英文 keyword aliases
+- `components/CmdKTrigger.tsx` · Nav 上的 ⌘K 提示按鈕 · 偵測 Mac vs Win/Linux
+- ⌘K / Ctrl-K 開啟 · Esc 關閉 · ↑↓ 導航 · ↵ 開啟
+- aria-modal · listbox role · activedescendant 模式(完整 a11y)
+- **不裝 fuse.js · 不裝 cmdk lib · 不留 telemetry · 不存 recently-used**(per disclosure philosophy)
+- 純 substring filter on 23-row list · brand-pure 極簡 implementation
+
+**`/audit` live numeric dashboard(research-driven · Plausible/Buffer pattern):**
+- `lib/build-meta.ts` · COMMIT_SHA + DEPLOYED_AT + GitHub permalink 從 Vercel env vars
+- MetaPair grid 從 5-col 升 6-col · 加 BUILD chip(clickable → 該 commit GitHub 頁)
+- SAMPLE_SIZE 從 hardcoded string → dynamic count(`matches.length` + `getFinalizedMatches().length`)
+- 「方法公開」從 rhetoric 升級成 literal numbers · 每次 deploy 數字會變
+
+**`/roadmap` OG card 補完:**
+- 3-stage equal-weight 視覺 · LOCKED(full gold)/ EXPLORING(dim)/ EXPLICIT NO(line)
+- 「Saying NO publicly is harder than saying YES」punchline
+- Custom OG 數量 14 → 15
+
+**OG glyph hardening:**
+- /privacy + /faq OG cards ✕ (U+2715 Dingbats) → × (U+00D7 Latin-1)
+- 解 next/og dynamic font 400 warning · 卡片 render 一致
+
+### Phase 4-5 (a2dc73d + 接續) · 第二輪 audit 收尾 + 8-doc TRUST STACK + StatTerm 擴展
+
+**2nd 輪 audit agent 抓到的 5 個 IMPORTANT + 2 個 NICE fix:**
+- `lib/build-meta.ts`:COMMIT_PERMALINK 在 local dev fallback 到 repo root(避免 /commit/local 404)
+- `lib/build-meta.ts`:DEPLOYED_AT 用 Asia/Taipei TZ(跟 getTodayTaipei 一致)
+- `/roadmap`:`type Status` + `function Status` 衝突 → 改名 RoadmapStatus + RoadmapRow
+- `/roadmap`:Cmd-K 列在 EXPLORING 但本 phase 已 SHIP · 搬到 LOCKED ✓ SHIPPED + /track-record 也標 SHIPPED
+- `CommandPalette`:加 focus restore on close(triggerRef capture · requestAnimationFrame restore)
+- keydown override 內聯文檔化(intentional · 對齊 Linear/Vercel)
+
+**Homepage TRUST STACK 7→8-doc:**
+- 加 `/roadmap` 為第 8 卡 · grid lg:cols-4 滿 4+4 cleaner
+- 文案:「7 個 trust artifact」→「8 個 · 含 1 LIVE 公開戰績 + 1 公開路線圖 · 50+ sections」
+
+**`app/loading.tsx`(NEW)· Next.js App Router native suspense fallback:**
+- Brand-pure skeleton · Nav + Footer chrome 保持連續
+- 「ENGINE WARMING UP」punchline + 2 個 hairline pulse + 「< 0.5 秒」honest expectation
+
+**StatTerm 擴展到 `/matches/[gameId]` PitcherCard:**
+- ERA / K/9 / WHIP / BB/9 / HR/9 都加 hover tooltip
+- Baseball Savant 風格 inline glossary at point-of-use
+- 4 → 5 個頁面用 StatTerm 元件
+
+### Round 2 數字差
+
+| 指標 | Round 2 開始 | Round 2 收盤 |
+|---|---|---|
+| User-visible routes | 19 | **21**(+/roadmap +/loading) |
+| Custom OG cards | 14 | **15**(+/roadmap) |
+| Trust artifact pages | 7 | **8**(+/roadmap) |
+| Total commits since DAY 3 | 0 | **4** |
+| Routes indexed in palette | 0 | **23** |
+| Stat terms inline tooltipped | 4 頁 | **5 頁** |
+| /audit MetaPair items | 5 | **6**(+BUILD chip) |
+| Hardcoded sample size | "n = 3" | **動態** matches.length |
+| Cmd-K palette | ❌ | **✅ global** |
+| Brand chrome on loading | ❌ | **✅ skeleton** |
+
+### Round 2 brand IP 強化
+
+1. **/roadmap EXPLICIT NO** 是 brand defense mechanism:把「絕對不做」公開 · 違反就 grep-able · = 強制紀律
+2. **/audit BUILD chip** 是 literal disclosure:每次 deploy 數字會變 · 訪客可點進去 verify 這個 page 是哪個 commit 蓋的
+3. **Cmd-K palette 不存 recently-used / 不收 telemetry** 是 privacy IP 的具體體現 · 跟 /privacy Section 03 對齊
+4. **Loading skeleton 用 ENGINE WARMING UP** 對齊 「engine IS the analyst」brand 化身
+5. **StatTerm 擴展** 給硬核棒球迷的 Bret Victor 式體驗 · 「沒聽過 wOBA?hover 即可」
+
+### Round 2 您回來建議流程
+
+1. `npm run dev` → http://localhost:3000
+2. 試 **⌘K / Ctrl-K** 開 palette · 打「track」、「roadmap」、「founders」感受快搜
+3. 滾到首頁底 TRUST STACK · 看 8 卡 4+4 layout
+4. 進 `/roadmap` · 滑到底看 EXPLICIT NO section
+5. 進 `/audit` · 看 BUILD chip(目前是「local」· 點下去到 GitHub repo root · Vercel deploy 後會變成真實 commit hash)
+6. 進 `/matches/cpbl-260521-01` · hover ERA / K/9 / WHIP labels 看新 StatTerm tooltip
+7. 試打錯網址(例如 /xxx)看 K-strikeout 404 page
+8. **18:35 後賽事開始** · HeroLiveCard badge 轉「LIVE · 賽事進行中」
+9. **22:00 後賽事結束** · 截 cpbl.com.tw 那場 box score → 貼給我 → ledger 第一筆亮起
+
+---
+
+
 
 ---
 

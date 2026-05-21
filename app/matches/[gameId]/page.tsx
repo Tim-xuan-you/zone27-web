@@ -14,6 +14,7 @@ import {
   type MatchPhase,
   type Calibration,
 } from "@/lib/matches";
+import StatTerm from "@/components/StatTerm";
 import {
   FOUNDERS_TOTAL,
   FOUNDERS_CLAIMED,
@@ -455,20 +456,22 @@ function PitcherCard({
       <h3 className="text-2xl text-bone font-light tracking-tight mb-6">{p.name}</h3>
 
       <dl className="space-y-3 font-mono text-sm">
-        <StatRow label="ERA" value={p.era} />
-        <StatRow label="K / 9" value={p.k9} />
-        <StatRow label="WHIP" value={p.whip} />
-        <StatRow label="BB / 9" value={p.bb9} />
-        <StatRow label="HR / 9" value={p.hr9} />
+        <StatRow term="ERA" value={p.era} />
+        <StatRow term="K/9" value={p.k9} />
+        <StatRow term="WHIP" value={p.whip} />
+        <StatRow term="BB/9" value={p.bb9} />
+        <StatRow term="HR/9" value={p.hr9} />
       </dl>
     </div>
   );
 }
 
-function StatRow({ label, value }: { label: string; value: string }) {
+function StatRow({ term, value }: { term: string; value: string }) {
   return (
     <div className="flex items-center justify-between border-b border-line/40 pb-2">
-      <dt className="text-mute tracking-[0.25em] text-[10px]">{label}</dt>
+      <dt className="text-mute tracking-[0.25em] text-[10px]">
+        <StatTerm term={term} />
+      </dt>
       <dd className="text-bone tabular">{value}</dd>
     </div>
   );

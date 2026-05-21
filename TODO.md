@@ -3,6 +3,41 @@
 > Tim 明早回到電腦前要做的事
 > 整理於 2026-05-19 晚上(DAY 1)+ 2026-05-20 整日(DAY 2 · 37 commits)
 > + 2026-05-21 開盤(DAY 3 · `/track-record` ledger + match lifecycle)
+> + 2026-05-21 接續(Round 2 · 4 commits · `/roadmap` + Cmd-K + 50+ files)
+
+---
+
+## 🚀 Round 2 (2026-05-21 同日) · 自主多輪迭代 · 4 commits
+
+**完整 Round 2 scroll:[WHILE-YOU-WERE-OUT.md](WHILE-YOU-WERE-OUT.md)** — Round 2 prepended
+
+**Round 2 ship list(全程 TIER 1 · Tim 完全沒動手):**
+
+- **`/roadmap`** 第 8 個 trust artifact · 3-stage (LOCKED / EXPLORING / EXPLICIT NO) · OG card · /changelog 雙向 CTA
+- **`/not-found` K-strikeout 升級** · 4 canonical 入口 · sabermetric notation
+- **Cmd-K 全站快搜 palette** · 23 routes 索引 · 5 groups · ⌘K/Ctrl-K 開啟 · 全 a11y(aria-modal · listbox · focus restore)
+- **`/audit` live numeric dashboard** · SAMPLE_SIZE 動態化 · BUILD chip(commit + deploy date) · 6-col MetaPair
+- **Homepage TRUST STACK 7→8-doc** · grid lg:cols-4 滿 4+4
+- **`app/loading.tsx`** · brand-pure suspense skeleton
+- **StatTerm 擴展到 /matches/[gameId]** · ERA/K9/WHIP/BB9/HR9 hover tooltip · 4→5 頁
+- **8 個 bug fixes** + **5 audit agent IMPORTANT** + OG glyph hardening
+- **2 parallel agents 跑過**(bug audit + world-class brand research)
+
+**Round 2 收盤狀態:**
+- User-visible routes:**21**(+ /roadmap + /loading)
+- Custom OG cards:**15**(+ /roadmap)
+- Trust artifact pages:**8**(+ /roadmap)
+- Build / Lint / TSC strict 三綠
+
+**您回來建議流程:**
+1. `npm run dev` → http://localhost:3000
+2. 試 **⌘K / Ctrl-K** 開 palette · 打「track」「roadmap」「founders」感受快搜
+3. `/roadmap` · 滑到底看 EXPLICIT NO section(品牌防線)
+4. 首頁 TRUST STACK · 看 8 卡 4+4 layout
+5. `/audit` BUILD chip(local dev 是「local」· Vercel deploy 後變真實 commit hash)
+6. `/matches/cpbl-260521-01` · hover stat labels 看 tooltip
+7. **18:35 後**(賽事真的進行中):HeroLiveCard badge 轉 LIVE
+8. **22:00 後**(賽事結束):截 cpbl box score → 貼我 → 我 ingest → ledger 第一筆亮起
 
 ---
 

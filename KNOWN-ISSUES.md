@@ -9,7 +9,7 @@
 
 ## 🟡 Pending owner actions(您該做的)
 
-從 [TODO.md](TODO.md) 引用 · **以 DAY 3 開盤狀態 (2026-05-21)**:
+從 [TODO.md](TODO.md) 引用 · **以 Round 2 收盤狀態 (2026-05-21 同日 · 4 個 Round 2 commits 後)**:
 
 - ✅ **① Supabase 註冊** — **DONE**(2026-05-20 上午)
 - ✅ **④ Footer 版本 chip bump** — **DONE**(2026-05-21 · v0.27 → v0.28 全 repo · LAST_REVIEWED 2026-05-21)

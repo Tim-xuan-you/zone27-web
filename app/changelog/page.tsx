@@ -23,6 +23,12 @@ const GH_COMMITS_URL =
 
 const MILESTONES: { date: string; title: string; detail: string }[] = [
   {
+    date: "2026-05-21 · Round 2",
+    title: "自主多輪迭代 · /roadmap + Cmd-K palette + /audit live dashboard + StatTerm 擴展",
+    detail:
+      "Tim 全權交付 · 用「敢於突破設計專家」persona lens · 派 2 個 parallel agent(bug audit + world-class brand research)· 同時手動推進。Round 2 共 4 commits / 50+ files / 1800+ insertions。新 canonical · /roadmap 第 8 個 trust artifact(LOCKED / EXPLORING / EXPLICIT NO 三段 · 「永遠不做」section 對標 Anthropic RSP + Plausible)· /not-found K-strikeout 升級(sabermetric notation)。Cmd-K 全站快搜 palette(23 routes · 5 groups · 完整 a11y · 無 fuse.js / 無 telemetry / 無 recently-used)· /audit live numeric dashboard(SAMPLE_SIZE 動態 + BUILD chip GitHub permalink)· Homepage TRUST STACK 7→8-doc(grid lg:cols-4 滿 4+4)· app/loading.tsx brand-pure skeleton · StatTerm 擴展到 /matches/[gameId] PitcherCard(Baseball Savant 風格 hover tooltip)。13 bug fixes(Phase 1 audit 8 個 + Phase 4 audit 5 個 IMPORTANT)+ OG glyph hardening + 全 repo refs 同步。Build / Lint / TSC strict 三綠。",
+  },
+  {
     date: "2026-05-21",
     title: "/track-record 公開戰績 ledger + match lifecycle (PRE/LIVE/FINAL) + calibration 收據",
     detail:
