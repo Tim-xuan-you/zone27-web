@@ -523,6 +523,12 @@ function RoadmapVotingPanel({ mounted }: { mounted: boolean }) {
   );
   const [because, setBecause] = useState<string>("");
   const [saved, setSaved] = useState<boolean>(false);
+  // Round 29 Wave 7 self-audit fix: previously persist useEffect fired
+  // on initial hydration setOrder/setBecause from localStorage · which
+  // re-saved the just-loaded value AND flashed「✓ saved local」on page
+  // mount even though user didn't change anything. hydrated flag gates
+  // persist to only fire after hydration completes(user-action saves only).
+  const [hydrated, setHydrated] = useState(false);
 
   // Hydrate from localStorage post-mount (avoids SSR hydration mismatch).
   useEffect(() => {
@@ -531,18 +537,20 @@ function RoadmapVotingPanel({ mounted }: { mounted: boolean }) {
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setOrder(state.order);
     setBecause(state.because);
+    setHydrated(true);
   }, [mounted]);
 
-  // Persist whenever state changes (skip initial mount to avoid overwriting fresh load).
+  // Persist whenever state changes(only AFTER hydration done · skips
+  // the initial localStorage → state load that would falsely trigger
+  // saved indicator).
   useEffect(() => {
-    if (!mounted) return;
+    if (!hydrated) return;
     saveVotingState({ order, because });
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setSaved(true);
     const t = window.setTimeout(() => setSaved(false), 1200);
     return () => window.clearTimeout(t);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [order, because]);
+  }, [order, because, hydrated]);
 
   // Find item by id with current position.
   const orderedItems = useMemo(() => {

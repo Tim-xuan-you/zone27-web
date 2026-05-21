@@ -92,25 +92,105 @@ Tim 直擊 4 個基礎 product 問題 — honest answer:網站目前是 brand + 
 | `/now` UNRESOLVED | PREPEND 3 個 Round 29 unresolved(FREE TIER auth Phase 1 Q3 · BLACK CARD TapPay Phase 2 Q3+ · Founders 27 「preorder」 framing 可以「現在開」) |
 | WHILE-YOU-WERE-OUT.md | ToC prepend Round 29 line + detailed scroll(本 section) |
 
-### Round 29 收盤狀態
+### Phase 3 · Wave 4 ship · /member 2026 research-driven patterns(commit `4823d67`)
 
-- **27 visitor-discoverable routes** + **1 noindex `/admin`** = 28 total page routes
-- **18 custom OG cards**(+/member · /admin noindex no OG)
-- **22 reusable components**(+ MemberDashboardPreview)
-- **Build / Lint / TSC strict: 3 commits 全程綠**
-- **6 trust docs 有 founder sign-off**(/audit · /methodology · /coverage · /track-record · /roadmap · /now · /member · /admin = actually 8 if count /now /member /admin)
-- **/member psychology-driven dashboard preview shipped**(4 cognitive bias driven · 倒置 SaaS「付費 → 開更多 features」)
-- **/admin noindex ops preview shipped**(Tim 自己看 · Stage 1 Supabase Studio + Stage 2 mockup + Stage 3 远期)
-- **MLM 結構防線 shipped**(Pratfall + Costly Signaling · 對 Taiwan brand context 是真實 trust 缺口補上)
+派 1 focused Agent 做 2026 member-dashboard 研究(Stratechery Plus · HEY ·
+Linear · Notion · Vercel · GitHub · Strava · Letterboxd · Day One ·
+Substack · Patreon · Are.na · Claude.ai · NN/g empty-state research)·
+帶回 5 ranked SAFE patterns + 3 axiom-rejected + 1 anti-pattern flag。
+
+Ship 3 highest-leverage(剩 2 patterns 留 Round 30+):
+
+| # | Pattern | Source | Ship to /member |
+|---|---|---|---|
+| #2 | Context Metadata Strip | Atlassian + Vercel + MIT Tech Review April 2026 | 開頭 mono strip「資料位置 · localStorage · 上次寫入 · 我們看不到 · 0 cookies · 0 GA · 0 pixel」· 把 absence-of-tracker invisibility 轉 visible presence(Costly Signaling page-level) |
+| #3 | Differentiated Empty State | NN/g 2026 guidelines | 重寫 Section 01 EmptyState · status + learning cue + direct pathway · 不放 marketing copy · returning visitor 用 neutral status |
+| #4 | 「近況 · 引擎」 rail | Stratechery Plus + Patreon Jun-26 + GitHub release-info | /member 最後加 3-dated-lines plain text · 不是 gamification 不是 FOMO · 純 dated facts · NEW RecentEngineLine sub-component |
+
+3 axiom-rejected(Agent 正確 filter):Spotify Wrapped(stealth + no social)·
+Streak counter(gamification ban + Dr. Rachel Taylor 神經科學:streak 武器化 loss aversion 反對 user)· AI chatbot widget(explicit「no AI chatbot」axiom · 2026 #1 anti-pattern)
+
+1 anti-pattern Agent 主動 flag · ZONE 27 必須 NEVER:Top-of-page KPI tile strip
+(Vercel · PostHog · Linear 都這樣做 · 對 ZONE 27 災難:「personal archive for
+hardcore fans」 framing → 「SaaS operator dashboard」)。已 lead 用 narrative-formatted
+accumulated history · 抵抗 future PR 加 KPI strip。
+
+### Phase 3 · Wave 5 ship · cinematic + voting + memory(commit `92fe0c4`)
+
+3 個高 leverage 同 commit · 都對齊「驚艷 / 攻頂 / 極致美觀」directive:
+
+| Wave | NEW / Update | Brand IP role |
+|---|---|---|
+| 5A | NEW `FirstReceiptHero` in /track-record · 只在 finalized.length === 1 render · 2px gold border + soft glow + entry animation · 「★ FIRST RECEIPT · 1 OF 270 PROJECTED」shimmer band · 大字 ENGINE vs ACTUAL grid · 等大 PROVED/DIVERGED/PUSH verdict band | 為今晚 22:00+ Tim ingest 第一場 cpbl-260521-01 設計的 brand 物理時刻 · N=0→N=1 transition 自動 fire · N>1 自動切回正常 Bloomberg ledger |
+| 5B | drag-rank IKEA voting on /member Section 03 · Linear/PostHog 2025-2026 從 thumb-up 轉 drag-rank · ▲▼ arrow buttons swap-with-neighbor(mobile-safe · 不需 drag-drop dep)· localStorage `zone27_engine_voting_v1` schema-versioned · 「因為 ___」textarea 280 字 · NEW RoadmapVotingPanel + RankedItemRow sub-components | IKEA Effect cranked · ranked prioritization 比 binary vote 心理投資高 · auth 上線後 sync identity |
+| 5C | /member memory resurfacing strip · Day One「On This Day」accumulating-over-time framing 的 lightweight 版 · 只在 history.length > 0 才 render · 「YOU&apos;VE ACCUMULATED · 您已累積 N 場 over D 天」 · Strava Annual Best Efforts + GitHub contribution graph 同邏輯 | Endowment Effect 真正 trigger 是「我擁有 X」不是「我會失去 X」 · 升一級 says「look how much you already own」 |
+
+Code quality notes:React 19 + Next.js 16 雙重 satisfaction · Date.now() 不在
+useMemo(react-hooks/purity 違規)· 改 capture-once 用 setMountTime · ALL
+hooks 移到 early return 之前(rules-of-hooks)· eslint-disable
+react-hooks/set-state-in-effect 只 mark 第一個 setState per useEffect。
+
+### Phase 3 · Wave 6 ship · Run Differential Histogram(commit `cfb235d`)
+
+解 Round 28 唯一仍 active UNRESOLVED:「MatchSimulator N=10K Uncertainty
+Stripe 太窄」(/now Section 03 寫死)。
+
+10K trials 自帶完整 distribution(scoreCounts dict 已存)· 從中拉 7-bucket
+histogram 暴露真實 spread:同樣 winRate 62%/38% · 可能 4:3 也可能 12:1。
+對標 Bank of England fan-charts + Baseball Savant exit velocity distribution。
+
+| File | Change |
+|---|---|
+| lib/simulator.ts | NEW `buildRunDiffBuckets()` O(n) one-pass group · NEW `RunDiffBucket` type · 7 buckets 對稱 ±7+ tail(captures rare blowouts · Pratfall demonstration) |
+| components/MatchSimulator.tsx | NEW section「比分差距分布」between Score Distribution + Completion Card · NEW `RunDiffRow` sub-component · grid layout(zh + EN mono label / normalized bar / pct)· glow-gold on HOME · bone on TIE · mute on AWAY |
+| `/now` | SHIPPED 加 [R29 W6] entry · UNRESOLVED 移除「Uncertainty Stripe 太窄」(已 resolved · 註解 explain cross-section migration) |
+
+「0 EXTRA COMPUTE」badge 強調這 distribution 從免費的 10K samples 拉出 · 不需額外 sims(brand IP:resource efficiency · not paid API)。
+
+### Phase 3 · Wave 7 ship · self-audit + drift cleanup(this commit)
+
+11 waves 後真實 self-audit:
+- **Bug fix:** RoadmapVotingPanel 初次 hydration 觸發 persist useEffect ·
+  flashes「✓ saved local」即使 user 未變動。加 `hydrated` flag · 只在
+  hydration done 後 persist · 避免 false-positive save indicator
+- **Polish:** /track-record HERO badge 「START · N=0」 → conditional「WAITING · N=0」
+  with shimmer + glow-gold · 視覺 continuity with EmptyLedger 「waiting 第一筆」
+  framing · N≥1 後切回正常「START · N=X」(no-longer-waiting earned state)
+- **Backfill:** WHILE-YOU-WERE-OUT.md 加 Wave 4-6 detail(之前 Wave 3 commit
+  時 future-looking · 沒同步)
+- **TODO.md drift:** 多處 stale refs(「Footer 仍 v0.27 等 bump」line 199 ·
+  「2026-05-19 DAY 1」line 4 · 「REPORT v0.27」line 163 · 「v0.27 完成度極高」line
+  355)· 統一 reframe 為 Round 28-29 收盤 reality
+
+### Round 28-29 累計收盤狀態(11 commits today · evening EOD)
+
+- **27 visitor-discoverable routes** + **1 noindex /admin** = 28 total page routes
+- **18 custom OG cards** · **22 reusable components**(+ MemberDashboardPreview ·
+  UncertaintyStripe · FounderSignOff · ArticleMeta · FirstReceiptHero in-page ·
+  RoadmapVotingPanel · RankedItemRow · RunDiffRow · RecentEngineLine ·
+  buildRunDiffBuckets helper)
+- **Build / Lint / TSC strict: 11 commits 全程綠**
+- **8 founder sign-offs** across trust docs(/audit · /methodology · /coverage ·
+  /track-record · /roadmap · /now · /member · /admin)
+- **2026 canonical visual moat shipped**(Uncertainty Stripe · Bank of England fan-chart)
+- **/now NEW** 完成時間軸三角(/changelog 過去 + /now 現在 + /roadmap 未來)
+- **/member psychology-driven dashboard preview** · 4 cognitive bias + 3 research
+  patterns + drag-rank voting + memory resurfacing
+- **/admin noindex ops preview** · live KPI + Stage 1 Supabase + Stage 2 mockup
+- **MLM 結構防線**(Pratfall + Costly Signaling for Taiwan brand context)
+- **Score-level uncertainty viz**(Run Diff Histogram resolves last Round 28 unresolved)
+- **First Receipt cinematic ready** for tonight 22:00+ Tim ingest
 
 ### Round 29 lesson map
 
 1. **Tim 提問裡藏 brand 防線缺口** · 「安麗」這種看似 unrelated 提問 · 其實是「Founders 27 surface patterns 在 Taiwan 語境下可能被誤聯想 MLM」這個從沒明說的 anxiety 的 surface。Founder 自己 surface 缺口 · Claude 接住 · 是 brand IP 建立的 critical loop。
-2. **Product gap vs Brand gap 是不同層** · Round 28 補 brand IP(Uncertainty Stripe · founder sign-offs · /now)· Round 29 補 product gap(/member · /admin)· 倒置 SaaS 預設「先有 product 再有 brand」 — ZONE 27 brand 先 · product preview 後 · 因為 stealth 期 brand IP 是 differentiator · product 是 deliverable。兩個都重要 · 順序對。
+2. **Product gap vs Brand gap 是不同層** · Round 28 補 brand IP(Uncertainty Stripe · founder sign-offs · /now)· Round 29 補 product gap(/member · /admin)· 倒置 SaaS 預設「先有 product 再有 brand」 — ZONE 27 brand 先 · product preview 後 · 因為 stealth 期 brand IP 是 differentiator · product 是 deliverable。
 3. **Psychology-driven 比 feature-list 強** · /member 不是「FREE TIER 會員可以做 A · B · C」 · 是「會員 stickiness 不在功能多 · 在 data ownership」。同樣的 page 可以是 paywall pitch 或 brand statement · 看 framing。
-4. **Pratfall 在 product gap 工作得很漂亮** · /member 寫「這是 preview · 不是 functional · launch timeline 公開」 · 比「Coming Soon!」誠實十倍。倒置 SaaS「即將推出 · 敬請期待」 vague 話術。
-5. **Self-introduced drift 也算 lesson** · Round 28 Wave 5 我自己把 CLAUDE.md 改 v0.29 但其他全站 v0.28 · 是「docs sync 副作用 leaked」的典型錯。版本 bump 是 brand decision 必須等 Tim 拍板 · 不是 routine docs work。
-6. **/admin noindex 是 disclosure philosophy 的有趣 edge case** · ZONE 27 brand IP 是「方法公開」 · 但 admin 後台 mockup 也算「方法」嗎?Decision: 是 · 公開 design (ADMIN-PLAN.md + /admin preview 都 open)· 但不 SEO index 因為「不是給訪客看」 · 兩者並存 · 不衝突。
+4. **Pratfall 在 product gap 工作得很漂亮** · /member 寫「這是 preview · 不是 functional · launch timeline 公開」 · 比「Coming Soon!」誠實十倍。
+5. **Self-introduced drift 也算 lesson** · Round 28 Wave 5 我自己把 CLAUDE.md 改 v0.29 但其他全站 v0.28 · 是「docs sync 副作用 leaked」的典型錯。版本 bump 是 brand decision 必須等 Tim 拍板。
+6. **/admin noindex 是 disclosure philosophy 的有趣 edge case** · 「方法公開」但不 SEO index · 兩者並存 · 不衝突。
+7. **Resolve own UNRESOLVED 是 closure discipline** · Wave 6 解 Wave 3 的 Uncertainty Stripe 太窄 · 從 SHIPPED → DISCOVERED → UNRESOLVED 跨 wave migration 是 brand IP「方法公開」內部 demonstration · 不是只對外公開 · 對自己也 honest tracking。
+8. **Pratfall canary 第 8 次 push 不過度 ship** · Round 29 Wave 7 self-audit + 小 polish + 真實 drift cleanup · 不過度新 feature · 「diminishing returns」是 honest brand decision 不是 weakness signal。
 
 完整 Round 29 ship 內容 + 對話脈絡 in /now SHIPPED + DISCOVERED + UNRESOLVED · visitor 可直接讀。
 

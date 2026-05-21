@@ -1,9 +1,19 @@
 # 📋 ZONE 27 · Owner Pending Actions
 
-> Tim 明早回到電腦前要做的事
-> 整理於 2026-05-19 晚上(DAY 1)+ 2026-05-20 整日(DAY 2 · 37 commits)
-> + 2026-05-21 開盤(DAY 3 · `/track-record` ledger + match lifecycle)
-> + 2026-05-21 接續(Round 2 · 4 commits · `/roadmap` + Cmd-K + 50+ files)
+> Tim 待動作清單 · 最後更新 2026-05-21 evening(Round 29 Wave 7 收盤)
+> 從 2026-05-19 晚上(DAY 1)→ 2026-05-21 evening · 共 ~70 commits
+>
+> **最新狀態(Round 28+29 evening 收盤 · 11 waves today):**
+> 27 visitor + 1 noindex routes · 18 OG · 22 components · v0.28
+> Footer chip bump ✅ DONE Round 28 · v0.29 等 Tim 拍板 milestone(per
+> brand「版本是 brand decision · 不是 docs sync 副作用」discipline)
+>
+> **Tim 仍 pending 親手動作:**
+> - ② Resend ✅ DONE Round 16(production · Gmail Inbox 已驗收)
+> - ③ 品牌域名 · Tim-cued only(per [[feedback_zone27_domain_deferred]])
+> - ⑤ **今晚 22:00+ CPBL ingest** · cpbl-260521-01 box score → /track-record
+>   第一筆 → FirstReceiptHero cinematic 自動 fire(brand 物理時刻 of the week)
+> - ⑥ K/BB profile screenshot · optional · 升 estimate 為真實值
 
 ---
 

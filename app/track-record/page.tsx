@@ -68,12 +68,24 @@ export default function TrackRecordPage() {
           >
             / TRACK RECORD · 公開戰績
           </p>
+          {/* Round 29 Wave 7 polish · N=0 waiting state gets subtle shimmer +
+              gold/60 stronger border · signals「第一筆 pending · 不藏 waiting
+              state」 visual continuity with EmptyLedger below。Once N≥1 the
+              shimmer drops and border softens(no-longer-waiting · earned state)。 */}
           <span
             lang="en"
-            className="font-mono text-[9px] tracking-[0.3em] px-1.5 py-0.5 border border-gold/40 text-gold/80"
-            title="這頁從 N=0 開始 · 沒有 cherry-picked 歷史 · 沒有 backdated 入帳 · 第一筆預定今晚收錄"
+            className={`font-mono text-[9px] tracking-[0.3em] px-1.5 py-0.5 border ${
+              finalized.length === 0
+                ? "border-gold/60 text-gold shimmer glow-gold"
+                : "border-gold/40 text-gold/80"
+            }`}
+            title={
+              finalized.length === 0
+                ? "這頁從 N=0 開始 · 沒有 cherry-picked 歷史 · 沒有 backdated 入帳 · 第一筆預定今晚收錄"
+                : `N=${finalized.length} · ${finalized.length} receipt${finalized.length === 1 ? "" : "s"} ingested · 不刪不修飾`
+            }
           >
-            START · N={finalized.length}
+            {finalized.length === 0 ? "WAITING · N=0" : `START · N=${finalized.length}`}
           </span>
         </div>
         <h1 className="text-4xl sm:text-5xl text-bone font-light tracking-tight max-w-3xl">
