@@ -292,6 +292,28 @@ blockquote {
   }
 }
 
+/* ============================================
+   @starting-style fade-up · cinematic entry for dynamically
+   rendered cards (MatchSimulator completion · WaitlistForm
+   success). Replaces pop-in with subtle 320ms fade + 8px rise.
+   Chrome 117+ / Safari 17.5+ / Firefox 129+ · graceful fallback
+   on older browsers (element just appears instantly).
+   Per Round 18 Agent A · @starting-style is the modern correct
+   way to do entry animations — no JS, no class-toggle hack.
+   ============================================ */
+.enter-fade-up {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 320ms ease-out, transform 320ms ease-out;
+}
+
+@starting-style {
+  .enter-fade-up {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .chip-pop:hover .chip-dot {
     animation: none;
@@ -299,6 +321,11 @@ blockquote {
   .section-reveal::after {
     animation: none;
     transform: scaleX(1);
+  }
+  .enter-fade-up {
+    transition: none;
+    opacity: 1 !important;
+    transform: none !important;
   }
 }
 

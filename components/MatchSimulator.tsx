@@ -329,7 +329,11 @@ export default function MatchSimulator({ match }: Props) {
       {/* ── COMPLETION CARD ──────────────────────── */}
       {done && (
         <section className="pb-14">
-          <div className="bg-slate/40 border border-gold/50 p-10 text-center">
+          {/* Round 18 motion polish (Agent A #5 · @starting-style) ·
+              card fade-ups 320ms when sim finishes · matches the
+              "compute settled" moment per Bloomberg-terminal pattern.
+              Pure CSS · 0 JS · prefers-reduced-motion safe. */}
+          <div className="bg-slate/40 border border-gold/50 p-10 text-center enter-fade-up">
             <p className="font-mono text-gold text-[10px] tracking-[0.4em] mb-4">
               ✓ 模擬完成 · N = 10,000 · v0.2 引擎
             </p>

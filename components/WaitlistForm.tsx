@@ -51,7 +51,10 @@ export default function WaitlistForm({
   if (state?.ok) {
     const pos = String(state.queuePos).padStart(3, "0");
     return (
-      <div className="bg-slate/70 border border-gold/60 glow-soft p-10 text-center">
+      // Round 18 motion polish (Agent A #5 · @starting-style) · success
+      // card fade-ups 320ms when form submits · peak commitment moment
+      // (Cialdini & Trope 1976) deserves a cinematic settle · not pop-in.
+      <div className="bg-slate/70 border border-gold/60 glow-soft p-10 text-center enter-fade-up">
         <p className="font-mono text-gold text-[10px] tracking-[0.4em] mb-4">
           {state.alreadyReserved ? "✓ 您已在等候名單上" : "✓ 預留成功"}
         </p>
