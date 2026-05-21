@@ -23,7 +23,11 @@ import { FOUNDERS_TOTAL } from "@/lib/founders-stats";
 
 const RESEND_ENDPOINT = "https://api.resend.com/emails";
 const FROM_ADDRESS = "ZONE 27 <onboarding@resend.dev>";
-const REPLY_TO = "tim.tang@example.com"; // TODO replace with Tim's real email when ready
+// Tim's real inbox · reply UNSUBSCRIBE 與一般訪客回信都落這。
+// When brand domain (zone27.tw) ships · switch FROM to tim@zone27.tw
+// for stronger sender identity; REPLY_TO can stay personal Gmail or
+// follow.
+const REPLY_TO = "tatayngiti@gmail.com";
 
 export type EmailResult =
   | { ok: true; id: string }
