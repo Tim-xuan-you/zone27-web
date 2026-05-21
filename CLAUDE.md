@@ -188,57 +188,75 @@ ZONE 27 與 **BOTTOM 27**(Tim 的棒球手遊)是雙生品牌:
 
 ---
 
-## 🗺️ 當前路由(v0.28 · 8 rounds compressed · 2026-05-21)
+## 🗺️ 當前路由(v0.29 · Round 28 加 /now · 2026-05-21 evening)
 
 ```
 首頁 + 動線
 /                        首頁 · 3 sections (Round 3 Apple-style: Hero + HeroLiveCard + Founders strip)
                          · Round 5 mobile 3-viewport · Round 8 sticky CTA via StickyFoundersCTA
+                         · Round 28 HeroLiveCard 加 UncertaintyStripe + 蒙地卡羅 /learn 連結
+                         + 「不接受下注」defang + 賽後收據 /track-record permanent link
 /learn                   5 分鐘入門 primer · 給沒聽過 Bill James 的人(3 chapters)
+                         · Round 28 Chapter 03 footer 改 /about → /membership(P2.3)
 /not-found               K-strikeout 404 · sabermetric notation
 
 Brand IP(canonical · opt-in 深度)
 /manifesto               倒置宣言 · 6 sections + Section V SYNTHESIS「方法公開·品味私藏」
-/discipline              鐵律 · Buffett + Musk + Costco 三人共識(5 sections)
-/about                   六章節品牌方法論
-/roadmap                 公開路線圖 · LOCKED / EXPLORING / BRAND BOUNDARIES (Round 6+7 compressed to 3 items)
+/discipline              鐵律 · Buffett + Musk + Costco + Jobs 四人共識(Round 17 加 Jobs)
+/about                   七章節品牌方法論 · Round 28 加 Chapter 07 OPERATIONS(MAINTAINER · BUILD CADENCE
+                         · RESPONSE TIME · SCORE INGEST · FOUNDER ONBOARDING)
+/roadmap                 公開路線圖 · LOCKED / EXPLORING / BRAND BOUNDARIES
+                         · Round 28 加 ArticleMeta + FounderSignOff
+/now                     **NEW Round 28** · Linear-style craft journal · 3 sections(SHIPPED ·
+                         DISCOVERED · UNRESOLVED)· 完整時間軸三角:/changelog 過去 + /now 現在
+                         + /roadmap 未來 · 沒有 weekly schedule promise
 
-Trust artifacts(post-Round-7 compressed)
-/audit                   Model Report · 5 sections(Round 7 · 含 Section 05 Disclosure Philosophy canonical)
-/methodology             技術白皮書 · 4 sections(Round 7 · 00 ABSTRACT · 01 HOW IT WORKS · 02 TRY IT · 03 WHAT'S NEXT)
-/coverage                覆蓋範圍 · 6 sections + NEVER list
+Trust artifacts(全部 Round 28 加 FounderSignOff)
+/audit                   Model Report · 5 sections · Section 05 Disclosure Philosophy canonical
+                         · Round 28 Section 02 加 ESTIMATION DISCLOSURE block(K/9·BB/9 estimate
+                         surface 從 lib/matches.ts 註解到 /audit · Pratfall surface)
+/methodology             技術白皮書 · 4 sections · Round 28 ABSTRACT ±2% 改寫為「引擎內部一致性」+
+                         明示 N≥30 SAMPLE DEBT 還沒解 · 加 ArticleMeta 6 min + FounderSignOff
+/coverage                覆蓋範圍 · 6 sections + NEVER list · ArticleMeta 8 min + FounderSignOff
 /privacy                 隱私政策 · 8 sections(含 anti-tracking inventory)
 /terms                   服務條款
 /faq                     honest answers(動態計數)
 /track-record            公開戰績 ledger · PROVED + DIVERGED 等大 · N=0 honest empty state
+                         · Round 28 加 ArticleMeta N= SAMPLE DEBT live chip + FounderSignOff
 
 Engine + 賽事(只 1 場真實 cpbl-260521-01 · per Day 3 placeholder purge)
-/lab                     即時 Monte Carlo 模擬器(逐打席模型 v0.2)
+/lab                     即時 Monte Carlo 模擬器(逐打席模型 v0.2)· Round 28 加 post-sim
+                         TRUST LOOP 2-card row(/track-record + /founders)
 /lab/custom              自訂任意投手對戰
 /matches                 今日賽事板(CPBL)
 /matches/[gameId]        SSG 詳情 · cpbl-260521-01 統一 vs 富邦 2026-05-21 18:35 新莊
 /matches/mlb             MLB 即時資料(每 10 分鐘 ISR)
 /signal-board            每日量化早報
 /leaderboard             THE 27 WALL · 270 創始席位視覺化
-/founders                Founders 27 銷售頁(Round 8 polish · live scarcity in hero · sticky CTA destination)
-/glossary                27 種進階數據詞彙(StatTerm tooltip 整合)
+/founders                Founders 27 銷售頁 · Round 28 FROM THE FOUNDER 引用 dedupe(原本跟
+                         /about Chapter 05 重複 · 改為 Chapter 05 不同句「直覺說書人」+ Bloomberg analog)
+/membership              4-tier ladder 總覽(Round 25 NEW · Round 27 Footer + Cmd-K 全鏈)
+/glossary                27 industry stats(10+10+7)+ 5 Z27 LEXICON = 32 entries(Round 13 加 lexicon)
 /changelog               精簡版本紀錄 · GitHub commits 為 source of truth
 
 OG + favicon + chrome
 /icon                    Z27 monogram favicon
 /opengraph-image         全站 fallback OG card
-/[15 routes]/opengraph-image  15 個 custom OG cards(post-Round-2 · 含 /track-record + /roadmap)
+/[17 routes]/opengraph-image  17 個 custom OG cards(Round 28 加 /now)
 /loading.tsx             Brand-pure suspense skeleton(Round 2)
 ```
 
-## ⚙️ Global components(Round 2/5/12)
+## ⚙️ Global components(Round 2/5/12/28)
 
-- `<CommandPalette />` · 全站 ⌘K/Ctrl-K palette · **25 routes** 索引(Round 25 加 /membership 後)(layout.tsx)
+- `<CommandPalette />` · 全站 ⌘K/Ctrl-K palette · **26 routes** 索引(Round 28 加 /now 後)(layout.tsx)
 - `<CmdKTrigger />` · 雙 variant:
   - `variant="chip"` (default) · Nav 右上方 ⌘K 提示按鈕(desktop)
   - `variant="icon"` (Round 12) · Nav mobile 2nd row 右側 ⌕ 圖示(palette 全站可達)
 - `<StickyFoundersCTA />` · 行動版 sticky bottom CTA bar · 全頁顯示(**除 /founders + /lab/custom · Round 12 fix:/lab 復原 sticky · /lab/custom 仍隱藏因有 power-user form**)
 - `<ProvenanceStamp />` (Round 12) · ENGINE v0.2 · BUILD {SHA} · MATCH {id} citation footer · 自動加在 MatchSimulator 內 → 用於 /lab + /lab/custom + /matches/[gameId] · Patek/Bloomberg/academic citation pattern
+- `<UncertaintyStripe />` (Round 28) · Binomial CI gradient bar · 50% (dark) + 90% (light) 在 win-probability % 下方 · HeroLiveCard + MatchSimulator · Bank of England fan-chart convention · 2026 canonical visual moat for quantitative analytics brand
+- `<FounderSignOff />` (Round 28) · 3-sentence first-person paragraph + signed `— TIM · FOUNDER · {date}` · 5 trust docs(/audit · /methodology · /coverage · /track-record · /roadmap)+ /now · patio11/DHH pattern
+- `<ArticleMeta />` (Round 28) · Reading-time chip + optional N= SAMPLE DEBT chip(Z27 LEXICON UI primitive · threshold 30 Bill James 慣例)· /methodology · /coverage · /roadmap · /track-record · /now
 
 ## 📦 技術棧
 

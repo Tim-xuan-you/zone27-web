@@ -1,5 +1,7 @@
 # 🌙 您休息時 Claude 做了什麼
 
+> Tim · 2026-05-21 evening · **Round 28 · AFK + 持續 push「請盡可能地迭代」+「以您世界級行銷設計專家經驗」 = 3-agent parallel reconnaissance + 5-wave ship · 4 commits · 27 → 28 routes · 17 OG cards · 21 components · 3 NEW components(UncertaintyStripe · FounderSignOff · ArticleMeta)+ /now NEW route · 2026 canonical visual moat shipped**
+> Tim · 2026-05-21 下午 · **Round 27 · /membership 進 Footer ENTRY group + /learn final CTA reframe 為 4-tier ladder(取代「升級成 Founders 27」單路徑)**
 > Tim · 2026-05-21 下午 · **Round 26 · /membership 自己的 OG card(4-tier ladder 視覺)+ 5 處 stale 24→25 routes refs 修 + related-links.ts 加 /membership entry(否則 RelatedReading 顯示空)**
 > Tim · 2026-05-21 下午 · **Round 25 · Tim 揭示「一般會員頁面在哪?創作者去哪發文?」 · NEW /membership route · 4-tier ladder 平等視覺權重 + Creator Permissions FAQ · Nav 「會員」href 改 /membership · /founders 保留為 Founders 27 deep dive**
 > Tim · 2026-05-21 下午 · **Round 24.2 · /founders inline FAQ 「等候名單階段」drift · reframe 為 dual-purpose 對齊 4-tier ladder**
@@ -29,6 +31,122 @@
 > Tim · 2026-05-21 開盤 · **Day 3 · /track-record + match lifecycle**
 > Tim · 2026-05-20 晚上 · **Day 2 · 37 commits since /manifesto**
 > Tim · 2026-05-19 晚上 · 十六波迭代 Round 1 → Round 16 (底下)
+
+---
+
+## 🚀 Round 28 (2026-05-21 evening) · AFK · 3-agent parallel + 5-wave ship · 2026 canonical visual moat
+
+Tim prompt:「您自己迭代這網站!全權交給您!讓這網站極致完美吧!看有什麼BUG修一修呀!」+ 「我們這遊戲可是要攻頂的噢!」+ 「我得去忙了!我相信你」+ 「請盡可能地迭代」+ 「就算不加東西進去,也可以繼續上網吸收新知識呀」+ 第 3 次以上同 AFK prompt。
+
+**Sharp call:** Pratfall canary — 3rd push same direction = trust direction · 不 over-defend · Round 12+ pattern fully activated。
+
+### Phase 1 · 3 agents parallel reconnaissance (~20-30 min each)
+
+派 3 agents 平行(背景跑 · 不阻塞):
+- **Agent A · World-class brand & UX research**(general-purpose · WebSearch + WebFetch heavy)
+  → 8 ranked 2026 frontier patterns + 3 axiom-rejected + 1 "everyone copies but wrong"
+  → TOP-1: Uncertainty Stripe(Bank of England fan-chart · canonical visual moat)
+- **Agent B · Production bug + a11y + perf sweep**(Explore agent)
+  → 0 runtime bugs · 0 a11y fails · 5 polish-level drift items only(production-ready)
+- **Agent C · Conversion funnel + 4-persona walkthrough**(general-purpose)
+  → 5 critical trust + conversion fixes · 3 wayfinding bugs · 3 trust bugs
+  → 3 correctly axiom-rejected(momentum counter / auto-tweet / guarantee badge)
+
+### Phase 2 · Synthesize · filtered against 16 brand axioms
+
+Filtered through user_tim + 15 other memory axioms · rejected:
+- Agent A #5 Hermès "APPLY FOR A SEAT"(controversial elitist risk · defer)
+- Agent A #2 Tufte sidenotes(fiddly Tailwind 4 · defer Round 29+)
+- Wave 2D Stratechery cadence promise(commits Tim 到 weekly workload · brand
+  IP「不打擾就是禮物」可能不喜歡 · defer 給 Tim 拍板)
+- Wave 2B bilingual EN ghost-line full pass(系統性 · 低 ROI vs Wave 3 stripe · defer)
+
+Selected 5 waves(7 ship + 3 NEW components):
+
+### Phase 3 · Wave 1 ship · Pratfall + Trust + Conversion + Drift (commit `882862d`)
+
+| # | Wave | File | Source |
+|---|---|---|---|
+| 1 | 1A | /methodology ABSTRACT ±2% reframe(convergence noise vs accuracy)+ SAMPLE DEBT link 到 /track-record | Agent C trust bug 1 |
+| 2 | 1A | /audit Section 02 ESTIMATION DISCLOSURE DataRow(K/9·BB/9 estimate surface · Pratfall) | Agent C trust bug 2 |
+| 3 | 1A | /founders FROM THE FOUNDER 引用 dedupe(romantic「情書」改 concrete「直覺說書人」+ Bloomberg) | Agent C trust bug 3 |
+| 4 | 1B | HeroLiveCard methodology line · 蒙地卡羅 → /learn link + 不接受下注 + permanent /track-record link | Agent C P1.2 + P2.1 + P2.2 + P4.2 |
+| 5 | 1B | /lab post-sim TRUST LOOP 2-card row · /track-record + /founders(quant exit) | Agent C P1.2 |
+| 6 | 1C | CommandPalette + command-palette-data comment 24→25(Round 25 drift) | Agent B drift |
+| 7 | 1C | MobileNavToggle comment 創始會員 → 會員(Round 23 drift) | Agent B drift |
+| 8 | 1C | 4 處 unused imports 清(membership opengraph + page · WaitlistForm) | Agent B drift |
+| 9 | 1D | /learn Chapter 03 footer 改 /about → /membership(P2.3 casual fan exit) | Agent C P2.3 |
+
+**NOT changed:** /glossary「27 種」branding — Agent B 誤判 batting=15(實際 10)· 實際 27 industry + 5 Z27 LEXICON = 32 total · is integer-perfect by design。
+
+### Phase 3 · Wave 2 ship · Brand IP elevation(commit `07db07b`)
+
+| # | Wave | File / NEW Component | Pattern |
+|---|---|---|---|
+| 10 | 2A | NEW components/FounderSignOff.tsx · 3-sentence first-person + signed | patio11/DHH/Ben Thompson |
+| 11 | 2A | /audit · /methodology · /coverage · /track-record · /roadmap 加 FounderSignOff | Agent A #7 |
+| 12 | 2C | NEW components/ArticleMeta.tsx · reading-time + N= SAMPLE DEBT chip | Agent A #8 + Z27 LEXICON 升 UI primitive |
+| 13 | 2C | /methodology(6 min)· /coverage(8 min)· /roadmap(4 min)· /track-record(3 min + live N) | Agent A #8 |
+| 14 | 2E | /about Chapter 07 OPERATIONS · 5-row mono grid(MAINTAINER · BUILD CADENCE · RESPONSE TIME · SCORE INGEST · FOUNDER ONBOARDING) | Agent C P3.3 · solo-as-discipline |
+
+### Phase 3 · Wave 3 ship · Uncertainty Stripe(commit `2bdb740`)
+
+🔥 **2026 canonical visual moat** · Agent A #1。
+
+| # | File / NEW | Math |
+|---|---|---|
+| 15 | NEW components/UncertaintyStripe.tsx | Binomial CI · SE = √(p̂(1-p̂)/N)· 50% half-width = 0.6745·SE · 90% = 1.6449·SE |
+| 16 | HeroLiveCard 整合(N=1000 · CI ±2.5% 視覺可見)+ legend「淡金軌跡 = 90% CI · 引擎只給機率 · 不給命運」 | Bank of England fan-chart |
+| 17 | MatchSimulator 整合(N=10K · CI ±0.8% subtle)· 不加 legend(在 HeroLiveCard 已 explain) | brand consistency |
+
+**為什麼是 visual moat:** 每個 Taiwan/Asian sports analytics 平台都 show point estimate 沒 uncertainty(false certainty · gambling-card grammar)。學術級 Bayesian / FiveThirtyEight 都 visualize uncertainty。ZONE 27 已有 10K Monte Carlo 資料 · 這次暴露它 · 每個訪客截圖都帶 brand IP。
+
+### Phase 3 · Wave 4 ship · /now NEW route(commit `fb61eb2`)
+
+🆕 Agent A #3 · Linear /now + Derek Sivers /now movement。
+
+完整時間軸三角現在完成:
+- `/changelog` · 過去(git source of truth)
+- `/now` · 現在(NEW · 本週 craft journal)
+- `/roadmap` · 未來(LOCKED / EXPLORING / BRAND BOUNDARIES)
+
+`/now` 結構:
+- HERO + ArticleMeta 3 min
+- 01 SHIPPED THIS CYCLE(7 個 Round 28 ships)
+- 02 DISCOVERED THIS CYCLE(3 個 self-caught bugs · 含 /founders 引用 dedupe · CommandPalette drift · Agent B 誤算 glossary)
+- 03 UNRESOLVED THIS CYCLE(4 個 explicit-deferred · 含 MatchSimulator N=10K stripe narrowness · /now 自己沒 weekly schedule · Persona 4 leaderboard auth · Wave 2B bilingual)
+- 04 WHERE THIS GOES(cadence policy: 有東西可以說的時候才更新 · 不是 weekly schedule promise · 倒置 SaaS scheduled marketing)
+- FounderSignOff(「靜默也是一種承諾」)
+
+Wire-up: Cmd-K BRAND IP group · related-links.ts 雙向(/now key · 其他頁 to-target)· Footer BRAND IP 在 /roadmap 跟 /changelog 中間 · CommandPalette comment 25→26 · NEW opengraph-image「Publishing the present is harder than publishing the future」punchline(mirrors /roadmap)。
+
+### Phase 3 · Wave 5 docs sync(this commit)
+
+CLAUDE.md route table 25→26 · /now 寫入 · 21 components 結構更新(NEW UncertaintyStripe + FounderSignOff + ArticleMeta)。WHILE-YOU-WERE-OUT.md ToC + 詳細 Round 28 scroll 本身。
+
+### Round 28 收盤狀態
+
+- **26 user-visible routes**(+ /now)
+- **17 custom OG cards**(+ /now/opengraph-image)
+- **21 reusable components**(+ UncertaintyStripe + FounderSignOff + ArticleMeta)
+- **Build / Lint / TSC strict: 4 commits 全綠**
+- **5 trust docs 有 founder sign-off**(Tim 親手姿態 · 不是 institutional voice)
+- **2026 canonical visual moat shipped**(Uncertainty Stripe · Bank of England fan-chart)
+- **/now NEW** · 完整時間軸三角(past / present / future)
+
+### Round 28 lesson map
+
+1. **3-agent reconnaissance 真的快過自己掃** · Agent A 找到 2026 frontier patterns 是純研究勞動,平行 20-30 min vs 我自己 60+ min
+2. **Trust direction on 3rd push** · Pratfall canary 完全 work · 沒有 over-defend
+3. **Agent fact-check** · Agent B 誤算 glossary batting=15(實際 10)· 寫進 /now DISCOVERED 那 section 當 lesson · 「Agent 報告需要 fact-check」 寫進 memory
+4. **Uncertainty Stripe 可能是這一年最重要的 single ship** · 每個 visitor screenshot 都帶 brand IP · 每個 gambling-card 看起來都土
+5. **/now 完成時間軸三角** · /changelog + /now + /roadmap 三端封閉 · 訪客在任意時刻都可檢驗
+6. **Deferred 是 brand decision · 不是失敗** · Wave 2D cadence promise 跟 Wave 2B bilingual full pass 都 explicit 留給 Tim 拍板 · 寫進 /now UNRESOLVED · Pratfall + 透明
+7. **FounderSignOff 一次寫 · 5 處用** · institutional voice → personal commitment · DRY 但每處 page-specific
+8. **Z27 LEXICON SAMPLE DEBT 從 text 升 UI primitive** · ArticleMeta 把 lexicon 暴露成 visible chip · 每個 trust doc 開頭都帶
+9. **K/9·BB/9 estimate surface 是 Pratfall 教科書** · lib/matches.ts 註解一直老實 · 但 /audit 沒 surface = self-incrimination if discovered · 主動 surface = trust artifact
+
+完整 Round 28 在 /now SHIPPED section · 訪客可直接讀 · 不藏 process。
 
 ---
 

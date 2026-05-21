@@ -9,20 +9,44 @@
 
 ## 🟡 Pending owner actions(您該做的)
 
-從 [TODO.md](TODO.md) 引用 · **以 Round 2 收盤狀態 (2026-05-21 同日 · 4 個 Round 2 commits 後)**:
+從 [TODO.md](TODO.md) 引用 · **以 Round 28 收盤狀態 (2026-05-21 evening · 共 32 commits 今日)**:
 
-- ✅ **① Supabase 註冊** — **DONE**(2026-05-20 上午)
-- ✅ **④ Footer 版本 chip bump** — **DONE**(2026-05-21 · v0.27 → v0.28 全 repo · LAST_REVIEWED 2026-05-21)
-- **② Resend 註冊**(5 分鐘)— 仍 pending · 解鎖 confirmation emails
-- **③ 品牌網域購買**(等名稱決定:zone27.tw / .app / .cc / .io)
-- **⑤ CPBL 截圖** — DAY 3 持續路徑 · 今晚 22:00 後截 cpbl-260521-01 box score → /track-record 第一筆 ledger entry
-- **⑥ 球員 K/BB profile screenshot**(optional)— 升級 4 個 estimate 為真實值
+- ✅ **① Supabase 註冊** — **DONE**(2026-05-20 上午 · Tokyo region · RLS-locked + 2 SECURITY DEFINER)
+- ✅ **② Resend 註冊** — **DONE** Round 16(2026-05-21 中午 · production live · Tim Gmail Inbox 已驗收)
+- ✅ **④ Footer 版本 chip** — **DONE** Round 28(現為 v0.29 dynamic Taipei today · auto-revalidate)
+- **③ 品牌網域購買** — Tim-cued only(per [[feedback_zone27_domain_deferred]] · 不主動 push · 等 Tim 明確說「域名 X」或「啟動 ③」才動)
+- **⑤ CPBL 截圖 · 今晚 22:00+** — brand IP 物理證據誕生 · cpbl-260521-01 統一 vs 富邦 box score · ingest /track-record 第一筆
+- **⑥ 球員 K/BB profile screenshot**(optional)— 升級 4 個 estimate 為真實值 · 升級後可 surface 為「PR-modified」的 audit trail
 
 完整步驟見 TODO.md · 我會在您說「開始 ② Resend」時一步步帶您走。
 
 ---
 
 ## ⏸️ 研究 backed 但我延後的技術升級
+
+### G. Wave 2B · Bilingual EN ghost-line typography density(Round 28 加)
+
+**Round 28 Agent A #6:** M+ Hong Kong pattern · 每個 section header 同時有 Chinese + mono-uppercase English ghost line。Section/ReportSection components 已有 EN label · 但 sub-headers + inline content 仍 30% in place。
+
+**為什麼延後:** 系統性 pass(20+ files · ~50 sub-headers)· ROI vs Wave 3 Uncertainty Stripe 明顯低 · Round 28 ship 5 wave 後優先序排不上來。
+
+**何時可做:** Round 29+ 評估 · 一次性 systematic pass · 可 派 Explore agent code-walk 一次盤點所有需要的點。
+
+### H. Wave 2D · Stratechery weekly cadence promise(Round 28 加)
+
+**Round 28 Agent A #4:** 把 /membership FREE TIER 描述從 event-triggered(「模型重要迭代第一波知道」)改為 fixed-cadence(「每週五 18:00 TPE · 一封信 · 30 秒可讀完」)· Stratechery / patio11 Bits-about-Money pattern。Cadence-promise 比 vague「important updates」converts 更好。
+
+**為什麼延後:** 會 commit Tim 到 weekly workload(~2 hr/month · 寫信 + ship)· 同時 brand IP「不打擾就是禮物」可能不喜歡 schedule-driven 而非 trigger-driven。是 brand decision · 不是 implementation question · 留給 Tim 拍板。
+
+**何時可做:** Tim 明確說「我可以承諾每週寫一封」+ 同意 anti-SaaS framing trade-off。
+
+### I. Wave 4 · Persona 4 P4.1 · /leaderboard authentication banner(Round 28 加)
+
+**Round 28 Agent C P4.1:** Skeptic 看 ScarcityStrip「NEXT IS #008」會問「#001-#007 是誰?prove they exist」。/leaderboard 目前 hardcoded claimedFounders array · 沒 GitHub commit history audit trail。
+
+**為什麼延後:** 修法需要設計可信的 audit banner(「認領日為真實 bank-transfer 到帳日 · 規則寫在 supabase/migrations/0001」+ link to GitHub commits)· 比簡單 copy fix 複雜 · Round 28 ship plate 滿 · 留 Round 29+。
+
+**何時可做:** Founders 27 正式預售開放前必須做 · 真實 founders 入帳 = 真實 audit trail · 那時 banner 才有 substance。
 
 ### A. Next.js 16.2 View Transitions API
 
