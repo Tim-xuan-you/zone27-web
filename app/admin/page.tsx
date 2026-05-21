@@ -13,6 +13,7 @@ import {
   formatBadge,
 } from "@/lib/founders-stats";
 import { getWaitlistCount } from "@/lib/waitlist-stats";
+import { getSession } from "@/lib/supabase/server";
 
 export const metadata: Metadata = {
   title: "Admin · Tim's ZONE 27 ops dashboard preview",
@@ -51,6 +52,12 @@ export const revalidate = 60;
 // ─────────────────────────────────────────────────────
 
 export default async function AdminPage() {
+  // Round 30 Wave 10 · auth-aware /admin · Tim 自己 login 後 page 顯示
+  // 他的 session info(email + 加入天數)· anonymous visitor 看 noindex
+  // preview。 不是 admin gate(任何 logged-in user 都看得到)· 只是給
+  // Tim visual confirmation 他 auth 鏈通了。 真正的 admin actions
+  // gate 是 Stage 2 後台 · 還沒 ship。
+  const session = await getSession();
   const waitlistCount = await getWaitlistCount();
   const finalizedCount = getFinalizedMatches().length;
   const ingestedCount = matches.length;
@@ -77,6 +84,15 @@ export default async function AdminPage() {
             >
               STAGE 2 PREVIEW · NOINDEX
             </span>
+            {session && (
+              <span
+                lang="en"
+                className="font-mono text-[9px] tracking-[0.3em] px-1.5 py-0.5 border border-gold/60 text-gold shimmer"
+                title={`您 logged in as ${session.user.email}`}
+              >
+                ✓ SESSION · {session.user.email}
+              </span>
+            )}
           </div>
           <h1 className="text-4xl sm:text-5xl text-bone font-light tracking-tight max-w-3xl">
             Tim 的 <span className="text-gold">ZONE 27 ops 後台</span>

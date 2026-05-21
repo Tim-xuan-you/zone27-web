@@ -11,13 +11,13 @@ import {
 
 // ── ZONE 27 · Command Palette ──────────────────────────
 // Premium-tier navigation primitive. Cmd-K / Ctrl-K opens a
-// modal with all 29 visitor-discoverable routes searchable in one place.
+// modal with all 30 visitor-discoverable routes searchable in one place.
 // Arrow keys navigate · Enter opens · Esc closes.
 // (/admin · noindex Tim-ops preview · intentionally NOT indexed here.)
 //
 // Design principles (per [[zone27-disclosure-philosophy]]):
 //   - No external deps (no cmdk · no fuse.js · no telemetry)
-//   - Plain substring filter on hand-curated 29-row list
+//   - Plain substring filter on hand-curated 30-row list
 //   - No recently-used / personalization (would require tracking)
 //   - No hidden ranking · alphabetical-within-group · group-order
 //     is editorial (entry → engine → brand → trust → tools)

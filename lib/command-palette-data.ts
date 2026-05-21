@@ -10,7 +10,7 @@
 // Inspired by Linear / Vercel / Stripe command palettes,
 // but DELIBERATELY thin: no fuse.js, no telemetry, no
 // recently-used persistence. Simple substring filter on a
-// hand-curated 29-row list is sufficient and brand-pure
+// hand-curated 30-row list is sufficient and brand-pure
 // (per [[zone27-disclosure-philosophy]]: no hidden ranking).
 // (/admin is intentionally NOT indexed here · Tim bookmarks it ·
 // keeping it out of visitor Cmd-K aligns with its noindex framing.)
@@ -325,6 +325,26 @@ export const COMMAND_ITEMS: CommandItem[] = [
       "savant",
       "drift",
       "校準曲線",
+    ],
+  },
+  {
+    label: "Submit · 投稿給 Tim · 1/週 curate · FREE TIER",
+    kicker: "/member/submit",
+    path: "/member/submit",
+    group: "工具 · 外部",
+    keywords: [
+      "submit",
+      "投稿",
+      "submission",
+      "post",
+      "guest post",
+      "撰稿",
+      "creator",
+      "創作",
+      "guest",
+      "投書",
+      "send to tim",
+      "1/週",
     ],
   },
   {

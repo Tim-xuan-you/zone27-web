@@ -226,3 +226,114 @@ function escapeHtml(s: string): string {
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#39;");
 }
+
+// ── Round 30 Wave 10 · Submit-to-Tim notification ─────
+// FREE TIER 投稿 path · per /membership Creator Permissions FAQ
+// 「FREE TIER 投稿 · Tim 親手 curate · 1 篇 / 週」。 Member 在 /member/submit
+// 填 title + body · 此 function 寄給 Tim 的 Gmail。 Tim 在收件匣審 · 過則
+// 手動 publish 到 /signal-board(future)。 沒 public posting · 沒 5% 抽成 ·
+// 純 Tim-curate model · 同 Stratechery Guest Post pattern。
+//
+// 跟 sendWaitlistConfirmation 共用 Resend infra · 不重複 setup。
+
+type SubmissionEmailArgs = {
+  memberEmail: string;
+  title: string;
+  body: string;
+};
+
+export async function sendSubmissionNotification({
+  memberEmail,
+  title,
+  body,
+}: SubmissionEmailArgs): Promise<EmailResult> {
+  const apiKey = process.env.RESEND_API_KEY;
+  if (!apiKey) {
+    console.warn(
+      `[ZONE27 · SUBMISSION · SKIP] RESEND_API_KEY not set · submission email skipped from ${memberEmail}`
+    );
+    return { ok: false, error: "RESEND_API_KEY missing" };
+  }
+
+  const subject = `[ZONE 27 · SUBMISSION] ${title.slice(0, 60)} · from ${memberEmail}`;
+  const safeTitle = escapeHtml(title);
+  const safeBody = escapeHtml(body).replace(/\n/g, "<br>");
+  const safeMember = escapeHtml(memberEmail);
+
+  const html = `<!DOCTYPE html>
+<html lang="zh-Hant">
+<head><meta charset="UTF-8"></head>
+<body style="margin:0;padding:0;background:#0F1A2E;color:#F5F2EA;font-family:'Helvetica Neue',Arial,sans-serif;">
+<table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background:#0F1A2E;">
+<tr><td align="center" style="padding:40px 16px;">
+<table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="max-width:600px;background:#131F38;border:1px solid #D4AF37;">
+<tr><td style="padding:32px;">
+<p style="margin:0 0 6px 0;font-family:'SF Mono',monospace;color:#D4AF37;font-size:11px;letter-spacing:4px;">/ ZONE 27 · SUBMISSION</p>
+<p style="margin:0 0 24px 0;font-family:'SF Mono',monospace;color:#8A93A8;font-size:10px;letter-spacing:3px;">FREE TIER 投稿 · Tim curate 1/週</p>
+<p style="margin:0 0 6px 0;color:#8A93A8;font-size:12px;">From</p>
+<p style="margin:0 0 20px 0;color:#F5F2EA;font-size:14px;font-family:'SF Mono',monospace;">${safeMember}</p>
+<p style="margin:0 0 6px 0;color:#8A93A8;font-size:12px;">Title</p>
+<p style="margin:0 0 20px 0;color:#F5F2EA;font-size:20px;line-height:1.4;">${safeTitle}</p>
+<p style="margin:0 0 6px 0;color:#8A93A8;font-size:12px;">Body</p>
+<div style="color:#F5F2EA;font-size:14px;line-height:1.7;border-left:2px solid #D4AF37;padding-left:14px;">${safeBody}</div>
+<hr style="border:0;border-top:1px solid #1E2A47;margin:28px 0;">
+<p style="margin:0;color:#8A93A8;font-size:11px;line-height:1.6;">Reply to 此 email 直接給 member · 或 forward 給自己 curate 後手動 publish 到 /signal-board · Tim 1/週 cadence。</p>
+</td></tr>
+</table>
+</td></tr>
+</table>
+</body>
+</html>`;
+
+  const text = `ZONE 27 · SUBMISSION
+FREE TIER 投稿 · Tim curate 1/週
+
+From: ${memberEmail}
+Title: ${title}
+
+Body:
+${body}
+
+──
+Reply 此 email 直接給 member · 或 forward 給自己 curate 後 publish 到 /signal-board。`;
+
+  try {
+    const response = await fetch(RESEND_ENDPOINT, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        from: FROM_ADDRESS,
+        to: [REPLY_TO], // Tim 自己收
+        reply_to: memberEmail, // 點 reply 直接回給 member
+        subject,
+        html,
+        text,
+      }),
+    });
+    if (!response.ok) {
+      const errorBody = await response.text();
+      console.error(
+        `[ZONE27 · SUBMISSION · ERROR] http=${response.status} from=${memberEmail}`
+      );
+      return {
+        ok: false,
+        error: `HTTP ${response.status}: ${errorBody.slice(0, 200)}`,
+      };
+    }
+    const data = (await response.json()) as { id?: string };
+    const id = data.id ?? "unknown";
+    console.log(
+      `[ZONE27 · SUBMISSION · SENT] from=${memberEmail} title="${title.slice(0, 40)}" id=${id}`
+    );
+    return { ok: true, id };
+  } catch (err) {
+    const message = err instanceof Error ? err.message : String(err);
+    console.error(
+      `[ZONE27 · SUBMISSION · ERROR] uncaught from=${memberEmail} err=${message}`
+    );
+    return { ok: false, error: message };
+  }
+}

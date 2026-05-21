@@ -8,6 +8,7 @@ import ArticleMeta from "@/components/ArticleMeta";
 import MemberDashboardPreview from "@/components/MemberDashboardPreview";
 import { getSession } from "@/lib/supabase/server";
 import { readFollowsFromMeta } from "@/lib/follows";
+import { readNotesFromMeta } from "@/lib/notes";
 import {
   getMatchById,
   getMatchPhase,
@@ -60,12 +61,27 @@ export default async function MemberPage({
   // Round 30 Wave 6 · pull followed match IDs from user_metadata · server-
   // side render so logged-in members see their follows list immediately ·
   // anonymous visitors see empty array (no UI for follows section)。
-  const followIds = readFollowsFromMeta(
-    session?.user.user_metadata as Record<string, unknown> | undefined
-  );
+  const userMeta = session?.user.user_metadata as
+    | Record<string, unknown>
+    | undefined;
+  const followIds = readFollowsFromMeta(userMeta);
   const followedMatches = followIds
     .map((id) => getMatchById(id))
     .filter((m): m is Match => !!m);
+  // Round 30 Wave 10 · note map for badge display on each FollowedMatchRow
+  const notesMap = readNotesFromMeta(userMeta);
+  // Round 30 Wave 10 · days-since-join · auth.users.created_at = registration
+  // moment(magic link first click)。 Endowment Effect deepening:「您是
+  // ZONE 27 第 N 天會員」 explicit identity anchor。
+  const createdAt = session?.user.created_at ?? null;
+  const daysSinceJoin = createdAt
+    ? Math.max(
+        1,
+        Math.floor(
+          (Date.now() - new Date(createdAt).getTime()) / 86_400_000
+        ) + 1
+      )
+    : null;
 
   return (
     <div className="flex flex-col flex-1 min-h-screen">
@@ -117,8 +133,17 @@ export default async function MemberPage({
           {session ? (
             <p className="mt-6 text-mute leading-relaxed max-w-2xl">
               歡迎 · 您正式是{" "}
-              <span className="font-mono text-gold">{email}</span> ·
-              ZONE 27 FREE TIER 會員 · 終身免費 · 永不調漲。
+              <span className="font-mono text-gold">{email}</span>
+              {daysSinceJoin !== null && (
+                <>
+                  {" · "}ZONE 27 第{" "}
+                  <span className="font-mono text-gold tabular">
+                    {daysSinceJoin}
+                  </span>{" "}
+                  天 FREE TIER 會員
+                </>
+              )}{" "}
+              · 終身免費 · 永不調漲。
             </p>
           ) : (
             <p className="mt-6 text-mute leading-relaxed max-w-2xl">
@@ -143,23 +168,33 @@ export default async function MemberPage({
                     ? "✓ MAGIC LINK · 登入成功"
                     : "✓ SESSION ACTIVE"}
                 </p>
-                <form action="/auth/signout" method="post">
-                  <button
-                    type="submit"
-                    className="font-mono text-mute hover:text-loss text-[10px] tracking-[0.3em] underline-offset-4 hover:underline transition-colors"
+                <div className="flex items-baseline gap-4">
+                  <Link
+                    href="/member/submit"
+                    className="font-mono text-gold/80 hover:text-gold text-[10px] tracking-[0.3em] underline-offset-4 hover:underline transition-colors"
                   >
-                    登出 →
-                  </button>
-                </form>
+                    投稿 →
+                  </Link>
+                  <Link
+                    href="/member/calibration"
+                    className="font-mono text-gold/80 hover:text-gold text-[10px] tracking-[0.3em] underline-offset-4 hover:underline transition-colors"
+                  >
+                    mirror →
+                  </Link>
+                  <form action="/auth/signout" method="post" className="inline">
+                    <button
+                      type="submit"
+                      className="font-mono text-mute hover:text-loss text-[10px] tracking-[0.3em] underline-offset-4 hover:underline transition-colors"
+                    >
+                      登出 →
+                    </button>
+                  </form>
+                </div>
               </div>
               <p className="text-mute/85 text-sm leading-relaxed">
-                您的 session 用 HTTP-only cookies 寫進瀏覽器 ·
-                {justArrived
-                  ? " 剛剛 magic link 點開時設定的 ·"
-                  : ""}{" "}
-                直到您點「登出」或 cookie 過期。 您 /lab 之前跑過的 sim history
-                還在 localStorage · Phase 2 雲端 sync(尚未 ship · per /now
-                UNRESOLVED)後會自動 sync 到您 account · 不需手動 migration。
+                Session 用 HTTP-only cookies · 直到您點登出 / cookie 過期。
+                FREE TIER 解鎖:★ Follow / ✏️ Note / ↗ Submit / 🪞 Calibration
+                mirror。
               </p>
             </div>
           )}
@@ -271,6 +306,7 @@ export default async function MemberPage({
                   match={m}
                   isFirst={i === 0}
                   isLast={i === followedMatches.length - 1}
+                  noteLength={notesMap[m.id]?.length ?? 0}
                 />
               ))}
             </div>
@@ -421,10 +457,12 @@ function FollowedMatchRow({
   match,
   isFirst,
   isLast,
+  noteLength,
 }: {
   match: Match;
   isFirst: boolean;
   isLast: boolean;
+  noteLength: number;
 }) {
   const phase = getMatchPhase(match);
   const calibration = getCalibration(match);
@@ -500,15 +538,25 @@ function FollowedMatchRow({
           ENGINE · {homeFav ? match.home.winRate : match.away.winRate}% ·{" "}
           {homeFav ? match.home.en : match.away.en} 領先
         </p>
-        {fr ? (
-          <p className="font-mono text-bone text-sm tabular">
-            FINAL · {fr.homeScore}:{fr.awayScore}
-          </p>
-        ) : (
-          <p className="font-mono text-mute/60 text-[10px] tracking-[0.2em]">
-            賽後 receipt 自動入帳
-          </p>
-        )}
+        <div className="flex items-baseline gap-3 flex-wrap">
+          {noteLength > 0 && (
+            <span
+              className="font-mono text-gold/80 text-[10px] tracking-[0.2em]"
+              title={`您寫了 ${noteLength} 字筆記 · 點開看`}
+            >
+              ✏️ {noteLength} 字筆記
+            </span>
+          )}
+          {fr ? (
+            <p className="font-mono text-bone text-sm tabular">
+              FINAL · {fr.homeScore}:{fr.awayScore}
+            </p>
+          ) : (
+            <p className="font-mono text-mute/60 text-[10px] tracking-[0.2em]">
+              賽後 receipt 自動入帳
+            </p>
+          )}
+        </div>
       </div>
     </Link>
   );

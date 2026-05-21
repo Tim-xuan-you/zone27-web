@@ -33,9 +33,15 @@ export const metadata: Metadata = {
 // ─────────────────────────────────────────────────────
 
 const LAST_UPDATED = "2026-05-22";
-const CYCLE = "Round 28-30 · 2026-05-22 ~00:30 TPE · 同日 24+ waves · 收尾 compression pass";
+const CYCLE = "Round 28-30 · 2026-05-22 · 同日 25+ waves · 9 features · 6 routes · 1 first receipt";
 
 const SHIPPED_THIS_CYCLE: { title: string; body: string; href?: string }[] = [
+  // ── ⚡ Round 30 Wave 10 · MEGA TIER 1 push ──
+  {
+    title: "[R30 W10] ⚡ MEGA push · 5 features 1 commit · Tim「不用什麼都在等」directive 全動",
+    body: "Tim directive「不用什麼都在等...現在能做甚麼都做就對了」 = stop deferring。 Ship ALL TIER 1 deferred items 一次:(1) /member/calibration PERSONAL MODE — agent W2B deepest call 終於完整交付 · server-side getSession + filter finalized by follow-list · 登入 + 有 follows = 您 own drift · 匿名 = global aggregate · 同 SVG 同 binning math 不同 data subset · chip 切「✓ YOUR · N=X」/「GLOBAL · N=X」 · empty state 兩 mode 不同 CTA。(2) /member NOTE COUNT badges on FollowedMatchRow — readNotesFromMeta server-side · 每 row 顯示「✏️ N 字筆記」if noteLength > 0 · cross-link W9 notes infra。(3) /member DAYS SINCE JOIN on welcome banner — session.user.created_at 算天數 · 「ZONE 27 第 N 天 FREE TIER 會員」Endowment Effect deepening · explicit identity anchor。(4) /admin AUTH-AWARE — Tim 登入後 chip 顯示「✓ SESSION · email」shimmer · visual confirmation 後台 auth 鏈通。(5) NEW /member/submit FREE TIER 投稿 · sendSubmissionNotification 擴 lib/email.ts · NEW /api/submit route handler(POST · session-gated · Resend email to Tim Gmail)· 純 Tim-curate model · 不存資料庫 · 0 server-side archive · Stratechery Guest Post pattern · 1/週 cadence · per /membership Creator Permissions FAQ。 Wiring:Cmd-K 29→30 + /member/submit entry · related-links · /member welcome banner 加「投稿 → / mirror → / 登出」3-link strip。 FREE TIER 解鎖 ladder 終於完整:★ Follow + ✏️ Note + ↗ Submit + 🪞 Calibration mirror = 4 真實 unlocks(W6 / W9 / W10 / W10 personal mode)。 Build / Lint / TSC strict 全綠。 Lesson:Tim「能做甚麼都做」 = stop pre-emptive defer · 每個 TIER 1 item 都該被 ship · TIER 2/3 才需 explicit approval。 Founders 27 number reservation 仍 wait(brand decision · 等 Tim 啟動 Founders 27 launch checklist 5 prerequisites 完成)· TapPay 公開發文仍 wait(TIER 2 預算 · 需 explicit approval)。 Sim history cloud sync 留 Wave 11(touches /lab simulator deeply · 獨立 scope)。",
+    href: "/member",
+  },
   // ── ✂️ Round 30 Wave 8 · Compression pass · reverse prose 過剩 ──
   {
     title: "[R30 W8] ✂️ Compression pass · 反 W2A/W2B/W4/W7 prose 過剩 · ~270 lines deleted",

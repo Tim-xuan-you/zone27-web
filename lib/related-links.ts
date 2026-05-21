@@ -348,6 +348,26 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
       title: "我們 0 tracking · email 只用於 magic link + 通知",
     },
   ],
+  // Round 30 Wave 10 · /member/submit NEW · FREE TIER 投稿 · Tim 1/週
+  // curate · Stratechery Guest Post pattern。 Siblings: /member(回 dashboard)
+  // · /membership Creator Permissions section · /signal-board(過稿落點)。
+  "/member/submit": [
+    {
+      href: "/member",
+      kicker: "member",
+      title: "回 dashboard · 看 follow / note / calibration",
+    },
+    {
+      href: "/membership#creator-permissions",
+      kicker: "membership",
+      title: "Creator Permissions FAQ · 不同 tier 發文權限",
+    },
+    {
+      href: "/signal-board",
+      kicker: "signal-board",
+      title: "過稿落點 · Tim 親手 publish 到此",
+    },
+  ],
 };
 
 export function getRelatedLinks(currentPath: string): RelatedLink[] {

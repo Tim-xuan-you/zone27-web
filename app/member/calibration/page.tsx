@@ -9,6 +9,8 @@ import {
   getFinalizedMatches,
   type Match,
 } from "@/lib/matches";
+import { getSession } from "@/lib/supabase/server";
+import { readFollowsFromMeta } from "@/lib/follows";
 
 export const metadata: Metadata = {
   title: "Calibration · 您的 epistemic mirror · ZONE 27",
@@ -84,10 +86,24 @@ function computeBins(finalized: Match[]): Bin[] {
     .sort((a, b) => a.centerPct - b.centerPct);
 }
 
-export default function CalibrationPage() {
-  const finalized = getFinalizedMatches();
+export default async function CalibrationPage() {
+  // Round 30 Wave 10 · Personal mode — agent W2B deepest call 終於完整
+  // 交付。 Logged-in + has follows = render YOUR own drift(filter
+  // finalized by follow-list)。 Anonymous = render GLOBAL aggregate。
+  // 自動切換 · 同 SVG · 同 binning math · 不同 data subset。
+  const session = await getSession();
+  const followIds = readFollowsFromMeta(
+    session?.user.user_metadata as Record<string, unknown> | undefined
+  );
+  const allFinalized = getFinalizedMatches();
+  const mode: "personal" | "global" = session ? "personal" : "global";
+  const finalized =
+    mode === "personal"
+      ? allFinalized.filter((m) => followIds.includes(m.id))
+      : allFinalized;
   const n = finalized.length;
   const bins = computeBins(finalized);
+  const globalN = allFinalized.length;
 
   return (
     <div className="flex flex-col flex-1 min-h-screen">
@@ -108,15 +124,21 @@ export default function CalibrationPage() {
               className={`font-mono text-[9px] tracking-[0.3em] px-1.5 py-0.5 border ${
                 n === 0
                   ? "border-gold/60 text-gold shimmer glow-gold"
-                  : "border-gold/40 text-gold/80"
+                  : "border-gold/60 text-gold"
               }`}
               title={
-                n === 0
-                  ? "Reliability diagram 從 N=0 開始 · 第一個 dot 預定今晚 22:00+"
-                  : `${n} 場 finalized · diagram 從 git commit 開始計算`
+                mode === "personal"
+                  ? `您 follow 的 ${n} 場 finalized · 您 personal drift`
+                  : `${n} 場 finalized · global aggregate · git commit 為準`
               }
             >
-              {n === 0 ? "WAITING · N=0" : `N=${n}`}
+              {mode === "personal"
+                ? n === 0
+                  ? "✓ YOUR · N=0(follow 賽事 → 賽後落點)"
+                  : `✓ YOUR · N=${n}`
+                : n === 0
+                ? "GLOBAL · WAITING · N=0"
+                : `GLOBAL · N=${n}`}
             </span>
           </div>
           <h1 className="text-4xl sm:text-5xl text-bone font-light tracking-tight max-w-3xl">
@@ -155,25 +177,51 @@ export default function CalibrationPage() {
 
         {/* ── RELIABILITY DIAGRAM ──────────────────── */}
         <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-16">
-          <ReliabilityDiagram bins={bins} n={n} />
+          <ReliabilityDiagram bins={bins} n={n} mode={mode} />
           {n === 0 ? (
             <div className="mt-6 border border-dashed border-gold/30 bg-slate/30 p-6 sm:p-8 text-center">
-              <p
-                lang="en"
-                className="font-mono text-gold text-[10px] tracking-[0.4em] mb-3"
-              >
-                SCAFFOLD ONLY · N=0
-              </p>
-              <p className="text-mute text-sm sm:text-base leading-relaxed max-w-md mx-auto mb-3">
-                第一個 dot 預定今晚 22:00+ 落點 ·{" "}
-                <span className="text-gold">cpbl-260521-01</span>{" "}
-                統一 vs 富邦 · 新莊。
-              </p>
-              <p className="text-mute/75 text-xs sm:text-sm leading-relaxed max-w-md mx-auto">
-                Tim 截 box score → Claude ingest → 一行新 dot 在這 diagram
-                出現。Pratfall axiom:這頁從 empty 開始 · 我們不假裝
-                calibration 已有意義 · 也不 backfill 歷史。
-              </p>
+              {mode === "personal" ? (
+                <>
+                  <p
+                    lang="en"
+                    className="font-mono text-gold text-[10px] tracking-[0.4em] mb-3"
+                  >
+                    ✓ AUTH · YOUR N=0 · follow → 賽後落點
+                  </p>
+                  <p className="text-mute text-sm sm:text-base leading-relaxed max-w-md mx-auto mb-3">
+                    您已登入 · 但還沒 follow 任何已 finalized 的賽事 ·
+                    所以 mirror 還沒有點。 follow 一場 → 賽後 verdict 自動
+                    落這 diagram。
+                  </p>
+                  <div className="mt-5 flex flex-wrap justify-center gap-3">
+                    <Link
+                      href="/matches"
+                      className="inline-block px-6 py-2.5 bg-gold text-navy font-mono text-[10px] tracking-[0.3em] hover:bg-gold-soft transition-colors"
+                    >
+                      → 今日賽事板 · follow 第一場
+                    </Link>
+                    <Link
+                      href="/track-record"
+                      className="inline-block px-6 py-2.5 border border-gold/50 text-gold font-mono text-[10px] tracking-[0.3em] hover:bg-gold/10 transition-colors"
+                    >
+                      → 引擎已 finalized 的場
+                    </Link>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <p
+                    lang="en"
+                    className="font-mono text-gold text-[10px] tracking-[0.4em] mb-3"
+                  >
+                    SCAFFOLD · GLOBAL N=0
+                  </p>
+                  <p className="text-mute text-sm sm:text-base leading-relaxed max-w-md mx-auto mb-3">
+                    引擎還沒 finalized 任何場。 anon visitor 看 global aggregate ·
+                    /login 後變 personal mirror。
+                  </p>
+                </>
+              )}
             </div>
           ) : n < 30 ? (
             <div className="mt-6 border border-loss/30 bg-loss/5 p-5 sm:p-6">
@@ -334,7 +382,15 @@ export default function CalibrationPage() {
 // 400x400 viewBox · scales responsive。 Renders 45° perfect-calibration
 // line in gold · grid · axes · and either empty-bin ghosts(N=0)or
 // real plotted bins(N≥1, dot size by sample count)。
-function ReliabilityDiagram({ bins, n }: { bins: Bin[]; n: number }) {
+function ReliabilityDiagram({
+  bins,
+  n,
+  mode = "global",
+}: {
+  bins: Bin[];
+  n: number;
+  mode?: "personal" | "global";
+}) {
   // SVG coordinate system: 400x400 with 40px left/bottom margin · 20px top/right
   // Plot area: x 40..380(340 wide) · y 360..20(340 tall)
   // Convert pct (0-100) → svg coord
@@ -351,7 +407,7 @@ function ReliabilityDiagram({ bins, n }: { bins: Bin[]; n: number }) {
           / SABERMETRIC RELIABILITY DIAGRAM
         </p>
         <p className="font-mono text-mute/70 text-[10px] tracking-[0.3em] tabular">
-          ENGINE v0.2 · N = {n}
+          ENGINE v0.2 · {mode === "personal" ? "YOUR" : "GLOBAL"} N = {n}
         </p>
       </div>
       <div className="aspect-square max-w-md mx-auto">
