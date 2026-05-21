@@ -62,8 +62,30 @@ export default function MemberDashboardPreview() {
     );
   }
 
+  // Last-write timestamp from most recent sim · used in Context Strip
+  // (Pattern #2 · Agent A 2026 research · privacy-led UX trust signal).
+  const lastWrittenLabel =
+    history.length > 0 ? relativeTime(history[0].ranAt) : "尚未寫入";
+
   return (
     <div className="space-y-12">
+      {/* ── CONTEXT STRIP ─────────────────────────
+          Agent A 2026 research Pattern #2 · privacy-led UX trust signal.
+          Costly Signaling: visible data-location + last-access disclosure
+          beats absence-of-tracker invisibility. Replaces early-2020s
+          pattern of stuffing badges into footer. Atlassian + Vercel +
+          MIT Tech Review April 2026 piece converging on this. */}
+      <div
+        className="font-mono text-mute/60 text-[10px] tracking-[0.25em] tabular leading-relaxed py-3 px-4 sm:px-5 border border-line/30 bg-slate/20"
+        aria-label="此頁面的資料來源 + 隱私狀態說明"
+      >
+        ▌ 資料位置 · 您的瀏覽器 localStorage{" "}
+        <span className="text-mute/40">·</span> 上次寫入 ·{" "}
+        <span className="text-bone/70">{lastWrittenLabel}</span>{" "}
+        <span className="text-mute/40">·</span>{" "}
+        <span lang="en">我們看不到 · 0 cookies · 0 GA · 0 pixel</span>
+      </div>
+
       {/* ── 01 · 您的引擎時間軸 ───────────────────── */}
       <Section
         no="01"
@@ -73,10 +95,13 @@ export default function MemberDashboardPreview() {
         kicker="您在 /lab + /lab/custom 跑過的所有 Monte Carlo 收斂"
       >
         {history.length === 0 ? (
+          // Agent A 2026 research Pattern #3 · NN/g empty-state guidelines:
+          // first-time visitor sees one sentence of context + one concrete
+          // action + learning cue. No marketing copy · no exhortation.
           <EmptyState
-            zh="您還沒跑過任何 sim · 去 /lab 跑一場"
-            cta={{ label: "→ 去 /lab 跑一場", href: "/lab" }}
-            hint="跑完一場 · 這裡會自動長一筆。10K Monte Carlo 在您瀏覽器跑完 · localStorage 保留 10 筆歷史。"
+            zh="這格將顯示您本機跑過的 Monte Carlo · 跑一場它就會填上。"
+            cta={{ label: "→ 進 /lab 跑一場 10K sims", href: "/lab" }}
+            hint="您看到「您還沒跑過任何 sim」不是 bug · 是這頁的 first-time empty state。我們不在這裡放 marketing copy 引導您 · 您要不要跑 sim 是您決定。 (per NN/g 2026 empty-state guidelines · 倒置 SaaS dashboard 預設 onboarding 話術)"
           />
         ) : (
           <div className="space-y-3">
@@ -214,6 +239,43 @@ export default function MemberDashboardPreview() {
           )。
         </FootNote>
       </Section>
+
+      {/* ── 近況 · 引擎 ──────────────────────────
+          Agent A 2026 research Pattern #4 · Stratechery Plus + Patreon
+          + GitHub release-info-in-sidebar pattern。3 dated lines · plain
+          text · 不是 gamification · 不是 FOMO · 不是 streak counter ·
+          是 dated facts visitor 可一眼看到「project velocity」 · 不需
+          外部 Twitter / blog / changelog 跳轉。
+          Mobile + desktop 同 layout · /member 沒 right-rail 所以 inline。 */}
+      <section
+        aria-labelledby="recent-engine-heading"
+        className="border-l-2 border-gold/40 pl-4 sm:pl-5"
+      >
+        <p
+          id="recent-engine-heading"
+          lang="en"
+          className="font-mono text-gold/70 text-[10px] tracking-[0.35em] mb-3"
+        >
+          / 近況 · 引擎
+        </p>
+        <ul className="space-y-2 text-mute text-sm list-none pl-0">
+          <RecentEngineLine
+            date="2026-05-21"
+            body="/member NEW · Round 29 Wave 2 上線(您正在看的這頁)"
+          />
+          <RecentEngineLine
+            date="2026-05-21"
+            body="Uncertainty Stripe 上線 · HeroLiveCard + MatchSimulator(Round 28 Wave 3)"
+          />
+          <RecentEngineLine
+            date="2026-05-21"
+            body="Founders 27 開放申請預售 · NEXT IS #008 · 263 席剩"
+          />
+        </ul>
+        <p className="font-mono text-mute/50 text-[10px] tracking-[0.3em] mt-3 pt-3 border-t border-line/30">
+          ▸ 完整 git history · /changelog · GitHub commits 為 source of truth
+        </p>
+      </section>
     </div>
   );
 }
@@ -443,5 +505,19 @@ function FootNote({ children }: { children: React.ReactNode }) {
     <p className="font-mono text-mute/60 text-[10px] tracking-[0.3em] leading-relaxed mt-4 pt-3 border-t border-line/30">
       ▸ {children}
     </p>
+  );
+}
+
+function RecentEngineLine({ date, body }: { date: string; body: string }) {
+  return (
+    <li className="flex items-baseline gap-3 leading-relaxed">
+      <span
+        lang="en"
+        className="font-mono text-gold/60 text-[10px] tracking-[0.25em] tabular shrink-0"
+      >
+        {date}
+      </span>
+      <span className="flex-1 text-mute">{body}</span>
+    </li>
   );
 }
