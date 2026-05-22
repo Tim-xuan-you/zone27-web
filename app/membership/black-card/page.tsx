@@ -47,7 +47,7 @@ const UNLOCKS = [
   {
     icon: "💵",
     title: "創作者抽成 5%",
-    body: "BLACK CARD 訂閱者自己 publish 內容 · ZONE 27 抽 5%(vs 業界 LINE 老師平台玩運彩 / 報馬仔 30-50% 是降維打擊)。 Founders 27 永遠 0% 創作者抽成。",
+    body: "BLACK CARD 訂閱者自己 publish 內容 · ZONE 27 抽 5%(vs Taiwan LINE 老師 / 投顧老師生態 30-50% 業界共識是降維打擊)。 Founders 27 永遠 0% 創作者抽成。",
   },
   {
     icon: "🗳️",

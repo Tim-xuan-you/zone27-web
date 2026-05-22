@@ -33,9 +33,15 @@ export const metadata: Metadata = {
 // ─────────────────────────────────────────────────────
 
 const LAST_UPDATED = "2026-05-22";
-const CYCLE = "Round 28-32 · 2026-05-22 · 多 wave 大 push · TONIGHT 3 receipts + Savant bars + critic-hardening + signature + CPBL auto-fetch + 「我看 ___」 personalization + Open Allocation Ledger + 新 route 雙 OG card + Tim founder-dogfood 2 connecting canary fires(OTP path 砍 + Nav 會員 button auth-aware)";
+const CYCLE = "Round 28-32 · 2026-05-22 · 多 wave 大 push · TONIGHT 3 receipts + Savant bars + critic-hardening + signature + CPBL auto-fetch + 「我看 ___」 personalization + Open Allocation Ledger + 新 route 雙 OG card + Tim founder-dogfood 2 canary fires + Agent skip 4-col 對照 table + 報馬仔/玩運彩 wording IP risk fix";
 
 const SHIPPED_THIS_CYCLE: { title: string; body: string; href?: string }[] = [
+  // ── 🛡️ Round 32 W-E · 報馬仔/玩運彩 wording IP risk fix · Agent SKIP table verdict ──
+  {
+    title: "[R32 WE] 🛡️ 報馬仔/玩運彩 wording IP risk fix · Agent SKIP 4-col 對照 table · Patek+Hermès 不 compare-table",
+    body: "Tim 問「2 家 paid tier 功能差別 + 借鑒?」 派 general-purpose agent 跑 2025-2026 fresh competitor membership audit。 Agent 帶回 SKIP verdict 反我前 reply 「我打算 ship 4-col 對照 table」 plan · 5 reasons compelling:(1) Already covered 3 places(/coverage NEVER + /membership PermLine + /membership/black-card OG)· table 是 4th redundant ·(2) Functional comparison 從 declarative Pratfall 滑向 competitive trash talk · violates 倒置 SaaS ·(3) Asymmetric data cells(兩家不公開 disclose · 任何 column 3-4 都有「資料未公開」cell · negative framing 暴露)·(4) Tim 第 2 次同月問是焦慮 signal · 不是 product gap signal · Patek+Hermès 從不發 4-col 對照 table 比 Swatch · differentiation 靠 process visibility 不靠 comparison ·(5) Real next move:/founders/ledger 第一筆 entry + /track-record N=1→30 sample debt 解封 · process visibility > comparison table。 但 agent 同時 surface 1 IP risk:ZONE 27「業界 30-50% 抽成」 narrative 多處 cite specific 玩運彩 + 報馬仔 · 但兩家 paid pricing/抽成 都不公開 disclose · 應 cite Taiwan LINE 老師 / 投顧老師業界共識 · 不應 cite 兩家具體數字。 同時 surface /about line 78「報馬仔 NT$ 3,000/月 · 殺手平台抽成 · 贏家帳號被砍」 conflates 報馬仔(tipster platform)跟 殺手平台(illegal bookmaker)· 報馬仔不收下注 · 不會砍帳號。 Ship 2 surgical wording fixes:(A) /about line 78-79 分離 報馬仔 + 殺手平台 為 2 個獨立 bullet · 報馬仔 改 「paid picks 點數 1:1 NT$ · 9 駐站名家自稱 55-59% 勝率 · 戰績無第三方審計」 cite agent verified fact · 殺手平台單獨 bullet 標「跟報馬仔/玩運彩是不同 mechanism」 ·(B) /membership/black-card line 50 改「業界 LINE 老師平台玩運彩 / 報馬仔 30-50%」 → 「Taiwan LINE 老師 / 投顧老師生態 30-50% 業界共識」。 Lesson:agent counter-recommendation 推翻我 ship plan 是 healthy · brand IP discipline > shipping reflex · 同 Round 32 W-C founder dogfood canary 但這次是 agent canary(reverse direction)。 SKIP 4-col table 是對 Tim「您決定」 + agent verdict 雙 trust + brand IP 不 trash talk axiom 同時 hold。",
+    href: "/membership/black-card",
+  },
   // ── 🧭 Round 32 W-D · Nav 會員 button auth-aware · Tim founder-dogfood 2nd ──
   {
     title: "[R32 WD] 🧭 Nav「會員 →」 button auth-aware · 已登入切 /member · Tim founder-dogfood 2nd canary 同日",

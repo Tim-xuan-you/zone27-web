@@ -75,8 +75,15 @@ export default function AboutPage() {
           <li className="flex items-baseline gap-3">
             <span className="font-mono text-gold/70 text-[10px] tracking-[0.2em] shrink-0">▸</span>
             <span className="flex-1">
-              <strong className="text-bone">報馬仔網站</strong>每月收 NT$ 3,000 ·
-              殺手平台抽成 30-50% · 贏家帳號被砍
+              <strong className="text-bone">報馬仔網站</strong>paid picks 點數 1:1 NT$ ·
+              9 駐站名家自稱「55-59% 勝率」 · 戰績無第三方審計
+            </span>
+          </li>
+          <li className="flex items-baseline gap-3">
+            <span className="font-mono text-gold/70 text-[10px] tracking-[0.2em] shrink-0">▸</span>
+            <span className="flex-1">
+              <strong className="text-bone">殺手平台</strong>(地下莊家)抽下注金額
+              30-50% · 贏家帳號被砍 · 跟報馬仔/玩運彩是不同 mechanism
             </span>
           </li>
           <li className="flex items-baseline gap-3">
