@@ -129,8 +129,10 @@ const COMPARE_ROWS = [
   { key: "cap", label: "名額", en: "CAP" },
 ] as const;
 
-// ── Inline FAQ — top 3 objections, answered here so visitors
-// don't have to navigate to /faq to overcome them.
+// ── Inline FAQ — Round 52 W-E · Agent 1 #1 ship · 從 3 → 10 Q · HEY pricing
+// pattern「pre-empt the 5-7 concrete fears」 · 訪客 buy-decision moment 直接
+// surface 對抗 silent objections · 不必跳 /faq 求解。 Plain bullets · no
+// marketing tone · Pratfall pattern「主動 publish redlines IS the signal」。
 const INLINE_FAQ = [
   {
     q: "我怎麼知道這不是 vaporware?",
@@ -143,6 +145,35 @@ const INLINE_FAQ = [
   {
     q: "這是博彩平台嗎?",
     a: "不是。ZONE 27 計算的是機率分布,從不販售「鐵口直斷」。我們不接受運彩抽成、不寄生報馬仔生態、不買廣告投放。商業模式是會員制(BLACK CARD 月費 + Founders 27 一次性)+ 未來 Premium Sponsor。詳見 /about /faq。",
+  },
+  // Round 52 W-E · Agent 1 #1 · 7 concrete fears added · HEY pricing model:
+  {
+    q: "如果 270 個席位賣完前我還在猶豫怎麼辦?",
+    a: "/founders/ledger 每週手寫更新分配進度。 您可以隨時 check ledger 看「目前 N/270」 + 拒絕原因 sample。 沒有 live counter 製造 FOMO · 但有 weekly transparency。 售完即永久關閉 · 不會有第二批 — 這也是 brand IP 物理 codify(不是 marketing pressure)。",
+  },
+  {
+    q: "如果我加入後反悔想退款?",
+    a: "付款後 14 天無條件退款保證(Founders 27 + BLACK CARD 都適用)。 寫信 tim@zone27.tw 即可 · 不問原因 · 不嘗試挽留。 退款後您仍保留所有已下載的 GitHub source code + methodology docs(MIT licensed · 我們不能 revoke)。",
+  },
+  {
+    q: "手動銀行轉帳具體流程?",
+    a: "(1)Founders 27 開放後 · 您 email tim@zone27.tw 表達意願 ·(2)Tim 24h 內回覆銀行 4 欄位 + 您專屬 ZONE27-#NNN 備註碼 ·(3)您匯款 NT$ 2,700 · 備註寫 ZONE27-#NNN ·(4)Tim 確認入帳後寄 lifetime access confirmation + Founders LINE 群邀請。 全程 Tim 親手 onboard · 沒有 cron · 沒有外包(per /coverage philosophy)。",
+  },
+  {
+    q: "BLACK CARD 上線後我 Founders 27 status 會變嗎?",
+    a: "不會。 Founders 27 是 lifetime 第 4 階 · 包含未來所有 BLACK CARD unlocks(v0.3 + v0.4 engine + 創作者抽成 0%(BLACK CARD 是 5%)+ 每月 voting + Tim 工程筆記 full + LINE 群)。 Founders 27 是 floor not sidegrade · 您買的 270 個 seat 是 ZONE 27 整個系統永久 root identity · 不會 dilute。",
+  },
+  {
+    q: "Tim 會存我什麼資料?",
+    a: "(1)Email(magic link 用 · Supabase Tokyo · RLS-locked · 0 server-side analytics)·(2)Founders 27 銀行轉帳 ZONE27-#NNN 備註碼 + 您姓名(public ledger 用 · per /founders/ledger)。 不存:身分證 / 信用卡 / 電話 / 地址 / IP / 瀏覽行為。 完整 inventory 見 /privacy + /transparency。",
+  },
+  {
+    q: "可以贈送 Founders 27 給朋友嗎?",
+    a: "可以。 Founders 27 是 lifetime seat · transferable · 寫信 tim@zone27.tw 說「我要轉讓 #NNN 給某某人(對方 email)」 · Tim 24h 內 update ledger + 寄新 owner confirmation。 受贈人也享 14 天無條件退款保證(從 ledger update 日起算)。",
+  },
+  {
+    q: "如果我之後不喜歡 ZONE 27 的 methodology 怎麼辦?",
+    a: "您可以 fork GitHub repo 用自己的 methodology · MIT license 允許。 ZONE 27 的 methodology 持續 publish · 每次重大改動 30 天前 /changelog 公告(per /audit S05 PRE-COMMIT)。 您不喜歡 = 您可以反饋 + 我們聽 · 但不 retroactive 改 / 不 silently rotate。 還是不滿意 · 14 天內 refund · 不挽留。",
   },
 ] as const;
 
