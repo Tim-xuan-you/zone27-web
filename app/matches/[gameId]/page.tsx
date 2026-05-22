@@ -17,6 +17,7 @@ import {
 import StatPercentileBar from "@/components/StatPercentileBar";
 import AdvancedStatBar from "@/components/AdvancedStatBar";
 import ConfidenceStars from "@/components/ConfidenceStars";
+import VibeCheck from "@/components/VibeCheck";
 import EngineStamp from "@/components/EngineStamp";
 import { getCpblAdvancedByName } from "@/lib/cpbl-advanced";
 import RelatedReading from "@/components/RelatedReading";
@@ -366,6 +367,22 @@ export default async function MatchDetailPage({
           引擎不吃什麼 = Pratfall。 */}
       <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-20">
         <EngineNarrative match={m} />
+      </section>
+
+      {/* ── VIBE CHECK LENS · Round 37 W-B 第 1 個 Lens Variety 真實 LIVE ──
+          per [[feedback-no-waiting-rule]] iron rule「任何現在能做就做」 ·
+          R36 W-A Lens Variety table 第 2 個 candidate 落地。 純 data viz
+          from existing match.team.recent · 「hot hand fallacy」 educational
+          disclaimer · Tversky/Gilovich 1985 cite · brand-pure 不假
+          prediction · 同 Section 05 Lens Variety axiom。 */}
+      <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-20">
+        <h2 className="font-mono text-gold text-[10px] tracking-[0.4em] mb-6">
+          / 01B · VIBE CHECK · 氣勢 lens(streak descriptive · 非 prediction)
+        </h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <VibeCheck teamName={m.home.en} recent={m.home.recent} />
+          <VibeCheck teamName={m.away.en} recent={m.away.recent} />
+        </div>
       </section>
 
       {/* ── SCORE DISTRIBUTION ─────────────────────── */}

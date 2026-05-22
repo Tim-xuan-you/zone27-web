@@ -407,11 +407,11 @@ repeat 10,000 times → aggregate
               />
               <LensRow
                 lens="Vibe Check"
-                angle="連勝 / 連敗 streak · 「hot hand vs cold」 educational"
-                status="LENS · planned"
-                statusTone="loss"
-                tier="BLACK CARD"
-                tierTone="gold"
+                angle="連勝 / 連敗 streak · 「hot hand fallacy」 (Tversky 1985)"
+                status="✓ LIVE · R37 W-B"
+                statusTone="gold"
+                tier="FREE 預覽 · 將來 BLACK CARD"
+                tierTone="bone"
               />
               <LensRow
                 lens="Park Factor"
