@@ -59,14 +59,14 @@ export const matches: Match[] = [
   // 來源:Tim 截圖 cpbl.com.tw 一軍賽程 2026/05/21 比賽 #112
   //
   // 真實數據(從 screenshot 直接抓):
-  //   · ERA  · 郭俊麟 4.98 · 李東洛 2.61
-  //   · HR/9 · 郭俊麟 0.42(1 HR / 21.2 局 × 9)· 李東洛 0.29(1 HR / 31 局 × 9)
+  //   · ERA  · 郭俊麟 4.98 · 李東洺 2.61
+  //   · HR/9 · 郭俊麟 0.42(1 HR / 21.2 局 × 9)· 李東洺 0.29(1 HR / 31 局 × 9)
   //   · 場地 新莊 · 18:35 · 攝氏 28-30 度
   //
   // Estimated(CPBL stats.cpbl.com.tw 沒在投手 profile 公開 K/BB:
   //   · K/9   · 郭俊麟 ~7.0(146 km/h 球速 + 中等 ERA 推估)
-  //              · 李東洛 ~8.5(150 km/h 球速 + 低 ERA 推估)
-  //   · BB/9  · 郭俊麟 ~3.5(聯盟均值)· 李東洛 ~2.5(低 ERA 推估好控)
+  //              · 李東洺 ~8.5(150 km/h 球速 + 低 ERA 推估)
+  //   · BB/9  · 郭俊麟 ~3.5(聯盟均值)· 李東洺 ~2.5(低 ERA 推估好控)
   //   · WHIP  · 推估自 K/9 + BB/9 + 被打擊率
   //   · recent 5 · CPBL 球隊近 5 場戰績 Tim 下次截圖時補
   //
@@ -89,7 +89,7 @@ export const matches: Match[] = [
       name: "富邦悍將",
       en: "GUARDIANS",
       pitcher: {
-        name: "李東洛",
+        name: "李東洺",
         era: "2.61",
         k9: "8.5",      // estimate
         whip: "1.30",   // estimate
@@ -123,7 +123,7 @@ export const matches: Match[] = [
     aiConfidence: 65,
     // ── FINAL · 2026-05-21 ~22:30 TPE · brand IP 物理時刻 ──
     // 統一 2 : 6 富邦 · 9 局完整 · 新莊
-    // 勝投 李東洛(7 IP · 2 K · 0 失分 · 4-time MVP)
+    // 勝投 李東洺(7 IP · 2 K · 0 失分 · per cpbl-260521-01 box score Tim 截圖)
     // 敗投 郭俊麟 · 救援成功 張奕
     // Innings: away(統一)0 0 0 0 0 0 0 0 2 · home(富邦)3 2 0 0 0 0 1 0 X
     // Engine 賽前 say 60% home → home win → PROVED ✓ · ZONE 27 第一筆 receipt。
