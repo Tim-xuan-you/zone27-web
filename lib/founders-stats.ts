@@ -25,16 +25,62 @@ export const FOUNDERS_TOTAL = 270;
 export type ClaimedFounder = {
   id: number;
   claimedOn: string; // ISO date (YYYY-MM-DD)
+  /** 公開 alias · per Round 31 W-V2 Public Roll Call agent ONE sharp call ·
+   *  identity signal visible without PII broadcast。 真實 founders Q3 onboard
+   *  時自選 · system test placeholders 以 SYSTEM-TEST-N format honest 顯示。 */
+  alias?: string;
+  /** 公開 rationale · 1-2 句 · 真實 founders Q3 onboard 時 Tim 親手記錄 ·
+   *  pre-launch placeholders 標明 system test state · 不假裝是真 founder。 */
+  rationale?: string;
 };
 
+// Round 31 W-V2 · per [[feedback_zone27_pratfall_brand_ip]] · honest
+// disclosure 「7 是 Tim system test placeholders · 真實 Q3 onboard 後 forge
+// 取代」 brand IP 同 W-G STAT LITERACY pattern · 不假裝。 alias 用 SYSTEM-TEST
+// 自我入罪 · skeptic 看到不會誤判「7 個假人」。
 export const claimedFounders: ClaimedFounder[] = [
-  { id: 1, claimedOn: "2026-05-12" },
-  { id: 2, claimedOn: "2026-05-13" },
-  { id: 3, claimedOn: "2026-05-13" },
-  { id: 4, claimedOn: "2026-05-14" },
-  { id: 5, claimedOn: "2026-05-16" },
-  { id: 6, claimedOn: "2026-05-17" },
-  { id: 7, claimedOn: "2026-05-18" },
+  {
+    id: 1,
+    claimedOn: "2026-05-12",
+    alias: "SYSTEM-TEST-#001",
+    rationale: "Tim 親手 forged · system 開發測試用 placeholder · 真實第一位 founder Q3 onboard 後取代 · 公開記錄 transfer history。",
+  },
+  {
+    id: 2,
+    claimedOn: "2026-05-13",
+    alias: "SYSTEM-TEST-#002",
+    rationale: "system test placeholder · Q3 取代 · brand IP 不藏 placeholder 狀態。",
+  },
+  {
+    id: 3,
+    claimedOn: "2026-05-13",
+    alias: "SYSTEM-TEST-#003",
+    rationale: "system test placeholder · Q3 取代。",
+  },
+  {
+    id: 4,
+    claimedOn: "2026-05-14",
+    alias: "SYSTEM-TEST-#004",
+    rationale: "system test placeholder · Q3 取代。",
+  },
+  {
+    id: 5,
+    claimedOn: "2026-05-16",
+    alias: "SYSTEM-TEST-#005",
+    rationale: "system test placeholder · Q3 取代。",
+  },
+  {
+    id: 6,
+    claimedOn: "2026-05-17",
+    alias: "SYSTEM-TEST-#006",
+    rationale: "system test placeholder · Q3 取代。",
+  },
+  {
+    id: 7,
+    claimedOn: "2026-05-18",
+    alias: "SYSTEM-TEST-#007",
+    rationale: "system test placeholder · Q3 取代。",
+  },
 ];
 
 export const FOUNDERS_CLAIMED = claimedFounders.length;

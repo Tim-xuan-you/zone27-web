@@ -110,6 +110,73 @@ export default async function LeaderboardPage() {
         </div>
       </section>
 
+      {/* ── PUBLIC ROLL CALL · Round 31 W-V2 agent ONE sharp call ──
+          Conversion research agent verdict:「Tim 您以為缺的是會員之間
+          互動 · 數據說真正缺的是會員身份對外可見」。 FanGraphs · Stratechery
+          · Bits-about-Money · Defector 4 個 case 全部「幾乎 0 user-to-user
+          social · 高轉換」 · 全靠 creator authority + identity-as-supporter。
+          ship Public Roll Call · 270 序號公開展示 · 7 forged 顯示 alias +
+          rationale · 263 visible「待認領」 = Cialdini scarcity + Aronson
+          costly signaling = 預期 Founders 27 認領 +40-60% boost 12 個月。
+          Brand IP:0 PII broadcast · alias 自選 · brand IP「方法公開·品味
+          私藏」 物理產出(身份對外可見 · 內心動機私藏)。 */}
+      <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-12">
+        <div className="bg-slate/40 border border-gold/40 p-5 sm:p-7">
+          <div className="flex items-baseline justify-between gap-3 flex-wrap mb-5">
+            <p
+              lang="en"
+              className="font-mono text-gold text-[10px] sm:text-[11px] tracking-[0.4em]"
+            >
+              ★ PUBLIC ROLL CALL · 已 forged 公開
+            </p>
+            <p className="font-mono text-mute text-[10px] tracking-[0.3em] tabular">
+              {FOUNDERS_CLAIMED}/{FOUNDERS_TOTAL} forged · {FOUNDERS_REMAINING} 待認領
+            </p>
+          </div>
+          <p className="text-mute text-sm leading-relaxed mb-5">
+            <strong className="text-bone">身份對外可見 · 動機私藏</strong> ·
+            這是 brand IP「方法公開·品味私藏」 8 字 grammar 的物理產出。
+            7 已 forged 為 Tim system test placeholders(honest 公開狀態 ·
+            真實 Founders Q3 onboard 後 forge 取代)· 263 個編號等真實 founders。
+          </p>
+          <ul className="space-y-2 mb-5">
+            {claimedFounders.map((f) => (
+              <li
+                key={f.id}
+                className="flex items-baseline gap-3 sm:gap-4 flex-wrap py-1.5 border-b border-line/30"
+              >
+                <span className="font-mono text-gold text-base sm:text-lg tabular tracking-tight min-w-[3.5rem]">
+                  {formatBadge(f.id)}
+                </span>
+                <span className="font-mono text-mute/70 text-[10px] tracking-[0.25em] tabular">
+                  {f.claimedOn}
+                </span>
+                <span className="font-mono text-bone/90 text-[11px] tracking-[0.2em]">
+                  {f.alias ?? "—"}
+                </span>
+                <span className="text-mute text-xs sm:text-sm leading-snug flex-1 min-w-[15rem]">
+                  {f.rationale ?? "—"}
+                </span>
+              </li>
+            ))}
+          </ul>
+          <p className="font-mono text-mute/70 text-[10px] tracking-[0.3em] leading-relaxed">
+            ▸ 真實 founders Q3 認領後 · 在 onboard email 自選 alias(不強制
+            實名)+ 1-2 句 rationale Tim 親手記錄 · transfer 自 SYSTEM-TEST。
+            <br />
+            ▸ 公開 audit trail · 7 個 SYSTEM-TEST 位置何時被 real founder
+            取代會在{" "}
+            <Link
+              href="/founders/ledger"
+              className="text-gold hover:underline underline-offset-4"
+            >
+              /founders/ledger
+            </Link>
+            {" "}本週 review log 顯示。
+          </p>
+        </div>
+      </section>
+
       {/* ── THE WALL ─────────────────────────────── */}
       <section
         aria-label="THE 27 WALL — 270 founder seats"
