@@ -16,11 +16,12 @@ const MIN_PASSWORD_LEN = 8;
 // canary fire(「我真的可以註冊嗎?我懷疑...」)。
 //
 // Pratfall + Costly Signaling design:
-//   - Magic link + password 雙 path(R30 W14 Apple-pattern · 主 password
-//     secondary magic link)· 沒 OAuth · 沒 social login
-//   - 1-2 個欄位 · 1 個動作 · 1 封 email
+//   - Password-only single path(R50 W-F · 砍 magic link toggle per Tim
+//     27+ canary「2 個都存在好困擾」 · founder dogfood trump abstract
+//     axiom)· 沒 OAuth · 沒 social login · 沒 magic link toggle
+//   - 2 個欄位(email + password)· 1 個動作 · 1 封 confirmation email
 //   - 寄信失敗時誠實顯示 error · 不藏
-//   - 不要求 email verification 第二步(magic link 點開即等於 verified)
+//   - signup 需 email confirmation(Supabase 標準)· click link → /member
 //
 // 跟 WaitlistForm 的關係:
 //   - WaitlistForm = pure email collection · 沒 auth · 沒 session(legacy)
@@ -39,25 +40,32 @@ const MIN_PASSWORD_LEN = 8;
 // 「越少 fields 越正式」 axiom + R30 W11 present-tense-only axiom · 三 axiom
 // 同時 fire。 將來真要 cross-device OTP(Supabase Studio 改 template 加
 // `{{ .Token }}` 後)30 行可重 wire · git show 9860d61 之前版本還可參考。
+//
+// Round 50 W-F · 2026-05-22 evening · Tim 27+ canary fire dogfood:
+// 「註冊, 可以(magic link)跟帳號密碼, 2 選一就好嗎? 不要 2 個都存在!
+//  好困擾!好複雜!」 Hick's Law 教科書 case(2 choices = decision paralysis
+// + form 複雜)· 必須選 1 個。 founder signal 過去 5+ time reject magic
+// link(per R30 W14 註解寫死)· 此時 ship password-only 對齊 founder
+// preference。 砍 magic link mode toggle · 砍 mode state · 砍 submitMagicLink
+// function · 砍 magic_link_sent state · /login 變單一 form(email + password
+// + submit)。 R30 W14 「Tim prefer password」 lesson 物理 codify · 不再
+// hybrid 2-mode 複雜度。 「忘記密碼」 case 將來若需要 · 走 Supabase 標準
+// reset password flow(/reset · 另獨立 page)· 不再在 /login 內 toggle。
+// Resend functionality 保留 但 only for signup confirm email · 不再 OTP magic。
 // ─────────────────────────────────────────────────────
-
-type AuthMode = "password" | "magic_link";
 
 type SubmitState =
   | { kind: "idle" }
   | { kind: "submitting" }
   | { kind: "signup_confirm_sent"; email: string }
-  | { kind: "magic_link_sent"; email: string }
   | { kind: "error"; message: string };
 
 export default function LoginPage() {
-  // Round 30 Wave 14 · Apple-pattern · email + password 主 path · magic
-  // link 降 secondary(忘記密碼用)· per Tim 5+ time canary fire 拒
-  // magic link · 我 over-defended 自己 W7 axiom 太久。 「0 password」 不在
-  // canonical brand IP memory · 砍。
+  // Round 50 W-F · password-only · 砍 mode state(per Tim 27+ canary
+  // 「2 個都存在好困擾」)。 founder signal trump abstract axiom · Tim
+  // 過去 5+ time reject magic link · 此時 ship password-only。
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [mode, setMode] = useState<AuthMode>("password");
   const [state, setState] = useState<SubmitState>({ kind: "idle" });
   const [existingEmail, setExistingEmail] = useState<string | null>(null);
   const [cooldown, setCooldown] = useState(0);
@@ -133,16 +141,14 @@ export default function LoginPage() {
       return;
     }
 
-    // Cache email regardless of mode
+    // Cache email for next-visit autofill
     try {
       window.localStorage.setItem(EMAIL_CACHE_KEY, trimmed);
     } catch {
       // localStorage blocked · 不擋
     }
 
-    if (mode === "magic_link") {
-      return submitMagicLink(trimmed);
-    }
+    // Round 50 W-F · password-only path · 砍 magic link mode branching。
     return submitPassword(trimmed);
   }
 
@@ -227,53 +233,20 @@ export default function LoginPage() {
     }
   }
 
-  async function submitMagicLink(trimmedEmail: string) {
-    setState({ kind: "submitting" });
-    try {
-      const supabase = createSupabaseBrowserClient();
-      const callbackUrl = new URL(
-        "/auth/callback",
-        window.location.origin
-      );
-      if (nextPath) callbackUrl.searchParams.set("next", nextPath);
-      const { error } = await supabase.auth.signInWithOtp({
-        email: trimmedEmail,
-        options: {
-          emailRedirectTo: callbackUrl.toString(),
-        },
-      });
-      if (error) {
-        setState({
-          kind: "error",
-          message: error.message || "寄信失敗 · 請稍候再試",
-        });
-        return;
-      }
-      startCooldown();
-      setState({ kind: "magic_link_sent", email: trimmedEmail });
-    } catch (err) {
-      const message =
-        err instanceof Error ? err.message : "未知錯誤 · 請稍候再試";
-      setState({ kind: "error", message });
-    }
-  }
+  // Round 50 W-F · submitMagicLink function 砍乾淨 · password-only path。
+  // Future「忘記密碼」 case 將來若需要 · 走 Supabase 標準 reset password
+  // flow(/reset · 另獨立 page)· 不再在 /login 內 toggle 2 modes。
 
   async function handleResend() {
-    if (
-      cooldown > 0 ||
-      (state.kind !== "magic_link_sent" &&
-        state.kind !== "signup_confirm_sent")
-    )
-      return;
+    if (cooldown > 0 || state.kind !== "signup_confirm_sent") return;
     const targetEmail = state.email;
-    const wasSignupMode = state.kind === "signup_confirm_sent";
     setState({ kind: "submitting" });
     try {
       const supabase = createSupabaseBrowserClient();
       const callbackUrl = new URL("/auth/callback", window.location.origin);
       if (nextPath) callbackUrl.searchParams.set("next", nextPath);
-      // For signup mode, also resend via signInWithOtp(Supabase will resend
-      // confirmation if user not yet confirmed)
+      // Resend signup confirmation · Supabase signInWithOtp 對 unconfirmed
+      // user 等同於 resend confirmation email · 不創 new account。
       const { error } = await supabase.auth.signInWithOtp({
         email: targetEmail,
         options: { emailRedirectTo: callbackUrl.toString() },
@@ -287,7 +260,7 @@ export default function LoginPage() {
       }
       startCooldown();
       setState({
-        kind: wasSignupMode ? "signup_confirm_sent" : "magic_link_sent",
+        kind: "signup_confirm_sent",
         email: targetEmail,
       });
     } catch (err) {
@@ -324,7 +297,6 @@ export default function LoginPage() {
             magic link · 直接 link 到 /member。 Tim's pain:多次點 /login
             其實 session 已 active · UI 沒告訴他 · 重複寄 confusing emails。 */}
         {existingEmail &&
-          state.kind !== "magic_link_sent" &&
           state.kind !== "signup_confirm_sent" &&
           state.kind !== "submitting" && (
           <section className="mx-auto max-w-md w-full px-6 sm:px-10 pb-6">
@@ -350,13 +322,11 @@ export default function LoginPage() {
           </section>
         )}
 
-        {/* ── FORM · Round 30 Wave 14 · Apple-pattern email + password ── */}
+        {/* ── FORM · Round 50 W-F · password-only single path · 砍 mode toggle ── */}
         <section className="mx-auto max-w-md w-full px-6 sm:px-10 pb-12">
-          {state.kind === "magic_link_sent" ||
-          state.kind === "signup_confirm_sent" ? (
+          {state.kind === "signup_confirm_sent" ? (
             <SentState
               email={state.email}
-              isSignupConfirm={state.kind === "signup_confirm_sent"}
               cooldown={cooldown}
               onResend={handleResend}
             />
@@ -386,39 +356,33 @@ export default function LoginPage() {
                 />
               </div>
 
-              {mode === "password" && (
-                <div>
-                  <label
-                    htmlFor="password"
-                    className="block font-mono text-mute text-[10px] tracking-[0.3em] mb-2"
-                  >
-                    PASSWORD · 密碼 (≥ {MIN_PASSWORD_LEN} 字元)
-                  </label>
-                  <input
-                    id="password"
-                    type="password"
-                    autoComplete="current-password"
-                    required
-                    minLength={MIN_PASSWORD_LEN}
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    placeholder="••••••••"
-                    className="w-full bg-navy/60 border border-line/70 px-4 py-3 text-bone text-base focus:border-gold focus:outline-none focus:ring-2 focus:ring-gold/20 transition-colors"
-                    disabled={state.kind === "submitting"}
-                  />
-                </div>
-              )}
+              <div>
+                <label
+                  htmlFor="password"
+                  className="block font-mono text-mute text-[10px] tracking-[0.3em] mb-2"
+                >
+                  PASSWORD · 密碼 (≥ {MIN_PASSWORD_LEN} 字元)
+                </label>
+                <input
+                  id="password"
+                  type="password"
+                  autoComplete="current-password"
+                  required
+                  minLength={MIN_PASSWORD_LEN}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="••••••••"
+                  className="w-full bg-navy/60 border border-line/70 px-4 py-3 text-bone text-base focus:border-gold focus:outline-none focus:ring-2 focus:ring-gold/20 transition-colors"
+                  disabled={state.kind === "submitting"}
+                />
+              </div>
 
               <button
                 type="submit"
                 disabled={state.kind === "submitting"}
                 className="w-full px-6 py-3 bg-gold text-navy font-mono text-sm tracking-[0.3em] hover:bg-gold-soft transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                {state.kind === "submitting"
-                  ? "● 處理中 ..."
-                  : mode === "password"
-                  ? "→ 登入 / 註冊"
-                  : "→ 寄 magic link"}
+                {state.kind === "submitting" ? "● 處理中 ..." : "→ 登入 / 註冊"}
               </button>
 
               {state.kind === "error" && (
@@ -431,32 +395,11 @@ export default function LoginPage() {
                 </p>
               )}
 
-              {/* ── Mode toggle ── */}
-              <div className="pt-3 border-t border-line/40 flex flex-col gap-2">
-                {mode === "password" ? (
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setMode("magic_link");
-                      setState({ kind: "idle" });
-                    }}
-                    className="font-mono text-mute hover:text-gold text-[10px] tracking-[0.25em] text-left underline-offset-4 hover:underline transition-colors"
-                  >
-                    ↳ 忘記密碼 / 不想用密碼? 改用 magic link →
-                  </button>
-                ) : (
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setMode("password");
-                      setState({ kind: "idle" });
-                    }}
-                    className="font-mono text-mute hover:text-gold text-[10px] tracking-[0.25em] text-left underline-offset-4 hover:underline transition-colors"
-                  >
-                    ↳ 改用密碼登入 / 註冊 →
-                  </button>
-                )}
-                <p className="font-mono text-mute/70 text-[10px] tracking-[0.25em] leading-relaxed mt-2">
+              {/* ── Round 50 W-F · 砍 mode toggle button · 留 3-line hint
+                  簡化 to 1-path explanation。 「忘記密碼」 將來走獨立
+                  /reset page · 不在 /login 內 toggle 模式。 */}
+              <div className="pt-3 border-t border-line/40">
+                <p className="font-mono text-mute/70 text-[10px] tracking-[0.25em] leading-relaxed">
                   ▸ 新 email = 自動建帳號 · 寄確認 email · 點 link 完成 register
                   <br />
                   ▸ 已有 email = 用密碼登入 · session 落本 browser
@@ -518,17 +461,16 @@ export default function LoginPage() {
   );
 }
 
-// Round 32 W-C · SentState 砍 PATH B TYPE CODE form · Supabase 預設 email
-// template 不寄 `{{ .Token }}` · 6 位數 verify 永遠不 work · 違反 R30 W11
-// axiom。 只留 PATH A CLICK LINK · 1-tap 落地 · Apple/Stratechery pattern。
+// Round 50 W-F · SentState 簡化 · 砍 isSignupConfirm prop · 永遠 signup
+// confirm state(magic_link_sent path 已 R50 W-F 砍)。 password sign up
+// 走 Supabase 預設 email confirmation flow · 寄 confirmation link · click
+// → /auth/callback → /member · 同 PKCE same-device 限制。
 function SentState({
   email,
-  isSignupConfirm,
   cooldown,
   onResend,
 }: {
   email: string;
-  isSignupConfirm: boolean;
   cooldown: number;
   onResend: () => void;
 }) {
@@ -538,32 +480,28 @@ function SentState({
         lang="en"
         className="font-mono text-gold text-[10px] tracking-[0.45em] mb-4 shimmer text-center"
       >
-        {isSignupConfirm
-          ? "✓ ACCOUNT CREATED · 等 email 確認"
-          : "✓ EMAIL SENT · 1-tap 落地"}
+        ✓ ACCOUNT CREATED · 等 email 確認
       </p>
       <h2 className="text-2xl sm:text-3xl text-bone font-light tracking-tight mb-4 text-center">
-        {isSignupConfirm
-          ? "帳號建好了 · 請確認 email"
-          : "寄出了 · 1 分鐘內看您信箱"}
+        帳號建好了 · 請確認 email
       </h2>
       <p className="text-mute text-sm sm:text-base leading-relaxed mb-5 text-center">
         Email 寄到{" "}
         <span className="font-mono text-gold">{email}</span>
       </p>
 
-      {/* ── PATH · CLICK MAGIC LINK ─────────────── */}
+      {/* ── CLICK CONFIRM LINK ─────────────── */}
       <div className="bg-navy/40 border border-line/60 p-4 mb-4">
         <p
           lang="en"
           className="font-mono text-gold text-[10px] tracking-[0.35em] mb-2"
         >
-          → CLICK LINK · 1-tap 落地
+          → CLICK CONFIRM LINK · 1-tap 落地
         </p>
         <p className="text-mute text-xs sm:text-sm leading-relaxed">
           email 在<strong className="text-bone">這個 device + browser</strong>
-          開 · 點 link → 自動轉 /member。 PKCE 限制 · 換 device / 換 browser
-          點 link 不 work · 在新 device Resend 後再點。
+          開 · 點 confirmation link → 自動轉 /member。 PKCE 限制 · 換 device /
+          換 browser 點 link 不 work · 在新 device Resend 後再點。
         </p>
       </div>
 
@@ -582,7 +520,7 @@ function SentState({
       </div>
 
       <p className="font-mono text-mute/70 text-[10px] tracking-[0.25em] leading-relaxed text-center">
-        ▸ Link 1 小時內有效 · 過期 Resend
+        ▸ Confirmation link 1 小時內有效 · 過期 Resend
         <br />
         ▸ 找不到 email · 看垃圾信夾 · 或 30s 後 Resend
       </p>
