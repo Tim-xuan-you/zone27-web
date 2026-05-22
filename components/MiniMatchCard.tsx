@@ -67,7 +67,10 @@ export default function MiniMatchCard({ match }: { match: Match }) {
         <MiniPhaseBadge phase={matchPhase} calibration={calibration} />
       </div>
 
-      {/* Team labels — symmetric layout */}
+      {/* Team labels — symmetric layout · Round 31 Wave G A1 fix:加投手名
+          Critic agent surface「3 場 grid 沒投手名 = LOCK 沒重量 · skeptic
+          會嗆『連投手都沒確認就 LOCK 機率?』」。 投手名是 brand IP claim
+          的物理錨點 — 引擎吃 K/9 BB/9 HR/9 · 該 surface「機率綁定哪個投手」。 */}
       <div className="grid grid-cols-2 gap-3 mt-1">
         <div>
           <p className="font-mono text-mute text-[8px] tracking-[0.3em] mb-0.5">
@@ -79,6 +82,9 @@ export default function MiniMatchCard({ match }: { match: Match }) {
           <p className="font-mono text-gold/60 text-[9px] tracking-[0.25em] mt-0.5">
             {match.home.en}
           </p>
+          <p className="font-mono text-mute/70 text-[9px] tracking-[0.2em] mt-1 leading-snug">
+            P · {match.home.pitcher.name}
+          </p>
         </div>
         <div className="text-right">
           <p className="font-mono text-mute text-[8px] tracking-[0.3em] mb-0.5">
@@ -89,6 +95,9 @@ export default function MiniMatchCard({ match }: { match: Match }) {
           </h3>
           <p className="font-mono text-gold/60 text-[9px] tracking-[0.25em] mt-0.5">
             {match.away.en}
+          </p>
+          <p className="font-mono text-mute/70 text-[9px] tracking-[0.2em] mt-1 leading-snug">
+            P · {match.away.pitcher.name}
           </p>
         </div>
       </div>

@@ -85,7 +85,7 @@ const TIERS: Tier[] = [
     priceNote: "每月 · 預計 2026 Q3 開放",
     desc: "黑金訂閱會員。可發文 · 可推薦賽事 · 創作者抽成 5%(vs 業界 LINE 老師平台 30-50% 是降維打擊)。",
     perks: [
-      "可在賽事頁討論室發言 / 賣明牌",
+      "可在賽事頁討論室發言 / 分享預測(球迷 grammar 「明牌」 · 不導向莊家 · 見 #pick-vs-bet)",
       "創作者抽成 5%",
       "每月 voting 影響引擎迭代方向",
       "Founders 27 LINE 群 access",
@@ -247,6 +247,50 @@ export default async function MembershipPage({
               /coverage NEVER list
             </Link>
           </p>
+        </section>
+
+        {/* ── 「明牌」vs「博彩」disclosure · Round 31 Wave G A15 critic patch ──
+            Critic agent surface:「『賣明牌』本身就是博彩附屬詞 · 你又說不接受
+            下注 — 創作者賣明牌賣給誰?不就是賭客?那你跟博彩劃線劃假的?」
+            主動 surface 這個 brand 一致性裂縫 · 不藏 = 不能被一句拆穿。 */}
+        <section
+          id="pick-vs-bet"
+          className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-16 border-t border-line/40 pt-12 scroll-mt-20"
+        >
+          <p
+            lang="en"
+            className="font-mono text-gold text-[10px] tracking-[0.45em] mb-6 text-center"
+          >
+            / 「明牌」vs 「博彩」 · BRAND BOUNDARY
+          </p>
+          <h3 className="text-xl sm:text-2xl text-bone font-light tracking-tight mb-5 text-center max-w-2xl mx-auto">
+            為什麼 BLACK CARD perks 出現「明牌」這個詞 · 我們仍跟博彩劃線?
+          </h3>
+          <div className="space-y-4 text-mute text-sm leading-relaxed max-w-2xl mx-auto">
+            <p>
+              <strong className="text-bone">「明牌」</strong>在 CPBL 球迷 LINE 群 · Dcard ·
+              玩運彩 forum 是<strong className="text-bone">球迷之間 share 預測</strong>的
+              native 詞 — 「我覺得今晚富邦 60%」這種對話。 ZONE 27 沿用此詞因為
+              audience 用此詞 · 不另造新詞。
+            </p>
+            <p>
+              我們<strong className="text-bone">不</strong>連接莊家 · <strong className="text-bone">不</strong>
+              處理賠率 · <strong className="text-bone">不</strong>抽下注佣金。 BLACK CARD 5% / Founders 27 0%
+              抽的是<strong className="text-bone">會員之間預測訂閱費</strong>,不是賭客下注佣金。
+            </p>
+            <p className="font-mono text-mute/80 text-[10px] tracking-[0.3em] leading-relaxed">
+              對齊 brand IP「不接受下注 · 跟博彩劃線」+ /coverage NEVER list
+              (玩運彩 · 報馬仔 · LINE 老師平台都在 NEVER 上)。 完整 inversion 邏輯見{" "}
+              <Link href="/manifesto" className="text-gold hover:underline underline-offset-4">
+                /manifesto
+              </Link>
+              {" · "}
+              <Link href="/coverage" className="text-gold hover:underline underline-offset-4">
+                /coverage
+              </Link>
+              。
+            </p>
+          </div>
         </section>
 
         {/* ── FOUNDERS 27 DEEP DIVE CROSS-LINK ──── */}

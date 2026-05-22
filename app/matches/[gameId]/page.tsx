@@ -15,6 +15,7 @@ import {
   type Calibration,
 } from "@/lib/matches";
 import StatPercentileBar from "@/components/StatPercentileBar";
+import EngineStamp from "@/components/EngineStamp";
 import RelatedReading from "@/components/RelatedReading";
 import FollowMatchButton from "@/components/FollowMatchButton";
 import MatchNoteEditor from "@/components/MatchNoteEditor";
@@ -221,6 +222,11 @@ export default async function MatchDetailPage({
               </p>
             </div>
           </div>
+          {/* Round 31 Wave B · datestamped engine stamp · 預測 lock-in 物理證據
+              + BUILD chip 直連 GitHub commit · audit trail 1-click 可達 */}
+          <div className="mt-6 pt-5 border-t border-line/40">
+            <EngineStamp />
+          </div>
         </div>
       </section>
 
@@ -311,7 +317,7 @@ export default async function MatchDetailPage({
       )}
 
       {/* ── PITCHER MATCHUP ────────────────────────── */}
-      <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-20">
+      <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-12">
         <h2 className="font-mono text-gold text-[10px] tracking-[0.4em] mb-8">
           / 01 · STARTING PITCHER MATCHUP
         </h2>
@@ -320,6 +326,15 @@ export default async function MatchDetailPage({
           <PitcherCard side="HOME" team={m.home.name} pitcher={m.home.pitcher} />
           <PitcherCard side="AWAY" team={m.away.name} pitcher={m.away.pitcher} />
         </div>
+      </section>
+
+      {/* ── ENGINE NARRATIVE · Round 31 Wave G S1 critic patch ──
+          Critic agent surface:「比賽頁 narrative 是 0 — 純表格 stack ·
+          沒有一句中文敘述為什麼這代表 X 隊 N% 勝率。 對 CPBL 球迷,這幾乎是
+          侮辱 — 因為他們就是來看故事的。」 fan grammar match · 主動承認
+          引擎不吃什麼 = Pratfall。 */}
+      <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-20">
+        <EngineNarrative match={m} />
       </section>
 
       {/* ── SCORE DISTRIBUTION ─────────────────────── */}
@@ -435,6 +450,84 @@ export default async function MatchDetailPage({
 
       <Footer />
     </div>
+  );
+}
+
+// ── EngineNarrative · Round 31 Wave G S1 critic patch ──
+// Fan-grammar narrative explaining engine's prediction in plain Chinese ·
+// 同時 surface 引擎不吃什麼(individual batter quality · head-to-head ·
+// ballpark · bullpen)= Pratfall axiom 物理產出。 Generic across all
+// matches — derives the 3-stat comparison from match data · no per-game
+// hardcoded narrative。 Cross-link 到 /audit S03 ENGINE SCOPE + /changelog
+// for future v0.3 commits。
+function EngineNarrative({ match }: { match: Match }) {
+  const homeFav = match.home.winRate > match.away.winRate;
+  const fav = homeFav ? match.home : match.away;
+  const dog = homeFav ? match.away : match.home;
+  const favPct = homeFav ? match.home.winRate : match.away.winRate;
+
+  // Parse three rate stats(strings to numbers · graceful fallback)
+  const eraGap = parseFloat(dog.pitcher.era) - parseFloat(fav.pitcher.era);
+  const k9Gap = parseFloat(fav.pitcher.k9) - parseFloat(dog.pitcher.k9);
+  const bb9Gap = parseFloat(dog.pitcher.bb9) - parseFloat(fav.pitcher.bb9);
+  const hr9Gap = parseFloat(dog.pitcher.hr9) - parseFloat(fav.pitcher.hr9);
+
+  const gapStr = (n: number) =>
+    Number.isFinite(n) ? (n > 0 ? `+${n.toFixed(2)}` : n.toFixed(2)) : "—";
+
+  return (
+    <blockquote className="border-l-2 border-gold/50 pl-6 sm:pl-8 py-3 max-w-3xl">
+      <p className="font-mono text-gold text-[10px] tracking-[0.35em] mb-4">
+        / WHY THE ENGINE PICKS {fav.en} {favPct}%
+      </p>
+      <p className="text-bone text-base sm:text-lg leading-relaxed mb-4">
+        引擎只吃三個數字 — <span className="font-mono text-gold/90">K/9 · BB/9 · HR/9</span>
+        (per <Link href="/audit" className="text-gold hover:underline underline-offset-4">/audit</Link>
+        {" "}S02 INPUTS)。 這場 <strong className="text-bone">{fav.name}</strong> 的{" "}
+        <strong className="text-bone">{fav.pitcher.name}</strong> vs{" "}
+        <strong className="text-bone">{dog.name}</strong> 的{" "}
+        <strong className="text-bone">{dog.pitcher.name}</strong> · 三個數字差:
+      </p>
+      <ul className="space-y-2 text-mute text-sm leading-relaxed mb-5 font-mono tabular">
+        <li>
+          <span className="text-gold/80">ERA</span> · {fav.pitcher.era} vs {dog.pitcher.era}
+          {" · "}{gapStr(eraGap)}{" "}{eraGap > 0.5 ? "(favorite 控分明顯)" : eraGap > 0 ? "(favorite 略勝)" : "(差不多 · 非關鍵)"}
+        </li>
+        <li>
+          <span className="text-gold/80">K/9</span> · {fav.pitcher.k9} vs {dog.pitcher.k9}
+          {" · "}{gapStr(k9Gap)}{" "}{k9Gap > 1 ? "(每 9 局多吃 1 次以上三振)" : k9Gap > 0 ? "(favorite 略勝)" : "(差不多)"}
+        </li>
+        <li>
+          <span className="text-gold/80">BB/9</span> · {fav.pitcher.bb9} vs {dog.pitcher.bb9}
+          {" · "}{gapStr(bb9Gap)}{" "}{bb9Gap > 0.8 ? "(每 9 局少給 1 隻保送)" : bb9Gap > 0 ? "(favorite 略勝控球)" : "(差不多)"}
+        </li>
+        <li>
+          <span className="text-gold/80">HR/9</span> · {fav.pitcher.hr9} vs {dog.pitcher.hr9}
+          {" · "}{gapStr(hr9Gap)}{" "}{hr9Gap > 0.3 ? "(favorite 被轟少)" : hr9Gap > 0 ? "(略勝)" : "(差不多)"}
+        </li>
+      </ul>
+      <p className="text-mute text-sm leading-relaxed mb-3">
+        <strong className="text-bone">引擎不吃</strong>:本季對戰史 · 球員傷停 ·
+        守備站位 · 教練調度 · 場地適應。 per{" "}
+        <Link href="/audit" className="text-gold hover:underline underline-offset-4">
+          /audit
+        </Link>
+        {" "}S03 ENGINE SCOPE · 這幾項通常 ±15-25pp 影響真實 winRate · 同 {favPct}%
+        在不同場景的「真實機率」可以漂移到 {Math.max(0, favPct - 20)}-{Math.min(100, favPct + 20)}% 區間。
+      </p>
+      <p className="font-mono text-mute/70 text-[10px] tracking-[0.25em] leading-relaxed">
+        v0.3 roadmap 將陸續加入 ballpark factors · bullpen depth · 那時這段
+        caveat 縮小。 完整 plans 見{" "}
+        <Link href="/methodology" className="text-gold hover:underline underline-offset-4">
+          /methodology
+        </Link>
+        {" "}+ commits 在{" "}
+        <Link href="/changelog" className="text-gold hover:underline underline-offset-4">
+          /changelog
+        </Link>
+        。
+      </p>
+    </blockquote>
   );
 }
 

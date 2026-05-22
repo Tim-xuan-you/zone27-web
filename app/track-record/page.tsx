@@ -136,6 +136,44 @@ export default function TrackRecordPage() {
         <div className="w-full h-px bg-line/60" />
       </div>
 
+      {/* ── STAT LITERACY DISCLOSURE · Round 31 Wave G A12 critic patch ──
+          Stat-literate skeptic 嗆「60% PROVED 是 Texas sharpshooter fallacy:
+          predict 60% · 對方贏的時候你說『機率本來就 40% 有可能』 · 對方輸的
+          時候你就 PROVED」。 主動 surface 這個 wisdom:PROVED ≠ 校準。
+          校準需要 Brier score · 寫 v0.3 roadmap commitment。 brand IP
+          「Pratfall + Costly Signaling + Disclosure」三 axiom 同時 fire。 */}
+      {finalized.length > 0 && finalized.length < 30 && (
+        <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-12">
+          <div className="bg-loss/5 border border-loss/30 p-5 sm:p-7">
+            <p
+              lang="en"
+              className="font-mono text-loss text-[10px] tracking-[0.35em] mb-3"
+            >
+              ⚠ STAT LITERACY · 為什麼 60% PROVED ≠ 引擎強?
+            </p>
+            <p className="text-mute text-sm leading-relaxed mb-3">
+              PROVED 只代表引擎押的 majority side 真的贏。 60% 機率本來就有
+              40% 機率輸 · 我們命中時可以說「引擎方向對」 · 落空時可以說
+              「機率本來就允許」 — 這叫 <span lang="en" className="text-bone">Texas sharpshooter fallacy</span>。
+              要證明引擎「機率校準正確」(說 60% 真的 60% 命中)· 需要 N≥30
+              + <span lang="en" className="text-bone">Brier score</span> + reliability diagram。
+            </p>
+            <p className="font-mono text-mute/80 text-[10px] tracking-[0.25em] leading-relaxed">
+              所以這頁的 PROVED 數字 surface 「引擎方向命中與否」 · NOT 「引擎機率
+              校準與否」。 校準 surfacing 在{" "}
+              <Link href="/member/calibration" className="text-gold hover:underline underline-offset-4">
+                /member/calibration
+              </Link>
+              {" "}的 reliability diagram · 等 N≥30 才有統計意義。 完整數學見{" "}
+              <Link href="/methodology" className="text-gold hover:underline underline-offset-4">
+                /methodology
+              </Link>
+              。 v0.3 roadmap 將 ship Brier score 自動計算 · 那時這段移除。
+            </p>
+          </div>
+        </section>
+      )}
+
       {/* ── HEADLINE STATS ───────────────────────── */}
       <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-16">
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 bg-slate/40 border border-line/70 p-6 sm:p-8">
@@ -583,16 +621,22 @@ function FirstReceiptHero({ match }: { match: Match }) {
   return (
     <article
       aria-label="First receipt · the inaugural ZONE 27 calibration entry"
-      className="border-2 border-gold/70 glow-soft bg-slate/30 enter-fade-up"
+      className="border-2 border-mute/40 bg-slate/30 enter-fade-up"
     >
       {/* ── KICKER BAND ─────────────────────── */}
-      <div className="border-b border-gold/40 bg-gold/5 px-5 sm:px-8 py-4 flex items-baseline justify-between flex-wrap gap-3">
+      {/* Round 31 Wave G A11+A12 critic-agent patch · 改灰色 · 不慶祝 N=1。
+          Stat-literate skeptic 嗆「打一場中一場吹一輩子 = 統計文盲」·
+          Pratfall axiom 延伸到 own first receipt:不慶祝 · 直接 surface
+          「N=1 ≠ SIGNAL · 27 MORE TO N=30」 · brand IP「方法公開」延伸到
+          self-evaluation discipline。 ★ 保留 + 移到 secondary visual weight ·
+          shimmer 拿掉 · gold border 降 mute/40 · gold/5 bg 拿掉。 */}
+      <div className="border-b border-mute/30 px-5 sm:px-8 py-4 flex items-baseline justify-between flex-wrap gap-3">
         <p
           lang="en"
-          className="font-mono text-gold text-[10px] sm:text-xs tracking-[0.4em] shimmer"
-          title="這是 ZONE 27 公開戰績 ledger 的第一筆 · 物理時刻 · 不會重來"
+          className="font-mono text-mute/80 text-[10px] sm:text-xs tracking-[0.4em]"
+          title="N=1 不是 signal · 校準需要 Brier score · 見 v0.3 roadmap · per /audit S07 + critic-hardening Round 31 W-G"
         >
-          ★ FIRST RECEIPT · 1 OF 270 PROJECTED
+          ★ FIRST RECEIPT · NOT YET EVIDENCE · 29 MORE TO N=30
         </p>
         <p className="font-mono text-mute text-[10px] tracking-[0.3em] tabular">
           {dateIso} · INGEST

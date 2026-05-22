@@ -118,6 +118,20 @@ export default function TonightReceiptsCard({
   // Cumulative N after tonight (current track record + tonight's pending).
   const projectedTotal = trackRecord.total + pendingTodayCount;
 
+  // Round 31 Wave G A2 fix · Critic agent surface:「今晚三場全 coin-flip
+  // 區間(46/54 · 40/60 · 49/51)看起來像 confidence theater · skeptic 嗆
+  // 『LOCK 個屁 · 引擎在這三場都跟丟銅板差不多』。」 主動 surface 這個
+  // 弱點 = Pratfall axiom · 不藏起來。 thresholds:< 65 aiConfidence avg =
+  // LOW EDGE 夜(per /audit S03 個別打者品質 ±15-25pp gap convention)。
+  const avgConfidence = pendingTodayCount > 0
+    ? Math.round(
+        todayMatches
+          .filter((m) => getMatchPhase(m) !== "final")
+          .reduce((s, m) => s + m.aiConfidence, 0) / pendingTodayCount
+      )
+    : 0;
+  const isLowEdgeNight = avgConfidence > 0 && avgConfidence < 65;
+
   return (
     <article
       aria-label={`Tonight's ${count} engine predictions · cumulative track record N=${trackRecord.total}`}
@@ -135,6 +149,18 @@ export default function TonightReceiptsCard({
           >
             ● {statusLine}
           </span>
+          {isLowEdgeNight && (
+            // Round 31 Wave G A2 Pratfall surface · low-confidence night
+            // 主動 self-deprecating label · 不讓 skeptic 截圖嗆 confidence
+            // theater。 Brand IP「方法公開」延伸到 self-evaluation。
+            <span
+              lang="en"
+              className="font-mono text-[8px] tracking-[0.25em] px-1.5 py-0.5 border border-loss/40 text-loss/80 whitespace-nowrap"
+              title={`今晚 ${pendingTodayCount} 場 avg confidence = ${avgConfidence} · 引擎自評低 EDGE · 不藏 · brand IP 「方法公開」延伸到 self-evaluation · per /audit S03`}
+            >
+              LOW EDGE 夜
+            </span>
+          )}
         </div>
         <p
           lang="en"

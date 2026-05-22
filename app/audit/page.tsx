@@ -374,6 +374,43 @@ export default function AuditPage() {
               {" "}✕)等大列出 ·
               不刪、不修飾、不過濾。揭露哲學 = 文字理論;公開戰績 = 文字理論的物理產出。
             </P>
+
+            {/* Round 31 Wave G A10 critic patch · pre-commit DIVERGED handling
+                rule。 Critic agent surface:「N=1 還 100% 命中 · 你 SHOW 個屁
+                error?」 修法:先 commit handling rule 在 miss 還沒發生時 ·
+                signal 最強。 brand IP「Pratfall」延伸到 procedural pre-commitment。 */}
+            <div className="mt-6 p-5 sm:p-7 border border-loss/30 bg-loss/5">
+              <p
+                lang="en"
+                className="font-mono text-loss text-[10px] tracking-[0.35em] mb-3"
+              >
+                ⚓ PRE-COMMIT · 第一筆 DIVERGED 出現時的處理規則
+              </p>
+              <p className="text-mute text-sm leading-relaxed mb-3">
+                截至 v0.28(2026-05-22)· /track-record DIVERGED = 0。 趁
+                miss 還沒發生先 commit handling rule:
+              </p>
+              <ul className="space-y-2 text-mute text-sm leading-relaxed list-disc pl-6">
+                <li>第一筆 DIVERGED 出現當日 · 該場 receipt 自動 surface
+                  至 <Link href="/" className="text-gold hover:underline underline-offset-4">homepage HeroLiveCard</Link>
+                  /TonightReceiptsCard · 不撤、不藏、不在 7 天內被新 entry 蓋掉</li>
+                <li>/track-record ledger 編號不重排 · DIVERGED entry 跟
+                  PROVED entry 共用同 sort order(time-based)</li>
+                <li>每筆 DIVERGED 自動帶 git commit permalink 至 lib/matches.ts
+                  該 finalResult 的 ingest commit · audit trail 1-click 可達</li>
+                <li>不開「為什麼 diverged 解釋」excuse paragraph — 留空 ·
+                  讓數字自己說話</li>
+              </ul>
+              <p className="font-mono text-mute/80 text-[10px] tracking-[0.25em] leading-relaxed mt-3">
+                本規則 binding to engine v0.X 全部版本 · 修改需發 commit at
+                least 30 天前公告於{" "}
+                <Link href="/changelog" className="text-gold hover:underline underline-offset-4">
+                  /changelog
+                </Link>
+                。 Costly Signaling:pre-commit binding 比 post-hoc rationalization
+                strong 100×。
+              </p>
+            </div>
             <P className="text-mute/70">
               完整論證見{" "}
               <Link href="/manifesto" className="text-gold hover:underline">
