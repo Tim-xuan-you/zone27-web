@@ -95,13 +95,25 @@ Supabase webhook(visitor 填表) → Tim Gmail Inbox(即時通知) → Tim 22:00
 
 ---
 
-## ✅ Prerequisite 3 · Tim signature PNG
+## ✅ Prerequisite 3 · Tim signature PNG · **DONE 2026-05-22(Round 31 W-H)**
+
+### 狀態
+
+✅ **`public/tim-signature.png` 已 ship**(600×981 · 透明背景 + 黑色拉滿)
+
+Processing pipeline:`scripts/process-signature.mjs`(jimp 1.6.1)
+- 白底(R/G/B > 200)→ alpha 0 透明
+- 灰階 anti-alias zone → graduated alpha(保筆觸柔邊)
+- 黑色筆觸(brightness < 80)→ 強制 #000000 純黑
+- autocrop + resize 600px wide(Lanczos)
+
+未來 Tim 想換簽名 · 重 paste 原圖到 `public/tim-signature-raw.png` → `node scripts/process-signature.mjs` 一鍵重 process。
 
 ### 為什麼重要
 
 PDF 證書要 Tim 真實簽名(per docs/PDF-CERTIFICATE-SPEC.md · Pratfall imperfection)。**typed font 簽名 = template = 殺 brand IP**。一次性掃描 · 永久使用 270 次。
 
-### Sub-steps
+### Sub-steps(原版 · 已執行)
 
 3.1. **拿一張白紙(A4)+ 黑色簽字筆 / 鋼筆**
    - 不用太大 · 5cm × 2cm 的簽名空間就夠
