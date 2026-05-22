@@ -216,6 +216,46 @@ export default async function FoundersPage({
           ONE-TIME · LIFETIME · NEVER REOPENS
         </p>
 
+        {/* Round 52 W-D · Agent 1 #3 fix ·「270 = Tim's personal-reply
+            ceiling」 1-sentence justification · 之前 cap 看 arbitrary FOMO
+            marketing number · 加 1 行 explain「不是 marketing number 是物理
+            人力上限」 · 把 FOMO counter (banned axiom) 轉為 costly-signaling
+            (brand axiom) · 違反 0 · 強化 brand IP。 Pinboard pattern。 */}
+        <p className="mt-4 max-w-md mx-auto text-mute/85 text-xs sm:text-[13px] leading-relaxed">
+          <span className="text-gold/90 font-medium">270</span>{" "}
+          是一年 Tim 親手回覆 + 親筆 sign-off 的人力上限 · 不是 marketing
+          number。 超過 Tim sustain 不來 · 名額就成{" "}
+          <span className="text-loss/80">空頭支票</span> · 那 brand 自殺。
+        </p>
+
+        {/* Round 52 W-D · Agent 1 #4 fix · Founder voice block at buy line
+            · 之前 FROM THE FOUNDER 在 form 之後(R8 移)· 訪客 buy-decision
+            moment 沒看到 Tim voice · 加 present-tense first-person 120-word
+            block at hero · 直接上 BreakEvenCell 之前 · 同 Pinboard /
+            Stratechery「founder's voice on the buy line itself」 pattern · 不
+            轉 cold copy。 */}
+        <div className="mt-7 sm:mt-9 max-w-xl mx-auto bg-slate/30 border-l-2 border-gold/60 px-5 py-4 text-left">
+          <p
+            lang="en"
+            className="font-mono text-gold/85 text-[10px] tracking-[0.4em] mb-3"
+          >
+            DIRECTLY FROM TIM · 親筆 · 不是公關稿
+          </p>
+          <p className="text-bone text-[14px] sm:text-[15px] leading-relaxed mb-2">
+            我寫這個引擎 · 是因為台灣硬核棒球迷沒有自己的 Bloomberg。
+            玩運彩 + 報馬仔 + LINE 老師生態用「明牌」 框架對待您 — 我們不是。
+            您現在看到的這頁 · 我親手寫 · 您加入 · 我親手回覆。
+          </p>
+          <p className="text-mute/90 text-[13px] sm:text-[14px] leading-relaxed mb-3">
+            <strong className="text-bone">您不是在買明牌</strong> ·
+            您是在買 270 個 lifetime seat 之一 · 加入 ZONE 27 整個系統的 floor。
+            引擎永遠免費 · 您買的是身分 + 永久 access + 0% creator 抽成。
+          </p>
+          <p className="font-mono text-mute/70 text-[10px] tracking-[0.3em] mt-3 pt-3 border-t border-line/40">
+            — TIM · SOLO FOUNDER · ZONE 27 · {new Date().getFullYear()}
+          </p>
+        </div>
+
         {/* Break-even math · Round 12 funnel-audit lifted the numbers
             out of body copy into a 3-cell bento. Mobile visitors skim
             (Kahneman System 1) · body copy was System 2 territory ·
