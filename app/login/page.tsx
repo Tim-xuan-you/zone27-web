@@ -445,7 +445,7 @@ export default function LoginPage() {
             <li>▸ 終身免費</li>
             <li>▸ /member dashboard + /member/calibration mirror</li>
             <li>▸ 模型迭代 email 通知</li>
-            <li>▸ 0 GA · 0 Pixel · 0 Hotjar · 0 cookies</li>
+            <li>▸ 0 GA · 0 Pixel · 0 Hotjar · 0 tracking cookies(essential auth session only · 登出即刪)</li>
           </ul>
         </section>
 

@@ -484,9 +484,15 @@ function CalibrationVerdict({
     diverged: "text-loss border-loss/70",
     push: "text-mute border-mute/60",
   } as const;
+  // Round 56 W-A · Agent A Vector 3 fix · CRITICAL · 之前 「✓ ENGINE PROVED」
+  // 在 N=1 sample 是 cherry-pick optics(/track-record 自己 disclaim N<30 NOT
+  // EVIDENCE)· adversarial critic 1-second reads as「他們 know N=1 不夠 但
+  // 還是放首頁宣傳」 hypocrisy。 改為「✓ MATCHED」 weaker verb · 更 Aronson
+  // Pratfall 一致 · brand IP「方法公開 · 不誇大」 axiom 物理 codify · 仍
+  // 顯示 receipt 但 vocabulary honest given sample size。
   const labels = {
-    proved: "✓ ENGINE PROVED · 引擎方向言中",
-    diverged: "✕ ENGINE DIVERGED · 引擎方向落空",
+    proved: "✓ MATCHED · 引擎方向對齊(N<30 樣本)",
+    diverged: "✕ DIVERGED · 引擎方向落空(N<30 樣本)",
     push: "= PUSH · 無 favorite 或平局",
   } as const;
   return (

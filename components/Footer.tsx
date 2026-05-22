@@ -245,16 +245,22 @@ export default function Footer() {
               on navy bg fail 4.5:1 contrast。 Bump text-mute/70 → text-mute/85
               (5.2:1 ✓ AA pass)· text-mute/60 → text-mute/85 同步。 Decorative
               `·` divider 加 aria-hidden="true" 防 screen reader spurious read。 */}
+          {/* Round 56 W-A · Agent A Vector 4 fix · CRITICAL · 之前「0 cookies
+              set」 是 publicly indefensible · Supabase Auth 設 sb-access-token +
+              sb-refresh-token session cookies(essential for /login flow)·
+              devtools 5 秒可 debunk · 違反 brand IP「方法公開 · 不誇大」 axiom。
+              改為「0 tracking cookies」 + explicit auth session disclosure ·
+              brand-IP-pure transparency · 不藏 essential infrastructure cookie。 */}
           <p className="font-mono text-mute/85 group-hover:text-mute text-[9px] tracking-[0.3em] leading-relaxed transition-colors">
             由<span className="text-gold mx-1">創始會員</span>出資
             <span aria-hidden="true" className="mx-2 text-mute/60">·</span>
-            <span lang="en">0 GA · 0 FB Pixel · 0 Hotjar · 0 cookies set</span>
+            <span lang="en">0 GA · 0 FB Pixel · 0 Hotjar · 0 tracking cookies</span>
           </p>
           <p
             lang="en"
             className="font-mono text-mute/85 group-hover:text-mute text-[9px] tracking-[0.3em] mt-1.5 transition-colors"
           >
-            FUNDED BY FOUNDERS · NO GA · NO PIXEL · NO HOTJAR · 0 COOKIES SET
+            FUNDED BY FOUNDERS · NO GA · NO PIXEL · NO HOTJAR · NO TRACKING COOKIES
           </p>
           {/* Round 33 W-B · regulatory framing per agent verdict:
               positions ZONE 27 in 「data publisher」 category not 「advisor」 ·

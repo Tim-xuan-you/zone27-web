@@ -133,7 +133,7 @@ export default function TransparencyPage() {
             <Never>不分潤博彩 affiliate(NO COMMISSION)</Never>
             <Never>不寄生 gambling 平台(NO PARASITE)</Never>
             <Never>不藏 DIVERGED 賽事(NO HIDDEN MISSES)</Never>
-            <Never>不追蹤訪客(0 GA · 0 Pixel · 0 cookies)</Never>
+            <Never>不追蹤訪客(0 GA · 0 Pixel · 0 tracking cookies · essential auth session 例外明示 in /privacy)</Never>
             <Never>不接受 AdMob / 廣告營收(NO ADS · 永久)</Never>
             <Never>不做 fake methodology「管它準不準包裝」</Never>
             <Never>不做 fake testimonials / 偽造 social proof</Never>

@@ -521,9 +521,25 @@ export default function AuditPage() {
           <ReportSection no="06" label="LOCAL STORAGE TRANSPARENCY">
             <P>
               ZONE 27 用 localStorage 存 visitor-local state ·{" "}
-              <strong className="text-bone">0 cookies · 0 server-side write · 0 PII transit</strong>。
+              <strong className="text-bone">0 tracking cookies · 0 server-side write · 0 PII transit</strong>
+              (essential auth session cookies 例外明示 below)。
               開 DevTools → Application → Local Storage → zone27-web.vercel.app
               · 您看到的 keys 跟下表一致 · 我們不藏。
+            </P>
+            {/* Round 56 W-A · Agent A Vector 4 fix · CRITICAL · adversarial
+                critic 5-second devtools debunk surface · Supabase Auth 設
+                sb-access-token + sb-refresh-token session cookies on /login
+                成功登入後 · 這是 essential infrastructure cookie · 不是
+                tracking · 但 brand IP「不藏」 axiom 要 explicit disclose ·
+                不能 silently 否認。 */}
+            <P className="text-mute/80">
+              <strong className="text-bone">Auth session cookies disclosure</strong>:
+              登入後 Supabase 在 first-party domain 設 2 個 cookies
+              (<code className="font-mono text-gold/85 text-[12px]">sb-{`{project}`}-auth-token</code>
+              + refresh)· essential for session persistence · HTTP-only ·
+              Secure · SameSite=Lax · 登出即刪。 不 tracking · 不送第三方 ·
+              不 PII inventory(只 store opaque session token)。 開 DevTools
+              → Application → Cookies 可 audit。
             </P>
 
             {/* Round 43 W-B · CRITICAL fix · Agent J dogfood verify
