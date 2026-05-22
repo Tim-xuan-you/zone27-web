@@ -203,9 +203,9 @@ Build / Lint / TSC 三綠 ✓ · Auto-push per [[feedback_auto_push_zone27]]。
 
 【商業狀態】:
 - Founders 27:NT$ 2,700 一次性 · 限量 270 名 · **手工銀行轉帳(per
-  [[zone27-payment-architecture]])** · 5.4 個月 break-even
+  [[zone27-payment-architecture]])** · 9 個月 break-even(2700÷299)
 - 7 位 forged(hardcoded · 待 Q3 2026 manual onboarding 啟動)· 263 名額
-- BLACK CARD:NT$ 499/月 · TapPay 訂閱 · 預計 2026 Q3 上線
+- BLACK CARD:NT$ 299/月(R33 reprice 499→299)· TapPay 訂閱 · 預計 2026 Q3 上線
 - 自動 push 政策:Claude 直接 push zone27-web · 不問 Tim · 直到買品牌域名
 - 鐵律:Claude **永遠不說「休息 / 明天 / 晚安 / take a break」**
 

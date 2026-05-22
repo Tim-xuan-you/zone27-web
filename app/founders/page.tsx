@@ -295,7 +295,7 @@ export default async function FoundersPage({
             descriptive caption stays below as supporting text. */}
         <div className="mt-5 sm:mt-7 grid grid-cols-3 gap-2 sm:gap-3 max-w-xl mx-auto">
           <BreakEvenCell
-            value="5.4"
+            value="9"
             unit="個月"
             en="MONTHS TO BREAK-EVEN"
           />
@@ -326,6 +326,23 @@ export default async function FoundersPage({
           <span className="text-gold/85">9× ratio 是 INTENTIONAL</span> ·
           我們 under-price 創始席位 · 因為前 270 人不是 customer · 是 brand
           共同作者 + lifetime mission anchor · 不是「value-for-money」 trade。
+        </p>
+        {/* R59 W-A · Agent C Ship #5 · /methodology/diff Costly Signaling
+            anchor · the KEY objection 「why pay anything when method is
+            public?」 currently answered abstractly(identity-stamp)。 加
+            physical receipt · v0.2→v0.3 整份 5-line logic delta + 14
+            unchanged constants + Pratfall list · 不是「我們有深度」 prose ·
+            是「look 我們連 5 行 logic 都公開」 evidence。 同 Hindenburg
+            inline citation 概念 · Disclosure-first 物理升級 · brand IP
+            triple-fire(Disclosure + Pratfall + Costly Signaling)。 */}
+        <p className="mt-2 max-w-xl mx-auto text-mute/70 text-[10px] sm:text-[11px] leading-relaxed text-center">
+          <Link
+            href="/methodology/diff"
+            className="text-gold/80 hover:text-gold underline decoration-mute/40 underline-offset-4 hover:decoration-gold transition-colors"
+          >
+            看 v0.2 → v0.3 整份 delta →
+          </Link>{" "}
+          我們連 5 行 logic change 都公開。
         </p>
         <p
           lang="en"

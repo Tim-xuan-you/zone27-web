@@ -365,6 +365,21 @@ export default function AnonPickWidget({ match }: Props) {
         </Link>{" "}
         會 surface 您 vs engine 個人 strip(只在您裝置 render)。
       </p>
+      {/* R59 W-A · Agent C Ship #2 · BLACK CARD CTA inside the highest-intent
+          anonymous Lens moment · 您 just 個人下注 + 賽後對照 完成 IKEA-effect
+          retention loop · NOW is the empirically-strongest conversion second
+          · 5% creator 抽成 + voting 是「您剛剛 just experienced」 的 natural
+          ladder。 mute / underline / non-modal / 不 lock scroll · 純 inline
+          line · brand-pure。 */}
+      <p className="mt-4 pt-3 border-t border-line/30 font-mono text-mute/70 text-[10px] sm:text-[11px] tracking-[0.18em] leading-relaxed">
+        想 voting 引擎 v0.3 / v0.4 + 5% creator 抽成 →{" "}
+        <Link
+          href="/membership/black-card"
+          className="text-gold/85 hover:text-gold underline-offset-4 hover:underline transition-colors"
+        >
+          BLACK CARD · NT$ 299/月 →
+        </Link>
+      </p>
     </article>
   );
 }

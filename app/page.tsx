@@ -185,6 +185,16 @@ export default function Home() {
             <span className="text-gold/70 ml-2">→</span>
           </Link>
         </p>
+        {/* R59 W-A · Agent C Ship #6 · 270 = Tim 一年親手 sign-off 上限 ·
+            Costly Signaling framing 物理 visible on home · 防 「263/270」
+            被誤讀為 FOMO scarcity counter(brand redline)· R52 W-D framing
+            從 /founders hero 升 homepage first-touch · 不奪 hero 焦點 ·
+            極小 mute · 唯一目的 = filter-out 賭徒(看到「不是 marketing
+            數字」會直接 bounce)· filter-in fan(看到「物理 ceiling」會
+            直接 click)。 */}
+        <p className="mt-2 font-mono text-mute/55 text-[9px] sm:text-[10px] tracking-[0.28em] text-center">
+          270 = Tim 一年親手 sign-off 上限 · 不是 marketing 數字
+        </p>
 
         {/* Round 50 W-C · subtle scroll-to-prediction hint · per Hick's
             Law deeper formulation · 訪客 first-touch 必須是 PRIMARY
@@ -324,6 +334,19 @@ export default function Home() {
             (4.5:1 required)。 Bump to text-mute (100%) ≈ 5.6:1 ✓ AA pass。 */}
         <p className="mt-3 font-mono text-mute text-[9px] sm:text-[10px] tracking-[0.28em] leading-relaxed">
           NO ODDS · NO LOCK · NO AFFILIATE · NO HIDDEN MISSES · 0 TRACKERS · <span className="text-gold/80">NO WAITING</span>
+        </p>
+        {/* R59 W-A · Agent C Ship #4 · /transparency cross-link · F6 「不做」
+            strip 是 skeptic asks「prove it」 的精確時刻 · /transparency
+            Anthropic-pattern aggregator 是 one-page proof · 此 link 把
+            R51 W-D headline ship 從 footer/Cmd-K opt-in 升 homepage active
+            funnel entry。 underlined · tracking same · 不破 minimalism。 */}
+        <p className="mt-4 font-mono text-[10px] sm:text-[11px] tracking-[0.3em]">
+          <Link
+            href="/transparency"
+            className="text-gold/80 hover:text-gold underline decoration-mute/40 underline-offset-4 hover:decoration-gold transition-colors"
+          >
+            完整 audit · /transparency →
+          </Link>
         </p>
       </section>
 

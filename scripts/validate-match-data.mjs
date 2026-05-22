@@ -8,7 +8,7 @@
 //   1. Match ID format(cpbl-YYMMDD-NN)+ uniqueness
 //   2. Date format consistency(canonical「YYYY · MM · DD  ·  星期X」)
 //   3. winRate home + away sum = 100
-//   4. finalResult schema(homeRuns/awayRuns/winner/ingestedAt)
+//   4. finalResult schema(homeScore/awayScore/winner/ingestedAt)
 //   5. finalResult.ingestedAt ≥ match date(not backward time)
 //   6. Pitcher names referenced in matches.ts exist in cpbl-pitchers.ts
 //      OR flagged with「ESTIMATE」 comment
@@ -197,25 +197,30 @@ if (winRates.length % 2 !== 0) {
 }
 
 // ── Step 6 · finalResult schema check ───────────────────
-// Find each finalResult block · ensure has homeRuns + awayRuns + winner + ingestedAt
+// Find each finalResult block · ensure has homeScore + awayScore + winner + ingestedAt
+// (matches FinalResult type in lib/matches.ts:36-42)
 const finalResultBlocks = matchesSource.matchAll(
   /finalResult:\s*\{([^}]+)\}/g
 );
 let finalResultCount = 0;
+let finalResultErrors = 0;
 for (const block of finalResultBlocks) {
   finalResultCount++;
   const body = block[1];
-  const hasHomeRuns = /homeRuns:\s*\d+/.test(body);
-  const hasAwayRuns = /awayRuns:\s*\d+/.test(body);
+  const hasHomeScore = /homeScore:\s*\d+/.test(body);
+  const hasAwayScore = /awayScore:\s*\d+/.test(body);
   const hasWinner = /winner:\s*"(home|away|tie)"/.test(body);
   const hasIngestedAt = /ingestedAt:\s*"(\d{4}-\d{2}-\d{2})"/.test(body);
-  if (!hasHomeRuns || !hasAwayRuns || !hasWinner || !hasIngestedAt) {
+  if (!hasHomeScore || !hasAwayScore || !hasWinner || !hasIngestedAt) {
     error(
-      `finalResult #${finalResultCount} missing required field(homeRuns / awayRuns / winner / ingestedAt)`
+      `finalResult #${finalResultCount} missing required field(homeScore / awayScore / winner / ingestedAt)`
     );
+    finalResultErrors++;
   }
 }
-if (finalResultCount > 0) ok(`${finalResultCount} finalResult entries · schema valid`);
+if (finalResultCount > 0 && finalResultErrors === 0) {
+  ok(`${finalResultCount} finalResult entries · schema valid`);
+}
 
 // ── Step 7 · Stale-pending detection ────────────────────
 // 注:此 check 需要 today's date · 不在 grep 範圍 · 用 process date · 不
