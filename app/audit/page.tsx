@@ -465,6 +465,130 @@ export default function AuditPage() {
             </P>
           </ReportSection>
 
+          {/* ── 06 LOCAL STORAGE TRANSPARENCY · Round 41 W-B ────
+              Agent F surface'd this gap during mobile UX recon · 我們 ship
+              了 4+ localStorage features(team-pick · recent-matches ·
+              sim-history · notes · predictions)但 /audit 沒列出 storage
+              keys。 「方法公開」延伸到 client-side state 本身 · skeptic
+              開 DevTools Application 看到 ZONE 27 寫的 keys 跟 /audit 列的
+              一致才會信「0 trackers · 數據在您裝置不在我們 server」 claim。
+              brand IP「您能驗證 → 您才有理由信」 物理 codify 到 localStorage。 */}
+          <ReportSection no="06" label="LOCAL STORAGE TRANSPARENCY">
+            <P>
+              ZONE 27 用 localStorage 存 visitor-local state ·{" "}
+              <strong className="text-bone">0 cookies · 0 server-side write · 0 PII transit</strong>。
+              開 DevTools → Application → Local Storage → zone27-web.vercel.app
+              · 您看到的 keys 跟下表一致 · 我們不藏。
+            </P>
+
+            <DataTable>
+              <DataRow
+                label="zone27_team"
+                value="您支持的 CPBL 隊伍"
+                note="6 隊 enum · TeamPickPanel 寫入 · /track-record + /matches/[gameId] 讀取"
+              />
+              <DataRow
+                label="zone27_recent_matches_v1"
+                value="您最近看過的賽事(capped 10)"
+                note="MatchViewTracker 寫入 · homepage RecentMatchesRow 讀取 · {gameId, title, viewedAt} JSON array"
+              />
+              <DataRow
+                label="zone27_sim_history"
+                value="您 /lab 跑過的模擬結果"
+                note="MatchSimulator 寫入 · /member dashboard preview 讀取 · 11 fields with Number.isFinite validation"
+              />
+              <DataRow
+                label="zone27_engine_voting_v1"
+                value="您 BLACK CARD voting 排序"
+                note="RoadmapVotingPanel 寫入 · drag-rank schema-versioned · /member Section 03 IKEA Effect"
+              />
+              <DataRow
+                label="zone27_preview_tier"
+                value="Tim designer dev tool · 預覽 active tier"
+                note="PreviewModeBanner 寫入 · Tim 開發用 · 訪客不會 trigger · 0 PII"
+              />
+              <DataRow
+                label="zone27_match_note_{gameId}"
+                value="您 private match note(280 字)"
+                note="MatchNoteEditor 寫入 · 0 server read · /matches/[gameId] logged-in only"
+              />
+            </DataTable>
+
+            <P className="text-mute/70 mt-4">
+              清除 localStorage 完全是您的選擇:DevTools Application tab right-click
+              「Clear」 · 或 browser「Clear site data」 一鍵清除全部 ZONE 27
+              storage。 我們{" "}
+              <strong className="text-bone">不會</strong>{" "}
+              在您 clear 後試圖重新寫入 · 不會在 backend 保留 backup · 不會用
+              tracking pixel restore — 因為我們從一開始就沒有 backend copy。
+            </P>
+
+            <P className="text-mute/70">
+              修改此 localStorage transparency policy 需 30 天 /changelog 公告 ·
+              同 Section 05 PRE-COMMIT pattern · 新 localStorage key 加入時
+              此表必須同步 update · drift = brand IP 自殺。
+            </P>
+          </ReportSection>
+
+          {/* ── 07 ENGINE LINEUP v0.2/v0.3 ESTIMATION DISCLOSURE · R41 W-A ──
+              Engine Lineup #2 v0.3 從 DEV → LIVE 後 · 每 engine version 需
+              獨立 ESTIMATION DISCLOSURE 同 v0.2 K/9 estimate pattern。
+              「方法公開」 物理延伸:visitor 開 /audit 看 v0.2 vs v0.3 差別。 */}
+          <ReportSection no="07" label="ENGINE v0.3 ESTIMATION DISCLOSURE">
+            <P>
+              Round 41 W-A · Engine Lineup #2 v0.3 從 DEV → LIVE(DEV PREVIEW
+              state · opt-in via /lab 將來 ship)。 v0.3 = v0.2 base + Park
+              Factor HR rate adjustment · 公開 estimation methodology:
+            </P>
+
+            <DataTable>
+              <DataRow
+                label="v0.3 BASE"
+                value="繼承 v0.2 全部"
+                note="K/9 + BB/9 + HR/9 + atBatProbs() 100% inherit from lib/simulator.ts · per Lens Lifetime Pledge"
+              />
+              <DataRow
+                label="v0.3 NEW · Park Factor"
+                value="HR rate × (1 + Δ/9.5 × 0.5)"
+                note="保守 sensitivity 0.5 · estimate · per lib/cpbl-parks.ts ESTIMATE R/G environment · v0.4 split full effect"
+              />
+              <DataRow
+                label="v0.3 NOT YET"
+                value="BABIP · 外野 dimensions · 風阻"
+                note="v0.3 only HR rate · v0.4 commit 加 BABIP × park 因素 + outfield distance + weather data"
+              />
+              <DataRow
+                label="v0.3 EDGE CASE"
+                value="Unknown venue → v0.2 fallback"
+                note="venue 不在 lib/cpbl-parks.ts 4 主場 reference data · simulator-v03.ts 透明 fallback to v0.2 · 不假裝有 data"
+              />
+            </DataTable>
+
+            <P className="text-mute/70 mt-4">
+              v0.3 calibration receipts 將與 v0.2 receipts 平行 ingest 在{" "}
+              <Link href="/track-record" className="text-gold hover:underline">
+                /track-record
+              </Link>{" "}
+              · 每筆 receipt 標 engine version · N≥30 finalized matches per engine
+              後{" "}
+              <Link href="/calibration" className="text-gold hover:underline">
+                /calibration
+              </Link>{" "}
+              publish v0.2 vs v0.3 Brier score 對照 · 才決定 v0.3 是否 promote
+              default(per Lens Lifetime Pledge:
+              <strong className="text-bone"> 不 silently rotate</strong>)。
+            </P>
+
+            <P className="text-mute/70">
+              引擎 v0.3 程式碼公開:
+              <ExtLink href="https://github.com/Tim-xuan-you/zone27-web/blob/main/lib/simulator-v03.ts">
+                lib/simulator-v03.ts
+              </ExtLink>
+              {" "}· 同 v0.2 simulator.ts 同 repo · 任何工程師可 fork
+              · 30 分鐘理解 · per /methodology Section 04 ENGINE LINEUP。
+            </P>
+          </ReportSection>
+
           {/* ── FOOTER NOTE ───────────────────────── */}
           <footer className="pt-12 mt-12 border-t border-line/60">
             <p className="font-mono text-mute text-[11px] tracking-[0.25em] mb-6">

@@ -275,12 +275,12 @@ repeat 10,000 times → aggregate
               />
               <EngineRow
                 engine="v0.3"
-                statusLabel="DEV · Q3 2026"
-                statusTone="loss"
-                method="+ Park Factor + 隊伍平均 wOBA(打者品質)"
-                tier="BLACK CARD"
-                tierTone="gold"
-                record="TBD · Q3 launch"
+                statusLabel="✓ LIVE · R41 W-A · DEV PREVIEW"
+                statusTone="gold"
+                method="+ Park Factor HR rate adjustment(v0.3.0)· wOBA 留 v0.3.1"
+                tier="FREE 預覽 · 將來 BLACK CARD"
+                tierTone="bone"
+                record="N=0 per engine · v0.2 vs v0.3 Brier delta TBD until N≥30"
               />
               <EngineRow
                 engine="v0.4"
@@ -334,13 +334,16 @@ repeat 10,000 times → aggregate
         <blockquote className="mt-8 border-l-2 border-gold pl-6 py-3">
           <p className="text-bone text-lg sm:text-xl font-light tracking-tight leading-snug">
             Most prediction sites have 1 secret engine.<br />
-            <span className="text-gold">We have 3 open ones.</span>
+            <span className="text-gold">We built 2 open ones · 1 in queue.</span>
           </p>
           <p className="mt-3 text-mute text-sm leading-relaxed">
-            「Displacement mission · 對標幹掉 玩運彩+報馬仔」 brand-pure 路徑 ·
-            他們 1 fake mystery model · 我們 3 transparent variants 各自可
-            audit · 訂閱解鎖 progression 是 commercial · methodology 不可
-            妥協是 brand IP。
+            Round 41 W-A · v0.3 從 DEV → LIVE(DEV PREVIEW · opt-in)·
+            「Displacement mission · 對標幹掉 玩運彩+報馬仔」 brand-pure 路徑
+            物理升級。 他們 1 fake mystery model vs ZONE 27 2 LIVE transparent
+            variants(v0.2 base + v0.3 Park Factor · 各自 lib/simulator-vN.ts
+            on GitHub 可 audit)+ 1 PLANNED Bayesian ensemble(v0.4)·
+            訂閱解鎖 progression 是 commercial · methodology 不可妥協是 brand
+            IP · per Lens Lifetime Pledge 永遠 viewable · 不 silently rotate。
           </p>
         </blockquote>
       </Section>

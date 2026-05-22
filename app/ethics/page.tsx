@@ -1,0 +1,334 @@
+import Link from "next/link";
+import type { Metadata } from "next";
+import Nav from "@/components/Nav";
+import Footer from "@/components/Footer";
+import RelatedReading from "@/components/RelatedReading";
+import FounderSignOff from "@/components/FounderSignOff";
+import ArticleMeta from "@/components/ArticleMeta";
+
+export const metadata: Metadata = {
+  title: "Ethics Policy · 8 binding commitments · ZONE 27",
+  description:
+    "Stratechery「About」 transplant · 8 ZONE 27 binding NOT-DO commitments signed Tim · displacement narrative against 玩運彩+報馬仔 tipsters direct · brand pledge protecting visitors from brand misbehavior · Pratfall + Costly Signaling + Disclosure Philosophy 三 axiom 同時 fire · 修改任何 commitment 需 30 天 /changelog 公告。",
+};
+
+// ── ZONE 27 · /ethics ────────────────────────────────────
+// Round 41 W-C · Agent H #5 ship · per [[feedback-no-waiting-rule]] 鐵律。
+//
+// Stratechery About page transplant pattern · Ben Thompson 6 binding ethics
+// commitments(no paid opinions / no individual stocks in covered cos / no
+// consulting / self-pay travel / public corrections commitment)expand to
+// ZONE 27 8 commitments displacement-mission-specific。
+//
+// Distinct from /membership/black-card Subscriber Compact:
+//   - Subscriber Compact = 3 line · 訂閱 path 上的 ethics
+//   - /ethics = 8 line · brand-wide ethics policy · visitor protection
+//     from brand becoming a tipster · displacement narrative direct
+//
+// Brand IP 物理 codify:
+//   - 倒置 SaaS · 廣告 + affiliate 是傳統 SaaS revenue · ZONE 27 倒置
+//     完全拒絕 · 訂閱費 = 整個 model
+//   - Pratfall + Costly Signaling · 8 binding NOT-DO commitments 每個都
+//     costly to break · 公開 = trust signal
+//   - Disclosure Philosophy · 延伸 /audit S05 「為什麼公開」 to brand
+//     ethics layer
+//   - displacement narrative · 玩運彩+報馬仔 結構性無法 ship 同 ethics
+//     page(他們所有 commercial 都 violate 這 8 條)
+//
+// Routing: /ethics · public · 37th visitor-discoverable route。
+// ─────────────────────────────────────────────────────
+
+const COMMITMENTS: { num: string; title: string; body: string; tier: "displacement" | "subscriber" | "brand"; }[] = [
+  {
+    num: "01",
+    title: "我不賣引擎預測給 bookmakers 或 scrapers",
+    body: "若我收到 offer 來自任何博彩平台 / data scraper / sportsbook 想授權 ZONE 27 引擎輸出 · 我會把 offer 內容 + 我的拒絕 publish 在 /changelog · 不私下交易 · 不簽 NDA。",
+    tier: "displacement",
+  },
+  {
+    num: "02",
+    title: "我永遠不接受 gambling-platform advertising / affiliate revenue",
+    body: "ZONE 27 不接 sportsbook 廣告 · 不在站上放 affiliate link 到 任何 betting platform · 不接「點擊轉換」 commission · 不收賠率/明牌引流費。",
+    tier: "displacement",
+  },
+  {
+    num: "03",
+    title: "我不接受任何形式的 paid recommendations",
+    body: "任何 sponsor wanting ZONE 27 to recommend their service · product · 球員 · 球隊 · 媒體 · 都會被公開拒絕 · 不接 paid placement · 不寫 sponsored content · 不收「我們公司很棒」型 fee。",
+    tier: "displacement",
+  },
+  {
+    num: "04",
+    title: "我不接受 data-licensing offers to sportsbooks",
+    body: "ZONE 27 lens output(Vibe Check · Park Factor · Pitcher Fatigue · Underdog · Bullpen · Matchup History · Win Probability)+ engine version 計算結果 永遠不 sell / license / API access 給任何 sportsbook OR gambling-adjacent business。",
+    tier: "displacement",
+  },
+  {
+    num: "05",
+    title: "我不接 CPBL 球隊 / 球員經紀 equity / consulting",
+    body: "ZONE 27 與 CPBL 球隊 / 球員 / 經紀 / agents 之間永遠沒有 financial 關係 · 不持任何隊伍 equity · 不接 consulting fee · 不收 endorsement · 任何 conflict of interest 都會公開 disclose 在 /audit。",
+    tier: "displacement",
+  },
+  {
+    num: "06",
+    title: "我永遠不跑 ads / affiliate / paid placement on ZONE 27",
+    body: "整個 ZONE 27 站上 · 0 廣告 · 0 affiliate link · 0 paid placement · 0 sponsored content · 0 partner promotion。 訂閱費(Founders 27 + BLACK CARD)是整個 revenue model · by design · per [[zone27-monetization-philosophy]]。",
+    tier: "subscriber",
+  },
+  {
+    num: "07",
+    title: "我每年 5 月 publish 全年收入 + 開銷 + subscriber count",
+    body: "每年 5/31 publish /annual/{year} report · 含全年收入 · 全年開銷 · BLACK CARD subscriber count · Founders 27 認領數 · 同 /audit S05 PRE-COMMIT pattern · 修改此 publish cadence 需 30 天 /changelog 公告。",
+    tier: "subscriber",
+  },
+  {
+    num: "08",
+    title: "我永遠不接 sportsbook conversion fee / referral commission",
+    body: "若 ZONE 27 visitor 從 ZONE 27 跳出去 register sportsbook account · ZONE 27 不收任何 referral commission · 不在 URL 加 tracking parameter · 不享 conversion fee。 visitor 的選擇是 visitor 自己的。",
+    tier: "displacement",
+  },
+];
+
+export default function EthicsPage() {
+  return (
+    <div className="flex flex-col flex-1 min-h-screen">
+      <Nav />
+
+      <main id="main">
+        {/* ── HERO ─────────────────────────────────── */}
+        <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pt-20 pb-12">
+          <div className="flex items-baseline gap-3 mb-4 flex-wrap section-reveal">
+            <p
+              lang="en"
+              className="font-mono text-gold text-[10px] tracking-[0.45em]"
+            >
+              / ETHICS POLICY · 8 binding NOT-DO commitments
+            </p>
+            <span
+              lang="en"
+              className="font-mono text-[9px] tracking-[0.3em] px-1.5 py-0.5 border border-gold/60 text-gold"
+            >
+              8 LINE · SIGNED · BINDING
+            </span>
+          </div>
+          <h1 className="text-4xl sm:text-5xl text-bone font-light tracking-tight max-w-3xl leading-[1.1]">
+            8 件 ZONE 27 <span className="text-gold">永遠不做</span> 的事
+          </h1>
+
+          <div className="mt-8 border-l-2 border-gold/60 pl-5 sm:pl-6 py-2 max-w-2xl">
+            <p className="text-bone text-lg sm:text-xl leading-relaxed">
+              <strong>玩運彩+報馬仔 不可能 ship 這頁</strong> · 因為他們的每
+              一條 revenue stream 都 violate 下面 8 條 · 公開等於商業自殺。
+            </p>
+            <p className="mt-3 text-mute text-base leading-relaxed">
+              ZONE 27 可以 ship · 因為訂閱費(Founders 27 + BLACK CARD)是
+              整個 revenue model · 您贏您輸我都一樣賺。
+            </p>
+          </div>
+
+          <div className="mt-6">
+            <ArticleMeta readingMin={4} />
+          </div>
+        </section>
+
+        <div className="mx-auto w-32 gold-line mb-12" />
+
+        {/* ── 01 COMMITMENTS ───────────────────────── */}
+        <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-16">
+          <p
+            lang="en"
+            className="font-mono text-gold text-[10px] tracking-[0.45em] mb-6"
+          >
+            / 01 · 8 COMMITMENTS · 簽 Tim · 2026-05-22
+          </p>
+
+          <ol className="space-y-6">
+            {COMMITMENTS.map((c) => (
+              <li
+                key={c.num}
+                className="border border-gold/30 bg-slate/30 p-5 sm:p-6 hover:border-gold/50 transition-colors"
+              >
+                <div className="flex items-baseline gap-4 mb-3">
+                  <span
+                    lang="en"
+                    className="font-mono text-gold text-[14px] tracking-[0.35em] tabular"
+                  >
+                    {c.num}
+                  </span>
+                  <span
+                    lang="en"
+                    className={`font-mono text-[9px] tracking-[0.3em] px-1.5 py-0.5 border ${
+                      c.tier === "displacement"
+                        ? "border-gold/60 text-gold"
+                        : "border-line/60 text-mute"
+                    }`}
+                  >
+                    {c.tier === "displacement"
+                      ? "DISPLACEMENT"
+                      : c.tier === "subscriber"
+                      ? "SUBSCRIBER PROTECT"
+                      : "BRAND"}
+                  </span>
+                </div>
+                <h3 className="text-bone text-lg sm:text-xl font-light tracking-tight mb-3 leading-snug">
+                  {c.title}
+                </h3>
+                <p className="text-mute leading-relaxed">{c.body}</p>
+              </li>
+            ))}
+          </ol>
+        </section>
+
+        {/* ── 02 WHY STRUCTURALLY NON-COPYABLE ──────── */}
+        <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-16 border-t border-line/40 pt-12">
+          <p
+            lang="en"
+            className="font-mono text-gold text-[10px] tracking-[0.45em] mb-6"
+          >
+            / 02 · WHY 玩運彩 + 報馬仔 STRUCTURALLY CANNOT SHIP THIS
+          </p>
+          <h2 className="text-2xl sm:text-3xl text-bone font-light tracking-tight mb-6 leading-tight">
+            這 8 條對他們是商業自殺 · 對我們是 <span className="text-gold">brand moat</span>
+          </h2>
+          <div className="space-y-4 text-mute leading-relaxed">
+            <p>
+              玩運彩 · 報馬仔 · sportsbook adjacents · LINE 老師生態 · 整個
+              台灣博彩附屬 service 經濟結構 violate 上面 1-5 + 8 共 6 條:
+            </p>
+            <ul className="space-y-2 pl-6">
+              <li className="flex gap-3 items-baseline">
+                <span className="font-mono text-loss/80 text-[10px] tracking-[0.25em]">▸</span>
+                <span>他們的 revenue model 直接 OR 間接 來自 sportsbook conversion fee + referral commission(violate #2 #8)</span>
+              </li>
+              <li className="flex gap-3 items-baseline">
+                <span className="font-mono text-loss/80 text-[10px] tracking-[0.25em]">▸</span>
+                <span>他們的 data partnership 跟 betting platform license 是核心 revenue(violate #1 #4)</span>
+              </li>
+              <li className="flex gap-3 items-baseline">
+                <span className="font-mono text-loss/80 text-[10px] tracking-[0.25em]">▸</span>
+                <span>他們的 ads / affiliate 是核心 monetization(violate #3 #6)</span>
+              </li>
+              <li className="flex gap-3 items-baseline">
+                <span className="font-mono text-loss/80 text-[10px] tracking-[0.25em]">▸</span>
+                <span>「明牌」 內容 + paid pick + 老師收費 = paid recommendations(violate #3)</span>
+              </li>
+            </ul>
+            <p className="pt-3">
+              <strong className="text-bone">ZONE 27 structurally 可以 ship</strong> ·
+              因為 incentive alignment 跟訪客在同一邊:
+            </p>
+            <ul className="space-y-2 pl-6">
+              <li className="flex gap-3 items-baseline">
+                <span className="font-mono text-gold/80 text-[10px] tracking-[0.25em]">▸</span>
+                <span>Founders 27 一次性 NT$ 2,700 終身 · 0 抽成</span>
+              </li>
+              <li className="flex gap-3 items-baseline">
+                <span className="font-mono text-gold/80 text-[10px] tracking-[0.25em]">▸</span>
+                <span>BLACK CARD NT$ 299/月 manual subscription · 5% creator share</span>
+              </li>
+              <li className="flex gap-3 items-baseline">
+                <span className="font-mono text-gold/80 text-[10px] tracking-[0.25em]">▸</span>
+                <span>引擎 FREE forever · 不 paywall predictions · 不藏 lens · 不 silently rotate engine</span>
+              </li>
+              <li className="flex gap-3 items-baseline">
+                <span className="font-mono text-gold/80 text-[10px] tracking-[0.25em]">▸</span>
+                <span>您贏您輸 ZONE 27 都一樣賺 · 跟您在同一邊 · 不在對立面</span>
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        {/* ── 03 PRE-COMMIT BINDING ────────────────── */}
+        <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-16 border-t border-line/40 pt-12">
+          <p
+            lang="en"
+            className="font-mono text-gold text-[10px] tracking-[0.45em] mb-6"
+          >
+            / 03 · PRE-COMMIT · BINDING RULES
+          </p>
+          <div className="border border-loss/30 bg-loss/5 p-5 sm:p-7">
+            <h3 className="text-bone text-lg sm:text-xl font-light tracking-tight mb-4 leading-snug">
+              修改任何 commitment 需 30 天 /changelog 公告
+            </h3>
+            <p className="text-mute leading-relaxed mb-4">
+              同 /audit S05 PRE-COMMIT pattern · /annual yearly publish
+              pattern · /membership/black-card/ledger 5 rules pattern。
+              此 /ethics page 上的 8 commitments 任一條 wording 改動 / 條件
+              加 / 條件砍 · 全部需要:
+            </p>
+            <ol className="space-y-2 list-decimal pl-6 text-mute leading-relaxed mb-4">
+              <li>30 天前 /changelog publish 公告 · 含 before/after diff + 理由</li>
+              <li>30 天 freeze window · visitor 可在此期間發 GitHub Issue 反對</li>
+              <li>30 天後新 commitment 生效 · /ethics page rewrite · git commit 為 source of truth</li>
+              <li>每次修改在 commit message 強制 cite issue link · audit trail 1-click 可達</li>
+            </ol>
+            <p className="font-mono text-mute/80 text-[10px] tracking-[0.25em] leading-relaxed">
+              ⚓ Costly Signaling 100× · pre-commit binding 比 post-hoc
+              rationalization strong 100× · Aronson 1966 + Spence 1973 ·
+              改 ethics 不是「動 page · 是動 brand 信仰 base」。
+            </p>
+          </div>
+        </section>
+
+        <FounderSignOff>
+          <p>
+            這頁是 ZONE 27 displacement mission 的 brand-IP layer 物理 codify ·
+            <strong>不是 marketing copy</strong>。 8 條是 hard commitments ·
+            違反任一條 = brand 信用 collapse · 即使違反 1 次 · /ethics page
+            上會出現「{COMMITMENTS[0].num} - VIOLATED YYYY-MM-DD · see
+            /changelog」 紅色 alert · 永久 visible · per /audit S05 PRE-COMMIT
+            「不刪不藏」 pattern。
+          </p>
+          <p>
+            Stratechery About page Ben Thompson 6 commitments · ZONE 27 8
+            commitments · 不是 incremental more · 是 displacement-specific
+            more · 第 1 + 2 + 4 + 5 + 8 是 ZONE 27-only 5 條 ·
+            <strong>玩運彩+報馬仔 永遠 ship 不出來</strong> · 因為他們 violate
+            這 5 條 == 他們整個 revenue model 構成。
+          </p>
+          <p>
+            修改此 page 5 rules 需 30 天 /changelog 公告 · 同 /audit S05
+            PRE-COMMIT pattern · Costly Signaling 100×。
+          </p>
+        </FounderSignOff>
+
+        <RelatedReading currentPath="/ethics" />
+
+        {/* ── FINAL CTA ────────────────────────────── */}
+        <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 py-16 text-center border-t border-line/40">
+          <p
+            lang="en"
+            className="font-mono text-gold text-[10px] tracking-[0.4em] mb-6"
+          >
+            ETHICS IS PHYSICS · NOT MARKETING.
+          </p>
+          <h3 className="text-3xl text-bone font-light tracking-tight mb-8">
+            8 條 binding · 0 wiggle room · 0 fine print。
+          </h3>
+          <div className="flex flex-wrap justify-center gap-3">
+            <Link
+              href="/membership/black-card"
+              className="inline-block px-6 py-3 border border-gold/50 text-gold font-mono text-[10px] tracking-[0.3em] hover:bg-gold/10 transition-colors"
+            >
+              → Subscriber Compact(3 line)
+            </Link>
+            <Link
+              href="/audit"
+              className="inline-block px-6 py-3 border border-gold/50 text-gold font-mono text-[10px] tracking-[0.3em] hover:bg-gold/10 transition-colors"
+            >
+              → /audit S05 · DISCLOSURE PHILOSOPHY
+            </Link>
+            <Link
+              href="/coverage"
+              className="inline-block px-6 py-3 border border-gold/50 text-gold font-mono text-[10px] tracking-[0.3em] hover:bg-gold/10 transition-colors"
+            >
+              → /coverage NEVER list
+            </Link>
+          </div>
+        </section>
+      </main>
+
+      <Footer />
+    </div>
+  );
+}

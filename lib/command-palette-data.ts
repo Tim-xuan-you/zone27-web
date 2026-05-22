@@ -227,6 +227,23 @@ export const COMMAND_ITEMS: CommandItem[] = [
     ],
   },
   {
+    label: "Ethics Policy · 8 binding NOT-DO commitments",
+    kicker: "/ethics",
+    path: "/ethics",
+    group: "信任文件",
+    keywords: [
+      "ethics",
+      "policy",
+      "commitments",
+      "倫理",
+      "承諾",
+      "stratechery",
+      "binding",
+      "玩運彩",
+      "displacement",
+    ],
+  },
+  {
     label: "27 種進階指標 glossary",
     kicker: "/glossary",
     path: "/glossary",

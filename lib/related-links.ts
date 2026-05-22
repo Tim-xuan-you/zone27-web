@@ -228,6 +228,23 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
       title: "Year 0 honest report · 0 paid · NT$ 0 rev",
     },
   ],
+  "/ethics": [
+    {
+      href: "/audit",
+      kicker: "audit",
+      title: "Model Report S05 · Disclosure Philosophy",
+    },
+    {
+      href: "/coverage",
+      kicker: "coverage",
+      title: "00 BRAND BOUNDARY · NEVER list",
+    },
+    {
+      href: "/manifesto",
+      kicker: "manifesto",
+      title: "倒置宣言 · 4 倒置之中 monetization",
+    },
+  ],
   "/roadmap": [
     {
       href: "/changelog",

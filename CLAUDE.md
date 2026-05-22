@@ -188,7 +188,7 @@ ZONE 27 與 **BOTTOM 27**(Tim 的棒球手遊)是雙生品牌:
 
 ---
 
-## 🗺️ 當前路由(v0.28 · Round 30 W5-W14 + Round 31-40 · 2026-05-22 · 36 visitor-discoverable · v0.29 等 Tim 拍板 milestone · +/calibration +/membership/black-card/ledger · 7 LIVE LENS CANVAS COMPLETE per R37/R38/R39/R40 · Win Probability + VibeCheck + ParkFactor + PitcherFatigue + Underdog + BullpenDepth + MatchupHistory · 「Most prediction sites have 1 fake angle. We BUILT 7 honest ones.」)
+## 🗺️ 當前路由(v0.28 · Round 30 W5-W14 + Round 31-41 · 2026-05-22 · 37 visitor-discoverable · v0.29 等 Tim 拍板 milestone · +/calibration +/membership/black-card/ledger +/ethics · 7 LIVE LENS CANVAS COMPLETE + 2 LIVE Engine variants(v0.2 + v0.3 R41 W-A)+ 1 PLANNED(v0.4 Bayesian)· 「Most prediction sites have 1 fake angle. We BUILT 7 honest ones.」 + 「Most prediction sites have 1 secret engine. We built 2 open ones.」)
 
 ```
 首頁 + 動線
