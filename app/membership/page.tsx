@@ -75,7 +75,7 @@ const TIERS: Tier[] = [
       "Founders 27 預售開放時優先通知",
       "不寄行銷信 · 不轉售 · 隨時 reply UNSUBSCRIBE 退出",
     ],
-    cta: { label: "↓ 加入 FREE TIER", href: "#waitlist" },
+    cta: { label: "→ 立即免費註冊 · 30 秒", href: "/login" },
     highlight: true,
   },
   {
@@ -91,7 +91,7 @@ const TIERS: Tier[] = [
       "Founders 27 LINE 群 access",
       "每週 Tim 工程筆記 full 版",
     ],
-    cta: { label: "Q3 通知我 → 加入 FREE TIER", href: "#waitlist" },
+    cta: { label: "Q3 通知我 · 先免費註冊", href: "/login" },
     highlight: false,
   },
   {

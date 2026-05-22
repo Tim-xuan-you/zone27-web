@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import RelatedReading from "@/components/RelatedReading";
 import FounderSignOff from "@/components/FounderSignOff";
 import ArticleMeta from "@/components/ArticleMeta";
+import MemberUnlocksGrid from "@/components/MemberUnlocksGrid";
 import { getSession } from "@/lib/supabase/server";
 import { readFollowsFromMeta } from "@/lib/follows";
 import { readNotesFromMeta } from "@/lib/notes";
@@ -150,6 +151,29 @@ export default async function MemberPage({
               不假裝 functionality 已存在。
             </p>
           )}
+
+          {/* ── Round 31 W-M · 5 UNLOCKS PROMINENT GRID ──
+              Tim canary fire「會員哩!還是沒辦法享用會員能使用的所有
+              功能呀!」 surface visibility blocker · 5 個 FREE TIER
+              unlocks 升 prominent · 取代「散在文字裡」 pattern。 上方
+              出現在 hero text 後 · welcome flash banner 上方 · 是
+              dashboard 主視覺。 logged-in / anonymous 兩 mode 同 grid · 後者點 → /login。 */}
+          <div className="mt-8">
+            <MemberUnlocksGrid
+              authenticated={!!session}
+              stats={
+                session
+                  ? {
+                      followsCount: followedMatches.length,
+                      notesCount: Object.keys(notesMap).filter((k) => notesMap[k]?.length > 0).length,
+                      calibrationDots: followedMatches.filter((m) => m.finalResult).length,
+                      daysSinceJoin,
+                      reservationNumber: null, // future · pull from get_my_reservation RPC
+                    }
+                  : undefined
+              }
+            />
+          </div>
 
           {/* ── Round 30 Wave 5 · Welcome flash + logout · only when session ── */}
           {session && (
