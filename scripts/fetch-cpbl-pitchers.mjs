@@ -28,60 +28,45 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(__dirname, "..");
 const OUTPUT = path.join(ROOT, "lib", "cpbl-pitchers.ts");
 
-const URL = "https://www.cpbl.com.tw/stats/recordall?kindcode=A&position=02&sortby=01";
+const BASE_URL = "https://www.cpbl.com.tw/stats/recordall?kindcode=A&position=02&sortby=01";
 
-console.log(`📥 Fetching ${URL}`);
+const HEADERS = {
+  // CPBL blocks non-browser UAs(returns 404)· must look like real Chrome
+  "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36",
+  "Accept": "text/html,application/xhtml+xml",
+  "Accept-Language": "zh-TW,zh;q=0.9,en;q=0.8",
+};
 
-const res = await fetch(URL, {
-  headers: {
-    // CPBL blocks non-browser UAs(returns 404)· must look like real Chrome
-    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36",
-    "Accept": "text/html,application/xhtml+xml",
-    "Accept-Language": "zh-TW,zh;q=0.9,en;q=0.8",
-  },
-});
-
-if (!res.ok) {
-  console.error(`❌ HTTP ${res.status}`);
-  process.exit(1);
+// Page 1 first · 看 "共 N 頁" 拿 total pages · loop。
+async function fetchPage(pageNum) {
+  const url = pageNum === 1 ? BASE_URL : `${BASE_URL}&page=${pageNum}`;
+  console.log(`📥 Fetching page ${pageNum} · ${url}`);
+  const res = await fetch(url, { headers: HEADERS });
+  if (!res.ok) throw new Error(`HTTP ${res.status} on page ${pageNum}`);
+  const html = await res.text();
+  console.log(`   Got ${html.length} bytes`);
+  return cheerio.load(html);
 }
 
-const html = await res.text();
-console.log(`   Got ${html.length} bytes`);
+// Get page 1 + extract total page count
+const $page1 = await fetchPage(1);
+const pageCountMatch = $page1.html().match(/共\s*(\d+)\s*頁/);
+const totalPages = pageCountMatch ? parseInt(pageCountMatch[1], 10) : 1;
+console.log(`   Total pages: ${totalPages}`);
 
-const $ = cheerio.load(html);
-
-// Reconnaissance: CPBL uses semantic divs + lists rather than <table>
-// per WebFetch recon. Let me try multiple selectors and find which works.
-// Common patterns: .RecordTable tr, .table-list tr, ol li, etc.
-
-// Try: list rows containing pitcher links
-const candidates = [
-  ".RecordTable tbody tr",
-  ".table-list tbody tr",
-  "table tbody tr",
-  ".stats-list li",
-  "tbody tr",
-];
-
-let rows = null;
-let usedSelector = null;
-for (const sel of candidates) {
-  const found = $(sel);
-  if (found.length > 0) {
-    rows = found;
-    usedSelector = sel;
-    console.log(`   Found ${found.length} rows via "${sel}"`);
-    break;
-  }
+// Collect rows from all pages
+const allCheerios = [$page1];
+for (let p = 2; p <= totalPages; p++) {
+  allCheerios.push(await fetchPage(p));
 }
 
-if (!rows || rows.length === 0) {
-  console.error(`❌ No rows found · tried ${candidates.join(", ")}`);
-  console.log("   First 1000 chars of HTML:");
-  console.log(html.slice(0, 1000));
-  process.exit(1);
+// Collect rows from all pages
+const allRows = [];
+for (const $page of allCheerios) {
+  const rowsOnPage = $page(".RecordTable tbody tr");
+  rowsOnPage.each((_, row) => allRows.push({ $: $page, row }));
 }
+console.log(`   Total rows across all pages: ${allRows.length}`);
 
 /**
  * @typedef {Object} Pitcher
@@ -99,7 +84,7 @@ const pitchers = [];
 // [28] K/9 (pre-computed) · [29] BB/9 (pre-computed)
 // HR/9 not in row · compute from HR / IP * 9
 
-rows.each((i, row) => {
+allRows.forEach(({ $, row }) => {
   const $row = $(row);
   const cells = $row.find("td");
 

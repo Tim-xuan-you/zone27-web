@@ -2,7 +2,7 @@
 // AUTO-GENERATED · DO NOT EDIT MANUALLY · run scripts/fetch-cpbl-pitchers.mjs to refresh.
 // Source:  cpbl.com.tw /stats/recordall?kindcode=A&position=02 (server-rendered)
 // Fetched: 2026-05-22 TPE
-// Pitchers: 15
+// Pitchers: 16
 //
 // Use `getPitcherStatsByName(name)` from lib/matches.ts to lookup real
 // stats by Chinese name. Falls back to hardcoded estimate if not found
@@ -236,6 +236,20 @@ export const cpblPitchers: CpblPitcherStats[] = [
     "bb9": 3.69,
     "hr9": 0,
     "whip": 1.13
+  },
+  {
+    "name": "鄭浩均",
+    "team": "中信兄弟",
+    "acnt": "0000002345",
+    "era": 6.17,
+    "ip": 35,
+    "k": 34,
+    "bb": 13,
+    "hr": 4,
+    "k9": 8.74,
+    "bb9": 3.34,
+    "hr9": 1.03,
+    "whip": 1.34
   }
 ];
 
