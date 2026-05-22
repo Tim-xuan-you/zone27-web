@@ -54,6 +54,28 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
       title: "倒置宣言 · 為何完整公開",
     },
   ],
+  // Round 52 W-A · Agent 3 #7 fix · /terms ORPHAN · 之前 RelatedReading
+  // 完全沒 entry · 每個 trust artifact 都有 3-link spokes 但 /terms 沒。
+  // Siblings:/ethics(8 binding NOT-DO · 法律 + ethics 軸線通)· /privacy
+  // (0 tracking · TOS + Privacy 標準成對)· /coverage(NEVER list · TOS
+  // scope statement 同邏輯)。
+  "/terms": [
+    {
+      href: "/ethics",
+      kicker: "ethics",
+      title: "8 binding NOT-DO commitments · 違反 = 紅字永久標",
+    },
+    {
+      href: "/privacy",
+      kicker: "privacy",
+      title: "0 tracking · 完整 anti-tracker inventory",
+    },
+    {
+      href: "/coverage",
+      kicker: "coverage",
+      title: "NEVER list · 永遠不涵蓋什麼",
+    },
+  ],
   // Round 51 W-D · /transparency NEW · audit aggregator · Anthropic pattern。
   // Siblings: /audit(parent trust artifact · model report)· /ethics(8
   // binding commitments · 同 transparency 軸線)· /steelman(5 strongest
@@ -221,6 +243,16 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
     },
   ],
   "/track-record": [
+    // Round 52 W-A · Agent 3 #10 fix · /track-record(global aggregate)→
+    // /member/calibration(personal mirror)cross-link · Endowment Effect +
+    // Loss Aversion psychology · 訪客看 global PROVED rate 後可對照 personal
+    // accuracy · conversion moment · 之前 /calibration 已 link · 但
+    // /member/calibration personal-mode 沒 cross-link from /track-record。
+    {
+      href: "/member/calibration",
+      kicker: "member/calibration",
+      title: "您的 personal mirror · 與 global aggregate 對照",
+    },
     {
       href: "/calibration",
       kicker: "calibration",
@@ -230,11 +262,6 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
       href: "/manifesto",
       kicker: "manifesto",
       title: "倒置宣言 · 為何公開戰績是品牌 IP",
-    },
-    {
-      href: "/audit",
-      kicker: "audit",
-      title: "Model Report · 全部假設公開",
     },
   ],
   "/calibration": [

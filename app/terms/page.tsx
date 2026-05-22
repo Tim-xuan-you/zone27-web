@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
+import RelatedReading from "@/components/RelatedReading";
 
 export const metadata: Metadata = {
   title: "Terms of Service — 我們對您的承諾,您對我們的同意",
@@ -238,6 +239,11 @@ export default function TermsPage() {
           閱讀隱私政策 →
         </Link>
       </section>
+
+      {/* Round 52 W-A · Agent 3 #7 fix · /terms 之前 ORPHAN · 無 sibling
+          links · 加 RelatedReading 連到 /ethics + /privacy + /coverage
+          完成 trust artifact connective tissue。 */}
+      <RelatedReading currentPath="/terms" />
 
       </main>
 

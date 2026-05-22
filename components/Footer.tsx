@@ -69,8 +69,13 @@ type FooterGroup = {
 //     物理 codify 到 footer layer
 const FOOTER_GROUPS: FooterGroup[] = [
   {
+    // Round 52 W-A · Agent 3 #8 fix · Footer PRODUCT column 升 column 1
+    // 是 R50 W-E ship 已修 · 但 visitor 沒 sense「why product first」 ·
+    // 加 enLabel「FOR FANS」 explicit framing · 對 hardcore baseball fan
+    // audience grammar 「我們先 surface 賽事 因為您是 fan 不是 engineer」 ·
+    // brand IP「audience-fans-not-engineers」 axiom 物理 codify 到 footer。
     label: "賽事 · 引擎",
-    enLabel: "PRODUCT",
+    enLabel: "FOR FANS",
     links: [
       // Round 50 W-E · 加 /matches + /matches/mlb 兩個 footer product
       // entries · 之前 footer 0 個賽事入口 · 訪客 scroll 到底 完全

@@ -108,6 +108,10 @@ export default function LedgerDeltaChip({ currentN }: Props) {
       className="inline-flex items-baseline gap-2 px-3 py-1.5 border border-gold/40 bg-gold/5 font-mono text-[10px] tracking-[0.22em] text-bone"
       title={`Ledger delta · last seen N=${state.stored.lastSeenN} on ${state.stored.lastSeenAt} · now N=${currentN}`}
       role="status"
+      // Round 52 W-A · Agent 2 #7 fix · WCAG 2.1 Level A 警告 title attr
+      // 對 screen reader 不可靠(browser may not expose)· 加 aria-label
+      // 明確 announce delta + baseline date · accessible 物理 codify。
+      aria-label={`Ledger 新增 ${delta} 場 · 自您上次造訪 ${state.stored.lastSeenAt} · 目前 N=${currentN}`}
     >
       <span
         lang="en"

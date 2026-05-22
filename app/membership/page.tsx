@@ -370,7 +370,11 @@ function TierCard({ tier }: { tier: Tier }) {
       <p className="font-mono text-mute text-[10px] tracking-[0.2em] mb-4">
         {tier.priceNote}
       </p>
-      <p className="text-mute text-xs sm:text-sm leading-relaxed mb-4 flex-grow">
+      {/* Round 52 W-A · Agent 2 #2 fix · 4-tier card desc text-xs sm:text-sm
+          無 height constraint · 414px viewport 字數差異(40-60 chars 各 tier)
+          造成 vertical rhythm 不齊 · 撞 perks list · 修 min-h-[4.5rem] 確保
+          所有 tier card desc 同高 · perks list 對齊 baseline。 */}
+      <p className="text-mute text-xs sm:text-sm leading-relaxed mb-4 flex-grow min-h-[4.5rem]">
         {tier.desc}
       </p>
       <ul className="space-y-1.5 mb-5 text-xs leading-relaxed list-none pl-0">
