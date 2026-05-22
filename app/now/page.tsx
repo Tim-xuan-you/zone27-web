@@ -33,9 +33,21 @@ export const metadata: Metadata = {
 // ─────────────────────────────────────────────────────
 
 const LAST_UPDATED = "2026-05-22";
-const CYCLE = "Round 28-30 · 2026-05-22 · 同日 26+ waves · 4-cut compression Wave 11";
+const CYCLE = "Round 28-31 · 2026-05-22 · TONIGHT'S 3 RECEIPTS + Savant bars + datestamped engine stamp";
 
 const SHIPPED_THIS_CYCLE: { title: string; body: string; href?: string }[] = [
+  // ── 🎨 Round 31 Wave B · Baseball Savant + Vercel datestamped pattern ──
+  {
+    title: "[R31 WB] 🎨 Baseball Savant percentile bars + Vercel datestamped EngineStamp",
+    body: "Agent research(2026 frontier 20 sites)deepest 2 patterns 同時 ship。 (1) Baseball Savant 風 percentile bar 移植到 /matches/[gameId] PitcherCard:5 plain StatRow → 5 StatPercentileBar · 紅藍 gradient 替成 ZONE 27 配色(冷金 elite → 骨白 mid → mute poor)· dot 大小 + gold glow 標 elite · TIER label 右側(ELITE / MID / REBUILD)· hardcore 棒球迷 1.2 秒識別 grammar(Statcast 是現代 baseball 最廣為人知的視覺標誌)。 CPBL league reference range 暫用估計(per /audit S02 ESTIMATION DISCLOSURE pattern · 任何 CPBL 數據工作者可發 PR 修正)。 (2) Vercel + Plausible 風 EngineStamp 元件 · 「ENGINE v0.2 · LOCKED YYYY-MM-DD · BUILD a1b2c3d」 datestamped trust signal · BUILD chip 直連 GitHub commit permalink(/audit BUILD chip 同 pattern)· 訪客一鍵 audit 現在 serving 的 code 真實 git history。 Apply 到 HeroLiveCard footer + TonightReceiptsCard footer + /track-record hero。 NEW components/StatPercentileBar.tsx + components/EngineStamp.tsx。 Build / Lint / TSC 三綠。",
+    href: "/matches/cpbl-260521-01",
+  },
+  // ── 🎫 Round 31 Wave A · TONIGHT'S 3 RECEIPTS multi-match Costly Signaling ──
+  {
+    title: "[R31 WA] 🎫 TONIGHT'S 3 RECEIPTS · multi-match Costly Signaling brand IP 物理時刻",
+    body: "今天 cpbl-260522-01/02/03 三場同晚 18:35 開賽 = ZONE 27 第一次「多場同晚 receipt loop」物理時刻。 N=1 → 22:30 後 N=4 · /track-record 直接 ×4 · /member/calibration 從 1 個 gold dot 跳到 4 個 trend-able dots。 到 2026 下次三場同日為止 · 今晚是最大的單日 brand IP credibility event。 Sharp call:homepage HeroLiveCard 從 single-match cinematic 升為 multi-match 3-card grid when 今日 ≥2 場。 NEW components/MiniMatchCard.tsx(緊湊 static-engine card · pre-locked prediction · 不 re-simulate · brand IP 防 sample-gaming defense)+ components/TonightReceiptsCard.tsx(phase-aware header copy + 3-card grid + cumulative track record footer N=X · ✓Y ✕Z → 22:30 後 +pending)。 lib/matches.ts 加 getTodayMatches() + getTrackRecordStats() helpers + parseHHMM export。 app/page.tsx switch:today ≥2 → multi · today ≤1 → existing single-match HeroLiveCard cinematic(保留 receipt-mode 單場 brand soul)。 Pre-existing lint fix:react-hooks/purity false-positive on async server component(Date.now in render)· 移到 computeDaysSinceJoin top-level helper · /member/calibration 砍 unused globalN。",
+    href: "/",
+  },
   // ── 🗑️ Round 30 Wave 11 · Agent-research-driven 4-cut compression ──
   {
     title: "[R30 W11] 🗑️ Agent UX research → 4 cuts · 「one tense per page」axiom 寫死",
@@ -236,6 +248,21 @@ const SHIPPED_THIS_CYCLE: { title: string; body: string; href?: string }[] = [
 ];
 
 const DISCOVERED_THIS_CYCLE: { title: string; body: string }[] = [
+  // ── Round 31 Wave A discovery · multi-game-day brand IP physics ──
+  {
+    title: "[R31 WA] 多場同日 = 單日 brand IP credibility event 最大窗口 · single-match cinematic 不夠用",
+    body: "Round 30 W1 修了 getFeaturedMatch priority(receipt > future)· 為的是「Tim ingest 後首頁顯示 receipt」 cinematic 不被 future preview 蓋掉。 但那個 fix 預設「同時 only 1 場」。 今天首次出現「同晚 3 場同步開賽 + 1 場昨晚 receipt」 = single-match HeroLiveCard 不能 cover · 必須 multi-match grid。 Sharp call:single-match cinematic 對 receipt-mode 1 場 完美 · 對 多場同日 結構不適 · 兩個 different brand IP moment。 Lesson 寫進 axiom:cinematic = single match · grid = ≥2 matches 同日 · 不是「升級」是「不同 brand IP moment 用不同 visual treatment」。 future 任何 multi-game scenario(MLB doubleheader · CPBL 週末三連戰 · 跨聯盟同日)都 auto-route 到 TonightReceiptsCard · 不需 case-by-case judge。",
+  },
+  // ── Round 31 Wave B discovery · Statcast bars 是現代棒球 universal visual language ──
+  {
+    title: "[R31 WB] Baseball Savant percentile bar = 2026 baseball stat universal visual grammar",
+    body: "Agent research surface:Savant 風 percentile bar 是 2017+ MLB / 2020+ CPBL 球迷可被假設為 universal recognizable 的 visual idiom · 任何 Statcast tweet · 任何 broadcast 後製 · 任何 fantasy app 都用此 grammar。 ZONE 27 之前用 plain label-value StatRow = brand grammar 從 hardcore 球迷視角看「外行」(像 Google sheets 不像 Baseball Savant)。 Sharp call:不是「加 visual flourish」 · 是「對齊 audience 共通語言」。 平民 fan grammar match 是 brand IP「audience = hardcore 球迷不是工程師」 axiom 的物理產出。 Lesson 寫進 axiom:任何 stat 顯示 default 走 percentile bar(gold-gradient + tier label) · plain label-value 只在 ENGINE INTERNAL data(non-visitor-facing) 或 deep audit docs(/audit S02 ESTIMATION DISCLOSURE 那種 explainer)使用。 audience-grammar match is non-negotiable for hardcore fan brand.",
+  },
+  // ── Round 31 Wave B discovery · BUILD chip 不該只 live on /audit ──
+  {
+    title: "[R31 WB] BUILD chip 不該只 live on /audit · trust signal 散布到 every probability surface 才完整",
+    body: "/audit 的 BUILD chip(commit hash + permalink)是 Round 2 ship 的 brand-IP-defining trust signal · 但只 lived on /audit。 訪客在首頁看 engine output · 沒有 1-click audit trail 到 git 真實。 Sharp call:既然 BUILD chip 是 brand IP signal · 它該 surface 在 every probability output 旁 · 不是只 /audit deep page。 W-B EngineStamp 元件把 ENGINE v0.2 + LOCKED date + BUILD chip 統一打包 · apply 到 homepage HeroLiveCard / TonightReceiptsCard / /track-record · 任何 visitor 看 engine output 都 1-click 可達 GitHub commit。 Lesson:trust signal 應該散布到 user-facing surface · 不該藏在 deep-only doc。 W-B 把「方法公開」從 doc-claim 升 every-surface-physical-proof。 audit-by-default ≠ audit-by-deep-page-click。",
+  },
   // ── Round 30 Wave 11 discovery · canonical axiom ──
   {
     title: "[R30 W11] BRAND AXIOM · 「one tense per page」· complexity 不是 section 問題是 tense 問題",

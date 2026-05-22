@@ -188,7 +188,7 @@ ZONE 27 與 **BOTTOM 27**(Tim 的棒球手遊)是雙生品牌:
 
 ---
 
-## 🗺️ 當前路由(v0.28 · Round 30 W5 加 /login + /auth · Phase 1 magic link auth · 2026-05-21 late evening · v0.29 等 Tim 拍板 milestone)
+## 🗺️ 當前路由(v0.28 · Round 30 W5-W14 + Round 31 W-A/W-B · 2026-05-22 · v0.29 等 Tim 拍板 milestone)
 
 ```
 首頁 + 動線
@@ -248,12 +248,18 @@ Member + Ops + Auth(Round 29-30)
                          Phase 2 Q3+ TapPay · Phase 3 Q4+ CMS)· Round 30 Wave 2A
                          加 3-col Apple/Spotify/ZONE 27 brand comparison + epistemic
                          mirror CTA
-/member/calibration      **NEW Round 30 W2B** · agent-research deepest call · sabermetric
-                         reliability diagram(45° line)· ZONE 27 是唯一發布會員自己
-                         calibration drift 的高端 sports 品牌 · Pratfall + Costly
-                         Signaling axiom 同時 fire · 現在 N=1(cpbl-260521-01 PROVED
-                         · 第一個 gold dot 落點 65 bin)· personal 版 Phase 2 雲端
-                         sync 後接 · inline SVG 0 deps · 1d revalidate
+/member/calibration      **NEW Round 30 W2B + W10 personal mode** · agent-research
+                         deepest call · sabermetric reliability diagram(45° line)·
+                         ZONE 27 是唯一發布會員自己 calibration drift 的高端 sports
+                         品牌 · Pratfall + Costly Signaling axiom 同時 fire ·
+                         Round 30 W10 加 server-side personal mode(filter finalized
+                         by user follows)· chip 切 ✓ YOUR · N=X / GLOBAL · N=X ·
+                         現在 N=1(cpbl-260521-01 PROVED · 第一個 gold dot 落點 65
+                         bin)· inline SVG 0 deps · 1d revalidate
+/member/submit           **NEW Round 30 W10** · FREE TIER 投稿 · session-gated form ·
+                         title + body · POST /api/submit · sendSubmissionNotification
+                         via Resend → Tim Gmail · 0 server-side archive · pure Tim-
+                         curate model · 1/週 cadence · Stratechery Guest Post pattern
 /login                   **NEW Round 30 W5** · Phase 1 magic link auth · Tim Pratfall
                          canary 3rd fire 之後從 Q3 promise 加速到 NOW · /login email
                          入口 + Supabase signInWithOtp · 沒密碼 / 沒 OAuth / 沒 social
@@ -277,9 +283,9 @@ OG + favicon + chrome
 /loading.tsx             Brand-pure suspense skeleton(Round 2)
 ```
 
-## ⚙️ Global components(Round 2/5/12/28)
+## ⚙️ Global components(Round 2/5/12/28/30/31)
 
-- `<CommandPalette />` · 全站 ⌘K/Ctrl-K palette · **29 visitor-discoverable routes** 索引(Round 30 W5 加 /login Phase 1 auth 後 · /admin · /auth/* 不在 palette)(layout.tsx)
+- `<CommandPalette />` · 全站 ⌘K/Ctrl-K palette · **30 visitor-discoverable routes** 索引(Round 30 W10 加 /member/submit 後 · /admin · /auth/* 不在 palette)(layout.tsx)
 - `<CmdKTrigger />` · 雙 variant:
   - `variant="chip"` (default) · Nav 右上方 ⌘K 提示按鈕(desktop)
   - `variant="icon"` (Round 12) · Nav mobile 2nd row 右側 ⌕ 圖示(palette 全站可達)
@@ -289,6 +295,13 @@ OG + favicon + chrome
 - `<FounderSignOff />` (Round 28) · 3-sentence first-person paragraph + signed `— TIM · FOUNDER · {date}` · 5 trust docs(/audit · /methodology · /coverage · /track-record · /roadmap)+ /now · patio11/DHH pattern
 - `<ArticleMeta />` (Round 28) · Reading-time chip + optional N= SAMPLE DEBT chip(Z27 LEXICON UI primitive · threshold 30 Bill James 慣例)· /methodology · /coverage · /roadmap · /track-record · /now · /member · /admin
 - `<MemberDashboardPreview />` (Round 29) · client component · 把 visitor localStorage sim history 用「您的引擎時間軸」 framing 顯示(Endowment Effect)· 4 sections · 4 cognitive bias driven · 用於 /member · SSR-safe mount flag pattern
+- `<FollowMatchButton />` (Round 30 W6) · client · 3 states(loading / anonymous / ready)· 用 Supabase auth.users.user_metadata.followed_matches JSONB 存 · 0 migration · /matches/[gameId] + /member 整鏈
+- `<MatchNoteEditor />` (Round 30 W9) · client · 私人 match note(280字)· 也用 user_metadata · /matches/[gameId] logged-in only
+- `<FounderPickForm />` (Round 30 W12) · client · Founders 27 Patek allocation pattern · 選 #008-#270 → public RESERVED · 等 Tim apply migration 0002
+- `<MiniMatchCard />` (Round 31 W-A) · compact static-engine card · pre-locked prediction · 不 re-simulate · brand IP 防 sample-gaming
+- `<TonightReceiptsCard />` (Round 31 W-A) · phase-aware multi-match grid · header + 3 MiniMatchCards + cumulative track record footer · 當日 ≥2 場 替代 HeroLiveCard
+- `<StatPercentileBar />` (Round 31 W-B) · Baseball Savant 風 gradient bar · 冷金 → 骨白 → mute · TIER label · 5 stat presets · CPBL league reference range
+- `<EngineStamp />` (Round 31 W-B) · Vercel + Plausible datestamped trust signal · ENGINE v0.2 · LOCKED {date} · BUILD {sha} · BUILD chip 直連 GitHub commit
 
 ## 📦 技術棧
 

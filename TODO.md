@@ -1,20 +1,48 @@
 # 📋 ZONE 27 · Owner Pending Actions
 
-> Tim 待動作清單 · 最後更新 2026-05-21 evening(Round 29 Wave 7 收盤)
-> 從 2026-05-19 晚上(DAY 1)→ 2026-05-21 evening · 共 ~70 commits
+> Tim 待動作清單 · 最後更新 2026-05-22(Round 31 Wave B 收盤)
+> 從 2026-05-19 晚上(DAY 1)→ 2026-05-22 · 共 ~90+ commits
 >
-> **最新狀態(Round 28+29 evening 收盤 · 11 waves today):**
-> 27 visitor + 1 noindex routes · 18 OG · 22 components · v0.28
-> Footer chip bump ✅ DONE Round 28 · v0.29 等 Tim 拍板 milestone(per
+> **最新狀態(Round 30 W1-W14 + Round 31 W-A/W-B 收盤 · 2026-05-22):**
+> 30 visitor + 1 noindex routes · 18 OG · 30 components · v0.28
+> Footer chip 仍 v0.28 等 Tim 拍板 milestone(per
 > brand「版本是 brand decision · 不是 docs sync 副作用」discipline)
 >
-> **Tim 仍 pending 親手動作:**
+> **Tim 仍 pending 親手動作(2026-05-22):**
 > - ② Resend ✅ DONE Round 16(production · Gmail Inbox 已驗收)
 > - ③ 品牌域名 · Tim-cued only(per [[feedback_zone27_domain_deferred]])
-> - ⑤ CPBL ingest ✅ **DONE 2026-05-21 ~22:30 TPE** · cpbl-260521-01 · 統一 2:6 富邦
->   · ENGINE PROVED ✓ · /track-record N=0→N=1 · FirstReceiptHero cinematic 自動 fire
->   · /member/calibration 第一個 gold dot 落點(bin 65 · favoriteActualPct=100%)
+> - ⑤ CPBL ingest ✅ DONE 2026-05-21 cpbl-260521-01 · 統一 2:6 富邦 · ENGINE PROVED ✓
+>   - 🎯 **TONIGHT 22:30+ TPE** · 3 場 cpbl-260522-01/02/03 收驗 receipt · N=1→N=4
+>   - Tim 截 3 場 box score → 貼 Claude → ingest into lib/matches.ts
 > - ⑥ K/BB profile screenshot · optional · 升 estimate 為真實值
+> - ⏳ **Apply migration 0002 founder_reservations**(5 分 Supabase Studio)·
+>      unblocks /leaderboard FounderPickForm Patek allocation 預訂功能
+> - ⏳ **Supabase email rate limit fix**(2/hr free-tier 卡 · disable
+>      confirmation OR custom SMTP via Resend · per docs/SUPABASE-SETUP.md)·
+>      unblocks 真實會員規模化註冊
+> - ⏳ Tim signature PNG(10 分 · Founders 27 launch prereq 3)
+> - ⏳ Bank info 4 fields(5 分 · Founders 27 launch prereq 1)
+> - ⏳ TapPay public posting · BLACK CARD 訂閱 code · 需 Tim 明示 TIER 2 cost 同意
+
+---
+
+## 🚀 Round 31(2026-05-22)· TONIGHT'S 3 RECEIPTS + Savant + EngineStamp
+
+**Wave A · TONIGHT'S 3 RECEIPTS multi-match Costly Signaling · commit f99f5f1**
+
+今天 cpbl-260522-01/02/03 三場同晚 18:35 開賽 = ZONE 27 第一次「多場同晚 receipt loop」物理時刻。 N=1 → 22:30 後 N=4 · /track-record 直接 ×4。 Sharp call:homepage HeroLiveCard 從 single-match cinematic 升為 multi-match 3-card grid when 今日 ≥2 場。 NEW components:`MiniMatchCard.tsx`(緊湊 static-engine card · pre-locked · 不 re-simulate · brand IP 防 sample-gaming defense)+ `TonightReceiptsCard.tsx`(phase-aware header + 3-card grid + cumulative track record footer)。 `lib/matches.ts` 加 `getTodayMatches()` + `getTrackRecordStats()` + `parseHHMM` export。
+
+**Wave B · Baseball Savant bars + Vercel datestamped EngineStamp · commit 1ae6a1d**
+
+Agent visual research(2026 frontier 20 sites)deepest 2 patterns:
+- `StatPercentileBar.tsx` · Savant 風 gradient bar · 冷金 elite → 骨白 mid → mute poor · TIER label · 5 stat presets · 替換 /matches/[gameId] PitcherCard 5 plain StatRow · hardcore 棒球迷 1.2 秒識別 grammar
+- `EngineStamp.tsx` · Vercel + Plausible datestamped trust signal · ENGINE v0.2 · LOCKED YYYY-MM-DD · BUILD a1b2c3d · BUILD chip 直連 GitHub commit · apply 到 HeroLiveCard + TonightReceiptsCard + /track-record
+
+Pre-existing lint fix:react-hooks/purity false-positive on async server component · `Date.now()` in /member render 移到 `computeDaysSinceJoin` helper · /member/calibration 砍 unused globalN。
+
+Build / Lint / TSC 三綠 ✓ · Auto-push per [[feedback_auto_push_zone27]]。
+
+---
 
 ---
 
