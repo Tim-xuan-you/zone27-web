@@ -75,11 +75,15 @@ const FOOTER_GROUPS: FooterGroup[] = [
       // Round 50 W-E · 加 /matches + /matches/mlb 兩個 footer product
       // entries · 之前 footer 0 個賽事入口 · 訪客 scroll 到底 完全
       // 找不到「今日 CPBL」。 修。 Order priority:今日賽事 > MLB > 引擎 >
-      // 早報 > GitHub。
+      // 早報 > GitHub > RSS。
       { label: "今日 CPBL 賽事", href: "/matches" },
       { label: "MLB · 即時資料", href: "/matches/mlb" },
       { label: "蒙地卡羅實驗室", href: "/lab" },
       { label: "每日早報", href: "/signal-board" },
+      // Round 51 W-E · Atom RSS /feed.xml ship · 給 hardcore fan RSS reader
+      // audience subscribe · 同 Stratechery / FanGraphs / Baseball Savant
+      // pattern · 0 tracking · client-pulled · 不靠 email。
+      { label: "RSS · Atom feed", href: "/feed.xml", external: true },
       {
         label: "GitHub 開源",
         href: "https://github.com/Tim-xuan-you/zone27-web",

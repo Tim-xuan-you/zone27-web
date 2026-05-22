@@ -64,6 +64,18 @@ export const metadata: Metadata = {
     title: "ZONE 27 — We Don't Guess. We Compute.",
     description: "為硬核棒球迷打造的暗黑黃金級數據俱樂部 · 270 finite founders",
   },
+  // Round 51 W-E · /feed.xml Atom RSS discovery · <link rel="alternate"
+  // type="application/atom+xml"> in HTML head · 訪客 RSS reader auto-detect
+  // feed URL when visiting any page · 同 Stratechery / FanGraphs / Baseball
+  // Savant standard。 0 tracking · client-pulled subscription · brand IP
+  // 「audience-fans-not-engineers」 axiom 物理 codify · 不靠 email。
+  alternates: {
+    types: {
+      "application/atom+xml": [
+        { title: "ZONE 27 · Craft Journal", url: "/feed.xml" },
+      ],
+    },
+  },
 };
 
 export default function RootLayout({

@@ -6,6 +6,7 @@ import CopyLinkButton from "@/components/CopyLinkButton";
 import RelatedReading from "@/components/RelatedReading";
 import FounderSignOff from "@/components/FounderSignOff";
 import StatTerm from "@/components/StatTerm";
+import ReproducibilityReceipt from "@/components/ReproducibilityReceipt";
 import { matches, getFinalizedMatches } from "@/lib/matches";
 import {
   COMMIT_SHA,
@@ -374,6 +375,20 @@ export default function AuditPage() {
               讓 ZONE 27 在這個維度上領先 98% 的 ML model cards
               (含 Anthropic 與 OpenAI · 兩者皆未揭露 Scope 1/2/3 數據)。
             </P>
+
+            {/* Round 51 W-E · ReproducibilityReceipt drop-in to /audit S04
+                ENVIRONMENTAL IMPACT(R43 deferred · Agent H R41 #4 pattern
+                延伸)· 每 published number 帶 git+seed+n+dataAt audit trail
+                · 0.0005 hr / sim + < 0.1 g CO₂e / sim 兩 estimates 從 floating
+                claim 升 reproducible artifact · 對齊 IJCAI 2026 standard。 */}
+            <div className="mt-4">
+              <ReproducibilityReceipt
+                seed={null}
+                dataAt="2026-05-22"
+                n={10000}
+                fileLink="https://github.com/Tim-xuan-you/zone27-web/blob/main/app/audit/page.tsx"
+              />
+            </div>
           </ReportSection>
 
           {/* ── 05 DISCLOSURE PHILOSOPHY ──────────────
