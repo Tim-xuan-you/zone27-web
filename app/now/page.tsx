@@ -33,9 +33,27 @@ export const metadata: Metadata = {
 // ─────────────────────────────────────────────────────
 
 const LAST_UPDATED = "2026-05-22";
-const CYCLE = "Round 28-33 · 2026-05-22 · 多 wave 大 push · Tim 9+ canary fires brand-pivot · 量身 prediction-seeking audience · ConfidenceStars 1-5 ★ + AI prominence marketing + 「不做 list」 declarative absence + BLACK CARD repricing 499→299 + WCAG AA contrast bumps + /annual/2026 Year 0 honest report + Agent A subscription patterns + Agent B tech audit";
+const CYCLE = "Round 28-34 · 2026-05-22 · 多 wave 大 push · Tim 11+ canary fires brand-pivot displacement mission · 量身 prediction-seeking audience · ConfidenceStars 1-5 ★ 全鏈 4 surfaces + AI prominence marketing + 「不做 list」 + BLACK CARD repricing 499→299 + WCAG AA contrast + /annual/2026 Year 0 + OG card + next.config.ts production-ready";
 
 const SHIPPED_THIS_CYCLE: { title: string; body: string; href?: string }[] = [
+  // ── 🛡️ Round 34 W-C · next.config.ts production-ready ──
+  {
+    title: "[R34 WC] 🛡️ next.config.ts 升 production-ready · Agent B Finding #5 ship · 0 visual change",
+    body: "Agent B technical audit Finding #5 HIGH severity ship · next.config.ts 從 empty stub 升 production-ready · 3 sections add:(1) Image optimization remote patterns(MLB API + CPBL stats · future-proof Round 35+)·(2) OG image cache headers /:path*/opengraph-image · Cache-Control public max-age=86400 immutable · 19 custom OG cards 全鏈受惠 · social crawler 不 re-render · Vercel CPU 節省 ·(3) Global security headers defense-in-depth · X-Frame-Options DENY + X-Content-Type-Options nosniff + Referrer-Policy strict-origin-when-cross-origin + Permissions-Policy 0 camera/mic/geo/cohort(對齊 0 tracking axiom 延伸 browser permission layer)。 不開 experimental.reactCompiler(Next.js 16.2.6 unstable · 需 Tim explicit OK · brand-axiom-level)。 OWASP top 10 baseline defense 對齊 Tim「任何一點缺陷都有可能被攻擊」 directive。",
+    href: "/",
+  },
+  // ── 📊 Round 34 W-B · /annual/2026 OG image ──
+  {
+    title: "[R34 WB] 📊 NEW /annual/2026 OG image · 補 R33 W-E shareability gap",
+    body: "R33 W-E ship /annual/2026 但漏 OG image · trust artifact shareability gap · per Tim「驚艷全世界吧」 directive。 NEW app/annual/2026/opengraph-image.tsx · YEAR 0 · PRE-LAUNCH · HONEST EMPTY STATE badge + 4-col stats(0 PAID SUBS · 0 REVENUE NT$ · 7/270 FORGED · 1 PROVED N=)+ punchline「Most SaaS hide their ARR. We publish Year 0 NT$ 0.」 同 /track-record + /founders/ledger inversion pattern · 三 trust artifact OG card 統一 punchline 結構。",
+    href: "/annual/2026",
+  },
+  // ── 🤖 Round 34 W-A · ConfidenceStars 補 homepage hero + tonight grid ──
+  {
+    title: "[R34 WA] 🤖 ConfidenceStars 補 HeroLiveCard + MiniMatchCard · fill R33 W-A homepage promise gap",
+    body: "R33 W-A 只 ship 2 surfaces(/matches/[gameId] + /signal-board)· 漏 homepage hero + tonight grid · 是 R32 W-C OTP path 反向 over-promised UI pattern(homepage 寫 promise 必須兌現)。 Apply ConfidenceStars 2 more surfaces:(1) HeroLiveCard · single-match hero · inline variant 加在 UncertaintyStripe 下方 · brand IP「靜態 lock vs 動態 converge」 dual signal(Live Monte Carlo % = visitor 瀏覽器即時運算 open methodology · Static ★ = 賽前 locked engine confidence costly signaling pre-locked at ingest time 不可 game retroactively · 兩個並排 = brand IP「方法公開 · 同時 lock-in」 物理產出)·(2) MiniMatchCard · multi-match grid · inline variant · 球迷 grammar 1.2 秒識別比 plain {N}/100 更 fast。 ConfidenceStars 全鏈 4 surfaces(/matches/[gameId] + /signal-board + HeroLiveCard + MiniMatchCard)· displacement mission 對 玩運彩+報馬仔:他們「大師明牌 個人 tipster」 + 「贏截圖 / 輸刪文 retroactive curation」 vs ZONE 27「ENGINE 信號強度 mechanical」 + 「pre-locked locked-in ingest time」 + 「retroactive 不能 game」 = costly signaling 直接 reverse。",
+    href: "/",
+  },
   // ── 📊 Round 33 W-E · /annual/2026 Year 0 honest report ──
   {
     title: "[R33 WE] 📊 NEW /annual/2026 · Year 0 honest pre-launch report · radical transparency · 4 axiom 同時 fire",
