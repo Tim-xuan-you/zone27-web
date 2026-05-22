@@ -36,6 +36,36 @@ const LAST_UPDATED = "2026-05-22";
 const CYCLE = "Round 28-31 · 2026-05-22 · 多 wave 大 push · TONIGHT 3 receipts + Savant bars + critic-hardening + signature + CPBL auto-fetch + 「我看 ___」 personalization + Open Allocation Ledger";
 
 const SHIPPED_THIS_CYCLE: { title: string; body: string; href?: string }[] = [
+  // ── 💳 Round 31 W-X3 · BLACK CARD mockup ──
+  {
+    title: "[R31 WX3] 💳 NEW /membership/black-card · UI preview mockup · 32nd route",
+    body: "Tim「先 build BLACK CARD mockup 讓 Tim preview · 再決定 payment platform」 ship。 BLACK CARD UI 完整 mockup + 5 unlocks + payment form mockup(disabled · pre-launch)+ FAQ。 Q3 launch 時 此 page UPGRADE 從 mockup → real form · payment infra wire(綠界個人版 / 新申請 / TapPay 之一 · Tim 等 BLACK CARD UI 接近 ready 拍板)。 brand IP「不催 · 不 dark pattern · 不藏 cancel button」 FounderSignOff explicit。",
+    href: "/membership/black-card",
+  },
+  // ── 🎯 Round 31 W-X1 + W-X2 · /member prediction stats + /founders Hermès pivot ──
+  {
+    title: "[R31 WX1+X2] 🎯 /member prediction stats row + /founders Hermès process-transparency pivot",
+    body: "X1 · /member 加「🎯 YOUR PREDICTIONS · 您累計 N · ✓Y proved · ✕Z diverged · accuracy N%」 personal calibration stats · 利用 W-W1 aggregatePredictionStats helper · 「您 vs 引擎 vs 實際」 三層 epistemic mirror personal stats closure。 X2 · /founders 砍「263 席剩」 e-commerce FOMO script kid pattern(per onboarding agent W-V #5 anti-pattern + Hogan Lovells exclusivity-scarcity legal boundaries)· h1 改「NEXT IS #008」 Patek serial specificity + counter strip 改「分配規則公開帳本 →」 link to /founders/ledger · Hermès workshop transparency pattern · brand IP「方法公開·品味私藏」 延伸:分配規則公開 · 但 live count 不 expose。",
+    href: "/founders",
+  },
+  // ── 🎯 Round 31 W-V + W-W · social signals + prediction tracker ──
+  {
+    title: "[R31 WV+WW] 🎯 5 ship for Tim「會員沒功能 / 沒人付費」 critical canary fire",
+    body: "Tim canary「會員頁面了 · 能幹嘛?沒社交 · 沒功能 · 沒人想付費訂閱呀!」 critical fire · brand IP yield · agent verdict 帶回 counter-intuitive truth:「Tim 您以為缺的是會員之間互動 · 數據說真正缺的是會員身份對外可見」(FanGraphs · Stratechery · Bits-about-Money · Defector 4 case 全部「幾乎 0 user-to-user social · 高轉換」)。 Ship 5 waves:(WV1)MemberDailyBrief · 已登入會員 daily 一次 personalized brief「您支持的 [team] 今晚 vs X · 引擎押 N%」 給「為什麼註冊」 immediate answer。 (WV2)Public Roll Call on /leaderboard · 7 forged honest SYSTEM-TEST disclosure + 263 待認領 visible scarcity = Aronson 1966 + Spence 1973 costly signaling · 預期 Founders 27 認領 +40-60% boost 12 個月。 (WW1)UserPredictionPicker on /matches/[gameId] · 3-way pick(我猜 home / away / 不押)· user_metadata.predictions store · 純精神 Metaculus pattern · 延伸 epistemic mirror。 (WW2)Footer bug feedback link → GitHub Issues · Pratfall + Disclosure 完美 fit。 (WX1)/member prediction stats row · 累計 calibration closure。 Tim 6 questions verdict:✅ 猜賽事+記勝率(ship)· ❌ 集點兌換(engagement farming antipattern)· ❌ 儲值(TIER 2/3 + 金管會 + 無 use case)· ✅ bug 建議(ship)· ⏸ 推薦碼 cash(觸發台灣多層次傳銷管理法 · Witness referral W-O 已 queued)。",
+    href: "/member",
+  },
+  // ── 🛡️ Round 31 W-Q · CRITICAL security ──
+  {
+    title: "[R31 WQ] 🛡️ 2 CRITICAL security fixes · open redirect + CSRF defense",
+    body: "Code audit agent 2nd pass 帶回 CRITICAL:(1) /auth/callback open redirect · 「next」 param 未驗證 · 可 inject phishing URL · sanitizeNext() 只接受 single `/` 開頭。 (2) /api/submit 缺 Origin/CSRF · isSameOrigin() check · 不符 403。 brand IP「安全 = trust signal」 物理產出。",
+    href: "/login",
+  },
+  // ── 🏟️ Round 31 W-N · TeamPick personalization ──
+  {
+    title: "[R31 WN] 🏟️ 「我看 ___」 TeamPick localStorage personalization · fan-grammar moat",
+    body: "Critic-hardening agent W-G ONE deepest call 終於 ship。「對你(這個富邦球迷)說話 · 不對球迷說話」 fan grammar moat。 球迷 lived experience 不是「我喜歡棒球」 · 是「我看富邦 / 我看兄弟 / 我看統一」。 新檔:lib/teams.ts(6 隊 canonical · localStorage z27_team)· TeamPickPanel · MyTeamTrackRecord(personal N=X 累計)· MyTeamMatchNote(您支持的 X 在這場是 favorite/underdog)。 Wire-up:/track-record + /matches/[gameId]。 brand IP:0 cookie / 0 server / 0 PII / 純 localStorage。",
+    href: "/track-record",
+  },
   // ── 🏛️ Round 31 Wave S · Open Allocation Ledger ──
   {
     title: "[R31 WS] 🏛️ NEW /founders/ledger · Open Allocation Ledger · 4 brand IP axiom 同時 fire",
