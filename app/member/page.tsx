@@ -6,6 +6,7 @@ import RelatedReading from "@/components/RelatedReading";
 import FounderSignOff from "@/components/FounderSignOff";
 import ArticleMeta from "@/components/ArticleMeta";
 import MemberUnlocksGrid from "@/components/MemberUnlocksGrid";
+import PaidTierLockedGrid from "@/components/PaidTierLockedGrid";
 import MemberDailyBrief, { type DailyMatchSummary } from "@/components/MemberDailyBrief";
 import { getSession } from "@/lib/supabase/server";
 import { readFollowsFromMeta } from "@/lib/follows";
@@ -264,6 +265,18 @@ export default async function MemberPage({
               }
             />
           </div>
+
+          {/* ── Round 36 W-C · PAID TIER LOCKED GRID ──
+              Tim 14+ canary「會員功能對付費者沒吸引力」 surface critical
+              perception gap:Tim 截圖看的是 FREE TIER 5 unlocks · dashboard
+              沒 show BLACK CARD + Founders 27 加什麼 · 從 FREE TIER 看
+              不到 paid tier value → 感覺「就這些?」。 同 Netflix「Standard/
+              Premium」 grid 對照模式 缺。 Ship NEW PaidTierLockedGrid:
+              BLACK CARD 6 unlocks(Engine Lineup + Lens Variety + 賽事
+              討論 + 創作者抽成 + voting + Tim 筆記)+ Founders 27 lifetime
+              mega-card(全 BLACK CARD + 0% 抽成 + 未來所有 lenses/engines
+              永久解鎖)· visible status hierarchy + FOMO + Sunk cost + Anchoring。 */}
+          <PaidTierLockedGrid />
 
           {/* ── Round 30 Wave 5 · Welcome flash + logout · only when session ── */}
           {session && (
