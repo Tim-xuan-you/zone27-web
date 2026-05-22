@@ -368,6 +368,49 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
       title: "過稿落點 · Tim 親手 publish 到此",
     },
   ],
+  // Round 31 Wave S · /founders/ledger NEW · Open Allocation Ledger ·
+  // 4 brand IP axiom 同時 fire(Pratfall + Costly Signaling + Disclosure
+  // + 倒置 SaaS)。 Siblings: /founders(parent · 銷售頁 ←)· /audit(S05
+  // PRE-COMMIT cross-link · 同 PRE-COMMIT pattern)· /manifesto(為什麼
+  // 「方法公開 · 品味私藏」 延伸到 allocation 本身)。
+  "/founders/ledger": [
+    {
+      href: "/founders",
+      kicker: "founders",
+      title: "Founders 27 銷售頁 · 限量 270 · 終身席位",
+    },
+    {
+      href: "/audit",
+      kicker: "audit",
+      title: "Model Report · S05 PRE-COMMIT 同 disclosure pattern",
+    },
+    {
+      href: "/manifesto",
+      kicker: "manifesto",
+      title: "倒置宣言 · 為什麼「方法公開 · 品味私藏」",
+    },
+  ],
+  // Round 31 Wave X3 · /membership/black-card NEW · UI mockup preview ·
+  // 2026 Q3 上線。 Siblings: /membership(parent · 4-tier ladder ←)·
+  // /founders(可對照 4-tier 第 4 階終身席位)· /privacy(0 信用卡資訊在
+  // ZONE 27 server · token via payment gateway)。
+  "/membership/black-card": [
+    {
+      href: "/membership",
+      kicker: "membership",
+      title: "4-tier ladder 全景 · 從匿名到 NT$ 2,700 終身",
+    },
+    {
+      href: "/founders",
+      kicker: "founders",
+      title: "Founders 27 · 對照第 4 階終身 NT$ 2,700",
+    },
+    {
+      href: "/privacy",
+      kicker: "privacy",
+      title: "0 信用卡資訊 in ZONE 27 server · 完整 anti-tracker inventory",
+    },
+  ],
 };
 
 export function getRelatedLinks(currentPath: string): RelatedLink[] {

@@ -10,7 +10,7 @@
 // Inspired by Linear / Vercel / Stripe command palettes,
 // but DELIBERATELY thin: no fuse.js, no telemetry, no
 // recently-used persistence. Simple substring filter on a
-// hand-curated 30-row list is sufficient and brand-pure
+// hand-curated 32-row list is sufficient and brand-pure
 // (per [[zone27-disclosure-philosophy]]: no hidden ranking).
 // (/admin is intentionally NOT indexed here · Tim bookmarks it ·
 // keeping it out of visitor Cmd-K aligns with its noindex framing.)

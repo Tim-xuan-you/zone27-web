@@ -188,7 +188,7 @@ ZONE 27 與 **BOTTOM 27**(Tim 的棒球手遊)是雙生品牌:
 
 ---
 
-## 🗺️ 當前路由(v0.28 · Round 30 W5-W14 + Round 31 W-A/W-B · 2026-05-22 · v0.29 等 Tim 拍板 milestone)
+## 🗺️ 當前路由(v0.28 · Round 30 W5-W14 + Round 31 W-A→W-X4 · 2026-05-22 · 32 visitor-discoverable · v0.29 等 Tim 拍板 milestone)
 
 ```
 首頁 + 動線
@@ -235,7 +235,22 @@ Engine + 賽事(只 1 場真實 cpbl-260521-01 · per Day 3 placeholder purge)
 /leaderboard             THE 27 WALL · 270 創始席位視覺化
 /founders                Founders 27 銷售頁 · Round 28 FROM THE FOUNDER 引用 dedupe(原本跟
                          /about Chapter 05 重複 · 改為 Chapter 05 不同句「直覺說書人」+ Bloomberg analog)
+                         · Round 31 W-X2 Hermès counter pivot(砍 e-commerce FOMO live counter)
+/founders/ledger         **NEW Round 31 W-S** · Open Allocation Ledger · 4 brand IP axiom 同時 fire
+                         (Pratfall + Costly Signaling + Disclosure Philosophy + 倒置 SaaS)·
+                         每週手寫 update · 公布拒絕原因 sample(去 PII)· 公布通過率 · 公布規則 ·
+                         其他 luxury 品牌(Patek · Hermès · Tesla)做 process transparency 但
+                         沒人公布拒絕 · ZONE 27 因 disclosure-first 結構性可以做 · pre-launch
+                         empty scaffold + 5-step allocation rules pre-committed · ArticleMeta 3min
+                         + FounderSignOff · Round 32 W-A custom OG card(4 axiom chips)
 /membership              4-tier ladder 總覽(Round 25 NEW · Round 27 Footer + Cmd-K 全鏈)
+                         · Round 30 W4 MEMBER SYSTEM MAP + Round 30 W11 cuts(MAP + 4-paragraph
+                         Creator Permissions → PermLine 1-liners · 10→7 sections)
+/membership/black-card   **NEW Round 31 W-X3** · BLACK CARD 訂閱會員 UI preview · NT$ 499/月 ·
+                         5 unlocks(賽事發言 / 創作者抽成 5% / 每月 voting / Tim 工程筆記 full /
+                         Founders 27 LINE 群 access)· payment flow MOCKUP(disabled · 2026 Q3
+                         上線)· 5 FAQ · ArticleMeta 4min + FounderSignOff · Round 32 W-A custom
+                         OG card(PRE-LAUNCH badge + 5 unlocks)
 /glossary                27 industry stats(10+10+7)+ 5 Z27 LEXICON = 32 entries(Round 13 加 lexicon)
 /changelog               精簡版本紀錄 · GitHub commits 為 source of truth
 
@@ -285,7 +300,7 @@ OG + favicon + chrome
 
 ## ⚙️ Global components(Round 2/5/12/28/30/31)
 
-- `<CommandPalette />` · 全站 ⌘K/Ctrl-K palette · **30 visitor-discoverable routes** 索引(Round 30 W10 加 /member/submit 後 · /admin · /auth/* 不在 palette)(layout.tsx)
+- `<CommandPalette />` · 全站 ⌘K/Ctrl-K palette · **32 visitor-discoverable routes** 索引(Round 31 W-S 加 /founders/ledger + W-X3 加 /membership/black-card 後 · /admin · /auth/* 不在 palette)(layout.tsx)
 - `<CmdKTrigger />` · 雙 variant:
   - `variant="chip"` (default) · Nav 右上方 ⌘K 提示按鈕(desktop)
   - `variant="icon"` (Round 12) · Nav mobile 2nd row 右側 ⌕ 圖示(palette 全站可達)
