@@ -54,7 +54,33 @@ export type Match = {
   finalResult?: FinalResult; // set after game · powers /track-record receipt
 };
 
-export const matches: Match[] = [
+// ── Auto-merge real CPBL stats over hardcoded estimates ──
+// Round 31 W-J wire-up · for each pitcher · if name matches a qualifying
+// pitcher in cpbl-pitchers.ts(auto-fetched daily via fetch-cpbl-pitchers.mjs)
+// · real ERA/K9/BB9/HR9/WHIP override the hardcoded estimate inline。
+// Stats display layer(StatPercentileBar · PitcherCard etc.)consumes
+// matches export · so this transformation is invisible to consumers but
+// data accuracy upgrades automatically when CPBL leaderboard updates。
+// Per /audit S02 ESTIMATION DISCLOSURE pattern · 「estimate」 stat 逐步
+// 縮小範圍隨 CPBL data refresh · brand IP「方法公開」物理升級。
+// ─────────────────────────────────────────────────────
+
+import { getCpblPitcherByName } from "@/lib/cpbl-pitchers";
+
+function mergePitcherStats(p: PitcherStats): PitcherStats {
+  const real = getCpblPitcherByName(p.name);
+  if (!real) return p;
+  return {
+    name: p.name,
+    era: real.era.toFixed(2),
+    k9: real.k9.toFixed(1),
+    bb9: real.bb9.toFixed(1),
+    hr9: real.hr9.toFixed(2),
+    whip: real.whip.toFixed(2),
+  };
+}
+
+const rawMatches: Match[] = [
   // ── 2026-05-21 · 第一筆來自 cpbl.com.tw 真實截圖的 CPBL 資料 ──
   // 來源:Tim 截圖 cpbl.com.tw 一軍賽程 2026/05/21 比賽 #112
   //
@@ -286,6 +312,14 @@ export const matches: Match[] = [
     aiConfidence: 52,
   },
 ];
+
+// Auto-applied real-stats overlay · raw estimates 被 CPBL fetched 真值蓋
+// per Round 31 W-J · 不在 leaderboard 的 pitcher 仍 estimate
+export const matches: Match[] = rawMatches.map((m) => ({
+  ...m,
+  home: { ...m.home, pitcher: mergePitcherStats(m.home.pitcher) },
+  away: { ...m.away, pitcher: mergePitcherStats(m.away.pitcher) },
+}));
 
 export function getMatchById(id: string): Match | undefined {
   return matches.find((m) => m.id === id);
