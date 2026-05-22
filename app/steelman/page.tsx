@@ -349,6 +349,17 @@ export default function SteelmanPage() {
             >
               → /calibration Brier self-grading
             </Link>
+            {/* Round 51 W-B · Agent 3 missing cross-link #1 fix · /steelman
+                → /annual/2026 不藏 Year 0 honest empty state(0 paid · NT$0
+                rev)· Year 0 是 strongest pratfall · 跟 5 strongest objections
+                同 pratfall pattern · 應在 FINAL CTA 並列 surface · 不只
+                ethics/audit/calibration 三條。 */}
+            <Link
+              href="/annual/2026"
+              className="inline-block px-6 py-3 border border-gold/50 text-gold font-mono text-[10px] tracking-[0.3em] hover:bg-gold/10 transition-colors"
+            >
+              → /annual/2026 Year 0 honest empty
+            </Link>
           </div>
         </section>
       </main>

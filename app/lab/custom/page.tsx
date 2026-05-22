@@ -390,6 +390,22 @@ function CustomLabInner() {
         </div>
       </section>
 
+      {/* Round 51 W-B · Agent 3 founder voice audit · /lab/custom 缺
+          Tim signature · power-user 自訂任意投手 = founder methodology
+          accountability marker。 One-liner mute · 不破 minimalism。 */}
+      <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-12 text-center">
+        <p className="font-mono text-mute/80 text-[10px] tracking-[0.3em]">
+          —{" "}
+          <Link
+            href="/about"
+            className="hover:text-gold transition-colors"
+            aria-label="讀 Tim 創辦人筆記"
+          >
+            TIM · 自訂 sim 用的是 v0.2 同 engine · 不藏假投手 magic
+          </Link>
+        </p>
+      </section>
+
       </main>
 
       <Footer />

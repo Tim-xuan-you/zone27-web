@@ -110,6 +110,23 @@ export default function TrackRecordPage() {
           <span className="text-bone">PROVED ✓ 跟 DIVERGED ✕ 等大等亮列出</span>,
           不藏、不修飾、不重新加權。
         </p>
+        {/* Round 51 W-B · Agent 3 missing cross-link #2 fix · 匿名訪客
+            在 /track-record 看到 binary PROVED / DIVERGED · 不知道 reliability
+            diagram(Brier score · 45° calibration curve)在哪。 全 site 公開
+            /calibration page(non-member access)+ /member/calibration
+            (logged-in personal mirror)· 此 hero 加 1-line 引導 surface
+            兩條 path · per Agent 3 missing #2「anonymous can't reach
+            /calibration」 修正不 strict · 因 /calibration 本身公開。 */}
+        <p className="mt-3 font-mono text-mute/85 text-[11px] sm:text-xs tracking-[0.25em] leading-relaxed">
+          想看完整 Brier score + reliability diagram?{" "}
+          <Link
+            href="/calibration"
+            className="text-gold underline-offset-4 hover:underline transition-colors"
+          >
+            /calibration · 引擎自評 →
+          </Link>
+          {" "}(匿名可進 · 不需登入)
+        </p>
         <div className="mt-6 mb-2">
           <ArticleMeta
             readingMin={3}

@@ -39,14 +39,67 @@ export default function LabPage() {
               範例賽事尚未排定
             </h1>
             <p className="mt-8 text-mute leading-relaxed max-w-md mx-auto">
-              範例 CPBL 比賽資料目前不可用,但您仍可自訂任意兩位投手,讓引擎跑模擬。
+              範例 CPBL 比賽資料目前不可用 · 您仍可從以下三條路理解引擎:
             </p>
-            <Link
-              href="/lab/custom"
-              className="inline-block mt-10 px-10 py-3 bg-gold text-navy text-xs tracking-[0.3em] hover:bg-gold-soft transition-colors"
-            >
-              進階模式 · 自訂投手 →
-            </Link>
+
+            {/* Round 51 W-B · Agent 3 CRITICAL #1+#2 fix · empty state 從
+                單一 power-user dead-end ship 3-card grid · 訪客 fan
+                first-visit 不會卡在 power-user form · 同時 surface
+                /methodology 工程白皮書 + /track-record 公開戰績 credibility
+                anchor。 */}
+            <div className="grid sm:grid-cols-3 gap-3 mt-10 max-w-2xl mx-auto">
+              <Link
+                href="/methodology"
+                className="block p-5 border border-line/60 hover:border-gold/60 transition-colors group bg-slate/20 text-left"
+              >
+                <p
+                  lang="en"
+                  className="font-mono text-mute group-hover:text-gold text-[10px] tracking-[0.3em] mb-2 transition-colors"
+                >
+                  WHITEPAPER
+                </p>
+                <h3 className="text-base text-bone font-light leading-snug mb-1">
+                  引擎怎麼運作 →
+                </h3>
+                <p className="font-mono text-mute/80 text-[10px] tracking-[0.2em]">
+                  6 sections · 工程白皮書
+                </p>
+              </Link>
+              <Link
+                href="/track-record"
+                className="block p-5 border border-line/60 hover:border-gold/60 transition-colors group bg-slate/20 text-left"
+              >
+                <p
+                  lang="en"
+                  className="font-mono text-mute group-hover:text-gold text-[10px] tracking-[0.3em] mb-2 transition-colors"
+                >
+                  TRACK RECORD
+                </p>
+                <h3 className="text-base text-bone font-light leading-snug mb-1">
+                  引擎過去戰績 →
+                </h3>
+                <p className="font-mono text-mute/80 text-[10px] tracking-[0.2em]">
+                  PROVED ✓ · DIVERGED ✕ 等大列出
+                </p>
+              </Link>
+              <Link
+                href="/lab/custom"
+                className="block p-5 border border-gold/40 bg-gold/5 hover:border-gold transition-colors group text-left"
+              >
+                <p
+                  lang="en"
+                  className="font-mono text-gold/70 group-hover:text-gold text-[10px] tracking-[0.3em] mb-2 transition-colors"
+                >
+                  POWER USER
+                </p>
+                <h3 className="text-base text-bone font-light leading-snug mb-1">
+                  自訂任意投手 →
+                </h3>
+                <p className="font-mono text-mute/80 text-[10px] tracking-[0.2em]">
+                  輸入 K/9 BB/9 HR/9 跑 10K sim
+                </p>
+              </Link>
+            </div>
           </section>
         </main>
         <Footer />
@@ -86,6 +139,21 @@ export default function LabPage() {
             Brand axiom visible at engine entry point, not buried in
             /lab/custom only. Algorithm Step 3 (SIMPLIFY): one source. */}
         <EngineFreeBrandBlock />
+
+        {/* Round 51 W-B · Agent 3 CRITICAL #2 fix · pre-sim credibility
+            anchor · 訪客 cold land /lab 不知 track-record 存在 · 跑完
+            sim 才 surface(post-sim trust loop)= 太晚 · 此 hero
+            single-line link 是 entry-point credibility · 「親手跑 model」
+            前 surface「model 過去 receipts」 = NN/g Halo Effect ·
+            訪客 trust threshold 大幅降低。 */}
+        <p className="mt-6 font-mono text-mute/85 text-[11px] sm:text-xs tracking-[0.25em] text-center leading-relaxed">
+          <Link
+            href="/track-record"
+            className="text-gold underline-offset-4 hover:underline transition-colors"
+          >
+            ✓ 公開戰績 · 引擎過去 PROVED / DIVERGED 等大列出 →
+          </Link>
+        </p>
       </section>
 
       {/* ── MATCH SELECTOR ───────────────────────── */}
@@ -246,6 +314,22 @@ export default function LabPage() {
             v0.4(aspirational · 等 CPBL 公開 Statcast 等級資料)接上球速 + 轉軸物理先驗。
           </p>
         </div>
+      </section>
+
+      {/* Round 51 W-B · Agent 3 founder voice audit · /lab 缺 Tim signature ·
+          訪客親手跑完 10K sim · founder accountability marker 增強 trust。
+          One-liner mute · 不破 minimalism。 */}
+      <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-12 text-center">
+        <p className="font-mono text-mute/80 text-[10px] tracking-[0.3em]">
+          —{" "}
+          <Link
+            href="/about"
+            className="hover:text-gold transition-colors"
+            aria-label="讀 Tim 創辦人筆記"
+          >
+            TIM · This is where you verify everything yourself
+          </Link>
+        </p>
       </section>
 
       </main>

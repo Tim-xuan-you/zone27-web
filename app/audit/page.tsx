@@ -138,6 +138,31 @@ export default function AuditPage() {
               </Link>
               。本頁是精簡的 model report,/methodology 是完整技術論文。
             </P>
+            {/* Round 51 W-B · Agent 3 HIGH #5 fix · /audit S01 缺 v0.3/v0.4
+                engine lineup cross-link · BLACK CARD commercial unlock 核心
+                (per /membership/black-card unlock #1)· 此 page 不 surface
+                = audit 與 product progression 斷層。 Add explicit cross-link
+                to /methodology Section 04 ENGINE LINEUP · 訪客閱讀 audit
+                後可直接 jump 到 engine progression 對照。 */}
+            <P className="text-mute/70">
+              本報告涵蓋 v0.2 base engine。 v0.3(+ Park Factor HR rate)已
+              LIVE DEV PREVIEW · v0.4(Bayesian Model Averaging)Q4 2026 PLANNED。
+              完整 3-engine progression + per-engine tier unlock 見{" "}
+              <Link
+                href="/methodology"
+                className="text-gold underline-offset-4 hover:underline"
+              >
+                /methodology Section 04 ENGINE LINEUP
+              </Link>
+              {" "}+ entire v0.2 → v0.3 delta 見{" "}
+              <Link
+                href="/methodology/diff"
+                className="text-gold underline-offset-4 hover:underline"
+              >
+                /methodology/diff
+              </Link>
+              。
+            </P>
           </ReportSection>
 
           {/* ── 02 INPUTS WE USE ─────────────────────── */}
