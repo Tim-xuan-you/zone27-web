@@ -23,6 +23,12 @@ const GH_COMMITS_URL =
 
 const MILESTONES: { date: string; title: string; detail: string }[] = [
   {
+    date: "2026-05-22 · Round 50 + 51(world-class sprint)",
+    title: "11 W consolidated · UX IA overhaul + brand IP strengthening + bugs/a11y/perf · 26+ canary fire 全處理",
+    detail:
+      "Tim 26+ canary fire 連續 surface 真實 UX root cause + 「全權交給您 · 極致完美」 mandate · 連發 11 waves:Round 50 W-A → W-F(/methodology/diff entire v0.2 → v0.3 delta · 4 LOGIN entries Apple/Stripe nav IA · Homepage funnel invert Hick's deeper · Nav 三軸線 visual hierarchy「TONIGHT N」 dynamic chip · Footer F-pattern reorder PRODUCT first · /login password-only)+ Round 51 W-A → W-E(3 critical bugs login resend/error msg/submit safety · 7 funnel + cross-link fixes lab dead-end/audit S04 cross-link/track-record→calibration/lab Tim signatures · 5 brand strengthening + WCAG AA contrast/ethics+steelman conversion CTAs/about mailto · /transparency aggregator route Anthropic pattern · Atom RSS /feed.xml + ReproducibilityReceipt /audit S04)。 行銷設計專家 sharp insights:Round 22「conversion = gold pill」 visual primitive 延伸到 product items · Nielsen Norman 1997「visitors don't read · they scan」 footer F-pattern · NN/g Halo Effect /lab pre-sim credibility · Anthropic /transparency 「transparency as product not afterthought」 模式落地。 3 sub-agent 平行 research:niche subscription wins(Stratechery / Defector / Aftermath / HEY / Plausible / Linear / Anthropic / FanGraphs / Baseball Savant)· codebase bug+a11y+perf audit · conversion funnel + brand consistency。 0 brand redline violation · 0 audience pivot 到「賭徒」 framing · 純 IA + visual hierarchy + funnel order + Hick's law N=1 simplification + WCAG AA + Atom RSS + transparency aggregator 物理 codify。",
+  },
+  {
     date: "2026-05-21 · Round 6-9 (consolidated)",
     title: "Pratfall reversal · /founders airline-grade · 完成度提升 · 4 rounds polished",
     detail:

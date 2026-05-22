@@ -33,9 +33,39 @@ export const metadata: Metadata = {
 // ─────────────────────────────────────────────────────
 
 const LAST_UPDATED = "2026-05-22";
-const CYCLE = "Round 28-50 · 2026-05-22 · 26+ canary fires displacement mission · 39 visitor-discoverable routes · 7 LIVE LENS CANVAS + 2 LIVE Engine variants(v0.2 + v0.3 DEV PREVIEW)+ entire v0.2→v0.3 DIFF published + 8 binding ethics commitments + 5 steelman self-objections + 8 localStorage keys disclosed · R44 4 OG cards + Tim canonical sentence · R45 Anonymous Lens-Pick Loop DEEPEST · R46 CPBL schedule auto-fetch · R47 Tier 切換自如 inline + Cmd+Shift+P · R48 MLB engine pick + linescore + verdict pipeline · R49 LedgerDeltaChip(Endowment effect)· R50 /methodology/diff(「Most prediction sites claim they upgraded. We published the diff.」)· displacement battle 對 玩運彩+報馬仔 9+ 層 structural moat";
+const CYCLE = "Round 28-51 · 2026-05-22 · 27+ canary fires displacement mission · 40 visitor-discoverable routes(+/transparency)· 7 LIVE LENS CANVAS + 2 LIVE Engine variants(v0.2 + v0.3 DEV PREVIEW)+ entire v0.2→v0.3 DIFF published + 8 binding ethics commitments + 5 steelman self-objections + 8 localStorage keys disclosed + Atom RSS feed LIVE + /transparency aggregator route LIVE · R50 11 W IA overhaul(LOGIN entries + Homepage funnel invert + Nav 三軸線 hierarchy + Footer F-pattern + /login password-only + /methodology/diff)+ R51 5 W audit synthesize(critical bugs + funnel fixes + WCAG AA + transparency aggregator + Atom RSS)· displacement battle 對 玩運彩+報馬仔 10+ 層 structural moat";
 
 const SHIPPED_THIS_CYCLE: { title: string; body: string; href?: string }[] = [
+  // ── 📡 Round 51 W-E · Atom RSS /feed.xml + ReproducibilityReceipt /audit S04 ──
+  {
+    title: "[R51 WE] 📡 Atom RSS /feed.xml + ReproducibilityReceipt /audit S04 · R50 TODO + R43 deferred 收束",
+    body: "W-E ship 2 R50+ TODO 項目同時收束:Atom RSS /feed.xml(R50 TODO 第 1 · Agent L R44 GAP-3)+ ReproducibilityReceipt to /audit Section 04(R43 deferred · 同 R42 W-B pattern 延伸)。 行銷設計專家 sharp:hardcore baseball fan(FanGraphs/Baseball-Reference 讀者 demographic)5+ year RSS reader usage · Stratechery / FanGraphs / Baseball Savant 皆 LIVE Atom feed · ZONE 27 0 feed = 訪客 only path 是 email 或 recurring URL visit。 RSS = subscriber-pulled 0-tracking subscription · 完美對齊 0 cookie + audience-fans axiom。 NEW lib/feed-items.ts hand-curated FEED_META + 10 most-recent ship entries · NEW app/feed.xml/route.ts Atom 1.0 format(RFC 4287)· static + Vercel rebuild trigger update。 Wired:layout metadata.alternates.types「application/atom+xml」 HTML head RSS auto-detect · Footer PRODUCT group +1 link 「RSS · Atom feed」。 RR drop-in /audit S04 ENVIRONMENTAL IMPACT · 0.0005 hr / sim + < 0.1 g CO₂e / sim estimates 升 reproducible artifact。",
+    href: "/feed.xml",
+  },
+  // ── 🌐 Round 51 W-D · /transparency aggregator route ──
+  {
+    title: "[R51 WD] 🌐 NEW /transparency · audit aggregator · Anthropic 模式 · first-class destination",
+    body: "Agent 1 world-class niche subscription research ship #1 · Anthropic /transparency pattern · 把分散在 8 個 trust artifact pages 的 transparency content 聚合一個 navigable destination · 升 first-class brand axis · 不再是 footer link / about page bottom 隱藏。 6 sections:01 WHAT WE DON'T KNOW(LIMITS 集合)+ 02 WHAT WE DON'T DO(11 件「永遠不做」 binding grid)+ 03 WHEN WE'VE BEEN WRONG(DIVERGED 物理 codify)+ 04 WHAT WE COMMIT TO(8 binding ethics grid)+ 05 WHERE OUR DATA COMES FROM(3 data paths)+ 06 HOW YOU CAN AUDIT US(4 audit primitives)+ 07 LENS LIFETIME PLEDGE ANCHOR。 NEW custom OG card(「完整 audit · 一頁可見」 typography + 6 SECTION CHIPS grid)。 Wired CommandPalette + Footer DOCS column 1 + RelatedReading。 Brand IP triple-fire(Disclosure + Pratfall + Costly Signaling)同時 ship。",
+    href: "/transparency",
+  },
+  // ── ✨ Round 51 W-C · trust artifact conversion close + WCAG AA ──
+  {
+    title: "[R51 WC] ✨ /ethics + /steelman conversion CTA · /about Ch07 mailto · Homepage + Footer WCAG AA",
+    body: "Agent 3 conversion funnel synthesize · 5 brand strengthening + a11y fixes。 /ethics + /steelman 讀完訪客是 strongest warm-up state · 必須 trust loop close to Founders 27 / BLACK CARD entry · 不 dump 到 navigation。 加 explicit conversion sections + 2 primary CTA chip。 /about Chapter 07 OPERATIONS RESPONSE TIME row 加 callout「📧 直接寫信:tim@zone27.tw · 24h 內回覆保證 · 超過則 /ethics 紅字標」 · accountability 從 abstract claim → physical actionable channel。 Homepage F6 declarative strip dividers 加 aria-hidden=true(WCAG 1.3.1)+ text-mute/60 → text-mute(5.6:1 ✓ AA pass)。 Footer FUNDED row text-mute/70 → text-mute/85(5.2:1 ✓ AA pass)。",
+    href: "/ethics",
+  },
+  // ── 🛠️ Round 51 W-B · 7 funnel + cross-link fixes ──
+  {
+    title: "[R51 WB] 🛠️ 7 funnel + cross-link fixes · Agent 3 conversion audit synthesize",
+    body: "/lab empty state CRITICAL fix · 之前 N=0 dead-end power-user form · 修為 3-card grid(WHITEPAPER / TRACK RECORD / POWER USER)對應不同 audience entry。 /lab pre-sim credibility anchor · Hero EngineFreeBrandBlock 下方加「✓ 公開戰績 · 引擎過去 PROVED / DIVERGED 等大列出 →」 · NN/g Halo Effect 訪客 trust threshold 降低。 /lab + /lab/custom 加 Tim signature one-liner · founder voice 補洞。 /audit Section 01 加 v0.3/v0.4 engine cross-link(BLACK CARD commercial unlock 核心 · 之前 audit 不 surface 斷層)。 /steelman FINAL CTA 加 /annual/2026 link(Year 0 honest empty 同 pratfall pattern)。 /track-record hero 加 /calibration anonymous note(訪客知 reliability diagram 在哪 · 匿名可進)。",
+    href: "/lab",
+  },
+  // ── 🐛 Round 51 W-A · 3 critical bug fixes ──
+  {
+    title: "[R51 WA] 🐛 3 critical bug fixes · Agent 2 audit synthesize",
+    body: "Agent 2 bug + a11y + perf audit synthesize · ship 3 TIER-0 fixes。 /login handleResend logic correctness fix · R50 W-F 砍 magic link mode 後 handleResend 仍 wired 但 call signInWithOtp 不是 resend confirmation · 走錯 API silently fail · 修為 supabase.auth.resend({ type: 'signup', email, options })。 /login friendlyPasswordError stale 訊息 fix · 之前「點下方『忘記密碼』改 magic link」 ghost text 指向 R50 W-F 已移除的 UI · 改寫「確認 capslock · 仍不行寫信 tim@zone27.tw」 real recovery path。 /api/submit session.user.email strict validation · 砍「anonymous@unknown」 magic string fallback(invalid email · 違反 PII inventory)· 改 401 reject if 缺 valid email · system invariant break 不藏 cover-up。",
+    href: "/login",
+  },
   // ── 🔬 Round 50 W-A · /methodology/diff DEEPEST · v0.2 → v0.3 entire delta ─
   {
     title: "[R50 WA] 🔬 NEW /methodology/diff · entire v0.2 → v0.3 delta published · brand IP triple-fire",
