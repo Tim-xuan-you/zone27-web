@@ -91,7 +91,7 @@ const TIERS: Tier[] = [
       "Founders 27 LINE 群 access",
       "每週 Tim 工程筆記 full 版",
     ],
-    cta: { label: "Q3 通知我 · 先免費註冊", href: "/login" },
+    cta: { label: "→ 看 BLACK CARD UI preview", href: "/membership/black-card" },
     highlight: false,
   },
   {
