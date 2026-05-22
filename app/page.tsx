@@ -190,7 +190,10 @@ export default function Home() {
           Codify 5 redlines 物理 visible on home · 1 hr ship · 0 hr/wk ·
           permanent brand asset · differentiation 對 玩運彩 / 報馬仔 /
           LINE 老師生態 instant clarity。 5 items 為 ConfidenceStars(W-A)
-          的 inverse twin:「我們不是 sportsbook」 declarative。 */}
+          的 inverse twin:「我們不是 sportsbook」 declarative。
+          Round 38 W-I · Agent C P3 ship · 「不分潤博彩」 加 escape hatch
+          link 到 /learn#why-not-gambling · P3 casual visitor 不再 dead-
+          end declaration · 而是 clickable explainer。 */}
       <section className="mx-auto max-w-3xl px-6 sm:px-10 pb-10 sm:pb-12 text-center">
         <p
           lang="en"
@@ -203,7 +206,12 @@ export default function Home() {
           <span className="text-mute/50 mx-2">·</span>
           <span className="text-bone">不賣明牌</span>
           <span className="text-mute/50 mx-2">·</span>
-          <span className="text-bone">不分潤博彩</span>
+          <Link
+            href="/learn#why-not-gambling"
+            className="text-bone underline decoration-mute/40 underline-offset-4 hover:decoration-gold hover:text-gold transition-colors"
+          >
+            不分潤博彩
+          </Link>
           <span className="text-mute/50 mx-2">·</span>
           <span className="text-bone">不藏 DIVERGED</span>
           <span className="text-mute/50 mx-2">·</span>

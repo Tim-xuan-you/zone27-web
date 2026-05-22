@@ -149,6 +149,7 @@ export default function LearnPage() {
           en="WHY NOT GAMBLING"
           zh="為什麼 ZONE 27 不是博彩平台"
           kicker="1 分鐘"
+          anchor="why-not-gambling"
         >
           <p>
             如果您看到「機率」「賠率」「edge」這些字 · 可能會以為 ZONE 27 是某種運彩或殺手平台。
@@ -235,15 +236,20 @@ function Chapter({
   zh,
   kicker,
   children,
+  anchor,
 }: {
   no: string;
   en: string;
   zh: string;
   kicker: string;
   children: React.ReactNode;
+  anchor?: string;
 }) {
   return (
-    <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-16 border-t border-line/40 pt-14">
+    <section
+      id={anchor}
+      className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-16 border-t border-line/40 pt-14 scroll-mt-20"
+    >
       <div className="flex items-baseline gap-4 mb-3">
         <span className="font-mono text-gold/70 text-[10px] tracking-[0.35em] tabular">
           / {no}

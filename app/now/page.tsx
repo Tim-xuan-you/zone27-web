@@ -33,9 +33,60 @@ export const metadata: Metadata = {
 // ─────────────────────────────────────────────────────
 
 const LAST_UPDATED = "2026-05-22";
-const CYCLE = "Round 28-36 · 2026-05-22 · 13+ canary fires displacement mission · ConfidenceStars 全鏈 + AI marketing + 不做 list + BLACK CARD 499→299 + WCAG AA + /annual/2026 + OG cards × 3 + next.config.ts production-ready + NEW /rewards skill-based fantasy league prize + 恆美 ecosystem + NEW /methodology Section 04 Engine Lineup 3 變體(accuracy progression)+ NEW Section 05 Lens Variety 7 candidate lenses(analytical variety · Patek complication 模式)· brand-pure 兩軸線並存";
+const CYCLE = "Round 28-38 · 2026-05-22 · 14+ canary fires displacement mission · ConfidenceStars 全鏈 + AI marketing + 不做 list + BLACK CARD 499→299 + WCAG AA + /annual/2026 + OG cards × 3 + next.config.ts production-ready + NEW /rewards + NEW /methodology Section 04 Engine Lineup + Section 05 Lens Variety 7 lenses + R37 W-B Vibe Check + R37 W-D Park Factor + R38 7-wave AFK 攻頂(Pitcher Fatigue v0.1 PROXY + TeamPickPanel hero + /coverage NEVER above-the-fold + Coin-Flip Baseline + Footer Founders count + Lens Lifetime Pledge + LensTrace 5-step deterministic pipeline)";
 
 const SHIPPED_THIS_CYCLE: { title: string; body: string; href?: string }[] = [
+  // ── 🚀 Round 38 W-A → W-I · 9-wave AFK 攻頂 ship ──
+  {
+    title: "[R38 WI] 🚪 P3 escape hatch · /learn#why-not-gambling anchor + homepage F6「不分潤博彩」 clickable",
+    body: "Agent C 4-persona walkthrough P3(casual baseball watcher gambling-curious)friction:homepage F6 strip 列「不分潤博彩」 negative declaration 但 dead-end 沒 cross-link · casual visitor 看到「賠率/明牌/博彩」 primed gambling 但無 escape hatch。 Ship:/learn Chapter 03 加 anchor=「why-not-gambling」(scroll-mt-20 for fixed nav offset)+ homepage F6 「不分潤博彩」 wrap 成 Link href=/learn#why-not-gambling + underline-on-hover · NOT dead pronouncement · 是 clickable explainer。 P3 visitor 現在有 1-click 解釋路徑 · P4(玩運彩 escapee)+ P1(CPBL fan)+ P2(skeptic)三 persona 同時 inherit improvement。 30-min ship per Agent C effort estimate。",
+    href: "/learn#why-not-gambling",
+  },
+  {
+    title: "[R38 WH] 🔬 LensTrace dynamic checklist · 「We Don't Guess. We Compute.」 literally visualized · Agent A #4 ship",
+    body: "Smashing Magazine 2026「AI Transparency · Dynamic Checklist」 pattern · NOT chatbot widget(rejected pattern)· 純 static breadcrumb of deterministic compute。 NEW components/LensTrace.tsx · TraceStep type · 5-step engine v0.2 pipeline preset(PULL PITCHER STATS · RUN MONTE CARLO N=10K · AGGREGATE WIN PROBABILITY · COMPUTE AI CONFIDENCE · BOUND UNCERTAINTY)· each step has step+explainer+source citation · GitHub source link 直連 lib/simulator.ts。 brand IP 物理 codify:「方法公開」 literal 步驟級 disclosure · displacement mission 對 玩運彩+報馬仔(他們 0 pipeline 公開)。 /matches/[gameId] section 01A 加 LensTrace · 之後 lens-specific traces 可 reuse component。",
+    href: "/matches/cpbl-260521-01",
+  },
+  {
+    title: "[R38 WG] 🏛️ Lens Lifetime Pledge · /methodology Section 06 · Patek「since 1839」 pattern · Agent A #3 ship",
+    body: "SaaS 標準是 model 衰退時 silently rotate models · ZONE 27 倒置:每個 ship 過的 engine 變體 / 每個 ship 過的 analytical lens 永遠在 production 看得到 · deprecate + version 不 silently retire。 NEW Section 06 LENS LIFETIME PLEDGE block · gold-bordered + glow-soft · Patek Philippe「service since 1839」 axiom 落地 · 「ZONE 27 自 v0.1 起每個 lens 永久看得到」 對應。 displacement 對 報馬仔「deletes losing weeks」 generational identity continuity。 修改 pledge 需 30 天 /changelog 公告 PRE-COMMIT lock 同 /audit S05 pattern。 brand IP「方法公開 · 不藏不換」 延伸到 generational time axis。",
+    href: "/methodology",
+  },
+  {
+    title: "[R38 WF] 💎 Founders count static row in Footer · Plausible/Are.na pattern · Agent A #5 ship",
+    body: "Plausible「18k subscribers · 260B pageviews」 + Are.na「18,791 people support Are.na」 pattern · 公開 數字 但 NOT 動畫 · NOT live counter · NOT FOMO · 靜態。 Footer 加新 row · {FOUNDERS_CLAIMED} / 270 創始席位 + SYSTEM-TEST PLACEHOLDERS · Q3 取代 + PUBLIC LEDGER → link to /founders/ledger。 Costly Signaling「小數字也願意公開」 brand IP · 同 [[zone27-disclosure-philosophy]] 延伸。 自動 reactive · 真實 Q3 founders onboard 後此 row 數字自動更新(因 import from claimedFounders.length)· 0 component change needed when Q3 launch。",
+    href: "/founders/ledger",
+  },
+  {
+    title: "[R38 WE] 🪙 Coin-Flip Baseline mode badge · FanGraphs 4-mode pattern · Agent A #2 ship",
+    body: "FanGraphs Playoff Odds About 「4 modes」 pattern(FanGraphs blend / ATC / Season-to-Date / Coin Flip baseline)· deepest credibility move = coin-flip null hypothesis 永遠 visible 在 engine number 旁邊。 /matches/[gameId] AI PROBABILITY section 加 2-col mode strip(ENGINE MODE v0.2 PITCHER-ONLY MC · K/9 BB/9 HR/9 + NULL COIN-FLIP BASELINE 50%/50% · 0 信息 · 引擎邊際 = abs(max% - 50)pp)。 Method Public + Pratfall 同時 fire:edge margin 直接公開 = 不藏 baseline · 顯示「引擎 number 減去 50% 才是 real edge claim」。 displacement mission 對 玩運彩+報馬仔:他們從不 publish baseline 因為等於暴露 coin-flip-equivalent。 1 SVG-free row · 0 deps · 0 cost。",
+    href: "/matches/cpbl-260521-01",
+  },
+  {
+    title: "[R38 WD] 🛑 /coverage NEVER list above-the-fold · 「00 BRAND BOUNDARY」 compact chips · Agent C P4+P3+P2 ship",
+    body: "Agent C P4 玩運彩 escapee friction:NEVER list 在 section 05 ~80% scroll buried · 最強 60-sec proof-of-difference 看不到。 Ship:/coverage 加新「00 · BRAND BOUNDARY · WHAT WE'LL NEVER COVER」 section between header + section 01 PHILOSOPHY · compact 5-item chip strip(✕ 玩運彩 / 報馬仔 / 台灣運彩 / Sportradar / 任何登入繞付費牆)+ ↓ 完整 reasoning 連到 #never-cover anchor。 Section 05 deep dive 保留為 anchor target · 0 anchor break · 只 surfacing front-load。 P4 escapee + P3 casual + P2 skeptic 三 persona 同時受惠。 brand IP「品牌定義 not 限制」 axiom 物理 visible 在 visitor 第一個 fold。",
+    href: "/coverage",
+  },
+  {
+    title: "[R38 WC] 📐 CLAUDE.md route count drift fix · 32 → 34 · Agent B finding · 加 R37/R38 component listing",
+    body: "Agent B production audit Finding · CLAUDE.md line 191 + 303「32 visitor-discoverable」 → 34(R30 W10 加 /member/submit · R33 W-E 加 /annual/2026 漏 sync)。 Ship:route table header 從「v0.28 · Round 30 W5-W14 + Round 31 W-A→W-X4」 → 「v0.28 · Round 30 W5-W14 + Round 31-38」 + 「3 lenses LIVE per R37-W-B/W-D + R38-W-A · VibeCheck + ParkFactor + PitcherFatigue」 explicit list。 CommandPalette comment 32→34。 Global components section 加 VibeCheck + ParkFactorLens + PitcherFatigueLens 3 個新 entries。 Drift cleanup · 0 functional change。",
+    href: "/",
+  },
+  {
+    title: "[R38 WB] 🏟️ TeamPickPanel header variant 加到 /matches/[gameId] hero · Agent C P1+P4 ship · fan-grammar moat",
+    body: "Agent C P1 CPBL fan friction:TeamPickPanel 只在 /track-record 沒在 /matches · WhatsApp friend-link landing 看不到「我看 ___」 picker · MyTeamMatchNote 永不 fire 因 localStorage z27_team 未 set。 Ship:/matches/[gameId] hero 加 TeamPickPanel header variant 在 venue + first pitch 行下方 · 訪客 inline pick → MyTeamMatchNote auto-fire chain 完整「您支持 富邦 · 這場是 underdog」。 brand IP:0 cookie · 0 server · 純 localStorage · 同 /track-record pattern。 P1(CPBL fan 終於 see「對你說話」 on first WhatsApp landing)+ P4(玩運彩 escapee see fan-grammar 不是 tipster-grammar)兩 persona 同時受惠。",
+    href: "/matches/cpbl-260521-01",
+  },
+  {
+    title: "[R38 WA] 🩺 NEW PitcherFatigueLens v0.1 PROXY · 第 4 個 Lens Variety LIVE · per 「不等」 鐵律",
+    body: "/methodology Section 05 Lens Variety table 第 4 個 candidate Pitcher Fatigue 從 planned → ✓ LIVE · R38 W-A · v0.1 PROXY。 brand IP 困境:Section 05 寫 angle 是「休息天數 + IP load」 · 但 matches.ts PitcherStats type 只有 era/k9/bb9/hr9/whip 5 個季統計 · 沒 rest_days + season_ip。 不選砍 lens(violate「不等」 鐵律)· 選 ship v0.1 PROXY(用 existing WHIP + BB9 + K9 季累計 derive 'command stability' proxy · v0.2 commit upgrade real fatigue when schema extended)。 3-tier classification(FRESH WHIP<1.30 BB9<2.5 K9>7.5 · NORMAL · LOADED WHIP>1.50 OR BB9>4.0)· 3-stat composite display + Pratfall「v0.1 PROXY · 不是 true fatigue · 反映季累計 stress · 不反映最近一場後到今天 real fatigue」 disclaimer + Costly Signaling「v0.2 upgrade commit」 + Disclosure「PR invite lib/matches.ts PitcherStats」 三 axiom 同時 fire。 /matches/[gameId] section 01D 2-pitcher grid render。 Lens Variety progression:Win Prob + Vibe Check + Park Factor + ✓ Pitcher Fatigue = 4 LIVE lenses · displacement mission 物理閉環 again。",
+    href: "/methodology",
+  },
+  {
+    title: "[R37 WD] 🏟️ NEW ParkFactorLens · 第 3 個 Lens Variety LIVE · 4 CPBL 場館 home advantage",
+    body: "/methodology Section 05 Lens Variety table 第 3 個 candidate Park Factor 從 planned → ✓ LIVE · R37 W-D · 接 R37 W-B Vibe Check 之後 · per [[feedback-no-waiting-rule]] 鐵律「任何現在能做就做 · 不等 Q3」。 NEW lib/cpbl-parks.ts · 4 CPBL 主場 reference data(新莊 / 樂天桃園 / 臺北大巨蛋 / 澄清湖)· estimatedHomeWinPct + estimatedRunsPerGame + tilt + rationale + observable factor disclosure。 NEW components/ParkFactorLens.tsx · 3-section layout:TONIGHT 本場場館 highlight + 4 場館 R/G 環境 bars 比較(冷金 hitter-tilt → mute pitcher-tilt · 中央 baseline line · 當前 venue gold border-l highlight)+ Pratfall disclaimer「park factor ≠ outcome predictor · 只是 multiplier on team-level skills」。 /matches/[gameId] section 01C 加。 brand IP「方法公開」 延伸 estimate methodology + PR invitation per /audit Section 02 ESTIMATION DISCLOSURE pattern。",
+    href: "/methodology",
+  },
   // ── 🔬 Round 36 W-A · NEW /methodology Section 05 Lens Variety ──
   {
     title: "[R36 WA] 🔬 NEW /methodology Section 05「LENS VARIETY」 multi-angle pivot · 7 candidate lenses · Patek complication 模式 · 兩軸線並存",

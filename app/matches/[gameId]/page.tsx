@@ -20,6 +20,7 @@ import ConfidenceStars from "@/components/ConfidenceStars";
 import VibeCheck from "@/components/VibeCheck";
 import ParkFactorLens from "@/components/ParkFactorLens";
 import PitcherFatigueLens from "@/components/PitcherFatigueLens";
+import LensTrace, { ENGINE_V02_TRACE_STEPS } from "@/components/LensTrace";
 import EngineStamp from "@/components/EngineStamp";
 import { getCpblAdvancedByName } from "@/lib/cpbl-advanced";
 import RelatedReading from "@/components/RelatedReading";
@@ -414,6 +415,24 @@ export default async function MatchDetailPage({
           引擎不吃什麼 = Pratfall。 */}
       <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-20">
         <EngineNarrative match={m} />
+      </section>
+
+      {/* ── ENGINE TRACE · Round 38 W-H · Agent A #4 ship ─────
+          「We Don't Guess. We Compute.」 literally visualized · 5-step
+          deterministic pipeline trace · NOT loading spinner · NOT chatbot
+          widget · 純 static breadcrumb of deterministic compute · per
+          Smashing Magazine 2026 AI Transparency「Dynamic Checklist」 pattern。
+          Brand IP「方法公開」 物理 literal · 多數「AI」 sites 只 show output ·
+          ZONE 27 直接公開 5 步 pipeline · GitHub source link 直連 ·
+          displacement mission 對 玩運彩+報馬仔(他們 0 pipeline 公開)。 */}
+      <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-20">
+        <h2 className="font-mono text-gold text-[10px] tracking-[0.4em] mb-6">
+          / 01A · ENGINE TRACE · 5 步 deterministic pipeline(GitHub 可驗證)
+        </h2>
+        <LensTrace
+          steps={ENGINE_V02_TRACE_STEPS}
+          engineLabel="v0.2 PITCHER-ONLY MC"
+        />
       </section>
 
       {/* ── VIBE CHECK LENS · Round 37 W-B 第 1 個 Lens Variety 真實 LIVE ──
