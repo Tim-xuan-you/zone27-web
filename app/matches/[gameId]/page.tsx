@@ -15,7 +15,9 @@ import {
   type Calibration,
 } from "@/lib/matches";
 import StatPercentileBar from "@/components/StatPercentileBar";
+import AdvancedStatBar from "@/components/AdvancedStatBar";
 import EngineStamp from "@/components/EngineStamp";
+import { getCpblAdvancedByName } from "@/lib/cpbl-advanced";
 import RelatedReading from "@/components/RelatedReading";
 import FollowMatchButton from "@/components/FollowMatchButton";
 import MatchNoteEditor from "@/components/MatchNoteEditor";
@@ -589,7 +591,7 @@ function PitcherCard({
         <StatPercentileBar stat="HR/9" value={p.hr9} />
       </div>
       <p className="font-mono text-mute/60 text-[9px] tracking-[0.25em] mt-4 leading-relaxed">
-        TIER vs CPBL league ref range · 估計值 / 真實值 dot color 同等 ·{" "}
+        BASIC · TIER vs CPBL league ref range · 估計值 / 真實值 dot color 同等 ·{" "}
         <Link
           href="/audit"
           className="text-mute/60 hover:text-gold underline-offset-4 hover:underline transition-colors"
@@ -597,6 +599,59 @@ function PitcherCard({
           /audit
         </Link>{" "}
         S02 disclosure
+      </p>
+
+      {/* Round 31 Wave U · ADVANCED · Trackman radar 中職百分位
+          整合 stats.cpbl.com.tw advanced data · 野球革命 + Trackman
+          radar 整合 試營運上線資料 · Statcast-grade · 100=elite */}
+      <PitcherAdvancedSection pitcherName={p.name} />
+    </div>
+  );
+}
+
+// ── Round 31 W-U · Trackman advanced metrics section ──
+// 接 lib/cpbl-advanced.ts auto-fetched percentile data · 不在 leaderboard 的
+// 投手(尚無 Trackman 累計 sample)render "尚無進階數據" honest gap state。
+function PitcherAdvancedSection({ pitcherName }: { pitcherName: string }) {
+  const adv = getCpblAdvancedByName(pitcherName);
+  if (!adv) {
+    return (
+      <div className="mt-6 pt-4 border-t border-line/30">
+        <p className="font-mono text-mute/60 text-[9px] tracking-[0.3em]">
+          ADVANCED · TRACKMAN 數據累計中 · 待 sample 達 threshold 後落地 ·{" "}
+          <Link
+            href="/audit"
+            className="text-mute/60 hover:text-gold underline-offset-4 hover:underline transition-colors"
+          >
+            see /audit S02
+          </Link>
+        </p>
+      </div>
+    );
+  }
+  return (
+    <div className="mt-6 pt-4 border-t border-gold/30">
+      <p className="font-mono text-gold/80 text-[10px] tracking-[0.3em] mb-3">
+        / ADVANCED · TRACKMAN 中職百分位
+      </p>
+      <div className="space-y-0.5">
+        <AdvancedStatBar label="wOBA-against" percentile={adv.wobaAgainst} />
+        <AdvancedStatBar label="K%" percentile={adv.kPct} />
+        <AdvancedStatBar label="揮空%" percentile={adv.whiffPct} />
+        <AdvancedStatBar label="強擊球%" percentile={adv.hardHitPct} />
+        <AdvancedStatBar label="擊球初速" percentile={adv.exitVeloAvg} />
+      </div>
+      <p className="font-mono text-mute/60 text-[9px] tracking-[0.25em] mt-3 leading-relaxed">
+        source{" "}
+        <a
+          href={`https://stats.cpbl.com.tw/players/${adv.acnt}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-mute/60 hover:text-gold underline-offset-4 hover:underline transition-colors"
+        >
+          stats.cpbl.com.tw
+        </a>
+        {" "}+ Trackman radar · 100 = elite · {adv.team}
       </p>
     </div>
   );
