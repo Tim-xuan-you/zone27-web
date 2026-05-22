@@ -66,11 +66,11 @@ export default function EngineStamp({
       {compact ? (
         <>
           <span className="text-gold/70">{engineVersion}</span>
-          <span className="text-mute/40 mx-2">·</span>
+          <span className="text-mute/60 mx-2">·</span>
           <span>{dateStr}</span>
           {showBuild && (
             <>
-              <span className="text-mute/40 mx-2">·</span>
+              <span className="text-mute/60 mx-2">·</span>
               {isLocalDev ? (
                 <span className="text-mute/50">{COMMIT_SHA}</span>
               ) : (
@@ -90,11 +90,11 @@ export default function EngineStamp({
       ) : (
         <>
           <span className="text-gold/70">ENGINE {engineVersion}</span>
-          <span className="text-mute/40 mx-2">·</span>
+          <span className="text-mute/60 mx-2">·</span>
           <span>LOCKED {dateStr}</span>
           {showBuild && (
             <>
-              <span className="text-mute/40 mx-2">·</span>
+              <span className="text-mute/60 mx-2">·</span>
               <span className="text-mute/60">BUILD </span>
               {isLocalDev ? (
                 <span className="text-mute/50">{COMMIT_SHA}</span>

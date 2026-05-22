@@ -180,9 +180,9 @@ export default function MemberDashboardPreview() {
         aria-label="此頁面的資料來源 + 隱私狀態說明"
       >
         ▌ 資料位置 · 您的瀏覽器 localStorage{" "}
-        <span className="text-mute/40">·</span> 上次寫入 ·{" "}
+        <span className="text-mute/60">·</span> 上次寫入 ·{" "}
         <span className="text-bone/70">{lastWrittenLabel}</span>{" "}
-        <span className="text-mute/40">·</span>{" "}
+        <span className="text-mute/60">·</span>{" "}
         <span lang="en">我們看不到 · 0 cookies · 0 GA · 0 pixel</span>
       </div>
 
@@ -629,7 +629,7 @@ function RoadmapVotingPanel({ mounted }: { mounted: boolean }) {
           placeholder="例如:強打線 vs 二軍 winRate gap 是我最常 raise 的 question · 想看真實數字"
           rows={2}
           maxLength={280}
-          className="w-full bg-navy/40 border border-line/40 focus:border-gold/60 px-3 py-2 text-bone text-sm font-mono leading-relaxed outline-none transition-colors placeholder:text-mute/40"
+          className="w-full bg-navy/40 border border-line/40 focus:border-gold/60 px-3 py-2 text-bone text-sm font-mono leading-relaxed outline-none transition-colors placeholder:text-mute/60"
         />
         <div className="flex items-baseline justify-between mt-2 flex-wrap gap-2">
           <p className="font-mono text-mute/60 text-[10px] tracking-[0.25em] tabular">
@@ -637,7 +637,7 @@ function RoadmapVotingPanel({ mounted }: { mounted: boolean }) {
           </p>
           <p
             className={`font-mono text-[10px] tracking-[0.3em] transition-opacity ${
-              saved ? "text-gold opacity-100" : "text-mute/40 opacity-60"
+              saved ? "text-gold opacity-100" : "text-mute/60 opacity-60"
             }`}
             aria-live="polite"
           >
@@ -676,7 +676,7 @@ function RankedItemRow({
       {/* Rank badge */}
       <div
         className={`flex flex-col items-center font-mono tabular ${
-          isDisabled ? "text-mute/40" : "text-gold"
+          isDisabled ? "text-mute/60" : "text-gold"
         }`}
       >
         <span className="text-[9px] tracking-[0.25em] mb-1">RANK</span>

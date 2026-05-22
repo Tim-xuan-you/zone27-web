@@ -56,7 +56,7 @@ export default function ProvenanceStamp({ matchId, className = "" }: Props) {
         <span lang="en" className="text-mute/80">
           ENGINE {ENGINE_VERSION}
         </span>
-        <span className="text-mute/40 mx-2" aria-hidden="true">
+        <span className="text-mute/60 mx-2" aria-hidden="true">
           ·
         </span>
         <span lang="en">BUILD </span>
@@ -71,7 +71,7 @@ export default function ProvenanceStamp({ matchId, className = "" }: Props) {
         </a>
         {matchId && (
           <>
-            <span className="text-mute/40 mx-2" aria-hidden="true">
+            <span className="text-mute/60 mx-2" aria-hidden="true">
               ·
             </span>
             <span lang="en">MATCH </span>

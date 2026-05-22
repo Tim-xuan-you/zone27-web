@@ -78,11 +78,11 @@ export default async function MatchDetailPage({
           <Link href="/" className="hover:text-gold transition-colors">
             HOME
           </Link>
-          <span className="text-mute/40">/</span>
+          <span className="text-mute/60">/</span>
           <Link href="/matches" className="hover:text-gold transition-colors">
             MATCHES
           </Link>
-          <span className="text-mute/40">/</span>
+          <span className="text-mute/60">/</span>
           <span className="text-gold">{m.league}</span>
         </div>
       </section>

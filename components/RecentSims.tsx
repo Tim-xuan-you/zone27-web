@@ -113,7 +113,7 @@ function HistoryRow({ entry }: { entry: SimHistoryEntry }) {
         <span className={homeFav ? "text-gold" : "text-mute"}>
           {entry.homePct.toFixed(1)}%
         </span>
-        <span className="text-mute/40">/</span>
+        <span className="text-mute/60">/</span>
         <span className={!homeFav ? "text-gold" : "text-mute"}>
           {entry.awayPct.toFixed(1)}%
         </span>

@@ -80,9 +80,9 @@ export default function StickyFoundersCTA() {
             <span className="text-gold">{FOUNDERS_CLAIMED}</span>
             <span className="text-mute/60"> / </span>
             <span>{FOUNDERS_TOTAL}</span>
-            <span className="text-mute/40 mx-1.5">·</span>
+            <span className="text-mute/60 mx-1.5">·</span>
             <span>{FOUNDERS_REMAINING} 席</span>
-            <span className="text-mute/40 mx-1.5">·</span>
+            <span className="text-mute/60 mx-1.5">·</span>
             <span className="text-mute">永久關閉</span>
           </span>
         </div>
