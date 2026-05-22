@@ -10,7 +10,7 @@
 // Inspired by Linear / Vercel / Stripe command palettes,
 // but DELIBERATELY thin: no fuse.js, no telemetry, no
 // recently-used persistence. Simple substring filter on a
-// hand-curated 32-row list is sufficient and brand-pure
+// hand-curated 33-row list is sufficient and brand-pure
 // (per [[zone27-disclosure-philosophy]]: no hidden ranking).
 // (/admin is intentionally NOT indexed here · Tim bookmarks it ·
 // keeping it out of visitor Cmd-K aligns with its noindex framing.)
@@ -295,6 +295,27 @@ export const COMMAND_ITEMS: CommandItem[] = [
       "monthly",
       "mockup",
       "preview",
+    ],
+  },
+  {
+    label: "Annual Report 2026 · Year 0 honest empty state · radical transparency",
+    kicker: "/annual/2026",
+    path: "/annual/2026",
+    group: "信任文件",
+    keywords: [
+      "annual",
+      "annual report",
+      "年度報告",
+      "year 0",
+      "transparency",
+      "defector",
+      "hell gate",
+      "aftermath",
+      "pratfall",
+      "costly signaling",
+      "0 subs",
+      "0 revenue",
+      "honest",
     ],
   },
   {

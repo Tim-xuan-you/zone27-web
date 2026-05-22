@@ -411,6 +411,28 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
       title: "0 信用卡資訊 in ZONE 27 server · 完整 anti-tracker inventory",
     },
   ],
+  // Round 33 W-E · /annual/2026 NEW · Year 0 honest empty state report ·
+  // Defector + Hell Gate + Aftermath radical-transparency pattern · agent A
+  // F2 #2 priority。 Siblings:/audit(model report parallel)· /founders/ledger
+  // (allocation report parallel · 同 radical-transparency)· /track-record
+  // (engine PROVED/DIVERGED ledger feeding annual report metrics)。
+  "/annual/2026": [
+    {
+      href: "/audit",
+      kicker: "audit",
+      title: "Model Report · 引擎範圍 + 揭露哲學",
+    },
+    {
+      href: "/founders/ledger",
+      kicker: "founders/ledger",
+      title: "Open Allocation Ledger · 公布拒絕原因 + 通過率",
+    },
+    {
+      href: "/track-record",
+      kicker: "track-record",
+      title: "公開戰績 ledger · 此 annual report 的 metric 源頭",
+    },
+  ],
 };
 
 export function getRelatedLinks(currentPath: string): RelatedLink[] {
