@@ -125,6 +125,27 @@ export default function BlackCardPage() {
             BLACK CARD ·{" "}
             <span className="text-gold">NT$ 299 / 月</span>
           </h1>
+          {/* Round 55 W-B · Agent C #4 fix · trust-signal line ABOVE price
+              block · Plausible pricing-page pattern · 不是 fake testimonial
+              · 是 factual brand metric · 訪客 buy moment 直接看到 brand
+              IP 物理 codify · 不需 scroll 到 /audit 才知。 */}
+          <p
+            lang="en"
+            className="mt-3 font-mono text-mute/85 text-[10px] sm:text-[11px] tracking-[0.3em] leading-relaxed max-w-2xl"
+          >
+            <span className="text-gold/85">v0.2</span> ENGINE
+            <span className="mx-2 text-mute/40">·</span>
+            <span className="text-gold/85">100%</span> OPEN AUDIT
+            <span className="mx-2 text-mute/40">·</span>
+            <Link
+              href="/audit"
+              className="text-mute hover:text-gold transition-colors underline-offset-4 hover:underline"
+            >
+              /audit S08 公開全模型
+            </Link>
+            <span className="mx-2 text-mute/40">·</span>
+            <span className="text-gold/85">14-DAY</span> 退款保證
+          </p>
           <p className="mt-6 text-mute leading-relaxed max-w-2xl">
             ZONE 27 訂閱會員 · <strong className="text-bone">月卡手動續訂</strong>
             模式 · NT$ 299 月卡 visitor 每月主動付 1 次 · <strong className="text-bone">
