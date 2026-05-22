@@ -612,6 +612,10 @@ export function getFeaturedMatch(): Match | undefined {
     })[0];
   if (future) return future;
 
-  // 5. Any match (orphan fallback)
+  // 5. Any match (orphan fallback) · 返 undefined if matches=[](e.g. data
+  // migration / pre-launch)· caller MUST null-check · per signature `Match
+  // | undefined`。 Round 51 W-A · 確認 app/page.tsx:107-108 已 ternary guard:
+  //   `featuredMatch ? <HeroLiveCard match={featuredMatch} /> : <EmptyHeroCard />`
+  // 此 fallback line 保留 ·「undefined」 已 expected by callers · 不改。
   return matches[0];
 }

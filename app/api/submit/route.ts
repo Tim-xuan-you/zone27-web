@@ -95,7 +95,19 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  const memberEmail = session.user.email ?? "anonymous@unknown";
+  // Round 51 W-A · Agent 2 #2 fix · strict email validation · 砍
+  // "anonymous@unknown" magic string fallback(invalid email · 破 Resend
+  // template parsing · 違反「方法公開」 axiom · 也誤 PII inventory)。
+  // 認 session 必有 valid email(password signup flow guarantees Supabase
+  // confirmation step · 不可能沒 email)· 缺 = system invariant break · 應
+  // log + 500 不藏。
+  const memberEmail = session.user.email;
+  if (!memberEmail || !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(memberEmail)) {
+    return NextResponse.json(
+      { ok: false, error: "session_email_missing" },
+      { status: 401 }
+    );
+  }
 
   const result = await sendSubmissionNotification({
     memberEmail,

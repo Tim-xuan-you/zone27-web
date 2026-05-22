@@ -245,9 +245,12 @@ export default function LoginPage() {
       const supabase = createSupabaseBrowserClient();
       const callbackUrl = new URL("/auth/callback", window.location.origin);
       if (nextPath) callbackUrl.searchParams.set("next", nextPath);
-      // Resend signup confirmation · Supabase signInWithOtp 對 unconfirmed
-      // user 等同於 resend confirmation email · 不創 new account。
-      const { error } = await supabase.auth.signInWithOtp({
+      // Round 51 W-A · Agent 2 #4 fix · 砍 signInWithOtp(OTP magic link
+      // flow · password signup 不該走此 path)· 改用 supabase.auth.resend
+      // ({ type: "signup", ...}) canonical Supabase API for resending
+      // signup confirmation email · 不創 new account · 不混 OTP path。
+      const { error } = await supabase.auth.resend({
+        type: "signup",
         email: targetEmail,
         options: { emailRedirectTo: callbackUrl.toString() },
       });
@@ -529,12 +532,16 @@ function SentState({
 }
 
 // Round 30 Wave 14 · friendly password error mapping。
+// Round 51 W-A · Agent 2 #10 fix · 砍 stale「忘記密碼」 references · R50 W-F
+// 已移除 mode toggle button · 此 message 指向不存在 UI 是 ghost text · 改寫
+// canonical「密碼錯了 · 確認 capslock · 寫信 tim@zone27.tw」 path · 真實
+// 可達 recovery option(/reset page 將來 ship)。
 function friendlyPasswordError(raw: string): string {
   const lower = raw.toLowerCase();
   if (lower.includes("already") && lower.includes("registered"))
-    return "此 email 已註冊 · 密碼錯了 · 點下方「忘記密碼」改 magic link";
+    return "此 email 已註冊 · 密碼錯了 · 確認 capslock · 仍不行寫信 tim@zone27.tw";
   if (lower.includes("user already exists"))
-    return "此 email 已註冊 · 密碼錯了 · 點下方「忘記密碼」改 magic link";
+    return "此 email 已註冊 · 密碼錯了 · 確認 capslock · 仍不行寫信 tim@zone27.tw";
   if (lower.includes("password should be at least"))
     return `密碼至少 ${MIN_PASSWORD_LEN} 字元`;
   if (lower.includes("weak"))
