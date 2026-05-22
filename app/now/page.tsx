@@ -33,9 +33,15 @@ export const metadata: Metadata = {
 // ─────────────────────────────────────────────────────
 
 const LAST_UPDATED = "2026-05-22";
-const CYCLE = "Round 28-31 · 2026-05-22 · TONIGHT'S 3 RECEIPTS + Savant bars + datestamped engine stamp";
+const CYCLE = "Round 28-31 · 2026-05-22 · TONIGHT'S 3 RECEIPTS + Savant bars + EngineStamp + critic-hardening 5 patches";
 
 const SHIPPED_THIS_CYCLE: { title: string; body: string; href?: string }[] = [
+  // ── 🛡️ Round 31 Wave G · Critic-hardening top 5 patches + fan-grammar narrative ──
+  {
+    title: "[R31 WG] 🛡️ Critic-hardening 5 patches + fan-grammar narrative · agent 攻擊面審視 ship",
+    body: "Agent critic-hardening + storytelling pass(8 routes crawled · CPBL real-context cross-check)帶回 15 個攻擊面 + TOP 5 critical patch + ONE deepest call。 Ship TOP 5:(A11+A12)/track-record N=1 慶祝視覺改 — FirstReceiptHero gold/70 border → mute/40 · shimmer 拿掉 · ★ FIRST RECEIPT 改「NOT YET EVIDENCE · 29 MORE TO N=30」 mute/80 · stat-literate skeptic 嗆「N=1 100% PROVED = 統計文盲」 Texas sharpshooter fallacy 風險直接 surface · 加「⚠ STAT LITERACY · 為什麼 60% PROVED ≠ 引擎強?」 120-字 block · 引出 Brier score + reliability diagram + /member/calibration cross-link + v0.3 commitment。 (A15)/membership 「明牌」vs「博彩」disclosure section #pick-vs-bet · skeptic 嗆「『賣明牌』就是博彩附屬詞 · 跟博彩劃線劃假的?」 主動 surface「明牌 = 球迷之間 share 預測 native 詞」+「我們不連接莊家 · 不處理賠率 · 不抽下注佣金」+ /coverage NEVER list cross-link。 (A1+A2)首頁 TonightReceiptsCard 加 LOW EDGE 夜 self-deprecating chip(when avg confidence < 65 of pending matches)+ MiniMatchCard 加投手名「P · {name}」 in HOME/AWAY rows · skeptic「3 場 grid 沒投手名 = LOCK 沒重量」 fix + 「全 coin-flip 區間 = confidence theater」 主動承認 Pratfall surface。 (A10)/audit S05 末尾加「⚓ PRE-COMMIT · 第一筆 DIVERGED 出現時的處理規則」block · pre-commit binding rule(該場 receipt 首頁 7 天不撤 + ledger 編號不重排 + git commit permalink + 不開 excuse paragraph)· 修改需 30 天前 /changelog 公告 · Costly Signaling 100×。 (S1)/matches/[gameId] 加 EngineNarrative blockquote in 「/ 01 · STARTING PITCHER MATCHUP」 與「/ 02 · TOP 5 SCORES」 之間 · generic across all matches · 動態 derive 3-stat comparison · 「引擎為什麼押 X% [winner]」 + ERA / K9 / BB9 / HR9 差值對話化解讀 + 「引擎不吃:本季對戰史 · 球員傷停 · 守備站位 · 教練調度 · 場地適應」 Pratfall 主動承認 + ±15-25pp /audit S03 cross-link + v0.3 roadmap commitment。 Build / Lint / TSC 三綠。 Lesson 寫進 axiom:「critic-hardening 不是 audit 副產品 · 是 brand IP Pratfall 持續壓力測試 · skeptic 第一句嗆破的點都 pre-empt 公開」 · 對齊 brand axiom「Pratfall + Costly Signaling + Disclosure」 三層同時 fire 的物理實踐。 ONE deepest call(team-pick localStorage personalization · 「我看富邦 / 統一 / 兄弟」)留 Wave H 評估 — 涉及 4 surface 改 + Nav 增物件 · brand axiom homepage = ONE thing 風險 · 需 Tim 拍板。",
+    href: "/track-record",
+  },
   // ── 🎨 Round 31 Wave B · Baseball Savant + Vercel datestamped pattern ──
   {
     title: "[R31 WB] 🎨 Baseball Savant percentile bars + Vercel datestamped EngineStamp",
