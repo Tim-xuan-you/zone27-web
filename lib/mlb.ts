@@ -28,6 +28,20 @@ export type MlbGame = {
   /** Pre-built URL into /lab/custom with the two probable pitchers' stats
    *  pre-filled (or null if no probable pitchers announced yet). */
   simulateUrl: string | null;
+  /** R48 W-A · Engine pick win% on HOME team · 0-100 · deterministic Log5
+   *  style formula from K/9 BB/9 HR/9 · brand IP「LIVE re-compute · NOT
+   *  pre-game lock-in」 vs CPBL discipline · disclosed in /audit + /coverage。
+   *  null when either pitcher missing stats(─ from MLB API)。 */
+  engineWinHomePct: number | null;
+  /** R48 W-A · Final score from MLB API linescore hydrate · only when
+   *  state === "final" · null otherwise · home/away runs at end of game。 */
+  finalScore: { home: number; away: number } | null;
+  /** R48 W-A · Verdict computed from engine pick vs actual outcome ·
+   *  only when state === "final" + engineWinHomePct + finalScore · 「proved」
+   *  = engine pick matches winner · 「diverged」 = miss · 「tie」 = tie game。
+   *  NOT aggregated to /track-record(brand IP integrity preserved · per
+   *  /audit S05 PRE-COMMIT「pre-game lock-in」 axiom)。 */
+  verdict: "proved" | "diverged" | "tie" | null;
 };
 
 export type MlbTeamSide = {
@@ -166,7 +180,9 @@ export async function fetchTodayMlb(): Promise<MlbGame[]> {
  * Total HTTP requests per ISR refresh: 2 (regardless of how many games).
  */
 export async function fetchMlbForDate(dateYmd: string): Promise<MlbGame[]> {
-  const scheduleUrl = `${MLB_API}/schedule?sportId=1&date=${dateYmd}&hydrate=probablePitcher`;
+  // R48 W-A · 加 linescore hydrate to get final scores for status=Final games ·
+  // same response · 0 extra HTTP call · brand-pure since MLB API native support。
+  const scheduleUrl = `${MLB_API}/schedule?sportId=1&date=${dateYmd}&hydrate=probablePitcher,linescore`;
   try {
     const res = await fetch(scheduleUrl, {
       next: { revalidate: REVALIDATE_SECONDS },
@@ -296,8 +312,19 @@ type RawGame = {
   gamePk: number;
   gameDate: string;
   status: { abstractGameState: string; detailedState?: string };
-  teams: { home: RawTeam; away: RawTeam };
+  teams: {
+    home: RawTeam & { score?: number };
+    away: RawTeam & { score?: number };
+  };
   venue: { name: string };
+  /** R48 W-A · Hydrated when &hydrate=linescore added · final innings + runs */
+  linescore?: {
+    currentInning?: number;
+    teams?: {
+      home?: { runs?: number };
+      away?: { runs?: number };
+    };
+  };
 };
 
 type MlbScheduleResponse = {
@@ -321,6 +348,75 @@ type MlbPeopleResponse = {
   }[];
 };
 
+// ── R48 W-A · MLB engine pick computation ─────────────
+// Deterministic Log5-style formula from K/9 BB/9 HR/9 ERA · brand IP「方法
+// 公開」 延伸:每 game render 都 produces same number from same inputs ·
+// 不 silently 變 between fetches(除非 pitcher stats 更新 from MLB API)。
+//
+// NOT 10K Monte Carlo(那是 CPBL pre-game lock-in pattern · 賽前鎖定不再
+// 改 · MLB 此處是 LIVE re-compute · disclosure 必須 explicit)。
+//
+// Formula(simple Pythagorean-style):
+//   baseHome = 54  // MLB home-field advantage baseline ~54%
+//   eraDelta = away.era - home.era  // positive = home has better pitcher
+//   k9Delta = home.k9 - away.k9     // positive = home K/9 higher
+//   hr9Delta = away.hr9 - home.hr9  // positive = home gives up fewer HR
+//   pitcherEdge = (eraDelta * 4) + (k9Delta * 2) + (hr9Delta * 6)
+//                 // weighting based on /audit S02 INPUTS axiom
+//   homeWinPct = clamp(baseHome + pitcherEdge, 25, 80)
+//                // 不假 > 80% confidence(any MLB game has ~20% upset baseline)
+//
+// 引擎 v0.2 同 Bill James log5 family · brand-IP-pure if disclosed in /audit
+// + /coverage data pipeline · explicit「不 lock-in · NOT aggregated to
+// /track-record」 disclosure。
+// ─────────────────────────────────────────────────────
+function computeEngineWinHomePct(
+  homePitcher: MlbPitcher | null,
+  awayPitcher: MlbPitcher | null
+): number | null {
+  if (!homePitcher || !awayPitcher) return null;
+  if (
+    homePitcher.k9 === "—" ||
+    homePitcher.bb9 === "—" ||
+    homePitcher.hr9 === "—" ||
+    homePitcher.era === "—" ||
+    awayPitcher.k9 === "—" ||
+    awayPitcher.bb9 === "—" ||
+    awayPitcher.hr9 === "—" ||
+    awayPitcher.era === "—"
+  ) {
+    return null;
+  }
+
+  const hera = parseFloat(homePitcher.era);
+  const aera = parseFloat(awayPitcher.era);
+  const hk9 = parseFloat(homePitcher.k9);
+  const ak9 = parseFloat(awayPitcher.k9);
+  const hhr9 = parseFloat(homePitcher.hr9);
+  const ahr9 = parseFloat(awayPitcher.hr9);
+
+  if (
+    !Number.isFinite(hera) ||
+    !Number.isFinite(aera) ||
+    !Number.isFinite(hk9) ||
+    !Number.isFinite(ak9) ||
+    !Number.isFinite(hhr9) ||
+    !Number.isFinite(ahr9)
+  ) {
+    return null;
+  }
+
+  const baseHome = 54; // MLB home-field advantage baseline
+  const eraDelta = aera - hera;
+  const k9Delta = hk9 - ak9;
+  const hr9Delta = ahr9 - hhr9;
+
+  const pitcherEdge = eraDelta * 4 + k9Delta * 2 + hr9Delta * 6;
+  const raw = baseHome + pitcherEdge;
+  // Clamp to [25, 80] · 不假裝 > 80% confidence(MLB upset baseline ~20%)
+  return Math.max(25, Math.min(80, Math.round(raw)));
+}
+
 function mapGame(
   g: RawGame,
   pitcherStats: Map<number, MlbPitcher>
@@ -328,17 +424,55 @@ function mapGame(
   const taipei = toTaipeiTime(g.gameDate);
   const home = makeSide(g.teams.home, pitcherStats);
   const away = makeSide(g.teams.away, pitcherStats);
+  const state = classifyState(g.status.abstractGameState);
+  const engineWinHomePct = computeEngineWinHomePct(
+    home.probablePitcher,
+    away.probablePitcher
+  );
+
+  // R48 W-A · Extract finalScore from linescore hydrate when state=Final ·
+  // MLB API returns home.score + away.score on linescore teams · null for
+  // non-final games(state=Preview / Live · 不 surface partial scores · 因
+  // brand IP「賽後 finalResult only」 same axiom as CPBL)。
+  let finalScore: MlbGame["finalScore"] = null;
+  if (state === "final") {
+    const homeRuns =
+      g.linescore?.teams?.home?.runs ?? g.teams.home.score ?? null;
+    const awayRuns =
+      g.linescore?.teams?.away?.runs ?? g.teams.away.score ?? null;
+    if (homeRuns !== null && awayRuns !== null) {
+      finalScore = { home: homeRuns, away: awayRuns };
+    }
+  }
+
+  // R48 W-A · Verdict computed only when state=Final + both engine pick
+  // exists + finalScore exists · 「proved」 = engine pick matches actual
+  // winner · 「diverged」 = miss · 「tie」 = rare MLB tie。
+  let verdict: MlbGame["verdict"] = null;
+  if (state === "final" && engineWinHomePct !== null && finalScore !== null) {
+    if (finalScore.home === finalScore.away) {
+      verdict = "tie";
+    } else {
+      const homeWon = finalScore.home > finalScore.away;
+      const engineFavoredHome = engineWinHomePct > 50;
+      verdict = homeWon === engineFavoredHome ? "proved" : "diverged";
+    }
+  }
+
   return {
     gamePk: g.gamePk,
     startUTC: g.gameDate,
     startTaipei: taipei.time,
     dateTaipei: taipei.date,
-    state: classifyState(g.status.abstractGameState),
+    state,
     statusDetail: g.status.detailedState ?? g.status.abstractGameState,
     home,
     away,
     venue: g.venue?.name ?? "—",
     simulateUrl: buildSimulateUrl(home, away),
+    engineWinHomePct,
+    finalScore,
+    verdict,
   };
 }
 

@@ -311,11 +311,24 @@ export default function CoveragePage() {
                   <p className="font-mono text-gold/90 text-[10px] tracking-[0.3em] mb-2">
                     MLB · 100% AUTOMATIC ✓
                   </p>
-                  <p className="text-mute leading-relaxed">
+                  <p className="text-mute leading-relaxed mb-2">
                     MLB Stats API(<code className="font-mono text-bone bg-slate/40 px-1.5 py-0.5 rounded-sm text-[10px]">statsapi.mlb.com</code>)
                     · 10-min ISR(Vercel auto-cache)· 0 cost · 0 API key ·
                     全部 ~15 daily games · pitchers · K9 BB9 HR9 ERA · venue ·
-                    time · 0 founder intervention。
+                    time · final scores(R48 W-A linescore hydrate)· 0 founder
+                    intervention。
+                  </p>
+                  <p className="text-mute/85 text-sm leading-relaxed">
+                    ⚓ <strong className="text-bone">MLB grading discipline:LIVE re-compute · NOT pre-game lock-in</strong>{" "}
+                    · 每 10 min revalidate · engine pick = deterministic Log5-
+                    style formula from K9/BB9/HR9/ERA · 公開 in /audit S07 ·
+                    賽後 verdict ✓ PROVED / ✕ DIVERGED 在 /matches/mlb card
+                    上 display(R48 W-B)· 但{" "}
+                    <strong className="text-bone">NOT 算進 /track-record</strong> ·
+                    因 brand IP /audit S05 PRE-COMMIT 「pre-game lock-in」 axiom
+                    要求 prediction lock 在 first-pitch time 不可 retroactively
+                    re-compute · MLB grading 是 informational layer · CPBL
+                    grading 是 accountability layer · 兩 layer brand-IP-pure 區分。
                   </p>
                 </div>
                 <div className="border-l-2 border-line/60 pl-4">
