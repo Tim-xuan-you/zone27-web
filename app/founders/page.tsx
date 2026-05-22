@@ -316,6 +316,17 @@ export default async function FoundersPage({
           <span className="text-gold">9 個月即達損益平衡</span> ·
           之後每年省下 NT$ 3,588
         </p>
+        {/* Round 56 W-B · Agent A Vector 5 fix · pricing 9-month math 攻擊面
+            pre-empt · 之前 NT$ 2,700 ÷ 299 = 9 個月 ratio 在 adversarial 角度
+            是「lifetime 等於 9 個月 BLACK CARD = 內部矛盾 · Costco 模式 應該
+            5-10x annual fee」 attack。 此 line 把 gap frame 為 INTENTIONAL ·
+            「前 270 人是 brand 共同作者 不是 customer」 axiom 物理 codify ·
+            costly signaling 比沉默更強 · Aronson pratfall 物理 fire。 */}
+        <p className="mt-2 max-w-xl mx-auto text-mute/85 text-[11px] sm:text-xs leading-relaxed text-center">
+          <span className="text-gold/85">9× ratio 是 INTENTIONAL</span> ·
+          我們 under-price 創始席位 · 因為前 270 人不是 customer · 是 brand
+          共同作者 + lifetime mission anchor · 不是「value-for-money」 trade。
+        </p>
         <p
           lang="en"
           className="mt-2 font-mono text-mute text-[10px] tracking-[0.3em] text-center"

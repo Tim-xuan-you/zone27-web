@@ -73,8 +73,19 @@ export default function NavLoginCTA({ variant = "desktop" }: Props) {
     };
   }, []);
 
-  // Logged-in users: hide entirely · MembershipNavCTA 已切「您的引擎 →」
-  if (session === "logged_in") return null;
+  // Round 56 W-B · Agent B Ship #1 fix · CLS HIGH on homepage 之前 · logged-in
+  // 從「登入」 button → null 造成 layout shift · 改 render invisible placeholder
+  // 保持 same size · reserve slot regardless of auth state · CLS -0.05~-0.10。
+  if (session === "logged_in") {
+    return (
+      <span
+        aria-hidden="true"
+        className="font-mono text-[10px] sm:text-xs tracking-[0.22em] whitespace-nowrap invisible"
+      >
+        登入
+      </span>
+    );
+  }
 
   // SSR default + anonymous · both render the LOGIN button(hydration-stable)
   const aria = "登入或註冊 · magic link · 終身免費 · 0 tracking";

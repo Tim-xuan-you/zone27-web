@@ -66,9 +66,11 @@ export default function CalibrationTierBadge() {
 
   if (!mountState.mounted) {
     // SSR placeholder · same height as badge to avoid layout shift
+    // Round 56 W-B · Agent B Ship #1 reinforce · min-h-[240px] better matches
+    // Observer state actual height(rendered N<10 badge ~240px tall + body)
     return (
       <div
-        className="bg-slate/30 border border-line/60 px-5 py-6 min-h-[180px]"
+        className="bg-slate/30 border border-line/60 px-5 py-6 min-h-[240px]"
         aria-hidden="true"
       />
     );

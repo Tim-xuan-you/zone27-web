@@ -25,11 +25,16 @@ export default function AboutPage() {
           OUR MANIFESTO
         </p>
 
+        {/* Round 56 W-B · Agent A Vector 9 fix · 之前 「我們是一群」 plural ·
+            但 /about 自己 declare「ZONE 27 是一個人在跑」 solo founder ·
+            attacker 抓 fake-we / startup-plural 矛盾。 改 single-voice
+            addressing community「我寫 ZONE 27 給...」 · brand IP「方法公開
+            · 不假裝」 axiom 更純 · pratfall 強化 not weaker。 */}
         <h1 className="text-4xl sm:text-5xl md:text-6xl font-light leading-[1.15] tracking-tight text-bone">
-          我們不是博彩公司。
+          ZONE 27 不是博彩公司。
           <br />
           <span className="text-gold">
-            我們是一群相信數字
+            我寫給一群相信數字
             <br className="sm:hidden" />
             比運氣誠實的棒球迷。
           </span>
