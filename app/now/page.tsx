@@ -33,9 +33,15 @@ export const metadata: Metadata = {
 // ─────────────────────────────────────────────────────
 
 const LAST_UPDATED = "2026-05-22";
-const CYCLE = "Round 28-31 · 2026-05-22 · 多 wave 大 push · TONIGHT 3 receipts + Savant bars + critic-hardening + signature + CPBL auto-fetch + 「我看 ___」 personalization + Open Allocation Ledger";
+const CYCLE = "Round 28-32 · 2026-05-22 · 多 wave 大 push · TONIGHT 3 receipts + Savant bars + critic-hardening + signature + CPBL auto-fetch + 「我看 ___」 personalization + Open Allocation Ledger + 新 route 雙 OG card";
 
 const SHIPPED_THIS_CYCLE: { title: string; body: string; href?: string }[] = [
+  // ── 📐 Round 32 W-A · Wire-up sync · 2 OG cards + count drift ──
+  {
+    title: "[R32 WA] 📐 Wire-up sync · /founders/ledger + /membership/black-card 2 OG cards + Cmd-K 30→32",
+    body: "Round 31 27-commit blast 後 hygiene pass。 2 個新 route 缺 OG card · related-links sibling · count drift。 Ship:NEW app/founders/ledger/opengraph-image.tsx · 4 axiom chips(Pratfall · Costly Signaling · Disclosure · 倒置 SaaS)等大列出 + FORGED/REMAINING/TOTAL stats · punchline「Most luxury brands publish process. We publish rejections.」 同 /track-record「Most prediction sites hide their misses.」 inversion pattern。 NEW app/membership/black-card/opengraph-image.tsx · PRE-LAUNCH · UI MOCKUP badge 顯眼 + NT$ 499/月 + 5 unlocks 條列 · punchline「Subscription preview. We don't take money until Q3.」 brand IP「方法公開」 延伸到 preview state itself。 related-links.ts 加 2 entries · Cmd-K count 30→32 in 3 files · CLAUDE.md route table 加 2 新 route 完整 description。",
+    href: "/founders/ledger",
+  },
   // ── 💳 Round 31 W-X3 · BLACK CARD mockup ──
   {
     title: "[R31 WX3] 💳 NEW /membership/black-card · UI preview mockup · 32nd route",
