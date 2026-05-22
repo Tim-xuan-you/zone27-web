@@ -196,7 +196,7 @@ export default async function MembershipOgImage() {
           }}
         >
           <span style={{ color: "rgba(245,242,234,0.55)", display: "flex" }}>
-            FREE · NT$ 499/MO · NT$ 2,700 ONE-TIME
+            FREE · NT$ 299/MO · NT$ 2,700 ONE-TIME
           </span>
           <span
             style={{

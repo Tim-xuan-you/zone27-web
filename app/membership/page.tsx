@@ -81,7 +81,7 @@ const TIERS: Tier[] = [
   {
     name: "BLACK CARD",
     en: "BLACK CARD",
-    price: "NT$ 499",
+    price: "NT$ 299",
     priceNote: "每月 · 預計 2026 Q3 開放",
     desc: "黑金訂閱會員。可發文 · 可推薦賽事 · 創作者抽成 5%(vs 業界 LINE 老師平台 30-50% 是降維打擊)。",
     perks: [
@@ -308,7 +308,7 @@ export default async function MembershipPage({
             <span className="font-mono text-gold tabular">{FOUNDERS_REMAINING}</span>{" "}
             席剩 · 共 {FOUNDERS_TOTAL} 名 · NEXT IS{" "}
             <span className="font-mono text-gold tabular">{formatBadge(FOUNDERS_NEXT)}</span>。
-            6 大權益 + 5.4 個月 break-even · 完整定價邏輯 · 三層 tier 比較表 · INLINE FAQ。
+            6 大權益 + 9 個月 break-even · 完整定價邏輯 · 三層 tier 比較表 · INLINE FAQ。
           </p>
           <Link
             href="/founders"

@@ -14,7 +14,7 @@ import { getWaitlistCount } from "@/lib/waitlist-stats";
 export const metadata: Metadata = {
   title: "Founders 27 · NT$ 2,700 終身會員 · 限量 270 名",
   description:
-    "ZONE 27 創始會員資格 · 一次付清 NT$ 2,700,終身免費 · 270 名額滿即永久關閉,不會有第二批 · 5.4 個月達損益平衡,之後每年省下 NT$ 5,988。",
+    "ZONE 27 創始會員資格 · 一次付清 NT$ 2,700,終身免費 · 270 名額滿即永久關閉,不會有第二批 · 9 個月達損益平衡,之後每年省下 NT$ 3,588。",
 };
 
 // Re-fetch waitlist count every 60 seconds (ISR). Visitors see a number
@@ -26,7 +26,7 @@ const benefits = [
     no: "01",
     zh: "終身會員資格",
     en: "LIFETIME ACCESS",
-    body: "一次性 NT$ 2,700,永久解鎖未來所有功能。BLACK CARD 月費 NT$ 499 對您完全免費,終身。",
+    body: "一次性 NT$ 2,700,永久解鎖未來所有功能。BLACK CARD 月費 NT$ 299 對您完全免費,終身。",
   },
   {
     no: "02",
@@ -83,7 +83,7 @@ const TIERS = [
   {
     name: "BLACK CARD",
     zh: "黑金月費",
-    price: "NT$ 499",
+    price: "NT$ 299",
     priceNote: "每月 · 預計 2026 Q3 上線",
     highlight: false,
     rows: {
@@ -136,7 +136,7 @@ const INLINE_FAQ = [
   },
   {
     q: "現在留 email 就要付錢嗎?",
-    a: "不收費、不綁定、隨時可退出。留 email 同時 = 進入免費訂閱層(永久免費 · launch 後也存在)+ Founders 27 預售名單(2026 Q3 開放時優先通知)。真正付款是當您主動選擇升級到 Founders 27(NT$ 2,700 終身)或 BLACK CARD(NT$ 499/月)· 我們不催。Founders 27 付款後 14 天無條件退款保證。",
+    a: "不收費、不綁定、隨時可退出。留 email 同時 = 進入免費訂閱層(永久免費 · launch 後也存在)+ Founders 27 預售名單(2026 Q3 開放時優先通知)。真正付款是當您主動選擇升級到 Founders 27(NT$ 2,700 終身)或 BLACK CARD(NT$ 299/月)· 我們不催。Founders 27 付款後 14 天無條件退款保證。",
   },
   {
     q: "這是博彩平台嗎?",
@@ -233,15 +233,15 @@ export default async function FoundersPage({
             gold
           />
           <BreakEvenCell
-            value="5,988"
+            value="3,588"
             unit="NT$ /年省"
             en="SAVED PER YEAR"
           />
         </div>
         <p className="mt-4 max-w-xl mx-auto text-mute text-xs sm:text-sm leading-relaxed text-center">
-          與 BLACK CARD 月費 NT$ 499 比較 ·{" "}
-          <span className="text-gold">5.4 個月即達損益平衡</span> ·
-          之後每年省下 NT$ 5,988
+          與 BLACK CARD 月費 NT$ 299 比較 ·{" "}
+          <span className="text-gold">9 個月即達損益平衡</span> ·
+          之後每年省下 NT$ 3,588
         </p>
         <p
           lang="en"
@@ -345,7 +345,7 @@ export default async function FoundersPage({
             </li>
           </ul>
           <p className="mt-5 text-mute/80 text-xs sm:text-sm leading-relaxed">
-            想升級成 Founders 27(NT$ 2,700 終身)或 BLACK CARD(NT$ 499/月 · 預計
+            想升級成 Founders 27(NT$ 2,700 終身)或 BLACK CARD(NT$ 299/月 · 預計
             Q3 2026 開放)· 任時可選。也可<strong className="text-mute">永遠停在這層</strong>·
             <span className="text-gold"> 我們不催</span>。
           </p>
@@ -715,14 +715,14 @@ export default async function FoundersPage({
             <CalcRow label="對標" en="ANCHOR">
               <span className="text-mute">
                 BLACK CARD 月費{" "}
-                <span className="text-bone tabular">NT$ 499</span> /月
+                <span className="text-bone tabular">NT$ 299</span> /月
               </span>
             </CalcRow>
 
             <CalcRow label="5 年訂閱對照" en="5-YEAR PARITY">
               <span className="text-mute">
                 BLACK CARD:{" "}
-                <span className="text-bone tabular">NT$ 29,940</span>
+                <span className="text-bone tabular">NT$ 17,940</span>
                 <span className="mx-2 text-mute/50">vs</span>
                 FOUNDERS 27:{" "}
                 <span className="text-gold tabular">NT$ 2,700</span>

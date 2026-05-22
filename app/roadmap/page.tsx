@@ -78,12 +78,12 @@ const LOCKED: { quarter: string; items: RoadmapItem[] }[] = [
     items: [
       {
         title: "Founders 27 正式預售開啟",
-        body: "NT$ 2,700 一次性 · 限量 270 名 · 手工銀行轉帳 · Tim 親手 onboarding 每一位。預期 5.4 個月 break-even。流程細節已寫進 docs/MANUAL-ONBOARDING.md。",
+        body: "NT$ 2,700 一次性 · 限量 270 名 · 手工銀行轉帳 · Tim 親手 onboarding 每一位。預期 9 個月 break-even(BLACK CARD NT$ 299/月 × 9)。流程細節已寫進 docs/MANUAL-ONBOARDING.md。",
         evidenceHref: "/founders",
         evidenceLabel: "/founders 完整邏輯",
       },
       {
-        title: "BLACK CARD 月費 NT$ 499 上線(TapPay 訂閱)",
+        title: "BLACK CARD 月費 NT$ 299 上線(TapPay 訂閱)",
         body: "賣的不是引擎(永遠免費)· 賣的是社群 + 策展 + 創作者 take。對標 Stratechery / The Athletic / Bankless Premium / TradingView Pro。",
         evidenceHref: "/founders",
         evidenceLabel: "BLACK CARD reframe",

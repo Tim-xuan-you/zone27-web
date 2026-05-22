@@ -10,7 +10,7 @@ import EngineStamp from "@/components/EngineStamp";
 export const metadata: Metadata = {
   title: "BLACK CARD · UI Preview · ZONE 27",
   description:
-    "ZONE 27 BLACK CARD 訂閱會員 UI preview · 預計 2026 Q3 上線 · NT$ 499/月 · 信用卡定期定額自動扣款 · 5% 創作者抽成 · 14 天無條件退款 · pre-launch mockup state · payment infrastructure ready 後正式上線。",
+    "ZONE 27 BLACK CARD 訂閱會員 UI preview · 預計 2026 Q3 上線 · NT$ 299/月 · 信用卡定期定額自動扣款 · 5% 創作者抽成 · 14 天無條件退款 · pre-launch mockup state · payment infrastructure ready 後正式上線。",
 };
 
 // ── ZONE 27 · /membership/black-card ───────────────────
@@ -114,7 +114,7 @@ export default function BlackCardPage() {
           </div>
           <h1 className="text-4xl sm:text-5xl text-bone font-light tracking-tight max-w-3xl">
             BLACK CARD ·{" "}
-            <span className="text-gold">NT$ 499 / 月</span>
+            <span className="text-gold">NT$ 299 / 月</span>
           </h1>
           <p className="mt-6 text-mute leading-relaxed max-w-2xl">
             ZONE 27 訂閱會員 · 信用卡定期定額自動扣款 · 14 天無條件退款 ·
@@ -246,7 +246,7 @@ export default function BlackCardPage() {
                 disabled
                 className="w-full bg-mute/30 text-mute py-3 font-mono text-xs tracking-[0.3em] cursor-not-allowed"
               >
-                → 訂閱 NT$ 499 / 月(MOCKUP · disabled)
+                → 訂閱 NT$ 299 / 月(MOCKUP · disabled)
               </button>
               <p className="font-mono text-mute/60 text-[10px] tracking-[0.25em] text-center leading-relaxed">
                 首月 14 天無條件退款 · 隨時可取消 · 每月扣款前 3 天 email 提醒
@@ -306,7 +306,7 @@ export default function BlackCardPage() {
 
         <FounderSignOff>
           <p>
-            BLACK CARD 是 ZONE 27 主要 recurring revenue model · NT$ 499/月 ·
+            BLACK CARD 是 ZONE 27 主要 recurring revenue model · NT$ 299/月 ·
             支援 engine iteration + 給訂閱者投 voting 影響下個 ship · 拿 Tim
             每週工程筆記 full 版。 5% 創作者抽成 vs 業界 30-50% 是降維打擊 ·
             per /membership #pick-vs-bet brand boundary 明確「球迷 share 預測」

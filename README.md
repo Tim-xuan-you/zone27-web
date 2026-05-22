@@ -99,7 +99,7 @@ lib/
 | Tier | 費用 | 名額 | 創作者抽成 |
 |---|---|---|---|
 | FREE | NT$ 0 | 無限 | — |
-| BLACK CARD | NT$ 499 / 月 | 無限 | 5% |
+| BLACK CARD | NT$ 299 / 月 | 無限 | 5% |
 | **FOUNDERS 27** | **NT$ 2,700 一次性 · 終身** | **270 · 永遠關閉** | **0%** |
 
 拒絕 AdMob 廣告收入,只走 Premium Sponsor。

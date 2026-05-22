@@ -170,7 +170,7 @@ Current pending (as of 2026-05-20 DAY 2 collapse):
 ## 🏛️ 商業模式定錨
 
 - **Free Tier:** 看得到基本數據,不能參與
-- **BLACK CARD:** NT$ 499 / 月 — 黑金會員,大神賣明牌平台 5% 抽成
+- **BLACK CARD:** NT$ 299 / 月 — 黑金訂閱會員,5% 創作者抽成(Round 33 reprice 499→299 per agent NT$ 200-450/月 benchmark band sweet spot · Netflix Premium NT$ 390 comparable)
 - **FOUNDERS 27:** NT$ 2,700 一次性 / 限量 270 名 / 終身 / 創作者 0% 抽成
 - **拒絕:** 廣告營收(AdMob 永久封殺),只走 Premium Sponsor
 
@@ -246,7 +246,7 @@ Engine + 賽事(只 1 場真實 cpbl-260521-01 · per Day 3 placeholder purge)
 /membership              4-tier ladder 總覽(Round 25 NEW · Round 27 Footer + Cmd-K 全鏈)
                          · Round 30 W4 MEMBER SYSTEM MAP + Round 30 W11 cuts(MAP + 4-paragraph
                          Creator Permissions → PermLine 1-liners · 10→7 sections)
-/membership/black-card   **NEW Round 31 W-X3** · BLACK CARD 訂閱會員 UI preview · NT$ 499/月 ·
+/membership/black-card   **NEW Round 31 W-X3** · BLACK CARD 訂閱會員 UI preview · NT$ 299/月(Round 33 reprice from 499)·
                          5 unlocks(賽事發言 / 創作者抽成 5% / 每月 voting / Tim 工程筆記 full /
                          Founders 27 LINE 群 access)· payment flow MOCKUP(disabled · 2026 Q3
                          上線)· 5 FAQ · ArticleMeta 4min + FounderSignOff · Round 32 W-A custom

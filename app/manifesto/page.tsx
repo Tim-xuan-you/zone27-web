@@ -206,7 +206,7 @@ export default function ManifestoPage() {
               <strong className="text-bone">這個倒置讓我們失去什麼:</strong>{" "}
               我們永遠不會有「ARR 50x 線性成長」的故事可以講給創投。
               收入上限 = 270 位 Founders × NT$ 2,700 + N 位 BLACK CARD ×
-              NT$ 499/月。這是一個{" "}
+              NT$ 299/月。這是一個{" "}
               <Link href="/about" className="text-gold hover:underline underline-offset-4">
                 俱樂部規模的事業
               </Link>

@@ -290,7 +290,7 @@ export const COMMAND_ITEMS: CommandItem[] = [
       "subscription",
       "訂閱",
       "黑卡",
-      "499",
+      "299",
       "月費",
       "monthly",
       "mockup",

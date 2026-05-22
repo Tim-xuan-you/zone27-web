@@ -12,7 +12,7 @@ import { BRAND, OG_SIZE, OG_CONTENT_TYPE } from "@/lib/brand";
 // 設計原則:
 //   - PRE-LAUNCH · UI MOCKUP badge 顯眼(同 page hero)
 //   - 5 unlocks 條列(球迷 grammar:明牌 / voting / Tim 筆記 / LINE 群)
-//   - NT$ 499 / 月 + 5% 創作者抽成(vs 業界 30-50% 是降維打擊)
+//   - NT$ 299 / 月 + 5% 創作者抽成(vs 業界 30-50% 是降維打擊)
 //   - 反向 marketing punchline:「Subscription preview. We don't take
 //     money until Q3.」
 // ─────────────────────────────────────────────────────
@@ -20,7 +20,7 @@ import { BRAND, OG_SIZE, OG_CONTENT_TYPE } from "@/lib/brand";
 export const size = OG_SIZE;
 export const contentType = OG_CONTENT_TYPE;
 export const alt =
-  "ZONE 27 · BLACK CARD · 訂閱會員 UI preview · NT$ 499/月 · Q3 2026 上線 · 5 unlocks · 5% 創作者抽成";
+  "ZONE 27 · BLACK CARD · 訂閱會員 UI preview · NT$ 299/月 · Q3 2026 上線 · 5 unlocks · 5% 創作者抽成";
 
 export default async function BlackCardOgImage() {
   return new ImageResponse(
@@ -132,7 +132,7 @@ export default async function BlackCardOgImage() {
               display: "flex",
             }}
           >
-            NT$ 499 / 月
+            NT$ 299 / 月
           </span>
           <span
             style={{
