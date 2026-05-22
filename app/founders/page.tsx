@@ -832,6 +832,13 @@ export default async function FoundersPage({
         >
           閱讀完整品牌方法論 →
         </Link>
+        <Link
+          href="/founders/ledger"
+          className="block mt-3 font-mono text-mute hover:text-gold text-[10px] tracking-[0.3em] transition-colors"
+          title="本週新分配 · 累計通過率 · 拒絕原因 sample(去 PII)· 4 brand IP axiom 同時 fire"
+        >
+          分配公開帳本 · 拒絕原因公布 · 每週一更 →
+        </Link>
 
         {/* ── Share this offer · private-DM lever ── */}
         <div className="mt-10 pt-8 border-t border-line/40 flex items-center justify-center">

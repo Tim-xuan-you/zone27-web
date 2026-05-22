@@ -33,9 +33,45 @@ export const metadata: Metadata = {
 // ─────────────────────────────────────────────────────
 
 const LAST_UPDATED = "2026-05-22";
-const CYCLE = "Round 28-31 · 2026-05-22 · TONIGHT'S 3 RECEIPTS + Savant bars + EngineStamp + critic-hardening 5 patches";
+const CYCLE = "Round 28-31 · 2026-05-22 · 多 wave 大 push · TONIGHT 3 receipts + Savant bars + critic-hardening + signature + CPBL auto-fetch + 「我看 ___」 personalization + Open Allocation Ledger";
 
 const SHIPPED_THIS_CYCLE: { title: string; body: string; href?: string }[] = [
+  // ── 🏛️ Round 31 Wave S · Open Allocation Ledger ──
+  {
+    title: "[R31 WS] 🏛️ NEW /founders/ledger · Open Allocation Ledger · 4 brand IP axiom 同時 fire",
+    body: "Onboarding research agent ONE deepest call ship。 Patek · Hermès · Tesla · Apple Vision Pro 都做 process transparency · 但**沒人公布「本週拒絕了誰 · 為什麼」**。 ZONE 27 因 disclosure-first 結構性可以做 · brand 邏輯是「方法公開·品味私藏」公布拒絕 = 強化 brand IP 不 dilute。 31st visitor-discoverable route。 Pre-launch empty scaffold + binding allocation rules + Future weekly review rows scaffolding。 4 brand IP axiom 同時 fire 的唯一 page:Pratfall(公布拒絕)+ Costly Signaling(每週手寫不可造假)+ Disclosure Philosophy(延伸 /audit 公開模型 → 公開分配模型)+ 倒置 SaaS(手工稀缺商品 = 手工稀缺流程)。 5 步流程 binding rule(申請窗口 · 審核標準 · 通過 onboard · 拒絕 email · 此頁更新)修改需 30 天前 /changelog 公告 · 同 /audit S05 PRE-COMMIT pattern。 CommandPalette + /founders cross-link 已 wire。",
+    href: "/founders/ledger",
+  },
+  // ── 🏟️ Round 31 Wave N · TeamPick personalization ──
+  {
+    title: "[R31 WN] 🏟️ TeamPick 「我看 ___」 localStorage personalization · fan-grammar moat ship",
+    body: "Critic-hardening agent W-G ONE deepest call 終於 ship。「對你(這個富邦球迷)說話 · 不對球迷說話」 fan grammar moat。 球迷 lived experience 不是「我喜歡棒球」 · 是「我看富邦 / 我看兄弟 / 我看統一」。 整個網站從來沒問這句話。 新檔:lib/teams.ts(6 隊 canonical · localStorage z27_team helpers)· TeamPickPanel(client picker · 2 variant · SSR-safe)· MyTeamTrackRecord(personal N=X · ✓Y ✕Z counter)· MyTeamMatchNote(您支持的 X 在這場是 favorite/underdog)。 Wire-up:/track-record hero + /matches/[gameId] hero。 brand IP:0 cookie / 0 server / 0 PII / 純 localStorage · 對齊 FUNDED BY FOUNDERS · NO TRACKERS axiom。 homepage = ONE thing 仍受尊重 · picker 只 inline trust artifact pages 不在 homepage。",
+    href: "/track-record",
+  },
+  // ── 🛡️ Round 31 Wave Q · CRITICAL security fixes ──
+  {
+    title: "[R31 WQ] 🛡️ 2 CRITICAL security fixes · open redirect + CSRF defense",
+    body: "Code audit agent 2nd pass 帶回 2 CRITICAL/HIGH security findings:(1) /auth/callback open redirect · 「next」 param 未驗證 · 可被 inject phishing URL · 加 sanitizeNext() 只接受 single `/` 開頭 internal path。 (2) /api/submit 缺 Origin/CSRF 防護 · 攻擊者頁面可 trigger user authenticated fetch POST 造成 cross-origin spam · 加 isSameOrigin() check · 不符 403。 brand IP impact:per /privacy 0-tracker promise · 安全性 = trust signal · 不修不公開 = ZONE 27 trust 自殺。 三綠 ✓。",
+    href: "/login",
+  },
+  // ── 🎁 Round 31 Wave M · 5 unlocks dashboard grid ──
+  {
+    title: "[R31 WM] 🎁 5 unlocks prominent grid + /membership FREE TIER 直連 /login",
+    body: "Tim canary fire「會員哩!還是沒辦法享用會員能使用的所有功能呀!請問一般人要怎麼加入會員?拜託別這麼複雜!」 surface 2 conversion blockers:(1) visibility · 5 FREE TIER unlocks 散在不同 routes · /member 只 text 1 行帶過。 (2) onboarding 複雜 · /membership FREE TIER CTA href=#waitlist 只 email collection 不是真會員註冊。 修:NEW MemberUnlocksGrid 5-card prominent grid(authenticated stats overlay + anonymous preview CTA → /login)apply 到 /member 上方 main visible · /membership FREE TIER CTA href #waitlist → /login direct。 brand IP「one menu per dashboard」延伸「one tense per page」 · 您擁有的福利 surface 而非藏 deep page。",
+    href: "/member",
+  },
+  // ── 🤖 Round 31 Wave I+J+K+L · CPBL auto-fetch + pitcher team SWAP + real stats ──
+  {
+    title: "[R31 WI/J/K/L] 🤖 CPBL pitcher stats 自動化 + pitcher-team SWAP fix · Tim 不用截圖",
+    body: "Tim push back「真的太麻煩了 · 每天都要複製這些給您?」 surface workflow blocker。 Recon 發現 cpbl.com.tw 是 server-rendered HTML(不是 SPA · CLAUDE.md 寫錯)· /stats/recordall?kindcode=A&position=02 一頁 inline 所有投手 K/9 · BB/9 · HR/9 · pre-computed metrics。 (W-I) 88 行 cheerio script + lib/cpbl-pitchers.ts auto-generated lookup + npm run fetch-cpbl shortcut · 從 Tim daily screenshot grind 升 30-sec one-click refresh。 (W-J) wire-up:lib/matches.ts mergePitcherStats() 自動 overlay real stats over hardcoded estimate。 (W-K) pagination fix:從 15 → 16 pitchers across 2 pages。 (W-L) Tim 矯正 logo legend · CPBL 6 隊 logo→隊伍對應 fix · matches.ts cpbl-260522-02/03 兩場 away pitcher SWAP(魔神龍 ↔ 獅帝芬)· + 真實 ERA values(魔神龍 0.61 · 艾速特 1.80 · 曾家輝 2.97)。 7/8 pitchers 真實 stats live · 1/8 estimate(郭俊麟 · IP 不足 qualify · 不急)。",
+    href: "/matches",
+  },
+  // ── ✍️ Round 31 W-H · Tim signature + bank info ──
+  {
+    title: "[R31 WH] ✍️ Tim signature PNG + bank info gitignored · prereq 1+3 DONE",
+    body: "Tim 親手簽名(abstract X 花體 · brand-mark-grade logogram · Patek/Hermès 等級的 visual identity)· jimp 處理 pipeline(白底 → 透明 + 黑色拉滿 + autocrop + resize 600px Lanczos)· output public/tim-signature.png。 + Tim 銀行 4 欄位 collected 存 docs/private/bank-info.md(gitignored · public GitHub 永遠看不到 · Claude 新對話從本機 disk 讀)· .gitignore 加 docs/private/ entry · git check-ignore verified。 Founders 27 launch prereq 1+3 DONE(剩 2 Gmail filter · 4 PDF cert · 5 timing 不卡資訊收集)。",
+    href: "/audit",
+  },
   // ── 🛡️ Round 31 Wave G · Critic-hardening top 5 patches + fan-grammar narrative ──
   {
     title: "[R31 WG] 🛡️ Critic-hardening 5 patches + fan-grammar narrative · agent 攻擊面審視 ship",
