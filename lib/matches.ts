@@ -192,12 +192,16 @@ const rawMatches: Match[] = [
       name: "樂天桃猿",
       en: "MONKEYS",
       pitcher: {
+        // Round 31 W-L · Tim 截圖 real 2026 stats verified
+        // ERA 2.97 · 30.1 IP · 25 H · 2 HR · 10 R · 10 ER (起算季)
+        // K/BB columns 不在 Tim 累計成績 screenshot · 待 individual page
+        // fetch 補(下次 wave)
         name: "曾家輝",
-        era: "4.50",       // estimate · 本土 mid-tier
+        era: "2.97",       // real · per Tim screenshot 2026 累計成績
         k9: "7.0",         // estimate · 聯盟均值
         whip: "1.40",      // estimate
         bb9: "3.5",        // estimate
-        hr9: "1.20",       // estimate
+        hr9: "0.60",       // real · (2 HR / 30.1 IP) × 9
       },
       recent: ["L", "W", "L", "L", "W"],  // estimate · 14-19 mid-bottom
       winRate: 46,
