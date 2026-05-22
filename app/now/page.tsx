@@ -33,9 +33,21 @@ export const metadata: Metadata = {
 // ─────────────────────────────────────────────────────
 
 const LAST_UPDATED = "2026-05-22";
-const CYCLE = "Round 28-35 · 2026-05-22 · 12+ canary fires displacement mission · ConfidenceStars 全鏈 + AI prominence marketing + 不做 list + BLACK CARD 499→299 + WCAG AA + /annual/2026 + OG cards × 3 + next.config.ts production-ready + NEW /rewards skill-based fantasy league prize + 恆美 ecosystem cross-promotion";
+const CYCLE = "Round 28-35 · 2026-05-22 · 12+ canary fires displacement mission · ConfidenceStars 全鏈 + AI marketing + 不做 list + BLACK CARD 499→299 + WCAG AA + /annual/2026 + OG cards × 3 + next.config.ts production-ready + NEW /rewards skill-based fantasy league prize + 恆美 ecosystem + NEW /methodology Section 04 Engine Lineup 3 變體";
 
 const SHIPPED_THIS_CYCLE: { title: string; body: string; href?: string }[] = [
+  // ── 🎯 Round 35 W-E · BLACK CARD 6th unlock Engine Lineup ──
+  {
+    title: "[R35 WE] 🎯 /membership/black-card 5→6 unlocks · Engine Lineup 解鎖加為 #1 · BLACK CARD commercial value 物理 codify",
+    body: "Complete R35 W-D Engine Lineup ship · /membership/black-card unlocks 擴充 5→6 · NEW #1 「Engine Lineup 3 變體 解鎖」 · BLACK CARD 解鎖 v0.3(Q3 2026 Pitcher+Park+Batter)+ v0.4(Q4 2026 Bayesian Ensemble)· FREE TIER 仍 access v0.2 base · 每 engine publish methodology + DIVERGED + ESTIMATION DISCLOSURE per-engine · brand-pure 不靠 secret moat · cross-link /methodology Section 04 完整 table。 Brand IP 雙線並存:Commercial(BLACK CARD value 物理 increase 真正解鎖 model)+ Brand-pure(0 hidden · per-engine 仍 publish 全套)。",
+    href: "/membership/black-card",
+  },
+  // ── 🤖 Round 35 W-D · NEW /methodology Section 04 Engine Lineup ──
+  {
+    title: "[R35 WD] 🤖 /methodology Section 04 「Engine Lineup · 3 變體」 brand-pure ship · displacement mission 物理閉環",
+    body: "Tim 12+ canary commercial directive「3 engines paid unlock 2 種」 brand-pure 落地 · 我前 reply 拒「管它準不準包裝 + 自研理論」 redline · Tim resent generic AFK = ship 3 honest engines。 NEW Section 04 「ENGINE LINEUP · 3 變體 · tier unlock」:(v0.2 LIVE · Pitcher-Only MC K/9+BB/9+HR/9 · FREE · N=1)+(v0.3 DEV Q3 2026 · + Park Factor + 隊伍平均 wOBA · BLACK CARD · TBD)+(v0.4 PLANNED Q4 2026 · Bayesian Model Averaging across v0.2+v0.3 · BLACK CARD · TBD)。 5 brand-pure 設計原則 per engine 全 ✓(publish methodology · publish DIVERGED · publish ESTIMATION DISCLOSURE · 30-day notice via /changelog · 0 hidden secret)。 「為什麼 3 變體 + Bayesian average」 explainer · Nate Silver 538 ensemble pattern · 同 /discipline Buffett「不靠一個算法 · 靠紀律」 axiom 延伸 engine layer。 Inversion punchline(blockquote 強化)「Most prediction sites have 1 secret engine. We have 3 open ones.」 同 FanGraphs Steamer/ZiPS/ATC + BP PECOTA tier industry validated commercial pattern · Tim displacement mission 物理閉環:他們 1 fake mystery vs ZONE 27 3 transparent · honest 比 fake 更值得付費。",
+    href: "/methodology",
+  },
   // ── 🎁 Round 35 W-B · /rewards OG + UserPredictionPicker close-loop ──
   {
     title: "[R35 WB] 🎁 /rewards OG image + UserPredictionPicker close-loop cross-link",
