@@ -3,6 +3,7 @@ import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import HeroLiveCard from "@/components/HeroLiveCard";
 import TonightReceiptsCard from "@/components/TonightReceiptsCard";
+import RecentMatchesRow from "@/components/RecentMatchesRow";
 import {
   getFeaturedMatch,
   getTodayMatches,
@@ -226,6 +227,16 @@ export default function Home() {
 
       {/* Hairline divider — visual breath. Tighter on mobile. */}
       <div className="mx-auto w-32 gold-line mb-8 sm:mb-20" />
+
+      {/* Round 40 W-G · Agent F #5 · RecentMatchesRow · client-only ·
+          conditional render when localStorage has entries · 0 SSR /
+          0 server state / 0 cookies / 0 tracking · brand IP homepage
+          minimalism preserved(無 entries 時不 render)· Day One「On This
+          Day」 pattern transplant to baseball matches · WhatsApp landers
+          升 multi-game readers without account · Agent F deepest sharp
+          call「3-step funnel: precise landing → instant exploration →
+          return-visit recall」 完整 close。 */}
+      <RecentMatchesRow />
 
       {/* ── THE ENGINE · 主視覺 · 即時跑這場 ─────────
           This is the soul. Engine output IS the product · IS the

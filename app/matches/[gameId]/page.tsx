@@ -24,6 +24,7 @@ import UnderdogLens from "@/components/UnderdogLens";
 import BullpenDepthLens from "@/components/BullpenDepthLens";
 import MatchupHistoryLens from "@/components/MatchupHistoryLens";
 import LensTrace, { ENGINE_V02_TRACE_STEPS } from "@/components/LensTrace";
+import MatchViewTracker from "@/components/MatchViewTracker";
 import EngineStamp from "@/components/EngineStamp";
 import { getCpblAdvancedByName } from "@/lib/cpbl-advanced";
 import RelatedReading from "@/components/RelatedReading";
@@ -79,6 +80,15 @@ export default async function MatchDetailPage({
       <Nav active="matches" />
 
       <main id="main">
+
+      {/* Round 40 W-G · Agent F #5 · MatchViewTracker · client-only side
+          effect · pushes current match to localStorage recent-matches list ·
+          0 server write · 0 PII · per disclosure axiom storage key 公開 in
+          /audit · WhatsApp landers 升 multi-game readers without cookies。 */}
+      <MatchViewTracker
+        gameId={m.id}
+        title={`${m.home.name} vs ${m.away.name}`}
+      />
 
       {/* ── BREADCRUMB ─────────────────────────────── */}
       <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pt-10">
@@ -444,7 +454,7 @@ export default async function MatchDetailPage({
           from existing match.team.recent · 「hot hand fallacy」 educational
           disclaimer · Tversky/Gilovich 1985 cite · brand-pure 不假
           prediction · 同 Section 05 Lens Variety axiom。 */}
-      <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-20">
+      <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-20 [content-visibility:auto] [contain-intrinsic-size:0_600px]">
         <h2 className="font-mono text-gold text-[10px] tracking-[0.4em] mb-6">
           / 01B · VIBE CHECK · 氣勢 lens(streak descriptive · 非 prediction)
         </h2>
@@ -462,7 +472,7 @@ export default async function MatchDetailPage({
           pure 不假 prediction · ESTIMATE methodology + PR invitation per
           /audit Section 02 ESTIMATION DISCLOSURE pattern · 同 Section 05
           Lens Variety axiom。 */}
-      <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-20">
+      <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-20 [content-visibility:auto] [contain-intrinsic-size:0_600px]">
         <h2 className="font-mono text-gold text-[10px] tracking-[0.4em] mb-6">
           / 01C · PARK FACTOR · 場館 lens(home advantage · 非 prediction)
         </h2>
@@ -475,7 +485,7 @@ export default async function MatchDetailPage({
           WHIP + BB9 + K9 季累計 derive command stability proxy(不是
           true fatigue · v0.2 需 ingest rest_days + season_ip)· brand IP
           Pratfall + Costly Signaling + Disclosure 三 axiom 同時 fire。 */}
-      <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-20">
+      <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-20 [content-visibility:auto] [contain-intrinsic-size:0_600px]">
         <h2 className="font-mono text-gold text-[10px] tracking-[0.4em] mb-6">
           / 01D · PITCHER FATIGUE · 投手疲勞 lens(v0.1 PROXY · 非 prediction)
         </h2>
@@ -493,7 +503,7 @@ export default async function MatchDetailPage({
           ≠ underdog 會贏」 主動 surface · displacement mission 對 玩運彩
           「冷門大爆」 marketing 反向 · 0 contrarian play · 0 prediction
           偏置 · 純 viz from existing winRate data。 */}
-      <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-20">
+      <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-20 [content-visibility:auto] [contain-intrinsic-size:0_600px]">
         <h2 className="font-mono text-gold text-[10px] tracking-[0.4em] mb-6">
           / 01E · UNDERDOG TRACKER · 黑馬機率 lens(upset probability · 非 contrarian)
         </h2>
@@ -508,7 +518,7 @@ export default async function MatchDetailPage({
           + last 7 days workload)· brand IP Pratfall + Costly Signaling +
           Disclosure 三 axiom 同時 fire · 同 PitcherFatigueLens v0.1 PROXY
           pattern。 */}
-      <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-20">
+      <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-20 [content-visibility:auto] [contain-intrinsic-size:0_600px]">
         <h2 className="font-mono text-gold text-[10px] tracking-[0.4em] mb-6">
           / 01F · BULLPEN DEPTH · 牛棚 lens(v0.1 PROXY · 非 prediction)
         </h2>
@@ -529,7 +539,7 @@ export default async function MatchDetailPage({
           /methodology Section 05 「We're building 7」 → 「WE BUILT 7」 LIVE
           truth not future promise · displacement battle 對 玩運彩+報馬仔
           1 fake angle vs ZONE 27 7 honest 物理閉合。 */}
-      <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-20">
+      <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-20 [content-visibility:auto] [contain-intrinsic-size:0_600px]">
         <h2 className="font-mono text-gold text-[10px] tracking-[0.4em] mb-6">
           / 01G · MATCHUP HISTORY · H2H lens(real data · 7th LIVE Lens Variety)
         </h2>
