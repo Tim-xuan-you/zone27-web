@@ -107,6 +107,43 @@ export default function PrivacyPage() {
           <li>❌ 沒有個人身分資料(姓名/電話/地址全部不收)</li>
           <li>❌ 沒有瀏覽行為紀錄(您在 /lab 跑幾次 simulation 我們不知道)</li>
         </ul>
+
+        {/* Round 52 W-C · Agent 3 #4 fix · 「我們不收」 list explicit 但
+            缺 「我們審計過但 reject」 specific tools list。 Plausible.io
+            privacy page 模式 · 公開審計過的 tracker tools 名單 = costly
+            signal「我們花心力 audit 才知道要 reject」 比泛 statement 強。
+            Append 9-item「EXPLICITLY DISABLED TOOLS」 grid · per /audit S05
+            DISCLOSURE PHILOSOPHY 同 pattern。 */}
+        <div className="mt-8 bg-slate/30 border border-line/60 p-5 sm:p-6">
+          <p
+            lang="en"
+            className="font-mono text-gold text-[10px] tracking-[0.4em] mb-4"
+          >
+            ⚠ EXPLICITLY DISABLED TOOLS · 我們審計過 但 不用
+          </p>
+          <p className="text-mute/85 text-sm leading-relaxed mb-4">
+            泛說「我們不追蹤」 不夠 — 列出我們{" "}
+            <strong className="text-bone">specifically audited and rejected</strong>{" "}
+            的工具:
+          </p>
+          <ul className="grid sm:grid-cols-2 gap-x-6 gap-y-2 text-sm text-mute/85">
+            <li>✕ Google Analytics / Vercel Analytics</li>
+            <li>✕ Facebook Pixel / Meta Conversion API</li>
+            <li>✕ Hotjar / FullStory session replay</li>
+            <li>✕ Segment / mParticle CDP</li>
+            <li>✕ Mixpanel / Amplitude product analytics</li>
+            <li>✕ Datadog RUM / New Relic browser</li>
+            <li>✕ Resend email open/click tracking(delivery only)</li>
+            <li>✕ Sentry user-context PII auto-attach</li>
+            <li>✕ Cloudflare Web Analytics / Plausible(都未安裝)</li>
+          </ul>
+          <p className="mt-4 font-mono text-mute/70 text-[10px] tracking-[0.3em] leading-relaxed">
+            ⚓ 此 list 每加 1 個 tool 需 30 天前 /changelog 公告 · 同 /audit
+            S05 PRE-COMMIT pattern · Costly Signaling 100×。 砍 1 個 tool
+            from this list = brand 自殺。
+          </p>
+        </div>
+
         <p className="text-mute/80 mt-6">
           這也代表:目前的 ZONE 27 是一個「客戶端透明」的網站,所有互動(Monte
           Carlo 模擬、REPLAY 動畫、自訂引擎)全部在您的瀏覽器執行,

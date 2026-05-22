@@ -43,6 +43,46 @@ export default function AboutPage() {
         </div>
       </section>
 
+      {/* Round 52 W-C · Agent 3「necessary soul」 fix · 8-字 grammar
+          「方法公開 · 品味私藏」 之前 only surface in /manifesto Section V
+          SYNTHESIS · 24 個 page 都有引用 但 /about + /learn(訪客 first-
+          touch 兩個 entry-level pages)沒有。 加 hero-level grammar anchor
+          block · Tim 親手簽 · 物理 codify 整個品牌的 unifying theory · 訪客
+          /about 第一眼看到 8 字 + 英文版 + 1 行 explanation。 */}
+      <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-12 text-center">
+        <div className="inline-block border border-gold/40 bg-slate/40 px-8 py-6 glow-soft">
+          <p
+            lang="en"
+            className="font-mono text-gold/85 text-[10px] tracking-[0.4em] mb-3"
+          >
+            OUR UNIFYING THEORY · 8 字 BRAND GRAMMAR
+          </p>
+          <p className="text-3xl sm:text-4xl text-bone font-light tracking-tight leading-snug mb-3">
+            方法公開 <span className="text-gold/60 mx-2">·</span> 品味私藏
+          </p>
+          <p
+            lang="en"
+            className="font-mono text-gold text-xs tracking-[0.35em] mb-4"
+          >
+            SHOW YOUR WORK <span className="text-gold/40 mx-1">·</span> KEEP YOUR SOUL
+          </p>
+          <p className="text-mute/85 text-sm leading-relaxed max-w-xl mx-auto">
+            這 8 個字是 ZONE 27 整個品牌的 unifying theory ·
+            從 /lab 引擎開源 / /audit model report / /track-record DIVERGED
+            不藏 / /privacy 0 tracking · 全部從這一句衍生。
+          </p>
+          <p className="mt-3 font-mono text-mute/70 text-[10px] tracking-[0.3em]">
+            full canonical 寫在{" "}
+            <Link
+              href="/manifesto"
+              className="text-gold underline-offset-4 hover:underline"
+            >
+              /manifesto Section V SYNTHESIS
+            </Link>
+          </p>
+        </div>
+      </section>
+
       <div className="mx-auto w-32 gold-line mb-20" />
 
       {/* ── 00 PROLOGUE · Round 19 soul addition ──────

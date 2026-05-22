@@ -831,6 +831,31 @@ export default function NowPage() {
           <strong className="text-bone">這頁是當下</strong> —
           本週引擎在想什麼、發現了什麼、還沒解決什麼。
         </p>
+
+        {/* Round 52 W-C · Agent 3 #6 fix · binding cadence commitment
+            · /now 之前 no explicit cadence promise · 每週更新但 visitor 不知
+            · 加 binding statement「本頁顯示 past 30 days · 舊條目歸檔到
+            /changelog · 修改需 30-day notice」 · 同 /audit S05 PRE-COMMIT
+            + /methodology/diff Lens Lifetime Pledge pattern · binding 物理 codify。 */}
+        <div className="mt-5 bg-slate/30 border-l-2 border-gold/60 px-4 py-3 max-w-2xl">
+          <p
+            lang="en"
+            className="font-mono text-gold/85 text-[10px] tracking-[0.35em] mb-1.5"
+          >
+            ⚓ CADENCE & BINDING
+          </p>
+          <p className="text-mute/85 text-[13px] sm:text-sm leading-relaxed">
+            本頁顯示{" "}
+            <strong className="text-bone">past 30 days</strong>{" "}
+            真實 ship cycle · 舊條目自動歸檔到{" "}
+            <Link href="/changelog" className="text-gold underline-offset-4 hover:underline">/changelog</Link>
+            。 修改 cadence 或刪 condition 需 30 天前在{" "}
+            <Link href="/changelog" className="text-gold underline-offset-4 hover:underline">/changelog</Link>
+            {" "}公告 · 同{" "}
+            <Link href="/audit" className="text-gold underline-offset-4 hover:underline">/audit</Link>
+            {" "}S05 PRE-COMMIT pattern · Costly Signaling 100×。
+          </p>
+        </div>
         <p className="mt-4 font-mono text-mute/80 text-[10px] tracking-[0.25em] leading-relaxed max-w-2xl">
           沒有 weekly schedule promise · 有東西可以說的時候才更新。
           Linear /now + Derek Sivers /now movement 對標 · 倒置 SaaS

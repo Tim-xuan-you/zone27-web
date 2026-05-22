@@ -271,6 +271,23 @@ export default function SignalBoardPage() {
             加入等候名單 →
           </Link>
         </div>
+
+        {/* Round 52 W-C · Agent 3 #9 fix · /member/submit visibility from
+            /signal-board · brand IP「方法公開 · 品味私藏」 symmetric path:
+            「Tim writes for you」 = /signal-board / 「you write for Tim」
+            = /member/submit。 之前訪客在 /signal-board 看不到 submission entry
+            · 加 1-line CTA · 對齊「品味私藏 = Tim 親手 curate 訪客投稿」 brand
+            grammar 物理 codify。 */}
+        <p className="mt-10 font-mono text-mute/85 text-[11px] sm:text-xs tracking-[0.25em] leading-relaxed">
+          您也有想投稿的研究?{" "}
+          <Link
+            href="/member/submit"
+            className="text-gold underline-offset-4 hover:underline transition-colors"
+          >
+            /member/submit · Tim 1/週 curate →
+          </Link>
+          {" "}(Stratechery Guest Post pattern · 品味私藏 物理 codify)
+        </p>
       </section>
 
       </main>
