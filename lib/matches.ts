@@ -249,12 +249,15 @@ const rawMatches: Match[] = [
       name: "統一7-ELEVEn獅",
       en: "LIONS",
       pitcher: {
-        name: "魔神龍",
-        era: "3.50",       // estimate · 洋將 strong
-        k9: "8.0",         // estimate
-        whip: "1.25",      // estimate
-        bb9: "2.8",        // estimate
-        hr9: "0.85",       // estimate
+        // Round 31 W-L · Tim 截圖矯正 logo + pitcher-team 對應 ·
+        // 獅帝芬 (LL 橘 = 統一)· 不是味全 (W 紅)
+        // 2026 real ERA 2.45 from /team/person?acnt=0000007597
+        name: "獅帝芬",
+        era: "2.45",       // real · 自動同步 from cpbl-pitchers.ts
+        k9: "6.61",        // real
+        whip: "1.22",      // real
+        bb9: "2.83",       // real
+        hr9: "0.19",       // real
       },
       recent: ["W", "W", "L", "W", "W"],  // estimate · 23-13 league leader
       winRate: 60,
@@ -278,12 +281,14 @@ const rawMatches: Match[] = [
       name: "台鋼雄鷹",
       en: "HAWKS",
       pitcher: {
+        // Round 31 W-L · Tim 截圖 real 2026 stats verified
+        // ERA 1.80 · 35 IP · 1 HR · K/BB not in qualifying leaderboard
         name: "艾速特",
-        era: "3.95",       // estimate · 洋將
-        k9: "8.2",         // estimate
-        whip: "1.30",      // estimate
+        era: "1.80",       // real · per Tim screenshot 2026
+        k9: "8.2",         // estimate · K column not in Tim screenshot
+        whip: "1.30",      // estimate · BB column not in Tim screenshot
         bb9: "3.0",        // estimate
-        hr9: "0.95",       // estimate
+        hr9: "0.26",       // real · (1 HR / 35 IP) × 9
       },
       recent: ["W", "L", "W", "L", "W"],  // estimate · 18-18 mid-table
       winRate: 51,
@@ -292,12 +297,16 @@ const rawMatches: Match[] = [
       name: "味全龍",
       en: "DRAGONS",
       pitcher: {
-        name: "獅帝芬",
-        era: "4.10",       // estimate · 洋將
-        k9: "7.8",         // estimate
-        whip: "1.35",      // estimate
-        bb9: "3.2",        // estimate
-        hr9: "1.00",       // estimate
+        // Round 31 W-L · Tim 截圖矯正 logo + pitcher-team 對應 ·
+        // 魔神龍 (W 紅 = 味全)· 不是統一 (LL 橘)
+        // 2026 real ERA 0.61 · 29.1 IP · 27 H · 2 R · 2 ER per Tim screenshot
+        // K/BB 不在 Tim 截圖 · 待 individual page fetch 補
+        name: "魔神龍",
+        era: "0.61",       // real · per Tim screenshot 2026 (elite)
+        k9: "8.0",         // estimate · K column not in Tim screenshot
+        whip: "1.25",      // estimate · approximated from H/IP ratio
+        bb9: "2.8",        // estimate
+        hr9: "0.00",       // real · 0 HR / 29.1 IP per Tim screenshot
       },
       recent: ["L", "W", "W", "L", "W"],  // estimate · 18-16 slightly above .500
       winRate: 49,
