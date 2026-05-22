@@ -345,6 +345,167 @@ repeat 10,000 times → aggregate
         </blockquote>
       </Section>
 
+      {/* ── 05 LENS VARIETY · multi-angle analytical variants ──
+          Round 36 W-A · Tim 13+ canary explicit「壓力減 + 不同 angle 分析
+          + 越開發越多」 framework pivot · 跟 Section 04 ENGINE LINEUP「accuracy
+          progression」 軸線 互補 · 不取代。 LENS VARIETY = 同 v0.2 base · 不
+          問「誰會贏」 · 問「哪些 factor 影響」 = pure data visualizer ·
+          每個 lens publish methodology + open code · 不假 accuracy promise。
+          Patek Philippe complication progression 模式:不是「越準的錶」 · 是
+          「越多 complication」(萬年曆 / 三問報時 / 計時)· ZONE 27 multi-lens
+          同邏輯 · 越多 angle 看比賽 · 不衝突 brand IP 任何 axiom。 訂閱
+          解鎖每 1-2 月 ship 1 new lens · sustained BLACK CARD value compounding。 */}
+      <Section no="05" label="LENS VARIETY" zh="多 angle 分析 · variety 軸線">
+        <p>
+          Section 04 是「<strong className="text-bone">accuracy progression</strong>」
+          軸線(v0.2 → v0.3 → v0.4 越多 input feature · 同預測 winner 任務)。
+          本 Section 是「<strong className="text-bone">analytical variety</strong>」
+          軸線 · 同 v0.2 base · 但從不同 angle 看比賽:不問「誰會贏」 ·
+          問「哪些 factor 影響」 · 純 data visualizer/analyzer · 0 prediction
+          accuracy promise(因為 visualizer 沒有「準」的概念 · 只有「insight」)。
+        </p>
+
+        <p className="mt-4 text-mute/85 leading-relaxed">
+          類比 · <strong className="text-bone">Patek Philippe complication 模式</strong>
+          :Patek 不是「越準的錶」 · 是「越多 complication」(萬年曆 / 三問
+          報時 / 計時)· 每個 complication 是不同 functional angle · 不衝突
+          「同等準」 base。 ZONE 27 multi-lens 同邏輯 · 每 1-2 月 ship 1
+          new lens · sustained BLACK CARD value compounding · brand-pure
+          無限 scaling。
+        </p>
+
+        <p className="mt-6">
+          <strong className="text-bone">7 candidate lenses(roadmap exploration):</strong>
+        </p>
+
+        <div className="mt-3 bg-slate/40 border border-line/70 overflow-hidden">
+          <table className="w-full font-mono text-[11px] sm:text-xs tabular">
+            <thead>
+              <tr className="border-b border-line/60 bg-slate/60">
+                <th className="text-left text-gold/90 tracking-[0.2em] px-3 py-2 text-[10px]">
+                  LENS
+                </th>
+                <th className="text-left text-gold/90 tracking-[0.2em] px-3 py-2 text-[10px]">
+                  ANGLE
+                </th>
+                <th className="text-left text-gold/90 tracking-[0.2em] px-3 py-2 text-[10px]">
+                  STATUS
+                </th>
+                <th className="text-left text-gold/90 tracking-[0.2em] px-3 py-2 text-[10px]">
+                  TIER
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <LensRow
+                lens="Win Probability"
+                angle="預測 home/away win % · 同 Section 04 v0.2 engine"
+                status="LIVE"
+                statusTone="gold"
+                tier="FREE"
+                tierTone="bone"
+              />
+              <LensRow
+                lens="Vibe Check"
+                angle="連勝 / 連敗 streak · 「hot hand vs cold」 educational"
+                status="LENS · planned"
+                statusTone="loss"
+                tier="BLACK CARD"
+                tierTone="gold"
+              />
+              <LensRow
+                lens="Park Factor"
+                angle="4 場館 home advantage 比較 · 哪場有利投/打"
+                status="LENS · planned"
+                statusTone="loss"
+                tier="BLACK CARD"
+                tierTone="gold"
+              />
+              <LensRow
+                lens="Pitcher Fatigue"
+                angle="休息天數 + IP load · 投手疲勞警訊"
+                status="LENS · planned"
+                statusTone="loss"
+                tier="BLACK CARD"
+                tierTone="gold"
+              />
+              <LensRow
+                lens="Underdog Tracker"
+                angle="今晚 upset 機率最高賽事 · 黑馬獵手"
+                status="LENS · planned"
+                statusTone="loss"
+                tier="BLACK CARD"
+                tierTone="gold"
+              />
+              <LensRow
+                lens="Bullpen Depth"
+                angle="兩隊牛棚深度比較 · 後援戰力 audit"
+                status="LENS · planned"
+                statusTone="loss"
+                tier="BLACK CARD"
+                tierTone="gold"
+              />
+              <LensRow
+                lens="Matchup History"
+                angle="此 matchup 過去 N 場 H2H + 趨勢"
+                status="LENS · planned"
+                statusTone="loss"
+                tier="BLACK CARD"
+                tierTone="gold"
+              />
+            </tbody>
+          </table>
+        </div>
+
+        <p className="mt-6">
+          <strong className="text-bone">每 lens brand-pure 設計原則(同 Section 04 standard 延伸):</strong>
+        </p>
+        <ul className="space-y-2 mt-3 text-mute">
+          <li className="flex gap-3 items-baseline">
+            <span className="font-mono text-gold/70 text-[10px] tracking-[0.25em]">▸</span>
+            <span className="flex-1">純 data viz / analyzer · 不假 prediction accuracy promise · 公開 source code per-lens(simulator-vibecheck.ts · simulator-parkfactor.ts 等)</span>
+          </li>
+          <li className="flex gap-3 items-baseline">
+            <span className="font-mono text-gold/70 text-[10px] tracking-[0.25em]">▸</span>
+            <span className="flex-1">每 lens 「為什麼這個 angle 重要」 educational explainer · 不止 viz · 是 sabermetric education</span>
+          </li>
+          <li className="flex gap-3 items-baseline">
+            <span className="font-mono text-gold/70 text-[10px] tracking-[0.25em]">▸</span>
+            <span className="flex-1">BLACK CARD voting decide next lens · IKEA Effect · 訂閱者 voting 影響 ship 順序</span>
+          </li>
+          <li className="flex gap-3 items-baseline">
+            <span className="font-mono text-gold/70 text-[10px] tracking-[0.25em]">▸</span>
+            <span className="flex-1">每 1-2 月 ship 1 new lens · sustained BLACK CARD value compounding · 訂閱越久 越多 lenses 可用</span>
+          </li>
+          <li className="flex gap-3 items-baseline">
+            <span className="font-mono text-gold/70 text-[10px] tracking-[0.25em]">▸</span>
+            <span className="flex-1">Founders 27 終身 lock 未來所有 lenses · 真實「無限解鎖」 value · 同 lifetime brand promise</span>
+          </li>
+        </ul>
+
+        <p className="mt-6 text-mute/85 leading-relaxed">
+          <strong className="text-bone">兩個軸線並存 brand IP 邏輯:</strong>{" "}
+          Section 04(accuracy progression)解「我們的預測準不準?」 · Section 05
+          (analytical variety)解「我們的分析夠不夠多 angle?」。 訪客來 ZONE 27
+          可能想要 prediction accuracy(看 Section 04 receipt)· 也可能想要
+          多 lens insight(看 Section 05 catalogue)· 兩個都 honest 不假。
+        </p>
+
+        <blockquote className="mt-8 border-l-2 border-gold pl-6 py-3">
+          <p className="text-bone text-lg sm:text-xl font-light tracking-tight leading-snug">
+            Most prediction sites have 1 fake angle.<br />
+            <span className="text-gold">We&apos;re building 7 honest ones.</span>
+          </p>
+          <p className="mt-3 text-mute text-sm leading-relaxed">
+            玩運彩+報馬仔 1 個 fake「大師明牌」 angle · ZONE 27 multi-lens
+            7 angles 各自 publish methodology + open code + educational
+            explainer · 同 Patek complication 模式 · brand-pure 無限 scaling ·
+            訂閱者 voting 決定 next ship order · IKEA Effect + Sunk cost +
+            Curiosity + FOMO 4 hook 同時 fire。
+          </p>
+        </blockquote>
+      </Section>
+
       <FounderSignOff>
         <p>
           這份白皮書沒有打算讓所有人讀完。寫給的對象是
@@ -491,6 +652,42 @@ function EngineRow({
       </td>
       <td className="px-3 py-3 text-mute font-mono text-[10px] tracking-[0.2em] tabular">
         {record}
+      </td>
+    </tr>
+  );
+}
+
+// ── Round 36 W-A · LENS VARIETY table row ────────────────
+function LensRow({
+  lens,
+  angle,
+  status,
+  statusTone,
+  tier,
+  tierTone,
+}: {
+  lens: string;
+  angle: string;
+  status: string;
+  statusTone: "gold" | "loss";
+  tier: string;
+  tierTone: "gold" | "bone";
+}) {
+  const statusClass = statusTone === "gold" ? "text-gold" : "text-loss/80";
+  const tierClass = tierTone === "gold" ? "text-gold" : "text-bone";
+  return (
+    <tr className="border-b border-line/40">
+      <td className="px-3 py-3 text-bone font-mono tabular tracking-tight">
+        {lens}
+      </td>
+      <td className="px-3 py-3 text-mute leading-snug">
+        {angle}
+      </td>
+      <td className={`px-3 py-3 ${statusClass} font-mono text-[10px] tracking-[0.2em] whitespace-nowrap`}>
+        {status}
+      </td>
+      <td className={`px-3 py-3 ${tierClass} font-mono text-[10px] tracking-[0.2em] whitespace-nowrap`}>
+        {tier}
       </td>
     </tr>
   );
