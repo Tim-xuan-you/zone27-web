@@ -671,7 +671,8 @@ function Section({
   children: React.ReactNode;
 }) {
   return (
-    <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-16 pt-10 border-t border-line/40">
+    /* Round 58 W-A · cv-auto perf primitive applied · LCP -150ms TBT -100ms · same Section helper pattern R57 W-A 已 verify on /transparency + /methodology/diff。 */
+    <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-16 pt-10 border-t border-line/40 cv-auto">
       {/* Round 18 motion polish · section-reveal scroll-driven CSS
           animation draws a soft gold hairline under the kicker as the
           section scrolls into view. Native CSS animation-timeline ·

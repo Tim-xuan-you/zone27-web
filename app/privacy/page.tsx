@@ -328,7 +328,8 @@ function Section({
   children: React.ReactNode;
 }) {
   return (
-    <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-14 pt-10 border-t border-line/40">
+    /* Round 58 W-A · cv-auto perf primitive · /privacy 8 sections benefit。 */
+    <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-14 pt-10 border-t border-line/40 cv-auto">
       <div className="flex items-baseline gap-4 mb-2">
         <span className="font-mono text-gold/70 text-[10px] tracking-[0.35em]">
           / {no}

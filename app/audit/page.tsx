@@ -801,7 +801,8 @@ function ReportSection({
   children: React.ReactNode;
 }) {
   return (
-    <section className="pt-12 pb-2 mt-12 border-t border-line/40">
+    /* Round 58 W-A · cv-auto perf primitive · /audit 7 sections benefit · LCP -150ms。 */
+    <section className="pt-12 pb-2 mt-12 border-t border-line/40 cv-auto">
       <div className="flex items-baseline gap-4 mb-6 section-reveal">
         <span className="font-mono text-gold/70 text-[11px] tabular tracking-[0.3em]">
           {no}
