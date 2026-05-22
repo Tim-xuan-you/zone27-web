@@ -33,9 +33,39 @@ export const metadata: Metadata = {
 // ─────────────────────────────────────────────────────
 
 const LAST_UPDATED = "2026-05-22";
-const CYCLE = "Round 28-32 · 2026-05-22 · 多 wave 大 push · TONIGHT 3 receipts + Savant bars + critic-hardening + signature + CPBL auto-fetch + 「我看 ___」 personalization + Open Allocation Ledger + 新 route 雙 OG card + Tim founder-dogfood 2 canary fires + Agent skip 4-col 對照 table + 報馬仔/玩運彩 wording IP risk fix";
+const CYCLE = "Round 28-33 · 2026-05-22 · 多 wave 大 push · Tim 9+ canary fires brand-pivot · 量身 prediction-seeking audience · ConfidenceStars 1-5 ★ + AI prominence marketing + 「不做 list」 declarative absence + BLACK CARD repricing 499→299 + WCAG AA contrast bumps + /annual/2026 Year 0 honest report + Agent A subscription patterns + Agent B tech audit";
 
 const SHIPPED_THIS_CYCLE: { title: string; body: string; href?: string }[] = [
+  // ── 📊 Round 33 W-E · /annual/2026 Year 0 honest report ──
+  {
+    title: "[R33 WE] 📊 NEW /annual/2026 · Year 0 honest pre-launch report · radical transparency · 4 axiom 同時 fire",
+    body: "Agent A 研究 #2 priority ship。 Defector + Hell Gate + Aftermath annual report pattern · radical transparency = 最強 costly signaling form · trust > marketing。 Year 0 pre-launch honest content:0 paid · NT$ 0 rev · NT$ 0 月成本(Vercel/Supabase/Resend/GitHub all free)· 7 SYSTEM-TEST forged + 263 待認領 · N=1 PROVED(cpbl-260521-01)· engine v0.2 · 200+ commits audit trail。 6 WHAT FAILED list(R30 W11 MEMBER MAP 砍 · R32 W-C OTP path 砍 · R32 W-D Nav auth-aware fix · R32 W-E wording IP fix · R30-31 BLACK CARD 賣身份 framing 推翻 · Founders 27 Q3 launch timeline 延)。 4 WHAT'S NEXT 2027 binding commitment(Q3 BLACK CARD + Q3 Founders 27 review window + Q4 Engine v0.3 + 2027 May Year 1 publish · 修改需 30 day notice via /changelog 同 /audit S05 PRE-COMMIT pattern)。 4 brand IP axiom 同時 fire:Pratfall(0 sub 0 rev publish)+ Costly Signaling(yearly commitment device)+ Disclosure(延伸 /audit model 公開 → business 公開)+ 倒置 SaaS(SaaS 隱藏 ARR · ZONE 27 Year 0 NT$ 0 透明)。 32→33 visitor-discoverable routes · Cmd-K + related-links wire-up complete · /annual root redirect to /annual/2026。 Update cadence:每年 5/31 publish · 0 hr Tim writing · Claude auto-generate based on Supabase metrics + GitHub commits + Resend deliveries。",
+    href: "/annual/2026",
+  },
+  // ── 🛡️ Round 33 W-D · Agent B audit ship · WCAG AA contrast bumps ──
+  {
+    title: "[R33 WD] 🛡️ Agent B audit · text-mute/40 → text-mute/60(WCAG AA contrast 2.8:1 → 3.9:1)+ /track-record revalidate verify",
+    body: "Agent B technical+UX audit Finding #1 ship · 7 components/pages updated(StickyFoundersCTA · EngineStamp · ProvenanceStamp · RecentSims · /matches/[gameId] · /track-record · MemberDashboardPreview)。 text-mute/40 (#8A93A8 @ 40%) over navy = 2.8:1 FAILS WCAG AA · bump to text-mute/60 = 3.9:1 PASSES。 Decorative separator dots「·」 全站 fix。 Task verify /track-record:29 已有 revalidate = 86400 · day-boundary ledger refresh confirmed working · no fix needed。 Agent B Finding #3 (text-gold/70 → text-gold · 117 instances) defer 不 bulk replace · 因部分 large-font headers 3.1:1 passes AA for ≥18pt · 將來 audit per-instance 細部修。",
+    href: "/track-record",
+  },
+  // ── 💰 Round 33 W-C · BLACK CARD repricing NT$ 499 → NT$ 299 ──
+  {
+    title: "[R33 WC] 💰 BLACK CARD repricing NT$ 499 → NT$ 299 + math recalc 全鏈 13 files",
+    body: "Tim 9+ canary「賺大錢」 + Agent A benchmark verdict:NT$ 499 在 NT$ 200-450/月 sabermetric subscription band TOP · NT$ 299 是中段 sweet spot(Netflix Premium NT$ 390 anchor)· 1.6x conversion lift per price elasticity。 13 files updated(README · CLAUDE.md · /membership · /membership/black-card · /membership/opengraph · /faq · /founders · /manifesto · /about · /roadmap · MemberDashboardPreview · lib/command-palette-data.ts)。 Math recalc 連動:年費 5,988 → 3,588(299×12)· /about + /faq NT$ 4,990 → NT$ 3,588 consistent · break-even 2700/499≈5.4 個月 → 2700/299≈9 個月 · 5-year compare 29,940 → 17,940(299×60)。 KNOWN-ISSUES F「定價跨頁敘事差異」 同時解 · 統一基於 NT$ 299/月 anchor 全頁 consistent。 Agent benchmark cite:FanGraphs $15/mo · BP $74-99/yr · The Athletic $71/yr · Defector $79-119/yr · Stratechery $120/yr 全 cluster $6-15/mo · NT$ 299 align mainstream Taiwan WTP。 Y2 target 1,000 paid × NT$ 299 = NT$ 250-300k MRR · 5,000 paid realistic 1.0% conv MAU = NT$ 1.5M MRR · NT$ 18M ARR。 Brand axiom KEEP:Founders 27 NT$ 2,700 終身不動 · Engine FREE forever · /coverage NEVER · Pratfall 全保留 · 4 redlines 守。",
+    href: "/membership/black-card",
+  },
+  // ── 🎯 Round 33 W-B · Marketing pivot · AI prominence + 不做 list ──
+  {
+    title: "[R33 WB] 🎯 Marketing pivot · AI prominence + F6 不做 list 5 items + 公開可驗證 regulatory tag",
+    body: "Tim 9+ canary explicit「跟 AI 風口 · 賺大錢」 + Agent A winning pattern「declarative absence is brand moat(Stratechery 'no ads' · Defector 'no PE' · Aftermath worker-owned)」 + agent customer-driven「hero must stop sounding academic」。 Hero kicker:「A QUANTITATIVE SPORTS INTELLIGENCE CLUB · EST. 2026」 → 「AI 量化棒球引擎 · QUANTITATIVE BASEBALL AI · EST. 2026」 · AI 明確 prominence per Tim「跟風口」 directive · text-gold/70 → text-gold(WCAG AA contrast 同 Agent B Finding #3)。 維持 h1「不靠直覺 · 只看演算法」 brand soul 不動。 Explainer 改 連結 ConfidenceStars downstream + 「今晚 CPBL · AI 引擎告訴您信號強度 5 ★ STRONG → 1 ★ COIN-FLIP」 信號強度 framing。 加 regulatory tag「公開可驗證 · 不收下注佣 · 不推薦投注」 · Taiwan 投顧 license analogy defense + brand IP「data publisher」 not「advisor」 positioning。 NEW F6 不做 strip(Agent A #1 priority · 1 hr ship · 0 hr/wk · permanent brand moat):5 items inline 不顯示賠率 · 不賣明牌 · 不分潤博彩 · 不藏 DIVERGED · 不追蹤您 + English mirror NO ODDS · NO LOCK · NO AFFILIATE · NO HIDDEN MISSES · 0 TRACKERS。 Aronson 1966 + Spence 1973 costly signaling backed。 Footer 加同 regulatory tag「公開可驗證 · 不收下注佣 · 不推薦投注」 global consistency。 4 redlines 守 · Pratfall sections 全保留 ✓。",
+    href: "/",
+  },
+  // ── 🤖 Round 33 W-A · NEW ConfidenceStars 1-5 + apply ──
+  {
+    title: "[R33 WA] 🤖 NEW ConfidenceStars 1-5 component + apply /matches/[gameId] hero + /signal-board strip",
+    body: "Tim 9+ canary AFK + Agent customer-driven product redesign verdict:Authority bias + decision-cost-collapse hook(canonical sports-betting subscription benchmark · agent verdict #2 hook after Loss aversion)。 NEW components/ConfidenceStars.tsx 1-5 star visualization · 「STRONG SIGNAL → COIN-FLIP」 vocabulary discipline(NOT「LOCK」 報明牌 grifter vocab · scientist not tipster)。 Mechanical mapping(NO editorial · derives from aiConfidence directly):>=80 ★5 STRONG · 70-79 ★4 CLEAR · 60-69 ★3 DECENT · 50-59 ★2 WEAK · <50 ★1 COIN-FLIP。 2 variants(inline 緊湊 + stack 大 hero)· tooltip cross-link /audit#section-02 ESTIMATION DISCLOSURE(Pratfall)。 Apply /matches/[gameId] stack variant 替 MODEL CONFIDENCE plain text · /signal-board inline variant · 替原 plain {N}/100。 4 redlines 守:「STRONG SIGNAL」 不是「LOCK」 vocab · Engine streak only · No odds display · No affiliate。",
+    href: "/matches/cpbl-260521-01",
+  },
   // ── 🛡️ Round 32 W-E · 報馬仔/玩運彩 wording IP risk fix · Agent SKIP table verdict ──
   {
     title: "[R32 WE] 🛡️ 報馬仔/玩運彩 wording IP risk fix · Agent SKIP 4-col 對照 table · Patek+Hermès 不 compare-table",
