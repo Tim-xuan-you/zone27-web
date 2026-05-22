@@ -77,7 +77,7 @@ const TIERS: Tier[] = [
       "Founders 27 預售開放時優先通知",
       "不寄行銷信 · 不轉售 · 隨時 reply UNSUBSCRIBE 退出",
     ],
-    cta: { label: "→ 立即免費註冊 · 30 秒", href: "/login" },
+    cta: { label: "→ 加入 ZONE 27 · 免費", href: "/login" },
     highlight: true,
   },
   {

@@ -137,7 +137,7 @@ export default function MemberUnlocksGrid({
             href="/login"
             className="inline-block px-6 py-3 bg-gold text-navy font-mono text-xs tracking-[0.3em] hover:bg-gold-soft transition-colors"
           >
-            → 立即免費註冊 · 30 秒 · 5 樣解鎖
+            → 加入 ZONE 27 · 免費 · 5 樣解鎖
           </Link>
           <p className="font-mono text-mute/70 text-[10px] tracking-[0.25em] mt-3">
             email + password · 0 cookie tracking · 0 行銷信 · per

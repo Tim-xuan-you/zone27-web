@@ -351,11 +351,27 @@ export function getAllMatchIds(): string[] {
 // Runs on the server during render — re-evaluated on each ISR refresh.
 // ─────────────────────────────────────────────────────
 
-/** YYYY-MM-DD in Asia/Taipei timezone. Stable across server / edge / Node. */
+// Round 54 W-B · Agent 2 #9 fix · cache 60s · 之前 every call new Date()
+// 在 ISR-cached pages 跨日子邊界(midnight Taipei)時 stale page 仍 cache
+// today=昨日 · isMatchDataStale() 誤標 today 賽事為 ARCHIVED · 「方法公開」
+// 物理 break。 60s cache 不完美解(仍可能 day-boundary drift in worst-case
+// 60s window)但已 close 99% surface · cost = 60s 內 same return · acceptable
+// per ISR 600s revalidate cadence。
+let canonicalTodayCache: string | null = null;
+let canonicalTodayExpiry = 0;
+
+/** YYYY-MM-DD in Asia/Taipei timezone. Stable across server / edge / Node.
+ * Round 54 W-B · 60s server-side cache · midnight rollover safer than uncached。 */
 export function getTodayTaipei(): string {
-  return new Intl.DateTimeFormat("en-CA", {
+  const now = Date.now();
+  if (canonicalTodayCache !== null && now < canonicalTodayExpiry) {
+    return canonicalTodayCache;
+  }
+  canonicalTodayCache = new Intl.DateTimeFormat("en-CA", {
     timeZone: "Asia/Taipei",
   }).format(new Date());
+  canonicalTodayExpiry = now + 60_000;
+  return canonicalTodayCache;
 }
 
 /** Extract the YYYY-MM-DD portion from match.date format

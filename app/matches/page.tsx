@@ -76,9 +76,11 @@ export default function MatchesPage() {
             <p className="font-mono text-mute text-xs tracking-[0.25em] mb-4">
               今日 CPBL · 無引擎覆蓋場次
             </p>
+            {/* Round 54 W-B · Agent 3 #4 fix · 之前 passive「可能是...」 三
+                possibilities 讓訪客 uncertain · 現在 active voice + immediate
+                action · per R30 W11「every section must be true right now」 axiom。 */}
             <p className="text-mute text-sm leading-relaxed max-w-md mx-auto mb-8">
-              可能是季外、休賽日 · 或 Tim 還沒截圖 ingest 明日場次。
-              引擎過去的預測結果已收進 ledger:
+              今日無 CPBL 場次 · 改為檢視過去的公開戰績:
             </p>
             <Link
               href="/track-record"
