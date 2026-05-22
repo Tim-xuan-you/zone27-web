@@ -17,10 +17,34 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 
+/**
+ * Sanitize `next` redirect param to prevent open-redirect attack
+ * (per Round 31 W-Q code audit agent CRITICAL finding).
+ *
+ * Reject:
+ *   - Absolute URL(http://attacker.com)
+ *   - Protocol-relative(//attacker.com)
+ *   - Empty / non-string
+ *
+ * Allow:
+ *   - Internal path starting with single `/`
+ *   - Optional query string + fragment
+ *
+ * Fallback to canonical /member welcome on any invalid input.
+ */
+function sanitizeNext(raw: string | null): string {
+  const fallback = "/member?welcome=true";
+  if (!raw || typeof raw !== "string") return fallback;
+  if (!raw.startsWith("/")) return fallback;
+  if (raw.startsWith("//")) return fallback;
+  if (raw.startsWith("/\\")) return fallback;
+  return raw;
+}
+
 export async function GET(request: NextRequest) {
   const url = new URL(request.url);
   const code = url.searchParams.get("code");
-  const next = url.searchParams.get("next") ?? "/member?welcome=true";
+  const next = sanitizeNext(url.searchParams.get("next"));
 
   if (!code) {
     return NextResponse.redirect(
@@ -42,7 +66,7 @@ export async function GET(request: NextRequest) {
     }
 
     // Session cookies set via the ssr adapter setAll callback ·
-    // redirect to /member welcome state。
+    // redirect to /member welcome state(or sanitized custom next path)。
     return NextResponse.redirect(new URL(next, url.origin));
   } catch (err) {
     const msg =

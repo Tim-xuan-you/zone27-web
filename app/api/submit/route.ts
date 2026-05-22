@@ -22,7 +22,32 @@ import { sendSubmissionNotification } from "@/lib/email";
 const MAX_TITLE_LEN = 120;
 const MAX_BODY_LEN = 3000;
 
+/**
+ * Same-origin POST check · per Round 31 W-Q code audit agent HIGH finding。
+ * Reject cross-origin POSTs(CSRF defense-in-depth on top of session check)。
+ * Browser sends Origin header on POST · check it matches our host。
+ */
+function isSameOrigin(request: NextRequest): boolean {
+  const origin = request.headers.get("origin");
+  if (!origin) return false;
+  try {
+    const reqUrl = new URL(request.url);
+    const originUrl = new URL(origin);
+    return originUrl.host === reqUrl.host;
+  } catch {
+    return false;
+  }
+}
+
 export async function POST(request: NextRequest) {
+  // CSRF defense · same-origin check before any work
+  if (!isSameOrigin(request)) {
+    return NextResponse.json(
+      { ok: false, error: "cross_origin_rejected" },
+      { status: 403 }
+    );
+  }
+
   // Require authenticated session(防 anon spam)
   const supabase = await createSupabaseServerClient();
   const {
