@@ -10,7 +10,7 @@
 // Inspired by Linear / Vercel / Stripe command palettes,
 // but DELIBERATELY thin: no fuse.js, no telemetry, no
 // recently-used persistence. Simple substring filter on a
-// hand-curated 33-row list is sufficient and brand-pure
+// hand-curated 34-row list is sufficient and brand-pure
 // (per [[zone27-disclosure-philosophy]]: no hidden ranking).
 // (/admin is intentionally NOT indexed here · Tim bookmarks it ·
 // keeping it out of visitor Cmd-K aligns with its noindex framing.)
@@ -316,6 +316,32 @@ export const COMMAND_ITEMS: CommandItem[] = [
       "0 subs",
       "0 revenue",
       "honest",
+    ],
+  },
+  {
+    label: "Rewards · 預測 PROVED 兌換實體獎品 · 恆美攝影 ecosystem",
+    kicker: "/rewards",
+    path: "/rewards",
+    group: "工具 · 外部",
+    keywords: [
+      "rewards",
+      "獎品",
+      "兌換",
+      "點數",
+      "points",
+      "集點",
+      "底片",
+      "咖啡",
+      "恆美",
+      "伶 kopi",
+      "沖洗",
+      "護照",
+      "代辦",
+      "prove",
+      "proved",
+      "fantasy league",
+      "prize",
+      "catalogue",
     ],
   },
   {
