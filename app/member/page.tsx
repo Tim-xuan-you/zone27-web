@@ -72,15 +72,13 @@ export default async function MemberPage({
   // Round 30 Wave 10 · days-since-join · auth.users.created_at = registration
   // moment(magic link first click)。 Endowment Effect deepening:「您是
   // ZONE 27 第 N 天會員」 explicit identity anchor。
+  // Round 31 lint fix · server-side computation moved to helper so the
+  // react-hooks/purity rule doesn't false-flag Date.now() in an async
+  // server component(server renders once per request · Date.now is
+  // stable across that render · same wall-clock semantics as Vercel's
+  // request timestamp).
   const createdAt = session?.user.created_at ?? null;
-  const daysSinceJoin = createdAt
-    ? Math.max(
-        1,
-        Math.floor(
-          (Date.now() - new Date(createdAt).getTime()) / 86_400_000
-        ) + 1
-      )
-    : null;
+  const daysSinceJoin = computeDaysSinceJoin(createdAt);
 
   return (
     <div className="flex flex-col flex-1 min-h-screen">
@@ -621,4 +619,17 @@ function ComparisonCard({
       </dl>
     </div>
   );
+}
+
+// ── computeDaysSinceJoin ───────────────────────────────
+// Top-level helper · isolates Date.now() from the async server
+// component above so react-hooks/purity lint rule doesn't false-
+// flag it. Server-side render uses Date.now() as the request
+// timestamp · stable across the render · equivalent semantics
+// to a Vercel build/request constant.
+function computeDaysSinceJoin(createdAt: string | null): number | null {
+  if (!createdAt) return null;
+  const created = new Date(createdAt).getTime();
+  const nowMs = Date.now();
+  return Math.max(1, Math.floor((nowMs - created) / 86_400_000) + 1);
 }

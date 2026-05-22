@@ -2,7 +2,12 @@ import Link from "next/link";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import HeroLiveCard from "@/components/HeroLiveCard";
-import { getFeaturedMatch } from "@/lib/matches";
+import TonightReceiptsCard from "@/components/TonightReceiptsCard";
+import {
+  getFeaturedMatch,
+  getTodayMatches,
+  getTrackRecordStats,
+} from "@/lib/matches";
 import {
   FOUNDERS_TOTAL,
   FOUNDERS_REMAINING,
@@ -72,19 +77,33 @@ export const revalidate = 600;
 // ─────────────────────────────────────────────────────
 
 export default function Home() {
-  // Round 30 Wave 1: getFeaturedMatch picks via lifecycle priority,
-  // now aligned with brand reasoning(receipt > future):
-  //   1. today-pregame OR today-live(engine actively running)
-  //   2. today-final(post-ingest cinematic window · brand soul)
-  //   3. most-recent-finalized(receipt mode any date)
-  //   4. closest future(abstract pregame · only as cold-start fallback)
-  //   5. orphan
-  // Tonight 22:00+ Tim ingests cpbl-260521-01 → phase flips to「final」
-  // with matchDate === today → step 2 keeps the receipt cinematic on
-  // the homepage HeroLiveCard for the rest of the night(not just on
-  // /track-record). After midnight TPE, cpbl-260522-01 hits step 1
-  // as today-pregame · receipt of yesterday moves to /track-record.
-  const featuredMatch = getFeaturedMatch();
+  // Round 31 Wave A · Multi-match Costly Signaling moment.
+  //
+  // When today has 2+ matches (CPBL 3-game nights · MLB doubleheaders ·
+  // future cross-league days), the homepage switches from the
+  // single-match HeroLiveCard cinematic to TonightReceiptsCard — a
+  // 2-or-3-card grid that shows all of tonight's PRE-LOCKED engine
+  // predictions side-by-side. Brand IP physics:
+  //
+  //   - One night = N receipts. The bigger N, the more chance to be
+  //     visibly wrong. Putting them all on the front door is the
+  //     Costly Signaling move.
+  //   - Cumulative track record (TRACK RECORD · N=X · ✓Y ✕Z) lives
+  //     in the card footer · visitor sees the audit trail growing.
+  //   - "Engine published BEFORE first pitch" timestamp = pre-lock-in
+  //     proof. Static engine output (no live re-simulation) ensures
+  //     we cannot game the receipt by re-sampling.
+  //
+  // When today has 1 or 0 matches, we fall back to the existing
+  // getFeaturedMatch() priority chain (today active → today final →
+  // recent finalized → future) which HeroLiveCard renders with its
+  // live 1000-sim Monte Carlo cinematic. Single-match days keep the
+  // single-match theatre · multi-match days get the multi-receipt
+  // grid · brand IP soul preserved across both modes.
+  const todayMatches = getTodayMatches();
+  const useMultiMatch = todayMatches.length >= 2;
+  const featuredMatch = useMultiMatch ? null : getFeaturedMatch();
+  const trackRecord = useMultiMatch ? getTrackRecordStats() : null;
 
   return (
     <div className="flex flex-col flex-1 min-h-screen">
@@ -159,9 +178,16 @@ export default function Home() {
           credibility · IS the homepage. Visitors arrive, see the
           algorithm converge in 2 seconds, get it.
           HeroLiveCard embeds its own CTAs (/matches and /matches/[gameId])
-          — those carry visitors to depth on their own gradient. */}
+          — those carry visitors to depth on their own gradient.
+          Round 31 Wave A: multi-match days swap in TonightReceiptsCard
+          for the same hero slot · 3-card grid of pre-locked receipts. */}
       <section className="mx-auto w-full max-w-3xl px-6 sm:px-10 pb-20 sm:pb-28">
-        {featuredMatch ? (
+        {useMultiMatch && trackRecord ? (
+          <TonightReceiptsCard
+            matches={todayMatches}
+            trackRecord={trackRecord}
+          />
+        ) : featuredMatch ? (
           <HeroLiveCard match={featuredMatch} />
         ) : (
           <EmptyHeroCard />

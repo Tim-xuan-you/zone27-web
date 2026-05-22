@@ -369,8 +369,9 @@ export function getTaipeiNowMinutes(): number {
   return h * 60 + m;
 }
 
-/** Parse "HH:MM" → minutes-since-midnight. Returns 0 on malformed input. */
-function parseHHMM(t: string): number {
+/** Parse "HH:MM" → minutes-since-midnight. Returns 0 on malformed input.
+ *  Exported for sort-by-startTime in getTodayMatches() consumer. */
+export function parseHHMM(t: string): number {
   const [hStr, mStr] = t.split(":");
   const h = parseInt(hStr ?? "", 10);
   const m = parseInt(mStr ?? "", 10);
@@ -447,6 +448,45 @@ export function getFinalizedMatches(): Match[] {
       const db = getMatchDateIso(b) ?? "";
       return db.localeCompare(da);
     });
+}
+
+/** Matches that are LIVE TODAY in any state — pregame, live, OR finalized
+ *  (with date === today). Sorted by startTime ascending. Powers homepage
+ *  TonightReceiptsCard multi-match grid when there are ≥2 matches today.
+ *  Round 31 Wave A · the Costly Signaling brand IP physical moment for
+ *  multi-game CPBL days (3-game day = 3x engine receipts in one night). */
+export function getTodayMatches(): Match[] {
+  const today = getTodayTaipei();
+  return matches
+    .filter((m) => {
+      const phase = getMatchPhase(m);
+      if (phase === "today-pregame" || phase === "today-live") return true;
+      if (phase === "final" && getMatchDateIso(m) === today) return true;
+      return false;
+    })
+    .sort((a, b) => parseHHMM(a.startTime) - parseHHMM(b.startTime));
+}
+
+/** Aggregate stats for ALL finalized matches in the dataset. Powers
+ *  TonightReceiptsCard footer cumulative track-record chip (N=X · ✓Y ✕Z).
+ *  Pure helper — no side effects. */
+export function getTrackRecordStats(): {
+  total: number;
+  proved: number;
+  diverged: number;
+  push: number;
+} {
+  const finalized = getFinalizedMatches();
+  let proved = 0;
+  let diverged = 0;
+  let push = 0;
+  for (const m of finalized) {
+    const cal = getCalibration(m);
+    if (cal === "proved") proved++;
+    else if (cal === "diverged") diverged++;
+    else if (cal === "push") push++;
+  }
+  return { total: finalized.length, proved, diverged, push };
 }
 
 /** Matches scheduled today or in the future, sorted by date.

@@ -103,7 +103,6 @@ export default async function CalibrationPage() {
       : allFinalized;
   const n = finalized.length;
   const bins = computeBins(finalized);
-  const globalN = allFinalized.length;
 
   return (
     <div className="flex flex-col flex-1 min-h-screen">
