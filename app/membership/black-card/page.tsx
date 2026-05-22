@@ -169,6 +169,41 @@ export default function BlackCardPage() {
           <div className="w-full h-px bg-line/60" />
         </div>
 
+        {/* ── R39 W-H · Public Ledger cross-link · Agent D DEEPEST sibling ─
+            /membership/black-card/ledger 公開 0 paid subscriber 真實狀態 ·
+            inverse-FOMO 「您會是第 1 位」 brand IP 物理 visible at main
+            BLACK CARD page · structurally non-copyable by tipsters。 */}
+        <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-12">
+          <Link
+            href="/membership/black-card/ledger"
+            className="block border border-gold/40 bg-slate/40 p-5 sm:p-6 hover:bg-slate/50 hover:border-gold/60 transition-colors group"
+          >
+            <div className="flex items-baseline justify-between gap-4 flex-wrap mb-2">
+              <p
+                lang="en"
+                className="font-mono text-gold/90 text-[10px] tracking-[0.35em]"
+              >
+                ↗ PUBLIC LEDGER · 訂閱者帳本
+              </p>
+              <span
+                lang="en"
+                className="font-mono text-gold text-[9px] tracking-[0.3em] shimmer"
+              >
+                N=0 · WAITING · 您會是第 1 位
+              </span>
+            </div>
+            <p className="text-bone text-base leading-relaxed group-hover:text-gold transition-colors">
+              目前 <span className="text-gold">0</span> 位 BLACK CARD 訂閱者 ·
+              第 1 位的 handle 永久顯示在 ledger row 1 · 同 Founders 27 allocation
+              pattern · structurally non-copyable by 玩運彩+報馬仔(regulatory +
+              privacy + churn 暴露)。
+            </p>
+            <p className="mt-2 font-mono text-mute/70 text-[10px] tracking-[0.25em] group-hover:text-mute transition-colors">
+              5 PRE-COMMIT rules · 修改需 30 天 /changelog 公告 →
+            </p>
+          </Link>
+        </section>
+
         {/* ── 5 UNLOCKS ────────────────────────────── */}
         <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-16">
           <p

@@ -33,9 +33,40 @@ export const metadata: Metadata = {
 // ─────────────────────────────────────────────────────
 
 const LAST_UPDATED = "2026-05-22";
-const CYCLE = "Round 28-38 · 2026-05-22 · 14+ canary fires displacement mission · ConfidenceStars 全鏈 + AI marketing + 不做 list + BLACK CARD 499→299 + WCAG AA + /annual/2026 + OG cards × 3 + next.config.ts production-ready + NEW /rewards + NEW /methodology Section 04 Engine Lineup + Section 05 Lens Variety 7 lenses + R37 W-B Vibe Check + R37 W-D Park Factor + R38 7-wave AFK 攻頂(Pitcher Fatigue v0.1 PROXY + TeamPickPanel hero + /coverage NEVER above-the-fold + Coin-Flip Baseline + Footer Founders count + Lens Lifetime Pledge + LensTrace 5-step deterministic pipeline)";
+const CYCLE = "Round 28-39 · 2026-05-22 · 15+ canary fires displacement mission · 36 visitor-discoverable routes · 5 LIVE lenses(Win Probability + Vibe Check + Park Factor + Pitcher Fatigue + Underdog)· R39 9-wave 攻頂(/calibration FiveThirtyEight + UnderdogLens + 404 Media FREE FOREVER + Stratechery Subscriber Compact + Aftermath Negation IS Product + BLACK CARD Ledger DEEPEST + WCAG AAA + 4 critical a11y fixes)";
 
 const SHIPPED_THIS_CYCLE: { title: string; body: string; href?: string }[] = [
+  // ── 🏆 Round 39 W-A → W-K · 9-wave 攻頂 multi-agent synthesize ──
+  {
+    title: "[R39 WJ+K] ♿ WCAG AAA + 4 critical a11y fixes + 2 moderate · Agent E audit ship",
+    body: "Agent E WCAG AAA + keyboard nav + screen reader audit · 4 critical + 2 moderate fixes 全 ship:(W-J critical)(1)/track-record arrow + separator dots text-mute/40 → text-mute/85(2.8:1 fail → 5.1:1 AAA pass · 4 instances · aria-hidden)·(2)FollowMatchButton 32px → 44px mobile touch target(py-2 → py-3 sm:py-2 + min-h-[44px])·(3)MatchNoteEditor 儲存 button 24px → 44px(py-1.5 → py-2.5 sm:py-1.5)·(4)UserPredictionPicker PickButton 加 aria-pressed={active} + min-h-[44px] ·(W-K moderate)(5)PitcherFatigueLens FatigueStatBox 加 aria-label tier descriptor(good/mid/bad → healthy/typical/concerning)· screen reader 不依賴 color-only ·(6)TeamPickPanel team button 加 aria-pressed={selected} + min-h-[44px]。 WCAG 從 AA 升 AAA 路徑開通 · 同 brand IP「品質 4 redlines + 任何一點缺陷都被攻擊」 directive 物理 codify 到 a11y layer。",
+    href: "/track-record",
+  },
+  {
+    title: "[R39 WG] 🏛️ DEEPEST · NEW /membership/black-card/ledger · 36th route · Aftermath + Patek 合一",
+    body: "Agent D DEEPEST sharp call · per Tim 「我相信你 · 驚艷全世界」 directive。 Aftermath「Subscriber Goals 2026」 + Hell Gate ledger + Patek allocation transparency 三 pattern 合一 · 同 /founders/ledger structure transplant 到 monthly BLACK CARD tier。 Pre-launch state:0 paid sub honest publish · 「目前 0 位 · 您會是第 1 位」 inverse-FOMO · Aronson 1966 Pratfall。 4 brand IP axiom 同時 fire(Pratfall + Costly Signaling + Disclosure + 倒置 SaaS)· structurally non-copyable by 玩運彩+報馬仔(regulatory + privacy + churn 暴露 + auto-charge incentive)。 5 PRE-COMMIT rules · 修改需 30 天 /changelog 公告 · ledger row 1 永久 · cancel 保留 row state=cancelled · git commit source of truth。 Cmd-K + related-links · 36 visitor-discoverable routes。",
+    href: "/membership/black-card/ledger",
+  },
+  {
+    title: "[R39 WD+E+F] 💎 3 conversion patterns on /membership/black-card · Agent D Top 3",
+    body: "(W-D · 404 Media)「FREE FOREVER vs ADDED」 2-col disclosure · /membership/black-card 加 8 free routes/features vs 6 BLACK CARD adds · 「不拿掉任何 free 內容」 + ⚓ PRE-COMMIT「Engine FREE forever」 30-day notice。 (W-E · Aftermath)「Negation IS the product」 reframe · 6 不做 items 從 brand statement 升 value-stack item · 「您 NT$ 299 同時買 6 件永遠不做」 Aronson 1966 + Spence 1973 costly signaling extended to purchase justification。 (W-F · Stratechery)「Subscriber Compact」 3-line ethics · Ben Thompson 3-point ethics transplant · 3 commit signed Tim:(1)不賣引擎給 bookmakers(若收到 offer publish in /changelog)·(2)永遠不跑 ads / affiliate / paid placement ·(3)每年 5 月 publish 全年收入 + 開銷 + BLACK CARD sub count。 14 sites Agent D fetched · 3 axiom-rejected(free trial · Linear social proof · FanGraphs auto-renew)· 1 deepest(Public Ledger · W-G shipped separately)。",
+    href: "/membership/black-card",
+  },
+  {
+    title: "[R39 WC] 📐 Wire-up + drift · Cmd-K 34→36 · CLAUDE.md route count + 5 component listing",
+    body: "Cmd-K palette 加 /calibration + /membership/black-card/ledger · 34 → 36 visitor-discoverable routes。 CLAUDE.md route count 行 + 5 new component listing entry(VibeCheck · ParkFactorLens · PitcherFatigueLens · LensTrace · UnderdogLens)。 related-links.ts /calibration + /membership/black-card/ledger 4 sibling entries · /track-record 加 /calibration cross-link as primary sibling(從 manifesto 退後)。 Footer DOCS group 加「引擎自評 → /calibration」 entry · between 公開戰績 + 27 種進階指標。",
+    href: "/",
+  },
+  {
+    title: "[R39 WB] 🐎 NEW UnderdogLens · 5th LIVE Lens Variety · 黑馬機率 lens",
+    body: "/methodology Section 05 Lens Variety table 第 5 個 candidate Underdog Tracker planned → ✓ LIVE · R39 W-B。 brand-pure interpretation:不是「我們押 underdog 會贏」(contrarian play · violates brand IP)· 是「surface 引擎信心 spread reality」 educational lens。 4-tier classification(COIN-FLIP 45-55% · COMPETITIVE 35-45% · FAVORITE LEAN 25-35% · STRONG FAVORITE <25%)+ underdog identification + favorite identification + dominance gap visual。 Pratfall「upset probability ≠ underdog 會贏」 主動 surface · displacement mission 對 玩運彩「冷門大爆 / 黑馬精選」 marketing 反向 · 0 contrarian play · 0 prediction 偏置 · 純 viz from existing winRate data · /matches/[gameId] section 01E。 Lens Variety progression:Win Prob + Vibe Check + Park Factor + Pitcher Fatigue + ✓ Underdog = 5 LIVE lenses · 7 total candidates · 2 planned(Bullpen Depth + Matchup History)。",
+    href: "/methodology",
+  },
+  {
+    title: "[R39 WA] 🎯 DEEPEST · NEW /calibration public page · 35th route · FiveThirtyEight Pattern · R38 deferred 解封",
+    body: "Agent A R38 DEEPEST sharp call · /calibration public engine self-grading page · 「displacement battle 對 玩運彩+報馬仔 fought on **realized outputs** · not static trust claims」。 FiveThirtyEight「Checking Our Work」 pattern · Tetlock Brier score(B = (1/N) Σ (p̂ - outcome)² · 0 = perfect · 0.25 = coin-flip · 1 = wrong)+ coin-flip baseline 對照 + reliability diagram(inline SVG · 45° line · empty placeholder bins)+「Why 玩運彩+報馬仔 structurally 不可 ship this page」 explainer + cross-link to /member/calibration personal mode。 Founder voice opening「每個高端 sports 分析平台都告訴您 model 多準 · 沒有一家告訴您『say 70% 時實際贏 67%』的 3% over-confidence delta · 因為公布等於暴露」。 Pratfall + Costly Signaling + Disclosure 三 axiom 同時 fire · first-mover advantage 永久(玩運彩 publish calibration = 暴露 50-52% realized vs 94% stated「勝率」)。",
+    href: "/calibration",
+  },
   // ── 🚀 Round 38 W-A → W-I · 9-wave AFK 攻頂 ship ──
   {
     title: "[R38 WI] 🚪 P3 escape hatch · /learn#why-not-gambling anchor + homepage F6「不分潤博彩」 clickable",
