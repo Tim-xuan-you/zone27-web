@@ -78,7 +78,13 @@ const TIERS: Tier[] = [
       "不寄行銷信 · 不轉售 · 隨時 reply UNSUBSCRIBE 退出",
     ],
     cta: { label: "→ 加入 ZONE 27 · 免費", href: "/login" },
-    highlight: true,
+    // Round 55 W-A · Agent C anchoring fix · FREE TIER 不再 highlight ·
+    // 訪客 default reasonable 不是 free · 是 Founders 27(headline product
+    // · brand-aligned 270 · Tim's personal-reply ceiling)· Per Patreon /
+    // Defector / Apple One「premium tier 作為 anchor」 research · 翻 highlight
+    // 到 Founders 27 · BLACK CARD 自然 read as「reasonable monthly entry」
+    // · FREE TIER 為 no-brainer floor。 brand-IP-pure · 不是 dark pattern。
+    highlight: false,
   },
   {
     name: "BLACK CARD",
@@ -111,7 +117,11 @@ const TIERS: Tier[] = [
       "恆美 × 伶 Kopi 紅茶招待 QR(台南)",
     ],
     cta: { label: "→ Founders 27 詳情頁", href: "/founders" },
-    highlight: false,
+    // Round 55 W-A · Agent C anchoring fix · headline product 物理 anchor ·
+    // gold-outlined visual dominance · 270 唯一 ceiling · 一次性 lifetime ·
+    // 9-month break-even math · 同 Patreon premium / Defector 「Accomplice」
+    // 模式 anchor at top tier · decoy effect for BLACK CARD month feel cheap。
+    highlight: true,
   },
 ];
 

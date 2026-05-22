@@ -10,7 +10,9 @@
     "fetch-cpbl": "node scripts/fetch-cpbl-pitchers.mjs",
     "fetch-cpbl-advanced": "node scripts/fetch-cpbl-advanced.mjs",
     "fetch-cpbl-schedule": "node scripts/fetch-cpbl-schedule.mjs",
-    "process-signature": "node scripts/process-signature.mjs"
+    "process-signature": "node scripts/process-signature.mjs",
+    "validate:data": "node scripts/validate-match-data.mjs",
+    "validate:data:warn": "node scripts/validate-match-data.mjs --warn"
   },
   "dependencies": {
     "@supabase/ssr": "^0.10.3",
