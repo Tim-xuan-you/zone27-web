@@ -223,6 +223,128 @@ repeat 10,000 times → aggregate
         </p>
       </Section>
 
+      {/* ── 04 ENGINE LINEUP · 3 變體 · tier unlock progression ──
+          Round 35 W-D · Tim 12+ canary commercial directive「3 engines paid
+          unlock 2」 brand-pure 落地 · 拒「管它準不準包裝」 redline · ship
+          3 honest engine progression instead。 同 FanGraphs Steamer / ZiPS /
+          ATC + Baseball Prospectus PECOTA tier 結構 · brand IP「方法公開」
+          延伸到 engine variant layer · 不再只是 1 個 black box · 是 3 個
+          可審 model variants 各自 publish methodology + DIVERGED + ESTIMATION
+          DISCLOSURE per-engine。 commercial motivation(訂閱 unlock)+ honest
+          methodology(0 secret)= Tim displacement mission 對 玩運彩+報馬仔
+          的 brand-pure inversion。 */}
+      <Section no="04" label="ENGINE LINEUP" zh="3 變體 · tier unlock">
+        <p>
+          引擎不是 1 個 black box · 是 <strong className="text-bone">3 個可審
+          model variant</strong> · 每個 publish 完整 methodology + publish
+          DIVERGED per-engine + publish ESTIMATION DISCLOSURE per-engine。
+          訂閱 tier 解鎖 progression · 同 FanGraphs Steamer/ZiPS/ATC +
+          Baseball Prospectus PECOTA tier 結構 · brand-pure 不靠 secret moat。
+        </p>
+
+        <div className="mt-6 bg-slate/40 border border-line/70 overflow-hidden">
+          <table className="w-full font-mono text-[11px] sm:text-xs tabular">
+            <thead>
+              <tr className="border-b border-line/60 bg-slate/60">
+                <th className="text-left text-gold/90 tracking-[0.2em] px-3 py-2 text-[10px]">
+                  ENGINE
+                </th>
+                <th className="text-left text-gold/90 tracking-[0.2em] px-3 py-2 text-[10px]">
+                  STATUS
+                </th>
+                <th className="text-left text-gold/90 tracking-[0.2em] px-3 py-2 text-[10px]">
+                  METHOD
+                </th>
+                <th className="text-left text-gold/90 tracking-[0.2em] px-3 py-2 text-[10px]">
+                  TIER
+                </th>
+                <th className="text-left text-gold/90 tracking-[0.2em] px-3 py-2 text-[10px]">
+                  TRACK RECORD
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <EngineRow
+                engine="v0.2"
+                statusLabel="LIVE"
+                statusTone="gold"
+                method="Pitcher-Only Monte Carlo · K/9 + BB/9 + HR/9"
+                tier="FREE"
+                tierTone="bone"
+                record="N=1 (cpbl-260521-01)"
+              />
+              <EngineRow
+                engine="v0.3"
+                statusLabel="DEV · Q3 2026"
+                statusTone="loss"
+                method="+ Park Factor + 隊伍平均 wOBA(打者品質)"
+                tier="BLACK CARD"
+                tierTone="gold"
+                record="TBD · Q3 launch"
+              />
+              <EngineRow
+                engine="v0.4"
+                statusLabel="PLANNED · Q4 2026"
+                statusTone="loss"
+                method="Bayesian Model Averaging across v0.2 + v0.3 votes"
+                tier="BLACK CARD"
+                tierTone="gold"
+                record="TBD · Q4 launch"
+              />
+            </tbody>
+          </table>
+        </div>
+
+        <p className="mt-6">
+          <strong className="text-bone">每 engine brand-pure 設計原則(全 ✓):</strong>
+        </p>
+        <ul className="space-y-2 mt-3 text-mute">
+          <li className="flex gap-3 items-baseline">
+            <span className="font-mono text-gold/70 text-[10px] tracking-[0.25em]">▸</span>
+            <span className="flex-1">publish entire methodology(simulator-vN.ts on GitHub · per /audit S08 disclosure-philosophy)</span>
+          </li>
+          <li className="flex gap-3 items-baseline">
+            <span className="font-mono text-gold/70 text-[10px] tracking-[0.25em]">▸</span>
+            <span className="flex-1">publish DIVERGED per-engine in <Link href="/track-record" className="text-gold underline-offset-4 hover:underline">/track-record</Link>(separate bucket · 同等大不藏 miss)</span>
+          </li>
+          <li className="flex gap-3 items-baseline">
+            <span className="font-mono text-gold/70 text-[10px] tracking-[0.25em]">▸</span>
+            <span className="flex-1">publish ESTIMATION DISCLOSURE per-engine in <Link href="/audit" className="text-gold underline-offset-4 hover:underline">/audit S02</Link>(separate row · 同 v0.2 estimate 公開模式)</span>
+          </li>
+          <li className="flex gap-3 items-baseline">
+            <span className="font-mono text-gold/70 text-[10px] tracking-[0.25em]">▸</span>
+            <span className="flex-1">30-day notice via <Link href="/changelog" className="text-gold underline-offset-4 hover:underline">/changelog</Link> for any rule modification(同 /audit S05 PRE-COMMIT pattern)</span>
+          </li>
+          <li className="flex gap-3 items-baseline">
+            <span className="font-mono text-gold/70 text-[10px] tracking-[0.25em]">▸</span>
+            <span className="flex-1">0 hidden secret per-engine · 0「自研理論包裝」 · brand IP「方法公開」 延伸到 engine variant layer</span>
+          </li>
+        </ul>
+
+        <p className="mt-6 text-mute/85 leading-relaxed">
+          <strong className="text-bone">為什麼 3 變體 + Bayesian average:</strong>{" "}
+          Nate Silver FiveThirtyEight 模式 · 多 model 投票避免 single-model
+          overfitting · ensemble 通常比 best single 模型穩定。 同
+          <Link href="/discipline" className="text-gold underline-offset-4 hover:underline mx-1">
+            /discipline
+          </Link>
+          Buffett「不靠一個算法 · 靠紀律」 axiom 延伸到 engine layer 本身。
+        </p>
+
+        <blockquote className="mt-8 border-l-2 border-gold pl-6 py-3">
+          <p className="text-bone text-lg sm:text-xl font-light tracking-tight leading-snug">
+            Most prediction sites have 1 secret engine.<br />
+            <span className="text-gold">We have 3 open ones.</span>
+          </p>
+          <p className="mt-3 text-mute text-sm leading-relaxed">
+            「Displacement mission · 對標幹掉 玩運彩+報馬仔」 brand-pure 路徑 ·
+            他們 1 fake mystery model · 我們 3 transparent variants 各自可
+            audit · 訂閱解鎖 progression 是 commercial · methodology 不可
+            妥協是 brand IP。
+          </p>
+        </blockquote>
+      </Section>
+
       <FounderSignOff>
         <p>
           這份白皮書沒有打算讓所有人讀完。寫給的對象是
@@ -330,5 +452,46 @@ function Pre({ children }: { children: React.ReactNode }) {
     <pre className="bg-ink/40 border border-line/60 p-4 sm:p-5 overflow-x-auto font-mono text-[12px] sm:text-sm text-bone leading-relaxed my-2">
       <code>{children}</code>
     </pre>
+  );
+}
+
+// ── Round 35 W-D · Engine Lineup table row ───────────────
+function EngineRow({
+  engine,
+  statusLabel,
+  statusTone,
+  method,
+  tier,
+  tierTone,
+  record,
+}: {
+  engine: string;
+  statusLabel: string;
+  statusTone: "gold" | "loss";
+  method: string;
+  tier: string;
+  tierTone: "gold" | "bone";
+  record: string;
+}) {
+  const statusClass = statusTone === "gold" ? "text-gold" : "text-loss/80";
+  const tierClass = tierTone === "gold" ? "text-gold" : "text-bone";
+  return (
+    <tr className="border-b border-line/40">
+      <td className="px-3 py-3 text-bone font-mono tabular tracking-tight">
+        {engine}
+      </td>
+      <td className={`px-3 py-3 ${statusClass} font-mono text-[10px] tracking-[0.2em]`}>
+        {statusLabel}
+      </td>
+      <td className="px-3 py-3 text-mute leading-snug">
+        {method}
+      </td>
+      <td className={`px-3 py-3 ${tierClass} font-mono text-[10px] tracking-[0.2em]`}>
+        {tier}
+      </td>
+      <td className="px-3 py-3 text-mute font-mono text-[10px] tracking-[0.2em] tabular">
+        {record}
+      </td>
+    </tr>
   );
 }
