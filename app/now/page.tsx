@@ -33,9 +33,21 @@ export const metadata: Metadata = {
 // ─────────────────────────────────────────────────────
 
 const LAST_UPDATED = "2026-05-22";
-const CYCLE = "Round 28-34 · 2026-05-22 · 多 wave 大 push · Tim 11+ canary fires brand-pivot displacement mission · 量身 prediction-seeking audience · ConfidenceStars 1-5 ★ 全鏈 4 surfaces + AI prominence marketing + 「不做 list」 + BLACK CARD repricing 499→299 + WCAG AA contrast + /annual/2026 Year 0 + OG card + next.config.ts production-ready";
+const CYCLE = "Round 28-35 · 2026-05-22 · 12+ canary fires displacement mission · ConfidenceStars 全鏈 + AI prominence marketing + 不做 list + BLACK CARD 499→299 + WCAG AA + /annual/2026 + OG cards × 3 + next.config.ts production-ready + NEW /rewards skill-based fantasy league prize + 恆美 ecosystem cross-promotion";
 
 const SHIPPED_THIS_CYCLE: { title: string; body: string; href?: string }[] = [
+  // ── 🎁 Round 35 W-B · /rewards OG + UserPredictionPicker close-loop ──
+  {
+    title: "[R35 WB] 🎁 /rewards OG image + UserPredictionPicker close-loop cross-link",
+    body: "Complete R35 W-A /rewards ship · 2 gaps fill:(1) NEW /rewards/opengraph-image.tsx · shareability gap fix · 4 catalogue rows inline + PRE-LAUNCH badge + punchline「Most prediction sites pay you in cash. We pay you in 底片.」 · brand-pure ecosystem play visible in image form ·(2) UserPredictionPicker bottom 加「累計 PROVED 預測 → /rewards 兌換實體獎品」 cross-link · 第一次 product loop 物理閉合(prediction → reward path)· user makes prediction → sees PROVED chip post-game → click /rewards 看 catalogue → 看自己 N points + affordable items。 4th 統一 OG punchline 結構 canonical(/track-record「Most prediction sites hide misses」+ /founders/ledger「Most luxury brands publish process」+ /annual「Most SaaS hide ARR」+ /rewards「Most pay cash · we pay 底片」)。",
+    href: "/rewards",
+  },
+  // ── 🎁 Round 35 W-A · NEW /rewards PROVED 兌換實體獎品 ──
+  {
+    title: "[R35 WA] 🎁 NEW /rewards · PROVED 預測兌換實體獎品 · brand-pure skill-based prize · 34th route",
+    body: "Tim 11+ canary 同方向「集點兌換 / 兌換實體獎品 / 恆美攝影 ecosystem」 push · 之前 Round 31 W-V agent reject 的是「daily login engagement farming · virtual badge」 = 不同 mechanism。 Tim 提議 = 「PROVED 預測 → 累計 → 兌換實體獎品(底片 / 咖啡 / 沖洗 / 護照代辦折抵)」 = skill-based fantasy league prize 結構(Metaculus + Manifold + WSOP main event prize pattern)· brand-pure。 Brand IP 全 ✓:Engine FREE 不動 · 0 cash referral · 0 user-to-user social · 0 MLM(同 7-11 集點 retail · 不觸 § 29)· 0 寄生 gambling · 0 金管會(retail loyalty 不是 financial product)· Pratfall(PROVED + DIVERGED 等大公開)。 Auth-aware · session.user 看 N PROVED points(derived from existing aggregatePredictionStats · 0 migration · 0 新 field)· Anonymous 看 /login?next=/rewards CTA。 4 catalogue:底片 20pts / 咖啡 5pts / 沖洗 10pts / 護照代辦 15pts。 2 取貨:來店免費(恆美攝影 × 伶 Kopi 台南東區)/ 郵寄 NT$ 100(cost-recovery 不賺錢)。 4 rules PRE-COMMIT binding(同 /audit S05 pattern · 30-day notice via /changelog)。 ECOSYSTEM EXPLAINER · ZONE 27 ↔ 恆美攝影 × 伶 Kopi 雙生品牌 cross-promotion。 WHAT THIS IS NOT · 5 anti-pattern explicit defense(brand-IP-pure 物理 codify)。 4 心理 hook 同時 fire:Sunk cost + Status + Operant conditioning + Tangible reward > digital。 PRE-LAUNCH state(Q4 2026 啟用 · 等 Tim 恆美 inventory 對接 + 郵寄物流 setup · 同 /membership/black-card mockup pattern)。 「Displacement mission · 對標幹掉 玩運彩+報馬仔」 物理閉環 fire:他們 cash referral 觸 § 29 vs ZONE 27 實體獎品 0 cash 0 referral 同 7-11 邏輯不觸法。",
+    href: "/rewards",
+  },
   // ── 🛡️ Round 34 W-C · next.config.ts production-ready ──
   {
     title: "[R34 WC] 🛡️ next.config.ts 升 production-ready · Agent B Finding #5 ship · 0 visual change",
