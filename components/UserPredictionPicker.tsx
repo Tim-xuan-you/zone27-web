@@ -204,9 +204,21 @@ export default function UserPredictionPicker({
         </p>
       )}
 
+      {/* Round 35 W-B · close loop · UserPredictionPicker → /rewards
+          ecosystem connection。 brand IP「skill-based fantasy league prize」
+          物理 surface · 0 cash · 0 referral · 0 wallet · 預測 PROVED 累計
+          可兌換實體獎品(底片 / 咖啡 / 沖洗 / 護照代辦折抵)。 */}
       <p className="font-mono text-mute/60 text-[9px] tracking-[0.25em] mt-3 leading-relaxed">
-        ▸ 0 money · 0 reward · 0 兌換 · 純精神 epistemic mirror(Metaculus
-        pattern)· 「您 vs 引擎 vs 實際」 三層 calibration · 0 PII broadcast
+        ▸ 0 cash · 0 referral · 0 wallet · skill-based fantasy league prize
+        structure · 「您 vs 引擎 vs 實際」 三層 calibration · 0 PII broadcast
+        <br />
+        ▸ 累計 PROVED 預測 →{" "}
+        <Link
+          href="/rewards"
+          className="text-gold/80 hover:text-gold underline-offset-4 hover:underline transition-colors"
+        >
+          /rewards 兌換實體獎品(底片 / 咖啡 / 沖洗 / 護照代辦)
+        </Link>
       </p>
     </div>
   );
