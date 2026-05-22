@@ -33,9 +33,15 @@ export const metadata: Metadata = {
 // ─────────────────────────────────────────────────────
 
 const LAST_UPDATED = "2026-05-22";
-const CYCLE = "Round 28-32 · 2026-05-22 · 多 wave 大 push · TONIGHT 3 receipts + Savant bars + critic-hardening + signature + CPBL auto-fetch + 「我看 ___」 personalization + Open Allocation Ledger + 新 route 雙 OG card + Tim founder-dogfood OTP path 砍";
+const CYCLE = "Round 28-32 · 2026-05-22 · 多 wave 大 push · TONIGHT 3 receipts + Savant bars + critic-hardening + signature + CPBL auto-fetch + 「我看 ___」 personalization + Open Allocation Ledger + 新 route 雙 OG card + Tim founder-dogfood 2 connecting canary fires(OTP path 砍 + Nav 會員 button auth-aware)";
 
 const SHIPPED_THIS_CYCLE: { title: string; body: string; href?: string }[] = [
+  // ── 🧭 Round 32 W-D · Nav 會員 button auth-aware · Tim founder-dogfood 2nd ──
+  {
+    title: "[R32 WD] 🧭 Nav「會員 →」 button auth-aware · 已登入切 /member · Tim founder-dogfood 2nd canary 同日",
+    body: "Tim 截 2 圖 push back:「我已經登入了!結果我只是去看其他頁面 · 現在想回去會員裏頭 · 點擊右上角(會員)· 跑到這裡幹嘛...回不去會員裡面的界面呀!」 = Round 32 W-C 後同日 2nd founder-dogfood canary 直接驗證 [[feedback-founder-dogfood-canary]] 寫死的「Tim push back 第 1 次就 trust direction 即修」 axiom。 Root cause:Nav「會員」 button 從 R23 → R25 一直 hardcode /membership(4-tier ladder)· 給 anonymous visitor wayfinding 用 · 但 logged-in user 點下去看 ladder 不是自己 dashboard · 「回不去」 confusion 是 navigation gap 不是 user 錯。 Ship NEW components/MembershipNavCTA.tsx(client island · session probe via createSupabaseBrowserClient · mount 後切 href + label)· Anonymous → /membership + 「會員 →」 · Logged-in → /member + 「您的引擎 →」(用 brand-specific 詞同 /member 自己 hero「您的引擎時間軸」 · 不用 SaaS jargon「儀表板」)。 Architecture choice:client island 非 async server · 因 Nav.tsx server / /login client · 不能 mix。 FOUC 200ms 接受 · 真實 user 不會點這麼快 · logged-in 點到 /membership 仍 graceful。 Variants:desktop gold-outlined pill + mobile gold-filled pill · 同 visual hierarchy unchanged。 Nav.tsx 重構 NAV_ITEMS 移 founders entry · MobileNavToggle 改 thin wrapper around MembershipNavCTA。 R30 W7 axiom「越少 fields 越正式」 延伸:session state 用 label 本身 carry · 不加 chip 不加 indicator · 1 個 button 2 state 不 split UI surface。",
+    href: "/member",
+  },
   // ── 🔪 Round 32 W-C · Tim founder-dogfood canary · 砍 path ② OTP code ──
   {
     title: "[R32 WC] 🔪 /login SentState path ② TYPE CODE 砍 · Tim founder-dogfood canary fire · 三 axiom 同時 fire",

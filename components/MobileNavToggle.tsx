@@ -1,23 +1,24 @@
-import Link from "next/link";
+import MembershipNavCTA from "@/components/MembershipNavCTA";
 
 // ── ZONE 27 · Mobile Nav CTA ───────────────────────────
+// Round 32 W-D · 2026-05-22 · 此 component 從靜態「會員 → /membership」
+// pill 升 auth-aware · delegates 到 MembershipNavCTA(client island)·
+// session probe 後切 /member + label「您的引擎 →」。
+//
+// 保留此 file 是為了 Nav.tsx import path stability + 將來再用 mobile-only
+// 特化 nav 變體時 wrapper 不必新建。 內部純 thin wrapper · 0 logic 重複。
+//
+// History(pre-Round-32):
 // (Component name retained for backwards compatibility · file was
 //  previously the hamburger overlay; rewritten 2026-05-20 PM after
-//  Tim flagged the overlay as "very cramped, ugly".)
+//  Tim flagged the overlay as "very cramped, ugly". Round 23 → Round 25
+//  href 改 /founders → /membership · Round 32 W-D 升 auth-aware。)
 //
-// Mobile minimal-nav pattern · Linear / Stripe / Apple marketing:
-//   - Top header: ZONE 27 wordmark + 會員 CTA · nothing else
-//   - All secondary nav lives in Footer + inline content links +
-//     Related Reading hub-and-spoke on trust-artifact pages
-//   - ScarcityStrip continues to render directly under Nav
-//
-// Why this works for ZONE 27 (stealth + premium brand):
-//   1. Every visitor lands via Tim's hand-shared link → they came
-//      for a specific page, not random navigation
-//   2. Content has inline cross-links (/audit + /methodology +
-//      /coverage on most pages) so contextual nav is preserved
-//   3. Footer has every route — visitors who want to wander find
-//      it there
+// Why minimal-nav pattern still works for ZONE 27:
+//   1. Every visitor lands via Tim's hand-shared link → came for specific
+//      page · not random navigation
+//   2. Content has inline cross-links · contextual nav 保留
+//   3. Footer 有 every route · 想 wander find it there
 //   4. Top stays minimum-cognitive-load · maximum reading focus
 // ─────────────────────────────────────────────────────
 
@@ -30,25 +31,12 @@ export default function MobileNavToggle({
   active,
   className = "",
 }: Props) {
-  const isFoundersActive = active === "founders";
   return (
     <div className={className}>
-      <Link
-        href="/membership"
-        aria-current={isFoundersActive ? "page" : undefined}
-        aria-label="加入會員 · FREE TIER 免費訂閱 + BLACK CARD + Founders 27 三層 ladder"
-        /* Round 9: py-1.5 → py-3 ensures ≥44px tap target per
-           Apple HIG / WCAG 2.5.5. Pill height was ~28-32px before.
-           Round 23 → Round 25(Tim 揭示 wayfinding 根本問題):
-           href 改 /founders → /membership · /founders 視覺上仍是
-           Founders 27 sales page · /membership 才是 4-tier ladder
-           平等視覺權重的入口頁。Mobile sticky bottom CTA 仍指
-           /founders(paid-focused conversion)· Nav pill = inclusive
-           入口 · 兩條路徑各服務不同 stage。 */
-        className="px-3.5 py-3 bg-gold text-navy text-[10px] tracking-[0.22em] font-mono font-medium whitespace-nowrap hover:bg-gold-soft transition-colors"
-      >
-        會員 →
-      </Link>
+      <MembershipNavCTA
+        active={active === "founders"}
+        variant="mobile"
+      />
     </div>
   );
 }
