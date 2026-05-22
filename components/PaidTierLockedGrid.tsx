@@ -102,10 +102,10 @@ export default function PaidTierLockedGrid() {
             </p>
             <span
               lang="en"
-              className="font-mono text-[9px] tracking-[0.3em] px-1.5 py-0.5 border border-loss/40 text-loss/80"
-              title="PRE-LAUNCH · payment infrastructure Q3 2026 上線"
+              className="font-mono text-[9px] tracking-[0.3em] px-1.5 py-0.5 border border-gold/60 text-gold shimmer"
+              title="LIVE NOW · 月卡手動續訂模式 · 個人方案綠界 ECPay · 不等 Q3"
             >
-              PRE-LAUNCH · Q3 2026
+              ✓ LIVE · 月卡手動
             </span>
           </div>
           <p className="font-mono text-gold tabular text-lg sm:text-xl tracking-tight">

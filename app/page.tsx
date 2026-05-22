@@ -208,9 +208,11 @@ export default function Home() {
           <span className="text-bone">不藏 DIVERGED</span>
           <span className="text-mute/50 mx-2">·</span>
           <span className="text-bone">不追蹤您</span>
+          <span className="text-mute/50 mx-2">·</span>
+          <span className="text-gold">不等 Q3</span>
         </p>
         <p className="mt-3 font-mono text-mute/60 text-[9px] sm:text-[10px] tracking-[0.28em] leading-relaxed">
-          NO ODDS · NO LOCK · NO AFFILIATE · NO HIDDEN MISSES · 0 TRACKERS
+          NO ODDS · NO LOCK · NO AFFILIATE · NO HIDDEN MISSES · 0 TRACKERS · <span className="text-gold/80">NO WAITING</span>
         </p>
       </section>
 

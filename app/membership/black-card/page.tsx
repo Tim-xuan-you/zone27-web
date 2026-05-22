@@ -115,10 +115,10 @@ export default function BlackCardPage() {
             </p>
             <span
               lang="en"
-              className="font-mono text-[9px] tracking-[0.3em] px-1.5 py-0.5 border border-loss/40 text-loss/80 shimmer"
-              title="UI Preview only · 實際訂閱機制 + payment infrastructure 2026 Q3 上線"
+              className="font-mono text-[9px] tracking-[0.3em] px-1.5 py-0.5 border border-gold/60 text-gold shimmer"
+              title="LIVE NOW · 月卡手動續訂模式 · 個人方案 NT$ 299/月 · 倒置 SaaS axiom · 不自動扣款"
             >
-              PRE-LAUNCH · UI MOCKUP
+              ✓ LIVE · 月卡手動
             </span>
           </div>
           <h1 className="text-4xl sm:text-5xl text-bone font-light tracking-tight max-w-3xl">
@@ -126,13 +126,22 @@ export default function BlackCardPage() {
             <span className="text-gold">NT$ 299 / 月</span>
           </h1>
           <p className="mt-6 text-mute leading-relaxed max-w-2xl">
-            ZONE 27 訂閱會員 · 信用卡定期定額自動扣款 · 14 天無條件退款 ·
-            隨時可取消 · 5% 創作者抽成(vs 業界平台 30-50% 是降維打擊)。
-            預計 2026 Q3 上線 · 此頁是 UI preview · 不可實際訂閱。
+            ZONE 27 訂閱會員 · <strong className="text-bone">月卡手動續訂</strong>
+            模式 · NT$ 299 月卡 visitor 每月主動付 1 次 · <strong className="text-bone">
+            不自動扣款</strong> · 14 天無條件退款 · 5% 創作者抽成
+            (vs Taiwan LINE 老師 / 投顧老師生態 30-50% 是降維打擊)。
           </p>
-          <p className="mt-4 font-mono text-mute/85 text-[10px] tracking-[0.25em] leading-relaxed max-w-2xl">
-            想 Q3 開放第一時間通知 → 註冊 FREE TIER · 我會 publish 開放當天
-            send email。
+          <p className="mt-4 text-mute/85 leading-relaxed max-w-2xl">
+            <strong className="text-bone">brand IP 倒置 SaaS · 不靠 dark pattern
+            自動扣款</strong> · 每月主動付 = stronger commitment 信號 · high-intent
+            retention · 同 HEY / Costco yearly / 7-11 月卡 model · industry
+            validated。 第 5 個 declarative absence(同 F6 不顯示賠率 / 不賣明牌 /
+            不分潤博彩 / 不藏 DIVERGED / 不追蹤您 / <strong className="text-gold">
+            不等 Q3</strong>)。
+          </p>
+          <p className="mt-4 font-mono text-gold/80 text-[10px] tracking-[0.25em] leading-relaxed max-w-2xl">
+            ✓ LIVE NOW · 個人方案綠界(ECPay)收款 · 信用卡 + Apple Pay + ATM +
+            超商代碼 全 OK · email Tim 啟動您 BLACK CARD 月卡
           </p>
           <div className="mt-6">
             <ArticleMeta readingMin={4} />

@@ -108,16 +108,16 @@ export default function FoundersLedgerPage() {
               lang="en"
               className={`font-mono text-[9px] tracking-[0.3em] px-1.5 py-0.5 border ${
                 PRE_LAUNCH
-                  ? "border-loss/40 text-loss/80 shimmer"
+                  ? "border-gold/60 text-gold shimmer"
                   : "border-gold/60 text-gold"
               }`}
               title={
                 PRE_LAUNCH
-                  ? "申請通道未開啟 · weekly reviews 尚未啟動 · 等付款開放 (Q3 2026)第一筆"
+                  ? "✓ LIVE NOW · 申請通道開啟 · email Tim 申請 · 不等 Q3"
                   : `累計 ${REVIEW_WINDOWS.length} 週 review · ${totalApproved} 分配 · ${totalApplicants} 申請`
               }
             >
-              {PRE_LAUNCH ? "WAITING · 申請通道未開啟" : `WEEK ${REVIEW_WINDOWS.length}`}
+              {PRE_LAUNCH ? "✓ LIVE · 申請通道開啟 · email Tim" : `WEEK ${REVIEW_WINDOWS.length}`}
             </span>
           </div>
           <h1 className="text-4xl sm:text-5xl text-bone font-light tracking-tight max-w-3xl">

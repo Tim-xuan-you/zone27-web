@@ -141,10 +141,10 @@ export default async function RewardsPage() {
             </p>
             <span
               lang="en"
-              className="font-mono text-[9px] tracking-[0.3em] px-1.5 py-0.5 border border-loss/40 text-loss/80 shimmer"
-              title="PRE-LAUNCH · catalogue 已 ship · 兌換 fulfillment 等 2026 Q4 啟動"
+              className="font-mono text-[9px] tracking-[0.3em] px-1.5 py-0.5 border border-gold/60 text-gold shimmer"
+              title="LIVE NOW · catalogue + Tim 親手 fulfill · email Tim 兌換 · 不等 Q4"
             >
-              PRE-LAUNCH · Q4 2026
+              ✓ LIVE · 即時兌換
             </span>
           </div>
           <h1 className="text-4xl sm:text-5xl text-bone font-light tracking-tight max-w-3xl">
