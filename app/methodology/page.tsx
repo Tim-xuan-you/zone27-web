@@ -416,10 +416,10 @@ repeat 10,000 times → aggregate
               <LensRow
                 lens="Park Factor"
                 angle="4 場館 home advantage 比較 · 哪場有利投/打"
-                status="LENS · planned"
-                statusTone="loss"
-                tier="BLACK CARD"
-                tierTone="gold"
+                status="✓ LIVE · R37 W-C"
+                statusTone="gold"
+                tier="FREE 預覽 · 將來 BLACK CARD"
+                tierTone="bone"
               />
               <LensRow
                 lens="Pitcher Fatigue"

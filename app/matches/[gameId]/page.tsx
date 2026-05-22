@@ -18,6 +18,7 @@ import StatPercentileBar from "@/components/StatPercentileBar";
 import AdvancedStatBar from "@/components/AdvancedStatBar";
 import ConfidenceStars from "@/components/ConfidenceStars";
 import VibeCheck from "@/components/VibeCheck";
+import ParkFactorLens from "@/components/ParkFactorLens";
 import EngineStamp from "@/components/EngineStamp";
 import { getCpblAdvancedByName } from "@/lib/cpbl-advanced";
 import RelatedReading from "@/components/RelatedReading";
@@ -383,6 +384,21 @@ export default async function MatchDetailPage({
           <VibeCheck teamName={m.home.en} recent={m.home.recent} />
           <VibeCheck teamName={m.away.en} recent={m.away.recent} />
         </div>
+      </section>
+
+      {/* ── PARK FACTOR LENS · Round 37 W-C 第 2 個 Lens Variety 真實 LIVE ──
+          per [[feedback-no-waiting-rule]] iron rule「任何現在能做就做」 ·
+          R36 W-A Lens Variety table 第 3 個 candidate 落地。 純 data viz
+          from existing match.venue + lib/cpbl-parks.ts reference data ·
+          「park factor ≠ outcome predictor」 educational disclaimer · brand-
+          pure 不假 prediction · ESTIMATE methodology + PR invitation per
+          /audit Section 02 ESTIMATION DISCLOSURE pattern · 同 Section 05
+          Lens Variety axiom。 */}
+      <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-20">
+        <h2 className="font-mono text-gold text-[10px] tracking-[0.4em] mb-6">
+          / 01C · PARK FACTOR · 場館 lens(home advantage · 非 prediction)
+        </h2>
+        <ParkFactorLens venue={m.venue} />
       </section>
 
       {/* ── SCORE DISTRIBUTION ─────────────────────── */}
