@@ -91,6 +91,11 @@ const FOOTER_GROUPS: FooterGroup[] = [
     label: "信任文件",
     enLabel: "DOCS",
     links: [
+      // Round 51 W-D · /transparency NEW · audit aggregator · Anthropic
+      // pattern · 整套 LIMITS / NEVER / DIVERGED / commitments / data
+      // sources / audit trail 集中 surface · 升 DOCS column 第 1 位置 ·
+      // 訪客 F-pattern 第一眼看到。
+      { label: "Transparency · 完整 audit", href: "/transparency" },
       { label: "模型報告", href: "/audit" },
       { label: "技術白皮書", href: "/methodology" },
       // Round 50 W-A · /methodology/diff NEW · v0.2 → v0.3 entire delta ·

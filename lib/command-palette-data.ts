@@ -158,6 +158,28 @@ export const COMMAND_ITEMS: CommandItem[] = [
 
   // ── 信任文件 ───────────────────────────────────────
   {
+    label: "Transparency · 完整 audit 一頁可見 · 6 sections aggregator",
+    kicker: "/transparency",
+    path: "/transparency",
+    group: "信任文件",
+    keywords: [
+      "transparency",
+      "audit",
+      "transparency hub",
+      "aggregator",
+      "anthropic",
+      "limits",
+      "never",
+      "diverged",
+      "commitments",
+      "data sources",
+      "audit trail",
+      "公開",
+      "稽核",
+      "transparency aggregator",
+    ],
+  },
+  {
     label: "Model Report · 5 sections · 引擎範圍 + 揭露哲學",
     kicker: "/audit",
     path: "/audit",

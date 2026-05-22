@@ -54,6 +54,27 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
       title: "倒置宣言 · 為何完整公開",
     },
   ],
+  // Round 51 W-D · /transparency NEW · audit aggregator · Anthropic pattern。
+  // Siblings: /audit(parent trust artifact · model report)· /ethics(8
+  // binding commitments · 同 transparency 軸線)· /steelman(5 strongest
+  // objections · 同 self-exposure pattern)。
+  "/transparency": [
+    {
+      href: "/audit",
+      kicker: "audit",
+      title: "Model Report · 5 sections + DISCLOSURE PHILOSOPHY",
+    },
+    {
+      href: "/ethics",
+      kicker: "ethics",
+      title: "8 binding commitments · 違反 = 紅字標",
+    },
+    {
+      href: "/steelman",
+      kicker: "steelman",
+      title: "5 strongest objections · self-exposure pattern",
+    },
+  ],
   // Round 50 W-A · /methodology/diff NEW · v0.2 → v0.3 entire delta ·
   // brand IP triple-fire(Disclosure + Pratfall + Costly Signaling)。
   // Siblings: /methodology(parent · 完整白皮書)· /audit(S05 PRE-COMMIT
