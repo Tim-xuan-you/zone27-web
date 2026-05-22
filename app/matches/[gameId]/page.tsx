@@ -19,6 +19,7 @@ import EngineStamp from "@/components/EngineStamp";
 import RelatedReading from "@/components/RelatedReading";
 import FollowMatchButton from "@/components/FollowMatchButton";
 import MatchNoteEditor from "@/components/MatchNoteEditor";
+import MyTeamMatchNote from "@/components/MyTeamMatchNote";
 
 // ── ISR · Re-render daily so updates to lib/matches.ts ship within
 // 24h without a full redeploy. Pairs with isMatchDataStale() rendering
@@ -161,6 +162,17 @@ export default async function MatchDetailPage({
           </p>
           <FollowMatchButton matchId={m.id} />
         </div>
+
+        {/* Round 31 Wave N · 「您支持的 X 在這場是 favorite/underdog」
+            personal narrative · 對你說話 · 不對球迷說話 · client-hydrate
+            after myTeam set in localStorage(z27_team)。 */}
+        <MyTeamMatchNote
+          homeName={m.home.name}
+          awayName={m.away.name}
+          homeWinRate={m.home.winRate}
+          awayWinRate={m.away.winRate}
+          finalWinner={m.finalResult?.winner ?? null}
+        />
       </section>
 
       {/* ── THE MASSIVE WIN BAR ────────────────────── */}

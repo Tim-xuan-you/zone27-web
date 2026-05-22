@@ -6,6 +6,8 @@ import RelatedReading from "@/components/RelatedReading";
 import FounderSignOff from "@/components/FounderSignOff";
 import ArticleMeta from "@/components/ArticleMeta";
 import EngineStamp from "@/components/EngineStamp";
+import TeamPickPanel from "@/components/TeamPickPanel";
+import MyTeamTrackRecord, { type MyTeamMatch } from "@/components/MyTeamTrackRecord";
 import {
   matches,
   getFinalizedMatches,
@@ -112,6 +114,19 @@ export default function TrackRecordPage() {
         <div className="mt-3">
           <EngineStamp />
         </div>
+
+        {/* Round 31 Wave N · TeamPick personalization · 「對你(這個富邦
+            球迷)說話 · 不對球迷說話」 fan grammar match · per critic-hardening
+            agent W-G ONE deepest call · 0 cookie / 0 server / 0 PII /
+            純 localStorage z27_team。 */}
+        <div className="mt-5 flex items-baseline justify-between flex-wrap gap-3">
+          <TeamPickPanel variant="header" />
+        </div>
+
+        {/* Round 31 Wave N · personal counter · 您支持的隊 N=X · ✓Y ✕Z
+            · 只在 myTeam 已選後 render(client-hydrate) */}
+        <MyTeamTrackRecord matches={buildMyTeamMatches(finalized)} />
+
         <p className="mt-4 font-mono text-mute/80 text-[10px] tracking-[0.25em] leading-relaxed max-w-2xl">
           多數運動分析平台選擇藏起這頁;ZONE 27 把它放在 footer 主導航 ·
           因為公開戰績是品牌 IP 的物理證據(per{" "}
@@ -398,6 +413,31 @@ export default function TrackRecordPage() {
       <Footer />
     </div>
   );
+}
+
+// ── Round 31 W-N · buildMyTeamMatches ──────────────────
+// Converts finalized Match[] to MyTeamMatch[] · the lighter shape used
+// by client-side MyTeamTrackRecord(no need to ship full Match data to
+// client · only the fields needed for team filtering + verdict)。
+function buildMyTeamMatches(finalized: Match[]): MyTeamMatch[] {
+  return finalized.map((m) => {
+    const homePicked = m.home.winRate > m.away.winRate;
+    const homeWon = m.finalResult
+      ? m.finalResult.winner === "home"
+        ? true
+        : m.finalResult.winner === "away"
+        ? false
+        : null
+      : null;
+    return {
+      id: m.id,
+      homeName: m.home.name,
+      awayName: m.away.name,
+      homePicked,
+      homeWon,
+      isFinal: !!m.finalResult,
+    };
+  });
 }
 
 // ── Sub-components ─────────────────────────────────────
