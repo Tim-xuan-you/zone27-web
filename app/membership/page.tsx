@@ -92,11 +92,15 @@ const TIERS: Tier[] = [
     price: "NT$ 299",
     priceNote: "每月 · 預計 2026 Q3 開放",
     desc: "黑金訂閱會員。可發文 · 可推薦賽事 · 創作者抽成 5%(vs 業界 LINE 老師平台 30-50% 是降維打擊)。",
+    // Round 55 W-C · Agent C #2 fix · 「Everything in [prev tier]+」 stacking
+    // pattern · 同 Defector + Plausible + Patreon premium-tier 模式 · 訪客
+    // visual rhythm 簡化 · card height -40% · price 變 focal point · 不再
+    // repeat lower tier perks。
     perks: [
-      "可在賽事頁討論室發言 / 分享預測(球迷 grammar 「明牌」 · 不導向莊家 · 見 #pick-vs-bet)",
-      "創作者抽成 5%",
+      "Everything in FREE TIER · 持續 access",
+      "可在賽事頁討論室發言 / 分享預測(球迷 grammar 「明牌」 · 不導向莊家)",
+      "創作者抽成 5%(vs LINE 老師 30-50%)",
       "每月 voting 影響引擎迭代方向",
-      "Founders 27 LINE 群 access",
       "每週 Tim 工程筆記 full 版",
     ],
     cta: { label: "→ 看 BLACK CARD UI preview", href: "/membership/black-card" },
@@ -108,8 +112,11 @@ const TIERS: Tier[] = [
     price: "NT$ 2,700",
     priceNote: "一次 · 終身 · 限量 270",
     desc: "創始終身會員。270 個編號 · 永遠關閉 · 不再開放。BLACK CARD 全 access + 創作者抽成 0%(終身)+ 編號 #001-#270 鑲入身分。",
+    // Round 55 W-C · Agent C #2 fix · 「Everything in [prev tier]+」 stacking
+    // · 同 BLACK CARD pattern · 訪客 1-line 即知 Founders 27 包含所有
+    // BLACK CARD value + lifetime + creator抽成 0% premium。
     perks: [
-      "BLACK CARD 全 access · 終身免費",
+      "Everything in BLACK CARD · 終身 access",
       "創作者抽成 0%(永遠 · vs BLACK CARD 5%)",
       "編號 #001-#270 永久 identity",
       "模型迭代提前 7 天試用 + voting",
