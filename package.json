@@ -9,6 +9,7 @@
     "lint": "eslint",
     "fetch-cpbl": "node scripts/fetch-cpbl-pitchers.mjs",
     "fetch-cpbl-advanced": "node scripts/fetch-cpbl-advanced.mjs",
+    "fetch-cpbl-schedule": "node scripts/fetch-cpbl-schedule.mjs",
     "process-signature": "node scripts/process-signature.mjs"
   },
   "dependencies": {

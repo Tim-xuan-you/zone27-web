@@ -291,6 +291,62 @@ export default function CoveragePage() {
               引擎已就緒,資料流動中
             </h2>
             <LeagueTable rows={ACTIVE_LEAGUES} />
+
+            {/* Round 46 W-B · Agent L R44 question canary fire · Tim 直問
+                MLB 是否 auto-fetch · /coverage 應該 honest document MLB
+                vs CPBL hybrid data flow · brand IP「方法公開」 延伸到 data
+                pipeline layer 本身。 */}
+            <div className="mt-8 border border-gold/30 bg-slate/30 p-5 sm:p-7">
+              <p
+                lang="en"
+                className="font-mono text-gold text-[10px] tracking-[0.4em] mb-4"
+              >
+                ⚙ DATA PIPELINE TRANSPARENCY · auto vs manual
+              </p>
+              <p className="text-mute text-sm leading-relaxed mb-4">
+                ZONE 27 不是同一 ingestion 模式 · 兩聯盟各 honest disclose:
+              </p>
+              <div className="space-y-4 text-sm">
+                <div className="border-l-2 border-gold/60 pl-4">
+                  <p className="font-mono text-gold/90 text-[10px] tracking-[0.3em] mb-2">
+                    MLB · 100% AUTOMATIC ✓
+                  </p>
+                  <p className="text-mute leading-relaxed">
+                    MLB Stats API(<code className="font-mono text-bone bg-slate/40 px-1.5 py-0.5 rounded-sm text-[10px]">statsapi.mlb.com</code>)
+                    · 10-min ISR(Vercel auto-cache)· 0 cost · 0 API key ·
+                    全部 ~15 daily games · pitchers · K9 BB9 HR9 ERA · venue ·
+                    time · 0 founder intervention。
+                  </p>
+                </div>
+                <div className="border-l-2 border-line/60 pl-4">
+                  <p className="font-mono text-bone/90 text-[10px] tracking-[0.3em] mb-2">
+                    CPBL · HYBRID(50% auto · 50% manual)⚠
+                  </p>
+                  <p className="text-mute leading-relaxed mb-2">
+                    cpbl.com.tw 是 server-rendered HTML 不是 SPA · cheerio
+                    parsing pattern works · 3 scripts auto-fetch:
+                  </p>
+                  <ul className="space-y-1.5 text-mute/85 pl-4 leading-relaxed">
+                    <li>▸ <code className="font-mono text-bone bg-slate/40 px-1 rounded-sm text-[10px]">npm run fetch-cpbl</code> · pitcher K9/BB9/HR9 leaderboard auto-parse</li>
+                    <li>▸ <code className="font-mono text-bone bg-slate/40 px-1 rounded-sm text-[10px]">npm run fetch-cpbl-advanced</code> · Trackman radar 進階 stats(野球革命)</li>
+                    <li>▸ <code className="font-mono text-bone bg-slate/40 px-1 rounded-sm text-[10px]">npm run fetch-cpbl-schedule</code> · 今日賽程 metadata(R46 W-A NEW)</li>
+                  </ul>
+                  <p className="text-mute/85 leading-relaxed mt-2">
+                    剩 1 manual step:<strong className="text-bone">賽後 box score finalResult</strong> ·
+                    Tim 22:30+ TPE screenshot ingest · 因 brand IP「物理時刻 +
+                    賽前/賽後 strict timing」 不可 auto · 賽後 receipt 真實
+                    PROVED/DIVERGED 等大 公開。
+                  </p>
+                </div>
+              </div>
+              <p className="font-mono text-mute/70 text-[10px] tracking-[0.25em] leading-relaxed mt-4">
+                ⚓ 為什麼 hybrid · 不全 auto:CPBL 沒 official API(僅 server-
+                rendered HTML)· 賽程 + pitcher stats 可 cheerio parse · box
+                score finalResult 賽後 timing-critical · Tim 親手 ingest 是
+                brand IP physical signature(同 /audit S05 PRE-COMMIT pattern)·
+                不可 silently 自動化(若 auto · 可 backdate · 失 trust signal)。
+              </p>
+            </div>
           </section>
 
           {/* ── 03 TRACKED, NOT ACTIVE ────────────────── */}
