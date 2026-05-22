@@ -439,19 +439,19 @@ repeat 10,000 times → aggregate
               />
               <LensRow
                 lens="Bullpen Depth"
-                angle="兩隊牛棚深度比較 · 後援戰力 audit"
-                status="LENS · planned"
-                statusTone="loss"
-                tier="BLACK CARD"
-                tierTone="gold"
+                angle="team recent W-L derive late-inning resilience proxy(v0.1)· v0.2 = bullpen ERA + IP usage"
+                status="✓ LIVE · R40 W-A · v0.1 PROXY"
+                statusTone="gold"
+                tier="FREE 預覽 · 將來 BLACK CARD"
+                tierTone="bone"
               />
               <LensRow
                 lens="Matchup History"
-                angle="此 matchup 過去 N 場 H2H + 趨勢"
-                status="LENS · planned"
-                statusTone="loss"
-                tier="BLACK CARD"
-                tierTone="gold"
+                angle="此 matchup 過去 H2H + 趨勢 · real data · educational at N<10"
+                status="✓ LIVE · R40 W-B · 7th LIVE"
+                statusTone="gold"
+                tier="FREE 預覽 · 將來 BLACK CARD"
+                tierTone="bone"
               />
             </tbody>
           </table>
@@ -494,14 +494,19 @@ repeat 10,000 times → aggregate
         <blockquote className="mt-8 border-l-2 border-gold pl-6 py-3">
           <p className="text-bone text-lg sm:text-xl font-light tracking-tight leading-snug">
             Most prediction sites have 1 fake angle.<br />
-            <span className="text-gold">We&apos;re building 7 honest ones.</span>
+            <span className="text-gold">We built 7 honest ones.</span>
           </p>
           <p className="mt-3 text-mute text-sm leading-relaxed">
-            玩運彩+報馬仔 1 個 fake「大師明牌」 angle · ZONE 27 multi-lens
-            7 angles 各自 publish methodology + open code + educational
-            explainer · 同 Patek complication 模式 · brand-pure 無限 scaling ·
-            訂閱者 voting 決定 next ship order · IKEA Effect + Sunk cost +
-            Curiosity + FOMO 4 hook 同時 fire。
+            Round 40 W-B · 7-lens canvas 完成。 玩運彩+報馬仔 1 個 fake
+            「大師明牌」 angle · ZONE 27 multi-lens{" "}
+            <strong className="text-bone">7 LIVE angles</strong>(Win
+            Probability + Vibe Check + Park Factor + Pitcher Fatigue +
+            Underdog + Bullpen Depth + Matchup History)各自 publish
+            methodology + open code + educational explainer · 同 Patek
+            complication 模式 · brand-pure 無限 scaling 起點。 displacement
+            narrative 物理閉環 — 從 future promise(「building」)升 LIVE
+            truth(「built」)。 訂閱者 voting 決定 next ship order(Lens
+            v2.0 計劃 · Q3 2026+)。
           </p>
         </blockquote>
       </Section>

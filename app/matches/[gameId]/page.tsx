@@ -21,6 +21,8 @@ import VibeCheck from "@/components/VibeCheck";
 import ParkFactorLens from "@/components/ParkFactorLens";
 import PitcherFatigueLens from "@/components/PitcherFatigueLens";
 import UnderdogLens from "@/components/UnderdogLens";
+import BullpenDepthLens from "@/components/BullpenDepthLens";
+import MatchupHistoryLens from "@/components/MatchupHistoryLens";
 import LensTrace, { ENGINE_V02_TRACE_STEPS } from "@/components/LensTrace";
 import EngineStamp from "@/components/EngineStamp";
 import { getCpblAdvancedByName } from "@/lib/cpbl-advanced";
@@ -496,6 +498,42 @@ export default async function MatchDetailPage({
           / 01E · UNDERDOG TRACKER · 黑馬機率 lens(upset probability · 非 contrarian)
         </h2>
         <UnderdogLens match={m} />
+      </section>
+
+      {/* ── BULLPEN DEPTH LENS(v0.1 PROXY) · Round 40 W-A 第 6 個 ──
+          per [[feedback-no-waiting-rule]] · R36 W-A Lens Variety table
+          第 6 個 candidate「Bullpen Depth · 兩隊牛棚深度比較」 落地 · v0.1
+          PROXY · 用 existing team recent W-L 推測 late-inning resilience
+          (不是 true bullpen depth · v0.2 需 ingest bullpen ERA + IP usage
+          + last 7 days workload)· brand IP Pratfall + Costly Signaling +
+          Disclosure 三 axiom 同時 fire · 同 PitcherFatigueLens v0.1 PROXY
+          pattern。 */}
+      <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-20">
+        <h2 className="font-mono text-gold text-[10px] tracking-[0.4em] mb-6">
+          / 01F · BULLPEN DEPTH · 牛棚 lens(v0.1 PROXY · 非 prediction)
+        </h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <BullpenDepthLens team={m.home} side="HOME" />
+          <BullpenDepthLens team={m.away} side="AWAY" />
+        </div>
+      </section>
+
+      {/* ── MATCHUP HISTORY LENS · Round 40 W-B 第 7 個(canvas 完成)──
+          per [[feedback-no-waiting-rule]] · R36 W-A Lens Variety table
+          第 7 個 candidate「Matchup History · 此 matchup 過去 H2H + 趨勢」
+          落地 · 完成 7-lens canvas。 跟 Bullpen Depth 不同 · 此 lens 是
+          REAL DATA(不是 v0.1 PROXY)· auto-derive from existing finalized
+          matches.ts data · 同 team-pair 查 historical encounters · N=0/1
+          stage 顯 educational lens explaining「為什麼 H2H 重要」 · N≥10
+          後 surface 真實 trend。 displacement narrative 物理閉環:
+          /methodology Section 05 「We're building 7」 → 「WE BUILT 7」 LIVE
+          truth not future promise · displacement battle 對 玩運彩+報馬仔
+          1 fake angle vs ZONE 27 7 honest 物理閉合。 */}
+      <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-20">
+        <h2 className="font-mono text-gold text-[10px] tracking-[0.4em] mb-6">
+          / 01G · MATCHUP HISTORY · H2H lens(real data · 7th LIVE Lens Variety)
+        </h2>
+        <MatchupHistoryLens match={m} />
       </section>
 
       {/* ── SCORE DISTRIBUTION ─────────────────────── */}

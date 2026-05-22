@@ -188,7 +188,7 @@ ZONE 27 與 **BOTTOM 27**(Tim 的棒球手遊)是雙生品牌:
 
 ---
 
-## 🗺️ 當前路由(v0.28 · Round 30 W5-W14 + Round 31-39 · 2026-05-22 · 36 visitor-discoverable · v0.29 等 Tim 拍板 milestone · +/calibration +/membership/black-card/ledger · 5 lenses LIVE per R37-W-B/W-D + R38-W-A + R39-W-B · VibeCheck + ParkFactor + PitcherFatigue + Underdog)
+## 🗺️ 當前路由(v0.28 · Round 30 W5-W14 + Round 31-40 · 2026-05-22 · 36 visitor-discoverable · v0.29 等 Tim 拍板 milestone · +/calibration +/membership/black-card/ledger · 7 LIVE LENS CANVAS COMPLETE per R37/R38/R39/R40 · Win Probability + VibeCheck + ParkFactor + PitcherFatigue + Underdog + BullpenDepth + MatchupHistory · 「Most prediction sites have 1 fake angle. We BUILT 7 honest ones.」)
 
 ```
 首頁 + 動線
@@ -306,6 +306,8 @@ OG + favicon + chrome
 - `<PitcherFatigueLens />` (Round 38 W-A · components/) · v0.1 PROXY · WHIP + BB9 + K9 季累計 derive command stability · v0.2 commit to rest_days + season_ip ingestion · /matches/[gameId] section 01D
 - `<LensTrace />` (Round 38 W-H · components/) · Smashing Magazine 2026 「AI Transparency · Dynamic Checklist」 pattern · 5-step deterministic pipeline trace · ENGINE_V02_TRACE_STEPS preset · NOT chatbot widget · /matches/[gameId] section 01A
 - `<UnderdogLens />` (Round 39 W-B · components/) · 黑馬機率 lens · upset probability + dominance gap · 0 contrarian play · 0 prediction 偏置 · 純 viz from existing winRate data · /matches/[gameId] section 01E
+- `<BullpenDepthLens />` (Round 40 W-A · components/) · v0.1 PROXY · team recent W-L derive late-inning resilience proxy · v0.2 commit to bullpen ERA + IP usage + last 7d ingestion · /matches/[gameId] section 01F
+- `<MatchupHistoryLens />` (Round 40 W-B · components/) · 7th LIVE Lens Variety · real H2H from finalized matches.ts · N=0/1 educational lens · N≥10 真實 trend · /matches/[gameId] section 01G · 7-LENS CANVAS COMPLETE
 - `<CmdKTrigger />` · 雙 variant:
   - `variant="chip"` (default) · Nav 右上方 ⌘K 提示按鈕(desktop)
   - `variant="icon"` (Round 12) · Nav mobile 2nd row 右側 ⌕ 圖示(palette 全站可達)

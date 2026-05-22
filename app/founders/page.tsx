@@ -17,9 +17,11 @@ export const metadata: Metadata = {
     "ZONE 27 創始會員資格 · 一次付清 NT$ 2,700,終身免費 · 270 名額滿即永久關閉,不會有第二批 · 9 個月達損益平衡,之後每年省下 NT$ 3,588。",
 };
 
-// Re-fetch waitlist count every 60 seconds (ISR). Visitors see a number
-// that's never older than ~1 minute without the page becoming dynamic.
-export const revalidate = 60;
+// R40 perf agent finding · was 60s ISR overhead · founders state is
+// hardcoded(claimedFounders array)not live API · 60s ISR triggers
+// Vercel Function invocations unnecessarily。 3600s(1hr)fallback cache
+// only · git push 觸發 redeploy when claimedFounders update Q3 onboard。
+export const revalidate = 3600;
 
 const benefits = [
   {

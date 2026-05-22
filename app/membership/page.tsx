@@ -18,8 +18,10 @@ export const metadata: Metadata = {
     "ZONE 27 4-tier membership ladder · 從匿名免費到 NT$ 2,700 終身 · 任時自由升級或永遠停在當前層 · 我們不催。創作者發文與推薦賽事的權限對照亦在此頁。",
 };
 
-// Re-fetch waitlist count every 60s (matches /founders cadence).
-export const revalidate = 60;
+// R40 perf agent finding · /membership pulls from static lib/founders-
+// stats.ts not live API · 60s ISR overhead 不必要 · 3600s(1hr)fallback
+// cache only · git push 觸發 redeploy on data change · 同 /founders pattern。
+export const revalidate = 3600;
 
 // ── ZONE 27 · /membership — 4-Tier Ladder Overview ──────
 // Tim 直擊:「我就只看到加入創始會員的頁面 · 哪裡可以加入一般會員?」
