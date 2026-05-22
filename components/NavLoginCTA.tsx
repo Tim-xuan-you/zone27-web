@@ -88,7 +88,7 @@ export default function NavLoginCTA({ variant = "desktop" }: Props) {
   }
 
   // SSR default + anonymous · both render the LOGIN button(hydration-stable)
-  const aria = "登入或註冊 · magic link · 終身免費 · 0 tracking";
+  const aria = "登入或註冊 · Email + 密碼 · 終身免費 · 0 tracking";
 
   if (variant === "mobile") {
     return (

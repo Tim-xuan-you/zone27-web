@@ -553,6 +553,9 @@ function SentState({
 // `raw.slice(0, 200)` fallback(unsanitized Supabase error message → DOM ·
 // fragile refactor surface · 也 leak infrastructure detail · 違反 security
 // 最小信息揭露)· 改為 unknown error → log + canonical generic message。
+// R59 W-B · Agent B Finding #2 · 從 comment-only intent 升為 actual
+// implementation(之前 comment 寫 「改為 log + canonical generic message」 但
+// code 還是 return raw.slice 違反 comment 承諾 · 同 security drift 信號)。
 function friendlyPasswordError(raw: string): string {
   if (!raw || typeof raw !== "string") return "錯誤 · 請稍候再試 · 持續寫信 tim@zone27.tw";
   const lower = raw.toLowerCase();
@@ -568,5 +571,10 @@ function friendlyPasswordError(raw: string): string {
     return "太快 · 等 30 秒後再試";
   if (lower.includes("network") || lower.includes("fetch"))
     return "網路問題 · 重試";
-  return raw.slice(0, 200);
+  // R59 W-B · log raw for Tim 後台 debug + return canonical generic message。
+  // 之前 return raw.slice(0, 200) 直接 leak Supabase infra strings 到 DOM。
+  if (typeof console !== "undefined" && typeof console.error === "function") {
+    console.error("[login friendlyPasswordError unknown]", raw);
+  }
+  return "錯誤 · 請稍候再試 · 持續寫信 tim@zone27.tw";
 }

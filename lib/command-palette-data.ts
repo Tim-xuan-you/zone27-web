@@ -78,7 +78,7 @@ export const COMMAND_ITEMS: CommandItem[] = [
     kicker: "/matches/cpbl-260521-01",
     path: "/matches/cpbl-260521-01",
     group: "賽事 · 引擎",
-    keywords: ["統一", "富邦", "lions", "guardians", "李東洛", "郭俊麟", "新莊"],
+    keywords: ["統一", "富邦", "lions", "guardians", "李東洺", "郭俊麟", "新莊"],
   },
   {
     label: "MLB · 即時資料",
@@ -465,7 +465,7 @@ export const COMMAND_ITEMS: CommandItem[] = [
     keywords: ["leaderboard", "wall", "27", "席位", "之牆"],
   },
   {
-    label: "Login · magic link 註冊 · FREE TIER 會員",
+    label: "Login · Email + 密碼 註冊 · FREE TIER 會員",
     kicker: "/login",
     path: "/login",
     group: "工具 · 外部",
@@ -476,6 +476,9 @@ export const COMMAND_ITEMS: CommandItem[] = [
       "register",
       "signup",
       "sign in",
+      "password",
+      "密碼",
+      "email",
       "magic link",
       "magic",
       "link",

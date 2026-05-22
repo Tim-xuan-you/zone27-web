@@ -128,7 +128,7 @@ export default function SubmitPage() {
                 href="/login?next=/member/submit"
                 className="inline-block px-6 py-3 bg-gold text-navy font-mono text-xs tracking-[0.3em] hover:bg-gold-soft transition-colors"
               >
-                → /login · magic link 註冊
+                → /login · Email + 密碼 註冊
               </Link>
             </div>
           ) : status.kind === "sent" ? (

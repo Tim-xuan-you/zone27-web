@@ -388,7 +388,7 @@ export default function CalibrationPublicPage() {
               >
                 /member/calibration
               </Link>{" "}
-              · 需 magic link 登入。 同 SVG · 同 binning math · 不同 data subset。
+              · 需 Email + 密碼 登入。 同 SVG · 同 binning math · 不同 data subset。
             </p>
             <div className="flex flex-wrap gap-3">
               <Link

@@ -89,7 +89,7 @@ export default function FollowMatchButton({ matchId }: { matchId: string }) {
       <Link
         href={`/login?next=${encodeURIComponent(`/matches/${matchId}`)}`}
         className="inline-flex items-center gap-2 px-4 py-2 border border-gold/40 text-gold/80 font-mono text-[10px] tracking-[0.3em] hover:bg-gold/5 hover:border-gold/70 transition-colors"
-        title="登入 FREE TIER 會員 · magic link 1 分鐘"
+        title="登入 FREE TIER 會員 · Email + 密碼 1 分鐘"
       >
         ★ 登入解鎖 FOLLOW
       </Link>

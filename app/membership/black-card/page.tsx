@@ -125,13 +125,81 @@ export default function BlackCardPage() {
             BLACK CARD ·{" "}
             <span className="text-gold">NT$ 299 / 月</span>
           </h1>
+          {/* R59 W-B · Agent C Ship #3 · price anchor strip · 4-cell honest
+              comparison · NT$ 200-450/月 benchmark band 從 CLAUDE.md
+              「商業模式定錨」 memory 升 visitor 眼前 · Loss Aversion(Kahneman
+              1979)+ Contrast Principle(Cialdini)· 之前 NT$ 299 floats
+              with no contrast · 訪客 default 認為 expensive。 4 cells:
+              Defector(獨立 sports media · Agent A Year-5 annual report cited)
+              · Netflix Premium(universal media anchor)· 健身房月卡(visceral
+              台北/台中市場 anchor)· BLACK CARD(highlighted gold)。 brand
+              IP per [[zone27-audience-fans-not-engineers]] · 「方法公開 ·
+              品味私藏」 不依賴 hidden price discrimination · 公開 anchor。 */}
+          <div className="mt-4 sm:mt-5 max-w-2xl">
+            <p
+              lang="en"
+              className="font-mono text-mute/55 text-[9px] tracking-[0.3em] mb-2"
+            >
+              ↘ MARKET ANCHOR · NT$ 200-450/月 SWEET SPOT BAND
+            </p>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3">
+              <div className="border border-line/40 bg-slate/20 p-2 sm:p-3 text-center">
+                <p
+                  lang="en"
+                  className="font-mono text-mute/70 text-[9px] tracking-[0.22em] mb-1"
+                >
+                  DEFECTOR
+                </p>
+                <p className="font-mono text-mute text-[11px] sm:text-xs tabular tracking-tight">
+                  NT$ ~200/月
+                </p>
+              </div>
+              <div className="border border-line/40 bg-slate/20 p-2 sm:p-3 text-center">
+                <p
+                  lang="en"
+                  className="font-mono text-mute/70 text-[9px] tracking-[0.22em] mb-1"
+                >
+                  NETFLIX PREMIUM
+                </p>
+                <p className="font-mono text-mute text-[11px] sm:text-xs tabular tracking-tight">
+                  NT$ 390/月
+                </p>
+              </div>
+              <div className="border border-line/40 bg-slate/20 p-2 sm:p-3 text-center">
+                <p
+                  lang="en"
+                  className="font-mono text-mute/70 text-[9px] tracking-[0.22em] mb-1"
+                >
+                  GYM 月卡
+                </p>
+                <p className="font-mono text-mute text-[11px] sm:text-xs tabular tracking-tight">
+                  NT$ 1,500+/月
+                </p>
+              </div>
+              <div className="border border-gold/60 bg-gold/5 p-2 sm:p-3 text-center glow-soft">
+                <p
+                  lang="en"
+                  className="font-mono text-gold text-[9px] tracking-[0.22em] mb-1"
+                >
+                  BLACK CARD
+                </p>
+                <p className="font-mono text-gold text-[11px] sm:text-xs tabular tracking-tight">
+                  NT$ 299/月
+                </p>
+              </div>
+            </div>
+            <p className="mt-2 font-mono text-mute/60 text-[9px] sm:text-[10px] tracking-[0.2em] leading-relaxed">
+              中段 sweet spot · 不 luxury · 不 commodity · 同 indie sports
+              subscription band 物理對齊
+            </p>
+          </div>
           {/* Round 55 W-B · Agent C #4 fix · trust-signal line ABOVE price
               block · Plausible pricing-page pattern · 不是 fake testimonial
               · 是 factual brand metric · 訪客 buy moment 直接看到 brand
               IP 物理 codify · 不需 scroll 到 /audit 才知。 */}
           <p
             lang="en"
-            className="mt-3 font-mono text-mute/85 text-[10px] sm:text-[11px] tracking-[0.3em] leading-relaxed max-w-2xl"
+            className="mt-5 font-mono text-mute/85 text-[10px] sm:text-[11px] tracking-[0.3em] leading-relaxed max-w-2xl"
           >
             <span className="text-gold/85">v0.2</span> ENGINE
             <span className="mx-2 text-mute/40">·</span>

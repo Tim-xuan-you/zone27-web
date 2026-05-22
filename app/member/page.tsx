@@ -383,7 +383,7 @@ export default async function MemberPage({
               </p>
               <p className="text-mute text-sm leading-relaxed mb-4">
                 這頁目前是 preview。想<strong className="text-bone">真實註冊
-                FREE TIER 會員</strong> · magic link 1 分鐘內收到 · 點開後本頁
+                FREE TIER 會員</strong> · email + 密碼 1 分鐘註冊 · 點開後本頁
                 自動變成<strong className="text-bone">您的 dashboard</strong> ·
                 Round 30 Wave 5 剛 ship · Phase 1 timeline 從 Q3 加速到 NOW。
               </p>
@@ -391,7 +391,7 @@ export default async function MemberPage({
                 href="/login"
                 className="inline-block px-6 py-2.5 bg-gold text-navy font-mono text-xs tracking-[0.3em] hover:bg-gold-soft transition-colors"
               >
-                → /login · magic link 註冊
+                → /login · Email + 密碼 註冊
               </Link>
             </div>
           )}

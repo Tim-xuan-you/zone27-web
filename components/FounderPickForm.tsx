@@ -152,14 +152,14 @@ export default function FounderPickForm({
           / LOGIN REQUIRED · reserve 需 FREE TIER session
         </p>
         <p className="text-mute text-sm leading-relaxed mb-4">
-          您要先 /login(1 分鐘 magic link)· 才能 reserve 一個 #N。
+          您要先 /login(1 分鐘 Email + 密碼)· 才能 reserve 一個 #N。
           Patek 模式 · 公開 commitment 在轉帳之前。
         </p>
         <Link
           href="/login?next=/leaderboard"
           className="inline-block px-6 py-2.5 bg-gold text-navy font-mono text-[10px] tracking-[0.3em] hover:bg-gold-soft transition-colors"
         >
-          → /login · magic link 註冊
+          → /login · Email + 密碼 註冊
         </Link>
       </div>
     );
