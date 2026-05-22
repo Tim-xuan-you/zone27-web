@@ -39,6 +39,11 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
   ],
   "/methodology": [
     {
+      href: "/methodology/diff",
+      kicker: "methodology/diff",
+      title: "v0.2 → v0.3 逐行 diff · 14 unchanged + 1 new",
+    },
+    {
       href: "/audit",
       kicker: "audit",
       title: "精簡版 Model Report",
@@ -48,10 +53,27 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
       kicker: "manifesto",
       title: "倒置宣言 · 為何完整公開",
     },
+  ],
+  // Round 50 W-A · /methodology/diff NEW · v0.2 → v0.3 entire delta ·
+  // brand IP triple-fire(Disclosure + Pratfall + Costly Signaling)。
+  // Siblings: /methodology(parent · 完整白皮書)· /audit(S05 PRE-COMMIT
+  // 同 rules-binding pattern)· /track-record(per-engine calibration
+  // receipts 在那 ingest)。
+  "/methodology/diff": [
     {
-      href: "/glossary",
-      kicker: "glossary",
-      title: "27 種進階數據",
+      href: "/methodology",
+      kicker: "methodology",
+      title: "回完整白皮書 · 4 sections + ENGINE LINEUP",
+    },
+    {
+      href: "/audit",
+      kicker: "audit",
+      title: "Model Report · S05 PRE-COMMIT 同 rules-binding pattern",
+    },
+    {
+      href: "/track-record",
+      kicker: "track-record",
+      title: "公開戰績 · per-engine calibration receipts ingest 處",
     },
   ],
   "/coverage": [

@@ -10,7 +10,7 @@
 // Inspired by Linear / Vercel / Stripe command palettes,
 // but DELIBERATELY thin: no fuse.js, no telemetry, no
 // recently-used persistence. Simple substring filter on a
-// hand-curated 34-row list is sufficient and brand-pure
+// hand-curated 39-row list is sufficient and brand-pure
 // (per [[zone27-disclosure-philosophy]]: no hidden ranking).
 // (/admin is intentionally NOT indexed here · Tim bookmarks it ·
 // keeping it out of visitor Cmd-K aligns with its noindex framing.)
@@ -170,6 +170,30 @@ export const COMMAND_ITEMS: CommandItem[] = [
     path: "/methodology",
     group: "信任文件",
     keywords: ["methodology", "技術", "白皮書", "whitepaper", "method"],
+  },
+  {
+    label: "Engine Diff · v0.2 → v0.3 逐行 delta · 14 unchanged + 1 new",
+    kicker: "/methodology/diff",
+    path: "/methodology/diff",
+    group: "信任文件",
+    keywords: [
+      "diff",
+      "engine diff",
+      "v0.2",
+      "v0.3",
+      "delta",
+      "compare",
+      "比較",
+      "對照",
+      "park factor",
+      "升級",
+      "version",
+      "changelog",
+      "react.dev",
+      "stripe",
+      "anthropic",
+      "model card",
+    ],
   },
   {
     label: "覆蓋範圍 · NEVER 清單",

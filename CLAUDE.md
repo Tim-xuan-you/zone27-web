@@ -188,7 +188,7 @@ ZONE 27 與 **BOTTOM 27**(Tim 的棒球手遊)是雙生品牌:
 
 ---
 
-## 🗺️ 當前路由(v0.28 · Round 30 W5-W14 + Round 31-42 · 2026-05-22 · 38 visitor-discoverable · v0.29 等 Tim 拍板 milestone · +/calibration +/membership/black-card/ledger +/ethics +/steelman · 7 LIVE LENS CANVAS COMPLETE + 2 LIVE Engine variants + 8 binding NOT-DO commitments + 5 steelman objections · 「Most prediction sites have 1 fake angle. We BUILT 7 honest ones.」 + 「Most prediction sites have 1 secret engine. We built 2 open ones.」 + 「5 strongest objections against us · we wrote them first.」)
+## 🗺️ 當前路由(v0.28 · Round 30 W5-W14 + Round 31-50 · 2026-05-22 · 39 visitor-discoverable · v0.29 等 Tim 拍板 milestone · +/calibration +/membership/black-card/ledger +/ethics +/steelman +/methodology/diff · 7 LIVE LENS CANVAS COMPLETE + 2 LIVE Engine variants + entire v0.2→v0.3 DIFF published + 8 binding NOT-DO commitments + 5 steelman objections · 「Most prediction sites have 1 fake angle. We BUILT 7 honest ones.」 + 「Most prediction sites have 1 secret engine. We built 2 open ones.」 + 「Most prediction sites claim they upgraded. We published the diff.」 + 「5 strongest objections against us · we wrote them first.」)
 
 ```
 首頁 + 動線
@@ -217,6 +217,16 @@ Trust artifacts(全部 Round 28 加 FounderSignOff)
                          surface 從 lib/matches.ts 註解到 /audit · Pratfall surface)
 /methodology             技術白皮書 · 4 sections · Round 28 ABSTRACT ±2% 改寫為「引擎內部一致性」+
                          明示 N≥30 SAMPLE DEBT 還沒解 · 加 ArticleMeta 6 min + FounderSignOff
+                         · Round 50 W-A cross-link Section 04 → /methodology/diff
+/methodology/diff        **NEW Round 50 W-A** · v0.2 → v0.3 entire delta · 7 sections
+                         + custom OG card · 14 unchanged constants + 1 new(HR_PARK_SENSITIVITY)
+                         + 5 行 logic delta + 4 場館 worked example + 6 件 v0.3 不修正
+                         (Pratfall list)+ v0.4 PRE-COMMIT + Lens Lifetime Pledge anchor。
+                         brand IP triple-fire(Disclosure + Pratfall + Costly Signaling)·
+                         同 React.dev / Stripe API changelog / Anthropic model card revision
+                         pattern · 「Most prediction sites claim they upgraded. We published
+                         the diff.」 不只 claim 2 engines · publish 整份 delta · 顯式
+                         ban cherry-picking / retroactive curation 退路
 /coverage                覆蓋範圍 · 6 sections + NEVER list · ArticleMeta 8 min + FounderSignOff
 /privacy                 隱私政策 · 8 sections(含 anti-tracking inventory)
 /terms                   服務條款

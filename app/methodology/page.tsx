@@ -360,6 +360,35 @@ repeat 10,000 times → aggregate
             IP · per Lens Lifetime Pledge 永遠 viewable · 不 silently rotate。
           </p>
         </blockquote>
+
+        {/* Round 50 W-A · cross-link to /methodology/diff DEEPEST ·
+            「不止 claim 2 engines · publish entire delta」 brand IP 物理
+            codify · 接 Section 04 ENGINE LINEUP table + blockquote
+            narrative · 下一步是 entire v0.2 → v0.3 逐行 diff 頁。 */}
+        <div className="mt-8 border border-line/70 bg-slate/40 p-5 sm:p-6">
+          <p
+            lang="en"
+            className="font-mono text-gold/80 text-[10px] tracking-[0.35em] mb-3"
+          >
+            DEEPER · ENGINE DIFF
+          </p>
+          <p className="text-bone text-base sm:text-lg leading-snug mb-3">
+            不止 claim「我們有 2 個 engine」。
+            <br />
+            <Link
+              href="/methodology/diff"
+              className="text-gold underline-offset-4 hover:underline"
+            >
+              v0.2 → v0.3 entire delta →
+            </Link>
+          </p>
+          <p className="text-mute/85 text-sm leading-relaxed">
+            14 個 constants unchanged · 1 個 new(HR_PARK_SENSITIVITY = 0.5)·
+            5 行 logic delta · 6 件 v0.3 不修正 · 4 場館 worked example。
+            同 React.dev / Stripe API changelog / Anthropic model card revision
+            pattern · 整份 audit trail 公開。
+          </p>
+        </div>
       </Section>
 
       {/* ── 05 LENS VARIETY · multi-angle analytical variants ──

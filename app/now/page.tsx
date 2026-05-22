@@ -33,9 +33,15 @@ export const metadata: Metadata = {
 // ─────────────────────────────────────────────────────
 
 const LAST_UPDATED = "2026-05-22";
-const CYCLE = "Round 28-49 · 2026-05-22 · 25+ canary fires displacement mission · 38 visitor-discoverable routes · 7 LIVE LENS CANVAS + 2 LIVE Engine variants(v0.2 + v0.3 DEV PREVIEW)+ 8 binding ethics commitments + 5 steelman self-objections + 8 localStorage keys disclosed · R44 4 OG cards + Tim canonical sentence · R45 Anonymous Lens-Pick Loop DEEPEST · R46 CPBL schedule auto-fetch · R47 Tier 切換自如 inline + Cmd+Shift+P · R48 MLB engine pick + linescore + verdict pipeline · R49 LedgerDeltaChip(Endowment effect)· displacement battle 對 玩運彩+報馬仔 8+ 層 structural moat";
+const CYCLE = "Round 28-50 · 2026-05-22 · 26+ canary fires displacement mission · 39 visitor-discoverable routes · 7 LIVE LENS CANVAS + 2 LIVE Engine variants(v0.2 + v0.3 DEV PREVIEW)+ entire v0.2→v0.3 DIFF published + 8 binding ethics commitments + 5 steelman self-objections + 8 localStorage keys disclosed · R44 4 OG cards + Tim canonical sentence · R45 Anonymous Lens-Pick Loop DEEPEST · R46 CPBL schedule auto-fetch · R47 Tier 切換自如 inline + Cmd+Shift+P · R48 MLB engine pick + linescore + verdict pipeline · R49 LedgerDeltaChip(Endowment effect)· R50 /methodology/diff(「Most prediction sites claim they upgraded. We published the diff.」)· displacement battle 對 玩運彩+報馬仔 9+ 層 structural moat";
 
 const SHIPPED_THIS_CYCLE: { title: string; body: string; href?: string }[] = [
+  // ── 🔬 Round 50 W-A · /methodology/diff DEEPEST · v0.2 → v0.3 entire delta ─
+  {
+    title: "[R50 WA] 🔬 NEW /methodology/diff · entire v0.2 → v0.3 delta published · brand IP triple-fire",
+    body: "Tim 留空指令 → 鐵律 default ship NOW · 不問 keyword · 接 R50+ TODO 第 1 條(原 Agent H R41 #2 · 3hr scope)· brand IP triple-fire(Disclosure + Pratfall + Costly Signaling)同時 ship。 NEW app/methodology/diff/page.tsx · 7 sections · 14 unchanged constants + 1 new(HR_PARK_SENSITIVITY = 0.5)+ 5 行 logic delta + 4 場館 worked example(新莊 ×0.9842 / 桃園 ×1.0316 / 大巨蛋 ×1.0105 / 澄清湖 ×1.0158)+ 6 件 v0.3 不修正 Pratfall list(BABIP / dimensions / weather / batter splits / DH / N≥30)+ v0.4 PRE-COMMIT(Bayesian Model Averaging)+ Lens Lifetime Pledge anchor(此 diff page 永久 viewable 即使 v0.4 ship 後)。 NEW app/methodology/diff/opengraph-image.tsx custom OG paper-style 「v0.2 → v0.3」 typography + 4 fact rows。 CommandPalette + RELATED_LINKS + /methodology Section 04 cross-link DEEPER ENGINE DIFF callout · 同 React.dev release notes / Stripe API changelog / Anthropic model card revision pattern · 物理 ban cherry-picking 退路。 不止 claim「我們有 2 engines」 · publish entire delta · 「Most prediction sites claim they upgraded. We published the diff.」 第 9 layer displacement moat。",
+    href: "/methodology/diff",
+  },
   // ── 🎯 Round 49 W-A · LedgerDeltaChip + handoff prompt ────
   {
     title: "[R49 WA] 📊 NEW LedgerDeltaChip · Agent L R44 GAP-2 · Endowment effect retention",
