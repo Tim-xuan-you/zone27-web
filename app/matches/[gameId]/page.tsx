@@ -16,6 +16,7 @@ import {
 } from "@/lib/matches";
 import StatPercentileBar from "@/components/StatPercentileBar";
 import AdvancedStatBar from "@/components/AdvancedStatBar";
+import ConfidenceStars from "@/components/ConfidenceStars";
 import EngineStamp from "@/components/EngineStamp";
 import { getCpblAdvancedByName } from "@/lib/cpbl-advanced";
 import RelatedReading from "@/components/RelatedReading";
@@ -227,16 +228,21 @@ export default async function MatchDetailPage({
             />
           </div>
 
-          {/* Confidence */}
-          <div className="mt-8 flex items-center justify-between">
+          {/* Confidence · Round 33 W-A · ConfidenceStars 1-5 升 authority-bias
+              + decision-cost-collapse hook(per agent customer-driven product
+              redesign · canonical sports-betting subscription benchmark)。
+              Vocabulary: STRONG/CLEAR/DECENT/WEAK SIGNAL · COIN-FLIP · 不用
+              「LOCK」 報明牌 grifter vocab。 mechanical mapping derives from
+              aiConfidence · /audit S02 ESTIMATION DISCLOSURE 公開。 */}
+          <div className="mt-8 flex items-start justify-between gap-6 flex-wrap">
             <div>
-              <p className="font-mono text-mute text-[10px] tracking-[0.3em] mb-1">
-                MODEL CONFIDENCE
+              <p className="font-mono text-mute text-[10px] tracking-[0.3em] mb-2">
+                AI CONFIDENCE
               </p>
-              <p className="font-mono text-bone text-2xl tabular">
-                {m.aiConfidence}
-                <span className="text-sm text-mute ml-1">/ 100</span>
-              </p>
+              <ConfidenceStars
+                confidence={m.aiConfidence}
+                variant="stack"
+              />
             </div>
             <div className="text-right">
               <p className="font-mono text-mute text-[10px] tracking-[0.3em] mb-1">

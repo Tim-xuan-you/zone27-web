@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import RelatedReading from "@/components/RelatedReading";
+import ConfidenceStars from "@/components/ConfidenceStars";
 import { getTodayAndFutureMatches, type Match } from "@/lib/matches";
 
 export const metadata: Metadata = {
@@ -402,12 +403,11 @@ function SignalRow({ match, tier }: { match: Match; tier: Tier }) {
         </div>
         <div className="text-right">
           <p className="font-mono text-mute text-[9px] tracking-[0.3em] mb-1">
-            MODEL CONFIDENCE
+            AI CONFIDENCE
           </p>
-          <p className="font-mono text-bone text-xl tabular">
-            {match.aiConfidence}
-            <span className="text-xs text-mute ml-1">/ 100</span>
-          </p>
+          <div className="flex justify-end">
+            <ConfidenceStars confidence={match.aiConfidence} variant="inline" />
+          </div>
         </div>
       </div>
 
