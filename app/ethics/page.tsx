@@ -307,10 +307,10 @@ export default function EthicsPage() {
           </h3>
           <div className="flex flex-wrap justify-center gap-3">
             <Link
-              href="/membership/black-card"
+              href="/steelman"
               className="inline-block px-6 py-3 border border-gold/50 text-gold font-mono text-[10px] tracking-[0.3em] hover:bg-gold/10 transition-colors"
             >
-              → Subscriber Compact(3 line)
+              → /steelman 5 strongest objections
             </Link>
             <Link
               href="/audit"

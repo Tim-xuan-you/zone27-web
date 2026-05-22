@@ -6,6 +6,7 @@ import RelatedReading from "@/components/RelatedReading";
 import FounderSignOff from "@/components/FounderSignOff";
 import ArticleMeta from "@/components/ArticleMeta";
 import EngineStamp from "@/components/EngineStamp";
+import ReproducibilityReceipt from "@/components/ReproducibilityReceipt";
 import TeamPickPanel from "@/components/TeamPickPanel";
 import MyTeamTrackRecord, { type MyTeamMatch } from "@/components/MyTeamTrackRecord";
 import {
@@ -113,6 +114,19 @@ export default function TrackRecordPage() {
             可達 · 對齊 brand IP「方法公開·品味私藏」 + /audit BUILD chip。 */}
         <div className="mt-3">
           <EngineStamp />
+        </div>
+
+        {/* Round 43 W-A · ReproducibilityReceipt drop-in · /track-record
+            count of finalized matches · per IJCAI 2026 standard · git+seed+
+            n+dataAt audit trail · component drop-in pattern from R42。 */}
+        <div className="mt-3">
+          <ReproducibilityReceipt
+            compact
+            seed={null}
+            dataAt="2026-05-22"
+            n={finalized.length}
+            fileLink="https://github.com/Tim-xuan-you/zone27-web/blob/main/lib/matches.ts"
+          />
         </div>
 
         {/* Round 31 Wave N · TeamPick personalization · 「對你(這個富邦

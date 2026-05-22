@@ -481,26 +481,34 @@ export default function AuditPage() {
               · 您看到的 keys 跟下表一致 · 我們不藏。
             </P>
 
+            {/* Round 43 W-B · CRITICAL fix · Agent J dogfood verify
+                R42 Section 06 had 3/6 wrong keys + 1 fabricated + 1 missing ·
+                brand IP self-falsifiable in 5 seconds with DevTools。 修:
+                exact key names verified against source code(lib/teams.ts ·
+                lib/recent-matches.ts · lib/sim-history.ts · app/login/page.tsx ·
+                components/PreviewModeBanner.tsx · components/MemberDashboardPreview.tsx)·
+                MatchNoteEditor 真實 stores in Supabase user_metadata 不是
+                localStorage · 從此表移除(brand IP「不藏 · 不假裝」 honest fix)。 */}
             <DataTable>
               <DataRow
-                label="zone27_team"
+                label="z27_team"
                 value="您支持的 CPBL 隊伍"
-                note="6 隊 enum · TeamPickPanel 寫入 · /track-record + /matches/[gameId] 讀取"
+                note="6 隊 enum · TeamPickPanel 寫入 · /track-record + /matches/[gameId] 讀取(per lib/teams.ts)"
               />
               <DataRow
                 label="zone27_recent_matches_v1"
                 value="您最近看過的賽事(capped 10)"
-                note="MatchViewTracker 寫入 · homepage RecentMatchesRow 讀取 · {gameId, title, viewedAt} JSON array"
+                note="MatchViewTracker 寫入 · homepage RecentMatchesRow 讀取 · JSON array {gameId, title, viewedAt}(per lib/recent-matches.ts)"
               />
               <DataRow
-                label="zone27_sim_history"
+                label="zone27_sim_history_v1"
                 value="您 /lab 跑過的模擬結果"
-                note="MatchSimulator 寫入 · /member dashboard preview 讀取 · 11 fields with Number.isFinite validation"
+                note="MatchSimulator 寫入 · /member dashboard preview 讀取 · 11 fields with Number.isFinite validation(per lib/sim-history.ts)"
               />
               <DataRow
                 label="zone27_engine_voting_v1"
                 value="您 BLACK CARD voting 排序"
-                note="RoadmapVotingPanel 寫入 · drag-rank schema-versioned · /member Section 03 IKEA Effect"
+                note="RoadmapVotingPanel 寫入 · drag-rank schema-versioned · /member Section 03 IKEA Effect(per MemberDashboardPreview.tsx)"
               />
               <DataRow
                 label="zone27_preview_tier"
@@ -508,11 +516,25 @@ export default function AuditPage() {
                 note="PreviewModeBanner 寫入 · Tim 開發用 · 訪客不會 trigger · 0 PII"
               />
               <DataRow
-                label="zone27_match_note_{gameId}"
-                value="您 private match note(280 字)"
-                note="MatchNoteEditor 寫入 · 0 server read · /matches/[gameId] logged-in only"
+                label="zone27_last_login_email"
+                value="您上次 /login email 預填"
+                note="LoginForm 寫入 · 您下次回 /login 自動預填 email · 0 server transit · purely UX 便利"
               />
             </DataTable>
+
+            <P className="text-mute/70 mt-3">
+              <strong className="text-bone">⚓ R43 W-B drift correction</strong> ·
+              此表 R41 W-C ship 時 keys 3/6 不正確 · 1 fabricated · 1 missing ·
+              Agent J 2026-05-22 dogfood verify 發現 · 立即修正 · per Pratfall「不藏錯」
+              axiom 公開記在此處 · 不刪 commit history。
+            </P>
+            <P className="text-mute/70">
+              <strong className="text-bone">NOT in localStorage</strong>:Match notes
+              (per MatchNoteEditor)store in Supabase{" "}
+              <code className="font-mono text-bone bg-slate/40 px-1.5 py-0.5 rounded-sm">user_metadata.match_notes</code> · 登入後 sync 到 server-side ·
+              不在 localStorage · 此表不列(brand IP「不藏 · 不假裝」)。
+              Match follows(per FollowMatchButton)同樣 in user_metadata 不在 localStorage。
+            </P>
 
             <P className="text-mute/70 mt-4">
               清除 localStorage 完全是您的選擇:DevTools Application tab right-click

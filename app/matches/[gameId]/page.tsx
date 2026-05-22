@@ -455,13 +455,23 @@ export default async function MatchDetailPage({
           gold/30 pl-3)· WhatsApp landers 看清 hierarchy(/01 STARTING
           PITCHER 是 Tier-1 · 6 lens 是 nested under Tier-1 /02 LENS CANVAS
           parent)· 「all 7 sections equal volume」 wall fix。 */}
+      {/* Round 43 W-D · Agent J N1 fix · Tier-1 hub vs Tier-2 sub-lenses
+          visual hierarchy strengthen · 之前 /02 hub + /02A-02F sub-lenses
+          都 text-[10px] · 訪客看 mobile 視覺 collapse · 修:hub 升 text-xs
+          + larger gold-glow underline + 不 tracking-[0.4em] 過 tight · 父
+          子關係 visible at glance not requiring body prose to decode。 */}
       <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-6 border-t border-line/40 pt-12">
-        <h2 className="font-mono text-gold text-[10px] tracking-[0.4em] mb-3">
-          / 02 · LENS CANVAS · 7 個獨立 analytical angles
-        </h2>
+        <div className="border-l-4 border-gold pl-4 mb-4">
+          <h2 className="font-mono text-gold text-xs sm:text-sm tracking-[0.3em] mb-1">
+            / 02 · LENS CANVAS
+          </h2>
+          <p className="font-mono text-bone text-[10px] tracking-[0.25em]">
+            6 個獨立 analytical angles · 集合 view
+          </p>
+        </div>
         <p className="text-mute text-sm leading-relaxed max-w-2xl">
-          以下 6 個 sub-lens · 各自 publish methodology + open code +
-          educational explainer · 共同回答「<strong className="text-bone">這場 多角度 看 什麼？</strong>」
+          以下 6 個 sub-lens(下方 02A-02F)· 各自 publish methodology +
+          open code + educational explainer · 共同回答「<strong className="text-bone">這場 多角度 看 什麼？</strong>」
           · 不替代 Win Probability prediction(/00B engine trace 是 prediction layer)。
           Patek Philippe complication 模式 · per /methodology Section 05。
         </p>
@@ -504,7 +514,7 @@ export default async function MatchDetailPage({
           Pratfall + Costly Signaling + Disclosure 三 axiom 同時 fire。 */}
       <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-12 [content-visibility:auto] [contain-intrinsic-size:0_600px]">
         <h3 className="font-mono text-gold/80 text-[9px] tracking-[0.3em] mb-4 border-l-2 border-gold/30 pl-3">
-          / 02C · PITCHER FATIGUE · 投手疲勞 lens(v0.1 PROXY · 非 prediction)
+          / 02C · WORKLOAD PROXY · 投手負荷 lens(v0.1 · 命名 vocabulary per /steelman Obj 03)
         </h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <PitcherFatigueLens pitcher={m.home.pitcher} teamName={m.home.en} />

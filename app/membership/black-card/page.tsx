@@ -8,26 +8,26 @@ import ArticleMeta from "@/components/ArticleMeta";
 import EngineStamp from "@/components/EngineStamp";
 
 export const metadata: Metadata = {
-  title: "BLACK CARD · UI Preview · ZONE 27",
+  title: "BLACK CARD · LIVE 月卡手動 · ZONE 27",
   description:
-    "ZONE 27 BLACK CARD 訂閱會員 UI preview · 預計 2026 Q3 上線 · NT$ 299/月 · 信用卡定期定額自動扣款 · 5% 創作者抽成 · 14 天無條件退款 · pre-launch mockup state · payment infrastructure ready 後正式上線。",
+    "ZONE 27 BLACK CARD 訂閱會員 · ✓ LIVE 月卡手動 ECPay 個人方案 · NT$ 299/月 · email Tim 啟動 · 5% 創作者抽成 · 14 天無條件退款 · 6 unlocks · 玩運彩+報馬仔 結構性無法 ship 同 page。",
 };
 
 // ── ZONE 27 · /membership/black-card ───────────────────
 // Round 31 W-X3 · Tim 「能 fluently 看 BLACK CARD 長相」 enabler 之前
 // 不存在 BLACK CARD dedicated UI preview · 只在 /membership 4-tier
-// ladder 中 1 張 card 帶過。 visitor 想付費前需要看 product 長相。
+// ladder 中 1 張 card 帶過。
 //
-// Pre-launch state:
-//   - 整 page UI mockup · 不可實際訂閱(payment infra 還沒接)
-//   - 「PRE-LAUNCH · UI MOCKUP」 status badge honest 標
-//   - 「想 Q3 第一時間通知」 → /login email · 同 W-V1 / W-W1 pattern
+// Round 42 W-C · LIVE state transition · per [[feedback-no-waiting-rule]]:
+//   - mailto:tim@zone27.tw 月卡手動 ECPay 真實 flow LIVE
+//   - "PRE-LAUNCH · UI MOCKUP" framing 全 strip(per Agent J R43 dogfood
+//     verify · narrative 殘留 must sweep · brand IP「不可 LIVE badge ↔
+//     mockup narrative 共存」)
 //
 // brand IP fits:
-//   - Stratechery / Substack PRE-LAUNCH preview pattern(public showcase
-//     of future product · build trust + scarcity)
-//   - 「方法公開」 延伸:UI 公開 · code 開源 · 跟 /audit pattern 一致
-//   - 0 cookie / 0 PII / 純 informational
+//   - 倒置 SaaS · manual ECPay payment vs auto-charge 標準 SaaS
+//   - 「方法公開」 延伸:訂閱 flow 公開 · email Tim 不藏 · 跟 /audit pattern 一致
+//   - 0 cookie / 0 PII / mailto: native browser · 0 tracking
 //
 // Wires:
 //   - /membership BLACK CARD card 「Q3 通知我 · 先免費註冊」 CTA(已 W-M)
@@ -78,11 +78,11 @@ const UNLOCKS = [
 const FAQS = [
   {
     q: "現在可以訂閱嗎?",
-    a: "尚未 · 預計 2026 Q3 上線。 想 Q3 第一時間通知 → 註冊 FREE TIER · 我 publish 開放當天 send email。",
+    a: "✓ 可以 · LIVE 月卡手動 ECPay 個人方案 · email tim@zone27.tw 我 24 小時內寄 ECPay 付款連結 · 首月起算。 自動扣款 infrastructure 留 Q4 2026+(per 倒置 SaaS · manual 是 brand IP scarcity)。",
   },
   {
     q: "如何取消訂閱?",
-    a: "上線後 · 任何時候 /member dashboard 一鍵取消 · 立刻停止下月扣款 · 已扣本月不退(per 一般 SaaS · 14 天試用首次訂閱例外)。",
+    a: "Manual ECPay 月卡 · 不續訂下月就停 · 不需 cancel button · email 提醒 在每月扣款前 3 天送出 · 您回 email「不續訂」即可。 已扣本月不退(per 一般 SaaS · 14 天無條件退款首次訂閱例外)。",
   },
   {
     q: "14 天無條件退款?",
@@ -150,12 +150,12 @@ export default function BlackCardPage() {
             <EngineStamp />
           </div>
           <div className="mt-6 flex flex-wrap gap-3">
-            <Link
-              href="/login"
+            <a
+              href="mailto:tim@zone27.tw?subject=BLACK%20CARD%20%E8%A8%82%E9%96%B1%20-%20NT%24%20299%2F%E6%9C%88&body=Tim%20%E5%A5%BD%2C%0A%0A%E6%88%91%E6%83%B3%E8%A8%82%E9%96%B1%20BLACK%20CARD%20%E6%9C%88%E5%8D%A1%20%E2%80%A2%20NT%24%20299%2F%E6%9C%88%E3%80%82%0A%0A%E8%AB%8B%E5%AF%84%E6%88%91%20ECPay%20%E5%80%8B%E4%BA%BA%E6%96%B9%E6%A1%88%E4%BB%98%E6%AC%BE%E9%80%A3%E7%B5%90%E3%80%82%0A%0A%E8%AC%9D%E8%AC%9D%E3%80%82"
               className="inline-block px-5 py-2.5 bg-gold text-navy font-mono text-xs tracking-[0.3em] hover:bg-gold-soft transition-colors"
             >
-              → Q3 開放通知 · FREE TIER 註冊
-            </Link>
+              ✓ EMAIL TIM · 啟動 BLACK CARD 月卡
+            </a>
             <Link
               href="/membership"
               className="inline-block px-5 py-2.5 border border-gold/40 text-gold hover:bg-gold/5 font-mono text-xs tracking-[0.3em] transition-colors"
@@ -507,10 +507,12 @@ export default function BlackCardPage() {
             · NOT 博彩。
           </p>
           <p>
-            這頁今天是 UI mockup · payment infrastructure 還沒接 · 2026 Q3
-            上線 · 想 Q3 第一時間通知 → /login 免費 30 秒註冊 FREE TIER ·
-            我 publish 開放當天 send email。 不催 · 不 dark pattern · 不藏
-            cancel button。 brand IP「不靠秘密賺錢 · 靠紀律」 延伸到訂閱模式。
+            這頁 ✓ LIVE 月卡手動 ECPay 個人方案(per R42 W-C · Agent I dogfood
+            fix)· email tim@zone27.tw 我 24 小時內寄 ECPay 付款連結 · 自動扣款
+            infrastructure 留 Q4 2026+(per 倒置 SaaS · manual 是 brand IP
+            scarcity 不是 missing feature)。 不催 · 不 dark pattern · 不藏
+            cancel button(monthly manual 本身就不需要 cancel button · 不續訂
+            下月就停)。 brand IP「不靠秘密賺錢 · 靠紀律」 延伸到訂閱模式。
           </p>
         </FounderSignOff>
 

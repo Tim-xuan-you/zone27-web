@@ -71,9 +71,9 @@ const STEELMAN_OBJECTIONS: {
     objection:
       "PitcherFatigueLens(R38 W-A)寫「v0.1 PROXY · 用 WHIP + BB9 + K9 季累計 derive command stability」 · 但「command stability」 跟「fatigue」 是完全不同的東西。 季累計 stats 反映 season talent · 不反映「該投手 since last start 是否疲勞」。 vocabulary 「Fatigue」 = false labeling · 即使 disclaimer 寫了「不是 true fatigue」 · 訪客 default mental model 仍是「這 lens 告訴我投手疲勞嗎」 · 我們 ship 等於 利用 disclaimer 漏洞 marketing 「fatigue」 brand value。",
     response:
-      "Sharp call · 接近 brand-IP violation 的邊界。 ZONE 27 此處的 honest move:(1) 重新評估 lens naming · 從「Pitcher Fatigue」 改「Pitcher Workload Proxy」 OR 「Command Stability Lens」 · vocabulary discipline 修正 ·(2) 若 v0.2 commit upgrade real fatigue(ingest rest_days + season_ip)持續 deferred · v0.1 PROXY lens 應該 demote 從「LIVE」 改「DEPRECATED」 · 不 ship-and-forget ·(3) 此 critique 是 brand-IP-violation canary · 加入 brand-IP audit cycle · 任何 lens vocabulary 與 actual data 之間 gap 都需要 explicit naming reconciliation。",
+      "Sharp call · 接近 brand-IP violation 的邊界。 ✓ R43 W-C EXECUTED · lens naming「Pitcher Fatigue」 → 「Workload Proxy」 visible label rename ship in /matches /02C + /methodology Section 05 LensRow + PitcherFatigueLens component label · file 保留 git history。 brand-IP audit cycle 加入「lens vocabulary 與 actual data scope reconciliation」 PRE-COMMIT discipline:任何新 lens visible label 必須 match actual data scope · 不可 ship 「planned full angle 但 v0.1 partial scope」 mismatch。 若 v0.2 commit upgrade real fatigue(ingest rest_days + season_ip)持續 deferred · v0.1 Workload Proxy lens 應該 mark「待 v0.2 升 Pitcher Fatigue full angle」 status。",
     concession:
-      "Lens naming「Fatigue」 是 marketing inheritance from Section 05 table planned-name · ship v0.1 PROXY 時應該 rename to match scope。 此 critique 推動 vocabulary discipline 必要 audit · 是 brand-IP healthy stress test。",
+      "✓ R43 W-C concession executed · Lens naming「Fatigue」 是 marketing inheritance from Section 05 table planned-name · ship v0.1 PROXY 時應該 rename to match scope · Agent J post-R42 dogfood verify「promised rename · never executed」 surface · 修正 + 此 page 自我 update reflect execution。 此 critique 推動 vocabulary discipline 必要 audit · 是 brand-IP healthy stress test。",
   },
   {
     num: "04",

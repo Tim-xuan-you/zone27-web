@@ -8,6 +8,7 @@ import RelatedReading from "@/components/RelatedReading";
 import FounderSignOff from "@/components/FounderSignOff";
 import ArticleMeta from "@/components/ArticleMeta";
 import StatTerm from "@/components/StatTerm";
+import ReproducibilityReceipt from "@/components/ReproducibilityReceipt";
 import { matches } from "@/lib/matches";
 
 export const metadata: Metadata = {
@@ -57,6 +58,19 @@ export default function MethodologyPage() {
           配合壘上跑者推進物理累計分數。10,000 次採樣的收斂結果,引擎內部
           會穩定在 <Mono>±2%</Mono> 標準差(亂數採樣的天花板)。
         </p>
+
+        {/* Round 43 W-A · ReproducibilityReceipt drop-in · Agent H R41 #4
+            pattern applied 至 /methodology ABSTRACT ±2% number · 每個
+            published number 都有 git+seed+n+dataAt audit trail · per
+            IJCAI 2026 standard。 */}
+        <div className="mt-4">
+          <ReproducibilityReceipt
+            seed={null}
+            dataAt="2026-05-22"
+            n={10000}
+            fileLink="https://github.com/Tim-xuan-you/zone27-web/blob/main/lib/simulator.ts"
+          />
+        </div>
         <p className="text-mute/80">
           <strong className="text-bone">這只是「引擎自己的內部一致性」</strong> —
           引擎對 CPBL 實際比賽結果的 calibration 還在累積樣本,目前未達
@@ -425,9 +439,9 @@ repeat 10,000 times → aggregate
                 tierTone="bone"
               />
               <LensRow
-                lens="Pitcher Fatigue"
-                angle="WHIP + BB9 + K9 command stability proxy(v0.1)· v0.2 = rest_days + IP load"
-                status="✓ LIVE · R38 W-A · v0.1 PROXY"
+                lens="Workload Proxy(formerly Pitcher Fatigue)"
+                angle="WHIP + BB9 + K9 command stability proxy(v0.1)· R43 W-C vocabulary rename per Steelman Obj 03 · v0.2 = rest_days + IP load real fatigue"
+                status="✓ LIVE · R38 W-A · v0.1 · R43 W-C renamed"
                 statusTone="gold"
                 tier="FREE 預覽 · 將來 BLACK CARD"
                 tierTone="bone"

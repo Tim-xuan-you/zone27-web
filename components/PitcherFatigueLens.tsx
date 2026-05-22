@@ -1,7 +1,17 @@
-// ── ZONE 27 · Pitcher Fatigue Lens(v0.1 proxy) ─────────
+// ── ZONE 27 · Workload Proxy Lens(formerly Pitcher Fatigue v0.1) ─
 // Round 38 W-A · 第 3 個 BLACK CARD analytical lens 真實 LIVE · 不 scaffold
 // mode · per [[feedback-no-waiting-rule]] iron rule「任何現在能做就做 · 不
 // 等 Q3」。 接 R37 W-B Vibe Check + R37 W-D Park Factor 之後。
+//
+// Round 43 W-C · VOCABULARY DISCIPLINE RENAME(Steelman Obj 03 fulfillment)·
+// Agent J post-R42 dogfood surface 「promised rename · never executed」 ·
+// 從「PITCHER FATIGUE」 → 「WORKLOAD PROXY」 visible label rename · per
+// /steelman Objection 03 honest response「Fatigue = false labeling · default
+// mental model「fatigue lens 告訴我投手疲勞嗎」 · 即使 disclaimer 訪客 read
+// 「Fatigue」 brand value」 · 改「Workload Proxy」 不誤導 vocabulary · file
+// name 保留(avoid git history confusion)· /methodology Section 05 LensRow
+// status 同步 update · /audit S07 ESTIMATION DISCLOSURE 加 vocabulary
+// rename note。
 //
 // 從 R36 W-A Lens Variety table 第 4 個 candidate 落地真實。
 //
@@ -112,7 +122,7 @@ export default function PitcherFatigueLens({ pitcher, teamName }: Props) {
           lang="en"
           className="font-mono text-gold text-[10px] tracking-[0.35em]"
         >
-          / FATIGUE PROXY · {pitcher.name}
+          / WORKLOAD PROXY · {pitcher.name}
         </p>
         <span
           lang="en"

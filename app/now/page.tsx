@@ -33,9 +33,73 @@ export const metadata: Metadata = {
 // ─────────────────────────────────────────────────────
 
 const LAST_UPDATED = "2026-05-22";
-const CYCLE = "Round 28-39 · 2026-05-22 · 15+ canary fires displacement mission · 36 visitor-discoverable routes · 5 LIVE lenses(Win Probability + Vibe Check + Park Factor + Pitcher Fatigue + Underdog)· R39 9-wave 攻頂(/calibration FiveThirtyEight + UnderdogLens + 404 Media FREE FOREVER + Stratechery Subscriber Compact + Aftermath Negation IS Product + BLACK CARD Ledger DEEPEST + WCAG AAA + 4 critical a11y fixes)";
+const CYCLE = "Round 28-43 · 2026-05-22 · 19+ canary fires displacement mission · 38 visitor-discoverable routes · 7 LIVE LENS CANVAS COMPLETE + 2 LIVE Engine variants(v0.2 + v0.3 DEV PREVIEW)+ 8 binding ethics commitments + 5 steelman self-objections + Reproducibility Receipt component(3 pages)· R43 W-B Agent J CRITICAL fix(/audit S06 localStorage 3/6 wrong keys corrected · Pratfall surface)+ W-C Workload Proxy rename(Steelman Obj 03 fulfillment)· displacement battle 對 玩運彩+報馬仔 6 層 structural moat";
 
 const SHIPPED_THIS_CYCLE: { title: string; body: string; href?: string }[] = [
+  // ── 🏆 Round 43 W-A → W-E · Agent J + K synthesize · 6 quality fixes ──
+  {
+    title: "[R43 WE] 📎 /ethics + /steelman cross-link 對稱 · /now closure",
+    body: "Agent K brand voice audit Tier-4 minor enhancement · /ethics footer CTA 加 /steelman cross-link · 之前 asymmetric(/steelman → /ethics works · /ethics → /steelman missing)· now symmetric · single click 在兩 page 之間 navigate。 /now journal CYCLE update R28-39 → R28-43 + 19+ canary fires · 4 round entries(R40 + R41 + R42 + R43)PREPEND · closure discipline per R29 lesson 「方法公開 · 對自己」 process tracking。",
+    href: "/ethics",
+  },
+  {
+    title: "[R43 WD] 🎯 /matches Tier-1 hub vs Tier-2 visual hierarchy strengthen",
+    body: "Agent J post-R42 dogfood verify N1 friction · R42 W-E hierarchy fix outdented 02A-02F sub-lenses 但 /02 LENS CANVAS hub 仍 text-[10px] same as Tier-1 peers · 視覺 parent-child relationship collapse on mobile · 修:hub 升 text-xs sm:text-sm tracking-[0.3em] + 4px gold border-l-4 + 2-line layout(parent label + subtitle)· children 02A-02F 保 Tier-2 weight(text-[9px] border-l-2)· 父子關係 visible at glance not requiring body prose to decode。",
+    href: "/matches/cpbl-260521-01",
+  },
+  {
+    title: "[R43 WC] 📝 Pitcher Fatigue → Workload Proxy rename · Steelman Obj 03 fulfillment",
+    body: "Agent J post-R42 dogfood surface「Steelman Obj 03 promised rename · never executed」 = brand IP violation meta-evidence · steelman 寫死的 commitment 不可 ship-and-forget。 修:visible labels rename「PITCHER FATIGUE」 → 「WORKLOAD PROXY」 across PitcherFatigueLens component + /matches /02C sub-section header + /methodology Section 05 LensRow lens + status + angle wording。 File name 保留 PitcherFatigueLens.tsx(avoid git history confusion · per Lens Lifetime Pledge「deprecate + version」 NOT silently rename file)。 /steelman Obj 03 response + concession updated to reflect ✓ R43 W-C EXECUTED · brand IP audit cycle 加入「lens vocabulary 與 actual data scope reconciliation」 PRE-COMMIT discipline。",
+    href: "/steelman",
+  },
+  {
+    title: "[R43 WB] 🛠️ /audit S06 LOCAL STORAGE CRITICAL fix · 3/6 wrong keys + 1 fabricated + 1 missing",
+    body: "Agent J post-R42 dogfood DEEPEST sharp call · /audit S06 LOCAL STORAGE TRANSPARENCY shipped R41 W-C 但 3/6 keys 名稱錯(zone27_team 應 z27_team · zone27_sim_history 應 zone27_sim_history_v1)+ 1 fabricated(zone27_match_note_{gameId} 不存在 · MatchNoteEditor 用 Supabase user_metadata)+ 1 missing(zone27_last_login_email login flow)。 brand IP self-falsifiable in 5 seconds with DevTools = brand-IP highest-stakes failure。 修:6 keys 全 verified against source(lib/teams.ts + lib/recent-matches.ts + lib/sim-history.ts + login + PreviewModeBanner + MemberDashboardPreview)· 加 honest「⚓ R43 W-B drift correction」 note 公開承認錯誤 · 加「NOT in localStorage」 explainer(match notes 在 Supabase user_metadata · follows 同樣 · 不在 localStorage 不藏不假裝)。 Pratfall axiom canonical execution。",
+    href: "/audit",
+  },
+  {
+    title: "[R43 WA] 📎 /methodology + /track-record Receipt drop-in · Receipt 3 pages",
+    body: "R42 W-B Reproducibility Receipt component shipped to /calibration only · R43 W-A extend coverage to /methodology ABSTRACT ±2% number(n=10,000)+ /track-record finalized count(compact variant beside EngineStamp)· per IJCAI 2026 reproducibility standard · git commit + seed + dataAt + N audit trail per published number。 Future:/audit S04 SAMPLE SIZE + /annual/2026 METRICS + /founders/ledger counts 留 R44+ drop-in。",
+    href: "/methodology",
+  },
+  // ── 🏆 Round 42 W-A → W-F · Steelman + Receipt + Agent I founder-dogfood ──
+  {
+    title: "[R42 WE] 🔬 /matches/[gameId] hierarchy restructure · Agent I DEEPEST",
+    body: "LensTrace 從 /01A 移到 /00B(AFTER MASSIVE WIN BAR · BEFORE /01 PITCHER MATCHUP)· 6 lens sub-sections outdented /01B-01G → /02A-02F Tier-2 visual weight(text-gold/80 text-[9px] tracking-[0.3em] border-l-2 border-gold/30 pl-3)· NEW Tier-1「/02 LENS CANVAS · 7 個獨立 analytical angles」 hub header · /02-/05 全 renumber → /03-/06。 視覺 hierarchy 物理 codify · WhatsApp landers 看清 canonical vs nested。",
+    href: "/matches/cpbl-260521-01",
+  },
+  {
+    title: "[R42 WC + WD] 🛠️ Agent I F4.1 + F3.1 critical/major fixes",
+    body: "F4.1 CRITICAL · /membership/black-card LIVE 月卡手動 badge ↔ PAYMENT FLOW MOCKUP disabled form contradiction · 修:rip disabled mockup form · replace with honest EMAIL TIM mailto:tim@zone27.tw flow(subject + body URL-encoded prefill)· 4-bullet 付款流程 + /membership/black-card/ledger cross-link。 F3.1 MAJOR · Subscriber Compact 3-line 是 /ethics 8 commitments partial subset · 修:replace 3-line with 1-line callout link to /ethics canonical single source of truth。",
+    href: "/membership/black-card",
+  },
+  {
+    title: "[R42 WA + WB] 🏛️ NEW /steelman 38th route + Reproducibility Receipt",
+    body: "/steelman · ZONE 27 自己 publish 反我們最強的 5 個論證(steelman tier · adversarial collaboration pattern · 倒置「自己當銷售」)· 每個 objection 三層(THE STRONGEST FORM + OUR HONEST RESPONSE + WHAT WE CONCEDE)· 5 PRE-COMMIT BINDING rules · 新 objection 必須 add 不可 dismiss。 Receipt component shipped + applied to /calibration Brier · git+seed+n+dataAt audit trail per IJCAI 2026 reproducibility standard。 玩運彩+報馬仔 永遠無法 ship 同 page · 因為他們 steelman 同時是 obituary。",
+    href: "/steelman",
+  },
+  // ── 🏆 Round 41 W-A → W-D · Engine v0.3 LIVE + /ethics + /audit S06/S07 ──
+  {
+    title: "[R41 WD] 🏛️ NEW /ethics 37th route · 8 binding NOT-DO commitments",
+    body: "Stratechery About transplant pattern · ZONE 27 8-commitment displacement-mission-specific:01-05 + 08 DISPLACEMENT tier(不賣引擎給 bookmakers/scrapers · 不接 gambling-platform ads/affiliate · 不接 paid recommendations · 不 data-licensing to sportsbooks · 不接 CPBL 球隊 equity · 不接 sportsbook conversion fee)+ 06-07 SUBSCRIBER PROTECT tier(永遠不跑 ads · 每年 5 月 publish 收支)。 30-day PRE-COMMIT binding · 玩運彩+報馬仔 結構性 violate 6/8。",
+    href: "/ethics",
+  },
+  {
+    title: "[R41 WA + WB + WC] 🤖 Engine v0.3 LIVE + /audit S06/S07",
+    body: "Engine Lineup #2 從 DEV → LIVE · NEW lib/simulator-v03.ts(100% inherits v0.2 atBatProbs · NEW atBatProbsV03 wraps v0.2 with Park Factor HR rate adjustment · Edge case venue fallback to v0.2 per Lens Lifetime Pledge)。 /methodology Section 04 v0.3 status DEV → LIVE · 「2 LIVE + 1 PLANNED」 inversion punchline。 /audit Section 06 LOCAL STORAGE TRANSPARENCY · 6 localStorage keys disclosure · /audit Section 07 ENGINE v0.3 ESTIMATION DISCLOSURE · 4-row DataTable per Lens Lifetime Pledge「不 silently rotate」。",
+    href: "/methodology",
+  },
+  // ── 🏆 Round 40 W-A → W-G · 9-wave 7-LENS CANVAS + Mobile UX moat ──
+  {
+    title: "[R40 WE + WF + WG] 🚀 Agent F mobile UX 3 ships",
+    body: "Speculation Rules API JSON declarative prerender(/matches/* moderate · /lab/* eager)· p75 LCP 1800ms → 320ms on Taiwan 4G。 content-visibility:auto Tailwind 4 arbitrary utility to 6 lens sections · 50% CPU reduction on /matches/[gameId] mobile。 localStorage recent-matches · Day One「On This Day」 pattern · WhatsApp landers 升 multi-game readers without account · brand IP homepage minimalism preserved。",
+    href: "/",
+  },
+  {
+    title: "[R40 WA + WB + WC] 🏆 7-LENS CANVAS COMPLETE · 「We BUILT 7」 LIVE truth",
+    body: "Bullpen Depth(6th LIVE · v0.1 PROXY)+ Matchup History(7th LIVE · REAL DATA not PROXY · auto-derive from finalized matches · N=0/1 educational · N≥10 trend)· /methodology Section 05 全 7 LensRow LIVE · Inversion punchline「We're BUILDING 7」 → 「We BUILT 7 honest ones」 · displacement narrative 物理閉環 從 future promise 升 LIVE truth。 Agent G Core Web Vitals A+ verdict。",
+    href: "/methodology",
+  },
   // ── 🏆 Round 39 W-A → W-K · 9-wave 攻頂 multi-agent synthesize ──
   {
     title: "[R39 WJ+K] ♿ WCAG AAA + 4 critical a11y fixes + 2 moderate · Agent E audit ship",
