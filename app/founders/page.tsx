@@ -590,8 +590,12 @@ export default async function FoundersPage({
           FREE · BLACK CARD · FOUNDERS 27
         </p>
 
-        {/* Desktop: 4-column comparison grid */}
-        <div className="hidden md:block">
+        {/* Desktop: 4-column comparison grid
+            Round 52 W-B · Agent 2 #6 fix · breakpoint trap · md(768px)
+            上 desktop table 太擠 · 768-1023px iPad portrait viewport 4-col
+            table cells 字 cutoff · column 對齊崩。 改 lg(1024px)· iPad
+            portrait 維持 stacked cards · iPad landscape 才升 4-col table。 */}
+        <div className="hidden lg:block">
           <div className="grid grid-cols-[1.2fr_1fr_1fr_1.2fr] gap-x-4 text-sm">
             {/* Header row */}
             <div />
@@ -634,7 +638,10 @@ export default async function FoundersPage({
         </div>
 
         {/* Mobile: 3 stacked cards */}
-        <div className="md:hidden space-y-6">
+        {/* Round 52 W-B · 對齊 lg: breakpoint(Agent 2 #6)· stacked cards
+            on mobile + iPad portrait(< 1024px)· 4-col table on iPad
+            landscape + desktop。 */}
+        <div className="lg:hidden space-y-6">
           {TIERS.map((t) => (
             <div
               key={t.name}

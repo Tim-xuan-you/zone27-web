@@ -497,6 +497,11 @@ function NumberField({
   max: number;
   step: number;
 }) {
+  // Round 52 W-B · Agent 2 #3 fix · NumberField 之前 native HTML5 max/min
+  // silent constraint · 訪客 mobile 輸入 25 K/9 沒提示 · submit 也無反應 ·
+  // 困惑。 加 aria-describedby + visible 「0–{max}」 range hint below input
+  // · accessible + visual 雙 cue · 不再 silent fail。
+  const hintId = `${label.replace(/\s+/g, "").replace(/\//g, "")}-hint`;
   return (
     <label className="block">
       <span className="font-mono text-mute text-[9px] tracking-[0.3em] block mb-1.5">
@@ -512,8 +517,15 @@ function NumberField({
         min={min}
         max={max}
         step={step}
+        aria-describedby={hintId}
         className="w-full bg-ink/60 border border-line/70 focus:border-gold/70 disabled:opacity-50 text-bone px-2 py-2.5 outline-none transition-colors font-mono text-sm tabular text-center"
       />
+      <span
+        id={hintId}
+        className="block mt-1 font-mono text-mute/70 text-[9px] tracking-[0.2em] text-center tabular"
+      >
+        {min}–{max}
+      </span>
     </label>
   );
 }
