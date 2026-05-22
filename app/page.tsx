@@ -133,6 +133,10 @@ export default function Home() {
           <br />
           <span className="text-gold">只看演算法。</span>
         </h1>
+        {/* Round 54 W-C · Cold Gold Hairline signature moat · 27px below
+            H1 + 2 tick marks at golden ratio 38.2%/61.8% · brand IP screenshot
+            identity · Agent 1 award-winning visual research synthesize。 */}
+        <div className="zone27-rule mx-auto max-w-[280px]" aria-hidden="true" />
 
         <p
           lang="en"

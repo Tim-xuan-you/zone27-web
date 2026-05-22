@@ -37,7 +37,10 @@ export default function MethodologyPage() {
           <br />
           <span className="text-gold">Engine</span>
         </h1>
-        <p className="mt-8 max-w-xl mx-auto text-mute leading-relaxed">
+        {/* Round 54 W-C · Cold Gold Hairline signature moat。 */}
+        <div className="zone27-rule mx-auto max-w-[260px] mt-4" aria-hidden="true" />
+        {/* Round 54 W-C · Editorial drop-cap on first body paragraph。 */}
+        <p className="editorial-dropcap mt-8 max-w-xl mx-auto text-mute leading-relaxed">
           我們不寫公關稿,只寫技術筆記。
           這是 ZONE 27 蒙地卡羅引擎完整的內部運作說明。
         </p>

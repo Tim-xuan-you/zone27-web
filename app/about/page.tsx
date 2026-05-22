@@ -34,6 +34,8 @@ export default function AboutPage() {
             比運氣誠實的棒球迷。
           </span>
         </h1>
+        {/* Round 54 W-C · Cold Gold Hairline signature moat。 */}
+        <div className="zone27-rule mx-auto max-w-[280px]" aria-hidden="true" />
 
         <p className="font-mono text-mute text-xs tracking-[0.3em] mt-10">
           A QUIET REBELLION AGAINST GUT-FEEL.

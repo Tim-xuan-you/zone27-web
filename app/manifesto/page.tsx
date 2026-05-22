@@ -65,13 +65,16 @@ export default function ManifestoPage() {
             >
               INVERTED BY DESIGN
             </p>
-            <h1 className="text-4xl sm:text-5xl text-bone font-light tracking-tight leading-[1.1] mb-6">
+            <h1 className="text-4xl sm:text-5xl text-bone font-light tracking-tight leading-[1.1] mb-3">
               倒置宣言
               <span className="block mt-3 font-mono text-gold text-lg sm:text-xl tracking-[0.25em]">
                 THE FOUR INVERSIONS
               </span>
             </h1>
-            <p className="text-mute text-base leading-relaxed mb-8 max-w-2xl">
+            {/* Round 54 W-C · Cold Gold Hairline signature moat。 */}
+            <div className="zone27-rule max-w-[260px] mb-6" aria-hidden="true" />
+            {/* Round 54 W-C · Editorial drop-cap on first body paragraph。 */}
+            <p className="editorial-dropcap text-mute text-base leading-relaxed mb-8 max-w-2xl">
               四個我們刻意倒置的行業預設。每一個倒置都有代價,代價就是品牌。
               這份宣言列出我們的選擇、放棄的選項,以及為什麼。
             </p>

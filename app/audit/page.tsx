@@ -91,10 +91,15 @@ export default function AuditPage() {
                 REPORT v0.28
               </p>
             </div>
-            <h1 className="text-4xl sm:text-5xl text-bone font-light tracking-tight leading-[1.1] mb-6">
+            <h1 className="text-4xl sm:text-5xl text-bone font-light tracking-tight leading-[1.1] mb-3">
               ZONE 27 Engine
             </h1>
-            <p className="text-mute text-base leading-relaxed mb-8 max-w-2xl">
+            {/* Round 54 W-C · Cold Gold Hairline signature moat。 */}
+            <div className="zone27-rule max-w-[260px] mb-6" aria-hidden="true" />
+            {/* Round 54 W-C · Editorial drop-cap · Apple Newsroom + Atlantic
+                pattern · first paragraph 首字 cold gold · 4-line tall · brand
+                IP「方法公開」 editorial gravitas signal。 */}
+            <p className="editorial-dropcap text-mute text-base leading-relaxed mb-8 max-w-2xl">
               引擎能算什麼 · 不能算什麼 · 為什麼公開全部。
             </p>
 

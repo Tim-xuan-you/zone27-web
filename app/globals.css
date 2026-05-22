@@ -120,6 +120,79 @@ blockquote {
   height: 1px;
 }
 
+/* ── Round 54 W-C · Cold Gold Hairline · ZONE 27 signature visual moat ─
+   Agent 1 award-winning visual research synthesize · ONE recognizable
+   geometric element · 0.5px cold-gold rule placed 27px below H1 · 2 tick
+   marks at golden ratio split(38.2% / 61.8% of viewport width)。
+
+   Why brand-pure:
+     · uses only locked palette(冷金 #D4AF37 + 骨白 0.3 mix)
+     · reinforces「27」 brand number(27px offset)+ calibration brand IP
+       (tick marks = engineering caliper visual)
+     · 0.5px 不 loud · 不 gambling-bright · luxury restraint
+     · decorative · aria-hidden · 不影響 screen reader
+
+   Implementation:
+     · Wrap H1 in `<header className="zone27-rule">...</header>` OR
+     · Add `<div className="zone27-rule" aria-hidden="true" />` 27px below H1
+     · 兩種模式 page-level 灵活運用
+
+   Same Stripe gradient / Linear pixel-grid / Apple navy 級 visual signature
+   pattern · 跨 OG cards / Twitter previews / 全 site H1 = ONE recognizable
+   mark · brand 物理 identity codify。 */
+.zone27-rule {
+  position: relative;
+  width: 100%;
+  height: 0.5px;
+  margin-top: 27px;
+  background: rgba(212, 175, 55, 0.45);
+  pointer-events: none;
+}
+
+.zone27-rule::before,
+.zone27-rule::after {
+  content: "";
+  position: absolute;
+  top: -2.5px;
+  width: 1px;
+  height: 6px;
+  background: rgba(212, 175, 55, 0.7);
+  pointer-events: none;
+}
+
+/* Golden ratio split: 38.2% (1/φ²) and 61.8% (1/φ) */
+.zone27-rule::before {
+  left: 38.2%;
+}
+
+.zone27-rule::after {
+  left: 61.8%;
+}
+
+/* ── Round 54 W-C · Editorial drop-cap · Apple Newsroom + Atlantic pattern
+   First paragraph ::first-letter styled in cold gold · 4-line tall · slight
+   negative letter-spacing · 「方法公開」 brand IP 物理 amplify(editorial
+   gravitas signal inside product brand)。 Apply 到 /audit /methodology
+   /manifesto first paragraph via `.editorial-dropcap` class on <p>。 */
+.editorial-dropcap::first-letter {
+  float: left;
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  font-size: 3.5em;
+  line-height: 0.85;
+  font-weight: 300;
+  padding: 0.05em 0.12em 0 0;
+  color: var(--zone-gold);
+  letter-spacing: -0.04em;
+}
+
+/* Reduced motion · respect prefers-reduced-motion globally · drop-cap stays
+   static but skip any motion-spring animations(spring tokens 未 ship · 預留 hook)。 */
+@media (prefers-reduced-motion: reduce) {
+  .zone27-rule {
+    /* keep visual · static · accessible always */
+  }
+}
+
 /* Glow utilities for the signature progress bar */
 .glow-gold {
   box-shadow:
