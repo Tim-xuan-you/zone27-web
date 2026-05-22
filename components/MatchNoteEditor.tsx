@@ -106,7 +106,7 @@ export default function MatchNoteEditor({ matchId }: { matchId: string }) {
             type="button"
             onClick={handleSave}
             disabled={!dirty || status.kind === "saving"}
-            className="px-5 py-1.5 bg-gold text-navy font-mono text-[10px] tracking-[0.3em] hover:bg-gold-soft transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            className="px-5 py-2.5 sm:py-1.5 min-h-[44px] sm:min-h-[32px] bg-gold text-navy font-mono text-[10px] tracking-[0.3em] hover:bg-gold-soft transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {status.kind === "saving"
               ? "● 儲存中"

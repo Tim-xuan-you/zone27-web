@@ -242,7 +242,8 @@ function PickButton({
       type="button"
       onClick={onClick}
       disabled={disabled}
-      className={`px-3 py-2.5 border font-mono text-[11px] tracking-[0.2em] transition-colors disabled:opacity-50 disabled:cursor-not-allowed ${
+      aria-pressed={active}
+      className={`px-3 py-2.5 min-h-[44px] border font-mono text-[11px] tracking-[0.2em] transition-colors disabled:opacity-50 disabled:cursor-not-allowed ${
         active
           ? "border-gold bg-gold text-navy"
           : "border-gold/40 text-bone hover:border-gold hover:bg-gold/10"

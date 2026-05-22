@@ -110,7 +110,7 @@ export default function FollowMatchButton({ matchId }: { matchId: string }) {
         onClick={handleToggle}
         disabled={isToggling}
         aria-pressed={following}
-        className={`inline-flex items-center gap-2 px-4 py-2 font-mono text-[10px] tracking-[0.3em] transition-colors disabled:opacity-60 disabled:cursor-not-allowed ${
+        className={`inline-flex items-center gap-2 px-4 py-3 sm:py-2 min-h-[44px] sm:min-h-[36px] font-mono text-[10px] tracking-[0.3em] transition-colors disabled:opacity-60 disabled:cursor-not-allowed ${
           following
             ? "bg-gold text-navy hover:bg-gold-soft"
             : "border border-gold text-gold hover:bg-gold/10"

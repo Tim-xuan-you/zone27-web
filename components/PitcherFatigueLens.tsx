@@ -199,15 +199,24 @@ function FatigueStatBox({
     bad: "text-loss/85",
   }[tier];
 
+  const tierLabel = {
+    good: "healthy",
+    mid: "typical",
+    bad: "concerning",
+  }[tier];
+
   return (
     <div className="bg-slate/60 border border-line/40 px-2 py-2">
       <div className="font-mono text-mute/70 text-[9px] tracking-[0.25em] mb-1">
         {label}
       </div>
-      <div className={`font-mono tabular text-base sm:text-lg ${tierColor}`}>
+      <div
+        className={`font-mono tabular text-base sm:text-lg ${tierColor}`}
+        aria-label={`${label} ${Number.isFinite(value) ? fmt(value) : "no data"} · ${tierLabel} tier`}
+      >
         {Number.isFinite(value) ? fmt(value) : "—"}
       </div>
-      <div className="font-mono text-mute/50 text-[8px] tracking-[0.22em] mt-1">
+      <div className="font-mono text-mute/70 text-[8px] tracking-[0.22em] mt-1">
         BEST {best}
       </div>
     </div>

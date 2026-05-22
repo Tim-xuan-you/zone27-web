@@ -431,11 +431,11 @@ repeat 10,000 times → aggregate
               />
               <LensRow
                 lens="Underdog Tracker"
-                angle="今晚 upset 機率最高賽事 · 黑馬獵手"
-                status="LENS · planned"
-                statusTone="loss"
-                tier="BLACK CARD"
-                tierTone="gold"
+                angle="upset probability + dominance gap · 黑馬機率 lens · 0 contrarian play"
+                status="✓ LIVE · R39 W-B"
+                statusTone="gold"
+                tier="FREE 預覽 · 將來 BLACK CARD"
+                tierTone="bone"
               />
               <LensRow
                 lens="Bullpen Depth"

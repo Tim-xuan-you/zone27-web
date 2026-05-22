@@ -179,6 +179,11 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
   ],
   "/track-record": [
     {
+      href: "/calibration",
+      kicker: "calibration",
+      title: "Checking Our Work · Brier score 引擎自評",
+    },
+    {
       href: "/manifesto",
       kicker: "manifesto",
       title: "倒置宣言 · 為何公開戰績是品牌 IP",
@@ -188,10 +193,39 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
       kicker: "audit",
       title: "Model Report · 全部假設公開",
     },
+  ],
+  "/calibration": [
     {
-      href: "/discipline",
-      kicker: "discipline",
-      title: "鐵律 · Buffett「track record visible」",
+      href: "/track-record",
+      kicker: "track-record",
+      title: "PROVED vs DIVERGED 賽事 ledger",
+    },
+    {
+      href: "/audit",
+      kicker: "audit",
+      title: "Model Report · 全部假設公開",
+    },
+    {
+      href: "/methodology",
+      kicker: "methodology",
+      title: "Brier score + reliability math 完整",
+    },
+  ],
+  "/membership/black-card/ledger": [
+    {
+      href: "/membership/black-card",
+      kicker: "black-card",
+      title: "BLACK CARD 完整介紹 · NT$ 299/月",
+    },
+    {
+      href: "/founders/ledger",
+      kicker: "founders/ledger",
+      title: "Founders 27 公開 allocation ledger",
+    },
+    {
+      href: "/annual/2026",
+      kicker: "annual",
+      title: "Year 0 honest report · 0 paid · NT$ 0 rev",
     },
   ],
   "/roadmap": [

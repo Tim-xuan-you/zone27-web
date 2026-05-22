@@ -20,6 +20,7 @@ import ConfidenceStars from "@/components/ConfidenceStars";
 import VibeCheck from "@/components/VibeCheck";
 import ParkFactorLens from "@/components/ParkFactorLens";
 import PitcherFatigueLens from "@/components/PitcherFatigueLens";
+import UnderdogLens from "@/components/UnderdogLens";
 import LensTrace, { ENGINE_V02_TRACE_STEPS } from "@/components/LensTrace";
 import EngineStamp from "@/components/EngineStamp";
 import { getCpblAdvancedByName } from "@/lib/cpbl-advanced";
@@ -480,6 +481,21 @@ export default async function MatchDetailPage({
           <PitcherFatigueLens pitcher={m.home.pitcher} teamName={m.home.en} />
           <PitcherFatigueLens pitcher={m.away.pitcher} teamName={m.away.en} />
         </div>
+      </section>
+
+      {/* ── UNDERDOG LENS · Round 39 W-B 第 5 個 Lens Variety LIVE ─────
+          per [[feedback-no-waiting-rule]] · R36 W-A Lens Variety table
+          第 5 個 candidate「Underdog Tracker · 黑馬機率」 落地。 不是「黑馬
+          精選」 contrarian play(grifter pattern)· 是「surface 引擎信心
+          spread reality」 educational lens · Pratfall「upset probability
+          ≠ underdog 會贏」 主動 surface · displacement mission 對 玩運彩
+          「冷門大爆」 marketing 反向 · 0 contrarian play · 0 prediction
+          偏置 · 純 viz from existing winRate data。 */}
+      <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-20">
+        <h2 className="font-mono text-gold text-[10px] tracking-[0.4em] mb-6">
+          / 01E · UNDERDOG TRACKER · 黑馬機率 lens(upset probability · 非 contrarian)
+        </h2>
+        <UnderdogLens match={m} />
       </section>
 
       {/* ── SCORE DISTRIBUTION ─────────────────────── */}

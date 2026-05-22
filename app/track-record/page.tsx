@@ -694,7 +694,7 @@ function FirstReceiptHero({ match }: { match: Match }) {
           <span className="text-mute">{match.away.name}</span>
         </h2>
         <p className="font-mono text-mute text-[10px] tracking-[0.25em] mt-1">
-          {match.home.en} <span className="text-mute/40">·</span>{" "}
+          {match.home.en} <span aria-hidden="true" className="text-mute/85">·</span>{" "}
           {match.away.en}
         </p>
       </div>
@@ -827,15 +827,15 @@ function EmptyLedger() {
           <p className="text-bone mt-1">18:35 TPE</p>
           <p className="text-mute/60 text-[9px] tracking-[0.2em] mt-0.5">2026-05-21 · 新莊</p>
         </div>
-        <span aria-hidden="true" className="text-mute/40 text-base hidden sm:inline">→</span>
-        <span aria-hidden="true" className="text-mute/40 text-base sm:hidden">↓</span>
+        <span aria-hidden="true" className="text-mute/85 text-base hidden sm:inline">→</span>
+        <span aria-hidden="true" className="text-mute/85 text-base sm:hidden">↓</span>
         <div className="text-center">
           <p className="text-gold/80">ENGINE RUN</p>
           <p className="text-bone mt-1">18:30 → 22:00 TPE</p>
           <p className="text-mute/60 text-[9px] tracking-[0.2em] mt-0.5">10K Monte Carlo · 賽前公開鎖定</p>
         </div>
-        <span aria-hidden="true" className="text-mute/40 text-base hidden sm:inline">→</span>
-        <span aria-hidden="true" className="text-mute/40 text-base sm:hidden">↓</span>
+        <span aria-hidden="true" className="text-mute/85 text-base hidden sm:inline">→</span>
+        <span aria-hidden="true" className="text-mute/85 text-base sm:hidden">↓</span>
         <div className="text-center">
           <p className="text-gold/80">FIRST RECEIPT</p>
           <p className="text-bone mt-1">22:00+ TPE</p>

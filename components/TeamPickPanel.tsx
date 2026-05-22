@@ -192,7 +192,8 @@ function TeamPickerButtons({
             key={t.id}
             type="button"
             onClick={() => onPick(t.id)}
-            className={`px-3 py-1.5 border font-mono text-[10px] tracking-[0.25em] transition-colors ${
+            aria-pressed={selected}
+            className={`px-3 py-2 sm:py-1.5 min-h-[44px] sm:min-h-[32px] border font-mono text-[10px] tracking-[0.25em] transition-colors ${
               selected
                 ? "border-gold bg-gold/10 text-gold"
                 : "border-line/60 text-mute hover:border-gold/50 hover:text-bone"

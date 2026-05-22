@@ -79,6 +79,7 @@ const FOOTER_GROUPS: FooterGroup[] = [
       { label: "技術白皮書", href: "/methodology" },
       { label: "覆蓋範圍", href: "/coverage" },
       { label: "公開戰績", href: "/track-record" },
+      { label: "引擎自評", href: "/calibration" },
       { label: "27 種進階指標", href: "/glossary" },
     ],
   },

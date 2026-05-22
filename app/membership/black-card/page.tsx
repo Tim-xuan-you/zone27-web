@@ -200,6 +200,176 @@ export default function BlackCardPage() {
           </div>
         </section>
 
+        {/* ── R39 W-D · Agent D #2 · 404 Media 「FREE FOREVER vs ADDED」 2-col disclosure ─
+            「Almost every story is free」 framing 倒置入 ZONE 27 brand IP ·
+            告訴 visitor 您不需付的東西比需付的多 · 解 first-time-payer
+            第一恐懼「他們之後會 paywall 全部」。 brand IP「Engine FREE forever」
+            從 implicit 升 explicit visible at purchase path。 */}
+        <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-16 border-t border-line/40 pt-12">
+          <p
+            lang="en"
+            className="font-mono text-gold text-[10px] tracking-[0.45em] mb-6"
+          >
+            / FREE FOREVER · 您不需付的東西 · vs · BLACK CARD 加上的
+          </p>
+          <h2 className="text-2xl sm:text-3xl text-bone font-light tracking-tight mb-6 leading-tight">
+            BLACK CARD <span className="text-gold">加上 6 件</span> · 不拿掉任何 free 內容
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+            <div className="border border-line/60 bg-slate/30 p-5">
+              <p
+                lang="en"
+                className="font-mono text-gold/80 text-[10px] tracking-[0.3em] mb-3"
+              >
+                FREE FOREVER · 不需付費
+              </p>
+              <ul className="space-y-2 text-mute text-sm leading-relaxed">
+                <li>▸ 引擎 v0.2 Win Probability + 10K Monte Carlo</li>
+                <li>▸ /matches all CPBL 賽事 · all 5 lenses(Vibe Check + Park Factor + Pitcher Fatigue + Underdog + LensTrace)</li>
+                <li>▸ /track-record + /calibration 引擎自評 + Brier score</li>
+                <li>▸ /audit + /methodology + /coverage 全部 trust docs</li>
+                <li>▸ /lab + /lab/custom 自訂任意投手對戰</li>
+                <li>▸ /signal-board + /matches/mlb MLB 資料</li>
+                <li>▸ FREE TIER 5 unlocks(Follow + Note + Submit + Calibration mirror + Predictions)</li>
+                <li>▸ /annual/2026 Year 0 honest report</li>
+              </ul>
+            </div>
+            <div className="border border-gold/50 bg-slate/50 p-5 glow-soft">
+              <p
+                lang="en"
+                className="font-mono text-gold text-[10px] tracking-[0.3em] mb-3"
+              >
+                BLACK CARD · 加上的 6 件
+              </p>
+              <ul className="space-y-2 text-bone text-sm leading-relaxed">
+                <li>▸ Engine Lineup v0.3 + v0.4 解鎖(Q3 Q4 ship)</li>
+                <li>▸ Lens Variety 7 candidates 完整解鎖(目前 5 LIVE · 2 planned)</li>
+                <li>▸ 賽事 24hr 討論室 access(Round 31 planned)</li>
+                <li>▸ 5% creator 抽成(per /membership)</li>
+                <li>▸ 每月 voting · 決定 engine + lens 下一個 ship</li>
+                <li>▸ Tim 工程筆記 full(deprecation notes · DIVERGED 學習 · pre-launch)</li>
+              </ul>
+            </div>
+          </div>
+          <p className="font-mono text-mute/80 text-[10px] tracking-[0.25em] leading-relaxed">
+            ⚓ 我們<strong className="text-bone">永遠不會</strong> paywall 任何
+            目前 free 的內容 · per /audit S05 PRE-COMMIT pattern · 修改需 30
+            天 /changelog 公告 · brand IP「Engine FREE forever」 物理 codify。
+          </p>
+        </section>
+
+        {/* ── R39 W-E · Agent D #5 · Aftermath「F6 IS THE PRODUCT」 reframe ─
+            F6 不做 list 從 brand statement 升 value-stack item ·
+            「您 NT$ 299 也在為這 6 件「永遠不做」 付費」 · negation IS
+            the product · displacement payload 物理 codify。 */}
+        <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-16 border-t border-line/40 pt-12">
+          <p
+            lang="en"
+            className="font-mono text-gold text-[10px] tracking-[0.45em] mb-6"
+          >
+            / NEGATION IS THE PRODUCT · 您也在為這 6 件「永遠不做」付費
+          </p>
+          <h2 className="text-2xl sm:text-3xl text-bone font-light tracking-tight mb-6 leading-tight">
+            您的 NT$ 299 買 6 unlocks · 同時買 <span className="text-gold">6 件永遠不做</span>
+          </h2>
+          <p className="text-mute leading-relaxed mb-6">
+            訂閱費 funds 不止 features · 也 funds 結構性約束。 玩運彩+報馬仔
+            收的錢 funds 他們 do 您不想要的事(賠率推銷 + cash referral
+            + 失敗週次刪文)。 ZONE 27 收的錢 funds 我們 <strong>NOT do</strong>{" "}
+            這些事:
+          </p>
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-5">
+            {[
+              "不顯示賠率",
+              "不賣明牌",
+              "不分潤博彩",
+              "不藏 DIVERGED",
+              "不追蹤您",
+              "不等 Q3",
+            ].map((item) => (
+              <div
+                key={item}
+                className="border border-gold/40 bg-slate/40 p-3 font-mono text-bone text-[11px] tracking-[0.2em] text-center"
+              >
+                ✕ {item}
+              </div>
+            ))}
+          </div>
+          <p className="font-mono text-mute/80 text-[10px] tracking-[0.25em] leading-relaxed">
+            Aronson 1966 + Spence 1973 costly signaling · negation 是 brand
+            moat · 公開定價 funds 拒絕的東西 · 比 funds 功能 更 informative。
+          </p>
+        </section>
+
+        {/* ── R39 W-F · Agent D #3 · Stratechery「Subscriber Compact」 3-line ─
+            Ben Thompson 「不賣 paid opinions · 不持 covered cos individual
+            stocks · 不 consulting」 3-point ethics on subscription path ·
+            ZONE 27 transplant 同 pattern · 3 commitment signed Tim
+            「不賣引擎給 bookmakers · 0 ads ever · 公開年度收支 + sub count」。 */}
+        <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-16 border-t border-line/40 pt-12">
+          <p
+            lang="en"
+            className="font-mono text-gold text-[10px] tracking-[0.45em] mb-6"
+          >
+            / SUBSCRIBER COMPACT · 我對訂閱者的 3 line commitment
+          </p>
+          <h2 className="text-2xl sm:text-3xl text-bone font-light tracking-tight mb-6 leading-tight">
+            訂閱前 · 您應該知道 <span className="text-gold">3 件事</span>
+          </h2>
+          <div className="border border-gold/40 bg-slate/40 p-6 sm:p-8 glow-soft mb-5">
+            <ol className="space-y-5">
+              <li className="grid grid-cols-[auto_1fr] gap-4 items-baseline">
+                <span
+                  lang="en"
+                  className="font-mono text-gold text-[12px] tracking-[0.35em] tabular"
+                >
+                  01
+                </span>
+                <div>
+                  <p className="text-bone text-base sm:text-lg leading-relaxed">
+                    <strong>我不賣引擎預測給 bookmakers 或 scrapers</strong>。
+                    若我收到 offer · 我會把 offer 內容 + 我的拒絕 publish
+                    在 /changelog。
+                  </p>
+                </div>
+              </li>
+              <li className="grid grid-cols-[auto_1fr] gap-4 items-baseline">
+                <span
+                  lang="en"
+                  className="font-mono text-gold text-[12px] tracking-[0.35em] tabular"
+                >
+                  02
+                </span>
+                <div>
+                  <p className="text-bone text-base sm:text-lg leading-relaxed">
+                    <strong>我永遠不在 ZONE 27 跑廣告 / affiliate / paid placement</strong>。
+                    訂閱費(BLACK CARD + Founders 27)是整個 revenue model ·
+                    by design · per [[zone27-monetization-philosophy]]。
+                  </p>
+                </div>
+              </li>
+              <li className="grid grid-cols-[auto_1fr] gap-4 items-baseline">
+                <span
+                  lang="en"
+                  className="font-mono text-gold text-[12px] tracking-[0.35em] tabular"
+                >
+                  03
+                </span>
+                <div>
+                  <p className="text-bone text-base sm:text-lg leading-relaxed">
+                    <strong>我每年 5 月 publish 全年收入 + 開銷 + BLACK CARD subscriber count</strong>{" "}
+                    在 /annual/{`{year}`} · 同 /audit S05 PRE-COMMIT pattern ·
+                    修改此 commitment 需 30 天 /changelog 公告。
+                  </p>
+                </div>
+              </li>
+            </ol>
+          </div>
+          <p className="font-mono text-mute text-[10px] tracking-[0.25em] text-right">
+            — TIM · 工程師 · ZONE 27 · 2026-05-22
+          </p>
+        </section>
+
         {/* ── PAYMENT FLOW MOCKUP ──────────────────── */}
         <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-16 border-t border-line/40 pt-12">
           <p
