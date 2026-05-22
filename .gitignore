@@ -24,6 +24,10 @@
 .DS_Store
 *.pem
 
+# Tim 個人/敏感 ops 資訊(銀行 · 法務 · 客戶 PII · launch checklist 私密欄位)
+# 永不 push 到 public GitHub · Claude 在新對話 session 從本機 disk 讀
+docs/private/
+
 # debug
 npm-debug.log*
 yarn-debug.log*

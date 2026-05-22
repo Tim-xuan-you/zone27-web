@@ -75,12 +75,16 @@ Hi {訪客稱呼 / 訪客 email},
 3 個步驟完成入會:
 
 1. 匯款 NT$ 2,700 到以下帳號:
-   銀行:{Tim 的銀行}
-   分行:{分行}
-   戶名:{Tim 全名}
-   帳號:{帳號}
+   銀行:{{BANK_NAME}}
+   分行:{{BANK_BRANCH}}
+   戶名:{{BANK_HOLDER}}
+   帳號:{{BANK_ACCOUNT}}
 
-   備註欄請填:ZONE 27 · #00X · {您的 email 前 8 字元}
+   備註欄請填:ZONE27-#00X(per docs/EMAIL-TEMPLATES.md reconciliation
+   pattern · Round 31 W-H 標準化)
+
+   ☉ 實際 4 欄位 placeholder 替換值 in docs/private/bank-info.md
+     (gitignored · public GitHub 看不到 · Tim 本機 + Claude session 讀)
 
 2. 匯款完成後 reply 此 email 告訴我(附匯款截圖更快)
    → 我會在 24 小時內手動 confirm 並把您的 status 從

@@ -16,13 +16,26 @@ Tim 問「為何需要我?」surface 了一個真實 gap:目前網站說「Found
 
 ---
 
-## ✅ Prerequisite 1 · Banking info ready
+## ✅ Prerequisite 1 · Banking info ready · **DONE 2026-05-22(Round 31 W-H)**
+
+### 狀態
+
+✅ **Tim 個人戶 collected** · 實際 4 欄位存 `docs/private/bank-info.md`
+   (gitignored · public GitHub 看不到 · Claude 新對話 session 從本機讀)
+
+戶名 / 銀行 / 分行 / 帳號 / 總分支機構代碼 / SWIFT BIC 6 欄位 + 客服電話 全
+   archived 在 private file 內 · ready 給未來 EMAIL-TEMPLATES.md Phase 2
+   reconciliation flow 直接 substitute。
+
+⚠️ 安全 protocol:存摺實體 image 不存(印章樣式仿造風險)· 4 欄位以
+   plain text 存 · 跟銀行 best practice 一致(帳號公開在轉帳 email OK
+   · 印章 + 全攤位置一起 expose 才有風險)。
 
 ### 為什麼重要
 
 訪客匯款要看到實際帳號 · 不能是「未來給您」。第一封 onboarding email 必須含真實帳號(per docs/EMAIL-TEMPLATES.md Phase 2 template skeleton)。
 
-### Sub-steps
+### Sub-steps(原版 · 已執行)
 
 1.1. **決定收款銀行**
    - 推薦:玉山銀行(instant settle · 您手機可即時看到入帳)
