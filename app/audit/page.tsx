@@ -178,18 +178,63 @@ export default function AuditPage() {
                 ▲ ESTIMATION DISCLOSURE
               </p>
               <p className="text-mute text-sm leading-relaxed">
-                CPBL 不公開投手 plate-appearance 級 K/9 · BB/9 · HR/9 真值。
-                ZONE 27 從球速 + ERA + 聯盟均值反推 estimate ·{" "}
+                CPBL 主站 cpbl.com.tw 不公開投手 plate-appearance 級 K/9 · BB/9 ·
+                HR/9 真值。 ZONE 27 從球速 + ERA + 聯盟均值反推 estimate ·{" "}
                 <ExtLink href="https://github.com/Tim-xuan-you/zone27-web/blob/main/lib/matches.ts">
                   lib/matches.ts
                 </ExtLink>
-                {" "}註解 explicit 標每位投手的 estimate path(如「~7.0 · 從 146 km/h
-                球速 + ERA 推估」)· 不藏。任何 CPBL data 工作者可透過 GitHub
-                PR 提供修正真值 · 引擎輸出立即重算。
+                {" "}註解 explicit 標每位投手的 estimate path · 不藏。 但 W-I
+                自動 fetch cpbl.com.tw 主站 K/9 BB/9 HR/9 leaderboard · 16+
+                qualifying 投手已 auto-overlay real values from{" "}
+                <ExtLink href="https://github.com/Tim-xuan-you/zone27-web/blob/main/lib/cpbl-pitchers.ts">
+                  lib/cpbl-pitchers.ts
+                </ExtLink>
+                (npm run fetch-cpbl 1 鍵 30 秒 refresh)。
               </p>
               <p className="text-mute/70 text-xs leading-relaxed mt-3">
                 這個 caveat 是 disclosure philosophy 的物理產出 ·
                 /audit Section 05 解釋為什麼把弱點貼在門口而不是藏起來。
+              </p>
+            </div>
+
+            {/* Round 31 W-U · ADVANCED INPUTS UPGRADE · 站在 CPBL 進階數據網站
+                + 野球革命 + Trackman radar 巨人肩上 · brand IP transformation moment。
+                attribution clear · 我們 cite source · fetch script GitHub 公開
+                可 audit · 不假裝自己 collect Trackman data。 */}
+            <div className="mt-6 border border-gold/40 bg-gold/5 p-5 sm:p-6">
+              <p
+                lang="en"
+                className="font-mono text-gold text-[10px] tracking-[0.4em] mb-3"
+              >
+                ✦ ADVANCED INPUTS · TRACKMAN RADAR 整合
+              </p>
+              <p className="text-mute text-sm leading-relaxed">
+                W-U 整合{" "}
+                <ExtLink href="https://stats.cpbl.com.tw/">
+                  stats.cpbl.com.tw
+                </ExtLink>
+                {" "}CPBL 進階數據網站(野球革命 + Trackman radar · 試營運
+                上線)· 拉每位 qualifying 投手 advanced metrics 中職百分位:
+                <strong className="text-bone"> wOBA-against · K% · 揮空% · 強擊球% ·
+                擊球初速 Avg/Max</strong>。 每 /matches/[gameId] 投手卡顯示
+                ADVANCED TRACKMAN 區塊 · 100 = elite · 0 = poor · CPBL 內部
+                percentile rank。
+              </p>
+              <p className="text-mute/85 text-sm leading-relaxed mt-3">
+                Brand IP transformation:engine input 從「per-9 stats(20 世紀
+                標準 + 自己估算)」 升「Trackman radar Statcast-grade(2024+
+                MLB 同等)」。 attribution clear · fetch script(
+                <ExtLink href="https://github.com/Tim-xuan-you/zone27-web/blob/main/scripts/fetch-cpbl-advanced.mjs">
+                  scripts/fetch-cpbl-advanced.mjs
+                </ExtLink>
+                )GitHub 公開 · 不假裝自己 collect Trackman radar data · 站
+                在 CPBL 官方巨人肩上的同時 100% 揭露 dependency。
+              </p>
+              <p className="text-mute/70 text-xs leading-relaxed mt-3">
+                試營運狀態:stats.cpbl.com.tw URL 結構未來可能微變 · fetch
+                script 對 acnt-based lookup 穩定 · 對 leaderboard layout
+                依賴 minimal。 任何破改 · GitHub commit 為 source of truth ·
+                修一個 file 全站自動更新。
               </p>
             </div>
             <P className="text-mute/70">
