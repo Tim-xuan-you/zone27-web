@@ -341,140 +341,111 @@ export default function BlackCardPage() {
             stocks · 不 consulting」 3-point ethics on subscription path ·
             ZONE 27 transplant 同 pattern · 3 commitment signed Tim
             「不賣引擎給 bookmakers · 0 ads ever · 公開年度收支 + sub count」。 */}
+        {/* ── R42 W-D · F3.1 MAJOR FIX · Agent I dogfood canary
+            Subscriber Compact 3-line lived here as subset of /ethics 8 ·
+            skeptic 看到兩 page 內容 partial overlap 會 ask「why 3 here vs
+            8 there?」 · 改 1-line link · /ethics 是 canonical · 不 duplicate
+            partial wording from /ethics · single source of truth。 */}
         <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-16 border-t border-line/40 pt-12">
           <p
             lang="en"
             className="font-mono text-gold text-[10px] tracking-[0.45em] mb-6"
           >
-            / SUBSCRIBER COMPACT · 我對訂閱者的 3 line commitment
+            / TIM 的 8 binding commitments · /ethics
           </p>
-          <h2 className="text-2xl sm:text-3xl text-bone font-light tracking-tight mb-6 leading-tight">
-            訂閱前 · 您應該知道 <span className="text-gold">3 件事</span>
-          </h2>
-          <div className="border border-gold/40 bg-slate/40 p-6 sm:p-8 glow-soft mb-5">
-            <ol className="space-y-5">
-              <li className="grid grid-cols-[auto_1fr] gap-4 items-baseline">
-                <span
-                  lang="en"
-                  className="font-mono text-gold text-[12px] tracking-[0.35em] tabular"
-                >
-                  01
-                </span>
-                <div>
-                  <p className="text-bone text-base sm:text-lg leading-relaxed">
-                    <strong>我不賣引擎預測給 bookmakers 或 scrapers</strong>。
-                    若我收到 offer · 我會把 offer 內容 + 我的拒絕 publish
-                    在 /changelog。
-                  </p>
-                </div>
-              </li>
-              <li className="grid grid-cols-[auto_1fr] gap-4 items-baseline">
-                <span
-                  lang="en"
-                  className="font-mono text-gold text-[12px] tracking-[0.35em] tabular"
-                >
-                  02
-                </span>
-                <div>
-                  <p className="text-bone text-base sm:text-lg leading-relaxed">
-                    <strong>我永遠不在 ZONE 27 跑廣告 / affiliate / paid placement</strong>。
-                    訂閱費(BLACK CARD + Founders 27)是整個 revenue model ·
-                    by design · per [[zone27-monetization-philosophy]]。
-                  </p>
-                </div>
-              </li>
-              <li className="grid grid-cols-[auto_1fr] gap-4 items-baseline">
-                <span
-                  lang="en"
-                  className="font-mono text-gold text-[12px] tracking-[0.35em] tabular"
-                >
-                  03
-                </span>
-                <div>
-                  <p className="text-bone text-base sm:text-lg leading-relaxed">
-                    <strong>我每年 5 月 publish 全年收入 + 開銷 + BLACK CARD subscriber count</strong>{" "}
-                    在 /annual/{`{year}`} · 同 /audit S05 PRE-COMMIT pattern ·
-                    修改此 commitment 需 30 天 /changelog 公告。
-                  </p>
-                </div>
-              </li>
-            </ol>
-          </div>
-          <p className="font-mono text-mute text-[10px] tracking-[0.25em] text-right">
-            — TIM · 工程師 · ZONE 27 · 2026-05-22
-          </p>
+          <Link
+            href="/ethics"
+            className="block border border-gold/40 bg-slate/40 p-5 sm:p-6 hover:bg-slate/50 hover:border-gold/60 transition-colors group glow-soft"
+          >
+            <div className="flex items-baseline justify-between gap-3 flex-wrap mb-3">
+              <p
+                lang="en"
+                className="font-mono text-gold/90 text-[10px] tracking-[0.35em]"
+              >
+                ↗ 8 BINDING NOT-DO COMMITMENTS · SIGNED TIM
+              </p>
+              <span
+                lang="en"
+                className="font-mono text-gold text-[9px] tracking-[0.3em]"
+              >
+                CANONICAL · /ethics
+              </span>
+            </div>
+            <p className="text-bone text-base sm:text-lg leading-relaxed group-hover:text-gold transition-colors">
+              訂閱前 · 您應該知道 ZONE 27 永遠不做的{" "}
+              <span className="text-gold">8 件事</span> ·
+              玩運彩+報馬仔 結構性 violate 6/8 · ship 等於商業自殺 ·
+              ZONE 27 ship 等於 displacement narrative 物理閉環。
+            </p>
+            <p className="mt-3 font-mono text-mute/70 text-[10px] tracking-[0.25em] group-hover:text-mute transition-colors">
+              5 DISPLACEMENT + 2 SUBSCRIBER PROTECT + 1 BRAND · 30-day
+              pre-commit binding · 修改需 /changelog 公告 →
+            </p>
+          </Link>
         </section>
 
-        {/* ── PAYMENT FLOW MOCKUP ──────────────────── */}
+        {/* ── R42 W-C · F4.1 CRITICAL FIX · Agent I dogfood canary
+            LIVE 月卡手動 badge contradicted with PAYMENT FLOW MOCKUP
+            disabled form. Resolved per Pratfall axiom · 不可 「badge over-
+            claim · form admits otherwise」 同時 ship · 同一 page mismatched
+            signal = brand IP violation。 Ripped out disabled mockup form ·
+            replaced with honest EMAIL TIM flow that matches LIVE badge.
+            Visitor 看到 LIVE badge 就應該 看到 actionable LIVE path 不是
+            disabled form (Pratfall + Costly Signaling discipline). */}
         <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-16 border-t border-line/40 pt-12">
           <p
             lang="en"
             className="font-mono text-gold text-[10px] tracking-[0.45em] mb-6"
           >
-            / PAYMENT FLOW · MOCKUP(disabled · 2026 Q3 啟用)
+            / 訂閱 BLACK CARD · email Tim 啟動月卡
           </p>
-          <div className="bg-slate/30 border-2 border-dashed border-loss/30 p-6 sm:p-8 opacity-70">
-            <p className="font-mono text-loss/80 text-[10px] tracking-[0.35em] mb-4 text-center">
-              ⚠ MOCKUP · 此 form 不可實際提交 · payment infra 2026 Q3 上線
+          <div className="bg-slate/40 border border-gold/40 p-6 sm:p-8 glow-soft">
+            <p
+              lang="en"
+              className="font-mono text-gold text-[10px] tracking-[0.35em] mb-4 text-center"
+            >
+              ✓ LIVE NOW · 月卡手動 · 個人方案 ECPay
             </p>
-            <div className="space-y-4">
-              <div>
-                <label className="block font-mono text-mute text-[10px] tracking-[0.3em] mb-1">
-                  EMAIL · 訂閱 email
-                </label>
-                <input
-                  type="email"
-                  disabled
-                  placeholder="您 FREE TIER 註冊 email · 自動 prefilled"
-                  className="w-full bg-navy/40 border border-line/60 px-3 py-2 text-mute/60 text-sm cursor-not-allowed"
-                />
-              </div>
-              <div>
-                <label className="block font-mono text-mute text-[10px] tracking-[0.3em] mb-1">
-                  信用卡 · 由 payment gateway 處理 · 0 卡號 in ZONE 27 server
-                </label>
-                <input
-                  type="text"
-                  disabled
-                  placeholder="•••• •••• •••• ••••(payment iframe)"
-                  className="w-full bg-navy/40 border border-line/60 px-3 py-2 text-mute/60 text-sm cursor-not-allowed font-mono tabular"
-                />
-              </div>
-              <div className="flex gap-3">
-                <div className="flex-1">
-                  <label className="block font-mono text-mute text-[10px] tracking-[0.3em] mb-1">
-                    MM / YY
-                  </label>
-                  <input
-                    type="text"
-                    disabled
-                    placeholder="MM / YY"
-                    className="w-full bg-navy/40 border border-line/60 px-3 py-2 text-mute/60 text-sm cursor-not-allowed font-mono tabular"
-                  />
-                </div>
-                <div className="flex-1">
-                  <label className="block font-mono text-mute text-[10px] tracking-[0.3em] mb-1">
-                    CVC
-                  </label>
-                  <input
-                    type="text"
-                    disabled
-                    placeholder="•••"
-                    className="w-full bg-navy/40 border border-line/60 px-3 py-2 text-mute/60 text-sm cursor-not-allowed font-mono tabular"
-                  />
-                </div>
-              </div>
-              <button
-                type="button"
-                disabled
-                className="w-full bg-mute/30 text-mute py-3 font-mono text-xs tracking-[0.3em] cursor-not-allowed"
+            <p className="text-bone text-lg sm:text-xl leading-relaxed mb-4 text-center">
+              寄 email 給 Tim · 24 小時內收到您的{" "}
+              <span className="text-gold">ECPay 個人方案付款連結</span> ·
+              首月起算。
+            </p>
+            <div className="border border-gold/30 bg-navy/30 p-4 sm:p-5 mb-4">
+              <p
+                lang="en"
+                className="font-mono text-gold/90 text-[10px] tracking-[0.3em] mb-2"
               >
-                → 訂閱 NT$ 299 / 月(MOCKUP · disabled)
-              </button>
-              <p className="font-mono text-mute/60 text-[10px] tracking-[0.25em] text-center leading-relaxed">
-                首月 14 天無條件退款 · 隨時可取消 · 每月扣款前 3 天 email 提醒
+                EMAIL · ZONE 27 創辦人 Tim
+              </p>
+              <a
+                href="mailto:tim@zone27.tw?subject=BLACK%20CARD%20%E8%A8%82%E9%96%B1%20-%20NT%24%20299%2F%E6%9C%88&body=Tim%20%E5%A5%BD%2C%0A%0A%E6%88%91%E6%83%B3%E8%A8%82%E9%96%B1%20BLACK%20CARD%20%E6%9C%88%E5%8D%A1%20%E2%80%A2%20NT%24%20299%2F%E6%9C%88%E3%80%82%0A%0A%E8%AB%8B%E5%AF%84%E6%88%91%20ECPay%20%E5%80%8B%E4%BA%BA%E6%96%B9%E6%A1%88%E4%BB%98%E6%AC%BE%E9%80%A3%E7%B5%90%E3%80%82%0A%0A%E8%AC%9D%E8%AC%9D%E3%80%82"
+                className="block text-center text-bone hover:text-gold text-base sm:text-lg tabular tracking-wide transition-colors underline-offset-4 hover:underline break-all"
+              >
+                tim@zone27.tw
+              </a>
+              <p className="mt-3 font-mono text-mute/70 text-[9px] tracking-[0.25em] text-center">
+                點上面連結會開啟您的 email app · subject + body 預填好
               </p>
             </div>
+            <ul className="space-y-2 text-mute text-sm leading-relaxed">
+              <li className="flex gap-3 items-baseline">
+                <span className="font-mono text-gold/80 text-[10px] tracking-[0.25em]">▸</span>
+                <span>付款方式:ECPay 個人方案 · 信用卡 / 銀行轉帳 / 超商繳費</span>
+              </li>
+              <li className="flex gap-3 items-baseline">
+                <span className="font-mono text-gold/80 text-[10px] tracking-[0.25em]">▸</span>
+                <span>首月起算 · 每月手動續訂 · 不自動扣款(per 倒置 SaaS 軸線)</span>
+              </li>
+              <li className="flex gap-3 items-baseline">
+                <span className="font-mono text-gold/80 text-[10px] tracking-[0.25em]">▸</span>
+                <span>首月 14 天無條件退款 · 隨時可取消 · 每月扣款前 3 天 email 提醒</span>
+              </li>
+              <li className="flex gap-3 items-baseline">
+                <span className="font-mono text-gold/80 text-[10px] tracking-[0.25em]">▸</span>
+                <span>每筆訂閱真實上 <Link href="/membership/black-card/ledger" className="text-gold hover:underline underline-offset-4">/membership/black-card/ledger</Link> public ledger · row 1 永久</span>
+              </li>
+            </ul>
           </div>
         </section>
 

@@ -81,6 +81,7 @@ const FOOTER_GROUPS: FooterGroup[] = [
       { label: "公開戰績", href: "/track-record" },
       { label: "引擎自評", href: "/calibration" },
       { label: "Ethics Policy", href: "/ethics" },
+      { label: "Steelman", href: "/steelman" },
       { label: "27 種進階指標", href: "/glossary" },
     ],
   },

@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import RelatedReading from "@/components/RelatedReading";
 import FounderSignOff from "@/components/FounderSignOff";
 import ArticleMeta from "@/components/ArticleMeta";
+import ReproducibilityReceipt from "@/components/ReproducibilityReceipt";
 import { getFinalizedMatches, type Match } from "@/lib/matches";
 
 export const metadata: Metadata = {
@@ -243,6 +244,18 @@ export default function CalibrationPublicPage() {
             <span className="font-mono text-mute">0.25</span> = coin-flip baseline ·{" "}
             <span className="font-mono text-loss">1</span> = perfectly wrong。
           </p>
+
+          {/* Round 42 W-B · Reproducibility Receipt · Agent H #4 ship ·
+              specific git commit + data as-of + seed + N · 每個 published
+              number 都 auditable 至 git revision · per IJCAI 2026 standard。 */}
+          <div className="mb-3">
+            <ReproducibilityReceipt
+              seed={null}
+              dataAt="2026-05-21"
+              n={n}
+              fileLink="https://github.com/Tim-xuan-you/zone27-web/blob/main/app/calibration/page.tsx"
+            />
+          </div>
           <p className="text-mute/85 text-sm leading-relaxed">
             比 win-rate 更 informative · 因為 win-rate 不考慮 confidence level ·
             Brier penalizes <strong className="text-bone">over-confidence</strong>。

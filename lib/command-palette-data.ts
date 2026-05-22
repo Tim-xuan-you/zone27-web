@@ -244,6 +244,23 @@ export const COMMAND_ITEMS: CommandItem[] = [
     ],
   },
   {
+    label: "Steelman · 反 ZONE 27 最強 5 個論證",
+    kicker: "/steelman",
+    path: "/steelman",
+    group: "信任文件",
+    keywords: [
+      "steelman",
+      "objection",
+      "反方",
+      "論證",
+      "critique",
+      "adversarial",
+      "tetlock",
+      "aronson",
+      "pratfall",
+    ],
+  },
+  {
     label: "27 種進階指標 glossary",
     kicker: "/glossary",
     path: "/glossary",

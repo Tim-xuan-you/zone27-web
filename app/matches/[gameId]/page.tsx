@@ -409,6 +409,24 @@ export default async function MatchDetailPage({
         </section>
       )}
 
+      {/* ── ENGINE TRACE · Round 42 W-E · Agent I dogfood deepest fix
+          MOVED from /01A to /00B per Agent I deepest call:LensTrace
+          5-step pipeline 描述 produces MASSIVE WIN BAR + EngineNarrative
+          (上方 sections)· not the 6 lenses below(those are separate
+          components from different libs)· 放在 hero 後 立刻 satisfy
+          「prediction → trace」 1-click adjacency per LensTrace 設計 axiom。
+          Renumber 從 /01A → /00B(conditional /00 calibration receipt 後
+          followed by always-rendered /00B trace · before /01 pitcher matchup)。 */}
+      <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-20">
+        <h2 className="font-mono text-gold text-[10px] tracking-[0.4em] mb-6">
+          / 00B · ENGINE TRACE · 5 步 deterministic pipeline(GitHub 可驗證)
+        </h2>
+        <LensTrace
+          steps={ENGINE_V02_TRACE_STEPS}
+          engineLabel="v0.2 PITCHER-ONLY MC"
+        />
+      </section>
+
       {/* ── PITCHER MATCHUP ────────────────────────── */}
       <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-12">
         <h2 className="font-mono text-gold text-[10px] tracking-[0.4em] mb-8">
@@ -430,34 +448,33 @@ export default async function MatchDetailPage({
         <EngineNarrative match={m} />
       </section>
 
-      {/* ── ENGINE TRACE · Round 38 W-H · Agent A #4 ship ─────
-          「We Don't Guess. We Compute.」 literally visualized · 5-step
-          deterministic pipeline trace · NOT loading spinner · NOT chatbot
-          widget · 純 static breadcrumb of deterministic compute · per
-          Smashing Magazine 2026 AI Transparency「Dynamic Checklist」 pattern。
-          Brand IP「方法公開」 物理 literal · 多數「AI」 sites 只 show output ·
-          ZONE 27 直接公開 5 步 pipeline · GitHub source link 直連 ·
-          displacement mission 對 玩運彩+報馬仔(他們 0 pipeline 公開)。 */}
-      <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-20">
-        <h2 className="font-mono text-gold text-[10px] tracking-[0.4em] mb-6">
-          / 01A · ENGINE TRACE · 5 步 deterministic pipeline(GitHub 可驗證)
+      {/* ── /02 · LENS CANVAS · Round 42 W-E · Agent I dogfood F1.2 fix
+          One Tier-1 header introduces the 6 lens sub-sections collectively ·
+          內個 lens sub-section 從 /01B-/01G outdented to /02A-/02F at Tier-2
+          visual weight(text-[9px] · tracking-[0.3em] · border-l-2 border-
+          gold/30 pl-3)· WhatsApp landers 看清 hierarchy(/01 STARTING
+          PITCHER 是 Tier-1 · 6 lens 是 nested under Tier-1 /02 LENS CANVAS
+          parent)· 「all 7 sections equal volume」 wall fix。 */}
+      <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-6 border-t border-line/40 pt-12">
+        <h2 className="font-mono text-gold text-[10px] tracking-[0.4em] mb-3">
+          / 02 · LENS CANVAS · 7 個獨立 analytical angles
         </h2>
-        <LensTrace
-          steps={ENGINE_V02_TRACE_STEPS}
-          engineLabel="v0.2 PITCHER-ONLY MC"
-        />
+        <p className="text-mute text-sm leading-relaxed max-w-2xl">
+          以下 6 個 sub-lens · 各自 publish methodology + open code +
+          educational explainer · 共同回答「<strong className="text-bone">這場 多角度 看 什麼？</strong>」
+          · 不替代 Win Probability prediction(/00B engine trace 是 prediction layer)。
+          Patek Philippe complication 模式 · per /methodology Section 05。
+        </p>
       </section>
 
-      {/* ── VIBE CHECK LENS · Round 37 W-B 第 1 個 Lens Variety 真實 LIVE ──
-          per [[feedback-no-waiting-rule]] iron rule「任何現在能做就做」 ·
-          R36 W-A Lens Variety table 第 2 個 candidate 落地。 純 data viz
-          from existing match.team.recent · 「hot hand fallacy」 educational
-          disclaimer · Tversky/Gilovich 1985 cite · brand-pure 不假
-          prediction · 同 Section 05 Lens Variety axiom。 */}
-      <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-20 [content-visibility:auto] [contain-intrinsic-size:0_600px]">
-        <h2 className="font-mono text-gold text-[10px] tracking-[0.4em] mb-6">
-          / 01B · VIBE CHECK · 氣勢 lens(streak descriptive · 非 prediction)
-        </h2>
+      {/* ── VIBE CHECK LENS · Round 37 W-B · 1st of 6 sub-lenses under
+          /02 LENS CANVAS · outdented to Tier-2 visual weight per Agent I
+          F1.2 fix(text-gold/80 text-[9px] · tracking-[0.3em] · border-l-2
+          border-gold/30 pl-3 · pb-12 不 pb-20 較緊湊)。 */}
+      <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-12 [content-visibility:auto] [contain-intrinsic-size:0_600px]">
+        <h3 className="font-mono text-gold/80 text-[9px] tracking-[0.3em] mb-4 border-l-2 border-gold/30 pl-3">
+          / 02A · VIBE CHECK · 氣勢 lens(streak descriptive · 非 prediction)
+        </h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <VibeCheck teamName={m.home.en} recent={m.home.recent} />
           <VibeCheck teamName={m.away.en} recent={m.away.recent} />
@@ -472,10 +489,10 @@ export default async function MatchDetailPage({
           pure 不假 prediction · ESTIMATE methodology + PR invitation per
           /audit Section 02 ESTIMATION DISCLOSURE pattern · 同 Section 05
           Lens Variety axiom。 */}
-      <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-20 [content-visibility:auto] [contain-intrinsic-size:0_600px]">
-        <h2 className="font-mono text-gold text-[10px] tracking-[0.4em] mb-6">
-          / 01C · PARK FACTOR · 場館 lens(home advantage · 非 prediction)
-        </h2>
+      <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-12 [content-visibility:auto] [contain-intrinsic-size:0_600px]">
+        <h3 className="font-mono text-gold/80 text-[9px] tracking-[0.3em] mb-4 border-l-2 border-gold/30 pl-3">
+          / 02B · PARK FACTOR · 場館 lens(home advantage · 非 prediction)
+        </h3>
         <ParkFactorLens venue={m.venue} />
       </section>
 
@@ -485,10 +502,10 @@ export default async function MatchDetailPage({
           WHIP + BB9 + K9 季累計 derive command stability proxy(不是
           true fatigue · v0.2 需 ingest rest_days + season_ip)· brand IP
           Pratfall + Costly Signaling + Disclosure 三 axiom 同時 fire。 */}
-      <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-20 [content-visibility:auto] [contain-intrinsic-size:0_600px]">
-        <h2 className="font-mono text-gold text-[10px] tracking-[0.4em] mb-6">
-          / 01D · PITCHER FATIGUE · 投手疲勞 lens(v0.1 PROXY · 非 prediction)
-        </h2>
+      <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-12 [content-visibility:auto] [contain-intrinsic-size:0_600px]">
+        <h3 className="font-mono text-gold/80 text-[9px] tracking-[0.3em] mb-4 border-l-2 border-gold/30 pl-3">
+          / 02C · PITCHER FATIGUE · 投手疲勞 lens(v0.1 PROXY · 非 prediction)
+        </h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <PitcherFatigueLens pitcher={m.home.pitcher} teamName={m.home.en} />
           <PitcherFatigueLens pitcher={m.away.pitcher} teamName={m.away.en} />
@@ -503,10 +520,10 @@ export default async function MatchDetailPage({
           ≠ underdog 會贏」 主動 surface · displacement mission 對 玩運彩
           「冷門大爆」 marketing 反向 · 0 contrarian play · 0 prediction
           偏置 · 純 viz from existing winRate data。 */}
-      <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-20 [content-visibility:auto] [contain-intrinsic-size:0_600px]">
-        <h2 className="font-mono text-gold text-[10px] tracking-[0.4em] mb-6">
-          / 01E · UNDERDOG TRACKER · 黑馬機率 lens(upset probability · 非 contrarian)
-        </h2>
+      <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-12 [content-visibility:auto] [contain-intrinsic-size:0_600px]">
+        <h3 className="font-mono text-gold/80 text-[9px] tracking-[0.3em] mb-4 border-l-2 border-gold/30 pl-3">
+          / 02D · UNDERDOG TRACKER · 黑馬機率 lens(upset probability · 非 contrarian)
+        </h3>
         <UnderdogLens match={m} />
       </section>
 
@@ -518,10 +535,10 @@ export default async function MatchDetailPage({
           + last 7 days workload)· brand IP Pratfall + Costly Signaling +
           Disclosure 三 axiom 同時 fire · 同 PitcherFatigueLens v0.1 PROXY
           pattern。 */}
-      <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-20 [content-visibility:auto] [contain-intrinsic-size:0_600px]">
-        <h2 className="font-mono text-gold text-[10px] tracking-[0.4em] mb-6">
-          / 01F · BULLPEN DEPTH · 牛棚 lens(v0.1 PROXY · 非 prediction)
-        </h2>
+      <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-12 [content-visibility:auto] [contain-intrinsic-size:0_600px]">
+        <h3 className="font-mono text-gold/80 text-[9px] tracking-[0.3em] mb-4 border-l-2 border-gold/30 pl-3">
+          / 02E · BULLPEN DEPTH · 牛棚 lens(v0.1 PROXY · 非 prediction)
+        </h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <BullpenDepthLens team={m.home} side="HOME" />
           <BullpenDepthLens team={m.away} side="AWAY" />
@@ -540,16 +557,16 @@ export default async function MatchDetailPage({
           truth not future promise · displacement battle 對 玩運彩+報馬仔
           1 fake angle vs ZONE 27 7 honest 物理閉合。 */}
       <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-20 [content-visibility:auto] [contain-intrinsic-size:0_600px]">
-        <h2 className="font-mono text-gold text-[10px] tracking-[0.4em] mb-6">
-          / 01G · MATCHUP HISTORY · H2H lens(real data · 7th LIVE Lens Variety)
-        </h2>
+        <h3 className="font-mono text-gold/80 text-[9px] tracking-[0.3em] mb-4 border-l-2 border-gold/30 pl-3">
+          / 02F · MATCHUP HISTORY · H2H lens(real data · 6th sub-lens · 7-LENS CANVAS COMPLETE)
+        </h3>
         <MatchupHistoryLens match={m} />
       </section>
 
       {/* ── SCORE DISTRIBUTION ─────────────────────── */}
       <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-20">
         <h2 className="font-mono text-gold text-[10px] tracking-[0.4em] mb-8">
-          / 02 · TOP 5 PROJECTED FINAL SCORES
+          / 03 · TOP 5 PROJECTED FINAL SCORES
         </h2>
 
         <div className="space-y-3">
@@ -565,7 +582,7 @@ export default async function MatchDetailPage({
       {/* ── RECENT FORM ────────────────────────────── */}
       <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-20">
         <h2 className="font-mono text-gold text-[10px] tracking-[0.4em] mb-8">
-          / 03 · LAST 5 GAMES
+          / 04 · LAST 5 GAMES
         </h2>
         <div className="grid sm:grid-cols-2 gap-12">
           <FormRow team={m.home.name} recent={m.home.recent} />
@@ -576,7 +593,7 @@ export default async function MatchDetailPage({
       {/* ── AI METHODOLOGY ─────────────────────────── */}
       <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-20">
         <h2 className="font-mono text-gold text-[10px] tracking-[0.4em] mb-8">
-          / 04 · HOW WE COMPUTE
+          / 05 · HOW WE COMPUTE
         </h2>
 
         <div className="space-y-6">
@@ -615,10 +632,10 @@ export default async function MatchDetailPage({
         </p>
       </section>
 
-      {/* ── /05 · RUN IT YOURSELF (embedded live sim) ─ */}
+      {/* ── /06 · RUN IT YOURSELF (embedded live sim) ─ */}
       <section className="mx-auto max-w-4xl w-full px-6 sm:px-10 pb-20 border-t border-line/40 pt-16">
         <h2 className="font-mono text-gold text-[10px] tracking-[0.4em] mb-3">
-          / 05 · RUN IT YOURSELF
+          / 06 · RUN IT YOURSELF
         </h2>
         <p className="text-mute text-sm leading-relaxed mb-10 max-w-xl">
           別只看我們的數字。直接在瀏覽器裡跑一輪完整的 Monte Carlo,

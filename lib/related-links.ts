@@ -230,6 +230,11 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
   ],
   "/ethics": [
     {
+      href: "/steelman",
+      kicker: "steelman",
+      title: "5 strongest objections against ZONE 27",
+    },
+    {
       href: "/audit",
       kicker: "audit",
       title: "Model Report S05 · Disclosure Philosophy",
@@ -239,10 +244,22 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
       kicker: "coverage",
       title: "00 BRAND BOUNDARY · NEVER list",
     },
+  ],
+  "/steelman": [
     {
-      href: "/manifesto",
-      kicker: "manifesto",
-      title: "倒置宣言 · 4 倒置之中 monetization",
+      href: "/ethics",
+      kicker: "ethics",
+      title: "8 binding NOT-DO commitments",
+    },
+    {
+      href: "/audit",
+      kicker: "audit",
+      title: "Model Report S05 · Disclosure Philosophy",
+    },
+    {
+      href: "/calibration",
+      kicker: "calibration",
+      title: "Brier score 引擎自評 · FiveThirtyEight pattern",
     },
   ],
   "/roadmap": [
