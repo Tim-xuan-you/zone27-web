@@ -423,11 +423,11 @@ repeat 10,000 times → aggregate
               />
               <LensRow
                 lens="Pitcher Fatigue"
-                angle="休息天數 + IP load · 投手疲勞警訊"
-                status="LENS · planned"
-                statusTone="loss"
-                tier="BLACK CARD"
-                tierTone="gold"
+                angle="WHIP + BB9 + K9 command stability proxy(v0.1)· v0.2 = rest_days + IP load"
+                status="✓ LIVE · R38 W-A · v0.1 PROXY"
+                statusTone="gold"
+                tier="FREE 預覽 · 將來 BLACK CARD"
+                tierTone="bone"
               />
               <LensRow
                 lens="Underdog Tracker"
@@ -505,6 +505,46 @@ repeat 10,000 times → aggregate
           </p>
         </blockquote>
       </Section>
+
+      {/* ── Round 38 W-G · Lens Lifetime Pledge · Agent A #3 ship ──
+          Patek Philippe「service since 1839」 pattern · permanent banner
+          下方的 brand IP 物理 codify。 SaaS 標準是「silently rotate models
+          when degrade」 · ZONE 27 倒置:every lens shipped stays viewable
+          forever · 不 silently retire · 不 silently swap · deprecate +
+          version 路線。 Patek inverse 邏輯:identity continuity in a market
+          where 報馬仔 deletes losing weeks。 brand IP「方法公開 · 不藏不
+          換」 延伸到 generational time axis。 */}
+      <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 py-12 border-t border-line/40">
+        <div className="border border-gold/40 bg-slate/40 p-6 sm:p-8 glow-soft">
+          <p
+            lang="en"
+            className="font-mono text-gold text-[10px] tracking-[0.4em] mb-4"
+          >
+            06 · LENS LIFETIME PLEDGE
+          </p>
+          <h2 className="text-2xl sm:text-3xl text-bone font-light tracking-tight mb-5 leading-tight">
+            每個 ship 過的 lens · 永遠看得到
+          </h2>
+          <p className="text-mute leading-relaxed text-base mb-4">
+            SaaS 標準是 model 衰退時 silently rotate / 偷偷換掉 · 訪客不會
+            知道。 ZONE 27 倒置:每個 ship 過的 engine 變體 / 每個 ship 過的
+            analytical lens · 永遠在 production 看得到。 我們不{" "}
+            <span className="text-loss/80">silently retire</span> ·
+            我們{" "}<span className="text-gold">deprecate + version</span>。
+          </p>
+          <p className="text-mute leading-relaxed text-base mb-4">
+            Patek Philippe「自 1839 服務每一隻 Patek」 ·{" "}
+            <span className="text-bone">ZONE 27「自 v0.1 起每個 lens 永久看得到」</span>。
+            未來訪客 fork 我們的 GitHub repo · git log 找 v0.1 的 calibration
+            drift · 都查得到。 報馬仔 deletes losing weeks · 我們 deprecate
+            with 永久 audit trail。
+          </p>
+          <p className="font-mono text-mute/80 text-[10px] tracking-[0.3em] leading-relaxed">
+            ⚓ 修改此 pledge 需 30 天前 /changelog 公告 · 同 /audit S05
+            PRE-COMMIT pattern · Costly Signaling 100×。
+          </p>
+        </div>
+      </section>
 
       <FounderSignOff>
         <p>

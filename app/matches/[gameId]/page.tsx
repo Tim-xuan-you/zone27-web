@@ -19,6 +19,7 @@ import AdvancedStatBar from "@/components/AdvancedStatBar";
 import ConfidenceStars from "@/components/ConfidenceStars";
 import VibeCheck from "@/components/VibeCheck";
 import ParkFactorLens from "@/components/ParkFactorLens";
+import PitcherFatigueLens from "@/components/PitcherFatigueLens";
 import EngineStamp from "@/components/EngineStamp";
 import { getCpblAdvancedByName } from "@/lib/cpbl-advanced";
 import RelatedReading from "@/components/RelatedReading";
@@ -26,6 +27,7 @@ import FollowMatchButton from "@/components/FollowMatchButton";
 import MatchNoteEditor from "@/components/MatchNoteEditor";
 import MyTeamMatchNote from "@/components/MyTeamMatchNote";
 import UserPredictionPicker from "@/components/UserPredictionPicker";
+import TeamPickPanel from "@/components/TeamPickPanel";
 
 // ── ISR · Re-render daily so updates to lib/matches.ts ship within
 // 24h without a full redeploy. Pairs with isMatchDataStale() rendering
@@ -155,6 +157,17 @@ export default async function MatchDetailPage({
           <span>FIRST PITCH · {m.startTime}</span>
         </div>
 
+        {/* ── Round 38 W-B · TeamPickPanel header variant · Agent C P1
+            ship · 對你說話 hook for first-time WhatsApp-link landers ·
+            未 set localStorage z27_team 的訪客在這裡 inline pick ·
+            picked 後 MyTeamMatchNote 自動 fire 對你的隊說話 · 不對球迷
+            說話 · fan-grammar moat per [[feedback-zone27-audience-fans-
+            not-engineers]]。 Brand IP:0 cookie · 0 server · 純 localStorage
+            same as /track-record TeamPickPanel pattern。 */}
+        <div className="mt-6 pt-4 border-t border-line/40">
+          <TeamPickPanel variant="header" />
+        </div>
+
         {/* ── Round 30 Wave 6 · FOLLOW BUTTON ───────────────
             First unlock feature for FREE TIER members(per Tim 4th
             canary「使用 · 解鎖功能」)。 Anonymous visitors 看「→ 登入
@@ -255,6 +268,39 @@ export default async function MatchDetailPage({
               </p>
             </div>
           </div>
+          {/* ── Round 38 W-E · Coin-Flip Baseline 對照 strip · Agent A #2 ship
+              FanGraphs 4-mode pattern · 「null hypothesis 永遠 visible」 brand
+              IP · 不只 publish 引擎信心 · 也 publish coin-flip baseline 該
+              比賽如果沒 information 信號 = 50%/50% · 引擎 number 減去 50%
+              才是 real edge claim · Pratfall + Method Public 同時 fire ·
+              displacement mission 對 玩運彩+報馬仔:他們從不 publish baseline
+              因為 publishing 等於暴露「跟 coin flip 一樣」。 brand-pure
+              static · 0 deps · 0 cost · 1 SVG-free row。 */}
+          <div className="mt-6 pt-5 border-t border-line/40 grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="border border-line/40 bg-slate/50 p-3">
+              <p className="font-mono text-mute/70 text-[9px] tracking-[0.3em] mb-1">
+                ENGINE MODE · v0.2 PITCHER-ONLY MC
+              </p>
+              <p className="font-mono text-gold text-base tabular">
+                {Math.max(m.home.winRate, m.away.winRate)}% / {Math.min(m.home.winRate, m.away.winRate)}%
+              </p>
+              <p className="font-mono text-mute/80 text-[10px] tracking-[0.22em] mt-1">
+                K/9 · BB/9 · HR/9 · N=10,000 sim
+              </p>
+            </div>
+            <div className="border border-line/40 bg-slate/30 p-3">
+              <p className="font-mono text-mute/70 text-[9px] tracking-[0.3em] mb-1">
+                NULL · COIN-FLIP BASELINE
+              </p>
+              <p className="font-mono text-mute text-base tabular">
+                50% / 50%
+              </p>
+              <p className="font-mono text-mute/80 text-[10px] tracking-[0.22em] mt-1">
+                0 信息 · 純機率 · 引擎邊際 = {Math.abs(Math.max(m.home.winRate, m.away.winRate) - 50)} pp
+              </p>
+            </div>
+          </div>
+
           {/* Round 31 Wave B · datestamped engine stamp · 預測 lock-in 物理證據
               + BUILD chip 直連 GitHub commit · audit trail 1-click 可達 */}
           <div className="mt-6 pt-5 border-t border-line/40">
@@ -399,6 +445,22 @@ export default async function MatchDetailPage({
           / 01C · PARK FACTOR · 場館 lens(home advantage · 非 prediction)
         </h2>
         <ParkFactorLens venue={m.venue} />
+      </section>
+
+      {/* ── PITCHER FATIGUE LENS(v0.1 proxy) · Round 38 W-A 第 3 個 Lens
+          Variety 真實 LIVE · per [[feedback-no-waiting-rule]] · R36 W-A
+          Lens Variety table 第 4 個 candidate 落地。 v0.1 PROXY · 用 existing
+          WHIP + BB9 + K9 季累計 derive command stability proxy(不是
+          true fatigue · v0.2 需 ingest rest_days + season_ip)· brand IP
+          Pratfall + Costly Signaling + Disclosure 三 axiom 同時 fire。 */}
+      <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-20">
+        <h2 className="font-mono text-gold text-[10px] tracking-[0.4em] mb-6">
+          / 01D · PITCHER FATIGUE · 投手疲勞 lens(v0.1 PROXY · 非 prediction)
+        </h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <PitcherFatigueLens pitcher={m.home.pitcher} teamName={m.home.en} />
+          <PitcherFatigueLens pitcher={m.away.pitcher} teamName={m.away.en} />
+        </div>
       </section>
 
       {/* ── SCORE DISTRIBUTION ─────────────────────── */}

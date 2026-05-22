@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { FOUNDERS_CLAIMED, FOUNDERS_TOTAL } from "@/lib/founders-stats";
 
 // Server-side Taipei today. Footer is a server component, so this
 // re-evaluates on each render — meaning every static-built page is
@@ -203,6 +204,29 @@ export default function Footer() {
             className="font-mono text-mute/60 group-hover:text-mute text-[9px] tracking-[0.3em] mt-1.5 transition-colors"
           >
             公開可驗證 · 不收下注佣 · 不推薦投注 · OPEN ENGINE · NO COMMISSION · NO BET ADVICE
+          </p>
+        </Link>
+
+        {/* ── Round 38 W-F · Founders count static row · Agent A #5 ship
+            Plausible「18k subscribers · 260B pageviews」 + Are.na「18,791
+            people support Are.na」 pattern · 公開 數字 但 NOT 動畫 · NOT
+            live counter · NOT FOMO · 靜態 · Costly Signaling「小數字也願
+            意公開」 brand IP · 同 [[zone27-disclosure-philosophy]] 延伸 ·
+            一旦真實 founders Q3 onboard 後此 row 數字自動更新(因 import
+            from claimedFounders.length)· 不需 component change。 */}
+        <Link
+          href="/founders/ledger"
+          className="block text-center pt-2 pb-3 group hover:bg-slate/10 transition-colors -mx-6 sm:-mx-10 px-6 sm:px-10"
+          aria-label="Founders 27 公開分配帳本 · /founders/ledger 完整 process transparency"
+        >
+          <p className="font-mono text-mute/70 group-hover:text-mute text-[9px] tracking-[0.3em] transition-colors">
+            <span lang="en" className="text-gold">{FOUNDERS_CLAIMED}</span>{" "}
+            / {FOUNDERS_TOTAL} 創始席位 ·{" "}
+            <span lang="en">SYSTEM-TEST PLACEHOLDERS · Q3 取代</span>
+            <span className="mx-2 text-mute/60">·</span>
+            <span lang="en" className="text-mute/80 group-hover:text-gold underline-offset-4 group-hover:underline transition-colors">
+              PUBLIC LEDGER →
+            </span>
           </p>
         </Link>
 

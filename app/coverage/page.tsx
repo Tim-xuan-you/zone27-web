@@ -220,6 +220,39 @@ export default function CoveragePage() {
             </div>
           </header>
 
+          {/* ── 00 NEVER COVER ABOVE-THE-FOLD · Round 38 W-D ─
+              Agent C P4 ship · 玩運彩 escapee 最強 60-second proof-of-
+              difference 從 section 05 ~80% scroll 移到 above-the-fold ·
+              compact NeverCoverChip preview · 完整 5-item NEVER list 仍
+              在 deep section 05。 P3 casual visitor + P2 sabermetrician
+              + P4 escapee 三 persona 同時 helped。 brand IP「品牌定義 not
+              限制」 axiom 物理 visible 在 visitor 進入後第一個 fold。 */}
+          <section className="py-10 border-b border-line/40 section-reveal">
+            <p lang="en" className="font-mono text-gold/90 text-[10px] tracking-[0.45em] mb-3">
+              00 · BRAND BOUNDARY · WHAT WE&apos;LL NEVER COVER
+            </p>
+            <p className="text-bone text-base sm:text-lg leading-relaxed mb-5 max-w-2xl">
+              來自 玩運彩 / 報馬仔 / 殺手平台 / 任何博彩生態 ·{" "}
+              <span className="text-gold">我們永遠不接</span>。
+              下方是完整 5-item list 的 quick preview · 點 §05 看 reasoning。
+            </p>
+            <div className="flex gap-2 flex-wrap">
+              {NEVER_COVER.map((item, idx) => (
+                <span
+                  key={idx}
+                  className="font-mono text-[10px] tracking-[0.22em] px-2.5 py-1.5 border border-loss/40 bg-loss/5 text-mute"
+                >
+                  ✕ {item.name.split(" ")[0]}
+                </span>
+              ))}
+            </div>
+            <p className="mt-4 font-mono text-mute/70 text-[10px] tracking-[0.25em]">
+              <Link href="#never-cover" className="text-gold hover:text-gold-soft transition-colors">
+                ↓ 完整 reasoning(§05)
+              </Link>
+            </p>
+          </section>
+
           {/* ── 01 PHILOSOPHY ─────────────────────────── */}
           <section className="py-12 border-b border-line/40 section-reveal">
             <p lang="en" className="font-mono text-mute text-[10px] tracking-[0.45em] mb-4">
@@ -298,7 +331,7 @@ export default function CoveragePage() {
           </section>
 
           {/* ── 05 NEVER COVER ────────────────────────── */}
-          <section className="py-12 border-b border-line/40 section-reveal">
+          <section id="never-cover" className="py-12 border-b border-line/40 section-reveal">
             <p lang="en" className="font-mono text-mute text-[10px] tracking-[0.45em] mb-4">
               05 WHAT WE&apos;LL NEVER COVER
             </p>

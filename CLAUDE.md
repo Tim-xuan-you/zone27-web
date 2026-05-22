@@ -188,7 +188,7 @@ ZONE 27 與 **BOTTOM 27**(Tim 的棒球手遊)是雙生品牌:
 
 ---
 
-## 🗺️ 當前路由(v0.28 · Round 30 W5-W14 + Round 31 W-A→W-X4 · 2026-05-22 · 32 visitor-discoverable · v0.29 等 Tim 拍板 milestone)
+## 🗺️ 當前路由(v0.28 · Round 30 W5-W14 + Round 31-38 · 2026-05-22 · 34 visitor-discoverable · v0.29 等 Tim 拍板 milestone · +/member/submit +/annual/2026 · 3 lenses LIVE per R37-W-B/W-D + R38-W-A · VibeCheck + ParkFactor + PitcherFatigue)
 
 ```
 首頁 + 動線
@@ -300,7 +300,10 @@ OG + favicon + chrome
 
 ## ⚙️ Global components(Round 2/5/12/28/30/31)
 
-- `<CommandPalette />` · 全站 ⌘K/Ctrl-K palette · **32 visitor-discoverable routes** 索引(Round 31 W-S 加 /founders/ledger + W-X3 加 /membership/black-card 後 · /admin · /auth/* 不在 palette)(layout.tsx)
+- `<CommandPalette />` · 全站 ⌘K/Ctrl-K palette · **34 visitor-discoverable routes** 索引(R30 W10 加 /member/submit · R33 W-E 加 /annual/2026 · R31 W-S 加 /founders/ledger · W-X3 加 /membership/black-card 後 · /admin · /auth/* 不在 palette)(layout.tsx)
+- `<VibeCheck />` (Round 37 W-B · components/) · streak descriptive lens · Tversky/Gilovich 1985 hot hand fallacy disclaimer · /matches/[gameId] section 01B
+- `<ParkFactorLens />` (Round 37 W-D · components/) · 4 CPBL 場館 home advantage visualizer · lib/cpbl-parks.ts reference data · ESTIMATE methodology + PR invitation · /matches/[gameId] section 01C
+- `<PitcherFatigueLens />` (Round 38 W-A · components/) · v0.1 PROXY · WHIP + BB9 + K9 季累計 derive command stability · v0.2 commit to rest_days + season_ip ingestion · /matches/[gameId] section 01D
 - `<CmdKTrigger />` · 雙 variant:
   - `variant="chip"` (default) · Nav 右上方 ⌘K 提示按鈕(desktop)
   - `variant="icon"` (Round 12) · Nav mobile 2nd row 右側 ⌕ 圖示(palette 全站可達)
