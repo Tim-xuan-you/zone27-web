@@ -26,6 +26,7 @@ import MatchupHistoryLens from "@/components/MatchupHistoryLens";
 import LensTrace, { ENGINE_V02_TRACE_STEPS } from "@/components/LensTrace";
 import MatchViewTracker from "@/components/MatchViewTracker";
 import EngineStamp from "@/components/EngineStamp";
+import CopyLinkButton from "@/components/CopyLinkButton";
 import { getCpblAdvancedByName } from "@/lib/cpbl-advanced";
 import RelatedReading from "@/components/RelatedReading";
 import FollowMatchButton from "@/components/FollowMatchButton";
@@ -317,8 +318,15 @@ export default async function MatchDetailPage({
 
           {/* Round 31 Wave B · datestamped engine stamp · 預測 lock-in 物理證據
               + BUILD chip 直連 GitHub commit · audit trail 1-click 可達 */}
-          <div className="mt-6 pt-5 border-t border-line/40">
+          <div className="mt-6 pt-5 border-t border-line/40 flex flex-wrap items-baseline justify-between gap-3">
             <EngineStamp />
+            {/* Round 44 W-D · Agent L GAP-1 fix · CopyLinkButton on /matches/
+                [gameId] · highest-volume share route(WhatsApp / LINE landings)
+                previously had no share button · CopyLinkButton 已 wired
+                /methodology · /audit · /founders · /coverage · /manifesto ·
+                /discipline · 此處 finally 補上 · refTag=match-{gameId} 帶
+                per-match attribution(0 tracking · 純 URL query)。 */}
+            <CopyLinkButton refTag={`match-${m.id}`} />
           </div>
         </div>
       </section>

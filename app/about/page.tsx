@@ -271,10 +271,21 @@ export default function AboutPage() {
           但台灣的棒球資訊產業,卻長期停留在「直覺說書人」的階段。
           我覺得這群熱愛棒球的硬核球迷,值得擁有自己的 Bloomberg、自己的 TradingView、自己的 Robinhood。
         </p>
+        {/* Round 44 W-C · Agent K DEEPEST canonical sentence · 此 sentence
+            在 4 key pages 重複 fire(/about Prologue · /ethics hero · /steelman
+            hero · /annual hero)· brand-IP moat 統一物理 codify · Tim 簽名
+            個人累積 vs 玩運彩+報馬仔 anonymity+deletion structurally 不可
+            replicate。 */}
         <p className="text-bone">
           ZONE 27 是我給這群人 —— 包括我自己 —— 的一封情書。
         </p>
-        <p className="font-mono text-mute text-[10px] tracking-[0.3em] mt-8">
+        <p className="text-mute mt-5 leading-relaxed border-l-2 border-gold/40 pl-5 py-2">
+          <strong className="text-bone">每一個承諾 Tim 簽名 · 可被驗證 ·
+          違反任何一條 = <Link href="/ethics" className="text-gold underline-offset-4 hover:underline">/ethics</Link> 紅字永久標 · 不可刪</strong> ·
+          這是 ZONE 27 跟 玩運彩+報馬仔 anonymity+deletion model 的
+          structural asymmetry。
+        </p>
+        <p className="font-mono text-mute text-[10px] tracking-[0.3em] mt-6">
           — TIM · FOUNDER · CPBL 球迷 27 年
         </p>
       </Chapter>

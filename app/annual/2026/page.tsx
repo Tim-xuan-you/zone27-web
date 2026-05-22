@@ -6,6 +6,7 @@ import RelatedReading from "@/components/RelatedReading";
 import FounderSignOff from "@/components/FounderSignOff";
 import ArticleMeta from "@/components/ArticleMeta";
 import EngineStamp from "@/components/EngineStamp";
+import ReproducibilityReceipt from "@/components/ReproducibilityReceipt";
 import {
   FOUNDERS_TOTAL,
   FOUNDERS_CLAIMED,
@@ -156,6 +157,16 @@ export default function AnnualReport2026Page() {
             有 metric 才 publish · 我們從 Year 0 就承諾 every 5/31 publish ·
             commitment device 不可造假。
           </p>
+
+          {/* Round 44 W-C · Agent K DEEPEST canonical sentence · 4th of 4
+              key pages 統一 brand IP moat sentence · 同 /about Prologue ·
+              /ethics hero · /steelman hero。 */}
+          <p className="mt-6 text-bone text-base sm:text-lg leading-relaxed border-l-4 border-gold pl-5 py-2 max-w-2xl">
+            <strong>每一個承諾 Tim 簽名 · 可被驗證 · 違反任何一條 = <Link href="/ethics" className="text-gold underline-offset-4 hover:underline">/ethics</Link> 紅字
+            永久標 · 不可刪</strong> · 包括此 page 每年 5/31 publish 的承諾 · 同
+            binding · 違反 = brand 信用 collapse · 不分 success or failure。
+          </p>
+
           <div className="mt-6 mb-2">
             <ArticleMeta readingMin={5} sample={{ current: METRICS.engineSampleN, threshold: 30 }} />
           </div>
@@ -218,6 +229,18 @@ export default function AnnualReport2026Page() {
             ⚠ PRE-LAUNCH · 所有付費相關 metrics = 0。 Payment infrastructure
             (TapPay / 綠界個人版)未拍板 · brand 域名未買 · Q3 2026 ship。
           </p>
+
+          {/* Round 44 W-B · ReproducibilityReceipt drop-in · /annual/2026
+              METRICS block · per IJCAI 2026 standard · git+seed+n+dataAt
+              audit trail per published Year 0 number。 */}
+          <div className="mt-5">
+            <ReproducibilityReceipt
+              seed={null}
+              dataAt="2026-05-22"
+              n={METRICS.receiptsTotal}
+              fileLink="https://github.com/Tim-xuan-you/zone27-web/blob/main/app/annual/2026/page.tsx"
+            />
+          </div>
         </section>
 
         {/* ── WHAT FAILED · canonical Pratfall ──────── */}

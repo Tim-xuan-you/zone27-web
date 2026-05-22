@@ -126,6 +126,15 @@ export default function EthicsPage() {
             </p>
           </div>
 
+          {/* Round 44 W-C · Agent K DEEPEST canonical sentence · 統一 brand IP
+              moat sentence in 4 key pages(此處 /ethics · 同 /about Prologue ·
+              /steelman hero · /annual hero)。 */}
+          <p className="mt-6 text-bone text-base sm:text-lg leading-relaxed border-l-4 border-gold pl-5 py-2 max-w-2xl">
+            <strong>每一個承諾 Tim 簽名 · 可被驗證 · 違反任何一條 = 此 page 紅字
+            永久標 · 不可刪</strong> · ZONE 27 vs 玩運彩+報馬仔 anonymity+deletion
+            model 的 structural asymmetry。
+          </p>
+
           <div className="mt-6">
             <ArticleMeta readingMin={4} />
           </div>

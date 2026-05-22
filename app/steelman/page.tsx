@@ -137,6 +137,14 @@ export default function SteelmanPage() {
             </p>
           </div>
 
+          {/* Round 44 W-C · Agent K DEEPEST canonical sentence · 同 /about
+              Prologue · /ethics hero · /annual hero。 */}
+          <p className="mt-6 text-bone text-base sm:text-lg leading-relaxed border-l-4 border-gold pl-5 py-2 max-w-2xl">
+            <strong>每一個承諾 Tim 簽名 · 可被驗證 · 違反任何一條 = <Link href="/ethics" className="text-gold underline-offset-4 hover:underline">/ethics</Link> 紅字
+            永久標 · 不可刪</strong> · 包括此 page 的 5 objections 自我 self-update
+            mechanism · 同樣 binding。
+          </p>
+
           <div className="mt-6">
             <ArticleMeta readingMin={6} />
           </div>
