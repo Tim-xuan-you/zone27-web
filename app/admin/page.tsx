@@ -14,6 +14,7 @@ import {
 } from "@/lib/founders-stats";
 import { getWaitlistCount } from "@/lib/waitlist-stats";
 import { getSession } from "@/lib/supabase/server";
+import AdminTierSwitcher from "@/components/AdminTierSwitcher";
 
 export const metadata: Metadata = {
   title: "Admin · Tim's ZONE 27 ops dashboard preview",
@@ -114,6 +115,18 @@ export default async function AdminPage() {
         </section>
 
         <div className="mx-auto w-32 gold-line mb-12" />
+
+        {/* ── Round 36 W-D · TIER SWITCHER · founder dev tool ────
+            Tim 14+ canary fire question:「我這個設計者 · 我要怎麼樣可以
+            在各個付費程度裡面 · 隨意切換看各個功能有沒有到位?」 brilliant
+            founder dogfood requirement · ship 4-tier preview switcher。
+            localStorage-based · sticky banner 全 site 顯示 · click 切 +
+            reload · banner click cancel 回真實 session。 Phase 1 MVP
+            client-side visual preview · Phase 2 升 cookie-based 讓 server
+            tier-aware components 也 honor preview tier。 */}
+        <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-12">
+          <AdminTierSwitcher />
+        </section>
 
         {/* ── KPI ROW (live numbers · no actions) ──── */}
         <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-16">
