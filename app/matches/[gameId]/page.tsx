@@ -25,6 +25,7 @@ import BullpenDepthLens from "@/components/BullpenDepthLens";
 import MatchupHistoryLens from "@/components/MatchupHistoryLens";
 import LensTrace, { ENGINE_V02_TRACE_STEPS } from "@/components/LensTrace";
 import MatchViewTracker from "@/components/MatchViewTracker";
+import AnonPickWidget from "@/components/AnonPickWidget";
 import EngineStamp from "@/components/EngineStamp";
 import CopyLinkButton from "@/components/CopyLinkButton";
 import { getCpblAdvancedByName } from "@/lib/cpbl-advanced";
@@ -217,6 +218,17 @@ export default async function MatchDetailPage({
           engineHomePicked={m.home.winRate >= m.away.winRate}
           finalWinner={m.finalResult?.winner ?? null}
         />
+      </section>
+
+      {/* ── R45 W-D · Agent L DEEPEST · Anonymous Lens-Pick Loop ─────
+          Pre-engine-reveal pick widget · IKEA effect 訪客 invested 個人
+          calibration vs engine · localStorage-only · 0 auth · 0 server ·
+          per [[zone27-disclosure-philosophy]] storage key zone27_anon_picks_v1
+          公開 in /audit S06。 0 gating · skip 隨時可達 · brand IP「不打擾就是
+          禮物」 axiom 守。 client component · SSR-safe discriminated union
+          mount pattern。 */}
+      <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-12">
+        <AnonPickWidget match={m} />
       </section>
 
       {/* ── THE MASSIVE WIN BAR ────────────────────── */}

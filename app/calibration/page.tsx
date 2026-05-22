@@ -6,6 +6,7 @@ import RelatedReading from "@/components/RelatedReading";
 import FounderSignOff from "@/components/FounderSignOff";
 import ArticleMeta from "@/components/ArticleMeta";
 import ReproducibilityReceipt from "@/components/ReproducibilityReceipt";
+import AnonCalibrationStrip from "@/components/AnonCalibrationStrip";
 import { getFinalizedMatches, type Match } from "@/lib/matches";
 
 export const metadata: Metadata = {
@@ -307,6 +308,13 @@ export default function CalibrationPublicPage() {
             </div>
           ) : null}
         </section>
+
+        {/* ── R45 W-E · Agent L DEEPEST · Anonymous Calibration Strip
+            Visitor 個人 picks vs engine track record · client-render only ·
+            0 server-side · ZONE 27 看不到 individual data · per disclosure
+            axiom storage key zone27_anon_picks_v1 公開 in /audit S06。
+            Only renders when localStorage has picks · progressive enhancement。 */}
+        <AnonCalibrationStrip variant="calibration" />
 
         {/* ── DISPLACEMENT MISSION · what tipster sites can't ship ── */}
         <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-16 border-t border-line/40 pt-12">

@@ -308,6 +308,8 @@ OG + favicon + chrome
 - `<UnderdogLens />` (Round 39 W-B · components/) · 黑馬機率 lens · upset probability + dominance gap · 0 contrarian play · 0 prediction 偏置 · 純 viz from existing winRate data · /matches/[gameId] section 01E
 - `<BullpenDepthLens />` (Round 40 W-A · components/) · v0.1 PROXY · team recent W-L derive late-inning resilience proxy · v0.2 commit to bullpen ERA + IP usage + last 7d ingestion · /matches/[gameId] section 01F
 - `<MatchupHistoryLens />` (Round 40 W-B · components/) · 7th LIVE Lens Variety · real H2H from finalized matches.ts · N=0/1 educational lens · N≥10 真實 trend · /matches/[gameId] section 01G · 7-LENS CANVAS COMPLETE
+- `<AnonPickWidget />` (Round 45 W-B · components/) · Agent L DEEPEST · pre-engine-reveal pick widget on /matches/[gameId] · localStorage-only zone27_anon_picks_v1 · IKEA effect retention loop · 3 states discriminated union mount · 0 auth · 0 server · 0 PII
+- `<AnonCalibrationStrip />` (Round 45 W-C · components/) · Agent L DEEPEST · 2 variants(calibration full + homepage compact)· 您 vs engine personal track record · localStorage only · conditional render when has picks
 - `<CmdKTrigger />` · 雙 variant:
   - `variant="chip"` (default) · Nav 右上方 ⌘K 提示按鈕(desktop)
   - `variant="icon"` (Round 12) · Nav mobile 2nd row 右側 ⌕ 圖示(palette 全站可達)

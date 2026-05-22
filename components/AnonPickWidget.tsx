@@ -1,0 +1,354 @@
+"use client";
+
+// ── ZONE 27 · Anonymous Pick Widget ─────────────────────
+// Round 45 W-B · Agent L DEEPEST sharp call · client component on
+// /matches/[gameId] · per [[feedback-no-waiting-rule]] iron rule。
+//
+// Mount BEFORE engine output reveal · invite anonymous visitor to commit
+// a pick before seeing the engine number · IKEA effect · 訪客 invested
+// 個人 calibration vs engine over time · WITHOUT auth / email / cookies。
+//
+// 3 states(discriminated union mount flag per R40 W-G + R43 W-B pattern):
+//   1. NOT_PICKED · 2 buttons(home / away)+ skip ↓ explicit
+//   2. PICKED_PRE_REVEAL · 您 picked X · engine 在下方 · 賽後對照
+//   3. REVEALED · 您 picked X · engine picked Y · actual Z · ✓PROVED / ✕DIVERGED
+//
+// brand IP 全 ✓:
+//   - 0 gating · 「skip」 button always present · visitor never forced
+//   - 0 cookies / 0 server / 0 PII · 純 localStorage zone27_anon_picks_v1
+//   - per [[zone27-disclosure-philosophy]] · S06 key 公開 in /audit
+//   - per [[feedback-zone27-audience-fans-not-engineers]] · 球迷
+//     pick before reveal = fan-grammar value(同 LINE/dcard 球迷 share
+//     預測 native culture)
+//   - per Pratfall + Costly Signaling · 訪客自己 PROVED/DIVERGED 跟
+//     engine 同 reliability discipline
+//
+// 跟 UserPredictionPicker(logged-in version)區別:
+//   - UserPredictionPicker writes to Supabase user_metadata
+//   - AnonPickWidget writes to localStorage
+//   - 兩 widget 共存 on /matches/[gameId] · UserPredictionPicker 在
+//     logged-in flow · AnonPickWidget 在 pre-engine-reveal pre-flow
+//   - 兩個 widget 目標不同:UserPredictionPicker = 「您已登入會員 track
+//     record」 · AnonPickWidget = 「先 pick 再 peek engine」 IKEA loop
+// ─────────────────────────────────────────────────────
+
+import { useEffect, useState } from "react";
+import Link from "next/link";
+import {
+  getAnonPickForMatch,
+  pushAnonPick,
+  type AnonPick,
+} from "@/lib/anon-picks";
+import type { Match } from "@/lib/matches";
+
+type Props = {
+  match: Match;
+};
+
+type WidgetState =
+  | { mounted: false }
+  | { mounted: true; pick: AnonPick | null };
+
+export default function AnonPickWidget({ match }: Props) {
+  const [state, setState] = useState<WidgetState>({ mounted: false });
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setState({ mounted: true, pick: getAnonPickForMatch(match.id) });
+  }, [match.id]);
+
+  // SSR-safe: render skeleton during SSR
+  if (!state.mounted) {
+    return (
+      <article className="bg-slate/30 border border-line/40 p-4 sm:p-5 min-h-[120px]">
+        <p
+          lang="en"
+          className="font-mono text-mute/60 text-[10px] tracking-[0.35em]"
+        >
+          / EPISTEMIC GYM · loading...
+        </p>
+      </article>
+    );
+  }
+
+  const homeFav = match.home.winRate >= match.away.winRate;
+  const enginePickedSide: "home" | "away" = homeFav ? "home" : "away";
+  const engineConfidence = Math.max(match.home.winRate, match.away.winRate);
+  const finalResult = match.finalResult;
+
+  // ── STATE 1 · NOT_PICKED ──────────────────────────────
+  if (!state.pick) {
+    const handlePick = (side: "home" | "away") => {
+      pushAnonPick({
+        matchId: match.id,
+        pickedSide: side,
+        enginePickedSide,
+        engineConfidence,
+      });
+      // Re-read after write to update widget state
+      setState({ mounted: true, pick: getAnonPickForMatch(match.id) });
+    };
+
+    return (
+      <article className="bg-slate/40 border border-gold/40 p-4 sm:p-5">
+        <div className="flex items-baseline justify-between gap-3 flex-wrap mb-3">
+          <p
+            lang="en"
+            className="font-mono text-gold text-[10px] tracking-[0.35em]"
+          >
+            🎯 EPISTEMIC GYM · pick before peeking
+          </p>
+          <span
+            lang="en"
+            className="font-mono text-mute/70 text-[9px] tracking-[0.3em]"
+          >
+            ANON · localStorage · 0 auth
+          </span>
+        </div>
+        <p className="text-bone text-base sm:text-lg leading-relaxed mb-4">
+          先 pick 哪邊會贏 · 再看引擎 · 賽後對照 ·{" "}
+          <span className="text-gold">您 own 個人 track record vs engine</span> ·
+          純 localStorage · 永遠不傳 server。
+        </p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-3">
+          <button
+            type="button"
+            onClick={() => handlePick("home")}
+            className="px-4 py-3 sm:py-4 min-h-[44px] border border-gold/40 bg-slate/50 hover:bg-gold/10 hover:border-gold text-bone hover:text-gold font-mono text-xs tracking-[0.25em] transition-colors"
+          >
+            <span className="block text-[10px] text-mute/70 tracking-[0.3em] mb-1">
+              HOME · 我選
+            </span>
+            <span className="block text-base">{match.home.name}</span>
+          </button>
+          <button
+            type="button"
+            onClick={() => handlePick("away")}
+            className="px-4 py-3 sm:py-4 min-h-[44px] border border-gold/40 bg-slate/50 hover:bg-gold/10 hover:border-gold text-bone hover:text-gold font-mono text-xs tracking-[0.25em] transition-colors"
+          >
+            <span className="block text-[10px] text-mute/70 tracking-[0.3em] mb-1">
+              AWAY · 我選
+            </span>
+            <span className="block text-base">{match.away.name}</span>
+          </button>
+        </div>
+        <p className="font-mono text-mute/70 text-[9px] tracking-[0.25em] leading-relaxed">
+          ⚓ 不 pick 也可以 · 直接滾下方看 engine · 此 widget 是 optional ·
+          「不打擾就是禮物」 axiom 守。{" "}
+          <Link
+            href="/audit"
+            className="text-gold/70 hover:text-gold underline-offset-4 hover:underline"
+          >
+            storage key 公開 /audit S06
+          </Link>
+        </p>
+      </article>
+    );
+  }
+
+  // ── STATE 2 · PICKED · pre-reveal (no finalResult yet) ─
+  if (!finalResult) {
+    const yourSide = state.pick.pickedSide;
+    const yourTeam = yourSide === "home" ? match.home : match.away;
+    const engineTeam = enginePickedSide === "home" ? match.home : match.away;
+    const agreeWithEngine = yourSide === enginePickedSide;
+
+    return (
+      <article className="bg-slate/40 border border-gold/40 glow-soft p-4 sm:p-5">
+        <div className="flex items-baseline justify-between gap-3 flex-wrap mb-3">
+          <p
+            lang="en"
+            className="font-mono text-gold text-[10px] tracking-[0.35em]"
+          >
+            ✓ EPISTEMIC GYM · 您 picked
+          </p>
+          <span
+            lang="en"
+            className="font-mono text-mute/70 text-[9px] tracking-[0.3em]"
+          >
+            LOCKED · LOCAL ONLY
+          </span>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-3">
+          <div className="border border-gold/60 bg-gold/10 p-3">
+            <p
+              lang="en"
+              className="font-mono text-gold/90 text-[9px] tracking-[0.3em] mb-1"
+            >
+              您 PICKED
+            </p>
+            <p className="text-bone text-lg">{yourTeam.name}</p>
+            <p
+              lang="en"
+              className="font-mono text-mute/80 text-[10px] tracking-[0.22em] mt-1"
+            >
+              {yourSide === "home" ? "HOME" : "AWAY"} · 您 locked
+            </p>
+          </div>
+          <div className="border border-line/60 bg-slate/40 p-3">
+            <p
+              lang="en"
+              className="font-mono text-mute/70 text-[9px] tracking-[0.3em] mb-1"
+            >
+              ENGINE PICKED
+            </p>
+            <p className="text-mute text-lg">{engineTeam.name}</p>
+            <p
+              lang="en"
+              className="font-mono text-mute/70 text-[10px] tracking-[0.22em] mt-1"
+            >
+              {enginePickedSide === "home" ? "HOME" : "AWAY"} · {engineConfidence}% confidence
+            </p>
+          </div>
+        </div>
+        <p className="text-mute text-sm leading-relaxed">
+          {agreeWithEngine ? (
+            <>
+              ✓ 您跟引擎一致 ·{" "}
+              <strong className="text-bone">
+                若 {yourTeam.name} 真贏 · 兩邊都 PROVED · 您 + engine 都加分
+              </strong>{" "}
+              · 若輸 · 兩邊都 DIVERGED · 對等收據。
+            </>
+          ) : (
+            <>
+              ⚔ 您跟引擎不同 ·{" "}
+              <strong className="text-bone">
+                只有一邊會 PROVED · 賽後分曉 · 累積 N≥30 後您 vs engine{" "}
+                Brier 對照可比較
+              </strong>{" "}
+              · 結果回到此 widget 自動 update。
+            </>
+          )}
+        </p>
+        <p className="mt-3 font-mono text-mute/70 text-[9px] tracking-[0.25em]">
+          🔒 您的 pick 只在您裝置 · ZONE 27 看不到 · /calibration 個人 strip
+          只在您裝置 render。
+        </p>
+      </article>
+    );
+  }
+
+  // ── STATE 3 · REVEALED (finalResult exists) ─────────────
+  const yourSide = state.pick.pickedSide;
+  const yourTeam = yourSide === "home" ? match.home : match.away;
+  const engineTeam = enginePickedSide === "home" ? match.home : match.away;
+  const actualWinnerSide = finalResult.winner;
+  const actualWinnerTeam =
+    actualWinnerSide === "home"
+      ? match.home
+      : actualWinnerSide === "away"
+      ? match.away
+      : null;
+
+  const yourVerdict =
+    actualWinnerSide === "tie"
+      ? "push"
+      : yourSide === actualWinnerSide
+      ? "proved"
+      : "diverged";
+  const engineVerdict =
+    actualWinnerSide === "tie"
+      ? "push"
+      : enginePickedSide === actualWinnerSide
+      ? "proved"
+      : "diverged";
+
+  const verdictMeta: Record<
+    "proved" | "diverged" | "push",
+    { icon: string; label: string; color: string }
+  > = {
+    proved: { icon: "✓", label: "PROVED", color: "text-gold" },
+    diverged: { icon: "✕", label: "DIVERGED", color: "text-loss/85" },
+    push: { icon: "▪", label: "PUSH", color: "text-mute" },
+  };
+
+  return (
+    <article className="bg-slate/50 border border-gold/60 glow-soft p-4 sm:p-5">
+      <div className="flex items-baseline justify-between gap-3 flex-wrap mb-4">
+        <p
+          lang="en"
+          className="font-mono text-gold text-[10px] tracking-[0.35em]"
+        >
+          ⚡ EPISTEMIC GYM · 賽後對照
+        </p>
+        <span
+          lang="en"
+          className="font-mono text-mute/70 text-[9px] tracking-[0.3em]"
+        >
+          REVEALED · LOCAL ONLY
+        </span>
+      </div>
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-4">
+        <div className="border border-line/60 bg-slate/40 p-3">
+          <p
+            lang="en"
+            className={`font-mono text-[9px] tracking-[0.3em] mb-1 ${verdictMeta[yourVerdict].color}`}
+          >
+            {verdictMeta[yourVerdict].icon} 您 {verdictMeta[yourVerdict].label}
+          </p>
+          <p className="text-bone text-base">{yourTeam.name}</p>
+          <p
+            lang="en"
+            className="font-mono text-mute/80 text-[10px] tracking-[0.22em] mt-1"
+          >
+            您 picked {yourSide.toUpperCase()}
+          </p>
+        </div>
+        <div className="border border-line/60 bg-slate/40 p-3">
+          <p
+            lang="en"
+            className={`font-mono text-[9px] tracking-[0.3em] mb-1 ${verdictMeta[engineVerdict].color}`}
+          >
+            {verdictMeta[engineVerdict].icon} ENGINE {verdictMeta[engineVerdict].label}
+          </p>
+          <p className="text-bone text-base">{engineTeam.name}</p>
+          <p
+            lang="en"
+            className="font-mono text-mute/80 text-[10px] tracking-[0.22em] mt-1"
+          >
+            engine picked {enginePickedSide.toUpperCase()} · {engineConfidence}%
+          </p>
+        </div>
+        <div className="border border-line/60 bg-slate/40 p-3">
+          <p
+            lang="en"
+            className="font-mono text-gold/90 text-[9px] tracking-[0.3em] mb-1"
+          >
+            🏆 ACTUAL
+          </p>
+          <p className="text-bone text-base">
+            {actualWinnerTeam ? actualWinnerTeam.name : "Tie"}
+          </p>
+          <p
+            lang="en"
+            className="font-mono text-mute/80 text-[10px] tracking-[0.22em] mt-1"
+          >
+            {finalResult.homeScore} : {finalResult.awayScore}
+          </p>
+        </div>
+      </div>
+      <p className="text-mute text-xs leading-relaxed">
+        <strong className="text-bone">
+          {yourVerdict === engineVerdict
+            ? yourVerdict === "proved"
+              ? "兩邊都 PROVED · 您 + engine 同 reliability"
+              : yourVerdict === "diverged"
+              ? "兩邊都 DIVERGED · 對等 miss"
+              : "兩邊都 PUSH · tie 不算"
+            : yourVerdict === "proved"
+            ? "您 PROVED · engine DIVERGED · 您贏 engine 這場"
+            : "engine PROVED · 您 DIVERGED · engine 贏 您這場"}
+        </strong>{" "}
+        · 累積後{" "}
+        <Link
+          href="/calibration"
+          className="text-gold underline-offset-4 hover:underline"
+        >
+          /calibration
+        </Link>{" "}
+        會 surface 您 vs engine 個人 strip(只在您裝置 render)。
+      </p>
+    </article>
+  );
+}

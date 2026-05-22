@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import HeroLiveCard from "@/components/HeroLiveCard";
 import TonightReceiptsCard from "@/components/TonightReceiptsCard";
 import RecentMatchesRow from "@/components/RecentMatchesRow";
+import AnonCalibrationStrip from "@/components/AnonCalibrationStrip";
 import {
   getFeaturedMatch,
   getTodayMatches,
@@ -237,6 +238,13 @@ export default function Home() {
           call「3-step funnel: precise landing → instant exploration →
           return-visit recall」 完整 close。 */}
       <RecentMatchesRow />
+
+      {/* R45 W-E · Agent L DEEPEST · Anonymous Calibration Strip compact
+          homepage variant · 訪客 own track record vs engine summary chip ·
+          only renders when localStorage zone27_anon_picks_v1 has picks ·
+          0 server · 0 PII · 0 cookies · brand IP homepage minimalism
+          preserved(無 picks 時不 render)· Link to /calibration full strip。 */}
+      <AnonCalibrationStrip variant="homepage" />
 
       {/* ── THE ENGINE · 主視覺 · 即時跑這場 ─────────
           This is the soul. Engine output IS the product · IS the

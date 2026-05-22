@@ -520,6 +520,11 @@ export default function AuditPage() {
                 value="您上次 /login email 預填"
                 note="LoginForm 寫入 · 您下次回 /login 自動預填 email · 0 server transit · purely UX 便利"
               />
+              <DataRow
+                label="zone27_anon_picks_v1"
+                value="您 anonymous picks · 個人 calibration vs engine"
+                note="AnonPickWidget 寫入 · /matches/[gameId] 訪客 pick before peeking · AnonCalibrationStrip 讀 · 0 server · 0 PII · /calibration + homepage 只在您裝置 render · R45 W-A"
+              />
             </DataTable>
 
             <P className="text-mute/70 mt-3">
