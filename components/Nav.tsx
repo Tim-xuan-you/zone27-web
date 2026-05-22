@@ -2,6 +2,7 @@ import Link from "next/link";
 import ScarcityStrip from "@/components/ScarcityStrip";
 import MobileNavToggle from "@/components/MobileNavToggle";
 import MembershipNavCTA from "@/components/MembershipNavCTA";
+import NavLoginCTA from "@/components/NavLoginCTA";
 import CmdKTrigger from "@/components/CmdKTrigger";
 
 type NavKey =
@@ -90,24 +91,27 @@ export default function Nav({ active }: { active?: NavKey }) {
                 )}
               </Link>
             ))}
+            {/* Round 50 W-B · NavLoginCTA(auth-aware client island)·
+                anonymous 顯「登入」 mono link · logged-in 隱藏(因
+                MembershipNavCTA 已切「您的引擎 →」)· per 26+ canary
+                fire UX root cause · Apple/Stripe/Linear/Vercel standard
+                Sign-in entry 永遠 visible 模式 物理 codify。 */}
+            <NavLoginCTA variant="desktop" />
             <MembershipNavCTA
               active={active === "founders"}
               variant="desktop"
             />
             <CmdKTrigger />
-            {/* 登入 button removed in Round 3 (Apple-minimalism pass):
-                disabled button is a choice-paradox item (visitor sees it,
-                wonders why, gets no payoff). Login UI returns when
-                Founders 27 Q3 2026 onboarding requires it. */}
           </div>
 
-          {/* Mobile · 創始會員 gold CTA only (always visible). The
-              secondary nav lives below on its own row to keep this
-              line uncramped. */}
-          <MobileNavToggle
-            active={active}
-            className="sm:hidden"
-          />
+          {/* Mobile · LOGIN + 創始會員 gold CTA · The secondary nav
+              lives below on its own row to keep this line uncramped.
+              Round 50 W-B · 加 NavLoginCTA mobile variant 左邊 ·
+              Apple-pattern「登入」 永遠 visible · 不再隱藏 essential entry。 */}
+          <div className="sm:hidden flex items-center gap-2 shrink-0">
+            <NavLoginCTA variant="mobile" />
+            <MobileNavToggle active={active} />
+          </div>
         </div>
 
         {/* Mobile · 2nd row: 4 secondary nav links + ⌕ palette trigger.

@@ -48,12 +48,17 @@ const FOOTER_GROUPS: FooterGroup[] = [
     links: [
       { label: "5 分鐘入門", href: "/learn" },
       { label: "關於 ZONE 27", href: "/about" },
+      // Round 50 W-B · 2026-05-22 · Tim 26+ canary fire UX root cause ·
+      // /login footer entry 是 Nav LOGIN button + Cmd-K 之外的第三條路 ·
+      // 訪客滾到 footer 找 ACCOUNT entry 是 Apple/Stripe 訪客行為標準 ·
+      // 此 entry 必須存在。
+      { label: "登入 / 註冊", href: "/login" },
       // Round 27 · /membership 加入 footer ENTRY group · 訪客滾到 footer
       // 也能看到 4-tier ladder 入口 · 不只靠 Nav pill 進入。
       { label: "會員制 · 4 tier", href: "/membership" },
       // Round 29 Wave 2 · /member NEW · FREE TIER dashboard preview ·
       // Tim 反覆被問「會員頁面在哪?」這是答案 entry。
-      { label: "會員儀表板預覽", href: "/member" },
+      { label: "您的儀表板", href: "/member" },
       { label: "常見問題", href: "/faq" },
     ],
   },

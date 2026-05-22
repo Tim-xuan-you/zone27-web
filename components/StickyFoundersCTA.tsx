@@ -64,35 +64,61 @@ export default function StickyFoundersCTA() {
         paddingRight: "env(safe-area-inset-right, 0px)",
       }}
     >
-      <Link
-        href="/founders"
-        className="flex items-center justify-between gap-3 px-4 py-3 group"
-        aria-label={`加入 Founders 27 · ${FOUNDERS_CLAIMED} 已認領 · ${FOUNDERS_REMAINING} 剩 · NT$ 2,700 終身`}
-      >
-        <div className="flex flex-col min-w-0 flex-1">
+      <div className="flex items-stretch">
+        <Link
+          href="/founders"
+          className="flex items-center justify-between gap-3 px-4 py-3 group flex-1 min-w-0"
+          aria-label={`加入 Founders 27 · ${FOUNDERS_CLAIMED} 已認領 · ${FOUNDERS_REMAINING} 剩 · NT$ 2,700 終身`}
+        >
+          <div className="flex flex-col min-w-0 flex-1">
+            <span
+              lang="en"
+              className="font-mono text-gold text-[9px] tracking-[0.3em] leading-tight"
+            >
+              FOUNDERS 27 · NT$ 2,700 終身
+            </span>
+            <span className="font-mono text-bone text-[11px] tracking-[0.15em] tabular leading-snug mt-0.5">
+              <span className="text-gold">{FOUNDERS_CLAIMED}</span>
+              <span className="text-mute/60"> / </span>
+              <span>{FOUNDERS_TOTAL}</span>
+              <span className="text-mute/60 mx-1.5">·</span>
+              <span>{FOUNDERS_REMAINING} 席</span>
+              <span className="text-mute/60 mx-1.5">·</span>
+              <span className="text-mute">永久關閉</span>
+            </span>
+          </div>
+          <span
+            aria-hidden="true"
+            className="shrink-0 px-3 py-2 bg-gold text-navy font-mono text-[10px] tracking-[0.25em] group-active:bg-gold-soft transition-colors"
+          >
+            加入 →
+          </span>
+        </Link>
+
+        {/* Round 50 W-B · secondary「已是會員 → 登入」 mini chip ·
+            Tim 26+ canary fire UX root cause · sticky CTA mobile-only 唯一
+            persistent bottom bar 之前 100% push Founders 27 · 0 alternative
+            path · 已 logged-in 看到也不協調 · 未 logged-in 想登入也找不到
+            entry。 加 mini login chip(border-l divider · text-only · 不
+            破壞主 CTA hierarchy)· 訪客 1 tap 到 /login。 同 Apple App
+            Store「Already have an account? Sign in」 pattern 延伸到 mobile
+            sticky bar layer。 */}
+        <Link
+          href="/login"
+          aria-label="已是會員 · 登入"
+          className="shrink-0 border-l border-line/60 px-3 py-2 flex flex-col items-center justify-center group"
+        >
           <span
             lang="en"
-            className="font-mono text-gold text-[9px] tracking-[0.3em] leading-tight"
+            className="font-mono text-mute/70 group-active:text-gold text-[8px] tracking-[0.3em] leading-tight"
           >
-            FOUNDERS 27 · NT$ 2,700 終身
+            ALREADY MEMBER
           </span>
-          <span className="font-mono text-bone text-[11px] tracking-[0.15em] tabular leading-snug mt-0.5">
-            <span className="text-gold">{FOUNDERS_CLAIMED}</span>
-            <span className="text-mute/60"> / </span>
-            <span>{FOUNDERS_TOTAL}</span>
-            <span className="text-mute/60 mx-1.5">·</span>
-            <span>{FOUNDERS_REMAINING} 席</span>
-            <span className="text-mute/60 mx-1.5">·</span>
-            <span className="text-mute">永久關閉</span>
+          <span className="font-mono text-mute group-active:text-gold text-[10px] tracking-[0.2em] mt-0.5 transition-colors">
+            登入
           </span>
-        </div>
-        <span
-          aria-hidden="true"
-          className="shrink-0 px-3 py-2 bg-gold text-navy font-mono text-[10px] tracking-[0.25em] group-active:bg-gold-soft transition-colors"
-        >
-          加入 →
-        </span>
-      </Link>
+        </Link>
+      </div>
     </div>
   );
 }
