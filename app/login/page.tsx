@@ -16,24 +16,29 @@ const MIN_PASSWORD_LEN = 8;
 // canary fire(「我真的可以註冊嗎?我懷疑...」)。
 //
 // Pratfall + Costly Signaling design:
-//   - Magic link ONLY · 沒密碼欄 · 沒 OAuth · 沒 social login
-//   - 1 個欄位 · 1 個動作 · 1 封 email
+//   - Magic link + password 雙 path(R30 W14 Apple-pattern · 主 password
+//     secondary magic link)· 沒 OAuth · 沒 social login
+//   - 1-2 個欄位 · 1 個動作 · 1 封 email
 //   - 寄信失敗時誠實顯示 error · 不藏
 //   - 不要求 email verification 第二步(magic link 點開即等於 verified)
 //
 // 跟 WaitlistForm 的關係:
 //   - WaitlistForm = pure email collection · 沒 auth · 沒 session(legacy)
-//   - /login(本頁)= real magic-link registration · 有 session · 有 member
-//     state · /member 真實 authenticated dashboard
+//   - /login(本頁)= real magic-link/password registration · 有 session ·
+//     有 member state · /member 真實 authenticated dashboard
 //   - 兩者並存:純訂閱選 WaitlistForm · 註冊選 /login
 //
-// Psychology trigger:
-//   - 「您將成為 ZONE 27 第 X 位 FREE TIER 會員」 (concrete identity ·
-//     Endowment Effect)
-//   - 「1 分鐘內」 (specific time · 降焦慮)
-//   - 「您只給 email · 我們不要密碼 · 不要 social login」 (Pratfall
-//     deliberate minimalism · Costly Signaling)
-//   - 「終身免費 · 永不調漲」 (re-affirm commitment)
+// Round 32 W-C · 2026-05-22 noon · Tim founder-dogfood canary fire:
+// 「沒有收到 6 位數 code 呀!直接點擊信箱的登入連結,就進去了...」 surface
+// 了 R30 W13b OTP code fallback 是 over-promised UI:Supabase 預設 magic
+// link email template 只寄 `{{ .ConfirmationURL }}` · 不寄 `{{ .Token }}` ·
+// 訪客看 6 位數 verify form 永遠收不到 code。 違反 R30 W11 axiom「every
+// section must be true right now」 + 反向 brand IP「方法公開 · 物理產出」。
+// 砍 path ② 整套(PATH B form · handleVerifyOtp · friendlyOtpError ·
+// verifying state)· 對齊 Apple/Stratechery 1-tap minimalism + R30 W7
+// 「越少 fields 越正式」 axiom + R30 W11 present-tense-only axiom · 三 axiom
+// 同時 fire。 將來真要 cross-device OTP(Supabase Studio 改 template 加
+// `{{ .Token }}` 後)30 行可重 wire · git show 9860d61 之前版本還可參考。
 // ─────────────────────────────────────────────────────
 
 type AuthMode = "password" | "magic_link";
@@ -43,7 +48,6 @@ type SubmitState =
   | { kind: "submitting" }
   | { kind: "signup_confirm_sent"; email: string }
   | { kind: "magic_link_sent"; email: string }
-  | { kind: "verifying"; email: string }
   | { kind: "error"; message: string };
 
 export default function LoginPage() {
@@ -293,49 +297,6 @@ export default function LoginPage() {
     }
   }
 
-  // Round 30 Wave 13b · Linear pattern OTP code fallback。 Works for both
-  // magic_link_sent + signup_confirm_sent · Supabase verifyOtp 對 email
-  // type 適用兩個 case。
-  async function handleVerifyOtp(token: string) {
-    if (
-      state.kind !== "magic_link_sent" &&
-      state.kind !== "signup_confirm_sent"
-    )
-      return;
-    const targetEmail = state.email;
-    const trimmed = token.replace(/\s/g, "");
-    if (!/^\d{6}$/.test(trimmed)) {
-      setState({
-        kind: "error",
-        message: "6 碼 code 必須是 6 個數字",
-      });
-      return;
-    }
-    setState({ kind: "verifying", email: targetEmail });
-    try {
-      const supabase = createSupabaseBrowserClient();
-      const { error } = await supabase.auth.verifyOtp({
-        email: targetEmail,
-        token: trimmed,
-        type: "email",
-      });
-      if (error) {
-        setState({
-          kind: "error",
-          message: friendlyOtpError(error.message),
-        });
-        return;
-      }
-      // Session set via @supabase/ssr cookies · redirect to /member or next
-      const dest = nextPath ?? "/member?welcome=true";
-      window.location.assign(dest);
-    } catch (err) {
-      const message =
-        err instanceof Error ? err.message : "未知錯誤";
-      setState({ kind: "error", message });
-    }
-  }
-
   return (
     <div className="flex flex-col flex-1 min-h-screen">
       <Nav />
@@ -365,8 +326,7 @@ export default function LoginPage() {
         {existingEmail &&
           state.kind !== "magic_link_sent" &&
           state.kind !== "signup_confirm_sent" &&
-          state.kind !== "submitting" &&
-          state.kind !== "verifying" && (
+          state.kind !== "submitting" && (
           <section className="mx-auto max-w-md w-full px-6 sm:px-10 pb-6">
             <div className="bg-gold/5 border border-gold/60 glow-soft p-5">
               <p
@@ -393,21 +353,12 @@ export default function LoginPage() {
         {/* ── FORM · Round 30 Wave 14 · Apple-pattern email + password ── */}
         <section className="mx-auto max-w-md w-full px-6 sm:px-10 pb-12">
           {state.kind === "magic_link_sent" ||
-          state.kind === "signup_confirm_sent" ||
-          state.kind === "verifying" ? (
+          state.kind === "signup_confirm_sent" ? (
             <SentState
-              email={
-                state.kind === "verifying"
-                  ? state.email
-                  : state.kind === "magic_link_sent"
-                  ? state.email
-                  : state.email
-              }
+              email={state.email}
               isSignupConfirm={state.kind === "signup_confirm_sent"}
               cooldown={cooldown}
               onResend={handleResend}
-              onVerifyOtp={handleVerifyOtp}
-              verifying={state.kind === "verifying"}
             />
           ) : (
             <form
@@ -567,23 +518,20 @@ export default function LoginPage() {
   );
 }
 
+// Round 32 W-C · SentState 砍 PATH B TYPE CODE form · Supabase 預設 email
+// template 不寄 `{{ .Token }}` · 6 位數 verify 永遠不 work · 違反 R30 W11
+// axiom。 只留 PATH A CLICK LINK · 1-tap 落地 · Apple/Stratechery pattern。
 function SentState({
   email,
   isSignupConfirm,
   cooldown,
   onResend,
-  onVerifyOtp,
-  verifying,
 }: {
   email: string;
   isSignupConfirm: boolean;
   cooldown: number;
   onResend: () => void;
-  onVerifyOtp: (token: string) => Promise<void>;
-  verifying: boolean;
 }) {
-  const [otpInput, setOtpInput] = useState("");
-
   return (
     <div className="bg-gold/5 border border-gold/60 glow-soft p-6 sm:p-8">
       <p
@@ -592,7 +540,7 @@ function SentState({
       >
         {isSignupConfirm
           ? "✓ ACCOUNT CREATED · 等 email 確認"
-          : "✓ EMAIL SENT · 2 個 path 任選"}
+          : "✓ EMAIL SENT · 1-tap 落地"}
       </p>
       <h2 className="text-2xl sm:text-3xl text-bone font-light tracking-tight mb-4 text-center">
         {isSignupConfirm
@@ -604,70 +552,27 @@ function SentState({
         <span className="font-mono text-gold">{email}</span>
       </p>
 
-      {/* ── PATH A · CLICK MAGIC LINK(same device only) ── */}
-      <div className="bg-navy/40 border border-line/60 p-4 mb-3">
-        <p
-          lang="en"
-          className="font-mono text-gold/80 text-[10px] tracking-[0.35em] mb-2"
-        >
-          ① CLICK LINK · 同 device 開 email
-        </p>
-        <p className="text-mute text-xs sm:text-sm leading-relaxed">
-          email 在<strong className="text-bone">這個 device + browser</strong>
-          開 · 點 link → 自動轉 /member。 PKCE 限制 · 換 device / 換 browser
-          不 work · 用 ② path。
-        </p>
-      </div>
-
-      {/* ── PATH B · TYPE 6-DIGIT CODE(cross-device 也 work) ── */}
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          onVerifyOtp(otpInput);
-        }}
-        className="bg-gold/5 border border-gold/40 p-4 mb-4"
-      >
+      {/* ── PATH · CLICK MAGIC LINK ─────────────── */}
+      <div className="bg-navy/40 border border-line/60 p-4 mb-4">
         <p
           lang="en"
           className="font-mono text-gold text-[10px] tracking-[0.35em] mb-2"
         >
-          ② TYPE CODE · 跨 device 也 work · Linear pattern
+          → CLICK LINK · 1-tap 落地
         </p>
-        <p className="text-mute text-xs leading-relaxed mb-3">
-          Email 裡有 6 位數 code · 貼到下方 verify · 不限 device · session
-          落您現在 browser。
+        <p className="text-mute text-xs sm:text-sm leading-relaxed">
+          email 在<strong className="text-bone">這個 device + browser</strong>
+          開 · 點 link → 自動轉 /member。 PKCE 限制 · 換 device / 換 browser
+          點 link 不 work · 在新 device Resend 後再點。
         </p>
-        <div className="flex items-baseline gap-2 flex-wrap">
-          <input
-            type="text"
-            inputMode="numeric"
-            pattern="\d{6}"
-            maxLength={6}
-            autoComplete="one-time-code"
-            value={otpInput}
-            onChange={(e) =>
-              setOtpInput(e.target.value.replace(/\D/g, "").slice(0, 6))
-            }
-            placeholder="000000"
-            className="flex-1 min-w-[110px] bg-navy/60 border border-line/70 px-3 py-2 text-bone text-xl tabular tracking-[0.4em] text-center focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold/30 transition-colors font-mono"
-            disabled={verifying}
-          />
-          <button
-            type="submit"
-            disabled={verifying || otpInput.length !== 6}
-            className="px-4 py-2 bg-gold text-navy font-mono text-[10px] tracking-[0.3em] hover:bg-gold-soft transition-colors disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
-          >
-            {verifying ? "● 驗證" : "→ Verify"}
-          </button>
-        </div>
-      </form>
+      </div>
 
       {/* ── Resend button + countdown ── */}
       <div className="text-center mb-3">
         <button
           type="button"
           onClick={onResend}
-          disabled={cooldown > 0 || verifying}
+          disabled={cooldown > 0}
           className="px-6 py-2.5 border border-line/60 text-mute font-mono text-[10px] tracking-[0.3em] hover:bg-gold/5 hover:text-gold hover:border-gold/40 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {cooldown > 0
@@ -677,22 +582,12 @@ function SentState({
       </div>
 
       <p className="font-mono text-mute/70 text-[10px] tracking-[0.25em] leading-relaxed text-center">
-        ▸ Link + code 同 1 小時內有效 · 過期 Resend
+        ▸ Link 1 小時內有效 · 過期 Resend
         <br />
         ▸ 找不到 email · 看垃圾信夾 · 或 30s 後 Resend
       </p>
     </div>
   );
-}
-
-function friendlyOtpError(raw: string): string {
-  const lower = raw.toLowerCase();
-  if (lower.includes("expired")) return "Code 過期(1 小時)· Resend 取新 code";
-  if (lower.includes("invalid") || lower.includes("not found"))
-    return "Code 錯誤 · 看最新 email · 6 碼數字";
-  if (lower.includes("rate"))
-    return "太快 · 等 30 秒後再試";
-  return raw.slice(0, 200);
 }
 
 // Round 30 Wave 14 · friendly password error mapping。

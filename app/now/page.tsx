@@ -33,9 +33,15 @@ export const metadata: Metadata = {
 // ─────────────────────────────────────────────────────
 
 const LAST_UPDATED = "2026-05-22";
-const CYCLE = "Round 28-32 · 2026-05-22 · 多 wave 大 push · TONIGHT 3 receipts + Savant bars + critic-hardening + signature + CPBL auto-fetch + 「我看 ___」 personalization + Open Allocation Ledger + 新 route 雙 OG card";
+const CYCLE = "Round 28-32 · 2026-05-22 · 多 wave 大 push · TONIGHT 3 receipts + Savant bars + critic-hardening + signature + CPBL auto-fetch + 「我看 ___」 personalization + Open Allocation Ledger + 新 route 雙 OG card + Tim founder-dogfood OTP path 砍";
 
 const SHIPPED_THIS_CYCLE: { title: string; body: string; href?: string }[] = [
+  // ── 🔪 Round 32 W-C · Tim founder-dogfood canary · 砍 path ② OTP code ──
+  {
+    title: "[R32 WC] 🔪 /login SentState path ② TYPE CODE 砍 · Tim founder-dogfood canary fire · 三 axiom 同時 fire",
+    body: "Tim 第一手 dogfood 註冊流程截 2 張圖 push back:「沒有收到 6 位數 code 呀!直接點擊信箱的登入連結,就進去了...發生甚麼事情?」 surface 了 R30 W13b OTP code fallback path 是 over-promised UI:Supabase 預設 magic link email template 只寄 `{{ .ConfirmationURL }}` · 不寄 `{{ .Token }}` · 訪客看 SentState path ② 6 位數 verify form 永遠收不到 code。 反向 brand IP「方法公開 · 物理產出」 + 違反 R30 W11 axiom「every section must be true right now」。 砍 path ② 整套(PATH B form · handleVerifyOtp · friendlyOtpError · verifying state)· 對齊 Apple/Stratechery 1-tap minimalism + R30 W7「越少 fields 越正式」 axiom + R30 W11 present-tense-only axiom · 三 axiom 同時 fire。 Lesson canonical:UI feature 必須先 verify end-to-end · 不止 code path · 還要 verify email/SMS/external dependency 真的傳真實 data。 Founder dogfood = brand IP highest-quality canary 永遠優於 agent audit。 將來真要 cross-device OTP(Supabase Studio 改 template 加 `{{ .Token }}` 後)30 行可重 wire · git history 還可參考。",
+    href: "/login",
+  },
   // ── 📐 Round 32 W-A · Wire-up sync · 2 OG cards + count drift ──
   {
     title: "[R32 WA] 📐 Wire-up sync · /founders/ledger + /membership/black-card 2 OG cards + Cmd-K 30→32",
