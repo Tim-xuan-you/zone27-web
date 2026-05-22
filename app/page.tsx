@@ -181,48 +181,22 @@ export default function Home() {
             <span className="text-gold/70 ml-2">→</span>
           </Link>
         </p>
-      </section>
 
-      {/* ── F6 「ZONE 27 不做」 declarative-absence strip ────────────
-          Round 33 W-B · agent A 帶回 top success pattern across 13 niche
-          subscription wins(Stratechery「no ads」 · Defector「no PE no
-          billionaire」 · Aftermath「worker-owned」)+ ZONE 27 既有
-          [[feedback-zone27-pratfall-brand-ip]] · 「declarative absence
-          is brand moat(Aronson 1966 + Spence 1973 costly signaling)」。
-          Codify 5 redlines 物理 visible on home · 1 hr ship · 0 hr/wk ·
-          permanent brand asset · differentiation 對 玩運彩 / 報馬仔 /
-          LINE 老師生態 instant clarity。 5 items 為 ConfidenceStars(W-A)
-          的 inverse twin:「我們不是 sportsbook」 declarative。
-          Round 38 W-I · Agent C P3 ship · 「不分潤博彩」 加 escape hatch
-          link 到 /learn#why-not-gambling · P3 casual visitor 不再 dead-
-          end declaration · 而是 clickable explainer。 */}
-      <section className="mx-auto max-w-3xl px-6 sm:px-10 pb-10 sm:pb-12 text-center">
-        <p
-          lang="en"
-          className="font-mono text-gold text-[10px] sm:text-[11px] tracking-[0.4em] mb-3 sm:mb-4"
-        >
-          / WHAT ZONE 27 DOES NOT DO
-        </p>
-        <p className="font-mono text-mute/85 text-[11px] sm:text-xs tracking-[0.18em] leading-relaxed">
-          <span className="text-bone">不顯示賠率</span>
-          <span className="text-mute/50 mx-2">·</span>
-          <span className="text-bone">不賣明牌</span>
-          <span className="text-mute/50 mx-2">·</span>
-          <Link
-            href="/learn#why-not-gambling"
-            className="text-bone underline decoration-mute/40 underline-offset-4 hover:decoration-gold hover:text-gold transition-colors"
+        {/* Round 50 W-C · subtle scroll-to-prediction hint · per Hick's
+            Law deeper formulation · 訪客 first-touch 必須是 PRIMARY
+            product moment · 不是 brand declaration。 此 link 不奪 hero
+            焦點(mute color · -2 text size · 純文字 + ↓ 符號)· 但給
+            fan「我來看 prediction」 的明確 path · 不必猜「prediction 在
+            哪滑」。 */}
+        <p className="mt-4 sm:mt-5">
+          <a
+            href="#tonight-engine"
+            className="inline-flex items-center gap-2 font-mono text-mute/70 hover:text-gold text-[10px] sm:text-[11px] tracking-[0.3em] transition-colors group"
+            aria-label="scroll 到今晚的引擎 prediction"
           >
-            不分潤博彩
-          </Link>
-          <span className="text-mute/50 mx-2">·</span>
-          <span className="text-bone">不藏 DIVERGED</span>
-          <span className="text-mute/50 mx-2">·</span>
-          <span className="text-bone">不追蹤您</span>
-          <span className="text-mute/50 mx-2">·</span>
-          <span className="text-gold">不等 Q3</span>
-        </p>
-        <p className="mt-3 font-mono text-mute/60 text-[9px] sm:text-[10px] tracking-[0.28em] leading-relaxed">
-          NO ODDS · NO LOCK · NO AFFILIATE · NO HIDDEN MISSES · 0 TRACKERS · <span className="text-gold/80">NO WAITING</span>
+            <span className="text-gold/60 group-hover:text-gold transition-colors">↓</span>
+            <span>今晚的引擎</span>
+          </a>
         </p>
       </section>
 
@@ -253,8 +227,13 @@ export default function Home() {
           HeroLiveCard embeds its own CTAs (/matches and /matches/[gameId])
           — those carry visitors to depth on their own gradient.
           Round 31 Wave A: multi-match days swap in TonightReceiptsCard
-          for the same hero slot · 3-card grid of pre-locked receipts. */}
-      <section className="mx-auto w-full max-w-3xl px-6 sm:px-10 pb-20 sm:pb-28">
+          for the same hero slot · 3-card grid of pre-locked receipts.
+          Round 50 W-C · #tonight-engine id anchor for hero scroll hint
+          (per Hick's Law deeper formulation · fan-first audience axiom). */}
+      <section
+        id="tonight-engine"
+        className="mx-auto w-full max-w-3xl px-6 sm:px-10 pb-20 sm:pb-28 scroll-mt-8"
+      >
         {useMultiMatch && trackRecord ? (
           <TonightReceiptsCard
             matches={todayMatches}
@@ -284,6 +263,60 @@ export default function Home() {
           >
             TIM · CPBL 球迷 27 年
           </Link>
+        </p>
+      </section>
+
+      {/* ── F6 「ZONE 27 不做」 declarative-absence strip ────────────
+          Round 33 W-B · agent A 帶回 top success pattern across 13 niche
+          subscription wins(Stratechery「no ads」 · Defector「no PE no
+          billionaire」 · Aftermath「worker-owned」)+ ZONE 27 既有
+          [[feedback-zone27-pratfall-brand-ip]] · 「declarative absence
+          is brand moat(Aronson 1966 + Spence 1973 costly signaling)」。
+          Codify 5 redlines 物理 visible on home · 1 hr ship · 0 hr/wk ·
+          permanent brand asset · differentiation 對 玩運彩 / 報馬仔 /
+          LINE 老師生態 instant clarity。 5 items 為 ConfidenceStars(W-A)
+          的 inverse twin:「我們不是 sportsbook」 declarative。
+          Round 38 W-I · Agent C P3 ship · 「不分潤博彩」 加 escape hatch
+          link 到 /learn#why-not-gambling · P3 casual visitor 不再 dead-
+          end declaration · 而是 clickable explainer。
+
+          Round 50 W-C · 2026-05-22 evening · Tim 26+ canary fire 高情緒
+          push「點出來的頁面都是無關緊要的」 surface 真實 funnel-order
+          bug · F6 strip 從 hero 下方 移到 THE ENGINE section 之後 ·
+          per Hick's Law deeper formulation:訪客 first-touch 必須是
+          PRIMARY product moment · 不是 brand declaration。 fan filter-in
+          先見 prediction(THE ENGINE)· 賭徒 filter-out 後看到「不做」
+          declarative redline · 兩端 funnel 同時改善 · brand-IP 0 修改 ·
+          純 JSX 重 order。 declarative-absence 仍 first-fold below(若
+          訪客 scroll 不到 = anyway 不是 audience)· 對齊
+          [[feedback-zone27-audience-fans-not-engineers]] axiom。 */}
+      <section className="mx-auto max-w-3xl px-6 sm:px-10 pb-12 sm:pb-16 text-center border-t border-line/40 pt-12 sm:pt-16">
+        <p
+          lang="en"
+          className="font-mono text-gold text-[10px] sm:text-[11px] tracking-[0.4em] mb-3 sm:mb-4"
+        >
+          / WHAT ZONE 27 DOES NOT DO
+        </p>
+        <p className="font-mono text-mute/85 text-[11px] sm:text-xs tracking-[0.18em] leading-relaxed">
+          <span className="text-bone">不顯示賠率</span>
+          <span className="text-mute/50 mx-2">·</span>
+          <span className="text-bone">不賣明牌</span>
+          <span className="text-mute/50 mx-2">·</span>
+          <Link
+            href="/learn#why-not-gambling"
+            className="text-bone underline decoration-mute/40 underline-offset-4 hover:decoration-gold hover:text-gold transition-colors"
+          >
+            不分潤博彩
+          </Link>
+          <span className="text-mute/50 mx-2">·</span>
+          <span className="text-bone">不藏 DIVERGED</span>
+          <span className="text-mute/50 mx-2">·</span>
+          <span className="text-bone">不追蹤您</span>
+          <span className="text-mute/50 mx-2">·</span>
+          <span className="text-gold">不等 Q3</span>
+        </p>
+        <p className="mt-3 font-mono text-mute/60 text-[9px] sm:text-[10px] tracking-[0.28em] leading-relaxed">
+          NO ODDS · NO LOCK · NO AFFILIATE · NO HIDDEN MISSES · 0 TRACKERS · <span className="text-gold/80">NO WAITING</span>
         </p>
       </section>
 
