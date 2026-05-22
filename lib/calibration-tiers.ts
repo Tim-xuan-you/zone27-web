@@ -194,9 +194,16 @@ function computeBrierScore(picks: AnonPick[]): number {
     // interpretation for binary pick(no fractional confidence slider)
     const predicted = 1; // user said this side will win · binary commitment
     const actual = p.pickedSide === p.finalOutcome ? 1 : 0;
-    sum += Math.pow(predicted - actual, 2);
+    const delta = Math.pow(predicted - actual, 2);
+    // Round 54 W-A · Agent 2 #8 fix · NaN propagation guard · 若 corrupted
+    // pick(JSON.parse silent coercion 等)導致 NaN · degrade to worst-case
+    // 1.0 而非 silent inflation · 不 tier 6 with NaN metrics(brand IP
+    //「方法公開」 物理 break)。
+    if (!Number.isFinite(delta)) return 1;
+    sum += delta;
   }
-  return sum / finalized.length;
+  const brier = sum / finalized.length;
+  return Number.isFinite(brier) ? brier : 1;
 }
 
 /**
@@ -284,8 +291,22 @@ export function computeCalibrationState(picks: AnonPick[]): CalibrationState {
   const brierDrift = computeBrierDrift(picks);
   const maxBinError = computeMaxBinReliabilityError(picks);
 
-  // Tier resolution · highest tier 訪客 qualifies for
+  // Tier resolution · highest tier 訪客 qualifies for。
+  // Round 54 W-A · Agent 2 #8 fix · NaN guard · if Brier or reliability
+  // is NaN/Infinity · floor to Observer · 不 silent inflation。
   let tier: CalibrationTier = CALIBRATION_TIERS[0]; // Observer default
+  if (!Number.isFinite(brierLifetime) || !Number.isFinite(maxBinError)) {
+    return {
+      tier,
+      nPicks: picks.length,
+      nFinalized,
+      brierLifetime: Number.isFinite(brierLifetime) ? brierLifetime : 1,
+      brierLast30: Number.isFinite(brierLast30) ? brierLast30 : 1,
+      brierDrift: 0,
+      maxBinReliabilityError: Number.isFinite(maxBinError) ? maxBinError : 1,
+      pratfallBin: null,
+    };
+  }
   for (const t of CALIBRATION_TIERS) {
     if (nFinalized < t.nMin) continue;
     if (t.brierMax !== null && brierLifetime > t.brierMax) continue;

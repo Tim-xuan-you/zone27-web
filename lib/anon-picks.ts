@@ -65,14 +65,21 @@ export function readAnonPicks(): AnonPick[] {
   }
 }
 
-/** Add a new pick · dedupes by matchId(allow re-pick · overwrite previous)*/
+/** Add a new pick · dedupes by matchId(allow re-pick · overwrite previous)。
+ * Round 54 W-A · Agent 2 #7 fix · return PushResult instead of void · caller
+ * can detect quota-exceeded / disabled localStorage · 不再 silent data loss。
+ * Also dispatches custom event for in-tab CalibrationTierBadge re-derive。 */
+export type PushResult =
+  | { ok: true }
+  | { ok: false; reason: "ssr" | "quota_exceeded" | "disabled" | "unknown" };
+
 export function pushAnonPick(entry: {
   matchId: string;
   pickedSide: "home" | "away";
   enginePickedSide: "home" | "away";
   engineConfidence: number;
-}): void {
-  if (typeof window === "undefined") return;
+}): PushResult {
+  if (typeof window === "undefined") return { ok: false, reason: "ssr" };
   try {
     const existing = readAnonPicks();
     const filtered = existing.filter((p) => p.matchId !== entry.matchId);
@@ -86,12 +93,27 @@ export function pushAnonPick(entry: {
       ...filtered,
     ].slice(0, MAX_ENTRIES);
     window.localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
-  } catch {
-    /* swallow · localStorage quota or disabled */
+    // Round 54 W-A · custom event for same-tab CalibrationTierBadge re-derive
+    try {
+      window.dispatchEvent(new CustomEvent("zone27:anon-picks-changed"));
+    } catch {
+      /* CustomEvent may fail in old IE polyfill · safe to ignore */
+    }
+    return { ok: true };
+  } catch (err) {
+    // Distinguish quota-exceeded vs disabled · DOMException code 22 = quota
+    if (
+      err instanceof DOMException &&
+      (err.code === 22 || err.name === "QuotaExceededError")
+    ) {
+      return { ok: false, reason: "quota_exceeded" };
+    }
+    return { ok: false, reason: "disabled" };
   }
 }
 
-/** Update a pick with finalOutcome + computed verdict · idempotent */
+/** Update a pick with finalOutcome + computed verdict · idempotent。
+ * Round 54 W-A · dispatch custom event for same-tab tier badge sync。 */
 export function updatePickOutcome(
   matchId: string,
   finalOutcome: "home" | "away" | "tie"
@@ -110,6 +132,11 @@ export function updatePickOutcome(
       return { ...p, finalOutcome, verdict };
     });
     window.localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
+    try {
+      window.dispatchEvent(new CustomEvent("zone27:anon-picks-changed"));
+    } catch {
+      /* safe to ignore */
+    }
   } catch {
     /* swallow */
   }

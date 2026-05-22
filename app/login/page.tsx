@@ -227,9 +227,16 @@ export default function LoginPage() {
         message: friendlyPasswordError(signInResult.error.message),
       });
     } catch (err) {
-      const message =
-        err instanceof Error ? err.message : "未知錯誤 · 請稍候再試";
-      setState({ kind: "error", message });
+      // Round 54 W-A · Agent 2 #10 fix · 不 leak Supabase internal infra
+      // detail(IP / port / API key / timeout)to DOM · log server-side
+      // for debugging · return canonical generic + Tim recovery path。
+      if (err instanceof Error) {
+        console.error("[login submitPassword]", err.message);
+      }
+      setState({
+        kind: "error",
+        message: "未知錯誤 · 請稍候再試 · 持續寫信 tim@zone27.tw",
+      });
     }
   }
 
@@ -267,9 +274,14 @@ export default function LoginPage() {
         email: targetEmail,
       });
     } catch (err) {
-      const message =
-        err instanceof Error ? err.message : "未知錯誤";
-      setState({ kind: "error", message });
+      // Round 54 W-A · Agent 2 #10 fix · 同 submitPassword · 不 leak infra detail。
+      if (err instanceof Error) {
+        console.error("[login handleResend]", err.message);
+      }
+      setState({
+        kind: "error",
+        message: "重發失敗 · 請稍候再試 · 持續寫信 tim@zone27.tw",
+      });
     }
   }
 
@@ -536,12 +548,18 @@ function SentState({
 // 已移除 mode toggle button · 此 message 指向不存在 UI 是 ghost text · 改寫
 // canonical「密碼錯了 · 確認 capslock · 寫信 tim@zone27.tw」 path · 真實
 // 可達 recovery option(/reset page 將來 ship)。
+//
+// Round 54 W-A · Agent 2 #3 + #10 fix · whitelist-only approach · 砍
+// `raw.slice(0, 200)` fallback(unsanitized Supabase error message → DOM ·
+// fragile refactor surface · 也 leak infrastructure detail · 違反 security
+// 最小信息揭露)· 改為 unknown error → log + canonical generic message。
 function friendlyPasswordError(raw: string): string {
+  if (!raw || typeof raw !== "string") return "錯誤 · 請稍候再試 · 持續寫信 tim@zone27.tw";
   const lower = raw.toLowerCase();
   if (lower.includes("already") && lower.includes("registered"))
-    return "此 email 已註冊 · 密碼錯了 · 確認 capslock · 仍不行寫信 tim@zone27.tw";
+    return "此 email 已註冊 · 密碼錯了? 寫信 tim@zone27.tw 重設";
   if (lower.includes("user already exists"))
-    return "此 email 已註冊 · 密碼錯了 · 確認 capslock · 仍不行寫信 tim@zone27.tw";
+    return "此 email 已註冊 · 密碼錯了? 寫信 tim@zone27.tw 重設";
   if (lower.includes("password should be at least"))
     return `密碼至少 ${MIN_PASSWORD_LEN} 字元`;
   if (lower.includes("weak"))

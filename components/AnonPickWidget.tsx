@@ -79,12 +79,28 @@ export default function AnonPickWidget({ match }: Props) {
   // ── STATE 1 · NOT_PICKED ──────────────────────────────
   if (!state.pick) {
     const handlePick = (side: "home" | "away") => {
-      pushAnonPick({
+      // Round 54 W-A · Agent 2 #7 fix · check pushAnonPick result · 不
+      // silent loss · 若 quota / disabled localStorage · alert user · 不
+      // 假裝 saved。 brand IP「方法公開 · 不藏 broken state」 物理 codify。
+      const result = pushAnonPick({
         matchId: match.id,
         pickedSide: side,
         enginePickedSide,
         engineConfidence,
       });
+      if (!result.ok) {
+        const msg =
+          result.reason === "quota_exceeded"
+            ? "localStorage 滿了 · pick 未存 · 清些瀏覽器資料再試"
+            : result.reason === "disabled"
+            ? "localStorage 被瀏覽器停用(可能私密模式)· pick 無法存"
+            : "Pick 存取錯誤 · 請重試";
+        // Surface to user · 不 silent · 不 fake confirmation
+        if (typeof window !== "undefined") {
+          window.alert(msg);
+        }
+        return;
+      }
       // Re-read after write to update widget state
       setState({ mounted: true, pick: getAnonPickForMatch(match.id) });
     };

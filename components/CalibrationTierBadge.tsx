@@ -35,14 +35,33 @@ type MountState =
   | { mounted: false }
   | { mounted: true; state: CalibrationState };
 
+// Round 54 W-A · Agent 2 #1 fix · stale closure / cross-tab sync · subscribe
+// to localStorage `storage` event AND a custom in-tab event(window dispatches
+// it from AnonPickWidget after pushAnonPick / updatePickOutcome)so tier badge
+// re-derives whenever picks change · 不只 mount-once stale。
+const PICKS_CHANGE_EVENT = "zone27:anon-picks-changed";
+
 export default function CalibrationTierBadge() {
   const [mountState, setMountState] = useState<MountState>({ mounted: false });
 
   useEffect(() => {
-    const picks = readAnonPicks();
-    const state = computeCalibrationState(picks);
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setMountState({ mounted: true, state });
+    function refresh() {
+      const picks = readAnonPicks();
+      const state = computeCalibrationState(picks);
+      setMountState({ mounted: true, state });
+    }
+    refresh();
+    // Cross-tab sync · localStorage write in another tab fires `storage` here
+    function onStorage(e: StorageEvent) {
+      if (e.key === null || e.key === "zone27_anon_picks_v1") refresh();
+    }
+    window.addEventListener("storage", onStorage);
+    // Same-tab sync · custom event fired by AnonPickWidget after push/update
+    window.addEventListener(PICKS_CHANGE_EVENT, refresh);
+    return () => {
+      window.removeEventListener("storage", onStorage);
+      window.removeEventListener(PICKS_CHANGE_EVENT, refresh);
+    };
   }, []);
 
   if (!mountState.mounted) {
