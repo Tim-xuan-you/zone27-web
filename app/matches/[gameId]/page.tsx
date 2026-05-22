@@ -22,6 +22,7 @@ import RelatedReading from "@/components/RelatedReading";
 import FollowMatchButton from "@/components/FollowMatchButton";
 import MatchNoteEditor from "@/components/MatchNoteEditor";
 import MyTeamMatchNote from "@/components/MyTeamMatchNote";
+import UserPredictionPicker from "@/components/UserPredictionPicker";
 
 // ── ISR · Re-render daily so updates to lib/matches.ts ship within
 // 24h without a full redeploy. Pairs with isMatchDataStale() rendering
@@ -173,6 +174,16 @@ export default async function MatchDetailPage({
           awayName={m.away.name}
           homeWinRate={m.home.winRate}
           awayWinRate={m.away.winRate}
+          finalWinner={m.finalResult?.winner ?? null}
+        />
+
+        {/* Round 31 W-W1 · User Prediction Picker · 您自己也猜 · 對照
+            engine + 實際 · 純精神 epistemic mirror · Metaculus pattern。 */}
+        <UserPredictionPicker
+          matchId={m.id}
+          homeName={m.home.name}
+          awayName={m.away.name}
+          engineHomePicked={m.home.winRate >= m.away.winRate}
           finalWinner={m.finalResult?.winner ?? null}
         />
       </section>

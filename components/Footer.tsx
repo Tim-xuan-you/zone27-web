@@ -206,6 +206,19 @@ export default function Footer() {
           <p className="font-mono text-mute/70 text-[10px] tracking-[0.25em] text-center">
             為讀懂數字的人而建 ·{" "}
             <span lang="en">BUILT FOR THOSE WHO READ THE NUMBERS</span>
+            <br className="sm:hidden" />
+            <span className="sm:ml-3">
+              發現 bug / 建議 →{" "}
+              <a
+                href="https://github.com/Tim-xuan-you/zone27-web/issues/new"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-mute hover:text-gold underline-offset-4 hover:underline transition-colors"
+                title="GitHub Issues · 公開 audit trail · 同 Pratfall + Disclosure axiom"
+              >
+                GitHub Issue
+              </a>
+            </span>
           </p>
           <a
             href="https://github.com/Tim-xuan-you/zone27-web/commits/main"
