@@ -6,6 +6,7 @@ import RelatedReading from "@/components/RelatedReading";
 import FounderSignOff from "@/components/FounderSignOff";
 import ArticleMeta from "@/components/ArticleMeta";
 import MemberUnlocksGrid from "@/components/MemberUnlocksGrid";
+import MemberDailyBrief, { type DailyMatchSummary } from "@/components/MemberDailyBrief";
 import { getSession } from "@/lib/supabase/server";
 import { readFollowsFromMeta } from "@/lib/follows";
 import { readNotesFromMeta } from "@/lib/notes";
@@ -13,6 +14,7 @@ import {
   getMatchById,
   getMatchPhase,
   getCalibration,
+  getTodayMatches,
   type Match,
 } from "@/lib/matches";
 
@@ -150,6 +152,31 @@ export default async function MemberPage({
               您 localStorage 裡已有的 sim history 當 preview data ·
               不假裝 functionality 已存在。
             </p>
+          )}
+
+          {/* ── Round 31 W-V · MEMBER DAILY BRIEF · 為什麼註冊 answer ──
+              Tim canary fire「會員頁面了 · 能幹嘛?沒社交 · 沒功能 · 為
+              什麼付費訂閱?」 critical · 必須 ship 「daily reason to come back」。
+              brand IP yield(per [[feedback_zone27_pratfall_brand_ip]] · 修
+              不是 reframe · 是 ship 真實 daily value loop)。 純 derived
+              data + W-N TeamPick localStorage · 0 DB · brand-IP-pure。 */}
+          {session && (
+            <div className="mt-8">
+              <MemberDailyBrief
+                todayMatches={getTodayMatches().map(
+                  (m): DailyMatchSummary => ({
+                    id: m.id,
+                    homeName: m.home.name,
+                    awayName: m.away.name,
+                    homeWinRate: m.home.winRate,
+                    awayWinRate: m.away.winRate,
+                    startTime: m.startTime,
+                    venue: m.venue,
+                    isFinal: !!m.finalResult,
+                  })
+                )}
+              />
+            </div>
           )}
 
           {/* ── Round 31 W-M · 5 UNLOCKS PROMINENT GRID ──
