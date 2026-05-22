@@ -39,6 +39,15 @@ export const metadata: Metadata = {
 export const revalidate = 86400;
 
 const UNLOCKS = [
+  // Round 35 W-E · 加 Engine Lineup unlock 為 #1 · brand-pure 3-engine
+  // progression 是 BLACK CARD 真正 commercial unlock(per Round 35 W-D
+  // /methodology Section 04)· 「Most prediction sites have 1 secret engine ·
+  // we have 3 open ones」 displacement mission 物理閉環。
+  {
+    icon: "🤖",
+    title: "Engine Lineup 3 變體 解鎖",
+    body: "BLACK CARD 解鎖 v0.3「Pitcher + Park Factor + 隊伍平均 wOBA」(Q3 2026)+ v0.4「Bayesian Model Averaging ensemble」(Q4 2026)· FREE TIER 仍 access v0.2 Pitcher-Only Monte Carlo。 每個 engine publish methodology + DIVERGED + ESTIMATION DISCLOSURE per-engine · brand-pure 不靠 secret moat。 完整 lineup table 見 /methodology Section 04。",
+  },
   {
     icon: "💬",
     title: "賽事討論室發言 / 分享預測",
