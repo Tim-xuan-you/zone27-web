@@ -33,9 +33,45 @@ export const metadata: Metadata = {
 // ─────────────────────────────────────────────────────
 
 const LAST_UPDATED = "2026-05-22";
-const CYCLE = "Round 28-43 · 2026-05-22 · 19+ canary fires displacement mission · 38 visitor-discoverable routes · 7 LIVE LENS CANVAS COMPLETE + 2 LIVE Engine variants(v0.2 + v0.3 DEV PREVIEW)+ 8 binding ethics commitments + 5 steelman self-objections + Reproducibility Receipt component(3 pages)· R43 W-B Agent J CRITICAL fix(/audit S06 localStorage 3/6 wrong keys corrected · Pratfall surface)+ W-C Workload Proxy rename(Steelman Obj 03 fulfillment)· displacement battle 對 玩運彩+報馬仔 6 層 structural moat";
+const CYCLE = "Round 28-49 · 2026-05-22 · 25+ canary fires displacement mission · 38 visitor-discoverable routes · 7 LIVE LENS CANVAS + 2 LIVE Engine variants(v0.2 + v0.3 DEV PREVIEW)+ 8 binding ethics commitments + 5 steelman self-objections + 8 localStorage keys disclosed · R44 4 OG cards + Tim canonical sentence · R45 Anonymous Lens-Pick Loop DEEPEST · R46 CPBL schedule auto-fetch · R47 Tier 切換自如 inline + Cmd+Shift+P · R48 MLB engine pick + linescore + verdict pipeline · R49 LedgerDeltaChip(Endowment effect)· displacement battle 對 玩運彩+報馬仔 8+ 層 structural moat";
 
 const SHIPPED_THIS_CYCLE: { title: string; body: string; href?: string }[] = [
+  // ── 🎯 Round 49 W-A · LedgerDeltaChip + handoff prompt ────
+  {
+    title: "[R49 WA] 📊 NEW LedgerDeltaChip · Agent L R44 GAP-2 · Endowment effect retention",
+    body: "Tim 25+ canary 「人的心理學很重要」 directive · ship Endowment effect localStorage delta chip on /track-record · 「+X since YYYY-MM-DD」 visitor 個人 累積 check-ins。 NEW components/LedgerDeltaChip.tsx · localStorage zone27_last_ledger_n_v1 · SSR-safe discriminated union mount · conditional render(first visit · delta=0 都不 render · 0 noise)· 0 server · 0 PII · per /audit S06 PRE-COMMIT disclosure 第 8 個 localStorage key。 同 RecentMatchesRow R40 + AnonCalibrationStrip R45 pattern · 「不打擾就是禮物」 axiom maintained · 0 push · 純 client recall。",
+    href: "/track-record",
+  },
+  // ── 🔥 Round 48 · MLB engine pick + linescore + verdict pipeline ──
+  {
+    title: "[R48 WA+WB+WC] 🔥 MLB grading pipeline · Tim 直問補洞 · LIVE re-compute disclosure",
+    body: "Tim 24+ canary 「MLB 為何沒結算? 也要我貼給您?」 surface 真實 brand-IP gap · ship MLB engine pick + linescore final scores + verdict 對照。 lib/mlb.ts extended(engineWinHomePct deterministic Log5 formula · finalScore from linescore hydrate · verdict proved/diverged/tie)· /matches/mlb cards 加 ENGINE NOW row + final score TeamRow inline + verdict block · /coverage data pipeline disclose「MLB LIVE re-compute · NOT pre-game lock-in vs CPBL」 brand-IP-pure 區分(MLB = informational · CPBL = accountability · NOT 算進 /track-record per /audit S05 PRE-COMMIT axiom)。 Tim 不需要截 MLB 圖。",
+    href: "/matches/mlb",
+  },
+  // ── 🎨 Round 47 · Tier 切換自如 ──
+  {
+    title: "[R47 WA+WB] 🎨 PreviewModeBanner inline 4-tier switch + Cmd+Shift+P shortcut",
+    body: "Tim 23+ canary「設計者帳號各方案切換自如」 friction · R36 W-D banner 只 cancel · 沒 inline switch · 修:banner 加 inline 4 tier-switch buttons(匿名 · FREE · BLACK · FOUNDERS)· 從任何 page 1-click 切換不需回 /admin · Keyboard shortcut Cmd+Shift+P · 從任何 page activate preview · default anonymous · 同 brand IP /admin noindex axiom invisible to public。",
+    href: "/admin",
+  },
+  // ── 🤖 Round 46 · CPBL schedule auto-fetch ──
+  {
+    title: "[R46 WA+WB+WC] 🤖 CPBL schedule auto-fetch + /coverage data pipeline transparency",
+    body: "Tim 22+ canary「MLB 自己更新 · CPBL 呢?」 surface friction · ship scripts/fetch-cpbl-schedule.mjs(cheerio HTML parse cpbl.com.tw/games)+ npm script entry · /coverage Section 02 data pipeline transparency block(MLB 100% auto vs CPBL hybrid 50% auto)。 Tim daily friction 減半(賽程截圖 → auto · 仍 manual:賽後 box score finalResult)· per brand IP「物理時刻 + Tim 簽名」 axiom。",
+    href: "/coverage",
+  },
+  // ── 🎯 Round 45 · Agent L DEEPEST · Anonymous Lens-Pick Loop ──
+  {
+    title: "[R45 WA→WG] 🎯 DEEPEST · Anonymous Lens-Pick Loop · Epistemic Gym retention without auth",
+    body: "Tim 21+ canary persona invocation = ONE sharp call · ship Agent L R44 DEEPEST · 「Epistemic gym」 retention loop 訪客在 /matches/[gameId] engine reveal 之前 pick · localStorage 累積個人 calibration vs engine · 0 auth · 0 server · 0 PII。 NEW lib/anon-picks.ts + AnonPickWidget(3 states discriminated union mount · pre/post-reveal/finalized)+ AnonCalibrationStrip(2 variants calibration full + homepage compact)· /audit S06 zone27_anon_picks_v1 disclosure · CLAUDE.md 2 new components。 brand-pure first retention loop without auth/email/push · 玩運彩+報馬仔 結構性無法 ship 同 widget。",
+    href: "/calibration",
+  },
+  // ── 🎨 Round 44 W-A → W-G · 4 OG cards + Receipt + Tim canonical sentence + Agent L GAP-1 ──
+  {
+    title: "[R44 WA-WG] 🎨 4 OG cards + Tim canonical sentence + CopyLinkButton + Receipt expansion",
+    body: "Agent L visitor return engagement audit + Agent K brand voice EXEMPLARY verdict + Agent K DEEPEST canonical sentence。 Ship 4 NEW OG cards(/calibration · /ethics · /steelman · /membership/black-card/ledger)displacement-specific punchlines · Reproducibility Receipt drop-in /annual/2026 METRICS(4-page coverage now)· Tim canonical「每一個承諾 Tim 簽名 · 可被驗證 · 違反 = /ethics 紅字永久標」 sentence in 4 hero pages(/about Prologue + /ethics + /steelman + /annual)· Agent L GAP-1 fix · CopyLinkButton on /matches/[gameId] highest-volume share route。",
+    href: "/ethics",
+  },
   // ── 🏆 Round 43 W-A → W-E · Agent J + K synthesize · 6 quality fixes ──
   {
     title: "[R43 WE] 📎 /ethics + /steelman cross-link 對稱 · /now closure",

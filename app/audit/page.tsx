@@ -525,6 +525,11 @@ export default function AuditPage() {
                 value="您 anonymous picks · 個人 calibration vs engine"
                 note="AnonPickWidget 寫入 · /matches/[gameId] 訪客 pick before peeking · AnonCalibrationStrip 讀 · 0 server · 0 PII · /calibration + homepage 只在您裝置 render · R45 W-A"
               />
+              <DataRow
+                label="zone27_last_ledger_n_v1"
+                value="您上次看 /track-record 時的 N · 用於 delta chip 顯示"
+                note="LedgerDeltaChip 寫入 + 讀取 · 每次訪 /track-record 看到「+X since YYYY-MM-DD」 · 純 Endowment effect 心理 hook · 0 server · 0 PII · R49 W-A"
+              />
             </DataTable>
 
             <P className="text-mute/70 mt-3">

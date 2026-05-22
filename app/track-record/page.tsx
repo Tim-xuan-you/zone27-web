@@ -7,6 +7,7 @@ import FounderSignOff from "@/components/FounderSignOff";
 import ArticleMeta from "@/components/ArticleMeta";
 import EngineStamp from "@/components/EngineStamp";
 import ReproducibilityReceipt from "@/components/ReproducibilityReceipt";
+import LedgerDeltaChip from "@/components/LedgerDeltaChip";
 import TeamPickPanel from "@/components/TeamPickPanel";
 import MyTeamTrackRecord, { type MyTeamMatch } from "@/components/MyTeamTrackRecord";
 import {
@@ -91,6 +92,12 @@ export default function TrackRecordPage() {
           >
             {finalized.length === 0 ? "WAITING · N=0" : `START · N=${finalized.length}`}
           </span>
+          {/* Round 49 W-A · LedgerDeltaChip · Agent L R44 GAP-2 ship ·
+              Endowment effect retention · returning visitor 看「+X since
+              date」 客戶端 only · localStorage zone27_last_ledger_n_v1 ·
+              0 server · 0 PII · per /audit S06 disclosure。 Only renders
+              for non-first visits 同時 delta > 0。 */}
+          <LedgerDeltaChip currentN={finalized.length} />
         </div>
         <h1 className="text-4xl sm:text-5xl text-bone font-light tracking-tight max-w-3xl">
           每一場引擎的公開預測 · 賽後實際結果在這
