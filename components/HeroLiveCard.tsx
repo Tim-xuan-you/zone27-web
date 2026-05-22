@@ -24,6 +24,7 @@ import {
   formatBadge,
 } from "@/lib/founders-stats";
 import UncertaintyStripe from "@/components/UncertaintyStripe";
+import ConfidenceStars from "@/components/ConfidenceStars";
 import EngineStamp from "@/components/EngineStamp";
 
 // ── ZONE 27 · Hero Live Card ───────────────────────────
@@ -193,6 +194,26 @@ export default function HeroLiveCard({ match }: { match: Match }) {
           命運」 VISUAL not text. */}
       <div className="mt-1">
         <UncertaintyStripe estimate={homePct} n={stats.completed} height={4} />
+      </div>
+
+      {/* Round 34 W-A · ConfidenceStars 補 homepage hero gap(R33 W-A 只 ship
+          /matches/[gameId] + /signal-board · 漏 hero · 是 R32 W-C OTP path 反向
+          over-promise pattern · homepage 寫 「AI 引擎告訴您信號強度 5★ STRONG → 1★
+          COIN-FLIP」 promise 必須兌現)。 Static aiConfidence 跟 live Monte Carlo
+          並排 dual signal:Live % = visitor 瀏覽器即時運算(open methodology)·
+          Static ★ = 賽前 locked engine confidence(costly signaling · pre-locked
+          at ingest time · 不可 game)。 兩個並存 = brand IP「方法公開 · 同時 lock-in」。 */}
+      <div className="mt-5 sm:mt-6 flex items-center justify-between gap-3 flex-wrap">
+        <div>
+          <p className="font-mono text-mute text-[9px] sm:text-[10px] tracking-[0.3em] mb-1.5">
+            AI CONFIDENCE · 賽前 locked
+          </p>
+          <ConfidenceStars confidence={match.aiConfidence} variant="inline" />
+        </div>
+        <p className="font-mono text-mute/60 text-[9px] tracking-[0.25em] tabular leading-relaxed text-right">
+          static locked vs<br />
+          live ↑ converging
+        </p>
       </div>
       {simPhase === "converged" && stats.completed >= 30 && (
         <p

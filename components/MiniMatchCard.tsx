@@ -7,6 +7,7 @@ import {
   type MatchPhase,
   type Calibration,
 } from "@/lib/matches";
+import ConfidenceStars from "@/components/ConfidenceStars";
 
 // ── ZONE 27 · Mini Match Card ────────────────────────────
 // Round 31 Wave A · Compact static-engine card for the homepage
@@ -133,6 +134,14 @@ export default function MiniMatchCard({ match }: { match: Match }) {
             className="absolute -top-1 h-[8px] w-px bg-gold/80"
             style={{ left: `${homePct}%` }}
           />
+        </div>
+
+        {/* Round 34 W-A · ConfidenceStars per-card 同 hero AI promise · static
+            locked 5★ STRONG → 1★ COIN-FLIP visual hierarchy · authority bias +
+            decision-cost-collapse hook · 球迷 grammar 1.2 秒識別比 plain {N}/100
+            更 fast。 */}
+        <div className="mt-1.5 flex justify-end">
+          <ConfidenceStars confidence={match.aiConfidence} variant="inline" />
         </div>
       </div>
 
