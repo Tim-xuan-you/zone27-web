@@ -24,6 +24,7 @@ import {
   formatBadge,
 } from "@/lib/founders-stats";
 import UncertaintyStripe from "@/components/UncertaintyStripe";
+import EngineStamp from "@/components/EngineStamp";
 
 // ── ZONE 27 · Hero Live Card ───────────────────────────
 // 首頁的活化版預測卡。Mount 時 client-side 跑 1000 場
@@ -350,6 +351,10 @@ export default function HeroLiveCard({ match }: { match: Match }) {
           ?
         </p>
       )}
+      {/* Round 31 Wave B · Vercel + Plausible datestamped trust signal */}
+      <div className="mt-6 sm:mt-8 pt-4 sm:pt-5 border-t border-line/40 text-center">
+        <EngineStamp />
+      </div>
     </article>
   );
 }

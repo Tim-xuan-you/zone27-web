@@ -1,5 +1,6 @@
 import Link from "next/link";
 import MiniMatchCard from "@/components/MiniMatchCard";
+import EngineStamp from "@/components/EngineStamp";
 import {
   getMatchPhase,
   type Match,
@@ -194,6 +195,10 @@ export default function TonightReceiptsCard({
           >
             完整公開戰績 →
           </Link>
+        </div>
+        {/* Round 31 Wave B · Vercel + Plausible datestamped trust signal */}
+        <div className="mt-4 text-center sm:text-left">
+          <EngineStamp />
         </div>
       </footer>
     </article>

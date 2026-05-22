@@ -14,7 +14,7 @@ import {
   type MatchPhase,
   type Calibration,
 } from "@/lib/matches";
-import StatTerm from "@/components/StatTerm";
+import StatPercentileBar from "@/components/StatPercentileBar";
 import RelatedReading from "@/components/RelatedReading";
 import FollowMatchButton from "@/components/FollowMatchButton";
 import MatchNoteEditor from "@/components/MatchNoteEditor";
@@ -463,8 +463,8 @@ function PitcherCard({
     hr9: string;
   };
   return (
-    <div className="bg-slate/60 border border-line/70 p-8">
-      <div className="flex items-center justify-between mb-6">
+    <div className="bg-slate/60 border border-line/70 p-6 sm:p-8">
+      <div className="flex items-center justify-between mb-5">
         <span className="font-mono text-gold/70 text-[10px] tracking-[0.3em]">
           {side}
         </span>
@@ -472,24 +472,27 @@ function PitcherCard({
       </div>
       <h3 className="text-2xl text-bone font-light tracking-tight mb-6">{p.name}</h3>
 
-      <dl className="space-y-3 font-mono text-sm">
-        <StatRow term="ERA" value={p.era} />
-        <StatRow term="K/9" value={p.k9} />
-        <StatRow term="WHIP" value={p.whip} />
-        <StatRow term="BB/9" value={p.bb9} />
-        <StatRow term="HR/9" value={p.hr9} />
-      </dl>
-    </div>
-  );
-}
-
-function StatRow({ term, value }: { term: string; value: string }) {
-  return (
-    <div className="flex items-center justify-between border-b border-line/40 pb-2">
-      <dt className="text-mute tracking-[0.25em] text-[10px]">
-        <StatTerm term={term} />
-      </dt>
-      <dd className="text-bone tabular">{value}</dd>
+      {/* Round 31 Wave B · Baseball Savant percentile bars
+          替換原 plain StatRow · brand IP grammar match for hardcore
+          baseball fans · CPBL league reference range positioning
+          per /audit S02 ESTIMATION DISCLOSURE pattern。 */}
+      <div className="space-y-0.5">
+        <StatPercentileBar stat="ERA" value={p.era} />
+        <StatPercentileBar stat="K/9" value={p.k9} />
+        <StatPercentileBar stat="WHIP" value={p.whip} />
+        <StatPercentileBar stat="BB/9" value={p.bb9} />
+        <StatPercentileBar stat="HR/9" value={p.hr9} />
+      </div>
+      <p className="font-mono text-mute/60 text-[9px] tracking-[0.25em] mt-4 leading-relaxed">
+        TIER vs CPBL league ref range · 估計值 / 真實值 dot color 同等 ·{" "}
+        <Link
+          href="/audit"
+          className="text-mute/60 hover:text-gold underline-offset-4 hover:underline transition-colors"
+        >
+          /audit
+        </Link>{" "}
+        S02 disclosure
+      </p>
     </div>
   );
 }

@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import RelatedReading from "@/components/RelatedReading";
 import FounderSignOff from "@/components/FounderSignOff";
 import ArticleMeta from "@/components/ArticleMeta";
+import EngineStamp from "@/components/EngineStamp";
 import {
   matches,
   getFinalizedMatches,
@@ -104,6 +105,12 @@ export default function TrackRecordPage() {
             readingMin={3}
             sample={{ current: finalized.length, threshold: 30 }}
           />
+        </div>
+        {/* Round 31 Wave B · datestamped engine stamp · Vercel + Plausible
+            pattern · 公開戰績頁 + build commit permalink = audit trail 一鍵
+            可達 · 對齊 brand IP「方法公開·品味私藏」 + /audit BUILD chip。 */}
+        <div className="mt-3">
+          <EngineStamp />
         </div>
         <p className="mt-4 font-mono text-mute/80 text-[10px] tracking-[0.25em] leading-relaxed max-w-2xl">
           多數運動分析平台選擇藏起這頁;ZONE 27 把它放在 footer 主導航 ·
