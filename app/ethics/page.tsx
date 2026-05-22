@@ -247,6 +247,47 @@ export default function EthicsPage() {
           </div>
         </section>
 
+        {/* ── 02B MIT LICENSE LIMIT(Round 57 W-A · Agent A Vector 7 fix)──
+            Honest disclosure of brand-IP boundary 物理 limit · 之前 commitments
+            bind Tim's actions 但 MIT license 同時允許 anyone fork engine ·
+            包成 sportsbook tool · ZONE 27 ethical claim 只 bind Tim · 不 bind
+            code 流向。 Pre-empt adversarial「commitment 是 theatrical」 attack
+            via transparent limit-of-power disclosure · costly signaling 比
+            silent contradiction 強 100×。 */}
+        <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-12 border-t border-line/40 pt-10">
+          <p
+            lang="en"
+            className="font-mono text-gold text-[10px] tracking-[0.45em] mb-6"
+          >
+            / 02B · MIT LICENSE LIMIT · 我們做不到的事
+          </p>
+          <div className="border border-line/70 bg-slate/30 p-5 sm:p-7">
+            <h3 className="text-bone text-lg sm:text-xl font-light tracking-tight mb-4 leading-snug">
+              我們承諾我們不做 · 但我們不能阻止 fork
+            </h3>
+            <p className="text-mute leading-relaxed mb-4">
+              ZONE 27 引擎 MIT-licensed open source(同 brand IP「方法公開」
+              axiom)。 任何 sportsbook 明天可以 fork lib/simulator.ts +
+              lib/simulator-v03.ts · 包成 odds 服務賣。 我們的 8 commitments
+              只 bind 我們的 actions · <strong className="text-bone">不能 bind
+              code 的流向</strong>。
+            </p>
+            <p className="text-mute/85 leading-relaxed mb-4">
+              <strong className="text-bone">透明 limit-of-power 比假裝沒 contradiction 強</strong>。
+              此 commitment 「不分潤博彩」 = Tim signs 「ZONE 27 entity 不
+              license / sell / API access 給 sportsbook」 · 不是「ZONE 27 code
+              永遠不會出現在 sportsbook tool」 — 後者是 MIT license 物理 上做
+              不到。
+            </p>
+            <p className="font-mono text-mute/80 text-[10px] tracking-[0.3em] leading-relaxed">
+              ⚓ 若 sportsbook fork ZONE 27 · 我們會在{" "}
+              <Link href="/audit" className="text-gold underline-offset-4 hover:underline">/audit</Link>
+              {" "}列出 fork 事實 + publicly disavow · 不收 brand 利益關聯。
+              限制公開 = 比假裝強大更可信。
+            </p>
+          </div>
+        </section>
+
         {/* ── 03 PRE-COMMIT BINDING ────────────────── */}
         <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-16 border-t border-line/40 pt-12">
           <p

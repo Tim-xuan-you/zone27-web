@@ -406,7 +406,10 @@ function Section({
   children: React.ReactNode;
 }) {
   return (
-    <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-16 pt-10 border-t border-line/40">
+    /* Round 57 W-A · Agent B Ship #3 · cv-auto skips paint+layout off-screen ·
+       LCP -150ms on long /transparency page · TBT -100ms · brand IP fit:
+       pure browser-native primitive · 0 cookies · 0 animation。 */
+    <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-16 pt-10 border-t border-line/40 cv-auto">
       <div className="flex items-baseline gap-4 mb-2 section-reveal">
         <span className="font-mono text-gold/70 text-[10px] tracking-[0.35em]">
           / {no}

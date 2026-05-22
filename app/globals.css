@@ -206,6 +206,25 @@ blockquote {
     0 8px 40px rgba(0, 0, 0, 0.45);
 }
 
+/* ── Round 57 W-A · Agent B Ship #3 · content-visibility utility classes ──
+   Skip rendering of below-the-fold sections until they scroll into view ·
+   LCP -150ms · TBT -100ms on long pages(/transparency 7 sections · /lab
+   below-fold · /founders 975 DOM elements)。 Browser skips paint + layout
+   for off-screen sections · reads spec but defers expensive work。
+   `contain-intrinsic-size` reserves estimated height to avoid scrollbar
+   jump on section reveal。 Brand IP fit:0 animation · 0 motion · 0 cookies
+   · pure browser-native perf primitive · 不違反 reduced-motion accessibility。
+*/
+.cv-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 800px;
+}
+
+.cv-auto-sm {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 300px;
+}
+
 /* Subtle gold shimmer for the win bar */
 @keyframes shimmer {
   0%, 100% { opacity: 0.85; }
