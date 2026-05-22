@@ -121,9 +121,9 @@ export default function Home() {
       <section className="mx-auto max-w-4xl px-6 sm:px-10 pt-10 sm:pt-32 pb-10 sm:pb-20 text-center">
         <p
           lang="en"
-          className="font-mono text-gold/70 text-[10px] sm:text-xs tracking-[0.4em] mb-5 sm:mb-10"
+          className="font-mono text-gold text-[10px] sm:text-xs tracking-[0.4em] mb-5 sm:mb-10"
         >
-          A QUANTITATIVE SPORTS INTELLIGENCE CLUB · EST. 2026
+          AI 量化棒球引擎 · QUANTITATIVE BASEBALL AI · EST. 2026
         </p>
 
         <h1 className="text-4xl sm:text-6xl md:text-7xl font-light leading-[1.05] tracking-tight text-bone">
@@ -139,8 +139,19 @@ export default function Home() {
           WE DON&apos;T GUESS. WE COMPUTE.
         </p>
 
+        {/* Round 33 W-B · agent customer-driven product redesign verdict:
+            hero explainer 加 AI prominence + 信號強度語法 + regulatory
+            framing。 connects to ConfidenceStars(Round 33 W-A)downstream.
+            「公開可驗證 · 不收下注佣 · 不推薦投注」 = Taiwan 投顧 license
+            analogy defense + brand IP「data publisher」 not「advisor」 positioning. */}
         <p className="mt-6 sm:mt-10 max-w-md mx-auto text-mute leading-relaxed text-sm sm:text-base">
-          引擎為您跑這場 · 結果存進公開戰績。
+          今晚 CPBL · AI 引擎告訴您信號強度<span className="text-gold">5 ★ STRONG → 1 ★ COIN-FLIP</span>。 結果存進公開戰績。
+        </p>
+        <p
+          lang="en"
+          className="mt-3 max-w-md mx-auto font-mono text-mute/70 text-[9px] sm:text-[10px] tracking-[0.3em] leading-relaxed"
+        >
+          公開可驗證 · 不收下注佣 · 不推薦投注
         </p>
 
         {/* Round 11 agent fix: desktop hero had no Founders CTA above
@@ -167,6 +178,39 @@ export default function Home() {
             <span className="text-mute">NT$ 2,700 終身</span>
             <span className="text-gold/70 ml-2">→</span>
           </Link>
+        </p>
+      </section>
+
+      {/* ── F6 「ZONE 27 不做」 declarative-absence strip ────────────
+          Round 33 W-B · agent A 帶回 top success pattern across 13 niche
+          subscription wins(Stratechery「no ads」 · Defector「no PE no
+          billionaire」 · Aftermath「worker-owned」)+ ZONE 27 既有
+          [[feedback-zone27-pratfall-brand-ip]] · 「declarative absence
+          is brand moat(Aronson 1966 + Spence 1973 costly signaling)」。
+          Codify 5 redlines 物理 visible on home · 1 hr ship · 0 hr/wk ·
+          permanent brand asset · differentiation 對 玩運彩 / 報馬仔 /
+          LINE 老師生態 instant clarity。 5 items 為 ConfidenceStars(W-A)
+          的 inverse twin:「我們不是 sportsbook」 declarative。 */}
+      <section className="mx-auto max-w-3xl px-6 sm:px-10 pb-10 sm:pb-12 text-center">
+        <p
+          lang="en"
+          className="font-mono text-gold text-[10px] sm:text-[11px] tracking-[0.4em] mb-3 sm:mb-4"
+        >
+          / WHAT ZONE 27 DOES NOT DO
+        </p>
+        <p className="font-mono text-mute/85 text-[11px] sm:text-xs tracking-[0.18em] leading-relaxed">
+          <span className="text-bone">不顯示賠率</span>
+          <span className="text-mute/50 mx-2">·</span>
+          <span className="text-bone">不賣明牌</span>
+          <span className="text-mute/50 mx-2">·</span>
+          <span className="text-bone">不分潤博彩</span>
+          <span className="text-mute/50 mx-2">·</span>
+          <span className="text-bone">不藏 DIVERGED</span>
+          <span className="text-mute/50 mx-2">·</span>
+          <span className="text-bone">不追蹤您</span>
+        </p>
+        <p className="mt-3 font-mono text-mute/60 text-[9px] sm:text-[10px] tracking-[0.28em] leading-relaxed">
+          NO ODDS · NO LOCK · NO AFFILIATE · NO HIDDEN MISSES · 0 TRACKERS
         </p>
       </section>
 

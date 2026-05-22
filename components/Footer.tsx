@@ -185,7 +185,7 @@ export default function Footer() {
         >
           <p className="font-mono text-mute/70 group-hover:text-mute text-[9px] tracking-[0.3em] leading-relaxed transition-colors">
             由<span className="text-gold mx-1">創始會員</span>出資
-            <span className="mx-2 text-mute/40">·</span>
+            <span className="mx-2 text-mute/60">·</span>
             <span lang="en">0 GA · 0 FB Pixel · 0 Hotjar · 0 cookies set</span>
           </p>
           <p
@@ -193,6 +193,16 @@ export default function Footer() {
             className="font-mono text-mute/70 group-hover:text-mute text-[9px] tracking-[0.3em] mt-1.5 transition-colors"
           >
             FUNDED BY FOUNDERS · NO GA · NO PIXEL · NO HOTJAR · 0 COOKIES SET
+          </p>
+          {/* Round 33 W-B · regulatory framing per agent verdict:
+              positions ZONE 27 in 「data publisher」 category not 「advisor」 ·
+              Taiwan 投顧 license analogy defense + brand IP「方法公開 ·
+              不分潤博彩」 redline 物理 codify · 同 /coverage NEVER list 延伸。 */}
+          <p
+            lang="en"
+            className="font-mono text-mute/60 group-hover:text-mute text-[9px] tracking-[0.3em] mt-1.5 transition-colors"
+          >
+            公開可驗證 · 不收下注佣 · 不推薦投注 · OPEN ENGINE · NO COMMISSION · NO BET ADVICE
           </p>
         </Link>
 
