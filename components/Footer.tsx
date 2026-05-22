@@ -41,7 +41,69 @@ type FooterGroup = {
   links: FooterLink[];
 };
 
+// Round 50 W-E · 2026-05-22 evening · Footer F-pattern reorder · per
+// Nielsen Norman 1997 canonical「visitors don't read · they scan」 +
+// Tim 26+ canary fire 高情緒「點出來的頁面都是無關緊要的」 surface 真實
+// footer-order bug:
+//   - 原 column 1 = ENTRY(6 個 onboarding items 第一眼)
+//   - 原 column 4 = ENGINE(3 個 product items 反而最後)
+//   - 「/matches」 routes(/matches · /matches/mlb · /matches/cpbl-260521-01)
+//     completely missing from footer · 訪客 scroll 到底 footer 找不到「賽事」
+//
+// W-E fix · F-pattern reading aligned to fan-first audience axiom:
+//   - column 1 = PRODUCT(賽事 · 引擎)· 5 items 含 /matches + /lab + 等
+//   - column 2 = DOCS(信任文件)· 8 trust artifacts(W-A 加 /methodology/diff)
+//   - column 3 = ENTRY(入門)· 6 onboarding items
+//   - column 4 = BRAND(品牌 IP)· 5 identity items
+//
+// 訪客 F-pattern desktop scan left-to-right · 第一眼 product · 第二 trust ·
+// 第三 onboarding · 第四 identity。 Mobile flatten 同樣順序。 對 fan
+// filter-in:product first ✓ · trust second ✓。 對 賭徒 filter-out:column
+// 2 trust artifacts(/audit + /ethics + /steelman 等)第二眼出現 = 自然
+// filter-out signal。
+//
+// Brand IP unchanged:
+//   · BRAND 5 items 完整保留(只 column position 從 column 2 → column 4)
+//   · 不違反 [[feedback-zone27-audience-fans-not-engineers]]
+//   · 對齊 R50 W-C homepage funnel invert · 同 pattern「product-first 順序」
+//     物理 codify 到 footer layer
 const FOOTER_GROUPS: FooterGroup[] = [
+  {
+    label: "賽事 · 引擎",
+    enLabel: "PRODUCT",
+    links: [
+      // Round 50 W-E · 加 /matches + /matches/mlb 兩個 footer product
+      // entries · 之前 footer 0 個賽事入口 · 訪客 scroll 到底 完全
+      // 找不到「今日 CPBL」。 修。 Order priority:今日賽事 > MLB > 引擎 >
+      // 早報 > GitHub。
+      { label: "今日 CPBL 賽事", href: "/matches" },
+      { label: "MLB · 即時資料", href: "/matches/mlb" },
+      { label: "蒙地卡羅實驗室", href: "/lab" },
+      { label: "每日早報", href: "/signal-board" },
+      {
+        label: "GitHub 開源",
+        href: "https://github.com/Tim-xuan-you/zone27-web",
+        external: true,
+      },
+    ],
+  },
+  {
+    label: "信任文件",
+    enLabel: "DOCS",
+    links: [
+      { label: "模型報告", href: "/audit" },
+      { label: "技術白皮書", href: "/methodology" },
+      // Round 50 W-A · /methodology/diff NEW · v0.2 → v0.3 entire delta ·
+      // brand IP triple-fire · 加進 DOCS group surface 給 footer scroll。
+      { label: "引擎 diff · v0.2 → v0.3", href: "/methodology/diff" },
+      { label: "覆蓋範圍", href: "/coverage" },
+      { label: "公開戰績", href: "/track-record" },
+      { label: "引擎自評", href: "/calibration" },
+      { label: "Ethics Policy", href: "/ethics" },
+      { label: "Steelman", href: "/steelman" },
+      { label: "27 種進階指標", href: "/glossary" },
+    ],
+  },
   {
     label: "入門",
     enLabel: "ENTRY",
@@ -74,33 +136,6 @@ const FOOTER_GROUPS: FooterGroup[] = [
       // Sivers /now movement 對標 · 倒置 SaaS scheduled marketing。
       { label: "現在 · craft journal", href: "/now" },
       { label: "版本紀錄", href: "/changelog" },
-    ],
-  },
-  {
-    label: "信任文件",
-    enLabel: "DOCS",
-    links: [
-      { label: "模型報告", href: "/audit" },
-      { label: "技術白皮書", href: "/methodology" },
-      { label: "覆蓋範圍", href: "/coverage" },
-      { label: "公開戰績", href: "/track-record" },
-      { label: "引擎自評", href: "/calibration" },
-      { label: "Ethics Policy", href: "/ethics" },
-      { label: "Steelman", href: "/steelman" },
-      { label: "27 種進階指標", href: "/glossary" },
-    ],
-  },
-  {
-    label: "工具",
-    enLabel: "ENGINE",
-    links: [
-      { label: "實驗室", href: "/lab" },
-      { label: "每日早報", href: "/signal-board" },
-      {
-        label: "GitHub 開源",
-        href: "https://github.com/Tim-xuan-you/zone27-web",
-        external: true,
-      },
     ],
   },
 ];
