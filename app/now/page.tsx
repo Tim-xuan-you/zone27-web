@@ -33,9 +33,15 @@ export const metadata: Metadata = {
 // ─────────────────────────────────────────────────────
 
 const LAST_UPDATED = "2026-05-22";
-const CYCLE = "Round 28-35 · 2026-05-22 · 12+ canary fires displacement mission · ConfidenceStars 全鏈 + AI marketing + 不做 list + BLACK CARD 499→299 + WCAG AA + /annual/2026 + OG cards × 3 + next.config.ts production-ready + NEW /rewards skill-based fantasy league prize + 恆美 ecosystem + NEW /methodology Section 04 Engine Lineup 3 變體";
+const CYCLE = "Round 28-36 · 2026-05-22 · 13+ canary fires displacement mission · ConfidenceStars 全鏈 + AI marketing + 不做 list + BLACK CARD 499→299 + WCAG AA + /annual/2026 + OG cards × 3 + next.config.ts production-ready + NEW /rewards skill-based fantasy league prize + 恆美 ecosystem + NEW /methodology Section 04 Engine Lineup 3 變體(accuracy progression)+ NEW Section 05 Lens Variety 7 candidate lenses(analytical variety · Patek complication 模式)· brand-pure 兩軸線並存";
 
 const SHIPPED_THIS_CYCLE: { title: string; body: string; href?: string }[] = [
+  // ── 🔬 Round 36 W-A · NEW /methodology Section 05 Lens Variety ──
+  {
+    title: "[R36 WA] 🔬 NEW /methodology Section 05「LENS VARIETY」 multi-angle pivot · 7 candidate lenses · Patek complication 模式 · 兩軸線並存",
+    body: "Tim 13+ canary explicit verbatim resent = trust direction「ship multi-lens framework」 per prior reply Option 3(preserve Section 04 v0.2/v0.3/v0.4 progression + ADD lens variety expansion · 不 churn · 兩軸線並存)。 Tim 提議:「壓力減 + 不同 angle 分析 + 越開發越多」 framework · brand-pure interpretation:不是「accuracy 壓力減」(brand IP violation)· 是「加 variety 軸線」(brand-pure 延伸)。 Patek Philippe complication 模式 · 不是越準的錶 · 是越多 complication · ZONE 27 multi-lens 同邏輯 · brand-pure 無限 scaling。 7 candidate lenses table:Win Probability(LIVE FREE)/ Vibe Check(streak)/ Park Factor / Pitcher Fatigue / Underdog Tracker / Bullpen Depth / Matchup History · 全 BLACK CARD planned 解鎖。 兩軸線並存 brand IP 邏輯:Section 04(accuracy)解「準不準?」 + Section 05(variety)解「夠不夠多 angle?」 · 訪客兩個都 honest 不假。 Inversion punchline:「Most prediction sites have 1 fake angle. We're building 7 honest ones.」 displacement mission 補完。 5 brand-pure 設計原則 per-lens(純 viz · educational explainer · BLACK CARD voting decide next · 每 1-2 月 ship 1 · Founders 27 lifetime lock 未來所有 lenses)。 commercial directive 完整 brand-pure 落地(不破 brand IP · 不破 minimalism · 不分 STARTER/PRO multi-tier · single BLACK CARD all-lens · sustained value compounding)。",
+    href: "/methodology",
+  },
   // ── 🎯 Round 35 W-E · BLACK CARD 6th unlock Engine Lineup ──
   {
     title: "[R35 WE] 🎯 /membership/black-card 5→6 unlocks · Engine Lineup 解鎖加為 #1 · BLACK CARD commercial value 物理 codify",
