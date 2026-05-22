@@ -11,10 +11,15 @@ import { getSession } from "@/lib/supabase/server";
 import { readFollowsFromMeta } from "@/lib/follows";
 import { readNotesFromMeta } from "@/lib/notes";
 import {
+  readPredictionsFromMeta,
+  aggregatePredictionStats,
+} from "@/lib/predictions";
+import {
   getMatchById,
   getMatchPhase,
   getCalibration,
   getTodayMatches,
+  matches as allMatches,
   type Match,
 } from "@/lib/matches";
 
@@ -72,6 +77,16 @@ export default async function MemberPage({
     .filter((m): m is Match => !!m);
   // Round 30 Wave 10 · note map for badge display on each FollowedMatchRow
   const notesMap = readNotesFromMeta(userMeta);
+  // Round 31 W-X1 · Personal prediction stats overlay · per W-W1
+  // UserPredictionPicker · aggregate by match finalWinner from full match dataset。
+  const predictionsMap = readPredictionsFromMeta(userMeta);
+  const predictionStats = aggregatePredictionStats(
+    predictionsMap,
+    allMatches.map((m) => ({
+      id: m.id,
+      finalWinner: m.finalResult?.winner ?? null,
+    }))
+  );
   // Round 30 Wave 10 · days-since-join · auth.users.created_at = registration
   // moment(magic link first click)。 Endowment Effect deepening:「您是
   // ZONE 27 第 N 天會員」 explicit identity anchor。
@@ -176,6 +191,54 @@ export default async function MemberPage({
                   })
                 )}
               />
+            </div>
+          )}
+
+          {/* ── Round 31 W-X1 · Personal prediction stats row ──
+              per W-W1 UserPredictionPicker · aggregate「您 predictions 累計
+              N · ✓Y proved · ✕Z diverged · accuracy N%」 personal calibration
+              stats · 同 /track-record W-J trackRecord chip pattern · 對你
+              (這個 prediction 累積的會員)說話。 */}
+          {session && predictionStats.total > 0 && (
+            <div className="mt-6 bg-slate/40 border border-gold/30 p-5 sm:p-6">
+              <div className="flex items-baseline justify-between gap-3 flex-wrap mb-2">
+                <p
+                  lang="en"
+                  className="font-mono text-gold text-[10px] tracking-[0.4em]"
+                >
+                  🎯 YOUR PREDICTIONS · 您累計
+                </p>
+                <p className="font-mono text-mute text-[10px] tracking-[0.3em] tabular">
+                  累計 N={predictionStats.total} · pending {predictionStats.pending}
+                </p>
+              </div>
+              <div className="flex items-baseline gap-4 sm:gap-6 flex-wrap font-mono tabular">
+                <span className="text-gold text-xl sm:text-2xl tracking-tight">
+                  ✓{predictionStats.proved}
+                  <span className="text-mute text-xs ml-1">PROVED</span>
+                </span>
+                <span className="text-loss/80 text-xl sm:text-2xl tracking-tight">
+                  ✕{predictionStats.diverged}
+                  <span className="text-mute text-xs ml-1">DIVERGED</span>
+                </span>
+                {predictionStats.push > 0 && (
+                  <span className="text-mute text-xl sm:text-2xl tracking-tight">
+                    ={predictionStats.push}
+                    <span className="text-mute/60 text-xs ml-1">PUSH</span>
+                  </span>
+                )}
+                {predictionStats.accuracy !== null && (
+                  <span className="text-bone text-xl sm:text-2xl tracking-tight">
+                    {predictionStats.accuracy}%
+                    <span className="text-mute text-xs ml-1">accuracy</span>
+                  </span>
+                )}
+              </div>
+              <p className="text-mute/85 text-sm leading-relaxed mt-3">
+                您 vs 引擎 vs 實際 · 三層 epistemic mirror。 任何賽事頁
+                point click 🎯 YOUR PREDICTION pick (我猜 / 不押)· 賽後
+                verdict 自動進此累計。
+              </p>
             </div>
           )}
 

@@ -6,8 +6,6 @@ import WaitlistForm from "@/components/WaitlistForm";
 import CopyLinkButton from "@/components/CopyLinkButton";
 import {
   FOUNDERS_TOTAL,
-  FOUNDERS_CLAIMED,
-  FOUNDERS_REMAINING,
   FOUNDERS_NEXT,
   formatBadge,
 } from "@/lib/founders-stats";
@@ -174,38 +172,39 @@ export default async function FoundersPage({
           </span>
         </div>
 
+        {/* Round 14 brand-IP amplification(Agent A #1 · Patek/Cartier
+            serial-number specificity)→ Round 31 W-X2 Hermès process
+            transparency pivot · 砍 「263 席剩」 FOMO e-commerce script
+            kid pattern · 改 Patek specificity + 「永不再開」 · agent
+            ONE deepest call:「我們公布分配規則 · 不公布 live counter ·
+            每週手寫更新 ledger」 per Hogan Lovells exclusivity-scarcity
+            legal boundaries · per Hermès workshop transparency pattern。 */}
         <h1 className="text-4xl sm:text-6xl md:text-7xl font-light leading-[1.05] tracking-tight text-bone">
-          <span className="text-gold tabular">{FOUNDERS_REMAINING}</span>
-          {" "}席剩
+          NEXT IS{" "}
+          <span className="text-gold tabular">{formatBadge(FOUNDERS_NEXT)}</span>
           <br />
           <span className="text-3xl sm:text-4xl md:text-5xl text-mute">
             (共 {FOUNDERS_TOTAL} 名 · 永不再開)
           </span>
         </h1>
 
-        {/* Round 14 brand-IP amplification (Agent A #1 · Patek/Cartier
-            serial-number specificity). Visitor sees their concrete
-            future number — not abstract "263 remaining" but specific
-            "you'd be #008". Identity hook stronger than count.
-            Low Patek-numbers trade at premium (#001 > #150); this
-            specificity is what makes Founders 27 a numbered artefact
-            vs a generic membership. */}
-        <p className="mt-3 sm:mt-4 font-mono text-gold text-[11px] sm:text-xs tracking-[0.45em] tabular">
-          · NEXT IS {formatBadge(FOUNDERS_NEXT)} ·
-        </p>
-
-        {/* Live scarcity strip · directly under headline · matches what
-            sticky CTA bar promised on the prior page (per Round 8 agent
-            audit). Without this, mobile visitor arriving via sticky bar
-            lost the「X / 270」context they just tapped. */}
-        <p className="mt-3 sm:mt-4 font-mono text-bone text-sm sm:text-base tabular tracking-[0.2em]">
-          <span className="text-gold">{FOUNDERS_CLAIMED}</span>
-          <span className="text-mute/60"> / </span>
-          <span>{FOUNDERS_TOTAL}</span>
-          <span className="text-mute mx-2">·</span>
+        {/* Round 31 W-X2 · Hermès process transparency · 砍 live counter
+            FOMO · 改 allocation rules cross-link · 每週手寫更新 ledger
+            per /founders/ledger pattern · brand IP「方法公開·品味私藏」
+            延伸:分配規則公開到極致(誰被 reject · 為什麼)· 但 live count
+            不 expose。 */}
+        <p className="mt-4 sm:mt-5 font-mono text-mute text-sm sm:text-base tabular tracking-[0.2em] leading-relaxed">
           NT$ 2,700
-          <span className="text-mute mx-2">·</span>
+          <span className="text-mute/60 mx-2">·</span>
           終身
+          <span className="text-mute/60 mx-2">·</span>
+          <Link
+            href="/founders/ledger"
+            className="text-gold hover:text-gold-soft underline-offset-4 hover:underline transition-colors"
+            title="分配公開帳本 · 每週手寫更新 · 拒絕原因 sample 去 PII · 4 brand IP axiom 同時 fire"
+          >
+            分配規則公開帳本 →
+          </Link>
         </p>
 
         <p
