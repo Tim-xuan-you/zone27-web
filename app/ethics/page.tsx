@@ -311,9 +311,38 @@ export default function EthicsPage() {
           >
             ETHICS IS PHYSICS · NOT MARKETING.
           </p>
-          <h3 className="text-3xl text-bone font-light tracking-tight mb-8">
+          <h3 className="text-3xl text-bone font-light tracking-tight mb-4">
             8 條 binding · 0 wiggle room · 0 fine print。
           </h3>
+          {/* Round 51 W-C · Agent 3 HIGH #6 fix · /ethics 缺 conversion
+              CTA at page end · 讀完 8 commitments 訪客是 strongest possible
+              warm-up state · trust loop must close to Founders 27 / BLACK
+              CARD entry · 不 dump 到 navigation 即跑路。 加 explicit Founders
+              27 + BLACK CARD chip · 同 trust artifacts 並列 surface · 訪客
+              可 1-tap action。 */}
+          <p className="text-mute text-sm sm:text-base max-w-xl mx-auto mb-8 leading-relaxed">
+            這 8 條 commitment 改變了您的判斷嗎? 加入 ZONE 27 ·
+          </p>
+          <div className="flex flex-wrap justify-center gap-3 mb-8">
+            <Link
+              href="/founders"
+              className="inline-block px-6 py-3 bg-gold text-navy font-mono text-[10px] tracking-[0.3em] hover:bg-gold-soft transition-colors"
+            >
+              → Founders 27 · NT$ 2,700 終身
+            </Link>
+            <Link
+              href="/membership/black-card"
+              className="inline-block px-6 py-3 border border-gold text-gold font-mono text-[10px] tracking-[0.3em] hover:bg-gold/10 transition-colors"
+            >
+              → BLACK CARD · NT$ 299/月
+            </Link>
+          </div>
+          <p
+            lang="en"
+            className="font-mono text-mute/85 text-[10px] tracking-[0.35em] mb-6"
+          >
+            OR DIG DEEPER ·
+          </p>
           <div className="flex flex-wrap justify-center gap-3">
             <Link
               href="/steelman"

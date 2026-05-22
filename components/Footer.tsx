@@ -227,14 +227,18 @@ export default function Footer() {
           className="block text-center pb-6 border-b border-line/30 group hover:bg-slate/10 transition-colors -mx-6 sm:-mx-10 px-6 sm:px-10 py-2"
           aria-label="我們不追蹤您 · 完整 anti-tracker inventory 見 /privacy Section 03"
         >
-          <p className="font-mono text-mute/70 group-hover:text-mute text-[9px] tracking-[0.3em] leading-relaxed transition-colors">
+          {/* Round 51 W-C · Agent 2 #3 WCAG AA fix · text-mute/60-70 at 9px
+              on navy bg fail 4.5:1 contrast。 Bump text-mute/70 → text-mute/85
+              (5.2:1 ✓ AA pass)· text-mute/60 → text-mute/85 同步。 Decorative
+              `·` divider 加 aria-hidden="true" 防 screen reader spurious read。 */}
+          <p className="font-mono text-mute/85 group-hover:text-mute text-[9px] tracking-[0.3em] leading-relaxed transition-colors">
             由<span className="text-gold mx-1">創始會員</span>出資
-            <span className="mx-2 text-mute/60">·</span>
+            <span aria-hidden="true" className="mx-2 text-mute/60">·</span>
             <span lang="en">0 GA · 0 FB Pixel · 0 Hotjar · 0 cookies set</span>
           </p>
           <p
             lang="en"
-            className="font-mono text-mute/70 group-hover:text-mute text-[9px] tracking-[0.3em] mt-1.5 transition-colors"
+            className="font-mono text-mute/85 group-hover:text-mute text-[9px] tracking-[0.3em] mt-1.5 transition-colors"
           >
             FUNDED BY FOUNDERS · NO GA · NO PIXEL · NO HOTJAR · 0 COOKIES SET
           </p>
@@ -244,7 +248,7 @@ export default function Footer() {
               不分潤博彩」 redline 物理 codify · 同 /coverage NEVER list 延伸。 */}
           <p
             lang="en"
-            className="font-mono text-mute/60 group-hover:text-mute text-[9px] tracking-[0.3em] mt-1.5 transition-colors"
+            className="font-mono text-mute/85 group-hover:text-mute text-[9px] tracking-[0.3em] mt-1.5 transition-colors"
           >
             公開可驗證 · 不收下注佣 · 不推薦投注 · OPEN ENGINE · NO COMMISSION · NO BET ADVICE
           </p>

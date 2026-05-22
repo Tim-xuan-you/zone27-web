@@ -327,9 +327,36 @@ export default function SteelmanPage() {
           >
             STEELMAN · NOT STRAWMAN.
           </p>
-          <h3 className="text-3xl text-bone font-light tracking-tight mb-8">
+          <h3 className="text-3xl text-bone font-light tracking-tight mb-4">
             5 strongest objections · 5 honest concessions · 0 dismissals。
           </h3>
+          {/* Round 51 W-C · Agent 3 HIGH #6 fix · /steelman conversion CTA
+              at page end · 同 /ethics pattern · 訪客讀完 5 strongest
+              objections + Tim 自己 concede = strongest warm-up state ·
+              trust loop must close to Founders 27 / BLACK CARD entry。 */}
+          <p className="text-mute text-sm sm:text-base max-w-xl mx-auto mb-8 leading-relaxed">
+            5 strongest objections 沒勸退您嗎? 加入 ZONE 27 ·
+          </p>
+          <div className="flex flex-wrap justify-center gap-3 mb-8">
+            <Link
+              href="/founders"
+              className="inline-block px-6 py-3 bg-gold text-navy font-mono text-[10px] tracking-[0.3em] hover:bg-gold-soft transition-colors"
+            >
+              → Founders 27 · NT$ 2,700 終身
+            </Link>
+            <Link
+              href="/membership/black-card"
+              className="inline-block px-6 py-3 border border-gold text-gold font-mono text-[10px] tracking-[0.3em] hover:bg-gold/10 transition-colors"
+            >
+              → BLACK CARD · NT$ 299/月
+            </Link>
+          </div>
+          <p
+            lang="en"
+            className="font-mono text-mute/85 text-[10px] tracking-[0.35em] mb-6"
+          >
+            OR DIG DEEPER ·
+          </p>
           <div className="flex flex-wrap justify-center gap-3">
             <Link
               href="/ethics"

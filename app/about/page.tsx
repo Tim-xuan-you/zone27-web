@@ -374,9 +374,29 @@ export default function AboutPage() {
             >
               RESPONSE TIME
             </p>
-            <p className="text-bone text-base">
-              email / DM 24 小時內 Taipei time · 不外包客服 · 不批次回覆
-            </p>
+            <div className="text-bone text-base">
+              <p>email / DM 24 小時內 Taipei time · 不外包客服 · 不批次回覆</p>
+              {/* Round 51 W-C · Agent 3 MEDIUM #10 fix · 缺 explicit Tim
+                  accountability marker · 24h SLA claim 不夠 · 必須給 visitor
+                  actionable mailto entry。 真實 mailto:tim@zone27.tw direct
+                  channel · 若 SLA 超過則 /ethics 紅字標 · brand-pure 物理 codify。 */}
+              <p className="mt-3 font-mono text-mute/85 text-[11px] tracking-[0.25em] leading-relaxed">
+                📧 直接寫信:{" "}
+                <a
+                  href="mailto:tim@zone27.tw"
+                  className="text-gold underline-offset-4 hover:underline transition-colors"
+                >
+                  tim@zone27.tw
+                </a>
+                {" "}· 24h 內回覆保證 · 超過則{" "}
+                <Link
+                  href="/ethics"
+                  className="text-loss/80 underline-offset-4 hover:underline transition-colors"
+                >
+                  /ethics 紅字標
+                </Link>
+              </p>
+            </div>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-[200px_1fr] gap-2 sm:gap-6 p-5 sm:p-6">
             <p

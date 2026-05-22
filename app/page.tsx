@@ -299,23 +299,26 @@ export default function Home() {
         </p>
         <p className="font-mono text-mute/85 text-[11px] sm:text-xs tracking-[0.18em] leading-relaxed">
           <span className="text-bone">不顯示賠率</span>
-          <span className="text-mute/50 mx-2">·</span>
+          <span aria-hidden="true" className="text-mute/50 mx-2">·</span>
           <span className="text-bone">不賣明牌</span>
-          <span className="text-mute/50 mx-2">·</span>
+          <span aria-hidden="true" className="text-mute/50 mx-2">·</span>
           <Link
             href="/learn#why-not-gambling"
             className="text-bone underline decoration-mute/40 underline-offset-4 hover:decoration-gold hover:text-gold transition-colors"
           >
             不分潤博彩
           </Link>
-          <span className="text-mute/50 mx-2">·</span>
+          <span aria-hidden="true" className="text-mute/50 mx-2">·</span>
           <span className="text-bone">不藏 DIVERGED</span>
-          <span className="text-mute/50 mx-2">·</span>
+          <span aria-hidden="true" className="text-mute/50 mx-2">·</span>
           <span className="text-bone">不追蹤您</span>
-          <span className="text-mute/50 mx-2">·</span>
+          <span aria-hidden="true" className="text-mute/50 mx-2">·</span>
           <span className="text-gold">不等 Q3</span>
         </p>
-        <p className="mt-3 font-mono text-mute/60 text-[9px] sm:text-[10px] tracking-[0.28em] leading-relaxed">
+        {/* Round 51 W-C · Agent 2 #3 WCAG AA fix · text-mute/60 at 9-10px
+            font on navy bg → 3.5:1 contrast ratio · fails AA normal text
+            (4.5:1 required)。 Bump to text-mute (100%) ≈ 5.6:1 ✓ AA pass。 */}
+        <p className="mt-3 font-mono text-mute text-[9px] sm:text-[10px] tracking-[0.28em] leading-relaxed">
           NO ODDS · NO LOCK · NO AFFILIATE · NO HIDDEN MISSES · 0 TRACKERS · <span className="text-gold/80">NO WAITING</span>
         </p>
       </section>
