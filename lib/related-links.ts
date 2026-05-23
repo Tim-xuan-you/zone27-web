@@ -852,6 +852,28 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
       title: "Pre-purchase altercasting · 替下一個 CPBL 球迷世代守",
     },
   ],
+  // R80 W-H · NEW /hey-tim · Agent A R80 BIGGEST GAP closure · Bill James
+  //「Hey Bill」 15-yr pattern + Defector Funbag + Stratechery + Tom Tango
+  // + patio11 reader-reply ethic。 Siblings: /letter(Tim singular voice)
+  // + /faq(pre-anticipated Qs)+ /integrity(21 binding · rule #9 mandatory
+  // ledger discipline)。 8th in canonical append-only ledger family。
+  "/hey-tim": [
+    {
+      href: "/letter",
+      kicker: "letter",
+      title: "Tim singular voice · essay-style · NO comment thread",
+    },
+    {
+      href: "/faq",
+      kicker: "faq",
+      title: "14 pre-anticipated Qs · monologue · already-known answers",
+    },
+    {
+      href: "/integrity",
+      kicker: "integrity",
+      title: "21 binding rules · rule #9 mandatory-ledger discipline binding",
+    },
+  ],
 };
 
 export function getRelatedLinks(currentPath: string): RelatedLink[] {

@@ -11,7 +11,7 @@ import {
 
 // ── ZONE 27 · Command Palette ──────────────────────────
 // Premium-tier navigation primitive. Cmd-K / Ctrl-K opens a
-// modal with all 53 visitor-discoverable routes searchable in one place.
+// modal with all 54 visitor-discoverable routes searchable in one place.
 // Arrow keys navigate · Enter opens · Esc closes.
 // (/admin · noindex Tim-ops preview · intentionally NOT indexed here.)
 // R68 W-A added /founders/apply (Patek-style application) · 41→42 routes。

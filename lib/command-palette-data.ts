@@ -649,6 +649,38 @@ export const COMMAND_ITEMS: CommandItem[] = [
       "cpbl only",
     ],
   },
+  // R80 W-H · NEW /hey-tim · Agent A R80 BIGGEST GAP closure · Bill James
+  //「Hey Bill」 15-yr canonical pattern + Defector Funbag + Stratechery
+  // Daily Update reply + Tom Tango comments + patio11 reader-reply ethic ·
+  // 8th in canonical append-only ledger family · 信任文件 group。
+  {
+    label: "Hey Tim · subscriber Q&A · 您 ask · Tim 親手 reply · Bill James 15-yr pattern",
+    kicker: "/hey-tim",
+    path: "/hey-tim",
+    group: "信任文件",
+    keywords: [
+      "hey tim",
+      "hey-tim",
+      "subscriber qa",
+      "subscriber q&a",
+      "q&a",
+      "ask tim",
+      "問 tim",
+      "問題",
+      "回覆",
+      "ledger",
+      "bill james",
+      "hey bill",
+      "defector funbag",
+      "stratechery reply",
+      "tom tango",
+      "patio11",
+      "8th ledger",
+      "親手 reply",
+      "dialogue",
+      "trust the human",
+    ],
+  },
   // R76 W-C · NEW /engine-log · Stripe Status 2012 + Cloudflare 2025 +
   // Tailscale changelog pattern · curated dated log of every engine re-run
   // + receipt correction + input-staleness + methodology update · biggest
