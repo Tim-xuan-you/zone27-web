@@ -302,9 +302,10 @@ Member + Ops + Auth(Round 29-30)
                          不出現在 Cmd-K · 對齊 noindex 框架
 
 OG + favicon + chrome
-/icon                    Z27 monogram favicon
+/icon                    Z27 monogram favicon(64×64)
+/apple-icon              **NEW Round 79 W-B** · Apple touch icon(180×180)· iOS Safari + LINE iOS + iMessage + Threads + Slack mobile share-preview void close · pattern parallel /icon
 /opengraph-image         全站 fallback OG card
-/[18 routes]/opengraph-image  18 個 custom OG cards(Round 29 加 /member · /admin 無 OG · 因 noindex)
+/[36 routes]/opengraph-image  36 個 custom OG cards(R79 W-C-G+W-H 加 /letter + /year-zero + /heritage + /integrity + /pricing/why + /engine-log = 6 NEW · all 54 visitor-discoverable routes + per-page openGraph + twitter + canonical via lib/page-og.ts helper · /admin + /poster 無 OG 因 noindex)
 /loading.tsx             Brand-pure suspense skeleton(Round 2)
 ```
 

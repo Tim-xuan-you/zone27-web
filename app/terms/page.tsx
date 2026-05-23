@@ -1,14 +1,18 @@
 import Link from "next/link";
-import type { Metadata } from "next";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import RelatedReading from "@/components/RelatedReading";
+import { createPageMetadata } from "@/lib/page-og";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "Terms of Service — 我們對您的承諾,您對我們的同意",
   description:
-    "ZONE 27 服務條款。pre-launch 階段的真實情境合約 — 不是模板。AI 是娛樂用途,Founders 27 waitlist 不收費不綁定。",
-};
+    "ZONE 27 服務條款 · pre-launch 階段的真實情境合約 · 不是模板 · AI 是娛樂用途 · Founders 27 waitlist 不收費不綁定 · 含台灣 14-day 退款主動延伸(消保法 § 19 distance-selling)。",
+  ogTitle: "Terms of Service · 我們對您的承諾 · ZONE 27",
+  ogDescription:
+    "pre-launch 真實情境合約 · 不是模板 · 含台灣 14-day 退款主動延伸 · 消保法 § 19",
+  path: "/terms",
+});
 
 export default function TermsPage() {
   return (

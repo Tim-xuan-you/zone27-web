@@ -17,7 +17,17 @@ export const metadata: Metadata = {
     title: "The Letter · Tim 親手 voice · ZONE 27",
     description:
       "Tim 親手 letter · edited-in-place · DHH HEY World + Berkshire pattern · NO email · NO push · NO comment thread",
-    images: ["/transparency/opengraph-image"],
+    type: "article",
+    url: "/letter",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "The Letter · Tim 親手 voice · ZONE 27",
+    description:
+      "Tim 親手 letter · edited-in-place · DHH HEY World + Berkshire pattern · NO email · NO push · NO comment thread",
+  },
+  alternates: {
+    canonical: "/letter",
   },
 };
 

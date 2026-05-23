@@ -1,16 +1,20 @@
 import Link from "next/link";
-import type { Metadata } from "next";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import RelatedReading from "@/components/RelatedReading";
 import ArticleMeta from "@/components/ArticleMeta";
 import StatTerm from "@/components/StatTerm";
+import { createPageMetadata } from "@/lib/page-og";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "5 分鐘看懂 ZONE 27 — 給沒聽過 Bill James 的人",
   description:
     "對棒球有興趣但不懂進階數據?從這裡開始。3 個章節 · 5 分鐘 · 不需要統計學背景。為什麼運氣不是答案 · 機率分布到底在說什麼 · 為什麼 ZONE 27 不是博彩。",
-};
+  ogTitle: "5 分鐘看懂 ZONE 27 · 給沒聽過 Bill James 的人",
+  ogDescription:
+    "3 章節 · 5 分鐘 · 不需要統計學背景 · 為什麼運氣不是答案 · 為什麼不是博彩",
+  path: "/learn",
+});
 
 // ── ZONE 27 · /learn — 5-minute primer for non-quant visitors ──
 // Why this page exists:

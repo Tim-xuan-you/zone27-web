@@ -1,19 +1,23 @@
 import Link from "next/link";
-import type { Metadata } from "next";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import FounderSignOff from "@/components/FounderSignOff";
 import ArticleMeta from "@/components/ArticleMeta";
 import EngineStamp from "@/components/EngineStamp";
 import RelatedReading from "@/components/RelatedReading";
+import { createPageMetadata } from "@/lib/page-og";
 import { getFinalizedMatches } from "@/lib/matches";
 import { LAST_SHIPPED_DATE_ISO } from "@/lib/last-shipped";
 
-export const metadata: Metadata = {
-  title: "首五分鐘 · 5 receipts of Tim's craft · ZONE 27",
+export const metadata = createPageMetadata({
+  title: "首五分鐘 · 5 receipts of Tim's craft",
   description:
     "ZONE 27 onboarding · 5 個獨立 trust artifact · 不是 wizard · 不是 progress bar · 每 step 是 Tim 親手 ship 的 receipt · 您 5 分鐘看完 = 您已 verified ZONE 27 不是 LINE 老師 · 倒置 SaaS marketing。",
-};
+  ogTitle: "首五分鐘 · 5 receipts of Tim's craft · ZONE 27",
+  ogDescription:
+    "5 independent trust artifacts · 不是 wizard · 倒置 SaaS marketing · 5 分鐘 verified 不是 LINE 老師",
+  path: "/founders/first-five-minutes",
+});
 
 // ── R69 W-A · Founders 27 First-Five-Minutes Onboarding ──
 // Agent A R68 SHIP 1 deferred · Linear command-palette tour +

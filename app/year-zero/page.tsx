@@ -21,7 +21,17 @@ export const metadata: Metadata = {
     title: "Year Zero · ZONE 27 第一封年信",
     description:
       "Tim 親手年信 · what shipped + what refused + what don't know + Year One + thank you · Defector Year-Five pattern",
-    images: ["/transparency/opengraph-image"],
+    type: "article",
+    url: "/year-zero",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Year Zero · ZONE 27 第一封年信",
+    description:
+      "Tim 親手年信 · what shipped + what refused + what don't know + Year One + thank you · Defector Year-Five pattern",
+  },
+  alternates: {
+    canonical: "/year-zero",
   },
 };
 

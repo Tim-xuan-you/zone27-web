@@ -1,14 +1,18 @@
 import Link from "next/link";
-import type { Metadata } from "next";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
+import { createPageMetadata } from "@/lib/page-og";
 import { fetchTodayMlb, type MlbGame } from "@/lib/mlb";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "今日 MLB 賽程 — 即時資料來自 MLB 官方 API",
   description:
-    "MLB 美國職棒今日全部賽程,即時資料來自 MLB Stats API,每 10 分鐘更新。台北時區顯示。",
-};
+    "MLB 美國職棒今日全部賽程 · 即時資料來自 MLB Stats API · 每 10 分鐘更新 · 台北時區顯示。",
+  ogTitle: "今日 MLB 賽程 · ZONE 27",
+  ogDescription:
+    "MLB 今日賽程 · MLB Stats API · 每 10 分鐘 ISR · 台北時區",
+  path: "/matches/mlb",
+});
 
 // Force this page to use ISR cache from lib/mlb's revalidate setting
 export const revalidate = 600;

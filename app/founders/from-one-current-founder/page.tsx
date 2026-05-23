@@ -1,17 +1,21 @@
 import Link from "next/link";
-import type { Metadata } from "next";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import FounderSignOff from "@/components/FounderSignOff";
 import ArticleMeta from "@/components/ArticleMeta";
 import RelatedReading from "@/components/RelatedReading";
+import { createPageMetadata } from "@/lib/page-og";
 import { FOUNDERS_TOTAL } from "@/lib/founders-stats";
 
-export const metadata: Metadata = {
-  title: "From One Current Founder · 等待 #001 的真實 6 個月 letter · ZONE 27",
+export const metadata = createPageMetadata({
+  title: "From One Current Founder · 等待 #001 真實 6 個月 letter",
   description:
     "此頁 RESERVED FOR Founder #001 第 6 個月的真實 letter · 不是 fake testimonial · 不是 mock quote · pre-launch empty state IS the receipt that this page is reserved for one real voice。 270 個席位 = 270 封 letter 未來。",
-};
+  ogTitle: "From One Current Founder · 等待 #001 真實 letter · ZONE 27",
+  ogDescription:
+    "Pre-launch empty scaffold · 不是 fake testimonial · 等真實 Founder #001 6 個月後 ship · 270 席 = 270 封 letter",
+  path: "/founders/from-one-current-founder",
+});
 
 // ── R69 W-B · From One Current Founder · Empty Scaffold ──
 // Agent A R68 SHIP 4 deferred · Substack Year-In-Review pattern + Mubi

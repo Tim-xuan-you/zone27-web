@@ -12,7 +12,17 @@ export const metadata: Metadata = {
     title: "Integrity · ZONE 27 永久不會變的 19 條",
     description:
       "Berkshire 1996 Owner's Manual pattern · 11 redlines + 8 ethics = 19 永久 binding · public bond not implicit",
-    images: ["/transparency/opengraph-image"],
+    type: "article",
+    url: "/integrity",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Integrity · ZONE 27 永久不會變的 19 條",
+    description:
+      "Berkshire 1996 Owner's Manual pattern · 11 redlines + 8 ethics = 19 永久 binding · public bond not implicit",
+  },
+  alternates: {
+    canonical: "/integrity",
   },
 };
 

@@ -21,7 +21,17 @@ export const metadata: Metadata = {
     title: "Engine Operations Log · ZONE 27",
     description:
       "Stripe Status pattern · dated operational log · brand IP operational artifact surface · APPEND-ONLY",
-    images: ["/transparency/opengraph-image"],
+    type: "article",
+    url: "/engine-log",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Engine Operations Log · ZONE 27",
+    description:
+      "Stripe Status pattern · dated operational log · brand IP operational artifact surface · APPEND-ONLY",
+  },
+  alternates: {
+    canonical: "/engine-log",
   },
 };
 

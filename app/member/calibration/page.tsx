@@ -1,11 +1,11 @@
 import Link from "next/link";
-import type { Metadata } from "next";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import RelatedReading from "@/components/RelatedReading";
 import FounderSignOff from "@/components/FounderSignOff";
 import ArticleMeta from "@/components/ArticleMeta";
 import CalibrationTierBadge from "@/components/CalibrationTierBadge";
+import { createPageMetadata } from "@/lib/page-og";
 import {
   getFinalizedMatches,
   type Match,
@@ -13,11 +13,15 @@ import {
 import { getSession } from "@/lib/supabase/server";
 import { readFollowsFromMeta } from "@/lib/follows";
 
-export const metadata: Metadata = {
-  title: "Calibration · 您的 epistemic mirror · ZONE 27",
+export const metadata = createPageMetadata({
+  title: "Calibration · 您的 epistemic mirror",
   description:
-    "Sabermetric reliability diagram · ZONE 27 是唯一發布會員自己 calibration drift 的高端棒球分析品牌。X 軸 = 引擎機率,Y 軸 = actual frequency,45° 線 = 完美校準。Pratfall + Costly Signaling brand IP 物理產出。N=0 從今晚 22:00+ 第一筆 cpbl-260521-01 ingest 起跳。",
-};
+    "Sabermetric reliability diagram · ZONE 27 是唯一發布會員自己 calibration drift 的高端棒球分析品牌。X 軸 = 引擎機率,Y 軸 = actual frequency,45° 線 = 完美校準。Pratfall + Costly Signaling brand IP 物理產出。",
+  ogTitle: "Calibration · 您的 epistemic mirror · ZONE 27",
+  ogDescription:
+    "Reliability diagram · 唯一發布會員 calibration drift 的高端棒球品牌 · Pratfall + Costly Signaling",
+  path: "/member/calibration",
+});
 
 // ── ZONE 27 · /member/calibration ──────────────────────
 // Round 30 Wave 2B · 2026-05-21 evening · agent research deepest call。

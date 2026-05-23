@@ -1,5 +1,4 @@
 import Link from "next/link";
-import type { Metadata } from "next";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import RelatedReading from "@/components/RelatedReading";
@@ -7,17 +6,22 @@ import FounderSignOff from "@/components/FounderSignOff";
 import ArticleMeta from "@/components/ArticleMeta";
 import EngineStamp from "@/components/EngineStamp";
 import ReciprocityLedger from "@/components/ReciprocityLedger";
+import { createPageMetadata } from "@/lib/page-og";
 import {
   FOUNDERS_TOTAL,
   FOUNDERS_CLAIMED,
   FOUNDERS_REMAINING,
 } from "@/lib/founders-stats";
 
-export const metadata: Metadata = {
-  title: "為什麼是 NT$ 299 · 為什麼是 NT$ 2,700 · ZONE 27 Pricing Why",
+export const metadata = createPageMetadata({
+  title: "為什麼是 NT$ 299 · 為什麼是 NT$ 2,700",
   description:
     "ZONE 27 定價 rationale 一頁說清楚 · 不藏在 FAQ · 不靠 sales call · 不靠 enterprise contact form · 純 Defector inverse-disclosure + FanGraphs output-not-input + Stripe Atlas 6-deliverable + Stratechery single-sentence FAQ defense · 5 brand IP axiom triple-fire pricing page craft。",
-};
+  ogTitle: "Pricing Why · NT$ 299/月 vs NT$ 2,700 一次性 · ZONE 27",
+  ogDescription:
+    "定價 rationale 一頁說清楚 · 不藏在 FAQ · 不靠 sales call · 5 anti-pattern explicit refused",
+  path: "/pricing/why",
+});
 
 // ── ZONE 27 · /pricing/why ─────────────────────────────
 // R64 W-B · Agent 6 R64 pricing-page-as-object-of-craft deep dive · 5 ranked

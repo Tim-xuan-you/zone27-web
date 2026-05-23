@@ -1,14 +1,18 @@
 import Link from "next/link";
-import type { Metadata } from "next";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import UnscheduledLetterChip from "@/components/UnscheduledLetterChip";
+import { createPageMetadata } from "@/lib/page-og";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "Changelog — 完整變動歷史 · git 是唯一事實來源",
   description:
-    "ZONE 27 不再手工維護 changelog narrative。所有變動公開在 GitHub commits,git log 是唯一事實來源。本頁列出近期里程碑當 reference,點按鈕可直達完整歷史。",
-};
+    "ZONE 27 不再手工維護 changelog narrative · 所有變動公開在 GitHub commits · git log 是唯一事實來源 · 本頁列出近期里程碑當 reference · 點按鈕可直達完整歷史。",
+  ogTitle: "Changelog · git 是唯一事實來源 · ZONE 27",
+  ogDescription:
+    "76+ rounds 物理證據 · 所有變動公開 · git log 唯一事實 · 不手工維護 narrative",
+  path: "/changelog",
+});
 
 // ── ZONE 27 · /changelog — Reduced (Algorithm Step 3 · Simplify) ──
 // Was 483 lines of hand-maintained release narrative. Now ~70 lines

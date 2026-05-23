@@ -1,7 +1,7 @@
 import Link from "next/link";
-import type { Metadata } from "next";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
+import { createPageMetadata } from "@/lib/page-og";
 import {
   getMatchPhase,
   getCalibration,
@@ -12,11 +12,15 @@ import {
   type Calibration,
 } from "@/lib/matches";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "今日 CPBL 賽事板",
   description:
-    "今日中華職棒比賽列表 · AI 勝率模型每天 15:00 鎖定 · 點進任一場看完整 10,000 次模擬與重播。",
-};
+    "今日中華職棒比賽列表 · AI 勝率模型每天 15:00 鎖定 · 點進任一場看完整 10,000 次模擬與重播 · 7 LIVE LENS CANVAS · 不接受下注。",
+  ogTitle: "今日 CPBL 賽事板 · ZONE 27",
+  ogDescription:
+    "今日 CPBL 比賽列表 · 勝率模型 15:00 鎖定 · 10,000 次模擬 · 7 LIVE LENS · 不接受下注",
+  path: "/matches",
+});
 
 // ── ISR · Re-render daily so the today/archived state stays honest.
 export const revalidate = 86400; // 24 hours

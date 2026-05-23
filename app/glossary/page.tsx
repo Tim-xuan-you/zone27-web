@@ -1,14 +1,18 @@
 import Link from "next/link";
-import type { Metadata } from "next";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import RelatedReading from "@/components/RelatedReading";
+import { createPageMetadata } from "@/lib/page-og";
 
-export const metadata: Metadata = {
-  title: "Glossary — 27 種棒球進階數據",
+export const metadata = createPageMetadata({
+  title: "Glossary — 27 種棒球進階數據 + 5 個 Z27 LEXICON",
   description:
-    "為什麼 K/9 比三振次數重要?WHIP 為什麼是投手的金線?27 個你必須懂的進階指標,白話拆解。",
-};
+    "為什麼 K/9 比三振次數重要?WHIP 為什麼是投手的金線?27 個你必須懂的進階指標 + 5 個 ZONE 27 自創 LEXICON · 白話拆解 · CPBL 看球必備辭典。",
+  ogTitle: "Glossary · 27 industry stats + 5 Z27 LEXICON · ZONE 27",
+  ogDescription:
+    "27 個進階數據 + 5 個 ZONE 27 自創 LEXICON · CPBL 看球必備辭典 · 白話拆解",
+  path: "/glossary",
+});
 
 type Stat = {
   abbr: string;

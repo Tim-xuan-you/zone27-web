@@ -11,7 +11,17 @@ export const metadata: Metadata = {
     title: "Heritage · 替下一個 CPBL 球迷世代守 ZONE 27",
     description:
       "Patek 1996 + Belk 1988 + Weinstein 1963 altercasting · pre-cast inheritance for all visitors",
-    images: ["/transparency/opengraph-image"],
+    type: "article",
+    url: "/heritage",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Heritage · 替下一個 CPBL 球迷世代守 ZONE 27",
+    description:
+      "Patek 1996 + Belk 1988 + Weinstein 1963 altercasting · pre-cast inheritance for all visitors",
+  },
+  alternates: {
+    canonical: "/heritage",
   },
 };
 
