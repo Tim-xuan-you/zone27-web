@@ -259,6 +259,31 @@ export default async function FoundersPage({
           <span className="text-loss/80">空頭支票</span> · 那 brand 自殺。
         </p>
 
+        {/* R60 W-B · 「SHADOWLESS RUN」 framing · 整批 270 = 1st Edition
+            relative to BLACK CARD ongoing renewal · 同 Pokemon TCG WoTC 1999
+            Base Set 1st Edition / Shadowless 第一批 print run · 從未被 reprint ·
+            PSA 10 1st Edition Shadowless Charizard 2024 Heritage 拍賣 $550K
+            (vs Unlimited 同卡 low five figures = 10-50x premium · per
+            cllct.com / heritage / bulbapedia 1st_Edition_TCG)。 binary tier
+            機制(1st Edition vs Unlimited)是 Pokemon 經濟學的核心 driver ·
+            不是 sub-tier · 是 print-run-of-record · 之後永遠不會再有 270 個
+            seat opened。 同 [[zone27-payment-architecture]] 倒置 SaaS 手工
+            稀缺 + Tim 「270 = 一年 sign-off ceiling」 axiom · brand IP
+            triple-fire(disclosure-philosophy + pratfall + costly-signaling)。 */}
+        <p className="mt-3 max-w-md mx-auto text-mute/70 text-[11px] sm:text-xs leading-relaxed">
+          <strong className="text-bone">Founders 27</strong> = ZONE 27 的{" "}
+          <span className="text-gold/90">1st Edition Shadowless Run</span> ·
+          同 Pokemon Base Set 1999 第一批 print run · 售完即永久關閉 · BLACK
+          CARD 訂閱者永遠無法 retroactively 升 Founders 27 ·{" "}
+          <Link
+            href="/founders/ledger"
+            className="text-gold/80 hover:text-gold underline-offset-4 hover:underline transition-colors"
+          >
+            /founders/ledger
+          </Link>
+          {" "}記名追蹤。
+        </p>
+
         {/* Round 52 W-D · Agent 1 #4 fix · Founder voice block at buy line
             · 之前 FROM THE FOUNDER 在 form 之後(R8 移)· 訪客 buy-decision
             moment 沒看到 Tim voice · 加 present-tense first-person 120-word

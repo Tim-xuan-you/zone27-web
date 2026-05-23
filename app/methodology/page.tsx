@@ -354,6 +354,32 @@ repeat 10,000 times → aggregate
           Baseball Prospectus PECOTA tier 結構 · brand-pure 不靠 secret moat。
         </p>
 
+        {/* R60 W-A · Pokemon TCG SET release narrative 借鑑 · Wizards of the
+            Coast Base Set(1999)→ Jungle Expansion 1 → Fossil Expansion 2
+            同樣 pattern · 每個 set 永久 viewable · 不 silent rotate · 不 reprint
+            (Patek + Pokemon 1st Edition mystique 雙 anchor)。 ZONE 27 引擎
+            版本 framing 從「v0.X · vX.Y」 工程術語 升 「BASE SET · EXPANSION」
+            collectible narrative · 同 [[zone27-audience-fans-not-engineers]]
+            (hardcore CPBL 球迷 + TCG 收藏 demographic overlap > 工程師 audience)。
+            同 brand IP「方法公開」 延伸:每個 set 完整 ship code on GitHub +
+            完整 diff /methodology/diff + 永久 viewable per Lens Lifetime
+            Pledge · TCG「先 collect 完整 set」 incentive 轉換為「先 audit 完整
+            engine progression」 trust signal。 */}
+        <p className="mt-4 text-mute/85 leading-relaxed">
+          <strong className="text-bone">v0.2 是 BASE SET</strong> · 七 lens
+          canvas + Pitcher-Only Monte Carlo · ZONE 27 的奠基引擎。{" "}
+          <strong className="text-bone">v0.3 是 EXPANSION 1</strong> · 加 Park
+          Factor · 把 4 個 CPBL 場館的 dimension delta 寫進 HR sensitivity。{" "}
+          <strong className="text-bone">v0.4 是 EXPANSION 2</strong> · Bayesian
+          Model Averaging · v0.2 vs v0.3 之間的投票機制。 這不是 silent 替換 ·
+          是 set release · 每個 set 永久 viewable per Lens Lifetime Pledge ·
+          完整 diff 在{" "}
+          <Link href="/methodology/diff" className="text-gold underline-offset-4 hover:underline">
+            /methodology/diff
+          </Link>
+          。
+        </p>
+
         <div className="mt-6 bg-slate/40 border border-line/70 overflow-hidden">
           <table className="w-full font-mono text-[11px] sm:text-xs tabular">
             <thead>
@@ -378,7 +404,7 @@ repeat 10,000 times → aggregate
             <tbody>
               <EngineRow
                 engine="v0.2"
-                statusLabel="LIVE"
+                statusLabel="BASE SET · ✓ LIVE"
                 statusTone="gold"
                 method="Pitcher-Only Monte Carlo · K/9 + BB/9 + HR/9"
                 tier="FREE"
@@ -387,7 +413,7 @@ repeat 10,000 times → aggregate
               />
               <EngineRow
                 engine="v0.3"
-                statusLabel="✓ LIVE · R41 W-A · DEV PREVIEW"
+                statusLabel="EXPANSION 1 · ✓ LIVE · DEV PREVIEW"
                 statusTone="gold"
                 method="+ Park Factor HR rate adjustment(v0.3.0)· wOBA 留 v0.3.1"
                 tier="FREE 預覽 · 將來 BLACK CARD"
@@ -396,7 +422,7 @@ repeat 10,000 times → aggregate
               />
               <EngineRow
                 engine="v0.4"
-                statusLabel="PLANNED · Q4 2026"
+                statusLabel="EXPANSION 2 · PLANNED · Q4 2026"
                 statusTone="loss"
                 method="Bayesian Model Averaging across v0.2 + v0.3 votes"
                 tier="BLACK CARD"

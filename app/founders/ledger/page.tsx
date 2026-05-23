@@ -193,6 +193,106 @@ export default function FoundersLedgerPage() {
           )}
         </section>
 
+        {/* R60 W-B · NEW SECTION · SHADOWLESS RUN framing · Pokemon TCG 1st
+            Edition / Shadowless Run mechanic 物理 codify · 整批 270 = print-
+            run-of-record · 永不重印。 WoTC 1999 Base Set 第一批 print run
+            的 「1st Edition」 sigil 從未被 reprint · PSA 10 1st Edition
+            Shadowless Charizard 2024 Heritage Auctions 拍賣 $550K(vs 同卡
+            Unlimited low five figures = 10-50x premium)· 「first batch
+            visible mark」 mechanic 不是 rarity 而是 receipt-of-finite-set。
+            ZONE 27 Founders 27 整批 = 等價 1st Edition Shadowless · BLACK
+            CARD 永遠 = 等價 Unlimited(可 renew)。 不加價(NT$ 2,700 不變)·
+            不 split sub-tier(no #001 vs #027 prestige)· 純 binary
+            tier framing(per Pokemon mechanic accurate · not vinyl First
+            Pressing sub-prestige invention)。 同 Patek allocation +
+            [[zone27-disclosure-philosophy]] 公開 commitment「售完即永久關閉」
+            事前 binding · brand IP triple-fire。 ────────────────── */}
+        <section
+          id="shadowless-run"
+          className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-16 border-t border-line/40 pt-12"
+        >
+          <p
+            lang="en"
+            className="font-mono text-gold text-[10px] tracking-[0.45em] mb-6"
+          >
+            / SHADOWLESS RUN · 整批 270 = ZONE 27 1st Edition
+          </p>
+          <h2 className="text-2xl sm:text-3xl text-bone font-light tracking-tight mb-6">
+            為什麼整批 270 是「1st Edition」?
+          </h2>
+          <p className="text-mute leading-relaxed max-w-2xl mb-5">
+            Pokemon TCG 1999 年 WoTC Base Set 第一批 print run 上面有個小小的{" "}
+            <strong className="text-bone">1st Edition sigil</strong>(後來
+            shadow 加回去 · 第一批就成「Shadowless」)· 從未被 reprint · 2024
+            Heritage Auctions PSA 10 1st Edition Shadowless Charizard 拍價{" "}
+            <strong className="text-gold">US$ 550,000</strong> ·{" "}
+            同一張卡 Unlimited 印量版本 low five figures · binary tier
+            mechanic 帶來 10-50× premium。
+          </p>
+          <p className="text-mute leading-relaxed max-w-2xl mb-5">
+            <strong className="text-bone">ZONE 27 採同 mechanic</strong> ·
+            Founders 27 整批 270 名 = 1st Edition Shadowless Run · 售完即
+            <span className="text-gold/90"> 永久關閉 · 不會有第二批</span>。
+            BLACK CARD 訂閱永遠 open(同 Unlimited 印量)· Founders 27 永遠
+            closed once sold(同 1st Edition 不可 reprint)。
+          </p>
+          <p className="text-mute leading-relaxed max-w-2xl mb-5">
+            <strong className="text-bone">BLACK CARD 訂閱者永遠無法 retroactively
+            升 Founders 27</strong>(同 Unlimited 持有者永遠無法把卡片變成 1st
+            Edition)。 這是<span className="text-gold"> binary tier</span> ·
+            不是 sub-tier · 不分 #001 vs #027 prestige(我們無 vinyl First
+            Pressing sub-prestige 發明)· 純 print-run-of-record · 同 NT$ 2,700
+            一次 · 不加價。
+          </p>
+          <div className="mt-6 bg-slate/40 border border-line/70 p-5 sm:p-6">
+            <p
+              lang="en"
+              className="font-mono text-gold/90 text-[10px] tracking-[0.35em] mb-3"
+            >
+              / 3 BINDING COMMITMENTS · 事前 pre-commit
+            </p>
+            <ul className="space-y-2 text-mute text-sm leading-relaxed">
+              <li className="flex gap-3 items-baseline">
+                <span className="font-mono text-gold/70 text-[10px] tracking-[0.25em]">01</span>
+                <span className="flex-1">
+                  Founders 27 售完 即永久關閉 · git commit 為 source of truth ·
+                  不會有第二批
+                </span>
+              </li>
+              <li className="flex gap-3 items-baseline">
+                <span className="font-mono text-gold/70 text-[10px] tracking-[0.25em]">02</span>
+                <span className="flex-1">
+                  BLACK CARD 訂閱者 不論時間多久 不論累計付款多少 · 永遠
+                  cannot upgrade to Founders 27 · 1st Edition is binary
+                </span>
+              </li>
+              <li className="flex gap-3 items-baseline">
+                <span className="font-mono text-gold/70 text-[10px] tracking-[0.25em]">03</span>
+                <span className="flex-1">
+                  NT$ 2,700 終身永不調漲 · 售完 = 永遠 NT$ 2,700 在 closed state
+                  · 不會 reprint 漲價 · 同 1st Edition Shadowless 不可重印
+                </span>
+              </li>
+            </ul>
+          </div>
+          <p className="mt-5 font-mono text-mute/70 text-[10px] tracking-[0.3em] leading-relaxed">
+            ⚓ <strong className="text-bone">PRE-COMMIT</strong> · 上 3 條
+            binding rule · 修改需 30 天前{" "}
+            <Link href="/changelog" className="text-gold underline-offset-4 hover:underline">
+              /changelog
+            </Link>{" "}
+            公告 · 同{" "}
+            <Link href="/audit" className="text-gold underline-offset-4 hover:underline">
+              /audit
+            </Link>
+            {" "}S05 PRE-COMMIT pattern · 違反 = brand 信用 collapse(per{" "}
+            <Link href="/ethics" className="text-gold underline-offset-4 hover:underline">
+              /ethics
+            </Link>
+            )。
+          </p>
+        </section>
+
         {/* ── ALLOCATION RULES · canonical · pre-locked ─ */}
         <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-16 border-t border-line/40 pt-12">
           <p
