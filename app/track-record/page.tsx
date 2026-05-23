@@ -10,6 +10,7 @@ import ReproducibilityReceipt from "@/components/ReproducibilityReceipt";
 import LedgerDeltaChip from "@/components/LedgerDeltaChip";
 import TeamPickPanel from "@/components/TeamPickPanel";
 import MyTeamTrackRecord, { type MyTeamMatch } from "@/components/MyTeamTrackRecord";
+import CalibrationProgressBar from "@/components/CalibrationProgressBar";
 import {
   matches,
   getFinalizedMatches,
@@ -282,6 +283,16 @@ export default function TrackRecordPage() {
             </>
           )}
         </p>
+      </section>
+
+      {/* R66 W-B · Agent psychology ship #3 · Goal Gradient effect(Hull 1932 ·
+          Kivetz/Urminsky/Zheng 2006)applied to N≥30 statistical-meaningfulness
+          threshold。 NEW CalibrationProgressBar mounted ABOVE LEDGER · honest
+          progress · 不裝 head-start · transparent statistics literacy · 不
+          streak farm · pure pratfall surface that naturally accelerates
+          motivation as N approaches 30。 */}
+      <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-4">
+        <CalibrationProgressBar totalN={finalized.length} />
       </section>
 
       {/* ── LEDGER ROWS ──────────────────────────── */}
