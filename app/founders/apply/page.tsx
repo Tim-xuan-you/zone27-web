@@ -12,6 +12,16 @@ export const metadata: Metadata = {
   title: "申請 Founders 27 · Patek-style allocation · ZONE 27",
   description:
     "Founders 27 創始席位申請表 · Tim 親手 review 每一份申請 · 1-3 business days · per /founders/ledger 5-step allocation rules · 通過後您才會收到付款方式 · 這不是註冊表單 · 是 Patek-style application。",
+  // R69 W-G · Agent B audit F11 fix · explicit openGraph re-using /founders
+  // OG card · NEW-CONVERSATION-PROMPT advertised 「29 custom OG cards」 ·
+  // highest-conversion R68 W-A page was sharing with global fallback OG ·
+  // 此 fix 對齊 /founders parent OG until dedicated card ships R70+。
+  openGraph: {
+    title: "申請 Founders 27 · Patek-style allocation",
+    description:
+      "Tim 親手 review 1-3 days · 通過後收到付款方式(銀行轉帳 + 24h window)· per /founders/ledger 5-step allocation rules。",
+    images: ["/founders/opengraph-image"],
+  },
 };
 
 // ── R68 W-A · Founders 27 Application Page ──────────────

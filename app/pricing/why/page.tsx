@@ -187,7 +187,7 @@ export default function PricingWhyPage() {
               per /methodology Section 04(R60 W-A Pokemon SET narrative)
             </NumItem>
             <NumItem n="05">
-              <span className="text-bone">41 visitor-discoverable routes</span> ·
+              <span className="text-bone">44 visitor-discoverable routes</span> ·
               full Cmd-K palette indexed · 全公開 · 無 paywall on engine
               functionality
             </NumItem>
@@ -528,7 +528,7 @@ function NumItemGhost({
   return (
     <li className="relative py-3 sm:py-4 pl-16 sm:pl-20 border-b border-line/30 last:border-b-0">
       <span
-        className="absolute left-0 top-1 sm:top-2 font-mono text-gold/15 text-5xl sm:text-6xl tabular leading-none pointer-events-none select-none"
+        className="absolute left-0 top-1 sm:top-2 font-mono text-gold/22 text-5xl sm:text-6xl tabular leading-none pointer-events-none select-none"
         aria-hidden="true"
       >
         {n}

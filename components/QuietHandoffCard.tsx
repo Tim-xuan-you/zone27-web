@@ -98,7 +98,7 @@ export default function QuietHandoffCard({ match }: Props) {
 
   return (
     <aside
-      aria-label="One-to-one email handoff · Bloomberg quiet share pattern"
+      aria-label="One-to-one email handoff"
       className="border border-line/50 bg-slate/30 p-4 sm:p-5"
     >
       <div className="flex items-baseline justify-between gap-3 flex-wrap mb-3">

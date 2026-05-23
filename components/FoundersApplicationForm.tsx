@@ -1,6 +1,10 @@
 "use client";
 
 // ── ZONE 27 · Founders 27 Application Form ──────────────
+// R69 W-G · Agent B audit F8 fix · success state focus management ·
+// WCAG 2.4.3 Focus Order + 4.1.3 Status Messages · 訪客 submit 後
+// focus 自動移到 success container · role="status" + aria-live · 不
+// 失去 keyboard / screen reader context。
 // R68 W-A · Patek Philippe-style application form · 1 layer deeper than
 // /founders WaitlistForm · for visitors who actually want one of 270
 // founding seats(#008-#270 · #001-#007 are Tim's system-test placeholders
@@ -37,7 +41,7 @@
 //   ✕ no marketing copy bait("您是最棒的!")· brand-pure honesty only
 // ─────────────────────────────────────────────────────
 
-import { useActionState } from "react";
+import { useActionState, useEffect, useRef } from "react";
 import { useFormStatus } from "react-dom";
 import Link from "next/link";
 import { submitFoundersApplication } from "@/lib/founders-apply";
@@ -69,11 +73,27 @@ export default function FoundersApplicationForm() {
     FoundersApplyResult | null,
     FormData
   >(submitFoundersApplication, null);
+  const successRef = useRef<HTMLDivElement>(null);
+
+  // R69 W-G · Agent B audit F8 fix · move focus to success container
+  // when submission succeeds · keyboard + SR users not orphaned。
+  useEffect(() => {
+    if (state?.ok) {
+      successRef.current?.focus();
+    }
+  }, [state?.ok]);
 
   // ── Success state ────────────────────────────────────
   if (state?.ok) {
     return (
-      <div className="bg-slate/70 border border-gold/60 glow-soft p-10 enter-fade-up">
+      <div
+        ref={successRef}
+        tabIndex={-1}
+        role="status"
+        aria-live="polite"
+        aria-atomic="true"
+        className="bg-slate/70 border border-gold/60 glow-soft p-10 enter-fade-up focus:outline-none focus-visible:ring-2 focus-visible:ring-gold/40"
+      >
         <p className="font-mono text-gold text-[10px] tracking-[0.4em] mb-4 text-center">
           ✓ 申請已收到 · APPLICATION RECEIVED
         </p>
@@ -185,7 +205,7 @@ export default function FoundersApplicationForm() {
           required
           aria-required="true"
           placeholder="Tim · 或 球迷暱稱"
-          autoComplete="given-name"
+          autoComplete="nickname"
           maxLength={FOUNDERS_APPLY_LIMITS.nameMaxChars}
           className="w-full bg-ink/60 border border-line/70 focus-visible:border-gold/70 text-bone px-4 py-3 outline-none transition-colors placeholder:text-mute/70 font-mono text-sm"
         />
