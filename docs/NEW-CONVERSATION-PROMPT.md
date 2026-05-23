@@ -1,8 +1,8 @@
 # 📋 New Conversation Prompt · ZONE 27 Session Handoff
 
 **用途:** 開新對話窗時複製此 prompt 整段 paste · 新 Claude 一秒接上 context。
-**最後 update:** 2026-05-23 · **Round 73 W-Final 攻頂** · R59 7 + R60 3 + R61 6 + R62 4 + R63 4 + R64 3 + R65 4 + R66 3 + R67 5 + R68 7 + R69 9 + R70 8 + R71 5 + R72 5 + R73 6 = 79 W · 3-agent full-authority × 8 invocations(R59-R66)+ R67 code-focused + R68 9th + R69 10th + R70 11th + R71 12th + R72 13th + R73 14th-invocation code-quality + psychology depth(per Tim「先專心更新程式碼 + 人的心理學很重要」)· 2-agent + ClientErrorBoundary + NoPushManifest + 5 audit critical patched(F01+F02+F03+F06+F09)+ Tim handoff copy block · R37→R73
-**Token urgency:** Tim explicit「現在這個對話窗太燒TOKEN了 · 我要開新對話窗複製過去」 · 此 prompt 是 R73 contextual snapshot for fresh Claude bootstrap · TIM ACTIVELY HANDING OFF 2026-05-23 R73 W-Final
+**最後 update:** 2026-05-23 · **Round 74 W-Final 攻頂** · R59 7 + R60 3 + R61 6 + R62 4 + R63 4 + R64 3 + R65 4 + R66 3 + R67 5 + R68 7 + R69 9 + R70 8 + R71 5 + R72 5 + R73 6 + R74 7 = 86 W · 3-agent full-authority × 8 invocations(R59-R66)+ R67 code-focused + R68 9th + R69 10th + R70 11th + R71 12th + R72 13th + R73 14th + R74 15th-invocation psychology-depth queue ship + audit critical sweep · 1-agent post-commit audit pattern(per R57+ 不過度 spawn discipline)· 4 NEW psychology components(ReciprocityLedger + RefusalLedgerHint + NonComparableAnchor + LocalStorageReceipt)+ ClientErrorBoundary 4th wrap + 4 🔴 + 3 🟡 audit critical patched(C1+C2+C3+C4+M1+M2+M3)· R37→R74
+**Token urgency:** Tim explicit「現在這個對話窗太燒TOKEN了 · 我要開新對話窗複製過去」 · 此 prompt 是 R74 contextual snapshot for fresh Claude bootstrap · 留空 task default-ship-NOW pattern confirmed R67 → R74 4 rounds 共識
 
 ---
 
@@ -192,16 +192,42 @@ EXCEPTIONS ship · brand-pure 替代:
 
 【新對話窗 first 動作建議】:
 1. cd C:\Users\tatay\Desktop\Second\zone27-web
-2. git log --oneline -15 看 R70→R73 commits 物理證據(R73 = 2 commits · ClientErrorBoundary + NoPushManifest + 5 audit critical patched · code-quality + psychology depth per Tim 14th mandate)
+2. git log --oneline -15 看 R71→R74 commits 物理證據(R74 = 3 commits · 4 psychology components + ClientErrorBoundary 4th wrap + 4 🔴 + 3 🟡 audit critical patched · 同 R67 + R73 code-focused execution mode pattern · 15th-invocation queue ship + audit sweep)
 3. 跑 npm run lint + npx tsc --noEmit + npm run validate:data:warn 確認三綠
-4. 跟 Tim 確認:「您希望 R74 從哪邊接續?(R73+ deferred queue · Agent A R73 SHIPs 1/3/4/5 · Agent A R72 SHIPs 1/4/5/7 · Agent A R71 SHIPs 2/3/5/6 · Agent A R70 SHIPs 2/4/6/7 · Agent B 8 audit medium/low · 必要大工程 CPBL pipeline 等 · 或新 mandate)」
+4. 跟 Tim 確認:「您希望 R75 從哪邊接續?(R74+ deferred queue · R72 NEW SHIPs 1/5/7 · R71 SHIPs 2/3/4/5/6/7 · R70 SHIPs 2/4/6/7 · Agent B 8 audit medium/low · 必要大工程 CPBL pipeline · Code quality #5 WaitlistForm 5th ErrorBoundary wrap · 或新 mandate)」
 
-【R70+ DEFERRED queue · R69 ship 4 Agent A SHIPs + 14 audit findings + 2 Patek pages 後剩餘】:
-[Agent A R69 NEW SHIPs · 4 of 6 deferred · ranked highest leverage]
-• SHIP 1 · MemberHomeHero · Bloomberg 3-quadrant /member dashboard drop-in(M · 4-6h · ★★★★★ HIGHEST · post-login premium feel · YOUR LAST PICK + ENGINE STATE + RECENT RECEIPTS quadrant grid · Bloomberg amber-equivalent 冷金 · NO welcome animation · NO daysSinceJoin confetti)
-• SHIP 2 · DailyReturnRail · Letterboxd diary 「上次您來 X 天前」 on homepage(S · 3h · localStorage zone27_last_visit_v1 11th key · conditional render only when lastVisitDate exists · honest reframe)
-• SHIP 3 · EngineDryDock · DHH HEY-style /methodology Section 06 NEW(S · 3h · CURRENT BUILD + EXPANSION 1 v0.3 READY/PROD DEFERRED + EXPANSION 2 v0.4 SPEC LOCKED + NEXT SHIP CANDIDATE · 4 named states)
-• SHIP 4 · SilentReceiptStream on /track-record below FirstReceiptHero(S · 2-3h · Pinboard.in archive view · every finalized match as single-line typographic row · build for N≥30 future)
+【R75+ DEFERRED queue · R74 ship 4 R73 Agent A psychology SHIPs + ClientErrorBoundary 4th wrap + 7 audit critical patched 後剩餘】:
+
+[R74 W-G audit · 13 explicit PASS · 0 deferred · no carry-over from audit]
+
+[Agent A R72 deferred · 3 of 7]
+• SHIP 1 EngineSparkline(S · 3-4h · HeroLiveCard mobile micro-typography · Apple Stocks pattern)
+• SHIP 5 MicroStatRug(M · /matches/[gameId] lens canvas · Baseball Savant percentile bars)
+• SHIP 7 UnscheduledLetterChip(XS · /now CadencePulseChip extension · DHH world.hey.com)
+
+[Agent A R71 deferred · 6 of 7]
+• SHIP 2 EngineFootprint + CalibrationGardenChip(M · /member 4th quadrant · Letterboxd year-in-review)
+• SHIP 3 TwReceiptFrame Taiwan-native typography(S · 統一發票 prefix Z2-26052101)
+• SHIP 4 QuietApplyCanary(S · /founders/apply returning-deliberator recognition)
+• SHIP 5 MethodologyAnnotatedTrace Brooks Baseball CI bands(M)
+• SHIP 6 CrossPageGrammarLock + audit script(M · Pinboard cohesion moat)
+• SHIP 7 QuietBlackCardSampler(XS · mobile sample-then-subscribe)
+
+[Agent A R70 deferred · 4 remaining]
+• SHIP 2 MobileEngineBar(M · WIN BAR mobile compact)
+• SHIP 4 MobileBottomSheetEngineDetails(M · 7-lens drag-up sheet)
+• SHIP 6 PowerUserDataKbd(XS · D-key density toggle)
+• SHIP 7 MobileShareSnapshot(M · PNG Web Share API)
+
+[Agent B audit deferred · 8 medium/low 仍留 R75+]
+• F04 park-factor offset double-margin(simple span class cleanup)
+• F05 lib/feed-items.ts journal body 3 places tim@zone27 mailto(historical · low priority)
+• F07 TimResponseSLA isPreLaunchSlaState helper partial-update transition bug
+• F08 FoundingMemberLedger 270-listitem screen-reader fatigue(A11y improvement)
+• F10 slugFromDiffSectionNo dead regex(consolidate with slugFromMethodologySectionNo)
+• F11 FromOneSolo Chinglish polish
+• F12 TimResponseSLA「PATEK DEALER PROMISE」 cite-link
+• F13 /now CYCLE constant length 5KB+(maintenance gripe · acceptable to leave)
 
 [Agent A R68 SHIP 2 · only PDP restructure remaining from R68 deferred]
 • SHIP 2 R68 · /founders Hermès PDP restructure(M · 1 day · 6-icon grid → vertical material/maker/method/maintenance rhythm · price to bottom · zero icons)
@@ -216,8 +242,8 @@ EXCEPTIONS ship · brand-pure 替代:
 • Agent 4 R62 ship #3 · Bloomberg watchlist table on /member + SVG sparklines(M · superseded by R69 SHIP 1 MemberHomeHero)
 • Agent 4 R62 ship #5 · Asian-craft tabular density on /track-record + /coverage(M · Aesop/MUJI restraint)
 
-[code quality · R68 + R69 audit cleanup 後剩餘]
-• Code improvement #4 · Per-component ErrorBoundary wrapper(M · risk-bearing client components)
+[code quality · R74 W-E partial close 後剩餘]
+• Code improvement #4 · Per-component ErrorBoundary wrapper(R74 W-E shipped 4 of 5: AnonPickWidget + LensFocusVote + DailyReturnRail + FoundersApplicationForm · 5th = WaitlistForm wrap · 1 remaining)
 • Code improvement #5 · AnonPickWidget useLocalStorage hook React 19 idiom(M)
 
 [blocked on external state · brand IP redline]
@@ -230,7 +256,7 @@ EXCEPTIONS ship · brand-pure 替代:
 • ANTI-2 · Calibration Streak / Days Followed gamification counter(engagement-farming redline · Tetlock badge IS the brand-pure substitute)
 • ANTI-3 · Founder of the Week / Top Member Picks leaderboard(manufactured social proof violates audience-fans-not-engineers)
 
-今天我要做的事:[ 填入任務 · 或留空讓 Claude 接 R70+ deferred queue + 鐵律 default ship NOW ]
+今天我要做的事:[ 填入任務 · 或留空讓 Claude 接 R75+ deferred queue + 鐵律 default ship NOW(R67 → R74 4 rounds 共識 · 留空 = ship NOW 不問 keyword · 不 surface options) ]
 ```
 
 ---
@@ -277,7 +303,9 @@ EXCEPTIONS ship · brand-pure 替代:
 
 | R73 | 6 | 14th full-authority · 2 agents(psychology depth NEW + post-R72 audit · per R57+ 不過度 spawn)+ Tim explicit「先專心更新程式碼 + 人的心理學很重要」 4-axis mandate · code-quality + psychology amplification + Tim handoff | NEW components/ClientErrorBoundary.tsx(React class component · risk-bearing client crashes 不 take down page · wraps AnonPickWidget + LensFocusVote on /matches/[gameId] + DailyReturnRail on /)+ NEW components/NoPushManifest.tsx + lib/no-push-inventory.ts(Agent A R73 SHIP 2 ★★★★★ · Brehm Reactance 1966 + Deci/Ryan SDT 1985 + Spence Costly Signaling 1973 + Patagonia「Don't Buy This Jacket」 · 12 deliberate absences PUBLISHED · /transparency NEW section · Mubi+Calm+Are.na+Astral Codex Ten+1Password pattern)+ F06 DailyReturnRail TZ midnight 6h gate(isLikelyMidnightRefresh helper · prior visit yesterday AND current TPE hour < 6 → same-session no chip)+ F09 DraftSaveLink iOS mailto silent-fail fallback(why_zone27 cap 400 chars + post-click document.hasFocus 500ms check → auto-clipboard fallback)+ Agent B 5 audit critical patched(F01 /founders/ledger LIVE chip rewording「✓ APPLY OPEN · review pending Q3+」 · F02 FoundingMemberLedger header「7 SYSTEM-TEST / 270」 qualifier · F03 decodeDraft Bidi/RTL/zero-width strip + EMAIL_RE_VALIDATE + DRAFT_KNOWN_KEYS whitelist · F09 FoundingMemberLedger 3-state visual differentiation ◌ dashed SYSTEM-TEST vs ✦ solid REAL vs — empty + 3-state footer legend) |
 
-**Total: 119+ waves · ~289 fixes · 0 brand redline violation**
+| R74 | 7 | 15th full-authority · 留空 task = default ship NOW per [[feedback-no-waiting-rule]] · code-focused execution mode + 1 post-commit audit agent(per R57+ 不過度 spawn discipline · 同 R67 + R73 pattern)· 接 R73 deferred queue 4 Agent A psychology-grounded SHIPs(1+3+4+5)+ code quality #2 + 4 🔴 + 3 🟡 audit critical patched(C1+C2+C3+C4+M1+M2+M3) | NEW lib/reciprocity-ledger.ts + components/ReciprocityLedger.tsx(Agent A R73 SHIP 3 · Cialdini Reciprocity Principle 1984 · 16 published-before-ask artifacts · Berkshire+Patek+Anthropic library pattern · /transparency NEW section + /pricing/why §06 NEW section)+ NEW components/RefusalLedgerHint.tsx(Agent A R73 SHIP 5 · Cialdini Reject-then-Retreat 1975 inverted · 5 pre-committed refusal rationales · /founders/ledger#refusals NEW section · pairs with TimResponseSLA R72 W-B)+ NEW lib/solo-founder-anchor.ts + components/NonComparableAnchor.tsx(Agent A R73 SHIP 4 · Samuelson/Zeckhauser Status Quo Bias 1988 · 6 solo-durable peers Pinboard+Tarsnap+Sublime Text+Drafts+Soulver+Pieter Levels · /founders BETWEEN PreTransferReceipt + WaitlistForm)+ NEW lib/local-storage-inventory.ts + components/LocalStorageReceipt.tsx(Agent A R73 SHIP 1 · Loewenstein/Issacharoff endowment-via-inventory 1994 · 11-key canonical single-source · /audit S06 refactored from inline DataTable + /member dashboard NEW receipt variant · drift impossible by design)+ ClientErrorBoundary 4th wrap FoundersApplicationForm · Agent B R74 audit 4 🔴 + 3 🟡 全 patched(C1 /audit ReportSection slug helper · C2 RECIPROCITY_LEDGER 2 wrong section citations · C3 /audit S06 single-source refactor · C4 TimResponseSLA bidirectional cross-link · M1 aria-label shortened · M2 role=status aria-live · M3 NonComparableAnchor cross-link tail) |
+
+**Total: 126+ waves · ~296 fixes · 0 brand redline violation**
 
 ---
 
@@ -305,6 +333,6 @@ EXCEPTIONS shipped(brand-pure 替代):
 
 ---
 
-ZONE 27 brand IP 物理升級到 **R67 state**(2026-05-23)· 79+ waves across R37→R67 multi-sprint · 0 brand redline violation · ready for 新對話窗接續 R68+。 🏆
+ZONE 27 brand IP 物理升級到 **R74 state**(2026-05-23)· 126+ waves across R37→R74 multi-sprint · 0 brand redline violation · ready for 新對話窗接續 R75+。 🏆
 
 您忙完回來 · 開新對話窗 · 一切如初。
