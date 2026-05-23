@@ -48,7 +48,7 @@ export const revalidate = 600;
 // /track-record · /roadmap · /discipline · /methodology · /glossary ·
 // /faq · /about · /learn · /changelog · /signal-board · /lab · ...)
 // is still reachable via:
-//   ▸ Cmd-K / Ctrl-K palette(34 visitor-discoverable routes indexed)
+//   ▸ Cmd-K / Ctrl-K palette(40 visitor-discoverable routes indexed)
 //   ▸ Footer 4-column nav
 //   ▸ Inline links from /manifesto + /audit + each trust artifact
 //
