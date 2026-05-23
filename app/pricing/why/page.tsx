@@ -235,7 +235,14 @@ export default function PricingWhyPage() {
           </ul>
         </Section>
 
-        {/* ── §03 · 為什麼 Founders 27 是 NT$ 2,700 · Stripe Atlas pattern ─── */}
+        {/* ── §03 · 為什麼 Founders 27 是 NT$ 2,700 · Stripe Atlas pattern ───
+            R68 W-F · Agent A SHIP 7 · compressed to Stripe Atlas grammar:
+            bold deliverable + ONE sentence + cross-link · ghost numerals
+            BEHIND each row(Patek movement-spec aesthetic · 大型 light gold
+            opacity 5% · 不打字典感觀 · 純 typographic depth)。 sub-header
+            「您數到第 6 行 · 您 conclude 自己 · 我們不 sell」 Tetlock-honest
+            framing。 vs prior 2-3-line prose · same content density · less
+            cognitive load per row。 */}
         <Section
           no="03"
           label="WHY FOUNDERS 27 = NT$ 2,700"
@@ -247,38 +254,29 @@ export default function PricingWhyPage() {
             「$500 cheap」。 ZONE 27 採同 pattern · Founders 27 一次性 NT$
             2,700 · 永久 · 限 {FOUNDERS_TOTAL} 位 · 6 個 deliverables:
           </p>
-          <ol className="space-y-3 mt-6">
-            <NumItem n="01">
-              <span className="text-bone">0% creator 抽成</span>(BLACK CARD
-              creators 5%)· 您未來成為 ZONE 27 contributor · 訂閱者抽成
-              100% 全拿 · per /founders benefit #03
-            </NumItem>
-            <NumItem n="02">
-              <span className="text-bone">編號身分 #001-#{FOUNDERS_TOTAL}</span>
-              · 動態牆 / 明牌 / 聊天室都顯示 · 是 ID 也是勳章 · per /founders
-              benefit #02 + Pokemon TCG 1st Edition SHADOWLESS RUN axiom
-            </NumItem>
-            <NumItem n="03">
-              <span className="text-bone">model 早期 access</span> · 每次 AI
-              模型迭代 Founders 27 提前 7 天試用 · per /founders benefit #05
-            </NumItem>
-            <NumItem n="04">
-              <span className="text-bone">實體尊榮招待</span> · 出示 QR 至恆美
-              攝影 × 伶 Kopi 旗艦店 · 免費招待一杯冰鎮頂級一品紅茶 · 終身有效
-              · per /founders benefit #06
-            </NumItem>
-            <NumItem n="05">
-              <span className="text-bone">BLACK CARD 月卡終身免費</span> ·
-              Founders 27 一次性 NT$ 2,700 自動 includes BLACK CARD lifetime ·
-              省下 NT$ 299 × ∞ months · per /founders break-even math(9 個月
-              損益平衡)
-            </NumItem>
-            <NumItem n="06">
-              <span className="text-bone">永久不漲價</span> · 同 NT$ 2,700 在
-              closed state · 不會 reprint 漲價 · 同 Pokemon 1st Edition
-              Shadowless 不可重印 mechanic · per /founders/ledger #shadowless-run
-            </NumItem>
+          <ol className="space-y-1 mt-8">
+            <NumItemGhost n="01">
+              <strong className="text-bone">0% creator 抽成</strong> · 永久 · per /founders benefit #03
+            </NumItemGhost>
+            <NumItemGhost n="02">
+              <strong className="text-bone">編號身分 #001-#{FOUNDERS_TOTAL}</strong> · 動態牆顯示 · per Pokemon TCG 1st Edition SHADOWLESS RUN axiom
+            </NumItemGhost>
+            <NumItemGhost n="03">
+              <strong className="text-bone">model 早期 access</strong> · 每次 AI 模型迭代提前 7 天 · per /founders benefit #05
+            </NumItemGhost>
+            <NumItemGhost n="04">
+              <strong className="text-bone">實體尊榮招待</strong> · 恆美攝影 × 伶 Kopi 旗艦店 · 終身一杯紅茶 · per /founders benefit #06
+            </NumItemGhost>
+            <NumItemGhost n="05">
+              <strong className="text-bone">BLACK CARD 月卡終身免費</strong> · 省 NT$ 299 × ∞ months · per /founders 9 個月 break-even math
+            </NumItemGhost>
+            <NumItemGhost n="06">
+              <strong className="text-bone">永久不漲價</strong> · NT$ 2,700 closed state · 同 Pokemon 1st Edition Shadowless 不可重印
+            </NumItemGhost>
           </ol>
+          <p className="mt-8 font-mono text-gold/80 text-[10px] sm:text-xs tracking-[0.3em] leading-relaxed text-center">
+            ⚓ 您數到第 6 行 · 您 conclude 自己 · 我們不 sell
+          </p>
           <p className="mt-6 font-mono text-mute/80 text-[10px] tracking-[0.3em] leading-relaxed">
             ⚓ <strong className="text-bone">這是 brand commitment 不是
             marketing copy</strong> · 6 條 binding pre-commit · 修改需 30 天前
@@ -289,6 +287,11 @@ export default function PricingWhyPage() {
             目前 {FOUNDERS_CLAIMED} 名 SYSTEM-TEST forged · {FOUNDERS_REMAINING}
             {" "}名待認領 · 申請通道在 payment infra 就緒後啟用(milestone-
             triggered · 不綁日期)· per /founders/ledger pre-commit timeline。
+            R68 W-A · 申請表單 LIVE · per <a
+              href="/founders/apply"
+              className="text-gold underline-offset-4 hover:underline"
+            >/founders/apply</a>{" "}
+            · Tim 親手 review 1-3 days。
           </p>
         </Section>
 
@@ -505,6 +508,34 @@ function NumItem({
         {n}
       </span>
       <span className="flex-1">{children}</span>
+    </li>
+  );
+}
+
+// R68 W-F · Agent A SHIP 7 · ghost-numeral NumItem variant · Patek
+// movement-spec aesthetic · 大型 light gold ghost numeral BEHIND the row
+// content via absolute positioning · pointer-events-none + aria-hidden
+// (decorative · screen reader skip)。 Used only in /pricing/why §03(highest-
+// stake 6-deliverable Stripe Atlas section)· NOT in §01 §02 to maintain
+// visual hierarchy(§03 is the apex)。
+function NumItemGhost({
+  n,
+  children,
+}: {
+  n: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <li className="relative py-3 sm:py-4 pl-16 sm:pl-20 border-b border-line/30 last:border-b-0">
+      <span
+        className="absolute left-0 top-1 sm:top-2 font-mono text-gold/15 text-5xl sm:text-6xl tabular leading-none pointer-events-none select-none"
+        aria-hidden="true"
+      >
+        {n}
+      </span>
+      <span className="block text-mute text-sm sm:text-base leading-relaxed">
+        {children}
+      </span>
     </li>
   );
 }
