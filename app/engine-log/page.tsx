@@ -14,7 +14,7 @@ import {
 } from "@/lib/engine-log-entries";
 
 export const metadata: Metadata = {
-  title: "/engine-log · Engine Operations Log · operational artifact",
+  title: "/engine-log · Engine Operations Log · operational artifact spine",
   description:
     "Stripe Status 2012 + Cloudflare postmortem + Tailscale changelog pattern · ZONE 27 engine operational artifact surface · curated dated log of every engine re-run / receipt correction / input-staleness / methodology update · 「engine alive · someone on it」 signal · APPEND-ONLY per /audit S05 PRE-COMMIT clause · brand IP「方法公開」 物理 codify to operational layer。",
   openGraph: {

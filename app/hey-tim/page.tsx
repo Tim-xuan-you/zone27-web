@@ -30,7 +30,7 @@ export const metadata = createPageMetadata({
 // R80 W-H · Agent A R80 BIGGEST GAP closure · Bill James「Hey Bill」
 // 15-year canonical pattern + Defector Funbag staff-reply + Stratechery
 // Daily Update reply + Tom Tango comments dialogue + patio11 reader-reply
-// ethic。 ZONE 27 had 21 binding rules + receipts + letters + Year-Zero
+// ethic。 ZONE 27 had 22 binding rules + receipts + letters + Year-Zero
 // 但 0 recurring proof that Tim is on the other end of a line · 整 brand
 // IP 是「trust the human」 但無 visible 「Tim 親手 reply」 ritual。
 // 此 page closes structural gap。
@@ -290,7 +290,7 @@ export default function HeyTimPage() {
             className="text-mute text-base leading-relaxed mb-4"
             style={{ fontFamily: "Georgia, serif", textWrap: "pretty" }}
           >
-            ZONE 27 有 21 binding rules + 8 canonical ledgers + receipts +
+            ZONE 27 有 22 binding rules + 8 canonical ledgers + receipts +
             /letter + /year-zero · 但 0 recurring proof that Tim 是 someone
             on the other end of a line。 整 brand IP 是「trust the human」
             · 但無 visible 「Tim 親手 reply」 ritual。 此 page closes structural
@@ -330,7 +330,7 @@ export default function HeyTimPage() {
           </p>
           <p className="text-mute text-sm leading-relaxed mb-6">
             此 page 結構性拒絕的 6 件事 · 配對 11 NEVER + NoPushManifest +
-            21 binding rules · 不藏 hidden flexibility。
+            22 binding rules · 不藏 hidden flexibility。
           </p>
           <ul className="space-y-3 text-mute text-sm leading-relaxed">
             <NotDoItem>
@@ -404,7 +404,7 @@ export default function HeyTimPage() {
               href="/integrity"
               className="font-mono text-mute hover:text-gold text-[10px] tracking-[0.4em] transition-colors"
             >
-              /integrity · 21 binding rules →
+              /integrity · 22 binding rules →
             </Link>
           </div>
         </section>

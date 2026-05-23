@@ -219,10 +219,10 @@ export default function TransparencyPage() {
         </Section>
 
         {/* ── 02 · WHAT WE DON'T DO ───────────────── */}
-        <Section no="02" label="WHAT WE DON'T DO" zh="11 件「永遠不做」 binding">
+        <Section no="02" label="WHAT WE DON'T DO" zh="13 件「永遠不做」 binding">
           <p>
             ZONE 27 displacement target = 玩運彩 + 報馬仔 + LINE 老師生態。
-            這 11 件「永遠不做」 是物理 differentiation · 違反任一 = 品牌自殺。
+            這 13 件「永遠不做」 是物理 differentiation · 違反任一 = 品牌自殺(R80 加 #12 CPBL-only-forever engine scope binding · R81 加 #13 永遠不 subscription auto-renewal binding · scope + discipline + renewal 三軸 close brand IP loop)。
             Costly Signaling(Spence 1973)· 公布「不做」 比公布「會做」 更
             expensive · 因為 publish = 物理 ban 退路。
           </p>
@@ -239,6 +239,7 @@ export default function TransparencyPage() {
             <Never>不做 modal paywall scroll-lock</Never>
             <Never>不做多步驟 onboarding wizard</Never>
             <Never>不預測 MLB / NPB / KBO / 任何外國職棒 / 任何台灣運彩 bettable events(R80 加 · ENGINE PERMANENT CPBL-ONLY SCOPE)</Never>
+            <Never>不 ship subscription auto-renewal · 永遠 · ECPay/TapPay/Stripe 自動扣款全 refused(R81 加 · BLACK CARD pivot 至 CPBL Season Pass NT$ 1,500/season explicit · Defector 85% explicit-renewal + NBA 88% season ticket renewal + Pinboard 一次性 pattern · Loss aversion FOR ZONE 27 axiom)</Never>
           </NeverGrid>
           <p className="text-mute/85 mt-6">
             完整 list 含 explainer 與 reason · 見{" "}
@@ -246,7 +247,7 @@ export default function TransparencyPage() {
             {" "}+{" "}
             <Link href="/ethics" className="text-gold underline-offset-4 hover:underline">/ethics 9 binding commitments</Link>
             {" "}+{" "}
-            <Link href="/integrity" className="text-gold underline-offset-4 hover:underline">/integrity 21 binding rules</Link>
+            <Link href="/integrity" className="text-gold underline-offset-4 hover:underline">/integrity 22 binding rules</Link>
             。 任何 1 條修改需 30 天前在{" "}
             <Link href="/changelog" className="text-gold underline-offset-4 hover:underline">/changelog</Link>
             {" "}公告 · 同 PRE-COMMIT pattern。

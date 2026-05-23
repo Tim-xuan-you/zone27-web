@@ -620,12 +620,12 @@ export const COMMAND_ITEMS: CommandItem[] = [
     ],
   },
   // R78 W-F-3 · NEW /integrity · Berkshire 1996 Owner's Manual at Year 0 ·
-  // 21 binding rules(12 redlines + 9 ethics)· dated + Tim signature ·
+  // 22 binding rules(13 redlines + 9 ethics)· dated + Tim signature ·
   // public bond not implicit。 R80 加 Cmd-K entry close orphan(Agent B R79
   // 🟡 #5 fix · /integrity 之前 missing from Cmd-K · 同 R78 W-G + R76 W-G
   // axiom: 新 flagship route 立即 Cmd-K)· 信任文件 group。
   {
-    label: "Integrity · 21 永久不會變的 · Berkshire 1996 Owner's Manual at Year 0",
+    label: "Integrity · 22 永久不會變的 · Berkshire 1996 Owner's Manual at Year 0",
     kicker: "/integrity",
     path: "/integrity",
     group: "信任文件",
@@ -636,8 +636,8 @@ export const COMMAND_ITEMS: CommandItem[] = [
       "owners manual",
       "berkshire",
       "buffett",
-      "21 binding",
-      "21 永久",
+      "22 binding",
+      "22 永久",
       "永久 binding",
       "redlines",
       "ethics",

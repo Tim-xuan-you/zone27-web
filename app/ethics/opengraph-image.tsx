@@ -6,14 +6,14 @@ import { BRAND, OG_SIZE, OG_CONTENT_TYPE } from "@/lib/brand";
 // /ethics 8 binding commitments without OG card · per
 // [[zone27-disclosure-philosophy]] OG cards = private-DM lever。
 //
-// /ethics 是 Stratechery About transplant · 8 binding NOT-DO commitments ·
-// 玩運彩+報馬仔 violate 6/8 · ship 等於商業自殺 · 此 OG card 必須 surface
-// 此 brand-IP differentiation when shared。
+// /ethics 是 Stratechery About transplant · 9 binding NOT-DO commitments(R80
+// 加 #09 mandatory-ledger discipline)· 玩運彩+報馬仔 violate 7/9 · ship 等於
+// 商業自殺 · 此 OG card 必須 surface 此 brand-IP differentiation when shared。
 // ─────────────────────────────────────────────────────
 
 export const size = OG_SIZE;
 export const contentType = OG_CONTENT_TYPE;
-export const alt = "ZONE 27 · Ethics Policy · 8 binding NOT-DO commitments";
+export const alt = "ZONE 27 · Ethics Policy · 9 binding NOT-DO commitments(R80 加 #09 mandatory-ledger discipline · 配對 /integrity rule #12 CPBL-only-forever scope + R81 rule #13 永遠不 subscription auto-renewal · scope + discipline + renewal 三軸 close brand IP loop)";
 
 export default async function EthicsOgImage() {
   return new ImageResponse(
@@ -91,7 +91,7 @@ export default async function EthicsOgImage() {
               display: "flex",
             }}
           >
-            8 NOT-DO COMMITMENTS
+            9 NOT-DO COMMITMENTS
           </span>
           <span
             style={{
@@ -105,7 +105,7 @@ export default async function EthicsOgImage() {
               flexWrap: "wrap",
             }}
           >
-            8 件永遠不做
+            9 件永遠不做
           </span>
           <span
             style={{
@@ -141,7 +141,7 @@ export default async function EthicsOgImage() {
             gap: 24,
           }}
         >
-          <TierStat n="5" label="DISPLACEMENT" sub="玩運彩 違反 5/5" gold />
+          <TierStat n="6" label="DISPLACEMENT" sub="玩運彩 違反 6/6" gold />
           <TierStat n="2" label="SUBSCRIBER PROTECT" sub="0 ads · annual rev publish" />
           <TierStat n="1" label="BRAND" sub="never become tipster" />
         </div>
@@ -167,7 +167,7 @@ export default async function EthicsOgImage() {
               maxWidth: 720,
             }}
           >
-            玩運彩+報馬仔 violate 6/8 of these. Publishing this = business suicide for them.
+            玩運彩+報馬仔 violate 7/9 of these. Publishing this = business suicide for them.
           </span>
           <span
             style={{

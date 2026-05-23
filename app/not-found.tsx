@@ -4,7 +4,7 @@ import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "K · 三振 · 404 · ZONE 27",
+  title: "K · 三振 · 404",
   description:
     "這條 URL 不在 ZONE 27 的 ledger 上 — 可能是引擎還沒覆蓋、可能是 URL 已搬家、可能是手滑。三振也是統計的一部分。",
 };

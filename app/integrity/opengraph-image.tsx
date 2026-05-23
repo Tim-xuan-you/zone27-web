@@ -3,21 +3,21 @@ import { BRAND, OG_SIZE, OG_CONTENT_TYPE } from "@/lib/brand";
 
 // ── ZONE 27 · /integrity Dynamic OG ────────────────────
 // R79 W-F · Owner's Manual at Year 0 share card · Berkshire
-// Hathaway 1996 Owner's Manual pattern · 12 redlines + 9 ethics
-// = 21 永久 binding rules · 訪客貼到 LINE / PTT 看到「21 條永久
+// Hathaway 1996 Owner's Manual pattern · 13 redlines + 9 ethics
+// = 22 永久 binding rules · 訪客貼到 LINE / PTT 看到「22 條永久
 // 不會變的 · public bond not implicit」 punchline。
 //
 // Brand IP fire:
 //   - Disclosure(canonical proof page consolidates scattered)
-//   - Costly Signaling(publish 21 binding 100× per Spence 1973)
-//   - Pratfall(12 redlines = 公開不做的事)
+//   - Costly Signaling(publish 22 binding 100× per Spence 1973)
+//   - Pratfall(13 redlines = 公開不做的事)
 //   - audience-fans-not-engineers(Berkshire grammar pattern-match)
 // ─────────────────────────────────────────────────────
 
 export const size = OG_SIZE;
 export const contentType = OG_CONTENT_TYPE;
 export const alt =
-  "ZONE 27 · Integrity · 21 永久不會變的 · Berkshire 1996 Owner's Manual at Year 0 · 12 redlines + 9 ethics commitments = public bond not implicit · R80 加 rule 12 CPBL-only-forever scope + rule 09 mandatory-ledger discipline 配對 close loop";
+  "ZONE 27 · Integrity · 22 永久不會變的 · Berkshire 1996 Owner's Manual at Year 0 · 13 redlines + 9 ethics commitments = public bond not implicit · R80 加 rule 12 CPBL-only-forever scope + rule 09 mandatory-ledger discipline + R81 加 rule 13 永遠不 subscription auto-renewal · scope + discipline + renewal 三軸 close brand IP loop";
 
 export default async function IntegrityOgImage() {
   return new ImageResponse(
@@ -115,7 +115,7 @@ export default async function IntegrityOgImage() {
                 display: "flex",
               }}
             >
-              21
+              22
             </span>
             <span
               style={{
@@ -146,7 +146,7 @@ export default async function IntegrityOgImage() {
           }}
         />
 
-        {/* DATA TABLE · 12 redlines + 9 commitments breakdown */}
+        {/* DATA TABLE · 13 redlines + 9 commitments breakdown */}
         <div
           style={{
             display: "flex",
@@ -155,7 +155,7 @@ export default async function IntegrityOgImage() {
             fontSize: 20,
           }}
         >
-          <PaperRow label="REDLINES · 永遠不做" value="12" />
+          <PaperRow label="REDLINES · 永遠不做" value="13" />
           <PaperRow label="ETHICS COMMITMENTS · 永遠會做" value="9" />
           <PaperRow label="MODIFICATION NOTICE PERIOD" value="30 days · /changelog" />
         </div>

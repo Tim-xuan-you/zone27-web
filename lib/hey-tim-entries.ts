@@ -6,7 +6,7 @@
 // Tom Tango comments dialogue + patio11 reader reply ethic。
 //
 // The cognitive frame this closes(per Agent A R80 honest answer):
-//   - ZONE 27 has 21 binding rules + receipts + letters + Year-Zero
+//   - ZONE 27 has 22 binding rules + receipts + letters + Year-Zero
 //   - 但 0 recurring proof that Tim is on the other end of a line
 //   - 整 brand IP 是「trust the human」· 但無 visible 「Tim 親手 reply」
 //     ritual · 訪客 spending NT$ 2,700 應該看到 Tim's name on dated

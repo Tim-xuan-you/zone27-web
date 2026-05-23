@@ -766,7 +766,7 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
     {
       href: "/integrity",
       kicker: "integrity",
-      title: "21 binding rules · Berkshire Owner's Manual at Year 0",
+      title: "22 binding rules · Berkshire Owner's Manual at Year 0",
     },
     {
       href: "/engine-log",
@@ -788,7 +788,7 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
     {
       href: "/integrity",
       kicker: "integrity",
-      title: "21 binding rules · Berkshire 1996 Owner's Manual",
+      title: "22 binding rules · Berkshire 1996 Owner's Manual",
     },
   ],
   "/integrity": [
@@ -855,7 +855,7 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
   // R80 W-H · NEW /hey-tim · Agent A R80 BIGGEST GAP closure · Bill James
   //「Hey Bill」 15-yr pattern + Defector Funbag + Stratechery + Tom Tango
   // + patio11 reader-reply ethic。 Siblings: /letter(Tim singular voice)
-  // + /faq(pre-anticipated Qs)+ /integrity(21 binding · rule #9 mandatory
+  // + /faq(pre-anticipated Qs)+ /integrity(22 binding · rule #9 mandatory
   // ledger discipline)。 8th in canonical append-only ledger family。
   "/hey-tim": [
     {
@@ -871,7 +871,7 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
     {
       href: "/integrity",
       kicker: "integrity",
-      title: "21 binding rules · rule #9 mandatory-ledger discipline binding",
+      title: "22 binding rules · rule #9 mandatory-ledger discipline binding",
     },
   ],
 };

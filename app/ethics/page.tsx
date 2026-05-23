@@ -109,27 +109,27 @@ export default function EthicsPage() {
               lang="en"
               className="font-mono text-gold text-[10px] tracking-[0.45em]"
             >
-              / ETHICS POLICY · 8 binding NOT-DO commitments
+              / ETHICS POLICY · 9 binding NOT-DO commitments
             </p>
             <span
               lang="en"
               className="font-mono text-[9px] tracking-[0.3em] px-1.5 py-0.5 border border-gold/60 text-gold"
             >
-              8 LINE · SIGNED · BINDING
+              9 LINE · SIGNED · BINDING
             </span>
           </div>
           <h1 className="text-4xl sm:text-5xl text-bone font-light tracking-tight max-w-3xl leading-[1.1]">
-            8 件 ZONE 27 <span className="text-gold">永遠不做</span> 的事
+            9 件 ZONE 27 <span className="text-gold">永遠不做</span> 的事
           </h1>
 
           <div className="mt-8 border-l-2 border-gold/60 pl-5 sm:pl-6 py-2 max-w-2xl">
             <p className="text-bone text-lg sm:text-xl leading-relaxed">
               <strong>玩運彩+報馬仔 不可能 ship 這頁</strong> · 因為他們的每
-              一條 revenue stream 都 violate 下面 8 條 · 公開等於商業自殺。
+              一條 revenue stream 都 violate 下面 9 條 · 公開等於商業自殺。
             </p>
             <p className="mt-3 text-mute text-base leading-relaxed">
-              ZONE 27 可以 ship · 因為訂閱費(Founders 27 + BLACK CARD)是
-              整個 revenue model · 您贏您輸我都一樣賺。
+              ZONE 27 可以 ship · 因為訂閱費(Founders 27 + BLACK CARD CPBL
+              Season Pass)是整個 revenue model · 您贏您輸我都一樣賺。
             </p>
           </div>
 
@@ -155,7 +155,7 @@ export default function EthicsPage() {
             lang="en"
             className="font-mono text-gold text-[10px] tracking-[0.45em] mb-6"
           >
-            / 01 · 8 COMMITMENTS · 簽 Tim · 2026-05-22
+            / 01 · 9 COMMITMENTS · 簽 Tim · 2026-05-23(R80 加 #09 mandatory-ledger · R81 ship parallel /integrity rule #13 永遠不 subscription auto-renewal)
           </p>
 
           <ol className="space-y-6">
@@ -433,7 +433,7 @@ export default function EthicsPage() {
         <FounderSignOff>
           <p>
             這頁是 ZONE 27 displacement mission 的 brand-IP layer 物理 codify ·
-            <strong>不是 marketing copy</strong>。 8 條是 hard commitments +
+            <strong>不是 marketing copy</strong>。 9 條是 hard commitments +
             R70 W-F BUS_FACTOR contingency section · 違反任一條 = brand 信用
             collapse · 即使違反 1 次 · /ethics page 上會出現「{COMMITMENTS[0].num}
             {" "}- VIOLATED YYYY-MM-DD · see /changelog」 紅色 alert · 永久
@@ -441,15 +441,16 @@ export default function EthicsPage() {
             「不刪不藏」 pattern。
           </p>
           <p>
-            Stratechery About page Ben Thompson 6 commitments · ZONE 27 8
+            Stratechery About page Ben Thompson 6 commitments · ZONE 27 9
             commitments · 不是 incremental more · 是 displacement-specific
-            more · 第 1 + 2 + 4 + 5 + 8 是 ZONE 27-only 5 條 ·
+            more · 第 1 + 2 + 4 + 5 + 8 + 9 是 ZONE 27-only 6 條 ·
             <strong>玩運彩+報馬仔 永遠 ship 不出來</strong> · 因為他們 violate
-            這 5 條 == 他們整個 revenue model 構成。
+            這 6 條 == 他們整個 revenue model 構成。
           </p>
           <p>
-            修改此 page 5 rules 需 30 天 /changelog 公告 · 同 /audit S05
-            PRE-COMMIT pattern · Costly Signaling 100×。
+            修改此 page 9 commitments 需 30 天 /changelog 公告 · 同 /audit S05
+            PRE-COMMIT pattern · Costly Signaling 100× · 同 /integrity 22
+            binding rules modification protocol 軸線一致。
           </p>
         </FounderSignOff>
 
@@ -464,7 +465,7 @@ export default function EthicsPage() {
             ETHICS IS PHYSICS · NOT MARKETING.
           </p>
           <h3 className="text-3xl text-bone font-light tracking-tight mb-4">
-            8 條 binding · 0 wiggle room · 0 fine print。
+            9 條 binding · 0 wiggle room · 0 fine print。
           </h3>
           {/* Round 51 W-C · Agent 3 HIGH #6 fix · /ethics 缺 conversion
               CTA at page end · 讀完 9 commitments 訪客是 strongest possible
@@ -473,7 +474,7 @@ export default function EthicsPage() {
               27 + BLACK CARD chip · 同 trust artifacts 並列 surface · 訪客
               可 1-tap action。 */}
           <p className="text-mute text-sm sm:text-base max-w-xl mx-auto mb-8 leading-relaxed">
-            這 8 條 commitment 改變了您的判斷嗎? 加入 ZONE 27 ·
+            這 9 條 commitment 改變了您的判斷嗎? 加入 ZONE 27 ·
           </p>
           <div className="flex flex-wrap justify-center gap-3 mb-8">
             <Link
@@ -486,7 +487,7 @@ export default function EthicsPage() {
               href="/membership/black-card"
               className="inline-block px-6 py-3 border border-gold text-gold font-mono text-[10px] tracking-[0.3em] hover:bg-gold/10 transition-colors"
             >
-              → BLACK CARD · NT$ 299/月
+              → BLACK CARD · NT$ 1,500/season(R81 pivot)
             </Link>
           </div>
           <p
