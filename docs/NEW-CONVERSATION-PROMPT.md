@@ -1,8 +1,8 @@
 # 📋 New Conversation Prompt · ZONE 27 Session Handoff
 
 **用途:** 開新對話窗時複製此 prompt 整段 paste · 新 Claude 一秒接上 context。
-**最後 update:** 2026-05-23 · **Round 70 W-Final 攻頂** · R59 7 + R60 3 + R61 6 + R62 4 + R63 4 + R64 3 + R65 4 + R66 3 + R67 5 + R68 7 + R69 9 + R70 8 = 63 W · 3-agent full-authority × 8 invocations(R59-R66)+ R67 code-focused + R68 9th + R69 10th + R70 11th-invocation 2-agent + 4+5 Agent A deferred SHIPs + 29 Agent B audit findings 全 patched(14 R69 + 15 R70)· R37→R70
-**Token urgency:** Tim explicit「現在這個對話窗太燒TOKEN了 · 我要開新對話窗複製過去」 · 此 prompt 是 R70 contextual snapshot for fresh Claude bootstrap · TIM ACTIVELY HANDING OFF 2026-05-23 R70 W-Final
+**最後 update:** 2026-05-23 · **Round 71 W-Final 攻頂** · R59 7 + R60 3 + R61 6 + R62 4 + R63 4 + R64 3 + R65 4 + R66 3 + R67 5 + R68 7 + R69 9 + R70 8 + R71 5 = 68 W · 3-agent full-authority × 8 invocations(R59-R66)+ R67 code-focused + R68 9th + R69 10th + R70 11th + R71 12th-invocation 2-agent + 3 Agent A deferred SHIPs + 5 Agent B audit critical patched + 8-file tim@zone27.tw global sweep · R37→R71
+**Token urgency:** Tim explicit「現在這個對話窗太燒TOKEN了 · 我要開新對話窗複製過去」 · 此 prompt 是 R71 contextual snapshot for fresh Claude bootstrap · TIM ACTIVELY HANDING OFF 2026-05-23 R71 W-Final
 
 ---
 
@@ -192,9 +192,9 @@ EXCEPTIONS ship · brand-pure 替代:
 
 【新對話窗 first 動作建議】:
 1. cd C:\Users\tatay\Desktop\Second\zone27-web
-2. git log --oneline -15 看 R66→R69 commits 物理證據(R69 = ~6 commits · 3 Agent A R68-deferred SHIPs + 14 Agent B audit findings 全 patched + 2 NEW Patek routes)
+2. git log --oneline -15 看 R68→R71 commits 物理證據(R71 = 3 commits · EngineDryDock + DraftSaveLink + DiffCommitChip + 5 audit critical + 8-file tim@zone27 sweep)
 3. 跑 npm run lint + npx tsc --noEmit + npm run validate:data:warn 確認三綠
-4. 跟 Tim 確認:「您希望 R70 從哪邊接續?(R69+ deferred queue · Agent A SHIP 1 MemberHomeHero + SHIP 2 DailyReturnRail + SHIP 3 EngineDryDock + SHIP 4 SilentReceiptStream · 或新 mandate)」
+4. 跟 Tim 確認:「您希望 R72 從哪邊接續?(R71+ deferred queue · Agent A R71 SHIPs 2-7 · Agent A R70 SHIPs 2/4/6/7 · 必要大工程 CPBL pipeline 等 · 或新 mandate)」
 
 【R70+ DEFERRED queue · R69 ship 4 Agent A SHIPs + 14 audit findings + 2 Patek pages 後剩餘】:
 [Agent A R69 NEW SHIPs · 4 of 6 deferred · ranked highest leverage]
@@ -271,7 +271,9 @@ EXCEPTIONS ship · brand-pure 替代:
 
 | R70 | 8 | 11th full-authority · 2 agents(mobile UX + first-purchase trust NEW research · post-R69 12-new-ship audit · per R57+ 不過度 spawn)+ 親自 ship 5 deferred queue items · /member premium upgrade + mobile-first revenue ships · 15 Agent B audit findings 全 patched | NEW components/MemberHomeHero.tsx(★★★★★ Bloomberg 3-quadrant /member dashboard · YOUR LAST PICK + ENGINE STATE + RECENT RECEIPTS · Pieter Levels nomadlist + Bloomberg Terminal home pattern · post-login premium feel)+ NEW components/DailyReturnRail.tsx(Letterboxd diary + Are.na slow-web · localStorage zone27_last_visit_v1 11th key · /audit S06 disclosed · honest「上次您來 X 天前」 NOT streak)+ NEW components/SilentReceiptStream.tsx(Pinboard.in archive view paradigm · single-line oldest-first · ARCHIVE INDEX axis 對 Bloomberg-grid LedgerRow newest-first)+ NEW components/TonightMatchRail.tsx(Agent A R70 SHIP 1 mobile match-switcher · MLB At Bat scoreboard ribbon · CPBL 80% nights 3 games · 1-tap lateral nav · brand-pure 0 live score + 0 presence + 0 push)+ /founders/apply pre-apply checklist refactor NumItemGhost(Stripe Atlas + Patek dealer pre-qualification + Apple Card self-screen pattern)· Agent B 15 audit findings 全 patched · F1 /privacy id slug helper · F2 /privacy Section 6B emergency contact provision NEW · F3 phantom MEMBER_VOICE removed · F4 RaycastJumpHint timer leak + race fix · F5 count drift 10→11 keys · F6 CLAUDE.md 39→44 routes header · F7 3 more 41→44 stale refs · F8 /pricing/why opacity comment fix · F9 cpbl+why sanitize complete · F11 /founders/first-five-minutes PUSH count · F13 /ethics 5 rules→8 commitments+BUS_FACTOR · F14 tim@zone27.tw→tatayngiti@gmail.com mailto · F15 verified intentional auto-dismiss-only |
 
-**Total: 103+ waves · ~263 fixes · 0 brand redline violation**
+| R71 | 5 | 12th full-authority · 2 agents(conversion-after-deliberation + Taiwanese trust micro-patterns NEW research · post-R70 12-new-ship audit · per R57+ 不過度 spawn)+ 親自 ship 3 deferred queue items + 5 Agent B critical audit patched + 8-file tim@zone27.tw global sweep | NEW /methodology Section 06 ENGINE DRY DOCK(Agent A R69 SHIP 3 deferred · DHH HEY「inbox state IS dashboard」 grammar · 4 single-status-per-row chips · NO progress bar / NO ETA / NO marketing)+ NEW DraftSaveLink in FoundersApplicationForm(Agent A R70 SHIP 3 deferred · Patek-dealer「save wishlist」 + Wayback Machine plaintext-URL state · base64-UTF8 encoded draft in mailto: body · 0 server / 0 Supabase / 0 PII / 0 localStorage · Baymard 2025 15-25% mobile abandonment recovery)+ NEW lib/diff-commits.ts + components/DiffCommitChip.tsx(Agent A R71 SHIP 1 ★★★★★ · Berkshire annual letter delivery cadence + React.dev changelog + Anthropic model card revision · ENGINE_DIFF_BEACONS append-only · DiffCommitChip 2 variants · integrated into DailyReturnRail when daysSince>=7)· Agent B 5 critical audit patched(F01 /transparency Section id slug helper · F02 TonightMatchRail --sticky-cta-h hard-code 76px · F03 8 user-visible files tim@zone27.tw global sweep · F04 MemberHomeHero PUSH/skip differentiation · F05 TonightMatchRail phase guard render only today-pregame/today-live)+ MEDIUM batch F11 N≥30 ack + F12 count clarity + F15 DailyReturnRail dismiss persist single-key extension |
+
+**Total: 108+ waves · ~276 fixes · 0 brand redline violation**
 
 ---
 
