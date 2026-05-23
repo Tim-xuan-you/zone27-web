@@ -1,8 +1,8 @@
 # 📋 New Conversation Prompt · ZONE 27 Session Handoff
 
 **用途:** 開新對話窗時複製此 prompt 整段 paste · 新 Claude 一秒接上 context。
-**最後 update:** 2026-05-23 · **Round 62 W-D 攻頂** · R59 7 W + R60 3 W + R61 6 W + R62 4 W · 3-agent full-authority × 4 invocations(R59 + R60 + R61 + R62)· R37→R62
-**Token urgency:** Tim explicit「現在這個對話窗太燒TOKEN了」 · 此 prompt 是 R62 contextual snapshot for fresh Claude bootstrap
+**最後 update:** 2026-05-23 · **Round 63 W-D 攻頂** · R59 7 W + R60 3 W + R61 6 W + R62 4 W + R63 4 W · 3-agent full-authority × 5 invocations(R59 + R60 + R61 + R62 + R63)· R37→R63
+**Token urgency:** Tim explicit「現在這個對話窗太燒TOKEN了」 · 此 prompt 是 R63 contextual snapshot for fresh Claude bootstrap
 
 ---
 
@@ -40,6 +40,11 @@
   · feedback_full_authority_3_agent_pattern(Tim 全權 mandate → 3 parallel agents synthesize → multi-wave ship · R51 confirmed pattern)
 
 【2026-05-23 R59-R60 攻頂 state · 7+ waves · 3-agent full-authority pattern fire × 2 invocations】:
+
+R63 W-A · FirstReceiptHero pinned mode + N>=2 founding-receipt永久 pinning(Pokemon TCG R60 W-B mechanical extension · adaptive kicker copy + adaptive tagline footer · 1st Edition prestige preserved at every N · cpbl-260521-01 永遠 elevated above ledger)· commit 2949695
+R63 W-B · Taiwan-native payment trust 4-point block above WaitlistForm(per taiwan.md creator economy report · structural blocker close · 0 信用卡 + 手動轉帳 intentional + Tim 親手 + 14 天退款)+ Pratfall「what your NT$ 2,700 didn't buy」 6-item differentiator at decision-point(per FanGraphs honest limitation pattern · concentrate 11-item NOT-DO at buy-line)· commit 389d78e
+R63 W-C · NEW CredentialStack 3-block(Cameron Grove + Travis Sawchik indie analyst portfolio pattern · founder above-fold visibility · ENGINE BUILD SHA + 5 trust docs + FOUNDER「solo + 0 investors」 honest empty-state)· commit 324479b
+R63 W-D · /now journal + NEW-CONVERSATION-PROMPT R63 closure(此 commit)
 
 R62 W-A · Q3 2026 milestone-language sweep · 11 user-visible refs converted to「payment infra 就緒後開放 · milestone-triggered · 不綁日期」(faq · founders · founders/ledger · membership/black-card · OG card · MemberUnlocksGrid · PaidTierLockedGrid · WaitlistForm)· commits 08b0b56 + 93acc91
 R62 W-B · NEW ReceiptForwardButton component · plain-text receipt share(match · engine pick · actual · verdict · CARD numbering · URL)· 0 tracking 0 UTM 0 referral code · Stratechery + Defector + Athletic pattern · Pokemon TCG「show off receipt」 mechanic codify · wired in /matches/[gameId] CALIBRATION RECEIPT · commit 17838ce
@@ -194,8 +199,9 @@ EXCEPTIONS ship · brand-pure 替代:
 | R60 | 3 | Pokemon TCG lens · 1 deep web research · SHADOWLESS RUN binary tier + SET release narrative + TCG card anatomy + designer dogfood 3rd-canary | /methodology Section 04 SET framing · /founders + /founders/ledger#shadowless-run · FirstReceiptHero CARD 001/∞ + REPRINT POLICY 0 · /admin DESIGNER QUICK REFERENCE + AdminTierSwitcher Cmd+Shift+P prominent kbd display |
 | R61 | 6 | 3rd full-authority · 3 parallel agents · validate regex + focus-visible + 2 CRITICAL 🔴 brand contradictions + WCAG 2.2 | validate:data 0 error 0 warning · 11 focus-visible refactor · 賣明牌 brand redline closed · /audit S08→S05 broken refs fixed · 6 stale magic-link cleanup · /auth/callback raw-error-leak fix · /annual commits 200→294 · PreviewModeBanner 28→32/36px + input-safe shortcut |
 | R62 | 4 | 4th full-authority · Bloomberg/power-user/newsletter lens · 1 deep research agent | Q3 2026 → milestone-triggered language sweep(11 user-visible refs)· NEW ReceiptForwardButton plain-text artifact share(Stratechery + Defector + Athletic pattern · 0 tracking)· NEW GlobalShortcuts g-mode 13 jump shortcuts(Linear/GitHub grammar)· CmdK footer g-mode discoverability hint |
+| R63 | 4 | 5th full-authority · Asian sports + sports-fan psychology lens · 1 deep research agent · 6-dimension gap matrix | FirstReceiptHero pinned mode(永久 1st Edition prestige preserved at N>=2 per Pokemon TCG R60 W-B mechanical extension)· Taiwan-native payment trust 4-point block above WaitlistForm(per taiwan.md trust-at-transfer friction close)· Pratfall「what your NT$ 2,700 didn't buy」 6-item differentiator at decision-point(per FanGraphs honest limitation pattern)· NEW CredentialStack 3-block component(Cameron Grove + Travis Sawchik indie analyst portfolio pattern · founder above-fold visibility) |
 
-**Total: 60+ waves · ~155 fixes · 0 brand redline violation**
+**Total: 64+ waves · ~165 fixes · 0 brand redline violation**
 
 ---
 
