@@ -391,6 +391,30 @@ export const COMMAND_ITEMS: CommandItem[] = [
       "transparency",
     ],
   },
+  // R68 W-A · NEW /founders/apply route · Patek-style application form ·
+  // 1 layer deeper than waitlist · Tim 手動 review 1-3 days · per
+  // /founders/ledger 5-step allocation rules · 通過後才收到付款方式。
+  {
+    label: "申請 Founders 27 · Patek-style application · Tim 親手 review",
+    kicker: "/founders/apply",
+    path: "/founders/apply",
+    group: "工具 · 外部",
+    keywords: [
+      "apply",
+      "application",
+      "申請",
+      "founders",
+      "patek",
+      "creator",
+      "review",
+      "form",
+      "申請表",
+      "manual",
+      "approve",
+      "通過",
+      "submit",
+    ],
+  },
   {
     label: "BLACK CARD · 訂閱會員 UI preview · payment infra 就緒後上線 · 5 unlocks",
     kicker: "/membership/black-card",

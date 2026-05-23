@@ -620,6 +620,29 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
       title: "Model Report · S05 PRE-COMMIT 同 rules-binding pattern",
     },
   ],
+  // R68 W-A · NEW /founders/apply route · Patek-style application form ·
+  // 1 layer deeper than /founders WaitlistForm · 通過後才收到付款方式。
+  // Siblings:/founders(parent · sales page · visitor 通常 read 完 才到 apply)·
+  // /founders/ledger(5-step allocation rules · /founders/apply 直接 implement
+  // 此 rules · 訪客可以對照 rules check application 通過率)· /pricing/why
+  // (pricing rationale · 想 audit 為什麼 NT$ 2,700)。
+  "/founders/apply": [
+    {
+      href: "/founders",
+      kicker: "founders",
+      title: "Founders 27 銷售頁 · 6 件什麼不買到 + benefits",
+    },
+    {
+      href: "/founders/ledger",
+      kicker: "founders/ledger",
+      title: "Public allocation ledger · 5-step rules · 通過率",
+    },
+    {
+      href: "/pricing/why",
+      kicker: "pricing/why",
+      title: "為什麼 NT$ 2,700 · 6-deliverable rationale",
+    },
+  ],
 };
 
 export function getRelatedLinks(currentPath: string): RelatedLink[] {

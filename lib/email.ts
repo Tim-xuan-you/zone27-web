@@ -227,6 +227,298 @@ function escapeHtml(s: string): string {
     .replace(/'/g, "&#39;");
 }
 
+// ── R68 W-B · Founders 27 Application Received (visitor confirmation) ──
+// Sent immediately after /founders/apply form submit · brand-tone HTML +
+// plain-text · explicit「1-3 business days 內 Tim 手動 review」 wait time
+// per Pratfall axiom honesty。 Re-uses Resend infrastructure · graceful
+// degradation if RESEND_API_KEY missing。
+
+type FoundersApplicationReceivedArgs = {
+  to: string;
+  name: string;
+  applicationId: string;
+};
+
+export async function sendFoundersApplicationReceived({
+  to,
+  name,
+  applicationId,
+}: FoundersApplicationReceivedArgs): Promise<EmailResult> {
+  const apiKey = process.env.RESEND_API_KEY;
+  if (!apiKey) {
+    console.warn(
+      `[ZONE27 · FOUNDERS_APPLY_EMAIL · SKIP] RESEND_API_KEY not set · email skipped for ${to}`,
+    );
+    return { ok: false, error: "RESEND_API_KEY missing" };
+  }
+
+  const safeName = escapeHtml(name);
+  const safeId = escapeHtml(applicationId);
+  const subject = `✓ ZONE 27 · Founders 27 申請已收到 · ${applicationId}`;
+  const mono = `'SF Mono', 'Menlo', 'Consolas', monospace`;
+  const sans = `'Helvetica Neue', 'Helvetica', Arial, sans-serif`;
+
+  const html = `<!DOCTYPE html>
+<html lang="zh-Hant">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>ZONE 27 · Founders 27 申請已收到</title></head>
+<body style="margin:0;padding:0;background:#0F1A2E;color:#F5F2EA;font-family:${sans};">
+<table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background:#0F1A2E;">
+<tr><td align="center" style="padding:48px 16px;">
+<table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="max-width:560px;background:#131F38;border:1px solid #1E2A47;">
+<tr><td style="padding:40px 32px;">
+
+<p style="margin:0 0 6px 0;font-family:${mono};color:#D4AF37;font-size:11px;letter-spacing:5px;text-transform:uppercase;">ZONE · 27 · FOUNDERS</p>
+<p style="margin:0 0 32px 0;font-family:${mono};color:#8A93A8;font-size:10px;letter-spacing:4px;text-transform:uppercase;">APPLICATION RECEIVED · MANUAL REVIEW QUEUE</p>
+
+<p style="margin:0;color:#F5F2EA;font-size:14px;letter-spacing:0.5px;">您的申請已收到 ·</p>
+<p style="margin:6px 0 0 0;font-family:${mono};color:#D4AF37;font-size:24px;line-height:1.2;letter-spacing:0;font-weight:300;">${safeId}</p>
+<p style="margin:6px 0 0 0;color:#8A93A8;font-size:13px;">Application ID · 請保留此編號做後續參考</p>
+
+<hr style="border:0;border-top:1px solid #1E2A47;margin:28px 0;">
+
+<p style="margin:0 0 16px 0;color:#F5F2EA;font-size:15px;line-height:1.6;">Hi ${safeName},</p>
+<p style="margin:0 0 16px 0;color:#8A93A8;font-size:14px;line-height:1.7;">您剛剛在 <a href="https://zone27-web.vercel.app/founders/apply" style="color:#D4AF37;text-decoration:none;">zone27-web.vercel.app/founders/apply</a> 提交了 Founders 27 申請。<br><span style="color:#F5F2EA;">這封信只是 receipt confirmation</span> · 您還沒被批准。</p>
+
+<p style="margin:24px 0 12px 0;color:#F5F2EA;font-size:14px;letter-spacing:0.5px;">接下來的流程:</p>
+<ol style="margin:0 0 24px 0;padding-left:22px;color:#8A93A8;font-size:14px;line-height:1.8;">
+<li><span style="color:#F5F2EA;">1-3 business days</span> 內 · Tim 親手 review 您的申請</li>
+<li>通過 → Tim email 您銀行轉帳資訊 + <span style="color:#D4AF37;">您 24 小時 window</span> 完成轉帳</li>
+<li>未通過 → Tim 也會 email 解釋原因 · per <a href="https://zone27-web.vercel.app/founders/ledger" style="color:#D4AF37;text-decoration:none;">/founders/ledger</a> 5-step allocation rules</li>
+<li>轉帳完成 → 您 Founder ID #008-#270 鎖定 · 永久 lifetime access · NT$ 2,700 永不調漲</li>
+</ol>
+
+<p style="margin:0 0 16px 0;color:#8A93A8;font-size:14px;line-height:1.7;">我不寄行銷信 · 下一封信只在 Tim review 完之後寄(approval / rejection / clarifying question)。 任何問題直接 <span style="color:#D4AF37;">reply 此 email</span> · 我每天看至少 2 次。</p>
+
+<p style="margin:32px 0 0 0;color:#F5F2EA;font-size:14px;">Tim</p>
+<p style="margin:4px 0 0 0;font-family:${mono};color:#8A93A8;font-size:11px;letter-spacing:2px;">ZONE 27 創辦人 · CPBL 球迷 27 年</p>
+
+<hr style="border:0;border-top:1px solid #1E2A47;margin:32px 0 20px 0;">
+
+<p style="margin:0 0 6px 0;font-family:${mono};color:#8A93A8;font-size:10px;letter-spacing:3px;text-align:center;">FUNDED BY FOUNDERS · NO VC · NO ADS · NO TRACKERS</p>
+<p style="margin:0;color:#8A93A8;font-size:11px;text-align:center;line-height:1.7;"><a href="https://zone27-web.vercel.app" style="color:#D4AF37;text-decoration:none;">zone27-web.vercel.app</a> · <a href="https://zone27-web.vercel.app/founders/ledger" style="color:#D4AF37;text-decoration:none;">/founders/ledger 5-step rules</a></p>
+<p style="margin:14px 0 0 0;color:#8A93A8;font-size:11px;text-align:center;line-height:1.7;">想取消申請?reply CANCEL · 我手動移除 · 不用 click track link</p>
+
+</td></tr>
+</table>
+</td></tr>
+</table>
+</body>
+</html>`;
+
+  const text = `ZONE 27 · FOUNDERS 27 申請已收到
+
+Application ID: ${applicationId}
+
+Hi ${name},
+
+您剛剛在 zone27-web.vercel.app/founders/apply 提交了 Founders 27 申請。
+這封信只是 receipt confirmation · 您還沒被批准。
+
+接下來的流程:
+1. 1-3 business days 內 · Tim 親手 review 您的申請
+2. 通過 → Tim email 您銀行轉帳資訊 + 您 24 小時 window 完成轉帳
+3. 未通過 → Tim 也會 email 解釋原因 · per /founders/ledger 5-step allocation rules
+4. 轉帳完成 → 您 Founder ID #008-#270 鎖定 · 永久 lifetime access · NT$ 2,700 永不調漲
+
+我不寄行銷信 · 下一封信只在 Tim review 完之後寄。
+任何問題直接 reply · 我每天看至少 2 次。
+
+Tim
+ZONE 27 創辦人 · CPBL 球迷 27 年
+
+──
+FUNDED BY FOUNDERS · NO VC · NO ADS · NO TRACKERS
+https://zone27-web.vercel.app
+https://zone27-web.vercel.app/founders/ledger
+
+想取消申請?reply CANCEL 即可
+`;
+
+  try {
+    const response = await fetch(RESEND_ENDPOINT, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        from: FROM_ADDRESS,
+        to: [to],
+        reply_to: REPLY_TO,
+        subject,
+        html,
+        text,
+      }),
+    });
+    if (!response.ok) {
+      const errorBody = await response.text();
+      console.error(
+        `[ZONE27 · FOUNDERS_APPLY_EMAIL · ERROR] http=${response.status} to=${to} body=${errorBody}`,
+      );
+      return {
+        ok: false,
+        error: `HTTP ${response.status}: ${errorBody.slice(0, 200)}`,
+      };
+    }
+    const data = (await response.json()) as { id?: string };
+    const id = data.id ?? "unknown";
+    console.log(
+      `[ZONE27 · FOUNDERS_APPLY_EMAIL · SENT] to=${to} app=${applicationId} id=${id}`,
+    );
+    return { ok: true, id };
+  } catch (err) {
+    const message = err instanceof Error ? err.message : String(err);
+    console.error(
+      `[ZONE27 · FOUNDERS_APPLY_EMAIL · ERROR] uncaught to=${to} err=${message}`,
+    );
+    return { ok: false, error: message };
+  }
+}
+
+// ── R68 W-B · Founders 27 Application Notification (Tim's inbox) ──
+// Sent to Tim's Gmail simultaneous with visitor confirmation · primary
+// audit trail backstop pre-Supabase migration 0003 · review queue source
+// of truth · reply 直接 → applicant · forward 給自己手動 transfer to
+// approved bank-wire flow。 Same pattern as sendSubmissionNotification。
+
+type FoundersApplicationNotificationArgs = {
+  applicantEmail: string;
+  applicantName: string;
+  cpblConnection: string;
+  why: string;
+  applicationId: string;
+};
+
+export async function sendFoundersApplicationNotification({
+  applicantEmail,
+  applicantName,
+  cpblConnection,
+  why,
+  applicationId,
+}: FoundersApplicationNotificationArgs): Promise<EmailResult> {
+  const apiKey = process.env.RESEND_API_KEY;
+  if (!apiKey) {
+    console.warn(
+      `[ZONE27 · FOUNDERS_APPLY_NOTIFY · SKIP] RESEND_API_KEY not set · notification skipped for ${applicationId}`,
+    );
+    return { ok: false, error: "RESEND_API_KEY missing" };
+  }
+
+  const subject = `[ZONE 27 · FOUNDERS_APPLY] ${applicationId} · ${applicantName} · ${applicantEmail}`;
+  const safeName = escapeHtml(applicantName);
+  const safeEmail = escapeHtml(applicantEmail);
+  const safeCpbl = escapeHtml(cpblConnection).replace(/\n/g, "<br>");
+  const safeWhy = escapeHtml(why).replace(/\n/g, "<br>");
+  const safeId = escapeHtml(applicationId);
+
+  const html = `<!DOCTYPE html>
+<html lang="zh-Hant">
+<head><meta charset="UTF-8"></head>
+<body style="margin:0;padding:0;background:#0F1A2E;color:#F5F2EA;font-family:'Helvetica Neue',Arial,sans-serif;">
+<table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background:#0F1A2E;">
+<tr><td align="center" style="padding:40px 16px;">
+<table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="max-width:680px;background:#131F38;border:2px solid #D4AF37;">
+<tr><td style="padding:32px;">
+
+<p style="margin:0 0 6px 0;font-family:'SF Mono',monospace;color:#D4AF37;font-size:11px;letter-spacing:4px;">/ ZONE 27 · FOUNDERS_APPLY</p>
+<p style="margin:0 0 24px 0;font-family:'SF Mono',monospace;color:#8A93A8;font-size:10px;letter-spacing:3px;">REVIEW QUEUE · MANUAL APPROVAL · 1-3 BUSINESS DAYS</p>
+
+<p style="margin:0 0 6px 0;color:#8A93A8;font-size:12px;">Application ID</p>
+<p style="margin:0 0 20px 0;color:#D4AF37;font-size:16px;font-family:'SF Mono',monospace;">${safeId}</p>
+
+<p style="margin:0 0 6px 0;color:#8A93A8;font-size:12px;">From</p>
+<p style="margin:0 0 20px 0;color:#F5F2EA;font-size:14px;"><strong>${safeName}</strong> &lt;${safeEmail}&gt;</p>
+
+<p style="margin:0 0 6px 0;color:#8A93A8;font-size:12px;">CPBL CONNECTION</p>
+<div style="margin:0 0 20px 0;color:#F5F2EA;font-size:14px;line-height:1.7;border-left:2px solid #D4AF37;padding-left:14px;">${safeCpbl}</div>
+
+<p style="margin:0 0 6px 0;color:#8A93A8;font-size:12px;">WHY ZONE 27</p>
+<div style="color:#F5F2EA;font-size:14px;line-height:1.7;border-left:2px solid #D4AF37;padding-left:14px;">${safeWhy}</div>
+
+<hr style="border:0;border-top:1px solid #1E2A47;margin:28px 0;">
+
+<p style="margin:0 0 12px 0;color:#F5F2EA;font-size:13px;letter-spacing:0.5px;">Tim · 5-step allocation review checklist:</p>
+<ol style="margin:0 0 12px 0;padding-left:22px;color:#8A93A8;font-size:13px;line-height:1.8;">
+<li>Real name vs handle?(per /founders/ledger Step 1 identity check)</li>
+<li>CPBL fan signal authentic?(球隊 + 年份 + 細節)</li>
+<li>「Why ZONE 27」 fits brand IP fan-not-engineer?(per audience-fans axiom)</li>
+<li>Any red flag(LINE 老師 / 投顧 / gambling intermediary affiliation)?</li>
+<li>Allocate next available slot(#008-#270)or reject with brand-pure explanation</li>
+</ol>
+
+<p style="margin:0;color:#8A93A8;font-size:11px;line-height:1.6;">Reply 此 email 直接給 applicant · 或 forward 給自己 / 加進 manual review spreadsheet · 通過後寄銀行資訊 24h window 完成。</p>
+
+</td></tr>
+</table>
+</td></tr>
+</table>
+</body>
+</html>`;
+
+  const text = `ZONE 27 · FOUNDERS_APPLY
+REVIEW QUEUE · MANUAL APPROVAL · 1-3 BUSINESS DAYS
+
+Application ID: ${applicationId}
+
+From: ${applicantName} <${applicantEmail}>
+
+CPBL CONNECTION:
+${cpblConnection}
+
+WHY ZONE 27:
+${why}
+
+──
+Tim · 5-step allocation review checklist:
+1. Real name vs handle?
+2. CPBL fan signal authentic?
+3. 「Why ZONE 27」 fits brand IP fan-not-engineer?
+4. Any red flag(LINE 老師 / 投顧 / gambling intermediary affiliation)?
+5. Allocate next available slot(#008-#270)or reject with brand-pure explanation
+
+Reply 此 email 直接給 applicant · 通過後寄銀行資訊 24h window 完成。`;
+
+  try {
+    const response = await fetch(RESEND_ENDPOINT, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        from: FROM_ADDRESS,
+        to: [REPLY_TO], // Tim's Gmail
+        reply_to: applicantEmail, // Reply directly to applicant
+        subject,
+        html,
+        text,
+      }),
+    });
+    if (!response.ok) {
+      const errorBody = await response.text();
+      console.error(
+        `[ZONE27 · FOUNDERS_APPLY_NOTIFY · ERROR] http=${response.status} app=${applicationId}`,
+      );
+      return {
+        ok: false,
+        error: `HTTP ${response.status}: ${errorBody.slice(0, 200)}`,
+      };
+    }
+    const data = (await response.json()) as { id?: string };
+    const id = data.id ?? "unknown";
+    console.log(
+      `[ZONE27 · FOUNDERS_APPLY_NOTIFY · SENT] app=${applicationId} id=${id}`,
+    );
+    return { ok: true, id };
+  } catch (err) {
+    const message = err instanceof Error ? err.message : String(err);
+    console.error(
+      `[ZONE27 · FOUNDERS_APPLY_NOTIFY · ERROR] uncaught app=${applicationId} err=${message}`,
+    );
+    return { ok: false, error: message };
+  }
+}
+
 // ── Round 30 Wave 10 · Submit-to-Tim notification ─────
 // FREE TIER 投稿 path · per /membership Creator Permissions FAQ
 // 「FREE TIER 投稿 · Tim 親手 curate · 1 篇 / 週」。 Member 在 /member/submit

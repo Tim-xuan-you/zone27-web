@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import WaitlistForm from "@/components/WaitlistForm";
+import PreTransferReceipt from "@/components/PreTransferReceipt";
 import CopyLinkButton from "@/components/CopyLinkButton";
 import CredentialStack from "@/components/CredentialStack";
 import {
@@ -437,76 +438,15 @@ export default async function FoundersPage({
         </a>
       </section>
 
-      {/* R63 W-B · Agent 5 SHIP #4 · Taiwan-native payment trust disclosure
-          immediately above conversion CTA · per Taiwan Self-Media Creator
-          Economy report(taiwan.md)·「Taiwanese consumers trust creator
-          recommendations BUT the proportion willing to pay creators directly
-          is low... structural blocker is trust at moment-of-transfer, not
-          price」。 ZONE 27 cannot use affiliate workaround(engine IS brand)·
-          must close trust gap explicitly at decision point。 4-point trust
-          block · 0 信用卡 + 手動轉帳 intentional + Tim 親手 + 14 天退款 ·
-          brand IP「方法公開」 延伸到 payment trust disclosure。 */}
-      <section className="mx-auto max-w-2xl w-full px-6 sm:px-10 pb-5 sm:pb-6">
-        <div className="border border-gold/40 bg-gold/5 px-5 sm:px-6 py-4 sm:py-5">
-          <p
-            lang="en"
-            className="font-mono text-gold text-[10px] sm:text-[11px] tracking-[0.4em] mb-3"
-          >
-            / PAYMENT TRUST · 為什麼手動轉帳
-          </p>
-          <ul className="space-y-2.5 text-mute text-[12px] sm:text-[13px] leading-relaxed">
-            <li className="flex gap-3">
-              <span aria-hidden="true" className="text-gold/70 shrink-0">▸</span>
-              <span>
-                <strong className="text-bone">0 信用卡資料在 ZONE 27</strong>{" "}
-                · 銀行轉帳 visitor 跟 visitor 的銀行直接 · 我們完全不接觸信用卡 ·
-                沒有 Stripe / TapPay / ECPay tokenization vault
-              </span>
-            </li>
-            <li className="flex gap-3">
-              <span aria-hidden="true" className="text-gold/70 shrink-0">▸</span>
-              <span>
-                <strong className="text-bone">手動轉帳是 intentional</strong>{" "}
-                · 不是「我們沒能力上 Stripe」 · 是 brand IP「倒置 SaaS · 稀缺
-                手工」 · payment infra 就緒後仍保留手動 onboarding path
-              </span>
-            </li>
-            <li className="flex gap-3">
-              <span aria-hidden="true" className="text-gold/70 shrink-0">▸</span>
-              <span>
-                <strong className="text-bone">Tim 親手 onboard</strong> · 沒有
-                cron · 沒有外包 · 24h 內個人化 email · 同{" "}
-                <Link
-                  href="/founders/ledger"
-                  className="text-gold/85 hover:text-gold underline-offset-4 hover:underline"
-                >
-                  /founders/ledger
-                </Link>{" "}
-                allocation 5-step pre-commit
-              </span>
-            </li>
-            <li className="flex gap-3">
-              <span aria-hidden="true" className="text-gold/70 shrink-0">▸</span>
-              <span>
-                <strong className="text-bone">14 天無條件退款</strong> · 即使
-                seat #NNN 已 locked · 寫信 tim@zone27.tw 即退 · 不問原因 · 不
-                嘗試挽留 · 同{" "}
-                <Link
-                  href="/faq#refund"
-                  className="text-gold/85 hover:text-gold underline-offset-4 hover:underline"
-                >
-                  /faq refund
-                </Link>{" "}
-                policy
-              </span>
-            </li>
-          </ul>
-          <p className="mt-3 pt-3 border-t border-line/40 font-mono text-mute/70 text-[10px] tracking-[0.25em] leading-relaxed">
-            ▸ per Taiwan Self-Media Creator Economy 2025-26 report · structural
-            trust-at-transfer blocker explicit close · brand IP「方法公開」 延伸
-          </p>
-        </div>
-      </section>
+      {/* R68 W-G · Agent A SHIP 3 · PreTransferReceipt upgrade of R63 W-B
+          4-point trust block · per taiwan.md trust-at-transfer creator-
+          economy report · Patek SEA / MUJI Asia / Kinokuniya HK pattern ·
+          show human choreography BEFORE checkout because Taiwanese cultural
+          default is suspicion of automated wire transfers · NOT「secure
+          checkout」 badges。 3 rows:01 您將收到 · 02 Tim 5-step choreography
+          · 03 如果出錯了 · brand IP triple-fire(Pratfall ROW 3 + Disclosure
+          choreography + costly signaling Tim 親眼 each step)。 */}
+      <PreTransferReceipt />
 
       {/* ── WAITLIST FORM · Round 8 moved up to be 2nd block ────
           Was 3rd block (after FROM THE FOUNDER) · per Round 8 agent
@@ -520,6 +460,46 @@ export default async function FoundersPage({
         className="mx-auto max-w-2xl w-full px-6 sm:px-10 pb-8 sm:pb-12 scroll-mt-20"
       >
         <WaitlistForm waitlistCount={waitlistCount} refSource={refSource} />
+      </section>
+
+      {/* ── R68 W-A · APPLY CTA strip ───────────────────────
+          Patek-style application form 1 layer deeper than waitlist email
+          signup · for visitors who have already read /founders + accept
+          6 「什麼不買到」 + /founders/ledger 5-step rules + /pricing/why
+          rationale · 直接想 apply for #008-#270 founding seat。
+
+          Per [[zone27-payment-architecture]] Founders 27 = manual bank
+          transfer 是 INTENTIONAL · 此 form 是 PRE-REQUISITE before Tim
+          sends bank details · NOT a payment form。
+
+          Visual treatment 比 WaitlistForm 更 subdued · 是「您已決定 ·
+          下一步」 destination 而非「正在 marketing」 surface · Patek
+          allocation form 該 understated。 */}
+      <section className="mx-auto max-w-2xl w-full px-6 sm:px-10 pb-12 sm:pb-16">
+        <div className="border-2 border-gold/40 bg-slate/40 p-6 sm:p-8">
+          <p
+            lang="en"
+            className="font-mono text-gold text-[10px] tracking-[0.4em] mb-3"
+          >
+            ⚓ READY TO APPLY · 您已決定?
+          </p>
+          <h3 className="text-xl sm:text-2xl text-bone font-light tracking-tight mb-3">
+            申請 Founders 27 創始席位 ·{" "}
+            <span className="text-gold">Patek allocation form</span>
+          </h3>
+          <p className="text-mute text-sm sm:text-base leading-relaxed mb-5">
+            上面留 email 是 free tier + waitlist · 您仍可慢慢決定。
+            <strong className="text-bone">下面是直接 apply 表單</strong> ·
+            Tim 親手 review 1-3 days · 通過後您收到銀行資訊 + 24h transfer
+            window。 per /founders/ledger 5-step rules。
+          </p>
+          <Link
+            href="/founders/apply"
+            className="inline-block px-6 py-3 border border-gold text-gold text-xs sm:text-sm tracking-[0.3em] hover:bg-gold hover:text-navy transition-colors"
+          >
+            申請 Founders 27 → /founders/apply
+          </Link>
+        </div>
       </section>
 
       {/* ── FREE EMAIL TIER CLARIFICATION · Round 21 ────────
