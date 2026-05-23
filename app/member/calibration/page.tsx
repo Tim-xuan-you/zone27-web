@@ -350,7 +350,7 @@ export default async function CalibrationPage() {
             <TimelineRow
               phase="Phase 1 Q3 / PERSONAL"
               status="等 auth 上線"
-              body="您 follow 的賽事 → 您自己的 calibration drift。 同 schema · 同 SVG · 不同 data subset。 magic link auth 上線當天 · 您 localStorage 已有的 follow-list 自動 sync · 您的 personal mirror 從那天起跳。"
+              body="您 follow 的賽事 → 您自己的 calibration drift。 同 schema · 同 SVG · 不同 data subset。 Email + 密碼 auth 已上線(R50 W-F password-only)· 您 localStorage 已有的 follow-list 已自動 sync · 您的 personal mirror 從登入那天起跳。"
             />
             <TimelineRow
               phase="未來 / SOCIAL"

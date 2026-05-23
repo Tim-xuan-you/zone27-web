@@ -194,8 +194,8 @@ export default function AuditPage() {
               >
                 /ethics
               </Link>
-              )。 Section 05 DISCLOSURE PHILOSOPHY 解釋為什麼 publish 這些。
-              Section 08 公開全模型 / GitHub source · 不留 secret。
+              )。 Section 05 DISCLOSURE PHILOSOPHY 解釋為什麼 publish 這些 ·
+              GitHub source 公開全模型 · 不留 secret。
             </p>
           </aside>
 

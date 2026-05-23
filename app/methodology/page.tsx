@@ -439,7 +439,7 @@ repeat 10,000 times → aggregate
         <ul className="space-y-2 mt-3 text-mute">
           <li className="flex gap-3 items-baseline">
             <span className="font-mono text-gold/70 text-[10px] tracking-[0.25em]">▸</span>
-            <span className="flex-1">publish entire methodology(simulator-vN.ts on GitHub · per /audit S08 disclosure-philosophy)</span>
+            <span className="flex-1">publish entire methodology(simulator-vN.ts on GitHub · per /audit S05 disclosure-philosophy)</span>
           </li>
           <li className="flex gap-3 items-baseline">
             <span className="font-mono text-gold/70 text-[10px] tracking-[0.25em]">▸</span>

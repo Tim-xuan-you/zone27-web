@@ -66,7 +66,7 @@ const METRICS = {
   costsMonthlyNTD: 0, // Vercel/Supabase/Resend free tiers
   engineVersion: "v0.2",
   engineSampleN: 1,
-  commitsToDate: 200, // approximate Round 33 W-E ship · /changelog source of truth
+  commitsToDate: 294, // R61 W-D refresh · git rev-list --count HEAD · /changelog source of truth
 };
 
 const WHAT_FAILED_2026: { item: string; lesson: string }[] = [

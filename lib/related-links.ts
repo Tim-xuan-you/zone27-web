@@ -483,7 +483,7 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
     {
       href: "/privacy",
       kicker: "privacy",
-      title: "我們 0 tracking · email 只用於 magic link + 通知",
+      title: "我們 0 tracking · email 只用於 login + 通知",
     },
   ],
   // Round 30 Wave 10 · /member/submit NEW · FREE TIER 投稿 · Tim 1/週

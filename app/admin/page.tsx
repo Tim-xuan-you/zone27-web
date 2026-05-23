@@ -174,8 +174,8 @@ export default async function AdminPage() {
                 </p>
                 <p className="text-bone text-[13px] sm:text-sm leading-relaxed">
                   Tier preview <strong className="text-gold">不需要任何
-                  帳號</strong>。 若要測「真實 auth state」(實際 magic-link
-                  flow / session cookie)再用 /login · 隨便 email + 密碼 註冊
+                  帳號</strong>。 若要測「真實 auth state」(實際 Email + 密碼
+                  flow / Supabase session cookie)再用 /login · 隨便 email + 密碼 註冊
                   測試帳號(Resend free tier 100/day)。
                 </p>
               </div>

@@ -40,7 +40,7 @@ const benefits = [
     no: "03",
     zh: "創作者零抽成",
     en: "0% PLATFORM FEE",
-    body: "如果您也是預測創作者,賣明牌 100% 全拿。一般黑金會員平台仍抽 5% — 您完全不抽。",
+    body: "如果您也是預測創作者,creator 抽成 100% 全拿(BLACK CARD creators 5% 給平台 · 您完全 0%)。 對比 LINE 老師 / 投顧老師業界 30-50% 是降維打擊。",
   },
   {
     no: "04",

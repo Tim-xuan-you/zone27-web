@@ -397,7 +397,7 @@ export default function MethodologyDiffPage() {
           <p>
             <strong className="text-bone">主動列出 v0.3 沒有修的 6 個 limitation</strong>
             (Pratfall · per <Link href="/audit" className="text-gold underline-offset-4 hover:underline">/audit</Link>{" "}
-            S08 disclosure pattern)。 玩運彩+報馬仔 marketing 標準是「升級了
+            S05 disclosure pattern)。 玩運彩+報馬仔 marketing 標準是「升級了
             model」 不交代細節 · ZONE 27 倒置:列出來。
           </p>
 

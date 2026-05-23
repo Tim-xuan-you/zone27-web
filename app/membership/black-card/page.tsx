@@ -209,7 +209,7 @@ export default function BlackCardPage() {
               href="/audit"
               className="text-mute hover:text-gold transition-colors underline-offset-4 hover:underline"
             >
-              /audit S08 公開全模型
+              /audit S05 公開全模型
             </Link>
             <span className="mx-2 text-mute/40">·</span>
             <span className="text-gold/85">14-DAY</span> 退款保證

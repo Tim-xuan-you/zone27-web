@@ -251,7 +251,7 @@ export default function HeroLiveCard({ match }: { match: Match }) {
       </p>
 
       {/* Calibration receipt — only when finalResult ingested.
-          Equal visual weight for PROVED and DIVERGED per /audit S08
+          Equal visual weight for PROVED and DIVERGED per /audit S05
           disclosure philosophy. This is the public receipt that powers
           /track-record · single source of truth for engine track record. */}
       {match.finalResult && calibration && (

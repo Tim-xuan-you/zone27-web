@@ -119,7 +119,7 @@ export default async function MemberPage({
               <span
                 lang="en"
                 className="font-mono text-[9px] tracking-[0.3em] px-1.5 py-0.5 border border-gold/60 text-gold shimmer"
-                title="您已登入 · session 啟用 · Round 30 Wave 5 ship 的 Phase 1 magic link auth"
+                title="您已登入 · session 啟用 · Round 30 Wave 5 ship 後 R50 W-F 升 Email + 密碼 auth"
               >
                 ✓ AUTHENTICATED · FREE TIER
               </span>
