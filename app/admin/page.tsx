@@ -116,6 +116,79 @@ export default async function AdminPage() {
 
         <div className="mx-auto w-32 gold-line mb-12" />
 
+        {/* R60 W-C · Designer Quick Reference · Tim 第 3 次 canary fire 同問題
+            「設計者要怎麼切換查看 / 要登入嗎 / 哪個帳號」 · founder dogfood
+            permanent FAQ block · 一進 /admin 就看到 3 個答案。 brand IP「方法
+            公開 · 品味私藏」 延伸到 designer tool ergonomics · per [[feedback-
+            founder-dogfood-canary]] 「founder push back 第 1 次就 trust 即修」 ·
+            第 3 次 explicit physical surface 必須立即修。 同 /admin noindex
+            invisible to public + 只 Tim 看得到 axiom 保留。 */}
+        <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-12">
+          <div className="bg-slate/30 border border-gold/50 p-5 sm:p-6">
+            <p
+              lang="en"
+              className="font-mono text-gold text-[10px] sm:text-[11px] tracking-[0.4em] mb-4"
+            >
+              / DESIGNER QUICK REFERENCE · 設計者 3 個常問
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
+              <div className="border-l-2 border-gold/50 pl-4">
+                <p
+                  lang="en"
+                  className="font-mono text-mute text-[10px] tracking-[0.3em] mb-2"
+                >
+                  Q · 要登入嗎?
+                </p>
+                <p className="text-bone text-[13px] sm:text-sm leading-relaxed">
+                  <strong className="text-gold">不需要</strong>。 tier preview
+                  是純 localStorage 不碰 auth · 不寫 server · 不影響真實
+                  session。 您是匿名訪客也 OK · 已登入也 OK。
+                </p>
+              </div>
+              <div className="border-l-2 border-gold/50 pl-4">
+                <p
+                  lang="en"
+                  className="font-mono text-mute text-[10px] tracking-[0.3em] mb-2"
+                >
+                  Q · 怎麼從任何頁面切?
+                </p>
+                <p className="text-bone text-[13px] sm:text-sm leading-relaxed">
+                  按{" "}
+                  <kbd className="font-mono text-gold bg-navy/60 border border-gold/40 px-1.5 py-0.5 text-[11px] tracking-tight">
+                    Cmd+Shift+P
+                  </kbd>
+                  (Mac)或{" "}
+                  <kbd className="font-mono text-gold bg-navy/60 border border-gold/40 px-1.5 py-0.5 text-[11px] tracking-tight">
+                    Ctrl+Shift+P
+                  </kbd>
+                  (Win)= 任何頁面 banner 立即跳出 · 4 tier 一鍵切。 banner 在
+                  全站 sticky top。
+                </p>
+              </div>
+              <div className="border-l-2 border-gold/50 pl-4">
+                <p
+                  lang="en"
+                  className="font-mono text-mute text-[10px] tracking-[0.3em] mb-2"
+                >
+                  Q · 要哪個帳號?
+                </p>
+                <p className="text-bone text-[13px] sm:text-sm leading-relaxed">
+                  Tier preview <strong className="text-gold">不需要任何
+                  帳號</strong>。 若要測「真實 auth state」(實際 magic-link
+                  flow / session cookie)再用 /login · 隨便 email + 密碼 註冊
+                  測試帳號(Resend free tier 100/day)。
+                </p>
+              </div>
+            </div>
+            <p className="mt-5 pt-4 border-t border-line/40 font-mono text-mute/70 text-[10px] tracking-[0.25em] leading-relaxed">
+              ▸ Tier preview = 純視覺切換(client-side localStorage)·
+              real auth = 真實 Supabase session(server-side cookie)· 兩個
+              系統獨立 · 您可同時 active · banner 顯示 preview tier · Nav 顯示
+              real auth state。
+            </p>
+          </div>
+        </section>
+
         {/* ── Round 36 W-D · TIER SWITCHER · founder dev tool ────
             Tim 14+ canary fire question:「我這個設計者 · 我要怎麼樣可以
             在各個付費程度裡面 · 隨意切換看各個功能有沒有到位?」 brilliant

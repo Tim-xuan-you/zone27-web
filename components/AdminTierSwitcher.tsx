@@ -112,6 +112,48 @@ export default function AdminTierSwitcher() {
         )}
       </div>
 
+      {/* R60 W-C · Tim 第 3 次 canary fire 同問題「設計者怎麼切換查看?」 ·
+          founder dogfood discoverability gap · per [[feedback-founder-dogfood-canary]]
+          第 1 次 trust · 第 3 次 must surface 物理 fix。 keyboard shortcut 在
+          PreviewModeBanner 已存在 R47 W-B · 但 banner 沒 active 之前 invisible。
+          此 block 在 /admin AdminTierSwitcher visible-永久 · Tim 一進來就看到。 */}
+      <div className="mb-5 border border-gold/40 bg-gold/5 px-4 py-3">
+        <p
+          lang="en"
+          className="font-mono text-gold text-[10px] tracking-[0.3em] mb-2"
+        >
+          ⌨ KEYBOARD SHORTCUT · 從任何 page 切換
+        </p>
+        <p className="text-bone text-[13px] leading-relaxed">
+          按{" "}
+          <kbd className="font-mono text-gold bg-navy/60 border border-gold/40 px-1.5 py-0.5 text-[11px] tracking-tight">
+            Cmd
+          </kbd>
+          {" "}+{" "}
+          <kbd className="font-mono text-gold bg-navy/60 border border-gold/40 px-1.5 py-0.5 text-[11px] tracking-tight">
+            Shift
+          </kbd>
+          {" "}+{" "}
+          <kbd className="font-mono text-gold bg-navy/60 border border-gold/40 px-1.5 py-0.5 text-[11px] tracking-tight">
+            P
+          </kbd>
+          {" "}(Mac)或{" "}
+          <kbd className="font-mono text-gold bg-navy/60 border border-gold/40 px-1.5 py-0.5 text-[11px] tracking-tight">
+            Ctrl
+          </kbd>
+          {" "}+{" "}
+          <kbd className="font-mono text-gold bg-navy/60 border border-gold/40 px-1.5 py-0.5 text-[11px] tracking-tight">
+            Shift
+          </kbd>
+          {" "}+{" "}
+          <kbd className="font-mono text-gold bg-navy/60 border border-gold/40 px-1.5 py-0.5 text-[11px] tracking-tight">
+            P
+          </kbd>
+          {" "}(Win)= 從任何頁面開啟 preview mode banner · 預設「匿名訪客」
+          身份 · 再點 banner 4 tier button 切換 · 不需要登入 · 不需要回此頁。
+        </p>
+      </div>
+
       <p className="text-mute text-sm leading-relaxed mb-5">
         切換 4 個 tier 身份 · 整站 client-side tier-aware components 跟著切。
         Effect:localStorage override · banner sticky-top 顯示 mode · server-rendered
