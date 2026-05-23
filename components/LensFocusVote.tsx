@@ -48,16 +48,29 @@ type Props = {
   matchId: string;
 };
 
+// R69 W-C audit F13 fix · error field added to WidgetState discriminated
+// union · window.alert() blocking dialog → inline role="alert" aria-live
+// region · matches WaitlistForm R56 W-A pattern · 同 a11y discipline ·
+// 不再 blocking keyboard navigation · 不再 unsstyled · brand-consistent。
 type WidgetState =
   | { mounted: false }
-  | { mounted: true; vote: LensFocusVote | null };
+  | {
+      mounted: true;
+      vote: LensFocusVote | null;
+      /** Storage write error · displayed inline below buttons via role=alert · null when no error */
+      error: string | null;
+    };
 
 export default function LensFocusVote({ matchId }: Props) {
   const [state, setState] = useState<WidgetState>({ mounted: false });
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
-    setState({ mounted: true, vote: getLensFocusVoteForMatch(matchId) });
+    setState({
+      mounted: true,
+      vote: getLensFocusVoteForMatch(matchId),
+      error: null,
+    });
   }, [matchId]);
 
   // SSR-safe skeleton(per AnonPick R45 W-B pattern · R68 W-D audit F11
@@ -80,25 +93,28 @@ export default function LensFocusVote({ matchId }: Props) {
   const handleVote = (lens: LensId) => {
     const result = pushLensFocusVote({ matchId, votedLens: lens });
     if (!result.ok) {
+      // R69 W-C audit F13 fix · inline error state instead of window.alert
       const msg =
         result.reason === "quota_exceeded"
           ? "localStorage 滿了 · vote 未存 · 清些瀏覽器資料再試"
           : result.reason === "disabled"
             ? "localStorage 被瀏覽器停用(可能私密模式)· vote 無法存"
             : "Vote 存取錯誤 · 請重試";
-      if (typeof window !== "undefined") {
-        window.alert(msg);
-      }
+      setState({ mounted: true, vote: state.vote, error: msg });
       return;
     }
-    setState({ mounted: true, vote: getLensFocusVoteForMatch(matchId) });
+    setState({
+      mounted: true,
+      vote: getLensFocusVoteForMatch(matchId),
+      error: null,
+    });
   };
 
   const handleReset = () => {
     // Re-vote 是 OK(idempotent overwrite)· null state 引導重選 1 個
     // lens · 不刪 localStorage 直接覆寫 next click。 此 button 透明
     // 顯示「您現在可以重選」 intent · brand IP「不藏 reversibility」 axiom。
-    setState({ mounted: true, vote: null });
+    setState({ mounted: true, vote: null, error: null });
   };
 
   // ── STATE 1 · NOT_VOTED ──────────────────────────────
@@ -149,8 +165,24 @@ export default function LensFocusVote({ matchId }: Props) {
             </li>
           ))}
         </ul>
+        {/* R69 W-C audit F13 fix · inline error region role="alert" aria-live · NOT
+            window.alert blocking dialog · WCAG 2.1 SC 4.1.3 Status Messages · 同
+            WaitlistForm R56 W-A pattern · keyboard-friendly + screen-reader announced
+            + brand-styled。 min-h reserved 防止 CLS when error appears。 */}
+        <div
+          role="alert"
+          aria-live="polite"
+          aria-atomic="true"
+          className="min-h-[1.25rem] mb-2"
+        >
+          {state.error && (
+            <p className="font-mono text-loss text-[11px] tracking-[0.2em] leading-relaxed">
+              ✕ {state.error}
+            </p>
+          )}
+        </div>
         <p className="font-mono text-mute/70 text-[9px] tracking-[0.25em] leading-relaxed">
-          ⚓ 不 vote 也可以 · 直接滾下方 7-lens canvas · 此 widget 是
+          ⚓ 不 vote 也可以 · 直接滾下方 6-lens canvas · 此 widget 是
           optional · 您 vote 只在您裝置 · 不傳 server · 沒 leaderboard ·
           不顯示「X% 訪客選 park factor」 social proof。{" "}
           <Link

@@ -45,16 +45,29 @@ type Props = {
   match: Match;
 };
 
+// R69 W-C audit F13 fix · error field added to WidgetState discriminated
+// union · window.alert() blocking dialog → inline role="alert" aria-live
+// region · matches LensFocusVote R69 + WaitlistForm R56 W-A pattern ·
+// 同 a11y discipline · 不再 blocking keyboard navigation · brand-consistent。
 type WidgetState =
   | { mounted: false }
-  | { mounted: true; pick: AnonPick | null };
+  | {
+      mounted: true;
+      pick: AnonPick | null;
+      /** Storage write error · displayed inline via role=alert · null when no error */
+      error: string | null;
+    };
 
 export default function AnonPickWidget({ match }: Props) {
   const [state, setState] = useState<WidgetState>({ mounted: false });
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
-    setState({ mounted: true, pick: getAnonPickForMatch(match.id) });
+    setState({
+      mounted: true,
+      pick: getAnonPickForMatch(match.id),
+      error: null,
+    });
   }, [match.id]);
 
   // SSR-safe: render skeleton during SSR
@@ -80,8 +93,11 @@ export default function AnonPickWidget({ match }: Props) {
   if (!state.pick) {
     const handlePick = (side: "home" | "away") => {
       // Round 54 W-A · Agent 2 #7 fix · check pushAnonPick result · 不
-      // silent loss · 若 quota / disabled localStorage · alert user · 不
-      // 假裝 saved。 brand IP「方法公開 · 不藏 broken state」 物理 codify。
+      // silent loss · 若 quota / disabled localStorage · surface inline
+      // error · 不假裝 saved。 brand IP「方法公開 · 不藏 broken state」
+      // 物理 codify。
+      // R69 W-C audit F13 fix · window.alert → inline error state · 同
+      // LensFocusVote pattern + WaitlistForm R56 W-A a11y discipline。
       const result = pushAnonPick({
         matchId: match.id,
         pickedSide: side,
@@ -95,14 +111,15 @@ export default function AnonPickWidget({ match }: Props) {
             : result.reason === "disabled"
             ? "localStorage 被瀏覽器停用(可能私密模式)· pick 無法存"
             : "Pick 存取錯誤 · 請重試";
-        // Surface to user · 不 silent · 不 fake confirmation
-        if (typeof window !== "undefined") {
-          window.alert(msg);
-        }
+        setState({ mounted: true, pick: state.pick, error: msg });
         return;
       }
-      // Re-read after write to update widget state
-      setState({ mounted: true, pick: getAnonPickForMatch(match.id) });
+      // Re-read after write to update widget state · clear any prior error
+      setState({
+        mounted: true,
+        pick: getAnonPickForMatch(match.id),
+        error: null,
+      });
     };
 
     return (
@@ -147,6 +164,21 @@ export default function AnonPickWidget({ match }: Props) {
             </span>
             <span className="block text-base">{match.away.name}</span>
           </button>
+        </div>
+        {/* R69 W-C audit F13 fix · inline error region role="alert" aria-live · NOT
+            window.alert blocking dialog · WCAG 2.1 SC 4.1.3 Status Messages compliance ·
+            同 LensFocusVote R69 + WaitlistForm R56 W-A pattern。 */}
+        <div
+          role="alert"
+          aria-live="polite"
+          aria-atomic="true"
+          className="min-h-[1.25rem] mb-2"
+        >
+          {state.error && (
+            <p className="font-mono text-loss text-[11px] tracking-[0.2em] leading-relaxed">
+              ✕ {state.error}
+            </p>
+          )}
         </div>
         <p className="font-mono text-mute/70 text-[9px] tracking-[0.25em] leading-relaxed">
           ⚓ 不 pick 也可以 · 直接滾下方看 engine · 此 widget 是 optional ·
