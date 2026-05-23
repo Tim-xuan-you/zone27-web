@@ -813,9 +813,14 @@ export default async function FoundersPage({
           THE SIX UNLOCKS
         </p>
 
-        <div className="grid sm:grid-cols-2 gap-x-12 gap-y-14">
+        {/* R76 W-B · Agent A R75 SHIP 5 UniformHeightStrip Aesop spacing
+            audit · auto-rows-fr forces uniform row heights · h-full + flex-
+            col stretches benefit cards · 6 benefits had inconsistent body
+            lengths(終身 = 2 lines vs 創作者 0% = 4 lines)· Aesop website
+            grid discipline · NN/g Anatomy of Good Design · 0 new tokens · CSS-only。 */}
+        <div className="grid sm:grid-cols-2 auto-rows-fr gap-x-12 gap-y-14">
           {benefits.map((b) => (
-            <div key={b.no}>
+            <div key={b.no} className="flex flex-col h-full">
               <p
                 lang="en"
                 className="font-mono text-gold/70 text-[10px] tracking-[0.35em] mb-3"

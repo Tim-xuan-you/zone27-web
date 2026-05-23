@@ -687,6 +687,71 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
       title: "Audit aggregator · 完整 disclosure 集合",
     },
   ],
+  // R75 W-G · NEW /founders/inheritance · Patek Generations 1996 + Hanshin
+  // 二代目ファン · 4-rule seat transfer protocol · 替下一代守 27 號 ·
+  // Siblings:/founders/ledger(SHADOWLESS RUN binding parent)· /founders/
+  // why-270(decision log sibling)· /ethics#bus-factor(Tim 失蹤 protocol)。
+  // Agent B R76 audit M-3 fix · 之前 RelatedReading 渲染空 dead block。
+  "/founders/inheritance": [
+    {
+      href: "/founders/ledger",
+      kicker: "founders/ledger",
+      title: "Public allocation ledger · SHADOWLESS RUN binding · seat permanence",
+    },
+    {
+      href: "/founders/why-270",
+      kicker: "founders/why-270",
+      title: "Decision log · 6 questions · why 270 · why 2700 · why bank transfer",
+    },
+    {
+      href: "/ethics#bus-factor",
+      kicker: "ethics#bus-factor",
+      title: "BUS_FACTOR · Tim 失蹤 30 天 protocol · executor 接管",
+    },
+  ],
+  // R76 W-D · NEW /founders/why-270 · Pinboard ratchet + Pieter Levels +
+  // patio11 + Pratfall axiom · 6 questions answered with math + doubts ·
+  // Siblings:/founders(parent sales page)· /founders/inheritance(Patek
+  // Generations grammar sibling)· /pricing/why(broader pricing rationale)。
+  "/founders/why-270": [
+    {
+      href: "/founders",
+      kicker: "founders",
+      title: "Founders 27 銷售頁 · NT$ 2,700 終身 · 限 270 名",
+    },
+    {
+      href: "/founders/inheritance",
+      kicker: "founders/inheritance",
+      title: "Patek Generations 1996 · 替下一代守 27 號席位",
+    },
+    {
+      href: "/pricing/why",
+      kicker: "pricing/why",
+      title: "Pricing rationale · 為什麼 NT$ 299 · 為什麼 NT$ 2,700",
+    },
+  ],
+  // R76 W-C · NEW /engine-log · Stripe Status + Cloudflare postmortem +
+  // Tailscale changelog pattern · operational artifact spine · Siblings:
+  // /audit(model report parent)· /track-record(receipts ledger)·
+  // /transparency(audit aggregator)。 Agent A R76 「biggest invisible gap」
+  // honest answer · NEW route · trust artifact 第 N 個。
+  "/engine-log": [
+    {
+      href: "/audit",
+      kicker: "audit",
+      title: "Model Report · 7 sections + DISCLOSURE block",
+    },
+    {
+      href: "/track-record",
+      kicker: "track-record",
+      title: "Receipts ledger · PROVED + DIVERGED 等大",
+    },
+    {
+      href: "/transparency",
+      kicker: "transparency",
+      title: "Audit aggregator · 6 sections + ReciprocityLedger + NoPushManifest",
+    },
+  ],
 };
 
 export function getRelatedLinks(currentPath: string): RelatedLink[] {

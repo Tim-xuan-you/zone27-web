@@ -956,6 +956,11 @@ function FirstReceiptHero({
       </div>
 
       {/* ── TAGLINE FOOTER ─────────────────── */}
+      {/* R76 W-G · Agent B R76 audit M-1 + M-2 fix · 加 /receipts/{id}
+          cross-link · 之前 /track-record 沒 link 回 /receipts/[receiptId]
+          · 訪客 lost wayfinding · 5-second self-debunk per Agent B R76 ·
+          fix:add /receipts/{id} 「object permalink」 link alongside existing
+          /matches/{id} 「full breakdown」 link · brand IP 不藏 wayfinding。 */}
       <div className="border-t border-line/30 px-5 sm:px-8 py-4 bg-navy/40">
         <p className="font-mono text-mute/70 text-[10px] tracking-[0.25em] leading-relaxed text-center">
           {pinned ? (
@@ -963,8 +968,15 @@ function FirstReceiptHero({
               ▌ <span lang="en">PERMANENTLY PINNED · founding receipt of the
               CPBL 2026 season · 1st Edition mythos preserved at every N</span> ·{" "}
               <Link
-                href={`/matches/${match.id}`}
+                href={`/receipts/${match.id}`}
                 className="text-gold hover:text-gold-soft underline-offset-4 hover:underline transition-colors"
+              >
+                receipt object →
+              </Link>
+              {" · "}
+              <Link
+                href={`/matches/${match.id}`}
+                className="text-gold/85 hover:text-gold underline-offset-4 hover:underline transition-colors"
               >
                 完整 breakdown →
               </Link>
@@ -974,8 +986,15 @@ function FirstReceiptHero({
               ▌ <span lang="en">269 more will follow as the engine runs through
               the CPBL season</span> · 不刪 · 不修飾 · 不重新加權 ·{" "}
               <Link
-                href={`/matches/${match.id}`}
+                href={`/receipts/${match.id}`}
                 className="text-gold hover:text-gold-soft underline-offset-4 hover:underline transition-colors"
+              >
+                receipt object →
+              </Link>
+              {" · "}
+              <Link
+                href={`/matches/${match.id}`}
+                className="text-gold/85 hover:text-gold underline-offset-4 hover:underline transition-colors"
               >
                 完整 breakdown →
               </Link>

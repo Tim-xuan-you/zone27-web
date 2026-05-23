@@ -200,8 +200,12 @@ export default function PricingWhyPage() {
           </ol>
 
           <h3 className="text-bone text-lg mt-8 mb-3">
-            BLACK CARD NT$ 299/月 unlocks(payment infra 就緒後)
+            BLACK CARD NT$ 299/月 unlocks(payment infra 就緒後)· 6 件
           </h3>
+          {/* R76 W-A · Agent A R75 SHIP 7 OutputArtifactSwitcher · 加 6th
+              row(LINE 群 read-only)· sync /membership/black-card UNLOCKS
+              array · count drift fix(之前 5 rows here · 6 entries 在
+              /membership/black-card · 不 consistent)。 */}
           <ol className="space-y-3">
             <NumItem n="01">
               <span className="text-bone">v0.3 / v0.4 engine</span> · Pitcher +
@@ -223,6 +227,11 @@ export default function PricingWhyPage() {
             <NumItem n="05">
               <span className="text-bone">Tim 工程筆記 full</span> · weekly
               behind-scene engineering write-up · per Stratechery analog
+            </NumItem>
+            <NumItem n="06">
+              <span className="text-bone">Founders 27 LINE 群 read-only access</span>{" "}
+              · 可看 7 forged founders 互動 + Tim 親自答 · 不可發言 · 不可邀人 ·
+              不可截圖外流 · per /audit S05 PRE-COMMIT
             </NumItem>
           </ol>
 

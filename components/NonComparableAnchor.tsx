@@ -76,11 +76,17 @@ export default function NonComparableAnchor() {
           <strong className="text-bone">不同 category 的 unit economics</strong>。
         </p>
 
-        <ol className="mt-7 grid sm:grid-cols-2 gap-3 sm:gap-4">
+        {/* R76 W-B · Agent A R75 SHIP 5 UniformHeightStrip Aesop spacing
+            audit · auto-rows-fr forces uniform row heights · h-full stretches
+            cards · 6 peer cards previously had inconsistent body lengths
+            (Pinboard 1 line vs Sublime Text 3 lines)· Aesop website spacing
+            discipline + NN/g Anatomy of Good Design pattern · 0 new tokens ·
+            CSS-only diff。 */}
+        <ol className="mt-7 grid sm:grid-cols-2 auto-rows-fr gap-3 sm:gap-4">
           {SOLO_FOUNDER_PEERS.map((peer, idx) => (
             <li
               key={idx}
-              className="border border-line/50 bg-slate/30 p-4 sm:p-5"
+              className="border border-line/50 bg-slate/30 p-4 sm:p-5 flex flex-col h-full"
             >
               <div className="flex items-baseline justify-between gap-2 flex-wrap mb-2">
                 <p className="text-bone font-light text-base leading-tight">

@@ -84,15 +84,24 @@ export async function generateStaticParams(): Promise<{ receiptId: string }[]> {
 // {date-YYMMDD}-{seq}。 date pulled from match.id "cpbl-YYMMDD-NN" pattern ·
 // seq from same。 brand IP 「不藏 / 不假裝」 · reference IS the match.id
 // with cosmetic Z27- prefix · 5-second DevTools verify。
+//
+// R76 W-G · Agent B R76 audit M-4 fix · strict CPBL-only guard · matchId
+// format MUST be exactly「cpbl-YYMMDD-NN」 3-part shape · MLB matches
+// (hypothetical「mlb-2026-05-21-LAD-vs-SF」)would break the date+seq slot
+// assumption。 此 fix:require parts.length === 3 + 「cpbl」 league exact ·
+// fallback to full matchId for other leagues · per Agent A R76 spec
+// 「Patek Reference grammar」 only CPBL ID shape conforms today。
 function deriveReferenceNumber(matchId: string, league: string): string {
-  // matchId format "cpbl-260521-01" or "mlb-..." etc · split + uppercase
   const parts = matchId.split("-");
-  if (parts.length >= 3) {
+  // Strict CPBL 3-part shape · cpbl-YYMMDD-NN · Patek-style 4-segment ref
+  if (parts.length === 3 && parts[0] === "cpbl") {
     const date = parts[1];
     const seq = parts[2];
     return `Z27 · ${league.toUpperCase()} · ${date} · ${seq}`;
   }
-  return `Z27 · ${league.toUpperCase()} · ${matchId.toUpperCase()}`;
+  // Fallback for non-CPBL or non-standard shapes · 不假裝 Patek grammar
+  // 適用 · 直接 use full matchId · per /audit S05 disclosure parity。
+  return `Z27 · ${league.toUpperCase()} · ${matchId}`;
 }
 
 export async function generateMetadata({

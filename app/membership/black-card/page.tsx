@@ -38,40 +38,45 @@ export const metadata: Metadata = {
 
 export const revalidate = 86400;
 
+// R76 W-A · Agent A R75 SHIP 7 deferred · OutputArtifactSwitcher · FanGraphs
+// output-not-input pattern · re-write 6 unlocks from noun-list titles to
+// verb-first action sentences · Linear what's new pattern + Stripe Atlas
+// 6-deliverable analog。 Visitor reads 您可以做什麼 not 您拿到什麼 abstract。
+// Same count-fix sweep:array 一直是 6 entries · header + OG card 之前寫
+// 「5 unlocks」 self-falsifiable count drift · per Agent B audit pattern ·
+// 此 ship 同時 fix count drift to「6 unlocks」 across header + OG card +
+// /pricing/why §02。 Per Tim「客戶 = audience」 + brand IP「方法公開」 延伸到
+// output-not-input grammar(視覺從 abstract noun-list 升 verb-first action)。
 const UNLOCKS = [
-  // Round 35 W-E · 加 Engine Lineup unlock 為 #1 · brand-pure 3-engine
-  // progression 是 BLACK CARD 真正 commercial unlock(per Round 35 W-D
-  // /methodology Section 04)· 「Most prediction sites have 1 secret engine ·
-  // we have 3 open ones」 displacement mission 物理閉環。
   {
     icon: "🤖",
-    title: "Engine Lineup 3 變體 解鎖",
+    title: "您可以跑 v0.3 + v0.4 engine variants",
     body: "BLACK CARD 解鎖 v0.3「Pitcher + Park Factor + 隊伍平均 wOBA」(LIVE DEV PREVIEW · production ship 待 N≥30 sample)+ v0.4「Bayesian Model Averaging ensemble」(PLANNED · v0.3 production ship 後)· FREE TIER 仍 access v0.2 Pitcher-Only Monte Carlo。 每個 engine publish methodology + DIVERGED + ESTIMATION DISCLOSURE per-engine · brand-pure 不靠 secret moat。 完整 lineup table 見 /methodology Section 04。",
   },
   {
     icon: "💬",
-    title: "賽事討論室發言 / 分享預測",
+    title: "您可以在 /matches/[gameId] 賽事頁發言 + 分享預測",
     body: "BLACK CARD 之上會員可在 /matches/[gameId] 頁面發言 / 推薦 / 分享預測。 球迷 grammar 「明牌」 native 詞 · 不導向莊家 · 不抽下注佣金(per /membership #pick-vs-bet)。",
   },
   {
     icon: "💵",
-    title: "創作者抽成 5%",
+    title: "您 publish 內容 ZONE 27 只抽 5%",
     body: "BLACK CARD 訂閱者自己 publish 內容 · ZONE 27 抽 5%(vs Taiwan LINE 老師 / 投顧老師生態 30-50% 業界共識是降維打擊)。 Founders 27 永遠 0% 創作者抽成。",
   },
   {
     icon: "🗳️",
-    title: "每月 voting 影響引擎迭代方向",
+    title: "您每月 vote · 您的票決定下個 ship",
     body: "Tim 每月 publish 「下個月想 ship 什麼」 3 個 options · BLACK CARD 訂閱者 vote · 結果公開。 IKEA Effect(您 voting → 您的引擎)+ brand IP「方法公開」延伸到 product roadmap。",
   },
   {
     icon: "📓",
-    title: "每週 Tim 工程筆記 full 版",
-    body: "Tim 每週寫 1 篇「本週寫什麼 / 為什麼這樣寫 / 下週要 ship 什麼」 · 公開版 truncated 在 /now · BLACK CARD 拿 full 版 · Stratechery 模式。",
+    title: "您每週讀 Tim 工程筆記 full 版",
+    body: "Tim 每週寫 1 篇「本週寫什麼 / 為什麼這樣寫 / 下週要 ship 什麼」 · 公開版 truncated 在 /now · BLACK CARD 拿 full 版 · Stratechery 模式。 目前所有 take 是 Tim 親手寫 · 不是模板 · 不是 AI rephrase · /now journal 記錄每次寫作時長 commit metadata。",
   },
   {
     icon: "🔓",
-    title: "Founders 27 LINE 群 access",
-    body: "Founders 27 創始會員 LINE 群 access(read-only) · BLACK CARD 可看 7 forged founders 互動 + Tim 親自答 · 真實 founders Q3 onboard 後 active。",
+    title: "您 read-only 進 Founders 27 LINE 群",
+    body: "Founders 27 創始會員 LINE 群 read-only access · BLACK CARD 可看 7 forged founders 互動 + Tim 親自答 · 真實 founders Q3 onboard 後 active。 不可發言 · 不可邀人 · 不可截圖外流(per /audit S05 PRE-COMMIT)。",
   },
 ];
 
@@ -293,13 +298,17 @@ export default function BlackCardPage() {
           </Link>
         </section>
 
-        {/* ── 5 UNLOCKS ────────────────────────────── */}
+        {/* ── R76 W-A · 6 UNLOCKS · Agent A R75 SHIP 7 OutputArtifactSwitcher
+            · FanGraphs output-not-input pattern · 您可以做什麼 not 您拿到什麼
+            abstract · count drift fix(之前 header「5 UNLOCKS」 但 array 有 6
+            entries since R35 W-E · self-falsifiable per Agent B audit pattern
+            · 此 ship 同時 sweep header + OG card + /pricing/why §02 to 6)。 */}
         <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-16">
           <p
             lang="en"
             className="font-mono text-gold text-[10px] tracking-[0.45em] mb-6"
           >
-            / 5 UNLOCKS · 您拿什麼
+            / 6 UNLOCKS · 您可以做什麼
           </p>
           <div className="space-y-6">
             {UNLOCKS.map((u) => (

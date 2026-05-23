@@ -498,6 +498,89 @@ export const COMMAND_ITEMS: CommandItem[] = [
       "27 號",
     ],
   },
+  // R76 W-D · NEW /founders/why-270 · Pinboard ratchet + Pieter Levels +
+  // patio11 Kalzumeus + Pratfall axiom · 6 questions answered with math +
+  // doubts · static decision log NOT live counter · 信任文件 group。
+  {
+    label: "Why 270 · Founders 27 Decision Log · 6 questions + math + doubts",
+    kicker: "/founders/why-270",
+    path: "/founders/why-270",
+    group: "信任文件",
+    keywords: [
+      "why",
+      "270",
+      "why 270",
+      "decision",
+      "decision log",
+      "reasoning",
+      "math",
+      "doubts",
+      "pinboard",
+      "pieter levels",
+      "patio11",
+      "kalzumeus",
+      "ratchet",
+      "pricing",
+      "founders",
+      "2700",
+    ],
+  },
+  // R76 W-C · NEW /engine-log · Stripe Status 2012 + Cloudflare 2025 +
+  // Tailscale changelog pattern · curated dated log of every engine re-run
+  // + receipt correction + input-staleness + methodology update · biggest
+  // invisible gap closure per Agent A R76 honest answer · 信任文件 group。
+  {
+    label: "Engine Operations Log · Stripe Status + Cloudflare postmortem pattern",
+    kicker: "/engine-log",
+    path: "/engine-log",
+    group: "信任文件",
+    keywords: [
+      "engine log",
+      "engine-log",
+      "operations",
+      "operations log",
+      "stripe status",
+      "stripe",
+      "status",
+      "cloudflare",
+      "postmortem",
+      "tailscale",
+      "changelog",
+      "uptime",
+      "operations artifact",
+      "operational",
+      "transparency",
+      "audit",
+      "log",
+    ],
+  },
+  // R75 W-F · NEW /receipts/[receiptId] · Stripe Press + Patek Reference
+  // Number + Defector permalink pattern · ZONE 27 第一個 visitor-grabbable
+  // receipt object · /receipts/cpbl-260521-01 第一個 PROVED · 工具・外部 group
+  // (per Agent B R76 audit M-1 + M-2 wayfinding gap closure)。
+  {
+    label: "RECEIPT 001 · cpbl-260521-01 · 第一個 PROVED receipt object permalink",
+    kicker: "/receipts/cpbl-260521-01",
+    path: "/receipts/cpbl-260521-01",
+    group: "工具 · 外部",
+    keywords: [
+      "receipt",
+      "receipts",
+      "object",
+      "permalink",
+      "cpbl-260521-01",
+      "cpbl 260521",
+      "first proved",
+      "first receipt",
+      "patek reference",
+      "z27",
+      "stripe press",
+      "defector",
+      "permanent",
+      "share",
+      "screenshot",
+    ],
+  },
   {
     label: "BLACK CARD · 訂閱會員 UI preview · payment infra 就緒後上線 · 5 unlocks",
     kicker: "/membership/black-card",
