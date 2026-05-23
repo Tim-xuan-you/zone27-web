@@ -11,6 +11,7 @@ import LedgerDeltaChip from "@/components/LedgerDeltaChip";
 import TeamPickPanel from "@/components/TeamPickPanel";
 import MyTeamTrackRecord, { type MyTeamMatch } from "@/components/MyTeamTrackRecord";
 import CalibrationProgressBar from "@/components/CalibrationProgressBar";
+import QuietHandoffCard from "@/components/QuietHandoffCard";
 import {
   matches,
   getFinalizedMatches,
@@ -316,7 +317,22 @@ export default function TrackRecordPage() {
           // PROVED and DIVERGED get equal visual weight per axiom ·
           // no emoji / no celebration animation that biases toward
           // PROVED outcome.
-          <FirstReceiptHero match={finalized[0]} totalN={finalized.length} />
+          <>
+            <FirstReceiptHero
+              match={finalized[0]}
+              totalN={finalized.length}
+            />
+            {/* R68 W-E · Agent A SHIP 6 · QuietHandoffCard · Bloomberg
+                Terminal MSG「send to one user」 pattern · mailto-only
+                forces 1-to-1 email medium · 「ONE friend not 1000
+                broadcast」 framing · distinct from ReceiptForwardButton
+                (Web Share API broadcast)· coexist on same finalized
+                match section · Stratechery/FanGraphs Premium/Athletic
+                research: 70%+ paid conversion via private email recs。 */}
+            <div className="mt-4">
+              <QuietHandoffCard match={finalized[0]} />
+            </div>
+          </>
         ) : (
           // R63 W-B · Pokemon TCG 1st Edition mechanic permanent pinning
           // · per R60 W-B 「CARD 001 / ∞ · REPRINT POLICY 0」 axiom · 「the
@@ -345,6 +361,13 @@ export default function TrackRecordPage() {
                       totalN={finalized.length}
                       pinned
                     />
+                    {/* R68 W-E · QuietHandoffCard mounted under pinned
+                        FirstReceiptHero · same Bloomberg one-to-one
+                        pattern · founding receipt is highest-share-
+                        intent moment per agent A research。 */}
+                    <div className="mt-4">
+                      <QuietHandoffCard match={foundingReceipt} />
+                    </div>
                   </div>
                 )}
                 <div className="border border-line/70">
