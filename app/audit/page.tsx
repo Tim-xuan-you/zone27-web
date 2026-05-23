@@ -685,6 +685,11 @@ export default function AuditPage() {
                 value="您是否已看過 g-mode 鍵盤 jump 提示(ONE-shot flag)"
                 note="GlobalShortcuts 寫入 · 訪客第一次 visit 8 秒後 surface ⚡ G+M tip 5 秒自動消失 · 設此 flag 後永不再顯示 · per Raycast/Arc/Linear 「don't teach bouncing visitors」 pattern · 0 server · 0 PII · 0 tracking · R69 W-F"
               />
+              <DataRow
+                label="zone27_last_visit_v1"
+                value="您上次訪 ZONE 27 的日期(YYYY-MM-DD · TPE-anchored)"
+                note="DailyReturnRail 寫入 + 讀取 · 訪客 1+ 天後回訪看到「上次您來 X 天前」 honest chip · NOT streak counter · NOT daily-login farming · NO daily reward · 純 Letterboxd diary + Pinboard.in past-tense check-in pattern · 0 server · 0 PII · ONE chip per session · dismiss with × · R70 W-B"
+              />
             </DataTable>
 
             <P className="text-mute/70 mt-3">

@@ -3,6 +3,7 @@ import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import HeroLiveCard from "@/components/HeroLiveCard";
 import TonightReceiptsCard from "@/components/TonightReceiptsCard";
+import DailyReturnRail from "@/components/DailyReturnRail";
 import RecentMatchesRow from "@/components/RecentMatchesRow";
 import AnonCalibrationStrip from "@/components/AnonCalibrationStrip";
 import {
@@ -48,7 +49,7 @@ export const revalidate = 600;
 // /track-record · /roadmap · /discipline · /methodology · /glossary ·
 // /faq · /about · /learn · /changelog · /signal-board · /lab · ...)
 // is still reachable via:
-//   ▸ Cmd-K / Ctrl-K palette(41 visitor-discoverable routes indexed)
+//   ▸ Cmd-K / Ctrl-K palette(44 visitor-discoverable routes indexed)
 //   ▸ Footer 4-column nav
 //   ▸ Inline links from /manifesto + /audit + each trust artifact
 //
@@ -258,6 +259,15 @@ export default function Home() {
         ) : (
           <EmptyHeroCard />
         )}
+
+        {/* R70 W-B · DailyReturnRail · Agent A R69 SHIP 2 deferred ·
+            Letterboxd diary + Are.na slow-web + Pinboard.in 「your last
+            login: X days ago」 pattern · honest past-tense check-in for
+            returning visitors · NOT streak counter · NOT daily-login
+            farming · localStorage zone27_last_visit_v1 11th key · /audit
+            S06 disclosed · 不打擾就是禮物 axiom 物理 codify。 conditional
+            render(first-time + same-day return = empty)。 */}
+        <DailyReturnRail />
 
         <p className="text-center font-mono text-mute text-[10px] tracking-[0.25em] mt-8">
           AI 計算的是機率 · 不是命運
