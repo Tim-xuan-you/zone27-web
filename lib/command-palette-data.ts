@@ -470,6 +470,34 @@ export const COMMAND_ITEMS: CommandItem[] = [
       "未來",
     ],
   },
+  // R75 W-G · NEW /founders/inheritance · Patek Philippe 1996 「Generations」
+  // campaign + Hanshin Tigers 二代目ファン generational identity grammar ·
+  // seat 4-rule transfer protocol · 替下一代守 27 號席位 · 信任文件 group。
+  {
+    label: "Inheritance · 替下一代守 27 號席位 · Patek 1996 Generations pattern",
+    kicker: "/founders/inheritance",
+    path: "/founders/inheritance",
+    group: "信任文件",
+    keywords: [
+      "inheritance",
+      "繼承",
+      "下一代",
+      "next generation",
+      "generations",
+      "patek",
+      "hanshin",
+      "二代目",
+      "transfer",
+      "seat",
+      "席位",
+      "family",
+      "家人",
+      "兒子",
+      "lifetime",
+      "終身",
+      "27 號",
+    ],
+  },
   {
     label: "BLACK CARD · 訂閱會員 UI preview · payment infra 就緒後上線 · 5 unlocks",
     kicker: "/membership/black-card",

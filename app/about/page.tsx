@@ -536,6 +536,19 @@ export default function AboutPage() {
 }
 
 // ── Reusable Chapter Block ─────────────────────────────
+// R75 W-H · Agent B R75 audit 🔴 C-1 fix · slug helper for /about Chapter
+// 從 R71-R74 section-id-slug sweep MISSED · /transparency + /privacy +
+// /terms + /audit 都 ship 過 slugFromXxxSectionNo helper · /about 沒有 ·
+// 導致 R74 W-G M3 NonComparableAnchor /about#operations cross-link 5-second
+// DevTools self-debunk(same Pratfall axis as R74 W-G C1 itself)· fix:
+// add slugFromAboutChapterEn helper + id={id} scroll-mt-20 to Chapter ·
+// /about#operations + /about#bus-factor + /about#founder + all 8 Chapter
+// uses now resolve · brand IP「不藏 · drift = 5-second self-debunk」 axiom
+// 物理 codify。
+function slugFromAboutChapterEn(en: string): string {
+  return en.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+}
+
 function Chapter({
   no,
   en,
@@ -549,8 +562,16 @@ function Chapter({
   kicker: string;
   children: React.ReactNode;
 }) {
+  const id = slugFromAboutChapterEn(en);
   return (
-    <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-24 border-t border-line/40 pt-16">
+    /* R75 W-H · id + scroll-mt-20 for anchor jumps · 同 /audit R74 W-G C1 +
+       /transparency R71 W-E F1 + /privacy R70 W-F F1 + /terms R69 W-F F2
+       slug helper pattern · /about#operations + #bus-factor + all Chapter
+       en-prop-derived anchors now resolve。 */
+    <section
+      id={id}
+      className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-24 border-t border-line/40 pt-16 scroll-mt-20"
+    >
       <div className="flex items-baseline gap-4 mb-4">
         <span className="font-mono text-gold/70 text-[10px] tracking-[0.35em]">
           / {no}

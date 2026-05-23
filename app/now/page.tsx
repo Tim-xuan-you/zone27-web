@@ -6,6 +6,8 @@ import RelatedReading from "@/components/RelatedReading";
 import FounderSignOff from "@/components/FounderSignOff";
 import ArticleMeta from "@/components/ArticleMeta";
 import CadencePulseChip from "@/components/CadencePulseChip";
+import UnscheduledLetterChip from "@/components/UnscheduledLetterChip";
+import EngineCadencePromise from "@/components/EngineCadencePromise";
 
 export const metadata: Metadata = {
   title: "Now · 現在 — ZONE 27 craft journal",
@@ -995,6 +997,28 @@ export default function NowPage() {
         <div className="mt-8 max-w-2xl">
           <CadencePulseChip variant="panel" />
         </div>
+
+        {/* R75 W-B · UnscheduledLetterChip panel variant · Agent A R72 SHIP 7
+            deferred · DHH world.hey.com letter pattern · CadencePulseChip
+            extension · 「STATE layer + FRAMING layer」 two-chip stack ·
+            CadencePulseChip says 「LAST SHIPPED X days ago · 節奏不承諾」 ·
+            UnscheduledLetterChip says 「ZONE 27 ships unscheduled letters ·
+            不是 blog · 不是 newsletter · pull-based · 您 OWN arrival · 0 email
+            · 0 push」 · asymmetric arrival ownership physically codified ·
+            brand IP triple-fire(Disclosure + Pratfall + 不打擾就是禮物)。 */}
+        <div className="mt-4 max-w-2xl">
+          <UnscheduledLetterChip variant="panel" />
+        </div>
+
+        {/* R75 W-E · EngineCadencePromise · Agent A R75 SHIP 4 · Stratechery
+            cadence-of-EFFORT(NOT schedule-of-content)pre-commitment ·
+            reconciles /now 「no weekly schedule promise」 axiom with /ethics
+            #5 7-day SLA commitment · publishes MAXIMUM-DELAY ceiling not
+            specific timing · 3-chip stack complete:CadencePulseChip(WHEN
+            state)+ UnscheduledLetterChip(HOW arrival)+ EngineCadencePromise
+            (WHAT effort ceiling)· brand IP triple-fire(Disclosure +
+            Pratfall + 不打擾就是禮物)。 */}
+        <EngineCadencePromise />
       </section>
 
       <div className="mx-auto w-32 gold-line mb-12" />

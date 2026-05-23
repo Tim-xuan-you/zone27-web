@@ -601,3 +601,50 @@ blockquote {
     display: none;
   }
 }
+
+/* ============================================
+   R75 W-C · Power-user Density Toggle
+   ============================================
+   Agent A R70 SHIP 6 deferred · D-key single-stroke shortcut(per
+   GlobalShortcuts.tsx)toggles [data-density="condensed"] on
+   document.documentElement · session-only(0 localStorage · per R70 W-B
+   11-key cap discipline)· power-user opt-in。
+
+   Condensed mode reduces section padding by ~30% for dense-data viewing ·
+   per Bloomberg Terminal + Linear power-user pattern · 不 break layout ·
+   不 violate brand IP(0 features hidden · 0 features unlocked · pure
+   visual density compression for power users)。
+
+   CSS uses attribute selector on <html data-density="condensed"> so cascade
+   applies globally · prefers-reduced-motion respect implicit via no transition。
+*/
+
+html[data-density="condensed"] section.cv-auto {
+  padding-block: 1.5rem;
+}
+
+html[data-density="condensed"] section[class*="pt-20"] {
+  padding-top: 2.5rem;
+}
+
+html[data-density="condensed"] section[class*="pb-12"] {
+  padding-bottom: 1.5rem;
+}
+
+html[data-density="condensed"] section[class*="pb-16"] {
+  padding-bottom: 2rem;
+}
+
+html[data-density="condensed"] section[class*="pb-24"] {
+  padding-bottom: 3rem;
+}
+
+html[data-density="condensed"] article[class*="pb-12"] {
+  padding-bottom: 1.5rem;
+}
+
+/* Tighten line height in condensed mode for body copy(NOT headings · keep
+   text-wrap:balance + h1/h2/h3 spacing untouched) */
+html[data-density="condensed"] p[class*="leading-relaxed"] {
+  line-height: 1.55;
+}

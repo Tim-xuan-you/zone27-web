@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
+import UnscheduledLetterChip from "@/components/UnscheduledLetterChip";
 
 export const metadata: Metadata = {
   title: "Changelog — 完整變動歷史 · git 是唯一事實來源",
@@ -141,6 +142,17 @@ export default function ChangelogPage() {
               >
                 <span lang="en">/ROADMAP · 未來承諾 →</span>
               </Link>
+            </div>
+
+            {/* R75 W-B · UnscheduledLetterChip panel variant · Agent A R72
+                SHIP 7 deferred · DHH world.hey.com letter pattern · frames
+                /changelog as「unscheduled letters · pull-based · 您 OWN
+                arrival」 · NOT blog · NOT newsletter · 同 git-log-is-source-
+                of-truth axiom 物理 codify · asymmetric arrival ownership
+                surface 早於 MILESTONES list · 訪客 land on /changelog 第一眼
+                即 see brand IP framing。 */}
+            <div className="mt-8">
+              <UnscheduledLetterChip variant="panel" />
             </div>
           </header>
 

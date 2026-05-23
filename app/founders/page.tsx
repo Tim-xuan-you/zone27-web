@@ -3,8 +3,11 @@ import type { Metadata } from "next";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import WaitlistForm from "@/components/WaitlistForm";
+import ClientErrorBoundary from "@/components/ClientErrorBoundary";
 import PreTransferReceipt from "@/components/PreTransferReceipt";
 import NonComparableAnchor from "@/components/NonComparableAnchor";
+import MultiYearAnchor from "@/components/MultiYearAnchor";
+import GenerationsLine from "@/components/GenerationsLine";
 import CopyLinkButton from "@/components/CopyLinkButton";
 import CredentialStack from "@/components/CredentialStack";
 import {
@@ -461,6 +464,28 @@ export default async function FoundersPage({
           handshake choreography → reference class anchor → form。 */}
       <NonComparableAnchor />
 
+      {/* R75 W-D · MultiYearAnchor · Agent A R75 SHIP 2 ★★★★★ · FanGraphs
+          3-yr tier solo-founder durability + Patek Philippe「Generations」
+          1996 campaign + Stratechery cadence-promise · 3-line binding pre-
+          commitment(engine FREE through 2029 + /audit + /methodology
+          NEVER paywalled + Tim 失蹤 30 days → GitHub open-sources within
+          30 days per /ethics BUS_FACTOR)· NOT payment tier · 是 durability
+          statement · publish-before-asked-to-honor Costly Signaling 100×
+          per Spence 1973。 placement BETWEEN NonComparableAnchor reference
+          class + WaitlistForm · narrative:hero → handshake choreography →
+          reference class → multi-year durability → form。 */}
+      <MultiYearAnchor />
+
+      {/* R75 W-G · GenerationsLine · Agent A R75 SHIP 3 · Patek Philippe
+          1996「Generations」 campaign + Hanshin Tigers 二代目ファン
+          generational identity grammar + family-recording-coach skill
+          territory · 「您不是買 ZONE 27 · 您只是替下一代守 27 號席位」 ·
+          inheritance grammar 物理 codify · cross-link to /founders/
+          inheritance 4-section deep dive。 placement after MultiYearAnchor ·
+          narrative:durability(across 5-year horizon)→ inheritance
+          (across multi-generation horizon)。 */}
+      <GenerationsLine />
+
       {/* ── WAITLIST FORM · Round 8 moved up to be 2nd block ────
           Was 3rd block (after FROM THE FOUNDER) · per Round 8 agent
           audit "+280px mobile scroll inserted between sticky-bar tap
@@ -468,11 +493,19 @@ export default async function FoundersPage({
           sticky bar tap → hero scarcity → form. FROM THE FOUNDER
           moved below form so it warms returning visitors but doesn't
           block the conversion path. */}
+      {/* R75 W-A · ClientErrorBoundary 5th wrap · code quality #4 5/5 complete ·
+          per R73 W-A pattern · WaitlistForm risk-bearing client component
+          (useActionState + server action + Supabase RLS call + Resend email +
+          form state hydrate)· per [[zone27-disclosure-philosophy]]「不藏 broken
+          state」 · component crash 不 take down /founders 主要 conversion path ·
+          retry button + brand-pure fallback。 */}
       <section
         id="waitlist"
         className="mx-auto max-w-2xl w-full px-6 sm:px-10 pb-8 sm:pb-12 scroll-mt-20"
       >
-        <WaitlistForm waitlistCount={waitlistCount} refSource={refSource} />
+        <ClientErrorBoundary fallbackLabel="WaitlistForm">
+          <WaitlistForm waitlistCount={waitlistCount} refSource={refSource} />
+        </ClientErrorBoundary>
       </section>
 
       {/* ── R68 W-A · APPLY CTA strip ───────────────────────

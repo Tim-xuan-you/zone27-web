@@ -72,6 +72,14 @@ const SHORTCUTS: Record<string, string> = {
 
 const RESET_MS = 1500;
 
+// R75 W-C · Agent A R70 SHIP 6 deferred · D-key density toggle · power-user
+// single-stroke shortcut · NOT g-mode prefix · NOT localStorage persistence
+// (避免 12th key risk · per R70 W-B 11-key cap discipline)· toggle resets on
+// page reload · power-user opt-in only · 同 Linear single-key shortcut grammar
+// + Notion 「c」 create + Bloomberg power-user muscle memory。
+// CSS rule [data-density="condensed"] in app/globals.css。
+const DENSITY_KEY = "d";
+
 export default function GlobalShortcuts() {
   const router = useRouter();
   const armedRef = useRef(false);
@@ -184,6 +192,26 @@ export default function GlobalShortcuts() {
         }
         // Unknown follow-up · reset and let key propagate normally
         clearArmed();
+        return;
+      }
+
+      // R75 W-C · Power-user density toggle · single 「d」 press · armedRef
+      // already false at this point(g+d would've resolved in armed block above
+      // and clearArmed because d is not in SHORTCUTS map)· 直接 toggle
+      // [data-density="condensed"] on documentElement · CSS responds via
+      // [data-density] selectors in globals.css · 0 localStorage · session-only。
+      if (key === DENSITY_KEY) {
+        e.preventDefault();
+        const root = document.documentElement;
+        const current = root.dataset.density;
+        if (current === "condensed") {
+          delete root.dataset.density;
+          setFlash("DENSITY · DEFAULT");
+        } else {
+          root.dataset.density = "condensed";
+          setFlash("DENSITY · CONDENSED");
+        }
+        window.setTimeout(() => setFlash(null), 1200);
         return;
       }
 
