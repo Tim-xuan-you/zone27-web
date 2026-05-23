@@ -28,6 +28,7 @@ import MatchViewTracker from "@/components/MatchViewTracker";
 import AnonPickWidget from "@/components/AnonPickWidget";
 import EngineStamp from "@/components/EngineStamp";
 import CopyLinkButton from "@/components/CopyLinkButton";
+import ReceiptForwardButton from "@/components/ReceiptForwardButton";
 import { getCpblAdvancedByName } from "@/lib/cpbl-advanced";
 import RelatedReading from "@/components/RelatedReading";
 import FollowMatchButton from "@/components/FollowMatchButton";
@@ -346,10 +347,14 @@ export default async function MatchDetailPage({
       {/* ── CALIBRATION RECEIPT (only when finalResult ingested) ──
           Largest single-purpose disclosure block on the page when
           present. Renders engine prediction vs actual outcome at
-          equal visual weight. Maps to /audit S08 + /manifesto S II
-          + /discipline Section 01 (Buffett "track record visible").
-          Section "/ 00" intentionally precedes the canonical /01-/05
-          flow — it's the receipt headline when one exists. */}
+          equal visual weight. Maps to /audit S05 DISCLOSURE PHILOSOPHY
+          + /manifesto S II + /discipline Section 01 (Buffett "track
+          record visible"). Section "/ 00" intentionally precedes the
+          canonical /01-/05 flow — it's the receipt headline when one
+          exists.
+          R62 W-B · ReceiptForwardButton inserted below the
+          tagline · Stratechery + Defector + Athletic plain-text share
+          pattern · 0 tracking artifact-share。 */}
       {m.finalResult && calibration && (
         <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-16">
           <h2 className="font-mono text-gold text-[10px] tracking-[0.4em] mb-8">
@@ -424,6 +429,12 @@ export default async function MatchDetailPage({
                 </Link>{" "}
                 找到對應的 PROVED 或 DIVERGED 行 — 含這場。
               </p>
+              {/* R62 W-B · Receipt forward button · plain-text artifact share ·
+                  Stratechery + Defector + Athletic non-tracking pattern · per
+                  Pokemon TCG「show off receipt」 mechanic 延伸。 */}
+              <div className="mt-6 pt-5 border-t border-line/40 flex items-center justify-center">
+                <ReceiptForwardButton match={m} />
+              </div>
             </div>
           </div>
         </section>
