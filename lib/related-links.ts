@@ -529,7 +529,7 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
     },
   ],
   // Round 31 Wave X3 · /membership/black-card NEW · UI mockup preview ·
-  // 2026 Q3 上線。 Siblings: /membership(parent · 4-tier ladder ←)·
+  // payment infra 就緒後上線(milestone-triggered)。 Siblings: /membership(parent · 4-tier ladder ←)·
   // /founders(可對照 4-tier 第 4 階終身席位)· /privacy(0 信用卡資訊在
   // ZONE 27 server · token via payment gateway)。
   "/membership/black-card": [

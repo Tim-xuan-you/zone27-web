@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 
 // ── ZONE 27 · /roadmap ───────────────────────────────
 // /changelog(past · git source of truth)+ 這頁(future · founder
-// promise)= complete disclosure timeline。/audit Section 08
+// promise)= complete disclosure timeline。/audit Section 05
 // 揭露哲學要求「過去 · 現在 · 未來」都不藏 — /roadmap 是「未來」
 // 那塊拼圖。
 //
@@ -51,7 +51,7 @@ const LOCKED: { quarter: string; items: RoadmapItem[] }[] = [
       },
       {
         title: "✓ SHIPPED · Cmd-K 全站快搜 palette",
-        body: "2026-05-21 上線 · 40 visitor-discoverable routes 索引化 · ⌘K (Mac) / Ctrl-K (Win) 開啟 · ↑↓ 導航 · ↵ 開啟 · mobile ⌕ icon trigger (Round 12) · Round 30 W5 加 /login + Round 31 W-S /founders/ledger + W-X3 /membership/black-card + R33 W-E /annual/2026 + R39 /calibration + /membership/black-card/ledger + R50 W-A /methodology/diff + R51 W-D /transparency 後達 40 entries。/admin · /auth/callback · /auth/signout 因 noindex / 內部 redirect 不在 palette。無 fuse.js 無 telemetry 無 recently-used (per disclosure philosophy)。",
+        body: "2026-05-21 上線 · 41 visitor-discoverable routes 索引化 · ⌘K (Mac) / Ctrl-K (Win) 開啟 · ↑↓ 導航 · ↵ 開啟 · mobile ⌕ icon trigger (Round 12) · Round 30 W5 加 /login + Round 31 W-S /founders/ledger + W-X3 /membership/black-card + R33 W-E /annual/2026 + R39 /calibration + /membership/black-card/ledger + R50 W-A /methodology/diff + R51 W-D /transparency + R64 W-B /pricing/why 後達 41 entries。/admin · /auth/callback · /auth/signout 因 noindex / 內部 redirect 不在 palette。無 fuse.js 無 telemetry 無 recently-used (per disclosure philosophy)。",
       },
       {
         title: "CPBL 每日 ingestion 持續累積 ledger",

@@ -22,7 +22,7 @@ export const metadata: Metadata = {
 // we cannot violate without becoming a different brand.
 //
 // Voice contract:
-//   - Match /audit Section 08 + /manifesto Section V tone
+//   - Match /audit Section 05 + /manifesto Section V tone
 //   - Original quotes from primary sources cited with names
 //   - Industry pattern vs ZONE 27 inverse (when applicable)
 //   - Closing "WHAT THIS PAGE IS NOT" prevents misreading as

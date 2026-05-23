@@ -187,7 +187,7 @@ export default function PricingWhyPage() {
               per /methodology Section 04(R60 W-A Pokemon SET narrative)
             </NumItem>
             <NumItem n="05">
-              <span className="text-bone">40 visitor-discoverable routes</span> ·
+              <span className="text-bone">41 visitor-discoverable routes</span> ·
               full Cmd-K palette indexed · 全公開 · 無 paywall on engine
               functionality
             </NumItem>

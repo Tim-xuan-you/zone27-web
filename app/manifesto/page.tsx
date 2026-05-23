@@ -20,7 +20,7 @@ export const metadata: Metadata = {
 //
 // Why a standalone page?
 //   - Homepage TLDR shows the 4 rows in 60 seconds — no argument
-//   - /audit Section 08 covers disclosure axiom only
+//   - /audit Section 05 covers disclosure axiom only
 //   - /coverage covers coverage axiom only
 //   - /privacy covers privacy axiom only
 //   - There is no single canonical URL where someone can read the
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
 //     read that explains who ZONE 27 is. This is that page.
 //
 // Voice contract:
-//   - Match /audit Section 08 tone: declarative + structural
+//   - Match /audit Section 05 tone: declarative + structural
 //   - English mono kickers + zh prose body (bilingual scaffold)
 //   - No marketing language, no slogans, no exhortation
 //   - Each axiom = INDUSTRY pattern + ZONE 27 inverse + 4-layer
