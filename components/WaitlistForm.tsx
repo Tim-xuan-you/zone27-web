@@ -251,7 +251,8 @@ export default function WaitlistForm({
           (the visual text never makes it to assistive tech). Caught by
           3rd-pass audit · WCAG 2.1 SC 4.1.3 Status Messages compliance. */}
       {/* R67 W-D · error 訊息 via getWaitlistErrorMessage(single source
-          of truth in lib/waitlist.ts)· 替代 inline ternary cascade ·
+          of truth in lib/waitlist-types.ts · R68 W-D audit fix from R67
+          stale ref to lib/waitlist.ts)· 替代 inline ternary cascade ·
           新 error code 加入 WAITLIST_ERROR_CODES auto-typesafe surface ·
           consumer 不需要 silently 落到 default branch · Tetlock track-
           able-error discipline 物理 codify。 */}

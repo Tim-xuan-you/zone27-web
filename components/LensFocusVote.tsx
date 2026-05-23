@@ -60,11 +60,13 @@ export default function LensFocusVote({ matchId }: Props) {
     setState({ mounted: true, vote: getLensFocusVoteForMatch(matchId) });
   }, [matchId]);
 
-  // SSR-safe skeleton(per AnonPick R45 W-B pattern · same min-height
-  // to avoid CLS when state hydrates)
+  // SSR-safe skeleton(per AnonPick R45 W-B pattern · R68 W-D audit F11
+  // CLS fix · min-h-[420px] matches NOT_VOTED state actual height(6
+  // buttons in 2-3 col grid + intro + footer · 沒 CLS jitter on slow
+  // connections when state hydrates)。
   if (!state.mounted) {
     return (
-      <article className="bg-slate/30 border border-line/40 p-4 sm:p-5 min-h-[180px]">
+      <article className="bg-slate/30 border border-line/40 p-4 sm:p-5 min-h-[420px]">
         <p
           lang="en"
           className="font-mono text-mute/60 text-[10px] tracking-[0.35em]"
@@ -163,10 +165,20 @@ export default function LensFocusVote({ matchId }: Props) {
   }
 
   // ── STATE 2 · VOTED ────────────────────────────────
+  // R68 W-D audit F6 fix · role="status" + aria-live="polite" 在外層
+  // article · WCAG 2.1 SC 4.1.3 Status Messages compliance · 螢幕閱讀器
+  // 使用者 vote 後立即被通知 widget 已更新(NEW content 「您 voted」)·
+  // 同 WaitlistForm role="alert" pattern · 但 vote 是 success 非 error
+  // 故用 role="status" 更精確。
   const voted = LENS_OPTIONS.find((l) => l.id === state.vote!.votedLens)!;
 
   return (
-    <article className="bg-slate/40 border border-gold/60 glow-soft p-4 sm:p-5">
+    <article
+      role="status"
+      aria-live="polite"
+      aria-atomic="true"
+      className="bg-slate/40 border border-gold/60 glow-soft p-4 sm:p-5"
+    >
       <div className="flex items-baseline justify-between gap-3 flex-wrap mb-3">
         <p
           lang="en"
@@ -194,7 +206,7 @@ export default function LensFocusVote({ matchId }: Props) {
         <p className="text-mute text-sm mt-1">{voted.label}</p>
       </div>
       <p className="text-mute text-sm leading-relaxed mb-3">
-        往下滾看 7-lens canvas ·{" "}
+        往下滾看 6-lens canvas ·{" "}
         <strong className="text-bone">
           看 your bet 是否跟 reading 體驗一致
         </strong>{" "}

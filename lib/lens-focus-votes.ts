@@ -12,7 +12,7 @@
 //     發言「今晚先看哪邊」 fan-grammar pre-commit · 不是 power-user
 //     engineer flag
 //   - per [[feedback-no-waiting-rule]] · ship NOW · 0 server / 0 PII
-//   - per /audit S06 LOCAL STORAGE TRANSPARENCY pattern · 7th key
+//   - per /audit S06 LOCAL STORAGE TRANSPARENCY pattern · 9th key
 //     joining anon-picks family · same versioning grammar
 //   - per [[feedback-zone27-pratfall-brand-ip]] · vote 不 reveal「正確
 //     答案」 · 不裝 reward system · 純 pre-commit + post-explore self-
@@ -28,16 +28,26 @@
 const STORAGE_KEY = "zone27_lens_focus_votes_v1";
 const MAX_ENTRIES = 50;
 
-/** 6 lens IDs · matches /02A-/02F in /matches/[gameId] · stable across
- *  future renames(brand IP「lens vocabulary 與 actual data scope
- *  reconciliation」 per R43 W-C steelman Obj 03 pattern)。 */
-export type LensId =
-  | "vibe"
-  | "park"
-  | "workload"
-  | "underdog"
-  | "bullpen"
-  | "matchup";
+// R68 W-D · Audit F7 fix · apply R67 W-D Tetlock track-able-error pattern
+// to LensId · derive type from const-array source of truth · adding new
+// lens to LENS_IDS auto-widens LensId AND propagates to VALID_LENSES +
+// LENS_OPTIONS via single source · 不再 3-place silent drift risk · same
+// discipline as WAITLIST_ERROR_CODES。
+
+/** 6 lens IDs · const-array source of truth · matches /02A-/02F in
+ *  /matches/[gameId] · stable across future renames(brand IP「lens
+ *  vocabulary 與 actual data scope reconciliation」 per R43 W-C steelman
+ *  Obj 03 pattern)。 Adding to this array auto-types everything below. */
+export const LENS_IDS = [
+  "vibe",
+  "park",
+  "workload",
+  "underdog",
+  "bullpen",
+  "matchup",
+] as const;
+
+export type LensId = (typeof LENS_IDS)[number];
 
 export type LensFocusVote = {
   matchId: string;
@@ -49,14 +59,9 @@ export type LensFocusPushResult =
   | { ok: true }
   | { ok: false; reason: "ssr" | "quota_exceeded" | "disabled" | "unknown" };
 
-const VALID_LENSES: ReadonlySet<LensId> = new Set([
-  "vibe",
-  "park",
-  "workload",
-  "underdog",
-  "bullpen",
-  "matchup",
-]);
+// Derived from LENS_IDS · 0 manual sync risk · adding to LENS_IDS auto-
+// widens this Set without code touch。
+const VALID_LENSES: ReadonlySet<LensId> = new Set(LENS_IDS);
 
 /** Read all lens-focus votes · SSR-safe · returns [] if no localStorage */
 export function readLensFocusVotes(): LensFocusVote[] {
@@ -104,11 +109,12 @@ export function pushLensFocusVote(entry: {
       ...filtered,
     ].slice(0, MAX_ENTRIES);
     window.localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
-    try {
-      window.dispatchEvent(new CustomEvent("zone27:lens-focus-vote-changed"));
-    } catch {
-      /* safe to ignore in old browsers */
-    }
+    // R68 W-D · Audit F10 fix · removed dead CustomEvent dispatch · no
+    // listener wired(LensFocusVote re-reads on state mount via useEffect ·
+    // /calibration page does not yet surface lens-vote stats)· avoid dead
+    // code per[[zone27-disclosure-philosophy]] cleanup discipline · if
+    // future /calibration ships lens-vote aggregate · re-add dispatch +
+    // wire listener together · 不 ship orphan side effect。
     return { ok: true };
   } catch (err) {
     if (

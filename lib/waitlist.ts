@@ -18,18 +18,18 @@
 // ─────────────────────────────────────────────────────
 
 import { revalidatePath } from "next/cache";
+import type { WaitlistResult } from "@/lib/waitlist-types";
 import { supabase } from "@/lib/supabase";
 import { sendWaitlistConfirmation } from "@/lib/email";
-// R67 W-D · types + non-async helpers split to lib/waitlist-types.ts
-// because "use server" requires all exports here to be async。 Re-export
-// WaitlistResult so existing consumer imports keep working(WaitlistForm
-// imports type { WaitlistResult } from "@/lib/waitlist")。
-export type { WaitlistResult, WaitlistErrorCode } from "@/lib/waitlist-types";
+
+// R67 W-D · types + non-async helpers live in lib/waitlist-types.ts
+// because "use server" requires all exports here to be async。 R68 W-D
+// audit cleanup · WaitlistForm imports getWaitlistErrorMessage + type
+// { WaitlistResult } directly from "@/lib/waitlist-types"(NOT via this
+// file)· no re-export here · simpler import graph · single doorway for
+// types · single doorway for server action(reserveSpot below)。
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
-
-// Server action return type · imported above as re-export for consumers
-import type { WaitlistResult } from "@/lib/waitlist-types";
 
 export async function reserveSpot(
   _prev: WaitlistResult | null,

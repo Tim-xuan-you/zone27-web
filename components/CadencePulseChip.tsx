@@ -1,8 +1,18 @@
+"use client";
+
 // ── ZONE 27 · Cadence Pulse Chip ────────────────────────
 // R67 W-C · Agent R66 ship #4 deferred · Zajonc 1968 Mere Exposure
 // 機制 · brand-pure reframe(NOT 「下次更新週四」 cadence promise ·
 // /now 已 explicit reject promise pattern · brand IP「不打擾就是禮物」
 // axiom 守)。
+//
+// R68 W-D · Audit F8 fix · 改 client component · 因 server component
+// 的「N 天前」 label is computed at build time + SSG 永久 cache · SSG
+// 頁面 (track-record · methodology · pricing/why etc) 沒 revalidate
+// 故 chip 永久顯示「今天」 even 5 天後 visitor 回訪 = self-falsifiable
+// brand IP violation。 修:改 client component · useEffect 在 hydration
+// 後 recompute · 每次 visitor 開頁面看到 accurate「X 天前」。 SSR 仍
+// render initial fallback「ship」 label 防 CLS。
 //
 // Surface:
 //   ✦ LAST SHIPPED · 2026-05-23 · {N 天前}
@@ -16,13 +26,10 @@
 //     EXPLORING / BRAND BOUNDARIES」 三層 honesty grammar
 //   - Mere Exposure works on visitor seeing「ZONE 27 is shipping things」
 //     each return visit · NOT on weekly subscription nag
-//
-// Server component(無 client state)· /Footer + /now 兩處 mount ·
-// re-evaluate each Vercel build · 不需 ISR revalidate 因為 last-shipped
-// const change = redeploy event。
 // ─────────────────────────────────────────────────────
 
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import {
   LAST_SHIPPED_DATE_ISO,
   formatTimeSinceLastShipped,
@@ -34,7 +41,20 @@ type Props = {
 };
 
 export default function CadencePulseChip({ variant = "compact" }: Props) {
-  const sinceLabel = formatTimeSinceLastShipped();
+  // R68 W-D audit F8 fix · SSR initial label uses build-time compute
+  // (sufficient for first paint · same content as before)· useEffect
+  // re-evaluates after hydration · 防止 SSG stale date。 Visitor refresh
+  // 5 天後看到 accurate「5 天前」 not stale「今天」。
+  const [sinceLabel, setSinceLabel] = useState<string>(() =>
+    formatTimeSinceLastShipped(),
+  );
+
+  useEffect(() => {
+    // Recompute on client mount · cheap (string format only)。 No interval
+    // needed · visitor session is short enough that one recompute suffices.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setSinceLabel(formatTimeSinceLastShipped());
+  }, []);
 
   if (variant === "panel") {
     return (
