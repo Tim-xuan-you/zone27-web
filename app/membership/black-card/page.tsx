@@ -46,7 +46,7 @@ const UNLOCKS = [
   {
     icon: "🤖",
     title: "Engine Lineup 3 變體 解鎖",
-    body: "BLACK CARD 解鎖 v0.3「Pitcher + Park Factor + 隊伍平均 wOBA」(Q3 2026)+ v0.4「Bayesian Model Averaging ensemble」(Q4 2026)· FREE TIER 仍 access v0.2 Pitcher-Only Monte Carlo。 每個 engine publish methodology + DIVERGED + ESTIMATION DISCLOSURE per-engine · brand-pure 不靠 secret moat。 完整 lineup table 見 /methodology Section 04。",
+    body: "BLACK CARD 解鎖 v0.3「Pitcher + Park Factor + 隊伍平均 wOBA」(LIVE DEV PREVIEW · production ship 待 N≥30 sample)+ v0.4「Bayesian Model Averaging ensemble」(PLANNED · v0.3 production ship 後)· FREE TIER 仍 access v0.2 Pitcher-Only Monte Carlo。 每個 engine publish methodology + DIVERGED + ESTIMATION DISCLOSURE per-engine · brand-pure 不靠 secret moat。 完整 lineup table 見 /methodology Section 04。",
   },
   {
     icon: "💬",

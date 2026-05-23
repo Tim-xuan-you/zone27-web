@@ -471,8 +471,8 @@ export default async function FoundersPage({
             </li>
           </ul>
           <p className="mt-5 text-mute/80 text-xs sm:text-sm leading-relaxed">
-            想升級成 Founders 27(NT$ 2,700 終身)或 BLACK CARD(NT$ 299/月 · 預計
-            Q3 2026 開放)· 任時可選。也可<strong className="text-mute">永遠停在這層</strong>·
+            想升級成 Founders 27(NT$ 2,700 終身)或 BLACK CARD(NT$ 299/月 · payment
+            infra 就緒後開放)· 任時可選。也可<strong className="text-mute">永遠停在這層</strong>·
             <span className="text-gold"> 我們不催</span>。
           </p>
         </div>

@@ -64,7 +64,7 @@ const UNLOCKS = [
   {
     icon: "🎫",
     title: "Founder # 預訂",
-    body: "鎖 #008-#270 編號 · 等付款開放(Q3 2026)再 NT$2,700 forge · Patek allocation pattern · 不 forfeit。",
+    body: "鎖 #008-#270 編號 · 等 payment infra 就緒 + 付款開放後再 NT$2,700 forge(milestone-triggered · 不綁日期)· Patek allocation pattern · 不 forfeit。",
     href: "/leaderboard",
     cta: "選您 #",
   },

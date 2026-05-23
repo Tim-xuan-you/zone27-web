@@ -34,7 +34,7 @@ const BLACK_CARD_UNLOCKS = [
   {
     icon: "🤖",
     title: "Engine Lineup 3 變體解鎖",
-    body: "v0.3 Pitcher+Park+Batter(Q3 2026)+ v0.4 Bayesian Ensemble(Q4 2026)· FREE TIER 仍 access v0.2 base",
+    body: "v0.3 Pitcher+Park+Batter(LIVE DEV PREVIEW · production 待 N≥30)+ v0.4 Bayesian Ensemble(PLANNED · v0.3 ship 後)· FREE TIER 仍 access v0.2 base",
   },
   {
     icon: "🔬",

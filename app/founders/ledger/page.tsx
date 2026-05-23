@@ -181,8 +181,9 @@ export default function FoundersLedgerPage() {
           {PRE_LAUNCH && (
             <p className="mt-5 font-mono text-loss/80 text-[10px] tracking-[0.3em] leading-relaxed">
               ⚠ PRE-LAUNCH · 7 forged 為 hardcoded(per lib/founders-stats.ts
-              · Tim 親手 onboard 之前的 placeholder)。 申請通道在 Q3 2026
-              付款開放後啟用 · 第一週 review window 開啟才會有 weekly row。
+              · Tim 親手 onboard 之前的 placeholder)。 申請通道在 payment
+              infra 就緒 + 付款開放後啟用(milestone-triggered · 不綁日期)·
+              第一週 review window 開啟才會有 weekly row。
             </p>
           )}
           {!PRE_LAUNCH && (
@@ -396,10 +397,10 @@ export default function FoundersLedgerPage() {
             commitment 已 binding · 修改需 30 天前 /changelog 公告。
           </p>
           <p>
-            申請通道在 Q3 2026 付款開放後啟用 · 第一個 review window 結束
-            那天 · 第一筆 weekly row 落這。 沒 backdated 過去申請 · 沒
-            cherry-picked 通過 sample · 拒絕原因(去 PII)會跟通過數量同等
-            視覺權重 surface。
+            申請通道在 payment infra 就緒 + 付款開放後啟用(milestone-triggered ·
+            不綁日期)· 第一個 review window 結束那天 · 第一筆 weekly row
+            落這。 沒 backdated 過去申請 · 沒 cherry-picked 通過 sample ·
+            拒絕原因(去 PII)會跟通過數量同等視覺權重 surface。
           </p>
           <p>
             這個 page 的存在 brand IP 是 statement:<strong>ZONE 27 跟所有
@@ -505,9 +506,10 @@ function EmptyReviewsState() {
         ⚠ NO REVIEW WINDOWS YET · 申請通道未開啟
       </p>
       <p className="text-mute text-sm sm:text-base leading-relaxed max-w-md mx-auto mb-4">
-        第一個 review window 在 Q3 2026 付款開放後啟用。 那天起每週一手寫加
-        新 row(本週新分配 + 申請數 + 通過率 + 拒絕原因 sample)。 從 0
-        開始 · 不 backdated 過去申請 · 不 cherry-pick 通過 sample。
+        第一個 review window 在 payment infra 就緒 + 付款開放後啟用
+        (milestone-triggered · 不綁日期)。 那天起每週一手寫加新 row
+        (本週新分配 + 申請數 + 通過率 + 拒絕原因 sample)。 從 0 開始 ·
+        不 backdated 過去申請 · 不 cherry-pick 通過 sample。
       </p>
       <p className="font-mono text-mute/70 text-[10px] tracking-[0.25em]">
         7 founders forged 顯示在累計 stats · 為 Tim 手工 onboard 的早期會員 ·

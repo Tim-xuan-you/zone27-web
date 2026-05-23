@@ -83,7 +83,7 @@ const CATEGORIES: Category[] = [
             <strong className="text-bone">Founders 27</strong> 是限量 270 個名額的
             「一次性 NT$ 2,700 終身會員」。
             <strong className="text-bone">BLACK CARD</strong> 是每月 NT$ 299 的訂閱制
-            (預計 Q3 2026 開放)。創始會員額外好處:creator 抽成 0%
+            (payment infra 就緒後開放 · milestone-triggered · 不綁日期)。創始會員額外好處:creator 抽成 0%
             (BLACK CARD creators 5%)、AI 模型優先試用、實體招待。完整對照請見{" "}
             <Link href="/founders" className="text-gold underline-offset-4 hover:underline">
               /founders

@@ -64,8 +64,8 @@ export default function WaitlistForm({
           # {pos}
         </p>
         <p className="text-mute text-sm max-w-sm mx-auto leading-relaxed">
-          當付款系統正式開放(預計 Q3 2026),我們會優先通知您。
-          您的位置已被保留。
+          當 payment infra 就緒 + 付款系統正式開放(milestone-triggered · 不綁日期),
+          我們會優先通知您。 您的位置已被保留。
         </p>
         <p className="font-mono text-mute text-[11px] sm:text-[12px] tracking-[0.3em] mt-8">
           目前不收費 · 不綁定 · 隨時可退出
