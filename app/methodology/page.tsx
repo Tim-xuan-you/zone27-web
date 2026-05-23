@@ -49,17 +49,111 @@ export default function MethodologyPage() {
         </div>
       </section>
 
+      {/* R59 W-D · Hindenburg Research disclosure pattern · top-of-document
+          position disclosure(同 hindenburgresearch.com 每份 report 開頭
+          「we have taken a short position」 box)· brand IP「方法公開 · 公開
+          整個 enterprise」 物理化 · 訪客 read 引擎前先 know who's writing it ·
+          0 sponsors · 0 hidden incentives · 100% solo equity · 完整 state 直接
+          公開 · 不藏 Pratfall(7 SYSTEM-TEST forged + N=1 sample · 不裝大)。 */}
+      <aside
+        id="disclosure"
+        aria-labelledby="disclosure-heading"
+        className="mx-auto max-w-3xl w-full px-6 sm:px-10 mb-8"
+      >
+        <div className="border border-line/60 bg-slate/30 p-5 sm:p-6">
+          <div className="flex items-baseline gap-3 mb-3 flex-wrap">
+            <span
+              id="disclosure-heading"
+              lang="en"
+              className="font-mono text-gold text-[10px] tracking-[0.4em]"
+            >
+              / DISCLOSURE · WHO WROTE THIS
+            </span>
+            <span
+              lang="en"
+              className="font-mono text-mute/60 text-[9px] tracking-[0.3em]"
+            >
+              LAST UPDATED · 2026-05-23
+            </span>
+          </div>
+          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-1.5 text-mute/85 text-[12px] sm:text-[13px] leading-relaxed">
+            <li className="font-mono tabular">
+              <span className="text-mute/60">EQUITY</span>{" "}
+              <span className="text-bone">100% TIM solo</span>
+            </li>
+            <li className="font-mono tabular">
+              <span className="text-mute/60">SPONSORS</span>{" "}
+              <span className="text-bone">0</span>
+            </li>
+            <li className="font-mono tabular">
+              <span className="text-mute/60">ADS</span>{" "}
+              <span className="text-bone">0 · AdMob permanently banned</span>
+            </li>
+            <li className="font-mono tabular">
+              <span className="text-mute/60">TRACKERS</span>{" "}
+              <span className="text-bone">0 · per /privacy</span>
+            </li>
+            <li className="font-mono tabular">
+              <span className="text-mute/60">ENGINE</span>{" "}
+              <span className="text-bone">v0.2 LOCKED</span>{" "}
+              <span className="text-mute/70">→ </span>
+              <Link
+                href="/methodology/diff"
+                className="text-gold/80 hover:text-gold underline-offset-4 hover:underline"
+              >
+                v0.3 diff
+              </Link>
+            </li>
+            <li className="font-mono tabular">
+              <span className="text-mute/60">RECEIPTS</span>{" "}
+              <span className="text-bone">N=1 · 1 PROVED · 0 DIVERGED</span>
+            </li>
+            <li className="font-mono tabular">
+              <span className="text-mute/60">FOUNDERS 27</span>{" "}
+              <span className="text-bone">7 SYSTEM-TEST · 0 real</span>
+            </li>
+            <li className="font-mono tabular">
+              <span className="text-mute/60">BLACK CARD</span>{" "}
+              <span className="text-bone">0 paid subscribers</span>
+            </li>
+          </ul>
+          <p className="mt-3 text-mute/65 text-[11px] leading-relaxed border-t border-line/40 pt-3">
+            完整 enterprise state 公開於{" "}
+            <Link
+              href="/annual/2026"
+              className="text-gold/80 hover:text-gold underline-offset-4 hover:underline"
+            >
+              /annual/2026
+            </Link>{" "}
+            · 5/31 每年 publish commitment · 違反 = brand 信用 collapse(per{" "}
+            <Link
+              href="/ethics"
+              className="text-gold/80 hover:text-gold underline-offset-4 hover:underline"
+            >
+              /ethics
+            </Link>
+            )。 此頁 inline footnotes 在文末 §05 FOOTNOTES。
+          </p>
+        </div>
+      </aside>
+
       <div className="mx-auto w-32 gold-line mb-12" />
 
       {/* ── ABSTRACT ─────────────────────────────── */}
       <Section no="00" label="ABSTRACT" zh="摘要">
         <p>
-          ZONE 27 採用蒙地卡羅(Monte Carlo)模擬法估算 CPBL 比賽的勝率分布。
+          ZONE 27 採用蒙地卡羅(Monte Carlo)模擬法
+          <FootnoteRef n={1} />
+          {" "}估算 CPBL 比賽的勝率分布。
           引擎 v0.2 為逐打席對決模型(Real At-Bat),每場虛擬比賽包含
           約 70 個打席,以投手 <StatTerm term="K/9" /> · <StatTerm term="BB/9" />{" "}
-          · <StatTerm term="HR/9" /> 三項進階指標推導 8 種互斥結果的條件機率,
+          · <StatTerm term="HR/9" />
+          <FootnoteRef n={2} />
+          {" "}三項進階指標推導 8 種互斥結果的條件機率,
           配合壘上跑者推進物理累計分數。10,000 次採樣的收斂結果,引擎內部
-          會穩定在 <Mono>±2%</Mono> 標準差(亂數採樣的天花板)。
+          會穩定在 <Mono>±2%</Mono> 標準差
+          <FootnoteRef n={3} />
+          (亂數採樣的天花板)。
         </p>
 
         {/* Round 43 W-A · ReproducibilityReceipt drop-in · Agent H R41 #4
@@ -77,8 +171,9 @@ export default function MethodologyPage() {
         <p className="text-mute/80">
           <strong className="text-bone">這只是「引擎自己的內部一致性」</strong> —
           引擎對 CPBL 實際比賽結果的 calibration 還在累積樣本,目前未達
-          統計顯著門檻(N ≥ 30 · Z27 LEXICON「SAMPLE DEBT」)。賽後收據持續
-          累積在{" "}
+          統計顯著門檻(N ≥ 30 · Z27 LEXICON「SAMPLE DEBT」
+          <FootnoteRef n={4} />
+          )。賽後收據持續累積在{" "}
           <Link
             href="/track-record"
             className="text-gold underline-offset-4 hover:underline"
@@ -600,6 +695,165 @@ repeat 10,000 times → aggregate
         </div>
       </section>
 
+      {/* R59 W-D · Section 07 FOOTNOTES · Hindenburg Research inline-cited
+          evidence pattern · 之前 Section 03 已 prose-cite Bill James / Pete
+          Palmer / Tango Tiger / FanGraphs Glossary · 但 inline 主張(Monte
+          Carlo / K-BB-HR-9 / ±2% / N≥30)沒對應 numbered footnote anchor。
+          Hindenburg 模式 = 每一個 claim 配 inline superscript + 對應 primary
+          source URL · 同 academic 論文 standard · 倒置 of「就是看著辦」 prose
+          citation · 訪客 click <sup>[N]</sup> 跳對應 footnote · 同 anchor
+          jump 後可從 footnote 點外部 primary source。 同 brand IP「方法公開 ·
+          每個 claim 物理可 trace」。 */}
+      <Section no="07" label="FOOTNOTES" zh="出處與引用">
+        <p className="text-mute/85 text-[14px]">
+          每一個 inline 主張(ABSTRACT 內 <FootnoteRef n={1} inline />–
+          <FootnoteRef n={4} inline />)在此 numbered · 點開展對應 primary
+          source · 同 Hindenburg Research 結構性 evidence pattern · 不依賴
+          訪客信任「我們說的」 · 依賴訪客 verify 我們 cite 的。
+        </p>
+        <ol className="space-y-5 text-mute/85 text-[13px] sm:text-[14px] leading-relaxed mt-6">
+          <li id="footnote-1" className="border-l-2 border-gold/50 pl-4">
+            <p>
+              <span className="font-mono text-gold tabular tracking-[0.18em] mr-2">
+                [1]
+              </span>
+              <strong className="text-bone">Monte Carlo 模擬法</strong> · 隨機
+              採樣大量 trial 估算 distribution · Metropolis &amp; Ulam 1949
+              (Los Alamos Manhattan Project)首創於物理模擬 · 1990s+ 被
+              sabermetric 社群採用於勝率 / Run Expectancy 估算。
+            </p>
+            <p className="mt-1 text-mute/65 text-[12px] font-mono">
+              ▸{" "}
+              <a
+                href="https://en.wikipedia.org/wiki/Monte_Carlo_method"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gold/80 hover:text-gold underline-offset-4 hover:underline break-all"
+              >
+                en.wikipedia.org/wiki/Monte_Carlo_method
+              </a>
+              <br />▸{" "}
+              <a
+                href="https://library.fangraphs.com/principles/run-expectancy/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gold/80 hover:text-gold underline-offset-4 hover:underline break-all"
+              >
+                library.fangraphs.com/principles/run-expectancy
+              </a>
+            </p>
+          </li>
+          <li id="footnote-2" className="border-l-2 border-gold/50 pl-4">
+            <p>
+              <span className="font-mono text-gold tabular tracking-[0.18em] mr-2">
+                [2]
+              </span>
+              <strong className="text-bone">K/9 · BB/9 · HR/9</strong> · 投手
+              per-9-inning rate stats · 標準 sabermetric 進階指標 · Pete
+              Palmer / John Thorn <em>The Hidden Game of Baseball</em>{" "}
+              (1984)定義原型 · FanGraphs Glossary 為現代 canonical reference。
+            </p>
+            <p className="mt-1 text-mute/65 text-[12px] font-mono">
+              ▸{" "}
+              <a
+                href="https://library.fangraphs.com/principles/glossary/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gold/80 hover:text-gold underline-offset-4 hover:underline break-all"
+              >
+                library.fangraphs.com/principles/glossary
+              </a>
+              <br />▸{" "}
+              <a
+                href="https://library.fangraphs.com/pitching/rate-stats/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gold/80 hover:text-gold underline-offset-4 hover:underline break-all"
+              >
+                library.fangraphs.com/pitching/rate-stats
+              </a>
+            </p>
+          </li>
+          <li id="footnote-3" className="border-l-2 border-gold/50 pl-4">
+            <p>
+              <span className="font-mono text-gold tabular tracking-[0.18em] mr-2">
+                [3]
+              </span>
+              <strong className="text-bone">±2% 標準差(亂數採樣的天花板)</strong>
+              {" "}· 10,000 次 Bernoulli trial 標準誤 = √(p(1-p)/n) · 對 p=0.5
+              (max variance)時 ~0.005 = ±0.5% · 我們 round 到 ±2% 是為「不
+              過度宣稱精度」(實際 internal consistency 嚴於此)· 中心極限
+              定理(Central Limit Theorem)為理論基礎。
+            </p>
+            <p className="mt-1 text-mute/65 text-[12px] font-mono">
+              ▸{" "}
+              <a
+                href="https://en.wikipedia.org/wiki/Central_limit_theorem"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gold/80 hover:text-gold underline-offset-4 hover:underline break-all"
+              >
+                en.wikipedia.org/wiki/Central_limit_theorem
+              </a>
+              <br />▸{" "}
+              <a
+                href="https://github.com/Tim-xuan-you/zone27-web/blob/main/lib/simulator.ts"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gold/80 hover:text-gold underline-offset-4 hover:underline break-all"
+              >
+                github.com/Tim-xuan-you/zone27-web · lib/simulator.ts
+              </a>
+            </p>
+          </li>
+          <li id="footnote-4" className="border-l-2 border-gold/50 pl-4">
+            <p>
+              <span className="font-mono text-gold tabular tracking-[0.18em] mr-2">
+                [4]
+              </span>
+              <strong className="text-bone">N ≥ 30 SAMPLE DEBT 門檻</strong> ·
+              小樣本統計學共識 · 30 場 ~= 統計檢定力進入 reliable 區間的最低
+              standard · sabermetric 社群「when do baseball stats stabilize?」
+              (Russell A. Carleton, 2008+ ongoing)系列研究確認各 stat 各
+              stabilization point · 我們選 30 為跨 stat 保守下限。
+            </p>
+            <p className="mt-1 text-mute/65 text-[12px] font-mono">
+              ▸{" "}
+              <a
+                href="https://blogs.fangraphs.com/it-just-aint-real-baseball-stat-reliability-and-the-six-month-sample/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gold/80 hover:text-gold underline-offset-4 hover:underline break-all"
+              >
+                blogs.fangraphs.com · Russell Carleton stat reliability
+              </a>
+              <br />▸{" "}
+              <a
+                href="https://en.wikipedia.org/wiki/Sample_size_determination"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gold/80 hover:text-gold underline-offset-4 hover:underline break-all"
+              >
+                en.wikipedia.org/wiki/Sample_size_determination
+              </a>
+            </p>
+          </li>
+        </ol>
+        <p className="mt-6 text-mute/65 text-[12px] leading-relaxed border-t border-line/40 pt-4">
+          ▸ 發現 broken link / 過期 URL / 更好的 primary source · 發 PR 到{" "}
+          <a
+            href="https://github.com/Tim-xuan-you/zone27-web"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-gold/80 hover:text-gold underline-offset-4 hover:underline"
+          >
+            zone27-web GitHub
+          </a>
+          {" "}· 我們不藏 cite。 同 Hindenburg「point us to ourselves on this」
+          public verification axiom。
+        </p>
+      </Section>
+
       <FounderSignOff>
         <p>
           這份白皮書沒有打算讓所有人讀完。寫給的對象是
@@ -692,6 +946,31 @@ function Section({
         {children}
       </div>
     </section>
+  );
+}
+
+// R59 W-D · FootnoteRef · inline superscript link to numbered footnote at
+// the bottom of /methodology · Hindenburg Research evidence pattern · 訪客
+// click sup [N] 跳對應 #footnote-N · 同 academic paper inline citation。
+// `inline` variant 在 Footnotes section 自身展開時用 · 不需要 anchor jump。
+function FootnoteRef({ n, inline = false }: { n: number; inline?: boolean }) {
+  if (inline) {
+    return (
+      <span className="font-mono text-gold/80 tabular tracking-[0.15em] mx-1">
+        [{n}]
+      </span>
+    );
+  }
+  return (
+    <sup className="font-mono text-gold/85 hover:text-gold text-[10px] tracking-[0.1em] ml-0.5">
+      <a
+        href={`#footnote-${n}`}
+        aria-label={`跳至 footnote ${n}`}
+        className="underline-offset-2 hover:underline"
+      >
+        [{n}]
+      </a>
+    </sup>
   );
 }
 
