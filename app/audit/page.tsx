@@ -115,6 +115,90 @@ export default function AuditPage() {
             </dl>
           </header>
 
+          {/* R59 W-E · Hindenburg Research position-disclosure mirror to
+              /methodology DISCLOSURE block · brand consistency across two
+              trust artifacts(model report + engineering paper)· /audit
+              header 已 surface ENGINE + LAST REVIEWED + SAMPLE SIZE 三項
+              · 此 disclosure 補 「who wrote this」 layer 的 8 項 position
+              facts:EQUITY / SPONSORS / ADS / TRACKERS / RECEIPTS / FOUNDERS
+              27 / BLACK CARD · 同 Hindenburg「at-the-top-of-document
+              position disclosure」 + Anthropic system card 「known
+              affiliations」 pattern。 brand IP「方法公開 · 公開 enterprise
+              not just engine」 物理 codify。 同 /methodology WAVE D。 */}
+          <aside
+            id="disclosure"
+            aria-labelledby="audit-disclosure-heading"
+            className="mt-8 mb-12 border border-line/60 bg-slate/30 p-5 sm:p-6"
+          >
+            <div className="flex items-baseline gap-3 mb-3 flex-wrap">
+              <span
+                id="audit-disclosure-heading"
+                lang="en"
+                className="font-mono text-gold text-[10px] tracking-[0.4em]"
+              >
+                / DISCLOSURE · WHO WROTE THIS
+              </span>
+              <span
+                lang="en"
+                className="font-mono text-mute/60 text-[9px] tracking-[0.3em]"
+              >
+                LAST UPDATED · 2026-05-23
+              </span>
+            </div>
+            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-1.5 text-mute/85 text-[12px] sm:text-[13px] leading-relaxed">
+              <li className="font-mono tabular">
+                <span className="text-mute/60">EQUITY</span>{" "}
+                <span className="text-bone">100% TIM solo</span>
+              </li>
+              <li className="font-mono tabular">
+                <span className="text-mute/60">SPONSORS</span>{" "}
+                <span className="text-bone">0</span>
+              </li>
+              <li className="font-mono tabular">
+                <span className="text-mute/60">ADS</span>{" "}
+                <span className="text-bone">0 · AdMob permanently banned</span>
+              </li>
+              <li className="font-mono tabular">
+                <span className="text-mute/60">TRACKERS</span>{" "}
+                <span className="text-bone">0 · per /privacy</span>
+              </li>
+              <li className="font-mono tabular">
+                <span className="text-mute/60">RECEIPTS</span>{" "}
+                <span className="text-bone">N={finalizedCount} · cpbl-260521-01 PROVED</span>
+              </li>
+              <li className="font-mono tabular">
+                <span className="text-mute/60">FOUNDERS 27</span>{" "}
+                <span className="text-bone">7 SYSTEM-TEST · 0 real</span>
+              </li>
+              <li className="font-mono tabular">
+                <span className="text-mute/60">BLACK CARD</span>{" "}
+                <span className="text-bone">0 paid subscribers</span>
+              </li>
+              <li className="font-mono tabular">
+                <span className="text-mute/60">REVENUE</span>{" "}
+                <span className="text-bone">NT$ 0 · Year 0 honest empty</span>
+              </li>
+            </ul>
+            <p className="mt-3 text-mute/65 text-[11px] leading-relaxed border-t border-line/40 pt-3">
+              完整 enterprise state 公開於{" "}
+              <Link
+                href="/annual/2026"
+                className="text-gold/80 hover:text-gold underline-offset-4 hover:underline"
+              >
+                /annual/2026
+              </Link>{" "}
+              · 5/31 每年 publish commitment · 違反 = brand 信用 collapse(per{" "}
+              <Link
+                href="/ethics"
+                className="text-gold/80 hover:text-gold underline-offset-4 hover:underline"
+              >
+                /ethics
+              </Link>
+              )。 Section 05 DISCLOSURE PHILOSOPHY 解釋為什麼 publish 這些。
+              Section 08 公開全模型 / GitHub source · 不留 secret。
+            </p>
+          </aside>
+
           {/* ── 01 MODEL DESCRIPTION ────────────────── */}
           <ReportSection no="01" label="MODEL DESCRIPTION">
             <P>

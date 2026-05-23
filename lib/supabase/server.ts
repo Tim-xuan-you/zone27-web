@@ -49,7 +49,13 @@ export async function createSupabaseServerClient() {
 
 /** Lightweight helper for server components: returns current session or
  *  null。 Used by /member · /admin · etc. to render auth-aware UI without
- *  bouncing on render errors when Supabase is unreachable. */
+ *  bouncing on render errors when Supabase is unreachable.
+ *
+ *  ⚠ SECURITY NOTE(R59 W-E · Agent B Finding #8)· getSession() reads cookies
+ *  WITHOUT server re-validation · spoofable client-side。 SAFE for UI-paint
+ *  (chip rendering · welcome banner)· UNSAFE for trust decisions(admin gate
+ *  · per-user data fetch · destructive mutations)· 之後 trust-critical code
+ *  必須 use getUser() below(re-validates with Supabase auth server)。 */
 export async function getSession() {
   try {
     const supabase = await createSupabaseServerClient();
@@ -57,6 +63,28 @@ export async function getSession() {
       data: { session },
     } = await supabase.auth.getSession();
     return session;
+  } catch {
+    return null;
+  }
+}
+
+/** R59 W-E · Agent B Finding #8 · TRUST-VALIDATED user helper · 同 getSession
+ *  但 re-validates with Supabase auth server(JWT verify · DB lookup)。 用於
+ *  trust-critical code path:admin gating · per-user data fetch · destructive
+ *  mutations · server actions reading PII。 Supabase docs explicitly warn
+ *  getSession() is spoofable for these · use this helper instead。 Returns
+ *  { user } or null on failure / no auth。
+ *
+ *  Latency:~50-100ms vs getSession 0ms · acceptable for non-UI paths。
+ *  Currently /admin doesn't yet gate · this helper is here for the future
+ *  Phase-2 admin actions ship。 */
+export async function getUser() {
+  try {
+    const supabase = await createSupabaseServerClient();
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+    return user;
   } catch {
     return null;
   }
