@@ -3,7 +3,11 @@
 import Link from "next/link";
 import { useActionState } from "react";
 import { useFormStatus } from "react-dom";
-import { reserveSpot, type WaitlistResult } from "@/lib/waitlist";
+import { reserveSpot } from "@/lib/waitlist";
+import {
+  getWaitlistErrorMessage,
+  type WaitlistResult,
+} from "@/lib/waitlist-types";
 import CopyLinkButton from "@/components/CopyLinkButton";
 
 // ── Submit button — disables while pending, shows spinner ───
@@ -246,14 +250,15 @@ export default function WaitlistForm({
           a blind user submitting an invalid email would see no feedback
           (the visual text never makes it to assistive tech). Caught by
           3rd-pass audit · WCAG 2.1 SC 4.1.3 Status Messages compliance. */}
+      {/* R67 W-D · error 訊息 via getWaitlistErrorMessage(single source
+          of truth in lib/waitlist.ts)· 替代 inline ternary cascade ·
+          新 error code 加入 WAITLIST_ERROR_CODES auto-typesafe surface ·
+          consumer 不需要 silently 落到 default branch · Tetlock track-
+          able-error discipline 物理 codify。 */}
       <div role="alert" aria-live="polite" aria-atomic="true" className="min-h-[1rem]">
         {state && !state.ok && (
           <p className="mt-4 font-mono text-loss text-xs sm:text-sm tracking-[0.2em] text-center">
-            {state.error === "missing_email"
-              ? "請填寫 EMAIL"
-              : state.error === "invalid_email"
-              ? "EMAIL 格式不正確"
-              : "系統暫時無法處理 · 請稍後再試"}
+            {getWaitlistErrorMessage(state.error)}
           </p>
         )}
       </div>
