@@ -6,6 +6,7 @@ import MatchSimulator from "@/components/MatchSimulator";
 import CopyLinkButton from "@/components/CopyLinkButton";
 import RelatedReading from "@/components/RelatedReading";
 import FounderSignOff from "@/components/FounderSignOff";
+import LongReadHandoff from "@/components/LongReadHandoff";
 import ArticleMeta from "@/components/ArticleMeta";
 import StatTerm from "@/components/StatTerm";
 import ReproducibilityReceipt from "@/components/ReproducibilityReceipt";
@@ -879,6 +880,16 @@ repeat 10,000 times → aggregate
           public verification axiom。
         </p>
       </Section>
+
+      {/* R69 W-E · Agent A SHIP 5 · LongReadHandoff · Tom Tango sabermetrics
+          blog + Aeon end-of-post pattern · honor reader's time investment at
+          MAX trust state · next deep read + RSS-only subscription · 0 email
+          capture · per [[zone27-disclosure-philosophy]] + 不打擾就是禮物。 */}
+      <LongReadHandoff
+        readingMin={6}
+        nextHref="/methodology/diff"
+        nextLabel="v0.2 → v0.3 entire delta · 14 unchanged + 1 new constant"
+      />
 
       <FounderSignOff>
         <p>

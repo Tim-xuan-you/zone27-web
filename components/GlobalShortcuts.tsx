@@ -9,6 +9,17 @@ import { useRouter } from "next/navigation";
 // repeat-visitor 不必開 Cmd-K · 直接 g+m / g+t / g+l jump。 Bloomberg-grade
 // muscle memory for hardcore CPBL fans returning daily。
 //
+// R69 W-F · Agent A SHIP 6 · RaycastJumpHint · ONE-SHOT first-ever-visit
+// discovery toast「Press G then M · jump anywhere」 · 8-second session
+// activity gate(Arc browser pattern · don't teach bouncing visitors)·
+// localStorage zone27_shortcut_hint_seen_v1(11th key · /audit S06 disclose)·
+// 5s auto-dismiss · ONE shot per device lifetime。 不是 push notification ·
+// 不是 modal · 不是 onboarding wizard · 是 inline gold flash discoverability。
+
+const SHORTCUT_HINT_STORAGE_KEY = "zone27_shortcut_hint_seen_v1";
+const HINT_DELAY_MS = 8_000;
+const HINT_DURATION_MS = 5_000;
+//
 // SHORTCUT TABLE(reset 1500ms after 「g」 pressed):
 //   g h → / (home)
 //   g m → /matches
@@ -67,6 +78,38 @@ export default function GlobalShortcuts() {
   const timeoutRef = useRef<number | null>(null);
   // Visual flash to confirm shortcut received(brief gold flash · CSS-only)
   const [flash, setFlash] = useState<string | null>(null);
+  // R69 W-F · ONE-shot RaycastJumpHint state · 5s auto-dismiss · 8s session gate
+  const [hintVisible, setHintVisible] = useState(false);
+
+  useEffect(() => {
+    // R69 W-F · ONE-shot RaycastJumpHint · Arc browser「don't teach bouncing
+    // visitors」 pattern · only show on first-ever visit AFTER 8s session
+    // activity · localStorage one-shot guard · zero push permission · zero
+    // tracking · zero re-show after dismiss。
+    if (typeof window === "undefined") return;
+    try {
+      const seen = window.localStorage.getItem(SHORTCUT_HINT_STORAGE_KEY);
+      if (seen === "1") return; // already shown once · respect ONE-shot
+    } catch {
+      return; // localStorage disabled · silently skip · 不 push
+    }
+
+    const showTimer = window.setTimeout(() => {
+      setHintVisible(true);
+      // Mark as seen immediately on display · 不等 dismiss · ONE shot 嚴格
+      try {
+        window.localStorage.setItem(SHORTCUT_HINT_STORAGE_KEY, "1");
+      } catch {
+        /* swallow · still display this session */
+      }
+      // Auto-dismiss after 5s · per Agent A spec
+      window.setTimeout(() => setHintVisible(false), HINT_DURATION_MS);
+    }, HINT_DELAY_MS);
+
+    return () => {
+      window.clearTimeout(showTimer);
+    };
+  }, []);
 
   useEffect(() => {
     function isInputTarget(target: EventTarget | null): boolean {
@@ -144,6 +187,34 @@ export default function GlobalShortcuts() {
     };
   }, [router]);
 
+  // R69 W-F · ONE-shot RaycastJumpHint · 5s discoverability flash · brand-pure
+  // Raycast/Arc/Linear discovery pattern · 不是 modal · 不是 sticky banner ·
+  // 是 ambient gold flash in same position as g-mode flash · visitors learn
+  // keyboard surface exists · power-users muscle-memory unlocked。
+  if (hintVisible && !flash) {
+    return (
+      <div
+        role="status"
+        aria-live="polite"
+        className="pointer-events-none fixed bottom-20 sm:bottom-8 right-4 sm:right-8 z-50 border border-gold/60 bg-ink/95 backdrop-blur-md px-4 py-3 font-mono text-gold text-[11px] tracking-[0.25em] tabular max-w-xs"
+      >
+        <p className="leading-relaxed">
+          ⚡ Power-user tip · 按{" "}
+          <kbd className="px-1.5 py-0.5 border border-gold/60 bg-slate/60 text-gold tabular text-[10px] rounded-sm">
+            G
+          </kbd>{" "}
+          再按{" "}
+          <kbd className="px-1.5 py-0.5 border border-gold/60 bg-slate/60 text-gold tabular text-[10px] rounded-sm">
+            M
+          </kbd>{" "}
+          jump 任何 page
+        </p>
+        <p className="font-mono text-mute/70 text-[9px] tracking-[0.2em] mt-1.5">
+          ▸ this hint 一次性 · 5 秒自動消失 · 不再顯示
+        </p>
+      </div>
+    );
+  }
   if (!flash) return null;
   return (
     <div

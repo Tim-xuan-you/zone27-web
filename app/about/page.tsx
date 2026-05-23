@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import RelatedReading from "@/components/RelatedReading";
+import LongReadHandoff from "@/components/LongReadHandoff";
 import ArticleMeta from "@/components/ArticleMeta";
 import { FOUNDERS_NEXT, formatBadge } from "@/lib/founders-stats";
 
@@ -494,6 +495,16 @@ export default function AboutPage() {
           。
         </p>
       </Chapter>
+
+      {/* R69 W-E · Agent A SHIP 5 · LongReadHandoff · honor reader's 8-min
+          time investment at MAX trust state · next deep read + RSS-only ·
+          0 email capture · /steelman is natural next destination for /about
+          readers(brand IP philosophy → adversarial steelman). */}
+      <LongReadHandoff
+        readingMin={8}
+        nextHref="/steelman"
+        nextLabel="5 strongest objections against ZONE 27 · 自己 publish"
+      />
 
       <RelatedReading currentPath="/about" />
 

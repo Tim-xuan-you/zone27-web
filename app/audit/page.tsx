@@ -680,6 +680,11 @@ export default function AuditPage() {
                 value="您 pre-canvas 1-tap lens vote · per-match commitment artifact"
                 note="LensFocusVote 寫入 · /matches/[gameId] pre /02 LENS CANVAS hub · 6 lens 選 1 個您認為最 matter · Cialdini commitment-consistency · 0 server · 0 PII · 0 leaderboard · 純您裝置 · R67 W-A"
               />
+              <DataRow
+                label="zone27_shortcut_hint_seen_v1"
+                value="您是否已看過 g-mode 鍵盤 jump 提示(ONE-shot flag)"
+                note="GlobalShortcuts 寫入 · 訪客第一次 visit 8 秒後 surface ⚡ G+M tip 5 秒自動消失 · 設此 flag 後永不再顯示 · per Raycast/Arc/Linear 「don't teach bouncing visitors」 pattern · 0 server · 0 PII · 0 tracking · R69 W-F"
+              />
             </DataTable>
 
             <P className="text-mute/70 mt-3">
