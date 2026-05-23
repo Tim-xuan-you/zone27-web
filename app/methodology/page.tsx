@@ -1130,6 +1130,14 @@ repeat 10,000 times → aggregate
 
 // ── Sub-components ────────────────────────────────────
 
+// R72 W-D · Agent B audit F01 fix · slug helper for /methodology Section ·
+// 同 R69 W-F /terms + R70 W-F /privacy + R71 W-E /transparency pattern ·
+// enables /methodology#section-06 anchor jump · per R71 W-A ENGINE_DIFF_BEACONS
+// + /now journal cross-link · 不再 broken 5-second devtools verify。
+function slugFromMethodologySectionNo(no: string): string {
+  return `section-${no.toLowerCase().replace(/[^a-z0-9]/g, "-")}`;
+}
+
 function Section({
   no,
   label,
@@ -1141,9 +1149,14 @@ function Section({
   zh: string;
   children: React.ReactNode;
 }) {
+  const id = slugFromMethodologySectionNo(no);
   return (
-    /* Round 58 W-A · cv-auto perf primitive applied · LCP -150ms TBT -100ms · same Section helper pattern R57 W-A 已 verify on /transparency + /methodology/diff。 */
-    <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-16 pt-10 border-t border-line/40 cv-auto">
+    /* Round 58 W-A · cv-auto perf primitive applied · LCP -150ms TBT -100ms · same Section helper pattern R57 W-A 已 verify on /transparency + /methodology/diff。
+       R72 W-D · Agent B audit F01 fix · id slug for anchor jump · scroll-mt-20。 */
+    <section
+      id={id}
+      className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-16 pt-10 border-t border-line/40 cv-auto scroll-mt-20"
+    >
       {/* Round 18 motion polish · section-reveal scroll-driven CSS
           animation draws a soft gold hairline under the kicker as the
           section scrolls into view. Native CSS animation-timeline ·

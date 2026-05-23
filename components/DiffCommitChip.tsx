@@ -74,6 +74,9 @@ export default function DiffCommitChip({
   }
 
   // inline variant · 1-line · for DailyReturnRail
+  // R72 W-D · Agent B audit F13 fix · aria-label on Link · screen reader
+  // users get「Engine update since last visit · click for full diff」
+  // descriptive label instead of reading entire beacon string mid-content。
   return (
     <p className="font-mono text-mute/80 text-[10px] tracking-[0.22em] leading-relaxed">
       <span className="text-gold/70 mr-2" aria-hidden="true">
@@ -82,6 +85,7 @@ export default function DiffCommitChip({
       {totalCount > 1 ? `${totalCount} 件 ` : ""}engine update ·{" "}
       <Link
         href={beacon.href}
+        aria-label="Engine update since your last visit · click for full diff"
         className="text-gold/85 hover:text-gold underline-offset-4 hover:underline transition-colors"
       >
         {beacon.label} →

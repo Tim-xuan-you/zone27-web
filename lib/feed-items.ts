@@ -43,7 +43,12 @@ export const FEED_META = {
   link: "https://zone27-web.vercel.app/",
   selfLink: "https://zone27-web.vercel.app/feed.xml",
   authorName: "Tim",
-  authorEmail: "tim@zone27.tw",
+  // R72 W-D · Agent B audit F03 fix · authorEmail sweep · R71 W-E F03
+  // 8-file sweep missed this · public RSS feed exposed dead domain ·
+  // visitors clicking mailto from Feedly/Reeder get bounce · brand IP
+  // 「Tim 親手 onboard」 promise fail。 tatayngiti@gmail.com aspirational
+  // future tim@zone27.tw post-domain-launch swap-back per /audit S05。
+  authorEmail: "tatayngiti@gmail.com",
   language: "zh-TW",
   rights: "© 2026 ZONE 27 · MIT-licensed source code",
 } as const;

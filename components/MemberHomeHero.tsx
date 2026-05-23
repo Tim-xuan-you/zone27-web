@@ -258,15 +258,24 @@ export default function MemberHomeHero({
                 {/* R71 W-E · Agent B audit F11 fix · N=30 threshold acknowledgment ·
                     之前 silent disappearance · 修:engineN < 30 show countdown · engineN
                     >= 30 swap to「N≥30 · STATISTICALLY MEANINGFUL」 anchor · 同
-                    /track-record + Bill James 慣例 + /calibration linkout。 */}
+                    /track-record + Bill James 慣例 + /calibration linkout。
+                    R72 W-D · Agent B audit F08 fix · /calibration linkout 補 ·
+                    之前 R71 W-E F11 只 text · 半-fix · /audit S05 disclosure
+                    parity 要求 linkout · 現在 N<30 + N≥30 都 link 到 /calibration。 */}
                 {engineN < 30 ? (
-                  <span className="text-mute/60 text-[9px] tracking-[0.25em] ml-1.5">
-                    · {30 - engineN} TO N=30
-                  </span>
+                  <Link
+                    href="/calibration"
+                    className="text-mute/60 hover:text-gold text-[9px] tracking-[0.25em] ml-1.5 underline-offset-4 hover:underline transition-colors"
+                  >
+                    · {30 - engineN} TO N=30 →
+                  </Link>
                 ) : (
-                  <span className="text-gold/85 text-[9px] tracking-[0.25em] ml-1.5">
-                    · N≥30 · STATISTICALLY MEANINGFUL
-                  </span>
+                  <Link
+                    href="/calibration"
+                    className="text-gold/85 hover:text-gold text-[9px] tracking-[0.25em] ml-1.5 underline-offset-4 hover:underline transition-colors"
+                  >
+                    · N≥30 · STATISTICALLY MEANINGFUL →
+                  </Link>
                 )}
               </p>
             </div>

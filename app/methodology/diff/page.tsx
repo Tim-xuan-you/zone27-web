@@ -584,6 +584,14 @@ export default function MethodologyDiffPage() {
 
 // ── Sub-components ────────────────────────────────────
 
+// R72 W-D · Agent B audit F02 fix · slug helper for /methodology/diff
+// Section · 同 R69 W-F /terms + R70 W-F /privacy + R71 W-E /transparency +
+// R72 W-D /methodology pattern · enables anchor jumps · per R71 W-C
+// ENGINE_DIFF_BEACONS#park-factor promise · 不再 broken 5-second devtools。
+function slugFromDiffSectionNo(no: string): string {
+  return `section-${no.toLowerCase().replace(/[^a-z0-9]/g, "-").replace(/-+$/g, "")}`;
+}
+
 function Section({
   no,
   label,
@@ -595,9 +603,20 @@ function Section({
   zh: string;
   children: React.ReactNode;
 }) {
+  const id = slugFromDiffSectionNo(no);
+  // R72 W-D · expose friendly alias anchor「park-factor」 when section
+  // discusses Park Factor · per ENGINE_DIFF_BEACONS R71 W-C cross-link。
+  const parkFactorAlias = /park.?factor/i.test(label) || /park.?factor|場館/i.test(zh);
   return (
-    /* Round 57 W-A · cv-auto perf primitive · LCP -150ms on long pages。 */
-    <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-16 pt-10 border-t border-line/40 cv-auto">
+    /* Round 57 W-A · cv-auto perf primitive · LCP -150ms on long pages。
+       R72 W-D · Agent B audit F02 fix · id slug for anchor jump · scroll-mt-20。 */
+    <section
+      id={id}
+      className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-16 pt-10 border-t border-line/40 cv-auto scroll-mt-20"
+    >
+      {parkFactorAlias && (
+        <span id="park-factor" aria-hidden="true" className="block -mt-16 pt-16" />
+      )}
       <div className="flex items-baseline gap-4 mb-2 section-reveal">
         <span className="font-mono text-gold/70 text-[10px] tracking-[0.35em]">
           / {no}
