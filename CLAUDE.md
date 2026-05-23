@@ -310,7 +310,7 @@ OG + favicon + chrome
 
 ## ⚙️ Global components(Round 2/5/12/28/30/31)
 
-- `<CommandPalette />` · 全站 ⌘K/Ctrl-K palette · **40 visitor-discoverable routes** 索引(R30 W10 加 /member/submit · R33 W-E 加 /annual/2026 · R31 W-S 加 /founders/ledger · W-X3 加 /membership/black-card · R39 加 /calibration + /membership/black-card/ledger · R50 W-A 加 /methodology/diff · R51 W-D 加 /transparency 後 · /admin · /auth/* 不在 palette)(layout.tsx)
+- `<CommandPalette />` · 全站 ⌘K/Ctrl-K palette · **41 visitor-discoverable routes** 索引(R30 W10 加 /member/submit · R33 W-E 加 /annual/2026 · R31 W-S 加 /founders/ledger · W-X3 加 /membership/black-card · R39 加 /calibration + /membership/black-card/ledger · R50 W-A 加 /methodology/diff · R51 W-D 加 /transparency · R64 W-B 加 /pricing/why 後 · /admin · /auth/* 不在 palette)(layout.tsx)
 - `<VibeCheck />` (Round 37 W-B · components/) · streak descriptive lens · Tversky/Gilovich 1985 hot hand fallacy disclaimer · /matches/[gameId] section 01B
 - `<ParkFactorLens />` (Round 37 W-D · components/) · 4 CPBL 場館 home advantage visualizer · lib/cpbl-parks.ts reference data · ESTIMATE methodology + PR invitation · /matches/[gameId] section 01C
 - `<PitcherFatigueLens />` (Round 38 W-A · components/) · v0.1 PROXY · WHIP + BB9 + K9 季累計 derive command stability · v0.2 commit to rest_days + season_ip ingestion · /matches/[gameId] section 01D

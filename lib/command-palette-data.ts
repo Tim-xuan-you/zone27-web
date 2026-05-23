@@ -10,7 +10,7 @@
 // Inspired by Linear / Vercel / Stripe command palettes,
 // but DELIBERATELY thin: no fuse.js, no telemetry, no
 // recently-used persistence. Simple substring filter on a
-// hand-curated 40-row list is sufficient and brand-pure
+// hand-curated 41-row list is sufficient and brand-pure
 // (per [[zone27-disclosure-philosophy]]: no hidden ranking).
 // (/admin is intentionally NOT indexed here · Tim bookmarks it ·
 // keeping it out of visitor Cmd-K aligns with its noindex framing.)
@@ -392,7 +392,7 @@ export const COMMAND_ITEMS: CommandItem[] = [
     ],
   },
   {
-    label: "BLACK CARD · 訂閱會員 UI preview · 2026 Q3 上線 · 5 unlocks",
+    label: "BLACK CARD · 訂閱會員 UI preview · payment infra 就緒後上線 · 5 unlocks",
     kicker: "/membership/black-card",
     path: "/membership/black-card",
     group: "工具 · 外部",
@@ -408,6 +408,26 @@ export const COMMAND_ITEMS: CommandItem[] = [
       "monthly",
       "mockup",
       "preview",
+    ],
+  },
+  {
+    label: "為什麼 NT$ 299 / NT$ 2,700 · pricing rationale 一頁說清楚",
+    kicker: "/pricing/why",
+    path: "/pricing/why",
+    group: "工具 · 外部",
+    keywords: [
+      "pricing",
+      "why",
+      "為什麼",
+      "定價",
+      "rationale",
+      "price",
+      "299",
+      "2700",
+      "math",
+      "explainer",
+      "founders 27",
+      "black card",
     ],
   },
   {
