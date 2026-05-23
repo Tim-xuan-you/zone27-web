@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import RelatedReading from "@/components/RelatedReading";
 import FounderSignOff from "@/components/FounderSignOff";
 import ArticleMeta from "@/components/ArticleMeta";
+import CadencePulseChip from "@/components/CadencePulseChip";
 
 export const metadata: Metadata = {
   title: "Now · 現在 — ZONE 27 craft journal",
@@ -33,9 +34,15 @@ export const metadata: Metadata = {
 // ─────────────────────────────────────────────────────
 
 const LAST_UPDATED = "2026-05-23";
-const CYCLE = "Round 28-66 · 2026-05-23 · 42+ canary fires displacement mission · 41 visitor-discoverable routes(+/pricing/why R64 W-B)· 7 LIVE LENS CANVAS + 3 ENGINE SET · 8 binding ethics + 5 steelman + 8 localStorage keys + Atom RSS + global-error.tsx + g-mode 13 shortcuts + ReceiptForwardButton + CredentialStack + CalibrationProgressBar + DEFAULT_CONSENT + lib/motion · R59-R64 6 full-authority invocations · R65 QA regression audit · R66 8th-invocation behavioral psychology + Next.js 16 code modernization(global-error.tsx NEW root-layout boundary · error.tsx `reset` → `unstable_retry` API migration · lib/motion constants single-source · lib/consent DEFAULT_CONSENT pre-commit guardrail · CalibrationProgressBar Goal Gradient honest progress)· displacement battle 對 玩運彩+報馬仔 21+ 層 structural moat";
+const CYCLE = "Round 28-67 · 2026-05-23 · 43+ canary fires displacement mission · 41 visitor-discoverable routes(+/pricing/why R64 W-B)· 7 LIVE LENS CANVAS + 3 ENGINE SET · 9 localStorage keys(+R67 zone27_lens_focus_votes_v1)+ 8 binding ethics + 5 steelman + Atom RSS + global-error.tsx + g-mode 13 shortcuts + ReceiptForwardButton + CredentialStack + CalibrationProgressBar + DEFAULT_CONSENT + lib/motion + R67 NEW LensFocusVote(Cialdini commitment-consistency)+ R67 .enter-verdict-reveal CSS(Peak-End rule Kahneman 2002)+ R67 CadencePulseChip(Zajonc Mere Exposure reframed)+ R67 WaitlistResult exhaustive type(Tetlock track-able-error)· R59-R64 6 full-authority invocations · R65 QA regression audit · R66 8th-invocation behavioral psychology · R67 code-focused deferred queue ship(4 deferred ships from R66 psychology agent)· displacement battle 對 玩運彩+報馬仔 22+ 層 structural moat";
 
 const SHIPPED_THIS_CYCLE: { title: string; body: string; href?: string }[] = [
+  // ── 🔭 Round 67 W-A→W-E · code-focused deferred queue ship · 4 R66 psychology agent ships ─
+  {
+    title: "[R67 WA→WE] 🔭 Code-focused R67 · LensFocusVote + Peak-End reveal + CadencePulseChip + WaitlistResult exhaustive types · 4 R66 deferred queue ships",
+    body: "Tim 留空指令 = 鐵律 default ship NOW · 4 deferred queue items + closure · R66 psychology agent ship #1(LensFocusVote · Cialdini commitment-consistency)+ #2(Peak-End rule verdict reveal · Kahneman 2002)+ #4(Zajonc Mere Exposure reframed · /now brand IP collision avoided)+ code improvement #3(WaitlistResult template-literal types · Tetlock track-able-error)batched into 4 waves。 0 brand redline · 0 new external dependency · 0 image asset · 純 typographic + motion + type-safety craft。 W-A · NEW components/LensFocusVote.tsx(180 lines · 2-state SSR-safe discriminated union mount per AnonPick pattern)+ NEW lib/lens-focus-votes.ts(zone27_lens_focus_votes_v1 LocalStorage key · 9th key total · LENS_OPTIONS metadata single-source for 6 lenses 02A-02F)+ /audit S06 8th key disclosure · 6-lens 1-tap pre-canvas commitment widget per Cialdini & Trope 1976 commitment-consistency · 0 leaderboard / 0 social proof「X% voters chose park factor」 / 0 reward animation(brand IP violation patterns)· 兩個 widget commitment ladder:AnonPickWidget(team-level home/away · R45 W-B)+ LensFocusVote(angle-level 6-way · R67 W-A)· Cialdini foot-in-the-door 物理 codify · placement BEFORE /02 LENS CANVAS hub on /matches/[gameId]。 W-B · `.enter-verdict-reveal` CSS class in globals.css · 800ms hold + 480ms cubic-bezier expo reveal per Kahneman 2002 Peak-End rule + Fredrickson/Kahneman 1993 · uses MOTION.verdictHoldMs + MOTION.verdictReveal + MOTION.easeOutExpo from R66 lib/motion.ts single-source · `@starting-style` modern CSS(0 JS · graceful fallback older browsers)· @media prefers-reduced-motion guarded · applied to FirstReceiptHero VERDICT BAND on /track-record · per /audit S05 disclosure parity · PROVED 和 DIVERGED 同 timing 不偏 emotion · Bloomberg LAST-number 強調 grammar 不是 victory animation。 W-C · NEW lib/last-shipped.ts(LAST_SHIPPED_DATE_ISO single source · formatTimeSinceLastShipped helper)+ NEW components/CadencePulseChip.tsx(2 variants: panel for /now top · compact for Footer)· Zajonc 1968 Mere Exposure 機制 REFRAMED per /now「無 weekly schedule promise」 brand IP collision · NOT 「下週四前可期」 cadence promise · 改 honest「LAST SHIPPED · X 天前 · 節奏由 craft 決定 · 不承諾」 + /changelog cross-link · brand IP triple-fire(Pratfall + Disclosure + 不打擾就是禮物 axiom)· 訪客每次 return visit 看到 ZONE 27 ship 進度 without subscription nag。 W-D · NEW lib/waitlist-types.ts(因 lib/waitlist.ts 「use server」 directive 不允許 non-async exports · types + helpers split)· WAITLIST_ERROR_CODES const-array template-literal-derived type + getWaitlistErrorMessage exhaustive switch helper · WaitlistForm.tsx inline 3-way ternary cascade → helper invocation · 新 error code 加入 array auto-typesafe surface · 不再 silent fall-through default · Tetlock track-able-error discipline 物理 codify · brand IP 「方法公開」 延伸到 error taxonomy。 W-E · /now journal + NEW-CONVERSATION-PROMPT R67 row closure + commit + push per auto-push axiom。 npm run build 全 41 routes green · TSC 0 error · lint 0 error · validate:data 0 error 0 warning。",
+    href: "/matches/cpbl-260521-01",
+  },
   // ── 🧠 Round 66 W-A+W-B+W-C · 8th full-authority invocation · behavioral psychology lens + Next.js 16 code modernization ─
   {
     title: "[R66 WA→WC] 🧠 8th full-authority · behavioral psychology + Next.js 16 code modernization · code-focused per Tim emphasis",
@@ -935,6 +942,16 @@ export default function NowPage() {
         </p>
         <div className="mt-6">
           <ArticleMeta readingMin={3} />
+        </div>
+
+        {/* R67 W-C · CadencePulseChip panel variant · Zajonc 1968 Mere
+            Exposure 機制 reframed per /now 「無 weekly schedule promise」
+            brand IP · NOT 「下週四前可期」 cadence promise · 改 honest
+            「LAST SHIPPED + 不承諾節奏 + /changelog full history」 ·
+            mounted top-of-page · 訪客每次 return visit 看到 ZONE 27
+            still shipping(brand awareness)without subscription nag。 */}
+        <div className="mt-8 max-w-2xl">
+          <CadencePulseChip variant="panel" />
         </div>
       </section>
 

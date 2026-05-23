@@ -1,8 +1,8 @@
 # 📋 New Conversation Prompt · ZONE 27 Session Handoff
 
 **用途:** 開新對話窗時複製此 prompt 整段 paste · 新 Claude 一秒接上 context。
-**最後 update:** 2026-05-23 · **Round 66 W-C 攻頂** · R59 7 W + R60 3 W + R61 6 W + R62 4 W + R63 4 W + R64 3 W + R65 4 W + R66 3 W · 3-agent full-authority × 8 invocations(R59 + R60 + R61 + R62 + R63 + R64 + R65 + R66)· R37→R66
-**Token urgency:** Tim explicit「現在這個對話窗太燒TOKEN了 · 我要開新對話窗複製過去」 · 此 prompt 是 R66 contextual snapshot for fresh Claude bootstrap · TIM ACTIVELY HANDING OFF 2026-05-23 R66 W-C
+**最後 update:** 2026-05-23 · **Round 67 W-E 攻頂** · R59 7 W + R60 3 W + R61 6 W + R62 4 W + R63 4 W + R64 3 W + R65 4 W + R66 3 W + R67 5 W · 3-agent full-authority × 8 invocations(R59 + R60 + R61 + R62 + R63 + R64 + R65 + R66)+ R67 code-focused deferred queue ship · R37→R67
+**Token urgency:** Tim explicit「現在這個對話窗太燒TOKEN了 · 我要開新對話窗複製過去」 · 此 prompt 是 R67 contextual snapshot for fresh Claude bootstrap · TIM ACTIVELY HANDING OFF 2026-05-23 R67 W-E
 
 ---
 
@@ -39,7 +39,13 @@
   · feedback_no_waiting_rule(default ship NOW · 不問 keyword · 不 surface options · auto-push)
   · feedback_full_authority_3_agent_pattern(Tim 全權 mandate → 3 parallel agents synthesize → multi-wave ship · R51 confirmed pattern)
 
-【2026-05-23 R59-R60 攻頂 state · 7+ waves · 3-agent full-authority pattern fire × 2 invocations】:
+【2026-05-23 R59-R67 攻頂 state · 79+ waves · 8 full-authority invocations + R67 code-focused deferred queue ship】:
+
+R67 W-A · LensFocusVote new component · NEW components/LensFocusVote.tsx(180 lines · 2-state SSR-safe discriminated union mount per AnonPick pattern · 6-lens 1-tap pre-canvas commitment widget per Cialdini & Trope 1976 commitment-consistency · 0 leaderboard / 0 social proof / 0 reward animation)+ NEW lib/lens-focus-votes.ts(zone27_lens_focus_votes_v1 LocalStorage key · 9th key total · LENS_OPTIONS metadata single-source for 6 lenses 02A-02F)+ /audit S06 8th key disclosure · placement BEFORE /02 LENS CANVAS hub on /matches/[gameId] · 兩個 commitment widgets stacked AnonPickWidget(team-level)+ LensFocusVote(angle-level)= Cialdini foot-in-the-door 物理 codify
+R67 W-B · Peak-End rule verdict reveal animation · `.enter-verdict-reveal` CSS class in app/globals.css · 800ms hold + 480ms cubic-bezier expo reveal per Kahneman 2002 Peak-End rule + Fredrickson/Kahneman 1993 · uses MOTION.verdictHoldMs + verdictReveal + easeOutExpo from R66 lib/motion.ts single-source · `@starting-style` modern CSS pattern · @media prefers-reduced-motion guarded · applied to FirstReceiptHero VERDICT BAND on /track-record · per /audit S05 disclosure parity · PROVED 和 DIVERGED 同 timing 不偏 emotion
+R67 W-C · CadencePulseChip Zajonc Mere Exposure reframed · NEW lib/last-shipped.ts(LAST_SHIPPED_DATE_ISO single source + formatTimeSinceLastShipped helper)+ NEW components/CadencePulseChip.tsx(2 variants: panel for /now top · compact for Footer)· Zajonc 1968 Mere Exposure 機制 REFRAMED per /now「無 weekly schedule promise」 brand IP collision · NOT「下週四前可期」 cadence promise(violation pattern)· 改 honest「LAST SHIPPED · X 天前 · 節奏由 craft 決定 · 不承諾」 + /changelog cross-link · brand IP triple-fire(Pratfall + Disclosure + 不打擾就是禮物 axiom)
+R67 W-D · WaitlistResult exhaustive type tightening · NEW lib/waitlist-types.ts(types + helpers split out from「use server」 file)+ WAITLIST_ERROR_CODES const-array + WaitlistErrorCode template-literal-derived type(typeof [number])+ getWaitlistErrorMessage exhaustive switch helper · WaitlistForm.tsx inline 3-way ternary cascade → helper invocation · 新 error code 加入 array auto-typesafe surface · 不再 silent fall-through default · Tetlock track-able-error discipline 物理 codify · brand IP「方法公開」 延伸到 error taxonomy
+R67 W-E · /now journal + NEW-CONVERSATION-PROMPT R67 closure(此 commit)· COMPREHENSIVE HANDOFF prompt synthesis · npm run build 全 41 routes green · TSC 0 error · lint 0 error · validate:data 0 error 0 warning
 
 R66 W-A · Next.js 16 error boundary modernization · app/error.tsx `reset` prop → `unstable_retry`(Next.js 16 API migration · may break in Next.js 17 if not migrated)+ NEW app/global-error.tsx 220 lines self-contained <html>/<body> root-layout error coverage gap close · catastrophic failure brand-pure fallback · commit b1a2db9
 R66 W-B · Psychology agent synthesize · 3 NEW files(lib/motion.ts animation constants single-source · lib/consent.ts DEFAULT_CONSENT 5-key pre-commit guardrail Default Bias per Thaler 2003 · components/CalibrationProgressBar.tsx Goal Gradient effect role=progressbar wired /track-record above LEDGER · 3px gold bar adaptive footer copy)· commit 1a3ac36
@@ -176,12 +182,34 @@ EXCEPTIONS ship · brand-pure 替代:
 - Tim 全權 mandate → 3 parallel agents pattern(feedback_full_authority_3_agent_pattern)· 但 R57+ 確認 diminishing returns 後 · 改 execution-mode from deferred queue · 不過度 spawn
 
 【新對話窗 first 動作建議】:
-1. 讀 CLAUDE.md + AGENTS.md + /now journal + 本檔(docs/NEW-CONVERSATION-PROMPT.md)
-2. git log --oneline -25 看 R50-R58 commits 物理證據
-3. npm run validate:data:warn 跑 9-rule data quality check · 看 6 missing pitchers 是否仍 WARN
-4. 跟 Tim 確認:「您希望 R59 從哪邊接續?(R58 deferred queue 還有 ~15 items · 或新 mandate)」
+1. cd C:\Users\tatay\Desktop\Second\zone27-web
+2. git log --oneline -15 看 R64→R67 commits 物理證據
+3. 跑 npm run lint + npx tsc --noEmit + npm run validate:data:warn 確認三綠
+4. 跟 Tim 確認:「您希望 R68 從哪邊接續?(R67+ deferred queue 還有 ~12 items · 或新 mandate)」
 
-今天我要做的事:[ 填入任務 · 或留空讓 Claude 接 TODO + 鐵律 default ship NOW ]
+【R68+ DEFERRED queue · R66+ agent synthesize · R67 ship 4 of 14 後剩餘】:
+[必要大工程 · Tim「我還有什麼大工程沒做」 mandate]
+• Agent 3 R61 · CPBL pipeline 自動化(L · 1 week · TIER 0 cost · pre-launch critical · 解 Tim manual screenshot ingestion single-point-of-failure)
+• Agent 3 R61 · Engine v0.3 production ship(M · depends on CPBL pipeline · N≥30 sample debt 才能 close)
+• Agent 3 R61 · /founders/apply form MVP(S · 2-3 days · brand IP says wait for payment infra)
+• Agent 3 R61 · Resend email automation(M · 3-5 days · 4 transactional templates)
+
+[心理學 + 視覺 amplification · R67 ship 3 of 4 後剩餘]
+• Agent 6 R64 ship #5 · Stripe stacked sequential /membership restructure(M)
+• Agent 4 R62 ship #3 · Bloomberg watchlist table on /member + SVG sparklines(M)
+• Agent 4 R62 ship #5 · Asian-craft tabular density on /track-record + /coverage(M · Aesop/MUJI restraint)
+
+[code quality · R67 ship 1 of 4 後剩餘]
+• Code improvement #2 · WaitlistForm aria-live region(已 shipped R56 W-A · DEFER REMOVE from queue)
+• Code improvement #4 · Per-component ErrorBoundary wrapper(M · risk-bearing client components)
+• Code improvement #5 · AnonPickWidget useLocalStorage hook React 19 idiom(M)
+
+[blocked on external state · brand IP redline]
+• Agent 5 R63 ship #1+#2 · Membership Drive + drive-funded attribution(empty until first real Founder onboards · 不 fake testimonial)
+• Agent 4 R62 ship #2 · Pay-it-forward ledger(wait for first BLACK CARD subscriber)
+• External validation testimonial chip(Tim manual Founder onboarding pipeline · brand IP「structurally self-referential」 until first real Founder #001)
+
+今天我要做的事:[ 填入任務 · 或留空讓 Claude 接 R68+ deferred queue + 鐵律 default ship NOW ]
 ```
 
 ---
@@ -189,9 +217,9 @@ EXCEPTIONS ship · brand-pure 替代:
 ## 📝 您回到新對話窗時記得告訴 Claude
 
 1. **「請讀 docs/NEW-CONVERSATION-PROMPT.md 完整脈絡」** — 此檔已 git committed + pushed · 新 Claude 第一件事讀
-2. **「跑 git log --oneline -25 看 R50-R58 commits」** — 物理證據看 34+ waves
-3. **「跑 npm run validate:data:warn 看當前 data quality WARN」** — 6 missing pitchers 是否仍待修
-4. **「您可以從 R58 deferred queue 接續 · 或新 mandate · 我都 OK」** — 給新 Claude execution direction
+2. **「跑 git log --oneline -15 看 R64-R67 commits」** — 物理證據看 R67 W-A→W-E 5 ships
+3. **「跑 npm run lint + npx tsc --noEmit + npm run validate:data:warn 確認三綠」** — R67 closure 已 verified pass
+4. **「您可以從 R68 deferred queue 接續 · 或新 mandate · 我都 OK」** — 給新 Claude execution direction
 
 ---
 
@@ -216,8 +244,9 @@ EXCEPTIONS ship · brand-pure 替代:
 | R64 | 3 | 6th full-authority · pricing-page-as-object-of-craft lens + Taiwan legal compliance · 1 deep research agent | /terms Section 4B explicit REFUND POLICY per Taiwan 消保法 § 19(雙倍法定 7-day cooling-off)+ /privacy Section 6B PDPA COMPLIANCE 個資法 / 跨境傳輸聲明 · NEW /pricing/why MVP route(5 brand-pure patterns: Defector inverse-disclosure + Stripe Atlas 6-deliverable + FanGraphs output-not-input + Stratechery FAQ defense + Pratfall「沒做什麼」)+ 5 anti-patterns explicitly avoided · 41 routes(40→41) |
 | R65 | 4 | 7th full-authority · QA regression audit on R59-R64 28-wave drift · 1 scoped audit agent · 13 findings | 8-place self-audit sweep-miss cleanup + /pricing/why cross-link integration(NEW related-links entry · R64 W-B page no longer orphan)+ 2 NEW /faq entries close broken citation chain(refund + corporate)+ ConfidenceStars S08→S05 ref + NEW-PROMPT 40→41 + 9 user-visible Q3 sweep gaps R62 W-A missed(including lib/email.ts HTML + plain-text email body + /member OG metadata + 5 page surfaces) |
 | R66 | 3 | 8th full-authority · behavioral psychology + Next.js 16 code modernization · 1 deep psychology agent | Next.js 16 error boundary modernization(error.tsx `reset` → `unstable_retry` + NEW global-error.tsx 220 lines self-contained root-layout boundary)+ 3 NEW files psychology synthesize:lib/motion.ts(animation timing constants)· lib/consent.ts(DEFAULT_CONSENT 5-key pre-commit guardrail · Default Bias Thaler 2003)· components/CalibrationProgressBar.tsx(Goal Gradient Kivetz 2006 · wired /track-record above LEDGER) |
+| R67 | 5 | code-focused R66 deferred queue ship · 4 R66 psychology agent ships(no new agent spawn · execution mode)· 鐵律 default ship NOW per Tim 留空 mandate | NEW components/LensFocusVote.tsx(Cialdini & Trope 1976 commitment-consistency · pre-canvas 1-tap angle-level pre-commit · 6-lens widget · localStorage zone27_lens_focus_votes_v1 9th key)+ NEW lib/lens-focus-votes.ts(LENS_OPTIONS single-source · push/get/read helpers)+ /audit S06 8th key disclosure · `.enter-verdict-reveal` CSS class for Peak-End rule(Kahneman 2002)on FirstReceiptHero VERDICT BAND(800ms hold + 480ms cubic-bezier expo · uses R66 MOTION.verdictHoldMs + verdictReveal + easeOutExpo single-source)· NEW lib/last-shipped.ts + NEW components/CadencePulseChip.tsx(Zajonc 1968 Mere Exposure REFRAMED per /now「無 weekly schedule promise」 brand IP collision · LAST SHIPPED + 「節奏不承諾」 honest chip · panel /now top + compact Footer)+ NEW lib/waitlist-types.ts(types + helpers split out from「use server」 file)+ WAITLIST_ERROR_CODES const-array + WaitlistErrorCode template-literal-derived type + getWaitlistErrorMessage exhaustive switch helper · WaitlistForm.tsx inline ternary → helper invocation(Tetlock track-able-error discipline) |
 
-**Total: 74+ waves · ~200 fixes · 0 brand redline violation**
+**Total: 79+ waves · ~205 fixes · 0 brand redline violation**
 
 ---
 
