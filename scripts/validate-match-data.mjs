@@ -125,19 +125,59 @@ while ((pf = pitcherListPattern.exec(pitchersSource)) !== null) {
   pitchersFromFile.add(pf[1]);
 }
 
+// R61 W-B · enhancement · honor inline ESTIMATE markers in matches.ts。
+// 之前 validator 對 missing-from-cpbl-pitchers.ts pitcher 一律 WARN · 不
+// distinguish「真的 missing data」 vs「explicit estimate per /audit S02
+// ESTIMATION DISCLOSURE pattern」。 matches.ts 已 inline mark 例:
+//   k9: "8.5",      // estimate
+// validator extension:if pitcher name 出現在 matches.ts 緊接著的 5-10 行
+// 內含「estimate」 marker(任何 stat 行有 // estimate)· 視為 explicitly
+// marked · 不 WARN · 同 [[zone27-disclosure-philosophy]] inline marker
+// honored as canonical disclosure。
+function pitcherHasInlineEstimate(matchesSource, pitcherName) {
+  // Find each pitcher block by name and check surrounding 5-10 lines for // estimate
+  const namePattern = new RegExp(
+    `name:\\s*"${pitcherName.replace(/[.*+?^${}()|[\\]\\\\]/g, "\\\\$&")}"`,
+    "g"
+  );
+  let nm;
+  while ((nm = namePattern.exec(matchesSource)) !== null) {
+    // Look at next 600 chars(roughly a pitcher block of 5-10 lines)
+    const window = matchesSource.slice(nm.index, nm.index + 600);
+    if (/\/\/\s*estimate/i.test(window)) {
+      return true;
+    }
+  }
+  return false;
+}
+
 // Cross-check · pitchers in matches.ts missing from cpbl-pitchers.ts
-// (acceptable if explicitly marked ESTIMATE in comment · 不 strict fail)
+// 3-tier classification:
+//   (a) pitcher in cpbl-pitchers.ts · OK · no warn
+//   (b) pitcher NOT in cpbl-pitchers.ts AND has inline // estimate marker · OK
+//       (per /audit S02 ESTIMATION DISCLOSURE pattern · honest)
+//   (c) pitcher NOT in cpbl-pitchers.ts AND no inline marker · WARN(真實 gap)
 const missingPitchers = [];
+const estimatePitchers = [];
 for (const name of pitcherNamesInMatches) {
-  if (!pitchersFromFile.has(name)) {
+  if (pitchersFromFile.has(name)) continue;
+  if (pitcherHasInlineEstimate(matchesSource, name)) {
+    estimatePitchers.push(name);
+  } else {
     missingPitchers.push(name);
   }
 }
 if (missingPitchers.length > 0) {
   warn(
-    `Pitchers in matches.ts NOT in cpbl-pitchers.ts: ${missingPitchers.join(
+    `Pitchers in matches.ts NOT in cpbl-pitchers.ts AND missing inline // estimate marker: ${missingPitchers.join(
       ", "
-    )} · should add real entry OR explicit ESTIMATE comment`
+    )} · add real entry OR inline // estimate comment`
+  );
+} else if (estimatePitchers.length > 0) {
+  ok(
+    `All match pitchers either in cpbl-pitchers.ts OR explicitly marked // estimate (${estimatePitchers.length} marked: ${estimatePitchers.join(
+      ", "
+    )})`
   );
 } else {
   ok(`All match pitchers have cpbl-pitchers.ts entry`);
