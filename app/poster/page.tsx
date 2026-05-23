@@ -5,7 +5,7 @@ import Footer from "@/components/Footer";
 import { getMatchById, getCalibration } from "@/lib/matches";
 
 export const metadata: Metadata = {
-  title: "/poster · Launch-Day Visual Cannon · ZONE 27",
+  title: "/poster · Launch-Day Visual Cannon",
   description:
     "Patek 50th Nautilus packaging + Stripe Press hardcover + A24 zine box-set + Defector Year-Five annual report · ZONE 27 launch-day standalone visual artifact · 1080×1080(IG)+ 1080×1920(Story/TikTok)dual aspect · 冷金/骨白 palette + cpbl-260521-01 PROVED stat + Tim signature · screenshot-as-brand · screenshot-friendly。 不在 sitemap · 不在 Cmd-K · launch-day cannon ready。",
   // Per AGENTS.md SEO freeze · noindex this page until launch

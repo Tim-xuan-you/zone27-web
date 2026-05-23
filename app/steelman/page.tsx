@@ -7,7 +7,7 @@ import FounderSignOff from "@/components/FounderSignOff";
 import ArticleMeta from "@/components/ArticleMeta";
 
 export const metadata: Metadata = {
-  title: "Steelman · 反 ZONE 27 最強論證 · ZONE 27",
+  title: "Steelman · 反 ZONE 27 最強論證",
   description:
     "ZONE 27 自己 publish 反我們最強的 5 個論點 · Adversarial collaboration 倒置「自己當反方」 pattern · per Aronson 1966 Pratfall axiom 極限版 · skeptic 看到我們先寫了 strongest objection 就 disarmed · 玩運彩+報馬仔 永遠不會 publish steelman against themselves · 因為他們的 steelman 同時是他們的 obituary。",
 };

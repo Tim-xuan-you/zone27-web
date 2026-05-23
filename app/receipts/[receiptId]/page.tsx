@@ -115,7 +115,7 @@ export async function generateMetadata({
   const match = getMatchById(receiptId);
   if (!match || !match.finalResult) {
     return {
-      title: "Receipt not found · ZONE 27",
+      title: "Receipt not found",
       description: "此 receipt 不存在或未 finalized · 完整 ledger 在 /track-record。",
     };
   }

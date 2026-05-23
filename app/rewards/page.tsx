@@ -14,7 +14,7 @@ import {
 import { getFinalizedMatches, type Match } from "@/lib/matches";
 
 export const metadata: Metadata = {
-  title: "Rewards · 預測兌換獎品 · ZONE 27",
+  title: "Rewards · 預測兌換獎品",
   description:
     "ZONE 27 PROVED 預測 → 累計點數 → 兌換實體獎品(底片 / 伶 Kopi 咖啡 / 沖洗服務 / 護照代辦折抵)。 取貨來店(恆美攝影 × 伶 Kopi 台南東區)或郵寄(NT$ 100)。 PRE-LAUNCH · Q4 2026 上線 · 0 cash · 0 referral · 0 wallet · skill-based fantasy league prize 結構 · brand-pure 集點 mechanism。",
 };

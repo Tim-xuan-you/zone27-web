@@ -17,7 +17,7 @@
 
 【請按以下順序讀完】每份檔都有重要脈絡:
 
-1. CLAUDE.md → 44 visitor-discoverable routes · 三條鐵律 · Global components 50+ · 8 字 grammar 「方法公開 · 品味私藏」
+1. CLAUDE.md → 53 visitor-discoverable routes · 三條鐵律 · Global components 60+ · 8 字 grammar 「方法公開 · 品味私藏」
 2. AGENTS.md → Next.js 16 breaking changes 警告(別寫過時程式碼)
 3. WHILE-YOU-WERE-OUT.md → Round 1 → Round 36 完整 ToC
 4. /now journal → Round 28→R58 完整 SHIPPED 軌跡(per closure discipline R29 lesson)
@@ -115,7 +115,7 @@ R59 brand IP axiom fires:
 【2026-05-22 R50→R58 single-day sprint 收盤 state · 34+ waves · 8 agent rounds · ~75 fixes】:
 
 技術:
-- 44 visitor-discoverable routes(+/transparency R51 W-D · +/methodology/diff R50 W-A · +/pricing/why R64 W-B · +/founders/apply R68 W-A · +/founders/first-five-minutes + /founders/from-one-current-founder R69 W-A+W-B)
+- 53 visitor-discoverable routes(+/transparency R51 W-D · +/methodology/diff R50 W-A · +/pricing/why R64 W-B · +/founders/apply R68 W-A · +/founders/first-five-minutes + /founders/from-one-current-founder R69 W-A+W-B · +/receipts/[receiptId] +/founders/inheritance R75 W-F+W-G · +/engine-log +/founders/why-270 +/poster R76 W-C+W-D+W-E · +/letter +/year-zero R77 W-D+W-C · +/founders/seat-card/[seatNumber] SSG 270 +/heritage +/integrity R78 W-A+W-F+W-F-3)
 - 36 custom OG cards + apple-touch-icon(R79 W-B-H · letter + year-zero + heritage + integrity + pricing/why + engine-log NEW · all 54 routes per-page openGraph + twitter + canonical via lib/page-og.ts helper)
 - Next.js 16.2.6 + Tailwind 4 + Supabase Tokyo + Resend production
 - Build/Lint/TSC strict 三綠
@@ -327,7 +327,7 @@ EXCEPTIONS ship · brand-pure 替代:
 
 ## 🛡️ Brand IP 鐵律 redline(複製到新對話窗時必看)
 
-11 件「永遠不做」:
+12 件「永遠不做」(R80 加 #12 CPBL-only-forever engine scope binding):
 1. user-to-user social platform · 不 ship community / forum / DM
 2. 集點 daily login farming · 不 ship streak / badge-for-engagement
 3. 儲值 wallet · 不 ship in-app currency

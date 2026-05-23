@@ -8,7 +8,7 @@ import ArticleMeta from "@/components/ArticleMeta";
 import EngineStamp from "@/components/EngineStamp";
 
 export const metadata: Metadata = {
-  title: "BLACK CARD · LIVE 月卡手動 · ZONE 27",
+  title: "BLACK CARD · LIVE 月卡手動",
   description:
     "ZONE 27 BLACK CARD 訂閱會員 · ✓ LIVE 月卡手動 ECPay 個人方案 · NT$ 299/月 · email Tim 啟動 · 5% 創作者抽成 · 14 天無條件退款 · 6 unlocks · 玩運彩+報馬仔 結構性無法 ship 同 page。",
 };

@@ -10,10 +10,12 @@
 // Inspired by Linear / Vercel / Stripe command palettes,
 // but DELIBERATELY thin: no fuse.js, no telemetry, no
 // recently-used persistence. Simple substring filter on a
-// hand-curated 44-row list is sufficient and brand-pure
+// hand-curated 50+-row list is sufficient and brand-pure
 // (per [[zone27-disclosure-philosophy]]: no hidden ranking).
-// (/admin is intentionally NOT indexed here · Tim bookmarks it ·
-// keeping it out of visitor Cmd-K aligns with its noindex framing.)
+// (/admin + /poster + /auth/* are intentionally NOT indexed here ·
+// Tim bookmarks /admin · /poster is noindex launch-cannon ·
+// /auth/* is internal redirect path · all 3 align with their
+// respective non-discoverable framing.)
 // ─────────────────────────────────────────────────────
 
 export type CommandItem = {
@@ -615,6 +617,36 @@ export const COMMAND_ITEMS: CommandItem[] = [
       "empty seat",
       "founder identity",
       "pre-cast",
+    ],
+  },
+  // R78 W-F-3 · NEW /integrity · Berkshire 1996 Owner's Manual at Year 0 ·
+  // 21 binding rules(12 redlines + 9 ethics)· dated + Tim signature ·
+  // public bond not implicit。 R80 加 Cmd-K entry close orphan(Agent B R79
+  // 🟡 #5 fix · /integrity 之前 missing from Cmd-K · 同 R78 W-G + R76 W-G
+  // axiom: 新 flagship route 立即 Cmd-K)· 信任文件 group。
+  {
+    label: "Integrity · 21 永久不會變的 · Berkshire 1996 Owner's Manual at Year 0",
+    kicker: "/integrity",
+    path: "/integrity",
+    group: "信任文件",
+    keywords: [
+      "integrity",
+      "誠信",
+      "owner's manual",
+      "owners manual",
+      "berkshire",
+      "buffett",
+      "21 binding",
+      "21 永久",
+      "永久 binding",
+      "redlines",
+      "ethics",
+      "commitments",
+      "binding rules",
+      "year 0",
+      "rule 12",
+      "rule 09",
+      "cpbl only",
     ],
   },
   // R76 W-C · NEW /engine-log · Stripe Status 2012 + Cloudflare 2025 +

@@ -7,7 +7,7 @@ import FounderSignOff from "@/components/FounderSignOff";
 import ArticleMeta from "@/components/ArticleMeta";
 
 export const metadata: Metadata = {
-  title: "BLACK CARD Public Ledger · 0 paid · 第 1 位 = 您 · ZONE 27",
+  title: "BLACK CARD Public Ledger · 0 paid · 第 1 位 = 您",
   description:
     "ZONE 27 BLACK CARD 公開訂閱者帳本 · Aftermath subscriber goals + Patek allocation ledger pattern · 0 paid sub state honest publish · 第 1 位的 handle 永久顯示在這裡 · 我們不會用機器人灌水 · 也不會假裝有客戶。 玩運彩+報馬仔 結構上無法 publish 訂閱者帳本(regulatory + privacy + churn 暴露)· structurally 不可 copy。",
 };

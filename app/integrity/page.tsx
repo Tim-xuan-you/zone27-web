@@ -5,21 +5,21 @@ import Footer from "@/components/Footer";
 import FounderSignOff from "@/components/FounderSignOff";
 
 export const metadata: Metadata = {
-  title: "Integrity · 19 永久不會變的 · ZONE 27 Owner's Manual at Year 0",
+  title: "Integrity · 21 永久不會變的 · Owner's Manual at Year 0",
   description:
-    "Berkshire Hathaway 1996 Owner's Manual Buffett published and never changed · applied to ZONE 27 at Year 0 · single canonical proof page · 11 brand-IP redlines「永遠不做」 + 8 binding ethics commitments = 19 永久 binding rules · dated · Tim signature · per /audit S05 PRE-COMMIT clause · violations trigger /receipts entry · public bond not implicit · 為 years 2-5 brand consistency 物理 codify。",
+    "Berkshire Hathaway 1996 Owner's Manual Buffett published and never changed · applied to ZONE 27 at Year 0 · single canonical proof page · 12 brand-IP redlines「永遠不做」 + 9 binding ethics commitments = 21 永久 binding rules · dated · Tim signature · per /audit S05 PRE-COMMIT clause · violations trigger /receipts entry · public bond not implicit · R80 加 scope + discipline 配對 binding(rule 12 CPBL-only-forever + rule 09 mandatory-ledger-no-cherry-pick)· 為 years 2-5 brand consistency 物理 codify。",
   openGraph: {
-    title: "Integrity · ZONE 27 永久不會變的 19 條",
+    title: "Integrity · ZONE 27 永久不會變的 21 條",
     description:
-      "Berkshire 1996 Owner's Manual pattern · 11 redlines + 8 ethics = 19 永久 binding · public bond not implicit",
+      "Berkshire 1996 Owner's Manual pattern · 12 redlines + 9 ethics = 21 永久 binding · scope + discipline 配對 · public bond not implicit",
     type: "article",
     url: "/integrity",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Integrity · ZONE 27 永久不會變的 19 條",
+    title: "Integrity · ZONE 27 永久不會變的 21 條",
     description:
-      "Berkshire 1996 Owner's Manual pattern · 11 redlines + 8 ethics = 19 永久 binding · public bond not implicit",
+      "Berkshire 1996 Owner's Manual pattern · 12 redlines + 9 ethics = 21 永久 binding · scope + discipline 配對 · public bond not implicit",
   },
   alternates: {
     canonical: "/integrity",
@@ -32,13 +32,15 @@ export const metadata: Metadata = {
 // listing「what Berkshire will and will NOT do」 · never changed it ·
 // 30 yrs unbroken · public bond not implicit)applied to ZONE 27 at Year 0
 // pre-launch · single canonical proof page consolidating:
-//   - 11 brand-IP redlines「永遠不做」(from /transparency Section 02 +
-//     /audit Section 02 + canonical CLAUDE.md memory)
-//   - 8 binding ethics commitments(from /ethics 8 commitments)
-//   = 19 永久 binding rules · dated · Tim signature · frozen
+//   - 12 brand-IP redlines「永遠不做」(from /transparency Section 02 +
+//     /audit Section 02 + canonical CLAUDE.md memory · R80 加 #12 CPBL-only-
+//     forever scope binding)
+//   - 9 binding ethics commitments(from /ethics 9 commitments · R80 加 #09
+//     mandatory-ledger-discipline binding · 配對 #12 close brand IP loop)
+//   = 21 永久 binding rules · dated · Tim signature · frozen
 //
 // The cognitive frame this closes(per Agent A R78 fourth-pass spec):
-//   - ZONE 27 currently has 11 redlines + 8 ethics scattered across
+//   - ZONE 27 currently has 12 redlines + 9 ethics scattered across
 //     /audit /methodology /receipts /roadmap /transparency /ethics
 //   - Without ONE canonical proof page · every redline is implicit
 //   - With this page · every redline is a PUBLIC BOND
@@ -53,7 +55,7 @@ export const metadata: Metadata = {
 // Brand IP fit:
 //   - per [[zone27-disclosure-philosophy]] · canonical proof page IS
 //     disclosure axis strongest application · scattered → consolidated
-//   - per [[feedback-zone27-pratfall-brand-ip]] · publish 19 things we
+//   - per [[feedback-zone27-pratfall-brand-ip]] · publish 21 things we
 //     永遠不會 ship IS Costly Signaling 100× per Spence 1973
 //   - per /audit S05 PRE-COMMIT clause · 修改任一 rule 需 30 天前
 //     /changelog 公告 · violations 觸發 /receipts entry per /ethics
@@ -143,10 +145,15 @@ const REDLINES: ReadonlyArray<{ no: string; rule: string; basis: string }> = [
     rule: "不 ship fake testimonials / 偽造 social proof",
     basis: "等真實 Founders Q3+ onboard 後才 publish letter · 0 ghostwritten quote · 0 mock social proof · 0「join 1000+」 inflation · per FoundingMemberLedger R72 W-C + /founders/from-one-current-founder R69 W-B empty scaffold pattern",
   },
+  {
+    no: "12",
+    rule: "不 ship engine prediction outside CPBL · MLB / NPB / KBO / 任何外國職棒 / 任何台灣運彩 bettable events 全部 refuse",
+    basis: "solo founder CPBL niche dominance = costly signal 100× per Spence 1973 · MLB me-too = noise · 對標玩運彩 + 報馬仔 displacement mission = CPBL sharpness NOT reach · 同 Patek 不做 Apple Watch / Defector 不做 ESPN / Cegłowski Pinboard 不做 Facebook pattern · /matches/mlb 保留為純 viewer 工具(MLB Stats API 即時資料 + 排程 only · 0 engine prediction surface)· /lab + /lab/custom 是 user-driven Monte Carlo simulator · 不算 engine pre-commit · /track-record 永久 CPBL only · R80 加入 per Tim's R80 explicit signature(覆蓋過去 R-era 假設 implicit binding · 現在 explicit binding)",
+  },
 ];
 
 // 8 binding ethics commitments · verbatim from /audit Section 04
-// 「WHAT WE COMMIT TO」 · per /ethics 8 commitments · same single-source。
+// 「WHAT WE COMMIT TO」 · per /ethics 9 commitments · same single-source。
 const ETHICS_COMMITMENTS: ReadonlyArray<{
   no: string;
   rule: string;
@@ -192,6 +199,11 @@ const ETHICS_COMMITMENTS: ReadonlyArray<{
     rule: "0 fine print · 任何 rule modification 30 天前 /changelog 公告",
     basis: "/audit S05 PRE-COMMIT clause · 修改任一 rule 需 30 天前 /changelog 公告 · 此 page integrity 同 binding · 違反 = brand 信用 collapse",
   },
+  {
+    no: "09",
+    rule: "0 cherry-pick · 每筆 CPBL engine prediction → mandatory /track-record entry + /receipts/[receiptId] permalink · 0 retroactive delete",
+    basis: "顯示 prediction 後 visitor endowment(Kahneman/Knetsch/Thaler 1990)在「我會看到結果」 上 · selective publishing = trust 物理崩 · PROVED + DIVERGED + PUSH 等大 visual weight 不藏 miss · 同 Berkshire 70-year annual letter「無論好年壞年 都 mandatory publish」 + Geneva Seal「每只 watch 都印 serial」 pattern · per /audit S05 PRE-COMMIT clause 升級到 /integrity binding rule layer · 即使 engine 100% 錯也 binding publish · R80 加入 per Tim's R80 explicit signature · 配對 redline #12(scope) = 完整 scope + discipline closure",
+  },
 ];
 
 export default function IntegrityPage() {
@@ -209,7 +221,7 @@ export default function IntegrityPage() {
             className="text-4xl sm:text-5xl text-bone font-light tracking-tight leading-tight mb-4"
             style={{ fontFamily: "Georgia, serif" }}
           >
-            19 件 ZONE 27 永久{" "}
+            21 件 ZONE 27 永久{" "}
             <span className="text-gold">不會變</span>{" "}
             的事
           </h1>
@@ -228,8 +240,10 @@ export default function IntegrityPage() {
             Berkshire Hathaway 1996 「Owner&rsquo;s Manual」 · Warren
             Buffett 寫了一頁列「Berkshire will and will NOT do」 · 30+ 年
             從未改過 · 公開 binding 不是 implicit assumption。 ZONE 27 採同
-            axis at Year 0:11 brand-IP「永遠不做」 redlines + 8 binding
-            ethics commitments = 19 件永久不會變的事。
+            axis at Year 0:12 brand-IP「永遠不做」 redlines + 9 binding
+            ethics commitments = 21 件永久不會變的事(R80 加 rule 12
+            CPBL-only-forever scope + rule 09 mandatory-ledger-no-cherry-pick
+            discipline · 配對 close brand IP loop)。
           </p>
           <p
             className="text-mute/85 text-sm leading-relaxed"
@@ -245,19 +259,21 @@ export default function IntegrityPage() {
 
         <div className="mx-auto w-32 gold-line mb-12" />
 
-        {/* ── §01 · 11 永遠不做 redlines ──────────── */}
+        {/* ── §01 · 12 永遠不做 redlines ──────────── */}
         <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-12">
           <p
             lang="en"
             className="font-mono text-gold/85 text-[10px] tracking-[0.4em] mb-4"
           >
-            / §01 · 11 BRAND-IP REDLINES · 永遠不做
+            / §01 · 12 BRAND-IP REDLINES · 永遠不做
           </p>
           <p className="text-mute text-sm leading-relaxed mb-6">
-            這 11 件「永遠不做」 是 ZONE 27 displacement-mission against 玩運彩
+            這 12 件「永遠不做」 是 ZONE 27 displacement-mission against 玩運彩
             + 報馬仔 + LINE 老師生態 的 binding signal。 違反任一 = brand
             自殺 · per /audit S05 PRE-COMMIT clause · 修改需 30 天前
-            /changelog 公告。
+            /changelog 公告。R80 加 rule 12(engine 永遠 only CPBL · 不
+            cross 任何外國職棒 · 不 cross 任何運彩 bettable events)是 scope
+            binding 物理 codify。
           </p>
           <ol className="space-y-4 mt-4">
             {REDLINES.map((item) => (
@@ -266,19 +282,22 @@ export default function IntegrityPage() {
           </ol>
         </section>
 
-        {/* ── §02 · 8 binding ethics ────────────────── */}
+        {/* ── §02 · 9 binding ethics ────────────────── */}
         <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-12 border-t border-line/40 pt-12">
           <p
             lang="en"
             className="font-mono text-gold/85 text-[10px] tracking-[0.4em] mb-4"
           >
-            / §02 · 8 BINDING ETHICS COMMITMENTS · 永遠會做
+            / §02 · 9 BINDING ETHICS COMMITMENTS · 永遠會做
           </p>
           <p className="text-mute text-sm leading-relaxed mb-6">
-            這 8 件 ethics commitments 是 ZONE 27 brand IP「方法公開」 8 字
-            grammar 物理 codify · 同步 per /audit Section 04 + /ethics 8
+            這 9 件 ethics commitments 是 ZONE 27 brand IP「方法公開」 8 字
+            grammar 物理 codify · 同步 per /audit Section 04 + /ethics 9
             commitments + canonical single-source。 違反 = Tim 親手 在
-            /ethics 紅字標永久 audit trail · 不可 retroactively rebrand。
+            /ethics 紅字標永久 audit trail · 不可 retroactively rebrand。R80
+            加 commitment 09(每筆 engine prediction → mandatory ledger +
+            permalink · 0 cherry-pick · 0 retroactive delete)是 disclosure
+            discipline binding 物理 codify · 配對 redline #12 close loop。
           </p>
           <ol className="space-y-4 mt-4">
             {ETHICS_COMMITMENTS.map((item) => (
@@ -335,7 +354,7 @@ export default function IntegrityPage() {
             / §04 · PRE-COMMIT MECHANISM · 修改 protocol
           </p>
           <p className="text-mute text-sm leading-relaxed mb-3">
-            如果 ZONE 27 future 需要修改任一條 19 binding rule · 唯一允許
+            如果 ZONE 27 future 需要修改任一條 21 binding rule · 唯一允許
             mechanism 是:
           </p>
           <ol className="space-y-2.5 text-mute text-sm leading-relaxed ml-4">
@@ -359,6 +378,13 @@ export default function IntegrityPage() {
               modify · skip 30-day notice · backdate)= brand 信用 collapse
               永久 audit trail · per /ethics commitment #8。
             </li>
+            <li>
+              <strong className="text-bone">5.</strong> 加 NEW binding rule
+              (e.g. R80 加 rule 12 + 09)同 protocol · Tim 親手 signature
+              一句即決 · /changelog entry「added, effective YYYY-MM-DD」
+              · 「擴」 protocol 跟「改」 protocol 同 axis · 不藏 hidden
+              expansion。
+            </li>
           </ol>
           <p className="text-mute/85 text-sm leading-relaxed mt-5">
             此 protocol IS the bond。 Buffett never used Berkshire 1996
@@ -370,13 +396,13 @@ export default function IntegrityPage() {
 
         <FounderSignOff signedAt={SIGNED_AT}>
           <p>
-            這 19 件不是 marketing copy · 不是 sales pitch · 不是 commitment
+            這 21 件不是 marketing copy · 不是 sales pitch · 不是 commitment
             theater · 是 Tim 親手在 {SIGNED_AT} 公開簽名的 binding bond。
             Berkshire 1996 Owner&rsquo;s Manual 30+ 年從未改過 · ZONE 27 採
             同 axis from Year 0。
           </p>
           <p>
-            如果未來您看到 ZONE 27 違反任一條 19 binding rule · 您 right to
+            如果未來您看到 ZONE 27 違反任一條 21 binding rule · 您 right to
             challenge · email tatayngiti@gmail.com 直接質問 Tim · 或開
             GitHub Issue 公開 audit trail · 或在 /faq 留言記錄。 brand IP
             「方法公開 · 品味私藏」 8 字 grammar 物理 codify 到 commitment
@@ -402,13 +428,13 @@ export default function IntegrityPage() {
               href="/ethics"
               className="font-mono text-mute hover:text-gold text-[10px] tracking-[0.4em] transition-colors"
             >
-              /ethics · 8 commitments source →
+              /ethics · 9 commitments source →
             </Link>
             <Link
               href="/audit#section-02"
               className="font-mono text-mute hover:text-gold text-[10px] tracking-[0.4em] transition-colors"
             >
-              /audit § 02 · 11 NEVER source →
+              /audit § 02 · 12 NEVER source →
             </Link>
             <Link
               href="/changelog"

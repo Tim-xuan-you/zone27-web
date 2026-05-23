@@ -11,7 +11,7 @@ import ArticleMeta from "@/components/ArticleMeta";
 import { matches, getFinalizedMatches } from "@/lib/matches";
 
 export const metadata: Metadata = {
-  title: "Transparency — 完整 audit aggregator · ZONE 27",
+  title: "Transparency — 完整 audit aggregator",
   description:
     "ZONE 27 所有 transparency artifacts 集中索引:LIMITS · NEVER list · DIVERGED 賽事 · 8 binding commitments · DATA SOURCES · audit trail。 Anthropic /transparency 模式 · 公開散布在 /audit /methodology /coverage /track-record /ethics /steelman 的 transparency 資產統一 surface。",
 };
@@ -238,12 +238,15 @@ export default function TransparencyPage() {
             <Never>不做 fake testimonials / 偽造 social proof</Never>
             <Never>不做 modal paywall scroll-lock</Never>
             <Never>不做多步驟 onboarding wizard</Never>
+            <Never>不預測 MLB / NPB / KBO / 任何外國職棒 / 任何台灣運彩 bettable events(R80 加 · ENGINE PERMANENT CPBL-ONLY SCOPE)</Never>
           </NeverGrid>
           <p className="text-mute/85 mt-6">
             完整 list 含 explainer 與 reason · 見{" "}
             <Link href="/coverage" className="text-gold underline-offset-4 hover:underline">/coverage Section 05 NEVER</Link>
             {" "}+{" "}
-            <Link href="/ethics" className="text-gold underline-offset-4 hover:underline">/ethics 8 binding commitments</Link>
+            <Link href="/ethics" className="text-gold underline-offset-4 hover:underline">/ethics 9 binding commitments</Link>
+            {" "}+{" "}
+            <Link href="/integrity" className="text-gold underline-offset-4 hover:underline">/integrity 21 binding rules</Link>
             。 任何 1 條修改需 30 天前在{" "}
             <Link href="/changelog" className="text-gold underline-offset-4 hover:underline">/changelog</Link>
             {" "}公告 · 同 PRE-COMMIT pattern。
@@ -290,9 +293,9 @@ export default function TransparencyPage() {
         </Section>
 
         {/* ── 04 · WHAT WE COMMIT TO ───────────────── */}
-        <Section no="04" label="WHAT WE COMMIT TO" zh="8 binding ethics commitments">
+        <Section no="04" label="WHAT WE COMMIT TO" zh="9 binding ethics commitments">
           <p>
-            ZONE 27 publish 8 條 binding ethics commitment · 違反任一 = Tim
+            ZONE 27 publish 9 條 binding ethics commitment · 違反任一 = Tim
             親手 在{" "}
             <Link href="/ethics" className="text-gold underline-offset-4 hover:underline">
               /ethics
@@ -309,6 +312,7 @@ export default function TransparencyPage() {
             <Commit n="06" title="0 silently model rotation · Lens Lifetime Pledge · 每 ship 過的 engine 永久 viewable" />
             <Commit n="07" title="0 「明牌」 framing · prediction = probability 不是 picks" />
             <Commit n="08" title="0 fine print · 任何 rule modification 30 天前 /changelog 公告" />
+            <Commit n="09" title="0 cherry-pick · 每筆 CPBL engine prediction → mandatory /track-record + /receipts permalink · 0 retroactive delete(R80 加)" />
           </CommitGrid>
           <p className="text-mute/85 mt-6">
             完整 8 commitments + per-item violation receipt mechanism · 見{" "}

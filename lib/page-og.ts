@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 // ── ZONE 27 · Page Metadata Helper ─────────────────────
 // R79 W-A · single-source for per-page OG + Twitter card metadata ·
-// 防 drift across 54 visitor-discoverable routes when sharing
+// 防 drift across 53 visitor-discoverable routes when sharing
 // LINE / PTT / IG / Threads / Discord / Slack。
 //
 // Why this exists:

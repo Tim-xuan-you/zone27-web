@@ -113,9 +113,9 @@ export const RECIPROCITY_LEDGER: ReadonlyArray<ReciprocityArtifact> = [
   },
   // ── 9-12 · CONSTRAINT · 不會做 + 失敗 + 跨境 + 大樓崩 ───
   {
-    what: "11-item NEVER list · 永遠不會做",
+    what: "12-item NEVER list · 永遠不會做",
     surface: "/transparency#section-02",
-    why: "ZONE 27 displacement target = 玩運彩 + 報馬仔 + LINE 老師生態 · 11 件物理 ban · publish = 物理 codify 退路 · Costly Signaling 100× per Spence 1973",
+    why: "ZONE 27 displacement target = 玩運彩 + 報馬仔 + LINE 老師生態 · 12 件物理 ban(R80 加 #12 CPBL-only-forever engine scope binding)· publish = 物理 codify 退路 · Costly Signaling 100× per Spence 1973",
     source: "Stratechery「say what you don't do」",
   },
   {

@@ -14,7 +14,7 @@ import {
 } from "@/lib/founders-stats";
 
 export const metadata: Metadata = {
-  title: "Annual Report · 2026 Year 0 · ZONE 27",
+  title: "Annual Report · 2026 Year 0",
   description:
     "ZONE 27 第 0 年公開年度報告。 0 訂閱者 · NT$ 0 收入 · 7 forged founders · N=1 engine receipt · 完整 costs · 完整 what-failed list · pre-launch honest state · Defector + Hell Gate + Aftermath radical-transparency pattern · Pratfall + Costly Signaling axiom 同時 fire。",
 };

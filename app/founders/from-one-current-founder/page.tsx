@@ -183,7 +183,7 @@ export default function FromOneCurrentFounderPage() {
               {/* R70 W-F · Agent B audit F3 fix · 移除 phantom MEMBER_VOICE
                   clause reference · 之前 R69 W-B 寫 ref but /ethics 沒
                   此 clause · self-falsifiable in 30 seconds via Ctrl-F。
-                  改 cite 已存在的 /ethics 8 commitments + /audit S05
+                  改 cite 已存在的 /ethics 9 commitments + /audit S05
                   PRE-COMMIT pattern + bus-factor R70 W-F · binding remains
                   intact 不靠 phantom 名稱。 */}
               ⚓ Tim 不 edit letter content · 不 polish prose · 不 remove

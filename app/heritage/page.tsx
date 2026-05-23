@@ -4,7 +4,7 @@ import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "Heritage · Pre-Cast Inheritance Artifact · ZONE 27",
+  title: "Heritage · Pre-Cast Inheritance Artifact",
   description:
     "Patek Philippe 1996「Generations」 campaign + Belk 1988 Extended Self + Weinstein & Deutschberger 1963 altercasting · 4-line negative-then-positive altercasting applied to ALL visitors not just Founders 27 buyers · pre-cast 「您只是替下一個 CPBL 球迷世代守著它」 identity vehicle · Aronson Pratfall self-selection filter · per /audit S05 PRE-COMMIT clause。",
   openGraph: {

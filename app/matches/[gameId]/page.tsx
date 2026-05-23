@@ -59,9 +59,9 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { gameId } = await params;
   const match = getMatchById(gameId);
-  if (!match) return { title: "Match not found · ZONE 27" };
+  if (!match) return { title: "Match not found" };
   return {
-    title: `${match.home.name} vs ${match.away.name} · ${match.league} · ZONE 27`,
+    title: `${match.home.name} vs ${match.away.name} · ${match.league}`,
     description: `蒙地卡羅 10,000 次模擬 — ${match.home.name} ${match.home.winRate}% / ${match.away.name} ${match.away.winRate}%。${match.home.pitcher.name} vs ${match.away.pitcher.name}。`,
   };
 }

@@ -15,7 +15,7 @@ import {
 } from "@/lib/founders-stats";
 
 export const metadata: Metadata = {
-  title: "Founders 27 · Open Allocation Ledger · ZONE 27",
+  title: "Founders 27 · Open Allocation Ledger",
   description:
     "Founders 27 分配公開帳本。 每週手寫更新本週新分配 / 累計 / 通過率 / 拒絕原因 sample(去 PII)。 Pratfall + Costly Signaling + Disclosure Philosophy + 倒置 SaaS · 4 brand IP axiom 同時 fire 的唯一 page。 沒有 luxury 品牌(Patek · Hermès · Tesla)做這件事 · ZONE 27 因 disclosure-first 結構性可以做。",
 };

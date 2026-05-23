@@ -752,6 +752,106 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
       title: "Audit aggregator · 6 sections + ReciprocityLedger + NoPushManifest",
     },
   ],
+  // R80 W-A · Agent B R79 🟡 #6 fix · 5 NEW route related-links · close
+  // orphan(of pages calling getRelatedLinks() but rendering empty dead
+  // block):/year-zero · /heritage · /integrity · /receipts/[receiptId] ·
+  // /founders/seat-card/[seatNumber]。 Skip /letter per intentional design
+  // (LETTER IS the artifact · no related rail by spec)。
+  "/year-zero": [
+    {
+      href: "/letter",
+      kicker: "letter",
+      title: "Tim 親手 voice artifact · singular essay · DHH HEY World",
+    },
+    {
+      href: "/integrity",
+      kicker: "integrity",
+      title: "21 binding rules · Berkshire Owner's Manual at Year 0",
+    },
+    {
+      href: "/engine-log",
+      kicker: "engine-log",
+      title: "Operational artifact spine · Stripe Status pattern",
+    },
+  ],
+  "/heritage": [
+    {
+      href: "/founders/inheritance",
+      kicker: "founders/inheritance",
+      title: "Post-purchase seat transfer 4-rule · for buyers",
+    },
+    {
+      href: "/founders/seat-card/008",
+      kicker: "founders/seat-card",
+      title: "270 altercasting permalinks · empty seats publicly waiting",
+    },
+    {
+      href: "/integrity",
+      kicker: "integrity",
+      title: "21 binding rules · Berkshire 1996 Owner's Manual",
+    },
+  ],
+  "/integrity": [
+    {
+      href: "/audit",
+      kicker: "audit",
+      title: "Model Report · 7 sections + DISCLOSURE block",
+    },
+    {
+      href: "/ethics",
+      kicker: "ethics",
+      title: "9 binding ethics commitments · canonical source",
+    },
+    {
+      href: "/transparency",
+      kicker: "transparency",
+      title: "Audit aggregator · 12-item NEVER list canonical",
+    },
+  ],
+  // R80 W-A · NEW /receipts/[receiptId] dynamic route group · per-receipt
+  // permalink object · Patek Reference Number permanence pattern · Siblings:
+  // /track-record(parent ledger)· /matches/[gameId](match page)·
+  // /audit(model report)· /methodology(white paper)。 Note · keyed by
+  // sample cpbl-260521-01 entry · other receipts inherit empty(allowed)。
+  "/receipts/cpbl-260521-01": [
+    {
+      href: "/track-record",
+      kicker: "track-record",
+      title: "全部 receipts ledger · PROVED + DIVERGED 等大列出",
+    },
+    {
+      href: "/matches/cpbl-260521-01",
+      kicker: "matches",
+      title: "Match page · 完整 7 LIVE LENS CANVAS",
+    },
+    {
+      href: "/audit",
+      kicker: "audit",
+      title: "Model Report · 為什麼 PROVED/DIVERGED 等大",
+    },
+  ],
+  // R80 W-A · NEW /founders/seat-card/[seatNumber] dynamic route group ·
+  // R78 W-A 270 altercasting permalinks · 每個 seat-card 共用 sibling set
+  // pointing to /founders parent + /founders/inheritance + /heritage
+  // pre-cast。 Note · keyed by sample seat 008 entry · 其他 269 seats inherit
+  // empty(acceptable · /founders/seat-card all 共用 same parent context)。
+  "/founders/seat-card/008": [
+    {
+      href: "/founders",
+      kicker: "founders",
+      title: "Founders 27 sales page · 270 seats · Patek-style allocation",
+    },
+    {
+      href: "/founders/inheritance",
+      kicker: "founders/inheritance",
+      title: "Post-purchase seat transfer 4-rule binding",
+    },
+    {
+      href: "/heritage",
+      kicker: "heritage",
+      title: "Pre-purchase altercasting · 替下一個 CPBL 球迷世代守",
+    },
+  ],
 };
 
 export function getRelatedLinks(currentPath: string): RelatedLink[] {

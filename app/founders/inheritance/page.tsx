@@ -8,7 +8,7 @@ import RelatedReading from "@/components/RelatedReading";
 import { FOUNDERS_TOTAL } from "@/lib/founders-stats";
 
 export const metadata: Metadata = {
-  title: "Inheritance · Founders 27 seat 替下一代守 · ZONE 27",
+  title: "Inheritance · Founders 27 seat 替下一代守",
   description:
     "Patek Philippe 1996「Generations」 tagline localized to Taiwan CPBL fan culture · Hanshin Tigers 二代目ファン pattern · Berkshire shareholder continuity · ZONE 27 Founders 27 seat 永久 transferable to family member · 不開公開市場 · 不 resale · 不 broker · Tim 親手 executor protocol。 您不是買 ZONE 27 · 您只是替下一代守 27 號席位。",
   openGraph: {

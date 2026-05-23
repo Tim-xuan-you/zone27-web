@@ -101,6 +101,18 @@ export default function TrackRecordPage() {
               0 server · 0 PII · per /audit S06 disclosure。 Only renders
               for non-first visits 同時 delta > 0。 */}
           <LedgerDeltaChip currentN={finalized.length} />
+          {/* R80 W-A · /integrity rule #12 + #09 brand chip · CPBL-ONLY-
+              FOREVER scope binding(rule 12)+ mandatory-ledger-no-cherry-
+              pick discipline binding(rule 9)· 配對 close brand IP loop ·
+              visible at top fold · 同 Berkshire Owner's Manual annual letter
+              opening line pattern。 */}
+          <Link
+            href="/integrity"
+            className="font-mono text-[9px] tracking-[0.3em] px-1.5 py-0.5 border border-loss/40 text-loss/85 hover:border-loss/70 hover:text-loss transition-colors"
+            title="/integrity rule 12 + 9 · CPBL ONLY · 0 cherry-pick · 0 retroactive delete · binding"
+          >
+            CPBL ONLY · 永久 · 0 CHERRY-PICK
+          </Link>
         </div>
         <h1 className="text-4xl sm:text-5xl text-bone font-light tracking-tight max-w-3xl">
           每一場引擎的公開預測 · 賽後實際結果在這

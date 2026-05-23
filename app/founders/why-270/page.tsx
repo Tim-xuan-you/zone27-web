@@ -9,7 +9,7 @@ import IdentityCovenant from "@/components/IdentityCovenant";
 import { FOUNDERS_TOTAL } from "@/lib/founders-stats";
 
 export const metadata: Metadata = {
-  title: "Why 270 · Founders 27 Decision Log · ZONE 27",
+  title: "Why 270 · Founders 27 Decision Log",
   description:
     "Pinboard ratchet pricing + Pieter Levels public revenue + Pratfall axiom · ZONE 27 publish the historical reasoning behind 270 seats · NT$ 2,700 · 一次性 · 銀行轉帳 · 不開公開市場 · 6 questions answered with the math + the doubts · static decision log NOT live counter · brand IP triple-fire(Pratfall + Costly Signaling + Disclosure)。",
   openGraph: {

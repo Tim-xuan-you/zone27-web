@@ -10,7 +10,7 @@ import {
 } from "@/lib/letter-content";
 
 export const metadata: Metadata = {
-  title: "The Letter · Tim 親手 voice artifact · ZONE 27",
+  title: "The Letter · Tim 親手 voice artifact",
   description:
     "DHH HEY World + Berkshire annual letter + Bret Victor replace-in-place + Maciej Cegłowski Pinboard blog pattern · ZONE 27 第一個 singular voice artifact · Tim 親手 letter · edited-in-place not feed · APPEND-ONLY edit history · NO comment thread · NO share button · NO email subscribe · NO related-reading rail · 不 push · reader pulls。",
   openGraph: {

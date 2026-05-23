@@ -7,9 +7,9 @@ import FounderSignOff from "@/components/FounderSignOff";
 import ArticleMeta from "@/components/ArticleMeta";
 
 export const metadata: Metadata = {
-  title: "Ethics Policy · 8 binding commitments · ZONE 27",
+  title: "Ethics Policy · 9 binding commitments",
   description:
-    "Stratechery「About」 transplant · 8 ZONE 27 binding NOT-DO commitments signed Tim · displacement narrative against 玩運彩+報馬仔 tipsters direct · brand pledge protecting visitors from brand misbehavior · Pratfall + Costly Signaling + Disclosure Philosophy 三 axiom 同時 fire · 修改任何 commitment 需 30 天 /changelog 公告。",
+    "Stratechery「About」 transplant · 9 ZONE 27 binding NOT-DO commitments signed Tim · displacement narrative against 玩運彩+報馬仔 tipsters direct · brand pledge protecting visitors from brand misbehavior · Pratfall + Costly Signaling + Disclosure Philosophy 三 axiom 同時 fire · 修改任何 commitment 需 30 天 /changelog 公告。R80 加 commitment 09(mandatory prediction ledger · 0 cherry-pick · 0 retroactive delete · 配對 /integrity rule 12 CPBL-only-forever scope close brand IP loop)。",
 };
 
 // ── ZONE 27 · /ethics ────────────────────────────────────
@@ -18,7 +18,8 @@ export const metadata: Metadata = {
 // Stratechery About page transplant pattern · Ben Thompson 6 binding ethics
 // commitments(no paid opinions / no individual stocks in covered cos / no
 // consulting / self-pay travel / public corrections commitment)expand to
-// ZONE 27 8 commitments displacement-mission-specific。
+// ZONE 27 9 commitments displacement-mission-specific(R80 加 #09 mandatory
+// ledger discipline · 配對 /integrity rule 12 CPBL-only-forever scope)。
 //
 // Distinct from /membership/black-card Subscriber Compact:
 //   - Subscriber Compact = 3 line · 訂閱 path 上的 ethics
@@ -85,6 +86,12 @@ const COMMITMENTS: { num: string; title: string; body: string; tier: "displaceme
     num: "08",
     title: "我永遠不接 sportsbook conversion fee / referral commission",
     body: "若 ZONE 27 visitor 從 ZONE 27 跳出去 register sportsbook account · ZONE 27 不收任何 referral commission · 不在 URL 加 tracking parameter · 不享 conversion fee。 visitor 的選擇是 visitor 自己的。",
+    tier: "displacement",
+  },
+  {
+    num: "09",
+    title: "我每筆 engine 預測都 mandatory publish · 0 cherry-pick · 0 retroactive delete",
+    body: "每筆 CPBL engine pre-committed prediction → mandatory /track-record entry + /receipts/[receiptId] permalink + PROVED / DIVERGED / PUSH label。 不選擇性 publish · 不 retroactive delete · 不 cherry-pick high-confidence-only · 即使 engine 100% 錯也 binding publish。 顯示 prediction 後 visitor endowment(Kahneman/Knetsch/Thaler 1990)在「我會看到結果」 上 · selective publishing = trust 物理崩。 同 Berkshire 70-year annual letter「無論好年壞年 都 mandatory publish」 + Geneva Seal「每只 watch 都印 serial」 pattern · per /audit S05 PRE-COMMIT clause 升級到 /integrity binding rule layer(commitment #09 · R80 加)· 配對 /integrity redline #12(CPBL-only scope)close brand IP loop。",
     tier: "displacement",
   },
 ];
@@ -268,7 +275,7 @@ export default function EthicsPage() {
             <p className="text-mute leading-relaxed mb-4">
               ZONE 27 引擎 MIT-licensed open source(同 brand IP「方法公開」
               axiom)。 任何 sportsbook 明天可以 fork lib/simulator.ts +
-              lib/simulator-v03.ts · 包成 odds 服務賣。 我們的 8 commitments
+              lib/simulator-v03.ts · 包成 odds 服務賣。 我們的 9 commitments
               只 bind 我們的 actions · <strong className="text-bone">不能 bind
               code 的流向</strong>。
             </p>
@@ -303,7 +310,7 @@ export default function EthicsPage() {
             <p className="text-mute leading-relaxed mb-4">
               同 /audit S05 PRE-COMMIT pattern · /annual yearly publish
               pattern · /membership/black-card/ledger 5 rules pattern。
-              此 /ethics page 上的 8 commitments 任一條 wording 改動 / 條件
+              此 /ethics page 上的 9 commitments 任一條 wording 改動 / 條件
               加 / 條件砍 · 全部需要:
             </p>
             <ol className="space-y-2 list-decimal pl-6 text-mute leading-relaxed mb-4">
@@ -460,7 +467,7 @@ export default function EthicsPage() {
             8 條 binding · 0 wiggle room · 0 fine print。
           </h3>
           {/* Round 51 W-C · Agent 3 HIGH #6 fix · /ethics 缺 conversion
-              CTA at page end · 讀完 8 commitments 訪客是 strongest possible
+              CTA at page end · 讀完 9 commitments 訪客是 strongest possible
               warm-up state · trust loop must close to Founders 27 / BLACK
               CARD entry · 不 dump 到 navigation 即跑路。 加 explicit Founders
               27 + BLACK CARD chip · 同 trust artifacts 並列 surface · 訪客
