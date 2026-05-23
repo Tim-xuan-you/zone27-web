@@ -1,8 +1,8 @@
 # 📋 New Conversation Prompt · ZONE 27 Session Handoff
 
 **用途:** 開新對話窗時複製此 prompt 整段 paste · 新 Claude 一秒接上 context。
-**最後 update:** 2026-05-23 · **Round 59 W-E 攻頂** · R59 fresh-day sprint · 3-agent full-authority pattern fire(web research / codebase audit / conversion funnel)· 5 waves · ~25 ships · R37→R59
-**Token urgency:** Tim explicit「現在這個對話窗太燒TOKEN了」 · 此 prompt 是 R59 contextual snapshot for fresh Claude bootstrap
+**最後 update:** 2026-05-23 · **Round 60 W-B 攻頂** · R59 5 waves + R60 Pokemon TCG lens 2 waves · 3-agent full-authority pattern × 2 invocations · R37→R60
+**Token urgency:** Tim explicit「現在這個對話窗太燒TOKEN了」 · 此 prompt 是 R60 contextual snapshot for fresh Claude bootstrap
 
 ---
 
@@ -39,13 +39,25 @@
   · feedback_no_waiting_rule(default ship NOW · 不問 keyword · 不 surface options · auto-push)
   · feedback_full_authority_3_agent_pattern(Tim 全權 mandate → 3 parallel agents synthesize → multi-wave ship · R51 confirmed pattern)
 
-【2026-05-23 R59 fresh-day sprint 攻頂 state · 5 waves · ~25 ships · 3-agent full-authority pattern fire】:
+【2026-05-23 R59-R60 攻頂 state · 7+ waves · 3-agent full-authority pattern fire × 2 invocations】:
+
+R60 W-A · Pokemon TCG lens · SET release narrative on /methodology Section 04(v0.2 BASE SET · v0.3 EXPANSION 1 Park Factor · v0.4 EXPANSION 2 Bayesian Mix)+ SHADOWLESS RUN binary tier framing on /founders + NEW section #shadowless-run on /founders/ledger(整批 270 = 1st Edition · BLACK CARD 永遠無法 retroactively 升 · 同 Pokemon Charizard 1st Edition $550K mechanic)+ 3 BINDING PRE-COMMITMENTS · commit cd14381
+R60 W-B · TCG card anatomy on FirstReceiptHero(/track-record)· top-line「ZONE 27 ENGINE · v0.2 · RECEIPT 001 · CARD 001/SEASON 2026」 + bottom-line「CARD 001/∞ · REPRINT POLICY 0」 typographic frame · screenshot-shareable artifact + /now journal sync · NEW-CONVERSATION-PROMPT update · (此 commit)
 
 R59 W-A · 1 CRITICAL brand-redline(/founders break-even 5.4→9)+ 5 Agent C XS conversion amplifications + validate script schema fix · commit 3940729
 R59 W-B · Agent C Ship #3 /membership/black-card 4-cell anchor strip + 5 Agent B critical 🔴 hardening(login error leak · Cmd-K 李東洺 typo · /auth/signout CSRF · 8 stale magic-link copy refs)· commit 0d2ada0
 R59 W-C · Agent B 🟡 #9 stale route-count drift across 5 files · 24/25/32/34/36/39 → canonical 40 · commit 5b987fc
 R59 W-D · Agent A Ship #3 Hindenburg footnote retrofit on /methodology · top-of-document DISCLOSURE block + 4 inline sup + Section 07 FOOTNOTES with 8 primary source URLs + FootnoteRef component · commit 5a7b6ce
 R59 W-E · /audit DISCLOSURE block mirror(brand consistency with /methodology)+ Supabase getUser() helper(defense-in-depth)· commit fe53633
+R59 W-F · /now journal + NEW-CONVERSATION-PROMPT R59 closure · commit 947006a
+R59 W-G · /transparency DISCLOSURE block · 3 trust artifact 完整 brand-IP consistency · commit 0aad5f7
+
+R60 Pokemon TCG agent research(general-purpose · web search Heritage Auctions · Bulbapedia · Pokemon.com · TCG Protectors · IKEA Effect academic · Kahneman endowment)synthesized 5 ranked ships · 2 of 5 shipped:
+• SHIP 2 SHADOWLESS RUN(整批 270 = 1st Edition binary tier mechanic per Pokemon Charizard 10-50× premium driver)· SHIPPED W-A
+• SHIP 3 ENGINE SET INDEX(SET release narrative · 工程術語升 collectible narrative)· SHIPPED W-A
+• SHIP 4 v0.2 RECEIPT BORDER(TCG card anatomy · top-line + bottom-line)· SHIPPED W-B
+• SHIP 1 N/270 canonical notation(already partial · 已 unified across surfaces)· DEFERRED amplification
+• SHIP 5 NOT-DO checklist artifact(already on /transparency)· DEFERRED canonical promotion
 
 R59 brand IP axiom fires:
 • [[feedback-zone27-pratfall-brand-ip]] · self-falsifiable contradictions closed(5.4 vs 9 · 李東洛 vs 李東洺 · magic-link UI gap · count drift)
@@ -166,9 +178,10 @@ EXCEPTIONS ship · brand-pure 替代:
 | R56 | 2 | adversarial + CWV | 4 attack vectors closed · NavLoginCTA CLS fix · /founders 9× ratio frame · /about manifesto solo-voice |
 | R57 | 1 | execution mode · no new agents | MIT license disclosure on /ethics S02B · cv-auto utility classes |
 | R58 | 1 | execution mode continued | cv-auto on /methodology + /audit + /privacy · 19 sections benefit |
-| R59 | 5 | full-authority 3-agent · brand-redline + conversion + Hindenburg evidence | /founders 5.4→9 CRITICAL fix · /membership/black-card 4-cell anchor strip · 8 magic-link copy refs · /methodology DISCLOSURE + 4 inline sup + Section 07 FOOTNOTES + FootnoteRef component · /audit DISCLOSURE mirror · Supabase getUser() helper |
+| R59 | 7 | full-authority 3-agent · brand-redline + conversion + Hindenburg evidence | /founders 5.4→9 CRITICAL fix · /membership/black-card 4-cell anchor strip · 8 magic-link copy refs · /methodology + /audit + /transparency DISCLOSURE blocks · 4 inline sup + Section 07 FOOTNOTES + FootnoteRef component · Supabase getUser() helper |
+| R60 | 2 | Pokemon TCG lens · 1 deep web research · SHADOWLESS RUN binary tier + SET release narrative + TCG card anatomy | /methodology Section 04 SET framing(v0.2 BASE SET · v0.3 EXPANSION 1 · v0.4 EXPANSION 2)· /founders + /founders/ledger#shadowless-run · FirstReceiptHero CARD 001/∞ + REPRINT POLICY 0 · screenshot-shareable artifact |
 
-**Total: 39+ waves · ~100 fixes · 0 brand redline violation**
+**Total: 48+ waves · ~110 fixes · 0 brand redline violation**
 
 ---
 

@@ -701,6 +701,29 @@ function FirstReceiptHero({ match }: { match: Match }) {
       aria-label="First receipt · the inaugural ZONE 27 calibration entry"
       className="border-2 border-mute/40 bg-slate/30 enter-fade-up"
     >
+      {/* R60 W-B · Pokemon TCG card anatomy header · top-line 「set name + card
+          number」 grammar · 同 Pokemon Base Set 1999 Charizard 卡頂端 「Charizard
+          120 HP · Stage 2」 hierarchy · 不是 visual skinning(無 yellow border ·
+          無 holo foil · 無 emoji)· 是 typographic card grammar transplant ·
+          ZONE 27 deep navy + cold gold + bone white + Geist Mono 全保留 ·
+          TCG「receipt-of-finite-set」 mental model 通過 N/total notation
+          物理 codify。 per agent Pokemon research ship #4 · 同 TCG Protectors
+          anatomy guide(card # / set total + rarity + illustrator footer)。 */}
+      <div className="border-b border-gold/40 bg-gold/5 px-5 sm:px-8 py-3 flex items-center justify-between flex-wrap gap-2">
+        <p
+          lang="en"
+          className="font-mono text-gold tracking-[0.35em] text-[10px] sm:text-[11px]"
+        >
+          ZONE 27 ENGINE · v0.2 · RECEIPT 001
+        </p>
+        <p
+          lang="en"
+          className="font-mono text-gold/80 tracking-[0.3em] text-[9px] sm:text-[10px] tabular"
+        >
+          CARD 001 / CPBL SEASON 2026
+        </p>
+      </div>
+
       {/* ── KICKER BAND ─────────────────────── */}
       {/* Round 31 Wave G A11+A12 critic-agent patch · 改灰色 · 不慶祝 N=1。
           Stat-literate skeptic 嗆「打一場中一場吹一輩子 = 統計文盲」·
@@ -831,6 +854,17 @@ function FirstReceiptHero({ match }: { match: Match }) {
             完整 breakdown →
           </Link>
         </p>
+      </div>
+      {/* R60 W-B · Pokemon TCG card footer · bottom-line「N/total + rarity +
+          illustrator credit」 grammar · 同 Charizard 4/102 / WOTC 1999 stamp。
+          ZONE 27 transplant:CARD # / SEASON · ENGINE VERSION · INGEST date ·
+          REPRINT POLICY 0(永不重印 · 同 1st Edition Shadowless mechanic per
+          R60 W-A SHADOWLESS RUN section)。 訪客 screenshot share = TCG-style
+          card artifact · 同 agent ship #4 「screenshot-shareable」 axiom。 */}
+      <div className="border-t border-gold/40 px-5 sm:px-8 py-3 bg-gold/5 flex items-center justify-between flex-wrap gap-2 font-mono text-gold/80 text-[9px] tracking-[0.28em] tabular">
+        <span lang="en">CARD 001 / ∞</span>
+        <span lang="en">CPBL · 2026 SEASON 1</span>
+        <span lang="en">REPRINT POLICY · 0</span>
       </div>
     </article>
   );
