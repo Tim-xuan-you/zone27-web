@@ -1,8 +1,8 @@
 # 📋 New Conversation Prompt · ZONE 27 Session Handoff
 
 **用途:** 開新對話窗時複製此 prompt 整段 paste · 新 Claude 一秒接上 context。
-**最後 update:** 2026-05-23 · **Round 63 W-D 攻頂** · R59 7 W + R60 3 W + R61 6 W + R62 4 W + R63 4 W · 3-agent full-authority × 5 invocations(R59 + R60 + R61 + R62 + R63)· R37→R63
-**Token urgency:** Tim explicit「現在這個對話窗太燒TOKEN了」 · 此 prompt 是 R63 contextual snapshot for fresh Claude bootstrap
+**最後 update:** 2026-05-23 · **Round 64 W-C 攻頂** · R59 7 W + R60 3 W + R61 6 W + R62 4 W + R63 4 W + R64 3 W · 3-agent full-authority × 6 invocations(R59 + R60 + R61 + R62 + R63 + R64)· R37→R64
+**Token urgency:** Tim explicit「現在這個對話窗太燒TOKEN了」 · 此 prompt 是 R64 contextual snapshot for fresh Claude bootstrap
 
 ---
 
@@ -40,6 +40,10 @@
   · feedback_full_authority_3_agent_pattern(Tim 全權 mandate → 3 parallel agents synthesize → multi-wave ship · R51 confirmed pattern)
 
 【2026-05-23 R59-R60 攻頂 state · 7+ waves · 3-agent full-authority pattern fire × 2 invocations】:
+
+R64 W-A · /terms Section 4B explicit REFUND POLICY(Taiwan 消保法 § 19 distance-selling 7-day cooling-off · ZONE 27 主動延伸到 14 天 · Founders 27 + BLACK CARD 退款流程 codify · 三處 surface synchronized)+ /privacy Section 6B PDPA COMPLIANCE(資料控制者 · 跨境傳輸聲明 Supabase Tokyo + Vercel + Resend + GitHub locations + 無 PRC 節點 + 保留期間 + PDPA § 19/§ 20 特定目的)· commit 97cd20c
+R64 W-B · NEW app/pricing/why/page.tsx · 415 lines · 5 brand-pure patterns synthesized(Defector inverse-disclosure §01 + FanGraphs output-not-input §02 + Stripe Atlas 6-deliverable §03 + Pratfall「沒做什麼」 §04 + Stratechery single-sentence FAQ §05)+ 5 anti-patterns explicitly avoided · 41 routes · CmdK 加 entry · count drift 5 files · commit adff9b5
+R64 W-C · /now journal + NEW-CONVERSATION-PROMPT R64 closure(此 commit)
 
 R63 W-A · FirstReceiptHero pinned mode + N>=2 founding-receipt永久 pinning(Pokemon TCG R60 W-B mechanical extension · adaptive kicker copy + adaptive tagline footer · 1st Edition prestige preserved at every N · cpbl-260521-01 永遠 elevated above ledger)· commit 2949695
 R63 W-B · Taiwan-native payment trust 4-point block above WaitlistForm(per taiwan.md creator economy report · structural blocker close · 0 信用卡 + 手動轉帳 intentional + Tim 親手 + 14 天退款)+ Pratfall「what your NT$ 2,700 didn't buy」 6-item differentiator at decision-point(per FanGraphs honest limitation pattern · concentrate 11-item NOT-DO at buy-line)· commit 389d78e
@@ -200,8 +204,9 @@ EXCEPTIONS ship · brand-pure 替代:
 | R61 | 6 | 3rd full-authority · 3 parallel agents · validate regex + focus-visible + 2 CRITICAL 🔴 brand contradictions + WCAG 2.2 | validate:data 0 error 0 warning · 11 focus-visible refactor · 賣明牌 brand redline closed · /audit S08→S05 broken refs fixed · 6 stale magic-link cleanup · /auth/callback raw-error-leak fix · /annual commits 200→294 · PreviewModeBanner 28→32/36px + input-safe shortcut |
 | R62 | 4 | 4th full-authority · Bloomberg/power-user/newsletter lens · 1 deep research agent | Q3 2026 → milestone-triggered language sweep(11 user-visible refs)· NEW ReceiptForwardButton plain-text artifact share(Stratechery + Defector + Athletic pattern · 0 tracking)· NEW GlobalShortcuts g-mode 13 jump shortcuts(Linear/GitHub grammar)· CmdK footer g-mode discoverability hint |
 | R63 | 4 | 5th full-authority · Asian sports + sports-fan psychology lens · 1 deep research agent · 6-dimension gap matrix | FirstReceiptHero pinned mode(永久 1st Edition prestige preserved at N>=2 per Pokemon TCG R60 W-B mechanical extension)· Taiwan-native payment trust 4-point block above WaitlistForm(per taiwan.md trust-at-transfer friction close)· Pratfall「what your NT$ 2,700 didn't buy」 6-item differentiator at decision-point(per FanGraphs honest limitation pattern)· NEW CredentialStack 3-block component(Cameron Grove + Travis Sawchik indie analyst portfolio pattern · founder above-fold visibility) |
+| R64 | 3 | 6th full-authority · pricing-page-as-object-of-craft lens + Taiwan legal compliance · 1 deep research agent | /terms Section 4B explicit REFUND POLICY per Taiwan 消保法 § 19(雙倍法定 7-day cooling-off)+ /privacy Section 6B PDPA COMPLIANCE 個資法 / 跨境傳輸聲明 · NEW /pricing/why MVP route(5 brand-pure patterns: Defector inverse-disclosure + Stripe Atlas 6-deliverable + FanGraphs output-not-input + Stratechery FAQ defense + Pratfall「沒做什麼」)+ 5 anti-patterns explicitly avoided · 41 routes(40→41) |
 
-**Total: 64+ waves · ~165 fixes · 0 brand redline violation**
+**Total: 67+ waves · ~175 fixes · 0 brand redline violation**
 
 ---
 
