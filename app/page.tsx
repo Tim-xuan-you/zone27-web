@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import HeroLiveCard from "@/components/HeroLiveCard";
 import TonightReceiptsCard from "@/components/TonightReceiptsCard";
 import DailyReturnRail from "@/components/DailyReturnRail";
+import ClientErrorBoundary from "@/components/ClientErrorBoundary";
 import RecentMatchesRow from "@/components/RecentMatchesRow";
 import AnonCalibrationStrip from "@/components/AnonCalibrationStrip";
 import {
@@ -266,8 +267,13 @@ export default function Home() {
             returning visitors · NOT streak counter · NOT daily-login
             farming · localStorage zone27_last_visit_v1 11th key · /audit
             S06 disclosed · 不打擾就是禮物 axiom 物理 codify。 conditional
-            render(first-time + same-day return = empty)。 */}
-        <DailyReturnRail />
+            render(first-time + same-day return = empty)。
+            R73 W-A · ClientErrorBoundary wrap · TZ edge / localStorage
+            quota crash 不 take down homepage · 同 risk pattern as
+            /matches/[gameId] AnonPickWidget+LensFocusVote wraps。 */}
+        <ClientErrorBoundary fallbackLabel="DailyReturnRail · return chip">
+          <DailyReturnRail />
+        </ClientErrorBoundary>
 
         <p className="text-center font-mono text-mute text-[10px] tracking-[0.25em] mt-8">
           AI 計算的是機率 · 不是命運

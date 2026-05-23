@@ -67,8 +67,8 @@ export default function FoundingMemberLedger() {
           lang="en"
           className="font-mono text-mute/70 text-[9px] tracking-[0.3em] tabular"
         >
-          {claimedFounders.length} / {FOUNDERS_TOTAL} · {FOUNDERS_REMAINING}{" "}
-          AWAITING · WEEKLY HANDWRITTEN
+          {claimedFounders.length} SYSTEM-TEST / {FOUNDERS_TOTAL} ·{" "}
+          {FOUNDERS_REMAINING} AWAITING REAL · WEEKLY HANDWRITTEN
         </p>
       </header>
 
@@ -96,28 +96,41 @@ export default function FoundingMemberLedger() {
               ? claimedFounders.find((f) => f.id === id)
               : null;
             const idStr = String(id).padStart(3, "0");
+            // R73 W-D · Agent B audit F09 fix · visual differentiation
+            // SYSTEM-TEST placeholders vs REAL founders · brand IP「不藏
+            // SYSTEM-TEST state」 axiom physical codify · 3-state visual:
+            // empty(—)· SYSTEM-TEST(◌ dashed border opacity-50)· REAL(✦ solid)。
+            const isSystemTest =
+              claimed && (founder?.alias?.startsWith("SYSTEM-TEST") ?? false);
+            const isRealFounder = claimed && !isSystemTest;
+            const cellClass = isSystemTest
+              ? "border border-dashed border-gold/30 bg-gold/[0.03] text-gold/50"
+              : isRealFounder
+                ? "border border-gold/60 bg-gold/10 text-gold hover:bg-gold/15"
+                : "border border-line/30 bg-slate/30 text-mute/40 hover:text-mute/60";
+            const sigil = isSystemTest ? "◌" : isRealFounder ? "✦" : "—";
             return (
               <div
                 key={id}
                 role="listitem"
                 aria-label={
-                  claimed
-                    ? `Seat ${idStr} · claimed by ${founder?.alias ?? "anonymous"}`
-                    : `Seat ${idStr} · empty · awaiting allocation`
+                  isSystemTest
+                    ? `Seat ${idStr} · SYSTEM-TEST placeholder · awaiting real founder`
+                    : isRealFounder
+                      ? `Seat ${idStr} · claimed by ${founder?.alias ?? "anonymous"}`
+                      : `Seat ${idStr} · empty · awaiting allocation`
                 }
                 title={
-                  claimed
-                    ? `#${idStr} · ${founder?.alias ?? "—"} · ${founder?.claimedOn ?? "—"}`
-                    : `#${idStr} · — — — · empty seat`
+                  isSystemTest
+                    ? `#${idStr} · SYSTEM-TEST · ${founder?.alias ?? "—"} · 真實 founder Q3+ 取代`
+                    : isRealFounder
+                      ? `#${idStr} · ${founder?.alias ?? "—"} · ${founder?.claimedOn ?? "—"}`
+                      : `#${idStr} · — — — · empty seat`
                 }
-                className={`relative aspect-square flex flex-col items-center justify-center text-center font-mono tabular leading-tight transition-colors ${
-                  claimed
-                    ? "border border-gold/40 bg-gold/5 text-gold/85 hover:bg-gold/10"
-                    : "border border-line/30 bg-slate/30 text-mute/40 hover:text-mute/60"
-                }`}
+                className={`relative aspect-square flex flex-col items-center justify-center text-center font-mono tabular leading-tight transition-colors ${cellClass}`}
               >
                 <span className="block text-[8px] sm:text-[9px] tracking-[0.1em]">
-                  {claimed ? "✦" : "—"}
+                  {sigil}
                 </span>
                 <span className="block text-[8px] sm:text-[9px] tracking-[0.15em]">
                   {idStr}
@@ -130,15 +143,26 @@ export default function FoundingMemberLedger() {
 
       {/* ── Compact legend + status footer ───── */}
       <footer className="mt-5 flex items-baseline justify-between gap-3 flex-wrap">
-        <ul className="flex items-center gap-4 text-mute/85 text-[10px] font-mono tracking-[0.22em] leading-relaxed">
+        <ul className="flex items-center gap-3 sm:gap-4 text-mute/85 text-[10px] font-mono tracking-[0.22em] leading-relaxed flex-wrap">
+          {/* R73 W-D · Agent B audit F09 fix · 3-state legend matching 3-state
+              cell visualization · brand IP「不藏 SYSTEM-TEST state」 axiom。 */}
           <li className="flex items-center gap-2">
             <span
               aria-hidden="true"
-              className="inline-block w-3 h-3 border border-gold/40 bg-gold/5 text-gold/85 text-center text-[6px] leading-[10px]"
+              className="inline-block w-3 h-3 border border-dashed border-gold/30 bg-gold/[0.03] text-gold/50 text-center text-[6px] leading-[10px]"
+            >
+              ◌
+            </span>
+            <span lang="en">SYSTEM-TEST · {claimedFounders.length}</span>
+          </li>
+          <li className="flex items-center gap-2">
+            <span
+              aria-hidden="true"
+              className="inline-block w-3 h-3 border border-gold/60 bg-gold/10 text-gold text-center text-[6px] leading-[10px]"
             >
               ✦
             </span>
-            <span lang="en">CLAIMED · {claimedFounders.length}</span>
+            <span lang="en">REAL FOUNDER · 0(awaiting #008)</span>
           </li>
           <li className="flex items-center gap-2">
             <span

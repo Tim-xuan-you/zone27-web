@@ -113,6 +113,16 @@ function encodeDraft(obj: Record<string, string>): string {
   }
 }
 
+// R73 W-D · Agent B R72 audit F03 fix · Bidi/RTL/zero-width control char
+// strip + email-shape validation · attacker-crafted ?draft= email field
+// with bidi-marker or phishing-text would otherwise display in the「draft
+// restored」 banner as if it's the visitor's address · social-engineering
+// vector close · per Tim mandate「嚴肅看待 attack vectors」。
+const EMAIL_RE_VALIDATE = /^[^\s<>@]+@[^\s<>@]+\.[^\s<>@]+$/;
+const BIDI_CHARS_RE = /[​-‏‪-‮﻿]/g;
+const DRAFT_KNOWN_KEYS = ["email", "name", "cpbl_connection", "why_zone27"] as const;
+type DraftKey = (typeof DRAFT_KNOWN_KEYS)[number];
+
 function decodeDraft(b64: string): Record<string, string> | null {
   if (typeof window === "undefined") return null;
   try {
@@ -123,12 +133,23 @@ function decodeDraft(b64: string): Record<string, string> | null {
     const parsed = JSON.parse(json);
     if (!parsed || typeof parsed !== "object" || Array.isArray(parsed))
       return null;
-    // Validate all values are strings · defense-in-depth against malformed
-    // resume URLs from attacker(no exec via stored XSS · just hydration source)
+    // R73 W-D · F06 audit fix · whitelist known keys only · defense-in-depth
+    // against attacker injecting unknown payload keys。
     const out: Record<string, string> = {};
-    for (const [k, v] of Object.entries(parsed)) {
+    for (const k of DRAFT_KNOWN_KEYS) {
+      const v = (parsed as Record<string, unknown>)[k];
       if (typeof v !== "string") continue;
-      out[k] = v.slice(0, 2000); // hard cap to prevent huge URLs
+      // R73 W-D · F03 audit fix · strip Bidi/RTL/zero-width control chars ·
+      // 防 visual phishing attack on banner display。
+      const sanitized = v.replace(BIDI_CHARS_RE, "").slice(0, 2000);
+      // R73 W-D · F03 audit fix · email-shape validation · only accept
+      // realistic email format · 不 trust attacker-crafted「請打 0912345678」
+      // plain-text in email field · banner would otherwise display as if
+      // visitor's actual email。
+      if (k === "email" && !EMAIL_RE_VALIDATE.test(sanitized)) {
+        continue;
+      }
+      out[k as DraftKey] = sanitized;
     }
     return out;
   } catch {
@@ -213,20 +234,34 @@ export default function FoundersApplicationForm() {
   // R71 W-B · DraftSaveLink composer · reads current form values · base64
   // encodes · builds mailto: with subject + body containing resume URL ·
   // attempts navigator.clipboard.writeText fallback if mailto: fails。
+  // R73 W-C · Agent B R71 audit F09 fix · iOS Safari mailto >2000 char silent
+  // fail mitigation · cap why_zone27 to first 400 chars in draft + post-
+  // click focus-still-here check(500ms · if window stays focused = mail
+  // app didn't launch)→ auto-clipboard fallback。 Baymard 2025 mobile
+  // abandonment recovery rate(15-25%)preserved。
   const handleSaveDraft = () => {
     if (!formRef.current) return;
     const fd = new FormData(formRef.current);
+    // R73 W-C · cap why_zone27 to 400 chars · keeps total mailto under
+    // iOS 2000-char safe zone · visitor finishes remaining 200 chars on
+    // resume(brand-pure 「draft is a starting point not finished work」)。
+    const whyFull = String(fd.get("why_zone27") ?? "");
+    const whyTruncated = whyFull.length > 400 ? whyFull.slice(0, 400) : whyFull;
     const draft: Record<string, string> = {
       email: String(fd.get("email") ?? ""),
       name: String(fd.get("name") ?? ""),
       cpbl_connection: String(fd.get("cpbl_connection") ?? ""),
-      why_zone27: String(fd.get("why_zone27") ?? ""),
+      why_zone27: whyTruncated,
     };
     const encoded = encodeDraft(draft);
     if (!encoded) return;
     const origin =
       typeof window !== "undefined" ? window.location.origin : "https://zone27-web.vercel.app";
     const resumeUrl = `${origin}/founders/apply?draft=${encoded}`;
+    const truncationNotice =
+      whyFull.length > 400
+        ? `\n\n(您 why_zone27 第一個 400 字符 saved · 剩餘 ${whyFull.length - 400} 字在 resume 時補寫 · per iOS mailto 2000-char safe-zone)`
+        : "";
     const subject = "ZONE 27 · Founders 27 application 暫存 · resume link";
     const body = [
       `Hi,`,
@@ -241,23 +276,53 @@ export default function FoundersApplicationForm() {
       ``,
       `If your mail client cannot send · just copy the URL above + save it`,
       `to your notes app · ZONE 27 does NOT track this URL · 不打擾就是禮物。`,
+      truncationNotice,
     ].join("\n");
     const mailtoUrl = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    try {
-      window.location.href = mailtoUrl;
-      setDraftSaveStatus("composed");
-      window.setTimeout(() => setDraftSaveStatus("idle"), 3500);
-    } catch {
-      // Fallback · copy resume URL to clipboard
+
+    // R73 W-C · Agent B R71 F09 fix · iOS Safari mailto silent-fail detection ·
+    // mail app launch causes window to lose focus → if document.hasFocus()
+    // 500ms after click · mailto likely silently failed · auto-fallback to
+    // clipboard · visitor sees「✓ resume URL copied」 not false「✓ mailto opened」。
+    const fallbackToClipboard = (): void => {
+      if (typeof navigator === "undefined" || !navigator.clipboard) {
+        if (typeof window !== "undefined") {
+          window.prompt("Copy your resume URL:", resumeUrl);
+        }
+        return;
+      }
       navigator.clipboard
-        ?.writeText(resumeUrl)
+        .writeText(resumeUrl)
         .then(() => {
           setDraftSaveStatus("copied");
           window.setTimeout(() => setDraftSaveStatus("idle"), 3500);
         })
         .catch(() => {
-          window.prompt("Copy your resume URL:", resumeUrl);
+          if (typeof window !== "undefined") {
+            window.prompt("Copy your resume URL:", resumeUrl);
+          }
         });
+    };
+
+    try {
+      window.location.href = mailtoUrl;
+      // Optimistic UI · assume mailto opens
+      setDraftSaveStatus("composed");
+      // R73 W-C · post-click focus-still-here check · 500ms after assignment
+      // · if window still focused = mail app DIDN'T launch(iOS silent fail) ·
+      // auto-fallback to clipboard · 不 leave visitor with false confirmation。
+      window.setTimeout(() => {
+        if (typeof document !== "undefined" && document.hasFocus()) {
+          // Mail app didn't take over · iOS silent fail OR desktop without
+          // default mail client · fallback to clipboard for plaintext recovery
+          fallbackToClipboard();
+        } else {
+          // Mail app took focus = success · reset status after 3s
+          window.setTimeout(() => setDraftSaveStatus("idle"), 3000);
+        }
+      }, 500);
+    } catch {
+      fallbackToClipboard();
     }
   };
 

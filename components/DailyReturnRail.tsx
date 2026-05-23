@@ -92,6 +92,38 @@ function formatDaysAgo(n: number): string {
   return `${Math.floor(n / 30)} 個月前`;
 }
 
+/** R73 W-B · Agent B R71 audit F06 fix · TZ midnight 6h gate · visitor
+ *  at 23:50 TPE · refresh at 00:01 next day → 「1 天前」 chip shows again
+ *  within 11 min · breaks ONE-shot-per-day axiom + 「不打擾就是禮物」 brand IP。
+ *  Fix:if priorVisit was YESTERDAY AND current TPE hour < 6 · treat as
+ *  midnight-refresh edge · skip chip render until next true return >=6h
+ *  after midnight。 */
+function isLikelyMidnightRefresh(
+  priorVisitDate: string,
+  today: string,
+): boolean {
+  const prior = new Date(`${priorVisitDate}T00:00:00+08:00`);
+  const now = new Date(`${today}T00:00:00+08:00`);
+  if (Number.isNaN(prior.getTime()) || Number.isNaN(now.getTime())) return false;
+  const dayDiff = Math.floor(
+    (now.getTime() - prior.getTime()) / (1000 * 60 * 60 * 24),
+  );
+  if (dayDiff !== 1) return false;
+  // Check current TPE hour · within first 6h of new day = midnight-refresh edge
+  try {
+    const tpeHourStr = new Intl.DateTimeFormat("en-CA", {
+      hour: "2-digit",
+      hour12: false,
+      timeZone: "Asia/Taipei",
+    }).format(new Date());
+    const tpeHour = parseInt(tpeHourStr, 10);
+    if (Number.isNaN(tpeHour)) return false;
+    return tpeHour < 6;
+  } catch {
+    return false;
+  }
+}
+
 export default function DailyReturnRail() {
   const [state, setState] = useState<RailState>({ mounted: false });
 
@@ -150,6 +182,25 @@ export default function DailyReturnRail() {
     const cleanPriorVisit = priorVisit.split(":")[0];
     if (isDismissedToday || cleanPriorVisit === today) {
       // Same-day return path · 不 update · 不 render
+      setState({
+        mounted: true,
+        daysSince: null,
+        dismissed: false,
+        priorVisitIso: cleanPriorVisit,
+      });
+      return;
+    }
+
+    // R73 W-B · Agent B R71 audit F06 fix · TZ midnight 6h gate · visitor
+    // at 23:50 TPE refresh at 00:01 next day = midnight-edge same-session ·
+    // skip chip render · 同 isDismissedToday spirit · 不打擾就是禮物 axiom 守。
+    if (isLikelyMidnightRefresh(cleanPriorVisit, today)) {
+      // Update key to today so subsequent visits within same day stay quiet
+      try {
+        window.localStorage.setItem(STORAGE_KEY, today);
+      } catch {
+        /* swallow */
+      }
       setState({
         mounted: true,
         daysSince: null,

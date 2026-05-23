@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import CopyLinkButton from "@/components/CopyLinkButton";
 import RelatedReading from "@/components/RelatedReading";
 import FounderSignOff from "@/components/FounderSignOff";
+import NoPushManifest from "@/components/NoPushManifest";
 import ArticleMeta from "@/components/ArticleMeta";
 import { matches, getFinalizedMatches } from "@/lib/matches";
 
@@ -430,6 +431,15 @@ export default function TransparencyPage() {
             </p>
           </div>
         </section>
+
+        {/* R73 W-D · NoPushManifest manifest variant · Agent A R73 SHIP 2 ·
+            Brehm Reactance(1966)+ Deci/Ryan Self-Determination(1985)·
+            costly-signaling-via-restraint(Spence 1973)· 12 deliberate
+            absences PUBLISHED · operational artifact of existing 11
+            「永遠不做」 CLAUDE.md axiom · Mubi+Calm+Are.na+Astral Codex Ten
+            +1Password pattern · Patagonia「Don't Buy This Jacket」 NYT
+            2011 parallel。 */}
+        <NoPushManifest />
 
         <FounderSignOff>
           <p>

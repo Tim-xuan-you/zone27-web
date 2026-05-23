@@ -118,7 +118,7 @@ export default function FoundersLedgerPage() {
                   : `累計 ${REVIEW_WINDOWS.length} 週 review · ${totalApproved} 分配 · ${totalApplicants} 申請`
               }
             >
-              {PRE_LAUNCH ? "✓ LIVE · 申請通道開啟 · email Tim" : `WEEK ${REVIEW_WINDOWS.length}`}
+              {PRE_LAUNCH ? "✓ APPLY OPEN · review pending Q3+ · email Tim" : `WEEK ${REVIEW_WINDOWS.length}`}
             </span>
           </div>
           <h1 className="text-4xl sm:text-5xl text-bone font-light tracking-tight max-w-3xl">

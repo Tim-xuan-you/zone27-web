@@ -28,6 +28,7 @@ import LensTrace, { ENGINE_V02_TRACE_STEPS } from "@/components/LensTrace";
 import MatchViewTracker from "@/components/MatchViewTracker";
 import AnonPickWidget from "@/components/AnonPickWidget";
 import LensFocusVote from "@/components/LensFocusVote";
+import ClientErrorBoundary from "@/components/ClientErrorBoundary";
 import TonightMatchRail from "@/components/TonightMatchRail";
 import EngineStamp from "@/components/EngineStamp";
 import CopyLinkButton from "@/components/CopyLinkButton";
@@ -232,7 +233,12 @@ export default async function MatchDetailPage({
           禮物」 axiom 守。 client component · SSR-safe discriminated union
           mount pattern。 */}
       <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-12">
-        <AnonPickWidget match={m} />
+        {/* R73 W-A · ClientErrorBoundary wrap · localStorage operations + form
+            state hydrate risk-bearing client components · brand-pure fallback
+            UI prevents whole-page crash · per code-quality deferred R66+。 */}
+        <ClientErrorBoundary fallbackLabel="AnonPickWidget · Epistemic Gym">
+          <AnonPickWidget match={m} />
+        </ClientErrorBoundary>
       </section>
 
       {/* ── THE MASSIVE WIN BAR ────────────────────── */}
@@ -494,7 +500,12 @@ export default async function MatchDetailPage({
           LensFocusVote(angle) → 7-lens canvas → 兩個 commitments 同時
           mentally active · Cialdini foot-in-the-door 物理 codify。 */}
       <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-8 border-t border-line/40 pt-12">
-        <LensFocusVote matchId={m.id} />
+        {/* R73 W-A · ClientErrorBoundary wrap · LensFocusVote localStorage
+            commitment-consistency widget · 不 take down whole page on
+            quota/disabled localStorage crash。 */}
+        <ClientErrorBoundary fallbackLabel="LensFocusVote · pre-canvas commit">
+          <LensFocusVote matchId={m.id} />
+        </ClientErrorBoundary>
       </section>
 
       {/* ── /02 · LENS CANVAS · Round 42 W-E · Agent I dogfood F1.2 fix
