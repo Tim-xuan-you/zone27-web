@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { FOUNDERS_CLAIMED, FOUNDERS_TOTAL } from "@/lib/founders-stats";
+import CadencePulseChip from "@/components/CadencePulseChip";
 
 // Server-side Taipei today. Footer is a server component, so this
 // re-evaluates on each render — meaning every static-built page is
@@ -296,6 +297,16 @@ export default function Footer() {
             </span>
           </p>
         </Link>
+
+        {/* R67 W-C · CadencePulseChip compact · between Founders row +
+            brand bottom row · Zajonc Mere Exposure reframed · NOT「下週
+            更新」 cadence promise(/now 已 explicit reject pattern)·
+            純 「LAST SHIPPED · X 天前 · 節奏不承諾 · /changelog」 honest
+            anchor。 訪客每次 scroll 到 Footer 看到 ship date(無聲 Mere
+            Exposure)without subscription CTA。 */}
+        <div className="flex items-center justify-center pt-4 pb-3 border-t border-line/30">
+          <CadencePulseChip variant="compact" />
+        </div>
 
         {/* Bottom row: brand + tagline + version chip */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-6">
