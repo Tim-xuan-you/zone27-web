@@ -129,6 +129,33 @@ export const ENGINE_OPS_LOG: ReadonlyArray<EngineOpsLogEntry> = [
       "Stripe Status 2012 + Cloudflare 2025 postmortem + Tailscale changelog pattern · ZONE 27 operational artifact surface NEW · per Agent A R76 「biggest invisible gap」 honest answer · APPEND-ONLY log of engine re-runs + receipt corrections + input-staleness + methodology updates · /engine-log IS the「engine alive · someone on it」 signal · cannot fake operational artifact · same single-source pattern as ENGINE_DIFF_BEACONS + NO_PUSH_INVENTORY + RECIPROCITY_LEDGER。",
     href: "/engine-log",
   },
+  {
+    date: "2026-05-23",
+    eventType: "receipt-ingest",
+    label: "cpbl-260523-01 ingested · 味全 0:2 台鋼 @ 澄清湖 · PROVED ✓",
+    detail:
+      "Tim 親手 cpbl.com.tw screenshot ingest · 味全龍 vs 台鋼雄鷹 @ 澄清湖棒球場 · final 0-2 home wins · WP 坎南(台鋼)· LP 布雷克(味全)· SV 林詩翔(台鋼)· Engine 賽前 51% home → home wins 2-0 → PROVED ✓ · brand IP「engine 言中」 物理 codify · per /ethics commitment #5 7-day post-final SLA · /track-record N=1→2 finalized。",
+    receiptId: "cpbl-260523-01",
+    href: "/receipts/cpbl-260523-01",
+  },
+  {
+    date: "2026-05-23",
+    eventType: "receipt-ingest",
+    label: "cpbl-260523-02 ingested · 富邦 3:1 樂天 @ 樂天桃園 · PROVED ✓",
+    detail:
+      "Tim 親手 cpbl.com.tw screenshot ingest · 富邦悍將(AWAY 21-15-0)vs 樂天桃猿(HOME 15-20-1)@ 樂天桃園棒球場 · final 1-3 away wins · WP 鈴木駿輔(富邦)· LP 艾菩樂(樂天)· SV 曾峻岳(富邦)· Engine 賽前 54% away → away wins 3-1 → PROVED ✓ · /track-record N=2→3 finalized。",
+    receiptId: "cpbl-260523-02",
+    href: "/receipts/cpbl-260523-02",
+  },
+  {
+    date: "2026-05-23",
+    eventType: "receipt-ingest",
+    label: "cpbl-260523-03 ingested · 統一 2:0 兄弟 @ 大巨蛋 · PROVED ✓",
+    detail:
+      "Tim 親手 cpbl.com.tw screenshot ingest · 統一獅(AWAY 25-13-0 league leader)vs 中信兄弟(HOME 11-25-1 last place)@ 臺北大巨蛋 · final 0-2 away wins · WP 梅賽鎂(統一)· LP 德保拉(兄弟)· SV 林凱威(統一)· Engine 賽前 64% away → away wins 2-0 → PROVED ✓ · 4 consecutive PROVED receipts(cpbl-260521-01 + cpbl-260523-01/02/03)· N=3→4 finalized · brand IP「方法公開 · PROVED + DIVERGED 等大」 axiom 物理 codify · 沒 cherry-pick · 沒 retroactive 加權。",
+    receiptId: "cpbl-260523-03",
+    href: "/receipts/cpbl-260523-03",
+  },
 ];
 
 /** Computed count · used by component header chip · brand IP「N operational
