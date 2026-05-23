@@ -116,6 +116,82 @@ export default function TermsPage() {
         </ul>
       </Section>
 
+      {/* R64 W-A · per Agent 3 R61 Ship #4 + Agent 5 R63 gap matrix · explicit
+          REFUND POLICY section per Taiwan 消費者保護法 § 19 distance-selling
+          7-day cooling-off rule。 ZONE 27 exceeds minimum at 14 days · 同
+          /faq + /founders W-B trust block 已宣告 · 此 Section 4B codify in
+          legal-findable location · brand IP「方法公開」 延伸到 refund
+          terms · 不藏。 Section labeled 「4B」 to avoid renumbering 05-09
+          downstream sections · low-risk inline amplification。 */}
+      <Section no="4B" label="REFUND POLICY" zh="退款條款 · Taiwan 消保法 § 19">
+        <p>
+          中華民國消費者保護法 § 19 規定:消費者透過郵購、網購、訪問交易等
+          通訊交易方式所為的商品或服務契約 · 享有自接受商品或服務 <strong className="text-bone">至少
+          7 日</strong> 內無條件解除契約的權利。 ZONE 27 主動延伸到 <strong className="text-gold">14
+          天</strong> · 翻倍法定下限。
+        </p>
+
+        <h3 className="text-bone text-lg mt-6 mb-3">Founders 27(NT$ 2,700 一次性)</h3>
+        <ul className="space-y-2">
+          <li>
+            <strong className="text-bone">14 天無條件退款</strong> · 從 Tim
+            確認您的銀行轉帳入帳 + 您收到 lifetime access confirmation email
+            那天起算 · 14 個自然日內可解除契約。
+          </li>
+          <li>
+            <strong className="text-bone">退款流程</strong> ·
+            寄信 <Code>tim@zone27.tw</Code> · 主旨 <Code>REFUND · ZONE27-#NNN</Code>
+            (NNN 為您的 founder 編號)· Tim 48 hr 內回覆確認 · 同步原匯款
+            銀行戶頭退回 NT$ 2,700 全額。
+          </li>
+          <li>
+            <strong className="text-bone">不問原因</strong> · 不嘗試挽留 ·
+            不要求填問卷 · 不寄 retention 文案 · per [[zone27-pratfall-brand-ip]]
+            「不裝挽留」 axiom。
+          </li>
+          <li>
+            <strong className="text-bone">您退款後仍保留</strong> · GitHub
+            source code(MIT licensed · 我們不能 revoke)· 已下載的 methodology
+            docs · 全部 /audit + /methodology + /track-record 公開 trust artifacts ·
+            這些不在退款範圍 · 我們無權收回。
+          </li>
+          <li>
+            <strong className="text-bone">您退款後失去</strong> · #NNN 編號的
+            ledger 入帳(/founders/ledger 上的 reserved 標記 release)· lifetime
+            access flag · BLACK CARD 月卡免費 perk · BOTTOM 27 ecosystem
+            cross-pass(未來 ship)。
+          </li>
+        </ul>
+
+        <h3 className="text-bone text-lg mt-6 mb-3">BLACK CARD(NT$ 299/月)</h3>
+        <ul className="space-y-2">
+          <li>
+            <strong className="text-bone">每月 14 天退款</strong> · 您每月手動
+            轉帳當月份 NT$ 299 入帳後 · 14 個自然日內可解除該月契約 · 全額
+            退回 · 不按比例。
+          </li>
+          <li>
+            <strong className="text-bone">沒有 auto-renew</strong> · 同 brand
+            IP「倒置 SaaS · 不自動扣款」(per /membership/black-card)· 您
+            不主動轉帳下月 · 服務自然停止 · 不需 cancel button · 不需 exit
+            interview · 不寄 reactivation 文案。
+          </li>
+          <li>
+            <strong className="text-bone">月份未滿期</strong> · 您退款後當月
+            access 立即停止 · ZONE 27 不會繼續發您 month-end newsletter ·
+            您也不能 access BLACK CARD-only content 直到下次主動轉帳。
+          </li>
+        </ul>
+
+        <p className="mt-6 text-mute/85 text-sm">
+          ▸ 完整 refund 政策同步顯示在 <Link href="/founders" className="text-gold underline-offset-4 hover:underline">/founders Payment Trust block</Link>
+          + <Link href="/faq" className="text-gold underline-offset-4 hover:underline">/faq Q「14 天退款怎麼運作」</Link>
+          + <Link href="/membership/black-card" className="text-gold underline-offset-4 hover:underline">/membership/black-card hero「14-DAY 退款保證」 chip</Link>
+          · 三處 surface synchronized · 任何 update 需 30 天 /changelog 公告 · per
+          /audit S05 PRE-COMMIT pattern。
+        </p>
+      </Section>
+
       {/* ── 05 AI DISCLAIMER ────────────────────── */}
       <Section no="05" label="AI DISCLAIMER" zh="AI 預測免責">
         <p>

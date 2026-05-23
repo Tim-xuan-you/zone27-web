@@ -246,6 +246,114 @@ export default function PrivacyPage() {
         </p>
       </Section>
 
+      {/* R64 W-A · per Agent 3 R61 Ship #4 + Agent 5 R63 gap matrix · explicit
+          PDPA COMPLIANCE section per 《個人資料保護法》(2010 amendment)。
+          Existing Section 06 covers 4 PDPA rights(查詢 / 更正 / 刪除 / 攜出)
+          adequately · 但缺 explicit PDPA citation + cross-border transfer
+          disclosure(Supabase Tokyo + Resend + Vercel 全部 host outside TW)+
+          retention period + designated data controller。 Section labeled
+          「6B」 to avoid renumbering 07-08 downstream sections · low-risk
+          inline amplification。 */}
+      <Section no="6B" label="PDPA COMPLIANCE" zh="個資法 / 跨境傳輸聲明">
+        <p>
+          中華民國《個人資料保護法》(2010 年制定 · 2015 年修正)規範非
+          公務機關蒐集、處理、利用個人資料應遵循的原則。 ZONE 27 作為非
+          公務機關 · 主動 codify 以下 PDPA-compliant 承諾:
+        </p>
+
+        <h3 className="text-bone text-lg mt-6 mb-3">資料控制者(Data Controller)</h3>
+        <ul className="space-y-2">
+          <li>
+            <strong className="text-bone">姓名</strong> · Tim(Tim-xuan-you · solo 自然人)
+          </li>
+          <li>
+            <strong className="text-bone">聯絡 email</strong> · tim@zone27.tw
+          </li>
+          <li>
+            <strong className="text-bone">法律地位</strong> · 自然人 · 尚未公司化 ·
+            per /terms Section 01「ZONE 27 ... 目前由創辦人 Tim 以個人名義經營」
+          </li>
+          <li>
+            <strong className="text-bone">無 DPO 指派</strong> · solo founder ·
+            Tim 親自 handle 全部 PDPA-related 詢問 · 14 天內回覆 per Section 06
+          </li>
+        </ul>
+
+        <h3 className="text-bone text-lg mt-6 mb-3">跨境資料傳輸(Cross-border Transfer)</h3>
+        <ul className="space-y-2">
+          <li>
+            <strong className="text-bone">Supabase Tokyo</strong>(ap-northeast-1)·
+            位於日本東京 · 您的 email + 稱呼 + waitlist queue 位置 stored here ·
+            日本適用 APPI(Act on the Protection of Personal Information · 2003) ·
+            與 PDPA 同等保護等級
+          </li>
+          <li>
+            <strong className="text-bone">Vercel</strong>(global CDN · USA-based) ·
+            handles HTTP request routing · 您 IP 短暫經 Vercel edge · 不 persist ·
+            per /audit S04 environmental impact disclosure
+          </li>
+          <li>
+            <strong className="text-bone">Resend</strong>(USA-based) · transactional
+            email delivery · 您的 email + 通知內容 短暫經 Resend SMTP · per their
+            standard data processing agreement
+          </li>
+          <li>
+            <strong className="text-bone">GitHub</strong>(USA-based · Microsoft) ·
+            source code repository · 不存任何 visitor 個資 · 純 git commit
+            metadata
+          </li>
+          <li>
+            <strong className="text-bone">無中華人民共和國境內節點</strong> ·
+            ZONE 27 不使用任何 PRC-located cloud / CDN · per brand IP「audience
+            是台灣 + 海外華語區 baseball fan · not PRC market」 explicit。
+          </li>
+        </ul>
+
+        <h3 className="text-bone text-lg mt-6 mb-3">保留期間(Retention Period)</h3>
+        <ul className="space-y-2">
+          <li>
+            <strong className="text-bone">Waitlist email</strong> · 保留至您
+            主動要求刪除 OR ZONE 27 brand 永久關閉 · whichever first
+          </li>
+          <li>
+            <strong className="text-bone">Founders 27 ledger row</strong> · 永久
+            保留 · 同 lifetime access 性質 · per /founders/ledger SHADOWLESS RUN
+            commitment「售完即永久關閉 · 不會有第二批」 · 您即使退款 ledger
+            row 仍 release reserved 標記但保留歷史記錄
+          </li>
+          <li>
+            <strong className="text-bone">Resend email delivery logs</strong> ·
+            Resend default 7-day retention · ZONE 27 不主動 export · 不留 local copy
+          </li>
+          <li>
+            <strong className="text-bone">GitHub commit metadata</strong> ·
+            永久 public · 同 git nature · 不可刪除 · 但您的個資 NEVER appears
+            in commit content
+          </li>
+        </ul>
+
+        <h3 className="text-bone text-lg mt-6 mb-3">處理 / 利用之特定目的(Specific Purpose)</h3>
+        <ul className="space-y-2">
+          <li>
+            <strong className="text-bone">PDPA 第 19 條</strong>(蒐集前告知)
+            · 我們蒐集您的 email 限於「launch 通知」 + 「Founders 27 onboarding
+            個人化 email」 · 不作任何 marketing / cross-selling / 廣告投放 /
+            個資 monetization 用途。
+          </li>
+          <li>
+            <strong className="text-bone">第 20 條</strong>(原蒐集目的範圍內)
+            · 我們承諾不超出 launch 通知 + onboarding 兩個目的 · 任何擴張需 30
+            天 /changelog 公告 + 您可選 opt-out。
+          </li>
+        </ul>
+
+        <p className="mt-6 text-mute/85 text-sm">
+          ▸ 完整 PDPA-compliant 承諾 同步顯示在 <Link href="/audit#disclosure" className="text-gold underline-offset-4 hover:underline">/audit DISCLOSURE block</Link>
+          + <Link href="/transparency" className="text-gold underline-offset-4 hover:underline">/transparency aggregator</Link>
+          · 任何 update 需 30 天 /changelog 公告 · per /audit S05 PRE-COMMIT pattern。
+        </p>
+      </Section>
+
       {/* ── 07 SECURITY ─────────────────────────── */}
       <Section no="07" label="SECURITY" zh="資料安全">
         <p>
