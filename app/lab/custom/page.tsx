@@ -443,7 +443,7 @@ function PitcherForm({
           onChange={(e) => onChange({ ...data, name: e.target.value })}
           disabled={disabled}
           maxLength={30}
-          className="w-full bg-ink/60 border border-line/70 focus:border-gold/70 disabled:opacity-50 text-bone px-3 py-2.5 outline-none transition-colors font-mono text-sm"
+          className="w-full bg-ink/60 border border-line/70 focus-visible:border-gold/70 disabled:opacity-50 text-bone px-3 py-2.5 outline-none transition-colors font-mono text-sm"
         />
       </label>
 
@@ -518,7 +518,7 @@ function NumberField({
         max={max}
         step={step}
         aria-describedby={hintId}
-        className="w-full bg-ink/60 border border-line/70 focus:border-gold/70 disabled:opacity-50 text-bone px-2 py-2.5 outline-none transition-colors font-mono text-sm tabular text-center"
+        className="w-full bg-ink/60 border border-line/70 focus-visible:border-gold/70 disabled:opacity-50 text-bone px-2 py-2.5 outline-none transition-colors font-mono text-sm tabular text-center"
       />
       <span
         id={hintId}

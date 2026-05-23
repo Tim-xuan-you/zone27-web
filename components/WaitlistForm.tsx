@@ -221,7 +221,7 @@ export default function WaitlistForm({
           aria-required="true"
           placeholder="you@example.com"
           autoComplete="email"
-          className="w-full bg-ink/60 border border-line/70 focus:border-gold/70 text-bone px-4 py-3 outline-none transition-colors placeholder:text-mute/70 font-mono text-sm"
+          className="w-full bg-ink/60 border border-line/70 focus-visible:border-gold/70 text-bone px-4 py-3 outline-none transition-colors placeholder:text-mute/70 font-mono text-sm"
         />
       </label>
 
@@ -235,7 +235,7 @@ export default function WaitlistForm({
           name="name"
           placeholder="Tim"
           autoComplete="given-name"
-          className="w-full bg-ink/60 border border-line/70 focus:border-gold/70 text-bone px-4 py-3 outline-none transition-colors placeholder:text-mute/70 font-mono text-sm"
+          className="w-full bg-ink/60 border border-line/70 focus-visible:border-gold/70 text-bone px-4 py-3 outline-none transition-colors placeholder:text-mute/70 font-mono text-sm"
         />
       </label>
 

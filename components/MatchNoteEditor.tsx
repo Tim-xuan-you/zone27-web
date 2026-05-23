@@ -96,7 +96,7 @@ export default function MatchNoteEditor({ matchId }: { matchId: string }) {
           placeholder="您對這場的分析 / 預測 / 賽後回顧..."
           rows={4}
           aria-label="Private match note"
-          className="w-full bg-navy/60 border border-line/70 px-3 py-2 text-bone text-sm focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold/30 transition-colors font-mono leading-relaxed resize-y"
+          className="w-full bg-navy/60 border border-line/70 px-3 py-2 text-bone text-sm focus:outline-none focus-visible:border-gold focus-visible:ring-1 focus-visible:ring-gold/30 transition-colors font-mono leading-relaxed resize-y"
         />
         <div className="mt-3 flex items-center justify-between flex-wrap gap-2">
           <p className="font-mono text-mute/70 text-[10px] tracking-[0.25em]">

@@ -182,7 +182,7 @@ export default function SubmitPage() {
                     setTitle(e.target.value.slice(0, MAX_TITLE))
                   }
                   placeholder="例:今晚 cpbl-260521-01 賽前 calibration drift 分析"
-                  className="w-full bg-navy/60 border border-line/70 px-3 py-2 text-bone text-base focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold/30 transition-colors"
+                  className="w-full bg-navy/60 border border-line/70 px-3 py-2 text-bone text-base focus:outline-none focus-visible:border-gold focus-visible:ring-1 focus-visible:ring-gold/30 transition-colors"
                   disabled={status.kind === "submitting"}
                 />
               </div>
@@ -202,7 +202,7 @@ export default function SubmitPage() {
                     setBody(e.target.value.slice(0, MAX_BODY))
                   }
                   placeholder="您的分析 / 觀察 / 賽事 take · 30 字 ~ 3000 字 · 純文字 · 不接 markdown 不接 link 不接 image · Tim 過稿後手動 publish 時可加 link / image"
-                  className="w-full bg-navy/60 border border-line/70 px-3 py-2 text-bone text-sm focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold/30 transition-colors font-mono leading-relaxed resize-y"
+                  className="w-full bg-navy/60 border border-line/70 px-3 py-2 text-bone text-sm focus:outline-none focus-visible:border-gold focus-visible:ring-1 focus-visible:ring-gold/30 transition-colors font-mono leading-relaxed resize-y"
                   disabled={status.kind === "submitting"}
                 />
               </div>

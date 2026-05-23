@@ -629,7 +629,7 @@ function RoadmapVotingPanel({ mounted }: { mounted: boolean }) {
           placeholder="例如:強打線 vs 二軍 winRate gap 是我最常 raise 的 question · 想看真實數字"
           rows={2}
           maxLength={280}
-          className="w-full bg-navy/40 border border-line/40 focus:border-gold/60 px-3 py-2 text-bone text-sm font-mono leading-relaxed outline-none transition-colors placeholder:text-mute/60"
+          className="w-full bg-navy/40 border border-line/40 focus-visible:border-gold/60 px-3 py-2 text-bone text-sm font-mono leading-relaxed outline-none transition-colors placeholder:text-mute/60"
         />
         <div className="flex items-baseline justify-between mt-2 flex-wrap gap-2">
           <p className="font-mono text-mute/60 text-[10px] tracking-[0.25em] tabular">

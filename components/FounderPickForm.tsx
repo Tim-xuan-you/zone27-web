@@ -250,7 +250,7 @@ export default function FounderPickForm({
           value={pickInput}
           onChange={(e) => setPickInput(e.target.value)}
           placeholder="例:27 · 008-270"
-          className="w-full bg-navy/60 border border-line/70 px-4 py-3 text-bone text-base focus:border-gold focus:outline-none focus:ring-2 focus:ring-gold/20 transition-colors font-mono tabular"
+          className="w-full bg-navy/60 border border-line/70 px-4 py-3 text-bone text-base focus:outline-none focus-visible:border-gold focus-visible:ring-2 focus-visible:ring-gold/20 transition-colors font-mono tabular"
           disabled={submitting}
         />
       </div>
