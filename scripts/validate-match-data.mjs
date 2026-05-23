@@ -112,8 +112,14 @@ while ((pm = pitcherNamePattern.exec(matchesSource)) !== null) {
 }
 
 // Extract pitcher names from cpbl-pitchers.ts
+// R61 W-A · regex fix · cpbl-pitchers.ts uses JSON-like format `"name": "X"` ·
+// previous regex `name:\s*"X"` 不 match because `:` comes AFTER the closing
+// quote of the key(actual substring is `name"` + `":` separately)· result:
+// 0 names found · all 16 pitchers false-positive "missing" · 4 of 6
+// reported missing(李東洺 / 魔力藍 / 羅戈)were actually IN the file。
+// Fix:add leading quote anchor `"name":` to match JSON key format precisely。
 const pitchersFromFile = new Set();
-const pitcherListPattern = /name:\s*"([一-龥]{2,4})"/g;
+const pitcherListPattern = /"name":\s*"([一-龥]{2,4})"/g;
 let pf;
 while ((pf = pitcherListPattern.exec(pitchersSource)) !== null) {
   pitchersFromFile.add(pf[1]);
