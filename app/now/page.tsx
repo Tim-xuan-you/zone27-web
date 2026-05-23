@@ -8,6 +8,7 @@ import ArticleMeta from "@/components/ArticleMeta";
 import CadencePulseChip from "@/components/CadencePulseChip";
 import UnscheduledLetterChip from "@/components/UnscheduledLetterChip";
 import EngineCadencePromise from "@/components/EngineCadencePromise";
+import LetterStampBar from "@/components/LetterStampBar";
 
 export const metadata: Metadata = {
   title: "Now · 現在 — ZONE 27 craft journal",
@@ -1037,6 +1038,17 @@ export default function NowPage() {
             (WHAT effort ceiling)· brand IP triple-fire(Disclosure +
             Pratfall + 不打擾就是禮物)。 */}
         <EngineCadencePromise />
+
+        {/* R78 W-B · LetterStampBar panel variant · Agent A R77 SHIP G ·
+            Stratechery RSS heartbeat + Wikipedia「last edited」 stamp +
+            UnscheduledLetterChip R75 W-B companion · pairs with /letter
+            R77 W-D singular voice artifact · 4-chip stack now(CadencePulseChip
+            WHEN + UnscheduledLetterChip HOW + EngineCadencePromise WHAT +
+            LetterStampBar VOICE)· brand IP triple-fire(Disclosure + Pratfall
+            + 不打擾就是禮物)。 */}
+        <div className="mt-4 max-w-2xl">
+          <LetterStampBar variant="panel" />
+        </div>
       </section>
 
       <div className="mx-auto w-32 gold-line mb-12" />

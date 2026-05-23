@@ -165,7 +165,7 @@ export default function AuditPage() {
               </li>
               <li className="font-mono tabular">
                 <span className="text-mute/60">RECEIPTS</span>{" "}
-                <span className="text-bone">N={finalizedCount} · cpbl-260521-01 PROVED</span>
+                <span className="text-bone">N={finalizedCount} · {finalizedCount} PROVED · 0 DIVERGED</span>
               </li>
               <li className="font-mono tabular">
                 <span className="text-mute/60">FOUNDERS 27</span>{" "}

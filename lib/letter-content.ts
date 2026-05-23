@@ -90,7 +90,7 @@ ZONE 27 此刻是什麼狀態(2026-05-23):
 
 一個 PROVED receipt(cpbl-260521-01 富邦 60% engine → PROVED ✓)·
 4 場 ingested matches · 7 個 SYSTEM-TEST forged Founders · 0 個真實
-paying customer · 49 visitor-discoverable routes · 6 canonical append-only
+paying customer · 53 visitor-discoverable routes · 7 canonical append-only
 ledgers · 143+ waves of craft · 0 brand redline violation。
 
 我在台南某間咖啡店或某個夜班 · 親手寫每個 page。 沒外包 · 沒 hire intern ·

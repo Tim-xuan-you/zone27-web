@@ -277,6 +277,19 @@ export default function Footer() {
           >
             公開可驗證 · 不收下注佣 · 不推薦投注 · OPEN ENGINE · NO COMMISSION · NO BET ADVICE
           </p>
+          {/* R78 W-F-2 · BequestLine · Agent A R78 SHIP D · Patek 1996「you
+              never own · look after for next generation」 + Belk 1988 Extended
+              Self bequeathal mechanism + R77 ENGINE_OPS_LOG continuity ·
+              1-line footer addendum site-wide · Belk bequeathal activates
+              for EVERY page visitor passively(not just /heritage explicit
+              readers)· solo-founder Pratfall + Patek Generations 在 literal
+              footer 物理 codify · per /ethics #3 GitHub MIT licensed binding
+              + R75 W-D MultiYearAnchor「Tim 失蹤 30 days → GitHub repo open-
+              sources within 30 days」 multi-year durability statement。 */}
+          <p className="font-mono text-mute/80 group-hover:text-mute text-[9px] tracking-[0.28em] mt-1.5 transition-colors leading-relaxed">
+            <span aria-hidden="true" className="text-gold/70 mr-1">▌</span>
+            ZONE 27 ledger 將在 Tim 退場後由社群繼承 · 程式碼公開 · 帳本附加 · 球迷世代延續
+          </p>
         </Link>
 
         {/* ── Round 38 W-F · Founders count static row · Agent A #5 ship

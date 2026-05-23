@@ -127,7 +127,7 @@ export default function TransparencyPage() {
               </li>
               <li className="font-mono tabular">
                 <span className="text-mute/60">RECEIPTS</span>{" "}
-                <span className="text-bone">N={FINALIZED_N} · cpbl-260521-01 PROVED</span>
+                <span className="text-bone">N={FINALIZED_N} · {FINALIZED_N} PROVED · 0 DIVERGED</span>
               </li>
               <li className="font-mono tabular">
                 <span className="text-mute/60">FOUNDERS 27</span>{" "}

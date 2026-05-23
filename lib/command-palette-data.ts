@@ -525,6 +525,98 @@ export const COMMAND_ITEMS: CommandItem[] = [
       "2700",
     ],
   },
+  // R77 W-D · NEW /letter · Tim 親手 singular voice artifact · DHH HEY World
+  // + Berkshire annual letter + Bret Victor replace-in-place pattern · 信任
+  // 文件 group。 Per Agent B R78 🔴 #1 fix · /letter + /year-zero + /heritage
+  // 從 R77+R78 全 missing from Cmd-K · 5-second discoverability gap closed。
+  {
+    label: "The Letter · Tim 親手 voice artifact · DHH HEY World + Berkshire replace-in-place",
+    kicker: "/letter",
+    path: "/letter",
+    group: "信任文件",
+    keywords: [
+      "letter",
+      "the letter",
+      "tim",
+      "voice",
+      "親手",
+      "berkshire",
+      "dhh",
+      "hey world",
+      "bret victor",
+      "replace-in-place",
+      "edit history",
+      "edited",
+    ],
+  },
+  // R77 W-C · NEW /year-zero · Defector Year-Five at Year-Zero · 5-section
+  // long-form essay · 信任文件 group。
+  {
+    label: "Year Zero · Tim 親手 第一封年信 · Defector Year-Five pattern at Year-Zero",
+    kicker: "/year-zero",
+    path: "/year-zero",
+    group: "信任文件",
+    keywords: [
+      "year zero",
+      "year-zero",
+      "annual",
+      "annual letter",
+      "defector",
+      "year five",
+      "five",
+      "what shipped",
+      "what refused",
+      "thank you",
+      "1 proved",
+      "year one",
+      "founders annual",
+    ],
+  },
+  // R78 W-F · NEW /heritage · Patek 1996「Generations」 altercasting +
+  // Belk 1988 Extended Self + Weinstein 1963 · pre-cast inheritance for
+  // ALL visitors · 信任文件 group。
+  {
+    label: "Heritage · 替下一個 CPBL 球迷世代守 · Patek 1996 + Belk 1988 + Weinstein 1963 altercasting",
+    kicker: "/heritage",
+    path: "/heritage",
+    group: "信任文件",
+    keywords: [
+      "heritage",
+      "繼承",
+      "generations",
+      "inheritance",
+      "patek",
+      "belk",
+      "extended self",
+      "weinstein",
+      "altercasting",
+      "下一代",
+      "球迷世代",
+      "pre-cast",
+    ],
+  },
+  // R78 W-A · NEW /founders/seat-card · 270 altercasting seat permalinks ·
+  // Patek 1996 + Weinstein 1963 + Belk 1988 + Defector 2020 named-launch
+  // pattern · 信任文件 group · Cmd-K entry to seat #008(first empty seat
+  // post-7 SYSTEM-TEST · representative entry · 用 270 entries 太雜)。
+  {
+    label: "Seat Card #008 · altercasting permalink · 270 seats publicly waiting · Patek 1996",
+    kicker: "/founders/seat-card/008",
+    path: "/founders/seat-card/008",
+    group: "信任文件",
+    keywords: [
+      "seat",
+      "seat card",
+      "seat-card",
+      "008",
+      "altercasting",
+      "patek",
+      "270",
+      "empty seat",
+      "founder identity",
+      "pre-cast",
+    ],
+  },
   // R76 W-C · NEW /engine-log · Stripe Status 2012 + Cloudflare 2025 +
   // Tailscale changelog pattern · curated dated log of every engine re-run
   // + receipt correction + input-staleness + methodology update · biggest

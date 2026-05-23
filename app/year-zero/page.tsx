@@ -81,7 +81,7 @@ export const metadata: Metadata = {
 //
 // Append-only per /audit S05 PRE-COMMIT clause · 修改 letter content 需 30
 // 天前 /changelog 公告 · same single-source discipline as ENGINE_OPS_LOG
-// R76 W-C + ENGINE_DIFF_BEACONS R71 W-C + canonical 6-ledger family pattern。
+// R76 W-C + ENGINE_DIFF_BEACONS R71 W-C + canonical 7-ledger family pattern。
 // ─────────────────────────────────────────────────────
 
 export const revalidate = 86400; // daily revalidate(stat freshness)
@@ -160,7 +160,7 @@ export default function YearZeroPage() {
             <span className="font-mono text-bone tabular">
               {LOCAL_STORAGE_KEY_COUNT}
             </span>{" "}
-            canonical localStorage keys · 6 canonical append-only ledgers ·
+            canonical localStorage keys · 7 canonical append-only ledgers ·
             5/5 risk-bearing client components wrapped with ClientErrorBoundary。
           </p>
           <p>
@@ -199,7 +199,7 @@ export default function YearZeroPage() {
             <li className="flex gap-3 items-baseline">
               <span className="text-gold/85" aria-hidden="true">▸</span>
               <span className="flex-1">
-                <strong className="text-bone">6 canonical append-only ledgers</strong>
+                <strong className="text-bone">7 canonical append-only ledgers</strong>
                 {" "}· ENGINE_DIFF_BEACONS(R71 W-C)+ NO_PUSH_INVENTORY(R73 W-D ·{" "}
                 {NO_PUSH_COUNT} deliberate absences)+ RECIPROCITY_LEDGER(R74
                 W-A · {RECIPROCITY_COUNT} published-before-ask artifacts)+
@@ -554,15 +554,15 @@ export default function YearZeroPage() {
         <Section
           no="05"
           en="THANK YOU"
-          zh="感謝 · 1 PROVED + N=4 + 您讀到這裡"
+          zh="感謝 · 4 PROVED + N=4 finalized + 您讀到這裡"
         >
           <p>
             Year Zero 沒有 customers · 沒有 paying subscribers · 沒有 social
             proof testimonials(per 11-NEVER #11)。 但有{" "}
             <strong className="text-bone">
-              {FINALIZED_COUNT} PROVED receipt(cpbl-260521-01)
+              {FINALIZED_COUNT} PROVED receipts(cpbl-260521-01 + 260523-01/02/03)
             </strong>
-            · 4 ingested matches · 7 SYSTEM-TEST forged Founders ·{" "}
+            · {INGESTED_COUNT} ingested matches · 7 SYSTEM-TEST forged Founders ·{" "}
             {CUMULATIVE_WAVES}+ waves of craft · 而您 read 完此 letter ·
             可能就是 future Founder #001-#{FOUNDERS_TOTAL} 之一。
           </p>
@@ -574,7 +574,7 @@ export default function YearZeroPage() {
             <li className="flex gap-3 items-baseline">
               <span className="text-gold/85" aria-hidden="true">▸</span>
               <span className="flex-1">
-                <strong className="text-bone">cpbl-260521-01 富邦 + 統一</strong>
+                <strong className="text-bone">cpbl-260521-01 富邦 vs 統一</strong>
                 {" "}· 第一場 ingested match · 60% engine prediction → PROVED ✓
                 · 永久 1st Edition Shadowless Run · 編號 RECEIPT 001
               </span>
@@ -582,9 +582,20 @@ export default function YearZeroPage() {
             <li className="flex gap-3 items-baseline">
               <span className="text-gold/85" aria-hidden="true">▸</span>
               <span className="flex-1">
-                <strong className="text-bone">3 場 pending CPBL matches</strong>
-                {" "}(cpbl-260522-01/02/03)· stale-pending finalResult ingest
-                · Tim 親手 screenshot decision pending
+                <strong className="text-bone">cpbl-260523-01/02/03 · 3 場 同日 finalized</strong>
+                {" "}· 味全 0:2 台鋼 + 富邦 3:1 樂天 + 統一 2:0 兄弟 · 全 PROVED ✓ ·
+                4-for-4 PROVED rate · per /audit S05「PROVED + DIVERGED 等大」
+                disclosure parity 但 N=4 仍非 statistical evidence(/steelman § 1
+                Bill James 1985 N≥30 threshold)
+              </span>
+            </li>
+            <li className="flex gap-3 items-baseline">
+              <span className="text-gold/85" aria-hidden="true">▸</span>
+              <span className="flex-1">
+                <strong className="text-bone">{INGESTED_COUNT - FINALIZED_COUNT} 場 pending CPBL matches</strong>
+                {" "}(cpbl-260522-01/02/03 stale-pending + cpbl-260524-01/02/03
+                future preview)· Tim 親手 screenshot decision pending · per
+                /ethics commitment #5 7-day post-final SLA
               </span>
             </li>
             <li className="flex gap-3 items-baseline">

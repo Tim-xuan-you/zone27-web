@@ -592,7 +592,7 @@ export default function ManifestoPage() {
                 <Link href="/audit" className="text-gold hover:underline">
                   /audit
                 </Link>{" "}
-                — 5 sections · 引擎範圍 + 環境衝擊 + 揭露哲學
+                — 7 sections · 引擎範圍 + 揭露哲學 + LocalStorage + v0.3 ESTIMATE
               </li>
               <li>
                 ▸ 倒置 II · 引擎工具免費:{" "}

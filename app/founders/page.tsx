@@ -694,7 +694,7 @@ export default async function FoundersPage({
                 自訂任意投手對戰(K/9 · BB/9 · HR/9)
               </NotBuyingItem>
               <NotBuyingItem>
-                讀完整 model report(/audit 5 sections)
+                讀完整 model report(/audit 7 sections)
               </NotBuyingItem>
               <NotBuyingItem>
                 讀完整 methodology(/methodology)

@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import FounderSignOff from "@/components/FounderSignOff";
 import ArticleMeta from "@/components/ArticleMeta";
 import RelatedReading from "@/components/RelatedReading";
+import IdentityCovenant from "@/components/IdentityCovenant";
 import { FOUNDERS_TOTAL } from "@/lib/founders-stats";
 
 export const metadata: Metadata = {
@@ -187,6 +188,14 @@ export default function FoundersWhy270Page() {
             2,700 IS the filter · 不買「便宜試試」 心態的 visitor。
           </p>
         </Section>
+
+        {/* R78 W-D · IdentityCovenant · Agent A R77 SHIP C · Bottega 1978
+            「When your own initials are enough」 + Patek 1996 + Weinstein
+            1963 altercasting · 4-line negative-space block · 「您會讀到這裡
+            · 不是因為 ___ · 是因為 ___」 pre-casts visitor identity · drop-
+            in between Section 02(WHY 2,700)+ Section 03(WHY ONE-TIME)·
+            Pratfall self-selection filter · per /audit S05 PRE-COMMIT。 */}
+        <IdentityCovenant />
 
         {/* ── §03 · WHY ONE-TIME NOT SUBSCRIPTION ── */}
         <Section
