@@ -385,19 +385,21 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
   ],
   // Round 26 · /membership 新 route(Round 25 ship)需要 RelatedReading
   // entries · 否則 page 內 component 顯示空 array。3 個 sibling 選:
-  // /founders(自然下一步:Founders 27 deep dive)· /manifesto(為什麼
-  // 4-tier 結構 · 倒置 II MONETIZATION)· /track-record(物理 proof
-  // points 給 FREE TIER 訂閱者「為什麼相信這個 ladder」)。
+  // /pricing/why(R64 W-B NEW · 自然下一步:pricing rationale 一頁說清楚 ·
+  // 「為什麼這個 tier 是這個價」 訪客 next question)· /founders(Founders
+  // 27 deep dive)· /track-record(物理 proof points)。
+  // Round 65 W-A · swapped /manifesto for /pricing/why(R64 W-B NEW page 更
+  // direct sibling · 同 buy decision context)。
   "/membership": [
+    {
+      href: "/pricing/why",
+      kicker: "pricing/why",
+      title: "為什麼是這個價 · pricing rationale 一頁說清楚",
+    },
     {
       href: "/founders",
       kicker: "founders",
       title: "Founders 27 詳情頁 · 限量 270 · 終身",
-    },
-    {
-      href: "/manifesto",
-      kicker: "manifesto",
-      title: "倒置宣言 · 為什麼工具免費 · 身分付費",
     },
     {
       href: "/track-record",
@@ -549,6 +551,31 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
       title: "0 信用卡資訊 in ZONE 27 server · 完整 anti-tracker inventory",
     },
   ],
+  // R64 W-B · /pricing/why NEW · pricing-page-as-object-of-craft synthesis ·
+  // Agent 6 R64 5 brand-pure patterns + 5 anti-patterns avoided · Defector
+  // inverse-disclosure + Stripe Atlas 6-deliverable + FanGraphs output-not-input
+  // + Stratechery FAQ defense + Pratfall「沒做什麼」。 Siblings:/membership
+  // (4-tier ladder parent · users land here after seeing pricing rationale)·
+  // /founders(deep page NT$ 2,700 · same buy decision)· /membership/black-card
+  // (deep page NT$ 299/月 · same buy decision)。
+  "/pricing/why": [
+    {
+      href: "/membership",
+      kicker: "membership",
+      title: "4-tier ladder · 完整 tier 對照表",
+    },
+    {
+      href: "/founders",
+      kicker: "founders",
+      title: "Founders 27 · NT$ 2,700 一次性 · 終身",
+    },
+    {
+      href: "/membership/black-card",
+      kicker: "membership/black-card",
+      title: "BLACK CARD · NT$ 299/月 訂閱會員",
+    },
+  ],
+
   // Round 33 W-E · /annual/2026 NEW · Year 0 honest empty state report ·
   // Defector + Hell Gate + Aftermath radical-transparency pattern · agent A
   // F2 #2 priority。 Siblings:/audit(model report parallel)· /founders/ledger
