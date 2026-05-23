@@ -365,6 +365,19 @@ export default function CommandPalette() {
               </kbd>
               <span className="hidden sm:inline">關閉</span>
             </span>
+            {/* R62 W-D · g-mode discoverability hint · Linear/GitHub power-user
+                grammar · 訪客 close palette 後可直接 g+m / g+t / g+l jump · 不必
+                每次重開 Cmd-K · per Bloomberg/power-user agent Ship #1 axiom。 */}
+            <span className="hidden md:flex items-center gap-1.5">
+              <kbd className="border border-gold/40 text-gold/85 px-1.5 py-0.5 text-[9px] tracking-normal">
+                G
+              </kbd>
+              <span className="text-gold/85">+</span>
+              <kbd className="border border-gold/40 text-gold/85 px-1.5 py-0.5 text-[9px] tracking-normal">
+                M/T/L/F/A
+              </kbd>
+              <span className="text-mute/70">直接跳</span>
+            </span>
           </div>
           <span lang="en" className="text-mute/70">
             {flat.length} / {COMMAND_ITEMS.length}

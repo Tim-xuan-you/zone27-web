@@ -1,8 +1,8 @@
 # 📋 New Conversation Prompt · ZONE 27 Session Handoff
 
 **用途:** 開新對話窗時複製此 prompt 整段 paste · 新 Claude 一秒接上 context。
-**最後 update:** 2026-05-23 · **Round 61 W-E 攻頂** · R59 7 waves + R60 3 waves + R61 5 waves · 3-agent full-authority pattern × 3 invocations · R37→R61
-**Token urgency:** Tim explicit「現在這個對話窗太燒TOKEN了」 · 此 prompt 是 R61 contextual snapshot for fresh Claude bootstrap
+**最後 update:** 2026-05-23 · **Round 62 W-D 攻頂** · R59 7 W + R60 3 W + R61 6 W + R62 4 W · 3-agent full-authority × 4 invocations(R59 + R60 + R61 + R62)· R37→R62
+**Token urgency:** Tim explicit「現在這個對話窗太燒TOKEN了」 · 此 prompt 是 R62 contextual snapshot for fresh Claude bootstrap
 
 ---
 
@@ -40,6 +40,11 @@
   · feedback_full_authority_3_agent_pattern(Tim 全權 mandate → 3 parallel agents synthesize → multi-wave ship · R51 confirmed pattern)
 
 【2026-05-23 R59-R60 攻頂 state · 7+ waves · 3-agent full-authority pattern fire × 2 invocations】:
+
+R62 W-A · Q3 2026 milestone-language sweep · 11 user-visible refs converted to「payment infra 就緒後開放 · milestone-triggered · 不綁日期」(faq · founders · founders/ledger · membership/black-card · OG card · MemberUnlocksGrid · PaidTierLockedGrid · WaitlistForm)· commits 08b0b56 + 93acc91
+R62 W-B · NEW ReceiptForwardButton component · plain-text receipt share(match · engine pick · actual · verdict · CARD numbering · URL)· 0 tracking 0 UTM 0 referral code · Stratechery + Defector + Athletic pattern · Pokemon TCG「show off receipt」 mechanic codify · wired in /matches/[gameId] CALIBRATION RECEIPT · commit 17838ce
+R62 W-C · NEW GlobalShortcuts component · Linear/GitHub g-mode two-stroke jump shortcuts · 13 bindings(g+m matches · g+t track-record · g+l lab · g+f founders · g+a audit · g+c calibration · g+r roadmap · g+p methodology · g+s steelman · g+e ethics · g+x transparency · g+n now · g+h home · g+? CmdK help)· 1500ms reset · input-safe · modifier-safe · visual flash toast · commit 63ce44f
+R62 W-D · CmdK palette footer 加 g-mode discoverability hint「G + M/T/L/F/A 直接跳」· power-users from any open palette 立即 know jump grammar exists · (此 commit · /now journal + NEW-CONVERSATION-PROMPT R62 closure)
 
 R61 W-A · validate regex bug fix · cpbl-pitchers.ts uses "name": JSON format · regex name:\s*" 0 matches · 4 false-positive pitchers · fixed with leading quote anchor · commit 4072b8e
 R61 W-B · validator inline ESTIMATE marker support · 3-tier classification(in cpbl-pitchers OR // estimate marker OR real gap)· 0 error 0 warning · commit 6b20745
@@ -187,9 +192,10 @@ EXCEPTIONS ship · brand-pure 替代:
 | R58 | 1 | execution mode continued | cv-auto on /methodology + /audit + /privacy · 19 sections benefit |
 | R59 | 7 | full-authority 3-agent · brand-redline + conversion + Hindenburg evidence | /founders 5.4→9 CRITICAL fix · /membership/black-card 4-cell anchor strip · 8 magic-link copy refs · /methodology + /audit + /transparency DISCLOSURE blocks · 4 inline sup + Section 07 FOOTNOTES + FootnoteRef component · Supabase getUser() helper |
 | R60 | 3 | Pokemon TCG lens · 1 deep web research · SHADOWLESS RUN binary tier + SET release narrative + TCG card anatomy + designer dogfood 3rd-canary | /methodology Section 04 SET framing · /founders + /founders/ledger#shadowless-run · FirstReceiptHero CARD 001/∞ + REPRINT POLICY 0 · /admin DESIGNER QUICK REFERENCE + AdminTierSwitcher Cmd+Shift+P prominent kbd display |
-| R61 | 5 | 3rd full-authority · 3 parallel agents · validate regex + focus-visible + 2 CRITICAL 🔴 brand contradictions + WCAG 2.2 | validate:data 0 error 0 warning · 11 focus-visible refactor · 賣明牌 brand redline closed · /audit S08→S05 broken refs fixed · 6 stale magic-link cleanup · /auth/callback raw-error-leak fix · /annual commits 200→294 · PreviewModeBanner 28→32/36px + input-safe shortcut |
+| R61 | 6 | 3rd full-authority · 3 parallel agents · validate regex + focus-visible + 2 CRITICAL 🔴 brand contradictions + WCAG 2.2 | validate:data 0 error 0 warning · 11 focus-visible refactor · 賣明牌 brand redline closed · /audit S08→S05 broken refs fixed · 6 stale magic-link cleanup · /auth/callback raw-error-leak fix · /annual commits 200→294 · PreviewModeBanner 28→32/36px + input-safe shortcut |
+| R62 | 4 | 4th full-authority · Bloomberg/power-user/newsletter lens · 1 deep research agent | Q3 2026 → milestone-triggered language sweep(11 user-visible refs)· NEW ReceiptForwardButton plain-text artifact share(Stratechery + Defector + Athletic pattern · 0 tracking)· NEW GlobalShortcuts g-mode 13 jump shortcuts(Linear/GitHub grammar)· CmdK footer g-mode discoverability hint |
 
-**Total: 56+ waves · ~140 fixes · 0 brand redline violation**
+**Total: 60+ waves · ~155 fixes · 0 brand redline violation**
 
 ---
 
