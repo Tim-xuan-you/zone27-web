@@ -26,6 +26,7 @@ import MatchupHistoryLens from "@/components/MatchupHistoryLens";
 import LensTrace, { ENGINE_V02_TRACE_STEPS } from "@/components/LensTrace";
 import MatchViewTracker from "@/components/MatchViewTracker";
 import AnonPickWidget from "@/components/AnonPickWidget";
+import LensFocusVote from "@/components/LensFocusVote";
 import EngineStamp from "@/components/EngineStamp";
 import CopyLinkButton from "@/components/CopyLinkButton";
 import ReceiptForwardButton from "@/components/ReceiptForwardButton";
@@ -479,6 +480,21 @@ export default async function MatchDetailPage({
         <EngineNarrative match={m} />
       </section>
 
+      {/* ── LENS FOCUS VOTE · R67 W-A · Agent R66 ship #1 deferred ──
+          Cialdini & Trope 1976 commitment-consistency 物理 codify ·
+          pre-canvas 1-tap pre-commit「您認為哪個 lens 對今晚這場最 matter」 ·
+          後 visitor read /02A-/02F 帶 own bet mentally active · 比 cold
+          scroll 更高 retention。 brand IP 全 ✓:0 server / 0 PII / 0
+          leaderboard / 0 「X% voters」 social proof feed · 純 personal
+          pre-commitment artifact。 同 AnonPickWidget pattern · localStorage
+          zone27_lens_focus_votes_v1 · /audit S06 disclose。
+          Placement · BEFORE /02 LENS CANVAS hub · 順序:AnonPick(team) →
+          LensFocusVote(angle) → 7-lens canvas → 兩個 commitments 同時
+          mentally active · Cialdini foot-in-the-door 物理 codify。 */}
+      <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-8 border-t border-line/40 pt-12">
+        <LensFocusVote matchId={m.id} />
+      </section>
+
       {/* ── /02 · LENS CANVAS · Round 42 W-E · Agent I dogfood F1.2 fix
           One Tier-1 header introduces the 6 lens sub-sections collectively ·
           內個 lens sub-section 從 /01B-/01G outdented to /02A-/02F at Tier-2
@@ -491,7 +507,7 @@ export default async function MatchDetailPage({
           都 text-[10px] · 訪客看 mobile 視覺 collapse · 修:hub 升 text-xs
           + larger gold-glow underline + 不 tracking-[0.4em] 過 tight · 父
           子關係 visible at glance not requiring body prose to decode。 */}
-      <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-6 border-t border-line/40 pt-12">
+      <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-6 pt-2">
         <div className="border-l-4 border-gold pl-4 mb-4">
           <h2 className="font-mono text-gold text-xs sm:text-sm tracking-[0.3em] mb-1">
             / 02 · LENS CANVAS

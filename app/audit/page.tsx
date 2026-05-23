@@ -675,6 +675,11 @@ export default function AuditPage() {
                 value="您上次看 /track-record 時的 N · 用於 delta chip 顯示"
                 note="LedgerDeltaChip 寫入 + 讀取 · 每次訪 /track-record 看到「+X since YYYY-MM-DD」 · 純 Endowment effect 心理 hook · 0 server · 0 PII · R49 W-A"
               />
+              <DataRow
+                label="zone27_lens_focus_votes_v1"
+                value="您 pre-canvas 1-tap lens vote · per-match commitment artifact"
+                note="LensFocusVote 寫入 · /matches/[gameId] pre /02 LENS CANVAS hub · 6 lens 選 1 個您認為最 matter · Cialdini commitment-consistency · 0 server · 0 PII · 0 leaderboard · 純您裝置 · R67 W-A"
+              />
             </DataTable>
 
             <P className="text-mute/70 mt-3">
