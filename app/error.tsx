@@ -3,25 +3,31 @@
 import { useEffect } from "react";
 import Link from "next/link";
 
-// ── ZONE 27 · Branded Error Boundary ──────────────────
-// 客製錯誤頁面。當任何 runtime error 冒出,訪客看到的不再是
-// Next.js 預設的紅字 stacktrace,而是符合 ZONE 27 黑金品牌
-// 語言的優雅錯誤訊息 + 一鍵重試。
+// ── ZONE 27 · Branded Route Error Boundary ────────────
+// 客製錯誤頁面。當任何 runtime error 冒出於 route segment 內,訪客
+// 看到的不再是 Next.js 預設的紅字 stacktrace,而是符合 ZONE 27 黑金
+// 品牌語言的優雅錯誤訊息 + 一鍵重試。
+//
+// R66 W-A · Next.js 16 API migration · `reset` → `unstable_retry`
+// (per node_modules/next/dist/docs/01-app/03-api-reference/03-file-
+// conventions/error.md current spec)。 Old `reset` may break in
+// Next.js 17 · 主動 migrate。 NEW: app/global-error.tsx 同 wave 加
+// for root layout error coverage(error.tsx 不 wrap root layout)。
 //
 // 注意:error.tsx 是 client component 強制需求,且這頁不能引用
 // Nav / Footer 等 server components(會把整棵樹拉壞)。
 // ─────────────────────────────────────────────────────
 
-export default function GlobalError({
+export default function RouteError({
   error,
-  reset,
+  unstable_retry,
 }: {
   error: Error & { digest?: string };
-  reset: () => void;
+  unstable_retry: () => void;
 }) {
   // Log to console in dev so we don't lose the stack
   useEffect(() => {
-    console.error("[ZONE27 · ERROR]", error);
+    console.error("[ZONE27 · ROUTE-ERROR]", error);
   }, [error]);
 
   return (
@@ -74,7 +80,7 @@ export default function GlobalError({
         <div className="mt-12 flex flex-wrap gap-4 justify-center">
           <button
             type="button"
-            onClick={reset}
+            onClick={() => unstable_retry()}
             className="px-8 py-3 bg-gold text-navy text-xs tracking-[0.3em] hover:bg-gold-soft transition-colors font-medium"
           >
             ▶ 再試一次
