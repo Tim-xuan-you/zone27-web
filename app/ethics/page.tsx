@@ -320,6 +320,109 @@ export default function EthicsPage() {
           </div>
         </section>
 
+        {/* R69 W-G · Agent B audit F3 fix · BUS_FACTOR section NEW · per
+            PreTransferReceipt R68 W-G「Tim disappears → 看 /ethics BUS_FACTOR
+            section」 promise · 之前 phantom · 此 section fulfill promise。
+            Bus-factor honesty per [[feedback-zone27-pratfall-brand-ip]] +
+            Costly Signaling · 「what happens if Tim 失蹤了」 explicit
+            contingency · 同 SaaS 「if our team disappears」 disclosure pattern。 */}
+        <section
+          id="bus-factor"
+          className="mx-auto max-w-3xl w-full px-6 sm:px-10 py-14 border-t border-line/40 scroll-mt-20"
+        >
+          <div className="flex items-baseline gap-4 mb-2">
+            <span
+              lang="en"
+              className="font-mono text-gold/70 text-[10px] tracking-[0.35em]"
+            >
+              / BUS_FACTOR
+            </span>
+            <span
+              lang="en"
+              className="font-mono text-mute text-[10px] tracking-[0.35em]"
+            >
+              CONTINGENCY · TIM 失蹤了
+            </span>
+          </div>
+          <h2 className="text-3xl text-bone font-light tracking-tight mb-6">
+            如果 Tim 失蹤了 · BUS_FACTOR = 1
+          </h2>
+          <p className="text-mute leading-relaxed mb-4">
+            ZONE 27 是 solo founder · 0 employees · 0 contractors · 0
+            outsourced ops。{" "}
+            <strong className="text-bone">BUS_FACTOR = 1</strong> · 如果
+            Tim 出車禍 / 失蹤 / health-collapse · 整個 brand pipeline 中斷。
+            這是 brand IP「稀缺手工」 的 cost · 不藏 · 此 section explicit
+            codify what happens then。
+          </p>
+          <h3 className="text-bone text-lg mt-6 mb-3">您的資料 · 0 vendor lock-in</h3>
+          <ul className="space-y-3 text-mute leading-relaxed">
+            <li>
+              <strong className="text-bone">您的 Founder ID + ledger row</strong>{" "}
+              · 在{" "}
+              <a
+                href="https://github.com/Tim-xuan-you/zone27-web"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gold underline-offset-4 hover:underline"
+              >
+                GitHub zone27-web
+              </a>{" "}
+              repository · MIT licensed · 您 fork 自己 host 沒問題 · per /audit
+              S05 + /transparency 02 NEVER list
+            </li>
+            <li>
+              <strong className="text-bone">您的 PDF 證書 + welcome kit</strong>{" "}
+              · 本機 · 您下載後永久 own · 不需要 ZONE 27 server 渲染 · per
+              R68 W-G PreTransferReceipt ROW 01
+            </li>
+            <li>
+              <strong className="text-bone">您的 application + Tim email</strong>{" "}
+              · 在您 Gmail inbox + Tim Gmail inbox · 兩處 copy · 即使 Tim
+              帳號 frozen · 您 inbox 完整保留 audit trail
+            </li>
+            <li>
+              <strong className="text-bone">Supabase 資料</strong> · zone27-prod
+              Tokyo region · RLS-locked · 即使 Tim Vercel deploy 停止 · Supabase
+              Pro tier 無人接管下 90 天 auto-pause 但不刪除 · 您 email reset
+              可從 Supabase Auth 直接 recover · per[[zone27-supabase]]
+            </li>
+            <li>
+              <strong className="text-bone">您 NT$ 2,700 paid Founders 27</strong>{" "}
+              · 14 天 cooling-off window 隨時可退款 · per /terms § 4B Taiwan
+              消保法 § 19。 Tim 失蹤情境 · 因 service interruption · 您可
+              email{" "}
+              <a
+                href="mailto:tatayngiti@gmail.com?subject=ZONE%2027%20%C2%B7%20BUS_FACTOR%20refund%20request"
+                className="text-gold underline-offset-4 hover:underline"
+              >
+                tatayngiti@gmail.com
+              </a>{" "}
+              · 由 Tim 家人 / executor 退款處理(per /privacy Section 06B
+              emergency contact provision)
+            </li>
+          </ul>
+          <h3 className="text-bone text-lg mt-6 mb-3">為什麼不雇人 · 不外包?</h3>
+          <p className="text-mute leading-relaxed mb-4">
+            僱人 = 分散 BUS_FACTOR 但同時稀釋 brand identity。 ZONE 27 brand IP
+            「Tim 親手」 = 「Tim 親眼 verify wire」 + 「Tim 親手 review
+            application」 + 「Tim 親手 manually onboard」。 僱第 2 人 = 變 SaaS
+            · 違反 倒置 SaaS axiom + 稀缺手工 axiom。
+          </p>
+          <p className="text-mute leading-relaxed mb-4">
+            <strong className="text-bone">所以選擇:</strong> 我選 BUS_FACTOR=1
+            的 cost · 因為 BUS_FACTOR=1 是 brand 信用 base。 為了減少您的
+            risk · 我 ship 此 section 公開 · 您 see contingency = 您 conclude
+            您 own 風險決定。
+          </p>
+          <p className="font-mono text-mute/80 text-[10px] tracking-[0.25em] leading-relaxed">
+            ⚓ 同 Pinboard.in(Maciej Cegłowski 單人 17 年)· 同 Patek Philippe
+            family-business 174 年 · 同 Berkshire Hathaway succession plan
+            公開 · solo founder BUS_FACTOR honesty 比 fake「team page · 10
+            people」 brand-pure。
+          </p>
+        </section>
+
         <FounderSignOff>
           <p>
             這頁是 ZONE 27 displacement mission 的 brand-IP layer 物理 codify ·

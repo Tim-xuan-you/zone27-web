@@ -329,6 +329,15 @@ export default function TermsPage() {
 }
 
 // ── Sub-component ─────────────────────────────────────
+// R69 W-G · Agent B audit F2 fix · Section accepts optional id prop ·
+// slug derived from `no` ("4B" → "section-4b" · "02B" → "section-02b" ·
+// "01" → "section-01")· enables cross-link anchor jumping(per
+// PreTransferReceipt R68 W-G /terms#section-4b)· brand IP「方法公開」
+// 延伸到 deep-link discoverability。
+function slugFromSectionNo(no: string): string {
+  return `section-${no.toLowerCase().replace(/[^a-z0-9]/g, "-")}`;
+}
+
 function Section({
   no,
   label,
@@ -340,8 +349,12 @@ function Section({
   zh: string;
   children: React.ReactNode;
 }) {
+  const id = slugFromSectionNo(no);
   return (
-    <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-14 pt-10 border-t border-line/40">
+    <section
+      id={id}
+      className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-14 pt-10 border-t border-line/40 scroll-mt-20"
+    >
       <div className="flex items-baseline gap-4 mb-2">
         <span className="font-mono text-gold/70 text-[10px] tracking-[0.35em]">
           / {no}

@@ -47,104 +47,138 @@ export type { FoundersApplyResult, FoundersApplyErrorCode } from "@/lib/founders
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
+// R69 W-G · Agent B audit F4 fix · sanitize CRLF/tab from name + email +
+// applicationId to prevent email header injection(Subject line CRLF→BCC
+// 第三方 attacker pattern)· defense-in-depth even if Resend sanitizes
+// internally · brand IP「任何缺陷被攻擊」 axiom 物理 codify。
+function stripControlChars(s: string): string {
+  return s.replace(/[\r\n\t]/g, " ");
+}
+
 export async function submitFoundersApplication(
   _prev: FoundersApplyResult | null,
   formData: FormData,
 ): Promise<FoundersApplyResult> {
-  const emailRaw = formData.get("email");
-  const nameRaw = formData.get("name");
-  const cpblConnectionRaw = formData.get("cpbl_connection");
-  const whyRaw = formData.get("why_zone27");
+  // R69 W-G · Agent B audit F5 fix · wrap entire post-validation block in
+  // try/catch · server_error code now reachable when Resend / runtime throws ·
+  // Tetlock「declare what you actually do」 discipline。 Tim's Gmail flood
+  // protection deferred to migration 0003 rate-limit · rate_limited code
+  // already removed from FOUNDERS_APPLY_ERROR_CODES per F5 part 2。
+  try {
+    const emailRaw = formData.get("email");
+    const nameRaw = formData.get("name");
+    const cpblConnectionRaw = formData.get("cpbl_connection");
+    const whyRaw = formData.get("why_zone27");
 
-  // Validate email
-  if (typeof emailRaw !== "string" || emailRaw.trim().length === 0) {
-    return { ok: false, error: "missing_email" };
-  }
-  const email = emailRaw.trim().toLowerCase();
-  if (!EMAIL_RE.test(email)) {
-    return { ok: false, error: "invalid_email" };
-  }
+    // Validate email
+    if (typeof emailRaw !== "string" || emailRaw.trim().length === 0) {
+      return { ok: false, error: "missing_email" };
+    }
+    // Strip control chars BEFORE regex test · defense-in-depth
+    const email = stripControlChars(emailRaw.trim().toLowerCase());
+    if (!EMAIL_RE.test(email)) {
+      return { ok: false, error: "invalid_email" };
+    }
 
-  // Validate name
-  if (typeof nameRaw !== "string" || nameRaw.trim().length === 0) {
-    return { ok: false, error: "missing_name" };
-  }
-  const name = nameRaw.trim().slice(0, FOUNDERS_APPLY_LIMITS.nameMaxChars);
-
-  // Validate cpbl connection
-  if (
-    typeof cpblConnectionRaw !== "string" ||
-    cpblConnectionRaw.trim().length === 0
-  ) {
-    return { ok: false, error: "missing_cpbl_connection" };
-  }
-  const cpblConnection = cpblConnectionRaw
-    .trim()
-    .slice(0, FOUNDERS_APPLY_LIMITS.cpblConnectionMaxChars);
-
-  // Validate why
-  if (typeof whyRaw !== "string" || whyRaw.trim().length === 0) {
-    return { ok: false, error: "missing_why" };
-  }
-  const why = whyRaw.trim();
-  if (why.length < FOUNDERS_APPLY_LIMITS.whyMinChars) {
-    return { ok: false, error: "why_too_short" };
-  }
-  if (why.length > FOUNDERS_APPLY_LIMITS.whyMaxChars) {
-    return { ok: false, error: "why_too_long" };
-  }
-
-  // Generate application ID(timestamp-derived · sortable · unique-enough
-  // for MVP without Supabase row · format: fa-YYYYMMDD-HHMMSS-XXXX where
-  // XXXX is last 4 of email hash · 同 ZONE 27 cpbl-260521-01 grammar)
-  const now = new Date();
-  const yyyymmdd =
-    now.getUTCFullYear().toString() +
-    String(now.getUTCMonth() + 1).padStart(2, "0") +
-    String(now.getUTCDate()).padStart(2, "0");
-  const hhmmss =
-    String(now.getUTCHours()).padStart(2, "0") +
-    String(now.getUTCMinutes()).padStart(2, "0") +
-    String(now.getUTCSeconds()).padStart(2, "0");
-  const emailHashSuffix = simpleHash(email).slice(-4);
-  const applicationId = `fa-${yyyymmdd}-${hhmmss}-${emailHashSuffix}`;
-
-  // Audit trail · Vercel logs primary source · skeptic can verify
-  // application count via log search if needed pre-Supabase
-  console.log(
-    `[ZONE27 · FOUNDERS_APPLY · NEW] id=${applicationId} email=${email} name="${name}" cpbl="${cpblConnection.slice(0, 40)}" why_len=${why.length} ts=${now.toISOString()}`,
-  );
-
-  // Send 2 emails parallel · don't block on either · graceful degradation
-  // per existing lib/email.ts pattern · if RESEND_API_KEY missing both
-  // log warnings + return ok:false but application still succeeds
-  const [visitorEmailResult, timEmailResult] = await Promise.all([
-    sendFoundersApplicationReceived({
-      to: email,
-      name,
-      applicationId,
-    }),
-    sendFoundersApplicationNotification({
-      applicantEmail: email,
-      applicantName: name,
-      cpblConnection,
-      why,
-      applicationId,
-    }),
-  ]);
-
-  if (!visitorEmailResult.ok) {
-    console.warn(
-      `[ZONE27 · FOUNDERS_APPLY · VISITOR_EMAIL_FAILED] id=${applicationId} email=${email} reason=${visitorEmailResult.error}`,
+    // Validate name · strip control chars · cap length
+    if (typeof nameRaw !== "string" || nameRaw.trim().length === 0) {
+      return { ok: false, error: "missing_name" };
+    }
+    const name = stripControlChars(nameRaw.trim()).slice(
+      0,
+      FOUNDERS_APPLY_LIMITS.nameMaxChars,
     );
-  }
-  if (!timEmailResult.ok) {
-    console.warn(
-      `[ZONE27 · FOUNDERS_APPLY · TIM_EMAIL_FAILED] id=${applicationId} reason=${timEmailResult.error}`,
-    );
-  }
 
-  return { ok: true, applicationId };
+    // Validate cpbl connection · strip control chars but allow internal
+    // newlines after first sanitization since this isn't an email header
+    if (
+      typeof cpblConnectionRaw !== "string" ||
+      cpblConnectionRaw.trim().length === 0
+    ) {
+      return { ok: false, error: "missing_cpbl_connection" };
+    }
+    const cpblConnection = cpblConnectionRaw
+      .trim()
+      .slice(0, FOUNDERS_APPLY_LIMITS.cpblConnectionMaxChars);
+
+    // Validate why · cap length · allow internal newlines(body content)
+    if (typeof whyRaw !== "string" || whyRaw.trim().length === 0) {
+      return { ok: false, error: "missing_why" };
+    }
+    const why = whyRaw.trim();
+    if (why.length < FOUNDERS_APPLY_LIMITS.whyMinChars) {
+      return { ok: false, error: "why_too_short" };
+    }
+    if (why.length > FOUNDERS_APPLY_LIMITS.whyMaxChars) {
+      return { ok: false, error: "why_too_long" };
+    }
+
+    // Generate application ID(timestamp-derived · sortable · unique-enough
+    // for MVP without Supabase row · format: fa-YYYYMMDD-HHMMSS-XXXX where
+    // XXXX is last 4 of email hash · 同 ZONE 27 cpbl-260521-01 grammar)
+    const now = new Date();
+    const yyyymmdd =
+      now.getUTCFullYear().toString() +
+      String(now.getUTCMonth() + 1).padStart(2, "0") +
+      String(now.getUTCDate()).padStart(2, "0");
+    const hhmmss =
+      String(now.getUTCHours()).padStart(2, "0") +
+      String(now.getUTCMinutes()).padStart(2, "0") +
+      String(now.getUTCSeconds()).padStart(2, "0");
+    const emailHashSuffix = simpleHash(email).slice(-4);
+    const applicationId = `fa-${yyyymmdd}-${hhmmss}-${emailHashSuffix}`;
+
+    // R69 W-G · Agent B audit F9 fix · redact name + email in Vercel logs ·
+    // /privacy Section 02B disclosure aligned · 主要 audit trail 在 Tim
+    // Gmail inbox · Vercel logs 只記 applicationId + email domain · 不
+    // 完整 PII。 anyone with Vercel access only sees domain · 不 full identity。
+    const emailDomain = email.split("@")[1] ?? "unknown";
+    const namePreview = name.length > 0 ? `${name.slice(0, 1)}***` : "";
+    console.log(
+      `[ZONE27 · FOUNDERS_APPLY · NEW] id=${applicationId} email_domain=${emailDomain} name_prefix=${namePreview} why_len=${why.length} ts=${now.toISOString()}`,
+    );
+
+    // Send 2 emails parallel · don't block on either · graceful degradation
+    // per existing lib/email.ts pattern · if RESEND_API_KEY missing both
+    // log warnings but application still succeeds
+    const [visitorEmailResult, timEmailResult] = await Promise.all([
+      sendFoundersApplicationReceived({
+        to: email,
+        name,
+        applicationId,
+      }),
+      sendFoundersApplicationNotification({
+        applicantEmail: email,
+        applicantName: name,
+        cpblConnection,
+        why,
+        applicationId,
+      }),
+    ]);
+
+    if (!visitorEmailResult.ok) {
+      console.warn(
+        `[ZONE27 · FOUNDERS_APPLY · VISITOR_EMAIL_FAILED] id=${applicationId} domain=${emailDomain} reason=${visitorEmailResult.error}`,
+      );
+    }
+    if (!timEmailResult.ok) {
+      console.warn(
+        `[ZONE27 · FOUNDERS_APPLY · TIM_EMAIL_FAILED] id=${applicationId} reason=${timEmailResult.error}`,
+      );
+    }
+
+    return { ok: true, applicationId };
+  } catch (err) {
+    // R69 W-G · Agent B audit F5 fix · server_error code now reachable ·
+    // any Resend timeout / network error / runtime exception caught here ·
+    // visitor sees friendly inline error per WaitlistForm pattern · 不 leak
+    // raw exception to client per /audit S05 disclosure pattern。
+    const message = err instanceof Error ? err.message : String(err);
+    console.error(
+      `[ZONE27 · FOUNDERS_APPLY · ERROR] uncaught err=${message} ts=${new Date().toISOString()}`,
+    );
+    return { ok: false, error: "server_error" };
+  }
 }
 
 // Tiny stable hash for email suffix · not crypto-secure · just for

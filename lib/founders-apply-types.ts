@@ -17,6 +17,12 @@
 //     asks「您 CPBL 球迷 N 年」 fan-grammar · NOT engineering form
 // ─────────────────────────────────────────────────────
 
+// R69 W-G · Agent B audit F5 fix · removed "rate_limited" from declared
+// codes · was unreachable(server action had no rate-limit logic)·
+// declaring error code = pre-commit to handle it · Tetlock track-able-
+// error discipline says「declare what you actually do」 · re-add when
+// migration 0003 ships with Supabase RLS-locked applications table +
+// per-IP cooldown rate-limit。 8 codes remaining(all reachable):
 export const FOUNDERS_APPLY_ERROR_CODES = [
   "missing_email",
   "invalid_email",
@@ -26,7 +32,6 @@ export const FOUNDERS_APPLY_ERROR_CODES = [
   "why_too_short",
   "why_too_long",
   "server_error",
-  "rate_limited",
 ] as const;
 
 export type FoundersApplyErrorCode =
@@ -58,9 +63,7 @@ export function getFoundersApplyErrorMessage(
     case "why_too_long":
       return "說明太長 · 請控制在 600 字內 · 重點 not 長文";
     case "server_error":
-      return "系統暫時無法處理 · 請稍後再試 · 或直接 email tim@zone27.tw";
-    case "rate_limited":
-      return "您剛剛已提交過 · 請 5 分鐘後再試 · 防止重複申請";
+      return "系統暫時無法處理 · 請稍後再試 · 或直接 email tatayngiti@gmail.com";
   }
 }
 

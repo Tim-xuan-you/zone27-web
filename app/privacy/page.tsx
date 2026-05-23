@@ -81,8 +81,14 @@ export default function PrivacyPage() {
           </li>
         </ul>
         <p className="text-mute/80 mt-6">
-          就這 5 個欄位。我們沒有任何其他資料收集機制。
-          完整 schema 開放在{" "}
+          就這 5 個欄位 in waitlist · 4 fields in{" "}
+          <Link
+            href="/founders/apply"
+            className="text-gold underline-offset-4 hover:underline"
+          >
+            /founders/apply
+          </Link>
+          {" "}per Section 02B below · 共 9 fields total。 完整 schema 開放在{" "}
           <a
             href="https://github.com/Tim-xuan-you/zone27-web/blob/main/supabase/migrations/0001_waitlist.sql"
             target="_blank"
@@ -95,6 +101,100 @@ export default function PrivacyPage() {
         </p>
       </Section>
 
+      {/* ── 02B FOUNDERS 27 APPLICATION DATA · R69 W-G fix ─────
+          R69 W-G · Agent B audit finding F1 critical fix · R68 W-A shipped
+          /founders/apply collecting 4 NEW fields(email + name + cpbl_connection
+          + why_zone27)but /privacy stale-said「5 個欄位」 + 「沒有個人身分資料」
+          self-falsifiable in 30 seconds via DevTools Network on /founders/apply
+          submit。 此 section codify NEW PII collection + retention policy +
+          per-field rationale · brand IP「方法公開」 axiom 物理 codify · 不藏。 */}
+      <Section no="02B" label="FOUNDERS 27 APPLICATION DATA · 申請資料" zh="申請 Founders 27 額外 4 欄">
+        <p>
+          R68 W-A(2026-05-23)ship{" "}
+          <Link
+            href="/founders/apply"
+            className="text-gold underline-offset-4 hover:underline"
+          >
+            /founders/apply
+          </Link>{" "}
+          · Patek-style application form。 該 form 收{" "}
+          <strong className="text-bone">4 個額外欄位</strong>(Section 02 waitlist
+          5 欄之外)· Tim 親手 review 1-3 days · per /founders/ledger 5-step
+          allocation rules。 此 section codify 該 4 欄資料用途 + 保留期間 + per-
+          field rationale:
+        </p>
+        <ul className="space-y-4 mt-6">
+          <li>
+            <strong className="text-bone">A.</strong>{" "}
+            <Code>email</Code>{" "}
+            · 寄通過 / 不通過信 + 銀行轉帳指示 + 24h window · 同 Section 02
+            waitlist email · 退出寄{" "}
+            <a
+              href="mailto:tatayngiti@gmail.com?subject=ZONE%2027%20%C2%B7%20UNSUBSCRIBE"
+              className="text-gold underline-offset-4 hover:underline"
+            >
+              UNSUBSCRIBE
+            </a>。
+          </li>
+          <li>
+            <strong className="text-bone">B.</strong>{" "}
+            <Code>name</Code>(必填 · 最長 60 字元)· 真名 OK · 球迷暱稱也 OK ·
+            Tim 用於 review + personalized email 開頭 + 通過後寫入{" "}
+            <Link href="/founders/ledger" className="text-gold underline-offset-4 hover:underline">
+              /founders/ledger
+            </Link>{" "}
+            public allocation row(您可指定 handle 而非真名)。
+          </li>
+          <li>
+            <strong className="text-bone">C.</strong>{" "}
+            <Code>cpbl_connection</Code>(必填 · 最長 200 字元)· 您支持的 CPBL 球隊 +
+            球迷年數 + 任何 CPBL context · Tim 用於 fan-grammar authentic 判斷 · per
+            [[feedback-zone27-audience-fans-not-engineers]] · 不 share 給任何第三方。
+          </li>
+          <li>
+            <strong className="text-bone">D.</strong>{" "}
+            <Code>why_zone27</Code>(必填 · 50-600 字)· 您 reasoning 邏輯 · Tim 親手
+            read 親手 review · 通過 / 不通過 / clarifying question 的依據 · 不 share ·
+            不 publish · 您 letter 6 個月後{" "}
+            <Link href="/founders/from-one-current-founder" className="text-gold underline-offset-4 hover:underline">
+              /founders/from-one-current-founder
+            </Link>{" "}
+            是您 own ship 不是此 application 內容。
+          </li>
+        </ul>
+        <h3 className="text-bone text-base mt-6 mb-2">保留期間 · RETENTION POLICY</h3>
+        <ul className="space-y-2 mt-2 text-mute/85">
+          <li>▸ <strong className="text-bone">Tim Gmail inbox</strong> · 主要 audit
+            trail · 保留 5 年(Tim 個人帳號 retention policy)· Resend deliver 副本
+            7 天 retention(Resend free tier default)。 您可隨時 reply{" "}
+            <a
+              href="mailto:tatayngiti@gmail.com?subject=ZONE%2027%20%C2%B7%20DELETE%20MY%20APPLICATION"
+              className="text-gold underline-offset-4 hover:underline"
+            >
+              DELETE MY APPLICATION
+            </a>{" "}
+            · Tim 7 天內手動刪除 Gmail thread + Vercel logs grep。
+          </li>
+          <li>▸ <strong className="text-bone">Vercel logs</strong> · structured
+            event log backstop · {" "}
+            <em>R69 W-G fix · redacted to applicationId + email domain only · 不 log
+              full name / cpbl / why content</em>
+            {" "}· 預設 7 天 retention · Tim 不下載 不分析 不 archive。
+          </li>
+          <li>▸ <strong className="text-bone">Supabase</strong> · migration 0003
+            未 apply · 目前不存 application 到 Supabase · pre-launch MVP email-only
+            audit trail · migration apply 後此處更新 30 天前公告 per /audit S05
+            PRE-COMMIT clause。
+          </li>
+        </ul>
+        <p className="mt-6 text-mute/80">
+          <strong className="text-bone">不 share 第三方規則</strong> · 您 application
+          內容 0 third-party tracking · 0 analytics · 0 marketing list · 0 LLM
+          training corpus · 0 cross-product sharing。 違反此 disclosure 需 30 天前
+          /changelog 公告 + 您可選 opt-out · per /audit S05 + S06 PRE-COMMIT pattern。
+        </p>
+      </Section>
+
       {/* ── 03 WHAT WE DON'T COLLECT ────────────── */}
       <Section no="03" label="WHAT WE DON'T COLLECT" zh="我們不收什麼">
         <p>列出我們<strong className="text-bone">沒有</strong>做的事很重要:</p>
@@ -104,7 +204,16 @@ export default function PrivacyPage() {
           <li>❌ 沒有第三方追蹤 cookies</li>
           <li>❌ 沒有 IP 蒐集(Vercel 預設不對外公開)</li>
           <li>❌ 沒有信用卡(我們還沒開放付款)</li>
-          <li>❌ 沒有個人身分資料(姓名/電話/地址全部不收)</li>
+          <li>
+            ❌ 沒有個人身分資料 <strong className="text-bone">(/founders + waitlist 部分)</strong>{" "}
+            · 但{" "}
+            <Link href="#section-02b" className="text-gold underline-offset-4 hover:underline">
+              Section 02B
+            </Link>{" "}
+            /founders/apply 確實收 name + email + cpbl_connection + why_zone27 ·
+            因為 Patek-style manual review 需要(R69 W-G fix · 不藏)
+          </li>
+          <li>❌ 沒有電話 / 地址(application 也不收)</li>
           <li>❌ 沒有瀏覽行為紀錄(您在 /lab 跑幾次 simulation 我們不知道)</li>
         </ul>
 

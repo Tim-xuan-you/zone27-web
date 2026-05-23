@@ -33,12 +33,16 @@ export default function PreTransferReceipt() {
     <section className="mx-auto max-w-2xl w-full px-6 sm:px-10 pb-5 sm:pb-6">
       <div className="border border-gold/40 bg-gold/5">
         <header className="border-b border-gold/30 px-5 sm:px-6 py-3 flex items-baseline justify-between flex-wrap gap-2">
-          <p
+          {/* R69 W-G · Agent B audit F7 fix · semantic heading order ·
+              WCAG 2.4.6 Headings and Labels · screen reader users navigate
+              by heading hierarchy · h2 wrapping title + h3 row labels per
+              row · visual styling preserved via className。 */}
+          <h2
             lang="en"
-            className="font-mono text-gold text-[10px] sm:text-[11px] tracking-[0.4em]"
+            className="font-mono text-gold text-[10px] sm:text-[11px] tracking-[0.4em] m-0 font-normal"
           >
             / PAYMENT TRUST · 您 click 之後會發生什麼
-          </p>
+          </h2>
           <p
             lang="en"
             className="font-mono text-gold/70 text-[9px] tracking-[0.3em]"
@@ -49,9 +53,9 @@ export default function PreTransferReceipt() {
 
         {/* ── ROW 1 · WHAT YOU WILL RECEIVE ───────── */}
         <div className="px-5 sm:px-6 py-4 sm:py-5 border-b border-line/40">
-          <p className="font-mono text-gold/85 text-[10px] tracking-[0.35em] mb-3">
+          <h3 className="font-mono text-gold/85 text-[10px] tracking-[0.35em] mb-3 m-0 font-normal">
             ▸ 01 · 您將收到 · WHAT YOU WILL RECEIVE
-          </p>
+          </h3>
           <ul className="space-y-2.5 text-mute text-[12px] sm:text-[13px] leading-relaxed">
             <li className="flex gap-3">
               <span
@@ -104,9 +108,9 @@ export default function PreTransferReceipt() {
 
         {/* ── ROW 2 · TIM'S 5-STEP CHOREOGRAPHY ─── */}
         <div className="px-5 sm:px-6 py-4 sm:py-5 border-b border-line/40">
-          <p className="font-mono text-gold/85 text-[10px] tracking-[0.35em] mb-3">
+          <h3 className="font-mono text-gold/85 text-[10px] tracking-[0.35em] mb-3 m-0 font-normal">
             ▸ 02 · TIM 親手 5 個動作 · CHOREOGRAPHY
-          </p>
+          </h3>
           <ol className="space-y-2.5 text-mute text-[12px] sm:text-[13px] leading-relaxed">
             <li className="flex gap-3">
               <span
@@ -182,9 +186,9 @@ export default function PreTransferReceipt() {
 
         {/* ── ROW 3 · IF SOMETHING BREAKS ─────────── */}
         <div className="px-5 sm:px-6 py-4 sm:py-5">
-          <p className="font-mono text-gold/85 text-[10px] tracking-[0.35em] mb-3">
+          <h3 className="font-mono text-gold/85 text-[10px] tracking-[0.35em] mb-3 m-0 font-normal">
             ▸ 03 · 如果出錯了 · WHEN THINGS BREAK
-          </p>
+          </h3>
           <ul className="space-y-2.5 text-mute text-[12px] sm:text-[13px] leading-relaxed">
             <li className="flex gap-3">
               <span
@@ -251,13 +255,13 @@ export default function PreTransferReceipt() {
               <span>
                 Tim 失蹤了 → 看{" "}
                 <Link
-                  href="/ethics"
+                  href="/ethics#bus-factor"
                   className="text-gold/85 hover:text-gold underline-offset-4 hover:underline"
                 >
-                  /ethics
+                  /ethics BUS_FACTOR section
                 </Link>{" "}
-                BUS_FACTOR section · 您資料在 Supabase Tokyo + 您 PDF
-                certificate 本機 · 0 vendor lock-in
+                · 您資料在 Supabase Tokyo + 您 PDF certificate 本機 · 0
+                vendor lock-in
               </span>
             </li>
           </ul>
