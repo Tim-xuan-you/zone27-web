@@ -4,6 +4,7 @@ import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import WaitlistForm from "@/components/WaitlistForm";
 import CopyLinkButton from "@/components/CopyLinkButton";
+import CredentialStack from "@/components/CredentialStack";
 import {
   FOUNDERS_TOTAL,
   FOUNDERS_NEXT,
@@ -315,6 +316,14 @@ export default async function FoundersPage({
           </Link>
           {" "}記名追蹤。
         </p>
+
+        {/* R63 W-C · Agent 5 SHIP #3 · CredentialStack · 3-credential founder
+            portfolio block · Cameron Grove + Travis Sawchik indie analyst
+            pattern · 「demonstrated impact over sales language」 · trust
+            establishment 在 founder voice 之前 · 訪客自己 verify(不靠
+            testimonial)· brand IP「方法公開」 + Pratfall(列 solo + 0
+            investors) + audience-fans grammar(CPBL fan 27 yr)triple-fire。 */}
+        <CredentialStack />
 
         {/* Round 52 W-D · Agent 1 #4 fix · Founder voice block at buy line
             · 之前 FROM THE FOUNDER 在 form 之後(R8 移)· 訪客 buy-decision
