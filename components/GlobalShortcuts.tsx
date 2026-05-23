@@ -12,7 +12,7 @@ import { useRouter } from "next/navigation";
 // R69 W-F · Agent A SHIP 6 · RaycastJumpHint · ONE-SHOT first-ever-visit
 // discovery toast「Press G then M · jump anywhere」 · 8-second session
 // activity gate(Arc browser pattern · don't teach bouncing visitors)·
-// localStorage zone27_shortcut_hint_seen_v1(11th key · /audit S06 disclose)·
+// localStorage zone27_shortcut_hint_seen_v1(10th key chronologically · last_visit_v1 R70 W-B = 11th · /audit S06 disclose)·
 // 5s auto-dismiss · ONE shot per device lifetime。 不是 push notification ·
 // 不是 modal · 不是 onboarding wizard · 是 inline gold flash discoverability。
 
@@ -76,6 +76,11 @@ export default function GlobalShortcuts() {
   const router = useRouter();
   const armedRef = useRef(false);
   const timeoutRef = useRef<number | null>(null);
+  // R70 W-F · Agent B audit F4 fix · dismissTimerRef for proper cleanup ·
+  // 之前 5s auto-dismiss setTimeout 沒被 captured · unmount during 8-13s
+  // 窗口 → memory leak + React warning · 此 ref 允許 cleanup function 完整
+  // clearTimeout 雙計時器。
+  const dismissTimerRef = useRef<number | null>(null);
   // Visual flash to confirm shortcut received(brief gold flash · CSS-only)
   const [flash, setFlash] = useState<string | null>(null);
   // R69 W-F · ONE-shot RaycastJumpHint state · 5s auto-dismiss · 8s session gate
@@ -102,12 +107,21 @@ export default function GlobalShortcuts() {
       } catch {
         /* swallow · still display this session */
       }
-      // Auto-dismiss after 5s · per Agent A spec
-      window.setTimeout(() => setHintVisible(false), HINT_DURATION_MS);
+      // R70 W-F · Agent B audit F4 fix · capture dismiss timer into ref ·
+      // unmount during 5s window 不 leak · cleanup function 兩 timer 都
+      // clearTimeout。
+      dismissTimerRef.current = window.setTimeout(
+        () => setHintVisible(false),
+        HINT_DURATION_MS,
+      );
     }, HINT_DELAY_MS);
 
     return () => {
       window.clearTimeout(showTimer);
+      if (dismissTimerRef.current !== null) {
+        window.clearTimeout(dismissTimerRef.current);
+        dismissTimerRef.current = null;
+      }
     };
   }, []);
 
@@ -157,6 +171,14 @@ export default function GlobalShortcuts() {
           clearArmed();
           setFlash(`g+${key.toUpperCase()} → ${path}`);
           window.setTimeout(() => setFlash(null), 1200);
+          // R70 W-F · Agent B audit F4 fix · force-hide RaycastJumpHint if
+          // visible · power user just learned g+key works · re-showing hint
+          // mid-navigation 是 confusing · cancel pending dismiss timer too。
+          setHintVisible(false);
+          if (dismissTimerRef.current !== null) {
+            window.clearTimeout(dismissTimerRef.current);
+            dismissTimerRef.current = null;
+          }
           router.push(path);
           return;
         }

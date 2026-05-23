@@ -176,10 +176,29 @@ export default function FromOneCurrentFounderPage() {
               </li>
             </ol>
             <p className="font-mono text-mute/70 text-[10px] tracking-[0.25em] mt-5 leading-relaxed">
+              {/* R70 W-F · Agent B audit F3 fix · 移除 phantom MEMBER_VOICE
+                  clause reference · 之前 R69 W-B 寫 ref but /ethics 沒
+                  此 clause · self-falsifiable in 30 seconds via Ctrl-F。
+                  改 cite 已存在的 /ethics 8 commitments + /audit S05
+                  PRE-COMMIT pattern + bus-factor R70 W-F · binding remains
+                  intact 不靠 phantom 名稱。 */}
               ⚓ Tim 不 edit letter content · 不 polish prose · 不 remove
-              negative · 您寫什麼 ship 什麼 · per /ethics MEMBER_VOICE
-              clause(R69 W-B add)。 您 signed name 或 handle 都 OK ·
-              per /privacy member privacy default。
+              negative · 您寫什麼 ship 什麼 · per{" "}
+              <Link
+                href="/ethics"
+                className="text-gold/85 hover:text-gold underline-offset-4 hover:underline"
+              >
+                /ethics 8 binding commitments
+              </Link>
+              {" "}+{" "}
+              <Link
+                href="/audit#section-05"
+                className="text-gold/85 hover:text-gold underline-offset-4 hover:underline"
+              >
+                /audit S05 PRE-COMMIT
+              </Link>
+              {" "}pattern · 違反 = 紅字 alert 永久標 /ethics · 不刪。 您
+              signed name 或 handle 都 OK · per /privacy member privacy default。
             </p>
           </div>
         </section>

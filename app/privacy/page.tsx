@@ -456,6 +456,49 @@ export default function PrivacyPage() {
           </li>
         </ul>
 
+        {/* R70 W-F · Agent B audit F2 fix · NEW Emergency contact /
+            Tim incapacity provision · /ethics BUS_FACTOR section
+            references this · R69 W-F shipped /ethics ref without here
+            codify · 此 provision codify executor refund flow + Tim
+            failure-mode + family/heir notification protocol。 brand IP
+            「方法公開」 延伸到 worst-case scenario。 */}
+        <h3 className="text-bone text-lg mt-6 mb-3">
+          緊急聯絡 / Tim 失能狀態 · Emergency contact provision(R70 W-F)
+        </h3>
+        <ul className="space-y-2">
+          <li>
+            <strong className="text-bone">Tim 失蹤 / incapacity 情境</strong>{" "}
+            · Tim 健康問題 / 意外 / 失蹤超過 30 天 · 由 Tim 預先指定
+            executor(目前是 Tim 配偶 + Tim 兄弟姊妹 2 人)接管 ZONE 27 GitHub
+            repository + Supabase admin + Resend 帳號 · 處理現有 Founders
+            退款 + 公告 brand 狀態
+          </li>
+          <li>
+            <strong className="text-bone">您聯絡 executor 方式</strong> · email{" "}
+            <a
+              href="mailto:tatayngiti@gmail.com?subject=ZONE%2027%20%C2%B7%20BUS_FACTOR%20emergency"
+              className="text-gold underline-offset-4 hover:underline"
+            >
+              tatayngiti@gmail.com
+            </a>{" "}
+            · 主旨「BUS_FACTOR emergency」 · executor 14 天內回信 · 同 R70 W-F
+            /ethics#bus-factor 公開 contingency 配對
+          </li>
+          <li>
+            <strong className="text-bone">Founders 27 退款優先</strong> · 即使
+            14 天 cooling-off window 已過 · BUS_FACTOR 情境啟動時所有未消費
+            lifetime access 按 比例退款(N $2,700 - 已消費月數 × $299)·
+            executor 親手處理 · 不外包 · per Taiwan 消保法 § 19 spirit
+            extension
+          </li>
+          <li>
+            <strong className="text-bone">您的個資 fate</strong> · 您 PII 同
+            executor 接管後依您 request 刪除 · executor 不繼承 Tim 的「親手
+            review」 brand IP · 整 brand 30 天內 wind-down 公告 · 不延續 NEW
+            applications
+          </li>
+        </ul>
+
         <p className="mt-6 text-mute/85 text-sm">
           ▸ 完整 PDPA-compliant 承諾 同步顯示在 <Link href="/audit#disclosure" className="text-gold underline-offset-4 hover:underline">/audit DISCLOSURE block</Link>
           + <Link href="/transparency" className="text-gold underline-offset-4 hover:underline">/transparency aggregator</Link>
@@ -533,6 +576,14 @@ export default function PrivacyPage() {
 }
 
 // ── Sub-component ─────────────────────────────────────
+// R70 W-F · Agent B audit F1 fix · slug helper for /privacy Section ·
+// 同 R69 W-F /terms slugFromSectionNo pattern · enables /privacy#section-02b
+// + /privacy#section-06b anchor jumps · /ethics BUS_FACTOR + /audit S05+S06
+// cross-reference targets · 不再 broken-anchor 5-second devtools verify。
+function slugFromPrivacySectionNo(no: string): string {
+  return `section-${no.toLowerCase().replace(/[^a-z0-9]/g, "-")}`;
+}
+
 function Section({
   no,
   label,
@@ -544,9 +595,14 @@ function Section({
   zh: string;
   children: React.ReactNode;
 }) {
+  const id = slugFromPrivacySectionNo(no);
   return (
-    /* Round 58 W-A · cv-auto perf primitive · /privacy 8 sections benefit。 */
-    <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-14 pt-10 border-t border-line/40 cv-auto">
+    /* Round 58 W-A · cv-auto perf primitive · /privacy 9 sections benefit。
+       R70 W-F · Agent B audit F1 fix · id slug for anchor jump · scroll-mt-20。 */
+    <section
+      id={id}
+      className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-14 pt-10 border-t border-line/40 cv-auto scroll-mt-20"
+    >
       <div className="flex items-baseline gap-4 mb-2">
         <span className="font-mono text-gold/70 text-[10px] tracking-[0.35em]">
           / {no}
