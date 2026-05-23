@@ -192,16 +192,21 @@ EXCEPTIONS ship · brand-pure 替代:
 
 【新對話窗 first 動作建議】:
 1. cd C:\Users\tatay\Desktop\Second\zone27-web
-2. git log --oneline -15 看 R72→R75 commits 物理證據(R75 = 2 commits · bd5b8aa W-A→W-H 9 ships(/receipts/[receiptId] dynamic + 4 NEW Agent A psychology components + WaitlistForm 5th ErrorBoundary + D-key density toggle + UnscheduledLetterChip + /founders/inheritance + /about slug helper)+ 此 W-Final closure · 16th-invocation BIGGEST GAP closure pattern)
+2. git log --oneline -15 看 R73→R76 commits 物理證據(R76 = 2 commits · b7f2439 W-A→W-G 8 ships(/engine-log Stripe Status biggest invisible gap + /founders/why-270 Pinboard decision log + /poster launch-day cannon + UniformHeightStrip + OutputArtifactSwitcher + Cmd-K + lib/related-links + /track-record cross-link · 4 🟡 audit patched)+ 此 W-Final closure · 17th-invocation biggest invisible gap closure pattern)
 3. 跑 npm run lint + npx tsc --noEmit + npm run validate:data:warn 確認三綠
-4. 跟 Tim 確認:「您希望 R76 從哪邊接續?(R75+ deferred queue · Agent A R75 SHIPs 5/6/7 NEW research-backed · R72 SHIPs 1/5 · R71 SHIPs 2/3/4/5/6 · R70 SHIPs 2/4/7 · 8 Agent B medium/low · CPBL pipeline 大工程 · 或新 mandate)」
+4. 跟 Tim 確認:「您希望 R77 從哪邊接續?(R76+ deferred queue · Agent A R76 SHIPs B+D+E+F+G + Agent A R75 SHIP 6 /for-cpbl-fans-burned · R72 SHIPs 1/5 · R71 SHIPs 2/3/4/5/6 · R70 SHIPs 2/4/7 · 8 Agent B medium/low · CPBL pipeline 大工程 · 或新 mandate)」
 
-【R76+ DEFERRED queue · R75 ship 4 R75 NEW Agent A SHIPs + R72/R70 deferred ships + ClientErrorBoundary 5/5 + Agent B 🔴 C-1 patched 後剩餘】:
+【R77+ DEFERRED queue · R76 ship 3 R76 NEW Agent A SHIPs(A + C + 「第 2 gap」)+ Agent A R75 SHIPs 5+7(2 of 3 shipped · 1 remaining)+ R72 SHIPs partial + audit fixes 後剩餘】:
 
-[Agent A R75 NEW deferred · 3 of 6 ranked by Agent A research]
-• SHIP 5 UniformHeightStrip · Aesop spacing audit pass(S · 2-4h · ★★★ · /founders + /pricing/why + /membership 三 surface · NN/g Anatomy of Good Design · 統一 component heights regardless of viewport · CSS-only diff · 0 new code)
-• SHIP 6 /for-cpbl-fans-burned segment landing(S · 2-4h · ★★★ · NEW route · Notion intent-based personalization static analog · LINE 老師 / 報馬仔 betrayal pattern named · 6-row ZONE 27 inverse mapping · 不在 sitemap · 不在 Cmd-K · stealth share URL · 不違 social/SEO freeze)
-• SHIP 7 OutputArtifactSwitcher · FanGraphs output-not-input on /membership(XS · &lt;2h · ★★★ · re-write BLACK CARD 5 unlocks from noun list to verb-first action sentences · Linear what's new pattern · 0 new file)
+[Agent A R76 NEW deferred · 4 of 7 ranked]
+• SHIP B /year-zero Defector Year-Zero Founder Annual Report(M · 4-8h ★★★★★ · Defector Year-Five 模式 applied at Year-Zero · long-form single-page reads-like-essay-not-brochure · 不 paywall · 不 email-gate · founder voice · 「what we shipped + what we refused + what we don't know + year one looks like + thank you to N=4 + 1 PROVED」)
+• SHIP D /canvas single-receipt printable artifact(M · 4-8h ★★★★ · Patek cork box + Stripe Press hardcover + A24 zine · distinct from /poster · screenshot + A4 print · per-receipt printable artifact · dedicated print-stylesheet)
+• SHIP E LineKeepHint mobile micro-pattern(XS · &lt;2h ★★★ · LINE OA Taiwan opt-in pattern · long-press → 加到 LINE Keep · 不需加好友 · localStorage zone27_line_keep_hint_dismissed_v1 12th key · /receipts/[id] + /year-zero)
+• SHIP F EngineRerunBadge per-receipt version chip(XS · &lt;2h ★★★ · Cloudflare postmortem applied per-receipt · pairs with /engine-log R76 W-C · v2 badge on receipt header if re-run · brand IP Pratfall)
+• SHIP G MethodologyDecisionTrace Linear Now-Next-Later(S · 2-4h ★★★ · /methodology 延伸 horizon-language · NOT roadmap · 「explained / next-to-explain / later-needs-data」 typed array)
+
+[Agent A R75 NEW remaining · 1 of 3]
+• SHIP 6 /for-cpbl-fans-burned segment landing(S · 2-4h · ★★★ · Notion intent-based personalization static analog · LINE 老師 / 報馬仔 betrayal pattern named · 6-row inverse mapping · stealth share URL)
 
 [Agent A R72 deferred · 2 of 7 remaining(SHIP 7 shipped R75 W-B)]
 • SHIP 1 EngineSparkline(S · 3-4h · HeroLiveCard mobile micro-typography · Apple Stocks pattern)
@@ -261,7 +266,7 @@ EXCEPTIONS ship · brand-pure 替代:
 • ANTI-2 · Calibration Streak / Days Followed gamification counter(engagement-farming redline · Tetlock badge IS the brand-pure substitute)
 • ANTI-3 · Founder of the Week / Top Member Picks leaderboard(manufactured social proof violates audience-fans-not-engineers)
 
-今天我要做的事:[ 填入任務 · 或留空讓 Claude 接 R76+ deferred queue + 鐵律 default ship NOW(R67 → R75 5 rounds 共識 · 留空 = ship NOW 不問 keyword · 不 surface options · 2-parallel-agent pattern per R57+ 不過度 spawn) ]
+今天我要做的事:[ 填入任務 · 或留空讓 Claude 接 R77+ deferred queue + 鐵律 default ship NOW(R67 → R76 6 rounds 共識 · 留空 = ship NOW 不問 keyword · 不 surface options · 2-parallel-agent pattern per R57+ 不過度 spawn) ]
 ```
 
 ---
@@ -312,7 +317,7 @@ EXCEPTIONS ship · brand-pure 替代:
 
 | R75 | 9 | 16th full-authority · 同 mandate「全權 + 上網 + 攻頂 + 賺大錢 + 多去看成功網站學習 + 我還有什麼大工程沒做」 + 「整個網站的操作邏輯很重要」 + 「畫面更極致美觀」 + 「操作更流暢」 → 2 parallel agents(world-class research synthesis + post-R74 adversarial audit · per R57+ 不過度 spawn discipline)+ 親自 ship 9 waves · Agent A 「biggest gap」 honest answer = /receipts/[receiptId] visitor-grabbable receipt object · ZONE 27 第一個 grabbable thing · 44→46 routes | ★★★★★ NEW app/receipts/[receiptId]/page.tsx dynamic route group(Agent A R75 SHIP 1 ★★★★★ BIGGEST GAP CLOSURE · Stripe Press 3D book detail pages + Patek Philippe Reference Number permanence + Defector citation permalink + Anthropic Transparency Hub model card archive · 每場 finalized match 變成 dedicated permalink object · static SSG · cpbl-260521-01 第一個 generated · Patek Reference 格式 Z27 · CPBL · 260521 · 01 · TCG card anatomy + REFERENCE BAND + MATCH SUMMARY + ENGINE vs ACTUAL + VERDICT BAND Peak-End + TIM signature + CopyLinkButton + 4 RELATED CROSS-LINKS to /track-record + /matches/[gameId] + /audit + /methodology)+ NEW components/MultiYearAnchor.tsx(Agent A R75 SHIP 2 ★★★★★ · FanGraphs 3-yr tier + Patek 「Generations」 1996 + Stratechery cadence-promise · 3-line binding pre-commitment · engine FREE through 2029 + /audit + /methodology NEVER paywalled + Tim 失蹤 30 days GitHub open-sources · NOT payment tier · 是 durability statement)+ NEW components/EngineCadencePromise.tsx(Agent A R75 SHIP 4 · Stratechery cadence-of-EFFORT NOT schedule-of-content · 2 binding · daily ingest + ≤7-day max journal delay · reconciles /now no-weekly-schedule + /ethics #5 7-day SLA)+ NEW components/GenerationsLine.tsx + NEW app/founders/inheritance/page.tsx(Agent A R75 SHIP 3 · Patek 1996「Generations」 campaign + Hanshin Tigers 二代目ファン + Berkshire continuity · 「您不是買 ZONE 27 · 您只是替下一代守 27 號席位」 · 4 sections · seat 4-rule transfer protocol)+ NEW components/UnscheduledLetterChip.tsx(Agent A R72 SHIP 7 deferred · DHH world.hey.com letter pattern · 2 variants · /now + /changelog top)+ PowerUserDataKbd(Agent A R70 SHIP 6 deferred · D-key density toggle · GlobalShortcuts + CSS rules)+ WaitlistForm 5th ClientErrorBoundary wrap(code quality #4 5/5 complete)+ Agent B R75 audit 🔴 C-1 patched(/about Chapter slug helper · 8 Chapter anchors now resolve · 同 R74 W-G C1 pattern)· Cmd-K palette + /founders/inheritance entry · 3 🟡 verified PASS + 13 explicit PASS categories |
 
-**Total: 135+ waves · ~305 fixes · 0 brand redline violation**
+**Total: 143+ waves · ~315 fixes · 0 brand redline violation**
 
 ---
 
@@ -340,6 +345,6 @@ EXCEPTIONS shipped(brand-pure 替代):
 
 ---
 
-ZONE 27 brand IP 物理升級到 **R75 state**(2026-05-23)· 135+ waves across R37→R75 multi-sprint · 0 brand redline violation · 46 visitor-discoverable routes(NEW /receipts/[receiptId] dynamic group + /founders/inheritance Patek Generations route)· 第一個 visitor-grabbable receipt object · ready for 新對話窗接續 R76+。 🏆
+ZONE 27 brand IP 物理升級到 **R76 state**(2026-05-23)· 143+ waves across R37→R76 multi-sprint · 0 brand redline violation · 49 visitor-discoverable routes(R76 NEW /engine-log Stripe Status + /founders/why-270 Pinboard decision log + /poster Patek 50th launch-day cannon · R75 /receipts/[receiptId] + /founders/inheritance)· 第一個 visitor-grabbable receipt object + operational artifact spine + launch-day visual cannon · ready for 新對話窗接續 R77+。 🏆
 
 您忙完回來 · 開新對話窗 · 一切如初。
