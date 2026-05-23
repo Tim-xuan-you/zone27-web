@@ -8,6 +8,7 @@ import ArticleMeta from "@/components/ArticleMeta";
 import MemberUnlocksGrid from "@/components/MemberUnlocksGrid";
 import PaidTierLockedGrid from "@/components/PaidTierLockedGrid";
 import MemberDailyBrief, { type DailyMatchSummary } from "@/components/MemberDailyBrief";
+import MemberHomeHero from "@/components/MemberHomeHero";
 import { getSession } from "@/lib/supabase/server";
 import { readFollowsFromMeta } from "@/lib/follows";
 import { readNotesFromMeta } from "@/lib/notes";
@@ -168,6 +169,23 @@ export default async function MemberPage({
               您 localStorage 裡已有的 sim history 當 preview data ·
               不假裝 functionality 已存在。
             </p>
+          )}
+
+          {/* ── R70 W-A · MemberHomeHero · Agent A R69 SHIP 1 ★★★★★ ──
+              Bloomberg 3-quadrant dashboard drop-in · post-login premium
+              feel · YOUR LAST PICK + ENGINE STATE + RECENT RECEIPTS · vs
+              FREE TIER preview-card style this signals「you are home」 ·
+              density + recency + zero greeting noise · per Pieter Levels
+              nomadlist + Bloomberg Terminal home screen pattern · brand
+              IP: NO welcome animation · NO daysSinceJoin confetti · NO
+              leaderboard · 不 violate 11-item NOT-DO list。 */}
+          {session && (
+            <div className="mt-10">
+              <MemberHomeHero
+                predictions={predictionsMap}
+                allMatches={allMatches}
+              />
+            </div>
           )}
 
           {/* ── Round 31 W-V · MEMBER DAILY BRIEF · 為什麼註冊 answer ──
