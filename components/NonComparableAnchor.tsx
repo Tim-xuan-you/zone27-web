@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { SOLO_FOUNDER_PEERS, SOLO_FOUNDER_PEERS_COUNT } from "@/lib/solo-founder-anchor";
 
 // ── ZONE 27 · Non-Comparable Anchor ─────────────────────
@@ -133,6 +134,27 @@ export default function NonComparableAnchor() {
           <strong className="text-bone">「不 ship user-to-user social」</strong>{" "}
           redline · 我們只是公開 reference class · per /audit S05 PRE-COMMIT
           clause · 修改此 peer list 需 30 天 /changelog 公告。
+        </p>
+        {/* R74 W-G · M3 fix · internal cross-link tail · visitor 看完 6 peers
+            想 verify「ZONE 27 確 fit this category」 · 提供 path 到 /about
+            Chapter 07 OPERATIONS(Tim solo workflow + cadence)+ /audit
+            disclosure block(enterprise position 8 facts)· 不 leave 訪客 dead-
+            end paragraph · 同 RelatedReading axis 但 inline at decision-moment。 */}
+        <p className="font-mono text-mute/70 text-[10px] tracking-[0.25em] mt-3 leading-relaxed flex items-baseline gap-3 flex-wrap">
+          <span aria-hidden="true">→</span>
+          <Link
+            href="/about#operations"
+            className="text-gold/85 hover:text-gold underline-offset-4 hover:underline"
+          >
+            /about Chapter 07 OPERATIONS · Tim solo workflow + cadence
+          </Link>
+          <span className="text-mute/50">·</span>
+          <Link
+            href="/audit#disclosure"
+            className="text-gold/85 hover:text-gold underline-offset-4 hover:underline"
+          >
+            /audit DISCLOSURE block · 8 enterprise facts
+          </Link>
         </p>
       </div>
     </section>

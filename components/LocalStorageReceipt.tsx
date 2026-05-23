@@ -52,35 +52,33 @@ type Props = {
 
 export default function LocalStorageReceipt({ variant = "receipt" }: Props) {
   if (variant === "audit") {
-    // Full audit-table variant · /audit S06 drop-in · drop-in replaces inline
-    // DataRow stack · same labels + notes verbatim · same visual rhythm。
+    // R74 W-G · C3 fix · audit variant rewritten as <table> matching /audit
+    // S06 existing DataTable + DataRow visual exactly · zero visual change
+    // for visitor scrolling /audit before vs after R74 W-D · preserves
+    // /audit S05 PRE-COMMIT visual continuity · single-source from lib
+    // closes drift risk · brand-pure refactor per [[zone27-disclosure-
+    // philosophy]] axiom · 不假裝 + 不藏 + drift impossible by design。
     return (
-      <ul
+      <table
         aria-label="Local Storage Inventory · 11 canonical keys · audit-table variant"
-        className="my-4 border border-line/60 divide-y divide-line/40"
+        className="w-full text-sm font-mono border-collapse my-2"
       >
-        {LOCAL_STORAGE_INVENTORY.map((entry, idx) => (
-          <li key={idx} className="px-4 sm:px-5 py-3 sm:py-4 bg-slate/20">
-            <div className="flex items-baseline justify-between gap-3 flex-wrap mb-1">
-              <code className="font-mono text-gold/85 text-[12px] sm:text-[13px] tracking-tight">
+        <tbody>
+          {LOCAL_STORAGE_INVENTORY.map((entry, idx) => (
+            <tr key={idx} className="border-b border-line/30">
+              <td className="py-3 pr-4 text-mute text-[11px] tracking-[0.15em] w-1/3 align-top">
                 {entry.key}
-              </code>
-              <span
-                lang="en"
-                className="font-mono text-mute/60 text-[9px] tracking-[0.25em] tabular"
-              >
-                {entry.shippedIn}
-              </span>
-            </div>
-            <p className="text-bone/90 text-[13px] sm:text-sm leading-snug mb-1.5">
-              {entry.value}
-            </p>
-            <p className="text-mute/75 text-[11px] sm:text-[12px] leading-relaxed">
-              {entry.note}
-            </p>
-          </li>
-        ))}
-      </ul>
+              </td>
+              <td className="py-3 pr-4 text-bone tabular align-top">
+                {entry.value}
+              </td>
+              <td className="py-3 text-mute/70 text-[11px] tracking-[0.1em] align-top">
+                {entry.note}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     );
   }
 

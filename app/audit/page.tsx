@@ -7,6 +7,7 @@ import RelatedReading from "@/components/RelatedReading";
 import FounderSignOff from "@/components/FounderSignOff";
 import StatTerm from "@/components/StatTerm";
 import ReproducibilityReceipt from "@/components/ReproducibilityReceipt";
+import LocalStorageReceipt from "@/components/LocalStorageReceipt";
 import { matches, getFinalizedMatches } from "@/lib/matches";
 import {
   COMMIT_SHA,
@@ -634,63 +635,16 @@ export default function AuditPage() {
                 components/PreviewModeBanner.tsx · components/MemberDashboardPreview.tsx)·
                 MatchNoteEditor 真實 stores in Supabase user_metadata 不是
                 localStorage · 從此表移除(brand IP「不藏 · 不假裝」 honest fix)。 */}
-            <DataTable>
-              <DataRow
-                label="z27_team"
-                value="您支持的 CPBL 隊伍"
-                note="6 隊 enum · TeamPickPanel 寫入 · /track-record + /matches/[gameId] 讀取(per lib/teams.ts)"
-              />
-              <DataRow
-                label="zone27_recent_matches_v1"
-                value="您最近看過的賽事(capped 10)"
-                note="MatchViewTracker 寫入 · homepage RecentMatchesRow 讀取 · JSON array {gameId, title, viewedAt}(per lib/recent-matches.ts)"
-              />
-              <DataRow
-                label="zone27_sim_history_v1"
-                value="您 /lab 跑過的模擬結果"
-                note="MatchSimulator 寫入 · /member dashboard preview 讀取 · 11 fields with Number.isFinite validation(per lib/sim-history.ts)"
-              />
-              <DataRow
-                label="zone27_engine_voting_v1"
-                value="您 BLACK CARD voting 排序"
-                note="RoadmapVotingPanel 寫入 · drag-rank schema-versioned · /member Section 03 IKEA Effect(per MemberDashboardPreview.tsx)"
-              />
-              <DataRow
-                label="zone27_preview_tier"
-                value="Tim designer dev tool · 預覽 active tier"
-                note="PreviewModeBanner 寫入 · Tim 開發用 · 訪客不會 trigger · 0 PII"
-              />
-              <DataRow
-                label="zone27_last_login_email"
-                value="您上次 /login email 預填"
-                note="LoginForm 寫入 · 您下次回 /login 自動預填 email · 0 server transit · purely UX 便利"
-              />
-              <DataRow
-                label="zone27_anon_picks_v1"
-                value="您 anonymous picks · 個人 calibration vs engine"
-                note="AnonPickWidget 寫入 · /matches/[gameId] 訪客 pick before peeking · AnonCalibrationStrip 讀 · 0 server · 0 PII · /calibration + homepage 只在您裝置 render · R45 W-A"
-              />
-              <DataRow
-                label="zone27_last_ledger_n_v1"
-                value="您上次看 /track-record 時的 N · 用於 delta chip 顯示"
-                note="LedgerDeltaChip 寫入 + 讀取 · 每次訪 /track-record 看到「+X since YYYY-MM-DD」 · 純 Endowment effect 心理 hook · 0 server · 0 PII · R49 W-A"
-              />
-              <DataRow
-                label="zone27_lens_focus_votes_v1"
-                value="您 pre-canvas 1-tap lens vote · per-match commitment artifact"
-                note="LensFocusVote 寫入 · /matches/[gameId] pre /02 LENS CANVAS hub · 6 lens 選 1 個您認為最 matter · Cialdini commitment-consistency · 0 server · 0 PII · 0 leaderboard · 純您裝置 · R67 W-A"
-              />
-              <DataRow
-                label="zone27_shortcut_hint_seen_v1"
-                value="您是否已看過 g-mode 鍵盤 jump 提示(ONE-shot flag)"
-                note="GlobalShortcuts 寫入 · 訪客第一次 visit 8 秒後 surface ⚡ G+M tip 5 秒自動消失 · 設此 flag 後永不再顯示 · per Raycast/Arc/Linear 「don't teach bouncing visitors」 pattern · 0 server · 0 PII · 0 tracking · R69 W-F"
-              />
-              <DataRow
-                label="zone27_last_visit_v1"
-                value="您上次訪 ZONE 27 的日期(YYYY-MM-DD · TPE-anchored)"
-                note="DailyReturnRail 寫入 + 讀取 · 訪客 1+ 天後回訪看到「上次您來 X 天前」 honest chip · NOT streak counter · NOT daily-login farming · NO daily reward · 純 Letterboxd diary + Pinboard.in past-tense check-in pattern · 0 server · 0 PII · ONE chip per session · dismiss with × · R70 W-B"
-              />
-            </DataTable>
+            {/* R74 W-G · C3 fix · refactored from 11 inline DataRow calls to
+                LocalStorageReceipt variant="audit" · single-source from
+                lib/local-storage-inventory.ts · drift impossible by design
+                · same labels + notes + order verbatim · zero visual change
+                · per /audit S05 PRE-COMMIT clause REFACTOR not POLICY
+                MODIFICATION · same single-source append-only architecture
+                as ENGINE_DIFF_BEACONS + NO_PUSH_INVENTORY + RECIPROCITY_
+                LEDGER + SOLO_FOUNDER_PEERS pattern · brand IP「方法公開 ·
+                drift = 自殺」 axiom 物理 codify。 */}
+            <LocalStorageReceipt variant="audit" />
 
             <P className="text-mute/70 mt-3">
               <strong className="text-bone">⚓ R43 W-B drift correction</strong> ·
@@ -890,6 +844,17 @@ function MetaPair({
   );
 }
 
+// R74 W-G · C1 fix · slug helper for /audit ReportSection · 同 R71 W-E
+// /transparency + R70 W-F /privacy + R69 W-F /terms pattern · enables
+// /audit#section-02 + /audit#section-05 + /audit#section-06 anchor jumps
+// · /audit was MISSED in R71-R72 section-id-slug sweep · R74 W-A
+// ReciprocityLedger + LocalStorageReceipt + RefusalLedgerHint cross-
+// links surfaced the gap · per Agent B R74 audit C1 finding · 不再
+// 5-second DevTools 「no element with id=section-06」 self-debunk。
+function slugFromAuditSectionNo(no: string): string {
+  return `section-${no.toLowerCase().replace(/[^a-z0-9]/g, "-")}`;
+}
+
 function ReportSection({
   no,
   label,
@@ -899,9 +864,14 @@ function ReportSection({
   label: string;
   children: React.ReactNode;
 }) {
+  const id = slugFromAuditSectionNo(no);
   return (
-    /* Round 58 W-A · cv-auto perf primitive · /audit 7 sections benefit · LCP -150ms。 */
-    <section className="pt-12 pb-2 mt-12 border-t border-line/40 cv-auto">
+    /* Round 58 W-A · cv-auto perf primitive · /audit 7 sections benefit · LCP -150ms。
+       R74 W-G · C1 fix · id + scroll-mt-20 for anchor jumps · 同 /transparency pattern。 */
+    <section
+      id={id}
+      className="pt-12 pb-2 mt-12 border-t border-line/40 cv-auto scroll-mt-20"
+    >
       <div className="flex items-baseline gap-4 mb-6 section-reveal">
         <span className="font-mono text-gold/70 text-[11px] tabular tracking-[0.3em]">
           {no}

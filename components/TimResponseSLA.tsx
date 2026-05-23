@@ -131,12 +131,16 @@ export default function TimResponseSLA() {
       </div>
 
       <p className="font-mono text-mute/70 text-[10px] tracking-[0.22em] leading-relaxed mt-3">
+        {/* R74 W-G · C4 fix · href now points to /founders/ledger#refusals
+            (RefusalLedgerHint id="refusals" anchor)· bidirectional cross-
+            link contract honored · 同 R74 W-B RefusalLedgerHint comment
+            spec · refusal-as-reciprocity pairing 物理 codify。 */}
         ⚓ 拒絕原因 sample 公開 in{" "}
         <Link
-          href="/founders/ledger"
+          href="/founders/ledger#refusals"
           className="text-gold/85 hover:text-gold underline-offset-4 hover:underline"
         >
-          /founders/ledger
+          /founders/ledger § REFUSALS
         </Link>{" "}
         5-step allocation rules · 不藏 rejection rationale ·{" "}
         {isPreLaunch

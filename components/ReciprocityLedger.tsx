@@ -36,7 +36,7 @@ export default function ReciprocityLedger({ variant = "ledger" }: Props) {
     // Compact inline · single block for /pricing/why §06 buy-line surface
     return (
       <section
-        aria-label="Reciprocity Ledger · 16 artifacts published before asking · Cialdini Reciprocity"
+        aria-label="Reciprocity Ledger · 16 artifacts"
         className="border border-line/50 bg-slate/30 px-5 sm:px-6 py-4 sm:py-5"
       >
         <p
@@ -78,7 +78,7 @@ export default function ReciprocityLedger({ variant = "ledger" }: Props) {
   return (
     <section
       id="reciprocity-ledger"
-      aria-label="Reciprocity Ledger · 16 artifacts published before asking · Cialdini Reciprocity Principle 1984"
+      aria-label="Reciprocity Ledger · 16 artifacts published before asking"
       className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-14 pt-10 border-t border-line/40 scroll-mt-20"
     >
       <div className="flex items-baseline gap-4 mb-3 flex-wrap">

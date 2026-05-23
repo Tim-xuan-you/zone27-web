@@ -110,8 +110,16 @@ export default function RefusalLedgerHint() {
         >
           / REFUSAL LEDGER · PRE-COMMITTED RATIONALES
         </span>
+        {/* R74 W-G · M2 fix · role=status + aria-live for screen reader
+            dynamic count announcement when weekly counts start landing
+            post-Founder-#001 onboard · same WCAG 2.1 SC 4.1.3 Status
+            Messages pattern as R56 W-A WaitlistForm + R67 W-A LensFocusVote
+            VOTED state + R68 W-D LensFocusVote a11y。 */}
         <span
           lang="en"
+          role="status"
+          aria-live="polite"
+          aria-atomic="true"
           className="font-mono text-mute text-[10px] tracking-[0.3em] tabular"
         >
           5 RATIONALES · {PRE_LAUNCH_REFUSAL_COUNT} REFUSALS COUNT(pre-launch)

@@ -65,7 +65,7 @@ export const RECIPROCITY_LEDGER: ReadonlyArray<ReciprocityArtifact> = [
   {
     what: "整份 engine source · MIT licensed",
     surface: "https://github.com/Tim-xuan-you/zone27-web",
-    why: "您 fork 一份私有 ZONE 27 給自己用 · 0 NDA · 0 license fee · 我們不能 revoke · per /audit Section 06 audit primitives",
+    why: "您 fork 一份私有 ZONE 27 給自己用 · 0 NDA · 0 license fee · 我們不能 revoke · per /transparency Section 06 audit primitives 4-tool surface",
     source: "Anthropic Transparency Hub · Stripe API docs",
   },
   {
@@ -114,7 +114,7 @@ export const RECIPROCITY_LEDGER: ReadonlyArray<ReciprocityArtifact> = [
   // ── 9-12 · CONSTRAINT · 不會做 + 失敗 + 跨境 + 大樓崩 ───
   {
     what: "11-item NEVER list · 永遠不會做",
-    surface: "/audit#section-02",
+    surface: "/transparency#section-02",
     why: "ZONE 27 displacement target = 玩運彩 + 報馬仔 + LINE 老師生態 · 11 件物理 ban · publish = 物理 codify 退路 · Costly Signaling 100× per Spence 1973",
     source: "Stratechery「say what you don't do」",
   },
