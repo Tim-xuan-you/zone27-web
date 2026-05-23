@@ -32,10 +32,40 @@ export const metadata: Metadata = {
 // "不打擾就是禮物" applies to maintainer commitment too).
 // ─────────────────────────────────────────────────────
 
-const LAST_UPDATED = "2026-05-22";
-const CYCLE = "Round 28-51 · 2026-05-22 · 27+ canary fires displacement mission · 40 visitor-discoverable routes(+/transparency)· 7 LIVE LENS CANVAS + 2 LIVE Engine variants(v0.2 + v0.3 DEV PREVIEW)+ entire v0.2→v0.3 DIFF published + 8 binding ethics commitments + 5 steelman self-objections + 8 localStorage keys disclosed + Atom RSS feed LIVE + /transparency aggregator route LIVE · R50 11 W IA overhaul(LOGIN entries + Homepage funnel invert + Nav 三軸線 hierarchy + Footer F-pattern + /login password-only + /methodology/diff)+ R51 5 W audit synthesize(critical bugs + funnel fixes + WCAG AA + transparency aggregator + Atom RSS)· displacement battle 對 玩運彩+報馬仔 10+ 層 structural moat";
+const LAST_UPDATED = "2026-05-23";
+const CYCLE = "Round 28-59 · 2026-05-23 · 35+ canary fires displacement mission · 40 visitor-discoverable routes(+/transparency · +Hindenburg footnote retrofit on /methodology + /audit DISCLOSURE blocks)· 7 LIVE LENS CANVAS + 2 LIVE Engine variants(v0.2 + v0.3 DEV PREVIEW)+ entire v0.2→v0.3 DIFF published + 8 binding ethics commitments + 5 steelman self-objections + 8 localStorage keys disclosed + Atom RSS feed LIVE + /transparency aggregator route LIVE · R50 11 W IA overhaul · R51 5 W audit synthesize · R52-58 34+ waves single-day sprint · R59 5 W full-authority mandate(1 CRITICAL break-even brand-redline + 5 Agent C conversion ships + 5 Agent B critical 🔴 hardening + 8 magic-link copy refs + 5 stale route-count + Hindenburg evidence retrofit + Supabase getUser helper)· displacement battle 對 玩運彩+報馬仔 12+ 層 structural moat";
 
 const SHIPPED_THIS_CYCLE: { title: string; body: string; href?: string }[] = [
+  // ── 🛡️ Round 59 W-E · /audit DISCLOSURE mirror + Supabase getUser helper ─
+  {
+    title: "[R59 WE] 🛡️ /audit Hindenburg DISCLOSURE block mirror + Supabase getUser() helper · trust artifact consistency",
+    body: "Mirror /methodology WAVE D 的 8-field position disclosure 到 /audit hero · brand consistency across two canonical trust artifacts(model report + engineering paper)· 訪客從哪頁進都看到 identical position-disclosure baseline:EQUITY 100% TIM solo · 0 SPONSORS · 0 ADS · 0 TRACKERS · RECEIPTS N=1 · 7 SYSTEM-TEST FOUNDERS · 0 paid BLACK CARD · NT$ 0 revenue · 同 Hindenburg「at-the-top」 + Anthropic system card「known affiliations」 pattern。 Plus Supabase getUser() helper added to lib/supabase/server.ts · 同 getSession() pattern 但 re-validates with auth server · Agent B 🟡 #8 defense-in-depth · 為 Phase 2 admin actions ship 預備 · 0 breaking change existing getSession() usage。",
+    href: "/audit",
+  },
+  // ── 📜 Round 59 W-D · Hindenburg footnote retrofit on /methodology ─
+  {
+    title: "[R59 WD] 📜 Hindenburg Research footnote retrofit on /methodology · brand IP 「方法公開」 evidence-grade citation",
+    body: "Agent A web research ship #3(M effort · 8/10 ROI)· Hindenburg evidence density pattern · 之前 prose-cite Bill James/Tango/FanGraphs 但 inline claims 沒對應 numbered footnote anchor。 3-段補齊:(1)NEW top-of-document DISCLOSURE block · 8 position facts grid · Hindenburg「at-the-top-of-document position disclosure」 + Anthropic「known affiliations」 pattern · LAST UPDATED date stamp。 (2)4 inline superscript footnotes in ABSTRACT([1] Monte Carlo · [2] K/9 BB/9 HR/9 · [3] ±2% CLT · [4] N≥30 SAMPLE DEBT)· 訪客 click sup [N] anchor-jump · academic paper grammar。 (3)NEW Section 07 FOOTNOTES · numbered list 含 8 primary source URLs(Wikipedia Monte Carlo · FanGraphs Run Expectancy · FanGraphs Glossary · Rate Stats · Wikipedia CLT · GitHub simulator.ts · Russell Carleton stat reliability · Wikipedia sample size)。 NEW FootnoteRef component · superscript + inline variants · accessible aria-label · 0 deps。 Sabermetric/Forensic-credibility grammar 對齊 hardcore CPBL fan audience · 對 玩運彩/報馬仔 pure-prose「based on research」 框架 倒置。",
+    href: "/methodology#disclosure",
+  },
+  // ── 🔢 Round 59 W-C · Stale route-count drift across 5 files ─
+  {
+    title: "[R59 WC] 🔢 5 files stale route-count drift · Agent B 🟡 #9 · all aligned to canonical 40",
+    body: "Agent B audit surface · 7 places said 24/25/32/34/36/39 visitor-discoverable routes · 全部 stale · physical count = 41 page.tsx minus /admin = 40 · sharp visitor 數 nav 跟 dev comment 對不上 = drift surface。 5 stale refs → 40:CommandPalette.tsx(2 places · 「34 routes」 / 「34-row list」)· CmdKTrigger.tsx(2 places · 「24-route」 / 「25 個頁面」 title attr)· lib/command-palette-data.ts(「39-row list」 comment)· app/page.tsx(「34 routes indexed」 comment)· app/roadmap/page.tsx(LOCKED Cmd-K body 「32 entries」 + 完整 add-route trail compiled)· CLAUDE.md(「36 visitor-discoverable」 + 加 /methodology/diff + /transparency cross-ref)。 /transparency cross-link /annual/2026 verified · 不需額外 ship。 同 [[feedback-zone27-pratfall-brand-ip]] self-falsifiable attack vector close。",
+    href: "/",
+  },
+  // ── 🛡️ Round 59 W-B · 1 Agent C anchor strip + 5 Agent B critical 🔴 ──
+  {
+    title: "[R59 WB] 🛡️ /membership/black-card 4-cell anchor strip + 5 critical 🔴 hardening · 9 files",
+    body: "Agent C Ship #3(★★★★★ S effort)· /membership/black-card hero NT$ 200-450/月 sweet spot band 4-cell anchor strip · Defector ~200/月 · Netflix Premium 390/月 · Gym 1,500+/月 · BLACK CARD 299/月(gold highlight)· Loss Aversion + Contrast Principle 激活 · 中段 sweet spot 物理對齊 indie sports subscription band。 5 Agent B critical 🔴 hardening:(1)app/login/page.tsx:571 friendlyPasswordError 不再 leak raw Supabase strings · log + canonical generic message。 (2)lib/command-palette-data.ts 「李東洛」 → 「李東洺」 typo fix(cpbl-260521-01 PROVED ace 真名)。 (3)app/auth/signout/route.ts 加 isSameOrigin CSRF guard · 同 /api/submit pattern。 (4)8 stale 「magic link」 user-visible copy refs → 「Email + 密碼」 · /member · /member/submit · /calibration · FounderPickForm · FollowMatchButton · NavLoginCTA · Cmd-K palette label · R50 W-F founder dogfood 砍 magic link 後 UI 同步。",
+    href: "/membership/black-card",
+  },
+  // ── 🚨 Round 59 W-A · /founders break-even math 5.4→9 + 5 conversion ships + validate fix ──
+  {
+    title: "[R59 WA] 🚨 CRITICAL /founders 5.4 個月 → 9 個月 break-even fix + 5 Agent C conversion amplifications + validate script schema",
+    body: "Tim 全權迭代 mandate · 3 parallel agents spawn(web research / codebase audit / conversion funnel)· Agent C surface CRITICAL self-falsifiable brand redline:/founders hero BreakEvenCell 顯示 「5.4 個月」 但 caption 寫 「9 個月即達損益平衡」 + 「9× ratio」 line 重複 9 · 自相矛盾。 Math:2,700÷299 = 9.03 · 5.4 是 stale 從 R33 BLACK CARD reprice 499→299 之前(2,700÷499≈5.4)· caption 已 update · cell 沒。 Skeptic find in 5 sec = Pratfall attack。 修 + TODO.md 同 stale refs(「5.4 個月 break-even」 / 「BLACK CARD 499/月」 → 「9 個月」 / 「299/月」)。 5 Agent C XS conversion ships:(2)AnonPickWidget state 3 加 BLACK CARD NT$ 299/月 CTA in IKEA-effect retention loop · (4)首頁 F6 加 /transparency → cross-link · (5)/founders 9× block 加 /methodology/diff anchor「我們連 5 行 logic change 都公開」 · (6)首頁 Founders pill 下加「270 = Tim 一年親手 sign-off 上限 · 不是 marketing 數字」 · (7)HeroLiveCard 「想成為 #008?」 下加同 ceiling framing · 5 ships 同 Pratfall + Costly Signaling axis。 PLUS validate-match-data.mjs Step 6 schema regex 從 homeRuns/awayRuns 改 homeScore/awayScore · 對齊 FinalResult type · validate:data:warn 1 error → 0 error。",
+    href: "/founders",
+  },
   // ── 📡 Round 51 W-E · Atom RSS /feed.xml + ReproducibilityReceipt /audit S04 ──
   {
     title: "[R51 WE] 📡 Atom RSS /feed.xml + ReproducibilityReceipt /audit S04 · R50 TODO + R43 deferred 收束",
