@@ -131,7 +131,7 @@ const CATEGORIES: Category[] = [
             <br />
             <br />
             <strong className="text-bone">流程:</strong>
-            寄信 tim@zone27.tw · 主旨「REFUND · ZONE27-#NNN」(NNN 為您的
+            寄信 tatayngiti@gmail.com · 主旨「REFUND · ZONE27-#NNN」(NNN 為您的
             founder 編號 或 BLACK CARD month identifier)· Tim 48 hr 內回覆
             確認 · 同步原匯款銀行戶頭退回全額。
             <br />

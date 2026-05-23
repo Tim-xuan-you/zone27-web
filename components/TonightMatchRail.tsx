@@ -88,10 +88,13 @@ export default function TonightMatchRail({
       data-print-hide="true"
       className="fixed inset-x-0 z-29 sm:hidden border-t border-line/60 bg-ink/90 backdrop-blur-md"
       style={{
-        // Positioned ABOVE StickyFoundersCTA · 40px + safe-area-inset-bottom
-        // value(matches CTA's ~50px bottom space)+ small gap
-        bottom:
-          "calc(env(safe-area-inset-bottom, 0px) + var(--sticky-cta-h, 56px))",
+        // R71 W-E · Agent B audit F2 fix · --sticky-cta-h CSS var was
+        // never declared anywhere · fallback 56px < actual CTA height
+        // ~76px → visible overlap on mobile. Hard-code measured value ·
+        // StickyFoundersCTA at py-3 sm:py-4 + 1px border + content =
+        // ~76px on iPhone SE base · matches actual paint on all CPBL
+        // 3-game nights · no more z-29-vs-z-30 visual collision。
+        bottom: "calc(env(safe-area-inset-bottom, 0px) + 76px)",
         paddingLeft: "env(safe-area-inset-left, 0px)",
         paddingRight: "env(safe-area-inset-right, 0px)",
       }}

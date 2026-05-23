@@ -376,7 +376,7 @@ export default function PrivacyPage() {
             <strong className="text-bone">姓名</strong> · Tim(Tim-xuan-you · solo 自然人)
           </li>
           <li>
-            <strong className="text-bone">聯絡 email</strong> · tim@zone27.tw
+            <strong className="text-bone">聯絡 email</strong> · tatayngiti@gmail.com
           </li>
           <li>
             <strong className="text-bone">法律地位</strong> · 自然人 · 尚未公司化 ·

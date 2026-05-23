@@ -426,15 +426,15 @@ export default function AboutPage() {
               <p>email / DM 24 小時內 Taipei time · 不外包客服 · 不批次回覆</p>
               {/* Round 51 W-C · Agent 3 MEDIUM #10 fix · 缺 explicit Tim
                   accountability marker · 24h SLA claim 不夠 · 必須給 visitor
-                  actionable mailto entry。 真實 mailto:tim@zone27.tw direct
+                  actionable mailto entry。 真實 mailto:tatayngiti@gmail.com direct
                   channel · 若 SLA 超過則 /ethics 紅字標 · brand-pure 物理 codify。 */}
               <p className="mt-3 font-mono text-mute/85 text-[11px] tracking-[0.25em] leading-relaxed">
                 📧 直接寫信:{" "}
                 <a
-                  href="mailto:tim@zone27.tw"
+                  href="mailto:tatayngiti@gmail.com"
                   className="text-gold underline-offset-4 hover:underline transition-colors"
                 >
-                  tim@zone27.tw
+                  tatayngiti@gmail.com
                 </a>
                 {" "}· 24h 內回覆保證 · 超過則{" "}
                 <Link

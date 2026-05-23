@@ -141,7 +141,18 @@ export default function MemberHomeHero({
               <p className="font-mono text-mute/85 text-[10px] tracking-[0.22em] tabular mb-3">
                 {lastPick.match.home.name} vs {lastPick.match.away.name}
               </p>
-              {lastPick.verdict === null ? (
+              {/* R71 W-E · Agent B audit F4 fix · skip-pick guard ·
+                  visitor 顯示「skip 不押」 在 upper block · 不該 attribute
+                  verdict 到 non-pick · per /audit S05 disclosure parity
+                  axiom · only show verdict block when visitor actually picked。 */}
+              {lastPick.pick === "skip" ? (
+                <p
+                  lang="en"
+                  className="font-mono text-mute/60 text-[10px] tracking-[0.3em]"
+                >
+                  ◌ NO VERDICT · 您 skip · 引擎 verdict 不 attribute 到 non-pick
+                </p>
+              ) : lastPick.verdict === null ? (
                 <p
                   lang="en"
                   className="font-mono text-mute/70 text-[10px] tracking-[0.3em]"
@@ -167,7 +178,7 @@ export default function MemberHomeHero({
                   lang="en"
                   className="font-mono text-mute text-[10px] tracking-[0.3em]"
                 >
-                  ▪ PUSH
+                  ▪ PUSH · 平局/無 favorite
                 </p>
               )}
               <Link
@@ -244,9 +255,17 @@ export default function MemberHomeHero({
                 className="font-mono text-gold text-sm tabular"
               >
                 {engineN}
-                {engineN < 30 && (
+                {/* R71 W-E · Agent B audit F11 fix · N=30 threshold acknowledgment ·
+                    之前 silent disappearance · 修:engineN < 30 show countdown · engineN
+                    >= 30 swap to「N≥30 · STATISTICALLY MEANINGFUL」 anchor · 同
+                    /track-record + Bill James 慣例 + /calibration linkout。 */}
+                {engineN < 30 ? (
                   <span className="text-mute/60 text-[9px] tracking-[0.25em] ml-1.5">
                     · {30 - engineN} TO N=30
+                  </span>
+                ) : (
+                  <span className="text-gold/85 text-[9px] tracking-[0.25em] ml-1.5">
+                    · N≥30 · STATISTICALLY MEANINGFUL
                   </span>
                 )}
               </p>

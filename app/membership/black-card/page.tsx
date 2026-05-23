@@ -19,7 +19,7 @@ export const metadata: Metadata = {
 // ladder 中 1 張 card 帶過。
 //
 // Round 42 W-C · LIVE state transition · per [[feedback-no-waiting-rule]]:
-//   - mailto:tim@zone27.tw 月卡手動 ECPay 真實 flow LIVE
+//   - mailto:tatayngiti@gmail.com 月卡手動 ECPay 真實 flow LIVE
 //   - "PRE-LAUNCH · UI MOCKUP" framing 全 strip(per Agent J R43 dogfood
 //     verify · narrative 殘留 must sweep · brand IP「不可 LIVE badge ↔
 //     mockup narrative 共存」)
@@ -78,7 +78,7 @@ const UNLOCKS = [
 const FAQS = [
   {
     q: "現在可以訂閱嗎?",
-    a: "✓ 可以 · LIVE 月卡手動 ECPay 個人方案 · email tim@zone27.tw 我 24 小時內寄 ECPay 付款連結 · 首月起算。 自動扣款 infrastructure 留 Q4 2026+(per 倒置 SaaS · manual 是 brand IP scarcity)。",
+    a: "✓ 可以 · LIVE 月卡手動 ECPay 個人方案 · email tatayngiti@gmail.com 我 24 小時內寄 ECPay 付款連結 · 首月起算。 自動扣款 infrastructure 留 Q4 2026+(per 倒置 SaaS · manual 是 brand IP scarcity)。",
   },
   {
     q: "如何取消訂閱?",
@@ -240,7 +240,7 @@ export default function BlackCardPage() {
           </div>
           <div className="mt-6 flex flex-wrap gap-3">
             <a
-              href="mailto:tim@zone27.tw?subject=BLACK%20CARD%20%E8%A8%82%E9%96%B1%20-%20NT%24%20299%2F%E6%9C%88&body=Tim%20%E5%A5%BD%2C%0A%0A%E6%88%91%E6%83%B3%E8%A8%82%E9%96%B1%20BLACK%20CARD%20%E6%9C%88%E5%8D%A1%20%E2%80%A2%20NT%24%20299%2F%E6%9C%88%E3%80%82%0A%0A%E8%AB%8B%E5%AF%84%E6%88%91%20ECPay%20%E5%80%8B%E4%BA%BA%E6%96%B9%E6%A1%88%E4%BB%98%E6%AC%BE%E9%80%A3%E7%B5%90%E3%80%82%0A%0A%E8%AC%9D%E8%AC%9D%E3%80%82"
+              href="mailto:tatayngiti@gmail.com?subject=BLACK%20CARD%20%E8%A8%82%E9%96%B1%20-%20NT%24%20299%2F%E6%9C%88&body=Tim%20%E5%A5%BD%2C%0A%0A%E6%88%91%E6%83%B3%E8%A8%82%E9%96%B1%20BLACK%20CARD%20%E6%9C%88%E5%8D%A1%20%E2%80%A2%20NT%24%20299%2F%E6%9C%88%E3%80%82%0A%0A%E8%AB%8B%E5%AF%84%E6%88%91%20ECPay%20%E5%80%8B%E4%BA%BA%E6%96%B9%E6%A1%88%E4%BB%98%E6%AC%BE%E9%80%A3%E7%B5%90%E3%80%82%0A%0A%E8%AC%9D%E8%AC%9D%E3%80%82"
               className="inline-block px-5 py-2.5 bg-gold text-navy font-mono text-xs tracking-[0.3em] hover:bg-gold-soft transition-colors"
             >
               ✓ EMAIL TIM · 啟動 BLACK CARD 月卡
@@ -508,10 +508,10 @@ export default function BlackCardPage() {
                 EMAIL · ZONE 27 創辦人 Tim
               </p>
               <a
-                href="mailto:tim@zone27.tw?subject=BLACK%20CARD%20%E8%A8%82%E9%96%B1%20-%20NT%24%20299%2F%E6%9C%88&body=Tim%20%E5%A5%BD%2C%0A%0A%E6%88%91%E6%83%B3%E8%A8%82%E9%96%B1%20BLACK%20CARD%20%E6%9C%88%E5%8D%A1%20%E2%80%A2%20NT%24%20299%2F%E6%9C%88%E3%80%82%0A%0A%E8%AB%8B%E5%AF%84%E6%88%91%20ECPay%20%E5%80%8B%E4%BA%BA%E6%96%B9%E6%A1%88%E4%BB%98%E6%AC%BE%E9%80%A3%E7%B5%90%E3%80%82%0A%0A%E8%AC%9D%E8%AC%9D%E3%80%82"
+                href="mailto:tatayngiti@gmail.com?subject=BLACK%20CARD%20%E8%A8%82%E9%96%B1%20-%20NT%24%20299%2F%E6%9C%88&body=Tim%20%E5%A5%BD%2C%0A%0A%E6%88%91%E6%83%B3%E8%A8%82%E9%96%B1%20BLACK%20CARD%20%E6%9C%88%E5%8D%A1%20%E2%80%A2%20NT%24%20299%2F%E6%9C%88%E3%80%82%0A%0A%E8%AB%8B%E5%AF%84%E6%88%91%20ECPay%20%E5%80%8B%E4%BA%BA%E6%96%B9%E6%A1%88%E4%BB%98%E6%AC%BE%E9%80%A3%E7%B5%90%E3%80%82%0A%0A%E8%AC%9D%E8%AC%9D%E3%80%82"
                 className="block text-center text-bone hover:text-gold text-base sm:text-lg tabular tracking-wide transition-colors underline-offset-4 hover:underline break-all"
               >
-                tim@zone27.tw
+                tatayngiti@gmail.com
               </a>
               <p className="mt-3 font-mono text-mute/70 text-[9px] tracking-[0.25em] text-center">
                 點上面連結會開啟您的 email app · subject + body 預填好
@@ -597,7 +597,7 @@ export default function BlackCardPage() {
           </p>
           <p>
             這頁 ✓ LIVE 月卡手動 ECPay 個人方案(per R42 W-C · Agent I dogfood
-            fix)· email tim@zone27.tw 我 24 小時內寄 ECPay 付款連結 · 自動扣款
+            fix)· email tatayngiti@gmail.com 我 24 小時內寄 ECPay 付款連結 · 自動扣款
             infrastructure 留 Q4 2026+(per 倒置 SaaS · manual 是 brand IP
             scarcity 不是 missing feature)。 不催 · 不 dark pattern · 不藏
             cancel button(monthly manual 本身就不需要 cancel button · 不續訂

@@ -235,7 +235,7 @@ export default function LoginPage() {
       }
       setState({
         kind: "error",
-        message: "未知錯誤 · 請稍候再試 · 持續寫信 tim@zone27.tw",
+        message: "未知錯誤 · 請稍候再試 · 持續寫信 tatayngiti@gmail.com",
       });
     }
   }
@@ -280,7 +280,7 @@ export default function LoginPage() {
       }
       setState({
         kind: "error",
-        message: "重發失敗 · 請稍候再試 · 持續寫信 tim@zone27.tw",
+        message: "重發失敗 · 請稍候再試 · 持續寫信 tatayngiti@gmail.com",
       });
     }
   }
@@ -546,7 +546,7 @@ function SentState({
 // Round 30 Wave 14 · friendly password error mapping。
 // Round 51 W-A · Agent 2 #10 fix · 砍 stale「忘記密碼」 references · R50 W-F
 // 已移除 mode toggle button · 此 message 指向不存在 UI 是 ghost text · 改寫
-// canonical「密碼錯了 · 確認 capslock · 寫信 tim@zone27.tw」 path · 真實
+// canonical「密碼錯了 · 確認 capslock · 寫信 tatayngiti@gmail.com」 path · 真實
 // 可達 recovery option(/reset page 將來 ship)。
 //
 // Round 54 W-A · Agent 2 #3 + #10 fix · whitelist-only approach · 砍
@@ -557,12 +557,12 @@ function SentState({
 // implementation(之前 comment 寫 「改為 log + canonical generic message」 但
 // code 還是 return raw.slice 違反 comment 承諾 · 同 security drift 信號)。
 function friendlyPasswordError(raw: string): string {
-  if (!raw || typeof raw !== "string") return "錯誤 · 請稍候再試 · 持續寫信 tim@zone27.tw";
+  if (!raw || typeof raw !== "string") return "錯誤 · 請稍候再試 · 持續寫信 tatayngiti@gmail.com";
   const lower = raw.toLowerCase();
   if (lower.includes("already") && lower.includes("registered"))
-    return "此 email 已註冊 · 密碼錯了? 寫信 tim@zone27.tw 重設";
+    return "此 email 已註冊 · 密碼錯了? 寫信 tatayngiti@gmail.com 重設";
   if (lower.includes("user already exists"))
-    return "此 email 已註冊 · 密碼錯了? 寫信 tim@zone27.tw 重設";
+    return "此 email 已註冊 · 密碼錯了? 寫信 tatayngiti@gmail.com 重設";
   if (lower.includes("password should be at least"))
     return `密碼至少 ${MIN_PASSWORD_LEN} 字元`;
   if (lower.includes("weak"))
@@ -576,5 +576,5 @@ function friendlyPasswordError(raw: string): string {
   if (typeof console !== "undefined" && typeof console.error === "function") {
     console.error("[login friendlyPasswordError unknown]", raw);
   }
-  return "錯誤 · 請稍候再試 · 持續寫信 tim@zone27.tw";
+  return "錯誤 · 請稍候再試 · 持續寫信 tatayngiti@gmail.com";
 }

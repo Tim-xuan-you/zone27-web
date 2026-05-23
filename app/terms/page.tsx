@@ -140,7 +140,7 @@ export default function TermsPage() {
           </li>
           <li>
             <strong className="text-bone">退款流程</strong> ·
-            寄信 <Code>tim@zone27.tw</Code> · 主旨 <Code>REFUND · ZONE27-#NNN</Code>
+            寄信 <Code>tatayngiti@gmail.com</Code> · 主旨 <Code>REFUND · ZONE27-#NNN</Code>
             (NNN 為您的 founder 編號)· Tim 48 hr 內回覆確認 · 同步原匯款
             銀行戶頭退回 NT$ 2,700 全額。
           </li>

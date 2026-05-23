@@ -738,18 +738,24 @@ export default async function MatchDetailPage({
           nights have 3 games · 1-tap lateral nav between tonight's
           matches · MLB At Bat scoreboard ribbon + Bloomberg watchlist
           rail pattern · pre-locked engine % NOT live odds(brand-pure
-          per Costly Signaling)· <= 1 match · component returns null。 */}
-      <TonightMatchRail
-        currentMatchId={m.id}
-        matches={getTodayMatches().map((tm) => ({
-          id: tm.id,
-          homeName: tm.home.name,
-          awayName: tm.away.name,
-          homeWinRate: tm.home.winRate,
-          awayWinRate: tm.away.winRate,
-          startTime: tm.startTime,
-        }))}
-      />
+          per Costly Signaling)· <= 1 match · component returns null。
+          R71 W-E · Agent B audit F5 fix · phase guard · 只 render on
+          today-pregame + today-live(現場相關 phases)· 不 render on
+          final · stale-archived · future(archived match 不該 surface
+          tonight switcher · visual confusion + brand IP noise creep)。 */}
+      {(phase === "today-pregame" || phase === "today-live") && (
+        <TonightMatchRail
+          currentMatchId={m.id}
+          matches={getTodayMatches().map((tm) => ({
+            id: tm.id,
+            homeName: tm.home.name,
+            awayName: tm.away.name,
+            homeWinRate: tm.home.winRate,
+            awayWinRate: tm.away.winRate,
+            startTime: tm.startTime,
+          }))}
+        />
+      )}
 
       <Footer />
     </div>

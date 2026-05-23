@@ -187,11 +187,11 @@ const INLINE_FAQ = [
   },
   {
     q: "如果我加入後反悔想退款?",
-    a: "付款後 14 天無條件退款保證(Founders 27 + BLACK CARD 都適用)。 寫信 tim@zone27.tw 即可 · 不問原因 · 不嘗試挽留。 退款後您仍保留所有已下載的 GitHub source code + methodology docs(MIT licensed · 我們不能 revoke)。",
+    a: "付款後 14 天無條件退款保證(Founders 27 + BLACK CARD 都適用)。 寫信 tatayngiti@gmail.com 即可 · 不問原因 · 不嘗試挽留。 退款後您仍保留所有已下載的 GitHub source code + methodology docs(MIT licensed · 我們不能 revoke)。",
   },
   {
     q: "手動銀行轉帳具體流程?",
-    a: "(1)Founders 27 開放後 · 您 email tim@zone27.tw 表達意願 ·(2)Tim 24h 內回覆銀行 4 欄位 + 您專屬 ZONE27-#NNN 備註碼 ·(3)您匯款 NT$ 2,700 · 備註寫 ZONE27-#NNN ·(4)Tim 確認入帳後寄 lifetime access confirmation + Founders LINE 群邀請。 全程 Tim 親手 onboard · 沒有 cron · 沒有外包(per /coverage philosophy)。",
+    a: "(1)Founders 27 開放後 · 您 email tatayngiti@gmail.com 表達意願 ·(2)Tim 24h 內回覆銀行 4 欄位 + 您專屬 ZONE27-#NNN 備註碼 ·(3)您匯款 NT$ 2,700 · 備註寫 ZONE27-#NNN ·(4)Tim 確認入帳後寄 lifetime access confirmation + Founders LINE 群邀請。 全程 Tim 親手 onboard · 沒有 cron · 沒有外包(per /coverage philosophy)。",
   },
   {
     q: "BLACK CARD 上線後我 Founders 27 status 會變嗎?",
@@ -203,7 +203,7 @@ const INLINE_FAQ = [
   },
   {
     q: "可以贈送 Founders 27 給朋友嗎?",
-    a: "可以。 Founders 27 是 lifetime seat · transferable · 寫信 tim@zone27.tw 說「我要轉讓 #NNN 給某某人(對方 email)」 · Tim 24h 內 update ledger + 寄新 owner confirmation。 受贈人也享 14 天無條件退款保證(從 ledger update 日起算)。",
+    a: "可以。 Founders 27 是 lifetime seat · transferable · 寫信 tatayngiti@gmail.com 說「我要轉讓 #NNN 給某某人(對方 email)」 · Tim 24h 內 update ledger + 寄新 owner confirmation。 受贈人也享 14 天無條件退款保證(從 ledger update 日起算)。",
   },
   {
     q: "如果我之後不喜歡 ZONE 27 的 methodology 怎麼辦?",

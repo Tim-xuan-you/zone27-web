@@ -491,6 +491,14 @@ export default function TransparencyPage() {
 
 // ── Sub-components ────────────────────────────────────
 
+// R71 W-E · Agent B audit F1 fix · slug helper for /transparency Section ·
+// 同 R69 W-F /terms + R70 W-F /privacy pattern · enables /transparency
+// #section-02 anchor jump · /founders/apply R70 W-E pre-apply checklist
+// row 01 cross-link target · 不再 broken-anchor 5-second devtools verify。
+function slugFromTransparencySectionNo(no: string): string {
+  return `section-${no.toLowerCase().replace(/[^a-z0-9]/g, "-")}`;
+}
+
 function Section({
   no,
   label,
@@ -502,11 +510,16 @@ function Section({
   zh: string;
   children: React.ReactNode;
 }) {
+  const id = slugFromTransparencySectionNo(no);
   return (
     /* Round 57 W-A · Agent B Ship #3 · cv-auto skips paint+layout off-screen ·
        LCP -150ms on long /transparency page · TBT -100ms · brand IP fit:
-       pure browser-native primitive · 0 cookies · 0 animation。 */
-    <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-16 pt-10 border-t border-line/40 cv-auto">
+       pure browser-native primitive · 0 cookies · 0 animation。
+       R71 W-E · Agent B audit F1 fix · id slug for anchor jump · scroll-mt-20。 */
+    <section
+      id={id}
+      className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-16 pt-10 border-t border-line/40 cv-auto scroll-mt-20"
+    >
       <div className="flex items-baseline gap-4 mb-2 section-reveal">
         <span className="font-mono text-gold/70 text-[10px] tracking-[0.35em]">
           / {no}

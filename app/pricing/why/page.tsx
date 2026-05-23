@@ -384,7 +384,7 @@ export default function PricingWhyPage() {
             <FaqRow q="14 天退款怎麼算?">
               <p>
                 從 confirmation email 那天起算 14 個自然日內 · 寄信
-                tim@zone27.tw · 主旨「REFUND · ZONE27-#NNN」 · 48 hr 內 Tim
+                tatayngiti@gmail.com · 主旨「REFUND · ZONE27-#NNN」 · 48 hr 內 Tim
                 確認 · 同步原匯款銀行戶頭退回全額。 不問原因 · 不嘗試挽留 ·
                 不要求填問卷。 per Taiwan 消保法 § 19 distance-selling
                 cooling-off · ZONE 27 主動延伸到 14 天 · 翻倍法定下限。
