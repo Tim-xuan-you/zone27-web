@@ -1,8 +1,8 @@
 # 📋 New Conversation Prompt · ZONE 27 Session Handoff
 
 **用途:** 開新對話窗時複製此 prompt 整段 paste · 新 Claude 一秒接上 context。
-**最後 update:** 2026-05-23 · **Round 60 W-B 攻頂** · R59 5 waves + R60 Pokemon TCG lens 2 waves · 3-agent full-authority pattern × 2 invocations · R37→R60
-**Token urgency:** Tim explicit「現在這個對話窗太燒TOKEN了」 · 此 prompt 是 R60 contextual snapshot for fresh Claude bootstrap
+**最後 update:** 2026-05-23 · **Round 61 W-E 攻頂** · R59 7 waves + R60 3 waves + R61 5 waves · 3-agent full-authority pattern × 3 invocations · R37→R61
+**Token urgency:** Tim explicit「現在這個對話窗太燒TOKEN了」 · 此 prompt 是 R61 contextual snapshot for fresh Claude bootstrap
 
 ---
 
@@ -41,8 +41,15 @@
 
 【2026-05-23 R59-R60 攻頂 state · 7+ waves · 3-agent full-authority pattern fire × 2 invocations】:
 
+R61 W-A · validate regex bug fix · cpbl-pitchers.ts uses "name": JSON format · regex name:\s*" 0 matches · 4 false-positive pitchers · fixed with leading quote anchor · commit 4072b8e
+R61 W-B · validator inline ESTIMATE marker support · 3-tier classification(in cpbl-pitchers OR // estimate marker OR real gap)· 0 error 0 warning · commit 6b20745
+R61 W-C · 11 focus: → focus-visible: a11y refactor across 7 form files · Vercel guideline align · commit 5b2d1f5
+R61 W-D · Agent 2 audit synthesize · 14-file batch · 2 🔴 CRITICAL(賣明牌 brand redline · /audit S08→S05)+ 6 stale magic-link cleanup + /auth/callback raw-error-leak fix + /annual commits 200→294 · commit ed7e34c
+R61 W-E · PreviewModeBanner WCAG 2.2 SC 2.5.8 hit-target 28→32/36px + Cmd+Shift+P input-safe(Linear/Notion respect-focus pattern + Firefox Private Window collision avoid)· commit e491d0e
+
 R60 W-A · Pokemon TCG lens · SET release narrative on /methodology Section 04(v0.2 BASE SET · v0.3 EXPANSION 1 Park Factor · v0.4 EXPANSION 2 Bayesian Mix)+ SHADOWLESS RUN binary tier framing on /founders + NEW section #shadowless-run on /founders/ledger(整批 270 = 1st Edition · BLACK CARD 永遠無法 retroactively 升 · 同 Pokemon Charizard 1st Edition $550K mechanic)+ 3 BINDING PRE-COMMITMENTS · commit cd14381
-R60 W-B · TCG card anatomy on FirstReceiptHero(/track-record)· top-line「ZONE 27 ENGINE · v0.2 · RECEIPT 001 · CARD 001/SEASON 2026」 + bottom-line「CARD 001/∞ · REPRINT POLICY 0」 typographic frame · screenshot-shareable artifact + /now journal sync · NEW-CONVERSATION-PROMPT update · (此 commit)
+R60 W-B · TCG card anatomy on FirstReceiptHero(/track-record)· top-line「ZONE 27 ENGINE · v0.2 · RECEIPT 001 · CARD 001/SEASON 2026」 + bottom-line「CARD 001/∞ · REPRINT POLICY 0」 typographic frame · screenshot-shareable artifact · commit 96af33d
+R60 W-C · Designer dogfood 3rd-canary fix · /admin DESIGNER QUICK REFERENCE + AdminTierSwitcher Cmd+Shift+P kbd display(Tim 不必再問第 4 次 tier preview workflow)· commit b091107
 
 R59 W-A · 1 CRITICAL brand-redline(/founders break-even 5.4→9)+ 5 Agent C XS conversion amplifications + validate script schema fix · commit 3940729
 R59 W-B · Agent C Ship #3 /membership/black-card 4-cell anchor strip + 5 Agent B critical 🔴 hardening(login error leak · Cmd-K 李東洺 typo · /auth/signout CSRF · 8 stale magic-link copy refs)· commit 0d2ada0
@@ -179,9 +186,10 @@ EXCEPTIONS ship · brand-pure 替代:
 | R57 | 1 | execution mode · no new agents | MIT license disclosure on /ethics S02B · cv-auto utility classes |
 | R58 | 1 | execution mode continued | cv-auto on /methodology + /audit + /privacy · 19 sections benefit |
 | R59 | 7 | full-authority 3-agent · brand-redline + conversion + Hindenburg evidence | /founders 5.4→9 CRITICAL fix · /membership/black-card 4-cell anchor strip · 8 magic-link copy refs · /methodology + /audit + /transparency DISCLOSURE blocks · 4 inline sup + Section 07 FOOTNOTES + FootnoteRef component · Supabase getUser() helper |
-| R60 | 2 | Pokemon TCG lens · 1 deep web research · SHADOWLESS RUN binary tier + SET release narrative + TCG card anatomy | /methodology Section 04 SET framing(v0.2 BASE SET · v0.3 EXPANSION 1 · v0.4 EXPANSION 2)· /founders + /founders/ledger#shadowless-run · FirstReceiptHero CARD 001/∞ + REPRINT POLICY 0 · screenshot-shareable artifact |
+| R60 | 3 | Pokemon TCG lens · 1 deep web research · SHADOWLESS RUN binary tier + SET release narrative + TCG card anatomy + designer dogfood 3rd-canary | /methodology Section 04 SET framing · /founders + /founders/ledger#shadowless-run · FirstReceiptHero CARD 001/∞ + REPRINT POLICY 0 · /admin DESIGNER QUICK REFERENCE + AdminTierSwitcher Cmd+Shift+P prominent kbd display |
+| R61 | 5 | 3rd full-authority · 3 parallel agents · validate regex + focus-visible + 2 CRITICAL 🔴 brand contradictions + WCAG 2.2 | validate:data 0 error 0 warning · 11 focus-visible refactor · 賣明牌 brand redline closed · /audit S08→S05 broken refs fixed · 6 stale magic-link cleanup · /auth/callback raw-error-leak fix · /annual commits 200→294 · PreviewModeBanner 28→32/36px + input-safe shortcut |
 
-**Total: 48+ waves · ~110 fixes · 0 brand redline violation**
+**Total: 56+ waves · ~140 fixes · 0 brand redline violation**
 
 ---
 
