@@ -877,9 +877,17 @@ function FirstReceiptHero({
         </div>
       </div>
 
-      {/* ── VERDICT BAND ──────────────────────── */}
+      {/* ── VERDICT BAND ────────────────────────
+          R67 W-B · Peak-End rule(Kahneman 2002)moment · `.enter-
+          verdict-reveal` 800ms hold + 480ms cubic-bezier expo reveal ·
+          uses MOTION constants from lib/motion.ts(single source)·
+          @starting-style modern CSS(no JS · graceful fallback)·
+          prefers-reduced-motion guarded · per /audit S05 disclosure
+          parity · PROVED 與 DIVERGED 用同 timing 不偏 emotion · 同
+          Bloomberg Terminal LAST-number 強調 grammar 不是 victory
+          animation。 */}
       <div
-        className={`border-t-2 ${verdictBorder} px-5 sm:px-8 py-6 sm:py-7 text-center`}
+        className={`border-t-2 ${verdictBorder} px-5 sm:px-8 py-6 sm:py-7 text-center enter-verdict-reveal`}
       >
         <p
           lang="en"
