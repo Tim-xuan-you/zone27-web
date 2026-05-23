@@ -643,6 +643,50 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
       title: "為什麼 NT$ 2,700 · 6-deliverable rationale",
     },
   ],
+  // R69 W-A · NEW /founders/first-five-minutes onboarding trail ·
+  // Linear / Superhuman compressed to 5 trust artifacts · Siblings:
+  // /founders(parent · sales page · onboarding 之後 next destination)·
+  // /lab(STEP 01 lab simulation · 訪客可進去親手跑)· /track-record(STEP 04
+  // 公開戰績 · audit destination)。
+  "/founders/first-five-minutes": [
+    {
+      href: "/founders",
+      kicker: "founders",
+      title: "Founders 27 銷售頁 · 6 件什麼不買到 + benefits",
+    },
+    {
+      href: "/lab",
+      kicker: "lab",
+      title: "Monte Carlo 實驗室 · 親手跑 10K simulation",
+    },
+    {
+      href: "/track-record",
+      kicker: "track-record",
+      title: "公開戰績 ledger · PROVED + DIVERGED 等大",
+    },
+  ],
+  // R69 W-B · NEW /founders/from-one-current-founder Substack-style empty
+  // scaffold · 等待 Founder #001 第 6 個月真實 letter · Siblings:
+  // /founders/ledger(同 process-transparency axis · empty scaffold pattern)·
+  // /annual/2026(Year 0 honest empty parallel · Defector radical-transparency)·
+  // /transparency(disclosure aggregator · 此 page 是 transparency artifact)。
+  "/founders/from-one-current-founder": [
+    {
+      href: "/founders/ledger",
+      kicker: "founders/ledger",
+      title: "Public allocation ledger · 5-step rules · empty scaffold parallel",
+    },
+    {
+      href: "/annual/2026",
+      kicker: "annual",
+      title: "Year 0 honest report · empty state parallel · Defector pattern",
+    },
+    {
+      href: "/transparency",
+      kicker: "transparency",
+      title: "Audit aggregator · 完整 disclosure 集合",
+    },
+  ],
 };
 
 export function getRelatedLinks(currentPath: string): RelatedLink[] {

@@ -10,7 +10,7 @@
 // Inspired by Linear / Vercel / Stripe command palettes,
 // but DELIBERATELY thin: no fuse.js, no telemetry, no
 // recently-used persistence. Simple substring filter on a
-// hand-curated 41-row list is sufficient and brand-pure
+// hand-curated 44-row list is sufficient and brand-pure
 // (per [[zone27-disclosure-philosophy]]: no hidden ranking).
 // (/admin is intentionally NOT indexed here · Tim bookmarks it ·
 // keeping it out of visitor Cmd-K aligns with its noindex framing.)
@@ -413,6 +413,61 @@ export const COMMAND_ITEMS: CommandItem[] = [
       "approve",
       "通過",
       "submit",
+    ],
+  },
+  // R69 W-A · NEW /founders/first-five-minutes · 5-step trust artifact
+  // receipt trail · Linear command-palette tour + Superhuman 30-min
+  // concierge compressed · NOT wizard · NOT progress bar · 每 step 是
+  // existing artifact 的 inline preview + cross-link · per Agent A R68
+  // SHIP 1 deferred · 入門 group。
+  {
+    label: "首五分鐘 · 5 receipts of Tim's craft · ZONE 27 onboarding",
+    kicker: "/founders/first-five-minutes",
+    path: "/founders/first-five-minutes",
+    group: "入門",
+    keywords: [
+      "first",
+      "five",
+      "minutes",
+      "首五分鐘",
+      "onboarding",
+      "入門",
+      "tour",
+      "introduction",
+      "新來",
+      "從哪開始",
+      "step",
+      "5-step",
+      "新手",
+      "新人",
+      "begin",
+      "start",
+    ],
+  },
+  // R69 W-B · NEW /founders/from-one-current-founder · Substack Year-In-
+  // Review empty scaffold · 等待 Founder #001 第 6 個月真實 letter · 不
+  // ghostwrite · per Agent A R68 SHIP 4 deferred · 信任文件 group。
+  {
+    label: "From One Current Founder · 等待 #001 真實 6 個月 letter · empty by design",
+    kicker: "/founders/from-one-current-founder",
+    path: "/founders/from-one-current-founder",
+    group: "信任文件",
+    keywords: [
+      "from",
+      "one",
+      "current",
+      "founder",
+      "letter",
+      "voice",
+      "testimonial",
+      "substack",
+      "real",
+      "真實",
+      "empty",
+      "scaffold",
+      "6 個月",
+      "6-month",
+      "未來",
     ],
   },
   {

@@ -124,6 +124,10 @@ const FOOTER_GROUPS: FooterGroup[] = [
     enLabel: "ENTRY",
     links: [
       { label: "5 分鐘入門", href: "/learn" },
+      // R69 W-A · NEW /founders/first-five-minutes onboarding trail ·
+      // 5-step trust artifact receipt tour · Linear/Superhuman compressed ·
+      // F-pattern second-row priority entry · per Agent A R68 SHIP 1。
+      { label: "首五分鐘 · 5 receipts", href: "/founders/first-five-minutes" },
       { label: "關於 ZONE 27", href: "/about" },
       // Round 50 W-B · 2026-05-22 · Tim 26+ canary fire UX root cause ·
       // /login footer entry 是 Nav LOGIN button + Cmd-K 之外的第三條路 ·
