@@ -150,7 +150,7 @@ function buildHtmlBody({
 
 <p style="margin:24px 0 12px 0;color:#F5F2EA;font-size:14px;letter-spacing:0.5px;">接下來幾件事:</p>
 <ul style="margin:0 0 24px 0;padding-left:22px;color:#8A93A8;font-size:14px;line-height:1.8;">
-<li>付款系統預計 <span style="color:#F5F2EA;">2026 Q3</span> 啟動(手工銀行轉帳 + TapPay)</li>
+<li>付款系統 <span style="color:#F5F2EA;">payment infra 就緒後</span>啟動(milestone-triggered · 手工銀行轉帳 + TapPay)</li>
 <li>正式開放預訂時 · 您會收到 <span style="color:#D4AF37;">24 小時優先取得連結</span></li>
 <li><span style="color:#F5F2EA;">NT$ 2,700</span> 一次性 · 終身免費 · 永不調漲</li>
 <li>0% 創作者抽成 · 編號 <span style="color:#F5F2EA;font-family:${mono};">#${pos}</span>(目前序位 · 正式開放時依付款順序確定)</li>
@@ -197,7 +197,7 @@ Hi ${greeting},
 ${FOUNDERS_TOTAL} 個席位 · 您是第 ${queuePos} 位早到。
 
 接下來:
-- 付款系統預計 2026 Q3 啟動(手工銀行轉帳 + TapPay)
+- 付款系統 payment infra 就緒後啟動(milestone-triggered · 手工銀行轉帳 + TapPay)
 - 正式開放預訂時 · 您會收到 24 小時優先取得連結
 - NT$ 2,700 一次性 · 終身免費 · 永不調漲
 - 0% 創作者抽成 · 編號 #${pos} 目前序位

@@ -50,7 +50,7 @@ const BLACK_CARD_SUBSCRIBERS: {
   monthsSustained: number;
 }[] = [];
 
-const BLACK_CARD_LAUNCH_DATE = "2026 Q3 · payment infra 啟用後";
+const BLACK_CARD_LAUNCH_DATE = "payment infra 就緒後啟用(milestone-triggered)";
 
 export default function BlackCardLedgerPage() {
   const totalSubs = BLACK_CARD_SUBSCRIBERS.length;

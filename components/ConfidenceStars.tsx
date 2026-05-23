@@ -97,7 +97,7 @@ export default function ConfidenceStars({
           </span>
           {!noTooltip && (
             <Link
-              href="/audit#section-02"
+              href="/audit#disclosure"
               className="font-mono text-mute/60 hover:text-gold text-[9px] tracking-[0.3em] underline-offset-4 hover:underline transition-colors"
               title="ESTIMATION DISCLOSURE · 引擎置信度怎麼算"
             >

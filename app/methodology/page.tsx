@@ -676,7 +676,7 @@ repeat 10,000 times → aggregate
             complication 模式 · brand-pure 無限 scaling 起點。 displacement
             narrative 物理閉環 — 從 future promise(「building」)升 LIVE
             truth(「built」)。 訂閱者 voting 決定 next ship order(Lens
-            v2.0 計劃 · Q3 2026+)。
+            v2.0 計劃 · payment infra 就緒後 milestone-triggered)。
           </p>
         </blockquote>
       </Section>

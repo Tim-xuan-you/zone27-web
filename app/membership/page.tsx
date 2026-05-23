@@ -90,7 +90,7 @@ const TIERS: Tier[] = [
     name: "BLACK CARD",
     en: "BLACK CARD",
     price: "NT$ 299",
-    priceNote: "每月 · 預計 2026 Q3 開放",
+    priceNote: "每月 · payment infra 就緒後開放(milestone-triggered)",
     desc: "黑金訂閱會員。可發文 · 可推薦賽事 · 創作者抽成 5%(vs 業界 LINE 老師平台 30-50% 是降維打擊)。",
     // Round 55 W-C · Agent C #2 fix · 「Everything in [prev tier]+」 stacking
     // pattern · 同 Defector + Plausible + Patreon premium-tier 模式 · 訪客

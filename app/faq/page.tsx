@@ -106,9 +106,9 @@ const CATEGORIES: Category[] = [
         q: "付款系統什麼時候開放?",
         a: (
           <>
-            預計 <span className="font-mono text-gold tabular">2026 Q3</span>。
-            在此之前,加入等候名單 =排隊優先權,
-            <strong className="text-bone">完全免費</strong>,
+            <span className="font-mono text-gold">payment infra 就緒後開放</span>
+            (milestone-triggered · 不綁日期)。 在此之前,加入等候名單 =
+            排隊優先權,<strong className="text-bone">完全免費</strong>,
             不收任何資料以外的東西。下方按鈕直接加入:
             <br />
             <Link
@@ -117,6 +117,58 @@ const CATEGORIES: Category[] = [
             >
               加入等候名單 →
             </Link>
+          </>
+        ),
+      },
+      {
+        q: "14 天退款怎麼運作?",
+        id: "refund",
+        a: (
+          <>
+            <strong className="text-bone">14 天無條件退款</strong> · Founders 27
+            從 Tim 確認您的銀行轉帳入帳 + 您收到 lifetime access confirmation
+            email 那天起算 · BLACK CARD 從您每月手動轉帳當月份入帳那天起算。
+            <br />
+            <br />
+            <strong className="text-bone">流程:</strong>
+            寄信 tim@zone27.tw · 主旨「REFUND · ZONE27-#NNN」(NNN 為您的
+            founder 編號 或 BLACK CARD month identifier)· Tim 48 hr 內回覆
+            確認 · 同步原匯款銀行戶頭退回全額。
+            <br />
+            <br />
+            <strong className="text-bone">不問原因 · 不嘗試挽留</strong> · 不
+            要求填問卷 · 不寄 retention 文案 · per [[zone27-pratfall-brand-ip]]
+            「不裝挽留」 axiom。
+            <br />
+            <br />
+            ZONE 27 主動延伸到 14 天 · 翻倍中華民國消費者保護法 § 19 distance-
+            selling 法定 7-day cooling-off 下限。 完整 refund 條款見{" "}
+            <Link href="/terms" className="text-gold underline-offset-4 hover:underline">
+              /terms Section 4B
+            </Link>
+            。
+          </>
+        ),
+      },
+      {
+        q: "ZONE 27 接 corporate / 企業客戶?",
+        id: "corporate",
+        a: (
+          <>
+            <strong className="text-gold">不接。</strong> 不存在 enterprise tier
+            · 不存在「talk to our team」 form · ZONE 27 brand IP = 個人
+            audience-fans · 不接 corporate B2B。
+            <br />
+            <br />
+            如果您是 corporate 想用 ZONE 27 · 同 rates 同 access:
+            自己 NT$ 2,700(Founders 27)· 或 NT$ 299/月(BLACK CARD)· self-serve。
+            <br />
+            <br />
+            完整 pricing rationale 見{" "}
+            <Link href="/pricing/why" className="text-gold underline-offset-4 hover:underline">
+              /pricing/why
+            </Link>
+            {" "}§04「為什麼這頁沒有比較表」 + §03「為什麼 Founders 27 是 NT$ 2,700」。
           </>
         ),
       },

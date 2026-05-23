@@ -332,13 +332,13 @@ export default function MemberDashboardPreview() {
           body="您正在看的這頁是 public preview · 任何訪客可進 · 沒 auth · localStorage data 用 visitor 自己的。Pratfall surface 工程現狀 · 不假裝已 functional。"
         />
         <TimelineRow
-          label="Phase 1 · 2026 Q3(預估)"
+          label="Phase 1 · payment infra 就緒後(milestone-triggered)"
           status="AUTH + DB SYNC"
           tone="exploring"
           body="Supabase Email + 密碼 auth 已接入(R50 W-F password-only)· 您的 sim history + follow list 從 localStorage 同步雲端。FREE TIER 會員 / member auth 上線 · /member 變 auth-gated。"
         />
         <TimelineRow
-          label="Phase 2 · 2026 Q3+(TapPay setup 後)"
+          label="Phase 2 · TapPay / ECPay setup 後"
           status="BLACK CARD LIVE"
           tone="exploring"
           body="TapPay 訂閱 NT$ 299/月接入 · BLACK CARD 會員可在 /matches/[gameId] 賽事頁討論室發言 / 發表 prediction / 創作者抽成 5%(per /membership Creator Permissions FAQ)。"

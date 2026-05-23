@@ -17,7 +17,7 @@
 
 【請按以下順序讀完】每份檔都有重要脈絡:
 
-1. CLAUDE.md → 40 visitor-discoverable routes · 三條鐵律 · Global components 50+ · 8 字 grammar 「方法公開 · 品味私藏」
+1. CLAUDE.md → 41 visitor-discoverable routes · 三條鐵律 · Global components 50+ · 8 字 grammar 「方法公開 · 品味私藏」
 2. AGENTS.md → Next.js 16 breaking changes 警告(別寫過時程式碼)
 3. WHILE-YOU-WERE-OUT.md → Round 1 → Round 36 完整 ToC
 4. /now journal → Round 28→R58 完整 SHIPPED 軌跡(per closure discipline R29 lesson)
@@ -91,7 +91,7 @@ R59 brand IP axiom fires:
 【2026-05-22 R50→R58 single-day sprint 收盤 state · 34+ waves · 8 agent rounds · ~75 fixes】:
 
 技術:
-- 40 visitor-discoverable routes(+/transparency R51 W-D · +/methodology/diff R50 W-A)
+- 41 visitor-discoverable routes(+/transparency R51 W-D · +/methodology/diff R50 W-A)
 - 20 custom OG cards
 - Next.js 16.2.6 + Tailwind 4 + Supabase Tokyo + Resend production
 - Build/Lint/TSC strict 三綠

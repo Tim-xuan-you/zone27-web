@@ -27,7 +27,7 @@ import {
 export const metadata: Metadata = {
   title: "Member · 您的引擎時間軸 · FREE TIER dashboard preview",
   description:
-    "ZONE 27 會員儀表板預覽。您在 /lab 跑過的所有 Monte Carlo · 您 follow 的賽事 calibration record · 您能投票的引擎下一步 — 全部以 4 個 cognitive bias(Endowment Effect / IKEA Effect / Loss Aversion / Collection)為基礎設計。Auth 上線 + cloud sync 在 2026 Q3 規劃。",
+    "ZONE 27 會員儀表板預覽。您在 /lab 跑過的所有 Monte Carlo · 您 follow 的賽事 calibration record · 您能投票的引擎下一步 — 全部以 4 個 cognitive bias(Endowment Effect / IKEA Effect / Loss Aversion / Collection)為基礎設計。Auth 已上線(R50 W-F password-only)· cloud sync 在 payment infra 就緒後啟用。",
 };
 
 // ── ZONE 27 · /member ──────────────────────────────────
