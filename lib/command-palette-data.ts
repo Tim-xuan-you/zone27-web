@@ -180,7 +180,7 @@ export const COMMAND_ITEMS: CommandItem[] = [
     ],
   },
   {
-    label: "Model Report · 5 sections · 引擎範圍 + 揭露哲學",
+    label: "Model Report · 7 sections · 引擎範圍 + 揭露哲學 + LocalStorage · v0.3 ESTIMATE",
     kicker: "/audit",
     path: "/audit",
     group: "信任文件",

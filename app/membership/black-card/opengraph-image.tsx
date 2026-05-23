@@ -160,7 +160,14 @@ export default async function BlackCardOgImage() {
           }}
         />
 
-        {/* ── 5 UNLOCKS · 2-col stack ─────────────── */}
+        {/* ── 6 UNLOCKS · R77 W-G C-1 fix · Agent B R77 audit 🔴 ·
+            之前 array 有 5 UnlockRow 但 alt + visible text 都 claim「6
+            unlocks」 · 5-second self-debunk · Agent A R75 SHIP 7
+            OutputArtifactSwitcher 主 page UNLOCKS array 是 6 entries
+            including #1 v0.3/v0.4 engine variants · OG card 之前 missing
+            #1 · 此 fix add the missing first UnlockRow · count drift
+            真實 close · brand IP「方法公開 · drift = 5-second self-debunk」
+            axiom 物理 codify。 */}
         <div
           style={{
             display: "flex",
@@ -168,6 +175,7 @@ export default async function BlackCardOgImage() {
             gap: 8,
           }}
         >
+          <UnlockRow label="v0.3 + v0.4 engine variants(BLACK CARD 解鎖)" />
           <UnlockRow label="賽事討論室發言 · 球迷分享預測" />
           <UnlockRow label="創作者抽成 5%(業界 30-50% 降維打擊)" />
           <UnlockRow label="每月 voting 影響引擎下個 ship 方向" />

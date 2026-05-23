@@ -4,6 +4,8 @@ import type { Metadata } from "next";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import CopyLinkButton from "@/components/CopyLinkButton";
+import EngineRerunBadge from "@/components/EngineRerunBadge";
+import LineKeepHint from "@/components/LineKeepHint";
 import FounderSignOff from "@/components/FounderSignOff";
 import {
   getMatchById,
@@ -249,9 +251,16 @@ export default async function ReceiptPage({ params }: { params: Params }) {
               >
                 ★ REFERENCE · {ref}
               </p>
-              <p className="font-mono text-mute text-[10px] tracking-[0.3em] tabular">
-                {dateIso} · INGEST
-              </p>
+              <div className="flex items-baseline gap-3 flex-wrap">
+                {/* R77 W-A · EngineRerunBadge · Agent A R76 SHIP F · Cloudflare
+                    postmortem pattern · per-receipt version chip · v1 quiet · v2+
+                    rendered when ENGINE_OPS_LOG has receipt-correction events for
+                    this receipt · pairs with R76 W-C /engine-log canonical spine。 */}
+                <EngineRerunBadge receiptId={match.id} />
+                <p className="font-mono text-mute text-[10px] tracking-[0.3em] tabular">
+                  {dateIso} · INGEST
+                </p>
+              </div>
             </div>
 
             {/* ── MATCH SUMMARY ──────────────────────── */}
@@ -376,6 +385,11 @@ export default async function ReceiptPage({ params }: { params: Params }) {
               發 push 提醒「您 share 的 receipt 收到 N views」。
             </p>
             <CopyLinkButton />
+            {/* R77 W-B · LineKeepHint · Agent A R76 SHIP E · mobile-only
+                long-press → LINE Keep · 不需加好友 · 不 push · session-only
+                dismiss(NOT localStorage · per 11-key cap discipline)·
+                client component · graceful degrade desktop。 */}
+            <LineKeepHint />
           </div>
         </section>
 

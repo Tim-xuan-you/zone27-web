@@ -201,7 +201,7 @@ export default function LearnPage() {
               kicker="AUDIT"
               zh="讀完整 model report"
               href="/audit"
-              note="5 sections · 引擎範圍 + 揭露哲學"
+              note="7 sections · 引擎範圍 + 揭露哲學 + LocalStorage · v0.3 ESTIMATE"
             />
             <NextStep
               kicker="MEMBERSHIP"

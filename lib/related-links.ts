@@ -84,7 +84,7 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
     {
       href: "/audit",
       kicker: "audit",
-      title: "Model Report · 5 sections + DISCLOSURE PHILOSOPHY",
+      title: "Model Report · 7 sections + DISCLOSURE PHILOSOPHY",
     },
     {
       href: "/ethics",

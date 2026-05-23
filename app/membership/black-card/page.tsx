@@ -358,7 +358,7 @@ export default function BlackCardPage() {
               </p>
               <ul className="space-y-2 text-mute text-sm leading-relaxed">
                 <li>▸ 引擎 v0.2 Win Probability + 10K Monte Carlo</li>
-                <li>▸ /matches all CPBL 賽事 · all 5 lenses(Vibe Check + Park Factor + Pitcher Fatigue + Underdog + LensTrace)</li>
+                <li>▸ /matches all CPBL 賽事 · all 7 LIVE LENS(Vibe Check + Park Factor + Pitcher Fatigue + Underdog + BullpenDepth + MatchupHistory + LensTrace)</li>
                 <li>▸ /track-record + /calibration 引擎自評 + Brier score</li>
                 <li>▸ /audit + /methodology + /coverage 全部 trust docs</li>
                 <li>▸ /lab + /lab/custom 自訂任意投手對戰</li>
@@ -376,7 +376,7 @@ export default function BlackCardPage() {
               </p>
               <ul className="space-y-2 text-bone text-sm leading-relaxed">
                 <li>▸ Engine Lineup v0.3 + v0.4 解鎖(Q3 Q4 ship)</li>
-                <li>▸ Lens Variety 7 candidates 完整解鎖(目前 5 LIVE · 2 planned)</li>
+                <li>▸ Lens Variety 7 LIVE 完整解鎖(R40 W-B 7-lens canvas complete · Vibe + Park + Fatigue + Underdog + Bullpen + Matchup + LensTrace)</li>
                 <li>▸ 賽事 24hr 討論室 access(Round 31 planned)</li>
                 <li>▸ 5% creator 抽成(per /membership)</li>
                 <li>▸ 每月 voting · 決定 engine + lens 下一個 ship</li>
