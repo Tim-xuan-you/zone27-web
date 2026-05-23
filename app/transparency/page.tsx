@@ -77,6 +77,103 @@ export default function TransparencyPage() {
 
         <div className="mx-auto w-32 gold-line mb-12" />
 
+        {/* R59 W-G · Hindenburg DISCLOSURE block 第 3 個 trust artifact ·
+            brand-IP triple consistency · /methodology + /audit + /transparency
+            同一份 8-field position disclosure 同一份 LAST UPDATED · 訪客從
+            「audit aggregator」 進 /transparency 第一眼即見 enterprise position ·
+            no hidden incentive · canonical Anthropic system card「known
+            affiliations」 + Hindenburg「at-the-top」 + Defector「show the
+            books」 pattern triple-sync。 同 [[project-zone27-disclosure-
+            philosophy]]「公開 enterprise not just engine」 物理 codify。 */}
+        <aside
+          id="disclosure"
+          aria-labelledby="transparency-disclosure-heading"
+          className="mx-auto max-w-3xl w-full px-6 sm:px-10 mb-12"
+        >
+          <div className="border border-line/60 bg-slate/30 p-5 sm:p-6">
+            <div className="flex items-baseline gap-3 mb-3 flex-wrap">
+              <span
+                id="transparency-disclosure-heading"
+                lang="en"
+                className="font-mono text-gold text-[10px] tracking-[0.4em]"
+              >
+                / DISCLOSURE · WHO WROTE THIS
+              </span>
+              <span
+                lang="en"
+                className="font-mono text-mute/60 text-[9px] tracking-[0.3em]"
+              >
+                LAST UPDATED · 2026-05-23
+              </span>
+            </div>
+            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-1.5 text-mute/85 text-[12px] sm:text-[13px] leading-relaxed">
+              <li className="font-mono tabular">
+                <span className="text-mute/60">EQUITY</span>{" "}
+                <span className="text-bone">100% TIM solo</span>
+              </li>
+              <li className="font-mono tabular">
+                <span className="text-mute/60">SPONSORS</span>{" "}
+                <span className="text-bone">0</span>
+              </li>
+              <li className="font-mono tabular">
+                <span className="text-mute/60">ADS</span>{" "}
+                <span className="text-bone">0 · AdMob permanently banned</span>
+              </li>
+              <li className="font-mono tabular">
+                <span className="text-mute/60">TRACKERS</span>{" "}
+                <span className="text-bone">0 · per /privacy</span>
+              </li>
+              <li className="font-mono tabular">
+                <span className="text-mute/60">RECEIPTS</span>{" "}
+                <span className="text-bone">N={FINALIZED_N} · cpbl-260521-01 PROVED</span>
+              </li>
+              <li className="font-mono tabular">
+                <span className="text-mute/60">FOUNDERS 27</span>{" "}
+                <span className="text-bone">7 SYSTEM-TEST · 0 real</span>
+              </li>
+              <li className="font-mono tabular">
+                <span className="text-mute/60">BLACK CARD</span>{" "}
+                <span className="text-bone">0 paid subscribers</span>
+              </li>
+              <li className="font-mono tabular">
+                <span className="text-mute/60">REVENUE</span>{" "}
+                <span className="text-bone">NT$ 0 · Year 0 honest empty</span>
+              </li>
+            </ul>
+            <p className="mt-3 text-mute/65 text-[11px] leading-relaxed border-t border-line/40 pt-3">
+              同 disclosure block 在{" "}
+              <Link
+                href="/methodology#disclosure"
+                className="text-gold/80 hover:text-gold underline-offset-4 hover:underline"
+              >
+                /methodology
+              </Link>
+              {" "}+{" "}
+              <Link
+                href="/audit#disclosure"
+                className="text-gold/80 hover:text-gold underline-offset-4 hover:underline"
+              >
+                /audit
+              </Link>
+              {" "}· 3 trust artifact 同步 LAST UPDATED · 完整 enterprise state 在{" "}
+              <Link
+                href="/annual/2026"
+                className="text-gold/80 hover:text-gold underline-offset-4 hover:underline"
+              >
+                /annual/2026
+              </Link>
+              {" "}· 違反任何一條 = brand 信用 collapse(per{" "}
+              <Link
+                href="/ethics"
+                className="text-gold/80 hover:text-gold underline-offset-4 hover:underline"
+              >
+                /ethics
+              </Link>
+              )。
+            </p>
+          </div>
+        </aside>
+
         {/* ── 01 · WHAT WE DON'T KNOW ───────────────── */}
         <Section no="01" label="WHAT WE DON'T KNOW" zh="我們知道自己還不知道什麼">
           <p>
