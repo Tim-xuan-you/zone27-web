@@ -298,32 +298,64 @@ export default function TrackRecordPage() {
         ) : finalized.length === 1 ? (
           // Round 29 Wave 5A · First Receipt cinematic. When N=1 the
           // single ledger entry is rendered with elevated treatment ·
-          // gold 2px border · "★ FIRST RECEIPT · 1 OF 270 PROJECTED"
+          // gold 2px border · "★ FIRST RECEIPT · 29 MORE TO N=30"
           // band · larger verdict visual · slow gold glow. This is
           // designed for tonight's cpbl-260521-01 ingest moment ·
           // the physical brand-IP event of the week.
           // PROVED and DIVERGED get equal visual weight per axiom ·
           // no emoji / no celebration animation that biases toward
           // PROVED outcome.
-          <FirstReceiptHero match={finalized[0]} />
+          <FirstReceiptHero match={finalized[0]} totalN={finalized.length} />
         ) : (
-          <div className="border border-line/70">
-            {/* Bloomberg-style table header · hidden on mobile (stacked cards below) */}
-            <div
-              className="hidden lg:grid grid-cols-[110px_1fr_120px_140px_110px_50px] gap-3 px-5 py-3 bg-slate/50 border-b border-line/60 font-mono text-mute text-[9px] tracking-[0.3em]"
-              role="row"
-            >
-              <span lang="en">DATE</span>
-              <span lang="en">MATCHUP · ENGINE PREDICTION</span>
-              <span lang="en" className="text-right">FINAL</span>
-              <span lang="en" className="text-right">ENGINE % ON WINNER</span>
-              <span lang="en" className="text-right">VERDICT</span>
-              <span className="sr-only">link</span>
-            </div>
-            {finalized.map((m) => (
-              <LedgerRow key={m.id} match={m} />
-            ))}
-          </div>
+          // R63 W-B · Pokemon TCG 1st Edition mechanic permanent pinning
+          // · per R60 W-B 「CARD 001 / ∞ · REPRINT POLICY 0」 axiom · 「the
+          // first card always retains 1st Edition prestige · even at N=100」。
+          // Sort by ingestedAt ascending · oldest first ingested = 1st Edition
+          // · render pinned FirstReceiptHero ABOVE ledger table · then render
+          // ledger of subsequent receipts(excluding the founding card)。
+          // Without this · N≥2 transition silently strips 1st Edition prestige
+          // = brand IP regression。 此 fix 確保 cpbl-260521-01 永遠 elevated。
+          (() => {
+            const sortedByIngest = [...finalized].sort((a, b) =>
+              (a.finalResult?.ingestedAt ?? "").localeCompare(
+                b.finalResult?.ingestedAt ?? ""
+              )
+            );
+            const foundingReceipt = sortedByIngest[0];
+            const subsequentReceipts = finalized.filter(
+              (m) => m.id !== foundingReceipt?.id
+            );
+            return (
+              <>
+                {foundingReceipt && (
+                  <div className="mb-10">
+                    <FirstReceiptHero
+                      match={foundingReceipt}
+                      totalN={finalized.length}
+                      pinned
+                    />
+                  </div>
+                )}
+                <div className="border border-line/70">
+                  {/* Bloomberg-style table header · hidden on mobile (stacked cards below) */}
+                  <div
+                    className="hidden lg:grid grid-cols-[110px_1fr_120px_140px_110px_50px] gap-3 px-5 py-3 bg-slate/50 border-b border-line/60 font-mono text-mute text-[9px] tracking-[0.3em]"
+                    role="row"
+                  >
+                    <span lang="en">DATE</span>
+                    <span lang="en">MATCHUP · ENGINE PREDICTION</span>
+                    <span lang="en" className="text-right">FINAL</span>
+                    <span lang="en" className="text-right">ENGINE % ON WINNER</span>
+                    <span lang="en" className="text-right">VERDICT</span>
+                    <span className="sr-only">link</span>
+                  </div>
+                  {subsequentReceipts.map((m) => (
+                    <LedgerRow key={m.id} match={m} />
+                  ))}
+                </div>
+              </>
+            );
+          })()
         )}
 
         {unfiledArchived > 0 && (
@@ -669,7 +701,21 @@ function LedgerRow({ match }: { match: Match }) {
 //     the CPBL season」 — accumulating-over-time framing(Endowment
 //     Effect · per Agent A Pattern #1 lightweight 版)
 // 當 N>1 切回正常 ledger 表格(no cinematic for row 2+)。
-function FirstReceiptHero({ match }: { match: Match }) {
+// R63 W-B · pinned mode added · per Pokemon TCG 1st Edition永久-pinning
+// mechanic · when N>=2 the founding receipt(oldest ingested)stays elevated
+// ABOVE the ledger table · same anatomy + adapted copy(no "29 MORE TO N=30"
+// stale framing once N>=2 · use 「FOUNDING RECEIPT · PERMANENTLY PINNED」
+// instead)。 totalN prop allows the「X MORE TO N=30」 countdown to stay
+// accurate at every N level until threshold crossed。
+function FirstReceiptHero({
+  match,
+  pinned = false,
+  totalN = 1,
+}: {
+  match: Match;
+  pinned?: boolean;
+  totalN?: number;
+}) {
   const cal = getCalibration(match);
   const enginePctOnWinner = getEnginePctOnWinner(match);
   const fr = match.finalResult;
@@ -679,6 +725,17 @@ function FirstReceiptHero({ match }: { match: Match }) {
   const favoriteName = homeFavored ? match.home.name : match.away.name;
   const favoritePct = Math.max(match.home.winRate, match.away.winRate);
   const dateIso = getMatchDateIso(match) ?? "—";
+
+  // R63 W-B · adaptive kicker copy
+  // - pinned(N>=2): "FOUNDING RECEIPT · PERMANENTLY PINNED · 1ST EDITION"
+  // - not pinned, N<30: "FIRST RECEIPT · NOT YET EVIDENCE · X MORE TO N=30"
+  // - not pinned, N>=30: "FIRST RECEIPT · N≥30 THRESHOLD CROSSED"
+  const moreToThreshold = Math.max(0, 30 - totalN);
+  const kickerText = pinned
+    ? "★ FOUNDING RECEIPT · PERMANENTLY PINNED · 1ST EDITION"
+    : totalN >= 30
+    ? "★ FIRST RECEIPT · N≥30 THRESHOLD CROSSED · STATISTICALLY MEANINGFUL"
+    : `★ FIRST RECEIPT · NOT YET EVIDENCE · ${moreToThreshold} MORE TO N=30`;
 
   const verdictColor = {
     proved: "text-gold",
@@ -735,9 +792,13 @@ function FirstReceiptHero({ match }: { match: Match }) {
         <p
           lang="en"
           className="font-mono text-mute/80 text-[10px] sm:text-xs tracking-[0.4em]"
-          title="N=1 不是 signal · 校準需要 Brier score · 見 v0.3 roadmap · per /audit S07 + critic-hardening Round 31 W-G"
+          title={
+            pinned
+              ? "Founding receipt 永遠 pinned · Pokemon TCG 1st Edition mechanic · 同 R60 W-B「CARD 001 / ∞」 axiom"
+              : "N<30 不是 signal · 校準需要 Brier score · 見 v0.3 roadmap · per /audit S05 + critic-hardening Round 31 W-G"
+          }
         >
-          ★ FIRST RECEIPT · NOT YET EVIDENCE · 29 MORE TO N=30
+          {kickerText}
         </p>
         <p className="font-mono text-mute text-[10px] tracking-[0.3em] tabular">
           {dateIso} · INGEST
@@ -845,14 +906,29 @@ function FirstReceiptHero({ match }: { match: Match }) {
       {/* ── TAGLINE FOOTER ─────────────────── */}
       <div className="border-t border-line/30 px-5 sm:px-8 py-4 bg-navy/40">
         <p className="font-mono text-mute/70 text-[10px] tracking-[0.25em] leading-relaxed text-center">
-          ▌ <span lang="en">269 more will follow as the engine runs through
-          the CPBL season</span> · 不刪 · 不修飾 · 不重新加權 ·{" "}
-          <Link
-            href={`/matches/${match.id}`}
-            className="text-gold hover:text-gold-soft underline-offset-4 hover:underline transition-colors"
-          >
-            完整 breakdown →
-          </Link>
+          {pinned ? (
+            <>
+              ▌ <span lang="en">PERMANENTLY PINNED · founding receipt of the
+              CPBL 2026 season · 1st Edition mythos preserved at every N</span> ·{" "}
+              <Link
+                href={`/matches/${match.id}`}
+                className="text-gold hover:text-gold-soft underline-offset-4 hover:underline transition-colors"
+              >
+                完整 breakdown →
+              </Link>
+            </>
+          ) : (
+            <>
+              ▌ <span lang="en">269 more will follow as the engine runs through
+              the CPBL season</span> · 不刪 · 不修飾 · 不重新加權 ·{" "}
+              <Link
+                href={`/matches/${match.id}`}
+                className="text-gold hover:text-gold-soft underline-offset-4 hover:underline transition-colors"
+              >
+                完整 breakdown →
+              </Link>
+            </>
+          )}
         </p>
       </div>
       {/* R60 W-B · Pokemon TCG card footer · bottom-line「N/total + rarity +
