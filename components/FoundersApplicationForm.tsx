@@ -78,6 +78,7 @@ import {
   FOUNDERS_APPLY_LIMITS,
   type FoundersApplyResult,
 } from "@/lib/founders-apply-types";
+import TimResponseSLA from "@/components/TimResponseSLA";
 
 function SubmitButton() {
   const { pending } = useFormStatus();
@@ -148,6 +149,15 @@ export default function FoundersApplicationForm() {
   const [draftSaveStatus, setDraftSaveStatus] = useState<
     "idle" | "composed" | "copied"
   >("idle");
+  // R72 W-D · Agent B audit F04 fix · visible「draft restored」 banner ·
+  // social-engineering attack vector(attacker-crafted ?draft= link auto-
+  // fills visitor's form with attacker email · visitor inattentively submits
+  // → Tim emails confirmation to attacker)closed by exposing draft email
+  // for re-confirmation。 Visitor see「draft restored · email: X · clear」 ·
+  // Gmail draft-restored UX pattern。
+  const [restoredDraftEmail, setRestoredDraftEmail] = useState<string | null>(
+    null,
+  );
 
   // R69 W-G · Agent B audit F8 fix · move focus to success container
   // when submission succeeds · keyboard + SR users not orphaned。
@@ -176,7 +186,29 @@ export default function FoundersApplicationForm() {
         el.value = decoded[f];
       }
     }
+    // R72 W-D · Agent B audit F04 fix · surface restored email for visitor
+    // re-confirmation · 防 attacker-crafted ?draft= social-engineering vector。
+    if (typeof decoded.email === "string" && decoded.email.length > 0) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setRestoredDraftEmail(decoded.email);
+    }
   }, []);
+
+  // R72 W-D · Agent B audit F04 fix · clear restored draft · visitor click
+  // ✕ button reset form to empty(clears restored email banner)。
+  const handleClearDraft = () => {
+    if (formRef.current) {
+      formRef.current.reset();
+    }
+    setRestoredDraftEmail(null);
+    // Also clean URL by removing ?draft= param · per Wayback Machine
+    // plaintext-URL state pattern · 不留 attacker URL in browser history。
+    if (typeof window !== "undefined" && window.history.replaceState) {
+      const url = new URL(window.location.href);
+      url.searchParams.delete("draft");
+      window.history.replaceState({}, "", url.toString());
+    }
+  };
 
   // R71 W-B · DraftSaveLink composer · reads current form values · base64
   // encodes · builds mailto: with subject + body containing resume URL ·
@@ -314,6 +346,34 @@ export default function FoundersApplicationForm() {
       <p className="font-mono text-gold text-[10px] tracking-[0.4em] mb-3">
         FOUNDERS 27 · PATEK ALLOCATION FORM
       </p>
+
+      {/* R72 W-D · Agent B audit F04 fix · visible「draft restored」 banner ·
+          Gmail draft-restored UX pattern · 防 attacker-crafted ?draft= URL
+          social-engineering vector · visitor sees email pre-filled + 「clear
+          & start fresh」 button · re-confirmation required before submit。 */}
+      {restoredDraftEmail && (
+        <div
+          role="status"
+          aria-live="polite"
+          className="mb-5 border border-gold/40 bg-gold/5 px-4 py-3 flex items-baseline justify-between gap-3 flex-wrap"
+        >
+          <p className="font-mono text-mute text-[11px] tracking-[0.22em] leading-relaxed flex-1">
+            <span className="text-gold/85 mr-2" aria-hidden="true">✦</span>
+            Draft restored from email · email:{" "}
+            <strong className="text-bone tabular">{restoredDraftEmail}</strong>
+            {" "}· 確認是您的 email 再 submit
+          </p>
+          <button
+            type="button"
+            onClick={handleClearDraft}
+            aria-label="Clear restored draft and start fresh"
+            className="font-mono text-mute hover:text-gold text-[10px] tracking-[0.22em] underline-offset-4 hover:underline transition-colors shrink-0"
+          >
+            ✕ clear & start fresh
+          </button>
+        </div>
+      )}
+
       <h3 className="text-2xl sm:text-3xl text-bone font-light tracking-tight mb-2">
         申請 Founders 27 創始席位
       </h3>
@@ -432,6 +492,15 @@ export default function FoundersApplicationForm() {
           10 倍 weight。
         </span>
       </label>
+
+      {/* R72 W-B · TimResponseSLA · Agent A R72 SHIP 6 · Patek dealer
+          personal call promise + Stripe Atlas application response SLA +
+          Linear 2019 invite-only pattern · bridge between R68 W-G
+          PreTransferReceipt 5-step choreography(what happens AFTER click)
+          + submit-button friction(what Tim physically commits to NOW)·
+          pre-launch honest empty values · post-Founder-#001 Tim updates
+          lib/founder-sla.ts manually weekly · per /audit S05 PRE-COMMIT。 */}
+      <TimResponseSLA />
 
       <SubmitButton />
 

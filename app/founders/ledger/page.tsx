@@ -6,6 +6,7 @@ import RelatedReading from "@/components/RelatedReading";
 import FounderSignOff from "@/components/FounderSignOff";
 import ArticleMeta from "@/components/ArticleMeta";
 import EngineStamp from "@/components/EngineStamp";
+import FoundingMemberLedger from "@/components/FoundingMemberLedger";
 import {
   FOUNDERS_TOTAL,
   FOUNDERS_CLAIMED,
@@ -146,6 +147,20 @@ export default function FoundersLedgerPage() {
             <EngineStamp />
           </div>
         </section>
+
+        <div className="mx-auto max-w-3xl w-full px-6 sm:px-10 mb-12">
+          <div className="w-full h-px bg-line/60" />
+        </div>
+
+        {/* R72 W-C · FoundingMemberLedger · Agent A R72 SHIP 2 ★★★★★
+            highest direct revenue amplifier · Patek Philippe Geneva Seal
+            certification roll + Berkshire shareholder identity continuity
+            + Pinboard.in user-count public disclosure pattern · 270 grid
+            visualized · 7 SYSTEM-TEST + 263 empty「— —」 rows · costly
+            signaling moat · NO competitor can publish empty allocation roll
+            · Pokemon SHADOWLESS RUN axiom 物理 codify · 同 /founders/from-
+            one-current-founder R69 W-B 270 letters cap parallel。 */}
+        <FoundingMemberLedger />
 
         <div className="mx-auto max-w-3xl w-full px-6 sm:px-10 mb-12">
           <div className="w-full h-px bg-line/60" />

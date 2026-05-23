@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import FoundersApplicationForm from "@/components/FoundersApplicationForm";
+import FromOneSolo from "@/components/FromOneSolo";
 import RelatedReading from "@/components/RelatedReading";
 import FounderSignOff from "@/components/FounderSignOff";
 import ArticleMeta from "@/components/ArticleMeta";
@@ -93,6 +94,17 @@ export default function FoundersApplyPage() {
             <ArticleMeta readingMin={4} />
           </div>
         </section>
+
+        {/* ── R72 W-A · FromOneSolo · Agent A R72 SHIP 3 ──
+            patio11 Kalzumeus → Tarsnap + Pieter Levels nomadlist + Justin
+            Jackson MegaMaker first-100-users origin pattern。 ZONE 27
+            structurally cannot use social proof(LINE 老師 audience pattern-
+            match risk · brand-redline #11 fake testimonials)· must EXPLICITLY
+            invert no-social-proof weakness into the offer。 4 honest deltas
+            published BEFORE form · per /founders/from-one-current-founder
+            R69 W-B empty scaffold parallel axis · per /audit S05 PRE-COMMIT
+            permanent disclosure(stays here even after #270 fills)。 */}
+        <FromOneSolo />
 
         {/* ── R70 W-E · PreApplyChecklistMobile · Agent A R70 SHIP 5 ──
             Stripe Atlas-style 1-screen mobile checklist BEFORE form ·
