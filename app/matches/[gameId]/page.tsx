@@ -10,6 +10,7 @@ import {
   getMatchPhase,
   getCalibration,
   getEnginePctOnWinner,
+  getTodayMatches,
   type Match,
   type MatchPhase,
   type Calibration,
@@ -27,6 +28,7 @@ import LensTrace, { ENGINE_V02_TRACE_STEPS } from "@/components/LensTrace";
 import MatchViewTracker from "@/components/MatchViewTracker";
 import AnonPickWidget from "@/components/AnonPickWidget";
 import LensFocusVote from "@/components/LensFocusVote";
+import TonightMatchRail from "@/components/TonightMatchRail";
 import EngineStamp from "@/components/EngineStamp";
 import CopyLinkButton from "@/components/CopyLinkButton";
 import ReceiptForwardButton from "@/components/ReceiptForwardButton";
@@ -730,6 +732,24 @@ export default async function MatchDetailPage({
       </section>
 
       </main>
+
+      {/* R70 W-D · TonightMatchRail · Agent A R70 SHIP 1 · mobile-first
+          persistent match-switcher above StickyFoundersCTA · CPBL 80% of
+          nights have 3 games · 1-tap lateral nav between tonight's
+          matches · MLB At Bat scoreboard ribbon + Bloomberg watchlist
+          rail pattern · pre-locked engine % NOT live odds(brand-pure
+          per Costly Signaling)· <= 1 match · component returns null。 */}
+      <TonightMatchRail
+        currentMatchId={m.id}
+        matches={getTodayMatches().map((tm) => ({
+          id: tm.id,
+          homeName: tm.home.name,
+          awayName: tm.away.name,
+          homeWinRate: tm.home.winRate,
+          awayWinRate: tm.away.winRate,
+          startTime: tm.startTime,
+        }))}
+      />
 
       <Footer />
     </div>

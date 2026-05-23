@@ -12,6 +12,7 @@ import TeamPickPanel from "@/components/TeamPickPanel";
 import MyTeamTrackRecord, { type MyTeamMatch } from "@/components/MyTeamTrackRecord";
 import CalibrationProgressBar from "@/components/CalibrationProgressBar";
 import QuietHandoffCard from "@/components/QuietHandoffCard";
+import SilentReceiptStream from "@/components/SilentReceiptStream";
 import {
   matches,
   getFinalizedMatches,
@@ -400,6 +401,15 @@ export default function TrackRecordPage() {
           </p>
         )}
       </section>
+
+      {/* R70 W-C · SilentReceiptStream · Agent A R69 SHIP 4 deferred ·
+          Pinboard.in archive view paradigm · single-line typographic
+          rows · oldest first · ledger paper aesthetic · parallel ARCHIVE
+          INDEX axis 對 Bloomberg-grid LedgerRow newest-first view above ·
+          building NOW(N=1)means it lives in architecture before sample
+          debt closes · same physics-of-time discipline as /founders/ledger
+          + /annual/2026 + /founders/from-one-current-founder empty scaffolds。 */}
+      <SilentReceiptStream finalizedMatches={finalized} />
 
       {/* ── METHODOLOGY ──────────────────────────── */}
       <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-16 border-t border-line/40 pt-12">

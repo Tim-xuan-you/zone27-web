@@ -94,53 +94,97 @@ export default function FoundersApplyPage() {
           </div>
         </section>
 
-        {/* ── PRE-APPLY CONTEXT BLOCK ──────────────── */}
+        {/* ── R70 W-E · PreApplyChecklistMobile · Agent A R70 SHIP 5 ──
+            Stripe Atlas-style 1-screen mobile checklist BEFORE form ·
+            replaces inline 4-bullet text block with NumItemGhost-pattern
+            ghost-numeral checklist · each row tap = anchor jump to
+            relevant artifact · self-qualifying friction surface · solo
+            founder physics「-15 min email back-and-forth per applicant」 ·
+            per Stripe Atlas + Patek dealer pre-qualification + Apple Card
+            self-screen pattern。 brand IP triple-fire(Pratfall + Disclosure
+            + Tetlock-honest「您 conclude · 我們不 sell」)。 */}
         <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-10">
-          <div className="bg-slate/30 border-l-2 border-gold/60 px-5 sm:px-6 py-5">
-            <p className="font-mono text-gold/85 text-[10px] tracking-[0.35em] mb-3">
-              ⚓ 申請前請確認 · BEFORE YOU APPLY
-            </p>
-            <ul className="space-y-2.5 text-mute text-sm leading-relaxed">
-              <li>
-                ✓ 您讀過{" "}
+          <p className="font-mono text-gold/85 text-[10px] tracking-[0.35em] mb-5">
+            ⚓ 申請前請確認 4 件事 · BEFORE YOU APPLY · self-qualify
+          </p>
+          <ol className="border border-line/50 bg-slate/20">
+            <li className="relative py-3 sm:py-4 px-4 sm:px-5 pl-16 sm:pl-20 border-b border-line/30">
+              <span
+                aria-hidden="true"
+                className="absolute left-3 sm:left-4 top-1 sm:top-2 font-mono text-gold/22 text-5xl sm:text-6xl tabular leading-none pointer-events-none select-none"
+              >
+                01
+              </span>
+              <span className="block text-mute text-sm sm:text-base leading-relaxed">
+                <strong className="text-bone">您讀過 11-item NOT-DO list</strong>{" "}
+                + 接受 ZONE 27 永遠不做的事 ·{" "}
                 <Link
-                  href="/founders"
+                  href="/transparency#section-02"
                   className="text-gold underline-offset-4 hover:underline"
                 >
-                  /founders
-                </Link>{" "}
-                + 6 個「
-                <strong className="text-bone">什麼不買到</strong>
-                」 limitations 都接受
-              </li>
-              <li>
-                ✓ 您讀過{" "}
+                  /transparency §02
+                </Link>
+              </span>
+            </li>
+            <li className="relative py-3 sm:py-4 px-4 sm:px-5 pl-16 sm:pl-20 border-b border-line/30">
+              <span
+                aria-hidden="true"
+                className="absolute left-3 sm:left-4 top-1 sm:top-2 font-mono text-gold/22 text-5xl sm:text-6xl tabular leading-none pointer-events-none select-none"
+              >
+                02
+              </span>
+              <span className="block text-mute text-sm sm:text-base leading-relaxed">
+                <strong className="text-bone">您看過 /track-record</strong>{" "}
+                真實 N=1 receipt · 接受 N&lt;30 不是 evidence 的事實 ·{" "}
+                <Link
+                  href="/track-record"
+                  className="text-gold underline-offset-4 hover:underline"
+                >
+                  /track-record
+                </Link>
+              </span>
+            </li>
+            <li className="relative py-3 sm:py-4 px-4 sm:px-5 pl-16 sm:pl-20 border-b border-line/30">
+              <span
+                aria-hidden="true"
+                className="absolute left-3 sm:left-4 top-1 sm:top-2 font-mono text-gold/22 text-5xl sm:text-6xl tabular leading-none pointer-events-none select-none"
+              >
+                03
+              </span>
+              <span className="block text-mute text-sm sm:text-base leading-relaxed">
+                <strong className="text-bone">您理解 14 天退款流程</strong>{" "}
+                + Taiwan 消保法 § 19 双倍法定下限 ·{" "}
+                <Link
+                  href="/terms#section-4b"
+                  className="text-gold underline-offset-4 hover:underline"
+                >
+                  /terms §4B
+                </Link>
+              </span>
+            </li>
+            <li className="relative py-3 sm:py-4 px-4 sm:px-5 pl-16 sm:pl-20">
+              <span
+                aria-hidden="true"
+                className="absolute left-3 sm:left-4 top-1 sm:top-2 font-mono text-gold/22 text-5xl sm:text-6xl tabular leading-none pointer-events-none select-none"
+              >
+                04
+              </span>
+              <span className="block text-mute text-sm sm:text-base leading-relaxed">
+                <strong className="text-bone">您接受 1-3 天 Tim 親手 review</strong>{" "}
+                + 可能 reject + NT$ 2,700 銀行轉帳 24h window ·{" "}
                 <Link
                   href="/founders/ledger"
                   className="text-gold underline-offset-4 hover:underline"
                 >
                   /founders/ledger
-                </Link>{" "}
-                5-step allocation rules · 接受 Tim 可能 reject
-              </li>
-              <li>
-                ✓ 您讀過{" "}
-                <Link
-                  href="/pricing/why"
-                  className="text-gold underline-offset-4 hover:underline"
-                >
-                  /pricing/why
-                </Link>{" "}
-                · 您 conclude 自己 NT$ 2,700 fits · Tim 不 sell
-              </li>
-              <li>
-                ✓ 您準備好{" "}
-                <strong className="text-bone">NT$ 2,700 銀行轉帳</strong> ·
-                通過後 24 小時內完成(不收信用卡 · 不收 LINE Pay · 不收
-                超商代收)
-              </li>
-            </ul>
-          </div>
+                </Link>
+              </span>
+            </li>
+          </ol>
+          <p className="mt-4 font-mono text-mute/70 text-[10px] tracking-[0.25em] leading-relaxed text-center">
+            ⚓ 4 行讀完 · 您自己 conclude · 我們不 sell · Stripe Atlas + Patek
+            dealer pre-qualification 同 pattern
+          </p>
         </section>
 
         {/* ── THE FORM ──────────────────────────────── */}
