@@ -382,7 +382,7 @@ export default async function FoundersPage({
           一次入會,終身免費。售完即永久關閉,不會有第二批。
         </p>
         <p className="mt-3 sm:mt-4 max-w-xl mx-auto text-mute/70 text-xs sm:text-sm leading-relaxed">
-          付款系統預計 2026 Q3 開放。先加入等候名單,優先取得購買權。
+          付款系統 payment infra 就緒後開放(milestone-triggered · 不綁日期)。先加入等候名單,優先取得購買權。
         </p>
 
         {/* Hero anchor CTA — visitors landing here from sticky CTA on
