@@ -107,26 +107,44 @@ export default function PreviewModeBanner() {
 
   // Round 47 W-B · Keyboard shortcut Cmd+Shift+P · from any page activate
   // preview mode · default to anonymous tier · Tim 不需 visit /admin
-  // shortcut chosen:Cmd+Shift+P · Chrome devtools 用 Cmd+Shift+I · 不衝突
   // brand IP:invisible to public · only Tim know shortcut · same axiom as
   // /admin noindex pattern from R29 W2。
+  //
+  // R61 W-E · Agent 2 audit 🟡 #7 fix · Firefox Cmd+Shift+P opens Private
+  // Window(real conflict) · skip preventDefault + handler 當 target 在 input/
+  // textarea/contenteditable inside · 避免 Tim 在 form 內打字時被 banner 干擾。
+  // 同 Linear / Notion command-palette pattern · respect input focus context。
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       const modifier = e.metaKey || e.ctrlKey;
-      if (modifier && e.shiftKey && (e.key === "P" || e.key === "p")) {
-        e.preventDefault();
-        try {
-          const stored = localStorage.getItem(STORAGE_KEY);
-          if (stored && stored in TIER_LABELS) {
-            // Already active · cancel
-            handleCancel();
-          } else {
-            // Not active · default to anonymous
-            handleSwitch("anonymous");
-          }
-        } catch {
-          // ignore
+      if (!modifier || !e.shiftKey || (e.key !== "P" && e.key !== "p")) {
+        return;
+      }
+      // Skip if user is currently typing in any input field
+      const target = e.target as HTMLElement | null;
+      if (target) {
+        const tag = target.tagName;
+        const isEditable =
+          tag === "INPUT" ||
+          tag === "TEXTAREA" ||
+          tag === "SELECT" ||
+          target.isContentEditable;
+        if (isEditable) {
+          return;
         }
+      }
+      e.preventDefault();
+      try {
+        const stored = localStorage.getItem(STORAGE_KEY);
+        if (stored && stored in TIER_LABELS) {
+          // Already active · cancel
+          handleCancel();
+        } else {
+          // Not active · default to anonymous
+          handleSwitch("anonymous");
+        }
+      } catch {
+        // ignore
       }
     };
     window.addEventListener("keydown", onKey);
@@ -171,7 +189,7 @@ export default function PreviewModeBanner() {
               onClick={() => handleSwitch(t.value)}
               disabled={tier === t.value}
               aria-pressed={tier === t.value}
-              className={`px-2 sm:px-2.5 py-1 min-h-[28px] font-mono text-[9px] sm:text-[10px] tracking-[0.18em] tabular border transition-colors ${
+              className={`px-2.5 sm:px-3 py-1.5 min-h-[32px] sm:min-h-[36px] font-mono text-[9px] sm:text-[10px] tracking-[0.18em] tabular border transition-colors ${
                 tier === t.value
                   ? "border-loss/60 bg-loss/15 text-loss cursor-default"
                   : "border-loss/30 text-loss/80 hover:bg-loss/10 hover:text-loss hover:border-loss/50"
@@ -192,7 +210,7 @@ export default function PreviewModeBanner() {
         <button
           type="button"
           onClick={handleCancel}
-          className="font-mono text-loss/80 hover:text-loss text-[10px] sm:text-[11px] tracking-[0.2em] tabular underline underline-offset-4 hover:underline transition-colors"
+          className="font-mono text-loss/80 hover:text-loss text-[10px] sm:text-[11px] tracking-[0.2em] tabular underline underline-offset-4 hover:underline transition-colors min-h-[32px] px-2 py-1"
         >
           ✕ 取消
         </button>
