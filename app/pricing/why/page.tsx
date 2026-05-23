@@ -239,7 +239,7 @@ export default function PricingWhyPage() {
             R68 W-F · Agent A SHIP 7 · compressed to Stripe Atlas grammar:
             bold deliverable + ONE sentence + cross-link · ghost numerals
             BEHIND each row(Patek movement-spec aesthetic · 大型 light gold
-            opacity 5% · 不打字典感觀 · 純 typographic depth)。 sub-header
+            opacity 22%(R69 W-H Patek-aesthetic legible bump from 5%)· 不打字典感觀 · 純 typographic depth)。 sub-header
             「您數到第 6 行 · 您 conclude 自己 · 我們不 sell」 Tetlock-honest
             framing。 vs prior 2-3-line prose · same content density · less
             cognitive load per row。 */}

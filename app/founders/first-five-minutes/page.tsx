@@ -67,6 +67,14 @@ export default async function FirstFiveMinutesPage() {
         (m.away.winRate > m.home.winRate &&
           m.finalResult.winner === "home")),
   ).length;
+  // R70 W-G · Agent B audit F11 fix · PUSH count(ties · 50/50 no-favorite)·
+  // canonical /track-record + /calibration surface this · 不藏 PUSH cases ·
+  // disclosure-parity discipline · 同 Engine Lineup R41 W-A precedent。
+  const pushCount = finalized.filter(
+    (m) =>
+      m.finalResult &&
+      (m.finalResult.winner === "tie" || m.home.winRate === m.away.winRate),
+  ).length;
   const totalN = finalized.length;
 
   return (
@@ -285,6 +293,17 @@ export default async function FirstFiveMinutesPage() {
                     {divergedCount}
                   </span>
                 </li>
+                {pushCount > 0 && (
+                  <li className="flex items-baseline justify-between gap-3 flex-wrap">
+                    <span>
+                      <strong className="text-mute">PUSH ▪</strong> · 平局/
+                      無 favorite(per /track-record disclosure parity)
+                    </span>
+                    <span className="font-mono text-mute tabular">
+                      {pushCount}
+                    </span>
+                  </li>
+                )}
                 <li className="flex items-baseline justify-between gap-3 flex-wrap border-t border-line/40 pt-2 mt-2">
                   <span className="font-mono text-mute/70 text-[10px] tracking-[0.25em]">
                     ⚓ N&lt;30 = 不是 evidence · Bill James 慣例

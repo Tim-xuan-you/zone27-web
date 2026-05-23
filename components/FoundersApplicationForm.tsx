@@ -106,7 +106,14 @@ export default function FoundersApplicationForm() {
         <p className="text-mute text-sm max-w-md mx-auto leading-relaxed text-center mb-6">
           請保留此編號做後續參考。 您應該已經收到一封 confirmation
           email(主旨開頭「✓ ZONE 27 · Founders 27 申請已收到」)·
-          沒收到請檢查 spam folder 或 reply tim@zone27.tw。
+          沒收到請檢查 spam folder 或 email{" "}
+          <a
+            href="mailto:tatayngiti@gmail.com?subject=ZONE%2027%20%C2%B7%20application%20email%20missing"
+            className="text-gold underline-offset-4 hover:underline"
+          >
+            tatayngiti@gmail.com
+          </a>
+          (zone27.tw domain 尚未啟用 · R70 W-G fix from R68 stale ref)。
         </p>
 
         <div className="mt-8 pt-6 border-t border-line/40">

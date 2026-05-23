@@ -19,7 +19,7 @@ type Props = {
   /** "chip" = bordered chip with ⌘K + label (desktop nav default).
    *  "icon" = bare ⌕ glyph for mobile nav row (no border, fits inline).
    *  Round 12 funnel-audit: mobile visitors had no way to access the
-   *  41-route palette · verification path for skeptics broken. Adding
+   *  44-route palette · verification path for skeptics broken. Adding
    *  the icon variant exposes the trigger without crowding mobile nav. */
   variant?: "chip" | "icon";
 };

@@ -89,8 +89,11 @@ export async function submitFoundersApplication(
       FOUNDERS_APPLY_LIMITS.nameMaxChars,
     );
 
-    // Validate cpbl connection · strip control chars but allow internal
-    // newlines after first sanitization since this isn't an email header
+    // Validate cpbl connection · R70 W-G Agent B audit F9 fix · strip
+    // ONLY tab + carriage-return + null chars · keep \n newlines since
+    // body content may include multi-line CPBL fan history。 Previously
+    // missed sanitization · escapeHtml in lib/email.ts handled XSS but
+    // defense-in-depth gap closed here。
     if (
       typeof cpblConnectionRaw !== "string" ||
       cpblConnectionRaw.trim().length === 0
@@ -99,13 +102,15 @@ export async function submitFoundersApplication(
     }
     const cpblConnection = cpblConnectionRaw
       .trim()
+      .replace(/[\r\t\0]/g, "")
       .slice(0, FOUNDERS_APPLY_LIMITS.cpblConnectionMaxChars);
 
-    // Validate why · cap length · allow internal newlines(body content)
+    // Validate why · R70 W-G Agent B audit F9 fix · same \r/\t/\0 sanitization ·
+    // keep \n internal newlines as body content
     if (typeof whyRaw !== "string" || whyRaw.trim().length === 0) {
       return { ok: false, error: "missing_why" };
     }
-    const why = whyRaw.trim();
+    const why = whyRaw.trim().replace(/[\r\t\0]/g, "");
     if (why.length < FOUNDERS_APPLY_LIMITS.whyMinChars) {
       return { ok: false, error: "why_too_short" };
     }
