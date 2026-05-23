@@ -23,6 +23,38 @@ export const metadata: Metadata = {
 // only · git push 觸發 redeploy when claimedFounders update Q3 onboard。
 export const revalidate = 3600;
 
+// R63 W-B · Agent 5 SHIP #5 · 「What your NT$ 2,700 didn't buy」 list ·
+// FanGraphs honest limitation pattern · concentrate 11-item NOT-DO list at
+// /founders decision point · brand IP triple-fire(Pratfall + Costly Signaling +
+// Disclosure)· Differentiator from LINE 老師 / 報馬仔 / 投顧老師 schemes ·
+// 6 items selected for direct buyer-expectation gap close。
+const DOLLAR_DIDNT_BUY: { what: string; why: string }[] = [
+  {
+    what: "明牌 / 內幕消息",
+    why: "ZONE 27 不接受下注 · 不出彩金 · 不撮合對賭 · 沒有「老師明牌」 可以給 · per /transparency#section-02",
+  },
+  {
+    what: "Tim 私人 DM access",
+    why: "Tim 親手 reply email · 但不開個人 LINE / DM channel · 客戶 ≠ 朋友 · 全 270 同等對待 · Berkshire annual letter pattern",
+  },
+  {
+    what: "排他 Discord / 私群 community",
+    why: "ZONE 27 brand IP「不 ship user-to-user social platform」 · 永遠無 community / forum / 私群 / 排他 channel · per 11-item NOT-DO list",
+  },
+  {
+    what: "Founders 27 投票權",
+    why: "Tim 一手決定 product direction · /now journal 公開 + /roadmap LOCKED/EXPLORING 兩段 · 270 holders 不 vote · brand 不是 DAO · 不裝 community 民主",
+  },
+  {
+    what: "免費 BLACK CARD 月卡",
+    why: "Founders 27 = lifetime full access · 但不送 BLACK CARD subscription · 兩個 product 分開 · 想要 BLACK CARD 月費 NT$ 299 另付 · 同 The Athletic+FanGraphs Plus 不互送",
+  },
+  {
+    what: "保證 ROI / 賺錢承諾",
+    why: "ZONE 27 是 data publisher · 不是 advisor · 不 promise 您下注賺錢 · 不算 sponsor 投資建議 · 同 Taiwan 投顧 license analogy · 公開可驗證 · 不收下注佣 · 不推薦投注",
+  },
+];
+
 const benefits = [
   {
     no: "01",
@@ -86,7 +118,7 @@ const TIERS = [
     name: "BLACK CARD",
     zh: "黑金月費",
     price: "NT$ 299",
-    priceNote: "每月 · 預計 2026 Q3 上線",
+    priceNote: "每月 · payment infra 就緒後上線(milestone-triggered)",
     highlight: false,
     rows: {
       data: "完整",
@@ -394,6 +426,77 @@ export default async function FoundersPage({
         >
           ↓ 跳到等候名單
         </a>
+      </section>
+
+      {/* R63 W-B · Agent 5 SHIP #4 · Taiwan-native payment trust disclosure
+          immediately above conversion CTA · per Taiwan Self-Media Creator
+          Economy report(taiwan.md)·「Taiwanese consumers trust creator
+          recommendations BUT the proportion willing to pay creators directly
+          is low... structural blocker is trust at moment-of-transfer, not
+          price」。 ZONE 27 cannot use affiliate workaround(engine IS brand)·
+          must close trust gap explicitly at decision point。 4-point trust
+          block · 0 信用卡 + 手動轉帳 intentional + Tim 親手 + 14 天退款 ·
+          brand IP「方法公開」 延伸到 payment trust disclosure。 */}
+      <section className="mx-auto max-w-2xl w-full px-6 sm:px-10 pb-5 sm:pb-6">
+        <div className="border border-gold/40 bg-gold/5 px-5 sm:px-6 py-4 sm:py-5">
+          <p
+            lang="en"
+            className="font-mono text-gold text-[10px] sm:text-[11px] tracking-[0.4em] mb-3"
+          >
+            / PAYMENT TRUST · 為什麼手動轉帳
+          </p>
+          <ul className="space-y-2.5 text-mute text-[12px] sm:text-[13px] leading-relaxed">
+            <li className="flex gap-3">
+              <span aria-hidden="true" className="text-gold/70 shrink-0">▸</span>
+              <span>
+                <strong className="text-bone">0 信用卡資料在 ZONE 27</strong>{" "}
+                · 銀行轉帳 visitor 跟 visitor 的銀行直接 · 我們完全不接觸信用卡 ·
+                沒有 Stripe / TapPay / ECPay tokenization vault
+              </span>
+            </li>
+            <li className="flex gap-3">
+              <span aria-hidden="true" className="text-gold/70 shrink-0">▸</span>
+              <span>
+                <strong className="text-bone">手動轉帳是 intentional</strong>{" "}
+                · 不是「我們沒能力上 Stripe」 · 是 brand IP「倒置 SaaS · 稀缺
+                手工」 · payment infra 就緒後仍保留手動 onboarding path
+              </span>
+            </li>
+            <li className="flex gap-3">
+              <span aria-hidden="true" className="text-gold/70 shrink-0">▸</span>
+              <span>
+                <strong className="text-bone">Tim 親手 onboard</strong> · 沒有
+                cron · 沒有外包 · 24h 內個人化 email · 同{" "}
+                <Link
+                  href="/founders/ledger"
+                  className="text-gold/85 hover:text-gold underline-offset-4 hover:underline"
+                >
+                  /founders/ledger
+                </Link>{" "}
+                allocation 5-step pre-commit
+              </span>
+            </li>
+            <li className="flex gap-3">
+              <span aria-hidden="true" className="text-gold/70 shrink-0">▸</span>
+              <span>
+                <strong className="text-bone">14 天無條件退款</strong> · 即使
+                seat #NNN 已 locked · 寫信 tim@zone27.tw 即退 · 不問原因 · 不
+                嘗試挽留 · 同{" "}
+                <Link
+                  href="/faq#refund"
+                  className="text-gold/85 hover:text-gold underline-offset-4 hover:underline"
+                >
+                  /faq refund
+                </Link>{" "}
+                policy
+              </span>
+            </li>
+          </ul>
+          <p className="mt-3 pt-3 border-t border-line/40 font-mono text-mute/70 text-[10px] tracking-[0.25em] leading-relaxed">
+            ▸ per Taiwan Self-Media Creator Economy 2025-26 report · structural
+            trust-at-transfer blocker explicit close · brand IP「方法公開」 延伸
+          </p>
+        </div>
       </section>
 
       {/* ── WAITLIST FORM · Round 8 moved up to be 2nd block ────
@@ -888,6 +991,64 @@ export default async function FoundersPage({
           個編號之一。
           <br />
           不是優惠期、不是早鳥折扣 — 是這 270 個位置的真實成本。
+        </p>
+      </section>
+
+      {/* R63 W-B · Agent 5 SHIP #5 · Pratfall「what your dollar didn't buy」 ·
+          FanGraphs honest limitation pattern(per blogs.fangraphs.com/a-note-
+          on-membership-pricing「Our articles aren't written by AI... We don't
+          partner with sportsbooks. We don't have corporate overlords」)·
+          concentrate 11-item NOT-DO list at decision-point · brand IP triple-
+          fire(Pratfall + Costly Signaling + Disclosure)· hardcore CPBL fan
+          audience pattern-matches LINE 老師 / 報馬仔 / 投顧老師 schemes ·
+          「we are NOT that」 explicit differentiator at decision point。 */}
+      <section
+        aria-labelledby="dollar-didnt-buy-heading"
+        className="mx-auto max-w-3xl w-full px-6 sm:px-10 py-16 sm:py-20 border-t border-line/40"
+      >
+        <p
+          lang="en"
+          className="font-mono text-loss/85 text-[10px] tracking-[0.4em] mb-6 text-center"
+        >
+          ✕ / WHAT YOUR NT$ 2,700 DIDN&apos;T BUY
+        </p>
+        <h2
+          id="dollar-didnt-buy-heading"
+          className="text-3xl sm:text-4xl text-bone font-light tracking-tight text-center mb-4"
+        >
+          NT$ 2,700 不會給您
+        </h2>
+        <p className="text-mute text-sm sm:text-base leading-relaxed text-center max-w-xl mx-auto mb-10">
+          ZONE 27 跟 LINE 老師 / 報馬仔 / 投顧老師生態的 differential ·
+          explicit 列在 buy-line · 不藏 expectations gap。
+        </p>
+        <div className="grid sm:grid-cols-2 gap-3 sm:gap-4">
+          {DOLLAR_DIDNT_BUY.map((item, i) => (
+            <div
+              key={i}
+              className="border border-loss/30 bg-slate/30 p-4 sm:p-5"
+            >
+              <p
+                lang="en"
+                className="font-mono text-loss/85 text-[10px] tracking-[0.3em] mb-2"
+              >
+                ✕ {item.what}
+              </p>
+              <p className="text-mute text-[13px] leading-relaxed">
+                {item.why}
+              </p>
+            </div>
+          ))}
+        </div>
+        <p className="mt-8 text-center font-mono text-mute/80 text-[10px] tracking-[0.3em] leading-relaxed">
+          完整 11-item NOT-DO list 在{" "}
+          <Link
+            href="/transparency#section-02"
+            className="text-gold hover:underline"
+          >
+            /transparency Section 02
+          </Link>
+          {" "}· brand IP「方法公開」 物理 codify · 不只 marketing 講法。
         </p>
       </section>
 
