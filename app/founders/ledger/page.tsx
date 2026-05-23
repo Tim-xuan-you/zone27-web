@@ -7,6 +7,7 @@ import FounderSignOff from "@/components/FounderSignOff";
 import ArticleMeta from "@/components/ArticleMeta";
 import EngineStamp from "@/components/EngineStamp";
 import FoundingMemberLedger from "@/components/FoundingMemberLedger";
+import RefusalLedgerHint from "@/components/RefusalLedgerHint";
 import {
   FOUNDERS_TOTAL,
   FOUNDERS_CLAIMED,
@@ -366,6 +367,18 @@ export default function FoundersLedgerPage() {
             {" "}S05 PRE-COMMIT DIVERGED handling 同 Costly Signaling pattern。
           </p>
         </section>
+
+        {/* R74 W-B · RefusalLedgerHint · Agent A R73 SHIP 5 · Cialdini
+            Reject-then-Retreat(1975)inverted · publish refusal grammar
+            BEFORE 任何 refusal land · 申請者 self-select 自己 fit · 5 pre-
+            committed rationale-types · pre-launch all count=0 · per /audit
+            S05 PRE-COMMIT clause append-only · same Costly Signaling
+            discipline as ENGINE_DIFF_BEACONS + NO_PUSH_INVENTORY +
+            RECIPROCITY_LEDGER + LOCAL_STORAGE_INVENTORY pattern · pairs
+            with TimResponseSLA chip on /founders/apply R72 W-B · refusal-
+            as-reciprocity scaffold · brand IP triple-fire(Pratfall +
+            Costly Signaling + Disclosure)。 */}
+        <RefusalLedgerHint />
 
         {/* ── WEEKLY REVIEWS · ledger rows ──────────── */}
         <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-16 border-t border-line/40 pt-12">

@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import FoundersApplicationForm from "@/components/FoundersApplicationForm";
+import ClientErrorBoundary from "@/components/ClientErrorBoundary";
 import FromOneSolo from "@/components/FromOneSolo";
 import RelatedReading from "@/components/RelatedReading";
 import FounderSignOff from "@/components/FounderSignOff";
@@ -200,8 +201,18 @@ export default function FoundersApplyPage() {
         </section>
 
         {/* ── THE FORM ──────────────────────────────── */}
+        {/* R74 W-E · ClientErrorBoundary wrap · per R73 W-A pattern · 4th
+            risk-bearing client component wrap(after AnonPickWidget +
+            LensFocusVote + DailyReturnRail)· FoundersApplicationForm has
+            highest crash surface area(localStorage encode/decode + URL
+            param parsing + mailto + clipboard + form state hydrate + useRef
+            + useEffect side-effects)· per [[zone27-disclosure-philosophy]]
+            「不藏 broken state」 axiom · component crash 不 take down whole
+            /founders/apply page · retry button + brand-pure fallback。 */}
         <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-16">
-          <FoundersApplicationForm />
+          <ClientErrorBoundary fallbackLabel="FoundersApplicationForm">
+            <FoundersApplicationForm />
+          </ClientErrorBoundary>
         </section>
 
         {/* ── POST-APPLY EXPECTATION SETTING ───────── */}

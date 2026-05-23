@@ -9,6 +9,7 @@ import MemberUnlocksGrid from "@/components/MemberUnlocksGrid";
 import PaidTierLockedGrid from "@/components/PaidTierLockedGrid";
 import MemberDailyBrief, { type DailyMatchSummary } from "@/components/MemberDailyBrief";
 import MemberHomeHero from "@/components/MemberHomeHero";
+import LocalStorageReceipt from "@/components/LocalStorageReceipt";
 import { getSession } from "@/lib/supabase/server";
 import { readFollowsFromMeta } from "@/lib/follows";
 import { readNotesFromMeta } from "@/lib/notes";
@@ -530,6 +531,19 @@ export default async function MemberPage({
               → /member/calibration · 看 mirror
             </Link>
           </div>
+        </section>
+
+        {/* R74 W-D · LocalStorageReceipt receipt variant · Agent A R73 SHIP 1
+            · Loewenstein & Issacharoff endowment-via-inventory(1994)·
+            visitor's own browser holds 11 ZONE 27 localStorage keys · seeing
+            the inventory activates ownership cognition · same client-state-
+            as-receipt grammar as Letterboxd diary(R70 W-B DailyReturnRail)
+            + Pinboard archive(R70 W-C SilentReceiptStream)· extends 3-col
+            comparison axis「ZONE 27 0 tracking」 with the actual device-
+            local data receipt · canonical single-source from lib/local-
+            storage-inventory.ts · drift impossible by design。 */}
+        <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-16 pt-2">
+          <LocalStorageReceipt variant="receipt" />
         </section>
 
         <FounderSignOff>

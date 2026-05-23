@@ -6,6 +6,7 @@ import CopyLinkButton from "@/components/CopyLinkButton";
 import RelatedReading from "@/components/RelatedReading";
 import FounderSignOff from "@/components/FounderSignOff";
 import NoPushManifest from "@/components/NoPushManifest";
+import ReciprocityLedger from "@/components/ReciprocityLedger";
 import ArticleMeta from "@/components/ArticleMeta";
 import { matches, getFinalizedMatches } from "@/lib/matches";
 
@@ -431,6 +432,14 @@ export default function TransparencyPage() {
             </p>
           </div>
         </section>
+
+        {/* R74 W-A · ReciprocityLedger ledger variant · Agent A R73 SHIP 3 ·
+            Cialdini Reciprocity Principle(1984)· 16 concrete artifacts
+            published BEFORE NT$ 299/月 + NT$ 2,700 ASK · Berkshire 70 年
+            annual letters + Patek 200 年 movement schematics + Anthropic
+            model card library pattern · LINE 老師 / 報馬仔 ask-first-give-
+            never inversion · CPBL fan audience pattern-match instantly。 */}
+        <ReciprocityLedger />
 
         {/* R73 W-D · NoPushManifest manifest variant · Agent A R73 SHIP 2 ·
             Brehm Reactance(1966)+ Deci/Ryan Self-Determination(1985)·

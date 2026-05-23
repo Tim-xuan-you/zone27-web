@@ -4,6 +4,7 @@ import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import WaitlistForm from "@/components/WaitlistForm";
 import PreTransferReceipt from "@/components/PreTransferReceipt";
+import NonComparableAnchor from "@/components/NonComparableAnchor";
 import CopyLinkButton from "@/components/CopyLinkButton";
 import CredentialStack from "@/components/CredentialStack";
 import {
@@ -447,6 +448,18 @@ export default async function FoundersPage({
           · 03 如果出錯了 · brand IP triple-fire(Pratfall ROW 3 + Disclosure
           choreography + costly signaling Tim 親眼 each step)。 */}
       <PreTransferReceipt />
+
+      {/* R74 W-C · NonComparableAnchor · Agent A R73 SHIP 4 · Samuelson &
+          Zeckhauser Status Quo Bias(1988)· counter「SaaS-with-team」
+          default comparison frame · anchor against solo-durable-premium
+          indie reference class · Pinboard + Tarsnap + Sublime Text + Drafts
+          + Soulver + Pieter Levels · per [[feedback-zone27-pratfall-brand-
+          ip]] publish-the-category-mismatch axiom · ZONE 27 unit economics
+          axis 不是「SaaS minus team」 · 是 sustainability-not-growth · 1-
+          author-voice · craft-not-headcount-leverage 的 category。 placement
+          BETWEEN PreTransferReceipt + WaitlistForm · narrative:hero →
+          handshake choreography → reference class anchor → form。 */}
+      <NonComparableAnchor />
 
       {/* ── WAITLIST FORM · Round 8 moved up to be 2nd block ────
           Was 3rd block (after FROM THE FOUNDER) · per Round 8 agent

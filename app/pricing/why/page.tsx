@@ -6,6 +6,7 @@ import RelatedReading from "@/components/RelatedReading";
 import FounderSignOff from "@/components/FounderSignOff";
 import ArticleMeta from "@/components/ArticleMeta";
 import EngineStamp from "@/components/EngineStamp";
+import ReciprocityLedger from "@/components/ReciprocityLedger";
 import {
   FOUNDERS_TOTAL,
   FOUNDERS_CLAIMED,
@@ -350,6 +351,41 @@ export default function PricingWhyPage() {
               </span>
             </li>
           </ul>
+        </Section>
+
+        {/* ── §06 · Reciprocity Ledger · Cialdini publish-before-ask · R74 W-A ───
+            16 件 ZONE 27 已 publish 之後才 ask · Cialdini Reciprocity Principle
+            (1984)· same axis as Berkshire 70 年 annual letters + Patek 200 年
+            movement schematics + Anthropic model card library pattern · LINE
+            老師 / 報馬仔 ask-first-give-never inversion · CPBL fan audience
+            pattern-match instantly · brand IP triple-fire(Disclosure +
+            Pratfall + Costly Signaling)。 Compact variant on /pricing/why
+            buy-line surface · full ledger on /transparency。 */}
+        <Section
+          no="06"
+          label="WHAT WE PUBLISHED BEFORE ASKING"
+          zh="ASK 之前已 publish 的 16 件 receipts"
+        >
+          <p>
+            Cialdini Influence(1984)Chapter 2 Reciprocity Rule · pre-gift
+            triggers obligation-to-reciprocate · LINE 老師 / 報馬仔 ask-first-
+            give-never inversion · ZONE 27 在收 NT$ 299/月 + NT$ 2,700 一次性
+            之前已 publish 16 件 receipts:
+          </p>
+          <div className="mt-6">
+            <ReciprocityLedger variant="compact" />
+          </div>
+          <p className="font-mono text-mute/80 text-[10px] tracking-[0.3em] leading-relaxed mt-6">
+            ⚓ 16 件 published-before-ask · 完整 ledger 在{" "}
+            <Link
+              href="/transparency#reciprocity-ledger"
+              className="text-gold/85 hover:text-gold underline-offset-4 hover:underline"
+            >
+              /transparency#reciprocity-ledger
+            </Link>{" "}
+            · brand IP triple-fire(Disclosure + Pratfall + Costly Signaling)·
+            per /audit S05 PRE-COMMIT clause append-only。
+          </p>
         </Section>
 
         {/* ── §05 · 4 Q&A FAQ · Stratechery prose defense ─── */}
