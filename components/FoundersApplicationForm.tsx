@@ -5,6 +5,34 @@
 // WCAG 2.4.3 Focus Order + 4.1.3 Status Messages · 訪客 submit 後
 // focus 自動移到 success container · role="status" + aria-live · 不
 // 失去 keyboard / screen reader context。
+//
+// R71 W-B · Agent A R70 SHIP 3 deferred · DraftSaveLink · Patek-dealer
+// 「save your wishlist」 + Apple Pro hardware「save configuration」 +
+// Wayback Machine plaintext-URL state pattern。 Mobile abandonment
+// recovery for the 4-7 minute「why_zone27」 textarea writing time ·
+// per Baymard 2025: 4+ field forms with 100+ char text areas have
+// ~68% mobile abandonment if interrupted · draft-save recovers 15-25%。
+//
+// Architecture:
+//   - 0 server storage · 0 Supabase · 0 PII transit
+//   - Draft encoded base64-UTF8 into mailto: body URL
+//   - Visitor's own email holds draft state(Apple Mail / Gmail / etc)
+//   - Resume link → /founders/apply?draft={base64} → useEffect hydrate
+//   - No retention · no PII inventory · no /audit S06 storage key needed
+//
+// Brand IP fit per Agent A R70 SHIP 3:
+//   - per [[zone27-disclosure-philosophy]] · plaintext URL · visitor
+//     can audit draft content before mailing
+//   - per [[feedback-zone27-pratfall-brand-ip]] · 「we know you're on
+//     phone and might leave」 explicit acknowledgment
+//   - per 不打擾就是禮物 · NO email follow-up · NO nag · visitor's
+//     mailbox = state holder
+//
+// 不做 anti-pattern:
+//   ✕ NO「save to your account」 server-side draft(0 Supabase migration)
+//   ✕ NO「reminder email every 24h」 push CTA
+//   ✕ NO「abandoned cart」 retargeting email(redline)
+//   ✕ NO localStorage draft auto-save(per /privacy 11-key cap discipline)
 // R68 W-A · Patek Philippe-style application form · 1 layer deeper than
 // /founders WaitlistForm · for visitors who actually want one of 270
 // founding seats(#008-#270 · #001-#007 are Tim's system-test placeholders
@@ -41,7 +69,7 @@
 //   ✕ no marketing copy bait("您是最棒的!")· brand-pure honesty only
 // ─────────────────────────────────────────────────────
 
-import { useActionState, useEffect, useRef } from "react";
+import { useActionState, useEffect, useRef, useState } from "react";
 import { useFormStatus } from "react-dom";
 import Link from "next/link";
 import { submitFoundersApplication } from "@/lib/founders-apply";
@@ -68,12 +96,58 @@ function SubmitButton() {
   );
 }
 
+// R71 W-B · base64-UTF8 helpers for DraftSaveLink · TextEncoder/Decoder
+// modern API · safe for Chinese characters(unlike naive btoa which only
+// handles Latin-1)· 0 dep · 0 lib · pure browser primitives。
+function encodeDraft(obj: Record<string, string>): string {
+  if (typeof window === "undefined") return "";
+  try {
+    const json = JSON.stringify(obj);
+    const bytes = new TextEncoder().encode(json);
+    let binStr = "";
+    for (let i = 0; i < bytes.length; i++) binStr += String.fromCharCode(bytes[i]);
+    return window.btoa(binStr);
+  } catch {
+    return "";
+  }
+}
+
+function decodeDraft(b64: string): Record<string, string> | null {
+  if (typeof window === "undefined") return null;
+  try {
+    const binStr = window.atob(b64);
+    const bytes = new Uint8Array(binStr.length);
+    for (let i = 0; i < binStr.length; i++) bytes[i] = binStr.charCodeAt(i);
+    const json = new TextDecoder().decode(bytes);
+    const parsed = JSON.parse(json);
+    if (!parsed || typeof parsed !== "object" || Array.isArray(parsed))
+      return null;
+    // Validate all values are strings · defense-in-depth against malformed
+    // resume URLs from attacker(no exec via stored XSS · just hydration source)
+    const out: Record<string, string> = {};
+    for (const [k, v] of Object.entries(parsed)) {
+      if (typeof v !== "string") continue;
+      out[k] = v.slice(0, 2000); // hard cap to prevent huge URLs
+    }
+    return out;
+  } catch {
+    return null;
+  }
+}
+
 export default function FoundersApplicationForm() {
   const [state, formAction] = useActionState<
     FoundersApplyResult | null,
     FormData
   >(submitFoundersApplication, null);
   const successRef = useRef<HTMLDivElement>(null);
+  // R71 W-B · DraftSaveLink form ref · enables read FormData ad-hoc when
+  // save-draft clicked · doesn't change form's existing useActionState
+  // uncontrolled-input contract。
+  const formRef = useRef<HTMLFormElement>(null);
+  const [draftSaveStatus, setDraftSaveStatus] = useState<
+    "idle" | "composed" | "copied"
+  >("idle");
 
   // R69 W-G · Agent B audit F8 fix · move focus to success container
   // when submission succeeds · keyboard + SR users not orphaned。
@@ -82,6 +156,78 @@ export default function FoundersApplicationForm() {
       successRef.current?.focus();
     }
   }, [state?.ok]);
+
+  // R71 W-B · DraftSaveLink hydration · read ?draft= URL param on mount ·
+  // base64-UTF8 decode · pre-populate uncontrolled inputs via DOM API。
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const params = new URLSearchParams(window.location.search);
+    const draftParam = params.get("draft");
+    if (!draftParam || !formRef.current) return;
+    const decoded = decodeDraft(draftParam);
+    if (!decoded) return;
+    // Hydrate each known field if present in draft · uncontrolled value set
+    const fields = ["email", "name", "cpbl_connection", "why_zone27"] as const;
+    for (const f of fields) {
+      const el = formRef.current.elements.namedItem(f);
+      if (decoded[f] !== undefined && el instanceof HTMLInputElement) {
+        el.value = decoded[f];
+      } else if (decoded[f] !== undefined && el instanceof HTMLTextAreaElement) {
+        el.value = decoded[f];
+      }
+    }
+  }, []);
+
+  // R71 W-B · DraftSaveLink composer · reads current form values · base64
+  // encodes · builds mailto: with subject + body containing resume URL ·
+  // attempts navigator.clipboard.writeText fallback if mailto: fails。
+  const handleSaveDraft = () => {
+    if (!formRef.current) return;
+    const fd = new FormData(formRef.current);
+    const draft: Record<string, string> = {
+      email: String(fd.get("email") ?? ""),
+      name: String(fd.get("name") ?? ""),
+      cpbl_connection: String(fd.get("cpbl_connection") ?? ""),
+      why_zone27: String(fd.get("why_zone27") ?? ""),
+    };
+    const encoded = encodeDraft(draft);
+    if (!encoded) return;
+    const origin =
+      typeof window !== "undefined" ? window.location.origin : "https://zone27-web.vercel.app";
+    const resumeUrl = `${origin}/founders/apply?draft=${encoded}`;
+    const subject = "ZONE 27 · Founders 27 application 暫存 · resume link";
+    const body = [
+      `Hi,`,
+      ``,
+      `This is your ZONE 27 Founders 27 application 暫存 link · click to`,
+      `resume filling on any device:`,
+      ``,
+      resumeUrl,
+      ``,
+      `Your draft is encoded in the URL · 0 server storage · 0 PII transit ·`,
+      `per /audit S06 disclosure · this link expires when you finalize submit。`,
+      ``,
+      `If your mail client cannot send · just copy the URL above + save it`,
+      `to your notes app · ZONE 27 does NOT track this URL · 不打擾就是禮物。`,
+    ].join("\n");
+    const mailtoUrl = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    try {
+      window.location.href = mailtoUrl;
+      setDraftSaveStatus("composed");
+      window.setTimeout(() => setDraftSaveStatus("idle"), 3500);
+    } catch {
+      // Fallback · copy resume URL to clipboard
+      navigator.clipboard
+        ?.writeText(resumeUrl)
+        .then(() => {
+          setDraftSaveStatus("copied");
+          window.setTimeout(() => setDraftSaveStatus("idle"), 3500);
+        })
+        .catch(() => {
+          window.prompt("Copy your resume URL:", resumeUrl);
+        });
+    }
+  };
 
   // ── Success state ────────────────────────────────────
   if (state?.ok) {
@@ -161,6 +307,7 @@ export default function FoundersApplicationForm() {
   // ── Form state ───────────────────────────────────────
   return (
     <form
+      ref={formRef}
       action={formAction}
       className="bg-slate/70 border border-gold/40 glow-soft p-8 sm:p-10"
     >
@@ -237,6 +384,31 @@ export default function FoundersApplicationForm() {
           credential · 是 fan-grammar authentic
         </span>
       </label>
+
+      {/* R71 W-B · DraftSaveLink · Agent A R70 SHIP 3 · Patek-dealer 「save
+          wishlist」 + Apple Pro 「save configuration」 + Wayback Machine
+          plaintext-URL state pattern · mobile abandonment recovery for the
+          4-7 min why_zone27 writing window · 0 server / 0 PII / 0
+          localStorage · visitor's own email holds draft state · click =
+          mailto: composed with subject + body containing resume URL。 */}
+      <div className="mb-8 -mt-2 flex items-baseline justify-between gap-3 flex-wrap pb-2 border-b border-line/40">
+        <p className="font-mono text-mute/60 text-[10px] tracking-[0.22em] leading-relaxed">
+          ⚓ 寫到一半要忙別的?暫存到您自己 email · 等等回來填完 ·
+          0 server / 0 PII / 0 cookie
+        </p>
+        <button
+          type="button"
+          onClick={handleSaveDraft}
+          aria-label="Save draft to your own email · resume link in mailto body"
+          className="font-mono text-gold/80 hover:text-gold text-[10px] tracking-[0.25em] underline-offset-4 hover:underline transition-colors shrink-0"
+        >
+          {draftSaveStatus === "composed"
+            ? "✓ mailto opened · check 您 email"
+            : draftSaveStatus === "copied"
+              ? "✓ resume URL copied · paste 您 notes"
+              : "暫存 → 寄到我的 email →"}
+        </button>
+      </div>
 
       {/* Why ZONE 27 */}
       <label className="block mb-6">

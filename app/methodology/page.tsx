@@ -682,6 +682,183 @@ repeat 10,000 times → aggregate
         </blockquote>
       </Section>
 
+      {/* ── R71 W-A · Section 06 · ENGINE DRY DOCK ───────────────
+          Agent A R69 SHIP 3 deferred · DHH HEY「inbox state IS the
+          dashboard」 grammar transplant · single-status-per-row · NO
+          progress bar / NO ETA / NO「coming soon」 marketing copy ·
+          factual engine state machine surface · cross-referenced from
+          /now UNRESOLVED section · canonical viewer for v0.2/v0.3/v0.4
+          state without crawl /methodology/diff + /roadmap + /now。 */}
+      <Section no="06" label="ENGINE DRY DOCK" zh="引擎此刻在做什麼 · DRY DOCK">
+        <p>
+          DHH HEY pioneered「the app&apos;s internal state IS the dashboard」 ·
+          ZONE 27 transplants 同 grammar 到 engine version state:
+          每個 engine variant 的當下狀態 single-row · 不藏「coming soon」 ·
+          不放「Q3 roadmap promises」 · 是{" "}
+          <strong className="text-bone">factual single-state per row</strong>。
+          hardcore CPBL fans returning weekly want「what is the engine doing
+          this week?」 — currently 必須 crawl{" "}
+          <Link
+            href="/methodology/diff"
+            className="text-gold underline-offset-4 hover:underline"
+          >
+            /methodology/diff
+          </Link>{" "}
+          +{" "}
+          <Link
+            href="/roadmap"
+            className="text-gold underline-offset-4 hover:underline"
+          >
+            /roadmap
+          </Link>{" "}
+          +{" "}
+          <Link
+            href="/now"
+            className="text-gold underline-offset-4 hover:underline"
+          >
+            /now
+          </Link>{" "}
+          · 此 section consolidates。
+        </p>
+
+        <ol className="space-y-3 mt-6 list-none p-0">
+          {/* ── 01 · CURRENT BUILD ───────────────── */}
+          <li className="border border-gold/40 bg-slate/30 px-5 py-4">
+            <div className="flex items-baseline justify-between gap-3 flex-wrap mb-2">
+              <p
+                lang="en"
+                className="font-mono text-gold/85 text-[10px] tracking-[0.35em]"
+              >
+                01 · CURRENT BUILD
+              </p>
+              <span
+                lang="en"
+                className="font-mono text-gold text-[10px] tracking-[0.3em] px-2 py-0.5 border border-gold/60 bg-gold/10"
+              >
+                ✓ LIVE
+              </span>
+            </div>
+            <p className="text-mute text-sm sm:text-base leading-relaxed">
+              <strong className="text-bone">v0.2 BASE</strong> · 逐打席 Monte
+              Carlo · 100% client-side · 您 browser 跑 10K simulations · 同
+              GitHub source · 詳見{" "}
+              <Link
+                href="/methodology/diff"
+                className="text-gold underline-offset-4 hover:underline"
+              >
+                /methodology/diff
+              </Link>{" "}
+              entire v0.2 spec。
+            </p>
+          </li>
+
+          {/* ── 02 · EXPANSION 1 · v0.3 · PARK FACTOR ─────── */}
+          <li className="border border-gold/30 bg-slate/20 px-5 py-4">
+            <div className="flex items-baseline justify-between gap-3 flex-wrap mb-2">
+              <p
+                lang="en"
+                className="font-mono text-gold/70 text-[10px] tracking-[0.35em]"
+              >
+                02 · EXPANSION 1 · v0.3 · PARK FACTOR
+              </p>
+              <span
+                lang="en"
+                className="font-mono text-mute/80 text-[10px] tracking-[0.3em] px-2 py-0.5 border border-mute/50 bg-slate/40"
+              >
+                ◌ READY · PROD DEFERRED
+              </span>
+            </div>
+            <p className="text-mute text-sm sm:text-base leading-relaxed">
+              <strong className="text-bone">PARK FACTOR(HR_PARK_SENSITIVITY = 0.5)</strong>
+              {" "}· 4 CPBL 場館已 calibrated(新莊 ×0.9842 / 桃園 ×1.0316 /
+              大巨蛋 ×1.0105 / 澄清湖 ×1.0158)· code 已 ship to{" "}
+              <Link
+                href="/methodology/diff"
+                className="text-gold underline-offset-4 hover:underline"
+              >
+                /methodology/diff
+              </Link>
+              {" "}DEV PREVIEW · production 啟用 awaits N≥30 sample debt
+              close(per /audit S05 PRE-COMMIT)· 不 silently 切換。
+            </p>
+          </li>
+
+          {/* ── 03 · EXPANSION 2 · v0.4 · BAYESIAN MIX ────── */}
+          <li className="border border-gold/30 bg-slate/20 px-5 py-4">
+            <div className="flex items-baseline justify-between gap-3 flex-wrap mb-2">
+              <p
+                lang="en"
+                className="font-mono text-gold/70 text-[10px] tracking-[0.35em]"
+              >
+                03 · EXPANSION 2 · v0.4 · BAYESIAN MIX
+              </p>
+              <span
+                lang="en"
+                className="font-mono text-mute/80 text-[10px] tracking-[0.3em] px-2 py-0.5 border border-mute/50 bg-slate/40"
+              >
+                ◌ SPEC LOCKED · IMPLEMENTATION PENDING
+              </span>
+            </div>
+            <p className="text-mute text-sm sm:text-base leading-relaxed">
+              <strong className="text-bone">BAYESIAN MODEL AVERAGING</strong>{" "}
+              · Pitcher × Park Factor × Batter wOBA · spec locked in{" "}
+              <Link
+                href="/methodology/diff"
+                className="text-gold underline-offset-4 hover:underline"
+              >
+                /methodology/diff
+              </Link>{" "}
+              v0.4 PRE-COMMIT block · implementation 等 v0.3 production ship
+              + N≥30 baseline · timing milestone-triggered 不綁日期。
+            </p>
+          </li>
+
+          {/* ── 04 · NEXT SHIP CANDIDATE ───────────── */}
+          <li className="border border-gold/20 bg-slate/10 px-5 py-4">
+            <div className="flex items-baseline justify-between gap-3 flex-wrap mb-2">
+              <p
+                lang="en"
+                className="font-mono text-mute/70 text-[10px] tracking-[0.35em]"
+              >
+                04 · NEXT SHIP CANDIDATE
+              </p>
+              <span
+                lang="en"
+                className="font-mono text-mute/60 text-[10px] tracking-[0.3em] px-2 py-0.5 border border-mute/30 bg-slate/30"
+              >
+                ◌ NOT YET COMMITTED
+              </span>
+            </div>
+            <p className="text-mute text-sm sm:text-base leading-relaxed">
+              下個 wave candidate 由{" "}
+              <Link
+                href="/now"
+                className="text-gold underline-offset-4 hover:underline"
+              >
+                /now
+              </Link>{" "}
+              SHIPPED journal driving · NOT pre-committed list · /roadmap
+              LOCKED 段是 long-arc commitments · /now UNRESOLVED 段是
+              candidate dry-dock。 看{" "}
+              <Link
+                href="/roadmap"
+                className="text-gold underline-offset-4 hover:underline"
+              >
+                /roadmap
+              </Link>{" "}
+              + /now 跨 reference 來推斷。
+            </p>
+          </li>
+        </ol>
+
+        <p className="mt-6 font-mono text-mute/70 text-[10px] tracking-[0.25em] leading-relaxed">
+          ⚓ 同 DHH HEY「The Imbox」 naming + DHH「show your software&apos;s
+          state」 pattern · 不 ship「Coming Soon!」 / 「Stay tuned!」 marketing
+          copy · 純 state machine factual surface · 訪客親自 read · 我們
+          不 sell next ship。
+        </p>
+      </Section>
+
       {/* ── Round 38 W-G · Lens Lifetime Pledge · Agent A #3 ship ──
           Patek Philippe「service since 1839」 pattern · permanent banner
           下方的 brand IP 物理 codify。 SaaS 標準是「silently rotate models
@@ -689,14 +866,17 @@ repeat 10,000 times → aggregate
           forever · 不 silently retire · 不 silently swap · deprecate +
           version 路線。 Patek inverse 邏輯:identity continuity in a market
           where 報馬仔 deletes losing weeks。 brand IP「方法公開 · 不藏不
-          換」 延伸到 generational time axis。 */}
+          換」 延伸到 generational time axis。
+          R71 W-A · numbered label removed(was「06 · LENS LIFETIME PLEDGE」)·
+          new Section 06 ENGINE DRY DOCK above takes the 06 slot · this
+          pledge stays as un-numbered permanent commitment banner。 */}
       <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 py-12 border-t border-line/40">
         <div className="border border-gold/40 bg-slate/40 p-6 sm:p-8 glow-soft">
           <p
             lang="en"
             className="font-mono text-gold text-[10px] tracking-[0.4em] mb-4"
           >
-            06 · LENS LIFETIME PLEDGE
+            LENS LIFETIME PLEDGE · BINDING
           </p>
           <h2 className="text-2xl sm:text-3xl text-bone font-light tracking-tight mb-5 leading-tight">
             每個 ship 過的 lens · 永遠看得到

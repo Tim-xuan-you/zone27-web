@@ -45,12 +45,21 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { LAST_SHIPPED_DATE_ISO } from "@/lib/last-shipped";
+import DiffCommitChip from "@/components/DiffCommitChip";
 
 const STORAGE_KEY = "zone27_last_visit_v1";
 
 type RailState =
   | { mounted: false }
-  | { mounted: true; daysSince: number | null; dismissed: boolean };
+  | {
+      mounted: true;
+      daysSince: number | null;
+      dismissed: boolean;
+      /** R71 W-C · prior visit ISO YYYY-MM-DD · used by DiffCommitChip
+       *  to surface engine updates since visitor's last visit · 7-day+
+       *  threshold per Berkshire annual letter return-recapture pattern */
+      priorVisitIso: string | null;
+    };
 
 /** Get today's date string in YYYY-MM-DD format · TPE-anchored to match
  *  brand-wide Asia/Taipei convention(per CadencePulseChip + Footer). */
@@ -95,7 +104,12 @@ export default function DailyReturnRail() {
     } catch {
       // localStorage disabled · silently no-op · 不 push
       // eslint-disable-next-line react-hooks/set-state-in-effect
-      setState({ mounted: true, daysSince: null, dismissed: false });
+      setState({
+        mounted: true,
+        daysSince: null,
+        dismissed: false,
+        priorVisitIso: null,
+      });
       return;
     }
 
@@ -106,24 +120,58 @@ export default function DailyReturnRail() {
       } catch {
         /* swallow · key set 不 critical */
       }
-      setState({ mounted: true, daysSince: null, dismissed: false });
+      setState({
+        mounted: true,
+        daysSince: null,
+        dismissed: false,
+        priorVisitIso: null,
+      });
       return;
     }
 
     // Same-day return: 不 update · 不 render
     if (priorVisit === today) {
-      setState({ mounted: true, daysSince: null, dismissed: false });
+      setState({
+        mounted: true,
+        daysSince: null,
+        dismissed: false,
+        priorVisitIso: priorVisit,
+      });
       return;
     }
 
-    // Returning visitor 1+ days · render + update key
-    const days = daysBetween(priorVisit, today);
+    // R71 W-E · Agent B audit F15 fix · dismiss persistence via single
+    // storage key extension(YYYY-MM-DD = normal · YYYY-MM-DD:dismissed
+    // = visitor dismissed today)· 避免 12th localStorage key · brand-pure
+    // single-key extension · same-day re-visit (back/forward nav) 不再
+    // re-show dismissed chip · 不打擾就是禮物 axiom 物理 codify。
+    const isDismissedToday = priorVisit === `${today}:dismissed`;
+    // Strip dismissed suffix to get clean prior-visit date for daysBetween
+    const cleanPriorVisit = priorVisit.split(":")[0];
+    if (isDismissedToday || cleanPriorVisit === today) {
+      // Same-day return path · 不 update · 不 render
+      setState({
+        mounted: true,
+        daysSince: null,
+        dismissed: false,
+        priorVisitIso: cleanPriorVisit,
+      });
+      return;
+    }
+
+    // Returning visitor 1+ days · render + update key(clear dismissed flag)
+    const days = daysBetween(cleanPriorVisit, today);
     try {
       window.localStorage.setItem(STORAGE_KEY, today);
     } catch {
       /* swallow */
     }
-    setState({ mounted: true, daysSince: days, dismissed: false });
+    setState({
+      mounted: true,
+      daysSince: days,
+      dismissed: false,
+      priorVisitIso: cleanPriorVisit,
+    });
   }, []);
 
   // SSR + first-time + same-day · render nothing
@@ -133,6 +181,17 @@ export default function DailyReturnRail() {
 
   const handleDismiss = () => {
     setState({ ...state, dismissed: true });
+    // R71 W-E · Agent B audit F15 fix · persist dismiss via single-key
+    // extension · YYYY-MM-DD:dismissed · same-day re-visits 不再 re-show
+    // · 不打擾就是禮物 axiom 物理 codify。
+    if (typeof window !== "undefined") {
+      try {
+        const today = getTodayIso();
+        window.localStorage.setItem(STORAGE_KEY, `${today}:dismissed`);
+      } catch {
+        /* swallow · visitor in private mode · in-memory dismiss still works */
+      }
+    }
   };
 
   return (
@@ -140,32 +199,41 @@ export default function DailyReturnRail() {
       aria-label="Daily return rail · honest past-tense check-in"
       className="mx-auto max-w-3xl w-full px-6 sm:px-10 py-3"
     >
-      <div className="border border-line/40 bg-slate/20 px-4 sm:px-5 py-2.5 flex items-center justify-between gap-3 flex-wrap">
-        <p className="font-mono text-mute/85 text-[11px] tracking-[0.22em] leading-relaxed tabular flex-1">
-          <span aria-hidden="true" className="text-gold/70 mr-2">
-            ✦
-          </span>
-          上次您來是{" "}
-          <strong className="text-bone tabular">
-            {formatDaysAgo(state.daysSince)}
-          </strong>{" "}
-          · 期間我們 ship 的更新{" "}
-          <Link
-            href="/changelog"
-            className="text-gold/85 hover:text-gold underline-offset-4 hover:underline transition-colors"
+      <div className="border border-line/40 bg-slate/20 px-4 sm:px-5 py-2.5 flex flex-col gap-1.5">
+        <div className="flex items-center justify-between gap-3 flex-wrap">
+          <p className="font-mono text-mute/85 text-[11px] tracking-[0.22em] leading-relaxed tabular flex-1">
+            <span aria-hidden="true" className="text-gold/70 mr-2">
+              ✦
+            </span>
+            上次您來是{" "}
+            <strong className="text-bone tabular">
+              {formatDaysAgo(state.daysSince)}
+            </strong>{" "}
+            · 期間我們 ship 的更新{" "}
+            <Link
+              href="/changelog"
+              className="text-gold/85 hover:text-gold underline-offset-4 hover:underline transition-colors"
+            >
+              /changelog
+            </Link>{" "}
+            · 最近 ship · <span className="text-bone">{LAST_SHIPPED_DATE_ISO}</span>
+          </p>
+          <button
+            type="button"
+            onClick={handleDismiss}
+            aria-label="Dismiss daily return chip"
+            className="font-mono text-mute/60 hover:text-gold text-[12px] tracking-[0.2em] tabular shrink-0 transition-colors"
           >
-            /changelog
-          </Link>{" "}
-          · 最近 ship · <span className="text-bone">{LAST_SHIPPED_DATE_ISO}</span>
-        </p>
-        <button
-          type="button"
-          onClick={handleDismiss}
-          aria-label="Dismiss daily return chip"
-          className="font-mono text-mute/60 hover:text-gold text-[12px] tracking-[0.2em] tabular shrink-0 transition-colors"
-        >
-          ×
-        </button>
+            ×
+          </button>
+        </div>
+        {/* R71 W-C · DiffCommitChip integration · when daysSince >= 7 +
+            beacon exists since priorVisit · surface ONE high-density engine
+            update artifact deep-link · Berkshire annual letter return-
+            recapture pattern · NOT scroll-list /changelog summary。 */}
+        {state.daysSince >= 7 && state.priorVisitIso && (
+          <DiffCommitChip sinceIso={state.priorVisitIso} variant="inline" />
+        )}
       </div>
       <p className="font-mono text-mute/60 text-[9px] tracking-[0.22em] leading-relaxed mt-1.5 px-1">
         ⚓ 不是 streak counter · 不是 daily-login farming · 純 past-tense
