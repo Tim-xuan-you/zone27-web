@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
@@ -8,46 +9,31 @@ import {
   FOUNDERS_REMAINING,
 } from "@/lib/founders-stats";
 
-// ── ZONE 27 · Sticky Founders 27 CTA Bar(mobile-only)──
-// Persistent conversion lever for mobile. Visible on every viewport
-// while scrolling · removes the need for Founders 27 strip section
-// (Round 5 moved that off homepage entirely).
-//
-// Research backing (Round 5 agent · Baymard / HubSpot 2026):
-//   - "CTA above the fold = +30% conversion" (HubSpot · 40k landing pages)
-//   - 80% mobile abandonment driven by preventable UX · sticky CTA mitigates
-//   - Booking.com / Airbnb / Substack mobile pattern · proven
-//
-// Hidden on desktop (already has Nav CTA + Founders strip on /founders).
-// Hidden on the /founders page itself (would compete with primary CTA).
-// Hidden when sold out (FOUNDERS_REMAINING === 0).
-//
-// Spec:
-//   - fixed bottom · z-30 above content · backdrop-blur for legibility
-//   - 56px tall · respects iPhone home indicator with env(safe-area-inset)
-//   - tap target ≥ 48px (Apple HIG)
-//   - reduced-motion safe (no animation)
-//
-// Render strategy: ALWAYS render the DOM; toggle hidden via Tailwind
-// `sm:hidden` so server-rendered HTML matches client. Page-specific
-// hiding handled by parent (don't render at all on /founders).
-// ─────────────────────────────────────────────────────
+// Sticky Founders 27 CTA Bar(mobile-only)· hidden on /founders + /lab/custom
+// · hidden when sold out · homepage `/` 加 first-viewport scroll-depth gate
+// (per agent 不打擾就是禮物 + Tim founder-dogfood-canary axiom · first-touch
+// 30-second 不催 · scroll 過 first viewport 後才出現 = visitor 已 engage)。
 
 export default function StickyFoundersCTA() {
   const pathname = usePathname();
-  // Hide on /founders (would compete with the page's own CTA form)
-  // and on /lab/custom (power-user pitcher input form has bottom
-  // controls · sticky CTA would obscure them).
-  //
-  // Round 9 hid /lab + /lab/custom both. Round 12 agent (conversion
-  // funnel audit) flagged that as over-correction: /lab itself has
-  // NO bottom controls — its completion card is THE highest-intent
-  // moment in funnel (visitor just watched engine converge live).
-  // Suppressing the sticky CTA there killed the dopamine-spike →
-  // conversion handoff. /lab/custom still suppresses (real bottom
-  // form). One-line refinement of Round 9.
+  const isHomepage = pathname === "/";
+  // Homepage first-touch: gate sticky bar until visitor scrolls past first
+  // viewport (~600px). Non-homepage routes show immediately.
+  const [scrolledPastHero, setScrolledPastHero] = useState(false);
+
+  useEffect(() => {
+    if (!isHomepage) return;
+    const onScroll = () => {
+      if (window.scrollY > 600) setScrolledPastHero(true);
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [isHomepage]);
+
   if (pathname === "/founders" || pathname === "/lab/custom") return null;
   if (FOUNDERS_REMAINING === 0) return null;
+  if (isHomepage && !scrolledPastHero) return null;
 
   return (
     <div

@@ -125,23 +125,19 @@ export default function AnonPickWidget({ match }: Props) {
     return (
       <article className="bg-slate/40 border border-gold/40 p-4 sm:p-5">
         <div className="flex items-baseline justify-between gap-3 flex-wrap mb-3">
-          <p
-            lang="en"
-            className="font-mono text-gold text-[10px] tracking-[0.35em]"
-          >
-            🎯 EPISTEMIC GYM · pick before peeking
+          <p className="font-mono text-gold text-[11px] sm:text-xs tracking-[0.25em]">
+            你選哪邊?
           </p>
           <span
             lang="en"
             className="font-mono text-mute/70 text-[9px] tracking-[0.3em]"
           >
-            ANON · localStorage · 0 auth
+            0 AUTH · 0 SERVER
           </span>
         </div>
         <p className="text-bone text-base sm:text-lg leading-relaxed mb-4">
-          先 pick 哪邊會贏 · 再看引擎 · 賽後對照 ·{" "}
-          <span className="text-gold">您 own 個人 track record vs engine</span> ·
-          純 localStorage · 永遠不傳 server。
+          先選一邊 · AI 等下告訴你它怎麼想 · 賽後對賬 ·{" "}
+          <span className="text-gold">你 own 個人 track record vs 引擎</span>。
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-3">
           <button

@@ -132,31 +132,22 @@ export default function BlackCardPage() {
           </div>
           <h1 className="text-4xl sm:text-5xl text-bone font-light tracking-tight max-w-3xl">
             BLACK CARD ·{" "}
-            <span className="text-gold">NT$ 1,500 / season</span>
+            <span className="text-gold">≈ NT$ 6 / 場</span>
           </h1>
           <p className="mt-3 font-mono text-mute/85 text-[11px] sm:text-xs tracking-[0.25em] leading-relaxed max-w-2xl">
-            CPBL 季票 · March-November(240 場 + 季後賽)· ≈ NT$ 6 / 場 ·
-            ≈ NT$ 187 / 月 equivalent · 0 auto-renewal · 每季 explicit
-            click + manual transfer · per /integrity rule #13(R81)
+            CPBL 季票 NT$ 1,500/season · March-November(240 場 + 季後賽)·
+            一顆 7-11 御飯糰的價格 · 看一場 CPBL · 0 auto-renewal · 每季
+            explicit click + manual transfer
           </p>
-          {/* R59 W-B · Agent C Ship #3 · price anchor strip · 4-cell honest
-              comparison · NT$ 200-450/月 benchmark band 從 CLAUDE.md
-              「商業模式定錨」 memory 升 visitor 眼前 · Loss Aversion(Kahneman
-              1979)+ Contrast Principle(Cialdini)· 之前 NT$ 299 floats
-              with no contrast · 訪客 default 認為 expensive。 4 cells:
-              Defector(獨立 sports media · Agent A Year-5 annual report cited)
-              · Netflix Premium(universal media anchor)· 健身房月卡(visceral
-              台北/台中市場 anchor)· BLACK CARD(highlighted gold)。 brand
-              IP per [[zone27-audience-fans-not-engineers]] · 「方法公開 ·
-              品味私藏」 不依賴 hidden price discrimination · 公開 anchor。 */}
+          {/* MARKET ANCHOR · 4-cell honest comparison · per-game framing。 */}
           <div className="mt-4 sm:mt-5 max-w-2xl">
             <p
               lang="en"
               className="font-mono text-mute/55 text-[9px] tracking-[0.3em] mb-2"
             >
-              ↘ MARKET ANCHOR · NT$ 200-450/月 SWEET SPOT BAND
+              ↘ 1 場 CPBL 看球的價格 · 4-cell ANCHOR
             </p>
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3">
+            <div className="grid grid-cols-3 gap-2 sm:gap-3">
               <div className="border border-line/40 bg-slate/20 p-2 sm:p-3 text-center">
                 <p
                   lang="en"
@@ -179,17 +170,6 @@ export default function BlackCardPage() {
                   NT$ 390/月
                 </p>
               </div>
-              <div className="border border-line/40 bg-slate/20 p-2 sm:p-3 text-center">
-                <p
-                  lang="en"
-                  className="font-mono text-mute/70 text-[9px] tracking-[0.22em] mb-1"
-                >
-                  GYM 月卡
-                </p>
-                <p className="font-mono text-mute text-[11px] sm:text-xs tabular tracking-tight">
-                  NT$ 1,500+/月
-                </p>
-              </div>
               <div className="border border-gold/60 bg-gold/5 p-2 sm:p-3 text-center glow-soft">
                 <p
                   lang="en"
@@ -197,11 +177,11 @@ export default function BlackCardPage() {
                 >
                   BLACK CARD
                 </p>
-                <p className="font-mono text-gold text-[11px] sm:text-xs tabular tracking-tight">
-                  NT$ 187/月 ≈
+                <p className="font-mono text-gold text-[12px] sm:text-sm tabular tracking-tight">
+                  NT$ 6/場
                 </p>
                 <p className="font-mono text-mute/60 text-[8px] tracking-[0.15em] mt-0.5">
-                  NT$ 1,500/season
+                  240 場 + 季後賽
                 </p>
               </div>
             </div>

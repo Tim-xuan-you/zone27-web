@@ -163,6 +163,8 @@ export default function WaitlistForm({
         </p>
         {showLiveCount && (
           <p
+            role="status"
+            aria-live="polite"
             lang="en"
             className="font-mono text-mute text-[10px] tracking-[0.3em] flex items-center gap-2"
             aria-label={

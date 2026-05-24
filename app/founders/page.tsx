@@ -366,9 +366,9 @@ export default async function FoundersPage({
             descriptive caption stays below as supporting text. */}
         <div className="mt-5 sm:mt-7 grid grid-cols-3 gap-2 sm:gap-3 max-w-xl mx-auto">
           <BreakEvenCell
-            value="9"
-            unit="個月"
-            en="MONTHS TO BREAK-EVEN"
+            value="2"
+            unit="個季"
+            en="SEASONS TO BREAK-EVEN"
           />
           <BreakEvenCell
             value="2,700"
@@ -377,43 +377,23 @@ export default async function FoundersPage({
             gold
           />
           <BreakEvenCell
-            value="3,588"
+            value="3,000"
             unit="NT$ /年省"
             en="SAVED PER YEAR"
           />
         </div>
         <p className="mt-4 max-w-xl mx-auto text-mute text-xs sm:text-sm leading-relaxed text-center">
-          與 BLACK CARD 月費 NT$ 299 比較 ·{" "}
-          <span className="text-gold">9 個月即達損益平衡</span> ·
-          之後每年省下 NT$ 3,588
+          與 BLACK CARD NT$ 1,500/season 比較 ·{" "}
+          <span className="text-gold">2 個 CPBL 季即回本</span> · 之後終身免費
         </p>
-        {/* Round 56 W-B · Agent A Vector 5 fix · pricing 9-month math 攻擊面
-            pre-empt · 之前 NT$ 2,700 ÷ 299 = 9 個月 ratio 在 adversarial 角度
-            是「lifetime 等於 9 個月 BLACK CARD = 內部矛盾 · Costco 模式 應該
-            5-10x annual fee」 attack。 此 line 把 gap frame 為 INTENTIONAL ·
-            「前 270 人是 brand 共同作者 不是 customer」 axiom 物理 codify ·
-            costly signaling 比沉默更強 · Aronson pratfall 物理 fire。 */}
-        <p className="mt-2 max-w-xl mx-auto text-mute/85 text-[11px] sm:text-xs leading-relaxed text-center">
-          <span className="text-gold/85">9× ratio 是 INTENTIONAL</span> ·
-          我們 under-price 創始席位 · 因為前 270 人不是 customer · 是 brand
-          共同作者 + lifetime mission anchor · 不是「value-for-money」 trade。
-        </p>
-        {/* R59 W-A · Agent C Ship #5 · /methodology/diff Costly Signaling
-            anchor · the KEY objection 「why pay anything when method is
-            public?」 currently answered abstractly(identity-stamp)。 加
-            physical receipt · v0.2→v0.3 整份 5-line logic delta + 14
-            unchanged constants + Pratfall list · 不是「我們有深度」 prose ·
-            是「look 我們連 5 行 logic 都公開」 evidence。 同 Hindenburg
-            inline citation 概念 · Disclosure-first 物理升級 · brand IP
-            triple-fire(Disclosure + Pratfall + Costly Signaling)。 */}
         <p className="mt-2 max-w-xl mx-auto text-mute/70 text-[10px] sm:text-[11px] leading-relaxed text-center">
+          完整定價邏輯 ·{" "}
           <Link
-            href="/methodology/diff"
+            href="/pricing/why"
             className="text-gold/80 hover:text-gold underline decoration-mute/40 underline-offset-4 hover:decoration-gold transition-colors"
           >
-            看 v0.2 → v0.3 整份 delta →
-          </Link>{" "}
-          我們連 5 行 logic change 都公開。
+            /pricing/why →
+          </Link>
         </p>
         <p
           lang="en"

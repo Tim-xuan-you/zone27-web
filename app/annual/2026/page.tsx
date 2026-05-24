@@ -259,7 +259,7 @@ export default function AnnualReport2026Page() {
           <ol className="space-y-6">
             {WHAT_FAILED_2026.map((entry, i) => (
               <FailedItemRow
-                key={i}
+                key={entry.item}
                 no={String(i + 1).padStart(2, "0")}
                 item={entry.item}
                 lesson={entry.lesson}
@@ -277,9 +277,9 @@ export default function AnnualReport2026Page() {
             / WHAT&apos;S NEXT · 2027 milestone commitment
           </p>
           <div className="space-y-5">
-            {WHATS_NEXT_2027.map((entry, i) => (
+            {WHATS_NEXT_2027.map((entry) => (
               <NextMilestoneRow
-                key={i}
+                key={entry.milestone}
                 milestone={entry.milestone}
                 description={entry.description}
                 quarter={entry.q}

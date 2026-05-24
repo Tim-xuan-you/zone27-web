@@ -352,37 +352,19 @@ export default function HeroLiveCard({ match }: { match: Match }) {
         </Link>
       </div>
       {FOUNDERS_REMAINING > 0 && (
-        // Round 29 Wave 10C · Agent research Pattern #1 specificity-over-aggregate.
-        // Patek Philippe identity-stamp pattern translated to indie SaaS · 2026
-        // conversion research(Lead Alchemists · BowTied Life)confirms specific
-        // unit number 比 aggregate「263 / 270 剩」conversion lift。原本「想成為
-        // 263/270 位之一?」改為「想成為 #008?」 — identity stamp 取代 scarcity
-        // pressure。Title attribute 保留 aggregate context 給 hover 訪客。
-        // R59 W-A · 加 ceiling framing 第二行 · Fragment 包 2 sibling。
-        <>
-          <p
-            className="mt-5 sm:mt-6 text-center font-mono text-mute/70 text-[10px] tracking-[0.3em] tabular"
-            title={`Founders 27 · 限量 ${FOUNDERS_TOTAL} 名 · 已認領 ${FOUNDERS_TOTAL - FOUNDERS_REMAINING} 名 · NEXT IS ${formatBadge(FOUNDERS_NEXT)} · 一次性 NT$ 2,700 · 終身`}
+        <p
+          className="mt-5 sm:mt-6 text-center font-mono text-mute/70 text-[10px] tracking-[0.3em] tabular"
+          title={`Founders 27 · 限量 ${FOUNDERS_TOTAL} 名 · 已認領 ${FOUNDERS_TOTAL - FOUNDERS_REMAINING} 名 · NEXT IS ${formatBadge(FOUNDERS_NEXT)} · 一次性 NT$ 2,700 · 終身`}
+        >
+          想成為{" "}
+          <Link
+            href="/founders"
+            className="text-gold hover:text-gold-soft underline-offset-4 hover:underline transition-colors"
           >
-            想成為{" "}
-            <Link
-              href="/founders"
-              className="text-gold hover:text-gold-soft underline-offset-4 hover:underline transition-colors"
-            >
-              {formatBadge(FOUNDERS_NEXT)}
-            </Link>
-            ?
-          </p>
-          {/* R59 W-A · Agent C Ship #7 · ceiling framing 物理 surface · 同
-              Ship #6 axis · post-engine-converge 是 brand-soul peak intent ·
-              「270 = Tim 一年親筆 sign-off 上限」 from tooltip 升 visible
-              copy。 同 [[feedback-zone27-pratfall-brand-ip]] · costly
-              signaling > scarcity counter。 極小 mute/55 · 不奪 #008 焦點 ·
-              補 framing 而非 replace。 */}
-          <p className="mt-1 text-center font-mono text-mute/55 text-[9px] tracking-[0.28em]">
-            270 = Tim 一年親筆 sign-off 上限
-          </p>
-        </>
+            {formatBadge(FOUNDERS_NEXT)}
+          </Link>
+          ?
+        </p>
       )}
       {/* Round 31 Wave B · Vercel + Plausible datestamped trust signal */}
       <div className="mt-6 sm:mt-8 pt-4 sm:pt-5 border-t border-line/40 text-center">

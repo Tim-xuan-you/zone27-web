@@ -289,37 +289,9 @@ export default function Home() {
         </p>
       </section>
 
-      {/* ── F6 「ZONE 27 不做」 declarative-absence strip ────────────
-          Round 33 W-B · agent A 帶回 top success pattern across 13 niche
-          subscription wins(Stratechery「no ads」 · Defector「no PE no
-          billionaire」 · Aftermath「worker-owned」)+ ZONE 27 既有
-          [[feedback-zone27-pratfall-brand-ip]] · 「declarative absence
-          is brand moat(Aronson 1966 + Spence 1973 costly signaling)」。
-          Codify 5 redlines 物理 visible on home · 1 hr ship · 0 hr/wk ·
-          permanent brand asset · differentiation 對 玩運彩 / 報馬仔 /
-          LINE 老師生態 instant clarity。 5 items 為 ConfidenceStars(W-A)
-          的 inverse twin:「我們不是 sportsbook」 declarative。
-          Round 38 W-I · Agent C P3 ship · 「不分潤博彩」 加 escape hatch
-          link 到 /learn#why-not-gambling · P3 casual visitor 不再 dead-
-          end declaration · 而是 clickable explainer。
-
-          Round 50 W-C · 2026-05-22 evening · Tim 26+ canary fire 高情緒
-          push「點出來的頁面都是無關緊要的」 surface 真實 funnel-order
-          bug · F6 strip 從 hero 下方 移到 THE ENGINE section 之後 ·
-          per Hick's Law deeper formulation:訪客 first-touch 必須是
-          PRIMARY product moment · 不是 brand declaration。 fan filter-in
-          先見 prediction(THE ENGINE)· 賭徒 filter-out 後看到「不做」
-          declarative redline · 兩端 funnel 同時改善 · brand-IP 0 修改 ·
-          純 JSX 重 order。 declarative-absence 仍 first-fold below(若
-          訪客 scroll 不到 = anyway 不是 audience)· 對齊
-          [[feedback-zone27-audience-fans-not-engineers]] axiom。 */}
-      <section className="mx-auto max-w-3xl px-6 sm:px-10 pb-12 sm:pb-16 text-center border-t border-line/40 pt-12 sm:pt-16">
-        <p
-          lang="en"
-          className="font-mono text-gold text-[10px] sm:text-[11px] tracking-[0.4em] mb-3 sm:mb-4"
-        >
-          / WHAT ZONE 27 DOES NOT DO
-        </p>
+      {/* F6 declarative-absence strip · 6 brand-IP negations · pratfall axiom
+          protected · compressed per 3-viewport rule (R95)。 */}
+      <section className="mx-auto max-w-3xl px-6 sm:px-10 pb-10 sm:pb-14 text-center border-t border-line/40 pt-10 sm:pt-12">
         <p className="font-mono text-mute/85 text-[11px] sm:text-xs tracking-[0.18em] leading-relaxed">
           <span className="text-bone">不顯示賠率</span>
           <span aria-hidden="true" className="text-mute/50 mx-2">·</span>
@@ -338,17 +310,6 @@ export default function Home() {
           <span aria-hidden="true" className="text-mute/50 mx-2">·</span>
           <span className="text-gold">不等 Q3</span>
         </p>
-        {/* Round 51 W-C · Agent 2 #3 WCAG AA fix · text-mute/60 at 9-10px
-            font on navy bg → 3.5:1 contrast ratio · fails AA normal text
-            (4.5:1 required)。 Bump to text-mute (100%) ≈ 5.6:1 ✓ AA pass。 */}
-        <p className="mt-3 font-mono text-mute text-[9px] sm:text-[10px] tracking-[0.28em] leading-relaxed">
-          NO ODDS · NO LOCK · NO AFFILIATE · NO HIDDEN MISSES · 0 TRACKERS · <span className="text-gold/80">NO WAITING</span>
-        </p>
-        {/* R59 W-A · Agent C Ship #4 · /transparency cross-link · F6 「不做」
-            strip 是 skeptic asks「prove it」 的精確時刻 · /transparency
-            Anthropic-pattern aggregator 是 one-page proof · 此 link 把
-            R51 W-D headline ship 從 footer/Cmd-K opt-in 升 homepage active
-            funnel entry。 underlined · tracking same · 不破 minimalism。 */}
         <p className="mt-4 font-mono text-[10px] sm:text-[11px] tracking-[0.3em]">
           <Link
             href="/transparency"
