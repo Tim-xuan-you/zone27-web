@@ -12,32 +12,8 @@ export const metadata: Metadata = {
     "Stratechery「About」 transplant · 9 ZONE 27 binding NOT-DO commitments signed Tim · displacement narrative against 玩運彩+報馬仔 tipsters direct · brand pledge protecting visitors from brand misbehavior · Pratfall + Costly Signaling + Disclosure Philosophy 三 axiom 同時 fire · 修改任何 commitment 需 30 天 /changelog 公告。R80 加 commitment 09(mandatory prediction ledger · 0 cherry-pick · 0 retroactive delete · 配對 /integrity rule 12 CPBL-only-forever scope close brand IP loop)。",
 };
 
-// ── ZONE 27 · /ethics ────────────────────────────────────
-// Round 41 W-C · Agent H #5 ship · per [[feedback-no-waiting-rule]] 鐵律。
-//
-// Stratechery About page transplant pattern · Ben Thompson 6 binding ethics
-// commitments(no paid opinions / no individual stocks in covered cos / no
-// consulting / self-pay travel / public corrections commitment)expand to
-// ZONE 27 9 commitments displacement-mission-specific(R80 加 #09 mandatory
-// ledger discipline · 配對 /integrity rule 12 CPBL-only-forever scope)。
-//
-// Distinct from /membership/black-card Subscriber Compact:
-//   - Subscriber Compact = 3 line · 訂閱 path 上的 ethics
-//   - /ethics = 8 line · brand-wide ethics policy · visitor protection
-//     from brand becoming a tipster · displacement narrative direct
-//
-// Brand IP 物理 codify:
-//   - 倒置 SaaS · 廣告 + affiliate 是傳統 SaaS revenue · ZONE 27 倒置
-//     完全拒絕 · 訂閱費 = 整個 model
-//   - Pratfall + Costly Signaling · 8 binding NOT-DO commitments 每個都
-//     costly to break · 公開 = trust signal
-//   - Disclosure Philosophy · 延伸 /audit S05 「為什麼公開」 to brand
-//     ethics layer
-//   - displacement narrative · 玩運彩+報馬仔 結構性無法 ship 同 ethics
-//     page(他們所有 commercial 都 violate 這 8 條)
-//
-// Routing: /ethics · public · 37th visitor-discoverable route。
-// ─────────────────────────────────────────────────────
+// /ethics · Stratechery About page transplant · 9 ZONE 27 binding NOT-DO
+// commitments · 修改任 commitment 需 30 天 /changelog 公告。
 
 const COMMITMENTS: { num: string; title: string; body: string; tier: "displacement" | "subscriber" | "brand"; }[] = [
   {
@@ -133,9 +109,6 @@ export default function EthicsPage() {
             </p>
           </div>
 
-          {/* Round 44 W-C · Agent K DEEPEST canonical sentence · 統一 brand IP
-              moat sentence in 4 key pages(此處 /ethics · 同 /about Prologue ·
-              /steelman hero · /annual hero)。 */}
           <p className="mt-6 text-bone text-base sm:text-lg leading-relaxed border-l-4 border-gold pl-5 py-2 max-w-2xl">
             <strong>每一個承諾 Tim 簽名 · 可被驗證 · 違反任何一條 = 此 page 紅字
             永久標 · 不可刪</strong> · ZONE 27 vs 玩運彩+報馬仔 anonymity+deletion
@@ -155,7 +128,7 @@ export default function EthicsPage() {
             lang="en"
             className="font-mono text-gold text-[10px] tracking-[0.45em] mb-6"
           >
-            / 01 · 9 COMMITMENTS · 簽 Tim · 2026-05-23(R80 加 #09 mandatory-ledger · R81 ship parallel /integrity rule #13 永遠不 subscription auto-renewal)
+            / 01 · 9 COMMITMENTS · 簽 Tim · 2026-05-23
           </p>
 
           <ol className="space-y-6">
@@ -254,13 +227,7 @@ export default function EthicsPage() {
           </div>
         </section>
 
-        {/* ── 02B MIT LICENSE LIMIT(Round 57 W-A · Agent A Vector 7 fix)──
-            Honest disclosure of brand-IP boundary 物理 limit · 之前 commitments
-            bind Tim's actions 但 MIT license 同時允許 anyone fork engine ·
-            包成 sportsbook tool · ZONE 27 ethical claim 只 bind Tim · 不 bind
-            code 流向。 Pre-empt adversarial「commitment 是 theatrical」 attack
-            via transparent limit-of-power disclosure · costly signaling 比
-            silent contradiction 強 100×。 */}
+        {/* ── 02B · MIT LICENSE LIMIT · honest limit-of-power disclosure ── */}
         <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-12 border-t border-line/40 pt-10">
           <p
             lang="en"
@@ -327,12 +294,7 @@ export default function EthicsPage() {
           </div>
         </section>
 
-        {/* R69 W-G · Agent B audit F3 fix · BUS_FACTOR section NEW · per
-            PreTransferReceipt R68 W-G「Tim disappears → 看 /ethics BUS_FACTOR
-            section」 promise · 之前 phantom · 此 section fulfill promise。
-            Bus-factor honesty per [[feedback-zone27-pratfall-brand-ip]] +
-            Costly Signaling · 「what happens if Tim 失蹤了」 explicit
-            contingency · 同 SaaS 「if our team disappears」 disclosure pattern。 */}
+        {/* ── BUS_FACTOR · solo-founder contingency disclosure ── */}
         <section
           id="bus-factor"
           className="mx-auto max-w-3xl w-full px-6 sm:px-10 py-14 border-t border-line/40 scroll-mt-20"
@@ -380,8 +342,7 @@ export default function EthicsPage() {
             </li>
             <li>
               <strong className="text-bone">您的 PDF 證書 + welcome kit</strong>{" "}
-              · 本機 · 您下載後永久 own · 不需要 ZONE 27 server 渲染 · per
-              R68 W-G PreTransferReceipt ROW 01
+              · 本機 · 您下載後永久 own · 不需要 ZONE 27 server 渲染
             </li>
             <li>
               <strong className="text-bone">您的 application + Tim email</strong>{" "}

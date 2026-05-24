@@ -95,20 +95,11 @@ export default function AuditPage() {
             <h1 className="text-4xl sm:text-5xl text-bone font-light tracking-tight leading-[1.1] mb-3">
               ZONE 27 Engine
             </h1>
-            {/* Round 54 W-C · Cold Gold Hairline signature moat。 */}
             <div className="zone27-rule max-w-[260px] mb-6" aria-hidden="true" />
-            {/* Round 54 W-C · Editorial drop-cap · Apple Newsroom + Atlantic
-                pattern · first paragraph 首字 cold gold · 4-line tall · brand
-                IP「方法公開」 editorial gravitas signal。 */}
             <p className="editorial-dropcap text-mute text-base leading-relaxed mb-8 max-w-2xl">
               引擎能算什麼 · 不能算什麼 · 為什麼公開全部。
             </p>
 
-            {/* Compact meta strip — 3 items only.
-                Round 4: dropped ITERATIONS / STANDARD ERROR (engineer-y)
-                and BUILD chip (moved to footer for die-hards) per
-                audience-reframe critique. Kept the 3 that matter to a
-                baseball fan evaluating «can I trust this analyst?». */}
             <dl className="grid grid-cols-3 gap-x-6 gap-y-4 font-mono text-[11px] tracking-[0.05em]">
               <MetaPair label="LAST REVIEWED" value={LAST_REVIEWED} />
               <MetaPair label="ENGINE" value={ENGINE_VERSION} />
@@ -116,16 +107,7 @@ export default function AuditPage() {
             </dl>
           </header>
 
-          {/* R59 W-E · Hindenburg Research position-disclosure mirror to
-              /methodology DISCLOSURE block · brand consistency across two
-              trust artifacts(model report + engineering paper)· /audit
-              header 已 surface ENGINE + LAST REVIEWED + SAMPLE SIZE 三項
-              · 此 disclosure 補 「who wrote this」 layer 的 8 項 position
-              facts:EQUITY / SPONSORS / ADS / TRACKERS / RECEIPTS / FOUNDERS
-              27 / BLACK CARD · 同 Hindenburg「at-the-top-of-document
-              position disclosure」 + Anthropic system card 「known
-              affiliations」 pattern。 brand IP「方法公開 · 公開 enterprise
-              not just engine」 物理 codify。 同 /methodology WAVE D。 */}
+          {/* Hindenburg-style top-of-doc position disclosure · mirror to /methodology。 */}
           <aside
             id="disclosure"
             aria-labelledby="audit-disclosure-heading"
@@ -229,12 +211,6 @@ export default function AuditPage() {
               </Link>
               。本頁是精簡的 model report,/methodology 是完整技術論文。
             </P>
-            {/* Round 51 W-B · Agent 3 HIGH #5 fix · /audit S01 缺 v0.3/v0.4
-                engine lineup cross-link · BLACK CARD commercial unlock 核心
-                (per /membership/black-card unlock #1)· 此 page 不 surface
-                = audit 與 product progression 斷層。 Add explicit cross-link
-                to /methodology Section 04 ENGINE LINEUP · 訪客閱讀 audit
-                後可直接 jump 到 engine progression 對照。 */}
             <P className="text-mute/70">
               本報告涵蓋 v0.2 base engine。 v0.3(+ Park Factor HR rate)已
               LIVE DEV PREVIEW · v0.4(Bayesian Model Averaging)Q4 2026 PLANNED。
@@ -451,11 +427,6 @@ export default function AuditPage() {
               (含 Anthropic 與 OpenAI · 兩者皆未揭露 Scope 1/2/3 數據)。
             </P>
 
-            {/* Round 51 W-E · ReproducibilityReceipt drop-in to /audit S04
-                ENVIRONMENTAL IMPACT(R43 deferred · Agent H R41 #4 pattern
-                延伸)· 每 published number 帶 git+seed+n+dataAt audit trail
-                · 0.0005 hr / sim + < 0.1 g CO₂e / sim 兩 estimates 從 floating
-                claim 升 reproducible artifact · 對齊 IJCAI 2026 standard。 */}
             <div className="mt-4">
               <ReproducibilityReceipt
                 seed={null}
@@ -466,17 +437,7 @@ export default function AuditPage() {
             </div>
           </ReportSection>
 
-          {/* ── 05 DISCLOSURE PHILOSOPHY ──────────────
-              Round 7: renumbered 06 → 05 (was 08 → 06 in Round 4).
-              Section LAST CALIBRATION RUN removed entirely back in
-              Round 4. Canonical disclosure philosophy stays — this
-              is the brand-IP anchor per [[zone27-disclosure-philosophy]]
-              and is the META section ("why we publish") not a
-              taxonomy of limitations.
-
-              Original Tim ask 2026-05-20: "AI 公司不公開模型,我們為什麼要?"
-              Answer: ZONE 27 sells identity, not algorithm access.
-              No algorithmic moat → radical transparency IS the moat. */}
+          {/* ── 05 DISCLOSURE PHILOSOPHY · canonical brand-IP anchor ── */}
           <ReportSection no="05" label="DISCLOSURE PHILOSOPHY">
             <P>
               為什麼我們把整份 model report 公開到這個程度?
@@ -580,14 +541,7 @@ export default function AuditPage() {
             </P>
           </ReportSection>
 
-          {/* ── 06 LOCAL STORAGE TRANSPARENCY · Round 41 W-B ────
-              Agent F surface'd this gap during mobile UX recon · 我們 ship
-              了 4+ localStorage features(team-pick · recent-matches ·
-              sim-history · notes · predictions)但 /audit 沒列出 storage
-              keys。 「方法公開」延伸到 client-side state 本身 · skeptic
-              開 DevTools Application 看到 ZONE 27 寫的 keys 跟 /audit 列的
-              一致才會信「0 trackers · 數據在您裝置不在我們 server」 claim。
-              brand IP「您能驗證 → 您才有理由信」 物理 codify 到 localStorage。 */}
+          {/* ── 06 LOCAL STORAGE TRANSPARENCY · client-side state disclosure ── */}
           <ReportSection no="06" label="LOCAL STORAGE TRANSPARENCY">
             <P>
               ZONE 27 用 localStorage 存 visitor-local state ·{" "}
@@ -596,12 +550,6 @@ export default function AuditPage() {
               開 DevTools → Application → Local Storage → zone27-web.vercel.app
               · 您看到的 keys 跟下表一致 · 我們不藏。
             </P>
-            {/* Round 56 W-A · Agent A Vector 4 fix · CRITICAL · adversarial
-                critic 5-second devtools debunk surface · Supabase Auth 設
-                sb-access-token + sb-refresh-token session cookies on /login
-                成功登入後 · 這是 essential infrastructure cookie · 不是
-                tracking · 但 brand IP「不藏」 axiom 要 explicit disclose ·
-                不能 silently 否認。 */}
             <P className="text-mute/80">
               <strong className="text-bone">Auth session cookies disclosure</strong>:
               登入後 Supabase 在 first-party domain 設 2 個 cookies
@@ -612,30 +560,13 @@ export default function AuditPage() {
               → Application → Cookies 可 audit。
             </P>
 
-            {/* Round 43 W-B · CRITICAL fix · Agent J dogfood verify
-                R42 Section 06 had 3/6 wrong keys + 1 fabricated + 1 missing ·
-                brand IP self-falsifiable in 5 seconds with DevTools。 修:
-                exact key names verified against source code(lib/teams.ts ·
-                lib/recent-matches.ts · lib/sim-history.ts · app/login/page.tsx ·
-                components/PreviewModeBanner.tsx · components/MemberDashboardPreview.tsx)·
-                MatchNoteEditor 真實 stores in Supabase user_metadata 不是
-                localStorage · 從此表移除(brand IP「不藏 · 不假裝」 honest fix)。 */}
-            {/* R74 W-G · C3 fix · refactored from 11 inline DataRow calls to
-                LocalStorageReceipt variant="audit" · single-source from
-                lib/local-storage-inventory.ts · drift impossible by design
-                · same labels + notes + order verbatim · zero visual change
-                · per /audit S05 PRE-COMMIT clause REFACTOR not POLICY
-                MODIFICATION · same single-source append-only architecture
-                as ENGINE_DIFF_BEACONS + NO_PUSH_INVENTORY + RECIPROCITY_
-                LEDGER + SOLO_FOUNDER_PEERS pattern · brand IP「方法公開 ·
-                drift = 自殺」 axiom 物理 codify。 */}
             <LocalStorageReceipt variant="audit" />
 
             <P className="text-mute/70 mt-3">
-              <strong className="text-bone">⚓ R43 W-B drift correction</strong> ·
-              此表 R41 W-C ship 時 keys 3/6 不正確 · 1 fabricated · 1 missing ·
-              Agent J 2026-05-22 dogfood verify 發現 · 立即修正 · per Pratfall「不藏錯」
-              axiom 公開記在此處 · 不刪 commit history。
+              <strong className="text-bone">⚓ Drift correction history</strong> ·
+              此表早期 ship 時 keys 3/6 不正確 · 1 fabricated · 1 missing ·
+              dogfood verify 發現 · 立即修正 · per Pratfall「不藏錯」 axiom 公開
+              記在此處 · 不刪 commit history。
             </P>
             <P className="text-mute/70">
               <strong className="text-bone">NOT in localStorage</strong>:Match notes
@@ -661,15 +592,12 @@ export default function AuditPage() {
             </P>
           </ReportSection>
 
-          {/* ── 07 ENGINE LINEUP v0.2/v0.3 ESTIMATION DISCLOSURE · R41 W-A ──
-              Engine Lineup #2 v0.3 從 DEV → LIVE 後 · 每 engine version 需
-              獨立 ESTIMATION DISCLOSURE 同 v0.2 K/9 estimate pattern。
-              「方法公開」 物理延伸:visitor 開 /audit 看 v0.2 vs v0.3 差別。 */}
+          {/* ── 07 ENGINE v0.3 ESTIMATION DISCLOSURE · per engine version disclose ── */}
           <ReportSection no="07" label="ENGINE v0.3 ESTIMATION DISCLOSURE">
             <P>
-              Round 41 W-A · Engine Lineup #2 v0.3 從 DEV → LIVE(DEV PREVIEW
-              state · opt-in via /lab 將來 ship)。 v0.3 = v0.2 base + Park
-              Factor HR rate adjustment · 公開 estimation methodology:
+              Engine Lineup #2 v0.3 已 LIVE(DEV PREVIEW state · opt-in via
+              /lab 將來 ship)。 v0.3 = v0.2 base + Park Factor HR rate
+              adjustment · 公開 estimation methodology:
             </P>
 
             <DataTable>
@@ -829,13 +757,6 @@ function MetaPair({
   );
 }
 
-// R74 W-G · C1 fix · slug helper for /audit ReportSection · 同 R71 W-E
-// /transparency + R70 W-F /privacy + R69 W-F /terms pattern · enables
-// /audit#section-02 + /audit#section-05 + /audit#section-06 anchor jumps
-// · /audit was MISSED in R71-R72 section-id-slug sweep · R74 W-A
-// ReciprocityLedger + LocalStorageReceipt + RefusalLedgerHint cross-
-// links surfaced the gap · per Agent B R74 audit C1 finding · 不再
-// 5-second DevTools 「no element with id=section-06」 self-debunk。
 function slugFromAuditSectionNo(no: string): string {
   return `section-${no.toLowerCase().replace(/[^a-z0-9]/g, "-")}`;
 }
@@ -851,8 +772,6 @@ function ReportSection({
 }) {
   const id = slugFromAuditSectionNo(no);
   return (
-    /* Round 58 W-A · cv-auto perf primitive · /audit 7 sections benefit · LCP -150ms。
-       R74 W-G · C1 fix · id + scroll-mt-20 for anchor jumps · 同 /transparency pattern。 */
     <section
       id={id}
       className="pt-12 pb-2 mt-12 border-t border-line/40 cv-auto scroll-mt-20"

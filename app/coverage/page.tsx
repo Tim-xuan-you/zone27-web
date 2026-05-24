@@ -13,22 +13,7 @@ export const metadata: Metadata = {
     "ZONE 27 不覆蓋每一場可下注的比賽,只覆蓋引擎可以誠實計算的比賽。完整公開:作用中的聯盟、追蹤但未啟用的賽事、創始會員可投票請求的賽事、我們永遠不會覆蓋的(博彩平台清單)。",
 };
 
-// ── ZONE 27 · /coverage — Coverage Manifesto ───────────
-// The fourth trust-artifact page (joining /audit /methodology /privacy).
-//
-// /audit       = what the model is
-// /methodology = how the model works
-// /privacy     = what we don't collect
-// /coverage    = what we cover, what we don't, and why
-//
-// Six section spine, mirroring /audit's Anthropic-style structure:
-//   01 Coverage Philosophy
-//   02 Active Leagues (engine ready)
-//   03 Tracked, Not Activated (engine available, sample concerns)
-//   04 Requested by Founders (vote-to-activate queue)
-//   05 What We'll Never Cover (brand defense — betting platforms)
-//   06 Data Sources (open ledger of where data comes from)
-// ─────────────────────────────────────────────────────
+// /coverage — Coverage Manifesto · 4th trust-artifact joining /audit + /methodology + /privacy。
 
 const LAST_REVIEWED = "2026-05-21";
 
@@ -178,11 +163,6 @@ export default function CoveragePage() {
               <span className="text-mute">為什麼不覆蓋全部</span>
             </h1>
 
-            {/* Round 12 brand-IP amplification (Agent A #5 · Pinnacle
-                "Winners Welcome" pattern). One-line audience filter
-                crystallizes the 6-section policy below. Pratfall-safe:
-                explicitly repelling娛樂下注者 strengthens hardcore-fan
-                signal (Aronson 1966 / Spence 1973 costly signaling). */}
             <p className="text-bone text-lg sm:text-xl leading-relaxed mb-6 border-l-2 border-gold/60 pl-5 sm:pl-6 max-w-2xl">
               <strong>ZONE 27 不為娛樂下注者優化。</strong>
               <br />
@@ -220,13 +200,7 @@ export default function CoveragePage() {
             </div>
           </header>
 
-          {/* ── 00 NEVER COVER ABOVE-THE-FOLD · Round 38 W-D ─
-              Agent C P4 ship · 玩運彩 escapee 最強 60-second proof-of-
-              difference 從 section 05 ~80% scroll 移到 above-the-fold ·
-              compact NeverCoverChip preview · 完整 5-item NEVER list 仍
-              在 deep section 05。 P3 casual visitor + P2 sabermetrician
-              + P4 escapee 三 persona 同時 helped。 brand IP「品牌定義 not
-              限制」 axiom 物理 visible 在 visitor 進入後第一個 fold。 */}
+          {/* ── 00 NEVER COVER ABOVE-THE-FOLD · brand boundary preview ── */}
           <section className="py-10 border-b border-line/40 section-reveal">
             <p lang="en" className="font-mono text-gold/90 text-[10px] tracking-[0.45em] mb-3">
               00 · BRAND BOUNDARY · WHAT WE&apos;LL NEVER COVER
@@ -292,10 +266,6 @@ export default function CoveragePage() {
             </h2>
             <LeagueTable rows={ACTIVE_LEAGUES} />
 
-            {/* Round 46 W-B · Agent L R44 question canary fire · Tim 直問
-                MLB 是否 auto-fetch · /coverage 應該 honest document MLB
-                vs CPBL hybrid data flow · brand IP「方法公開」 延伸到 data
-                pipeline layer 本身。 */}
             <div className="mt-8 border border-gold/30 bg-slate/30 p-5 sm:p-7">
               <p
                 lang="en"
@@ -315,20 +285,19 @@ export default function CoveragePage() {
                     MLB Stats API(<code className="font-mono text-bone bg-slate/40 px-1.5 py-0.5 rounded-sm text-[10px]">statsapi.mlb.com</code>)
                     · 10-min ISR(Vercel auto-cache)· 0 cost · 0 API key ·
                     全部 ~15 daily games · pitchers · K9 BB9 HR9 ERA · venue ·
-                    time · final scores(R48 W-A linescore hydrate)· 0 founder
-                    intervention。
+                    time · final scores · 0 founder intervention。
                   </p>
                   <p className="text-mute/85 text-sm leading-relaxed">
                     ⚓ <strong className="text-bone">MLB grading discipline:LIVE re-compute · NOT pre-game lock-in</strong>{" "}
                     · 每 10 min revalidate · engine pick = deterministic Log5-
                     style formula from K9/BB9/HR9/ERA · 公開 in /audit S07 ·
                     賽後 verdict ✓ PROVED / ✕ DIVERGED 在 /matches/mlb card
-                    上 display(R48 W-B)· 但{" "}
+                    上 display · 但{" "}
                     <strong className="text-bone">NOT 算進 /track-record</strong> ·
-                    因 brand IP /audit S05 PRE-COMMIT 「pre-game lock-in」 axiom
-                    要求 prediction lock 在 first-pitch time 不可 retroactively
-                    re-compute · MLB grading 是 informational layer · CPBL
-                    grading 是 accountability layer · 兩 layer brand-IP-pure 區分。
+                    因 brand IP「pre-game lock-in」 axiom 要求 prediction lock
+                    在 first-pitch time 不可 retroactively re-compute · MLB
+                    grading 是 informational layer · CPBL grading 是
+                    accountability layer · 兩 layer brand-IP-pure 區分。
                   </p>
                 </div>
                 <div className="border-l-2 border-line/60 pl-4">
@@ -342,7 +311,7 @@ export default function CoveragePage() {
                   <ul className="space-y-1.5 text-mute/85 pl-4 leading-relaxed">
                     <li>▸ <code className="font-mono text-bone bg-slate/40 px-1 rounded-sm text-[10px]">npm run fetch-cpbl</code> · pitcher K9/BB9/HR9 leaderboard auto-parse</li>
                     <li>▸ <code className="font-mono text-bone bg-slate/40 px-1 rounded-sm text-[10px]">npm run fetch-cpbl-advanced</code> · Trackman radar 進階 stats(野球革命)</li>
-                    <li>▸ <code className="font-mono text-bone bg-slate/40 px-1 rounded-sm text-[10px]">npm run fetch-cpbl-schedule</code> · 今日賽程 metadata(R46 W-A NEW)</li>
+                    <li>▸ <code className="font-mono text-bone bg-slate/40 px-1 rounded-sm text-[10px]">npm run fetch-cpbl-schedule</code> · 今日賽程 metadata</li>
                   </ul>
                   <p className="text-mute/85 leading-relaxed mt-2">
                     剩 1 manual step:<strong className="text-bone">賽後 box score finalResult</strong> ·
@@ -356,8 +325,8 @@ export default function CoveragePage() {
                 ⚓ 為什麼 hybrid · 不全 auto:CPBL 沒 official API(僅 server-
                 rendered HTML)· 賽程 + pitcher stats 可 cheerio parse · box
                 score finalResult 賽後 timing-critical · Tim 親手 ingest 是
-                brand IP physical signature(同 /audit S05 PRE-COMMIT pattern)·
-                不可 silently 自動化(若 auto · 可 backdate · 失 trust signal)。
+                brand IP physical signature · 不可 silently 自動化(若 auto ·
+                可 backdate · 失 trust signal)。
               </p>
             </div>
           </section>
@@ -560,7 +529,6 @@ export default function CoveragePage() {
   );
 }
 
-// ── Sub-component: LeagueTable ─────────────────────────
 function LeagueTable({ rows }: { rows: LeagueRow[] }) {
   return (
     <div className="border border-line/40 divide-y divide-line/30">
@@ -590,7 +558,6 @@ function LeagueTable({ rows }: { rows: LeagueRow[] }) {
   );
 }
 
-// ── Sub-component: SourceRow ───────────────────────────
 function SourceRow({
   league,
   source,
