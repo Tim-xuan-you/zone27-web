@@ -43,10 +43,13 @@ function renderLetterBody(body: string): React.ReactElement[] {
     .map((paragraph) => paragraph.trim())
     .filter((paragraph) => paragraph.length > 0)
     .map((paragraph, idx) => (
+      // .zh-body applies Typotheque CJK canonical(17px / 1.78 leading / 38ch
+      // max width / hanging-punctuation)· per R96 W1 utility · Chinese
+      // long-form prose readability。
       <p
         key={idx}
-        className="text-bone text-base sm:text-lg leading-relaxed mb-5 font-light"
-        style={{ fontFamily: "Georgia, serif", textWrap: "pretty" }}
+        className="zh-body text-bone mb-5 font-light"
+        style={{ fontFamily: "Georgia, serif" }}
       >
         {paragraph}
       </p>

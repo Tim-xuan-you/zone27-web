@@ -908,23 +908,42 @@ export default async function FoundersPage({
         </p>
       </section>
 
-      {/* ── WHY THIS PRICE ─────────────────── */}
+      {/* ── WHY THIS PRICE · collapsed by default · /pricing/why canonical ── */}
       <section
         aria-labelledby="why-price-heading"
         className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-24 border-t border-line/40 pt-20"
       >
-        <p className="font-mono text-gold text-[10px] tracking-[0.4em] mb-6 text-center">
-          / WHY NT$ 2,700
-        </p>
-        <h2
-          id="why-price-heading"
-          className="text-3xl sm:text-4xl text-bone font-light tracking-tight text-center mb-4"
-        >
-          這個數字不是隨便定的。
-        </h2>
-        <p className="text-mute text-center text-sm mb-12 max-w-xl mx-auto leading-relaxed">
-          也不是「先把價格設高、再打七折」的常見手法。
-        </p>
+        <details className="group">
+          <summary className="cursor-pointer list-none mb-3 hover:opacity-90 transition-opacity">
+            <p className="font-mono text-gold text-[10px] tracking-[0.4em] mb-3 text-center">
+              / WHY NT$ 2,700
+            </p>
+            <h2
+              id="why-price-heading"
+              className="text-3xl sm:text-4xl text-bone font-light tracking-tight text-center mb-2"
+            >
+              這個數字不是隨便定的{" "}
+              <span
+                className="font-mono text-gold/60 text-xl group-open:rotate-45 transition-transform inline-block ml-2"
+                aria-hidden="true"
+              >
+                +
+              </span>
+            </h2>
+            <p className="text-mute text-center text-sm max-w-xl mx-auto leading-relaxed">
+              點開看完整推導
+            </p>
+          </summary>
+          <p className="text-mute text-center text-sm mb-10 max-w-xl mx-auto leading-relaxed">
+            或直接看{" "}
+            <Link
+              href="/pricing/why"
+              className="text-gold underline-offset-4 hover:underline"
+            >
+              /pricing/why
+            </Link>{" "}
+            canonical 詳細頁。 也不是「先把價格設高、再打七折」的常見手法。
+          </p>
 
         <div className="bg-slate/60 border border-line/70 p-6 sm:p-10 font-mono text-sm">
           <dl className="space-y-4">
@@ -978,6 +997,7 @@ export default async function FoundersPage({
           <br />
           不是優惠期、不是早鳥折扣 — 是這 270 個位置的真實成本。
         </p>
+        </details>
       </section>
 
       {/* R63 W-B · Agent 5 SHIP #5 · Pratfall「what your dollar didn't buy」 ·
@@ -1054,9 +1074,10 @@ export default async function FoundersPage({
         </h2>
 
         <div className="space-y-3">
-          {INLINE_FAQ.map((item, idx) => (
+          {/* Top 3 questions visible by default — vaporware/payment/scope。 */}
+          {INLINE_FAQ.slice(0, 3).map((item, idx) => (
             <details
-              key={idx}
+              key={`top-${idx}`}
               className="group bg-slate/40 border border-line/60 open:border-gold/40 transition-colors"
             >
               <summary className="cursor-pointer list-none px-6 py-5 flex items-start justify-between gap-4 hover:bg-slate/60 transition-colors">
@@ -1076,6 +1097,45 @@ export default async function FoundersPage({
             </details>
           ))}
         </div>
+
+        {/* Remaining 7 questions · collapsed-group under「更多 N 個問題」 ·
+            3-viewport rule mobile compliance · canonical 完整 list still in /faq。 */}
+        <details className="mt-4 group">
+          <summary className="cursor-pointer list-none px-6 py-4 flex items-center justify-between gap-4 border border-line/40 bg-slate/20 hover:bg-slate/40 transition-colors">
+            <span className="font-mono text-mute text-[11px] tracking-[0.3em] group-open:text-gold transition-colors">
+              + 更多 {INLINE_FAQ.length - 3} 個問題(退款 · 銀行轉帳 · 資料 · 贈送 · 等)
+            </span>
+            <span
+              className="font-mono text-gold/60 text-xs tracking-[0.2em] group-open:rotate-45 transition-transform shrink-0"
+              aria-hidden="true"
+            >
+              +
+            </span>
+          </summary>
+          <div className="mt-3 space-y-3">
+            {INLINE_FAQ.slice(3).map((item, idx) => (
+              <details
+                key={`more-${idx}`}
+                className="group/inner bg-slate/40 border border-line/60 open:border-gold/40 transition-colors"
+              >
+                <summary className="cursor-pointer list-none px-6 py-5 flex items-start justify-between gap-4 hover:bg-slate/60 transition-colors">
+                  <span className="text-bone text-base leading-snug flex-1">
+                    {item.q}
+                  </span>
+                  <span
+                    className="font-mono text-gold/60 text-xs tracking-[0.2em] group-open/inner:rotate-45 transition-transform shrink-0 mt-1"
+                    aria-hidden="true"
+                  >
+                    +
+                  </span>
+                </summary>
+                <div className="px-6 pb-6 pt-1 text-mute text-sm leading-relaxed">
+                  {item.a}
+                </div>
+              </details>
+            ))}
+          </div>
+        </details>
 
         <p className="mt-10 text-center font-mono text-mute text-[10px] tracking-[0.3em]">
           完整詳細問答在{" "}
