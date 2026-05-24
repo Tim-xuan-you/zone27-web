@@ -84,7 +84,7 @@ const FOOTER_GROUPS: FooterGroup[] = [
       // 早報 > GitHub > RSS。
       { label: "今日 CPBL 賽事", href: "/matches" },
       { label: "MLB · 即時資料", href: "/matches/mlb" },
-      { label: "蒙地卡羅實驗室", href: "/lab" },
+      { label: "模擬實驗室 · 1 萬次跑", href: "/lab" },
       { label: "每日早報", href: "/signal-board" },
       // Round 51 W-E · Atom RSS /feed.xml ship · 給 hardcore fan RSS reader
       // audience subscribe · 同 Stratechery / FanGraphs / Baseball Savant
@@ -98,25 +98,24 @@ const FOOTER_GROUPS: FooterGroup[] = [
     ],
   },
   {
+    // R88 simplification · DOCS column 10 → 6 essentials cut per Tim
+    // 「不要那麼雜」 mandate · 4 secondary entries移除 from primary footer
+    // surface · 仍可 access via Cmd-K palette + Transparency aggregator
+    // cross-links · brand IP 守住 per pratfall axiom(pages exist · 只
+    // 不 surface in primary footer)。 cut:
+    //   - 引擎 diff · v0.2 → v0.3(deep technical · /methodology cross-link)
+    //   - 覆蓋範圍(/coverage · /audit cross-link)
+    //   - 引擎自評(/calibration · /track-record cross-link)
+    //   - 27 種進階指標(/glossary · /learn cross-link)
     label: "信任文件",
     enLabel: "DOCS",
     links: [
-      // Round 51 W-D · /transparency NEW · audit aggregator · Anthropic
-      // pattern · 整套 LIMITS / NEVER / DIVERGED / commitments / data
-      // sources / audit trail 集中 surface · 升 DOCS column 第 1 位置 ·
-      // 訪客 F-pattern 第一眼看到。
       { label: "Transparency · 完整 audit", href: "/transparency" },
       { label: "模型報告", href: "/audit" },
       { label: "技術白皮書", href: "/methodology" },
-      // Round 50 W-A · /methodology/diff NEW · v0.2 → v0.3 entire delta ·
-      // brand IP triple-fire · 加進 DOCS group surface 給 footer scroll。
-      { label: "引擎 diff · v0.2 → v0.3", href: "/methodology/diff" },
-      { label: "覆蓋範圍", href: "/coverage" },
       { label: "公開戰績", href: "/track-record" },
-      { label: "引擎自評", href: "/calibration" },
       { label: "Ethics Policy", href: "/ethics" },
       { label: "Steelman", href: "/steelman" },
-      { label: "27 種進階指標", href: "/glossary" },
     ],
   },
   {
