@@ -5,6 +5,7 @@ import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import RelatedReading from "@/components/RelatedReading";
 import FounderSignOff from "@/components/FounderSignOff";
+import ArticleMeta from "@/components/ArticleMeta";
 import StatPercentileBar from "@/components/StatPercentileBar";
 import {
   CPBL_TEAMS,
@@ -247,6 +248,9 @@ export default async function TeamPage({ params }: Props) {
               ? ` · Trackman percentile aggregate from ${trackmanAggregate.count} tracked pitchers`
               : " · Trackman advanced metrics 暫 0 tracked in 此 team(per Disclosure axiom 不藏)"}
           </p>
+          <div className="mt-5">
+            <ArticleMeta readingMin={3} />
+          </div>
         </section>
 
         <div className="mx-auto w-32 gold-line mb-10" />

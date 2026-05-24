@@ -5,6 +5,7 @@ import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import RelatedReading from "@/components/RelatedReading";
 import FounderSignOff from "@/components/FounderSignOff";
+import ArticleMeta from "@/components/ArticleMeta";
 import StatPercentileBar from "@/components/StatPercentileBar";
 import {
   cpblPitchers,
@@ -130,6 +131,9 @@ export default async function PitcherProfilePage({ params }: Props) {
           <p className="mt-3 font-mono text-mute/70 text-[10px] tracking-[0.25em] leading-relaxed">
             ⚓ {sampleLabel}
           </p>
+          <div className="mt-5">
+            <ArticleMeta readingMin={2} />
+          </div>
         </section>
 
         <div className="mx-auto w-32 gold-line mb-10" />

@@ -6,6 +6,7 @@ import CopyLinkButton from "@/components/CopyLinkButton";
 import RelatedReading from "@/components/RelatedReading";
 import FounderSignOff from "@/components/FounderSignOff";
 import StatTerm from "@/components/StatTerm";
+import ArticleMeta from "@/components/ArticleMeta";
 import ReproducibilityReceipt from "@/components/ReproducibilityReceipt";
 import LocalStorageReceipt from "@/components/LocalStorageReceipt";
 import { matches, getFinalizedMatches } from "@/lib/matches";
@@ -105,6 +106,12 @@ export default function AuditPage() {
               <MetaPair label="ENGINE" value={ENGINE_VERSION} />
               <MetaPair label="SAMPLE SIZE" value={sampleSize} />
             </dl>
+            <div className="mt-6">
+              <ArticleMeta
+                readingMin={8}
+                sample={{ current: finalizedCount, threshold: 30 }}
+              />
+            </div>
           </header>
 
           {/* Hindenburg-style top-of-doc position disclosure · mirror to /methodology。 */}

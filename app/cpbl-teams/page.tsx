@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import FounderSignOff from "@/components/FounderSignOff";
+import ArticleMeta from "@/components/ArticleMeta";
 import { CPBL_TEAMS } from "@/lib/teams";
 import {
   cpblPitchers,
@@ -80,6 +81,9 @@ export default function CpblTeamsIndexPage() {
             隊內投手 percentile visualization。 球迷 tribal home base · 統一獅
             fan / 中信兄弟 fan / etc 各自 dedicated page。
           </p>
+          <div className="mt-5">
+            <ArticleMeta readingMin={1} />
+          </div>
         </section>
 
         <div className="mx-auto w-32 gold-line mb-10" />

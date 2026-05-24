@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import FounderSignOff from "@/components/FounderSignOff";
+import ArticleMeta from "@/components/ArticleMeta";
 
 export const metadata: Metadata = {
   title: "Integrity · 22 永久不會變的 · Owner's Manual at Year 0",
@@ -203,6 +204,9 @@ export default function IntegrityPage() {
             years 2-5 brand consistency 的 missing organ · 不只 launch
             week 用。
           </p>
+          <div className="mt-5">
+            <ArticleMeta readingMin={5} />
+          </div>
         </section>
 
         <div className="mx-auto w-32 gold-line mb-12" />

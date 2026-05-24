@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
+import ArticleMeta from "@/components/ArticleMeta";
 
 export const metadata: Metadata = {
   title: "Heritage · Pre-Cast Inheritance Artifact",
@@ -63,6 +64,9 @@ export default function HeritagePage() {
           >
             ALTERCASTING WITHOUT GATEKEEPING · APPLIES TO ALL VISITORS
           </p>
+          <div className="mt-6 flex justify-center">
+            <ArticleMeta readingMin={3} />
+          </div>
         </section>
 
         <div className="mx-auto w-32 gold-line mb-12" />
