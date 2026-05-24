@@ -308,7 +308,7 @@ export default function Home() {
           <span aria-hidden="true" className="text-mute/50 mx-2">·</span>
           <span className="text-bone">不追蹤您</span>
           <span aria-hidden="true" className="text-mute/50 mx-2">·</span>
-          <span className="text-gold">不等 Q3</span>
+          <span className="text-gold">不自動續扣</span>
         </p>
         <p className="mt-4 font-mono text-[10px] sm:text-[11px] tracking-[0.3em]">
           <Link

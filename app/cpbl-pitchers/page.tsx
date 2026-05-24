@@ -98,8 +98,17 @@ const STAT_META: Record<
 
 const STAT_ORDER: StatKey[] = ["k9", "bb9", "hr9", "whip", "era", "ip"];
 
+// Derive unique teams from data · sorted alphabetically for stable URL state。
+const TEAMS: string[] = Array.from(
+  new Set(cpblPitchers.map((p) => p.team))
+).sort();
+
 function isStatKey(v: unknown): v is StatKey {
   return typeof v === "string" && (STAT_ORDER as string[]).includes(v);
+}
+
+function isTeam(v: unknown): v is string {
+  return typeof v === "string" && TEAMS.includes(v);
 }
 
 function sortPitchers(
@@ -117,12 +126,28 @@ function sortPitchers(
 export default async function CpblPitchersPage({
   searchParams,
 }: {
-  searchParams: Promise<{ stat?: string }>;
+  searchParams: Promise<{ stat?: string; team?: string }>;
 }) {
   const params = await searchParams;
   const activeStat: StatKey = isStatKey(params.stat) ? params.stat : "k9";
-  const sorted = sortPitchers(cpblPitchers, activeStat);
+  const activeTeam: string | null = isTeam(params.team) ? params.team : null;
+  const filtered = activeTeam
+    ? cpblPitchers.filter((p) => p.team === activeTeam)
+    : cpblPitchers;
+  const sorted = sortPitchers(filtered, activeStat);
   const meta = STAT_META[activeStat];
+
+  // Helper · keep team selection in URL when stat tab clicked + vice versa。
+  const buildHref = (overrides: { stat?: StatKey; team?: string | null }) => {
+    const sp = new URLSearchParams();
+    const nextStat = overrides.stat ?? activeStat;
+    const nextTeam =
+      "team" in overrides ? overrides.team : activeTeam;
+    if (nextStat !== "k9") sp.set("stat", nextStat);
+    if (nextTeam) sp.set("team", nextTeam);
+    const q = sp.toString();
+    return q ? `/cpbl-pitchers?${q}` : "/cpbl-pitchers";
+  };
 
   return (
     <div className="flex flex-col flex-1 min-h-screen">
@@ -141,7 +166,17 @@ export default async function CpblPitchersPage({
         </section>
 
         {/* ── HERO ────────────────────────────────── */}
-        <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pt-10 pb-8 text-center">
+        <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pt-10 pb-8 text-center relative">
+          {/* The Pudding / Defector issue-numbering pattern · permanent
+              cite-able snapshot stamp · top-right Geist Mono · contrasts
+              with LINE 老師 who never timestamp。 */}
+          <p
+            lang="en"
+            className="absolute top-10 right-6 sm:right-10 font-mono text-mute/60 text-[9px] tracking-[0.3em] tabular hidden sm:block"
+          >
+            DATA · {CPBL_PITCHER_FETCH_DATE} TPE · N={cpblPitchers.length}
+            {activeTeam ? ` · 篩 ${sorted.length}` : ""}
+          </p>
           <p className="font-mono text-gold text-[10px] tracking-[0.45em] mb-6">
             CPBL PITCHER LEADERBOARD · ZONE 27
           </p>
@@ -170,6 +205,53 @@ export default async function CpblPitchersPage({
 
         <div className="mx-auto w-32 gold-line mb-10" />
 
+        {/* ── TEAM FILTER CHIPS ────────────────────── */}
+        <section
+          aria-label="球團篩選"
+          className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-3"
+        >
+          <p
+            lang="en"
+            className="font-mono text-mute/70 text-[10px] tracking-[0.3em] mb-3"
+          >
+            ↘ FILTER 球團(球迷部落感)· URL 保留 stat + team
+          </p>
+          <div className="flex flex-wrap gap-2 sm:gap-3">
+            <Link
+              href={buildHref({ team: null })}
+              scroll={false}
+              prefetch
+              className={`px-3 py-1.5 min-h-[36px] inline-flex items-center border font-mono text-[11px] tracking-[0.15em] transition-colors ${
+                activeTeam === null
+                  ? "border-gold bg-gold/10 text-gold"
+                  : "border-line/50 bg-slate/20 text-mute hover:border-gold/60 hover:text-gold"
+              }`}
+              aria-pressed={activeTeam === null}
+            >
+              全部
+            </Link>
+            {TEAMS.map((team) => {
+              const isActive = team === activeTeam;
+              return (
+                <Link
+                  key={team}
+                  href={buildHref({ team })}
+                  scroll={false}
+                  prefetch
+                  className={`px-3 py-1.5 min-h-[36px] inline-flex items-center border font-mono text-[11px] tracking-[0.15em] transition-colors ${
+                    isActive
+                      ? "border-gold bg-gold/10 text-gold"
+                      : "border-line/50 bg-slate/20 text-mute hover:border-gold/60 hover:text-gold"
+                  }`}
+                  aria-pressed={isActive}
+                >
+                  {team}
+                </Link>
+              );
+            })}
+          </div>
+        </section>
+
         {/* ── STAT TABS ────────────────────────────── */}
         <section
           aria-label="排序指標切換"
@@ -188,7 +270,7 @@ export default async function CpblPitchersPage({
               return (
                 <Link
                   key={key}
-                  href={`/cpbl-pitchers?stat=${key}`}
+                  href={buildHref({ stat: key })}
                   scroll={false}
                   prefetch
                   className={`px-4 py-2 min-h-[44px] inline-flex items-baseline gap-2 border font-mono text-xs tracking-[0.2em] transition-colors ${
@@ -238,29 +320,51 @@ export default async function CpblPitchersPage({
           </div>
         </section>
 
-        {/* ── LEADERBOARD TABLE ────────────────────── */}
+        {/* ── LEADERBOARD TABLE · W3C APG sortable-table pattern ── */}
         <section
-          aria-label="投手排行表"
+          aria-label={`投手排行表 · 排序依 ${meta.label} · ${meta.higherIsBetter ? "高至低" : "低至高"}`}
           className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-12"
         >
+          {/* W3C APG aria-live announcement when sort changes(VoiceOver +
+              JAWS + NVDA announces single-source sentence on tab change)。 */}
+          <div role="status" aria-live="polite" className="sr-only">
+            排序依 {meta.label}({meta.en})·
+            {meta.higherIsBetter ? "由高至低" : "由低至高"}· 共 {sorted.length} 位投手
+          </div>
           <div className="border border-line/60 bg-slate/20 overflow-x-auto">
             <table className="w-full font-mono text-xs sm:text-sm tabular">
               <thead>
                 <tr className="border-b border-line/60 bg-slate/50">
-                  <th className="text-left text-gold/90 tracking-[0.2em] px-3 py-3 text-[10px] sm:text-xs sticky left-0 bg-slate/50">
+                  <th
+                    scope="col"
+                    className="text-left text-gold/90 tracking-[0.2em] px-3 py-3 text-[10px] sm:text-xs sticky left-0 bg-slate/50"
+                  >
                     #
                   </th>
-                  <th className="text-left text-gold/90 tracking-[0.2em] px-3 py-3 text-[10px] sm:text-xs">
+                  <th
+                    scope="col"
+                    className="text-left text-gold/90 tracking-[0.2em] px-3 py-3 text-[10px] sm:text-xs"
+                  >
                     投手
                   </th>
-                  <th className="text-left text-gold/90 tracking-[0.2em] px-3 py-3 text-[10px] sm:text-xs hidden sm:table-cell">
+                  <th
+                    scope="col"
+                    className="text-left text-gold/90 tracking-[0.2em] px-3 py-3 text-[10px] sm:text-xs hidden sm:table-cell"
+                  >
                     球團
                   </th>
                   {STAT_ORDER.map((key) => {
                     const isActive = key === activeStat;
+                    const sortAttr = isActive
+                      ? STAT_META[key].higherIsBetter
+                        ? "descending"
+                        : "ascending"
+                      : "none";
                     return (
                       <th
                         key={key}
+                        scope="col"
+                        aria-sort={sortAttr}
                         className={`text-right tracking-[0.2em] px-3 py-3 text-[10px] sm:text-xs ${
                           isActive
                             ? "text-gold bg-gold/10"
@@ -400,9 +504,9 @@ export default async function CpblPitchersPage({
           </p>
           <p>
             這份頁面永遠 FREE · 不 paywall · 不 email gate · per /integrity
-            「engine FREE forever」 binding。 BLACK CARD 將來會加 engine
-            probability column(每投手對每打者的勝率分布)· 但 base 排行
-            永遠開放。
+            「engine FREE forever」 binding。 BLACK CARD 加深的方向 = per-pitcher
+            × per-batter probability split(engine 跑出來公開 · 同 base 排行
+            一樣全 visible)· 沒有「上面 free 下面 paywall」 dark pattern。
           </p>
         </FounderSignOff>
 

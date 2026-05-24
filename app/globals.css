@@ -103,6 +103,19 @@ p, li {
   text-spacing-trim: trim-start;
 }
 
+/* CJK body leading rule · Typotheque + W3C CLREQ canonical: CJK glyphs are
+   denser than Latin · leading 1.75-1.8 vs Latin 1.5 · max line length 38ch.
+   Apply via `.zh-body` to long-form Chinese prose blocks(/audit · /methodology
+   · /year-zero · /letter · /heritage)。 Doesn't override Tailwind leading-N
+   utilities · just sets sensible body-text default for unstyled <p>。 */
+.zh-body {
+  font-size: 1.0625rem; /* 17px */
+  line-height: 1.78;
+  max-width: 38ch;
+  text-wrap: pretty;
+  hanging-punctuation: first allow-end;
+}
+
 /* Safari-only but harmless elsewhere — pulls opening quote outside
    the text block. Edward-Tufte-grade typography. */
 blockquote {
