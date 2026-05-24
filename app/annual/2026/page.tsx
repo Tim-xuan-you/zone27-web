@@ -226,8 +226,9 @@ export default function AnnualReport2026Page() {
             />
           </div>
           <p className="mt-5 font-mono text-loss/80 text-[10px] tracking-[0.3em] leading-relaxed">
-            ⚠ PRE-LAUNCH · 所有付費相關 metrics = 0。 Payment infrastructure
-            (TapPay / 綠界個人版)未拍板 · brand 域名未買 · Q3 2026 ship。
+            ⚠ PRE-LAUNCH · Founders 27 付費相關 metrics = 0。 BLACK CARD LIVE
+            manual ECPay(per R81 pivot)· Founders 27 payment infrastructure
+            (manual bank transfer)· brand 域名未買 · milestone-triggered ship。
           </p>
 
           {/* Round 44 W-B · ReproducibilityReceipt drop-in · /annual/2026

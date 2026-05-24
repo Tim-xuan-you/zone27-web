@@ -49,7 +49,7 @@ export default function EngineFreeBrandBlock() {
         >
           Founders 27 終身名冊
         </Link>
-        {" "}與未來 BLACK CARD 月費社群運作 —— 工具給每個人,身分留給入會的人。
+        {" "}與 BLACK CARD CPBL 季票社群運作 —— 工具給每個人,身分留給入會的人。
       </p>
     </div>
   );

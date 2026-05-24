@@ -353,7 +353,7 @@ export default function BlackCardPage() {
             lang="en"
             className="font-mono text-gold text-[10px] tracking-[0.45em] mb-6"
           >
-            / 訂閱 BLACK CARD · email Tim 啟動月卡
+            / 訂閱 BLACK CARD · email Tim 啟動季票
           </p>
           <div className="bg-slate/40 border border-gold/40 p-6 sm:p-8 glow-soft">
             <p

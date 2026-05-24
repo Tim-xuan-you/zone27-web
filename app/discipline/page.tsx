@@ -236,7 +236,7 @@ export default function DisciplinePage() {
             <List>
               <Item label="會員制 > 商品收費">
                 引擎 markup = 0%(永遠免費)·
-                BLACK CARD 月費 + Founders 27 一次性 = membership revenue ·
+                BLACK CARD CPBL 季票 + Founders 27 一次性 = membership revenue ·
                 跟 Costco 一樣 — 「賣會員身分,不賣商品本身」。
               </Item>
               <Item label="自設創作者抽成上限">

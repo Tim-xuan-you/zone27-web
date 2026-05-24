@@ -280,9 +280,9 @@ export default function FromOneCurrentFounderPage() {
               </li>
             </ol>
             <p className="font-mono text-mute/70 text-[10px] tracking-[0.25em] mt-5 leading-relaxed">
-              ⚓ Q3 2026 application channel opens(per payment infra
-              milestone)· 首位 Founder onboard 約 Q3 末-Q4 · 第一封 letter
-              約 Q1 2027 · 此 ETA 不綁日期 · milestone-triggered。
+              ⚓ Application channel opens · payment infra ready 後 · 首位
+              Founder onboard 約 6 個月內 · 第一封 letter 約 12 個月後 · ETA
+              milestone-triggered · 不綁日期。
             </p>
           </div>
         </section>

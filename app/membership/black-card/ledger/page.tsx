@@ -20,8 +20,8 @@ export const metadata: Metadata = {
 // transparency 三 pattern 合一 · 同 /founders/ledger structure transplant
 // 到 monthly BLACK CARD tier。
 //
-// Pre-launch state(2026-05-22):
-//   - 0 BLACK CARD subscribers(payment infra Q3 2026 啟用)
+// Pre-launch state(post-R81 pivot):
+//   - 0 BLACK CARD subscribers · CPBL Season Pass LIVE manual ECPay
 //   - 「第 1 位的 handle 會永久顯示在這裡」 inverse-FOMO
 //   - empty state IS the point per Aronson 1966 Pratfall
 //

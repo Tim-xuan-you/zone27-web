@@ -103,9 +103,9 @@ export default function PaidTierLockedGrid() {
             <span
               lang="en"
               className="font-mono text-[9px] tracking-[0.3em] px-1.5 py-0.5 border border-gold/60 text-gold shimmer"
-              title="LIVE NOW · 月卡手動續訂模式 · 個人方案綠界 ECPay · 不等 Q3"
+              title="LIVE NOW · 季票手動續訂模式 · 個人方案綠界 ECPay · 0 auto-renewal per /integrity rule #13"
             >
-              ✓ LIVE · 月卡手動
+              ✓ LIVE · 季票手動
             </span>
           </div>
           <p className="font-mono text-gold tabular text-lg sm:text-xl tracking-tight">
