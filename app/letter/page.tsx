@@ -31,67 +31,12 @@ export const metadata: Metadata = {
   },
 };
 
-// ── ZONE 27 · /letter · The Singular Voice Artifact ────
-// R77 W-D · Agent A R77 SHIP B ★★★★★ · 「biggest invisible gap」 third-
-// pass honest answer · DHH HEY World + Berkshire annual letter + Bret
-// Victor replace-in-place + Maciej Cegłowski Pinboard blog + Substack-pre-
-// Substack Ben Thompson(2013-2014)pattern。
-//
-// Per Agent A R77 third-pass honest answer:
-//   - Tim has 49 routes · 6 canonical ledgers · 0 singular voice artifact
-//   - Every pre-launch brand that survived had one(Buffett letter · DHH
-//     HEY World · Stratechery About · Cegłowski Pinboard · Bret Victor)
-//   - The brand-defining artifact is never /about · 是 singular letter
-//     that gets edited and re-edited until it BECOMES the brand voice
-//
-// This page architecture(per Agent A R77 SHIP B spec):
-//   - Single static page · reads lib/letter-content.ts canonical source
-//   - LETTER_BODY rendered as serif prose · max-w-prose · plain text feel
-//   - LAST_EDITED_AT stamp at top
-//   - EDIT_HISTORY table at bottom · transparency-friendly cadence audit
-//   - NO comment thread · NO share button · NO related-reading rail · NO
-//     email subscribe · NO push · NO「next letter」 navigation
-//   - Reader pulls; nothing pushes
-//   - LineKeepHint mobile hint at bottom(per R75 W-B + R77 W-B mobile
-//     long-press → LINE Keep grammar)
-//
-// Brand IP fit:
-//   - per [[zone27-disclosure-philosophy]] · singular voice IS disclosure
-//     axis 物理 codify
-//   - per [[feedback-zone27-pratfall-brand-ip]] · vulnerable + brief +
-//     edited-in-place IS Pratfall · 不 craft「perfect launch piece」
-//   - per [[feedback-zone27-audience-fans-not-engineers]] · Tim 親手 voice
-//     speaks fan-grammar instantly
-//   - per /audit S05 PRE-COMMIT · EDIT_HISTORY append-only · same Costly
-//     Signaling discipline as 7-ledger family canonical pattern
-//
-// 不做 anti-pattern(per Agent A R77 SHIP B spec + R75 W-B
-// UnscheduledLetterChip framing):
-//   ✕ NO comment thread / discussion(11-NEVER #1 user-to-user social)
-//   ✕ NO share buttons(reader 自己 long-press / copy URL)
-//   ✕ NO related-reading rail(letter IS the artifact · 不 cross-link)
-//   ✕ NO email subscribe / newsletter / RSS push(per /transparency
-//     #no-push-manifest R73 W-D · per UnscheduledLetterChip R75 W-B
-//     「您 OWN arrival」 axis)
-//   ✕ NO「join Substack」 / 「subscribe to receive next letter」 CTA
-//   ✕ NO「Print this letter」 PDF download(letter IS the URL artifact)
-//
-// Inspiration sources:
-//   - DHH world.hey.com/dhh(replacing-in-place letter pattern)
-//   - Berkshire Hathaway annual letter(Buffett 60-yr cadence)
-//   - Stratechery About page(Ben Thompson singular voice)
-//   - Maciej Cegłowski Pinboard blog(idlewords.com · 17 yr durable)
-//   - Bret Victor worrydream.com/about(non-incremental publishing)
-//
-// LineKeepHint reused from R77 W-B · mobile long-press → LINE Keep grammar
-// · 不需加好友 · session-only dismiss(NOT localStorage · per 11-key cap)。
-// ─────────────────────────────────────────────────────
+// /letter · DHH HEY World + Berkshire annual letter + Bret Victor replace-in-
+// place + Pinboard blog pattern · singular voice artifact · reader pulls ·
+// nothing pushes · EDIT_HISTORY append-only。
 
-export const revalidate = 86400; // daily revalidate(content freshness)
+export const revalidate = 86400; // daily revalidate
 
-// Render LETTER_BODY paragraphs · split by double newlines · brand-pure
-// plain-text rendering · NO markdown library dependency · 0 deps · serif
-// prose for letter-letter feel(Berkshire + Patek tagline aesthetic)。
 function renderLetterBody(body: string): React.ReactElement[] {
   return body
     .split("\n\n")
@@ -110,8 +55,6 @@ function renderLetterBody(body: string): React.ReactElement[] {
 
 export default function LetterPage() {
   const body = renderLetterBody(LETTER_BODY);
-  // Reverse for newest-first display in EDIT_HISTORY · same canonical
-  // pattern as /engine-log render layer(R76 W-C)· lib stays ASCENDING。
   const editsNewestFirst = [...EDIT_HISTORY].reverse();
 
   return (
@@ -176,11 +119,9 @@ export default function LetterPage() {
               >
                 /changelog
               </Link>{" "}
-              公告 · same Costly Signaling discipline as ENGINE_OPS_LOG R76
-              W-C + ENGINE_DIFF_BEACONS R71 W-C canonical 7-ledger family
-              pattern。 LETTER_BODY 是 replace-in-place(this IS the
-              design)· 但 EDIT_HISTORY 不可 retroactively 修改 · reader
-              audits the edit cadence。
+              公告。 LETTER_BODY 是 replace-in-place(this IS the design)·
+              但 EDIT_HISTORY 不可 retroactively 修改 · reader audits the
+              edit cadence。
             </p>
           </section>
 
@@ -223,7 +164,7 @@ export default function LetterPage() {
                   >
                     NO-PUSH MANIFEST
                   </Link>{" "}
-                  R73 W-D · per UnscheduledLetterChip R75 W-B「您 OWN arrival」 axis
+                  · 您 OWN arrival
                 </span>
               </li>
               <li className="flex gap-3 items-baseline">

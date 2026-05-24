@@ -26,71 +26,15 @@ export const metadata: Metadata = {
   },
 };
 
-// ── ZONE 27 · /integrity · Owner's Manual at Year 0 ────
-// R78 W-F-3 · Agent A R78「fourth-pass biggest gap」 honest answer ·
-// Berkshire Hathaway 1996 Owner's Manual model(Buffett published one page
-// listing「what Berkshire will and will NOT do」 · never changed it ·
-// 30 yrs unbroken · public bond not implicit)applied to ZONE 27 at Year 0
-// pre-launch · single canonical proof page consolidating:
-//   - 13 brand-IP redlines「永遠不做」(from /transparency Section 02 +
-//     /audit Section 02 + canonical CLAUDE.md memory · R80 加 #12 CPBL-only-
-//     forever scope binding · R81 加 #13 永遠不 subscription auto-renewal
-//     binding · 同 Defector 85% explicit-renewal + Pinboard 一次性 pattern)
-//   - 9 binding ethics commitments(from /ethics 9 commitments · R80 加 #09
-//     mandatory-ledger-discipline binding · scope + discipline + renewal
-//     三軸配對 close brand IP loop)
-//   = 22 永久 binding rules · dated · Tim signature · frozen
-//
-// The cognitive frame this closes(per Agent A R78 fourth-pass spec):
-//   - ZONE 27 currently has 13 redlines + 9 ethics scattered across
-//     /audit /methodology /receipts /roadmap /transparency /ethics
-//   - Without ONE canonical proof page · every redline is implicit
-//   - With this page · every redline is a PUBLIC BOND
-//   - Same psychology as Berkshire's 1996「Owner's Manual」 Buffett
-//     published and never changed · 30+ years unbroken
-//   - The moment fans suspect ZONE 27 might「graduate into」 GA / analytics
-//     / social-account / paid-engine after launch · entire Pratfall +
-//     costly-signal + Defector-Year-Zero brand collapses
-//   - This page is the work that makes years 2-5 of ZONE 27 brand-
-//     consistent · not just launch week
-//
-// Brand IP fit:
-//   - per [[zone27-disclosure-philosophy]] · canonical proof page IS
-//     disclosure axis strongest application · scattered → consolidated
-//   - per [[feedback-zone27-pratfall-brand-ip]] · publish 22 things we
-//     永遠不會 ship IS Costly Signaling 100× per Spence 1973
-//   - per /audit S05 PRE-COMMIT clause · 修改任一 rule 需 30 天前
-//     /changelog 公告 · violations 觸發 /receipts entry per /ethics
-//     commitment #6 SLA · Tim 親手 signed · 永久 binding
-//   - per [[feedback-zone27-audience-fans-not-engineers]] · CPBL fan
-//     audience pattern-match Berkshire grammar instantly · Costco /
-//     Patek / Buffett all 公開 binding rules · 同 axis
-//
-// 不做 anti-pattern:
-//   ✕ NO「we COULD ship X if necessary」 future-flexibility weasel(
-//     Buffett 1996 explicitly REJECTED future flexibility · same axis)
-//   ✕ NO「subject to change」 footer disclaimer(brand IP「修改需 30 天
-//     前 /changelog 公告」 is the only allowed change mechanism)
-//   ✕ NO「except in cases of...」 conditional clauses(brand IP「不藏
-//     fine print」 axiom · 不增加 weasel clause)
-//   ✕ NO Berkshire mimicry without depth(Buffett earned 30+ yrs · ZONE
-//     27 at Year 0 · acknowledge gap explicitly per Pratfall)
-//
-// Inspiration sources(per Agent A R78 fourth-pass spec):
-//   - Berkshire Hathaway 1996「Owner's Manual」 Buffett(canonical model)
-//   - Costco 14% margin self-cap public bond
-//   - Patek Philippe Reference permanence 200-yr discipline
-//   - Defector worker-owned launch commitment statements
-//   - Stripe Atlas binding founder commitments(Atlas 6-deliverable model)
-// ─────────────────────────────────────────────────────
+// /integrity · Berkshire 1996 Owner's Manual pattern · 22 永久 binding rules
+// (13 redlines + 9 ethics)· public bond not implicit · 修改 needs 30-day
+// /changelog notice per /audit S05 PRE-COMMIT clause。
 
 export const revalidate = 86400; // daily revalidate
 
 const SIGNED_AT = "2026-05-23";
 
-// 11 brand-IP redlines 「永遠不做」 · verbatim from /transparency Section 02
-// + canonical CLAUDE.md memory · 同步 single-source · 修改需 30 天前
-// /changelog 公告 per /audit S05 PRE-COMMIT clause。
+// 13 brand-IP redlines · single-source canonical · same axis as /transparency § 02。
 const REDLINES: ReadonlyArray<{ no: string; rule: string; basis: string }> = [
   {
     no: "01",
@@ -159,8 +103,7 @@ const REDLINES: ReadonlyArray<{ no: string; rule: string; basis: string }> = [
   },
 ];
 
-// 8 binding ethics commitments · verbatim from /audit Section 04
-// 「WHAT WE COMMIT TO」 · per /ethics 9 commitments · same single-source。
+// 9 binding ethics commitments · single-source canonical · same axis as /ethics 9 commitments。
 const ETHICS_COMMITMENTS: ReadonlyArray<{
   no: string;
   rule: string;
@@ -248,20 +191,17 @@ export default function IntegrityPage() {
             Buffett 寫了一頁列「Berkshire will and will NOT do」 · 30+ 年
             從未改過 · 公開 binding 不是 implicit assumption。 ZONE 27 採同
             axis at Year 0:13 brand-IP「永遠不做」 redlines + 9 binding
-            ethics commitments = 22 件永久不會變的事(R80 加 rule 12
-            CPBL-only-forever scope + rule 09 mandatory-ledger-no-cherry-pick
-            discipline · R81 加 rule 13 永遠不 subscription auto-renewal ·
-            scope + discipline + renewal 三軸配對 close brand IP loop)。
+            ethics commitments = 22 件永久不會變的事。
           </p>
           <p
             className="text-mute/85 text-sm leading-relaxed"
             style={{ fontFamily: "Georgia, serif", textWrap: "pretty" }}
           >
-            為什麼此 page 結構性重要:當 future fan 懷疑 ZONE 27 might
-            「graduate into」 GA / analytics / social-account / paid-engine
-            after launch · 整個 Pratfall + Costly Signaling + Defector-Year-
-            Zero brand 會 collapse。 此 page 是 years 2-5 brand consistency
-            的 missing organ · 不只 launch week 用。
+            為什麼結構性重要:當未來 fan 懷疑 ZONE 27 會不會「graduate into」
+            GA / analytics / 社群帳號 / paid-engine after launch · 整個
+            Pratfall + Costly Signaling brand 會 collapse。 此 page 是
+            years 2-5 brand consistency 的 missing organ · 不只 launch
+            week 用。
           </p>
         </section>
 
@@ -278,13 +218,7 @@ export default function IntegrityPage() {
           <p className="text-mute text-sm leading-relaxed mb-6">
             這 13 件「永遠不做」 是 ZONE 27 displacement-mission against 玩運彩
             + 報馬仔 + LINE 老師生態 的 binding signal。 違反任一 = brand
-            自殺 · per /audit S05 PRE-COMMIT clause · 修改需 30 天前
-            /changelog 公告。R80 加 rule 12(engine 永遠 only CPBL · 不
-            cross 任何外國職棒 · 不 cross 任何運彩 bettable events)是 scope
-            binding 物理 codify · R81 加 rule 13(永遠不 subscription auto-
-            renewal · ECPay/TapPay 自動扣款全 refused)是 renewal mechanism
-            binding 物理 codify · scope + discipline + renewal 三軸 close
-            brand IP loop。
+            自殺 · 修改需 30 天前 /changelog 公告。
           </p>
           <ol className="space-y-4 mt-4">
             {REDLINES.map((item) => (
@@ -303,12 +237,9 @@ export default function IntegrityPage() {
           </p>
           <p className="text-mute text-sm leading-relaxed mb-6">
             這 9 件 ethics commitments 是 ZONE 27 brand IP「方法公開」 8 字
-            grammar 物理 codify · 同步 per /audit Section 04 + /ethics 9
-            commitments + canonical single-source。 違反 = Tim 親手 在
-            /ethics 紅字標永久 audit trail · 不可 retroactively rebrand。R80
-            加 commitment 09(每筆 engine prediction → mandatory ledger +
-            permalink · 0 cherry-pick · 0 retroactive delete)是 disclosure
-            discipline binding 物理 codify · 配對 redline #12 close loop。
+            grammar 物理 codify · canonical single-source 同步 /ethics + /audit
+            Section 04。 違反 = Tim 親手 在 /ethics 紅字標永久 audit trail ·
+            不可 retroactively rebrand。
           </p>
           <ol className="space-y-4 mt-4">
             {ETHICS_COMMITMENTS.map((item) => (
@@ -391,10 +322,9 @@ export default function IntegrityPage() {
             </li>
             <li>
               <strong className="text-bone">5.</strong> 加 NEW binding rule
-              (e.g. R80 加 rule 12 + 09)同 protocol · Tim 親手 signature
-              一句即決 · /changelog entry「added, effective YYYY-MM-DD」
-              · 「擴」 protocol 跟「改」 protocol 同 axis · 不藏 hidden
-              expansion。
+              同 protocol · Tim 親手 signature 一句即決 · /changelog entry
+              「added, effective YYYY-MM-DD」· 「擴」 protocol 跟「改」
+              protocol 同 axis · 不藏 hidden expansion。
             </li>
           </ol>
           <p className="text-mute/85 text-sm leading-relaxed mt-5">

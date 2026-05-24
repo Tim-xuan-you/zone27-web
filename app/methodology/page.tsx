@@ -38,9 +38,7 @@ export default function MethodologyPage() {
           <br />
           <span className="text-gold">Engine</span>
         </h1>
-        {/* Round 54 W-C · Cold Gold Hairline signature moat。 */}
         <div className="zone27-rule mx-auto max-w-[260px] mt-4" aria-hidden="true" />
-        {/* Round 54 W-C · Editorial drop-cap on first body paragraph。 */}
         <p className="editorial-dropcap mt-8 max-w-xl mx-auto text-mute leading-relaxed">
           我們不寫公關稿,只寫技術筆記。
           這是 ZONE 27 蒙地卡羅引擎完整的內部運作說明。
@@ -50,12 +48,7 @@ export default function MethodologyPage() {
         </div>
       </section>
 
-      {/* R59 W-D · Hindenburg Research disclosure pattern · top-of-document
-          position disclosure(同 hindenburgresearch.com 每份 report 開頭
-          「we have taken a short position」 box)· brand IP「方法公開 · 公開
-          整個 enterprise」 物理化 · 訪客 read 引擎前先 know who's writing it ·
-          0 sponsors · 0 hidden incentives · 100% solo equity · 完整 state 直接
-          公開 · 不藏 Pratfall(7 SYSTEM-TEST forged + N=1 sample · 不裝大)。 */}
+      {/* Hindenburg-style top-of-doc position disclosure · brand IP「方法公開」。 */}
       <aside
         id="disclosure"
         aria-labelledby="disclosure-heading"
@@ -157,10 +150,6 @@ export default function MethodologyPage() {
           (亂數採樣的天花板)。
         </p>
 
-        {/* Round 43 W-A · ReproducibilityReceipt drop-in · Agent H R41 #4
-            pattern applied 至 /methodology ABSTRACT ±2% number · 每個
-            published number 都有 git+seed+n+dataAt audit trail · per
-            IJCAI 2026 standard。 */}
         <div className="mt-4">
           <ReproducibilityReceipt
             seed={null}
@@ -209,18 +198,6 @@ export default function MethodologyPage() {
         </p>
       </Section>
 
-      {/* Round 4 audience-reframe: 5 academic-aesthetic sections removed.
-          Removed:
-          - 01 WHY BASEBALL (discrete events / Markov / agent-based theory)
-          - 03 PLATE APPEARANCE MODEL (clamp + Poisson math)
-          - 04 BASERUNNER PHYSICS (推進條件機率 table)
-          - 05 VALIDATION (CLT + SE derivation)
-          - 08 ROADMAP (duplicate of /roadmap page · point to it instead)
-          Kept the 4 fan-relevant sections: ABSTRACT · HOW IT WORKS ·
-          LIMITATIONS · TRY IT + compressed REFERENCES. Engineers who
-          need the math can read lib/simulator.ts on GitHub (linked in
-          ABSTRACT). */}
-
       {/* ── 01 THE ENGINE · 高層次流程 ────────────────── */}
       <Section no="01" label="HOW IT WORKS" zh="引擎在做什麼">
         <p>v0.2 引擎的執行流程:</p>
@@ -244,22 +221,6 @@ repeat 10,000 times → aggregate
           <Mono>requestAnimationFrame</Mono> 批次每幀 200 場以維持 UI 流暢。
         </p>
       </Section>
-
-      {/* Round 4 removed: Section 03 PA MODEL (clamp + rate math) ·
-          Section 04 BASERUNNER PHYSICS (推進條件機率 table) ·
-          shareablequote with SE formula · Section 05 VALIDATION (CLT
-          derivation). All engineering math now lives only in
-          lib/simulator.ts. Fans who want the explanation get it in
-          Section 01 HOW IT WORKS above (high-level) · engineers go to
-          GitHub. */}
-
-      {/* Round 7 (agent fact-check validated):
-          Section 02 ENGINE BOUNDARIES (6-item limitations list)
-          REMOVED entirely. Same content duplicated /audit Section 03
-          ENGINE SCOPE — 27 limitation items across 3 site pages was
-          "taxonomy-as-decoration · not signal" per agent verdict.
-          Cross-link to /audit Section 03 below instead. Round 4-6
-          renumbering history kept in comments where relevant. */}
 
       {/* ── 02 TRY IT · MatchSimulator embed ───────────────── */}
       <Section no="02" label="TRY IT" zh="親手驗證">
@@ -287,15 +248,7 @@ repeat 10,000 times → aggregate
         )}
       </Section>
 
-      {/* Round 4 removed:
-          - Section 08 ROADMAP (duplicate of /roadmap page · was 30+ lines)
-          - Section 09 REFERENCES verbose (6 academic books + 3 websites)
-          Replaced with compact Section 04 below pointing to /roadmap
-          for future work and listing only the most-cited reference. */}
-
-      {/* ── 03 WHAT'S NEXT · 路線圖 + 參考 ────────────
-          Round 7: renumbered 04 → 03 after Section 02 ENGINE
-          BOUNDARIES deleted (consolidated into /audit Section 03). */}
+      {/* ── 03 WHAT'S NEXT · 路線圖 + 參考 ──────────── */}
       <Section no="03" label="WHAT'S NEXT" zh="路線圖 + 出處">
         <p>
           未來引擎版本(v0.3 加球場因素 + 打者品質 · v0.4 球場細節 · v0.5 牛棚切換)
@@ -336,16 +289,7 @@ repeat 10,000 times → aggregate
         </p>
       </Section>
 
-      {/* ── 04 ENGINE LINEUP · 3 變體 · tier unlock progression ──
-          Round 35 W-D · Tim 12+ canary commercial directive「3 engines paid
-          unlock 2」 brand-pure 落地 · 拒「管它準不準包裝」 redline · ship
-          3 honest engine progression instead。 同 FanGraphs Steamer / ZiPS /
-          ATC + Baseball Prospectus PECOTA tier 結構 · brand IP「方法公開」
-          延伸到 engine variant layer · 不再只是 1 個 black box · 是 3 個
-          可審 model variants 各自 publish methodology + DIVERGED + ESTIMATION
-          DISCLOSURE per-engine。 commercial motivation(訂閱 unlock)+ honest
-          methodology(0 secret)= Tim displacement mission 對 玩運彩+報馬仔
-          的 brand-pure inversion。 */}
+      {/* ── 04 ENGINE LINEUP · 3 變體 · tier unlock progression ── */}
       <Section no="04" label="ENGINE LINEUP" zh="3 變體 · tier unlock">
         <p>
           引擎不是 1 個 black box · 是 <strong className="text-bone">3 個可審
@@ -355,17 +299,7 @@ repeat 10,000 times → aggregate
           Baseball Prospectus PECOTA tier 結構 · brand-pure 不靠 secret moat。
         </p>
 
-        {/* R60 W-A · Pokemon TCG SET release narrative 借鑑 · Wizards of the
-            Coast Base Set(1999)→ Jungle Expansion 1 → Fossil Expansion 2
-            同樣 pattern · 每個 set 永久 viewable · 不 silent rotate · 不 reprint
-            (Patek + Pokemon 1st Edition mystique 雙 anchor)。 ZONE 27 引擎
-            版本 framing 從「v0.X · vX.Y」 工程術語 升 「BASE SET · EXPANSION」
-            collectible narrative · 同 [[zone27-audience-fans-not-engineers]]
-            (hardcore CPBL 球迷 + TCG 收藏 demographic overlap > 工程師 audience)。
-            同 brand IP「方法公開」 延伸:每個 set 完整 ship code on GitHub +
-            完整 diff /methodology/diff + 永久 viewable per Lens Lifetime
-            Pledge · TCG「先 collect 完整 set」 incentive 轉換為「先 audit 完整
-            engine progression」 trust signal。 */}
+        {/* Pokemon TCG SET release narrative · 工程術語升 collectible signal。 */}
         <p className="mt-4 text-mute/85 leading-relaxed">
           <strong className="text-bone">v0.2 是 BASE SET</strong> · 七 lens
           canvas + Pitcher-Only Monte Carlo · ZONE 27 的奠基引擎。{" "}
@@ -460,36 +394,19 @@ repeat 10,000 times → aggregate
           </li>
         </ul>
 
-        <p className="mt-6 text-mute/85 leading-relaxed">
-          <strong className="text-bone">為什麼 3 變體 + Bayesian average:</strong>{" "}
-          Nate Silver FiveThirtyEight 模式 · 多 model 投票避免 single-model
-          overfitting · ensemble 通常比 best single 模型穩定。 同
-          <Link href="/discipline" className="text-gold underline-offset-4 hover:underline mx-1">
-            /discipline
-          </Link>
-          Buffett「不靠一個算法 · 靠紀律」 axiom 延伸到 engine layer 本身。
-        </p>
-
         <blockquote className="mt-8 border-l-2 border-gold pl-6 py-3">
           <p className="text-bone text-lg sm:text-xl font-light tracking-tight leading-snug">
             Most prediction sites have 1 secret engine.<br />
             <span className="text-gold">We built 2 open ones · 1 in queue.</span>
           </p>
           <p className="mt-3 text-mute text-sm leading-relaxed">
-            Round 41 W-A · v0.3 從 DEV → LIVE(DEV PREVIEW · opt-in)·
-            「Displacement mission · 對標幹掉 玩運彩+報馬仔」 brand-pure 路徑
-            物理升級。 他們 1 fake mystery model vs ZONE 27 2 LIVE transparent
-            variants(v0.2 base + v0.3 Park Factor · 各自 lib/simulator-vN.ts
-            on GitHub 可 audit)+ 1 PLANNED Bayesian ensemble(v0.4)·
-            訂閱解鎖 progression 是 commercial · methodology 不可妥協是 brand
-            IP · per Lens Lifetime Pledge 永遠 viewable · 不 silently rotate。
+            v0.2 base + v0.3 Park Factor · 各自 lib/simulator-vN.ts on GitHub
+            可 audit · v0.4 Bayesian ensemble 排程中。 訂閱解鎖 progression
+            是 commercial · methodology 永遠不靠 secret · 每個 lens 永久
+            viewable 不 silently rotate。
           </p>
         </blockquote>
 
-        {/* Round 50 W-A · cross-link to /methodology/diff DEEPEST ·
-            「不止 claim 2 engines · publish entire delta」 brand IP 物理
-            codify · 接 Section 04 ENGINE LINEUP table + blockquote
-            narrative · 下一步是 entire v0.2 → v0.3 逐行 diff 頁。 */}
         <div className="mt-8 border border-line/70 bg-slate/40 p-5 sm:p-6">
           <p
             lang="en"
@@ -510,39 +427,23 @@ repeat 10,000 times → aggregate
           <p className="text-mute/85 text-sm leading-relaxed">
             14 個 constants unchanged · 1 個 new(HR_PARK_SENSITIVITY = 0.5)·
             5 行 logic delta · 6 件 v0.3 不修正 · 4 場館 worked example。
-            同 React.dev / Stripe API changelog / Anthropic model card revision
-            pattern · 整份 audit trail 公開。
           </p>
         </div>
       </Section>
 
-      {/* ── 05 LENS VARIETY · multi-angle analytical variants ──
-          Round 36 W-A · Tim 13+ canary explicit「壓力減 + 不同 angle 分析
-          + 越開發越多」 framework pivot · 跟 Section 04 ENGINE LINEUP「accuracy
-          progression」 軸線 互補 · 不取代。 LENS VARIETY = 同 v0.2 base · 不
-          問「誰會贏」 · 問「哪些 factor 影響」 = pure data visualizer ·
-          每個 lens publish methodology + open code · 不假 accuracy promise。
-          Patek Philippe complication progression 模式:不是「越準的錶」 · 是
-          「越多 complication」(萬年曆 / 三問報時 / 計時)· ZONE 27 multi-lens
-          同邏輯 · 越多 angle 看比賽 · 不衝突 brand IP 任何 axiom。 訂閱
-          解鎖每 1-2 月 ship 1 new lens · sustained BLACK CARD value compounding。 */}
+      {/* ── 05 LENS VARIETY · multi-angle analytical variants ── */}
       <Section no="05" label="LENS VARIETY" zh="多 angle 分析 · variety 軸線">
         <p>
-          Section 04 是「<strong className="text-bone">accuracy progression</strong>」
-          軸線(v0.2 → v0.3 → v0.4 越多 input feature · 同預測 winner 任務)。
-          本 Section 是「<strong className="text-bone">analytical variety</strong>」
-          軸線 · 同 v0.2 base · 但從不同 angle 看比賽:不問「誰會贏」 ·
-          問「哪些 factor 影響」 · 純 data visualizer/analyzer · 0 prediction
-          accuracy promise(因為 visualizer 沒有「準」的概念 · 只有「insight」)。
+          Section 04 是「accuracy progression」 軸線。 本 Section 是
+          「<strong className="text-bone">analytical variety</strong>」 軸線
+          · 同 v0.2 base · 不問「誰會贏」 · 問「哪些 factor 影響」 · 純 data
+          visualizer · 0 prediction accuracy promise。
         </p>
 
         <p className="mt-4 text-mute/85 leading-relaxed">
-          類比 · <strong className="text-bone">Patek Philippe complication 模式</strong>
-          :Patek 不是「越準的錶」 · 是「越多 complication」(萬年曆 / 三問
-          報時 / 計時)· 每個 complication 是不同 functional angle · 不衝突
-          「同等準」 base。 ZONE 27 multi-lens 同邏輯 · 每 1-2 月 ship 1
-          new lens · sustained BLACK CARD value compounding · brand-pure
-          無限 scaling。
+          類比 Patek Philippe complication 模式 · 不是「越準的錶」 · 是「越多
+          complication」(萬年曆 / 三問報時 / 計時)· ZONE 27 multi-lens
+          同邏輯 · 每 1-2 月 ship 1 new lens · 越多 angle 看比賽。
         </p>
 
         <p className="mt-6">
@@ -579,7 +480,7 @@ repeat 10,000 times → aggregate
               <LensRow
                 lens="Vibe Check"
                 angle="連勝 / 連敗 streak · 「hot hand fallacy」 (Tversky 1985)"
-                status="✓ LIVE · R37 W-B"
+                status="✓ LIVE"
                 statusTone="gold"
                 tier="FREE 預覽 · 將來 BLACK CARD"
                 tierTone="bone"
@@ -587,15 +488,15 @@ repeat 10,000 times → aggregate
               <LensRow
                 lens="Park Factor"
                 angle="4 場館 home advantage 比較 · 哪場有利投/打"
-                status="✓ LIVE · R37 W-C"
+                status="✓ LIVE"
                 statusTone="gold"
                 tier="FREE 預覽 · 將來 BLACK CARD"
                 tierTone="bone"
               />
               <LensRow
-                lens="Workload Proxy(formerly Pitcher Fatigue)"
-                angle="WHIP + BB9 + K9 command stability proxy(v0.1)· R43 W-C vocabulary rename per Steelman Obj 03 · v0.2 = rest_days + IP load real fatigue"
-                status="✓ LIVE · R38 W-A · v0.1 · R43 W-C renamed"
+                lens="Workload Proxy"
+                angle="WHIP + BB9 + K9 command stability proxy(v0.1)· v0.2 = rest_days + IP load real fatigue"
+                status="✓ LIVE · v0.1"
                 statusTone="gold"
                 tier="FREE 預覽 · 將來 BLACK CARD"
                 tierTone="bone"
@@ -603,7 +504,7 @@ repeat 10,000 times → aggregate
               <LensRow
                 lens="Underdog Tracker"
                 angle="upset probability + dominance gap · 黑馬機率 lens · 0 contrarian play"
-                status="✓ LIVE · R39 W-B"
+                status="✓ LIVE"
                 statusTone="gold"
                 tier="FREE 預覽 · 將來 BLACK CARD"
                 tierTone="bone"
@@ -611,7 +512,7 @@ repeat 10,000 times → aggregate
               <LensRow
                 lens="Bullpen Depth"
                 angle="team recent W-L derive late-inning resilience proxy(v0.1)· v0.2 = bullpen ERA + IP usage"
-                status="✓ LIVE · R40 W-A · v0.1 PROXY"
+                status="✓ LIVE · v0.1 PROXY"
                 statusTone="gold"
                 tier="FREE 預覽 · 將來 BLACK CARD"
                 tierTone="bone"
@@ -619,7 +520,7 @@ repeat 10,000 times → aggregate
               <LensRow
                 lens="Matchup History"
                 angle="此 matchup 過去 H2H + 趨勢 · real data · educational at N<10"
-                status="✓ LIVE · R40 W-B · 7th LIVE"
+                status="✓ LIVE"
                 statusTone="gold"
                 tier="FREE 預覽 · 將來 BLACK CARD"
                 tierTone="bone"
@@ -654,71 +555,37 @@ repeat 10,000 times → aggregate
           </li>
         </ul>
 
-        <p className="mt-6 text-mute/85 leading-relaxed">
-          <strong className="text-bone">兩個軸線並存 brand IP 邏輯:</strong>{" "}
-          Section 04(accuracy progression)解「我們的預測準不準?」 · Section 05
-          (analytical variety)解「我們的分析夠不夠多 angle?」。 訪客來 ZONE 27
-          可能想要 prediction accuracy(看 Section 04 receipt)· 也可能想要
-          多 lens insight(看 Section 05 catalogue)· 兩個都 honest 不假。
-        </p>
-
         <blockquote className="mt-8 border-l-2 border-gold pl-6 py-3">
           <p className="text-bone text-lg sm:text-xl font-light tracking-tight leading-snug">
             Most prediction sites have 1 fake angle.<br />
             <span className="text-gold">We built 7 honest ones.</span>
           </p>
           <p className="mt-3 text-mute text-sm leading-relaxed">
-            Round 40 W-B · 7-lens canvas 完成。 玩運彩+報馬仔 1 個 fake
-            「大師明牌」 angle · ZONE 27 multi-lens{" "}
-            <strong className="text-bone">7 LIVE angles</strong>(Win
-            Probability + Vibe Check + Park Factor + Pitcher Fatigue +
-            Underdog + Bullpen Depth + Matchup History)各自 publish
-            methodology + open code + educational explainer · 同 Patek
-            complication 模式 · brand-pure 無限 scaling 起點。 displacement
-            narrative 物理閉環 — 從 future promise(「building」)升 LIVE
-            truth(「built」)。 訂閱者 voting 決定 next ship order(Lens
-            v2.0 計劃 · payment infra 就緒後 milestone-triggered)。
+            7 LIVE angles · Win Probability + Vibe Check + Park Factor +
+            Workload Proxy + Underdog + Bullpen Depth + Matchup History ·
+            各自 publish methodology + open code。 訂閱者 voting 決定 next
+            lens · payment infra 就緒後 milestone-triggered。
           </p>
         </blockquote>
       </Section>
 
-      {/* ── R71 W-A · Section 06 · ENGINE DRY DOCK ───────────────
-          Agent A R69 SHIP 3 deferred · DHH HEY「inbox state IS the
-          dashboard」 grammar transplant · single-status-per-row · NO
-          progress bar / NO ETA / NO「coming soon」 marketing copy ·
-          factual engine state machine surface · cross-referenced from
-          /now UNRESOLVED section · canonical viewer for v0.2/v0.3/v0.4
-          state without crawl /methodology/diff + /roadmap + /now。 */}
+      {/* ── 06 · ENGINE DRY DOCK · DHH HEY single-state-per-row pattern ── */}
       <Section no="06" label="ENGINE DRY DOCK" zh="引擎此刻在做什麼 · DRY DOCK">
         <p>
-          DHH HEY pioneered「the app&apos;s internal state IS the dashboard」 ·
-          ZONE 27 transplants 同 grammar 到 engine version state:
           每個 engine variant 的當下狀態 single-row · 不藏「coming soon」 ·
           不放「Q3 roadmap promises」 · 是{" "}
           <strong className="text-bone">factual single-state per row</strong>。
-          hardcore CPBL fans returning weekly want「what is the engine doing
-          this week?」 — currently 必須 crawl{" "}
-          <Link
-            href="/methodology/diff"
-            className="text-gold underline-offset-4 hover:underline"
-          >
+          想看本週引擎在做什麼 · 不用 crawl{" "}
+          <Link href="/methodology/diff" className="text-gold underline-offset-4 hover:underline">
             /methodology/diff
-          </Link>{" "}
-          +{" "}
-          <Link
-            href="/roadmap"
-            className="text-gold underline-offset-4 hover:underline"
-          >
+          </Link>{" "}+{" "}
+          <Link href="/roadmap" className="text-gold underline-offset-4 hover:underline">
             /roadmap
-          </Link>{" "}
-          +{" "}
-          <Link
-            href="/now"
-            className="text-gold underline-offset-4 hover:underline"
-          >
+          </Link>{" "}+{" "}
+          <Link href="/now" className="text-gold underline-offset-4 hover:underline">
             /now
-          </Link>{" "}
-          · 此 section consolidates。
+          </Link>
+          。
         </p>
 
         <ol className="space-y-3 mt-6 list-none p-0">
@@ -851,25 +718,9 @@ repeat 10,000 times → aggregate
           </li>
         </ol>
 
-        <p className="mt-6 font-mono text-mute/70 text-[10px] tracking-[0.25em] leading-relaxed">
-          ⚓ 同 DHH HEY「The Imbox」 naming + DHH「show your software&apos;s
-          state」 pattern · 不 ship「Coming Soon!」 / 「Stay tuned!」 marketing
-          copy · 純 state machine factual surface · 訪客親自 read · 我們
-          不 sell next ship。
-        </p>
       </Section>
 
-      {/* ── Round 38 W-G · Lens Lifetime Pledge · Agent A #3 ship ──
-          Patek Philippe「service since 1839」 pattern · permanent banner
-          下方的 brand IP 物理 codify。 SaaS 標準是「silently rotate models
-          when degrade」 · ZONE 27 倒置:every lens shipped stays viewable
-          forever · 不 silently retire · 不 silently swap · deprecate +
-          version 路線。 Patek inverse 邏輯:identity continuity in a market
-          where 報馬仔 deletes losing weeks。 brand IP「方法公開 · 不藏不
-          換」 延伸到 generational time axis。
-          R71 W-A · numbered label removed(was「06 · LENS LIFETIME PLEDGE」)·
-          new Section 06 ENGINE DRY DOCK above takes the 06 slot · this
-          pledge stays as un-numbered permanent commitment banner。 */}
+      {/* LENS LIFETIME PLEDGE · BINDING brand IP commitment · Patek「service since 1839」 inverse pattern。 */}
       <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 py-12 border-t border-line/40">
         <div className="border border-gold/40 bg-slate/40 p-6 sm:p-8 glow-soft">
           <p
@@ -902,15 +753,7 @@ repeat 10,000 times → aggregate
         </div>
       </section>
 
-      {/* R59 W-D · Section 07 FOOTNOTES · Hindenburg Research inline-cited
-          evidence pattern · 之前 Section 03 已 prose-cite Bill James / Pete
-          Palmer / Tango Tiger / FanGraphs Glossary · 但 inline 主張(Monte
-          Carlo / K-BB-HR-9 / ±2% / N≥30)沒對應 numbered footnote anchor。
-          Hindenburg 模式 = 每一個 claim 配 inline superscript + 對應 primary
-          source URL · 同 academic 論文 standard · 倒置 of「就是看著辦」 prose
-          citation · 訪客 click <sup>[N]</sup> 跳對應 footnote · 同 anchor
-          jump 後可從 footnote 點外部 primary source。 同 brand IP「方法公開 ·
-          每個 claim 物理可 trace」。 */}
+      {/* ── 07 FOOTNOTES · Hindenburg-style inline-cited evidence ── */}
       <Section no="07" label="FOOTNOTES" zh="出處與引用">
         <p className="text-mute/85 text-[14px]">
           每一個 inline 主張(ABSTRACT 內 <FootnoteRef n={1} inline />–
@@ -1061,10 +904,6 @@ repeat 10,000 times → aggregate
         </p>
       </Section>
 
-      {/* R69 W-E · Agent A SHIP 5 · LongReadHandoff · Tom Tango sabermetrics
-          blog + Aeon end-of-post pattern · honor reader's time investment at
-          MAX trust state · next deep read + RSS-only subscription · 0 email
-          capture · per [[zone27-disclosure-philosophy]] + 不打擾就是禮物。 */}
       <LongReadHandoff
         readingMin={6}
         nextHref="/methodology/diff"
@@ -1130,10 +969,6 @@ repeat 10,000 times → aggregate
 
 // ── Sub-components ────────────────────────────────────
 
-// R72 W-D · Agent B audit F01 fix · slug helper for /methodology Section ·
-// 同 R69 W-F /terms + R70 W-F /privacy + R71 W-E /transparency pattern ·
-// enables /methodology#section-06 anchor jump · per R71 W-A ENGINE_DIFF_BEACONS
-// + /now journal cross-link · 不再 broken 5-second devtools verify。
 function slugFromMethodologySectionNo(no: string): string {
   return `section-${no.toLowerCase().replace(/[^a-z0-9]/g, "-")}`;
 }
@@ -1151,18 +986,10 @@ function Section({
 }) {
   const id = slugFromMethodologySectionNo(no);
   return (
-    /* Round 58 W-A · cv-auto perf primitive applied · LCP -150ms TBT -100ms · same Section helper pattern R57 W-A 已 verify on /transparency + /methodology/diff。
-       R72 W-D · Agent B audit F01 fix · id slug for anchor jump · scroll-mt-20。 */
     <section
       id={id}
       className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-16 pt-10 border-t border-line/40 cv-auto scroll-mt-20"
     >
-      {/* Round 18 motion polish · section-reveal scroll-driven CSS
-          animation draws a soft gold hairline under the kicker as the
-          section scrolls into view. Native CSS animation-timeline ·
-          0 JS · respects prefers-reduced-motion via @media guard in
-          globals.css. Aligned with /audit + /coverage + /manifesto
-          sections which already use this pattern. */}
       <div className="flex items-baseline gap-4 mb-2 section-reveal">
         <span className="font-mono text-gold/70 text-[10px] tracking-[0.35em]">
           / {no}
@@ -1179,10 +1006,6 @@ function Section({
   );
 }
 
-// R59 W-D · FootnoteRef · inline superscript link to numbered footnote at
-// the bottom of /methodology · Hindenburg Research evidence pattern · 訪客
-// click sup [N] 跳對應 #footnote-N · 同 academic paper inline citation。
-// `inline` variant 在 Footnotes section 自身展開時用 · 不需要 anchor jump。
 function FootnoteRef({ n, inline = false }: { n: number; inline?: boolean }) {
   if (inline) {
     return (
@@ -1220,7 +1043,6 @@ function Pre({ children }: { children: React.ReactNode }) {
   );
 }
 
-// ── Round 35 W-D · Engine Lineup table row ───────────────
 function EngineRow({
   engine,
   statusLabel,
@@ -1261,7 +1083,6 @@ function EngineRow({
   );
 }
 
-// ── Round 36 W-A · LENS VARIETY table row ────────────────
 function LensRow({
   lens,
   angle,

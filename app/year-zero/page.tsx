@@ -35,66 +35,11 @@ export const metadata: Metadata = {
   },
 };
 
-// ── ZONE 27 · /year-zero · First Annual Letter ─────────
-// R77 W-C · Agent A R76 SHIP B ★★★★★ · Defector Year-Five annual report
-// 2025 model(85% renew rate driver · single artifact subscribers actually
-// read and quote · long-form single-page essay-not-brochure)applied at
-// Year-Zero · publish-before-asked-to-honor · the artifact-as-content axis
-// distinct from /audit(model report)+ /annual/2026(enterprise state)+
-// /engine-log(operational artifact)。
-//
-// Defector Year-Five mechanic:
-//   - 19 worker-owners + 4 years receipts + 85% renew · annual report is
-//     NOT brochure · 是「what we did + how」 narrative · 6+ minute read
-//   - Reader posts to social NOT because asked · because the artifact
-//     IS the renewal pitch · founder voice IS the content
-//
-// ZONE 27 Year-Zero application(pre-first-Founder):
-//   - 0 worker-owners · 4 ingested matches · 1 PROVED receipt · 0 paid
-//     subscribers · 0 fake testimonials per 11-NEVER #11
-//   - Defector at Year-5 has results · ZONE 27 at Year-0 has commitments
-//   - 此 page = Year-0 annual letter · what we shipped(R59-R76 76+ rounds)
-//     + what we refused(11-NEVER + 12 NoPushManifest + 5 RefusalRationale)
-//     + what we don't know(/steelman 5 + N<30 sample debt + estimate
-//     methodology disclosure)+ Year One looks like(payment infra +
-//     CPBL pipeline + Founder #001 onboarding)+ thank you(N=4 + 1 PROVED
-//     + you reading this)
-//
-// Brand IP fit:
-//   - per [[zone27-disclosure-philosophy]] · publish before earning · same
-//     axis as MultiYearAnchor R75 W-D + /engine-log R76 W-C
-//   - per [[feedback-zone27-pratfall-brand-ip]] · §03「don't know」 is
-//     Pratfall non-empty · same axis as /steelman + /audit S05 PRE-COMMIT
-//   - per [[zone27-monetization-philosophy]] · 不 paywall · 不 email-gate
-//     · per Founder-Dogfood-Canary R32 W-C kill /login OTP rule applied to
-//     /year-zero · MUST be fully public
-//   - per /audit S05 PRE-COMMIT clause · annual letter 仍 binding · 修改
-//     content 需 30 天前 /changelog 公告 · same Costly Signaling discipline
-//
-// 不做 anti-pattern(per Agent A R76 SHIP B Anti-Pattern 2):
-//   ✕ NO「subscribe to read full Year One letter」 paywall(violates
-//     Defector pattern · violates Founder-Dogfood-Canary rule)
-//   ✕ NO「join 1000+ Founders」 social proof(no real Founder #001 yet ·
-//     per 11-NEVER #11 fake testimonials)
-//   ✕ NO「early bird discount」 / 「pre-order Founders 27 from this page」
-//     (per /founders/why-270 axiom · fixed price · no ratchet · no FOMO)
-//   ✕ NO push notification「new annual letter dropped」 (per NoPushManifest
-//     R73 W-D · per 不打擾就是禮物 axiom)
-//
-// Inspiration sources:
-//   - Defector Year-Five annual report(defector.com/defector-annual-
-//     report-year-five · 2025-11 · Nieman Lab analysis)
-//   - Stratechery Year in Review(Ben Thompson 2013-now)
-//   - Berkshire Hathaway annual letter(1965-2025 · 60-yr continuity)
-//   - DHH 37signals annual reflection posts(world.hey.com)
-//   - Anthropic 2024 annual transparency update + Stripe annual letter
-//
-// Append-only per /audit S05 PRE-COMMIT clause · 修改 letter content 需 30
-// 天前 /changelog 公告 · same single-source discipline as ENGINE_OPS_LOG
-// R76 W-C + ENGINE_DIFF_BEACONS R71 W-C + canonical 7-ledger family pattern。
-// ─────────────────────────────────────────────────────
+// /year-zero · Defector Year-Five annual report pattern applied at Year-Zero ·
+// Tim 親手 essay · shipped / refused / don't know / Year One / thank you ·
+// 不 paywall · 不 email-gate · letter content append-only per /audit S05。
 
-export const revalidate = 86400; // daily revalidate(stat freshness)
+export const revalidate = 86400; // daily revalidate
 
 const LETTER_DATE = "2026-05-23";
 const FINALIZED_COUNT = getFinalizedMatches().length;
@@ -166,7 +111,7 @@ export default function YearZeroPage() {
             <strong className="text-bone tabular">
               {CUMULATIVE_WAVES}+ waves
             </strong>{" "}
-            shipped across R37→R76 · {ROUTE_COUNT} visitor-discoverable routes ·{" "}
+            shipped · {ROUTE_COUNT} visitor-discoverable routes ·{" "}
             <span className="font-mono text-bone tabular">
               {LOCAL_STORAGE_KEY_COUNT}
             </span>{" "}
@@ -182,9 +127,8 @@ export default function YearZeroPage() {
               <span className="text-gold/85" aria-hidden="true">▸</span>
               <span className="flex-1">
                 <strong className="text-bone">7 LIVE LENS CANVAS</strong> ·
-                Vibe Check + Park Factor + Pitcher Fatigue + Underdog +
-                BullpenDepth + Matchup History + LensTrace · per /methodology
-                Section 05
+                Vibe Check + Park Factor + Workload Proxy + Underdog +
+                BullpenDepth + Matchup History + LensTrace
               </span>
             </li>
             <li className="flex gap-3 items-baseline">
@@ -192,8 +136,7 @@ export default function YearZeroPage() {
               <span className="flex-1">
                 <strong className="text-bone">2 LIVE engine variants</strong>
                 {" "}+ 1 PLANNED · v0.2 BASE LIVE + v0.3 EXPANSION 1 LIVE DEV
-                PREVIEW + v0.4 EXPANSION 2 SPEC LOCKED · per /methodology
-                Section 06 ENGINE DRY DOCK
+                PREVIEW + v0.4 EXPANSION 2 SPEC LOCKED
               </span>
             </li>
             <li className="flex gap-3 items-baseline">
@@ -203,36 +146,34 @@ export default function YearZeroPage() {
                 {" "}cpbl-260521-01(統一 vs 富邦 2026-05-21 新莊)· 60% engine
                 預測 →{" "}
                 <span className="text-gold">PROVED ✓</span> · 標記永久 1st
-                Edition Shadowless Run · per /track-record + /receipts/cpbl-260521-01
+                Edition Shadowless Run
               </span>
             </li>
             <li className="flex gap-3 items-baseline">
               <span className="text-gold/85" aria-hidden="true">▸</span>
               <span className="flex-1">
                 <strong className="text-bone">7 canonical append-only ledgers</strong>
-                {" "}· ENGINE_DIFF_BEACONS(R71 W-C)+ NO_PUSH_INVENTORY(R73 W-D ·{" "}
-                {NO_PUSH_COUNT} deliberate absences)+ RECIPROCITY_LEDGER(R74
-                W-A · {RECIPROCITY_COUNT} published-before-ask artifacts)+
-                LOCAL_STORAGE_INVENTORY(R74 W-D · {LOCAL_STORAGE_KEY_COUNT}{" "}
-                keys)+ SOLO_FOUNDER_PEERS(R74 W-C · 6 reference class)+
-                ENGINE_OPS_LOG(R76 W-C · {ENGINE_OPS_LOG_COUNT} operational events)
+                {" "}· ENGINE_DIFF_BEACONS + NO_PUSH_INVENTORY({NO_PUSH_COUNT}{" "}
+                deliberate absences)+ RECIPROCITY_LEDGER({RECIPROCITY_COUNT}{" "}
+                published-before-ask artifacts)+ LOCAL_STORAGE_INVENTORY({" "}
+                {LOCAL_STORAGE_KEY_COUNT} keys)+ SOLO_FOUNDER_PEERS(6 reference
+                class)+ ENGINE_OPS_LOG({ENGINE_OPS_LOG_COUNT} operational events)
               </span>
             </li>
             <li className="flex gap-3 items-baseline">
               <span className="text-gold/85" aria-hidden="true">▸</span>
               <span className="flex-1">
                 <strong className="text-bone">第一個 visitor-grabbable receipt object</strong>
-                {" "}· /receipts/[receiptId] dynamic route(R75 W-F)· Stripe
-                Press + Patek Reference Number permanence pattern · 每場
-                finalized match 變 dedicated permalink object-as-receipt
+                {" "}· /receipts/[receiptId] dynamic route · Stripe Press + Patek
+                Reference Number permanence pattern · 每場 finalized match 變
+                dedicated permalink object-as-receipt
               </span>
             </li>
             <li className="flex gap-3 items-baseline">
               <span className="text-gold/85" aria-hidden="true">▸</span>
               <span className="flex-1">
                 <strong className="text-bone">/engine-log operational artifact spine</strong>
-                {" "}(R76 W-C ★★★★★ biggest invisible gap closure)· Stripe
-                Status 2012 + Cloudflare 2025 postmortem + Tailscale changelog
+                {" "}· Stripe Status + Cloudflare postmortem + Tailscale changelog
                 pattern · 「engine alive · someone on it」 mechanical signal
               </span>
             </li>
@@ -240,8 +181,8 @@ export default function YearZeroPage() {
               <span className="text-gold/85" aria-hidden="true">▸</span>
               <span className="flex-1">
                 <strong className="text-bone">/poster launch-day visual cannon</strong>
-                {" "}(R76 W-E · Agent A R75 「第 2 gap」)· 1080×1080 IG + 1080×1920
-                Story/TikTok · Patek 50th Nautilus + Stripe Press + A24 zine pattern
+                {" "}· 1080×1080 IG + 1080×1920 Story/TikTok · Patek 50th Nautilus
+                + Stripe Press + A24 zine pattern
               </span>
             </li>
           </ul>
@@ -475,9 +416,9 @@ export default function YearZeroPage() {
           zh="Year One 會是什麼 · 不 promise schedule · 只 promise effort axis"
         >
           <p>
-            ZONE 27 brand IP 拒絕 schedule promise(CadencePulseChip R67 W-C
-            「節奏不承諾」)· 但 publish effort axis(R75 W-E EngineCadencePromise
-            「maximum-delay ceiling NOT specific timing」)· Year One commitments:
+            ZONE 27 brand IP 拒絕 schedule promise「節奏不承諾」· 但 publish
+            effort axis「maximum-delay ceiling NOT specific timing」· Year
+            One commitments:
           </p>
           <ol className="space-y-3.5 mt-5 text-[14px] leading-relaxed">
             <li className="flex gap-3 items-baseline">
@@ -644,20 +585,14 @@ export default function YearZeroPage() {
           <p>
             這封 letter 修改需 30 天前 /changelog 公告 · per /audit S05
             PRE-COMMIT clause · 違反 = brand 信用 collapse 永久 audit trail。
-            same Costly Signaling discipline as ENGINE_OPS_LOG R76 W-C +
-            ENGINE_DIFF_BEACONS R71 W-C + 6-ledger canonical family pattern。
           </p>
           <p>
             Year One annual letter 預定 2027-05-23 publish on /year-one · same
             5-section axis(shipped + refused + don&apos;t know + Year Two looks
-            like + thank you)· 此 cadence per /ethics commitment #5 + #8
-            binding。
+            like + thank you)。
           </p>
         </FounderSignOff>
 
-        {/* R77 W-B · LineKeepHint · Agent A R76 SHIP E · mobile long-press
-            → LINE Keep · per Defector Year-Five subscriber save-and-quote
-            pattern · 不需加好友 · session-only dismiss。 */}
         <div className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-6">
           <LineKeepHint />
         </div>
