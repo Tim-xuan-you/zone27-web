@@ -4,6 +4,7 @@ import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import FounderSignOff from "@/components/FounderSignOff";
 import ArticleMeta from "@/components/ArticleMeta";
+import ReadingProgress from "@/components/ReadingProgress";
 
 export const metadata: Metadata = {
   title: "Integrity · 22 永久不會變的 · Owner's Manual at Year 0",
@@ -161,6 +162,7 @@ export default function IntegrityPage() {
   return (
     <div className="flex flex-col flex-1 min-h-screen">
       <Nav />
+      <ReadingProgress />
 
       <main id="main">
         {/* ── HERO ─────────────────────────────────── */}

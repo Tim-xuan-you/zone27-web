@@ -6,6 +6,7 @@ import CopyLinkButton from "@/components/CopyLinkButton";
 import RelatedReading from "@/components/RelatedReading";
 import FounderSignOff from "@/components/FounderSignOff";
 import ArticleMeta from "@/components/ArticleMeta";
+import ReadingProgress from "@/components/ReadingProgress";
 
 export const metadata: Metadata = {
   title: "Coverage — 我們覆蓋哪些賽事 · 為什麼不覆蓋全部",
@@ -137,6 +138,7 @@ export default function CoveragePage() {
   return (
     <div className="flex flex-col flex-1 min-h-screen">
       <Nav />
+      <ReadingProgress />
 
       <main id="main">
         <article className="mx-auto max-w-3xl w-full px-6 sm:px-10 pt-20 pb-12">

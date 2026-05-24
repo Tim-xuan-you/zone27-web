@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import Nav from "@/components/Nav";
+import ReadingProgress from "@/components/ReadingProgress";
 import Footer from "@/components/Footer";
 import {
   LETTER_BODY,
@@ -63,6 +64,7 @@ export default function LetterPage() {
   return (
     <div className="flex flex-col flex-1 min-h-screen">
       <Nav />
+      <ReadingProgress />
 
       <main id="main">
         {/* ── HEADER · minimal · letter-like feel ─────── */}

@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import RelatedReading from "@/components/RelatedReading";
 import FounderSignOff from "@/components/FounderSignOff";
 import ArticleMeta from "@/components/ArticleMeta";
+import ReadingProgress from "@/components/ReadingProgress";
 import EngineStamp from "@/components/EngineStamp";
 import ReproducibilityReceipt from "@/components/ReproducibilityReceipt";
 import {
@@ -123,6 +124,7 @@ export default function AnnualReport2026Page() {
   return (
     <div className="flex flex-col flex-1 min-h-screen">
       <Nav active="about" />
+      <ReadingProgress />
 
       <main id="main">
         {/* ── HERO ─────────────────────────────────── */}
