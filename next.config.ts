@@ -83,6 +83,44 @@ const nextConfig: NextConfig = {
             value:
               "camera=(), microphone=(), geolocation=(), interest-cohort=()",
           },
+          {
+            // Strict-Transport-Security · enforce HTTPS for 1 year +
+            // preload + includeSubDomains · per OWASP SecHeaders 2026
+            // canonical · Vercel sets this by default but explicit
+            // belt-and-suspenders per R96 W1 audit defense-in-depth。
+            key: "Strict-Transport-Security",
+            value: "max-age=31536000; includeSubDomains; preload",
+          },
+          {
+            // Content-Security-Policy · per R96 W1 agent OBSERVATION 5
+            // low-priority recommendation · brand IP「0 tracking · 0
+            // third-party scripts · 0 ads」 已是 naturally restrictive。
+            // 'unsafe-inline' kept for Next.js inline RSC + speculation
+            // rules JSON in layout.tsx + Tailwind 4 inline styles · 不
+            // 強行 nonce strategy(risk of breaking Next.js 16 streaming
+            // partial-prerender)。 connect-src whitelist Supabase ·
+            // img-src whitelist MLB/CPBL CDN per remotePatterns above。
+            key: "Content-Security-Policy",
+            value: [
+              "default-src 'self'",
+              "script-src 'self' 'unsafe-inline'",
+              "style-src 'self' 'unsafe-inline'",
+              "img-src 'self' data: https://midfield.mlbstatic.com https://img.mlbstatic.com https://stats.cpbl.com.tw",
+              "font-src 'self' data:",
+              "connect-src 'self' https://*.supabase.co",
+              "frame-ancestors 'none'",
+              "base-uri 'self'",
+              "form-action 'self'",
+              "object-src 'none'",
+              "upgrade-insecure-requests",
+            ].join("; "),
+          },
+          {
+            // Cross-Origin-Opener-Policy · process isolation · prevents
+            // window.opener leakage · brand IP 「0 tracking」 axiom 延伸。
+            key: "Cross-Origin-Opener-Policy",
+            value: "same-origin",
+          },
         ],
       },
     ];

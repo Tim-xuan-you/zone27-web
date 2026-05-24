@@ -10,6 +10,10 @@ import {
   cpblPitchers,
   CPBL_PITCHER_FETCH_DATE,
 } from "@/lib/cpbl-pitchers";
+import {
+  getCpblAdvancedByAcnt,
+  CPBL_ADVANCED_FETCH_DATE,
+} from "@/lib/cpbl-advanced";
 
 type Props = {
   params: Promise<{ acnt: string }>;
@@ -55,6 +59,10 @@ export default async function PitcherProfilePage({ params }: Props) {
   if (!pitcher) {
     notFound();
   }
+  // Trackman radar advanced stats(R99 W1 integration · lib/cpbl-advanced.ts
+  // existing data · 0 new infrastructure · 12 pitchers covered · null if not
+  // tracked yet · honest empty-state per Disclosure axiom)。
+  const advanced = pitcher.acnt ? getCpblAdvancedByAcnt(pitcher.acnt) : null;
 
   // League-relative rank · sorted by K/9 default。
   const sortedByK9 = [...cpblPitchers].sort((a, b) => b.k9 - a.k9);
@@ -165,6 +173,100 @@ export default async function PitcherProfilePage({ params }: Props) {
           </p>
         </section>
 
+        {/* ── ADVANCED TRACKMAN PERCENTILE STACK · R99 W1 integration ── */}
+        {advanced ? (
+          <section
+            aria-labelledby="advanced-stack-heading"
+            className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-10 border-t border-line/40 pt-10"
+          >
+            <p
+              lang="en"
+              className="font-mono text-gold/85 text-[10px] tracking-[0.4em] mb-3"
+            >
+              / ADVANCED · TRACKMAN RADAR · stats.cpbl + 野球革命
+            </p>
+            <h2
+              id="advanced-stack-heading"
+              className="text-2xl sm:text-3xl text-bone font-light tracking-tight mb-3 leading-snug"
+            >
+              7 個 Statcast-grade 進階指標
+            </h2>
+            <p className="text-mute text-sm sm:text-base leading-relaxed mb-6">
+              中職百分位 0-100(100 = elite vs CPBL league)· Trackman radar
+              tracking · 比 K/9 / BB/9 / HR/9 per-9 rate stats 高一層 ·{" "}
+              <strong className="text-bone">wOBA-against</strong> · K% ·
+              BB% · Whiff% · Hard-Hit% · Exit Velo Avg/Max。
+            </p>
+            <div className="bg-slate/30 border border-line/60 px-4 sm:px-6 py-5 sm:py-6 space-y-2 font-mono">
+              <AdvancedPercentileRow
+                label="wOBA AGAINST"
+                en="WEIGHTED ON-BASE"
+                percentile={advanced.wobaAgainst}
+                higherBetter={false}
+              />
+              <AdvancedPercentileRow
+                label="K %"
+                en="STRIKEOUT RATE"
+                percentile={advanced.kPct}
+                higherBetter={true}
+              />
+              <AdvancedPercentileRow
+                label="BB %"
+                en="WALK RATE"
+                percentile={advanced.bbPct}
+                higherBetter={false}
+              />
+              <AdvancedPercentileRow
+                label="WHIFF %"
+                en="SWING-AND-MISS"
+                percentile={advanced.whiffPct}
+                higherBetter={true}
+              />
+              <AdvancedPercentileRow
+                label="HARD-HIT %"
+                en="EXIT VELO ≥ 95mph"
+                percentile={advanced.hardHitPct}
+                higherBetter={false}
+              />
+              <AdvancedPercentileRow
+                label="EXIT VELO AVG"
+                en="ALLOWED CONTACT"
+                percentile={advanced.exitVeloAvg}
+                higherBetter={false}
+              />
+              <AdvancedPercentileRow
+                label="EXIT VELO MAX"
+                en="HARDEST HIT ALLOWED"
+                percentile={advanced.exitVeloMax}
+                higherBetter={false}
+              />
+            </div>
+            <p className="mt-4 font-mono text-mute/70 text-[10px] tracking-[0.25em] leading-relaxed">
+              ⚓ Data · {CPBL_ADVANCED_FETCH_DATE} TPE · Trackman radar 整合
+              stats.cpbl.com.tw · 不假裝自己 collect Trackman data · fetch
+              script 公開 GitHub
+            </p>
+          </section>
+        ) : (
+          <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-10 border-t border-line/40 pt-10">
+            <p
+              lang="en"
+              className="font-mono text-mute/70 text-[10px] tracking-[0.4em] mb-3"
+            >
+              / ADVANCED · TRACKMAN RADAR · 此投手尚未 tracked
+            </p>
+            <p className="text-mute text-sm leading-relaxed">
+              {pitcher.name} 暫時不在 Trackman radar 進階指標 cache(目前 12
+              位主要投手)· 等下次{" "}
+              <code className="font-mono text-bone bg-slate/40 px-1.5 py-0.5 rounded-sm text-[12px]">
+                npm run fetch-cpbl-advanced
+              </code>{" "}
+              auto-update · 此 honest empty state per Disclosure axiom · 不藏
+              · 不假裝。
+            </p>
+          </section>
+        )}
+
         {/* ── RAW COUNT STATS · supplementary table ──── */}
         <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-10 border-t border-line/40 pt-10">
           <p
@@ -258,6 +360,85 @@ export default async function PitcherProfilePage({ params }: Props) {
       </main>
 
       <Footer />
+    </div>
+  );
+}
+
+// ── AdvancedPercentileRow · Baseball Savant style horizontal percentile bar ─
+function AdvancedPercentileRow({
+  label,
+  en,
+  percentile,
+  higherBetter,
+}: {
+  label: string;
+  en: string;
+  percentile: number | null;
+  higherBetter: boolean;
+}) {
+  if (percentile === null) {
+    return (
+      <div className="grid grid-cols-[5.5rem_1fr_3rem] sm:grid-cols-[7rem_1fr_3rem] items-center gap-3 py-1.5 text-[11px] sm:text-xs">
+        <span className="text-mute/70 tracking-[0.2em]">{label}</span>
+        <span className="text-mute/50 italic">— 未 tracked</span>
+        <span className="text-mute/40 text-right">—</span>
+      </div>
+    );
+  }
+  // Strength tier color · higherBetter aware。
+  const strength = higherBetter ? percentile : 100 - percentile;
+  const tier: "elite" | "mid" | "rebuild" =
+    strength >= 70 ? "elite" : strength >= 30 ? "mid" : "rebuild";
+  const tierLabel =
+    tier === "elite" ? "ELITE" : tier === "mid" ? "MID" : "REBUILD";
+  const tierClass =
+    tier === "elite"
+      ? "text-gold"
+      : tier === "mid"
+      ? "text-bone/85"
+      : "text-mute";
+  return (
+    <div
+      className="grid grid-cols-[5.5rem_1fr_3rem] sm:grid-cols-[7rem_1fr_3rem] items-center gap-3 py-1.5 text-[11px] sm:text-xs"
+      title={`${label}(${en})· 百分位 ${percentile}/100 · ${higherBetter ? "高 = 強" : "低 = 強"} · per CPBL league reference`}
+    >
+      <span className="text-mute tracking-[0.2em] leading-snug">
+        {label}
+        <span className="block text-mute/50 text-[9px] tracking-[0.18em] mt-0.5">
+          {en}
+        </span>
+      </span>
+      <div
+        className="relative h-[6px] bg-line/40 rounded-sm overflow-visible"
+        role="img"
+        aria-label={`${label} percentile ${percentile} · ${tierLabel}`}
+      >
+        <div
+          className="absolute inset-0 rounded-sm opacity-40"
+          style={{
+            background: higherBetter
+              ? "linear-gradient(to right, rgba(138, 147, 168, 0.4), rgba(245, 242, 234, 0.5), rgba(212, 175, 55, 0.6))"
+              : "linear-gradient(to right, rgba(212, 175, 55, 0.6), rgba(245, 242, 234, 0.5), rgba(138, 147, 168, 0.4))",
+          }}
+        />
+        <div
+          className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-[10px] h-[10px] rounded-sm"
+          style={{
+            left: `${percentile}%`,
+            backgroundColor:
+              tier === "elite"
+                ? "#D4AF37"
+                : tier === "mid"
+                ? "#F5F2EA"
+                : "#8A93A8",
+            boxShadow:
+              tier === "elite" ? "0 0 6px rgba(212, 175, 55, 0.5)" : "none",
+          }}
+        />
+      </div>
+      <span className={`tracking-[0.18em] text-right tabular ${tierClass}`}>
+        {tierLabel}
+      </span>
     </div>
   );
 }
