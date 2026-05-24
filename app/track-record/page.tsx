@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import RelatedReading from "@/components/RelatedReading";
 import FounderSignOff from "@/components/FounderSignOff";
 import ArticleMeta from "@/components/ArticleMeta";
+import ReadingProgress from "@/components/ReadingProgress";
 import EngineStamp from "@/components/EngineStamp";
 import ReproducibilityReceipt from "@/components/ReproducibilityReceipt";
 import LedgerDeltaChip from "@/components/LedgerDeltaChip";
@@ -61,6 +62,7 @@ export default function TrackRecordPage() {
   return (
     <div className="flex flex-col flex-1 min-h-screen">
       <Nav />
+      <ReadingProgress />
 
       <main id="main">
 

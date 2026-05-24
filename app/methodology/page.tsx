@@ -8,6 +8,7 @@ import RelatedReading from "@/components/RelatedReading";
 import FounderSignOff from "@/components/FounderSignOff";
 import LongReadHandoff from "@/components/LongReadHandoff";
 import ArticleMeta from "@/components/ArticleMeta";
+import ReadingProgress from "@/components/ReadingProgress";
 import StatTerm from "@/components/StatTerm";
 import ReproducibilityReceipt from "@/components/ReproducibilityReceipt";
 import { matches } from "@/lib/matches";
@@ -25,6 +26,7 @@ export default function MethodologyPage() {
   return (
     <div className="flex flex-col flex-1 min-h-screen">
       <Nav />
+      <ReadingProgress />
 
       <main id="main">
 

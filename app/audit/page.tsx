@@ -7,6 +7,7 @@ import RelatedReading from "@/components/RelatedReading";
 import FounderSignOff from "@/components/FounderSignOff";
 import StatTerm from "@/components/StatTerm";
 import ArticleMeta from "@/components/ArticleMeta";
+import ReadingProgress from "@/components/ReadingProgress";
 import ReproducibilityReceipt from "@/components/ReproducibilityReceipt";
 import LocalStorageReceipt from "@/components/LocalStorageReceipt";
 import { matches, getFinalizedMatches } from "@/lib/matches";
@@ -58,6 +59,7 @@ export default function AuditPage() {
   return (
     <div className="flex flex-col flex-1 min-h-screen">
       <Nav />
+      <ReadingProgress />
 
       <main id="main">
         <article className="mx-auto max-w-3xl w-full px-6 sm:px-10 pt-20 pb-12">

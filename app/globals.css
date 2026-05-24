@@ -116,6 +116,47 @@ p, li {
   hanging-punctuation: first allow-end;
 }
 
+/* Reading-progress bar · CSS Scroll-Driven Animations Level 1 · Chrome 115+
+   Safari 26+ · Firefox behind flag · gracefully degrades to invisible in
+   unsupported browsers via @supports guard · 0 JS · fixed-top hairline ·
+   Cold Gold #D4AF37 · same brand palette · per `<ReadingProgress />` server
+   component · indie-premium polish signal · per 2026 award-winning indie
+   editorial site pattern(Stratechery + Substack + Defector use similar)。
+   Prefers-reduced-motion respected via @media guard。 */
+.reading-progress-bar {
+  display: none;
+}
+@supports (animation-timeline: scroll(root)) {
+  @media (prefers-reduced-motion: no-preference) {
+    .reading-progress-bar {
+      display: block;
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 2px;
+      background: linear-gradient(
+        90deg,
+        rgba(212, 175, 55, 0.4) 0%,
+        rgba(212, 175, 55, 1) 100%
+      );
+      z-index: 40;
+      width: 0%;
+      animation: reading-progress-fill linear;
+      animation-timeline: scroll(root);
+      pointer-events: none;
+      box-shadow: 0 0 8px rgba(212, 175, 55, 0.4);
+    }
+  }
+}
+@keyframes reading-progress-fill {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
+  }
+}
+
 /* Safari-only but harmless elsewhere — pulls opening quote outside
    the text block. Edward-Tufte-grade typography. */
 blockquote {
