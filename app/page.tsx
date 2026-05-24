@@ -8,6 +8,7 @@ import ClientErrorBoundary from "@/components/ClientErrorBoundary";
 import RecentMatchesRow from "@/components/RecentMatchesRow";
 import AnonCalibrationStrip from "@/components/AnonCalibrationStrip";
 import AnonPickWidget from "@/components/AnonPickWidget";
+import LivingCoverHero from "@/components/LivingCoverHero";
 import {
   getFeaturedMatch,
   getTodayMatches,
@@ -219,6 +220,15 @@ export default function Home() {
         id="tonight-engine"
         className="mx-auto w-full max-w-3xl px-6 sm:px-10 pb-20 sm:pb-28 scroll-mt-8"
       >
+        {/* R97 W2 · LivingCoverHero · Stripe Press signature pattern · 算法
+            生成 SVG sparkline · 永遠 render 引擎活著的 visual proof · 0 JS ·
+            0 animation · deterministic per match.id / build date · 同 Anthropic
+            interactive model card visual signature axis。 */}
+        <LivingCoverHero
+          match={featuredMatch ?? todayMatches[0] ?? undefined}
+          className="mb-6 sm:mb-8 -mt-2 sm:-mt-4"
+        />
+
         {useMultiMatch && trackRecord ? (
           <TonightReceiptsCard
             matches={todayMatches}
