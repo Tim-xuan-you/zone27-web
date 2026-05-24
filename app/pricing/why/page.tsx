@@ -14,10 +14,10 @@ import {
 } from "@/lib/founders-stats";
 
 export const metadata = createPageMetadata({
-  title: "為什麼是 NT$ 299 · 為什麼是 NT$ 2,700",
+  title: "為什麼是 NT$ 1,500 · 為什麼是 NT$ 2,700",
   description:
     "ZONE 27 定價 rationale 一頁說清楚 · 不藏在 FAQ · 不靠 sales call · 不靠 enterprise contact form · 純 Defector inverse-disclosure + FanGraphs output-not-input + Stripe Atlas 6-deliverable + Stratechery single-sentence FAQ defense · 5 brand IP axiom triple-fire pricing page craft。",
-  ogTitle: "Pricing Why · NT$ 299/月 vs NT$ 2,700 一次性 · ZONE 27",
+  ogTitle: "Pricing Why · NT$ 1,500/season vs NT$ 2,700 一次性 · ZONE 27",
   ogDescription:
     "定價 rationale 一頁說清楚 · 不藏在 FAQ · 不靠 sales call · 5 anti-pattern explicit refused",
   path: "/pricing/why",
@@ -64,7 +64,7 @@ export default function PricingWhyPage() {
             PRICING / WHY · 一頁說清楚
           </p>
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-light leading-[1.1] tracking-tight text-bone">
-            為什麼是 <span className="text-gold">NT$ 299</span>
+            為什麼是 <span className="text-gold">NT$ 1,500</span>
             <br />
             為什麼是 <span className="text-gold">NT$ 2,700</span>
           </h1>
@@ -157,8 +157,8 @@ export default function PricingWhyPage() {
           </ul>
         </Section>
 
-        {/* ── §02 · NT$ 299 換到的東西 · FanGraphs output-not-input ─── */}
-        <Section no="02" label="WHAT NT$ 299 BUYS" zh="NT$ 299 換到的東西">
+        {/* ── §02 · NT$ 1,500/season 換到的東西 · FanGraphs output-not-input ─── */}
+        <Section no="02" label="WHAT NT$ 1,500/SEASON BUYS" zh="NT$ 1,500/season 換到的東西">
           <p>
             FanGraphs Membership($14.95/mo)不列「我們 server 成本 X · 員工
             payroll Y」 · 列 OUTPUT:「200 articles/month · 25 contributors ·
@@ -204,7 +204,7 @@ export default function PricingWhyPage() {
           </ol>
 
           <h3 className="text-bone text-lg mt-8 mb-3">
-            BLACK CARD NT$ 299/月 unlocks(payment infra 就緒後)· 6 件
+            BLACK CARD NT$ 1,500/season unlocks(payment infra 就緒後)· 6 件
           </h3>
           {/* R76 W-A · Agent A R75 SHIP 7 OutputArtifactSwitcher · 加 6th
               row(LINE 群 read-only)· sync /membership/black-card UNLOCKS
@@ -282,7 +282,7 @@ export default function PricingWhyPage() {
               <strong className="text-bone">實體尊榮招待</strong> · 恆美攝影 × 伶 Kopi 旗艦店 · 終身一杯紅茶 · per /founders benefit #06
             </NumItemGhost>
             <NumItemGhost n="05">
-              <strong className="text-bone">BLACK CARD 月卡終身免費</strong> · 省 NT$ 299 × ∞ months · per /founders 9 個月 break-even math
+              <strong className="text-bone">BLACK CARD 季票終身免費</strong> · 省 NT$ 1,500 × ∞ seasons · per /founders 2-season break-even math(R81 pivot 後)
             </NumItemGhost>
             <NumItemGhost n="06">
               <strong className="text-bone">永久不漲價</strong> · NT$ 2,700 closed state · 同 Pokemon 1st Edition Shadowless 不可重印
@@ -360,7 +360,7 @@ export default function PricingWhyPage() {
                 · 不存在 enterprise tier · 不存在「talk to our team」 form ·
                 ZONE 27 brand IP = 個人 audience-fans · 不接 corporate B2B ·
                 如果您是 corporate · 同 rates 同 access 自己 NT$ 2,700 或 NT$
-                299/月 · per /faq Q「ZONE 27 接 corporate?」 答 NO。
+                1,500/season · per /faq Q「ZONE 27 接 corporate?」 答 NO。
               </span>
             </li>
           </ul>
@@ -382,7 +382,7 @@ export default function PricingWhyPage() {
           <p>
             Cialdini Influence(1984)Chapter 2 Reciprocity Rule · pre-gift
             triggers obligation-to-reciprocate · LINE 老師 / 報馬仔 ask-first-
-            give-never inversion · ZONE 27 在收 NT$ 299/月 + NT$ 2,700 一次性
+            give-never inversion · ZONE 27 在收 NT$ 1,500/season + NT$ 2,700 一次性
             之前已 publish 16 件 receipts:
           </p>
           <div className="mt-6">
@@ -413,10 +413,10 @@ export default function PricingWhyPage() {
                 Stratechery 創辦人 Ben Thompson:「Stratechery is purposely kept
                 at a low price — thousands of dollars less than other analyst
                 reports or newsletters — to ensure it is accessible to everyone,
-                including students。」 ZONE 27 採同思維:NT$ 299 是<strong className="text-bone">刻意低</strong>
+                including students。」 ZONE 27 採同思維:NT$ 1,500/season(≈ NT$ 187/月)是<strong className="text-bone">刻意低</strong>
                 · 不是因為我們便宜 · 是因為我們不想要靠您財務不舒服才賺錢。
                 Defector $79/yr ≈ NT$ 2,400/年 ≈ NT$ 200/月 · The Athletic
-                $79.99/yr ≈ NT$ 210/月 · ZONE 27 NT$ 299 在 NT$ 200-450/月
+                $79.99/yr ≈ NT$ 210/月 · ZONE 27 NT$ 1,500/season ≈ NT$ 187/月 在 NT$ 200-450/月
                 indie sports subscription band 中段 sweet spot · per
                 /membership/black-card hero 4-cell anchor strip。
               </p>
@@ -425,7 +425,7 @@ export default function PricingWhyPage() {
               <p>
                 Founders 27(NT$ 2,700 一次性 終身)IS the lifetime BLACK CARD ·
                 already includes 全部 BLACK CARD unlocks 終身 · 不需要再付 NT$
-                299/月。 換言之 · Founders 27 = lifetime BLACK CARD + 6 額外
+                1,500/season。 換言之 · Founders 27 = lifetime BLACK CARD + 6 額外
                 benefits(per §03 list)。 您持 Founders 27 永遠不需要訂閱 BLACK
                 CARD · 「升級」 不存在 · 因為您已經在 top tier 終身。
               </p>
@@ -453,8 +453,11 @@ export default function PricingWhyPage() {
                 Pokemon 1st Edition Shadowless 不可重印 mechanic · per
                 /founders/ledger #shadowless-run binding pre-commit。 BLACK CARD
                 如果未來調整 monthly price · 已 active subscribers 自動 grandfather
-                到 NT$ 299/月 · 不會被強制 migration · 修改需 30 天前 /changelog
-                公告 · per /audit S05 PRE-COMMIT pattern。
+                到 您 first-purchase season price · 不會被強制 migration ·
+                修改需 30 天前 /changelog 公告 · per /audit S05 PRE-COMMIT +
+                /integrity rule #13(R81 加 · 永遠不 subscription auto-renewal)
+                pattern。 R81 BLACK CARD pivot 自 NT$ 299/月 → NT$ 1,500/season
+                · 已 active(若有)按過去 price grandfather。
               </p>
             </FaqRow>
           </div>
@@ -499,7 +502,7 @@ export default function PricingWhyPage() {
               href="/membership/black-card"
               className="px-6 sm:px-8 py-3 border border-line/60 text-mute hover:text-gold hover:border-gold/40 text-xs tracking-[0.3em] transition-colors"
             >
-              BLACK CARD NT$ 299/月 →
+              BLACK CARD NT$ 1,500/season →
             </Link>
           </div>
         </section>
