@@ -96,6 +96,54 @@ export default async function TeamPage({ params }: Props) {
         }
       : null;
 
+  // R100 W1 · Team-level Trackman aggregate · derived from cpbl-advanced ·
+  // 顯示「球團 N 位 trackman 進階指標投手 + 平均 K% + 平均 wOBA-against 百分位」 ·
+  // 補 percentile depth · honest empty-state when 0 trackman pitchers。
+  const trackmanPitchers = teamPitchers
+    .map((p) =>
+      p.acnt ? { pitcher: p, advanced: getCpblAdvancedByAcnt(p.acnt) } : null
+    )
+    .filter(
+      (entry): entry is { pitcher: CpblPitcherStats; advanced: NonNullable<ReturnType<typeof getCpblAdvancedByAcnt>> } =>
+        entry !== null && entry.advanced !== null
+    );
+
+  const trackmanAggregate =
+    trackmanPitchers.length > 0
+      ? {
+          count: trackmanPitchers.length,
+          avgKPct: Math.round(
+            trackmanPitchers
+              .filter((e) => e.advanced.kPct !== null)
+              .reduce((sum, e) => sum + (e.advanced.kPct ?? 0), 0) /
+              Math.max(
+                1,
+                trackmanPitchers.filter((e) => e.advanced.kPct !== null).length
+              )
+          ),
+          avgWobaAgainst: Math.round(
+            trackmanPitchers
+              .filter((e) => e.advanced.wobaAgainst !== null)
+              .reduce((sum, e) => sum + (e.advanced.wobaAgainst ?? 0), 0) /
+              Math.max(
+                1,
+                trackmanPitchers.filter((e) => e.advanced.wobaAgainst !== null)
+                  .length
+              )
+          ),
+          avgWhiffPct: Math.round(
+            trackmanPitchers
+              .filter((e) => e.advanced.whiffPct !== null)
+              .reduce((sum, e) => sum + (e.advanced.whiffPct ?? 0), 0) /
+              Math.max(
+                1,
+                trackmanPitchers.filter((e) => e.advanced.whiffPct !== null)
+                  .length
+              )
+          ),
+        }
+      : null;
+
   return (
     <div className="flex flex-col flex-1 min-h-screen">
       <Nav />
@@ -156,9 +204,48 @@ export default async function TeamPage({ params }: Props) {
               <AggregateCell label="TOTAL IP" value={aggregate.totalIp} />
             </div>
           )}
+
+          {/* R100 W1 · Team-level Trackman aggregate · 12 pitchers across
+              league have advanced metrics · this team's avg percentile vs
+              league reference · honest count if 0。 */}
+          {trackmanAggregate && (
+            <div className="mt-4 max-w-3xl">
+              <p
+                lang="en"
+                className="font-mono text-gold/85 text-[9px] tracking-[0.3em] mb-2"
+              >
+                ↘ TRACKMAN AGGREGATE · {trackmanAggregate.count} of{" "}
+                {teamPitchers.length} pitchers tracked
+              </p>
+              <div className="grid grid-cols-3 gap-2 sm:gap-3">
+                <TrackmanAggregateCell
+                  label="AVG K %"
+                  en="STRIKEOUT RATE"
+                  percentile={trackmanAggregate.avgKPct}
+                  higherBetter={true}
+                />
+                <TrackmanAggregateCell
+                  label="AVG WHIFF %"
+                  en="SWING-AND-MISS"
+                  percentile={trackmanAggregate.avgWhiffPct}
+                  higherBetter={true}
+                />
+                <TrackmanAggregateCell
+                  label="AVG wOBA-A"
+                  en="WEIGHTED OBP"
+                  percentile={trackmanAggregate.avgWobaAgainst}
+                  higherBetter={false}
+                />
+              </div>
+            </div>
+          )}
+
           <p className="mt-6 font-mono text-mute/70 text-[10px] tracking-[0.25em] leading-relaxed">
             ⚓ Team aggregate from {teamPitchers.length} 投手 · {team.name}{" "}
             (database fetched {CPBL_PITCHER_FETCH_DATE} TPE)· 排序依 K/9 desc
+            {trackmanAggregate
+              ? ` · Trackman percentile aggregate from ${trackmanAggregate.count} tracked pitchers`
+              : " · Trackman advanced metrics 暫 0 tracked in 此 team(per Disclosure axiom 不藏)"}
           </p>
         </section>
 
@@ -345,6 +432,52 @@ function AggregateCell({ label, value }: { label: string; value: string }) {
       </p>
       <p className="font-mono text-bone tabular text-xl sm:text-2xl font-light">
         {value}
+      </p>
+    </div>
+  );
+}
+
+// ── TrackmanAggregateCell · team-level percentile aggregate ──
+function TrackmanAggregateCell({
+  label,
+  en,
+  percentile,
+  higherBetter,
+}: {
+  label: string;
+  en: string;
+  percentile: number;
+  higherBetter: boolean;
+}) {
+  const strength = higherBetter ? percentile : 100 - percentile;
+  const tier: "elite" | "mid" | "rebuild" =
+    strength >= 70 ? "elite" : strength >= 30 ? "mid" : "rebuild";
+  const tierClass =
+    tier === "elite"
+      ? "text-gold"
+      : tier === "mid"
+      ? "text-bone/85"
+      : "text-mute";
+  const tierLabel =
+    tier === "elite" ? "ELITE" : tier === "mid" ? "MID" : "REBUILD";
+  return (
+    <div
+      className="border border-gold/30 bg-slate/30 px-3 sm:px-4 py-3 text-center"
+      title={`${label}(${en})· team avg 百分位 ${percentile}/100 · ${higherBetter ? "高 = 強" : "低 = 強"} · ${tierLabel}`}
+    >
+      <p
+        lang="en"
+        className="font-mono text-gold/70 text-[9px] tracking-[0.3em] mb-1"
+      >
+        {label}
+      </p>
+      <p
+        className={`font-mono tabular text-xl sm:text-2xl font-light ${tierClass}`}
+      >
+        {percentile}
+      </p>
+      <p className="font-mono text-mute/60 text-[8px] tracking-[0.2em] mt-0.5">
+        {tierLabel}
       </p>
     </div>
   );
