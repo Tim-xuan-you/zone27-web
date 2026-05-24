@@ -233,27 +233,8 @@ export default function BlackCardPage() {
             <span className="text-gold/85">14-DAY</span> 退款保證
           </p>
           <p className="mt-6 text-mute leading-relaxed max-w-2xl">
-            ZONE 27 BLACK CARD · <strong className="text-bone">CPBL Season Pass 季票模式</strong>
-            · NT$ 1,500 per CPBL season(March-November · 240 場 + 季後賽)·
-            <strong className="text-bone"> 0 subscription auto-renewal · 每季
-            explicit click + manual transfer</strong> · 14 天無條件退款 · 5% 創作者抽成
-            (vs Taiwan LINE 老師 / 投顧老師生態 30-50% 是降維打擊)。
-          </p>
-          <p className="mt-4 text-mute/85 leading-relaxed max-w-2xl">
-            <strong className="text-bone">brand IP 倒置 SaaS · 不靠 dark pattern
-            自動扣款</strong> · 每季 explicit commit = stronger signal · 同 統一獅
-            47-game season package + NBA 88% season ticket renewal + Defector 85%
-            explicit-renewal + Pinboard $25 一次性 · 4 industry references
-            validated · per /integrity rule #13(R81 加 · 永遠不 subscription
-            auto-renewal binding · ECPay / TapPay / Stripe 自動扣款全 refused)。
-          </p>
-          <p className="mt-4 text-mute/85 leading-relaxed max-w-2xl">
-            <strong className="text-bone">R81 pivot rationale:</strong> 綠界沒
-            定期定額 = brand opportunity NOT 限制 · Recurly 2025 data 年訂閱
-            churn 比月訂閱低 51% · NBA Warriors season ticket renewal 99.5% ·
-            ChartMogul 4.78M-customer data · NRR 年訂閱比月訂閱高 10-20pp ·
-            Defector Year-5 公開 85% explicit-renewal · Pinboard 17-year solo
-            $25 one-time · 我們同 indie premium niche 的最強 axis。
+            CPBL 季票 · <strong className="text-bone">NT$ 1,500 / season</strong> ·
+            0 auto-renewal · 14 天無條件退款 · 5% 創作者抽成。
           </p>
           <p className="mt-4 font-mono text-gold/80 text-[10px] tracking-[0.25em] leading-relaxed max-w-2xl">
             ✓ LIVE NOW · 個人方案綠界(ECPay)收款 · 信用卡 + Apple Pay + ATM +
@@ -355,151 +336,26 @@ export default function BlackCardPage() {
           </div>
         </section>
 
-        {/* ── R39 W-D · Agent D #2 · 404 Media 「FREE FOREVER vs ADDED」 2-col disclosure ─
-            「Almost every story is free」 framing 倒置入 ZONE 27 brand IP ·
-            告訴 visitor 您不需付的東西比需付的多 · 解 first-time-payer
-            第一恐懼「他們之後會 paywall 全部」。 brand IP「Engine FREE forever」
-            從 implicit 升 explicit visible at purchase path。 */}
+        {/* R82 simplification · 3 brand-IP sections compressed to 1 small
+            cross-link card · per Tim 「太多多餘 · 沒人想知道」 founder-
+            dogfood-canary fire · FREE FOREVER + NEGATION IS PRODUCT +
+            8 commitments sections 全 cut · 本 page 從 633 行 → ~350 行 ·
+            brand IP commitments 仍 visible in /audit + /integrity +
+            /ethics canonical pages · 但 sales page 不再 hijack。 per
+            pratfall-brand-ip · 不 delete brand IP · 只 move 到 secondary
+            page · sales-page-as-Apple-product-page pattern。 */}
         <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-16 border-t border-line/40 pt-12">
-          <p
-            lang="en"
-            className="font-mono text-gold text-[10px] tracking-[0.45em] mb-6"
-          >
-            / FREE FOREVER · 您不需付的東西 · vs · BLACK CARD 加上的
-          </p>
-          <h2 className="text-2xl sm:text-3xl text-bone font-light tracking-tight mb-6 leading-tight">
-            BLACK CARD <span className="text-gold">加上 6 件</span> · 不拿掉任何 free 內容
-          </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
-            <div className="border border-line/60 bg-slate/30 p-5">
-              <p
-                lang="en"
-                className="font-mono text-gold/80 text-[10px] tracking-[0.3em] mb-3"
-              >
-                FREE FOREVER · 不需付費
-              </p>
-              <ul className="space-y-2 text-mute text-sm leading-relaxed">
-                <li>▸ 引擎 v0.2 Win Probability + 10K Monte Carlo</li>
-                <li>▸ /matches all CPBL 賽事 · all 7 LIVE LENS(Vibe Check + Park Factor + Pitcher Fatigue + Underdog + BullpenDepth + MatchupHistory + LensTrace)</li>
-                <li>▸ /track-record + /calibration 引擎自評 + Brier score</li>
-                <li>▸ /audit + /methodology + /coverage 全部 trust docs</li>
-                <li>▸ /lab + /lab/custom 自訂任意投手對戰</li>
-                <li>▸ /signal-board + /matches/mlb MLB 資料</li>
-                <li>▸ FREE TIER 5 unlocks(Follow + Note + Submit + Calibration mirror + Predictions)</li>
-                <li>▸ /annual/2026 Year 0 honest report</li>
-              </ul>
-            </div>
-            <div className="border border-gold/50 bg-slate/50 p-5 glow-soft">
-              <p
-                lang="en"
-                className="font-mono text-gold text-[10px] tracking-[0.3em] mb-3"
-              >
-                BLACK CARD · 加上的 6 件
-              </p>
-              <ul className="space-y-2 text-bone text-sm leading-relaxed">
-                <li>▸ Engine Lineup v0.3 + v0.4 解鎖(Q3 Q4 ship)</li>
-                <li>▸ Lens Variety 7 LIVE 完整解鎖(R40 W-B 7-lens canvas complete · Vibe + Park + Fatigue + Underdog + Bullpen + Matchup + LensTrace)</li>
-                <li>▸ 賽事 24hr 討論室 access(Round 31 planned)</li>
-                <li>▸ 5% creator 抽成(per /membership)</li>
-                <li>▸ 每月 voting · 決定 engine + lens 下一個 ship</li>
-                <li>▸ Tim 工程筆記 full(deprecation notes · DIVERGED 學習 · pre-launch)</li>
-              </ul>
-            </div>
-          </div>
-          <p className="font-mono text-mute/80 text-[10px] tracking-[0.25em] leading-relaxed">
-            ⚓ 我們<strong className="text-bone">永遠不會</strong> paywall 任何
-            目前 free 的內容 · per /audit S05 PRE-COMMIT pattern · 修改需 30
-            天 /changelog 公告 · brand IP「Engine FREE forever」 物理 codify。
-          </p>
-        </section>
-
-        {/* ── R39 W-E · Agent D #5 · Aftermath「F6 IS THE PRODUCT」 reframe ─
-            F6 不做 list 從 brand statement 升 value-stack item ·
-            「您 NT$ 299 也在為這 6 件「永遠不做」 付費」 · negation IS
-            the product · displacement payload 物理 codify。 */}
-        <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-16 border-t border-line/40 pt-12">
-          <p
-            lang="en"
-            className="font-mono text-gold text-[10px] tracking-[0.45em] mb-6"
-          >
-            / NEGATION IS THE PRODUCT · 您也在為這 6 件「永遠不做」付費
-          </p>
-          <h2 className="text-2xl sm:text-3xl text-bone font-light tracking-tight mb-6 leading-tight">
-            您的 NT$ 299 買 6 unlocks · 同時買 <span className="text-gold">6 件永遠不做</span>
-          </h2>
-          <p className="text-mute leading-relaxed mb-6">
-            訂閱費 funds 不止 features · 也 funds 結構性約束。 玩運彩+報馬仔
-            收的錢 funds 他們 do 您不想要的事(賠率推銷 + cash referral
-            + 失敗週次刪文)。 ZONE 27 收的錢 funds 我們 <strong>NOT do</strong>{" "}
-            這些事:
-          </p>
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-5">
-            {[
-              "不顯示賠率",
-              "不賣明牌",
-              "不分潤博彩",
-              "不藏 DIVERGED",
-              "不追蹤您",
-              "不等 Q3",
-            ].map((item) => (
-              <div
-                key={item}
-                className="border border-gold/40 bg-slate/40 p-3 font-mono text-bone text-[11px] tracking-[0.2em] text-center"
-              >
-                ✕ {item}
-              </div>
-            ))}
-          </div>
-          <p className="font-mono text-mute/80 text-[10px] tracking-[0.25em] leading-relaxed">
-            Aronson 1966 + Spence 1973 costly signaling · negation 是 brand
-            moat · 公開定價 funds 拒絕的東西 · 比 funds 功能 更 informative。
-          </p>
-        </section>
-
-        {/* ── R39 W-F · Agent D #3 · Stratechery「Subscriber Compact」 3-line ─
-            Ben Thompson 「不賣 paid opinions · 不持 covered cos individual
-            stocks · 不 consulting」 3-point ethics on subscription path ·
-            ZONE 27 transplant 同 pattern · 3 commitment signed Tim
-            「不賣引擎給 bookmakers · 0 ads ever · 公開年度收支 + sub count」。 */}
-        {/* ── R42 W-D · F3.1 MAJOR FIX · Agent I dogfood canary
-            Subscriber Compact 3-line lived here as subset of /ethics 8 ·
-            skeptic 看到兩 page 內容 partial overlap 會 ask「why 3 here vs
-            8 there?」 · 改 1-line link · /ethics 是 canonical · 不 duplicate
-            partial wording from /ethics · single source of truth。 */}
-        <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-16 border-t border-line/40 pt-12">
-          <p
-            lang="en"
-            className="font-mono text-gold text-[10px] tracking-[0.45em] mb-6"
-          >
-            / TIM 的 8 binding commitments · /ethics
-          </p>
           <Link
-            href="/ethics"
-            className="block border border-gold/40 bg-slate/40 p-5 sm:p-6 hover:bg-slate/50 hover:border-gold/60 transition-colors group glow-soft"
+            href="/integrity"
+            className="block border border-gold/40 bg-slate/40 p-5 hover:bg-slate/50 hover:border-gold/60 transition-colors group"
           >
-            <div className="flex items-baseline justify-between gap-3 flex-wrap mb-3">
-              <p
-                lang="en"
-                className="font-mono text-gold/90 text-[10px] tracking-[0.35em]"
-              >
-                ↗ 8 BINDING NOT-DO COMMITMENTS · SIGNED TIM
-              </p>
-              <span
-                lang="en"
-                className="font-mono text-gold text-[9px] tracking-[0.3em]"
-              >
-                CANONICAL · /ethics
-              </span>
-            </div>
-            <p className="text-bone text-base sm:text-lg leading-relaxed group-hover:text-gold transition-colors">
-              訂閱前 · 您應該知道 ZONE 27 永遠不做的{" "}
-              <span className="text-gold">8 件事</span> ·
-              玩運彩+報馬仔 結構性 violate 6/8 · ship 等於商業自殺 ·
-              ZONE 27 ship 等於 displacement narrative 物理閉環。
+            <p className="text-bone text-base leading-relaxed group-hover:text-gold transition-colors">
+              訂閱前 · 您應該知道 ZONE 27 <span className="text-gold">永遠不會變的 22 件事</span>
+              (13 redlines + 9 commitments)· per /integrity Berkshire 1996
+              Owner&rsquo;s Manual pattern · 公開 binding bond。
             </p>
-            <p className="mt-3 font-mono text-mute/70 text-[10px] tracking-[0.25em] group-hover:text-mute transition-colors">
-              5 DISPLACEMENT + 2 SUBSCRIBER PROTECT + 1 BRAND · 30-day
-              pre-commit binding · 修改需 /changelog 公告 →
+            <p className="mt-2 font-mono text-mute/70 text-[10px] tracking-[0.3em] group-hover:text-mute transition-colors">
+              /integrity · /ethics · /audit · /transparency →
             </p>
           </Link>
         </section>
@@ -551,19 +407,15 @@ export default function BlackCardPage() {
             <ul className="space-y-2 text-mute text-sm leading-relaxed">
               <li className="flex gap-3 items-baseline">
                 <span className="font-mono text-gold/80 text-[10px] tracking-[0.25em]">▸</span>
-                <span>付款方式:ECPay 個人方案 · 信用卡 / 銀行轉帳 / 超商繳費 · NT$ 1,500 per CPBL season(March-November · 240 場 + 季後賽 ≈ NT$ 6/場)</span>
+                <span>ECPay 個人方案 · 信用卡 / 銀行轉帳 / 超商繳費</span>
               </li>
               <li className="flex gap-3 items-baseline">
                 <span className="font-mono text-gold/80 text-[10px] tracking-[0.25em]">▸</span>
-                <span>當季起算 · 每季 explicit click + manual transfer · <strong className="text-gold">0 auto-renewal forever</strong>(per /integrity rule #13 · R81 binding · 同 NBA 88% / 統一獅 47-game / Defector 85% / Pinboard 一次性 pattern)</span>
+                <span>0 auto-renewal · 季末 email 提醒下季 renew · 您回 OK 才付</span>
               </li>
               <li className="flex gap-3 items-baseline">
                 <span className="font-mono text-gold/80 text-[10px] tracking-[0.25em]">▸</span>
-                <span>首次 14 天無條件退款(per 台灣消保法 § 19 distance-selling)· 季末 email 提醒「下季 renew?」· 您回「下季 renew」即可付下季 · 7 天不回 silent expire · 0 reminder · 0 dark pattern</span>
-              </li>
-              <li className="flex gap-3 items-baseline">
-                <span className="font-mono text-gold/80 text-[10px] tracking-[0.25em]">▸</span>
-                <span>每筆 season pass 真實上 <Link href="/membership/black-card/ledger" className="text-gold hover:underline underline-offset-4">/membership/black-card/ledger</Link> public ledger · row 1 永久</span>
+                <span>首次 14 天無條件退款 · 您上 <Link href="/membership/black-card/ledger" className="text-gold hover:underline underline-offset-4">public ledger</Link> row 1</span>
               </li>
             </ul>
           </div>
