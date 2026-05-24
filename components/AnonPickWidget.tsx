@@ -409,7 +409,7 @@ export default function AnonPickWidget({ match }: Props) {
           href="/membership/black-card"
           className="text-gold/85 hover:text-gold underline-offset-4 hover:underline transition-colors"
         >
-          BLACK CARD · NT$ 299/月 →
+          BLACK CARD · NT$ 1,500/season →
         </Link>
       </p>
     </article>

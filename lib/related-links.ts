@@ -285,7 +285,7 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
     {
       href: "/membership/black-card",
       kicker: "black-card",
-      title: "BLACK CARD 完整介紹 · NT$ 299/月",
+      title: "BLACK CARD 完整介紹 · NT$ 1,500/season",
     },
     {
       href: "/founders/ledger",
@@ -557,7 +557,7 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
   // + Stratechery FAQ defense + Pratfall「沒做什麼」。 Siblings:/membership
   // (4-tier ladder parent · users land here after seeing pricing rationale)·
   // /founders(deep page NT$ 2,700 · same buy decision)· /membership/black-card
-  // (deep page NT$ 299/月 · same buy decision)。
+  // (deep page NT$ 1,500/season · same buy decision)。
   "/pricing/why": [
     {
       href: "/membership",
@@ -572,7 +572,7 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
     {
       href: "/membership/black-card",
       kicker: "membership/black-card",
-      title: "BLACK CARD · NT$ 299/月 訂閱會員",
+      title: "BLACK CARD · NT$ 1,500/season 訂閱會員",
     },
   ],
 
@@ -727,7 +727,7 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
     {
       href: "/pricing/why",
       kicker: "pricing/why",
-      title: "Pricing rationale · 為什麼 NT$ 299 · 為什麼 NT$ 2,700",
+      title: "Pricing rationale · 為什麼 NT$ 1,500/season · 為什麼 NT$ 2,700",
     },
   ],
   // R76 W-C · NEW /engine-log · Stripe Status + Cloudflare postmortem +

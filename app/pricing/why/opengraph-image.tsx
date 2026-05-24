@@ -12,13 +12,13 @@ import { BRAND, OG_SIZE, OG_CONTENT_TYPE } from "@/lib/brand";
 //   - Pratfall(unique「沒做什麼」 section)
 //   - Costly Signaling(output-not-input forces real numbers)
 //   - Disclosure(inverse-disclosure who we're not beholden to)
-//   - 倒置 SaaS(NT$ 299/月 vs NT$ 2,700 一次性)
+//   - 倒置 SaaS(NT$ 1,500/season vs NT$ 2,700 一次性)
 // ─────────────────────────────────────────────────────
 
 export const size = OG_SIZE;
 export const contentType = OG_CONTENT_TYPE;
 export const alt =
-  "ZONE 27 · Pricing Why · NT$ 299/月 vs NT$ 2,700 一次性 · 一頁說清楚 · 不藏在 FAQ · 不靠 sales call · 不靠 enterprise contact form";
+  "ZONE 27 · Pricing Why · NT$ 1,500/season vs NT$ 2,700 一次性 · 一頁說清楚 · 不藏在 FAQ · 不靠 sales call · 不靠 enterprise contact form";
 
 export default async function PricingWhyOgImage() {
   return new ImageResponse(
@@ -125,7 +125,7 @@ export default async function PricingWhyOgImage() {
                   display: "flex",
                 }}
               >
-                NT$ 299
+                NT$ 1,500
               </span>
               <span
                 style={{
@@ -135,7 +135,7 @@ export default async function PricingWhyOgImage() {
                   display: "flex",
                 }}
               >
-                BLACK CARD · 每月
+                BLACK CARD · 每季
               </span>
             </div>
             <span

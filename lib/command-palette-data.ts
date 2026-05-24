@@ -757,7 +757,7 @@ export const COMMAND_ITEMS: CommandItem[] = [
     ],
   },
   {
-    label: "為什麼 NT$ 299 / NT$ 2,700 · pricing rationale 一頁說清楚",
+    label: "為什麼 NT$ 1,500/season / NT$ 2,700 · pricing rationale 一頁說清楚",
     kicker: "/pricing/why",
     path: "/pricing/why",
     group: "工具 · 外部",

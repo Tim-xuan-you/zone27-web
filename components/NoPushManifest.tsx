@@ -49,7 +49,7 @@ export default function NoPushManifest({ variant = "manifest" }: Props) {
           ⚓ NO-PUSH MANIFEST · {NO_PUSH_COUNT} DELIBERATE ABSENCES
         </p>
         <p className="text-mute text-sm leading-relaxed mb-3">
-          ZONE 27 NT$ 299/月(BLACK CARD)+ NT$ 2,700(Founders 27 一次)
+          ZONE 27 NT$ 1,500/season(BLACK CARD CPBL Season Pass)+ NT$ 2,700(Founders 27 一次)
           訂閱費 後 · {NO_PUSH_COUNT} 件事我們 binding{" "}
           <strong className="text-bone">永遠不會做</strong> · per /audit S05
           PRE-COMMIT 30-day notice if breaks · Brehm Reactance Theory(1966)

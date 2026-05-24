@@ -4,7 +4,8 @@ import { RECIPROCITY_LEDGER, RECIPROCITY_COUNT } from "@/lib/reciprocity-ledger"
 // ── ZONE 27 · Reciprocity Ledger ────────────────────────
 // R74 W-A · Agent A R73 SHIP 3 · Cialdini Reciprocity Principle(1984)·
 // 16 concrete artifacts ZONE 27 PUBLISHED before asking for NT$ 2,700 /
-// NT$ 299/月。 give-first triggers obligation-to-reciprocate · same axis
+// NT$ 1,500/season(R81 pivot 自 NT$ 299/月)。 give-first triggers
+// obligation-to-reciprocate · same axis
 // as Berkshire Hathaway annual letter library + Patek Philippe Movement
 // Schematic Library + Anthropic Model Card library · ZONE 27 differentiator
 // is concentrating the give in one navigable receipt(competitors give but
@@ -46,7 +47,7 @@ export default function ReciprocityLedger({ variant = "ledger" }: Props) {
           ⚓ RECIPROCITY LEDGER · {RECIPROCITY_COUNT} ARTIFACTS PUBLISHED FIRST
         </p>
         <p className="text-mute text-sm leading-relaxed mb-3">
-          ZONE 27 在 NT$ 299/月 + NT$ 2,700 一次性 ASK 之前 ·{" "}
+          ZONE 27 在 NT$ 1,500/season + NT$ 2,700 一次性 ASK 之前 ·{" "}
           <strong className="text-bone">已 publish {RECIPROCITY_COUNT} 件</strong>{" "}
           · Cialdini Reciprocity Principle(1984)· give-first triggers
           obligation-to-reciprocate · LINE 老師 / 報馬仔 是 ASK-first-give-never

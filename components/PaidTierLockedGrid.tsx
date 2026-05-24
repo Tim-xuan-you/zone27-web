@@ -9,7 +9,7 @@ import Link from "next/link";
 //
 // 設計:
 //   - Header「↑ NEXT TIER · 您未解鎖」 visible locked state
-//   - BLACK CARD 6 unlocks card · NT$ 299/月 visible
+//   - BLACK CARD 6 unlocks card · NT$ 1,500/season visible
 //   - Founders 27 終身 mega-card · 全 BLACK CARD + 0% 抽成 + 未來所有
 //     lenses/engines 永久解鎖
 //   - 每 unlock 標 lock icon · 灰 + low opacity · click → /membership/black-card
@@ -109,8 +109,8 @@ export default function PaidTierLockedGrid() {
             </span>
           </div>
           <p className="font-mono text-gold tabular text-lg sm:text-xl tracking-tight">
-            NT$ 299
-            <span className="text-mute text-[10px] ml-1 tracking-[0.25em]">/ 月</span>
+            NT$ 1,500
+            <span className="text-mute text-[10px] ml-1 tracking-[0.25em]">/ season</span>
           </p>
         </div>
         <p className="text-mute text-sm leading-relaxed mb-5">
@@ -208,7 +208,7 @@ export default function PaidTierLockedGrid() {
       {/* ── Brand IP footnote · Pratfall + 無限 scaling ── */}
       <div className="bg-slate/30 border border-line/60 p-4 sm:p-5 mt-0">
         <p className="font-mono text-mute/70 text-[10px] sm:text-[11px] tracking-[0.25em] leading-relaxed text-center">
-          ▸ FREE TIER 5 unlocks 終身免費 · BLACK CARD 6 unlocks NT$ 299/月 ·
+          ▸ FREE TIER 5 unlocks 終身免費 · BLACK CARD 6 unlocks NT$ 1,500/season ·
           Founders 27 終身 NT$ 2,700 一次<br />
           ▸ Engine Lineup 3 變體 + Lens Variety 7 lenses 已寫入 /methodology
           Section 04 + 05 · roadmap visible · 每 lens publish methodology +
