@@ -10,6 +10,7 @@ import {
   CPBL_PITCHER_FETCH_DATE,
   type CpblPitcherStats,
 } from "@/lib/cpbl-pitchers";
+import { getTeamByName } from "@/lib/teams";
 
 export const metadata: Metadata = {
   title: "CPBL 投手排行 · K/9 · BB/9 · HR/9 · WHIP · ERA · IP",
@@ -250,6 +251,23 @@ export default async function CpblPitchersPage({
               );
             })}
           </div>
+          {/* When team is filtered, surface dedicated team page link · per
+              R98 W1 NEW /cpbl-teams/[teamId] aggregation route discoverability。 */}
+          {activeTeam && (() => {
+            const teamMeta = getTeamByName(activeTeam);
+            if (!teamMeta) return null;
+            return (
+              <p className="mt-3 font-mono text-mute/70 text-[10px] tracking-[0.25em]">
+                ↘{" "}
+                <Link
+                  href={`/cpbl-teams/${teamMeta.id}`}
+                  className="text-gold/85 hover:text-gold underline-offset-4 hover:underline"
+                >
+                  看 {teamMeta.short} 完整隊伍頁 + aggregate stats →
+                </Link>
+              </p>
+            );
+          })()}
         </section>
 
         {/* ── STAT TABS ────────────────────────────── */}
