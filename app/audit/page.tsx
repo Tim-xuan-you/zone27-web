@@ -313,10 +313,11 @@ export default function AuditPage() {
               </p>
             </div>
 
-            {/* Round 31 W-U · ADVANCED INPUTS UPGRADE · 站在 CPBL 進階數據網站
-                + 野球革命 + Trackman radar 巨人肩上 · brand IP transformation moment。
-                attribution clear · 我們 cite source · fetch script GitHub 公開
-                可 audit · 不假裝自己 collect Trackman data。 */}
+            {/* R91 simplification · ADVANCED INPUTS Trackman box compressed
+                from 3 paragraphs(~35 lines)to 1 paragraph(~10 lines)·
+                brand IP signal 守住(Trackman 整合 + GitHub attribution +
+                stats.cpbl source cite)· engineering 細節 cut 70% per Tim
+               「都是字」 mandate · 同 R90 /track-record STAT LITERACY axis。 */}
             <div className="mt-6 border border-gold/40 bg-gold/5 p-5 sm:p-6">
               <p
                 lang="en"
@@ -325,32 +326,16 @@ export default function AuditPage() {
                 ✦ ADVANCED INPUTS · TRACKMAN RADAR 整合
               </p>
               <p className="text-mute text-sm leading-relaxed">
-                W-U 整合{" "}
+                整合{" "}
                 <ExtLink href="https://stats.cpbl.com.tw/">
                   stats.cpbl.com.tw
                 </ExtLink>
-                {" "}CPBL 進階數據網站(野球革命 + Trackman radar · 試營運
-                上線)· 拉每位 qualifying 投手 advanced metrics 中職百分位:
-                <strong className="text-bone"> wOBA-against · K% · 揮空% · 強擊球% ·
-                擊球初速 Avg/Max</strong>。 每 /matches/[gameId] 投手卡顯示
-                ADVANCED TRACKMAN 區塊 · 100 = elite · 0 = poor · CPBL 內部
-                percentile rank。
-              </p>
-              <p className="text-mute/85 text-sm leading-relaxed mt-3">
-                Brand IP transformation:engine input 從「per-9 stats(20 世紀
-                標準 + 自己估算)」 升「Trackman radar Statcast-grade(2024+
-                MLB 同等)」。 attribution clear · fetch script(
+                {" "}CPBL 進階數據(Trackman radar)· wOBA-against · K% · 揮空% ·
+                強擊球% · 擊球初速 Avg/Max · CPBL 內部 percentile。 fetch script{" "}
                 <ExtLink href="https://github.com/Tim-xuan-you/zone27-web/blob/main/scripts/fetch-cpbl-advanced.mjs">
-                  scripts/fetch-cpbl-advanced.mjs
+                  GitHub 公開
                 </ExtLink>
-                )GitHub 公開 · 不假裝自己 collect Trackman radar data · 站
-                在 CPBL 官方巨人肩上的同時 100% 揭露 dependency。
-              </p>
-              <p className="text-mute/70 text-xs leading-relaxed mt-3">
-                試營運狀態:stats.cpbl.com.tw URL 結構未來可能微變 · fetch
-                script 對 acnt-based lookup 穩定 · 對 leaderboard layout
-                依賴 minimal。 任何破改 · GitHub commit 為 source of truth ·
-                修一個 file 全站自動更新。
+                · 不假裝自己 collect Trackman data。
               </p>
             </div>
             <P className="text-mute/70">
