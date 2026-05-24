@@ -20,6 +20,26 @@ export type RelatedLink = {
 };
 
 export const RELATED_LINKS: Record<string, RelatedLink[]> = {
+  // R101 W1 · NEW /cpbl-pitchers family entry · used by /cpbl-pitchers
+  // leaderboard + /cpbl-pitchers/[acnt] player profile + /cpbl-teams/[teamId]
+  // team page · all 3 pass currentPath="/cpbl-pitchers" to RelatedReading.
+  "/cpbl-pitchers": [
+    {
+      href: "/cpbl-teams",
+      kicker: "cpbl-teams",
+      title: "CPBL 6 球團 投手 aggregation · 球迷 tribal home base",
+    },
+    {
+      href: "/matches",
+      kicker: "matches",
+      title: "今日 CPBL 賽事 + 引擎模擬 · 看誰先發",
+    },
+    {
+      href: "/methodology",
+      kicker: "methodology",
+      title: "這些指標怎麼餵進引擎 · 蒙地卡羅 程式碼公開",
+    },
+  ],
   "/audit": [
     {
       href: "/track-record",
