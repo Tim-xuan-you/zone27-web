@@ -129,8 +129,8 @@ export default function FromOneCurrentFounderPage() {
             <p className="text-mute leading-relaxed text-center max-w-2xl mx-auto">
               <strong className="text-bone">為什麼 6 個月?</strong>{" "}
               短期(1-3 個月)只能說「我剛加入 · 期待」 — 不是 useful
-              signal。 6 個月後您看完 NT$ 299 × 6 = NT$ 1,794 等價 BLACK
-              CARD value · 您看 25+ matches engine track record · 您
+              signal。 6 個月後您看完 1 個 CPBL 季 NT$ 1,500/season 等價 BLACK
+              CARD value · 您看 60+ matches engine track record · 您
               experience 完整 Tim 親手 onboarding choreography · 您 own
               opinion 有 backing · 那才是 worth writing letter 的 moment。
             </p>

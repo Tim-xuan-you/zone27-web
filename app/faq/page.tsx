@@ -77,13 +77,14 @@ const CATEGORIES: Category[] = [
     zh: "創始會員 / 定價",
     qas: [
       {
-        q: "Founders 27 跟 BLACK CARD 月費會員有什麼差別?",
+        q: "Founders 27 跟 BLACK CARD 季票會員有什麼差別?",
         a: (
           <>
             <strong className="text-bone">Founders 27</strong> 是限量 270 個名額的
             「一次性 NT$ 2,700 終身會員」。
-            <strong className="text-bone">BLACK CARD</strong> 是每月 NT$ 299 的訂閱制
-            (payment infra 就緒後開放 · milestone-triggered · 不綁日期)。創始會員額外好處:creator 抽成 0%
+            <strong className="text-bone">BLACK CARD</strong> 是 CPBL 季票 NT$ 1,500/season
+            (March-November · 240 場 + 季後賽 · ≈ NT$ 6/場 · LIVE manual ECPay ·
+            0 auto-renewal · per /integrity rule #13)。創始會員額外好處:creator 抽成 0%
             (BLACK CARD creators 5%)、AI 模型優先試用、實體招待。完整對照請見{" "}
             <Link href="/founders" className="text-gold underline-offset-4 hover:underline">
               /founders
@@ -97,16 +98,18 @@ const CATEGORIES: Category[] = [
         a: (
           <>
             因為這是「品牌共建價」,不是「永久市場價」。270 位創始會員會永遠是 ZONE 27
-            的傳教士;後續黑金會員年費將會是 NT$ 3,588(每月 299 × 12)。
+            的傳教士;後續黑金會員 2 個 CPBL 季就 break-even(NT$ 1,500 × 2 = NT$ 3,000 vs Founders 27 NT$ 2,700 終身免費)。
             創始者扛了「品牌還沒驗證」的風險,所以拿一輩子的優惠回報。
           </>
         ),
       },
       {
-        q: "付款系統什麼時候開放?",
+        q: "付款系統現況?",
         a: (
           <>
-            <span className="font-mono text-gold">payment infra 就緒後開放</span>
+            <span className="font-mono text-gold">BLACK CARD CPBL 季票 LIVE manual ECPay</span>
+            (NT$ 1,500/season · 每季 explicit click + manual transfer · 0 auto-renewal)。
+            <span className="font-mono text-gold mx-1">Founders 27 payment infra 就緒後開放</span>
             (milestone-triggered · 不綁日期)。 在此之前,加入等候名單 =
             排隊優先權,<strong className="text-bone">完全免費</strong>,
             不收任何資料以外的東西。下方按鈕直接加入:
