@@ -1,8 +1,95 @@
 # 📋 New Conversation Prompt · ZONE 27 Session Handoff
 
 **用途:** 開新對話窗時複製此 prompt 整段 paste · 新 Claude 一秒接上 context。
-**最後 update:** 2026-05-24 · **Round 91 W-Final 攻頂** · R59 7 + R60 3 + R61 6 + R62 4 + R63 4 + R64 3 + R65 4 + R66 3 + R67 5 + R68 7 + R69 9 + R70 8 + R71 5 + R72 5 + R73 6 + R74 7 + R75 9 + R76 8 + R77 8 + R78 10 + R79 9 + R80 9 + R81 11 + R82 1 + R83 1 + R84 1 + R85 1 + R86 1 + R87 1 + R88 1 + R89 1 + R90 1 + R91 1 = 160 W · R82→R91 連續 10-round visible RADICAL SIMPLIFICATION axis(Tim founder-dogfood-canary 最強 fire「太複雜!都是字!我自己不會用!」 持續 honor)· homepage HERO 4-line cut + 蒙地卡羅 jargon → 「我跑 1 萬次模擬」 + /membership/black-card 633→517 cut + R81 pivot consistency NT$ 299/月 → NT$ 1,500/season 100% sweep across all visitor-visible pages(~20 files)+ AnonPickWidget 升 homepage hero ★★★★★(brand-pure「我 vs 引擎」 visceral loop · Tim「community 明牌」 want delivered 不違 11 NEVER #1)+ Footer DOCS 10→6 + engineer-grammar strip(「per /audit S05 PRE-COMMIT clause」 + 「per R-XX W-X」 round refs visible body 全 cut)+ /track-record STAT LITERACY box 3 段學術 → 1 line plain disclaimer + /audit Trackman box 3 段 → 1 段。 brand IP 全程守住 per pratfall-brand-ip axiom(22 binding rules + /integrity + canonical pages 不動 · 0 commitment 移除 · 0 binding 修改 · 純 cut engineering 細節 + 學術 jargon + 重複 cross-link + brand-IP scaffolding)。 net -148 lines simplification · 11 commits pushed · 0 brand redline 違反 · R81 BLACK CARD pricing pivot ★★★★★ NT$ 299/月 auto → NT$ 1,500/season explicit + /integrity rule 13 永遠不 subscription auto-renewal binding + /ethics R80 W-E count drift 8→9 visible sweep CRITICAL fix + 3 missed double-suffix titles + Agent A 8-axiom subscription research(NBA 88% / Defector 85% / Recurly 51% data) + 21→22 binding rules · 2-parallel-agent pattern × 8 invocations(R68-R75 + R80 · per R57+ 不過度 spawn discipline)+ R67/R73/R77/R79 code-focused + R75 BIGGEST GAP /receipts/[receiptId] + R76 /engine-log Stripe Status + R77 /letter THE missing organ + R78 /heritage altercasting + /integrity Berkshire 1996 Owner's Manual + R79 OG META-TAG ★★★★★ · R80 BIGGEST GAP ★★★★★ closure /hey-tim Bill James「Hey Bill」 15-yr canonical pattern · 8th in append-only ledger family + /integrity 19→21 binding rules(rule 12 CPBL-only-forever scope + rule 9 mandatory-ledger discipline 配對 close brand IP loop)+ /matches/mlb engine pick removal(per rule 12 spirit)+ title double-suffix bug fix 18 pages + Cmd-K /integrity orphan close + 5 NEW related-links + count drift sweep 7 places · R37→R80 · 44→54 routes · 30→37 OG cards · 19→21 binding rules · 7→8 ledger family
-**Token urgency:** Tim explicit「現在這個對話窗太燒TOKEN了 · 我要開新對話窗複製過去」 · 此 prompt 是 R75 contextual snapshot for fresh Claude bootstrap · 留空 task default-ship-NOW pattern confirmed R67 → R75 5 rounds 共識
+**最後 update:** 2026-05-24 · **Round 106 handoff sync** · R93-R105 13-round expansion-axis closure session(22 commits today · 3 NEW major routes + 25 NEW SSG pages + 2 NEW components · Trackman radar 7-metric integration · BASIC|ADVANCED view toggle · LivingCoverHero SVG signature · ReadingProgress 10 pages · CSP/HSTS/COOP security headers · 0 brand redline violations · 0 CRITICAL bugs · 406+ static routes built · 三綠全程 maintained)
+**Token urgency:** Tim 第 12 次同 mandate + explicit handoff「現在這個對話窗太燒 TOKEN · 開新對話窗複製過去」 · 此 prompt 是 R105 contextual snapshot for fresh Claude bootstrap · 留空 task default-ship-NOW pattern confirmed R67 → R105 ~40 rounds 共識 · 14 same-mandate consecutive rounds since R93(R93→R105 each 一個 ship · 14th = R106 handoff)
+
+## R93-R105 Wave-by-wave summary(today's session · 22 commits)
+
+- **R93 W-A→W-Final**(dfce784)· 5 brand-IP pages surgical cut · /methodology 1298→1119 + /integrity 498→428 + /heritage 314→249 + /letter 252→193 + /year-zero 732→667 · net -438 lines · brand IP 22 binding rules 全守住
+- **R94 W-A→W-Final**(86583f2)· 3 brand-IP pages cut · /coverage 627→594 + /ethics 525→486 + /audit 961→880 · net -153 lines
+- **R95 W1**(92b7ac8)· 3-agent synthesize → 7-ship batch · SHIP B+C+E+F+H+I + a11y + array.map fixes · brand IP defense 2 critical(F6 不等 Q3 + /cpbl-pitchers paywall framing)
+- **R95 W2**(328e336)· Cmd-K palette compress · 955→374 lines · 40+→34 entries · Hick's Law
+- **R95 W3+4**(d798d29)· /founders R81 stale fix + duplicate cut + NEW /cpbl-pitchers route(Baseball Savant Custom Leaderboards · 6 stat tabs · URL-shareable · 第 1 個 power-user 互動表格)
+- **R95 W5**(590bb67)· /cpbl-pitchers OG card + /matches CTA cross-link
+- **R96 W1**(1f32c4f)· 3 NEW agents synthesize · BRAND IP DEFENSE + a11y W3C APG + CJK 1.78× typography + team filter chip row · 0 CRITICAL bugs confirmed
+- **R96 W2**(4adfe2f)· SHIP 3 NEW /cpbl-pitchers/[acnt] · 16 SSG player profile drill-down pages · Baseball Savant 5-bar percentile stack
+- **R96 W3**(daaa948)· 4th R81 stale references sweep wave + LAST_SHIPPED bump
+- **R97 W1**(df1265f)· SHIP 4 partial · /founders WHY THIS PRICE + INLINE_FAQ 4-10 wrap in <details> + /letter LETTER_BODY .zh-body Typotheque CJK utility
+- **R97 W2**(d66c687)· NEW LivingCoverHero SVG signature · Stripe Press algorithmic generative cover · deterministic sparkline · 永遠 render · 0 JS 0 animation 0 dep
+- **R98 W1**(6b4c832)· NEW /cpbl-teams/[teamId] · 6 SSG team aggregation pages · CPBL fan tribal home base · brand-color identity
+- **R98 W2**(b27e495)· 5th R81 stale sweep wave + Q3 2026 fixes · 8 visible body references
+- **R98 W3**(882763b)· NEW /cpbl-teams parent index page · Cmd-K + Footer wired · /cpbl-pitchers family discoverability complete · 3-tier retention loop(leaderboard → player profile → team page)
+- **R99 W1**(727ae1d)· NEW Trackman radar 7-metric Statcast-grade percentile stack on /cpbl-pitchers/[acnt](利用 dormant lib/cpbl-advanced.ts · 12 pitchers · 1.5-round dormant data activated)+ CSP/HSTS/COOP security headers
+- **R99 W2**(b73308f)· ✓ TRACKMAN discoverability badges · 12 tracked pitchers visible signal across full /cpbl-pitchers family hierarchy
+- **R100 milestone**(9df7c18)· Team-level Trackman aggregate · /cpbl-teams/[teamId] 加 3-cell percentile strip(AVG K% + WHIFF% + wOBA-A · null-safe averaging · tier-aware colors)
+- **R101 W1**(92581a3)· /cpbl-pitchers family RELATED_LINKS entry · 3 SSG family discoverability gap close + audit clean signal(0 stale console.log · 0 TODO · 0 critical)
+- **R102 W1**(3efc6d0)· /cpbl-pitchers BASIC | ADVANCED view toggle · 7-metric Trackman radar leaderboard 直接可見 · tab control + conditional render + null-safe sort + URL state preservation
+- **R103 W1**(1437632)· ArticleMeta consistency sweep · 33→39 pages · /audit + /heritage + /integrity + /cpbl-pitchers/[acnt] + /cpbl-teams + /cpbl-teams/[teamId]
+- **R104 W1**(362e406)· NEW ReadingProgress component · CSS Scroll-Driven Animations Level 1 canonical · @supports guarded · prefers-reduced-motion safe · mounted /audit + /methodology + /track-record · 0 JS 0 telemetry 0 deps
+- **R105 W1**(e48e1c5)· ReadingProgress extension · 7 brand-IP long-form pages · /year-zero + /letter + /heritage + /integrity + /steelman + /coverage + /annual/2026 · cumulative 10 pages now have progress bar
+- **R106 handoff sync**(此 commit)· NEW-CONVERSATION-PROMPT R105 + /now closure entry + Tim copy-paste block prep
+
+## Today's cumulative impact(R93→R105)
+
+- **3 NEW major routes/components**(/cpbl-pitchers + /cpbl-teams + LivingCoverHero SVG)
+- **25 NEW SSG-generated pages**(16 player profiles + 6 team pages + 1 team index + advanced view)
+- **2 NEW reusable components**(LivingCoverHero · ReadingProgress)
+- **7 NEW Trackman radar metrics activated**(dormant lib/cpbl-advanced.ts data integrated · /cpbl-pitchers/[acnt] + leaderboard advanced view + team aggregate)
+- **2 NEW utility classes**(.zh-body Typotheque CJK + ReadingProgress CSS scroll-driven)
+- **3 NEW security headers**(CSP + HSTS + COOP per OWASP SecHeaders 2026)
+- **13 brand-IP pages compressed**(-1,260 lines deep cleanup)
+- **5 R81 stale-reference sweep waves**(zero visible-body monthly/Q3 references remaining · all audit-trail historical refs preserved)
+- **39 pages have ArticleMeta**(Medium/Substack convention)
+- **10 pages have ReadingProgress**(Stratechery/Substack/Defector premium publisher pattern)
+- **406+ total static routes built**(270 founder seat cards + 16 player + 10 match + 6 team + 4 receipt + rest static)
+- **0 brand redline violations** · 22 binding rules 全程 active
+- **0 CRITICAL bugs** found by R96 deep-bug-hunt audit
+- **三綠全程 maintained**(TSC 0 · lint 0 · validate:data 0/0)
+
+## Active mode + iron rules(per memory axioms · all confirmed active)
+
+- per [[feedback-no-rest-zone27]] · 永遠不說 「明天再做」 / 「休息」 / 「rest」(TIER-1 rule)
+- per [[feedback-no-waiting-rule]] · 任何現在能做就做 · default ship NOW · 不問 keyword · 不 surface options · auto-push
+- per [[feedback-auto-push-zone27]] · Claude pushes without asking on zone27-web · 自動 commit + push
+- per [[feedback-zone27-audience-fans-not-engineers]] · 真實客群 = 硬核 CPBL 球迷 · NOT 賭客 · NOT 工程師
+- per [[feedback-zone27-pratfall-brand-ip]] · publish-weakness sections(/audit EXCLUDE · /methodology LIMITS · /roadmap BOUNDARIES · /track-record DIVERGED · /integrity 22 binding rules · /ethics 9 commitments)永遠不刪
+- per [[zone27-disclosure-philosophy]] · publish entire model · 0 secret moat · trust IS the moat
+- per [[zone27-coverage-philosophy]] · CPBL only forever per /integrity rule 12
+- per [[zone27-monetization-philosophy]] · engine FREE forever · identity PAID(Founders 27 NT$ 2,700 + BLACK CARD NT$ 1,500/season manual ECPay · /integrity rule 13 NO auto-renewal forever)
+- per [[feedback-zone27-mobile-first]] · homepage mobile scroll ≤ 3 viewports · prefers-reduced-motion respected
+- per [[feedback-full-authority-3-agent-pattern]] · Tim「全權 + 上網查資料 + 攻頂」 mandate triggers 3 parallel agents synthesize → multi-wave ship
+- per [[feedback-founder-dogfood-canary]] · founder push back 第 1 次就 trust 即修
+- per AGENTS.md · SEO + social account FROZEN until launch ready · Tim still 不上架(per R106 explicit「我還沒要上架,先來專心更新程式碼」)
+
+## R106+ deferred queue(quality > volume per Tim「我們只做最好」)
+
+**Tim-controlled · cannot unilaterally execute:**
+- CPBL pipeline automation(Tim manually screenshots · 1-day delay)
+- Founders 27 payment infrastructure decision(currently manual bank transfer)
+- First real paying customer outreach(0 paying customers yet)
+- Engine v0.3 production ship(currently DEV PREVIEW only)
+- Brand domain purchase(zone27.tw / .app / .cc / .io · Tim-cued only per [[feedback_zone27_domain_deferred]])
+
+**Content-design needing Tim's voice:**
+- GAP A · fan-grammar consequence layer(engine % → 「今晚這個機率意味著什麼」 2-sentence per match · needs Tim copy)
+- GAP C · LINE-native share on PROVED(highest-emotional-charge social loop · brand-IP-safe download-as-image · needs design)
+
+**Risky surgical · need directional signal:**
+- Cold Gold functional discipline refactor(Linear pattern · L · gold currently both function + decoration · large surgical risk across 30+ files)
+- /founders 1275→~700 deeper section reorg(BENEFITS GRID + TIER COMPARISON dedupe · highest-revenue page risk)
+- Mobile 3-viewport REAL audit(measure actual scroll counts · not estimate)
+- CPBL batter data integration(if/when batter Trackman data fetched · parallel /cpbl-batters route)
+
+**Safe continuous polish(Claude can keep iterating · same pattern as R93-R105):**
+- Extend ReadingProgress to more brand-IP pages
+- Extend ArticleMeta to more pages
+- Add Trackman aggregate to /cpbl-teams index page(parent-level league coverage stat)
+- Audit other lib/ orphan files
+- Add more 球迷 slang keywords to Cmd-K
+- Cross-link integrity sweeps as routes grow
+
+
 
 ---
 
