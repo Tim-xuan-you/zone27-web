@@ -342,9 +342,8 @@ export default function YearZeroPage() {
             </Link>。
           </p>
           <p className="text-mute/85">
-            每筆 entry 修改需 30 天前 /changelog 公告 · per /audit S05
-            PRE-COMMIT clause · same Costly Signaling discipline。 違反 = brand
-            信用 collapse 永久 audit trail · 不可 retroactively rebrand。
+            每筆 entry 修改需 30 天前 /changelog 公告 · 違反 = brand 信用
+            collapse 永久 audit trail · 不可 retroactively rebrand。
           </p>
         </Section>
 
@@ -554,9 +553,7 @@ export default function YearZeroPage() {
           </ol>
           <p className="text-mute/85 mt-5">
             這些不是 promise of timing · 是 promise of axis。 違反 = brand 信用
-            collapse · per /audit S05 PRE-COMMIT clause append-only Costly
-            Signaling discipline · 同 MultiYearAnchor R75 W-D 3-line binding
-            pattern。
+            collapse。
           </p>
         </Section>
 

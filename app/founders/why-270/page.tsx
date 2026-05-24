@@ -305,8 +305,7 @@ export default function FoundersWhy270Page() {
           <p>
             ZONE 27 engine 繼續 publish · /audit + /methodology + /track-record
             永久 viewable · GitHub MIT licensed · 不會 paywall · 不會 pivot
-            · 不會關站。 per R75 W-D MultiYearAnchor 「engine FREE through
-            2029」 binding。
+            · 不會關站 · engine FREE through 2029 binding。
           </p>
           <p>
             Tim 一年只 onboard 30 個 Founders · 那就 30 個 · 不慶祝 · 不哀號 ·

@@ -169,8 +169,7 @@ export default function LetterPage() {
               ))}
             </ul>
             <p className="font-mono text-mute/70 text-[10px] tracking-[0.25em] leading-relaxed mt-6">
-              ⚓ EDIT_HISTORY append-only per /audit S05 PRE-COMMIT clause ·
-              修改任 entry 需 30 天前{" "}
+              ⚓ EDIT_HISTORY append-only · 修改任 entry 需 30 天前{" "}
               <Link
                 href="/changelog"
                 className="text-gold/85 hover:text-gold underline-offset-4 hover:underline"

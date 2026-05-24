@@ -218,7 +218,7 @@ export default function EngineLogPage() {
                 >
                   /changelog
                 </Link>{" "}
-                公告 per /audit S05 PRE-COMMIT clause。
+                公告。
               </span>
             </li>
             <li className="flex gap-3 items-baseline">
@@ -277,11 +277,8 @@ export default function EngineLogPage() {
             Tailscale Changelog + Linear Now-Next-Later horizon-language pattern。
           </p>
           <p>
-            APPEND-ONLY per /audit S05 PRE-COMMIT clause · 修改任 entry 需 30
-            天前 /changelog 公告 · 違反 = brand 信用 collapse · same Costly
-            Signaling discipline as ENGINE_DIFF_BEACONS R71 W-C + NO_PUSH_INVENTORY
-            R73 W-D + RECIPROCITY_LEDGER R74 W-A + LOCAL_STORAGE_INVENTORY
-            R74 W-D pattern。
+            APPEND-ONLY · 修改任 entry 需 30 天前 /changelog 公告 · 違反 = brand
+            信用 collapse。
           </p>
         </FounderSignOff>
 
