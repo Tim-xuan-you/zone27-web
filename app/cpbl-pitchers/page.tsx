@@ -11,7 +11,11 @@ import {
   type CpblPitcherStats,
 } from "@/lib/cpbl-pitchers";
 import { getTeamByName } from "@/lib/teams";
-import { getCpblAdvancedByAcnt } from "@/lib/cpbl-advanced";
+import {
+  cpblAdvanced,
+  getCpblAdvancedByAcnt,
+  type CpblAdvancedStats,
+} from "@/lib/cpbl-advanced";
 
 export const metadata: Metadata = {
   title: "CPBL 投手排行 · K/9 · BB/9 · HR/9 · WHIP · ERA · IP",
@@ -100,6 +104,90 @@ const STAT_META: Record<
 
 const STAT_ORDER: StatKey[] = ["k9", "bb9", "hr9", "whip", "era", "ip"];
 
+// R102 W1 · ADVANCED Trackman view metadata · per /audit S02 ESTIMATION
+// DISCLOSURE pattern · 0-100 percentile per CPBL league reference。
+type AdvancedStatKey =
+  | "wobaAgainst"
+  | "kPct"
+  | "bbPct"
+  | "whiffPct"
+  | "hardHitPct"
+  | "exitVeloAvg"
+  | "exitVeloMax";
+
+const ADVANCED_STAT_META: Record<
+  AdvancedStatKey,
+  {
+    label: string;
+    en: string;
+    higherIsBetter: boolean;
+    desc: string;
+    range: string;
+  }
+> = {
+  wobaAgainst: {
+    label: "wOBA-A",
+    en: "WEIGHTED ON-BASE AGAINST",
+    higherIsBetter: false,
+    desc: "加權上壘率 · 投手:打者對此投手的加權上壘表現 · 越低 = 越強 · 整合 BB/HBP/1B/2B/3B/HR 加權 · 比 OBP 更精確反映投手 stuff。",
+    range: "CPBL 百分位 · 0(elite/被打 ≤ league low）· 100(rebuild/被打 ≥ league high)",
+  },
+  kPct: {
+    label: "K %",
+    en: "STRIKEOUT RATE",
+    higherIsBetter: true,
+    desc: "三振% · 對戰打者中三振的比例 · 越高 = 越會三振 · 反映 stuff + command 雙信號。",
+    range: "CPBL 百分位 · 0(rebuild/低 K%)· 100(elite/高 K%)",
+  },
+  bbPct: {
+    label: "BB %",
+    en: "WALK RATE",
+    higherIsBetter: false,
+    desc: "保送% · 對戰打者中保送的比例 · 越低 = 越會控球 · 反映 command + 心理穩定度。",
+    range: "CPBL 百分位 · 0(elite/低 BB%)· 100(rebuild/高 BB%)",
+  },
+  whiffPct: {
+    label: "WHIFF %",
+    en: "SWING-AND-MISS RATE",
+    higherIsBetter: true,
+    desc: "揮空率 · 打者揮棒落空的比例 · 越高 = 越能讓打者揮空 · 反映 deceptive stuff(滑球 + 變化球 + 突放速度)。",
+    range: "CPBL 百分位 · 0(rebuild/低 Whiff%)· 100(elite/高 Whiff%)",
+  },
+  hardHitPct: {
+    label: "HARD-HIT %",
+    en: "EXIT VELO ≥ 95mph",
+    higherIsBetter: false,
+    desc: "強擊球率 · 被打出 95mph 以上的比例 · 越低 = 越能 induce 弱擊 · 反映投手 contact suppression。",
+    range: "CPBL 百分位 · 0(elite/被打弱)· 100(rebuild/被強擊)",
+  },
+  exitVeloAvg: {
+    label: "EV AVG",
+    en: "ALLOWED EXIT VELO AVG",
+    higherIsBetter: false,
+    desc: "允許平均擊球初速 · 越低 = 接觸品質越爛 · 反映投手對打者的壓制力。",
+    range: "CPBL 百分位 · 0(elite/被打弱)· 100(rebuild/被打強)",
+  },
+  exitVeloMax: {
+    label: "EV MAX",
+    en: "HARDEST HIT ALLOWED",
+    higherIsBetter: false,
+    desc: "允許最大擊球初速 · 投手被打最爆的單一打席 · 越低 = 即使失誤也不會被打太爛 · 反映 worst-case ceiling。",
+    range: "CPBL 百分位 · 0(elite/被打 ceiling 低)· 100(rebuild/被打 ceiling 高)",
+  },
+};
+
+const ADVANCED_STAT_ORDER: AdvancedStatKey[] = [
+  "wobaAgainst",
+  "kPct",
+  "bbPct",
+  "whiffPct",
+  "hardHitPct",
+  "exitVeloAvg",
+  "exitVeloMax",
+];
+
+type ViewMode = "basic" | "advanced";
+
 // Derive unique teams from data · sorted alphabetically for stable URL state。
 const TEAMS: string[] = Array.from(
   new Set(cpblPitchers.map((p) => p.team))
@@ -109,8 +197,18 @@ function isStatKey(v: unknown): v is StatKey {
   return typeof v === "string" && (STAT_ORDER as string[]).includes(v);
 }
 
+function isAdvancedStatKey(v: unknown): v is AdvancedStatKey {
+  return (
+    typeof v === "string" && (ADVANCED_STAT_ORDER as string[]).includes(v)
+  );
+}
+
 function isTeam(v: unknown): v is string {
   return typeof v === "string" && TEAMS.includes(v);
+}
+
+function isViewMode(v: unknown): v is ViewMode {
+  return v === "basic" || v === "advanced";
 }
 
 function sortPitchers(
@@ -125,27 +223,83 @@ function sortPitchers(
   });
 }
 
+// R102 W1 · sort advanced stats with null-safe handling · null pushed to end。
+function sortAdvanced(
+  rows: { pitcher: CpblPitcherStats; advanced: CpblAdvancedStats }[],
+  stat: AdvancedStatKey
+): { pitcher: CpblPitcherStats; advanced: CpblAdvancedStats }[] {
+  const meta = ADVANCED_STAT_META[stat];
+  return [...rows].sort((a, b) => {
+    const av = a.advanced[stat];
+    const bv = b.advanced[stat];
+    if (av === null && bv === null) return 0;
+    if (av === null) return 1;
+    if (bv === null) return -1;
+    return meta.higherIsBetter ? bv - av : av - bv;
+  });
+}
+
 export default async function CpblPitchersPage({
   searchParams,
 }: {
-  searchParams: Promise<{ stat?: string; team?: string }>;
+  searchParams: Promise<{ stat?: string; team?: string; view?: string }>;
 }) {
   const params = await searchParams;
-  const activeStat: StatKey = isStatKey(params.stat) ? params.stat : "k9";
+  const view: ViewMode = isViewMode(params.view) ? params.view : "basic";
   const activeTeam: string | null = isTeam(params.team) ? params.team : null;
+
+  // BASIC view · all 16 pitchers + 6 basic stats
+  const activeStat: StatKey = isStatKey(params.stat) ? params.stat : "k9";
   const filtered = activeTeam
     ? cpblPitchers.filter((p) => p.team === activeTeam)
     : cpblPitchers;
   const sorted = sortPitchers(filtered, activeStat);
   const meta = STAT_META[activeStat];
 
-  // Helper · keep team selection in URL when stat tab clicked + vice versa。
-  const buildHref = (overrides: { stat?: StatKey; team?: string | null }) => {
+  // ADVANCED view · only 12 tracked + 7 Trackman percentiles
+  const activeAdvStat: AdvancedStatKey = isAdvancedStatKey(params.stat)
+    ? params.stat
+    : "kPct";
+  const advancedRows = (activeTeam
+    ? cpblAdvanced.filter((a) => a.team === activeTeam)
+    : cpblAdvanced
+  ).map((advanced) => ({
+    pitcher:
+      cpblPitchers.find((p) => p.acnt === advanced.acnt) ?? {
+        name: advanced.name,
+        team: advanced.team,
+        acnt: advanced.acnt,
+        era: 0,
+        ip: 0,
+        k: 0,
+        bb: 0,
+        hr: 0,
+        k9: 0,
+        bb9: 0,
+        hr9: 0,
+        whip: 0,
+      },
+    advanced,
+  }));
+  const advancedSorted = sortAdvanced(advancedRows, activeAdvStat);
+  const advMeta = ADVANCED_STAT_META[activeAdvStat];
+
+  // Helper · preserve view/team/stat across URL state changes。
+  const buildHref = (overrides: {
+    stat?: StatKey | AdvancedStatKey;
+    team?: string | null;
+    view?: ViewMode;
+  }) => {
     const sp = new URLSearchParams();
-    const nextStat = overrides.stat ?? activeStat;
+    const nextView = overrides.view ?? view;
     const nextTeam =
       "team" in overrides ? overrides.team : activeTeam;
-    if (nextStat !== "k9") sp.set("stat", nextStat);
+    // Stat default differs per view(basic = k9 · advanced = kPct)
+    const defaultStat = nextView === "advanced" ? "kPct" : "k9";
+    const nextStat =
+      overrides.stat ?? (nextView === view ? (view === "advanced" ? activeAdvStat : activeStat) : defaultStat);
+    if (nextView !== "basic") sp.set("view", nextView);
+    if (nextStat !== defaultStat) sp.set("stat", nextStat);
     if (nextTeam) sp.set("team", nextTeam);
     const q = sp.toString();
     return q ? `/cpbl-pitchers?${q}` : "/cpbl-pitchers";
@@ -206,6 +360,65 @@ export default async function CpblPitchersPage({
         </section>
 
         <div className="mx-auto w-32 gold-line mb-10" />
+
+        {/* ── VIEW MODE TOGGLE · BASIC | ADVANCED · R102 W1 ────── */}
+        <section
+          aria-label="View mode toggle"
+          className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-3"
+        >
+          <p
+            lang="en"
+            className="font-mono text-mute/70 text-[10px] tracking-[0.3em] mb-3"
+          >
+            ↘ VIEW MODE · BASIC(per-9 rate · 16 投手)| ADVANCED(Trackman radar · {cpblAdvanced.length} 投手)
+          </p>
+          <div
+            role="tablist"
+            aria-label="統計層級切換"
+            className="inline-flex border border-line/60 bg-slate/30"
+          >
+            <Link
+              role="tab"
+              aria-selected={view === "basic"}
+              href={buildHref({ view: "basic" })}
+              scroll={false}
+              prefetch
+              className={`px-5 py-2 min-h-[40px] inline-flex items-baseline gap-2 font-mono text-xs tracking-[0.25em] transition-colors ${
+                view === "basic"
+                  ? "bg-gold/15 text-gold"
+                  : "text-mute hover:text-gold"
+              }`}
+            >
+              <span className="text-bone tabular">BASIC</span>
+              <span
+                lang="en"
+                className="text-[9px] tracking-[0.25em] text-mute/70"
+              >
+                per-9
+              </span>
+            </Link>
+            <Link
+              role="tab"
+              aria-selected={view === "advanced"}
+              href={buildHref({ view: "advanced" })}
+              scroll={false}
+              prefetch
+              className={`px-5 py-2 min-h-[40px] inline-flex items-baseline gap-2 font-mono text-xs tracking-[0.25em] transition-colors border-l border-line/60 ${
+                view === "advanced"
+                  ? "bg-gold/15 text-gold"
+                  : "text-mute hover:text-gold"
+              }`}
+            >
+              <span className="text-bone tabular">ADVANCED</span>
+              <span
+                lang="en"
+                className="text-[9px] tracking-[0.25em] text-mute/70"
+              >
+                Trackman
+              </span>
+            </Link>
+          </div>
+        </section>
 
         {/* ── TEAM FILTER CHIPS ────────────────────── */}
         <section
@@ -271,7 +484,7 @@ export default async function CpblPitchersPage({
           })()}
         </section>
 
-        {/* ── STAT TABS ────────────────────────────── */}
+        {/* ── STAT TABS · basic OR advanced based on view mode ──── */}
         <section
           aria-label="排序指標切換"
           className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-6"
@@ -283,36 +496,64 @@ export default async function CpblPitchersPage({
             ↘ TAP 任一指標 · URL 立即 update · LINE-shareable
           </p>
           <div className="flex flex-wrap gap-2 sm:gap-3">
-            {STAT_ORDER.map((key) => {
-              const isActive = key === activeStat;
-              const m = STAT_META[key];
-              return (
-                <Link
-                  key={key}
-                  href={buildHref({ stat: key })}
-                  scroll={false}
-                  prefetch
-                  className={`px-4 py-2 min-h-[44px] inline-flex items-baseline gap-2 border font-mono text-xs tracking-[0.2em] transition-colors ${
-                    isActive
-                      ? "border-gold bg-gold/10 text-gold"
-                      : "border-line/60 bg-slate/30 text-mute hover:border-gold/60 hover:text-gold"
-                  }`}
-                  aria-pressed={isActive}
-                >
-                  <span className="text-bone tabular">{m.label}</span>
-                  <span
-                    lang="en"
-                    className="text-[9px] tracking-[0.25em] text-mute/70"
+            {view === "basic" &&
+              STAT_ORDER.map((key) => {
+                const isActive = key === activeStat;
+                const m = STAT_META[key];
+                return (
+                  <Link
+                    key={key}
+                    href={buildHref({ stat: key })}
+                    scroll={false}
+                    prefetch
+                    className={`px-4 py-2 min-h-[44px] inline-flex items-baseline gap-2 border font-mono text-xs tracking-[0.2em] transition-colors ${
+                      isActive
+                        ? "border-gold bg-gold/10 text-gold"
+                        : "border-line/60 bg-slate/30 text-mute hover:border-gold/60 hover:text-gold"
+                    }`}
+                    aria-pressed={isActive}
                   >
-                    {m.higherIsBetter ? "↑" : "↓"}
-                  </span>
-                </Link>
-              );
-            })}
+                    <span className="text-bone tabular">{m.label}</span>
+                    <span
+                      lang="en"
+                      className="text-[9px] tracking-[0.25em] text-mute/70"
+                    >
+                      {m.higherIsBetter ? "↑" : "↓"}
+                    </span>
+                  </Link>
+                );
+              })}
+            {view === "advanced" &&
+              ADVANCED_STAT_ORDER.map((key) => {
+                const isActive = key === activeAdvStat;
+                const m = ADVANCED_STAT_META[key];
+                return (
+                  <Link
+                    key={key}
+                    href={buildHref({ stat: key })}
+                    scroll={false}
+                    prefetch
+                    className={`px-4 py-2 min-h-[44px] inline-flex items-baseline gap-2 border font-mono text-xs tracking-[0.2em] transition-colors ${
+                      isActive
+                        ? "border-gold bg-gold/10 text-gold"
+                        : "border-line/60 bg-slate/30 text-mute hover:border-gold/60 hover:text-gold"
+                    }`}
+                    aria-pressed={isActive}
+                  >
+                    <span className="text-bone tabular">{m.label}</span>
+                    <span
+                      lang="en"
+                      className="text-[9px] tracking-[0.25em] text-mute/70"
+                    >
+                      {m.higherIsBetter ? "↑" : "↓"}
+                    </span>
+                  </Link>
+                );
+              })}
           </div>
         </section>
 
-        {/* ── ACTIVE STAT EXPLAINER ───────────────── */}
+        {/* ── ACTIVE STAT EXPLAINER · basic OR advanced ──── */}
         <section
           aria-labelledby="active-stat-heading"
           className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-8"
@@ -322,30 +563,32 @@ export default async function CpblPitchersPage({
               lang="en"
               className="font-mono text-gold text-[10px] tracking-[0.35em] mb-1.5"
             >
-              {meta.en}
+              {view === "advanced" ? advMeta.en : meta.en}
             </p>
             <h2
               id="active-stat-heading"
               className="text-bone text-xl sm:text-2xl font-light tracking-tight mb-3 leading-snug"
             >
-              {meta.label} · {meta.higherIsBetter ? "越高越好" : "越低越好"}
+              {view === "advanced" ? advMeta.label : meta.label} ·{" "}
+              {(view === "advanced" ? advMeta.higherIsBetter : meta.higherIsBetter)
+                ? "越高越好"
+                : "越低越好"}
             </h2>
             <p className="text-mute text-sm sm:text-base leading-relaxed mb-2">
-              {meta.desc}
+              {view === "advanced" ? advMeta.desc : meta.desc}
             </p>
             <p className="font-mono text-mute/70 text-[11px] tracking-[0.2em] leading-relaxed">
-              ⚓ {meta.range}
+              ⚓ {view === "advanced" ? advMeta.range : meta.range}
             </p>
           </div>
         </section>
 
-        {/* ── LEADERBOARD TABLE · W3C APG sortable-table pattern ── */}
+        {/* ── LEADERBOARD TABLE · BASIC view · W3C APG sortable ── */}
+        {view === "basic" && (
         <section
           aria-label={`投手排行表 · 排序依 ${meta.label} · ${meta.higherIsBetter ? "高至低" : "低至高"}`}
           className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-12"
         >
-          {/* W3C APG aria-live announcement when sort changes(VoiceOver +
-              JAWS + NVDA announces single-source sentence on tab change)。 */}
           <div role="status" aria-live="polite" className="sr-only">
             排序依 {meta.label}({meta.en})·
             {meta.higherIsBetter ? "由高至低" : "由低至高"}· 共 {sorted.length} 位投手
@@ -461,6 +704,102 @@ export default async function CpblPitchersPage({
             statistical significance 顯著 · per /audit S05 PRE-COMMIT
           </p>
         </section>
+        )}
+
+        {/* ── LEADERBOARD TABLE · ADVANCED view · Trackman radar ── */}
+        {view === "advanced" && (
+        <section
+          aria-label={`投手 Trackman 排行 · 排序依 ${advMeta.label} · ${advMeta.higherIsBetter ? "高至低" : "低至高"}`}
+          className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-12"
+        >
+          <div role="status" aria-live="polite" className="sr-only">
+            ADVANCED · 排序依 {advMeta.label}({advMeta.en})·
+            {advMeta.higherIsBetter ? "由高至低" : "由低至高"}· 共 {advancedSorted.length} 位 Trackman tracked 投手
+          </div>
+          <div className="border border-line/60 bg-slate/20 overflow-x-auto">
+            <table className="w-full font-mono text-xs sm:text-sm tabular">
+              <thead>
+                <tr className="border-b border-line/60 bg-slate/50">
+                  <th scope="col" className="text-left text-gold/90 tracking-[0.2em] px-3 py-3 text-[10px] sm:text-xs sticky left-0 bg-slate/50">
+                    #
+                  </th>
+                  <th scope="col" className="text-left text-gold/90 tracking-[0.2em] px-3 py-3 text-[10px] sm:text-xs">
+                    投手
+                  </th>
+                  <th scope="col" className="text-left text-gold/90 tracking-[0.2em] px-3 py-3 text-[10px] sm:text-xs hidden sm:table-cell">
+                    球團
+                  </th>
+                  {ADVANCED_STAT_ORDER.map((key) => {
+                    const isActive = key === activeAdvStat;
+                    const sortAttr = isActive
+                      ? ADVANCED_STAT_META[key].higherIsBetter
+                        ? "descending"
+                        : "ascending"
+                      : "none";
+                    return (
+                      <th
+                        key={key}
+                        scope="col"
+                        aria-sort={sortAttr}
+                        className={`text-right tracking-[0.2em] px-3 py-3 text-[10px] sm:text-xs ${
+                          isActive
+                            ? "text-gold bg-gold/10"
+                            : "text-mute/70"
+                        }`}
+                      >
+                        {ADVANCED_STAT_META[key].label}
+                      </th>
+                    );
+                  })}
+                </tr>
+              </thead>
+              <tbody>
+                {advancedSorted.map((row, idx) => (
+                  <tr
+                    key={`${row.advanced.team}-${row.advanced.name}`}
+                    className="border-b border-line/30 hover:bg-slate/30 transition-colors"
+                  >
+                    <td className="text-mute/60 px-3 py-3 sticky left-0 bg-slate/20">
+                      {String(idx + 1).padStart(2, "0")}
+                    </td>
+                    <td className="text-bone px-3 py-3 font-normal">
+                      <Link
+                        href={`/cpbl-pitchers/${row.advanced.acnt}`}
+                        className="hover:text-gold underline-offset-4 hover:underline transition-colors"
+                        aria-label={`${row.advanced.name} 球員頁 · ${row.advanced.team}(含 Trackman radar)`}
+                      >
+                        {row.advanced.name}
+                      </Link>
+                    </td>
+                    <td className="text-mute/85 px-3 py-3 hidden sm:table-cell">
+                      {row.advanced.team}
+                    </td>
+                    {ADVANCED_STAT_ORDER.map((key) => {
+                      const isActive = key === activeAdvStat;
+                      const value = row.advanced[key];
+                      return (
+                        <td
+                          key={key}
+                          className={`text-right px-3 py-3 tabular ${
+                            isActive
+                              ? "text-gold font-medium bg-gold/5"
+                              : "text-mute"
+                          }`}
+                        >
+                          {value === null ? "—" : value}
+                        </td>
+                      );
+                    })}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <p className="mt-3 font-mono text-mute/70 text-[10px] tracking-[0.25em] leading-relaxed">
+            ⚓ N = {advancedSorted.length} Trackman tracked 投手 · {cpblPitchers.length - advancedSorted.length} 投手 不在此 cache · 百分位 0-100 vs CPBL league · 0 付費 API · 0 繞 paywall · fetch script 公開 GitHub · per /audit S02 ESTIMATION DISCLOSURE
+          </p>
+        </section>
+        )}
 
         {/* ── FAN-GRAMMAR INTERPRETATION ──────────── */}
         <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-12 border-t border-line/40 pt-12">
