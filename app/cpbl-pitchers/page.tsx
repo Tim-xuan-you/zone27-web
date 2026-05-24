@@ -11,6 +11,7 @@ import {
   type CpblPitcherStats,
 } from "@/lib/cpbl-pitchers";
 import { getTeamByName } from "@/lib/teams";
+import { getCpblAdvancedByAcnt } from "@/lib/cpbl-advanced";
 
 export const metadata: Metadata = {
   title: "CPBL 投手排行 · K/9 · BB/9 · HR/9 · WHIP · ERA · IP",
@@ -406,13 +407,25 @@ export default async function CpblPitchersPage({
                     </td>
                     <td className="text-bone px-3 py-3 font-normal">
                       {p.acnt ? (
-                        <Link
-                          href={`/cpbl-pitchers/${p.acnt}`}
-                          className="hover:text-gold underline-offset-4 hover:underline transition-colors"
-                          aria-label={`${p.name} 球員頁 · ${p.team}`}
-                        >
-                          {p.name}
-                        </Link>
+                        <span className="inline-flex items-baseline gap-1.5 flex-wrap">
+                          <Link
+                            href={`/cpbl-pitchers/${p.acnt}`}
+                            className="hover:text-gold underline-offset-4 hover:underline transition-colors"
+                            aria-label={`${p.name} 球員頁 · ${p.team}${getCpblAdvancedByAcnt(p.acnt) ? "(含 Trackman radar)" : ""}`}
+                          >
+                            {p.name}
+                          </Link>
+                          {getCpblAdvancedByAcnt(p.acnt) && (
+                            <span
+                              lang="en"
+                              className="font-mono text-gold/75 text-[8px] tracking-[0.25em] tabular px-1 py-0 border border-gold/30 bg-gold/5"
+                              title="Trackman radar advanced stats available"
+                              aria-hidden="true"
+                            >
+                              ✓ T
+                            </span>
+                          )}
+                        </span>
                       ) : (
                         p.name
                       )}

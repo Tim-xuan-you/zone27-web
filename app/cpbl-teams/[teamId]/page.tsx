@@ -16,6 +16,7 @@ import {
   CPBL_PITCHER_FETCH_DATE,
   type CpblPitcherStats,
 } from "@/lib/cpbl-pitchers";
+import { getCpblAdvancedByAcnt } from "@/lib/cpbl-advanced";
 
 type Props = {
   params: Promise<{ teamId: string }>;
@@ -272,10 +273,17 @@ function PitcherCard({
   pitcher: CpblPitcherStats;
   rank: number;
 }) {
+  // R99 W2 · Trackman radar discoverability badge · visible signal that
+  // clicking name leads to deeper 7-metric Statcast-grade stack per R99 W1
+  // /cpbl-pitchers/[acnt] integration · per Disclosure axiom 不藏。
+  const hasAdvanced = pitcher.acnt
+    ? getCpblAdvancedByAcnt(pitcher.acnt) !== null
+    : false;
+
   return (
     <article className="border border-line/60 bg-slate/20 px-4 sm:px-6 py-5 sm:py-6">
       <div className="flex items-baseline justify-between mb-4 gap-3 flex-wrap">
-        <div className="flex items-baseline gap-3">
+        <div className="flex items-baseline gap-3 flex-wrap">
           <span
             lang="en"
             className="font-mono text-mute/60 text-[10px] tracking-[0.25em] tabular"
@@ -286,13 +294,22 @@ function PitcherCard({
             <Link
               href={`/cpbl-pitchers/${pitcher.acnt}`}
               className="text-bone text-lg sm:text-xl font-normal tracking-tight hover:text-gold underline-offset-4 hover:underline transition-colors"
-              aria-label={`${pitcher.name} 球員頁`}
+              aria-label={`${pitcher.name} 球員頁${hasAdvanced ? "(含 Trackman radar 進階指標)" : ""}`}
             >
               {pitcher.name}
             </Link>
           ) : (
             <span className="text-bone text-lg sm:text-xl font-normal tracking-tight">
               {pitcher.name}
+            </span>
+          )}
+          {hasAdvanced && (
+            <span
+              lang="en"
+              className="font-mono text-gold/85 text-[9px] tracking-[0.3em] tabular px-1.5 py-0.5 border border-gold/40 bg-gold/5"
+              title="Trackman radar 整合 · 7 Statcast-grade advanced metrics available · click name to see"
+            >
+              ✓ TRACKMAN
             </span>
           )}
         </div>
