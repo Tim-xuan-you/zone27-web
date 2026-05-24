@@ -115,29 +115,34 @@ export default function Home() {
 
       <main id="main">
 
-      {/* ── HERO · Mobile-first compressed ────────────────
-          Round 5: mobile vertical density was too high. Padding
-          pt-24 + pb-16 + text-5xl meant hero alone = 1.7 viewports
-          on iPhone, pushing HeroLiveCard demo entirely below fold.
-          Cut by ~50% on mobile · desktop preserves the breathing
-          room. Owner-as-visitor test: hero + first half of demo
-          must fit in 1st mobile viewport. */}
-      <section className="mx-auto max-w-4xl px-6 sm:px-10 pt-10 sm:pt-32 pb-10 sm:pb-20 text-center">
-        <p
-          lang="en"
-          className="font-mono text-gold text-[10px] sm:text-xs tracking-[0.4em] mb-5 sm:mb-10"
-        >
-          AI 量化棒球引擎 · QUANTITATIVE BASEBALL AI · EST. 2026
-        </p>
+      {/* ── HERO · R82 RADICAL CUT(per Tim「太複雜」 founder-dogfood
+          canary fire · Apple iPhone product page pattern · 1 screen 1 thing)
 
+          Cut(R82 simplification per founder-dogfood-canary trump):
+          ❌ kicker line「AI 量化棒球引擎 · QUANTITATIVE BASEBALL AI ·
+             EST. 2026」(engineer-grammar · move to Footer)
+          ❌「信號強度 5★ → 1★ COIN-FLIP」 jargon → 「對了/錯了 全公開」 plain
+          ❌「公開可驗證 · 不收下注佣 · 不推薦投注」 regulatory line →
+             move to Footer(brand IP 仍 surface · 但 hero 不 carry)
+          ❌「270 = Tim 一年親手 sign-off 上限」 filter line → only on
+             /founders page(per pratfall-brand-ip 守住 · 但 hero 不 carry)
+
+          Kept(brand IP 守住 per pratfall axiom):
+          ✓ H1 slogan「不靠直覺, 只看演算法。」
+          ✓ Cold Gold Hairline signature
+          ✓ EN slogan「WE DON'T GUESS. WE COMPUTE.」
+          ✓ Founders 27 CTA pill
+          ✓ ↓ 今晚的引擎 scroll hint
+
+          Apple/Stripe/Linear precedent: hero = 1 brand statement +
+          1 primary CTA + 1 secondary action. No philosophy. No
+          regulatory disclaimer. No filter copy. Those live deeper. */}
+      <section className="mx-auto max-w-4xl px-6 sm:px-10 pt-12 sm:pt-32 pb-10 sm:pb-20 text-center">
         <h1 className="text-4xl sm:text-6xl md:text-7xl font-light leading-[1.05] tracking-tight text-bone">
           不靠直覺,
           <br />
           <span className="text-gold">只看演算法。</span>
         </h1>
-        {/* Round 54 W-C · Cold Gold Hairline signature moat · 27px below
-            H1 + 2 tick marks at golden ratio 38.2%/61.8% · brand IP screenshot
-            identity · Agent 1 award-winning visual research synthesize。 */}
         <div className="zone27-rule mx-auto max-w-[280px]" aria-hidden="true" />
 
         <p
@@ -147,31 +152,10 @@ export default function Home() {
           WE DON&apos;T GUESS. WE COMPUTE.
         </p>
 
-        {/* Round 33 W-B · agent customer-driven product redesign verdict:
-            hero explainer 加 AI prominence + 信號強度語法 + regulatory
-            framing。 connects to ConfidenceStars(Round 33 W-A)downstream.
-            「公開可驗證 · 不收下注佣 · 不推薦投注」 = Taiwan 投顧 license
-            analogy defense + brand IP「data publisher」 not「advisor」 positioning. */}
         <p className="mt-6 sm:mt-10 max-w-md mx-auto text-mute leading-relaxed text-sm sm:text-base">
-          今晚 CPBL · AI 引擎告訴您信號強度<span className="text-gold">5 ★ STRONG → 1 ★ COIN-FLIP</span>。 結果存進公開戰績。
-        </p>
-        <p
-          lang="en"
-          className="mt-3 max-w-md mx-auto font-mono text-mute/70 text-[9px] sm:text-[10px] tracking-[0.3em] leading-relaxed"
-        >
-          公開可驗證 · 不收下注佣 · 不推薦投注
+          今晚 CPBL · 我跑 1 萬次模擬給您看 · 對了 / 錯了 全公開。
         </p>
 
-        {/* Round 11 agent fix: desktop hero had no Founders CTA above
-            the fold · sticky CTA covered mobile but desktop visitors
-            had to scan Nav to find /founders. Add inline scarcity
-            anchor (desktop-visible · mobile too · doesn't conflict
-            with sticky bar).
-            Round 12 conversion-funnel agent: bare mono text at -0.2em
-            tracking parsed as label, not CTA (Fitts's Law violation).
-            Wrap in hairline-bordered pill — still brand-pure (canonical
-            ZONE 27 visual idiom), now reads as interactive at first
-            glance without breaking minimalism. */}
         <p className="mt-6 sm:mt-8">
           <Link
             href="/founders"
@@ -187,23 +171,7 @@ export default function Home() {
             <span className="text-gold/70 ml-2">→</span>
           </Link>
         </p>
-        {/* R59 W-A · Agent C Ship #6 · 270 = Tim 一年親手 sign-off 上限 ·
-            Costly Signaling framing 物理 visible on home · 防 「263/270」
-            被誤讀為 FOMO scarcity counter(brand redline)· R52 W-D framing
-            從 /founders hero 升 homepage first-touch · 不奪 hero 焦點 ·
-            極小 mute · 唯一目的 = filter-out 賭徒(看到「不是 marketing
-            數字」會直接 bounce)· filter-in fan(看到「物理 ceiling」會
-            直接 click)。 */}
-        <p className="mt-2 font-mono text-mute/55 text-[9px] sm:text-[10px] tracking-[0.28em] text-center">
-          270 = Tim 一年親手 sign-off 上限 · 不是 marketing 數字
-        </p>
 
-        {/* Round 50 W-C · subtle scroll-to-prediction hint · per Hick's
-            Law deeper formulation · 訪客 first-touch 必須是 PRIMARY
-            product moment · 不是 brand declaration。 此 link 不奪 hero
-            焦點(mute color · -2 text size · 純文字 + ↓ 符號)· 但給
-            fan「我來看 prediction」 的明確 path · 不必猜「prediction 在
-            哪滑」。 */}
         <p className="mt-4 sm:mt-5">
           <a
             href="#tonight-engine"

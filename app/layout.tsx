@@ -39,7 +39,7 @@ export const metadata: Metadata = {
   // - Tiered commission honest (0% Founders / 5% BLACK CARD vs flat "零手續費")
   // - "git 不可篡改" specific (matches Pillar 02 wording)
   description:
-    "全台第一個為硬核棒球迷打造的暗黑黃金級數據俱樂部。蒙地卡羅模擬器 · git 不可篡改紀錄 · 創作者抽成 0%(Founders 27)/ 5%(BLACK CARD)。",
+    "為硬核棒球迷打造的暗黑黃金級數據俱樂部。我跑 1 萬次模擬給您看 CPBL 勝率 · git 不可篡改紀錄 · 創作者抽成 0%(Founders 27)/ 5%(BLACK CARD)。",
   keywords: [
     "中華職棒",
     "CPBL",
@@ -55,7 +55,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "ZONE 27 — We Don't Guess. We Compute.",
     description:
-      "為硬核棒球迷打造的暗黑黃金級數據俱樂部 · 蒙地卡羅模擬器 · 270 個終身席位",
+      "為硬核棒球迷打造的暗黑黃金級數據俱樂部 · 我跑 1 萬次模擬給您看 · 270 個終身席位",
     type: "website",
     locale: "zh_TW",
     siteName: "ZONE 27",

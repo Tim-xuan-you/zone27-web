@@ -233,8 +233,8 @@ export default function HeroLiveCard({ match }: { match: Match }) {
           (3) "賽後收據在 /track-record" permanent 連結讓 skeptic 任何時候
           (pre-game · live · final 都看得到)都有 above-the-fold 證據路徑. */}
       <p className="font-mono text-mute/80 text-[10px] tracking-[0.25em] mt-3 sm:mt-5 tabular leading-relaxed">
-        <Link href="/learn" className="text-mute/80 hover:text-gold underline-offset-4 hover:underline transition-colors" title="5 分鐘看懂蒙地卡羅 → /learn">
-          蒙地卡羅
+        <Link href="/learn" className="text-mute/80 hover:text-gold underline-offset-4 hover:underline transition-colors" title="5 分鐘看懂模擬原理 → /learn">
+          我跑 1 萬次模擬
         </Link>
         {" "}·{" "}
         <span className="text-gold/80">
