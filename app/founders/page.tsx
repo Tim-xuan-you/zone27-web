@@ -52,8 +52,8 @@ const DOLLAR_DIDNT_BUY: { what: string; why: string }[] = [
     why: "Tim 一手決定 product direction · /now journal 公開 + /roadmap LOCKED/EXPLORING 兩段 · 270 holders 不 vote · brand 不是 DAO · 不裝 community 民主",
   },
   {
-    what: "免費 BLACK CARD 月卡",
-    why: "Founders 27 = lifetime full access · 但不送 BLACK CARD subscription · 兩個 product 分開 · 想要 BLACK CARD 月費 NT$ 299 另付 · 同 The Athletic+FanGraphs Plus 不互送",
+    what: "免費 BLACK CARD 季票",
+    why: "Founders 27 = lifetime full access · 但不送 BLACK CARD subscription · 兩個 product 分開 · 想要 BLACK CARD CPBL 季票 NT$ 1,500/season 另付 · 同 The Athletic+FanGraphs Plus 不互送",
   },
   {
     what: "保證 ROI / 賺錢承諾",
@@ -66,7 +66,7 @@ const benefits = [
     no: "01",
     zh: "終身會員資格",
     en: "LIFETIME ACCESS",
-    body: "一次性 NT$ 2,700,永久解鎖未來所有功能。BLACK CARD 月費 NT$ 299 對您完全免費,終身。",
+    body: "一次性 NT$ 2,700,永久解鎖未來所有功能。BLACK CARD 季票 NT$ 1,500/season 對您完全免費,終身。",
   },
   {
     no: "02",
@@ -122,9 +122,9 @@ const TIERS = [
   },
   {
     name: "BLACK CARD",
-    zh: "黑金月費",
-    price: "NT$ 299",
-    priceNote: "每月 · payment infra 就緒後上線(milestone-triggered)",
+    zh: "CPBL 季票",
+    price: "NT$ 1,500",
+    priceNote: "每季 · LIVE manual ECPay · 0 auto-renewal · per /integrity rule #13",
     highlight: false,
     rows: {
       data: "完整",
@@ -182,7 +182,7 @@ const INLINE_FAQ = [
   },
   {
     q: "這是博彩平台嗎?",
-    a: "不是。ZONE 27 計算的是機率分布,從不販售「鐵口直斷」。我們不接受運彩抽成、不寄生報馬仔生態、不買廣告投放。商業模式是會員制(BLACK CARD 月費 + Founders 27 一次性)+ 未來 Premium Sponsor。詳見 /about /faq。",
+    a: "不是。ZONE 27 計算的是機率分布,從不販售「鐵口直斷」。我們不接受運彩抽成、不寄生報馬仔生態、不買廣告投放。商業模式是會員制(BLACK CARD 季票 + Founders 27 一次性)+ 未來 Premium Sponsor。詳見 /about /faq。",
   },
   // Round 52 W-E · Agent 1 #1 · 7 concrete fears added · HEY pricing model:
   {
@@ -595,39 +595,6 @@ export default async function FoundersPage({
         </div>
       </section>
 
-      {/* ── FROM THE FOUNDER · Round 8 moved below form ──
-          Excerpted closing line from /about Chapter 5 (Tim's voice).
-          Warm trust signal · now appears AFTER visitors submit (or
-          choose not to). 1px gold/20 border + uppercase mono label
-          is the high-trust premium SaaS convention. */}
-      <section className="mx-auto max-w-2xl w-full px-6 sm:px-10 pb-10">
-        <div className="border border-gold/20 p-6 sm:p-8">
-          <p
-            lang="en"
-            className="font-mono text-gold text-[10px] tracking-[0.4em] mb-5"
-          >
-            FROM THE FOUNDER · 親筆說明
-          </p>
-          <blockquote className="text-bone text-lg sm:text-xl font-light leading-snug">
-            台灣的棒球資訊產業,卻長期停留在「直覺說書人」的階段。
-            <span className="block mt-3 text-mute/90 text-base sm:text-lg">
-              這群熱愛棒球的硬核球迷,值得擁有自己的 Bloomberg。
-            </span>
-          </blockquote>
-          <div className="mt-6 flex items-baseline justify-between gap-4 flex-wrap pt-5 border-t border-line/40">
-            <p className="font-mono text-mute text-[10px] tracking-[0.3em]">
-              — TIM · FOUNDER · CPBL 球迷 27 年
-            </p>
-            <Link
-              href="/about"
-              className="font-mono text-gold/70 text-[10px] tracking-[0.3em] hover:text-gold transition-colors"
-            >
-              讀完整創辦人筆記 →
-            </Link>
-          </div>
-        </div>
-      </section>
-
       {/* ── WHAT YOU'RE NOT BUYING ────────────
           Pre-empts the silent objection: "if engine is free + GitHub is
           public, what am I actually paying NT$ 2,700 for?" That doubt
@@ -937,7 +904,7 @@ export default async function FoundersPage({
         </div>
 
         <p className="mt-12 text-center font-mono text-mute text-[10px] tracking-[0.3em]">
-          BLACK CARD 月費為預計上線(payment infra 就緒後 · milestone-triggered),價格可能微調 · FOUNDERS 27 為終身定價,不再變動
+          BLACK CARD CPBL 季票 LIVE manual ECPay · 0 auto-renewal · FOUNDERS 27 為終身定價,不再變動
         </p>
       </section>
 
@@ -969,24 +936,24 @@ export default async function FoundersPage({
 
             <CalcRow label="對標" en="ANCHOR">
               <span className="text-mute">
-                BLACK CARD 月費{" "}
-                <span className="text-bone tabular">NT$ 299</span> /月
+                BLACK CARD 季票{" "}
+                <span className="text-bone tabular">NT$ 1,500</span> /season
               </span>
             </CalcRow>
 
             <CalcRow label="5 年訂閱對照" en="5-YEAR PARITY">
               <span className="text-mute">
-                BLACK CARD:{" "}
-                <span className="text-bone tabular">NT$ 17,940</span>
+                BLACK CARD 10 季:{" "}
+                <span className="text-bone tabular">NT$ 15,000</span>
                 <span className="mx-2 text-mute/50">vs</span>
                 FOUNDERS 27:{" "}
                 <span className="text-gold tabular">NT$ 2,700</span>
               </span>
             </CalcRow>
 
-            <CalcRow label="等同月費攤提" en="EFFECTIVE MO. RATE">
-              <span className="text-bone tabular">~ NT$ 45 / 月</span>
-              <span className="text-mute/60 ml-2">(以 5 年計)</span>
+            <CalcRow label="等同每場攤提" en="EFFECTIVE PER GAME">
+              <span className="text-bone tabular">~ NT$ 2 / 場</span>
+              <span className="text-mute/60 ml-2">(5 年 1,200 場計)</span>
             </CalcRow>
 
             <CalcRow label="創作者抽成節省" en="CREATOR FEE">
@@ -1083,7 +1050,7 @@ export default async function FoundersPage({
           id="inline-faq-heading"
           className="text-3xl sm:text-4xl text-bone font-light tracking-tight text-center mb-12"
         >
-          三個您應該問的問題
+          您應該問的問題
         </h2>
 
         <div className="space-y-3">

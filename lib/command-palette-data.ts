@@ -93,6 +93,29 @@ export const COMMAND_ITEMS: CommandItem[] = [
     group: "賽事 · 引擎",
     keywords: ["signal", "board", "早報", "daily", "brief"],
   },
+  {
+    label: "CPBL 投手排行 · 6 stat tabs · URL-shareable",
+    kicker: "/cpbl-pitchers",
+    path: "/cpbl-pitchers",
+    group: "賽事 · 引擎",
+    keywords: [
+      "cpbl pitchers",
+      "排行",
+      "leaderboard",
+      "投手",
+      "pitchers",
+      "k9",
+      "bb9",
+      "hr9",
+      "whip",
+      "era",
+      "ip",
+      "stat",
+      "ranking",
+      "baseball savant",
+      "savant",
+    ],
+  },
 
   // ── 品牌 IP ────────────────────────────────────────
   {
