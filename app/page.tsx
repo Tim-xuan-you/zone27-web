@@ -7,6 +7,7 @@ import DailyReturnRail from "@/components/DailyReturnRail";
 import ClientErrorBoundary from "@/components/ClientErrorBoundary";
 import RecentMatchesRow from "@/components/RecentMatchesRow";
 import AnonCalibrationStrip from "@/components/AnonCalibrationStrip";
+import AnonPickWidget from "@/components/AnonPickWidget";
 import {
   getFeaturedMatch,
   getTodayMatches,
@@ -224,7 +225,31 @@ export default function Home() {
             trackRecord={trackRecord}
           />
         ) : featuredMatch ? (
-          <HeroLiveCard match={featuredMatch} />
+          <>
+            {/* R86 W-A · Surface AnonPickWidget on homepage as「我 vs
+                引擎」 visceral feedback loop · per Tim 「使用者要看 AI
+                答案 + 其他使用者明牌」 brand-pure replacement(NOT 違反
+                11 NEVER #1 social-leaderboard · 是 personal calibration
+                mirror per Bill James「Hey Bill」 + FiveThirtyEight
+                pattern)· localStorage · 0 PII · 0 server · IKEA effect
+                retention loop · 訪客 first-touch 立刻 click 「我選 X」
+                → 看 engine number 對照 · 來日看自己 PROVED/DIVERGED
+                track record。 已 R45 W-B ship on /matches/[gameId] ·
+                R86 surface 升 homepage hero conversion path · 同 brand
+                IP「Engine FREE + visitor calibration mirror」 axis。
+                ClientErrorBoundary wrap per R73 W-A risk-bearing client
+                pattern · TZ edge / localStorage quota crash 不 take
+                down homepage。 */}
+            <ClientErrorBoundary fallbackLabel="AnonPickWidget · homepage pick">
+              <div className="mb-6 sm:mb-8">
+                <p className="font-mono text-gold/70 text-[10px] sm:text-[11px] tracking-[0.3em] mb-2 text-center">
+                  ↓ 先猜再看引擎 · IKEA effect
+                </p>
+                <AnonPickWidget match={featuredMatch} />
+              </div>
+            </ClientErrorBoundary>
+            <HeroLiveCard match={featuredMatch} />
+          </>
         ) : (
           <EmptyHeroCard />
         )}
