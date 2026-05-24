@@ -440,7 +440,7 @@ export default function TransparencyPage() {
 
         {/* R74 W-A · ReciprocityLedger ledger variant · Agent A R73 SHIP 3 ·
             Cialdini Reciprocity Principle(1984)· 16 concrete artifacts
-            published BEFORE NT$ 299/月 + NT$ 2,700 ASK · Berkshire 70 年
+            published BEFORE NT$ 1,500/season + NT$ 2,700 ASK · Berkshire 70 年
             annual letters + Patek 200 年 movement schematics + Anthropic
             model card library pattern · LINE 老師 / 報馬仔 ask-first-give-
             never inversion · CPBL fan audience pattern-match instantly。 */}
@@ -498,7 +498,7 @@ export default function TransparencyPage() {
               href="/membership/black-card"
               className="inline-block px-6 py-3 border border-gold text-gold font-mono text-[10px] tracking-[0.3em] hover:bg-gold/10 transition-colors"
             >
-              → BLACK CARD · NT$ 299/月
+              → BLACK CARD · NT$ 1,500/season
             </Link>
           </div>
 

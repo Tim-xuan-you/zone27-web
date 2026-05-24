@@ -178,7 +178,7 @@ const INLINE_FAQ = [
   },
   {
     q: "現在留 email 就要付錢嗎?",
-    a: "不收費、不綁定、隨時可退出。留 email 同時 = 進入免費訂閱層(永久免費 · launch 後也存在)+ Founders 27 預售名單(payment infra 就緒後開放時優先通知 · milestone-triggered · 不綁日期)。真正付款是當您主動選擇升級到 Founders 27(NT$ 2,700 終身)或 BLACK CARD(NT$ 299/月)· 我們不催。Founders 27 付款後 14 天無條件退款保證。",
+    a: "不收費、不綁定、隨時可退出。留 email 同時 = 進入免費訂閱層(永久免費 · launch 後也存在)+ Founders 27 預售名單(payment infra 就緒後開放時優先通知 · milestone-triggered · 不綁日期)。真正付款是當您主動選擇升級到 Founders 27(NT$ 2,700 終身)或 BLACK CARD(NT$ 1,500/season)· 我們不催。Founders 27 付款後 14 天無條件退款保證。",
   },
   {
     q: "這是博彩平台嗎?",
@@ -609,8 +609,7 @@ export default async function FoundersPage({
             </li>
           </ul>
           <p className="mt-5 text-mute/80 text-xs sm:text-sm leading-relaxed">
-            想升級成 Founders 27(NT$ 2,700 終身)或 BLACK CARD(NT$ 299/月 · payment
-            infra 就緒後開放)· 任時可選。也可<strong className="text-mute">永遠停在這層</strong>·
+            想升級成 Founders 27(NT$ 2,700 終身)或 BLACK CARD(NT$ 1,500/season · CPBL March-November · 0 auto-renewal)· 任時可選。也可<strong className="text-mute">永遠停在這層</strong>·
             <span className="text-gold"> 我們不催</span>。
           </p>
         </div>

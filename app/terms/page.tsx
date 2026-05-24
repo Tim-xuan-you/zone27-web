@@ -167,7 +167,7 @@ export default function TermsPage() {
           </li>
         </ul>
 
-        <h3 className="text-bone text-lg mt-6 mb-3">BLACK CARD(NT$ 299/月)</h3>
+        <h3 className="text-bone text-lg mt-6 mb-3">BLACK CARD(NT$ 1,500/season)</h3>
         <ul className="space-y-2">
           <li>
             <strong className="text-bone">每月 14 天退款</strong> · 您每月手動

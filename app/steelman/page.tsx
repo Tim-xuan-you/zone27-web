@@ -348,7 +348,7 @@ export default function SteelmanPage() {
               href="/membership/black-card"
               className="inline-block px-6 py-3 border border-gold text-gold font-mono text-[10px] tracking-[0.3em] hover:bg-gold/10 transition-colors"
             >
-              → BLACK CARD · NT$ 299/月
+              → BLACK CARD · NT$ 1,500/season
             </Link>
           </div>
           <p

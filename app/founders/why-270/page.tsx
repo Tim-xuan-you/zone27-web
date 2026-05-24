@@ -146,7 +146,7 @@ export default function FoundersWhy270Page() {
           <p className="text-mute/85 text-[13px] italic">
             ↳ doubt 2:270 太少 ZONE 27 養不活?{" "}
             <strong className="text-bone">真實 case</strong> · 270 × NT$ 2,700
-            = NT$ 729,000 一次性 收入 + BLACK CARD 月卡 NT$ 299 × N 累積 ·
+            = NT$ 729,000 一次性 收入 + BLACK CARD CPBL Season Pass NT$ 1,500 × N 累積 ·
             Pinboard 17 年 14K paid users 可以 sustain solo · Tarsnap 18 年
             usage-billed 可以 sustain solo · ZONE 27 採同 economic axis。
           </p>
@@ -162,8 +162,9 @@ export default function FoundersWhy270Page() {
             27 × 100 = 2,700 · 同 brand 數字哲學 anchor。 但 deeper math:
           </p>
           <p>
-            BLACK CARD 月費 NT$ 299/月 · Founders 27 是 lifetime · 9 個月達
-            損益平衡(NT$ 2,700 ÷ NT$ 299 ≈ 9 months break-even)· per
+            BLACK CARD CPBL Season Pass NT$ 1,500/season · Founders 27 是 lifetime ·
+            2-season 達 損益平衡(NT$ 2,700 ÷ NT$ 1,500 ≈ 2 seasons break-even ·
+            R81 pivot 自 NT$ 299/月 · 過去 9-month break-even retired)· per
             /founders BreakEvenCell bento。
           </p>
           <p>

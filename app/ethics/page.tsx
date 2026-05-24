@@ -240,7 +240,7 @@ export default function EthicsPage() {
               </li>
               <li className="flex gap-3 items-baseline">
                 <span className="font-mono text-gold/80 text-[10px] tracking-[0.25em]">▸</span>
-                <span>BLACK CARD NT$ 299/月 manual subscription · 5% creator share</span>
+                <span>BLACK CARD NT$ 1,500/season manual subscription · 5% creator share</span>
               </li>
               <li className="flex gap-3 items-baseline">
                 <span className="font-mono text-gold/80 text-[10px] tracking-[0.25em]">▸</span>

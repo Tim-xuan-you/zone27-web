@@ -161,7 +161,7 @@ const CATEGORIES: Category[] = [
             <br />
             <br />
             如果您是 corporate 想用 ZONE 27 · 同 rates 同 access:
-            自己 NT$ 2,700(Founders 27)· 或 NT$ 299/月(BLACK CARD)· self-serve。
+            自己 NT$ 2,700(Founders 27)· 或 NT$ 1,500/season(BLACK CARD)· self-serve。
             <br />
             <br />
             完整 pricing rationale 見{" "}
