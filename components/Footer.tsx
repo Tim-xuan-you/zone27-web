@@ -86,6 +86,7 @@ const FOOTER_GROUPS: FooterGroup[] = [
       { label: "MLB · 即時資料", href: "/matches/mlb" },
       { label: "模擬實驗室 · 1 萬次跑", href: "/lab" },
       { label: "CPBL 投手排行 · 6 stats", href: "/cpbl-pitchers" },
+      { label: "CPBL 6 隊伍 · aggregation", href: "/cpbl-teams" },
       { label: "每日早報", href: "/signal-board" },
       // Round 51 W-E · Atom RSS /feed.xml ship · 給 hardcore fan RSS reader
       // audience subscribe · 同 Stratechery / FanGraphs / Baseball Savant

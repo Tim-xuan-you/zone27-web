@@ -123,6 +123,32 @@ export const COMMAND_ITEMS: CommandItem[] = [
       "保送",
     ],
   },
+  {
+    label: "CPBL 6 隊伍 投手 aggregation · 球迷 tribal home base",
+    kicker: "/cpbl-teams",
+    path: "/cpbl-teams",
+    group: "賽事 · 引擎",
+    keywords: [
+      "cpbl teams",
+      "teams",
+      "隊伍",
+      "球團",
+      "team page",
+      "tribal",
+      "統一獅",
+      "中信兄弟",
+      "富邦悍將",
+      "樂天桃猿",
+      "味全龍",
+      "台鋼雄鷹",
+      "lions",
+      "brothers",
+      "guardians",
+      "monkeys",
+      "dragons",
+      "hawks",
+    ],
+  },
 
   // ── 品牌 IP ────────────────────────────────────────
   {
