@@ -387,7 +387,17 @@ export default async function CpblPitchersPage({
                       {String(idx + 1).padStart(2, "0")}
                     </td>
                     <td className="text-bone px-3 py-3 font-normal">
-                      {p.name}
+                      {p.acnt ? (
+                        <Link
+                          href={`/cpbl-pitchers/${p.acnt}`}
+                          className="hover:text-gold underline-offset-4 hover:underline transition-colors"
+                          aria-label={`${p.name} 球員頁 · ${p.team}`}
+                        >
+                          {p.name}
+                        </Link>
+                      ) : (
+                        p.name
+                      )}
                     </td>
                     <td className="text-mute/85 px-3 py-3 hidden sm:table-cell">
                       {p.team}
