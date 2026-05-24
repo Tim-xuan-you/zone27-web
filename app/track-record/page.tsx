@@ -181,22 +181,7 @@ export default function TrackRecordPage() {
         <MyTeamTrackRecord matches={buildMyTeamMatches(finalized)} />
 
         <p className="mt-4 font-mono text-mute/80 text-[10px] tracking-[0.25em] leading-relaxed max-w-2xl">
-          多數運動分析平台選擇藏起這頁;ZONE 27 把它放在 footer 主導航 ·
-          因為公開戰績是品牌 IP 的物理證據(per{" "}
-          <Link
-            href="/manifesto"
-            className="text-gold underline-offset-4 hover:underline"
-          >
-            /manifesto Section II
-          </Link>
-          {" / "}
-          <Link
-            href="/discipline"
-            className="text-gold underline-offset-4 hover:underline"
-          >
-            /discipline Section 01
-          </Link>
-          )。
+          多數運動分析平台選擇藏起這頁 · ZONE 27 把它放在 footer 主導航 · 公開戰績是品牌的物理證據。
         </p>
       </section>
 
@@ -204,41 +189,23 @@ export default function TrackRecordPage() {
         <div className="w-full h-px bg-line/60" />
       </div>
 
-      {/* ── STAT LITERACY DISCLOSURE · Round 31 Wave G A12 critic patch ──
-          Stat-literate skeptic 嗆「60% PROVED 是 Texas sharpshooter fallacy:
-          predict 60% · 對方贏的時候你說『機率本來就 40% 有可能』 · 對方輸的
-          時候你就 PROVED」。 主動 surface 這個 wisdom:PROVED ≠ 校準。
-          校準需要 Brier score · 寫 v0.3 roadmap commitment。 brand IP
-          「Pratfall + Costly Signaling + Disclosure」三 axiom 同時 fire。 */}
+      {/* R90 simplification · STAT LITERACY DISCLOSURE box 從 3 段 →
+          1 line · 學術 Texas sharpshooter fallacy 教育 cut · 純 honest
+          disclaimer + /member/calibration cross-link · 600 → 1 line · 同
+          Tim「都是字 · 不必要的資訊」 mandate · brand IP「Pratfall」 守住
+          但 visitor cognitive load 大幅 cut · 細節可在 /methodology 深 dive。 */}
       {finalized.length > 0 && finalized.length < 30 && (
         <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-12">
-          <div className="bg-loss/5 border border-loss/30 p-5 sm:p-7">
-            <p
-              lang="en"
-              className="font-mono text-loss text-[10px] tracking-[0.35em] mb-3"
+          <p className="font-mono text-loss/85 text-[10px] tracking-[0.3em] leading-relaxed">
+            ⚠ N &lt; 30 · PROVED 數字 surface 方向命中 · NOT 機率校準 ·{" "}
+            <Link
+              href="/member/calibration"
+              className="text-gold hover:underline underline-offset-4"
             >
-              ⚠ STAT LITERACY · 為什麼 60% PROVED ≠ 引擎強?
-            </p>
-            <p className="text-mute text-sm leading-relaxed mb-3">
-              PROVED 只代表引擎押的 majority side 真的贏。 60% 機率本來就有
-              40% 機率輸 · 我們命中時可以說「引擎方向對」 · 落空時可以說
-              「機率本來就允許」 — 這叫 <span lang="en" className="text-bone">Texas sharpshooter fallacy</span>。
-              要證明引擎「機率校準正確」(說 60% 真的 60% 命中)· 需要 N≥30
-              + <span lang="en" className="text-bone">Brier score</span> + reliability diagram。
-            </p>
-            <p className="font-mono text-mute/80 text-[10px] tracking-[0.25em] leading-relaxed">
-              所以這頁的 PROVED 數字 surface 「引擎方向命中與否」 · NOT 「引擎機率
-              校準與否」。 校準 surfacing 在{" "}
-              <Link href="/member/calibration" className="text-gold hover:underline underline-offset-4">
-                /member/calibration
-              </Link>
-              {" "}的 reliability diagram · 等 N≥30 才有統計意義。 完整數學見{" "}
-              <Link href="/methodology" className="text-gold hover:underline underline-offset-4">
-                /methodology
-              </Link>
-              。 v0.3 roadmap 將 ship Brier score 自動計算 · 那時這段移除。
-            </p>
-          </div>
+              /member/calibration reliability diagram
+            </Link>{" "}
+            等 N≥30 才有統計意義。
+          </p>
         </section>
       )}
 
