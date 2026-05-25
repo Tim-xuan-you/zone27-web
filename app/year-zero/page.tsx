@@ -661,7 +661,12 @@ function Section({
       <h2 className="text-2xl sm:text-3xl text-bone font-light tracking-tight mb-5">
         {zh}
       </h2>
-      <div className="space-y-4 text-mute text-base leading-relaxed">
+      {/* R130 W1 · zh-body Typotheque CJK typography upgrade · per R97 W1
+          LETTER_BODY precedent · same axis · 加 text-wrap balance + pretty +
+          word-break keep-all + punctuation hanging · 改善 long-form prose
+          CJK reading experience · 同 globals.css .zh-body utility · per Tim
+          「畫面更極致美觀」 mandate · per R120 deferred queue safe polish。 */}
+      <div className="space-y-4 zh-body text-mute text-base leading-relaxed">
         {children}
       </div>
     </section>
