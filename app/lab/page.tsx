@@ -7,21 +7,51 @@ import Footer from "@/components/Footer";
 import MatchSimulator from "@/components/MatchSimulator";
 import RecentSims from "@/components/RecentSims";
 import EngineFreeBrandBlock from "@/components/EngineFreeBrandBlock";
-import StatTerm from "@/components/StatTerm";
 import { matches } from "@/lib/matches";
 
 // ── /lab · Live AI Laboratory ──────────────────────────
+// R110 W2 · Apple-style minimalism refactor per Tim 2026-05-25 mobile
+// screenshot critique「頁面很雜 · 過多資訊 · 選擇太多 · 重複選項」 ·
+// 解決:
+//   - Match selector 10 cards → 3(filter logic: pre-game first · then
+//     most recent finalized by id desc · 限制 visual clutter)
+//   - 加 date chip(5/24 etc)per card · 同 team 跨日不再 looks duplicate
+//   - 砍 methodology section 整段(6 paragraphs · /methodology 已存在)·
+//     /lab 不該複製白皮書 content · 只該 link
+//   - Hero text 縮短到 single H1 + single subtitle line · Apple-grade single-action
+//   - StatTerm import removed(只用在 methodology section · 已 cut)
 // 從 v0.10 起,核心模擬 UI 抽到 components/MatchSimulator,
-// 這頁只保留 Hero + 比賽選擇器 + 方法論。
+// 這頁只保留 Hero + 比賽選擇器 + 方法論 cross-link。
 // ─────────────────────────────────────────────────────
 
+// R110 W2 · Filter matches for selector · 3 max · pre-game first · most
+// recent finalized fill 剩下 slot · slice 限制 visual clutter per Apple/
+// Stripe Press minimalism · 訪客 want「選個比賽 + RUN」 not「scroll 10 cards」。
+const LAB_MATCHES = matches
+  .slice()
+  .sort((a, b) => {
+    const aPre = a.finalResult ? 1 : 0;
+    const bPre = b.finalResult ? 1 : 0;
+    if (aPre !== bPre) return aPre - bPre;
+    return b.id.localeCompare(a.id);
+  })
+  .slice(0, 3);
+
+// R110 W2 · Extract MM/DD from cpbl-260524-01 id format · 同 team 不同日
+// disambiguation chip。 cpbl-YYMMDD-NN → "5/24"。
+function formatMatchDateChip(id: string): string {
+  const m = id.match(/^cpbl-\d{2}(\d{2})(\d{2})-/);
+  if (!m) return "";
+  return `${parseInt(m[1], 10)}/${parseInt(m[2], 10)}`;
+}
+
 export default function LabPage() {
-  // Defense: matches.length === 0 case (lib/matches.ts in migration).
+  // Defense: LAB_MATCHES.length === 0 case (lib/matches.ts in migration).
   // Hooks must be called unconditionally — useState gets a stable empty
   // string fallback, then we guard on match below.
-  const initialId = matches[0]?.id ?? "";
+  const initialId = LAB_MATCHES[0]?.id ?? "";
   const [matchId, setMatchId] = useState(initialId);
-  const match = matches.find((m) => m.id === matchId);
+  const match = LAB_MATCHES.find((m) => m.id === matchId);
 
   if (!match) {
     return (
@@ -113,79 +143,93 @@ export default function LabPage() {
 
       <main id="main">
 
-      {/* ── HERO ─────────────────────────────────── */}
+      {/* ── HERO · R110 W2 Apple-style minimal · 1 chip + 1 H1 + 1 subtitle line ── */}
       <section className="mx-auto max-w-4xl w-full px-6 sm:px-10 pt-20 pb-10 text-center">
-        <div className="inline-flex items-center gap-2 mb-8 font-mono text-[10px] tracking-[0.35em]">
-          <span className="text-gold">即時 AI 實驗室</span>
-          <span className="text-mute/60">·</span>
-          <span className="px-1.5 py-0.5 border border-gold/40 text-gold">
-            v0.2 · 真實打席 + 重播
-          </span>
-        </div>
+        <p className="font-mono text-[10px] tracking-[0.35em] mb-8 text-gold">
+          即時 AI 實驗室 · v0.2
+        </p>
         <h1 className="text-4xl sm:text-5xl md:text-6xl font-light leading-[1.1] tracking-tight text-bone">
           親眼看
           <span className="text-gold">演算法</span>
           跑。
         </h1>
-        <p className="mt-8 max-w-xl mx-auto text-mute leading-relaxed text-base">
-          每場虛擬比賽都是{" "}
-          <span className="font-mono text-gold/80">逐打席</span>
-          模擬:9 局、27 個出局數、滿壘保送會推進跑者。
-          選一場 CPBL 比賽,按下執行,看 10,000 次模擬如何在
-          兩秒內從亂數收斂成穩定的勝率分布 — 再按 REPLAY 看一場 9 局文字直播。
+        <p className="mt-6 max-w-md mx-auto text-mute leading-relaxed text-base">
+          選一場 CPBL · 跑 10,000 次 Monte Carlo · &lt; 2 秒收斂。
         </p>
 
-        {/* Universal engine-free brand block — same on /lab/custom.
-            Brand axiom visible at engine entry point, not buried in
-            /lab/custom only. Algorithm Step 3 (SIMPLIFY): one source. */}
+        {/* Universal engine-free brand block — same on /lab/custom. */}
         <EngineFreeBrandBlock />
 
-        {/* Round 51 W-B · Agent 3 CRITICAL #2 fix · pre-sim credibility
-            anchor · 訪客 cold land /lab 不知 track-record 存在 · 跑完
-            sim 才 surface(post-sim trust loop)= 太晚 · 此 hero
-            single-line link 是 entry-point credibility · 「親手跑 model」
-            前 surface「model 過去 receipts」 = NN/g Halo Effect ·
-            訪客 trust threshold 大幅降低。 */}
-        <p className="mt-6 font-mono text-mute/85 text-[11px] sm:text-xs tracking-[0.25em] text-center leading-relaxed">
+        {/* Pre-sim credibility anchor · single-line trust link · NN/g Halo Effect。 */}
+        <p className="mt-6 font-mono text-mute/85 text-[11px] sm:text-xs tracking-[0.25em] text-center">
           <Link
             href="/track-record"
             className="text-gold underline-offset-4 hover:underline transition-colors"
           >
-            ✓ 公開戰績 · 引擎過去 PROVED / DIVERGED 等大列出 →
+            ✓ 公開戰績 · PROVED / DIVERGED 等大列出 →
           </Link>
         </p>
       </section>
 
-      {/* ── MATCH SELECTOR ───────────────────────── */}
+      {/* ── MATCH SELECTOR · R110 W2 · 3 cards max · date chip 避免 same-team
+          跨日 looks duplicate · per Tim mobile critique「10 cards 太多 ·
+          重複的選項」 ── */}
       <section className="mx-auto max-w-4xl w-full px-6 sm:px-10 pb-8">
-        <p className="font-mono text-gold/70 text-[10px] tracking-[0.35em] mb-4">
-          / 01 · 選擇比賽
-        </p>
+        <div className="flex items-baseline justify-between mb-4 flex-wrap gap-2">
+          <p className="font-mono text-gold/70 text-[10px] tracking-[0.35em]">
+            / 01 · 選擇比賽
+          </p>
+          <Link
+            href="/matches"
+            className="font-mono text-mute hover:text-gold text-[10px] tracking-[0.3em] underline-offset-4 hover:underline transition-colors"
+          >
+            看全部 {matches.length} 場 →
+          </Link>
+        </div>
         <div className="grid sm:grid-cols-3 gap-3">
-          {matches.map((m) => {
+          {LAB_MATCHES.map((m) => {
             const active = m.id === matchId;
+            const dateChip = formatMatchDateChip(m.id);
+            const isFinal = !!m.finalResult;
             return (
               <button
                 key={m.id}
                 type="button"
                 onClick={() => setMatchId(m.id)}
+                aria-current={active ? "true" : undefined}
                 className={`text-left p-4 border transition-colors duration-150 cursor-pointer ${
                   active
                     ? "border-gold bg-gold/10 text-bone"
                     : "border-line/60 text-mute hover:border-gold/40 hover:text-bone"
                 }`}
               >
-                <p className="text-base font-light leading-tight">
+                <div className="flex items-baseline justify-between gap-2 mb-2">
+                  <span
+                    lang="en"
+                    className="font-mono text-mute/80 text-[10px] tracking-[0.25em] tabular"
+                  >
+                    {dateChip}
+                  </span>
+                  {isFinal && (
+                    <span
+                      lang="en"
+                      className="font-mono text-gold/70 text-[9px] tracking-[0.25em]"
+                    >
+                      ✓ FINAL
+                    </span>
+                  )}
+                </div>
+                <p className="text-sm sm:text-base font-light leading-tight">
                   {m.home.name}
                 </p>
-                <p className="font-mono text-[10px] text-mute tracking-[0.2em] my-1">
-                  VS
+                <p className="font-mono text-[9px] text-mute/70 tracking-[0.2em] my-0.5">
+                  vs
                 </p>
-                <p className="text-base font-light leading-tight">
+                <p className="text-sm sm:text-base font-light leading-tight">
                   {m.away.name}
                 </p>
                 <p className="font-mono text-[10px] text-gold/70 tabular mt-3 tracking-[0.2em]">
-                  歷史鎖定 · {m.home.winRate}% / {m.away.winRate}%
+                  {m.home.winRate}% / {m.away.winRate}%
                 </p>
               </button>
             );
@@ -285,35 +329,22 @@ export default function LabPage() {
         <RecentSims />
       </section>
 
-      {/* ── METHODOLOGY NOTE ─────────────────────── */}
-      <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-20 border-t border-line/40 pt-12">
-        <p className="font-mono text-gold/70 text-[10px] tracking-[0.35em] mb-4">
-          / METHODOLOGY · v0.2 — REAL AT-BAT
+      {/* ── METHODOLOGY · R110 W2 · single-line cross-link · 6-paragraph
+          inline copy cut per Apple/Stripe minimalism · 白皮書本就 in
+          /methodology · 不複製 ── */}
+      <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-20 border-t border-line/40 pt-10 text-center">
+        <p className="font-mono text-mute text-sm leading-relaxed">
+          引擎用 K/9 · BB/9 · HR/9 推 8 種打席結果 · 70 個打席 / 場 ·
+          10,000 場 · 全在您的瀏覽器跑。
         </p>
-        <div className="space-y-4 text-mute text-sm leading-relaxed">
-          <p>
-            v0.2 引擎升級為
-            <strong className="text-bone">逐打席對決模型</strong>。
-            每個打席依該投手的 <StatTerm term="K/9" /> · <StatTerm term="BB/9" />{" "}
-            · <StatTerm term="HR/9" /> 推導出 8 種互斥結果
-            (K · BB · HR · 1B · 2B · 3B · GO · FO)的機率,滾亂數選一個,
-            執行對應的壘上推進物理(滿壘保送強制得分、二壘安打 + 一壘跑者
-            50% 機率回本壘等),累計分數與出局數。
-          </p>
-          <p>
-            一場虛擬比賽需要模擬約{" "}
-            <strong className="text-bone">70 個打席</strong>(9 局 ×
-            約 8 次半局打席)。10,000 場 = 約 70 萬次亂數採樣,全部在
-            瀏覽器端執行,&lt; 2 秒收斂。
-          </p>
-          <p>
-            <strong className="text-bone">下一站 v0.3:</strong>
-            加入打者個別進階數據 (
-            <StatTerm term="OPS" /> · <StatTerm term="wRC+" />
-            ) 細化結果機率(可在現有資料上路);
-            v0.4(aspirational · 等 CPBL 公開 Statcast 等級資料)接上球速 + 轉軸物理先驗。
-          </p>
-        </div>
+        <p className="mt-4 font-mono text-gold/85 text-[10px] tracking-[0.35em]">
+          <Link
+            href="/methodology"
+            className="underline-offset-4 hover:underline transition-colors"
+          >
+            完整白皮書 →
+          </Link>
+        </p>
       </section>
 
       {/* Round 51 W-B · Agent 3 founder voice audit · /lab 缺 Tim signature ·
