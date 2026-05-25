@@ -58,6 +58,12 @@ export default function MiniMatchCard({ match }: { match: Match }) {
   return (
     <article
       aria-label={`${match.home.name} versus ${match.away.name} · engine prediction ${homePct}-${awayPct}`}
+      // R109 W2 · view-transition-name per-card · unique 用 match.id · 當訪客
+      // 從 /matches → /matches/[gameId] 跨頁 · 若 detail page 也加 matching name
+      // browser morphs card position smoothly · 否則 fallback whole-doc fade
+      // (per @view-transition navigation: auto in globals.css R109 W1)。
+      // Older browsers ignore property completely · 0 risk · 純 progressive enhancement。
+      style={{ viewTransitionName: `match-${match.id}` } as React.CSSProperties}
       className="bg-slate/40 border border-line/60 p-4 sm:p-5 flex flex-col gap-3 transition-colors hover:border-gold/40"
     >
       {/* Time + venue + phase badge */}
