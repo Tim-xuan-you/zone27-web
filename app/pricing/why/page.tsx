@@ -522,9 +522,57 @@ export default function PricingWhyPage() {
                 patek.com/generations-campaign
               </a>
             </NumItem>
+            <NumItem n="09">
+              <span className="text-bone">CPBLTV(Hami Video)2025 early-bird</span> ·
+              <strong className="text-gold"> NT$ 2,399/年 全聯盟 season pass</strong> · regular NT$ 2,499/年 · 單隊 NT$ 77/月 · 5 隊 NT$ 277/月 · Taiwan CPBL 鐵粉 already accept NT$ 2,399/yr 「passive watching」 · ZONE 27 Founders 27 NT$ 2,700 <strong className="text-gold">LIFETIME 只比 CPBLTV 1 年貴 NT$ 301</strong> · 「watch all year = NT$ 2,399 · think like an engine = NT$ 2,700 once forever」 anchor ·{" "}
+              <a
+                href="https://www.cht.com.tw/zh-tw/home/cht/messages/2025/0211-1000"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gold/85 hover:text-gold underline-offset-4 hover:underline"
+              >
+                cht.com.tw/2025 CPBLTV official
+              </a>
+            </NumItem>
+            <NumItem n="10">
+              <span className="text-bone">DELTA Inc.(Japan NPB sabermetrics)</span> ·
+              ¥1,000/月(≈ NT$ 210)for 1.02 Essence of Baseball · ¥2,000/月 farm tier · founded 2011 · ZONE 27 closest Asian precedent · 14 年運轉至今 sub count 不公開 · 「Bill James of Japan」 Yusuke Okada solo · ZONE 27 disclosure 哲學 <strong className="text-gold">反 invert DELTA opacity</strong> · per Pratfall(Aronson 1966)·{" "}
+              <a
+                href="https://1point02.jp/op/reg/guide_reg_description-en.aspx"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gold/85 hover:text-gold underline-offset-4 hover:underline"
+              >
+                1point02.jp DELTA subscription
+              </a>
+            </NumItem>
+            <NumItem n="11">
+              <span className="text-bone">CPBL 2025 attendance pacing</span> ·
+              <strong className="text-gold"> 3,000,000 spectators / season</strong> · average 11,940/game early-season(+55% vs 35-year avg)· 2024 record-high 7,477/game · 270 Founders 27 seats = <strong className="text-gold">0.009% of single-season gate</strong> · sell-out trivially achievable if conversion ≥ 1-in-11,000 attendees ·{" "}
+              <a
+                href="https://sports.ettoday.net/news/2938974"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gold/85 hover:text-gold underline-offset-4 hover:underline"
+              >
+                sports.ettoday.net CPBL 2025
+              </a>
+            </NumItem>
+            <NumItem n="12">
+              <span className="text-bone">PressPlay Academy 權證小哥(財經 options trader)</span> ·
+              <strong className="text-gold"> 8,100+ paying students</strong> · Taiwan 單一 niche-expert creator 已證 financial willingness-to-pay · ZONE 27 270 founders = <strong className="text-gold">3% of 權證小哥 already proven</strong> · 270-seat costly signal scarcity 是 PressPlay 沒 deploy 的 asymmetric weapon ·{" "}
+              <a
+                href="https://www.pressplay.cc/about"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gold/85 hover:text-gold underline-offset-4 hover:underline"
+              >
+                pressplay.cc Academy
+              </a>
+            </NumItem>
           </ol>
           <p className="mt-8 font-mono text-gold/80 text-[10px] sm:text-xs tracking-[0.3em] leading-relaxed text-center">
-            ⚓ 8 facts · web-verified · 全 source URL · 您可 click 自己 audit
+            ⚓ 12 facts · web-verified · 全 source URL · 您可 click 自己 audit
           </p>
           <p className="mt-6 font-mono text-mute/80 text-[10px] tracking-[0.3em] leading-relaxed">
             ⚓ <strong className="text-bone">您不孤獨 · 您 NT$ 2,700 在 industry benchmark 內</strong> ·
