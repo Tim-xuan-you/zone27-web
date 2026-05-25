@@ -20,6 +20,30 @@
 
   --background: var(--zone-navy);
   --foreground: var(--zone-bone);
+
+  /* R108 W4 · interpolate-size: allow-keywords · Chrome 129+ / Safari 18+ ·
+     enables `height: auto` and `100dvh` to transition smoothly · pairs with
+     env(safe-area-inset-bottom) in StickyFoundersCTA · iOS Safari URL-bar
+     collapse glides instead of snaps · Linear iOS app + Anthropic Console
+     mobile pattern · ungated fallback in older browsers(transitions skip
+     keyword targets but don't break)。 */
+  interpolate-size: allow-keywords;
+}
+
+/* R108 W4 · @property registered Cold Gold transitionable custom props ·
+   Chrome 85+ / Safari 16.4+ Baseline · lets gradient/glow values smoothly
+   interpolate via transition · 之前 .glow-gold box-shadow snap · 現在
+   transition: --gold-glow 280ms 順絲滑 · Linear gradient hover state pattern。
+   Silent under prefers-reduced-motion(property registered · 不 auto-animate)。 */
+@property --gold-alpha {
+  syntax: "<number>";
+  inherits: false;
+  initial-value: 0.4;
+}
+@property --gold-glow {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: 24px;
 }
 
 @theme inline {
@@ -36,6 +60,16 @@
   --color-mute: var(--zone-mute);
   --color-win: var(--zone-win);
   --color-loss: var(--zone-loss);
+
+  /* R108 W4 · color-mix() oklab interpolation palette · Chrome 111+ /
+     Safari 16.2+ Baseline · prevents「muddy mid-gray」 sRGB interpolation
+     produces between gold and navy · same Stripe Press / Anthropic
+     model-card axis pattern · 不取代 Tailwind opacity utilities · 而是 add
+     pre-mixed dim variants 供 component 直接用(.text-color-bone-dim 等)。 */
+  --color-gold-15: color-mix(in oklab, var(--zone-gold) 15%, transparent);
+  --color-gold-30: color-mix(in oklab, var(--zone-gold) 30%, transparent);
+  --color-gold-70: color-mix(in oklab, var(--zone-gold) 70%, transparent);
+  --color-bone-dim: color-mix(in oklab, var(--zone-bone) 65%, var(--zone-navy));
 
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
@@ -98,7 +132,10 @@ p, li {
 
 /* CJK kerning — Chrome 119+ ships text-spacing-trim. Fixes the awkward
    gap after 「 」, 、 , etc. per CLREQ rules. Single most powerful
-   Traditional Chinese polish available in 2026. */
+   Traditional Chinese polish available in 2026. R108 W4 · 加 space-all
+   upgrade(Chrome 132+ Baseline 2026)· collapses space between CJK +
+   Latin glyphs(「第 1000 個」 rendering)· Apple Newsroom Taiwan +
+   Initium Media editorial standard。 */
 :where([lang^="zh"], html[lang^="zh"]) {
   text-spacing-trim: trim-start;
 }
@@ -107,13 +144,41 @@ p, li {
    denser than Latin · leading 1.75-1.8 vs Latin 1.5 · max line length 38ch.
    Apply via `.zh-body` to long-form Chinese prose blocks(/audit · /methodology
    · /year-zero · /letter · /heritage)。 Doesn't override Tailwind leading-N
-   utilities · just sets sensible body-text default for unstyled <p>。 */
+   utilities · just sets sensible body-text default for unstyled <p>。
+   R108 W4 · 加 text-spacing-trim: space-all 升級(Chrome 132+ Baseline 2026 ·
+   Apple Newsroom TW pattern)+ font-feature-settings halt/palt(W3C CLREQ
+   半形 punctuation in proportional layout)· 此 utility 是 Tim 長文 voice
+   artifact 的 editorial signature。 */
 .zh-body {
   font-size: 1.0625rem; /* 17px */
   line-height: 1.78;
   max-width: 38ch;
   text-wrap: pretty;
+  text-spacing-trim: space-all;
+  font-feature-settings: "halt", "palt" 1;
   hanging-punctuation: first allow-end;
+}
+
+/* R108 W4 · widow-prevention for 1-line tabular stat captions · per
+   Agent 3 UX research · iPhone 13 mini(375px)經常 orphan「LOWER better」
+   /「HIGHER better」/「聯盟 elite ~2.00」 最後一字 · FanGraphs publication-
+   grade discipline · 0 deps · gracefully degrades(text-wrap-style: pretty
+   Chrome 130+ Baseline 2025)。 word-break: keep-all 防 CJK 標點 mid-word
+   切斷 per W3C CLREQ。 */
+.stat-caption {
+  text-wrap: balance;
+  text-wrap-style: pretty;
+  word-break: keep-all;
+}
+
+/* R108 W4 · vertical-center block utility · Chrome 123+ Baseline 2024 ·
+   `align-content: center` on plain block element · 不必 flex hack · 不必
+   `display: grid place-items-center` 牽動 child layout · Apple/Vercel 404
+   pattern · use on /not-found · /error · /global-error · /loading。 */
+.v-center-block {
+  display: block;
+  align-content: center;
+  min-height: 100dvh;
 }
 
 /* Reading-progress bar · CSS Scroll-Driven Animations Level 1 · Chrome 115+
