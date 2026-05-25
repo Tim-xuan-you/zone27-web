@@ -375,6 +375,47 @@ export default function TierFeatureMatrix() {
         ))}
       </div>
 
+      {/* R112 W2 · navigation hint · Tim 切完 tier 後問「切換都沒動作」 root cause:
+          tier change 是 localStorage state · 需要 visit tier-aware pages 才看到 visible
+          difference · /admin 此 matrix 是 comparison view 不會 self-change · 此 hint
+          surface「verify visible difference 該去哪些 page」 · 同 GitHub Copilot
+          dashboard「here's where to verify」 pattern。 */}
+      <div className="mt-5 grid sm:grid-cols-3 gap-2">
+        <Link
+          href="/member"
+          className="border border-gold/40 bg-slate/30 hover:bg-slate/50 hover:border-gold/60 px-3 py-2 transition-colors group"
+        >
+          <p className="font-mono text-gold/85 text-[9px] tracking-[0.3em] mb-1">
+            → /member dashboard
+          </p>
+          <p className="text-mute group-hover:text-bone text-[11px] leading-snug transition-colors">
+            tier-aware <strong className="text-bone">PaidTierLockedGrid</strong> · BLACK CARD + Founders 27 unlock preview
+          </p>
+        </Link>
+        <Link
+          href="/membership/black-card"
+          className="border border-gold/40 bg-slate/30 hover:bg-slate/50 hover:border-gold/60 px-3 py-2 transition-colors group"
+        >
+          <p className="font-mono text-gold/85 text-[9px] tracking-[0.3em] mb-1">
+            → /membership/black-card
+          </p>
+          <p className="text-mute group-hover:text-bone text-[11px] leading-snug transition-colors">
+            「引擎永久免費 · 您付的是身份」 inverse-paywall single-line(R111 W3)
+          </p>
+        </Link>
+        <Link
+          href="/founders"
+          className="border border-gold/40 bg-slate/30 hover:bg-slate/50 hover:border-gold/60 px-3 py-2 transition-colors group"
+        >
+          <p className="font-mono text-gold/85 text-[9px] tracking-[0.3em] mb-1">
+            → /founders
+          </p>
+          <p className="text-mute group-hover:text-bone text-[11px] leading-snug transition-colors">
+            Patek-style 270 limited founder seat allocation · Founders 27 sales page
+          </p>
+        </Link>
+      </div>
+
       <p className="mt-5 font-mono text-mute/70 text-[10px] tracking-[0.25em] leading-relaxed">
         ⚓ 此 matrix 是「方法公開」 延伸到 tier-comparison layer · 不藏哪個
         feature 在哪個 tier · 不靠 dark pattern · 顯式 surface unlock path。
