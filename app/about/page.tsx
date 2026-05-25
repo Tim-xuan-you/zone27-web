@@ -503,7 +503,7 @@ export default function AboutPage() {
       <LongReadHandoff
         readingMin={8}
         nextHref="/steelman"
-        nextLabel="5 strongest objections against ZONE 27 · 自己 publish"
+        nextLabel="6 strongest objections against ZONE 27 · 自己 publish(R108 W7 加 #06 LLM 對立面)"
       />
 
       <RelatedReading currentPath="/about" />

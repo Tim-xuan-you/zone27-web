@@ -370,7 +370,7 @@ export default function YearZeroPage() {
                 04
               </span>
               <span className="flex-1">
-                <strong className="text-bone">5 strongest objections AGAINST us</strong>
+                <strong className="text-bone">6 strongest objections AGAINST us</strong>
                 {" "}· ZONE 27 自己 write 5 個反 ZONE 27 strongest objections ·
                 不 strawman · 不 weakman · per{" "}
                 <Link

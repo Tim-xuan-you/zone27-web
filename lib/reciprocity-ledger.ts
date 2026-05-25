@@ -119,7 +119,7 @@ export const RECIPROCITY_LEDGER: ReadonlyArray<ReciprocityArtifact> = [
     source: "Stratechery「say what you don't do」",
   },
   {
-    what: "5 strongest objections AGAINST us",
+    what: "6 strongest objections AGAINST us",
     surface: "/steelman",
     why: "ZONE 27 自己 write 5 個反 ZONE 27 strongest objections · 不 strawman · 不 weakman · 您看 ZONE 27 自己列「我們可能錯哪裡」 · 完整 honest concessions",
     source: "Y Combinator「what would kill your startup」",

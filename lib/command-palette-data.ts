@@ -367,7 +367,7 @@ export const COMMAND_ITEMS: CommandItem[] = [
     keywords: ["ethics", "policy", "倫理", "承諾", "stratechery", "binding"],
   },
   {
-    label: "Steelman · 反 ZONE 27 最強 5 個論證",
+    label: "Steelman · 反 ZONE 27 最強 6 個論證",
     kicker: "/steelman",
     path: "/steelman",
     group: "信任文件",

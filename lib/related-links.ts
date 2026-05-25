@@ -98,8 +98,9 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
   ],
   // Round 51 W-D · /transparency NEW · audit aggregator · Anthropic pattern。
   // Siblings: /audit(parent trust artifact · model report)· /ethics(9
-  // binding commitments · 同 transparency 軸線)· /steelman(5 strongest
-  // objections · 同 self-exposure pattern)。 R107 W5 · 8→9 stale-count sweep。
+  // binding commitments · 同 transparency 軸線)· /steelman(6 strongest
+  // objections · 同 self-exposure pattern)。 R107 W5 · 8→9 stale-count sweep ·
+  // R108 W7 · 5→6 steelman count sweep。
   "/transparency": [
     {
       href: "/audit",
@@ -114,7 +115,7 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
     {
       href: "/steelman",
       kicker: "steelman",
-      title: "5 strongest objections · self-exposure pattern",
+      title: "6 strongest objections · self-exposure pattern",
     },
   ],
   // Round 50 W-A · /methodology/diff NEW · v0.2 → v0.3 entire delta ·
@@ -322,7 +323,7 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
     {
       href: "/steelman",
       kicker: "steelman",
-      title: "5 strongest objections against ZONE 27",
+      title: "6 strongest objections against ZONE 27",
     },
     {
       href: "/audit",

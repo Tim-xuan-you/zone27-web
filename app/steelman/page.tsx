@@ -10,13 +10,17 @@ import ReadingProgress from "@/components/ReadingProgress";
 export const metadata: Metadata = {
   title: "Steelman · 反 ZONE 27 最強論證",
   description:
-    "ZONE 27 自己 publish 反我們最強的 5 個論點 · Adversarial collaboration 倒置「自己當反方」 pattern · per Aronson 1966 Pratfall axiom 極限版 · skeptic 看到我們先寫了 strongest objection 就 disarmed · 玩運彩+報馬仔 永遠不會 publish steelman against themselves · 因為他們的 steelman 同時是他們的 obituary。",
+    "ZONE 27 自己 publish 反我們最強的 6 個論點(R108 W7 加 #06 LLM / Quark NBA-style AI 對立面 critique)· Adversarial collaboration 倒置「自己當反方」 pattern · per Aronson 1966 Pratfall axiom 極限版 · skeptic 看到我們先寫了 strongest objection 就 disarmed · 玩運彩+報馬仔 永遠不會 publish steelman against themselves · 因為他們的 steelman 同時是他們的 obituary。",
 };
 
 // ── ZONE 27 · /steelman ─────────────────────────────────
 // Round 42 W-A · Agent H #3 ship · per [[feedback-no-waiting-rule]] 鐵律。
+// R108 W7 · Tim raised 6th objection via Quark App x NBA China LLM「AI 看球」
+//   2026-05 launch · triggered binding rule「6th objection 提出 必須 publish」 ·
+//   /steelman 從 5 → 6 OBJECTIONS · dual-track「engine integrity + web polish
+//   2026-grade」 concession 生成 + Year 1 web baseline binding 加入 PRE-COMMIT。
 //
-// 5 strongest arguments against ZONE 27 · ZONE 27 自己寫 · steelman tier
+// 6 strongest arguments against ZONE 27 · ZONE 27 自己寫 · steelman tier
 // (不 strawman · 不 weakman)· 寫完 NOT 反駁 to win argument · 寫完 respond
 // honest assessment + Pratfall acknowledgment + concrete commitment when
 // applicable。
@@ -96,6 +100,22 @@ const STEELMAN_OBJECTIONS: {
     concession:
       "Pre-launch radical transparency IFF 之後真的成為 launched · 否則是「losing strategy admitted live」。 此 critique 推動 ZONE 27 必須 publish concrete 2027 sucess threshold · 不能無限 Year 0 永續。 Critique valid · concrete brand-IP commitment 生成。",
   },
+  // R108 W7 · NEW Objection 06 · Quark App x NBA China 2026-05 「AI 看球」 launch
+  // triggered binding rule「reader / agent / skeptic 提出 6th objection 必須
+  // publish 不可 dismiss」 · per 此 page META section binding · Tim raised the
+  // LLM / 多模態 sports companion 對立面 critique · steelman tier 寫成 + 4-layer
+  // honest response + dual-track「engine integrity + web polish 2026-grade」
+  // concession 物理 codify。
+  {
+    num: "06",
+    title: "為什麼不用 LLM / Quark NBA-style AI 對話式看球體驗?",
+    objection:
+      "2026-05 Quark App x NBA China 推出「AI 看球」 — 賽前/賽後 AI 簡報 + 千问 LLM sidebar 隨問隨答 + 相機認球員 + AI 生成球場大片 · 整合实时盘口预测胜负 · 全部一個 mobile app 內。 這是 2026 流行 sports tech format · LLM-powered companion · 自然語言 query · multi-modal interaction · 圖像生成 entertainment layer · 「邊看邊聊不卡頓」。 ZONE 27 ship 1 個靜態 Web · 7 deterministic lens · 0 LLM · 0 自然語言 query · 0 camera · 0 圖像生成 · 0 mobile app · 0 sportsbook 整合 · 0 sidebar AI。 在 attention economy + 2026 AI 浪潮 + Gen Z 球迷 mobile-first 期待中 · ZONE 27 像個 2014 年的網站。 「方法公開」 標籤 vs 「方法用 LLM 包成自然對話」 標籤 · 2026 球迷 default 選後者。 SEO 競爭 · brand discoverability · share-loop velocity 都輸 Quark 級 LLM 競爭者。 五年內 LLM-powered sports companion 變 default · ZONE 27 像個 academic artifact 而不是 living product。",
+    response:
+      "Sharp critique · 我們的 honest response 分 4 層拆解。 (1) engine integrity 不能妥協:LLM hallucination + 球賽預測 = visitor 永遠不知道 prediction 從哪來。 Quark 千问 query「分析今天 [球隊] 對 [球隊]」 → 返回的「胜率」 是 LLM token sampling + RAG retrieval · 不是 reproducible Monte Carlo。 同 query 跑兩次可能出兩個答案。 ZONE 27 SSG snapshot · 每場 deterministic · git commit SHA traceable · /audit S05 disclosure axiom 物理 codify。 用 LLM 我們 publish 不出 reproducible prediction · 違反 brand IP 結構。 (2) 盘口 integration 永遠 absolute refused:Quark feature spec 寫「结合实时盘口与球员状态预测胜负」 — 一旦 surface odds(即使不收 affiliate)是 gambling-adjacent UX · 違反 /ethics #02 + #04(NO data licensing to sportsbooks · NO gambling-platform integration)+ /integrity rule #12 · 13。 我們 ship 不出同 feature · 結構性選擇。 (3) 多模態 entertainment 是 engagement farming:AI 生成球場大片 + 相機認球員 + 千问 sidebar = engagement layer · 不是 epistemic layer。 ZONE 27 displacement target 是 玩運彩+報馬仔 hopium dispensers · 不是 watching-game-companion entertainment。 兩個 product category 完全不同 JTBD(Jobs-to-be-Done)· 我們 真實客群是賽前讀 calibration report + Brier track-record 後做 prediction 訓練的人 · 不是 邊看比賽邊問 LLM 球員薪資的 entertainment 用戶。 (4) 但「2026 feels 2014」 部分要 concede:ZONE 27 web layer 必須持續吸收 modern web platform feature(R108 W4 已 ship 6 個 · text-spacing-trim space-all + interpolate-size + @property + color-mix oklab + .stat-caption + .v-center-block)· 不能用「epistemic discipline 強」 當不 ship 現代 web 技術的藉口。 engine integrity 不變 + web polish 持續 2026-grade 是 dual track binding · 兩者 orthogonal。",
+    concession:
+      "ZONE 27 不 ship LLM / multimodal / mobile app / odds integration = brand-IP 結構性選擇 · 不是 incapability · 同 11-item NEVER list pattern。 但「web layer 2026 feels 2014」 critique sharp · 推動「engine epistemic integrity 不變 + web polish 持續 2026-grade」 dual track binding 加入 PRE-COMMIT:Year 1(2027-05-31)前 web layer 必須 ship(a)至少 8 個 2026 baseline CSS modern feature(R108 W4 已 ship 6 個 · R109+ 累積 2 個)·(b)at least 1 modern interactive primitive(View Transitions API OR Anchor Positioning API OR Popover API)·(c)維持 Core Web Vitals all green(LCP < 2.5s · INP < 200ms · CLS < 0.1)。 否則 /annual/2027 必須 explicit「ZONE 27 epistemic 強 但 web layer 落後」 · 不能藏。 此 critique 推動 brand-IP 「engine + polish dual axis」 commitment · 不能取一捨一。 R108 W7 同 commit 加入 此 objection 物理 codify · Tim 簽名 binding。",
+  },
 ];
 
 export default function SteelmanPage() {
@@ -118,19 +138,20 @@ export default function SteelmanPage() {
               lang="en"
               className="font-mono text-[9px] tracking-[0.3em] px-1.5 py-0.5 border border-loss/60 text-loss/85"
             >
-              ADVERSARIAL COLLAB · 5 OBJECTIONS
+              ADVERSARIAL COLLAB · 6 OBJECTIONS
             </span>
           </div>
           <h1 className="text-4xl sm:text-5xl text-bone font-light tracking-tight max-w-3xl leading-[1.1]">
-            5 個我們<span className="text-loss">最怕</span>的論證 ·
+            6 個我們<span className="text-loss">最怕</span>的論證 ·
             <br className="hidden sm:inline" />我們自己 <span className="text-gold">先寫</span>
           </h1>
 
           <div className="mt-8 border-l-2 border-loss/60 pl-5 sm:pl-6 py-2 max-w-2xl">
             <p className="text-bone text-lg sm:text-xl leading-relaxed">
               <strong>多數 SaaS 寫 FAQ 是預先反駁訪客可能的反對</strong> ·
-              ZONE 27 反向:這頁是反 ZONE 27 最強的 5 個 argument · 我們自己
-              寫成 steelman tier(不 strawman · 不 weakman)。
+              ZONE 27 反向:這頁是反 ZONE 27 最強的 6 個 argument · 我們自己
+              寫成 steelman tier(不 strawman · 不 weakman)。 R108 W7 加 #06
+              · LLM / Quark NBA-style AI 對立面 critique。
             </p>
             <p className="mt-3 text-mute text-base leading-relaxed">
               寫完 NOT 反駁 to win · 寫完 honest response + concession when
@@ -148,7 +169,7 @@ export default function SteelmanPage() {
           </p>
 
           <div className="mt-6">
-            <ArticleMeta readingMin={6} />
+            <ArticleMeta readingMin={8} />
           </div>
         </section>
 
@@ -250,10 +271,11 @@ export default function SteelmanPage() {
               opportunities · 不是 obituary · 結構性差別。
             </p>
             <p className="font-mono text-mute/80 text-sm tracking-[0.18em] leading-relaxed">
-              ⚓ 此 page 5 objections 數量 不可降(每次有 reader / agent /
-              skeptic 提出 6th objection 我們無法 dismiss · 必須 publish 在
-              此 page)· 5 objections wording 修改需 30 天 /changelog 公告 ·
-              同 /audit S05 + /ethics PRE-COMMIT pattern。
+              ⚓ 此 page objections 數量 不可降(R108 W7 5→6 via Tim Quark NBA
+              critique · per binding「reader / agent / skeptic 提出 nth
+              objection 我們無法 dismiss · 必須 publish」 · 6 變 new floor)·
+              objections wording 修改需 30 天 /changelog 公告 · 同 /audit S05
+              + /ethics PRE-COMMIT pattern。
             </p>
           </div>
         </section>
@@ -303,7 +325,7 @@ export default function SteelmanPage() {
         <FounderSignOff>
           <p>
             這頁是 ZONE 27 epistemic layer 最 expensive 的 trust artifact ·
-            因為公布等於把自己暴露在 5 個 sharpest skeptic 的 question 之下 ·
+            因為公布等於把自己暴露在 6 個 sharpest skeptic 的 question 之下 ·
             然後逐條 honest concession 自己 conceded。
           </p>
           <p>
@@ -313,9 +335,9 @@ export default function SteelmanPage() {
             不出 同 page · 因為他們 steelman 同時是 obituary。
           </p>
           <p>
-            修改 5 objections wording 需 30 天 /changelog 公告 · 同 /audit
+            修改 6 objections wording 需 30 天 /changelog 公告 · 同 /audit
             S05 + /ethics PRE-COMMIT pattern · Costly Signaling 100×。
-            新 objection 提出時必須 add 不可 dismiss。
+            新 objection 提出時必須 add 不可 dismiss(R108 W7 #06 物理證據)。
           </p>
         </FounderSignOff>
 
@@ -330,14 +352,14 @@ export default function SteelmanPage() {
             STEELMAN · NOT STRAWMAN.
           </p>
           <h3 className="text-3xl text-bone font-light tracking-tight mb-4">
-            5 strongest objections · 5 honest concessions · 0 dismissals。
+            6 strongest objections · 6 honest concessions · 0 dismissals。
           </h3>
           {/* Round 51 W-C · Agent 3 HIGH #6 fix · /steelman conversion CTA
-              at page end · 同 /ethics pattern · 訪客讀完 5 strongest
+              at page end · 同 /ethics pattern · 訪客讀完 6 strongest
               objections + Tim 自己 concede = strongest warm-up state ·
               trust loop must close to Founders 27 / BLACK CARD entry。 */}
           <p className="text-mute text-sm sm:text-base max-w-xl mx-auto mb-8 leading-relaxed">
-            5 strongest objections 沒勸退您嗎? 加入 ZONE 27 ·
+            6 strongest objections 沒勸退您嗎? 加入 ZONE 27 ·
           </p>
           <div className="flex flex-wrap justify-center gap-3 mb-8">
             <Link
