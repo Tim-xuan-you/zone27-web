@@ -240,6 +240,47 @@ export default function Home() {
           </p>
         )}
 
+        {/* R123 W1 · Tim 第三級 founder-dogfood-canary fire · Tim 問「使用者
+            怎麼互動?都是單向的不是嗎?哪裡可以互動?」 · per
+            [[feedback-zone27-one-way-by-design]] memory · 8 user interaction
+            surfaces 早已 ship 但 invisible to first-time visitor · 加 visible
+            actionable strip 列 4 個主要 verbs · 直接答「哪裡可以互動」 ·
+            brand IP one-way by design 守(reader↔writer NOT reader↔reader)·
+            同 Stratechery / Bloomberg / Buffett / Defector profitable
+            subscription model · 11-NEVER #1 全程 honored · NOT 加 community
+            / comments / forum · ONLY surface existing interactions。 */}
+        <p className="mt-3 sm:mt-4 font-mono text-mute/85 text-[10px] sm:text-[11px] tracking-[0.22em] tabular leading-relaxed">
+          <span className="text-gold/80">⚡ 您可以</span>
+          <span className="text-mute/40 mx-1.5">·</span>
+          <Link
+            href="/lab"
+            className="hover:text-gold underline-offset-4 hover:underline transition-colors"
+          >
+            /lab 跑模擬
+          </Link>
+          <span className="text-mute/40 mx-1.5">·</span>
+          <Link
+            href="/matches"
+            className="hover:text-gold underline-offset-4 hover:underline transition-colors"
+          >
+            /matches 猜對賬
+          </Link>
+          <span className="text-mute/40 mx-1.5">·</span>
+          <Link
+            href="/member/submit"
+            className="hover:text-gold underline-offset-4 hover:underline transition-colors"
+          >
+            /member 投稿
+          </Link>
+          <span className="text-mute/40 mx-1.5">·</span>
+          <Link
+            href="/founders/apply"
+            className="hover:text-gold underline-offset-4 hover:underline transition-colors"
+          >
+            /founders/apply 申請席位
+          </Link>
+        </p>
+
         <p className="mt-4 sm:mt-5">
           <a
             href="#tonight-engine"
