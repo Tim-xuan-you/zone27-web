@@ -15,6 +15,7 @@ import {
 import { getWaitlistCount } from "@/lib/waitlist-stats";
 import { getSession } from "@/lib/supabase/server";
 import AdminTierSwitcher from "@/components/AdminTierSwitcher";
+import TierFeatureMatrix from "@/components/TierFeatureMatrix";
 
 export const metadata: Metadata = {
   title: "Admin · Tim's ZONE 27 ops dashboard preview",
@@ -199,6 +200,18 @@ export default async function AdminPage() {
             tier-aware components 也 honor preview tier。 */}
         <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-12">
           <AdminTierSwitcher />
+        </section>
+
+        {/* ── R111 W1 · NEW TierFeatureMatrix · 4 tiers 並列 feature
+            comparison per Tim 2026-05-25 critique「切換都沒動作 · 看不到變化」
+            + 「最高階有哪些功能 · 最低階也顯現出來 · 誘惑他們花錢」 ·
+            13 features × 4 tiers grid · 每個 cell ✓ UNLOCKED / 🔒 LOCKED /
+            — N/A · click tier header 立即切換 preview tier + 同 PreviewModeBanner
+            sync via custom storage event · Tim 一頁可比對 4 tier 差別 ·
+            不需 4 個 login account · per agent research Substack/Patreon/
+            GitHub locked-preview pattern。 */}
+        <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-12">
+          <TierFeatureMatrix />
         </section>
 
         {/* ── KPI ROW (live numbers · no actions) ──── */}
