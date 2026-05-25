@@ -345,11 +345,28 @@ export default function Footer() {
         </div>
 
         {/* Bottom row: brand + tagline + version chip */}
+        {/* R134 W1 · Stratechery「by [Founder]」 solo-author identity signal
+            pattern · Agent A R125 SHIP 5 deferred · finally transplant · 加
+            「by Tim」 byline 到 Footer brand bottom row · Stratechery「by Ben
+            Thompson」 + patio11「by Patrick McKenzie」 + Substack「by [author]」
+            pattern · solo-founder identity = trust signal at every page bottom ·
+            brand IP「方法公開」 axiom · founder personal accountability 物理
+            codify · per [[feedback-zone27-paid-model-is-support-not-features]]
+            memory canonical「pay to fund Tim build · NOT to unlock features」
+            same axis · single-word addition · 0 chrome bloat。 */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-6">
           <div className="flex items-center gap-3">
             <span className="font-mono text-gold text-sm tracking-[0.22em]">ZONE</span>
             <span className="font-mono text-bone text-sm tracking-[0.22em]">27</span>
             <span className="text-mute text-xs ml-2">© 2026</span>
+            <span aria-hidden="true" className="text-mute/40 text-xs">·</span>
+            <span
+              lang="en"
+              className="font-mono text-mute/85 text-[10px] tracking-[0.22em]"
+              title="ZONE 27 by Tim · solo founder · per /audit DISCLOSURE 100% TIM solo equity · same axis as Stratechery by Ben Thompson · 404 Media by 4 journalists · DELTA Japan by Yusuke Okada"
+            >
+              by Tim
+            </span>
           </div>
           <p className="font-mono text-mute/70 text-[10px] tracking-[0.25em] text-center">
             為讀懂數字的人而建 ·{" "}
