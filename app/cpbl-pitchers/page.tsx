@@ -260,27 +260,23 @@ export default async function CpblPitchersPage({
   const activeAdvStat: AdvancedStatKey = isAdvancedStatKey(params.stat)
     ? params.stat
     : "kPct";
+  // R108 W6 · Agent 1 LOW cleanup · removed unreachable fallback object ·
+  // cpblAdvanced + cpblPitchers come from same fetch script · 100% acnt
+  // overlap guaranteed · 之前 fallback masked silent data drift。 現在 build
+  // fails loudly with clear error message if drift happens(Disclosure axiom
+  // 物理 codify on data-integrity layer)。
   const advancedRows = (activeTeam
     ? cpblAdvanced.filter((a) => a.team === activeTeam)
     : cpblAdvanced
-  ).map((advanced) => ({
-    pitcher:
-      cpblPitchers.find((p) => p.acnt === advanced.acnt) ?? {
-        name: advanced.name,
-        team: advanced.team,
-        acnt: advanced.acnt,
-        era: 0,
-        ip: 0,
-        k: 0,
-        bb: 0,
-        hr: 0,
-        k9: 0,
-        bb9: 0,
-        hr9: 0,
-        whip: 0,
-      },
-    advanced,
-  }));
+  ).map((advanced) => {
+    const pitcher = cpblPitchers.find((p) => p.acnt === advanced.acnt);
+    if (!pitcher) {
+      throw new Error(
+        `[/cpbl-pitchers] cpbl-advanced acnt=${advanced.acnt} (${advanced.name}) has no matching cpbl-pitchers entry · run scripts/fetch-cpbl-advanced.mjs to sync`
+      );
+    }
+    return { pitcher, advanced };
+  });
   const advancedSorted = sortAdvanced(advancedRows, activeAdvStat);
   const advMeta = ADVANCED_STAT_META[activeAdvStat];
 
