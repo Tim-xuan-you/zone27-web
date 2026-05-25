@@ -84,6 +84,11 @@ html {
   /* Smooth scroll for in-page anchor links (e.g. mobile nav '更多 ↓'
      jumps to footer); respects prefers-reduced-motion automatically. */
   scroll-behavior: smooth;
+  /* R110 W2 · prevent accidental horizontal scroll per Tim 2026-05-25 mobile
+     critique「為何不只上下划?還可以往右划?」 · overflow-x: clip(Chrome 90+ ·
+     Safari 16+ Baseline)不破 position: sticky 同 overflow-x: hidden 會破。
+     防 any descendant element 超 viewport 寬 default cause horizontal scroll。 */
+  overflow-x: clip;
 }
 
 body {
