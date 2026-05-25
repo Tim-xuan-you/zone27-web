@@ -327,7 +327,11 @@ export default function TierFeatureMatrix() {
               <p className="font-mono text-mute text-[9px] sm:text-[10px] tabular tracking-tight">
                 {meta.price}
               </p>
-              <p className="font-mono text-mute/60 text-[7px] sm:text-[8px] tracking-[0.15em] mt-0.5">
+              {/* R112 W1 · priceUnit hidden on mobile per 91px column 太擠 ·
+                  Apple/Stripe responsive pattern · 完整 priceUnit only visible
+                  at sm+(640px+)· mobile 訪客 still sees price · 詳情 in card-
+                  level tier pages。 */}
+              <p className="hidden sm:block font-mono text-mute/60 text-[7px] sm:text-[8px] tracking-[0.15em] mt-0.5">
                 {meta.priceUnit}
               </p>
             </button>
@@ -335,12 +339,14 @@ export default function TierFeatureMatrix() {
         })}
       </div>
 
-      {/* ── Feature matrix ── */}
+      {/* ── Feature matrix ── R112 W1 · grid ratio 2fr label + 4 × minmax(0,1fr)
+          tier cells · mobile 375px label gets 120px + 4 × 60px cells · 不 wrap
+          中文 feature label 太多 · sm+ wider tier cells for full UNLOCKED/升級 text。 */}
       <div className="border border-line/40">
         {FEATURES.map((feature, idx) => (
           <div
             key={feature.label}
-            className={`grid grid-cols-[1fr_repeat(4,minmax(0,1fr))] gap-1 sm:gap-2 px-2 sm:px-3 py-2.5 sm:py-3 text-[11px] sm:text-xs ${
+            className={`grid grid-cols-[2fr_repeat(4,minmax(0,1fr))] gap-1 sm:gap-2 px-2 sm:px-3 py-2.5 sm:py-3 text-[11px] sm:text-xs ${
               idx % 2 === 0 ? "bg-slate/10" : "bg-transparent"
             }`}
           >
@@ -349,7 +355,7 @@ export default function TierFeatureMatrix() {
                 {feature.label}
               </p>
               {feature.detail && (
-                <p className="font-mono text-mute/70 text-[9px] sm:text-[10px] tracking-[0.15em] leading-snug mt-0.5">
+                <p className="hidden sm:block font-mono text-mute/70 text-[9px] sm:text-[10px] tracking-[0.15em] leading-snug mt-0.5">
                   {feature.detail}
                 </p>
               )}
@@ -400,12 +406,17 @@ function UnlockCell({
         }`}
         title={`${tierMeta.label} 解鎖此 feature`}
       >
+        {/* R112 W1 · mobile-first responsive · icon-only on 375px · full text
+            on sm+ · per Tim「走極簡風格 + Apple/Google」 mandate · 行寬 56px
+            放不下「✓ UNLOCKED」 11 字 tracking-0.2em · 拆 icon + text。 */}
         <span
-          className={`font-mono tabular text-[11px] tracking-[0.2em] ${
+          className={`font-mono tabular text-base sm:text-[11px] tracking-[0.2em] ${
             isActive ? "text-gold" : "text-gold/85"
           }`}
+          aria-label={`${tierMeta.label} 解鎖`}
         >
-          ✓ UNLOCKED
+          <span aria-hidden="true">✓</span>
+          <span className="hidden sm:inline ml-1">UNLOCKED</span>
         </span>
       </div>
     );
@@ -422,14 +433,15 @@ function UnlockCell({
       >
         <span
           aria-hidden="true"
-          className="text-mute/60 text-[12px] leading-none"
+          className="text-mute/60 text-base sm:text-[12px] leading-none"
         >
           🔒
         </span>
         {tierMeta.href && (
           <Link
             href={tierMeta.href}
-            className="font-mono text-mute/70 hover:text-gold text-[8px] sm:text-[9px] tracking-[0.18em] underline-offset-2 hover:underline transition-colors"
+            className="hidden sm:inline font-mono text-mute/70 hover:text-gold text-[9px] tracking-[0.18em] underline-offset-2 hover:underline transition-colors"
+            aria-label={`升級到 ${tierMeta.label} 解鎖此 feature`}
           >
             升級 →
           </Link>
@@ -445,7 +457,9 @@ function UnlockCell({
       } bg-transparent`}
       title={`此 feature 在 ${tierMeta.label} 不存在(N/A · 不適用)`}
     >
-      <span className="font-mono text-mute/40 text-[10px] tabular">—</span>
+      <span className="font-mono text-mute/40 text-base sm:text-[10px] tabular">
+        —
+      </span>
     </div>
   );
 }
