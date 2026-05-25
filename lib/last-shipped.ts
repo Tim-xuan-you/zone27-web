@@ -28,7 +28,7 @@
  *  Note · 此 anchor 不是 git HEAD commit date(那 GitHub.commits 已 surface)
  *  · 此 anchor 是「Tim 認為 visitor 可以 sense 的最新變化」 · 故 R67 closure
  *  即使包含 internal refactor commit · 此 const 標 visitor-facing date。 */
-export const LAST_SHIPPED_DATE_ISO = "2026-05-24";
+export const LAST_SHIPPED_DATE_ISO = "2026-05-25";
 
 /** Compute days elapsed since LAST_SHIPPED_DATE_ISO at server-render time。
  *  Server timezone is UTC(Vercel)but answer is rounded · 用 Asia/Taipei
