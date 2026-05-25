@@ -320,8 +320,27 @@ export default async function MatchDetailPage({
               才是 real edge claim · Pratfall + Method Public 同時 fire ·
               displacement mission 對 玩運彩+報馬仔:他們從不 publish baseline
               因為 publishing 等於暴露「跟 coin flip 一樣」。 brand-pure
-              static · 0 deps · 0 cost · 1 SVG-free row。 */}
+              static · 0 deps · 0 cost · 1 SVG-free row。
+              R119 W3 · Tversky & Kahneman 1974 anchoring 重排 · NULL cell
+              移到左(reading-order 第一視覺 anchor)· 加 2px gold/70 左邊框
+              accent · 訪客 first cognitive anchor = 50% baseline · 然後 ENGINE %
+              呈現為 baseline 上方的 delta(edge claim 顯式 derive)· 「不藏
+              baseline · 反而 amplify visual prominence」 brand IP Pratfall
+              maximum 火力 · 玩運彩+報馬仔 結構性無法 ship 此排序 · 因為若
+              他們 publish baseline first · 整個 tipster business 公開等於
+              「我們只比 coin flip 強 X pp」 自我否定。 */}
           <div className="mt-6 pt-5 border-t border-line/40 grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="border border-line/40 border-l-2 border-l-gold/70 bg-slate/40 p-3">
+              <p className="font-mono text-gold/70 text-[9px] tracking-[0.3em] mb-1">
+                NULL · COIN-FLIP BASELINE
+              </p>
+              <p className="font-mono text-bone text-base tabular">
+                50% / 50%
+              </p>
+              <p className="font-mono text-mute/80 text-[10px] tracking-[0.22em] mt-1">
+                0 信息 · 純機率 · 引擎邊際 = {Math.abs(Math.max(m.home.winRate, m.away.winRate) - 50)} pp
+              </p>
+            </div>
             <div className="border border-line/40 bg-slate/50 p-3">
               <p className="font-mono text-mute/70 text-[9px] tracking-[0.3em] mb-1">
                 ENGINE MODE · v0.2 PITCHER-ONLY MC
@@ -331,17 +350,6 @@ export default async function MatchDetailPage({
               </p>
               <p className="font-mono text-mute/80 text-[10px] tracking-[0.22em] mt-1">
                 K/9 · BB/9 · HR/9 · N=10,000 sim
-              </p>
-            </div>
-            <div className="border border-line/40 bg-slate/30 p-3">
-              <p className="font-mono text-mute/70 text-[9px] tracking-[0.3em] mb-1">
-                NULL · COIN-FLIP BASELINE
-              </p>
-              <p className="font-mono text-mute text-base tabular">
-                50% / 50%
-              </p>
-              <p className="font-mono text-mute/80 text-[10px] tracking-[0.22em] mt-1">
-                0 信息 · 純機率 · 引擎邊際 = {Math.abs(Math.max(m.home.winRate, m.away.winRate) - 50)} pp
               </p>
             </div>
           </div>

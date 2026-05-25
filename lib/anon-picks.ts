@@ -207,3 +207,29 @@ export function computeAnonStats(picks: AnonPick[]): {
 
 /** Storage key for /audit S06 disclosure transparency */
 export const ANON_PICKS_STORAGE_KEY = STORAGE_KEY;
+
+// ── R119 W2 · Cialdini & Trope 1976 commitment-consistency surface ───
+// Show「您 X 天前 picked」 chip on return visits to a match they picked。
+// Agent A R119 SHIP 2 highest-priority finding: existing widget hides
+// prior commitment by re-rendering PICKED_PRE_REVEAL header without
+// temporal anchor · psychology loop breaks because visitor doesn't see
+// their prior commitment when they return · adding the temporal badge
+// brings the commitment back into conscious view · same Zajonc Mere
+// Exposure reframing pattern as lib/last-shipped.ts formatTimeSince。
+//
+// Pure client function · pickedAtMs from AnonPick · Asia/Taipei timezone
+// implicit via Date.now() comparison(both timestamps wall-clock TPE on
+// visitor device · no server involvement)。
+// ─────────────────────────────────────────────────────
+export function formatPickedSince(pickedAtMs: number, now: number = Date.now()): string {
+  const ms = Math.max(0, now - pickedAtMs);
+  const minutes = Math.floor(ms / (1000 * 60));
+  const hours = Math.floor(ms / (1000 * 60 * 60));
+  const days = Math.floor(ms / (1000 * 60 * 60 * 24));
+  if (minutes < 1) return "剛剛";
+  if (minutes < 60) return `${minutes} 分鐘前`;
+  if (hours < 24) return `${hours} 小時前`;
+  if (days < 7) return days === 1 ? "1 天前" : `${days} 天前`;
+  if (days < 30) return `${Math.floor(days / 7)} 週前`;
+  return `${Math.floor(days / 30)} 個月前`;
+}

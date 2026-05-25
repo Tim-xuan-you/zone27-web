@@ -18,8 +18,9 @@ import {
 // R69 W-A+W-B added /founders/first-five-minutes (onboarding) +
 //   /founders/from-one-current-founder (Substack empty scaffold)。
 // R95 W2 · Hick's Law compression · COMMAND_ITEMS.length 為 canonical source
-//   (currently 35 hand-curated entries · secondary routes accessed via
-//   /transparency aggregator + Footer + parent-page cross-links)。
+//   (currently 36 hand-curated entries · R119 W4 redline patch from stale 35 ·
+//   secondary routes accessed via /transparency aggregator + Footer +
+//   parent-page cross-links)。
 //
 // Design principles (per [[zone27-disclosure-philosophy]]):
 //   - No external deps (no cmdk · no fuse.js · no telemetry)

@@ -37,6 +37,7 @@ import Link from "next/link";
 import {
   getAnonPickForMatch,
   pushAnonPick,
+  formatPickedSince,
   type AnonPick,
 } from "@/lib/anon-picks";
 import type { Match } from "@/lib/matches";
@@ -213,6 +214,17 @@ export default function AnonPickWidget({ match }: Props) {
             LOCKED · LOCAL ONLY
           </span>
         </div>
+        {/* R119 W2 · Cialdini & Trope 1976 commitment-consistency surface ·
+            Agent A R119 SHIP 2 highest-priority finding · pre-existing widget
+            silently hides the temporal anchor of prior commitment on return
+            visits · adding visible「您 X 天前 picked」 brings commitment back
+            into conscious view · foot-in-the-door psychology loop fires every
+            return visit · 同 lib/last-shipped.ts Zajonc Mere Exposure pattern
+            but applied to private localStorage commitment(0 broadcast · 0
+            social proof · pure visitor-self temporal anchor)。 */}
+        <p className="mb-3 font-mono text-mute/80 text-[10px] tracking-[0.25em]">
+          您 {formatPickedSince(state.pick.pickedAt)} 鎖定 · 賽果尚未公布
+        </p>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-3">
           <div className="border border-gold/60 bg-gold/10 p-3">
             <p
@@ -323,6 +335,14 @@ export default function AnonPickWidget({ match }: Props) {
           REVEALED · LOCAL ONLY
         </span>
       </div>
+      {/* R119 W2 · Cialdini & Trope 1976 commitment-consistency on REVEALED state ·
+          strongest psychological frame: 「您 X 天前 commit · 結果現在揭曉」 ·
+          temporal distance between commitment and outcome ↑ commitment weight ·
+          Festinger 1957 cognitive dissonance reduction · 訪客自己親 verify
+          自己 prediction 對引擎 · 不靠 ZONE 27 自說自話。 */}
+      <p className="mb-4 font-mono text-mute/80 text-[10px] tracking-[0.25em]">
+        您 {formatPickedSince(state.pick.pickedAt)} 鎖定 · 結果已揭曉
+      </p>
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-4">
         <div className="border border-line/60 bg-slate/40 p-3">
           <p

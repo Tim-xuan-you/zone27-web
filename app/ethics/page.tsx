@@ -69,7 +69,13 @@ const COMMITMENTS: { num: string; title: string; body: string; tier: "displaceme
     num: "09",
     title: "我每筆 engine 預測都 mandatory publish · 0 cherry-pick · 0 retroactive delete",
     body: "每筆 CPBL engine pre-committed prediction → mandatory /track-record entry + /receipts/[receiptId] permalink + PROVED / DIVERGED / PUSH label。 不選擇性 publish · 不 retroactive delete · 不 cherry-pick high-confidence-only · 即使 engine 100% 錯也 binding publish。 顯示 prediction 後 visitor endowment(Kahneman/Knetsch/Thaler 1990)在「我會看到結果」 上 · selective publishing = trust 物理崩。 同 Berkshire 70-year annual letter「無論好年壞年 都 mandatory publish」 + Geneva Seal「每只 watch 都印 serial」 pattern · per /audit S05 PRE-COMMIT clause 升級到 /integrity binding rule layer(commitment #09 · R80 加)· 配對 /integrity redline #12(CPBL-only scope)close brand IP loop。",
-    tier: "displacement",
+    // R119 W4 · redline patch · tier corrected displacement → brand · #09 是
+    // ZONE 27 internal brand discipline(Berkshire 70-year + Geneva Seal
+    // pattern · per body cite)· NOT displacement of 玩運彩 (那 1-5 + 8 在
+    // 做)· OG card TierStat 6+2+1=9 結構之前 silent assumed brand=1 但 array
+    // mistagged 7+2+0 · per [[feedback-zone27-pratfall-brand-ip]] self-
+    // falsifiable count drift 永遠 patch · 不藏。
+    tier: "brand",
   },
 ];
 
@@ -179,7 +185,7 @@ export default function EthicsPage() {
             / 02 · WHY 玩運彩 + 報馬仔 STRUCTURALLY CANNOT SHIP THIS
           </p>
           <h2 className="text-2xl sm:text-3xl text-bone font-light tracking-tight mb-6 leading-tight">
-            這 8 條對他們是商業自殺 · 對我們是 <span className="text-gold">brand moat</span>
+            這 9 條對他們是商業自殺 · 對我們是 <span className="text-gold">brand moat</span>
           </h2>
           <div className="space-y-4 text-mute leading-relaxed">
             <p>
