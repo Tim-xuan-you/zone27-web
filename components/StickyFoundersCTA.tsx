@@ -23,8 +23,12 @@ export default function StickyFoundersCTA() {
 
   useEffect(() => {
     if (!isHomepage) return;
+    // R125 W6 · Agent C R125 Friction 3 · scroll gate 600→400 px · per audit
+    // 「homepage hero is ~400px on mobile · sticky bar at 600px misses 200px window」
+    // · Apple HIG「persistent bottom bars should activate when primary CTA is
+    // scrolled out of view · NOT 200px later」 · sticky CTA 更早 appear。
     const onScroll = () => {
-      if (window.scrollY > 600) setScrolledPastHero(true);
+      if (window.scrollY > 400) setScrolledPastHero(true);
     };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });

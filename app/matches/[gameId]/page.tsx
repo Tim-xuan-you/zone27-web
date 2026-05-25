@@ -649,6 +649,52 @@ export default async function MatchDetailPage({
         <MatchupHistoryLens match={m} />
       </section>
 
+      {/* ── R125 W6 · CONTEXT-AWARE FOUNDERS 27 CTA · Agent C R125 Friction 4 fix ──
+          per audit「7 LIVE LENS shipped on /matches/[gameId] · zero Founders 27
+          tie-in · visitor 跑完 calibration loop 後 no upgrade trigger」 · per
+          Forrester 2024「context-aware CTAs on detail pages convert 2.4x higher
+          than universal navigation」 + R125 [[feedback-zone27-paid-model-is-
+          support-not-features]] memory · Defector $690K day-1 cite · brand-pure
+          inline strip · NOT modal · NOT FOMO counter · just appropriate-moment
+          quiet invitation post-7-lens canvas complete。 */}
+      <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-20">
+        <div className="max-w-2xl mx-auto border-l-2 border-gold/60 pl-5 sm:pl-6 py-3 bg-slate/20">
+          <p
+            lang="en"
+            className="font-mono text-gold text-[10px] tracking-[0.35em] mb-2"
+          >
+            ⚓ POST-7-LENS · 您可能在想
+          </p>
+          <p className="text-bone text-base sm:text-lg leading-relaxed font-light mb-3">
+            「我已經 spend 5 分鐘 lock 預測 + 跑 7 lens · 我想 own 完整 ledger」
+          </p>
+          <p className="text-mute text-sm sm:text-base leading-relaxed mb-3">
+            Founders 27 不是 unlock engine(<strong className="text-bone">engine FREE forever</strong>)·
+            是 270 個 lifetime seats 之一 · 同 Defector 2020 founding subs $69/年(產品 6 週後才上線 · 訂戶 fund 不是 access)。
+          </p>
+          <div className="flex items-baseline gap-4 flex-wrap">
+            <Link
+              href="/founders"
+              className="font-mono text-gold/85 hover:text-gold text-[10px] tracking-[0.25em] underline-offset-4 hover:underline"
+            >
+              讀完整 Founders 27 →
+            </Link>
+            <Link
+              href="/founders/apply"
+              className="font-mono text-gold/85 hover:text-gold text-[10px] tracking-[0.25em] underline-offset-4 hover:underline"
+            >
+              直接申請席位 → /founders/apply
+            </Link>
+            <Link
+              href="/pricing/why"
+              className="font-mono text-mute/70 hover:text-gold text-[10px] tracking-[0.25em] underline-offset-4 hover:underline"
+            >
+              為什麼定這價 → /pricing/why
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* ── SCORE DISTRIBUTION ─────────────────────── */}
       <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-20">
         <h2 className="font-mono text-gold text-[10px] tracking-[0.4em] mb-8">
