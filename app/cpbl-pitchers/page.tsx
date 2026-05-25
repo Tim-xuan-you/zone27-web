@@ -372,14 +372,16 @@ export default async function CpblPitchersPage({
           >
             ↘ VIEW MODE · BASIC(per-9 rate · 16 投手)| ADVANCED(Trackman radar · {cpblAdvanced.length} 投手)
           </p>
-          <div
-            role="tablist"
+          {/* R108 W1 · A11y fix · drop role=tablist/role=tab false semantics
+              per W3C APG · these are Link navigation not tabpanel switchers
+              · use <nav> + aria-current="page" instead per ARIA Authoring
+              Practices "Navigation Landmarks" canonical pattern。 */}
+          <nav
             aria-label="統計層級切換"
             className="inline-flex border border-line/60 bg-slate/30"
           >
             <Link
-              role="tab"
-              aria-selected={view === "basic"}
+              aria-current={view === "basic" ? "page" : undefined}
               href={buildHref({ view: "basic" })}
               scroll={false}
               prefetch
@@ -398,8 +400,7 @@ export default async function CpblPitchersPage({
               </span>
             </Link>
             <Link
-              role="tab"
-              aria-selected={view === "advanced"}
+              aria-current={view === "advanced" ? "page" : undefined}
               href={buildHref({ view: "advanced" })}
               scroll={false}
               prefetch
@@ -417,7 +418,7 @@ export default async function CpblPitchersPage({
                 Trackman
               </span>
             </Link>
-          </div>
+          </nav>
         </section>
 
         {/* ── TEAM FILTER CHIPS ────────────────────── */}
@@ -441,7 +442,7 @@ export default async function CpblPitchersPage({
                   ? "border-gold bg-gold/10 text-gold"
                   : "border-line/50 bg-slate/20 text-mute hover:border-gold/60 hover:text-gold"
               }`}
-              aria-pressed={activeTeam === null}
+              aria-current={activeTeam === null ? "page" : undefined}
             >
               全部
             </Link>
@@ -458,7 +459,7 @@ export default async function CpblPitchersPage({
                       ? "border-gold bg-gold/10 text-gold"
                       : "border-line/50 bg-slate/20 text-mute hover:border-gold/60 hover:text-gold"
                   }`}
-                  aria-pressed={isActive}
+                  aria-current={isActive ? "page" : undefined}
                 >
                   {team}
                 </Link>
@@ -511,7 +512,7 @@ export default async function CpblPitchersPage({
                         ? "border-gold bg-gold/10 text-gold"
                         : "border-line/60 bg-slate/30 text-mute hover:border-gold/60 hover:text-gold"
                     }`}
-                    aria-pressed={isActive}
+                    aria-current={isActive ? "page" : undefined}
                   >
                     <span className="text-bone tabular">{m.label}</span>
                     <span
@@ -538,7 +539,7 @@ export default async function CpblPitchersPage({
                         ? "border-gold bg-gold/10 text-gold"
                         : "border-line/60 bg-slate/30 text-mute hover:border-gold/60 hover:text-gold"
                     }`}
-                    aria-pressed={isActive}
+                    aria-current={isActive ? "page" : undefined}
                   >
                     <span className="text-bone tabular">{m.label}</span>
                     <span
