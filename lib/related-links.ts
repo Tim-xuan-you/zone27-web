@@ -83,7 +83,7 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
     {
       href: "/ethics",
       kicker: "ethics",
-      title: "8 binding NOT-DO commitments · 違反 = 紅字永久標",
+      title: "9 binding NOT-DO commitments · 違反 = 紅字永久標",
     },
     {
       href: "/privacy",
@@ -97,9 +97,9 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
     },
   ],
   // Round 51 W-D · /transparency NEW · audit aggregator · Anthropic pattern。
-  // Siblings: /audit(parent trust artifact · model report)· /ethics(8
+  // Siblings: /audit(parent trust artifact · model report)· /ethics(9
   // binding commitments · 同 transparency 軸線)· /steelman(5 strongest
-  // objections · 同 self-exposure pattern)。
+  // objections · 同 self-exposure pattern)。 R107 W5 · 8→9 stale-count sweep。
   "/transparency": [
     {
       href: "/audit",
@@ -109,7 +109,7 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
     {
       href: "/ethics",
       kicker: "ethics",
-      title: "8 binding commitments · 違反 = 紅字標",
+      title: "9 binding commitments · 違反 = 紅字標",
     },
     {
       href: "/steelman",
@@ -339,7 +339,7 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
     {
       href: "/ethics",
       kicker: "ethics",
-      title: "8 binding NOT-DO commitments",
+      title: "9 binding NOT-DO commitments",
     },
     {
       href: "/audit",

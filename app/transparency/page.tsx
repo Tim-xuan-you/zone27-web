@@ -14,7 +14,7 @@ import { matches, getFinalizedMatches } from "@/lib/matches";
 export const metadata: Metadata = {
   title: "Transparency — 完整 audit aggregator",
   description:
-    "ZONE 27 所有 transparency artifacts 集中索引:LIMITS · NEVER list · DIVERGED 賽事 · 8 binding commitments · DATA SOURCES · audit trail。 Anthropic /transparency 模式 · 公開散布在 /audit /methodology /coverage /track-record /ethics /steelman 的 transparency 資產統一 surface。",
+    "ZONE 27 所有 transparency artifacts 集中索引:LIMITS · NEVER list · DIVERGED 賽事 · 9 binding commitments · DATA SOURCES · audit trail。 Anthropic /transparency 模式 · 公開散布在 /audit /methodology /coverage /track-record /ethics /steelman 的 transparency 資產統一 surface。",
 };
 
 // ── ZONE 27 · /transparency · transparency aggregator ──
@@ -44,7 +44,7 @@ export const metadata: Metadata = {
 //   01 WHAT WE DON'T KNOW · LIMITS 集合
 //   02 WHAT WE DON'T DO · NEVER 集合
 //   03 WHEN WE'VE BEEN WRONG · DIVERGED 集合
-//   04 WHAT WE COMMIT TO · 8 binding ethics
+//   04 WHAT WE COMMIT TO · 9 binding ethics
 //   05 WHERE OUR DATA COMES FROM · sources audit
 //   06 HOW YOU CAN AUDIT US · reproducibility tools
 // ─────────────────────────────────────────────────────

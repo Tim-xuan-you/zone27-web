@@ -144,7 +144,7 @@ export const RECIPROCITY_LEDGER: ReadonlyArray<ReciprocityArtifact> = [
     source: "Hindenburg Research at-top position disclosure",
   },
   {
-    what: "8 binding ethics commitments + violation receipt",
+    what: "9 binding ethics commitments + violation receipt",
     surface: "/ethics",
     why: "0 betting affiliate · 0 ads · 0 tracking · 0 fake testimonials · 0 hidden DIVERGED · 0 silent model rotation · 0 「明牌」 framing · 0 fine print · 違反任一 = Tim 親手在 /ethics 紅字標永久 audit trail · 不是 marketing copy · 是 Tim 簽名物理 codify",
     source: "Berkshire owner's manual ethics + binding lock",

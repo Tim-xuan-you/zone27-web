@@ -199,7 +199,7 @@ export default function PricingWhyPage() {
               functionality
             </NumItem>
             <NumItem n="06">
-              <span className="text-bone">8 binding ethics commitments</span> +
+              <span className="text-bone">9 binding ethics commitments</span> +
               5 self-objections + 11-item NOT-DO list · per /transparency
               aggregator · brand IP「方法公開」 物理 codify
             </NumItem>

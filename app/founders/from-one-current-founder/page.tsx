@@ -192,7 +192,7 @@ export default function FromOneCurrentFounderPage() {
                 href="/ethics"
                 className="text-gold/85 hover:text-gold underline-offset-4 hover:underline"
               >
-                /ethics 8 binding commitments
+                /ethics 9 binding commitments
               </Link>
               {" "}+{" "}
               <Link
