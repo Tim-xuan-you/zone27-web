@@ -180,6 +180,19 @@ export default async function MembershipPage({
               </Link>
             </span>
           </p>
+
+          {/* R112 W3 · inverse-paywall single-line · per agent locked-preview
+              research「unique opportunity from engine FREE forever」 · place
+              under every BLACK CARD upsell · 4-tier ladder hero 是 canonical
+              upsell location · 中和 visitor「為什麼要付費?」 first reaction ·
+              Spence 1973 costly signaling pure form · 同 R111 W3 /membership/
+              black-card pattern。 */}
+          <p className="mt-8 max-w-2xl mx-auto text-bone text-sm sm:text-base leading-relaxed border-l-2 border-gold/60 pl-4 text-left">
+            引擎永久免費 · 您付的是
+            <strong className="text-gold">身份</strong>。 4 個 tier 都看得到
+            engine 全部輸出 · 差別在 community + voting + Tim 工程筆記 +
+            創作者抽成 · 不是「資料」。
+          </p>
         </section>
 
         <div className="mx-auto w-32 gold-line mb-12" />
