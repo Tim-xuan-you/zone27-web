@@ -164,8 +164,26 @@ export default function Home() {
           WE DON&apos;T GUESS. WE COMPUTE.
         </p>
 
-        <p className="mt-6 sm:mt-10 max-w-md mx-auto text-mute leading-relaxed text-sm sm:text-base">
-          今晚 CPBL · 我跑 1 萬次模擬給您看 · 對了 / 錯了 全公開。
+        {/* R121 W1+W3 · NEW value prop one-liner per Tim 第二級 founder-dogfood-canary
+            fire(R32 W-C precedent)· Tim 自己 R121 問「我們的網站到底能幹嘛 ·
+            有何優點 · 有本錢收費」 → founder cannot articulate own value prop
+            = homepage value prop 沒 land for founder himself · per Stripe
+            (「Payments infrastructure for the internet」)/ Plausible(「Simple
+            and privacy-friendly Google Analytics alternative」)/ Linear(「Built
+            for the world's best teams」)/ Defector(「Worker-owned · ad-free」)
+            pattern · world-class brands 都有 crystal-clear ONE-sentence
+            「what we are + why different」 在 hero 顯示 · ZONE 27 之前 只有
+            H1 philosophy slogan + 行動 subtitle · 缺 category-defining
+            one-liner · 此 NEW line 補。 brand IP triple-fire: Disclosure(公開)
+            + Pratfall(不藏結果)+ 倒置 SaaS(不抽下注分成 vs 玩運彩+報馬仔
+            業務 model 直接 OR 間接 來自 sportsbook conversion fee)。 */}
+        <p className="mt-5 sm:mt-7 max-w-lg mx-auto text-bone leading-relaxed text-base sm:text-lg font-light">
+          公開的 CPBL 量化引擎 · <span className="text-gold">不藏結果</span> ·{" "}
+          <span className="text-gold">不抽下注分成</span>。
+        </p>
+
+        <p className="mt-3 sm:mt-4 max-w-md mx-auto text-mute leading-relaxed text-sm sm:text-base">
+          今晚 CPBL · 我跑 1 萬次模擬給您看 · 對了 / 錯了 全進 ledger。
         </p>
 
         <p className="mt-6 sm:mt-8">
@@ -184,26 +202,36 @@ export default function Home() {
           </Link>
         </p>
 
-        {/* R115 W3 · brand-IP-pure social proof line · per agent research
+        {/* R115 W3 brand-IP-pure social proof line · per agent research
             unique opportunity「0 hidden」 = engine PROVED + DIVERGED + 0 hidden
             · 同 Plausible「260B pageviews · 18k subs · 99.99% uptime」 static
             3-stat row pattern · NOT live ticker · NOT FOMO counter · 「0 hidden」
             是 unfakeable costly signal · 競爭者(玩運彩 / 報馬仔)結構性無法
             match 因為他們業務 model 需要藏 misses · Pratfall + Costly Signaling
-            + Disclosure axiom 三 fire 同時 · 8 chars 數字 compressed brand IP。 */}
+            + Disclosure axiom 三 fire 同時 · 8 chars 數字 compressed brand IP。
+            R121 W2 · Tim 第二級 founder-dogfood-canary fire 升級 · Tim R121
+            問「我一進這個網站,看不到有人在討論、分享、推薦賽事呀!以心理學角度
+            怎麼看?」 · Cialdini 1984 Social Proof psychology 期待 vs ZONE 27
+            11-NEVER #1(no user-to-user social)brand IP 結構性衝突 surfacing ·
+            per [[feedback-zone27-social-proof-costly-signal]] axiom · brand-pure
+            答案 = explicitly preempt psychology gap + redirect to unfakeable
+            costly signal(Spence 1973)NOT 加 fake social proof · 此 line 從
+            「↘ TRACK RECORD」 改 「↘ 不靠社群聲量 · 靠 ledger」 · framing
+            absence as brand IP strength · 同時保留 numbers · 配對 R120 W3
+            /engine-log#live-state numeric dashboard hash anchor。 */}
         {heroTrackRecord.total > 0 && (
           <p className="mt-4 sm:mt-5">
             <Link
               href="/track-record"
               className="inline-flex items-baseline gap-2 font-mono text-mute/85 hover:text-gold text-[10px] sm:text-[11px] tracking-[0.25em] tabular transition-colors"
-              aria-label={`引擎 track record · ${heroTrackRecord.proved} PROVED · ${heroTrackRecord.diverged} DIVERGED · 0 hidden · 查看 /track-record 完整 ledger`}
+              aria-label={`不靠社群聲量 · 靠 ledger · ${heroTrackRecord.proved} PROVED · ${heroTrackRecord.diverged} DIVERGED · 0 hidden · 查看 /track-record 完整 ledger`}
             >
-              <span className="text-gold/80">↘ TRACK RECORD</span>
+              <span className="text-gold/80">↘ 不靠社群聲量 · 靠 ledger</span>
               <span className="text-gold">{heroTrackRecord.proved}</span>
-              <span className="text-mute/60">PROVED</span>
+              <span className="text-mute/60">✓</span>
               <span className="text-mute/40">·</span>
               <span className="text-loss/80">{heroTrackRecord.diverged}</span>
-              <span className="text-mute/60">DIVERGED</span>
+              <span className="text-mute/60">✕</span>
               <span className="text-mute/40">·</span>
               <span className="text-gold">0</span>
               <span className="text-mute/60">hidden</span>
