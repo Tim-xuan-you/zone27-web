@@ -177,9 +177,16 @@ export default function Home() {
             one-liner · 此 NEW line 補。 brand IP triple-fire: Disclosure(公開)
             + Pratfall(不藏結果)+ 倒置 SaaS(不抽下注分成 vs 玩運彩+報馬仔
             業務 model 直接 OR 間接 來自 sportsbook conversion fee)。 */}
-        <p className="mt-5 sm:mt-7 max-w-lg mx-auto text-bone leading-relaxed text-base sm:text-lg font-light">
+        {/* R125 W4 · sharpen value prop with sharp differentiator per R125 agent
+            killer insight · 「Every other gambling/tipster site in Taiwan charges
+            for engine access · ZONE 27 is the only one that doesn't」 · 加
+            「不收明牌費」 直接對標 玩運彩 / 報馬仔 / LINE 老師 業務 model · per
+            [[feedback-zone27-paid-model-is-support-not-features]] memory「Engine
+            FREE 是 paid tier 的賣點 · NOT 削弱付費價值」 axiom 物理 codify。 */}
+        <p className="mt-5 sm:mt-7 max-w-xl mx-auto text-bone leading-relaxed text-base sm:text-lg font-light">
           公開的 CPBL 量化引擎 · <span className="text-gold">不藏結果</span> ·{" "}
-          <span className="text-gold">不抽下注分成</span>。
+          <span className="text-gold">不抽下注分成</span> ·{" "}
+          <span className="text-gold">不收明牌費</span>。
         </p>
 
         <p className="mt-3 sm:mt-4 max-w-md mx-auto text-mute leading-relaxed text-sm sm:text-base">

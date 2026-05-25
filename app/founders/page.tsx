@@ -466,6 +466,50 @@ export default async function FoundersPage({
           (across multi-generation horizon)。 */}
       <GenerationsLine />
 
+      {/* R125 W3 · Agent C R125 HIGHEST friction-removal · 「引擎免費 · 您不是在
+          買引擎」 reframe 之前 buried at line 607 · 訪客 scroll past WaitlistForm
+          時 已 silent objection「engine FREE 為什麼還付錢?」 unanswered · per
+          Baymard 2024 「objection pre-emption in first 2 sections lifts form-fill
+          +34%」 + R125 [[feedback-zone27-paid-model-is-support-not-features]]
+          memory canonical answer · 加 condensed reframe block BEFORE form · 完整
+          2-column grid 仍保留 deep at line 607 為 scroll-deep visitor · 此 block
+          = condensed pre-form preempt · Defector $690K day-1 0-product 數據 cite
+          (R125 agent verified · sources: defectormedia.com + CJR + Wikipedia)。 */}
+      <section
+        aria-labelledby="pre-form-reframe-heading"
+        className="mx-auto max-w-2xl w-full px-6 sm:px-10 pb-6 sm:pb-8"
+      >
+        <div className="border-l-2 border-gold/60 pl-5 sm:pl-6 py-3 bg-slate/20">
+          <p
+            lang="en"
+            className="font-mono text-gold text-[10px] tracking-[0.35em] mb-2"
+          >
+            ⚓ READ BEFORE YOU FILL · 您不是在買引擎
+          </p>
+          <h2
+            id="pre-form-reframe-heading"
+            className="text-xl sm:text-2xl text-bone font-light tracking-tight mb-3 leading-snug"
+          >
+            引擎 <span className="text-gold">FREE FOREVER</span>。 Founders 27 賣的不是工具 · 是 {FOUNDERS_TOTAL} 個 lifetime seats。
+          </h2>
+          <p className="text-mute text-sm sm:text-base leading-relaxed mb-2">
+            您可以無限次跑 10,000 場 Monte Carlo · 自訂任意投手對戰 · 讀整份 model
+            report + methodology · fork 整個 codebase。 全部不用付錢。
+          </p>
+          <p className="text-mute text-sm sm:text-base leading-relaxed">
+            Founders 27 是「我見證並 fund 了 Taiwan 第一個拒絕 gate engine 的品牌
+            誕生」 generational 參與 · 同 <strong className="text-bone">Defector 2020-07-29 day-1 賣 10,000 founding subscriptions × $69 = $690,000</strong>
+            (產品 6 週後才上線 · 訂戶 fund 不是 access)+ Patek Philippe Generations「You merely look after it for the next generation」 pattern。{" "}
+            <Link
+              href="#not-buying-engine-heading"
+              className="text-gold/85 hover:text-gold underline-offset-4 hover:underline"
+            >
+              完整對照 ↓
+            </Link>
+          </p>
+        </div>
+      </section>
+
       {/* ── WAITLIST FORM · Round 8 moved up to be 2nd block ────
           Was 3rd block (after FROM THE FOUNDER) · per Round 8 agent
           audit "+280px mobile scroll inserted between sticky-bar tap
