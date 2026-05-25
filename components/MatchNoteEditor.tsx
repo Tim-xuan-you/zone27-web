@@ -96,7 +96,11 @@ export default function MatchNoteEditor({ matchId }: { matchId: string }) {
           placeholder="您對這場的分析 / 預測 / 賽後回顧..."
           rows={4}
           aria-label="Private match note"
-          className="w-full bg-navy/60 border border-line/70 px-3 py-2 text-bone text-sm focus:outline-none focus-visible:border-gold focus-visible:ring-1 focus-visible:ring-gold/30 transition-colors font-mono leading-relaxed resize-y"
+          // R108 W5 · field-sizing: content auto-grow(Chrome 123+ Baseline 2024)·
+          // textarea 自動隨 content 高度長 · 不需 useRef + resize hack ·
+          // Notion/Linear inline-comment editor pattern · 0 JS · 0 CLS。
+          // 上限 24rem 防失控 · 下限 6rem 保 initial visual weight。
+          className="w-full bg-navy/60 border border-line/70 px-3 py-2 text-bone text-sm focus:outline-none focus-visible:border-gold focus-visible:ring-1 focus-visible:ring-gold/30 transition-colors font-mono leading-relaxed resize-y [field-sizing:content] min-h-[6rem] max-h-[24rem]"
         />
         <div className="mt-3 flex items-center justify-between flex-wrap gap-2">
           <p className="font-mono text-mute/70 text-[10px] tracking-[0.25em]">

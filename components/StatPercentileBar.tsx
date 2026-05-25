@@ -123,7 +123,7 @@ export default function StatPercentileBar({ stat, value }: Props) {
         />
       </div>
       <span
-        className={`font-mono text-[9px] tracking-[0.25em] text-right ${
+        className={`stat-caption font-mono text-[9px] tracking-[0.25em] text-right ${
           tier === "elite"
             ? "text-gold"
             : tier === "mid"

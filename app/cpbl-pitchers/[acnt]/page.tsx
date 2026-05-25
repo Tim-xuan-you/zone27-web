@@ -442,7 +442,9 @@ function AdvancedPercentileRow({
           }}
         />
       </div>
-      <span className={`tracking-[0.18em] text-right tabular ${tierClass}`}>
+      <span
+        className={`stat-caption tracking-[0.18em] text-right tabular ${tierClass}`}
+      >
         {tierLabel}
       </span>
     </div>

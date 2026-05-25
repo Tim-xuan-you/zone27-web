@@ -480,7 +480,7 @@ function TrackmanAggregateCell({
       >
         {percentile}
       </p>
-      <p className="font-mono text-mute/60 text-[8px] tracking-[0.2em] mt-0.5">
+      <p className="stat-caption font-mono text-mute/60 text-[8px] tracking-[0.2em] mt-0.5">
         {tierLabel}
       </p>
     </div>
