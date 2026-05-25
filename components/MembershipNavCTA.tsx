@@ -46,6 +46,12 @@ export default function MembershipNavCTA({
   variant = "desktop",
 }: Props) {
   const [loggedIn, setLoggedIn] = useState<boolean>(false);
+  // R124 W1 · Tim 第四級 founder-dogfood fire · PREVIEW Founders 27 mode 但
+  // 「會員 →」 跳 /membership ladder 不是 /member dashboard · designer dogfood
+  // UX 應 mirror logged-in flow · fix · 也讀 localStorage zone27_preview_tier ·
+  // 若 active = 視為 logged-in · label「您的引擎 (PREVIEW) →」 → /member。
+  // 同 NavLoginCTA W1 pattern + storage event sync 跨 tab。
+  const [previewActive, setPreviewActive] = useState(false);
 
   useEffect(() => {
     let cancelled = false;
@@ -65,9 +71,39 @@ export default function MembershipNavCTA({
     };
   }, []);
 
-  const href = loggedIn ? "/member" : "/membership";
-  const label = loggedIn ? "您的引擎" : "會員";
-  const aria = loggedIn
+  // R124 W1 · localStorage preview tier detection · sync with PreviewModeBanner +
+  // AdminTierSwitcher key · effect run on mount + storage event listener 跨 tab。
+  useEffect(() => {
+    const check = () => {
+      try {
+        const tier = window.localStorage.getItem("zone27_preview_tier");
+        setPreviewActive(!!tier);
+      } catch {
+        setPreviewActive(false);
+      }
+    };
+    check();
+    const onStorage = (e: StorageEvent) => {
+      if (e.key === "zone27_preview_tier") check();
+    };
+    window.addEventListener("storage", onStorage);
+    return () => window.removeEventListener("storage", onStorage);
+  }, []);
+
+  // R124 W1 · PREVIEW tier active = treat as logged-in for routing purpose · per
+  // dogfood UX mirror。 不影響真實 auth state(server-side /member 仍認 cookie)·
+  // Tim 進 /member 看 anonymous preview content · 但 Nav 路徑 1-click 不再卡 /login。
+  const effectiveLoggedIn = loggedIn || previewActive;
+
+  const href = effectiveLoggedIn ? "/member" : "/membership";
+  const label = previewActive
+    ? "您的引擎 (PREVIEW)"
+    : loggedIn
+    ? "您的引擎"
+    : "會員";
+  const aria = previewActive
+    ? "PREVIEW mode · /member dashboard preview · 同 dogfood mirror logged-in UX"
+    : loggedIn
     ? "您的 /member 個人儀表板 · 已登入會員專屬"
     : "加入會員 · FREE TIER 免費訂閱 + BLACK CARD + Founders 27 三層 ladder";
 

@@ -54,6 +54,13 @@ type SessionState = "loading" | "anonymous" | "logged_in";
 
 export default function NavLoginCTA({ variant = "desktop" }: Props) {
   const [session, setSession] = useState<SessionState>("loading");
+  // R124 W1 · Tim 第四級 founder-dogfood fire · PREVIEW Founders 27 mode 但
+  // 看到「登入」 button · click 跳 /login · 卡在 register form · 看不到
+  // /member。 fix · 也讀 localStorage zone27_preview_tier · 若 active = 視為
+  // logged_in for Nav purposes · NavLoginCTA hides · MembershipNavCTA 切「您的
+  // 引擎 →」 → /member。 brand IP「不躲 essential entry」 守 · 但 designer
+  // dogfood mode 應 mirror logged-in UX 不混淆。
+  const [previewActive, setPreviewActive] = useState(false);
 
   useEffect(() => {
     let cancelled = false;
@@ -73,10 +80,32 @@ export default function NavLoginCTA({ variant = "desktop" }: Props) {
     };
   }, []);
 
+  // R124 W1 · localStorage preview tier detection · sync with PreviewModeBanner +
+  // AdminTierSwitcher zone27_preview_tier key · 同 storage event listener pattern
+  // 跨 tab sync · effect run on mount + storage event。
+  useEffect(() => {
+    const check = () => {
+      try {
+        const tier = window.localStorage.getItem("zone27_preview_tier");
+        setPreviewActive(!!tier);
+      } catch {
+        setPreviewActive(false);
+      }
+    };
+    check();
+    const onStorage = (e: StorageEvent) => {
+      if (e.key === "zone27_preview_tier") check();
+    };
+    window.addEventListener("storage", onStorage);
+    return () => window.removeEventListener("storage", onStorage);
+  }, []);
+
   // Round 56 W-B · Agent B Ship #1 fix · CLS HIGH on homepage 之前 · logged-in
   // 從「登入」 button → null 造成 layout shift · 改 render invisible placeholder
   // 保持 same size · reserve slot regardless of auth state · CLS -0.05~-0.10。
-  if (session === "logged_in") {
+  // R124 W1 · PREVIEW tier active 也 hide(視為 logged-in for Nav · 同 dogfood
+  // UX mirror logged-in flow)· 同 invisible placeholder 維持 CLS-safe。
+  if (session === "logged_in" || previewActive) {
     return (
       <span
         aria-hidden="true"
