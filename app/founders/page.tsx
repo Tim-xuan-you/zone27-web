@@ -496,16 +496,35 @@ export default async function FoundersPage({
             您可以無限次跑 10,000 場 Monte Carlo · 自訂任意投手對戰 · 讀整份 model
             report + methodology · fork 整個 codebase。 全部不用付錢。
           </p>
-          <p className="text-mute text-sm sm:text-base leading-relaxed">
+          <p className="text-mute text-sm sm:text-base leading-relaxed mb-3">
             Founders 27 是「我見證並 fund 了 Taiwan 第一個拒絕 gate engine 的品牌
             誕生」 generational 參與 · 同 <strong className="text-bone">Defector 2020-07-29 day-1 賣 10,000 founding subscriptions × $69 = $690,000</strong>
-            (產品 6 週後才上線 · 訂戶 fund 不是 access)+ Patek Philippe Generations「You merely look after it for the next generation」 pattern。{" "}
+            (產品 6 週後才上線 · 訂戶 fund 不是 access)+ Patek Philippe Generations「You merely look after it for the next generation」 pattern。
+          </p>
+          {/* R126 W4 · TW-specific KILLER anchor per R126 TW market agent · CPBLTV
+              NT$ 2,399/yr 全聯盟 season pass · Taiwan CPBL 鐵粉 already accept ·
+              ZONE 27 NT$ 2,700 LIFETIME 比 1 年 CPBLTV 貴 NT$ 301 · 同 axis
+              「watch all year vs think like an engine forever」 anchor 直接 anchor
+              against most-relevant local benchmark · 同 R125 [[feedback-zone27-
+              paid-model-is-support-not-features]] memory canonical。 */}
+          <p className="text-mute text-sm sm:text-base leading-relaxed mb-2 border-l border-gold/40 pl-3">
+            ⚓ Taiwan-native anchor · CPBLTV(Hami Video)<strong className="text-bone">NT$ 2,399/yr 全聯盟 season pass</strong> · 您鐵粉 already 每年付這個 just 看球。 Founders 27 NT$ 2,700 <strong className="text-gold">LIFETIME 只比 CPBLTV 1 年貴 NT$ 301</strong> · 「watch all year = NT$ 2,399 · think like an engine = NT$ 2,700 once forever」。
+          </p>
+          <p className="text-mute text-sm sm:text-base leading-relaxed">
             <Link
               href="#not-buying-engine-heading"
               className="text-gold/85 hover:text-gold underline-offset-4 hover:underline"
             >
-              完整對照 ↓
-            </Link>
+              完整 12-fact 對照 ↓
+            </Link>{" "}
+            ·{" "}
+            <Link
+              href="/pricing/why"
+              className="text-gold/85 hover:text-gold underline-offset-4 hover:underline"
+            >
+              /pricing/why
+            </Link>{" "}
+            §07 PRECEDENT BENCHMARKS · 12 facts · 全 source URL · 您可 click 自己 audit
           </p>
         </div>
       </section>
