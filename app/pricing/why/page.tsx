@@ -719,8 +719,19 @@ function Section({
   zh: string;
   children: React.ReactNode;
 }) {
+  // R135 W1 · BROKEN ANCHOR FIX · /pricing/why Section component 之前 missing id ·
+  // 多處 cross-page link「/pricing/why#section-07」 anchor target 不存在 · click
+  // 無效 · 同 R74 W-G C1 /audit Section pattern · 加 id={`section-${no.toLowerCase()}`}
+  // + scroll-mt-20 · enable /pricing/why#section-01 ... #section-07 anchor jumps ·
+  // per [[feedback-zone27-pratfall-brand-ip]] self-falsifiable count drift discipline ·
+  // per Tim「程式碼總有 bug · 嚴肅看待 · 任何缺陷都可能被人們攻擊」 mandate
+  // 真實 fulfilled · 同 R130 critical bug pattern · 自己 found + fixed。
+  const id = `section-${no.toLowerCase()}`;
   return (
-    <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-16 pt-10 border-t border-line/40 cv-auto">
+    <section
+      id={id}
+      className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-16 pt-10 border-t border-line/40 cv-auto scroll-mt-20"
+    >
       <div className="flex items-baseline gap-4 mb-2 section-reveal">
         <span className="font-mono text-gold/70 text-[10px] tracking-[0.35em]">
           / {no}
