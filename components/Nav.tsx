@@ -3,6 +3,7 @@ import ScarcityStrip from "@/components/ScarcityStrip";
 import MobileNavToggle from "@/components/MobileNavToggle";
 import MembershipNavCTA from "@/components/MembershipNavCTA";
 import NavLoginCTA from "@/components/NavLoginCTA";
+import TierBadge from "@/components/TierBadge";
 import CmdKTrigger from "@/components/CmdKTrigger";
 import { getTodayMatches } from "@/lib/matches";
 
@@ -139,6 +140,11 @@ export default function Nav({ active }: { active?: NavKey }) {
                 MembershipNavCTA 已切「您的引擎 →」)· per 26+ canary
                 fire UX root cause · Apple/Stripe/Linear/Vercel standard
                 Sign-in entry 永遠 visible 模式 物理 codify。 */}
+            {/* R111 W2 · TierBadge · Notion-style passive tier indicator ·
+                only render when preview tier active(designer preview mode)·
+                public visitor 看不到 noise · per agent locked-preview research
+                Pattern 3。 */}
+            <TierBadge />
             <NavLoginCTA variant="desktop" />
             <MembershipNavCTA
               active={active === "founders"}

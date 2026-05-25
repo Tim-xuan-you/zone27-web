@@ -146,6 +146,19 @@ export default function BlackCardPage() {
             一顆 7-11 御飯糰的價格 · 看一場 CPBL · 0 auto-renewal · 每季
             explicit click + manual transfer
           </p>
+
+          {/* R111 W3 · inverse-paywall single-line · per agent locked-preview
+              research「unique opportunity from engine FREE forever」 ·
+              Spence 1973 costly signaling pure form · 中和「why am I paying
+              then?」 objection · 每競爭者 lock 產品(Substack lock post ·
+              Netflix lock 解析度 · Patreon lock content)· ZONE 27 只 lock
+              身份 不 lock 引擎 · 不能 copy 因為他們 burn core revenue。 */}
+          <p className="mt-4 max-w-2xl border-l-2 border-gold/60 pl-4 text-bone text-sm sm:text-base leading-relaxed font-light">
+            引擎永久免費 · 您付的是
+            <strong className="text-gold">身份</strong>。 全壘打率、打席率、
+            建議下注尺寸 — 全部 0 paywall · 0 rate limit · 永久 free。
+            BLACK CARD 不是付給「資料」 · 是付給「會員 community + voting + Tim 工程筆記」。
+          </p>
           {/* MARKET ANCHOR · 4-cell honest comparison · per-game framing。 */}
           <div className="mt-4 sm:mt-5 max-w-2xl">
             <p
