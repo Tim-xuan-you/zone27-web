@@ -255,6 +255,25 @@ export default function TierFeatureMatrix() {
   }, []);
 
   const handleHighlight = (tier: TierKey) => {
+    // R114 W1 · click already-active tier = clear preview(escape hatch UX
+    // fix)· 之前 Tim 需 scroll 到 banner ✕ 才能 cancel · 現在 matrix click
+    // 已 active = toggle off · 一致 toggle 行為 · 同 Linear/GitHub「click
+    // active filter = clear」 pattern。
+    if (activeTier === tier) {
+      try {
+        localStorage.removeItem(STORAGE_KEY);
+      } catch {
+        return;
+      }
+      setActiveTier(null);
+      window.dispatchEvent(
+        new StorageEvent("storage", {
+          key: STORAGE_KEY,
+          newValue: null,
+        })
+      );
+      return;
+    }
     try {
       localStorage.setItem(STORAGE_KEY, tier);
     } catch {
@@ -291,7 +310,9 @@ export default function TierFeatureMatrix() {
         4 tier 並列 feature matrix · 每個 cell 顯示該 tier 的 unlock 狀態。
         看到 🔒 表示「升級到此 tier 才解鎖」 ·{" "}
         <span className="text-gold">點 tier header</span>{" "}
-        即可切換 active preview · 立即看到 PreviewModeBanner 同步切換。
+        切換 active preview ·{" "}
+        <span className="text-mute/85">再點 active tier = 取消 preview</span>
+        (toggle 行為 · 不需 scroll 到 banner ✕)。
       </p>
 
       {/* ── Tier headers · clickable per-tier preview switch ── */}
