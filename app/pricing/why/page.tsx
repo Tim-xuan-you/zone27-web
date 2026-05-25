@@ -6,6 +6,7 @@ import FounderSignOff from "@/components/FounderSignOff";
 import ArticleMeta from "@/components/ArticleMeta";
 import EngineStamp from "@/components/EngineStamp";
 import ReciprocityLedger from "@/components/ReciprocityLedger";
+import ReadingProgress from "@/components/ReadingProgress";
 import { createPageMetadata } from "@/lib/page-og";
 import {
   FOUNDERS_TOTAL,
@@ -56,6 +57,7 @@ export default function PricingWhyPage() {
   return (
     <div className="flex flex-col flex-1 min-h-screen">
       <Nav active="founders" />
+      <ReadingProgress />
 
       <main id="main">
         {/* ── HERO ─────────────────────────────────── */}

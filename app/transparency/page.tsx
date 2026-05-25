@@ -8,6 +8,7 @@ import FounderSignOff from "@/components/FounderSignOff";
 import NoPushManifest from "@/components/NoPushManifest";
 import ReciprocityLedger from "@/components/ReciprocityLedger";
 import ArticleMeta from "@/components/ArticleMeta";
+import ReadingProgress from "@/components/ReadingProgress";
 import { matches, getFinalizedMatches } from "@/lib/matches";
 
 export const metadata: Metadata = {
@@ -55,6 +56,7 @@ export default function TransparencyPage() {
   return (
     <div className="flex flex-col flex-1 min-h-screen">
       <Nav />
+      <ReadingProgress />
 
       <main id="main">
         {/* ── HERO ─────────────────────────────────── */}

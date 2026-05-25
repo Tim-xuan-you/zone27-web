@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import FounderSignOff from "@/components/FounderSignOff";
 import ArticleMeta from "@/components/ArticleMeta";
 import RelatedReading from "@/components/RelatedReading";
+import ReadingProgress from "@/components/ReadingProgress";
 import {
   ENGINE_OPS_LOG,
   ENGINE_OPS_LOG_COUNT,
@@ -108,6 +109,7 @@ export default function EngineLogPage() {
   return (
     <div className="flex flex-col flex-1 min-h-screen">
       <Nav />
+      <ReadingProgress />
 
       <main id="main">
         {/* ── HERO ─────────────────────────────────── */}
