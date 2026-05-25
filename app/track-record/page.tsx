@@ -127,6 +127,74 @@ export default function TrackRecordPage() {
           <span className="text-bone">PROVED ✓ 跟 DIVERGED ✕ 等大等亮列出</span>,
           不藏、不修飾、不重新加權。
         </p>
+        {/* R115 W4 · Plausible static 3-stat row · per agent research synthesize
+            「brand-IP-pure social proof」 pattern 第 1 ship · 同 Plausible
+            「260B pageviews · 18k subs · 99.99% uptime」 static aggregate ·
+            NOT live ticker NOT FOMO · 4 stats horizontal: 已 finalized · PROVED
+            · DIVERGED · 0 hidden(unfakeable costly signal · per agent unique
+            opportunity · 競爭者結構性無法 match)。 only render when N > 0 ·
+            empty state(N=0)skips · per Pratfall「沒有」 honest framing。 */}
+        {finalized.length > 0 && (
+          <div className="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 max-w-3xl border border-gold/30 bg-slate/20 p-4 sm:p-5">
+            <div>
+              <p
+                lang="en"
+                className="font-mono text-mute/70 text-[9px] tracking-[0.3em] mb-1"
+              >
+                FINALIZED
+              </p>
+              <p className="font-mono text-bone tabular text-xl sm:text-2xl font-light">
+                {finalized.length}
+              </p>
+              <p className="font-mono text-mute/60 text-[9px] tracking-[0.2em] mt-0.5">
+                receipt{finalized.length === 1 ? "" : "s"}
+              </p>
+            </div>
+            <div>
+              <p
+                lang="en"
+                className="font-mono text-gold/80 text-[9px] tracking-[0.3em] mb-1"
+              >
+                ✓ PROVED
+              </p>
+              <p className="font-mono text-gold tabular text-xl sm:text-2xl font-light">
+                {proved}
+              </p>
+              <p className="font-mono text-mute/60 text-[9px] tracking-[0.2em] mt-0.5">
+                引擎言中
+              </p>
+            </div>
+            <div>
+              <p
+                lang="en"
+                className="font-mono text-loss/85 text-[9px] tracking-[0.3em] mb-1"
+              >
+                ✕ DIVERGED
+              </p>
+              <p className="font-mono text-loss tabular text-xl sm:text-2xl font-light">
+                {diverged}
+              </p>
+              <p className="font-mono text-mute/60 text-[9px] tracking-[0.2em] mt-0.5">
+                引擎落空 · 不藏
+              </p>
+            </div>
+            <div>
+              <p
+                lang="en"
+                className="font-mono text-gold/80 text-[9px] tracking-[0.3em] mb-1"
+              >
+                0 HIDDEN
+              </p>
+              <p className="font-mono text-gold tabular text-xl sm:text-2xl font-light">
+                100<span className="text-xs ml-0.5">%</span>
+              </p>
+              <p className="font-mono text-mute/60 text-[9px] tracking-[0.2em] mt-0.5">
+                disclosure
+              </p>
+            </div>
+          </div>
+        )}
+
         {/* Round 51 W-B · Agent 3 missing cross-link #2 fix · 匿名訪客
             在 /track-record 看到 binary PROVED / DIVERGED · 不知道 reliability
             diagram(Brier score · 45° calibration curve)在哪。 全 site 公開
@@ -134,7 +202,7 @@ export default function TrackRecordPage() {
             (logged-in personal mirror)· 此 hero 加 1-line 引導 surface
             兩條 path · per Agent 3 missing #2「anonymous can't reach
             /calibration」 修正不 strict · 因 /calibration 本身公開。 */}
-        <p className="mt-3 font-mono text-mute/85 text-[11px] sm:text-xs tracking-[0.25em] leading-relaxed">
+        <p className="mt-6 font-mono text-mute/85 text-[11px] sm:text-xs tracking-[0.25em] leading-relaxed">
           想看完整 Brier score + reliability diagram?{" "}
           <Link
             href="/calibration"
