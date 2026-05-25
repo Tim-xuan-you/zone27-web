@@ -18,10 +18,10 @@ import {
 // R69 W-A+W-B added /founders/first-five-minutes (onboarding) +
 //   /founders/from-one-current-founder (Substack empty scaffold)。
 // R95 W2 · Hick's Law compression · COMMAND_ITEMS.length 為 canonical source
-//   (currently 37 hand-curated entries · R120 W5 加 /engine-log direct entry
-//   後 LIVE STATE Plausible-pattern dashboard 1-click 可達 · R119 W4 36 ·
-//   R120 W5 37 · secondary routes accessed via /transparency aggregator +
-//   Footer + parent-page cross-links)。
+//   (currently 38 hand-curated entries · R122 W1 加 /admin tier preview entry
+//   後 designer dogfood 1-click 可達 · R119 W4 36 · R120 W5 37 · R122 W1 38 ·
+//   secondary routes accessed via /transparency aggregator + Footer +
+//   parent-page cross-links)。
 //
 // Design principles (per [[zone27-disclosure-philosophy]]):
 //   - No external deps (no cmdk · no fuse.js · no telemetry)

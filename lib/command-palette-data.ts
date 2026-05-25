@@ -1,11 +1,16 @@
 // ── ZONE 27 · Command Palette Index ─────────────────────
-// PRIMARY routes only · ~26 entries · power-user search · Hick's Law-aware
+// PRIMARY routes only · ~26 → 38 entries · power-user search · Hick's Law-aware
 // editorial priority。 Secondary routes accessed via /transparency aggregator
 // + Footer + parent-page cross-links(e.g. /founders/* sub-pages 從 /founders
-// 探索 · /letter + /year-zero + /heritage + /hey-tim + /engine-log + /annual
-// 從 /transparency aggregator · /methodology/diff 從 /methodology · /receipts/*
-// 從 /track-record · /member/calibration + /member/submit 從 /member)。
-// (/admin + /poster + /auth/* intentionally NOT indexed · 同 framing。)
+// 探索 · /letter + /year-zero + /heritage + /hey-tim + /annual 從 /transparency
+// aggregator · /methodology/diff 從 /methodology · /receipts/* 從 /track-record ·
+// /member/calibration + /member/submit 從 /member · /engine-log direct since R120 W5)。
+// (/poster + /auth/* intentionally NOT indexed · 同 framing。)
+// R122 W1 · /admin 從 「NOT indexed」 改 indexed · per founder-dogfood-canary
+// 第 N 次 fire · designer 需要 1-click access to tier preview · per
+// [[feedback-zone27-tier-dogfood-method]] memory · client-side spoofable BUT 0
+// risk(R113 W1 Kerckhoffs')· /admin still noindex on Vercel(meta robots)·
+// 但 Cmd-K visible for designer。
 
 export type CommandItem = {
   label: string;
@@ -593,6 +598,48 @@ export const COMMAND_ITEMS: CommandItem[] = [
     group: "工具 · 外部",
     keywords: ["github", "source", "code", "原始碼", "open source", "mit"],
     external: true,
+  },
+  {
+    // R122 W1 · Tim 第 N 次 founder-dogfood-canary fire(R36 / R47 / R60 / R113 / R122)
+    // 問「設計者怎麼切換 tier 方案?」 · 此非 missing feature · 是 discoverability bug ·
+    // /admin AdminTierSwitcher + PreviewModeBanner + Cmd+Shift+P + URL deep link 4 個 entry
+    // points 全 ship since R36 W-D · 但 Tim 仍 forget · 加 Cmd-K entry 1-click 可達 ·
+    // per [[feedback-zone27-tier-dogfood-method]] memory codify · DO NOT rebuild · DO NOT
+    // create separate accounts · ONLY surface existing infrastructure。 安全:per R113 W1
+    // Kerckhoffs' principle · client-side spoofable but 0 risk · 0 paid features built。
+    label: "🎭 Designer · 切換 tier preview(設計者 dogfood 工具)",
+    kicker: "/admin",
+    path: "/admin",
+    group: "工具 · 外部",
+    keywords: [
+      "admin",
+      "tier",
+      "切換",
+      "preview",
+      "dogfood",
+      "設計者",
+      "designer",
+      "anonymous",
+      "free",
+      "black",
+      "founders",
+      "切到 black",
+      "切到 founders",
+      "切到 free",
+      "切到 anonymous",
+      "tier switcher",
+      "預覽",
+      "身份切換",
+      "視角",
+      "方案",
+      "看 BLACK CARD",
+      "看 FREE TIER",
+      "看訪客",
+      "看 Founders",
+      "cmd shift p",
+      "ctrl shift p",
+      "keyboard shortcut",
+    ],
   },
 ];
 
