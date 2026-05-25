@@ -589,6 +589,92 @@ blockquote {
 }
 
 /* ============================================
+   R109 W2 · Anchor Positioning API · Chrome 125+ · per R108 W7 dual-track
+   binding Year 1 commitment「at least 1 modern interactive primitive」 axis
+   第 2。 StatTerm tooltip 之前 absolute left-0 bottom-full · 在 viewport
+   edges 上會破版(iPhone SE 375px · stat term 靠右時 tooltip 飛出畫面)·
+   Anchor Positioning API 自動 reposition 到 fit viewport。
+   ============================================
+   Implementation:
+   - .stat-term-anchor sets anchor-name(可 multiple StatTerm 同 page 不衝突)
+   - .stat-tooltip-anchored sets position-anchor + position-area + position-try-fallbacks
+   - @supports guard · 老 browser 用 fallback Tailwind absolute positioning
+
+   Real-world precedents:
+   - Linear inline-citation popup
+   - Stripe API docs parameter tooltip
+   - Anthropic Console docs inline reference
+   - The Verge 2024 redesign footnote tooltip
+*/
+@supports (anchor-name: --x) {
+  .stat-term-anchor {
+    anchor-name: --stat-term;
+  }
+  .stat-tooltip-anchored {
+    position: absolute;
+    /* Override Tailwind absolute left-0 bottom-full · 用 anchor positioning */
+    inset: auto;
+    position-anchor: --stat-term;
+    position-area: block-start;
+    position-try-fallbacks: --bottom-fallback, --inline-start-fallback;
+    margin: 8px 0;
+  }
+}
+
+@position-try --bottom-fallback {
+  position-area: block-end;
+}
+
+@position-try --inline-start-fallback {
+  position-area: inline-start span-block-start;
+}
+
+/* ============================================
+   R109 W1 · Cross-document View Transitions API · Chrome 126+ MPA mode
+   per R108 W7 dual-track binding(engine integrity + web polish 2026-grade)
+   delivers Year 1 commitment「at least 1 modern interactive primitive」 axis 第 1。
+   ============================================
+   ZONE 27 = MPA(server-rendered Next.js · 不是 SPA shell)· Chrome 126+
+   ships @view-transition { navigation: auto } 讓 cross-document navigation
+   有 smooth fade transition · 不需要 SPA framework wrapping。
+
+   Implementation:
+   - opt-in via @view-transition rule(Chrome 126+ · Safari behind flag)
+   - 220ms duration · 不過長 · 不 break perceived performance
+   - prefers-reduced-motion respected · 老 browser 完全 ignore(safe)
+
+   Real-world precedents:
+   - Stripe Sessions 2024 conference site cross-doc transitions
+   - Bloomberg Terminal「drill-in」 morphing feel transplant
+   - The Verge 2024 redesign opt-in cross-doc transitions
+   - GitHub Profile pages 2025 navigation between repo views
+
+   Brand IP fit:
+   - per [[zone27-disclosure-philosophy]] · 0 telemetry · 0 JS · pure CSS
+   - per [[feedback-zone27-mobile-first]] · prefers-reduced-motion 必 respected
+   - per /audit S05 PRE-COMMIT · uses public web platform feature(no proprietary)
+*/
+@view-transition {
+  navigation: auto;
+}
+
+::view-transition-group(*) {
+  animation-duration: 220ms;
+}
+
+::view-transition-old(*),
+::view-transition-new(*) {
+  animation-duration: 220ms;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  @view-transition {
+    navigation: none;
+  }
+}
+
+/* ============================================
    Print stylesheet · /audit is meant to be
    screenshotted + shared. Make Cmd+P output a clean
    academic PDF — invert dark mode, hide chrome,

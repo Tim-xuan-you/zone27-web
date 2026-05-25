@@ -45,7 +45,11 @@ export default function StatTerm({
     return <>{children ?? term}</>;
   }
 
-  const tooltipId = `stat-tooltip-${def.slug}-${++tooltipIdCounter}`;
+  const instanceId = ++tooltipIdCounter;
+  const tooltipId = `stat-tooltip-${def.slug}-${instanceId}`;
+  // R109 W2 · Unique anchor-name per StatTerm instance · multiple StatTerm 同
+  // page 不衝突(CSS spec「最後 tree-order anchor wins if shared name」 解決)。
+  const anchorName = `--stat-anchor-${def.slug}-${instanceId}`;
 
   return (
     <span className="relative inline-block group">
@@ -53,14 +57,17 @@ export default function StatTerm({
         role="button"
         tabIndex={0}
         aria-describedby={tooltipId}
-        className="font-mono border-b border-dotted border-gold/50 cursor-help text-bone hover:text-gold transition-colors focus:outline-none focus-visible:ring-1 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-navy"
+        style={{ anchorName } as React.CSSProperties}
+        className="stat-term-anchor font-mono border-b border-dotted border-gold/50 cursor-help text-bone hover:text-gold transition-colors focus:outline-none focus-visible:ring-1 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-navy"
       >
         {children ?? def.abbr}
       </span>
       <span
         id={tooltipId}
         role="tooltip"
+        style={{ positionAnchor: anchorName } as React.CSSProperties}
         className="
+          stat-tooltip-anchored
           absolute left-0 bottom-full mb-2 z-30
           w-72 max-w-[calc(100vw-3rem)]
           invisible opacity-0
