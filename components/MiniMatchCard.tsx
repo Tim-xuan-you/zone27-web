@@ -176,13 +176,29 @@ export default function MiniMatchCard({ match }: { match: Match }) {
         </div>
       )}
 
-      {/* Click-through to full sim */}
-      <Link
-        href={`/matches/${match.id}`}
-        className="mt-auto pt-2 font-mono text-gold/70 text-[10px] tracking-[0.3em] hover:text-gold transition-colors text-right"
-      >
-        完整分析 →
-      </Link>
+      {/* R115 W1 · Tim 2026-05-25 dogfood critique「在哪裡可以分享、推薦賽事?
+          找不到呀!」 · per [[feedback-founder-dogfood-canary]] first push back
+          trust 即修 · share/predict affordance 存在(/matches/[gameId] 內
+          UserPredictionPicker + AnonPickWidget + ReceiptForwardButton)但從
+          homepage / /matches index 看不到 hint · 加 subtle「👤 您也可以猜」 +
+          「完整分析 →」 雙重 footer signal · 不違反 minimalism axiom · per
+          brand IP「不打擾就是禮物」 keep subtle · 訪客 click 入 match page 即
+          可預測 + 分享 URL。 */}
+      <div className="mt-auto pt-2 flex items-baseline justify-between gap-2 flex-wrap">
+        <Link
+          href={`/matches/${match.id}`}
+          className="font-mono text-mute/70 hover:text-gold text-[10px] tracking-[0.3em] transition-colors"
+          title="您可以猜 home/away · localStorage-only · 0 server · 0 PII · per AnonPickWidget pattern"
+        >
+          👤 您也可以猜
+        </Link>
+        <Link
+          href={`/matches/${match.id}`}
+          className="font-mono text-gold/70 hover:text-gold text-[10px] tracking-[0.3em] transition-colors"
+        >
+          完整分析 →
+        </Link>
+      </div>
     </article>
   );
 }

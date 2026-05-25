@@ -84,6 +84,22 @@ export const COMMAND_ITEMS: CommandItem[] = [
       "預測",
       "賽前",
       "盤口",
+      // R115 W2 · Tim 2026-05-25 dogfood「在哪裡可以分享、推薦賽事? 找不到呀!」
+      // /matches/[gameId] 內 UserPredictionPicker + AnonPickWidget + ReceiptForwardButton
+      // 都 ship 但 share/predict 動作 keywords 之前不 surface · 加 keyword sets
+      // 讓 Cmd-K 搜索「分享」「我也猜」「投票」「推薦」 都能找到 → /matches。
+      "分享",
+      "share",
+      "我也猜",
+      "您也猜",
+      "猜輸贏",
+      "投票",
+      "推薦",
+      "recommend",
+      "贏家",
+      "黑馬",
+      "AnonPick",
+      "UserPrediction",
     ],
   },
   {
