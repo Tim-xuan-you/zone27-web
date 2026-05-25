@@ -155,6 +155,13 @@ const FOOTER_GROUPS: FooterGroup[] = [
     links: [
       { label: "倒置宣言", href: "/manifesto" },
       { label: "鐵律", href: "/discipline" },
+      // R114 W3 · per agent cold start playbook research · 「ONE artifact
+      // that travels」 winning pattern(Defector「how-we-got-here」 +
+      // Plausible「Why you should stop using GA」 + BP 1996 photocopied book)
+      // /letter IS Tim's manifesto candidate · 之前 orphan(僅 /hey-tim inline
+      // reference)· 加入 Footer BRAND IP column 提升 discoverability surface ·
+      // 是訪客 LINE 群分享 ZONE 27 URL 的 canonical target。
+      { label: "Tim 親手 letter", href: "/letter" },
       { label: "公開路線圖", href: "/roadmap" },
       // Round 28 Wave 4 · /now NEW · craft journal 現在 · 位於
       // /changelog(過去)+ /roadmap(未來)中間。Linear /now + Derek
