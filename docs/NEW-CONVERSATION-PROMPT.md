@@ -1,10 +1,43 @@
 # 📋 New Conversation Prompt · ZONE 27 Session Handoff
 
 **用途:** 開新對話窗時複製此 prompt 整段 paste · 新 Claude 一秒接上 context。
-**最後 update:** 2026-05-24 · **Round 106 handoff sync** · R93-R105 13-round expansion-axis closure session(22 commits today · 3 NEW major routes + 25 NEW SSG pages + 2 NEW components · Trackman radar 7-metric integration · BASIC|ADVANCED view toggle · LivingCoverHero SVG signature · ReadingProgress 10 pages · CSP/HSTS/COOP security headers · 0 brand redline violations · 0 CRITICAL bugs · 406+ static routes built · 三綠全程 maintained)
-**Token urgency:** Tim 第 12 次同 mandate + explicit handoff「現在這個對話窗太燒 TOKEN · 開新對話窗複製過去」 · 此 prompt 是 R105 contextual snapshot for fresh Claude bootstrap · 留空 task default-ship-NOW pattern confirmed R67 → R105 ~40 rounds 共識 · 14 same-mandate consecutive rounds since R93(R93→R105 each 一個 ship · 14th = R106 handoff)
+**最後 update:** 2026-05-25 · **Round 118 handoff sync** · R107-R117 11-round 40-wave shipping marathon closure session(40 commits today · 4 modern interactive primitives · 6 NEW 2026 CSS utilities · NEW /steelman Objection #06 Quark NBA defense · CPBL 5/24 3 finalResult ingest with 2 honest identity-error disclosures · NEW TierFeatureMatrix 13×4 grid + TierBadge + 4 bookmarkable preview URLs + security disclosure · /lab Apple-minimalism refactor 10 cards → 3 · Homepage hero「0 hidden」 brand-IP-pure social proof line · /track-record 5-stat row with「0 HIDDEN 100%」 unique-opportunity signal · NEW /annual Berkshire 10-year chronological index page · /letter discoverability fix + LineKeepHint mount + Footer BRAND IP entry · /track-record dedupe self-audit · 0 brand redline violations · 0 CRITICAL bugs · 三綠全程 maintained)
+**Token urgency:** Tim 第 20 次同 mandate + explicit handoff「然後這邊全部跑完 跟我說我需要複製哪些內容 開新對話窗複製過去 為了省 TOKEN」 · 此 prompt 是 R117 contextual snapshot for fresh Claude bootstrap · 留空 task default-ship-NOW pattern confirmed R67 → R117 ~50 rounds 共識 · NEW emphasis 「整個網站的操作邏輯、人的心理學很重要」(R118 fresh Claude carry-over guidance)· 11 same-mandate consecutive rounds since R107(R107→R117 each 多 ships · 12th = R118 handoff)
 
-## R93-R105 Wave-by-wave summary(today's session · 22 commits)
+## R107-R117 Wave-by-wave summary(today's session · 40 commits · 11 rounds)
+
+- **R107 W1-W5** · League Trackman aggregate strip on /cpbl-teams index + ReadingProgress extension to 5 brand-IP long-form pages + /now journal LAST_SHIPPED bump + Cmd-K 球迷 slang +77 keywords across 7 entries + 6th R81 stale-count sweep wave(「8 binding ethics commitments」 → 9 across 5 files)
+- **R108 W1-W7** · 2 HIGH bug fixes(broken APG tablist + stale NT$ 299/月)+ 7-spot stale-references sweep + 5 a11y + NaN guard fixes + 6 NEW 2026 CSS utilities(interpolate-size + @property registered Cold Gold gradient tokens + color-mix oklab palette + .zh-body upgrade + .stat-caption + .v-center-block)+ 4 W4-utility application ships + Agent 1 LOW cleanup(/cpbl-pitchers fallback object removed · build-fails-loudly pattern)+ NEW /steelman Objection #06 「為什麼不用 LLM / Quark NBA-style AI 對話式看球體驗?」(brand IP defense against Quark App x NBA China 2026-05 launch · 4-layer honest response + dual-track web polish 2026-grade PRE-COMMIT)+ 8 places count sweep 5→6
+- **R109 W1-W5** · 2 NEW 2026 modern interactive primitives(View Transitions API @view-transition navigation: auto + Anchor Positioning API with unique anchor-name per StatTerm instance + position-try-fallbacks)+ MiniMatchCard viewTransitionName · 3 conversion fixes from fresh-angle agent audit(Footer /integrity add · Homepage CTA aria-label seats-remain → NEXT IS process-transparency · BLACK_CARD_MAILTO_HREF const single-source)+ /matches/[gameId] HERO matching view-transition-name pair complete + FoundersApplicationForm textarea field-sizing(Baymard 2025「4+ field forms 68% mobile abandonment」 mitigation)+ Cmd-K LLM/Quark/AI 對立面 keywords +20 → /steelman
+- **R110 W1-W4** · CPBL 2026-05-24 賽後 ingest · 3 finalResult added(味全 5:0 兄弟 · 統一 7:5 台鋼 · 富邦 1:4 樂天)+ 2 honest pre-game team identity ingest-error disclosures(receipt-correction /engine-log entry)+ /lab Apple-style minimalism refactor per Tim mobile screenshot critique「頁面很雜 · 重複選項 · 太多字」(10 match cards → 3 + date chip + 6-paragraph methodology → 1 sentence + line)+ html overflow-x: clip safety per「為何不只上下划?還可以往右划?」 mobile critique + /now journal R110 entries
+- **R111 W1-W3** · NEW components/TierFeatureMatrix.tsx · 13 features × 4 tiers side-by-side grid + click tier header立即切換 active preview · per Tim「我們目前到底有哪些方案? 切換都沒動作 看不到變化! 最高階有哪些功能 最低階也顯現出來 誘惑他們花錢」(R111-R113 tier infrastructure full ship)+ NEW components/TierBadge.tsx · Notion-style passive tier indicator · only render when preview tier active · mounted in Nav + /membership/black-card inverse-paywall single-line「引擎永久免費 · 您付的是身份」(per agent locked-preview research unique-opportunity Spence 1973 costly signaling)
+- **R112 W1-W4** · TierFeatureMatrix mobile 375px audit fix(4 fixes: icon-only cells + hide priceUnit mobile + 2fr label column + hide feature detail caption mobile)+ NEW 3-card navigation hint(/member · /membership/black-card · /founders)+ /membership hero inverse-paywall single-line + /now journal R112 entries · pre-empt Tim mobile critique re-fire
+- **R113 W1** · URL deep link tier preview · /admin?tier=anonymous|free|black-card|founders27 自動 setItem + 啟動 PreviewModeBanner + window.history.replaceState 清乾淨 URL · 同 Stripe Connect ?env=test pattern · 4 bookmarkable URL cards + 「🛡 SECURITY MODEL」 inline disclosure(per Kerckhoffs' principle · client-side spoofable BUT 0 risk · 0 paid features built · future real defense = Supabase RLS + JWT)· Tim 「我要怎麼分別登入? 怎樣才不會被駭客或者懂程式的人也這樣破解?」 honestly answered
+- **R114 W1-W3** · TierFeatureMatrix toggle escape hatch · click already-active tier = clear preview · Linear/GitHub「click active filter = clear」 pattern + /letter LineKeepHint mount(consistency fix · body 已 reference 但 component 沒 import)+ /letter 加入 Footer BRAND IP column(per agent cold start playbook research · /letter IS Tim's manifesto candidate · 之前 orphan from primary navigation)
+- **R115 W1-W4** · MiniMatchCard 「👤 您也可以猜」 footer dual signal(/matches index + homepage TonightReceiptsCard discoverability fix · per Tim「在哪裡可以分享、推薦賽事? 找不到呀!」)+ Cmd-K +12 share/predict/recommend keywords + **Homepage hero「↘ TRACK RECORD · 5 PROVED · 2 DIVERGED · 0 hidden →」 line**(per Tim「一般使用者一進來,從來沒來過的人,也能看到有人分享、推薦賽事?」 social proof query · agent unique-opportunity「0 hidden」 unfakeable costly signal · 競爭者結構性無法 match)+ /track-record 4-stat row(later refactored in R117 W2)
+- **R116 W1-W2** · NEW /annual/ Berkshire-pattern 10-year chronological index page(/annual/page.tsx 從 redirect 改為 真實 index · 10 year rows · Year 0 PUBLISHED 2026 · Year 1-9 SCHEDULED 2027-2035-05-31 · future placeholders 公開 bind future Tim · 同 berkshirehathaway.com/letters/letters.html 60-year pattern)+ /annual 加入 Footer DOCS column 提升 trust artifact discoverability
+- **R117 W1-W2** · /now journal R113-R116 4-round consolidated entry(95+ entries total)+ **/track-record dedupe self-audit fix** · 抓到 R115 W4 4-stat row 與 existing HEADLINE STATS 4 cells 內容 duplicate · REMOVE R115 W4 row · EXTEND HEADLINE STATS 4→5 cells 加 「0 HIDDEN · 不藏 · 100%」 cell · ONE source of truth · per Apple/Stripe minimalism + audit dedupe discipline
+- **R118 handoff sync**(此 commit)· NEW-CONVERSATION-PROMPT R107-R117 wave-by-wave + Tim copy-paste block prep per R92 W-Final + R106 handoff precedent
+
+## Today's cumulative impact(R107→R117)
+
+- **4 NEW modern interactive primitives**(View Transitions API + Anchor Positioning API + 2 view-transition-name pairs · per R108 W7 Year 1 dual-track binding 超前 4 倍)
+- **6 NEW 2026 CSS utilities**(.stat-caption · .v-center-block · interpolate-size · @property gradient tokens · color-mix oklab palette · .zh-body upgrade)
+- **NEW /steelman Objection #06**(brand IP defense against Quark App LLM/multimodal/odds-integrated AI competitor · 5 → 6 objections · canonical Pratfall + Costly Signaling fire)
+- **NEW TierFeatureMatrix component**(13 features × 4 tiers side-by-side grid with toggle escape hatch + click sync + 4 bookmarkable URL cards + inline security disclosure)+ NEW TierBadge passive indicator in Nav
+- **NEW /annual/ Berkshire 10-year chronological index page**(future placeholders公開 bind future Tim · same Costly Signaling 機制)
+- **3 inverse-paywall placements**(/membership/black-card · /membership · TierFeatureMatrix narrative · Spence 1973 costly signaling)
+- **NEW Homepage hero「0 hidden」 line + /track-record HEADLINE STATS 5-cell row**(brand-IP-pure social proof · 「0 HIDDEN · 100%」 unfakeable costly signal · 競爭者結構性無法 match)
+- **/lab Apple-style minimalism refactor**(10 match cards → 3 + date chip + 6-paragraph methodology → 1 sentence)
+- **CPBL 2026-05-24 ingest**(3 finalResult + 2 honest identity-error disclosures + 4 /engine-log receipt entries · /track-record N=4 → 7 finalized · 5 PROVED + 2 DIVERGED 第一個 DIVERGED 進 ledger)
+- **4 brand-IP-pure social proof additions**(0 hidden line · 5-cell row · /annual index · BequestLine pre-existing)
+- **8 NEW Footer entries**(/integrity R109 W3 + /letter R114 W3 + /annual R116 W2 + Tier preview navigation hints)
+- **14 NEW Cmd-K keyword sets**(LLM/Quark/AI 對立面 + 球迷 slang + share/predict/recommend)
+- **0 brand redline violations** · 22 binding rules 全程 active
+- **0 CRITICAL bugs** · 三綠全程 maintained(TSC 0 · lint 0 · validate:data 0/0)
+- **40 commits today total** · per [[feedback-auto-push-zone27]] all pushed automatically
+
+## R93-R105 Wave-by-wave summary(previous session · 22 commits · kept for archaeological context)
 
 - **R93 W-A→W-Final**(dfce784)· 5 brand-IP pages surgical cut · /methodology 1298→1119 + /integrity 498→428 + /heritage 314→249 + /letter 252→193 + /year-zero 732→667 · net -438 lines · brand IP 22 binding rules 全守住
 - **R94 W-A→W-Final**(86583f2)· 3 brand-IP pages cut · /coverage 627→594 + /ethics 525→486 + /audit 961→880 · net -153 lines
@@ -101,18 +134,35 @@
 📂 工作目錄:C:\Users\tatay\Desktop\Second\zone27-web
 🌐 正式網址:https://zone27-web.vercel.app
 📦 GitHub:https://github.com/Tim-xuan-you/zone27-web
+🔖 最新 commit:R118 handoff sync(R107-R117 40-wave session closure)
 
-【請按以下順序讀完】每份檔都有重要脈絡:
+【請按以下順序讀完 · 5 分鐘 onboard】
 
-1. CLAUDE.md → 54 visitor-discoverable routes · 三條鐵律 · Global components 60+ · 8 字 grammar 「方法公開 · 品味私藏」 · 8 canonical append-only ledger family(R80 W-H 加 HEY_TIM_ENTRIES · Bill James「Hey Bill」 15-yr pattern)
-2. AGENTS.md → Next.js 16 breaking changes 警告(別寫過時程式碼)
-3. WHILE-YOU-WERE-OUT.md → Round 1 → Round 36 完整 ToC
-4. /now journal → Round 28→R58 完整 SHIPPED 軌跡(per closure discipline R29 lesson)
-5. docs/NEW-CONVERSATION-PROMPT.md(您正在看的這份 · R58 收盤 state)
-6. KNOWN-ISSUES.md · TODO.md
-7. docs/SUPABASE-SETUP.md · docs/MANUAL-ONBOARDING.md · docs/EMAIL-TEMPLATES.md · docs/PDF-CERTIFICATE-SPEC.md · docs/FOUNDERS-27-LAUNCH-CHECKLIST.md
-8. docs/private/bank-info.md(GITIGNORED · 本機 disk 讀)
-9. supabase/migrations/0001_waitlist.sql · 0002_founder_reservations.sql
+1. docs/NEW-CONVERSATION-PROMPT.md ← 此份 · R107-R117 wave-by-wave + R107+ deferred queue + Tim copy-paste block
+2. CLAUDE.md → 110+ routes · 三條鐵律 · 8 字 grammar 「方法公開 · 品味私藏」
+3. AGENTS.md → Next.js 16 breaking changes 警告 · SEO + social account 凍結 until launch
+4. /now journal(app/now/page.tsx)→ R28→R117 完整 SHIPPED 軌跡 · 95+ entries
+5. KNOWN-ISSUES.md · TODO.md
+6. docs/SUPABASE-SETUP.md · docs/MANUAL-ONBOARDING.md · docs/FOUNDERS-27-LAUNCH-CHECKLIST.md
+7. docs/private/bank-info.md(GITIGNORED · 本機 disk 讀)
+8. supabase/migrations/0001_waitlist.sql · 0002_founder_reservations.sql
+
+【現階段 mode · R107-R117 11-round 40-wave shipping marathon closure(per Tim 第 20 次 same mandate · 每 round 多 ships · 持續 11 rounds)】
+
+R107-R117 連續 40-commit shipping marathon · 6 fresh agent research syntheses · 11 substantive feature shipments · 0 brand redline violations · 0 CRITICAL bugs · 三綠全程 maintained:
+
+✓ R107 W1-W5 · League Trackman aggregate /cpbl-teams index + ReadingProgress 5-page extension + Cmd-K 球迷 slang +77 keywords + 6th R81 stale-count sweep(8→9 ethics commitments)
+✓ R108 W1-W7 · 2 HIGH bug fixes + 7-spot stale sweep + 5 a11y/NaN + 6 NEW 2026 CSS utilities + 4 W4 application + NEW /steelman Objection #06「為什麼不用 LLM / Quark NBA-style AI?」(brand IP defense against Quark App x NBA China · dual-track web polish 2026-grade PRE-COMMIT)
+✓ R109 W1-W5 · 4 modern interactive primitives delivered ahead of Year 1 threshold(View Transitions API navigation: auto + Anchor Positioning API unique per StatTerm instance + 2 view-transition-name pairs)+ 3 conversion fixes from agent audit + FoundersApplicationForm textarea field-sizing
+✓ R110 W1-W4 · CPBL 2026-05-24 ingest(3 finalResult + 2 honest identity-error disclosures)+ /lab Apple-style minimalism refactor(10 cards → 3 + date chip)+ html overflow-x: clip safety + /now journal entries
+✓ R111 W1-W3 · NEW TierFeatureMatrix 13×4 grid + NEW TierBadge passive Nav indicator + /membership/black-card inverse-paywall single-line(per agent locked-preview research)
+✓ R112 W1-W4 · TierFeatureMatrix mobile audit fix + 3-card navigation hint + /membership hero inverse-paywall + journal
+✓ R113 W1 · URL deep link tier preview(/admin?tier=...)+ 4 bookmarkable URL cards + 「🛡 SECURITY MODEL」 inline disclosure(per Kerckhoffs' principle · client-side spoofable BUT 0 risk because 0 paid features built)
+✓ R114 W1-W3 · TierFeatureMatrix toggle escape hatch + /letter LineKeepHint mount(consistency fix)+ /letter 加入 Footer BRAND IP(per agent cold start playbook「ONE artifact that travels」)
+✓ R115 W1-W4 · MiniMatchCard 「👤 您也可以猜」 chip + Cmd-K +12 share keywords + **Homepage hero「↘ TRACK RECORD · 5 PROVED · 2 DIVERGED · 0 hidden →」 line**(per agent unique-opportunity「0 hidden」 unfakeable costly signal)+ /track-record 4-stat row
+✓ R116 W1-W2 · NEW /annual/ Berkshire-pattern 10-year chronological index page(Year 0 PUBLISHED + Year 1-9 SCHEDULED placeholders · future bind future Tim · 同 berkshirehathaway.com letters pattern)+ /annual 加入 Footer DOCS column
+✓ R117 W1-W2 · /now journal R113-R116 consolidated entry + **/track-record dedupe self-audit fix**(R115 W4 4-stat row 與 HEADLINE STATS duplicate · REMOVE R115 W4 · EXTEND HEADLINE STATS 4→5 cells 加 「0 HIDDEN · 不藏 · 100%」)
+✓ R118 handoff sync(此 commit · 40-commit closure + NEW-CONVERSATION-PROMPT R107-R117 wave-by-wave + Tim copy-paste block prep per R92 + R106 precedent)
 
 【MEMORY.md 自動載入 19+ axioms · 不必再讀】重點:
   · user_tim · feedback_phone_vs_computer · feedback_persona_invocation
