@@ -415,7 +415,9 @@ function AdvancedPercentileRow({
       <div
         className="relative h-[6px] bg-line/40 rounded-sm overflow-visible"
         role="img"
-        aria-label={`${label} percentile ${percentile} · ${tierLabel}`}
+        aria-label={`${label} 百分位 ${percentile} · ${
+          higherBetter ? "高 = 強" : "低 = 強"
+        } · ${tierLabel}`}
       >
         <div
           className="absolute inset-0 rounded-sm opacity-40"

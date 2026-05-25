@@ -15,7 +15,9 @@
 //
 // Layout:
 //   - mobile only(sm:hidden); desktop preserves sidebar nav
-//   - sits ABOVE StickyFoundersCTA(z-29 vs z-30)
+//   - sits ABOVE StickyFoundersCTA via bottom: calc(safe-area + 76px) offset
+//     · NOT via z-index(z-29 < z-30 would actually layer BELOW)· physical
+//     y-position is what positions it above the sticky CTA bar(R108 W3 fix)
 //   - both share env(safe-area-inset-bottom)
 //   - 40px tall · 1 row · horizontal scroll-snap pill grid
 //

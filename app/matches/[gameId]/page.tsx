@@ -795,6 +795,21 @@ function EngineNarrative({ match }: { match: Match }) {
   const gapStr = (n: number) =>
     Number.isFinite(n) ? (n > 0 ? `+${n.toFixed(2)}` : n.toFixed(2)) : "—";
 
+  // R108 W3 · NaN guard helper · 防 silent fall-through masking malformed
+  // data per Agent 1 audit · 若 parseFloat → NaN · 每個 comparison return
+  // false → defaults to「差不多 · 非關鍵」 label(masks bad data · violation
+  // of Disclosure axiom)· 加 explicit isFinite check 顯式 surface「(資料未補)」。
+  const tieredLabel = (
+    n: number,
+    threshold: number,
+    strong: string,
+    mid: string,
+    weak: string
+  ): string => {
+    if (!Number.isFinite(n)) return "(資料未補)";
+    return n > threshold ? strong : n > 0 ? mid : weak;
+  };
+
   return (
     <blockquote className="border-l-2 border-gold/50 pl-6 sm:pl-8 py-3 max-w-3xl">
       <p className="font-mono text-gold text-[10px] tracking-[0.35em] mb-4">
@@ -811,19 +826,19 @@ function EngineNarrative({ match }: { match: Match }) {
       <ul className="space-y-2 text-mute text-sm leading-relaxed mb-5 font-mono tabular">
         <li>
           <span className="text-gold/80">ERA</span> · {fav.pitcher.era} vs {dog.pitcher.era}
-          {" · "}{gapStr(eraGap)}{" "}{eraGap > 0.5 ? "(favorite 控分明顯)" : eraGap > 0 ? "(favorite 略勝)" : "(差不多 · 非關鍵)"}
+          {" · "}{gapStr(eraGap)}{" "}{tieredLabel(eraGap, 0.5, "(favorite 控分明顯)", "(favorite 略勝)", "(差不多 · 非關鍵)")}
         </li>
         <li>
           <span className="text-gold/80">K/9</span> · {fav.pitcher.k9} vs {dog.pitcher.k9}
-          {" · "}{gapStr(k9Gap)}{" "}{k9Gap > 1 ? "(每 9 局多吃 1 次以上三振)" : k9Gap > 0 ? "(favorite 略勝)" : "(差不多)"}
+          {" · "}{gapStr(k9Gap)}{" "}{tieredLabel(k9Gap, 1, "(每 9 局多吃 1 次以上三振)", "(favorite 略勝)", "(差不多)")}
         </li>
         <li>
           <span className="text-gold/80">BB/9</span> · {fav.pitcher.bb9} vs {dog.pitcher.bb9}
-          {" · "}{gapStr(bb9Gap)}{" "}{bb9Gap > 0.8 ? "(每 9 局少給 1 隻保送)" : bb9Gap > 0 ? "(favorite 略勝控球)" : "(差不多)"}
+          {" · "}{gapStr(bb9Gap)}{" "}{tieredLabel(bb9Gap, 0.8, "(每 9 局少給 1 隻保送)", "(favorite 略勝控球)", "(差不多)")}
         </li>
         <li>
           <span className="text-gold/80">HR/9</span> · {fav.pitcher.hr9} vs {dog.pitcher.hr9}
-          {" · "}{gapStr(hr9Gap)}{" "}{hr9Gap > 0.3 ? "(favorite 被轟少)" : hr9Gap > 0 ? "(略勝)" : "(差不多)"}
+          {" · "}{gapStr(hr9Gap)}{" "}{tieredLabel(hr9Gap, 0.3, "(favorite 被轟少)", "(略勝)", "(差不多)")}
         </li>
       </ul>
       <p className="text-mute text-sm leading-relaxed mb-3">
@@ -993,13 +1008,22 @@ function ScoreRow({
 
 function FormRow({ team, recent }: { team: string; recent: ("W" | "L")[] }) {
   const wins = recent.filter((r) => r === "W").length;
+  const losses = recent.length - wins;
   return (
     <div>
       <p className="text-mute text-xs mb-3">{team}</p>
-      <div className="flex items-center gap-2 mb-4">
+      {/* R108 W3 · a11y · wrap W/L row in role=group + aria-label per Agent 1
+          audit · 之前 SR 用戶聽到 "W L W W L" 無 context · 加 group label 給
+          team + win/loss count 整體 announce。 */}
+      <div
+        role="group"
+        aria-label={`${team} 近 ${recent.length} 場 ${wins} 勝 ${losses} 敗`}
+        className="flex items-center gap-2 mb-4"
+      >
         {recent.map((r, i) => (
           <span
             key={i}
+            aria-hidden="true"
             className={`w-9 h-9 flex items-center justify-center font-mono text-sm border ${
               r === "W"
                 ? "border-gold text-gold bg-gold/5"

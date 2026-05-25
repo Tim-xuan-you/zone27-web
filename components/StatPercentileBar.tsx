@@ -95,7 +95,9 @@ export default function StatPercentileBar({ stat, value }: Props) {
       <div
         className="relative h-[6px] bg-line/40 rounded-sm overflow-visible"
         role="img"
-        aria-label={`${stat} ${value} · tier ${tierLabel}`}
+        aria-label={`${stat} ${value} · ${
+          ref.higherBetter ? "高 = 強" : "低 = 強"
+        } · tier ${tierLabel}`}
       >
         {/* Brand-tier gradient backdrop · mute(left)→ bone(mid)→ gold(right).
             Direction matches "good" semantics: gold is always the elite end.
