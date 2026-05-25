@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import Nav from "@/components/Nav";
 import ReadingProgress from "@/components/ReadingProgress";
 import Footer from "@/components/Footer";
+import LineKeepHint from "@/components/LineKeepHint";
 import {
   LETTER_BODY,
   LAST_EDITED_AT,
@@ -190,6 +191,17 @@ export default function LetterPage() {
             </ul>
           </section>
         </article>
+
+        {/* R114 W2 · LineKeepHint mount · /letter body 已 reference「per
+            LineKeepHint mobile hint below」 但 component 之前沒 import · 修
+            consistency gap · per agent cold start playbook research「ONE
+            artifact that travels」 · /letter IS Tim's manifesto · LineKeepHint
+            幫 mobile CPBL fan 長按 → LINE Keep 不需加好友 · 同 Defector
+            「how-we-got-here」 + Plausible「Why you should stop using GA」
+            pattern · 0 push · 0 friend-add · reader OWNS arrival。 */}
+        <div className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-8">
+          <LineKeepHint />
+        </div>
       </main>
 
       <Footer />
