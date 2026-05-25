@@ -202,7 +202,7 @@ export default function HeritagePage() {
             <span className="text-gold">one-winner-take-all</span> slot · 17 年空置
           </h2>
           <p
-            className="text-mute/90 text-sm sm:text-base leading-relaxed mb-4"
+            className="text-mute/90 zh-body text-sm sm:text-base leading-relaxed mb-4"
             style={{ textWrap: "pretty" }}
           >
             Asian baseball niche sabermetrics 14 年 only solo sustainable precedent =
@@ -217,7 +217,7 @@ export default function HeritagePage() {
             「Bill James of Japan」 · 2011 founded · NPB only · sub count 不公開。
           </p>
           <p
-            className="text-mute/90 text-sm sm:text-base leading-relaxed mb-4"
+            className="text-mute/90 zh-body text-sm sm:text-base leading-relaxed mb-4"
             style={{ textWrap: "pretty" }}
           >
             Taiwan CPBL 同 axis · 直接 competitor ={" "}
@@ -236,7 +236,7 @@ export default function HeritagePage() {
             270-seat scarcity · 「built like FanGraphs not Stratechery」。
           </p>
           <p
-            className="text-mute/90 text-sm sm:text-base leading-relaxed mb-4"
+            className="text-mute/90 zh-body text-sm sm:text-base leading-relaxed mb-4"
             style={{ textWrap: "pretty" }}
           >
             <strong className="text-gold">ZONE 27 asymmetric weapon</strong> · DELTA
