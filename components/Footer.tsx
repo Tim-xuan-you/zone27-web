@@ -123,6 +123,12 @@ const FOOTER_GROUPS: FooterGroup[] = [
       // commitments page · 違反「方法公開」 axiom 把最 binding Pratfall
       // artifact 藏在 Cmd-K · 加入 DOCS column 與其他 trust artifact 並列。
       { label: "永遠不變 22 件事", href: "/integrity" },
+      // R116 W2 · per R115 agent「brand-IP-pure social proof」 research Ship 1
+      // · /annual NEW Berkshire-pattern 10-year chronological index page(R116
+      // W1)· 未發行 placeholders 公開 binding 未來 Tim · 同 berkshirehathaway.com/
+      // letters/letters.html 60-year pattern · trust artifact category · 加入
+      // DOCS column 與 其他 binding pages 並列。
+      { label: "Annual Reports · 10 年連續", href: "/annual" },
     ],
   },
   {
