@@ -403,14 +403,19 @@ export default function PricingWhyPage() {
           </p>
         </Section>
 
-        {/* ── §07 · PRECEDENT BENCHMARKS · R126 W2 NEW · 8-fact data table
-            · per R125 monetization agent verified web research · Defector +
-            Stratechery + 404 Media + Kickstarter + FanGraphs + Hami CPBL +
-            Patek + Costly Signaling theory · 全 source URL inline · pre-launch
-            subscription monetization benchmarks 物理 codify · 同 Stripe Press
-            book-detail data table + FanGraphs Membership rationale + Defector
-            annual report pattern · brand IP triple-fire(Disclosure 公開 sources
-            + Pratfall 對標 自己定價 vs benchmark + Costly Signaling 公開
+        {/* ── §07 · PRECEDENT BENCHMARKS · R126 W2 NEW(8 facts initial)+ W3
+            augment(4 TW-specific facts FACT 09-12)= 12 facts total · R127 W1
+            comment sync per [[feedback-zone27-pratfall-brand-ip]] count-drift
+            discipline · per R125 monetization agent verified web research(US/
+            global · FACT 01-08)+ R126 TW market agent web research(TW/Asia ·
+            FACT 09-12)· Defector + Stratechery + 404 Media + Kickstarter +
+            FanGraphs + Hami CPBL + Patek + Costly Signaling theory + CPBLTV
+            NT$ 2,399/yr + DELTA Japan 14-yr + CPBL 3M attendance + PressPlay
+            權證小哥 8,100 · 全 source URL inline · pre-launch subscription
+            monetization benchmarks 物理 codify · 同 Stripe Press book-detail
+            data table + FanGraphs Membership rationale + Defector annual
+            report pattern · brand IP triple-fire(Disclosure 公開 sources +
+            Pratfall 對標 自己定價 vs benchmark + Costly Signaling 公開
             web-verified math)。 Tim 「Defector / Stratechery 都做到」 fact-check
             answer 物理 codify。 */}
         <Section

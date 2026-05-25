@@ -171,6 +171,121 @@ export default function HeritagePage() {
           </p>
         </section>
 
+        {/* ── R127 W2 · DELTA-of-CPBL first-mover positioning surface · per NEW
+            [[feedback-zone27-delta-of-cpbl-positioning]] R126 memory canonical
+            placement on /heritage · ZONE 27 fills structurally one-winner-take-all
+            Asian baseball analytics niche slot · DELTA Japan 1.02(14 年 solo ·
+            Yusuke Okada "Bill James of Japan")+ Rebas TW(media-conglomerate-
+            owned · cannot deploy 270-seat scarcity)= both failed to deploy
+            disclosure + scarcity in combined 17+ years · ZONE 27 asymmetric
+            weapon。 R126 TW market agent web-research verified · sources cited
+            inline。 brand IP 守:不違反 [[feedback-zone27-one-way-by-design]]
+            (cite peers · NOT social community)+ /audit S05 PRE-COMMIT clause。 */}
+        <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-12 pt-12 border-t border-line/40">
+          <p
+            lang="en"
+            className="font-mono text-gold text-[10px] tracking-[0.4em] mb-6"
+          >
+            / ASIAN BASEBALL ANALYTICS · POSITIONING
+          </p>
+          <h2
+            className="text-2xl sm:text-3xl text-bone font-light tracking-tight mb-5 leading-snug"
+            style={{ fontFamily: "Georgia, serif", textWrap: "pretty" }}
+          >
+            「DELTA of CPBL」 · structurally{" "}
+            <span className="text-gold">one-winner-take-all</span> slot · 17 年空置
+          </h2>
+          <p
+            className="text-mute/90 text-sm sm:text-base leading-relaxed mb-4"
+            style={{ textWrap: "pretty" }}
+          >
+            Asian baseball niche sabermetrics 14 年 only solo sustainable precedent =
+            <strong className="text-bone"> DELTA Inc. Japan</strong>(<a
+              href="https://1point02.jp/op/reg/guide_reg_description-en.aspx"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gold/85 hover:text-gold underline-offset-4 hover:underline"
+            >
+              1.02 Essence of Baseball
+            </a>)· ¥1,000/月(≈ NT$ 210)· Yusuke Okada solo founder ·
+            「Bill James of Japan」 · 2011 founded · NPB only · sub count 不公開。
+          </p>
+          <p
+            className="text-mute/90 text-sm sm:text-base leading-relaxed mb-4"
+            style={{ textWrap: "pretty" }}
+          >
+            Taiwan CPBL 同 axis · 直接 competitor ={" "}
+            <strong className="text-bone">
+              <a
+                href="https://www.rebas.tw/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gold/85 hover:text-gold underline-offset-4 hover:underline"
+              >
+                Rebas 野球革命
+              </a>
+            </strong>{" "}
+            ·「first CPBL advanced data website」 · BUT
+            media-conglomerate-owned(關鍵評論網)· structurally cannot deploy
+            270-seat scarcity · 「built like FanGraphs not Stratechery」。
+          </p>
+          <p
+            className="text-mute/90 text-sm sm:text-base leading-relaxed mb-4"
+            style={{ textWrap: "pretty" }}
+          >
+            <strong className="text-gold">ZONE 27 asymmetric weapon</strong> · DELTA
+            + Rebas combined 17+ years 都未 deploy:
+          </p>
+          <ul className="space-y-2 text-mute/85 text-sm sm:text-base leading-relaxed list-none pl-0 mb-5">
+            <li className="flex items-baseline gap-3">
+              <span aria-hidden="true" className="font-mono text-gold/70 text-[10px] tracking-[0.2em] shrink-0">▸</span>
+              <span className="flex-1">公開引擎 forever(DELTA + Rebas 都不 expose)</span>
+            </li>
+            <li className="flex items-baseline gap-3">
+              <span aria-hidden="true" className="font-mono text-gold/70 text-[10px] tracking-[0.2em] shrink-0">▸</span>
+              <span className="flex-1">PROVED + DIVERGED 等大 ledger(DELTA 14 年 sub count 不公開)</span>
+            </li>
+            <li className="flex items-baseline gap-3">
+              <span aria-hidden="true" className="font-mono text-gold/70 text-[10px] tracking-[0.2em] shrink-0">▸</span>
+              <span className="flex-1">270 lifetime seats(Rebas media-owned cannot limit · structurally impossible)</span>
+            </li>
+            <li className="flex items-baseline gap-3">
+              <span aria-hidden="true" className="font-mono text-gold/70 text-[10px] tracking-[0.2em] shrink-0">▸</span>
+              <span className="flex-1">0 抽下注分成(玩運彩 / 報馬仔 結構性無法 ship)</span>
+            </li>
+          </ul>
+          <p
+            className="text-mute/85 text-xs sm:text-sm leading-relaxed"
+            style={{ textWrap: "pretty" }}
+          >
+            ⚓ <strong className="text-bone">CPBL 2025 TAM math</strong> ·{" "}
+            <a
+              href="https://sports.ettoday.net/news/2938974"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gold/85 hover:text-gold underline-offset-4 hover:underline"
+            >
+              3,000,000 spectators / season
+            </a>{" "}
+            · 11,940/game early-season · 270 Founders 27 seats = 0.009% of
+            single-season gate · sell-out trivially achievable if conversion ≥
+            1-in-11,000 attendees。
+          </p>
+          <p
+            className="font-mono text-mute/65 text-[10px] tracking-[0.25em] leading-relaxed mt-6 max-w-2xl"
+            style={{ textWrap: "pretty" }}
+          >
+            ⚓ 修改 positioning statement 需 30 天前{" "}
+            <Link
+              href="/changelog"
+              className="text-gold/85 hover:text-gold underline-offset-4 hover:underline"
+            >
+              /changelog
+            </Link>{" "}
+            公告 · per /audit S05 PRE-COMMIT clause · 同 brand IP「方法公開」 binding。
+          </p>
+        </section>
+
         {/* ── BACK ─────────────────────────────────── */}
         <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-24 text-center border-t border-line/40 pt-12">
           <div className="flex flex-wrap items-center justify-center gap-4">
