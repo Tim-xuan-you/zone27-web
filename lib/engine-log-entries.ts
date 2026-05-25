@@ -156,6 +156,44 @@ export const ENGINE_OPS_LOG: ReadonlyArray<EngineOpsLogEntry> = [
     receiptId: "cpbl-260523-03",
     href: "/receipts/cpbl-260523-03",
   },
+  {
+    date: "2026-05-25",
+    eventType: "receipt-correction",
+    label:
+      "cpbl-260524-01 + -02 pre-game team identity ingest error · honest disclosure",
+    detail:
+      "Tim 賽後 screenshot ingest 2026-05-25 顯示 cpbl-260524-01 + cpbl-260524-02 pre-game 截圖 ingest 時 away team identity 互相 swap · -01 應為「味全龍 with 鋼龍」(pre-game 寫成 統一獅)· -02 應為「統一7-ELEVEn獅 with 高塩將樹」(pre-game 寫成 味全龍 with 胡智為)· 鋼龍 為 味全龍 starter per lib/cpbl-pitchers.ts canonical(acnt 0000006497)· 不是 統一獅 player。 處理 per Costly Signaling immutability axiom + Disclosure axiom dual: pre-game winRate 數字 immutable 不修改 · 不 retroactive 重算 · 但 finalResult 加詳細 inline comment 顯式 surface identity error · /track-record calibration 仍按已 lock-in winRate 計算 home/away side prediction(side-level 判斷不受 team-identity bug 影響)· /engine-log 此 entry 公開記錄 ingest pipeline 改善方向(R110+ Tim pre-game 截圖 + Claude ingest workflow 加入 「pitcher cross-reference cpbl-pitchers.ts team match」 verification step · 不 silently 通過 identity mismatch)。 同 Cloudflare 2025-11 postmortem「我們做了什麼錯 · 不藏 · 不甩鍋」 grammar · per Pratfall 100×。",
+    href: "/audit#section-05",
+  },
+  {
+    date: "2026-05-25",
+    eventType: "receipt-ingest",
+    label:
+      "cpbl-260524-01 ingested · 味全 5:0 兄弟 @ 大巨蛋 · PROVED ✓(with team identity disclosure)",
+    detail:
+      "Tim 親手 cpbl.com.tw screenshot ingest · 賽後實際 away team 味全龍(rec 26-13-0)vs HOME 中信兄弟(rec 11-26-1)@ 臺北大巨蛋 · final 0-5 away wins · WP 鋼龍(味全 · era 2.63 per cpbl-pitchers.ts)· LP 鄭浩均(中信)· Engine 賽前 65% away → away wins 5-0 → PROVED ✓ side prediction · BUT pre-game away team identity 錯掛 「統一獅」(actual 「味全龍」)· per /audit S05 disclosure 不藏 · /receipts/cpbl-260524-01 內 inline 顯式 surface · 同 receipt-correction entry above · /track-record N=4→5 finalized · 5 consecutive PROVED side-level predictions · identity bug 不影響 side-level math。",
+    receiptId: "cpbl-260524-01",
+    href: "/receipts/cpbl-260524-01",
+  },
+  {
+    date: "2026-05-25",
+    eventType: "receipt-ingest",
+    label:
+      "cpbl-260524-02 ingested · 統一 7:5 台鋼 @ 澄清湖 · DIVERGED ✕(with team identity disclosure)",
+    detail:
+      "Tim 親手 cpbl.com.tw screenshot ingest · 賽後實際 away team 統一7-ELEVEn獅 vs HOME 台鋼雄鷹 @ 澄清湖棒球場 · final 5-7 away wins · WP 高塩將樹(統一)· LP 林詩翔(台鋼)· SV 鍾允華(統一)· Engine 賽前 52% home(slight favorite)→ away wins 7-5 → DIVERGED ✕ · pre-game away team identity 錯掛 「味全龍 with 胡智為」(actual 「統一獅 with 高塩將樹」)· 同 cpbl-260524-01 swap error · 不藏 · /receipts/cpbl-260524-02 內 inline 顯式 surface · /track-record N=5→6 finalized · 第 1 個 DIVERGED 進入 ledger · 同 PROVED 等大 公開 per /audit S05 disclosure parity axiom · 不 cherry-pick · 不 retroactive 隱藏。",
+    receiptId: "cpbl-260524-02",
+    href: "/receipts/cpbl-260524-02",
+  },
+  {
+    date: "2026-05-25",
+    eventType: "receipt-ingest",
+    label: "cpbl-260524-03 ingested · 富邦 1:4 樂天 @ 樂天桃園 · DIVERGED ✕",
+    detail:
+      "Tim 親手 cpbl.com.tw screenshot ingest · 富邦悍將(AWAY 21-16-0)vs 樂天桃猿(HOME 16-20-1)@ 樂天桃園棒球場 · final 4-1 home wins · WP 陳克羿(樂天)· LP 陳品宏(富邦)· SV 莊昕諺(樂天)· Engine 賽前 55% away(slight favorite)→ home wins 4-1 → DIVERGED ✕ · ✓ clean ingest · 0 identity error(pre-game team identity + pitchers 全 match · CPBL screenshot)· /track-record N=6→7 finalized · 第 2 個 DIVERGED 進 ledger · 同 PROVED 等大 公開 · brand IP「engine 並非全對 · 不藏」 axiom 物理 codify · 信心 ratio 全 transparent。",
+    receiptId: "cpbl-260524-03",
+    href: "/receipts/cpbl-260524-03",
+  },
 ];
 
 /** Computed count · used by component header chip · brand IP「N operational

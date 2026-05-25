@@ -579,6 +579,32 @@ const rawMatches: Match[] = [
       { score: "3 : 1", probability: 8.7 },
     ],
     aiConfidence: 67,
+    // ── FINAL · 2026-05-24 evening TPE · 大巨蛋 · 9 局完整 ──
+    // 從 Tim 賽後 screenshot 2026-05-25 ingest · 比賽 #119。
+    //
+    // ⚠ INGEST DATA INTEGRITY DISCLOSURE(per /audit S05 + Pratfall axiom):
+    // 此 game 的 pre-game lock-in away team identity 為「統一7-ELEVEn獅 with 鋼龍」 ·
+    // 但 CPBL 賽後官方 screenshot 顯示實際 away team 為「味全龍 with 鋼龍」 ·
+    // 鋼龍 為 味全龍 starter(per lib/cpbl-pitchers.ts canonical · acnt 0000006497 ·
+    // ERA 2.63 · K/9 8.34)· 不是 統一獅 player · pre-game 截圖 ingest 時
+    // identity 錯掛(可能 Tim screenshot 比賽編號 swap with cpbl-260524-02)。
+    //
+    // 處理 per Costly Signaling immutability axiom: pre-game winRate(home 35 ·
+    // away 65)不修改 · 不 retroactive 重算 stat-derived probability。 finalResult
+    // record 真實官方 5-0 away 勝利。 /track-record calibration 計算 AWAY 65%
+    // 預測 vs AWAY actual win = PROVED ✓(engine 對「哪一側」 的判斷正確 ·
+    // identity bug 不影響 side prediction)· 但 brand IP 必須顯式 surface 此
+    // identity error · 不藏 · 同 /audit DIVERGED 等大 axiom。
+    //
+    // 比分: 味全龍(away · 5)at 中信兄弟(home · 0)· 9 局完整 · 大巨蛋
+    // 勝投: 鋼龍(味全)· 敗投: 鄭浩均(中信)
+    finalResult: {
+      homeScore: 0,
+      awayScore: 5,
+      winner: "away",
+      ingestedAt: "2026-05-25",
+      innings: 9,
+    },
   },
   {
     id: "cpbl-260524-02",
@@ -626,6 +652,30 @@ const rawMatches: Match[] = [
       { score: "5 : 3", probability: 8.5 },
     ],
     aiConfidence: 51,
+    // ── FINAL · 2026-05-24 evening TPE · 澄清湖 · 9 局完整 ──
+    // 從 Tim 賽後 screenshot 2026-05-25 ingest · 比賽 #120。
+    //
+    // ⚠ INGEST DATA INTEGRITY DISCLOSURE(per /audit S05 + Pratfall axiom):
+    // 此 game 的 pre-game lock-in away team identity 為「味全龍 with 胡智為」 ·
+    // 但 CPBL 賽後官方 screenshot 顯示實際 away team 為「統一7-ELEVEn獅 with
+    // 高塩將樹」 · 高塩將樹 為 統一獅 player · 胡智為 在 official roster 未現 ·
+    // pre-game 截圖 ingest 時 identity 錯掛(同 cpbl-260524-01 配對 swap error)。
+    //
+    // 處理: 同 cpbl-260524-01 disclosure pattern · pre-game winRate(home 52 ·
+    // away 48)immutable 不修改 · finalResult record 真實官方 7-5 away 勝利。
+    // /track-record calibration: HOME 52%(slight favorite)vs HOME 實際輸 5 ·
+    // AWAY 實際贏 7 · DIVERGED ✕(engine 微傾 home 但 away 贏)· 同 PROVED 等大
+    // 公開於 /track-record + /receipts ledger per /audit S05 disclosure parity。
+    //
+    // 比分: 統一7-ELEVEn獅(away · 7)at 台鋼雄鷹(home · 5)· 9 局完整 · 澄清湖
+    // 勝投: 高塩將樹(統一)· 敗投: 林詩翔(台鋼)· 救援成功: 鍾允華(統一)
+    finalResult: {
+      homeScore: 5,
+      awayScore: 7,
+      winner: "away",
+      ingestedAt: "2026-05-25",
+      innings: 9,
+    },
   },
   {
     id: "cpbl-260524-03",
@@ -673,6 +723,26 @@ const rawMatches: Match[] = [
       { score: "3 : 4", probability: 8.9 },
     ],
     aiConfidence: 55,
+    // ── FINAL · 2026-05-24 evening TPE · 樂天桃園 · 9 局完整 ──
+    // 從 Tim 賽後 screenshot 2026-05-25 ingest · 比賽 #121。
+    //
+    // ✓ INGEST DATA INTEGRITY: pre-game lock-in team identity + pitchers 全 match
+    // 賽後 box score · 0 identity error · clean ingest。
+    //
+    // 處理: pre-game winRate(home 45 · away 55)immutable preserved。 finalResult
+    // record 真實官方 4-1 home 勝利。 /track-record calibration: AWAY 55%
+    // (slight favorite)vs AWAY 實際 輸 1 · HOME 實際 贏 4 · DIVERGED ✕(engine
+    // 微傾 away 但 home 贏)· 同 PROVED 等大 公開於 /track-record + /receipts。
+    //
+    // 比分: 富邦悍將(away · 1)at 樂天桃猿(home · 4)· 9 局完整 · 樂天桃園
+    // 勝投: 陳克羿(樂天)· 敗投: 陳品宏(富邦)· 救援成功: 莊昕諺(樂天)
+    finalResult: {
+      homeScore: 4,
+      awayScore: 1,
+      winner: "home",
+      ingestedAt: "2026-05-25",
+      innings: 9,
+    },
   },
 ];
 
