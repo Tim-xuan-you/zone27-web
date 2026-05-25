@@ -117,8 +117,16 @@ export default async function MatchDetailPage({
           for past matches in receipt mode or stale-archived state.
           Now phase-aware: shows ENGINE RECEIPT / LIVE AI MODEL /
           ARCHIVED based on actual phase. Heartbeat dot only animates
-          when phase is "live" or "today-pregame" (signals true live). */}
-      <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pt-10 pb-6">
+          when phase is "live" or "today-pregame" (signals true live).
+          R109 W4 · viewTransitionName match-{id} 配對 MiniMatchCard 跨頁
+          morph · 訪客從 /matches grid 點進 detail page · browser 自動
+          smooth 220ms morph card position → hero position(per R109 W1
+          @view-transition navigation: auto · cubic-bezier easing)·
+          老 browser 完全 ignore property · prefers-reduced-motion 必 respect。 */}
+      <section
+        style={{ viewTransitionName: `match-${m.id}` } as React.CSSProperties}
+        className="mx-auto max-w-5xl w-full px-6 sm:px-10 pt-10 pb-6"
+      >
         <div className="flex items-center gap-3 mb-8 flex-wrap">
           <span
             className={`w-1.5 h-1.5 rounded-full bg-gold ${
