@@ -118,6 +118,11 @@ const FOOTER_GROUPS: FooterGroup[] = [
       { label: "公開戰績", href: "/track-record" },
       { label: "Ethics Policy", href: "/ethics" },
       { label: "Steelman", href: "/steelman" },
+      // R109 W3 · Agent conversion audit finding · /integrity orphaned from
+      // primary footer · canonical 22 binding rules + 13 redlines + 9
+      // commitments page · 違反「方法公開」 axiom 把最 binding Pratfall
+      // artifact 藏在 Cmd-K · 加入 DOCS column 與其他 trust artifact 並列。
+      { label: "永遠不變 22 件事", href: "/integrity" },
     ],
   },
   {
