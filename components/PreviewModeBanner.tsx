@@ -62,10 +62,29 @@ export default function PreviewModeBanner() {
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setMounted(true);
+
+    // R113 W1 · URL deep link auto-apply · per Tim 2026-05-25 query「我要
+    // 怎麼分別登入?」 · 4 個 bookmarkable URL(/admin?tier=anonymous etc)·
+    // visitor 從 URL 直接進入該 tier preview · 不需先訪問 /admin → click。
+    // 同 Stripe Connect dashboard?env=test · Linear team switcher 模式。
+    // Security disclosure: client-side localStorage state · 必可 spoof(per
+    // Kerckhoffs' principle 「security through obscurity = bad design」)·
+    // 0 風險因為 0 paid features 已 ship · real defense = Supabase RLS + JWT
+    // 等 paid features ship 後再上 · 同 industry standard SaaS auth pattern。
     try {
-      const stored = localStorage.getItem(STORAGE_KEY);
-      if (stored && stored in TIER_LABELS) {
-        setTier(stored);
+      const url = new URL(window.location.href);
+      const tierParam = url.searchParams.get("tier");
+      if (tierParam && tierParam in TIER_LABELS) {
+        localStorage.setItem(STORAGE_KEY, tierParam);
+        setTier(tierParam);
+        // Clean URL · strip tier param 不留 navigation history · cleaner UX。
+        url.searchParams.delete("tier");
+        window.history.replaceState({}, "", url.toString());
+      } else {
+        const stored = localStorage.getItem(STORAGE_KEY);
+        if (stored && stored in TIER_LABELS) {
+          setTier(stored);
+        }
       }
     } catch {
       // localStorage blocked · 不擋 · 不顯示 banner

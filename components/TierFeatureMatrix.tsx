@@ -416,10 +416,104 @@ export default function TierFeatureMatrix() {
         </Link>
       </div>
 
+      {/* R113 W1 · 4 bookmarkable URL deep links · per Tim 2026-05-25「我要
+          怎麼分別登入?」 · 答案:不是 4 個 login account(per [[zone27-payment-
+          architecture]] manual ECPay · 沒 paid auth gate by design)· 而是 4
+          個 URL bookmarkable preview deep link · click 直接進入該 tier
+          preview · 同 Stripe Connect ?env=test / Linear team switcher pattern。 */}
+      <div className="mt-6 border border-gold/30 bg-navy/40 p-4 sm:p-5">
+        <div className="flex items-baseline justify-between gap-3 mb-3 flex-wrap">
+          <p
+            lang="en"
+            className="font-mono text-gold text-[10px] tracking-[0.35em]"
+          >
+            🔗 4 BOOKMARKABLE TIER PREVIEW DEEP LINKS
+          </p>
+          <p className="font-mono text-mute/70 text-[9px] tracking-[0.25em]">
+            click → instant tier preview · 不需先 navigate
+          </p>
+        </div>
+        <p className="text-mute text-[12px] leading-relaxed mb-4">
+          Bookmark 4 個 URL · 替代「4 個 login account」 mental model。
+          Click 任一 → URL param 自動 set localStorage + 啟動 PreviewModeBanner ·
+          無需先訪問 /admin。 適合 dogfood 切換體驗。
+        </p>
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+          {TIER_ORDER.map((tierKey) => {
+            const meta = TIER_META[tierKey];
+            return (
+              <Link
+                key={tierKey}
+                href={`/admin?tier=${tierKey}`}
+                className="border border-line/60 bg-slate/40 hover:border-gold/60 hover:bg-slate/60 p-2 sm:p-3 transition-colors group text-left"
+              >
+                <p
+                  lang="en"
+                  className={`font-mono text-[9px] tracking-[0.25em] mb-1 ${meta.accent}`}
+                >
+                  {meta.en}
+                </p>
+                <p className="text-bone group-hover:text-gold text-[11px] font-light leading-tight mb-1 transition-colors">
+                  {meta.label}
+                </p>
+                <p className="font-mono text-mute/70 text-[9px] tabular tracking-tight">
+                  ?tier={tierKey}
+                </p>
+              </Link>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* R113 W1 · security model honest disclosure · per Tim 2026-05-25
+          「怎樣才不會被駭客或者懂程式的人也這樣破解?」 · per Disclosure +
+          Pratfall axiom 顯式 surface 為什麼 preview 可 spoof 但 0 風險 ·
+          同 Kerckhoffs' principle「security through obscurity = bad design」
+          + Anthropic model card「我們 know our limits」 pattern。 */}
+      <div className="mt-6 border border-loss/30 bg-loss/5 p-4 sm:p-5">
+        <p
+          lang="en"
+          className="font-mono text-loss/90 text-[10px] tracking-[0.35em] mb-3"
+        >
+          🛡 SECURITY MODEL · 為什麼 preview 可 spoof 但 0 風險
+        </p>
+        <p className="text-mute text-[12px] leading-relaxed mb-3">
+          <strong className="text-bone">Honest disclosure</strong>:
+          tier preview 是 client-side localStorage state · 工程師 1 分鐘
+          DevTools 即可 spoof(設{" "}
+          <code className="font-mono text-bone bg-navy/60 px-1 py-0.5 text-[11px]">
+            zone27_preview_tier = founders27
+          </code>{" "}
+          )。 任何 client-side state 都會 spoof · 同 Stripe Connect ?env=test ·
+          同 Linear dev banner · 不是 bug 是 dev/QA designer tool。
+        </p>
+        <p className="text-mute text-[12px] leading-relaxed mb-3">
+          <strong className="text-bone">為什麼 0 風險</strong>:
+          ZONE 27 目前 0 paid features have been built · 「BLACK CARD 月 voting」 ·
+          「Tim 工程筆記 full」 · 「創作者抽成」 全沒 ship · spoof preview 後
+          看到的只是 visual UI mockup · 沒實際 paid functionality 可以「unlock」 ·
+          per `/integrity` rule #13 + `[[zone27-payment-architecture]]` manual
+          ECPay flow · 沒 paid auth gate by design。 連 Founders 27 編號 #001-#270
+          都是 Tim 親手 add ledger · spoof preview 不會 add 您名字到 ledger。
+        </p>
+        <p className="text-mute text-[12px] leading-relaxed">
+          <strong className="text-bone">未來 real defense</strong>:
+          當 paid features 真實 ship(R200+ Founders 27 launch · BLACK CARD
+          recurring)· real gate 由{" "}
+          <span className="text-bone">Supabase RLS(Row-Level Security)</span>
+          {" + "}
+          <span className="text-bone">JWT signed claims</span> 提供 · 同 industry
+          standard SaaS auth pattern · hacker 無法 spoof 因為 Supabase secret key
+          沒人知道(包括 Tim)· 不靠 client-side obscurity · per Kerckhoffs&apos;
+          principle 「security through obscurity = bad design」。
+        </p>
+      </div>
+
       <p className="mt-5 font-mono text-mute/70 text-[10px] tracking-[0.25em] leading-relaxed">
         ⚓ 此 matrix 是「方法公開」 延伸到 tier-comparison layer · 不藏哪個
-        feature 在哪個 tier · 不靠 dark pattern · 顯式 surface unlock path。
-        每個 ✓ UNLOCKED + 🔒 LOCKED + — N/A 都是 brand IP statement。
+        feature 在哪個 tier · 不靠 dark pattern · 顯式 surface unlock path +
+        security model · 每個 ✓ UNLOCKED + 🔒 LOCKED + — N/A + spoofable
+        preview 都是 brand IP statement。
       </p>
     </div>
   );
