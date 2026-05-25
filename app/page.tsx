@@ -111,6 +111,15 @@ export default function Home() {
   const useMultiMatch = todayMatches.length >= 2;
   const featuredMatch = useMultiMatch ? null : getFeaturedMatch();
   const trackRecord = useMultiMatch ? getTrackRecordStats() : null;
+  // R115 W3 · per Tim 2026-05-25 dogfood「一般使用者一進來,從來沒來過的人,
+  // 也能看到有人分享、推薦賽事?」 social proof gap · agent research synthesize
+  // (Defector annual report + Plausible 3-stat row + Berkshire letters archive
+  // + Patek Generations + patio11 archive + Pinboard operator quote + Apple
+  // 「Designed in California」 signature pattern)· brand-IP-pure social proof
+  // = engine track record ledger · NOT testimonial / NOT live FOMO / NOT
+  // 「X 人在看」 · 「0 hidden」 is the killer line per agent unique-opportunity
+  // (competitors structurally 無法 match · 因為他們業務 model 需要藏 misses)。
+  const heroTrackRecord = getTrackRecordStats();
 
   return (
     <div className="flex flex-col flex-1 min-h-screen">
@@ -174,6 +183,34 @@ export default function Home() {
             <span className="text-gold/70 ml-2">→</span>
           </Link>
         </p>
+
+        {/* R115 W3 · brand-IP-pure social proof line · per agent research
+            unique opportunity「0 hidden」 = engine PROVED + DIVERGED + 0 hidden
+            · 同 Plausible「260B pageviews · 18k subs · 99.99% uptime」 static
+            3-stat row pattern · NOT live ticker · NOT FOMO counter · 「0 hidden」
+            是 unfakeable costly signal · 競爭者(玩運彩 / 報馬仔)結構性無法
+            match 因為他們業務 model 需要藏 misses · Pratfall + Costly Signaling
+            + Disclosure axiom 三 fire 同時 · 8 chars 數字 compressed brand IP。 */}
+        {heroTrackRecord.total > 0 && (
+          <p className="mt-4 sm:mt-5">
+            <Link
+              href="/track-record"
+              className="inline-flex items-baseline gap-2 font-mono text-mute/85 hover:text-gold text-[10px] sm:text-[11px] tracking-[0.25em] tabular transition-colors"
+              aria-label={`引擎 track record · ${heroTrackRecord.proved} PROVED · ${heroTrackRecord.diverged} DIVERGED · 0 hidden · 查看 /track-record 完整 ledger`}
+            >
+              <span className="text-gold/80">↘ TRACK RECORD</span>
+              <span className="text-gold">{heroTrackRecord.proved}</span>
+              <span className="text-mute/60">PROVED</span>
+              <span className="text-mute/40">·</span>
+              <span className="text-loss/80">{heroTrackRecord.diverged}</span>
+              <span className="text-mute/60">DIVERGED</span>
+              <span className="text-mute/40">·</span>
+              <span className="text-gold">0</span>
+              <span className="text-mute/60">hidden</span>
+              <span className="text-gold/70 ml-1">→</span>
+            </Link>
+          </p>
+        )}
 
         <p className="mt-4 sm:mt-5">
           <a
