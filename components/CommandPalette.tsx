@@ -11,16 +11,19 @@ import {
 
 // ── ZONE 27 · Command Palette ──────────────────────────
 // Premium-tier navigation primitive. Cmd-K / Ctrl-K opens a
-// modal with all 54 visitor-discoverable routes searchable in one place.
+// modal with hand-curated visitor-discoverable routes searchable in one place.
 // Arrow keys navigate · Enter opens · Esc closes.
 // (/admin · noindex Tim-ops preview · intentionally NOT indexed here.)
-// R68 W-A added /founders/apply (Patek-style application) · 41→42 routes。
+// R68 W-A added /founders/apply (Patek-style application)。
 // R69 W-A+W-B added /founders/first-five-minutes (onboarding) +
-//   /founders/from-one-current-founder (Substack empty scaffold) · 42→44 routes。
+//   /founders/from-one-current-founder (Substack empty scaffold)。
+// R95 W2 · Hick's Law compression · COMMAND_ITEMS.length 為 canonical source
+//   (currently 35 hand-curated entries · secondary routes accessed via
+//   /transparency aggregator + Footer + parent-page cross-links)。
 //
 // Design principles (per [[zone27-disclosure-philosophy]]):
 //   - No external deps (no cmdk · no fuse.js · no telemetry)
-//   - Plain substring filter on hand-curated 44-row list
+//   - Plain substring filter on COMMAND_ITEMS array(canonical count)
 //   - No recently-used / personalization (would require tracking)
 //   - No hidden ranking · alphabetical-within-group · group-order
 //     is editorial (entry → engine → brand → trust → tools)

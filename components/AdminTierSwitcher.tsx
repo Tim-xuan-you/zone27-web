@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 // 4 tier(對齊 /membership 4-tier ladder):
 //   - anonymous · 匿名訪客 · 未登入
 //   - free · FREE TIER · 已登入 · 終身免費
-//   - black-card · BLACK CARD · NT$ 299/月 訂閱
+//   - black-card · BLACK CARD · NT$ 1,500/season(每季手動 ECPay · 0 auto-renewal per rule #13)
 //   - founders27 · Founders 27 · NT$ 2,700 終身
 //
 // localStorage-based · 跟 PreviewModeBanner 共享 zone27_preview_tier key。
@@ -38,8 +38,8 @@ const TIERS: { value: string; label: string; body: string; price: string }[] = [
   {
     value: "black-card",
     label: "BLACK CARD",
-    body: "訂閱 · 6 unlocks(Engine + Lens + 討論 + 抽成 + voting + 筆記)",
-    price: "NT$ 299/月",
+    body: "每季手動 ECPay · 6 unlocks(Engine + Lens + 討論 + 抽成 + voting + 筆記)· 0 auto-renewal",
+    price: "NT$ 1,500/season",
   },
   {
     value: "founders27",

@@ -3,8 +3,8 @@ import { BRAND, OG_SIZE, OG_CONTENT_TYPE } from "@/lib/brand";
 
 // ── ZONE 27 · /ethics Dynamic OG ─────────────────────────
 // Round 44 W-A · Agent K-discovered OG-card gap fix · R41 W-D shipped
-// /ethics 8 binding commitments without OG card · per
-// [[zone27-disclosure-philosophy]] OG cards = private-DM lever。
+// /ethics initially 8 binding commitments without OG card(R80 加 #09 →
+// 現 9 binding)· per [[zone27-disclosure-philosophy]] OG cards = private-DM lever。
 //
 // /ethics 是 Stratechery About transplant · 9 binding NOT-DO commitments(R80
 // 加 #09 mandatory-ledger discipline)· 玩運彩+報馬仔 violate 7/9 · ship 等於

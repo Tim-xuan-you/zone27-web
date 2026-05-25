@@ -364,7 +364,7 @@ export default function SteelmanPage() {
               href="/ethics"
               className="inline-block px-6 py-3 border border-gold/50 text-gold font-mono text-[10px] tracking-[0.3em] hover:bg-gold/10 transition-colors"
             >
-              → /ethics 8 binding commitments
+              → /ethics 9 binding commitments
             </Link>
             <Link
               href="/audit"

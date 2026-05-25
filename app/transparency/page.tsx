@@ -318,7 +318,7 @@ export default function TransparencyPage() {
             <Commit n="09" title="0 cherry-pick · 每筆 CPBL engine prediction → mandatory /track-record + /receipts permalink · 0 retroactive delete(R80 加)" />
           </CommitGrid>
           <p className="text-mute/85 mt-6">
-            完整 8 commitments + per-item violation receipt mechanism · 見{" "}
+            完整 9 commitments + per-item violation receipt mechanism · 見{" "}
             <Link href="/ethics" className="text-gold underline-offset-4 hover:underline">
               /ethics
             </Link>

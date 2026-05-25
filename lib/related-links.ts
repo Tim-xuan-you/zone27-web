@@ -76,7 +76,7 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
   ],
   // Round 52 W-A · Agent 3 #7 fix · /terms ORPHAN · 之前 RelatedReading
   // 完全沒 entry · 每個 trust artifact 都有 3-link spokes 但 /terms 沒。
-  // Siblings:/ethics(8 binding NOT-DO · 法律 + ethics 軸線通)· /privacy
+  // Siblings:/ethics(9 binding NOT-DO · 法律 + ethics 軸線通 · R80 加 #09)· /privacy
   // (0 tracking · TOS + Privacy 標準成對)· /coverage(NEVER list · TOS
   // scope statement 同邏輯)。
   "/terms": [

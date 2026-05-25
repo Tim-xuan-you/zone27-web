@@ -44,7 +44,7 @@ const STORAGE_KEY = "zone27_preview_tier";
 const TIERS: { value: string; label: string; price: string }[] = [
   { value: "anonymous", label: "匿名訪客", price: "NT$ 0" },
   { value: "free", label: "FREE", price: "NT$ 0" },
-  { value: "black-card", label: "BLACK", price: "NT$ 299/月" },
+  { value: "black-card", label: "BLACK", price: "NT$ 1,500/season" },
   { value: "founders27", label: "FOUNDERS", price: "NT$ 2,700" },
 ];
 
