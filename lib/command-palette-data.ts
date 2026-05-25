@@ -306,6 +306,39 @@ export const COMMAND_ITEMS: CommandItem[] = [
     ],
   },
   {
+    // R120 W5 · /engine-log direct Cmd-K entry · 之前 only via /transparency
+    // aggregator 2-click path · R120 W3 加 LIVE STATE 8-cell Plausible numeric
+    // dashboard 後 /engine-log 升 top-tier brand IP signal · 1-click 直達 better
+    // 配合 Tim「讓網站熱銷」 mandate · 37/36 entries marginal Hick's Law cost。
+    label: "Engine Log · operational artifact + LIVE STATE numeric dashboard",
+    kicker: "/engine-log",
+    path: "/engine-log",
+    group: "信任文件",
+    keywords: [
+      "engine log",
+      "engine-log",
+      "ops",
+      "operational",
+      "status",
+      "live state",
+      "live status",
+      "dashboard",
+      "stripe status",
+      "cloudflare postmortem",
+      "tailscale",
+      "plausible",
+      "berkshire",
+      "summary",
+      "numeric",
+      "stats",
+      "現況",
+      "狀態",
+      "引擎運轉",
+      "operations",
+      "uptime",
+    ],
+  },
+  {
     label: "Model Report · 引擎範圍 + 揭露哲學",
     kicker: "/audit",
     path: "/audit",

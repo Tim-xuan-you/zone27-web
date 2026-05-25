@@ -208,8 +208,10 @@ export default function EngineLogPage() {
             real-time uptime · NOT availability SLA · 純 publicly-derivable
             counts(matches.ts + founders-stats.ts + git log + build env)·
             每個數字 visitor 可 git-clone repo 自己 verify · brand IP「方法公開」
-            從 narrative 升 numeric。 ─────────────────────────────── */}
-        <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-12">
+            從 narrative 升 numeric。 R120 W5 · id="live-state" anchor 加 ·
+            enable hash-link from Cmd-K + /receipts cross-link → numeric
+            dashboard directly。 ─────────────────────────────── */}
+        <section id="live-state" className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-12 scroll-mt-8">
           <div className="flex items-baseline gap-3 mb-6 flex-wrap">
             <p
               lang="en"
