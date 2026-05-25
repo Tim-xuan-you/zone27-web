@@ -127,73 +127,14 @@ export default function TrackRecordPage() {
           <span className="text-bone">PROVED ✓ 跟 DIVERGED ✕ 等大等亮列出</span>,
           不藏、不修飾、不重新加權。
         </p>
-        {/* R115 W4 · Plausible static 3-stat row · per agent research synthesize
-            「brand-IP-pure social proof」 pattern 第 1 ship · 同 Plausible
-            「260B pageviews · 18k subs · 99.99% uptime」 static aggregate ·
-            NOT live ticker NOT FOMO · 4 stats horizontal: 已 finalized · PROVED
-            · DIVERGED · 0 hidden(unfakeable costly signal · per agent unique
-            opportunity · 競爭者結構性無法 match)。 only render when N > 0 ·
-            empty state(N=0)skips · per Pratfall「沒有」 honest framing。 */}
-        {finalized.length > 0 && (
-          <div className="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 max-w-3xl border border-gold/30 bg-slate/20 p-4 sm:p-5">
-            <div>
-              <p
-                lang="en"
-                className="font-mono text-mute/70 text-[9px] tracking-[0.3em] mb-1"
-              >
-                FINALIZED
-              </p>
-              <p className="font-mono text-bone tabular text-xl sm:text-2xl font-light">
-                {finalized.length}
-              </p>
-              <p className="font-mono text-mute/60 text-[9px] tracking-[0.2em] mt-0.5">
-                receipt{finalized.length === 1 ? "" : "s"}
-              </p>
-            </div>
-            <div>
-              <p
-                lang="en"
-                className="font-mono text-gold/80 text-[9px] tracking-[0.3em] mb-1"
-              >
-                ✓ PROVED
-              </p>
-              <p className="font-mono text-gold tabular text-xl sm:text-2xl font-light">
-                {proved}
-              </p>
-              <p className="font-mono text-mute/60 text-[9px] tracking-[0.2em] mt-0.5">
-                引擎言中
-              </p>
-            </div>
-            <div>
-              <p
-                lang="en"
-                className="font-mono text-loss/85 text-[9px] tracking-[0.3em] mb-1"
-              >
-                ✕ DIVERGED
-              </p>
-              <p className="font-mono text-loss tabular text-xl sm:text-2xl font-light">
-                {diverged}
-              </p>
-              <p className="font-mono text-mute/60 text-[9px] tracking-[0.2em] mt-0.5">
-                引擎落空 · 不藏
-              </p>
-            </div>
-            <div>
-              <p
-                lang="en"
-                className="font-mono text-gold/80 text-[9px] tracking-[0.3em] mb-1"
-              >
-                0 HIDDEN
-              </p>
-              <p className="font-mono text-gold tabular text-xl sm:text-2xl font-light">
-                100<span className="text-xs ml-0.5">%</span>
-              </p>
-              <p className="font-mono text-mute/60 text-[9px] tracking-[0.2em] mt-0.5">
-                disclosure
-              </p>
-            </div>
-          </div>
-        )}
+        {/* R117 W2 · R115 W4 4-stat row REMOVED · per Apple/Stripe minimalism
+            audit · 與 HEADLINE STATS section(line 282-310 下方)4 cells 內容
+            完全 duplicate(TOTAL · PROVED · DIVERGED · PROVED RATE 對 FINALIZED
+            · PROVED · DIVERGED · 0 HIDDEN)· 違反 Tim「都是字 · 不必要的資訊」
+            mandate · 違反 [[feedback-zone27-homepage-minimalism]] axiom · 改在
+            HEADLINE STATS 加 「0 HIDDEN · 100% DISCLOSURE」 unique signal cell
+            (per R115 agent unique-opportunity insight)· consolidated · 不
+            duplicate · 0 hidden signal 仍 visible · 並 keep statistical caveat。 */}
 
         {/* Round 51 W-B · Agent 3 missing cross-link #2 fix · 匿名訪客
             在 /track-record 看到 binary PROVED / DIVERGED · 不知道 reliability
@@ -279,9 +220,11 @@ export default function TrackRecordPage() {
         </section>
       )}
 
-      {/* ── HEADLINE STATS ───────────────────────── */}
+      {/* ── HEADLINE STATS · R117 W2 · 5-cell expanded with「0 HIDDEN」
+          unique signal per R115 agent research · 競爭者結構性無法 match ·
+          PROVED/DIVERGED + RATE + 0 HIDDEN 同 row · consolidated above-fold ── */}
       <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-16">
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 bg-slate/40 border border-line/70 p-6 sm:p-8">
+        <div className="grid grid-cols-2 sm:grid-cols-5 gap-4 sm:gap-6 bg-slate/40 border border-line/70 p-6 sm:p-8">
           <LedgerStat label="TOTAL · 已收錄" value={String(finalized.length)} />
           <LedgerStat
             label="PROVED · 引擎言中"
@@ -294,7 +237,7 @@ export default function TrackRecordPage() {
             tone="loss"
           />
           <LedgerStat
-            label="PROVED RATE · 言中比例"
+            label="PROVED RATE · 言中"
             value={provedPct === null ? "—" : `${provedPct}%`}
             small={provedPct === null}
             tone={
@@ -306,6 +249,15 @@ export default function TrackRecordPage() {
                 ? "bone"
                 : "loss"
             }
+          />
+          {/* R117 W2 · 「0 HIDDEN」 unique-opportunity cell per R115 agent
+              research · 競爭者(玩運彩 + 報馬仔 + LINE 老師)結構性無法 match
+              · 因為他們業務 model 需要藏 misses · Pratfall + Costly Signaling
+              + Disclosure 三 axiom · 8 chars 數字 compressed brand IP。 */}
+          <LedgerStat
+            label="0 HIDDEN · 不藏"
+            value="100%"
+            tone="gold"
           />
         </div>
         <p className="mt-4 font-mono text-mute/70 text-[10px] tracking-[0.25em] leading-relaxed">
