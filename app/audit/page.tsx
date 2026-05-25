@@ -189,6 +189,26 @@ export default function AuditPage() {
               )。 Section 05 DISCLOSURE PHILOSOPHY 解釋為什麼 publish 這些 ·
               GitHub source 公開全模型 · 不留 secret。
             </p>
+            {/* R129 W1 · DELTA-of-CPBL positioning cross-link · per R126 NEW
+                [[feedback-zone27-delta-of-cpbl-positioning]] memory SOP「DO
+                surface this positioning on /audit + /heritage as canonical」 ·
+                /heritage 已 R127 W2 surface 完整 section · /audit 補 inline
+                cross-link · 不改 8-fact disclosure 結構(避免 count drift in
+                FromOneSolo:108 + NonComparableAnchor:147 兩處 8-fact reference)
+                · 純 closing-line 1-sentence link · multi-surface placement =
+                brand IP consistency。 */}
+            <p className="mt-2 text-mute/65 text-[11px] leading-relaxed">
+              ⚓ POSITIONING · ZONE 27 = first-mover「DELTA of CPBL」 17-year
+              empty Asian baseball analytics slot · 完整 reasoning + DELTA Japan
+              14-yr precedent + Rebas TW 對標 + CPBL 2025 TAM math 見{" "}
+              <Link
+                href="/heritage#asian-baseball-analytics-positioning"
+                className="text-gold/80 hover:text-gold underline-offset-4 hover:underline"
+              >
+                /heritage
+              </Link>{" "}
+              · 同 axis multi-surface placement。
+            </p>
           </aside>
 
           {/* ── 01 MODEL DESCRIPTION ────────────────── */}

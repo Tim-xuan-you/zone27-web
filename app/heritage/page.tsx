@@ -180,8 +180,14 @@ export default function HeritagePage() {
             disclosure + scarcity in combined 17+ years · ZONE 27 asymmetric
             weapon。 R126 TW market agent web-research verified · sources cited
             inline。 brand IP 守:不違反 [[feedback-zone27-one-way-by-design]]
-            (cite peers · NOT social community)+ /audit S05 PRE-COMMIT clause。 */}
-        <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-12 pt-12 border-t border-line/40">
+            (cite peers · NOT social community)+ /audit S05 PRE-COMMIT clause。
+            R129 W1 · id="asian-baseball-analytics-positioning" anchor 加 ·
+            enable /audit DISCLOSURE block closing-line cross-link 直接 jump · 同
+            /engine-log#live-state hash anchor pattern。 */}
+        <section
+          id="asian-baseball-analytics-positioning"
+          className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-12 pt-12 border-t border-line/40 scroll-mt-8"
+        >
           <p
             lang="en"
             className="font-mono text-gold text-[10px] tracking-[0.4em] mb-6"
