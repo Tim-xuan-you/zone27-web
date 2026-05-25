@@ -13,6 +13,26 @@ import {
   type EngineOpsLogEntry,
   type EngineOpsEventType,
 } from "@/lib/engine-log-entries";
+// R120 W3 · Plausible plausible.io/plausible.io LIVE STATE pattern · per Agent A
+// R120 highest-pick · Costly Signal Spence 1973 · publish numbers visitors can
+// verify against external sources(git log · matches.ts · founders-stats.ts)。
+import {
+  getTodayMatches,
+  getTrackRecordStats,
+} from "@/lib/matches";
+import {
+  FOUNDERS_CLAIMED,
+  FOUNDERS_TOTAL,
+} from "@/lib/founders-stats";
+import {
+  LAST_SHIPPED_DATE_ISO,
+  getDaysSinceLastShipped,
+} from "@/lib/last-shipped";
+import {
+  COMMIT_SHA,
+  COMMIT_PERMALINK,
+  DEPLOYED_AT,
+} from "@/lib/build-meta";
 
 export const metadata: Metadata = {
   title: "/engine-log · Engine Operations Log · operational artifact spine",
@@ -77,7 +97,10 @@ export const metadata: Metadata = {
 //   ✕ NO blame / point-fingers grammar(Tim solo · errors are Tim errors)
 // ─────────────────────────────────────────────────────
 
-export const revalidate = 86400; // daily revalidate
+// R120 W3 · revalidate 86400 → 600 · LIVE STATE section depends on
+// getTodayMatches() which is timezone-sensitive(Asia/Taipei midnight rollover)·
+// 10-minute ISR keeps「TODAY · N 場」 accurate · 同 homepage + /matches cadence。
+export const revalidate = 600;
 
 const EVENT_TYPE_LABEL: Record<EngineOpsEventType, string> = {
   "engine-launch": "ENGINE LAUNCH",
@@ -105,6 +128,11 @@ export default function EngineLogPage() {
   // Cloudflare + Tailscale all newest-first)。 Lib stays ASCENDING canonical
   // append-only · render layer reverses。
   const entriesNewestFirst = [...ENGINE_OPS_LOG].reverse();
+  // R120 W3 · LIVE STATE derived state · 全 sources public · 0 internal metric ·
+  // 0 telemetry · server-rendered · 600s ISR · 同 Plausible/Berkshire pattern。
+  const todayMatches = getTodayMatches();
+  const stats = getTrackRecordStats();
+  const daysSinceShipped = getDaysSinceLastShipped();
 
   return (
     <div className="flex flex-col flex-1 min-h-screen">
@@ -171,6 +199,90 @@ export default function EngineLogPage() {
         </section>
 
         <div className="mx-auto w-32 gold-line mb-12" />
+
+        {/* ── LIVE STATE · R120 W3 · Agent A R120 highest-pick · Plausible
+            plausible.io/plausible.io public-self-dashboard pattern · per Spence
+            1973 Costly Signaling · 同 Berkshire 60-year letters summary-table
+            top-of-page tradition · 不違反 /engine-log「NO live uptime monitor」
+            anti-pattern 因 此 grid 為 server-rendered ISR-static · NOT
+            real-time uptime · NOT availability SLA · 純 publicly-derivable
+            counts(matches.ts + founders-stats.ts + git log + build env)·
+            每個數字 visitor 可 git-clone repo 自己 verify · brand IP「方法公開」
+            從 narrative 升 numeric。 ─────────────────────────────── */}
+        <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-12">
+          <div className="flex items-baseline gap-3 mb-6 flex-wrap">
+            <p
+              lang="en"
+              className="font-mono text-gold text-[10px] tracking-[0.4em]"
+            >
+              / LIVE STATE · 600s ISR · 0 telemetry
+            </p>
+            <p
+              lang="en"
+              className="font-mono text-mute/70 text-[9px] tracking-[0.3em] tabular"
+            >
+              EVERY METRIC DERIVABLE FROM PUBLIC DATA
+            </p>
+          </div>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+            <StateCell
+              label="TODAY"
+              value={`${todayMatches.length}`}
+              sub={todayMatches.length === 0 ? "今日無 CPBL" : "場 CPBL"}
+            />
+            <StateCell
+              label="FINALIZED"
+              value={`${stats.total}`}
+              sub="場 進 ledger"
+            />
+            <StateCell
+              label="✓ PROVED"
+              value={`${stats.proved}`}
+              accent="gold"
+              sub="side 預測中"
+            />
+            <StateCell
+              label="✕ DIVERGED"
+              value={`${stats.diverged}`}
+              accent="loss"
+              sub="side 預測未中"
+            />
+            <StateCell
+              label="0 HIDDEN"
+              value="0"
+              accent="gold"
+              sub="100% published"
+            />
+            <StateCell
+              label="FOUNDERS"
+              value={`${FOUNDERS_CLAIMED}/${FOUNDERS_TOTAL}`}
+              sub={`${FOUNDERS_TOTAL - FOUNDERS_CLAIMED} 席 永不再開`}
+            />
+            <StateCell
+              label="LAST SHIPPED"
+              value={LAST_SHIPPED_DATE_ISO}
+              sub={
+                daysSinceShipped === 0
+                  ? "今天"
+                  : daysSinceShipped === 1
+                  ? "1 天前"
+                  : `${daysSinceShipped} 天前`
+              }
+            />
+            <StateCell
+              label="BUILD"
+              value={COMMIT_SHA}
+              sub={DEPLOYED_AT}
+              href={COMMIT_PERMALINK}
+            />
+          </div>
+          <p className="mt-6 font-mono text-mute/70 text-[10px] tracking-[0.25em] leading-relaxed">
+            ⚓ Plausible「plausible.io/plausible.io」 + Berkshire summary table
+            pattern · 每個 cell value 直接 derive 自 public source · git clone
+            zone27-web 自己 reproduce · 無內部 metric · 無 ad tracker · 無 user
+            telemetry · per /audit S05 PRE-COMMIT clause 同 axis。
+          </p>
+        </section>
 
         {/* ── LOG ENTRIES · newest-first ──────────── */}
         <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-12">
@@ -317,6 +429,72 @@ export default function EngineLogPage() {
 }
 
 // ── Sub-components ─────────────────────────────────────
+
+// R120 W3 · LIVE STATE numeric cell · brand-pure dark-navy + cold-gold + bone
+// · 4-row vertical typography(label · value · sub)· optional href for BUILD
+// linking to GitHub commit · 0 deps · 0 JS · 0 client-side。
+function StateCell({
+  label,
+  value,
+  sub,
+  accent = "default",
+  href,
+}: {
+  label: string;
+  value: string;
+  sub?: string;
+  /** Visual emphasis · "gold" for positive signals · "loss" for honest negatives */
+  accent?: "default" | "gold" | "loss";
+  /** Optional external link · used for BUILD SHA → GitHub commit */
+  href?: string;
+}) {
+  const valueColor =
+    accent === "gold"
+      ? "text-gold"
+      : accent === "loss"
+      ? "text-loss/85"
+      : "text-bone";
+  const borderColor =
+    accent === "gold"
+      ? "border-gold/40"
+      : accent === "loss"
+      ? "border-loss/40"
+      : "border-line/50";
+
+  const inner = (
+    <div className={`border ${borderColor} bg-slate/30 p-3 sm:p-4 h-full`}>
+      <p
+        lang="en"
+        className="font-mono text-mute/70 text-[9px] tracking-[0.3em] mb-1.5"
+      >
+        {label}
+      </p>
+      <p className={`font-mono ${valueColor} text-xl sm:text-2xl tabular leading-none`}>
+        {value}
+      </p>
+      {sub && (
+        <p className="font-mono text-mute/70 text-[9px] tracking-[0.2em] mt-1.5 tabular">
+          {sub}
+        </p>
+      )}
+    </div>
+  );
+
+  if (href) {
+    return (
+      <a
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="block hover:opacity-90 transition-opacity"
+        aria-label={`${label} · ${value} · ${sub ?? ""} · 開 GitHub`}
+      >
+        {inner}
+      </a>
+    );
+  }
+  return inner;
+}
 
 function LogEntry({ entry }: { entry: EngineOpsLogEntry }) {
   const typeColor = EVENT_TYPE_COLOR[entry.eventType];

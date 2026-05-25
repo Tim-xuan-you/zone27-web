@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { useId } from "react";
 import { getStatDefinition } from "@/lib/stat-definitions";
 
 // ── ZONE 27 · StatTerm tooltip ──────────────────────────
@@ -17,15 +18,21 @@ import { getStatDefinition } from "@/lib/stat-definitions";
 // Accessibility:
 //   - Term has role="button" + tabIndex=0 so it's reachable via keyboard
 //   - aria-describedby connects term to definition card
-//   - Tooltip uses CSS group-hover + group-focus-within for reveal
+//   - Tooltip uses CSS group-hover + group-focus-within for reveal(keyboard
+//     focus 觸發 :focus-within on outer .group · 不需要 Space/Enter handler
+//     因 focus IS the reveal action · per WCAG 2.1 SC 2.4.7 focus visible)
 //   - prefers-reduced-motion: transitions still happen (no movement,
 //     just opacity), so users see the same affordance
 //
-// Server-component friendly: no useState, no useEffect — pure JSX +
+// Server-component friendly: useId() works in RSC + client components ·
 // Tailwind classes for the reveal logic.
+//
+// R120 W2 · Agent B R120 audit HIGH 1 fix · 之前 `let tooltipIdCounter = 0`
+// module-level mutable counter · 在 SSR concurrent render OR multiple
+// StatTerm 同 page 可能 ID collision · 改用 React 18+ useId() canonical hook ·
+// auto-collision-free per React semantics · 同 anchor-name custom-ident sanitize
+// (useId returns `:r0:` 含 colons · CSS custom-ident 不允許 colons · 改 :→_)。
 // ─────────────────────────────────────────────────────
-
-let tooltipIdCounter = 0;
 
 export default function StatTerm({
   term,
@@ -38,6 +45,9 @@ export default function StatTerm({
   children?: React.ReactNode;
 }) {
   const def = getStatDefinition(term);
+  // useId() called BEFORE conditional return per Rules of Hooks · graceful
+  // degradation path still hits the hook · 0 perf impact since hook is cheap。
+  const reactId = useId();
 
   // Graceful degradation — if the term isn't in our dictionary,
   // just render its text unwrapped (no broken tooltip).
@@ -45,11 +55,14 @@ export default function StatTerm({
     return <>{children ?? term}</>;
   }
 
-  const instanceId = ++tooltipIdCounter;
-  const tooltipId = `stat-tooltip-${def.slug}-${instanceId}`;
+  // useId returns `:r0:` 含 colons · HTML id allow colons · BUT CSS
+  // custom-ident(anchor-name)disallow colons · sanitize to `_` 統一。
+  const safeId = reactId.replace(/:/g, "_");
+  const tooltipId = `stat-tooltip-${def.slug}-${safeId}`;
   // R109 W2 · Unique anchor-name per StatTerm instance · multiple StatTerm 同
   // page 不衝突(CSS spec「最後 tree-order anchor wins if shared name」 解決)。
-  const anchorName = `--stat-anchor-${def.slug}-${instanceId}`;
+  // R120 W2 · useId-derived 取代 module-level mutable counter · auto-collision-free。
+  const anchorName = `--stat-anchor-${def.slug}-${safeId}`;
 
   return (
     <span className="relative inline-block group">

@@ -456,6 +456,45 @@ export default async function ReceiptPage({ params }: { params: Params }) {
                 · engineering paper · how this prediction was computed
               </span>
             </li>
+            {/* R120 W4 · Agent C R120 niche-subscription cold-start research
+                · Stratechery「trust-of-permanence」 mechanism · ZONE 27 audience
+                faces「will this guy still be here in a year?」 fear · Tim's
+                CPBL fan audience facing Taiwan tipster sites die monthly ·
+                此 receipt-as-shared-artifact 是 visitor first impression · 加
+                /annual + /engine-log 兩個 permanence anchors · 同時 close
+                Defector + Stratechery cold-start gap · 0 email capture(brand
+                IP 守)· 0 push · 0 social proof · 純 cross-link 物理 surface
+                permanence artifacts。 */}
+            <li className="flex gap-3 items-baseline">
+              <span aria-hidden="true" className="text-gold/70">
+                ▸
+              </span>
+              <Link
+                href="/annual"
+                className="text-gold/85 hover:text-gold underline-offset-4 hover:underline"
+              >
+                /annual
+              </Link>
+              <span className="text-mute/70">
+                · 10-year letter index · Berkshire 60-year pattern · permanence
+                commitment Year 0 → Year 9
+              </span>
+            </li>
+            <li className="flex gap-3 items-baseline">
+              <span aria-hidden="true" className="text-gold/70">
+                ▸
+              </span>
+              <Link
+                href="/engine-log"
+                className="text-gold/85 hover:text-gold underline-offset-4 hover:underline"
+              >
+                /engine-log
+              </Link>
+              <span className="text-mute/70">
+                · operational artifact · LIVE STATE numeric publishing +
+                dated ops events · 「engine alive · someone on it」 signal
+              </span>
+            </li>
           </ul>
         </section>
 
