@@ -549,7 +549,11 @@ export default function FoundersApplicationForm() {
           placeholder="您 ZONE 27 哪一頁讓您決定要申請的?(/audit · /methodology · /track-record · /founders/ledger 等)為什麼這頁 hit?Tim 不要 marketing 答案 · 要您真實 reasoning 邏輯。"
           minLength={FOUNDERS_APPLY_LIMITS.whyMinChars}
           maxLength={FOUNDERS_APPLY_LIMITS.whyMaxChars}
-          className="w-full bg-ink/60 border border-line/70 focus-visible:border-gold/70 text-bone px-4 py-3 outline-none transition-colors placeholder:text-mute/70 font-mono text-sm leading-relaxed resize-y"
+          // R109 W5 · field-sizing: content auto-grow(Chrome 123+ Baseline)·
+          // textarea 自動隨 content 高度長 · Baymard 2025「4+ field forms with
+          // 100+ char text areas 有 ~68% mobile abandonment if interrupted」 ·
+          // smooth-grow 補長度感「不卡頓」感 · Notion/Linear inline pattern。
+          className="w-full bg-ink/60 border border-line/70 focus-visible:border-gold/70 text-bone px-4 py-3 outline-none transition-colors placeholder:text-mute/70 font-mono text-sm leading-relaxed resize-y [field-sizing:content] min-h-[9rem] max-h-[32rem]"
         />
         <span className="block mt-2 font-mono text-mute/70 text-[10px] tracking-[0.2em] leading-relaxed">
           ⚓ Tim 看的不是長度 · 是 specificity。 一句「我喜歡你們的
