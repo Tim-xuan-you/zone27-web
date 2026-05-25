@@ -9,22 +9,27 @@ import {
   cpblPitchers,
   CPBL_PITCHER_FETCH_DATE,
 } from "@/lib/cpbl-pitchers";
+import {
+  cpblAdvanced,
+  getCpblAdvancedByAcnt,
+  CPBL_ADVANCED_FETCH_DATE,
+} from "@/lib/cpbl-advanced";
 
 export const metadata: Metadata = {
   title: "CPBL 6 隊伍 投手 aggregation · ZONE 27",
   description:
-    "中華職棒 6 個球團投手 sabermetric 進階指標 aggregation pages · 富邦悍將 + 統一7-ELEVEn獅 + 中信兄弟 + 樂天桃猿 + 味全龍 + 台鋼雄鷹 · 球迷 tribal home base · 資料來自 stats.cpbl.com.tw 公開 box score · 0 付費 API。",
+    "中華職棒 6 個球團投手 sabermetric 進階指標 aggregation pages · 富邦悍將 + 統一7-ELEVEn獅 + 中信兄弟 + 樂天桃猿 + 味全龍 + 台鋼雄鷹 · 球迷 tribal home base · Trackman radar league-wide aggregate · 資料來自 stats.cpbl.com.tw 公開 box score · 0 付費 API。",
   openGraph: {
     title: "CPBL 6 隊伍 投手 aggregation · ZONE 27",
     description:
-      "6 球團投手 percentile aggregation · 球迷 tribal home base · CPBL only forever",
+      "6 球團投手 percentile aggregation · league Trackman aggregate · 球迷 tribal home base · CPBL only forever",
     type: "article",
     url: "/cpbl-teams",
   },
   twitter: {
     card: "summary_large_image",
     title: "CPBL 6 隊伍 · ZONE 27",
-    description: "6 球團投手 percentile aggregation · 球迷 tribal home base",
+    description: "6 球團 + league Trackman aggregate · 球迷 tribal home base",
   },
   alternates: { canonical: "/cpbl-teams" },
 };
@@ -33,15 +38,60 @@ export const revalidate = 3600;
 
 export default function CpblTeamsIndexPage() {
   // Sort teams by pitcher count desc(largest roster first · same-count
-  // teams maintain CPBL_TEAMS canonical order)。
-  const teamsWithCount = CPBL_TEAMS.map((team) => ({
-    ...team,
-    pitcherCount: cpblPitchers.filter((p) => p.team === team.name).length,
-  }));
+  // teams maintain CPBL_TEAMS canonical order)。 R107 W1 · 每隊 trackmanCount
+  // 加入 card chip · 為 league coverage gap signal 鋪路。
+  const teamsWithCount = CPBL_TEAMS.map((team) => {
+    const teamPitchers = cpblPitchers.filter((p) => p.team === team.name);
+    const trackmanCount = teamPitchers.filter((p) =>
+      p.acnt ? getCpblAdvancedByAcnt(p.acnt) !== null : false
+    ).length;
+    return {
+      ...team,
+      pitcherCount: teamPitchers.length,
+      trackmanCount,
+    };
+  });
   const totalPitchers = teamsWithCount.reduce(
     (sum, t) => sum + t.pitcherCount,
     0
   );
+
+  // R107 W1 · League-wide Trackman aggregate · parent-index canonical view ·
+  // 同 R100 milestone team-level percentile strip pattern 但 scope expand
+  // 到 entire 6-team league · coverage gap honest disclosure(X of N tracked
+  // · Y of 6 teams have ≥1)per [[zone27-disclosure-philosophy]]。
+  const teamsWithTrackman = teamsWithCount.filter((t) => t.trackmanCount > 0)
+    .length;
+  const leagueTrackmanAggregate =
+    cpblAdvanced.length > 0
+      ? {
+          count: cpblAdvanced.length,
+          avgKPct: Math.round(
+            cpblAdvanced
+              .filter((p) => p.kPct !== null)
+              .reduce((sum, p) => sum + (p.kPct ?? 0), 0) /
+              Math.max(1, cpblAdvanced.filter((p) => p.kPct !== null).length)
+          ),
+          avgWhiffPct: Math.round(
+            cpblAdvanced
+              .filter((p) => p.whiffPct !== null)
+              .reduce((sum, p) => sum + (p.whiffPct ?? 0), 0) /
+              Math.max(
+                1,
+                cpblAdvanced.filter((p) => p.whiffPct !== null).length
+              )
+          ),
+          avgWobaAgainst: Math.round(
+            cpblAdvanced
+              .filter((p) => p.wobaAgainst !== null)
+              .reduce((sum, p) => sum + (p.wobaAgainst ?? 0), 0) /
+              Math.max(
+                1,
+                cpblAdvanced.filter((p) => p.wobaAgainst !== null).length
+              )
+          ),
+        }
+      : null;
 
   return (
     <div className="flex flex-col flex-1 min-h-screen">
@@ -82,9 +132,60 @@ export default function CpblTeamsIndexPage() {
             fan / 中信兄弟 fan / etc 各自 dedicated page。
           </p>
           <div className="mt-5">
-            <ArticleMeta readingMin={1} />
+            <ArticleMeta readingMin={2} />
           </div>
         </section>
+
+        {/* ── LEAGUE TRACKMAN AGGREGATE STRIP ─────────
+            R107 W1 · 12 Trackman-tracked pitchers across 6 teams · 3-cell
+            percentile aggregate(AVG K% + WHIFF% + wOBA-A)mirror R100
+            team-level pattern · parent-index level league coverage stat ·
+            coverage gap honest disclosure per Disclosure axiom。 */}
+        {leagueTrackmanAggregate && (
+          <section
+            aria-labelledby="league-trackman-aggregate-heading"
+            className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-10"
+          >
+            <h2
+              id="league-trackman-aggregate-heading"
+              lang="en"
+              className="font-mono text-gold/85 text-[10px] tracking-[0.4em] mb-3"
+            >
+              ↘ LEAGUE TRACKMAN AGGREGATE · {leagueTrackmanAggregate.count} of{" "}
+              {totalPitchers} pitchers · {teamsWithTrackman} of 6 teams
+            </h2>
+            <div className="grid grid-cols-3 gap-2 sm:gap-3">
+              <LeagueTrackmanCell
+                label="LEAGUE AVG K %"
+                en="STRIKEOUT RATE"
+                percentile={leagueTrackmanAggregate.avgKPct}
+                higherBetter={true}
+              />
+              <LeagueTrackmanCell
+                label="LEAGUE AVG WHIFF %"
+                en="SWING-AND-MISS"
+                percentile={leagueTrackmanAggregate.avgWhiffPct}
+                higherBetter={true}
+              />
+              <LeagueTrackmanCell
+                label="LEAGUE AVG wOBA-A"
+                en="WEIGHTED OBP"
+                percentile={leagueTrackmanAggregate.avgWobaAgainst}
+                higherBetter={false}
+              />
+            </div>
+            <p className="mt-4 font-mono text-mute/70 text-[10px] tracking-[0.25em] leading-relaxed">
+              ⚓ Trackman radar 7-metric Statcast-grade · fetched{" "}
+              {CPBL_ADVANCED_FETCH_DATE} TPE · league coverage{" "}
+              {Math.round(
+                (leagueTrackmanAggregate.count / Math.max(1, totalPitchers)) *
+                  100
+              )}
+              % · 6-{teamsWithTrackman}={6 - teamsWithTrackman} 隊 0 tracked
+              pitchers(per Disclosure axiom 不藏)
+            </p>
+          </section>
+        )}
 
         <div className="mx-auto w-32 gold-line mb-10" />
 
@@ -131,9 +232,28 @@ export default function CpblTeamsIndexPage() {
                   style={{ backgroundColor: team.hexAccent, opacity: 0.5 }}
                   aria-hidden="true"
                 />
-                <p className="mt-3 font-mono text-mute/70 text-[10px] tracking-[0.25em]">
-                  → percentile + aggregate
-                </p>
+                <div className="mt-3 flex items-center justify-between gap-2">
+                  <p className="font-mono text-mute/70 text-[10px] tracking-[0.25em]">
+                    → percentile + aggregate
+                  </p>
+                  {team.trackmanCount > 0 ? (
+                    <span
+                      lang="en"
+                      className="font-mono text-gold/85 text-[9px] tracking-[0.3em] tabular px-1.5 py-0.5 border border-gold/40 bg-gold/5"
+                      title={`${team.trackmanCount} of ${team.pitcherCount} pitchers have Trackman radar 7-metric advanced data`}
+                    >
+                      ✓ {team.trackmanCount} TRACKMAN
+                    </span>
+                  ) : (
+                    <span
+                      lang="en"
+                      className="font-mono text-mute/50 text-[9px] tracking-[0.3em] tabular"
+                      title="0 pitchers with Trackman radar data · per Disclosure axiom 不藏"
+                    >
+                      0 TRACKMAN
+                    </span>
+                  )}
+                </div>
               </Link>
             ))}
           </div>
@@ -193,6 +313,13 @@ export default function CpblTeamsIndexPage() {
             aggregate + 隊內投手 stacked percentile · 球迷 tribal home base。
           </p>
           <p>
+            R107 W1 加 league-wide Trackman aggregate strip · {cpblAdvanced.length}{" "}
+            位 trackman radar 7-metric tracked pitchers across {teamsWithTrackman}{" "}
+            of 6 teams · 同 R100 milestone team-level pattern · 但 scope expand
+            到 parent-index level · coverage gap 不藏(per Disclosure axiom · 6
+            -{teamsWithTrackman}={6 - teamsWithTrackman} 隊目前 0 tracked)。
+          </p>
+          <p>
             CPBL only · 永遠 only · per /integrity rule 12。 不爬 MLB 球團 ·
             不接付費 API · 純 stats.cpbl.com.tw 公開 box score derived ·
             球團 logo color 來自 lib/teams.ts canonical(per Tim 2026-05-22
@@ -202,6 +329,54 @@ export default function CpblTeamsIndexPage() {
       </main>
 
       <Footer />
+    </div>
+  );
+}
+
+// ── LeagueTrackmanCell · parent-index 3-cell percentile aggregate ──
+// R107 W1 · mirror /cpbl-teams/[teamId] TrackmanAggregateCell pattern
+// 但 scope expand 到 league · 6-team 全部 trackman pitchers averaged。
+function LeagueTrackmanCell({
+  label,
+  en,
+  percentile,
+  higherBetter,
+}: {
+  label: string;
+  en: string;
+  percentile: number;
+  higherBetter: boolean;
+}) {
+  const strength = higherBetter ? percentile : 100 - percentile;
+  const tier: "elite" | "mid" | "rebuild" =
+    strength >= 70 ? "elite" : strength >= 30 ? "mid" : "rebuild";
+  const tierClass =
+    tier === "elite"
+      ? "text-gold"
+      : tier === "mid"
+      ? "text-bone/85"
+      : "text-mute";
+  const tierLabel =
+    tier === "elite" ? "ELITE" : tier === "mid" ? "MID" : "REBUILD";
+  return (
+    <div
+      className="border border-gold/30 bg-slate/30 px-3 sm:px-4 py-3 text-center"
+      title={`${label}(${en})· league avg 百分位 ${percentile}/100 · ${higherBetter ? "高 = 強" : "低 = 強"} · ${tierLabel}`}
+    >
+      <p
+        lang="en"
+        className="font-mono text-gold/70 text-[9px] tracking-[0.3em] mb-1"
+      >
+        {label}
+      </p>
+      <p
+        className={`font-mono tabular text-xl sm:text-2xl font-light ${tierClass}`}
+      >
+        {percentile}
+      </p>
+      <p className="font-mono text-mute/60 text-[8px] tracking-[0.2em] mt-0.5">
+        {tierLabel}
+      </p>
     </div>
   );
 }
