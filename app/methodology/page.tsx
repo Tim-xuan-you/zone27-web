@@ -1001,7 +1001,7 @@ function Section({
         </span>
       </div>
       <h2 className="text-3xl text-bone font-light tracking-tight mb-8">{zh}</h2>
-      <div className="space-y-5 text-mute text-base leading-relaxed">
+      <div className="space-y-5 zh-body text-mute text-base leading-relaxed">
         {children}
       </div>
     </section>
