@@ -134,6 +134,21 @@ export const COMMAND_ITEMS: CommandItem[] = [
       "黑馬",
       "AnonPick",
       "UserPrediction",
+      // R137 W6 · 場館暱稱 + 季事關鍵詞 per Agent C 球迷 slang gap audit
+      // (filtered to brand-IP-fit only · CPBL fan audience grammar per
+      // [[feedback-zone27-audience-fans-not-engineers]])
+      "洲際",
+      "天母",
+      "新莊",
+      "澄清湖",
+      "場館",
+      "球場",
+      "主場",
+      "客場",
+      "台灣大賽",
+      "季後賽",
+      "明星賽",
+      "總冠軍",
     ],
   },
   {
@@ -188,6 +203,16 @@ export const COMMAND_ITEMS: CommandItem[] = [
       "頭條",
       "今日重點",
       "戰況預覽",
+      // R137 W6 · 季事關鍵詞 per Agent C 球迷 slang gap audit · seasonal
+      // urgency events · 春訓 to 台灣大賽 全年 calendar coverage
+      "春訓",
+      "開幕戰",
+      "常規賽",
+      "季中",
+      "季末",
+      "台灣大賽",
+      "季後賽",
+      "明星賽",
     ],
   },
   {
@@ -240,6 +265,19 @@ export const COMMAND_ITEMS: CommandItem[] = [
       "進階指標",
       "trackman",
       "advanced",
+      // R137 W6 · 投手 archetype 球迷 slang per Agent C · CPBL/Asian baseball
+      // 文化 reference · 火球男 = fastball specialist · 控球魔術師 = command
+      // specialist · brand IP fit per [[feedback-zone27-audience-fans-not-engineers]]
+      "火球男",
+      "火球",
+      "控球魔術師",
+      "控球",
+      "魔術師",
+      "怪力男",
+      "養生球路",
+      "肩傷",
+      "復出",
+      "球速王",
     ],
   },
   {
@@ -282,6 +320,16 @@ export const COMMAND_ITEMS: CommandItem[] = [
       "鄉民",
       "支持的球隊",
       "母隊",
+      // R137 W6 · 場館暱稱 per Agent C 球迷 slang gap audit · CPBL ballpark
+      // affinity = team loyalty hinge · brand IP fit per
+      // [[feedback-zone27-audience-fans-not-engineers]]
+      "洲際",
+      "天母",
+      "新莊",
+      "澄清湖",
+      "場館",
+      "球場",
+      "主場",
     ],
   },
 
