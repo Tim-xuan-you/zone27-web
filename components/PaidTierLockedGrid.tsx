@@ -101,9 +101,16 @@ const BLACK_CARD_UNLOCKS: Unlock[] = [
     // rule · REFRAME to /hey-tim BLACK CARD priority lane(Bill James「Hey
     // Bill」 + Stratechery subscriber Q&A + Matt Levine「Money Stuff」 mailbag +
     // DELTA Japan reader letters pattern · 100% reader↔writer)。
+    // R145 W1 · Tim 6-fire same canary specifically asking「賽事討論室在哪裡」
+    // (R123 + R139 + R141 + R143 + R144 + R145)· refactor done R139 W2 但
+    // history invisible to visitor · 訪客記憶仍有「賽事討論室」 4 字 anchor ·
+    // ADD visible「previously called」 footnote on body per Pratfall「不藏
+    // mistake」 axiom 8th-time fulfillment this session(R130 + R135 + R139 +
+    // R140 + R141 + R142 + R143 + R145)+ per [[feedback-founder-dogfood-canary]]
+    // 6-fire trust-but-explain pattern · 不再隱藏 refactor history。
     icon: "📮",
     title: "/hey-tim 賽前 BLACK CARD 優先通道",
-    body: "/matches/[gameId] BLACK CARD 賽前 24hr 直送 1 question to Tim via /hey-tim · Tim 賽後 24hr 內答 selected 1-2 公開 thread · 球迷 grammar · 不答 betting · 同 /hey-tim 既有 reader↔writer 模式(Bill James 「Hey Bill」 15-yr canonical)· 0 reader↔reader",
+    body: "/matches/[gameId] BLACK CARD 賽前 24hr 直送 1 question to Tim via /hey-tim · Tim 賽後 24hr 內答 selected 1-2 公開 thread · 球迷 grammar · 不答 betting · 同 /hey-tim 既有 reader↔writer 模式(Bill James 「Hey Bill」 15-yr canonical)· 0 reader↔reader · ⚓ 此 unlock 原名「賽事討論室發言」(reader↔reader)· R139 W2 refactor 改為現名 per [[feedback-zone27-one-way-by-design]] iron rule + Pratfall axiom 公開 refactor history 不藏",
     status: "promise",
     eta: "Q3 2027(待 BLACK CARD payment system stable · /hey-tim priority queue 邏輯實做 · 目前 /hey-tim 既有 channel LIVE for all · 無 priority lane)",
   },

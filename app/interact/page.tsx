@@ -333,9 +333,11 @@ export default function InteractPage() {
               · 0 reply button · 同 /letter「NO comment thread」 axiom 4 處 codify
             </li>
             <li>
-              <strong className="text-bone">公開 user-to-user forum / 板</strong>{" "}
-              · 沒有「ZONE 27 板」 · 沒有「球迷區」 · 沒有「賽事討論」 · 球迷
-              social 已在 LINE 群 + FB 滿足
+              <strong className="text-bone">公開 user-to-user forum / 板 / 賽事討論室</strong>{" "}
+              · 沒有「ZONE 27 板」 · 沒有「球迷區」 · 沒有「賽事討論」 · 沒有「賽事討論室」
+              (此名 R139 W2 從 BLACK CARD unlock #03 promise text 中 refactored 掉 ·
+              改為 /hey-tim 賽前 BLACK CARD 優先通道 · per iron rule)· 球迷 social
+              已在 LINE 群 + FB 滿足
             </li>
             <li>
               <strong className="text-bone">User-to-user DM / 私訊</strong>{" "}
