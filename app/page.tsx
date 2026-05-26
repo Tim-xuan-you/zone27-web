@@ -9,6 +9,7 @@ import RecentMatchesRow from "@/components/RecentMatchesRow";
 import AnonCalibrationStrip from "@/components/AnonCalibrationStrip";
 import AnonPickWidget from "@/components/AnonPickWidget";
 import LivingCoverHero from "@/components/LivingCoverHero";
+import HomepageGameThreadPreview from "@/components/HomepageGameThreadPreview";
 import {
   getFeaturedMatch,
   getTodayMatches,
@@ -428,6 +429,17 @@ export default function Home() {
 
       {/* Hairline divider — visual breath. Tighter on mobile. */}
       <div className="mx-auto w-32 gold-line mb-8 sm:mb-20" />
+
+      {/* R149 W1 · NEW HomepageGameThreadPreview · Tim 8-fire explicit
+          「(賽事討論室)大家都可以看到! 到底在哪裡? 可以直接出現在首頁
+          可以讓人簡易點擊?」 · /matches/[gameId] 30-sec scroll 太深 ·
+          ship BIG visible homepage section · gold-border card · 1 mockup
+          post + big CTA「→ 看完整 賽事討論室 + 3 mockup posts」 · 自由可讀
+          + BLACK CARD 可發言 · per R148 6 constraints minimum-violation
+          preserved · per [[feedback-no-waiting-rule]] ship NOW · per
+          [[feedback-zone27-mobile-first]] trade-off for Tim 8-fire
+          explicit demand · 0-click 顯式 visible on homepage 不再 buried。 */}
+      <HomepageGameThreadPreview match={todayMatches[0] ?? null} />
 
       {/* Round 40 W-G · Agent F #5 · RecentMatchesRow · client-only ·
           conditional render when localStorage has entries · 0 SSR /
