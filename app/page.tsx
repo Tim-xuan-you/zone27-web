@@ -322,6 +322,19 @@ export default function Home() {
           >
             /founders/apply 申請席位
           </Link>
+          <span className="text-mute/40 mx-1.5">·</span>
+          {/* R143 W2 · cross-link to canonical /interact route · Tim 3rd
+              same canary fire(R123 + R139 + R143「討論區在哪裡」)response ·
+              /interact enumerates 10 reader↔writer surfaces + explains
+              one-way by design · per Cialdini Consistency 1984 + Pirolli &
+              Card 1995 Information Foraging Theory · brand IP iron rule
+              preserved + discoverability gap fixed。 */}
+          <Link
+            href="/interact"
+            className="hover:text-gold underline-offset-4 hover:underline transition-colors"
+          >
+            /interact 看 10 互動通道
+          </Link>
         </p>
 
         <p className="mt-4 sm:mt-5">
