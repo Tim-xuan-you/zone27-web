@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { COMMAND_ITEMS } from "@/lib/command-palette-data";
 
 // ── ZONE 27 · CmdK Trigger Chip ────────────────────────
 // Small visible hint that the command palette exists. Both
@@ -51,7 +52,7 @@ export default function CmdKTrigger({ className = "", variant = "chip" }: Props)
         type="button"
         onClick={open}
         aria-label="Open command palette · 全站快搜"
-        title="全站快搜 · 41 個頁面"
+        title={`全站快搜 · ${COMMAND_ITEMS.length} 個頁面`}
         className={`py-2.5 -my-1.5 tracking-[0.18em] inline-flex items-center gap-1 text-mute hover:text-gold transition-colors font-mono text-[14px] leading-none ${className}`}
       >
         <span aria-hidden="true">⌕</span>

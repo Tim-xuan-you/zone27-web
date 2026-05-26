@@ -449,6 +449,7 @@ function PitcherForm({
 
       <div className="grid grid-cols-3 gap-3">
         <NumberField
+          idPrefix={side}
           label="K / 9"
           value={data.k9}
           onChange={(v) => onChange({ ...data, k9: v })}
@@ -458,6 +459,7 @@ function PitcherForm({
           step={0.1}
         />
         <NumberField
+          idPrefix={side}
           label="BB / 9"
           value={data.bb9}
           onChange={(v) => onChange({ ...data, bb9: v })}
@@ -467,6 +469,7 @@ function PitcherForm({
           step={0.1}
         />
         <NumberField
+          idPrefix={side}
           label="HR / 9"
           value={data.hr9}
           onChange={(v) => onChange({ ...data, hr9: v })}
@@ -481,6 +484,7 @@ function PitcherForm({
 }
 
 function NumberField({
+  idPrefix,
   label,
   value,
   onChange,
@@ -489,6 +493,7 @@ function NumberField({
   max,
   step,
 }: {
+  idPrefix: string;
   label: string;
   value: string;
   onChange: (v: string) => void;
@@ -501,7 +506,11 @@ function NumberField({
   // silent constraint · 訪客 mobile 輸入 25 K/9 沒提示 · submit 也無反應 ·
   // 困惑。 加 aria-describedby + visible 「0–{max}」 range hint below input
   // · accessible + visual 雙 cue · 不再 silent fail。
-  const hintId = `${label.replace(/\s+/g, "").replace(/\//g, "")}-hint`;
+  // R138 W3 · idPrefix prop 加 · 兩個 PitcherForm 實例(HOME + AWAY)render
+  // 相同 NumberField labels 之前 generate 重複 DOM ids(K9-hint × 2 等)·
+  // HTML spec violation + screen reader aria-describedby ambiguous · per
+  // R138 Agent B HIGH-CONFIDENCE bug #3 fix。
+  const hintId = `${idPrefix}-${label.replace(/\s+/g, "").replace(/\//g, "")}-hint`;
   return (
     <label className="block">
       <span className="font-mono text-mute text-[9px] tracking-[0.3em] block mb-1.5">

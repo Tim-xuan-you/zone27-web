@@ -170,20 +170,21 @@ export default function TermsPage() {
         <h3 className="text-bone text-lg mt-6 mb-3">BLACK CARD(NT$ 1,500/season)</h3>
         <ul className="space-y-2">
           <li>
-            <strong className="text-bone">每月 14 天退款</strong> · 您每月手動
-            轉帳當月份 NT$ 299 入帳後 · 14 個自然日內可解除該月契約 · 全額
+            <strong className="text-bone">每季 14 天退款</strong> · 您每季手動
+            轉帳當季 NT$ 1,500 入帳後 · 14 個自然日內可解除該季契約 · 全額
             退回 · 不按比例。
           </li>
           <li>
             <strong className="text-bone">沒有 auto-renew</strong> · 同 brand
-            IP「倒置 SaaS · 不自動扣款」(per /membership/black-card)· 您
-            不主動轉帳下月 · 服務自然停止 · 不需 cancel button · 不需 exit
+            IP「倒置 SaaS · 不自動扣款」(per /membership/black-card + /integrity
+            rule #13 binding · ECPay/TapPay/Stripe 自動扣款全 refused forever)·
+            您不主動轉帳下季 · 服務自然停止 · 不需 cancel button · 不需 exit
             interview · 不寄 reactivation 文案。
           </li>
           <li>
-            <strong className="text-bone">月份未滿期</strong> · 您退款後當月
-            access 立即停止 · ZONE 27 不會繼續發您 month-end newsletter ·
-            您也不能 access BLACK CARD-only content 直到下次主動轉帳。
+            <strong className="text-bone">季中未滿期</strong> · 您退款後當季
+            access 立即停止 · ZONE 27 不會繼續發您 season-end newsletter ·
+            您也不能 access BLACK CARD-only content 直到下季主動轉帳。
           </li>
         </ul>
 
