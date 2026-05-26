@@ -59,7 +59,14 @@ function readStored(): StoredState | null {
 function writeStored(n: number): void {
   if (typeof window === "undefined") return;
   try {
-    const todayISO = new Date().toISOString().slice(0, 10);
+    // R140 W1 · TZ-display drift fix · 之前 new Date().toISOString().slice(0,10)
+    // 用 UTC date · 訪客 23:00 UTC = 07:00 TPE 次日 看到 yesterday's UTC date ·
+    // contradicts /audit S06 brand promise of TPE-anchored dates · per Agent B
+    // HIGH-CONFIDENCE bug · fix · use Asia/Taipei Intl.DateTimeFormat ·
+    // canonical en-CA locale gives YYYY-MM-DD format。
+    const todayISO = new Intl.DateTimeFormat("en-CA", {
+      timeZone: "Asia/Taipei",
+    }).format(new Date());
     const next: StoredState = { lastSeenN: n, lastSeenAt: todayISO };
     window.localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
   } catch {

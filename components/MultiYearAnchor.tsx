@@ -51,7 +51,17 @@ import Link from "next/link";
 // ─────────────────────────────────────────────────────
 
 export default function MultiYearAnchor() {
-  const currentYear = new Date().getFullYear();
+  // R140 W2 · UTC year drift fix · 之前 new Date().getFullYear() 用 Vercel
+  // server UTC · 在 Dec 31 UTC = Jan 1 TPE boundary · chip 寫「SIGNED · TIM
+  // · 2026」 但實際 TPE 已 2027 · yearsAhead off by one · per Agent B HIGH-
+  // CONFIDENCE bug · fix · use Asia/Taipei Intl.DateTimeFormat year-numeric。
+  const currentYear = parseInt(
+    new Intl.DateTimeFormat("en-CA", {
+      timeZone: "Asia/Taipei",
+      year: "numeric",
+    }).format(new Date()),
+    10
+  );
   const commitmentYear = 2029;
   const yearsAhead = commitmentYear - currentYear;
 

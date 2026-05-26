@@ -44,11 +44,24 @@ export default function HeroLiveCard({ match }: { match: Match }) {
   const [simPhase, setSimPhase] = useState<"simulating" | "converged">(
     "simulating"
   );
+  // R140 W3 · hydration mismatch fix · 之前 matchPhase 直接 compute at
+  // render time · getMatchPhase() 內部 call getTodayTaipei() + getTaipeiNowMinutes()
+  // 全 time-dependent · SSR 18:34 TPE → client 18:35 TPE → 不同 phase string ·
+  // React hydration mismatch + PhaseBadge text/className 不同 · per Agent B
+  // HIGH-CONFIDENCE bug · fix · mount flag pattern · matchPhase null on SSR
+  // (PhaseBadge 已 handle null · 不破)· compute after mount · 一致 render。
+  // calibration 同 enginePctOnWinner 不受影響(只 depend on match.finalResult
+  // static value · 0 time dependency)。
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setMounted(true);
+  }, []);
   const rafRef = useRef<number | null>(null);
   // Five-state lifecycle: future · today-pregame · today-live · stale-archived · final.
   // Engine output is always real (runs in visitor's browser); the badge
   // tells visitors which timeline this prediction sits in.
-  const matchPhase: MatchPhase | null = getMatchPhase(match);
+  const matchPhase: MatchPhase | null = mounted ? getMatchPhase(match) : null;
   const calibration = getCalibration(match); // proved | diverged | push | null
   const enginePctOnWinner = getEnginePctOnWinner(match);
 
