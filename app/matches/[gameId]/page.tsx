@@ -35,6 +35,7 @@ import CopyLinkButton from "@/components/CopyLinkButton";
 import ReceiptForwardButton from "@/components/ReceiptForwardButton";
 import { getCpblAdvancedByName } from "@/lib/cpbl-advanced";
 import RelatedReading from "@/components/RelatedReading";
+import GameThread from "@/components/GameThread";
 import FollowMatchButton from "@/components/FollowMatchButton";
 import MatchNoteEditor from "@/components/MatchNoteEditor";
 import MyTeamMatchNote from "@/components/MyTeamMatchNote";
@@ -796,6 +797,14 @@ export default async function MatchDetailPage({
           W10 ↗ Submit · W10 Personal Mirror 已 ship 真實 unlocks · placeholder
           完全多餘。 Conversion path 到 /founders 保留在 RelatedReading +
           Footer + Cmd-K · 此 section 刪除無損 conversion。 */}
+
+      {/* R148 W1 · GameThread scaffold · Tim founder-dogfood-canary 7-fire
+          explicit override of R123 iron rule · 賽事討論室 minimum-violation
+          ship · BLACK CARD-gated · 1-thread 24hr decay · 球迷 grammar · 0
+          betting · Tim solo moderate · ⏳ PRE-LAUNCH Q3 2026 scaffold ·
+          mockup 3 sample posts illustrate 球迷 grammar · placement after
+          7-LENS CANVAS post-engagement · before RelatedReading retreat。 */}
+      <GameThread gameId={m.id} />
 
       {/* ── RELATED READING · Round 11 audit fix ──────
           Was: lone「← 回到今日賽事板」retreat link · dead-end.
