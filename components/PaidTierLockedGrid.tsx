@@ -42,9 +42,20 @@ const BLACK_CARD_UNLOCKS = [
     body: "Vibe Check / Park Factor / Pitcher Fatigue / Underdog / Bullpen / Matchup History · 每 1-2 月 ship 1 new lens",
   },
   {
-    icon: "💬",
-    title: "賽事討論室發言",
-    body: "/matches/[gameId] BLACK CARD-gated 1-thread 24hr decay · 球迷 grammar 「明牌」 · 不導向莊家",
+    // R139 W2 · brand IP contradiction fix · 原 promise「賽事討論室發言」
+    // (reader↔reader)CONTRADICTS [[feedback-zone27-one-way-by-design]] iron
+    // rule(reader↔writer NOT reader↔reader · DO NOT build community/forum)·
+    // codebase 其他 6+ 處 reinforce「NO comment thread」 axiom(/letter + /hey-
+    // tim + lib/letter-content.ts + lib/related-links.ts 等)· 此 promise 是
+    // 唯一 inconsistency · per Pratfall axiom publish-correction + per [[feedback-
+    // zone27-paid-model-is-support-not-features]] DO NOT panic-build features ·
+    // REFRAME to enhance existing brand-pure /hey-tim channel(Bill James「Hey
+    // Bill」 + Stratechery subscriber Q&A + Matt Levine「Money Stuff」 mailbag +
+    // DELTA Japan reader letters pattern · 100% reader↔writer)· NO new feature
+    // build · 0 new infrastructure · 0 reader↔reader · brand IP iron rule preserved。
+    icon: "📮",
+    title: "/hey-tim 賽前 BLACK CARD 優先通道",
+    body: "/matches/[gameId] BLACK CARD 賽前 24hr 直送 1 question to Tim via /hey-tim · Tim 賽後 24hr 內答 selected 1-2 公開 thread · 球迷 grammar · 不答 betting · 同 /hey-tim 既有 reader↔writer 模式(Bill James 「Hey Bill」 15-yr canonical)· 0 reader↔reader",
   },
   {
     icon: "💵",
