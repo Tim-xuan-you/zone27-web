@@ -147,14 +147,23 @@ export default async function MatchDetailPage({
         </div>
 
         <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-6 sm:gap-12">
+          {/* R142 W1 · a11y fix · 之前 HOME + AWAY 都 <h1> 同 page · WCAG
+              1.3.1 + 2.4.6 violation · screen-reader 用戶 hears 2 「Heading
+              level 1」 cannot identify page topic · fix · add sr-only parent
+              <h1> matchup title + demote both team names to <h2> · semantic
+              hierarchy 一致。 */}
+          <h1 className="sr-only">
+            {m.home.name} vs {m.away.name} · {m.date} · {m.startTime} · {m.venue}
+          </h1>
+
           {/* HOME */}
           <div>
             <p className="font-mono text-mute text-[10px] tracking-[0.3em] mb-2">
               HOME
             </p>
-            <h1 className="text-3xl sm:text-5xl text-bone font-light tracking-tight leading-[1]">
+            <h2 className="text-3xl sm:text-5xl text-bone font-light tracking-tight leading-[1]">
               {m.home.name}
-            </h1>
+            </h2>
             <p className="font-mono text-gold/60 text-xs tracking-[0.3em] mt-2">
               {m.home.en}
             </p>
@@ -172,9 +181,9 @@ export default async function MatchDetailPage({
             <p className="font-mono text-mute text-[10px] tracking-[0.3em] mb-2">
               AWAY
             </p>
-            <h1 className="text-3xl sm:text-5xl text-bone font-light tracking-tight leading-[1]">
+            <h2 className="text-3xl sm:text-5xl text-bone font-light tracking-tight leading-[1]">
               {m.away.name}
-            </h1>
+            </h2>
             <p className="font-mono text-gold/60 text-xs tracking-[0.3em] mt-2">
               {m.away.en}
             </p>

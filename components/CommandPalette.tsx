@@ -323,7 +323,12 @@ export default function CommandPalette() {
                               <span
                                 lang="en"
                                 className={`block font-mono text-[10px] tracking-[0.2em] mt-0.5 ${
-                                  selected ? "text-gold/80" : "text-mute/70"
+                                  /* R142 W3 · a11y contrast fix · text-mute/70
+                                     on Cmd-K bg-slate 計算 ≈ 3.4:1 FAILS WCAG
+                                     1.4.3 AA 4.5:1 · kicker text 是 information-
+                                     bearing route path · 升 to text-mute/85 ·
+                                     selected state(text-gold/80)contrast 已 OK 保留。 */
+                                  selected ? "text-gold/80" : "text-mute/85"
                                 }`}
                               >
                                 {item.kicker}

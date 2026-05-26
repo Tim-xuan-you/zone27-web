@@ -240,7 +240,11 @@ export default function HeroLiveCard({ match }: { match: Match }) {
           </p>
           <ConfidenceStars confidence={match.aiConfidence} variant="inline" />
         </div>
-        <p className="font-mono text-mute/60 text-[9px] tracking-[0.25em] tabular leading-relaxed text-right">
+        {/* R142 W2 · a11y contrast fix · text-mute/60 on bg-ink 計算 ≈ 3.1:1
+            FAILS WCAG 1.4.3 AA 4.5:1 for body text · 此 text 是 information-
+            bearing(static vs live engine state)· 不是 decorative · 升 to
+            text-mute/85 同 Footer:278 R51 W-C pattern · passes AA。 */}
+        <p className="font-mono text-mute/85 text-[9px] tracking-[0.25em] tabular leading-relaxed text-right">
           static locked vs<br />
           live ↑ converging
         </p>
