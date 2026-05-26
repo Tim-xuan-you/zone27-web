@@ -8,6 +8,7 @@ import PreTransferReceipt from "@/components/PreTransferReceipt";
 import NonComparableAnchor from "@/components/NonComparableAnchor";
 import MultiYearAnchor from "@/components/MultiYearAnchor";
 import GenerationsLine from "@/components/GenerationsLine";
+import VsRowFold from "@/components/VsRowFold";
 import CopyLinkButton from "@/components/CopyLinkButton";
 import CredentialStack from "@/components/CredentialStack";
 import {
@@ -465,6 +466,18 @@ export default async function FoundersPage({
           narrative:durability(across 5-year horizon)→ inheritance
           (across multi-generation horizon)。 */}
       <GenerationsLine />
+
+      {/* R138 W5 · VsRowFold · Agent A R138 SHIP 2 · Contrast Principle
+          (Cialdini Influence ch.1)+ Decoy Effect(Ariely 2008 Predictably
+          Irrational)· 3-column visual comparison · 付費明牌 vs 黑箱模型
+          vs ZONE 27 · 7 axis row-by-row · ZONE 27 column 唯一接近全亮
+          (per Pratfall sample-debt axis 保留 ◐ honest)· 不講對手名字 ·
+          按 mode 分類 per Agent A risk mitigation(Stratechery pattern
+          incumbent media not specific outlets)· narrative chain ·
+          NonComparableAnchor(reference class)→ MultiYearAnchor(durability)
+          → GenerationsLine(inheritance)→ VsRowFold(category contrast)
+          → pre-form reframe(objection preempt)→ form。 */}
+      <VsRowFold surface="founders" />
 
       {/* R125 W3 · Agent C R125 HIGHEST friction-removal · 「引擎免費 · 您不是在
           買引擎」 reframe 之前 buried at line 607 · 訪客 scroll past WaitlistForm

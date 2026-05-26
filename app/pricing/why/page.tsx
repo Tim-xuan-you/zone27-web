@@ -7,6 +7,7 @@ import ArticleMeta from "@/components/ArticleMeta";
 import EngineStamp from "@/components/EngineStamp";
 import ReciprocityLedger from "@/components/ReciprocityLedger";
 import ReadingProgress from "@/components/ReadingProgress";
+import VsRowFold from "@/components/VsRowFold";
 import { createPageMetadata } from "@/lib/page-og";
 import {
   FOUNDERS_TOTAL,
@@ -593,6 +594,14 @@ export default function PricingWhyPage() {
             訂戶 pay 是 identity signal 不是 features unlock。
           </p>
         </Section>
+
+        {/* R138 W5 · VsRowFold · Agent A R138 SHIP 2 · Contrast Principle
+            (Cialdini Influence ch.1)+ Decoy Effect(Ariely 2008)· 3-column
+            visual companion to §07 12-fact text data table · 付費明牌 vs
+            黑箱模型 vs ZONE 27 · 7-axis row-by-row · pairs text wall(§07)
+            + visual fold(此 NEW) · Costly Signaling 同 axis · per Agent A
+            R138 SHIP placement「visual companion to the 12-fact text wall」。 */}
+        <VsRowFold surface="pricing" />
 
         {/* ── §05 · 4 Q&A FAQ · Stratechery prose defense ─── */}
         <Section
