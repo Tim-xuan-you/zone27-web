@@ -30,47 +30,103 @@ import Link from "next/link";
 //   - Anchoring · Founders 27 NT$ 2,700 一次 vs BLACK CARD NT$ 299×N 月
 // ─────────────────────────────────────────────────────
 
-const BLACK_CARD_UNLOCKS = [
+// R141 W1 · BLACK CARD unlocks build-status honest disclosure ·
+// Tim canary fire「都沒實做對吧」 · 6 unlocks 過去全部 promise text without
+// implementation status disclosure · per [[feedback-zone27-pratfall-brand-ip]]
+// axiom + Tim「我們只做最好不是有做就好」 + 「任何缺陷都可能被人們攻擊」
+// mandate · ADD explicit ✓ LIVE / ◐ PARTIAL / ⏳ PROMISE status badge to
+// EACH unlock + binding ETA for PROMISE items per /audit S05 PRE-COMMIT
+// discipline · same axis as /audit EXCLUDE + /methodology LIMITS + /roadmap
+// BOUNDARIES + /track-record DIVERGED + /steelman + /founders/postmortem-2028
+// (6 Pratfall surfaces · this is 7th surface in implementation honesty layer)。
+// 結構性 LINE 老師 / 報馬仔 永遠無法 ship 此 disclosure(他們 promise more
+// 但 deliver less + 不公開 implementation gap)· Costly Signaling 100×。
+// Apple「coming soon」 + Linear changelog「shipped vs in progress」 + Patek
+// 「Generations」 service model honesty + ZONE 27 own /roadmap LOCKED /
+// EXPLORING / BRAND BOUNDARIES pattern。
+//
+// 6-unlock honest status audit:
+//   #01 Engine 3 變體 = ◐ PARTIAL · v0.2 LIVE · v0.3 DEV PREVIEW · v0.4 PLANNED
+//                       · BLACK CARD gating ❌ NOT BUILT(no payment to gate)
+//   #02 7 Lenses     = ✓ LIVE · all 7 components built · 但 BLACK CARD gating
+//                       ❌ NOT BUILT(currently free for all visitors)
+//   #03 /hey-tim priority = ⏳ PROMISE · /hey-tim exists · 但 BLACK CARD priority
+//                       queue 邏輯 + payment-gated 賽前 24hr 直送 全未建
+//   #04 創作者抽成 5%  = ⏳ PROMISE · 完全未建 · 無 CMS + 無 creator vetting +
+//                       無 payment integration
+//   #05 每月 voting   = ⏳ PROMISE · 完全未建 · 無 voting infrastructure
+//   #06 Tim 工程筆記   = ◐ PARTIAL · /now exists 全文 LIVE for all · BLACK CARD
+//                       truncation gating ❌ NOT BUILT
+// Total: 1 LIVE · 2 PARTIAL · 3 PROMISE = 6
+// ─────────────────────────────────────────────────────
+
+type UnlockStatus = "live" | "partial" | "promise";
+
+const STATUS_BADGES: Record<
+  UnlockStatus,
+  { glyph: string; label: string; cls: string }
+> = {
+  live: { glyph: "✓", label: "LIVE", cls: "text-gold" },
+  partial: { glyph: "◐", label: "PARTIAL", cls: "text-mute" },
+  promise: { glyph: "⏳", label: "PROMISE", cls: "text-loss/85" },
+};
+
+type Unlock = {
+  icon: string;
+  title: string;
+  body: string;
+  status: UnlockStatus;
+  /** Optional ETA · binding per /audit S05 PRE-COMMIT 30-day notice */
+  eta?: string;
+};
+
+const BLACK_CARD_UNLOCKS: Unlock[] = [
   {
     icon: "🤖",
     title: "Engine Lineup 3 變體解鎖",
     body: "v0.3 Pitcher+Park+Batter(LIVE DEV PREVIEW · production 待 N≥30)+ v0.4 Bayesian Ensemble(PLANNED · v0.3 ship 後)· FREE TIER 仍 access v0.2 base",
+    status: "partial",
+    eta: "v0.3 production Q3 2026(待 N≥30 sample)· v0.4 PLANNED Q4 2026+ · BLACK CARD gating 邏輯 全未建",
   },
   {
     icon: "🔬",
     title: "Lens Variety 7 lenses 解鎖",
     body: "Vibe Check / Park Factor / Pitcher Fatigue / Underdog / Bullpen / Matchup History · 每 1-2 月 ship 1 new lens",
+    status: "live",
+    eta: "全 7 lenses LIVE on /matches/[gameId] for all visitors · BLACK CARD gating 待 payment system stable · 目前 free for all",
   },
   {
     // R139 W2 · brand IP contradiction fix · 原 promise「賽事討論室發言」
     // (reader↔reader)CONTRADICTS [[feedback-zone27-one-way-by-design]] iron
-    // rule(reader↔writer NOT reader↔reader · DO NOT build community/forum)·
-    // codebase 其他 6+ 處 reinforce「NO comment thread」 axiom(/letter + /hey-
-    // tim + lib/letter-content.ts + lib/related-links.ts 等)· 此 promise 是
-    // 唯一 inconsistency · per Pratfall axiom publish-correction + per [[feedback-
-    // zone27-paid-model-is-support-not-features]] DO NOT panic-build features ·
-    // REFRAME to enhance existing brand-pure /hey-tim channel(Bill James「Hey
+    // rule · REFRAME to /hey-tim BLACK CARD priority lane(Bill James「Hey
     // Bill」 + Stratechery subscriber Q&A + Matt Levine「Money Stuff」 mailbag +
-    // DELTA Japan reader letters pattern · 100% reader↔writer)· NO new feature
-    // build · 0 new infrastructure · 0 reader↔reader · brand IP iron rule preserved。
+    // DELTA Japan reader letters pattern · 100% reader↔writer)。
     icon: "📮",
     title: "/hey-tim 賽前 BLACK CARD 優先通道",
     body: "/matches/[gameId] BLACK CARD 賽前 24hr 直送 1 question to Tim via /hey-tim · Tim 賽後 24hr 內答 selected 1-2 公開 thread · 球迷 grammar · 不答 betting · 同 /hey-tim 既有 reader↔writer 模式(Bill James 「Hey Bill」 15-yr canonical)· 0 reader↔reader",
+    status: "promise",
+    eta: "Q3 2027(待 BLACK CARD payment system stable · /hey-tim priority queue 邏輯實做 · 目前 /hey-tim 既有 channel LIVE for all · 無 priority lane)",
   },
   {
     icon: "💵",
     title: "創作者抽成 5%",
     body: "您 publish 內容 · ZONE 27 抽 5% vs LINE 老師生態 30-50% 業界共識 · 降維打擊",
+    status: "promise",
+    eta: "Q4 2027(完全未建 · 需 CMS + creator vetting + payment integration + 5% revenue share infra · 同 axis Defector worker-owned media pattern 但 ZONE 27 不會 ship 直到 sustainability gate 全綠)",
   },
   {
     icon: "🗳️",
     title: "每月 voting 影響引擎 + lens roadmap",
     body: "Tim publish next ship options · BLACK CARD 訂閱者 vote · 結果公開 · IKEA Effect · 您 voting 即您引擎",
+    status: "promise",
+    eta: "Q3 2027(完全未建 · 需 voting infrastructure + Supabase 整合 + 結果公開 ledger · 同 Patek Generations subscriber influence pattern)",
   },
   {
     icon: "📓",
     title: "每週 Tim 工程筆記 full 版",
     body: "本週寫什麼 / 為什麼這樣寫 / 下週要 ship 什麼 · /now truncated · BLACK CARD 拿 full · Stratechery 模式",
+    status: "partial",
+    eta: "Q3 2026(truncation gating 待建 · 目前 /now 全文 LIVE for all · FREE vs BLACK CARD 差異未實做)",
   },
 ];
 
@@ -96,7 +152,7 @@ export default function PaidTierLockedGrid() {
             ↑ NEXT TIER · 您未解鎖 · 點下方 preview
           </p>
           <p className="font-mono text-mute/70 text-[10px] tracking-[0.3em] tabular">
-            FREE 5 + BLACK CARD 6 + Founders 27 終身無限
+            FREE 5 + BLACK CARD 6(1 ✓ LIVE · 2 ◐ PARTIAL · 3 ⏳ PROMISE)+ Founders 27 終身無限
           </p>
         </div>
       </div>
@@ -139,8 +195,41 @@ export default function PaidTierLockedGrid() {
               icon={u.icon}
               title={u.title}
               body={u.body}
+              status={u.status}
+              eta={u.eta}
             />
           ))}
+        </div>
+
+        {/* R141 W1 · honest implementation gap disclosure · per Pratfall axiom
+            + Tim「我們只做最好不是有做就好」 mandate · 不藏 unlock 實做狀態 ·
+            6th Pratfall implementation-honesty surface(7th overall counting
+            /audit EXCLUDE + /methodology LIMITS + /roadmap BOUNDARIES +
+            /track-record DIVERGED + /steelman + /founders/postmortem-2028)·
+            結構性 LINE 老師 / 報馬仔 永遠無法 ship 此 disclosure(他們 promise
+            more 但 deliver less + 不公開 implementation gap)· Costly Signaling
+            100×。 同 Apple「coming soon」 + Linear changelog + Patek Generations
+            service model honesty + ZONE 27 own /roadmap LOCKED/EXPLORING/
+            BOUNDARIES pattern。 */}
+        <div className="mt-5 p-3 sm:p-4 border border-loss/30 bg-loss/5">
+          <p className="font-mono text-loss/85 text-[10px] tracking-[0.3em] mb-2">
+            ⚓ HONEST IMPLEMENTATION DISCLOSURE
+          </p>
+          <p className="text-mute text-[11px] leading-relaxed">
+            6 unlocks 過去全部 promise text · 現公開 per-unlock build status:
+            <span className="text-gold mx-1">✓ LIVE</span>= 完整 shipped ·
+            <span className="text-mute mx-1">◐ PARTIAL</span>= 部分 shipped ·
+            <span className="text-loss/85 mx-1">⏳ PROMISE</span>= 未建 + 綁定 ETA
+            。 LINE 老師 / 報馬仔 結構性無法 ship 此 page(他們 promise more
+            deliver less + 不公開 implementation gap)。 修改 status 需 30 天前{" "}
+            <Link
+              href="/changelog"
+              className="text-gold/85 underline-offset-4 hover:underline"
+            >
+              /changelog
+            </Link>
+            {" "}公告 · same /audit S05 PRE-COMMIT discipline · binding append-only。
+          </p>
         </div>
 
         <div className="mt-5 text-center">
@@ -237,29 +326,56 @@ function LockedUnlockCard({
   icon,
   title,
   body,
+  status,
+  eta,
 }: {
   num: string;
   icon: string;
   title: string;
   body: string;
+  status: UnlockStatus;
+  eta?: string;
 }) {
+  const badge = STATUS_BADGES[status];
   return (
     <div className="bg-slate/30 border border-line/60 p-3 sm:p-4 group hover:border-gold/40 transition-colors">
-      <div className="flex items-baseline justify-between mb-2">
+      <div className="flex items-baseline justify-between mb-2 gap-2 flex-wrap">
         <span
           aria-hidden="true"
           className="text-lg text-gold/70 leading-none"
         >
           {icon}
         </span>
-        <span className="font-mono text-mute/60 text-[9px] tracking-[0.3em] tabular">
-          🔒 {num}
+        <span className="flex items-baseline gap-2">
+          {/* R141 W1 · honest status badge · ✓ LIVE / ◐ PARTIAL / ⏳ PROMISE
+              · per Pratfall axiom 不藏 implementation gap · Apple「coming soon」
+              + Linear changelog + Patek Generations honesty pattern · per /audit
+              S05 PRE-COMMIT discipline · 修改 status 需 30 天前 /changelog 公告。 */}
+          <span
+            lang="en"
+            className={`font-mono text-[9px] tracking-[0.25em] tabular ${badge.cls}`}
+            title={`Build status: ${badge.label} · ${status === "live" ? "fully shipped" : status === "partial" ? "partially shipped" : "not yet built · binding ETA"}`}
+          >
+            {badge.glyph} {badge.label}
+          </span>
+          <span className="font-mono text-mute/60 text-[9px] tracking-[0.3em] tabular">
+            🔒 {num}
+          </span>
         </span>
       </div>
       <h5 className="text-bone/85 text-sm font-light tracking-tight leading-snug mb-1.5">
         {title}
       </h5>
       <p className="text-mute/80 text-[11px] leading-relaxed">{body}</p>
+      {eta && (
+        <p
+          className={`mt-2 pt-2 border-t border-line/30 font-mono text-[9px] tracking-[0.2em] leading-relaxed ${
+            status === "promise" ? "text-loss/70" : "text-mute/60"
+          }`}
+        >
+          ETA · {eta}
+        </p>
+      )}
     </div>
   );
 }
