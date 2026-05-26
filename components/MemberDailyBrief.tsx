@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import Link from "next/link";
 import { getMyTeam, getTeamById, getTeamByName } from "@/lib/teams";
+import { useMounted } from "@/lib/use-mounted";
 
 // ── ZONE 27 · Member Daily Brief ────────────────────────
 // Round 31 W-V · Tim canary fire「會員頁面了 · 能幹嘛?沒社交 · 沒功能
@@ -44,12 +44,8 @@ type Props = {
 };
 
 export default function MemberDailyBrief({ todayMatches }: Props) {
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setMounted(true);
-  }, []);
+  // R162 W1 · useMounted canonical hook(lib/use-mounted.ts)· same SSR-safe semantics
+  const mounted = useMounted();
 
   if (!mounted) {
     return (

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useMounted } from "@/lib/use-mounted";
 import Link from "next/link";
 import { getMyTeam, getTeamById, getTeamByName } from "@/lib/teams";
 
@@ -29,13 +30,11 @@ type Props = {
 };
 
 export default function MyTeamTrackRecord({ matches }: Props) {
-  const [mounted, setMounted] = useState(false);
+  // R162 W1 · useMounted canonical hook · separated from storage listener
+  const mounted = useMounted();
   const [, refresh] = useState(0);
 
   useEffect(() => {
-    // SSR-safe hydration · canonical pattern · React 19 strict overflags
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setMounted(true);
     // Listen for storage events (other tabs / cross-component team changes)
     const onStorage = () => refresh((x) => x + 1);
     window.addEventListener("storage", onStorage);

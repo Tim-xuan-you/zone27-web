@@ -21,13 +21,14 @@ import { FOUNDERS_TOTAL } from "@/lib/founders-stats";
 // Plain-text fallback for screen readers and plain-text-only clients.
 // ─────────────────────────────────────────────────────
 
+import { SUPPORT_EMAIL, BRAND_NAME } from "@/lib/brand-constants";
+
 const RESEND_ENDPOINT = "https://api.resend.com/emails";
-const FROM_ADDRESS = "ZONE 27 <onboarding@resend.dev>";
-// Tim's real inbox · reply UNSUBSCRIBE 與一般訪客回信都落這。
-// When brand domain (zone27.tw) ships · switch FROM to tim@zone27.tw
-// for stronger sender identity; REPLY_TO can stay personal Gmail or
-// follow.
-const REPLY_TO = "tatayngiti@gmail.com";
+const FROM_ADDRESS = `${BRAND_NAME} <onboarding@resend.dev>`;
+// R162 W2 · Agent M #5 · REPLY_TO now via canonical SUPPORT_EMAIL constant
+// (lib/brand-constants.ts)· brand domain switch flips 1 env var instead of
+// hunt-and-replace across 19+ mailto sites · prep for support@zone27.tw alias。
+const REPLY_TO = SUPPORT_EMAIL;
 
 export type EmailResult =
   | { ok: true; id: string }

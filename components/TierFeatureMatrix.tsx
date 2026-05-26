@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useMounted } from "@/lib/use-mounted";
 import Link from "next/link";
 
 // ── ZONE 27 · Tier Feature Matrix ──────────────────────
@@ -239,14 +240,14 @@ function isTierKey(v: string): v is TierKey {
 
 export default function TierFeatureMatrix() {
   const [activeTier, setActiveTier] = useState<TierKey | null>(null);
-  const [mounted, setMounted] = useState(false);
+  // R162 W1 · useMounted canonical hook · separated from localStorage side-effect
+  const mounted = useMounted();
 
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setMounted(true);
     try {
       const stored = localStorage.getItem(STORAGE_KEY);
       if (stored && isTierKey(stored)) {
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setActiveTier(stored);
       }
     } catch {

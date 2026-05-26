@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { getMyTeam, getTeamById, getTeamByName } from "@/lib/teams";
+import { useMounted } from "@/lib/use-mounted";
 
 // ── ZONE 27 · My Team Match Note ────────────────────────
 // Round 31 W-N · 在 /matches/[gameId] hero 顯示「您支持的 X 在這場是
@@ -25,13 +25,8 @@ export default function MyTeamMatchNote({
   awayWinRate,
   finalWinner,
 }: Props) {
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    // SSR-safe hydration · canonical pattern · React 19 strict overflags
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setMounted(true);
-  }, []);
+  // R162 W1 · useMounted canonical hook(lib/use-mounted.ts)· same SSR-safe semantics
+  const mounted = useMounted();
 
   if (!mounted) return null;
 

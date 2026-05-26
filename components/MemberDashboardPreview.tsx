@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useState } from "react";
+import { useMounted } from "@/lib/use-mounted";
 import Link from "next/link";
 import {
   getSimHistory,
@@ -121,12 +122,12 @@ export default function MemberDashboardPreview() {
   // from it. Single useEffect setState is the canonical SSR-safe pattern
   // for browser-API access(localStorage 沒 same-window change events ·
   // useSyncExternalStore subscribe 是 noop · Object.is comparison thrash).
-  const [mounted, setMounted] = useState(false);
+  // R162 W1 · useMounted canonical hook · mountTime stays(separate concern)
+  const mounted = useMounted();
   const [mountTime, setMountTime] = useState<number>(0);
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
-    setMounted(true);
     setMountTime(Date.now());
   }, []);
 

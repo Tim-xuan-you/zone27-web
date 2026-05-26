@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useMounted } from "@/lib/use-mounted";
 import {
   CPBL_TEAMS,
   getMyTeam,
@@ -43,15 +44,13 @@ export default function TeamPickPanel({
   onChange,
   className = "",
 }: Props) {
-  const [mounted, setMounted] = useState(false);
+  // R162 W1 · useMounted canonical hook · separated from getMyTeam side-effect
+  const mounted = useMounted();
   const [myTeamId, setMyTeamId] = useState<CpblTeamId | null>(null);
   const [pickerOpen, setPickerOpen] = useState(false);
 
   useEffect(() => {
-    // SSR-safe hydration · localStorage only exists post-mount · canonical
-    // pattern that React 19 strict rule overflags(同 CmdKTrigger 處理)。
     // eslint-disable-next-line react-hooks/set-state-in-effect
-    setMounted(true);
     setMyTeamId(getMyTeam());
   }, []);
 

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useMounted } from "@/lib/use-mounted";
 import Link from "next/link";
 
 // ── ZONE 27 · Tier Badge ────────────────────────────────
@@ -36,14 +37,14 @@ const TIER_LABELS: Record<string, { label: string; href: string }> = {
 
 export default function TierBadge() {
   const [tier, setTier] = useState<string | null>(null);
-  const [mounted, setMounted] = useState(false);
+  // R162 W1 · useMounted canonical hook · separated from localStorage side-effect
+  const mounted = useMounted();
 
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setMounted(true);
     try {
       const stored = localStorage.getItem(STORAGE_KEY);
       if (stored && stored in TIER_LABELS) {
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setTier(stored);
       }
     } catch {

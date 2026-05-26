@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useMounted } from "@/lib/use-mounted";
 
 // ── ZONE 27 · Admin Tier Switcher ───────────────────────
 // Round 36 W-D · Tim founder dogfood designer dev tool requirement:
@@ -51,12 +52,12 @@ const TIERS: { value: string; label: string; body: string; price: string }[] = [
 
 export default function AdminTierSwitcher() {
   const [current, setCurrent] = useState<string | null>(null);
-  const [mounted, setMounted] = useState(false);
+  // R162 W1 · useMounted canonical hook · separated from localStorage side-effect
+  const mounted = useMounted();
 
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setMounted(true);
     try {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setCurrent(localStorage.getItem(STORAGE_KEY));
     } catch {
       // ignore

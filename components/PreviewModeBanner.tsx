@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
+import { useMounted } from "@/lib/use-mounted";
 
 // ── ZONE 27 · Preview Mode Banner ───────────────────────
 // Round 36 W-D · Tim 14+ canary fire 後 founder dogfood question:
@@ -57,12 +58,10 @@ const TIER_LABELS: Record<string, string> = {
 
 export default function PreviewModeBanner() {
   const [tier, setTier] = useState<string | null>(null);
-  const [mounted, setMounted] = useState(false);
+  // R162 W1 · useMounted canonical hook · separated from URL deep link side-effect
+  const mounted = useMounted();
 
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setMounted(true);
-
     // R113 W1 · URL deep link auto-apply · per Tim 2026-05-25 query「我要
     // 怎麼分別登入?」 · 4 個 bookmarkable URL(/admin?tier=anonymous etc)·
     // visitor 從 URL 直接進入該 tier preview · 不需先訪問 /admin → click。
@@ -76,6 +75,7 @@ export default function PreviewModeBanner() {
       const tierParam = url.searchParams.get("tier");
       if (tierParam && tierParam in TIER_LABELS) {
         localStorage.setItem(STORAGE_KEY, tierParam);
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setTier(tierParam);
         // Clean URL · strip tier param 不留 navigation history · cleaner UX。
         url.searchParams.delete("tier");
