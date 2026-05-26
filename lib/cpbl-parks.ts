@@ -99,6 +99,21 @@ export const cpblParks: ParkFactor[] = [
     tilt: "hitter",
     rationale: "南部乾燥 · 球體積較大 · 海拔約 30m · 略偏打者",
   },
+  {
+    // R139 W1 · NEW · 嘉義市棒球場 added per cpbl-260526-02 ingest ·
+    // 統一獅 secondary home(primary 台南棒球場)· 1918 開幕 historic ground
+    // 多次 renovation · CPBL 主辦 hosts assigned per season schedule。
+    venue: "嘉義市棒球場",
+    en: "CHIAYI MUNICIPAL",
+    homeTeam: "統一獅",
+    openedYear: 1918,
+    // 老場 · 中外野 122m · 嘉義市區位 · 南部乾燥 · neutral baseline
+    // historic Asahi Stadium 改建 · 多次整修 · capacity ~11,500
+    estimatedHomeWinPct: 52,
+    estimatedRunsPerGame: 9.5,
+    tilt: "neutral",
+    rationale: "1918 開幕 · 多次 renovation · 中型場 · 嘉義市區 · neutral baseline",
+  },
 ];
 
 export function getParkFactorByVenue(venue: string): ParkFactor | null {
