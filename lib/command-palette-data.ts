@@ -412,102 +412,13 @@ export const COMMAND_ITEMS: CommandItem[] = [
     group: "品牌 IP",
     keywords: ["changelog", "版本", "git", "歷史", "log"],
   },
-  {
-    // R128 W2 · NEW /heritage direct Cmd-K entry · per R127 W2 NEW DELTA-of-
-    // CPBL positioning section ship · 之前 only via /transparency aggregator
-    // 2-click path · 現在 power-user 搜「DELTA」/「Patek Generations」/
-    // 「inheritance」/「二代目」/「世代」/「下一代」/「heritage」 直接 jump ·
-    // per [[feedback-zone27-delta-of-cpbl-positioning]] memory SOP canonical
-    // placement + [[feedback-zone27-tier-dogfood-method]] pattern(同 R122 W1
-    // /admin direct-add precedent · 信任文件 / 品牌 IP groups 適當 expansion)。
-    label: "Heritage · 替下一個 CPBL 球迷世代守 · DELTA-of-CPBL positioning",
-    kicker: "/heritage",
-    path: "/heritage",
-    group: "品牌 IP",
-    keywords: [
-      "heritage",
-      "繼承",
-      "傳承",
-      "世代",
-      "下一代",
-      "二代目",
-      "二代目ファン",
-      "inheritance",
-      "patek",
-      "patek philippe",
-      "generations",
-      "1996",
-      "belk",
-      "belk 1988",
-      "extended self",
-      "weinstein 1963",
-      "altercasting",
-      "delta",
-      "delta of cpbl",
-      "delta japan",
-      "rebas",
-      "rebas tw",
-      "野球革命",
-      "first mover",
-      "positioning",
-      "category",
-      "one-winner-take-all",
-      "asian baseball analytics",
-      "hanshin tigers",
-      "tigers",
-    ],
-  },
+  // R164 NUCLEAR DELETE · /heritage + /transparency + /engine-log Cmd-K
+  // entries removed per Tim canary fire「頁面多到一個離譜」 · Apple discipline
+  // 12-page max · pages deleted from app/ · cross-references redirected to
+  // canonical parents(/heritage→/about · /transparency→/audit · /engine-log→
+  // /audit)。
 
   // ── 信任文件 ───────────────────────────────────────
-  {
-    label: "Transparency · 完整 audit 一頁可見 · aggregator",
-    kicker: "/transparency",
-    path: "/transparency",
-    group: "信任文件",
-    keywords: [
-      "transparency",
-      "audit",
-      "aggregator",
-      "anthropic",
-      "limits",
-      "never",
-      "公開",
-      "稽核",
-    ],
-  },
-  {
-    // R120 W5 · /engine-log direct Cmd-K entry · 之前 only via /transparency
-    // aggregator 2-click path · R120 W3 加 LIVE STATE 8-cell Plausible numeric
-    // dashboard 後 /engine-log 升 top-tier brand IP signal · 1-click 直達 better
-    // 配合 Tim「讓網站熱銷」 mandate · 37/36 entries marginal Hick's Law cost。
-    label: "Engine Log · operational artifact + LIVE STATE numeric dashboard",
-    kicker: "/engine-log",
-    path: "/engine-log",
-    group: "信任文件",
-    keywords: [
-      "engine log",
-      "engine-log",
-      "ops",
-      "operational",
-      "status",
-      "live state",
-      "live status",
-      "dashboard",
-      "stripe status",
-      "cloudflare postmortem",
-      "tailscale",
-      "plausible",
-      "berkshire",
-      "summary",
-      "numeric",
-      "stats",
-      "現況",
-      "狀態",
-      "引擎運轉",
-      "operations",
-      "uptime",
-    ],
-  },
   {
     label: "Model Report · 引擎範圍 + 揭露哲學",
     kicker: "/audit",
@@ -817,67 +728,9 @@ export const COMMAND_ITEMS: CommandItem[] = [
       "1500",
     ],
   },
-  {
-    // R128 W1 · keywords augment · per R125-R127 §07 PRECEDENT BENCHMARKS
-    // 12-fact data table ship · power-user 搜「為何 NT$ 2,700」/「Defector」/
-    // 「Stratechery」/「CPBLTV」/「Patek Generations」/「DELTA」/「權證小哥」/etc
-    // 直接 jump /pricing/why · 不再 only via「定價/pricing」 narrow keyword·
-    // per [[feedback-zone27-paid-model-is-support-not-features]] memory +
-    // [[feedback-zone27-delta-of-cpbl-positioning]] memory + R126 TW market
-    // agent verified web research data。
-    label: "為什麼 NT$ 1,500/season / NT$ 2,700 · 12-fact precedent benchmarks",
-    kicker: "/pricing/why",
-    path: "/pricing/why",
-    group: "轉換",
-    keywords: [
-      "pricing",
-      "why",
-      "為什麼",
-      "為何",
-      "定價",
-      "price",
-      "1500",
-      "2700",
-      "math",
-      // R128 W1 · §07 PRECEDENT BENCHMARKS 12 facts data brand names
-      "defector",
-      "stratechery",
-      "ben thompson",
-      "404 media",
-      "kickstarter",
-      "fangraphs",
-      "hami",
-      "hami video",
-      "cpbltv",
-      "cpbl tv",
-      "patek",
-      "patek philippe",
-      "generations",
-      "delta",
-      "delta japan",
-      "1.02",
-      "essence of baseball",
-      "yusuke okada",
-      "bill james",
-      "權證小哥",
-      "pressplay",
-      "costly signaling",
-      "spence 1973",
-      "precedent",
-      "benchmark",
-      "為何要付錢",
-      "誰要付錢",
-      "支持",
-      "support",
-      "fund tim",
-      "identity tier",
-      "patek-tier",
-      "270 seats",
-      "lifetime",
-      "終身",
-      "founding subscriber",
-    ],
-  },
+  // R164 NUCLEAR DELETE · /pricing/why Cmd-K entry removed · /pricing route
+  // deleted per Tim canary fire · NT$ 2,700 justification 已在 /founders body +
+  // BreakEvenCell + MultiYearAnchor + GenerationsLine consolidated · 不需獨立 page。
 
   // ── 工具 · 外部 ────────────────────────────────────
   {

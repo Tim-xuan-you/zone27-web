@@ -450,10 +450,10 @@ export default function Home() {
         </p>
         <p className="mt-4 font-mono text-[10px] sm:text-[11px] tracking-[0.3em]">
           <Link
-            href="/transparency"
+            href="/audit"
             className="text-gold/80 hover:text-gold underline decoration-mute/40 underline-offset-4 hover:decoration-gold transition-colors"
           >
-            完整 audit · /transparency →
+            完整 audit · /audit →
           </Link>
         </p>
       </section>

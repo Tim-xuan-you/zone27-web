@@ -112,7 +112,6 @@ const FOOTER_GROUPS: FooterGroup[] = [
     label: "信任文件",
     enLabel: "DOCS",
     links: [
-      { label: "Transparency · 完整 audit", href: "/transparency" },
       { label: "模型報告", href: "/audit" },
       { label: "技術白皮書", href: "/methodology" },
       { label: "公開戰績", href: "/track-record" },
@@ -142,10 +141,6 @@ const FOOTER_GROUPS: FooterGroup[] = [
       // inline link · footer 滾到底 訪客 找「怎麼聯繫 Tim」 dead-end · /interact
       // section 03 cross-links to /hey-tim solving 2 navigation gaps with 1 ship。
       { label: "10 互動管道 · Hey Tim", href: "/interact" },
-      // R69 W-A · NEW /founders/first-five-minutes onboarding trail ·
-      // 5-step trust artifact receipt tour · Linear/Superhuman compressed ·
-      // F-pattern second-row priority entry · per Agent A R68 SHIP 1。
-      { label: "首五分鐘 · 5 receipts", href: "/founders/first-five-minutes" },
       { label: "關於 ZONE 27", href: "/about" },
       // Round 50 W-B · 2026-05-22 · Tim 26+ canary fire UX root cause ·
       // /login footer entry 是 Nav LOGIN button + Cmd-K 之外的第三條路 ·
@@ -167,13 +162,6 @@ const FOOTER_GROUPS: FooterGroup[] = [
     links: [
       { label: "倒置宣言", href: "/manifesto" },
       { label: "鐵律", href: "/discipline" },
-      // R114 W3 · per agent cold start playbook research · 「ONE artifact
-      // that travels」 winning pattern(Defector「how-we-got-here」 +
-      // Plausible「Why you should stop using GA」 + BP 1996 photocopied book)
-      // /letter IS Tim's manifesto candidate · 之前 orphan(僅 /hey-tim inline
-      // reference)· 加入 Footer BRAND IP column 提升 discoverability surface ·
-      // 是訪客 LINE 群分享 ZONE 27 URL 的 canonical target。
-      { label: "Tim 親手 letter", href: "/letter" },
       { label: "公開路線圖", href: "/roadmap" },
       // Round 28 Wave 4 · /now NEW · craft journal 現在 · 位於
       // /changelog(過去)+ /roadmap(未來)中間。Linear /now + Derek
