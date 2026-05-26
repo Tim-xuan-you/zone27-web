@@ -196,6 +196,15 @@ export default async function MatchDetailPage({
           <span>FIRST PITCH · {m.startTime}</span>
         </div>
 
+        {/* R153 W1 · GameThread MOVED TO TOP · Tim 13-fire same canary
+            confirmed buried at bottom · 點 Nav 討論室 anchor 沒 reliably
+            surface(7-LENS CANVAS 長 scroll labyrinth)· MOVE to top right
+            after team headline + venue · before TeamPickPanel + 7-LENS ·
+            visitor cannot miss · per Tim 13-fire trust founder + nuclear
+            placement demand。 */}
+      </section>
+      <GameThread gameId={m.id} />
+      <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-12">
         {/* ── Round 38 W-B · TeamPickPanel header variant · Agent C P1
             ship · 對你說話 hook for first-time WhatsApp-link landers ·
             未 set localStorage z27_team 的訪客在這裡 inline pick ·
@@ -798,13 +807,11 @@ export default async function MatchDetailPage({
           完全多餘。 Conversion path 到 /founders 保留在 RelatedReading +
           Footer + Cmd-K · 此 section 刪除無損 conversion。 */}
 
-      {/* R148 W1 · GameThread scaffold · Tim founder-dogfood-canary 7-fire
-          explicit override of R123 iron rule · 賽事討論室 minimum-violation
-          ship · BLACK CARD-gated · 1-thread 24hr decay · 球迷 grammar · 0
-          betting · Tim solo moderate · ⏳ PRE-LAUNCH Q3 2026 scaffold ·
-          mockup 3 sample posts illustrate 球迷 grammar · placement after
-          7-LENS CANVAS post-engagement · before RelatedReading retreat。 */}
-      <GameThread gameId={m.id} />
+      {/* R153 W1 · GameThread MOVED TO TOP of page · removed from this
+          position(was after 7-LENS CANVAS before RelatedReading)· Tim
+          13-fire screenshot confirmed buried position 沒 reliably surface ·
+          now visible at TOP right after team headline + venue per Tim
+          nuclear placement demand。 */}
 
       {/* ── RELATED READING · Round 11 audit fix ──────
           Was: lone「← 回到今日賽事板」retreat link · dead-end.
