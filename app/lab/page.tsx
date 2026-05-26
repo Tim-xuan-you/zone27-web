@@ -280,7 +280,29 @@ export default function LabPage() {
         >
           / 引擎跑完了 · 接下來?
         </p>
-        <div className="grid sm:grid-cols-2 gap-3">
+        {/* R160 W2.O1 · Agent O Gap 1 · 2-card → 3-card trust loop · /audit
+            是 plain-language Model Report entry · Disclosure Philosophy
+            canonical home(S05)· 之前 lab 跑完訪客找「why trust this output」
+            必須 exit page through Cmd-K · /track-record + /audit + /founders
+            three-card 完整 trust loop · per Anthropic transparency hub pattern。 */}
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+          <Link
+            href="/audit"
+            className="block p-5 sm:p-6 border border-line/60 hover:border-gold/60 transition-colors group bg-slate/20"
+          >
+            <p
+              lang="en"
+              className="font-mono text-mute group-hover:text-gold text-[10px] tracking-[0.35em] mb-2 transition-colors"
+            >
+              MODEL REPORT · /audit
+            </p>
+            <h3 className="text-lg text-bone font-light tracking-tight mb-2">
+              5 sections + Disclosure Philosophy →
+            </h3>
+            <p className="font-mono text-mute/70 text-[10px] tracking-[0.25em]">
+              引擎背後的 model card · 零行銷語言
+            </p>
+          </Link>
           <Link
             href="/track-record"
             className="block p-5 sm:p-6 border border-line/60 hover:border-gold/60 transition-colors group bg-slate/20"
@@ -292,10 +314,10 @@ export default function LabPage() {
               TRACK RECORD · 公開戰績
             </p>
             <h3 className="text-lg text-bone font-light tracking-tight mb-2">
-              看引擎過去哪場 PROVED · 哪場 DIVERGED →
+              PROVED · DIVERGED 等大列出 →
             </h3>
             <p className="font-mono text-mute/70 text-[10px] tracking-[0.25em]">
-              不藏 miss · 等大列出 · sample 累積中
+              不藏 miss · sample 累積中
             </p>
           </Link>
           <Link

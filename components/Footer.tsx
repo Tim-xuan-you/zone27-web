@@ -136,6 +136,12 @@ const FOOTER_GROUPS: FooterGroup[] = [
     enLabel: "ENTRY",
     links: [
       { label: "5 分鐘入門", href: "/learn" },
+      // R160 W2.O5 · Agent O Gap 5 · /interact to Footer ENTRY column ·
+      // canonical reader↔writer 10 channels surface(per [[feedback-zone27-
+      // one-way-by-design]] R148 narrowed scope)· 之前只 Cmd-K + homepage
+      // inline link · footer 滾到底 訪客 找「怎麼聯繫 Tim」 dead-end · /interact
+      // section 03 cross-links to /hey-tim solving 2 navigation gaps with 1 ship。
+      { label: "10 互動管道 · Hey Tim", href: "/interact" },
       // R69 W-A · NEW /founders/first-five-minutes onboarding trail ·
       // 5-step trust artifact receipt tour · Linear/Superhuman compressed ·
       // F-pattern second-row priority entry · per Agent A R68 SHIP 1。

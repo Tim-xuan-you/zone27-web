@@ -417,9 +417,12 @@ export default function EthicsPage() {
             這 6 條 == 他們整個 revenue model 構成。
           </p>
           <p>
-            修改此 page 9 commitments 需 30 天 /changelog 公告 · 同 /audit S05
-            PRE-COMMIT pattern · Costly Signaling 100× · 同 /integrity 22
-            binding rules modification protocol 軸線一致。
+            修改此 page 9 commitments 需 30 天 /changelog 公告 · 同{" "}
+            <Link href="/audit#section-05" className="text-gold hover:underline">/audit S05</Link>{" "}
+            PRE-COMMIT pattern · Costly Signaling 100× · 同{" "}
+            <Link href="/integrity" className="text-gold hover:underline">/integrity 22 binding rules</Link>{" "}
+            modification protocol 軸線一致。 違反任一條 = 紅字永久標 in{" "}
+            <Link href="/track-record" className="text-gold hover:underline">/track-record</Link>。
           </p>
         </FounderSignOff>
 

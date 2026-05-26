@@ -365,6 +365,22 @@ export default async function FoundersPage({
             investors) + audience-fans grammar(CPBL fan 27 yr)triple-fire。 */}
         <CredentialStack />
 
+        {/* R160 W2.O2 · Agent O Gap 2 · /founders → /track-record decision-line ·
+            highest-warmth page · 1-click from NT$ 2,700 commitment · Tim brand IP
+            「look at the receipts before you commit」 但 /founders 全 page 無 direct
+            /track-record link(只 /audit#section-05 PRE-COMMIT 深 anchor)· per
+            Agent O recommendation surface PROVED ledger 在 form 前 explicit。 */}
+        <p className="mt-6 max-w-md mx-auto text-center font-mono text-mute/85 text-xs sm:text-[13px] tracking-[0.15em] leading-relaxed">
+          ⚓ 決定前看{" "}
+          <Link
+            href="/track-record"
+            className="text-gold hover:text-gold-soft underline-offset-4 hover:underline transition-colors"
+          >
+            /track-record
+          </Link>{" "}
+          · 引擎在真實 CPBL 賽事的 PROVED + DIVERGED ledger · N=1 至今 honest
+        </p>
+
         {/* Round 52 W-D · Agent 1 #4 fix · Founder voice block at buy line
             · 之前 FROM THE FOUNDER 在 form 之後(R8 移)· 訪客 buy-decision
             moment 沒看到 Tim voice · 加 present-tense first-person 120-word

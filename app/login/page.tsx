@@ -5,6 +5,7 @@ import Link from "next/link";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import { createSupabaseBrowserClient } from "@/lib/supabase/browser";
+import { sanitizeNext } from "@/lib/sanitize-next";
 
 const EMAIL_CACHE_KEY = "zone27_last_login_email";
 const RESEND_COOLDOWN_SEC = 30;
@@ -87,11 +88,23 @@ export default function LoginPage() {
       } catch {
         // localStorage blocked · 不擋
       }
-      // Parse ?next=
+      // R160 W1 · Agent M CRITICAL security parity fix · 之前 string-prefix
+      // check 有 bypass surface(`/%2F%2Fattacker.com` URL-encoded · `/\\evil.tld`
+      // backslash variant · null-byte injection 等)· 同 R54 W-A vulnerability
+      // class 已在 /auth/callback patched 但 /login 缺 parity · ALL of nextPath
+      // is propagated to window.location.assign() at lines 178+217 + Supabase
+      // emailRedirectTo at lines 195+254 · 必須 sanitize at input · per
+      // [[zone27-disclosure-philosophy]] defense parity axiom · sanitizeNext
+      // canonical helper from lib/sanitize-next.ts(URL parse-based validation)。
       const sp = new URLSearchParams(window.location.search);
-      const raw = sp.get("next");
-      if (raw && raw.startsWith("/") && !raw.startsWith("//")) {
-        setNextPath(raw);
+      const rawNext = sp.get("next");
+      if (rawNext) {
+        const sanitized = sanitizeNext(rawNext);
+        // sanitizeNext fallback returns "/member?welcome=true" · only set
+        // nextPath if visitor explicitly passed a valid override(not fallback)
+        if (sanitized !== "/member?welcome=true") {
+          setNextPath(sanitized);
+        }
       }
       // Probe existing session(已登入訪客不需重 register)
       try {

@@ -17,49 +17,13 @@
 
 import { NextResponse, type NextRequest } from "next/server";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
+import { sanitizeNext } from "@/lib/sanitize-next";
 
-/**
- * Sanitize `next` redirect param to prevent open-redirect attack。
- *
- * Round 54 W-A · Agent 2 #4 CRITICAL fix · previous string-prefix check 有
- * bypass surface:`/%2F%2F` URL-encoded · `//\attacker.com` backslash
- * variant · null-byte injection 等。 改用 URL parse-based approach · 只允
- * 接受 relative paths · 拒絕 any URL with protocol/host 即使 encoded。
- *
- * Reject:
- *   - Absolute URL(http://attacker.com)including encoded variants
- *   - Protocol-relative(//attacker.com · //%2Fattacker · etc)
- *   - Empty / non-string / null bytes
- *   - URL parse failures
- *
- * Allow:
- *   - Internal relative path(no protocol · no host · starts with /)
- *   - Optional query string + fragment(preserved)
- *
- * Fallback to canonical /member welcome on any invalid input。
- */
-function sanitizeNext(raw: string | null): string {
-  const fallback = "/member?welcome=true";
-  if (!raw || typeof raw !== "string") return fallback;
-  // Reject null bytes(some parsers strip pre-validation · we reject explicit)
-  if (raw.includes("\0")) return fallback;
-  // Must start with single `/` and NOT `//` (catches protocol-relative)
-  if (!raw.startsWith("/")) return fallback;
-  if (raw.startsWith("//")) return fallback;
-  if (raw.startsWith("/\\")) return fallback;
-
-  // Parse-based validation · catches encoded bypasses(%2F%2F → //)
-  try {
-    // Use dummy origin · only care about whether parser extracts a host
-    const parsed = new URL(raw, "https://zone27-internal.invalid");
-    // Allowed = parser kept dummy origin(meaning raw was truly relative)
-    if (parsed.origin !== "https://zone27-internal.invalid") return fallback;
-    // Reconstruct path-only · strip any protocol/host that might have slipped
-    return parsed.pathname + parsed.search + parsed.hash;
-  } catch {
-    return fallback;
-  }
-}
+// R160 W1 · Agent M CRITICAL security parity · sanitizeNext extracted to
+// canonical `lib/sanitize-next.ts` shared with /login(parity-patched here)·
+// per [[zone27-disclosure-philosophy]] defense parity axiom · 1 fix per
+// attack vector · NO asymmetric weakness。 Original R54 W-A docstring +
+// implementation moved verbatim to lib helper · re-imported above。
 
 export async function GET(request: NextRequest) {
   const url = new URL(request.url);
