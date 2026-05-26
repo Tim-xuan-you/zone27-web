@@ -263,8 +263,10 @@ export default function TrackRecordPage() {
         <p className="mt-4 font-mono text-mute/70 text-[10px] tracking-[0.25em] leading-relaxed">
           {finalized.length === 0 && (
             <span>
-              ⚠ 樣本數 0 · 第一筆 entry 預定今晚 (2026-05-21) cpbl-260521-01
-              統一 vs 富邦 賽後收錄 · 請明天回來
+              ⚠ 樣本數 0 · 第一筆 entry 賽後 24 小時內收錄 · 同 Tim 手工 ingest cadence
+              (per <Link href="/audit#section-05" className="text-gold hover:underline">/audit S05</Link>{" "}
+              + <Link href="/now" className="text-gold hover:underline">/now</Link>{" "}
+              公開 ingest 時間)
             </span>
           )}
           {finalized.length > 0 && finalized.length < 30 && (
@@ -1028,13 +1030,13 @@ function EmptyLedger() {
         N = 0 · LEDGER EMPTY · BY DESIGN
       </p>
       <h3 className="text-2xl text-bone font-light tracking-tight mb-3">
-        第一筆 entry 預定今晚收錄
+        Ledger 等待第一筆 <span className="text-gold">PROVED ✓</span> 或 <span className="text-loss/85">DIVERGED ✕</span>
       </h3>
       <p className="text-mute text-sm leading-relaxed max-w-md mx-auto mb-8">
         ZONE 27 不 backfill 歷史預測 — 沒有 cherry-picked 過往 ·
         沒有事後找出引擎曾經言中的場次。
-        Ledger 從 <span className="text-gold">cpbl-260521-01</span>{" "}
-        統一 vs 富邦 開始記錄 · 賽後最終比分 ingest 後第一筆會亮起。
+        Ledger 從引擎首次公開預測過的 CPBL 賽事 ingest 後第一筆亮起 ·
+        不藏 waiting 狀態本身就是 brand IP(per <Link href="/audit#section-05" className="text-gold hover:underline">/audit S05</Link>)。
       </p>
 
       {/* Round 13 cinematic moment · FIRST PITCH → FIRST RECEIPT
@@ -1065,10 +1067,10 @@ function EmptyLedger() {
 
       <div className="mt-10 flex flex-wrap gap-3 justify-center">
         <Link
-          href="/matches/cpbl-260521-01"
+          href="/matches"
           className="px-6 py-2.5 border border-gold text-gold text-xs tracking-[0.3em] hover:bg-gold hover:text-navy transition-colors"
         >
-          看今晚的預測 →
+          看今日預測 →
         </Link>
         <Link
           href="/manifesto"

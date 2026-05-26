@@ -119,6 +119,7 @@ const TIERS = [
       preview: "—",
       hospitality: "—",
       cap: "無限",
+      fiveYearTotal: "NT$ 0",
     },
   },
   {
@@ -136,6 +137,7 @@ const TIERS = [
       preview: "—",
       hospitality: "—",
       cap: "無限",
+      fiveYearTotal: "NT$ 15,000",
     },
   },
   {
@@ -153,6 +155,7 @@ const TIERS = [
       preview: "✓ 7 天",
       hospitality: "✓",
       cap: "270 · 永遠關閉",
+      fiveYearTotal: "NT$ 2,700",
     },
   },
 ] as const;
@@ -166,6 +169,11 @@ const COMPARE_ROWS = [
   { key: "preview", label: "AI 模型優先試用", en: "MODEL PREVIEW" },
   { key: "hospitality", label: "實體招待", en: "HOSPITALITY" },
   { key: "cap", label: "名額", en: "CAP" },
+  // R158 W3.H2 · Agent H Decoy Effect (Ariely 2008 + Tversky & Simonson 1993)·
+  // surface existing CalcRow「5 年訂閱對照」 math(10 seasons × 1,500 = 15,000
+  // vs 2,700 lifetime)at comparison-table moment · NOT new pricing · pure visual
+  // 揭露 the asymmetric dominance already TRUE per canonical 5-yr parity row。
+  { key: "fiveYearTotal", label: "5 年總額", en: "5-YEAR TOTAL" },
 ] as const;
 
 // ── Inline FAQ — Round 52 W-E · Agent 1 #1 ship · 從 3 → 10 Q · HEY pricing
@@ -284,6 +292,24 @@ export default async function FoundersPage({
           className="font-mono text-mute text-xs sm:text-sm tracking-[0.3em] mt-3 sm:mt-5"
         >
           ONE-TIME · LIFETIME · NEVER REOPENS
+        </p>
+
+        {/* R158 W3.H3 · Agent H Loss Aversion frame · Kahneman & Tversky 1979
+            Prospect Theory + Tom/Fox/Trepel/Poldrack 2007 fMRI(Science 315
+            ventral striatum 2× signal magnitude for losses vs equivalent
+            gains)· λ ≈ 2.25 asymmetry · 「the specific number 永遠不會存在
+            於您 ID 中」 categorical-loss frame · NOT urgency manipulation ·
+            NOT fake counter · 因為 270 永遠關閉 binding is published 12+
+            places · per /audit S05 PRE-COMMIT physical truth · per Patek 1996
+            Generations「you look after it for next generation」 same axis as
+            existing GenerationsLine。 */}
+        <p className="mt-4 max-w-md mx-auto text-loss/85 text-xs sm:text-[13px] leading-relaxed font-mono tracking-[0.05em]">
+          ⚓ <span className="text-loss">#{String(FOUNDERS_NEXT).padStart(3, "0")}</span>{" "}
+          認領後 · 您再也無法成為{" "}
+          <span className="text-loss">#{String(FOUNDERS_NEXT).padStart(3, "0")}</span>
+          。 不是「下一批還有」 · 是「這個編號永遠不存在於您 ID 中」 · per{" "}
+          <Link href="/audit#section-05" className="text-loss/85 hover:text-gold underline-offset-4 hover:underline">/audit S05 PRE-COMMIT</Link>{" "}
+          物理 codify · 不是 marketing FOMO。
         </p>
 
         {/* Round 52 W-D · Agent 1 #3 fix ·「270 = Tim's personal-reply

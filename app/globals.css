@@ -921,3 +921,87 @@ html[data-density="condensed"] article[class*="pb-12"] {
 html[data-density="condensed"] p[class*="leading-relaxed"] {
   line-height: 1.55;
 }
+
+/* ============================================
+   R158 W2 · Agent G#4 · :active button press microfeedback
+   Single :where() rule reaches 100+ buttons · transform scale(0.98) 80ms
+   ease · below perception delay threshold · gives tactile confirmation
+   finger left a mark especially when tap doesn't navigate immediately
+   (server action pending). Per Vercel Geist Button「explicitly list
+   transitions」 + Linear feel + shadcn pattern。
+   prefers-reduced-motion guarded · 0 JS · pure CSS · 0 bundle delta。
+   ============================================ */
+:where(button, [role="button"]):not(:disabled):active {
+  transform: scale(0.98);
+  transition: transform 80ms ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :where(button, [role="button"]):not(:disabled):active {
+    transform: none;
+    transition: none;
+  }
+}
+
+/* ============================================
+   R158 W2 · Agent G#3 · <kbd> global stylesheet
+   56 occurrences across 20 files previously re-declared inline per call
+   site · brand-pure consistent key-press 3D effect via inset border-
+   bottom-shadow · same pattern Linear/GitHub/Notion ship for keyboard
+   hint。 inline classes (CommandPalette + GlobalShortcuts + Cmd-K footer)
+   override locally if needed · global default reduces duplication。
+   ============================================ */
+kbd {
+  display: inline-block;
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.85em;
+  line-height: 1;
+  padding: 0.15em 0.45em;
+  background: var(--zone-slate);
+  color: var(--zone-bone);
+  border: 1px solid var(--zone-line);
+  border-bottom-width: 2px;
+  border-radius: 2px;
+  box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.4);
+  vertical-align: baseline;
+}
+
+/* ============================================
+   R158 W2 · Agent G#1 · :target flash + scroll-margin-top anchor
+   reveal · ZONE 27 brand IP「方法公開 + canonical-link targets」 claim
+   was broken pre-R158(grep 0 anchor href / 0 id= in trust artifact
+   pages despite 47 cross-reference comments)。 此 rule + id= additions
+   close the structural gap · Stripe API docs + MDN + Tailwind docs
+   canonical pattern。 600-800ms cold-gold pulse confirms「您在這」
+   without ping. scroll-margin-top: 5rem keeps section heading clear
+   of any sticky top edges。 prefers-reduced-motion guarded。
+   ============================================ */
+:where([id]) {
+  scroll-margin-top: 5rem;
+}
+
+@keyframes target-flash {
+  0% {
+    background-color: rgba(212, 175, 55, 0.22);
+    box-shadow: -3px 0 0 0 rgba(212, 175, 55, 0.85);
+  }
+  60% {
+    background-color: rgba(212, 175, 55, 0.08);
+    box-shadow: -3px 0 0 0 rgba(212, 175, 55, 0.5);
+  }
+  100% {
+    background-color: transparent;
+    box-shadow: -3px 0 0 0 rgba(212, 175, 55, 0);
+  }
+}
+
+:where([id]):target {
+  animation: target-flash 1200ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :where([id]):target {
+    animation: none;
+    background-color: rgba(212, 175, 55, 0.1);
+  }
+}

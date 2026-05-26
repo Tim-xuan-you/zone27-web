@@ -76,9 +76,20 @@ export default function FollowMatchButton({ matchId }: { matchId: string }) {
       setStatus({ kind: "ready", following: next });
     } catch (err) {
       if (!mountedRef.current) return;
-      const message =
-        err instanceof Error ? err.message : "unknown_error";
-      setStatus({ kind: "error", message, following: prev });
+      const raw = err instanceof Error ? err.message : "unknown_error";
+      // R158 W1 · Agent I error #3 · 不 leak raw err.message(JWT expired / fetch
+      // failed)to visitor · per [[zone27-disclosure-philosophy]] + 不 panic · 給
+      // concrete 下一步 · 同 MatchNoteEditor 同 axis · raw error 在 console
+      // available for debugging。
+      if (process.env.NODE_ENV !== "production") {
+        console.warn("[FollowMatchButton] toggle error:", raw);
+      }
+      const visibleMessage = /network|fetch/i.test(raw)
+        ? "網路 issue · follow 狀態未變更 · 重試"
+        : /jwt|session|expired/i.test(raw)
+        ? "session 過期 · 請 /login 重新登入"
+        : "Follow 切換失敗 · 重試或 email Tim";
+      setStatus({ kind: "error", message: visibleMessage, following: prev });
     }
   }
 

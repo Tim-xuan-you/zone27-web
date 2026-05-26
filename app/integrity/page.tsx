@@ -214,7 +214,10 @@ export default function IntegrityPage() {
         <div className="mx-auto w-32 gold-line mb-12" />
 
         {/* ── §01 · 13 永遠不做 redlines ──────────── */}
-        <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-12">
+        <section
+          id="section-01"
+          className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-12 scroll-mt-20"
+        >
           <p
             lang="en"
             className="font-mono text-gold/85 text-[10px] tracking-[0.4em] mb-4"
@@ -234,7 +237,10 @@ export default function IntegrityPage() {
         </section>
 
         {/* ── §02 · 9 binding ethics ────────────────── */}
-        <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-12 border-t border-line/40 pt-12">
+        <section
+          id="section-02"
+          className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-12 border-t border-line/40 pt-12 scroll-mt-20"
+        >
           <p
             lang="en"
             className="font-mono text-gold/85 text-[10px] tracking-[0.4em] mb-4"
@@ -262,7 +268,10 @@ export default function IntegrityPage() {
             possible · per [[zone27-disclosure-philosophy]] + [[zone27-
             monetization-philosophy]] + [[feedback-zone27-pratfall-brand-ip]]
             三 axiom 同時 fire · brand IP minimum-violation form。 */}
-        <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-12 border-t border-line/40 pt-12">
+        <section
+          id="section-02b"
+          className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-12 border-t border-line/40 pt-12 scroll-mt-20"
+        >
           <p
             lang="en"
             className="font-mono text-gold/85 text-[10px] tracking-[0.4em] mb-4"
@@ -395,7 +404,10 @@ export default function IntegrityPage() {
         </section>
 
         {/* ── §03 · BERKSHIRE 1996 PATTERN explanation ── */}
-        <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-12 border-t border-line/40 pt-12">
+        <section
+          id="section-03"
+          className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-12 border-t border-line/40 pt-12 scroll-mt-20"
+        >
           <p
             lang="en"
             className="font-mono text-gold/85 text-[10px] tracking-[0.4em] mb-4"
@@ -434,7 +446,10 @@ export default function IntegrityPage() {
         </section>
 
         {/* ── §04 · PRE-COMMIT MECHANISM ─────────── */}
-        <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-12 border-t border-line/40 pt-12">
+        <section
+          id="section-04"
+          className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-12 border-t border-line/40 pt-12 scroll-mt-20"
+        >
           <p
             lang="en"
             className="font-mono text-gold/85 text-[10px] tracking-[0.4em] mb-4"

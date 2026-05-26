@@ -77,9 +77,20 @@ export default function MatchNoteEditor({ matchId }: { matchId: string }) {
       }, 1800);
     } catch (err) {
       if (!mountedRef.current) return;
-      const message =
-        err instanceof Error ? err.message : "save_failed";
-      setStatus({ kind: "error", message });
+      const raw = err instanceof Error ? err.message : "save_failed";
+      // R158 W1 · Agent I error #2 · 不 leak raw Supabase err.message(JWT expired
+      // / fetch failed)to visitor · per [[zone27-disclosure-philosophy]] + 不 panic ·
+      // 不 pretend nothing wrong · 給 concrete 下一步。 raw error 在 console
+      // available for debugging。
+      if (process.env.NODE_ENV !== "production") {
+        console.warn("[MatchNoteEditor] save error:", raw);
+      }
+      const visibleMessage = /network|fetch/i.test(raw)
+        ? "網路 issue · 您的筆記還沒寫入(留在輸入框)· 請 10 秒後再儲存"
+        : /jwt|session|expired/i.test(raw)
+        ? "session 過期 · 請 /login 重新登入 · 您的筆記留在輸入框"
+        : "筆記儲存失敗 · 留在輸入框未消失 · 重試或 email Tim";
+      setStatus({ kind: "error", message: visibleMessage });
     }
   }
 
