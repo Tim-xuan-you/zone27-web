@@ -457,12 +457,18 @@ export default function FoundersApplicationForm() {
         · 通過後您才會收到付款方式。
       </p>
 
+      {/* R142 W4 · a11y fix · WCAG 1.3.1 + 4.1.2 · all 4 form fields(email
+          · name · cpbl_connection · why_zone27)之前 implicit wrapping <label>
+          + 內 <span> label · 沒 explicit htmlFor + id pairing · 加 id +
+          htmlFor explicit pair across 全 4 fields per Apple/Material/Polaris
+          accessible-name-and-role-value industry pattern。 */}
       {/* Email */}
-      <label className="block mb-5">
+      <label htmlFor="founders-apply-email" className="block mb-5">
         <span className="font-mono text-mute text-[10px] tracking-[0.3em] block mb-2">
           EMAIL · 必填
         </span>
         <input
+          id="founders-apply-email"
           type="email"
           name="email"
           required
@@ -474,11 +480,12 @@ export default function FoundersApplicationForm() {
       </label>
 
       {/* Name */}
-      <label className="block mb-5">
+      <label htmlFor="founders-apply-name" className="block mb-5">
         <span className="font-mono text-mute text-[10px] tracking-[0.3em] block mb-2">
           稱呼 · 必填 · 真名 OK · 球迷暱稱也 OK
         </span>
         <input
+          id="founders-apply-name"
           type="text"
           name="name"
           required
@@ -491,11 +498,12 @@ export default function FoundersApplicationForm() {
       </label>
 
       {/* CPBL Connection */}
-      <label className="block mb-5">
+      <label htmlFor="founders-apply-cpbl-connection" className="block mb-5">
         <span className="font-mono text-mute text-[10px] tracking-[0.3em] block mb-2">
           您與 CPBL 的關係 · 必填
         </span>
         <input
+          id="founders-apply-cpbl-connection"
           type="text"
           name="cpbl_connection"
           required
@@ -536,12 +544,13 @@ export default function FoundersApplicationForm() {
       </div>
 
       {/* Why ZONE 27 */}
-      <label className="block mb-6">
+      <label htmlFor="founders-apply-why" className="block mb-6">
         <span className="font-mono text-mute text-[10px] tracking-[0.3em] block mb-2">
           為什麼想成為 FOUNDER · 必填 · {FOUNDERS_APPLY_LIMITS.whyMinChars}-
           {FOUNDERS_APPLY_LIMITS.whyMaxChars} 字
         </span>
         <textarea
+          id="founders-apply-why"
           name="why_zone27"
           required
           aria-required="true"

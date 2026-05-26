@@ -61,9 +61,12 @@ export default function Nav({ active }: { active?: NavKey }) {
 
   return (
     <>
-      <a href="#main" className="skip-link">
-        Skip to main content
-      </a>
+      {/* R142 W6 · skip-link moved to app/layout.tsx · WCAG 2.4.1 Bypass Blocks
+          · 之前 skip-link 在 Nav 內 · 但 PreviewModeBanner renders BEFORE Nav
+          in layout.tsx · 訪客 first Tab 落在 PreviewModeBanner Cancel button
+          不是 skip-link · 違反 WCAG「first focusable element should be skip-
+          link」 · fix · move skip-link to layout.tsx top of body before any
+          other interactive element · brand IP a11y discipline 嚴肅看待。 */}
       <nav
         aria-label="Primary"
         className="w-full border-b border-line/60 backdrop-blur-sm"

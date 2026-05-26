@@ -215,12 +215,18 @@ export default function WaitlistForm({
         升級或永遠停在免費層 — 任時您決定。
       </p>
 
+      {/* R142 W4 · a11y fix · WCAG 1.3.1 + 4.1.2 · 之前 implicit wrapping
+          <label> + 內 <span> label · 沒 explicit htmlFor + id pairing · screen
+          reader 可能 announce 全 <label> 內容(含 helper text)· 加 id +
+          htmlFor explicit pair · 同 WCAG accessible-name-and-role-value
+          industry pattern · Apple/Material/Polaris 共識。 */}
       {/* Email field */}
-      <label className="block mb-5">
+      <label htmlFor="waitlist-email" className="block mb-5">
         <span className="font-mono text-mute text-[10px] tracking-[0.3em] block mb-2">
           EMAIL · 必填
         </span>
         <input
+          id="waitlist-email"
           type="email"
           name="email"
           required
@@ -232,11 +238,12 @@ export default function WaitlistForm({
       </label>
 
       {/* Name field (optional) */}
-      <label className="block mb-8">
+      <label htmlFor="waitlist-name" className="block mb-8">
         <span className="font-mono text-mute text-[10px] tracking-[0.3em] block mb-2">
           稱呼 · 選填
         </span>
         <input
+          id="waitlist-name"
           type="text"
           name="name"
           placeholder="Tim"

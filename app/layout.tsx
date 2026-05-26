@@ -90,6 +90,14 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col pb-[72px] sm:pb-0">
+        {/* R142 W6 · skip-link · WCAG 2.4.1 Bypass Blocks · 移自 Nav.tsx ·
+            必須 first focusable element in body · 之前 PreviewModeBanner first
+            focusable steal Tab focus · 違反 WCAG · 此 link visible only on
+            focus(per globals.css .skip-link)· Tab from page top 第一個 focus
+            · Enter scrolls to #main · 同 Apple/GitHub/GOV.UK pattern。 */}
+        <a href="#main" className="skip-link">
+          Skip to main content · 跳至主要內容
+        </a>
         {/* ── Round 40 W-E · Speculation Rules API · Agent F DEEPEST ship
             JSON declarative prerender · Chrome / Edge / Safari 18+ 支援 ·
             Firefox graceful degrade(no fetch · no break)。 「moderate」

@@ -241,6 +241,7 @@ export default function FounderPickForm({
           confirmed · 永遠是您的。 #001-#007 是 Tim hardcoded forged · 不能 pick。
         </p>
         <input
+          id="founder-pick-number"
           type="number"
           inputMode="numeric"
           min={8}
@@ -250,6 +251,11 @@ export default function FounderPickForm({
           value={pickInput}
           onChange={(e) => setPickInput(e.target.value)}
           placeholder="例:27 · 008-270"
+          // R142 W5 · a11y fix · WCAG 1.3.1 + 3.3.2 + 4.1.2 · 之前 input 無 id +
+          // 無 <label htmlFor> + 無 aria-label · voice control / screen reader
+          // 用戶無法 identify 此 field · 加 id + aria-label explicit per
+          // Apple/Material/Polaris pattern。
+          aria-label="選擇 Founders 27 編號 · 008 至 270 之間"
           className="w-full bg-navy/60 border border-line/70 px-4 py-3 text-bone text-base focus:outline-none focus-visible:border-gold focus-visible:ring-2 focus-visible:ring-gold/20 transition-colors font-mono tabular"
           disabled={submitting}
         />
