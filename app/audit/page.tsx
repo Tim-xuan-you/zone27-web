@@ -551,6 +551,42 @@ export default function AuditPage() {
                 <li>不開「為什麼 diverged 解釋」excuse paragraph — 留空 ·
                   讓數字自己說話</li>
               </ul>
+
+              {/* R138 W7 · Singularity Effect amplifier · Agent C R138 Runner-up 1 ·
+                  Schelling 1968「The Life You Save May Be Your Own」 + Small/Loewenstein/
+                  Slovic 2007「Sympathy and callousness: The impact of deliberative
+                  thought on donations to identifiable and statistical victims」
+                  (Org Behav Hum Decis Process 102:143-153)· Pratfall amplification
+                  via named first-miss slot · 抽象「第一筆」 → identifiable「THE
+                  FIRST MISS」 named entity · psychology mechanism · identifiable
+                  victim donations rise 2x vs statistical victims · 此 slot 是
+                  訪客 emotional commitment 到 verify ZONE 27 publish-failure 承諾
+                  · per [[feedback-zone27-pratfall-brand-ip]] axiom 強化 + per
+                  [[feedback-zone27-psychology-ux-axis]] academic citation 守。 */}
+              <div className="mt-5 pt-5 border-t border-loss/20">
+                <p
+                  lang="en"
+                  className="font-mono text-loss/85 text-[9px] tracking-[0.3em] mb-2"
+                >
+                  THE FIRST MISS · 命名空位
+                </p>
+                <p className="text-mute text-sm leading-relaxed">
+                  當第一筆 DIVERGED 發生 · 它將獲得一個專屬名字 ·{" "}
+                  <span className="font-mono text-bone bg-loss/10 px-2 py-0.5 border-b border-loss/40">
+                    [ AWAITING · {finalizedCount > 0 ? `N=${finalizedCount} 皆 PROVED` : "N=0"} ]
+                  </span>{" "}
+                  (the first miss earns the first name on this wall)· matchup ID +
+                  engine 估值 + 最終比分 一同 pinned to homepage for 7 days · 此 slot
+                  永遠不重複使用 · 第二筆 DIVERGED 獲得「THE SECOND MISS」 序號 · 序號
+                  monotonic · 寫進 source code audit trail · 不能 retroactively
+                  rebrand。
+                </p>
+                <p className="font-mono text-mute/70 text-[10px] tracking-[0.2em] leading-relaxed mt-3">
+                  WHY name it · Schelling 1968 + Small/Loewenstein/Slovic 2007
+                  identifiable victim effect · 抽象「第一筆」 抽不出情感 commitment
+                  · 命名空位 訪客 vested in verifying that promise hold。
+                </p>
+              </div>
               <p className="font-mono text-mute/80 text-[10px] tracking-[0.25em] leading-relaxed mt-3">
                 本規則 binding to engine v0.X 全部版本 · 修改需發 commit at
                 least 30 天前公告於{" "}
