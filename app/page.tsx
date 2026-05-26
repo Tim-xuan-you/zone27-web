@@ -366,6 +366,46 @@ export default function Home() {
           </Link>
         </p>
 
+        {/* R146 W1 · NEW 🤔 為何沒 strip · Tim 7-fire 同 canary 加 5 meta-questions
+            「為何沒有 賽事討論室 · 怎麼推薦賽事 · 怎麼抽傭」 · /faq R146 NEW 3 Q&A
+            answers all · explicit homepage layer cross-link to /faq#no-community
+            killing Tim mental anchor「賽事討論室」 visibility loop · per Cialdini
+            Consistency 1984 + Pirolli & Card 1995 Information Foraging Theory ·
+            訪客 0-click 看到 explicit「為何沒有 賽事討論室?」 + deep answer 1-click
+            on /faq · brand IP iron rule preserved 同時 discoverability gap closed
+            at homepage layer。 */}
+        <p className="mt-2 sm:mt-3 font-mono text-mute/85 text-[10px] sm:text-[11px] tracking-[0.22em] tabular leading-relaxed">
+          <span className="text-loss/85">🤔 為何沒有</span>
+          <span className="text-mute/40 mx-1.5">·</span>
+          <Link
+            href="/faq#no-community"
+            className="hover:text-gold underline-offset-4 hover:underline transition-colors"
+          >
+            賽事討論室
+          </Link>
+          <span className="text-mute/40 mx-1.5">·</span>
+          <Link
+            href="/faq#no-user-recommendations"
+            className="hover:text-gold underline-offset-4 hover:underline transition-colors"
+          >
+            用戶推薦賽事
+          </Link>
+          <span className="text-mute/40 mx-1.5">·</span>
+          <Link
+            href="/faq#no-commission"
+            className="hover:text-gold underline-offset-4 hover:underline transition-colors"
+          >
+            抽傭 commission
+          </Link>
+          <span className="text-mute/40 mx-1.5">·</span>
+          <Link
+            href="/faq"
+            className="hover:text-gold underline-offset-4 hover:underline transition-colors"
+          >
+            /faq 全 17 答
+          </Link>
+        </p>
+
         <p className="mt-4 sm:mt-5">
           <a
             href="#tonight-engine"

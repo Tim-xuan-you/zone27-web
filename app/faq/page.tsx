@@ -69,6 +69,89 @@ const CATEGORIES: Category[] = [
           </>
         ),
       },
+      {
+        q: "為何沒有 賽事討論室 / 留言板 / 討論區 / 社群?",
+        id: "no-community",
+        a: (
+          <>
+            因為 ZONE 27 是 <strong className="text-bone">reader↔writer 模式 by design</strong>{" "}
+            · NOT reader↔reader social platform · 同 Stratechery 15 年沒 comments + Bloomberg
+            沒 comments + Bill James「Hey Bill」 15-yr canonical + DELTA Japan 14-yr 一人 +
+            Defector + Berkshire + patio11 + Pinboard <strong className="text-bone">8 brand
+            profitable subscription precedent</strong>。
+            「賽事討論室」 原 BLACK CARD unlock #03 promise · R139 W2 refactored 改為{" "}
+            <Link href="/membership/black-card" className="text-gold underline-offset-4 hover:underline">
+              /hey-tim 賽前 BLACK CARD 優先通道
+            </Link>
+            。 您能 talk to Tim 在 10 個 channels(完整 list{" "}
+            <Link href="/interact" className="text-gold underline-offset-4 hover:underline">
+              /interact
+            </Link>
+            )· 您能 talk to other 球迷 在 LINE 球隊群 + FB 球隊粉專 + PTT Baseball 板
+            (OFF-SITE · ZONE 27 honest pointer)。{" "}
+            <strong className="text-bone">結構性 LINE 老師 / 報馬仔 永遠無法 ship 同 disclosure</strong>
+            (他們需要 community noise 變現)· ZONE 27 不靠 noise 變現 · 靠 quantified analysis
+            + brand IP trust。
+          </>
+        ),
+      },
+      {
+        q: "為何 visitor 不能 推薦賽事 / 投稿賽事?",
+        id: "no-user-recommendations",
+        a: (
+          <>
+            因為 <strong className="text-bone">Tim 是唯一 curator</strong> · CPBL only forever per{" "}
+            <Link href="/integrity" className="text-gold underline-offset-4 hover:underline">
+              /integrity
+            </Link>
+            {" "}rule 12 + [[zone27-coverage-philosophy]] axiom「cover engine-validated games NOT
+            all bettable games」。 玩運彩 / 報馬仔 業務 model 需要 user-generated recommendations
+            (他們從推薦中抽傭)· ZONE 27 結構性相反 · <strong className="text-bone">0 抽傭 + 0
+            third-party content + Tim 親手 ingest 每場 CPBL screenshot</strong>。 您 4 個 indirect
+            影響方式:
+            <Link href="/hey-tim" className="text-gold underline-offset-4 hover:underline mx-1">
+              /hey-tim
+            </Link>
+            公開問 +
+            <Link href="/member/submit" className="text-gold underline-offset-4 hover:underline mx-1">
+              /member/submit
+            </Link>
+            投稿 to Tim + LensFocusVote 投票 lens 優先序 + AnonPick / UserPrediction 自己 track
+            record。 同 Stratechery 訂戶不能 publish · Ben Thompson 親手 curate 所有內容 · 同 axis
+            DELTA Japan 一人 14 年 curate。
+          </>
+        ),
+      },
+      {
+        q: "ZONE 27 為何不抽傭 / 0 commission · 那怎麼賺錢?",
+        id: "no-commission",
+        a: (
+          <>
+            因為 brand IP iron rule <strong className="text-bone">永遠不 ship 抽傭 model</strong> ·
+            同{" "}
+            <Link href="/integrity" className="text-gold underline-offset-4 hover:underline">
+              /integrity
+            </Link>
+            {" "}rule 13 binding + CLAUDE.md「拒絕 AdMob 永久封殺」 +{" "}
+            <Link href="/pricing/why" className="text-gold underline-offset-4 hover:underline">
+              /pricing/why
+            </Link>
+            {" "}hero 第 4 條「<strong className="text-bone">不收明牌費</strong>」。 結構性無
+            commission flow because:(1) 不 host third-party sportsbook content ·(2) 不 host
+            user-recommended bets ·(3) engine 結果 0 affiliate kickback ·(4) Founders 27 /
+            BLACK CARD 訂閱是 pure identity tier NOT features unlock · 同 Stratechery + Defector
+            + Bill James 訂閱 model 全 0 commission flow。
+            <br />
+            <br />
+            <strong className="text-bone">怎麼賺錢?</strong>{" "}
+            (a) Founders 27 NT$ 2,700 lifetime × 270 名 = <strong className="text-gold">NT$
+            729,000 一次性</strong>(目前 263 待認領)· (b) BLACK CARD NT$ 1,500/season 手動 ECPay
+            × N 訂戶 / 年 = <strong className="text-gold">recurring revenue</strong>(無
+            auto-renewal · 每季 explicit click per rule 13)· per [[zone27-monetization-philosophy]]
+            memory canonical。 不靠 ad / commission / sponsorship。
+          </>
+        ),
+      },
     ],
   },
   {
