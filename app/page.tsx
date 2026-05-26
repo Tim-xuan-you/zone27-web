@@ -337,6 +337,35 @@ export default function Home() {
           </Link>
         </p>
 
+        {/* R144 W1 · NEW homepage community strip · Tim 5th-fire same canary +
+            explicit homepage demand「我在網站首頁就要能直接大家看到可以討論
+            的地方 · 大家熱絡的地方」 · brand-pure 2-lane answer surface · per
+            Reference Class Anchoring(Tversky & Kahneman 1974)球迷已用 LINE 看
+            球 → ZONE 27 是 publication · LINE 是 community 並存 · per Mere
+            Exposure Effect(Zajonc 1968)顯式 cite 既有球迷聚集地 normalizes
+            ZONE 27 alongside · per Pratfall Effect(Aronson 1966)顯式承認
+            「我們不 host community」 + point at 球迷已聚的地方 · per Information
+            Foraging Theory(Pirolli & Card 1995 Psychological Review 106(4):
+            643-675)reduce search cost · 您找 community 0-click 看到 2 lanes ·
+            brand IP iron rule preserved · all infrastructure OFF-SITE(LINE +
+            FB + PTT not on ZONE 27 web)· Lane 1 inner circle Founders 27
+            LINE 群 · Lane 2 既有 CPBL 球迷聚集 LINE/FB/PTT。 */}
+        <p className="mt-3 sm:mt-4 font-mono text-mute/85 text-[10px] sm:text-[11px] tracking-[0.22em] tabular leading-relaxed">
+          <span className="text-gold/80">💬 球迷熱絡的地方</span>
+          <span className="text-mute/40 mx-1.5">·</span>
+          <span className="text-mute">Founders 27 LINE 群</span>
+          <span className="text-loss/70 mx-1 text-[9px]">⏳ Q3</span>
+          <span className="text-mute/40 mx-1.5">·</span>
+          <span className="text-mute">球迷已聚 · LINE 群 / FB 粉專 / PTT Baseball</span>
+          <span className="text-mute/40 mx-1.5">·</span>
+          <Link
+            href="/interact"
+            className="hover:text-gold underline-offset-4 hover:underline transition-colors"
+          >
+            /interact 全 lanes
+          </Link>
+        </p>
+
         <p className="mt-4 sm:mt-5">
           <a
             href="#tonight-engine"

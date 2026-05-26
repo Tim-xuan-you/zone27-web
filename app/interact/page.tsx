@@ -382,9 +382,9 @@ export default function InteractPage() {
             / 球迷 COMMUNITY · 在 ZONE 27 之外的地方
           </p>
           <h2 className="text-2xl sm:text-3xl text-bone font-light tracking-tight mb-6">
-            您想 talk to other 球迷? 這些地方已有
+            您想 talk to other 球迷? 這 2 lanes 已熱絡
           </h2>
-          <div className="space-y-3 zh-body text-mute text-base leading-relaxed">
+          <div className="space-y-4 zh-body text-mute text-base leading-relaxed mb-8">
             <p>
               CPBL 球迷 community 已在 60+ active LINE 群 + Facebook 粉專 +
               PTT Baseball 板 滿足。 ZONE 27 加 community feature = duplication
@@ -392,12 +392,94 @@ export default function InteractPage() {
               noise 才能變現 · ZONE 27 不靠 noise 變現 · 靠 quantified analysis
               + brand IP trust · 兩者並存 not 取代。
             </p>
-            <p>
-              <strong className="text-bone">您想 community · 加 LINE 群 + FB · 找您球隊的粉專</strong>
-              。
-              <strong className="text-bone"> 您想 quantified analysis + 公開 ledger · 來 ZONE 27</strong>
-              。 兩個需求 different surface · don&apos;t conflate。
-            </p>
+          </div>
+
+          {/* R144 W2 · OFF-SITE COMMUNITY 2-lane explicit catalog · Tim 5th-
+              fire homepage demand surface · per Reference Class Anchoring
+              (Tversky & Kahneman 1974)+ Mere Exposure(Zajonc 1968)+
+              Pratfall(Aronson 1966)psychology · brand IP iron rule preserved
+              (all infrastructure OFF-SITE)· Lane 1 inner circle 自家 LINE
+              群 · Lane 2 既有 CPBL 球迷聚集 LINE/FB/PTT。 */}
+          <div className="space-y-4">
+            {/* Lane 1 · 自家 inner circle */}
+            <article className="bg-gold/5 border border-gold/40 p-4 sm:p-5">
+              <div className="flex items-baseline justify-between gap-3 mb-2 flex-wrap">
+                <span className="flex items-baseline gap-3">
+                  <span aria-hidden="true" className="text-lg text-gold/85 leading-none">
+                    🔒
+                  </span>
+                  <span className="font-mono text-gold text-[10px] tracking-[0.35em]">
+                    LANE 1 · INNER CIRCLE
+                  </span>
+                </span>
+                <span
+                  lang="en"
+                  className="font-mono text-loss/85 text-[9px] tracking-[0.25em] tabular"
+                >
+                  ⏳ PRE-LAUNCH · Q3 2026
+                </span>
+              </div>
+              <h3 className="text-bone text-base sm:text-lg font-light tracking-tight leading-snug mb-2">
+                Founders 27 私人 LINE 群 · Tim 親自答
+              </h3>
+              <p className="text-mute/85 text-[12px] sm:text-sm leading-relaxed mb-2">
+                270 限量 lifetime Founders 27 訂戶私人 LINE 群 · Tim 親自參與 ·
+                Founders 27 訂戶之間互相 talk + 全員 talk to Tim · 同 Patek 私人
+                owners club + Stratechery Plus 訂戶 Slack 模式 · OFF-SITE
+                infrastructure(LINE)· 不在 ZONE 27 web · 不違反 reader↔writer
+                site iron rule · 是 paid identity tier inner-circle community ·
+                per [[feedback-zone27-paid-model-is-support-not-features]] axiom
+                identity = community NOT features unlock。
+              </p>
+              <p className="font-mono text-mute/70 text-[10px] tracking-[0.25em] mb-3">
+                ACCESS · 待 Founders 27 application 通過(/founders/apply)+ NT$
+                2,700 onboard 完成 · Tim 親自 invite link
+              </p>
+              <p>
+                <Link
+                  href="/founders/apply"
+                  className="font-mono text-gold/85 hover:text-gold text-[10px] tracking-[0.3em] underline-offset-4 hover:underline transition-colors"
+                >
+                  → /founders/apply 申請通道
+                </Link>
+              </p>
+            </article>
+
+            {/* Lane 2 · 既有 CPBL 球迷聚集地 */}
+            <article className="bg-slate/30 border border-line/60 p-4 sm:p-5">
+              <div className="flex items-baseline justify-between gap-3 mb-2 flex-wrap">
+                <span className="flex items-baseline gap-3">
+                  <span aria-hidden="true" className="text-lg text-gold/70 leading-none">
+                    🌐
+                  </span>
+                  <span className="font-mono text-gold text-[10px] tracking-[0.35em]">
+                    LANE 2 · 既有 CPBL 球迷聚集地
+                  </span>
+                </span>
+                <span
+                  lang="en"
+                  className="font-mono text-gold text-[9px] tracking-[0.25em] tabular"
+                >
+                  ✓ LIVE · 已熱絡多年
+                </span>
+              </div>
+              <h3 className="text-bone text-base sm:text-lg font-light tracking-tight leading-snug mb-2">
+                LINE 球迷群 + Facebook 球隊粉專 + PTT Baseball 板
+              </h3>
+              <p className="text-mute/85 text-[12px] sm:text-sm leading-relaxed mb-3">
+                CPBL 球迷 community 已在 60+ active LINE 群 + 6 球隊官方 FB
+                粉專(中信兄弟 · 樂天桃猿 · 統一 7-Eleven 獅 · 富邦悍將 · 味全龍 ·
+                台鋼雄鷹)+ PTT Baseball 板 持續熱絡。 您找您球隊 LINE 群:
+                各球隊球迷會 Facebook 入群通道。 ZONE 27 honest pointer 不假裝
+                自己是 community · 您想 talk to other 球迷 就去這些既有空間 ·
+                我們不重複 build。
+              </p>
+              <ul className="space-y-1 font-mono text-mute/85 text-[10px] tracking-[0.22em] leading-relaxed">
+                <li>· FB 各隊粉專 · search「球隊名 + 官方」</li>
+                <li>· PTT Baseball 板 · ptt.cc/bbs/Baseball</li>
+                <li>· LINE 球迷群 · 各球隊球迷會官方入群</li>
+              </ul>
+            </article>
           </div>
         </section>
 
