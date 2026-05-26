@@ -479,6 +479,28 @@ export default async function FoundersPage({
           → pre-form reframe(objection preempt)→ form。 */}
       <VsRowFold surface="founders" />
 
+      {/* R140 W6 · cross-link to NEW /founders/postmortem-2028 Premortem
+          artifact · per Agent C R140 TOP psychology recommendation placement
+          「linked from /founders AFTER VsRowFold」 · 6th Pratfall surface ·
+          Klein 1998 + HBR 2007 prospective hindsight · subtle text link ·
+          不 surface 為 sales chrome · 訪客 self-select read 才 click。 */}
+      <section
+        aria-label="Postmortem 2028 cross-link"
+        className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-10 -mt-2"
+      >
+        <p className="font-mono text-mute/80 text-[10px] tracking-[0.3em] leading-relaxed text-center">
+          ⚓ READ BEFORE YOU APPLY · 5 種我們可能 die 的方式 ·{" "}
+          <Link
+            href="/founders/postmortem-2028"
+            className="text-loss/85 hover:text-loss underline-offset-4 hover:underline"
+          >
+            /founders/postmortem-2028
+          </Link>
+          {" "}
+          (Premortem · Klein 1998)
+        </p>
+      </section>
+
       {/* R125 W3 · Agent C R125 HIGHEST friction-removal · 「引擎免費 · 您不是在
           買引擎」 reframe 之前 buried at line 607 · 訪客 scroll past WaitlistForm
           時 已 silent objection「engine FREE 為什麼還付錢?」 unanswered · per

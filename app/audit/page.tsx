@@ -597,6 +597,35 @@ export default function AuditPage() {
                 strong 100×。
               </p>
             </div>
+
+            {/* R140 W6 · cross-link to /founders/postmortem-2028 sibling
+                Pratfall surface · per Agent C R140 TOP placement「sibling to
+                PRE-COMMIT」 · 6th Pratfall surface 平行 PRE-COMMIT 預期 first
+                DIVERGED · Postmortem 預期 5 種 project-level death scenarios ·
+                Klein 1998 + HBR 2007 prospective hindsight · brand IP「不藏
+                未來可能 die 方式」 axiom 物理 codify。 */}
+            <div className="mt-4 p-4 sm:p-5 border border-loss/30 bg-loss/[0.03]">
+              <p
+                lang="en"
+                className="font-mono text-loss/85 text-[10px] tracking-[0.35em] mb-2"
+              >
+                ⚓ POSTMORTEM 2028 · project-level prospective hindsight
+              </p>
+              <p className="text-mute text-sm leading-relaxed">
+                此 PRE-COMMIT 處理 engine 第一筆 miss · 但 project 本身也可能
+                die。 ZONE 27 2028-05-26 失敗 obituary(Klein 1998 + HBR 2007
+                prospective hindsight)5 scenarios + early-warning signals +
+                canary fire triggers 公開於{" "}
+                <Link
+                  href="/founders/postmortem-2028"
+                  className="text-loss/90 hover:text-loss underline-offset-4 hover:underline"
+                >
+                  /founders/postmortem-2028
+                </Link>
+                。 結構性 LINE 老師 / 報馬仔 永遠無法 ship 此 page · 同 axis Costly
+                Signaling 100×。
+              </p>
+            </div>
             <P className="text-mute/70">
               完整論證見{" "}
               <Link href="/manifesto" className="text-gold hover:underline">
