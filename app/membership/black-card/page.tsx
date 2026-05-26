@@ -126,6 +126,24 @@ export default function BlackCardPage() {
       <Nav active="founders" />
 
       <main id="main">
+        {/* R161 W1.O · Agent O · canonical breadcrumb · HOME / MEMBERSHIP /
+            BLACK CARD · 之前 /membership/black-card 2-level deep 無 breadcrumb
+            upward path · 訪客 Footer / Cmd-K landing 無 parent /membership
+            visible trail · per /founders/apply R68 canonical pattern。 */}
+        <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pt-10">
+          <div className="flex items-center gap-2 font-mono text-[10px] tracking-[0.3em] text-mute">
+            <Link href="/" className="hover:text-gold transition-colors">
+              HOME
+            </Link>
+            <span className="text-mute/60">/</span>
+            <Link href="/membership" className="hover:text-gold transition-colors">
+              MEMBERSHIP
+            </Link>
+            <span className="text-mute/60">/</span>
+            <span className="text-gold">BLACK CARD</span>
+          </div>
+        </section>
+
         {/* ── HERO ─────────────────────────────────── */}
         <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pt-20 pb-12">
           <div className="flex items-baseline gap-3 mb-4 flex-wrap section-reveal">

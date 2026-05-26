@@ -194,6 +194,29 @@ export default function AuditPage() {
               )。 Section 05 DISCLOSURE PHILOSOPHY 解釋為什麼 publish 這些 ·
               GitHub source 公開全模型 · 不留 secret。
             </p>
+            {/* R161 W1.O3 · Agent O Gap 3 · lateral cross-link to sibling
+                disclosure surfaces · /audit 是 trust artifact hub but star-graph
+                hub-spoke 過載 · 加 lateral mesh-graph edges to /integrity(22
+                binding rules canonical R109)+ /steelman(5 strongest objections
+                self-exposure)· per NN/g 2026 hub-and-spoke internal-linking
+                research · spokes cross-link reduces /audit single-point load。 */}
+            <p className="mt-3 font-mono text-mute/70 text-[10px] tracking-[0.25em] leading-relaxed">
+              ⚓ 完整 22 binding rules →{" "}
+              <Link
+                href="/integrity"
+                className="text-gold/80 hover:text-gold underline-offset-4 hover:underline"
+              >
+                /integrity
+              </Link>{" "}
+              · 5 strongest objections(self-exposure)→{" "}
+              <Link
+                href="/steelman"
+                className="text-gold/80 hover:text-gold underline-offset-4 hover:underline"
+              >
+                /steelman
+              </Link>
+              {" "}· per [[zone27-disclosure-philosophy]] 不藏 weakness axiom
+            </p>
             {/* R129 W1 · DELTA-of-CPBL positioning cross-link · per R126 NEW
                 [[feedback-zone27-delta-of-cpbl-positioning]] memory SOP「DO
                 surface this positioning on /audit + /heritage as canonical」 ·

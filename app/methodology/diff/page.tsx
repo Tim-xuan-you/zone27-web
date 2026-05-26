@@ -46,6 +46,25 @@ export default function MethodologyDiffPage() {
       <Nav />
 
       <main id="main">
+        {/* R161 W1.O · Agent O · canonical breadcrumb · HOME / METHODOLOGY /
+            v0.2 → v0.3 DIFF · per /founders/apply R68 pattern · /methodology/diff
+            是 brand IP triple-fire(Disclosure + Pratfall + Costly Signaling)·
+            訪客 landing 從 /audit cross-link OR GitHub URL share 無 path back
+            to /methodology parent without Cmd-K。 */}
+        <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pt-10">
+          <div className="flex items-center gap-2 font-mono text-[10px] tracking-[0.3em] text-mute">
+            <Link href="/" className="hover:text-gold transition-colors">
+              HOME
+            </Link>
+            <span className="text-mute/60">/</span>
+            <Link href="/methodology" className="hover:text-gold transition-colors">
+              METHODOLOGY
+            </Link>
+            <span className="text-mute/60">/</span>
+            <span className="text-gold">v0.2 → v0.3 DIFF</span>
+          </div>
+        </section>
+
         {/* ── HERO ─────────────────────────────────── */}
         <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pt-20 pb-12 text-center">
           <p className="font-mono text-gold text-[10px] tracking-[0.45em] mb-8">

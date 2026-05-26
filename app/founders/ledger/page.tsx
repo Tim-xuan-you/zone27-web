@@ -97,6 +97,25 @@ export default function FoundersLedgerPage() {
       <Nav active="founders" />
 
       <main id="main">
+        {/* R161 W1.O · Agent O · canonical breadcrumb pattern per /founders/apply
+            R68 · HOME / FOUNDERS 27 / LEDGER · 之前 /founders/ledger 是 most-
+            visited /founders/* subroute(R31 W-S canonical brand IP)but 0
+            breadcrumb upward-traversal cue · 訪客 Footer → /founders/ledger
+            無 path back to /founders parent without Cmd-K or browser back。 */}
+        <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pt-10">
+          <div className="flex items-center gap-2 font-mono text-[10px] tracking-[0.3em] text-mute">
+            <Link href="/" className="hover:text-gold transition-colors">
+              HOME
+            </Link>
+            <span className="text-mute/60">/</span>
+            <Link href="/founders" className="hover:text-gold transition-colors">
+              FOUNDERS 27
+            </Link>
+            <span className="text-mute/60">/</span>
+            <span className="text-gold">LEDGER</span>
+          </div>
+        </section>
+
         {/* ── HERO ─────────────────────────────────── */}
         <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pt-20 pb-12">
           <div className="flex items-baseline gap-3 mb-4 flex-wrap section-reveal">
