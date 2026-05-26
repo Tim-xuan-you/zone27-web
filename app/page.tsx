@@ -193,6 +193,42 @@ export default function Home() {
           今晚 CPBL · 我跑 1 萬次模擬給您看 · 對了 / 錯了 全進 ledger。
         </p>
 
+        {/* R142 W8 · TONIGHT micro-receipt above-the-fold · Agent C R142 TOP
+            friction-point fix · Picture Superiority Effect(Paivio 1971「Imagery
+            and Verbal Processes」+ Nelson/Reed/Walling 1976「Pictorial superiority
+            effect」 JEP:HLM 2(5):523-528)· 65% retention concrete numbers vs
+            ~10% declarative text after 72h · 之前 hero 6 stacked text blocks
+            push prediction below mobile fold · CPBL fan at 18:00 wants ONE thing
+            「今晚誰會贏」 但 must scroll 750-900px on iPhone 13 mini to see ·
+            INSERT 1-line above-fold micro-receipt · reuse existing todayMatches
+            (line 110)· 0 new fetch · 0 new feature(per [[feedback-zone27-
+            paid-model-is-support-not-features]])· real engine % NOT fake social
+            proof · hides gracefully when 0 matches today · click → #tonight-engine
+            anchor scroll · 對 CPBL fan = instant proof「ZONE 27 talks baseball
+            不是 philosophy」 · per Tim「整個網站的操作邏輯、人的心理學很重要」
+            mandate canonical fulfillment。 */}
+        {todayMatches.length > 0 && (
+          <p className="mt-4 sm:mt-5 mx-auto">
+            <Link
+              href="#tonight-engine"
+              className="inline-flex items-baseline gap-1.5 sm:gap-2 font-mono text-[10px] sm:text-[11px] tracking-[0.2em] tabular text-mute hover:text-bone transition-colors flex-wrap justify-center"
+              aria-label={`Tonight's first CPBL match · ${todayMatches[0].startTime} · ${todayMatches[0].home.name} engine ${todayMatches[0].home.winRate}% vs ${todayMatches[0].away.name} ${todayMatches[0].away.winRate}% · scroll to engine detail`}
+            >
+              <span className="text-gold/85">今晚 {todayMatches[0].startTime}</span>
+              <span className="text-mute/60">·</span>
+              <span className="text-bone">{todayMatches[0].home.en}</span>
+              <span className="text-gold">{todayMatches[0].home.winRate}%</span>
+              <span className="text-mute/60">vs</span>
+              <span className="text-bone">{todayMatches[0].away.en}</span>
+              <span className="text-mute">{todayMatches[0].away.winRate}%</span>
+              {todayMatches.length > 1 && (
+                <span className="text-mute/60">{`+ ${todayMatches.length - 1} 場`}</span>
+              )}
+              <span className="text-gold/70 ml-0.5">↓</span>
+            </Link>
+          </p>
+        )}
+
         <p className="mt-6 sm:mt-8">
           <Link
             href="/founders"

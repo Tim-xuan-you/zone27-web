@@ -27,12 +27,30 @@ export default function StickyFoundersCTA() {
     // 「homepage hero is ~400px on mobile · sticky bar at 600px misses 200px window」
     // · Apple HIG「persistent bottom bars should activate when primary CTA is
     // scrolled out of view · NOT 200px later」 · sticky CTA 更早 appear。
+    //
+    // R142 W7 · perf · Agent B Core Web Vitals TOP win · 之前 listener fires
+    // on EVERY scroll tick · 即使 state 已 flip to true setter 是 no-op · 但
+    // event 仍 cost · one-shot listener pattern · 第一次 trigger 後 self-
+    // detach · 同 Vercel/Linear 標準 pattern · INP 改善 + 100s redundant
+    // callbacks/session eliminated。 removed flag 防 double-remove · cleanup
+    // function still handles unmount-before-trigger case。
+    let removed = false;
     const onScroll = () => {
-      if (window.scrollY > 400) setScrolledPastHero(true);
+      if (window.scrollY > 400) {
+        setScrolledPastHero(true);
+        if (!removed) {
+          removed = true;
+          window.removeEventListener("scroll", onScroll);
+        }
+      }
     };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    return () => {
+      if (!removed) {
+        window.removeEventListener("scroll", onScroll);
+      }
+    };
   }, [isHomepage]);
 
   if (pathname === "/founders" || pathname === "/lab/custom") return null;
