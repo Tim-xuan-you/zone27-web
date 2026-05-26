@@ -339,8 +339,8 @@ export default function InteractPage() {
               founder-dogfood-canary 7-fire 後 explicit reversed · BLACK CARD-gated
               narrow-scope scaffold shipped on /matches/[gameId] · 不是 free-form
               forum · 1-thread per game + 24hr decay + 球迷 grammar + Tim moderate
-              + 200 char + 1 post per user per game 6 constraints · 見 channel #11
-              詳列。 球迷 social 已在 LINE 群 + FB 滿足。
+              + 200 char + 1 post per user per game 6 constraints · 詳見
+              /matches/[gameId]#game-thread。 球迷 social 已在 LINE 群 + FB 滿足。
             </li>
             <li>
               <strong className="text-bone">User-to-user DM / 私訊</strong>{" "}

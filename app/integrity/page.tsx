@@ -187,7 +187,7 @@ export default function IntegrityPage() {
             SIGNED · TIM · {SIGNED_AT} · APPEND-ONLY · 30-DAY /CHANGELOG NOTICE TO MODIFY
           </p>
           <p
-            className="text-mute text-base leading-relaxed mb-4"
+            className="text-mute text-base leading-relaxed mb-4 zh-body"
             style={{ fontFamily: "Georgia, serif", textWrap: "pretty" }}
           >
             Berkshire Hathaway 1996 「Owner&rsquo;s Manual」 · Warren
@@ -197,7 +197,7 @@ export default function IntegrityPage() {
             ethics commitments = 22 件永久不會變的事。
           </p>
           <p
-            className="text-mute/85 text-sm leading-relaxed"
+            className="text-mute/85 text-sm leading-relaxed zh-body"
             style={{ fontFamily: "Georgia, serif", textWrap: "pretty" }}
           >
             為什麼結構性重要:當未來 fan 懷疑 ZONE 27 會不會「graduate into」
@@ -263,7 +263,7 @@ export default function IntegrityPage() {
             / §03 · BERKSHIRE 1996 PATTERN
           </p>
           <p
-            className="text-mute text-base leading-relaxed mb-4"
+            className="text-mute text-base leading-relaxed mb-4 zh-body"
             style={{ fontFamily: "Georgia, serif", textWrap: "pretty" }}
           >
             Warren Buffett 1996 年寫了一頁「Owner&rsquo;s Manual」 · 列出
@@ -272,7 +272,7 @@ export default function IntegrityPage() {
             change」 footer · 沒有「except in cases of...」 conditional。
           </p>
           <p
-            className="text-mute text-base leading-relaxed mb-4"
+            className="text-mute text-base leading-relaxed mb-4 zh-body"
             style={{ fontFamily: "Georgia, serif", textWrap: "pretty" }}
           >
             其他 commitment 模式(Costco 14% 毛利上限自綁 · Patek 200-yr
@@ -281,7 +281,7 @@ export default function IntegrityPage() {
             讀者 read 完後 audit-able · 違反 = brand 自殺。
           </p>
           <p
-            className="text-mute/85 text-sm leading-relaxed"
+            className="text-mute/85 text-sm leading-relaxed zh-body"
             style={{ fontFamily: "Georgia, serif", textWrap: "pretty" }}
           >
             ZONE 27 在 Year 0 採同 axis · 但 honestly 不裝 30+ yrs earned。

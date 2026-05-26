@@ -237,7 +237,7 @@ export default function CoveragePage() {
             <h2 className="text-2xl sm:text-3xl text-bone font-light tracking-tight mb-6">
               覆蓋是策展,不是清單
             </h2>
-            <div className="space-y-4 text-mute leading-relaxed">
+            <div className="space-y-4 text-mute leading-relaxed zh-body">
               <p>
                 量化預測模型只有在輸入夠穩定時才能輸出有意義的訊號。
                 ZONE 27 引擎需要每位投手最少 N≥10 場樣本、確認的先發陣容、

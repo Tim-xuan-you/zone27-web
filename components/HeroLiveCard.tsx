@@ -387,7 +387,7 @@ export default function HeroLiveCard({ match }: { match: Match }) {
       </div>
       {FOUNDERS_REMAINING > 0 && (
         <p
-          className="mt-5 sm:mt-6 text-center font-mono text-mute/70 text-[10px] tracking-[0.3em] tabular"
+          className="hidden sm:block mt-5 sm:mt-6 text-center font-mono text-mute/70 text-[10px] tracking-[0.3em] tabular"
           title={`Founders 27 · 限量 ${FOUNDERS_TOTAL} 名 · 已認領 ${FOUNDERS_TOTAL - FOUNDERS_REMAINING} 名 · NEXT IS ${formatBadge(FOUNDERS_NEXT)} · 一次性 NT$ 2,700 · 終身`}
         >
           想成為{" "}

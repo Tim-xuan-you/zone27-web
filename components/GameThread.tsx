@@ -70,11 +70,12 @@ type Props = {
   gameId: string;
 };
 
-export default function GameThread({ gameId: _gameId }: Props) {
+export default function GameThread({ gameId }: Props) {
   return (
     <section
       aria-label="賽事討論室 · BLACK CARD-gated discussion thread"
       className="mx-auto max-w-3xl w-full px-6 sm:px-10 py-10 border-t border-line/40"
+      data-game-id={gameId}
       id="game-thread"
     >
       {/* ── HEADER · big visible 賽事討論室 label · product-first ──── */}

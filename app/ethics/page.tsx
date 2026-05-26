@@ -170,7 +170,7 @@ export default function EthicsPage() {
                 <h3 className="text-bone text-lg sm:text-xl font-light tracking-tight mb-3 leading-snug">
                   {c.title}
                 </h3>
-                <p className="text-mute leading-relaxed">{c.body}</p>
+                <p className="text-mute leading-relaxed zh-body">{c.body}</p>
               </li>
             ))}
           </ol>
@@ -187,7 +187,7 @@ export default function EthicsPage() {
           <h2 className="text-2xl sm:text-3xl text-bone font-light tracking-tight mb-6 leading-tight">
             這 9 條對他們是商業自殺 · 對我們是 <span className="text-gold">brand moat</span>
           </h2>
-          <div className="space-y-4 text-mute leading-relaxed">
+          <div className="space-y-4 text-mute leading-relaxed zh-body">
             <p>
               玩運彩 · 報馬仔 · sportsbook adjacents · LINE 老師生態 · 整個
               台灣博彩附屬 service 經濟結構 violate 上面 1-5 + 8 共 6 條:
@@ -333,7 +333,7 @@ export default function EthicsPage() {
             codify what happens then。
           </p>
           <h3 className="text-bone text-lg mt-6 mb-3">您的資料 · 0 vendor lock-in</h3>
-          <ul className="space-y-3 text-mute leading-relaxed">
+          <ul className="space-y-3 text-mute leading-relaxed zh-body">
             <li>
               <strong className="text-bone">您的 Founder ID + ledger row</strong>{" "}
               · 在{" "}

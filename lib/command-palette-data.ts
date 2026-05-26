@@ -149,6 +149,19 @@ export const COMMAND_ITEMS: CommandItem[] = [
       "季後賽",
       "明星賽",
       "總冠軍",
+      // R155 W3e · Agent C 5 new 球迷 slang per CPBL/PTT/FB 粉專 vernacular
+      // (filtered to brand-IP-fit · 0 betting term · per
+      // [[feedback-zone27-audience-fans-not-engineers]])· 滿貫砲 + 再見全壘打 +
+      // sayonara = high-leverage moments · 牛棚崩盤 + 救援失敗 + 失火 = late-inning
+      // event grammar
+      "滿貫砲",
+      "再見全壘打",
+      "再見",
+      "sayonara",
+      "牛棚崩盤",
+      "救援失敗",
+      "失火",
+      "炸裂",
     ],
   },
   {
@@ -185,7 +198,20 @@ export const COMMAND_ITEMS: CommandItem[] = [
     kicker: "/lab/custom",
     path: "/lab/custom",
     group: "賽事 · 引擎",
-    keywords: ["custom", "power", "自訂", "投手", "pitcher"],
+    keywords: [
+      "custom",
+      "power",
+      "自訂",
+      "投手",
+      "pitcher",
+      // R155 W3e · Agent C 球迷 slang · 二刀流 / Ohtani 大谷 SHO power-user
+      // simulation · CPBL fan 想 mock two-way player · brand IP fit
+      "二刀流",
+      "大谷",
+      "sho",
+      "ohtani",
+      "two-way",
+    ],
   },
   {
     label: "每日量化早報",
@@ -278,6 +304,14 @@ export const COMMAND_ITEMS: CommandItem[] = [
       "肩傷",
       "復出",
       "球速王",
+      // R155 W3e · Agent C 球迷 slang · pitcher-vulnerability narrative ·
+      // 「誰被開轟」 是 CPBL fan canonical pitcher rank question · HR9 leaderboard
+      // 已 on /cpbl-pitchers 但這些 fan grammar keywords 之前未 surface
+      "開轟",
+      "全壘打",
+      "場外開花",
+      "被打爆",
+      "失分王",
     ],
   },
   {
@@ -330,6 +364,15 @@ export const COMMAND_ITEMS: CommandItem[] = [
       "場館",
       "球場",
       "主場",
+      // R155 W3e · Agent C 球迷 slang · team-form tribal query · 「兄弟連敗」
+      // 「獅子王朝」 是 fan 查 team-aggregation page 的 canonical narrative ·
+      // brand IP fit per [[feedback-zone27-audience-fans-not-engineers]]
+      "連敗",
+      "連勝",
+      "王朝",
+      "氣勢",
+      "低潮",
+      "翻身",
     ],
   },
 

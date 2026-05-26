@@ -41,8 +41,8 @@ export default function HomepageGameThreadPreview({ match }: Props) {
   // game as fallback so 賽事討論室 preview always visible(per Tim 8-fire
   // explicit demand「大家都可以看到」 即使 0 today matches state)。
   const gameId = match?.id ?? "cpbl-260526-01";
-  const homeName = match?.home.name ?? "中信兄弟";
-  const awayName = match?.away.name ?? "味全龍";
+  const homeName = match?.home.name ?? "味全龍";
+  const awayName = match?.away.name ?? "中信兄弟";
 
   return (
     <section
@@ -78,8 +78,7 @@ export default function HomepageGameThreadPreview({ match }: Props) {
 
         <p className="text-mute text-sm leading-relaxed mb-5">
           BLACK CARD 訂閱者 1-post per game · 200 字以內 · 球迷 grammar(0 betting)·
-          24hr 自動 archive · Tim 親手 moderate · per R148 founder-dogfood-canary
-          7-fire explicit override of R123 iron rule · MINIMUM-VIOLATION · 6 constraints。
+          24hr 自動 archive · Tim 親手 moderate。
         </p>
 
         {/* ── MOCKUP POST · 1 sample 球迷 grammar ────── */}

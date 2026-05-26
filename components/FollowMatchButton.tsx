@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { createSupabaseBrowserClient } from "@/lib/supabase/browser";
 import { getMyFollows, toggleFollow } from "@/lib/follows";
@@ -31,6 +31,14 @@ type Status =
 
 export default function FollowMatchButton({ matchId }: { matchId: string }) {
   const [status, setStatus] = useState<Status>({ kind: "loading" });
+  const mountedRef = useRef(true);
+
+  useEffect(() => {
+    mountedRef.current = true;
+    return () => {
+      mountedRef.current = false;
+    };
+  }, []);
 
   useEffect(() => {
     let cancelled = false;
@@ -64,8 +72,10 @@ export default function FollowMatchButton({ matchId }: { matchId: string }) {
     setStatus({ kind: "toggling", previous: prev });
     try {
       const next = await toggleFollow(matchId);
+      if (!mountedRef.current) return;
       setStatus({ kind: "ready", following: next });
     } catch (err) {
+      if (!mountedRef.current) return;
       const message =
         err instanceof Error ? err.message : "unknown_error";
       setStatus({ kind: "error", message, following: prev });

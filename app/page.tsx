@@ -375,7 +375,7 @@ export default function Home() {
           <span className="text-mute">Founders 27 LINE 群</span>
           <span className="text-loss/70 mx-1 text-[9px]">⏳ Q3</span>
           <span className="text-mute/40 mx-1.5">·</span>
-          <span className="text-mute">球迷已聚 · LINE 群 / FB 粉專 / PTT Baseball</span>
+          <span className="text-mute">球迷已聚(LINE/FB/PTT)</span>
           <span className="text-mute/40 mx-1.5">·</span>
           <Link
             href="/interact"
@@ -385,29 +385,15 @@ export default function Home() {
           </Link>
         </p>
 
-        {/* R146 W1 · NEW 🤔 為何沒 strip · Tim 7-fire 同 canary 加 5 meta-questions
-            「為何沒有 賽事討論室 · 怎麼推薦賽事 · 怎麼抽傭」 · /faq R146 NEW 3 Q&A
-            answers all · explicit homepage layer cross-link to /faq#no-community
-            killing Tim mental anchor「賽事討論室」 visibility loop · per Cialdini
-            Consistency 1984 + Pirolli & Card 1995 Information Foraging Theory ·
-            訪客 0-click 看到 explicit「為何沒有 賽事討論室?」 + deep answer 1-click
-            on /faq · brand IP iron rule preserved 同時 discoverability gap closed
-            at homepage layer。 */}
-        {/* R148 W2 · 🤔 為何沒有 strip updated post-reversal · 賽事討論室 NEW
-            scaffold LIVE on /matches/[gameId] · 移 from「為何沒有」 list to
-            「LIVE on /matches」 callout · 用戶推薦賽事 + 抽傭 仍「為何沒有」 ·
-            per R148 minimum-violation reversal scope。 */}
-        <p className="mt-2 sm:mt-3 font-mono text-mute/85 text-[10px] sm:text-[11px] tracking-[0.22em] tabular leading-relaxed">
-          <span className="text-gold/80">💬 賽事討論室</span>
-          <span className="text-loss/70 mx-1 text-[9px]">⏳ R148 NEW</span>
-          <span className="text-mute/40 mx-1.5">·</span>
-          <Link
-            href="/matches/cpbl-260526-01#game-thread"
-            className="hover:text-gold underline-offset-4 hover:underline transition-colors"
-          >
-            BLACK CARD-gated scaffold LIVE on /matches/[gameId]
-          </Link>
-        </p>
+        {/* R155 W2 cut-1+4 · per Agent B mobile 3-viewport audit · MERGED R146 W1
+            「🤔 為何沒有」 + R148 W2「💬 賽事討論室 LIVE」 into 單一 strip ·
+            「為何沒有 X · 但 LIVE Y」 contrastive grammar · per [[feedback-zone27-
+            mobile-first]] ≤3 viewports compaction · iron rules preserved · R148
+            narrowed scope GameThread still surfaced at homepage layer · R146 Pratfall
+            meta-business honesty preserved · ALSO removed standalone「↓ 今晚的引擎」
+            chip(line 213 micro-receipt #tonight-engine anchor 已 provide path)· ~80px
+            saved per Agent B iPhone SE measurement(R142 hero micro-receipt + sticky
+            CTA + Founders pill 3 paths still reach engine + GameThread)。 */}
         <p className="mt-2 sm:mt-3 font-mono text-mute/85 text-[10px] sm:text-[11px] tracking-[0.22em] tabular leading-relaxed">
           <span className="text-loss/85">🤔 為何沒有</span>
           <span className="text-mute/40 mx-1.5">·</span>
@@ -431,17 +417,15 @@ export default function Home() {
           >
             /faq 全 17 答
           </Link>
-        </p>
-
-        <p className="mt-4 sm:mt-5">
-          <a
-            href="#tonight-engine"
-            className="inline-flex items-center gap-2 font-mono text-mute/70 hover:text-gold text-[10px] sm:text-[11px] tracking-[0.3em] transition-colors group"
-            aria-label="scroll 到今晚的引擎 prediction"
+          <span className="text-mute/40 mx-1.5">⚓</span>
+          <span className="text-gold/80">💬 賽事討論室 LIVE</span>
+          <span className="text-mute/40 mx-1.5">·</span>
+          <Link
+            href="/matches/cpbl-260526-01#game-thread"
+            className="hover:text-gold underline-offset-4 hover:underline transition-colors"
           >
-            <span className="text-gold/60 group-hover:text-gold transition-colors">↓</span>
-            <span>今晚的引擎</span>
-          </a>
+            /matches/[gameId]
+          </Link>
         </p>
       </section>
 

@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import CopyLinkButton from "@/components/CopyLinkButton";
 import RelatedReading from "@/components/RelatedReading";
 import ArticleMeta from "@/components/ArticleMeta";
+import VsRowFold from "@/components/VsRowFold";
 import { FOUNDERS_REMAINING } from "@/lib/founders-stats";
 
 export const metadata: Metadata = {
@@ -297,6 +298,15 @@ export default function ManifestoPage() {
               。
             </P>
           </AxiomSection>
+
+          {/* R155 W3 · VsRowFold 3rd placement · Agent C R155 synthesis ·
+              canonical philosophical surface 跟 /founders + /pricing/why
+              conversion surfaces 隔離 · 0 surface prop = manifesto-default
+              variant · contrastive 行業 vs ZONE 27 axis row visualization ·
+              per [[feedback-zone27-psychology-ux-axis]] · Pirolli & Card 1995
+              Information Foraging + Tversky & Kahneman 1981 contrast-frame
+              cited · 4 axiom 對照表 跟 manifesto 4-axiom body 平行 binding。 */}
+          <VsRowFold />
 
           {/* ── III · COVERAGE ──────────────────────── */}
           <AxiomSection

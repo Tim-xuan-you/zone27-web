@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { createSupabaseBrowserClient } from "@/lib/supabase/browser";
 import { getMyNotes, saveNote } from "@/lib/notes";
 
@@ -27,6 +27,16 @@ export default function MatchNoteEditor({ matchId }: { matchId: string }) {
   const [status, setStatus] = useState<Status>({ kind: "loading" });
   const [text, setText] = useState("");
   const [savedText, setSavedText] = useState("");
+  const mountedRef = useRef(true);
+  const savedTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => {
+    mountedRef.current = true;
+    return () => {
+      mountedRef.current = false;
+      if (savedTimerRef.current) clearTimeout(savedTimerRef.current);
+    };
+  }, []);
 
   useEffect(() => {
     let cancelled = false;
@@ -58,10 +68,15 @@ export default function MatchNoteEditor({ matchId }: { matchId: string }) {
     setStatus({ kind: "saving" });
     try {
       await saveNote(matchId, text);
+      if (!mountedRef.current) return;
       setSavedText(text);
       setStatus({ kind: "saved" });
-      setTimeout(() => setStatus({ kind: "ready" }), 1800);
+      if (savedTimerRef.current) clearTimeout(savedTimerRef.current);
+      savedTimerRef.current = setTimeout(() => {
+        if (mountedRef.current) setStatus({ kind: "ready" });
+      }, 1800);
     } catch (err) {
+      if (!mountedRef.current) return;
       const message =
         err instanceof Error ? err.message : "save_failed";
       setStatus({ kind: "error", message });
