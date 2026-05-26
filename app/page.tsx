@@ -9,7 +9,6 @@ import RecentMatchesRow from "@/components/RecentMatchesRow";
 import AnonCalibrationStrip from "@/components/AnonCalibrationStrip";
 import AnonPickWidget from "@/components/AnonPickWidget";
 import LivingCoverHero from "@/components/LivingCoverHero";
-import HomepageGameThreadPreview from "@/components/HomepageGameThreadPreview";
 import {
   getFeaturedMatch,
   getTodayMatches,
@@ -112,15 +111,10 @@ export default function Home() {
   const useMultiMatch = todayMatches.length >= 2;
   const featuredMatch = useMultiMatch ? null : getFeaturedMatch();
   const trackRecord = useMultiMatch ? getTrackRecordStats() : null;
-  // R115 W3 · per Tim 2026-05-25 dogfood「一般使用者一進來,從來沒來過的人,
-  // 也能看到有人分享、推薦賽事?」 social proof gap · agent research synthesize
-  // (Defector annual report + Plausible 3-stat row + Berkshire letters archive
-  // + Patek Generations + patio11 archive + Pinboard operator quote + Apple
-  // 「Designed in California」 signature pattern)· brand-IP-pure social proof
-  // = engine track record ledger · NOT testimonial / NOT live FOMO / NOT
-  // 「X 人在看」 · 「0 hidden」 is the killer line per agent unique-opportunity
-  // (competitors structurally 無法 match · 因為他們業務 model 需要藏 misses)。
-  const heroTrackRecord = getTrackRecordStats();
+  // R163 NUCLEAR SUBTRACTION · heroTrackRecord var removed · R115 W3 ledger line
+  // consumer cut per Tim canary fire「網頁好雜 · 請刪除」 · /track-record canonical
+  // surface preserved(F6 strip + Footer + RelatedReading + /audit)· per Apple
+  // Newsroom「page = 1 thing」 + Steve Jobs Say-NO discipline。
 
   return (
     <div className="flex flex-col flex-1 min-h-screen">
@@ -264,184 +258,64 @@ export default function Home() {
           </Link>
         </p>
 
-        {/* R115 W3 brand-IP-pure social proof line · per agent research
-            unique opportunity「0 hidden」 = engine PROVED + DIVERGED + 0 hidden
-            · 同 Plausible「260B pageviews · 18k subs · 99.99% uptime」 static
-            3-stat row pattern · NOT live ticker · NOT FOMO counter · 「0 hidden」
-            是 unfakeable costly signal · 競爭者(玩運彩 / 報馬仔)結構性無法
-            match 因為他們業務 model 需要藏 misses · Pratfall + Costly Signaling
-            + Disclosure axiom 三 fire 同時 · 8 chars 數字 compressed brand IP。
-            R121 W2 · Tim 第二級 founder-dogfood-canary fire 升級 · Tim R121
-            問「我一進這個網站,看不到有人在討論、分享、推薦賽事呀!以心理學角度
-            怎麼看?」 · Cialdini 1984 Social Proof psychology 期待 vs ZONE 27
-            11-NEVER #1(no user-to-user social)brand IP 結構性衝突 surfacing ·
-            per [[feedback-zone27-social-proof-costly-signal]] axiom · brand-pure
-            答案 = explicitly preempt psychology gap + redirect to unfakeable
-            costly signal(Spence 1973)NOT 加 fake social proof · 此 line 從
-            「↘ TRACK RECORD」 改 「↘ 不靠社群聲量 · 靠 ledger」 · framing
-            absence as brand IP strength · 同時保留 numbers · 配對 R120 W3
-            /engine-log#live-state numeric dashboard hash anchor。 */}
-        {heroTrackRecord.total > 0 && (
-          <p className="mt-4 sm:mt-5">
-            <Link
-              href="/track-record"
-              className="inline-flex items-baseline gap-2 font-mono text-mute/85 hover:text-gold text-[10px] sm:text-[11px] tracking-[0.25em] tabular transition-colors"
-              aria-label={`不靠社群聲量 · 靠 ledger · ${heroTrackRecord.proved} PROVED · ${heroTrackRecord.diverged} DIVERGED · 0 hidden · 查看 /track-record 完整 ledger`}
-            >
-              <span className="text-gold/80">↘ 不靠社群聲量 · 靠 ledger</span>
-              <span className="text-gold">{heroTrackRecord.proved}</span>
-              <span className="text-mute/60">✓</span>
-              <span className="text-mute/40">·</span>
-              <span className="text-loss/80">{heroTrackRecord.diverged}</span>
-              <span className="text-mute/60">✕</span>
-              <span className="text-mute/40">·</span>
-              <span className="text-gold">0</span>
-              <span className="text-mute/60">hidden</span>
-              <span className="text-gold/70 ml-1">→</span>
-            </Link>
-          </p>
-        )}
+        {/* R163 NUCLEAR SUBTRACTION · Tim canary fire「網頁好雜 · 都滑不到底 ·
+            超多沒人要看的東西 · 請刪除」 · per [[feedback-founder-dogfood-canary]]
+            iron rule · 最新 canary fire 取代 R115-R155 累積 strips:
 
-        {/* R123 W1 · Tim 第三級 founder-dogfood-canary fire · Tim 問「使用者
-            怎麼互動?都是單向的不是嗎?哪裡可以互動?」 · per
-            [[feedback-zone27-one-way-by-design]] memory · 8 user interaction
-            surfaces 早已 ship 但 invisible to first-time visitor · 加 visible
-            actionable strip 列 4 個主要 verbs · 直接答「哪裡可以互動」 ·
-            brand IP one-way by design 守(reader↔writer NOT reader↔reader)·
-            同 Stratechery / Bloomberg / Buffett / Defector profitable
-            subscription model · 11-NEVER #1 全程 honored · NOT 加 community
-            / comments / forum · ONLY surface existing interactions。 */}
-        <p className="mt-3 sm:mt-4 font-mono text-mute/85 text-[10px] sm:text-[11px] tracking-[0.22em] tabular leading-relaxed">
-          <span className="text-gold/80">⚡ 您可以</span>
-          <span className="text-mute/40 mx-1.5">·</span>
-          <Link
-            href="/lab"
-            className="hover:text-gold underline-offset-4 hover:underline transition-colors"
-          >
-            /lab 跑模擬
-          </Link>
-          <span className="text-mute/40 mx-1.5">·</span>
-          <Link
-            href="/matches"
-            className="hover:text-gold underline-offset-4 hover:underline transition-colors"
-          >
-            /matches 猜對賬
-          </Link>
-          <span className="text-mute/40 mx-1.5">·</span>
-          <Link
-            href="/member/submit"
-            className="hover:text-gold underline-offset-4 hover:underline transition-colors"
-          >
-            /member 投稿
-          </Link>
-          <span className="text-mute/40 mx-1.5">·</span>
-          <Link
-            href="/founders/apply"
-            className="hover:text-gold underline-offset-4 hover:underline transition-colors"
-          >
-            /founders/apply 申請席位
-          </Link>
-          <span className="text-mute/40 mx-1.5">·</span>
-          {/* R143 W2 · cross-link to canonical /interact route · Tim 3rd
-              same canary fire(R123 + R139 + R143「討論區在哪裡」)response ·
-              /interact enumerates 10 reader↔writer surfaces + explains
-              one-way by design · per Cialdini Consistency 1984 + Pirolli &
-              Card 1995 Information Foraging Theory · brand IP iron rule
-              preserved + discoverability gap fixed。 */}
-          <Link
-            href="/interact"
-            className="hover:text-gold underline-offset-4 hover:underline transition-colors"
-          >
-            /interact 看 10 互動通道
-          </Link>
-        </p>
+            ❌ CUT R115 W3「↘ 不靠社群聲量 ledger 8 chips」(/track-record link
+               canonical · F6 strip 在 footer above-engine 仍 surface「不藏 DIVERGED」)
+            ❌ CUT R123 W1「⚡ 您可以 · 5 verbs · /lab /matches /member /founders/apply
+               /interact」(Nav top + Cmd-K palette covers · footer 4 col covers)
+            ❌ CUT R144 W1「💬 球迷熱絡 · Founders LINE 群 + 球迷已聚」(/interact
+               canonical home · Nav 💬 chip 全站 visible)
+            ❌ CUT R155 W2-merged「🤔 為何沒有 · ⚓ 💬 賽事討論室 LIVE」(Pratfall
+               surface 移 /faq 已 R146 ship 3 Q&A canonical + /interact + /audit ·
+               homepage 不負責 surface every brand IP question · per Apple Newsroom
+               「page = 1 thing」 discipline)
 
-        {/* R144 W1 · NEW homepage community strip · Tim 5th-fire same canary +
-            explicit homepage demand「我在網站首頁就要能直接大家看到可以討論
-            的地方 · 大家熱絡的地方」 · brand-pure 2-lane answer surface · per
-            Reference Class Anchoring(Tversky & Kahneman 1974)球迷已用 LINE 看
-            球 → ZONE 27 是 publication · LINE 是 community 並存 · per Mere
-            Exposure Effect(Zajonc 1968)顯式 cite 既有球迷聚集地 normalizes
-            ZONE 27 alongside · per Pratfall Effect(Aronson 1966)顯式承認
-            「我們不 host community」 + point at 球迷已聚的地方 · per Information
-            Foraging Theory(Pirolli & Card 1995 Psychological Review 106(4):
-            643-675)reduce search cost · 您找 community 0-click 看到 2 lanes ·
-            brand IP iron rule preserved · all infrastructure OFF-SITE(LINE +
-            FB + PTT not on ZONE 27 web)· Lane 1 inner circle Founders 27
-            LINE 群 · Lane 2 既有 CPBL 球迷聚集 LINE/FB/PTT。 */}
-        <p className="mt-3 sm:mt-4 font-mono text-mute/85 text-[10px] sm:text-[11px] tracking-[0.22em] tabular leading-relaxed">
-          <span className="text-gold/80">💬 球迷熱絡的地方</span>
-          <span className="text-mute/40 mx-1.5">·</span>
-          <span className="text-mute">Founders 27 LINE 群</span>
-          <span className="text-loss/70 mx-1 text-[9px]">⏳ Q3</span>
-          <span className="text-mute/40 mx-1.5">·</span>
-          <span className="text-mute">球迷已聚(LINE/FB/PTT)</span>
-          <span className="text-mute/40 mx-1.5">·</span>
-          <Link
-            href="/interact"
-            className="hover:text-gold underline-offset-4 hover:underline transition-colors"
-          >
-            /interact 全 lanes
-          </Link>
-        </p>
+            Psychology defended:
+            ✓ Cognitive Load Theory(Sweller 1988)· extraneous load minimized ·
+              7 strips → 0 strips between hero pill row + HeroLiveCard
+            ✓ Hick's Law · choice options(15+ links → 4 essential)log time
+              improvement on first-touch
+            ✓ Apple Newsroom + Stratechery「ONE thing per page」 discipline ·
+              homepage ONE THING = watch engine converge(HeroLiveCard)
+            ✓ Steve Jobs Say-NO 5-step(per /discipline R17 Jobs distillation)·
+              focus = 拒絕 100 件好點子 · 此 cut 拒絕 5 strip
+            ✓ Peak-End rule(Kahneman 2002)honored · HeroLiveCard apex not
+              diluted by 5 sibling text walls
+            ✓ Pirolli & Card 1995 Information Foraging · scent-of-information
+              first principle · 訪客 first 30 sec 看 engine converge not 7 strips
 
-        {/* R155 W2 cut-1+4 · per Agent B mobile 3-viewport audit · MERGED R146 W1
-            「🤔 為何沒有」 + R148 W2「💬 賽事討論室 LIVE」 into 單一 strip ·
-            「為何沒有 X · 但 LIVE Y」 contrastive grammar · per [[feedback-zone27-
-            mobile-first]] ≤3 viewports compaction · iron rules preserved · R148
-            narrowed scope GameThread still surfaced at homepage layer · R146 Pratfall
-            meta-business honesty preserved · ALSO removed standalone「↓ 今晚的引擎」
-            chip(line 213 micro-receipt #tonight-engine anchor 已 provide path)· ~80px
-            saved per Agent B iPhone SE measurement(R142 hero micro-receipt + sticky
-            CTA + Founders pill 3 paths still reach engine + GameThread)。 */}
-        <p className="mt-2 sm:mt-3 font-mono text-mute/85 text-[10px] sm:text-[11px] tracking-[0.22em] tabular leading-relaxed">
-          <span className="text-loss/85">🤔 為何沒有</span>
-          <span className="text-mute/40 mx-1.5">·</span>
-          <Link
-            href="/faq#no-user-recommendations"
-            className="hover:text-gold underline-offset-4 hover:underline transition-colors"
-          >
-            用戶推薦賽事
-          </Link>
-          <span className="text-mute/40 mx-1.5">·</span>
-          <Link
-            href="/faq#no-commission"
-            className="hover:text-gold underline-offset-4 hover:underline transition-colors"
-          >
-            抽傭 commission
-          </Link>
-          <span className="text-mute/40 mx-1.5">·</span>
-          <Link
-            href="/faq"
-            className="hover:text-gold underline-offset-4 hover:underline transition-colors"
-          >
-            /faq 全 17 答
-          </Link>
-          <span className="text-mute/40 mx-1.5">⚓</span>
-          <span className="text-gold/80">💬 賽事討論室 LIVE</span>
-          <span className="text-mute/40 mx-1.5">·</span>
-          <Link
-            href="/matches/cpbl-260526-01#game-thread"
-            className="hover:text-gold underline-offset-4 hover:underline transition-colors"
-          >
-            /matches/[gameId]
-          </Link>
-        </p>
+            Pratfall iron rule defended(NOT removed · MOVED to canonical deeper
+            surface):
+            ✓ F6 declarative-absence strip 仍 BELOW HeroLiveCard(6 negations +
+              /transparency link)· per Aronson 1966 + Spence 1973 不刪
+            ✓ /track-record link 仍 via /audit + footer + RelatedReading
+            ✓ /interact 仍 在 Nav 💬 + Footer ENTRY 列 + R160 W2 added
+            ✓ /faq 17 答 仍 在 Footer + Cmd-K
+
+            R148 14-fire GameThread visibility · 3 surfaces preserved · NOT 5:
+            ✓ Nav 💬 permanent every page(R151 NUCLEAR)
+            ✓ Hero pill 💬 賽事討論室(R150 viewport 1 above pill row)
+            ✓ /matches/[gameId] TOP placement(R153)
+            ❌ HomepageGameThreadPreview BIG card 460px(R149)CUT below(同 strip)
+            ❌ R155-merged「⚓ 💬 賽事討論室 LIVE」 inline mention CUT(同上)
+
+            Per most-recent canary fire(R163 太雜)trumps older canary fire
+            (R148 14-fire visible)· founder-dogfood-canary iron rule applied。 */}
       </section>
 
       {/* Hairline divider — visual breath. Tighter on mobile. */}
-      <div className="mx-auto w-32 gold-line mb-8 sm:mb-20" />
+      <div className="mx-auto w-32 gold-line mb-8 sm:mb-12" />
 
-      {/* R149 W1 · NEW HomepageGameThreadPreview · Tim 8-fire explicit
-          「(賽事討論室)大家都可以看到! 到底在哪裡? 可以直接出現在首頁
-          可以讓人簡易點擊?」 · /matches/[gameId] 30-sec scroll 太深 ·
-          ship BIG visible homepage section · gold-border card · 1 mockup
-          post + big CTA「→ 看完整 賽事討論室 + 3 mockup posts」 · 自由可讀
-          + BLACK CARD 可發言 · per R148 6 constraints minimum-violation
-          preserved · per [[feedback-no-waiting-rule]] ship NOW · per
-          [[feedback-zone27-mobile-first]] trade-off for Tim 8-fire
-          explicit demand · 0-click 顯式 visible on homepage 不再 buried。 */}
-      <HomepageGameThreadPreview match={todayMatches[0] ?? null} />
+      {/* R163 NUCLEAR SUBTRACTION · HomepageGameThreadPreview BIG card 460px CUT
+          per Tim canary fire「網頁好雜 · 沒人要看的東西 · 請刪除」 trumps R148
+          14-fire「visible」 mandate(per [[feedback-founder-dogfood-canary]] most-
+          recent canary highest weight)· R148 narrowed scope brand IP preserved
+          via 3 alternative surfaces:Nav 💬 permanent(R151)+ Hero pill 💬 賽事
+          討論室(R150)+ /matches/[gameId] TOP placement(R153)· per Steve Jobs
+          Say-NO discipline + Cognitive Load Theory(Sweller 1988)· 460px reclaimed。 */}
 
       {/* Round 40 W-G · Agent F #5 · RecentMatchesRow · client-only ·
           conditional render when localStorage has entries · 0 SSR /
