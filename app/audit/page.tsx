@@ -16,12 +16,17 @@ import {
   COMMIT_PERMALINK,
   DEPLOYED_AT,
 } from "@/lib/build-meta";
+import { createPageMetadata } from "@/lib/page-og";
 
-export const metadata: Metadata = {
-  title: "Model Report — ZONE 27 Engine Audit",
+// R159 W1.L1 · Agent L CRITICAL · backfill createPageMetadata · 之前 root
+// openGraph slogan「We Don't Guess. We Compute.」 leak over custom /audit OG card
+// on share platforms。 per Anthropic transparency hub canonical spine。
+export const metadata: Metadata = createPageMetadata({
+  title: "Model Report · ZONE 27 Engine Audit",
   description:
-    "完整公開的 model report。模型描述、使用的輸入、引擎範圍、環境衝擊、揭露哲學。零行銷語言。",
-};
+    "完整公開的 model report · 5 sections · 模型描述、使用的輸入、引擎範圍、環境衝擊、揭露哲學。零行銷語言 · Anthropic transparency hub spine 同 axis。",
+  path: "/audit",
+});
 
 // ── ZONE 27 · /audit — Model Report ───────────────────
 // Inspired by Anthropic's Transparency Hub model card structure.

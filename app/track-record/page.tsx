@@ -23,12 +23,18 @@ import {
   getTodayTaipei,
   type Match,
 } from "@/lib/matches";
+import { createPageMetadata } from "@/lib/page-og";
 
-export const metadata: Metadata = {
-  title: "公開戰績 · ZONE 27 引擎預測 vs 實際結果",
+// R159 W1.L1 · Agent L CRITICAL · backfill createPageMetadata · /track-record
+// 是 highest-trust artifact · 球迷 screenshot 給朋友的 canonical page · 之前
+// share preview text overlay 顯 root slogan 與 PROVED+DIVERGED 等大 brand IP
+// 矛盾 · Pratfall-level incoherence 修。
+export const metadata: Metadata = createPageMetadata({
+  title: "公開戰績 · PROVED + DIVERGED ledger",
   description:
-    "ZONE 27 引擎所有公開預測的賽後追蹤。PROVED 跟 DIVERGED 等大等亮地列出 — 不刪、不修飾、不過濾。多數運動分析平台選擇藏起這頁;ZONE 27 把它放在 footer 主導航。",
-};
+    "ZONE 27 引擎所有預測賽後對賬 · PROVED 跟 DIVERGED 等大等亮 — 不刪、不修飾、不過濾。多數運動分析平台藏起這頁;我們放在 footer 主導航。",
+  path: "/track-record",
+});
 
 // ── ISR · re-render daily so today's match flips to FINAL when
 // Tim ingests box score · without full redeploy.

@@ -114,7 +114,11 @@ export default function StickyFoundersCTA() {
         <Link
           href="/login"
           aria-label="已是會員 · 登入"
-          className="shrink-0 border-l border-line/60 px-3 py-2 flex flex-col items-center justify-center group"
+          /* R159 W2.J5 · Agent J · WCAG 2.5.5 Target Size + Apple HIG 44pt +
+             Material 48dp · 之前 px-3 py-2 ≈ 28px tall · sub-44px tap target on
+             canonical conversion bar · 加 min-h-[44px] · same standard as
+             TonightMatchRail pills(R70 W-D 已遵守)。 */
+          className="shrink-0 min-h-[44px] border-l border-line/60 px-3 py-2 flex flex-col items-center justify-center group"
         >
           <span
             lang="en"

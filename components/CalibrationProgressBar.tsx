@@ -87,7 +87,12 @@ export default function CalibrationProgressBar({
         className="relative h-[3px] bg-line/60 overflow-hidden"
       >
         <div
-          className={`absolute top-0 left-0 h-full transition-all duration-700 ease-out ${
+          /* R159 W3.K4 · Agent K · transition-all → explicit list · 之前 sole
+             site-wide transition-all violation · Vercel Geist canonical anti-
+             pattern · animates every changing property including future bg/
+             color toggles risking unintended layout · 改 [width,background-
+             color,box-shadow] explicit per UncertaintyStripe.tsx:79 pattern。 */
+          className={`absolute top-0 left-0 h-full transition-[width,background-color,box-shadow] duration-700 ease-out ${
             isMet ? "bg-gold glow-gold" : "bg-gold/80"
           }`}
           style={{ width: `${pct}%` }}

@@ -199,7 +199,13 @@ export default function AnonPickWidget({ match }: Props) {
     const agreeWithEngine = yourSide === enginePickedSide;
 
     return (
-      <article className="bg-slate/40 border border-gold/40 glow-soft p-4 sm:p-5">
+      <article
+        /* R159 W3-gap-3 · Agent K motion gap · AnonPickWidget commit confirmation
+           IKEA effect peak moment(user 剛 author 第一個 pick · Cialdini commitment-
+           consistency brand IP)之前 0 motion confirmation · 加 .enter-fade-up
+           @starting-style(globals.css:556)· 0 new keyframe · 1-line addition。 */
+        className="enter-fade-up bg-slate/40 border border-gold/40 glow-soft p-4 sm:p-5"
+      >
         <div className="flex items-baseline justify-between gap-3 flex-wrap mb-3">
           <p
             lang="en"

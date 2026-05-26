@@ -1005,3 +1005,66 @@ kbd {
     background-color: rgba(212, 175, 55, 0.1);
   }
 }
+
+/* ============================================
+   R159 W2.J2 · Agent J · 100vh → 100dvh upgrade
+   Tailwind 4 ships min-h-dvh utility but 50+ pages still use min-h-screen
+   compiled to min-h: 100vh · iOS Safari URL bar collapse causes 75px
+   overshoot · StickyFoundersCTA paints behind address bar at rest。
+   Global override · @supports gates progressive enhancement(old browsers
+   keep 100vh)· dvh Baseline Widely Available since June 2025。
+   ============================================ */
+@supports (min-height: 100dvh) {
+  .min-h-screen {
+    min-height: 100dvh;
+  }
+}
+
+/* ============================================
+   R159 W2.J4 · Agent J · iOS focus zoom prevention
+   iOS Safari auto-zooms when computed input font-size < 16px ·
+   form abandonment risk · default font-mono text-sm = 14px violates。
+   Mobile breakpoint only · desktop typography unaffected · per CSS-Tricks
+   canonical pattern + Defensive CSS。
+   ============================================ */
+@media (max-width: 640px) {
+  input,
+  textarea,
+  select {
+    font-size: 16px;
+  }
+}
+
+/* ============================================
+   R159 W3.K1 · Agent K · engine-settle apex reveal
+   HeroLiveCard simPhase === "converged" 是 homepage 最 important micro-moment
+   (10K Monte Carlo sims 1.2s 完 converge)· 之前 numbers 從「twitching」 →
+   「still」 no peak signal · Peak-End rule violated。 NEW · letter-spacing
+   tighten 480ms expo · 「engine locks in」 physics · 同 .enter-verdict-reveal
+   grammar consistent · reuses lib/motion.ts MOTION.verdictReveal duration +
+   MOTION.easeOutExpo · prefers-reduced-motion guarded。
+   ============================================ */
+@keyframes engine-settle {
+  0% {
+    letter-spacing: -0.02em;
+    opacity: 0.85;
+  }
+  60% {
+    letter-spacing: 0;
+    opacity: 1;
+  }
+  100% {
+    letter-spacing: 0;
+    opacity: 1;
+  }
+}
+
+.engine-settle {
+  animation: engine-settle 480ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .engine-settle {
+    animation: none;
+  }
+}

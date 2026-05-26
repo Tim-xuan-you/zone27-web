@@ -5,28 +5,19 @@ import Footer from "@/components/Footer";
 import FounderSignOff from "@/components/FounderSignOff";
 import ArticleMeta from "@/components/ArticleMeta";
 import ReadingProgress from "@/components/ReadingProgress";
+import { createPageMetadata } from "@/lib/page-og";
 
-export const metadata: Metadata = {
+// R159 W4.L · Agent L · convert to createPageMetadata for locale + siteName
+// restoration + truncate description from 393 chars to ~140 · per Twitter
+// 200-char cap + Slack 200-char readable weight + Open Graph Protocol spec。
+export const metadata: Metadata = createPageMetadata({
   title: "Integrity · 22 永久不會變的 · Owner's Manual at Year 0",
   description:
-    "Berkshire Hathaway 1996 Owner's Manual Buffett published and never changed · applied to ZONE 27 at Year 0 · single canonical proof page · 13 brand-IP redlines「永遠不做」 + 9 binding ethics commitments = 22 永久 binding rules · dated · Tim signature · per /audit S05 PRE-COMMIT clause · violations trigger /receipts entry · public bond not implicit · R80 加 scope + discipline 配對 binding(rule 12 CPBL-only-forever + rule 09 mandatory-ledger-no-cherry-pick)· R81 加 rule 13 永遠不 subscription auto-renewal binding(ECPay/TapPay/Stripe 自動扣款 全 refused · Defector 85% explicit renewal + Pinboard 一次性 pattern · Loss aversion FOR ZONE 27 axiom)· 為 years 2-5 brand consistency 物理 codify。",
-  openGraph: {
-    title: "Integrity · ZONE 27 永久不會變的 22 條",
-    description:
-      "Berkshire 1996 Owner's Manual pattern · 13 redlines + 9 ethics = 22 永久 binding · scope + discipline + renewal 三軸 close brand IP loop · public bond not implicit",
-    type: "article",
-    url: "/integrity",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Integrity · ZONE 27 永久不會變的 22 條",
-    description:
-      "Berkshire 1996 Owner's Manual pattern · 13 redlines + 9 ethics = 22 永久 binding · scope + discipline + renewal 三軸 close brand IP loop · public bond not implicit",
-  },
-  alternates: {
-    canonical: "/integrity",
-  },
-};
+    "Berkshire Hathaway 1996 Owner's Manual pattern applied at ZONE 27 Year 0 · 13 brand-IP redlines + 9 binding ethics = 22 永久 binding rules · Tim signature · per /audit S05 PRE-COMMIT · public bond not implicit。",
+  ogDescription:
+    "Berkshire 1996 Owner's Manual pattern · 13 redlines + 9 ethics = 22 永久 binding · public bond not implicit · per /audit S05 PRE-COMMIT。",
+  path: "/integrity",
+});
 
 // /integrity · Berkshire 1996 Owner's Manual pattern · 22 永久 binding rules
 // (13 redlines + 9 ethics)· public bond not implicit · 修改 needs 30-day

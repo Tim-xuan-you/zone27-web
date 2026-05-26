@@ -6,12 +6,18 @@ import RelatedReading from "@/components/RelatedReading";
 import FounderSignOff from "@/components/FounderSignOff";
 import ArticleMeta from "@/components/ArticleMeta";
 import EngineStamp from "@/components/EngineStamp";
+import { createPageMetadata } from "@/lib/page-og";
 
-export const metadata: Metadata = {
-  title: "BLACK CARD · CPBL Season Pass · NT$ 1,500/season explicit",
+// R159 W1.L1 · Agent L CRITICAL · backfill createPageMetadata + truncate
+// description from 348 chars(over Twitter 200-char cap · Slack 200-char
+// readable weight)to ~140 chars · key info preserved · ECPay LIVE + 0
+// auto-renewal + 6 unlocks。
+export const metadata: Metadata = createPageMetadata({
+  title: "BLACK CARD · CPBL Season Pass · NT$ 1,500/season",
   description:
-    "ZONE 27 BLACK CARD CPBL Season Pass · NT$ 1,500 per CPBL season(March-November · 240 場 + 季後賽 = NT$ 6/場)· ✓ LIVE 季票手動 ECPay 個人方案 · email Tim 啟動 · 5% 創作者抽成 · 14 天無條件退款 · 6 unlocks · R81 pivot 自 NT$ 299/月 auto · 0 subscription auto-renewal forever per /integrity rule #13 · 同 統一獅 47-game season package + NBA 88% season ticket renewal + Defector 85% explicit-renewal + Pinboard $25 一次性 pattern · 玩運彩+報馬仔 結構性無法 ship 同 page。",
-};
+    "ZONE 27 BLACK CARD CPBL Season Pass · NT$ 1,500 / season · ✓ LIVE 季票手動 ECPay · 5% 創作者抽成 · 14 天退款 · 6 unlocks · 0 auto-renewal forever per /integrity rule #13。",
+  path: "/membership/black-card",
+});
 
 // ── ZONE 27 · /membership/black-card ───────────────────
 // Round 31 W-X3 · Tim 「能 fluently 看 BLACK CARD 長相」 enabler 之前

@@ -175,7 +175,7 @@ export default function HeroLiveCard({ match }: { match: Match }) {
         <span
           className={`font-mono text-2xl sm:text-4xl tabular tracking-tight ${
             homeFav ? "text-gold" : "text-mute"
-          }`}
+          } ${simPhase === "converged" ? "engine-settle" : ""}`}
           style={{
             transition: "color 200ms ease",
             fontVariantNumeric: "tabular-nums lining-nums slashed-zero",
@@ -188,7 +188,7 @@ export default function HeroLiveCard({ match }: { match: Match }) {
         <span
           className={`font-mono text-2xl sm:text-4xl tabular tracking-tight ${
             !homeFav ? "text-gold" : "text-mute"
-          }`}
+          } ${simPhase === "converged" ? "engine-settle" : ""}`}
           style={{
             transition: "color 200ms ease",
             fontVariantNumeric: "tabular-nums lining-nums slashed-zero",

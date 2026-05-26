@@ -12,12 +12,16 @@ import ReadingProgress from "@/components/ReadingProgress";
 import StatTerm from "@/components/StatTerm";
 import ReproducibilityReceipt from "@/components/ReproducibilityReceipt";
 import { matches } from "@/lib/matches";
+import { createPageMetadata } from "@/lib/page-og";
 
-export const metadata: Metadata = {
-  title: "Methodology — The ZONE 27 Engine Whitepaper",
+// R159 W1.L1 · Agent L CRITICAL · backfill createPageMetadata · 之前 root
+// openGraph slogan leak · per Stripe Press technical whitepaper share pattern。
+export const metadata: Metadata = createPageMetadata({
+  title: "Methodology · The ZONE 27 Engine Whitepaper",
   description:
-    "完整論文等級的技術白皮書。蒙地卡羅 9 局逐打席引擎、壘上推進物理、10,000 次收斂統計、v0.4 路線圖。",
-};
+    "完整論文等級的技術白皮書 · 4 sections · 蒙地卡羅 9 局逐打席引擎、壘上推進物理、10,000 次收斂統計、v0.4 路線圖。零行銷語言。",
+  path: "/methodology",
+});
 
 export default function MethodologyPage() {
   // Defensive — fall back gracefully if matches.ts is mid-migration.

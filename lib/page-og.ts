@@ -77,6 +77,12 @@ export function createPageMetadata(input: PageMetadataInput): Metadata {
       description: ogDescription,
       type: input.type ?? "article",
       url: input.path,
+      // R159 W4.L · Agent L · Next.js shallow merge replaces openGraph entirely
+      // when page declares its own block · root layout's locale + siteName are
+      // LOST · explicitly restore here · 影響 all 12+ pages using createPageMetadata
+      // · per Open Graph Protocol spec + LINE/Slack/Twitter platform docs。
+      locale: "zh_TW",
+      siteName: "ZONE 27",
     },
     twitter: {
       card: "summary_large_image",

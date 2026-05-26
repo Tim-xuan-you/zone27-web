@@ -102,7 +102,10 @@ export default function TonightMatchRail({
       }}
     >
       <ul
-        className="flex gap-2 overflow-x-auto px-3 py-2 snap-x snap-mandatory"
+        /* R159 W2.J3 · Agent J · overscroll-x-contain prevents iOS swipe-back
+           gesture trigger when last pill scrolled past · per MDN overscroll-
+           behavior canonical pattern · pairs with existing snap-x snap-mandatory。 */
+        className="flex gap-2 overflow-x-auto overscroll-x-contain px-3 py-2 snap-x snap-mandatory"
         aria-label="Tonight match pills · horizontal scroll · 1-tap jump"
       >
         {matches.map((m) => {

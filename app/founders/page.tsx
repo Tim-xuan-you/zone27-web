@@ -17,12 +17,20 @@ import {
   formatBadge,
 } from "@/lib/founders-stats";
 import { getWaitlistCount } from "@/lib/waitlist-stats";
+import { createPageMetadata } from "@/lib/page-og";
 
-export const metadata: Metadata = {
+// R159 W1.L1 · Agent L CRITICAL · backfill createPageMetadata helper · 之前
+// metadata 只 declare title+description · Next.js shallow merge 導致 root layout
+// openGraph block 整個 inherited(LINE/iMessage/Slack/Twitter 全 show「We Don't
+// Guess. We Compute.」 root slogan over custom OG image)· per /audit S05
+// PRE-COMMIT discipline + private-share critical pre-launch surface · createPageMetadata
+// 提供 openGraph + twitter + alternates.canonical 3 件 explicit override。
+export const metadata: Metadata = createPageMetadata({
   title: "Founders 27 · NT$ 2,700 終身會員 · 限量 270 名",
   description:
     "ZONE 27 創始會員資格 · 一次付清 NT$ 2,700,終身免費 · 270 名額滿即永久關閉,不會有第二批 · 9 個月達損益平衡,之後每年省下 NT$ 3,588。",
-};
+  path: "/founders",
+});
 
 // R40 perf agent finding · was 60s ISR overhead · founders state is
 // hardcoded(claimedFounders array)not live API · 60s ISR triggers

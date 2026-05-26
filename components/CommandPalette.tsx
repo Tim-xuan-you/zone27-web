@@ -260,7 +260,11 @@ export default function CommandPalette() {
           ref={listRef}
           id="cmd-listbox"
           role="listbox"
-          className="max-h-[60vh] overflow-y-auto py-2"
+          /* R159 W2.J3 · Agent J · overscroll-contain kills iOS scroll-chaining
+             · 之前 scroll past end of 43 results triggers page pull-to-refresh
+             dismissing palette · per MDN overscroll-behavior containment + Stripe
+             army body-lock article canonical fix。 */
+          className="max-h-[60vh] overflow-y-auto overscroll-contain py-2"
         >
           {flat.length === 0 ? (
             <div className="px-5 py-12 text-center">

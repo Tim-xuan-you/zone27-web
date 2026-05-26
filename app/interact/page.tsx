@@ -4,28 +4,20 @@ import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import FounderSignOff from "@/components/FounderSignOff";
 import ArticleMeta from "@/components/ArticleMeta";
+import { createPageMetadata } from "@/lib/page-og";
 
-export const metadata: Metadata = {
-  title: "互動 by Design · 10 reader↔writer channels · ZONE 27 one-way 模式 explained",
+// R159 W4.L · Agent L · convert to createPageMetadata for locale + siteName
+// restoration(Next.js shallow merge lost zh_TW + ZONE 27 from root when override)
+// + truncate description from 348 chars to ~140 · within Twitter 200-char cap +
+// Slack 200-char readable weight + iMessage uses og:title only(desc ignored)。
+export const metadata: Metadata = createPageMetadata({
+  title: "互動 by Design · 10 reader↔writer channels",
   description:
-    "您在找 ZONE 27 的討論區 / 留言板 / 社群? 沒有 · by design。 但您能 talk to Tim 在 10 個地方:/hey-tim 公開問答 · /member/submit 一週投稿 · /matches AnonPick + UserPrediction + LensFocusVote + FollowMatch + MatchNote + ReceiptForward 6 個 inline interaction · /founders/apply 申請信 · FounderPickForm 選號 · 共 10 個 reader↔writer 通道。 為何不做 reader↔reader 社群?per Cialdini Consistency(1984)+ Pirolli & Card 1995 Information Foraging Theory + Stratechery / Bill James / DELTA Japan 15-yr solo-founder precedent · ZONE 27 是 one-way 內容產品 not social platform · 結構性 LINE 老師 / 報馬仔 永遠無法 ship 此 page(他們需要 community noise 才能 sell engagement)· Costly Signaling 100×。",
-  openGraph: {
-    title: "互動 by Design · ZONE 27 reader↔writer 10 channels",
-    description:
-      "ZONE 27 沒有討論區 by design · 10 reader↔writer 通道 enumerate · Cialdini Consistency + Stratechery / Bill James precedent",
-    type: "article",
-    url: "/interact",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "互動 by Design · ZONE 27 reader↔writer 10 channels",
-    description:
-      "ZONE 27 沒有討論區 by design · 10 reader↔writer 通道 enumerate · Cialdini Consistency 一手 explain",
-  },
-  alternates: {
-    canonical: "/interact",
-  },
-};
+    "您在找 ZONE 27 的討論區? 沒有 by design。 但您能 talk to Tim 在 10 個地方 · /hey-tim · /member/submit · AnonPick + UserPrediction + LensFocusVote + FollowMatch + MatchNote + ReceiptForward · /founders/apply · FounderPickForm · per Cialdini Consistency + Stratechery / Bill James / DELTA Japan precedent。",
+  ogDescription:
+    "ZONE 27 沒有討論區 by design · 10 reader↔writer 通道 enumerate · Cialdini Consistency + Stratechery / Bill James 15-yr precedent。",
+  path: "/interact",
+});
 
 // ── ZONE 27 · /interact · Canonical Brand IP Defense Route ──
 // R143 W1 · Tim 3rd same canary fire(R123「都是單向的不是嗎」 + R139 W2

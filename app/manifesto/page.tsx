@@ -7,12 +7,17 @@ import RelatedReading from "@/components/RelatedReading";
 import ArticleMeta from "@/components/ArticleMeta";
 import VsRowFold from "@/components/VsRowFold";
 import { FOUNDERS_REMAINING } from "@/lib/founders-stats";
+import { createPageMetadata } from "@/lib/page-og";
 
-export const metadata: Metadata = {
+// R159 W1.L1 · Agent L CRITICAL · backfill createPageMetadata · /manifesto
+// 是 canonical brand IP page · per /audit S05 PRE-COMMIT · share preview 必須
+// reflect 4 axiom inversion not generic slogan。
+export const metadata: Metadata = createPageMetadata({
   title: "倒置宣言 · ZONE 27 Manifesto",
   description:
-    "四個我們刻意倒置的行業預設:完整公開引擎(不藏 weights)· 工具免費身分付費(不收 per-use)· 引擎能算的才覆蓋(不擴大博彩面)· 零第三方追蹤(不做行為定向)。每一個倒置都有代價,代價就是品牌。",
-};
+    "四個我們刻意倒置的行業預設:完整公開引擎、工具免費身分付費、引擎能算的才覆蓋、零第三方追蹤。每一個倒置都有代價,代價就是品牌。",
+  path: "/manifesto",
+});
 
 // ── ZONE 27 · /manifesto · 倒置宣言 ────────────────────
 // Canonical long-form home for the 4 brand axioms that are

@@ -12,9 +12,16 @@ import "./globals.css";
 // themeColor to deep navy makes iOS Safari address bar match
 // the brand. colorScheme: dark prevents flash-of-white on
 // initial paint and tells the OS to use dark scrollbars.
+// R159 W1.J1 · Agent J CRITICAL keystone · viewport-fit=cover · 之前無此 declaration
+// → ALL existing env(safe-area-inset-*) padding declarations across StickyFoundersCTA
+// + TonightMatchRail + globals.css were SILENTLY INERT on iPhone notch/Dynamic Island
+// devices(~70% Taiwan iPhone 2026 install base)· Apple HIG mandate: env() returns 0
+// unless viewport-fit=cover at meta level · single-line activates ~30 lines of latent
+// safe-area code · per Apple HIG layout guidance + W3C viewport spec。
 export const viewport: Viewport = {
   themeColor: "#0F1A2E",
   colorScheme: "dark",
+  viewportFit: "cover",
 };
 
 const geistSans = Geist({
