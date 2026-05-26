@@ -10,6 +10,7 @@ import { getTodayMatches } from "@/lib/matches";
 type NavKey =
   | "home"
   | "matches"
+  | "discuss"
   | "lab"
   | "leaderboard"
   | "founders"
@@ -42,8 +43,15 @@ type NavKey =
 // Round 32 W-D 註解:「founders」 entry 從 NAV_ITEMS 移到 MembershipNavCTA
 // (auth-aware client island)· 因 Nav 是 server component 但需要 session-
 // dependent href / label。 留 4 個 static items · founders 用 MembershipNavCTA。
-const NAV_ITEMS: {
-  key: Exclude<NavKey, "home" | "founders">;
+// R151 W1 · NUCLEAR · Tim 11-fire same canary「(賽事討論室)在哪裡? 每個人
+// 在首頁就能看到!」 · 4 prior R148-R150 surfaces 不夠 visible · ADD 💬 討論室
+// to Nav permanent · 永遠 visible on EVERY page · 同 axis as 賽事 / 實驗室 /
+// 27 之牆 / 關於 · Tim cannot miss this · Nav 是 highest visibility surface
+// 全 site。 dynamic href to today's first match #game-thread anchor ·
+// fallback /interact when 0 matches today · per R148 6-constraint scaffold
+// + BLACK CARD-gated brand IP 維持 minimum-violation。
+const NAV_ITEMS_STATIC: {
+  key: Exclude<NavKey, "home" | "founders" | "discuss">;
   href: string;
   label: string;
   badge?: string;
@@ -57,7 +65,24 @@ const NAV_ITEMS: {
 export default function Nav({ active }: { active?: NavKey }) {
   // Round 50 W-D · server-side today's match count for「賽事」 dynamic chip。
   // 0 場日子 chip 自動 hidden · Nav fallback plain「賽事」。
-  const tonightCount = getTodayMatches().length;
+  const todayMatches = getTodayMatches();
+  const tonightCount = todayMatches.length;
+  // R151 W1 · dynamic 討論室 href · 今日首場 match scaffold · fallback /interact
+  const discussHref = todayMatches[0]
+    ? `/matches/${todayMatches[0].id}#game-thread`
+    : "/interact";
+  // R151 W1 · NEW NAV_ITEMS 加入 💬 討論室 between 賽事 and 實驗室 · NEW badge
+  // 標 R148 NEW per Tim 11-fire explicit demand「每個人在首頁就能看到」
+  const NAV_ITEMS: {
+    key: Exclude<NavKey, "home" | "founders">;
+    href: string;
+    label: string;
+    badge?: string;
+  }[] = [
+    { key: "matches", href: "/matches", label: "賽事" },
+    { key: "discuss", href: discussHref, label: "💬 討論室", badge: "NEW" },
+    ...NAV_ITEMS_STATIC.filter((i) => i.key !== "matches"),
+  ];
 
   return (
     <>
