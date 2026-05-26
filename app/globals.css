@@ -176,6 +176,42 @@ p, li {
   word-break: keep-all;
 }
 
+/* R140 W4 · Loading skeleton choreography · Agent A R140 iOS-grade polish #5 ·
+   Linear/Vercel cold-gold sweep gradient pattern · replaces generic Tailwind
+   animate-pulse on content placeholders · animate-pulse is the most-
+   recognizable「default Tailwind site」 tell · cold-gold sweep signals「engine
+   fetching」 NOT「page broken」 · brand signal upgrade · prefers-reduced-
+   motion respected via @media guard · gracefully degrades to subtle static
+   opacity for opt-out users · Apply via className="skeleton" on bg-fill
+   placeholder blocks(NOT on signal dots which keep their pulse) */
+.skeleton {
+  background: linear-gradient(
+    110deg,
+    rgba(30, 42, 71, 0.4) 0%,
+    rgba(30, 42, 71, 0.7) 40%,
+    rgba(212, 175, 55, 0.08) 50%,
+    rgba(30, 42, 71, 0.7) 60%,
+    rgba(30, 42, 71, 0.4) 100%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-sweep 1.6s linear infinite;
+}
+@keyframes skeleton-sweep {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .skeleton {
+    animation: none;
+    background: rgba(30, 42, 71, 0.5);
+    opacity: 0.6;
+  }
+}
+
 /* R108 W4 · vertical-center block utility · Chrome 123+ Baseline 2024 ·
    `align-content: center` on plain block element · 不必 flex hack · 不必
    `display: grid place-items-center` 牽動 child layout · Apple/Vercel 404

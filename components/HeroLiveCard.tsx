@@ -155,24 +155,41 @@ export default function HeroLiveCard({ match }: { match: Match }) {
         </div>
       </div>
 
-      {/* Live win percentages — smaller on mobile to keep card compact */}
+      {/* Live win percentages — smaller on mobile to keep card compact ·
+          R140 W5 · Agent A iOS-grade polish #4 · win % width-lock · 之前
+          1.0% → 62.4% width swing during Monte Carlo convergence 造成 layout
+          twitch · 加 inline-block min-w-[3.5ch] text-right wrap percentage
+          value · 加 font-variant-numeric tabular-nums lining-nums slashed-
+          zero + font-feature-settings tnum/zero/case · Bloomberg Terminal
+          signature pattern · case feature 對齊 % glyph baseline with lining
+          figures · 防 digit-change layout twitch · 數字 feel「mechanical」
+          not「nervous」 · Baseball Savant + Stripe billing dashboard
+          industry-standard pattern。 */}
       <div className="flex items-baseline justify-between mb-2 sm:mb-3">
         <span
           className={`font-mono text-2xl sm:text-4xl tabular tracking-tight ${
             homeFav ? "text-gold" : "text-mute"
           }`}
-          style={{ transition: "color 200ms ease" }}
+          style={{
+            transition: "color 200ms ease",
+            fontVariantNumeric: "tabular-nums lining-nums slashed-zero",
+            fontFeatureSettings: '"tnum", "zero", "case"',
+          }}
         >
-          {homePct.toFixed(1)}
+          <span className="inline-block min-w-[3.5ch] text-right">{homePct.toFixed(1)}</span>
           <span className="text-sm sm:text-base opacity-60 ml-0.5">%</span>
         </span>
         <span
           className={`font-mono text-2xl sm:text-4xl tabular tracking-tight ${
             !homeFav ? "text-gold" : "text-mute"
           }`}
-          style={{ transition: "color 200ms ease" }}
+          style={{
+            transition: "color 200ms ease",
+            fontVariantNumeric: "tabular-nums lining-nums slashed-zero",
+            fontFeatureSettings: '"tnum", "zero", "case"',
+          }}
         >
-          {awayPct.toFixed(1)}
+          <span className="inline-block min-w-[3.5ch] text-right">{awayPct.toFixed(1)}</span>
           <span className="text-sm sm:text-base opacity-60 ml-0.5">%</span>
         </span>
       </div>

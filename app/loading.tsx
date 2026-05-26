@@ -41,9 +41,14 @@ export default function Loading() {
             </span>
           </div>
 
-          {/* Hairline pulse · placeholder for hero typography */}
-          <div className="w-48 h-8 bg-line/30 mx-auto mb-3 animate-pulse" />
-          <div className="w-32 h-3 bg-line/20 mx-auto animate-pulse" />
+          {/* R140 W4 · cold-gold sweep skeleton(Linear/Vercel pattern)·
+              replaces generic animate-pulse content placeholder · brand signal
+              「engine fetching」 NOT「page broken」 · prefers-reduced-motion
+              respected via globals.css @media guard · signal dot above 仍 keeps
+              animate-pulse(different category · single dot signal not content
+              placeholder)。 */}
+          <div className="w-48 h-8 skeleton mx-auto mb-3" />
+          <div className="w-32 h-3 skeleton mx-auto" />
 
           <p
             className="font-mono text-mute text-[10px] tracking-[0.3em] mt-10"
