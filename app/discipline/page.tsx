@@ -547,7 +547,7 @@ function RuleSection({
         </footer>
       </blockquote>
 
-      <div className="space-y-5 text-mute text-base leading-relaxed max-w-2xl">
+      <div className="space-y-5 zh-body text-mute text-base leading-relaxed max-w-2xl">
         {children}
       </div>
     </section>

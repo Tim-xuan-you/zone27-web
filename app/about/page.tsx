@@ -586,7 +586,7 @@ function Chapter({
       <p className="font-mono text-mute text-xs tracking-[0.25em] mb-10">
         {kicker}
       </p>
-      <div className="space-y-5 text-mute text-base leading-relaxed">
+      <div className="space-y-5 zh-body text-mute text-base leading-relaxed">
         {children}
       </div>
     </section>
