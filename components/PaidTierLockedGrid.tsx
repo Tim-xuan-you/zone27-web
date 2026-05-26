@@ -135,10 +135,22 @@ const BLACK_CARD_UNLOCKS: Unlock[] = [
     status: "partial",
     eta: "Q3 2026(truncation gating 待建 · 目前 /now 全文 LIVE for all · FREE vs BLACK CARD 差異未實做)",
   },
+  {
+    // R148 W2 · NEW unlock #07 · 賽事討論室 · Tim founder-dogfood-canary 7-fire
+    // explicit override of R123 [[feedback-zone27-one-way-by-design]] iron rule
+    // · BLACK CARD-gated minimum-violation reversal · scaffold shipped on
+    // /matches/[gameId] R148 commit 1 · per [[feedback-founder-dogfood-canary]]
+    // trust founder + per Pratfall axiom 公開 reversal 不藏。
+    icon: "💬",
+    title: "賽事討論室 · BLACK CARD 1-post per game",
+    body: "/matches/[gameId] BLACK CARD 訂閱者 1-post per game · 200 字以內 · 球迷 grammar(0 betting · 0 下注 · 0 賠率)· 24hr 自動 archive · Tim 親手 moderate · 違規 first warn + second remove + third permanent ban · per R148 founder-dogfood-canary explicit override + R123 iron rule reversed to BLACK CARD-gated narrow-scope scaffold(scaffold LIVE · form ⏳ PRE-LAUNCH)",
+    status: "promise",
+    eta: "Q3 2026(scaffold LIVE on /matches/[gameId] · form 待 BLACK CARD payment system stable + Tim 親手 moderation tool ready · pre-launch mockup 3 sample posts illustrate 球迷 grammar)",
+  },
 ];
 
 const FOUNDERS_27_BONUS = [
-  "全 BLACK CARD 6 unlocks · 終身 0 月費",
+  "全 BLACK CARD 7 unlocks · 終身 0 月費",
   "0% 創作者抽成(BLACK CARD 5%)",
   "未來所有 engines + lenses 終身永久解鎖(不限數量)",
   "Founders 27 LINE 群 active access · Tim 親自答",
@@ -159,7 +171,7 @@ export default function PaidTierLockedGrid() {
             ↑ NEXT TIER · 您未解鎖 · 點下方 preview
           </p>
           <p className="font-mono text-mute/70 text-[10px] tracking-[0.3em] tabular">
-            FREE 5 + BLACK CARD 6(1 ✓ LIVE · 2 ◐ PARTIAL · 3 ⏳ PROMISE)+ Founders 27 終身無限
+            FREE 5 + BLACK CARD 7(1 ✓ LIVE · 2 ◐ PARTIAL · 4 ⏳ PROMISE · R148 NEW #07 賽事討論室)+ Founders 27 終身無限
           </p>
         </div>
       </div>

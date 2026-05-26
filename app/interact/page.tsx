@@ -333,11 +333,14 @@ export default function InteractPage() {
               · 0 reply button · 同 /letter「NO comment thread」 axiom 4 處 codify
             </li>
             <li>
-              <strong className="text-bone">公開 user-to-user forum / 板 / 賽事討論室</strong>{" "}
-              · 沒有「ZONE 27 板」 · 沒有「球迷區」 · 沒有「賽事討論」 · 沒有「賽事討論室」
-              (此名 R139 W2 從 BLACK CARD unlock #03 promise text 中 refactored 掉 ·
-              改為 /hey-tim 賽前 BLACK CARD 優先通道 · per iron rule)· 球迷 social
-              已在 LINE 群 + FB 滿足
+              <strong className="text-bone">公開 user-to-user forum / 板</strong>{" "}
+              · 沒有「ZONE 27 板」 · 沒有「球迷區」 free-form forum · per iron
+              rule reader↔reader 限制。 ⚠️ R148 update · 「賽事討論室」 R148
+              founder-dogfood-canary 7-fire 後 explicit reversed · BLACK CARD-gated
+              narrow-scope scaffold shipped on /matches/[gameId] · 不是 free-form
+              forum · 1-thread per game + 24hr decay + 球迷 grammar + Tim moderate
+              + 200 char + 1 post per user per game 6 constraints · 見 channel #11
+              詳列。 球迷 social 已在 LINE 群 + FB 滿足。
             </li>
             <li>
               <strong className="text-bone">User-to-user DM / 私訊</strong>{" "}

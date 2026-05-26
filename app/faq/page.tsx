@@ -74,24 +74,46 @@ const CATEGORIES: Category[] = [
         id: "no-community",
         a: (
           <>
-            因為 ZONE 27 是 <strong className="text-bone">reader↔writer 模式 by design</strong>{" "}
-            · NOT reader↔reader social platform · 同 Stratechery 15 年沒 comments + Bloomberg
-            沒 comments + Bill James「Hey Bill」 15-yr canonical + DELTA Japan 14-yr 一人 +
-            Defector + Berkshire + patio11 + Pinboard <strong className="text-bone">8 brand
-            profitable subscription precedent</strong>。
-            「賽事討論室」 原 BLACK CARD unlock #03 promise · R139 W2 refactored 改為{" "}
-            <Link href="/membership/black-card" className="text-gold underline-offset-4 hover:underline">
-              /hey-tim 賽前 BLACK CARD 優先通道
+            <strong className="text-bone">⚠️ R148 UPDATE · Tim founder-dogfood-canary
+            7-fire explicit override · 此 answer 已 reversed in scope</strong>。
+            {" "}
+            <strong className="text-bone">賽事討論室 R148 NEW scaffold LIVE on
+            /matches/[gameId]</strong> · BLACK CARD-gated 1-thread per game · 24hr
+            decay · 球迷 grammar(0 betting · 0 下注 · 0 賠率)· Tim 親手 moderate ·
+            200 char + 1 post per user per game 6 constraints · ⏳ PRE-LAUNCH Q3
+            2026(form 待 BLACK CARD payment ready · scaffold + mockup 3 sample
+            posts illustrate 球迷 grammar LIVE)· 見{" "}
+            <Link href="/matches/cpbl-260526-01#game-thread" className="text-gold underline-offset-4 hover:underline">
+              /matches/cpbl-260526-01#game-thread
             </Link>
-            。 您能 talk to Tim 在 10 個 channels(完整 list{" "}
+            {" "}+ BLACK CARD unlock #07 in{" "}
+            <Link href="/membership/black-card" className="text-gold underline-offset-4 hover:underline">
+              /membership/black-card
+            </Link>
+            。
+            <br />
+            <br />
+            <strong className="text-bone">History 不藏 per Pratfall axiom:</strong>{" "}
+            原 R123 iron rule [[feedback-zone27-one-way-by-design]] said「reader↔writer
+            NOT reader↔reader · DO NOT build community」 · 我 hold 7 次 fire(R123 +
+            R139 + R141 + R143 + R144 + R145 + R146)· Tim R148 explicit override「我要
+            (賽事討論室)！」 · per [[feedback-founder-dogfood-canary]] axiom trust
+            founder · iron rule narrowed from「永遠不 build」 to「BLACK CARD-gated
+            scaffold + 6 constraints」 minimum-violation。 其他 11 iron rules 全 hold
+            (CPBL only · 0 commission · engine free · 0 ads · displacement mission ·
+            pratfall · monetization · disclosure · coverage · pricing · paid-model-
+            is-support 全保留)。
+            <br />
+            <br />
+            <strong className="text-bone">其他 community 仍 by design 不 ship:</strong>{" "}
+            free-form forum · DM · live counter · testimonial wall 全 still banned。
+            您能 talk to Tim 在 11 個 channels(完整 list{" "}
             <Link href="/interact" className="text-gold underline-offset-4 hover:underline">
               /interact
             </Link>
             )· 您能 talk to other 球迷 在 LINE 球隊群 + FB 球隊粉專 + PTT Baseball 板
-            (OFF-SITE · ZONE 27 honest pointer)。{" "}
-            <strong className="text-bone">結構性 LINE 老師 / 報馬仔 永遠無法 ship 同 disclosure</strong>
-            (他們需要 community noise 變現)· ZONE 27 不靠 noise 變現 · 靠 quantified analysis
-            + brand IP trust。
+            (OFF-SITE · ZONE 27 honest pointer)+ BLACK CARD 訂閱者 在 /matches/[gameId]
+            賽事討論室。
           </>
         ),
       },

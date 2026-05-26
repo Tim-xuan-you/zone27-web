@@ -374,15 +374,23 @@ export default function Home() {
             訪客 0-click 看到 explicit「為何沒有 賽事討論室?」 + deep answer 1-click
             on /faq · brand IP iron rule preserved 同時 discoverability gap closed
             at homepage layer。 */}
+        {/* R148 W2 · 🤔 為何沒有 strip updated post-reversal · 賽事討論室 NEW
+            scaffold LIVE on /matches/[gameId] · 移 from「為何沒有」 list to
+            「LIVE on /matches」 callout · 用戶推薦賽事 + 抽傭 仍「為何沒有」 ·
+            per R148 minimum-violation reversal scope。 */}
         <p className="mt-2 sm:mt-3 font-mono text-mute/85 text-[10px] sm:text-[11px] tracking-[0.22em] tabular leading-relaxed">
-          <span className="text-loss/85">🤔 為何沒有</span>
+          <span className="text-gold/80">💬 賽事討論室</span>
+          <span className="text-loss/70 mx-1 text-[9px]">⏳ R148 NEW</span>
           <span className="text-mute/40 mx-1.5">·</span>
           <Link
-            href="/faq#no-community"
+            href="/matches/cpbl-260526-01#game-thread"
             className="hover:text-gold underline-offset-4 hover:underline transition-colors"
           >
-            賽事討論室
+            BLACK CARD-gated scaffold LIVE on /matches/[gameId]
           </Link>
+        </p>
+        <p className="mt-2 sm:mt-3 font-mono text-mute/85 text-[10px] sm:text-[11px] tracking-[0.22em] tabular leading-relaxed">
+          <span className="text-loss/85">🤔 為何沒有</span>
           <span className="text-mute/40 mx-1.5">·</span>
           <Link
             href="/faq#no-user-recommendations"
