@@ -18,9 +18,9 @@ import {
 // R69 W-A+W-B added /founders/first-five-minutes (onboarding) +
 //   /founders/from-one-current-founder (Substack empty scaffold)。
 // R95 W2 · Hick's Law compression · COMMAND_ITEMS.length 為 canonical source
-//   (currently 39 hand-curated entries · R128 W2 加 /heritage direct entry
-//   後 DELTA-of-CPBL positioning 1-click 可達 · R119 W4 36 · R120 W5 37 ·
-//   R122 W1 38 · R128 W2 39 · secondary routes accessed via /transparency
+//   (currently 42 hand-curated entries · R137 W3 加 /glossary + /leaderboard +
+//   /founders/ledger direct entries · R119 W4 36 · R120 W5 37 · R122 W1 38 ·
+//   R128 W2 39 · R137 W3 42 · secondary routes accessed via /transparency
 //   aggregator + Footer + parent-page cross-links)。
 //
 // Design principles (per [[zone27-disclosure-philosophy]]):

@@ -90,7 +90,7 @@ export default function ManifestoPage() {
           </header>
 
           {/* ── OPENING NOTE ────────────────────────── */}
-          <section className="pt-12 pb-2 space-y-5 text-mute text-base leading-relaxed max-w-2xl">
+          <section className="pt-12 pb-2 space-y-5 zh-body text-mute text-base leading-relaxed max-w-2xl">
             <P>
               ZONE 27 是台灣硬核棒球迷的暗黑黃金級量化分析品牌。
               我們做的事不獨特:Monte Carlo 模擬器、勝率分布、賽事資料。
@@ -431,7 +431,7 @@ export default function ManifestoPage() {
               <span className="text-gold">KEEP YOUR SOUL.</span>
             </h3>
 
-            <div className="space-y-5 text-mute text-base leading-relaxed max-w-2xl">
+            <div className="space-y-5 zh-body text-mute text-base leading-relaxed max-w-2xl">
               <P>
                 4 個倒置濃縮成一句話:
                 <strong className="text-bone">
@@ -498,7 +498,7 @@ export default function ManifestoPage() {
               </div>
             </div>
 
-            <div className="space-y-5 text-mute text-base leading-relaxed max-w-2xl">
+            <div className="space-y-5 zh-body text-mute text-base leading-relaxed max-w-2xl">
               <P>
                 <strong className="text-bone">這個 framing 解決兩個矛盾:</strong>
               </P>
@@ -535,7 +535,7 @@ export default function ManifestoPage() {
                 WHO THIS IS FOR
               </h2>
             </div>
-            <div className="space-y-5 text-mute text-base leading-relaxed max-w-2xl">
+            <div className="space-y-5 zh-body text-mute text-base leading-relaxed max-w-2xl">
               <P>
                 這份宣言不是寫給所有人。
                 <strong className="text-bone">是寫給三種人:</strong>
@@ -709,7 +709,7 @@ function AxiomSection({
         </div>
       </div>
 
-      <div className="space-y-5 text-mute text-base leading-relaxed max-w-2xl">
+      <div className="space-y-5 zh-body text-mute text-base leading-relaxed max-w-2xl">
         {children}
       </div>
     </section>
