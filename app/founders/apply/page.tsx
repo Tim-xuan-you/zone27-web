@@ -215,6 +215,35 @@ export default function FoundersApplyPage() {
           </ClientErrorBoundary>
         </section>
 
+        {/* R156 W3.D5 · Craig Mod「I trust you」 hardship clause · per Agent D
+            R156 research · craigmod.com/membership/ stewardship register +
+            Are.na editorial「On Pricing」 hardship carve-out · 1-paragraph
+            add · converts price wall from gatekeeping to stewardship · per
+            [[zone27-monetization-philosophy]] identity-tier-as-SUPPORT axiom
+            · brand IP iron rule preserved · 0 new component · pure copy。 */}
+        <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-12">
+          <div className="border-l-2 border-gold/40 pl-5 sm:pl-6 py-3">
+            <p className="text-mute leading-relaxed text-sm sm:text-base zh-body">
+              <span className="text-bone font-medium">如果 NT$ 2,700 對您 genuinely out of reach</span>{" "}
+              · email{" "}
+              <a
+                href="mailto:tatayngiti@gmail.com?subject=ZONE%2027%20%C2%B7%20Founders%2027%20%C2%B7%20hardship%20inquiry"
+                className="text-gold underline-offset-4 hover:underline"
+              >
+                Tim
+              </a>
+              {" "}
+              · 我們 work something out · 不要 silently 跳過 application。
+              您走到這頁 = 您是 hardcore CPBL 球迷 · 我相信您。 same axis
+              Craig Mod「I trust you」 student tier + Are.na hardship carve-out。
+            </p>
+            <p className="mt-3 font-mono text-mute/60 text-[9px] tracking-[0.25em] leading-relaxed">
+              ⚓ per [[zone27-monetization-philosophy]] identity-tier-as-SUPPORT
+              axiom · 不 gatekeep · 0 outsource · solo founder discretion
+            </p>
+          </div>
+        </section>
+
         {/* ── POST-APPLY EXPECTATION SETTING ───────── */}
         <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-16">
           <div className="border border-line/40 bg-slate/20 p-6 sm:p-8">

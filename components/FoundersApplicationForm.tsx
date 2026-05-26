@@ -86,13 +86,13 @@ function SubmitButton() {
     <button
       type="submit"
       disabled={pending}
-      className={`w-full py-4 text-xs tracking-[0.3em] transition-colors font-medium ${
+      className={`w-full py-4 text-xs tracking-[0.3em] transition-colors font-medium border-2 ${
         pending
-          ? "bg-gold/30 text-navy/70 cursor-not-allowed"
-          : "bg-gold text-navy hover:bg-gold-soft"
+          ? "border-gold/40 bg-transparent text-gold/60 cursor-not-allowed"
+          : "border-gold bg-transparent text-gold hover:bg-gold/10"
       }`}
     >
-      {pending ? "▸ 正在提交申請 ..." : "提交申請 · TIM 1-3 日內 REVIEW →"}
+      {pending ? "▸ 遞交中 ..." : "遞交給 Tim · review 後您會收到通知"}
     </button>
   );
 }
@@ -353,10 +353,11 @@ export default function FoundersApplicationForm() {
           <a
             href="mailto:tatayngiti@gmail.com?subject=ZONE%2027%20%C2%B7%20application%20email%20missing"
             className="text-gold underline-offset-4 hover:underline"
+            title="tatayngiti@gmail.com · Tim 個人 inbox · 0 outsource · zone27 domain 啟用後即啟動 support@zone27 alias"
           >
-            tatayngiti@gmail.com
+            support@zone27
           </a>
-          (zone27.tw domain 尚未啟用 · R70 W-G fix from R68 stale ref)。
+          (zone27 domain 啟用後即啟動 support alias · 暫用 Tim 個人 inbox · 0 outsource · per Patek allocation pattern)。
         </p>
 
         <div className="mt-8 pt-6 border-t border-line/40">

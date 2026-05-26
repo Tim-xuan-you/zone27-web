@@ -37,7 +37,13 @@ import { FOUNDERS_REMAINING } from "@/lib/founders-stats";
 // ─────────────────────────────────────────────────────
 
 const TOTAL_SIMS = 10_000;
-const BATCH = 200;
+// R156 W2 · Agent F INP fix · BATCH 200 → 50 · 之前 200 sims per RAF tick crossed
+// Long Task threshold(50ms+ on low-end Android per Pixel 4a baseline)· tap on
+// stat row mid-sim → P75 INP > 200ms · per web.dev INP optimization canonical
+// anti-pattern。 NEW 50 sims per tick → each tick stays < 50ms · 10K sims = 200
+// ticks ≈ 3-4s total(vs 2s before)· tradeoff worth it for INP improvement ·
+// progressive enhancement · low-end Android visitor experience canonical fix。
+const BATCH = 50;
 
 type Props = {
   match: Match;
@@ -195,7 +201,7 @@ export default function MatchSimulator({ match }: Props) {
           }`}
         >
           {running
-            ? `▸ 模擬中 ${stats.completed.toLocaleString()} / ${TOTAL_SIMS.toLocaleString()}`
+            ? `▸ 演算法收斂中 · ${stats.completed.toLocaleString()} / ${TOTAL_SIMS.toLocaleString()} 次採樣`
             : done
             ? "▸ 再跑一次"
             : "▶ 跑 10,000 次模擬"}
@@ -220,7 +226,7 @@ export default function MatchSimulator({ match }: Props) {
           / 即時勝率
         </p>
 
-        <div className="bg-slate/70 border border-line/80 glow-soft p-8 sm:p-10">
+        <div className={`bg-slate/70 border border-line/80 glow-soft p-8 sm:p-10 ${running ? "card-breathing" : ""}`}>
           <div className="flex items-baseline justify-between mb-3">
             <div>
               <p className="font-mono text-mute text-[10px] tracking-[0.3em] mb-1">
@@ -419,10 +425,10 @@ export default function MatchSimulator({ match }: Props) {
               </span>
               。
               <br />
-              v0.2 引擎使用投手 K/9 · BB/9 · HR/9 推導打席結果機率,
-              純由壘上跑者推進物理累計分數。
+              每一個打席 · 引擎用 K/9 · BB/9 · HR/9 滾出 8 種結果(三振/保送/全壘打/單打/二壘/三壘/滾飛/高飛)·
+              跑者照棒球規則推進累計分數。
               <br />
-              <span className="text-gold">這次,連棒球都是真的。</span>
+              <span className="text-gold">連棒球本身,都是真的算的。</span>
             </p>
             {/* Round 12 funnel-audit: completion card is THE highest-
                 intent moment in the funnel · visitor just watched

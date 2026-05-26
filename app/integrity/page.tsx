@@ -254,6 +254,146 @@ export default function IntegrityPage() {
           </ol>
         </section>
 
+        {/* ── §02B · EDITORIAL-COMMERCE WALL ─────────────
+            R156 W3.D2 · Wirecutter editorial-commerce wall covenant ·
+            per Agent D R156 research · NYT Wirecutter 2026 redesign
+            transparency wall pattern transplanted · solo-founder paradox
+            registered as binding covenant since no org-chart structural wall
+            possible · per [[zone27-disclosure-philosophy]] + [[zone27-
+            monetization-philosophy]] + [[feedback-zone27-pratfall-brand-ip]]
+            三 axiom 同時 fire · brand IP minimum-violation form。 */}
+        <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-12 border-t border-line/40 pt-12">
+          <p
+            lang="en"
+            className="font-mono text-gold/85 text-[10px] tracking-[0.4em] mb-4"
+          >
+            / §02B · EDITORIAL-COMMERCE WALL · ENGINE 與 IDENTITY
+          </p>
+          <h2 className="text-2xl sm:text-3xl text-bone font-light tracking-tight mb-6 leading-tight">
+            引擎 FREE forever · 識別 tier PAID · 兩條線之間有一道<span className="text-gold">牆</span>
+          </h2>
+
+          <div className="space-y-5 text-mute leading-relaxed zh-body">
+            <p>
+              Wirecutter(NYT 旗下評測站)2026 年 3 月 redesign 公開
+              transparency wall:「editorial picks based solely on quality ·
+              commerce team handles affiliate links AFTER picks made · 兩邊
+              不互通」。 ZONE 27 採同 axis · 但因 solo founder · 無 org chart
+              可以結構性隔離 · 必須以<strong className="text-bone">登記 covenant 形式</strong>
+              替代 · 不假裝有 wall 而是公開 wall 怎麼維持。
+            </p>
+
+            <p>
+              <strong className="text-bone">這道牆的具體形狀:</strong>
+              ZONE 27 引擎 output(K/9 · BB/9 · HR/9 推 Monte Carlo · 7-LENS
+              CANVAS · /audit S02 全部 estimation disclosure)對<strong className="text-bone">
+              FREE tier 訪客 = BLACK CARD 訂閱者 = Founders 27 永久會員</strong>
+              · 物理上同一份 lib/simulator.ts 跑出來。 paid tier 買的是 IDENTITY
+              + 創作者抽成 + Founders 27 LINE 群 · 不買 engine accuracy
+              升級 · 不買 secret edge · 不買 paywall predictions。
+            </p>
+
+            <p>
+              <strong className="text-bone">Boundary case ZONE 27 已 pre-commit:</strong>
+              若 sportsbook / 玩運彩 / 報馬仔 / LINE 老師生態 / 任何 betting
+              platform 主動 contact 提出 NT$ X K 買 engine API · whitelabel
+              · co-branded launch · affiliate program · sponsored content · 任何
+              形式 commerce relationship · Tim 將: (1) 公開 disavow on /audit ·
+              (2) email decline 不洽談 · (3) 收 PII 不 leak · 不 negotiation 不
+              counter-offer。 Wirecutter 對應 boundary 是「best retailer 沒有
+              affiliate program · 仍 send readers 去 · 自己賺 NT$ 0」 · ZONE 27
+              對應 boundary 是「sportsbook fork 我們 MIT-licensed engine · 我們
+              /audit 公開 fork 事實 + disavow + 收 NT$ 0」(per /ethics §02B MIT
+              LICENSE LIMIT 已 codify)。
+            </p>
+          </div>
+
+          <div className="mt-8 border border-gold/30 bg-slate/30 p-5 sm:p-7">
+            <p
+              lang="en"
+              className="font-mono text-gold text-[10px] tracking-[0.4em] mb-4"
+            >
+              ⚓ 3 BINDING COVENANTS · APPEND-ONLY · 30-DAY /CHANGELOG NOTICE
+            </p>
+            <ol className="space-y-4 mt-4">
+              <li className="border-l-2 border-gold/40 pl-4 py-2">
+                <div className="flex items-baseline gap-3 flex-wrap mb-1.5">
+                  <span
+                    lang="en"
+                    className="font-mono text-gold/85 text-[10px] tracking-[0.3em] tabular"
+                  >
+                    ✓ W-01
+                  </span>
+                  <p className="text-bone text-sm sm:text-base leading-snug flex-1">
+                    <strong>引擎 output 對所有 tier 物理相同 · 0 paywall on prediction</strong>
+                  </p>
+                </div>
+                <p className="text-mute text-[12px] sm:text-sm leading-relaxed">
+                  FREE tier 訪客看到的 win probability = BLACK CARD 訂閱者 = Founders 27 永久會員
+                  · 同一份 lib/simulator.ts 同一份 lib/matches.ts 跑出來 · 任何時刻 fork repo
+                  可驗證 · 違反 = Tim 親手 在 /ethics 紅字標永久 audit trail
+                </p>
+              </li>
+              <li className="border-l-2 border-gold/40 pl-4 py-2">
+                <div className="flex items-baseline gap-3 flex-wrap mb-1.5">
+                  <span
+                    lang="en"
+                    className="font-mono text-gold/85 text-[10px] tracking-[0.3em] tabular"
+                  >
+                    ✓ W-02
+                  </span>
+                  <p className="text-bone text-sm sm:text-base leading-snug flex-1">
+                    <strong>0 sportsbook revenue 永久 · 任何 betting 生態 commerce relationship 全 decline</strong>
+                  </p>
+                </div>
+                <p className="text-mute text-[12px] sm:text-sm leading-relaxed">
+                  玩運彩 / 報馬仔 / sportsbook / LINE 老師 / betting platform / affiliate
+                  / sponsored content / API license / whitelabel / 任何形式 incentive 全
+                  decline · 不 counter-offer 不 negotiation · email refuse 收 PII 不 leak ·
+                  違反 = brand 信用永久 collapse · /ethics 紅字
+                </p>
+              </li>
+              <li className="border-l-2 border-gold/40 pl-4 py-2">
+                <div className="flex items-baseline gap-3 flex-wrap mb-1.5">
+                  <span
+                    lang="en"
+                    className="font-mono text-gold/85 text-[10px] tracking-[0.3em] tabular"
+                  >
+                    ✓ W-03
+                  </span>
+                  <p className="text-bone text-sm sm:text-base leading-snug flex-1">
+                    <strong>identity tier 不 unlock engine accuracy · 不 unlock secret edge · paid tier = SUPPORT/IDENTITY 不 features</strong>
+                  </p>
+                </div>
+                <p className="text-mute text-[12px] sm:text-sm leading-relaxed">
+                  per [[feedback-zone27-paid-model-is-support-not-features]] · BLACK CARD
+                  unlocks(per /membership/black-card R141 W1 公開 1 LIVE · 2 PARTIAL · 3
+                  PROMISE)全是 IDENTITY 層(LINE 群 + Tim 工程筆記 full + voting + 創作者
+                  抽成 + Founders 27 LINE 群)· 0 unlock = engine more accurate · 違反 =
+                  brand IP iron rule 直接 collapse
+                </p>
+              </li>
+            </ol>
+          </div>
+
+          <p className="mt-6 text-mute/85 text-sm leading-relaxed zh-body">
+            <strong className="text-bone">為什麼這道牆必須 explicit codify:</strong>
+            solo founder 結構不能依靠 org chart 隔離 · 必須以 public covenant
+            形式維持 · 同 Costco 14% 毛利上限 · Patek Generations 200-yr Reference
+            permanence · Berkshire 1996 Owner&rsquo;s Manual · Defector worker-owned
+            launch commitment · 全採同 axis:public bond not implicit assumption。
+            ZONE 27 在 Year 0 採同 axis · 不裝 30+ yrs earned · publish commitments
+            before earning · per /year-zero R77 W-C「我們 publish commitments not
+            results」 axiom · 此 wall 同 axis。
+          </p>
+
+          <p className="mt-6 font-mono text-mute/70 text-[10px] tracking-[0.25em] leading-relaxed">
+            ⚓ Source · Wirecutter 2026-03-03 redesign editorial-commerce
+            transparency wall · Tim 親手 transplant pattern to ZONE 27 ·
+            solo-founder physical limit converted to public covenant
+          </p>
+        </section>
+
         {/* ── §03 · BERKSHIRE 1996 PATTERN explanation ── */}
         <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-12 border-t border-line/40 pt-12">
           <p

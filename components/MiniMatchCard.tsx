@@ -64,7 +64,9 @@ export default function MiniMatchCard({ match }: { match: Match }) {
       // (per @view-transition navigation: auto in globals.css R109 W1)。
       // Older browsers ignore property completely · 0 risk · 純 progressive enhancement。
       style={{ viewTransitionName: `match-${match.id}` } as React.CSSProperties}
-      className="bg-slate/40 border border-line/60 p-4 sm:p-5 flex flex-col gap-3 transition-colors hover:border-gold/40"
+      data-match-card
+      data-final={match.finalResult ? "true" : "false"}
+      className="@container/card bg-slate/40 border border-line/60 p-4 sm:p-5 flex flex-col gap-3 transition-colors hover:border-gold/40"
     >
       {/* Time + venue + phase badge */}
       <div className="flex items-center justify-between gap-2">
@@ -83,7 +85,7 @@ export default function MiniMatchCard({ match }: { match: Match }) {
           <p className="font-mono text-mute text-[8px] tracking-[0.3em] mb-0.5">
             HOME
           </p>
-          <h3 className="text-bone text-sm sm:text-base font-light tracking-tight leading-snug">
+          <h3 className="text-bone text-sm @[260px]/card:text-base font-light tracking-tight leading-snug">
             {match.home.name}
           </h3>
           <p className="font-mono text-gold/60 text-[9px] tracking-[0.25em] mt-0.5">
@@ -97,7 +99,7 @@ export default function MiniMatchCard({ match }: { match: Match }) {
           <p className="font-mono text-mute text-[8px] tracking-[0.3em] mb-0.5">
             AWAY
           </p>
-          <h3 className="text-bone text-sm sm:text-base font-light tracking-tight leading-snug">
+          <h3 className="text-bone text-sm @[260px]/card:text-base font-light tracking-tight leading-snug">
             {match.away.name}
           </h3>
           <p className="font-mono text-gold/60 text-[9px] tracking-[0.25em] mt-0.5">

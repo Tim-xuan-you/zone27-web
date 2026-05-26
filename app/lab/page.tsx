@@ -197,12 +197,21 @@ export default function LabPage() {
                 type="button"
                 onClick={() => setMatchId(m.id)}
                 aria-current={active ? "true" : undefined}
-                className={`text-left p-4 border transition-colors duration-150 cursor-pointer ${
+                className={`relative text-left p-4 border transition-colors duration-150 cursor-pointer ${
                   active
-                    ? "border-gold bg-gold/10 text-bone"
+                    ? "border-gold border-l-4 bg-gold/10 text-bone"
                     : "border-line/60 text-mute hover:border-gold/40 hover:text-bone"
                 }`}
               >
+                {/* R156 W1.9 · Agent E friction #4 · active selector visual
+                    reinforcement · 4px left-border + 4px gold dot · 訪客 1.2s
+                    識別 active state · Bloomberg Terminal selected-cell pattern。 */}
+                {active && (
+                  <span
+                    aria-hidden="true"
+                    className="absolute top-2 right-2 w-1.5 h-1.5 rounded-full bg-gold glow-gold"
+                  />
+                )}
                 <div className="flex items-baseline justify-between gap-2 mb-2">
                   <span
                     lang="en"
@@ -237,8 +246,19 @@ export default function LabPage() {
         </div>
       </section>
 
+      {/* R156 W1.13 · Agent E rhythm #2 · /lab transition visual continuity ·
+          subtle scroll-position cue between match selector + simulator ·
+          Bloomberg Terminal panel-boundary pattern · 1-line mute orientation
+          guide · brand-pure 不破 minimalism。 */}
+      <p
+        aria-hidden="true"
+        className="text-center font-mono text-mute/40 text-[9px] tracking-[0.4em] mb-2 mt-4"
+      >
+        ↓ ENGINE ↓
+      </p>
+
       {/* ── THE SIMULATOR (shared component) ─────── */}
-      <section className="mx-auto max-w-4xl w-full px-6 sm:px-10 pb-12">
+      <section className="mx-auto max-w-4xl w-full px-6 sm:px-10 pb-12 border-t border-gold/20 pt-8">
         <MatchSimulator key={match.id} match={match} />
       </section>
 

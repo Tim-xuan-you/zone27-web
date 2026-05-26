@@ -122,7 +122,13 @@ export default function HeroLiveCard({ match }: { match: Match }) {
               ? "● 即時模擬中"
               : "● AI 模型 · 已收斂"}
           </span>
-          <PhaseBadge phase={matchPhase} calibration={calibration} />
+          {/* R156 W1.1 · Agent F#2 CLS fix · reserve badge slot · 之前 PhaseBadge
+              swap from null(SSR no badge)to chip post-mount · ~18-20px layout
+              shift on hydration · 加 inline-block min-h/min-w wrapper · 同
+              MiniMatchCard pattern · per web.dev CLS guide reserve-space axiom。 */}
+          <span className="inline-block min-h-[18px] min-w-[64px]">
+            <PhaseBadge phase={matchPhase} calibration={calibration} />
+          </span>
         </div>
         <span className="font-mono text-mute text-[10px] tracking-[0.25em]">
           {match.date} · {match.startTime}

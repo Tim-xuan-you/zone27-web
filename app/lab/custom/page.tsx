@@ -457,6 +457,8 @@ function PitcherForm({
           min={0}
           max={20}
           step={0.1}
+          leagueAvg={7.5}
+          zhHint="三振 / 9 局"
         />
         <NumberField
           idPrefix={side}
@@ -467,6 +469,8 @@ function PitcherForm({
           min={0}
           max={10}
           step={0.1}
+          leagueAvg={3.2}
+          zhHint="保送 / 9 局"
         />
         <NumberField
           idPrefix={side}
@@ -477,6 +481,8 @@ function PitcherForm({
           min={0}
           max={5}
           step={0.1}
+          leagueAvg={1.0}
+          zhHint="被全壘打 / 9 局"
         />
       </div>
     </div>
@@ -492,6 +498,8 @@ function NumberField({
   min,
   max,
   step,
+  leagueAvg,
+  zhHint,
 }: {
   idPrefix: string;
   label: string;
@@ -501,6 +509,13 @@ function NumberField({
   min: number;
   max: number;
   step: number;
+  // R156 W1.6 · Agent E microcopy #4 · CPBL league average reference ·
+  // Cmd-K landing 訪客可能不熟 K/9 / BB/9 / HR/9 metric semantic ·
+  // surface CPBL ~7.5 / ~3.2 / ~1.0 average + zh meaning · per
+  // [[feedback-zone27-audience-fans-not-engineers]] fan grammar
+  // accessibility · per /audit S02 ESTIMATION DISCLOSURE 顯式 reference range。
+  leagueAvg?: number;
+  zhHint?: string;
 }) {
   // Round 52 W-B · Agent 2 #3 fix · NumberField 之前 native HTML5 max/min
   // silent constraint · 訪客 mobile 輸入 25 K/9 沒提示 · submit 也無反應 ·
@@ -534,7 +549,15 @@ function NumberField({
         className="block mt-1 font-mono text-mute/70 text-[9px] tracking-[0.2em] text-center tabular"
       >
         {min}–{max}
+        {leagueAvg !== undefined && (
+          <span className="text-gold/60 ml-1">· CPBL ~{leagueAvg}</span>
+        )}
       </span>
+      {zhHint && (
+        <span className="block mt-0.5 font-mono text-mute/50 text-[9px] tracking-[0.15em] text-center">
+          {zhHint}
+        </span>
+      )}
     </label>
   );
 }
