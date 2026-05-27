@@ -167,12 +167,22 @@ Current pending (as of 2026-05-20 DAY 2 collapse):
 - **Slogan:** 「不靠直覺,只看演算法」/「We Don't Guess. We Compute.」
 - **禁止:** AdMob、宮廟風配色、閃爍 Banner、紅綠對比、可愛圖案
 
+## 🎯 Brand framing(R172 W1 Tim explicit override)
+
+**ZONE 27 = 賭徒的 Bloomberg Terminal**
+
+- **客群:** 會下注的 sports 迷(包括賭徒)· 不只純球迷
+- **Displacement target:** 玩運彩 / 報馬仔 / LINE 老師(維持初衷)
+- **差別:** 引擎永遠免費 · 不抽下注 · 不收明牌費 · 完整公開 model
+- **同類成功 displacement model:** Defector vs ESPN · Stratechery vs CNBC · Bloomberg Terminal vs 各券商 · Bill James vs MLB establishment
+- **Coverage:** Phase 1 CPBL · Phase 2 NBA + 未來 leagues · Tim 親手 curate · 不爬 gambling platforms
+
 ## 🏛️ 商業模式定錨
 
-- **Free Tier:** 看得到基本數據,不能參與
-- **BLACK CARD:** NT$ 299 / 月 — 黑金訂閱會員,5% 創作者抽成(Round 33 reprice 499→299 per agent NT$ 200-450/月 benchmark band sweet spot · Netflix Premium NT$ 390 comparable)
+- **Free Tier:** 引擎跑 10K Monte Carlo · /track-record + 所有 trust artifacts 全公開 · 永遠免費
+- **BLACK CARD:** NT$ 500 / season — CPBL 季票會員 · 5% 創作者抽成 · ATM 跨行轉帳免手續費 · 0 auto-renewal(R171 W3 reprice from NT$ 1,500)
 - **FOUNDERS 27:** NT$ 2,700 一次性 / 限量 270 名 / 終身 / 創作者 0% 抽成
-- **拒絕:** 廣告營收(AdMob 永久封殺),只走 Premium Sponsor
+- **拒絕:** 廣告營收(AdMob 永久封殺) · 抽下注分成(0 sportsbook revenue) · 收明牌費
 
 ## 🤝 生態系連動
 

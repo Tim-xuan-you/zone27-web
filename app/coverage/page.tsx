@@ -166,11 +166,16 @@ export default function CoveragePage() {
             </h1>
 
             <p className="text-bone text-lg sm:text-xl leading-relaxed mb-6 border-l-2 border-gold/60 pl-5 sm:pl-6 max-w-2xl">
-              <strong>ZONE 27 不為娛樂下注者優化。</strong>
+              <strong>ZONE 27 = 賭徒的 Bloomberg Terminal。</strong>
               <br />
               <span className="text-mute">
-                我們服務的是想看見<span className="text-gold">模型誠實程度</span>的硬核棒球迷。
+                客群 = 會下注的 sports 迷(包括賭徒)· 對標
+                <span className="text-gold">玩運彩 / 報馬仔 / LINE 老師</span> ·
+                提供更好的<span className="text-gold">資訊層</span>。
               </span>
+            </p>
+            <p className="text-bone text-base leading-relaxed mb-6 max-w-2xl">
+              不同 玩運彩 / 報馬仔:<strong className="text-gold">引擎永遠免費 · 不抽下注 · 不收明牌費 · 完整公開 model + ledger</strong>。 您拿我們的資料自己決定下哪個 platform · ZONE 27 不參與下注。
             </p>
             <div className="mb-6">
               <ArticleMeta readingMin={8} />
@@ -178,8 +183,8 @@ export default function CoveragePage() {
 
             <p className="text-mute text-base leading-relaxed mb-8 max-w-2xl">
               這頁列出我們覆蓋什麼 · 不覆蓋什麼 · 為什麼。
-              ZONE 27 不是「所有可下注賽事的預測 vending machine」 ·
-              只覆蓋引擎能誠實計算的比賽。
+              ZONE 27 不是「所有可下注賽事的 vending machine」 ·
+              只覆蓋引擎能誠實計算的比賽。 Phase 1: CPBL · Phase 2: NBA + 未來 leagues · Tim 親手 curate scope。
             </p>
 
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-x-6 gap-y-3 pt-4 font-mono text-[10px] tracking-[0.18em] section-reveal">

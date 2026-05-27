@@ -34,9 +34,7 @@ const CATEGORIES: Category[] = [
         q: "什麼是 ZONE 27?",
         a: (
           <>
-            全台第一個專為硬核棒球迷打造的暗黑黃金級體育預測社群。我們用蒙地卡羅 AI
-            模擬器拆解每場 CPBL 比賽,讓「機率」取代「直覺」。社群與創作者收入透明、
-            不可篡改,沒有任何宮廟風廣告。完整品牌方法論請見{" "}
+            <strong className="text-bone">ZONE 27 = 賭徒的 Bloomberg Terminal。</strong> 客群 = 會下注的 sports 迷(包括賭徒)· 對標 玩運彩 / 報馬仔 / LINE 老師 · 提供更好的資訊層。 不同他們的是:引擎永遠免費 · 不抽下注 · 不收明牌費 · 完整公開 model + ledger。 您拿我們的資料自己決定下哪個 platform · ZONE 27 不參與下注。 Phase 1 CPBL · Phase 2 NBA + 未來 leagues · Tim 親手 curate。 完整 brand 方法論見{" "}
             <Link href="/about" className="text-gold underline-offset-4 hover:underline">
               /about
             </Link>
