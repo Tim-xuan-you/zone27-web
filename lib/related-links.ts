@@ -576,28 +576,7 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
       title: "公開戰績 ledger · 此 annual report 的 metric 源頭",
     },
   ],
-  // Round 35 W-A · /rewards NEW · PROVED 預測兌換實體獎品 · ZONE 27 ↔
-  // 恆美攝影 ecosystem cross-promotion · Tim 11+ canary「集點兌換」 push
-  // axiom revisit · brand-pure skill-based fantasy league prize 結構。
-  // Siblings:/matches(預測來源)· /member(您 calibration mirror + total
-  // prediction stats)· /audit(S05 PRE-COMMIT rules-binding pattern 同邏輯)。
-  "/rewards": [
-    {
-      href: "/matches",
-      kicker: "matches",
-      title: "今日賽事 · 您 prediction 源頭 · UserPredictionPicker 在這",
-    },
-    {
-      href: "/member",
-      kicker: "member",
-      title: "您 calibration mirror + 完整 prediction stats breakdown",
-    },
-    {
-      href: "/audit",
-      kicker: "audit",
-      title: "Model Report · S05 PRE-COMMIT 同 rules-binding pattern",
-    },
-  ],
+  // R166 W1 · /rewards DELETED · Q4 vapor + Apple discipline + violated [[feedback-no-waiting-rule]] · per Agent P TIER A audit
   // R165 W1 · /pricing/why DELETED R164 · swap to /annual/2026(Year 0 empty state ·
   // 同 transparency axis · 申請者可 audit Founders 27 真實狀態)。
   "/founders/apply": [

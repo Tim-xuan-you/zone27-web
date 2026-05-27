@@ -167,6 +167,25 @@ export default function FoundersApplicationForm() {
   // save-draft clicked · doesn't change form's existing useActionState
   // uncontrolled-input contract。
   const formRef = useRef<HTMLFormElement>(null);
+  // R166 W1 · Agent Q bug audit MEDIUM #3 · async race guard · same pattern
+  // as R155 W1c(FollowMatchButton + MatchNoteEditor)· timers tracked +
+  // mountedRef guard before setState · prevents「setState on unmounted」 warning。
+  const mountedRef = useRef(true);
+  const timerRef = useRef<ReturnType<typeof setTimeout>[]>([]);
+  useEffect(() => {
+    mountedRef.current = true;
+    return () => {
+      mountedRef.current = false;
+      timerRef.current.forEach(clearTimeout);
+      timerRef.current = [];
+    };
+  }, []);
+  const scheduleStatusReset = (ms: number, next: "idle" | "composed" | "copied") => {
+    const t = setTimeout(() => {
+      if (mountedRef.current) setDraftSaveStatus(next);
+    }, ms);
+    timerRef.current.push(t);
+  };
   const [draftSaveStatus, setDraftSaveStatus] = useState<
     "idle" | "composed" | "copied"
   >("idle");
@@ -328,8 +347,8 @@ export default function FoundersApplicationForm() {
       navigator.clipboard
         .writeText(resumeUrl)
         .then(() => {
-          setDraftSaveStatus("copied");
-          window.setTimeout(() => setDraftSaveStatus("idle"), 3500);
+          if (mountedRef.current) setDraftSaveStatus("copied");
+          scheduleStatusReset(3500, "idle");
         })
         .catch(() => {
           if (typeof window !== "undefined") {
@@ -341,20 +360,23 @@ export default function FoundersApplicationForm() {
     try {
       window.location.href = mailtoUrl;
       // Optimistic UI · assume mailto opens
-      setDraftSaveStatus("composed");
+      if (mountedRef.current) setDraftSaveStatus("composed");
       // R73 W-C · post-click focus-still-here check · 500ms after assignment
       // · if window still focused = mail app DIDN'T launch(iOS silent fail) ·
       // auto-fallback to clipboard · 不 leave visitor with false confirmation。
-      window.setTimeout(() => {
+      // R166 W1 · async race guard per Agent Q audit · timer tracked + cleanup。
+      const focusCheckTimer = setTimeout(() => {
+        if (!mountedRef.current) return;
         if (typeof document !== "undefined" && document.hasFocus()) {
           // Mail app didn't take over · iOS silent fail OR desktop without
           // default mail client · fallback to clipboard for plaintext recovery
           fallbackToClipboard();
         } else {
           // Mail app took focus = success · reset status after 3s
-          window.setTimeout(() => setDraftSaveStatus("idle"), 3000);
+          scheduleStatusReset(3000, "idle");
         }
       }, 500);
+      timerRef.current.push(focusCheckTimer);
     } catch {
       fallbackToClipboard();
     }

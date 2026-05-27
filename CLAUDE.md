@@ -190,6 +190,9 @@ ZONE 27 與 **BOTTOM 27**(Tim 的棒球手遊)是雙生品牌:
 
 ## 🗺️ 當前路由(v0.29 · **R164 NUCLEAR DELETE applied** · 2026-05-26 · ~48 visitor-discoverable post削)
 
+**R166 W1 削除(1 route · Apple discipline continuation):**
+- ❌ /rewards · Q4 vapor + violates [[feedback-no-waiting-rule]] · per Agent P TIER A audit · redirect mapping: UserPredictionPicker → /member/calibration · /now historical refs → /membership/black-card
+
 **R164 削除清單(12 routes · 7188 lines removed):**
 - ❌ /poster · ❌ /founders/seat-card/[seatNumber] · ❌ /founders/from-one-current-founder
 - ❌ /founders/inheritance · ❌ /founders/why-270 · ❌ /founders/first-five-minutes

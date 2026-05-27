@@ -211,7 +211,7 @@ export default function AdminTierSwitcher() {
         ▸ Phase 2 future · cookie-based + server-side tier-aware rendering
         (BLACK CARD-only thread / Lens variety unlock / etc.)
         <br />
-        ▸ 切到 BLACK CARD / Founders 27 看 /member · /membership · /rewards ·
+        ▸ 切到 BLACK CARD / Founders 27 看 /member · /membership ·
         /matches/[gameId] · 全 tier-aware components 跟著切
       </p>
     </div>

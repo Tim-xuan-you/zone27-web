@@ -49,3 +49,18 @@ export const BRAND_TAGLINE = "不靠直覺,只看演算法";
  * Brand locale · zh_TW canonical per Taiwanese CPBL fan audience。
  */
 export const BRAND_LOCALE = "zh_TW";
+
+/**
+ * Latest brand-level review date · single source for FounderSignOff
+ * default `signedAt` prop · per [[feedback-zone27-pratfall-brand-ip]]
+ * stale-date prevention discipline。
+ *
+ * R166 W1 · introduced after Agent Q bug audit MEDIUM #2 finding ·
+ * 30+ trust pages use &lt;FounderSignOff&gt; default · before R166 stuck
+ * at "2026-05-21" hardcoded · Tim mandate「程式碼總有 bug · 嚴肅
+ * 看待」 fulfilled via central source。
+ *
+ * Update protocol · bump on any cross-cutting brand review · NOT per
+ * page edit(per-page edits should pass explicit signedAt to override)。
+ */
+export const LAST_BRAND_REVIEW = "2026-05-27";

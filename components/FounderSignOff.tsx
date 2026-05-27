@@ -18,16 +18,20 @@
 // blockquotes in /about Chapter 05 + /founders FROM THE FOUNDER.
 // ─────────────────────────────────────────────────────
 
+import { LAST_BRAND_REVIEW } from "@/lib/brand-constants";
+
 type Props = {
   /** Paragraph(s) — first person · max 3 short sentences total */
   children: React.ReactNode;
-  /** ISO date · default 2026-05-21 (current REPORT date) */
+  /** ISO date · default = LAST_BRAND_REVIEW from lib/brand-constants.ts · per
+   * R166 W1 Agent Q bug audit MEDIUM #2 stale-date fix · centralized to avoid
+   * 30+ trust pages all rendering 2026-05-21 forever。 */
   signedAt?: string;
 };
 
 export default function FounderSignOff({
   children,
-  signedAt = "2026-05-21",
+  signedAt = LAST_BRAND_REVIEW,
 }: Props) {
   return (
     <section

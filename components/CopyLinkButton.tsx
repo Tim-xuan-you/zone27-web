@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useSyncExternalStore } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 
 // Client-side feature detection helpers · React 19 idiomatic.
 // useSyncExternalStore handles SSR / hydration correctly: server
@@ -49,6 +49,24 @@ type Phase = "idle" | "done";
 
 export default function CopyLinkButton({ refTag }: CopyLinkButtonProps = {}) {
   const [phase, setPhase] = useState<Phase>("idle");
+  // R166 W1 · Agent Q bug audit LOW #4 · async race guard for 2s "done→idle"
+  // timer · prevents setState on unmounted component if visitor navigates away
+  // within the 2s window。
+  const mountedRef = useRef(true);
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  useEffect(() => {
+    mountedRef.current = true;
+    return () => {
+      mountedRef.current = false;
+      if (timerRef.current) clearTimeout(timerRef.current);
+    };
+  }, []);
+  const scheduleIdle = () => {
+    if (timerRef.current) clearTimeout(timerRef.current);
+    timerRef.current = setTimeout(() => {
+      if (mountedRef.current) setPhase("idle");
+    }, 2000);
+  };
   // Web Share API detected via useSyncExternalStore — React 19
   // idiomatic for browser-feature detection without setState-in-effect.
   const hasShareApi = useSyncExternalStore(
@@ -83,7 +101,7 @@ export default function CopyLinkButton({ refTag }: CopyLinkButtonProps = {}) {
           url,
         });
         setPhase("done");
-        window.setTimeout(() => setPhase("idle"), 2000);
+        scheduleIdle();
         return;
       } catch (e) {
         // User cancelled — don't fall back, just stay idle
@@ -96,7 +114,7 @@ export default function CopyLinkButton({ refTag }: CopyLinkButtonProps = {}) {
     try {
       await navigator.clipboard.writeText(url);
       setPhase("done");
-      window.setTimeout(() => setPhase("idle"), 2000);
+      scheduleIdle();
     } catch {
       window.prompt("Copy this link:", url);
     }

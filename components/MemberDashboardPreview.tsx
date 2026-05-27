@@ -327,7 +327,7 @@ export default function MemberDashboardPreview() {
         kicker="現在是 preview · 不是 mock · 不是 marketing"
       >
         <TimelineRow
-          label="現在 · 2026-05-21"
+          label="現在 · 2026-05-27"
           status="PREVIEW"
           tone="full"
           body="您正在看的這頁是 public preview · 任何訪客可進 · 沒 auth · localStorage data 用 visitor 自己的。Pratfall surface 工程現狀 · 不假裝已 functional。"
@@ -385,16 +385,16 @@ export default function MemberDashboardPreview() {
         </p>
         <ul className="space-y-2 text-mute text-sm list-none pl-0">
           <RecentEngineLine
-            date="2026-05-21"
-            body="/member NEW · Round 29 Wave 2 上線(您正在看的這頁)"
+            date="2026-05-27"
+            body="R166 W1 · /rewards delete + Agent Q bug audit · 1 CRITICAL(g x → /audit)+ 4 async race fix · per Tim「程式碼總有 bug · 嚴肅看待」 mandate"
           />
           <RecentEngineLine
-            date="2026-05-21"
-            body="Uncertainty Stripe 上線 · HeroLiveCard + MatchSimulator(Round 28 Wave 3)"
+            date="2026-05-27"
+            body="R165 W1 · CRITICAL cross-ref cleanup post R164 NUCLEAR DELETE · 25 files · -617 net lines · 0 runtime 404"
           />
           <RecentEngineLine
-            date="2026-05-21"
-            body="Founders 27 開放申請預售 · NEXT IS #008 · 263 席剩"
+            date="2026-05-26"
+            body="R163-R164 NUCLEAR削 · 5 homepage strips cut + 12 routes deleted(7188 lines)· Apple discipline applied"
           />
         </ul>
         <p className="font-mono text-mute/50 text-[10px] tracking-[0.3em] mt-3 pt-3 border-t border-line/30">

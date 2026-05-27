@@ -32,7 +32,7 @@ const HINT_DURATION_MS = 5_000;
 //   g p → /methodology(P for Paper/whitepaper)
 //   g s → /steelman(S for Steelman)
 //   g e → /ethics(E for Ethics)
-//   g x → /transparency(X for compleX audit)
+//   g x → /audit(X for compleX audit · /transparency R164 collapsed to /audit canonical hub)
 //   g n → /now(N for Now)
 //   g ? → toggle Cmd-K palette(shortcut help · 同 CommandPalette 顯示 all routes)
 //
@@ -66,7 +66,7 @@ const SHORTCUTS: Record<string, string> = {
   p: "/methodology",
   s: "/steelman",
   e: "/ethics",
-  x: "/transparency",
+  x: "/audit",
   n: "/now",
 };
 

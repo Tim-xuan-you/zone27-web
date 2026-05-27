@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useSyncExternalStore } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import type { Match } from "@/lib/matches";
 import { getCalibration, getEnginePctOnWinner } from "@/lib/matches";
 
@@ -87,6 +87,23 @@ type Props = { match: Match };
 
 export default function ReceiptForwardButton({ match }: Props) {
   const [phase, setPhase] = useState<"idle" | "done">("idle");
+  // R166 W1 · Agent Q bug audit LOW #4 · async race guard for 2.5s "done→idle"
+  // timer · same pattern as CopyLinkButton。
+  const mountedRef = useRef(true);
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  useEffect(() => {
+    mountedRef.current = true;
+    return () => {
+      mountedRef.current = false;
+      if (timerRef.current) clearTimeout(timerRef.current);
+    };
+  }, []);
+  const scheduleIdle = () => {
+    if (timerRef.current) clearTimeout(timerRef.current);
+    timerRef.current = setTimeout(() => {
+      if (mountedRef.current) setPhase("idle");
+    }, 2500);
+  };
   const hasShareApi = useSyncExternalStore(
     subscribeNoop,
     getShareApiSnapshot,
@@ -105,7 +122,7 @@ export default function ReceiptForwardButton({ match }: Props) {
           text,
         });
         setPhase("done");
-        window.setTimeout(() => setPhase("idle"), 2500);
+        scheduleIdle();
         return;
       } catch (e) {
         // User cancelled — don't fall back, just stay idle
@@ -118,7 +135,7 @@ export default function ReceiptForwardButton({ match }: Props) {
     try {
       await navigator.clipboard.writeText(text);
       setPhase("done");
-      window.setTimeout(() => setPhase("idle"), 2500);
+      scheduleIdle();
     } catch {
       window.prompt("Copy receipt:", text);
     }
