@@ -28,7 +28,7 @@ export const metadata: Metadata = {
 // Year 0 honest content(2026 pre-launch state):
 //   - 0 paid subscribers(BLACK CARD not launched)
 //   - 7 forged founders(placeholder · clearly SYSTEM-TEST labeled)
-//   - 263 待認領 Founders 27 spots(NT$ 2,700 終身 · 限量永久)
+//   - 263 待認領 Founders 27 spots(NT$ 2,700/365 天 · 每年 1/1 開放新 270 · Patek annual collection 模式)
 //   - 1 PROVED receipt(cpbl-260521-01 · 富邦 win @ 60% engine)
 //   - NT$ 0 revenue
 //   - Costs:Vercel Free + Supabase Free + Resend Free + GitHub Free
@@ -100,7 +100,7 @@ const WHAT_FAILED_2026: { item: string; lesson: string }[] = [
 const WHATS_NEXT_2027: { milestone: string; description: string; q: string }[] = [
   {
     milestone: "BLACK CARD 上線",
-    description: "NT$ 500/season 訂閱 · payment infrastructure(TapPay / 綠界個人版)接入 · weekly AI 引擎 deep-dive + match thread + Tim Q&A 每月。",
+    description: "NT$ 500/31 天 訂閱 · payment infrastructure(TapPay / 綠界個人版)接入 · weekly AI 引擎 deep-dive + match thread + Tim Q&A 每月。",
     q: "2026 Q3",
   },
   {

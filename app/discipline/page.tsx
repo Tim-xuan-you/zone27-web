@@ -115,7 +115,7 @@ export default function DisciplinePage() {
 
             <Subhead>ZONE 27 應用</Subhead>
             <List>
-              <Item label="270 終身席位">
+              <Item label="270 個 365 天席位">
                 Founders 27 不是「early bird 折扣」,
                 是<strong className="text-bone">一輩子</strong>關係。
                 Buffett 的 forever holding 哲學寫進限量結構。
@@ -236,7 +236,7 @@ export default function DisciplinePage() {
             <List>
               <Item label="會員制 > 商品收費">
                 引擎 markup = 0%(永遠免費)·
-                BLACK CARD CPBL 季票 + Founders 27 一次性 = membership revenue ·
+                BLACK CARD NT$ 500/31 天 + Founders 27 NT$ 2,700/365 天 = membership revenue ·
                 跟 Costco 一樣 — 「賣會員身分,不賣商品本身」。
               </Item>
               <Item label="自設創作者抽成上限">
@@ -376,7 +376,7 @@ export default function DisciplinePage() {
             <SynthRow
               axis="A · 長期 > 短期"
               examples="Buffett 26 年持 Coca-Cola · Musk 10-year SpaceX roadmap · Costco 7 年才漲一次會費 · Jobs iPhone 從 2000 概念到 2007 發布 7 年"
-              z27="270 終身席位 · 不收量化分數 · 拒絕季度 KPI 誘惑"
+              z27="270 個 365 天席位 · 不收量化分數 · 拒絕季度 KPI 誘惑"
             />
             <SynthRow
               axis="B · 集中 > 分散"

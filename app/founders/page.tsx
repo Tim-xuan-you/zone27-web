@@ -62,7 +62,7 @@ const DOLLAR_DIDNT_BUY: { what: string; why: string }[] = [
   },
   {
     what: "免費 BLACK CARD 季票",
-    why: "Founders 27 = lifetime full access · 但不送 BLACK CARD subscription · 兩個 product 分開 · 想要 BLACK CARD CPBL 季票 NT$ 500/season 另付 · 同 The Athletic+FanGraphs Plus 不互送",
+    why: "Founders 27 = 365 天 full access · 每年 1/1 開放新 270 · 但不送 BLACK CARD subscription · 兩個 product 分開 · 想要 BLACK CARD CPBL 季票 NT$ 500/31 天 另付 · 同 The Athletic+FanGraphs Plus 不互送",
   },
   {
     what: "保證 ROI / 賺錢承諾",
@@ -75,7 +75,7 @@ const benefits = [
     no: "01",
     zh: "365 天會員資格",
     en: "LIFETIME ACCESS",
-    body: "NT$ 2,700/365 天,永久解鎖未來所有功能。BLACK CARD 季票 NT$ 500/season 對您完全免費,終身。",
+    body: "NT$ 2,700/365 天,永久解鎖未來所有功能。BLACK CARD NT$ 500/31 天 包含在 Founders 27 內 · 不另收。",
   },
   {
     no: "02",
@@ -93,7 +93,7 @@ const benefits = [
     no: "04",
     zh: "BOTTOM 27 共生",
     en: "ECOSYSTEM CROSS-PASS",
-    body: "未來 BOTTOM 27 棒球手遊上線,自動空投創始限定球員卡、稀有球場代幣、終身贊助商徽章。",
+    body: "未來 BOTTOM 27 棒球手遊上線,自動空投創始限定球員卡、稀有球場代幣、365 天贊助商徽章。",
   },
   {
     no: "05",
@@ -195,7 +195,7 @@ const INLINE_FAQ = [
   },
   {
     q: "現在留 email 就要付錢嗎?",
-    a: "不收費、不綁定、隨時可退出。留 email 同時 = 進入免費訂閱層(永久免費 · launch 後也存在)+ Founders 27 預售名單(payment infra 就緒後開放時優先通知 · milestone-triggered · 不綁日期)。真正付款是當您主動選擇升級到 Founders 27(NT$ 2,700 終身)或 BLACK CARD(NT$ 500/season)· 我們不催。Founders 27 付款後 14 天無條件退款保證。",
+    a: "不收費、不綁定、隨時可退出。留 email 同時 = 進入免費訂閱層(永久免費 · launch 後也存在)+ Founders 27 預售名單(payment infra 就緒後開放時優先通知 · milestone-triggered · 不綁日期)。真正付款是當您主動選擇升級到 Founders 27(NT$ 2,700 終身)或 BLACK CARD(NT$ 500/31 天)· 我們不催。Founders 27 付款後 14 天無條件退款保證。",
   },
   {
     q: "這是博彩平台嗎?",
@@ -765,7 +765,7 @@ export default async function FoundersPage({
             </li>
           </ul>
           <p className="mt-5 text-mute/80 text-xs sm:text-sm leading-relaxed">
-            想升級成 Founders 27(NT$ 2,700 終身)或 BLACK CARD(NT$ 500/season · CPBL March-November · 0 auto-renewal)· 任時可選。也可<strong className="text-mute">永遠停在這層</strong>·
+            想升級成 Founders 27(NT$ 2,700 終身)或 BLACK CARD(NT$ 500/31 天 · CPBL March-November · 0 auto-renewal)· 任時可選。也可<strong className="text-mute">永遠停在這層</strong>·
             <span className="text-gold"> 我們不催</span>。
           </p>
         </div>

@@ -294,7 +294,7 @@ export default function FoundersApplyPage() {
                 >
                   /founders/ledger
                 </Link>{" "}
-                公開帳本 · lifetime access · NT$ 2,700 永不調漲
+                公開帳本 · 365 天訂閱 · NT$ 2,700 永不調漲 · 每年 1/1 開放新 270
               </li>
             </ol>
           </div>

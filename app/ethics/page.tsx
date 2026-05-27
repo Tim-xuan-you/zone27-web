@@ -217,11 +217,11 @@ export default function EthicsPage() {
             <ul className="space-y-2 pl-6">
               <li className="flex gap-3 items-baseline">
                 <span className="font-mono text-gold/80 text-[10px] tracking-[0.25em]">▸</span>
-                <span>Founders 27 一次性 NT$ 2,700 終身 · 0 抽成</span>
+                <span>Founders 27 NT$ 2,700/365 天 · 5% 抽成(BLACK CARD 一半)· 每年 1/1 開放新 270</span>
               </li>
               <li className="flex gap-3 items-baseline">
                 <span className="font-mono text-gold/80 text-[10px] tracking-[0.25em]">▸</span>
-                <span>BLACK CARD NT$ 500/season manual subscription · 5% creator share</span>
+                <span>BLACK CARD NT$ 500/31 天 manual subscription · 10% creator commission</span>
               </li>
               <li className="flex gap-3 items-baseline">
                 <span className="font-mono text-gold/80 text-[10px] tracking-[0.25em]">▸</span>
@@ -453,13 +453,13 @@ export default function EthicsPage() {
               href="/founders"
               className="inline-block px-6 py-3 bg-gold text-navy font-mono text-[10px] tracking-[0.3em] hover:bg-gold-soft transition-colors"
             >
-              → Founders 27 · NT$ 2,700 終身
+              → Founders 27 · NT$ 2,700/365 天
             </Link>
             <Link
               href="/membership/black-card"
               className="inline-block px-6 py-3 border border-gold text-gold font-mono text-[10px] tracking-[0.3em] hover:bg-gold/10 transition-colors"
             >
-              → BLACK CARD · NT$ 500/season(R81 pivot)
+              → BLACK CARD · NT$ 500/31 天(R81 pivot)
             </Link>
           </div>
           <p
