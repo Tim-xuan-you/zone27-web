@@ -708,10 +708,10 @@ export default async function MatchDetailPage({
               直接申請席位 → /founders/apply
             </Link>
             <Link
-              href="/pricing/why"
+              href="/founders"
               className="font-mono text-mute/70 hover:text-gold text-[10px] tracking-[0.25em] underline-offset-4 hover:underline"
             >
-              為什麼定這價 → /pricing/why
+              為什麼定這價 → /founders §定價推導
             </Link>
           </div>
         </div>

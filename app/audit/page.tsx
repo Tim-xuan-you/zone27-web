@@ -230,10 +230,10 @@ export default function AuditPage() {
               empty Asian baseball analytics slot · 完整 reasoning + DELTA Japan
               14-yr precedent + Rebas TW 對標 + CPBL 2025 TAM math 見{" "}
               <Link
-                href="/heritage#asian-baseball-analytics-positioning"
+                href="/about"
                 className="text-gold/80 hover:text-gold underline-offset-4 hover:underline"
               >
-                /heritage
+                /about
               </Link>{" "}
               · 同 axis multi-surface placement。
             </p>

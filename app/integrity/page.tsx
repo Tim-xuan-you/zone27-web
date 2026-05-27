@@ -512,10 +512,10 @@ export default function IntegrityPage() {
         <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-24 text-center border-t border-line/40 pt-12">
           <div className="flex flex-wrap items-center justify-center gap-4">
             <Link
-              href="/transparency"
+              href="/audit"
               className="font-mono text-mute hover:text-gold text-[10px] tracking-[0.4em] transition-colors"
             >
-              ← /transparency · audit aggregator
+              ← /audit · Model Report · DISCLOSURE PHILOSOPHY
             </Link>
             <Link
               href="/ethics"
@@ -524,10 +524,10 @@ export default function IntegrityPage() {
               /ethics · 9 commitments source →
             </Link>
             <Link
-              href="/transparency#section-02"
+              href="/audit#section-02"
               className="font-mono text-mute hover:text-gold text-[10px] tracking-[0.4em] transition-colors"
             >
-              /transparency § 02 · 13 NEVER source →
+              /audit § 02 · 13 NEVER source →
             </Link>
             <Link
               href="/changelog"

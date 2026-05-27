@@ -67,10 +67,10 @@ export default function NoPushManifest({ variant = "manifest" }: Props) {
           <li className="text-mute/60 italic mt-2">
             + {NO_PUSH_COUNT - 6} more · see{" "}
             <Link
-              href="/transparency#no-push-manifest"
+              href="/audit"
               className="text-gold/85 hover:text-gold underline-offset-4 hover:underline"
             >
-              /transparency
+              /audit
             </Link>
           </li>
         </ul>

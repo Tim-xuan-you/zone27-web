@@ -440,10 +440,10 @@ export default async function FoundersPage({
         <p className="mt-2 max-w-xl mx-auto text-mute/70 text-[10px] sm:text-[11px] leading-relaxed text-center">
           完整定價邏輯 ·{" "}
           <Link
-            href="/pricing/why"
+            href="/founders#why-2700"
             className="text-gold/80 hover:text-gold underline decoration-mute/40 underline-offset-4 hover:decoration-gold transition-colors"
           >
-            /pricing/why →
+            往下看 §定價推導 →
           </Link>
         </p>
         <p
@@ -527,7 +527,7 @@ export default async function FoundersPage({
           NonComparableAnchor(reference class)→ MultiYearAnchor(durability)
           → GenerationsLine(inheritance)→ VsRowFold(category contrast)
           → pre-form reframe(objection preempt)→ form。 */}
-      <VsRowFold surface="founders" />
+      <VsRowFold />
 
       {/* R140 W6 · cross-link to NEW /founders/postmortem-2028 Premortem
           artifact · per Agent C R140 TOP psychology recommendation placement
@@ -604,12 +604,12 @@ export default async function FoundersPage({
             </Link>{" "}
             ·{" "}
             <Link
-              href="/pricing/why"
+              href="/audit"
               className="text-gold/85 hover:text-gold underline-offset-4 hover:underline"
             >
-              /pricing/why
+              /audit
             </Link>{" "}
-            §07 PRECEDENT BENCHMARKS · 12 facts · 全 source URL · 您可 click 自己 audit
+            · PRECEDENT BENCHMARKS · 12 facts · 全 source URL · 您可 click 自己 audit(R164 collapsed 自 /pricing/why)
           </p>
         </div>
       </section>
@@ -1083,14 +1083,8 @@ export default async function FoundersPage({
             </p>
           </summary>
           <p className="text-mute text-center text-sm mb-10 max-w-xl mx-auto leading-relaxed">
-            或直接看{" "}
-            <Link
-              href="/pricing/why"
-              className="text-gold underline-offset-4 hover:underline"
-            >
-              /pricing/why
-            </Link>{" "}
-            canonical 詳細頁。 也不是「先把價格設高、再打七折」的常見手法。
+            R164 NUCLEAR DELETE 後 · /pricing/why 詳細頁 collapsed 至此頁 hero +
+            §定價推導 inline · 也不是「先把價格設高、再打七折」的常見手法。
           </p>
 
         <div className="bg-slate/60 border border-line/70 p-6 sm:p-10 font-mono text-sm">
@@ -1197,10 +1191,10 @@ export default async function FoundersPage({
         <p className="mt-8 text-center font-mono text-mute/80 text-[10px] tracking-[0.3em] leading-relaxed">
           完整 11-item NOT-DO list 在{" "}
           <Link
-            href="/transparency#section-02"
+            href="/audit#section-02"
             className="text-gold hover:underline"
           >
-            /transparency Section 02
+            /audit Section 02
           </Link>
           {" "}· brand IP「方法公開」 物理 codify · 不只 marketing 講法。
         </p>

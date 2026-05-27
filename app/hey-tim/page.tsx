@@ -389,10 +389,10 @@ export default function HeyTimPage() {
         <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-24 text-center border-t border-line/40 pt-12">
           <div className="flex flex-wrap items-center justify-center gap-4">
             <Link
-              href="/letter"
+              href="/about"
               className="font-mono text-mute hover:text-gold text-[10px] tracking-[0.4em] transition-colors"
             >
-              ← /letter · Tim singular voice
+              ← /about · Tim singular voice · 7-chapter methodology
             </Link>
             <Link
               href="/faq"

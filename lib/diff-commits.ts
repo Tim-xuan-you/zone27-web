@@ -57,8 +57,8 @@ export const ENGINE_DIFF_BEACONS: ReadonlyArray<EngineDiffBeacon> = [
   },
   {
     date: "2026-05-22",
-    label: "/transparency aggregator · 6-section audit + 8-binding-NOT-DO grid",
-    href: "/transparency",
+    label: "/audit canonical hub · 6-section audit + 8-binding-NOT-DO grid",
+    href: "/audit",
   },
   {
     date: "2026-05-23",

@@ -64,10 +64,10 @@ export default function ReciprocityLedger({ variant = "ledger" }: Props) {
           <li className="text-mute/60 italic mt-2">
             + {RECIPROCITY_COUNT - 6} more · see{" "}
             <Link
-              href="/transparency#reciprocity-ledger"
+              href="/audit"
               className="text-gold/85 hover:text-gold underline-offset-4 hover:underline"
             >
-              /transparency
+              /audit
             </Link>
           </li>
         </ul>

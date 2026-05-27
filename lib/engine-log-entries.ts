@@ -110,8 +110,8 @@ export const ENGINE_OPS_LOG: ReadonlyArray<EngineOpsLogEntry> = [
     eventType: "methodology-update",
     label: "/transparency aggregator route published",
     detail:
-      "6-section audit + 8-binding-NOT-DO + Anthropic Transparency Hub pattern · 統一 surface scattered /audit + /methodology + /coverage + /track-record + /ethics + /steelman trust content into navigable destination · brand IP Disclosure axis 物理 codify(R51 W-D)。",
-    href: "/transparency",
+      "6-section audit + 8-binding-NOT-DO + Anthropic Transparency Hub pattern · 統一 surface scattered /audit + /methodology + /coverage + /track-record + /ethics + /steelman trust content into navigable destination · brand IP Disclosure axis 物理 codify(R51 W-D)。 R164 collapsed into /audit canonical hub per Apple discipline。",
+    href: "/audit",
   },
   {
     date: "2026-05-23",
@@ -126,8 +126,8 @@ export const ENGINE_OPS_LOG: ReadonlyArray<EngineOpsLogEntry> = [
     eventType: "ops-log-meta",
     label: "/engine-log operational artifact spine initialized",
     detail:
-      "Stripe Status 2012 + Cloudflare 2025 postmortem + Tailscale changelog pattern · ZONE 27 operational artifact surface NEW · per Agent A R76 「biggest invisible gap」 honest answer · APPEND-ONLY log of engine re-runs + receipt corrections + input-staleness + methodology updates · /engine-log IS the「engine alive · someone on it」 signal · cannot fake operational artifact · same single-source pattern as ENGINE_DIFF_BEACONS + NO_PUSH_INVENTORY + RECIPROCITY_LEDGER。",
-    href: "/engine-log",
+      "Stripe Status 2012 + Cloudflare 2025 postmortem + Tailscale changelog pattern · ZONE 27 operational artifact surface NEW · per Agent A R76 「biggest invisible gap」 honest answer · APPEND-ONLY log of engine re-runs + receipt corrections + input-staleness + methodology updates · /engine-log IS the「engine alive · someone on it」 signal · cannot fake operational artifact · same single-source pattern as ENGINE_DIFF_BEACONS + NO_PUSH_INVENTORY + RECIPROCITY_LEDGER。 R164 collapsed into /audit canonical hub per Apple discipline。",
+    href: "/audit",
   },
   {
     date: "2026-05-23",

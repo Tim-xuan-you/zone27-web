@@ -96,28 +96,7 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
       title: "NEVER list · 永遠不涵蓋什麼",
     },
   ],
-  // Round 51 W-D · /transparency NEW · audit aggregator · Anthropic pattern。
-  // Siblings: /audit(parent trust artifact · model report)· /ethics(9
-  // binding commitments · 同 transparency 軸線)· /steelman(6 strongest
-  // objections · 同 self-exposure pattern)。 R107 W5 · 8→9 stale-count sweep ·
-  // R108 W7 · 5→6 steelman count sweep。
-  "/transparency": [
-    {
-      href: "/audit",
-      kicker: "audit",
-      title: "Model Report · 7 sections + DISCLOSURE PHILOSOPHY",
-    },
-    {
-      href: "/ethics",
-      kicker: "ethics",
-      title: "9 binding commitments · 違反 = 紅字標",
-    },
-    {
-      href: "/steelman",
-      kicker: "steelman",
-      title: "6 strongest objections · self-exposure pattern",
-    },
-  ],
+  // R164 DELETE /transparency · collapsed into /audit canonical hub per Apple discipline
   // Round 50 W-A · /methodology/diff NEW · v0.2 → v0.3 entire delta ·
   // brand IP triple-fire(Disclosure + Pratfall + Costly Signaling)。
   // Siblings: /methodology(parent · 完整白皮書)· /audit(S05 PRE-COMMIT
@@ -411,11 +390,13 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
   // 27 deep dive)· /track-record(物理 proof points)。
   // Round 65 W-A · swapped /manifesto for /pricing/why(R64 W-B NEW page 更
   // direct sibling · 同 buy decision context)。
+  // R165 W1 · /pricing/why DELETED R164 · swap to /annual/2026(Year 0 honest empty
+  // state report · 同 buy decision context · Defector radical-transparency parallel)。
   "/membership": [
     {
-      href: "/pricing/why",
-      kicker: "pricing/why",
-      title: "為什麼是這個價 · pricing rationale 一頁說清楚",
+      href: "/annual/2026",
+      kicker: "annual/2026",
+      title: "Year 0 honest report · 0 paid · NT$ 0 rev · empty state pattern",
     },
     {
       href: "/founders",
@@ -572,31 +553,7 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
       title: "0 信用卡資訊 in ZONE 27 server · 完整 anti-tracker inventory",
     },
   ],
-  // R64 W-B · /pricing/why NEW · pricing-page-as-object-of-craft synthesis ·
-  // Agent 6 R64 5 brand-pure patterns + 5 anti-patterns avoided · Defector
-  // inverse-disclosure + Stripe Atlas 6-deliverable + FanGraphs output-not-input
-  // + Stratechery FAQ defense + Pratfall「沒做什麼」。 Siblings:/membership
-  // (4-tier ladder parent · users land here after seeing pricing rationale)·
-  // /founders(deep page NT$ 2,700 · same buy decision)· /membership/black-card
-  // (deep page NT$ 1,500/season · same buy decision)。
-  "/pricing/why": [
-    {
-      href: "/membership",
-      kicker: "membership",
-      title: "4-tier ladder · 完整 tier 對照表",
-    },
-    {
-      href: "/founders",
-      kicker: "founders",
-      title: "Founders 27 · NT$ 2,700 一次性 · 終身",
-    },
-    {
-      href: "/membership/black-card",
-      kicker: "membership/black-card",
-      title: "BLACK CARD · NT$ 1,500/season 訂閱會員",
-    },
-  ],
-
+  // R164 DELETE /pricing/why · collapsed into /founders + /membership/black-card per Apple discipline
   // Round 33 W-E · /annual/2026 NEW · Year 0 honest empty state report ·
   // Defector + Hell Gate + Aftermath radical-transparency pattern · agent A
   // F2 #2 priority。 Siblings:/audit(model report parallel)· /founders/ledger
@@ -641,12 +598,8 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
       title: "Model Report · S05 PRE-COMMIT 同 rules-binding pattern",
     },
   ],
-  // R68 W-A · NEW /founders/apply route · Patek-style application form ·
-  // 1 layer deeper than /founders WaitlistForm · 通過後才收到付款方式。
-  // Siblings:/founders(parent · sales page · visitor 通常 read 完 才到 apply)·
-  // /founders/ledger(5-step allocation rules · /founders/apply 直接 implement
-  // 此 rules · 訪客可以對照 rules check application 通過率)· /pricing/why
-  // (pricing rationale · 想 audit 為什麼 NT$ 2,700)。
+  // R165 W1 · /pricing/why DELETED R164 · swap to /annual/2026(Year 0 empty state ·
+  // 同 transparency axis · 申請者可 audit Founders 27 真實狀態)。
   "/founders/apply": [
     {
       href: "/founders",
@@ -659,159 +612,20 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
       title: "Public allocation ledger · 5-step rules · 通過率",
     },
     {
-      href: "/pricing/why",
-      kicker: "pricing/why",
-      title: "為什麼 NT$ 2,700 · 6-deliverable rationale",
-    },
-  ],
-  // R69 W-A · NEW /founders/first-five-minutes onboarding trail ·
-  // Linear / Superhuman compressed to 5 trust artifacts · Siblings:
-  // /founders(parent · sales page · onboarding 之後 next destination)·
-  // /lab(STEP 01 lab simulation · 訪客可進去親手跑)· /track-record(STEP 04
-  // 公開戰績 · audit destination)。
-  "/founders/first-five-minutes": [
-    {
-      href: "/founders",
-      kicker: "founders",
-      title: "Founders 27 銷售頁 · 6 件什麼不買到 + benefits",
-    },
-    {
-      href: "/lab",
-      kicker: "lab",
-      title: "Monte Carlo 實驗室 · 親手跑 10K simulation",
-    },
-    {
-      href: "/track-record",
-      kicker: "track-record",
-      title: "公開戰績 ledger · PROVED + DIVERGED 等大",
-    },
-  ],
-  // R69 W-B · NEW /founders/from-one-current-founder Substack-style empty
-  // scaffold · 等待 Founder #001 第 6 個月真實 letter · Siblings:
-  // /founders/ledger(同 process-transparency axis · empty scaffold pattern)·
-  // /annual/2026(Year 0 honest empty parallel · Defector radical-transparency)·
-  // /transparency(disclosure aggregator · 此 page 是 transparency artifact)。
-  "/founders/from-one-current-founder": [
-    {
-      href: "/founders/ledger",
-      kicker: "founders/ledger",
-      title: "Public allocation ledger · 5-step rules · empty scaffold parallel",
-    },
-    {
       href: "/annual/2026",
-      kicker: "annual",
-      title: "Year 0 honest report · empty state parallel · Defector pattern",
-    },
-    {
-      href: "/transparency",
-      kicker: "transparency",
-      title: "Audit aggregator · 完整 disclosure 集合",
+      kicker: "annual/2026",
+      title: "Year 0 honest report · 0 paid · 申請前可 audit 真實狀態",
     },
   ],
-  // R75 W-G · NEW /founders/inheritance · Patek Generations 1996 + Hanshin
-  // 二代目ファン · 4-rule seat transfer protocol · 替下一代守 27 號 ·
-  // Siblings:/founders/ledger(SHADOWLESS RUN binding parent)· /founders/
-  // why-270(decision log sibling)· /ethics#bus-factor(Tim 失蹤 protocol)。
-  // Agent B R76 audit M-3 fix · 之前 RelatedReading 渲染空 dead block。
-  "/founders/inheritance": [
-    {
-      href: "/founders/ledger",
-      kicker: "founders/ledger",
-      title: "Public allocation ledger · SHADOWLESS RUN binding · seat permanence",
-    },
-    {
-      href: "/founders/why-270",
-      kicker: "founders/why-270",
-      title: "Decision log · 6 questions · why 270 · why 2700 · why bank transfer",
-    },
-    {
-      href: "/ethics#bus-factor",
-      kicker: "ethics#bus-factor",
-      title: "BUS_FACTOR · Tim 失蹤 30 天 protocol · executor 接管",
-    },
-  ],
-  // R76 W-D · NEW /founders/why-270 · Pinboard ratchet + Pieter Levels +
-  // patio11 + Pratfall axiom · 6 questions answered with math + doubts ·
-  // Siblings:/founders(parent sales page)· /founders/inheritance(Patek
-  // Generations grammar sibling)· /pricing/why(broader pricing rationale)。
-  "/founders/why-270": [
-    {
-      href: "/founders",
-      kicker: "founders",
-      title: "Founders 27 銷售頁 · NT$ 2,700 終身 · 限 270 名",
-    },
-    {
-      href: "/founders/inheritance",
-      kicker: "founders/inheritance",
-      title: "Patek Generations 1996 · 替下一代守 27 號席位",
-    },
-    {
-      href: "/pricing/why",
-      kicker: "pricing/why",
-      title: "Pricing rationale · 為什麼 NT$ 1,500/season · 為什麼 NT$ 2,700",
-    },
-  ],
-  // R76 W-C · NEW /engine-log · Stripe Status + Cloudflare postmortem +
-  // Tailscale changelog pattern · operational artifact spine · Siblings:
-  // /audit(model report parent)· /track-record(receipts ledger)·
-  // /transparency(audit aggregator)。 Agent A R76 「biggest invisible gap」
-  // honest answer · NEW route · trust artifact 第 N 個。
-  "/engine-log": [
-    {
-      href: "/audit",
-      kicker: "audit",
-      title: "Model Report · 7 sections + DISCLOSURE block",
-    },
-    {
-      href: "/track-record",
-      kicker: "track-record",
-      title: "Receipts ledger · PROVED + DIVERGED 等大",
-    },
-    {
-      href: "/transparency",
-      kicker: "transparency",
-      title: "Audit aggregator · 6 sections + ReciprocityLedger + NoPushManifest",
-    },
-  ],
-  // R80 W-A · Agent B R79 🟡 #6 fix · 5 NEW route related-links · close
-  // orphan(of pages calling getRelatedLinks() but rendering empty dead
-  // block):/year-zero · /heritage · /integrity · /receipts/[receiptId] ·
-  // /founders/seat-card/[seatNumber]。 Skip /letter per intentional design
-  // (LETTER IS the artifact · no related rail by spec)。
-  "/year-zero": [
-    {
-      href: "/letter",
-      kicker: "letter",
-      title: "Tim 親手 voice artifact · singular essay · DHH HEY World",
-    },
-    {
-      href: "/integrity",
-      kicker: "integrity",
-      title: "22 binding rules · Berkshire Owner's Manual at Year 0",
-    },
-    {
-      href: "/engine-log",
-      kicker: "engine-log",
-      title: "Operational artifact spine · Stripe Status pattern",
-    },
-  ],
-  "/heritage": [
-    {
-      href: "/founders/inheritance",
-      kicker: "founders/inheritance",
-      title: "Post-purchase seat transfer 4-rule · for buyers",
-    },
-    {
-      href: "/founders/seat-card/008",
-      kicker: "founders/seat-card",
-      title: "270 altercasting permalinks · empty seats publicly waiting",
-    },
-    {
-      href: "/integrity",
-      kicker: "integrity",
-      title: "22 binding rules · Berkshire 1996 Owner's Manual",
-    },
-  ],
+  // R164 DELETE /founders/first-five-minutes · onboarding collapsed into /founders + /audit
+  // R164 DELETE /founders/from-one-current-founder · empty scaffold collapsed into /founders/apply
+  // R164 DELETE /founders/inheritance · Patek Generations protocol collapsed into /founders body
+  // R164 DELETE /founders/why-270 · 270 cap justification collapsed into /founders hero
+  // R164 DELETE /engine-log · Stripe Status pattern collapsed into /audit
+  // R164 DELETE /year-zero · Year 0 commitments collapsed into /audit + /annual/2026
+  // R164 DELETE /heritage · DELTA-of-CPBL collapsed into /about
+  // R165 W1 · /transparency DELETED R164 · swap to /steelman(6 strongest objections ·
+  // same self-exposure axis · same Pratfall + Costly Signaling fire)。
   "/integrity": [
     {
       href: "/audit",
@@ -824,9 +638,9 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
       title: "9 binding ethics commitments · canonical source",
     },
     {
-      href: "/transparency",
-      kicker: "transparency",
-      title: "Audit aggregator · 12-item NEVER list canonical",
+      href: "/steelman",
+      kicker: "steelman",
+      title: "6 strongest objections · self-exposure pattern",
     },
   ],
   // R80 W-A · NEW /receipts/[receiptId] dynamic route group · per-receipt
@@ -851,38 +665,14 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
       title: "Model Report · 為什麼 PROVED/DIVERGED 等大",
     },
   ],
-  // R80 W-A · NEW /founders/seat-card/[seatNumber] dynamic route group ·
-  // R78 W-A 270 altercasting permalinks · 每個 seat-card 共用 sibling set
-  // pointing to /founders parent + /founders/inheritance + /heritage
-  // pre-cast。 Note · keyed by sample seat 008 entry · 其他 269 seats inherit
-  // empty(acceptable · /founders/seat-card all 共用 same parent context)。
-  "/founders/seat-card/008": [
-    {
-      href: "/founders",
-      kicker: "founders",
-      title: "Founders 27 sales page · 270 seats · Patek-style allocation",
-    },
-    {
-      href: "/founders/inheritance",
-      kicker: "founders/inheritance",
-      title: "Post-purchase seat transfer 4-rule binding",
-    },
-    {
-      href: "/heritage",
-      kicker: "heritage",
-      title: "Pre-purchase altercasting · 替下一個 CPBL 球迷世代守",
-    },
-  ],
-  // R80 W-H · NEW /hey-tim · Agent A R80 BIGGEST GAP closure · Bill James
-  //「Hey Bill」 15-yr pattern + Defector Funbag + Stratechery + Tom Tango
-  // + patio11 reader-reply ethic。 Siblings: /letter(Tim singular voice)
-  // + /faq(pre-anticipated Qs)+ /integrity(22 binding · rule #9 mandatory
-  // ledger discipline)。 8th in canonical append-only ledger family。
+  // R164 DELETE /founders/seat-card/[seatNumber] · 270 SSG cards gimmick
+  // R165 W1 · /letter DELETED R164 · swap to /about(7-chapter brand methodology ·
+  // same Tim singular voice axis · same long-form essay grammar)。
   "/hey-tim": [
     {
-      href: "/letter",
-      kicker: "letter",
-      title: "Tim singular voice · essay-style · NO comment thread",
+      href: "/about",
+      kicker: "about",
+      title: "Tim singular voice · 7-chapter brand methodology",
     },
     {
       href: "/faq",

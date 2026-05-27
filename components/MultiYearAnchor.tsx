@@ -106,10 +106,10 @@ export default function MultiYearAnchor() {
               </strong>
               {" "}· per{" "}
               <Link
-                href="/pricing/why"
+                href="/integrity"
                 className="text-gold/85 hover:text-gold underline-offset-4 hover:underline"
               >
-                /pricing/why
+                /integrity
               </Link>{" "}
               「engine FREE forever」 axiom · 多年 commitment 物理 codify ·
               v0.2 + v0.3 + v0.4 全免費 access · 不會在 BLACK CARD 推出後

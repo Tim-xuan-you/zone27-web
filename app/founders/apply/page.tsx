@@ -132,10 +132,10 @@ export default function FoundersApplyPage() {
                 <strong className="text-bone">您讀過 11-item NOT-DO list</strong>{" "}
                 + 接受 ZONE 27 永遠不做的事 ·{" "}
                 <Link
-                  href="/transparency#section-02"
+                  href="/audit#section-02"
                   className="text-gold underline-offset-4 hover:underline"
                 >
-                  /transparency §02
+                  /audit §02
                 </Link>
               </span>
             </li>

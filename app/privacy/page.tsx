@@ -155,11 +155,11 @@ export default function PrivacyPage() {
             <strong className="text-bone">D.</strong>{" "}
             <Code>why_zone27</Code>(必填 · 50-600 字)· 您 reasoning 邏輯 · Tim 親手
             read 親手 review · 通過 / 不通過 / clarifying question 的依據 · 不 share ·
-            不 publish · 您 letter 6 個月後{" "}
-            <Link href="/founders/from-one-current-founder" className="text-gold underline-offset-4 hover:underline">
-              /founders/from-one-current-founder
+            不 publish · 您 6 個月後若想 publish own letter 透過{" "}
+            <Link href="/founders/apply" className="text-gold underline-offset-4 hover:underline">
+              /founders/apply
             </Link>{" "}
-            是您 own ship 不是此 application 內容。
+            ledger entry 是您 own ship 不是此 application 內容。
           </li>
         </ul>
         <h3 className="text-bone text-base mt-6 mb-2">保留期間 · RETENTION POLICY</h3>
@@ -501,7 +501,7 @@ export default function PrivacyPage() {
 
         <p className="mt-6 text-mute/85 text-sm">
           ▸ 完整 PDPA-compliant 承諾 同步顯示在 <Link href="/audit#disclosure" className="text-gold underline-offset-4 hover:underline">/audit DISCLOSURE block</Link>
-          + <Link href="/transparency" className="text-gold underline-offset-4 hover:underline">/transparency aggregator</Link>
+          + <Link href="/integrity" className="text-gold underline-offset-4 hover:underline">/integrity binding rules</Link>
           · 任何 update 需 30 天 /changelog 公告 · per /audit S05 PRE-COMMIT pattern。
         </p>
       </Section>

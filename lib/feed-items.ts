@@ -62,10 +62,10 @@ export const FEED_ENTRIES: FeedEntry[] = [
     id: "r51-w-d-transparency-aggregator",
     title: "[R51 W-D] /transparency aggregator route · Anthropic 模式",
     summary:
-      "Audit aggregator route NEW · 6 sections 統一 surface LIMITS / NEVER / DIVERGED / commitments / data sources / audit trail · transparency 升 first-class navigable destination。",
+      "Audit aggregator route NEW · 6 sections 統一 surface LIMITS / NEVER / DIVERGED / commitments / data sources / audit trail · transparency 升 first-class navigable destination。 R164 collapsed into /audit canonical hub per Apple discipline。",
     content:
-      "Agent 1 world-class niche subscription audit synthesize · Anthropic /transparency pattern · 把分散在 8 個 trust artifact pages 的 transparency content 聚合一個 navigable destination · 升 first-class brand axis · 不再是 footer link / about page bottom 隱藏。 6 sections + custom OG card + wired CommandPalette / Footer DOCS column 1 / RelatedReading · 訪客 1-click 從 homepage 到完整 audit 摘要 · 再 deep-dive 對應 artifact。 Brand IP triple-fire(Disclosure + Pratfall + Costly Signaling)同時 ship。",
-    href: "/transparency",
+      "Agent 1 world-class niche subscription audit synthesize · Anthropic /transparency pattern · 把分散在 8 個 trust artifact pages 的 transparency content 聚合一個 navigable destination · 升 first-class brand axis · 不再是 footer link / about page bottom 隱藏。 6 sections + custom OG card + wired CommandPalette / Footer DOCS column 1 / RelatedReading · 訪客 1-click 從 homepage 到完整 audit 摘要 · 再 deep-dive 對應 artifact。 Brand IP triple-fire(Disclosure + Pratfall + Costly Signaling)同時 ship。 R164 W-DELETE · collapsed into /audit canonical hub per Apple discipline + Tim canary fire「網站沒救了 · 頁面多到一個離譜」。",
+    href: "/audit",
     updated: "2026-05-22",
   },
   {

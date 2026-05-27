@@ -65,7 +65,7 @@ export const RECIPROCITY_LEDGER: ReadonlyArray<ReciprocityArtifact> = [
   {
     what: "整份 engine source · MIT licensed",
     surface: "https://github.com/Tim-xuan-you/zone27-web",
-    why: "您 fork 一份私有 ZONE 27 給自己用 · 0 NDA · 0 license fee · 我們不能 revoke · per /transparency Section 06 audit primitives 4-tool surface",
+    why: "您 fork 一份私有 ZONE 27 給自己用 · 0 NDA · 0 license fee · 我們不能 revoke · per /audit Section 06 audit primitives 4-tool surface",
     source: "Anthropic Transparency Hub · Stripe API docs",
   },
   {
@@ -101,7 +101,7 @@ export const RECIPROCITY_LEDGER: ReadonlyArray<ReciprocityArtifact> = [
   },
   {
     what: "NO-PUSH MANIFEST · 12 deliberate absences",
-    surface: "/transparency#no-push-manifest",
+    surface: "/integrity",
     why: "operational artifact of existing 11 「永遠不做」 axiom · per Patagonia「Don't Buy This Jacket」 2011 NYT 案例 · Mubi+Calm+Are.na+1Password pattern · 我們 publish restraint not invisible silence",
     source: "Patagonia 2011 NYT 「Don't Buy This Jacket」",
   },
@@ -114,7 +114,7 @@ export const RECIPROCITY_LEDGER: ReadonlyArray<ReciprocityArtifact> = [
   // ── 9-12 · CONSTRAINT · 不會做 + 失敗 + 跨境 + 大樓崩 ───
   {
     what: "12-item NEVER list · 永遠不會做",
-    surface: "/transparency#section-02",
+    surface: "/audit#section-02",
     why: "ZONE 27 displacement target = 玩運彩 + 報馬仔 + LINE 老師生態 · 13 件物理 ban(R80 加 #12 CPBL-only-forever engine scope binding · R81 加 #13 永遠不 subscription auto-renewal binding · BLACK CARD pivot 至 CPBL Season Pass NT$ 1,500/season explicit)· publish = 物理 codify 退路 · Costly Signaling 100× per Spence 1973",
     source: "Stratechery「say what you don't do」",
   },

@@ -155,10 +155,10 @@ const CATEGORIES: Category[] = [
               /integrity
             </Link>
             {" "}rule 13 binding + CLAUDE.md「拒絕 AdMob 永久封殺」 +{" "}
-            <Link href="/pricing/why" className="text-gold underline-offset-4 hover:underline">
-              /pricing/why
+            <Link href="/" className="text-gold underline-offset-4 hover:underline">
+              homepage
             </Link>
-            {" "}hero 第 4 條「<strong className="text-bone">不收明牌費</strong>」。 結構性無
+            {" "}value-prop「<strong className="text-bone">不收明牌費</strong>」。 結構性無
             commission flow because:(1) 不 host third-party sportsbook content ·(2) 不 host
             user-recommended bets ·(3) engine 結果 0 affiliate kickback ·(4) Founders 27 /
             BLACK CARD 訂閱是 pure identity tier NOT features unlock · 同 Stratechery + Defector
@@ -273,10 +273,10 @@ const CATEGORIES: Category[] = [
             <br />
             <br />
             完整 pricing rationale 見{" "}
-            <Link href="/pricing/why" className="text-gold underline-offset-4 hover:underline">
-              /pricing/why
+            <Link href="/founders" className="text-gold underline-offset-4 hover:underline">
+              /founders
             </Link>
-            {" "}§04「為什麼這頁沒有比較表」 + §03「為什麼 Founders 27 是 NT$ 2,700」。
+            {" "}hero + §定價推導(R164 collapsed 自 /pricing/why 詳細頁)。
           </>
         ),
       },

@@ -188,7 +188,24 @@ ZONE 27 與 **BOTTOM 27**(Tim 的棒球手遊)是雙生品牌:
 
 ---
 
-## 🗺️ 當前路由(v0.28 · Round 30 W5-W14 + Round 31-80 · 2026-05-23 · **54 visitor-discoverable**(+/letter +/year-zero +/heritage +/integrity +/founders/seat-card/[seatNumber] SSG 270 +/receipts/[receiptId] +/engine-log +/founders/why-270 +/poster R76-R78 NEW · +/hey-tim R80 W-H BIGGEST GAP closure Bill James 「Hey Bill」 15-yr pattern)· v0.29 等 Tim 拍板 milestone · +/calibration +/membership/black-card/ledger +/ethics +/steelman +/methodology/diff +/pricing/why +/founders/apply +/founders/first-five-minutes +/founders/from-one-current-founder · 7 LIVE LENS CANVAS COMPLETE + 2 LIVE Engine variants + entire v0.2→v0.3 DIFF published + 8 binding NOT-DO commitments + 5 steelman objections + R68 Patek-style application + R69 5-step trust artifact onboarding + R70 Bloomberg member dashboard · 「Most prediction sites have 1 fake angle. We BUILT 7 honest ones.」 + 「Most prediction sites have 1 secret engine. We built 2 open ones.」 + 「Most prediction sites claim they upgraded. We published the diff.」 + 「5 strongest objections against us · we wrote them first.」)
+## 🗺️ 當前路由(v0.29 · **R164 NUCLEAR DELETE applied** · 2026-05-26 · ~48 visitor-discoverable post削)
+
+**R164 削除清單(12 routes · 7188 lines removed):**
+- ❌ /poster · ❌ /founders/seat-card/[seatNumber] · ❌ /founders/from-one-current-founder
+- ❌ /founders/inheritance · ❌ /founders/why-270 · ❌ /founders/first-five-minutes
+- ❌ /pricing · ❌ /heritage · ❌ /year-zero · ❌ /letter · ❌ /engine-log · ❌ /transparency
+
+**R164 collapse mapping(redirect canonical successors):**
+- /transparency · /engine-log · /year-zero → /audit
+- /heritage · /letter → /about
+- /pricing · /founders/why-270 · /founders/inheritance → /founders
+- /founders/seat-card → /founders/ledger
+- /founders/first-five-minutes · /founders/from-one-current-founder → /founders/apply
+
+**Pratfall iron rule pages 100% preserved(13 trust artifacts · 永遠不刪):**
+/audit · /methodology · /track-record · /roadmap · /steelman · /integrity · /founders/postmortem-2028 · /ethics · /coverage · /methodology/diff · /founders/ledger · /founders/apply · /interact · /annual/2026
+
+**Apple discipline applied** · per Tim R164 canary fire「網站沒救了 · 頁面多到一個離譜 · 多參考 Apple」 · Apple/Stripe/Linear/Anthropic 全部 ~10-15 top-level · ZONE 27 60+ → ~48 routes(post R164)still 3-4× excess by Apple discipline · 進一步削 deferred to R165+。 **default 改 subtraction first not addition first** per [[feedback-zone27-homepage-minimalism]]。
 
 ```
 首頁 + 動線
@@ -303,15 +320,15 @@ Member + Ops + Auth(Round 29-30)
 
 OG + favicon + chrome
 /icon                    Z27 monogram favicon(64×64)
-/apple-icon              **NEW Round 79 W-B** · Apple touch icon(180×180)· iOS Safari + LINE iOS + iMessage + Threads + Slack mobile share-preview void close · pattern parallel /icon
+/apple-icon              Round 79 W-B · Apple touch icon(180×180)· iOS Safari + LINE iOS + iMessage + Threads + Slack mobile share-preview void close
 /opengraph-image         全站 fallback OG card
-/[37 routes]/opengraph-image  37 個 custom OG cards(R79 W-C-G+W-H 加 /letter + /year-zero + /heritage + /integrity + /pricing/why + /engine-log = 6 NEW + R80 W-H /hey-tim = 7 NEW total · all 54 visitor-discoverable routes + per-page openGraph + twitter + canonical via lib/page-og.ts helper · /admin + /poster 無 OG 因 noindex)
+/[N routes]/opengraph-image  Custom OG cards · all visitor-discoverable routes + per-page openGraph + twitter + canonical via lib/page-og.ts helper · /admin 無 OG 因 noindex · R164 削除 6 OG cards(/letter + /year-zero + /heritage + /pricing/why + /engine-log + /poster)
 /loading.tsx             Brand-pure suspense skeleton(Round 2)
 ```
 
 ## ⚙️ Global components(Round 2/5/12/28/30/31)
 
-- `<CommandPalette />` · 全站 ⌘K/Ctrl-K palette · **54 visitor-discoverable routes** 索引(R30 W10 加 /member/submit · R33 W-E 加 /annual/2026 · R31 W-S 加 /founders/ledger · W-X3 加 /membership/black-card · R39 加 /calibration + /membership/black-card/ledger · R50 W-A 加 /methodology/diff · R51 W-D 加 /transparency · R64 W-B 加 /pricing/why · R68 W-A 加 /founders/apply · R69 W-A+W-B 加 /founders/first-five-minutes + /founders/from-one-current-founder + R75 W-F+W-G /receipts/[receiptId] + /founders/inheritance · R76 W-C+W-D /engine-log + /founders/why-270 · R77 W-D /letter · R77 W-C /year-zero · R78 W-A+W-F /founders/seat-card + /heritage · R78 W-F-3 + R80 W-A /integrity · R80 W-H /hey-tim Agent A BIGGEST GAP closure · /admin · /poster · /auth/* 不在 palette)(layout.tsx)
+- `<CommandPalette />` · 全站 ⌘K/Ctrl-K palette · **~39 visitor-discoverable routes** 索引 post R164 NUCLEAR DELETE(R30 W10 加 /member/submit · R33 W-E 加 /annual/2026 · R31 W-S 加 /founders/ledger · W-X3 加 /membership/black-card · R39 加 /calibration + /membership/black-card/ledger · R50 W-A 加 /methodology/diff · R68 W-A 加 /founders/apply · R75 W-F /receipts/[receiptId] · R78 W-F-3 + R80 W-A 加 /integrity · R80 W-H 加 /hey-tim Bill James「Hey Bill」 pattern · R148+ /interact · R164 NUCLEAR DELETE 4 entries removed(/transparency · /heritage · /engine-log · /pricing/why)· /admin · /auth/* 不在 palette)(layout.tsx)
 - `<VibeCheck />` (Round 37 W-B · components/) · streak descriptive lens · Tversky/Gilovich 1985 hot hand fallacy disclaimer · /matches/[gameId] section 01B
 - `<ParkFactorLens />` (Round 37 W-D · components/) · 4 CPBL 場館 home advantage visualizer · lib/cpbl-parks.ts reference data · ESTIMATE methodology + PR invitation · /matches/[gameId] section 01C
 - `<PitcherFatigueLens />` (Round 38 W-A · components/) · v0.1 PROXY · WHIP + BB9 + K9 季累計 derive command stability · v0.2 commit to rest_days + season_ip ingestion · /matches/[gameId] section 01D

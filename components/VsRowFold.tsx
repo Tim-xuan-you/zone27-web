@@ -109,9 +109,7 @@ const STATE_TO_CLASS: Record<RowState, string> = {
   none: "text-mute/35",
 };
 
-type Surface = "founders" | "pricing";
-
-export default function VsRowFold({ surface }: { surface?: Surface }) {
+export default function VsRowFold() {
   return (
     <section
       aria-label="ZONE 27 vs 黑箱模型 vs 付費明牌 · 7-axis 公開度對照"
@@ -216,33 +214,13 @@ export default function VsRowFold({ surface }: { surface?: Surface }) {
           /founders/ledger
         </Link>
         {" · "}
-        <Link href="/heritage" className="text-gold/85 underline-offset-4 hover:underline">
-          /heritage
+        <Link href="/about" className="text-gold/85 underline-offset-4 hover:underline">
+          /about
         </Link>
         。
       </p>
-
-      {surface === "founders" && (
-        <p className="mt-5">
-          <Link
-            href="/pricing/why#section-07"
-            className="font-mono text-gold/85 text-[10px] tracking-[0.35em] hover:underline"
-          >
-            → 12-fact PRECEDENT BENCHMARKS data table · /pricing/why §07
-          </Link>
-        </p>
-      )}
-
-      {surface === "pricing" && (
-        <p className="mt-5">
-          <Link
-            href="/heritage#asian-baseball-analytics-positioning"
-            className="font-mono text-gold/85 text-[10px] tracking-[0.35em] hover:underline"
-          >
-            → DELTA-of-CPBL 17-yr empty positioning slot · /heritage
-          </Link>
-        </p>
-      )}
+      {/* R165 W1 · R164 deleted /heritage + /pricing/why · 2 surface-specific CTAs removed
+        (12-fact PRECEDENT BENCHMARKS + DELTA-of-CPBL anchors) per Apple discipline */}
     </section>
   );
 }

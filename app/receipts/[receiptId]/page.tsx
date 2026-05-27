@@ -485,14 +485,14 @@ export default async function ReceiptPage({ params }: { params: Params }) {
                 ▸
               </span>
               <Link
-                href="/engine-log"
+                href="/audit"
                 className="text-gold/85 hover:text-gold underline-offset-4 hover:underline"
               >
-                /engine-log
+                /audit
               </Link>
               <span className="text-mute/70">
-                · operational artifact · LIVE STATE numeric publishing +
-                dated ops events · 「engine alive · someone on it」 signal
+                · Model Report canonical hub · 7 sections + DISCLOSURE
+                PHILOSOPHY · operational state + dated ops events collapsed here
               </span>
             </li>
           </ul>

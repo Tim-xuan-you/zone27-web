@@ -79,13 +79,13 @@ export default function GenerationsLine() {
         <p className="text-mute/85 text-sm leading-relaxed">
           兒子問我為什麼您 follow ZONE 27?{" "}
           <Link
-            href="/founders/inheritance"
+            href="/integrity"
             className="text-gold hover:text-gold-soft underline-offset-4 hover:underline transition-colors"
           >
-            → /founders/inheritance
+            → /integrity
           </Link>{" "}
-          · seat transfer rules + 永久 lifetime + 不開公開市場 + Tim 親手
-          executor protocol。
+          · binding rules · 永久 lifetime + 不開公開市場 + Tim 親手 executor
+          protocol(per [[ethics#bus-factor]] 30-day wind-down)。
         </p>
       </div>
     </aside>

@@ -112,10 +112,10 @@ export default function CredentialStack() {
             </li>
             <li>
               <Link
-                href="/transparency"
+                href="/audit"
                 className="text-gold/85 hover:text-gold underline-offset-4 hover:underline"
               >
-                /transparency
+                /audit
               </Link>
             </li>
           </ul>
