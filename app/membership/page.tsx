@@ -13,9 +13,9 @@ import {
 import { getWaitlistCount } from "@/lib/waitlist-stats";
 
 export const metadata: Metadata = {
-  title: "ZONE 27 會員制 · 4 層 ladder · 匿名 / 免費 / BLACK CARD / Founders 27",
+  title: "ZONE 27 會員制 · 3 種方案 · FREE / BLACK CARD / Founders 27(Costco 模式)",
   description:
-    "ZONE 27 4-tier membership ladder · 從匿名免費到 NT$ 2,700 終身 · 任時自由升級或永遠停在當前層 · 我們不催。創作者發文與推薦賽事的權限對照亦在此頁。",
+    "ZONE 27 3 種會員方案 · 對應 Costco 3-tier(非會員 / Gold Star / Executive 黑卡)。 FREE 全引擎 access · BLACK CARD NT$ 500/季 5% 抽傭 · Founders 27 NT$ 2,700 一次性終身 0% 抽傭。",
 };
 
 // R40 perf agent finding · /membership pulls from static lib/founders-
@@ -49,49 +49,32 @@ type Tier = {
   highlight: boolean;
 };
 
+// R172 W3 · Tim 44th canary explicit「3 種方案 Costco 模式」 · 4-tier ladder
+// (匿名訪客 + 免費訂閱) 合併成單一 FREE tier · per Tim simplification mandate
+// 對應 Costco Gold Star / Executive 結構
 const TIERS: Tier[] = [
   {
-    name: "匿名訪客",
-    en: "ANONYMOUS",
+    name: "FREE",
+    en: "FREE · 非會員",
     price: "NT$ 0",
-    priceNote: "不留 email",
-    desc: "您現在就是這層。全引擎可跑 · 全 trust artifact 公開。我們不知道您是誰 · 也不追蹤您。",
+    priceNote: "永久免費 · 對應 Costco 非會員",
+    desc: "全引擎跑 · 全 trust artifact 公開 · 留 email 可選(不留也 OK · 完全匿名 0 trackers)。 跟 Costco 一樣 · 您進得去用所有東西 · 只是會員福利沒有。",
     perks: [
       "/lab 跑 10K Monte Carlo 無限次",
       "/track-record + /audit + /methodology 全可讀",
       "GitHub 開源可 fork",
-      "完全匿名 · 0 trackers",
-    ],
-    cta: null,
-    highlight: false,
-  },
-  {
-    name: "免費訂閱",
-    en: "FREE TIER",
-    price: "NT$ 0",
-    priceNote: "留 email · 永久免費",
-    desc: "1 個動作 · 加入 ZONE 27 通知圈。模型重要迭代第一波知道 · Founders 27 預售開放時優先取得購買權。Stratechery / Plausible / Substack 同 model。",
-    perks: [
-      "模型重要迭代通知",
-      "/track-record 重大 entry 提醒(N=30 統計門檻等)",
-      "Founders 27 預售開放時優先通知",
-      "不寄行銷信 · 不轉售 · 隨時 reply UNSUBSCRIBE 退出",
+      "Founders 27 預售開放時優先通知(留 email 可選)",
+      "不能在賽事頁發言 · 不能 sell article · 不能 unlock 「✓ 驗證準確度」 標章",
     ],
     cta: { label: "→ 加入 ZONE 27 · 免費", href: "/login" },
-    // Round 55 W-A · Agent C anchoring fix · FREE TIER 不再 highlight ·
-    // 訪客 default reasonable 不是 free · 是 Founders 27(headline product
-    // · brand-aligned 270 · Tim's personal-reply ceiling)· Per Patreon /
-    // Defector / Apple One「premium tier 作為 anchor」 research · 翻 highlight
-    // 到 Founders 27 · BLACK CARD 自然 read as「reasonable monthly entry」
-    // · FREE TIER 為 no-brainer floor。 brand-IP-pure · 不是 dark pattern。
     highlight: false,
   },
   {
     name: "BLACK CARD",
-    en: "BLACK CARD",
+    en: "BLACK CARD · 一般會員",
     price: "NT$ 500",
-    priceNote: "CPBL 季票 · 每季 · LIVE manual ECPay · 0 auto-renewal · per /integrity rule #13",
-    desc: "CPBL 季票會員(March-November · 240 場 + 季後賽 · ≈ NT$ 2/場)。可發文 · 可推薦賽事 · 創作者抽成 5%(vs 業界 LINE 老師平台 30-50% 是降維打擊)。",
+    priceNote: "CPBL 季票 · 對應 Costco Gold Star 一般付費會員 · 手動 ECPay · 0 auto-renewal",
+    desc: "CPBL 季票會員(March-November · 240 場 + 季後賽 · ≈ NT$ 2/場)。 跟 Costco Gold Star 一樣 · 進得去 + 一般會員 perks。 可寫文章來賣(您拿 95% · Tim 抽 5% · 業界最低)。",
     // Round 55 W-C · Agent C #2 fix · 「Everything in [prev tier]+」 stacking
     // pattern · 同 Defector + Plausible + Patreon premium-tier 模式 · 訪客
     // visual rhythm 簡化 · card height -40% · price 變 focal point · 不再
@@ -108,10 +91,10 @@ const TIERS: Tier[] = [
   },
   {
     name: "Founders 27",
-    en: "FOUNDERS 27",
+    en: "FOUNDERS 27 · 黑卡",
     price: "NT$ 2,700",
-    priceNote: "一次 · 終身 · 限量 270",
-    desc: "創始終身會員。270 個編號 · 永遠關閉 · 不再開放。BLACK CARD 全 access + 創作者抽成 0%(終身)+ 編號 #001-#270 鑲入身分。",
+    priceNote: "一次 · 終身 · 限量 270 · 對應 Costco Executive 黑卡",
+    desc: "創始終身會員。 跟 Costco Executive 黑卡一樣 · 最高 tier · 額外 perks(寫文章 0% 抽傭 · Tim 親手 onboard · 編號鑲入身分)。 270 個編號 · 永遠關閉 · 不再開放。",
     // Round 55 W-C · Agent C #2 fix · 「Everything in [prev tier]+」 stacking
     // · 同 BLACK CARD pattern · 訪客 1-line 即知 Founders 27 包含所有
     // BLACK CARD value + lifetime + creator抽成 0% premium。
@@ -151,47 +134,51 @@ export default async function MembershipPage({
       <Nav active="founders" />
 
       <main id="main">
-        {/* ── HERO ─────────────────────────────────── */}
+        {/* ── HERO · R172 W3 · Tim Costco 模式 explicit · 3 方案 ── */}
         <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pt-20 pb-12 text-center">
           <p
             lang="en"
             className="font-mono text-gold text-[10px] tracking-[0.45em] mb-8"
           >
-            / MEMBERSHIP · ZONE 27 · 4-TIER LADDER
+            / MEMBERSHIP · ZONE 27 · 3 種方案 · COSTCO 模式
           </p>
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-light leading-[1.1] tracking-tight text-bone">
             ZONE 27 <span className="text-gold">會員制</span>
           </h1>
           <p className="mt-8 max-w-2xl mx-auto text-mute text-base leading-relaxed">
-            4 層 ladder · 從匿名免費到 NT$ 2,700 終身 ·
+            3 種方案 · 對應 Costco 3-tier · 從免費到 NT$ 2,700 終身 ·
             <span className="text-bone"> 任時自由升級</span>
             {" · "}
             <span className="text-gold">永遠停在當前層也可以 · 我們不催</span>。
           </p>
-          <p className="mt-4 max-w-2xl mx-auto font-mono text-mute/70 text-[10px] tracking-[0.3em] leading-relaxed">
-            ANONYMOUS · FREE TIER · BLACK CARD · FOUNDERS 27
-            <span className="block mt-1">
-              Stratechery / Plausible / Substack 同 4-tier model · 已寫死在{" "}
-              <Link
-                href="/manifesto"
-                className="text-gold underline-offset-4 hover:underline"
-              >
-                /manifesto Section II MONETIZATION
-              </Link>
-            </span>
-          </p>
 
-          {/* R112 W3 · inverse-paywall single-line · per agent locked-preview
-              research「unique opportunity from engine FREE forever」 · place
-              under every BLACK CARD upsell · 4-tier ladder hero 是 canonical
-              upsell location · 中和 visitor「為什麼要付費?」 first reaction ·
-              Spence 1973 costly signaling pure form · 同 R111 W3 /membership/
-              black-card pattern。 */}
+          {/* Costco analogy quick-glance table */}
+          <div className="mt-8 max-w-3xl mx-auto border border-line/60 bg-slate/40 p-5 sm:p-6 text-left">
+            <p className="font-mono text-gold/85 text-[10px] tracking-[0.4em] mb-4">
+              / COSTCO 3-TIER 對應 · 您一眼看懂
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-sm">
+              <div>
+                <p className="font-mono text-mute text-[9px] tracking-[0.3em] mb-2">COSTCO 非會員</p>
+                <p className="text-bone leading-relaxed">進得去用 · 但沒會員 perks</p>
+                <p className="text-gold mt-2 text-xs">= ZONE 27 FREE(NT$ 0)</p>
+              </div>
+              <div>
+                <p className="font-mono text-mute text-[9px] tracking-[0.3em] mb-2">COSTCO GOLD STAR</p>
+                <p className="text-bone leading-relaxed">一般付費會員 · 標準 perks</p>
+                <p className="text-gold mt-2 text-xs">= ZONE 27 BLACK CARD(NT$ 500/季)</p>
+              </div>
+              <div>
+                <p className="font-mono text-mute text-[9px] tracking-[0.3em] mb-2">COSTCO EXECUTIVE 黑卡</p>
+                <p className="text-bone leading-relaxed">最高 tier · 額外 perks · 0% 抽傭</p>
+                <p className="text-gold mt-2 text-xs">= ZONE 27 Founders 27(NT$ 2,700 終身)</p>
+              </div>
+            </div>
+          </div>
+
           <p className="mt-8 max-w-2xl mx-auto text-bone text-sm sm:text-base leading-relaxed border-l-2 border-gold/60 pl-4 text-left">
-            引擎永久免費 · 您付的是
-            <strong className="text-gold">身份</strong>。 4 個 tier 都看得到
-            engine 全部輸出 · 差別在 community + voting + Tim 工程筆記 +
-            創作者抽成 · 不是「資料」。
+            <strong>引擎永久免費</strong> · 您付的是
+            <strong className="text-gold">身份</strong>。 3 個 tier 都看得到 engine 全部輸出 · 差別在寫文章權限 + 抽傭比例 + 身份 · 不是「資料」。
           </p>
         </section>
 
@@ -206,15 +193,15 @@ export default async function MembershipPage({
             Conversion path 仍清晰:visitor 看 4-tier cards 直接點 · 不需
             second-pass MAP digest。 */}
 
-        {/* ── 4-TIER CARDS · 唯一 hero 後第一個 conversion 元件 ── */}
+        {/* ── 3-TIER CARDS · R172 W3 simplify ── */}
         <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-16">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {TIERS.map((t) => (
               <TierCard key={t.en} tier={t} />
             ))}
           </div>
           <p className="mt-8 text-center font-mono text-mute/70 text-[10px] tracking-[0.3em]">
-            FREE TIER + Founders 27 預售 = 同 1 個 email 動作(下方表單)
+            FREE + Founders 27 預售 = 同 1 個 email 動作(下方表單)
           </p>
         </section>
 
