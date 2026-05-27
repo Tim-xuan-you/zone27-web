@@ -63,36 +63,38 @@ export const revalidate = 86400;
 //   - 重寫 ③ publish 文章 · author public ledger + 14-day refund · NO performance-pay
 //   - 新加 4 · verified analyst chip + 24h Tim email + 15min receipt push + Founders 27 pre-access
 // 全 brand-pure 不破鐵律 · 0 vapor (LIVE / PRE-LAUNCH explicit status)
+// R171 W2 · Tim 40th canary「全部看不懂 · 寫中文」 · 把英文 / 技術詞全換中文人話
+// per [[feedback-fan-grammar-with-tim-too]] · per R167 canary「使用者不是工程師」
 const UNLOCKS = [
   {
     icon: "💬",
-    title: "您可以在賽事討論室寫(每場 1 thread · Tim moderate · 200 字)",
-    body: "BLACK CARD 訂閱者在 /matches/[gameId] 賽事討論室 publish 預測 + 球迷觀察 · 每場 1 thread per user · Tim 親手 moderate · 200 字 cap · 賽後 24h decay。 球迷 grammar native · 不導向莊家 · 不抽下注佣金 · 不報明牌。 ⏳ PRE-LAUNCH waiting BLACK CARD payment infra activation。",
+    title: "每場比賽 · 您可以發一篇預測或觀察(限 200 字 · Tim 看完才上)",
+    body: "BLACK CARD 訂閱者可在每場 CPBL 比賽頁發一篇 · 限 200 字 · Tim 親手看完才上線 · 不導向莊家 · 不抽下注佣金 · 不報明牌。 賽後 24 小時後關閉討論。 ⏳ 等付款系統上線後開放。",
   },
   {
     icon: "💵",
-    title: "您 publish 文章 · Tim 抽 5% · author 公開 ledger + 14-day refund",
-    body: "BLACK CARD 訂閱者 publish 預測文章 · Tim 抽 5% · author 收 95%(同 Substack 10% / OnlyFans 20% / YouTube 45% · 業界最低 50%)。 每位 author 公開個人 PROVED/DIVERGED ledger(同 /track-record pattern · Pratfall 延伸到 author level)· reader 買前先看 author 真實準度。 14-day no-questions refund per article · author 不賠 · Tim 從自己 5% 抽成 absorb refund cost(skin-in-game)。 NOT performance-pay · 不準的 author 自然沒人買 · 純 market mechanism。 ⏳ PRE-LAUNCH waiting article-publishing UI ship。",
+    title: "您寫整篇分析文章來賣 · 您拿 95% · Tim 抽 5%",
+    body: "BLACK CARD 訂閱者可以寫整篇預測文章來賣 · 讀者買多少 · 您拿 95% · Tim 抽 5%(業界最低 · Substack 抽 10% · OnlyFans 20% · YouTube 45%)。 每位作者公開自己的歷史紀錄(預測準幾場 / 失準幾場 · 同 /track-record 公開方式)· 讀者買文章前可看作者真實準確度 · 不準的作者自然沒人買 · 純市場機制。 讀者買了 14 天內不喜歡可以退錢 · 您不賠 · Tim 從自己 5% 抽成裡墊。 跟玩運彩高手分潤完全不一樣 · 我們不獎勵「賭預測準度」 · 只獎勵「寫好文章」。 ⏳ 等寫文章功能上線後開放。",
   },
   {
     icon: "✓",
-    title: "您 unlock 「verified analyst」 chip · accuracy ≥ 60% N≥10",
-    body: "BLACK CARD 訂閱者的 prediction track record 累積 · 達到「N ≥ 10 prediction」 且「PROVED rate ≥ 60%」 自動 unlock「✓ verified」 chip · 公開顯示在 author profile + 文章 byline。 純 honest credential · NOT ranking · NOT commission · NOT「高手」 vocab。 同 Metaculus / Manifold Markets predictor tier pattern。 ⏳ PRE-LAUNCH waiting profile UI ship。",
+    title: "您 unlock「✓ 驗證準確度」 標章 · 預測 10 場以上 · 準 6 場以上自動",
+    body: "BLACK CARD 訂閱者的預測紀錄累積 · 達到「預測 10 場以上 · 準 6 場以上(60%)」 · 自動 unlock「✓ 驗證準確度」 標章 · 公開顯示在您的 profile + 文章作者欄。 純誠實標章 · 不是排行榜 · 不是抽傭 · 不是「高手」 包裝。 ⏳ 等 profile 功能上線後開放。",
   },
   {
     icon: "⚡",
-    title: "您 email Tim · 24h 內親手回 · 不外包(FREE 7d SLA)",
-    body: "BLACK CARD 訂閱者 email tatayngiti@gmail.com · Tim 親手 24 小時內回覆(FREE TIER 是 /ethics commitment #5 7-day SLA)· 不外包客服 · 不批次回覆 · 不模板 · Tim 親自輸入每一字 · Patek dealer 親自關係 pattern。 ✓ LIVE now(SLA 已啟用)。",
+    title: "您寫信給 Tim · 24 小時內親手回(免費會員 7 天)",
+    body: "BLACK CARD 訂閱者寫 email 給 tatayngiti@gmail.com · Tim 親手 24 小時內回覆(免費會員是 7 天內回 · 寫在 /ethics 第 5 條)· 不外包客服 · 不批次回覆 · 不模板 · Tim 親自輸入每一個字。 ✓ 現在已可用(24 小時 SLA 已啟用)。",
   },
   {
     icon: "📡",
-    title: "您賽後 15 分鐘內收到 receipt 通知(FREE 24h)",
-    body: "BLACK CARD 訂閱者賽後 15 分鐘內收到 ZONE 27 engine receipt 通知(Tim 親手 ingest finalResult + 該場 PROVED/DIVERGED + winRate accuracy snapshot)· FREE TIER 24 小時 after · 同 Stripe Status 對 paying customers priority pattern。 ⏳ PRE-LAUNCH waiting Supabase push notification infra。",
+    title: "比賽結束 15 分鐘內 · 您收到引擎結果通知(免費會員 24 小時)",
+    body: "BLACK CARD 訂閱者比賽結束 15 分鐘內收到通知:這場引擎預測準了還是失準了 + 該場 PROVED / DIVERGED + 引擎勝率對比實際結果 snapshot。 免費會員 24 小時後才收到。 ⏳ 等通知系統上線後開放。",
   },
   {
     icon: "🎫",
-    title: "您 Founders 27 purchase 24h pre-access · Patek dealer pattern",
-    body: "Founders 27 270 lifetime seats payment infra activation 後 · BLACK CARD 訂閱者享 24 小時 pre-access purchase window · 同 Patek dealer waiting list pattern · 同 Linear 2019 invite-only first batch。 ⏳ PRE-LAUNCH waiting Founders 27 payment infra activation。",
+    title: "將來終身會員席位開賣時 · 您有 24 小時優先購買權",
+    body: "將來 Founders 27 終身會員(270 名 · NT$ 2,700 一次性 · 終身)付款系統啟動後 · BLACK CARD 訂閱者享 24 小時優先購買 window · 早 24 小時 access 給訂閱者 · 同 Patek 高級錶店 waiting list 的優先客戶。 ⏳ 等付款系統上線後開放。",
   },
 ];
 
