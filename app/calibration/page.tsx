@@ -358,7 +358,7 @@ export default function CalibrationPublicPage() {
             </ul>
             <p className="pt-2">
               <strong className="text-bone">ZONE 27 structurally 可以 publish</strong>{" "}
-              · 因為 BLACK CARD NT$ 1,500/season + Founders 27 NT$ 2,700 終身 ·
+              · 因為 BLACK CARD NT$ 500/season + Founders 27 NT$ 2,700 終身 ·
               訂閱費 不 depend on 引擎是否準。 您贏您輸 ZONE 27 都一樣賺。
               這個 incentive alignment 是 displacement mission 的{" "}
               <span className="text-gold">structural moat</span>。

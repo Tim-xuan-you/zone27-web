@@ -13,14 +13,14 @@ import { BRAND, OG_SIZE, OG_CONTENT_TYPE } from "@/lib/brand";
 // 設計原則:
 //   - PRE-LAUNCH · UI MOCKUP badge 顯眼(同 page hero)
 //   - 6 unlocks 條列(球迷 grammar:engine variants + 賽事討論 + 創作者抽成 + voting + Tim 筆記 + LINE 群 read-only)· R76 W-A count drift fix
-//   - NT$ 1,500 / season + 5% 創作者抽成(vs 業界 30-50% 是降維打擊)
+//   - NT$ 500 / season + 5% 創作者抽成(vs 業界 30-50% 是降維打擊)
 //   - 反向 marketing punchline:「Subscription preview. milestone-triggered.」
 // ─────────────────────────────────────────────────────
 
 export const size = OG_SIZE;
 export const contentType = OG_CONTENT_TYPE;
 export const alt =
-  "ZONE 27 · BLACK CARD · 訂閱會員 UI preview · NT$ 1,500/season · PRE-LAUNCH milestone-triggered · 6 unlocks · 5% 創作者抽成";
+  "ZONE 27 · BLACK CARD · 訂閱會員 UI preview · NT$ 500/season · PRE-LAUNCH milestone-triggered · 6 unlocks · 5% 創作者抽成";
 
 export default async function BlackCardOgImage() {
   return new ImageResponse(
@@ -132,7 +132,7 @@ export default async function BlackCardOgImage() {
               display: "flex",
             }}
           >
-            NT$ 1,500 / season
+            NT$ 500 / season
           </span>
           <span
             style={{

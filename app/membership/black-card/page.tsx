@@ -13,9 +13,9 @@ import { createPageMetadata } from "@/lib/page-og";
 // readable weight)to ~140 chars · key info preserved · ECPay LIVE + 0
 // auto-renewal + 6 unlocks。
 export const metadata: Metadata = createPageMetadata({
-  title: "BLACK CARD · CPBL Season Pass · NT$ 1,500/season",
+  title: "BLACK CARD · CPBL Season Pass · NT$ 500/season",
   description:
-    "ZONE 27 BLACK CARD CPBL Season Pass · NT$ 1,500 / season · ✓ LIVE 季票手動 ECPay · 5% 創作者抽成 · 14 天退款 · 6 unlocks · 0 auto-renewal forever per /integrity rule #13。",
+    "ZONE 27 BLACK CARD CPBL Season Pass · NT$ 500 / season · ✓ LIVE 季票手動 ECPay · 5% 創作者抽成 · 14 天退款 · 6 unlocks · 0 auto-renewal forever per /integrity rule #13。",
   path: "/membership/black-card",
 });
 
@@ -101,11 +101,11 @@ const UNLOCKS = [
 const FAQS = [
   {
     q: "現在可以訂 CPBL Season Pass 嗎?",
-    a: "✓ 可以 · LIVE 季票手動 ECPay 個人方案 · email tatayngiti@gmail.com 我 24 小時內寄 ECPay 付款連結 · NT$ 1,500 per CPBL season(March-November · 240 場 + 季後賽 ≈ NT$ 6/場)。 0 auto-renewal · 每季 explicit click + manual transfer · per /integrity rule #13(R81 加 · 永遠不 subscription auto-renewal binding · ECPay/TapPay/Stripe 自動扣款全 refused forever)。",
+    a: "✓ 可以 · LIVE 季票手動 ECPay 個人方案 · email tatayngiti@gmail.com 我 24 小時內寄 ECPay 付款連結 · NT$ 500 per CPBL season(March-November · 240 場 + 季後賽 ≈ NT$ 2/場)。 NT$ 500 設計剛好在台灣跨行轉帳免手續費上限以下 · 您付款 0 額外成本(原 NT$ 1,500/season 要付 NT$ 30 手續費 · 現在 0)。 0 auto-renewal · 每季 explicit click + manual transfer · per /integrity rule #13。",
   },
   {
-    q: "為什麼是 season pass 不是月訂閱?(R81 pivot)",
-    a: "綠界沒定期定額 = brand opportunity NOT 限制。 Recurly 2025 data 年訂閱 churn 比月訂閱低 51% · NBA Warriors season ticket renewal 99.5% · ChartMogul 4.78M-customer data NRR 年訂閱比月訂閱高 10-20pp · Defector Year-5 公開 85% explicit-renewal · Pinboard 17-year solo $25 一次性。 我們 R81 pivot 自 NT$ 299/月 auto(R31 W-X3 ship · R81 retired)· 同 indie premium niche + 統一獅 47-game season package CPBL fan-grammar 軸線對齊。 per /integrity rule #13 binding 永久 lock 此 decision · 0 auto-renewal infrastructure ever(取代之前「Q4 2026+ TapPay auto-charge plan」 false promise · per /audit S05 PRE-COMMIT 30-day /changelog notice protocol)。",
+    q: "為什麼是 season 季票 · 不是月訂?",
+    a: "3 個原因 ·(1)CPBL 球迷自然週期 = 一季 March-November 240 場 · 同 統一獅 47-game season package · NBA season ticket pattern · 跟「月」 不 align ·(2)NT$ 500 一次性 季付 · 您跨行轉帳免手續費(NT$ 500 以下 ATM 免手續費)· 月訂等於拆成 4-5 次小額付款 · 累積手續費反而貴 ·(3)月訂需要 auto-renewal 系統 · 但我們承諾「永遠不 auto-renewal」(寫在 /integrity 第 13 條 binding)· 季票 manual 每季 explicit click 才付下季 · 不催 · 不藏 cancel button。",
   },
   {
     q: "如何 renew 下一季?",
@@ -168,7 +168,7 @@ export default function BlackCardPage() {
             <span
               lang="en"
               className="font-mono text-[9px] tracking-[0.3em] px-1.5 py-0.5 border border-gold/60 text-gold shimmer"
-              title="LIVE NOW · CPBL Season Pass 季票模式 · NT$ 1,500/season · explicit manual · 0 auto-renewal per /integrity rule #13"
+              title="LIVE NOW · CPBL Season Pass 季票模式 · NT$ 500/season · explicit manual · 0 auto-renewal per /integrity rule #13"
             >
               ✓ LIVE · CPBL Season Pass
             </span>
@@ -178,7 +178,7 @@ export default function BlackCardPage() {
             <span className="text-gold">≈ NT$ 6 / 場</span>
           </h1>
           <p className="mt-3 font-mono text-mute/85 text-[11px] sm:text-xs tracking-[0.25em] leading-relaxed max-w-2xl">
-            CPBL 季票 NT$ 1,500/season · March-November(240 場 + 季後賽)·
+            CPBL 季票 NT$ 500/season · March-November(240 場 + 季後賽)·
             一顆 7-11 御飯糰的價格 · 看一場 CPBL · 0 auto-renewal · 每季
             explicit click + manual transfer
           </p>
@@ -234,7 +234,7 @@ export default function BlackCardPage() {
                   BLACK CARD
                 </p>
                 <p className="font-mono text-gold text-[12px] sm:text-sm tabular tracking-tight">
-                  NT$ 6/場
+                  NT$ 2/場
                 </p>
                 <p className="font-mono text-mute/60 text-[8px] tracking-[0.15em] mt-0.5">
                   240 場 + 季後賽
@@ -269,7 +269,7 @@ export default function BlackCardPage() {
             <span className="text-gold/85">14-DAY</span> 退款保證
           </p>
           <p className="mt-6 text-mute leading-relaxed max-w-2xl">
-            CPBL 季票 · <strong className="text-bone">NT$ 1,500 / season</strong> ·
+            CPBL 季票 · <strong className="text-bone">NT$ 500 / season</strong> ·
             0 auto-renewal · 14 天無條件退款 · 5% 創作者抽成。
           </p>
           <p className="mt-4 font-mono text-gold/80 text-[10px] tracking-[0.25em] leading-relaxed max-w-2xl">
@@ -421,7 +421,7 @@ export default function BlackCardPage() {
             <p className="text-bone text-lg sm:text-xl leading-relaxed mb-4 text-center">
               寄 email 給 Tim · 24 小時內收到您的{" "}
               <span className="text-gold">ECPay 個人方案付款連結</span> ·
-              CPBL Season Pass(March-November)NT$ 1,500/season 起算。
+              CPBL Season Pass(March-November)NT$ 500/season 起算。
             </p>
             <div className="border border-gold/30 bg-navy/30 p-4 sm:p-5 mb-4">
               <p
@@ -508,7 +508,7 @@ export default function BlackCardPage() {
 
         <FounderSignOff>
           <p>
-            BLACK CARD 是 ZONE 27 主要 season-based revenue model · NT$ 1,500
+            BLACK CARD 是 ZONE 27 主要 season-based revenue model · NT$ 500
             per CPBL season(March-November · 240 場 + 季後賽)· 支援 engine
             iteration + 給訂閱者投 voting 影響下個 ship · 拿 Tim 每週工程
             筆記 full 版。 5% 創作者抽成 vs 業界 30-50% 是降維打擊 · per
@@ -516,7 +516,7 @@ export default function BlackCardPage() {
             · NOT 博彩。
           </p>
           <p>
-            R81 pivot · 自 NT$ 299/月 auto → NT$ 1,500/season explicit · per
+            R81 pivot · 自 NT$ 299/月 auto → NT$ 500/season explicit · per
             /integrity rule #13(R81 加 · 永遠不 subscription auto-renewal
             binding)· 綠界沒定期定額 = brand opportunity NOT 限制。 NBA
             Warriors 99.5% / 統一獅 47-game / Defector 85% explicit-renewal

@@ -221,7 +221,7 @@ export default function EthicsPage() {
               </li>
               <li className="flex gap-3 items-baseline">
                 <span className="font-mono text-gold/80 text-[10px] tracking-[0.25em]">▸</span>
-                <span>BLACK CARD NT$ 1,500/season manual subscription · 5% creator share</span>
+                <span>BLACK CARD NT$ 500/season manual subscription · 5% creator share</span>
               </li>
               <li className="flex gap-3 items-baseline">
                 <span className="font-mono text-gold/80 text-[10px] tracking-[0.25em]">▸</span>
@@ -459,7 +459,7 @@ export default function EthicsPage() {
               href="/membership/black-card"
               className="inline-block px-6 py-3 border border-gold text-gold font-mono text-[10px] tracking-[0.3em] hover:bg-gold/10 transition-colors"
             >
-              → BLACK CARD · NT$ 1,500/season(R81 pivot)
+              → BLACK CARD · NT$ 500/season(R81 pivot)
             </Link>
           </div>
           <p

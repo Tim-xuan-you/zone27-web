@@ -89,9 +89,9 @@ const TIERS: Tier[] = [
   {
     name: "BLACK CARD",
     en: "BLACK CARD",
-    price: "NT$ 1,500",
+    price: "NT$ 500",
     priceNote: "CPBL 季票 · 每季 · LIVE manual ECPay · 0 auto-renewal · per /integrity rule #13",
-    desc: "CPBL 季票會員(March-November · 240 場 + 季後賽 · ≈ NT$ 6/場)。可發文 · 可推薦賽事 · 創作者抽成 5%(vs 業界 LINE 老師平台 30-50% 是降維打擊)。",
+    desc: "CPBL 季票會員(March-November · 240 場 + 季後賽 · ≈ NT$ 2/場)。可發文 · 可推薦賽事 · 創作者抽成 5%(vs 業界 LINE 老師平台 30-50% 是降維打擊)。",
     // Round 55 W-C · Agent C #2 fix · 「Everything in [prev tier]+」 stacking
     // pattern · 同 Defector + Plausible + Patreon premium-tier 模式 · 訪客
     // visual rhythm 簡化 · card height -40% · price 變 focal point · 不再

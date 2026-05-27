@@ -36,13 +36,13 @@ export const metadata: Metadata = {
 // ─────────────────────────────────────────────────────
 
 const LAST_UPDATED = "2026-05-27";
-// R171 W1 · Tim 39th canary sharp identify 3 vapor unlocks + iron-rule violation:
-// (a) Tim 工程筆記「沒人要」 (b) LINE 群「報明牌負面 association」 (c) 賣文章「找不到頁面」
-// + 我 read code 發現 ④ engine voting vapor + #1 engine tier-lock 違反鐵律「引擎永遠免費」
-// 整修 BLACK CARD 6 unlocks · 砍 4(engine tier-lock + engine voting + Tim 筆記 + LINE 群)·
-// 留 1 (賽事討論室寫) · 重寫 1 (賣文章 + author public ledger + 14-day refund · NO performance-pay)·
-// 新加 4 (verified analyst chip / 24h Tim email / 15min receipt push / Founders 27 pre-access)
-// 全 brand IP align · 0 vapor (LIVE / PRE-LAUNCH explicit status) · 三綠 TRUE
+// R171 W3 · Tim 41st canary sharp Taiwan-specific UX insight 「要 NT$ 500 方案 ·
+// 台灣跨行轉帳 500 以下免手續費」 · BLACK CARD season-pass 降價 NT$ 1,500 → NT$ 500 ·
+// NT$ 6/場 → NT$ 2/場 · 同 BLACK CARD existing concept · 不加 tier · 不破鐵律
+// 11+ visitor-facing pages 同步 update(/membership + /membership/black-card + /faq +
+// /founders + /ethics + /annual/2026 + /calibration + /roadmap + 3 OG cards)·
+// FAQ「為什麼是 season pass · 不是月訂」 rewrite plain Chinese + 加 ATM 0 手續費 reason ·
+// break-even math 重算 2 個季 → 5-6 個季(2,700 ÷ 500 = 5.4)· 三綠 TRUE
 
 // R165 W1 · CYCLE summary refresh post R164 NUCLEAR DELETE saga · session R137-R165 =
 // 29 rounds 41+ commits 122+ ships · 12 routes deleted + 7188 lines removed per Tim

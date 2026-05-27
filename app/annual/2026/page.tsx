@@ -100,7 +100,7 @@ const WHAT_FAILED_2026: { item: string; lesson: string }[] = [
 const WHATS_NEXT_2027: { milestone: string; description: string; q: string }[] = [
   {
     milestone: "BLACK CARD 上線",
-    description: "NT$ 1,500/season 訂閱 · payment infrastructure(TapPay / 綠界個人版)接入 · weekly AI 引擎 deep-dive + match thread + Tim Q&A 每月。",
+    description: "NT$ 500/season 訂閱 · payment infrastructure(TapPay / 綠界個人版)接入 · weekly AI 引擎 deep-dive + match thread + Tim Q&A 每月。",
     q: "2026 Q3",
   },
   {

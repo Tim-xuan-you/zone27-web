@@ -62,7 +62,7 @@ const DOLLAR_DIDNT_BUY: { what: string; why: string }[] = [
   },
   {
     what: "免費 BLACK CARD 季票",
-    why: "Founders 27 = lifetime full access · 但不送 BLACK CARD subscription · 兩個 product 分開 · 想要 BLACK CARD CPBL 季票 NT$ 1,500/season 另付 · 同 The Athletic+FanGraphs Plus 不互送",
+    why: "Founders 27 = lifetime full access · 但不送 BLACK CARD subscription · 兩個 product 分開 · 想要 BLACK CARD CPBL 季票 NT$ 500/season 另付 · 同 The Athletic+FanGraphs Plus 不互送",
   },
   {
     what: "保證 ROI / 賺錢承諾",
@@ -75,7 +75,7 @@ const benefits = [
     no: "01",
     zh: "終身會員資格",
     en: "LIFETIME ACCESS",
-    body: "一次性 NT$ 2,700,永久解鎖未來所有功能。BLACK CARD 季票 NT$ 1,500/season 對您完全免費,終身。",
+    body: "一次性 NT$ 2,700,永久解鎖未來所有功能。BLACK CARD 季票 NT$ 500/season 對您完全免費,終身。",
   },
   {
     no: "02",
@@ -133,7 +133,7 @@ const TIERS = [
   {
     name: "BLACK CARD",
     zh: "CPBL 季票",
-    price: "NT$ 1,500",
+    price: "NT$ 500",
     priceNote: "每季 · LIVE manual ECPay · 0 auto-renewal · per /integrity rule #13",
     highlight: false,
     rows: {
@@ -195,7 +195,7 @@ const INLINE_FAQ = [
   },
   {
     q: "現在留 email 就要付錢嗎?",
-    a: "不收費、不綁定、隨時可退出。留 email 同時 = 進入免費訂閱層(永久免費 · launch 後也存在)+ Founders 27 預售名單(payment infra 就緒後開放時優先通知 · milestone-triggered · 不綁日期)。真正付款是當您主動選擇升級到 Founders 27(NT$ 2,700 終身)或 BLACK CARD(NT$ 1,500/season)· 我們不催。Founders 27 付款後 14 天無條件退款保證。",
+    a: "不收費、不綁定、隨時可退出。留 email 同時 = 進入免費訂閱層(永久免費 · launch 後也存在)+ Founders 27 預售名單(payment infra 就緒後開放時優先通知 · milestone-triggered · 不綁日期)。真正付款是當您主動選擇升級到 Founders 27(NT$ 2,700 終身)或 BLACK CARD(NT$ 500/season)· 我們不催。Founders 27 付款後 14 天無條件退款保證。",
   },
   {
     q: "這是博彩平台嗎?",
@@ -445,8 +445,8 @@ export default async function FoundersPage({
             descriptive caption stays below as supporting text. */}
         <div className="mt-5 sm:mt-7 grid grid-cols-3 gap-2 sm:gap-3 max-w-xl mx-auto">
           <BreakEvenCell
-            value="2"
-            unit="個季"
+            value="5-6"
+            unit="個季回本"
             en="SEASONS TO BREAK-EVEN"
           />
           <BreakEvenCell
@@ -456,14 +456,14 @@ export default async function FoundersPage({
             gold
           />
           <BreakEvenCell
-            value="3,000"
-            unit="NT$ /年省"
-            en="SAVED PER YEAR"
+            value="500"
+            unit="NT$ /季省"
+            en="SAVED PER SEASON · AFTER YR 5"
           />
         </div>
         <p className="mt-4 max-w-xl mx-auto text-mute text-xs sm:text-sm leading-relaxed text-center">
-          與 BLACK CARD NT$ 1,500/season 比較 ·{" "}
-          <span className="text-gold">2 個 CPBL 季即回本</span> · 之後終身免費
+          與 BLACK CARD NT$ 500/season 比較 ·{" "}
+          <span className="text-gold">5-6 個 CPBL 季回本</span> · 之後終身免費
         </p>
         <p className="mt-2 max-w-xl mx-auto text-mute/70 text-[10px] sm:text-[11px] leading-relaxed text-center">
           完整定價邏輯 ·{" "}
@@ -765,7 +765,7 @@ export default async function FoundersPage({
             </li>
           </ul>
           <p className="mt-5 text-mute/80 text-xs sm:text-sm leading-relaxed">
-            想升級成 Founders 27(NT$ 2,700 終身)或 BLACK CARD(NT$ 1,500/season · CPBL March-November · 0 auto-renewal)· 任時可選。也可<strong className="text-mute">永遠停在這層</strong>·
+            想升級成 Founders 27(NT$ 2,700 終身)或 BLACK CARD(NT$ 500/season · CPBL March-November · 0 auto-renewal)· 任時可選。也可<strong className="text-mute">永遠停在這層</strong>·
             <span className="text-gold"> 我們不催</span>。
           </p>
         </div>
@@ -1126,7 +1126,7 @@ export default async function FoundersPage({
             <CalcRow label="對標" en="ANCHOR">
               <span className="text-mute">
                 BLACK CARD 季票{" "}
-                <span className="text-bone tabular">NT$ 1,500</span> /season
+                <span className="text-bone tabular">NT$ 500</span> /season
               </span>
             </CalcRow>
 

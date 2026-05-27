@@ -114,7 +114,7 @@ const CATEGORIES: Category[] = [
           <>
             <strong className="text-bone">Founders 27</strong> NT$ 2,700 lifetime × 270 名 =
             NT$ 729,000 一次性(目前 263 待認領)。
-            <strong className="text-bone">BLACK CARD</strong> NT$ 1,500/season × N 訂戶
+            <strong className="text-bone">BLACK CARD</strong> NT$ 500/season × N 訂戶
             (0 auto-renewal · 每季 explicit click)。
             不抽傭 · 不接 ad · 不接 sponsor · 不接 affiliate · 同 Stratechery / Defector / Bill James
             訂閱 model。
@@ -134,7 +134,7 @@ const CATEGORIES: Category[] = [
           <>
             <strong className="text-bone">Founders 27</strong> 是限量 270 個名額的
             「一次性 NT$ 2,700 終身會員」。
-            <strong className="text-bone">BLACK CARD</strong> 是 CPBL 季票 NT$ 1,500/season
+            <strong className="text-bone">BLACK CARD</strong> 是 CPBL 季票 NT$ 500/season
             (March-November · 240 場 + 季後賽 · ≈ NT$ 6/場 · LIVE manual ECPay ·
             0 auto-renewal · per /integrity rule #13)。創始會員額外好處:creator 抽成 0%
             (BLACK CARD creators 5%)、AI 模型優先試用、實體招待。完整對照請見{" "}
@@ -150,7 +150,7 @@ const CATEGORIES: Category[] = [
         a: (
           <>
             因為這是「品牌共建價」,不是「永久市場價」。270 位創始會員會永遠是 ZONE 27
-            的傳教士;後續黑金會員 2 個 CPBL 季就 break-even(NT$ 1,500 × 2 = NT$ 3,000 vs Founders 27 NT$ 2,700 終身免費)。
+            的傳教士;後續黑金會員 5-6 個 CPBL 季就 break-even(NT$ 500 × 5-6 ≈ NT$ 2,700 vs Founders 27 NT$ 2,700 終身免費)。
             創始者扛了「品牌還沒驗證」的風險,所以拿一輩子的優惠回報。
           </>
         ),
@@ -160,7 +160,7 @@ const CATEGORIES: Category[] = [
         a: (
           <>
             <span className="font-mono text-gold">BLACK CARD CPBL 季票 LIVE manual ECPay</span>
-            (NT$ 1,500/season · 每季 explicit click + manual transfer · 0 auto-renewal)。
+            (NT$ 500/season · 每季 explicit click + manual transfer · 0 auto-renewal)。
             <span className="font-mono text-gold mx-1">Founders 27 payment infra 就緒後開放</span>
             (milestone-triggered · 不綁日期)。 在此之前,加入等候名單 =
             排隊優先權,<strong className="text-bone">完全免費</strong>,
@@ -202,7 +202,7 @@ const CATEGORIES: Category[] = [
             <br />
             <br />
             如果您是 corporate 想用 ZONE 27 · 同 rates 同 access:
-            自己 NT$ 2,700(Founders 27)· 或 NT$ 1,500/season(BLACK CARD)· self-serve。
+            自己 NT$ 2,700(Founders 27)· 或 NT$ 500/season(BLACK CARD)· self-serve。
             <br />
             <br />
             完整 pricing rationale 見{" "}

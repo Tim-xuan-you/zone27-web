@@ -79,7 +79,7 @@ const LOCKED: { quarter: string; items: RoadmapItem[] }[] = [
     items: [
       {
         title: "Founders 27 正式預售開啟",
-        body: "NT$ 2,700 一次性 · 限量 270 名 · 手工銀行轉帳 · Tim 親手 onboarding 每一位。預期 2 個 CPBL season break-even(BLACK CARD NT$ 1,500/season × 2 · per R81 pivot)。流程細節已寫進 docs/MANUAL-ONBOARDING.md。",
+        body: "NT$ 2,700 一次性 · 限量 270 名 · 手工銀行轉帳 · Tim 親手 onboarding 每一位。預期 5-6 個 CPBL season break-even(BLACK CARD NT$ 500/season × 5-6 ≈ NT$ 2,700 · per R171 W3 ATM 免手續費 reprice)。流程細節已寫進 docs/MANUAL-ONBOARDING.md。",
         evidenceHref: "/founders",
         evidenceLabel: "/founders 完整邏輯",
       },
