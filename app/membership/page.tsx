@@ -73,35 +73,35 @@ const TIERS: Tier[] = [
     name: "BLACK CARD",
     en: "BLACK CARD · 一般會員",
     price: "NT$ 500",
-    priceNote: "CPBL 季票 · 對應 Costco Gold Star 一般付費會員 · 手動 ECPay · 0 auto-renewal",
-    desc: "CPBL 季票會員(March-November · 240 場 + 季後賽 · ≈ NT$ 2/場)。 跟 Costco Gold Star 一樣 · 進得去 + 一般會員 perks。 可寫文章來賣(您拿 95% · Tim 抽 5% · 業界最低)。",
+    priceNote: "每月 · 對應 Costco Gold Star · 手動 ECPay · 0 auto-renewal",
+    desc: "月訂會員。 跟 Costco Gold Star 一樣 · 進得去 + 一般會員 perks。 可寫文章來賣(您拿 90% · Tim 抽 10% · 同 Substack 10% 平 · 業界中段)。",
     // Round 55 W-C · Agent C #2 fix · 「Everything in [prev tier]+」 stacking
     // pattern · 同 Defector + Plausible + Patreon premium-tier 模式 · 訪客
     // visual rhythm 簡化 · card height -40% · price 變 focal point · 不再
     // repeat lower tier perks。
     perks: [
-      "Everything in FREE TIER · 持續 access",
-      "可在賽事頁討論室發言 / 分享預測(球迷 grammar 「明牌」 · 不導向莊家)",
-      "創作者抽成 5%(vs LINE 老師 30-50%)",
-      "每月 voting 影響引擎迭代方向",
-      "每週 Tim 工程筆記 full 版",
+      "Everything in FREE · 持續 access",
+      "可在賽事頁討論室發言(每場 1 thread · 200 字 · Tim moderate)",
+      "可寫文章來賣 · 您拿 90% · Tim 抽 10%(同 Substack 平 · 業界中段)",
+      "「✓ 驗證準確度」 標章(預測 10 場 · 準 6 場以上自動 unlock)",
+      "寫信給 Tim · 24h 親手回(FREE 7d)",
     ],
-    cta: { label: "→ 看 BLACK CARD UI preview", href: "/membership/black-card" },
+    cta: { label: "→ 看 BLACK CARD 詳情", href: "/membership/black-card" },
     highlight: false,
   },
   {
     name: "Founders 27",
     en: "FOUNDERS 27 · 黑卡",
     price: "NT$ 2,700",
-    priceNote: "一次 · 終身 · 限量 270 · 對應 Costco Executive 黑卡",
-    desc: "創始終身會員。 跟 Costco Executive 黑卡一樣 · 最高 tier · 額外 perks(寫文章 0% 抽傭 · Tim 親手 onboard · 編號鑲入身分)。 270 個編號 · 永遠關閉 · 不再開放。",
+    priceNote: "每年 · 限量 270 · 對應 Costco Executive 黑卡",
+    desc: "年訂創始會員 · 限量 270 名。 跟 Costco Executive 黑卡一樣 · 最高 tier · 額外 perks(寫文章 5% 抽傭(BLACK CARD 一半)· Tim 親手 onboard · 編號鑲入身分)。 270 個編號 · 售完關閉。",
     // Round 55 W-C · Agent C #2 fix · 「Everything in [prev tier]+」 stacking
     // · 同 BLACK CARD pattern · 訪客 1-line 即知 Founders 27 包含所有
     // BLACK CARD value + lifetime + creator抽成 0% premium。
     perks: [
-      "Everything in BLACK CARD · 終身 access",
-      "創作者抽成 0%(永遠 · vs BLACK CARD 5%)",
-      "編號 #001-#270 永久 identity",
+      "Everything in BLACK CARD · 每年訂閱",
+      "創作者抽成 5%(BLACK CARD 一半 · 寫文章您拿 95%)",
+      "編號 #001-#270 永久 identity · 售完關閉",
       "模型迭代提前 7 天試用 + voting",
       "BOTTOM 27 早鳥獨家虛擬資產",
       "恆美 × 伶 Kopi 紅茶招待 QR(台南)",
@@ -152,7 +152,7 @@ export default async function MembershipPage({
             <span className="text-gold">永遠停在當前層也可以 · 我們不催</span>。
           </p>
 
-          {/* Costco analogy quick-glance table */}
+          {/* Costco analogy quick-glance table · R172 W4 pricing update */}
           <div className="mt-8 max-w-3xl mx-auto border border-line/60 bg-slate/40 p-5 sm:p-6 text-left">
             <p className="font-mono text-gold/85 text-[10px] tracking-[0.4em] mb-4">
               / COSTCO 3-TIER 對應 · 您一眼看懂
@@ -165,13 +165,13 @@ export default async function MembershipPage({
               </div>
               <div>
                 <p className="font-mono text-mute text-[9px] tracking-[0.3em] mb-2">COSTCO GOLD STAR</p>
-                <p className="text-bone leading-relaxed">一般付費會員 · 標準 perks</p>
-                <p className="text-gold mt-2 text-xs">= ZONE 27 BLACK CARD(NT$ 500/季)</p>
+                <p className="text-bone leading-relaxed">一般付費月卡 · 標準 perks · 10% 抽傭</p>
+                <p className="text-gold mt-2 text-xs">= ZONE 27 BLACK CARD(NT$ 500/月)</p>
               </div>
               <div>
                 <p className="font-mono text-mute text-[9px] tracking-[0.3em] mb-2">COSTCO EXECUTIVE 黑卡</p>
-                <p className="text-bone leading-relaxed">最高 tier · 額外 perks · 0% 抽傭</p>
-                <p className="text-gold mt-2 text-xs">= ZONE 27 Founders 27(NT$ 2,700 終身)</p>
+                <p className="text-bone leading-relaxed">最高 tier 年卡 · 限 270 · 5% 抽傭(BLACK CARD 一半)</p>
+                <p className="text-gold mt-2 text-xs">= ZONE 27 Founders 27(NT$ 2,700/年)</p>
               </div>
             </div>
           </div>
