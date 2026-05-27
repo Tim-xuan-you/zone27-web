@@ -183,12 +183,12 @@ Current pending (as of 2026-05-20 DAY 2 collapse):
 - **同類成功 displacement model:** Defector vs ESPN · Stratechery vs CNBC · Bloomberg Terminal vs 各券商 · Bill James vs MLB establishment
 - **Coverage:** Phase 1 CPBL · Phase 2 NBA + 未來 leagues · Tim 親手 curate · 不爬 gambling platforms · 我們自己不接受下注(我們不是賭場)
 
-## 🏛️ 商業模式定錨
+## 🏛️ 商業模式定錨(R172 W4-W6 explicit Tim override)
 
-- **Free Tier:** 引擎跑 10K Monte Carlo · /track-record + 所有 trust artifacts 全公開 · 永遠免費
-- **BLACK CARD:** NT$ 500 / season — CPBL 季票會員 · 5% 創作者抽成 · ATM 跨行轉帳免手續費 · 0 auto-renewal(R171 W3 reprice from NT$ 1,500)
-- **FOUNDERS 27:** NT$ 2,700 一次性 / 限量 270 名 / 終身 / 創作者 0% 抽成
-- **拒絕:** 廣告營收(AdMob 永久封殺) · 抽下注分成(0 sportsbook revenue) · 收明牌費
+- **FREE:** NT$ 0 · 引擎跑 10K Monte Carlo · /track-record + 所有 trust artifacts 全公開 · 永遠免費
+- **BLACK CARD:** NT$ 500/31 天 · 一般付費會員 · 10% 創作者抽成(您拿 90%)· ATM 跨行轉帳免手續費 · 0 auto-renewal · 從付款日起算 31 天
+- **FOUNDERS 27:** NT$ 2,700/365 天 · 限量 270 名 · 5% 創作者抽成(您拿 95% · BLACK CARD 一半)· 每年 1/1 開放新 270 名(同 Patek 1996/1997 annual collection)· existing 訂戶享 1/1 24h pre-access renew
+- **拒絕:** 廣告營收(AdMob 永久封殺) · 抽下注分成(0 sportsbook revenue) · 賣 tipster picks(不賣明牌) · auto-renewal(/integrity #13 binding)
 
 ## 🤝 生態系連動
 

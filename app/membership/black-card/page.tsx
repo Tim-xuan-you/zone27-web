@@ -93,8 +93,8 @@ const UNLOCKS = [
   },
   {
     icon: "🎫",
-    title: "將來 Founders 27 開賣時 · 您有 24 小時優先購買權",
-    body: "將來 Founders 27(270 名年訂 · NT$ 2,700/365 天)付款系統啟動後 · BLACK CARD 訂閱者享 24 小時優先購買 window · 早 24 小時 access 給訂閱者。 ⏳ 等付款系統上線後開放。",
+    title: "每年 1/1 Founders 27 新 270 開放時 · 您享 24h pre-access",
+    body: "Founders 27(NT$ 2,700/365 天 · 每年 1/1 開放新 270 名 · 同 Patek 1996/1997 annual collection)· BLACK CARD 訂閱者享每年 1/1 24h 優先購買 window · 早 24 小時 access。 ⏳ 等付款系統上線後開放。",
   },
 ];
 

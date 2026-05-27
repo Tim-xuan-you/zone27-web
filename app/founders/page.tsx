@@ -26,9 +26,9 @@ import { createPageMetadata } from "@/lib/page-og";
 // PRE-COMMIT discipline + private-share critical pre-launch surface · createPageMetadata
 // 提供 openGraph + twitter + alternates.canonical 3 件 explicit override。
 export const metadata: Metadata = createPageMetadata({
-  title: "Founders 27 · NT$ 2,700 / 365 天會員 · 限量 270 名",
+  title: "Founders 27 · NT$ 2,700 / 365 天 · 每年 1/1 開放 270 名",
   description:
-    "ZONE 27 創始會員資格 · 一次付清 NT$ 2,700,終身免費 · 270 名額滿即永久關閉,不會有第二批 · 9 個月達損益平衡,之後每年省下 NT$ 3,588。",
+    "ZONE 27 創始會員 · NT$ 2,700/365 天 · 每年 1/1 開放 270 個新 seats(同 Patek 1996/1997 annual collection 模式)· existing 訂戶享 1/1 24h pre-access · Tim 親手 onboard · 抽傭 5%(BLACK CARD 一半)。",
   path: "/founders",
 });
 
@@ -204,7 +204,7 @@ const INLINE_FAQ = [
   // Round 52 W-E · Agent 1 #1 · 7 concrete fears added · HEY pricing model:
   {
     q: "如果 270 個席位賣完前我還在猶豫怎麼辦?",
-    a: "/founders/ledger 每週手寫更新分配進度。 您可以隨時 check ledger 看「目前 N/270」 + 拒絕原因 sample。 沒有 live counter 製造 FOMO · 但有 weekly transparency。 售完即永久關閉 · 不會有第二批 — 這也是 brand IP 物理 codify(不是 marketing pressure)。",
+    a: "/founders/ledger 每週手寫更新分配進度。 您可以隨時 check ledger 看「目前 N/270」 + 拒絕原因 sample。 沒有 live counter 製造 FOMO · 但有 weekly transparency。 每年 1/1 開放新 270 名(Year 2026 Class · Year 2027 Class · 等)· 同 Patek 1996/1997 annual collection 模式 · existing 訂戶享 1/1 24h pre-access。",
   },
   {
     q: "如果我加入後反悔想退款?",
@@ -445,25 +445,25 @@ export default async function FoundersPage({
             descriptive caption stays below as supporting text. */}
         <div className="mt-5 sm:mt-7 grid grid-cols-3 gap-2 sm:gap-3 max-w-xl mx-auto">
           <BreakEvenCell
-            value="5-6"
-            unit="個季回本"
-            en="SEASONS TO BREAK-EVEN"
+            value="55%"
+            unit="vs BLACK CARD 12 個月"
+            en="SAVED VS BLACK CARD"
           />
           <BreakEvenCell
             value="2,700"
-            unit="NT$ 一次"
-            en="ONE-TIME · LIFETIME"
+            unit="NT$ /365 天"
+            en="YEARLY · 270 SEATS"
             gold
           />
           <BreakEvenCell
-            value="500"
-            unit="NT$ /季省"
-            en="SAVED PER SEASON · AFTER YR 5"
+            value="5%"
+            unit="抽傭(BLACK CARD 一半)"
+            en="CREATOR COMMISSION"
           />
         </div>
         <p className="mt-4 max-w-xl mx-auto text-mute text-xs sm:text-sm leading-relaxed text-center">
-          與 BLACK CARD NT$ 500/season 比較 ·{" "}
-          <span className="text-gold">5-6 個 CPBL 季回本</span> · 之後終身免費
+          與 BLACK CARD NT$ 500/31 天 比較 ·{" "}
+          <span className="text-gold">同 BLACK CARD 12 個 31 天 ≈ NT$ 6,000 比 Founders 27 NT$ 2,700/365 天 省 55%</span>
         </p>
         <p className="mt-2 max-w-xl mx-auto text-mute/70 text-[10px] sm:text-[11px] leading-relaxed text-center">
           完整定價邏輯 ·{" "}
@@ -484,7 +484,7 @@ export default async function FoundersPage({
         <p className="mt-6 sm:mt-10 max-w-xl mx-auto text-mute leading-relaxed text-sm sm:text-base">
           這 {FOUNDERS_TOTAL} 個編號將是 ZONE 27 永遠的傳教士。
           <br />
-          一次入會,終身免費。售完即永久關閉,不會有第二批。
+          每年 1/1 開放 270 名(Year 2026 Class · Year 2027 Class · 等 · 同 Patek annual collection 模式)。 existing 訂戶享 1/1 24h pre-access renew。
         </p>
         <p className="mt-3 sm:mt-4 max-w-xl mx-auto text-mute/70 text-xs sm:text-sm leading-relaxed">
           付款系統 payment infra 就緒後開放(milestone-triggered · 不綁日期)。先加入等候名單,優先取得購買權。

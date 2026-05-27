@@ -93,18 +93,18 @@ const TIERS: Tier[] = [
     name: "Founders 27",
     en: "FOUNDERS 27 · 黑卡",
     price: "NT$ 2,700",
-    priceNote: "每年 · 限量 270 · 對應 Costco Executive 黑卡",
-    desc: "年訂創始會員 · 限量 270 名。 跟 Costco Executive 黑卡一樣 · 最高 tier · 額外 perks(寫文章 5% 抽傭(BLACK CARD 一半)· Tim 親手 onboard · 編號鑲入身分)。 270 個編號 · 售完關閉。",
+    priceNote: "每 365 天 · 每年 1/1 開放新 270 名 · 對應 Costco Executive 黑卡",
+    desc: "365 天訂閱創始會員。 跟 Costco Executive 黑卡一樣 · 最高 tier · 額外 perks(寫文章 5% 抽傭(BLACK CARD 一半)· Tim 親手 onboard · 編號鑲入身分)。 每年 1/1 開放新 270 個 seats(同 Patek 1996/1997 annual collection)· existing 訂戶享 1/1 24h pre-access renew。",
     // Round 55 W-C · Agent C #2 fix · 「Everything in [prev tier]+」 stacking
     // · 同 BLACK CARD pattern · 訪客 1-line 即知 Founders 27 包含所有
     // BLACK CARD value + lifetime + creator抽成 0% premium。
     perks: [
-      "Everything in BLACK CARD · 每年訂閱",
+      "Everything in BLACK CARD · 每 365 天 renew",
       "創作者抽成 5%(BLACK CARD 一半 · 寫文章您拿 95%)",
-      "編號 #001-#270 永久 identity · 售完關閉",
+      "每年 Class 編號 #001-#270 · 同 Patek annual collection",
+      "每年 1/1 24h pre-access renew window",
       "模型迭代提前 7 天試用 + voting",
-      "BOTTOM 27 早鳥獨家虛擬資產",
-      "恆美 × 伶 Kopi 紅茶招待 QR(台南)",
+      "BOTTOM 27 早鳥獨家虛擬資產 + 恆美 × 伶 Kopi 紅茶招待 QR(台南)",
     ],
     cta: { label: "→ Founders 27 詳情頁", href: "/founders" },
     // Round 55 W-A · Agent C anchoring fix · headline product 物理 anchor ·
