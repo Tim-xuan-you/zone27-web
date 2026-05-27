@@ -70,107 +70,54 @@ const CATEGORIES: Category[] = [
         ),
       },
       {
-        q: "為何沒有 賽事討論室 / 留言板 / 討論區 / 社群?",
+        q: "有 賽事討論室嗎?",
         id: "no-community",
         a: (
           <>
-            <strong className="text-bone">⚠️ R148 UPDATE · Tim founder-dogfood-canary
-            7-fire explicit override · 此 answer 已 reversed in scope</strong>。
-            {" "}
-            <strong className="text-bone">賽事討論室 R148 NEW scaffold LIVE on
-            /matches/[gameId]</strong> · BLACK CARD-gated 1-thread per game · 24hr
-            decay · 球迷 grammar(0 betting · 0 下注 · 0 賠率)· Tim 親手 moderate ·
-            200 char + 1 post per user per game 6 constraints · ⏳ PRE-LAUNCH Q3
-            2026(form 待 BLACK CARD payment ready · scaffold + mockup 3 sample
-            posts illustrate 球迷 grammar LIVE)· 見{" "}
+            有 ·{" "}
             <Link href="/matches/cpbl-260526-01#game-thread" className="text-gold underline-offset-4 hover:underline">
-              /matches/cpbl-260526-01#game-thread
+              /matches/[gameId]
             </Link>
-            {" "}+ BLACK CARD unlock #07 in{" "}
-            <Link href="/membership/black-card" className="text-gold underline-offset-4 hover:underline">
-              /membership/black-card
-            </Link>
-            。
-            <br />
-            <br />
-            <strong className="text-bone">History 不藏 per Pratfall axiom:</strong>{" "}
-            原 R123 iron rule [[feedback-zone27-one-way-by-design]] said「reader↔writer
-            NOT reader↔reader · DO NOT build community」 · 我 hold 7 次 fire(R123 +
-            R139 + R141 + R143 + R144 + R145 + R146)· Tim R148 explicit override「我要
-            (賽事討論室)！」 · per [[feedback-founder-dogfood-canary]] axiom trust
-            founder · iron rule narrowed from「永遠不 build」 to「BLACK CARD-gated
-            scaffold + 6 constraints」 minimum-violation。 其他 11 iron rules 全 hold
-            (CPBL only · 0 commission · engine free · 0 ads · displacement mission ·
-            pratfall · monetization · disclosure · coverage · pricing · paid-model-
-            is-support 全保留)。
-            <br />
-            <br />
-            <strong className="text-bone">其他 community 仍 by design 不 ship:</strong>{" "}
-            free-form forum · DM · live counter · testimonial wall 全 still banned。
-            您能 talk to Tim 在 11 個 channels(完整 list{" "}
+            {" "}BLACK CARD-gated · 1 thread per game · 200 字 · Tim 親手 moderate · PRE-LAUNCH。
+            其他 community(forum / DM / 留言板)永遠不做 · 您跟其他球迷在 LINE 球隊群 + PTT Baseball
+            板 OFF-SITE。 跟 Tim 在{" "}
             <Link href="/interact" className="text-gold underline-offset-4 hover:underline">
               /interact
             </Link>
-            )· 您能 talk to other 球迷 在 LINE 球隊群 + FB 球隊粉專 + PTT Baseball 板
-            (OFF-SITE · ZONE 27 honest pointer)+ BLACK CARD 訂閱者 在 /matches/[gameId]
-            賽事討論室。
+            。
           </>
         ),
       },
       {
-        q: "為何 visitor 不能 推薦賽事 / 投稿賽事?",
+        q: "為何 visitor 不能 推薦賽事?",
         id: "no-user-recommendations",
         a: (
           <>
-            因為 <strong className="text-bone">Tim 是唯一 curator</strong> · CPBL only forever per{" "}
-            <Link href="/integrity" className="text-gold underline-offset-4 hover:underline">
-              /integrity
-            </Link>
-            {" "}rule 12 + [[zone27-coverage-philosophy]] axiom「cover engine-validated games NOT
-            all bettable games」。 玩運彩 / 報馬仔 業務 model 需要 user-generated recommendations
-            (他們從推薦中抽傭)· ZONE 27 結構性相反 · <strong className="text-bone">0 抽傭 + 0
-            third-party content + Tim 親手 ingest 每場 CPBL screenshot</strong>。 您 4 個 indirect
-            影響方式:
-            <Link href="/hey-tim" className="text-gold underline-offset-4 hover:underline mx-1">
+            Tim 是唯一 curator · CPBL only · 同 Stratechery / Ben Thompson 親手 curate 所有內容。
+            玩運彩 / 報馬仔 抽傭 model 需要 user 推薦 · ZONE 27 結構性相反 · 0 抽傭 + 0 third-party 內容。
+            您可以走{" "}
+            <Link href="/hey-tim" className="text-gold underline-offset-4 hover:underline">
               /hey-tim
             </Link>
-            公開問 +
-            <Link href="/member/submit" className="text-gold underline-offset-4 hover:underline mx-1">
+            {" "}公開問 ·{" "}
+            <Link href="/member/submit" className="text-gold underline-offset-4 hover:underline">
               /member/submit
             </Link>
-            投稿 to Tim + LensFocusVote 投票 lens 優先序 + AnonPick / UserPrediction 自己 track
-            record。 同 Stratechery 訂戶不能 publish · Ben Thompson 親手 curate 所有內容 · 同 axis
-            DELTA Japan 一人 14 年 curate。
+            {" "}投稿 to Tim · LensFocusVote 投票 lens 優先序。
           </>
         ),
       },
       {
-        q: "ZONE 27 為何不抽傭 / 0 commission · 那怎麼賺錢?",
+        q: "0 commission · 那怎麼賺錢?",
         id: "no-commission",
         a: (
           <>
-            因為 brand IP iron rule <strong className="text-bone">永遠不 ship 抽傭 model</strong> ·
-            同{" "}
-            <Link href="/integrity" className="text-gold underline-offset-4 hover:underline">
-              /integrity
-            </Link>
-            {" "}rule 13 binding + CLAUDE.md「拒絕 AdMob 永久封殺」 +{" "}
-            <Link href="/" className="text-gold underline-offset-4 hover:underline">
-              homepage
-            </Link>
-            {" "}value-prop「<strong className="text-bone">不收明牌費</strong>」。 結構性無
-            commission flow because:(1) 不 host third-party sportsbook content ·(2) 不 host
-            user-recommended bets ·(3) engine 結果 0 affiliate kickback ·(4) Founders 27 /
-            BLACK CARD 訂閱是 pure identity tier NOT features unlock · 同 Stratechery + Defector
-            + Bill James 訂閱 model 全 0 commission flow。
-            <br />
-            <br />
-            <strong className="text-bone">怎麼賺錢?</strong>{" "}
-            (a) Founders 27 NT$ 2,700 lifetime × 270 名 = <strong className="text-gold">NT$
-            729,000 一次性</strong>(目前 263 待認領)· (b) BLACK CARD NT$ 1,500/season 手動 ECPay
-            × N 訂戶 / 年 = <strong className="text-gold">recurring revenue</strong>(無
-            auto-renewal · 每季 explicit click per rule 13)· per [[zone27-monetization-philosophy]]
-            memory canonical。 不靠 ad / commission / sponsorship。
+            <strong className="text-bone">Founders 27</strong> NT$ 2,700 lifetime × 270 名 =
+            NT$ 729,000 一次性(目前 263 待認領)。
+            <strong className="text-bone">BLACK CARD</strong> NT$ 1,500/season × N 訂戶
+            (0 auto-renewal · 每季 explicit click)。
+            不抽傭 · 不接 ad · 不接 sponsor · 不接 affiliate · 同 Stratechery / Defector / Bill James
+            訂閱 model。
           </>
         ),
       },
@@ -233,26 +180,12 @@ const CATEGORIES: Category[] = [
         id: "refund",
         a: (
           <>
-            <strong className="text-bone">14 天無條件退款</strong> · Founders 27
-            從 Tim 確認您的銀行轉帳入帳 + 您收到 lifetime access confirmation
-            email 那天起算 · BLACK CARD 從您每月手動轉帳當月份入帳那天起算。
-            <br />
-            <br />
-            <strong className="text-bone">流程:</strong>
-            寄信 tatayngiti@gmail.com · 主旨「REFUND · ZONE27-#NNN」(NNN 為您的
-            founder 編號 或 BLACK CARD month identifier)· Tim 48 hr 內回覆
-            確認 · 同步原匯款銀行戶頭退回全額。
-            <br />
-            <br />
-            <strong className="text-bone">不問原因 · 不嘗試挽留</strong> · 不
-            要求填問卷 · 不寄 retention 文案 · per [[zone27-pratfall-brand-ip]]
-            「不裝挽留」 axiom。
-            <br />
-            <br />
-            ZONE 27 主動延伸到 14 天 · 翻倍中華民國消費者保護法 § 19 distance-
-            selling 法定 7-day cooling-off 下限。 完整 refund 條款見{" "}
+            <strong className="text-bone">14 天無條件退款。</strong>{" "}
+            寄信 tatayngiti@gmail.com · 主旨「REFUND · ZONE27-#NNN」 · Tim 48h 回覆
+            確認 · 原戶頭退全額。 不問原因 · 不挽留 · 不問卷 · 不 retention 文案。
+            翻倍消保法 § 19 法定 7-day 下限。 完整條款{" "}
             <Link href="/terms" className="text-gold underline-offset-4 hover:underline">
-              /terms Section 4B
+              /terms §4B
             </Link>
             。
           </>
@@ -294,75 +227,22 @@ const CATEGORIES: Category[] = [
               /founders
             </Link>
             、
-            <Link href="/leaderboard" className="text-gold underline-offset-4 hover:underline">
-              /leaderboard
+            <Link href="/founders/ledger" className="text-gold underline-offset-4 hover:underline">
+              /founders/ledger
             </Link>{" "}
             三處。
           </>
         ),
       },
       {
-        q: "ZONE 27 跟傳銷(MLM / 直銷 / 安麗式)有什麼不同?",
+        q: "跟傳銷(MLM)有什麼不同?",
         id: "mlm",
         a: (
           <>
-            <strong className="text-bone">經濟結構完全相反。</strong>{" "}
-            MLM 的核心收入靠下線抽佣 + 推薦獎金(您介紹的人賺多少 · 您拿一部分)·
-            ZONE 27 完全
-            <strong className="text-bone">沒有 downline 結構</strong>。
-            <br />
-            <br />
-            <span className="block font-mono text-mute text-[10px] tracking-[0.3em] mb-3">
-              ✕ 我們不做的 vs ZONE 27 對應結構
-            </span>
-            <ul className="space-y-2 list-none pl-0 text-sm">
-              <li>
-                <span className="text-loss/80 mr-2">✕</span>
-                MLM 多層次抽佣 ·{" "}
-                <span className="text-bone">ZONE 27 零 multi-level compensation</span>
-              </li>
-              <li>
-                <span className="text-loss/80 mr-2">✕</span>
-                MLM 推薦獎金 ·{" "}
-                <span className="text-bone">ZONE 27 沒有任何 referral bonus</span>
-              </li>
-              <li>
-                <span className="text-loss/80 mr-2">✕</span>
-                MLM 業績 quota ·{" "}
-                <span className="text-bone">Founders 27 一次性付款 · 沒 quota</span>
-              </li>
-              <li>
-                <span className="text-loss/80 mr-2">✕</span>
-                MLM 強制庫存 ·{" "}
-                <span className="text-bone">沒實體商品 · 引擎免費</span>
-              </li>
-              <li>
-                <span className="text-loss/80 mr-2">✕</span>
-                MLM「成功學」訓練 ·{" "}
-                <span className="text-bone">沒任何 sales-script · 沒洗腦營</span>
-              </li>
-              <li>
-                <span className="text-loss/80 mr-2">✕</span>
-                MLM 無限招募下線 ·{" "}
-                <span className="text-bone">限量 270 · 一次性 · #270 認領那秒永久關閉</span>
-              </li>
-            </ul>
-            <br />
-            BLACK CARD 創作者抽成 5% 是 <strong className="text-bone">platform fee</strong>
-            (類 Stripe / Spotify · 不是 multi-level)· Founders 27 創作者抽成 0%
-            (把「未來不抽您佣」當 perk · 不是 referral kick-back)。
-            <br />
-            <br />
-            表面 visual cue(限量 / 親手 onboard / LINE 群)有重疊 ·
-            但結構是 <strong className="text-bone">Costly Signaling + 早期支持者補償</strong> ·
-            不是招募階梯。完整 monetization philosophy 見{" "}
-            <Link
-              href="/manifesto"
-              className="text-gold underline-offset-4 hover:underline"
-            >
-              /manifesto Section II
-            </Link>
-            。
+            <strong className="text-bone">沒 downline 結構。</strong>{" "}
+            0 推薦獎金 · 0 多層抽佣 · 0 業績 quota · 0 招募下線 · 限量 270 · 一次性 ·
+            #270 認領那秒永久關閉。 BLACK CARD 5% 抽成是 platform fee(類 Stripe / Spotify)
+            · Founders 27 0%。
           </>
         ),
       },
@@ -429,72 +309,48 @@ const CATEGORIES: Category[] = [
     zh: "隱私與生態系",
     qas: [
       {
-        q: "我的 email 會被怎麼處理?",
+        q: "我的 email 會怎麼處理?",
         a: (
           <>
-            <strong className="text-bone">更新 2026-05-20:</strong>{" "}
-            所有報名 email 存在{" "}
-            <span className="font-mono text-gold/90">Supabase Tokyo</span> 加密 PostgreSQL,
-            並啟用 Row-Level Security lock-down —{" "}
-            <strong className="text-bone">沒有任何角色能直接讀全表</strong>,
-            連我們的公開 publishable key 都無法繞過 RLS。所有讀取只能透過{" "}
-            <span className="font-mono text-gold/90">SECURITY DEFINER</span>{" "}
-            函式且該函式只回傳 COUNT,從不回傳 email/姓名。
-            <br />
-            <br />
-            我們承諾<strong className="text-bone">不分享、不販售、不轉手</strong>
-            任何第三方。完整 SQL schema 公開於{" "}
+            存{" "}
+            <span className="font-mono text-gold/90">Supabase Tokyo</span> 加密 PostgreSQL ·
+            RLS 鎖住 · 連 publishable key 都讀不到全表 · 只能透過 SECURITY DEFINER 回傳 COUNT。
+            不分享 · 不販售 · 不轉手。 完整 schema{" "}
             <a
               href="https://github.com/Tim-xuan-you/zone27-web/blob/main/supabase/migrations/0001_waitlist.sql"
               target="_blank"
               rel="noopener noreferrer"
               className="text-gold underline-offset-4 hover:underline"
             >
-              supabase/migrations/0001_waitlist.sql
+              GitHub
             </a>
-            ,任何人可審計 — 詳見{" "}
-            <Link
-              href="/privacy"
-              className="text-gold underline-offset-4 hover:underline"
-            >
-              /privacy Section 04
+            {" "}審計 ·{" "}
+            <Link href="/privacy" className="text-gold underline-offset-4 hover:underline">
+              /privacy §04
             </Link>
             。
           </>
         ),
       },
       {
-        q: "你們會追蹤我的使用行為嗎?",
+        q: "你們會追蹤我嗎?",
         a: (
           <>
             <strong className="text-bone">不會。</strong>{" "}
-            ZONE 27 沒有裝 Google Analytics、Facebook Pixel、Hotjar 錄影,
-            也沒有任何第三方追蹤 cookies。
-            <br />
-            <br />
-            您在{" "}
-            <Link href="/lab" className="text-gold underline-offset-4 hover:underline">
-              /lab
-            </Link>{" "}
-            跑過幾次 Monte Carlo、看了哪場比賽、停留多久 ——
-            只存在您自己的瀏覽器(localStorage),沒有伺服器副本。
-            <strong className="text-bone">我們連數都不數。</strong>
-            <br />
-            <br />
-            這不是技術限制,是品牌哲學。在競爭對手都在追蹤的市場,我們刻意選了相反方向。
-            完整清單見{" "}
+            0 Google Analytics · 0 Facebook Pixel · 0 Hotjar · 0 third-party cookies。
+            localStorage 只在您自己瀏覽器 · 沒伺服器副本。 完整清單{" "}
             <Link href="/privacy" className="text-gold underline-offset-4 hover:underline">
               /privacy
-            </Link>{" "}
-            第 03 節。
+            </Link>
+            。
           </>
         ),
       },
       {
-        q: "我可以取消等候名單嗎?",
+        q: "怎麼取消等候名單?",
         a: (
           <>
-            可以,隨時。目前(pre-launch)透過{" "}
+            隨時 ·{" "}
             <a
               href="https://github.com/Tim-xuan-you/zone27-web/issues"
               target="_blank"
@@ -503,24 +359,17 @@ const CATEGORIES: Category[] = [
             >
               GitHub Issues
             </a>
-            {" "}留下您要刪除的 email · 創辦人 Tim 收到後 24 小時內
-            從 Supabase 永久刪除您的 row(<strong className="text-bone">不留備份</strong>)。
-            <br />
-            <br />
-            等候名單本身<strong className="text-bone">不收費、不簽約、不綁定</strong>,
-            純粹是優先權的標記。退出沒有任何懲罰或保留期。
+            {" "}留 email · Tim 24h 內從 Supabase 永久刪除 · 不留備份。
+            等候名單不收費 · 不簽約 · 不綁定。
           </>
         ),
       },
       {
-        q: "BOTTOM 27 是什麼?跟 ZONE 27 什麼關係?",
+        q: "BOTTOM 27 是什麼?",
         a: (
           <>
-            <strong className="text-bone">BOTTOM 27</strong> 是 Tim 同步開發的棒球經營手遊。
-            兩者是雙生品牌,共用「27」概念與深藏青 × 冷金視覺系統。
-            Founders 27 會員未來會自動獲得 BOTTOM 27 的獨家虛擬資產
-            (專屬球員卡、稀有球場代幣、終身贊助商徽章),
-            雙產品深度綁定同一群棒球迷的娛樂時間。
+            Tim 同步開發的棒球經營手遊 · 雙生品牌 · 共用「27」概念與深藏青 × 冷金視覺。
+            Founders 27 會員未來自動獲得 BOTTOM 27 獨家虛擬資產。
           </>
         ),
       },

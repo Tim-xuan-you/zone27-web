@@ -156,7 +156,7 @@ export default function FounderPickForm({
           Patek 模式 · 公開 commitment 在轉帳之前。
         </p>
         <Link
-          href="/login?next=/leaderboard"
+          href="/login?next=/founders/ledger"
           className="inline-block px-6 py-2.5 bg-gold text-navy font-mono text-[10px] tracking-[0.3em] hover:bg-gold-soft transition-colors"
         >
           → /login · Email + 密碼 註冊

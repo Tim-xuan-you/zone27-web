@@ -83,7 +83,7 @@ const CHANNELS: Channel[] = [
     icon: "📮",
     zhTitle: "Hey Tim · 公開問答",
     enLabel: "PUBLIC Q&A",
-    body: "您 send 1 question to Tim · Tim 賽後 24hr 內挑 selected 公開 reply · 同 Bill James「Hey Bill」 15-year canonical pattern · pure reader↔writer · 0 reader↔reader · 0 push · 0 email subscribe · pull-not-push axiom",
+    body: "您問 1 個問題 · Tim 賽後 24h 內公開 reply · 同 Bill James「Hey Bill」 pattern。",
     surface: "/hey-tim",
     href: "/hey-tim",
     status: "live",
@@ -93,7 +93,7 @@ const CHANNELS: Channel[] = [
     icon: "📝",
     zhTitle: "投稿 · Reader Guest Post",
     enLabel: "GUEST POST",
-    body: "FREE TIER session-gated form · title + body · 直送 Tim Gmail via Resend · 0 archive · 0 public · 1/week cadence · Stratechery Guest Post pattern · Tim curate · 不全 publish · 您 vote on engine 是 indirect 影響",
+    body: "登入後送 title + body 給 Tim Gmail · 1/週 cadence · Tim curate · Stratechery Guest Post pattern。",
     surface: "/member/submit",
     href: "/member/submit",
     status: "logged-in",
@@ -103,7 +103,7 @@ const CHANNELS: Channel[] = [
     icon: "🎯",
     zhTitle: "AnonPick · 賽前 cold pick",
     enLabel: "ANON PICK",
-    body: "/matches/[gameId] 賽前 pick home/away cold · 0 auth · 0 PII · pure localStorage zone27_anon_picks_v1 · IKEA Effect retention loop · commitment-consistency badge(Cialdini & Trope 1976)· 您 own track record",
+    body: "賽前 pick home/away · 0 auth · 0 PII · localStorage · 您 own track record。",
     surface: "/matches/[gameId] AnonPickWidget",
     href: "/matches",
     status: "live",
@@ -113,7 +113,7 @@ const CHANNELS: Channel[] = [
     icon: "🗳️",
     zhTitle: "LensFocusVote · 投 lens 優先序",
     enLabel: "LENS VOTE",
-    body: "/matches/[gameId] 您 vote which lens(VibeCheck · ParkFactor · PitcherFatigue · Underdog · Bullpen · MatchupHistory · LensTrace)should be developed next · localStorage · 結果 surface to Tim · IKEA Effect · 您 voting 即您 engine roadmap",
+    body: "投票哪個 lens 應該下一個 develop · 您 voting = engine roadmap signal。",
     surface: "/matches/[gameId] LensFocusVote",
     href: "/matches",
     status: "live",
@@ -123,7 +123,7 @@ const CHANNELS: Channel[] = [
     icon: "✓",
     zhTitle: "UserPrediction · 帳號 picks + personal stats",
     enLabel: "USER PREDICTION",
-    body: "/matches/[gameId] logged-in 您 pick winner pre-engine-reveal · 累積 personal calibration drift · /member/calibration 顯示您自己 reliability diagram · ZONE 27 是唯一公開 member 自己 calibration drift 的 sports brand · Pratfall + Costly Signaling 同時",
+    body: "登入後 pick winner · /member/calibration 顯示您自己 reliability diagram。",
     surface: "/matches/[gameId] UserPredictionPicker",
     href: "/matches",
     status: "logged-in",
@@ -133,7 +133,7 @@ const CHANNELS: Channel[] = [
     icon: "⭐",
     zhTitle: "FollowMatch · 標記追蹤",
     enLabel: "FOLLOW MATCH",
-    body: "/matches/[gameId] logged-in 您 mark「followed」 · Supabase auth.users.user_metadata.followed_matches JSONB · 0 migration · /member dashboard 顯示 followed · 您 build 自己 watchlist · 不分享 · 純 personal",
+    body: "登入後標記 followed · /member dashboard 顯示 watchlist · 0 share · 純 personal。",
     surface: "/matches/[gameId] FollowMatchButton",
     href: "/matches",
     status: "logged-in",
@@ -143,7 +143,7 @@ const CHANNELS: Channel[] = [
     icon: "🗒️",
     zhTitle: "MatchNote · 280-char 私人筆記",
     enLabel: "MATCH NOTE",
-    body: "/matches/[gameId] logged-in 您 write 280-char private note · 同 axis as user_metadata · 0 public · 純 您 own thinking · Tim 看不到 · 其他 user 看不到 · pure personal journaling layer · Pinboard / Hyperallergic note pattern",
+    body: "登入後寫 280 字 private note · 0 public · Tim 看不到 · 純 personal journal。",
     surface: "/matches/[gameId] MatchNoteEditor",
     href: "/matches",
     status: "logged-in",
@@ -153,7 +153,7 @@ const CHANNELS: Channel[] = [
     icon: "🔗",
     zhTitle: "ReceiptForward · LINE 分享 receipt",
     enLabel: "RECEIPT FORWARD",
-    body: "/matches/[gameId] post-final 您 share receipt to LINE · /receipts/[receiptId] permanent URL · brand-pure download-as-image · Stripe Press + Patek Reference Number + Defector citation permalink + Anthropic model card archive pattern · ZONE 27 第一個 visitor-grabbable receipt object",
+    body: "賽後 share receipt to LINE · /receipts/[receiptId] permanent URL · download-as-image。",
     surface: "/matches/[gameId] ReceiptForwardButton",
     href: "/matches",
     status: "post-final",
@@ -163,7 +163,7 @@ const CHANNELS: Channel[] = [
     icon: "📜",
     zhTitle: "Founders 27 · 申請信",
     enLabel: "APPLICATION ESSAY",
-    body: "/founders/apply Patek-style application · 寫一封信 explaining 您與 CPBL 的關係 + 為何要加入 Founders 27 · Tim 親手 review · 不是 註冊 · 通過後才 invite · 同 Patek dealer process + Linear 2019 invite-only + Stripe Atlas application pattern",
+    body: "寫一封信 · Tim 親手 review · 通過後才 invite · Patek dealer 申請 pattern。",
     surface: "/founders/apply",
     href: "/founders/apply",
     status: "live",
@@ -173,7 +173,7 @@ const CHANNELS: Channel[] = [
     icon: "🎫",
     zhTitle: "FounderPickForm · 選 seat # 008-270",
     enLabel: "RESERVE SEAT",
-    body: "/founders 通過 Tim review 後 · 您 pick lifetime seat number 008-270 · Supabase write · /leaderboard 那個 cell 變 RESERVED · 您 # 編號公開永久 · 同 Patek allocation + Hermès Birkin 序號 pattern · 您 own that number forever",
+    body: "通過 review 後 · 您 pick lifetime seat # · Patek allocation + Hermès Birkin 序號 pattern。",
     surface: "/founders FounderPickForm",
     href: "/founders",
     status: "pre-launch",
@@ -242,49 +242,36 @@ export default function InteractPage() {
           >
             / 為什麼 ZONE 27 不做 community · WHY ONE-WAY
           </p>
-          <div className="space-y-4 zh-body text-mute text-base leading-relaxed">
+          <div className="space-y-3 zh-body text-mute text-base leading-relaxed">
             <p>
-              <strong className="text-bone">1 · 業務 model 結構性決定。</strong>{" "}
-              LINE 老師 / 報馬仔 / 玩運彩 結構性需要{" "}
-              <strong className="text-bone">community noise + group herding</strong>{" "}
-              才能 sell engagement 變現 ads / fees。 ZONE 27 業務 model = identity
-              訂閱 · pay to fund Tim build · NOT to unlock community features ·
-              per [[feedback-zone27-paid-model-is-support-not-features]] memory canonical。
+              <strong className="text-bone">1 · Solo founder.</strong>{" "}
+              CPBL 一年 240 場 · 加 comments 一年 4800+ 留言要 moderate · Tim 一個人
+              做不到 · 同 Defector 需要 worker-owned newsroom。
             </p>
             <p>
-              <strong className="text-bone">2 · 操作上 solo founder 必失敗。</strong>{" "}
-              CPBL 一年 240 場 · 若加 user-to-user comments · 每場至少 20 留言 ·
-              一年 4800+ 留言需 moderate · 一個人 review 全失敗 · 同 Defector
-              moderate 需要 worker-owned 多人 newsroom infrastructure · ZONE 27
-              solo Tim 結構性無法。
+              <strong className="text-bone">2 · 訂閱 = 支持 Tim build · NOT 解鎖 community。</strong>{" "}
+              同 Stratechery / Bill James 訂閱 model。 LINE 老師 / 報馬仔 需要
+              community noise 變現 · ZONE 27 結構性相反。
             </p>
             <p>
-              <strong className="text-bone">3 · Cialdini Consistency(1984)decision-time framing。</strong>{" "}
-              一旦 surface community model 後 · 撤掉是 brand collapse(Defector
-              comments 撤除 = 訂戶反彈)· 「不 ship」 比「ship 後撤」 brand IP
-              損害低 100×。 此 page 顯式公開 = pre-commit 不 ship · 同 /audit
-              S05 PRE-COMMIT axiom binding append-only。
+              <strong className="text-bone">3 · 球迷已有 community 在 LINE / FB / PTT。</strong>{" "}
+              60+ LINE 群 + 6 隊 FB 粉專 + PTT Baseball 板。 ZONE 27 加 forum =
+              duplication。 兩者並存 not 取代。
             </p>
             <p>
-              <strong className="text-bone">4 · 球迷想 community 的 needs 已在 LINE 群 + Facebook 滿足。</strong>{" "}
-              CPBL 球迷已有 60+ active LINE 群 + 中信兄弟 / 樂天 / 統一 / 富邦 /
-              味全 / 台鋼 各隊 Facebook 粉專 + PTT Baseball 板。 ZONE 27 加 forum
-              = duplication + dilution。 您想 community → 加 LINE 球迷群。 您
-              想 quantified analysis → ZONE 27。 兩者並存 not 取代。
+              <strong className="text-bone">4 · 公開「不做」 = 鎖死退路。</strong>{" "}
+              撤掉 community 是 brand collapse(Defector 案例)· 一開始不 ship 比
+              ship 後撤回 brand 損害低 100×。
             </p>
             <p>
-              <strong className="text-bone">5 · Stratechery / Bill James / DELTA Japan 8 brand precedent 驗證。</strong>{" "}
-              全球 profitable solo-founder subscription brand 都 reader↔writer model
-              · NOT reader↔reader: Stratechery(Ben Thompson 1-on-1 reader Q&A)·
-              Money Stuff(Matt Levine mailbag)· Bill James「Hey Bill」(15-yr
-              canonical · ZONE 27 已 ship as{" "}
+              <strong className="text-bone">5 · 8 brand precedent.</strong>{" "}
+              Stratechery · Bill James「Hey Bill」 · DELTA Japan · patio11 · Pinboard ·
+              DHH HEY · Berkshire · Money Stuff · 全 reader↔writer model · 0 reader↔reader。
+              已 ship 為{" "}
               <Link href="/hey-tim" className="text-gold/85 underline-offset-4 hover:underline">
                 /hey-tim
               </Link>
-              )· DELTA Japan(Yusuke Okada 讀者來信)· patio11(Patrick McKenzie
-              solo)· Pinboard(Maciej Cegłowski 17-yr solo)· DHH HEY · Berkshire
-              annual letters。 The Athletic + Defector 是 worker-owned multi-staff
-              model · 不適用 solo founder · ZONE 27 結構性 = solo-founder model。
+              。
             </p>
           </div>
         </section>

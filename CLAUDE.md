@@ -190,6 +190,15 @@ ZONE 27 與 **BOTTOM 27**(Tim 的棒球手遊)是雙生品牌:
 
 ## 🗺️ 當前路由(v0.29 · **R164 NUCLEAR DELETE applied** · 2026-05-26 · ~48 visitor-discoverable post削)
 
+**R167 W1 削除(2 routes · Tim canary 3 「每個網頁滑不到底」 escalation):**
+- ❌ /leaderboard · per Agent P TIER A #3 · ScarcityStrip + FounderPickForm + MemberUnlocksGrid redirect → /founders + /founders/ledger · Cmd-K entry removed
+- ❌ /signal-board · per Agent P TIER B #7 · daily promise we don't keep(同 /rewards Q4 vapor pattern · violates [[feedback-no-waiting-rule]])· Footer entry + Cmd-K entry removed
+
+**R167 W2 page body compression(per Tim canary 3 「使用者不是工程師」):**
+- /faq 686 → 535 lines(−22%)· verbose Q's compressed · academic-grammar dropped
+- /interact channel bodies + WHY ONE-WAY paragraphs nuclear compressed · 60-70% per-row text dropped
+- More compression deferred to R168+ per quality-bar(Pratfall iron rule pages preserved · internal verbose paragraphs targeted next round)
+
 **R166 W1 削除(1 route · Apple discipline continuation):**
 - ❌ /rewards · Q4 vapor + violates [[feedback-no-waiting-rule]] · per Agent P TIER A audit · redirect mapping: UserPredictionPicker → /member/calibration · /now historical refs → /membership/black-card
 

@@ -102,8 +102,8 @@ export default function SubmitPage() {
           </h1>
           <p className="mt-5 text-mute text-sm sm:text-base leading-relaxed">
             Stratechery Guest Post pattern · 沒 5% 抽成 · 沒 public 自動 post ·
-            純 Tim 親手 curate(LINE 老師 archetype 防線)。 Tim 1 週選 1 篇
-            手動 publish 到 /signal-board。 不過稿的 reply 您 reason · 不藏。
+            純 Tim 親手 curate(LINE 老師 archetype 防線)。 不過稿的 reply 您
+            reason · 不藏。 1 週 1 篇 cadence。
           </p>
         </section>
 
@@ -143,8 +143,7 @@ export default function SubmitPage() {
                 收到 · 24 小時內 review
               </h2>
               <p className="text-mute text-sm leading-relaxed max-w-md mx-auto">
-                Tim 親手讀完 reply。 過稿 = 手動 publish 到 /signal-board。
-                不過 = reply 您 reason · 不藏。 1/週 cadence。
+                Tim 親手讀完 reply。 不過 = reply 您 reason · 不藏。 1/週 cadence。
               </p>
               <div className="mt-6 flex flex-wrap justify-center gap-3">
                 <Link
@@ -152,12 +151,6 @@ export default function SubmitPage() {
                   className="px-6 py-2.5 border border-gold text-gold font-mono text-[10px] tracking-[0.3em] hover:bg-gold/10 transition-colors"
                 >
                   → 回 /member
-                </Link>
-                <Link
-                  href="/signal-board"
-                  className="px-6 py-2.5 border border-line/60 text-mute hover:text-gold font-mono text-[10px] tracking-[0.3em] transition-colors"
-                >
-                  → 看 /signal-board
                 </Link>
               </div>
             </div>
@@ -229,8 +222,7 @@ export default function SubmitPage() {
                 </p>
               )}
               <p className="font-mono text-mute/70 text-[10px] tracking-[0.25em] leading-relaxed pt-3 border-t border-line/40">
-                ▸ Tim 1/週 curate · 過稿 publish 到 /signal-board · 不過稿
-                reply reason · 不藏
+                ▸ Tim 1/週 curate · 不過稿 reply reason · 不藏
                 <br />
                 ▸ 0 server-side archive · 您 submission 只走 Resend → Tim
                 Gmail · 不存 DB · per /privacy

@@ -65,7 +65,7 @@ const UNLOCKS = [
     icon: "🎫",
     title: "Founder # 預訂",
     body: "鎖 #008-#270 編號 · 等 payment infra 就緒 + 付款開放後再 NT$2,700 forge(milestone-triggered · 不綁日期)· Patek allocation pattern · 不 forfeit。",
-    href: "/leaderboard",
+    href: "/founders/ledger",
     cta: "選您 #",
   },
 ];

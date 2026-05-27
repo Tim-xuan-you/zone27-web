@@ -24,11 +24,11 @@ export default function ScarcityStrip() {
 
   return (
     <Link
-      href="/leaderboard"
+      href="/founders"
       aria-label={
         isClosed
           ? "Founder seats closed — 270 of 270 forged"
-          : `View the 27 Wall — ${FOUNDERS_CLAIMED} of ${FOUNDERS_TOTAL} founder seats forged, ${FOUNDERS_REMAINING} remain, next badge ${formatBadge(FOUNDERS_NEXT)}`
+          : `Founders 27 — ${FOUNDERS_CLAIMED} of ${FOUNDERS_TOTAL} founder seats forged, ${FOUNDERS_REMAINING} remain, next badge ${formatBadge(FOUNDERS_NEXT)}`
       }
       data-print-hide="true"
       className="block w-full border-b border-gold/15 bg-ink/40 hover:bg-ink/60 transition-colors group"

@@ -187,23 +187,7 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
       title: "倒置宣言 · 4 個刻意倒置",
     },
   ],
-  "/signal-board": [
-    {
-      href: "/methodology",
-      kicker: "methodology",
-      title: "信號如何建構",
-    },
-    {
-      href: "/audit",
-      kicker: "audit",
-      title: "Model Report · 已知失效模式",
-    },
-    {
-      href: "/manifesto",
-      kicker: "manifesto",
-      title: "倒置宣言 · 為何這樣做",
-    },
-  ],
+  // R167 W1b · /signal-board DELETED · daily promise we don't keep per Agent P TIER B #7 + Tim canary 3「每個網頁滑不到底 · 大部分不必要」
   "/manifesto": [
     {
       href: "/track-record",
@@ -505,9 +489,9 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
       title: "Creator Permissions FAQ · 不同 tier 發文權限",
     },
     {
-      href: "/signal-board",
-      kicker: "signal-board",
-      title: "過稿落點 · Tim 親手 publish 到此",
+      href: "/now",
+      kicker: "now",
+      title: "Tim 親手 curate journal · ship cadence transparent",
     },
   ],
   // Round 31 Wave S · /founders/ledger NEW · Open Allocation Ledger ·

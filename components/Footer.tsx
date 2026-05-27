@@ -87,7 +87,7 @@ const FOOTER_GROUPS: FooterGroup[] = [
       { label: "模擬實驗室 · 1 萬次跑", href: "/lab" },
       { label: "CPBL 投手排行 · 6 stats", href: "/cpbl-pitchers" },
       { label: "CPBL 6 隊伍 · aggregation", href: "/cpbl-teams" },
-      { label: "每日早報", href: "/signal-board" },
+      // R167 W1b · /signal-board DELETED · daily promise we don't keep · per Agent P TIER B #7 + Tim canary 3
       // Round 51 W-E · Atom RSS /feed.xml ship · 給 hardcore fan RSS reader
       // audience subscribe · 同 Stratechery / FanGraphs / Baseball Savant
       // pattern · 0 tracking · client-pulled · 不靠 email。
