@@ -26,7 +26,7 @@ import { createPageMetadata } from "@/lib/page-og";
 // PRE-COMMIT discipline + private-share critical pre-launch surface · createPageMetadata
 // 提供 openGraph + twitter + alternates.canonical 3 件 explicit override。
 export const metadata: Metadata = createPageMetadata({
-  title: "Founders 27 · NT$ 2,700 終身會員 · 限量 270 名",
+  title: "Founders 27 · NT$ 2,700 / 365 天會員 · 限量 270 名",
   description:
     "ZONE 27 創始會員資格 · 一次付清 NT$ 2,700,終身免費 · 270 名額滿即永久關閉,不會有第二批 · 9 個月達損益平衡,之後每年省下 NT$ 3,588。",
   path: "/founders",
@@ -73,9 +73,9 @@ const DOLLAR_DIDNT_BUY: { what: string; why: string }[] = [
 const benefits = [
   {
     no: "01",
-    zh: "終身會員資格",
+    zh: "365 天會員資格",
     en: "LIFETIME ACCESS",
-    body: "一次性 NT$ 2,700,永久解鎖未來所有功能。BLACK CARD 季票 NT$ 500/season 對您完全免費,終身。",
+    body: "NT$ 2,700/365 天,永久解鎖未來所有功能。BLACK CARD 季票 NT$ 500/season 對您完全免費,終身。",
   },
   {
     no: "02",
@@ -216,7 +216,7 @@ const INLINE_FAQ = [
   },
   {
     q: "BLACK CARD 上線後我 Founders 27 status 會變嗎?",
-    a: "不會。 Founders 27 是 lifetime 第 4 階 · 包含未來所有 BLACK CARD unlocks(v0.3 + v0.4 engine + 創作者抽成 0%(BLACK CARD 是 5%)+ 每月 voting + Tim 工程筆記 full + LINE 群)。 Founders 27 是 floor not sidegrade · 您買的 270 個 seat 是 ZONE 27 整個系統永久 root identity · 不會 dilute。",
+    a: "不會。 Founders 27 是 lifetime 第 4 階 · 包含未來所有 BLACK CARD unlocks(v0.3 + v0.4 engine + 創作者抽成 5%(BLACK CARD 一半)(BLACK CARD 是 5%)+ 每月 voting + Tim 工程筆記 full + LINE 群)。 Founders 27 是 floor not sidegrade · 您買的 270 個 seat 是 ZONE 27 整個系統永久 root identity · 不會 dilute。",
   },
   {
     q: "Tim 會存我什麼資料?",
@@ -224,7 +224,7 @@ const INLINE_FAQ = [
   },
   {
     q: "可以贈送 Founders 27 給朋友嗎?",
-    a: "可以。 Founders 27 是 lifetime seat · transferable · 寫信 tatayngiti@gmail.com 說「我要轉讓 #NNN 給某某人(對方 email)」 · Tim 24h 內 update ledger + 寄新 owner confirmation。 受贈人也享 14 天無條件退款保證(從 ledger update 日起算)。",
+    a: "可以。 Founders 27 是 365-day pass seat · transferable · 寫信 tatayngiti@gmail.com 說「我要轉讓 #NNN 給某某人(對方 email)」 · Tim 24h 內 update ledger + 寄新 owner confirmation。 受贈人也享 14 天無條件退款保證(從 ledger update 日起算)。",
   },
   {
     q: "如果我之後不喜歡 ZONE 27 的 methodology 怎麼辦?",
@@ -403,7 +403,7 @@ export default async function FoundersPage({
             這是 founder 親自的 honest doubt · 我們選擇 publish 不藏。 答案不是
             「加 paywall 強迫」 · 答案是 Defector / Stratechery / Bill James
             Patreon pattern · paid tier = SUPPORT / IDENTITY 不是 feature unlock。
-            您訂閱 $2,700 lifetime · 不是 unlock 引擎(引擎永遠免費)· 是給
+            您訂閱 NT$ 2,700/365 天 · 不是 unlock 引擎(引擎永遠免費)· 是給
             Tim 不再為 alternative model 工作 · 同 Kickstarter pledge / Patek
             allocation / Defector day-1 $690K ZERO product launch model。
           </p>
@@ -429,7 +429,7 @@ export default async function FoundersPage({
           </p>
           <p className="text-mute/90 text-[13px] sm:text-[14px] leading-relaxed mb-3">
             <strong className="text-bone">您不是在買明牌</strong> ·
-            您是在買 270 個 lifetime seat 之一 · 加入 ZONE 27 整個系統的 floor。
+            您是在買 270 個 365-day pass seat 之一 · 加入 ZONE 27 整個系統的 floor。
             引擎永遠免費 · 您買的是身分 + 永久 access + 0% creator 抽成。
           </p>
           <p className="font-mono text-mute/70 text-[10px] tracking-[0.3em] mt-3 pt-3 border-t border-line/40">
@@ -603,7 +603,7 @@ export default async function FoundersPage({
             id="pre-form-reframe-heading"
             className="text-xl sm:text-2xl text-bone font-light tracking-tight mb-3 leading-snug"
           >
-            引擎 <span className="text-gold">FREE FOREVER</span>。 Founders 27 賣的不是工具 · 是 {FOUNDERS_TOTAL} 個 lifetime seats。
+            引擎 <span className="text-gold">FREE FOREVER</span>。 Founders 27 賣的不是工具 · 是 {FOUNDERS_TOTAL} 個 365-day pass seats。
           </h2>
           <p className="text-mute text-sm sm:text-base leading-relaxed mb-2">
             您可以無限次跑 10,000 場 Monte Carlo · 自訂任意投手對戰 · 讀整份 model
