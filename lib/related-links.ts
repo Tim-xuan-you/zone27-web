@@ -170,23 +170,7 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
       title: "完整工程白皮書",
     },
   ],
-  "/glossary": [
-    {
-      href: "/methodology",
-      kicker: "methodology",
-      title: "進階數據如何進引擎",
-    },
-    {
-      href: "/audit",
-      kicker: "audit",
-      title: "Model Report · 哪些 stat 我們不用",
-    },
-    {
-      href: "/manifesto",
-      kicker: "manifesto",
-      title: "倒置宣言 · 4 個刻意倒置",
-    },
-  ],
+  // R168 W1 · /glossary DELETED · Z27 LEXICON ported to /audit §08 · 27 industry stats removed per Tim canary 3「使用者不是工程師」
   // R167 W1b · /signal-board DELETED · daily promise we don't keep per Agent P TIER B #7 + Tim canary 3「每個網頁滑不到底 · 大部分不必要」
   "/manifesto": [
     {
@@ -340,9 +324,9 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
       title: "親手跑一場 Monte Carlo 模擬",
     },
     {
-      href: "/glossary",
-      kicker: "glossary",
-      title: "27 種進階數據完整詞彙",
+      href: "/methodology",
+      kicker: "methodology",
+      title: "完整方法論白皮書 · sabermetric 指標 inline",
     },
     {
       href: "/founders",

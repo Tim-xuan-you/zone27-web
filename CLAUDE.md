@@ -190,6 +190,10 @@ ZONE 27 與 **BOTTOM 27**(Tim 的棒球手遊)是雙生品牌:
 
 ## 🗺️ 當前路由(v0.29 · **R164 NUCLEAR DELETE applied** · 2026-05-26 · ~48 visitor-discoverable post削)
 
+**R168 W1 削除 + port(1 route · Tim canary 3 continuing「使用者不是工程師」 enforcement):**
+- ❌ /glossary · per Agent P TIER A #4 · 471 lines · 27 industry stat 字典 = engineer-grammar dump · 5 Z27 LEXICON entries ported to /audit §08(NEW · 5 brand IP term definitions:PROVED · DIVERGED · PUSH · SAMPLE DEBT · RECEIPT)· 7 inbound refs swapped(/audit#proved + #diverged self-anchors · /faq + /learn → /methodology · /track-record + CalibrationProgressBar → /audit#section-08 · /roadmap body text → /audit §08)· Cmd-K + related-links entries removed
+- /about Chapter 01 THE PROBLEM compressed(5 paragraphs → 2 · removed redundancy with Chapter 00 PROLOGUE 4-bullet)
+
 **R167 W1 削除(2 routes · Tim canary 3 「每個網頁滑不到底」 escalation):**
 - ❌ /leaderboard · per Agent P TIER A #3 · ScarcityStrip + FounderPickForm + MemberUnlocksGrid redirect → /founders + /founders/ledger · Cmd-K entry removed
 - ❌ /signal-board · per Agent P TIER B #7 · daily promise we don't keep(同 /rewards Q4 vapor pattern · violates [[feedback-no-waiting-rule]])· Footer entry + Cmd-K entry removed

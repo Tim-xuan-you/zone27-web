@@ -61,36 +61,7 @@ export const COMMAND_ITEMS: CommandItem[] = [
     group: "入門",
     keywords: ["about", "story", "關於"],
   },
-  {
-    label: "用語表 · 27 stats + 5 Z27 LEXICON · 32 entries",
-    kicker: "/glossary",
-    path: "/glossary",
-    group: "入門",
-    keywords: [
-      "glossary",
-      "用語",
-      "用語表",
-      "stat",
-      "stats",
-      "lexicon",
-      "wrc+",
-      "woba",
-      "fip",
-      "babip",
-      "ops",
-      "whip",
-      "sample debt",
-      "proved",
-      "diverged",
-      "z27 lexicon",
-      "縮寫",
-      "字典",
-      "詞彙",
-      "看不懂",
-      "什麼意思",
-    ],
-  },
-
+  // R168 W1 · /glossary DELETED · Tim canary 3「使用者不是工程師」 · 27 industry stat 字典 = engineer-grammar dump · Z27 LEXICON 5 terms ported to /audit §08 · Cmd-K entry removed · per Agent P TIER A #4
   // ── 賽事 · 引擎 ────────────────────────────────────
   {
     label: "今日賽事板 · CPBL",

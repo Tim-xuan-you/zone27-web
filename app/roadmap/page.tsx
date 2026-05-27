@@ -46,7 +46,7 @@ const LOCKED: { quarter: string; items: RoadmapItem[] }[] = [
     items: [
       {
         title: "✓ SHIPPED · /track-record 公開戰績 ledger",
-        body: "2026-05-21 上線 · Bloomberg-terminal aesthetic · PROVED 跟 DIVERGED(定義見 /glossary Z27 LEXICON)等大列出 · 從 N=0 honest empty state 起跳。第一筆預定今晚收錄。",
+        body: "2026-05-21 上線 · Bloomberg-terminal aesthetic · PROVED 跟 DIVERGED(定義見 /audit §08 Z27 LEXICON)等大列出 · 從 N=0 honest empty state 起跳。第一筆預定今晚收錄。",
         evidenceHref: "/track-record",
         evidenceLabel: "/track-record",
       },

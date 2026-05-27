@@ -546,9 +546,9 @@ export default function AuditPage() {
                 /track-record
               </Link>
               {" "}— 每場引擎公開預測賽後實際結果(
-              <Link href="/glossary#proved" className="text-gold underline-offset-4 hover:underline">PROVED</Link>
+              <Link href="#proved" className="text-gold underline-offset-4 hover:underline">PROVED</Link>
               {" "}✓ /{" "}
-              <Link href="/glossary#diverged" className="text-gold underline-offset-4 hover:underline">DIVERGED</Link>
+              <Link href="#diverged" className="text-gold underline-offset-4 hover:underline">DIVERGED</Link>
               {" "}✕)等大列出 ·
               不刪、不修飾、不過濾。揭露哲學 = 文字理論;公開戰績 = 文字理論的物理產出。
             </P>
@@ -768,6 +768,62 @@ export default function AuditPage() {
               {" "}· 同 v0.2 simulator.ts 同 repo · 任何工程師可 fork
               · 30 分鐘理解 · per /methodology Section 04 ENGINE LINEUP。
             </P>
+          </ReportSection>
+
+          {/* ── 08 Z27 LEXICON · R168 W1 port from deleted /glossary · 5 brand
+              IP terms used across site · anchor targets for /audit#proved /
+              /audit#diverged / /audit#sample-debt / /audit#z27-lexicon。 */}
+          <ReportSection no="08" label="Z27 LEXICON">
+            <P>
+              5 ZONE 27 自有詞彙 · 在 /track-record · HeroLiveCard · /matches/[gameId] ·
+              /audit 各處出現 · canonical 定義於此。
+            </P>
+            <dl className="mt-6 space-y-5">
+              <div id="proved" className="border-l-2 border-gold/60 pl-4 scroll-mt-20">
+                <dt className="font-mono text-gold text-[10px] tracking-[0.35em] mb-1">
+                  PROVED · 引擎言中
+                </dt>
+                <dd className="text-mute text-sm leading-relaxed">
+                  賽前引擎指向的 favorite(winRate &gt; 50%)在實際比賽中獲勝 · gold ✓
+                  記入 <Link href="/track-record" className="text-gold underline-offset-4 hover:underline">/track-record</Link> ledger · 視覺權重等同 DIVERGED · 不過濾。
+                </dd>
+              </div>
+              <div id="diverged" className="border-l-2 border-loss/60 pl-4 scroll-mt-20">
+                <dt className="font-mono text-loss text-[10px] tracking-[0.35em] mb-1">
+                  DIVERGED · 引擎落空
+                </dt>
+                <dd className="text-mute text-sm leading-relaxed">
+                  賽前 favorite 在實際比賽中輸了 · loss ✕ 等大等亮列入 ledger · 永遠不刪 ·
+                  「方法公開」 的物理證據。
+                </dd>
+              </div>
+              <div className="border-l-2 border-line/60 pl-4">
+                <dt className="font-mono text-mute text-[10px] tracking-[0.35em] mb-1">
+                  PUSH · 平手或無 favorite
+                </dt>
+                <dd className="text-mute text-sm leading-relaxed">
+                  罕見 · 兩種:(a) 實際平局 ·(b) 引擎輸出 50/50 · verdict 二元之外的第三狀態。
+                </dd>
+              </div>
+              <div id="sample-debt" className="border-l-2 border-loss/40 pl-4 scroll-mt-20">
+                <dt className="font-mono text-loss/85 text-[10px] tracking-[0.35em] mb-1">
+                  SAMPLE DEBT · 樣本債
+                </dt>
+                <dd className="text-mute text-sm leading-relaxed">
+                  N &lt; 30 時 PROVED rate 受 sample bias 影響 · /track-record 顯示
+                  「樣本債警告」直到累積 N≥30。 Bill James 1985 sabermetrics 文化 · 不掩飾。
+                </dd>
+              </div>
+              <div className="border-l-2 border-gold/40 pl-4">
+                <dt className="font-mono text-gold/85 text-[10px] tracking-[0.35em] mb-1">
+                  RECEIPT · 引擎收據
+                </dt>
+                <dd className="text-mute text-sm leading-relaxed">
+                  賽後 Tim 親手截圖 + finalResult ingest · 觸發 /track-record ledger 新一行 ·
+                  Tim 一人手工 · 不自動化。
+                </dd>
+              </div>
+            </dl>
           </ReportSection>
 
           {/* ── FOOTER NOTE ───────────────────────── */}

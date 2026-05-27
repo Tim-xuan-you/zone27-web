@@ -141,9 +141,9 @@ export default function LearnPage() {
           </p>
 
           <ChapterFooter
-            cta="完整 27 個指標白話拆解 →"
-            href="/glossary"
-            note="ERA · WHIP · OPS · BABIP · wRC+ · 27 個指標都有聯盟均值 / 頂級對照"
+            cta="完整方法論白皮書 →"
+            href="/methodology"
+            note="ERA · WHIP · OPS · BABIP · wRC+ · sabermetric 指標 inline 解釋"
           />
         </Chapter>
 

@@ -105,10 +105,10 @@ export default function CalibrationProgressBar({
             statistically meaningful sample reached · per Bill James 1985
             convention(see{" "}
             <Link
-              href="/glossary"
+              href="/audit#section-08"
               className="text-gold/85 hover:text-gold underline-offset-4 hover:underline"
             >
-              /glossary Z27 LEXICON
+              /audit §08 Z27 LEXICON
             </Link>
             )。
           </>

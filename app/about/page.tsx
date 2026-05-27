@@ -160,27 +160,18 @@ export default function AboutPage() {
         </p>
       </Chapter>
 
-      {/* ── 01 THE PROBLEM ───────────────────────── */}
+      {/* ── 01 THE PROBLEM ─────────────────────────
+          R168 W2 compression · 5 paragraphs → 2 · PROLOGUE 已詳列 4 失敗形態 ·
+          此章 focus 為什麼這群球迷值得更好的場所 · 不重複 PROLOGUE。 */}
       <Chapter
         no="01"
         en="THE PROBLEM"
         zh="問題"
-        kicker="台灣棒球預測市場的三重失敗"
+        kicker="這群球迷值得一個更好的場所"
       >
         <p>
-          台灣的棒球預測市場,長期被三股勢力把持。
-        </p>
-        <p>
-          <strong className="text-gold">老牌大型平台</strong>用 30% 到 50%
-          的高額手續費剝奪預測創作者,介面停留在十年前的論壇格式,廣告閃爍如夜市霓虹。
-        </p>
-        <p>
-          <strong className="text-gold">免費社群論壇</strong>(PTT、Dcard、運彩版)
-          資訊雖然即時,但完全沒有產品化,看半天等於沒看,數據不可視覺化、不可比較、不可追蹤。
-        </p>
-        <p>
-          <strong className="text-gold">LINE 老師群組</strong>則是信任歸零的黑箱。
-          輸了刪文,贏了截圖,沒有人對自己的預測負責,也沒有任何透明的勝率紀錄。
+          PROLOGUE 4 失敗形態(LINE 老師 · 報馬仔 · 殺手 · 免費論壇)的共同問題:
+          沒有人對自己的預測負責 · 沒有透明的勝率紀錄 · 沒有產品化。
         </p>
         <p className="text-bone">
           我們認為這群熱愛棒球、追求精緻、相信數據的人 —— 值得一個更好的場所。

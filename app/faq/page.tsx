@@ -262,12 +262,8 @@ const CATEGORIES: Category[] = [
             <span className="font-mono text-gold mx-1">±2%</span>
             內。我們不宣稱「鐵口直斷」 — AI 給的是機率分布,不是必勝牌。
             背後的數學基礎請見{" "}
-            <Link href="/lab" className="text-gold underline-offset-4 hover:underline">
-              /lab 方法論
-            </Link>{" "}
-            與{" "}
-            <Link href="/glossary" className="text-gold underline-offset-4 hover:underline">
-              /glossary
+            <Link href="/methodology" className="text-gold underline-offset-4 hover:underline">
+              /methodology
             </Link>
             。
           </>
