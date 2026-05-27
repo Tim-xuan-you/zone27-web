@@ -173,9 +173,15 @@ Current pending (as of 2026-05-20 DAY 2 collapse):
 
 - **客群:** 會下注的 sports 迷(包括賭徒)· 不只純球迷
 - **Displacement target:** 玩運彩 / 報馬仔 / LINE 老師(維持初衷)
-- **差別:** 引擎永遠免費 · 不抽下注 · 不收明牌費 · 完整公開 model
+- **差別:**
+  - 引擎永遠免費(他們收明牌費)
+  - 不賣 tipster picks · 我們公開 engine sim 您自己看
+  - PROVED + DIVERGED 等大公開(他們輸了刪文)
+  - model 完整公開在 GitHub(他們黑箱)
+  - BLACK CARD 5% creator commission 業界最低(Substack 10% · OnlyFans 20% · YouTube 45%)
+- **不假裝:** 我們 BLACK CARD 抽 5% · 跟 LINE 老師 5-30% 抽傭結構同類 · 我們只是抽得少 · 不講「我們不抽傭」 = honest disclosure
 - **同類成功 displacement model:** Defector vs ESPN · Stratechery vs CNBC · Bloomberg Terminal vs 各券商 · Bill James vs MLB establishment
-- **Coverage:** Phase 1 CPBL · Phase 2 NBA + 未來 leagues · Tim 親手 curate · 不爬 gambling platforms
+- **Coverage:** Phase 1 CPBL · Phase 2 NBA + 未來 leagues · Tim 親手 curate · 不爬 gambling platforms · 我們自己不接受下注(我們不是賭場)
 
 ## 🏛️ 商業模式定錨
 

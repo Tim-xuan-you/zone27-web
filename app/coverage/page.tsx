@@ -175,7 +175,10 @@ export default function CoveragePage() {
               </span>
             </p>
             <p className="text-bone text-base leading-relaxed mb-6 max-w-2xl">
-              不同 玩運彩 / 報馬仔:<strong className="text-gold">引擎永遠免費 · 不抽下注 · 不收明牌費 · 完整公開 model + ledger</strong>。 您拿我們的資料自己決定下哪個 platform · ZONE 27 不參與下注。
+              不同 玩運彩 / 報馬仔 / LINE 老師:<strong className="text-gold">引擎永遠免費 · 不賣明牌(tipster picks)· PROVED + DIVERGED 等大公開 · model 完整公開在 GitHub</strong>。 您拿我們的資料自己決定下哪個 platform · ZONE 27 自己不接受下注(我們不是賭場)。
+            </p>
+            <p className="text-mute/85 text-sm leading-relaxed mb-6 max-w-2xl">
+              <strong className="text-bone">老實認:</strong> BLACK CARD 訂閱者寫文章賣 · ZONE 27 抽 5% commission · 跟 LINE 老師 5-30% / Substack 10% / OnlyFans 20% / YouTube 45% 抽傭結構同類 · 業界最低 50% · 不假裝「我們不抽傭」 = 假面 disclosure。
             </p>
             <div className="mb-6">
               <ArticleMeta readingMin={8} />
