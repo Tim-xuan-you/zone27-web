@@ -381,13 +381,41 @@ export default async function FoundersPage({
           · 引擎在真實 CPBL 賽事的 PROVED + DIVERGED ledger · N=1 至今 honest
         </p>
 
-        {/* Round 52 W-D · Agent 1 #4 fix · Founder voice block at buy line
-            · 之前 FROM THE FOUNDER 在 form 之後(R8 移)· 訪客 buy-decision
-            moment 沒看到 Tim voice · 加 present-tense first-person 120-word
-            block at hero · 直接上 BreakEvenCell 之前 · 同 Pinboard /
-            Stratechery「founder's voice on the buy line itself」 pattern · 不
-            轉 cold copy。 */}
-        <div className="mt-7 sm:mt-9 max-w-xl mx-auto bg-slate/30 border-l-2 border-gold/60 px-5 py-4 text-left">
+        {/* R170 W1 · FOUNDER DOUBT Pratfall surface · Tim 38th canary
+            「founder 自己都不會訂閱了」 = strongest possible Costly Signaling
+            per Aronson 1966 Pratfall Effect + Spence 1973 Signaling Theory ·
+            Defector $690K day-1 launch ZERO product worked because radical
+            transparency including founder doubt · publish-weakness 永遠不刪
+            iron rule · 1 explicit surface. */}
+        <div className="mt-7 sm:mt-9 max-w-xl mx-auto border-2 border-loss/40 bg-loss/5 px-5 py-4 text-left">
+          <p
+            lang="en"
+            className="font-mono text-loss/85 text-[10px] tracking-[0.4em] mb-3"
+          >
+            ⚓ FOUNDER DOUBT · 不藏的 Pratfall surface
+          </p>
+          <p className="text-bone text-[14px] sm:text-[15px] leading-relaxed mb-2">
+            2026-05-27 · Tim 自己 dogfood ZONE 27 後問:
+            「<strong className="text-loss/95">為什麼有人要訂閱?引擎免費 ·
+            我自己都不會訂閱了 · 使用免費的即可</strong>。」
+          </p>
+          <p className="text-mute/85 text-[13px] sm:text-[14px] leading-relaxed mb-2">
+            這是 founder 親自的 honest doubt · 我們選擇 publish 不藏。 答案不是
+            「加 paywall 強迫」 · 答案是 Defector / Stratechery / Bill James
+            Patreon pattern · paid tier = SUPPORT / IDENTITY 不是 feature unlock。
+            您訂閱 $2,700 lifetime · 不是 unlock 引擎(引擎永遠免費)· 是給
+            Tim 不再為 alternative model 工作 · 同 Kickstarter pledge / Patek
+            allocation / Defector day-1 $690K ZERO product launch model。
+          </p>
+          <p className="text-mute/70 text-[12px] leading-relaxed">
+            若您訂閱 = 您接受 SUPPORT model · 若您不訂閱 = 您 keep 用免費版 · 都 honest。
+            Per Aronson 1966 + Spence 1973 · founder doubt published = strongest
+            Costly Signaling 100× weaker than artificial confidence。
+          </p>
+        </div>
+
+        {/* Round 52 W-D · Agent 1 #4 fix · Founder voice block at buy line */}
+        <div className="mt-5 max-w-xl mx-auto bg-slate/30 border-l-2 border-gold/60 px-5 py-4 text-left">
           <p
             lang="en"
             className="font-mono text-gold/85 text-[10px] tracking-[0.4em] mb-3"

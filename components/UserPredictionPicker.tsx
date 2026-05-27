@@ -209,15 +209,15 @@ export default function UserPredictionPicker({
           物理 surface · 0 cash · 0 referral · 0 wallet · 預測 PROVED 累計
           可兌換實體獎品(底片 / 咖啡 / 沖洗 / 護照代辦折抵)。 */}
       <p className="font-mono text-mute/60 text-[9px] tracking-[0.25em] mt-3 leading-relaxed">
-        ▸ 0 cash · 0 referral · 0 wallet · 「您 vs 引擎 vs 實際」 三層 calibration
-        · 0 PII broadcast
+        ▸ 0 cash · 0 referral · 0 wallet · skill-based fantasy league prize
+        structure · 「您 vs 引擎 vs 實際」 三層 calibration · 0 PII broadcast
         <br />
         ▸ 累計 PROVED 預測 →{" "}
         <Link
-          href="/member/calibration"
+          href="/rewards"
           className="text-gold/80 hover:text-gold underline-offset-4 hover:underline transition-colors"
         >
-          /member/calibration 您的 epistemic mirror
+          /rewards 兌換實體獎品(底片 / 咖啡 / 沖洗 / 護照代辦)
         </Link>
       </p>
     </div>

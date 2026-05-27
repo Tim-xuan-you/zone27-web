@@ -62,6 +62,30 @@ export const COMMAND_ITEMS: CommandItem[] = [
     keywords: ["about", "story", "關於"],
   },
   // R168 W1 · /glossary DELETED · Tim canary 3「使用者不是工程師」 · 27 industry stat 字典 = engineer-grammar dump · Z27 LEXICON 5 terms ported to /audit §08 · Cmd-K entry removed · per Agent P TIER A #4
+  // R170 W1 · /rewards RESTORED · Tim 38th 同 mandate explicit endorse Q4 launch · R166 W1 削 reason(Q4 vapor)obsolete · revive with Cmd-K entry
+  {
+    label: "Rewards · PROVED 預測兌換實體獎品(底片 / 咖啡 / 沖洗)",
+    kicker: "/rewards",
+    path: "/rewards",
+    group: "入門",
+    keywords: [
+      "rewards",
+      "獎品",
+      "兌換",
+      "集點",
+      "底片",
+      "咖啡",
+      "沖洗",
+      "護照代辦",
+      "點數",
+      "proved",
+      "預測兌換",
+      "恆美",
+      "伶 Kopi",
+      "skill prize",
+      "fantasy league",
+    ],
+  },
   // ── 賽事 · 引擎 ────────────────────────────────────
   {
     label: "今日賽事板 · CPBL",

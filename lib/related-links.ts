@@ -544,7 +544,25 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
       title: "公開戰績 ledger · 此 annual report 的 metric 源頭",
     },
   ],
-  // R166 W1 · /rewards DELETED · Q4 vapor + Apple discipline + violated [[feedback-no-waiting-rule]] · per Agent P TIER A audit
+  // R170 W1 · /rewards RESTORED · Tim 38th 同 mandate explicit Q4 endorsement removes R166 W1 削 reason
+  "/rewards": [
+    {
+      href: "/matches",
+      kicker: "matches",
+      title: "今日賽事 · 您 prediction 源頭 · UserPredictionPicker 在這",
+    },
+    {
+      href: "/member/calibration",
+      kicker: "member/calibration",
+      title: "您 personal calibration mirror · PROVED rate breakdown",
+    },
+    {
+      href: "/audit",
+      kicker: "audit",
+      title: "Model Report · S05 PRE-COMMIT 同 rules-binding pattern",
+    },
+  ],
+  // R166 W1 · /rewards DELETED · then R170 W1 RESTORED per Tim explicit endorse
   // R165 W1 · /pricing/why DELETED R164 · swap to /annual/2026(Year 0 empty state ·
   // 同 transparency axis · 申請者可 audit Founders 27 真實狀態)。
   "/founders/apply": [
