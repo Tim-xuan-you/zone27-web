@@ -307,13 +307,13 @@ export default function Home() {
           </p>
         )}
 
-        {/* R150 W1 · Tim 9-fire same canary · 賽事討論室 hero pill same axis
-            as Founders 27 pill · viewport 1 永遠 visible · NOT buried · per
-            Tim explicit「(賽事討論室)到底在哪裡? 大家都可以看到? 在首頁?
-            簡易點擊?」 demand · BLACK CARD-gated brand IP 維持 per R148
-            6 constraints minimum-violation · per [[feedback-no-waiting-rule]]
-            ship NOW · per Tim 8-9 fire pattern reach apex 必須 hero-level
-            visibility 不再 inline strip。 */}
+        {/* Hero CTA row · single primary action = FOUNDERS 27 pill。 The
+            賽事討論室 hero pill was REMOVED(autonomous-iteration wave 1):
+            it was a competing CTA(Hick's Law)+ a dead-end to a BLACK CARD-
+            gated / not-yet-live thread + it LEAKED an internal「⏳ R148」token
+            to visitors。 per founder「版面太雜 / 操作更直覺」+ subtraction-first ·
+            most-recent canary trumps the older R148 14-fire。 討論室 still
+            reachable via Nav 💬(every page)+ /matches/[id]。 */}
         <p className="mt-6 sm:mt-8 flex flex-wrap items-center justify-center gap-3">
           <Link
             href="/founders"
@@ -326,17 +326,6 @@ export default function Home() {
             <span className="text-mute/60">/{FOUNDERS_TOTAL}</span>
             <span className="text-mute/60 mx-2">·</span>
             <span className="text-mute">NT$ 2,700/年</span>
-            <span className="text-gold/70 ml-2">→</span>
-          </Link>
-          <Link
-            href={`/matches/${todayMatches[0]?.id ?? "cpbl-260526-01"}#game-thread`}
-            className="inline-block px-5 py-2.5 border border-gold/40 hover:border-gold hover:bg-gold/5 transition-colors font-mono text-xs sm:text-sm tracking-[0.2em] tabular"
-            aria-label="賽事討論室 · BLACK CARD-gated · R148 NEW · scroll to game thread scaffold"
-          >
-            <span className="text-gold">💬 賽事討論室</span>
-            <span className="text-mute/60 mx-2">·</span>
-            <span className="text-bone">BLACK CARD</span>
-            <span className="text-loss/70 ml-2 text-[10px]">⏳ R148</span>
             <span className="text-gold/70 ml-2">→</span>
           </Link>
         </p>

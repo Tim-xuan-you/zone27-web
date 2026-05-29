@@ -468,7 +468,7 @@ export default async function FoundersPage({
         <p className="mt-2 max-w-xl mx-auto text-mute/70 text-[10px] sm:text-[11px] leading-relaxed text-center">
           完整定價邏輯 ·{" "}
           <Link
-            href="/founders#why-2700"
+            href="/founders#why-price-heading"
             className="text-gold/80 hover:text-gold underline decoration-mute/40 underline-offset-4 hover:decoration-gold transition-colors"
           >
             往下看 §定價推導 →

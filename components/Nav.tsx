@@ -12,7 +12,6 @@ type NavKey =
   | "matches"
   | "discuss"
   | "lab"
-  | "leaderboard"
   | "founders"
   | "about";
 
@@ -58,7 +57,6 @@ const NAV_ITEMS_STATIC: {
 }[] = [
   { key: "matches", href: "/matches", label: "賽事" },
   { key: "lab", href: "/lab", label: "實驗室", badge: "BETA" },
-  { key: "leaderboard", href: "/leaderboard", label: "27 之牆" },
   { key: "about", href: "/about", label: "關於" },
 ];
 

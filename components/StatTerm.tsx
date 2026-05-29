@@ -114,10 +114,10 @@ export default function StatTerm({
           </span>
         )}
         <Link
-          href={`/glossary#${def.slug}`}
+          href="/methodology"
           className="block font-mono text-gold/80 hover:text-gold text-[10px] tracking-[0.25em] pt-2 border-t border-line/60"
         >
-          讀完整定義 → /glossary
+          深入了解 → /methodology
         </Link>
       </span>
     </span>
