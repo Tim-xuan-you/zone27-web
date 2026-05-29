@@ -3,31 +3,48 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { createSupabaseBrowserClient } from "@/lib/supabase/browser";
-import { readPredictionsFromMeta, type UserPrediction } from "@/lib/predictions";
+import {
+  getMatchTally,
+  getMyPrediction,
+  submitPrediction,
+  type MarketTally,
+} from "@/lib/predictions-market";
 
-// ── ZONE 27 · User Prediction Picker ────────────────────
-// Round 31 W-W1 · Tim「使用者可以自己猜賽事?」 brand-IP-pure ship。
-// 3-way pick · saves to user_metadata.predictions(同 follows/notes
-// pattern · 0 DB migration)。 logged-in only · anonymous 顯示「→ 登入
-// 解鎖 您的 prediction」 CTA。
+// ── ZONE 27 · 進場預測 / Market Predict ─────────────────
+// The play-money prediction market mechanic, backed by the shared
+// `predictions` table (migration 0003) via SECURITY DEFINER RPCs.
 //
-// 設計:
-//   - 3 buttons inline:「我猜 [home]」 / 「我猜 [away]」 / 「不押」
-//   - 已 picked:顯示當前 pick 標記 + 「變更 ↓」 toggle
-//   - 賽後 finalResult 存在 · 加 verdict chip(✓ PROVED / ✕ DIVERGED / = PUSH)
+// Replaces the old user_metadata-based picker (Round 31 W-W1). Why the
+// rewrite (kept the same props, so it's drop-in on /matches/[gameId]):
+//   1. CROWD MARKET LINE. user_metadata can't aggregate across users;
+//      the shared table can → live「N 人進場 · X% 押主隊」crowd %.
+//   2. SECURITY. Writes go through submit_prediction RPC (RLS-locked),
+//      not a client-trusted user_metadata blob (closes the audit P1-C/D
+//      gap for predictions).
+//   3. INTEGRITY. One pick per match · IMMUTABLE (server-enforced) =
+//      先鎖後結 · anti-cheat. No "change my pick" after the fact.
+//   4. LEGAL. pick = home/away only · 0 money · 0 reward. The old
+//      "/rewards 兌換實體獎品(底片/咖啡)" link is REMOVED —
+//      predict→win→redeem-physical-goods is 變相賭博. This market is
+//      pure-virtual: your record feeds the PUBLIC ledger + 海選 ladder,
+//      never prizes.
+//
+// Degrades gracefully: anon → login CTA (still sees the public crowd
+// line); RPC error / table not yet applied → crowd line reads empty,
+// no crash.
 // ─────────────────────────────────────────────────────
 
 type Props = {
   matchId: string;
   homeName: string;
   awayName: string;
-  /** Pre-game engine pick(home/away ≥50% prob)· 用於「對照引擎」 framing */
+  /** Pre-game engine pick(home/away ≥50%)· 用於「對照引擎」 framing */
   engineHomePicked: boolean;
-  /** Final result if ingested · 控制 verdict chip 顯示 */
+  /** Final result if ingested · 控制 verdict 顯示 + 鎖進場 */
   finalWinner?: "home" | "away" | "tie" | null;
 };
 
-type Status = "loading" | "anonymous" | "ready";
+type Status = "loading" | "anonymous" | "open" | "locked";
 
 export default function UserPredictionPicker({
   matchId,
@@ -37,29 +54,31 @@ export default function UserPredictionPicker({
   finalWinner,
 }: Props) {
   const [status, setStatus] = useState<Status>("loading");
-  const [currentPick, setCurrentPick] = useState<UserPrediction | null>(null);
+  const [myPick, setMyPick] = useState<"home" | "away" | null>(null);
+  const [tally, setTally] = useState<MarketTally | null>(null);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     let cancelled = false;
     (async () => {
+      // Crowd line is public — load it regardless of auth.
+      const t = await getMatchTally(matchId);
+      if (!cancelled) setTally(t);
       try {
         const supabase = createSupabaseBrowserClient();
-        const { data: { session } } = await supabase.auth.getSession();
+        const { data } = await supabase.auth.getSession();
         if (cancelled) return;
-        if (!session) {
+        if (!data.session) {
           setStatus("anonymous");
           return;
         }
-        const meta = session.user.user_metadata as Record<string, unknown> | undefined;
-        const map = readPredictionsFromMeta(meta);
-        setCurrentPick(map[matchId] ?? null);
-        setStatus("ready");
-      } catch (e) {
+        const mine = await getMyPrediction(matchId);
         if (cancelled) return;
-        setError(e instanceof Error ? e.message : "unknown_error");
-        setStatus("anonymous");
+        setMyPick(mine);
+        setStatus(mine ? "locked" : "open");
+      } catch {
+        if (!cancelled) setStatus("anonymous");
       }
     })();
     return () => {
@@ -67,158 +86,166 @@ export default function UserPredictionPicker({
     };
   }, [matchId]);
 
-  const pick = async (choice: UserPrediction["pick"]) => {
+  const enter = async (pick: "home" | "away") => {
     setSaving(true);
     setError(null);
-    try {
-      const supabase = createSupabaseBrowserClient();
-      const { data: { session } } = await supabase.auth.getSession();
-      if (!session) {
-        setError("not_logged_in");
-        setSaving(false);
-        return;
-      }
-      const meta = (session.user.user_metadata as Record<string, unknown>) ?? {};
-      const existing = readPredictionsFromMeta(meta);
-      const newPred: UserPrediction = {
-        pick: choice,
-        ts: new Date().toISOString(),
-      };
-      const updated = { ...existing, [matchId]: newPred };
-      const { error: updateErr } = await supabase.auth.updateUser({
-        data: { ...meta, predictions: updated },
-      });
-      if (updateErr) {
-        setError(updateErr.message);
-        setSaving(false);
-        return;
-      }
-      setCurrentPick(newPred);
-      setSaving(false);
-    } catch (e) {
-      setError(e instanceof Error ? e.message : "unknown_error");
-      setSaving(false);
+    const res = await submitPrediction(matchId, pick);
+    if (res.ok) {
+      setMyPick(res.pick);
+      setStatus("locked");
+      const t = await getMatchTally(matchId); // refresh to include my pick
+      setTally(t);
+    } else if (res.reason === "already_predicted") {
+      const mine = await getMyPrediction(matchId);
+      setMyPick(mine);
+      setStatus(mine ? "locked" : "open");
+    } else if (res.reason === "not_logged_in") {
+      setStatus("anonymous");
+    } else {
+      setError("進場失敗 · 請重試,或到 /login 重新登入");
     }
+    setSaving(false);
   };
-
-  if (status === "loading") {
-    return (
-      <div className="mt-4 bg-slate/30 border border-line/40 px-4 py-3" aria-hidden="true">
-        <p className="font-mono text-mute/50 text-[10px] tracking-[0.3em]">
-          / YOUR PREDICTION · 載入中...
-        </p>
-      </div>
-    );
-  }
-
-  if (status === "anonymous") {
-    return (
-      <div className="mt-4 bg-slate/40 border border-gold/30 px-4 py-3">
-        <p className="font-mono text-gold/80 text-[10px] tracking-[0.35em] mb-2">
-          🎯 YOUR PREDICTION · 您自己也猜 · 對照引擎 + 實際
-        </p>
-        <p className="text-mute text-sm leading-relaxed mb-2">
-          純精神 prediction tracker · 0 money / 0 reward / 0 兌換 · 延伸您
-          personal calibration mirror 從「engine drift」 升「您 + engine + 實際」
-          三層。
-        </p>
-        <Link
-          href={`/login?next=${encodeURIComponent(`/matches/${matchId}`)}`}
-          className="inline-block px-4 py-2 bg-gold text-navy font-mono text-xs tracking-[0.3em] hover:bg-gold-soft transition-colors"
-        >
-          → 登入解鎖 prediction
-        </Link>
-      </div>
-    );
-  }
-
-  const myPick = currentPick?.pick;
-  const showVerdict = !!finalWinner && !!myPick && myPick !== "skip" && finalWinner !== "tie";
-  const myWon = showVerdict && myPick === finalWinner;
 
   return (
     <div className="mt-4 bg-gold/5 border border-gold/40 px-4 py-3">
       <div className="flex items-baseline justify-between flex-wrap gap-2 mb-3">
         <p className="font-mono text-gold text-[10px] tracking-[0.35em]">
-          🎯 YOUR PREDICTION
+          進場預測 · 市場
         </p>
-        {myPick && (
-          <p className="font-mono text-mute text-[10px] tracking-[0.25em] tabular">
-            您 picked · {new Date(currentPick!.ts).toLocaleDateString("en-CA")}
+        <span className="font-mono text-mute/60 text-[9px] tracking-[0.25em]">
+          點數玩法 · 0 金錢 · 押了不可改
+        </span>
+      </div>
+
+      {/* Crowd market line */}
+      <CrowdLine tally={tally} homeName={homeName} awayName={awayName} />
+
+      {/* Verdict when the game is final */}
+      {finalWinner && myPick && finalWinner !== "tie" && (
+        <p
+          className={`mt-3 font-mono text-sm tracking-[0.2em] ${
+            myPick === finalWinner ? "text-gold" : "text-loss/80"
+          }`}
+        >
+          {myPick === finalWinner ? "✓ 您 PROVED · 猜對了" : "✕ 您 DIVERGED · 猜錯了"}
+        </p>
+      )}
+
+      {/* Action zone */}
+      <div className="mt-3">
+        {status === "loading" && (
+          <p className="font-mono text-mute/50 text-[10px] tracking-[0.3em]">
+            載入中...
+          </p>
+        )}
+
+        {status === "anonymous" && (
+          <Link
+            href={`/login?next=${encodeURIComponent(`/matches/${matchId}`)}`}
+            className="inline-block px-4 py-2 bg-gold text-navy font-mono text-xs tracking-[0.3em] hover:bg-gold-soft transition-colors"
+          >
+            → 登入後進場預測
+          </Link>
+        )}
+
+        {status === "open" && !finalWinner && (
+          <div className="grid grid-cols-2 gap-2">
+            <PickButton
+              label={`押 ${homeName.slice(0, 5)}`}
+              mark={engineHomePicked ? "引擎同側" : "與引擎相反"}
+              disabled={saving}
+              onClick={() => enter("home")}
+            />
+            <PickButton
+              label={`押 ${awayName.slice(0, 5)}`}
+              mark={!engineHomePicked ? "引擎同側" : "與引擎相反"}
+              disabled={saving}
+              onClick={() => enter("away")}
+            />
+          </div>
+        )}
+
+        {status === "open" && finalWinner && (
+          <p className="font-mono text-mute/60 text-[10px] tracking-[0.25em]">
+            此場已結束 · 已無法進場(先鎖後結 · 防賽後補登)
+          </p>
+        )}
+
+        {status === "locked" && myPick && (
+          <p className="font-mono text-bone text-sm tracking-[0.15em]">
+            ✓ 您已進場:押{" "}
+            <span className="text-gold">
+              {myPick === "home" ? homeName : awayName}
+            </span>
+            <span className="text-mute/60 text-[10px] ml-2">· 已鎖定 · 不可改</span>
           </p>
         )}
       </div>
 
-      {showVerdict ? (
-        <div className="mb-3">
-          <p
-            className={`font-mono text-sm tracking-[0.2em] ${
-              myWon ? "text-gold" : "text-loss/80"
-            }`}
-          >
-            {myWon ? "✓ 您 PROVED · 猜對了" : "✕ 您 DIVERGED · 猜錯了"}
-          </p>
-          <p className="font-mono text-mute/70 text-[9px] tracking-[0.25em] mt-1">
-            您 vs 引擎 vs 實際 · 三層 mirror · 累積您{" "}
-            <Link
-              href="/member"
-              className="text-mute hover:text-gold underline-offset-4 hover:underline"
-            >
-              personal accuracy
-            </Link>
-          </p>
-        </div>
-      ) : myPick && finalWinner === "tie" ? (
-        <p className="font-mono text-mute text-sm tracking-[0.2em] mb-3">
-          = PUSH · 賽事平局 · 不計入您 accuracy
-        </p>
-      ) : null}
-
-      <div className="grid grid-cols-3 gap-2">
-        <PickButton
-          label={`我猜 ${homeName.slice(0, 4)}`}
-          mark={engineHomePicked ? "(engine同)" : "(engine反)"}
-          active={myPick === "home"}
-          disabled={saving}
-          onClick={() => pick("home")}
-        />
-        <PickButton
-          label={`我猜 ${awayName.slice(0, 4)}`}
-          mark={!engineHomePicked ? "(engine同)" : "(engine反)"}
-          active={myPick === "away"}
-          disabled={saving}
-          onClick={() => pick("away")}
-        />
-        <PickButton
-          label="不押"
-          mark="看戲"
-          active={myPick === "skip"}
-          disabled={saving}
-          onClick={() => pick("skip")}
-        />
-      </div>
-
       {error && (
-        <p className="font-mono text-loss text-[10px] tracking-[0.25em] mt-2">
+        <p
+          role="alert"
+          aria-live="polite"
+          className="font-mono text-loss text-[10px] tracking-[0.25em] mt-2"
+        >
           ⚠ {error}
         </p>
       )}
 
-      {/* Round 35 W-B · close loop · UserPredictionPicker → /rewards
-          ecosystem connection。 brand IP「skill-based fantasy league prize」
-          物理 surface · 0 cash · 0 referral · 0 wallet · 預測 PROVED 累計
-          可兌換實體獎品(底片 / 咖啡 / 沖洗 / 護照代辦折抵)。 */}
-      <p className="font-mono text-mute/60 text-[9px] tracking-[0.25em] mt-3 leading-relaxed">
-        ▸ 0 cash · 0 referral · 0 wallet · skill-based fantasy league prize
-        structure · 「您 vs 引擎 vs 實際」 三層 calibration · 0 PII broadcast
-        <br />
-        ▸ 累計 PROVED 預測 →{" "}
+      <p className="font-mono text-mute/55 text-[9px] tracking-[0.25em] mt-3 leading-relaxed">
+        ▸ 您的預測自動進公開戰績 · 準度累積到{" "}
         <Link
-          href="/rewards"
+          href="/calibration"
           className="text-gold/80 hover:text-gold underline-offset-4 hover:underline transition-colors"
         >
-          /rewards 兌換實體獎品(底片 / 咖啡 / 沖洗 / 護照代辦)
+          /calibration
         </Link>
+        (海選排行榜即將上線)· 0 金錢 · 0 兌獎 · 純精神預測。
+      </p>
+    </div>
+  );
+}
+
+// ── Crowd market line ───────────────────────────────────
+function CrowdLine({
+  tally,
+  homeName,
+  awayName,
+}: {
+  tally: MarketTally | null;
+  homeName: string;
+  awayName: string;
+}) {
+  if (!tally || tally.total === 0 || tally.homePct === null) {
+    return (
+      <p className="font-mono text-mute/60 text-[10px] tracking-[0.25em]">
+        群眾市場 · 尚無人進場 · 您可以是第一個 ▸
+      </p>
+    );
+  }
+  const homePct = tally.homePct;
+  const awayPct = 100 - homePct;
+  return (
+    <div
+      role="img"
+      aria-label={`群眾市場線 · ${homePct}% 押 ${homeName} · ${awayPct}% 押 ${awayName} · 共 ${tally.total} 人進場`}
+    >
+      <div className="flex items-baseline justify-between mb-1.5 font-mono text-[10px] tracking-[0.22em] tabular gap-2 flex-wrap">
+        <span className="text-gold">
+          {homePct}% 押 {homeName.slice(0, 4)}
+        </span>
+        <span className="text-mute/70">{tally.total} 人進場</span>
+        <span className="text-mute">
+          {awayPct}% 押 {awayName.slice(0, 4)}
+        </span>
+      </div>
+      <div className="relative h-2 flex overflow-hidden rounded-full bg-line/50">
+        <div className="h-full bg-gold/80" style={{ width: `${homePct}%` }} />
+        <div className="h-full bg-mute/40" style={{ width: `${awayPct}%` }} />
+      </div>
+      <p className="mt-1 font-mono text-mute/50 text-[8px] tracking-[0.3em] text-center">
+        群眾市場線 · CROWD LINE
       </p>
     </div>
   );
@@ -227,13 +254,11 @@ export default function UserPredictionPicker({
 function PickButton({
   label,
   mark,
-  active,
   disabled,
   onClick,
 }: {
   label: string;
   mark: string;
-  active: boolean;
   disabled: boolean;
   onClick: () => void;
 }) {
@@ -242,12 +267,7 @@ function PickButton({
       type="button"
       onClick={onClick}
       disabled={disabled}
-      aria-pressed={active}
-      className={`px-3 py-2.5 min-h-[44px] border font-mono text-[11px] tracking-[0.2em] transition-colors disabled:opacity-50 disabled:cursor-not-allowed ${
-        active
-          ? "border-gold bg-gold text-navy"
-          : "border-gold/40 text-bone hover:border-gold hover:bg-gold/10"
-      }`}
+      className="px-3 py-2.5 min-h-[44px] border border-gold/40 text-bone hover:border-gold hover:bg-gold/10 font-mono text-[11px] tracking-[0.2em] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
     >
       <span className="block">{label}</span>
       <span className="block text-[8px] opacity-60 mt-1 tracking-[0.15em]">
