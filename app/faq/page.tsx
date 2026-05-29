@@ -106,14 +106,14 @@ const CATEGORIES: Category[] = [
         ),
       },
       {
-        q: "0 commission · 那怎麼賺錢?",
+        q: "不抽下注佣金 · 那怎麼賺錢?",
         id: "no-commission",
         a: (
           <>
             <strong className="text-bone">Founders 27</strong> NT$ 2,700/365 天 × 270 名 =
-            NT$ 729,000 一次性(目前 263 待認領)。
+            NT$ 729,000 / 年(目前 263 待認領)。
             <strong className="text-bone">BLACK CARD</strong> NT$ 500/31 天 × N 訂戶
-            (0 auto-renewal · 每季 explicit click)。
+            (0 auto-renewal · 每 31 天 explicit click)。
             不抽傭 · 不接 ad · 不接 sponsor · 不接 affiliate · 同 Stratechery / Defector / Bill James
             訂閱 model。
           </>
@@ -131,11 +131,11 @@ const CATEGORIES: Category[] = [
         a: (
           <>
             <strong className="text-bone">Founders 27</strong> 是限量 270 個名額的
-            「一次性 NT$ 2,700/365 天會員」。
+            「NT$ 2,700/365 天 年度會員」。
             <strong className="text-bone">BLACK CARD</strong> 是 31-day pass NT$ 500/31 天
             (March-November · 240 場 + 季後賽 · ≈ NT$ 6/場 · LIVE manual ECPay ·
-            0 auto-renewal · per /integrity rule #13)。創始會員額外好處:creator 抽成 0%
-            (BLACK CARD creators 5%)、AI 模型優先試用、實體招待。完整對照請見{" "}
+            0 auto-renewal · per /integrity rule #13)。創始會員額外好處:creator 抽成 5%
+            (BLACK CARD creators 10%)、AI 模型優先試用、實體招待。完整對照請見{" "}
             <Link href="/founders" className="text-gold underline-offset-4 hover:underline">
               /founders
             </Link>
@@ -148,8 +148,8 @@ const CATEGORIES: Category[] = [
         a: (
           <>
             因為這是「品牌共建價」,不是「永久市場價」。270 位創始會員會永遠是 ZONE 27
-            的傳教士;後續黑金會員 5-6 個 CPBL 季就 break-even(NT$ 500 × 5-6 ≈ NT$ 2,700 vs Founders 27 NT$ 2,700/365 天免費)。
-            創始者扛了「品牌還沒驗證」的風險,所以拿一輩子的優惠回報。
+            的傳教士;後續黑金會員一年約 12 期 × NT$ 500 = NT$ 6,000 · Founders 27 NT$ 2,700/年(含 BLACK CARD)等於省 55%。
+            創始者扛了「品牌還沒驗證」的風險,所以拿每年續訂價永遠不漲的回報。
           </>
         ),
       },
@@ -158,7 +158,7 @@ const CATEGORIES: Category[] = [
         a: (
           <>
             <span className="font-mono text-gold">BLACK CARD CPBL 季票 LIVE manual ECPay</span>
-            (NT$ 500/31 天 · 每季 explicit click + manual transfer · 0 auto-renewal)。
+            (NT$ 500/31 天 · 每 31 天 explicit click + manual transfer · 0 auto-renewal)。
             <span className="font-mono text-gold mx-1">Founders 27 payment infra 就緒後開放</span>
             (milestone-triggered · 不綁日期)。 在此之前,加入等候名單 =
             排隊優先權,<strong className="text-bone">完全免費</strong>,
@@ -215,8 +215,9 @@ const CATEGORIES: Category[] = [
         q: "還會有第二批 270 個創始會員嗎?",
         a: (
           <>
-            <strong className="text-gold">不會。</strong> 當 #270 被認領的那一秒,
-            Founders 27 就永久關閉。這是承諾,寫在{" "}
+            <strong className="text-gold">2026 班不會。</strong> 當 #270 被認領的那一秒,
+            2026 founding class 永久關閉 · 您再也無法成為 2026 班的一員。 但 2027 起每年 1/1
+            開放全新一班 270 名(定價不變)· 1st Edition 永遠只有 2026 這批。 寫在{" "}
             <Link href="/about" className="text-gold underline-offset-4 hover:underline">
               /about
             </Link>
@@ -238,9 +239,9 @@ const CATEGORIES: Category[] = [
         a: (
           <>
             <strong className="text-bone">沒 downline 結構。</strong>{" "}
-            0 推薦獎金 · 0 多層抽佣 · 0 業績 quota · 0 招募下線 · 限量 270 · 一次性 ·
-            #270 認領那秒永久關閉。 BLACK CARD 5% 抽成是 platform fee(類 Stripe / Spotify)
-            · Founders 27 0%。
+            0 推薦獎金 · 0 多層抽佣 · 0 業績 quota · 0 招募下線 · 限量 270 / 年 ·
+            #270 認領那秒該年班別永久關閉。 BLACK CARD 10% 抽成是 platform fee(類 Stripe / Spotify)
+            · Founders 27 5%。
           </>
         ),
       },

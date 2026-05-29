@@ -118,7 +118,7 @@ const NEVER_COVER: { name: string; reason: string }[] = [
   },
   {
     name: "玩運彩 playsport.cc/forum",
-    reason: "Taiwan 最大運彩討論區 · tipster ranking + 牌支戰績 + 「老師」生態 · 跟 ZONE 27 brand IP 結構相反(我們 0 % 創作者抽成 · 不販售明牌 · 不排 tipster)· Round 30 加 · per [[zone27-coverage-philosophy]]「reject gambling-platform scraping」",
+    reason: "Taiwan 最大運彩討論區 · tipster ranking + 牌支戰績 + 「老師」生態 · 跟 ZONE 27 brand IP 結構相反(我們不抽下注 · 不販售明牌 · 不排 tipster)· Round 30 加 · per [[zone27-coverage-philosophy]]「reject gambling-platform scraping」",
   },
   {
     name: "報馬仔 fengyuncai.com",

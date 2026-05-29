@@ -557,7 +557,7 @@ repeat 10,000 times → aggregate
           </li>
           <li className="flex gap-3 items-baseline">
             <span className="font-mono text-gold/70 text-[10px] tracking-[0.25em]">▸</span>
-            <span className="flex-1">Founders 27 終身 lock 未來所有 lenses · 真實「無限解鎖」 value · 同 lifetime brand promise</span>
+            <span className="flex-1">Founders 27 解鎖未來所有 lenses · 續訂價永鎖(NT$ 2,700/年)· 真實「無限解鎖」 value</span>
           </li>
         </ul>
 

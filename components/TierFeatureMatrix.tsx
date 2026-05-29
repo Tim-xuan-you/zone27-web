@@ -95,7 +95,7 @@ const FEATURES: Feature[] = [
   },
   {
     label: "Founders 27 預售優先通知",
-    detail: "270 個 lifetime seats · FREE TIER first dibs",
+    detail: "270 個 founding seats · FREE TIER first dibs",
     unlock: {
       anonymous: "locked",
       free: "unlocked",
@@ -144,8 +144,8 @@ const FEATURES: Feature[] = [
     },
   },
   {
-    label: "終身永久 access(無 auto-renewal)",
-    detail: "Founders 27 一次性買斷 · 月卡 / 季票永遠不會綁您",
+    label: "年度 access · 續訂價永遠鎖定(無 auto-renewal)",
+    detail: "Founders 27 NT$ 2,700/年 手動續訂 · 月卡 / 季票永遠不會自動綁您",
     unlock: {
       anonymous: "locked",
       free: "locked",
@@ -215,8 +215,8 @@ const TIER_META: Record<
   "black-card": {
     label: "BLACK CARD",
     en: "BLACK CARD",
-    price: "NT$ 1,500",
-    priceUnit: "每季 · 手動 ECPay · 0 auto-renew",
+    price: "NT$ 500",
+    priceUnit: "每 31 天 · 手動 ECPay · 0 auto-renew",
     href: "/membership/black-card",
     accent: "text-bone",
   },
@@ -224,7 +224,7 @@ const TIER_META: Record<
     label: "Founders 27",
     en: "FOUNDERS 27",
     price: "NT$ 2,700",
-    priceUnit: "一次性 · 限量 270 · 終身",
+    priceUnit: "/ 年 · 限量 270 · 每年 1/1",
     href: "/founders",
     accent: "text-gold",
   },

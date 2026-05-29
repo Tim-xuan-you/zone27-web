@@ -342,7 +342,7 @@ export default function MemberDashboardPreview() {
           label="Phase 2 · TapPay / ECPay setup 後"
           status="BLACK CARD LIVE"
           tone="exploring"
-          body="每季 ECPay 手動 NT$ 1,500/season 接入 · BLACK CARD 會員可在 /matches/[gameId] 賽事頁討論室發言 / 發表 prediction / 創作者抽成 5%(per /membership Creator Permissions FAQ · 0 auto-renewal per /integrity rule #13 binding)。"
+          body="每 31 天 ECPay 手動 NT$ 500/31 天 接入 · BLACK CARD 會員可在 /matches/[gameId] 賽事頁討論室發言 / 發表 prediction / 創作者抽成 10%(per /membership Creator Permissions FAQ · 0 auto-renewal per /integrity rule #13 binding)。"
         />
         <TimelineRow
           label="Phase 3 · 2026 Q4+(規劃中)"

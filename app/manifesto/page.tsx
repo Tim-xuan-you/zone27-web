@@ -165,7 +165,7 @@ export default function ManifestoPage() {
               <Link href="/founders" className="text-gold hover:underline underline-offset-4">
                 Founders 27
               </Link>{" "}
-              的價值是 #001 ~ #270 終身編號 + 創辦人親手 onboarding +
+              的價值是 #001 ~ #270 創始編號 + 創辦人親手 onboarding +
               建立期社群的位置 —{" "}
               <strong className="text-bone">這些東西 fork 不走</strong>。
               算法本來就沒有可藏的價值,硬藏 = 假裝有秘密 = 對訪客撒謊
@@ -215,7 +215,7 @@ export default function ManifestoPage() {
               <strong className="text-bone">這個倒置讓我們失去什麼:</strong>{" "}
               我們永遠不會有「ARR 50x 線性成長」的故事可以講給創投。
               收入上限 = 270 位 Founders × NT$ 2,700 + N 位 BLACK CARD ×
-              NT$ 1,500/season。這是一個{" "}
+              NT$ 500/31 天。這是一個{" "}
               <Link href="/about" className="text-gold hover:underline underline-offset-4">
                 俱樂部規模的事業
               </Link>
@@ -229,7 +229,7 @@ export default function ManifestoPage() {
               這兩件事不能反過來:免費身分 + 收費工具 = 我們變成普通 SaaS。
             </P>
             {/* Round 29 Wave 1 · MLM disambiguation brand defense.
-                台灣訪客看到「限量 270 + 親手 onboard + 終身 + LINE 群 +
+                台灣訪客看到「限量 270 + 親手 onboard + 年度 + LINE 群 +
                 未來實體聚會」很容易 surface-level 聯想到 MLM/安麗式
                 「限量早期合夥人」框架 · 但 ZONE 27 經濟結構跟 MLM 完全
                 相反。先前這個 disambiguation 埋在 /founders + /audit +
@@ -246,7 +246,7 @@ export default function ManifestoPage() {
               <P className="!mb-3">
                 <strong className="text-bone">這結構長得像 MLM 嗎?</strong>{" "}
                 表面有幾個 visual cue 確實會被聯想:限量名額(270)·
-                終身會員 · Tim 親手 onboard · 未來 LINE 群 + 實體聚會。
+                年度會員 · Tim 親手 onboard · 未來 LINE 群 + 實體聚會。
                 但 ZONE 27 的經濟結構跟 MLM / 安麗式平台
                 <strong className="text-bone">完全相反</strong>。
               </P>
@@ -261,7 +261,7 @@ export default function ManifestoPage() {
                 </li>
                 <li>
                   <span className="text-loss/80">✕</span> MLM 業績 quota →{" "}
-                  <span className="text-bone">Founders 27 一次性付款 · 沒 quota</span>
+                  <span className="text-bone">Founders 27 年度付款 · 沒 quota</span>
                 </li>
                 <li>
                   <span className="text-loss/80">✕</span> MLM 強制庫存 →{" "}
@@ -273,14 +273,14 @@ export default function ManifestoPage() {
                 </li>
                 <li>
                   <span className="text-loss/80">✕</span> MLM 無限招募下線 →{" "}
-                  <span className="text-bone">限量 270 · 一次性 · #270 認領那秒永久關閉</span>
+                  <span className="text-bone">限量 270 / 年 · #270 認領那秒當年班別關閉</span>
                 </li>
               </ul>
               <P className="text-mute/70 !mb-0 mt-4 text-sm">
-                BLACK CARD 創作者抽成 5% = platform fee(類 Stripe / Spotify) ·
-                Founders 27 創作者抽成 0%(把「未來不抽您佣」當 perk · 不是 referral kick-back)。
+                BLACK CARD 創作者抽成 10% = platform fee(類 Stripe / Spotify) ·
+                Founders 27 創作者抽成 5%(BLACK CARD 的一半 · 不是 referral kick-back)。
                 限量 270 是 <strong className="text-bone">Costly Signaling</strong> · 不是招募階梯。
-                終身會員是
+                創始會員是
                 <strong className="text-bone">扛了品牌風險的早期支持者的補償</strong> ·
                 不是未來業績的領先指標。
               </P>

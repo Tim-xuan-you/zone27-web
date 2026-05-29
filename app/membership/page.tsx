@@ -15,7 +15,7 @@ import { getWaitlistCount } from "@/lib/waitlist-stats";
 export const metadata: Metadata = {
   title: "ZONE 27 會員制 · 3 種方案 · FREE / BLACK CARD / Founders 27(Costco 模式)",
   description:
-    "ZONE 27 3 種會員方案 · 對應 Costco 3-tier(非會員 / Gold Star / Executive 黑卡)。 FREE 全引擎 access · BLACK CARD NT$ 500/季 5% 抽傭 · Founders 27 NT$ 2,700 一次性終身 0% 抽傭。",
+    "ZONE 27 3 種會員方案 · 對應 Costco 3-tier(非會員 / Gold Star / Executive 黑卡)。 FREE 全引擎 access · BLACK CARD NT$ 500/31 天 10% 抽傭 · Founders 27 NT$ 2,700/365 天 5% 抽傭。",
 };
 
 // R40 perf agent finding · /membership pulls from static lib/founders-
@@ -31,7 +31,7 @@ export const revalidate = 3600;
 //
 // 本頁分工 · 跟 /founders 形成互補:
 //   /membership = ladder 全景 · 4 個 tier 平等視覺權重 · 從免費到 NT$ 2,700
-//   /founders   = Founders 27 deep dive · 270 限量 · NT$ 2,700 終身銷售頁
+//   /founders   = Founders 27 deep dive · 270 限量 · NT$ 2,700/365 天銷售頁
 //
 // Nav「會員」pill → /membership(inclusive 入口)
 // Mobile sticky CTA + 首頁 pill → /founders(paid-focused conversion)
@@ -73,8 +73,8 @@ const TIERS: Tier[] = [
     name: "BLACK CARD",
     en: "BLACK CARD · 一般會員",
     price: "NT$ 500",
-    priceNote: "每月 · 對應 Costco Gold Star · 手動 ECPay · 0 auto-renewal",
-    desc: "月訂會員。 跟 Costco Gold Star 一樣 · 進得去 + 一般會員 perks。 可寫文章來賣(您拿 90% · Tim 抽 10% · 同 Substack 10% 平 · 業界中段)。",
+    priceNote: "每 31 天 · 對應 Costco Gold Star · 手動 ECPay · 0 auto-renewal",
+    desc: "31 天通行會員。 跟 Costco Gold Star 一樣 · 進得去 + 一般會員 perks。 可寫文章來賣(您拿 90% · Tim 抽 10% · 同 Substack 10% 平 · 業界中段)。",
     // Round 55 W-C · Agent C #2 fix · 「Everything in [prev tier]+」 stacking
     // pattern · 同 Defector + Plausible + Patreon premium-tier 模式 · 訪客
     // visual rhythm 簡化 · card height -40% · price 變 focal point · 不再
@@ -97,7 +97,7 @@ const TIERS: Tier[] = [
     desc: "365 天訂閱創始會員。 跟 Costco Executive 黑卡一樣 · 最高 tier · 額外 perks(寫文章 5% 抽傭(BLACK CARD 一半)· Tim 親手 onboard · 編號鑲入身分)。 每年 1/1 開放新 270 個 seats(同 Patek 1996/1997 annual collection)· existing 訂戶享 1/1 24h pre-access renew。",
     // Round 55 W-C · Agent C #2 fix · 「Everything in [prev tier]+」 stacking
     // · 同 BLACK CARD pattern · 訪客 1-line 即知 Founders 27 包含所有
-    // BLACK CARD value + lifetime + creator抽成 0% premium。
+    // BLACK CARD value + 365 天 + creator 抽成 5% premium。
     perks: [
       "Everything in BLACK CARD · 每 365 天 renew",
       "創作者抽成 5%(BLACK CARD 一半 · 寫文章您拿 95%)",
@@ -108,8 +108,8 @@ const TIERS: Tier[] = [
     ],
     cta: { label: "→ Founders 27 詳情頁", href: "/founders" },
     // Round 55 W-A · Agent C anchoring fix · headline product 物理 anchor ·
-    // gold-outlined visual dominance · 270 唯一 ceiling · 一次性 lifetime ·
-    // 9-month break-even math · 同 Patreon premium / Defector 「Accomplice」
+    // gold-outlined visual dominance · 270/年 ceiling · 365 天 annual ·
+    // 省 55% vs BLACK CARD 12 個月 · 同 Patreon premium / Defector 「Accomplice」
     // 模式 anchor at top tier · decoy effect for BLACK CARD month feel cheap。
     highlight: true,
   },
@@ -146,7 +146,7 @@ export default async function MembershipPage({
             ZONE 27 <span className="text-gold">會員制</span>
           </h1>
           <p className="mt-8 max-w-2xl mx-auto text-mute text-base leading-relaxed">
-            3 種方案 · 對應 Costco 3-tier · 從免費到 NT$ 2,700 終身 ·
+            3 種方案 · 對應 Costco 3-tier · 從免費到 NT$ 2,700 / 年 ·
             <span className="text-bone"> 任時自由升級</span>
             {" · "}
             <span className="text-gold">永遠停在當前層也可以 · 我們不催</span>。
@@ -165,8 +165,8 @@ export default async function MembershipPage({
               </div>
               <div>
                 <p className="font-mono text-mute text-[9px] tracking-[0.3em] mb-2">COSTCO GOLD STAR</p>
-                <p className="text-bone leading-relaxed">一般付費月卡 · 標準 perks · 10% 抽傭</p>
-                <p className="text-gold mt-2 text-xs">= ZONE 27 BLACK CARD(NT$ 500/月)</p>
+                <p className="text-bone leading-relaxed">一般付費會員 · 標準 perks · 10% 抽傭</p>
+                <p className="text-gold mt-2 text-xs">= ZONE 27 BLACK CARD(NT$ 500/31 天)</p>
               </div>
               <div>
                 <p className="font-mono text-mute text-[9px] tracking-[0.3em] mb-2">COSTCO EXECUTIVE 黑卡</p>
@@ -236,13 +236,13 @@ export default async function MembershipPage({
             />
             <PermLine
               tier="BLACK CARD · Q3+"
-              status="✅ 5%"
-              detail="可發文 / 推薦 · 5% 抽成(業界 30-50% 降維)"
+              status="✅ 10%"
+              detail="可發文 / 推薦 · 10% 抽成(業界 30-50% 降維)"
             />
             <PermLine
               tier="Founders 27 · 預售中"
-              status="✅ 0%"
-              detail="BLACK CARD 全權限 + 0% 抽成終身"
+              status="✅ 5%"
+              detail="BLACK CARD 全權限 + 5% 抽成(BLACK CARD 一半)"
             />
             <PermLine
               tier="FREE TIER 投稿"
@@ -294,7 +294,7 @@ export default async function MembershipPage({
             </p>
             <p>
               我們<strong className="text-bone">不</strong>連接莊家 · <strong className="text-bone">不</strong>
-              處理賠率 · <strong className="text-bone">不</strong>抽下注佣金。 BLACK CARD 5% / Founders 27 0%
+              處理賠率 · <strong className="text-bone">不</strong>抽下注佣金。 BLACK CARD 10% / Founders 27 5%
               抽的是<strong className="text-bone">會員之間預測訂閱費</strong>,不是賭客下注佣金。
             </p>
             <p className="font-mono text-mute/80 text-[10px] tracking-[0.3em] leading-relaxed">
@@ -327,7 +327,7 @@ export default async function MembershipPage({
             <span className="font-mono text-gold tabular">{FOUNDERS_REMAINING}</span>{" "}
             席剩 · 共 {FOUNDERS_TOTAL} 名 · NEXT IS{" "}
             <span className="font-mono text-gold tabular">{formatBadge(FOUNDERS_NEXT)}</span>。
-            6 大權益 + 9 個月 break-even · 完整定價邏輯 · 三層 tier 比較表 · INLINE FAQ。
+            6 大權益 + 省 55% vs BLACK CARD · 完整定價邏輯 · 三層 tier 比較表 · INLINE FAQ。
           </p>
           <Link
             href="/founders"

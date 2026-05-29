@@ -334,7 +334,7 @@ export default function LabPage() {
               引擎免費 · 270 個位置不免費 →
             </h3>
             <p className="font-mono text-mute/70 text-[10px] tracking-[0.25em]">
-              NT$ 2,700 一次性 · 終身 · 限量
+              NT$ 2,700/年 · 每年 1/1 · 限量 270
             </p>
           </Link>
         </div>

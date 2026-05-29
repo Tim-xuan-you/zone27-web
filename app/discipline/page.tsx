@@ -240,9 +240,9 @@ export default function DisciplinePage() {
                 跟 Costco 一樣 — 「賣會員身分,不賣商品本身」。
               </Item>
               <Item label="自設創作者抽成上限">
-                Founders 27 創作者 0% · BLACK CARD 5% · vs 業界 30-50%。
+                Founders 27 創作者 5% · BLACK CARD 10% · vs 業界 30-50%。
                 Costco 14% 上限 = 把客戶利益放在毛利之前。
-                ZONE 27 同樣邏輯 · 但更狠(0%)。
+                ZONE 27 同樣邏輯 · 但更狠(5%)。
               </Item>
               <Item label="不打廣告">
                 沒 Google Ads · 沒 FB Ads · 沒 retargeting(per{" "}

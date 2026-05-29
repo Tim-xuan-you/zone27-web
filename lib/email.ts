@@ -153,8 +153,8 @@ function buildHtmlBody({
 <ul style="margin:0 0 24px 0;padding-left:22px;color:#8A93A8;font-size:14px;line-height:1.8;">
 <li>付款系統 <span style="color:#F5F2EA;">payment infra 就緒後</span>啟動(milestone-triggered · 手工銀行轉帳 + TapPay)</li>
 <li>正式開放預訂時 · 您會收到 <span style="color:#D4AF37;">24 小時優先取得連結</span></li>
-<li><span style="color:#F5F2EA;">NT$ 2,700</span> 一次性 · 終身免費 · 永不調漲</li>
-<li>0% 創作者抽成 · 編號 <span style="color:#F5F2EA;font-family:${mono};">#${pos}</span>(目前序位 · 正式開放時依付款順序確定)</li>
+<li><span style="color:#F5F2EA;">NT$ 2,700</span> / 365 天 · 每年 1/1 續訂 · 價格永不調漲</li>
+<li>5% 創作者抽成 · 編號 <span style="color:#F5F2EA;font-family:${mono};">#${pos}</span>(目前序位 · 正式開放時依付款順序確定)</li>
 </ul>
 
 <p style="margin:0 0 16px 0;color:#8A93A8;font-size:14px;line-height:1.7;">我不寄行銷信 · 下一封信只在 Q3 預訂正式啟動時寄。任何問題直接 <span style="color:#D4AF37;">reply 此 email</span> · 我每天看至少 2 次。</p>
@@ -200,8 +200,8 @@ ${FOUNDERS_TOTAL} 個席位 · 您是第 ${queuePos} 位早到。
 接下來:
 - 付款系統 payment infra 就緒後啟動(milestone-triggered · 手工銀行轉帳 + TapPay)
 - 正式開放預訂時 · 您會收到 24 小時優先取得連結
-- NT$ 2,700 一次性 · 終身免費 · 永不調漲
-- 0% 創作者抽成 · 編號 #${pos} 目前序位
+- NT$ 2,700 / 365 天 · 每年 1/1 續訂 · 價格永不調漲
+- 5% 創作者抽成 · 編號 #${pos} 目前序位
 
 我不寄行銷信 · 下一封信只在 Q3 預訂正式啟動時寄。
 任何問題直接 reply · 我每天看至少 2 次。
@@ -285,7 +285,7 @@ export async function sendFoundersApplicationReceived({
 <li><span style="color:#F5F2EA;">1-3 business days</span> 內 · Tim 親手 review 您的申請</li>
 <li>通過 → Tim email 您銀行轉帳資訊 + <span style="color:#D4AF37;">您 24 小時 window</span> 完成轉帳</li>
 <li>未通過 → Tim 也會 email 解釋原因 · per <a href="https://zone27-web.vercel.app/founders/ledger" style="color:#D4AF37;text-decoration:none;">/founders/ledger</a> 5-step allocation rules</li>
-<li>轉帳完成 → 您 Founder ID #008-#270 鎖定 · 永久 lifetime access · NT$ 2,700 永不調漲</li>
+<li>轉帳完成 → 您 Founder ID #008-#270 鎖定 · 365 天 access · 每年 1/1 續訂價永不調漲</li>
 </ol>
 
 <p style="margin:0 0 16px 0;color:#8A93A8;font-size:14px;line-height:1.7;">我不寄行銷信 · 下一封信只在 Tim review 完之後寄(approval / rejection / clarifying question)。 任何問題直接 <span style="color:#D4AF37;">reply 此 email</span> · 我每天看至少 2 次。</p>
@@ -319,7 +319,7 @@ Hi ${name},
 1. 1-3 business days 內 · Tim 親手 review 您的申請
 2. 通過 → Tim email 您銀行轉帳資訊 + 您 24 小時 window 完成轉帳
 3. 未通過 → Tim 也會 email 解釋原因 · per /founders/ledger 5-step allocation rules
-4. 轉帳完成 → 您 Founder ID #008-#270 鎖定 · 永久 lifetime access · NT$ 2,700 永不調漲
+4. 轉帳完成 → 您 Founder ID #008-#270 鎖定 · 365 天 access · 每年 1/1 續訂價永不調漲
 
 我不寄行銷信 · 下一封信只在 Tim review 完之後寄。
 任何問題直接 reply · 我每天看至少 2 次。

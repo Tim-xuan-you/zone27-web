@@ -292,9 +292,9 @@ export default async function MemberPage({
               不到 paid tier value → 感覺「就這些?」。 同 Netflix「Standard/
               Premium」 grid 對照模式 缺。 Ship NEW PaidTierLockedGrid:
               BLACK CARD 6 unlocks(Engine Lineup + Lens Variety + 賽事
-              討論 + 創作者抽成 + voting + Tim 筆記)+ Founders 27 lifetime
-              mega-card(全 BLACK CARD + 0% 抽成 + 未來所有 lenses/engines
-              永久解鎖)· visible status hierarchy + FOMO + Sunk cost + Anchoring。 */}
+              討論 + 創作者抽成 + voting + Tim 筆記)+ Founders 27 年度
+              mega-card(全 BLACK CARD + 5% 抽成 + 未來所有 lenses/engines
+              解鎖)· visible status hierarchy + FOMO + Sunk cost + Anchoring。 */}
           <PaidTierLockedGrid />
 
           {/* ── Round 30 Wave 5 · Welcome flash + logout · only when session ── */}

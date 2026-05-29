@@ -79,13 +79,13 @@ const LOCKED: { quarter: string; items: RoadmapItem[] }[] = [
     items: [
       {
         title: "Founders 27 正式預售開啟",
-        body: "NT$ 2,700 一次性 · 限量 270 名 · 手工銀行轉帳 · Tim 親手 onboarding 每一位。預期 5-6 個 CPBL season break-even(BLACK CARD NT$ 500/season × 5-6 ≈ NT$ 2,700 · per R171 W3 ATM 免手續費 reprice)。流程細節已寫進 docs/MANUAL-ONBOARDING.md。",
+        body: "NT$ 2,700/年 · 限量 270 名 · 手工銀行轉帳 · Tim 親手 onboarding 每一位。BLACK CARD 一年約 12 期 × NT$ 500 = NT$ 6,000 · Founders 27 NT$ 2,700/年(含 BLACK CARD)省 55%。流程細節已寫進 docs/MANUAL-ONBOARDING.md。",
         evidenceHref: "/founders",
         evidenceLabel: "/founders 完整邏輯",
       },
       {
-        title: "BLACK CARD · CPBL Season Pass NT$ 1,500/season 上線(手動 ECPay · 0 auto-renewal)",
-        body: "賣的不是引擎(永遠免費)· 賣的是社群 + 策展 + 創作者 take。對標 Stratechery / The Athletic / Bankless Premium / TradingView Pro。R81 pivot · 自 NT$ 299/月 auto → NT$ 1,500/season explicit · per /integrity rule #13 binding(ECPay/TapPay/Stripe 自動扣款全 refused forever)。",
+        title: "BLACK CARD · CPBL Season Pass NT$ 500/31 天 上線(手動 ECPay · 0 auto-renewal)",
+        body: "賣的不是引擎(永遠免費)· 賣的是社群 + 策展 + 創作者 take。對標 Stratechery / The Athletic / Bankless Premium / TradingView Pro。R81 pivot · 自 NT$ 299/月 auto → NT$ 500/31 天 explicit · per /integrity rule #13 binding(ECPay/TapPay/Stripe 自動扣款全 refused forever)。",
         evidenceHref: "/membership/black-card",
         evidenceLabel: "BLACK CARD season pass canonical",
       },

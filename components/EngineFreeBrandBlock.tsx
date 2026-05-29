@@ -47,7 +47,7 @@ export default function EngineFreeBrandBlock() {
           href="/founders"
           className="text-gold hover:text-gold-soft transition-colors"
         >
-          Founders 27 終身名冊
+          Founders 27 創始名冊
         </Link>
         {" "}與 BLACK CARD CPBL 季票社群運作 —— 工具給每個人,身分留給入會的人。
       </p>

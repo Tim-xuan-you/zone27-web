@@ -426,12 +426,12 @@ export default function AnonPickWidget({ match }: Props) {
           ladder。 mute / underline / non-modal / 不 lock scroll · 純 inline
           line · brand-pure。 */}
       <p className="mt-4 pt-3 border-t border-line/30 font-mono text-mute/70 text-[10px] sm:text-[11px] tracking-[0.18em] leading-relaxed">
-        想 voting 引擎 v0.3 / v0.4 + 5% creator 抽成 →{" "}
+        想 voting 引擎 v0.3 / v0.4 + 10% creator 抽成 →{" "}
         <Link
           href="/membership/black-card"
           className="text-gold/85 hover:text-gold underline-offset-4 hover:underline transition-colors"
         >
-          BLACK CARD · NT$ 1,500/season →
+          BLACK CARD · NT$ 500/31 天 →
         </Link>
       </p>
     </article>

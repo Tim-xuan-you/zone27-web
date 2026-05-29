@@ -13,14 +13,14 @@ import { BRAND, OG_SIZE, OG_CONTENT_TYPE } from "@/lib/brand";
 // 設計原則:
 //   - PRE-LAUNCH · UI MOCKUP badge 顯眼(同 page hero)
 //   - 6 unlocks 條列(球迷 grammar:engine variants + 賽事討論 + 創作者抽成 + voting + Tim 筆記 + LINE 群 read-only)· R76 W-A count drift fix
-//   - NT$ 500 / season + 5% 創作者抽成(vs 業界 30-50% 是降維打擊)
+//   - NT$ 500 / 31 天 + 10% 創作者抽成(vs 業界 30-50% 是降維打擊)
 //   - 反向 marketing punchline:「Subscription preview. milestone-triggered.」
 // ─────────────────────────────────────────────────────
 
 export const size = OG_SIZE;
 export const contentType = OG_CONTENT_TYPE;
 export const alt =
-  "ZONE 27 · BLACK CARD · 訂閱會員 UI preview · NT$ 500/season · PRE-LAUNCH milestone-triggered · 6 unlocks · 5% 創作者抽成";
+  "ZONE 27 · BLACK CARD · 訂閱會員 UI preview · NT$ 500/31 天 · PRE-LAUNCH milestone-triggered · 6 unlocks · 10% 創作者抽成";
 
 export default async function BlackCardOgImage() {
   return new ImageResponse(
@@ -132,7 +132,7 @@ export default async function BlackCardOgImage() {
               display: "flex",
             }}
           >
-            NT$ 500 / season
+            NT$ 500 / 31 天
           </span>
           <span
             style={{
@@ -144,7 +144,7 @@ export default async function BlackCardOgImage() {
               display: "flex",
             }}
           >
-            訂閱會員 · 6 unlocks · 5% 創作者抽成(vs 業界 30-50%)
+            訂閱會員 · 6 unlocks · 10% 創作者抽成(vs 業界 30-50%)
           </span>
         </div>
 
@@ -177,7 +177,7 @@ export default async function BlackCardOgImage() {
         >
           <UnlockRow label="v0.3 + v0.4 engine variants(BLACK CARD 解鎖)" />
           <UnlockRow label="/hey-tim 賽前 BLACK CARD 優先通道 · Tim 直答" />
-          <UnlockRow label="創作者抽成 5%(業界 30-50% 降維打擊)" />
+          <UnlockRow label="創作者抽成 10%(業界 30-50% 降維打擊)" />
           <UnlockRow label="每月 voting 影響引擎下個 ship 方向" />
           <UnlockRow label="Tim 每週工程筆記 full 版" />
           <UnlockRow label="Founders 27 LINE 群 read-only access" />

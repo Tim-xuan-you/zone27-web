@@ -572,7 +572,7 @@ export const COMMAND_ITEMS: CommandItem[] = [
 
   // ── 轉換 ───────────────────────────────────────────
   {
-    label: "Founders 27 · 創始終身 · 限量 270 預售",
+    label: "Founders 27 · 年度創始席位 · 限量 270 預售",
     kicker: "/founders",
     path: "/founders",
     group: "轉換",
@@ -581,8 +581,8 @@ export const COMMAND_ITEMS: CommandItem[] = [
       "創始",
       "創始會員",
       "27",
-      "lifetime",
-      "終身",
+      "annual",
+      "年度",
       "2700",
       "270",
       "贊助",
@@ -591,7 +591,7 @@ export const COMMAND_ITEMS: CommandItem[] = [
       "限量",
       "席位",
       "席次",
-      "終身會員",
+      "年度會員",
       "ico",
       "天使",
       "patreon",
@@ -658,7 +658,7 @@ export const COMMAND_ITEMS: CommandItem[] = [
     ],
   },
   {
-    label: "BLACK CARD · CPBL 季票 · ≈ NT$ 6/場",
+    label: "BLACK CARD · CPBL 季票 · NT$ 500/31 天",
     kicker: "/membership/black-card",
     path: "/membership/black-card",
     group: "轉換",
@@ -670,7 +670,7 @@ export const COMMAND_ITEMS: CommandItem[] = [
       "黑卡",
       "季票",
       "season pass",
-      "1500",
+      "500",
     ],
   },
   // R164 NUCLEAR DELETE · /pricing/why Cmd-K entry removed · /pricing route

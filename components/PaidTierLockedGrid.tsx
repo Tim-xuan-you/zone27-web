@@ -116,10 +116,10 @@ const BLACK_CARD_UNLOCKS: Unlock[] = [
   },
   {
     icon: "💵",
-    title: "創作者抽成 5%",
-    body: "您 publish 內容 · ZONE 27 抽 5% vs LINE 老師生態 30-50% 業界共識 · 降維打擊",
+    title: "創作者抽成 10%",
+    body: "您 publish 內容 · ZONE 27 抽 10% vs LINE 老師生態 30-50% 業界共識 · 降維打擊",
     status: "promise",
-    eta: "Q4 2027(完全未建 · 需 CMS + creator vetting + payment integration + 5% revenue share infra · 同 axis Defector worker-owned media pattern 但 ZONE 27 不會 ship 直到 sustainability gate 全綠)",
+    eta: "Q4 2027(完全未建 · 需 CMS + creator vetting + payment integration + 10% revenue share infra · 同 axis Defector worker-owned media pattern 但 ZONE 27 不會 ship 直到 sustainability gate 全綠)",
   },
   {
     icon: "🗳️",
@@ -150,11 +150,11 @@ const BLACK_CARD_UNLOCKS: Unlock[] = [
 ];
 
 const FOUNDERS_27_BONUS = [
-  "全 BLACK CARD 7 unlocks · 終身 0 月費",
-  "0% 創作者抽成(BLACK CARD 5%)",
-  "未來所有 engines + lenses 終身永久解鎖(不限數量)",
+  "全 BLACK CARD 7 unlocks · 0 月費",
+  "5% 創作者抽成(BLACK CARD 10%)",
+  "未來所有 engines + lenses 解鎖(不限數量)",
   "Founders 27 LINE 群 active access · Tim 親自答",
-  "限量 270 名額永久關閉 · 您 # 編號公開 /leaderboard",
+  "限量 270 / 年 · 2026 班額滿關閉 · 您 # 編號公開 /founders/ledger",
   "「Witnessed by #007」 referral 認證 status(R36+ ship)",
 ];
 
@@ -171,7 +171,7 @@ export default function PaidTierLockedGrid() {
             ↑ NEXT TIER · 您未解鎖 · 點下方 preview
           </p>
           <p className="font-mono text-mute/70 text-[10px] tracking-[0.3em] tabular">
-            FREE 5 + BLACK CARD 7(1 ✓ LIVE · 2 ◐ PARTIAL · 4 ⏳ PROMISE · R148 NEW #07 賽事討論室)+ Founders 27 終身無限
+            FREE 5 + BLACK CARD 7(1 ✓ LIVE · 2 ◐ PARTIAL · 4 ⏳ PROMISE · R148 NEW #07 賽事討論室)+ Founders 27 年度無限
           </p>
         </div>
       </div>
@@ -195,8 +195,8 @@ export default function PaidTierLockedGrid() {
             </span>
           </div>
           <p className="font-mono text-gold tabular text-lg sm:text-xl tracking-tight">
-            NT$ 1,500
-            <span className="text-mute text-[10px] ml-1 tracking-[0.25em]">/ season</span>
+            NT$ 500
+            <span className="text-mute text-[10px] ml-1 tracking-[0.25em]">/ 31 天</span>
           </p>
         </div>
         <p className="text-mute text-sm leading-relaxed mb-5">
@@ -269,27 +269,27 @@ export default function PaidTierLockedGrid() {
               lang="en"
               className="font-mono text-gold text-[11px] sm:text-xs tracking-[0.4em]"
             >
-              FOUNDERS 27 · LIFETIME
+              FOUNDERS 27 · ANNUAL
             </p>
             <span
               lang="en"
               className="font-mono text-[9px] tracking-[0.3em] px-1.5 py-0.5 border border-gold/60 text-gold shimmer"
-              title="限量 270 · 7 SYSTEM-TEST forged · 263 待認領 · 永久關閉"
+              title="限量 270 / 年 · 7 SYSTEM-TEST forged · 263 待認領 · 2026 班額滿關閉"
             >
-              限量 263 · 永久關閉
+              限量 263 · 2026 班關閉
             </span>
           </div>
           <p className="font-mono text-gold tabular text-lg sm:text-xl tracking-tight">
             NT$ 2,700
-            <span className="text-mute text-[10px] ml-1 tracking-[0.25em]">一次 · 終身</span>
+            <span className="text-mute text-[10px] ml-1 tracking-[0.25em]">/ 年</span>
           </p>
         </div>
         <p className="text-mute text-sm leading-relaxed mb-5">
-          BLACK CARD 6 unlocks 全部 + 終身 0 月費 + 0% 創作者抽成 + **未來
-          所有 engines / lenses 永久解鎖**(R36+ ship 的 Vibe Check · Park
+          BLACK CARD 6 unlocks 全部 + 0 月費 + 5% 創作者抽成 + **未來
+          所有 engines / lenses 解鎖**(R36+ ship 的 Vibe Check · Park
           Factor · Pitcher Fatigue · Underdog · Bullpen · Matchup History
-          + Engine v0.3 + v0.4 + 任何未來 ship 的 · 全終身解鎖不限數量)·
-          Patek allocation pattern · 270 名額永久關閉。
+          + Engine v0.3 + v0.4 + 任何未來 ship 的 · 全解鎖不限數量)·
+          Patek allocation pattern · 限量 270 / 年 · 2026 班額滿關閉。
         </p>
 
         <ul className="space-y-2">
@@ -327,8 +327,8 @@ export default function PaidTierLockedGrid() {
       {/* ── Brand IP footnote · Pratfall + 無限 scaling ── */}
       <div className="bg-slate/30 border border-line/60 p-4 sm:p-5 mt-0">
         <p className="font-mono text-mute/70 text-[10px] sm:text-[11px] tracking-[0.25em] leading-relaxed text-center">
-          ▸ FREE TIER 5 unlocks 終身免費 · BLACK CARD 6 unlocks NT$ 1,500/season ·
-          Founders 27 終身 NT$ 2,700 一次<br />
+          ▸ FREE TIER 5 unlocks 終身免費 · BLACK CARD 6 unlocks NT$ 500/31 天 ·
+          Founders 27 NT$ 2,700/年<br />
           ▸ Engine Lineup 3 變體 + Lens Variety 7 lenses 已寫入 /methodology
           Section 04 + 05 · roadmap visible · 每 lens publish methodology +
           DIVERGED · 0 fake mystery model<br />

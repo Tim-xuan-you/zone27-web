@@ -116,7 +116,7 @@ export default function HomepageGameThreadPreview({ match }: Props) {
 
         {/* ── Brand IP footnote · 自由可讀 + BLACK CARD 可發言 ── */}
         <p className="font-mono text-mute/70 text-[10px] tracking-[0.25em] leading-relaxed text-center mt-5 pt-4 border-t border-line/30">
-          ⚓ 自由 tier 可讀 · BLACK CARD 訂閱者 NT$ 1,500/season 可發言 · per
+          ⚓ 自由 tier 可讀 · BLACK CARD 訂閱者 NT$ 500/31 天 可發言 · per
           R148 minimum-violation · iron rule 1 narrowed + 11 hold
         </p>
       </div>

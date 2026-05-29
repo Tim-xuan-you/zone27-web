@@ -43,10 +43,10 @@ export const metadata: Metadata = {
   // Root description · inherited by every page that doesn't override.
   // Honest copy aligned with homepage hero body + /faq Q3 brand stance:
   // - "數據俱樂部" not "預測社群" (we're not gambling-adjacent)
-  // - Tiered commission honest (0% Founders / 5% BLACK CARD vs flat "零手續費")
+  // - Tiered commission honest (5% Founders / 10% BLACK CARD vs flat "零手續費")
   // - "git 不可篡改" specific (matches Pillar 02 wording)
   description:
-    "為硬核棒球迷打造的暗黑黃金級數據俱樂部。我跑 1 萬次模擬給您看 CPBL 勝率 · git 不可篡改紀錄 · 創作者抽成 0%(Founders 27)/ 5%(BLACK CARD)。",
+    "為硬核棒球迷打造的暗黑黃金級數據俱樂部。我跑 1 萬次模擬給您看 CPBL 勝率 · git 不可篡改紀錄 · 創作者抽成 5%(Founders 27)/ 10%(BLACK CARD)。",
   keywords: [
     "中華職棒",
     "CPBL",
@@ -62,7 +62,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "ZONE 27 — We Don't Guess. We Compute.",
     description:
-      "為硬核棒球迷打造的暗黑黃金級數據俱樂部 · 我跑 1 萬次模擬給您看 · 270 個終身席位",
+      "為硬核棒球迷打造的暗黑黃金級數據俱樂部 · 我跑 1 萬次模擬給您看 · 每年 270 個創始席位",
     type: "website",
     locale: "zh_TW",
     siteName: "ZONE 27",

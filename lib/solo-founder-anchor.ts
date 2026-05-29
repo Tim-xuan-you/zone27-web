@@ -109,7 +109,7 @@ export const SOLO_FOUNDER_PEERS: ReadonlyArray<SoloFounderPeer> = [
     category: "Code editor",
     pricing: "NT$ 3,000 一次性 / 3 年 license · evergreen sale",
     anchor:
-      "Solo years · evergreen one-time license · no subscription churn · 19 年 craft software · 同 ZONE 27 Founders 27「NT$ 2,700 一次 終身」 closed-state mechanic",
+      "Solo years · evergreen one-time license · no subscription churn · 19 年 craft software · 同 ZONE 27 Founders 27「NT$ 2,700/年 · 續訂價永鎖 · 1st Edition 編號永久」 closed-state mechanic",
     url: "https://www.sublimetext.com",
   },
   {

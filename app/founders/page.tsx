@@ -61,8 +61,8 @@ const DOLLAR_DIDNT_BUY: { what: string; why: string }[] = [
     why: "Tim 一手決定 product direction · /now journal 公開 + /roadmap LOCKED/EXPLORING 兩段 · 270 holders 不 vote · brand 不是 DAO · 不裝 community 民主",
   },
   {
-    what: "免費 BLACK CARD 季票",
-    why: "Founders 27 = 365 天 full access · 每年 1/1 開放新 270 · 但不送 BLACK CARD subscription · 兩個 product 分開 · 想要 BLACK CARD CPBL 季票 NT$ 500/31 天 另付 · 同 The Athletic+FanGraphs Plus 不互送",
+    what: "終身 access · 一次買斷",
+    why: "Founders 27 = 365 天 · 每年 1/1 需主動續訂(0 自動扣款)· 不是一次付清的永久會員 · 我們做不到「終身鎖定」· 同 Patek annual collection 每年一批 · 誠實講:這是年度會員制 · 不是買斷",
   },
   {
     what: "保證 ROI / 賺錢承諾",
@@ -74,8 +74,8 @@ const benefits = [
   {
     no: "01",
     zh: "365 天會員資格",
-    en: "LIFETIME ACCESS",
-    body: "NT$ 2,700/365 天,永久解鎖未來所有功能。BLACK CARD NT$ 500/31 天 包含在 Founders 27 內 · 不另收。",
+    en: "365-DAY ACCESS",
+    body: "NT$ 2,700/365 天 · 每年 1/1 可優先續訂,解鎖未來所有功能。BLACK CARD NT$ 500/31 天 包含在 Founders 27 內 · 不另收。",
   },
   {
     no: "02",
@@ -85,9 +85,9 @@ const benefits = [
   },
   {
     no: "03",
-    zh: "創作者零抽成",
-    en: "0% PLATFORM FEE",
-    body: "如果您也是預測創作者,creator 抽成 100% 全拿(BLACK CARD creators 5% 給平台 · 您完全 0%)。 對比 LINE 老師 / 投顧老師業界 30-50% 是降維打擊。",
+    zh: "創作者低抽成",
+    en: "5% PLATFORM FEE",
+    body: "如果您也是預測創作者,Founders 27 抽成只 5%(您拿 95% · BLACK CARD 是 10%)。 對比 LINE 老師 / 投顧老師業界 30-50% 是降維打擊。",
   },
   {
     no: "04",
@@ -105,7 +105,7 @@ const benefits = [
     no: "06",
     zh: "實體尊榮招待",
     en: "PREMIUM HOSPITALITY",
-    body: "出示創始會員 QR Code 至恆美攝影 × 伶 Kopi 旗艦店,免費招待一杯冰鎮頂級一品紅茶。終身有效。",
+    body: "出示創始會員 QR Code 至恆美攝影 × 伶 Kopi 旗艦店,免費招待一杯冰鎮頂級一品紅茶。會員期間皆可使用。",
   },
 ];
 
@@ -132,38 +132,38 @@ const TIERS = [
   },
   {
     name: "BLACK CARD",
-    zh: "CPBL 季票",
+    zh: "31 天通行",
     price: "NT$ 500",
-    priceNote: "每季 · LIVE manual ECPay · 0 auto-renewal · per /integrity rule #13",
+    priceNote: "每 31 天 · 手動 ECPay · 0 自動續訂 · per /integrity rule #13",
     highlight: false,
     rows: {
       data: "完整",
       participate: "✓",
-      fee: "創作者抽 5%",
+      fee: "創作者抽 10%",
       badge: "—",
       bottom27: "—",
       preview: "—",
       hospitality: "—",
       cap: "無限",
-      fiveYearTotal: "NT$ 15,000",
+      fiveYearTotal: "NT$ 30,000",
     },
   },
   {
     name: "FOUNDERS 27",
     zh: "創始會員",
     price: "NT$ 2,700",
-    priceNote: "一次性 · 終身 · 不再開放",
+    priceNote: "每 365 天 · 每年 1/1 開放新 270",
     highlight: true,
     rows: {
       data: "完整 + 優先試用",
       participate: "✓",
-      fee: "創作者抽 0%",
+      fee: "創作者抽 5%",
       badge: "✓ #001-#270",
       bottom27: "✓",
       preview: "✓ 7 天",
       hospitality: "✓",
-      cap: "270 · 永遠關閉",
-      fiveYearTotal: "NT$ 2,700",
+      cap: "270 / 年 · 1/1 reset",
+      fiveYearTotal: "NT$ 13,500",
     },
   },
 ] as const;
@@ -178,8 +178,8 @@ const COMPARE_ROWS = [
   { key: "hospitality", label: "實體招待", en: "HOSPITALITY" },
   { key: "cap", label: "名額", en: "CAP" },
   // R158 W3.H2 · Agent H Decoy Effect (Ariely 2008 + Tversky & Simonson 1993)·
-  // surface existing CalcRow「5 年訂閱對照」 math(10 seasons × 1,500 = 15,000
-  // vs 2,700 lifetime)at comparison-table moment · NOT new pricing · pure visual
+  // surface existing CalcRow「5 年訂閱對照」 math(BLACK CARD 5yr 12×500×5 ≈ 30,000
+  // vs Founders 27 2,700×5 = 13,500 annual)at comparison-table moment · pure visual
   // 揭露 the asymmetric dominance already TRUE per canonical 5-yr parity row。
   { key: "fiveYearTotal", label: "5 年總額", en: "5-YEAR TOTAL" },
 ] as const;
@@ -195,11 +195,11 @@ const INLINE_FAQ = [
   },
   {
     q: "現在留 email 就要付錢嗎?",
-    a: "不收費、不綁定、隨時可退出。留 email 同時 = 進入免費訂閱層(永久免費 · launch 後也存在)+ Founders 27 預售名單(payment infra 就緒後開放時優先通知 · milestone-triggered · 不綁日期)。真正付款是當您主動選擇升級到 Founders 27(NT$ 2,700 終身)或 BLACK CARD(NT$ 500/31 天)· 我們不催。Founders 27 付款後 14 天無條件退款保證。",
+    a: "不收費、不綁定、隨時可退出。留 email 同時 = 進入免費訂閱層(永久免費 · launch 後也存在)+ Founders 27 預售名單(payment infra 就緒後開放時優先通知 · milestone-triggered · 不綁日期)。真正付款是當您主動選擇升級到 Founders 27(NT$ 2,700/365 天)或 BLACK CARD(NT$ 500/31 天)· 我們不催。Founders 27 付款後 14 天無條件退款保證。",
   },
   {
     q: "這是博彩平台嗎?",
-    a: "不是。ZONE 27 計算的是機率分布,從不販售「鐵口直斷」。我們不接受運彩抽成、不寄生報馬仔生態、不買廣告投放。商業模式是會員制(BLACK CARD 季票 + Founders 27 一次性)+ 未來 Premium Sponsor。詳見 /about /faq。",
+    a: "不是。ZONE 27 計算的是機率分布,從不販售「鐵口直斷」。我們不接受運彩抽成、不寄生報馬仔生態、不買廣告投放。商業模式是會員制(BLACK CARD 31 天通行 + Founders 27 年度會員)+ 未來 Premium Sponsor。詳見 /about /faq。",
   },
   // Round 52 W-E · Agent 1 #1 · 7 concrete fears added · HEY pricing model:
   {
@@ -212,11 +212,11 @@ const INLINE_FAQ = [
   },
   {
     q: "手動銀行轉帳具體流程?",
-    a: "(1)Founders 27 開放後 · 您 email tatayngiti@gmail.com 表達意願 ·(2)Tim 24h 內回覆銀行 4 欄位 + 您專屬 ZONE27-#NNN 備註碼 ·(3)您匯款 NT$ 2,700 · 備註寫 ZONE27-#NNN ·(4)Tim 確認入帳後寄 lifetime access confirmation + Founders LINE 群邀請。 全程 Tim 親手 onboard · 沒有 cron · 沒有外包(per /coverage philosophy)。",
+    a: "(1)Founders 27 開放後 · 您 email tatayngiti@gmail.com 表達意願 ·(2)Tim 24h 內回覆銀行 4 欄位 + 您專屬 ZONE27-#NNN 備註碼 ·(3)您匯款 NT$ 2,700 · 備註寫 ZONE27-#NNN ·(4)Tim 確認入帳後寄 founding class access confirmation + Founders LINE 群邀請。 全程 Tim 親手 onboard · 沒有 cron · 沒有外包(per /coverage philosophy)。",
   },
   {
     q: "BLACK CARD 上線後我 Founders 27 status 會變嗎?",
-    a: "不會。 Founders 27 是 lifetime 第 4 階 · 包含未來所有 BLACK CARD unlocks(v0.3 + v0.4 engine + 創作者抽成 5%(BLACK CARD 一半)(BLACK CARD 是 5%)+ 每月 voting + Tim 工程筆記 full + LINE 群)。 Founders 27 是 floor not sidegrade · 您買的 270 個 seat 是 ZONE 27 整個系統永久 root identity · 不會 dilute。",
+    a: "不會。 Founders 27 是最高階 · 包含未來所有 BLACK CARD unlocks(v0.3 + v0.4 engine + 創作者抽成 5%(BLACK CARD 的一半 · BLACK CARD 是 10%)+ 每月 voting + Tim 工程筆記 full + LINE 群)。 Founders 27 是 floor not sidegrade · 您買的 270 個 seat 是 ZONE 27 整個系統的 root identity · 不會 dilute。",
   },
   {
     q: "Tim 會存我什麼資料?",
@@ -272,7 +272,7 @@ export default async function FoundersPage({
           <span className="text-gold tabular">{formatBadge(FOUNDERS_NEXT)}</span>
           <br />
           <span className="text-3xl sm:text-4xl md:text-5xl text-mute">
-            (共 {FOUNDERS_TOTAL} 名 · 永不再開)
+            (2026 班 · 共 {FOUNDERS_TOTAL} 名)
           </span>
         </h1>
 
@@ -284,7 +284,7 @@ export default async function FoundersPage({
         <p className="mt-4 sm:mt-5 font-mono text-mute text-sm sm:text-base tabular tracking-[0.2em] leading-relaxed">
           NT$ 2,700
           <span className="text-mute/60 mx-2">·</span>
-          終身
+          365 天
           <span className="text-mute/60 mx-2">·</span>
           <Link
             href="/founders/ledger"
@@ -299,7 +299,7 @@ export default async function FoundersPage({
           lang="en"
           className="font-mono text-mute text-xs sm:text-sm tracking-[0.3em] mt-3 sm:mt-5"
         >
-          ONE-TIME · LIFETIME · NEVER REOPENS
+          NT$ 2,700 / YEAR · 2026 CLASS NEVER REOPENS
         </p>
 
         {/* R158 W3.H3 · Agent H Loss Aversion frame · Kahneman & Tversky 1979
@@ -313,9 +313,9 @@ export default async function FoundersPage({
             existing GenerationsLine。 */}
         <p className="mt-4 max-w-md mx-auto text-loss/85 text-xs sm:text-[13px] leading-relaxed font-mono tracking-[0.05em]">
           ⚓ <span className="text-loss">#{String(FOUNDERS_NEXT).padStart(3, "0")}</span>{" "}
-          認領後 · 您再也無法成為{" "}
+          認領後 · 您再也無法成為 2026 班的{" "}
           <span className="text-loss">#{String(FOUNDERS_NEXT).padStart(3, "0")}</span>
-          。 不是「下一批還有」 · 是「這個編號永遠不存在於您 ID 中」 · per{" "}
+          。 2027 會開全新一班 · 但 2026 founding class 額滿即永久關閉 · per{" "}
           <Link href="/audit#section-05" className="text-loss/85 hover:text-gold underline-offset-4 hover:underline">/audit S05 PRE-COMMIT</Link>{" "}
           物理 codify · 不是 marketing FOMO。
         </p>
@@ -344,10 +344,10 @@ export default async function FoundersPage({
             稀缺 + Tim 「270 = 一年 sign-off ceiling」 axiom · brand IP
             triple-fire(disclosure-philosophy + pratfall + costly-signaling)。 */}
         <p className="mt-3 max-w-md mx-auto text-mute/70 text-[11px] sm:text-xs leading-relaxed">
-          <strong className="text-bone">Founders 27</strong> = ZONE 27 的{" "}
+          <strong className="text-bone">Founders 27 2026 班</strong> = ZONE 27 的{" "}
           <span className="text-gold/90">1st Edition Shadowless Run</span> ·
-          同 Pokemon Base Set 1999 第一批 print run · 售完即永久關閉 · BLACK
-          CARD 訂閱者永遠無法 retroactively 升 Founders 27 ·{" "}
+          同 Pokemon Base Set 1999 第一批 print run · 2026 班售完即永久關閉 ·
+          2027 起每年開新班(= Unlimited 重印)· 1st Edition 永遠只有 2026 這批 ·{" "}
           <Link
             href="/founders/ledger"
             className="text-gold/80 hover:text-gold underline-offset-4 hover:underline transition-colors"
@@ -430,7 +430,7 @@ export default async function FoundersPage({
           <p className="text-mute/90 text-[13px] sm:text-[14px] leading-relaxed mb-3">
             <strong className="text-bone">您不是在買明牌</strong> ·
             您是在買 270 個 365-day pass seat 之一 · 加入 ZONE 27 整個系統的 floor。
-            引擎永遠免費 · 您買的是身分 + 永久 access + 0% creator 抽成。
+            引擎永遠免費 · 您買的是身分 + 365 天 access + 5% creator 抽成(BLACK CARD 的一半)。
           </p>
           <p className="font-mono text-mute/70 text-[10px] tracking-[0.3em] mt-3 pt-3 border-t border-line/40">
             — TIM · SOLO FOUNDER · ZONE 27 · {new Date().getFullYear()}
@@ -478,7 +478,7 @@ export default async function FoundersPage({
           lang="en"
           className="mt-2 font-mono text-mute text-[10px] tracking-[0.3em] text-center"
         >
-          NO AUTO-RENEW · NO HIDDEN FEES · NEVER REOPENS
+          NO AUTO-RENEW · NO HIDDEN FEES · 2026 CLASS NEVER REOPENS
         </p>
 
         <p className="mt-6 sm:mt-10 max-w-xl mx-auto text-mute leading-relaxed text-sm sm:text-base">
@@ -616,12 +616,12 @@ export default async function FoundersPage({
           </p>
           {/* R126 W4 · TW-specific KILLER anchor per R126 TW market agent · CPBLTV
               NT$ 2,399/yr 全聯盟 season pass · Taiwan CPBL 鐵粉 already accept ·
-              ZONE 27 NT$ 2,700 LIFETIME 比 1 年 CPBLTV 貴 NT$ 301 · 同 axis
+              ZONE 27 NT$ 2,700/yr 比 CPBLTV NT$ 2,399/yr 貴 NT$ 301 · 同 axis
               「watch all year vs think like an engine forever」 anchor 直接 anchor
               against most-relevant local benchmark · 同 R125 [[feedback-zone27-
               paid-model-is-support-not-features]] memory canonical。 */}
           <p className="text-mute text-sm sm:text-base leading-relaxed mb-2 border-l border-gold/40 pl-3">
-            ⚓ Taiwan-native anchor · CPBLTV(Hami Video)<strong className="text-bone">NT$ 2,399/yr 全聯盟 season pass</strong> · 您鐵粉 already 每年付這個 just 看球。 Founders 27 NT$ 2,700 <strong className="text-gold">LIFETIME 只比 CPBLTV 1 年貴 NT$ 301</strong> · 「watch all year = NT$ 2,399 · think like an engine = NT$ 2,700 once forever」。
+            ⚓ Taiwan-native anchor · CPBLTV(Hami Video)<strong className="text-bone">NT$ 2,399/yr 全聯盟 season pass</strong> · 您鐵粉 already 每年付這個 just 看球。 Founders 27 NT$ 2,700/yr <strong className="text-gold">只比 CPBLTV 全聯盟季票貴 NT$ 301</strong> · 「watch all year = NT$ 2,399 · think like an engine = NT$ 2,700/yr」。
           </p>
           <p className="text-mute text-sm sm:text-base leading-relaxed">
             <Link
@@ -765,7 +765,7 @@ export default async function FoundersPage({
             </li>
           </ul>
           <p className="mt-5 text-mute/80 text-xs sm:text-sm leading-relaxed">
-            想升級成 Founders 27(NT$ 2,700 終身)或 BLACK CARD(NT$ 500/31 天 · CPBL March-November · 0 auto-renewal)· 任時可選。也可<strong className="text-mute">永遠停在這層</strong>·
+            想升級成 Founders 27(NT$ 2,700/365 天)或 BLACK CARD(NT$ 500/31 天 · CPBL March-November · 0 auto-renewal)· 任時可選。也可<strong className="text-mute">永遠停在這層</strong>·
             <span className="text-gold"> 我們不催</span>。
           </p>
         </div>
@@ -839,17 +839,17 @@ export default async function FoundersPage({
               lang="en"
               className="font-mono text-gold text-[10px] tracking-[0.3em] mb-5"
             >
-              NT$ 2,700 · 一次 · 終身
+              NT$ 2,700 · 一年 · 2026 班
             </p>
             <ul className="space-y-3 text-bone text-sm leading-relaxed list-none pl-0">
               <NotBuyingItem gold>
-                #001–#{FOUNDERS_TOTAL} 編號(世界永遠只有 {FOUNDERS_TOTAL} 個)
+                #001–#{FOUNDERS_TOTAL} 編號(2026 班永遠只有 {FOUNDERS_TOTAL} 個)
               </NotBuyingItem>
               <NotBuyingItem gold>
                 Tim 親手 onboarding(個人簽名證書)
               </NotBuyingItem>
               <NotBuyingItem gold>
-                Founders 27 LINE 群終身 access
+                Founders 27 LINE 群 access(會員期間)
               </NotBuyingItem>
               <NotBuyingItem gold>
                 BOTTOM 27 創始限定球員卡(Tim 的遊戲)
@@ -1080,7 +1080,7 @@ export default async function FoundersPage({
         </div>
 
         <p className="mt-12 text-center font-mono text-mute text-[10px] tracking-[0.3em]">
-          BLACK CARD CPBL 季票 LIVE manual ECPay · 0 auto-renewal · FOUNDERS 27 為終身定價,不再變動
+          BLACK CARD NT$ 500/31 天 manual ECPay · 0 auto-renewal · FOUNDERS 27 每年 1/1 開放新班,定價不變
         </p>
       </section>
 
@@ -1125,47 +1125,47 @@ export default async function FoundersPage({
 
             <CalcRow label="對標" en="ANCHOR">
               <span className="text-mute">
-                BLACK CARD 季票{" "}
-                <span className="text-bone tabular">NT$ 500</span> /season
+                BLACK CARD{" "}
+                <span className="text-bone tabular">NT$ 500</span> / 31 天
               </span>
             </CalcRow>
 
             <CalcRow label="5 年訂閱對照" en="5-YEAR PARITY">
               <span className="text-mute">
-                BLACK CARD 10 季:{" "}
-                <span className="text-bone tabular">NT$ 15,000</span>
+                BLACK CARD 5 年(60 個 31 天):{" "}
+                <span className="text-bone tabular">NT$ 30,000</span>
                 <span className="mx-2 text-mute/50">vs</span>
-                FOUNDERS 27:{" "}
-                <span className="text-gold tabular">NT$ 2,700</span>
+                FOUNDERS 27 5 年:{" "}
+                <span className="text-gold tabular">NT$ 13,500</span>
               </span>
             </CalcRow>
 
             <CalcRow label="等同每場攤提" en="EFFECTIVE PER GAME">
-              <span className="text-bone tabular">~ NT$ 2 / 場</span>
-              <span className="text-mute/60 ml-2">(5 年 1,200 場計)</span>
+              <span className="text-bone tabular">~ NT$ 11 / 場</span>
+              <span className="text-mute/60 ml-2">(1 年約 240 場計)</span>
             </CalcRow>
 
             <CalcRow label="創作者抽成節省" en="CREATOR FEE">
               <span className="text-mute">
-                BLACK CARD 5% <span className="mx-2 text-mute/50">→</span>{" "}
-                <span className="text-gold">0%</span>
+                BLACK CARD 10% <span className="mx-2 text-mute/50">→</span>{" "}
+                <span className="text-gold">5%</span>
               </span>
             </CalcRow>
 
             <CalcRow label="名額" en="CAP" isLast>
               <span className="text-bone">
-                {FOUNDERS_TOTAL} 名 · 永遠關閉(沒有第二批)
+                {FOUNDERS_TOTAL} 名 / 年 · 2026 班額滿即永久關閉
               </span>
             </CalcRow>
           </dl>
         </div>
 
         <p className="mt-10 text-center text-mute text-sm max-w-xl mx-auto leading-relaxed">
-          一次付完,終身屬於您
+          NT$ 2,700/年 · 您是 2026 班
           <span className="text-gold tabular mx-1">{FOUNDERS_TOTAL}</span>
           個編號之一。
           <br />
-          不是優惠期、不是早鳥折扣 — 是這 270 個位置的真實成本。
+          不是優惠期、不是早鳥折扣 — 是這 270 個位置的真實成本 · 每年 1/1 可優先續訂。
         </p>
         </details>
       </section>
@@ -1321,10 +1321,10 @@ export default async function FoundersPage({
           lang="en"
           className="font-mono text-gold text-[10px] tracking-[0.4em] mb-6"
         >
-          ONE NUMBER. ONE LIFETIME.
+          ONE NUMBER. ONE CLASS.
         </p>
         <h3 className="text-3xl sm:text-4xl text-bone font-light tracking-tight">
-          當 {formatBadge(FOUNDERS_TOTAL)} 被認領,這扇門將永遠關閉。
+          當 2026 班 {formatBadge(FOUNDERS_TOTAL)} 被認領,這扇門將永遠關閉。
         </h3>
         <p className="mt-6 text-mute max-w-md mx-auto text-sm leading-relaxed">
           現在加入等候名單,在正式開放預訂時擁有第一順位。

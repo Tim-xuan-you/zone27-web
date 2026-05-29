@@ -207,7 +207,7 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
     {
       href: "/founders",
       kicker: "founders",
-      title: "加入 270 個終身席位",
+      title: "加入 270 個創始席位",
     },
   ],
   "/track-record": [
@@ -253,7 +253,7 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
     {
       href: "/membership/black-card",
       kicker: "black-card",
-      title: "BLACK CARD 完整介紹 · NT$ 1,500/season",
+      title: "BLACK CARD 完整介紹 · NT$ 500/31 天",
     },
     {
       href: "/founders/ledger",
@@ -369,7 +369,7 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
     {
       href: "/founders",
       kicker: "founders",
-      title: "Founders 27 詳情頁 · 限量 270 · 終身",
+      title: "Founders 27 詳情頁 · 限量 270 · 年度",
     },
     {
       href: "/track-record",
@@ -410,7 +410,7 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
     {
       href: "/membership",
       kicker: "membership",
-      title: "4-tier ladder 全景 · 從匿名到 NT$ 2,700 終身",
+      title: "4-tier ladder 全景 · 從匿名到 NT$ 2,700/年",
     },
     {
       href: "/manifesto",
@@ -487,7 +487,7 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
     {
       href: "/founders",
       kicker: "founders",
-      title: "Founders 27 銷售頁 · 限量 270 · 終身席位",
+      title: "Founders 27 銷售頁 · 限量 270 · 創始席位",
     },
     {
       href: "/audit",
@@ -508,12 +508,12 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
     {
       href: "/membership",
       kicker: "membership",
-      title: "4-tier ladder 全景 · 從匿名到 NT$ 2,700 終身",
+      title: "4-tier ladder 全景 · 從匿名到 NT$ 2,700/年",
     },
     {
       href: "/founders",
       kicker: "founders",
-      title: "Founders 27 · 對照第 4 階終身 NT$ 2,700",
+      title: "Founders 27 · 對照第 4 階 NT$ 2,700/年",
     },
     {
       href: "/privacy",

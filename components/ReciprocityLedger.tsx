@@ -47,7 +47,7 @@ export default function ReciprocityLedger({ variant = "ledger" }: Props) {
           ⚓ RECIPROCITY LEDGER · {RECIPROCITY_COUNT} ARTIFACTS PUBLISHED FIRST
         </p>
         <p className="text-mute text-sm leading-relaxed mb-3">
-          ZONE 27 在 NT$ 1,500/season + NT$ 2,700 一次性 ASK 之前 ·{" "}
+          ZONE 27 在 NT$ 500/31 天 + NT$ 2,700/年 ASK 之前 ·{" "}
           <strong className="text-bone">已 publish {RECIPROCITY_COUNT} 件</strong>{" "}
           · Cialdini Reciprocity Principle(1984)· give-first triggers
           obligation-to-reciprocate · LINE 老師 / 報馬仔 是 ASK-first-give-never

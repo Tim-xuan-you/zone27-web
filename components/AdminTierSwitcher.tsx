@@ -10,8 +10,8 @@ import { useMounted } from "@/lib/use-mounted";
 // 4 tier(對齊 /membership 4-tier ladder):
 //   - anonymous · 匿名訪客 · 未登入
 //   - free · FREE TIER · 已登入 · 終身免費
-//   - black-card · BLACK CARD · NT$ 1,500/season(每季手動 ECPay · 0 auto-renewal per rule #13)
-//   - founders27 · Founders 27 · NT$ 2,700 終身
+//   - black-card · BLACK CARD · NT$ 500/31 天(每 31 天手動 ECPay · 0 auto-renewal per rule #13)
+//   - founders27 · Founders 27 · NT$ 2,700/年
 //
 // localStorage-based · 跟 PreviewModeBanner 共享 zone27_preview_tier key。
 // Tim 切換 → reload → 全 page client-side tier-aware components 切換
@@ -39,14 +39,14 @@ const TIERS: { value: string; label: string; body: string; price: string }[] = [
   {
     value: "black-card",
     label: "BLACK CARD",
-    body: "每季手動 ECPay · 6 unlocks(Engine + Lens + 討論 + 抽成 + voting + 筆記)· 0 auto-renewal",
-    price: "NT$ 1,500/season",
+    body: "每 31 天手動 ECPay · 6 unlocks(Engine + Lens + 討論 + 抽成 + voting + 筆記)· 0 auto-renewal",
+    price: "NT$ 500/31 天",
   },
   {
     value: "founders27",
     label: "Founders 27",
-    body: "終身 · 全 unlocks + 0% 抽成 + 未來所有 lenses/engines 終身解鎖",
-    price: "NT$ 2,700 一次",
+    body: "年度 · 全 unlocks + 5% 抽成 + 未來所有 lenses/engines 解鎖",
+    price: "NT$ 2,700/年",
   },
 ];
 

@@ -692,7 +692,7 @@ export default async function MatchDetailPage({
           </p>
           <p className="text-mute text-sm sm:text-base leading-relaxed mb-3">
             Founders 27 不是 unlock engine(<strong className="text-bone">engine FREE forever</strong>)·
-            是 270 個 lifetime seats 之一 · 同 Defector 2020 founding subs $69/年(產品 6 週後才上線 · 訂戶 fund 不是 access)。
+            是 270 個 founding seats 之一 · 同 Defector 2020 founding subs $69/年(產品 6 週後才上線 · 訂戶 fund 不是 access)。
           </p>
           <div className="flex items-baseline gap-4 flex-wrap">
             <Link

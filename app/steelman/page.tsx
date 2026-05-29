@@ -366,13 +366,13 @@ export default function SteelmanPage() {
               href="/founders"
               className="inline-block px-6 py-3 bg-gold text-navy font-mono text-[10px] tracking-[0.3em] hover:bg-gold-soft transition-colors"
             >
-              → Founders 27 · NT$ 2,700 終身
+              → Founders 27 · NT$ 2,700 / 年
             </Link>
             <Link
               href="/membership/black-card"
               className="inline-block px-6 py-3 border border-gold text-gold font-mono text-[10px] tracking-[0.3em] hover:bg-gold/10 transition-colors"
             >
-              → BLACK CARD · NT$ 1,500/season
+              → BLACK CARD · NT$ 500/31 天
             </Link>
           </div>
           <p

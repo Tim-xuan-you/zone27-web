@@ -3,7 +3,7 @@ import { BRAND, OG_SIZE, OG_CONTENT_TYPE } from "@/lib/brand";
 
 // ── ZONE 27 · /membership Dynamic OG ──────────────────
 // 當有人把 https://zone27-web.vercel.app/membership 貼到 LINE/FB,
-// 顯示的不是通用品牌卡 · 也不是 /founders 「270 LIFETIME」scarcity
+// 顯示的不是通用品牌卡 · 也不是 /founders 「270 年度」scarcity
 // 卡 · 而是「4-TIER LADDER 全景」 — visitor 看圖就知道這頁有從免費
 // 到 NT$ 2,700 的階梯 · 不是 paywall。
 // ─────────────────────────────────────────────────────
@@ -126,7 +126,7 @@ export default async function MembershipOgImage() {
               display: "flex",
             }}
           >
-            從免費到 NT$ 2,700 終身 · 任時自由升級 · 我們不催
+            從免費到 NT$ 2,700 / 年 · 任時自由升級 · 我們不催
           </div>
 
           {/* divider */}
@@ -196,7 +196,7 @@ export default async function MembershipOgImage() {
           }}
         >
           <span style={{ color: "rgba(245,242,234,0.55)", display: "flex" }}>
-            FREE · NT$ 500/SEASON · NT$ 2,700 ONE-TIME
+            FREE · NT$ 500/31天 · NT$ 2,700/年
           </span>
           <span
             style={{

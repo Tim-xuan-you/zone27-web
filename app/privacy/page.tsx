@@ -426,8 +426,8 @@ export default function PrivacyPage() {
           </li>
           <li>
             <strong className="text-bone">Founders 27 ledger row</strong> · 永久
-            保留 · 同 lifetime access 性質 · per /founders/ledger SHADOWLESS RUN
-            commitment「售完即永久關閉 · 不會有第二批」 · 您即使退款 ledger
+            保留 · 創始編號永久屬於該屆 · per /founders/ledger SHADOWLESS RUN
+            commitment「2026 班售完即關閉 · 1st Edition 永遠只有這批」 · 您即使退款 ledger
             row 仍 release reserved 標記但保留歷史記錄
           </li>
           <li>
@@ -486,8 +486,8 @@ export default function PrivacyPage() {
           </li>
           <li>
             <strong className="text-bone">Founders 27 退款優先</strong> · 即使
-            14 天 cooling-off window 已過 · BUS_FACTOR 情境啟動時所有未消費
-            lifetime access 按 比例退款(N $2,700 - 已消費月數 × $299)·
+            14 天 cooling-off window 已過 · BUS_FACTOR 情境啟動時當期未用完的
+            年度 access 按剩餘天數比例退款(NT$ 2,700 × 剩餘天數 / 365)·
             executor 親手處理 · 不外包 · per Taiwan 消保法 § 19 spirit
             extension
           </li>

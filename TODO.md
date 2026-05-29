@@ -1,9 +1,9 @@
 # 📋 ZONE 27 · Owner Pending Actions
 
-> Tim 待動作清單 · 最後更新 2026-05-27(R165 W1 收盤)
-> Session R137-R165 = 29 rounds 41+ commits 122+ ships ·
-> R163-R164 NUCLEAR DELETE saga(12 routes 砍 · 7188 lines removed · 60+→~48)·
-> R165 cross-ref cleanup post R164 delete · 0 runtime 404 · 三綠 TRUE per R131
+> Tim 待動作清單 · 最後更新 2026-05-29(R173 W1 收盤)
+> Session R137-R173 = 37 rounds · R163-R164 NUCLEAR DELETE saga(12 routes 砍 · 7188 lines removed · 60+→~48)·
+> R171-R172 pricing total redesign(Annual 1/1 270 reset · BLACK CARD NT$ 500/31 天 抽 10% · Founders 27 NT$ 2,700/365 天 抽 5%)·
+> R173 site-wide pricing-consistency sweep(half-applied 殘留全清 · 13+ RENDERED surfaces 對齊 canonical)· 三綠 TRUE per R131
 >
 > **歷史 round scroll 在 [/now journal](app/now/page.tsx) + [WHILE-YOU-WERE-OUT.md](WHILE-YOU-WERE-OUT.md)** ·
 > 此 TODO.md 只保留 current pending Tim 親手動作 · Apple discipline subtraction-first
@@ -46,11 +46,15 @@ unblocks /leaderboard FounderPickForm Patek allocation 預訂功能。
 
 ### ⏳ Tim signature PNG(10 分)+ Bank info 4 fields(5 分)
 
-Founders 27 launch prerequisite · 等 Tim 拍板 launch milestone。
+Founders 27 + BLACK CARD launch prerequisite(R172 後兩個 tier 都走銀行轉帳)·
+等 Tim 拍板 launch milestone。
 
-### ⏳ TapPay public posting · BLACK CARD 訂閱 code
+### ⏳ BLACK CARD 收款 infra · manual ATM 轉帳確認流程
 
-需 Tim 明示 TIER 2 cost 同意才開始(per CLAUDE.md 預算紀律 v2)。
+R172 pivot · BLACK CARD 從 TapPay 自動訂閱改成 manual ATM / 跨行轉帳(per /integrity
+#13 · 0 auto-renewal forever)· 不再需要 TapPay 訂閱 code。未來規模化可加「轉帳確認
+上傳 + 自動比對」工具(NOT auto-charge · 不違反 #13)· TapPay 保留給未來一次性商品
+(merch / 課程)· 屆時才是 TIER 2 cost · 需 Tim 明示同意。
 
 ---
 

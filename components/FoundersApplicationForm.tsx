@@ -446,7 +446,7 @@ export default function FoundersApplicationForm() {
               <span className="font-mono text-bone tabular mr-2">04</span>{" "}
               轉帳完成 → 您 Founder ID{" "}
               <span className="text-bone font-mono">#008-#270</span> 鎖定 ·
-              永久 lifetime access · NT$ 2,700 永不調漲
+              365 天 access · 每年 1/1 續訂價永不調漲
             </li>
           </ol>
         </div>
@@ -643,7 +643,7 @@ export default function FoundersApplicationForm() {
         <textarea
           value={ifThenPlan}
           onChange={handleIfThenChange}
-          placeholder={"例:「如果 Tim email 通過 → 我 24h 內完成轉帳」 · 「如果 ledger 加入我名字 → 我截圖傳給太太說明 270 lifetime seat」 · 您自己寫 · Tim 不看 · 不送 server"}
+          placeholder={"例:「如果 Tim email 通過 → 我 24h 內完成轉帳」 · 「如果 ledger 加入我名字 → 我截圖傳給太太說明 270 founding seat」 · 您自己寫 · Tim 不看 · 不送 server"}
           rows={2}
           maxLength={240}
           aria-label="Optional if-then implementation intention plan · client-side only"

@@ -235,14 +235,14 @@ export default function Home() {
           <Link
             href="/founders"
             className="inline-block px-5 py-2.5 border border-gold/40 hover:border-gold hover:bg-gold/5 transition-colors font-mono text-xs sm:text-sm tracking-[0.2em] tabular"
-            aria-label={`Founders 27 · NEXT IS #${FOUNDERS_CLAIMED + 1} of ${FOUNDERS_TOTAL} · 永不再開`}
+            aria-label={`Founders 27 · NEXT IS #${FOUNDERS_CLAIMED + 1} of ${FOUNDERS_TOTAL} · 2026 班額滿即永久關閉`}
           >
             <span className="text-gold">FOUNDERS · 27</span>
             <span className="text-mute/60 mx-2">·</span>
             <span className="text-bone">{FOUNDERS_REMAINING}</span>
             <span className="text-mute/60">/{FOUNDERS_TOTAL}</span>
             <span className="text-mute/60 mx-2">·</span>
-            <span className="text-mute">NT$ 2,700 終身</span>
+            <span className="text-mute">NT$ 2,700/年</span>
             <span className="text-gold/70 ml-2">→</span>
           </Link>
           <Link

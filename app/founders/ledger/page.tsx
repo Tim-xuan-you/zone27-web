@@ -267,18 +267,18 @@ export default function FoundersLedgerPage() {
           </p>
           <p className="text-mute leading-relaxed max-w-2xl mb-5">
             <strong className="text-bone">ZONE 27 採同 mechanic</strong> ·
-            Founders 27 整批 270 名 = 1st Edition Shadowless Run · 售完即
-            <span className="text-gold/90"> 永久關閉 · 不會有第二批</span>。
-            BLACK CARD 訂閱永遠 open(同 Unlimited 印量)· Founders 27 永遠
-            closed once sold(同 1st Edition 不可 reprint)。
+            2026 班整批 270 名 = ZONE 27 1st Edition Shadowless Run · 售完即
+            <span className="text-gold/90"> 永久關閉 · 不會有第二批 2026 班</span>。
+            BLACK CARD 訂閱永遠 open(同 Unlimited 印量)· 2027 起每年 1/1
+            開全新一班 · 但 1st Edition 永遠只有 2026 這批 · 不可 reprint。
           </p>
           <p className="text-mute leading-relaxed max-w-2xl mb-5">
             <strong className="text-bone">BLACK CARD 訂閱者永遠無法 retroactively
             升 Founders 27</strong>(同 Unlimited 持有者永遠無法把卡片變成 1st
             Edition)。 這是<span className="text-gold"> binary tier</span> ·
             不是 sub-tier · 不分 #001 vs #027 prestige(我們無 vinyl First
-            Pressing sub-prestige 發明)· 純 print-run-of-record · 同 NT$ 2,700
-            一次 · 不加價。
+            Pressing sub-prestige 發明)· 純 print-run-of-record · NT$ 2,700/年
+            · 每年續訂不加價。
           </p>
           <div className="mt-6 bg-slate/40 border border-line/70 p-5 sm:p-6">
             <p
@@ -291,8 +291,8 @@ export default function FoundersLedgerPage() {
               <li className="flex gap-3 items-baseline">
                 <span className="font-mono text-gold/70 text-[10px] tracking-[0.25em]">01</span>
                 <span className="flex-1">
-                  Founders 27 售完 即永久關閉 · git commit 為 source of truth ·
-                  不會有第二批
+                  2026 班售完 即永久關閉 · git commit 為 source of truth ·
+                  不會有第二批 2026 班(2027 起每年 1/1 開新班)
                 </span>
               </li>
               <li className="flex gap-3 items-baseline">
@@ -305,7 +305,7 @@ export default function FoundersLedgerPage() {
               <li className="flex gap-3 items-baseline">
                 <span className="font-mono text-gold/70 text-[10px] tracking-[0.25em]">03</span>
                 <span className="flex-1">
-                  NT$ 2,700 終身永不調漲 · 售完 = 永遠 NT$ 2,700 在 closed state
+                  NT$ 2,700/年 永不調漲 · 2026 班續訂價永遠 NT$ 2,700
                   · 不會 reprint 漲價 · 同 1st Edition Shadowless 不可重印
                 </span>
               </li>
@@ -343,7 +343,7 @@ export default function FoundersLedgerPage() {
           <p className="text-mute leading-relaxed max-w-2xl mb-6">
             棒球 1 場 = 27 個出局數(perfect game) · 270 = 10 倍。 同
             ZONE 27 brand 數字哲學 — 不是 round 100/200 行銷數字 · 是棒球
-            數字 anchor。 一旦 forge 滿 270 · 永遠關閉 · 不再開放。
+            數字 anchor。 一旦 forge 滿 270 · 該年班別永遠關閉 · 隔年 1/1 開新班。
           </p>
 
           <h2 className="text-2xl sm:text-3xl text-bone font-light tracking-tight mb-6 mt-10">

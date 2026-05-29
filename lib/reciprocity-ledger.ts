@@ -115,7 +115,7 @@ export const RECIPROCITY_LEDGER: ReadonlyArray<ReciprocityArtifact> = [
   {
     what: "12-item NEVER list · 永遠不會做",
     surface: "/audit#section-02",
-    why: "ZONE 27 displacement target = 玩運彩 + 報馬仔 + LINE 老師生態 · 13 件物理 ban(R80 加 #12 CPBL-only-forever engine scope binding · R81 加 #13 永遠不 subscription auto-renewal binding · BLACK CARD pivot 至 CPBL Season Pass NT$ 1,500/season explicit)· publish = 物理 codify 退路 · Costly Signaling 100× per Spence 1973",
+    why: "ZONE 27 displacement target = 玩運彩 + 報馬仔 + LINE 老師生態 · 13 件物理 ban(R80 加 #12 CPBL-only-forever engine scope binding · R81 加 #13 永遠不 subscription auto-renewal binding · BLACK CARD pivot 至 CPBL Season Pass NT$ 500/31 天 explicit)· publish = 物理 codify 退路 · Costly Signaling 100× per Spence 1973",
     source: "Stratechery「say what you don't do」",
   },
   {

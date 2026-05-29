@@ -135,11 +135,11 @@ export default function TermsPage() {
           天</strong> · 翻倍法定下限。
         </p>
 
-        <h3 className="text-bone text-lg mt-6 mb-3">Founders 27(NT$ 2,700 一次性)</h3>
+        <h3 className="text-bone text-lg mt-6 mb-3">Founders 27(NT$ 2,700 / 365 天)</h3>
         <ul className="space-y-2">
           <li>
             <strong className="text-bone">14 天無條件退款</strong> · 從 Tim
-            確認您的銀行轉帳入帳 + 您收到 lifetime access confirmation email
+            確認您的銀行轉帳入帳 + 您收到 365 天 access confirmation email
             那天起算 · 14 個自然日內可解除契約。
           </li>
           <li>
@@ -161,17 +161,17 @@ export default function TermsPage() {
           </li>
           <li>
             <strong className="text-bone">您退款後失去</strong> · #NNN 編號的
-            ledger 入帳(/founders/ledger 上的 reserved 標記 release)· lifetime
-            access flag · BLACK CARD 月卡免費 perk · BOTTOM 27 ecosystem
+            ledger 入帳(/founders/ledger 上的 reserved 標記 release)· 365 天
+            access flag · BLACK CARD 免費 perk · BOTTOM 27 ecosystem
             cross-pass(未來 ship)。
           </li>
         </ul>
 
-        <h3 className="text-bone text-lg mt-6 mb-3">BLACK CARD(NT$ 1,500/season)</h3>
+        <h3 className="text-bone text-lg mt-6 mb-3">BLACK CARD(NT$ 500/31 天)</h3>
         <ul className="space-y-2">
           <li>
-            <strong className="text-bone">每季 14 天退款</strong> · 您每季手動
-            轉帳當季 NT$ 1,500 入帳後 · 14 個自然日內可解除該季契約 · 全額
+            <strong className="text-bone">每期 14 天退款</strong> · 您每 31 天手動
+            轉帳當期 NT$ 500 入帳後 · 14 個自然日內可解除該期契約 · 全額
             退回 · 不按比例。
           </li>
           <li>
@@ -182,9 +182,9 @@ export default function TermsPage() {
             interview · 不寄 reactivation 文案。
           </li>
           <li>
-            <strong className="text-bone">季中未滿期</strong> · 您退款後當季
-            access 立即停止 · ZONE 27 不會繼續發您 season-end newsletter ·
-            您也不能 access BLACK CARD-only content 直到下季主動轉帳。
+            <strong className="text-bone">期中未滿</strong> · 您退款後當期
+            access 立即停止 · ZONE 27 不會繼續發您 period-end newsletter ·
+            您也不能 access BLACK CARD-only content 直到下期主動轉帳。
           </li>
         </ul>
 

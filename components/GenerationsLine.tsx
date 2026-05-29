@@ -72,9 +72,10 @@ export default function GenerationsLine() {
             &ldquo;You never actually own a Patek Philippe · you merely look
             after it for the next generation&rdquo;
           </em>{" "}
-          · 60-year continuity statement。 ZONE 27 Founders 27 seat NT$ 2,700
-          一次性 終身 + closed state = same axis · 同 Hanshin Tigers 「二代目
-          ファン」 + Berkshire shareholder continuity grammar。
+          · 60-year continuity statement。 ZONE 27 Founders 27 創始編號永久屬於
+          2026 1st Edition(不再 mint)· NT$ 2,700/年 續訂價永不漲 + closed
+          state = same axis · 同 Hanshin Tigers 「二代目ファン」 + Berkshire
+          shareholder continuity grammar。
         </p>
         <p className="text-mute/85 text-sm leading-relaxed">
           兒子問我為什麼您 follow ZONE 27?{" "}
@@ -84,7 +85,7 @@ export default function GenerationsLine() {
           >
             → /integrity
           </Link>{" "}
-          · binding rules · 永久 lifetime + 不開公開市場 + Tim 親手 executor
+          · binding rules · 創始編號永久 + 不開公開市場 + Tim 親手 executor
           protocol(per [[ethics#bus-factor]] 30-day wind-down)。
         </p>
       </div>

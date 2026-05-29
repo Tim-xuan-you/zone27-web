@@ -121,7 +121,7 @@ export default function GameThread({ gameId }: Props) {
         </label>
         <div className="mt-3 flex items-baseline justify-between gap-3 flex-wrap">
           <span className="font-mono text-mute/70 text-[10px] tracking-[0.25em]">
-            🔒 BLACK CARD 訂閱者(NT$ 1,500/season)可發言
+            🔒 BLACK CARD 訂閱者(NT$ 500/31 天)可發言
           </span>
           <Link
             href="/membership/black-card"

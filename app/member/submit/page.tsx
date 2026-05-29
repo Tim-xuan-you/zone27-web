@@ -101,7 +101,7 @@ export default function SubmitPage() {
             您寫 · <span className="text-gold">Tim curate</span> · 1 週 1 篇
           </h1>
           <p className="mt-5 text-mute text-sm sm:text-base leading-relaxed">
-            Stratechery Guest Post pattern · 沒 5% 抽成 · 沒 public 自動 post ·
+            Stratechery Guest Post pattern · 沒 10% 抽成 · 沒 public 自動 post ·
             純 Tim 親手 curate(LINE 老師 archetype 防線)。 不過稿的 reply 您
             reason · 不藏。 1 週 1 篇 cadence。
           </p>
@@ -227,7 +227,7 @@ export default function SubmitPage() {
                 ▸ 0 server-side archive · 您 submission 只走 Resend → Tim
                 Gmail · 不存 DB · per /privacy
                 <br />
-                ▸ 沒 5% 創作者抽成(那是 BLACK CARD Q3+ 才有 · 純付費 model)
+                ▸ 沒 10% 創作者抽成(那是 BLACK CARD Q3+ 才有 · 純付費 model)
               </p>
             </form>
           )}

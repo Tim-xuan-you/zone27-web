@@ -89,9 +89,9 @@ const SCENARIOS: Scenario[] = [
   {
     no: "02",
     enKicker: "REVENUE BRIDGE GAP",
-    zhTitle: "Founders 27 售完 · BLACK CARD 季票 NT$ 1,500 無法 sustain solo 工程進度",
+    zhTitle: "Founders 27 售完 · BLACK CARD NT$ 500/31 天 無法 sustain solo 工程進度",
     narrative:
-      "Founders 27 270 席位在 2027 Q1 sold out · NT$ 270,000 一次性收入入帳。 我以為這就是 break-even。 結果 BLACK CARD 季票 NT$ 1,500 conversion 比預期低 · 一年 4 季 × 100 訂戶 ≈ NT$ 600,000/年 · solo 工程 + CPBL 數據 + 客服成本超過 · 2027 年底我發現自己在補貼 · 不是 sustaining。 brand IP「engine FREE forever」 binding · 不能 monetize engine。 必須選擇:(a)放棄全職 · 兼差維持 · ship 速度 1/3 ·(b)增 Founders 27 名額 · 違反 brand IP 270 lifetime lock ·(c)加 paid features · 違反 [[feedback-zone27-paid-model-is-support-not-features]]。 三個都 hurt brand。",
+      "Founders 27 270 席位在 2027 Q1 sold out · NT$ 729,000 年度收入入帳。 我以為這就是 break-even。 結果 BLACK CARD NT$ 500/31 天 conversion 比預期低 · 一年約 12 期 × 100 訂戶 ≈ NT$ 600,000/年 · solo 工程 + CPBL 數據 + 客服成本超過 · 2027 年底我發現自己在補貼 · 不是 sustaining。 brand IP「engine FREE forever」 binding · 不能 monetize engine。 必須選擇:(a)放棄全職 · 兼差維持 · ship 速度 1/3 ·(b)增 Founders 27 名額 · 違反 brand IP 270/年 lock ·(c)加 paid features · 違反 [[feedback-zone27-paid-model-is-support-not-features]]。 三個都 hurt brand。",
     signal:
       "WATCHING · 2027 Q2 active BLACK CARD 訂戶 < 80 · 6 個月 burn rate > 6 個月 runway · Founders 27 售出 < 200 by 2027-06-30。",
     canary:

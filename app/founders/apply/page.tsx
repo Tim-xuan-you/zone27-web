@@ -82,7 +82,7 @@ export default function FoundersApplyPage() {
           </p>
           <p className="mt-3 font-mono text-mute/85 text-xs tracking-[0.25em]">
             目前 #{String(FOUNDERS_NEXT).padStart(3, "0")} 待認領 · 總額{" "}
-            {FOUNDERS_TOTAL} · 永遠不會有第二批(per{" "}
+            {FOUNDERS_TOTAL} · 2026 班(1st Edition)售完即關閉 · 不重開(per{" "}
             <Link
               href="/audit"
               className="text-gold underline-offset-4 hover:underline"

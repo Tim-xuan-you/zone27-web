@@ -9,13 +9,13 @@ import {
 
 // ── ZONE 27 · /founders Dynamic OG ─────────────────────
 // 當有人把 https://zone27-web.vercel.app/founders 貼到 LINE/FB,
-// 顯示的不是通用品牌卡,而是「FOUNDERS · 27 · 270 lifetime」
+// 顯示的不是通用品牌卡,而是「FOUNDERS · 27 · 270 / 365 天」
 // 銷售情境卡 — 直接是 sales pitch in image form。
 // ─────────────────────────────────────────────────────
 
 export const size = OG_SIZE;
 export const contentType = OG_CONTENT_TYPE;
-export const alt = "ZONE 27 · Founders 27 · Lifetime Membership";
+export const alt = "ZONE 27 · Founders 27 · Annual Founding Class";
 
 export default async function FoundersOgImage() {
   return new ImageResponse(
@@ -100,7 +100,7 @@ export default async function FoundersOgImage() {
               display: "flex",
             }}
           >
-            LIMITED EDITION · NEVER REOPENS
+            2026 FOUNDING CLASS · NEVER REOPENS
           </div>
 
           {/* 270 big numeral */}
@@ -128,7 +128,7 @@ export default async function FoundersOgImage() {
               display: "flex",
             }}
           >
-            LIFETIME MEMBERS
+            FOUNDING MEMBERS
           </div>
 
           {/* divider */}
@@ -169,7 +169,7 @@ export default async function FoundersOgImage() {
                 display: "flex",
               }}
             >
-              ONE-TIME
+              PER YEAR
             </span>
           </div>
         </div>

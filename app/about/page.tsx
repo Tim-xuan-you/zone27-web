@@ -274,8 +274,8 @@ export default function AboutPage() {
       >
         <ul className="space-y-3">
           <li>
-            <strong className="text-bone">零抽成。</strong>
-            黑金會員 creator 抽成,平台只抽 5%(創始 27 完全 0%)。對比 LINE 老師 / 投顧老師業界 30-50% 是降維打擊。
+            <strong className="text-bone">極低抽成。</strong>
+            黑金會員 creator 抽成,平台只抽 10%(創始 27 只 5%)。對比 LINE 老師 / 投顧老師業界 30-50% 是降維打擊。
           </li>
           <li>
             <strong className="text-bone">不可篡改紀錄。</strong>

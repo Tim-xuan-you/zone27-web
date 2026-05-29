@@ -76,14 +76,14 @@ export default function StickyFoundersCTA() {
         <Link
           href="/founders"
           className="flex items-center justify-between gap-3 px-4 py-3 group flex-1 min-w-0"
-          aria-label={`加入 Founders 27 · ${FOUNDERS_CLAIMED} 已認領 · ${FOUNDERS_REMAINING} 剩 · NT$ 2,700 終身`}
+          aria-label={`加入 Founders 27 · ${FOUNDERS_CLAIMED} 已認領 · ${FOUNDERS_REMAINING} 剩 · NT$ 2,700/年`}
         >
           <div className="flex flex-col min-w-0 flex-1">
             <span
               lang="en"
               className="font-mono text-gold text-[9px] tracking-[0.3em] leading-tight"
             >
-              FOUNDERS 27 · NT$ 2,700 終身
+              FOUNDERS 27 · NT$ 2,700/年
             </span>
             <span className="font-mono text-bone text-[11px] tracking-[0.15em] tabular leading-snug mt-0.5">
               <span className="text-gold">{FOUNDERS_CLAIMED}</span>
@@ -92,7 +92,7 @@ export default function StickyFoundersCTA() {
               <span className="text-mute/60 mx-1.5">·</span>
               <span>{FOUNDERS_REMAINING} 席</span>
               <span className="text-mute/60 mx-1.5">·</span>
-              <span className="text-mute">永久關閉</span>
+              <span className="text-mute">2026 班關閉</span>
             </span>
           </div>
           <span

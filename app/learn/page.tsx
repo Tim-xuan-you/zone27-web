@@ -171,7 +171,7 @@ export default function LearnPage() {
           <ul className="space-y-2 list-none pl-0">
             <li>▸ 我們<strong className="text-bone">不接受下注</strong> · 沒有彩金 · 沒有對賭</li>
             <li>▸ 我們<strong className="text-bone">不收交易抽成</strong>(您下注我們不賺)</li>
-            <li>▸ 我們的收入是 Founders 27 一次性會員 + BLACK CARD CPBL 季票 — 您贏您輸都一樣</li>
+            <li>▸ 我們的收入是 Founders 27 年度會員 + BLACK CARD 31 天通行 — 您贏您輸都一樣</li>
           </ul>
           <p>
             如果您看完機率之後仍想去博彩平台下注?那是您的選擇 — 我們不阻止也不從中抽錢。
@@ -181,7 +181,7 @@ export default function LearnPage() {
           <ChapterFooter
             cta="ZONE 27 4-tier 會員制 →"
             href="/membership"
-            note="從匿名免費到 NT$ 2,700 終身 · 任時可選 · 我們不催"
+            note="從匿名免費到 NT$ 2,700 / 年 · 任時可選 · 我們不催"
           />
         </Chapter>
 
@@ -211,7 +211,7 @@ export default function LearnPage() {
               kicker="MEMBERSHIP"
               zh="ZONE 27 4-tier 會員制"
               href="/membership"
-              note="從免費到 NT$ 2,700 終身 · 任時可選"
+              note="從免費到 NT$ 2,700 / 年 · 任時可選"
               gold
             />
           </div>
