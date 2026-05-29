@@ -183,6 +183,49 @@ const rawMatches: Match[] = [
     ],
     aiConfidence: 68,
   },
+  {
+    id: "cpbl-260530-03",
+    league: "CPBL",
+    date: "2026 · 05 · 30  ·  星期六",
+    startTime: "17:05",
+    venue: "樂天桃園棒球場",
+    home: {
+      name: "樂天桃猿",
+      en: "MONKEYS",
+      pitcher: {
+        name: "曾家輝",
+        era: "2.80", // 真實 · 2026 累計
+        k9: "7.5", // estimate
+        whip: "1.30", // estimate
+        bb9: "3.2", // estimate
+        hr9: "0.51", // 真實 · 2 HR / 35.1 局 × 9
+      },
+      recent: ["L", "W", "L", "L", "W"], // placeholder · 樂天 17-22
+      winRate: 54,
+    },
+    away: {
+      name: "統一7-ELEVEn獅",
+      en: "LIONS",
+      pitcher: {
+        name: "後勁",
+        era: "4.15", // 真實 · 2026 累計(生涯佳 · 今年較高)
+        k9: "7.5", // estimate
+        whip: "1.28", // estimate · 被安打低 28/39
+        bb9: "3.5", // estimate
+        hr9: "0.00", // 真實 · 0 HR / 39 局(極佳壓制)
+      },
+      recent: ["W", "L", "W", "W", "L"], // placeholder · 統一 23-19
+      winRate: 46,
+    },
+    topScores: [
+      { score: "4 : 3", probability: 11.5 },
+      { score: "3 : 2", probability: 11.0 },
+      { score: "3 : 4", probability: 10.5 },
+      { score: "2 : 3", probability: 9.5 },
+      { score: "5 : 3", probability: 8.5 },
+    ],
+    aiConfidence: 54,
+  },
 
   // ── 2026-05-21 · 第一筆來自 cpbl.com.tw 真實截圖的 CPBL 資料 ──
   // 來源:Tim 截圖 cpbl.com.tw 一軍賽程 2026/05/21 比賽 #112
