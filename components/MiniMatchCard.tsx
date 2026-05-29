@@ -132,17 +132,28 @@ export default function MiniMatchCard({ match }: { match: Match }) {
           </span>
         </div>
 
-        {/* Static signature bar */}
-        <div className="relative h-[2px] bg-line/80 overflow-visible">
+        {/* Polymarket-style market line · two-sided split · favorite in gold ·
+            underdog muted(replaces the thin one-sided 2px line)。 Reads instantly
+            as「63 / 37」。 This is the ENGINE opening line now · crowd-driven
+            movement layers on once migration 0003(predictions table)is applied。
+            Any gap = tie probability(home%+away% < 100)· honest residual。 */}
+        <div
+          className="relative h-2 sm:h-2.5 flex overflow-hidden rounded-full bg-line/50"
+          role="img"
+          aria-label={`引擎開盤線 · ${match.home.en} ${homePct}% / ${match.away.en} ${awayPct}%`}
+        >
           <div
-            className="absolute top-0 left-0 h-full bg-gold glow-gold"
+            className={`h-full ${homeFav ? "bg-gold glow-gold" : "bg-mute/45"}`}
             style={{ width: `${homePct}%` }}
           />
           <div
-            className="absolute -top-1 h-[8px] w-px bg-gold/80"
-            style={{ left: `${homePct}%` }}
+            className={`h-full ${!homeFav ? "bg-gold glow-gold" : "bg-mute/45"}`}
+            style={{ width: `${awayPct}%` }}
           />
         </div>
+        <p className="mt-1.5 text-center font-mono text-mute/55 text-[8px] tracking-[0.3em]">
+          引擎開盤線 · ENGINE LINE
+        </p>
 
         {/* Round 34 W-A · ConfidenceStars per-card 同 hero AI promise · static
             locked 5★ STRONG → 1★ COIN-FLIP visual hierarchy · authority bias +

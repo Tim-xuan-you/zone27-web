@@ -255,17 +255,24 @@ function MiniMatchCard({ match }: { match: Match }) {
         </span>
       </div>
 
-      {/* glow bar */}
-      <div className="relative h-[2px] bg-line/80">
+      {/* Polymarket-style market line · two-sided split · favorite gold · underdog muted */}
+      <div
+        className="relative h-2 sm:h-2.5 flex overflow-hidden rounded-full bg-line/50"
+        role="img"
+        aria-label={`引擎開盤線 · ${match.home.en} ${match.home.winRate}% / ${match.away.en} ${match.away.winRate}%`}
+      >
         <div
-          className="absolute top-0 left-0 h-full bg-gold glow-gold"
+          className={`h-full ${homeFavored ? "bg-gold glow-gold" : "bg-mute/45"}`}
           style={{ width: `${match.home.winRate}%` }}
         />
         <div
-          className="absolute -top-1 h-[10px] w-px bg-gold/80"
-          style={{ left: `${match.home.winRate}%` }}
+          className={`h-full ${!homeFavored ? "bg-gold glow-gold" : "bg-mute/45"}`}
+          style={{ width: `${match.away.winRate}%` }}
         />
       </div>
+      <p className="mt-1.5 text-center font-mono text-mute/55 text-[8px] tracking-[0.3em]">
+        引擎開盤線 · ENGINE LINE
+      </p>
 
       {/* pitcher line */}
       <div className="mt-5 pt-4 border-t border-line/50 flex justify-between text-xs">
