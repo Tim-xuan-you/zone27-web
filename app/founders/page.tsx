@@ -220,7 +220,7 @@ const INLINE_FAQ = [
   },
   {
     q: "Tim 會存我什麼資料?",
-    a: "(1)Email(magic link 用 · Supabase Tokyo · RLS-locked · 0 server-side analytics)·(2)Founders 27 銀行轉帳 ZONE27-#NNN 備註碼 + 您姓名(public ledger 用 · per /founders/ledger)。 不存:身分證 / 信用卡 / 電話 / 地址 / IP / 瀏覽行為。 完整 inventory 見 /privacy + /transparency。",
+    a: "(1)Email(magic link 用 · Supabase Tokyo · RLS-locked · 0 server-side analytics)·(2)Founders 27 銀行轉帳 ZONE27-#NNN 備註碼 + 您姓名(public ledger 用 · per /founders/ledger)。 不存:身分證 / 信用卡 / 電話 / 地址 / IP / 瀏覽行為。 完整 inventory 見 /privacy + /audit。",
   },
   {
     q: "可以贈送 Founders 27 給朋友嗎?",

@@ -391,7 +391,7 @@ export default function BlackCardPage() {
               Owner&rsquo;s Manual pattern · 公開 binding bond。
             </p>
             <p className="mt-2 font-mono text-mute/70 text-[10px] tracking-[0.3em] group-hover:text-mute transition-colors">
-              /integrity · /ethics · /audit · /transparency →
+              /integrity · /ethics · /audit →
             </p>
           </Link>
         </section>
