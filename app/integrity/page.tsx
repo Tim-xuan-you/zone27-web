@@ -72,7 +72,7 @@ const REDLINES: ReadonlyArray<{ no: string; rule: string; basis: string }> = [
   {
     no: "09",
     rule: "不 modal paywall scroll-lock",
-    basis: "0 modal · 0 scroll-lock · 0「subscribe to read more」 overlay · per /audit S05 PRE-COMMIT clause + Medium subscribe modal anti-pattern · /transparency NO_PUSH_MANIFEST #10",
+    basis: "0 modal · 0 scroll-lock · 0「subscribe to read more」 overlay · per /audit S05 PRE-COMMIT clause + Medium subscribe modal anti-pattern",
   },
   {
     no: "10",

@@ -301,9 +301,8 @@ export default function AnnualIndex() {
           <p className="mt-6 font-mono text-mute/70 text-[10px] tracking-[0.25em] leading-relaxed">
             ⚓ 此 10-year ledger 不可降(per /audit S05 PRE-COMMIT)·
             extending past Year 9(2035)需公開 binding 加 longer list ·
-            shortening 違反 brand axiom。 If Tim 退場 · per /heritage seat-
-            transfer protocol + /founders/inheritance 4-rule 由社群繼承
-            publishing 義務。
+            shortening 違反 brand axiom。 If Tim 退場 · publishing 義務由社群承接 ·
+            succession 細節見 /founders/postmortem-2028。
           </p>
         </section>
 

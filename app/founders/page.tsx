@@ -46,7 +46,7 @@ export const revalidate = 3600;
 const DOLLAR_DIDNT_BUY: { what: string; why: string }[] = [
   {
     what: "明牌 / 內幕消息",
-    why: "ZONE 27 不接受下注 · 不出彩金 · 不撮合對賭 · 沒有「老師明牌」 可以給 · per /transparency#section-02",
+    why: "ZONE 27 不接受下注 · 不出彩金 · 不撮合對賭 · 沒有「老師明牌」 可以給 · per /integrity",
   },
   {
     what: "Tim 私人 DM access",

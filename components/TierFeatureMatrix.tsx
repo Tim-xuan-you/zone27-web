@@ -155,7 +155,7 @@ const FEATURES: Feature[] = [
   },
   {
     label: "編號 #001-#270 永久 identity",
-    detail: "/founders/seat-card/[N] permanent permalink · 像 Patek serial",
+    detail: "永久綁定編號 · 像 Patek serial number · 公開於 /founders/ledger",
     unlock: {
       anonymous: "locked",
       free: "locked",
