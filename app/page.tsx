@@ -110,11 +110,17 @@ export default function Home() {
   const todayMatches = getTodayMatches();
   const useMultiMatch = todayMatches.length >= 2;
   const featuredMatch = useMultiMatch ? null : getFeaturedMatch();
-  const trackRecord = useMultiMatch ? getTrackRecordStats() : null;
-  // R163 NUCLEAR SUBTRACTION · heroTrackRecord var removed · R115 W3 ledger line
-  // consumer cut per Tim canary fire「網頁好雜 · 請刪除」 · /track-record canonical
-  // surface preserved(F6 strip + Footer + RelatedReading + /audit)· per Apple
-  // Newsroom「page = 1 thing」 + Steve Jobs Say-NO discipline。
+  // trackRecord now computed unconditionally(was useMultiMatch-gated)· the
+  // front-door scoreboard strip in the hero needs it on EVERY render · not only
+  // multi-match nights。 TonightReceiptsCard still consumes it gated by
+  // useMultiMatch(behavior unchanged)。
+  // This RE-ADDS a hero track-record element · deliberately reversing R163's
+  // heroTrackRecord removal(「網頁好雜 · 請刪除」)· because Tim explicitly
+  // mandated「首頁第一眼 = 真實勝敗結算表 · 連輸的也掛上來」。 This is NOT the
+  // old 太雜 clutter line — it is the single brand-defining proof on the front
+  // door。 Moat vs 報馬仔/玩運彩 = DIVERGED published equal-weight next to PROVED
+  // · not buried behind a click。
+  const trackRecord = getTrackRecordStats();
 
   return (
     <div className="flex flex-col flex-1 min-h-screen">
@@ -187,6 +193,83 @@ export default function Home() {
         <p className="mt-3 sm:mt-4 max-w-md mx-auto text-mute leading-relaxed text-sm sm:text-base">
           今晚 CPBL · 我跑 1 萬次模擬給您看 · 對了 / 錯了 全進 ledger。
         </p>
+
+        {/* FRONT-DOOR SCOREBOARD · Tim mandate「首頁第一眼 = 真實勝敗結算表 ·
+            連輸的一起掛上去」。 The copy one line above promises「對了/錯了 全進
+            ledger」 → here we immediately SHOW that ledger with real numbers
+            (promise→proof adjacency)。 Moat physics vs 報馬仔/玩運彩:DIVERGED ✕
+            rendered EQUAL-weight next to PROVED ✓ · losses on the FRONT DOOR ·
+            not hidden(0 藏)。 Honest small-N discipline:NO PROVED-rate brag
+            (per /track-record N<30 caveat + FirstReceiptHero「N=1 ≠ SIGNAL」
+            axiom)· raw counts only · 不吹言中率。 Renders only when total > 0
+            (no empty fake state · Pratfall)· whole strip links /track-record. */}
+        {trackRecord.total > 0 && (
+          <div className="mt-5 sm:mt-6 mx-auto max-w-xl">
+            <Link
+              href="/track-record"
+              className="block border border-gold/40 bg-slate/30 hover:bg-slate/40 hover:border-gold/60 transition-colors px-4 py-3.5 sm:px-5 sm:py-4"
+              aria-label={`公開戰績 · 已對賬 ${trackRecord.total} 場 · 引擎言中 ${trackRecord.proved} · 落空 ${trackRecord.diverged}${trackRecord.push > 0 ? ` · 平手 ${trackRecord.push}` : ""} · 連輸的也公開掛在首頁 · 點進看完整結算表`}
+            >
+              <span className="flex items-baseline justify-between gap-3 flex-wrap">
+                <span className="font-mono text-gold/90 text-[10px] sm:text-[11px] tracking-[0.3em]">
+                  公開戰績 · 連輸的也掛上來
+                </span>
+                <span
+                  lang="en"
+                  className="font-mono text-mute/70 text-[9px] tracking-[0.3em]"
+                >
+                  0 藏 · 完整 →
+                </span>
+              </span>
+
+              <span className="mt-3 flex items-baseline justify-center gap-4 sm:gap-6 flex-wrap font-mono tabular">
+                <span className="text-bone whitespace-nowrap">
+                  <strong className="text-gold text-2xl sm:text-3xl font-light">
+                    {trackRecord.total}
+                  </strong>
+                  <span className="text-mute text-[10px] tracking-[0.2em] ml-1.5">
+                    場已對賬
+                  </span>
+                </span>
+                <span aria-hidden="true" className="text-mute/40">·</span>
+                <span className="text-gold whitespace-nowrap">
+                  <strong className="text-xl sm:text-2xl font-light">
+                    ✓{trackRecord.proved}
+                  </strong>
+                  <span className="text-gold/70 text-[10px] tracking-[0.2em] ml-1">
+                    PROVED
+                  </span>
+                </span>
+                <span aria-hidden="true" className="text-mute/40">·</span>
+                <span className="text-loss whitespace-nowrap">
+                  <strong className="text-xl sm:text-2xl font-light">
+                    ✕{trackRecord.diverged}
+                  </strong>
+                  <span className="text-loss/70 text-[10px] tracking-[0.2em] ml-1">
+                    DIVERGED
+                  </span>
+                </span>
+                {trackRecord.push > 0 && (
+                  <>
+                    <span aria-hidden="true" className="text-mute/40">·</span>
+                    <span className="text-mute whitespace-nowrap">
+                      <strong className="text-xl sm:text-2xl font-light">
+                        ={trackRecord.push}
+                      </strong>
+                      <span className="text-mute/70 text-[10px] tracking-[0.2em] ml-1">
+                        PUSH
+                      </span>
+                    </span>
+                  </>
+                )}
+              </span>
+
+              <span className="mt-2.5 block text-center font-mono text-mute/70 text-[9px] sm:text-[10px] tracking-[0.2em] leading-relaxed">
+                樣本還小 · 不吹言中率 · 每場賽後實際比分都公開
+              </span>
+            </Link>
+          </div>
+        )}
 
         {/* R142 W8 · TONIGHT micro-receipt above-the-fold · Agent C R142 TOP
             friction-point fix · Picture Superiority Effect(Paivio 1971「Imagery
