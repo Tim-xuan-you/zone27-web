@@ -232,6 +232,23 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
       title: "倒置宣言 · 為何公開戰績是品牌 IP",
     },
   ],
+  "/ladder": [
+    {
+      href: "/matches",
+      kicker: "matches",
+      title: "今日賽事 · 進場鎖預測 · 開始爬天梯",
+    },
+    {
+      href: "/calibration",
+      kicker: "calibration",
+      title: "引擎自評 · 你要贏過的對手",
+    },
+    {
+      href: "/track-record",
+      kicker: "track-record",
+      title: "公開戰績 · 王座那張卡的數字來源",
+    },
+  ],
   "/calibration": [
     {
       href: "/track-record",

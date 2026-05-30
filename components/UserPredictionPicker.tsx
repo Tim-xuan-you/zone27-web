@@ -194,14 +194,14 @@ export default function UserPredictionPicker({
       )}
 
       <p className="font-mono text-mute/55 text-[9px] tracking-[0.25em] mt-3 leading-relaxed">
-        ▸ 您的預測自動進公開戰績 · 準度累積到{" "}
+        ▸ 您的預測自動進公開戰績 · 準度累積上{" "}
         <Link
-          href="/calibration"
+          href="/ladder"
           className="text-gold/80 hover:text-gold underline-offset-4 hover:underline transition-colors"
         >
-          /calibration
+          海選天梯
         </Link>
-        (海選排行榜即將上線)· 0 金錢 · 0 兌獎 · 純精神預測。
+        (新秀 → 神諭)· 0 金錢 · 0 兌獎 · 純精神預測。
       </p>
     </div>
   );
