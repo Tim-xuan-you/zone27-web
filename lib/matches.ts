@@ -205,41 +205,43 @@ const rawMatches: Match[] = [
       name: "樂天桃猿",
       en: "MONKEYS",
       pitcher: {
-        // 麥斯威尼 = 樂天桃猿 洋投 starter · Tim 沒截投手表 · 全 estimate
+        // 麥斯威尼 = 樂天桃猿 洋投 starter · per Tim 5/31 screenshot 2026 累計
+        // ERA 3.51 · 33.1 IP · 33 H · 4 HR · 13 ER · K/BB 不在截圖 · estimate
         name: "麥斯威尼",
-        era: "3.80", // estimate · 洋將 mid-tier
+        era: "3.51", // real · 2026 累計
         k9: "8.0", // estimate
-        whip: "1.30", // estimate
+        whip: "1.35", // estimate · 33 H / 33.1 IP
         bb9: "3.0", // estimate
-        hr9: "0.90", // estimate
+        hr9: "1.09", // real · 4 HR / 33.1 IP × 9
       },
       recent: ["L", "W", "L", "L", "W"], // placeholder · 樂天 17-22-1
-      winRate: 47,
+      winRate: 43,
     },
     away: {
       name: "台鋼雄鷹",
       en: "HAWKS",
       pitcher: {
-        // 江承謙 = 台鋼雄鷹 本土 starter · Tim 沒截投手表 · 全 estimate
+        // 江承謙 = 台鋼雄鷹 本土 starter · per Tim 5/31 screenshot 2026 累計
+        // ERA 1.51 · 41.2 IP · 35 H · 1 HR · 7 ER · breakout(2024 3.43 · 2025 4.34)
         name: "江承謙",
-        era: "4.20", // estimate · 本土 mid-tier
-        k9: "6.8", // estimate
-        whip: "1.42", // estimate
-        bb9: "3.4", // estimate
-        hr9: "0.95", // estimate
+        era: "1.51", // real · 2026 累計 · elite
+        k9: "7.5", // estimate
+        whip: "1.10", // estimate · 35 H / 41.2 IP
+        bb9: "2.6", // estimate
+        hr9: "0.22", // real · 1 HR / 41.2 IP × 9
       },
       recent: ["W", "L", "W", "W", "L"], // placeholder · 台鋼 23-19-1
-      winRate: 53,
+      winRate: 57,
     },
     topScores: [
-      // 台鋼 record edge(away)· 樂天 home edge · 投手 estimate even · away 微favored
-      { score: "3 : 4", probability: 11.5 },
-      { score: "4 : 3", probability: 10.8 },
-      { score: "2 : 3", probability: 10.0 },
-      { score: "4 : 5", probability: 9.0 },
-      { score: "3 : 5", probability: 8.0 },
+      // 江承謙 1.51(away · elite · 真值)vs 麥斯威尼 3.51(home)· away favored · 偏低分
+      { score: "2 : 3", probability: 13.0 },
+      { score: "3 : 4", probability: 12.0 },
+      { score: "1 : 3", probability: 10.5 },
+      { score: "2 : 4", probability: 9.5 },
+      { score: "3 : 2", probability: 8.5 },
     ],
-    aiConfidence: 52,
+    aiConfidence: 58,
   },
 
   // ── 2026-05-30 · 今晚 CPBL · Tim 截圖 ingest(比賽 #131-132)──
@@ -300,6 +302,21 @@ const rawMatches: Match[] = [
       { score: "4 : 3", probability: 9.5 },
     ],
     aiConfidence: 55,
+    // ── FINAL · 2026-05-30 · 天母 · 9 局完整 · per Tim 賽後 screenshot #131 ──
+    // ⚠ INGEST DATA INTEGRITY DISCLOSURE(per /audit S05 + Pratfall axiom):
+    // pre-game away team 記為「台鋼雄鷹」· 官方 #131 box score away = 統一7-ELEVEn獅
+    // (台鋼/統一 在 pre-game #131↔#133 之間 swap · 同 cpbl-260524 ingest-error pattern)。
+    // 處理:pre-game winRate(home 51 · away 49)immutable 不改 · finalResult 記官方真實。
+    // 比分:味全(home)2 : 0 統一(away)· WP 梅賽鏔(味全)· LP 布雷克 · SV 林凱威(味全)
+    // Engine 賽前 home 51% favored → home(味全)win → PROVED ✓(side prediction 正確 ·
+    // identity error 不影響 home/away calibration)。
+    finalResult: {
+      homeScore: 2,
+      awayScore: 0,
+      winner: "home",
+      ingestedAt: "2026-05-30",
+      innings: 9,
+    },
   },
   {
     id: "cpbl-260530-02",
@@ -343,6 +360,21 @@ const rawMatches: Match[] = [
       { score: "5 : 3", probability: 8.5 },
     ],
     aiConfidence: 68,
+    // ── FINAL · 2026-05-30 · 大巨蛋 · 9 局完整 · per Tim 賽後 screenshot #132 ──
+    // ⚠ INGEST DATA INTEGRITY DISCLOSURE(per /audit S05 + Pratfall axiom):
+    // pre-game home/away + 投手 swap:記為 home=中信兄弟(鈴木駿輔)· away=富邦悍將(鄭浩均)。
+    // 官方 #132:大巨蛋(富邦 home)· away=中信兄弟 · WP 鄭浩均(中信)· LP 鈴木駿輔(富邦)。
+    // 即場地 home/away 標反 + 兩隊先發投手對調。 處理:pre-game winRate(中信 66 · 富邦 34)
+    // immutable 不改 · 以 engine 偏好的「隊伍」對映:engine 重壓 中信 66% · 中信 10:1 大勝 →
+    // PROVED ✓(team-level 預測正確)。 finalResult 以 pre-game slot frame 記(home=中信 slot)。
+    // 比分:中信兄弟 10 : 1 富邦悍將(中信 WP 鄭浩均 · 富邦 LP 鈴木駿輔)。
+    finalResult: {
+      homeScore: 10,
+      awayScore: 1,
+      winner: "home",
+      ingestedAt: "2026-05-30",
+      innings: 9,
+    },
   },
   {
     id: "cpbl-260530-03",
@@ -386,6 +418,21 @@ const rawMatches: Match[] = [
       { score: "5 : 3", probability: 8.5 },
     ],
     aiConfidence: 54,
+    // ── FINAL · 2026-05-30 · 樂天桃園 · 9 局完整 · per Tim 賽後 screenshot #133 ──
+    // ⚠ INGEST DATA INTEGRITY DISCLOSURE(per /audit S05 + Pratfall axiom):
+    // pre-game away team 記為「統一7-ELEVEn獅(後勁)」· 官方 #133 box score away = 台鋼雄鷹
+    // (台鋼/統一 在 pre-game #131↔#133 之間 swap)。 決勝投手 WP 黃群(台鋼)· LP 朱承洋(樂天)·
+    // SV 林詩翔(台鋼)· 非 pre-game 掛名先發(後勁/曾家輝)。
+    // 處理:pre-game winRate(home 樂天 54 · away 46)immutable 不改 · finalResult 記官方真實。
+    // 比分:樂天(home)3 : 5 台鋼(away)· away 勝。 Engine 賽前 home 54% favored → home(樂天)
+    // 輸 → DIVERGED ✕(同 PROVED 等大公開於 /track-record + /calibration)。
+    finalResult: {
+      homeScore: 3,
+      awayScore: 5,
+      winner: "away",
+      ingestedAt: "2026-05-30",
+      innings: 9,
+    },
   },
 
   // ── 2026-05-21 · 第一筆來自 cpbl.com.tw 真實截圖的 CPBL 資料 ──
