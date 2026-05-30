@@ -1,547 +1,186 @@
 import Link from "next/link";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
-import HeroLiveCard from "@/components/HeroLiveCard";
-import TonightReceiptsCard from "@/components/TonightReceiptsCard";
-import DailyReturnRail from "@/components/DailyReturnRail";
-import ClientErrorBoundary from "@/components/ClientErrorBoundary";
-import RecentMatchesRow from "@/components/RecentMatchesRow";
-import AnonCalibrationStrip from "@/components/AnonCalibrationStrip";
-import AnonPickWidget from "@/components/AnonPickWidget";
-import LivingCoverHero from "@/components/LivingCoverHero";
+import MiniMatchCard from "@/components/MiniMatchCard";
 import {
-  getFeaturedMatch,
-  getTodayMatches,
+  getTodayAndFutureMatches,
+  getFinalizedMatches,
   getTrackRecordStats,
 } from "@/lib/matches";
-import {
-  FOUNDERS_TOTAL,
-  FOUNDERS_REMAINING,
-  FOUNDERS_CLAIMED,
-} from "@/lib/founders-stats";
 
-// ── ISR · re-evaluate featured match every 10 minutes. ─────
-// Without revalidate the homepage is fully static · frozen at
-// build time · which breaks every lifecycle transition that
-// isn't accompanied by a git push:
-//   · 18:35 today-pregame → today-live(badge stays as PREGAME)
-//   · 22:00+ today-live → today-final WHEN Tim's ingest runs
-//     a git push(handled · build refreshes)BUT also when Tim
-//     ingests via Supabase Studio without a deploy(future state)
-//   · 00:00 day rollover · today → stale-archived · next-day
-//     future → today-pregame(homepage shows yesterday's data
-//     all morning until manual deploy)
-// 600 s mirrors /matches/mlb · same「lifecycle-state page」cadence.
-export const revalidate = 600;
-
-// ── ZONE 27 · Homepage(Round 3 · Apple-grade compression)──
+// ── ZONE 27 · Homepage · 市場看板(R175 Polymarket pivot)──────
+// Tim 2026-05-30「請變成 Polymarket · 很亂很雜」· per
+// memory/project_zone27_polymarket_pivot.md + [[feedback-zone27-homepage-minimalism]]
+// subtraction-first。
 //
-// Round 1-2 had 8 sections trying to prove credibility on the
-// homepage. Tim's critique on 2026-05-21 PM:
-//   「我們網站好雜...走極簡風...心理學怎麼看?」
-//
-// He's right. Apple homepage doesn't list features — it shows
-// ONE product at a time. Stratechery's homepage is the latest
-// article, not a credentials wall. Linear's homepage is a product
-// demo. ZONE 27's parallel is:
-//
-//   1. Hero  — the soul statement(一句話)
-//   2. Live engine card — THE demo(receipt of credibility)
-//   3. Founders 27 — the offer
-//
-// Everything else(/manifesto · /audit · /coverage · /privacy ·
-// /track-record · /roadmap · /discipline · /methodology · /glossary ·
-// /faq · /about · /learn · /changelog · /signal-board · /lab · ...)
-// is still reachable via:
-//   ▸ Cmd-K / Ctrl-K palette(54 visitor-discoverable routes indexed)
-//   ▸ Footer 4-column nav
-//   ▸ Inline links from /manifesto + /audit + each trust artifact
-//
-// The brand-IP「方法公開」isn't broken — it's just no longer SHOUTED
-// on the homepage. Depth lives behind clicks · visitors who want it
-// earn it · visitors who don't get a clean front door.
-//
-// Psychology backing:
-//   - Hick's Law(more choices = slower decisions)
-//   - Cognitive load theory(more elements = less retention)
-//   - F-pattern reading(top-down scanning · we own the top 2 rows)
-//   - Apple's「一畫面一件事」after Norman 1988 + 2019 nngroup updates
-//
-// Sections removed from homepage(content preserved on other pages):
-//   ❌ CREDIBILITY STRIP(3-cell DATA·ENGINE·METHOD)
-//      → covered by HeroLiveCard methodology line + /audit
-//   ❌ THREE PILLARS(會員制低抽成 · 不可篡改 · Monte Carlo)
-//      → covered by /manifesto + /discipline canonical
-//   ❌ BRAND INVERSION THESIS(4 倒置 TLDR)
-//      → fully covered by /manifesto canonical
-//   ❌ BY THE NUMBERS bento(6 proof tiles)
-//      → covered by /audit Section 00 BUILD chip + /track-record
-//   ❌ TRUST STACK(8-doc grid)
-//      → covered by Footer + Cmd-K palette + Footer FUNDED-BY line
-//
-// Reversibility: one `git revert` brings everything back. Components
-// were inline · purged with the section that used them · no orphan code.
+// 翻轉 IA:市場優先,出版其次。 首頁 = 一片市場看板(每場賽事 = 一張市場卡 ·
+// 引擎開盤線 + 點進去討論/分析/預測)· 不再是單場 cinematic + 7 條 strip。
+// 舊的 HeroLiveCard / TonightReceiptsCard / 各種 localStorage strip 退場
+// (元件保留 · 一個 git revert 可回)· brand IP Pratfall(F6 negations · 公開
+// 戰績含 DIVERGED)保留但 demote 到看板下方。 引擎 cinematic 仍在 /matches/[gameId]。
 // ─────────────────────────────────────────────────────
 
+export const revalidate = 600; // ISR · 賽事 lifecycle transitions
+
 export default function Home() {
-  // Round 31 Wave A · Multi-match Costly Signaling moment.
-  //
-  // When today has 2+ matches (CPBL 3-game nights · MLB doubleheaders ·
-  // future cross-league days), the homepage switches from the
-  // single-match HeroLiveCard cinematic to TonightReceiptsCard — a
-  // 2-or-3-card grid that shows all of tonight's PRE-LOCKED engine
-  // predictions side-by-side. Brand IP physics:
-  //
-  //   - One night = N receipts. The bigger N, the more chance to be
-  //     visibly wrong. Putting them all on the front door is the
-  //     Costly Signaling move.
-  //   - Cumulative track record (TRACK RECORD · N=X · ✓Y ✕Z) lives
-  //     in the card footer · visitor sees the audit trail growing.
-  //   - "Engine published BEFORE first pitch" timestamp = pre-lock-in
-  //     proof. Static engine output (no live re-simulation) ensures
-  //     we cannot game the receipt by re-sampling.
-  //
-  // When today has 1 or 0 matches, we fall back to the existing
-  // getFeaturedMatch() priority chain (today active → today final →
-  // recent finalized → future) which HeroLiveCard renders with its
-  // live 1000-sim Monte Carlo cinematic. Single-match days keep the
-  // single-match theatre · multi-match days get the multi-receipt
-  // grid · brand IP soul preserved across both modes.
-  const todayMatches = getTodayMatches();
-  const useMultiMatch = todayMatches.length >= 2;
-  const featuredMatch = useMultiMatch ? null : getFeaturedMatch();
-  // trackRecord now computed unconditionally(was useMultiMatch-gated)· the
-  // front-door scoreboard strip in the hero needs it on EVERY render · not only
-  // multi-match nights。 TonightReceiptsCard still consumes it gated by
-  // useMultiMatch(behavior unchanged)。
-  // This RE-ADDS a hero track-record element · deliberately reversing R163's
-  // heroTrackRecord removal(「網頁好雜 · 請刪除」)· because Tim explicitly
-  // mandated「首頁第一眼 = 真實勝敗結算表 · 連輸的也掛上來」。 This is NOT the
-  // old 太雜 clutter line — it is the single brand-defining proof on the front
-  // door。 Moat vs 報馬仔/玩運彩 = DIVERGED published equal-weight next to PROVED
-  // · not buried behind a click。
-  const trackRecord = getTrackRecordStats();
+  const upcoming = getTodayAndFutureMatches(); // 今晚 + 即將 · asc
+  const receipts = getFinalizedMatches().slice(0, 6); // 最近結算 · newest first
+  const tr = getTrackRecordStats();
 
   return (
     <div className="flex flex-col flex-1 min-h-screen">
       <Nav active="home" />
 
       <main id="main">
+        {/* ── HERO · slim · market-first ─────────────── */}
+        <section className="mx-auto max-w-5xl px-6 sm:px-10 pt-12 sm:pt-16 pb-8 text-center">
+          <h1 className="text-3xl sm:text-5xl font-light leading-[1.08] tracking-tight text-bone">
+            不靠直覺,<span className="text-gold">只看演算法。</span>
+          </h1>
+          <p className="mt-4 sm:mt-5 max-w-2xl mx-auto text-mute leading-relaxed text-sm sm:text-base">
+            台灣 CPBL 預測市場 · 引擎免費跑 1 萬次給你看 · 群眾一起押 · 準的爬上天梯。{" "}
+            <span className="text-bone">不藏結果 · 不抽下注 · 不收明牌費。</span>
+          </p>
 
-      {/* ── HERO · R82 RADICAL CUT(per Tim「太複雜」 founder-dogfood
-          canary fire · Apple iPhone product page pattern · 1 screen 1 thing)
-
-          Cut(R82 simplification per founder-dogfood-canary trump):
-          ❌ kicker line「AI 量化棒球引擎 · QUANTITATIVE BASEBALL AI ·
-             EST. 2026」(engineer-grammar · move to Footer)
-          ❌「信號強度 5★ → 1★ COIN-FLIP」 jargon → 「對了/錯了 全公開」 plain
-          ❌「公開可驗證 · 不收下注佣 · 不推薦投注」 regulatory line →
-             move to Footer(brand IP 仍 surface · 但 hero 不 carry)
-          ❌「270 = Tim 一年親手 sign-off 上限」 filter line → only on
-             /founders page(per pratfall-brand-ip 守住 · 但 hero 不 carry)
-
-          Kept(brand IP 守住 per pratfall axiom):
-          ✓ H1 slogan「不靠直覺, 只看演算法。」
-          ✓ Cold Gold Hairline signature
-          ✓ EN slogan「WE DON'T GUESS. WE COMPUTE.」
-          ✓ Founders 27 CTA pill
-          ✓ ↓ 今晚的引擎 scroll hint
-
-          Apple/Stripe/Linear precedent: hero = 1 brand statement +
-          1 primary CTA + 1 secondary action. No philosophy. No
-          regulatory disclaimer. No filter copy. Those live deeper. */}
-      <section className="mx-auto max-w-4xl px-6 sm:px-10 pt-12 sm:pt-32 pb-10 sm:pb-20 text-center">
-        <h1 className="text-4xl sm:text-6xl md:text-7xl font-light leading-[1.05] tracking-tight text-bone">
-          不靠直覺,
-          <br />
-          <span className="text-gold">只看演算法。</span>
-        </h1>
-        <div className="zone27-rule mx-auto max-w-[280px]" aria-hidden="true" />
-
-        <p
-          lang="en"
-          className="font-mono text-mute text-xs sm:text-sm tracking-[0.3em] mt-5 sm:mt-8"
-        >
-          WE DON&apos;T GUESS. WE COMPUTE.
-        </p>
-
-        {/* R121 W1+W3 · NEW value prop one-liner per Tim 第二級 founder-dogfood-canary
-            fire(R32 W-C precedent)· Tim 自己 R121 問「我們的網站到底能幹嘛 ·
-            有何優點 · 有本錢收費」 → founder cannot articulate own value prop
-            = homepage value prop 沒 land for founder himself · per Stripe
-            (「Payments infrastructure for the internet」)/ Plausible(「Simple
-            and privacy-friendly Google Analytics alternative」)/ Linear(「Built
-            for the world's best teams」)/ Defector(「Worker-owned · ad-free」)
-            pattern · world-class brands 都有 crystal-clear ONE-sentence
-            「what we are + why different」 在 hero 顯示 · ZONE 27 之前 只有
-            H1 philosophy slogan + 行動 subtitle · 缺 category-defining
-            one-liner · 此 NEW line 補。 brand IP triple-fire: Disclosure(公開)
-            + Pratfall(不藏結果)+ 倒置 SaaS(不抽下注分成 vs 玩運彩+報馬仔
-            業務 model 直接 OR 間接 來自 sportsbook conversion fee)。 */}
-        {/* R125 W4 · sharpen value prop with sharp differentiator per R125 agent
-            killer insight · 「Every other gambling/tipster site in Taiwan charges
-            for engine access · ZONE 27 is the only one that doesn't」 · 加
-            「不收明牌費」 直接對標 玩運彩 / 報馬仔 / LINE 老師 業務 model · per
-            [[feedback-zone27-paid-model-is-support-not-features]] memory「Engine
-            FREE 是 paid tier 的賣點 · NOT 削弱付費價值」 axiom 物理 codify。 */}
-        <p className="mt-5 sm:mt-7 max-w-xl mx-auto text-bone leading-relaxed text-base sm:text-lg font-light">
-          公開的 CPBL 量化引擎 · <span className="text-gold">不藏結果</span> ·{" "}
-          <span className="text-gold">不抽下注分成</span> ·{" "}
-          <span className="text-gold">不收明牌費</span>。
-        </p>
-
-        <p className="mt-3 sm:mt-4 max-w-md mx-auto text-mute leading-relaxed text-sm sm:text-base">
-          今晚 CPBL · 我跑 1 萬次模擬給您看 · 對了 / 錯了 全進 ledger。
-        </p>
-
-        {/* FRONT-DOOR SCOREBOARD · Tim mandate「首頁第一眼 = 真實勝敗結算表 ·
-            連輸的一起掛上去」。 The copy one line above promises「對了/錯了 全進
-            ledger」 → here we immediately SHOW that ledger with real numbers
-            (promise→proof adjacency)。 Moat physics vs 報馬仔/玩運彩:DIVERGED ✕
-            rendered EQUAL-weight next to PROVED ✓ · losses on the FRONT DOOR ·
-            not hidden(0 藏)。 Honest small-N discipline:NO PROVED-rate brag
-            (per /track-record N<30 caveat + FirstReceiptHero「N=1 ≠ SIGNAL」
-            axiom)· raw counts only · 不吹言中率。 Renders only when total > 0
-            (no empty fake state · Pratfall)· whole strip links /track-record. */}
-        {trackRecord.total > 0 && (
-          <div className="mt-5 sm:mt-6 mx-auto max-w-xl">
+          {/* 引擎戰績 · Pratfall「連輸的也掛」· compact · 永遠不刪 */}
+          {tr.total > 0 && (
             <Link
               href="/track-record"
-              className="block border border-gold/40 bg-slate/30 hover:bg-slate/40 hover:border-gold/60 transition-colors px-4 py-3.5 sm:px-5 sm:py-4"
-              aria-label={`公開戰績 · 已對賬 ${trackRecord.total} 場 · 引擎言中 ${trackRecord.proved} · 落空 ${trackRecord.diverged}${trackRecord.push > 0 ? ` · 平手 ${trackRecord.push}` : ""} · 連輸的也公開掛在首頁 · 點進看完整結算表`}
+              className="mt-5 inline-flex items-baseline gap-3 sm:gap-4 border border-gold/40 bg-slate/30 hover:border-gold/60 transition-colors px-4 py-2.5 font-mono tabular flex-wrap justify-center"
+              aria-label={`公開戰績 · ${tr.total} 場已對賬 · 引擎言中 ${tr.proved} · 落空 ${tr.diverged}`}
             >
-              <span className="flex items-baseline justify-between gap-3 flex-wrap">
-                <span className="font-mono text-gold/90 text-[10px] sm:text-[11px] tracking-[0.3em]">
-                  公開戰績 · 連輸的也掛上來
-                </span>
-                <span
-                  lang="en"
-                  className="font-mono text-mute/70 text-[9px] tracking-[0.3em]"
-                >
-                  0 藏 · 完整 →
-                </span>
+              <span className="text-gold/90 text-[10px] tracking-[0.3em]">引擎戰績</span>
+              <span className="text-bone text-sm">
+                <strong className="text-gold">{tr.total}</strong> 場
               </span>
+              <span className="text-gold text-sm">✓{tr.proved}</span>
+              <span className="text-loss text-sm">✕{tr.diverged}</span>
+              <span className="text-mute/60 text-[9px] tracking-[0.2em]">連輸的也掛 →</span>
+            </Link>
+          )}
+        </section>
 
-              <span className="mt-3 flex items-baseline justify-center gap-4 sm:gap-6 flex-wrap font-mono tabular">
-                <span className="text-bone whitespace-nowrap">
-                  <strong className="text-gold text-2xl sm:text-3xl font-light">
-                    {trackRecord.total}
-                  </strong>
-                  <span className="text-mute text-[10px] tracking-[0.2em] ml-1.5">
-                    場已對賬
-                  </span>
-                </span>
-                <span aria-hidden="true" className="text-mute/40">·</span>
-                <span className="text-gold whitespace-nowrap">
-                  <strong className="text-xl sm:text-2xl font-light">
-                    ✓{trackRecord.proved}
-                  </strong>
-                  <span className="text-gold/70 text-[10px] tracking-[0.2em] ml-1">
-                    PROVED
-                  </span>
-                </span>
-                <span aria-hidden="true" className="text-mute/40">·</span>
-                <span className="text-loss whitespace-nowrap">
-                  <strong className="text-xl sm:text-2xl font-light">
-                    ✕{trackRecord.diverged}
-                  </strong>
-                  <span className="text-loss/70 text-[10px] tracking-[0.2em] ml-1">
-                    DIVERGED
-                  </span>
-                </span>
-                {trackRecord.push > 0 && (
-                  <>
-                    <span aria-hidden="true" className="text-mute/40">·</span>
-                    <span className="text-mute whitespace-nowrap">
-                      <strong className="text-xl sm:text-2xl font-light">
-                        ={trackRecord.push}
-                      </strong>
-                      <span className="text-mute/70 text-[10px] tracking-[0.2em] ml-1">
-                        PUSH
-                      </span>
-                    </span>
-                  </>
-                )}
-              </span>
-
-              <span className="mt-2.5 block text-center font-mono text-mute/70 text-[9px] sm:text-[10px] tracking-[0.2em] leading-relaxed">
-                樣本還小 · 不吹言中率 · 每場賽後實際比分都公開
-              </span>
+        {/* ── THE FLOOR · 市場看板(每場 = 一張市場卡)──── */}
+        <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-14">
+          <div className="flex items-baseline justify-between gap-3 mb-5 flex-wrap">
+            <p
+              lang="en"
+              className="font-mono text-gold text-[10px] sm:text-[11px] tracking-[0.45em]"
+            >
+              / 市場看板 · 今晚 / 即將
+            </p>
+            <Link
+              href="/matches"
+              className="font-mono text-mute/70 hover:text-gold text-[10px] tracking-[0.3em] transition-colors"
+            >
+              全部賽事 →
             </Link>
           </div>
+          {upcoming.length > 0 ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {upcoming.map((m) => (
+                <MiniMatchCard key={m.id} match={m} />
+              ))}
+            </div>
+          ) : (
+            <EmptyFloor />
+          )}
+        </section>
+
+        {/* ── 最近結算 · receipts(PROVED vs DIVERGED 等大)── */}
+        {receipts.length > 0 && (
+          <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-14 border-t border-line/40 pt-12">
+            <div className="flex items-baseline justify-between gap-3 mb-5 flex-wrap">
+              <p
+                lang="en"
+                className="font-mono text-gold text-[10px] sm:text-[11px] tracking-[0.45em]"
+              >
+                / 最近結算 · PROVED vs DIVERGED
+              </p>
+              <Link
+                href="/track-record"
+                className="font-mono text-mute/70 hover:text-gold text-[10px] tracking-[0.3em] transition-colors"
+              >
+                完整戰績 →
+              </Link>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {receipts.map((m) => (
+                <MiniMatchCard key={m.id} match={m} />
+              ))}
+            </div>
+          </section>
         )}
 
-        {/* R142 W8 · TONIGHT micro-receipt above-the-fold · Agent C R142 TOP
-            friction-point fix · Picture Superiority Effect(Paivio 1971「Imagery
-            and Verbal Processes」+ Nelson/Reed/Walling 1976「Pictorial superiority
-            effect」 JEP:HLM 2(5):523-528)· 65% retention concrete numbers vs
-            ~10% declarative text after 72h · 之前 hero 6 stacked text blocks
-            push prediction below mobile fold · CPBL fan at 18:00 wants ONE thing
-            「今晚誰會贏」 但 must scroll 750-900px on iPhone 13 mini to see ·
-            INSERT 1-line above-fold micro-receipt · reuse existing todayMatches
-            (line 110)· 0 new fetch · 0 new feature(per [[feedback-zone27-
-            paid-model-is-support-not-features]])· real engine % NOT fake social
-            proof · hides gracefully when 0 matches today · click → #tonight-engine
-            anchor scroll · 對 CPBL fan = instant proof「ZONE 27 talks baseball
-            不是 philosophy」 · per Tim「整個網站的操作邏輯、人的心理學很重要」
-            mandate canonical fulfillment。 */}
-        {todayMatches.length > 0 && (
-          <p className="mt-4 sm:mt-5 mx-auto">
+        {/* ── 怎麼玩 · 引擎免費 · 你來較勁 ──────────────── */}
+        <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-14 border-t border-line/40 pt-12">
+          <p
+            lang="en"
+            className="font-mono text-gold text-[10px] sm:text-[11px] tracking-[0.45em] mb-5"
+          >
+            / 怎麼玩 · 引擎免費 · 你來較勁
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <PlayCard
+              href="/ladder"
+              tag="海選天梯"
+              body="誰最準 · 從新秀爬到神諭 · 樣本加權排名。"
+              live
+            />
+            <PlayCard
+              href="/matches"
+              tag="賽事討論室"
+              body="每場開放討論 · 免費看 · 登入發言 · 掛你的天梯名次。"
+              live
+            />
+            <PlayCard
+              href="/calibration"
+              tag="引擎自評"
+              body="引擎準不準 · 公開打分 · 連 over-confidence 都列。"
+              live
+            />
+            <PlayCard
+              href="/membership"
+              tag="創作者分析"
+              body="高手發文賣分析 · 每篇掛天梯名次 · 平台抽 5-10%。即將上線。"
+            />
+          </div>
+        </section>
+
+        {/* ── F6 negations(Pratfall · 永遠不刪)+ founders + 靈魂 ── */}
+        <section className="mx-auto max-w-3xl px-6 sm:px-10 pb-16 text-center border-t border-line/40 pt-10">
+          <p className="font-mono text-mute/85 text-[11px] sm:text-xs tracking-[0.18em] leading-relaxed">
+            <span className="text-bone">不藏 DIVERGED</span>
+            <span aria-hidden="true" className="text-mute/50 mx-2">·</span>
+            <span className="text-bone">不抽下注分成</span>
+            <span aria-hidden="true" className="text-mute/50 mx-2">·</span>
             <Link
-              href="#tonight-engine"
-              className="inline-flex items-baseline gap-1.5 sm:gap-2 font-mono text-[10px] sm:text-[11px] tracking-[0.2em] tabular text-mute hover:text-bone transition-colors flex-wrap justify-center"
-              aria-label={`Tonight's first CPBL match · ${todayMatches[0].startTime} · ${todayMatches[0].home.name} engine ${todayMatches[0].home.winRate}% vs ${todayMatches[0].away.name} ${todayMatches[0].away.winRate}% · scroll to engine detail`}
+              href="/learn#why-not-gambling"
+              className="text-bone underline decoration-mute/40 underline-offset-4 hover:decoration-gold hover:text-gold transition-colors"
             >
-              <span className="text-gold/85">今晚 {todayMatches[0].startTime}</span>
-              <span className="text-mute/60">·</span>
-              <span className="text-bone">{todayMatches[0].home.en}</span>
-              <span className="text-gold">{todayMatches[0].home.winRate}%</span>
-              <span className="text-mute/60">vs</span>
-              <span className="text-bone">{todayMatches[0].away.en}</span>
-              <span className="text-mute">{todayMatches[0].away.winRate}%</span>
-              {todayMatches.length > 1 && (
-                <span className="text-mute/60">{`+ ${todayMatches.length - 1} 場`}</span>
-              )}
-              <span className="text-gold/70 ml-0.5">↓</span>
+              不分潤博彩
+            </Link>
+            <span aria-hidden="true" className="text-mute/50 mx-2">·</span>
+            <span className="text-bone">不追蹤您</span>
+            <span aria-hidden="true" className="text-mute/50 mx-2">·</span>
+            <span className="text-gold">不自動續扣</span>
+          </p>
+          <p className="mt-5 flex flex-wrap items-center justify-center gap-3 font-mono text-[10px] sm:text-[11px] tracking-[0.3em]">
+            <Link href="/audit" className="text-gold/80 hover:text-gold transition-colors">
+              完整 audit →
+            </Link>
+            <span aria-hidden="true" className="text-mute/40">·</span>
+            <Link href="/founders" className="text-mute hover:text-gold transition-colors">
+              FOUNDERS 27 · NT$ 2,700/年 →
             </Link>
           </p>
-        )}
-
-        {/* Hero CTA row · single primary action = FOUNDERS 27 pill。 The
-            賽事討論室 hero pill was REMOVED(autonomous-iteration wave 1):
-            it was a competing CTA(Hick's Law)+ a dead-end to a BLACK CARD-
-            gated / not-yet-live thread + it LEAKED an internal「⏳ R148」token
-            to visitors。 per founder「版面太雜 / 操作更直覺」+ subtraction-first ·
-            most-recent canary trumps the older R148 14-fire。 討論室 still
-            reachable via Nav 💬(every page)+ /matches/[id]。 */}
-        <p className="mt-6 sm:mt-8 flex flex-wrap items-center justify-center gap-3">
-          <Link
-            href="/founders"
-            className="inline-block px-5 py-2.5 border border-gold/40 hover:border-gold hover:bg-gold/5 transition-colors font-mono text-xs sm:text-sm tracking-[0.2em] tabular"
-            aria-label={`Founders 27 · NEXT IS #${FOUNDERS_CLAIMED + 1} of ${FOUNDERS_TOTAL} · 2026 班額滿即永久關閉`}
-          >
-            <span className="text-gold">FOUNDERS · 27</span>
-            <span className="text-mute/60 mx-2">·</span>
-            <span className="text-bone">{FOUNDERS_REMAINING}</span>
-            <span className="text-mute/60">/{FOUNDERS_TOTAL}</span>
-            <span className="text-mute/60 mx-2">·</span>
-            <span className="text-mute">NT$ 2,700/年</span>
-            <span className="text-gold/70 ml-2">→</span>
-          </Link>
-        </p>
-
-        {/* R163 NUCLEAR SUBTRACTION · Tim canary fire「網頁好雜 · 都滑不到底 ·
-            超多沒人要看的東西 · 請刪除」 · per [[feedback-founder-dogfood-canary]]
-            iron rule · 最新 canary fire 取代 R115-R155 累積 strips:
-
-            ❌ CUT R115 W3「↘ 不靠社群聲量 ledger 8 chips」(/track-record link
-               canonical · F6 strip 在 footer above-engine 仍 surface「不藏 DIVERGED」)
-            ❌ CUT R123 W1「⚡ 您可以 · 5 verbs · /lab /matches /member /founders/apply
-               /interact」(Nav top + Cmd-K palette covers · footer 4 col covers)
-            ❌ CUT R144 W1「💬 球迷熱絡 · Founders LINE 群 + 球迷已聚」(/interact
-               canonical home · Nav 💬 chip 全站 visible)
-            ❌ CUT R155 W2-merged「🤔 為何沒有 · ⚓ 💬 賽事討論室 LIVE」(Pratfall
-               surface 移 /faq 已 R146 ship 3 Q&A canonical + /interact + /audit ·
-               homepage 不負責 surface every brand IP question · per Apple Newsroom
-               「page = 1 thing」 discipline)
-
-            Psychology defended:
-            ✓ Cognitive Load Theory(Sweller 1988)· extraneous load minimized ·
-              7 strips → 0 strips between hero pill row + HeroLiveCard
-            ✓ Hick's Law · choice options(15+ links → 4 essential)log time
-              improvement on first-touch
-            ✓ Apple Newsroom + Stratechery「ONE thing per page」 discipline ·
-              homepage ONE THING = watch engine converge(HeroLiveCard)
-            ✓ Steve Jobs Say-NO 5-step(per /discipline R17 Jobs distillation)·
-              focus = 拒絕 100 件好點子 · 此 cut 拒絕 5 strip
-            ✓ Peak-End rule(Kahneman 2002)honored · HeroLiveCard apex not
-              diluted by 5 sibling text walls
-            ✓ Pirolli & Card 1995 Information Foraging · scent-of-information
-              first principle · 訪客 first 30 sec 看 engine converge not 7 strips
-
-            Pratfall iron rule defended(NOT removed · MOVED to canonical deeper
-            surface):
-            ✓ F6 declarative-absence strip 仍 BELOW HeroLiveCard(6 negations +
-              /transparency link)· per Aronson 1966 + Spence 1973 不刪
-            ✓ /track-record link 仍 via /audit + footer + RelatedReading
-            ✓ /interact 仍 在 Nav 💬 + Footer ENTRY 列 + R160 W2 added
-            ✓ /faq 17 答 仍 在 Footer + Cmd-K
-
-            R148 14-fire GameThread visibility · 3 surfaces preserved · NOT 5:
-            ✓ Nav 💬 permanent every page(R151 NUCLEAR)
-            ✓ Hero pill 💬 賽事討論室(R150 viewport 1 above pill row)
-            ✓ /matches/[gameId] TOP placement(R153)
-            ❌ HomepageGameThreadPreview BIG card 460px(R149)CUT below(同 strip)
-            ❌ R155-merged「⚓ 💬 賽事討論室 LIVE」 inline mention CUT(同上)
-
-            Per most-recent canary fire(R163 太雜)trumps older canary fire
-            (R148 14-fire visible)· founder-dogfood-canary iron rule applied。 */}
-      </section>
-
-      {/* Hairline divider — visual breath. Tighter on mobile. */}
-      <div className="mx-auto w-32 gold-line mb-8 sm:mb-12" />
-
-      {/* R163 NUCLEAR SUBTRACTION · HomepageGameThreadPreview BIG card 460px CUT
-          per Tim canary fire「網頁好雜 · 沒人要看的東西 · 請刪除」 trumps R148
-          14-fire「visible」 mandate(per [[feedback-founder-dogfood-canary]] most-
-          recent canary highest weight)· R148 narrowed scope brand IP preserved
-          via 3 alternative surfaces:Nav 💬 permanent(R151)+ Hero pill 💬 賽事
-          討論室(R150)+ /matches/[gameId] TOP placement(R153)· per Steve Jobs
-          Say-NO discipline + Cognitive Load Theory(Sweller 1988)· 460px reclaimed。 */}
-
-      {/* Round 40 W-G · Agent F #5 · RecentMatchesRow · client-only ·
-          conditional render when localStorage has entries · 0 SSR /
-          0 server state / 0 cookies / 0 tracking · brand IP homepage
-          minimalism preserved(無 entries 時不 render)· Day One「On This
-          Day」 pattern transplant to baseball matches · WhatsApp landers
-          升 multi-game readers without account · Agent F deepest sharp
-          call「3-step funnel: precise landing → instant exploration →
-          return-visit recall」 完整 close。 */}
-      <RecentMatchesRow />
-
-      {/* R45 W-E · Agent L DEEPEST · Anonymous Calibration Strip compact
-          homepage variant · 訪客 own track record vs engine summary chip ·
-          only renders when localStorage zone27_anon_picks_v1 has picks ·
-          0 server · 0 PII · 0 cookies · brand IP homepage minimalism
-          preserved(無 picks 時不 render)· Link to /calibration full strip。 */}
-      <AnonCalibrationStrip variant="homepage" />
-
-      {/* ── THE ENGINE · 主視覺 · 即時跑這場 ─────────
-          This is the soul. Engine output IS the product · IS the
-          credibility · IS the homepage. Visitors arrive, see the
-          algorithm converge in 2 seconds, get it.
-          HeroLiveCard embeds its own CTAs (/matches and /matches/[gameId])
-          — those carry visitors to depth on their own gradient.
-          Round 31 Wave A: multi-match days swap in TonightReceiptsCard
-          for the same hero slot · 3-card grid of pre-locked receipts.
-          Round 50 W-C · #tonight-engine id anchor for hero scroll hint
-          (per Hick's Law deeper formulation · fan-first audience axiom). */}
-      <section
-        id="tonight-engine"
-        className="mx-auto w-full max-w-3xl px-6 sm:px-10 pb-20 sm:pb-28 scroll-mt-8"
-      >
-        {/* R97 W2 · LivingCoverHero · Stripe Press signature pattern · 算法
-            生成 SVG sparkline · 永遠 render 引擎活著的 visual proof · 0 JS ·
-            0 animation · deterministic per match.id / build date · 同 Anthropic
-            interactive model card visual signature axis。 */}
-        <LivingCoverHero
-          match={featuredMatch ?? todayMatches[0] ?? undefined}
-          className="mb-6 sm:mb-8 -mt-2 sm:-mt-4"
-        />
-
-        {useMultiMatch && trackRecord ? (
-          <TonightReceiptsCard
-            matches={todayMatches}
-            trackRecord={trackRecord}
-          />
-        ) : featuredMatch ? (
-          <>
-            {/* R86 W-A · Surface AnonPickWidget on homepage as「我 vs
-                引擎」 visceral feedback loop · per Tim 「使用者要看 AI
-                答案 + 其他使用者明牌」 brand-pure replacement(NOT 違反
-                11 NEVER #1 social-leaderboard · 是 personal calibration
-                mirror per Bill James「Hey Bill」 + FiveThirtyEight
-                pattern)· localStorage · 0 PII · 0 server · IKEA effect
-                retention loop · 訪客 first-touch 立刻 click 「我選 X」
-                → 看 engine number 對照 · 來日看自己 PROVED/DIVERGED
-                track record。 已 R45 W-B ship on /matches/[gameId] ·
-                R86 surface 升 homepage hero conversion path · 同 brand
-                IP「Engine FREE + visitor calibration mirror」 axis。
-                ClientErrorBoundary wrap per R73 W-A risk-bearing client
-                pattern · TZ edge / localStorage quota crash 不 take
-                down homepage。 */}
-            <ClientErrorBoundary fallbackLabel="AnonPickWidget · homepage pick">
-              <div className="mb-6 sm:mb-8">
-                <p className="font-mono text-gold/70 text-[10px] sm:text-[11px] tracking-[0.3em] mb-2 text-center">
-                  ↓ 先猜再看引擎 · IKEA effect
-                </p>
-                <AnonPickWidget match={featuredMatch} />
-              </div>
-            </ClientErrorBoundary>
-            <HeroLiveCard match={featuredMatch} />
-          </>
-        ) : (
-          <EmptyHeroCard />
-        )}
-
-        {/* R70 W-B · DailyReturnRail · Agent A R69 SHIP 2 deferred ·
-            Letterboxd diary + Are.na slow-web + Pinboard.in 「your last
-            login: X days ago」 pattern · honest past-tense check-in for
-            returning visitors · NOT streak counter · NOT daily-login
-            farming · localStorage zone27_last_visit_v1 11th key · /audit
-            S06 disclosed · 不打擾就是禮物 axiom 物理 codify。 conditional
-            render(first-time + same-day return = empty)。
-            R73 W-A · ClientErrorBoundary wrap · TZ edge / localStorage
-            quota crash 不 take down homepage · 同 risk pattern as
-            /matches/[gameId] AnonPickWidget+LensFocusVote wraps。 */}
-        <ClientErrorBoundary fallbackLabel="DailyReturnRail · return chip">
-          <DailyReturnRail />
-        </ClientErrorBoundary>
-
-        <p className="text-center font-mono text-mute text-[10px] tracking-[0.25em] mt-8">
-          AI 計算的是機率 · 不是命運
-        </p>
-
-        {/* Round 19 soul addition · Tim signature 取代 homepage 從前的
-            「100% product · 0 founder」狀態。極小 mute/60 一行 · 不破
-            Apple-grade 3-section minimalism · 卻給整個首頁人性錨點。
-            Links to /about Chapter 00 PROLOGUE — full founder narrative
-            一鍵可達。Per Round 19 Tim 直覺「我們缺必要靈魂」之回應。 */}
-        <p className="text-center font-mono text-mute/60 text-[9px] tracking-[0.3em] mt-3">
-          —{" "}
-          <Link
-            href="/about"
-            className="hover:text-gold transition-colors"
-            aria-label="讀 Tim 創辦人筆記 · /about Chapter 00 PROLOGUE"
-          >
-            TIM · CPBL 球迷 27 年
-          </Link>
-        </p>
-      </section>
-
-      {/* F6 declarative-absence strip · 6 brand-IP negations · pratfall axiom
-          protected · compressed per 3-viewport rule (R95)。 */}
-      <section className="mx-auto max-w-3xl px-6 sm:px-10 pb-10 sm:pb-14 text-center border-t border-line/40 pt-10 sm:pt-12">
-        <p className="font-mono text-mute/85 text-[11px] sm:text-xs tracking-[0.18em] leading-relaxed">
-          <span className="text-bone">不顯示賠率</span>
-          <span aria-hidden="true" className="text-mute/50 mx-2">·</span>
-          <span className="text-bone">不賣明牌</span>
-          <span aria-hidden="true" className="text-mute/50 mx-2">·</span>
-          <Link
-            href="/learn#why-not-gambling"
-            className="text-bone underline decoration-mute/40 underline-offset-4 hover:decoration-gold hover:text-gold transition-colors"
-          >
-            不分潤博彩
-          </Link>
-          <span aria-hidden="true" className="text-mute/50 mx-2">·</span>
-          <span className="text-bone">不藏 DIVERGED</span>
-          <span aria-hidden="true" className="text-mute/50 mx-2">·</span>
-          <span className="text-bone">不追蹤您</span>
-          <span aria-hidden="true" className="text-mute/50 mx-2">·</span>
-          <span className="text-gold">不自動續扣</span>
-        </p>
-        <p className="mt-4 font-mono text-[10px] sm:text-[11px] tracking-[0.3em]">
-          <Link
-            href="/audit"
-            className="text-gold/80 hover:text-gold underline decoration-mute/40 underline-offset-4 hover:decoration-gold transition-colors"
-          >
-            完整 audit · /audit →
-          </Link>
-        </p>
-      </section>
-
-      {/* Round 5: Founders 27 strip REMOVED from homepage.
-          Research recommendation (agent · Baymard / HubSpot 2026):
-          - Sticky bottom CTA bar (StickyFoundersCTA · mobile only)
-            replaces this section's function with +30% conversion
-            uplift vs static strip below fold.
-          - Saves ~500-600px on mobile · pushes total scroll closer
-            to 3-viewport target.
-          - /founders page itself is the canonical offer destination ·
-            sticky bar drives directly there.
-          - "Quiet door to /manifesto" moved to footer link group.
-          One git revert brings this strip back if needed. */}
-
+          <p className="mt-5 font-mono text-mute/60 text-[9px] tracking-[0.3em]">
+            —{" "}
+            <Link href="/about" className="hover:text-gold transition-colors">
+              TIM · CPBL 球迷 27 年
+            </Link>
+          </p>
+        </section>
       </main>
 
       <Footer />
@@ -549,29 +188,53 @@ export default function Home() {
   );
 }
 
-// ── EmptyHeroCard ─────────────────────────────────────
-// Fallback when matches array is empty (migration / pre-launch /
-// scheduled outage). The "ENGINE READY · NO MATCHES LOADED" framing
-// is honest — not "Coming soon" marketing fluff.
+// ── Sub-components ─────────────────────────────────────
 
-function EmptyHeroCard() {
+function PlayCard({
+  href,
+  tag,
+  body,
+  live,
+}: {
+  href: string;
+  tag: string;
+  body: string;
+  live?: boolean;
+}) {
   return (
-    <div className="bg-slate/40 border border-line/60 p-10 sm:p-14 text-center">
-      <p
-        lang="en"
-        className="font-mono text-gold/70 text-[10px] tracking-[0.4em] mb-8"
-      >
+    <Link
+      href={href}
+      className="block p-4 sm:p-5 border border-line/60 bg-slate/30 hover:border-gold/50 hover:bg-slate/40 transition-colors group"
+    >
+      <div className="flex items-baseline justify-between gap-2 mb-2">
+        <span className="text-bone text-base font-light tracking-tight group-hover:text-gold transition-colors">
+          {tag}
+        </span>
+        <span
+          className={`font-mono text-[8px] tracking-[0.25em] px-1.5 py-0.5 border ${
+            live ? "border-gold/50 text-gold" : "border-mute/40 text-mute/70"
+          }`}
+        >
+          {live ? "LIVE" : "即將"}
+        </span>
+      </div>
+      <p className="text-mute text-xs sm:text-sm leading-relaxed">{body}</p>
+    </Link>
+  );
+}
+
+function EmptyFloor() {
+  return (
+    <div className="bg-slate/40 border border-line/60 p-10 text-center">
+      <p lang="en" className="font-mono text-gold/70 text-[10px] tracking-[0.4em] mb-4">
         ENGINE READY · NO MATCHES LOADED
       </p>
-      <h2 className="text-2xl sm:text-3xl text-bone font-light tracking-tight">
-        範例賽事尚未排定
-      </h2>
-      <p className="mt-6 text-mute text-sm max-w-md mx-auto leading-relaxed">
-        資料寫入中(可能是季外或資料遷移)。引擎已就緒 · 可在自訂模式自由跑模擬。
+      <p className="text-mute text-sm max-w-md mx-auto leading-relaxed">
+        目前沒有排定的賽事(季外或資料更新中)。 引擎隨時可在自訂模式跑模擬。
       </p>
       <Link
         href="/lab/custom"
-        className="inline-block mt-8 font-mono text-gold text-[10px] tracking-[0.3em] hover:opacity-80"
+        className="inline-block mt-6 font-mono text-gold text-[10px] tracking-[0.3em] hover:opacity-80"
       >
         進入自訂實驗室 →
       </Link>

@@ -57,13 +57,11 @@ Tim 確認入帳後解鎖內容 + 抽傭計算。per [[zone27-polymarket-pivot]]
 完整討論區(R148 賽事討論室的後續)+ 管理後台 · 需要 ADMIN_EMAIL env var decision(同 M#2)。
 文章刪文 governance:用戶只能「申請」刪文 · Tim 准了才刪。
 
-### ⏳ Apply migration 0004 game_posts(5 分 Supabase Studio)· 開通賽事討論室
+### ✅ Apply migration 0004 game_posts · DONE(2026-05-30 Tim 親手套用 · Success)
 
-R174 pivot · 賽事討論室已從付費牆 mockup 改成 OPEN(免費看 + 登入發言 · 不付費)·
-backend = supabase/migrations/0004_game_posts.sql。 **套用後討論就真的能發文**(同
-0003 流程:Supabase Studio → SQL Editor → 貼上 0004 → Run)。 未套用前 graceful:
-讀到空串 · 發文友善提示「開通中」· 不 crash。 Moderation v1 = Tim 用 Supabase Studio
-刪 row(in-app 刪文 = Phase 3 · 需 admin email)。
+賽事討論室 backend 已上線 zone27-prod · 真的能發文了。 game_posts 表 + 3 RPCs
+(submit_game_post · get_game_posts anon-read · get_my_game_post)live。
+Moderation v1 = Tim 用 Supabase Studio 刪 row(in-app 刪文 = Phase 3 · 需 admin email)。
 
 ### ⏳ Apply migration 0002 founder_reservations(5 分 Supabase Studio)
 
