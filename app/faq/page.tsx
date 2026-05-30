@@ -72,17 +72,12 @@ const CATEGORIES: Category[] = [
         id: "no-community",
         a: (
           <>
-            有 ·{" "}
-            <Link href="/matches/cpbl-260526-01#game-thread" className="text-gold underline-offset-4 hover:underline">
-              /matches/[gameId]
+            有 · 每場{" "}
+            <Link href="/matches/cpbl-260526-01#creator-analysis" className="text-gold underline-offset-4 hover:underline">
+              賽事頁
             </Link>
-            {" "}BLACK CARD-gated · 1 thread per game · 200 字 · Tim 親手 moderate · PRE-LAUNCH。
-            其他 community(forum / DM / 留言板)永遠不做 · 您跟其他球迷在 LINE 球隊群 + PTT Baseball
-            板 OFF-SITE。 跟 Tim 在{" "}
-            <Link href="/interact" className="text-gold underline-offset-4 hover:underline">
-              /interact
-            </Link>
-            。
+            {" "}的「看法 · 分析」· <strong className="text-bone">免費看 · 登入發言</strong>(不必付費)·
+            一場一篇 · 押一邊賽後自動掛準/不準(刪不掉)。 高手的完整分析未來可賣(平台抽 5–10%)。
           </>
         ),
       },

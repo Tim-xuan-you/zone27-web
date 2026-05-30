@@ -15,10 +15,10 @@ import {
 export const metadata = createPageMetadata({
   title: "今日 CPBL 賽事板",
   description:
-    "今日中華職棒比賽列表 · AI 勝率模型每天 15:00 鎖定 · 點進任一場看完整 10,000 次模擬與重播 · 7 LIVE LENS CANVAS · 不接受下注。",
+    "今日中華職棒比賽列表 · AI 勝率模型每天 15:00 鎖定 · 點進任一場看引擎開盤線 + 完整 10,000 次模擬與重播 · 不接受下注。",
   ogTitle: "今日 CPBL 賽事板 · ZONE 27",
   ogDescription:
-    "今日 CPBL 比賽列表 · 勝率模型 15:00 鎖定 · 10,000 次模擬 · 7 LIVE LENS · 不接受下注",
+    "今日 CPBL 比賽列表 · 勝率模型 15:00 鎖定 · 10,000 次模擬 · 引擎開盤線 · 不接受下注",
   path: "/matches",
 });
 

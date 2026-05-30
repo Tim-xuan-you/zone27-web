@@ -120,7 +120,7 @@ export default function Home() {
           >
             / 怎麼玩 · 引擎免費 · 你來較勁
           </p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <PlayCard
               href="/ladder"
               tag="海選天梯"
@@ -139,12 +139,16 @@ export default function Home() {
               body="引擎準不準 · 公開打分 · 連 over-confidence 都列。"
               live
             />
-            <PlayCard
-              href="/membership"
-              tag="賣分析收費"
-              body="高手把分析賣錢 · 平台抽 5-10% · 賽後自動掛準度。即將開放。"
-            />
           </div>
+          <p className="mt-4 font-mono text-mute/60 text-[10px] tracking-[0.25em] leading-relaxed">
+            ▸ 高手賣分析 · 平台抽 5–10% · 賽後自動掛準度 ·{" "}
+            <Link
+              href="/membership"
+              className="text-gold/70 hover:text-gold transition-colors"
+            >
+              即將開放 →
+            </Link>
+          </p>
         </section>
 
         {/* ── F6 negations(Pratfall · 永遠不刪)+ founders + 靈魂 ── */}

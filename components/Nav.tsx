@@ -65,22 +65,10 @@ export default function Nav({ active }: { active?: NavKey }) {
   // 0 場日子 chip 自動 hidden · Nav fallback plain「賽事」。
   const todayMatches = getTodayMatches();
   const tonightCount = todayMatches.length;
-  // R151 W1 · dynamic 討論室 href · 今日首場 match scaffold · fallback /interact
-  const discussHref = todayMatches[0]
-    ? `/matches/${todayMatches[0].id}#game-thread`
-    : "/interact";
-  // R151 W1 · NEW NAV_ITEMS 加入 💬 討論室 between 賽事 and 實驗室 · NEW badge
-  // 標 R148 NEW per Tim 11-fire explicit demand「每個人在首頁就能看到」
-  const NAV_ITEMS: {
-    key: Exclude<NavKey, "home" | "founders">;
-    href: string;
-    label: string;
-    badge?: string;
-  }[] = [
-    { key: "matches", href: "/matches", label: "賽事" },
-    { key: "discuss", href: discussHref, label: "💬 討論室", badge: "NEW" },
-    ...NAV_ITEMS_STATIC.filter((i) => i.key !== "matches"),
-  ];
+  // R175 Polymarket pivot · 移除 💬 討論室 nav item(+ 舊 #game-thread dead
+  // anchor)· 討論已併入賽事頁的「看法 · 分析」(CreatorAnalysis)· 點任一場
+  // 賽事即達 · nav 回到 market-first 乾淨 3 軸。
+  const NAV_ITEMS = NAV_ITEMS_STATIC;
 
   return (
     <>
@@ -246,7 +234,9 @@ export default function Nav({ active }: { active?: NavKey }) {
           </ul>
         </div>
       </nav>
-      <ScarcityStrip />
+      {/* R175 · ScarcityStrip 退出首頁(市場優先 · 不讓 founder 稀缺條把市場
+          看板擠到 mobile 折線下方)· 其餘頁仍顯示。 */}
+      {active !== "home" && <ScarcityStrip />}
     </>
   );
 }
