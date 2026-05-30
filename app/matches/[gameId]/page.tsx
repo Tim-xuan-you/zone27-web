@@ -7,6 +7,7 @@ import MatchSimulator from "@/components/MatchSimulator";
 import StatPercentileBar from "@/components/StatPercentileBar";
 import ConfidenceStars from "@/components/ConfidenceStars";
 import GameThread from "@/components/GameThread";
+import CreatorAnalysis from "@/components/CreatorAnalysis";
 import UserPredictionPicker from "@/components/UserPredictionPicker";
 import ReceiptForwardButton from "@/components/ReceiptForwardButton";
 import CopyLinkButton from "@/components/CopyLinkButton";
@@ -251,6 +252,14 @@ export default async function MatchDetailPage({
             </div>
           </section>
         )}
+
+        {/* ── CREATOR ANALYSIS · 創作者分析(發文 + 選邊 + 賽後自動評準度)── */}
+        <CreatorAnalysis
+          matchId={m.id}
+          homeName={m.home.name}
+          awayName={m.away.name}
+          finalWinner={m.finalResult?.winner ?? null}
+        />
 
         {/* ── DISCUSSION · 賽事討論室(免費看 · 登入發言)── */}
         <GameThread gameId={m.id} />
