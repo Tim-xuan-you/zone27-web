@@ -226,17 +226,8 @@ export default function GameThread({ gameId }: Props) {
         )}
       </div>
 
-      {/* ── 天梯信用 framing + 規則 ──────────────────── */}
-      <p className="font-mono text-mute/60 text-[10px] tracking-[0.25em] leading-relaxed">
-        ▸ 發言不靠付費 · 靠信用。 您的{" "}
-        <Link
-          href="/ladder"
-          className="text-gold/80 hover:text-gold underline-offset-4 hover:underline transition-colors"
-        >
-          海選天梯
-        </Link>{" "}
-        名次越高 · 您的看法越有份量 ——「自帶測謊器的發言」。 一場一篇 · ≤{MAX} 字 ·
-        Tim 親手 moderate。
+      <p className="font-mono text-mute/50 text-[9px] tracking-[0.25em]">
+        免費看 · 登入發言 · 一場一篇 · ≤{MAX} 字
       </p>
     </section>
   );
