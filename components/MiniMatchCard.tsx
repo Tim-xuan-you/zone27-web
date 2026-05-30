@@ -7,7 +7,6 @@ import {
   type MatchPhase,
   type Calibration,
 } from "@/lib/matches";
-import ConfidenceStars from "@/components/ConfidenceStars";
 
 // ── ZONE 27 · Mini Match Card ────────────────────────────
 // Round 31 Wave A · Compact static-engine card for the homepage
@@ -155,13 +154,6 @@ export default function MiniMatchCard({ match }: { match: Match }) {
           引擎開盤線 · ENGINE LINE
         </p>
 
-        {/* Round 34 W-A · ConfidenceStars per-card 同 hero AI promise · static
-            locked 5★ STRONG → 1★ COIN-FLIP visual hierarchy · authority bias +
-            decision-cost-collapse hook · 球迷 grammar 1.2 秒識別比 plain {N}/100
-            更 fast。 */}
-        <div className="mt-1.5 flex justify-end">
-          <ConfidenceStars confidence={match.aiConfidence} variant="inline" />
-        </div>
       </div>
 
       {/* Final result strip — only when ingested */}
@@ -189,22 +181,10 @@ export default function MiniMatchCard({ match }: { match: Match }) {
         </div>
       )}
 
-      {/* R115 W1 · Tim 2026-05-25 dogfood critique「在哪裡可以分享、推薦賽事?
-          找不到呀!」 · per [[feedback-founder-dogfood-canary]] first push back
-          trust 即修 · share/predict affordance 存在(/matches/[gameId] 內
-          UserPredictionPicker + AnonPickWidget + ReceiptForwardButton)但從
-          homepage / /matches index 看不到 hint · 加 subtle「👤 您也可以猜」 +
-          「完整分析 →」 雙重 footer signal · 不違反 minimalism axiom · per
-          brand IP「不打擾就是禮物」 keep subtle · 訪客 click 入 match page 即
-          可預測 + 分享 URL。 */}
-      <div className="mt-auto pt-2 flex items-baseline justify-between gap-2 flex-wrap">
-        <Link
-          href={`/matches/${match.id}`}
-          className="font-mono text-mute/70 hover:text-gold text-[10px] tracking-[0.3em] transition-colors"
-          title="您可以猜 home/away · localStorage-only · 0 server · 0 PII · per AnonPickWidget pattern"
-        >
-          👤 您也可以猜
-        </Link>
+      <div className="mt-auto pt-2 flex items-baseline justify-between gap-2">
+        <span className="font-mono text-mute/55 text-[10px] tracking-[0.3em]">
+          10K 模擬
+        </span>
         <Link
           href={`/matches/${match.id}`}
           className="font-mono text-gold/70 hover:text-gold text-[10px] tracking-[0.3em] transition-colors"

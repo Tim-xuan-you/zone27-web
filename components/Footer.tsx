@@ -87,6 +87,7 @@ const FOOTER_GROUPS: FooterGroup[] = [
       { label: "模擬實驗室 · 1 萬次跑", href: "/lab" },
       { label: "CPBL 投手排行 · 6 stats", href: "/cpbl-pitchers" },
       { label: "CPBL 6 隊伍 · aggregation", href: "/cpbl-teams" },
+      { label: "海選天梯 · 準度排行", href: "/ladder" },
       // R167 W1b · /signal-board DELETED · daily promise we don't keep · per Agent P TIER B #7 + Tim canary 3
       // Round 51 W-E · Atom RSS /feed.xml ship · 給 hardcore fan RSS reader
       // audience subscribe · 同 Stratechery / FanGraphs / Baseball Savant
@@ -115,6 +116,7 @@ const FOOTER_GROUPS: FooterGroup[] = [
       { label: "模型報告", href: "/audit" },
       { label: "技術白皮書", href: "/methodology" },
       { label: "公開戰績", href: "/track-record" },
+      { label: "引擎自評 · 準不準", href: "/calibration" },
       { label: "Ethics Policy", href: "/ethics" },
       { label: "Steelman", href: "/steelman" },
       // R109 W3 · Agent conversion audit finding · /integrity orphaned from
@@ -140,7 +142,7 @@ const FOOTER_GROUPS: FooterGroup[] = [
       // one-way-by-design]] R148 narrowed scope)· 之前只 Cmd-K + homepage
       // inline link · footer 滾到底 訪客 找「怎麼聯繫 Tim」 dead-end · /interact
       // section 03 cross-links to /hey-tim solving 2 navigation gaps with 1 ship。
-      { label: "10 互動管道 · Hey Tim", href: "/interact" },
+      { label: "與 Tim 互動 · Hey Tim", href: "/interact" },
       { label: "關於 ZONE 27", href: "/about" },
       // Round 50 W-B · 2026-05-22 · Tim 26+ canary fire UX root cause ·
       // /login footer entry 是 Nav LOGIN button + Cmd-K 之外的第三條路 ·
@@ -388,7 +390,7 @@ export default function Footer() {
           >
             <span className="chip-dot w-1.5 h-1.5 rounded-full bg-gold/70 glow-gold" />
             <span>
-              v0.28 · {getTaipeiTodayChip()} TPE
+              v0.29 · {getTaipeiTodayChip()} TPE
             </span>
           </a>
         </div>

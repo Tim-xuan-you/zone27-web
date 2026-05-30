@@ -591,7 +591,7 @@ export const COMMAND_ITEMS: CommandItem[] = [
 
   // ── 轉換 ───────────────────────────────────────────
   {
-    label: "Founders 27 · 年度創始席位 · 限量 270 預售",
+    label: "Founders 27 · 年度創始席位 · 前 270 創始編號",
     kicker: "/founders",
     path: "/founders",
     group: "轉換",
@@ -705,7 +705,7 @@ export const COMMAND_ITEMS: CommandItem[] = [
     keywords: ["member", "dashboard", "會員頁", "個人", "時間軸"],
   },
   {
-    label: "Login · Email + 密碼 註冊 · FREE TIER",
+    label: "Login · Email magic link · 無密碼 · FREE TIER",
     kicker: "/login",
     path: "/login",
     group: "工具 · 外部",

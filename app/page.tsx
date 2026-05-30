@@ -229,19 +229,27 @@ function PlayCard({
 
 function EmptyFloor() {
   return (
-    <div className="bg-slate/40 border border-line/60 p-10 text-center">
-      <p lang="en" className="font-mono text-gold/70 text-[10px] tracking-[0.4em] mb-4">
-        ENGINE READY · NO MATCHES LOADED
+    <div className="bg-slate/40 border border-line/60 p-8 sm:p-10 text-center">
+      <p className="text-bone text-base sm:text-lg font-light tracking-tight mb-2">
+        今日沒有排定的 CPBL 賽事
       </p>
-      <p className="text-mute text-sm max-w-md mx-auto leading-relaxed">
-        目前沒有排定的賽事(季外或資料更新中)。 引擎隨時可在自訂模式跑模擬。
+      <p className="text-mute text-sm max-w-md mx-auto leading-relaxed mb-6">
+        季外或休賽日。 往下看引擎最近的公開戰績 · 或自己跑一場模擬。
       </p>
-      <Link
-        href="/lab/custom"
-        className="inline-block mt-6 font-mono text-gold text-[10px] tracking-[0.3em] hover:opacity-80"
-      >
-        進入自訂實驗室 →
-      </Link>
+      <div className="flex flex-wrap items-center justify-center gap-3">
+        <Link
+          href="/track-record"
+          className="inline-block px-5 py-2 border border-gold/50 text-gold font-mono text-[10px] tracking-[0.3em] hover:bg-gold/10 transition-colors"
+        >
+          看公開戰績 →
+        </Link>
+        <Link
+          href="/lab/custom"
+          className="inline-block px-5 py-2 border border-line/60 text-mute font-mono text-[10px] tracking-[0.3em] hover:text-gold hover:border-gold/40 transition-colors"
+        >
+          自訂模擬 →
+        </Link>
+      </div>
     </div>
   );
 }
