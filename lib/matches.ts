@@ -81,6 +81,167 @@ function mergePitcherStats(p: PitcherStats): PitcherStats {
 }
 
 const rawMatches: Match[] = [
+  // ── 2026-05-31 · DAY 8 ingest · 3 一軍 games · Tim 截圖 cpbl.com.tw ──
+  // 來源:Tim 截圖 cpbl.com.tw 一軍賽程 2026/05/31 星期日 #134-136 + 先發投手成績表。
+  //
+  // 真實數據(screenshot 投手累計成績直接抓 · 2026 球季):
+  //   #134 天母 16:05 · 統一 喬登(away · ERA 1.71 · 21 IP · 12 H · 0 HR · 4 ER)
+  //                    vs 味全 鋼龍(home · ERA 2.30 · 47 IP · 39 H · 4 HR · 12 ER)
+  //   #135 大巨蛋 16:05 · 中信 勝騎士(away · ERA 2.44 · 48 IP · 41 H · 3 HR · 13 ER)
+  //                      vs 富邦 江國豪(home · ERA 3.38 · 16 IP · 17 H · 1 HR · 6 ER)
+  //   #136 樂天桃園 17:05 · 台鋼 江承謙(away)vs 樂天 麥斯威尼(home)· Tim 無投手表 · 全 estimate
+  //   隊伍 W-L:統一 20-22-1 · 味全 29-14-0 · 中信 11-29-1 · 富邦 23-17-0 · 台鋼 23-19-1 · 樂天 17-22-1
+  //
+  // Estimated(per /audit S02 ESTIMATION DISCLOSURE · 投手表沒列 K/BB):
+  //   · K/9 · BB/9 · WHIP 從 ERA + H/IP + 聯盟均值推估 · HR/9 從 screenshot HR÷IP×9 直接算(real)
+  //   · #136 兩位投手全 estimate(Tim 沒截投手表 · 下次截圖可升級)
+  //   · winRate 從 record gap + home advantage + SP ERA gap 估算 · 投手若在 cpbl-pitchers.ts
+  //     leaderboard · mergePitcherStats() 自動以真值覆蓋 K/BB/WHIP
+  //
+  // PRE-GAME · 沒 finalResult · 賽後 Tim 截 box score 才入 /track-record。
+  {
+    id: "cpbl-260531-01",
+    league: "CPBL",
+    date: "2026 · 05 · 31  ·  星期日",
+    startTime: "16:05",
+    venue: "天母棒球場",
+    home: {
+      name: "味全龍",
+      en: "DRAGONS",
+      pitcher: {
+        // 鋼龍 = 味全龍 洋投 starter · per Tim 5/31 screenshot 2026 累計
+        // ERA 2.30 · 47 IP · 39 H · 4 HR · 12 ER · K/BB 不在截圖 · estimate
+        name: "鋼龍",
+        era: "2.30", // real · 2026 累計
+        k9: "7.8", // estimate
+        whip: "1.18", // estimate · 39 H / 47 IP
+        bb9: "2.9", // estimate
+        hr9: "0.77", // real · 4 HR / 47 IP × 9
+      },
+      recent: ["W", "W", "L", "W", "W"], // placeholder · 味全 29-14-0 聯盟第一
+      winRate: 54,
+    },
+    away: {
+      name: "統一7-ELEVEn獅",
+      en: "LIONS",
+      pitcher: {
+        // 喬登 = 統一獅 洋投 starter · per Tim 5/31 screenshot 2026 累計
+        // ERA 1.71 · 21 IP · 12 H · 0 HR · 4 ER · elite 小樣本
+        name: "喬登",
+        era: "1.71", // real · 2026 累計
+        k9: "7.5", // estimate
+        whip: "1.10", // estimate · 12 H / 21 IP
+        bb9: "2.8", // estimate
+        hr9: "0.00", // real · 0 HR / 21 IP
+      },
+      recent: ["L", "W", "L", "W", "L"], // placeholder · 統一 20-22-1
+      winRate: 46,
+    },
+    topScores: [
+      // 投手戰(喬登 1.71 vs 鋼龍 2.30)· 低比分 skew · home 微favored
+      { score: "3 : 2", probability: 13.0 },
+      { score: "2 : 3", probability: 12.5 },
+      { score: "2 : 1", probability: 11.5 },
+      { score: "3 : 1", probability: 9.5 },
+      { score: "1 : 2", probability: 9.0 },
+    ],
+    aiConfidence: 54,
+  },
+  {
+    id: "cpbl-260531-02",
+    league: "CPBL",
+    date: "2026 · 05 · 31  ·  星期日",
+    startTime: "16:05",
+    venue: "臺北大巨蛋",
+    home: {
+      name: "富邦悍將",
+      en: "GUARDIANS",
+      pitcher: {
+        // 江國豪 = 富邦悍將 本土 starter · per Tim 5/31 screenshot 2026 累計
+        // ERA 3.38 · 16 IP · 17 H · 1 HR · 6 ER · 小樣本
+        name: "江國豪",
+        era: "3.38", // real · 2026 累計
+        k9: "7.0", // estimate
+        whip: "1.45", // estimate · 17 H / 16 IP 偏高
+        bb9: "3.5", // estimate
+        hr9: "0.56", // real · 1 HR / 16 IP × 9
+      },
+      recent: ["W", "L", "W", "W", "L"], // placeholder · 富邦 23-17-0
+      winRate: 57,
+    },
+    away: {
+      name: "中信兄弟",
+      en: "BROTHERS",
+      pitcher: {
+        // 勝騎士 = 中信兄弟 洋投 starter · per Tim 5/31 screenshot 2026 累計
+        // ERA 2.44 · 48 IP · 41 H · 3 HR · 13 ER · solid 大樣本
+        name: "勝騎士",
+        era: "2.44", // real · 2026 累計
+        k9: "7.5", // estimate
+        whip: "1.18", // estimate · 41 H / 48 IP
+        bb9: "2.8", // estimate
+        hr9: "0.56", // real · 3 HR / 48 IP × 9
+      },
+      recent: ["L", "L", "L", "W", "L"], // placeholder · 中信 11-29-1 墊底
+      winRate: 43,
+    },
+    topScores: [
+      // 富邦 record + home vs 中信墊底 · 但 勝騎士(away)壓制力 keep close
+      { score: "4 : 3", probability: 12.5 },
+      { score: "3 : 2", probability: 11.5 },
+      { score: "4 : 2", probability: 10.5 },
+      { score: "5 : 3", probability: 9.0 },
+      { score: "3 : 4", probability: 8.5 },
+    ],
+    aiConfidence: 57,
+  },
+  {
+    id: "cpbl-260531-03",
+    league: "CPBL",
+    date: "2026 · 05 · 31  ·  星期日",
+    startTime: "17:05",
+    venue: "樂天桃園棒球場",
+    home: {
+      name: "樂天桃猿",
+      en: "MONKEYS",
+      pitcher: {
+        // 麥斯威尼 = 樂天桃猿 洋投 starter · Tim 沒截投手表 · 全 estimate
+        name: "麥斯威尼",
+        era: "3.80", // estimate · 洋將 mid-tier
+        k9: "8.0", // estimate
+        whip: "1.30", // estimate
+        bb9: "3.0", // estimate
+        hr9: "0.90", // estimate
+      },
+      recent: ["L", "W", "L", "L", "W"], // placeholder · 樂天 17-22-1
+      winRate: 47,
+    },
+    away: {
+      name: "台鋼雄鷹",
+      en: "HAWKS",
+      pitcher: {
+        // 江承謙 = 台鋼雄鷹 本土 starter · Tim 沒截投手表 · 全 estimate
+        name: "江承謙",
+        era: "4.20", // estimate · 本土 mid-tier
+        k9: "6.8", // estimate
+        whip: "1.42", // estimate
+        bb9: "3.4", // estimate
+        hr9: "0.95", // estimate
+      },
+      recent: ["W", "L", "W", "W", "L"], // placeholder · 台鋼 23-19-1
+      winRate: 53,
+    },
+    topScores: [
+      // 台鋼 record edge(away)· 樂天 home edge · 投手 estimate even · away 微favored
+      { score: "3 : 4", probability: 11.5 },
+      { score: "4 : 3", probability: 10.8 },
+      { score: "2 : 3", probability: 10.0 },
+      { score: "4 : 5", probability: 9.0 },
+      { score: "3 : 5", probability: 8.0 },
+    ],
+    aiConfidence: 52,
+  },
+
   // ── 2026-05-30 · 今晚 CPBL · Tim 截圖 ingest(比賽 #131-132)──
   // 來源:Tim 截圖 cpbl.com.tw 一軍賽程 2026/05/30 + 先發投手成績表。
   //
