@@ -129,8 +129,8 @@ export default function Home() {
             />
             <PlayCard
               href="/matches"
-              tag="賽事討論室"
-              body="每場開放討論 · 免費看 · 登入發言 · 掛你的天梯名次。"
+              tag="看法 · 分析"
+              body="每場留看法、寫分析、選一邊 · 賽後自動評準度(刪不掉)。"
               live
             />
             <PlayCard
@@ -141,8 +141,8 @@ export default function Home() {
             />
             <PlayCard
               href="/membership"
-              tag="創作者分析"
-              body="高手發文賣分析 · 每篇掛天梯名次 · 平台抽 5-10%。即將上線。"
+              tag="賣分析收費"
+              body="高手把分析賣錢 · 平台抽 5-10% · 賽後自動掛準度。即將開放。"
             />
           </div>
         </section>

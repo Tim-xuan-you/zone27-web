@@ -6,7 +6,6 @@ import Footer from "@/components/Footer";
 import MatchSimulator from "@/components/MatchSimulator";
 import StatPercentileBar from "@/components/StatPercentileBar";
 import ConfidenceStars from "@/components/ConfidenceStars";
-import GameThread from "@/components/GameThread";
 import CreatorAnalysis from "@/components/CreatorAnalysis";
 import UserPredictionPicker from "@/components/UserPredictionPicker";
 import ReceiptForwardButton from "@/components/ReceiptForwardButton";
@@ -253,16 +252,13 @@ export default async function MatchDetailPage({
           </section>
         )}
 
-        {/* ── CREATOR ANALYSIS · 創作者分析(發文 + 選邊 + 賽後自動評準度)── */}
+        {/* ── 看法 · 分析(唯一發言區:留看法/寫分析 + 選邊 + 賽後自動評準度)── */}
         <CreatorAnalysis
           matchId={m.id}
           homeName={m.home.name}
           awayName={m.away.name}
           finalWinner={m.finalResult?.winner ?? null}
         />
-
-        {/* ── DISCUSSION · 賽事討論室(免費看 · 登入發言)── */}
-        <GameThread gameId={m.id} />
 
         {/* ── PITCHER MATCHUP · 精簡 ─────────────────── */}
         <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-8 border-t border-line/40 pt-8">

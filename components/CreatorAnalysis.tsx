@@ -107,15 +107,12 @@ export default function CreatorAnalysis({
       className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-8 border-t border-line/40 pt-8"
       id="creator-analysis"
     >
-      <div className="flex items-baseline gap-3 mb-1 flex-wrap">
-        <p className="font-mono text-gold text-[9px] tracking-[0.4em]">/ 創作者分析</p>
+      <div className="flex items-baseline gap-3 mb-4 flex-wrap">
+        <p className="font-mono text-gold text-[9px] tracking-[0.4em]">/ 看法 · 分析</p>
         <span className="font-mono text-mute/55 text-[9px] tracking-[0.25em]">
-          {posts.length} 篇 · 押的邊賽後自動掛準/不準
+          {posts.length} 篇 · 選一邊 · 賽後自動評準度
         </span>
       </div>
-      <p className="text-mute/70 text-[11px] leading-relaxed mb-5">
-        寫分析 · 選一邊 · 賽後自動評勝敗(刪不掉)。 賣文章功能即將開放。
-      </p>
 
       {/* posts */}
       {posts.length > 0 ? (
@@ -163,7 +160,7 @@ export default function CreatorAnalysis({
               value={title}
               maxLength={T_MAX}
               onChange={(e) => setTitle(e.target.value)}
-              placeholder="標題 · 例「今晚我壓主隊,投手壓制力差很多」"
+              placeholder="一句話標題 · 例「今晚壓主隊,投手差很多」"
               className="w-full bg-ink/60 border border-line/70 text-bone px-3 py-2 outline-none focus:border-gold/60 placeholder:text-mute/60 font-mono text-sm transition-colors"
             />
             <textarea
@@ -171,7 +168,7 @@ export default function CreatorAnalysis({
               value={body}
               maxLength={B_MAX}
               onChange={(e) => setBody(e.target.value)}
-              placeholder="你的分析 ·（理性討論 · Tim 親手 moderate）"
+              placeholder="你的看法 / 分析"
               className="w-full bg-ink/60 border border-line/70 text-bone px-3 py-2.5 outline-none focus:border-gold/60 placeholder:text-mute/60 font-mono text-sm leading-relaxed transition-colors"
             />
             <div className="flex items-center gap-2 flex-wrap">
