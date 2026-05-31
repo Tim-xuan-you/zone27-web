@@ -704,7 +704,7 @@ export const COMMAND_ITEMS: CommandItem[] = [
     keywords: ["member", "dashboard", "會員頁", "個人", "時間軸"],
   },
   {
-    label: "Login · Email magic link · 無密碼 · FREE TIER",
+    label: "Login · Email + 密碼 · FREE TIER",
     kicker: "/login",
     path: "/login",
     group: "工具 · 外部",

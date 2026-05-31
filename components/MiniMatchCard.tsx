@@ -150,8 +150,12 @@ export default function MiniMatchCard({ match }: { match: Match }) {
             style={{ width: `${awayPct}%` }}
           />
         </div>
-        <p className="mt-1.5 text-center font-mono text-mute/55 text-[8px] tracking-[0.3em]">
-          引擎開盤線 · ENGINE LINE
+        <p className="mt-1.5 text-center font-mono text-mute/65 text-[9px] tracking-[0.12em] leading-snug">
+          引擎看好{" "}
+          <span className="text-gold/80">
+            {homeFav ? match.home.name : match.away.name}
+          </span>{" "}
+          · 一萬次模擬贏 {Math.max(homePct, awayPct) * 100} 次
         </p>
 
       </div>

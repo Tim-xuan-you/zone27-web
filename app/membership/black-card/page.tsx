@@ -130,7 +130,7 @@ const FAQS = [
 // edit = 2-place change 高 mismatch risk · 違反 R76 W-A self-falsifiable
 // count-drift discipline · 現在 const 從 1 source render · 改字 = 改 1 處。
 const BLACK_CARD_MAILTO_HREF =
-  "mailto:tatayngiti@gmail.com?subject=BLACK%20CARD%20CPBL%20Season%20Pass%20-%20NT%24%201%2C500%2Fseason&body=Tim%20%E5%A5%BD%2C%0A%0A%E6%88%91%E6%83%B3%E8%A8%82%E9%96%B1%20BLACK%20CARD%20CPBL%20Season%20Pass%20%E2%80%A2%20NT%24%201%2C500%20per%20CPBL%20season(March-November)%E3%80%82%0A%0A%E8%AB%8B%E5%AF%84%E6%88%91%20ECPay%20%E5%80%8B%E4%BA%BA%E6%96%B9%E6%A1%88%E4%BB%98%E6%AC%BE%E9%80%A3%E7%B5%90%E3%80%82%0A%0A%E5%B7%B2%E7%9F%A5%E6%82%89%200%20auto-renewal%20%E2%80%A2%20%E6%AF%8F%E5%AD%A3%20explicit%20click%20%2B%20manual%20transfer%20%E2%80%A2%2014%20%E5%A4%A9%E7%84%A1%E6%A2%9D%E4%BB%B6%E9%80%80%E6%AC%BE%E3%80%82%0A%0A%E8%AC%9D%E8%AC%9D%E3%80%82";
+  "mailto:tatayngiti@gmail.com?subject=BLACK%20CARD%20%C2%B7%20NT%24%20500%2F31%20%E5%A4%A9&body=Tim%20%E5%A5%BD%2C%0A%0A%E6%88%91%E6%83%B3%E8%A8%82%E9%96%B1%20BLACK%20CARD%20%C2%B7%20NT%24%20500%2F31%20%E5%A4%A9%E3%80%82%0A%0A%E8%AB%8B%E5%AF%84%E6%88%91%20ECPay%20%E5%80%8B%E4%BA%BA%E6%96%B9%E6%A1%88%E4%BB%98%E6%AC%BE%E9%80%A3%E7%B5%90%E3%80%82%0A%0A%E5%B7%B2%E7%9F%A5%E6%82%89%200%20auto-renewal%20%C2%B7%20%E6%AF%8F%2031%20%E5%A4%A9%20explicit%20click%20%2B%20manual%20transfer%20%C2%B7%2014%20%E5%A4%A9%E7%84%A1%E6%A2%9D%E4%BB%B6%E9%80%80%E6%AC%BE%E3%80%82%0A%0A%E8%AC%9D%E8%AC%9D%E3%80%82";
 
 export default function BlackCardPage() {
   return (

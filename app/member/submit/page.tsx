@@ -121,8 +121,8 @@ export default function SubmitPage() {
                 / LOGIN REQUIRED
               </p>
               <p className="text-mute text-sm leading-relaxed mb-5">
-                投稿需要 FREE TIER 會員身份(防 anon spam)· 1 分鐘 magic
-                link 註冊 → 回此頁。
+                投稿需要 FREE TIER 會員身份(防 anon spam)· Email + 密碼
+                1 分鐘註冊 → 回此頁。
               </p>
               <Link
                 href="/login?next=/member/submit"
