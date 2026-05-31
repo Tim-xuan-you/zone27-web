@@ -95,11 +95,21 @@ R174 pivot build queue · Claude 可主動 ship(三綠 + auto-push):
 
 - ✅ **海選天梯 /ladder**(已 ship · 新秀→神諭 · 樣本加權 · 引擎/群眾/你三聲音對照)· UserPredictionPicker 已指向 /ladder
 - ✅ **賽事討論室 OPEN**(已 ship · 免費看 + 登入發言 · 不付費 · migration 0004 待 Tim 套用 · GameThread + HomepagePreview reframe)
-- **270-cap 站內 reframe sweep**(下一個大件)· 舊頁面仍寫「限量 270 名」/「每年開放新 270」(/founders /roadmap
-  /membership 等)→ 改「會員不限量 + 前 270 創始徽章」· 同 R173 pricing-sweep 規格 · 一次掃乾淨不要 half-apply
+- ✅ **270-cap 站內 reframe sweep**(DONE 2026-05-31)· 26 檔 + 首頁 ·「限量 270 席/2026 班售完關閉/每年新 270」→
+  「會員不限量 + 前 270 創始編號(1st Edition · 發完即止 · 271+ 仍完整會員無編號)」· /discipline 紀律論述 + /manifesto 反 MLM
+  + /founders 銷售敘事全重寫 · 三綠 + push · grep 確認 0 殘留(now journal 歷史保留)
+- ✅ **首頁砍最近結算 + 市場卡機率講人話**(DONE · Tim「超雜」+ 研究 agent #1)·「63%」→「引擎看好 X · 一萬次模擬贏 N 次」
+- ✅ **止血 3 矛盾 + dev CSP fix + 清 1054 行 dead code**(DONE)· 黑卡 mailto 1500→500 / login magic-link 文案 / 創作者訊息誠實化
+  + CSP dev 加 unsafe-eval(Fast Refresh 修復)+ 刪 7 orphan 元件(R175 pivot 後無 import)
+- ⏳ **押注 → 個人準度迴路接通**(retention 命脈 · conversion agent HIGH · gated on Tim)· UserPredictionPicker 寫 0003
+  predictions 表 · 但 /member 還讀舊 user_metadata → 球迷押了看不到自己累積準度 = 押完斷線。**migration
+  0006_my_predictions.sql 已備好**(get_my_predictions RPC)· 待 Tim 在 Supabase Studio 套用 → Claude 接 /member
+  改讀新表 + app-side 對 finalResult grade 算累積準度。
 - **群眾市場線鋪滿卡片**(MiniMatchCard + /matches 已有 · 補其餘 surface)
 - **安全 P1** · /admin 伺服器端上鎖(M#2 · 需 ADMIN_EMAIL)· 寄信限流 Upstash(TIER 1)
 - **K/BB estimate → 真值**(等 Tim screenshot)
+- **小 deferred**(不急)· /rewards route 跟 CLAUDE.md 文件對不上(該砍或更新文件)· 黑卡舊價殘留在幾個程式註解
+  (非 rendered)· 首頁手機 sticky CTA 要不要改產品導向(「跑一場模擬」)· MemberHomeHero null guard
 
 ---
 
