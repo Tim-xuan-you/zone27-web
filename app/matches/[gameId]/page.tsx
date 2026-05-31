@@ -50,7 +50,7 @@ export async function generateMetadata({
   if (!match) return { title: "Match not found" };
   return {
     title: `${match.home.name} vs ${match.away.name} · ${match.league}`,
-    description: `蒙地卡羅 10,000 次模擬 — ${match.home.name} ${match.home.winRate}% / ${match.away.name} ${match.away.winRate}%。${match.home.pitcher.name} vs ${match.away.pitcher.name}。`,
+    description: `引擎開盤線 · 賽前鎖定 — ${match.home.name} ${match.home.winRate}% / ${match.away.name} ${match.away.winRate}% · 站內可自己跑 10K 逐打席模擬。${match.home.pitcher.name} vs ${match.away.pitcher.name}。`,
   };
 }
 
@@ -140,7 +140,7 @@ export default async function MatchDetailPage({
           <div className="bg-slate/60 border border-line/70 p-6 sm:p-8">
             <div className="flex items-baseline justify-between mb-3">
               <span className="font-mono text-gold/80 text-[9px] tracking-[0.35em]">
-                引擎機率 · 10K MONTE CARLO
+                引擎開盤線 · 賽前鎖定
               </span>
               <ConfidenceStars confidence={m.aiConfidence} variant="inline" />
             </div>
@@ -180,6 +180,16 @@ export default async function MatchDetailPage({
               引擎開盤線 · ENGINE LINE
             </p>
           </div>
+
+          {/* R176 · 開盤線 vs 即時模擬 落差 framing · Tim 5/31 screenshot canary:
+              同頁兩個勝率(開盤鎖定 estimate vs 下方逐打席 10K)= 信任 bug。
+              假標籤「10K MONTE CARLO」已從開盤線移除(它是賽前估算 · 不是模擬)。
+              落差 framed 成 Pratfall:兩種算法都公開 · 不挑好看的講。 */}
+          <p className="mt-3 text-center text-mute/75 text-[11px] sm:text-xs leading-relaxed">
+            開盤線是<span className="text-bone">賽前鎖定的估算</span>(戰績 · 主場 · 投手強弱 · 鎖了不改)。
+            往下<span className="text-gold">自己跑 10K 逐打席模擬</span>是另一套更細的算法 ·
+            數字會有點出入 —— 兩個都攤給你看,不挑好看的講。
+          </p>
 
           {/* 進場預測 · 群眾線 + 你的一手 */}
           <UserPredictionPicker
