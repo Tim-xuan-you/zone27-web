@@ -294,10 +294,12 @@ export default async function MatchDetailPage({
         {/* ── RUN IT YOURSELF · 自己跑引擎 ───────────── */}
         <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-16 border-t border-line/40 pt-8">
           <p className="font-mono text-gold text-[9px] tracking-[0.4em] mb-3">
-            / 自己跑一次引擎
+            / 自己驗算 · 逐打席 10K
           </p>
           <p className="text-mute text-sm leading-relaxed mb-6 max-w-xl">
-            別只看數字 · 在你瀏覽器裡跑一輪 10,000 次蒙地卡羅 · 看勝率怎麼收斂。
+            上面的開盤線不用信我們 · 在你瀏覽器裡親手跑 10,000 次逐打席模擬 ·
+            這是更細的另一套算法(數字會跟開盤線有點出入)· 你親手看引擎憑什麼開這個盤。{" "}
+            <span className="text-bone">這是驗算工具 · 不是第二個官方盤口</span>。
           </p>
           <MatchSimulator key={m.id} match={m} />
         </section>
