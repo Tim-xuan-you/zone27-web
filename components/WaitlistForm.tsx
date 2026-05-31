@@ -154,7 +154,7 @@ export default function WaitlistForm({
         {/* Round 24 stale-ref fix(post-Round-21 FREE TIER · Round-23 Nav
             "會員")· kicker 從「創始會員 · 預售等候名單」改成 dual-purpose
             framing · 訪客現在 1 個動作填表 = 自動進入 2 個 tier:免費
-            訂閱層(永久)+ Founders 27 預售名單(限量 270 · 開放時優
+            訂閱層(永久)+ Founders 27 預售名單(前 270 拿創始編號 · 開放時優
             先)。原 kicker 把表單框成「只有想當創始會員才填」· bounce
             掉真正只想留 email 的訪客 · 跟下方 Round 21 FREE TIER
             clarifier 邏輯衝突。 */}

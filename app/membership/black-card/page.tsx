@@ -93,8 +93,8 @@ const UNLOCKS = [
   },
   {
     icon: "🎫",
-    title: "每年 1/1 Founders 27 新 270 開放時 · 您享 24h pre-access",
-    body: "Founders 27(NT$ 2,700/365 天 · 每年 1/1 開放新 270 名 · 同 Patek 1996/1997 annual collection)· BLACK CARD 訂閱者享每年 1/1 24h 優先購買 window · 早 24 小時 access。 ⏳ 等付款系統上線後開放。",
+    title: "每年 1/1 Founders 27 開放時 · 您享 24h pre-access",
+    body: "Founders 27(NT$ 2,700/365 天 · 每年 1/1 開放 · 會員不限量 · 同 Patek annual collection)· BLACK CARD 訂閱者享每年 1/1 24h 優先購買 window · 早 24 小時 access。 ⏳ 等付款系統上線後開放。",
   },
 ];
 
@@ -487,7 +487,7 @@ export default function BlackCardPage() {
           </p>
           <p className="text-mute text-sm leading-relaxed mb-6 max-w-xl mx-auto">
             BLACK CARD 在 ZONE 27 3-tier 會員 ladder 中位處第 2 階 ·
-            上有 Founders 27(限量 270 · NT$ 2,700/365 天 · 抽傭 5%)·
+            上有 Founders 27(NT$ 2,700/365 天 · 抽傭 5% · 前 270 拿編號)·
             下有 FREE TIER(永久免費)。 完整對照在 /membership。
           </p>
           <div className="flex flex-wrap items-center justify-center gap-4">

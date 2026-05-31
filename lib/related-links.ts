@@ -190,7 +190,7 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
       // conversion-warmth link.
       href: "/founders",
       kicker: "founders",
-      title: "讀完了 · 加入 270 個席位之一",
+      title: "讀完了 · 成為前 270 創始編號之一",
     },
   ],
   "/matches/[gameId]": [
@@ -207,7 +207,7 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
     {
       href: "/founders",
       kicker: "founders",
-      title: "加入 270 個創始席位",
+      title: "加入 Founders 27 · 前 270 拿創始編號",
     },
   ],
   "/track-record": [
@@ -348,7 +348,7 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
     {
       href: "/founders",
       kicker: "founders",
-      title: "看完了 · 加入 270 名創始會員",
+      title: "看完了 · 加入 Founders 27 · 前 270 拿編號",
     },
   ],
   "/discipline": [
@@ -386,7 +386,7 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
     {
       href: "/founders",
       kicker: "founders",
-      title: "Founders 27 詳情頁 · 限量 270 · 年度",
+      title: "Founders 27 詳情頁 · 前 270 創始編號 · 年度",
     },
     {
       href: "/track-record",
@@ -504,7 +504,7 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
     {
       href: "/founders",
       kicker: "founders",
-      title: "Founders 27 銷售頁 · 限量 270 · 創始席位",
+      title: "Founders 27 銷售頁 · 前 270 創始編號 · 年度",
     },
     {
       href: "/audit",

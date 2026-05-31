@@ -90,9 +90,9 @@ export default function StickyFoundersCTA() {
               <span className="text-mute/60"> / </span>
               <span>{FOUNDERS_TOTAL}</span>
               <span className="text-mute/60 mx-1.5">·</span>
-              <span>{FOUNDERS_REMAINING} 席</span>
+              <span>{FOUNDERS_REMAINING} 號待領</span>
               <span className="text-mute/60 mx-1.5">·</span>
-              <span className="text-mute">2026 班關閉</span>
+              <span className="text-mute">會員不限量</span>
             </span>
           </div>
           <span

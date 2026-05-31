@@ -26,9 +26,9 @@ import { createPageMetadata } from "@/lib/page-og";
 // PRE-COMMIT discipline + private-share critical pre-launch surface · createPageMetadata
 // 提供 openGraph + twitter + alternates.canonical 3 件 explicit override。
 export const metadata: Metadata = createPageMetadata({
-  title: "Founders 27 · NT$ 2,700 / 365 天 · 每年 1/1 開放 270 名",
+  title: "Founders 27 · NT$ 2,700 / 365 天 · 前 270 拿創始編號",
   description:
-    "ZONE 27 創始會員 · NT$ 2,700/365 天 · 每年 1/1 開放 270 個新 seats(同 Patek 1996/1997 annual collection 模式)· existing 訂戶享 1/1 24h pre-access · Tim 親手 onboard · 抽傭 5%(BLACK CARD 一半)。",
+    "ZONE 27 創始會員 · NT$ 2,700/365 天 · 會員不限量 · 前 270 拿永久創始編號(1st Edition · 發完即止)· 每年 1/1 加入 / 續訂節點 · Tim 親手 onboard 前 270 · 抽傭 5%(BLACK CARD 一半)。",
   path: "/founders",
 });
 
@@ -152,7 +152,7 @@ const TIERS = [
     name: "FOUNDERS 27",
     zh: "創始會員",
     price: "NT$ 2,700",
-    priceNote: "每 365 天 · 每年 1/1 開放新 270",
+    priceNote: "每 365 天 · 會員不限量 · 前 270 拿編號",
     highlight: true,
     rows: {
       data: "完整 + 優先試用",
@@ -162,7 +162,7 @@ const TIERS = [
       bottom27: "✓",
       preview: "✓ 7 天",
       hospitality: "✓",
-      cap: "270 / 年 · 1/1 reset",
+      cap: "不限 · 前 270 拿編號",
       fiveYearTotal: "NT$ 13,500",
     },
   },
@@ -203,8 +203,8 @@ const INLINE_FAQ = [
   },
   // Round 52 W-E · Agent 1 #1 · 7 concrete fears added · HEY pricing model:
   {
-    q: "如果 270 個席位賣完前我還在猶豫怎麼辦?",
-    a: "/founders/ledger 每週手寫更新分配進度。 您可以隨時 check ledger 看「目前 N/270」 + 拒絕原因 sample。 沒有 live counter 製造 FOMO · 但有 weekly transparency。 每年 1/1 開放新 270 名(Year 2026 Class · Year 2027 Class · 等)· 同 Patek 1996/1997 annual collection 模式 · existing 訂戶享 1/1 24h pre-access。",
+    q: "如果創始編號發完前我還在猶豫怎麼辦?",
+    a: "/founders/ledger 每週手寫更新分配進度。 您可以隨時 check ledger 看「目前 N/270」 + 拒絕原因 sample。 沒有 live counter 製造 FOMO · 但有 weekly transparency。 創始編號發完後 · 會員仍不限量開放(NT$ 2,700/年 · 5% 抽成不變)· 只是 #001–#270 這批永久編號沒了。 1st Edition 永遠只有最初 270 個。",
   },
   {
     q: "如果我加入後反悔想退款?",
@@ -272,7 +272,7 @@ export default async function FoundersPage({
           <span className="text-gold tabular">{formatBadge(FOUNDERS_NEXT)}</span>
           <br />
           <span className="text-3xl sm:text-4xl md:text-5xl text-mute">
-            (2026 班 · 共 {FOUNDERS_TOTAL} 名)
+            (會員不限量 · 前 {FOUNDERS_TOTAL} 拿創始編號)
           </span>
         </h1>
 
@@ -299,7 +299,7 @@ export default async function FoundersPage({
           lang="en"
           className="font-mono text-mute text-xs sm:text-sm tracking-[0.3em] mt-3 sm:mt-5"
         >
-          NT$ 2,700 / YEAR · 2026 CLASS NEVER REOPENS
+          NT$ 2,700 / YEAR · 1ST EDITION #001–#270
         </p>
 
         {/* R158 W3.H3 · Agent H Loss Aversion frame · Kahneman & Tversky 1979
@@ -313,9 +313,9 @@ export default async function FoundersPage({
             existing GenerationsLine。 */}
         <p className="mt-4 max-w-md mx-auto text-loss/85 text-xs sm:text-[13px] leading-relaxed font-mono tracking-[0.05em]">
           ⚓ <span className="text-loss">#{String(FOUNDERS_NEXT).padStart(3, "0")}</span>{" "}
-          認領後 · 您再也無法成為 2026 班的{" "}
+          認領後 · 您再也無法拿到創始編號{" "}
           <span className="text-loss">#{String(FOUNDERS_NEXT).padStart(3, "0")}</span>
-          。 2027 會開全新一班 · 但 2026 founding class 額滿即永久關閉 · per{" "}
+          。 會員永遠不限量可加入 · 但創始編號 1st Edition 只有最初 270 個 · 發完即止 · per{" "}
           <Link href="/audit#section-05" className="text-loss/85 hover:text-gold underline-offset-4 hover:underline">/audit S05 PRE-COMMIT</Link>{" "}
           物理 codify · 不是 marketing FOMO。
         </p>
@@ -326,10 +326,10 @@ export default async function FoundersPage({
             人力上限」 · 把 FOMO counter (banned axiom) 轉為 costly-signaling
             (brand axiom) · 違反 0 · 強化 brand IP。 Pinboard pattern。 */}
         <p className="mt-4 max-w-md mx-auto text-mute/85 text-xs sm:text-[13px] leading-relaxed">
-          <span className="text-gold/90 font-medium">270</span>{" "}
-          是一年 Tim 親手回覆 + 親筆 sign-off 的人力上限 · 不是 marketing
-          number。 超過 Tim sustain 不來 · 名額就成{" "}
-          <span className="text-loss/80">空頭支票</span> · 那 brand 自殺。
+          <span className="text-gold/90 font-medium">前 270</span>{" "}
+          個創始編號 · 每一個都是 Tim 親手回覆 + 親筆 sign-off · 不是 marketing
+          number。 會員不限量 · 但「親手 onboard」這道工 · 只刻在最初 270 個{" "}
+          <span className="text-loss/80">編號</span>上。
         </p>
 
         {/* R60 W-B · 「SHADOWLESS RUN」 framing · 整批 270 = 1st Edition
@@ -344,10 +344,10 @@ export default async function FoundersPage({
             稀缺 + Tim 「270 = 一年 sign-off ceiling」 axiom · brand IP
             triple-fire(disclosure-philosophy + pratfall + costly-signaling)。 */}
         <p className="mt-3 max-w-md mx-auto text-mute/70 text-[11px] sm:text-xs leading-relaxed">
-          <strong className="text-bone">Founders 27 2026 班</strong> = ZONE 27 的{" "}
+          <strong className="text-bone">前 270 個創始編號</strong> = ZONE 27 的{" "}
           <span className="text-gold/90">1st Edition Shadowless Run</span> ·
-          同 Pokemon Base Set 1999 第一批 print run · 2026 班售完即永久關閉 ·
-          2027 起每年開新班(= Unlimited 重印)· 1st Edition 永遠只有 2026 這批 ·{" "}
+          同 Pokemon Base Set 1999 第一批 print run · 發完即止 ·
+          第 271 位起的會員 = Unlimited 重印(一樣是真會員)· 1st Edition 永遠只有最初 270 ·{" "}
           <Link
             href="/founders/ledger"
             className="text-gold/80 hover:text-gold underline-offset-4 hover:underline transition-colors"
@@ -478,13 +478,13 @@ export default async function FoundersPage({
           lang="en"
           className="mt-2 font-mono text-mute text-[10px] tracking-[0.3em] text-center"
         >
-          NO AUTO-RENEW · NO HIDDEN FEES · 2026 CLASS NEVER REOPENS
+          NO AUTO-RENEW · NO HIDDEN FEES · 1ST EDITION #001–#270
         </p>
 
         <p className="mt-6 sm:mt-10 max-w-xl mx-auto text-mute leading-relaxed text-sm sm:text-base">
           這 {FOUNDERS_TOTAL} 個編號將是 ZONE 27 永遠的傳教士。
           <br />
-          每年 1/1 開放 270 名(Year 2026 Class · Year 2027 Class · 等 · 同 Patek annual collection 模式)。 existing 訂戶享 1/1 24h pre-access renew。
+          會員不限量 · 但前 270 拿創始編號(1st Edition · 發完即止)。 每年 1/1 是加入 / 續訂節點(同 Patek annual collection)· existing 訂戶享 1/1 24h pre-access。
         </p>
         <p className="mt-3 sm:mt-4 max-w-xl mx-auto text-mute/70 text-xs sm:text-sm leading-relaxed">
           付款系統 payment infra 就緒後開放(milestone-triggered · 不綁日期)。先加入等候名單,優先取得購買權。
@@ -839,11 +839,11 @@ export default async function FoundersPage({
               lang="en"
               className="font-mono text-gold text-[10px] tracking-[0.3em] mb-5"
             >
-              NT$ 2,700 · 一年 · 2026 班
+              NT$ 2,700 · 一年 · 前 270 創始編號
             </p>
             <ul className="space-y-3 text-bone text-sm leading-relaxed list-none pl-0">
               <NotBuyingItem gold>
-                #001–#{FOUNDERS_TOTAL} 編號(2026 班永遠只有 {FOUNDERS_TOTAL} 個)
+                #001–#{FOUNDERS_TOTAL} 創始編號(1st Edition 永遠只有 {FOUNDERS_TOTAL} 個)
               </NotBuyingItem>
               <NotBuyingItem gold>
                 Tim 親手 onboarding(個人簽名證書)
@@ -1152,20 +1152,20 @@ export default async function FoundersPage({
               </span>
             </CalcRow>
 
-            <CalcRow label="名額" en="CAP" isLast>
+            <CalcRow label="創始編號" en="1ST EDITION" isLast>
               <span className="text-bone">
-                {FOUNDERS_TOTAL} 名 / 年 · 2026 班額滿即永久關閉
+                前 {FOUNDERS_TOTAL} 個 · 發完即止 · 會員仍不限量
               </span>
             </CalcRow>
           </dl>
         </div>
 
         <p className="mt-10 text-center text-mute text-sm max-w-xl mx-auto leading-relaxed">
-          NT$ 2,700/年 · 您是 2026 班
+          NT$ 2,700/年 · 您是前
           <span className="text-gold tabular mx-1">{FOUNDERS_TOTAL}</span>
-          個編號之一。
+          個創始編號之一。
           <br />
-          不是優惠期、不是早鳥折扣 — 是這 270 個位置的真實成本 · 每年 1/1 可優先續訂。
+          不是優惠期、不是早鳥折扣 — 是這個價格的真實成本 · 每年 1/1 可優先續訂。
         </p>
         </details>
       </section>
@@ -1321,10 +1321,10 @@ export default async function FoundersPage({
           lang="en"
           className="font-mono text-gold text-[10px] tracking-[0.4em] mb-6"
         >
-          ONE NUMBER. ONE CLASS.
+          ONE NUMBER. FIRST EDITION.
         </p>
         <h3 className="text-3xl sm:text-4xl text-bone font-light tracking-tight">
-          當 2026 班 {formatBadge(FOUNDERS_TOTAL)} 被認領,這扇門將永遠關閉。
+          當創始編號 {formatBadge(FOUNDERS_TOTAL)} 被認領,1st Edition 永遠關閉。
         </h3>
         <p className="mt-6 text-mute max-w-md mx-auto text-sm leading-relaxed">
           現在加入等候名單,在正式開放預訂時擁有第一順位。

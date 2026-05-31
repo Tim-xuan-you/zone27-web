@@ -72,7 +72,7 @@ export default function FoundersApplyPage() {
           </p>
           <h1 className="text-4xl sm:text-5xl text-bone font-light tracking-tight leading-tight">
             申請 Founders 27 ·{" "}
-            <span className="text-gold">一年 270 個席位</span>
+            <span className="text-gold">前 270 個創始編號</span>
           </h1>
           <p className="mt-6 text-mute leading-relaxed text-base sm:text-lg">
             這不是註冊表單 · 是 Patek-style application。{" "}
@@ -81,8 +81,8 @@ export default function FoundersApplyPage() {
             小時 window)。
           </p>
           <p className="mt-3 font-mono text-mute/85 text-xs tracking-[0.25em]">
-            目前 #{String(FOUNDERS_NEXT).padStart(3, "0")} 待認領 · 總額{" "}
-            {FOUNDERS_TOTAL} · 2026 班(1st Edition)售完即關閉 · 不重開(per{" "}
+            目前 #{String(FOUNDERS_NEXT).padStart(3, "0")} 待領 · 創始編號共{" "}
+            {FOUNDERS_TOTAL} 個 · 1st Edition 發完即止 · 會員仍不限量(per{" "}
             <Link
               href="/audit"
               className="text-gold underline-offset-4 hover:underline"
@@ -294,7 +294,7 @@ export default function FoundersApplyPage() {
                 >
                   /founders/ledger
                 </Link>{" "}
-                公開帳本 · 365 天訂閱 · NT$ 2,700 永不調漲 · 每年 1/1 開放新 270
+                公開帳本 · 365 天訂閱 · NT$ 2,700 永不調漲 · 會員不限量 · 前 270 拿編號
               </li>
             </ol>
           </div>
@@ -307,9 +307,10 @@ export default function FoundersApplyPage() {
             因為 ZONE 27 不是 SaaS · 是稀缺手工 product。
           </p>
           <p>
-            一年 270 個席位 = 我 365 天 ÷ 1.35 = 我親手 review 每一個
-            applicant 的物理上限。 我不外包 review · 不 hire intern · 不
-            auto-approve 任何 case。
+            前 270 個創始編號 = 我親手 review 每一個 applicant 的階段 · 365 天 ÷ 1.35
+            是我一年親手 onboard 的節奏。 我不外包 review · 不 hire intern · 不
+            auto-approve 任何 case。 創始編號發完後 Founders 27 仍不限量開放 · 但
+            #001–#270 這批是我一個一個親手讀完「why」才發出去的。
           </p>
           <p>
             您 click submit 那一刻 · 我在台南某家咖啡店或某個夜班會親手讀完

@@ -607,7 +607,6 @@ export const COMMAND_ITEMS: CommandItem[] = [
       "贊助",
       "支持",
       "入主",
-      "限量",
       "席位",
       "席次",
       "年度會員",

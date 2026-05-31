@@ -427,7 +427,7 @@ export default function PrivacyPage() {
           <li>
             <strong className="text-bone">Founders 27 ledger row</strong> · 永久
             保留 · 創始編號永久屬於該屆 · per /founders/ledger SHADOWLESS RUN
-            commitment「2026 班售完即關閉 · 1st Edition 永遠只有這批」 · 您即使退款 ledger
+            commitment「創始編號發完即止 · 1st Edition 永遠只有最初 270」 · 您即使退款 ledger
             row 仍 release reserved 標記但保留歷史記錄
           </li>
           <li>

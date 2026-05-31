@@ -214,8 +214,8 @@ export default function ManifestoPage() {
             <P>
               <strong className="text-bone">這個倒置讓我們失去什麼:</strong>{" "}
               我們永遠不會有「ARR 50x 線性成長」的故事可以講給創投。
-              收入上限 = 270 位 Founders × NT$ 2,700 + N 位 BLACK CARD ×
-              NT$ 500/31 天。這是一個{" "}
+              收入靠會員費(Founders 27 NT$ 2,700/年 · BLACK CARD NT$ 500/月)+
+              創作者抽成 5–10% · 會員不限量 · 但 CPBL 市場本身就小。這是一個{" "}
               <Link href="/about" className="text-gold hover:underline underline-offset-4">
                 俱樂部規模的事業
               </Link>
@@ -229,7 +229,7 @@ export default function ManifestoPage() {
               這兩件事不能反過來:免費身分 + 收費工具 = 我們變成普通 SaaS。
             </P>
             {/* Round 29 Wave 1 · MLM disambiguation brand defense.
-                台灣訪客看到「限量 270 + 親手 onboard + 年度 + LINE 群 +
+                台灣訪客看到「前 270 創始編號 + 親手 onboard + 年度 + LINE 群 +
                 未來實體聚會」很容易 surface-level 聯想到 MLM/安麗式
                 「限量早期合夥人」框架 · 但 ZONE 27 經濟結構跟 MLM 完全
                 相反。先前這個 disambiguation 埋在 /founders + /audit +
@@ -245,7 +245,7 @@ export default function ManifestoPage() {
               </p>
               <P className="!mb-3">
                 <strong className="text-bone">這結構長得像 MLM 嗎?</strong>{" "}
-                表面有幾個 visual cue 確實會被聯想:限量名額(270)·
+                表面有幾個 visual cue 確實會被聯想:創始編號(前 270)·
                 年度會員 · Tim 親手 onboard · 未來 LINE 群 + 實體聚會。
                 但 ZONE 27 的經濟結構跟 MLM / 安麗式平台
                 <strong className="text-bone">完全相反</strong>。
@@ -272,14 +272,14 @@ export default function ManifestoPage() {
                   <span className="text-bone">沒任何 sales-script · 沒洗腦營</span>
                 </li>
                 <li>
-                  <span className="text-loss/80">✕</span> MLM 無限招募下線 →{" "}
-                  <span className="text-bone">限量 270 / 年 · #270 認領那秒當年班別關閉</span>
+                  <span className="text-loss/80">✕</span> MLM 無限招募下線 · 每層抽佣 →{" "}
+                  <span className="text-bone">會員不限量 · 但零多層抽佣 · 每位都是平台直接關係</span>
                 </li>
               </ul>
               <P className="text-mute/70 !mb-0 mt-4 text-sm">
                 BLACK CARD 創作者抽成 10% = platform fee(類 Stripe / Spotify) ·
                 Founders 27 創作者抽成 5%(BLACK CARD 的一半 · 不是 referral kick-back)。
-                限量 270 是 <strong className="text-bone">Costly Signaling</strong> · 不是招募階梯。
+                前 270 創始編號是 <strong className="text-bone">Costly Signaling</strong> · 不是招募階梯。
                 創始會員是
                 <strong className="text-bone">扛了品牌風險的早期支持者的補償</strong> ·
                 不是未來業績的領先指標。
@@ -588,7 +588,7 @@ export default function ManifestoPage() {
                     href="/founders"
                     className="text-gold underline-offset-4 hover:underline"
                   >
-                    這 {FOUNDERS_REMAINING} 個位置是為您留的
+                    這 {FOUNDERS_REMAINING} 個創始編號是為您留的
                   </Link>
                   。
                 </P>

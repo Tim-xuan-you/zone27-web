@@ -115,10 +115,10 @@ export default function DisciplinePage() {
 
             <Subhead>ZONE 27 應用</Subhead>
             <List>
-              <Item label="270 個 365 天席位">
+              <Item label="前 270 創始編號 · 永久">
                 Founders 27 不是「early bird 折扣」,
                 是<strong className="text-bone">一輩子</strong>關係。
-                Buffett 的 forever holding 哲學寫進限量結構。
+                前 270 個創始編號永久屬於您 · Buffett 的 forever holding 哲學寫進編號裡。
               </Item>
               <Item label="壞消息誠實揭露">
                 <Link href="/audit" className="text-gold hover:underline">
@@ -203,9 +203,10 @@ export default function DisciplinePage() {
                 沒有抄 LINE 老師 / 殺手平台模式 · 從零問「what&apos;s a quant baseball
                 community really for」。這就是 First Principles。
               </Item>
-              <Item label="270 limited slots = forced focus">
+              <Item label="自綁抽成 5% = forced discipline">
                 Musk 為什麼能造火箭?因為他<strong className="text-bone">限制自己</strong>
-                只做幾件事。270 個席位 = 我們限制自己只服務這群人 · 不擴張。
+                只做幾件事。ZONE 27 版:引擎永遠免費 · 創作者抽成自綁 5%(業界 30-50%)·
+                0 廣告 · 0 自動續扣 — 我們限制的是自己賺錢的方式 · 不是限制能服務多少人。
               </Item>
             </List>
           </RuleSection>
@@ -311,9 +312,9 @@ export default function DisciplinePage() {
               </Item>
               <Item label="Quality of 1 > Quantity of 100">
                 Jobs 名言「我寧願有 1 個 A 級人才,不要 100 個 B 級」。
-                ZONE 27 結構化版:270 限量席位 = concentrate effort on 270 個關係 ·
-                不擴張到 10,000 用戶。每位 Founder Tim 投資 12-15 分鐘
-                onboarding · 270 × 15 min = ~70 小時 · 完全可控。
+                ZONE 27 版:前 270 個創始編號 · Tim 一個一個親手 onboard(每位 12-15 分鐘 ·
+                270 × 15 min ≈ 70 小時)· 這是 1st Edition 的工藝。 會員不限量 · 但「親手」
+                這件事用在最初 270 個編號上 · 不稀釋。
               </Item>
               <Item label="Design is how it works">
                 Jobs 1996 WIRED:「Design is not just what it looks like and feels

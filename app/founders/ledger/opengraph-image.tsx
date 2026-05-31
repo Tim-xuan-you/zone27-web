@@ -176,7 +176,7 @@ export default async function FoundersLedgerOgImage() {
             label="REMAINING · 待認領"
             tone="bone"
           />
-          <StatBlock n={total} label="TOTAL · 限量" tone="mute" />
+          <StatBlock n={total} label="1ST EDITION 編號" tone="mute" />
         </div>
 
         {/* ── BOTTOM · differentiator punchline ──────── */}

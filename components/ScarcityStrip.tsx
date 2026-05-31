@@ -51,8 +51,8 @@ export default function ScarcityStrip() {
           <span>{FOUNDERS_TOTAL}</span>
         </span>
 
-        <span className="hidden sm:inline">FOUNDER SEATS FORGED</span>
-        <span className="sm:hidden">FORGED</span>
+        <span className="hidden sm:inline">創始編號 · 1ST EDITION</span>
+        <span className="sm:hidden">創始編號</span>
 
         <span className="text-mute/30" aria-hidden="true">·</span>
 
@@ -64,8 +64,8 @@ export default function ScarcityStrip() {
               <span className="text-bone">{FOUNDERS_REMAINING}</span> REMAIN
             </span>
             <span className="text-mute/30" aria-hidden="true">·</span>
-            <span className="hidden sm:inline">2026 班售完關閉</span>
-            <span className="sm:hidden">2026 班關閉</span>
+            <span className="hidden sm:inline">會員不限量 · 前 270 限定編號</span>
+            <span className="sm:hidden">前 270 編號</span>
             <span className="hidden md:inline text-mute/30" aria-hidden="true">·</span>
             <span className="hidden md:inline tabular text-mute group-hover:text-gold transition-colors">
               NEXT {formatBadge(FOUNDERS_NEXT)} →

@@ -328,13 +328,13 @@ export default function LabPage() {
               lang="en"
               className="font-mono text-gold/70 group-hover:text-gold text-[10px] tracking-[0.35em] mb-2 transition-colors"
             >
-              FOUNDERS 27 · 創始席位
+              FOUNDERS 27 · 創始編號
             </p>
             <h3 className="text-lg text-bone font-light tracking-tight mb-2">
-              引擎免費 · 270 個位置不免費 →
+              引擎免費 · 前 270 個編號限定 →
             </h3>
             <p className="font-mono text-mute/70 text-[10px] tracking-[0.25em]">
-              NT$ 2,700/年 · 每年 1/1 · 限量 270
+              NT$ 2,700/年 · 會員不限量 · 前 270 拿編號
             </p>
           </Link>
         </div>

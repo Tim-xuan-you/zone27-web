@@ -105,8 +105,8 @@ const CATEGORIES: Category[] = [
         id: "no-commission",
         a: (
           <>
-            <strong className="text-bone">Founders 27</strong> NT$ 2,700/365 天 × 270 名 =
-            NT$ 729,000 / 年(目前 263 待認領)。
+            <strong className="text-bone">Founders 27</strong> NT$ 2,700/365 天 · 會員不限量
+            (前 270 拿永久創始編號 · 目前 263 號待領)。
             <strong className="text-bone">BLACK CARD</strong> NT$ 500/31 天 × N 訂戶
             (0 auto-renewal · 每 31 天 explicit click)。
             不抽傭 · 不接 ad · 不接 sponsor · 不接 affiliate · 同 Stratechery / Defector / Bill James
@@ -125,8 +125,8 @@ const CATEGORIES: Category[] = [
         q: "Founders 27 跟 BLACK CARD 一般會員有什麼差別?",
         a: (
           <>
-            <strong className="text-bone">Founders 27</strong> 是限量 270 個名額的
-            「NT$ 2,700/365 天 年度會員」。
+            <strong className="text-bone">Founders 27</strong> 是會員不限量的
+            「NT$ 2,700/365 天 年度會員」(前 270 名拿永久創始編號)。
             <strong className="text-bone">BLACK CARD</strong> 是 31-day pass NT$ 500/31 天
             (March-November · 240 場 + 季後賽 · ≈ NT$ 6/場 · LIVE manual ECPay ·
             0 auto-renewal · per /integrity rule #13)。創始會員額外好處:creator 抽成 5%
@@ -207,12 +207,12 @@ const CATEGORIES: Category[] = [
         ),
       },
       {
-        q: "還會有第二批 270 個創始會員嗎?",
+        q: "創始編號發完後 · 還能加入 Founders 27 嗎?",
         a: (
           <>
-            <strong className="text-gold">2026 班不會。</strong> 當 #270 被認領的那一秒,
-            2026 founding class 永久關閉 · 您再也無法成為 2026 班的一員。 但 2027 起每年 1/1
-            開放全新一班 270 名(定價不變)· 1st Edition 永遠只有 2026 這批。 寫在{" "}
+            <strong className="text-gold">可以 · 會員永遠不限量。</strong> 當 #270 創始編號被認領的那一秒,
+            創始編號 1st Edition 永久關閉 · 您再也無法拿到創始編號。 但 Founders 27 會員資格永遠開放
+            (同樣 NT$ 2,700/年 · 同樣 5% 抽成 · 只是沒有創始編號)· 1st Edition 永遠只有最初 270 個。 寫在{" "}
             <Link href="/about" className="text-gold underline-offset-4 hover:underline">
               /about
             </Link>
@@ -234,8 +234,8 @@ const CATEGORIES: Category[] = [
         a: (
           <>
             <strong className="text-bone">沒 downline 結構。</strong>{" "}
-            0 推薦獎金 · 0 多層抽佣 · 0 業績 quota · 0 招募下線 · 限量 270 / 年 ·
-            #270 認領那秒該年班別永久關閉。 BLACK CARD 10% 抽成是 platform fee(類 Stripe / Spotify)
+            0 推薦獎金 · 0 多層抽佣 · 0 業績 quota · 0 招募下線 · 會員不限量但零金字塔抽佣 ·
+            前 270 名拿永久創始編號(1st Edition · 發完即關)。 BLACK CARD 10% 抽成是 platform fee(類 Stripe / Spotify)
             · Founders 27 5%。
           </>
         ),

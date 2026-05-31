@@ -321,7 +321,7 @@ export default function Footer() {
         >
           <p className="font-mono text-mute/70 group-hover:text-mute text-[9px] tracking-[0.3em] transition-colors">
             <span lang="en" className="text-gold">{FOUNDERS_CLAIMED}</span>{" "}
-            / {FOUNDERS_TOTAL} 創始席位 ·{" "}
+            / {FOUNDERS_TOTAL} 創始編號 ·{" "}
             <span lang="en">SYSTEM-TEST PLACEHOLDERS · Q3 取代</span>
             <span className="mx-2 text-mute/60">·</span>
             <span lang="en" className="text-mute/80 group-hover:text-gold underline-offset-4 group-hover:underline transition-colors">

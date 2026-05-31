@@ -154,7 +154,7 @@ const FOUNDERS_27_BONUS = [
   "5% 創作者抽成(BLACK CARD 10%)",
   "未來所有 engines + lenses 解鎖(不限數量)",
   "Founders 27 LINE 群 active access · Tim 親自答",
-  "限量 270 / 年 · 2026 班額滿關閉 · 您 # 編號公開 /founders/ledger",
+  "前 270 拿永久創始編號 · 會員不限量 · 您 # 編號公開 /founders/ledger",
   "「Witnessed by #007」 referral 認證 status(R36+ ship)",
 ];
 
@@ -274,9 +274,9 @@ export default function PaidTierLockedGrid() {
             <span
               lang="en"
               className="font-mono text-[9px] tracking-[0.3em] px-1.5 py-0.5 border border-gold/60 text-gold shimmer"
-              title="限量 270 / 年 · 7 SYSTEM-TEST forged · 263 待認領 · 2026 班額滿關閉"
+              title="前 270 創始編號 1st Edition · 7 SYSTEM-TEST forged · 263 待領 · 會員不限量"
             >
-              限量 263 · 2026 班關閉
+              263 號待領
             </span>
           </div>
           <p className="font-mono text-gold tabular text-lg sm:text-xl tracking-tight">
@@ -289,7 +289,7 @@ export default function PaidTierLockedGrid() {
           所有 engines / lenses 解鎖**(R36+ ship 的 Vibe Check · Park
           Factor · Pitcher Fatigue · Underdog · Bullpen · Matchup History
           + Engine v0.3 + v0.4 + 任何未來 ship 的 · 全解鎖不限數量)·
-          Patek allocation pattern · 限量 270 / 年 · 2026 班額滿關閉。
+          Patek allocation pattern · 前 270 拿永久創始編號(1st Edition)· 會員不限量。
         </p>
 
         <ul className="space-y-2">

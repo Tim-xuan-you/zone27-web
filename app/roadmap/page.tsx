@@ -79,7 +79,7 @@ const LOCKED: { quarter: string; items: RoadmapItem[] }[] = [
     items: [
       {
         title: "Founders 27 正式預售開啟",
-        body: "NT$ 2,700/年 · 限量 270 名 · 手工銀行轉帳 · Tim 親手 onboarding 每一位。BLACK CARD 一年約 12 期 × NT$ 500 = NT$ 6,000 · Founders 27 NT$ 2,700/年(含 BLACK CARD)省 55%。流程細節已寫進 docs/MANUAL-ONBOARDING.md。",
+        body: "NT$ 2,700/年 · 會員不限量 · 前 270 拿永久創始編號 · 手工銀行轉帳 · Tim 親手 onboarding 每一位。BLACK CARD 一年約 12 期 × NT$ 500 = NT$ 6,000 · Founders 27 NT$ 2,700/年(含 BLACK CARD)省 55%。流程細節已寫進 docs/MANUAL-ONBOARDING.md。",
         evidenceHref: "/founders",
         evidenceLabel: "/founders 完整邏輯",
       },

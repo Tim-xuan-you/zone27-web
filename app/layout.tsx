@@ -62,7 +62,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "ZONE 27 — We Don't Guess. We Compute.",
     description:
-      "為硬核棒球迷打造的暗黑黃金級數據俱樂部 · 我跑 1 萬次模擬給您看 · 每年 270 個創始席位",
+      "為硬核棒球迷打造的暗黑黃金級數據俱樂部 · 我跑 1 萬次模擬給您看 · 引擎永遠免費 · 前 270 名拿創始編號",
     type: "website",
     locale: "zh_TW",
     siteName: "ZONE 27",

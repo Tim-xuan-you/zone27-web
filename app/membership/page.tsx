@@ -31,7 +31,7 @@ export const revalidate = 3600;
 //
 // 本頁分工 · 跟 /founders 形成互補:
 //   /membership = ladder 全景 · 4 個 tier 平等視覺權重 · 從免費到 NT$ 2,700
-//   /founders   = Founders 27 deep dive · 270 限量 · NT$ 2,700/365 天銷售頁
+//   /founders   = Founders 27 deep dive · 前 270 創始編號 · NT$ 2,700/365 天銷售頁
 //
 // Nav「會員」pill → /membership(inclusive 入口)
 // Mobile sticky CTA + 首頁 pill → /founders(paid-focused conversion)
@@ -93,8 +93,8 @@ const TIERS: Tier[] = [
     name: "Founders 27",
     en: "FOUNDERS 27 · 黑卡",
     price: "NT$ 2,700",
-    priceNote: "每 365 天 · 每年 1/1 開放新 270 名 · 對應 Costco Executive 黑卡",
-    desc: "365 天訂閱創始會員。 跟 Costco Executive 黑卡一樣 · 最高 tier · 額外 perks(寫文章 5% 抽傭(BLACK CARD 一半)· Tim 親手 onboard · 編號鑲入身分)。 每年 1/1 開放新 270 個 seats(同 Patek 1996/1997 annual collection)· existing 訂戶享 1/1 24h pre-access renew。",
+    priceNote: "每 365 天 · 會員不限量 · 前 270 拿創始編號 · 對應 Costco Executive 黑卡",
+    desc: "365 天訂閱創始會員。 跟 Costco Executive 黑卡一樣 · 最高 tier · 額外 perks(寫文章 5% 抽傭(BLACK CARD 一半)· Tim 親手 onboard · 編號鑲入身分)。 每年 1/1 開放(同 Patek annual collection)· 會員不限量 · 前 270 拿創始編號 · existing 訂戶享 1/1 24h pre-access renew。",
     // Round 55 W-C · Agent C #2 fix · 「Everything in [prev tier]+」 stacking
     // · 同 BLACK CARD pattern · 訪客 1-line 即知 Founders 27 包含所有
     // BLACK CARD value + 365 天 + creator 抽成 5% premium。

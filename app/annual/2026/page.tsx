@@ -28,7 +28,7 @@ export const metadata: Metadata = {
 // Year 0 honest content(2026 pre-launch state):
 //   - 0 paid subscribers(BLACK CARD not launched)
 //   - 7 forged founders(placeholder · clearly SYSTEM-TEST labeled)
-//   - 263 待認領 Founders 27 spots(NT$ 2,700/365 天 · 每年 1/1 開放新 270 · Patek annual collection 模式)
+//   - 263 待領創始編號(NT$ 2,700/365 天 · 會員不限量 · 前 270 拿編號 · Patek annual collection 模式)
 //   - 1 PROVED receipt(cpbl-260521-01 · 富邦 win @ 60% engine)
 //   - NT$ 0 revenue
 //   - Costs:Vercel Free + Supabase Free + Resend Free + GitHub Free

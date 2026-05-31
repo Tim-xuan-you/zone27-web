@@ -407,7 +407,7 @@ export default function InteractPage() {
                 Founders 27 私人 LINE 群 · Tim 親自答
               </h3>
               <p className="text-mute/85 text-[12px] sm:text-sm leading-relaxed mb-2">
-                270 限量 Founders 27 訂戶私人 LINE 群 · Tim 親自參與 ·
+                Founders 27 訂戶私人 LINE 群 · Tim 親自參與 ·
                 Founders 27 訂戶之間互相 talk + 全員 talk to Tim · 同 Patek 私人
                 owners club + Stratechery Plus 訂戶 Slack 模式 · OFF-SITE
                 infrastructure(LINE)· 不在 ZONE 27 web · 不違反 reader↔writer

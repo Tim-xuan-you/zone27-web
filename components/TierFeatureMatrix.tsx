@@ -224,7 +224,7 @@ const TIER_META: Record<
     label: "Founders 27",
     en: "FOUNDERS 27",
     price: "NT$ 2,700",
-    priceUnit: "/ 年 · 限量 270 · 每年 1/1",
+    priceUnit: "/ 年 · 前 270 創始編號",
     href: "/founders",
     accent: "text-gold",
   },
