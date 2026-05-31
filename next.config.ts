@@ -103,7 +103,11 @@ const nextConfig: NextConfig = {
             key: "Content-Security-Policy",
             value: [
               "default-src 'self'",
-              "script-src 'self' 'unsafe-inline'",
+              // dev 需要 'unsafe-eval'(Turbopack Fast Refresh + React dev
+              // debugging)· production 維持嚴格(React prod 不用 eval · 安全不變)。
+              `script-src 'self' 'unsafe-inline'${
+                process.env.NODE_ENV === "development" ? " 'unsafe-eval'" : ""
+              }`,
               "style-src 'self' 'unsafe-inline'",
               "img-src 'self' data: https://midfield.mlbstatic.com https://img.mlbstatic.com https://stats.cpbl.com.tw",
               "font-src 'self' data:",

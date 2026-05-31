@@ -114,12 +114,12 @@ export default function Home() {
             />
           </div>
           <p className="mt-4 font-mono text-mute/60 text-[10px] tracking-[0.25em] leading-relaxed">
-            ▸ 高手賣分析 · 平台抽 5–10% · 賽後自動掛準度 ·{" "}
+            ▸ 發分析免費開放中 · 賽後自動掛準度(刪不掉)· 賣文章抽 5–10% 即將開放 ·{" "}
             <Link
-              href="/membership"
+              href="/matches"
               className="text-gold/70 hover:text-gold transition-colors"
             >
-              即將開放 →
+              挑一場開講 →
             </Link>
           </p>
         </section>
