@@ -1,13 +1,13 @@
 import Link from "next/link";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
+import MiniMatchCard from "@/components/MiniMatchCard";
 import { createPageMetadata } from "@/lib/page-og";
 import {
   getMatchPhase,
   getCalibration,
   getTodayAndFutureMatches,
   getFinalizedMatches,
-  type Match,
   type MatchPhase,
   type Calibration,
 } from "@/lib/matches";
@@ -193,111 +193,6 @@ export default function MatchesPage() {
 
       <Footer />
     </div>
-  );
-}
-
-// ── MiniMatchCard ──────────────────────────────────────
-function MiniMatchCard({ match }: { match: Match }) {
-  const homeFavored = match.home.winRate > match.away.winRate;
-  const phase = getMatchPhase(match);
-  const calibration = getCalibration(match);
-  return (
-    <Link
-      href={`/matches/${match.id}`}
-      className="block bg-slate/60 border border-line/70 hover:border-gold/40 transition-colors p-6 group"
-    >
-      {/* meta */}
-      <div className="flex items-center justify-between mb-5 gap-2 flex-wrap">
-        <div className="flex items-center gap-2 flex-wrap">
-          <span className="font-mono text-gold text-[10px] tracking-[0.3em]">
-            {match.league}
-          </span>
-          <PhaseChip phase={phase} calibration={calibration} compact />
-        </div>
-        <span className="font-mono text-mute text-[10px] tracking-[0.25em]">
-          {match.venue.replace("棒球場", "").replace("洲際", "洲際")} · {match.startTime}
-        </span>
-      </div>
-
-      {/* teams row */}
-      <div className="flex items-baseline justify-between mb-2">
-        <div>
-          <p className="text-bone text-lg font-light">{match.home.name}</p>
-          <p className="font-mono text-gold/50 text-[10px] tracking-[0.25em] mt-0.5">
-            {match.home.en}
-          </p>
-        </div>
-        <div className="text-right">
-          <p className="text-bone text-lg font-light">{match.away.name}</p>
-          <p className="font-mono text-gold/50 text-[10px] tracking-[0.25em] mt-0.5">
-            {match.away.en}
-          </p>
-        </div>
-      </div>
-
-      {/* win rates */}
-      <div className="flex items-baseline justify-between mt-4 mb-2">
-        <span
-          className={`font-mono text-2xl tabular ${
-            homeFavored ? "text-gold" : "text-mute"
-          }`}
-        >
-          {match.home.winRate}
-          <span className="text-xs opacity-60 ml-0.5">%</span>
-        </span>
-        <span
-          className={`font-mono text-2xl tabular ${
-            !homeFavored ? "text-gold" : "text-mute"
-          }`}
-        >
-          {match.away.winRate}
-          <span className="text-xs opacity-60 ml-0.5">%</span>
-        </span>
-      </div>
-
-      {/* Polymarket-style market line · two-sided split · favorite gold · underdog muted */}
-      <div
-        className="relative h-2 sm:h-2.5 flex overflow-hidden rounded-full bg-line/50"
-        role="img"
-        aria-label={`引擎開盤線 · ${match.home.en} ${match.home.winRate}% / ${match.away.en} ${match.away.winRate}%`}
-      >
-        <div
-          className={`h-full ${homeFavored ? "bg-gold glow-gold" : "bg-mute/45"}`}
-          style={{ width: `${match.home.winRate}%` }}
-        />
-        <div
-          className={`h-full ${!homeFavored ? "bg-gold glow-gold" : "bg-mute/45"}`}
-          style={{ width: `${match.away.winRate}%` }}
-        />
-      </div>
-      <p className="mt-1.5 text-center font-mono text-mute/55 text-[8px] tracking-[0.3em]">
-        引擎開盤線 · ENGINE LINE
-      </p>
-
-      {/* pitcher line */}
-      <div className="mt-5 pt-4 border-t border-line/50 flex justify-between text-xs">
-        <div>
-          <p className="text-bone">{match.home.pitcher.name}</p>
-          <p className="font-mono text-gold/60 tabular mt-0.5">
-            ERA · {match.home.pitcher.era}
-          </p>
-        </div>
-        <div className="text-right">
-          <p className="text-bone">{match.away.pitcher.name}</p>
-          <p className="font-mono text-gold/60 tabular mt-0.5">
-            ERA · {match.away.pitcher.era}
-          </p>
-        </div>
-      </div>
-
-      {/* footer cta */}
-      <div className="mt-5 flex items-center justify-between text-[10px] font-mono tracking-[0.25em]">
-        <span className="text-mute">10,000 場模擬</span>
-        <span className="text-gold/70 group-hover:text-gold transition-colors">
-          完整分析 →
-        </span>
-      </div>
-    </Link>
   );
 }
 
