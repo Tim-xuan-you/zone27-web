@@ -186,9 +186,9 @@ export default async function MatchDetailPage({
               假標籤「10K MONTE CARLO」已從開盤線移除(它是賽前估算 · 不是模擬)。
               落差 framed 成 Pratfall:兩種算法都公開 · 不挑好看的講。 */}
           <p className="mt-3 text-center text-mute/75 text-[11px] sm:text-xs leading-relaxed">
-            開盤線是<span className="text-bone">賽前鎖定的估算</span>(戰績 · 主場 · 投手強弱 · 鎖了不改)。
-            往下<span className="text-gold">自己跑 10K 逐打席模擬</span>是另一套更細的算法 ·
-            數字會有點出入 —— 兩個都攤給你看,不挑好看的講。
+            這頁給你<span className="text-gold">兩種算法對照</span>:開盤線是賽前鎖定的<span className="text-bone">快攻估算</span>
+            (戰績 · 主場 · 投手),往下能自己跑<span className="text-bone">逐打席 10K 深算</span>。
+            數字有出入很正常 —— 多數站只給一個數字假裝確定,<span className="text-bone">我們兩種都免費攤開讓你自己對照</span>。
           </p>
 
           {/* 進場預測 · 群眾線 + 你的一手 */}
