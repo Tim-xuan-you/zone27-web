@@ -1,4 +1,5 @@
 import Link from "next/link";
+import CardBetStrip from "@/components/CardBetStrip";
 import {
   getMatchPhase,
   getCalibration,
@@ -159,6 +160,15 @@ export default function MiniMatchCard({ match }: { match: Match }) {
         </p>
 
       </div>
+
+      {/* R177 · Polymarket 化:卡上一鍵押 + 群眾線(未結算場)· 押注從埋 4 步 → 1 步 */}
+      {!match.finalResult && (
+        <CardBetStrip
+          matchId={match.id}
+          homeName={match.home.name}
+          awayName={match.away.name}
+        />
+      )}
 
       {/* Final result strip — only when ingested */}
       {match.finalResult && calibration && (
