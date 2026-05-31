@@ -101,6 +101,16 @@ R174 pivot build queue · Claude 可主動 ship(三綠 + auto-push):
 - ✅ **首頁砍最近結算 + 市場卡機率講人話**(DONE · Tim「超雜」+ 研究 agent #1)·「63%」→「引擎看好 X · 一萬次模擬贏 N 次」
 - ✅ **止血 3 矛盾 + dev CSP fix + 清 1054 行 dead code**(DONE)· 黑卡 mailto 1500→500 / login magic-link 文案 / 創作者訊息誠實化
   + CSP dev 加 unsafe-eval(Fast Refresh 修復)+ 刪 7 orphan 元件(R175 pivot 後無 import)
+- ✅ **Polymarket 化 wave 2**(DONE 2026-05-31)· 首頁 + /matches 全卡一鍵押(新 CardBetStrip · 押注 4 步→1 步)·
+  賽事頁開盤線假標籤修(「引擎機率·10K MONTE CARLO」其實是估算 → 改「引擎開盤線·賽前鎖定」)+ 收斂成一個主盤
+  (下方自己跑模擬重定位成「驗算工具」· 解掉 Tim 截圖的「43% vs 37.9% 兩數字打架」)· 市場頁去募資條
+  (ScarcityStrip 退出 /matches · ⚠️ **本地 dev cache 詭異一直 stale 沒 verify 成功 · git source 確認對 · 新窗用 fresh
+  環境 confirm production /matches 頂部無「7/270 創始編號」· 若還在則 Nav active 條件需重查**)
+- ✅ **R179 賣分析付費優越 + tier 系統**(DONE)· 關鍵:賣分析後端早 ready(creator_posts price_ntd 欄位 + submit RPC
+  接受 p_price · migration 0005)· 只缺 UI。 新 lib/tier.ts(user_metadata.tier='black'|'founder' · 付費手動轉帳 Tim
+  在 Supabase 手動標 · 0 auto-charge per #13)· CreatorAnalysis 付費會員可標價賣(顯示你拿 90-95%/平台抽 5-10%)·
+  免費只免費發 + 升級 CTA · PostCard 付費分析鎖(標題+推薦邊公開·完整購買解鎖)。 ⏳ 完整購買(買家付錢→後端解鎖 body)
+  = Phase 2(需 Tim 收款帳戶 + 後端 body gate RPC)
 - ⏳ **押注 → 個人準度迴路接通**(retention 命脈 · conversion agent HIGH · gated on Tim)· UserPredictionPicker 寫 0003
   predictions 表 · 但 /member 還讀舊 user_metadata → 球迷押了看不到自己累積準度 = 押完斷線。**migration
   0006_my_predictions.sql 已備好**(get_my_predictions RPC)· 待 Tim 在 Supabase Studio 套用 → Claude 接 /member
