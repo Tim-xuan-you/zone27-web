@@ -234,9 +234,10 @@ export default function Nav({ active }: { active?: NavKey }) {
           </ul>
         </div>
       </nav>
-      {/* R175 · ScarcityStrip 退出首頁(市場優先 · 不讓 founder 稀缺條把市場
-          看板擠到 mobile 折線下方)· 其餘頁仍顯示。 */}
-      {active !== "home" && <ScarcityStrip />}
+      {/* R175 · ScarcityStrip 退出首頁(市場優先)· R178 再退出 /matches + 賽事頁
+          (Polymarket:市場相關頁頂部要乾淨 · 不讓 founder 募資條變噪音擠掉市場)·
+          brand 頁(/about /founders /membership 等)仍顯示 founder 稀缺條。 */}
+      {active !== "home" && active !== "matches" && <ScarcityStrip />}
     </>
   );
 }
