@@ -93,6 +93,14 @@ R172 pivot · BLACK CARD 從 TapPay 自動訂閱改成 manual ATM / 跨行轉帳
 
 R174 pivot build queue · Claude 可主動 ship(三綠 + auto-push):
 
+- ✅ **R180 攻頂 session(2026-06-01 · 5 commit · full build 綠)**· Tim 全權 mandate · 3 路 agent(全球研究/碼審計/心理動線)
+  synthesize → multi-wave ship:
+  - **減法**:刪 21 個孤兒檔(-3395 行 · 7-Lens canvas 全退場 + follow/note/orphan lib)· 直擊「檔案多到離譜」
+  - **接通押注電線**(三路 agent 一致 #1):/member + /rewards 改讀 0006 RPC(新 lib/predictions-server.ts)· 修「押完斷線」·
+    ⚠️ 只剩 Tim 套 0006 即點亮(見上方 🟡 項)
+  - **看板永不空白**:首頁 + /matches 休賽日 fallback → 引擎最近戰績收據(休賽日不再空盒子 · costly signal 擺正中)
+  - **冷啟動鉤子**:CardBetStrip N=0「第一手是你的」· **峰終付費**:猜中時接到「寫成分析 →」創作迴路(非逼付費)
+  - **修矛盾**:/rewards LIVE↔PRE-LAUNCH · UserPredictionPicker stale 變相賭博註解 · /rewards 死連結 /leaderboard→/ladder
 - ✅ **海選天梯 /ladder**(已 ship · 新秀→神諭 · 樣本加權 · 引擎/群眾/你三聲音對照)· UserPredictionPicker 已指向 /ladder
 - ✅ **賽事討論室 OPEN**(已 ship · 免費看 + 登入發言 · 不付費 · migration 0004 待 Tim 套用 · GameThread + HomepagePreview reframe)
 - ✅ **270-cap 站內 reframe sweep**(DONE 2026-05-31)· 26 檔 + 首頁 ·「限量 270 席/2026 班售完關閉/每年新 270」→
@@ -111,10 +119,11 @@ R174 pivot build queue · Claude 可主動 ship(三綠 + auto-push):
   在 Supabase 手動標 · 0 auto-charge per #13)· CreatorAnalysis 付費會員可標價賣(顯示你拿 90-95%/平台抽 5-10%)·
   免費只免費發 + 升級 CTA · PostCard 付費分析鎖(標題+推薦邊公開·完整購買解鎖)。 ⏳ 完整購買(買家付錢→後端解鎖 body)
   = Phase 2(需 Tim 收款帳戶 + 後端 body gate RPC)
-- ⏳ **押注 → 個人準度迴路接通**(retention 命脈 · conversion agent HIGH · gated on Tim)· UserPredictionPicker 寫 0003
-  predictions 表 · 但 /member 還讀舊 user_metadata → 球迷押了看不到自己累積準度 = 押完斷線。**migration
-  0006_my_predictions.sql 已備好**(get_my_predictions RPC)· 待 Tim 在 Supabase Studio 套用 → Claude 接 /member
-  改讀新表 + app-side 對 finalResult grade 算累積準度。
+- 🟡 **押注 → 個人準度迴路接通(前端已接線 · R180)· 只剩 Tim 套 migration 0006**(retention 命脈 · 三路 agent 一致 #1)·
+  Claude 已 ship 前端接線:新 `lib/predictions-server.ts`(getMyPredictionsMap · server-side 呼叫 0006 RPC →
+  轉 UserPredictionsMap)· /member + /rewards 改讀新表(不再讀死掉的 user_metadata)· GRACEFUL(0006 未套用 →
+  回空不 crash)。 **⚠️ 剩 Tim 唯一動作:在 Supabase Studio 套用 `0006_my_predictions.sql`** → 押完斷線徹底修復、
+  球迷回儀表板看得到自己累積準度。(套用前畫面正常顯示空狀態 · 套用後自動點亮。)
 - **群眾市場線鋪滿卡片**(MiniMatchCard + /matches 已有 · 補其餘 surface)
 - **安全 P1** · /admin 伺服器端上鎖(M#2 · 需 ADMIN_EMAIL)· 寄信限流 Upstash(TIER 1)
 - **K/BB estimate → 真值**(等 Tim screenshot)
