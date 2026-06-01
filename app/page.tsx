@@ -26,9 +26,10 @@ export default function Home() {
   const upcoming = getTodayAndFutureMatches(); // 今晚 + 即將 · asc
   // 休賽日 fallback · 看板永不空白:沒有可押賽事時,改放引擎最近的賽後
   // 收據(✓言中 / ✕落空都掛)· per getFeaturedMatch 哲學「引擎沒在跑時,
-  // proof-of-work(收據)勝過空泛的未來預測 = 轉換槓桿」。 6 場上限。
+  // proof-of-work(收據)勝過空泛的未來預測 = 轉換槓桿」。 首頁 2 場上限
+  // (mobile ≤ 3 viewport 鐵律 · 看完整去 /track-record)。
   const recentReceipts =
-    upcoming.length === 0 ? getFinalizedMatches().slice(0, 6) : [];
+    upcoming.length === 0 ? getFinalizedMatches().slice(0, 2) : [];
   const tr = getTrackRecordStats();
 
   return (
