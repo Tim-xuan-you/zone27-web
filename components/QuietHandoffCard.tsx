@@ -54,10 +54,10 @@ function buildMailtoUrl(match: Match): string {
         ? "✕ DIVERGED · ENGINE 落空"
         : "= PUSH · 平局或無 favorite";
 
-  const url =
-    typeof window !== "undefined"
-      ? `${window.location.origin}/matches/${match.id}`
-      : `https://zone27-web.vercel.app/matches/${match.id}`;
+  // 固定用正式網址 · 分享連結本來就該指向 public(不是 localhost)。
+  // 移除 typeof window 分支 = 修 hydration mismatch:此 href 在 SSR 就 render,
+  // server 給 vercel.app、client 給 localhost → React 對不上(/track-record「1 Issue」)。
+  const url = `https://zone27-web.vercel.app/matches/${match.id}`;
 
   const subject = `ZONE 27 · ${match.home.name} vs ${match.away.name} · ${verdictLabel.split(" · ")[0]}`;
 

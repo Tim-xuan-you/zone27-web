@@ -50,6 +50,21 @@ export default function TrackRecordPage() {
   const decided = proved + diverged;
   const provedPct = decided > 0 ? Math.round((proved / decided) * 100) : null;
 
+  // ── 引擎最自信的兩場 · 一中一沒中 ───────────────────────
+  // costly signal:別的站只秀贏的。 把引擎「押最重」的兩場 —— 最自信
+  // 言中 vs 最自信落空 —— 等大並排。 守住「PROVED/DIVERGED 等大等亮」
+  // 紀律(不是把 miss 放大表演謙虛 · 是把最大的對與錯擺同一個秤上)。
+  // favorite = winRate 大的那邊 · 「自信」= 那個 winRate 多高。
+  const favPct = (m: Match) => Math.max(m.home.winRate, m.away.winRate);
+  const provedList = finalized.filter((m) => getCalibration(m) === "proved");
+  const divergedList = finalized.filter((m) => getCalibration(m) === "diverged");
+  const biggestHit = provedList.length
+    ? provedList.reduce((a, b) => (favPct(b) > favPct(a) ? b : a))
+    : null;
+  const biggestMiss = divergedList.length
+    ? divergedList.reduce((a, b) => (favPct(b) > favPct(a) ? b : a))
+    : null;
+
   // Matches that ran but never had a final ingested — visible debt.
   // Brand-honest: surface this gap rather than silently skipping it.
   // Uses getTodayTaipei() (Asia/Taipei) — same source-of-truth as
@@ -295,6 +310,30 @@ export default function TrackRecordPage() {
           )}
         </p>
       </section>
+
+      {/* ── 引擎最自信的兩場 · 一中一沒中(costly signal · 等大等亮)──
+          別的站只秀贏的。 把引擎押最重的兩場等大並排 —— 最自信言中 vs
+          最自信落空。 只在 proved + diverged 都至少 1 場時 render。 */}
+      {biggestHit && biggestMiss && (
+        <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-16">
+          <p
+            lang="en"
+            className="font-mono text-gold/70 text-[10px] tracking-[0.35em] mb-2 section-reveal"
+          >
+            / 引擎最自信的兩場 · 一場中 · 一場沒中
+          </p>
+          <p className="text-mute/85 text-sm leading-relaxed mb-6 max-w-2xl">
+            別的站只秀贏的。 這是引擎下注最重的兩場 ——{" "}
+            <span className="text-bone">最自信而言中的</span>,跟{" "}
+            <span className="text-bone">最自信卻落空的</span>,等大擺在一起。
+            押最大的時候對不對,才看得出一個模型的底。
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <BiggestCallCard match={biggestHit} kind="proved" />
+            <BiggestCallCard match={biggestMiss} kind="diverged" />
+          </div>
+        </section>
+      )}
 
       {/* R66 W-B · Agent psychology ship #3 · Goal Gradient effect(Hull 1932 ·
           Kivetz/Urminsky/Zheng 2006)applied to N≥30 statistical-meaningfulness
@@ -595,6 +634,74 @@ function LedgerStat({
         {value}
       </p>
     </div>
+  );
+}
+
+// ── BiggestCallCard · 引擎最自信的一場(言中 / 落空)──────
+// 等大等亮:言中(gold)與落空(loss)用同一個 anatomy · 只差顏色 ·
+// 不偏袒任一結果。 秀「最自信卻落空」 = costly signal · 別人藏的我們放大。
+function BiggestCallCard({
+  match,
+  kind,
+}: {
+  match: Match;
+  kind: "proved" | "diverged";
+}) {
+  const fr = match.finalResult;
+  if (!fr) return null;
+  const homeFavored = match.home.winRate > match.away.winRate;
+  const favoriteName = homeFavored ? match.home.name : match.away.name;
+  const favoritePct = Math.max(match.home.winRate, match.away.winRate);
+  const isHit = kind === "proved";
+  const dateIso = getMatchDateIso(match) ?? "—";
+
+  return (
+    <Link
+      href={`/matches/${match.id}`}
+      className={`block border p-5 sm:p-6 bg-slate/30 transition-colors ${
+        isHit
+          ? "border-gold/50 hover:border-gold"
+          : "border-loss/50 hover:border-loss"
+      }`}
+    >
+      <div className="flex items-baseline justify-between gap-2 mb-4">
+        <span
+          lang="en"
+          className={`font-mono text-[9px] tracking-[0.3em] px-1.5 py-0.5 border ${
+            isHit ? "border-gold text-gold" : "border-loss/70 text-loss"
+          }`}
+        >
+          {isHit ? "✓ 最自信 · 言中" : "✕ 最自信 · 落空"}
+        </span>
+        <span className="font-mono text-mute text-[10px] tabular tracking-[0.2em]">
+          {dateIso}
+        </span>
+      </div>
+      <p
+        className={`font-mono tabular text-4xl font-light tracking-tight leading-none ${
+          isHit ? "text-gold" : "text-loss"
+        }`}
+      >
+        {favoritePct}
+        <span className="text-lg opacity-60 ml-0.5">%</span>
+      </p>
+      <p className="text-bone text-sm leading-snug mt-3">
+        引擎重壓{" "}
+        <span className={isHit ? "text-gold" : "text-loss"}>{favoriteName}</span>
+        {isHit ? " · 賽後對了" : " · 賽後卻輸了"}
+      </p>
+      <p className="font-mono text-mute text-[10px] tracking-[0.2em] mt-2 tabular">
+        FINAL {fr.homeScore}:{fr.awayScore} ·{" "}
+        {fr.winner === "home"
+          ? match.home.en + " W"
+          : fr.winner === "away"
+          ? match.away.en + " W"
+          : "TIE"}
+      </p>
+      <p className="font-mono text-gold/60 text-[10px] tracking-[0.3em] mt-4">
+        看我們{isHit ? "押對" : "錯"}在哪 →
+      </p>
+    </Link>
   );
 }
 
