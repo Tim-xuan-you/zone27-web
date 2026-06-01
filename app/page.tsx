@@ -126,10 +126,10 @@ export default function Home() {
         <section className="mx-auto max-w-3xl px-6 sm:px-10 pb-16 text-center border-t border-line/40 pt-10">
           <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-2.5">
             <PromiseChip>引擎免費</PromiseChip>
-            <PromiseChip>不抽下注</PromiseChip>
-            <PromiseChip>不收明牌費</PromiseChip>
-            <PromiseChip>不自動續扣</PromiseChip>
+            <PromiseChip>方法公開</PromiseChip>
             <PromiseChip>不藏輸的</PromiseChip>
+            <PromiseChip>不追蹤你</PromiseChip>
+            <PromiseChip>不自動續扣</PromiseChip>
           </div>
           <p className="mt-6 flex flex-wrap items-center justify-center gap-3 font-mono text-[10px] tracking-[0.3em]">
             <Link href="/audit" className="text-gold/80 hover:text-gold transition-colors">

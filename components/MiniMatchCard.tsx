@@ -71,7 +71,7 @@ export default function MiniMatchCard({ match }: { match: Match }) {
       {/* Time + venue + phase badge */}
       <div className="flex items-center justify-between gap-2">
         <span className="font-mono text-mute text-[9px] tracking-[0.25em] tabular">
-          {match.startTime} · {match.venue.replace("棒球場", "").replace("大巨蛋", "巨蛋")}
+          {match.startTime}
         </span>
         <MiniPhaseBadge phase={matchPhase} calibration={calibration} />
       </div>
