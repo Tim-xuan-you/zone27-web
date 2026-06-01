@@ -109,8 +109,8 @@ const CATEGORIES: Category[] = [
             (前 270 拿永久創始編號 · 目前 263 號待領)。
             <strong className="text-bone">BLACK CARD</strong> NT$ 500/31 天 × N 訂戶
             (0 auto-renewal · 每 31 天 explicit click)。
-            不抽傭 · 不接 ad · 不接 sponsor · 不接 affiliate · 同 Stratechery / Defector / Bill James
-            訂閱 model。
+            再加上創作者賣分析 · 平台抽 5–10%(業界最低,老實認、不假裝不抽)。
+            不抽真錢下注的傭 · 不接廣告 / 業配 / 導購分潤。
           </>
         ),
       },

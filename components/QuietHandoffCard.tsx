@@ -82,7 +82,7 @@ function buildMailtoUrl(match: Match): string {
     `完整 breakdown:`,
     url,
     ``,
-    `(ZONE 27 = displacement vs 玩運彩 + 報馬仔 · 公開引擎 · 0 tracker · 0 commission · 0 bet advice · per /transparency)`,
+    `(ZONE 27 · 公開引擎 · 0 廣告 · 0 追蹤 · 不接受下注 · 詳見 /audit)`,
   ].join("\n");
 
   return `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
