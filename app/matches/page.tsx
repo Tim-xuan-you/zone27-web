@@ -31,7 +31,12 @@ export default function MatchesPage() {
   // /track-record + permalink /matches/[gameId] · not in this list.
   // This is the "daily refresh" UX visitors expect from a sport page.
   const upcomingMatches = getTodayAndFutureMatches();
-  const recentReceipts = getFinalizedMatches().slice(0, 3);
+  const allReceipts = getFinalizedMatches();
+  const recentReceipts = allReceipts.slice(0, 3); // 有賽事時 · 下方輔助 strip
+  // 休賽日主看板 fallback · 同首頁:沒有可押賽事時,看板改放引擎最近 6 場
+  // 賽後收據(✓/✕ 都掛)而非空盒子 · 看板永不空白。
+  const offSeasonReceipts =
+    upcomingMatches.length === 0 ? allReceipts.slice(0, 6) : [];
 
   return (
     <div className="flex flex-col flex-1 min-h-screen">
@@ -75,14 +80,33 @@ export default function MatchesPage() {
 
       {/* ── MATCH GRID ──────────────────────── */}
       <section className="mx-auto max-w-6xl w-full px-6 sm:px-10 pb-12">
-        {upcomingMatches.length === 0 ? (
+        {upcomingMatches.length > 0 ? (
+          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+            {upcomingMatches.map((m) => (
+              <MiniMatchCard key={m.id} match={m} />
+            ))}
+          </div>
+        ) : offSeasonReceipts.length > 0 ? (
+          /* 休賽日 · 看板永不空白 → 引擎最近戰績收據(同首頁 fallback) */
+          <>
+            <p className="text-mute text-sm leading-relaxed mb-6 max-w-2xl">
+              今日無 CPBL 場次 · 現在沒有可押的賽事。 這是引擎最近{" "}
+              {offSeasonReceipts.length} 場的公開判決 —{" "}
+              <span className="text-gold">✓ 言中</span> 跟{" "}
+              <span className="text-loss">✕ 落空</span>{" "}
+              一樣掛上來,從不藏。
+            </p>
+            <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+              {offSeasonReceipts.map((m) => (
+                <MiniMatchCard key={m.id} match={m} />
+              ))}
+            </div>
+          </>
+        ) : (
           <div className="bg-slate/40 border border-line/60 p-10 sm:p-12 text-center">
             <p className="font-mono text-mute text-xs tracking-[0.25em] mb-4">
               今日 CPBL · 無引擎覆蓋場次
             </p>
-            {/* Round 54 W-B · Agent 3 #4 fix · 之前 passive「可能是...」 三
-                possibilities 讓訪客 uncertain · 現在 active voice + immediate
-                action · per R30 W11「every section must be true right now」 axiom。 */}
             <p className="text-mute text-sm leading-relaxed max-w-md mx-auto mb-8">
               今日無 CPBL 場次 · 改為檢視過去的公開戰績:
             </p>
@@ -92,12 +116,6 @@ export default function MatchesPage() {
             >
               看 /track-record 公開戰績 →
             </Link>
-          </div>
-        ) : (
-          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-            {upcomingMatches.map((m) => (
-              <MiniMatchCard key={m.id} match={m} />
-            ))}
           </div>
         )}
       </section>
