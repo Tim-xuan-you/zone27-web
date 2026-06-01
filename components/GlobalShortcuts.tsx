@@ -33,7 +33,6 @@ const HINT_DURATION_MS = 5_000;
 //   g s → /steelman(S for Steelman)
 //   g e → /ethics(E for Ethics)
 //   g x → /audit(X for compleX audit · /transparency R164 collapsed to /audit canonical hub)
-//   g n → /now(N for Now)
 //   g ? → toggle Cmd-K palette(shortcut help · 同 CommandPalette 顯示 all routes)
 //
 // SOURCE: Linear https://linear.app/changelog/2021-03-25-keyboard-shortcuts-help
@@ -67,7 +66,6 @@ const SHORTCUTS: Record<string, string> = {
   s: "/steelman",
   e: "/ethics",
   x: "/audit",
-  n: "/now",
 };
 
 const RESET_MS = 1500;

@@ -386,13 +386,6 @@ export const COMMAND_ITEMS: CommandItem[] = [
     keywords: ["roadmap", "路線圖", "未來", "永遠不做"],
   },
   {
-    label: "Now · craft journal · SHIPPED / DISCOVERED / UNRESOLVED",
-    kicker: "/now",
-    path: "/now",
-    group: "品牌 IP",
-    keywords: ["now", "現在", "craft", "journal", "本週", "工藝"],
-  },
-  {
     label: "Changelog · git source of truth",
     kicker: "/changelog",
     path: "/changelog",
