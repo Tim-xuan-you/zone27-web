@@ -84,7 +84,7 @@ const LOCKED: { quarter: string; items: RoadmapItem[] }[] = [
         evidenceLabel: "/founders 完整邏輯",
       },
       {
-        title: "BLACK CARD · CPBL Season Pass NT$ 500/31 天 上線(手動 ECPay · 0 auto-renewal)",
+        title: "BLACK CARD · CPBL Season Pass NT$ 500/31 天 上線(手動轉帳 · 0 auto-renewal)",
         body: "賣的不是引擎(永遠免費)· 賣的是社群 + 策展 + 創作者 take。對標 Stratechery / The Athletic / Bankless Premium / TradingView Pro。R81 pivot · 自 NT$ 299/月 auto → NT$ 500/31 天 explicit · per /integrity rule #13 binding(ECPay/TapPay/Stripe 自動扣款全 refused forever)。",
         evidenceHref: "/membership/black-card",
         evidenceLabel: "BLACK CARD season pass canonical",

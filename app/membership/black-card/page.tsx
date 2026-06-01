@@ -10,12 +10,12 @@ import { createPageMetadata } from "@/lib/page-og";
 
 // R159 W1.L1 · Agent L CRITICAL · backfill createPageMetadata + truncate
 // description from 348 chars(over Twitter 200-char cap · Slack 200-char
-// readable weight)to ~140 chars · key info preserved · ECPay LIVE + 0
+// readable weight)to ~140 chars · key info preserved · 手動轉帳 + 0
 // auto-renewal + 6 unlocks。
 export const metadata: Metadata = createPageMetadata({
   title: "BLACK CARD · CPBL Season Pass · NT$ 500/31 天",
   description:
-    "ZONE 27 BLACK CARD CPBL Season Pass · NT$ 500 / 31 天 · ✓ LIVE 季票手動 ECPay · 10% 創作者抽成 · 14 天退款 · 6 unlocks · 0 auto-renewal forever per /integrity rule #13。",
+    "ZONE 27 BLACK CARD CPBL Season Pass · NT$ 500 / 31 天 · ✓ 手動銀行轉帳 · 0 自動續扣 · 10% 創作者抽成 · 14 天退款 · 6 unlocks · per /integrity rule #13。",
   path: "/membership/black-card",
 });
 
@@ -25,13 +25,13 @@ export const metadata: Metadata = createPageMetadata({
 // ladder 中 1 張 card 帶過。
 //
 // Round 42 W-C · LIVE state transition · per [[feedback-no-waiting-rule]]:
-//   - mailto:tatayngiti@gmail.com 月卡手動 ECPay 真實 flow LIVE
+//   - mailto:tatayngiti@gmail.com 月卡手動銀行轉帳 真實 flow
 //   - "PRE-LAUNCH · UI MOCKUP" framing 全 strip(per Agent J R43 dogfood
 //     verify · narrative 殘留 must sweep · brand IP「不可 LIVE badge ↔
 //     mockup narrative 共存」)
 //
 // brand IP fits:
-//   - 倒置 SaaS · manual ECPay payment vs auto-charge 標準 SaaS
+//   - 倒置 SaaS · 手動銀行轉帳 vs auto-charge 標準 SaaS
 //   - 「方法公開」 延伸:訂閱 flow 公開 · email Tim 不藏 · 跟 /audit pattern 一致
 //   - 0 cookie / 0 PII / mailto: native browser · 0 tracking
 //
@@ -101,7 +101,7 @@ const UNLOCKS = [
 const FAQS = [
   {
     q: "現在可以訂嗎?",
-    a: "✓ 可以 · LIVE 31-day pass 手動 ECPay 個人方案 · email tatayngiti@gmail.com 我 24 小時內寄 ECPay 付款連結 · NT$ 500 從付款日起算 31 天。 NT$ 500 剛好在台灣跨行轉帳免手續費上限以下 · 您付款 0 額外成本。 0 auto-renewal · 每 31 天結束您主動再付才續 · per /integrity 第 13 條。",
+    a: "✓ 可以 · email tatayngiti@gmail.com · 我 24 小時內給你銀行轉帳帳號 + 開通說明 · NT$ 500 從付款日起算 31 天。 NT$ 500 剛好在台灣跨行轉帳免手續費上限以下 · 你付款 0 額外成本。 0 自動續扣 · 每 31 天結束你主動再轉才續 · per /integrity 第 13 條。",
   },
   {
     q: "為什麼是 31 天 · 不是 calendar 月?",
@@ -109,15 +109,15 @@ const FAQS = [
   },
   {
     q: "如何 renew 下一個 31 天?",
-    a: "Manual ECPay · 不續就停 · 不需 cancel button · 第 28 天 email 提醒 · 您回 email「續訂」 我寄 ECPay link · 您付款後從新付款日起算 31 天。 14 天 cool-off only 首次訂閱 · 後續續訂沒 cool-off · 但 mid-period 可 email Tim 商量。",
+    a: "手動轉帳 · 不續就停 · 不需 cancel button · 第 28 天 email 提醒 · 你回 email「續訂」 我給轉帳帳號 · 你轉帳後從新付款日起算 31 天。 14 天 cool-off only 首次訂閱 · 後續續訂沒 cool-off · 但 mid-period 可 email Tim 商量。",
   },
   {
     q: "14 天無條件退款?",
     a: "首次訂購 14 天內 100% 退款 · 不問理由(per 台灣消保法 § 19 distance-selling 雙倍 7-day cooling-off 主動延伸)。 後續續訂您每次主動 commit · 不適用 cooling-off。 換 email 重複 trial = 永久 ban per /ethics。",
   },
   {
-    q: "信用卡資料安全?",
-    a: "0 信用卡資訊在 ZONE 27 server。 透過 payment gateway(綠界 ECPay 個人方案 · 信用卡 / Apple Pay / ATM / 超商代碼 全 OK)token 處理。 我們 store user_metadata.season_pass_id 不存卡號 · 0 auto-renewal infrastructure ever per rule #13 binding。",
+    q: "付款安全嗎?要綁卡嗎?",
+    a: "不綁卡 · 不經過任何金流商。 純手動銀行 / ATM 轉帳到 Tim 的帳號(email 索取)· ZONE 27 server 完全不碰、不存你的任何付款資料 · 也沒有自動扣款的基礎設施(per rule #13 binding)· 不可能被偷扣一毛。",
   },
   {
     q: "為什麼要付費?",
@@ -130,7 +130,7 @@ const FAQS = [
 // edit = 2-place change 高 mismatch risk · 違反 R76 W-A self-falsifiable
 // count-drift discipline · 現在 const 從 1 source render · 改字 = 改 1 處。
 const BLACK_CARD_MAILTO_HREF =
-  "mailto:tatayngiti@gmail.com?subject=BLACK%20CARD%20%C2%B7%20NT%24%20500%2F31%20%E5%A4%A9&body=Tim%20%E5%A5%BD%2C%0A%0A%E6%88%91%E6%83%B3%E8%A8%82%E9%96%B1%20BLACK%20CARD%20%C2%B7%20NT%24%20500%2F31%20%E5%A4%A9%E3%80%82%0A%0A%E8%AB%8B%E5%AF%84%E6%88%91%20ECPay%20%E5%80%8B%E4%BA%BA%E6%96%B9%E6%A1%88%E4%BB%98%E6%AC%BE%E9%80%A3%E7%B5%90%E3%80%82%0A%0A%E5%B7%B2%E7%9F%A5%E6%82%89%200%20auto-renewal%20%C2%B7%20%E6%AF%8F%2031%20%E5%A4%A9%20explicit%20click%20%2B%20manual%20transfer%20%C2%B7%2014%20%E5%A4%A9%E7%84%A1%E6%A2%9D%E4%BB%B6%E9%80%80%E6%AC%BE%E3%80%82%0A%0A%E8%AC%9D%E8%AC%9D%E3%80%82";
+  "mailto:tatayngiti@gmail.com?subject=BLACK%20CARD%20%C2%B7%20NT%24%20500%2F31%20%E5%A4%A9%20%C2%B7%20%E6%88%91%E8%A6%81%E8%A8%82(%E6%89%8B%E5%8B%95%E8%BD%89%E5%B8%B3)&body=Tim%20%E5%A5%BD%2C%0A%0A%E6%88%91%E6%83%B3%E8%A8%82%20BLACK%20CARD%20%C2%B7%20NT%24%20500%2F31%20%E5%A4%A9%E3%80%82%0A%0A%E8%AB%8B%E7%B5%A6%E6%88%91%E9%8A%80%E8%A1%8C%E8%BD%89%E5%B8%B3%E5%B8%B3%E8%99%9F%20%2B%20%E9%96%8B%E9%80%9A%E8%AA%AA%E6%98%8E%E3%80%82%0A%0A%E5%B7%B2%E7%9F%A5%E6%82%89%200%20%E8%87%AA%E5%8B%95%E7%BA%8C%E6%89%A3%20%C2%B7%20%E6%AF%8F%2031%20%E5%A4%A9%E6%88%91%E4%B8%BB%E5%8B%95%E5%86%8D%E8%BD%89%E6%89%8D%E7%BA%8C%20%C2%B7%2014%20%E5%A4%A9%E7%84%A1%E6%A2%9D%E4%BB%B6%E9%80%80%E6%AC%BE%E3%80%82%0A%0A%E8%AC%9D%E8%AC%9D%E3%80%82";
 
 export default function BlackCardPage() {
   return (
@@ -168,9 +168,9 @@ export default function BlackCardPage() {
             <span
               lang="en"
               className="font-mono text-[9px] tracking-[0.3em] px-1.5 py-0.5 border border-gold/60 text-gold shimmer"
-              title="LIVE NOW · CPBL Season Pass 季票模式 · NT$ 500/31 天 · explicit manual · 0 auto-renewal per /integrity rule #13"
+              title="開放訂閱 · CPBL Season Pass 季票模式 · NT$ 500/31 天 · 手動銀行轉帳 · 0 auto-renewal per /integrity rule #13"
             >
-              ✓ LIVE · CPBL Season Pass
+              ✓ 開放訂閱 · CPBL 季票
             </span>
           </div>
           <h1 className="text-4xl sm:text-5xl text-bone font-light tracking-tight max-w-3xl">
@@ -272,8 +272,8 @@ export default function BlackCardPage() {
             0 auto-renewal · 14 天無條件退款 · 10% 創作者抽成。
           </p>
           <p className="mt-4 font-mono text-gold/80 text-[10px] tracking-[0.25em] leading-relaxed max-w-2xl">
-            ✓ LIVE NOW · 個人方案綠界(ECPay)收款 · 信用卡 + Apple Pay + ATM +
-            超商代碼 全 OK · email Tim 啟動您 BLACK CARD CPBL Season Pass
+            ✓ 開放訂閱 · 手動銀行 / ATM 轉帳(NT$ 500 跨行免手續費)·
+            email Tim → 收到轉帳帳號 + 開通說明 · 0 自動續扣
           </p>
           <div className="mt-6">
             <ArticleMeta readingMin={4} />
@@ -415,12 +415,12 @@ export default function BlackCardPage() {
               lang="en"
               className="font-mono text-gold text-[10px] tracking-[0.35em] mb-4 text-center"
             >
-              ✓ LIVE NOW · CPBL Season Pass · 季票手動 · 個人方案 ECPay
+              ✓ 開放訂閱 · CPBL Season Pass · 手動銀行轉帳 · 0 自動續扣
             </p>
             <p className="text-bone text-lg sm:text-xl leading-relaxed mb-4 text-center">
-              寄 email 給 Tim · 24 小時內收到您的{" "}
-              <span className="text-gold">ECPay 個人方案付款連結</span> ·
-              CPBL Season Pass(March-November)NT$ 500/31 天 起算。
+              寄 email 給 Tim · 24 小時內收到{" "}
+              <span className="text-gold">銀行轉帳帳號 + 開通說明</span> ·
+              CPBL Season Pass(3 月–11 月)NT$ 500/31 天 起算。
             </p>
             <div className="border border-gold/30 bg-navy/30 p-4 sm:p-5 mb-4">
               <p
@@ -442,7 +442,7 @@ export default function BlackCardPage() {
             <ul className="space-y-2 text-mute text-sm leading-relaxed">
               <li className="flex gap-3 items-baseline">
                 <span className="font-mono text-gold/80 text-[10px] tracking-[0.25em]">▸</span>
-                <span>ECPay 個人方案 · 信用卡 / 銀行轉帳 / 超商繳費</span>
+                <span>銀行 / ATM 跨行轉帳 · NT$ 500 以下免手續費</span>
               </li>
               <li className="flex gap-3 items-baseline">
                 <span className="font-mono text-gold/80 text-[10px] tracking-[0.25em]">▸</span>

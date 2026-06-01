@@ -144,7 +144,7 @@ export default async function BlackCardLedgerOgImage() {
             color: BRAND.bone,
           }}
         >
-          <DataRow label="PRICING" value="NT$ 500 / season · LIVE 季票手動 ECPay" />
+          <DataRow label="PRICING" value="NT$ 500 / season · 手動銀行轉帳" />
           <DataRow label="LEDGER STATE" value="0 paid · 0 cancelled · 0 churned" />
           <DataRow label="CHURN POLICY" value="cancel = row state=cancelled · 不刪不藏" />
           <DataRow label="LAUNCHED" value="2026-05-22 · row 1 等您" />

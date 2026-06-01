@@ -203,7 +203,7 @@ export default function PrivacyPage() {
           <li>❌ 沒有 Facebook Pixel</li>
           <li>❌ 沒有第三方追蹤 cookies</li>
           <li>❌ 沒有 IP 蒐集(Vercel 預設不對外公開)</li>
-          <li>❌ 沒有信用卡(我們還沒開放付款)</li>
+          <li>❌ 沒有信用卡 / 卡號(付費會員走手動銀行轉帳 · 不經過我們)</li>
           <li>
             ❌ 沒有個人身分資料 <strong className="text-bone">(/founders + waitlist 部分)</strong>{" "}
             · 但{" "}

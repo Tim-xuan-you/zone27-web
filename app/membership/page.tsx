@@ -73,7 +73,7 @@ const TIERS: Tier[] = [
     name: "BLACK CARD",
     en: "BLACK CARD · 一般會員",
     price: "NT$ 500",
-    priceNote: "每 31 天 · 對應 Costco Gold Star · 手動 ECPay · 0 auto-renewal",
+    priceNote: "每 31 天 · 對應 Costco Gold Star · 手動轉帳 · 0 auto-renewal",
     desc: "31 天通行會員。 跟 Costco Gold Star 一樣 · 進得去 + 一般會員 perks。 可寫文章來賣(您拿 90% · Tim 抽 10% · 同 Substack 10% 平 · 業界中段)。",
     // Round 55 W-C · Agent C #2 fix · 「Everything in [prev tier]+」 stacking
     // pattern · 同 Defector + Plausible + Patreon premium-tier 模式 · 訪客

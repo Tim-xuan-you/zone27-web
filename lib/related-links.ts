@@ -535,7 +535,7 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
     {
       href: "/privacy",
       kicker: "privacy",
-      title: "0 信用卡資訊 in ZONE 27 server · 完整 anti-tracker inventory",
+      title: "付款走手動轉帳 · 0 卡號經過我們 · 完整 anti-tracker inventory",
     },
   ],
   // R164 DELETE /pricing/why · collapsed into /founders + /membership/black-card per Apple discipline

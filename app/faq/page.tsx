@@ -128,7 +128,7 @@ const CATEGORIES: Category[] = [
             <strong className="text-bone">Founders 27</strong> 是會員不限量的
             「NT$ 2,700/365 天 年度會員」(前 270 名拿永久創始編號)。
             <strong className="text-bone">BLACK CARD</strong> 是 31-day pass NT$ 500/31 天
-            (March-November · 240 場 + 季後賽 · ≈ NT$ 6/場 · LIVE manual ECPay ·
+            (3 月–11 月 · 240 場 + 季後賽 · ≈ NT$ 6/場 · 手動銀行轉帳 ·
             0 auto-renewal · per /integrity rule #13)。創始會員額外好處:creator 抽成 5%
             (BLACK CARD creators 10%)、AI 模型優先試用、實體招待。完整對照請見{" "}
             <Link href="/founders" className="text-gold underline-offset-4 hover:underline">
@@ -152,8 +152,8 @@ const CATEGORIES: Category[] = [
         q: "付款系統現況?",
         a: (
           <>
-            <span className="font-mono text-gold">BLACK CARD CPBL 季票 LIVE manual ECPay</span>
-            (NT$ 500/31 天 · 每 31 天 explicit click + manual transfer · 0 auto-renewal)。
+            <span className="font-mono text-gold">BLACK CARD CPBL 季票 · 手動銀行轉帳</span>
+            (NT$ 500/31 天 · 每 31 天你主動轉帳一次 · 0 auto-renewal)。
             <span className="font-mono text-gold mx-1">Founders 27 payment infra 就緒後開放</span>
             (milestone-triggered · 不綁日期)。 在此之前,加入等候名單 =
             排隊優先權,<strong className="text-bone">完全免費</strong>,
