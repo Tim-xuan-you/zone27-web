@@ -9,13 +9,6 @@ import {
   submitCreatorPost,
   type CreatorPost,
 } from "@/lib/creator-posts";
-import {
-  readTier,
-  isPaid,
-  creatorFeePct,
-  creatorTakePct,
-  type MemberTier,
-} from "@/lib/tier";
 
 // ── ZONE 27 · CreatorAnalysis · 創作者賣分析(migration 0005)──────
 // Tim 2026-05-30 報馬仔/明燈 screenshot · 要:發文 + 推薦賽事(選邊)+ 寫分析 +
@@ -50,8 +43,6 @@ export default function CreatorAnalysis({
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   const [pick, setPick] = useState<"home" | "away" | null>(null);
-  const [priceNtd, setPriceNtd] = useState(0); // 0 = 免費發 · >0 = 付費賣(付費會員專屬)
-  const [tier, setTier] = useState<MemberTier>("free");
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -70,7 +61,6 @@ export default function CreatorAnalysis({
           setStatus("anonymous");
           return;
         }
-        setTier(readTier(user.user_metadata));
         const my = await getMyCreatorPost(matchId);
         if (cancelled) return;
         if (my) {
@@ -93,7 +83,7 @@ export default function CreatorAnalysis({
     if (!t || !b || !pick) return;
     setSaving(true);
     setError(null);
-    const res = await submitCreatorPost(matchId, t, b, pick, isPaid(tier) ? priceNtd : 0);
+    const res = await submitCreatorPost(matchId, t, b, pick, 0);
     if (res.ok) {
       setStatus("posted");
       setTitle("");
@@ -188,41 +178,12 @@ export default function CreatorAnalysis({
               <PickBtn label={`押 ${homeName.slice(0, 5)}`} active={pick === "home"} onClick={() => setPick("home")} />
               <PickBtn label={`押 ${awayName.slice(0, 5)}`} active={pick === "away"} onClick={() => setPick("away")} />
             </div>
-            {/* R179 · 賣分析 = 付費會員優越(後端 price_ntd ready · migration 0005)·
-                付費 tier 可標價賣 · 免費只免費發 + 看到升級理由 · 引擎仍永遠免費不 gate */}
-            {isPaid(tier) ? (
-              <div className="flex items-center gap-2 flex-wrap border-t border-line/40 pt-3">
-                <span className="font-mono text-gold/80 text-[10px] tracking-[0.25em]">標價賣</span>
-                <span className="font-mono text-mute/70 text-[11px]">NT$</span>
-                <input
-                  type="number"
-                  min={0}
-                  max={9999}
-                  value={priceNtd || ""}
-                  onChange={(e) =>
-                    setPriceNtd(Math.max(0, Math.min(9999, Math.round(Number(e.target.value) || 0))))
-                  }
-                  placeholder="0"
-                  aria-label="分析售價 NT$ · 0 為免費"
-                  className="w-20 bg-ink/60 border border-line/70 text-bone px-2 py-1 outline-none focus:border-gold/60 font-mono text-sm tabular transition-colors"
-                />
-                <span className="font-mono text-mute/55 text-[9px] tracking-[0.12em] leading-snug">
-                  {priceNtd > 0
-                    ? `你拿 NT$ ${Math.round((priceNtd * creatorTakePct(tier)) / 100)} · 平台抽 ${creatorFeePct(tier)}%`
-                    : `0 = 免費分享 · 設個價就能賣(你拿 ${creatorTakePct(tier)}%)`}
-                </span>
-              </div>
-            ) : (
-              <p className="border-t border-line/40 pt-3 font-mono text-mute/60 text-[10px] tracking-[0.12em] leading-relaxed">
-                💡 這篇免費發。 想<span className="text-gold/80">標價賣分析賺錢</span>(你拿 90–95% · 平台抽 5–10%)?{" "}
-                <Link
-                  href="/membership"
-                  className="text-gold/80 hover:text-gold underline-offset-4 hover:underline"
-                >
-                  升級付費會員 →
-                </Link>
-              </p>
-            )}
+            {/* v1 = 免費發(migration 0005)。「標價賣分析」的購買金流是 Phase 2 ·
+                上線前不放假的標價輸入 — 避免「設了價卻沒人買得了」的假 UX。 */}
+            <p className="border-t border-line/40 pt-3 font-mono text-mute/60 text-[10px] tracking-[0.12em] leading-relaxed">
+              ▸ 先免費發 · 賽後自動掛準度(刪不掉)·{" "}
+              <span className="text-gold/80">標價賣分析變現即將開放</span>。
+            </p>
             <div className="flex items-center justify-between gap-3 flex-wrap">
               <span className="font-mono text-mute/55 text-[10px] tracking-[0.2em] tabular">
                 {title.trim().length}/{T_MAX} · {body.trim().length}/{B_MAX}

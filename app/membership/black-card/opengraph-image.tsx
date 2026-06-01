@@ -98,7 +98,7 @@ export default async function BlackCardOgImage() {
               display: "flex",
             }}
           >
-            PRE-LAUNCH · UI MOCKUP · MILESTONE-TRIGGERED
+            NT$ 500 / 31 天 · 手動 · 0 自動續扣
           </span>
         </div>
 

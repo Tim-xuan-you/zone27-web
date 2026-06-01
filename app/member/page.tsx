@@ -357,36 +357,31 @@ export default async function MemberPage({
                 / YOUR FIRST ACTION · 第一個動作
               </p>
               <h2 className="text-2xl sm:text-3xl text-bone font-light tracking-tight leading-snug mb-4">
-                Follow 您的第一場 ZONE 27 賽事
+                押下你的第一注
               </h2>
               <p className="text-mute text-sm sm:text-base leading-relaxed mb-5 max-w-2xl">
-                您剛註冊 FREE TIER · 但 dashboard 是空的。
-                <strong className="text-bone"> Day-1 retention 的黃金一招</strong>
-                ·{" "}
-                <strong className="text-bone">
-                  Follow 一場 ZONE 27 公開預測過的賽事
-                </strong>{" "}
-                · 賽後 PROVED / DIVERGED 自動進您 dashboard · 您的
-                personal calibration mirror 從這場開始累積。
+                你剛註冊好了 · 但儀表板還是空的。 去任一場賽事
+                <strong className="text-bone">押一邊</strong>(或寫一篇分析)·
+                押的邊賽後自動掛 <span className="text-gold">準</span> /{" "}
+                <span className="text-loss">不準</span> · 刪不掉 · 你的準度從這一場
+                開始累積、爬上海選天梯。
               </p>
               <div className="flex flex-wrap gap-3">
                 <Link
                   href="/matches"
                   className="inline-block px-6 py-3 bg-gold text-navy font-mono text-xs tracking-[0.3em] hover:bg-gold-soft transition-colors"
                 >
-                  → 今日賽事板 · follow 第一場
+                  → 今日賽事板 · 押一注
                 </Link>
                 <Link
                   href="/track-record"
                   className="inline-block px-6 py-3 border border-gold/50 text-gold font-mono text-xs tracking-[0.3em] hover:bg-gold/10 transition-colors"
                 >
-                  → 引擎過去戰績 ledger
+                  → 引擎過去戰績
                 </Link>
               </div>
               <p className="font-mono text-mute/60 text-[10px] tracking-[0.25em] mt-5 leading-relaxed">
-                ▸ Follow = explicit 動作 · 不是被動 recommendation algorithm
-                <br />
-                ▸ 您 follow 哪場是您的事 · 我們不推薦 · 不排名 · 0 tracking
+                ▸ 我們不推薦 · 不排名 · 0 追蹤 · 你押哪場是你的事
               </p>
             </div>
           )}

@@ -11,11 +11,11 @@ import { createPageMetadata } from "@/lib/page-og";
 // + truncate description from 348 chars to ~140 · within Twitter 200-char cap +
 // Slack 200-char readable weight + iMessage uses og:title only(desc ignored)。
 export const metadata: Metadata = createPageMetadata({
-  title: "互動 · 10 個找 Tim 的管道 · 沒有討論區 by design",
+  title: "互動 · 6 個找 Tim 的管道 · 沒有討論區 by design",
   description:
-    "您在找 ZONE 27 的討論區? 沒有 · 刻意不做。 但您能在 10 個地方找 Tim 互動 · /hey-tim · /member/submit · 賽前預測 + 帳號預測 + lens 投票 + 追蹤賽事 + 私人筆記 + 收據分享 · /founders/apply。 全部是您對 Tim · 不是讀者對讀者。",
+    "你在找 ZONE 27 的討論區? 沒有 · 刻意不做。 但你能在 6 個地方找 Tim 互動 · Hey Tim 公開問答 · 投稿 · 押注選邊 · 發表分析 · 分享收據 · Founders 申請信。 全部是你對 Tim · 不是讀者對讀者。",
   ogDescription:
-    "ZONE 27 沒有討論區 · 刻意不做 · 但有 10 個您能找 Tim 互動的地方 · 全部是您對 Tim · 不是讀者對讀者。",
+    "ZONE 27 沒有討論區 · 刻意不做 · 但有 6 個你能找 Tim 互動的地方 · 全部是你對 Tim · 不是讀者對讀者。",
   path: "/interact",
 });
 
@@ -77,13 +77,16 @@ type Channel = {
   status: "live" | "logged-in" | "post-final" | "pre-launch";
 };
 
+// R181 · 只列真實存在的管道。 砍掉廣告已刪元件的鬼功能(LensFocusVote ·
+// FollowMatchButton · MatchNoteEditor 已刪 · AnonPickWidget 未掛 · FounderPickForm
+// 不存在)· 避免訪客照著去找卻什麼都沒有(比 404 更糟)。
 const CHANNELS: Channel[] = [
   {
     no: "01",
     icon: "📮",
     zhTitle: "Hey Tim · 公開問答",
     enLabel: "PUBLIC Q&A",
-    body: "您問 1 個問題 · Tim 賽後 24 小時內公開回覆。",
+    body: "你問一個問題 · Tim 賽後 24 小時內公開回覆。",
     surface: "/hey-tim",
     href: "/hey-tim",
     status: "live",
@@ -91,92 +94,52 @@ const CHANNELS: Channel[] = [
   {
     no: "02",
     icon: "📝",
-    zhTitle: "投稿 · Reader Guest Post",
+    zhTitle: "投稿 · 讀者客座",
     enLabel: "GUEST POST",
-    body: "登入後把標題 + 內文寄給 Tim · 每週一篇 · Tim 親手挑選刊出。",
+    body: "登入後把標題 + 內文寄給 Tim · Tim 親手挑選刊出。",
     surface: "/member/submit",
     href: "/member/submit",
     status: "logged-in",
   },
   {
     no: "03",
-    icon: "🎯",
-    zhTitle: "AnonPick · 賽前 cold pick",
-    enLabel: "ANON PICK",
-    body: "賽前 pick home/away · 0 auth · 0 PII · localStorage · 您 own track record。",
-    surface: "/matches/[gameId] AnonPickWidget",
+    icon: "✓",
+    zhTitle: "押注 · 選一邊",
+    enLabel: "PICK A SIDE",
+    body: "登入後押 home/away · 賽後自動評準度(刪不掉)· 累積上海選天梯。",
+    surface: "/matches",
     href: "/matches",
-    status: "live",
+    status: "logged-in",
   },
   {
     no: "04",
-    icon: "🗳️",
-    zhTitle: "LensFocusVote · 投 lens 優先序",
-    enLabel: "LENS VOTE",
-    body: "投票哪個 lens 應該下一個 develop · 您 voting = engine roadmap signal。",
-    surface: "/matches/[gameId] LensFocusVote",
+    icon: "🗒️",
+    zhTitle: "發表分析 · 選邊 + 寫看法",
+    enLabel: "POST ANALYSIS",
+    body: "登入後每場發一篇分析 · 押的邊賽後自動掛準/不準 · 賴不掉。",
+    surface: "/matches",
     href: "/matches",
-    status: "live",
+    status: "logged-in",
   },
   {
     no: "05",
-    icon: "✓",
-    zhTitle: "UserPrediction · 帳號 picks + personal stats",
-    enLabel: "USER PREDICTION",
-    body: "登入後 pick winner · /member/calibration 顯示您自己 reliability diagram。",
-    surface: "/matches/[gameId] UserPredictionPicker",
-    href: "/matches",
-    status: "logged-in",
-  },
-  {
-    no: "06",
-    icon: "⭐",
-    zhTitle: "FollowMatch · 標記追蹤",
-    enLabel: "FOLLOW MATCH",
-    body: "登入後標記 followed · /member dashboard 顯示 watchlist · 0 share · 純 personal。",
-    surface: "/matches/[gameId] FollowMatchButton",
-    href: "/matches",
-    status: "logged-in",
-  },
-  {
-    no: "07",
-    icon: "🗒️",
-    zhTitle: "MatchNote · 280-char 私人筆記",
-    enLabel: "MATCH NOTE",
-    body: "登入後寫 280 字 private note · 0 public · Tim 看不到 · 純 personal journal。",
-    surface: "/matches/[gameId] MatchNoteEditor",
-    href: "/matches",
-    status: "logged-in",
-  },
-  {
-    no: "08",
     icon: "🔗",
-    zhTitle: "ReceiptForward · LINE 分享 receipt",
-    enLabel: "RECEIPT FORWARD",
-    body: "賽後 share receipt to LINE · /receipts/[receiptId] permanent URL · download-as-image。",
-    surface: "/matches/[gameId] ReceiptForwardButton",
+    zhTitle: "分享賽後收據",
+    enLabel: "SHARE RECEIPT",
+    body: "賽後把引擎收據分享到 LINE · 永久連結 · 可存成圖。",
+    surface: "/matches",
     href: "/matches",
     status: "post-final",
   },
   {
-    no: "09",
+    no: "06",
     icon: "📜",
     zhTitle: "Founders 27 · 申請信",
-    enLabel: "APPLICATION ESSAY",
+    enLabel: "APPLICATION",
     body: "寫一封信 · Tim 親手審核 · 通過後才邀請加入。",
     surface: "/founders/apply",
     href: "/founders/apply",
     status: "live",
-  },
-  {
-    no: "10",
-    icon: "🎫",
-    zhTitle: "FounderPickForm · 選 seat # 008-270",
-    enLabel: "RESERVE SEAT",
-    body: "通過審核後 · 您挑選自己的創始編號。",
-    surface: "/founders FounderPickForm",
-    href: "/founders",
-    status: "pre-launch",
   },
 ];
 
@@ -210,7 +173,7 @@ export default function InteractPage() {
             lang="en"
             className="font-mono text-gold text-[10px] tracking-[0.45em] mb-6"
           >
-            INTERACT · ONE-WAY BY DESIGN · 10 READER↔WRITER CHANNELS
+            INTERACT · ONE-WAY BY DESIGN · 6 READER↔WRITER CHANNELS
           </p>
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-light leading-[1.05] tracking-tight text-bone">
             您在找{" "}
@@ -222,7 +185,7 @@ export default function InteractPage() {
             ZONE 27 沒有討論區 · 沒有留言板 · 沒有論壇 · 沒有使用者之間的
             聊天。 不是「還沒做」 · 是{" "}
             <strong className="text-bone">刻意不做</strong>。 但您能{" "}
-            <strong className="text-bone">在 10 個地方找 Tim 互動</strong>
+            <strong className="text-bone">在 6 個地方找 Tim 互動</strong>
             (這頁全列出來)。 全部是{" "}
             <strong className="text-bone">您對 Tim · 不是讀者對讀者</strong>。
           </p>
@@ -277,10 +240,10 @@ export default function InteractPage() {
             lang="en"
             className="font-mono text-gold text-[10px] tracking-[0.4em] mb-4"
           >
-            / 10 READER↔WRITER CHANNELS · 您能 talk to Tim 在哪裡
+            / 6 READER↔WRITER CHANNELS · 您能 talk to Tim 在哪裡
           </p>
           <h2 className="text-2xl sm:text-3xl text-bone font-light tracking-tight mb-6">
-            您找的 interaction 都在這 10 個地方
+            你找的互動都在這 6 個地方
           </h2>
           <div className="space-y-3">
             {CHANNELS.map((c) => (
