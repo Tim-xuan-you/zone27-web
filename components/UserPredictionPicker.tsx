@@ -23,11 +23,12 @@ import {
 //      gap for predictions).
 //   3. INTEGRITY. One pick per match · IMMUTABLE (server-enforced) =
 //      先鎖後結 · anti-cheat. No "change my pick" after the fact.
-//   4. LEGAL. pick = home/away only · 0 money · 0 reward. The old
-//      "/rewards 兌換實體獎品(底片/咖啡)" link is REMOVED —
-//      predict→win→redeem-physical-goods is 變相賭博. This market is
-//      pure-virtual: your record feeds the PUBLIC ledger + 海選 ladder,
-//      never prizes.
+//      法律唯一紅線 = 真錢對賭 / 抽賭注傭(per memory legal-redline) ·
+//      本市場 0 金錢 0 賭注 · 不碰紅線。 pick = home/away · 押了不可改 ·
+//      你的紀錄餵公開戰績 + 海選天梯(/ladder)。
+//   4. REWARDS. /rewards 的「PROVED 點數 → 換小獎」是無賭注 skill 兌換
+//      (≠賭博 · 灰色可做)· 跟本市場分離:這裡只記準度上天梯,不在這
+//      頁談兌獎,避免「押注=賭」的視覺聯想。
 //
 // Degrades gracefully: anon → login CTA (still sees the public crowd
 // line); RPC error / table not yet applied → crowd line reads empty,

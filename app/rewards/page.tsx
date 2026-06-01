@@ -7,10 +7,8 @@ import FounderSignOff from "@/components/FounderSignOff";
 import ArticleMeta from "@/components/ArticleMeta";
 import EngineStamp from "@/components/EngineStamp";
 import { getSession } from "@/lib/supabase/server";
-import {
-  readPredictionsFromMeta,
-  aggregatePredictionStats,
-} from "@/lib/predictions";
+import { aggregatePredictionStats } from "@/lib/predictions";
+import { getMyPredictionsMap } from "@/lib/predictions-server";
 import { getFinalizedMatches, type Match } from "@/lib/matches";
 
 export const metadata: Metadata = {
@@ -47,7 +45,7 @@ export const metadata: Metadata = {
 //
 // 4 心理 hook 同時 fire:
 //   1. Sunk cost · 累計 50 預測 → 越多越 commitment
-//   2. Status · top points public leaderboard(已部分 R31 W-V2 ship)
+//   2. Status · 準度公開累積上 /ladder 海選天梯(新秀 → 神諭)
 //   3. Operant conditioning · variable reward(只 PROVED 才 +1)· Skinner positive
 //   4. Tangible reward > digital · 實體底片 / 咖啡 > virtual badge
 // ─────────────────────────────────────────────────────
@@ -110,10 +108,9 @@ const RULES = [
 
 export default async function RewardsPage() {
   const session = await getSession();
-  const meta = session?.user.user_metadata as
-    | Record<string, unknown>
-    | undefined;
-  const predictionsMap = readPredictionsFromMeta(meta);
+  // 接通押注電線(Wave 2)· 點數改讀 0003 predictions 表(0006 RPC)·
+  // 不再讀已無人寫入的 user_metadata = 修「押了卻 0 點」死讀。
+  const predictionsMap = session ? await getMyPredictionsMap() : {};
   const finalized: Match[] = getFinalizedMatches();
   const matchSummaries = finalized.map((m) => ({
     id: m.id,
@@ -141,10 +138,10 @@ export default async function RewardsPage() {
             </p>
             <span
               lang="en"
-              className="font-mono text-[9px] tracking-[0.3em] px-1.5 py-0.5 border border-gold/60 text-gold shimmer"
-              title="LIVE NOW · catalogue + Tim 親手 fulfill · email Tim 兌換 · 不等 Q4"
+              className="font-mono text-[9px] tracking-[0.3em] px-1.5 py-0.5 border border-gold/60 text-gold"
+              title="押中即時累計 PROVED 點數 · 實體兌換 fulfillment 2026 Q4 開放(等恆美 inventory + 物流 setup)· 累計的點永遠保留不歸零"
             >
-              ✓ LIVE · 即時兌換
+              點數即時累計 · 兌換 Q4
             </span>
           </div>
           <h1 className="text-4xl sm:text-5xl text-bone font-light tracking-tight max-w-3xl">

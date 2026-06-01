@@ -13,10 +13,8 @@ import LocalStorageReceipt from "@/components/LocalStorageReceipt";
 import { getSession } from "@/lib/supabase/server";
 import { readFollowsFromMeta } from "@/lib/follows";
 import { readNotesFromMeta } from "@/lib/notes";
-import {
-  readPredictionsFromMeta,
-  aggregatePredictionStats,
-} from "@/lib/predictions";
+import { aggregatePredictionStats } from "@/lib/predictions";
+import { getMyPredictionsMap } from "@/lib/predictions-server";
 import {
   getMatchById,
   getMatchPhase,
@@ -80,9 +78,11 @@ export default async function MemberPage({
     .filter((m): m is Match => !!m);
   // Round 30 Wave 10 · note map for badge display on each FollowedMatchRow
   const notesMap = readNotesFromMeta(userMeta);
-  // Round 31 W-X1 · Personal prediction stats overlay · per W-W1
-  // UserPredictionPicker · aggregate by match finalWinner from full match dataset。
-  const predictionsMap = readPredictionsFromMeta(userMeta);
+  // Personal prediction stats overlay · 接通押注電線(Wave 2)· 改讀 0003
+  // predictions 表(migration 0006 get_my_predictions RPC · server-side)·
+  // 不再讀已無人寫入的 user_metadata.predictions = 修「押完斷線」。 未登入
+  // 回 {} · grade 在 app-side 對 finalResult(比賽結果不在 DB)。
+  const predictionsMap = session ? await getMyPredictionsMap() : {};
   const predictionStats = aggregatePredictionStats(
     predictionsMap,
     allMatches.map((m) => ({
