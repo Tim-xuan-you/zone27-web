@@ -14,6 +14,17 @@
 
 ## ⏳ 仍 pending Tim 親手動作
 
+### 🔴🔴 最優先(R181)· 跑修正後的 SQL → 押注 + 發表分析才會動
+
+押注 + 發表分析有一個真 SQL bug(`submit_prediction` / `submit_creator_post` 的
+`returning id, created_at` 沒 qualify 表名 → `42702 column reference "created_at"
+is ambiguous` · 每次按下去都炸 · 前端 graceful catch 成假錯誤「系統開通中」)。
+**已在 repo `supabase/migrations/0003` + `0005` 修好**(改成 `predictions.created_at`
+/ `creator_posts.created_at`)。 ⚠️ **Tim 要在 Supabase SQL Editor 重跑修正後的那兩支
+函式才生效**(表已建好,只需 `create or replace function` 兩支 + grant)。 詳細
+診斷見 memory/feedback_live_db_rpc_diagnostic.md。 (email 確認是關的 · 註冊不卡。)
+0002 過時別套(指向已刪 /leaderboard)· 0004 沒前端用不必套。
+
 ### 🔴 今晚(2026-05-30)· 3 場 CPBL 賽後結算 — 唯一 gated-on-Tim
 
 3 場 pre-game 已 ingest(cpbl-260530-01 味全/台鋼 · -02 中信/富邦 · -03 樂天/統一)·
