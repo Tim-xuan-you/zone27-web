@@ -468,10 +468,10 @@ export default function LoginPage() {
             不想註冊 · 只想被通知?
           </p>
           <Link
-            href="/membership#waitlist"
+            href="/founders#waitlist"
             className="font-mono text-mute hover:text-gold text-[11px] tracking-[0.35em] underline-offset-4 hover:underline transition-colors"
           >
-            → /membership · 純訂閱通知 email(不需 magic link · 不需 session)
+            → 純訂閱通知 email(不需註冊 · 不需 magic link)
           </Link>
           <div className="mt-12 pt-8 border-t border-line/40">
             <Link
