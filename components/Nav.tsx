@@ -13,7 +13,8 @@ type NavKey =
   | "discuss"
   | "lab"
   | "founders"
-  | "about";
+  | "about"
+  | "member";
 
 // Round 50 W-D · 三軸線 visual hierarchy codify · 2026-05-22 evening:
 //   - conversion path = gold-outlined pill(「會員 →」 · Round 22 fix · 不動)
@@ -237,7 +238,7 @@ export default function Nav({ active }: { active?: NavKey }) {
       {/* R175 · ScarcityStrip 退出首頁(市場優先)· R178 再退出 /matches + 賽事頁
           (Polymarket:市場相關頁頂部要乾淨 · 不讓 founder 募資條變噪音擠掉市場)·
           brand 頁(/about /founders /membership 等)仍顯示 founder 稀缺條。 */}
-      {active !== "home" && active !== "matches" && <ScarcityStrip />}
+      {active !== "home" && active !== "matches" && active !== "member" && <ScarcityStrip />}
     </>
   );
 }

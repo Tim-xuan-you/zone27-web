@@ -53,7 +53,13 @@ export default function StickyFoundersCTA() {
     };
   }, [isHomepage]);
 
-  if (pathname === "/founders" || pathname === "/lab/custom") return null;
+  // /member* = 會員自己的儀表板 · 不對已是會員的人推招募 bar(Tim canary)
+  if (
+    pathname === "/founders" ||
+    pathname === "/lab/custom" ||
+    pathname.startsWith("/member")
+  )
+    return null;
   if (FOUNDERS_REMAINING === 0) return null;
   if (isHomepage && !scrolledPastHero) return null;
 

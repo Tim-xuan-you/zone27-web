@@ -2,788 +2,214 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
-import RelatedReading from "@/components/RelatedReading";
-import FounderSignOff from "@/components/FounderSignOff";
-import ArticleMeta from "@/components/ArticleMeta";
-import MemberUnlocksGrid from "@/components/MemberUnlocksGrid";
-import PaidTierLockedGrid from "@/components/PaidTierLockedGrid";
-import MemberDailyBrief, { type DailyMatchSummary } from "@/components/MemberDailyBrief";
-import MemberHomeHero from "@/components/MemberHomeHero";
-import LocalStorageReceipt from "@/components/LocalStorageReceipt";
 import { getSession } from "@/lib/supabase/server";
-import { readFollowsFromMeta } from "@/lib/follows";
-import { readNotesFromMeta } from "@/lib/notes";
 import { aggregatePredictionStats } from "@/lib/predictions";
 import { getMyPredictionsMap } from "@/lib/predictions-server";
-import {
-  getMatchById,
-  getMatchPhase,
-  getCalibration,
-  getTodayMatches,
-  matches as allMatches,
-  type Match,
-} from "@/lib/matches";
+import { getTodayMatches, matches as allMatches } from "@/lib/matches";
 
 export const metadata: Metadata = {
-  title: "Member · 您的引擎時間軸 · FREE TIER dashboard preview",
-  description:
-    "ZONE 27 會員儀表板預覽。您在 /lab 跑過的所有 Monte Carlo · 您追蹤的賽事準度紀錄 · 您能投票決定的引擎下一步。登入已上線 · 雲端同步在付款機制就緒後啟用。",
+  title: "你的儀表板",
+  description: "你的準度 · 你 vs 引擎 · 今晚可以押的賽事。終身免費。",
 };
 
-// ── ZONE 27 · /member ──────────────────────────────────
-// Round 29 Wave 2 · Tim 直擊:「會員他們自己的頁面又在哪裡?他們會員
-// 頁面能做什麼呢?多以心理學的角度去出發及處理」
+// ── ZONE 27 · /member · 會員自己的儀表板 ─────────────────
+// R183 NUCLEAR · Tim canary fire(mobile screenshot):「亂七八糟 · 划不到底 ·
+// 寫一堆沒必要的東西 · 這是會員自己的介面 · 極簡再極簡 · go Polymarket go」。
 //
-// 這頁是 FREE TIER 會員儀表板的 PUBLIC PREVIEW · 不是 mock · 不是
-// marketing。Visitor 進來看到自己 localStorage 裡的 sim history(已
-// 累積資料)當 preview data — Endowment Effect 立刻 fire。沒 auth ·
-// 但因為 data 是 visitor 自己的 · 心理連結比看 fake screenshots 強。
-//
-// 4 個 cognitive bias 同時 fire(per Tim「多以心理學角度」 ask):
-//   01 Endowment Effect    · 您的引擎時間軸(localStorage data)
-//   02 Loss Aversion       · 您 follow 的賽事 + 個人 calibration record
-//   03 IKEA Effect         · 您能投票決定的引擎下一步(/roadmap items)
-//   04 Pratfall + Costly Signaling · 誠實 launch timeline (preview vs functional)
-//
-// Pratfall: 不假裝 functionality already exists · launch timeline 公開
-// 寫 (Phase 1 Q3 Supabase auth · Phase 2 Q3+ TapPay · Phase 3 Q4+ CMS)。
-// 倒置 SaaS 預設「coming soon · trust me · sign up now」 · 不放空頭支票。
-//
-// 跟 /membership 分工:
-//   /membership = 4-tier ladder 全景 + sales conversion
-//   /member     = 個人預覽 + 心理學 product gap surface
+// 砍掉所有行銷/哲學/說明文(PaidTierLockedGrid 推銷、Apple/Spotify 對照、
+// localStorage 清單、創辦人簽名、5 大解鎖格、MemberHomeHero、DailyBrief、
+// 招募 essay)。會員登入後只想看三樣:
+//   1. 我準不準(你 vs 引擎 · THE number)
+//   2. 今晚可以押什麼(一鍵進場)
+//   3. 登出
+// 招募 bar(StickyFoundersCTA)+ 創始編號 strip(ScarcityStrip)已在
+// /member 隱藏 — 不對已是會員的人推入會。
 // ─────────────────────────────────────────────────────
 
-export default async function MemberPage({
-  searchParams,
-}: {
-  searchParams: Promise<{ welcome?: string }>;
-}) {
-  // Round 30 Wave 5 · auth-aware /member。 Session present = 真實註冊
-  // 會員 · 顯示 welcome 區塊 + 登出 button · PREVIEW chip 切 AUTHENTICATED。
-  // No session = preview mode (existing behavior) · 不假裝 functionality 已存在。
+export default async function MemberPage() {
   const session = await getSession();
-  const params = await searchParams;
-  const justArrived = params.welcome === "true";
-  const email = session?.user.email ?? null;
-  // Round 30 Wave 6 · pull followed match IDs from user_metadata · server-
-  // side render so logged-in members see their follows list immediately ·
-  // anonymous visitors see empty array (no UI for follows section)。
-  const userMeta = session?.user.user_metadata as
-    | Record<string, unknown>
-    | undefined;
-  const followIds = readFollowsFromMeta(userMeta);
-  const followedMatches = followIds
-    .map((id) => getMatchById(id))
-    .filter((m): m is Match => !!m);
-  // Round 30 Wave 10 · note map for badge display on each FollowedMatchRow
-  const notesMap = readNotesFromMeta(userMeta);
-  // Personal prediction stats overlay · 接通押注電線(Wave 2)· 改讀 0003
-  // predictions 表(migration 0006 get_my_predictions RPC · server-side)·
-  // 不再讀已無人寫入的 user_metadata.predictions = 修「押完斷線」。 未登入
-  // 回 {} · grade 在 app-side 對 finalResult(比賽結果不在 DB)。
-  const predictionsMap = session ? await getMyPredictionsMap() : {};
-  const predictionStats = aggregatePredictionStats(
+
+  // 未登入 → 一頁式登入邀請(不再是長預覽)
+  if (!session) {
+    return (
+      <div className="flex flex-col flex-1 min-h-screen">
+        <Nav active="member" />
+        <main id="main" className="flex-1 flex items-center">
+          <section className="mx-auto max-w-md w-full px-6 sm:px-10 py-24 text-center">
+            <p className="font-mono text-gold text-[10px] tracking-[0.45em] mb-4">
+              / 會員儀表板
+            </p>
+            <h1 className="text-3xl sm:text-4xl text-bone font-light tracking-tight leading-tight">
+              登入看<span className="text-gold">你的準度</span>
+            </h1>
+            <p className="mt-5 text-mute leading-relaxed">
+              你押過的場、你跟引擎誰準,登入後都在這裡。終身免費。
+            </p>
+            <Link
+              href="/login?next=/member"
+              className="mt-7 inline-block px-7 py-3 bg-gold text-navy font-mono text-xs tracking-[0.3em] hover:bg-gold-soft transition-colors"
+            >
+              登入 / 註冊 →
+            </Link>
+          </section>
+        </main>
+        <Footer />
+      </div>
+    );
+  }
+
+  const email = session.user.email ?? "";
+  const emailName = email.split("@")[0] || "會員";
+
+  const predictionsMap = await getMyPredictionsMap();
+  const stats = aggregatePredictionStats(
     predictionsMap,
-    allMatches.map((m) => ({
-      id: m.id,
-      finalWinner: m.finalResult?.winner ?? null,
-    }))
+    allMatches.map((m) => ({ id: m.id, finalWinner: m.finalResult?.winner ?? null }))
   );
-  // Round 30 Wave 10 · days-since-join · auth.users.created_at = registration
-  // moment(magic link first click)。 Endowment Effect deepening:「您是
-  // ZONE 27 第 N 天會員」 explicit identity anchor。
-  // Round 31 lint fix · server-side computation moved to helper so the
-  // react-hooks/purity rule doesn't false-flag Date.now() in an async
-  // server component(server renders once per request · Date.now is
-  // stable across that render · same wall-clock semantics as Vercel's
-  // request timestamp).
-  const createdAt = session?.user.created_at ?? null;
-  const daysSinceJoin = computeDaysSinceJoin(createdAt);
+
+  const tonight = getTodayMatches().filter((m) => !m.finalResult);
 
   return (
     <div className="flex flex-col flex-1 min-h-screen">
-      <Nav active="founders" />
+      <Nav active="member" />
 
-      <main id="main">
-        {/* ── HERO ─────────────────────────────────── */}
-        <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pt-20 pb-12">
-          <div className="flex items-baseline gap-3 mb-4 flex-wrap section-reveal">
-            <p
-              lang="en"
-              className="font-mono text-gold text-[10px] tracking-[0.45em]"
+      <main id="main" className="mx-auto max-w-2xl w-full px-6 sm:px-10 pt-10 pb-24">
+        {/* 1 · 身分列 · 一行 ────────────────────────── */}
+        <div className="flex items-baseline justify-between gap-3 flex-wrap">
+          <p className="font-mono text-mute text-[11px] tracking-[0.2em]">
+            <span className="text-gold">{emailName}</span> · FREE 會員
+          </p>
+          <form action="/auth/signout" method="post">
+            <button
+              type="submit"
+              className="font-mono text-mute/70 hover:text-loss text-[10px] tracking-[0.3em] underline-offset-4 hover:underline transition-colors"
             >
-              {session
-                ? "/ MEMBER · 您的 dashboard"
-                : "/ MEMBER · 您的引擎時間軸"}
-            </p>
-            {session ? (
-              <span
-                lang="en"
-                className="font-mono text-[9px] tracking-[0.3em] px-1.5 py-0.5 border border-gold/60 text-gold shimmer"
-                title="您已登入 · session 啟用 · Round 30 Wave 5 ship 後 R50 W-F 升 Email + 密碼 auth"
-              >
-                ✓ AUTHENTICATED · FREE TIER
-              </span>
-            ) : (
-              <span
-                lang="en"
-                className="font-mono text-[9px] tracking-[0.3em] px-1.5 py-0.5 border border-loss/40 text-loss/80"
-                title="本頁尚未 auth-gated · 您是 visitor / preview state · 想正式註冊 → /login"
-              >
-                PREVIEW · 您尚未登入
-              </span>
-            )}
-          </div>
-          <h1 className="text-4xl sm:text-5xl text-bone font-light tracking-tight max-w-3xl">
-            {session ? (
-              <>
-                FREE TIER ·{" "}
-                <span className="text-gold">您的 dashboard</span>
-              </>
-            ) : (
-              <>
-                FREE TIER 會員儀表板 ·{" "}
-                <span className="text-gold">預覽版</span>
-              </>
-            )}
-          </h1>
-          {session ? (
-            <p className="mt-6 text-mute leading-relaxed max-w-2xl">
-              歡迎 · 您正式是{" "}
-              <span className="font-mono text-gold">{email}</span>
-              {daysSinceJoin !== null && (
-                <>
-                  {" · "}ZONE 27 第{" "}
-                  <span className="font-mono text-gold tabular">
-                    {daysSinceJoin}
-                  </span>{" "}
-                  天 FREE TIER 會員
-                </>
-              )}{" "}
-              · 終身免費 · 永不調漲。
-            </p>
+              登出
+            </button>
+          </form>
+        </div>
+
+        {/* 2 · 你的準度 · THE number ────────────────── */}
+        <section className="mt-8 bg-slate/40 border border-gold/30 p-6 sm:p-8">
+          <p className="font-mono text-gold text-[10px] tracking-[0.4em] mb-4">
+            你的準度 · 你 vs 引擎
+          </p>
+          {stats.total > 0 ? (
+            <>
+              <div className="flex items-baseline gap-3">
+                <span className="font-mono text-gold text-6xl sm:text-7xl font-light tracking-tight tabular">
+                  {stats.accuracy ?? "—"}
+                  {stats.accuracy !== null && (
+                    <span className="text-2xl opacity-60 ml-1">%</span>
+                  )}
+                </span>
+              </div>
+              <p className="mt-4 text-bone text-base leading-relaxed">
+                押了 <span className="font-mono text-gold tabular">{stats.total}</span> 場 ·{" "}
+                <span className="font-mono text-gold tabular">✓{stats.proved}</span> 中 ·{" "}
+                <span className="font-mono text-loss/85 tabular">✕{stats.diverged}</span> 沒中
+                {stats.push > 0 && (
+                  <>
+                    {" "}· <span className="font-mono text-mute tabular">={stats.push}</span> 平
+                  </>
+                )}
+                {stats.pending > 0 && (
+                  <span className="text-mute/70 text-sm"> · {stats.pending} 場待開</span>
+                )}
+              </p>
+              <p className="mt-2 font-mono text-mute/60 text-[10px] tracking-[0.2em]">
+                每場賽後自動對照引擎 · 押了刪不掉 ·{" "}
+                <Link href="/ladder" className="text-gold/80 hover:text-gold underline-offset-4 hover:underline">
+                  爬天梯 →
+                </Link>
+              </p>
+            </>
           ) : (
-            <p className="mt-6 text-mute leading-relaxed max-w-2xl">
-              Tim 反覆被問:「會員他們自己的頁面在哪裡?能做什麼?」
-              <strong className="text-bone">這頁就是答案的 preview</strong> · 用
-              您 localStorage 裡已有的 sim history 當 preview data ·
-              不假裝 functionality 已存在。
-            </p>
-          )}
-
-          {/* ── R70 W-A · MemberHomeHero · Agent A R69 SHIP 1 ★★★★★ ──
-              Bloomberg 3-quadrant dashboard drop-in · post-login premium
-              feel · YOUR LAST PICK + ENGINE STATE + RECENT RECEIPTS · vs
-              FREE TIER preview-card style this signals「you are home」 ·
-              density + recency + zero greeting noise · per Pieter Levels
-              nomadlist + Bloomberg Terminal home screen pattern · brand
-              IP: NO welcome animation · NO daysSinceJoin confetti · NO
-              leaderboard · 不 violate 11-item NOT-DO list。 */}
-          {session && (
-            <div className="mt-10">
-              <MemberHomeHero
-                predictions={predictionsMap}
-                allMatches={allMatches}
-              />
-            </div>
-          )}
-
-          {/* ── Round 31 W-V · MEMBER DAILY BRIEF · 為什麼註冊 answer ──
-              Tim canary fire「會員頁面了 · 能幹嘛?沒社交 · 沒功能 · 為
-              什麼付費訂閱?」 critical · 必須 ship 「daily reason to come back」。
-              brand IP yield(per [[feedback_zone27_pratfall_brand_ip]] · 修
-              不是 reframe · 是 ship 真實 daily value loop)。 純 derived
-              data + W-N TeamPick localStorage · 0 DB · brand-IP-pure。 */}
-          {session && (
-            <div className="mt-8">
-              <MemberDailyBrief
-                todayMatches={getTodayMatches().map(
-                  (m): DailyMatchSummary => ({
-                    id: m.id,
-                    homeName: m.home.name,
-                    awayName: m.away.name,
-                    homeWinRate: m.home.winRate,
-                    awayWinRate: m.away.winRate,
-                    startTime: m.startTime,
-                    venue: m.venue,
-                    isFinal: !!m.finalResult,
-                  })
-                )}
-              />
-            </div>
-          )}
-
-          {/* ── Round 31 W-X1 · Personal prediction stats row ──
-              per W-W1 UserPredictionPicker · aggregate「您 predictions 累計
-              N · ✓Y proved · ✕Z diverged · accuracy N%」 personal calibration
-              stats · 同 /track-record W-J trackRecord chip pattern · 對你
-              (這個 prediction 累積的會員)說話。 */}
-          {session && predictionStats.total > 0 && (
-            <div className="mt-6 bg-slate/40 border border-gold/30 p-5 sm:p-6">
-              <div className="flex items-baseline justify-between gap-3 flex-wrap mb-2">
-                <p
-                  lang="en"
-                  className="font-mono text-gold text-[10px] tracking-[0.4em]"
-                >
-                  🎯 YOUR PREDICTIONS · 您累計
-                </p>
-                <p className="font-mono text-mute text-[10px] tracking-[0.3em] tabular">
-                  累計 N={predictionStats.total} · pending {predictionStats.pending}
-                </p>
-              </div>
-              <div className="flex items-baseline gap-4 sm:gap-6 flex-wrap font-mono tabular">
-                <span className="text-gold text-xl sm:text-2xl tracking-tight">
-                  ✓{predictionStats.proved}
-                  <span className="text-mute text-xs ml-1">PROVED</span>
-                </span>
-                <span className="text-loss/80 text-xl sm:text-2xl tracking-tight">
-                  ✕{predictionStats.diverged}
-                  <span className="text-mute text-xs ml-1">DIVERGED</span>
-                </span>
-                {predictionStats.push > 0 && (
-                  <span className="text-mute text-xl sm:text-2xl tracking-tight">
-                    ={predictionStats.push}
-                    <span className="text-mute/60 text-xs ml-1">PUSH</span>
-                  </span>
-                )}
-                {predictionStats.accuracy !== null && (
-                  <span className="text-bone text-xl sm:text-2xl tracking-tight">
-                    {predictionStats.accuracy}%
-                    <span className="text-mute text-xs ml-1">accuracy</span>
-                  </span>
-                )}
-              </div>
-              <p className="text-mute/85 text-sm leading-relaxed mt-3">
-                您 vs 引擎 vs 實際結果的對照。 任何賽事頁
-                點 🎯 YOUR PREDICTION 做出您的預測(我猜 / 不押)· 賽後
-                結果自動進這個累計。
+            <>
+              <p className="text-bone text-lg leading-relaxed">
+                還沒押任何一場。
               </p>
-            </div>
-          )}
-
-          {/* ── Round 31 W-M · 5 UNLOCKS PROMINENT GRID ──
-              Tim canary fire「會員哩!還是沒辦法享用會員能使用的所有
-              功能呀!」 surface visibility blocker · 5 個 FREE TIER
-              unlocks 升 prominent · 取代「散在文字裡」 pattern。 上方
-              出現在 hero text 後 · welcome flash banner 上方 · 是
-              dashboard 主視覺。 logged-in / anonymous 兩 mode 同 grid · 後者點 → /login。 */}
-          <div className="mt-8">
-            <MemberUnlocksGrid
-              authenticated={!!session}
-              stats={
-                session
-                  ? {
-                      followsCount: followedMatches.length,
-                      notesCount: Object.keys(notesMap).filter((k) => notesMap[k]?.length > 0).length,
-                      calibrationDots: followedMatches.filter((m) => m.finalResult).length,
-                      daysSinceJoin,
-                      reservationNumber: null, // future · pull from get_my_reservation RPC
-                    }
-                  : undefined
-              }
-            />
-          </div>
-
-          {/* ── Round 36 W-C · PAID TIER LOCKED GRID ──
-              Tim 14+ canary「會員功能對付費者沒吸引力」 surface critical
-              perception gap:Tim 截圖看的是 FREE TIER 5 unlocks · dashboard
-              沒 show BLACK CARD + Founders 27 加什麼 · 從 FREE TIER 看
-              不到 paid tier value → 感覺「就這些?」。 同 Netflix「Standard/
-              Premium」 grid 對照模式 缺。 Ship NEW PaidTierLockedGrid:
-              BLACK CARD 6 unlocks(Engine Lineup + Lens Variety + 賽事
-              討論 + 創作者抽成 + voting + Tim 筆記)+ Founders 27 年度
-              mega-card(全 BLACK CARD + 5% 抽成 + 未來所有 lenses/engines
-              解鎖)· visible status hierarchy + FOMO + Sunk cost + Anchoring。 */}
-          <PaidTierLockedGrid />
-
-          {/* ── Round 30 Wave 5 · Welcome flash + logout · only when session ── */}
-          {session && (
-            <div className="mt-6 bg-gold/5 border border-gold/50 p-5 sm:p-6">
-              <div className="flex items-baseline justify-between gap-3 flex-wrap mb-3">
-                <p
-                  lang="en"
-                  className={`font-mono text-gold text-[10px] tracking-[0.4em] ${
-                    justArrived ? "shimmer" : ""
-                  }`}
-                >
-                  {justArrived
-                    ? "✓ MAGIC LINK · 登入成功"
-                    : "✓ SESSION ACTIVE"}
-                </p>
-                <div className="flex items-baseline gap-4">
-                  <Link
-                    href="/member/submit"
-                    className="font-mono text-gold/80 hover:text-gold text-[10px] tracking-[0.3em] underline-offset-4 hover:underline transition-colors"
-                  >
-                    投稿 →
-                  </Link>
-                  <Link
-                    href="/member/calibration"
-                    className="font-mono text-gold/80 hover:text-gold text-[10px] tracking-[0.3em] underline-offset-4 hover:underline transition-colors"
-                  >
-                    mirror →
-                  </Link>
-                  <form action="/auth/signout" method="post" className="inline">
-                    <button
-                      type="submit"
-                      className="font-mono text-mute hover:text-loss text-[10px] tracking-[0.3em] underline-offset-4 hover:underline transition-colors"
-                    >
-                      登出 →
-                    </button>
-                  </form>
-                </div>
-              </div>
-              <p className="text-mute/85 text-sm leading-relaxed">
-                Session 用 HTTP-only cookies · 直到您點登出 / cookie 過期。
-                FREE TIER 解鎖:★ Follow / ✏️ Note / ↗ Submit / 🪞 Calibration
-                mirror。
-              </p>
-            </div>
-          )}
-
-          {/* ── Round 30 Wave 6 · FIRST-ACTION ONBOARDING ───
-              當 logged-in 但還沒 follow 任何賽事 · 顯示大 CTA「您的第一
-              個動作」指 /matches。 Day One「first journal entry」 / Linear
-              「create first ticket」 / HEY「write first email」same pattern。
-              已 follow 過的 logged-in user 不顯示此 block · 改顯示下方
-              follows list。 */}
-          {session && followedMatches.length === 0 && (
-            <div className="mt-6 bg-slate/40 border-2 border-gold/60 glow-soft p-6 sm:p-8">
-              <p
-                lang="en"
-                className="font-mono text-gold text-[10px] tracking-[0.45em] mb-3 shimmer"
-              >
-                / YOUR FIRST ACTION · 第一個動作
-              </p>
-              <h2 className="text-2xl sm:text-3xl text-bone font-light tracking-tight leading-snug mb-4">
-                押下你的第一注
-              </h2>
-              <p className="text-mute text-sm sm:text-base leading-relaxed mb-5 max-w-2xl">
-                你剛註冊好了 · 但儀表板還是空的。 去任一場賽事
-                <strong className="text-bone">押一邊</strong>(或寫一篇分析)·
-                押的邊賽後自動掛 <span className="text-gold">準</span> /{" "}
-                <span className="text-loss">不準</span> · 刪不掉 · 你的準度從這一場
-                開始累積、爬上海選天梯。
-              </p>
-              <div className="flex flex-wrap gap-3">
-                <Link
-                  href="/matches"
-                  className="inline-block px-6 py-3 bg-gold text-navy font-mono text-xs tracking-[0.3em] hover:bg-gold-soft transition-colors"
-                >
-                  → 今日賽事板 · 押一注
-                </Link>
-                <Link
-                  href="/track-record"
-                  className="inline-block px-6 py-3 border border-gold/50 text-gold font-mono text-xs tracking-[0.3em] hover:bg-gold/10 transition-colors"
-                >
-                  → 引擎過去戰績
-                </Link>
-              </div>
-              <p className="font-mono text-mute/60 text-[10px] tracking-[0.25em] mt-5 leading-relaxed">
-                ▸ 我們不推薦 · 不排名 · 0 追蹤 · 你押哪場是你的事
-              </p>
-            </div>
-          )}
-
-          {/* ── Round 30 Wave 5 · CTA to /login if not authenticated ── */}
-          {!session && (
-            <div className="mt-6 bg-slate/40 border border-gold/40 p-5 sm:p-6">
-              <p
-                lang="en"
-                className="font-mono text-gold text-[10px] tracking-[0.4em] mb-3"
-              >
-                / WANT REAL DASHBOARD?
-              </p>
-              <p className="text-mute text-sm leading-relaxed mb-4">
-                這頁目前是預覽。想<strong className="text-bone">真實註冊
-                FREE TIER 會員</strong> · email + 密碼 1 分鐘註冊 · 點開後本頁
-                自動變成<strong className="text-bone">您的 dashboard</strong> ·
-                登入功能現在就能用。
-              </p>
-              <Link
-                href="/login"
-                className="inline-block px-6 py-2.5 bg-gold text-navy font-mono text-xs tracking-[0.3em] hover:bg-gold-soft transition-colors"
-              >
-                → /login · Email + 密碼 註冊
-              </Link>
-            </div>
-          )}
-          <div className="mt-6">
-            <ArticleMeta readingMin={3} />
-          </div>
-        </section>
-
-        <div className="mx-auto w-32 gold-line mb-12" />
-
-        {/* ── Round 30 Wave 6 · YOUR FOLLOWED MATCHES ───
-            Logged-in 會員 + 有 follow 過時顯示。 每行 = 一場 follow ·
-            phase chip + verdict chip(if final)+ score(if final)+
-            連結到 /matches/[gameId]。 Endowment Effect cranked — 您
-            手動 follow 的 collection · 累積 = 您的 trophy。 */}
-        {session && followedMatches.length > 0 && (
-          <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-12">
-            <div className="flex items-baseline justify-between mb-6 flex-wrap gap-3">
-              <p
-                lang="en"
-                className="font-mono text-gold text-[10px] tracking-[0.45em]"
-              >
-                / YOUR FOLLOWED MATCHES · 您 follow 的 {followedMatches.length} 場
+              <p className="mt-1 text-mute text-sm leading-relaxed">
+                押一邊,賽後自動掛準 / 不準,你的準度從這一場開始累積。
               </p>
               <Link
                 href="/matches"
-                className="font-mono text-mute hover:text-gold text-[10px] tracking-[0.3em] underline-offset-4 hover:underline transition-colors"
+                className="mt-5 inline-block px-6 py-3 bg-gold text-navy font-mono text-xs tracking-[0.3em] hover:bg-gold-soft transition-colors"
               >
-                + follow 更多 · /matches
+                去押第一注 →
               </Link>
-            </div>
+            </>
+          )}
+        </section>
+
+        {/* 3 · 今晚可以押 ───────────────────────────── */}
+        <section className="mt-6">
+          <p className="font-mono text-gold text-[10px] tracking-[0.4em] mb-3">
+            {tonight.length > 0 ? "今晚可以押" : "今天賽事"}
+          </p>
+          {tonight.length > 0 ? (
             <div className="border border-line/60 bg-slate/30">
-              {followedMatches.map((m, i) => (
-                <FollowedMatchRow
-                  key={m.id}
-                  match={m}
-                  isFirst={i === 0}
-                  isLast={i === followedMatches.length - 1}
-                  noteLength={notesMap[m.id]?.length ?? 0}
-                />
-              ))}
+              {tonight.map((m, i) => {
+                const homeFav = m.home.winRate >= m.away.winRate;
+                return (
+                  <Link
+                    key={m.id}
+                    href={`/matches/${m.id}`}
+                    className={`flex items-center justify-between gap-3 px-4 py-3.5 hover:bg-gold/5 transition-colors ${
+                      i === tonight.length - 1 ? "" : "border-b border-line/40"
+                    }`}
+                  >
+                    <div className="min-w-0">
+                      <p className="text-bone text-sm sm:text-base font-light leading-snug truncate">
+                        <span className={homeFav ? "text-gold" : ""}>{m.home.name}</span>
+                        <span className="text-mute/60 mx-1.5 text-xs">vs</span>
+                        <span className={!homeFav ? "text-gold" : ""}>{m.away.name}</span>
+                      </p>
+                      <p className="font-mono text-mute/70 text-[10px] tracking-[0.2em] mt-1 tabular">
+                        {m.startTime} · 引擎看好 {homeFav ? m.home.name : m.away.name}{" "}
+                        {Math.max(m.home.winRate, m.away.winRate)}%
+                      </p>
+                    </div>
+                    <span className="shrink-0 font-mono text-gold/70 text-[10px] tracking-[0.3em]">
+                      押 →
+                    </span>
+                  </Link>
+                );
+              })}
             </div>
-            <p className="font-mono text-mute/70 text-[10px] tracking-[0.25em] mt-4 leading-relaxed">
-              ▸ 賽後 finalized 的場 · verdict(PROVED ✓ / DIVERGED ✕)在每行顯示
-              <br />
-              ▸ 您 personal calibration mirror 從這些 followed-and-finalized
-              matches 累積{" "}
-              <Link
-                href="/member/calibration"
-                className="text-gold underline-offset-4 hover:underline"
-              >
-                /member/calibration
-              </Link>
-            </p>
-          </section>
-        )}
-
-        {/* ── Round 30 Wave 11b · DELETED MemberDashboardPreview ────
-            Agent research deepest call:「strip future-tense scaffolding from
-            present-tense pages」 = 4-bias preview block was「preview of a
-            dashboard」 · 現在 W6 真實 YOUR FOLLOWED MATCHES + W10 personal
-            calibration mirror 已 ship · preview 變 future-tense scaffolding
-            on present-tense page · 砍。 Component file 保留(import 移除)· 將
-            來如果需要 marketing surface 還可用。 */}
-
-        {/* ── MEMBER SYSTEM, INVERTED · Wave 11b MERGED ──
-            Agent Merge #1:原 ✕/✓ blocks + 3-col + deepest call CTA 三 sub-block
-            合一。 Stratechery「one core argument per article」· ✕/✓ 跟 3-col
-            argue 同一件事兩次 · 砍 ✕/✓ · 留 3-col(視覺主角)+ 1-line quote
-            + CTA。 9 sections → 7 sections per Cowan 4-chunk ceiling。 */}
-        <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-16 pt-12 border-t border-line/40">
-          <p
-            lang="en"
-            className="font-mono text-gold text-[10px] tracking-[0.45em] mb-8 text-center"
-          >
-            / MEMBER SYSTEM · INVERTED
-          </p>
-
-          {/* 3-col concrete brand comparison · 視覺主角保留 */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            <ComparisonCard
-              brand="Apple Store 會員"
-              type="COMMERCE · 交易史"
-              give="付費 + 訂單史"
-              get="下次購買更快 · 收藏 · 退換貨"
-              reward="重複購買"
-              track="全部購買行為 + 設備指紋"
-            />
-            <ComparisonCard
-              brand="Spotify Premium"
-              type="CONSUMPTION · 消費史"
-              give="月費 + 收聽行為"
-              get="更精準推薦 · skip 無上限"
-              reward="重複收聽"
-              track="全部播放行為 + 跨平台"
-            />
-            <ComparisonCard
-              brand="ZONE 27 會員"
-              type="THINKING · 思辨史"
-              give="email + 您自己跑過的 sim"
-              get="您歷史的所有權"
-              reward="重複思辨"
-              track="0 · 寫進 /privacy"
-              highlight
-            />
-          </div>
-
-          {/* Deepest sharp call · 1-line quote + 1-CTA · no elaboration */}
-          <div className="mt-10 pt-6 border-t border-gold/30 text-center">
-            <p className="text-bone text-lg sm:text-xl font-light tracking-tight leading-snug mb-5 max-w-xl mx-auto">
-              不是一堆功能的堆疊 · 是{" "}
-              <span className="text-gold">您 vs 引擎 vs 實際結果的對照</span>。
-            </p>
-            <Link
-              href="/member/calibration"
-              className="inline-block px-8 py-3 border border-gold text-gold text-xs tracking-[0.3em] hover:bg-gold hover:text-navy transition-colors"
-            >
-              → /member/calibration · 看 mirror
-            </Link>
-          </div>
+          ) : (
+            <div className="border border-line/60 bg-slate/30 p-5">
+              <p className="text-mute text-sm leading-relaxed mb-4">
+                今天沒排 CPBL 賽事。
+              </p>
+              <div className="flex flex-wrap gap-3">
+                <Link
+                  href="/track-record"
+                  className="font-mono text-gold/80 hover:text-gold text-[10px] tracking-[0.3em] underline-offset-4 hover:underline transition-colors"
+                >
+                  看引擎戰績 →
+                </Link>
+                <Link
+                  href="/lab/custom"
+                  className="font-mono text-mute hover:text-gold text-[10px] tracking-[0.3em] underline-offset-4 hover:underline transition-colors"
+                >
+                  自己跑模擬 →
+                </Link>
+              </div>
+            </div>
+          )}
         </section>
 
-        {/* R74 W-D · LocalStorageReceipt receipt variant · Agent A R73 SHIP 1
-            · Loewenstein & Issacharoff endowment-via-inventory(1994)·
-            visitor's own browser holds 11 ZONE 27 localStorage keys · seeing
-            the inventory activates ownership cognition · same client-state-
-            as-receipt grammar as Letterboxd diary(R70 W-B DailyReturnRail)
-            + Pinboard archive(R70 W-C SilentReceiptStream)· extends 3-col
-            comparison axis「ZONE 27 0 tracking」 with the actual device-
-            local data receipt · canonical single-source from lib/local-
-            storage-inventory.ts · drift impossible by design。 */}
-        <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-16 pt-2">
-          <LocalStorageReceipt variant="receipt" />
-        </section>
-
-        <FounderSignOff>
-          <p>
-            登入已上線 · 追蹤功能已開 · 雲端同步還沒做好。
-            我們不假裝已經做好的事還沒做好。
-          </p>
-          <p>
-            任何進度差異都看得到 ·{" "}
-            <strong>全寫在 /changelog 的版本紀錄裡</strong> ·
-            沒有「即將推出 · 敬請期待」 · 只有實際做完的。
-          </p>
-        </FounderSignOff>
-
-        <RelatedReading currentPath="/member" />
-        {/* sub-component:見檔尾 ComparisonCard */}
-
-        {/* ── BACK ─────────────────────────────────── */}
-        <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-24 text-center">
-          <div className="flex flex-wrap items-center justify-center gap-6">
-            <Link
-              href="/membership"
-              className="font-mono text-mute hover:text-gold text-[10px] tracking-[0.4em] transition-colors"
-            >
-              ← 4-tier ladder 全景 · /membership
-            </Link>
-            <Link
-              href="/changelog"
-              className="font-mono text-mute hover:text-gold text-[10px] tracking-[0.4em] transition-colors"
-            >
-              這頁工程現狀 · /changelog →
-            </Link>
-          </div>
-        </section>
+        {/* 4 · 一行升級(不推銷 · 純資訊)─────────────── */}
+        <p className="mt-10 text-center font-mono text-mute/55 text-[10px] tracking-[0.2em] leading-relaxed">
+          想賣分析抽成 · 投票決定引擎版本?{" "}
+          <Link href="/membership" className="text-gold/70 hover:text-gold underline-offset-4 hover:underline">
+            看會員方案 →
+          </Link>
+        </p>
       </main>
 
       <Footer />
     </div>
   );
-}
-
-// ── Sub-components ─────────────────────────────────────
-
-// Round 30 Wave 6 · One row in the「您 follow 的賽事」list on /member。
-// Server-rendered(no client state needed since auth + follows already
-// read server-side)· phase + verdict chip + score(if final)· entire
-// row links to /matches/[gameId]。 Endowment Effect visual:gold-tinted
-// hover · 每場 felt-as-owned。
-function FollowedMatchRow({
-  match,
-  isFirst,
-  isLast,
-  noteLength,
-}: {
-  match: Match;
-  isFirst: boolean;
-  isLast: boolean;
-  noteLength: number;
-}) {
-  const phase = getMatchPhase(match);
-  const calibration = getCalibration(match);
-  const fr = match.finalResult;
-  const homeFav = match.home.winRate >= match.away.winRate;
-
-  const verdictColor = {
-    proved: "text-gold border-gold/60",
-    diverged: "text-loss border-loss/60",
-    push: "text-mute border-mute/60",
-  };
-  const verdictLabel = {
-    proved: "✓ PROVED",
-    diverged: "✕ DIVERGED",
-    push: "= PUSH",
-  };
-
-  return (
-    <Link
-      href={`/matches/${match.id}`}
-      className={`block px-5 py-4 hover:bg-gold/5 transition-colors ${
-        isLast ? "" : "border-b border-line/40"
-      } ${isFirst ? "" : ""}`}
-    >
-      <div className="flex items-baseline justify-between gap-3 flex-wrap mb-2">
-        <p className="font-mono text-mute text-[10px] tracking-[0.25em] tabular">
-          {match.date} · {match.startTime}
-        </p>
-        {fr && calibration ? (
-          <span
-            lang="en"
-            className={`font-mono text-[10px] tracking-[0.25em] px-1.5 py-0.5 border ${verdictColor[calibration]}`}
-          >
-            {verdictLabel[calibration]}
-          </span>
-        ) : phase === "today-live" ? (
-          <span
-            lang="en"
-            className="font-mono text-[10px] tracking-[0.25em] px-1.5 py-0.5 border border-gold text-gold shimmer"
-          >
-            LIVE
-          </span>
-        ) : phase === "today-pregame" ? (
-          <span
-            lang="en"
-            className="font-mono text-[10px] tracking-[0.25em] px-1.5 py-0.5 border border-gold text-gold"
-          >
-            TODAY · 今晚開賽
-          </span>
-        ) : phase === "future" ? (
-          <span
-            lang="en"
-            className="font-mono text-[10px] tracking-[0.25em] px-1.5 py-0.5 border border-gold/60 text-gold/80"
-          >
-            PREVIEW
-          </span>
-        ) : (
-          <span
-            lang="en"
-            className="font-mono text-[10px] tracking-[0.25em] px-1.5 py-0.5 border border-mute/60 text-mute"
-          >
-            ARCHIVED
-          </span>
-        )}
-      </div>
-      <p className="text-bone text-base sm:text-lg font-light leading-snug">
-        <span className={homeFav ? "text-gold" : ""}>{match.home.name}</span>
-        <span className="text-mute mx-2 text-xs">vs</span>
-        <span className={!homeFav ? "text-gold" : ""}>{match.away.name}</span>
-      </p>
-      <div className="mt-2 flex items-baseline justify-between flex-wrap gap-2">
-        <p className="font-mono text-mute text-[10px] tracking-[0.2em] tabular">
-          ENGINE · {homeFav ? match.home.winRate : match.away.winRate}% ·{" "}
-          {homeFav ? match.home.en : match.away.en} 領先
-        </p>
-        <div className="flex items-baseline gap-3 flex-wrap">
-          {noteLength > 0 && (
-            <span
-              className="font-mono text-gold/80 text-[10px] tracking-[0.2em]"
-              title={`您寫了 ${noteLength} 字筆記 · 點開看`}
-            >
-              ✏️ {noteLength} 字筆記
-            </span>
-          )}
-          {fr ? (
-            <p className="font-mono text-bone text-sm tabular">
-              FINAL · {fr.homeScore}:{fr.awayScore}
-            </p>
-          ) : (
-            <p className="font-mono text-mute/60 text-[10px] tracking-[0.2em]">
-              賽後 receipt 自動入帳
-            </p>
-          )}
-        </div>
-      </div>
-    </Link>
-  );
-}
-
-// Round 30 Wave 2 · 3-col member-system comparison card.
-// Brand-IP focused · NOT a feature-arms-race。 Each card surfaces 4 axes:
-// give/get/reward/track。 Highlight version(ZONE 27)gold-bordered with
-// 0 tracking visible as gold cell · 對齊 Footer「FUNDED BY FOUNDERS · NO
-// GA · NO PIXEL」inversion brand line。
-function ComparisonCard({
-  brand,
-  type,
-  give,
-  get,
-  reward,
-  track,
-  highlight = false,
-}: {
-  brand: string;
-  type: string;
-  give: string;
-  get: string;
-  reward: string;
-  track: string;
-  highlight?: boolean;
-}) {
-  return (
-    <div
-      className={`p-5 border flex flex-col h-full ${
-        highlight
-          ? "border-gold/60 bg-gold/5 glow-soft"
-          : "border-line/50 bg-slate/30"
-      }`}
-    >
-      <p
-        lang="en"
-        className={`font-mono text-[9px] tracking-[0.25em] mb-2 ${
-          highlight ? "text-gold" : "text-mute/70"
-        }`}
-      >
-        {type}
-      </p>
-      <h3
-        className={`text-base sm:text-lg font-light tracking-tight mb-4 ${
-          highlight ? "text-gold" : "text-bone"
-        }`}
-      >
-        {brand}
-      </h3>
-      <dl className="space-y-3 text-xs sm:text-sm">
-        <div>
-          <dt className="font-mono text-mute/70 text-[9px] tracking-[0.25em] mb-0.5">
-            您給他們
-          </dt>
-          <dd className="text-bone/90 leading-snug">{give}</dd>
-        </div>
-        <div>
-          <dt className="font-mono text-mute/70 text-[9px] tracking-[0.25em] mb-0.5">
-            他們給您
-          </dt>
-          <dd className="text-bone/90 leading-snug">{get}</dd>
-        </div>
-        <div>
-          <dt className="font-mono text-mute/70 text-[9px] tracking-[0.25em] mb-0.5">
-            獎勵您的
-          </dt>
-          <dd className="text-bone/90 leading-snug">{reward}</dd>
-        </div>
-        <div>
-          <dt className="font-mono text-mute/70 text-[9px] tracking-[0.25em] mb-0.5">
-            追蹤您的
-          </dt>
-          <dd
-            className={`leading-snug ${highlight ? "text-gold" : "text-bone/90"}`}
-          >
-            {track}
-          </dd>
-        </div>
-      </dl>
-    </div>
-  );
-}
-
-// ── computeDaysSinceJoin ───────────────────────────────
-// Top-level helper · isolates Date.now() from the async server
-// component above so react-hooks/purity lint rule doesn't false-
-// flag it. Server-side render uses Date.now() as the request
-// timestamp · stable across the render · equivalent semantics
-// to a Vercel build/request constant.
-function computeDaysSinceJoin(createdAt: string | null): number | null {
-  if (!createdAt) return null;
-  const created = new Date(createdAt).getTime();
-  const nowMs = Date.now();
-  return Math.max(1, Math.floor((nowMs - created) / 86_400_000) + 1);
 }
