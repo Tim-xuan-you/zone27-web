@@ -98,7 +98,7 @@ begin
 
   insert into public.creator_posts (user_id, match_id, title, body, pick, price_ntd)
   values (v_uid, v_match, v_title, v_body, p_pick, v_price)
-  returning id, created_at
+  returning id, creator_posts.created_at
   into v_id, v_at;
 
   return query select v_id, v_at;

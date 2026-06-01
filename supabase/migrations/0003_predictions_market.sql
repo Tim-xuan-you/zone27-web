@@ -88,7 +88,7 @@ begin
 
   insert into public.predictions (user_id, match_id, pick)
   values (v_uid, v_match, p_pick)
-  returning id, created_at
+  returning id, predictions.created_at
   into v_id, v_at;
 
   return query select v_id, v_match, p_pick, v_at;
