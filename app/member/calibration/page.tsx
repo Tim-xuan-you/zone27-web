@@ -220,7 +220,7 @@ export default async function CalibrationPage() {
                   </p>
                   <p className="text-mute text-sm sm:text-base leading-relaxed max-w-md mx-auto mb-3">
                     您已登入 · 但還沒 follow 任何已 finalized 的賽事 ·
-                    所以 mirror 還沒有點。 follow 一場 → 賽後 verdict 自動
+                    所以這張圖還沒有點。 follow 一場 → 賽後 verdict 自動
                     落這 diagram。
                   </p>
                   <div className="mt-5 flex flex-wrap justify-center gap-3">
@@ -248,7 +248,7 @@ export default async function CalibrationPage() {
                   </p>
                   <p className="text-mute text-sm sm:text-base leading-relaxed max-w-md mx-auto mb-3">
                     引擎還沒 finalized 任何場。 anon visitor 看 global aggregate ·
-                    /login 後變 personal mirror。
+                    /login 後變個人對照圖。
                   </p>
                 </>
               )}
@@ -350,7 +350,7 @@ export default async function CalibrationPage() {
             <TimelineRow
               phase="Phase 1 Q3 / PERSONAL"
               status="等 auth 上線"
-              body="您 follow 的賽事 → 您自己的 calibration drift。 同 schema · 同 SVG · 不同 data subset。 Email + 密碼 auth 已上線(R50 W-F password-only)· 您 localStorage 已有的 follow-list 已自動 sync · 您的 personal mirror 從登入那天起跳。"
+              body="您 follow 的賽事 → 您自己的 calibration drift。 同 schema · 同 SVG · 不同 data subset。 Email + 密碼 auth 已上線 · 您 localStorage 已有的 follow-list 已自動 sync · 您的個人對照圖從登入那天起跳。"
             />
             <TimelineRow
               phase="未來 / SOCIAL"
@@ -373,9 +373,9 @@ export default async function CalibrationPage() {
             不同。 不需 migration · 不需「升級」 · 一直就是這樣設計的。
           </p>
           <p>
-            這個 page 的存在不是 features-arms-race · 是 brand IP statement:
+            這個 page 的存在不是為了比功能多 · 是要講一件事:
             <strong>ZONE 27 跟其他高端 sports 分析品牌唯一的差別 ·
-            就是這個 mirror。</strong> 我們不藏 drift · 我們把它公開到 visitor
+            就是這張對照圖。</strong> 我們不藏 drift · 我們把它公開到 visitor
             可以截圖嗆我們的程度。
           </p>
         </FounderSignOff>

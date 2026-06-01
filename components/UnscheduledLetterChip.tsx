@@ -117,7 +117,7 @@ export default function UnscheduledLetterChip({ variant = "panel" }: Props) {
         差別在{" "}
         <strong className="text-bone">arrival ownership 不對稱</strong> ·
         LINE 老師 / 報馬仔 / 投顧老師 model 是「they 推 TO you」 · ZONE 27
-        model 是「you GO to them OR RSS pull」 · 訪客 autonomy 物理 codify。
+        model 是「you GO to them OR RSS pull」 · 把主動權交還給訪客。
       </p>
       <p className="font-mono text-mute/70 text-[10px] tracking-[0.25em] leading-relaxed">
         ⚓ per /audit S05 PRE-COMMIT clause · 不訂 weekly cadence + 不發

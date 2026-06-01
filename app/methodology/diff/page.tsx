@@ -288,7 +288,7 @@ export default function MethodologyDiffPage() {
             <strong className="text-bone">v0.3 reuse v0.2 atBatProbs()</strong>{" "}
             · 不 copy paste · 不 fork。 v0.2 任何 future 修正(K/BB/HR rate
             clamp / in-play distribution / baserunner physics)v0.3 自動 inherit。
-            這是 Lens Lifetime Pledge 物理 codify · 不 silently divergence。
+            這是 Lens Lifetime Pledge 的具體落實 · 不 silently divergence。
           </p>
 
           <p className="text-mute/80 text-sm leading-relaxed">

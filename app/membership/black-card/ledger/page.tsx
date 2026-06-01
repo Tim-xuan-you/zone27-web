@@ -137,8 +137,7 @@ export default function BlackCardLedgerPage() {
                 假裝有客戶 · 此 empty state IS the point。
               </p>
               <p className="font-mono text-mute/70 text-[10px] tracking-[0.25em] leading-relaxed">
-                Aronson 1966 Pratfall · admitted imperfection raises trust
-                more than claimed perfection。
+                坦承不完美比宣稱完美更能贏得信任。
               </p>
               <div className="mt-6 flex flex-wrap justify-center gap-3">
                 <Link

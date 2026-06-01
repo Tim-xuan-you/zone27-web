@@ -68,7 +68,7 @@ const COMMITMENTS: { num: string; title: string; body: string; tier: "displaceme
   {
     num: "09",
     title: "我每筆 engine 預測都 mandatory publish · 0 cherry-pick · 0 retroactive delete",
-    body: "每筆 CPBL engine pre-committed prediction → mandatory /track-record entry + /receipts/[receiptId] permalink + PROVED / DIVERGED / PUSH label。 不選擇性 publish · 不 retroactive delete · 不 cherry-pick high-confidence-only · 即使 engine 100% 錯也 binding publish。 顯示 prediction 後 visitor endowment(Kahneman/Knetsch/Thaler 1990)在「我會看到結果」 上 · selective publishing = trust 物理崩。 同 Berkshire 70-year annual letter「無論好年壞年 都 mandatory publish」 + Geneva Seal「每只 watch 都印 serial」 pattern · per /audit S05 PRE-COMMIT clause 升級到 /integrity binding rule layer(commitment #09 · R80 加)· 配對 /integrity redline #12(CPBL-only scope)close brand IP loop。",
+    body: "每筆 CPBL engine pre-committed prediction → mandatory /track-record entry + /receipts/[receiptId] permalink + PROVED / DIVERGED / PUSH label。 不選擇性 publish · 不 retroactive delete · 不 cherry-pick high-confidence-only · 即使 engine 100% 錯也 binding publish。 顯示 prediction 後 · 訪客對「我會看到結果」 產生擁有感 · selective publishing = trust 物理崩。 同 Berkshire 70-year annual letter「無論好年壞年 都 mandatory publish」 + Geneva Seal「每只 watch 都印 serial」 pattern · per /audit S05 PRE-COMMIT clause 升級到 /integrity binding rule layer(commitment #09 · R80 加)· 配對 /integrity redline #12(CPBL-only scope)close brand IP loop。",
     // R119 W4 · redline patch · tier corrected displacement → brand · #09 是
     // ZONE 27 internal brand discipline(Berkshire 70-year + Geneva Seal
     // pattern · per body cite)· NOT displacement of 玩運彩 (那 1-5 + 8 在
@@ -295,8 +295,7 @@ export default function EthicsPage() {
               <li>每次修改在 commit message 強制 cite issue link · audit trail 1-click 可達</li>
             </ol>
             <p className="font-mono text-mute/80 text-[10px] tracking-[0.25em] leading-relaxed">
-              ⚓ Costly Signaling 100× · pre-commit binding 比 post-hoc
-              rationalization strong 100× · Aronson 1966 + Spence 1973 ·
+              ⚓ 事前綁定的承諾 · 比事後找理由強 100× ·
               改 ethics 不是「動 page · 是動 brand 信仰 base」。
             </p>
           </div>
@@ -401,7 +400,7 @@ export default function EthicsPage() {
 
         <FounderSignOff>
           <p>
-            這頁是 ZONE 27 displacement mission 的 brand-IP layer 物理 codify ·
+            這頁是 ZONE 27 對標、取代 玩運彩+報馬仔 的品牌底層落地 ·
             <strong>不是 marketing copy</strong>。 9 條是 hard commitments +
             R70 W-F BUS_FACTOR contingency section · 違反任一條 = brand 信用
             collapse · 即使違反 1 次 · /ethics page 上會出現「{COMMITMENTS[0].num}

@@ -100,7 +100,7 @@ export default function RefusalLedgerHint() {
   return (
     <section
       id="refusals"
-      aria-label="Refusal Ledger · 5 published refusal rationales · Cialdini Reject-then-Retreat inversion"
+      aria-label="Refusal Ledger · 5 published refusal rationales · 先公開拒絕標準"
       className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-14 pt-10 border-t border-line/40 scroll-mt-20"
     >
       <div className="flex items-baseline gap-4 mb-3 flex-wrap">
@@ -131,8 +131,7 @@ export default function RefusalLedgerHint() {
       </h2>
 
       <p className="text-mute leading-relaxed mb-4">
-        Cialdini Reject-then-Retreat(1975)classic mechanic 是「ask big →
-        reject → ask small」。 ZONE 27 inversion:{" "}
+        多數平台先誘你進門再加碼推銷。 ZONE 27 反過來:{" "}
         <strong className="text-bone">
           publish refusal grammar BEFORE 任何 refusal land
         </strong>{" "}
@@ -145,9 +144,7 @@ export default function RefusalLedgerHint() {
         <strong className="text-bone">已 binding pre-commit</strong>{" "}
         · 第一筆真實 refusal land 後 · Tim 親手 update weekly count + sample
         rationale(去 PII)· 修改任一 rationale-type 需 30 天前 /changelog
-        公告 · per /audit S05 PRE-COMMIT clause · same append-only Costly
-        Signaling discipline as ENGINE_DIFF_BEACONS R71 W-C + NO_PUSH_INVENTORY
-        R73 W-D + RECIPROCITY_LEDGER R74 W-A。
+        事前公告 · 同站上其他 append-only 公開帳本一樣的紀律 · 只增不刪。
       </p>
 
       <ol className="space-y-3 mt-6">
@@ -206,11 +203,10 @@ export default function RefusalLedgerHint() {
         </p>
         <p className="font-mono text-mute/60 text-[10px] tracking-[0.25em] leading-relaxed">
           ⚓ 此 page 是{" "}
-          <strong className="text-bone">refusal-as-reciprocity</strong> scaffold
-          per Cialdini Influence(1984)Ch 2 · 您 read 完{" "}
-          {REFUSAL_RATIONALES.length} 條 rationale · 您 conclude 自己 fit · ZONE
-          27 不 sell · 您 self-select。 brand IP triple-fire(Pratfall +
-          Costly Signaling + Disclosure)。
+          <strong className="text-bone">先公開拒絕標準</strong> 的善意 ·
+          您 read 完{" "}
+          {REFUSAL_RATIONALES.length} 條 rationale · 您自己判斷是否 fit · ZONE
+          27 不 sell · 您 self-select。
         </p>
       </div>
     </section>

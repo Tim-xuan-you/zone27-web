@@ -411,7 +411,7 @@ export default function AnnualIndex() {
         <FounderSignOff>
           <p>
             這份 10-year ledger 從 Year 0 開始公開 future binding commitments ·
-            是 ZONE 27 對自己最 expensive 的 brand IP 物理 codify。 Year 0
+            是 ZONE 27 對自己最 expensive 的公開承諾。 Year 0
             (2026) 已 publish honest empty state 不藏 · Year 1-9 (2027-2035)
             是 future placeholders 公開 bind future Tim。
           </p>

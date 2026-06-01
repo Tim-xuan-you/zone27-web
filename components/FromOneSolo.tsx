@@ -67,9 +67,9 @@ export default function FromOneSolo() {
           <strong className="text-bone">
             ZONE 27 沒有「已 forge」 Founder testimonials
           </strong>
-          {" "}· 沒有「100 位專業人士推薦」 · 沒有 TechCrunch coverage ·
-          沒有 Pinned tweet by 大 V。 這不是 marketing 失敗 · 是 brand IP
-          物理 codify · 是 the offer 本身。
+          {" "}· 沒有「100 位專業人士推薦」 · 沒有媒體報導 ·
+          沒有大 V 轉發。 這不是 marketing 失敗 · 而是我們刻意公開的真實狀態 ·
+          是 the offer 本身。
         </p>
 
         <h3 className="text-bone text-lg font-light tracking-tight mt-7 mb-3">
@@ -169,7 +169,7 @@ export default function FromOneSolo() {
             social proof 看起來像 LINE 老師 social proof 一模一樣
           </strong>{" "}
           · 我不能 use that path · 必須走 inverse path。 您 read 完 4 deltas
-          後 decide 自己 fit · 那是 Tetlock-honest framing。
+          後自己判斷是否 fit · 那是把話講清楚、可被追蹤檢驗的誠實。
         </p>
 
         <p className="font-mono text-mute/70 text-[10px] tracking-[0.25em] mt-6 leading-relaxed">

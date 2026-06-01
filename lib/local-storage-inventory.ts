@@ -109,7 +109,7 @@ export const LOCAL_STORAGE_INVENTORY: ReadonlyArray<LocalStorageKeyEntry> = [
   {
     key: "zone27_lens_focus_votes_v1",
     value: "您 pre-canvas 1-tap lens vote · per-match commitment artifact",
-    note: "LensFocusVote 寫入 · /matches/[gameId] pre /02 LENS CANVAS hub · 6 lens 選 1 個您認為最 matter · Cialdini commitment-consistency · 0 server · 0 PII · 0 leaderboard · 純您裝置 · R67 W-A",
+    note: "LensFocusVote 寫入 · /matches/[gameId] pre /02 LENS CANVAS hub · 6 lens 選 1 個您認為最 matter · 一旦選定就維持一致 · 0 server · 0 PII · 0 leaderboard · 純您裝置 · R67 W-A",
     shippedIn: "R67 W-A",
   },
   {
