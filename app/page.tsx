@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import Link from "next/link";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
@@ -42,9 +43,8 @@ export default function Home() {
           <h1 className="text-3xl sm:text-5xl font-light leading-[1.08] tracking-tight text-bone">
             不靠直覺,<span className="text-gold">只看演算法。</span>
           </h1>
-          <p className="mt-4 sm:mt-5 max-w-2xl mx-auto text-mute leading-relaxed text-sm sm:text-base">
-            台灣 CPBL 預測市場 · 引擎免費跑 1 萬次給你看 · 群眾一起押 · 準的爬上天梯。{" "}
-            <span className="text-bone">不藏結果 · 不抽下注 · 不收明牌費。</span>
+          <p className="mt-4 sm:mt-5 max-w-xl mx-auto text-mute leading-relaxed text-base sm:text-lg">
+            免費跑一萬次 · <span className="text-bone">告訴你誰會贏。</span>
           </p>
 
           {/* 引擎戰績 · Pratfall「連輸的也掛」· compact · 永遠不刪 */}
@@ -91,12 +91,10 @@ export default function Home() {
             </div>
           ) : recentReceipts.length > 0 ? (
             <>
-              <p className="mb-5 text-mute text-sm leading-relaxed">
-                季外 / 休賽日 · 現在沒有可押的賽事。 這是引擎最近{" "}
-                {recentReceipts.length} 場的公開判決 —{" "}
-                <span className="text-gold">✓ 言中</span> 跟{" "}
-                <span className="text-loss">✕ 落空</span>{" "}
-                一樣掛上來,從不藏。
+              <p className="mb-5 text-mute/85 text-sm leading-relaxed">
+                休賽日 · 看引擎最近的判決 ·{" "}
+                <span className="text-gold">✓ 中</span> /{" "}
+                <span className="text-loss">✕ 沒中</span> 都掛,不藏。
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 {recentReceipts.map((m) => (
@@ -109,76 +107,37 @@ export default function Home() {
           )}
         </section>
 
-        {/* ── 怎麼玩 · 引擎免費 · 你來較勁 ──────────────── */}
+        {/* ── 三步玩法 · 圖示卡(child-level · 圖取代字)──── */}
         <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-14 border-t border-line/40 pt-12">
           <p
             lang="en"
-            className="font-mono text-gold text-[10px] sm:text-[11px] tracking-[0.45em] mb-5"
+            className="font-mono text-gold text-[10px] sm:text-[11px] tracking-[0.45em] mb-6"
           >
-            / 怎麼玩 · 引擎免費 · 你來較勁
+            / 三步玩法
           </p>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            <PlayCard
-              href="/ladder"
-              tag="海選天梯"
-              body="誰最準 · 從新秀爬到神諭 · 樣本加權排名。"
-              live
-            />
-            <PlayCard
-              href="/matches"
-              tag="看法 · 分析"
-              body="每場留看法、寫分析、選一邊 · 賽後自動評準度(刪不掉)。"
-              live
-            />
-            <PlayCard
-              href="/calibration"
-              tag="引擎自評"
-              body="引擎準不準 · 公開打分 · 連 over-confidence 都列。"
-              live
-            />
+          <div className="grid grid-cols-3 gap-3 sm:gap-4">
+            <IconCard href="/matches" title="押一邊" sub="選你看好的隊" icon={<BetIcon />} />
+            <IconCard href="/ladder" title="爬天梯" sub="準的往上爬" icon={<LadderIcon />} />
+            <IconCard href="/calibration" title="看準度" sub="引擎準不準公開" icon={<TargetIcon />} />
           </div>
-          <p className="mt-4 font-mono text-mute/60 text-[10px] tracking-[0.25em] leading-relaxed">
-            ▸ 發分析免費開放中 · 賽後自動掛準度(刪不掉)· 賣文章抽 5–10% 即將開放 ·{" "}
-            <Link
-              href="/matches"
-              className="text-gold/70 hover:text-gold transition-colors"
-            >
-              挑一場開講 →
-            </Link>
-          </p>
         </section>
 
-        {/* ── F6 negations(Pratfall · 永遠不刪)+ founders + 靈魂 ── */}
+        {/* ── 信任 chips(✓ 取代一串字)+ founders ───────── */}
         <section className="mx-auto max-w-3xl px-6 sm:px-10 pb-16 text-center border-t border-line/40 pt-10">
-          <p className="font-mono text-mute/85 text-[11px] sm:text-xs tracking-[0.18em] leading-relaxed">
-            <span className="text-bone">不藏 DIVERGED</span>
-            <span aria-hidden="true" className="text-mute/50 mx-2">·</span>
-            <span className="text-bone">不抽下注分成</span>
-            <span aria-hidden="true" className="text-mute/50 mx-2">·</span>
-            <Link
-              href="/learn#why-not-gambling"
-              className="text-bone underline decoration-mute/40 underline-offset-4 hover:decoration-gold hover:text-gold transition-colors"
-            >
-              不分潤博彩
-            </Link>
-            <span aria-hidden="true" className="text-mute/50 mx-2">·</span>
-            <span className="text-bone">不追蹤您</span>
-            <span aria-hidden="true" className="text-mute/50 mx-2">·</span>
-            <span className="text-gold">不自動續扣</span>
-          </p>
-          <p className="mt-5 flex flex-wrap items-center justify-center gap-3 font-mono text-[10px] sm:text-[11px] tracking-[0.3em]">
+          <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-2.5">
+            <PromiseChip>引擎免費</PromiseChip>
+            <PromiseChip>不抽下注</PromiseChip>
+            <PromiseChip>不收明牌費</PromiseChip>
+            <PromiseChip>不自動續扣</PromiseChip>
+            <PromiseChip>不藏輸的</PromiseChip>
+          </div>
+          <p className="mt-6 flex flex-wrap items-center justify-center gap-3 font-mono text-[10px] tracking-[0.3em]">
             <Link href="/audit" className="text-gold/80 hover:text-gold transition-colors">
               完整 audit →
             </Link>
             <span aria-hidden="true" className="text-mute/40">·</span>
             <Link href="/founders" className="text-mute hover:text-gold transition-colors">
-              FOUNDERS 27 · NT$ 2,700/年 →
-            </Link>
-          </p>
-          <p className="mt-5 font-mono text-mute/60 text-[9px] tracking-[0.3em]">
-            —{" "}
-            <Link href="/about" className="hover:text-gold transition-colors">
-              TIM · CPBL 球迷 27 年
+              FOUNDERS 27 →
             </Link>
           </p>
         </section>
@@ -191,36 +150,99 @@ export default function Home() {
 
 // ── Sub-components ─────────────────────────────────────
 
-function PlayCard({
+// 三步玩法的圖示卡 · 圖 + 兩三個字 · 不放句子(child-level glance)
+function IconCard({
   href,
-  tag,
-  body,
-  live,
+  title,
+  sub,
+  icon,
 }: {
   href: string;
-  tag: string;
-  body: string;
-  live?: boolean;
+  title: string;
+  sub: string;
+  icon: ReactNode;
 }) {
   return (
     <Link
       href={href}
-      className="block p-4 sm:p-5 border border-line/60 bg-slate/30 hover:border-gold/50 hover:bg-slate/40 transition-colors group"
+      className="flex flex-col items-center text-center gap-2 p-3 sm:p-5 border border-line/60 bg-slate/30 hover:border-gold/50 hover:bg-slate/40 transition-colors group"
     >
-      <div className="flex items-baseline justify-between gap-2 mb-2">
-        <span className="text-bone text-base font-light tracking-tight group-hover:text-gold transition-colors">
-          {tag}
-        </span>
-        <span
-          className={`font-mono text-[8px] tracking-[0.25em] px-1.5 py-0.5 border ${
-            live ? "border-gold/50 text-gold" : "border-mute/40 text-mute/70"
-          }`}
-        >
-          {live ? "LIVE" : "即將"}
-        </span>
-      </div>
-      <p className="text-mute text-xs sm:text-sm leading-relaxed">{body}</p>
+      <span className="text-gold/80 group-hover:text-gold transition-colors">
+        {icon}
+      </span>
+      <span className="text-bone text-sm sm:text-base font-light tracking-tight leading-snug">
+        {title}
+      </span>
+      <span className="text-mute/70 text-[10px] sm:text-xs leading-tight">
+        {sub}
+      </span>
     </Link>
+  );
+}
+
+// 信任承諾 chip · ✓ + 短詞 · 取代一整串「不…不…不…」
+function PromiseChip({ children }: { children: ReactNode }) {
+  return (
+    <span className="inline-flex items-center gap-1 border border-gold/25 bg-gold/5 px-2.5 py-1 text-[11px] sm:text-xs tracking-wide text-bone/90">
+      <span aria-hidden="true" className="text-gold text-[10px]">
+        ✓
+      </span>
+      {children}
+    </span>
+  );
+}
+
+// ── 乾淨幾何線圖示(非可愛 emoji · 守品牌:量化分析師不是博彩公司)──
+function BetIcon() {
+  return (
+    <svg
+      width="30"
+      height="30"
+      viewBox="0 0 32 32"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      aria-hidden="true"
+    >
+      <rect x="3" y="12" width="26" height="8" rx="4" />
+      <line x1="16" y1="9" x2="16" y2="23" />
+    </svg>
+  );
+}
+
+function LadderIcon() {
+  return (
+    <svg
+      width="30"
+      height="30"
+      viewBox="0 0 32 32"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinejoin="round"
+      strokeLinecap="round"
+      aria-hidden="true"
+    >
+      <path d="M4 27 h6 v-6 h6 v-6 h6 v-6 h4" />
+    </svg>
+  );
+}
+
+function TargetIcon() {
+  return (
+    <svg
+      width="30"
+      height="30"
+      viewBox="0 0 32 32"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      aria-hidden="true"
+    >
+      <circle cx="16" cy="16" r="11" />
+      <circle cx="16" cy="16" r="5.5" />
+      <circle cx="16" cy="16" r="1.5" fill="currentColor" stroke="none" />
+    </svg>
   );
 }
 
