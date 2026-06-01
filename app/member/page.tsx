@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
+import WalletPanel from "@/components/WalletPanel";
 import { getSession } from "@/lib/supabase/server";
 import { aggregatePredictionStats } from "@/lib/predictions";
 import { getMyPredictionsMap } from "@/lib/predictions-server";
@@ -141,6 +142,9 @@ export default async function MemberPage() {
             </>
           )}
         </section>
+
+        {/* 點數錢包 · 儲值 → 買付費分析(0009)*/}
+        <WalletPanel />
 
         {/* 3 · 今晚可以押 ───────────────────────────── */}
         <section className="mt-6">

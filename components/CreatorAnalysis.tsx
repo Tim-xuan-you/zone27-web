@@ -20,22 +20,7 @@ import {
   tierLabel,
   type MemberTier,
 } from "@/lib/tier";
-
-// 買付費分析 = 手動(同會員轉帳模式)· 讀者 email Tim → 轉帳 → Tim 在 Studio
-// 記一筆 creator_purchases → 刷新解鎖。 0 自動金流 · 0 公司必要(小規模)。
-function buildBuyHref(opts: {
-  matchId: string;
-  handle: string;
-  postId: string;
-  title: string;
-  price: number;
-}): string {
-  const subject = `我要買付費分析 · NT$ ${opts.price}`;
-  const body = `Tim 好,\n\n我想買這篇付費分析:\n· 賽事:${opts.matchId}\n· 作者:${opts.handle}\n· 標題:${opts.title}\n· 金額:NT$ ${opts.price}\n· 文章編號:${opts.postId}\n\n請給我轉帳帳號,轉帳後幫我解鎖。謝謝。`;
-  return `mailto:tatayngiti@gmail.com?subject=${encodeURIComponent(
-    subject
-  )}&body=${encodeURIComponent(body)}`;
-}
+import { getWalletBalance, buyCreatorPost, type BuyResult } from "@/lib/wallet";
 
 // ── ZONE 27 · CreatorAnalysis · 創作者賣分析(migration 0005)──────
 // Tim 2026-05-30 報馬仔/明燈 screenshot · 要:發文 + 推薦賽事(選邊)+ 寫分析 +
@@ -78,6 +63,7 @@ export default function CreatorAnalysis({
   const [error, setError] = useState<string | null>(null);
   const [tier, setTier] = useState<MemberTier>("free"); // 付費會員才能標價賣
   const [price, setPrice] = useState(0); // NT$ · 0 = 免費發
+  const [balance, setBalance] = useState(0); // 錢包餘額(NT$ · 1 點 = NT$1)
 
   useEffect(() => {
     let cancelled = false;
@@ -101,6 +87,9 @@ export default function CreatorAnalysis({
         setTier(
           readTier(user.user_metadata as Record<string, unknown> | undefined)
         );
+        getWalletBalance().then((b) => {
+          if (!cancelled) setBalance(b);
+        });
         const my = await getMyCreatorPost(matchId);
         if (cancelled) return;
         if (my) {
@@ -146,6 +135,19 @@ export default function CreatorAnalysis({
     setSaving(false);
   };
 
+  // 用點數買付費分析(原子扣款 · 成功 → 重抓 posts 解鎖 + 更新餘額)
+  const handleBuy = async (postId: string): Promise<BuyResult> => {
+    const res = await buyCreatorPost(postId);
+    if (res.ok) {
+      setBalance(res.balance);
+      const list = await getCreatorPosts(matchId);
+      setPosts(list);
+    } else if (res.reason === "insufficient") {
+      setBalance(res.balance);
+    }
+    return res;
+  };
+
   return (
     <section
       aria-label="創作者分析 · 發表分析 · 選邊 · 賽後自動評準度"
@@ -172,11 +174,13 @@ export default function CreatorAnalysis({
             <PostCard
               key={`${p.handle}-${i}`}
               post={p}
-              matchId={matchId}
               homeName={homeName}
               awayName={awayName}
               finalWinner={finalWinner}
               record={records[p.handle]}
+              loggedIn={status === "open" || status === "posted"}
+              balance={balance}
+              onBuy={handleBuy}
             />
           ))}
         </div>
@@ -313,22 +317,48 @@ export default function CreatorAnalysis({
 
 function PostCard({
   post: p,
-  matchId,
   homeName,
   awayName,
   finalWinner,
   record,
+  loggedIn,
+  balance,
+  onBuy,
 }: {
   post: CreatorPost;
-  matchId: string;
   homeName: string;
   awayName: string;
   finalWinner?: "home" | "away" | "tie" | null;
   record?: AuthorRecord;
+  loggedIn: boolean;
+  balance: number;
+  onBuy: (postId: string) => Promise<BuyResult>;
 }) {
   const pickName = p.pick === "home" ? homeName : awayName;
   const graded = finalWinner && finalWinner !== "tie";
   const correct = graded && p.pick === finalWinner;
+  const [buying, setBuying] = useState(false);
+  const [buyMsg, setBuyMsg] = useState<string | null>(null);
+  const [insufficient, setInsufficient] = useState(false);
+
+  const doBuy = async () => {
+    setBuying(true);
+    setBuyMsg(null);
+    setInsufficient(false);
+    const res = await onBuy(p.postId);
+    if (!res.ok) {
+      if (res.reason === "insufficient") {
+        setInsufficient(true);
+        setBuyMsg(`餘額不足(餘額 NT$ ${res.balance})`);
+      } else if (res.reason === "not_logged_in") {
+        setBuyMsg("請先登入");
+      } else {
+        setBuyMsg("購買失敗 · 請重試");
+      }
+    }
+    // ok → 父層 re-fetch posts → 本卡重繪成已解鎖
+    setBuying(false);
+  };
 
   return (
     <article className="p-4 sm:p-5 border border-line/60 bg-slate/30">
@@ -362,20 +392,49 @@ function PostCard({
           <p className="font-mono text-mute/70 text-[10px] tracking-[0.12em] leading-relaxed mb-3">
             標題 + 推薦哪一邊免費看 · 完整內文買了才解鎖。 賽後一樣自動掛準度(賣家賴不掉)。
           </p>
-          <a
-            href={buildBuyHref({
-              matchId,
-              handle: p.handle,
-              postId: p.postId,
-              title: p.title,
-              price: p.priceNtd,
-            })}
-            className="inline-block px-4 py-2 bg-gold text-navy font-mono text-[10px] tracking-[0.25em] hover:bg-gold-soft transition-colors"
-          >
-            買 NT$ {p.priceNtd} · 轉帳解鎖 →
-          </a>
+          {loggedIn ? (
+            <>
+              <button
+                type="button"
+                onClick={doBuy}
+                disabled={buying}
+                className="inline-block px-4 py-2 bg-gold text-navy font-mono text-[10px] tracking-[0.25em] hover:bg-gold-soft transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {buying ? "購買中..." : `用點數買 NT$ ${p.priceNtd}`}
+              </button>
+              <span className="ml-2 font-mono text-mute/60 text-[10px] tracking-[0.15em]">
+                餘額 NT$ {balance}
+              </span>
+              {buyMsg && (
+                <p
+                  role="alert"
+                  className="mt-2 font-mono text-loss/85 text-[10px] tracking-[0.15em] leading-relaxed"
+                >
+                  {buyMsg}
+                  {insufficient && (
+                    <>
+                      {" · "}
+                      <Link
+                        href="/member"
+                        className="text-gold underline-offset-4 hover:underline"
+                      >
+                        去儲值 →
+                      </Link>
+                    </>
+                  )}
+                </p>
+              )}
+            </>
+          ) : (
+            <Link
+              href="/login"
+              className="inline-block px-4 py-2 bg-gold text-navy font-mono text-[10px] tracking-[0.25em] hover:bg-gold-soft transition-colors"
+            >
+              登入後用點數買 →
+            </Link>
+          )}
           <p className="mt-2 font-mono text-mute/50 text-[9px] tracking-[0.15em] leading-relaxed">
-            手動轉帳 · 0 自動扣款 · 付款確認後解鎖。
+            點數買 · 0 自動扣款 · 買了立即解鎖。
           </p>
         </div>
       ) : (
