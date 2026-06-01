@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import MiniMatchCard from "@/components/MiniMatchCard";
 import {
   getTodayAndFutureMatches,
+  getFinalizedMatches,
   getTrackRecordStats,
 } from "@/lib/matches";
 
@@ -23,6 +24,11 @@ export const revalidate = 600; // ISR · 賽事 lifecycle transitions
 
 export default function Home() {
   const upcoming = getTodayAndFutureMatches(); // 今晚 + 即將 · asc
+  // 休賽日 fallback · 看板永不空白:沒有可押賽事時,改放引擎最近的賽後
+  // 收據(✓言中 / ✕落空都掛)· per getFeaturedMatch 哲學「引擎沒在跑時,
+  // proof-of-work(收據)勝過空泛的未來預測 = 轉換槓桿」。 6 場上限。
+  const recentReceipts =
+    upcoming.length === 0 ? getFinalizedMatches().slice(0, 6) : [];
   const tr = getTrackRecordStats();
 
   return (
@@ -58,20 +64,22 @@ export default function Home() {
           )}
         </section>
 
-        {/* ── THE FLOOR · 市場看板(每場 = 一張市場卡)──── */}
+        {/* ── THE FLOOR · 市場看板 / 賽後收據(休賽日 fallback)──── */}
         <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-14">
           <div className="flex items-baseline justify-between gap-3 mb-5 flex-wrap">
             <p
               lang="en"
               className="font-mono text-gold text-[10px] sm:text-[11px] tracking-[0.45em]"
             >
-              / 市場看板 · 今晚 / 即將
+              {upcoming.length > 0
+                ? "/ 市場看板 · 今晚 / 即將"
+                : "/ 引擎最近戰績 · 賽後收據"}
             </p>
             <Link
-              href="/matches"
+              href={upcoming.length > 0 ? "/matches" : "/track-record"}
               className="font-mono text-mute/70 hover:text-gold text-[10px] tracking-[0.3em] transition-colors"
             >
-              全部賽事 →
+              {upcoming.length > 0 ? "全部賽事 →" : "完整戰績 →"}
             </Link>
           </div>
           {upcoming.length > 0 ? (
@@ -80,6 +88,21 @@ export default function Home() {
                 <MiniMatchCard key={m.id} match={m} />
               ))}
             </div>
+          ) : recentReceipts.length > 0 ? (
+            <>
+              <p className="mb-5 text-mute text-sm leading-relaxed">
+                季外 / 休賽日 · 現在沒有可押的賽事。 這是引擎最近{" "}
+                {recentReceipts.length} 場的公開判決 —{" "}
+                <span className="text-gold">✓ 言中</span> 跟{" "}
+                <span className="text-loss">✕ 落空</span>{" "}
+                一樣掛上來,從不藏。
+              </p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                {recentReceipts.map((m) => (
+                  <MiniMatchCard key={m.id} match={m} />
+                ))}
+              </div>
+            </>
           ) : (
             <EmptyFloor />
           )}

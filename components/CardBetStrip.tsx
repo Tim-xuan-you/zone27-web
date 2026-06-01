@@ -80,7 +80,7 @@ export default function CardBetStrip({ matchId, homeName, awayName }: Props) {
 
   return (
     <div className="mt-3 pt-3 border-t border-gold/15">
-      {/* 群眾市場線 · 只在有人進場時顯示(冷啟動不佔空間)*/}
+      {/* 群眾市場線 · 有人進場時顯示 */}
       {tally && tally.total > 0 && tally.homePct !== null && (
         <div
           role="img"
@@ -104,6 +104,14 @@ export default function CardBetStrip({ matchId, homeName, awayName }: Props) {
             />
           </div>
         </div>
+      )}
+
+      {/* 冷啟動鉤子 · 還沒人押時,把空盤翻成「第一手是你的」邀請(IKEA /
+          first-mover)· 只在可押(open)時出現 · anonymous 由下方登入 CTA 接手 */}
+      {tally && tally.total === 0 && status === "open" && (
+        <p className="mb-2 font-mono text-gold/70 text-[9px] tracking-[0.2em]">
+          還沒人押這場 · 第一手是你的 ▸
+        </p>
       )}
 
       {/* 一鍵押 */}
