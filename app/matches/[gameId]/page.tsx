@@ -18,6 +18,7 @@ import {
   getCalibration,
   getEnginePctOnWinner,
   getTodayMatches,
+  getFinalizedMatches,
   type Match,
   type MatchPhase,
   type Calibration,
@@ -271,6 +272,12 @@ export default async function MatchDetailPage({
             homeName={m.home.name}
             awayName={m.away.name}
             finalWinner={m.finalResult?.winner ?? null}
+            finalResults={Object.fromEntries(
+              getFinalizedMatches().map((fm) => [
+                fm.id,
+                fm.finalResult!.winner,
+              ])
+            )}
           />
         </div>
 

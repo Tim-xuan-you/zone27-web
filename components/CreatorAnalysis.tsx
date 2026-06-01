@@ -7,7 +7,10 @@ import {
   getCreatorPosts,
   getMyCreatorPost,
   submitCreatorPost,
+  getCreatorRecords,
+  gradeAuthorRecords,
   type CreatorPost,
+  type AuthorRecord,
 } from "@/lib/creator-posts";
 
 // ── ZONE 27 · CreatorAnalysis · 創作者賣分析(migration 0005)──────
@@ -30,6 +33,8 @@ type Props = {
   homeName: string;
   awayName: string;
   finalWinner?: "home" | "away" | "tie" | null;
+  /** 全站已結算賽果 map · 給作者戰績 badge 評分用(賽果在 app 端 · 不在 DB)*/
+  finalResults?: Record<string, "home" | "away" | "tie">;
 };
 
 export default function CreatorAnalysis({
@@ -37,9 +42,11 @@ export default function CreatorAnalysis({
   homeName,
   awayName,
   finalWinner,
+  finalResults = {},
 }: Props) {
   const [status, setStatus] = useState<Status>("loading");
   const [posts, setPosts] = useState<CreatorPost[]>([]);
+  const [records, setRecords] = useState<Record<string, AuthorRecord>>({});
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   const [pick, setPick] = useState<"home" | "away" | null>(null);
@@ -51,6 +58,10 @@ export default function CreatorAnalysis({
     (async () => {
       const list = await getCreatorPosts(matchId);
       if (!cancelled) setPosts(list);
+      // 作者公開戰績 · 撈全站選邊紀錄 → 對賽果評分 → 每位作者命中率(badge 用)
+      getCreatorRecords().then((rows) => {
+        if (!cancelled) setRecords(gradeAuthorRecords(rows, finalResults));
+      });
       try {
         const supabase = createSupabaseBrowserClient();
         const {
@@ -109,12 +120,18 @@ export default function CreatorAnalysis({
       className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-8 border-t border-line/40 pt-8"
       id="creator-analysis"
     >
-      <div className="flex items-baseline gap-3 mb-4 flex-wrap">
+      <div className="flex items-baseline gap-3 mb-2 flex-wrap">
         <p className="font-mono text-gold text-[9px] tracking-[0.4em]">/ 看法 · 分析</p>
         <span className="font-mono text-mute/55 text-[9px] tracking-[0.25em]">
           {posts.length} 篇 · 選一邊 · 賽後自動評準度
         </span>
       </div>
+      {/* displacement weapon · 報馬仔挑好看的窗 + 輸了刪文;這裡賽前鎖、賽後
+          自動評、連輸的都掛、刪不掉 = 作者賴不掉的戰績 = 讀者敢信。 */}
+      <p className="mb-5 text-mute/85 text-[13px] leading-relaxed max-w-2xl">
+        每位作者旁邊掛的是<span className="text-bone">真實累積戰績</span> —— 賽前選邊鎖死、賽後自動掛準/不準、
+        <span className="text-gold">連輸的都留著、刪不掉</span>。 不是「近 15 天挑好看的」,是全部。
+      </p>
 
       {/* posts */}
       {posts.length > 0 ? (
@@ -126,6 +143,7 @@ export default function CreatorAnalysis({
               homeName={homeName}
               awayName={awayName}
               finalWinner={finalWinner}
+              record={records[p.handle]}
             />
           ))}
         </div>
@@ -225,11 +243,13 @@ function PostCard({
   homeName,
   awayName,
   finalWinner,
+  record,
 }: {
   post: CreatorPost;
   homeName: string;
   awayName: string;
   finalWinner?: "home" | "away" | "tie" | null;
+  record?: AuthorRecord;
 }) {
   const pickName = p.pick === "home" ? homeName : awayName;
   const graded = finalWinner && finalWinner !== "tie";
@@ -237,7 +257,7 @@ function PostCard({
 
   return (
     <article className="p-4 sm:p-5 border border-line/60 bg-slate/30">
-      <div className="flex items-baseline justify-between gap-3 mb-2 flex-wrap">
+      <div className="flex items-baseline justify-between gap-3 mb-1.5 flex-wrap">
         <span className="flex items-baseline gap-2 flex-wrap">
           <span className="font-mono text-bone text-[11px] tracking-[0.2em]">{p.handle}</span>
           <span className="font-mono text-gold/80 text-[9px] tracking-[0.2em] px-1.5 py-0.5 border border-gold/40">
@@ -254,6 +274,10 @@ function PostCard({
           </span>
         )}
       </div>
+
+      {/* 作者公開戰績 badge · 玩運彩「近 N 過 Y」的誠實版(全撈 · 連輸的都算)*/}
+      <AuthorBadge record={record} />
+
       <h4 className="text-bone text-base font-light tracking-tight mb-1.5">{p.title}</h4>
       {p.priceNtd > 0 ? (
         <div className="mt-2 border border-gold/30 bg-gold/5 px-3 py-3">
@@ -269,6 +293,48 @@ function PostCard({
         <p className="text-bone/85 text-sm leading-relaxed whitespace-pre-wrap">{p.body}</p>
       )}
     </article>
+  );
+}
+
+// ── 作者戰績 badge · 誠實三態 ────────────────────────────
+// 新分析師(0 結算)/ 累積中(1-9)/ 已上天梯(≥10)。 報馬仔掛「近 16 日
+// 77 過 55」挑窗 + 刪輸的;這裡全撈、連輸的都算 · 賴不掉。
+function AuthorBadge({ record }: { record?: AuthorRecord }) {
+  // 沒戰績(0007 未套用 / 新人 / 還沒結算)→ 誠實「新分析師」
+  if (!record || record.n === 0) {
+    return (
+      <p className="mb-2 font-mono text-mute/60 text-[10px] tracking-[0.15em]">
+        新分析師 · 戰績從這場開始累積 · 賽後自動掛、刪不掉
+      </p>
+    );
+  }
+  const { n, hits, rate, onLadder } = record;
+  const misses = n - hits;
+  if (!onLadder) {
+    // 1-9 場 · 樣本還不夠上天梯 · 不裸吹勝率(同 SAMPLE DEBT 誠實)
+    return (
+      <p className="mb-2 font-mono text-mute/70 text-[10px] tracking-[0.15em]">
+        近 <span className="text-bone tabular">{n}</span> 場 ·{" "}
+        <span className="text-gold/80 tabular">✓{hits}</span>{" "}
+        <span className="text-loss/70 tabular">✕{misses}</span> · 還差{" "}
+        <span className="text-bone tabular">{10 - n}</span> 場上天梯
+      </p>
+    );
+  }
+  // ≥10 場 · 已上海選天梯 · 命中率可掛
+  return (
+    <Link
+      href="/ladder"
+      className="mb-2 inline-flex items-baseline gap-2 flex-wrap font-mono text-[10px] tracking-[0.15em] group"
+    >
+      <span className="text-gold tabular text-[12px] font-medium">{rate}% 準</span>
+      <span className="text-mute/70">
+        近 <span className="text-bone tabular">{n}</span> 場 ·{" "}
+        <span className="text-gold/80 tabular">✓{hits}</span>{" "}
+        <span className="text-loss/70 tabular">✕{misses}</span>
+      </span>
+      <span className="text-gold/70 group-hover:text-gold transition-colors">· 海選天梯 →</span>
+    </Link>
   );
 }
 
