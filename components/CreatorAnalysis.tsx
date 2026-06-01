@@ -12,6 +12,30 @@ import {
   type CreatorPost,
   type AuthorRecord,
 } from "@/lib/creator-posts";
+import {
+  readTier,
+  isPaid as isPaidTier,
+  creatorTakePct,
+  creatorFeePct,
+  tierLabel,
+  type MemberTier,
+} from "@/lib/tier";
+
+// 買付費分析 = 手動(同會員轉帳模式)· 讀者 email Tim → 轉帳 → Tim 在 Studio
+// 記一筆 creator_purchases → 刷新解鎖。 0 自動金流 · 0 公司必要(小規模)。
+function buildBuyHref(opts: {
+  matchId: string;
+  handle: string;
+  postId: string;
+  title: string;
+  price: number;
+}): string {
+  const subject = `我要買付費分析 · NT$ ${opts.price}`;
+  const body = `Tim 好,\n\n我想買這篇付費分析:\n· 賽事:${opts.matchId}\n· 作者:${opts.handle}\n· 標題:${opts.title}\n· 金額:NT$ ${opts.price}\n· 文章編號:${opts.postId}\n\n請給我轉帳帳號,轉帳後幫我解鎖。謝謝。`;
+  return `mailto:tatayngiti@gmail.com?subject=${encodeURIComponent(
+    subject
+  )}&body=${encodeURIComponent(body)}`;
+}
 
 // ── ZONE 27 · CreatorAnalysis · 創作者賣分析(migration 0005)──────
 // Tim 2026-05-30 報馬仔/明燈 screenshot · 要:發文 + 推薦賽事(選邊)+ 寫分析 +
@@ -52,6 +76,8 @@ export default function CreatorAnalysis({
   const [pick, setPick] = useState<"home" | "away" | null>(null);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [tier, setTier] = useState<MemberTier>("free"); // 付費會員才能標價賣
+  const [price, setPrice] = useState(0); // NT$ · 0 = 免費發
 
   useEffect(() => {
     let cancelled = false;
@@ -72,6 +98,9 @@ export default function CreatorAnalysis({
           setStatus("anonymous");
           return;
         }
+        setTier(
+          readTier(user.user_metadata as Record<string, unknown> | undefined)
+        );
         const my = await getMyCreatorPost(matchId);
         if (cancelled) return;
         if (my) {
@@ -94,12 +123,15 @@ export default function CreatorAnalysis({
     if (!t || !b || !pick) return;
     setSaving(true);
     setError(null);
-    const res = await submitCreatorPost(matchId, t, b, pick, 0);
+    // 付費會員才可標價(price>0)· 免費會員一律免費發(price 0)
+    const sellPrice = isPaidTier(tier) ? Math.max(0, Math.round(price)) : 0;
+    const res = await submitCreatorPost(matchId, t, b, pick, sellPrice);
     if (res.ok) {
       setStatus("posted");
       setTitle("");
       setBody("");
       setPick(null);
+      setPrice(0);
       const list = await getCreatorPosts(matchId);
       setPosts(list);
     } else if (res.reason === "already_posted") {
@@ -140,6 +172,7 @@ export default function CreatorAnalysis({
             <PostCard
               key={`${p.handle}-${i}`}
               post={p}
+              matchId={matchId}
               homeName={homeName}
               awayName={awayName}
               finalWinner={finalWinner}
@@ -196,12 +229,52 @@ export default function CreatorAnalysis({
               <PickBtn label={`押 ${homeName.slice(0, 5)}`} active={pick === "home"} onClick={() => setPick("home")} />
               <PickBtn label={`押 ${awayName.slice(0, 5)}`} active={pick === "away"} onClick={() => setPick("away")} />
             </div>
-            {/* v1 = 免費發(migration 0005)。「標價賣分析」的購買金流是 Phase 2 ·
-                上線前不放假的標價輸入 — 避免「設了價卻沒人買得了」的假 UX。 */}
-            <p className="border-t border-line/40 pt-3 font-mono text-mute/60 text-[10px] tracking-[0.12em] leading-relaxed">
-              ▸ 先免費發 · 賽後自動掛準度(刪不掉)·{" "}
-              <span className="text-gold/80">標價賣分析變現即將開放</span>。
-            </p>
+            {/* 標價賣分析:付費會員可標價(你拿 90-95%)· 免費會員只能免費發 + 升級提示。
+                買了才解鎖(migration 0008 · server 端 gate body)= 賣得出去的前提。 */}
+            {isPaidTier(tier) ? (
+              <div className="border-t border-line/40 pt-3 space-y-2">
+                <div className="flex items-center gap-2 flex-wrap">
+                  <label className="font-mono text-mute/70 text-[10px] tracking-[0.2em]">
+                    標價賣(NT$ · 0 = 免費):
+                  </label>
+                  <input
+                    type="number"
+                    min={0}
+                    max={2000}
+                    value={price || ""}
+                    onChange={(e) => setPrice(Number(e.target.value) || 0)}
+                    placeholder="0"
+                    className="w-24 bg-ink/60 border border-line/70 text-bone px-2 py-1.5 outline-none focus:border-gold/60 font-mono text-sm tabular transition-colors"
+                  />
+                </div>
+                {price > 0 ? (
+                  <p className="font-mono text-mute/70 text-[10px] tracking-[0.12em] leading-relaxed">
+                    ▸ 標題 + 推薦邊公開 · 完整內文買了才看得到(防免費複製)· 賣出 NT$ {price} · 你拿{" "}
+                    <span className="text-gold tabular">
+                      {Math.round((price * creatorTakePct(tier)) / 100)}
+                    </span>{" "}
+                    元(<span className="text-gold">{creatorTakePct(tier)}%</span> · 平台抽{" "}
+                    {creatorFeePct(tier)}%)· 賽後一樣自動掛準度。
+                  </p>
+                ) : (
+                  <p className="font-mono text-mute/60 text-[10px] tracking-[0.12em] leading-relaxed">
+                    ▸ 0 = 免費發 · 填金額即變付費分析(你是 {tierLabel(tier)} · 抽成{" "}
+                    {creatorFeePct(tier)}%)。
+                  </p>
+                )}
+              </div>
+            ) : (
+              <p className="border-t border-line/40 pt-3 font-mono text-mute/60 text-[10px] tracking-[0.12em] leading-relaxed">
+                ▸ 先免費發 · 賽後自動掛準度(刪不掉)。 想
+                <span className="text-gold/80">標價賣分析變現</span>?{" "}
+                <Link
+                  href="/membership"
+                  className="text-gold underline-offset-4 hover:underline"
+                >
+                  升級會員 →
+                </Link>
+              </p>
+            )}
             <div className="flex items-center justify-between gap-3 flex-wrap">
               <span className="font-mono text-mute/55 text-[10px] tracking-[0.2em] tabular">
                 {title.trim().length}/{T_MAX} · {body.trim().length}/{B_MAX}
@@ -240,12 +313,14 @@ export default function CreatorAnalysis({
 
 function PostCard({
   post: p,
+  matchId,
   homeName,
   awayName,
   finalWinner,
   record,
 }: {
   post: CreatorPost;
+  matchId: string;
   homeName: string;
   awayName: string;
   finalWinner?: "home" | "away" | "tie" | null;
@@ -279,18 +354,41 @@ function PostCard({
       <AuthorBadge record={record} />
 
       <h4 className="text-bone text-base font-light tracking-tight mb-1.5">{p.title}</h4>
-      {p.priceNtd > 0 ? (
+      {p.isPaid && !p.purchased ? (
         <div className="mt-2 border border-gold/30 bg-gold/5 px-3 py-3">
           <p className="font-mono text-gold/90 text-[11px] tracking-[0.2em] mb-1">
-            🔒 付費分析 · NT$ {p.priceNtd}
+            🔒 完整分析 · NT$ {p.priceNtd}
           </p>
-          <p className="font-mono text-mute/70 text-[10px] tracking-[0.12em] leading-relaxed">
-            標題 + 推薦邊免費看 · 完整分析購買後解鎖。 賽後一樣自動掛準度(賣家賴不掉)。{" "}
-            <span className="text-mute/50">手動轉帳購買即將開放。</span>
+          <p className="font-mono text-mute/70 text-[10px] tracking-[0.12em] leading-relaxed mb-3">
+            標題 + 推薦哪一邊免費看 · 完整內文買了才解鎖。 賽後一樣自動掛準度(賣家賴不掉)。
+          </p>
+          <a
+            href={buildBuyHref({
+              matchId,
+              handle: p.handle,
+              postId: p.postId,
+              title: p.title,
+              price: p.priceNtd,
+            })}
+            className="inline-block px-4 py-2 bg-gold text-navy font-mono text-[10px] tracking-[0.25em] hover:bg-gold-soft transition-colors"
+          >
+            買 NT$ {p.priceNtd} · 轉帳解鎖 →
+          </a>
+          <p className="mt-2 font-mono text-mute/50 text-[9px] tracking-[0.15em] leading-relaxed">
+            手動轉帳 · 0 自動扣款 · 付款確認後解鎖。
           </p>
         </div>
       ) : (
-        <p className="text-bone/85 text-sm leading-relaxed whitespace-pre-wrap">{p.body}</p>
+        <>
+          {p.isPaid && p.purchased && (
+            <p className="mb-1.5 font-mono text-gold/80 text-[9px] tracking-[0.25em]">
+              ✓ 已購買 · 已解鎖
+            </p>
+          )}
+          <p className="text-bone/85 text-sm leading-relaxed whitespace-pre-wrap">
+            {p.body}
+          </p>
+        </>
       )}
     </article>
   );

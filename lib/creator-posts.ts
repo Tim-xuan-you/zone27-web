@@ -14,15 +14,19 @@
 import { createSupabaseBrowserClient } from "@/lib/supabase/browser";
 
 export type CreatorPost = {
+  postId: string; // 0008+ · 付費購買用 · 舊 RPC 無 → ""
   handle: string; // 「球迷 #XXXX」· 0 PII
   title: string;
-  body: string;
+  body: string; // 付費未購 → ""(0008 server 端 gate · body 不進 payload)
   pick: "home" | "away";
   priceNtd: number; // 0 = 免費
+  isPaid: boolean; // priceNtd > 0
+  purchased: boolean; // 本人已購 / 免費 / 作者本人
   createdAt: string; // ISO
 };
 
-/** Creator analyses for a match (anon-readable). Empty array on any error. */
+/** Creator analyses for a match (anon-readable). Empty array on any error.
+ *  0008 後:付費未購的 body server 端不回(防免費複製)· 標題+推薦邊+badge 仍公開。 */
 export async function getCreatorPosts(matchId: string): Promise<CreatorPost[]> {
   try {
     const supabase = createSupabaseBrowserClient();
@@ -33,24 +37,36 @@ export async function getCreatorPosts(matchId: string): Promise<CreatorPost[]> {
     return data
       .map((row) => {
         const r = row as {
+          post_id?: unknown;
           handle?: unknown;
           title?: unknown;
           body?: unknown;
           pick?: unknown;
           price_ntd?: unknown;
+          is_paid?: unknown;
+          purchased?: unknown;
           created_at?: unknown;
         };
         const pick: "home" | "away" = r.pick === "away" ? "away" : "home";
+        const priceNtd = Number(r.price_ntd) || 0;
+        const isPaid =
+          typeof r.is_paid === "boolean" ? r.is_paid : priceNtd > 0;
         return {
+          postId: typeof r.post_id === "string" ? r.post_id : "",
           handle: typeof r.handle === "string" ? r.handle : "球迷",
           title: typeof r.title === "string" ? r.title : "",
           body: typeof r.body === "string" ? r.body : "",
           pick,
-          priceNtd: Number(r.price_ntd) || 0,
+          priceNtd,
+          isPaid,
+          // 舊 RPC(0008 未套)無 purchased 欄 → 免費文視為已解鎖 · 付費文視為未購(鎖)
+          purchased:
+            typeof r.purchased === "boolean" ? r.purchased : !isPaid,
           createdAt: typeof r.created_at === "string" ? r.created_at : "",
         };
       })
-      .filter((p) => p.title.length > 0 && p.body.length > 0);
+      // 付費未購的 body 是空的 · 不能被這行濾掉(它要以鎖卡呈現)
+      .filter((p) => p.title.length > 0 && (p.body.length > 0 || p.isPaid));
   } catch {
     return [];
   }
