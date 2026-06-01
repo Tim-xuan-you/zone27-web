@@ -482,12 +482,12 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
     {
       href: "/member",
       kicker: "member",
-      title: "回 dashboard · 看 follow / note / calibration",
+      title: "你的儀表板 · 準度 + 點數錢包",
     },
     {
-      href: "/membership#creator-permissions",
+      href: "/membership",
       kicker: "membership",
-      title: "Creator Permissions FAQ · 不同 tier 發文權限",
+      title: "升級會員 · 賣分析抽成 5-10%",
     },
     {
       href: "/now",
