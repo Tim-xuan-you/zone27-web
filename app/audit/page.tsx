@@ -24,7 +24,7 @@ import { createPageMetadata } from "@/lib/page-og";
 export const metadata: Metadata = createPageMetadata({
   title: "Model Report · ZONE 27 Engine Audit",
   description:
-    "完整公開的 model report · 5 sections · 模型描述、使用的輸入、引擎範圍、環境衝擊、揭露哲學。零行銷語言 · Anthropic transparency hub spine 同 axis。",
+    "完整公開的 model report · 5 sections · 模型描述、使用的輸入、引擎範圍、環境衝擊、揭露哲學。零行銷語言。",
   path: "/audit",
 });
 
@@ -215,7 +215,6 @@ export default function AuditPage() {
               >
                 /steelman
               </Link>
-              {" "}· per [[zone27-disclosure-philosophy]] 不藏 weakness axiom
             </p>
             {/* R129 W1 · DELTA-of-CPBL positioning cross-link · per R126 NEW
                 [[feedback-zone27-delta-of-cpbl-positioning]] memory SOP「DO
@@ -610,19 +609,15 @@ export default function AuditPage() {
                   rebrand。
                 </p>
                 <p className="font-mono text-mute/70 text-[10px] tracking-[0.2em] leading-relaxed mt-3">
-                  WHY name it · Schelling 1968 + Small/Loewenstein/Slovic 2007
-                  identifiable victim effect · 抽象「第一筆」 抽不出情感 commitment
-                  · 命名空位 訪客 vested in verifying that promise hold。
+                  第一筆 DIVERGED 會 pin 上 homepage、永遠不刪。
                 </p>
               </div>
               <p className="font-mono text-mute/80 text-[10px] tracking-[0.25em] leading-relaxed mt-3">
-                本規則 binding to engine v0.X 全部版本 · 修改需發 commit at
-                least 30 天前公告於{" "}
+                本規則適用 engine v0.X 全部版本 · 修改需至少 30 天前公告於{" "}
                 <Link href="/changelog" className="text-gold hover:underline underline-offset-4">
                   /changelog
                 </Link>
-                。 Costly Signaling:pre-commit binding 比 post-hoc rationalization
-                strong 100×。
+                。 先講好規則 · 比事後找理由解釋更可信。
               </p>
             </div>
 
@@ -637,21 +632,18 @@ export default function AuditPage() {
                 lang="en"
                 className="font-mono text-loss/85 text-[10px] tracking-[0.35em] mb-2"
               >
-                ⚓ POSTMORTEM 2028 · project-level prospective hindsight
+                ⚓ POSTMORTEM 2028 · 我們可能怎麼失敗
               </p>
               <p className="text-mute text-sm leading-relaxed">
-                此 PRE-COMMIT 處理 engine 第一筆 miss · 但 project 本身也可能
-                die。 ZONE 27 2028-05-26 失敗 obituary(Klein 1998 + HBR 2007
-                prospective hindsight)5 scenarios + early-warning signals +
-                canary fire triggers 公開於{" "}
+                上面那條規則處理引擎第一筆失手 · 但整個 ZONE 27 本身也可能做不
+                下去。 我們先把 5 種可能的失敗情境 + 早期警訊公開在{" "}
                 <Link
                   href="/founders/postmortem-2028"
                   className="text-loss/90 hover:text-loss underline-offset-4 hover:underline"
                 >
                   /founders/postmortem-2028
                 </Link>
-                。 結構性 LINE 老師 / 報馬仔 永遠無法 ship 此 page · 同 axis Costly
-                Signaling 100×。
+                。 願意先公開「自己可能怎麼死」這件事 · 明牌站不會做。
               </p>
             </div>
             <P className="text-mute/70">
@@ -686,15 +678,14 @@ export default function AuditPage() {
 
             <P className="text-mute/70 mt-3">
               <strong className="text-bone">⚓ Drift correction history</strong> ·
-              此表早期 ship 時 keys 3/6 不正確 · 1 fabricated · 1 missing ·
-              dogfood verify 發現 · 立即修正 · per Pratfall「不藏錯」 axiom 公開
-              記在此處 · 不刪 commit history。
+              此表早期上線時 keys 6 個有 3 個不對 · 1 個是捏造的 · 1 個漏掉 ·
+              自己用站時發現、立即修正 · 不藏錯 · 公開記在這裡 · 不刪 commit history。
             </P>
             <P className="text-mute/70">
               <strong className="text-bone">NOT in localStorage</strong>:Match notes
               (per MatchNoteEditor)store in Supabase{" "}
               <code className="font-mono text-bone bg-slate/40 px-1.5 py-0.5 rounded-sm">user_metadata.match_notes</code> · 登入後 sync 到 server-side ·
-              不在 localStorage · 此表不列(brand IP「不藏 · 不假裝」)。
+              不在 localStorage · 此表不列(不藏 · 不假裝)。
               Match follows(per FollowMatchButton)同樣 in user_metadata 不在 localStorage。
             </P>
 
@@ -710,7 +701,7 @@ export default function AuditPage() {
             <P className="text-mute/70">
               修改此 localStorage transparency policy 需 30 天 /changelog 公告 ·
               同 Section 05 PRE-COMMIT pattern · 新 localStorage key 加入時
-              此表必須同步 update · drift = brand IP 自殺。
+              此表必須同步 update · 對不上 = 品牌自殺。
             </P>
           </ReportSection>
 

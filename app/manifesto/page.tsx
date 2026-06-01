@@ -277,11 +277,10 @@ export default function ManifestoPage() {
                 </li>
               </ul>
               <P className="text-mute/70 !mb-0 mt-4 text-sm">
-                BLACK CARD 創作者抽成 10% = platform fee(類 Stripe / Spotify) ·
-                Founders 27 創作者抽成 5%(BLACK CARD 的一半 · 不是 referral kick-back)。
-                前 270 創始編號是 <strong className="text-bone">Costly Signaling</strong> · 不是招募階梯。
-                創始會員是
-                <strong className="text-bone">扛了品牌風險的早期支持者的補償</strong> ·
+                BLACK CARD 創作者抽成 10% 是平台費 ·
+                Founders 27 創作者抽成 5%(BLACK CARD 的一半 · 不是推薦回扣)。
+                前 270 創始編號是
+                <strong className="text-bone">給最早期支持者的永久徽章</strong> · 不是招募階梯 ·
                 不是未來業績的領先指標。
               </P>
             </div>
@@ -532,10 +531,9 @@ export default function ManifestoPage() {
                 </Item>
               </List>
               <P className="text-mute/70">
-                世界級案例驗證這套模式:Patagonia(供應鏈公開 · 品牌身分認同)·
-                Plausible(source code 在 GitHub · 收 $19/月) · Stratechery
-                (內容半免費 · USD $12/月)· Signal(完全開源 · 靠捐款 + 信任活)·
-                The Athletic(比分免費 · 訂閱買編輯品味)。
+                公開做事的方法、把錢收在身分與品味上 — 這套組合不是我們發明的 ·
+                許多把原始碼或內容攤在陽光下的品牌 · 一樣靠信任與認同活得很好。
+                我們只是把它用在台灣棒球上。
               </P>
             </div>
           </section>

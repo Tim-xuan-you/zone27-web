@@ -396,7 +396,7 @@ repeat 10,000 times → aggregate
           </li>
           <li className="flex gap-3 items-baseline">
             <span className="font-mono text-gold/70 text-[10px] tracking-[0.25em]">▸</span>
-            <span className="flex-1">0 hidden secret per-engine · 0「自研理論包裝」 · brand IP「方法公開」 延伸到 engine variant layer</span>
+            <span className="flex-1">每個 engine 都 0 藏私 · 0「自研理論包裝」 ·「方法公開」原則延伸到每個 engine 變體</span>
           </li>
         </ul>
 
@@ -447,9 +447,8 @@ repeat 10,000 times → aggregate
         </p>
 
         <p className="mt-4 text-mute/85 leading-relaxed">
-          類比 Patek Philippe complication 模式 · 不是「越準的錶」 · 是「越多
-          complication」(萬年曆 / 三問報時 / 計時)· ZONE 27 multi-lens
-          同邏輯 · 每 1-2 月 ship 1 new lens · 越多 angle 看比賽。
+          這不是「越準的工具」· 是「越多角度的工具」· 每 1-2 個月 ship 1 個
+          new lens · 讓你能從更多面向看同一場比賽。
         </p>
 
         <p className="mt-6">
@@ -485,7 +484,7 @@ repeat 10,000 times → aggregate
               />
               <LensRow
                 lens="Vibe Check"
-                angle="連勝 / 連敗 streak · 「hot hand fallacy」 (Tversky 1985)"
+                angle="連勝 / 連敗 streak · 提醒你別被「手感正熱」的錯覺帶著走"
                 status="✓ LIVE"
                 statusTone="gold"
                 tier="FREE 預覽 · 將來 BLACK CARD"
@@ -581,15 +580,12 @@ repeat 10,000 times → aggregate
           每個 engine variant 的當下狀態 single-row · 不藏「coming soon」 ·
           不放「Q3 roadmap promises」 · 是{" "}
           <strong className="text-bone">factual single-state per row</strong>。
-          想看本週引擎在做什麼 · 不用 crawl{" "}
+          想看引擎現在在做什麼 · 看{" "}
           <Link href="/methodology/diff" className="text-gold underline-offset-4 hover:underline">
             /methodology/diff
           </Link>{" "}+{" "}
           <Link href="/roadmap" className="text-gold underline-offset-4 hover:underline">
             /roadmap
-          </Link>{" "}+{" "}
-          <Link href="/now" className="text-gold underline-offset-4 hover:underline">
-            /now
           </Link>
           。
         </p>
@@ -703,23 +699,22 @@ repeat 10,000 times → aggregate
               </span>
             </div>
             <p className="text-mute text-sm sm:text-base leading-relaxed">
-              下個 wave candidate 由{" "}
+              下一個要做什麼還沒拍板 · 不是預先承諾的清單。 已經 ship 的東西
+              記在{" "}
               <Link
-                href="/now"
+                href="/changelog"
                 className="text-gold underline-offset-4 hover:underline"
               >
-                /now
-              </Link>{" "}
-              SHIPPED journal driving · NOT pre-committed list · /roadmap
-              LOCKED 段是 long-arc commitments · /now UNRESOLVED 段是
-              candidate dry-dock。 看{" "}
+                /changelog
+              </Link>
+              · 長期方向看{" "}
               <Link
                 href="/roadmap"
                 className="text-gold underline-offset-4 hover:underline"
               >
                 /roadmap
-              </Link>{" "}
-              + /now 跨 reference 來推斷。
+              </Link>
+              。
             </p>
           </li>
         </ol>
@@ -746,15 +741,13 @@ repeat 10,000 times → aggregate
             我們{" "}<span className="text-gold">deprecate + version</span>。
           </p>
           <p className="text-mute leading-relaxed text-base mb-4">
-            Patek Philippe「自 1839 服務每一隻 Patek」 ·{" "}
             <span className="text-bone">ZONE 27「自 v0.1 起每個 lens 永久看得到」</span>。
-            未來訪客 fork 我們的 GitHub repo · git log 找 v0.1 的 calibration
-            drift · 都查得到。 報馬仔 deletes losing weeks · 我們 deprecate
-            with 永久 audit trail。
+            未來你 fork 我們的 GitHub repo · 用 git log 找 v0.1 的準度變化 ·
+            都查得到。 報馬仔輸了就刪文 · 我們是保留版本 + 永久留下記錄。
           </p>
           <p className="font-mono text-mute/80 text-[10px] tracking-[0.3em] leading-relaxed">
             ⚓ 修改此 pledge 需 30 天前 /changelog 公告 · 同 /audit S05
-            PRE-COMMIT pattern · Costly Signaling 100×。
+            PRE-COMMIT pattern。
           </p>
         </div>
       </section>
@@ -763,9 +756,8 @@ repeat 10,000 times → aggregate
       <Section no="07" label="FOOTNOTES" zh="出處與引用">
         <p className="text-mute/85 text-[14px]">
           每一個 inline 主張(ABSTRACT 內 <FootnoteRef n={1} inline />–
-          <FootnoteRef n={4} inline />)在此 numbered · 點開展對應 primary
-          source · 同 Hindenburg Research 結構性 evidence pattern · 不依賴
-          訪客信任「我們說的」 · 依賴訪客 verify 我們 cite 的。
+          <FootnoteRef n={4} inline />)在此編號 · 點開可看對應的原始出處 ·
+          你不用相信「我們說的」 · 自己對照我們引用的來源即可。
         </p>
         <ol className="space-y-5 text-mute/85 text-[13px] sm:text-[14px] leading-relaxed mt-6">
           <li id="footnote-1" className="border-l-2 border-gold/50 pl-4">
@@ -905,8 +897,7 @@ repeat 10,000 times → aggregate
           >
             zone27-web GitHub
           </a>
-          {" "}· 我們不藏 cite。 同 Hindenburg「point us to ourselves on this」
-          public verification axiom。
+          {" "}· 我們不藏出處 · 歡迎你指正。
         </p>
       </Section>
 

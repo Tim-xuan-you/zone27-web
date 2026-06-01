@@ -371,7 +371,7 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-mute hover:text-gold underline-offset-4 hover:underline transition-colors"
-                title="GitHub Issues · 公開 audit trail · 同 Pratfall + Disclosure axiom"
+                title="發現問題或建議 · 開一個 GitHub Issue 給 Tim"
               >
                 GitHub Issue
               </a>

@@ -15,9 +15,9 @@ import {
 } from "@/lib/founders-stats";
 
 export const metadata: Metadata = {
-  title: "Annual Report · 2026 Year 0",
+  title: "年度公開報告 · 2026 第 0 年",
   description:
-    "ZONE 27 第 0 年公開年度報告。 0 訂閱者 · NT$ 0 收入 · 7 forged founders · N=1 engine receipt · 完整 costs · 完整 what-failed list · pre-launch honest state · Defector + Hell Gate + Aftermath radical-transparency pattern · Pratfall + Costly Signaling axiom 同時 fire。",
+    "ZONE 27 第 0 年公開年度報告。 0 訂閱者 · NT$ 0 收入 · 7 個系統測試用的佔位創始會員 · 只結算過 1 場 · 完整成本 · 完整今年砍掉的清單 · 上線前的誠實狀態。 一般網站隱藏營收 · 我們從第 0 年就公開。",
 };
 
 // ── ZONE 27 · /annual/2026 ─────────────────────────────
@@ -72,28 +72,28 @@ const METRICS = {
 
 const WHAT_FAILED_2026: { item: string; lesson: string }[] = [
   {
-    item: "Round 30 W11 · MEMBER SYSTEM MAP block 60 lines",
-    lesson: "Tim 第 11 次 canary fire「太多字 · 沒人想看」 · 砍 270 lines · 寫死 axiom「one tense per page · every section must be true right now · 反 future-tense scaffolding」",
+    item: "會員頁一度太長 · 砍掉重做",
+    lesson: "會員系統說明寫了一大段、字太多沒人想看 · 砍掉 270 行 · 並定下一條規則:每一頁只講一個時態 · 每個段落都必須是「現在」就成立的事 · 不寫一堆還沒發生的未來。",
   },
   {
-    item: "Round 32 W-C · /login SentState path ② TYPE CODE 6 位數 OTP form",
-    lesson: "假設 Supabase magic link email template 帶 `{{ .Token }}` · 但預設只帶 `{{ .ConfirmationURL }}` · 訪客看 6 位數 verify form 永遠收不到 code = over-promised UI · 違反 R30 W11 axiom · 砍整套。 Lesson:UI feature 必須 verify end-to-end real data flow · 不只 verify code compiles。",
+    item: "登入頁的「輸入 6 位數驗證碼」表單 · 整套砍掉",
+    lesson: "原本以為登入信會帶 6 位數驗證碼 · 但實際只帶一個確認連結 · 訪客盯著驗證碼欄位永遠等不到碼 = 介面承諾了做不到的事。 教訓:介面功能必須從頭到尾用真實資料走過一遍 · 不能只確認程式能編譯。",
   },
   {
-    item: "Round 32 W-D · Nav「會員 →」 button 從 R23-R25 hardcode /membership",
-    lesson: "已登入 user 點下去到 ladder overview 不是個人 dashboard · navigation gap · 修為 auth-aware client island。 founder dogfood canary 比 agent audit 高 quality。",
+    item: "導覽列「會員 →」按鈕一度連錯地方",
+    lesson: "已登入的人點下去 · 跑到方案總覽而不是自己的個人頁 · 是動線斷掉。 改成會依登入狀態判斷的版本。 自己當使用者實際走一遍 · 比稽核更能抓到問題。",
   },
   {
-    item: "Round 32 W-E · 「30-50% 抽成」 narrative cite 玩運彩+報馬仔",
-    lesson: "Agent 帶回 IP risk:兩家不公開 disclose 抽成 % · 我們 cite specific platform 是 unverified claim。 改 cite Taiwan LINE 老師 / 投顧老師業界共識 generic。",
+    item: "「抽成 30-50%」這個說法一度點名特定平台",
+    lesson: "那兩家平台根本沒公開過自己抽幾成 · 我們點名講就是沒憑據的說法 · 有風險。 改成講台灣 LINE 老師、投顧老師的業界共識 · 不點名。",
   },
   {
-    item: "Round 30-31 · BLACK CARD「賣身份不賣 unlock」 framing",
-    lesson: "Tim 9+ canary fire「會員爛 · 沒人付費 · 客群要賭博」 · brand IP-rich + business-poor 失衡。 Round 33 pivot to AI baseball engine + 「unlock 真實 functional value」 framing · 重 frame BLACK CARD = newsletter + AI Confidence + thread + Q&A 量身 design for prediction-seeking audience。",
+    item: "BLACK CARD 一度只賣「身份」、不給實際功能",
+    lesson: "會員方案一度做得很虛、沒人想付費 · 而我們的客群是會下注的人。 後來把重心轉回棒球預測引擎 · 把 BLACK CARD 重新定義成 — 工程筆記、AI 信心度、賽事討論、Q&A · 為想練預測的人量身設計、給得出實際價值。",
   },
   {
-    item: "Founders 27 LAUNCH timeline · 寫 Q3 2026 · 至今 7 forged 仍是 SYSTEM-TEST",
-    lesson: "Payment platform (TapPay / 綠界個人版 / 藍新) 還沒拍板 · brand 域名沒買 · 第一筆 real founder 認領延後到 Q3 後。 Pratfall 寫進 /founders/ledger empty scaffold 等通道開啟。",
+    item: "Founders 27 上線時間一度寫 2026 Q3 · 至今 7 個仍是系統測試佔位",
+    lesson: "金流平台還沒拍板 · 品牌域名還沒買 · 第一筆真實會員認領延後。 我們大方把這件事寫進空白的認領帳本 · 等通道開了再上。",
   },
 ];
 
@@ -148,16 +148,15 @@ export default function AnnualReport2026Page() {
             年度公開報告 · {REPORT_YEAR}
           </h1>
           <p className="mt-6 text-mute leading-relaxed max-w-2xl">
-            {REPORT_PHASE}。 0 訂閱者 · NT$ 0 收入 · 7 SYSTEM-TEST forged
-            founders · 1 PROVED receipt(N=1)· engine v0.2。 所有 metrics
-            honest empty · Defector / Hell Gate / Aftermath radical-transparency
-            pattern。
+            {REPORT_PHASE}。 0 訂閱者 · NT$ 0 收入 · 7 個系統測試用的佔位
+            創始會員 · 只結算過 1 場(命中)· 引擎 v0.2。 所有數字都是
+            誠實的空白 · 不造假。 有些獨立媒體靠讀者直接資助起家、把一切
+            攤開給人看 · 我們從第 0 年就這樣做。
           </p>
           <p className="mt-4 text-mute/85 leading-relaxed max-w-2xl">
-            一般 SaaS 隱藏 ARR · ZONE 27 公開 Year 0 NT$ 0。 一般 startup
-            隱藏 what-failed · 我們列 6 項今年砍掉的 ship。 一般品牌等到 Year 1
-            有 metric 才 publish · 我們從 Year 0 就承諾 every 5/31 publish ·
-            commitment device 不可造假。
+            一般公司隱藏營收 · ZONE 27 公開第 0 年 NT$ 0。 一般公司隱藏
+            失敗 · 我們列出今年砍掉的 6 項東西。 一般品牌等到有數字才公開 ·
+            我們從第 0 年就承諾每年 5/31 公開 · 說到就要做到。
           </p>
 
           {/* Round 44 W-C · Agent K DEEPEST canonical sentence · 4th of 4
@@ -228,9 +227,8 @@ export default function AnnualReport2026Page() {
             />
           </div>
           <p className="mt-5 font-mono text-loss/80 text-[10px] tracking-[0.3em] leading-relaxed">
-            ⚠ PRE-LAUNCH · Founders 27 付費相關 metrics = 0。 BLACK CARD LIVE
-            manual ECPay(per R81 pivot)· Founders 27 payment infrastructure
-            (manual bank transfer)· brand 域名未買 · milestone-triggered ship。
+            ⚠ 上線前 · Founders 27 付費相關數字全為 0。 BLACK CARD 與
+            Founders 27 都採人工轉帳 · 品牌域名還沒買 · 等時機到了再上線。
           </p>
 
           {/* Round 44 W-B · ReproducibilityReceipt drop-in · /annual/2026
@@ -255,9 +253,9 @@ export default function AnnualReport2026Page() {
             / WHAT FAILED · 今年砍掉的 ship + lesson
           </p>
           <p className="text-mute leading-relaxed mb-8 max-w-2xl">
-            一般 startup annual report 隱藏 what-failed。 我們列 6 項
-            today 砍掉的 ship + lesson 寫死 axiom。 Aronson 1966 + Spence
-            1973 costly signaling 背書:公開弱點反向強化 trust。
+            一般公司的年度報告會隱藏失敗。 我們把今年砍掉的 6 項東西
+            連同學到的教訓全部列出來。 公開弱點本身就是訊號 · 反而會
+            強化信任。
           </p>
           <ol className="space-y-6">
             {WHAT_FAILED_2026.map((entry, i) => (
@@ -290,11 +288,11 @@ export default function AnnualReport2026Page() {
             ))}
           </div>
           <p className="mt-6 font-mono text-mute/70 text-[10px] tracking-[0.3em] leading-relaxed">
-            ▸ 此 list 是 commitment device · 修改需 30 天前
+            ▸ 這份清單是說到要做到的承諾 · 修改需提前 30 天在
             <Link href="/changelog" className="text-gold underline-offset-4 hover:underline mx-1">
               /changelog
             </Link>
-            公告(同 /audit S05 PRE-COMMIT pattern)。
+            公告。
           </p>
         </section>
 
@@ -305,36 +303,32 @@ export default function AnnualReport2026Page() {
               一般 SaaS Year 0 不公開 · 我們公開 Year 0 NT$ 0。
             </p>
             <p className="text-mute text-sm sm:text-base leading-relaxed">
-              Defector 把 cooperative 結構 + worker-owned 公開 · Hell Gate
-              「百萬美元」 文寫死 · Aftermath subscriber-goals page 公開承諾。
-              ZONE 27 從 Year 0 就 publish · 每年 5/31 update · 0 hr Tim
-              writing(Claude auto-generate based on Supabase metrics + GitHub
-              commits + Resend deliveries)。 Commitment device 不可造假
-              prove-it-yearly · 同 /audit S05 PRE-COMMIT pattern。
+              有些獨立媒體把自己的營運結構、收入目標全部攤開給讀者看。
+              ZONE 27 從第 0 年就公開 · 每年 5/31 更新 · 內容由系統自動
+              依真實數字生成。 這是一個說到就要做到、每年攤開讓人檢驗的
+              承諾。
             </p>
           </blockquote>
         </section>
 
         <FounderSignOff>
           <p>
-            這頁今天是 <strong>Year 0 empty scaffold</strong> · 6 項 what-failed
-            是真實 ship history · 4 項 what&apos;s next 是 binding commitment(修改
-            需 30 天前 /changelog 公告)。 0 paid subs + NT$ 0 rev 是 honest
-            pre-launch reality · 不 fake numbers 不 vanity metric。
+            這頁今天是 <strong>第 0 年的空白底稿</strong> · 6 項今年砍掉的
+            東西是真實的開發歷史 · 4 項明年計畫是說到要做到的承諾(修改
+            需提前 30 天在 /changelog 公告)。 0 付費會員 + NT$ 0 收入是
+            上線前的誠實現實 · 不造假數字、不灌虛榮數據。
           </p>
           <p>
-            Year 1 report 預計 2027/05/31 publish · 第一次有真實 BLACK CARD
-            subscriber count + revenue + churn + Year 1 PROVED/DIVERGED N
-            count · Year 0 → Year 1 transition 公開全程。 我們從 Year 0
-            就承諾 every 5/31 publish · 這個 commitment device 本身就是 brand
-            IP 物理產出。
+            第 1 年報告預計 2027/05/31 公開 · 第一次會有真實的 BLACK CARD
+            訂閱人數、收入、流失率、以及命中與失準的場數 · 從第 0 年到
+            第 1 年全程公開。 我們從第 0 年就承諾每年 5/31 公開 · 這個承諾
+            本身就是品牌的一部分。
           </p>
           <p>
-            這個 page 的存在 brand IP 是 statement:<strong>一般 SaaS 隱藏
-            ARR · ZONE 27 從 Year 0 就 publish · 因為我們的 moat 是 trust
-            不是 algorithm</strong>。 同 /audit S05 + /track-record + /coverage
-            NEVER + /founders/ledger rejection samples 同邏輯 · radical
-            transparency 是 brand 鐵律。
+            這頁存在的意義是一句話:<strong>一般公司隱藏營收 · ZONE 27
+            從第 0 年就公開 · 因為我們的護城河是信任 · 不是演算法</strong>。
+            這跟 /audit、/track-record、/coverage、/founders/ledger 公開
+            拒絕案例是同一套邏輯 · 全部攤開是我們的鐵律。
           </p>
         </FounderSignOff>
 

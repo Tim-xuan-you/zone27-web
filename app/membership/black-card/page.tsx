@@ -74,7 +74,7 @@ const UNLOCKS = [
   {
     icon: "💵",
     title: "您寫整篇分析文章來賣 · 您拿 90% · Tim 抽 10%",
-    body: "BLACK CARD 訂閱者可以寫整篇預測文章來賣 · 讀者買多少 · 您拿 90% · Tim 抽 10%(同 Substack 10% 平 · 業界中段 · OnlyFans 20% · YouTube 45% · ZONE 27 lower 50%)。 每位作者公開自己的歷史紀錄(預測準幾場 / 失準幾場 · 同 /track-record 公開方式)· 讀者買文章前可看作者真實準確度 · 不準的作者自然沒人買 · 純市場機制。 讀者買了 14 天內不喜歡可以退錢 · 您不賠 · Tim 從自己 10% 抽成裡墊。 跟玩運彩高手分潤完全不一樣 · 我們不獎勵「賭預測準度」 · 只獎勵「寫好文章」。 ⏳ 等寫文章功能上線後開放。",
+    body: "BLACK CARD 訂閱者可以寫整篇預測文章來賣 · 讀者買多少 · 您拿 90% · Tim 抽 10%(業界裡偏低的抽成)。 每位作者公開自己的歷史紀錄(預測準幾場 / 失準幾場 · 同 /track-record 公開方式)· 讀者買文章前可看作者真實準確度 · 不準的作者自然沒人買 · 純市場機制。 讀者買了 14 天內不喜歡可以退錢 · 您不賠 · Tim 從自己 10% 抽成裡墊。 跟玩運彩高手分潤完全不一樣 · 我們不獎勵「賭預測準度」 · 只獎勵「寫好文章」。 ⏳ 等寫文章功能上線後開放。",
   },
   {
     icon: "✓",
@@ -121,7 +121,7 @@ const FAQS = [
   },
   {
     q: "為什麼要付費?",
-    a: "您完全可以不付 · FREE TIER 已涵蓋 engine + data + trust artifacts 100%(brand IP 鐵律「引擎永遠免費」)。 BLACK CARD 是想 support Tim build + 拿 6 個 unlock(賽事討論室寫 / 賣文章 您拿 90% / verified analyst chip / 24h Tim email priority / 賽後 15min receipt push / Founders 27 24h pre-access)的會員。 brand IP 不催 · 不 dark pattern · 不藏 cancel button · 0 auto-renewal · 每 31 天結束您主動 click 才付下個 31 天。 14-day refund 100% no-questions(per /terms §4B)。",
+    a: "您完全可以不付 · FREE TIER 已經包含引擎、資料、公開戰績全部(引擎永遠免費)。 BLACK CARD 是想支持 Tim 持續開發 + 拿 6 個 unlock(賽事討論室寫 / 賣文章 您拿 90% / 驗證準確度標章 / 24h Tim email 優先回 / 賽後 15 分鐘結果通知 / Founders 27 24h 優先購買)的會員。 不催繳 · 不用陷阱設計 · 不藏取消鍵 · 不自動續扣 · 每 31 天結束您主動再付才續。 14 天內 100% 退款不問理由(見 /terms §4B)。",
   },
 ];
 
@@ -192,8 +192,8 @@ export default function BlackCardPage() {
           <p className="mt-4 max-w-2xl border-l-2 border-gold/60 pl-4 text-bone text-sm sm:text-base leading-relaxed font-light">
             引擎永久免費 · 您付的是
             <strong className="text-gold">身份</strong>。 全壘打率、打席率、
-            建議下注尺寸 — 全部 0 paywall · 0 rate limit · 永久 free。
-            BLACK CARD 不是付給「資料」 · 是付給「會員 community + voting + Tim 工程筆記」。
+            建議下注尺寸 — 全部不設付費牆 · 不限次數 · 永久免費。
+            BLACK CARD 不是付給「資料」 · 是付給下方那 6 件您可以做的事。
           </p>
           {/* MARKET ANCHOR · 4-cell honest comparison · per-game framing。 */}
           <div className="mt-4 sm:mt-5 max-w-2xl">
@@ -209,7 +209,7 @@ export default function BlackCardPage() {
                   lang="en"
                   className="font-mono text-mute/70 text-[9px] tracking-[0.22em] mb-1"
                 >
-                  DEFECTOR
+                  獨立媒體訂閱
                 </p>
                 <p className="font-mono text-mute text-[11px] sm:text-xs tabular tracking-tight">
                   NT$ ~200/月
@@ -220,7 +220,7 @@ export default function BlackCardPage() {
                   lang="en"
                   className="font-mono text-mute/70 text-[9px] tracking-[0.22em] mb-1"
                 >
-                  NETFLIX PREMIUM
+                  串流影音月費
                 </p>
                 <p className="font-mono text-mute text-[11px] sm:text-xs tabular tracking-tight">
                   NT$ 390/月
@@ -242,9 +242,8 @@ export default function BlackCardPage() {
               </div>
             </div>
             <p className="mt-2 font-mono text-mute/60 text-[9px] sm:text-[10px] tracking-[0.2em] leading-relaxed">
-              中段 sweet spot · 不 luxury · 不 commodity · 同 indie sports
-              subscription band 物理對齊 · CPBL season-aligned 同 統一獅 47-game
-              package + NBA 88% season ticket renewal pattern
+              一整季算下來 · 一場約 NT$ 2 · 比一張球票、一份串流月費都低 ·
+              不走奢華路線 · 也不是廉價品。
             </p>
           </div>
           {/* Round 55 W-B · Agent C #4 fix · trust-signal line ABOVE price
@@ -508,29 +507,19 @@ export default function BlackCardPage() {
 
         <FounderSignOff>
           <p>
-            BLACK CARD 是 ZONE 27 主要 season-based revenue model · NT$ 500
-            per CPBL season(March-November · 240 場 + 季後賽)· 支援 engine
-            iteration + 給訂閱者投 voting 影響下個 ship · 拿 Tim 每週工程
-            筆記 full 版。 10% 創作者抽成 vs 業界 30-50% 是降維打擊 · per
-            /membership #pick-vs-bet brand boundary 明確「球迷 share 預測」
-            · NOT 博彩。
+            BLACK CARD 是 ZONE 27 主要的季票收入來源 · 一季 NT$ 500
+            (3 月到 11 月 · 240 場加季後賽)· 用來支持引擎持續開發。
+            創作者抽成 10% · 遠低於業界的 30–50% · 我們的界線很明確:
+            球迷分享預測 · 不是博彩。
           </p>
           <p>
-            R81 pivot · 自 NT$ 299/月 auto → NT$ 500/31 天 explicit · per
-            /integrity rule #13(R81 加 · 永遠不 subscription auto-renewal
-            binding)· 綠界沒定期定額 = brand opportunity NOT 限制。 NBA
-            Warriors 99.5% / 統一獅 47-game / Defector 85% explicit-renewal
-            / Pinboard 一次性 4 indie premium niche references validate this
-            pivot · Recurly 2025 data 年訂閱 churn 比月訂閱低 51%。
+            從付款日起算 31 天 · 不自動續扣(寫進 /integrity 第 13 條)。
+            每季結束我會寄信提醒 · 您回信說要續才付下一季 · 不續就停。
           </p>
           <p>
-            這頁 ✓ LIVE 季票手動 ECPay 個人方案 · email tatayngiti@gmail.com
-            我 24 小時內寄 ECPay 付款連結 · 0 auto-renewal infrastructure ever
-            per rule #13 binding · manual 是 brand IP discipline 不是 missing
-            feature。 不催 · 不 dark pattern · 不藏 cancel button(season-
-            based manual 本身就不需要 cancel button · 不續訂下季就停 · 0 reminder
-            spam)。 brand IP「不靠秘密賺錢 · 靠紀律」 延伸到訂閱模式 · scope
-            + discipline + renewal 三軸 close brand IP loop。
+            這頁是真的可以訂 · 寄信到 tatayngiti@gmail.com · 我 24 小時內
+            寄付款連結給您。 不自動續扣 · 不催繳 · 不用藏取消鍵
+            (季票本來就不續就停)。 首次訂購 14 天內不滿意 · 100% 退款。
           </p>
         </FounderSignOff>
 

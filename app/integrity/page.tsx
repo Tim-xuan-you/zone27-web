@@ -11,11 +11,11 @@ import { createPageMetadata } from "@/lib/page-og";
 // restoration + truncate description from 393 chars to ~140 · per Twitter
 // 200-char cap + Slack 200-char readable weight + Open Graph Protocol spec。
 export const metadata: Metadata = createPageMetadata({
-  title: "Integrity · 22 永久不會變的 · Owner's Manual at Year 0",
+  title: "Integrity · 22 件 ZONE 27 永久不會變的事",
   description:
-    "Berkshire Hathaway 1996 Owner's Manual pattern applied at ZONE 27 Year 0 · 13 brand-IP redlines + 9 binding ethics = 22 永久 binding rules · Tim signature · per /audit S05 PRE-COMMIT · public bond not implicit。",
+    "13 條永遠不做的紅線 + 9 條永遠會做的承諾 = 22 件 ZONE 27 永久不會變的事 · Tim 親手簽名 · 修改要提前 30 天公告。",
   ogDescription:
-    "Berkshire 1996 Owner's Manual pattern · 13 redlines + 9 ethics = 22 永久 binding · public bond not implicit · per /audit S05 PRE-COMMIT。",
+    "13 條永遠不做 + 9 條永遠會做 = 22 件永久不會變的事 · Tim 親手簽名 · 修改要提前 30 天公告。",
   path: "/integrity",
 });
 
@@ -32,12 +32,12 @@ const REDLINES: ReadonlyArray<{ no: string; rule: string; basis: string }> = [
   {
     no: "01",
     rule: "不 ship user-to-user social platform",
-    basis: "no community / no forum / no DM / no chat · brand IP「epistemic mirror not engagement loop」 axiom · per /membership 倒置 SaaS pattern",
+    basis: "0 社群 / 0 論壇 / 0 私訊 / 0 聊天室 · ZONE 27 是讓你照見自己判斷的鏡子 · 不是想盡辦法黏住你的互動迴圈。",
   },
   {
     no: "02",
     rule: "不 ship streak / daily-login farming / Days Followed badge",
-    basis: "engagement-for-engagement redline · per Tetlock R53 7-tier discipline badge IS the brand-pure substitute · per Duolingo / Snapchat / Robinhood anti-pattern",
+    basis: "不用「連續登入天數」「追蹤幾天」這種把你黏在站上的設計 · 不為互動而互動。",
   },
   {
     no: "03",
@@ -51,48 +51,48 @@ const REDLINES: ReadonlyArray<{ no: string; rule: string; basis: string }> = [
   },
   {
     no: "05",
-    rule: "不 ship「X of 270 sold」 live FOMO counter",
-    basis: "ledger 是 weekly 手寫 不是 live · 0 live count · 0 countdown · per Booking.com / Stripe Atlas applicants ticker anti-pattern · 同 Pinboard ratchet 不適用 axiom",
+    rule: "不 ship「X of 270 sold」 即時搶購倒數",
+    basis: "名冊是每週手寫更新 · 不是即時跳動 · 0 即時人數 · 0 倒數計時 · 不用「再不買就沒了」催你下單。",
   },
   {
     no: "06",
     rule: "不 寄生 gambling 平台",
-    basis: "0 scrape 玩運彩 / 報馬仔 / 投顧老師 · 0 affiliate / commission · ZONE 27 displacement target NOT enable · per /audit Section 02 displacement axiom",
+    basis: "0 爬取 玩運彩 / 報馬仔 / 投顧老師 · 0 抽成 / 分潤 · 我們要取代它們 · 不是幫它們導流。",
   },
   {
     no: "07",
     rule: "不 接 AdMob 廣告營收",
-    basis: "AdMob 永久封殺 · 0 ads · 0 sponsored content · per /privacy + /audit DISCLOSURE block 「ADS 0」 axiom · /ethics commitment #2 binding",
+    basis: "AdMob 永久封殺 · 0 廣告 · 0 業配 · 同步 /privacy + /audit · /ethics 第 2 條 binding。",
   },
   {
     no: "08",
     rule: "不 multi-step onboarding wizard",
-    basis: "1 個動作 / 1 個 email · 不 multi-screen sign-up · 不 progressive disclosure form · per Stratechery 「1 form 1 button」 + DHH HEY single-action axiom",
+    basis: "1 個動作 / 1 個 email · 不分好幾頁註冊 · 不一步一步逼你填更多欄位。",
   },
   {
     no: "09",
     rule: "不 modal paywall scroll-lock",
-    basis: "0 modal · 0 scroll-lock · 0「subscribe to read more」 overlay · per /audit S05 PRE-COMMIT clause + Medium subscribe modal anti-pattern",
+    basis: "0 彈窗 · 0 卡住捲動 · 0「訂閱才能看下去」遮罩 · 內容看到底都不擋你。",
   },
   {
     no: "10",
     rule: "不 ship「管它準不準包裝」 fake methodology",
-    basis: "engine v0.2/v0.3/v0.4 全 publish · 不藏 estimate · 不藏 DIVERGED · 不藏 sample debt N<30 · per /audit S05 + /methodology Section 04 binding · brand IP soul redline",
+    basis: "engine v0.2/v0.3/v0.4 全 publish · 不藏 estimate · 不藏 DIVERGED · 不藏 sample debt N<30 · 這是最核心的一條紅線。",
   },
   {
     no: "11",
     rule: "不 ship fake testimonials / 偽造 social proof",
-    basis: "等真實 Founders Q3+ onboard 後才 publish letter · 0 ghostwritten quote · 0 mock social proof · 0「join 1000+」 inflation · per FoundingMemberLedger R72 W-C + /founders/from-one-current-founder R69 W-B empty scaffold pattern",
+    basis: "等真實創始會員加入後才放他們的話 · 0 代筆好評 · 0 假推薦 · 0「已有 1000+ 人加入」灌水。",
   },
   {
     no: "12",
     rule: "不 ship engine prediction outside CPBL · MLB / NPB / KBO / 任何外國職棒 / 任何台灣運彩 bettable events 全部 refuse",
-    basis: "solo founder CPBL niche dominance = costly signal 100× per Spence 1973 · MLB me-too = noise · 對標玩運彩 + 報馬仔 displacement mission = CPBL sharpness NOT reach · 同 Patek 不做 Apple Watch / Defector 不做 ESPN / Cegłowski Pinboard 不做 Facebook pattern · /matches/mlb 保留為純 viewer 工具(MLB Stats API 即時資料 + 排程 only · 0 engine prediction surface)· /lab + /lab/custom 是 user-driven Monte Carlo simulator · 不算 engine pre-commit · /track-record 永久 CPBL only · R80 加入 per Tim's R80 explicit signature(覆蓋過去 R-era 假設 implicit binding · 現在 explicit binding)",
+    basis: "一個人把 CPBL 做深 · 比什麼聯盟都做、樣樣淺薄更有價值 · MLB 跟風只是雜訊 · 我們要的是把 CPBL 算得更準 · 不是覆蓋更廣。/matches/mlb 保留為純看資料工具(即時數據 + 排程 only · 0 引擎預測)· /lab + /lab/custom 是你自己跑的模擬器 · 不算引擎預先承諾 · /track-record 永久只收 CPBL。",
   },
   {
     no: "13",
     rule: "不 ship subscription auto-renewal · 永遠 · ECPay / TapPay / 綠界定期定額 / Stripe / 藍新 / 任何 payment gateway 自動扣款 全 refused",
-    basis: "訪客每次 commit 必須 explicit click + manual transfer · auto-renewal = 「忘記取消 → 持續扣款」 implicit dark pattern · 同 Duolingo / Snapchat / Robinhood anti-pattern · per Loss aversion FOR ZONE 27 axiom(Kahneman/Tversky 1979 倒置:auto-renewal 利用 loss aversion AGAINST visitor · explicit renewal 利用 loss aversion FOR ZONE 27 · 每 season visitor 主動「我還在乎」 重新 commit · costly signal 100×)· 業界數據 · 月費 auto-renew industry churn 30-40% within 12 months · explicit annual renewal 70-85% retention(Defector 公開 Year-5 報告 85% renew · Pinboard $25 一次性 17 年 100% lifetime)· 同 倒置 SaaS axiom([[zone27-monetization-philosophy]])scarce-handmade tier discipline · BLACK CARD pivots from NT$ 299/月 auto → NT$ 500/31 天 explicit one-time · R81 加入 per Tim's R81 explicit signature 後綠界沒定期定額 = brand opportunity NOT 限制 · 違反 = brand dark-pattern collapse 永久 audit trail",
+    basis: "每次續訂都要你親手按一次 + 自己轉帳 · 自動扣款 = 「忘記取消就一直被扣」的暗黑設計 · 我們不做。每一季由你主動「我還在乎」重新加入 · 而不是靠你忘記取消來留住你。BLACK CARD 從月費自動扣款改成 NT$ 500/31 天親手一次性付款 · 沒有自動續訂對我們是機會不是限制 · 違反 = 品牌信用永久留下記錄。",
   },
 ];
 
@@ -110,7 +110,7 @@ const ETHICS_COMMITMENTS: ReadonlyArray<{
   {
     no: "02",
     rule: "0 ads · AdMob 永久封殺",
-    basis: "no Google AdSense · no AdMob · no Meta ads · no display banner · per /ethics commitment #2 + /privacy + /audit DISCLOSURE「ADS 0」 axis",
+    basis: "no Google AdSense · no AdMob · no Meta ads · no display banner · 永久 0 廣告 · 同步 /privacy + /audit。",
   },
   {
     no: "03",
@@ -120,7 +120,7 @@ const ETHICS_COMMITMENTS: ReadonlyArray<{
   {
     no: "04",
     rule: "0 fake testimonials · 公開 founders 全名清單(Q3+ onboard 後)",
-    basis: "等真實 Founder 6 個月後 publish letter · 0 mock testimonial · /founders/from-one-current-founder R69 W-B empty scaffold pattern · per /audit S05 PRE-COMMIT",
+    basis: "等真實創始會員加入 6 個月後才放他們的話 · 0 假推薦 · 現在是空的就誠實留空。",
   },
   {
     no: "05",
@@ -145,7 +145,7 @@ const ETHICS_COMMITMENTS: ReadonlyArray<{
   {
     no: "09",
     rule: "0 cherry-pick · 每筆 CPBL engine prediction → mandatory /track-record entry + /receipts/[receiptId] permalink · 0 retroactive delete",
-    basis: "顯示 prediction 後 visitor endowment(Kahneman/Knetsch/Thaler 1990)在「我會看到結果」 上 · selective publishing = trust 物理崩 · PROVED + DIVERGED + PUSH 等大 visual weight 不藏 miss · 同 Berkshire 70-year annual letter「無論好年壞年 都 mandatory publish」 + Geneva Seal「每只 watch 都印 serial」 pattern · per /audit S05 PRE-COMMIT clause 升級到 /integrity binding rule layer · 即使 engine 100% 錯也 binding publish · R80 加入 per Tim's R80 explicit signature · 配對 redline #12(scope) = 完整 scope + discipline closure",
+    basis: "引擎一旦出手預測 · 你就有權看到結果 · 只挑好的公布 = 信任直接崩掉 · PROVED + DIVERGED + PUSH 一樣大、一樣亮 · 不藏失手。無論引擎那場對或錯都一定列出 · 就算 100% 算錯也照樣公布 · 搭配紅線 #12(只做 CPBL)= 完整範圍 + 紀律收尾。",
   },
 ];
 
@@ -159,7 +159,7 @@ export default function IntegrityPage() {
         {/* ── HERO ─────────────────────────────────── */}
         <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pt-20 pb-12">
           <p className="font-mono text-gold text-[10px] tracking-[0.45em] mb-6">
-            INTEGRITY · OWNER&apos;S MANUAL AT YEAR 0 · BERKSHIRE 1996 PATTERN
+            INTEGRITY · 22 件永久不會變的事
           </p>
           <h1
             className="text-4xl sm:text-5xl text-bone font-light tracking-tight leading-tight mb-4"
@@ -181,21 +181,17 @@ export default function IntegrityPage() {
             className="text-mute text-base leading-relaxed mb-4 zh-body"
             style={{ fontFamily: "Georgia, serif", textWrap: "pretty" }}
           >
-            Berkshire Hathaway 1996 「Owner&rsquo;s Manual」 · Warren
-            Buffett 寫了一頁列「Berkshire will and will NOT do」 · 30+ 年
-            從未改過 · 公開 binding 不是 implicit assumption。 ZONE 27 採同
-            axis at Year 0:13 brand-IP「永遠不做」 redlines + 9 binding
-            ethics commitments = 22 件永久不會變的事。
+            這頁列出 ZONE 27「永遠會做」與「永遠不做」的事 · 公開寫死 ·
+            不是放在心裡的默契。13 條「永遠不做」紅線 + 9 條「永遠會做」的
+            承諾 = 22 件永久不會變的事 · 要改 · 必須提前 30 天公告。
           </p>
           <p
             className="text-mute/85 text-sm leading-relaxed zh-body"
             style={{ fontFamily: "Georgia, serif", textWrap: "pretty" }}
           >
-            為什麼結構性重要:當未來 fan 懷疑 ZONE 27 會不會「graduate into」
-            GA / analytics / 社群帳號 / paid-engine after launch · 整個
-            Pratfall + Costly Signaling brand 會 collapse。 此 page 是
-            years 2-5 brand consistency 的 missing organ · 不只 launch
-            week 用。
+            為什麼重要:當你以後懷疑 ZONE 27 會不會偷偷裝追蹤、開社群帳號、
+            或把引擎改成付費才能用 · 這頁就是可以拿來對照的白紙黑字。它管的是
+            未來好幾年的一致性 · 不只是上線那一週。
           </p>
           <div className="mt-5">
             <ArticleMeta readingMin={5} />
@@ -216,9 +212,8 @@ export default function IntegrityPage() {
             / §01 · 13 BRAND-IP REDLINES · 永遠不做
           </p>
           <p className="text-mute text-sm leading-relaxed mb-6">
-            這 13 件「永遠不做」 是 ZONE 27 displacement-mission against 玩運彩
-            + 報馬仔 + LINE 老師生態 的 binding signal。 違反任一 = brand
-            自殺 · 修改需 30 天前 /changelog 公告。
+            這 13 件「永遠不做」是 ZONE 27 跟玩運彩 + 報馬仔 + LINE 老師劃清界線的
+            底線。 違反任一 = 品牌自殺 · 修改需 30 天前 /changelog 公告。
           </p>
           <ol className="space-y-4 mt-4">
             {REDLINES.map((item) => (
@@ -239,10 +234,9 @@ export default function IntegrityPage() {
             / §02 · 9 BINDING ETHICS COMMITMENTS · 永遠會做
           </p>
           <p className="text-mute text-sm leading-relaxed mb-6">
-            這 9 件 ethics commitments 是 ZONE 27 brand IP「方法公開」 8 字
-            grammar 物理 codify · canonical single-source 同步 /ethics + /audit
-            Section 04。 違反 = Tim 親手 在 /ethics 紅字標永久 audit trail ·
-            不可 retroactively rebrand。
+            這 9 件承諾把 ZONE 27「方法公開」的原則寫死 · 與 /ethics + /audit
+            同步。 違反 = Tim 親手在 /ethics 用紅字標記、永久留下記錄 ·
+            不能事後重新包裝成別的說法。
           </p>
           <ol className="space-y-4 mt-4">
             {ETHICS_COMMITMENTS.map((item) => (
@@ -275,12 +269,10 @@ export default function IntegrityPage() {
 
           <div className="space-y-5 text-mute leading-relaxed zh-body">
             <p>
-              Wirecutter(NYT 旗下評測站)2026 年 3 月 redesign 公開
-              transparency wall:「editorial picks based solely on quality ·
-              commerce team handles affiliate links AFTER picks made · 兩邊
-              不互通」。 ZONE 27 採同 axis · 但因 solo founder · 無 org chart
-              可以結構性隔離 · 必須以<strong className="text-bone">登記 covenant 形式</strong>
-              替代 · 不假裝有 wall 而是公開 wall 怎麼維持。
+              引擎這條線只看數據品質、不受任何金錢關係影響;賺錢那條線(身分、
+              抽成)完全不能反過來干涉引擎算出什麼。 因為 ZONE 27 是一個人做的 ·
+              沒辦法靠公司部門互相隔離 · 所以改用<strong className="text-bone">公開白紙黑字</strong>
+              的方式守住這道牆 · 不假裝有牆 · 而是公開講清楚這道牆怎麼維持。
             </p>
 
             <p>
@@ -298,13 +290,10 @@ export default function IntegrityPage() {
               若 sportsbook / 玩運彩 / 報馬仔 / LINE 老師生態 / 任何 betting
               platform 主動 contact 提出 NT$ X K 買 engine API · whitelabel
               · co-branded launch · affiliate program · sponsored content · 任何
-              形式 commerce relationship · Tim 將: (1) 公開 disavow on /audit ·
-              (2) email decline 不洽談 · (3) 收 PII 不 leak · 不 negotiation 不
-              counter-offer。 Wirecutter 對應 boundary 是「best retailer 沒有
-              affiliate program · 仍 send readers 去 · 自己賺 NT$ 0」 · ZONE 27
-              對應 boundary 是「sportsbook fork 我們 MIT-licensed engine · 我們
-              /audit 公開 fork 事實 + disavow + 收 NT$ 0」(per /ethics §02B MIT
-              LICENSE LIMIT 已 codify)。
+              形式 commerce relationship · Tim 將: (1) 在 /audit 公開拒絕往來 ·
+              (2) email 回絕、不洽談 · (3) 收到的個資不外洩 · 不談判、不還價。
+              就算 sportsbook 拿我們公開授權的引擎去自己改一份 · 我們也會在
+              /audit 公開這件事 + 公開撇清 + 收 NT$ 0(已寫進 /ethics §02B)。
             </p>
           </div>
 
@@ -366,32 +355,21 @@ export default function IntegrityPage() {
                   </p>
                 </div>
                 <p className="text-mute text-[12px] sm:text-sm leading-relaxed">
-                  per [[feedback-zone27-paid-model-is-support-not-features]] · BLACK CARD
-                  unlocks(per /membership/black-card R141 W1 公開 1 LIVE · 2 PARTIAL · 3
-                  PROMISE)全是 IDENTITY 層(LINE 群 + Tim 工程筆記 full + voting + 創作者
-                  抽成 + Founders 27 LINE 群)· 0 unlock = engine more accurate · 違反 =
-                  brand IP iron rule 直接 collapse
+                  BLACK CARD 解鎖的(見 /membership/black-card)全是身分層的東西
+                  (LINE 群 + Tim 工程筆記完整版 + voting + 創作者抽成 + Founders 27 LINE 群)·
+                  沒有任何一項是「讓引擎變更準」· 違反 = 品牌鐵律直接崩。
                 </p>
               </li>
             </ol>
           </div>
 
           <p className="mt-6 text-mute/85 text-sm leading-relaxed zh-body">
-            <strong className="text-bone">為什麼這道牆必須 explicit codify:</strong>
-            solo founder 結構不能依靠 org chart 隔離 · 必須以 public covenant
-            形式維持 · 同 Costco 14% 毛利上限 · Patek Generations 200-yr Reference
-            permanence · Berkshire 1996 Owner&rsquo;s Manual · Defector worker-owned
-            launch commitment · 全採同 axis:public bond not implicit assumption。
-            ZONE 27 在 Year 0 採同 axis · 不裝 30+ yrs earned · publish commitments
-            before earning · per /year-zero R77 W-C「我們 publish commitments not
-            results」 axiom · 此 wall 同 axis。
+            <strong className="text-bone">為什麼這道牆必須白紙黑字寫出來:</strong>
+            一個人做的東西沒辦法靠公司部門互相把關 · 只能靠公開承諾來守住。
+            ZONE 27 還很年輕 · 不裝自己經營了幾十年 · 而是先把承諾講清楚 ·
+            再慢慢用時間證明。 這道牆就是其中一條承諾。
           </p>
 
-          <p className="mt-6 font-mono text-mute/70 text-[10px] tracking-[0.25em] leading-relaxed">
-            ⚓ Source · Wirecutter 2026-03-03 redesign editorial-commerce
-            transparency wall · Tim 親手 transplant pattern to ZONE 27 ·
-            solo-founder physical limit converted to public covenant
-          </p>
         </section>
 
         {/* ── §03 · BERKSHIRE 1996 PATTERN explanation ── */}
@@ -403,36 +381,23 @@ export default function IntegrityPage() {
             lang="en"
             className="font-mono text-gold/85 text-[10px] tracking-[0.4em] mb-4"
           >
-            / §03 · BERKSHIRE 1996 PATTERN
+            / §03 · 為什麼寫死、不留模糊空間
           </p>
           <p
             className="text-mute text-base leading-relaxed mb-4 zh-body"
             style={{ fontFamily: "Georgia, serif", textWrap: "pretty" }}
           >
-            Warren Buffett 1996 年寫了一頁「Owner&rsquo;s Manual」 · 列出
-            Berkshire Hathaway will and will NOT do。 30+ 年從未改過。 沒有
-            「we COULD change if necessary」 weasel · 沒有「subject to
-            change」 footer · 沒有「except in cases of...」 conditional。
-          </p>
-          <p
-            className="text-mute text-base leading-relaxed mb-4 zh-body"
-            style={{ fontFamily: "Georgia, serif", textWrap: "pretty" }}
-          >
-            其他 commitment 模式(Costco 14% 毛利上限自綁 · Patek 200-yr
-            Reference permanence · Defector worker-owned launch
-            commitment)都採同 axis:public bond not implicit assumption。
-            讀者 read 完後 audit-able · 違反 = brand 自殺。
+            這 22 條是寫死的承諾。 沒有「必要時我們可能會改」這種伏筆 ·
+            沒有「內容可能隨時變動」的小字 · 沒有「除非遇到某些情況」的但書。
+            讀完之後你可以一條一條對照、隨時檢查 · 違反 = 品牌自殺。
           </p>
           <p
             className="text-mute/85 text-sm leading-relaxed zh-body"
             style={{ fontFamily: "Georgia, serif", textWrap: "pretty" }}
           >
-            ZONE 27 在 Year 0 採同 axis · 但 honestly 不裝 30+ yrs earned。
-            Buffett earned 1996 公信力 from 1965 起算 31 yrs Berkshire
-            shareholder letter cadence · ZONE 27 從 2026-05-21 launch ·
-            目前 N=4 PROVED · 0 paying customer · 整 brand 是「commitments
-            published before earning」 per /year-zero R77 W-C「我們 publish
-            commitments not results」 axiom · 此 page 同 axis。
+            ZONE 27 還很年輕 · 老實說還沒累積多少戰績 · 目前 4 場 PROVED ·
+            0 付費客戶。 整個品牌的做法是:先把承諾講清楚 · 再用時間去證明 ·
+            而不是事後才補一張漂亮的成績單。
           </p>
         </section>
 
@@ -480,31 +445,25 @@ export default function IntegrityPage() {
             </li>
           </ol>
           <p className="text-mute/85 text-sm leading-relaxed mt-5">
-            此 protocol IS the bond。 Buffett never used Berkshire 1996
-            modify mechanism(no rules changed since 1996)· Tim 採同
-            discipline at Year 0 · per Pratfall「不藏 modify path · 但
-            commit to never use it」 axis。
+            這套流程本身就是承諾。 我們公開「要改的話該怎麼改」這條路 ·
+            但同時承諾盡量永遠不去走它。
           </p>
         </section>
 
         <FounderSignOff signedAt={SIGNED_AT}>
           <p>
-            這 22 件不是 marketing copy · 不是 sales pitch · 不是 commitment
-            theater · 是 Tim 親手在 {SIGNED_AT} 公開簽名的 binding bond。
-            Berkshire 1996 Owner&rsquo;s Manual 30+ 年從未改過 · ZONE 27 採
-            同 axis from Year 0。
+            這 22 件不是行銷文案 · 不是銷售話術 · 是 Tim 親手在 {SIGNED_AT}
+            公開簽名、寫死的承諾。
           </p>
           <p>
-            如果未來您看到 ZONE 27 違反任一條 22 binding rule · 您 right to
-            challenge · email tatayngiti@gmail.com 直接質問 Tim · 或開
-            GitHub Issue 公開 audit trail · 或在 /faq 留言記錄。 brand IP
-            「方法公開 · 品味私藏」 8 字 grammar 物理 codify 到 commitment
-            bond 層 · 沒有 hidden flexibility。
+            如果未來你看到 ZONE 27 違反任一條 · 你有權質問:email
+            tatayngiti@gmail.com 直接問 Tim · 或開 GitHub Issue 公開留下記錄 ·
+            或在 /faq 留言。 「方法公開 · 品味私藏」這八個字寫進承諾裡 ·
+            沒有藏起來的彈性空間。
           </p>
           <p>
-            修改任一 rule per /audit S05 PRE-COMMIT clause 30-day /changelog
-            notice mechanism。 違反 protocol = brand 信用 collapse · 您
-            擁有 永久 audit trail right · 公開 right to challenge。
+            修改任一條都要提前 30 天在 /changelog 公告。 違反這個流程 =
+            品牌信用崩掉 · 你永遠有權檢查、有權公開質問。
           </p>
         </FounderSignOff>
 

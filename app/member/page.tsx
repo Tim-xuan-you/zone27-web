@@ -27,7 +27,7 @@ import {
 export const metadata: Metadata = {
   title: "Member · 您的引擎時間軸 · FREE TIER dashboard preview",
   description:
-    "ZONE 27 會員儀表板預覽。您在 /lab 跑過的所有 Monte Carlo · 您 follow 的賽事 calibration record · 您能投票的引擎下一步 — 全部以 4 個 cognitive bias(Endowment Effect / IKEA Effect / Loss Aversion / Collection)為基礎設計。Auth 已上線(R50 W-F password-only)· cloud sync 在 payment infra 就緒後啟用。",
+    "ZONE 27 會員儀表板預覽。您在 /lab 跑過的所有 Monte Carlo · 您追蹤的賽事準度紀錄 · 您能投票決定的引擎下一步。登入已上線 · 雲端同步在付款機制就緒後啟用。",
 };
 
 // ── ZONE 27 · /member ──────────────────────────────────
@@ -255,9 +255,9 @@ export default async function MemberPage({
                 )}
               </div>
               <p className="text-mute/85 text-sm leading-relaxed mt-3">
-                您 vs 引擎 vs 實際 · 三層 epistemic mirror。 任何賽事頁
-                point click 🎯 YOUR PREDICTION pick (我猜 / 不押)· 賽後
-                verdict 自動進此累計。
+                您 vs 引擎 vs 實際結果的對照。 任何賽事頁
+                點 🎯 YOUR PREDICTION 做出您的預測(我猜 / 不押)· 賽後
+                結果自動進這個累計。
               </p>
             </div>
           )}
@@ -401,10 +401,10 @@ export default async function MemberPage({
                 / WANT REAL DASHBOARD?
               </p>
               <p className="text-mute text-sm leading-relaxed mb-4">
-                這頁目前是 preview。想<strong className="text-bone">真實註冊
+                這頁目前是預覽。想<strong className="text-bone">真實註冊
                 FREE TIER 會員</strong> · email + 密碼 1 分鐘註冊 · 點開後本頁
                 自動變成<strong className="text-bone">您的 dashboard</strong> ·
-                Round 30 Wave 5 剛 ship · Phase 1 timeline 從 Q3 加速到 NOW。
+                登入功能現在就能用。
               </p>
               <Link
                 href="/login"
@@ -509,7 +509,7 @@ export default async function MemberPage({
             />
             <ComparisonCard
               brand="ZONE 27 會員"
-              type="EPISTEMIC · 思辨史"
+              type="THINKING · 思辨史"
               give="email + 您自己跑過的 sim"
               get="您歷史的所有權"
               reward="重複思辨"
@@ -521,8 +521,8 @@ export default async function MemberPage({
           {/* Deepest sharp call · 1-line quote + 1-CTA · no elaboration */}
           <div className="mt-10 pt-6 border-t border-gold/30 text-center">
             <p className="text-bone text-lg sm:text-xl font-light tracking-tight leading-snug mb-5 max-w-xl mx-auto">
-              不是 feature stack · 是{" "}
-              <span className="text-gold">epistemic mirror</span>。
+              不是一堆功能的堆疊 · 是{" "}
+              <span className="text-gold">您 vs 引擎 vs 實際結果的對照</span>。
             </p>
             <Link
               href="/member/calibration"
@@ -548,13 +548,13 @@ export default async function MemberPage({
 
         <FounderSignOff>
           <p>
-            Auth 已上(Round 30 W5)· Follow 已開(W6)· 雲端 sim sync 還沒
-            (per /now UNRESOLVED)。 不假裝 functional 之外的事。
+            登入已上線 · 追蹤功能已開 · 雲端同步還沒做好。
+            我們不假裝已經做好的事還沒做好。
           </p>
           <p>
-            任何 timing 偏差在{" "}
-            <strong>/changelog git commit diff</strong> 看得到 ·
-            沒有「即將推出 · 敬請期待」 · 只有實際的 commit。
+            任何進度差異都看得到 ·{" "}
+            <strong>全寫在 /changelog 的版本紀錄裡</strong> ·
+            沒有「即將推出 · 敬請期待」 · 只有實際做完的。
           </p>
         </FounderSignOff>
 
@@ -571,10 +571,10 @@ export default async function MemberPage({
               ← 4-tier ladder 全景 · /membership
             </Link>
             <Link
-              href="/now"
+              href="/changelog"
               className="font-mono text-mute hover:text-gold text-[10px] tracking-[0.4em] transition-colors"
             >
-              這頁工程現狀 · /now →
+              這頁工程現狀 · /changelog →
             </Link>
           </div>
         </section>

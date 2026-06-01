@@ -14,12 +14,12 @@ import { getSession } from "@/lib/supabase/server";
 import { readFollowsFromMeta } from "@/lib/follows";
 
 export const metadata = createPageMetadata({
-  title: "Calibration · 您的 epistemic mirror",
+  title: "引擎準度對照 · 您 vs 引擎 vs 實際",
   description:
-    "Sabermetric reliability diagram · ZONE 27 是唯一發布會員自己 calibration drift 的高端棒球分析品牌。X 軸 = 引擎機率,Y 軸 = actual frequency,45° 線 = 完美校準。Pratfall + Costly Signaling brand IP 物理產出。",
-  ogTitle: "Calibration · 您的 epistemic mirror · ZONE 27",
+    "可信度對照圖:引擎賽前說的機率(X 軸)對上實際發生的頻率(Y 軸),落在 45° 線上就是完美校準。引擎準不準,公開讓你自己看。",
+  ogTitle: "引擎準度對照 · ZONE 27",
   ogDescription:
-    "Reliability diagram · 唯一發布會員 calibration drift 的高端棒球品牌 · Pratfall + Costly Signaling",
+    "可信度對照圖 · 引擎準不準公開讓你自己看 · 言中跟落空一樣攤開",
   path: "/member/calibration",
 });
 
@@ -121,7 +121,7 @@ export default async function CalibrationPage() {
               lang="en"
               className="font-mono text-gold text-[10px] tracking-[0.45em]"
             >
-              / CALIBRATION · 您的 epistemic mirror
+              / 引擎準度對照 · 您 vs 引擎 vs 實際
             </p>
             <span
               lang="en"
@@ -146,8 +146,8 @@ export default async function CalibrationPage() {
             </span>
           </div>
           <h1 className="text-4xl sm:text-5xl text-bone font-light tracking-tight max-w-3xl">
-            您的 <span className="text-gold">epistemic mirror</span>{" "}
-            · 引擎跟現實的可信對照
+            照見自己判斷的{" "}
+            <span className="text-gold">那面鏡子</span>
           </h1>
           <p className="mt-6 text-mute leading-relaxed max-w-2xl">
             這頁是{" "}
@@ -164,10 +164,8 @@ export default async function CalibrationPage() {
             calibration drift 的</strong>。
           </p>
           <p className="mt-4 font-mono text-mute/80 text-[10px] tracking-[0.25em] leading-relaxed max-w-2xl">
-            這不是 feature stack · 是{" "}
-            <strong className="text-bone">epistemic mirror</strong> —
-            您看到自己跟引擎的對照 · 看到引擎跟現實的對照 · Pratfall +
-            Costly Signaling 同時 fire。
+            不是功能堆疊 · 是一面鏡子 —
+            你看到自己跟引擎的對照,也看到引擎跟現實的對照。
           </p>
           <div className="mt-6">
             <ArticleMeta
@@ -191,18 +189,16 @@ export default async function CalibrationPage() {
             lang="en"
             className="font-mono text-gold text-[10px] tracking-[0.4em] mb-4"
           >
-            / YOUR EPISTEMIC TIER · 7-LADDER · PRIVATE MIRROR
+            / 你的準度級別 · 7 階 · 只有你自己看得到
           </p>
           <h2 className="text-2xl sm:text-3xl text-bone font-light tracking-tight mb-3">
-            您的 epistemic discipline tier
+            你的準度級別
           </h2>
           <p className="text-mute/85 text-sm leading-relaxed mb-6">
-            ZONE 27 跟玩運彩+報馬仔 leaderboard 結構性不同 —
-            我們 rank「<strong className="text-bone">您 confidence 對齊
-            actual outcome 的能力</strong>」(Brier 1950 + Murphy 1973 reliability
-            decomposition)· 不 rank「最準預測者」(那是 gambling-leaderboard
-            pattern)。 Tetlock 2015 Superforecaster 模式 · per Hanus & Fox
-            2015 純 private mirror · 0 social comparison。
+            這跟玩運彩、報馬仔的排行榜本質不同 —
+            我們排的是「<strong className="text-bone">你說的把握程度,跟實際結果有多吻合</strong>」,
+            不是排「誰猜最準」(那是賭博排行榜的玩法)。 而且只有你自己看得到,
+            不跟別人比。
           </p>
           <CalibrationTierBadge />
         </section>
@@ -319,13 +315,13 @@ export default async function CalibrationPage() {
         <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-16 border-t border-line/40 pt-12">
           <blockquote className="border-l-2 border-gold pl-6 sm:pl-8 py-3">
             <p className="text-bone text-xl sm:text-2xl font-light tracking-tight leading-snug mb-4">
-              不是 feature stack · 是{" "}
-              <span className="text-gold">epistemic mirror</span>。
+              不是功能堆疊 · 是一面{" "}
+              <span className="text-gold">照見自己判斷的鏡子</span>。
             </p>
             <p className="text-mute text-sm sm:text-base leading-relaxed">
-              別人給您 team stats / 別人的 archive。 ZONE 27 唯一 surface
-              會員<strong className="text-bone">自己</strong>的 calibration drift —
-              Pratfall + Costly Signaling 公開 bin diverged。
+              別人給你的是別人的數據。 ZONE 27 讓你看到
+              <strong className="text-bone">你自己</strong>的準度怎麼飄 —
+              連你過度自信的地方都攤開。
             </p>
           </blockquote>
         </section>
@@ -336,16 +332,16 @@ export default async function CalibrationPage() {
             lang="en"
             className="font-mono text-gold text-[10px] tracking-[0.45em] mb-6"
           >
-            / GLOBAL vs PERSONAL · 兩層 mirror
+            / 全站 vs 你自己 · 兩層對照
           </p>
           <h2 className="text-2xl sm:text-3xl text-bone font-light tracking-tight mb-6">
-            這個 diagram 演化的兩個 phase
+            這張圖的兩個階段
           </h2>
           <div className="space-y-5">
             <TimelineRow
               phase="現在 / GLOBAL"
               status={n === 0 ? "EMPTY · 等今晚 22:00+ 第一筆" : `N=${n} · 累積中`}
-              body={`所有 ZONE 27 公開預測 → 引擎 average calibration。 任何 visitor 都看得到 · 不需 auth · 對齊「方法公開」brand axiom。 ${
+              body={`所有 ZONE 27 公開預測 → 引擎平均準度。 任何人都看得到 · 不需登入 · 方法公開。 ${
                 n === 0
                   ? "今晚第一個 dot 落點 · cpbl-260521-01。"
                   : "git commit 為 source of truth · 任何 ingest 都可以回查。"
@@ -359,7 +355,7 @@ export default async function CalibrationPage() {
             <TimelineRow
               phase="未來 / SOCIAL"
               status="UNRESOLVED · 待 Tim 拍板"
-              body="是否 expose 其他會員 calibration · 或 leaderboard 排 most-calibrated members。 高度爭議 — 一方面是 healthy competition · 一方面是 Costly Signaling 走太遠變比慘。 留 brand decision · 不主動推。"
+              body="是否公開其他會員的準度 · 或排一個「最準會員」榜。 很有爭議 — 一邊是良性競爭,一邊是比慘比過頭。 留給 Tim 拍板 · 不主動推。"
             />
           </div>
         </section>

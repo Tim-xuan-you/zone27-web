@@ -17,12 +17,12 @@ import {
 } from "@/lib/hey-tim-entries";
 
 export const metadata = createPageMetadata({
-  title: "Hey Tim · subscriber Q&A ledger · Bill James pattern · 您 ask · Tim 親手 reply",
+  title: "Hey Tim · 訂閱者問答帳本 · 您問 · Tim 親手回",
   description:
-    "Bill James「Hey Bill」 2009 起 15+ 年 canonical pattern · 球迷 email questions → Tim 親手 reply → 公開 ledger 不藏 · 包括 Tim 答錯後的 correction。Defector Funbag + Stratechery Daily Update + Tom Tango comments + patio11 reader-reply 同 axis · canonical 8th in ZONE 27 append-only ledger family · 0 cherry-pick · 0 retroactive delete · 同 /integrity rule #9 mandatory-ledger discipline 物理 codify。",
-  ogTitle: "Hey Tim · subscriber Q&A · Bill James 15-yr pattern · ZONE 27",
+    "您寄 email 來問 · Tim 親手回 · 答案公開在這 · 不藏 · 包括 Tim 答錯後的更正。只增不刪 · 不回頭刪掉 · 同 /integrity 第 9 條 · 無論問題好壞都一定公開。",
+  ogTitle: "Hey Tim · 訂閱者問答 · 您問 · Tim 親手回 · ZONE 27",
   ogDescription:
-    "您 ask · Tim 親手 reply · 公開 ledger · 不藏「我答錯了」 correction · Bill James + Defector + Stratechery pattern",
+    "您問 · Tim 親手回 · 公開帳本 · 不藏「我答錯了」的更正",
   path: "/hey-tim",
 });
 
@@ -142,21 +142,17 @@ export default function HeyTimPage() {
             className="text-mute text-base leading-relaxed max-w-2xl mb-4"
             style={{ fontFamily: "Georgia, serif", textWrap: "pretty" }}
           >
-            Bill James 2009 起 ship「Hey Bill」 — 球迷 email questions ·
-            Bill 親手 reply · 公開 ledger 不藏。 15+ 年來這個 page 是 Bill
-            James Online subscription 第 1 retention driver(讓人續訂的不是
-            預測準度 · 是「Bill 在另一頭」 的感覺)。 ZONE 27 採同 axis
-            from Year 0。
+            您寄 email 來問問題 · Tim 親手回 · 答案公開在這 · 不藏。
+            讓人留下來的不是預測有多準 · 是知道「另一頭真的有個人在」。
+            ZONE 27 從第一天就這樣做。
           </p>
           <p
             className="text-mute/85 text-sm leading-relaxed max-w-2xl"
             style={{ fontFamily: "Georgia, serif", textWrap: "pretty" }}
           >
-            包括 Tim 答錯後的 correction(certainty =「wrong-then-corrected」
-            · 同 /audit DIVERGED 等大 axis)。 APPEND-ONLY · 0 retroactive
-            delete · 同 /integrity rule #9(R80)mandatory-ledger discipline
-            extended to Q&amp;A artifact layer · 同 Berkshire 70-year
-            annual letter「無論好年壞年 都 mandatory publish」 pattern。
+            包括 Tim 答錯之後的更正(標記成「答錯已更正」 · 跟 /audit
+            把失準的預測一樣大方公開同一個態度)。 只增不刪 · 不回頭刪掉 ·
+            同 /integrity 第 9 條 · 無論問題好壞都一定公開。
           </p>
           <div className="mt-6 mb-2">
             <ArticleMeta
@@ -177,9 +173,9 @@ export default function HeyTimPage() {
             / §01 · HOW TO ASK
           </p>
           <p className="text-mute text-sm leading-relaxed mb-6">
-            兩條路徑 · 都 OK · 都 Tim 親手 reply。 1-week typical reply · 0
-            reply within 7 days = published 「PENDING TIM · 7-day SLA」
-            status per /integrity rule #9 binding。
+            兩條路徑 · 都可以 · 都是 Tim 親手回。 通常一週內回 ·
+            若 7 天還沒回 · 這份紀錄會公開標成「等待 Tim 回覆 · 7 天內」 ·
+            見 /integrity 第 9 條。
           </p>
           <ol className="space-y-4 mt-4">
             <li className="border-l-2 border-gold/40 pl-4 py-2">
@@ -268,12 +264,9 @@ export default function HeyTimPage() {
               className="text-mute/85 text-sm leading-relaxed mt-8 italic"
               style={{ fontFamily: "Georgia, serif", textWrap: "pretty" }}
             >
-              ⚓ Year 0 · 1 SEED entry showing format · waiting for first
-              real visitor Q。 同 /year-zero + /founders/from-one-current-
-              founder + FoundingMemberLedger 263 empty seats pattern · 空
-              的 ledger 也是 ledger · 空 = signal。 不 fake testimonials per
-              /integrity rule #11 · 不 manufacture inbound per /audit S05
-              PRE-COMMIT · 等 真實 Q in。
+              ⚓ 開站第一年 · 目前只有 1 則示範 · 在等第一個真實提問。
+              空的帳本也是帳本 · 空本身就是一種訊號。 我們不假造推薦 ·
+              不自導自演問題 · 就等真實的問題進來。
             </p>
           )}
         </section>
@@ -290,33 +283,26 @@ export default function HeyTimPage() {
             className="text-mute text-base leading-relaxed mb-4"
             style={{ fontFamily: "Georgia, serif", textWrap: "pretty" }}
           >
-            ZONE 27 有 22 binding rules + 8 canonical ledgers + receipts +
-            /letter + /year-zero · 但 0 recurring proof that Tim 是 someone
-            on the other end of a line。 整 brand IP 是「trust the human」
-            · 但無 visible 「Tim 親手 reply」 ritual。 此 page closes structural
-            gap · 為 years 2-5 brand consistency 物理 codify · 不只 launch
-            week 用。
+            ZONE 27 有很多公開規則、公開帳本、公開收據 · 但一直沒有一個
+            能持續證明「Tim 真的在另一頭」的地方。 整個品牌講的是
+            「相信這個人」 · 卻沒有一個看得到「Tim 親手回覆」的固定儀式。
+            這頁補上這個缺口 · 不只開站那週用 · 是往後好幾年都在。
           </p>
           <p
             className="text-mute text-base leading-relaxed mb-4"
             style={{ fontFamily: "Georgia, serif", textWrap: "pretty" }}
           >
-            Founders 27 spending NT$ 2,700 應該看到 Tim 親手 reply on dated
-            entries before deciding · 不是 marketing「我們很懂台灣棒球」
-            self-claim · 是 dialogue artifact 物理 codify。 Bill James
-            Online sub renews 15+ years 不是因為預測 100% 對 · 是因為
-            Bill 親手 reply on Hey Bill。 ZONE 27 採同 axis from Year 0。
+            花 NT$ 2,700 加入 Founders 27 的人 · 在決定前應該看得到 Tim
+            親手、有日期的回覆 · 而不是一句「我們很懂台灣棒球」的廣告詞。
+            讓人年復一年留下來的 · 從來不是預測 100% 命中 · 是有人真的會回你。
           </p>
           <p
             className="text-mute/85 text-sm leading-relaxed"
             style={{ fontFamily: "Georgia, serif", textWrap: "pretty" }}
           >
-            這也是 8th in ZONE 27 canonical append-only ledger family
-            (ENGINE_OPS_LOG · ENGINE_DIFF_BEACONS · NO_PUSH_INVENTORY ·
-            RECIPROCITY_LEDGER · LOCAL_STORAGE_INVENTORY · SOLO_FOUNDER_PEERS
-            · LETTER_BODY/EDIT_HISTORY · HEY_TIM_ENTRIES)· 同 discipline ·
-            同 Costly Signaling per Spence 1973 · 無人能 fake 200-entry
-            reply log over 18 months without actually replying。
+            這也是 ZONE 27 一系列「只增不刪」公開紀錄的其中一份 · 同樣的紀律。
+            沒有人能假造一份累積 18 個月、上百則親手回覆的問答紀錄 ·
+            除非他真的每一則都親手回了。
           </p>
         </section>
 
@@ -329,56 +315,50 @@ export default function HeyTimPage() {
             / §04 · 不做 ANTI-PATTERN
           </p>
           <p className="text-mute text-sm leading-relaxed mb-6">
-            此 page 結構性拒絕的 6 件事 · 配對 11 NEVER + NoPushManifest +
-            22 binding rules · 不藏 hidden flexibility。
+            這頁刻意不做的 6 件事 · 都先講明白 · 不留模糊空間。
           </p>
           <ul className="space-y-3 text-mute text-sm leading-relaxed">
             <NotDoItem>
-              <strong>NO comment thread / reply-button</strong> · pull not
-              push · 同 /letter axiom + 11-NEVER #1 user-to-user social
-              platform
+              <strong>不做留言串 / 回覆鍵</strong> · 您拉內容來看 ·
+              我們不推播 · 這裡不是讓使用者互相留言的社群平台
             </NotDoItem>
             <NotDoItem>
-              <strong>NO email subscribe form for new Q&amp;A</strong> ·
-              per NoPushManifest #1-2 · reader pulls 不 push
+              <strong>不做新問答的 email 訂閱表單</strong> ·
+              您主動來看 · 我們不推播
             </NotDoItem>
             <NotDoItem>
-              <strong>NO Discord / forum / live chat</strong> · 同 Pinboard
-              Cegłowski 17-yr solo 拒絕 community · brand pure solo voice
+              <strong>不做 Discord / 論壇 / 即時聊天室</strong> ·
+              一個人做 · 不開社群 · 保持單純
             </NotDoItem>
             <NotDoItem>
-              <strong>NO「Top-rated Q」 sorting / voting / popularity</strong> ·
-              11-NEVER #2 streak/engagement-farming · APPEND-ONLY chronological
+              <strong>不做「熱門問題」排序 / 投票 / 人氣榜</strong> ·
+              只按時間順序 · 只增不刪
             </NotDoItem>
             <NotDoItem>
-              <strong>NO ghostwritten / AI-generated / outsourced reply</strong> ·
-              11-NEVER #11 fake testimonials · Tim 親手 only · 0 outsource
+              <strong>不做代筆 / AI 生成 / 外包的回覆</strong> ·
+              全部 Tim 親手 · 不外包
             </NotDoItem>
             <NotDoItem>
-              <strong>NO retroactive edit of past Q or A</strong> · APPEND-ONLY
-              · correction = NEW entry「wrong-then-corrected」 referencing
-              prior slug · 同 git commit history pattern
+              <strong>不回頭修改過去的問與答</strong> · 只增不刪 ·
+              要更正就新增一則「答錯已更正」 · 連回前一則
             </NotDoItem>
           </ul>
         </section>
 
         <FounderSignOff signedAt="2026-05-23">
           <p>
-            這個 page 是 ZONE 27 R80 W-H 「BIGGEST GAP」 closure · 沒有
-            這個 page · 整個 brand IP「trust the human」 沒有 recurring proof。
-            Bill James 15+ 年的 Hey Bill · 是 Bill James Online subscription
-            第 1 retention driver。 我採同 axis at Year 0。
+            沒有這頁 · 整個「相信這個人」的品牌就少了一個能持續證明的地方。
+            讓人年復一年留下來的 · 不是預測多準 · 是有人真的會回你。
+            ZONE 27 從第一天就這樣做。
           </p>
           <p>
-            您 ask · 我親手 reply · 公開 ledger · 包括我答錯的 correction。
-            7-day SLA · 0 ghostwritten · 0 outsourcing · APPEND-ONLY 不
-            retroactive delete · 同 /integrity rule #9 binding。
+            您問 · 我親手回 · 公開在這 · 包括我答錯的更正。
+            7 天內回 · 不代筆 · 不外包 · 只增不刪 · 同 /integrity 第 9 條。
           </p>
           <p>
-            如果 7 天後您沒收到 reply · 此 ledger 會顯示「PENDING TIM ·
-            7-DAY SLA」 status · 違反 SLA 觸發 /receipts 紅字 entry per
-            /ethics commitment #5 + #8 binding。 brand IP「方法公開 · 品味
-            私藏」 8 字 grammar 物理 codify 到 dialogue artifact 層。
+            如果 7 天後您還沒收到回覆 · 這份紀錄會標成「等待 Tim 回覆 ·
+            7 天內」 · 逾時就在 /receipts 留下紅字 · 見 /ethics 第 5 與第 8 條。
+            「方法公開 · 品味私藏」這 8 個字 · 一路落實到問答這一層。
           </p>
         </FounderSignOff>
 

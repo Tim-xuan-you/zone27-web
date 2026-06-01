@@ -6,21 +6,21 @@ import FounderSignOff from "@/components/FounderSignOff";
 import ArticleMeta from "@/components/ArticleMeta";
 
 export const metadata: Metadata = {
-  title: "Postmortem 2028 · ZONE 27 失敗 obituary written 2 years before · Premortem(Klein 1998)",
+  title: "我們的訃聞 · 寫在 ZONE 27 倒下前 2 年",
   description:
-    "Premortem (Klein 1998 + HBR 2007) prospective hindsight 應用 · Tim 親手 first-person past-tense 寫 2028-05-26 ZONE 27 5 種最可能 die-by 失敗劇本 · 每 scenario 含 failure narrative + early-warning signal + canary fire trigger · 同 /audit S05 PRE-COMMIT clause + /steelman 5 objections 平行 pratfall surface · 6th publish-weakness artifact · 不藏未來可能 die 的方式 · 若 5 個 scenarios 全 2028-05-26 前未 fire · ZONE 27 survived · 若 1 個 fire · 此 page 變 receipt · brand IP「方法公開」 axiom 延伸到 prospective-failure 層 · 結構性 LINE 老師 / 報馬仔 永遠無法 ship 此 page(他們不公佈失敗劇本 · 也不 commit 給 failure 預測)。",
+    "Tim 親手用過去式寫下 2028 年 ZONE 27 最可能倒下的 5 種劇本 · 每個劇本包含失敗的故事、早期警訊、觸發後要做的事 · 不藏未來可能死掉的方式。 若這 5 個劇本到 2028-05-26 都沒發生 · ZONE 27 活了下來 · 若有一個發生 · 這頁就變成證據。 LINE 老師、報馬仔永遠不會做這樣一頁 · 因為他們不公布失敗劇本 · 也不替自己的失敗先立下承諾。",
   openGraph: {
-    title: "Postmortem 2028 · ZONE 27 失敗 obituary",
+    title: "我們的訃聞 · 寫在 ZONE 27 倒下前 2 年",
     description:
-      "Tim 親手 2028 失敗劇本 · Premortem Klein 1998 + HBR 2007 prospective hindsight · 5 scenarios + 早期 warning signal + canary fire trigger · pratfall 6th surface",
+      "Tim 親手寫下 2028 失敗劇本 · 5 種最可能倒下的方式 + 早期警訊 + 觸發後要做的事",
     type: "article",
     url: "/founders/postmortem-2028",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Postmortem 2028 · ZONE 27 失敗 obituary",
+    title: "我們的訃聞 · 寫在 ZONE 27 倒下前 2 年",
     description:
-      "Tim 親手 2028 失敗劇本 · Premortem Klein 1998 + HBR 2007 · 5 scenarios + 早期 warning · pratfall 6th",
+      "Tim 親手寫下 2028 失敗劇本 · 5 種最可能倒下的方式 + 早期警訊 + 觸發後要做的事",
   },
   alternates: {
     canonical: "/founders/postmortem-2028",
@@ -78,57 +78,57 @@ const SCENARIOS: Scenario[] = [
   {
     no: "01",
     enKicker: "SUSTAINABILITY COLLAPSE",
-    zhTitle: "Tim burnout · 親手 reply 270 人 + 每週工程筆記 不可 sustain",
+    zhTitle: "Tim 燃燒殆盡 · 一個人回 270 人 + 每週工程筆記 · 撐不下去",
     narrative:
-      "我在 Q2 2027 開始 ship 速度減半。 Founders 27 全 270 個都已 onboarded · 但每週寫工程筆記 + reply /hey-tim + ingest CPBL + maintain calibration 全棧 solo 撐不住。 一開始我以為再 push 一下就好。 接著我開始略過某些週的工程筆記 · 然後 /hey-tim reply 從 24hr 變 72hr 變一週。 BLACK CARD 訂戶看到 cadence 降質 · 不續訂下季。 2027 Q4 · 我發現 sustaining velocity 是 brand model 的 hidden constraint · 不是 nice-to-have。",
+      "我在 2027 Q2 開始出貨速度減半。 Founders 27 的 270 人都已經加入 · 但每週要寫工程筆記、回訊息、處理 CPBL 資料、維護準度報告 · 一個人全包扛不住。 一開始我以為再撐一下就好。 接著我開始略過某幾週的工程筆記 · 然後回訊息從 24 小時變 72 小時變一週。 BLACK CARD 訂戶看到品質下降 · 下一季就不續訂了。 2027 Q4 · 我才發現「能不能持續維持速度」是這個模式藏起來的死穴 · 不是可有可無的事。",
     signal:
-      "WATCHING · 每週工程筆記延遲 ≥ 3 天 · /hey-tim reply median ≥ 48 hr · /now journal 連續 2 週空 update。",
+      "WATCHING · 每週工程筆記延遲 3 天以上 · 回訊息的中位時間超過 48 小時 · 進度日誌連續 2 週沒更新。",
     canary:
-      "FIRE IF · 2026-12-31 前任一指標 trigger · 立即在 /year-zero 公開 cadence-revision letter · 暫停 Founders 27 新申請 · 重 size 個人 sustainable bandwidth。",
+      "FIRE IF · 2026-12-31 前任一指標觸發 · 立即公開一封「調整更新節奏」的信 · 暫停 Founders 27 新申請 · 重新評估我一個人能負荷的量。",
   },
   {
     no: "02",
     enKicker: "REVENUE BRIDGE GAP",
-    zhTitle: "Founders 27 售完 · BLACK CARD NT$ 500/31 天 無法 sustain solo 工程進度",
+    zhTitle: "Founders 27 賣完 · 光靠 BLACK CARD NT$ 500/31 天 養不起一個人的工程進度",
     narrative:
-      "Founders 27 270 席位在 2027 Q1 sold out · NT$ 729,000 年度收入入帳。 我以為這就是 break-even。 結果 BLACK CARD NT$ 500/31 天 conversion 比預期低 · 一年約 12 期 × 100 訂戶 ≈ NT$ 600,000/年 · solo 工程 + CPBL 數據 + 客服成本超過 · 2027 年底我發現自己在補貼 · 不是 sustaining。 brand IP「engine FREE forever」 binding · 不能 monetize engine。 必須選擇:(a)放棄全職 · 兼差維持 · ship 速度 1/3 ·(b)增 Founders 27 名額 · 違反 brand IP 270/年 lock ·(c)加 paid features · 違反 [[feedback-zone27-paid-model-is-support-not-features]]。 三個都 hurt brand。",
+      "Founders 27 的 270 席在 2027 Q1 賣完 · 年度收入 NT$ 729,000 入帳。 我以為這就打平了。 結果 BLACK CARD NT$ 500/31 天 的轉換率比預期低 · 一年大約 12 期 × 100 訂戶 ≈ NT$ 600,000/年 · 一個人扛工程 + CPBL 數據 + 客服的成本超過收入 · 2027 年底我發現自己在補貼 · 不是在維持。 「引擎永遠免費」是不能破的原則 · 不能拿引擎收費。 我只剩三個選擇:(a)放棄全職、兼差維持 · 但出貨速度掉到三分之一 ·(b)增加 Founders 27 名額 · 但這破壞了原本的稀缺承諾 ·(c)加付費功能 · 但訂閱本來就該是支持、不是把功能鎖起來。 三個都傷品牌。",
     signal:
-      "WATCHING · 2027 Q2 active BLACK CARD 訂戶 < 80 · 6 個月 burn rate > 6 個月 runway · Founders 27 售出 < 200 by 2027-06-30。",
+      "WATCHING · 2027 Q2 有效 BLACK CARD 訂戶低於 80 · 接下來半年的花費超過半年的存糧 · 到 2027-06-30 Founders 27 賣出不到 200。",
     canary:
-      "FIRE IF · 2027-06-30 BLACK CARD < 80 + Founders 27 < 200 · 立即在 /year-zero + /founders/ledger 公開 financial-honesty letter · 邀請 Founders 27 vote 4 個 sustaining options · 不靜默 pivot。",
+      "FIRE IF · 2027-06-30 BLACK CARD 不到 80 且 Founders 27 不到 200 · 立即在 /founders/ledger 公開一封財務誠實信 · 邀請 Founders 27 票選 4 個維持下去的方案 · 不偷偷轉向。",
   },
   {
     no: "03",
     enKicker: "ENGINE CALIBRATION DRIFT",
-    zhTitle: "Engine v0.3 N=30 sample 真實跑出來 · calibration 比 v0.2 worse",
+    zhTitle: "引擎 v0.3 累積 30 場真實跑出來 · 準度比 v0.2 還差",
     narrative:
-      "2026 Q4 · CPBL N=30 sample 累積完成。 v0.3 production ship。 結果 v0.3 calibration drift 比 v0.2 高 8 個百分點 · v0.2 在 reliability diagram 上更 close to 45° line。 我必須在 /audit S05 PRE-COMMIT 規則下 ·(a)公開 DIVERGED ratio worsening · (b)decide 是否 rollback v0.3 · (c)寫 worse-engine post-mortem。 訂戶看到 calibration 退步 · trust 動搖。 即使全 publish + 全 honest · perception damage 已造成。 ZONE 27 brand IP「方法公開」 此時 cuts both ways · transparency 是 trust 累積 axiom · 也是 trust 拆穿 axiom。",
+      "2026 Q4 · CPBL 累積到 30 場樣本。 v0.3 上線。 結果 v0.3 的準度比 v0.2 還差了 8 個百分點 · 舊版反而更準。 在我們白紙黑字的規則下 · 我必須:(a)公開失準比例變高了 · (b)決定要不要把 v0.3 退回舊版 · (c)寫一份「新版更差」的檢討。 訂戶看到準度退步 · 信任動搖。 就算我全部公開、全部誠實 · 觀感的傷害已經造成。 「方法公開」這件事這時候是雙面刃 · 透明會累積信任 · 也會把退步攤在陽光下。",
     signal:
-      "WATCHING · v0.3 first 30 finalized matches calibration drift > 5 percentage points worse than v0.2 baseline · /track-record DIVERGED ratio rising 連續 4 週。",
+      "WATCHING · v0.3 前 30 場結算後的準度比 v0.2 差超過 5 個百分點 · /track-record 失準比例連續 4 週上升。",
     canary:
-      "FIRE IF · v0.3 第 30 場 calibration vs v0.2 worse · 立即在 /methodology/diff 加 v0.3 rollback rationale section · 同 R130 W-CRITICAL「自己 introduced 自己 fixed」 axiom · 不藏。",
+      "FIRE IF · v0.3 第 30 場準度比 v0.2 差 · 立即在 /methodology/diff 加上 v0.3 退版的理由說明 · 自己出的問題自己公開修 · 不藏。",
   },
   {
     no: "04",
     enKicker: "DATA PIPELINE HALT",
     zhTitle: "CPBL 真實數據 pipeline 中斷 · Tim 手動 screenshot 不可持續",
     narrative:
-      "2026 Q3 · CPBL 賽程 ramp up to 240 場/年 + 季後賽 + 台灣大賽。 我每天截 2-3 場 · 一週 14-21 場 · 一年 1000+ screenshots · 半自動 parse 也要 30 min/場。 1000+ 場 × 30 min = 500 小時/年 純 data ingest · 即一個 full-time worker 等價。 我做不下去。 自動化 cpbl.com.tw 違反 [[zone27-coverage-philosophy]]「NOT scraped」 redline。 不自動化 = 不能 sustain。 binding redline 把我 trap 在 dead end · 2027 我必須選擇:(a)違反 brand IP 開始 scraping · (b)只 ingest selected 重大場次 · (c)放棄 daily ingestion claim。 三個都 hurt brand。",
+      "2026 Q3 · CPBL 賽程衝到一年 240 場 + 季後賽 + 台灣大賽。 我每天截 2-3 場 · 一週 14-21 場 · 一年一千多張截圖 · 就算半自動處理也要每場 30 分鐘。 一千多場 × 30 分鐘 = 一年 500 小時純粹在輸入資料 · 等於一個全職人力。 我做不下去。 但自動爬 CPBL 官網違反我們「不爬資料」的紅線。 不自動化就撐不住 · 紅線把我逼進死胡同 · 2027 我只剩三個選擇:(a)破戒開始爬資料 · (b)只收重大場次 · (c)放棄「每天更新」的說法。 三個都傷品牌。",
     signal:
-      "WATCHING · 每週 ingested 場次 < scheduled 場次 80% · /track-record N 累積速度 < 1 場/天 · Tim ingest 時間佔每日工作時 > 40%。",
+      "WATCHING · 每週實際處理的場次低於排定場次的 8 成 · /track-record 累積速度低於一天一場 · Tim 處理資料的時間超過每日工時 4 成。",
     canary:
-      "FIRE IF · 2026-10-31 前連續 3 週 ingestion < 80% · 立即在 /coverage 公開 selected-not-all framing letter · 不靜默 reduce scope · 同 /audit S05 30-day 提前公告 protocol。",
+      "FIRE IF · 2026-10-31 前連續 3 週處理量低於 8 成 · 立即在 /coverage 公開一封信、說明改成只收重大場次 · 不偷偷縮小範圍 · 並提前 30 天公告。",
   },
   {
     no: "05",
     enKicker: "STEALTH MODE BROKEN",
-    zhTitle: "premature SEO / social launch · 半成品 imprint 第一印象 dilutes positioning",
+    zhTitle: "太早衝行銷上線 · 半成品的第一印象打壞定位",
     narrative:
-      "2026 Q4 · 我 panic-launched SEO 因為 Founders 27 conversion 比預期慢。 sitemap.xml ship · Google Search Console 解封 · IG / Threads 帳號 register · 寫了 launch 文。 結果第一波流量在還沒準備好的狀態下湧入。 visitors 看到的 N=15 calibration sample · v0.2 engine · 0 真實付費 receipts · 半成品 imprint 永久記憶體。 之後 ship 真的成熟版 · 第一印象 already imprinted · positioning damaged。 [[feedback-zone27-domain-deferred]] memory canonical 我自己 break · 同 R138 W2「明天再做 / TapPay 訂閱」 stale-promise pattern + R139 W2「賽事討論室」 brand IP contradiction · 我自己 introduced 自己 trapped。",
+      "2026 Q4 · 因為 Founders 27 轉換比預期慢 · 我慌了、提早衝行銷。 上了網站地圖、開放搜尋引擎、註冊社群帳號、寫了上線文。 結果第一波流量在還沒準備好的狀態下湧進來。 訪客看到的是只有 15 場的準度樣本、還是舊版引擎、0 筆真實付費紀錄 · 半成品的印象就這樣烙進腦海。 之後真的做出成熟版本 · 但第一印象已經定型 · 定位被打壞了。 我自己破了「域名與行銷等時機成熟再動」的原則 · 跟之前那些「明天再做」的拖延承諾、以及自打嘴巴的功能一樣 · 都是我自己埋的坑自己跳。",
     signal:
-      "WATCHING · Tim 主動提「我們現在 launch 吧」 vs binding [[feedback-no-rest-zone27]] + AGENTS.md SEO frozen rule · self-detected impatience signal · 訪客 unique visitors 突然 spike 50%+ 無 explainable source。",
+      "WATCHING · Tim 自己主動說「我們現在上線吧」 · 違反「不躁進」原則和 SEO 凍結規則 · 這是我自己察覺到的急躁訊號 · 或訪客不重複人數突然暴增 5 成以上、又找不到原因。",
     canary:
-      "FIRE IF · 任何 SEO / social account / sitemap action 在 5 個 sustainability gate 全綠 之前 trigger · 立即在 /transparency 公開 premature-launch self-correction letter · 暫停 promotion · 同 R130 + R135 + R139「自己 catch」 cumulative axiom。",
+      "FIRE IF · 在 5 個基礎條件全綠之前做了任何行銷、社群帳號、網站地圖的動作 · 立即在 /transparency 公開一封「提早上線、自我修正」的信 · 暫停推廣 · 自己抓到自己。",
   },
 ];
 
@@ -165,19 +165,17 @@ export default function PostmortemPage() {
             POSTMORTEM · DATED {PROSPECTIVE_DATE} · WRITTEN {PUBLISHED_DATE}
           </p>
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-light leading-[1.05] tracking-tight text-bone">
-            ZONE 27 失敗{" "}
-            <span className="text-loss/85">obituary</span> · 寫在它 die 之前{" "}
+            ZONE 27 的{" "}
+            <span className="text-loss/85">訃聞</span> · 寫在它倒下前{" "}
             <span className="text-gold">2 年</span>
           </h1>
           <div className="zone27-rule max-w-[320px] mt-5" aria-hidden="true" />
           <p className="text-mute text-base sm:text-lg leading-relaxed mt-6 max-w-2xl">
-            這份 obituary 假設今天是 2028-05-26 · ZONE 27 已 die · 我用過去
-            式寫 5 個最可能 die 的方式。 不是預測 · 不是擔心 · 是
-            <strong className="text-bone">prospective hindsight</strong>(Klein
-            1998「Sources of Power」 ch.7 · HBR 2007「Performing a Project
-            Premortem」)· 一個 30% 更 effective 的 failure-cause identification
-            method · 因為 converts ambiguous future risk(System 2 effortful)
-            to concrete past narrative(System 1 fluent)。
+            這份訃聞假設今天是 2028-05-26 · ZONE 27 已經倒下 · 我用過去式
+            寫下 5 個最可能倒下的方式。 不是預測 · 不是擔心 · 是
+            <strong className="text-bone">先寫好自己的死法</strong>。
+            把模糊的未來風險 · 變成一個具體、寫死的故事 · 反而更容易看清
+            自己會敗在哪裡。
           </p>
           <div className="mt-6">
             <ArticleMeta readingMin={7} />
@@ -190,39 +188,35 @@ export default function PostmortemPage() {
             lang="en"
             className="font-mono text-gold text-[10px] tracking-[0.4em] mb-4"
           >
-            / 為什麼 ship 此 page · WHY THIS EXISTS
+            / 為什麼寫這一頁
           </p>
           <div className="space-y-4 zh-body text-mute text-base leading-relaxed">
             <p>
-              每一個 Taiwan tipster / LINE 老師 / 報馬仔 都 claim 自己永遠會
-              贏。 他們 business model 要求{" "}
-              <strong className="text-bone">perpetual confidence</strong>。
-              他們結構性無法 ship 此 page。 ZONE 27 brand IP 倒過來 ·{" "}
-              <strong className="text-bone">公開 own obituary</strong> = trust
-              signal that competitors CANNOT mimic · 同 Costly Signaling
-              (Spence 1973)100× axiom。
+              每一個 LINE 老師、報馬仔都宣稱自己永遠會贏。 他們的生意要靠{" "}
+              <strong className="text-bone">永遠看起來很有把握</strong> ·
+              結構上做不出這樣一頁。 ZONE 27 反過來 ·{" "}
+              <strong className="text-bone">公開自己的訃聞</strong> · 這是
+              對手學不來的信任證明。
             </p>
             <p>
-              此 page 是 ZONE 27 第 6 個 Pratfall surface · 平行於 /audit
-              EXCLUDE + /methodology LIMITS + /roadmap BOUNDARIES + /track-record
-              DIVERGED + /steelman · per
-              {" "}
+              這頁是 ZONE 27 公開自己弱點的其中一面 · 跟 /audit 列出模型限制、
+              /methodology 列出技術邊界、/roadmap 列出不做的範圍、/track-record
+              把失準跟命中一樣公開、以及 /steelman 自己寫反方論證 · 是同一套做法。
+              一旦發布 · 要修改必須提前 30 天在{" "}
               <Link
-                href="/audit#section-05"
+                href="/changelog"
                 className="text-gold underline-offset-4 hover:underline"
               >
-                /audit Section 05 PRE-COMMIT
+                /changelog
               </Link>
-              {" "}
-              clause append-only · 一旦 ship 30 天前公告於 /changelog 才可 modify。
+              {" "}公告。
             </p>
             <p>
-              若 5 個 scenarios 全 2028-05-26 前未 fire ·{" "}
-              <strong className="text-bone">ZONE 27 survived</strong> · 此 page
-              變 historical artifact。 若 1 個 fire ·{" "}
-              <strong className="text-bone">此 page 變 self-fulfilled receipt</strong>
-              · 我 anticipate 對了 · 但 anticipating 不能 save the project ·
-              brand IP「不藏 mistake」 axiom 物理 codify to prospective-failure 層。
+              若這 5 個劇本到 2028-05-26 都沒發生 ·{" "}
+              <strong className="text-bone">ZONE 27 活了下來</strong> · 這頁
+              就變成一段歷史紀錄。 若有一個發生 ·{" "}
+              <strong className="text-bone">這頁就變成自己預言成真的證據</strong>
+              · 我猜對了 · 但猜對救不了這個專案 · 連未來可能怎麼死 · 我都不藏。
             </p>
           </div>
         </section>
@@ -238,10 +232,10 @@ export default function PostmortemPage() {
             lang="en"
             className="font-mono text-loss/85 text-[10px] tracking-[0.4em] mb-4"
           >
-            / CANARY SUMMARY · 早期 warning watchlist
+            / 早期警訊清單
           </p>
           <h2 className="text-2xl sm:text-3xl text-bone font-light tracking-tight mb-6">
-            ZONE 27 倖存 IF 以下 5 個指標 全 2028-05-26 前未 fire
+            以下 5 個指標到 2028-05-26 都沒觸發 · ZONE 27 就活了下來
           </h2>
           <ol className="space-y-3 text-mute text-sm leading-relaxed list-decimal pl-6">
             {SCENARIOS.map((s) => (
@@ -253,9 +247,8 @@ export default function PostmortemPage() {
             ))}
           </ol>
           <p className="font-mono text-mute/80 text-[10px] tracking-[0.25em] leading-relaxed mt-6">
-            本 5 scenarios + canary triggers binding append-only · 修改任一條
-            需 30 天前 /changelog 公告 · 同 /audit S05 PRE-COMMIT discipline
-            · 不能 retroactively soften 或 remove scenario。
+            這 5 個劇本與觸發條件只能增、不能改弱或刪除 · 修改任一條都需
+            提前 30 天在 /changelog 公告。
           </p>
         </section>
 
@@ -265,7 +258,7 @@ export default function PostmortemPage() {
             lang="en"
             className="font-mono text-gold text-[10px] tracking-[0.4em] mb-4"
           >
-            / RELATED PRATFALL SURFACES · 5 sibling artifacts
+            / 其他公開弱點的頁面
           </p>
           <ul className="space-y-2 text-mute text-sm leading-relaxed">
             <li>
@@ -273,36 +266,36 @@ export default function PostmortemPage() {
                 href="/audit"
                 className="text-gold/85 underline-offset-4 hover:underline"
               >
-                /audit EXCLUDE
+                /audit
               </Link>
-              {" · model limits + sample debt + estimation disclosure"}
+              {" · 模型限制 + 樣本不足 + 哪些數字是推估的"}
             </li>
             <li>
               <Link
                 href="/methodology"
                 className="text-gold/85 underline-offset-4 hover:underline"
               >
-                /methodology LIMITS
+                /methodology
               </Link>
-              {" · technical bounds + N≥30 SAMPLE DEBT explicit"}
+              {" · 技術邊界 + 還沒累積到足夠樣本"}
             </li>
             <li>
               <Link
                 href="/roadmap"
                 className="text-gold/85 underline-offset-4 hover:underline"
               >
-                /roadmap BOUNDARIES
+                /roadmap
               </Link>
-              {" · scope refused + LOCKED / EXPLORING / BRAND BOUNDARIES"}
+              {" · 哪些功能我們刻意不做"}
             </li>
             <li>
               <Link
                 href="/track-record"
                 className="text-gold/85 underline-offset-4 hover:underline"
               >
-                /track-record DIVERGED
+                /track-record
               </Link>
-              {" · receipt misses equal weight as PROVED"}
+              {" · 失準跟命中一樣大方公開"}
             </li>
             <li>
               <Link
@@ -311,16 +304,16 @@ export default function PostmortemPage() {
               >
                 /steelman
               </Link>
-              {" · 5 strongest external objections wrote first"}
+              {" · 自己先寫出反對我們最強的論點"}
             </li>
           </ul>
         </section>
 
         <FounderSignOff signedAt={PUBLISHED_DATE}>
-          這份 obituary 不是預測。 是 commitment 不藏未來可能 die 的方式。
-          若您 read 完仍想加入 Founders 27 · 您 know what 您 sign up for。
-          若您 read 完選擇 walk away · 我 thank 您 for the honest 評估 ·
-          不會 retarget · 不會 email · 不會 push。
+          這份訃聞不是預測。 是一個承諾:連未來可能怎麼倒下 · 我都不藏。
+          若您讀完仍想加入 Founders 27 · 您清楚自己在加入什麼。
+          若您讀完選擇離開 · 我謝謝您誠實的評估 · 不會回頭追蹤您 ·
+          不會寄信 · 不會推銷。
         </FounderSignOff>
 
         <Footer />

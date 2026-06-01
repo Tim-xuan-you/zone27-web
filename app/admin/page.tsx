@@ -443,12 +443,6 @@ export default async function AdminPage() {
             >
               ← 會員端 preview · /member
             </Link>
-            <Link
-              href="/now"
-              className="font-mono text-mute hover:text-gold text-[10px] tracking-[0.4em] transition-colors"
-            >
-              這頁工程現狀 · /now →
-            </Link>
           </div>
         </section>
       </main>

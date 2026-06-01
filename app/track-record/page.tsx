@@ -285,9 +285,8 @@ export default function TrackRecordPage() {
           {finalized.length === 0 && (
             <span>
               ⚠ 樣本數 0 · 第一筆 entry 賽後 24 小時內收錄 · 同 Tim 手工 ingest cadence
-              (per <Link href="/audit#section-05" className="text-gold hover:underline">/audit S05</Link>{" "}
-              + <Link href="/now" className="text-gold hover:underline">/now</Link>{" "}
-              公開 ingest 時間)
+              (公開 ingest 時間見{" "}
+              <Link href="/audit#section-05" className="text-gold hover:underline">/audit</Link>)
             </span>
           )}
           {finalized.length > 0 && finalized.length < 30 && (

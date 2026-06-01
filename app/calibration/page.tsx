@@ -10,9 +10,9 @@ import AnonCalibrationStrip from "@/components/AnonCalibrationStrip";
 import { getFinalizedMatches, type Match } from "@/lib/matches";
 
 export const metadata: Metadata = {
-  title: "Checking Our Work · ZONE 27 engine self-grading",
+  title: "Checking Our Work · ZONE 27 引擎自評",
   description:
-    "FiveThirtyEight 「Checking Our Work」 pattern · ZONE 27 引擎自評。 引擎賽前 say X% · 賽後 actual win-rate Y% · Brier score + reliability diagram + coin-flip baseline 對照。 玩運彩+報馬仔 永遠 ship 不出來這頁 · 因為一 publish 等於暴露 50-52% realized rate vs 94% stated「勝率」。 brand IP「方法公開」 物理 highest signal。",
+    "ZONE 27 引擎自評。 引擎賽前說 X% · 賽後實際贏 Y% · Brier score + reliability diagram + coin-flip baseline 對照。 我們公開自己的準度 · 明牌站不會這樣做 · 因為一公開就會暴露他們嘴上的勝率和實際差很多。",
 };
 
 // ── ZONE 27 · /calibration ──────────────────────────────
@@ -198,7 +198,7 @@ export default function CalibrationPublicPage() {
             lang="en"
             className="font-mono text-gold text-[10px] tracking-[0.45em] mb-6"
           >
-            / 01 · BRIER SCORE · TETLOCK CURRENCY
+            / 01 · BRIER SCORE · 引擎準度分數
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
             <div className="border border-gold/60 bg-slate/40 p-5 sm:p-6 glow-soft">
@@ -239,8 +239,8 @@ export default function CalibrationPublicPage() {
             </div>
           </div>
           <p className="text-mute text-sm leading-relaxed mb-3">
-            <strong className="text-bone">Brier score</strong>(Tetlock 2014-2018)
-            = mean squared error · 機率 vs outcome。
+            <strong className="text-bone">Brier score</strong>
+            {" "}= mean squared error · 機率 vs outcome。
             <span className="font-mono text-gold/80">0</span> = 完美 ·{" "}
             <span className="font-mono text-mute">0.25</span> = coin-flip baseline ·{" "}
             <span className="font-mono text-loss">1</span> = perfectly wrong。
@@ -360,8 +360,8 @@ export default function CalibrationPublicPage() {
               <strong className="text-bone">ZONE 27 structurally 可以 publish</strong>{" "}
               · 因為 BLACK CARD NT$ 500/31 天 + Founders 27 NT$ 2,700/365 天 ·
               訂閱費 不 depend on 引擎是否準。 您贏您輸 ZONE 27 都一樣賺。
-              這個 incentive alignment 是 displacement mission 的{" "}
-              <span className="text-gold">structural moat</span>。
+              正因為賺錢方式跟「您有沒有贏」脫鉤 · 我們才敢這樣公開 ·{" "}
+              <span className="text-gold">這是明牌站學不來的地方</span>。
             </p>
           </div>
         </section>
@@ -409,18 +409,16 @@ export default function CalibrationPublicPage() {
 
         <FounderSignOff>
           <p>
-            這頁是 ZONE 27 最 expensive 的 trust artifact · 因為公布等於
-            <strong>把自己暴露在 outcome accountability 之下</strong>。
+            這頁是 ZONE 27 最貴的一張信任憑證 · 因為公布它等於
+            <strong>把自己攤在「準不準大家看得到」之下</strong>。
           </p>
           <p>
-            FiveThirtyEight 2020 publish「Checking Our Work」 · 變成所有
-            probabilistic journalism 學術 cite 的 reference。 ZONE 27 採同
-            pattern · 但更具體 · 加 Brier score + coin-flip baseline 對照 ·
-            玩運彩+報馬仔 結構上無法 copy。
+            我們公開自己的準度 · 加上 Brier score + coin-flip baseline 對照 ·
+            明牌站不會這樣做 — 因為一公開就會暴露他們嘴上的勝率和實際差很多。
           </p>
           <p>
             修改此頁的計算邏輯需 30 天 /changelog 公告 · 同 /audit S05
-            PRE-COMMIT pattern · Costly Signaling 100×。
+            PRE-COMMIT pattern。
           </p>
         </FounderSignOff>
 

@@ -17,7 +17,7 @@ import {
 export const metadata: Metadata = {
   title: "Founders 27 · Open Allocation Ledger",
   description:
-    "Founders 27 分配公開帳本。 每週手寫更新本週新分配 / 累計 / 通過率 / 拒絕原因 sample(去 PII)。 Pratfall + Costly Signaling + Disclosure Philosophy + 倒置 SaaS · 4 brand IP axiom 同時 fire 的唯一 page。 沒有 luxury 品牌(Patek · Hermès · Tesla)做這件事 · ZONE 27 因 disclosure-first 結構性可以做。",
+    "Founders 27 分配公開帳本。 每週親手更新本週新分配 / 累計 / 通過率 / 拒絕原因(去個資)。 連我們拒絕了誰、為什麼都公開 — 因為 ZONE 27 一切公開,所以做得到。",
 };
 
 // ── ZONE 27 · Founders 27 Open Allocation Ledger ────────
@@ -145,20 +145,16 @@ export default function FoundersLedgerPage() {
             Founders 27 · 分配公開帳本
           </h1>
           <p className="mt-6 text-mute leading-relaxed max-w-2xl">
-            其他 luxury 品牌(Patek · Hermès · Tesla · Apple Vision Pro)做
-            <strong className="text-bone"> process transparency</strong> · 但
-            <strong className="text-bone">沒人公布「本週拒絕了誰 · 為什麼」</strong>。
-            ZONE 27 因 disclosure-first 結構性可以做。 每週手寫一次。
+            高端品牌通常會公開「流程」 · 但
+            <strong className="text-bone">幾乎沒人公布「本週拒絕了誰 · 為什麼」</strong>。
+            因為 ZONE 27 一切公開 · 所以我們做得到。 每週親手更新一次。
           </p>
           <p className="mt-4 text-mute/85 leading-relaxed max-w-2xl">
-            這頁 4 個 brand IP axiom 同時 fire:
-            <strong className="text-bone">Pratfall</strong>(公布拒絕)·
-            <strong className="text-bone">Costly Signaling</strong>(每週
-            手寫不可造假)·
-            <strong className="text-bone">Disclosure Philosophy</strong>(
-            延伸 /audit 公開模型 → 公開分配模型)·
-            <strong className="text-bone">倒置 SaaS</strong>(手工稀缺商品 =
-            手工稀缺流程)。
+            這頁把分配做到完全公開:
+            <strong className="text-bone">公布我們拒絕了誰</strong> ·
+            <strong className="text-bone">每週親手更新一次</strong>(不可造假)·
+            把<strong className="text-bone">分配規則攤在陽光下</strong> ·
+            連稀缺商品的分配流程都是手工。
           </p>
           <div className="mt-6 mb-2">
             <ArticleMeta readingMin={3} sample={{ current: REVIEW_WINDOWS.length, threshold: 30 }} />
@@ -215,10 +211,9 @@ export default function FoundersLedgerPage() {
           </div>
           {PRE_LAUNCH && (
             <p className="mt-5 font-mono text-loss/80 text-[10px] tracking-[0.3em] leading-relaxed">
-              ⚠ PRE-LAUNCH · 7 forged 為 hardcoded(per lib/founders-stats.ts
-              · Tim 親手 onboard 之前的 placeholder)。 申請通道在 payment
-              infra 就緒 + 付款開放後啟用(milestone-triggered · 不綁日期)·
-              第一週 review window 開啟才會有 weekly row。
+              ⚠ 尚未開放 · 目前 7 位是 Tim 親手 onboard 的早期會員 ·
+              申請通道在付款機制就緒後開放(看進度 · 不綁日期)·
+              開放後第一週才會有第一筆每週紀錄。
             </p>
           )}
           {!PRE_LAUNCH && (
@@ -251,34 +246,22 @@ export default function FoundersLedgerPage() {
             lang="en"
             className="font-mono text-gold text-[10px] tracking-[0.45em] mb-6"
           >
-            / SHADOWLESS RUN · 整批 270 = ZONE 27 1st Edition
+            / 最初 270 · 永久創始編號
           </p>
           <h2 className="text-2xl sm:text-3xl text-bone font-light tracking-tight mb-6">
-            為什麼整批 270 是「1st Edition」?
+            為什麼最初 270 個編號這麼特別?
           </h2>
           <p className="text-mute leading-relaxed max-w-2xl mb-5">
-            Pokemon TCG 1999 年 WoTC Base Set 第一批 print run 上面有個小小的{" "}
-            <strong className="text-bone">1st Edition sigil</strong>(後來
-            shadow 加回去 · 第一批就成「Shadowless」)· 從未被 reprint · 2024
-            Heritage Auctions PSA 10 1st Edition Shadowless Charizard 拍價{" "}
-            <strong className="text-gold">US$ 550,000</strong> ·{" "}
-            同一張卡 Unlimited 印量版本 low five figures · binary tier
-            mechanic 帶來 10-50× premium。
-          </p>
-          <p className="text-mute leading-relaxed max-w-2xl mb-5">
-            <strong className="text-bone">ZONE 27 採同 mechanic</strong> ·
-            最初 270 名 = ZONE 27 1st Edition Shadowless Run · 創始編號 #001–#270
+            <strong className="text-bone">最初 270 名 = ZONE 27 創始編號</strong> ·
+            #001–#270
             <span className="text-gold/90"> 發完即止 · 不會有第 271 個創始編號</span>。
-            會員不限量 · 第 271 位起的 Founders 27 + BLACK CARD 永遠 open(同 Unlimited
-            印量 · 一樣是真會員)· 但 1st Edition 創始編號永遠只有最初這 270 · 不可 reprint。
+            會員不限量 · 第 271 位起的 Founders 27 跟 BLACK CARD 永遠開放
+            (一樣是真會員)· 但這個永久創始編號 · 永遠只有最初這 270 個。
           </p>
           <p className="text-mute leading-relaxed max-w-2xl mb-5">
-            <strong className="text-bone">BLACK CARD 訂閱者永遠無法 retroactively
-            升 Founders 27</strong>(同 Unlimited 持有者永遠無法把卡片變成 1st
-            Edition)。 這是<span className="text-gold"> binary tier</span> ·
-            不是 sub-tier · 不分 #001 vs #027 prestige(我們無 vinyl First
-            Pressing sub-prestige 發明)· 純 print-run-of-record · NT$ 2,700/年
-            · 每年續訂不加價。
+            <strong className="text-bone">BLACK CARD 訂閱者無法回頭補拿創始編號</strong> ·
+            編號發完就是發完。 不分 #001 還是 #027 · 沒有誰比誰尊貴 ·
+            就是單純「最早的 270 人」的紀念。 NT$ 2,700/年 · 每年續訂不加價。
           </p>
           <div className="mt-6 bg-slate/40 border border-line/70 p-5 sm:p-6">
             <p
@@ -298,22 +281,21 @@ export default function FoundersLedgerPage() {
               <li className="flex gap-3 items-baseline">
                 <span className="font-mono text-gold/70 text-[10px] tracking-[0.25em]">02</span>
                 <span className="flex-1">
-                  創始編號發完後 · 不論付多少 · 都無法 retroactively 補拿
-                  #001–#270 · 1st Edition 編號 is binary(會員資格仍可升)
+                  創始編號發完後 · 不論付多少 · 都無法回頭補拿
+                  #001–#270 · 但會員資格仍可隨時加入或升級
                 </span>
               </li>
               <li className="flex gap-3 items-baseline">
                 <span className="font-mono text-gold/70 text-[10px] tracking-[0.25em]">03</span>
                 <span className="flex-1">
                   NT$ 2,700/年 永不調漲 · 創始編號持有者續訂價永遠 NT$ 2,700
-                  · 不會 reprint 漲價 · 同 1st Edition Shadowless 不可重印
                 </span>
               </li>
             </ul>
           </div>
           <p className="mt-5 font-mono text-mute/70 text-[10px] tracking-[0.3em] leading-relaxed">
-            ⚓ <strong className="text-bone">PRE-COMMIT</strong> · 上 3 條
-            binding rule · 修改需 30 天前{" "}
+            ⚓ <strong className="text-bone">事前承諾</strong> · 上 3 條
+            都是綁定規則 · 修改需 30 天前在{" "}
             <Link href="/changelog" className="text-gold underline-offset-4 hover:underline">
               /changelog
             </Link>{" "}
@@ -321,7 +303,7 @@ export default function FoundersLedgerPage() {
             <Link href="/audit" className="text-gold underline-offset-4 hover:underline">
               /audit
             </Link>
-            {" "}S05 PRE-COMMIT pattern · 違反 = brand 信用 collapse(per{" "}
+            {" "}的做法一致 · 違反就是賠上品牌信用(見{" "}
             <Link href="/ethics" className="text-gold underline-offset-4 hover:underline">
               /ethics
             </Link>
@@ -341,9 +323,9 @@ export default function FoundersLedgerPage() {
             為什麼是 270?
           </h2>
           <p className="text-mute leading-relaxed max-w-2xl mb-6">
-            棒球 1 場 = 27 個出局數(perfect game) · 270 = 10 倍。 同
-            ZONE 27 brand 數字哲學 — 不是 round 100/200 行銷數字 · 是棒球
-            數字 anchor。 一旦發滿 270 個創始編號 · 1st Edition 永遠關閉 · 會員仍不限量開放加入。
+            棒球 1 場 = 27 個出局數(完全比賽) · 270 = 10 倍。 這是棒球
+            數字 · 不是隨便湊的 100、200 行銷數字。 一旦發滿 270 個創始編號 ·
+            永久編號就此關閉 · 但會員仍不限量開放加入。
           </p>
 
           <h2 className="text-2xl sm:text-3xl text-bone font-light tracking-tight mb-6 mt-10">
@@ -358,32 +340,32 @@ export default function FoundersLedgerPage() {
             <RuleRow
               no="02"
               title="審核標準"
-              body="(a) 申請動機跟 brand IP 對齊(不接受純『投資』『增值』『轉售』 framing) · (b) 對 CPBL / 棒球分析有真實興趣 · (c) 不重複申請(同 email 4 次 = 自動 reject)。"
+              body="(a) 申請動機跟品牌精神對齊(不接受純『投資』『增值』『轉售』的說法) · (b) 對 CPBL / 棒球分析有真實興趣 · (c) 不重複申請(同 email 4 次 = 自動婉拒)。"
             />
             <RuleRow
               no="03"
-              title="通過 → onboard"
-              body="Tim 親手寄個人化 email · 含銀行 4 欄位 + ZONE27-#NNN 備註 + 流程指引(per docs/EMAIL-TEMPLATES.md 4-phase psychology framework)。 24-48 hr response window。"
+              title="通過 → 加入"
+              body="Tim 親手寄個人化 email · 含銀行轉帳 4 欄位 + ZONE27-#NNN 備註 + 流程指引。 24-48 小時內回覆。"
             />
             <RuleRow
               no="04"
-              title="未通過 → 拒絕 email"
-              body="Tim 親手寄 honest rejection email · 說明原因(不 boilerplate) · 不留 future window(每個申請是 final)。 拒絕 sample 去 PII 後本帳本下方公布。"
+              title="未通過 → 拒絕信"
+              body="Tim 親手寄拒絕信 · 說明原因(不用罐頭回覆) · 不留下次機會(每個申請都是最終決定)。 拒絕原因去個資後在本帳本下方公布。"
             />
             <RuleRow
               no="05"
               title="此頁更新"
-              body="每週一手寫加入新 row · 含本週新分配數 / 申請數 / 通過率 / 拒絕原因 sample。 git commit 為 source of truth · 任何 visitor 可看 commit history audit。"
+              body="每週一親手加入新一筆 · 含本週新分配數 / 申請數 / 通過率 / 拒絕原因。 所有更動都留在版本紀錄裡 · 任何人都可回頭查。"
             />
           </ol>
 
           <p className="mt-8 font-mono text-mute/70 text-[10px] tracking-[0.3em] leading-relaxed">
-            ⚓ <strong className="text-bone">PRE-COMMIT</strong> · 上述 5 步 +
-            審核標準 binding rule · 修改需 30 天前 /changelog 公告。 同
+            ⚓ <strong className="text-bone">事前承諾</strong> · 上述 5 步 +
+            審核標準都是綁定規則 · 修改需 30 天前在 /changelog 公告。 同
             <Link href="/audit" className="text-gold underline-offset-4 hover:underline ml-1">
               /audit
             </Link>
-            {" "}S05 PRE-COMMIT DIVERGED handling 同 Costly Signaling pattern。
+            {" "}的事前承諾做法一致。
           </p>
         </section>
 
@@ -428,11 +410,10 @@ export default function FoundersLedgerPage() {
               <span className="text-gold">公開</span>的見證 · 拒絕也是。
             </p>
             <p className="text-mute text-sm sm:text-base leading-relaxed">
-              其他高端 sports / luxury / membership 品牌(Patek · Hermès ·
-              Stratechery · The Athletic)做 process transparency 但**沒人
-              公布拒絕**。 因為他們 brand 結構是「我們 select 你 = 你 lucky」
-              · 公布拒絕 = 否定 luxury 邏輯。 ZONE 27 brand 結構是「方法
-              公開 · 品味私藏」 · 公布拒絕 = 強化 brand IP · 不是 dilute。
+              其他高端會員品牌會公開「流程」 · 但幾乎沒人公布拒絕。
+              因為他們的邏輯是「我們選上你 = 你很幸運」 ·
+              公布拒絕會破壞這種稀缺感。 ZONE 27 的邏輯是「方法公開 ·
+              品味私藏」 · 公布拒絕反而強化我們是誰 · 不會稀釋。
             </p>
           </blockquote>
         </section>
@@ -450,10 +431,9 @@ export default function FoundersLedgerPage() {
             拒絕原因(去 PII)會跟通過數量同等視覺權重 surface。
           </p>
           <p>
-            這個 page 的存在 brand IP 是 statement:<strong>ZONE 27 跟所有
-            高端 membership / luxury 品牌的根本差別 · 就是這個 ledger 的存在
-            本身</strong>。 我們不藏拒絕 · 我們把它公開到 visitor 可以截圖
-            嗆我們的程度。
+            這個帳本本身就是一個態度:<strong>ZONE 27 跟其他高端會員品牌
+            最根本的差別 · 就是我們敢把拒絕也攤出來</strong>。 我們不藏拒絕 ·
+            公開到您可以截圖嗆我們的程度。
           </p>
         </FounderSignOff>
 
@@ -559,8 +539,8 @@ function EmptyReviewsState() {
         不 backdated 過去申請 · 不 cherry-pick 通過 sample。
       </p>
       <p className="font-mono text-mute/70 text-[10px] tracking-[0.25em]">
-        7 founders forged 顯示在累計 stats · 為 Tim 手工 onboard 的早期會員 ·
-        未經申請通道 · 直接 forged · 標記在 /leaderboard 編號 #001-#007。
+        目前 7 位顯示在累計數字裡 · 是 Tim 親手 onboard 的早期會員 ·
+        未經申請通道 · 編號 #001-#007。
       </p>
     </div>
   );

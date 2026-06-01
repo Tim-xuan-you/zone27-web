@@ -11,11 +11,11 @@ import { createPageMetadata } from "@/lib/page-og";
 // + truncate description from 348 chars to ~140 · within Twitter 200-char cap +
 // Slack 200-char readable weight + iMessage uses og:title only(desc ignored)。
 export const metadata: Metadata = createPageMetadata({
-  title: "互動 by Design · 10 reader↔writer channels",
+  title: "互動 · 10 個找 Tim 的管道 · 沒有討論區 by design",
   description:
-    "您在找 ZONE 27 的討論區? 沒有 by design。 但您能 talk to Tim 在 10 個地方 · /hey-tim · /member/submit · AnonPick + UserPrediction + LensFocusVote + FollowMatch + MatchNote + ReceiptForward · /founders/apply · FounderPickForm · per Cialdini Consistency + Stratechery / Bill James / DELTA Japan precedent。",
+    "您在找 ZONE 27 的討論區? 沒有 · 刻意不做。 但您能在 10 個地方找 Tim 互動 · /hey-tim · /member/submit · 賽前預測 + 帳號預測 + lens 投票 + 追蹤賽事 + 私人筆記 + 收據分享 · /founders/apply。 全部是您對 Tim · 不是讀者對讀者。",
   ogDescription:
-    "ZONE 27 沒有討論區 by design · 10 reader↔writer 通道 enumerate · Cialdini Consistency + Stratechery / Bill James 15-yr precedent。",
+    "ZONE 27 沒有討論區 · 刻意不做 · 但有 10 個您能找 Tim 互動的地方 · 全部是您對 Tim · 不是讀者對讀者。",
   path: "/interact",
 });
 
@@ -83,7 +83,7 @@ const CHANNELS: Channel[] = [
     icon: "📮",
     zhTitle: "Hey Tim · 公開問答",
     enLabel: "PUBLIC Q&A",
-    body: "您問 1 個問題 · Tim 賽後 24h 內公開 reply · 同 Bill James「Hey Bill」 pattern。",
+    body: "您問 1 個問題 · Tim 賽後 24 小時內公開回覆。",
     surface: "/hey-tim",
     href: "/hey-tim",
     status: "live",
@@ -93,7 +93,7 @@ const CHANNELS: Channel[] = [
     icon: "📝",
     zhTitle: "投稿 · Reader Guest Post",
     enLabel: "GUEST POST",
-    body: "登入後送 title + body 給 Tim Gmail · 1/週 cadence · Tim curate · Stratechery Guest Post pattern。",
+    body: "登入後把標題 + 內文寄給 Tim · 每週一篇 · Tim 親手挑選刊出。",
     surface: "/member/submit",
     href: "/member/submit",
     status: "logged-in",
@@ -163,7 +163,7 @@ const CHANNELS: Channel[] = [
     icon: "📜",
     zhTitle: "Founders 27 · 申請信",
     enLabel: "APPLICATION ESSAY",
-    body: "寫一封信 · Tim 親手 review · 通過後才 invite · Patek dealer 申請 pattern。",
+    body: "寫一封信 · Tim 親手審核 · 通過後才邀請加入。",
     surface: "/founders/apply",
     href: "/founders/apply",
     status: "live",
@@ -173,7 +173,7 @@ const CHANNELS: Channel[] = [
     icon: "🎫",
     zhTitle: "FounderPickForm · 選 seat # 008-270",
     enLabel: "RESERVE SEAT",
-    body: "通過 review 後 · 您 pick 您的 founding seat # · Patek allocation + Hermès Birkin 序號 pattern。",
+    body: "通過審核後 · 您挑選自己的創始編號。",
     surface: "/founders FounderPickForm",
     href: "/founders",
     status: "pre-launch",
@@ -219,15 +219,12 @@ export default function InteractPage() {
           </h1>
           <div className="zone27-rule max-w-[320px] mt-5" aria-hidden="true" />
           <p className="text-mute text-base sm:text-lg leading-relaxed mt-6 max-w-2xl">
-            ZONE 27 沒有討論區 · 沒有留言板 · 沒有 forum · 沒有 user-to-user
-            chat。 不是「還沒做」 · 是{" "}
-            <strong className="text-bone">刻意 NOT 做</strong>。 但您能{" "}
-            <strong className="text-bone">talk to Tim 在 10 個地方</strong>
-            (此 page 列全)· 同 Stratechery / Bloomberg「Money Stuff」 Matt
-            Levine / Bill James「Hey Bill」 15-year canonical / DELTA Japan
-            Yusuke Okada 14-year solo · profitable subscription brand 8 precedent
-            模式。 全{" "}
-            <strong className="text-bone">reader↔writer · 0 reader↔reader</strong>。
+            ZONE 27 沒有討論區 · 沒有留言板 · 沒有論壇 · 沒有使用者之間的
+            聊天。 不是「還沒做」 · 是{" "}
+            <strong className="text-bone">刻意不做</strong>。 但您能{" "}
+            <strong className="text-bone">在 10 個地方找 Tim 互動</strong>
+            (這頁全列出來)。 全部是{" "}
+            <strong className="text-bone">您對 Tim · 不是讀者對讀者</strong>。
           </p>
           <div className="mt-6">
             <ArticleMeta readingMin={5} />
@@ -244,30 +241,28 @@ export default function InteractPage() {
           </p>
           <div className="space-y-3 zh-body text-mute text-base leading-relaxed">
             <p>
-              <strong className="text-bone">1 · Solo founder.</strong>{" "}
-              CPBL 一年 240 場 · 加 comments 一年 4800+ 留言要 moderate · Tim 一個人
-              做不到 · 同 Defector 需要 worker-owned newsroom。
+              <strong className="text-bone">1 · 一個人做。</strong>{" "}
+              CPBL 一年 240 場 · 開留言一年要管 4800+ 則 · Tim 一個人
+              做不到。
             </p>
             <p>
-              <strong className="text-bone">2 · 訂閱 = 支持 Tim build · NOT 解鎖 community。</strong>{" "}
-              同 Stratechery / Bill James 訂閱 model。 LINE 老師 / 報馬仔 需要
-              community noise 變現 · ZONE 27 結構性相反。
+              <strong className="text-bone">2 · 訂閱是支持 Tim 做下去 · 不是解鎖社群。</strong>{" "}
+              LINE 老師 / 報馬仔 需要靠群組熱度變現 · ZONE 27 剛好相反。
             </p>
             <p>
-              <strong className="text-bone">3 · 球迷已有 community 在 LINE / FB / PTT。</strong>{" "}
-              60+ LINE 群 + 6 隊 FB 粉專 + PTT Baseball 板。 ZONE 27 加 forum =
-              duplication。 兩者並存 not 取代。
+              <strong className="text-bone">3 · 球迷的社群已經在 LINE / FB / PTT。</strong>{" "}
+              60+ LINE 群 + 6 隊 FB 粉專 + PTT 棒球板。 ZONE 27 再開論壇是
+              重複。 兩者並存 · 不取代。
             </p>
             <p>
-              <strong className="text-bone">4 · 公開「不做」 = 鎖死退路。</strong>{" "}
-              撤掉 community 是 brand collapse(Defector 案例)· 一開始不 ship 比
-              ship 後撤回 brand 損害低 100×。
+              <strong className="text-bone">4 · 公開說「不做」 · 等於鎖死退路。</strong>{" "}
+              開了社群再收掉 · 對品牌的傷害很大 · 一開始就不做 · 比做了再撤回
+              安全得多。
             </p>
             <p>
-              <strong className="text-bone">5 · 8 brand precedent.</strong>{" "}
-              Stratechery · Bill James「Hey Bill」 · DELTA Japan · patio11 · Pinboard ·
-              DHH HEY · Berkshire · Money Stuff · 全 reader↔writer model · 0 reader↔reader。
-              已 ship 為{" "}
+              <strong className="text-bone">5 · 這條路有人走通過。</strong>{" "}
+              很多靠訂閱獲利的內容品牌 · 都是「作者對讀者」 · 不開「讀者對讀者」的社群。
+              我們已經做出來的就是{" "}
               <Link href="/hey-tim" className="text-gold/85 underline-offset-4 hover:underline">
                 /hey-tim
               </Link>
@@ -307,53 +302,50 @@ export default function InteractPage() {
           </h2>
           <ol className="space-y-3 text-mute text-sm leading-relaxed list-decimal pl-6">
             <li>
-              <strong className="text-bone">User-to-user comment thread</strong>{" "}
-              · /matches/[gameId] / /lab / /track-record / 任一 page · 0 留言
-              · 0 reply button · 同 /letter「NO comment thread」 axiom 4 處 codify
+              <strong className="text-bone">使用者之間的留言串</strong>{" "}
+              · /matches/[gameId] / /lab / /track-record 任一頁 · 0 留言
+              · 0 回覆鍵。
             </li>
             <li>
-              <strong className="text-bone">公開 user-to-user forum / 板</strong>{" "}
-              · 沒有「ZONE 27 板」 · 沒有「球迷區」 free-form forum · per iron
-              rule reader↔reader 限制。 ⚠️ R148 update · 「賽事討論室」 R148
-              founder-dogfood-canary 7-fire 後 explicit reversed · BLACK CARD-gated
-              narrow-scope scaffold shipped on /matches/[gameId] · 不是 free-form
-              forum · 1-thread per game + 24hr decay + 球迷 grammar + Tim moderate
-              + 200 char + 1 post per user per game 6 constraints · 詳見
-              /matches/[gameId]#game-thread。 球迷 social 已在 LINE 群 + FB 滿足。
+              <strong className="text-bone">公開的使用者論壇 / 討論板</strong>{" "}
+              · 沒有「ZONE 27 板」 · 沒有自由發文的「球迷區」。
+              唯一例外是 BLACK CARD 訂閱者的「賽事討論室」 · 範圍很窄 ·
+              每場一串 + 24 小時後關閉 + 200 字 + 每人每場限一篇 + Tim 親手把關 ·
+              不是自由論壇 · 詳見 /matches/[gameId]#game-thread。
+              球迷社群已在 LINE 群 + FB 滿足。
             </li>
             <li>
-              <strong className="text-bone">User-to-user DM / 私訊</strong>{" "}
-              · 您不能 message 其他 ZONE 27 user · 不收集 user list · 不 expose
-              其他訂戶 identity · per [[zone27-disclosure-philosophy]] privacy axiom
+              <strong className="text-bone">使用者之間的私訊</strong>{" "}
+              · 您不能傳訊息給其他 ZONE 27 使用者 · 我們不收集使用者名單 ·
+              不公開其他訂戶的身分。
             </li>
             <li>
-              <strong className="text-bone">「X 人在看 / X 人 voted」 live counter</strong>{" "}
-              · 沒有 live ticker · 沒有 herd-following display · per [[feedback-zone27-
-              social-proof-costly-signal]] memory「DO NOT fake social proof · DO
-              preempt + redirect to costly signal」 axiom
+              <strong className="text-bone">「X 人在看 / X 人投票了」即時計數器</strong>{" "}
+              · 沒有即時跑動的數字 · 沒有製造從眾感的顯示。
+              我們不做假的社群熱度。
             </li>
             <li>
-              <strong className="text-bone">Testimonial wall / 推薦語 section</strong>{" "}
-              · 沒有「訂戶推薦」 · 沒有「客戶見證」 · brand IP「方法公開 ·
-              品味私藏」 8 字 grammar 嚴守 · 推薦語 是 noise · receipts are signal
+              <strong className="text-bone">推薦語牆 / 客戶見證區</strong>{" "}
+              · 沒有「訂戶推薦」 · 沒有「客戶見證」。 推薦語是雜訊 ·
+              公開的賽後收據才是真訊號。
             </li>
           </ol>
           <p className="font-mono text-mute/80 text-[10px] tracking-[0.25em] leading-relaxed mt-6">
-            本 5 永遠不 ship list binding append-only · 修改任一條需 30 天前{" "}
+            這 5 條只增不刪 · 修改任一條需 30 天前{" "}
             <Link
               href="/changelog"
               className="text-gold/85 underline-offset-4 hover:underline"
             >
               /changelog
             </Link>
-            {" "}公告 · 同 /audit S05 PRE-COMMIT discipline · 同{" "}
+            {" "}公告 · 同 /audit 的事前承諾做法一致 · 同{" "}
             <Link
               href="/integrity"
               className="text-gold/85 underline-offset-4 hover:underline"
             >
               /integrity
             </Link>
-            {" "}22 binding rules append-only。
+            {" "}的綁定規則一樣只增不刪。
           </p>
         </section>
 
@@ -366,15 +358,14 @@ export default function InteractPage() {
             / 球迷 COMMUNITY · 在 ZONE 27 之外的地方
           </p>
           <h2 className="text-2xl sm:text-3xl text-bone font-light tracking-tight mb-6">
-            您想 talk to other 球迷? 這 2 lanes 已熱絡
+            您想跟其他球迷聊? 這 2 條路已經很熱絡
           </h2>
           <div className="space-y-4 zh-body text-mute text-base leading-relaxed mb-8">
             <p>
-              CPBL 球迷 community 已在 60+ active LINE 群 + Facebook 粉專 +
-              PTT Baseball 板 滿足。 ZONE 27 加 community feature = duplication
-              + dilution · 結構性 LINE 老師 / 報馬仔 / 玩運彩 結構性需要 community
-              noise 才能變現 · ZONE 27 不靠 noise 變現 · 靠 quantified analysis
-              + brand IP trust · 兩者並存 not 取代。
+              CPBL 球迷社群已在 60+ 個活躍 LINE 群 + Facebook 粉專 +
+              PTT 棒球板 滿足。 ZONE 27 再加社群功能只是重複又稀釋。
+              LINE 老師 / 報馬仔 / 玩運彩 需要靠群組熱度才能變現 ·
+              ZONE 27 不靠熱度變現 · 靠量化分析 + 公開可信。 兩者並存 · 不取代。
             </p>
           </div>
 
@@ -408,12 +399,9 @@ export default function InteractPage() {
               </h3>
               <p className="text-mute/85 text-[12px] sm:text-sm leading-relaxed mb-2">
                 Founders 27 訂戶私人 LINE 群 · Tim 親自參與 ·
-                Founders 27 訂戶之間互相 talk + 全員 talk to Tim · 同 Patek 私人
-                owners club + Stratechery Plus 訂戶 Slack 模式 · OFF-SITE
-                infrastructure(LINE)· 不在 ZONE 27 web · 不違反 reader↔writer
-                site iron rule · 是 paid identity tier inner-circle community ·
-                per [[feedback-zone27-paid-model-is-support-not-features]] axiom
-                identity = community NOT features unlock。
+                訂戶之間可以互相聊 · 也能一起找 Tim。 群組開在 LINE 上 ·
+                不在 ZONE 27 網站內 · 所以不違反「網站不做讀者對讀者社群」的原則。
+                這是付費身分的內圈 · 加入身分本身就包含這個圈子 · 不是另外解鎖的功能。
               </p>
               <p className="font-mono text-mute/70 text-[10px] tracking-[0.25em] mb-3">
                 ACCESS · 待 Founders 27 application 通過(/founders/apply)+ NT$
@@ -473,7 +461,7 @@ export default function InteractPage() {
             lang="en"
             className="font-mono text-gold text-[10px] tracking-[0.4em] mb-4"
           >
-            / RELATED BRAND IP DEFENSE SURFACES · 8 sibling artifacts
+            / 延伸閱讀 · 我們公開弱點的其他頁面
           </p>
           <ul className="space-y-2 text-mute text-sm leading-relaxed">
             <li>
@@ -528,7 +516,7 @@ export default function InteractPage() {
               >
                 /founders/postmortem-2028
               </Link>
-              {" · 5 失敗 scenarios prospective hindsight"}
+              {" · 預想 5 種失敗情境"}
             </li>
             <li>
               <Link
@@ -546,17 +534,16 @@ export default function InteractPage() {
               >
                 /ethics
               </Link>
-              {" · 9 commitments + BUS_FACTOR open-source contingency"}
+              {" · 9 項承諾 + 萬一我出事的開源備案"}
             </li>
           </ul>
         </section>
 
         <FounderSignOff signedAt={PUBLISHED_DATE}>
-          您找的 interaction 是 social platform style · ZONE 27 是 publication
-          style · 兩個 different category。 我選 publication 是因為 solo
-          founder + brand IP trust + Stratechery / Bill James / DELTA Japan
-          15-year precedent 都這樣 ship。 您想 community 隨時可加 LINE 群 ·
-          您想 quantified analysis + 公開 ledger 就在 ZONE 27 · 兩個並存。
+          您找的互動比較像社群平台 · ZONE 27 比較像一份刊物 · 是兩種不同的東西。
+          我選刊物 · 是因為一個人做 · 也因為這樣才守得住公開可信。
+          您想要社群 · 隨時可以加 LINE 群 · 您想要量化分析 + 公開戰績 ·
+          就在 ZONE 27。 兩個並存。
         </FounderSignOff>
 
         <Footer />
