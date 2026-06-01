@@ -1,9 +1,12 @@
 "use client";
 
 // ── ZONE 27 · 點數錢包面板(/member)· migration 0009 ──────────
-// 顯示餘額 + 儲值入口。 儲值 v1 = 手動轉帳(點金額 → email Tim → 他給帳號 →
-// 轉帳後幫你加點)。 點數單向:只能買分析 · 不能提現 · 不能轉人(per
-// zone27-legal-redline · Steam 錢包模式,不是賭場籌碼)。 0009 未套 → 餘額 0。
+// 餘額 + 儲值。 R184 W3(Tim canary「email 去要帳號太慢太蠢」):點金額 →
+// 直接秀轉帳帳號 + 複製鈕 + 轉完一鍵通知(不再 email 去「要」帳號)。
+//
+// 收款帳號走 Vercel 環境變數(NEXT_PUBLIC_BANK_*)· 不寫進公開 GitHub repo
+// (per memory/zone27-payment-architecture)。 未設 → graceful「設定中」。
+// 點數單向:只能買分析 · 不能提現 · 不能轉人(per zone27-legal-redline)。
 // ─────────────────────────────────────────────────────
 
 import { useEffect, useState } from "react";
@@ -11,9 +14,17 @@ import { getWalletBalance } from "@/lib/wallet";
 
 const TOPUP_AMOUNTS = [100, 300, 500, 1000];
 
-function topupHref(amount: number): string {
-  const subject = `我要儲值 NT$ ${amount}`;
-  const body = `Tim 好,\n\n我要儲值 NT$ ${amount} 到我的 ZONE 27 點數錢包。\n請給我銀行轉帳帳號,轉帳後幫我加點。\n(已知:點數只能買分析、不能提現、不能轉人 · 0 自動扣款。)\n\n謝謝。`;
+// 收款資料 · Vercel 私密 env(不在 GitHub)· 未設則 fallback
+const BANK = {
+  name: process.env.NEXT_PUBLIC_BANK_NAME ?? "",
+  account: process.env.NEXT_PUBLIC_BANK_ACCOUNT ?? "",
+  holder: process.env.NEXT_PUBLIC_BANK_HOLDER ?? "",
+};
+const BANK_SET = BANK.account.length > 0;
+
+function notifyHref(amount: number): string {
+  const subject = `我已轉帳儲值 NT$ ${amount}`;
+  const body = `Tim 好,\n\n我已經轉帳 NT$ ${amount} 到 ZONE 27 儲值。\n轉帳帳號末五碼:______(請填)\n\n請幫我加點。謝謝。`;
   return `mailto:tatayngiti@gmail.com?subject=${encodeURIComponent(
     subject
   )}&body=${encodeURIComponent(body)}`;
@@ -23,6 +34,8 @@ type State = { mounted: false } | { mounted: true; balance: number };
 
 export default function WalletPanel() {
   const [state, setState] = useState<State>({ mounted: false });
+  const [amount, setAmount] = useState<number | null>(null);
+  const [copied, setCopied] = useState(false);
 
   useEffect(() => {
     let cancelled = false;
@@ -33,6 +46,16 @@ export default function WalletPanel() {
       cancelled = true;
     };
   }, []);
+
+  const copyAccount = async () => {
+    try {
+      await navigator.clipboard.writeText(BANK.account);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      /* clipboard 不可用 · 帳號已可見 · 手動複製 */
+    }
+  };
 
   return (
     <section className="mt-6 bg-slate/40 border border-gold/30 p-5 sm:p-6">
@@ -49,20 +72,102 @@ export default function WalletPanel() {
         儲值點數買付費分析。點數只能買分析 ·{" "}
         <span className="text-bone">不能提現、不能轉人</span> · 0 自動扣款(像 Steam 錢包)。
       </p>
+
+      {/* 1 · 選金額 */}
       <div className="flex flex-wrap gap-2 mb-3">
         {TOPUP_AMOUNTS.map((a) => (
-          <a
+          <button
             key={a}
-            href={topupHref(a)}
-            className="px-4 py-2.5 border border-gold/40 text-gold font-mono text-xs tracking-[0.2em] tabular hover:bg-gold/10 hover:border-gold transition-colors"
+            type="button"
+            onClick={() => setAmount(a)}
+            className={`px-4 py-2.5 border font-mono text-xs tracking-[0.2em] tabular transition-colors ${
+              amount === a
+                ? "border-gold bg-gold/10 text-gold"
+                : "border-gold/40 text-gold hover:bg-gold/10 hover:border-gold"
+            }`}
           >
             儲 NT$ {a}
-          </a>
+          </button>
         ))}
       </div>
-      <p className="font-mono text-mute/60 text-[10px] tracking-[0.15em] leading-relaxed">
-        ▸ 點任一個 = 寄信給 Tim → 他給你轉帳帳號 → 轉帳後幫你加點(手動 · v1)。
-      </p>
+
+      {/* 2 · 選了金額 → 直接秀轉帳資訊(不用 email 去要)*/}
+      {amount !== null && (
+        <div className="mt-2 border border-gold/40 bg-gold/5 p-4">
+          {BANK_SET ? (
+            <>
+              <p className="font-mono text-gold/90 text-[10px] tracking-[0.3em] mb-3">
+                轉帳 NT$ {amount} 到 ↓
+              </p>
+              <dl className="space-y-1.5 font-mono text-sm mb-3">
+                <Row label="銀行" value={BANK.name} />
+                <Row
+                  label="帳號"
+                  value={BANK.account}
+                  action={
+                    <button
+                      type="button"
+                      onClick={copyAccount}
+                      className="ml-2 px-2 py-0.5 border border-gold/50 text-gold text-[10px] tracking-[0.2em] hover:bg-gold/10 transition-colors"
+                    >
+                      {copied ? "已複製 ✓" : "複製"}
+                    </button>
+                  }
+                />
+                <Row label="戶名" value={BANK.holder} />
+                <Row label="金額" value={`NT$ ${amount}`} gold />
+              </dl>
+              <a
+                href={notifyHref(amount)}
+                className="inline-block px-4 py-2.5 bg-gold text-navy font-mono text-[11px] tracking-[0.25em] hover:bg-gold-soft transition-colors"
+              >
+                轉好了 · 通知加點 →
+              </a>
+              <p className="mt-2 font-mono text-mute/60 text-[9px] tracking-[0.15em] leading-relaxed">
+                ▸ 我們確認入帳後幫你加 {amount} 點 · 0 自動扣款 · 點數只能買分析。
+              </p>
+            </>
+          ) : (
+            <>
+              <p className="font-mono text-gold/90 text-[11px] tracking-[0.2em] mb-2">
+                收款帳號設定中
+              </p>
+              <a
+                href={notifyHref(amount)}
+                className="inline-block px-4 py-2 bg-gold text-navy font-mono text-[10px] tracking-[0.25em] hover:bg-gold-soft transition-colors"
+              >
+                先 email Tim 儲值 NT$ {amount} →
+              </a>
+            </>
+          )}
+        </div>
+      )}
     </section>
+  );
+}
+
+function Row({
+  label,
+  value,
+  action,
+  gold = false,
+}: {
+  label: string;
+  value: string;
+  action?: React.ReactNode;
+  gold?: boolean;
+}) {
+  return (
+    <div className="flex items-baseline gap-3 flex-wrap">
+      <dt className="text-mute/70 text-[11px] tracking-[0.2em] w-10 shrink-0">
+        {label}
+      </dt>
+      <dd
+        className={`flex-1 tabular tracking-wide break-all ${gold ? "text-gold" : "text-bone"}`}
+      >
+        {value}
+        {action}
+      </dd>
+    </div>
   );
 }
