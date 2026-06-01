@@ -124,13 +124,26 @@ export default function UserPredictionPicker({
 
       {/* Verdict when the game is final */}
       {finalWinner && myPick && finalWinner !== "tie" && (
-        <p
-          className={`mt-3 font-mono text-sm tracking-[0.2em] ${
-            myPick === finalWinner ? "text-gold" : "text-loss/80"
-          }`}
-        >
-          {myPick === finalWinner ? "✓ 您 PROVED · 猜對了" : "✕ 您 DIVERGED · 猜錯了"}
-        </p>
+        <div className="mt-3">
+          <p
+            className={`font-mono text-sm tracking-[0.2em] ${
+              myPick === finalWinner ? "text-gold" : "text-loss/80"
+            }`}
+          >
+            {myPick === finalWinner ? "✓ 您 PROVED · 猜對了" : "✕ 您 DIVERGED · 猜錯了"}
+          </p>
+          {/* 峰終時刻(peak-end)· 猜中的情緒高點接到創作迴路 · 邀請「寫」
+              不是逼「付」· 賣不賣是下方 CreatorAnalysis 自己的事(付費=賣分析
+              變現 · 不鎖功能)· per UX agent #2 */}
+          {myPick === finalWinner && (
+            <a
+              href="#say"
+              className="mt-1.5 inline-block font-mono text-gold/70 hover:text-gold text-[10px] tracking-[0.2em] underline-offset-4 hover:underline transition-colors"
+            >
+              把這一手的判斷寫成分析 · 賽後準度自動掛上 →
+            </a>
+          )}
+        </div>
       )}
 
       {/* Action zone */}

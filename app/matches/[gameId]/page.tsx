@@ -262,13 +262,16 @@ export default async function MatchDetailPage({
           </section>
         )}
 
-        {/* ── 看法 · 分析(唯一發言區:留看法/寫分析 + 選邊 + 賽後自動評準度)── */}
-        <CreatorAnalysis
-          matchId={m.id}
-          homeName={m.home.name}
-          awayName={m.away.name}
-          finalWinner={m.finalResult?.winner ?? null}
-        />
+        {/* ── 看法 · 分析(唯一發言區:留看法/寫分析 + 選邊 + 賽後自動評準度)──
+            id="say" = 峰終錨點 · UserPredictionPicker 猜中時的「寫成分析 →」連到這 */}
+        <div id="say" className="scroll-mt-24">
+          <CreatorAnalysis
+            matchId={m.id}
+            homeName={m.home.name}
+            awayName={m.away.name}
+            finalWinner={m.finalResult?.winner ?? null}
+          />
+        </div>
 
         {/* ── PITCHER MATCHUP · 精簡 ─────────────────── */}
         <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-8 border-t border-line/40 pt-8">
