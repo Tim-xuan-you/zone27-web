@@ -1,28 +1,19 @@
 "use client";
 
-// ── ZONE 27 · Anonymous Calibration Strip ───────────────
-// Round 45 W-C · Agent L DEEPEST sharp call · client component for
-// rendering visitor's own anon-picks track record vs engine。
+// ── ZONE 27 · 你的戰績 strip(免登入 · 你 vs 引擎)─────────
+// 把訪客自己押在這台裝置的紀錄,用「你 vs 引擎誰準」的對照呈現。
+// 只在 localStorage 有 picks 時才出現(0 picks → 不 render · 不佔空間)。
 //
-// Mounted on /calibration after Brier section + homepage(below F6 strip
-// when has picks)· conditional render only when localStorage has picks ·
-// per progressive enhancement axiom 同 RecentMatchesRow pattern from R40。
+// 鐵律:
+//   - 0 個資 / 0 伺服器 / 0 cookie / 純這台裝置的瀏覽器
+//   - 你押了什麼,ZONE 27 看不到(只在你瀏覽器裡算)
+//   - 沒夠樣本不假裝準(N≥1 才出現 · 數字夠不夠準誠實標)
 //
-// brand IP 物理 codify:
-//   - 0 PII / 0 server / 0 cookies / 純 localStorage
-//   - per [[zone27-disclosure-philosophy]] · 此 strip 只 client-render ·
-//     server 不知道 visitor pick 內容 · 看不到 individual delta
-//   - per Pratfall · 同 N=0 empty state pattern from /calibration page ·
-//     此 strip 只在 N≥1 後 surface · 不 render empty fake numbers
-//   - per [[feedback-zone27-audience-fans-not-engineers]] · 「您 N picks ·
-//     ✓Y PROVED · ✕Z DIVERGED」 fan-grammar value
+// 兩個版型:
+//   - "calibration" · /看準度 頁的完整版(4 格 stat)
+//   - "homepage"   · 首頁市場板下方的一行精簡版(回訪鉤子)
 //
-// Variant prop:
-//   - "calibration" · 大 stack version on /calibration page · 3-col stat
-//   - "homepage" · compact inline version 在 F6 strip 下方 · 1-line summary
-//
-// SSR-safe(typeof window guard)+ hydration-safe(discriminated union mount)
-// 同 R43 W-B RecentMatchesRow pattern。
+// SSR-safe + hydration-safe(discriminated union mount flag)。
 // ─────────────────────────────────────────────────────
 
 import { useEffect, useState } from "react";
@@ -55,44 +46,42 @@ export default function AnonCalibrationStrip({ variant }: Props) {
   if (!state.mounted) return null;
   const { picks } = state;
 
-  // Conditional: render nothing if 0 picks · progressive enhancement
+  // 0 picks → 不 render(新訪客看不到 · 不佔空間)
   if (picks.length === 0) return null;
 
   const stats = computeAnonStats(picks);
+  const decided = stats.proved + stats.diverged;
+  const deltaWord =
+    stats.delta > 0 ? "你領先" : stats.delta < 0 ? "你落後" : "平手";
 
-  // ── HOMEPAGE COMPACT VARIANT ──────────────────────────
+  // ── 首頁精簡版 ────────────────────────────────────────
   if (variant === "homepage") {
     return (
       <section
         className="mx-auto max-w-3xl px-6 sm:px-10 pb-10"
-        aria-label="您的個人 calibration strip"
+        aria-label="你的戰績 · 你 vs 引擎"
       >
         <Link
           href="/calibration"
           className="block border border-gold/40 bg-slate/30 p-4 sm:p-5 hover:bg-slate/40 hover:border-gold/60 transition-colors group"
         >
           <div className="flex items-baseline justify-between gap-3 flex-wrap">
-            <p
-              lang="en"
-              className="font-mono text-gold/90 text-[10px] tracking-[0.3em]"
-            >
-              ⚡ EPISTEMIC GYM · 您的 track record
+            <p className="font-mono text-gold/90 text-[10px] tracking-[0.3em]">
+              你的戰績 · 你 vs 引擎
             </p>
-            <span
-              lang="en"
-              className="font-mono text-mute/70 text-[9px] tracking-[0.3em]"
-            >
-              LOCAL ONLY · 0 SERVER
+            <span className="font-mono text-mute/70 text-[9px] tracking-[0.3em]">
+              只存這台裝置
             </span>
           </div>
           <div className="mt-3 flex items-baseline gap-4 flex-wrap text-sm">
             <span className="text-bone">
+              押了{" "}
               <strong className="font-mono text-gold tabular text-lg">
                 {stats.total}
               </strong>{" "}
-              picks
+              場
             </span>
-            {stats.proved + stats.diverged > 0 && (
+            {decided > 0 && (
               <>
                 <span aria-hidden="true" className="text-mute/40">·</span>
                 <span className="text-mute">
@@ -105,19 +94,19 @@ export default function AnonCalibrationStrip({ variant }: Props) {
                 </span>
                 <span aria-hidden="true" className="text-mute/40">·</span>
                 <span className="text-mute">
-                  您 acc{" "}
+                  你準度{" "}
                   <strong className="font-mono text-bone tabular">
                     {stats.yourAccuracyLabel}
                   </strong>
                 </span>
                 <span aria-hidden="true" className="text-mute/40">·</span>
                 <span className="text-mute">
-                  engine acc{" "}
+                  引擎{" "}
                   <strong className="font-mono text-bone tabular">
                     {stats.engineAccuracyLabel}
                   </strong>
                 </span>
-                {stats.proved + stats.diverged >= 3 && (
+                {decided >= 3 && (
                   <>
                     <span aria-hidden="true" className="text-mute/40">·</span>
                     <span
@@ -129,12 +118,12 @@ export default function AnonCalibrationStrip({ variant }: Props) {
                           : "text-mute"
                       }
                     >
-                      Δ{" "}
-                      <strong className="font-mono tabular">
-                        {stats.delta > 0 ? "+" : ""}
-                        {Math.round(stats.delta)}pp
-                      </strong>{" "}
-                      vs engine
+                      {deltaWord}
+                      {stats.delta !== 0 && (
+                        <strong className="font-mono tabular ml-1">
+                          {Math.abs(Math.round(stats.delta))} 分
+                        </strong>
+                      )}
                     </span>
                   </>
                 )}
@@ -142,75 +131,61 @@ export default function AnonCalibrationStrip({ variant }: Props) {
             )}
           </div>
           <p className="mt-2 font-mono text-mute/70 text-[9px] tracking-[0.25em]">
-            完整 strip 在 /calibration · 您 own data 永遠在您裝置 →
+            完整紀錄在看準度頁 · 你的資料永遠只在這台裝置 →
           </p>
         </Link>
       </section>
     );
   }
 
-  // ── CALIBRATION FULL STACK VARIANT ────────────────────
+  // ── 看準度頁完整版 ────────────────────────────────────
   return (
     <section
       className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-16 border-t border-line/40 pt-12"
-      aria-label="您的個人 vs engine calibration"
+      aria-label="你的戰績 · 你 vs 引擎"
     >
-      <p
-        lang="en"
-        className="font-mono text-gold text-[10px] tracking-[0.45em] mb-6"
-      >
-        / EPISTEMIC GYM · 您 vs ENGINE · 個人 strip
+      <p className="font-mono text-gold text-[10px] tracking-[0.45em] mb-6">
+        / 你的戰績 · 你 vs 引擎
       </p>
       <h2 className="text-2xl sm:text-3xl text-bone font-light tracking-tight mb-3 leading-tight">
-        您的 picks · 永遠在您裝置 · <span className="text-gold">ZONE 27 看不到</span>
+        你押的每一手 · 只存這台裝置 · <span className="text-gold">ZONE 27 看不到</span>
       </h2>
       <p className="text-mute leading-relaxed mb-6">
-        此 strip 只在您裝置 client-render · 您的 individual picks 從未 sent
-        to ZONE 27 server · 此頁的 global Brier(上方)跟此 strip(您
-        personal)兩個 layer independently · 不交叉。
+        這一塊只在你的瀏覽器裡算 · 你押了什麼從不會傳給 ZONE 27 · 跟上面的公開
+        戰績是兩回事,不會混在一起。
       </p>
 
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-5">
         <StatBox
-          label="TOTAL PICKS"
+          label="總場數"
           value={String(stats.total)}
-          sub={`${stats.pending} pending`}
+          sub={`${stats.pending} 場待開`}
           tone="bone"
         />
         <StatBox
-          label="您 ACCURACY"
+          label="你準度"
           value={stats.yourAccuracyLabel}
-          sub={
-            stats.proved + stats.diverged > 0
-              ? `✓${stats.proved} ✕${stats.diverged}`
-              : "N=0 finalized"
-          }
+          sub={decided > 0 ? `✓${stats.proved} ✕${stats.diverged}` : "還沒結算"}
           tone={stats.proved > stats.diverged ? "gold" : "bone"}
         />
         <StatBox
-          label="ENGINE ACCURACY"
+          label="引擎準度"
           value={stats.engineAccuracyLabel}
-          sub="same finalized picks"
+          sub="同樣這幾場"
           tone="mute"
         />
         <StatBox
-          label="Δ vs ENGINE"
+          label="你 vs 引擎"
           value={
-            stats.proved + stats.diverged >= 3
-              ? `${stats.delta > 0 ? "+" : ""}${Math.round(stats.delta)}pp`
-              : "wait N≥3"
+            decided >= 3
+              ? `${stats.delta > 0 ? "+" : stats.delta < 0 ? "−" : ""}${Math.abs(
+                  Math.round(stats.delta)
+                )}`
+              : "再幾場"
           }
-          sub={
-            stats.proved + stats.diverged >= 3
-              ? stats.delta > 0
-                ? "您 ahead"
-                : stats.delta < 0
-                ? "engine ahead"
-                : "tied"
-              : "more picks needed"
-          }
+          sub={decided >= 3 ? deltaWord : "至少 3 場結算"}
           tone={
-            stats.proved + stats.diverged >= 3
+            decided >= 3
               ? stats.delta > 0
                 ? "gold"
                 : stats.delta < 0
@@ -222,29 +197,20 @@ export default function AnonCalibrationStrip({ variant }: Props) {
       </div>
 
       <p className="font-mono text-mute/70 text-[10px] tracking-[0.25em] leading-relaxed mb-3">
-        ⚓ N≥30 個 finalized picks 後 此 strip 才 statistically meaningful ·
-        per /track-record SAMPLE DEBT axiom · 目前{" "}
-        <strong className="text-bone">
-          {stats.proved + stats.diverged}
-        </strong>{" "}
-        finalized · 還需{" "}
-        <strong className="text-bone">
-          {Math.max(0, 30 - (stats.proved + stats.diverged))}
-        </strong>{" "}
-        場 hit threshold。
+        ⚓ 累積到 30 場以上有結果,這個數字才真的準 · 目前{" "}
+        <strong className="text-bone">{decided}</strong> 場有結果 · 還差{" "}
+        <strong className="text-bone">{Math.max(0, 30 - decided)}</strong> 場。
       </p>
 
       <p className="text-mute/85 text-sm leading-relaxed">
-        想累積此 strip · 在{" "}
+        想累積?在{" "}
         <Link
           href="/matches"
           className="text-gold underline-offset-4 hover:underline"
         >
-          /matches
+          市場看板
         </Link>{" "}
-        每場 picks before peeking engine · 您 own private track record vs
-        engine · 不需 auth · 不傳 server · 不 broadcast。 純 「epistemic
-        gym」 練習 · brand IP「不打擾就是禮物」 axiom 守。
+        每場先選一邊,再看引擎怎麼想 · 不用註冊 · 不傳伺服器 · 純粹練自己的眼光。
       </p>
     </section>
   );
@@ -279,10 +245,7 @@ function StatBox({
 
   return (
     <div className={`border ${borderColor} p-3`}>
-      <p
-        lang="en"
-        className="font-mono text-mute/70 text-[9px] tracking-[0.25em] mb-1"
-      >
+      <p className="font-mono text-mute/70 text-[9px] tracking-[0.25em] mb-1">
         {label}
       </p>
       <p
@@ -290,10 +253,7 @@ function StatBox({
       >
         {value}
       </p>
-      <p
-        lang="en"
-        className="font-mono text-mute/70 text-[9px] tracking-[0.22em] mt-1"
-      >
+      <p className="font-mono text-mute/70 text-[9px] tracking-[0.22em] mt-1">
         {sub}
       </p>
     </div>

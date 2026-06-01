@@ -78,8 +78,9 @@ type Channel = {
 };
 
 // R181 · 只列真實存在的管道。 砍掉廣告已刪元件的鬼功能(LensFocusVote ·
-// FollowMatchButton · MatchNoteEditor 已刪 · AnonPickWidget 未掛 · FounderPickForm
-// 不存在)· 避免訪客照著去找卻什麼都沒有(比 404 更糟)。
+// FollowMatchButton · MatchNoteEditor · AnonPickWidget 已刪 — 免登入押注的
+// 功能 R182 併進 UserPredictionPicker / CardBetStrip · FounderPickForm 不存在)·
+// 避免訪客照著去找卻什麼都沒有(比 404 更糟)。
 const CHANNELS: Channel[] = [
   {
     no: "01",

@@ -9,30 +9,30 @@ import {
   submitPrediction,
   type MarketTally,
 } from "@/lib/predictions-market";
+import {
+  getAnonPickForMatch,
+  pushAnonPick,
+  updatePickOutcome,
+  formatPickedSince,
+  type AnonPick,
+} from "@/lib/anon-picks";
 
 // ── ZONE 27 · 進場預測 / Market Predict ─────────────────
-// The play-money prediction market mechanic, backed by the shared
-// `predictions` table (migration 0003) via SECURITY DEFINER RPCs.
+// 一場比賽唯一的押注 widget。 兩條腿,同一個動作「押一邊」:
 //
-// Replaces the old user_metadata-based picker (Round 31 W-W1). Why the
-// rewrite (kept the same props, so it's drop-in on /matches/[gameId]):
-//   1. CROWD MARKET LINE. user_metadata can't aggregate across users;
-//      the shared table can → live「N 人進場 · X% 押主隊」crowd %.
-//   2. SECURITY. Writes go through submit_prediction RPC (RLS-locked),
-//      not a client-trusted user_metadata blob (closes the audit P1-C/D
-//      gap for predictions).
-//   3. INTEGRITY. One pick per match · IMMUTABLE (server-enforced) =
-//      先鎖後結 · anti-cheat. No "change my pick" after the fact.
-//      法律唯一紅線 = 真錢對賭 / 抽賭注傭(per memory legal-redline) ·
-//      本市場 0 金錢 0 賭注 · 不碰紅線。 pick = home/away · 押了不可改 ·
-//      你的紀錄餵公開戰績 + 海選天梯(/ladder)。
-//   4. REWARDS. /rewards 的「PROVED 點數 → 換小獎」是無賭注 skill 兌換
-//      (≠賭博 · 灰色可做)· 跟本市場分離:這裡只記準度上天梯,不在這
-//      頁談兌獎,避免「押注=賭」的視覺聯想。
+//   1. 還沒登入 → 押在「這台裝置」(localStorage · 0 註冊 · 0 伺服器)。
+//      訪客第一秒就能 own 一手 · 賽後回來看自己跟引擎誰準。 登入不是
+//      門檻 · 是「把這一手存進永久戰績 + 進群眾市場 + 爬天梯」的升級。
+//   2. 已登入 → 押進共享的 predictions 表(migration 0003 RPC · RLS-locked ·
+//      一場一人一次 · server-enforced 不可改)· 餵群眾市場線 + 海選天梯。
 //
-// Degrades gracefully: anon → login CTA (still sees the public crowd
-// line); RPC error / table not yet applied → crowd line reads empty,
-// no crash.
+// 為什麼分兩條腿:群眾市場線要防灌票 · 只能算真帳號;個人「你 vs 引擎」
+// 迴路不需要帳號就能成立。 押了都不可改(先鎖後結 · 防賽後補登)· 0 金錢
+// 0 賭注 · 純精神預測(法律唯一紅線 = 真錢對賭 · 本市場不碰)。
+//
+// 沒登入的人押完 · CalibrationTierBadge / 個人準度 strip 會自動同步
+// (pushAnonPick / updatePickOutcome 會 dispatch zone27:anon-picks-changed)。
+// GRACEFUL:RPC 掛了 / 表還沒建 → 群眾線收起不 crash。
 // ─────────────────────────────────────────────────────
 
 type Props = {
@@ -41,88 +41,128 @@ type Props = {
   awayName: string;
   /** Pre-game engine pick(home/away ≥50%)· 用於「對照引擎」 framing */
   engineHomePicked: boolean;
+  /** 引擎對 favorite 的把握度(0-100)· 存進本地 pick 供賽後對照 */
+  engineConfidence: number;
   /** Final result if ingested · 控制 verdict 顯示 + 鎖進場 */
   finalWinner?: "home" | "away" | "tie" | null;
 };
 
-type Status = "loading" | "anonymous" | "open" | "locked";
+type Auth = "loading" | "anon" | "member";
 
 export default function UserPredictionPicker({
   matchId,
   homeName,
   awayName,
   engineHomePicked,
+  engineConfidence,
   finalWinner,
 }: Props) {
-  const [status, setStatus] = useState<Status>("loading");
-  const [myPick, setMyPick] = useState<"home" | "away" | null>(null);
+  const [auth, setAuth] = useState<Auth>("loading");
+  const [myPick, setMyPick] = useState<"home" | "away" | null>(null); // 會員 · Supabase
+  const [anonPick, setAnonPick] = useState<AnonPick | null>(null); // 訪客 · localStorage
   const [tally, setTally] = useState<MarketTally | null>(null);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     let cancelled = false;
+    const loadAnon = () => {
+      let p = getAnonPickForMatch(matchId);
+      // 賽果出爐後,把判決寫回本地 pick(idempotent)· 之後天梯/準度才算得到
+      if (p && finalWinner && p.verdict === null) {
+        updatePickOutcome(matchId, finalWinner);
+        p = getAnonPickForMatch(matchId);
+      }
+      if (!cancelled) {
+        setAnonPick(p);
+        setAuth("anon");
+      }
+    };
     (async () => {
-      // Crowd line is public — load it regardless of auth.
-      const t = await getMatchTally(matchId);
+      const t = await getMatchTally(matchId); // 群眾線公開 · 不分登入
       if (!cancelled) setTally(t);
       try {
         const supabase = createSupabaseBrowserClient();
         const { data } = await supabase.auth.getSession();
         if (cancelled) return;
-        if (!data.session) {
-          setStatus("anonymous");
-          return;
+        if (data.session) {
+          const mine = await getMyPrediction(matchId);
+          if (cancelled) return;
+          setMyPick(mine);
+          setAuth("member");
+        } else {
+          loadAnon();
         }
-        const mine = await getMyPrediction(matchId);
-        if (cancelled) return;
-        setMyPick(mine);
-        setStatus(mine ? "locked" : "open");
       } catch {
-        if (!cancelled) setStatus("anonymous");
+        loadAnon();
       }
     })();
     return () => {
       cancelled = true;
     };
-  }, [matchId]);
+  }, [matchId, finalWinner]);
 
-  const enter = async (pick: "home" | "away") => {
+  // 會員押注 · Supabase
+  const enterMember = async (pick: "home" | "away") => {
     setSaving(true);
     setError(null);
     const res = await submitPrediction(matchId, pick);
     if (res.ok) {
       setMyPick(res.pick);
-      setStatus("locked");
-      const t = await getMatchTally(matchId); // refresh to include my pick
+      const t = await getMatchTally(matchId); // refresh 含自己這一手
       setTally(t);
     } else if (res.reason === "already_predicted") {
       const mine = await getMyPrediction(matchId);
       setMyPick(mine);
-      setStatus(mine ? "locked" : "open");
     } else if (res.reason === "not_logged_in") {
-      setStatus("anonymous");
+      setAuth("anon");
+      setAnonPick(getAnonPickForMatch(matchId));
     } else {
       setError("進場失敗 · 請重試,或到 /login 重新登入");
     }
     setSaving(false);
   };
 
+  // 訪客押注 · localStorage(0 註冊)
+  const enterLocal = (pick: "home" | "away") => {
+    setError(null);
+    const res = pushAnonPick({
+      matchId,
+      pickedSide: pick,
+      enginePickedSide: engineHomePicked ? "home" : "away",
+      engineConfidence,
+    });
+    if (!res.ok) {
+      setError(
+        res.reason === "quota_exceeded"
+          ? "瀏覽器空間滿了 · 這一手沒存到 · 清點資料再試"
+          : res.reason === "disabled"
+          ? "瀏覽器停用了本機儲存(可能是無痕模式)· 這一手沒法存"
+          : "存取出錯 · 請重試"
+      );
+      return;
+    }
+    setAnonPick(getAnonPickForMatch(matchId));
+  };
+
+  const locked = auth === "member" && myPick !== null;
+  const anonLocked = auth === "anon" && anonPick !== null;
+
   return (
     <div className="mt-4 bg-gold/5 border border-gold/40 px-4 py-3">
       <div className="flex items-baseline justify-between flex-wrap gap-2 mb-3">
         <p className="font-mono text-gold text-[10px] tracking-[0.35em]">
-          進場預測 · 市場
+          押一邊 · 你看好誰
         </p>
         <span className="font-mono text-mute/60 text-[9px] tracking-[0.25em]">
           點數玩法 · 0 金錢 · 押了不可改
         </span>
       </div>
 
-      {/* Crowd market line */}
+      {/* 群眾市場線 · 所有人都看得到 */}
       <CrowdLine tally={tally} homeName={homeName} awayName={awayName} />
 
-      {/* Verdict when the game is final */}
+      {/* 會員賽後判決 */}
       {finalWinner && myPick && finalWinner !== "tie" && (
         <div className="mt-3">
           <p
@@ -130,11 +170,8 @@ export default function UserPredictionPicker({
               myPick === finalWinner ? "text-gold" : "text-loss/80"
             }`}
           >
-            {myPick === finalWinner ? "✓ 您 PROVED · 猜對了" : "✕ 您 DIVERGED · 猜錯了"}
+            {myPick === finalWinner ? "✓ 你猜中了" : "✕ 這次沒中"}
           </p>
-          {/* 峰終時刻(peak-end)· 猜中的情緒高點接到創作迴路 · 邀請「寫」
-              不是逼「付」· 賣不賣是下方 CreatorAnalysis 自己的事(付費=賣分析
-              變現 · 不鎖功能)· per UX agent #2 */}
           {myPick === finalWinner && (
             <a
               href="#say"
@@ -146,54 +183,101 @@ export default function UserPredictionPicker({
         </div>
       )}
 
-      {/* Action zone */}
+      {/* 訪客賽後判決 · 你 vs 引擎(本地 pick)*/}
+      {finalWinner && anonPick && (
+        <AnonVerdict
+          anonPick={anonPick}
+          finalWinner={finalWinner}
+          homeName={homeName}
+          awayName={awayName}
+        />
+      )}
+
+      {/* 動作區 */}
       <div className="mt-3">
-        {status === "loading" && (
+        {auth === "loading" && (
           <p className="font-mono text-mute/50 text-[10px] tracking-[0.3em]">
             載入中...
           </p>
         )}
 
-        {status === "anonymous" && (
-          <Link
-            href={`/login?next=${encodeURIComponent(`/matches/${matchId}`)}`}
-            className="inline-block px-4 py-2 bg-gold text-navy font-mono text-xs tracking-[0.3em] hover:bg-gold-soft transition-colors"
-          >
-            → 登入後進場預測
-          </Link>
-        )}
-
-        {status === "open" && !finalWinner && (
+        {/* ── 會員 ── */}
+        {auth === "member" && !locked && !finalWinner && (
           <div className="grid grid-cols-2 gap-2">
             <PickButton
               label={`押 ${homeName.slice(0, 5)}`}
               mark={engineHomePicked ? "引擎同側" : "與引擎相反"}
               disabled={saving}
-              onClick={() => enter("home")}
+              onClick={() => enterMember("home")}
             />
             <PickButton
               label={`押 ${awayName.slice(0, 5)}`}
               mark={!engineHomePicked ? "引擎同側" : "與引擎相反"}
               disabled={saving}
-              onClick={() => enter("away")}
+              onClick={() => enterMember("away")}
             />
           </div>
         )}
-
-        {status === "open" && finalWinner && (
+        {auth === "member" && !locked && finalWinner && (
           <p className="font-mono text-mute/60 text-[10px] tracking-[0.25em]">
             此場已結束 · 已無法進場(先鎖後結 · 防賽後補登)
           </p>
         )}
-
-        {status === "locked" && myPick && (
+        {locked && myPick && (
           <p className="font-mono text-bone text-sm tracking-[0.15em]">
-            ✓ 您已進場:押{" "}
+            ✓ 你已進場:押{" "}
             <span className="text-gold">
               {myPick === "home" ? homeName : awayName}
             </span>
             <span className="text-mute/60 text-[10px] ml-2">· 已鎖定 · 不可改</span>
           </p>
+        )}
+
+        {/* ── 訪客 · 免登入押在這台裝置 ── */}
+        {auth === "anon" && !anonLocked && !finalWinner && (
+          <>
+            <div className="grid grid-cols-2 gap-2">
+              <PickButton
+                label={`押 ${homeName.slice(0, 5)}`}
+                mark={engineHomePicked ? "引擎同側" : "與引擎相反"}
+                disabled={saving}
+                onClick={() => enterLocal("home")}
+              />
+              <PickButton
+                label={`押 ${awayName.slice(0, 5)}`}
+                mark={!engineHomePicked ? "引擎同側" : "與引擎相反"}
+                disabled={saving}
+                onClick={() => enterLocal("away")}
+              />
+            </div>
+            <p className="mt-2 font-mono text-mute/60 text-[9px] tracking-[0.2em]">
+              不用註冊 · 先押著,賽後回來看你跟引擎誰準
+            </p>
+          </>
+        )}
+        {auth === "anon" && !anonLocked && finalWinner && (
+          <p className="font-mono text-mute/60 text-[10px] tracking-[0.25em]">
+            此場已結束 · 已無法進場(先鎖後結 · 防賽後補登)
+          </p>
+        )}
+        {anonLocked && anonPick && !finalWinner && (
+          <div>
+            <p className="font-mono text-bone text-sm tracking-[0.15em]">
+              ✓ 你押了{" "}
+              <span className="text-gold">
+                {anonPick.pickedSide === "home" ? homeName : awayName}
+              </span>
+              <span className="text-mute/60 text-[10px] ml-2">
+                · {formatPickedSince(anonPick.pickedAt)} · 只存這台裝置
+              </span>
+            </p>
+            <Link
+              href={`/login?next=${encodeURIComponent(`/matches/${matchId}`)}`}
+              className="mt-2 inline-block font-mono text-gold/80 hover:text-gold text-[10px] tracking-[0.2em] underline-offset-4 hover:underline transition-colors"
+            >
+              登入 → 存進永久戰績 · 進群眾市場 · 爬天梯
+            </Link>
+          </div>
         )}
       </div>
 
@@ -208,7 +292,7 @@ export default function UserPredictionPicker({
       )}
 
       <p className="font-mono text-mute/55 text-[9px] tracking-[0.25em] mt-3 leading-relaxed">
-        ▸ 您的預測自動進公開戰績 · 準度累積上{" "}
+        ▸ 登入後你的預測自動進公開戰績 · 準度累積上{" "}
         <Link
           href="/ladder"
           className="text-gold/80 hover:text-gold underline-offset-4 hover:underline transition-colors"
@@ -216,6 +300,76 @@ export default function UserPredictionPicker({
           海選天梯
         </Link>
         (新秀 → 神諭)· 0 金錢 · 0 兌獎 · 純精神預測。
+      </p>
+    </div>
+  );
+}
+
+// ── 訪客賽後判決 · 你 vs 引擎 ────────────────────────────
+function AnonVerdict({
+  anonPick,
+  finalWinner,
+  homeName,
+  awayName,
+}: {
+  anonPick: AnonPick;
+  finalWinner: "home" | "away" | "tie";
+  homeName: string;
+  awayName: string;
+}) {
+  const teamName = (side: "home" | "away") => (side === "home" ? homeName : awayName);
+  const youHit = finalWinner !== "tie" && anonPick.pickedSide === finalWinner;
+  const engineHit =
+    finalWinner !== "tie" && anonPick.enginePickedSide === finalWinner;
+
+  // 一句話總結你跟引擎這場誰準
+  const headline =
+    finalWinner === "tie"
+      ? "平局 · 這場不算"
+      : youHit && engineHit
+      ? "你跟引擎都猜中了"
+      : youHit && !engineHit
+      ? "你猜中 · 引擎沒中 · 這場你贏引擎"
+      : !youHit && engineHit
+      ? "引擎猜中 · 你沒中 · 這場引擎贏你"
+      : "你跟引擎都沒中";
+
+  return (
+    <div className="mt-3 border-t border-gold/20 pt-3">
+      <p className="font-mono text-gold/80 text-[9px] tracking-[0.3em] mb-2">
+        賽果出爐 · 你 {formatPickedSince(anonPick.pickedAt)} 押的
+      </p>
+      <div className="grid grid-cols-2 gap-2 mb-2">
+        <div className="border border-line/60 bg-slate/40 p-2.5">
+          <p className="font-mono text-mute/60 text-[9px] tracking-[0.25em] mb-1">
+            你押
+          </p>
+          <p className="text-bone text-sm">{teamName(anonPick.pickedSide)}</p>
+          <p
+            className={`font-mono text-[11px] tracking-[0.15em] mt-1 ${
+              youHit ? "text-gold" : "text-loss/80"
+            }`}
+          >
+            {finalWinner === "tie" ? "—" : youHit ? "✓ 中" : "✕ 沒中"}
+          </p>
+        </div>
+        <div className="border border-line/60 bg-slate/40 p-2.5">
+          <p className="font-mono text-mute/60 text-[9px] tracking-[0.25em] mb-1">
+            引擎押
+          </p>
+          <p className="text-bone text-sm">{teamName(anonPick.enginePickedSide)}</p>
+          <p
+            className={`font-mono text-[11px] tracking-[0.15em] mt-1 ${
+              engineHit ? "text-gold" : "text-loss/80"
+            }`}
+          >
+            {finalWinner === "tie" ? "—" : engineHit ? "✓ 中" : "✕ 沒中"}
+          </p>
+        </div>
+      </div>
+      <p className="text-bone text-sm leading-relaxed">{headline}</p>
+      <p className="font-mono text-mute/55 text-[9px] tracking-[0.2em] mt-2 leading-relaxed">
+        押的紀錄只存這台裝置 · 登入就能跨裝置累積、上海選天梯。
       </p>
     </div>
   );
@@ -234,7 +388,7 @@ function CrowdLine({
   if (!tally || tally.total === 0 || tally.homePct === null) {
     return (
       <p className="font-mono text-mute/60 text-[10px] tracking-[0.25em]">
-        群眾市場 · 尚無人進場 · 您可以是第一個 ▸
+        群眾市場 · 尚無人進場 · 登入後你可以是第一個 ▸
       </p>
     );
   }

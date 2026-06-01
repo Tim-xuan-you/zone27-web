@@ -167,6 +167,8 @@ export default function MiniMatchCard({ match }: { match: Match }) {
           matchId={match.id}
           homeName={match.home.name}
           awayName={match.away.name}
+          engineHomePicked={homeFav}
+          engineConfidence={Math.max(homePct, awayPct)}
         />
       )}
 

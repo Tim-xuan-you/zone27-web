@@ -3,6 +3,7 @@ import Link from "next/link";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import MiniMatchCard from "@/components/MiniMatchCard";
+import AnonCalibrationStrip from "@/components/AnonCalibrationStrip";
 import {
   getTodayAndFutureMatches,
   getFinalizedMatches,
@@ -106,6 +107,11 @@ export default function Home() {
             <EmptyFloor />
           )}
         </section>
+
+        {/* ── 你的戰績 vs 引擎 · 回訪鉤子 · 只在這台裝置押過才出現 ──
+            新訪客 0 picks → 自動隱藏(不佔空間)· 回訪押過的人 → 看到
+            自己跟引擎誰準 = 明天回來的理由。 per 轉換動線 agent #1。 */}
+        <AnonCalibrationStrip variant="homepage" />
 
         {/* ── 三步玩法 · 圖示卡(child-level · 圖取代字)──── */}
         <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-14 border-t border-line/40 pt-12">

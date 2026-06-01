@@ -9,26 +9,37 @@ import {
   submitPrediction,
   type MarketTally,
 } from "@/lib/predictions-market";
+import { getAnonPickForMatch, pushAnonPick } from "@/lib/anon-picks";
 
 // ── ZONE 27 · Card Bet Strip (R177 · Polymarket 化) ─────
 // 首頁市場卡上的一鍵押 + 群眾市場線。 把押注從「點完整分析 → 進賽事頁 →
 // 滑到 picker」(4 步)壓成「卡上直接押」(1 步)= Polymarket 核心體驗。
 //
-// 同一份 predictions 表(migration 0003 RPC)· 跟賽事頁 UserPredictionPicker
-// 完全一致(押了兩處都顯示已鎖 · 一場一人一次 · server-enforced 不可改)。
-// 精簡版:只有群眾線 + 一鍵押 · 完整 verdict / 海選說明留賽事頁。
-// GRACEFUL:anon → 登入 CTA · 0 用戶 → 群眾線收起不佔空間 · RPC error → 不 crash。
+// 兩條腿,同一個動作(跟賽事頁 UserPredictionPicker 完全一致):
+//   · 還沒登入 → 押在這台裝置(localStorage · 0 註冊)· 一秒 own 一手
+//   · 已登入 → 押進共享 predictions 表(0003 RPC · 餵群眾線)· 一場一人一次
+// GRACEFUL:0 用戶 → 群眾線收起 · RPC error → 不 crash。
 // ─────────────────────────────────────────────────────
 
 type Props = {
   matchId: string;
   homeName: string;
   awayName: string;
+  /** 引擎賽前看好哪邊(home ≥ away)· 存進本地 pick 供賽後對照 */
+  engineHomePicked: boolean;
+  /** 引擎對 favorite 的把握度(0-100)*/
+  engineConfidence: number;
 };
 
-type Status = "loading" | "anonymous" | "open" | "locked";
+type Status = "loading" | "anon-open" | "anon-locked" | "open" | "locked";
 
-export default function CardBetStrip({ matchId, homeName, awayName }: Props) {
+export default function CardBetStrip({
+  matchId,
+  homeName,
+  awayName,
+  engineHomePicked,
+  engineConfidence,
+}: Props) {
   const [status, setStatus] = useState<Status>("loading");
   const [myPick, setMyPick] = useState<"home" | "away" | null>(null);
   const [tally, setTally] = useState<MarketTally | null>(null);
@@ -44,7 +55,9 @@ export default function CardBetStrip({ matchId, homeName, awayName }: Props) {
         const { data } = await supabase.auth.getSession();
         if (cancelled) return;
         if (!data.session) {
-          setStatus("anonymous");
+          const local = getAnonPickForMatch(matchId);
+          setMyPick(local ? local.pickedSide : null);
+          setStatus(local ? "anon-locked" : "anon-open");
           return;
         }
         const mine = await getMyPrediction(matchId);
@@ -52,7 +65,10 @@ export default function CardBetStrip({ matchId, homeName, awayName }: Props) {
         setMyPick(mine);
         setStatus(mine ? "locked" : "open");
       } catch {
-        if (!cancelled) setStatus("anonymous");
+        if (cancelled) return;
+        const local = getAnonPickForMatch(matchId);
+        setMyPick(local ? local.pickedSide : null);
+        setStatus(local ? "anon-locked" : "anon-open");
       }
     })();
     return () => {
@@ -60,22 +76,39 @@ export default function CardBetStrip({ matchId, homeName, awayName }: Props) {
     };
   }, [matchId]);
 
-  const enter = async (pick: "home" | "away") => {
+  // 會員 · Supabase
+  const enterMember = async (pick: "home" | "away") => {
     setSaving(true);
     const res = await submitPrediction(matchId, pick);
     if (res.ok) {
       setMyPick(res.pick);
       setStatus("locked");
-      const t = await getMatchTally(matchId); // refresh to include my pick
+      const t = await getMatchTally(matchId);
       setTally(t);
     } else if (res.reason === "already_predicted") {
       const mine = await getMyPrediction(matchId);
       setMyPick(mine);
       setStatus(mine ? "locked" : "open");
     } else if (res.reason === "not_logged_in") {
-      setStatus("anonymous");
+      const local = getAnonPickForMatch(matchId);
+      setMyPick(local ? local.pickedSide : null);
+      setStatus(local ? "anon-locked" : "anon-open");
     }
     setSaving(false);
+  };
+
+  // 訪客 · localStorage(0 註冊)
+  const enterLocal = (pick: "home" | "away") => {
+    const res = pushAnonPick({
+      matchId,
+      pickedSide: pick,
+      enginePickedSide: engineHomePicked ? "home" : "away",
+      engineConfidence,
+    });
+    if (res.ok) {
+      setMyPick(pick);
+      setStatus("anon-locked");
+    }
   };
 
   return (
@@ -106,31 +139,26 @@ export default function CardBetStrip({ matchId, homeName, awayName }: Props) {
         </div>
       )}
 
-      {/* 冷啟動鉤子 · 還沒人押時,把空盤翻成「第一手是你的」邀請(IKEA /
-          first-mover)· 只在可押(open)時出現 · anonymous 由下方登入 CTA 接手 */}
-      {tally && tally.total === 0 && status === "open" && (
-        <p className="mb-2 font-mono text-gold/70 text-[9px] tracking-[0.2em]">
-          還沒人押這場 · 第一手是你的 ▸
-        </p>
-      )}
+      {/* 冷啟動鉤子 · 還沒人押時,把空盤翻成「第一手是你的」邀請 */}
+      {tally &&
+        tally.total === 0 &&
+        (status === "open" || status === "anon-open") && (
+          <p className="mb-2 font-mono text-gold/70 text-[9px] tracking-[0.2em]">
+            還沒人押這場 · 第一手是你的 ▸
+          </p>
+        )}
 
       {/* 一鍵押 */}
       {status === "loading" && (
         <div className="h-10 bg-line/20 animate-pulse rounded" aria-hidden="true" />
       )}
-      {status === "anonymous" && (
-        <Link
-          href={`/login?next=${encodeURIComponent(`/matches/${matchId}`)}`}
-          className="block text-center px-3 py-2.5 min-h-[40px] border border-gold/40 text-gold font-mono text-[10px] tracking-[0.25em] hover:bg-gold/10 transition-colors"
-        >
-          登入 · 一鍵進場 →
-        </Link>
-      )}
-      {status === "open" && (
+      {(status === "open" || status === "anon-open") && (
         <div className="grid grid-cols-2 gap-2">
           <button
             type="button"
-            onClick={() => enter("home")}
+            onClick={() =>
+              status === "open" ? enterMember("home") : enterLocal("home")
+            }
             disabled={saving}
             className="px-2 py-2.5 min-h-[40px] border border-gold/40 text-bone hover:border-gold hover:bg-gold/10 font-mono text-[10px] tracking-[0.15em] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
@@ -138,7 +166,9 @@ export default function CardBetStrip({ matchId, homeName, awayName }: Props) {
           </button>
           <button
             type="button"
-            onClick={() => enter("away")}
+            onClick={() =>
+              status === "open" ? enterMember("away") : enterLocal("away")
+            }
             disabled={saving}
             className="px-2 py-2.5 min-h-[40px] border border-gold/40 text-bone hover:border-gold hover:bg-gold/10 font-mono text-[10px] tracking-[0.15em] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
@@ -146,13 +176,20 @@ export default function CardBetStrip({ matchId, homeName, awayName }: Props) {
           </button>
         </div>
       )}
-      {status === "locked" && myPick && (
+      {status === "anon-open" && (
+        <p className="mt-1.5 font-mono text-mute/55 text-[9px] tracking-[0.18em] text-center">
+          不用註冊 · 先押著
+        </p>
+      )}
+      {(status === "locked" || status === "anon-locked") && myPick && (
         <p className="font-mono text-bone text-[11px] tracking-[0.15em] text-center py-1.5">
           ✓ 已押{" "}
           <span className="text-gold">
             {myPick === "home" ? homeName : awayName}
           </span>
-          <span className="text-mute/50 text-[9px] ml-1.5">· 鎖定</span>
+          <span className="text-mute/50 text-[9px] ml-1.5">
+            {status === "anon-locked" ? "· 存這裝置" : "· 鎖定"}
+          </span>
         </p>
       )}
     </div>
