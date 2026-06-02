@@ -7,6 +7,7 @@ import {
   getMatchTally,
   getMyPrediction,
   submitPrediction,
+  CROWD_LINE_MIN,
   type MarketTally,
 } from "@/lib/predictions-market";
 import { getAnonPickForMatch, pushAnonPick } from "@/lib/anon-picks";
@@ -113,8 +114,8 @@ export default function CardBetStrip({
 
   return (
     <div className="mt-3 pt-3 border-t border-gold/15">
-      {/* 群眾市場線 · 有人進場時顯示 */}
-      {tally && tally.total > 0 && tally.homePct !== null && (
+      {/* 群眾市場線 · 滿門檻才畫百分比(低於門檻只報人數 · 不拿小樣本假裝共識)*/}
+      {tally && tally.total >= CROWD_LINE_MIN && tally.homePct !== null && (
         <div
           role="img"
           aria-label={`群眾市場線 · ${tally.homePct}% 押 ${homeName} · ${tally.total} 人進場`}
@@ -137,6 +138,14 @@ export default function CardBetStrip({
             />
           </div>
         </div>
+      )}
+
+      {/* 樣本太小 · 只報人數,不畫滿格 bar(不拿 N=1 假裝 100% 共識)*/}
+      {tally && tally.total > 0 && tally.total < CROWD_LINE_MIN && (
+        <p className="mb-2 font-mono text-mute/70 text-[9px] tracking-[0.18em]">
+          <span className="text-bone tabular">{tally.total}</span> 人押了 · 滿{" "}
+          {CROWD_LINE_MIN} 人成形市場線 ▸
+        </p>
       )}
 
       {/* 冷啟動鉤子 · 還沒人押時,把空盤翻成「第一手是你的」邀請 */}

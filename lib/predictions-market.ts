@@ -36,6 +36,12 @@ const EMPTY_TALLY: MarketTally = {
   homePct: null,
 };
 
+// 群眾市場線最小樣本 · 低於此只報實際人數,不畫百分比 bar。
+// 拿 N=1 畫「100% 押 X」= 報馬仔拿小樣本假裝「大盤共識」的手法 · 品牌不做。
+// 呼應全站樣本紀律:作者徽章 N≥10 才掛準度、天梯 10 場才上榜、
+// methodology N≥30 SAMPLE DEBT。 滿這個數,群眾線才畫得出來。
+export const CROWD_LINE_MIN = 5;
+
 /** Public crowd tally for a match (anon-readable). Returns an empty tally
  *  on any error so the UI degrades gracefully. */
 export async function getMatchTally(matchId: string): Promise<MarketTally> {

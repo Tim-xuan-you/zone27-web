@@ -7,6 +7,7 @@ import {
   getMatchTally,
   getMyPrediction,
   submitPrediction,
+  CROWD_LINE_MIN,
   type MarketTally,
 } from "@/lib/predictions-market";
 import {
@@ -390,6 +391,24 @@ function CrowdLine({
       <p className="font-mono text-mute/60 text-[10px] tracking-[0.25em]">
         群眾市場 · 尚無人進場 · 登入後你可以是第一個 ▸
       </p>
+    );
+  }
+  // 樣本太小 → 只報實際人數,不畫百分比 bar。 N=1 畫「100% 押 X」=
+  // 拿一個人假裝是「大盤共識」(報馬仔手法)· 跟全站樣本紀律自打臉。
+  if (tally.total < CROWD_LINE_MIN) {
+    return (
+      <div className="font-mono text-[10px] tracking-[0.2em] leading-relaxed">
+        <p className="text-mute/85">
+          目前 <span className="text-bone tabular">{tally.total}</span> 人進場 ·{" "}
+          <span className="text-gold/90 tabular">{tally.homeCount}</span> 押{" "}
+          {homeName.slice(0, 4)} ·{" "}
+          <span className="text-mute tabular">{tally.awayCount}</span> 押{" "}
+          {awayName.slice(0, 4)}
+        </p>
+        <p className="text-mute/50 text-[9px] tracking-[0.22em] mt-1">
+          滿 {CROWD_LINE_MIN} 人才畫群眾市場線 —— 不拿幾個人假裝是大盤。
+        </p>
+      </div>
     );
   }
   const homePct = tally.homePct;
