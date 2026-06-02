@@ -128,7 +128,6 @@ export default function MatchesPage() {
         <section className="mx-auto max-w-6xl w-full px-6 sm:px-10 pb-16">
           <div className="flex items-baseline justify-between flex-wrap gap-3 mb-6">
             <p
-              lang="en"
               className="font-mono text-gold/70 text-[10px] tracking-[0.35em]"
             >
               / RECENT RECEIPTS · 引擎過去戰績
@@ -257,7 +256,6 @@ function PhaseChip({
   if (phase === "today-pregame") {
     return (
       <span
-        lang="en"
         className={`font-mono ${baseSize} border border-gold text-gold shimmer`}
         title="今晚開賽 · 預測已公開鎖定"
       >
@@ -269,7 +267,6 @@ function PhaseChip({
   if (phase === "today-live") {
     return (
       <span
-        lang="en"
         className={`font-mono ${baseSize} border border-gold text-gold`}
         title="賽事進行中 · 引擎預測已無法再改"
       >
@@ -292,7 +289,6 @@ function PhaseChip({
 
   return (
     <span
-      lang="en"
       className={`font-mono ${baseSize} border border-mute/60 text-mute`}
       title="已結束 · 未補錄收據"
     >

@@ -666,7 +666,6 @@ function BiggestCallCard({
     >
       <div className="flex items-baseline justify-between gap-2 mb-4">
         <span
-          lang="en"
           className={`font-mono text-[9px] tracking-[0.3em] px-1.5 py-0.5 border ${
             isHit ? "border-gold text-gold" : "border-loss/70 text-loss"
           }`}
@@ -1064,7 +1063,7 @@ function FirstReceiptHero({
             )}
             {cal === "push" && (
               <>
-                <span lang="en">NO FAVORITE 或 TIE</span> · 引擎 verdict 不可驗證
+                <span>NO FAVORITE 或 TIE</span> · 引擎 verdict 不可驗證
               </>
             )}
           </p>

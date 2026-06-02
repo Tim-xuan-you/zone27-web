@@ -329,8 +329,8 @@ export default function CoveragePage() {
               </p>
               <p>
                 所以我們不假裝覆蓋一切。當某場比賽的輸入不足,我們直接告訴您
-                「<span lang="en" className="font-mono text-bone">ENGINE PENDING · 等待先發資訊</span>」
-                或「<span lang="en" className="font-mono text-bone">ENGINE WAIVED · 樣本 n&lt;10</span>」。
+                「<span className="font-mono text-bone">ENGINE PENDING · 等待先發資訊</span>」
+                或「<span className="font-mono text-bone">ENGINE WAIVED · 樣本 n&lt;10</span>」。
                 這個「沒覆蓋」本身就是我們的 trust artifact —
                 <span className="text-bone"> 我們選擇沉默,而不是製造雜訊</span>。
               </p>
