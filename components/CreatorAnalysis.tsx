@@ -21,6 +21,11 @@ import {
   type MemberTier,
 } from "@/lib/tier";
 import { getWalletBalance, buyCreatorPost, type BuyResult } from "@/lib/wallet";
+import {
+  getCreatorComments,
+  submitCreatorComment,
+  type CreatorComment,
+} from "@/lib/creator-comments";
 
 // ── ZONE 27 · CreatorAnalysis · 創作者賣分析(migration 0005)──────
 // Tim 2026-05-30 報馬仔/明燈 screenshot · 要:發文 + 推薦賽事(選邊)+ 寫分析 +
@@ -298,8 +303,8 @@ export default function CreatorAnalysis({
         )}
 
         {status === "posted" && (
-          <p className="font-mono text-gold text-[10px] tracking-[0.3em]">
-            ✓ 您已發表本場分析 · 一場一篇 · 賽後自動評準度
+          <p className="font-mono text-gold text-[10px] tracking-[0.25em] leading-relaxed">
+            ✓ 您已發表本場分析 · <span className="text-mute/80">預測一場一篇(鎖死、賽後自動評準度)· 但討論不限 —— 到任一篇分析下面留言、回覆讀者都可以。</span>
           </p>
         )}
 
@@ -451,7 +456,134 @@ function PostCard({
           </p>
         </>
       )}
+
+      {/* 回覆串 · 分析下的對話層(讀者↔作者 · 買家↔賣家)· 預測仍鎖死一場一篇,
+          回覆無上限不評分 = 拿到互動、不丟問責 · per Tim R185 dogfood · migration 0010 */}
+      <CommentThread postId={p.postId} loggedIn={loggedIn} />
     </article>
+  );
+}
+
+// ── 回覆串 · 分析下的對話層 ──────────────────────────────
+// flat thread(不深層巢狀 · 乾淨)· 折疊預設(subtraction-first · 點開才載入)·
+// 登入可回覆 · 作者本人的回覆標「作者」(解 Tim「賣家回覆買家」)。 GRACEFUL:
+// 0010 未套用 → 空串 + 送出回「開通中」· 不 crash。 預測一場一篇不動,這只是對話。
+function CommentThread({
+  postId,
+  loggedIn,
+}: {
+  postId: string;
+  loggedIn: boolean;
+}) {
+  const [open, setOpen] = useState(false);
+  const [loaded, setLoaded] = useState(false);
+  const [comments, setComments] = useState<CreatorComment[]>([]);
+  const [text, setText] = useState("");
+  const [sending, setSending] = useState(false);
+  const [err, setErr] = useState<string | null>(null);
+
+  const load = async () => {
+    const list = await getCreatorComments(postId);
+    setComments(list);
+    setLoaded(true);
+  };
+
+  const toggle = () => {
+    const next = !open;
+    setOpen(next);
+    if (next && !loaded) load();
+  };
+
+  const send = async () => {
+    const b = text.trim();
+    if (!b) return;
+    setSending(true);
+    setErr(null);
+    const res = await submitCreatorComment(postId, b);
+    if (res.ok) {
+      setText("");
+      await load();
+    } else if (res.reason === "not_logged_in") {
+      setErr("請先登入再回覆。");
+    } else if (res.reason === "invalid") {
+      setErr("回覆 1–500 字。");
+    } else {
+      setErr("討論功能開通中 · 請稍後再試。");
+    }
+    setSending(false);
+  };
+
+  // 舊 RPC 沒回 post_id → 無法綁回覆 · 不顯示(graceful)
+  if (!postId) return null;
+
+  return (
+    <div className="mt-3 pt-3 border-t border-line/30">
+      <button
+        type="button"
+        onClick={toggle}
+        aria-expanded={open}
+        className="font-mono text-gold/70 hover:text-gold text-[10px] tracking-[0.2em] transition-colors"
+      >
+        💬 {loaded ? `${comments.length} 則討論` : "留言・回覆作者"} {open ? "▾" : "▸"}
+      </button>
+
+      {open && (
+        <div className="mt-3 space-y-3">
+          {loaded && comments.length === 0 && (
+            <p className="font-mono text-mute/55 text-[10px] tracking-[0.2em]">
+              還沒有人留言 · 留第一則。
+            </p>
+          )}
+          {comments.map((c, i) => (
+            <div key={i} className="border-l-2 border-line/40 pl-3">
+              <p className="flex items-baseline gap-2 flex-wrap">
+                <span className="font-mono text-bone/90 text-[10px] tracking-[0.15em]">
+                  {c.handle}
+                </span>
+                {c.isAuthor && (
+                  <span className="font-mono text-gold/90 text-[8px] tracking-[0.2em] px-1 py-0.5 border border-gold/40">
+                    作者
+                  </span>
+                )}
+              </p>
+              <p className="mt-1 text-bone/80 text-[13px] leading-relaxed whitespace-pre-wrap">
+                {c.body}
+              </p>
+            </div>
+          ))}
+
+          {loggedIn ? (
+            <div className="flex items-end gap-2">
+              <textarea
+                rows={2}
+                value={text}
+                maxLength={500}
+                onChange={(e) => setText(e.target.value)}
+                placeholder="回覆這篇分析 / 問作者問題"
+                className="flex-1 bg-ink/60 border border-line/70 text-bone px-3 py-2 outline-none focus:border-gold/60 placeholder:text-mute/55 font-mono text-[13px] leading-relaxed transition-colors"
+              />
+              <button
+                type="button"
+                onClick={send}
+                disabled={sending || !text.trim()}
+                className="shrink-0 px-4 py-2 bg-gold text-navy font-mono text-[10px] tracking-[0.2em] hover:bg-gold-soft transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {sending ? "送出中" : "回覆"}
+              </button>
+            </div>
+          ) : (
+            <p className="font-mono text-mute/60 text-[10px] tracking-[0.2em]">
+              ▸ 登入後可回覆 / 問作者
+            </p>
+          )}
+          {err && (
+            <p role="alert" className="font-mono text-loss/85 text-[10px] tracking-[0.15em]">
+              ⚠ {err}
+            </p>
+          )}
+        </div>
+      )}
+    </div>
   );
 }
 
