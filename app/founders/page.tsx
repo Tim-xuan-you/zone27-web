@@ -6,43 +6,42 @@ import WaitlistForm from "@/components/WaitlistForm";
 import ClientErrorBoundary from "@/components/ClientErrorBoundary";
 import CopyLinkButton from "@/components/CopyLinkButton";
 import CredentialStack from "@/components/CredentialStack";
-import { FOUNDERS_TOTAL, FOUNDERS_NEXT, formatBadge } from "@/lib/founders-stats";
 import { getWaitlistCount } from "@/lib/waitlist-stats";
 import { createPageMetadata } from "@/lib/page-og";
 
-// ── /founders · Apple 式瘦身(對標已砍好的 /membership)──────────
-// Tim 點名:880 行 → Apple 式。 subtraction-first。 砍除:三種會員對照大表
-// (→ 一行連到 /membership)· WHY NT$2,700 推導收合 · 重複的 Final CTA ·
-// 「你不是在買引擎」2-col 卡片牆 · 6 大權益的長卡 grid · 6 題 FAQ。
-// 留下這頁真正的工作:報價 → 一段親筆 founder voice → 信任 → 表單 → 申請。
-// 其餘深度全部 push 到 /membership · /track-record · /founders/ledger · /faq。
-// ⚠ 必須保留 id="waitlist"(/login 有深連結 /founders#waitlist)。
+// ── /founders · R187 · 拿掉「創始 270 名冊」(per Tim「太複雜 · 刪掉吧」)──
+// 砍掉:NEXT IS #008 倒數 · 前 270 創始編號 · 鑲金編號 unlock · #001–#270 ·
+// 分配帳本連結 · founders-stats(FOUNDERS_TOTAL/NEXT/formatBadge)依賴。
+// FOUNDERS 27 改框成「最高階年度會員」· 稀有感用身分+全站最低抽成承載,不用數字。
+// /founders/ledger 已改成 redirect · FoundingMemberLedger / ScarcityStrip 已刪。
+// ⚠ 站上其他散落的「270 / 創始編號」文字提及(faq/terms/privacy/annual 等)
+//   留下一輪文字 sweep。
 // ─────────────────────────────────────────────────────
 export const metadata: Metadata = createPageMetadata({
-  title: "Founders 27 · NT$ 2,700 / 365 天 · 前 270 拿創始編號",
+  title: "Founders 27 · 最高階年度會員 · NT$ 2,700 / 365 天",
   description:
-    "ZONE 27 創始會員 · NT$ 2,700/365 天 · 會員不限量 · 前 270 拿永久創始編號 · 每年 1/1 加入 / 續訂 · Tim 親手 onboard 前 270 · 創作者抽傭 5%。",
+    "ZONE 27 最高階年度會員 · NT$ 2,700/365 天 · 賣分析你拿 95%(全站最低抽成)· 引擎新版搶先試 + 投票權 · 每年 1/1 加入 / 續訂 · Tim 親手 onboard。",
   path: "/founders",
 });
 
 export const revalidate = 3600;
 
-// 你拿到什麼 · 6 個權益 · 一行一個(不再用長卡 grid)
+// 你拿到什麼 · 6 個權益 · 一行一個
 const UNLOCKS = [
   "365 天會員資格 · BLACK CARD 全部功能都包含",
-  `鑲金創始編號 #001–#${FOUNDERS_TOTAL} · 天梯、留言、署名旁都顯示`,
-  "賣分析只抽 5% · 你拿 95%(BLACK CARD 是 10%)",
-  "引擎每次改版 · 提前 7 天搶先試",
+  "「✓ 驗證準度」徽章 · 掛在你署名旁(連輸都算 · 不可造假)",
+  "賣分析只抽 5% · 你拿 95%(BLACK CARD 是 10%)· 全站最低",
+  "引擎每次改版 · 提前 7 天搶先試 + 投票權",
   "BOTTOM 27 棒球手遊上線 · 創始限定球員卡空投",
   "恆美攝影 × 伶 Kopi 旗艦店 · 一品紅茶招待",
 ];
 
-// 誠實列在買點旁 · NT$ 2,700 不會給你(Pratfall · 一行一個)
+// 誠實列在買點旁 · NT$ 2,700 不會給你(一行一個)
 const WONT_BUY = [
   ["明牌 / 內幕", "不接受下注 · 不出彩金 · 沒有「老師明牌」可給"],
   ["保證賺錢", "我們公開機率 · 不承諾你下注賺錢"],
   ["終身買斷", "365 天 · 每年 1/1 主動續訂 · 0 自動扣款"],
-  ["私人 DM", "Tim 親手回 email · 但全 270 同等對待"],
+  ["私人 DM", "Tim 親手回 email · 但全體會員同等對待"],
 ];
 
 export default async function FoundersPage({
@@ -70,11 +69,10 @@ export default async function FoundersPage({
           </div>
 
           <h1 className="text-4xl sm:text-6xl md:text-7xl font-light leading-[1.05] tracking-tight text-bone">
-            NEXT IS{" "}
-            <span className="text-gold tabular">{formatBadge(FOUNDERS_NEXT)}</span>
+            FOUNDERS 27
             <br />
             <span className="text-2xl sm:text-3xl md:text-4xl text-mute">
-              會員不限量 · 前 {FOUNDERS_TOTAL} 拿創始編號
+              最高階 · 創始會員
             </span>
           </h1>
 
@@ -86,15 +84,15 @@ export default async function FoundersPage({
             <span className="text-bone">NO AUTO-RENEW</span>
           </p>
           <p className="mt-2 text-mute/70 text-xs sm:text-[13px] leading-relaxed">
-            等同每場 ~NT$ 11 · 比 BLACK CARD 整年省 55% · #001–#{FOUNDERS_TOTAL} 發完即止
+            賣分析你拿 <span className="text-gold">95%</span>(全站最低抽成)· 等同每場 ~NT$ 11 · 比 BLACK CARD 整年省 55%
           </p>
 
           {/* 一段親筆 founder voice */}
           <div className="mt-7 max-w-xl mx-auto bg-slate/30 border-l-2 border-gold/60 px-5 py-4 text-left">
             <p className="text-bone text-[14px] sm:text-[15px] leading-relaxed">
               我寫這個引擎,是因為台灣硬核棒球迷沒有自己的 Bloomberg。引擎永遠免費 ——
-              Founders 27 賣的不是工具,是前 {FOUNDERS_TOTAL} 個我親手回覆、親筆簽名的創始編號。
-              <strong className="text-bone">你不是在買明牌</strong>,是買一個不靠明牌、不抽下注活下去的品牌。
+              Founders 27 賣的不是工具,是一個不靠明牌、不抽下注活下去的品牌的
+              <strong className="text-bone">最高階席位</strong>:賣分析只抽 5%、新版搶先試、Tim 親手 onboard。
             </p>
             <p className="font-mono text-mute/70 text-[10px] tracking-[0.3em] mt-3 pt-3 border-t border-line/40">
               — TIM · SOLO FOUNDER · ZONE 27
@@ -129,7 +127,7 @@ export default async function FoundersPage({
           >
             <span className="min-w-0">
               <span className="block text-bone text-base sm:text-lg font-light tracking-tight">
-                已決定?直接申請創始席位 →
+                已決定?直接申請最高階席位 →
               </span>
               <span className="block text-mute text-xs sm:text-sm mt-1 leading-relaxed">
                 Tim 親手 review · 通過後寄銀行資訊 + 轉帳窗口
@@ -150,7 +148,7 @@ export default async function FoundersPage({
             NT$ 2,700 · 一年 · 你拿到什麼
           </h2>
           <p className="text-mute text-center text-sm mb-10 max-w-lg mx-auto leading-relaxed">
-            引擎本來就免費。下面這些,是 {FOUNDERS_TOTAL} 個 fork 不走的位置。
+            引擎本來就免費。下面這些,是只有最高階會員才有的東西。
           </p>
 
           <ul className="max-w-xl mx-auto space-y-3 list-none pl-0 mb-12">
@@ -167,7 +165,7 @@ export default async function FoundersPage({
             ))}
           </ul>
 
-          {/* 不會給你(Pratfall · 誠實 coda)*/}
+          {/* 不會給你(誠實 coda)*/}
           <div className="max-w-xl mx-auto border border-loss/30 bg-slate/30 p-5 sm:p-6">
             <p
               lang="en"
@@ -192,7 +190,7 @@ export default async function FoundersPage({
           <div className="grid sm:grid-cols-2 gap-3">
             <DepthLink href="/membership" label="比較三種會員" en="FREE · BLACK · FOUNDERS" />
             <DepthLink href="/track-record" label="引擎公開戰績" en="言中跟落空一樣掛" />
-            <DepthLink href="/founders/ledger" label="創始席位分配帳本" en="拒絕原因也公開" />
+            <DepthLink href="/integrity" label="永遠不變的事" en="13 條紅線 + 9 條承諾" />
             <DepthLink href="/faq" label="完整問答" en="現在留 email 要付錢嗎?引擎免費那我付什麼?" />
           </div>
 
