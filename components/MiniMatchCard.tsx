@@ -168,7 +168,9 @@ export default function MiniMatchCard({ match }: { match: Match }) {
           <span className="text-gold/80">
             {homeFav ? match.home.name : match.away.name}
           </span>{" "}
-          · 一萬次模擬贏 {Math.max(homePct, awayPct) * 100} 次
+          · 一萬次模擬 · 贏{" "}
+          {Math.round(Math.max(homePct, awayPct) * 100).toLocaleString("en-US")}{" "}
+          次
         </p>
 
       </div>

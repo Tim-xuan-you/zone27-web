@@ -288,13 +288,17 @@ export default function UserPredictionPicker({
         )}
       </div>
 
-      {/* 押完接下一步 · 峰值不斷頭(UX H4)· 押完最熱的瞬間 → 接「去押下一場」迴路 */}
-      {(locked || anonLocked) && !finalWinner && (
+      {/* 押完接下一步 · 峰值不斷頭(Kahneman peak-end)· 押完 / 賽果出爐最熱
+          那刻 → 接「去押下一場」迴路。 賽後也留著:贏了不只給高門檻的「寫成
+          分析」(多數人不會做)· 也給低門檻的「再押一場」· 輸了也不斷頭
+          (0 金錢 · 不掠奪 · 純練眼光)。 原本 gate !finalWinner 讓這條在賽果
+          出爐時消失 = 剛好在情緒最高那刻斷頭。 */}
+      {(locked || anonLocked) && (
         <Link
           href="/matches"
           className="mt-3 block text-center font-mono text-gold/80 hover:text-gold text-[10px] tracking-[0.2em] underline-offset-4 hover:underline transition-colors"
         >
-          押下一場 · 看今晚其他賽事 →
+          {finalWinner ? "去押下一場 →" : "押下一場 · 看今晚其他賽事 →"}
         </Link>
       )}
 
