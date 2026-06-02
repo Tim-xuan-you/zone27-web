@@ -124,11 +124,24 @@ export default async function MemberPage() {
                   <span className="text-mute/70 text-sm"> · {stats.pending} 場待開</span>
                 )}
               </p>
-              <p className="mt-2 font-mono text-mute/60 text-[10px] tracking-[0.2em]">
-                每場賽後自動對照引擎 · 押了刪不掉 ·{" "}
-                <Link href="/ladder" className="text-gold/80 hover:text-gold underline-offset-4 hover:underline">
-                  爬天梯 →
-                </Link>
+              {/* 準度接天梯進度 · 把孤兒數字接上「排名感」(UX M2)· 門檻 10 場同 /ladder */}
+              <p className="mt-2 font-mono text-mute/60 text-[10px] tracking-[0.2em] leading-relaxed">
+                每場賽後自動對照引擎 · 押了刪不掉。{" "}
+                {stats.total >= 10 ? (
+                  <>
+                    你已達上天梯門檻 ·{" "}
+                    <Link href="/ladder" className="text-gold/80 hover:text-gold underline-offset-4 hover:underline">
+                      看你排第幾 →
+                    </Link>
+                  </>
+                ) : (
+                  <>
+                    再押 <span className="text-bone tabular">{10 - stats.total}</span> 場 · 你就能上天梯排名 ·{" "}
+                    <Link href="/ladder" className="text-gold/80 hover:text-gold underline-offset-4 hover:underline">
+                      天梯怎麼爬 →
+                    </Link>
+                  </>
+                )}
               </p>
             </>
           ) : (
