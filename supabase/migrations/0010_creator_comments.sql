@@ -69,9 +69,11 @@ begin
     raise exception 'post_not_found';
   end if;
 
+  -- ⚠️ qualify 表名:RETURNS TABLE 的 out 欄 created_at 會跟表的 created_at 撞名
+  -- → 42702 ambiguous(同 R181 教訓)。 必須 creator_comments.created_at 點出來。
   insert into public.creator_comments (post_id, user_id, body)
   values (p_post_id, v_uid, v_body)
-  returning id, created_at
+  returning creator_comments.id, creator_comments.created_at
   into v_id, v_at;
 
   return query select v_id, v_at;

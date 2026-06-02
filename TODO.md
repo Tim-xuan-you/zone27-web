@@ -28,12 +28,15 @@
 - 測試殘留(都掛假賽事 `cpbl-rpctest-260602` · 不顯示在任何真實頁 · Tim 想清可在 Studio 刪):2 個 `z27.rpctest.*@example.com` 帳號 + 1 prediction + 1 creator post
 - 註:0002 過時別套(指向已刪 /leaderboard)· 0004 沒前端用不必套。
 
-### ⏳ Apply migration 0010 creator_comments(5 分 · Supabase SQL Editor)· 分析回覆串
+### 🔴 重跑修正後的 0010 + 0004(42702 bug · R185 實測抓到)· Supabase SQL Editor
 
-R185 Tim dogfood 後新增:創作者分析下的「回覆串」對話層(讀者↔作者 · 買家↔賣家 · 作者回覆標「作者」)。
-表 + 2 RPC(submit_creator_comment / get_creator_comments)· RLS-locked + SECURITY DEFINER · 同 0004 game_posts 模式。
-**跑了才會真的能留言**(現在前端 graceful 顯示空串、不 crash)。 預測(選邊)一場一篇鎖死不動 ·
-這只加「不評分的對話層」· 不碰 ✓已驗證準度 章的根基。 檔:supabase/migrations/0010_creator_comments.sql。
+Tim 已套 0010 ✅,但 R185 live-test(自建帳號直接打 RPC)抓到真 bug:**0010 submit_creator_comment
++ 0004 submit_game_post** 的 `returning id, created_at` 撞 RETURNS TABLE 的 out 欄 created_at →
+**42702 ambiguous** → 留言 / 賽事討論室發言其實送不出(前端 graceful catch 成假訊息 = R181 同陷阱)。
+已在 repo qualify 表名修好(`returning <table>.id, <table>.created_at`)。
+⚠️ **Tim 要在 SQL Editor 重跑修正後的這兩支檔**(`create or replace` 冪等 · 重貼整支 0004 + 0010 再 Run 即可)
+→ 留言 + 賽事討論室發言才會真的通。
+(分析回覆串 = 讀者↔作者 / 買家↔賣家對話層 · 作者回覆標「作者」· 預測選邊一場一篇鎖死不動 · 這只加不評分的對話。)
 
 ### 🔴 今晚(2026-05-30)· 3 場 CPBL 賽後結算 — 唯一 gated-on-Tim
 

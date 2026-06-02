@@ -89,9 +89,11 @@ begin
     raise exception 'already_posted';
   end if;
 
+  -- ⚠️ qualify 表名:RETURNS TABLE out 欄 created_at 撞表的 created_at → 42702
+  -- ambiguous(R181 同 bug · 實測 R185 確認此函式 prod 一直壞、發言其實送不出)。
   insert into public.game_posts (user_id, game_id, body)
   values (v_uid, v_game, v_body)
-  returning id, created_at
+  returning game_posts.id, game_posts.created_at
   into v_id, v_at;
 
   return query select v_id, v_game, v_at;
