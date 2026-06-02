@@ -443,7 +443,6 @@ function PhaseBadgeLg({
     } as const;
     return (
       <span
-        lang="en"
         className={`font-mono text-[9px] tracking-[0.3em] px-1.5 py-0.5 border ml-1 ${styles[calibration]}`}
       >
         {labels[calibration]}
@@ -454,7 +453,6 @@ function PhaseBadgeLg({
   if (phase === "today-pregame") {
     return (
       <span
-        lang="en"
         className="font-mono text-[9px] tracking-[0.3em] px-1.5 py-0.5 border border-gold text-gold ml-1 shimmer"
       >
         TODAY · 今晚開賽
@@ -465,7 +463,6 @@ function PhaseBadgeLg({
   if (phase === "today-live") {
     return (
       <span
-        lang="en"
         className="font-mono text-[9px] tracking-[0.3em] px-1.5 py-0.5 border border-gold text-gold ml-1"
       >
         LIVE · 進行中
@@ -476,7 +473,6 @@ function PhaseBadgeLg({
   if (phase === "future") {
     return (
       <span
-        lang="en"
         className="font-mono text-[9px] tracking-[0.3em] px-1.5 py-0.5 border border-gold/60 text-gold ml-1"
       >
         PREVIEW · 預覽
