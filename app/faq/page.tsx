@@ -86,7 +86,7 @@ const CATEGORIES: Category[] = [
         id: "no-user-recommendations",
         a: (
           <>
-            Tim 是唯一 curator · CPBL only · 同 Stratechery / Ben Thompson 親手 curate 所有內容。
+            Tim 是唯一 curator · 目前先做 CPBL · 同 Stratechery / Ben Thompson 親手 curate 所有內容。
             玩運彩 / 報馬仔 抽傭 model 需要 user 推薦 · ZONE 27 結構性相反 · 0 抽傭 + 0 third-party 內容。
             您可以走{" "}
             <Link href="/hey-tim" className="text-gold underline-offset-4 hover:underline">

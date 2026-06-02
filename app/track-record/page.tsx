@@ -132,9 +132,9 @@ export default function TrackRecordPage() {
           <Link
             href="/integrity"
             className="font-mono text-[9px] tracking-[0.3em] px-1.5 py-0.5 border border-loss/40 text-loss/85 hover:border-loss/70 hover:text-loss transition-colors"
-            title="/integrity rule 12 + 9 · CPBL ONLY · 0 cherry-pick · 0 retroactive delete · binding"
+            title="/integrity rule 12 + 9 · CPBL 先做 · 0 cherry-pick · 0 retroactive delete · binding"
           >
-            CPBL ONLY · 永久 · 0 CHERRY-PICK
+            CPBL 先做 · 0 CHERRY-PICK
           </Link>
         </div>
         <h1 className="text-4xl sm:text-5xl text-bone font-light tracking-tight max-w-3xl">

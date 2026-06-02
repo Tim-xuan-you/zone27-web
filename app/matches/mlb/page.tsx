@@ -51,18 +51,18 @@ export default async function MlbMatchesPage() {
           資料來源:MLB Stats API(官方公開、完全免費) ·
           ZONE 27 不修改任何原始資料
         </p>
-        {/* MLB = 免費即時比分鉤子 · 引擎刻意只算 CPBL(focus = 護城河)·
-            一句自信的話講完取捨 + 導回 CPBL · 不再貼內部辯護書黑話 ·
-            per Tim R185 dogfood(同看準度頁的黑話牆病)。 */}
+        {/* MLB = 免費即時比分鉤子 · 閘門式多運動路線圖框架(非永久拒絕)·
+            台灣運彩有的都會做 · 但每個運動的引擎驗證夠準才開盤 · CPBL 先攻頂 ·
+            per Tim R185:全運動願景 · supersedes 舊「CPBL-only-forever」框架。 */}
         <p className="mt-4 text-mute text-sm sm:text-[15px] leading-relaxed max-w-2xl">
-          <strong className="text-bone">引擎只算 CPBL。</strong>{" "}
-          MLB 這頁純粹給你看即時比分 · 不開預測、不計分 ——
-          我們把火力全押在一個聯盟、做到別人做不到,而不是每個聯盟都沾一點。{" "}
+          <strong className="text-bone">一個運動、一個引擎,逐步點亮。</strong>{" "}
+          台灣運彩有的,我們都會做 —— 但鐵律是:每個運動的引擎沒驗證到夠準,絕不開盤。
+          棒球先把 CPBL 做到極致 · MLB 跟其他運動的引擎正在路上 · 這頁先給你看即時比分。{" "}
           <Link
             href="/matches"
             className="text-gold/90 hover:text-gold underline-offset-4 hover:underline whitespace-nowrap"
           >
-            想押有引擎開盤的?→ 今日 CPBL
+            想押已經開盤的?→ 今日 CPBL
           </Link>
         </p>
         <div className="mt-6 w-full h-px bg-line/60" />

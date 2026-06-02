@@ -875,8 +875,8 @@ export default async function CpblPitchersPage({
             LINE 轉傳直接看同一份排序。
           </p>
           <p>
-            CPBL only · 永遠 only · per /integrity rule 12。 不爬 MLB 排行 ·
-            不接付費 API · 純 cpbl.com.tw 公開 box score。 N 才 16 投手 ·
+            目前先做 CPBL · 其他運動逐步上(各配自己的引擎)· 不接付費 API ·
+            純 cpbl.com.tw 公開 box score。 N 才 16 投手 ·
             等 CPBL pipeline 自動化後會擴到所有投手 + 打者 splits。
           </p>
           <p>

@@ -17,7 +17,7 @@ import { BRAND, OG_SIZE, OG_CONTENT_TYPE } from "@/lib/brand";
 export const size = OG_SIZE;
 export const contentType = OG_CONTENT_TYPE;
 export const alt =
-  "ZONE 27 · Integrity · 22 永久不會變的 · Berkshire 1996 Owner's Manual at Year 0 · 13 redlines + 9 ethics commitments = public bond not implicit · R80 加 rule 12 CPBL-only-forever scope + rule 09 mandatory-ledger discipline + R81 加 rule 13 永遠不 subscription auto-renewal · scope + discipline + renewal 三軸 close brand IP loop";
+  "ZONE 27 · Integrity · 22 永久不會變的 · Berkshire 1996 Owner's Manual at Year 0 · 13 redlines + 9 ethics commitments = public bond not implicit · R80 加 rule 12 引擎驗證夠準才開盤 scope + rule 09 mandatory-ledger discipline + R81 加 rule 13 永遠不 subscription auto-renewal · scope + discipline + renewal 三軸 close brand IP loop";
 
 export default async function IntegrityOgImage() {
   return new ImageResponse(

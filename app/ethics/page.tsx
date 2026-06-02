@@ -10,7 +10,7 @@ import ReadingProgress from "@/components/ReadingProgress";
 export const metadata: Metadata = {
   title: "Ethics Policy · 9 binding commitments",
   description:
-    "Stratechery「About」 transplant · 9 ZONE 27 binding NOT-DO commitments signed Tim · displacement narrative against 玩運彩+報馬仔 tipsters direct · brand pledge protecting visitors from brand misbehavior · Pratfall + Costly Signaling + Disclosure Philosophy 三 axiom 同時 fire · 修改任何 commitment 需 30 天 /changelog 公告。R80 加 commitment 09(mandatory prediction ledger · 0 cherry-pick · 0 retroactive delete · 配對 /integrity rule 12 CPBL-only-forever scope close brand IP loop)。",
+    "Stratechery「About」 transplant · 9 ZONE 27 binding NOT-DO commitments signed Tim · displacement narrative against 玩運彩+報馬仔 tipsters direct · brand pledge protecting visitors from brand misbehavior · Pratfall + Costly Signaling + Disclosure Philosophy 三 axiom 同時 fire · 修改任何 commitment 需 30 天 /changelog 公告。R80 加 commitment 09(mandatory prediction ledger · 0 cherry-pick · 0 retroactive delete · 配對 /integrity rule 12 引擎驗證夠準才開盤 scope close brand IP loop)。",
 };
 
 // /ethics · Stratechery About page transplant · 9 ZONE 27 binding NOT-DO
@@ -68,7 +68,7 @@ const COMMITMENTS: { num: string; title: string; body: string; tier: "displaceme
   {
     num: "09",
     title: "我每筆 engine 預測都 mandatory publish · 0 cherry-pick · 0 retroactive delete",
-    body: "每筆 CPBL engine pre-committed prediction → mandatory /track-record entry + /receipts/[receiptId] permalink + PROVED / DIVERGED / PUSH label。 不選擇性 publish · 不 retroactive delete · 不 cherry-pick high-confidence-only · 即使 engine 100% 錯也 binding publish。 顯示 prediction 後 · 訪客對「我會看到結果」 產生擁有感 · selective publishing = trust 物理崩。 同 Berkshire 70-year annual letter「無論好年壞年 都 mandatory publish」 + Geneva Seal「每只 watch 都印 serial」 pattern · per /audit S05 PRE-COMMIT clause 升級到 /integrity binding rule layer(commitment #09 · R80 加)· 配對 /integrity redline #12(CPBL-only scope)close brand IP loop。",
+    body: "每筆 CPBL engine pre-committed prediction → mandatory /track-record entry + /receipts/[receiptId] permalink + PROVED / DIVERGED / PUSH label。 不選擇性 publish · 不 retroactive delete · 不 cherry-pick high-confidence-only · 即使 engine 100% 錯也 binding publish。 顯示 prediction 後 · 訪客對「我會看到結果」 產生擁有感 · selective publishing = trust 物理崩。 同 Berkshire 70-year annual letter「無論好年壞年 都 mandatory publish」 + Geneva Seal「每只 watch 都印 serial」 pattern · per /audit S05 PRE-COMMIT clause 升級到 /integrity binding rule layer(commitment #09 · R80 加)· 配對 /integrity redline #12(引擎驗證夠準才開盤 scope)close brand IP loop。",
     // R119 W4 · redline patch · tier corrected displacement → brand · #09 是
     // ZONE 27 internal brand discipline(Berkshire 70-year + Geneva Seal
     // pattern · per body cite)· NOT displacement of 玩運彩 (那 1-5 + 8 在

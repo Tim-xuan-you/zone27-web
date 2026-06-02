@@ -181,7 +181,7 @@ export default async function CpblPitchersOgImage() {
           }}
         >
           <span style={{ color: "rgba(245,242,234,0.55)", display: "flex" }}>
-            BASEBALL SAVANT PATTERN · CPBL ONLY FOREVER
+            BASEBALL SAVANT PATTERN · CPBL FIRST
           </span>
           <span
             style={{ color: BRAND.gold, fontWeight: 500, display: "flex" }}

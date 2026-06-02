@@ -13,7 +13,7 @@ import { BRAND, OG_SIZE, OG_CONTENT_TYPE } from "@/lib/brand";
 
 export const size = OG_SIZE;
 export const contentType = OG_CONTENT_TYPE;
-export const alt = "ZONE 27 · Ethics Policy · 9 binding NOT-DO commitments(R80 加 #09 mandatory-ledger discipline · 配對 /integrity rule #12 CPBL-only-forever scope + R81 rule #13 永遠不 subscription auto-renewal · scope + discipline + renewal 三軸 close brand IP loop)";
+export const alt = "ZONE 27 · Ethics Policy · 9 binding NOT-DO commitments(R80 加 #09 mandatory-ledger discipline · 配對 /integrity rule #12 引擎驗證夠準才開盤 scope + R81 rule #13 永遠不 subscription auto-renewal · scope + discipline + renewal 三軸 close brand IP loop)";
 
 export default async function EthicsOgImage() {
   return new ImageResponse(

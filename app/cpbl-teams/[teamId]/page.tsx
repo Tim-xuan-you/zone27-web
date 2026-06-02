@@ -335,7 +335,7 @@ export default async function TeamPage({ params }: Props) {
             aggregation · CPBL fan tribal home base。
           </p>
           <p>
-            CPBL only · 永遠 only · per /integrity rule 12。 不爬 MLB 隊伍 ·
+            目前先做 CPBL · 其他運動逐步上(各配自己的引擎)·
             不接付費 API · 純 stats.cpbl.com.tw 公開 box score derived。
             隊伍 logo color({team.hexAccent})從 lib/teams.ts canonical
             single-source 對齊。

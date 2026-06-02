@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "CPBL 6 隊伍 投手 aggregation · ZONE 27",
     description:
-      "6 球團投手 percentile aggregation · league Trackman aggregate · 球迷 tribal home base · CPBL only forever",
+      "6 球團投手 percentile aggregation · league Trackman aggregate · 球迷 tribal home base · 先做 CPBL · 逐步擴",
     type: "article",
     url: "/cpbl-teams",
   },
@@ -320,7 +320,7 @@ export default function CpblTeamsIndexPage() {
             -{teamsWithTrackman}={6 - teamsWithTrackman} 隊目前 0 tracked)。
           </p>
           <p>
-            CPBL only · 永遠 only · per /integrity rule 12。 不爬 MLB 球團 ·
+            目前先做 CPBL · 其他運動逐步上(各配自己的引擎)·
             不接付費 API · 純 stats.cpbl.com.tw 公開 box score derived ·
             球團 logo color 來自 lib/teams.ts canonical(per Tim 2026-05-22
             W-L logo legend correction)。

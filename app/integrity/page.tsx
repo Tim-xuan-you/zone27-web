@@ -86,8 +86,8 @@ const REDLINES: ReadonlyArray<{ no: string; rule: string; basis: string }> = [
   },
   {
     no: "12",
-    rule: "不 ship engine prediction outside CPBL · MLB / NPB / KBO / 任何外國職棒 / 任何台灣運彩 bettable events 全部 refuse",
-    basis: "一個人把 CPBL 做深 · 比什麼聯盟都做、樣樣淺薄更有價值 · MLB 跟風只是雜訊 · 我們要的是把 CPBL 算得更準 · 不是覆蓋更廣。/matches/mlb 保留為純看資料工具(即時數據 + 排程 only · 0 引擎預測)· /lab + /lab/custom 是你自己跑的模擬器 · 不算引擎預先承諾 · /track-record 永久只收 CPBL。",
+    rule: "不為了覆蓋更廣而開半成品的盤 · 每個運動的引擎沒驗證到夠準,絕不上線開盤 · 任何擴張都提前公告、絕不偷偷加",
+    basis: "目標是把台灣運彩賣的每個運動都做 —— 但一個運動、一個引擎,逐步點亮,品質閘門永遠不降。寧可少做、做得準,也不為了菜單好看而亂開盤(那是賭場的玩法)。棒球先把 CPBL 做到極致 · MLB 跟其他運動的引擎逐步研發 · 沒驗證夠準之前不會在賽事板出現它的開盤、/track-record 也不替它計分。/matches/mlb 目前是純看即時比分的工具(0 引擎預測)· /lab + /lab/custom 是你自己跑的模擬器、不算引擎預先承諾。每次擴張都走公開流程、提前公告 · 絕不偷偷加一個運動上去。",
   },
   {
     no: "13",
@@ -145,7 +145,7 @@ const ETHICS_COMMITMENTS: ReadonlyArray<{
   {
     no: "09",
     rule: "0 cherry-pick · 每筆 CPBL engine prediction → mandatory /track-record entry + /receipts/[receiptId] permalink · 0 retroactive delete",
-    basis: "引擎一旦出手預測 · 你就有權看到結果 · 只挑好的公布 = 信任直接崩掉 · PROVED + DIVERGED + PUSH 一樣大、一樣亮 · 不藏失手。無論引擎那場對或錯都一定列出 · 就算 100% 算錯也照樣公布 · 搭配紅線 #12(只做 CPBL)= 完整範圍 + 紀律收尾。",
+    basis: "引擎一旦出手預測 · 你就有權看到結果 · 只挑好的公布 = 信任直接崩掉 · PROVED + DIVERGED + PUSH 一樣大、一樣亮 · 不藏失手。無論引擎那場對或錯都一定列出 · 就算 100% 算錯也照樣公布 · 搭配紅線 #12(沒驗證夠準不開盤)= 完整範圍 + 紀律收尾。",
   },
 ];
 
