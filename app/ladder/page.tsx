@@ -190,8 +190,9 @@ export default function LadderPage() {
               ))}
           </div>
           <p className="mt-6 font-mono text-mute/70 text-[10px] tracking-[0.25em] leading-relaxed">
-            ▸ 階級每月重新計算 · 升得上去也掉得下來。 名次靠的是<span className="text-bone">真實準度</span> ·
-            不是付費 · 不是年資。
+            ▸ <span className="text-bone">每月評分一次 · 達標升一階(一次最多升一階)· 退步會掉階</span>。
+            爬到頂至少要連續幾個月都夠準 —— 一晚的手氣升不上去。
+            名次靠的是<span className="text-bone">真實準度</span> · 不是付費 · 不是年資。
           </p>
         </section>
 
@@ -260,8 +261,8 @@ export default function LadderPage() {
             />
             <RuleRow
               no="04"
-              title="每月升降"
-              body="天梯每月重算一次。 階級會升 · 也會掉。 這是準度的擂台 · 不是資歷的牆。"
+              title="每月一階 · 一步一步爬"
+              body="天梯每月評分一次 · 達標就往上 —— 但一次最多升一階,退步也會掉階。 所以從新秀爬到神諭,至少要連續好幾個月都夠準。 一場爆冷、一晚手氣,升不上王座。 這是準度的擂台 · 不是資歷的牆。"
             />
             <RuleRow
               no="05"
@@ -290,7 +291,7 @@ export default function LadderPage() {
           </h2>
           <p className="text-mute leading-relaxed max-w-2xl mb-6">
             到任何一場賽事頁 · 在引擎掀牌前先鎖你自己的一邊。 賽後自動對帳 ·
-            準度開始累積。 累到 10 場 · 你就登上新秀 —— 天梯的第一階。
+            準度開始累積。 累到 10 場登上新秀 —— 之後每個月評分一次 · 夠準就往上爬一階。
           </p>
           <div className="flex flex-wrap gap-3">
             <Link
