@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { FOUNDERS_REMAINING } from "@/lib/founders-stats";
+import { readAnonPicks } from "@/lib/anon-picks";
 
 // Sticky Founders 27 CTA Bar(mobile-only)· hidden on /founders + /lab/custom
 // · hidden when sold out · homepage `/` 加 first-viewport scroll-depth gate
@@ -16,6 +17,16 @@ export default function StickyFoundersCTA() {
   // Homepage first-touch: gate sticky bar until visitor scrolls past first
   // viewport (~600px). Non-homepage routes show immediately.
   const [scrolledPastHero, setScrolledPastHero] = useState(false);
+  // 漸進式 ask:沒押過的新訪客先推「免費押一邊」· 押過(已 engage)才推付費
+  // (research #14 + UX L5:別對 0 經驗訪客一上來就推最貴的 Founders 2,700)。
+  // SSR-safe:default false = 新訪客版 · client mount 後讀 localStorage 才切。
+  const [hasEngaged, setHasEngaged] = useState(false);
+
+  useEffect(() => {
+    try {
+      if (readAnonPicks().length > 0) setHasEngaged(true);
+    } catch {}
+  }, []);
 
   useEffect(() => {
     if (!isHomepage) return;
@@ -75,29 +86,55 @@ export default function StickyFoundersCTA() {
       }}
     >
       <div className="flex items-stretch">
-        <Link
-          href="/founders"
-          className="flex items-center justify-between gap-3 px-4 py-3 group flex-1 min-w-0"
-          aria-label="加入 Founders 27 · NT$ 2,700 / 365 天 · 你拿 95% · 全站最低抽成"
-        >
-          <div className="flex flex-col min-w-0 flex-1">
-            <span
-              lang="en"
-              className="font-mono text-gold text-[9px] tracking-[0.3em] leading-tight"
-            >
-              FOUNDERS 27 · NT$ 2,700 / 365 天
-            </span>
-            <span className="font-mono text-bone text-[11px] tracking-[0.15em] leading-snug mt-0.5">
-              解鎖賣分析賺錢 · 你拿 95% · 全站最低抽成
-            </span>
-          </div>
-          <span
-            aria-hidden="true"
-            className="shrink-0 px-3 py-2 bg-gold text-navy font-mono text-[10px] tracking-[0.25em] group-active:bg-gold-soft transition-colors"
+        {hasEngaged ? (
+          <Link
+            href="/founders"
+            className="flex items-center justify-between gap-3 px-4 py-3 group flex-1 min-w-0"
+            aria-label="加入 Founders 27 · NT$ 2,700 / 365 天 · 你拿 95% · 全站最低抽成"
           >
-            加入 →
-          </span>
-        </Link>
+            <div className="flex flex-col min-w-0 flex-1">
+              <span
+                lang="en"
+                className="font-mono text-gold text-[9px] tracking-[0.3em] leading-tight"
+              >
+                FOUNDERS 27 · NT$ 2,700 / 365 天
+              </span>
+              <span className="font-mono text-bone text-[11px] tracking-[0.15em] leading-snug mt-0.5">
+                解鎖賣分析賺錢 · 你拿 95% · 全站最低抽成
+              </span>
+            </div>
+            <span
+              aria-hidden="true"
+              className="shrink-0 px-3 py-2 bg-gold text-navy font-mono text-[10px] tracking-[0.25em] group-active:bg-gold-soft transition-colors"
+            >
+              加入 →
+            </span>
+          </Link>
+        ) : (
+          <Link
+            href="/matches"
+            className="flex items-center justify-between gap-3 px-4 py-3 group flex-1 min-w-0"
+            aria-label="先免費押一邊 · 不用註冊 · 賽後看你贏不贏引擎"
+          >
+            <div className="flex flex-col min-w-0 flex-1">
+              <span
+                lang="en"
+                className="font-mono text-gold text-[9px] tracking-[0.3em] leading-tight"
+              >
+                FREE · 不用註冊
+              </span>
+              <span className="font-mono text-bone text-[11px] tracking-[0.15em] leading-snug mt-0.5">
+                先免費押一邊 · 賽後看你贏不贏引擎
+              </span>
+            </div>
+            <span
+              aria-hidden="true"
+              className="shrink-0 px-3 py-2 bg-gold text-navy font-mono text-[10px] tracking-[0.25em] group-active:bg-gold-soft transition-colors"
+            >
+              押一注 →
+            </span>
+          </Link>
+        )}
 
         {/* Round 50 W-B · secondary「已是會員 → 登入」 mini chip ·
             Tim 26+ canary fire UX root cause · sticky CTA mobile-only 唯一
