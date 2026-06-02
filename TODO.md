@@ -125,6 +125,12 @@ R172 pivot · BLACK CARD 從 TapPay 自動訂閱改成 manual ATM / 跨行轉帳
 
 R174 pivot build queue · Claude 可主動 ship(三綠 + auto-push):
 
+- ✅ **心理學 + 操作邏輯打磨(2026-06-03 · 4 commit 全三綠 · 96fd67e→eee159e · 接上窗 marathon)**· Tim「全權攻頂 · 重人的心理學+操作邏輯 · 先更新碼別上線」· 2 路 agent(心理/動線審計 + a11y lang 審計)synthesize · 6 條心理發現全 ship:
+  - **W1 冷啟動迴路(96fd67e)**:AnonCalibrationStrip 訂閱 `zone27:anon-picks-changed` → 押完「你的戰績」strip 即時亮(原本要重整才出現 = 押完最熱那刻 endowment 回饋斷)· 首頁 strip 準度 % 滿 3 場結算才報(1 場不喊「你準度 100%」· 對齊 CROWD_LINE_MIN/天梯/看準度紀律)· CardBetStrip 會員押完加「再選一場 →」。
+  - **W2 賽事卡 + 峰終(df24360)**:MiniMatchCard「一萬次模擬贏 6300 次」→「一萬次模擬 · 贏 6,300 次」(千分位 + Math.round 防脆裂)· UserPredictionPicker 賽後「押下一場」迴路原本 gate `!finalWinner` 在賽果出爐時消失(峰終斷頭)→ 改賽後也留低門檻「去押下一場」(贏可寫分析也可再押 · 輸不斷頭)。
+  - **W3 會員儀表板對等(ee733b8)**:/member「今晚可以押」原本只抓 `getTodayMatches()`(只今天)· 改 `getTodayAndFutureMatches()`(同首頁)· 修「休賽日但明後天有排賽時,登入會員看死路、沒登入的人在首頁卻看得到還能先押」的不對等 bug。
+  - **W4 a11y lang(eee159e)**:/matches 列表 PhaseChip + /changelog + /coverage + /track-record 的中英混排 span 拿掉 `lang="en"`(承接上窗 0f21834 賽事詳情頁)。 ⚠️ **發現此 `lang=en`+中文 pattern 是全站等級 ~60 處 / ~25 檔(多是 section header 慣例如「/ §01 · …永遠不做」)· handoff 寫的「少數」嚴重低估** · 本輪只掃高流量市場/信任頁 · 其餘建議獨立一輪 codemod 式統一(屬輕量 a11y · 不急)。
+  - ⏳ **未做 · 社群熱度可見(handoff item ① · 賽事卡顯示 N 篇分析 / N 則討論)**:評估後**暫緩**。 理由:① 需新 migration 0012(Tim 已有 0010+0004 重跑、0011 admin 待套 · 不想再加 SQL 負擔)② 0 內容時卡片 gated 顯示不出東西(graceful 但現在看不到)③ 與本輪「打磨既有心理學」較不同調。 **backend 我可隨時備好**(creator_posts + creator_comments 兩表 schema 都查過 · 可寫 column-qualified 的 batch count RPC 避開 42702)· 建議等「有真實內容」或「Tim 想一次清後台」時再做。
 - ✅ **攻頂 marathon(2026-06-02 · 11 commit 全三綠 · 4513247→0f21834 · 不含並發窗 e72a504)**· Tim 連發「全權迭代攻頂」· 3-agent 偵察(全球標竿研究 / 碼審計 / 轉換動線)+ founder dogfood synthesize:
   - **信任合約對齊(P0)**:/integrity 三紅線(不做錢包 / 0 社群 / no commission)自打臉已上線功能 → 對齊 legal-redline + 「↻ 已修訂」誠實註記(不偷改)· 同手法 /interact 整頁 one-way 反社群宣言 → 「綁戰績的討論 · 不嘴砲」(9 處 reframe)。
   - **轉換漏斗**:首頁 hero 補主 CTA · 押完接「下一場」迴路 · 手機 sticky CTA 漸進式 ask(新訪客先推免費押注、押過才推 Founders 2700)· /member 準度接天梯排名鉤子。
