@@ -38,8 +38,22 @@ export default function AnonCalibrationStrip({ variant }: Props) {
   const [state, setState] = useState<MountState>({ mounted: false });
 
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setState({ mounted: true, picks: readAnonPicks() });
+    function refresh() {
+      setState({ mounted: true, picks: readAnonPicks() });
+    }
+    refresh();
+    // 押完即時亮:pushAnonPick / updatePickOutcome 會 dispatch 這個事件 ·
+    // 不訂閱的話「你的戰績」strip 要等重整才出現 = 押完最熱那一刻 endowment
+    // 的回饋斷掉(同 CalibrationTierBadge 的訂閱)。 storage event 補跨分頁。
+    function onStorage(e: StorageEvent) {
+      if (e.key === null || e.key === "zone27_anon_picks_v1") refresh();
+    }
+    window.addEventListener("storage", onStorage);
+    window.addEventListener("zone27:anon-picks-changed", refresh);
+    return () => {
+      window.removeEventListener("storage", onStorage);
+      window.removeEventListener("zone27:anon-picks-changed", refresh);
+    };
   }, []);
 
   // SSR-safe: render nothing during SSR
@@ -92,22 +106,25 @@ export default function AnonCalibrationStrip({ variant }: Props) {
                     ✕{stats.diverged}
                   </span>
                 </span>
-                <span aria-hidden="true" className="text-mute/40">·</span>
-                <span className="text-mute">
-                  你準度{" "}
-                  <strong className="font-mono text-bone tabular">
-                    {stats.yourAccuracyLabel}
-                  </strong>
-                </span>
-                <span aria-hidden="true" className="text-mute/40">·</span>
-                <span className="text-mute">
-                  引擎{" "}
-                  <strong className="font-mono text-bone tabular">
-                    {stats.engineAccuracyLabel}
-                  </strong>
-                </span>
-                {decided >= 3 && (
+                {/* 準度 % 要滿 3 場結算才報 · 1 場就喊「你準度 100%」= 拿小樣本
+                    當訊號(同 CROWD_LINE_MIN=5 / 天梯 10 場 / 看準度 30 場 的紀律)·
+                    而且下一場輸就崩到 50% 反而像懲罰。 先只給誠實的 ✓/✕ 計數。 */}
+                {decided >= 3 ? (
                   <>
+                    <span aria-hidden="true" className="text-mute/40">·</span>
+                    <span className="text-mute">
+                      你準度{" "}
+                      <strong className="font-mono text-bone tabular">
+                        {stats.yourAccuracyLabel}
+                      </strong>
+                    </span>
+                    <span aria-hidden="true" className="text-mute/40">·</span>
+                    <span className="text-mute">
+                      引擎{" "}
+                      <strong className="font-mono text-bone tabular">
+                        {stats.engineAccuracyLabel}
+                      </strong>
+                    </span>
                     <span aria-hidden="true" className="text-mute/40">·</span>
                     <span
                       className={
@@ -124,6 +141,13 @@ export default function AnonCalibrationStrip({ variant }: Props) {
                           {Math.abs(Math.round(stats.delta))} 分
                         </strong>
                       )}
+                    </span>
+                  </>
+                ) : (
+                  <>
+                    <span aria-hidden="true" className="text-mute/40">·</span>
+                    <span className="font-mono text-mute/70 text-[12px] tracking-[0.1em]">
+                      再 {3 - decided} 場才算準度
                     </span>
                   </>
                 )}

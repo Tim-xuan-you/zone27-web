@@ -209,6 +209,16 @@ export default function CardBetStrip({
               登入 → 存成永久戰績、進群眾市場 ▸
             </Link>
           )}
+          {/* 會員押完接下一手 · 不斷頭(同賽事頁 picker 的「押下一場」迴路)·
+              訪客不加這條:他的下一步是「登入升級」+ 下方即時亮的你的戰績。 */}
+          {status === "locked" && (
+            <Link
+              href="/matches"
+              className="inline-block mt-1 font-mono text-gold/70 hover:text-gold text-[9px] tracking-[0.18em] underline-offset-4 hover:underline transition-colors"
+            >
+              再選一場 →
+            </Link>
+          )}
         </div>
       )}
     </div>
