@@ -11,6 +11,7 @@
 
 import { useEffect, useState } from "react";
 import { getWalletBalance } from "@/lib/wallet";
+import { SUPPORT_EMAIL } from "@/lib/brand-constants";
 
 // Tim R187:儲值 preset · 500 → 30,000(自訂欄太複雜 · Tim 拍板拿掉 · 只留固定按鈕)
 const TOPUP_AMOUNTS = [500, 1000, 3000, 10000, 30000];
@@ -45,7 +46,7 @@ function notifyHref(amount: number): string {
   const body = `Tim 好,\n\n我已經轉帳 NT$ ${fmt(amount)} 到 ZONE 27 儲值。\n轉帳帳號末五碼:______(請填)\n\n請幫我加 ${fmt(totalPts(amount))} 點${
     bonus > 0 ? `(NT$ ${fmt(amount)} + 回饋 ${fmt(bonus)} 點)` : ""
   }。謝謝。`;
-  return `mailto:tatayngiti@gmail.com?subject=${encodeURIComponent(
+  return `mailto:${SUPPORT_EMAIL}?subject=${encodeURIComponent(
     subject
   )}&body=${encodeURIComponent(body)}`;
 }

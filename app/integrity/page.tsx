@@ -28,11 +28,12 @@ export const revalidate = 86400; // daily revalidate
 const SIGNED_AT = "2026-05-23";
 
 // 13 brand-IP redlines · single-source canonical · same axis as /transparency § 02。
-const REDLINES: ReadonlyArray<{ no: string; rule: string; basis: string }> = [
+const REDLINES: ReadonlyArray<{ no: string; rule: string; basis: string; revised?: string }> = [
   {
     no: "01",
-    rule: "不 ship user-to-user social platform",
-    basis: "0 社群 / 0 論壇 / 0 私訊 / 0 聊天室 · ZONE 27 是讓你照見自己判斷的鏡子 · 不是想盡辦法黏住你的互動迴圈。",
+    rule: "不做黏著式社交迴圈 · 0 私訊 / 0 即時聊天室 / 0 獨立論壇",
+    basis: "每篇分析底下可以討論、可以回覆作者(一場一篇預測仍賽前鎖死、不可改)· 但沒有私訊、沒有即時聊天室、沒有獨立論壇 · ZONE 27 是讓你照見自己判斷的鏡子 · 不是想盡辦法黏住你的互動迴圈。",
+    revised: "2026-06 隨群眾市場 pivot 修訂:原文「不做任何 user-to-user 互動」· 開了「分析底下可討論」後,如實改成現在的界線。",
   },
   {
     no: "02",
@@ -41,13 +42,15 @@ const REDLINES: ReadonlyArray<{ no: string; rule: string; basis: string }> = [
   },
   {
     no: "03",
-    rule: "不 ship 儲值 wallet / in-app currency",
-    basis: "no virtual currency · no points-economy · no in-app credit · per Taiwan 多層次傳銷法 § 29 implicit risk · 不 build pseudo-finance layer",
+    rule: "點數只能單向買分析 · 不做可提現 / 可轉讓的金融層",
+    basis: "儲值的點數只能拿來買別人的分析 · 不能提現 / 不能轉給別人 / 不能換回現金 · 1 點 = NT$ 1 的單向記帳 · 不是可流通的虛擬貨幣 · 更不碰真錢對賭(那才是唯一會坐牢的紅線)。",
+    revised: "2026-06 隨群眾市場 pivot 修訂:原文「完全不做儲值錢包」· 開了「儲值買分析」後,如實改成「單向、不可提現」的界線。",
   },
   {
     no: "04",
-    rule: "不 ship cash referral / 多層次傳銷法 § 29 affiliate",
-    basis: "no referral codes · no commission · no UTM · no referral bonus · 11-NEVER #4 strictest redline · per Taiwan legal compliance",
+    rule: "不抽真錢下注的傭 · 不做多層次分潤",
+    basis: "0 抽賭注的傭(唯一法律紅線 · 我們自己不接受下注)· 0 referral code / 0 UTM / 0 多層次傳銷分潤。創作者賣分析我們抽 5-10% 內容傭(老實認 · 業界最低)—— 那是內容平台抽成(同 Substack / YouTube),不是下注分潤,兩件事不要混。",
+    revised: "2026-06 隨創作者市場 pivot 修訂:原文「no commission 任何形式」誤把內容抽傭也包進去 · 真紅線只有抽賭注的傭,如實分清楚。",
   },
   {
     no: "05",
@@ -217,7 +220,7 @@ export default function IntegrityPage() {
           </p>
           <ol className="space-y-4 mt-4">
             {REDLINES.map((item) => (
-              <RuleEntry key={item.no} no={item.no} rule={item.rule} basis={item.basis} negative />
+              <RuleEntry key={item.no} no={item.no} rule={item.rule} basis={item.basis} revised={item.revised} negative />
             ))}
           </ol>
         </section>
@@ -508,11 +511,13 @@ function RuleEntry({
   no,
   rule,
   basis,
+  revised,
   negative = false,
 }: {
   no: string;
   rule: string;
   basis: string;
+  revised?: string;
   negative?: boolean;
 }) {
   const colorClass = negative ? "text-loss/85" : "text-gold/85";
@@ -534,6 +539,14 @@ function RuleEntry({
       <p className="text-mute text-[12px] sm:text-sm leading-relaxed">
         {basis}
       </p>
+      {revised && (
+        <p className="mt-2 flex items-baseline gap-2 text-[11px] leading-relaxed">
+          <span className="font-mono text-gold/60 text-[9px] tracking-[0.2em] shrink-0">
+            ↻ 已修訂
+          </span>
+          <span className="text-mute/60">{revised}</span>
+        </p>
+      )}
     </li>
   );
 }

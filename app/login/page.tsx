@@ -5,6 +5,7 @@ import Link from "next/link";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import { createSupabaseBrowserClient } from "@/lib/supabase/browser";
+import { SUPPORT_EMAIL } from "@/lib/brand-constants";
 import { sanitizeNext } from "@/lib/sanitize-next";
 
 const EMAIL_CACHE_KEY = "zone27_last_login_email";
@@ -249,7 +250,7 @@ export default function LoginPage() {
       }
       setState({
         kind: "error",
-        message: "未知錯誤 · 請稍候再試 · 持續寫信 tatayngiti@gmail.com",
+        message: "未知錯誤 · 請稍候再試 · 持續寫信 " + SUPPORT_EMAIL,
       });
     }
   }
@@ -294,7 +295,7 @@ export default function LoginPage() {
       }
       setState({
         kind: "error",
-        message: "重發失敗 · 請稍候再試 · 持續寫信 tatayngiti@gmail.com",
+        message: "重發失敗 · 請稍候再試 · 持續寫信 " + SUPPORT_EMAIL,
       });
     }
   }
@@ -356,13 +357,12 @@ export default function LoginPage() {
           <section className="mx-auto max-w-md w-full px-6 sm:px-10 pb-6">
             <div className="bg-gold/5 border border-gold/60 glow-soft p-5">
               <p
-                lang="en"
                 className="font-mono text-gold text-[10px] tracking-[0.4em] mb-2 shimmer"
               >
-                ✓ ALREADY LOGGED IN
+                ✓ 你已經登入
               </p>
               <p className="text-mute text-sm leading-relaxed mb-4">
-                您本 device 已 logged in as{" "}
+                這台裝置已經登入:{" "}
                 <span className="font-mono text-gold">{existingEmail}</span> ·
                 不需重新註冊。
               </p>
@@ -370,7 +370,7 @@ export default function LoginPage() {
                 href="/member"
                 className="inline-block px-5 py-2 bg-gold text-navy font-mono text-[10px] tracking-[0.3em] hover:bg-gold-soft transition-colors"
               >
-                → 進您 /member dashboard
+                → 進你的會員儀表板
               </Link>
             </div>
           </section>
@@ -463,11 +463,11 @@ export default function LoginPage() {
               {/* ── 已有帳號忘記密碼 → 上面「忘記密碼」寄 Supabase recovery → /auth/reset 設新密碼。 */}
               <div className="pt-3 border-t border-line/40">
                 <p className="font-mono text-mute/70 text-[10px] tracking-[0.25em] leading-relaxed">
-                  ▸ 新 email = 自動建帳號 · 寄確認 email · 點 link 完成 register
+                  ▸ 第一次用這個信箱 = 自動幫你開帳號 · 寄一封確認信 · 點信裡的連結就完成
                   <br />
-                  ▸ 已有 email = 用密碼登入 · session 落本 browser
+                  ▸ 用過了 = 直接打密碼登入 · 登入狀態只留在這台裝置
                   <br />
-                  ▸ 沒 social login · 沒 OAuth · 沒 tracking · per /privacy
+                  ▸ 不綁臉書 / Google · 不追蹤你(詳見 /privacy)
                 </p>
               </div>
             </form>
@@ -493,7 +493,7 @@ export default function LoginPage() {
             <li>▸ 終身免費</li>
             <li>▸ 你的準度儀表板 · 你 vs 引擎誰準</li>
             <li>▸ 模型改版時 email 通知你</li>
-            <li>▸ 0 追蹤工具 · 只留登入用的 session · 登出即刪</li>
+            <li>▸ 0 追蹤工具 · 只留登入用的紀錄 · 登出就刪</li>
           </ul>
         </section>
 
@@ -506,7 +506,7 @@ export default function LoginPage() {
             href="/founders#waitlist"
             className="font-mono text-mute hover:text-gold text-[11px] tracking-[0.35em] underline-offset-4 hover:underline transition-colors"
           >
-            → 純訂閱通知 email(不需註冊 · 不需 magic link)
+            → 只想收通知信?不用註冊也行 →
           </Link>
           <div className="mt-12 pt-8 border-t border-line/40">
             <Link
@@ -576,15 +576,14 @@ function SentState({
       {/* ── CLICK CONFIRM LINK ─────────────── */}
       <div className="bg-navy/40 border border-line/60 p-4 mb-4">
         <p
-          lang="en"
           className="font-mono text-gold text-[10px] tracking-[0.35em] mb-2"
         >
-          → CLICK CONFIRM LINK · 1-tap 落地
+          → 點確認信裡的連結
         </p>
         <p className="text-mute text-xs sm:text-sm leading-relaxed">
-          email 在<strong className="text-bone">這個 device + browser</strong>
-          開 · 點 confirmation link → 自動轉 /member。 PKCE 限制 · 換 device /
-          換 browser 點 link 不 work · 在新 device Resend 後再點。
+          請在<strong className="text-bone">剛剛填 email 的同一支手機、同一個瀏覽器</strong>
+          打開那封信、點裡面的連結 · 就會自動帶你進會員頁。 換一台裝置或換瀏覽器點會失效 ——
+          那就在新裝置上重寄一次再點。
         </p>
       </div>
 
@@ -597,15 +596,15 @@ function SentState({
           className="px-6 py-2.5 border border-line/60 text-mute font-mono text-[10px] tracking-[0.3em] hover:bg-gold/5 hover:text-gold hover:border-gold/40 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {cooldown > 0
-            ? `⌛ Resend · 等 ${cooldown}s`
-            : "↻ 沒收到 · Resend email"}
+            ? `⌛ 重寄 · 等 ${cooldown}s`
+            : "↻ 沒收到 · 重寄一封"}
         </button>
       </div>
 
       <p className="font-mono text-mute/70 text-[10px] tracking-[0.25em] leading-relaxed text-center">
-        ▸ Confirmation link 1 小時內有效 · 過期 Resend
+        ▸ 確認連結 1 小時內有效 · 過期就重寄
         <br />
-        ▸ 找不到 email · 看垃圾信夾 · 或 30s 後 Resend
+        ▸ 找不到信 · 看垃圾信匣 · 或 30 秒後重寄
       </p>
     </div>
   );
@@ -625,7 +624,7 @@ function SentState({
 // implementation(之前 comment 寫 「改為 log + canonical generic message」 但
 // code 還是 return raw.slice 違反 comment 承諾 · 同 security drift 信號)。
 function friendlyPasswordError(raw: string): string {
-  if (!raw || typeof raw !== "string") return "錯誤 · 請稍候再試 · 持續寫信 tatayngiti@gmail.com";
+  if (!raw || typeof raw !== "string") return "錯誤 · 請稍候再試 · 持續寫信 " + SUPPORT_EMAIL;
   const lower = raw.toLowerCase();
   if (lower.includes("already") && lower.includes("registered"))
     return "此 email 已註冊 · 密碼不對?點下方「忘記密碼」寄重設信給自己";
@@ -644,5 +643,5 @@ function friendlyPasswordError(raw: string): string {
   if (typeof console !== "undefined" && typeof console.error === "function") {
     console.error("[login friendlyPasswordError unknown]", raw);
   }
-  return "錯誤 · 請稍候再試 · 持續寫信 tatayngiti@gmail.com";
+  return "錯誤 · 請稍候再試 · 持續寫信 " + SUPPORT_EMAIL;
 }
