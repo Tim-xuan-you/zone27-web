@@ -83,7 +83,7 @@ export default function CredentialStack() {
             / 02 · ARTIFACTS
           </p>
           <p className="font-mono text-bone text-[13px] sm:text-sm leading-snug">
-            5 trust docs
+            4 份公開文件
           </p>
           <ul className="font-mono text-[11px] tracking-[0.15em] mt-1 leading-relaxed space-y-0.5">
             <li>
@@ -112,10 +112,10 @@ export default function CredentialStack() {
             </li>
             <li>
               <Link
-                href="/audit"
+                href="/roadmap"
                 className="text-gold/85 hover:text-gold underline-offset-4 hover:underline"
               >
-                /audit
+                /roadmap
               </Link>
             </li>
           </ul>
@@ -147,9 +147,7 @@ export default function CredentialStack() {
         </div>
       </div>
       <p className="mt-3 text-center font-mono text-mute/65 text-[10px] tracking-[0.25em] leading-relaxed">
-        ▸ per Cameron Grove + Travis Sawchik indie analyst portfolio pattern ·
-        「demonstrated impact over sales language」 axiom · 不裝 institutional
-        cred · 不藏 solo-founder reality
+        ▸ 每一條都點得進去自己查 · 不靠推薦詞 · 不裝門面 · 也不藏「一個人做」這件事
       </p>
     </div>
   );
