@@ -1,5 +1,4 @@
 import Link from "next/link";
-import ScarcityStrip from "@/components/ScarcityStrip";
 import MobileNavToggle from "@/components/MobileNavToggle";
 import MembershipNavCTA from "@/components/MembershipNavCTA";
 import NavLoginCTA from "@/components/NavLoginCTA";
@@ -236,13 +235,9 @@ export default function Nav({ active }: { active?: NavKey }) {
           </ul>
         </div>
       </nav>
-      {/* R175 · ScarcityStrip 退出首頁(市場優先)· R178 再退出 /matches + 賽事頁
-          (Polymarket:市場相關頁頂部要乾淨 · 不讓 founder 募資條變噪音擠掉市場)·
-          brand 頁(/about /founders /membership 等)仍顯示 founder 稀缺條。 */}
-      {active !== "home" &&
-        active !== "matches" &&
-        active !== "member" &&
-        active !== "membership" && <ScarcityStrip />}
+      {/* R187 · 整個移除頂部「7/270 創始編號」稀缺條(ScarcityStrip)· per Tim
+          dogfood「不想要前 270 · 太複雜 · 用戶一頭霧水」· chrome 改 Polymarket 式乾淨。
+          稀有感改由 /membership「最高階·創始席位」承載 · 不再用全站倒數條轟炸。 */}
     </>
   );
 }
