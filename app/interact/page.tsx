@@ -11,11 +11,11 @@ import { createPageMetadata } from "@/lib/page-og";
 // + truncate description from 348 chars to ~140 · within Twitter 200-char cap +
 // Slack 200-char readable weight + iMessage uses og:title only(desc ignored)。
 export const metadata: Metadata = createPageMetadata({
-  title: "互動 · 6 個找 Tim 的管道 · 沒有討論區 by design",
+  title: "互動 · 綁戰績的討論 · 不是匿名嘴砲論壇",
   description:
-    "你在找 ZONE 27 的討論區? 沒有 · 刻意不做。 但你能在 6 個地方找 Tim 互動 · Hey Tim 公開問答 · 投稿 · 押注選邊 · 發表分析 · 分享收據 · Founders 申請信。 全部是你對 Tim · 不是讀者對讀者。",
+    "ZONE 27 的討論綁你的戰績:押的賽前鎖死、賽後自動算帳、你的話掛在你的準度旁,嘴砲要付代價。 不做匿名免責的閒聊論壇(那 LINE / FB 已經有)。 賽事押注、分析討論、Hey Tim 公開問答、投稿、Founders 申請,全部公開可究責。",
   ogDescription:
-    "ZONE 27 沒有討論區 · 刻意不做 · 但有 6 個你能找 Tim 互動的地方 · 全部是你對 Tim · 不是讀者對讀者。",
+    "ZONE 27 的討論綁戰績 · 押了賽前鎖死、賽後自動算帳、嘴砲付代價 · 不做匿名免責的閒聊論壇。",
   path: "/interact",
 });
 
@@ -171,24 +171,22 @@ export default function InteractPage() {
         {/* ── HERO ────────────────────────────────── */}
         <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pt-12 pb-10">
           <p
-            lang="en"
             className="font-mono text-gold text-[10px] tracking-[0.45em] mb-6"
           >
-            INTERACT · ONE-WAY BY DESIGN · 6 READER↔WRITER CHANNELS
+            互動 · 綁戰績的討論 · 不是嘴砲論壇
           </p>
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-light leading-[1.05] tracking-tight text-bone">
-            您在找{" "}
-            <span className="text-loss/85">討論區</span> · 沒有 · by{" "}
-            <span className="text-gold">design</span>
+            這裡的討論{" "}
+            <span className="text-gold">綁你的戰績</span> · 不是匿名嘴砲
           </h1>
           <div className="zone27-rule max-w-[320px] mt-5" aria-hidden="true" />
           <p className="text-mute text-base sm:text-lg leading-relaxed mt-6 max-w-2xl">
-            ZONE 27 沒有討論區 · 沒有留言板 · 沒有論壇 · 沒有使用者之間的
-            聊天。 不是「還沒做」 · 是{" "}
-            <strong className="text-bone">刻意不做</strong>。 但您能{" "}
-            <strong className="text-bone">在 6 個地方找 Tim 互動</strong>
-            (這頁全列出來)。 全部是{" "}
-            <strong className="text-bone">您對 Tim · 不是讀者對讀者</strong>。
+            ZONE 27 有討論 —— 但跟一般論壇不一樣:你押的{" "}
+            <strong className="text-bone">賽前鎖死</strong> · 賽後{" "}
+            <strong className="text-bone">自動算帳</strong> · 你寫的分析、留言都
+            掛在你的<strong className="text-bone">準度旁</strong>,嘴砲要付代價。
+            我們不做的是<strong className="text-bone">匿名免責的閒聊論壇</strong>
+            (那個 LINE / FB / PTT 已經有)。
           </p>
           <div className="mt-6">
             <ArticleMeta readingMin={5} />
@@ -198,10 +196,9 @@ export default function InteractPage() {
         {/* ── WHY ONE-WAY · psychology + brand precedent ── */}
         <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 py-10 border-t border-line/40">
           <p
-            lang="en"
             className="font-mono text-gold text-[10px] tracking-[0.4em] mb-4"
           >
-            / 為什麼 ZONE 27 不做 community · WHY ONE-WAY
+            / 為什麼是「綁戰績」而不是「開閒聊論壇」
           </p>
           <div className="space-y-3 zh-body text-mute text-base leading-relaxed">
             <p>
@@ -224,13 +221,13 @@ export default function InteractPage() {
               安全得多。
             </p>
             <p>
-              <strong className="text-bone">5 · 這條路有人走通過。</strong>{" "}
-              很多靠訂閱獲利的內容品牌 · 都是「作者對讀者」 · 不開「讀者對讀者」的社群。
-              我們已經做出來的就是{" "}
+              <strong className="text-bone">5 · 討論綁問責 · 不綁熱度。</strong>{" "}
+              一般論壇靠匿名嘴砲衝熱度;ZONE 27 的討論綁在你賽前鎖死的那一手上 ——
+              賽後自動算帳、賴不掉。 拿戰績說話的討論才留得下,{" "}
               <Link href="/hey-tim" className="text-gold/85 underline-offset-4 hover:underline">
                 /hey-tim
               </Link>
-              。
+              {" "}的公開問答也是同一個原則。
             </p>
           </div>
         </section>
@@ -238,13 +235,12 @@ export default function InteractPage() {
         {/* ── 10 CHANNELS CATALOG ────────────────── */}
         <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 py-10 border-t border-line/40">
           <p
-            lang="en"
             className="font-mono text-gold text-[10px] tracking-[0.4em] mb-4"
           >
-            / 6 READER↔WRITER CHANNELS · 您能 talk to Tim 在哪裡
+            / 6 個參與管道 · 你能在哪裡出手
           </p>
           <h2 className="text-2xl sm:text-3xl text-bone font-light tracking-tight mb-6">
-            你找的互動都在這 6 個地方
+            你的互動都在這 6 個地方
           </h2>
           <div className="space-y-3">
             {CHANNELS.map((c) => (
@@ -256,19 +252,21 @@ export default function InteractPage() {
         {/* ── WHAT WE DON'T BUILD · Pratfall enumeration ── */}
         <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 py-10 border-t border-line/40">
           <p
-            lang="en"
             className="font-mono text-loss/85 text-[10px] tracking-[0.4em] mb-4"
           >
-            / WHAT WE DON&apos;T BUILD · 永遠不會 ship 的
+            / 我們仍然不做的
           </p>
           <h2 className="text-2xl sm:text-3xl text-bone font-light tracking-tight mb-6">
-            5 件 ZONE 27 永遠不 ship 的 community features
+            就算開了討論 · 這幾件我們還是不做
           </h2>
           <ol className="space-y-3 text-mute text-sm leading-relaxed list-decimal pl-6">
             <li>
-              <strong className="text-bone">使用者之間的留言串</strong>{" "}
-              · /matches/[gameId] / /lab / /track-record 任一頁 · 0 留言
-              · 0 回覆鍵。
+              <strong className="text-bone">匿名、不綁立場的閒聊留言</strong>{" "}
+              · 你能在分析底下討論、回覆作者,但那是綁在你賽前鎖死的那一手上的
+              —— 沒有「不押也能來嘴、輸了不認」的匿名免責留言。
+              <span className="block mt-1 font-mono text-gold/55 text-[10px] tracking-[0.15em]">
+                ↻ 2026 pivot 修訂:原文「0 留言 0 回覆鍵」· 開了綁戰績的分析討論後 · 如實改成這條界線。
+              </span>
             </li>
             <li>
               <strong className="text-bone">公開的使用者論壇 / 討論板</strong>{" "}
@@ -326,10 +324,11 @@ export default function InteractPage() {
           </h2>
           <div className="space-y-4 zh-body text-mute text-base leading-relaxed mb-8">
             <p>
-              CPBL 球迷社群已在 60+ 個活躍 LINE 群 + Facebook 粉專 +
-              PTT 棒球板 滿足。 ZONE 27 再加社群功能只是重複又稀釋。
-              靠賣明牌的生意,要靠群組熱度才能變現 ·
-              ZONE 27 不靠熱度變現 · 靠量化分析 + 公開可信。 兩者並存 · 不取代。
+              想<strong className="text-bone">純閒聊</strong>?CPBL 球迷社群已在
+              60+ 個 LINE 群 + Facebook 粉專 + PTT 棒球板 —— ZONE 27 再開一個
+              閒聊論壇只是重複又稀釋。 我們站內的討論不一樣:綁賽事、綁你賽前鎖死的
+              那一手、賽後算帳。 靠賣明牌的生意要靠群組熱度變現,ZONE 27 不靠熱度 ·
+              靠量化分析 + 公開可信。 兩者並存 · 不取代。
             </p>
           </div>
 
@@ -364,8 +363,8 @@ export default function InteractPage() {
               <p className="text-mute/85 text-[12px] sm:text-sm leading-relaxed mb-2">
                 Founders 27 訂戶私人 LINE 群 · Tim 親自參與 ·
                 訂戶之間可以互相聊 · 也能一起找 Tim。 群組開在 LINE 上 ·
-                不在 ZONE 27 網站內 · 所以不違反「網站不做讀者對讀者社群」的原則。
-                這是付費身分的內圈 · 加入身分本身就包含這個圈子 · 不是另外解鎖的功能。
+                不在 ZONE 27 網站內 —— 站內是綁戰績的討論 · 這個 LINE 群是純內圈交流 ·
+                兩種剛好互補。 加入身分本身就包含這個圈子 · 不是另外解鎖的功能。
               </p>
               <p className="font-mono text-mute/70 text-[10px] tracking-[0.25em] mb-3">
                 ACCESS · 待 Founders 27 application 通過(/founders/apply)+ NT$
