@@ -217,7 +217,7 @@ export default function AnnualReport2026Page() {
               label="ENGINE RECEIPTS · 戰績"
               value={`${METRICS.receiptsProved} ✓ / ${METRICS.receiptsDiverged} ✕`}
               tone="bone"
-              note={`N=${METRICS.receiptsTotal} · SAMPLE DEBT 未解(threshold 30)`}
+              note={`N=${METRICS.receiptsTotal} · 樣本還太少(未滿 30 場)`}
             />
             <MetricBlock
               label="COMMITS · 開源 git history"

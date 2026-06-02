@@ -135,7 +135,7 @@ const ETHICS_COMMITMENTS: ReadonlyArray<{
   {
     no: "07",
     rule: "0「明牌」 framing · prediction = probability 不是 picks",
-    basis: "不販售「鐵口直斷」 · 不顯示賠率 · 純機率分布 + Brier score · per /audit + /manifesto + /coverage NEVER list + 11-NEVER #10 fake methodology binding",
+    basis: "不販售「鐵口直斷」 · 不顯示賠率 · 純機率分布 + 公開實際準度 · per /audit + /manifesto + /coverage NEVER list + 11-NEVER #10 fake methodology binding",
   },
   {
     no: "08",

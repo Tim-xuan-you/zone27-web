@@ -63,17 +63,11 @@ export default function SilentReceiptStream({ finalizedMatches }: Props) {
       className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-20"
     >
       <header className="mb-6 flex items-baseline justify-between gap-3 flex-wrap">
-        <p
-          lang="en"
-          className="font-mono text-gold/85 text-[10px] tracking-[0.4em]"
-        >
-          / ARCHIVE INDEX · CHRONOLOGICAL · OLDEST FIRST
+        <p className="font-mono text-gold/85 text-[10px] tracking-[0.4em]">
+          / 收據總表 · 依時間排序 · 最舊在前
         </p>
-        <p
-          lang="en"
-          className="font-mono text-mute/70 text-[9px] tracking-[0.3em] tabular"
-        >
-          N = {sorted.length} · LEDGER PAPER · 0 FILTER UI
+        <p className="font-mono text-mute/70 text-[9px] tracking-[0.3em] tabular">
+          N = {sorted.length} · 純列表 · 不篩選
         </p>
       </header>
 
@@ -142,11 +136,8 @@ export default function SilentReceiptStream({ finalizedMatches }: Props) {
       </ol>
 
       <p className="mt-6 font-mono text-mute/60 text-[9px] tracking-[0.25em] leading-relaxed">
-        ⚓ Pinboard.in archive paradigm · oldest first · 0 filter / 0
-        search / 0 pagination · ARCHIVE INDEX axis(parallel 上方 LedgerRow
-        Bloomberg-grid newest-first view)· 每筆 receipt RECEIPT NNN ·
-        REPRINT POLICY 0 同 Pokemon TCG 1st Edition mechanic · per R60 W-B
-        card anatomy。
+        ⚓ 依時間順序 · 最舊在最前 · 不篩選 / 不搜尋 / 不分頁 ·
+        每一筆收據都永久保留、永不重發 · 第一筆永遠是第一筆。
       </p>
     </section>
   );

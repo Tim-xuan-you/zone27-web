@@ -246,7 +246,7 @@ export default function LadderPage() {
             <RuleRow
               no="01"
               title="樣本加權 · 不裸勝率"
-              body="7 戰全勝 排在 100 戰 60 勝 後面。 運氣騙得了一晚 · 騙不了一季。 樣本太小只會掛 SAMPLE DEBT · 不會衝上神諭。"
+              body="7 戰全勝 排在 100 戰 60 勝 後面。 運氣騙得了一晚 · 騙不了一季。 樣本太小只會掛「樣本還太少」· 不會衝上神諭。"
             />
             <RuleRow
               no="02"

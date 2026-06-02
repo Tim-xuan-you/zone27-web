@@ -166,8 +166,8 @@ export default function MethodologyPage() {
         </div>
         <p className="text-mute/80">
           <strong className="text-bone">這只是「引擎自己的內部一致性」</strong> —
-          引擎對 CPBL 實際比賽結果的 calibration 還在累積樣本,目前未達
-          統計顯著門檻(N ≥ 30 · Z27 LEXICON「SAMPLE DEBT」
+          引擎跟 CPBL 實際比賽結果對不對得上 · 還在累積場數,目前還沒到
+          可靠門檻(30 場 · 也就是「樣本還太少」
           <FootnoteRef n={4} />
           )。賽後收據持續累積在{" "}
           <Link
@@ -359,7 +359,7 @@ repeat 10,000 times → aggregate
                 method="+ Park Factor HR rate adjustment(v0.3.0)· wOBA 留 v0.3.1"
                 tier="FREE 預覽 · 將來 BLACK CARD"
                 tierTone="bone"
-                record="N=0 per engine · v0.2 vs v0.3 Brier delta TBD until N≥30"
+                record="每個引擎 N=0 · v0.2 vs v0.3 準度差距等 30 場後才比"
               />
               <EngineRow
                 engine="v0.4"
@@ -858,11 +858,10 @@ repeat 10,000 times → aggregate
               <span className="font-mono text-gold tabular tracking-[0.18em] mr-2">
                 [4]
               </span>
-              <strong className="text-bone">N ≥ 30 SAMPLE DEBT 門檻</strong> ·
-              小樣本統計學共識 · 30 場 ~= 統計檢定力進入 reliable 區間的最低
-              standard · 進階數據社群「when do baseball stats stabilize?」
-              (Russell A. Carleton, 2008+ ongoing)系列研究確認各 stat 各
-              stabilization point · 我們選 30 為跨 stat 保守下限。
+              <strong className="text-bone">為什麼門檻是 30 場</strong> ·
+              棒球數據要累積到一定場次才會「穩定」· 進階數據社群長年研究各項
+              數據各自的穩定點 · 30 場是我們選的跨項目保守下限。 場數還沒到
+              30 場前 · 我們會主動在戰績頁標明「樣本還太少」。
             </p>
             <p className="mt-1 text-mute/65 text-[12px] font-mono">
               ▸{" "}

@@ -448,8 +448,8 @@ export default function MethodologyDiffPage() {
             />
             <NotFix
               n="06"
-              what="N ≥ 30 calibration validation"
-              why="v0.3 LIVE 後 N=0 finalized matches per engine · 不能宣稱「v0.3 > v0.2 accuracy」 · per /audit S05 PRE-COMMIT · 等 N≥30 finalized matches per engine 才 publish Brier score 對照。"
+              what="30 場準度驗證"
+              why="v0.3 上線後每個引擎 N=0 · 不能宣稱「v0.3 比 v0.2 準」 · per /audit S05 PRE-COMMIT · 等每個引擎累積到 30 場 finalized matches 才公布實際準度對照。"
             />
           </div>
 
@@ -490,7 +490,7 @@ export default function MethodologyDiffPage() {
               </li>
               <li className="flex gap-3 items-baseline">
                 <span className="font-mono text-gold/70 text-[10px] tracking-[0.25em]">▸</span>
-                <span>Weights derived from per-engine Brier score over rolling 30-game window</span>
+                <span>各引擎依「最近 30 場的實際準度」動態調整權重</span>
               </li>
               <li className="flex gap-3 items-baseline">
                 <span className="font-mono text-gold/70 text-[10px] tracking-[0.25em]">▸</span>
@@ -550,7 +550,7 @@ export default function MethodologyDiffPage() {
           </p>
           <p>
             列得出來的 6 件 v0.3 不修正 · 一條一條寫在 Section 05。
-            您比我懂 sabermetric · 看到漏了什麼請發 PR。
+            您比我懂進階數據 · 看到漏了什麼請發 PR。
           </p>
           <p>
             v0.4 ship 那天 · 同此頁 pattern publish v0.3 → v0.4 diff。

@@ -165,7 +165,7 @@ export default function TrackRecordPage() {
             兩條 path · per Agent 3 missing #2「anonymous can't reach
             /calibration」 修正不 strict · 因 /calibration 本身公開。 */}
         <p className="mt-6 font-mono text-mute/85 text-[11px] sm:text-xs tracking-[0.25em] leading-relaxed">
-          想看完整 Brier score + reliability diagram?{" "}
+          想看完整的引擎準度自評?{" "}
           <Link
             href="/calibration"
             className="text-gold underline-offset-4 hover:underline transition-colors"
@@ -234,7 +234,7 @@ export default function TrackRecordPage() {
               href="/member/calibration"
               className="text-gold hover:underline underline-offset-4"
             >
-              /member/calibration reliability diagram
+              /member/calibration 引擎自評
             </Link>{" "}
             等 N≥30 才有統計意義。
           </p>
@@ -496,9 +496,10 @@ export default function TrackRecordPage() {
         </div>
 
         <p className="mt-8 font-mono text-mute text-[10px] tracking-[0.25em] leading-relaxed">
-          完整 Brier score / log loss 後續會接 ·
-          目前先用最直觀的 binary verdict 跑 N → 30 sample size(<Link href="/audit#sample-debt" className="text-gold hover:underline">SAMPLE DEBT</Link> warning until N≥30)。
-          完整 calibration 方法論見{" "}
+          更精細的準度評分(機率對不對得上實際)之後會接 ·
+          目前先用最直觀的「中 / 沒中」累積到 30 場 · 場數還太少時我們會主動標明(見{" "}
+          <Link href="/audit#sample-debt" className="text-gold hover:underline">/audit</Link>)。
+          完整準度方法論見{" "}
           <Link
             href="/methodology"
             className="text-gold underline-offset-4 hover:underline"
@@ -506,12 +507,12 @@ export default function TrackRecordPage() {
             /methodology
           </Link>
           {" · "}
-          PROVED / DIVERGED / PUSH 等 verdict 詞彙定義見{" "}
+          PROVED / DIVERGED / PUSH 等判定詞的定義見{" "}
           <Link
             href="/audit#section-08"
             className="text-gold underline-offset-4 hover:underline"
           >
-            /audit §08 Z27 LEXICON
+            /audit §08
           </Link>
           。
         </p>
@@ -953,8 +954,8 @@ function FirstReceiptHero({
           className="font-mono text-mute/80 text-[10px] sm:text-xs tracking-[0.4em]"
           title={
             pinned
-              ? "Founding receipt 永遠 pinned · Pokemon TCG 1st Edition mechanic · 同 R60 W-B「CARD 001 / ∞」 axiom"
-              : "N<30 不是 signal · 校準需要 Brier score · 見 v0.3 roadmap · per /audit S05 + critic-hardening Round 31 W-G"
+              ? "第一張收據永遠釘在最前面 · 1st Edition"
+              : "場數還不到 30 · 還不能算準度 · 詳見 /audit"
           }
         >
           {kickerText}

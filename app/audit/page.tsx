@@ -746,7 +746,7 @@ export default function AuditPage() {
               <Link href="/calibration" className="text-gold hover:underline">
                 /calibration
               </Link>{" "}
-              publish v0.2 vs v0.3 Brier score 對照 · 才決定 v0.3 是否 promote
+              publish v0.2 vs v0.3 的實際準度對照 · 才決定 v0.3 是否 promote
               default(per Lens Lifetime Pledge:
               <strong className="text-bone"> 不 silently rotate</strong>)。
             </P>
@@ -798,11 +798,11 @@ export default function AuditPage() {
               </div>
               <div id="sample-debt" className="border-l-2 border-loss/40 pl-4 scroll-mt-20">
                 <dt className="font-mono text-loss/85 text-[10px] tracking-[0.35em] mb-1">
-                  SAMPLE DEBT · 樣本債
+                  樣本還太少 · 場數不夠
                 </dt>
                 <dd className="text-mute text-sm leading-relaxed">
-                  N &lt; 30 時 PROVED rate 受 sample bias 影響 · /track-record 顯示
-                  「樣本債警告」直到累積 N≥30。 Bill James 1985 sabermetrics 文化 · 不掩飾。
+                  場數 &lt; 30 時 · 中獎率容易被運氣放大 · /track-record 會顯示
+                  「樣本還太少」直到累積到 30 場。 進階數據社群的老規矩 · 我們不掩飾。
                 </dd>
               </div>
               <div className="border-l-2 border-gold/40 pl-4">
