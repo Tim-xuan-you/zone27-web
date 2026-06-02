@@ -59,6 +59,7 @@ type SubmitState =
   | { kind: "idle" }
   | { kind: "submitting" }
   | { kind: "signup_confirm_sent"; email: string }
+  | { kind: "reset_sent"; email: string }
   | { kind: "error"; message: string };
 
 export default function LoginPage() {
@@ -298,6 +299,31 @@ export default function LoginPage() {
     }
   }
 
+  // 忘記密碼 · Supabase 標準 recovery · 寄重設信 → 點 link 落地 /auth/reset 設新密碼。
+  async function handleForgot() {
+    const trimmed = email.trim().toLowerCase();
+    if (!trimmed || !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(trimmed)) {
+      setState({ kind: "error", message: "先在上面填你的 email · 再按忘記密碼" });
+      return;
+    }
+    setState({ kind: "submitting" });
+    try {
+      const supabase = createSupabaseBrowserClient();
+      const resetUrl = new URL("/auth/reset", window.location.origin);
+      const { error } = await supabase.auth.resetPasswordForEmail(trimmed, {
+        redirectTo: resetUrl.toString(),
+      });
+      if (error) {
+        setState({ kind: "error", message: "寄重設信失敗 · 稍候再試" });
+        return;
+      }
+      setState({ kind: "reset_sent", email: trimmed });
+    } catch (err) {
+      if (err instanceof Error) console.error("[login handleForgot]", err.message);
+      setState({ kind: "error", message: "寄重設信失敗 · 稍候再試" });
+    }
+  }
+
   return (
     <div className="flex flex-col flex-1 min-h-screen">
       <Nav />
@@ -358,6 +384,8 @@ export default function LoginPage() {
               cooldown={cooldown}
               onResend={handleResend}
             />
+          ) : state.kind === "reset_sent" ? (
+            <ResetSentState email={state.email} />
           ) : (
             <form
               onSubmit={handleSubmit}
@@ -423,9 +451,16 @@ export default function LoginPage() {
                 </p>
               )}
 
-              {/* ── Round 50 W-F · 砍 mode toggle button · 留 3-line hint
-                  簡化 to 1-path explanation。 「忘記密碼」 將來走獨立
-                  /reset page · 不在 /login 內 toggle 模式。 */}
+              <button
+                type="button"
+                onClick={handleForgot}
+                disabled={state.kind === "submitting"}
+                className="w-full text-center font-mono text-mute/60 hover:text-gold text-[10px] tracking-[0.25em] transition-colors disabled:opacity-50"
+              >
+                忘記密碼?寄重設信給你 →
+              </button>
+
+              {/* ── 已有帳號忘記密碼 → 上面「忘記密碼」寄 Supabase recovery → /auth/reset 設新密碼。 */}
               <div className="pt-3 border-t border-line/40">
                 <p className="font-mono text-mute/70 text-[10px] tracking-[0.25em] leading-relaxed">
                   ▸ 新 email = 自動建帳號 · 寄確認 email · 點 link 完成 register
@@ -493,6 +528,26 @@ export default function LoginPage() {
 // confirm state(magic_link_sent path 已 R50 W-F 砍)。 password sign up
 // 走 Supabase 預設 email confirmation flow · 寄 confirmation link · click
 // → /auth/callback → /member · 同 PKCE same-device 限制。
+function ResetSentState({ email }: { email: string }) {
+  return (
+    <div className="bg-gold/5 border border-gold/60 glow-soft p-6 sm:p-8 text-center">
+      <p className="font-mono text-gold text-[10px] tracking-[0.45em] mb-4 shimmer">
+        ✓ 重設信已寄出
+      </p>
+      <h2 className="text-2xl sm:text-3xl text-bone font-light tracking-tight mb-4">
+        檢查你的信箱
+      </h2>
+      <p className="text-mute text-sm sm:text-base leading-relaxed mb-3">
+        重設密碼的連結寄到{" "}
+        <span className="font-mono text-gold">{email}</span> · 點信裡的連結就能設新密碼。
+      </p>
+      <p className="font-mono text-mute/70 text-[10px] tracking-[0.25em] leading-relaxed">
+        ▸ 找不到看垃圾信夾 · 連結 1 小時內有效 · 在同一個瀏覽器點
+      </p>
+    </div>
+  );
+}
+
 function SentState({
   email,
   cooldown,
@@ -573,9 +628,9 @@ function friendlyPasswordError(raw: string): string {
   if (!raw || typeof raw !== "string") return "錯誤 · 請稍候再試 · 持續寫信 tatayngiti@gmail.com";
   const lower = raw.toLowerCase();
   if (lower.includes("already") && lower.includes("registered"))
-    return "此 email 已註冊 · 密碼錯了? 寫信 tatayngiti@gmail.com 重設";
+    return "此 email 已註冊 · 密碼不對?點下方「忘記密碼」寄重設信給自己";
   if (lower.includes("user already exists"))
-    return "此 email 已註冊 · 密碼錯了? 寫信 tatayngiti@gmail.com 重設";
+    return "此 email 已註冊 · 密碼不對?點下方「忘記密碼」寄重設信給自己";
   if (lower.includes("password should be at least"))
     return `密碼至少 ${MIN_PASSWORD_LEN} 字元`;
   if (lower.includes("weak"))
