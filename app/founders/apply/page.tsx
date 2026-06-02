@@ -8,6 +8,7 @@ import FromOneSolo from "@/components/FromOneSolo";
 import RelatedReading from "@/components/RelatedReading";
 import FounderSignOff from "@/components/FounderSignOff";
 import ArticleMeta from "@/components/ArticleMeta";
+import RefusalLedgerHint from "@/components/RefusalLedgerHint";
 import { FOUNDERS_TOTAL, FOUNDERS_NEXT } from "@/lib/founders-stats";
 
 export const metadata: Metadata = {
@@ -312,6 +313,9 @@ export default function FoundersApplyPage() {
             您的「why ZONE 27」 段落 · 然後決定。
           </p>
         </FounderSignOff>
+
+        {/* ── 拒絕標準 · 申請前先公開(brand IP:對手不敢做的 disclosure · R187 啟用孤兒元件)── */}
+        <RefusalLedgerHint />
 
         {/* ── RELATED READING ──────────────────────── */}
         <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-16">
