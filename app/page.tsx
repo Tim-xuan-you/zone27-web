@@ -64,13 +64,22 @@ export default function Home() {
               <span className="text-mute/60 text-[9px] tracking-[0.2em]">連輸的也掛 →</span>
             </Link>
           )}
+
+          {/* 主 CTA · hero 的明確下一步 · 滑到今晚的盤(UX:第一屏要有「現在按哪」)*/}
+          <div className="mt-7">
+            <a
+              href="#floor"
+              className="inline-flex items-center gap-2 bg-gold text-navy font-mono text-xs sm:text-sm tracking-[0.25em] px-6 py-3 hover:bg-gold-soft transition-colors"
+            >
+              {upcoming.length > 0 ? "↓ 看今晚誰會贏" : "↓ 看引擎最近戰績"}
+            </a>
+          </div>
         </section>
 
         {/* ── THE FLOOR · 市場看板 / 賽後收據(休賽日 fallback)──── */}
-        <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-14">
+        <section id="floor" className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-14 scroll-mt-20">
           <div className="flex items-baseline justify-between gap-3 mb-5 flex-wrap">
             <p
-              lang="en"
               className="font-mono text-gold text-[10px] sm:text-[11px] tracking-[0.45em]"
             >
               {upcoming.length > 0
@@ -116,7 +125,6 @@ export default function Home() {
         {/* ── 三步玩法 · 圖示卡(child-level · 圖取代字)──── */}
         <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-14 border-t border-line/40 pt-12">
           <p
-            lang="en"
             className="font-mono text-gold text-[10px] sm:text-[11px] tracking-[0.45em] mb-6"
           >
             / 三步玩法
