@@ -51,35 +51,20 @@ export default async function MlbMatchesPage() {
           資料來源:MLB Stats API(官方公開、完全免費) ·
           ZONE 27 不修改任何原始資料
         </p>
-        {/* R80 · Per /integrity rule #12 binding(R80 加 · CPBL-only-forever
-            scope · NEVER predict MLB / NPB / KBO / 任何外國職棒)· R48 W-B
-            engine pick surface 整個 removed · 此頁從「prediction with
-            disclaimer」 改為「pure schedule viewer · 0 engine surface」 ·
-            brand IP「方法公開」 不再 ambiguous · 完全 honor rule 12 spirit
-            not just letter。 Patek 不做 Apple Watch / Defector 不做 ESPN
-            broadcast pattern。 */}
-        <div className="mt-4 border border-loss/30 bg-loss/5 px-4 py-3 max-w-2xl">
-          <p
-            lang="en"
-            className="font-mono text-loss/85 text-[9px] tracking-[0.35em] mb-1.5"
+        {/* MLB = 免費即時比分鉤子 · 引擎刻意只算 CPBL(focus = 護城河)·
+            一句自信的話講完取捨 + 導回 CPBL · 不再貼內部辯護書黑話 ·
+            per Tim R185 dogfood(同看準度頁的黑話牆病)。 */}
+        <p className="mt-4 text-mute text-sm sm:text-[15px] leading-relaxed max-w-2xl">
+          <strong className="text-bone">引擎只算 CPBL。</strong>{" "}
+          MLB 這頁純粹給你看即時比分 · 不開預測、不計分 ——
+          我們把火力全押在一個聯盟、做到別人做不到,而不是每個聯盟都沾一點。{" "}
+          <Link
+            href="/matches"
+            className="text-gold/90 hover:text-gold underline-offset-4 hover:underline whitespace-nowrap"
           >
-            ⚓ /INTEGRITY RULE #12 BINDING
-          </p>
-          <p className="text-bone/90 text-[12px] sm:text-[13px] leading-relaxed">
-            <strong>ZONE 27 engine 永遠不預測 MLB。</strong>此頁是純 viewer
-            工具 · MLB Stats API 即時排程 + 比分 · 0 engine prediction surface
-            · 0 PROVED / DIVERGED label · 0 /track-record 計分。Reason: solo
-            founder CPBL niche dominance = costly signal · MLB me-too = noise
-            · 同 Patek 不做 Apple Watch pattern。詳見{" "}
-            <Link
-              href="/integrity"
-              className="text-gold/80 hover:text-gold underline-offset-4 hover:underline"
-            >
-              /integrity rule #12
-            </Link>
-            。
-          </p>
-        </div>
+            想押有引擎開盤的?→ 今日 CPBL
+          </Link>
+        </p>
         <div className="mt-6 w-full h-px bg-line/60" />
       </section>
 
@@ -172,13 +157,10 @@ function MlbCard({ game }: { game: MlbGame }) {
         />
       </div>
 
-      {/* venue + date */}
-      <div className="pt-3 mt-1 border-t border-line/40 flex items-baseline justify-between">
+      {/* venue · 日期砍掉(今日賽程 + 台北時間已足夠 · per Tim R185)*/}
+      <div className="pt-3 mt-1 border-t border-line/40">
         <span className="font-mono text-mute/70 text-[10px] tracking-[0.2em] truncate">
           {game.venue}
-        </span>
-        <span className="font-mono text-mute text-[9px] tracking-[0.2em] shrink-0 ml-2">
-          {game.dateTaipei}
         </span>
       </div>
     </article>
