@@ -110,7 +110,9 @@ R174 pivot build queue · Claude 可主動 ship(三綠 + auto-push):
   - **動線**:CardBetStrip 押完不再斷線(加「登入 → 存永久戰績」峰終鉤子)· /member 賣分析入口改直接指到能發文的賽事頁(原誤導去定價頁)
   - **減法**:刪 12 孤兒檔(9 元件 + 3 lib · 驗證無 import)
   - 🧭 研究 agent 找到的「缺的靈魂」= 公開、可驗證的準度本身就是產品(不是功能堆疊)· 已部分落地(白話化讓誠實看得懂)· 下一步可做「創作者已驗證準度徽章」(Substack Bestseller 式 · 不可造假 · 掛在作者名旁)
-  - ⏳ 還沒做(下個窗):**/founders Apple 式砍乾淨(880 行 · 對標 /membership)** · **live-test 押注/錢包/買文章 RPC**(用 anon key 自建帳號打 RPC)
+  - 🌐 **全運動願景對齊(Tim MLB 頁 + 運彩 8 運動選單 dogfood · 同 session 追加 · push 72f49df + e73956b)**:MLB 頁去黑話牆(/INTEGRITY RULE #12 辯護書牆 → 一句自信話)+ 改路線圖框架 · **/integrity 綁定鐵律 #12** 從「永久只做 CPBL · MLB 跟風是雜訊」**reframe** 成「沒驗證夠準不開盤 + 擴張提前公告絕不偷加」(永久守的是**品質閘門**不是只做 CPBL)· 站內 9 處「CPBL only forever / 永遠 only」掃成 phased · **/coverage 新增「全運動路線圖」section**(8 運動:棒球亮、其餘 7 研發中)· 詳見 [[zone27-coverage-philosophy]] R185 amplify
+  - ⚠️ **rule #12 是「永久不會變」鐵律的改動** · 按 Tim 自己的 30 天公告紀律,可能要補一則 /changelog · wording 也可由 Tim 調
+  - ⏳ 還沒做(下個窗):**/founders Apple 式砍乾淨(880 行 · 對標 /membership)** · **live-test 押注/錢包/買文章 RPC**(用 anon key 自建帳號打 RPC)· (可選)創作者「已驗證準度」徽章(研究 agent 的 missing-soul · Substack Bestseller 式)
 - ✅ **R180 攻頂 session(2026-06-01 · 5 commit · full build 綠)**· Tim 全權 mandate · 3 路 agent(全球研究/碼審計/心理動線)
   synthesize → multi-wave ship:
   - **減法**:刪 21 個孤兒檔(-3395 行 · 7-Lens canvas 全退場 + follow/note/orphan lib)· 直擊「檔案多到離譜」
