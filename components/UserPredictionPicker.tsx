@@ -288,6 +288,16 @@ export default function UserPredictionPicker({
         )}
       </div>
 
+      {/* 押完接下一步 · 峰值不斷頭(UX H4)· 押完最熱的瞬間 → 接「去押下一場」迴路 */}
+      {(locked || anonLocked) && !finalWinner && (
+        <Link
+          href="/matches"
+          className="mt-3 block text-center font-mono text-gold/80 hover:text-gold text-[10px] tracking-[0.2em] underline-offset-4 hover:underline transition-colors"
+        >
+          押下一場 · 看今晚其他賽事 →
+        </Link>
+      )}
+
       {error && (
         <p
           role="alert"

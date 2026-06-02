@@ -209,6 +209,17 @@ export default async function MatchDetailPage({
             engineConfidence={Math.max(m.home.winRate, m.away.winRate)}
             finalWinner={m.finalResult?.winner ?? null}
           />
+
+          {/* 這題怎麼算贏 · 預測市場第一信任機制(賭徒最怕模糊結算)· 補全球標竿研究「缺的靈魂①」 */}
+          <div className="mt-4 border border-line/60 bg-slate/30 px-4 py-3">
+            <p className="font-mono text-gold/80 text-[9px] tracking-[0.35em] mb-1.5">
+              這題怎麼算贏
+            </p>
+            <p className="text-mute/85 text-[12px] sm:text-[13px] leading-relaxed">
+              以 <span className="text-bone">CPBL 官網最終比分</span>為準 · 賽後自動結算:分數高的隊贏 · 你押對掛 ✓、押錯掛 ✕(連輸都留著、刪不掉)。<span className="text-mute/70"> 延賽順延到補賽日才算 · 和局兩邊都不算贏。</span>
+            </p>
+          </div>
+
           <div className="mt-3 flex justify-end">
             <CopyLinkButton refTag={`match-${m.id}`} />
           </div>
