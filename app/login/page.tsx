@@ -481,7 +481,7 @@ export default function LoginPage() {
             elaboration 全砍。 訪客想知 detail click /privacy。 */}
         <section className="mx-auto max-w-md w-full px-6 sm:px-10 pb-16">
           <p className="font-mono text-mute/70 text-[10px] tracking-[0.3em] leading-relaxed text-center mb-6">
-            1 個欄位 · 不問姓名 / 國家 / 生日 · 因為我們 0 tracking 延伸到註冊本身。{" "}
+            只要 email + 密碼 · 不問姓名 / 國家 / 生日 · 因為我們連註冊都 0 追蹤。{" "}
             <Link
               href="/privacy"
               className="text-gold underline-offset-4 hover:underline"
@@ -491,9 +491,9 @@ export default function LoginPage() {
           </p>
           <ul className="text-mute/80 text-xs font-mono tracking-[0.15em] space-y-1.5 list-none pl-0 text-center">
             <li>▸ 終身免費</li>
-            <li>▸ /member dashboard + /member/calibration mirror</li>
-            <li>▸ 模型迭代 email 通知</li>
-            <li>▸ 0 GA · 0 Pixel · 0 Hotjar · 0 tracking cookies(essential auth session only · 登出即刪)</li>
+            <li>▸ 你的準度儀表板 · 你 vs 引擎誰準</li>
+            <li>▸ 模型改版時 email 通知你</li>
+            <li>▸ 0 追蹤工具 · 只留登入用的 session · 登出即刪</li>
           </ul>
         </section>
 

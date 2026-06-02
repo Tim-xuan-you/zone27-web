@@ -82,7 +82,7 @@ export default function LadderPage() {
                       </span>
                       {apex && (
                         <span className="font-mono text-gold/80 text-[9px] tracking-[0.2em] px-1.5 py-0.5 border border-gold/50">
-                          👑 王座
+                          王座
                         </span>
                       )}
                     </p>

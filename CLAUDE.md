@@ -342,8 +342,8 @@ Engine + 賽事(只 1 場真實 cpbl-260521-01 · per Day 3 placeholder purge)
 /membership              4-tier ladder 總覽(Round 25 NEW · Round 27 Footer + Cmd-K 全鏈)
                          · Round 30 W4 MEMBER SYSTEM MAP + Round 30 W11 cuts(MAP + 4-paragraph
                          Creator Permissions → PermLine 1-liners · 10→7 sections)
-/membership/black-card   **NEW Round 31 W-X3** · BLACK CARD 訂閱會員 UI preview · NT$ 299/月(Round 33 reprice from 499)·
-                         5 unlocks(賽事發言 / 創作者抽成 5% / 每月 voting / Tim 工程筆記 full /
+/membership/black-card   **NEW Round 31 W-X3** · BLACK CARD 訂閱會員 UI preview · NT$ 500/31 天(R172 canonical · 抽成 10%)·
+                         5 unlocks(賽事發言 / 創作者抽成 10% / 每月 voting / Tim 工程筆記 full /
                          Founders 27 LINE 群 access)· payment flow MOCKUP(disabled · 2026 Q3
                          上線)· 5 FAQ · ArticleMeta 4min + FounderSignOff · Round 32 W-A custom
                          OG card(PRE-LAUNCH badge + 5 unlocks)
@@ -371,11 +371,10 @@ Member + Ops + Auth(Round 29-30)
                          title + body · POST /api/submit · sendSubmissionNotification
                          via Resend → Tim Gmail · 0 server-side archive · pure Tim-
                          curate model · 1/週 cadence · Stratechery Guest Post pattern
-/login                   **NEW Round 30 W5** · Phase 1 magic link auth · Tim Pratfall
-                         canary 3rd fire 之後從 Q3 promise 加速到 NOW · /login email
-                         入口 + Supabase signInWithOtp · 沒密碼 / 沒 OAuth / 沒 social
-                         login · 1 個欄位 1 個動作 1 封 email · client component
-/auth/callback           **NEW Round 30 W5 · internal redirect** · 收 magic link
+/login                   **R50 W-F · password auth(原 R30 magic link 已改密碼)** · email +
+                         密碼(≥8 字元)登入/註冊 · Supabase password auth · 沒 OAuth /
+                         沒 social login · 沒 magic link · client component
+/auth/callback           **NEW Round 30 W5 · internal redirect** · 收 auth
                          ?code= → exchangeCodeForSession → 設 HTTP-only cookies →
                          redirect /member?welcome=true · 失敗 redirect /login?error=...
                          · 不在 Cmd-K · 純技術路徑

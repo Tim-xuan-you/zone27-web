@@ -113,7 +113,11 @@ export default async function MatchDetailPage({
           <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-4 sm:gap-8">
             <div>
               <p className="font-mono text-mute text-[9px] tracking-[0.3em] mb-1">主 HOME</p>
-              <h2 className="text-2xl sm:text-4xl text-bone font-light tracking-tight leading-[1]">
+              <h2
+                className={`text-2xl sm:text-4xl font-light tracking-tight leading-[1] ${
+                  m.home.winRate >= m.away.winRate ? "text-gold" : "text-bone/70"
+                }`}
+              >
                 {m.home.name}
               </h2>
               <p className="font-mono text-gold/60 text-[10px] tracking-[0.3em] mt-1.5">
@@ -123,7 +127,11 @@ export default async function MatchDetailPage({
             <p className="font-mono text-gold/70 text-lg tracking-[0.2em]">VS</p>
             <div className="text-right">
               <p className="font-mono text-mute text-[9px] tracking-[0.3em] mb-1">客 AWAY</p>
-              <h2 className="text-2xl sm:text-4xl text-bone font-light tracking-tight leading-[1]">
+              <h2
+                className={`text-2xl sm:text-4xl font-light tracking-tight leading-[1] ${
+                  m.away.winRate > m.home.winRate ? "text-gold" : "text-bone/70"
+                }`}
+              >
                 {m.away.name}
               </h2>
               <p className="font-mono text-gold/60 text-[10px] tracking-[0.3em] mt-1.5">

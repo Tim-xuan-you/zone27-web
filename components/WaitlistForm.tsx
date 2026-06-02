@@ -107,9 +107,9 @@ export default function WaitlistForm({
               </p>
               <CopyLinkButton refTag={`reserve-${pos}`} />
             </div>
-            {/* TONIGHT card (still primary · receipt-promise route) */}
+            {/* 賽事板 · 連動態今日場次(不寫死特定場次,避免 stale 假裝「今晚」) */}
             <Link
-              href="/matches/cpbl-260521-01"
+              href="/matches"
               className="block border border-line/60 hover:border-gold/40 p-4 group transition-colors text-left"
             >
               <p
@@ -119,10 +119,10 @@ export default function WaitlistForm({
                 / TONIGHT
               </p>
               <p className="text-bone text-sm leading-snug group-hover:text-gold transition-colors">
-                看今晚引擎預測這場 →
+                看今晚的引擎開盤線 →
               </p>
-              <p className="font-mono text-mute text-[10px] tracking-[0.2em] mt-1 tabular">
-                統一 vs 富邦 · 18:35 新莊
+              <p className="font-mono text-mute text-[10px] tracking-[0.2em] mt-1">
+                每場賽前鎖定 · 賽後對賬 · 中沒中都掛
               </p>
             </Link>
           </div>

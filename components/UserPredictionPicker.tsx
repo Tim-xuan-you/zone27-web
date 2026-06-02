@@ -163,11 +163,17 @@ export default function UserPredictionPicker({
       {/* 群眾市場線 · 所有人都看得到 */}
       <CrowdLine tally={tally} homeName={homeName} awayName={awayName} />
 
-      {/* 會員賽後判決 */}
+      {/* 會員賽後判決 · 峰終時刻(Kahneman peak-end)· 猜中給份量感,不是一行小字 */}
       {finalWinner && myPick && finalWinner !== "tie" && (
-        <div className="mt-3">
+        <div
+          className={`mt-3 border px-4 py-3 ${
+            myPick === finalWinner
+              ? "border-gold/60 bg-gold/10 glow-soft"
+              : "border-loss/40 bg-loss/5"
+          }`}
+        >
           <p
-            className={`font-mono text-sm tracking-[0.2em] ${
+            className={`font-mono text-base sm:text-lg tracking-[0.15em] ${
               myPick === finalWinner ? "text-gold" : "text-loss/80"
             }`}
           >
@@ -176,9 +182,9 @@ export default function UserPredictionPicker({
           {myPick === finalWinner && (
             <a
               href="#say"
-              className="mt-1.5 inline-block font-mono text-gold/70 hover:text-gold text-[10px] tracking-[0.2em] underline-offset-4 hover:underline transition-colors"
+              className="mt-2 inline-block font-mono text-gold/80 hover:text-gold text-[10px] tracking-[0.2em] underline-offset-4 hover:underline transition-colors"
             >
-              把這一手的判斷寫成分析 · 賽後準度自動掛上 →
+              把這一手寫成分析 · 賽後準度自動掛上 →
             </a>
           )}
         </div>

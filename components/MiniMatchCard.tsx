@@ -209,10 +209,7 @@ export default function MiniMatchCard({ match }: { match: Match }) {
         </div>
       )}
 
-      <div className="mt-auto pt-2 flex items-baseline justify-between gap-2">
-        <span className="font-mono text-mute/55 text-[10px] tracking-[0.3em]">
-          10K 模擬
-        </span>
+      <div className="mt-auto pt-2 flex items-baseline justify-end gap-2">
         <Link
           href={`/matches/${match.id}`}
           className="font-mono text-gold/70 hover:text-gold text-[10px] tracking-[0.3em] transition-colors"

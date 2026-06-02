@@ -100,13 +100,13 @@ export default async function AdminPage() {
             Tim 的 <span className="text-gold">ZONE 27 ops 後台</span>
           </h1>
           <p className="mt-6 text-mute leading-relaxed max-w-2xl">
-            這是你的管理台。 管理會員、管理大家發的文章 ——
-            <strong className="text-bone">全部在 Supabase 做</strong>,下面是一步一步的操作手冊
-            (每個動作都有現成指令,直接複製貼上就好)。
+            這是你的管理台。 管理會員、加點數、審文章 ——
+            <strong className="text-bone">全部用點按鈕完成</strong>:打 email、打金額、按按鈕,
+            全程不用寫任何指令。
           </p>
           <p className="mt-4 text-mute/80 text-sm leading-relaxed max-w-2xl">
-            為什麼不做「一鍵按鈕」後台?因為碰錢的動作<strong className="text-bone">故意手動 + 留痕</strong>
-            (你的鐵律 #13:不自動扣款)· 一個人經營的階段不過度造後台。 下面的數字是即時的,動作走 Supabase。
+            碰錢的動作<strong className="text-bone">故意要你親手按一次確認 + 留痕</strong>
+            (你的鐵律 #13:不自動扣款)· 不是限制,是紀律。 下面的數字都是即時的。
           </p>
           <div className="mt-6">
             <ArticleMeta readingMin={3} />
