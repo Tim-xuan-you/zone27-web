@@ -162,9 +162,9 @@ export default async function MemberPage() {
               解鎖<span className="text-gold">標價賣你的分析</span> · 賣出你拿 90–95%。
             </p>
             <p className="font-mono text-mute text-[12px] tracking-[0.12em] leading-relaxed mb-4">
-              BLACK CARD <span className="text-bone tabular">NT$ 500/月</span> · 你拿 90%
+              BLACK CARD <span className="text-bone tabular">NT$ 500 / 31 天</span> · 你拿 90%
               <br />
-              創始會員 <span className="text-bone tabular">NT$ 2,700/年</span> · 你拿 95% + 創始編號
+              創始會員 <span className="text-bone tabular">NT$ 2,700 / 365 天</span> · 你拿 95%（全站最低抽成）
             </p>
             <span className="inline-flex items-center gap-2 font-mono text-navy bg-gold px-5 py-2.5 text-xs tracking-[0.25em] group-hover:bg-gold-soft transition-colors">
               看方案並升級 →

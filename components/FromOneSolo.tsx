@@ -114,13 +114,13 @@ export default function FromOneSolo() {
               03
             </span>
             <strong className="text-bone">Solo founder · 0 employees · 0
-            contractors · BUS_FACTOR = 1</strong>{" "}
+            contractors · 全靠 Tim 一個人</strong>{" "}
             · per{" "}
             <Link
               href="/ethics#bus-factor"
               className="text-gold underline-offset-4 hover:underline"
             >
-              /ethics BUS_FACTOR section
+              /ethics 單人風險那一節
             </Link>
             裡有應變安排。 Tim 失蹤 30+ 天 → 配偶 + 2 兄弟姊妹
             executor 接管 · /privacy Section 6B 退款 protocol。 不裝

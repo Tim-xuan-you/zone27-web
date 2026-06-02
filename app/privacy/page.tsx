@@ -424,8 +424,8 @@ export default function PrivacyPage() {
           </li>
           <li>
             <strong className="text-bone">Founders 27 ledger row</strong> · 永久
-            保留 · 創始編號永久屬於該屆 · per /founders/ledger SHADOWLESS RUN
-            commitment「創始編號發完即止 · 1st Edition 永遠只有最初 270」 · 您即使退款 ledger
+            保留 · 創始編號永久屬於該屆 · 同 /founders/ledger 的承諾:創始編號
+            發完即止 · 永遠只有最初 270 個 · 您即使退款 ledger
             row 仍 release reserved 標記但保留歷史記錄
           </li>
           <li>
@@ -474,17 +474,17 @@ export default function PrivacyPage() {
           <li>
             <strong className="text-bone">您聯絡 executor 方式</strong> · email{" "}
             <a
-              href="mailto:tatayngiti@gmail.com?subject=ZONE%2027%20%C2%B7%20BUS_FACTOR%20emergency"
+              href="mailto:tatayngiti@gmail.com?subject=ZONE%2027%20%C2%B7%20emergency%20takeover"
               className="text-gold underline-offset-4 hover:underline"
             >
               tatayngiti@gmail.com
             </a>{" "}
-            · 主旨「BUS_FACTOR emergency」 · executor 14 天內回信 · 對應
+            · 主旨「緊急接管」 · executor 14 天內回信 · 對應
             /ethics#bus-factor 公開的接管安排
           </li>
           <li>
             <strong className="text-bone">Founders 27 退款優先</strong> · 即使
-            14 天 cooling-off window 已過 · BUS_FACTOR 情境啟動時當期未用完的
+            14 天 cooling-off window 已過 · 這個緊急情境啟動時當期未用完的
             年度 access 按剩餘天數比例退款(NT$ 2,700 × 剩餘天數 / 365)·
             executor 親手處理 · 不外包 · per Taiwan 消保法 § 19 spirit
             extension

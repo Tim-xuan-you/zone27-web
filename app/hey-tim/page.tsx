@@ -125,7 +125,7 @@ export default function HeyTimPage() {
               title={
                 HEY_TIM_COUNT === 1
                   ? "Year 0 pre-launch · 1 SEED entry showing format · waiting for first real visitor Q"
-                  : `${HEY_TIM_COUNT} entries · APPEND-ONLY · 0 retroactive delete`
+                  : `${HEY_TIM_COUNT} entries · 只增不刪 · 0 回頭刪改`
               }
             >
               {HEY_TIM_COUNT === 1
@@ -230,7 +230,7 @@ export default function HeyTimPage() {
             lang="en"
             className="font-mono text-gold/85 text-[10px] tracking-[0.4em] mb-4"
           >
-            / §02 · LEDGER · APPEND-ONLY · {HEY_TIM_COUNT} ENTRIES
+            / §02 · LEDGER · 只增不刪 · {HEY_TIM_COUNT} ENTRIES
           </p>
           <div className="mb-6 flex items-baseline gap-3 flex-wrap text-mute text-xs sm:text-sm">
             <span>

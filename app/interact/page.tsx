@@ -489,7 +489,7 @@ export default function InteractPage() {
               >
                 /integrity
               </Link>
-              {" · 22 binding rules append-only"}
+              {" · 22 binding rules · 只增不刪"}
             </li>
             <li>
               <Link

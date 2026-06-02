@@ -24,7 +24,7 @@ import {
 export const size = OG_SIZE;
 export const contentType = OG_CONTENT_TYPE;
 export const alt =
-  "ZONE 27 · Hey Tim · subscriber Q&A ledger · Bill James 15-yr pattern · 您 ask · Tim 親手 reply · APPEND-ONLY · 0 cherry-pick · 0 retroactive delete · 8th canonical append-only ledger family";
+  "ZONE 27 · Hey Tim · 訂閱者問答紀錄 · Bill James 15 年模式 · 你問 · Tim 親手回 · 只增不刪 · 0 cherry-pick · 0 回頭刪改";
 
 export default async function HeyTimOgImage() {
   return new ImageResponse(

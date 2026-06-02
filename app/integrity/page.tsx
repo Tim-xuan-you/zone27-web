@@ -175,7 +175,7 @@ export default function IntegrityPage() {
             lang="en"
             className="font-mono text-mute text-xs tracking-[0.3em] tabular mb-6"
           >
-            SIGNED · TIM · {SIGNED_AT} · APPEND-ONLY · 30-DAY /CHANGELOG NOTICE TO MODIFY
+            SIGNED · TIM · {SIGNED_AT} · 只增不刪 · 修改前 30 天 /CHANGELOG 公告
           </p>
           <p
             className="text-mute text-base leading-relaxed mb-4 zh-body"
@@ -302,7 +302,7 @@ export default function IntegrityPage() {
               lang="en"
               className="font-mono text-gold text-[10px] tracking-[0.4em] mb-4"
             >
-              ⚓ 3 BINDING COVENANTS · APPEND-ONLY · 30-DAY /CHANGELOG NOTICE
+              ⚓ 3 BINDING COVENANTS · 只增不刪 · 修改前 30 天 /CHANGELOG 公告
             </p>
             <ol className="space-y-4 mt-4">
               <li className="border-l-2 border-gold/40 pl-4 py-2">

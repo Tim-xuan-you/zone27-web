@@ -310,7 +310,7 @@ export default function EthicsPage() {
               lang="en"
               className="font-mono text-gold/70 text-[10px] tracking-[0.35em]"
             >
-              / BUS_FACTOR
+              / 單人風險
             </span>
             <span
               lang="en"
@@ -320,12 +320,12 @@ export default function EthicsPage() {
             </span>
           </div>
           <h2 className="text-3xl text-bone font-light tracking-tight mb-6">
-            如果 Tim 失蹤了 · BUS_FACTOR = 1
+            如果 Tim 失蹤了 · 全靠他一個人
           </h2>
           <p className="text-mute leading-relaxed mb-4">
             ZONE 27 是 solo founder · 0 employees · 0 contractors · 0
             outsourced ops。{" "}
-            <strong className="text-bone">BUS_FACTOR = 1</strong> · 如果
+            <strong className="text-bone">就只有 Tim 一個人</strong> · 如果
             Tim 出車禍 / 失蹤 / health-collapse · 整個 brand pipeline 中斷。
             這是 brand IP「稀缺手工」 的 cost · 不藏 · 此 section explicit
             codify what happens then。
@@ -367,7 +367,7 @@ export default function EthicsPage() {
               消保法 § 19。 Tim 失蹤情境 · 因 service interruption · 您可
               email{" "}
               <a
-                href="mailto:tatayngiti@gmail.com?subject=ZONE%2027%20%C2%B7%20BUS_FACTOR%20refund%20request"
+                href="mailto:tatayngiti@gmail.com?subject=ZONE%2027%20%C2%B7%20service%20interruption%20refund"
                 className="text-gold underline-offset-4 hover:underline"
               >
                 tatayngiti@gmail.com
@@ -378,21 +378,21 @@ export default function EthicsPage() {
           </ul>
           <h3 className="text-bone text-lg mt-6 mb-3">為什麼不雇人 · 不外包?</h3>
           <p className="text-mute leading-relaxed mb-4">
-            僱人 = 分散 BUS_FACTOR 但同時稀釋 brand identity。 ZONE 27 brand IP
+            僱人 = 分散這個單人風險 · 但同時稀釋 brand identity。 ZONE 27 brand IP
             「Tim 親手」 = 「Tim 親眼 verify wire」 + 「Tim 親手 review
             application」 + 「Tim 親手 manually onboard」。 僱第 2 人 = 變 SaaS
             · 違反「倒置 SaaS」跟「稀缺、手工」這兩個原則。
           </p>
           <p className="text-mute leading-relaxed mb-4">
-            <strong className="text-bone">所以選擇:</strong> 我選 BUS_FACTOR=1
-            的 cost · 因為 BUS_FACTOR=1 是 brand 信用 base。 為了減少您的
+            <strong className="text-bone">所以選擇:</strong> 我選擇「只有一個人」
+            的代價 · 因為這就是 brand 信用的根基。 為了減少您的
             risk · 我 ship 此 section 公開 · 您 see contingency = 您 conclude
             您 own 風險決定。
           </p>
           <p className="font-mono text-mute/80 text-[10px] tracking-[0.25em] leading-relaxed">
             ⚓ 同 Pinboard.in(Maciej Cegłowski 單人 17 年)· 同 Patek Philippe
             family-business 174 年 · 同 Berkshire Hathaway succession plan
-            公開 · solo founder BUS_FACTOR honesty 比 fake「team page · 10
+            公開 · solo founder 老實講出單人風險 · 比 fake「team page · 10
             people」 brand-pure。
           </p>
         </section>
@@ -401,7 +401,7 @@ export default function EthicsPage() {
           <p>
             這頁是 ZONE 27 對標、取代 玩運彩+報馬仔 的品牌底層落地 ·
             <strong>不是 marketing copy</strong>。 9 條是 hard commitments +
-            BUS_FACTOR contingency section · 違反任一條 = brand 信用
+            單人風險的接管安排 · 違反任一條 = brand 信用
             collapse · 即使違反 1 次 · /ethics page 上會出現「{COMMITMENTS[0].num}
             {" "}- VIOLATED YYYY-MM-DD · see /changelog」 紅色 alert · 永久
             visible · per /audit S05 PRE-COMMIT
