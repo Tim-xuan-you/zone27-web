@@ -233,13 +233,8 @@ export default function FoundersApplyPage() {
                 Tim
               </a>
               {" "}
-              · 我們 work something out · 不要 silently 跳過 application。
-              您走到這頁 = 您是 hardcore CPBL 球迷 · 我相信您。 same axis
-              Craig Mod「I trust you」 student tier + Are.na hardship carve-out。
-            </p>
-            <p className="mt-3 font-mono text-mute/60 text-[9px] tracking-[0.25em] leading-relaxed">
-              ⚓ per [[zone27-monetization-philosophy]] identity-tier-as-SUPPORT
-              axiom · 不 gatekeep · 0 outsource · solo founder discretion
+              · 我們一起想辦法 · 不要默默跳過申請。
+              您走到這頁 = 您是死忠 CPBL 球迷 · 我相信您。
             </p>
           </div>
         </section>

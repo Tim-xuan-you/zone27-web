@@ -415,8 +415,7 @@ export default function MethodologyDiffPage() {
         <Section no="05" label="WHAT v0.3 DOES NOT FIX" zh="v0.3 不修正的 6 件事">
           <p>
             <strong className="text-bone">主動列出 v0.3 沒有修的 6 個 limitation</strong>
-            (Pratfall · per <Link href="/audit" className="text-gold underline-offset-4 hover:underline">/audit</Link>{" "}
-            S05 disclosure pattern)。 玩運彩+報馬仔 marketing 標準是「升級了
+            (主動揭短 · 詳見 <Link href="/audit" className="text-gold underline-offset-4 hover:underline">/audit</Link>)。 玩運彩+報馬仔 marketing 標準是「升級了
             model」 不交代細節 · ZONE 27 倒置:列出來。
           </p>
 
@@ -536,8 +535,8 @@ export default function MethodologyDiffPage() {
               不 silently rotate。
             </p>
             <p className="font-mono text-mute/80 text-[10px] tracking-[0.3em] leading-relaxed">
-              ⚓ 修改此 pledge 需 30 天前 /changelog 公告 · 同 /audit S05
-              PRE-COMMIT pattern · Costly Signaling 100×。
+              ⚓ 修改此承諾需 30 天前在 /changelog 公告 · 同 /audit S05
+              「先承諾」原則 · 用實際成本背書。
             </p>
           </div>
         </section>

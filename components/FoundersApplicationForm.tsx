@@ -622,9 +622,9 @@ export default function FoundersApplicationForm() {
           className="w-full bg-ink/60 border border-line/70 focus-visible:border-gold/70 text-bone px-4 py-3 outline-none transition-colors placeholder:text-mute/70 font-mono text-sm leading-relaxed resize-y [field-sizing:content] min-h-[9rem] max-h-[32rem]"
         />
         <span className="block mt-2 font-mono text-mute/70 text-[10px] tracking-[0.2em] leading-relaxed">
-          ⚓ Tim 看的不是長度 · 是 specificity。 一句「我喜歡你們的
-          /audit Section 05」 比 500 字 generic「I love sabermetrics」 高
-          10 倍 weight。
+          ⚓ Tim 看的不是長度 · 是夠不夠具體。 一句「我喜歡你們的
+          /audit Section 05」 比 500 字空泛的「我愛看數據」 高
+          10 倍份量。
         </span>
       </label>
 

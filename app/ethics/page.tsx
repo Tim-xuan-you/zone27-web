@@ -10,7 +10,7 @@ import ReadingProgress from "@/components/ReadingProgress";
 export const metadata: Metadata = {
   title: "Ethics Policy · 9 binding commitments",
   description:
-    "Stratechery「About」 transplant · 9 ZONE 27 binding NOT-DO commitments signed Tim · displacement narrative against 玩運彩+報馬仔 tipsters direct · brand pledge protecting visitors from brand misbehavior · Pratfall + Costly Signaling + Disclosure Philosophy 三 axiom 同時 fire · 修改任何 commitment 需 30 天 /changelog 公告。R80 加 commitment 09(mandatory prediction ledger · 0 cherry-pick · 0 retroactive delete · 配對 /integrity rule 12 引擎驗證夠準才開盤 scope close brand IP loop)。",
+    "ZONE 27 的 9 條「我永遠不做」承諾,Tim 親筆簽名。對標、取代玩運彩 / 報馬仔 / LINE 老師。每一條都公開、可追蹤,修改任何一條都要 30 天前在 /changelog 公告。違反 = 品牌信用崩盤。",
 };
 
 // /ethics · Stratechery About page transplant · 9 ZONE 27 binding NOT-DO
@@ -50,7 +50,7 @@ const COMMITMENTS: { num: string; title: string; body: string; tier: "displaceme
   {
     num: "06",
     title: "我永遠不跑 ads / affiliate / paid placement on ZONE 27",
-    body: "整個 ZONE 27 站上 · 0 廣告 · 0 affiliate link · 0 paid placement · 0 sponsored content · 0 partner promotion。 訂閱費(Founders 27 + BLACK CARD)是整個 revenue model · by design · per [[zone27-monetization-philosophy]]。",
+    body: "整個 ZONE 27 站上 · 0 廣告 · 0 業配 · 0 付費置入 · 0 贊助內容 · 0 合作推廣。 訂閱費(Founders 27 + BLACK CARD)就是全部的收入來源 · 從設計上就這樣定。",
     tier: "subscriber",
   },
   {
@@ -248,8 +248,7 @@ export default function EthicsPage() {
               我們承諾我們不做 · 但我們不能阻止 fork
             </h3>
             <p className="text-mute leading-relaxed mb-4">
-              ZONE 27 引擎 MIT-licensed open source(同 brand IP「方法公開」
-              axiom)。 任何 sportsbook 明天可以 fork lib/simulator.ts +
+              ZONE 27 引擎是 MIT 授權的開源軟體(這就是我們「方法公開」的原則)。 任何 sportsbook 明天可以 fork lib/simulator.ts +
               lib/simulator-v03.ts · 包成 odds 服務賣。 我們的 9 commitments
               只 bind 我們的 actions · <strong className="text-bone">不能 bind
               code 的流向</strong>。
@@ -360,7 +359,7 @@ export default function EthicsPage() {
               <strong className="text-bone">Supabase 資料</strong> · zone27-prod
               Tokyo region · RLS-locked · 即使 Tim Vercel deploy 停止 · Supabase
               Pro tier 無人接管下 90 天 auto-pause 但不刪除 · 您 email reset
-              可從 Supabase Auth 直接 recover · per[[zone27-supabase]]
+              可從 Supabase Auth 直接 recover。
             </li>
             <li>
               <strong className="text-bone">您 NT$ 2,700 paid Founders 27</strong>{" "}
@@ -382,7 +381,7 @@ export default function EthicsPage() {
             僱人 = 分散 BUS_FACTOR 但同時稀釋 brand identity。 ZONE 27 brand IP
             「Tim 親手」 = 「Tim 親眼 verify wire」 + 「Tim 親手 review
             application」 + 「Tim 親手 manually onboard」。 僱第 2 人 = 變 SaaS
-            · 違反 倒置 SaaS axiom + 稀缺手工 axiom。
+            · 違反「倒置 SaaS」跟「稀缺、手工」這兩個原則。
           </p>
           <p className="text-mute leading-relaxed mb-4">
             <strong className="text-bone">所以選擇:</strong> 我選 BUS_FACTOR=1
@@ -418,7 +417,7 @@ export default function EthicsPage() {
           <p>
             修改此 page 9 commitments 需 30 天 /changelog 公告 · 同{" "}
             <Link href="/audit#section-05" className="text-gold hover:underline">/audit S05</Link>{" "}
-            PRE-COMMIT pattern · Costly Signaling 100× · 同{" "}
+            PRE-COMMIT pattern · 用實際成本背書 · 同{" "}
             <Link href="/integrity" className="text-gold hover:underline">/integrity 22 binding rules</Link>{" "}
             modification protocol 軸線一致。 違反任一條 = 紅字永久標 in{" "}
             <Link href="/track-record" className="text-gold hover:underline">/track-record</Link>。

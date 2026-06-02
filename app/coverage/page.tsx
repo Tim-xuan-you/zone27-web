@@ -118,7 +118,7 @@ const NEVER_COVER: { name: string; reason: string }[] = [
   },
   {
     name: "玩運彩 playsport.cc/forum",
-    reason: "Taiwan 最大運彩討論區 · tipster ranking + 牌支戰績 + 「老師」生態 · 跟 ZONE 27 brand IP 結構相反(我們不抽下注 · 不販售明牌 · 不排 tipster)· Round 30 加 · per [[zone27-coverage-philosophy]]「reject gambling-platform scraping」",
+    reason: "Taiwan 最大運彩討論區 · 牌支戰績 +「老師」生態 · 跟 ZONE 27 結構相反(我們不抽下注 · 不販售明牌 · 不排名「老師」)· 我們不爬賭博平台的資料。",
   },
   {
     name: "報馬仔 fengyuncai.com",
@@ -379,8 +379,7 @@ export default function CoveragePage() {
                     賽後 verdict ✓ PROVED / ✕ DIVERGED 在 /matches/mlb card
                     上 display · 但{" "}
                     <strong className="text-bone">NOT 算進 /track-record</strong> ·
-                    因 brand IP「pre-game lock-in」 axiom 要求 prediction lock
-                    在 first-pitch time 不可 retroactively re-compute · MLB
+                    因為我們的原則要求預測在開賽前就鎖定、賽後不回頭重算 · MLB
                     grading 是 informational layer · CPBL grading 是
                     accountability layer · 兩 layer brand-IP-pure 區分。
                   </p>
