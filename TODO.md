@@ -125,6 +125,15 @@ R172 pivot · BLACK CARD 從 TapPay 自動訂閱改成 manual ATM / 跨行轉帳
 
 R174 pivot build queue · Claude 可主動 ship(三綠 + auto-push):
 
+- ✅ **攻頂 marathon(2026-06-02 · 11 commit 全三綠 · 4513247→0f21834 · 不含並發窗 e72a504)**· Tim 連發「全權迭代攻頂」· 3-agent 偵察(全球標竿研究 / 碼審計 / 轉換動線)+ founder dogfood synthesize:
+  - **信任合約對齊(P0)**:/integrity 三紅線(不做錢包 / 0 社群 / no commission)自打臉已上線功能 → 對齊 legal-redline + 「↻ 已修訂」誠實註記(不偷改)· 同手法 /interact 整頁 one-way 反社群宣言 → 「綁戰績的討論 · 不嘴砲」(9 處 reframe)。
+  - **轉換漏斗**:首頁 hero 補主 CTA · 押完接「下一場」迴路 · 手機 sticky CTA 漸進式 ask(新訪客先推免費押注、押過才推 Founders 2700)· /member 準度接天梯排名鉤子。
+  - **缺的靈魂(全球研究)**:每場「這題怎麼算贏」結算規則(預測市場第一信任機制)· 啟用孤兒 brand IP RefusalLedgerHint(拒絕標準)到 /founders/apply。
+  - **品質**:登入頁全去工程黑話 + SUPPORT_EMAIL 收斂(login + WalletPanel)· 賽事頁/首頁 a11y lang 中英混排修正。
+  - **subtraction 勝利(查證後確認「不該動」)**:tier.ts(free 抽傭語意其實合理)· /membership(已是 additive framing)· Nav 天梯入口(踩 Tim「nav 極精簡」canary)· 錢包(核心金流不刪)· 賽事頁雙算法(brand IP)— 全確認健康/刻意,沒亂動。
+  - 🧭 **研究結論**:信任層已世界級護城河 · 冷啟動靠 single-player(你 vs 引擎)+ 創始徽章 + 早來稱王(對手靠真錢流動性 = 死穴)= 結構優勢已蓋好 · 缺的「熱度+下一步」已大量補。
+  - ⏳ **下一步方向(Tim 明示:還沒上架 · 先專心更新程式碼 · 重「心理學 + 操作邏輯」)**:① 社群熱度可見(賽事卡顯示 N 篇分析 / N 則討論 · 需後端 count RPC migration,Claude 可先備 code)② 視覺 / 心理學 UX 微打磨 ③ a11y lang 全站清掃(306 個 lang=en 篩出少數中英混排)。 待 Tim 扣扳機才做:Supabase 關 email confirm / 上線推廣 / 創作者市場金流。
+  - ⚠️ **preview client render 對 SSR 頁不可靠**(/membership 看似卡 loading 但 fetch server HTML 完整健康)· dogfood SSR/loading 頁要 `fetch(url)` 看 server HTML,別信 preview_eval 的 client 畫面。
 - ✅ **群眾市場線守樣本紀律(2026-06-02 · push 4513247 · 三綠)**:N=1 不再畫「100% 共識」假 bar(= 報馬仔拿小樣本當大盤的手法 · 跟全站樣本紀律 + 上方開盤線「不假裝確定」自打臉)· 新增 `CROWD_LINE_MIN=5`(lib/predictions-market 單一來源)· 低於門檻只報真實人數 +「滿 5 人才畫群眾市場線」· 賽事頁 CrowdLine + 首頁卡 CardBetStrip 同步 · dogfood 親見 cpbl-260602-01 真實 1 人場驗證三分支(0/1/≥5)。
 - ✅ **「下個窗」三項 verify 後其實早完成(2026-06-02)**:① /founders R187 已砍到 244 行(Apple 式 · 對標 /membership)· ② 押注/錢包/買文章 RPC R185 已 live-test · ③ 創作者「已驗證準度」徽章已實作(CreatorAnalysis `AuthorBadge` 三態 + `gradeAuthorRecords` + 0007 RPC · 賽事頁 finalResults 已正確接線)。 ⚠️ **教訓:TODO 會落後實際 · 動工前先 grep/讀碼 verify,別盲信清單。**
 - ✅ **R185 fan-grammar 大掃除 + 動線 + 減法(2026-06-02 · push b938d49 · net −2605 行 · 三綠)**· Tim 全權 mandate · 4 路 agent(全球研究 / 碼審 / 動線 / 資料檔清掃)synthesize:
