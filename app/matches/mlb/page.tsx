@@ -157,10 +157,13 @@ function MlbCard({ game }: { game: MlbGame }) {
         />
       </div>
 
-      {/* venue · 日期砍掉(今日賽程 + 台北時間已足夠 · per Tim R185)*/}
-      <div className="pt-3 mt-1 border-t border-line/40">
+      {/* venue + 日期 · per Tim R185:每張賽事卡都帶日期(會被截圖/分享/跨日並排 · 沒日期會搞混) */}
+      <div className="pt-3 mt-1 border-t border-line/40 flex items-baseline justify-between gap-2">
         <span className="font-mono text-mute/70 text-[10px] tracking-[0.2em] truncate">
           {game.venue}
+        </span>
+        <span className="font-mono text-mute text-[9px] tracking-[0.2em] shrink-0">
+          {game.dateTaipei}
         </span>
       </div>
     </article>

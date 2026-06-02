@@ -43,6 +43,16 @@ import {
 // full pitcher-stats panel that HeroLiveCard has room for.
 // ─────────────────────────────────────────────────────
 
+// 卡片緊湊日期 · "2026 · 06 · 02  ·  星期二" → "06/02（二）"。 per Tim R185 dogfood:
+// 每張賽事卡都要帶日期 —— 卡片會被截圖、分享、跟別天的卡並排,沒日期就搞混。
+function compactMatchDate(dateStr: string): string {
+  const parts = dateStr.split("·").map((s) => s.trim());
+  if (parts.length >= 4 && parts[1] && parts[2]) {
+    return `${parts[1]}/${parts[2]}（${parts[3].replace("星期", "")}）`;
+  }
+  return dateStr;
+}
+
 export default function MiniMatchCard({ match }: { match: Match }) {
   const matchPhase: MatchPhase | null = getMatchPhase(match);
   const calibration = getCalibration(match);
@@ -68,9 +78,11 @@ export default function MiniMatchCard({ match }: { match: Match }) {
       data-final={match.finalResult ? "true" : "false"}
       className="@container/card bg-slate/40 border border-line/60 p-4 sm:p-5 flex flex-col gap-3 transition-colors hover:border-gold/40"
     >
-      {/* Time + venue + phase badge */}
+      {/* 日期 + 時間 + phase badge · 日期每卡必帶(per Tim R185 · 跨日不搞混) */}
       <div className="flex items-center justify-between gap-2">
         <span className="font-mono text-mute text-[9px] tracking-[0.25em] tabular">
+          <span className="text-mute/90">{compactMatchDate(match.date)}</span>
+          <span className="text-mute/50 mx-1">·</span>
           {match.startTime}
         </span>
         <MiniPhaseBadge phase={matchPhase} calibration={calibration} />
