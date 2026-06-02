@@ -20,7 +20,6 @@ import {
   tierLabel,
   type MemberTier,
 } from "@/lib/tier";
-import { getWalletBalance, buyCreatorPost, type BuyResult } from "@/lib/wallet";
 import {
   getCreatorComments,
   submitCreatorComment,
@@ -68,7 +67,6 @@ export default function CreatorAnalysis({
   const [error, setError] = useState<string | null>(null);
   const [tier, setTier] = useState<MemberTier>("free"); // 付費會員才能標價賣
   const [price, setPrice] = useState(0); // NT$ · 0 = 免費發
-  const [balance, setBalance] = useState(0); // 錢包餘額(NT$ · 1 點 = NT$1)
 
   useEffect(() => {
     let cancelled = false;
@@ -92,9 +90,6 @@ export default function CreatorAnalysis({
         setTier(
           readTier(user.user_metadata as Record<string, unknown> | undefined)
         );
-        getWalletBalance().then((b) => {
-          if (!cancelled) setBalance(b);
-        });
         const my = await getMyCreatorPost(matchId);
         if (cancelled) return;
         if (my) {
@@ -140,19 +135,6 @@ export default function CreatorAnalysis({
     setSaving(false);
   };
 
-  // 用點數買付費分析(原子扣款 · 成功 → 重抓 posts 解鎖 + 更新餘額)
-  const handleBuy = async (postId: string): Promise<BuyResult> => {
-    const res = await buyCreatorPost(postId);
-    if (res.ok) {
-      setBalance(res.balance);
-      const list = await getCreatorPosts(matchId);
-      setPosts(list);
-    } else if (res.reason === "insufficient") {
-      setBalance(res.balance);
-    }
-    return res;
-  };
-
   return (
     <section
       aria-label="創作者分析 · 發表分析 · 選邊 · 賽後自動評準度"
@@ -186,8 +168,6 @@ export default function CreatorAnalysis({
               finalWinner={finalWinner}
               record={records[p.handle]}
               loggedIn={status === "open" || status === "posted"}
-              balance={balance}
-              onBuy={handleBuy}
             />
           ))}
         </div>
@@ -329,8 +309,6 @@ function PostCard({
   finalWinner,
   record,
   loggedIn,
-  balance,
-  onBuy,
 }: {
   post: CreatorPost;
   homeName: string;
@@ -338,34 +316,10 @@ function PostCard({
   finalWinner?: "home" | "away" | "tie" | null;
   record?: AuthorRecord;
   loggedIn: boolean;
-  balance: number;
-  onBuy: (postId: string) => Promise<BuyResult>;
 }) {
   const pickName = p.pick === "home" ? homeName : awayName;
   const graded = finalWinner && finalWinner !== "tie";
   const correct = graded && p.pick === finalWinner;
-  const [buying, setBuying] = useState(false);
-  const [buyMsg, setBuyMsg] = useState<string | null>(null);
-  const [insufficient, setInsufficient] = useState(false);
-
-  const doBuy = async () => {
-    setBuying(true);
-    setBuyMsg(null);
-    setInsufficient(false);
-    const res = await onBuy(p.postId);
-    if (!res.ok) {
-      if (res.reason === "insufficient") {
-        setInsufficient(true);
-        setBuyMsg(`餘額不足(餘額 NT$ ${res.balance})`);
-      } else if (res.reason === "not_logged_in") {
-        setBuyMsg("請先登入");
-      } else {
-        setBuyMsg("購買失敗 · 請重試");
-      }
-    }
-    // ok → 父層 re-fetch posts → 本卡重繪成已解鎖
-    setBuying(false);
-  };
 
   return (
     <article className="p-4 sm:p-5 border border-line/60 bg-slate/30">
@@ -396,52 +350,12 @@ function PostCard({
           <p className="font-mono text-gold/90 text-[11px] tracking-[0.2em] mb-1">
             🔒 完整分析 · NT$ {p.priceNtd}
           </p>
-          <p className="font-mono text-mute/70 text-[10px] tracking-[0.12em] leading-relaxed mb-3">
-            標題 + 推薦哪一邊免費看 · 完整內文買了才解鎖。 賽後一樣自動掛準度(賣家賴不掉)。
-          </p>
-          {loggedIn ? (
-            <>
-              <button
-                type="button"
-                onClick={doBuy}
-                disabled={buying}
-                className="inline-block px-4 py-2 bg-gold text-navy font-mono text-[10px] tracking-[0.25em] hover:bg-gold-soft transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                {buying ? "購買中..." : `用點數買 NT$ ${p.priceNtd}`}
-              </button>
-              <span className="ml-2 font-mono text-mute/60 text-[10px] tracking-[0.15em]">
-                餘額 NT$ {balance}
-              </span>
-              {buyMsg && (
-                <p
-                  role="alert"
-                  className="mt-2 font-mono text-loss/85 text-[10px] tracking-[0.15em] leading-relaxed"
-                >
-                  {buyMsg}
-                  {insufficient && (
-                    <>
-                      {" · "}
-                      <Link
-                        href="/member"
-                        className="text-gold underline-offset-4 hover:underline"
-                      >
-                        去儲值 →
-                      </Link>
-                    </>
-                  )}
-                </p>
-              )}
-            </>
-          ) : (
-            <Link
-              href="/login"
-              className="inline-block px-4 py-2 bg-gold text-navy font-mono text-[10px] tracking-[0.25em] hover:bg-gold-soft transition-colors"
-            >
-              登入後用點數買 →
-            </Link>
-          )}
-          <p className="mt-2 font-mono text-mute/50 text-[9px] tracking-[0.15em] leading-relaxed">
-            點數買 · 0 自動扣款 · 買了立即解鎖。
+          <p className="font-mono text-mute/70 text-[10px] tracking-[0.12em] leading-relaxed">
+            標題 + 推薦哪一邊免費看 · 完整內文要付費解鎖 · 賽後一樣自動掛準度(賣家賴不掉)。
+            <br />
+            <span className="text-mute/55">
+              付費解鎖即將開放 —— 上線後直接付這一篇的錢解鎖、不用先儲值點數。
+            </span>
           </p>
         </div>
       ) : (
