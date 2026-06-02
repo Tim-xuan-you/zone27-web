@@ -80,11 +80,10 @@ export default async function AdminPage() {
               / ADMIN · Tim&apos;s OPS DASHBOARD
             </p>
             <span
-              lang="en"
-              className="font-mono text-[9px] tracking-[0.3em] px-1.5 py-0.5 border border-loss/40 text-loss/80"
-              title="Stage 2 mockup · 還沒 auth-gated · 還沒接真實 admin actions"
+              className="font-mono text-[9px] tracking-[0.3em] px-1.5 py-0.5 border border-gold/40 text-gold/80"
+              title="只有你看得到 · 沒上 Google"
             >
-              STAGE 2 PREVIEW · NOINDEX
+              只有你看得到
             </span>
             {session && (
               <span
@@ -100,15 +99,13 @@ export default async function AdminPage() {
             Tim 的 <span className="text-gold">ZONE 27 ops 後台</span>
           </h1>
           <p className="mt-6 text-mute leading-relaxed max-w-2xl">
-            Tim 直擊「我要如何管理會員?操作介面在哪裡?」 ·
-            <strong className="text-bone">這頁是 Stage 2 mockup</strong>。
-            目前 Stage 1 = Supabase Studio 直接登入(下方有外部連結) ·
-            Stage 2 自家後台還沒寫 · ADMIN-PLAN.md 已寫死 design。
+            這是你的管理台。 管理會員、管理大家發的文章 ——
+            <strong className="text-bone">全部在 Supabase 做</strong>,下面是一步一步的操作手冊
+            (每個動作都有現成指令,直接複製貼上就好)。
           </p>
-          <p className="mt-4 font-mono text-mute/80 text-[10px] tracking-[0.25em] leading-relaxed max-w-2xl">
-            真實 numbers 從 live data 拉(waitlist · founders state · ingest queue) ·
-            但所有 actions(刪除 · 改 state · 寄 email)都還是手動透過 Supabase Studio
-            或 git commit。
+          <p className="mt-4 text-mute/80 text-sm leading-relaxed max-w-2xl">
+            為什麼不做「一鍵按鈕」後台?因為碰錢的動作<strong className="text-bone">故意手動 + 留痕</strong>
+            (你的鐵律 #13:0 自動扣款)· 一個人經營的階段不過度造後台。 下面的數字是即時的,動作走 Supabase。
           </p>
           <div className="mt-6">
             <ArticleMeta readingMin={3} />
@@ -116,6 +113,88 @@ export default async function AdminPage() {
         </section>
 
         <div className="mx-auto w-32 gold-line mb-12" />
+
+        {/* ── 操作手冊(R185 · Tim 問「怎麼管理會員 / 文章 · 管理頁在哪 · 一步步教」)──
+            把 /admin 從「假功能 mockup」改成真 playbook:你真的會做的事 + 現成可貼的指令。
+            碰錢動作走 Supabase(故意手動 · 留痕 · per #13)· 不做一鍵按鈕後台。 */}
+        <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-12">
+          <p className="font-mono text-gold text-[10px] tracking-[0.4em] mb-3">
+            / 操作手冊 · 你真的會做的事
+          </p>
+          <h2 className="text-2xl sm:text-3xl text-bone font-light tracking-tight mb-3">
+            你的管理台 = Supabase + 這份手冊
+          </h2>
+          <p className="text-mute/85 text-sm leading-relaxed mb-8 max-w-2xl">
+            你只在 <span className="text-bone">Supabase</span> 做兩類事:管會員、管文章。
+            每件都有現成指令 —— 貼到 Supabase 的 <span className="text-bone">SQL Editor</span> 把
+            <span className="text-gold"> 紅字部分換掉</span> → 按 Run。
+          </p>
+
+          {/* A · 管理會員 */}
+          <div className="mb-6 border border-gold/30 bg-slate/30 p-5 sm:p-6">
+            <p className="font-mono text-gold/90 text-[11px] tracking-[0.3em] mb-4">
+              A · 管理會員
+            </p>
+            <PlaybookStep
+              title="① 看所有會員"
+              body="Supabase → 左側「Authentication」→「Users」· 列出每個人的 email + 加入時間。 不用指令,用點的。"
+            />
+            <PlaybookStep
+              title="② 有人轉帳買點數 → 幫他加點(儲值)"
+              body="確認入帳後,SQL Editor 貼這段,把金額 / 末5碼 / email 換掉 → Run:"
+              sql={`insert into public.wallet_ledger (user_id, delta_ntd, kind, ref)\nselect id, 500, 'topup', '末5碼12345'\nfrom auth.users\nwhere email = '買家@example.com';`}
+            />
+            <PlaybookStep
+              title="③ 標記某人是付費會員(黑卡 / 創始)"
+              body="收到會員費轉帳後,把他升級。 black = BLACK CARD · founder = Founders 27 → Run:"
+              sql={`update auth.users\nset raw_user_meta_data = coalesce(raw_user_meta_data, '{}'::jsonb)\n    || jsonb_build_object('tier', 'black')\nwhere email = '會員@example.com';`}
+            />
+            <PlaybookStep
+              title="④ 查某人錢包還剩多少點"
+              body="想確認某人餘額 → Run:"
+              sql={`select u.email, coalesce(sum(w.delta_ntd), 0) as balance_ntd\nfrom auth.users u\nleft join public.wallet_ledger w on w.user_id = u.id\nwhere u.email = '會員@example.com'\ngroup by u.email;`}
+              last
+            />
+            <p className="mt-4 font-mono text-mute/65 text-[10px] tracking-[0.2em] leading-relaxed">
+              ▸ ③ 標記付費後,對方<span className="text-mute/90">下次登入(或最多 1 小時)</span>才會生效
+              —— 因為等級存在他的登入憑證裡,要刷新才會更新。 跟他說重新登入一下就立刻看到。
+            </p>
+          </div>
+
+          {/* B · 管理文章 / 留言 */}
+          <div className="mb-6 border border-gold/30 bg-slate/30 p-5 sm:p-6">
+            <p className="font-mono text-gold/90 text-[11px] tracking-[0.3em] mb-4">
+              B · 管理大家發的文章 / 留言
+            </p>
+            <PlaybookStep
+              title="① 看所有人發的東西"
+              body="Supabase → 左側「Table Editor」→ 點這三張表用看的:creator_posts(賣的分析)· creator_comments(分析下的回覆)· game_posts(賽事討論室發言)。 每張看得到內容 + 是誰發的 + 時間。"
+            />
+            <PlaybookStep
+              title="② 刪掉違規 / 爛的文章或留言"
+              body="在 Table Editor 那張表,勾選那一列左邊的框 → 上面按「Delete」。 或用指令(把 id 換成那一篇的)→ Run:"
+              sql={`delete from public.creator_posts where id = '貼上那篇的 id';\n-- 刪留言改成 creator_comments · 刪討論室發言改成 game_posts`}
+              last
+            />
+            <p className="mt-4 font-mono text-mute/65 text-[10px] tracking-[0.2em] leading-relaxed">
+              ▸ 目前刪文是你親手刪(一個人經營的階段)· 用戶自己不能刪、只能跟你申請 ·
+              之後再做站內「刪文鈕」(Phase 3)。
+            </p>
+          </div>
+
+          <a
+            href="https://supabase.com/dashboard/projects"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block px-6 py-3 bg-gold text-navy font-mono text-xs tracking-[0.3em] hover:bg-gold-soft transition-colors"
+          >
+            → 開 Supabase 後台
+          </a>
+          <p className="mt-4 font-mono text-mute/55 text-[10px] tracking-[0.2em] leading-relaxed max-w-2xl">
+            ⚠️ 這頁本身還沒上鎖(任何人都點得到)· 但這裡看不到任何會員 email、指令也只有登入你
+            Supabase 的你能執行 —— 所以放著沒風險。 把這頁鎖成「只有你 email 能看」是待辦,不急。
+          </p>
+        </section>
 
         {/* R60 W-C · Designer Quick Reference · Tim 第 3 次 canary fire 同問題
             「設計者要怎麼切換查看 / 要登入嗎 / 哪個帳號」 · founder dogfood
@@ -256,144 +335,10 @@ export default async function AdminPage() {
           </div>
         </section>
 
-        {/* ── STAGE 1 · CURRENT REALITY ────────────── */}
+        {/* ── 不裝什麼(analytics 紀律)─────────────── */}
         <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-16 pt-12 border-t border-line/40">
-          <p
-            lang="en"
-            className="font-mono text-gold/70 text-[10px] tracking-[0.35em] mb-4"
-          >
-            / 02 · STAGE 1 · 目前你怎麼管理(誠實)
-          </p>
-          <h2 className="text-2xl sm:text-3xl text-bone font-light tracking-tight mb-6">
-            目前 ops 入口 · Supabase Studio 直接登入
-          </h2>
-          <div className="space-y-4 text-mute leading-relaxed">
-            <p>
-              ADMIN-PLAN.md 寫死 Stage 1 = Supabase Studio。沒做自家 /admin
-              因為:會員 100 人前不需要 polish dashboard · Stage 1 已夠用。
-            </p>
-            <div className="border-l-2 border-gold/40 pl-5 sm:pl-6 py-2 space-y-3">
-              <p className="text-bone text-base">
-                <strong>你現在能在 Supabase Studio 做的:</strong>
-              </p>
-              <ul className="space-y-2 text-sm list-none pl-0">
-                <li className="flex items-baseline gap-3">
-                  <span className="font-mono text-gold/70 text-[10px] shrink-0">
-                    ▸
-                  </span>
-                  <span>
-                    看 <code className="font-mono text-bone bg-slate/40 px-1.5 py-0.5">waitlist</code>{" "}
-                    表所有 email · queue_position · created_at
-                  </span>
-                </li>
-                <li className="flex items-baseline gap-3">
-                  <span className="font-mono text-gold/70 text-[10px] shrink-0">
-                    ▸
-                  </span>
-                  <span>
-                    匯出 CSV(寄 email 通知用 · 但目前沒用過因為 N=0)
-                  </span>
-                </li>
-                <li className="flex items-baseline gap-3">
-                  <span className="font-mono text-gold/70 text-[10px] shrink-0">
-                    ▸
-                  </span>
-                  <span>
-                    SQL Editor 跑簡單 query(最近 24h 新增 · 過去 7 天累計)
-                  </span>
-                </li>
-                <li className="flex items-baseline gap-3">
-                  <span className="font-mono text-gold/70 text-[10px] shrink-0">
-                    ▸
-                  </span>
-                  <span>
-                    手動刪除 GDPR 退出請求(直接 SQL delete · audit log 留在
-                    Supabase 系統 log)
-                  </span>
-                </li>
-              </ul>
-            </div>
-            <a
-              href="https://supabase.com/dashboard/projects"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-block mt-4 px-6 py-3 border border-gold text-gold text-xs tracking-[0.3em] hover:bg-gold hover:text-navy transition-colors"
-            >
-              → 開 Supabase Studio (新視窗)
-            </a>
-          </div>
-        </section>
-
-        {/* ── STAGE 2 · MOCKUP PREVIEW ──────────────── */}
-        <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-16 pt-12 border-t border-line/40">
-          <p
-            lang="en"
-            className="font-mono text-gold/70 text-[10px] tracking-[0.35em] mb-4"
-          >
-            / 03 · STAGE 2 · 自家 /admin 後台會長這樣
-          </p>
-          <h2 className="text-2xl sm:text-3xl text-bone font-light tracking-tight mb-6">
-            建好後 · Tim 一天 1 分鐘巡視
-          </h2>
-          <p className="text-mute leading-relaxed mb-8">
-            ADMIN-PLAN.md Stage 2 設計(尚未寫程式 · trigger = waitlist 突破 100 人
-            或 Tim 開始想看「轉換漏斗」):
-          </p>
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-            <FeatureMock
-              en="MAGIC LINK LOGIN"
-              zh="Magic link 登入"
-              body="Supabase Auth · 只允許 Tim's email 登入 · 無密碼"
-            />
-            <FeatureMock
-              en="FUNNEL VISUAL"
-              zh="轉換漏斗視覺化"
-              body="訪客 → waitlist → 已付款 · 各階段轉換率 · brand-pure 視覺(深藏青 × 冷金 · 不抄 Stripe / Vercel)"
-            />
-            <FeatureMock
-              en="ACTIVITY FEED"
-              zh="最近活動 feed"
-              body="最近 20 個加入名單(編號 + 時間 + 匿名 email · 不展示 email 全字 · 顯示 a***@example.com)"
-            />
-            <FeatureMock
-              en="EXPORT CSV"
-              zh="一鍵匯出 CSV"
-              body="全部會員資料 · 用於寄 newsletter / migration / GDPR 退出請求審核"
-            />
-            <FeatureMock
-              en="GDPR DELETE"
-              zh="GDPR 刪除介面"
-              body="搜尋 email → 軟刪除 → audit log 留下「Tim deleted at TS」記錄"
-            />
-            <FeatureMock
-              en="FOUNDERS OPS"
-              zh="Founders 27 ops"
-              body="pending_payment → forged 狀態切換 · 自動推送 PDF 證書產生(template 在 docs/MANUAL-ONBOARDING.md)"
-            />
-          </div>
-
-          <p className="font-mono text-mute/60 text-[10px] tracking-[0.3em] mt-8 leading-relaxed">
-            ▸ 完整 spec 在{" "}
-            <a
-              href="https://github.com/Tim-xuan-you/zone27-web/blob/main/ADMIN-PLAN.md"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gold underline-offset-4 hover:underline"
-            >
-              ADMIN-PLAN.md
-            </a>
-            {" · "}所有 Stage 1 / 2 / 3 trigger 條件 + 不做 list 寫死。
-          </p>
-        </section>
-
-        {/* ── STAGE 3 · ANALYTICS (FAR) ─────────────── */}
-        <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-16 pt-12 border-t border-line/40">
-          <p
-            lang="en"
-            className="font-mono text-gold/70 text-[10px] tracking-[0.35em] mb-4"
-          >
-            / 04 · STAGE 3 · Plausible cookieless analytics(三條件 trigger)
+          <p className="font-mono text-gold/70 text-[10px] tracking-[0.35em] mb-4">
+            / 不裝什麼 · 數據追蹤紀律
           </p>
           <h2 className="text-2xl sm:text-3xl text-bone font-light tracking-tight mb-6">
             還早 · 不裝
@@ -486,28 +431,26 @@ function KpiCard({
   );
 }
 
-function FeatureMock({
-  en,
-  zh,
+function PlaybookStep({
+  title,
   body,
+  sql,
+  last,
 }: {
-  en: string;
-  zh: string;
+  title: string;
   body: string;
+  sql?: string;
+  last?: boolean;
 }) {
   return (
-    <div className="p-5 border border-line/60 bg-slate/20">
-      <p
-        lang="en"
-        className="font-mono text-gold/70 text-[10px] tracking-[0.35em] mb-1"
-      >
-        {en}
-      </p>
-      <p className="text-bone text-lg font-light tracking-tight mb-3">{zh}</p>
-      <p className="text-mute text-sm leading-relaxed">{body}</p>
-      <p className="font-mono text-mute/50 text-[9px] tracking-[0.3em] mt-3 pt-3 border-t border-line/30">
-        ▸ MOCKUP · 尚未寫程式
-      </p>
+    <div className={last ? "" : "mb-4 pb-4 border-b border-line/30"}>
+      <p className="text-bone text-sm font-medium mb-1.5">{title}</p>
+      <p className="text-mute/85 text-[13px] leading-relaxed">{body}</p>
+      {sql && (
+        <pre className="mt-2 overflow-x-auto bg-navy/70 border border-line/50 px-3 py-2.5 font-mono text-gold/85 text-[11px] leading-relaxed">
+          {sql}
+        </pre>
+      )}
     </div>
   );
 }
