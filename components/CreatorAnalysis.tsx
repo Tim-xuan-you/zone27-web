@@ -163,8 +163,10 @@ export default function CreatorAnalysis({
       {/* displacement weapon · 報馬仔挑好看的窗 + 輸了刪文;這裡賽前鎖、賽後
           自動評、連輸的都掛、刪不掉 = 作者賴不掉的戰績 = 讀者敢信。 */}
       <p className="mb-5 text-mute/85 text-[13px] leading-relaxed max-w-2xl">
-        每位作者旁邊掛的是<span className="text-bone">真實累積戰績</span> —— 賽前選邊鎖死、賽後自動掛準/不準、
-        <span className="text-gold">連輸的都留著、刪不掉</span>。 不是「近 15 天挑好看的」,是全部。
+        每位作者名字旁那個 <span className="text-gold font-medium">✓ 已驗證準度</span> 章 ——
+        是 ZONE 27 從他<span className="text-bone">每一手鎖死的紀錄</span>自動算的:賽前選邊鎖死、
+        賽後自動掛準/不準、<span className="text-gold">連輸的全留著、刪不掉</span>。
+        報馬仔掛「近 15 天 77 過 55」是自己挑窗、輸的刪掉;<span className="text-bone">這個章他永遠掛不出來</span>。
       </p>
 
       {/* posts */}
@@ -453,45 +455,57 @@ function PostCard({
   );
 }
 
-// ── 作者戰績 badge · 誠實三態 ────────────────────────────
-// 新分析師(0 結算)/ 累積中(1-9)/ 已上天梯(≥10)。 報馬仔掛「近 16 日
-// 77 過 55」挑窗 + 刪輸的;這裡全撈、連輸的都算 · 賴不掉。
+// ── 作者「已驗證準度」徽章 · 誠實三態 ──────────────────────
+// 這是 brand 的靈魂 mark(Substack Bestseller 式 · 但用真實準度換 · 不可造假):
+// ZONE 27 從每一手鎖死的紀錄自動算 · 連輸的都算進去 · 報馬仔挑窗刪輸的 → 永遠掛不出。
+// 把「數字」升級成「身分章」: ✓ 已驗證 = status · % = detail。
+//   新分析師(0 結算)/ ✓ 已驗證·累積中(1-9)/ ✓ 已驗證準度 + 上天梯(≥10)。
 function AuthorBadge({ record }: { record?: AuthorRecord }) {
-  // 沒戰績(0007 未套用 / 新人 / 還沒結算)→ 誠實「新分析師」
+  // 沒戰績(0007 未套用 / 新人 / 還沒結算)→ 誠實「新分析師」+ 從第一手起就賴不掉
   if (!record || record.n === 0) {
     return (
-      <p className="mb-2 font-mono text-mute/60 text-[10px] tracking-[0.15em]">
-        新分析師 · 戰績從這場開始累積 · 賽後自動掛、刪不掉
+      <p className="mb-2 font-mono text-mute/60 text-[10px] tracking-[0.15em] leading-relaxed">
+        新分析師 · 從第一手起就鎖死 · 賽後自動掛準/不準 · 連輸的都算、刪不掉
       </p>
     );
   }
   const { n, hits, rate, onLadder } = record;
   const misses = n - hits;
   if (!onLadder) {
-    // 1-9 場 · 樣本還不夠上天梯 · 不裸吹勝率(同 SAMPLE DEBT 誠實)
+    // 1-9 場 · 已驗證但樣本不夠上天梯 · 不裸吹勝率(同 N≥10 才掛準度的誠實)
     return (
-      <p className="mb-2 font-mono text-mute/70 text-[10px] tracking-[0.15em]">
-        近 <span className="text-bone tabular">{n}</span> 場 ·{" "}
-        <span className="text-gold/80 tabular">✓{hits}</span>{" "}
-        <span className="text-loss/70 tabular">✕{misses}</span> · 還差{" "}
-        <span className="text-bone tabular">{10 - n}</span> 場上天梯
-      </p>
+      <div className="mb-2 flex items-center gap-2 flex-wrap">
+        <span className="inline-flex items-baseline gap-1 px-1.5 py-0.5 border border-gold/40 bg-gold/5 font-mono text-gold/85 text-[9px] tracking-[0.18em] whitespace-nowrap">
+          ✓ 已驗證 · 累積中
+        </span>
+        <span className="font-mono text-mute/70 text-[10px] tracking-[0.15em]">
+          近 <span className="text-bone tabular">{n}</span> 場 ·{" "}
+          <span className="text-gold/80 tabular">✓{hits}</span>{" "}
+          <span className="text-loss/70 tabular">✕{misses}</span> · 還差{" "}
+          <span className="text-bone tabular">{10 - n}</span> 場上天梯
+        </span>
+      </div>
     );
   }
-  // ≥10 場 · 已上海選天梯 · 命中率可掛
+  // ≥10 場 · 已上海選天梯 · 「✓ 已驗證準度」章 = 報馬仔掛不出來的那個 mark
   return (
-    <Link
-      href="/ladder"
-      className="mb-2 inline-flex items-baseline gap-2 flex-wrap font-mono text-[10px] tracking-[0.15em] group"
-    >
-      <span className="text-gold tabular text-[12px] font-medium">{rate}% 準</span>
-      <span className="text-mute/70">
-        近 <span className="text-bone tabular">{n}</span> 場 ·{" "}
-        <span className="text-gold/80 tabular">✓{hits}</span>{" "}
-        <span className="text-loss/70 tabular">✕{misses}</span>
+    <div className="mb-2 flex items-center gap-2 flex-wrap">
+      <span className="inline-flex items-baseline gap-1 px-1.5 py-0.5 border border-gold/60 bg-gold/10 glow-soft font-mono text-gold text-[9px] tracking-[0.18em] whitespace-nowrap">
+        ✓ 已驗證準度
       </span>
-      <span className="text-gold/70 group-hover:text-gold transition-colors">· 海選天梯 →</span>
-    </Link>
+      <Link
+        href="/ladder"
+        className="inline-flex items-baseline gap-2 flex-wrap font-mono text-[10px] tracking-[0.15em] group"
+      >
+        <span className="text-gold tabular text-[12px] font-medium">{rate}% 準</span>
+        <span className="text-mute/70">
+          近 <span className="text-bone tabular">{n}</span> 場 ·{" "}
+          <span className="text-gold/80 tabular">✓{hits}</span>{" "}
+          <span className="text-loss/70 tabular">✕{misses}</span>
+        </span>
+        <span className="text-gold/70 group-hover:text-gold transition-colors">· 海選天梯 →</span>
+      </Link>
+    </div>
   );
 }
 
