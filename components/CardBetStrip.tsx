@@ -182,15 +182,25 @@ export default function CardBetStrip({
         </p>
       )}
       {(status === "locked" || status === "anon-locked") && myPick && (
-        <p className="font-mono text-bone text-[11px] tracking-[0.15em] text-center py-1.5">
-          ✓ 已押{" "}
-          <span className="text-gold">
-            {myPick === "home" ? homeName : awayName}
-          </span>
-          <span className="text-mute/50 text-[9px] ml-1.5">
-            {status === "anon-locked" ? "· 存這裝置" : "· 鎖定"}
-          </span>
-        </p>
+        <div className="text-center py-1.5">
+          <p className="font-mono text-bone text-[11px] tracking-[0.15em]">
+            ✓ 已押{" "}
+            <span className="text-gold">
+              {myPick === "home" ? homeName : awayName}
+            </span>
+            <span className="text-mute/50 text-[9px] ml-1.5">
+              {status === "anon-locked" ? "· 存這裝置" : "· 鎖定"}
+            </span>
+          </p>
+          {status === "anon-locked" && (
+            <Link
+              href={`/login?next=/matches/${matchId}`}
+              className="inline-block mt-1 font-mono text-gold/70 hover:text-gold text-[9px] tracking-[0.18em] underline-offset-4 hover:underline transition-colors"
+            >
+              登入 → 存成永久戰績、進群眾市場 ▸
+            </Link>
+          )}
+        </div>
       )}
     </div>
   );

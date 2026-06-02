@@ -42,17 +42,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const teamPitchers = cpblPitchers.filter((p) => p.team === team.name);
   return {
     title: `${team.name} 投手 · ${teamPitchers.length} 人 · 進階指標 · CPBL · ZONE 27`,
-    description: `${team.name}(${team.en})CPBL 隊伍 ${teamPitchers.length} 位投手 sabermetric 進階指標 percentile 視覺化 · K/9 + BB/9 + HR/9 + WHIP + ERA + IP · 資料來自 stats.cpbl.com.tw 公開 box score · 0 付費 API。`,
+    description: `${team.name}(${team.en})CPBL 隊伍 ${teamPitchers.length} 位投手進階數據百分位視覺化 · K/9 + BB/9 + HR/9 + WHIP + ERA + IP · 資料來自 stats.cpbl.com.tw 公開 box score · 0 付費 API。`,
     openGraph: {
       title: `${team.name} 投手 · ${teamPitchers.length} 人 · ZONE 27`,
-      description: `${team.en} · ${teamPitchers.length} 投手 · sabermetric percentile · CPBL`,
+      description: `${team.en} · ${teamPitchers.length} 投手 · 進階數據百分位 · CPBL`,
       type: "article",
       url: `/cpbl-teams/${teamId}`,
     },
     twitter: {
       card: "summary_large_image",
       title: `${team.name} 投手 · ZONE 27`,
-      description: `${team.en} · ${teamPitchers.length} pitchers · sabermetric percentile`,
+      description: `${team.en} · ${teamPitchers.length} pitchers · 進階數據百分位`,
     },
     alternates: { canonical: `/cpbl-teams/${teamId}` },
   };

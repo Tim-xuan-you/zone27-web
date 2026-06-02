@@ -25,7 +25,7 @@ import {
 export const size = OG_SIZE;
 export const contentType = OG_CONTENT_TYPE;
 export const alt =
-  "ZONE 27 · Founders 27 Open Allocation Ledger · 公布拒絕原因 · 4 brand IP axiom 同時 fire";
+  "ZONE 27 · Founders 27 公開名額帳本 · 連被拒的原因都公布";
 
 export default async function FoundersLedgerOgImage() {
   const forged = FOUNDERS_CLAIMED;
@@ -155,10 +155,10 @@ export default async function FoundersLedgerOgImage() {
             gap: 12,
           }}
         >
-          <AxiomChip label="PRATFALL" />
-          <AxiomChip label="COSTLY SIGNALING" />
-          <AxiomChip label="DISCLOSURE" />
-          <AxiomChip label="倒置 SaaS" />
+          <AxiomChip label="公開拒絕" />
+          <AxiomChip label="別人不敢" />
+          <AxiomChip label="規則全攤" />
+          <AxiomChip label="反著做" />
         </div>
 
         {/* ── STATS BLOCK ─────────────────────────── */}

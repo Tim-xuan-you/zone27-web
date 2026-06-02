@@ -435,7 +435,7 @@ export default function InteractPage() {
               >
                 /audit EXCLUDE
               </Link>
-              {" · model limits + sample debt"}
+              {" · 模型限制 + 樣本不足"}
             </li>
             <li>
               <Link
@@ -444,7 +444,7 @@ export default function InteractPage() {
               >
                 /methodology LIMITS
               </Link>
-              {" · technical bounds + N≥30 SAMPLE DEBT explicit"}
+              {" · 技術限制 + 滿 30 場才有統計意義"}
             </li>
             <li>
               <Link

@@ -174,7 +174,7 @@ export default function SubmitPage() {
                   onChange={(e) =>
                     setTitle(e.target.value.slice(0, MAX_TITLE))
                   }
-                  placeholder="例:今晚 cpbl-260521-01 賽前 calibration drift 分析"
+                  placeholder="例:今晚這場賽前分析"
                   className="w-full bg-navy/60 border border-line/70 px-3 py-2 text-bone text-base focus:outline-none focus-visible:border-gold focus-visible:ring-1 focus-visible:ring-gold/30 transition-colors"
                   disabled={status.kind === "submitting"}
                 />

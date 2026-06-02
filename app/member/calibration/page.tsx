@@ -117,14 +117,10 @@ export default async function CalibrationPage() {
         {/* ── HERO ─────────────────────────────────── */}
         <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pt-20 pb-12">
           <div className="flex items-baseline gap-3 mb-4 flex-wrap section-reveal">
-            <p
-              lang="en"
-              className="font-mono text-gold text-[10px] tracking-[0.45em]"
-            >
-              / 引擎準度對照 · 您 vs 引擎 vs 實際
+            <p className="font-mono text-gold text-[10px] tracking-[0.45em]">
+              / 引擎準度對照 · 你 vs 引擎 vs 實際
             </p>
             <span
-              lang="en"
               className={`font-mono text-[9px] tracking-[0.3em] px-1.5 py-0.5 border ${
                 n === 0
                   ? "border-gold/60 text-gold shimmer glow-gold"
@@ -132,17 +128,17 @@ export default async function CalibrationPage() {
               }`}
               title={
                 mode === "personal"
-                  ? `您 follow 的 ${n} 場 finalized · 您 personal drift`
-                  : `${n} 場 finalized · global aggregate · git commit 為準`
+                  ? `你追蹤的 ${n} 場已結算 · 你自己的準度`
+                  : `${n} 場已結算 · 全站平均 · 賽後逐場登錄`
               }
             >
               {mode === "personal"
                 ? n === 0
-                  ? "✓ YOUR · N=0(follow 賽事 → 賽後落點)"
-                  : `✓ YOUR · N=${n}`
+                  ? "你的 · 0 場(追蹤賽事 → 賽後落點)"
+                  : `你的 · ${n} 場`
                 : n === 0
-                ? "GLOBAL · WAITING · N=0"
-                : `GLOBAL · N=${n}`}
+                ? "全站 · 等第一場"
+                : `全站 · ${n} 場`}
             </span>
           </div>
           <h1 className="text-4xl sm:text-5xl text-bone font-light tracking-tight max-w-3xl">
@@ -150,18 +146,17 @@ export default async function CalibrationPage() {
             <span className="text-gold">那面鏡子</span>
           </h1>
           <p className="mt-6 text-mute leading-relaxed max-w-2xl">
-            這頁是{" "}
-            <strong className="text-bone">sabermetric reliability diagram</strong>
-            · 引擎賽前 say 的機率(x 軸)對上 actual frequency(y 軸)。
-            完美 calibration = 落在 <span className="text-gold">45° 線</span>{" "}
-            上 — 引擎 say 60% 的場 · 真的有 60% 機率 favorite win。
+            這頁是一張{" "}
+            <strong className="text-bone">準度對照圖</strong>
+            · 引擎賽前說的成數(橫軸)對上實際真的中的成數(直軸)。
+            完全準 = 落在 <span className="text-gold">45° 斜線</span>{" "}
+            上 — 引擎說「六成」的那些場 · 真的就有六成贏。
           </p>
           <p className="mt-4 text-mute/85 leading-relaxed max-w-2xl">
-            每個高端 sports 分析平台都給您看{" "}
-            <span className="text-mute">OTHER PEOPLE</span>{" "}
-            的數據(team stats · player metrics · league averages)。
-            ZONE 27 是<strong className="text-bone">唯一發布會員自己{" "}
-            calibration drift 的</strong>。
+            每個分析網站都給你看{" "}
+            <span className="text-mute">別人</span>{" "}
+            的數據(球隊數據、球員數據、聯盟平均)。
+            ZONE 27 是<strong className="text-bone">唯一把你自己的準度攤開來給你看的</strong>。
           </p>
           <p className="mt-4 font-mono text-mute/80 text-[10px] tracking-[0.25em] leading-relaxed max-w-2xl">
             不是功能堆疊 · 是一面鏡子 —
@@ -185,10 +180,7 @@ export default async function CalibrationPage() {
             Tier 3 守紀者 II · Tier 4 超級守紀者(Tetlock top-2%)·
             Tier 5 27(brand-aligned 270 picks)· Tier 6 終身校準者。 */}
         <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-12">
-          <p
-            lang="en"
-            className="font-mono text-gold text-[10px] tracking-[0.4em] mb-4"
-          >
+          <p className="font-mono text-gold text-[10px] tracking-[0.4em] mb-4">
             / 你的準度級別 · 7 階 · 只有你自己看得到
           </p>
           <h2 className="text-2xl sm:text-3xl text-bone font-light tracking-tight mb-3">
@@ -212,64 +204,55 @@ export default async function CalibrationPage() {
             <div className="mt-6 border border-dashed border-gold/30 bg-slate/30 p-6 sm:p-8 text-center">
               {mode === "personal" ? (
                 <>
-                  <p
-                    lang="en"
-                    className="font-mono text-gold text-[10px] tracking-[0.4em] mb-3"
-                  >
-                    ✓ AUTH · YOUR N=0 · follow → 賽後落點
+                  <p className="font-mono text-gold text-[10px] tracking-[0.4em] mb-3">
+                    你的 · 0 場 · 追蹤賽事 → 賽後落點
                   </p>
                   <p className="text-mute text-sm sm:text-base leading-relaxed max-w-md mx-auto mb-3">
-                    您已登入 · 但還沒 follow 任何已 finalized 的賽事 ·
-                    所以這張圖還沒有點。 follow 一場 → 賽後 verdict 自動
-                    落這 diagram。
+                    你已登入 · 但還沒追蹤任何已經結算的賽事 ·
+                    所以這張圖還沒有點。 追蹤一場 → 賽後結果自動
+                    落到這張圖上。
                   </p>
                   <div className="mt-5 flex flex-wrap justify-center gap-3">
                     <Link
                       href="/matches"
                       className="inline-block px-6 py-2.5 bg-gold text-navy font-mono text-[10px] tracking-[0.3em] hover:bg-gold-soft transition-colors"
                     >
-                      → 今日賽事板 · follow 第一場
+                      → 今日賽事板 · 追蹤第一場
                     </Link>
                     <Link
                       href="/track-record"
                       className="inline-block px-6 py-2.5 border border-gold/50 text-gold font-mono text-[10px] tracking-[0.3em] hover:bg-gold/10 transition-colors"
                     >
-                      → 引擎已 finalized 的場
+                      → 引擎已結算的場
                     </Link>
                   </div>
                 </>
               ) : (
                 <>
-                  <p
-                    lang="en"
-                    className="font-mono text-gold text-[10px] tracking-[0.4em] mb-3"
-                  >
-                    SCAFFOLD · GLOBAL N=0
+                  <p className="font-mono text-gold text-[10px] tracking-[0.4em] mb-3">
+                    全站 · 還沒有資料
                   </p>
                   <p className="text-mute text-sm sm:text-base leading-relaxed max-w-md mx-auto mb-3">
-                    引擎還沒 finalized 任何場。 anon visitor 看 global aggregate ·
-                    /login 後變個人對照圖。
+                    引擎還沒結算任何一場。 沒登入看到的是全站平均 ·
+                    登入後就變成你自己的對照圖。
                   </p>
                 </>
               )}
             </div>
           ) : n < 30 ? (
             <div className="mt-6 border border-loss/30 bg-loss/5 p-5 sm:p-6">
-              <p
-                lang="en"
-                className="font-mono text-loss text-[10px] tracking-[0.35em] mb-2"
-              >
-                ⚠ SAMPLE DEBT · N = {n} of 30
+              <p className="font-mono text-loss text-[10px] tracking-[0.35em] mb-2">
+                ⚠ 資料還太少 · 目前 {n} 場 / 滿 30 場才算數
               </p>
               <p className="text-mute text-sm leading-relaxed">
-                Reliability diagram 在 N≥30 之前 statistically meaningless ·
-                任何 drift 都可能是雜訊 · 不是引擎缺陷。
-                完整 calibration math 見{" "}
+                場數不到 30 之前,這張圖還看不出名堂 ·
+                任何偏移都可能只是運氣、不是引擎的問題。
+                完整算法見{" "}
                 <Link
                   href="/methodology"
                   className="text-gold underline-offset-4 hover:underline"
                 >
-                  /methodology
+                  方法說明
                 </Link>
                 。
               </p>
@@ -279,32 +262,29 @@ export default async function CalibrationPage() {
 
         {/* ── HOW TO READ · Wave 8 COMPRESSED 6 steps → 4 ── */}
         <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-16 border-t border-line/40 pt-12">
-          <p
-            lang="en"
-            className="font-mono text-gold text-[10px] tracking-[0.45em] mb-8"
-          >
-            / HOW TO READ
+          <p className="font-mono text-gold text-[10px] tracking-[0.45em] mb-8">
+            / 怎麼看這張圖
           </p>
           <div className="space-y-5">
             <ReadingStep
               no="01"
-              title="X 軸 · 引擎賽前 favorite 機率"
-              body="10K Monte Carlo 收斂後 · 賽前鎖定不再改。"
+              title="橫軸 · 引擎賽前看好的成數"
+              body="一萬次模擬收斂後 · 賽前鎖定、不再改。"
             />
             <ReadingStep
               no="02"
-              title="Y 軸 · actual frequency"
-              body="同 x 軸區間 · favorite 真的贏的比例 · 從 cpbl 最終比分 derived。"
+              title="直軸 · 實際真的中的成數"
+              body="同一個成數區間裡 · 看好的那隊真的贏的比例 · 由賽後比分算出。"
             />
             <ReadingStep
               no="03"
-              title="45° 金線 = 完美 · 高於 = under-confident · 低於 = over-confident"
-              body="點偏離 45° 越多 · 引擎這個機率區間越需 calibration。"
+              title="45° 金線 = 完全準 · 在線上方 = 太保守 · 在線下方 = 太自信"
+              body="點離這條線越遠 · 引擎在這個成數區間越需要校正。"
             />
             <ReadingStep
               no="04"
-              title="點大小 = bin sample 數"
-              body="同區間賽越多點越大。N<10 多是雜訊;N≥30 進統計顯著。"
+              title="點越大 = 這個區間累積的場數越多"
+              body="同區間場數越多、點越大。 不到 10 場多半是運氣;滿 30 場才有統計意義。"
             />
           </div>
         </section>
@@ -328,10 +308,7 @@ export default async function CalibrationPage() {
 
         {/* ── PERSONAL VERSION TIMELINE ─────────────── */}
         <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-16 border-t border-line/40 pt-12">
-          <p
-            lang="en"
-            className="font-mono text-gold text-[10px] tracking-[0.45em] mb-6"
-          >
+          <p className="font-mono text-gold text-[10px] tracking-[0.45em] mb-6">
             / 全站 vs 你自己 · 兩層對照
           </p>
           <h2 className="text-2xl sm:text-3xl text-bone font-light tracking-tight mb-6">
@@ -339,43 +316,43 @@ export default async function CalibrationPage() {
           </h2>
           <div className="space-y-5">
             <TimelineRow
-              phase="現在 / GLOBAL"
-              status={n === 0 ? "EMPTY · 等今晚 22:00+ 第一筆" : `N=${n} · 累積中`}
-              body={`所有 ZONE 27 公開預測 → 引擎平均準度。 任何人都看得到 · 不需登入 · 方法公開。 ${
+              phase="現在 · 全站"
+              status={n === 0 ? "還沒有資料 · 等第一場" : `${n} 場 · 累積中`}
+              body={`所有 ZONE 27 公開預測 → 引擎的平均準度。 任何人都看得到 · 不用登入 · 算法公開。 ${
                 n === 0
-                  ? "今晚第一個 dot 落點 · cpbl-260521-01。"
-                  : "git commit 為 source of truth · 任何 ingest 都可以回查。"
+                  ? "第一個落點 · 統一 vs 富邦(2026-05-21)。"
+                  : "賽後逐場登錄 · 任何一場都可以回查。"
               }`}
             />
             <TimelineRow
-              phase="Phase 1 Q3 / PERSONAL"
-              status="等 auth 上線"
-              body="您 follow 的賽事 → 您自己的 calibration drift。 同 schema · 同 SVG · 不同 data subset。 Email + 密碼 auth 已上線 · 您 localStorage 已有的 follow-list 已自動 sync · 您的個人對照圖從登入那天起跳。"
+              phase="登入後 · 你自己"
+              status="登入即啟用"
+              body="你追蹤的賽事 → 你自己的準度怎麼飄。 同一張圖、同一套算法 · 只是換成你的資料。 Email + 密碼登入已上線 · 你這台裝置已追蹤的賽事會自動同步 · 你的個人對照圖從登入那天起跳。"
             />
             <TimelineRow
-              phase="未來 / SOCIAL"
-              status="UNRESOLVED · 待 Tim 拍板"
-              body="是否公開其他會員的準度 · 或排一個「最準會員」榜。 很有爭議 — 一邊是良性競爭,一邊是比慘比過頭。 留給 Tim 拍板 · 不主動推。"
+              phase="未來 · 還沒定"
+              status="待拍板"
+              body="要不要公開其他會員的準度 · 或排一個「最準會員」榜。 很有爭議 — 一邊是良性競爭,一邊是比慘比過頭。 先留著 · 不主動推。"
             />
           </div>
         </section>
 
         <FounderSignOff>
           <p>
-            這頁今天是<strong>empty scaffold</strong> · N=0 ·
-            我們連 platform 級 calibration 都還沒能畫 · 別說個人版。
-            但這是<strong>設計</strong> — diagram 從 N=0 開始 · 第一個 dot
-            今晚 22:00+ 落點 · 不 backfill 不假裝。
+            這頁今天還是<strong>一張空圖</strong> · 一場都還沒結算 ·
+            我們連全站的準度圖都還畫不出來 · 更別說個人版。
+            但這是<strong>故意的</strong> — 圖從零開始 · 第一個落點
+            賽後才會出現 · 不回填、不假裝。
           </p>
           <p>
-            個人版(您 follow 的賽事 · 您自己的 calibration drift)等 Phase 1
-            Q3 auth 上線後接 · 同 SVG · 同 binning math · 只是 data subset
-            不同。 不需 migration · 不需「升級」 · 一直就是這樣設計的。
+            個人版(你追蹤的賽事 · 你自己的準度)登入後就接上 ·
+            同一張圖、同一套算法 · 只是換成你的資料。
+            不用等「升級」 · 一直就是這樣設計的。
           </p>
           <p>
-            這個 page 的存在不是為了比功能多 · 是要講一件事:
-            <strong>ZONE 27 跟其他高端 sports 分析品牌唯一的差別 ·
-            就是這張對照圖。</strong> 我們不藏 drift · 我們把它公開到 visitor
+            這頁的存在不是為了比功能多 · 是要講一件事:
+            <strong>ZONE 27 跟其他分析網站唯一的差別 ·
+            就是這張對照圖。</strong> 我們不藏自己飄掉的地方 · 公開到你
             可以截圖嗆我們的程度。
           </p>
         </FounderSignOff>
@@ -389,13 +366,13 @@ export default async function CalibrationPage() {
               href="/member"
               className="font-mono text-mute hover:text-gold text-[10px] tracking-[0.4em] transition-colors"
             >
-              ← 回 /member 儀表板 preview
+              ← 回會員儀表板
             </Link>
             <Link
               href="/track-record"
               className="font-mono text-mute hover:text-gold text-[10px] tracking-[0.4em] transition-colors"
             >
-              完整 receipt ledger · /track-record →
+              完整公開戰績 →
             </Link>
           </div>
         </section>
@@ -430,14 +407,11 @@ function ReliabilityDiagram({
   return (
     <div className="bg-slate/30 border border-line/60 p-5 sm:p-8">
       <div className="flex items-baseline justify-between mb-4 flex-wrap gap-3">
-        <p
-          lang="en"
-          className="font-mono text-gold text-[10px] tracking-[0.4em]"
-        >
-          / SABERMETRIC RELIABILITY DIAGRAM
+        <p className="font-mono text-gold text-[10px] tracking-[0.4em]">
+          / 引擎說的 vs 實際發生
         </p>
         <p className="font-mono text-mute/70 text-[10px] tracking-[0.3em] tabular">
-          ENGINE v0.2 · {mode === "personal" ? "YOUR" : "GLOBAL"} N = {n}
+          引擎 v0.2 · {mode === "personal" ? "你的" : "全站"} {n} 場
         </p>
       </div>
       <div className="aspect-square max-w-md mx-auto">
@@ -448,8 +422,8 @@ function ReliabilityDiagram({
           role="img"
           aria-label={
             n === 0
-              ? "Reliability diagram scaffold: predicted probability vs actual frequency, currently empty (N=0)"
-              : `Reliability diagram: ${n} finalized matches plotted, engine vs actual frequency`
+              ? "引擎準度對照圖 · 引擎說的成數對上實際中的成數 · 目前還沒有資料"
+              : `引擎準度對照圖 · 已畫上 ${n} 場 · 引擎說的成數對上實際中的成數`
           }
         >
           {/* ── Grid ── */}
@@ -569,7 +543,7 @@ function ReliabilityDiagram({
             textAnchor="middle"
             letterSpacing="2"
           >
-            ENGINE PROBABILITY %
+            引擎看好幾成
           </text>
           <text
             x={px(0) - 30}
@@ -581,7 +555,7 @@ function ReliabilityDiagram({
             letterSpacing="2"
             transform={`rotate(-90 ${px(0) - 30} ${py(50)})`}
           >
-            ACTUAL FREQUENCY %
+            實際中幾成
           </text>
 
           {/* ── Perfect-calibration line label ── */}
@@ -593,18 +567,18 @@ function ReliabilityDiagram({
             fill="#D4AF37"
             letterSpacing="1.5"
           >
-            PERFECT · 45°
+            完全準 · 45°
           </text>
         </svg>
       </div>
       <p className="mt-5 font-mono text-mute/70 text-[10px] tracking-[0.25em] text-center leading-relaxed">
         {n === 0 ? (
           <span>
-            ↗ 金色虛線 = 完美 calibration · empty dots = waiting first data
+            ↗ 金色虛線 = 完全準 · 空心點 = 還沒有資料
           </span>
         ) : (
           <span>
-            ↗ 金色虛線 = 完美 calibration · 金色點 = bin · 大小 ∝ sample
+            ↗ 金色虛線 = 完全準 · 金色點 = 一個成數區間 · 點越大場數越多
           </span>
         )}
       </p>

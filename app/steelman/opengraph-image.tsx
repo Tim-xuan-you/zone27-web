@@ -145,11 +145,11 @@ export default async function SteelmanOgImage() {
             color: BRAND.bone,
           }}
         >
-          <ObjRow num="01" title="Bayesian ensembles 在 12-team CPBL 過擬合" />
-          <ObjRow num="02" title="Park factors 4 場館 estimate 是 noise" />
-          <ObjRow num="03" title="Workload Proxy 命名 = marketing dressed engineering" />
-          <ObjRow num="04" title="「方法公開」 是 commodity · 不是 differentiation" />
-          <ObjRow num="05" title="Pre-launch transparency 是 Pratfall 還是 spinning?" />
+          <ObjRow num="01" title="只有 12 隊的 CPBL · 模型會不會過度配適?" />
+          <ObjRow num="02" title="4 個球場的主場優勢 · 會不會只是雜訊?" />
+          <ObjRow num="03" title="「投球負荷」這名字 · 是包裝還是真功夫?" />
+          <ObjRow num="04" title="「方法公開」誰都能喊 · 算什麼優勢?" />
+          <ObjRow num="05" title="還沒上線就大談公開 · 是真誠還是公關?" />
         </div>
 
         {/* BOTTOM · differentiator */}

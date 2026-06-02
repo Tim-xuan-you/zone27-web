@@ -27,7 +27,7 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
     {
       href: "/cpbl-teams",
       kicker: "cpbl-teams",
-      title: "CPBL 6 球團 投手 aggregation · 球迷 tribal home base",
+      title: "CPBL 6 球團投手總覽 · 你支持的球隊在這",
     },
     {
       href: "/matches",
@@ -83,17 +83,17 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
     {
       href: "/ethics",
       kicker: "ethics",
-      title: "9 binding NOT-DO commitments · 違反 = 紅字永久標",
+      title: "9 條永遠不做的承諾 · 違反 = 紅字永久標",
     },
     {
       href: "/privacy",
       kicker: "privacy",
-      title: "0 tracking · 完整 anti-tracker inventory",
+      title: "0 追蹤 · 完整不追蹤清單",
     },
     {
       href: "/coverage",
       kicker: "coverage",
-      title: "NEVER list · 永遠不涵蓋什麼",
+      title: "永遠不涵蓋什麼",
     },
   ],
   // R164 DELETE /transparency · collapsed into /audit canonical hub per Apple discipline
@@ -106,17 +106,17 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
     {
       href: "/methodology",
       kicker: "methodology",
-      title: "回完整白皮書 · 4 sections + ENGINE LINEUP",
+      title: "回完整白皮書 · 4 章 + 引擎陣容",
     },
     {
       href: "/audit",
       kicker: "audit",
-      title: "Model Report · S05 PRE-COMMIT 同 rules-binding pattern",
+      title: "Model Report · 改規則前先公告 30 天",
     },
     {
       href: "/track-record",
       kicker: "track-record",
-      title: "公開戰績 · per-engine calibration receipts ingest 處",
+      title: "公開戰績 · 每一場賽後收據",
     },
   ],
   "/coverage": [
@@ -176,7 +176,7 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
     {
       href: "/track-record",
       kicker: "track-record",
-      title: "公開戰績 · 倒置 II receipts 的物理證據",
+      title: "公開戰績 · 倒置 II 的物理證據",
     },
     {
       href: "/audit",
@@ -219,17 +219,17 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
     {
       href: "/member/calibration",
       kicker: "member/calibration",
-      title: "您的 personal mirror · 與 global aggregate 對照",
+      title: "你自己的準度 · 跟全站平均對照",
     },
     {
       href: "/calibration",
       kicker: "calibration",
-      title: "Checking Our Work · Brier score 引擎自評",
+      title: "引擎自評 · 公開我們準不準",
     },
     {
       href: "/manifesto",
       kicker: "manifesto",
-      title: "倒置宣言 · 為何公開戰績是品牌 IP",
+      title: "倒置宣言 · 為何公開戰績這麼重要",
     },
   ],
   "/ladder": [
@@ -253,7 +253,7 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
     {
       href: "/track-record",
       kicker: "track-record",
-      title: "PROVED vs DIVERGED 賽事 ledger",
+      title: "PROVED vs DIVERGED 賽事帳本",
     },
     {
       href: "/audit",
@@ -263,7 +263,7 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
     {
       href: "/methodology",
       kicker: "methodology",
-      title: "Brier score + reliability math 完整",
+      title: "準度怎麼算 · 完整公式",
     },
   ],
   "/membership/black-card/ledger": [
@@ -275,53 +275,53 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
     {
       href: "/founders/ledger",
       kicker: "founders/ledger",
-      title: "Founders 27 公開 allocation ledger",
+      title: "Founders 27 公開名額帳本",
     },
     {
       href: "/annual/2026",
       kicker: "annual",
-      title: "Year 0 honest report · 0 paid · NT$ 0 rev",
+      title: "Year 0 誠實報告 · 0 付費 · NT$ 0 營收",
     },
   ],
   "/ethics": [
     {
       href: "/steelman",
       kicker: "steelman",
-      title: "6 strongest objections against ZONE 27",
+      title: "反對 ZONE 27 最強的 6 個論點",
     },
     {
       href: "/audit",
       kicker: "audit",
-      title: "Model Report S05 · Disclosure Philosophy",
+      title: "Model Report · 揭露哲學",
     },
     {
       href: "/coverage",
       kicker: "coverage",
-      title: "00 BRAND BOUNDARY · NEVER list",
+      title: "永遠不做的事 · 品牌界線",
     },
   ],
   "/steelman": [
     {
       href: "/ethics",
       kicker: "ethics",
-      title: "9 binding NOT-DO commitments",
+      title: "9 條永遠不做的承諾",
     },
     {
       href: "/audit",
       kicker: "audit",
-      title: "Model Report S05 · Disclosure Philosophy",
+      title: "Model Report · 揭露哲學",
     },
     {
       href: "/calibration",
       kicker: "calibration",
-      title: "Brier score 引擎自評 · FiveThirtyEight pattern",
+      title: "引擎自評 · 公開我們準不準",
     },
   ],
   "/roadmap": [
     {
       href: "/changelog",
       kicker: "changelog",
-      title: "過去的事實 · git source of truth",
+      title: "過去的事實 · 以 git 為準",
     },
     {
       href: "/manifesto",
@@ -331,7 +331,7 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
     {
       href: "/audit",
       kicker: "audit",
-      title: "Model Report · DISCLOSURE 完整證據",
+      title: "Model Report · 完整揭露證據",
     },
   ],
   "/learn": [
@@ -343,7 +343,7 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
     {
       href: "/methodology",
       kicker: "methodology",
-      title: "完整方法論白皮書 · sabermetric 指標 inline",
+      title: "完整方法論白皮書 · 進階指標逐一解釋",
     },
     {
       href: "/founders",
@@ -381,7 +381,7 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
     {
       href: "/annual/2026",
       kicker: "annual/2026",
-      title: "Year 0 honest report · 0 paid · NT$ 0 rev · empty state pattern",
+      title: "Year 0 誠實報告 · 0 付費 · NT$ 0 營收",
     },
     {
       href: "/founders",
@@ -401,17 +401,17 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
     {
       href: "/changelog",
       kicker: "changelog",
-      title: "過去的事實 · git source of truth",
+      title: "過去的事實 · 以 git 為準",
     },
     {
       href: "/roadmap",
       kicker: "roadmap",
-      title: "未來的承諾 · BRAND BOUNDARIES",
+      title: "未來的承諾 · 品牌界線",
     },
     {
       href: "/manifesto",
       kicker: "manifesto",
-      title: "倒置宣言 · 為什麼當下的工藝也是 brand IP",
+      title: "倒置宣言 · 為什麼當下的工藝也重要",
     },
   ],
   // Round 29 Wave 2 · /member NEW · 3 sibling
@@ -422,17 +422,17 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
     {
       href: "/member/calibration",
       kicker: "calibration",
-      title: "您的 epistemic mirror · sabermetric 45° reliability diagram",
+      title: "你自己的判斷對照圖",
     },
     {
       href: "/membership",
       kicker: "membership",
-      title: "4-tier ladder 全景 · 從匿名到 NT$ 2,700/年",
+      title: "會員全景 · 從免費到 NT$ 2,700/年",
     },
     {
       href: "/manifesto",
       kicker: "manifesto",
-      title: "為什麼 data ownership 是 brand IP 不是 feature",
+      title: "為什麼你的資料屬於你自己",
     },
   ],
   // Round 30 Wave 2B · /member/calibration NEW · 3 sibling: /track-record
@@ -442,17 +442,17 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
     {
       href: "/track-record",
       kicker: "track-record",
-      title: "完整 receipt ledger · diagram data source",
+      title: "完整賽後收據 · 對照圖的資料來源",
     },
     {
       href: "/methodology",
       kicker: "methodology",
-      title: "完整 calibration math 白皮書",
+      title: "準度怎麼算 · 完整白皮書",
     },
     {
       href: "/member",
       kicker: "member",
-      title: "回 4-bias 會員儀表板 preview",
+      title: "回會員儀表板",
     },
   ],
   // Round 30 Wave 5 · /login NEW · Phase 1 magic link auth。 3 sibling:
@@ -462,17 +462,17 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
     {
       href: "/member",
       kicker: "member",
-      title: "註冊後 session 啟動 · /member 變您 dashboard",
+      title: "註冊後 · /member 變你的儀表板",
     },
     {
       href: "/membership",
       kicker: "membership",
-      title: "4-tier ladder 全景 · 為什麼您要註冊",
+      title: "會員全景 · 為什麼你要註冊",
     },
     {
       href: "/privacy",
       kicker: "privacy",
-      title: "我們 0 tracking · email 只用於 login + 通知",
+      title: "我們 0 追蹤 · email 只用於登入 + 通知",
     },
   ],
   // Round 30 Wave 10 · /member/submit NEW · FREE TIER 投稿 · Tim 1/週
@@ -492,7 +492,7 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
     {
       href: "/now",
       kicker: "now",
-      title: "Tim 親手 curate journal · ship cadence transparent",
+      title: "Tim 親手挑選 · 公開更新節奏",
     },
   ],
   // Round 31 Wave S · /founders/ledger NEW · Open Allocation Ledger ·
@@ -509,7 +509,7 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
     {
       href: "/audit",
       kicker: "audit",
-      title: "Model Report · S05 PRE-COMMIT 同 disclosure pattern",
+      title: "Model Report · 改規則前先公告 30 天",
     },
     {
       href: "/manifesto",
@@ -525,7 +525,7 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
     {
       href: "/membership",
       kicker: "membership",
-      title: "4-tier ladder 全景 · 從匿名到 NT$ 2,700/年",
+      title: "會員全景 · 從免費到 NT$ 2,700/年",
     },
     {
       href: "/founders",
@@ -535,7 +535,7 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
     {
       href: "/privacy",
       kicker: "privacy",
-      title: "付款走手動轉帳 · 0 卡號經過我們 · 完整 anti-tracker inventory",
+      title: "付款走手動轉帳 · 0 卡號經過我們 · 完整不追蹤清單",
     },
   ],
   // R164 DELETE /pricing/why · collapsed into /founders + /membership/black-card per Apple discipline
@@ -553,12 +553,12 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
     {
       href: "/founders/ledger",
       kicker: "founders/ledger",
-      title: "Open Allocation Ledger · 公布拒絕原因 + 通過率",
+      title: "公開名額帳本 · 公布拒絕原因 + 通過率",
     },
     {
       href: "/track-record",
       kicker: "track-record",
-      title: "公開戰績 ledger · 此 annual report 的 metric 源頭",
+      title: "公開戰績帳本 · 年度報告的數字來源",
     },
   ],
   // R170 W1 · /rewards RESTORED · Tim 38th 同 mandate explicit Q4 endorsement removes R166 W1 削 reason
@@ -566,17 +566,17 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
     {
       href: "/matches",
       kicker: "matches",
-      title: "今日賽事 · 您 prediction 源頭 · UserPredictionPicker 在這",
+      title: "今日賽事 · 你下預測的地方",
     },
     {
       href: "/member/calibration",
       kicker: "member/calibration",
-      title: "您 personal calibration mirror · PROVED rate breakdown",
+      title: "你自己的準度 · PROVED 比率細項",
     },
     {
       href: "/audit",
       kicker: "audit",
-      title: "Model Report · S05 PRE-COMMIT 同 rules-binding pattern",
+      title: "Model Report · 改規則前先公告 30 天",
     },
   ],
   // R166 W1 · /rewards DELETED · then R170 W1 RESTORED per Tim explicit endorse
@@ -586,17 +586,17 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
     {
       href: "/founders",
       kicker: "founders",
-      title: "Founders 27 銷售頁 · 6 件什麼不買到 + benefits",
+      title: "Founders 27 介紹 · 6 件買不到的東西 + 權益",
     },
     {
       href: "/founders/ledger",
       kicker: "founders/ledger",
-      title: "Public allocation ledger · 5-step rules · 通過率",
+      title: "公開名額帳本 · 5 步規則 · 通過率",
     },
     {
       href: "/annual/2026",
       kicker: "annual/2026",
-      title: "Year 0 honest report · 0 paid · 申請前可 audit 真實狀態",
+      title: "Year 0 誠實報告 · 0 付費 · 申請前可查真實狀態",
     },
   ],
   // R164 DELETE /founders/first-five-minutes · onboarding collapsed into /founders + /audit
@@ -612,17 +612,17 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
     {
       href: "/audit",
       kicker: "audit",
-      title: "Model Report · 7 sections + DISCLOSURE block",
+      title: "Model Report · 7 章 + 揭露區塊",
     },
     {
       href: "/ethics",
       kicker: "ethics",
-      title: "9 binding ethics commitments · canonical source",
+      title: "9 條倫理承諾 · 正式出處",
     },
     {
       href: "/steelman",
       kicker: "steelman",
-      title: "6 strongest objections · self-exposure pattern",
+      title: "反對 ZONE 27 最強的 6 個論點",
     },
   ],
   // R80 W-A · NEW /receipts/[receiptId] dynamic route group · per-receipt
@@ -634,12 +634,12 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
     {
       href: "/track-record",
       kicker: "track-record",
-      title: "全部 receipts ledger · PROVED + DIVERGED 等大列出",
+      title: "全部賽後收據 · PROVED + DIVERGED 等大列出",
     },
     {
       href: "/matches/cpbl-260521-01",
       kicker: "matches",
-      title: "Match page · 完整 7 LIVE LENS CANVAS",
+      title: "賽事頁 · 完整 7 種即時透視",
     },
     {
       href: "/audit",
@@ -654,17 +654,17 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
     {
       href: "/about",
       kicker: "about",
-      title: "Tim singular voice · 7-chapter brand methodology",
+      title: "Tim 親筆 · 七章節品牌方法論",
     },
     {
       href: "/faq",
       kicker: "faq",
-      title: "14 pre-anticipated Qs · monologue · already-known answers",
+      title: "14 個常見問題 · 先想好的誠實回答",
     },
     {
       href: "/integrity",
       kicker: "integrity",
-      title: "22 binding rules · rule #9 mandatory-ledger discipline binding",
+      title: "22 條永遠不變的規則 · 第 9 條:強制公開戰績",
     },
   ],
 };

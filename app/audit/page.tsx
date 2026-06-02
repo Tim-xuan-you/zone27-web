@@ -568,9 +568,9 @@ export default function AuditPage() {
                 miss 還沒發生先 commit handling rule:
               </p>
               <ul className="space-y-2 text-mute text-sm leading-relaxed list-disc pl-6">
-                <li>第一筆 DIVERGED 出現當日 · 該場 receipt 自動 surface
-                  至 <Link href="/" className="text-gold hover:underline underline-offset-4">homepage HeroLiveCard</Link>
-                  /TonightReceiptsCard · 不撤、不藏、不在 7 天內被新 entry 蓋掉</li>
+                <li>第一筆 DIVERGED 出現當日 · 該場收據自動出現
+                  在 <Link href="/" className="text-gold hover:underline underline-offset-4">首頁</Link>
+                  · 不撤、不藏、不在 7 天內被新的蓋掉</li>
                 <li>/track-record ledger 編號不重排 · DIVERGED entry 跟
                   PROVED entry 共用同 sort order(time-based)</li>
                 <li>每筆 DIVERGED 自動帶 git commit permalink 至 lib/matches.ts
@@ -766,8 +766,8 @@ export default function AuditPage() {
               /audit#diverged / /audit#sample-debt / /audit#z27-lexicon。 */}
           <ReportSection no="08" label="Z27 LEXICON">
             <P>
-              5 ZONE 27 自有詞彙 · 在 /track-record · HeroLiveCard · /matches/[gameId] ·
-              /audit 各處出現 · canonical 定義於此。
+              5 個 ZONE 27 自己的用語 · 在公開戰績、首頁、賽事頁、/audit 各處出現 ·
+              完整定義在這裡。
             </P>
             <dl className="mt-6 space-y-5">
               <div id="proved" className="border-l-2 border-gold/60 pl-4 scroll-mt-20">

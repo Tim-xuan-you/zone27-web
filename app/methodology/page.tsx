@@ -544,7 +544,7 @@ repeat 10,000 times → aggregate
           </li>
           <li className="flex gap-3 items-baseline">
             <span className="font-mono text-gold/70 text-[10px] tracking-[0.25em]">▸</span>
-            <span className="flex-1">每 lens 「為什麼這個 angle 重要」 educational explainer · 不止 viz · 是 sabermetric education</span>
+            <span className="flex-1">每 lens 「為什麼這個 angle 重要」 educational explainer · 不止 viz · 是棒球數據教學</span>
           </li>
           <li className="flex gap-3 items-baseline">
             <span className="font-mono text-gold/70 text-[10px] tracking-[0.25em]">▸</span>
@@ -647,8 +647,7 @@ repeat 10,000 times → aggregate
               >
                 /methodology/diff
               </Link>
-              {" "}DEV PREVIEW · production 啟用 awaits N≥30 sample debt
-              close(per /audit S05 PRE-COMMIT)· 不 silently 切換。
+              {" "}目前是開發預覽 · 等滿 30 場才會正式啟用 · 會先公告、不偷偷切換。
             </p>
           </li>
 
@@ -768,7 +767,7 @@ repeat 10,000 times → aggregate
               <strong className="text-bone">Monte Carlo 模擬法</strong> · 隨機
               採樣大量 trial 估算 distribution · Metropolis &amp; Ulam 1949
               (Los Alamos Manhattan Project)首創於物理模擬 · 1990s+ 被
-              sabermetric 社群採用於勝率 / Run Expectancy 估算。
+              進階數據社群採用於勝率 / Run Expectancy 估算。
             </p>
             <p className="mt-1 text-mute/65 text-[12px] font-mono">
               ▸{" "}
@@ -797,7 +796,7 @@ repeat 10,000 times → aggregate
                 [2]
               </span>
               <strong className="text-bone">K/9 · BB/9 · HR/9</strong> · 投手
-              per-9-inning rate stats · 標準 sabermetric 進階指標 · Pete
+              per-9-inning rate stats · 標準進階數據 · Pete
               Palmer / John Thorn <em>The Hidden Game of Baseball</em>{" "}
               (1984)定義原型 · FanGraphs Glossary 為現代 canonical reference。
             </p>
@@ -861,7 +860,7 @@ repeat 10,000 times → aggregate
               </span>
               <strong className="text-bone">N ≥ 30 SAMPLE DEBT 門檻</strong> ·
               小樣本統計學共識 · 30 場 ~= 統計檢定力進入 reliable 區間的最低
-              standard · sabermetric 社群「when do baseball stats stabilize?」
+              standard · 進階數據社群「when do baseball stats stabilize?」
               (Russell A. Carleton, 2008+ ongoing)系列研究確認各 stat 各
               stabilization point · 我們選 30 為跨 stat 保守下限。
             </p>

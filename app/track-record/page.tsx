@@ -142,8 +142,8 @@ export default function TrackRecordPage() {
         </h1>
         <p className="mt-6 text-mute leading-relaxed max-w-2xl">
           ZONE 27 引擎賽前在 <Link href="/matches" className="text-gold underline-offset-4 hover:underline">/matches</Link>
-          {" "}+ <Link href="/" className="text-gold underline-offset-4 hover:underline">首頁 HeroLiveCard</Link>
-          {" "}公開鎖定一個機率分布(N=10K Monte Carlo)。
+          {" "}+ <Link href="/" className="text-gold underline-offset-4 hover:underline">首頁</Link>
+          {" "}公開鎖定一個機率分布(一萬次模擬)。
           賽後 Tim 親手截圖最終比分 → 解析後加進此表 →{" "}
           <span className="text-bone">PROVED ✓ 跟 DIVERGED ✕ 等大等亮列出</span>,
           不藏、不修飾、不重新加權。

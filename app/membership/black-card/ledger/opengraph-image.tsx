@@ -171,7 +171,7 @@ export default async function BlackCardLedgerOgImage() {
               maxWidth: 720,
             }}
           >
-            Most SaaS hide subscriber counts. We publish 0. Aronson 1966.
+            別的訂閱制都藏會員數 · 我們公開:目前 0。
           </span>
           <span
             style={{

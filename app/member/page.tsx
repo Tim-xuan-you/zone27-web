@@ -204,11 +204,14 @@ export default async function MemberPage() {
           )}
         </section>
 
-        {/* 4 · 一行升級(不推銷 · 純資訊)─────────────── */}
+        {/* 4 · 一行賣分析入口(不推銷 · 直接指到能發文的地方)──────── */}
         <p className="mt-10 text-center font-mono text-mute/55 text-[10px] tracking-[0.2em] leading-relaxed">
-          想賣分析抽成 · 投票決定引擎版本?{" "}
-          <Link href="/membership" className="text-gold/70 hover:text-gold underline-offset-4 hover:underline">
-            看會員方案 →
+          想把你的分析標價賣?平台抽 5-10% · 你拿 90-95%{" "}
+          <Link
+            href={tonight.length > 0 ? `/matches/${tonight[0].id}#say` : "/matches"}
+            className="text-gold/70 hover:text-gold underline-offset-4 hover:underline"
+          >
+            去發一篇 →
           </Link>
         </p>
       </main>

@@ -10,8 +10,7 @@ import { BRAND, OG_SIZE, OG_CONTENT_TYPE } from "@/lib/brand";
 
 export const size = OG_SIZE;
 export const contentType = OG_CONTENT_TYPE;
-export const alt =
-  "ZONE 27 · /member · FREE TIER member dashboard preview · psychology-driven";
+export const alt = "ZONE 27 · 你的會員儀表板";
 
 export default async function MemberOgImage() {
   return new ImageResponse(
@@ -136,10 +135,10 @@ export default async function MemberOgImage() {
             alignItems: "flex-start",
           }}
         >
-          <BiasChip label="ENDOWMENT" zh="您的 data" />
-          <BiasChip label="IKEA" zh="您 vote · 您建造" />
-          <BiasChip label="LOSS" zh="離開 = 失去 history" />
-          <BiasChip label="COLLECTION" zh="個人 calibration trophy" />
+          <BiasChip label="你的資料" zh="只在你手上" />
+          <BiasChip label="你親手押的" zh="你投票 · 你決定" />
+          <BiasChip label="你的戰績" zh="離開就帶不走" />
+          <BiasChip label="你的準度蒐藏" zh="一場一場累積" />
         </div>
 
         <div
@@ -161,7 +160,7 @@ export default async function MemberOgImage() {
               display: "flex",
             }}
           >
-            Member stickiness is data ownership, not features.
+            黏住會員的是「資料屬於你」· 不是功能。
           </span>
           <span
             style={{

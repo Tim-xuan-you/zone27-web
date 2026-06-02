@@ -229,7 +229,7 @@ export const COMMAND_ITEMS: CommandItem[] = [
   },
   // R167 W1b · /signal-board DELETED · daily promise we don't keep(violates [[feedback-no-waiting-rule]] same as /rewards Q4 vapor)· per Agent P TIER B #7 + Tim canary 3 · Cmd-K entry removed
   {
-    label: "CPBL 投手排行 · 6 stat tabs · URL-shareable",
+    label: "CPBL 投手排行 · 6 項數據 · 可分享連結",
     kicker: "/cpbl-pitchers",
     path: "/cpbl-pitchers",
     group: "賽事 · 引擎",
@@ -302,7 +302,7 @@ export const COMMAND_ITEMS: CommandItem[] = [
     ],
   },
   {
-    label: "CPBL 6 隊伍 投手 aggregation · 球迷 tribal home base",
+    label: "CPBL 6 隊投手總覽 · 你支持的球隊在這",
     kicker: "/cpbl-teams",
     path: "/cpbl-teams",
     group: "賽事 · 引擎",
@@ -386,7 +386,7 @@ export const COMMAND_ITEMS: CommandItem[] = [
     keywords: ["roadmap", "路線圖", "未來", "永遠不做"],
   },
   {
-    label: "Changelog · git source of truth",
+    label: "版本紀錄 · 以 git 為準",
     kicker: "/changelog",
     path: "/changelog",
     group: "品牌 IP",
@@ -414,7 +414,7 @@ export const COMMAND_ITEMS: CommandItem[] = [
     keywords: ["methodology", "技術", "白皮書", "whitepaper"],
   },
   {
-    label: "公開戰績 · PROVED vs DIVERGED ledger",
+    label: "公開戰績 · PROVED vs DIVERGED 帳本",
     kicker: "/track-record",
     path: "/track-record",
     group: "信任文件",
@@ -443,14 +443,14 @@ export const COMMAND_ITEMS: CommandItem[] = [
     ],
   },
   {
-    label: "Calibration · epistemic mirror · reliability diagram",
+    label: "引擎自評 · 準不準一目了然",
     kicker: "/calibration",
     path: "/calibration",
     group: "信任文件",
     keywords: ["calibration", "brier", "校準", "538", "tetlock"],
   },
   {
-    label: "Integrity · 22 永久不會變 · Berkshire 1996",
+    label: "誠信 · 22 條永遠不變",
     kicker: "/integrity",
     path: "/integrity",
     group: "信任文件",
@@ -470,7 +470,7 @@ export const COMMAND_ITEMS: CommandItem[] = [
     ],
   },
   {
-    label: "Interact · 10 reader↔writer channels · one-way by design",
+    label: "互動 · 怎麼跟我們說話",
     kicker: "/interact",
     path: "/interact",
     group: "信任文件",
@@ -520,14 +520,14 @@ export const COMMAND_ITEMS: CommandItem[] = [
     ],
   },
   {
-    label: "Ethics · 9 binding NOT-DO commitments",
+    label: "倫理 · 9 條永遠不做的承諾",
     kicker: "/ethics",
     path: "/ethics",
     group: "信任文件",
     keywords: ["ethics", "policy", "倫理", "承諾", "stratechery", "binding"],
   },
   {
-    label: "Steelman · 反 ZONE 27 最強 6 個論證",
+    label: "最強反方 · 反 ZONE 27 的 6 個論點",
     kicker: "/steelman",
     path: "/steelman",
     group: "信任文件",
@@ -561,14 +561,14 @@ export const COMMAND_ITEMS: CommandItem[] = [
     ],
   },
   {
-    label: "覆蓋範圍 · NEVER 清單",
+    label: "覆蓋範圍 · 永遠不做清單",
     kicker: "/coverage",
     path: "/coverage",
     group: "信任文件",
     keywords: ["coverage", "覆蓋", "範圍", "scope", "never"],
   },
   {
-    label: "隱私政策 · 0 trackers",
+    label: "隱私政策 · 0 追蹤",
     kicker: "/privacy",
     path: "/privacy",
     group: "信任文件",
@@ -609,7 +609,7 @@ export const COMMAND_ITEMS: CommandItem[] = [
     ],
   },
   {
-    label: "申請 Founders 27 · Patek-style · Tim 親手 review",
+    label: "申請 Founders 27 · 創始席位 · Tim 親手審核",
     kicker: "/founders/apply",
     path: "/founders/apply",
     group: "轉換",
@@ -625,7 +625,7 @@ export const COMMAND_ITEMS: CommandItem[] = [
   },
   // R167 W1a · /leaderboard DELETED · Tim canary 3「每個網頁滑不到底 · 大部分不必要」 · per Agent P TIER A #3 · Cmd-K entry removed · 「席位」 keyword now points to /founders/ledger
   {
-    label: "Open Allocation Ledger · 公開拒絕原因 · 4 axiom",
+    label: "公開名額帳本 · 連被拒的原因都貼出來",
     kicker: "/founders/ledger",
     path: "/founders/ledger",
     group: "轉換",
@@ -654,7 +654,7 @@ export const COMMAND_ITEMS: CommandItem[] = [
     ],
   },
   {
-    label: "會員制 · 4-tier ladder 總覽",
+    label: "會員制 · 會員全景",
     kicker: "/membership",
     path: "/membership",
     group: "轉換",
@@ -690,14 +690,14 @@ export const COMMAND_ITEMS: CommandItem[] = [
 
   // ── 工具 · 外部 ────────────────────────────────────
   {
-    label: "Member · 您的引擎時間軸",
+    label: "會員 · 你的引擎時間軸",
     kicker: "/member",
     path: "/member",
     group: "工具 · 外部",
     keywords: ["member", "dashboard", "會員頁", "個人", "時間軸"],
   },
   {
-    label: "Login · Email + 密碼 · FREE TIER",
+    label: "登入 · Email + 密碼 · 免費會員",
     kicker: "/login",
     path: "/login",
     group: "工具 · 外部",
@@ -729,7 +729,7 @@ export const COMMAND_ITEMS: CommandItem[] = [
     // per [[feedback-zone27-tier-dogfood-method]] memory codify · DO NOT rebuild · DO NOT
     // create separate accounts · ONLY surface existing infrastructure。 安全:per R113 W1
     // Kerckhoffs' principle · client-side spoofable but 0 risk · 0 paid features built。
-    label: "🎭 Designer · 切換 tier preview(設計者 dogfood 工具)",
+    label: "🎭 設計者 · 切換會員視角(設計者預覽工具)",
     kicker: "/admin",
     path: "/admin",
     group: "工具 · 外部",

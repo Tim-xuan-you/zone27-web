@@ -143,7 +143,7 @@ export default function LearnPage() {
           <ChapterFooter
             cta="完整方法論白皮書 →"
             href="/methodology"
-            note="ERA · WHIP · OPS · BABIP · wRC+ · sabermetric 指標 inline 解釋"
+            note="ERA · WHIP · OPS · BABIP · wRC+ · 進階指標逐一解釋"
           />
         </Chapter>
 

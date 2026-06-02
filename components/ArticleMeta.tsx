@@ -37,37 +37,27 @@ export default function ArticleMeta({ readingMin, sample }: Props) {
   return (
     <div
       className="font-mono text-mute/70 text-[10px] tracking-[0.3em] tabular flex flex-wrap items-center gap-x-5 gap-y-2"
-      aria-label="文章 metadata"
+      aria-label="文章資訊"
     >
       <span aria-label={`預計閱讀時間 ${readingMin} 分鐘`}>
         <span aria-hidden="true" className="text-gold/60">▌</span>{" "}
-        <span lang="en">{readingMin} MIN READ</span> · 閱讀 {readingMin} 分鐘
+        閱讀 {readingMin} 分鐘
       </span>
       {sample !== undefined && (
         <span
           className={belowThreshold ? "text-loss/80" : "text-bone/80"}
-          title="Z27 LEXICON · SAMPLE DEBT — N < 30 時 PROVED rate 受 sample bias 影響大 · 任何百分比皆需打折判讀"
+          title="場數不到 30 時 · 命中率受小樣本影響很大 · 任何百分比都要打折看"
         >
           <span aria-hidden="true" className="text-gold/60">▌</span>{" "}
-          N ={" "}
+          已{" "}
           <span className={belowThreshold ? "text-loss" : "text-bone"}>
             {sample.current}
-          </span>
+          </span>{" "}
+          場
           {belowThreshold ? (
-            <>
-              {" "}·{" "}
-              <span lang="en">SAMPLE DEBT</span> {sampleDeficit}{" "}
-              <span lang="en" className="text-mute/60">
-                BEFORE STATISTICAL
-              </span>
-            </>
+            <> · 還差 {sampleDeficit} 場才夠 30</>
           ) : (
-            <>
-              {" "}·{" "}
-              <span lang="en" className="text-bone/70">
-                STATISTICALLY MEANINGFUL
-              </span>
-            </>
+            <> · 樣本足夠</>
           )}
         </span>
       )}

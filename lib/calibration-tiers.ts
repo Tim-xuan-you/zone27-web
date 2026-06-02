@@ -70,10 +70,8 @@ export type CalibrationTier = {
   brierMax: number | null;
   /** Max reliability error in any of 5 bins · null = not yet checked */
   reliabilityErrorMax: number | null;
-  /** Tier description · 給 visitor 看「我為什麼是這個 tier」 */
+  /** Tier description · 給 visitor 看「我為什麼是這個級別」· 球迷白話 */
   description: string;
-  /** Tier rationale · cite 研究依據 · per brand IP 方法公開 */
-  source: string;
 };
 
 /**
@@ -93,9 +91,7 @@ export const CALIBRATION_TIERS: CalibrationTier[] = [
     brierMax: null,
     reliabilityErrorMax: null,
     description:
-      "您還沒累積足夠 picks(< 10)· honest「不夠 sample」 stage · 不假裝 calibration · brand IP「方法公開」 物理 codify 從 Observer 開始。",
-    source:
-      "Bill James N≥30 sabermetric convention + Tetlock baseline · 「沒 sample 不 claim」 axiom",
+      "你還沒累積足夠的場數(不到 10 場結算)。 場數太少,準度數字還不作數 — 我們不會假裝你已經很準。 先去押幾場,結算後再回來看。",
   },
   {
     id: 1,
@@ -105,9 +101,7 @@ export const CALIBRATION_TIERS: CalibrationTier[] = [
     brierMax: 0.3,
     reliabilityErrorMax: null,
     description:
-      "10+ picks · Brier < 0.30 · 您已 beat coin-flip baseline。 但還沒到 Tetlock ordinary forecaster benchmark · 持續累積。",
-    source:
-      "Brier 1950 baseline · coin-flip Brier = 0.25 · 0.30 是「稍好過 guess」 entry",
+      "已結算 10 場以上 · 你開始比「隨便猜」準了。 繼續累積,看你說的把握程度撐不撐得住。",
   },
   {
     id: 2,
@@ -117,9 +111,7 @@ export const CALIBRATION_TIERS: CalibrationTier[] = [
     brierMax: 0.25,
     reliabilityErrorMax: null,
     description:
-      "30+ picks · Brier < 0.25 · 您達到 Tetlock 5000 ordinary forecaster benchmark(mean Brier ~0.25)。 + 3 次「我錯了」 honest admission(自我 reset trend claim)。",
-    source:
-      "Tetlock 2015 ordinary forecaster mean Brier ~0.25 · 加 humility gate",
+      "已結算 30 場以上,而且你說有把握的時候多半真的中。 這是一般人能到的平均水準 — 沒那麼容易。",
   },
   {
     id: 3,
@@ -129,9 +121,7 @@ export const CALIBRATION_TIERS: CalibrationTier[] = [
     brierMax: 0.22,
     reliabilityErrorMax: 0.05,
     description:
-      "60+ picks · Brier < 0.22 · Reliability error < 0.05 在 3+ confidence bins。 您 confidence 對齊 actual outcome ±5pp · Murphy 1973 reliability axis 達標 · 不只 Brier 而已。",
-    source:
-      "Murphy 1973 reliability decomposition · 不止 raw Brier · 要 bin-level alignment",
+      "已結算 60 場以上 · 你說「六成把握」的時候,大概就真的中六成 — 你的把握跟結果對得上,誤差很小。 不只是押得準,是「知道自己有多準」。",
   },
   {
     id: 4,
@@ -141,9 +131,7 @@ export const CALIBRATION_TIERS: CalibrationTier[] = [
     brierMax: 0.2,
     reliabilityErrorMax: 0.05,
     description:
-      "100+ picks · Brier < 0.20 · last-30 drift < 0.03。 您達到 Tetlock top-2% Superforecaster threshold(Brier < 0.25 ordinary · top 2% < 0.20)· 5,000 人中前 100。 此 tier 物理稀缺。",
-    source:
-      "Tetlock 2015 top 2% Superforecaster threshold · Mellers et al. PoPS 10(3):267",
+      "已結算 100 場以上,而且準度穩定不飄。 這個水準,大概一百個人裡才出兩三個 — 很稀有。",
   },
   {
     id: 5,
@@ -153,9 +141,7 @@ export const CALIBRATION_TIERS: CalibrationTier[] = [
     brierMax: 0.18,
     reliabilityErrorMax: 0.04,
     description:
-      "270+ picks(brand-aligned 27 number)· Brier < 0.18 · 0 unflagged N<30 trend claims(自律 sample-patience · 沒在 small N 早 claim trend)。 ZONE 27 brand-aligned highest tier。",
-    source:
-      "Tetlock retained Superforecaster · 70% year-over-year retention rate = skill not luck",
+      "已結算 270 場以上(呼應 ZONE 27 的 27)· 而且你從不在場數不夠時就先喊「我看得很準」。 這是站上最高的一級。",
   },
   {
     id: 6,
@@ -165,9 +151,7 @@ export const CALIBRATION_TIERS: CalibrationTier[] = [
     brierMax: 0.18,
     reliabilityErrorMax: 0.04,
     description:
-      "Tier 5 維持 12 個月 · 持續 calibration discipline · 不只一次 spike 而是 sustained mastery。 Good Judgment Project 70% Superforecaster 一年後仍維持 status = 確認 skill·不是運氣。",
-    source:
-      "Good Judgment Project · 70% Superforecaster YoY retention(Mellers/Tetlock 2015)",
+      "最高一級維持滿一年 · 不是一時手熱,是長期都這麼穩。 證明是真本事,不是運氣。",
   },
 ];
 

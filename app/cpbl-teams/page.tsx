@@ -18,7 +18,7 @@ import {
 export const metadata: Metadata = {
   title: "CPBL 6 隊伍 投手 aggregation · ZONE 27",
   description:
-    "中華職棒 6 個球團投手 sabermetric 進階指標 aggregation pages · 富邦悍將 + 統一7-ELEVEn獅 + 中信兄弟 + 樂天桃猿 + 味全龍 + 台鋼雄鷹 · 球迷 tribal home base · Trackman radar league-wide aggregate · 資料來自 stats.cpbl.com.tw 公開 box score · 0 付費 API。",
+    "中華職棒 6 個球團投手進階數據 aggregation pages · 富邦悍將 + 統一7-ELEVEn獅 + 中信兄弟 + 樂天桃猿 + 味全龍 + 台鋼雄鷹 · 球迷 tribal home base · Trackman radar league-wide aggregate · 資料來自 stats.cpbl.com.tw 公開 box score · 0 付費 API。",
   openGraph: {
     title: "CPBL 6 隊伍 投手 aggregation · ZONE 27",
     description:

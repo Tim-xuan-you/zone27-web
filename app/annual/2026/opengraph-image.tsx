@@ -25,7 +25,7 @@ import {
 export const size = OG_SIZE;
 export const contentType = OG_CONTENT_TYPE;
 export const alt =
-  "ZONE 27 · Annual Report 2026 Year 0 · 0 paid subs · NT$ 0 revenue · honest pre-launch state · 4 brand IP axiom 同時 fire";
+  "ZONE 27 · 2026 年度報告 · 第 0 年 · 0 付費會員 · 0 營收 · 誠實的上線前狀態";
 
 export default async function AnnualReportOgImage() {
   const forged = FOUNDERS_CLAIMED;

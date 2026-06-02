@@ -77,178 +77,95 @@ export default function CalibrationTierBadge() {
   }
 
   const { state } = mountState;
-  const { tier, nFinalized, brierLifetime, brierLast30, maxBinReliabilityError, pratfallBin } = state;
+  const { tier, nFinalized, pratfallBin } = state;
 
-  // Observer state(N < 10)· honest「沒 sample」 UI · 不假裝 progress
+  // 還沒夠場數 · 誠實說「還不作數」· 不假裝
   if (tier.id === 0) {
     return (
       <div className="bg-slate/40 border border-line/70 p-5 sm:p-6">
-        <p
-          lang="en"
-          className="font-mono text-gold/85 text-[10px] tracking-[0.4em] mb-3"
-        >
-          / TIER 00 · OBSERVER
+        <p className="font-mono text-gold/85 text-[10px] tracking-[0.3em] mb-3">
+          你的準度級別
         </p>
         <h3 className="text-2xl text-bone font-light tracking-tight mb-2">
-          觀測者 · 還沒累積 sample
+          {tier.name} · 還沒開始累積
         </h3>
         <p className="text-mute/85 text-sm leading-relaxed mb-4">
-          您目前有{" "}
-          <strong className="text-bone tabular">{nFinalized}</strong>{" "}
-          場 finalized picks · 還未達 N=10 enter「校準學徒」 tier。
-          honest「不夠 sample」 state · 不假裝 calibration · brand IP
-          「方法公開」 從 Observer 開始。
+          {tier.description}
         </p>
         <p className="font-mono text-mute/70 text-[10px] tracking-[0.3em]">
-          下個 tier(校準學徒)· 還需{" "}
+          再{" "}
           <span className="text-gold">{Math.max(0, 10 - nFinalized)}</span>{" "}
-          場 finalized picks
+          場結算 · 就進下一級「校準學徒」
         </p>
         <p className="mt-4 text-mute/70 text-xs leading-relaxed">
-          想開始累積 picks?{" "}
+          想開始累積?{" "}
           <Link
             href="/matches"
             className="text-gold underline-offset-4 hover:underline"
           >
-            /matches · 選一場 CPBL 對戰
+            去市場看板選一場 CPBL
           </Link>
-          {" "}· anonymous pick · localStorage only · 0 server · 0 PII
+          {" "}· 不用註冊 · 只存這台裝置 · 不傳伺服器
         </p>
       </div>
     );
   }
 
-  // Active tier display
+  // 已上級 · 等級 + 結算場數 + 誠實的「最容易高估的地方」+ 下一級
   const tierClass = tier.id >= 4 ? "border-gold/60 bg-gold/5 glow-soft" : "border-gold/40 bg-slate/40";
   const tierColor = tier.id >= 4 ? "text-gold" : "text-bone";
+  const nextTier = tier.id < 6 ? CALIBRATION_TIERS[tier.id + 1] : null;
 
   return (
     <div className={`border p-5 sm:p-6 ${tierClass}`} role="status">
-      <p
-        lang="en"
-        className="font-mono text-gold/85 text-[10px] tracking-[0.4em] mb-3"
-      >
-        / TIER {String(tier.id).padStart(2, "0")} · {tier.en}
+      <p className="font-mono text-gold/85 text-[10px] tracking-[0.3em] mb-3">
+        你的準度級別 · 已結算 {nFinalized} 場
       </p>
-      <h3 className={`text-2xl sm:text-3xl font-light tracking-tight mb-3 ${tierColor}`}>
+      <h3 className={`text-2xl sm:text-3xl font-light tracking-tight mb-4 ${tierColor}`}>
         {tier.name}
       </h3>
 
-      {/* Stats grid · 4 key metrics */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-5 font-mono text-[10px] tracking-[0.2em]">
-        <StatCell
-          label="PICKS FINALIZED"
-          value={String(nFinalized)}
-          tone="bone"
-        />
-        <StatCell
-          label="BRIER LIFETIME"
-          value={brierLifetime.toFixed(3)}
-          tone={brierLifetime < 0.25 ? "gold" : "mute"}
-          help="Brier 1950 · strictly proper · 0=完美 · 0.25=ordinary · <0.20=top 2%"
-        />
-        <StatCell
-          label="BRIER LAST-30"
-          value={nFinalized >= 30 ? brierLast30.toFixed(3) : "—"}
-          tone={nFinalized >= 30 && brierLast30 < 0.25 ? "gold" : "mute"}
-          help="last 30 picks rolling Brier · drift signal"
-        />
-        <StatCell
-          label="RELIABILITY ERR"
-          value={maxBinReliabilityError < 1 ? maxBinReliabilityError.toFixed(3) : "—"}
-          tone={maxBinReliabilityError < 0.05 ? "gold" : "mute"}
-          help="Murphy 1973 reliability · max bin error · <0.05=excellent"
-        />
-      </div>
-
-      {/* Pratfall surface · honest over-confidence display */}
+      {/* 誠實照出最容易高估自己的地方 · 不藏 */}
       {pratfallBin && (
         <div className="bg-loss/[0.06] border-l-2 border-loss/40 px-4 py-3 mb-5">
-          <p
-            lang="en"
-            className="font-mono text-loss/85 text-[9px] tracking-[0.35em] mb-1.5"
-          >
-            ⚠ PRATFALL · OVER-CONFIDENCE DETECTED
+          <p className="text-bone text-[13px] tracking-wide mb-1.5">
+            你最容易{pratfallBin.errorPp > 0 ? "高估" : "低估"}自己的地方
           </p>
           <p className="text-mute/90 text-[13px] leading-relaxed">
-            您在{" "}
+            引擎開盤落在{" "}
             <strong className="text-bone">{pratfallBin.range}</strong>{" "}
-            confidence bucket · 命中率僅{" "}
+            的那些場 · 你押中的比例是{" "}
             <strong className="text-bone tabular">{pratfallBin.observed.toFixed(0)}%</strong>{" "}
             ·{" "}
             <span className={pratfallBin.errorPp > 0 ? "text-loss/85" : "text-gold/85"}>
-              {pratfallBin.errorPp > 0 ? "過自信" : "過保守"}{" "}
-              {Math.abs(pratfallBin.errorPp).toFixed(0)} pp
+              比帳面{pratfallBin.errorPp > 0 ? "低" : "高"}了{" "}
+              {Math.abs(pratfallBin.errorPp).toFixed(0)} 個百分點
             </span>
-            。 honest mirror · per Pratfall axiom · 不藏。
+            。 連這個我們都照實顯示。
           </p>
         </div>
       )}
 
-      {/* Tier rationale + research backing */}
-      <p className="text-mute/90 text-[13px] sm:text-sm leading-relaxed mb-3">
+      {/* 這一級代表什麼 · 球迷白話 */}
+      <p className="text-mute/90 text-[13px] sm:text-sm leading-relaxed mb-4">
         {tier.description}
       </p>
-      <p className="font-mono text-mute/70 text-[10px] tracking-[0.25em] leading-relaxed mb-4">
-        ⚓ source · {tier.source}
-      </p>
 
-      {/* Next tier hint(if not max tier)*/}
-      {tier.id < 6 && (
+      {/* 下一級 */}
+      {nextTier && (
         <div className="pt-4 border-t border-line/40">
-          <p className="font-mono text-mute/80 text-[10px] tracking-[0.3em] mb-1">
-            NEXT TIER · {CALIBRATION_TIERS[tier.id + 1].en}
-          </p>
           <p className="text-mute/85 text-[13px] leading-relaxed">
-            {CALIBRATION_TIERS[tier.id + 1].name}({CALIBRATION_TIERS[tier.id + 1].en})·
-            need N ≥ <strong className="text-bone tabular">{CALIBRATION_TIERS[tier.id + 1].nMin}</strong>
-            {CALIBRATION_TIERS[tier.id + 1].brierMax !== null && (
-              <>
-                {" "}+ Brier &lt;{" "}
-                <strong className="text-bone tabular">
-                  {CALIBRATION_TIERS[tier.id + 1].brierMax}
-                </strong>
-              </>
-            )}
-            {CALIBRATION_TIERS[tier.id + 1].reliabilityErrorMax !== null && (
-              <>
-                {" "}+ reliability error &lt;{" "}
-                <strong className="text-bone tabular">
-                  {CALIBRATION_TIERS[tier.id + 1].reliabilityErrorMax}
-                </strong>
-              </>
-            )}
+            下一級「<strong className="text-bone">{nextTier.name}</strong>」· 還需累積到{" "}
+            <strong className="text-bone tabular">{nextTier.nMin}</strong> 場結算
+            {nextTier.brierMax !== null && <>,而且你說的把握要更貼近結果</>}。
           </p>
         </div>
       )}
 
-      {/* Anti-leaderboard guard reminder · brand IP 物理 codify */}
-      <p className="mt-4 pt-4 border-t border-line/40 font-mono text-mute/60 text-[9px] tracking-[0.3em] leading-relaxed">
-        🔒 此 tier 純 private mirror · localStorage only · 0 server · 0 social
-        leaderboard · per Hanus & Fox 2015(badges + public ranking REDUCED
-        intrinsic motivation)· brand IP 物理 codify
+      {/* 只有自己看得到 · 不上排行榜 */}
+      <p className="mt-4 pt-4 border-t border-line/40 text-mute/60 text-[11px] leading-relaxed">
+        這個級別只有你自己看得到 · 只存這台裝置 · 不跟別人比、也不會上任何排行榜。
       </p>
-    </div>
-  );
-}
-
-function StatCell({
-  label,
-  value,
-  tone,
-  help,
-}: {
-  label: string;
-  value: string;
-  tone: "bone" | "gold" | "mute";
-  help?: string;
-}) {
-  const valueColor =
-    tone === "gold" ? "text-gold" : tone === "bone" ? "text-bone" : "text-mute";
-  return (
-    <div title={help}>
-      <p className="text-mute/70 mb-1">{label}</p>
-      <p className={`text-base sm:text-lg tabular ${valueColor}`}>{value}</p>
     </div>
   );
 }

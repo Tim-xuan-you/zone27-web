@@ -20,7 +20,7 @@ import { BRAND, OG_SIZE, OG_CONTENT_TYPE } from "@/lib/brand";
 
 export const size = OG_SIZE;
 export const contentType = OG_CONTENT_TYPE;
-export const alt = "ZONE 27 · Checking Our Work · Engine self-grading + Brier score";
+export const alt = "ZONE 27 · 引擎自評 · 公開我們準不準";
 
 export default async function CalibrationOgImage() {
   return new ImageResponse(
@@ -77,7 +77,7 @@ export default async function CalibrationOgImage() {
               display: "flex",
             }}
           >
-            CHECKING OUR WORK · BRIER
+            引擎自評 · 公開準不準
           </span>
         </div>
 
@@ -98,7 +98,7 @@ export default async function CalibrationOgImage() {
               display: "flex",
             }}
           >
-            ENGINE SELF-GRADING
+            引擎準度公開
           </span>
           <span
             style={{
@@ -128,19 +128,20 @@ export default async function CalibrationOgImage() {
           }}
         />
 
-        {/* DATA ROW · Brier baseline */}
-        <div
+        {/* SUBTITLE · 球迷白話 */}
+        <span
           style={{
-            display: "flex",
-            justifyContent: "space-between",
-            gap: 24,
+            fontSize: 26,
+            color: "rgba(245,242,234,0.72)",
+            letterSpacing: "0.02em",
+            lineHeight: 1.5,
             marginTop: 8,
+            display: "flex",
+            maxWidth: 900,
           }}
         >
-          <BrierBox label="ENGINE v0.2" value="—" sub="N=0 · WAITING" gold />
-          <BrierBox label="COIN-FLIP BASELINE" value="0.250" sub="0 info · perfect null" />
-          <BrierBox label="PERFECT FORECAST" value="0.000" sub="impossible boundary" />
-        </div>
+          引擎賽前說的成數 · 賽後實際中的成數 · 一張圖攤開讓你看。
+        </span>
 
         {/* BOTTOM · differentiator */}
         <div
@@ -163,7 +164,7 @@ export default async function CalibrationOgImage() {
               maxWidth: 720,
             }}
           >
-            Tipster sites can&apos;t publish this page. We can. We do.
+            明牌站不敢做這頁。我們敢,而且做了。
           </span>
           <span
             style={{
@@ -180,67 +181,5 @@ export default async function CalibrationOgImage() {
       </div>
     ),
     { ...size }
-  );
-}
-
-function BrierBox({
-  label,
-  value,
-  sub,
-  gold = false,
-}: {
-  label: string;
-  value: string;
-  sub: string;
-  gold?: boolean;
-}) {
-  return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "flex-start",
-        gap: 8,
-        flex: 1,
-        padding: 24,
-        border: gold
-          ? "1px solid rgba(212,175,55,0.6)"
-          : "1px solid rgba(138,147,168,0.3)",
-        background: gold ? "rgba(212,175,55,0.06)" : "rgba(245,242,234,0.02)",
-      }}
-    >
-      <span
-        style={{
-          color: "rgba(245,242,234,0.55)",
-          letterSpacing: "0.22em",
-          fontSize: 12,
-          display: "flex",
-        }}
-      >
-        {label}
-      </span>
-      <span
-        style={{
-          color: gold ? BRAND.gold : BRAND.bone,
-          fontSize: 52,
-          fontWeight: 300,
-          letterSpacing: "-0.02em",
-          lineHeight: 1,
-          display: "flex",
-        }}
-      >
-        {value}
-      </span>
-      <span
-        style={{
-          color: "rgba(245,242,234,0.5)",
-          fontSize: 11,
-          letterSpacing: "0.18em",
-          display: "flex",
-        }}
-      >
-        {sub}
-      </span>
-    </div>
   );
 }

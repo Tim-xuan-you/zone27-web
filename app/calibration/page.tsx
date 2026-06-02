@@ -5,14 +5,13 @@ import Footer from "@/components/Footer";
 import RelatedReading from "@/components/RelatedReading";
 import FounderSignOff from "@/components/FounderSignOff";
 import ArticleMeta from "@/components/ArticleMeta";
-import ReproducibilityReceipt from "@/components/ReproducibilityReceipt";
 import AnonCalibrationStrip from "@/components/AnonCalibrationStrip";
 import { getFinalizedMatches, type Match } from "@/lib/matches";
 
 export const metadata: Metadata = {
-  title: "Checking Our Work · ZONE 27 引擎自評",
+  title: "引擎自評 · ZONE 27 公開準不準",
   description:
-    "ZONE 27 引擎自評。 引擎賽前說 X% · 賽後實際贏 Y% · Brier score + reliability diagram + coin-flip baseline 對照。 我們公開自己的準度 · 明牌站不會這樣做 · 因為一公開就會暴露他們嘴上的勝率和實際差很多。",
+    "ZONE 27 引擎自評。 引擎賽前說幾成 · 賽後實際中幾成 · 一張圖攤開讓你看。 我們公開自己準不準 · 明牌站不會這樣做 · 因為一公開就會暴露他們嘴上的勝率和實際差很多。",
 };
 
 // ── ZONE 27 · /calibration ──────────────────────────────
@@ -96,46 +95,10 @@ function computeBins(finalized: Match[]): Bin[] {
     .sort((a, b) => a.centerPct - b.centerPct);
 }
 
-// ── Brier score · Tetlock currency · NEW in /calibration ────
-// 0 = perfect · 0.25 = coin-flip baseline · 1 = perfectly wrong
-// 對 engine performance 比 win-rate 更 informative · 因為 win-rate
-// 不考慮 confidence level · Brier penalizes over-confidence。
-function computeBrierScore(finalized: Match[]): number | null {
-  if (finalized.length === 0) return null;
-
-  let sumSquaredError = 0;
-  let n = 0;
-
-  for (const m of finalized) {
-    if (!m.finalResult) continue;
-    const fr = m.finalResult;
-    const homeFav = m.home.winRate >= m.away.winRate;
-    const engineFavProb = Math.max(m.home.winRate, m.away.winRate) / 100;
-    const favoriteWon =
-      (homeFav && fr.winner === "home") || (!homeFav && fr.winner === "away");
-    const outcome = favoriteWon ? 1 : 0;
-    sumSquaredError += (engineFavProb - outcome) ** 2;
-    n++;
-  }
-
-  return n > 0 ? sumSquaredError / n : null;
-}
-
-const COIN_FLIP_BRIER = 0.25;
-
 export default function CalibrationPublicPage() {
   const finalized = getFinalizedMatches();
   const n = finalized.length;
   const bins = computeBins(finalized);
-  const brier = computeBrierScore(finalized);
-
-  // Brier verdict band(only meaningful at N>=30)
-  let brierVerdict: "better-than-coin-flip" | "coin-flip-tier" | "worse" | null = null;
-  if (brier !== null && n >= 30) {
-    if (brier < COIN_FLIP_BRIER - 0.01) brierVerdict = "better-than-coin-flip";
-    else if (brier < COIN_FLIP_BRIER + 0.01) brierVerdict = "coin-flip-tier";
-    else brierVerdict = "worse";
-  }
 
   return (
     <div className="flex flex-col flex-1 min-h-screen">
@@ -145,22 +108,18 @@ export default function CalibrationPublicPage() {
         {/* ── HERO ─────────────────────────────────── */}
         <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pt-20 pb-12">
           <div className="flex items-baseline gap-3 mb-4 flex-wrap section-reveal">
-            <p
-              lang="en"
-              className="font-mono text-gold text-[10px] tracking-[0.45em]"
-            >
-              / CHECKING OUR WORK · 引擎自評公開
+            <p className="font-mono text-gold text-[10px] tracking-[0.45em]">
+              / 引擎自評 · 公開我們準不準
             </p>
             <span
-              lang="en"
               className={`font-mono text-[9px] tracking-[0.3em] px-1.5 py-0.5 border ${
                 n === 0
                   ? "border-gold/60 text-gold shimmer glow-gold"
                   : "border-gold/60 text-gold"
               }`}
-              title={`${n} 場 finalized · git commit 為 source of truth`}
+              title={`已結算 ${n} 場 · 賽後逐場登錄`}
             >
-              {n === 0 ? "WAITING · N=0" : `ENGINE · N=${n}`}
+              {n === 0 ? "等第一場結算" : `已結算 ${n} 場`}
             </span>
           </div>
           <h1 className="text-4xl sm:text-5xl text-bone font-light tracking-tight max-w-3xl leading-[1.1]">
@@ -172,13 +131,13 @@ export default function CalibrationPublicPage() {
           {/* Founder voice opening · Tim 親手姿態 · NOT institutional voice */}
           <div className="mt-8 border-l-2 border-gold/60 pl-5 sm:pl-6 py-2 max-w-2xl">
             <p className="text-bone text-lg sm:text-xl leading-relaxed">
-              <strong>每個高端 sports 分析平台都告訴您 model 多準</strong>{" "}
-              · 沒有一家告訴您「say 70% 時實際贏 67%」的{" "}
-              <span className="text-gold">3% over-confidence delta</span> ·
-              因為公布等於暴露。
+              <strong>每個拿明牌賺錢的網站都說自己多準</strong>{" "}
+              · 沒有一家告訴你「說 70% 的時候、實際只中 67%」的那{" "}
+              <span className="text-gold">3% 落差</span> ·
+              因為一公開就露餡。
             </p>
             <p className="mt-3 text-mute text-base leading-relaxed">
-              ZONE 27 公開。 這頁的數字 · 是我們欠您的 receipts。
+              ZONE 27 公開。 這頁的數字 · 是我們欠你的一筆帳。
             </p>
           </div>
 
@@ -192,116 +151,39 @@ export default function CalibrationPublicPage() {
 
         <div className="mx-auto w-32 gold-line mb-12" />
 
-        {/* ── BRIER SCORE · Tetlock currency · NEW in /calibration ── */}
+        {/* ── 引擎說的 vs 實際發生 ──────────────────── */}
         <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-16">
-          <p
-            lang="en"
-            className="font-mono text-gold text-[10px] tracking-[0.45em] mb-6"
-          >
-            / 01 · BRIER SCORE · 引擎準度分數
+          <p className="font-mono text-gold text-[10px] tracking-[0.45em] mb-3">
+            / 引擎說的 vs 實際發生
           </p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
-            <div className="border border-gold/60 bg-slate/40 p-5 sm:p-6 glow-soft">
-              <p
-                lang="en"
-                className="font-mono text-gold/90 text-[9px] tracking-[0.3em] mb-2"
-              >
-                ENGINE v0.2 · BRIER
-              </p>
-              <p className="font-mono text-gold text-4xl sm:text-5xl tabular tracking-tight font-light">
-                {brier === null ? "—" : brier.toFixed(3)}
-              </p>
-              <p className="font-mono text-mute text-[10px] tracking-[0.22em] mt-2">
-                {n === 0
-                  ? "等今晚 22:30+ 第一筆 ingest"
-                  : n < 30
-                  ? `N = ${n} of 30 · SAMPLE DEBT`
-                  : brierVerdict === "better-than-coin-flip"
-                  ? "引擎 outperforms coin-flip"
-                  : brierVerdict === "coin-flip-tier"
-                  ? "引擎 ≈ coin-flip · 還沒展現 edge"
-                  : "引擎 underperforms coin-flip · 公開 audit"}
-              </p>
-            </div>
-            <div className="border border-line/40 bg-slate/20 p-5 sm:p-6">
-              <p
-                lang="en"
-                className="font-mono text-mute/70 text-[9px] tracking-[0.3em] mb-2"
-              >
-                NULL · COIN-FLIP BASELINE
-              </p>
-              <p className="font-mono text-mute text-4xl sm:text-5xl tabular tracking-tight font-light">
-                {COIN_FLIP_BRIER.toFixed(3)}
-              </p>
-              <p className="font-mono text-mute/70 text-[10px] tracking-[0.22em] mt-2">
-                0 信息 · 永遠 say 50% · 不會錯也不會對的 baseline
-              </p>
-            </div>
-          </div>
-          <p className="text-mute text-sm leading-relaxed mb-3">
-            <strong className="text-bone">Brier score</strong>
-            {" "}= mean squared error · 機率 vs outcome。
-            <span className="font-mono text-gold/80">0</span> = 完美 ·{" "}
-            <span className="font-mono text-mute">0.25</span> = coin-flip baseline ·{" "}
-            <span className="font-mono text-loss">1</span> = perfectly wrong。
-          </p>
-
-          {/* Round 42 W-B · Reproducibility Receipt · Agent H #4 ship ·
-              specific git commit + data as-of + seed + N · 每個 published
-              number 都 auditable 至 git revision · per IJCAI 2026 standard。 */}
-          <div className="mb-3">
-            <ReproducibilityReceipt
-              seed={null}
-              dataAt="2026-05-21"
-              n={n}
-              fileLink="https://github.com/Tim-xuan-you/zone27-web/blob/main/app/calibration/page.tsx"
-            />
-          </div>
-          <p className="text-mute/85 text-sm leading-relaxed">
-            比 win-rate 更 informative · 因為 win-rate 不考慮 confidence level ·
-            Brier penalizes <strong className="text-bone">over-confidence</strong>。
-            引擎 say 95% 結果輸 = 比 say 55% 結果輸 多扣分。
-          </p>
-        </section>
-
-        {/* ── RELIABILITY DIAGRAM ──────────────────── */}
-        <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-16 border-t border-line/40 pt-12">
-          <p
-            lang="en"
-            className="font-mono text-gold text-[10px] tracking-[0.45em] mb-6"
-          >
-            / 02 · RELIABILITY DIAGRAM · 引擎機率 vs 實際頻率
+          <p className="text-mute text-sm leading-relaxed mb-6 max-w-2xl">
+            橫軸是引擎賽前看好的成數,直軸是實際真的中的成數。 點越靠近那條金色
+            斜線,代表引擎「說幾成、就真的中幾成」· 越準。
           </p>
           <ReliabilityDiagram bins={bins} n={n} />
           {n === 0 ? (
             <div className="mt-6 border border-dashed border-gold/30 bg-slate/30 p-6 sm:p-8 text-center">
-              <p
-                lang="en"
-                className="font-mono text-gold text-[10px] tracking-[0.4em] mb-3"
-              >
-                SCAFFOLD · ENGINE N=0
+              <p className="font-mono text-gold text-[10px] tracking-[0.4em] mb-3">
+                還沒有資料 · 等第一場結算
               </p>
               <p className="text-mute text-sm sm:text-base leading-relaxed max-w-md mx-auto">
-                引擎還沒 finalized 任何場。 第一個 dot 落點 · cpbl-260521-01
-                (今晚 22:30+ TPE)。
+                引擎還沒結算任何一場。 第一個落點 · 統一 vs 富邦
+                (2026-05-21 新莊)。
               </p>
             </div>
           ) : n < 30 ? (
             <div className="mt-6 border border-loss/30 bg-loss/5 p-5 sm:p-6">
-              <p
-                lang="en"
-                className="font-mono text-loss text-[10px] tracking-[0.35em] mb-2"
-              >
-                ⚠ SAMPLE DEBT · N = {n} of 30
+              <p className="font-mono text-loss text-[10px] tracking-[0.35em] mb-2">
+                ⚠ 資料還太少 · 目前 {n} 場 / 滿 30 場才算數
               </p>
               <p className="text-mute text-sm leading-relaxed">
-                Reliability diagram 在 N≥30 之前 statistically meaningless ·
-                任何 drift 都可能是雜訊 · 不是引擎缺陷。 完整 calibration math 見{" "}
+                場數不到 30 之前,這張圖還看不出名堂 · 任何偏移都可能只是運氣、
+                不是引擎的問題。 完整算法見{" "}
                 <Link
                   href="/methodology"
                   className="text-gold underline-offset-4 hover:underline"
                 >
-                  /methodology
+                  方法說明
                 </Link>
                 。
               </p>
@@ -316,92 +198,82 @@ export default function CalibrationPublicPage() {
             Only renders when localStorage has picks · progressive enhancement。 */}
         <AnonCalibrationStrip variant="calibration" />
 
-        {/* ── DISPLACEMENT MISSION · what tipster sites can't ship ── */}
+        {/* ── 為什麼明牌站不敢做這頁 ── */}
         <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-16 border-t border-line/40 pt-12">
-          <p
-            lang="en"
-            className="font-mono text-gold text-[10px] tracking-[0.45em] mb-6"
-          >
-            / 03 · WHY 玩運彩 + 報馬仔 CAN&apos;T SHIP THIS PAGE
+          <p className="font-mono text-gold text-[10px] tracking-[0.45em] mb-6">
+            / 為什麼明牌站不敢做這頁
           </p>
           <h2 className="text-2xl sm:text-3xl text-bone font-light tracking-tight mb-6 leading-tight">
-            這頁 structurally 不可 copy
+            這頁,他們抄不走
           </h2>
           <div className="space-y-4 text-mute leading-relaxed">
             <p>
-              玩運彩 駐站名家 9 位 · 自稱 55-59% 勝率。 報馬仔 LINE 老師 ·
-              自稱 8-9 連勝。 沒有一家 publish reliability diagram · 因為
-              publish 等於暴露:
+              玩運彩駐站名家自稱 55-59% 勝率 · LINE 老師自稱連勝八九場。
+              沒有一家敢攤開這種對照圖 · 因為一攤開就露餡:
             </p>
             <ul className="space-y-2 pl-6">
               <li className="flex gap-3 items-baseline">
                 <span className="font-mono text-loss/80 text-[10px] tracking-[0.25em]">▸</span>
                 <span>
-                  Stated「94% 勝率」 vs realized 50-52% = 42pp over-confidence
-                  delta · Brier score &gt; 0.4(比 coin-flip 還差)
+                  嘴上「94% 勝率」· 實際只有 50-52% · 足足差了四十幾個百分點。
                 </span>
               </li>
               <li className="flex gap-3 items-baseline">
                 <span className="font-mono text-loss/80 text-[10px] tracking-[0.25em]">▸</span>
                 <span>
-                  Streak-based marketing(連勝 X 天)+ survivorship bias · 失敗
-                  週次刪文 + 贏家截圖 · retroactive curation 不可 calibration
+                  靠「連勝 X 天」行銷 · 輸的那幾週默默刪文、只截贏的那幾張 ·
+                  挑著給你看的紀錄當然漂亮。
                 </span>
               </li>
               <li className="flex gap-3 items-baseline">
                 <span className="font-mono text-loss/80 text-[10px] tracking-[0.25em]">▸</span>
                 <span>
-                  Pay-for-pick model · 報酬 incentive structure 跟 calibration
-                  反向 · 公布 calibration = 自殺商業模式
+                  靠賣明牌賺錢 · 一旦公開真實準度就砸自己招牌 · 所以永遠不公開。
                 </span>
               </li>
             </ul>
             <p className="pt-2">
-              <strong className="text-bone">ZONE 27 structurally 可以 publish</strong>{" "}
-              · 因為 BLACK CARD NT$ 500/31 天 + Founders 27 NT$ 2,700/365 天 ·
-              訂閱費 不 depend on 引擎是否準。 您贏您輸 ZONE 27 都一樣賺。
-              正因為賺錢方式跟「您有沒有贏」脫鉤 · 我們才敢這樣公開 ·{" "}
-              <span className="text-gold">這是明牌站學不來的地方</span>。
+              <strong className="text-bone">ZONE 27 敢公開</strong>{" "}
+              · 因為我們的訂閱費跟「引擎準不準」沒關係。 你贏你輸 · 我們都一樣。
+              正因為賺錢方式跟「你有沒有贏」脫鉤 · 我們才敢這樣攤開 ·{" "}
+              <span className="text-gold">這就是明牌站學不來的地方</span>。
             </p>
           </div>
         </section>
 
-        {/* ── PERSONAL VERSION CROSS-LINK ─────────── */}
+        {/* ── 你自己的準度在另一頁 ─────────── */}
         <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-16 border-t border-line/40 pt-12">
-          <p
-            lang="en"
-            className="font-mono text-gold text-[10px] tracking-[0.45em] mb-6"
-          >
-            / 04 · 您 own drift · /member/calibration
+          <p className="font-mono text-gold text-[10px] tracking-[0.45em] mb-6">
+            / 你自己的準度在另一頁
           </p>
           <div className="bg-slate/30 border border-line/60 p-6 sm:p-8">
             <h3 className="text-xl sm:text-2xl text-bone font-light tracking-tight mb-4">
-              這頁是 <span className="text-gold">global</span> 引擎自評 ·{" "}
-              <span className="text-gold">personal</span> 在另一頁
+              這頁是 <span className="text-gold">引擎</span> 的準度 ·{" "}
+              <span className="text-gold">你自己</span> 的在另一頁
             </h3>
             <p className="text-mute leading-relaxed mb-4">
-              這頁 = ALL ZONE 27 公開預測 averaged · 任何 visitor 都看得到 ·
-              不需 auth。 您 follow 過的賽事 own drift 在{" "}
+              這頁是全站公開預測的平均 · 任何人都看得到 · 不用登入。
+              你押過的那些場、你自己準不準,在{" "}
               <Link
                 href="/member/calibration"
                 className="text-gold underline-offset-4 hover:underline"
               >
-                /member/calibration
+                你的準度對照頁
               </Link>{" "}
-              · 需 Email + 密碼 登入。 同 SVG · 同 binning math · 不同 data subset。
+              · 登入就看得到。 同一張圖、同一套算法 · 只是換成你的資料。
             </p>
             <div className="flex flex-wrap gap-3">
               <Link
                 href="/login?next=/member/calibration"
                 className="inline-block px-6 py-2.5 border border-gold/50 text-gold font-mono text-[10px] tracking-[0.3em] hover:bg-gold/10 transition-colors"
               >
-                → 登入看您 own drift
+                → 登入看你自己的準度
               </Link>
               <Link
                 href="/methodology"
                 className="inline-block px-6 py-2.5 border border-line/60 text-mute font-mono text-[10px] tracking-[0.3em] hover:text-gold hover:border-gold/40 transition-colors"
               >
-                → /methodology Brier math
+                → 完整算法說明
               </Link>
             </div>
           </div>
@@ -413,12 +285,11 @@ export default function CalibrationPublicPage() {
             <strong>把自己攤在「準不準大家看得到」之下</strong>。
           </p>
           <p>
-            我們公開自己的準度 · 加上 Brier score + coin-flip baseline 對照 ·
+            我們公開自己準不準 · 一張圖就攤開 ·
             明牌站不會這樣做 — 因為一公開就會暴露他們嘴上的勝率和實際差很多。
           </p>
           <p>
-            修改此頁的計算邏輯需 30 天 /changelog 公告 · 同 /audit S05
-            PRE-COMMIT pattern。
+            這頁的計算方式要改,得先在更新紀錄公告 30 天才動 · 不偷改。
           </p>
         </FounderSignOff>
 
@@ -426,14 +297,11 @@ export default function CalibrationPublicPage() {
 
         {/* ── FINAL CTA ────────────────────────────── */}
         <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 py-16 text-center border-t border-line/40">
-          <p
-            lang="en"
-            className="font-mono text-gold text-[10px] tracking-[0.4em] mb-6"
-          >
-            OUTCOME ACCOUNTABILITY · NOT MARKETING.
+          <p className="font-mono text-gold text-[10px] tracking-[0.4em] mb-6">
+            用結果說話 · 不是用行銷話術
           </p>
           <h3 className="text-3xl text-bone font-light tracking-tight">
-            這頁不會消失 · 不會 silently rotate · 不會藏 over-confidence。
+            這頁不會消失 · 不會偷偷換掉 · 也不會藏起我們高估的地方。
           </h3>
         </section>
       </main>
@@ -459,14 +327,11 @@ function ReliabilityDiagram({ bins, n }: { bins: Bin[]; n: number }) {
   return (
     <div className="bg-slate/30 border border-line/60 p-5 sm:p-8">
       <div className="flex items-baseline justify-between mb-4 flex-wrap gap-3">
-        <p
-          lang="en"
-          className="font-mono text-gold text-[10px] tracking-[0.4em]"
-        >
-          / SABERMETRIC RELIABILITY DIAGRAM
+        <p className="font-mono text-gold text-[10px] tracking-[0.4em]">
+          / 引擎說的 vs 實際發生
         </p>
         <p className="font-mono text-mute/70 text-[10px] tracking-[0.3em] tabular">
-          ENGINE v0.2 · GLOBAL N = {n}
+          引擎 v0.2 · 已 {n} 場
         </p>
       </div>
       <div className="aspect-square max-w-md mx-auto">
@@ -477,8 +342,8 @@ function ReliabilityDiagram({ bins, n }: { bins: Bin[]; n: number }) {
           role="img"
           aria-label={
             n === 0
-              ? "Reliability diagram scaffold: predicted probability vs actual frequency, currently empty (N=0)"
-              : `Reliability diagram: ${n} finalized matches plotted, engine vs actual frequency`
+              ? "引擎準度對照圖 · 引擎說的成數對上實際中的成數 · 目前還沒有資料"
+              : `引擎準度對照圖 · 已畫上 ${n} 場 · 引擎說的成數對上實際中的成數`
           }
         >
           {/* Grid */}
@@ -593,7 +458,7 @@ function ReliabilityDiagram({ bins, n }: { bins: Bin[]; n: number }) {
             textAnchor="middle"
             letterSpacing="0.18em"
           >
-            ENGINE FAVORITE %
+            引擎看好幾成
           </text>
           <text
             x={px(0) - 32}
@@ -605,7 +470,7 @@ function ReliabilityDiagram({ bins, n }: { bins: Bin[]; n: number }) {
             letterSpacing="0.18em"
             transform={`rotate(-90 ${px(0) - 32} ${py(50)})`}
           >
-            ACTUAL %
+            實際中幾成
           </text>
         </svg>
       </div>

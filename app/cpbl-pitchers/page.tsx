@@ -20,11 +20,11 @@ import {
 export const metadata: Metadata = {
   title: "CPBL 投手排行 · K/9 · BB/9 · HR/9 · WHIP · ERA · IP",
   description:
-    "中華職棒投手 sabermetric 進階指標即時排行。Baseball Savant Custom Leaderboards pattern · URL-shareable 排序 · 6 stat tabs · 每 stat 配 fan-grammar 解釋。資料來自 cpbl.com.tw 公開 box score · 不付費 · 不繞 paywall。",
+    "中華職棒投手進階數據即時排行。Baseball Savant Custom Leaderboards pattern · URL-shareable 排序 · 6 stat tabs · 每 stat 配 fan-grammar 解釋。資料來自 cpbl.com.tw 公開 box score · 不付費 · 不繞 paywall。",
   openGraph: {
     title: "CPBL 投手排行 · 6 stat tabs · Baseball Savant pattern",
     description:
-      "中華職棒投手 sabermetric 進階指標排行 · URL-shareable · 公開資料 · 0 付費 API",
+      "中華職棒投手進階數據排行 · URL-shareable · 公開資料 · 0 付費 API",
     type: "article",
     url: "/cpbl-pitchers",
   },
@@ -81,7 +81,7 @@ const STAT_META: Record<
     en: "WALKS + HITS / IP",
     higherIsBetter: false,
     decimals: 2,
-    desc: "Walks + Hits per Inning Pitched · 越低 = 越少跑者上壘 · 是 BB/9 + 安打率的合成指標。 經典 sabermetric base stat。",
+    desc: "Walks + Hits per Inning Pitched · 越低 = 越少跑者上壘 · 是 BB/9 + 安打率的合成指標。 棒球進階數據的經典基礎項。",
     range: "CPBL 平均 ~1.30 · 1.10 以下是優秀 · 1.50+ 是危險。",
   },
   era: {
@@ -338,7 +338,7 @@ export default async function CpblPitchersPage({
           </h1>
           <div className="zone27-rule mx-auto max-w-[280px] mt-4" aria-hidden="true" />
           <p className="mt-6 text-mute text-sm sm:text-base leading-relaxed max-w-xl mx-auto">
-            6 個 sabermetric 進階指標 · 1 鍵切換排序 · URL 可分享(LINE
+            6 個進階數據 · 1 鍵切換排序 · URL 可分享(LINE
             轉傳直接看同一份排序)。 資料來自{" "}
             <a
               href="https://stats.cpbl.com.tw/"
@@ -816,7 +816,7 @@ export default async function CpblPitchersPage({
               某投手 BB/9 連 3 場上升 = 控球崩 OR 教練調整放球點?
             </p>
             <p>
-              這就是 sabermetric 的核心:
+              這就是進階數據的核心:
               <strong className="text-bone">用數字問更好的問題</strong>,不是
               用數字 mute 觀察。 排行只是入口 · 真正的洞察在 /matches
               引擎模擬 + /track-record 賽後對賬。

@@ -103,7 +103,7 @@ export default async function HeyTimOgImage() {
               display: "flex",
             }}
           >
-            CIALDINI + ARONSON + SPENCE · 8TH LEDGER FAMILY
+            公開問答 · 不刪不藏
           </span>
           <span
             style={{
@@ -116,7 +116,7 @@ export default async function HeyTimOgImage() {
               fontFamily: "Georgia, serif",
             }}
           >
-            您 ask
+            你問
           </span>
           <span
             style={{
@@ -130,7 +130,7 @@ export default async function HeyTimOgImage() {
               fontFamily: "Georgia, serif",
             }}
           >
-            Tim 親手 reply
+            Tim 親手回
           </span>
         </div>
 
@@ -164,7 +164,7 @@ export default async function HeyTimOgImage() {
           />
           <DataRow
             label="WRONG → CORRECTED"
-            value={`${HEY_TIM_WRONG_THEN_CORRECTED_COUNT} · Pratfall axis`}
+            value={`${HEY_TIM_WRONG_THEN_CORRECTED_COUNT} · 認錯改正`}
           />
           <DataRow
             label="DISCIPLINE"

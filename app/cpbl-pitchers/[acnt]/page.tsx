@@ -125,7 +125,7 @@ export default async function PitcherProfilePage({ params }: Props) {
             league-relative percentile · CPBL{" "}
             <span className="text-bone tabular">{k9Total}</span> 投手中{" "}
             <span className="text-gold tabular">#{String(k9Rank).padStart(2, "0")}</span>{" "}
-            (依 K/9 排序)。 5 個 sabermetric 進階指標的 percentile bar 視覺化 ·
+            (依 K/9 排序)。 5 個進階數據的百分位視覺化 ·
             基於 Baseball Savant 配色語言。
           </p>
           <p className="mt-3 font-mono text-mute/70 text-[10px] tracking-[0.25em] leading-relaxed">

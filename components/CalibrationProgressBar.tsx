@@ -1,5 +1,3 @@
-import Link from "next/link";
-
 // ── ZONE 27 · Calibration Progress Bar ──────────────────
 // R66 W-B · Agent psychology synthesize ship #3 · Goal Gradient
 // effect(Hull 1932 · Kivetz/Urminsky/Zheng 2006)applied to ZONE 27
@@ -60,20 +58,19 @@ export default function CalibrationProgressBar({
       <div className="flex items-baseline justify-between gap-2 flex-wrap mb-2">
         <p
           id="calibration-progress-heading"
-          lang="en"
           className="font-mono text-gold text-[10px] sm:text-[11px] tracking-[0.4em]"
         >
-          / CALIBRATION PROGRESS · N≥30 THRESHOLD
+          / 樣本累積 · 滿 30 場才算數
         </p>
         <p className="font-mono text-mute text-[10px] sm:text-[11px] tracking-[0.25em] tabular">
           {isMet ? (
-            <span className="text-gold">N = {totalN} · MET ✓</span>
+            <span className="text-gold">已 {totalN} 場 · 達標 ✓</span>
           ) : (
             <>
-              N = <span className="text-bone">{totalN}</span>
-              <span className="text-mute/60"> / {threshold}</span>
+              已 <span className="text-bone">{totalN}</span>
+              <span className="text-mute/60"> / {threshold} 場</span>
               <span className="text-mute/60 mx-2">·</span>
-              <span className="text-loss/80">{remaining} more</span>
+              <span className="text-loss/80">還差 {remaining} 場</span>
             </>
           )}
         </p>
@@ -83,7 +80,7 @@ export default function CalibrationProgressBar({
         aria-valuenow={totalN}
         aria-valuemin={0}
         aria-valuemax={threshold}
-        aria-label={`Calibration sample progress · ${totalN} of ${threshold} finalized receipts ingested · ${pct}% to statistical meaningfulness threshold`}
+        aria-label={`樣本累積進度 · 已結算 ${totalN} / ${threshold} 場 · 距離滿 30 場還有 ${pct}%`}
         className="relative h-[3px] bg-line/60 overflow-hidden"
       >
         <div
@@ -101,22 +98,13 @@ export default function CalibrationProgressBar({
       <p className="mt-2 font-mono text-mute/70 text-[9px] sm:text-[10px] tracking-[0.25em] leading-relaxed">
         {isMet ? (
           <>
-            ✓ <span className="text-bone">N≥30 threshold crossed</span> ·
-            statistically meaningful sample reached · per Bill James 1985
-            convention(see{" "}
-            <Link
-              href="/audit#section-08"
-              className="text-gold/85 hover:text-gold underline-offset-4 hover:underline"
-            >
-              /audit §08 Z27 LEXICON
-            </Link>
-            )。
+            ✓ <span className="text-bone">已滿 30 場</span> ·
+            到這裡準度數字才真的有意義 · 在這之前任何結論都可能只是運氣。
           </>
         ) : (
           <>
-            ▸ honest counter · 不裝 progress · per /audit S05 disclosure
-            philosophy · 真實 N · 不 backdated · 不 cherry-picked · per Tim
-            每場親手 ingest CPBL box score · 同 /coverage philosophy。
+            ▸ 老實的計數器 · 不灌水 · 每一場都是賽後親手登錄真實比分 ·
+            不回填、不挑好看的。 滿 30 場之前 · 準度數字先別當真。
           </>
         )}
       </p>
