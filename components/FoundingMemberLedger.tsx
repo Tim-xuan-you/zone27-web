@@ -176,7 +176,7 @@ export default function FoundingMemberLedger() {
           lang="en"
           className="font-mono text-mute/70 text-[9px] tracking-[0.3em] leading-relaxed"
         >
-          1 FOUNDER = 1 ROW FOREVER · NO REPRINT · POKEMON SHADOWLESS RUN
+          1 FOUNDER = 1 ROW FOREVER · NO REPRINT · 永不重發
         </p>
       </footer>
 

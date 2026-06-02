@@ -59,7 +59,7 @@ const ROWS: ComparisonRow[] = [
     zone27: "full",
   },
   {
-    axis: "Pratfall 弱點頁(/integrity · /steelman · /audit EXCLUDE)",
+    axis: "公開自己的弱點與失誤(/integrity · /steelman)",
     paidTip: "none",
     closedModel: "none",
     zone27: "full",
