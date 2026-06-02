@@ -157,8 +157,8 @@ export default async function RewardsPage() {
           <p className="mt-4 text-mute/85 leading-relaxed max-w-2xl">
             「使用者要的是炫耀預測成功」 founder directive · ZONE 27 brand-pure
             版本 = mechanical PROVED 計分(不可造假)+ 兌換實體獎品(恆美攝影
-            ecosystem)+ 公開規則(30-day notice 修改)+ Pratfall(DIVERGED 同等大
-            公布)。
+            ecosystem)+ 公開規則(30-day notice 修改)+ 連同失準的場次(DIVERGED)
+            同等大公布。
           </p>
           <div className="mt-6 mb-2">
             <ArticleMeta readingMin={3} />
@@ -311,7 +311,7 @@ export default async function RewardsPage() {
           <p>
             這個 page brand IP statement:<strong>使用者要炫耀預測成功的需求
             真實 · ZONE 27 用 mechanical PROVED 計分 + 實體獎品(恆美 ecosystem)
-            + 規則公開(binding 30-day notice)+ Pratfall(DIVERGED 同等大公布)
+            + 規則公開(binding 30-day notice)+ 連同失準的場次(DIVERGED)同等大公布
             滿足 · 不靠 cash · 不靠 referral · 不靠 social transfer</strong>。
             「displacement mission · 對標幹掉 玩運彩+報馬仔」 brand-pure 路徑。
           </p>

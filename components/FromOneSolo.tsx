@@ -122,7 +122,7 @@ export default function FromOneSolo() {
             >
               /ethics BUS_FACTOR section
             </Link>
-            (R69 W-F)contingency 明示。 Tim 失蹤 30+ 天 → 配偶 + 2 兄弟姊妹
+            裡有應變安排。 Tim 失蹤 30+ 天 → 配偶 + 2 兄弟姊妹
             executor 接管 · /privacy Section 6B 退款 protocol。 不裝
             「distributed team across 5 timezones」。
           </li>

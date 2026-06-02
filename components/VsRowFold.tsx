@@ -129,8 +129,8 @@ export default function VsRowFold() {
         <span className="font-mono text-gold mx-1">●</span>= 完整公開 ·
         <span className="font-mono text-mute mx-1">◐</span>= 部份公開 ·
         <span className="font-mono text-mute/35 mx-1">○</span>= 不公開 / 不存在。
-        ZONE 27 column 不是完美 · 我們在 sample-debt 軸也有 ◐
-        (N=1 honest empty · per Pratfall axiom publish-weakness 永久 codify)。
+        ZONE 27 這欄不是完美 · 樣本數那一條我們也只給半亮 ◐
+        (目前只有 1 場驗證過 · 老實標出來 · 不假裝全部做到)。
       </p>
 
       <div className="overflow-x-auto -mx-6 sm:-mx-10 px-6 sm:px-10">

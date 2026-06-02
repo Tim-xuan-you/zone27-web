@@ -97,31 +97,31 @@ export const LOCAL_STORAGE_INVENTORY: ReadonlyArray<LocalStorageKeyEntry> = [
   {
     key: "zone27_anon_picks_v1",
     value: "您 anonymous picks · 個人 calibration vs engine",
-    note: "AnonPickWidget 寫入 · /matches/[gameId] 訪客 pick before peeking · AnonCalibrationStrip 讀 · 0 server · 0 PII · /calibration + homepage 只在您裝置 render · R45 W-A",
+    note: "AnonPickWidget 寫入 · /matches/[gameId] 訪客 pick before peeking · AnonCalibrationStrip 讀 · 0 server · 0 PII · /calibration + homepage 只在您裝置 render",
     shippedIn: "R45 W-A",
   },
   {
     key: "zone27_last_ledger_n_v1",
     value: "您上次看 /track-record 時的 N · 用於 delta chip 顯示",
-    note: "LedgerDeltaChip 寫入 + 讀取 · 每次訪 /track-record 看到「+X since YYYY-MM-DD」 · 純 Endowment effect 心理 hook · 0 server · 0 PII · R49 W-A",
+    note: "LedgerDeltaChip 寫入 + 讀取 · 每次訪 /track-record 看到「+X since YYYY-MM-DD」 · 純 Endowment effect 心理 hook · 0 server · 0 PII",
     shippedIn: "R49 W-A",
   },
   {
     key: "zone27_lens_focus_votes_v1",
     value: "您 pre-canvas 1-tap lens vote · per-match commitment artifact",
-    note: "LensFocusVote 寫入 · /matches/[gameId] pre /02 LENS CANVAS hub · 6 lens 選 1 個您認為最 matter · 一旦選定就維持一致 · 0 server · 0 PII · 0 leaderboard · 純您裝置 · R67 W-A",
+    note: "LensFocusVote 寫入 · /matches/[gameId] pre /02 LENS CANVAS hub · 6 lens 選 1 個您認為最 matter · 一旦選定就維持一致 · 0 server · 0 PII · 0 leaderboard · 純您裝置",
     shippedIn: "R67 W-A",
   },
   {
     key: "zone27_shortcut_hint_seen_v1",
     value: "您是否已看過 g-mode 鍵盤 jump 提示(ONE-shot flag)",
-    note: "GlobalShortcuts 寫入 · 訪客第一次 visit 8 秒後 surface ⚡ G+M tip 5 秒自動消失 · 設此 flag 後永不再顯示 · per Raycast/Arc/Linear 「don't teach bouncing visitors」 pattern · 0 server · 0 PII · 0 tracking · R69 W-F",
+    note: "GlobalShortcuts 寫入 · 訪客第一次 visit 8 秒後 surface ⚡ G+M tip 5 秒自動消失 · 設此 flag 後永不再顯示 · per Raycast/Arc/Linear 「don't teach bouncing visitors」 pattern · 0 server · 0 PII · 0 tracking",
     shippedIn: "R69 W-F",
   },
   {
     key: "zone27_last_visit_v1",
     value: "您上次訪 ZONE 27 的日期(YYYY-MM-DD · TPE-anchored)",
-    note: "DailyReturnRail 寫入 + 讀取 · 訪客 1+ 天後回訪看到「上次您來 X 天前」 honest chip · NOT streak counter · NOT daily-login farming · NO daily reward · 純 Letterboxd diary + Pinboard.in past-tense check-in pattern · 0 server · 0 PII · ONE chip per session · dismiss with × · R70 W-B",
+    note: "DailyReturnRail 寫入 + 讀取 · 訪客 1+ 天後回訪看到「上次您來 X 天前」 honest chip · NOT streak counter · NOT daily-login farming · NO daily reward · 純 Letterboxd diary + Pinboard.in past-tense check-in pattern · 0 server · 0 PII · ONE chip per session · dismiss with ×",
     shippedIn: "R70 W-B",
   },
 ];

@@ -86,8 +86,8 @@ export default function LongReadHandoff({
           >
             /feed.xml
           </Link>{" "}
-          Atom RSS · 不需要 email · 您 reader pull · 不 push · 0 tracking ·
-          per /privacy 0-tracker promise + R51 W-E ship。
+          Atom RSS · 不需要 email · 您自己來看 · 我們不推播 · 0 追蹤 ·
+          同 /privacy 的「0 追蹤」承諾。
         </p>
       </div>
     </aside>

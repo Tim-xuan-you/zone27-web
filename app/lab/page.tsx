@@ -297,7 +297,7 @@ export default function LabPage() {
               MODEL REPORT · /audit
             </p>
             <h3 className="text-lg text-bone font-light tracking-tight mb-2">
-              5 sections + Disclosure Philosophy →
+              方法完整公開 · 5 個章節 →
             </h3>
             <p className="font-mono text-mute/70 text-[10px] tracking-[0.25em]">
               引擎背後的 model card · 零行銷語言

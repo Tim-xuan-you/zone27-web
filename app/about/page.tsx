@@ -479,11 +479,7 @@ export default function AboutPage() {
           <Link href="/manifesto" className="text-gold underline-offset-4 hover:underline">
             /manifesto Section II
           </Link>
-          {" "}MONETIZATION 倒置 + memory{" "}
-          <code className="font-mono text-bone bg-slate/40 px-1.5 py-0.5 rounded-sm">
-            [[zone27-payment-architecture]]
-          </code>
-          。
+          {" "}的 MONETIZATION 倒置那一節。
         </p>
       </Chapter>
 

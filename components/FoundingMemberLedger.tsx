@@ -181,11 +181,9 @@ export default function FoundingMemberLedger() {
       </footer>
 
       <p className="mt-4 font-mono text-mute/70 text-[10px] tracking-[0.22em] leading-relaxed">
-        ⚓ #001-#007 為 SYSTEM-TEST Tim 親手 forged placeholders · 真實第一位
-        Founder #008 onboard 後取代 · per /audit S05 PRE-COMMIT 公開記錄
-        transfer history · 不 silently swap · per /founders/from-one-current-founder
-        R69 W-B 270 letters cap parallel(每位 Founder 6 個月後 ship 真實
-        letter · 1 founder = 1 row + 1 letter forever)。
+        ⚓ #001-#007 是 Tim 親手放的測試占位 · 真實第一位 Founder #008 上線後
+        就取代掉 · 我們會公開記錄這個轉移過程 · 不偷偷換掉。每位 Founder
+        永久佔 1 row · 不重發。
       </p>
     </section>
   );

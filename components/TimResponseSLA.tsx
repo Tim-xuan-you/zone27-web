@@ -50,7 +50,7 @@ export default function TimResponseSLA() {
           lang="en"
           className="font-mono text-mute/70 text-[9px] tracking-[0.3em]"
         >
-          R72 W-B · /audit S05 PRE-COMMIT
+          /audit · 事前公開承諾
         </p>
       </div>
       <p className="text-bone text-sm sm:text-base leading-relaxed mb-3">

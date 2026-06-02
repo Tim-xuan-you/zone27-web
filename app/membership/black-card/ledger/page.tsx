@@ -263,8 +263,8 @@ export default function BlackCardLedgerPage() {
               <li className="flex gap-3 items-baseline">
                 <span className="font-mono text-gold/80 text-[10px] tracking-[0.25em]">▸</span>
                 <span>
-                  Manual monthly · 不依賴 hidden churn · 顯示 churn = brand IP
-                  「方法公開」 物理延伸 · Costly Signaling
+                  Manual monthly · 不依賴 hidden churn · 顯示流失率 =
+                  把「方法公開」延伸到經營數字 · 對手做不到
                 </span>
               </li>
               <li className="flex gap-3 items-baseline">
@@ -295,7 +295,7 @@ export default function BlackCardLedgerPage() {
               "Months sustained · cancel 後不 delete row · state 從 active 改 cancelled · 保留歷史",
               "Aggregate count 數字 sync 此 ledger row count · 不在其他 page hardcode 矛盾數字",
               "新訂閱 batch 寫入時間 = payment confirmation 時間 · 不可 backdate · git commit 為 source of truth",
-              "Empty ledger 不從 page 移除 · 0 paid state 永遠是 valid display state · per Pratfall axiom",
+              "就算 0 付費會員 · 空名冊也永遠留在頁面上 · 不藏不假裝",
             ].map((rule, i) => (
               <li
                 key={i}
@@ -326,8 +326,7 @@ export default function BlackCardLedgerPage() {
             這個 page 是 structural moat 不是 marketing decoration。
           </p>
           <p>
-            修改此 page 的 5 rules 需 30 天 /changelog 公告 · 同 /audit S05
-            PRE-COMMIT pattern · Costly Signaling 100×。
+            修改這頁的 5 條規則 · 需要 30 天前先在 /changelog 公告。
           </p>
         </FounderSignOff>
 

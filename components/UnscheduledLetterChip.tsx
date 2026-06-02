@@ -120,16 +120,15 @@ export default function UnscheduledLetterChip({ variant = "panel" }: Props) {
         model 是「you GO to them OR RSS pull」 · 把主動權交還給訪客。
       </p>
       <p className="font-mono text-mute/70 text-[10px] tracking-[0.25em] leading-relaxed">
-        ⚓ per /audit S05 PRE-COMMIT clause · 不訂 weekly cadence + 不發
-        digest email + 不要 push permission · 修改任一 commitment 需 30 天前{" "}
+        ⚓ 我們不訂每週更新 · 不寄電子報 · 不要你的推播權限 · 要改任何一條
+        都得 30 天前先在{" "}
         <Link
           href="/changelog"
           className="text-gold/85 hover:text-gold underline-offset-4 hover:underline"
         >
           /changelog
         </Link>{" "}
-        公告 · 同 NoPushManifest R73 W-D + CadencePulseChip R67 W-C single-
-        source brand IP axis。
+        公告。
       </p>
     </aside>
   );

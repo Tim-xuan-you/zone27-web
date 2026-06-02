@@ -127,9 +127,6 @@ export default function LocalStorageReceipt({ variant = "receipt" }: Props) {
             <span className="text-mute/70 flex-1 text-[9px] sm:text-[10px] tracking-[0.16em]">
               {entry.value}
             </span>
-            <span className="text-mute/40 text-[9px] tracking-[0.22em] tabular">
-              {entry.shippedIn}
-            </span>
           </li>
         ))}
       </ul>

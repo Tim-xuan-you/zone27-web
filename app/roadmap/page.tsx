@@ -52,7 +52,7 @@ const LOCKED: { quarter: string; items: RoadmapItem[] }[] = [
       },
       {
         title: "✓ SHIPPED · Cmd-K 全站快搜 palette",
-        body: "2026-05-21 上線 · 44 visitor-discoverable routes 索引化 · ⌘K (Mac) / Ctrl-K (Win) 開啟 · ↑↓ 導航 · ↵ 開啟 · mobile ⌕ icon trigger (Round 12) · Round 30 W5 加 /login + Round 31 W-S /founders/ledger + W-X3 /membership/black-card + R33 W-E /annual/2026 + R39 /calibration + /membership/black-card/ledger + R50 W-A /methodology/diff + R51 W-D /transparency + R64 W-B /pricing/why + R68 W-A /founders/apply + R69 W-A+W-B /founders/first-five-minutes + /founders/from-one-current-founder 後達 44 entries。/admin · /auth/callback · /auth/signout 因 noindex / 內部 redirect 不在 palette。無 fuse.js 無 telemetry 無 recently-used (per disclosure philosophy)。",
+        body: "2026-05-21 上線 · ⌘K(Mac)/ Ctrl-K(Windows)開啟全站快速搜尋 · 索引所有公開頁面 · ↑↓ 選擇 · ↵ 開啟 · 手機點右上角 ⌕ 圖示。後台與內部跳轉頁面不收錄。無第三方搜尋套件 · 無追蹤 · 無「最近使用」紀錄。",
       },
       {
         title: "CPBL 每日 ingestion 持續累積 ledger",
@@ -152,7 +152,7 @@ const EXPLICIT_NO: RoadmapItem[] = [
   // 為 /roadmap BRAND BOUNDARIES canonical permanent decision。
   {
     title: "永遠不做「Launch loudly to warm list」72-hour blitz",
-    body: "2026 #1 indie launch playbook(Tom Orbach $50K/72h · 70% revenue in 72 hours · warm email list 5K+ simultaneous blitz)對 ZONE 27 wrong:(1) stealth axiom forbid「loud」half ·(2) hardcore baseball fans 不在 IndieHackers Twitter crowd · 72-hour reach 不到 right audience。Right shape:slow trickle to #270 over 6-18 months · /founders 第 1 天跟第 400 天看起來一樣 · just a different number · slowness IS the curation proof。",
+    body: "2026 年最紅的獨立產品上線玩法(Tom Orbach:靠 5,000+ 人的暖名單 72 小時衝 $50K · 七成營收集中在頭三天)對 ZONE 27 不適用:(1)我們刻意低調潛行 ·「大聲喧嘩」跟初衷相反 ·(2)死忠棒球迷不在那些科技創業圈 · 72 小時的觸及打不到對的人。對的節奏:6 到 18 個月慢慢累積到第 270 位 · /founders 第 1 天跟第 400 天長得一樣 · 只是數字不同 · 這份慢本身就是篩選的證明。",
     evidenceHref: "/now",
     evidenceLabel: "/now UNRESOLVED · Wave 10B agent finding",
   },

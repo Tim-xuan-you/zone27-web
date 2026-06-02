@@ -110,7 +110,7 @@ export default function PrivacyPage() {
           per-field rationale · brand IP「方法公開」 axiom 物理 codify · 不藏。 */}
       <Section no="02B" label="FOUNDERS 27 APPLICATION DATA · 申請資料" zh="申請 Founders 27 額外 4 欄">
         <p>
-          R68 W-A(2026-05-23)ship{" "}
+          2026-05-23 上線的{" "}
           <Link
             href="/founders/apply"
             className="text-gold underline-offset-4 hover:underline"
@@ -148,8 +148,8 @@ export default function PrivacyPage() {
           <li>
             <strong className="text-bone">C.</strong>{" "}
             <Code>cpbl_connection</Code>(必填 · 最長 200 字元)· 您支持的 CPBL 球隊 +
-            球迷年數 + 任何 CPBL context · Tim 用於 fan-grammar authentic 判斷 · per
-            [[feedback-zone27-audience-fans-not-engineers]] · 不 share 給任何第三方。
+            球迷年數 + 任何 CPBL 背景 · Tim 用來判斷你是不是真的球迷 ·
+            不分享給任何第三方。
           </li>
           <li>
             <strong className="text-bone">D.</strong>{" "}
@@ -177,8 +177,7 @@ export default function PrivacyPage() {
           </li>
           <li>▸ <strong className="text-bone">Vercel logs</strong> · structured
             event log backstop · {" "}
-            <em>R69 W-G fix · redacted to applicationId + email domain only · 不 log
-              full name / cpbl / why content</em>
+            <em>只記錄 applicationId + email 網域 · 不記錄完整姓名 / 球隊 / 申請理由內容</em>
             {" "}· 預設 7 天 retention · Tim 不下載 不分析 不 archive。
           </li>
           <li>▸ <strong className="text-bone">Supabase</strong> · migration 0003
@@ -211,7 +210,7 @@ export default function PrivacyPage() {
               Section 02B
             </Link>{" "}
             /founders/apply 確實收 name + email + cpbl_connection + why_zone27 ·
-            因為 Patek-style manual review 需要(R69 W-G fix · 不藏)
+            因為 Patek 式人工審核需要(不藏)
           </li>
           <li>❌ 沒有電話 / 地址(application 也不收)</li>
           <li>❌ 沒有瀏覽行為紀錄(您在 /lab 跑幾次 simulation 我們不知道)</li>
@@ -247,9 +246,8 @@ export default function PrivacyPage() {
             <li>✕ Cloudflare Web Analytics / Plausible(都未安裝)</li>
           </ul>
           <p className="mt-4 font-mono text-mute/70 text-[10px] tracking-[0.3em] leading-relaxed">
-            ⚓ 此 list 每加 1 個 tool 需 30 天前 /changelog 公告 · 同 /audit
-            S05 PRE-COMMIT pattern · Costly Signaling 100×。 砍 1 個 tool
-            from this list = brand 自殺。
+            ⚓ 這份清單每加 1 個工具 · 都要 30 天前先在 /changelog 公告 ·
+            從清單上偷砍任何一個 = 品牌信用自殺。
           </p>
         </div>
 
@@ -463,7 +461,7 @@ export default function PrivacyPage() {
             failure-mode + family/heir notification protocol。 brand IP
             「方法公開」 延伸到 worst-case scenario。 */}
         <h3 className="text-bone text-lg mt-6 mb-3">
-          緊急聯絡 / Tim 失能狀態 · Emergency contact provision(R70 W-F)
+          緊急聯絡 / Tim 失能狀態 · Emergency contact provision
         </h3>
         <ul className="space-y-2">
           <li>
@@ -481,8 +479,8 @@ export default function PrivacyPage() {
             >
               tatayngiti@gmail.com
             </a>{" "}
-            · 主旨「BUS_FACTOR emergency」 · executor 14 天內回信 · 同 R70 W-F
-            /ethics#bus-factor 公開 contingency 配對
+            · 主旨「BUS_FACTOR emergency」 · executor 14 天內回信 · 對應
+            /ethics#bus-factor 公開的接管安排
           </li>
           <li>
             <strong className="text-bone">Founders 27 退款優先</strong> · 即使

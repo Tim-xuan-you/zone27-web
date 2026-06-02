@@ -401,7 +401,7 @@ export default function EthicsPage() {
           <p>
             這頁是 ZONE 27 對標、取代 玩運彩+報馬仔 的品牌底層落地 ·
             <strong>不是 marketing copy</strong>。 9 條是 hard commitments +
-            R70 W-F BUS_FACTOR contingency section · 違反任一條 = brand 信用
+            BUS_FACTOR contingency section · 違反任一條 = brand 信用
             collapse · 即使違反 1 次 · /ethics page 上會出現「{COMMITMENTS[0].num}
             {" "}- VIOLATED YYYY-MM-DD · see /changelog」 紅色 alert · 永久
             visible · per /audit S05 PRE-COMMIT

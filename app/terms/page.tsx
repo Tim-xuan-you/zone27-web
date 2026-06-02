@@ -150,8 +150,7 @@ export default function TermsPage() {
           </li>
           <li>
             <strong className="text-bone">不問原因</strong> · 不嘗試挽留 ·
-            不要求填問卷 · 不寄 retention 文案 · per [[zone27-pratfall-brand-ip]]
-            「不裝挽留」 axiom。
+            不要求填問卷 · 不寄挽留文案 · 我們不裝挽留。
           </li>
           <li>
             <strong className="text-bone">您退款後仍保留</strong> · GitHub
