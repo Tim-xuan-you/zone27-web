@@ -16,6 +16,7 @@ import { getWaitlistCount } from "@/lib/waitlist-stats";
 import { getSession } from "@/lib/supabase/server";
 import AdminTierSwitcher from "@/components/AdminTierSwitcher";
 import TierFeatureMatrix from "@/components/TierFeatureMatrix";
+import AdminConsole from "@/components/AdminConsole";
 
 export const metadata: Metadata = {
   title: "Admin · Tim's ZONE 27 ops dashboard preview",
@@ -114,85 +115,24 @@ export default async function AdminPage() {
 
         <div className="mx-auto w-32 gold-line mb-12" />
 
-        {/* ── 操作手冊(R185 · Tim 問「怎麼管理會員 / 文章 · 管理頁在哪 · 一步步教」)──
-            把 /admin 從「假功能 mockup」改成真 playbook:你真的會做的事 + 現成可貼的指令。
-            碰錢動作走 Supabase(故意手動 · 留痕 · per #13)· 不做一鍵按鈕後台。 */}
+        {/* ── 管理台 · 點按鈕(R185 · Tim:不會操作 SQL · 要 WordPress 式)· AdminConsole + migration 0011 ── */}
         <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-12">
           <p className="font-mono text-gold text-[10px] tracking-[0.4em] mb-3">
-            / 操作手冊 · 你真的會做的事
+            / 管理台 · 點按鈕就行
           </p>
           <h2 className="text-2xl sm:text-3xl text-bone font-light tracking-tight mb-3">
-            你的管理台 = Supabase + 這份手冊
+            你的管理台
           </h2>
-          <p className="text-mute/85 text-sm leading-relaxed mb-8 max-w-2xl">
-            你只在 <span className="text-bone">Supabase</span> 做兩類事:管會員、管文章。
-            每件都有現成指令 —— 貼到 Supabase 的 <span className="text-bone">SQL Editor</span> 把
-            <span className="text-gold"> 紅字部分換掉</span> → 按 Run。
+          <p className="text-mute/85 text-sm leading-relaxed mb-6 max-w-2xl">
+            像 WordPress 後台一樣 —— 打 email、打金額、按按鈕,全程不用寫任何指令。
+            碰錢的動作要你親手按一次確認(你的鐵律「不自動扣款」)· 不是限制,是紀律。
           </p>
 
-          {/* A · 管理會員 */}
-          <div className="mb-6 border border-gold/30 bg-slate/30 p-5 sm:p-6">
-            <p className="font-mono text-gold/90 text-[11px] tracking-[0.3em] mb-4">
-              A · 管理會員
-            </p>
-            <PlaybookStep
-              title="① 看所有會員"
-              body="Supabase → 左側「Authentication」→「Users」· 列出每個人的 email + 加入時間。 不用指令,用點的。"
-            />
-            <PlaybookStep
-              title="② 有人轉帳買點數 → 幫他加點(儲值)"
-              body="確認入帳後,SQL Editor 貼這段,把金額 / 末5碼 / email 換掉 → Run:"
-              sql={`insert into public.wallet_ledger (user_id, delta_ntd, kind, ref)\nselect id, 500, 'topup', '末5碼12345'\nfrom auth.users\nwhere email = '買家@example.com';`}
-            />
-            <PlaybookStep
-              title="③ 標記某人是付費會員(黑卡 / 創始)"
-              body="收到會員費轉帳後,把他升級。 black = BLACK CARD · founder = Founders 27 → Run:"
-              sql={`update auth.users\nset raw_user_meta_data = coalesce(raw_user_meta_data, '{}'::jsonb)\n    || jsonb_build_object('tier', 'black')\nwhere email = '會員@example.com';`}
-            />
-            <PlaybookStep
-              title="④ 查某人錢包還剩多少點"
-              body="想確認某人餘額 → Run:"
-              sql={`select u.email, coalesce(sum(w.delta_ntd), 0) as balance_ntd\nfrom auth.users u\nleft join public.wallet_ledger w on w.user_id = u.id\nwhere u.email = '會員@example.com'\ngroup by u.email;`}
-              last
-            />
-            <p className="mt-4 font-mono text-mute/65 text-[10px] tracking-[0.2em] leading-relaxed">
-              ▸ ③ 標記付費後,對方<span className="text-mute/90">下次登入(或最多 1 小時)</span>才會生效
-              —— 因為等級存在他的登入憑證裡,要刷新才會更新。 跟他說重新登入一下就立刻看到。
-            </p>
-          </div>
+          <AdminConsole />
 
-          {/* B · 管理文章 / 留言 */}
-          <div className="mb-6 border border-gold/30 bg-slate/30 p-5 sm:p-6">
-            <p className="font-mono text-gold/90 text-[11px] tracking-[0.3em] mb-4">
-              B · 管理大家發的文章 / 留言
-            </p>
-            <PlaybookStep
-              title="① 看所有人發的東西"
-              body="Supabase → 左側「Table Editor」→ 點這三張表用看的:creator_posts(賣的分析)· creator_comments(分析下的回覆)· game_posts(賽事討論室發言)。 每張看得到內容 + 是誰發的 + 時間。"
-            />
-            <PlaybookStep
-              title="② 刪掉違規 / 爛的文章或留言"
-              body="在 Table Editor 那張表,勾選那一列左邊的框 → 上面按「Delete」。 或用指令(把 id 換成那一篇的)→ Run:"
-              sql={`delete from public.creator_posts where id = '貼上那篇的 id';\n-- 刪留言改成 creator_comments · 刪討論室發言改成 game_posts`}
-              last
-            />
-            <p className="mt-4 font-mono text-mute/65 text-[10px] tracking-[0.2em] leading-relaxed">
-              ▸ 目前刪文是你親手刪(一個人經營的階段)· 用戶自己不能刪、只能跟你申請 ·
-              之後再做站內「刪文鈕」(Phase 3)。
-            </p>
-          </div>
-
-          <a
-            href="https://supabase.com/dashboard/projects"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block px-6 py-3 bg-gold text-navy font-mono text-xs tracking-[0.3em] hover:bg-gold-soft transition-colors"
-          >
-            → 開 Supabase 後台
-          </a>
-          <p className="mt-4 font-mono text-mute/55 text-[10px] tracking-[0.2em] leading-relaxed max-w-2xl">
-            ⚠️ 這頁本身還沒上鎖(任何人都點得到)· 但這裡看不到任何會員 email、指令也只有登入你
-            Supabase 的你能執行 —— 所以放著沒風險。 把這頁鎖成「只有你 email 能看」是待辦,不急。
+          <p className="mt-6 font-mono text-mute/55 text-[10px] tracking-[0.2em] leading-relaxed max-w-2xl">
+            ▸ 第一次用:登入你的 email → 按「把我設為管理員」(只有第一個人能設,設完鎖死)→ 之後全是按鈕。
+            這些管理「動作」都有上鎖(只有你能執行 · 別人硬打也被擋)· 整頁上鎖是待辦(但別人本來就看不到會員 email)。
           </p>
         </section>
 
@@ -431,26 +371,3 @@ function KpiCard({
   );
 }
 
-function PlaybookStep({
-  title,
-  body,
-  sql,
-  last,
-}: {
-  title: string;
-  body: string;
-  sql?: string;
-  last?: boolean;
-}) {
-  return (
-    <div className={last ? "" : "mb-4 pb-4 border-b border-line/30"}>
-      <p className="text-bone text-sm font-medium mb-1.5">{title}</p>
-      <p className="text-mute/85 text-[13px] leading-relaxed">{body}</p>
-      {sql && (
-        <pre className="mt-2 overflow-x-auto bg-navy/70 border border-line/50 px-3 py-2.5 font-mono text-gold/85 text-[11px] leading-relaxed">
-          {sql}
-        </pre>
-      )}
-    </div>
-  );
-}

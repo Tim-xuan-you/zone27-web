@@ -38,6 +38,14 @@ Tim 已套 0010 ✅,但 R185 live-test(自建帳號直接打 RPC)抓到真 bug:*
 → 留言 + 賽事討論室發言才會真的通。
 (分析回覆串 = 讀者↔作者 / 買家↔賣家對話層 · 作者回覆標「作者」· 預測選邊一場一篇鎖死不動 · 這只加不評分的對話。)
 
+### 🟢 跑 migration 0011 → /admin 變「點擊後台」(R185 · Tim:不會操作 SQL · 要 WordPress 式)
+
+Tim 唯一還要碰一次 SQL:套用 `supabase/migrations/0011_admin_console.sql`(app_admins + is_admin() gate +
+加點數 / 標付費 / 看會員 / 審文章 的 RPC · 全 server 端 is_admin 把關 · 非 admin 硬打也擋)。
+套完 → 去 /admin → 登入你 email → 按「把我設為管理員」(只有第一個人能設 · 立刻設別等)→
+**之後管理全是按鈕、再也不用寫 SQL**。 WordPress 式:打 email + 金額 + 按鈕。 碰錢仍你親手按一次確認
+(不違反 #13 不自動扣款)。 = 把「SQL playbook」徹底換成真・點擊後台(Tim dogfood「太難不會操作」)。
+
 ### 🔴 今晚(2026-05-30)· 3 場 CPBL 賽後結算 — 唯一 gated-on-Tim
 
 3 場 pre-game 已 ingest(cpbl-260530-01 味全/台鋼 · -02 中信/富邦 · -03 樂天/統一)·
