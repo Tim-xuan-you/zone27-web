@@ -7,6 +7,7 @@ import { getSession } from "@/lib/supabase/server";
 import { aggregatePredictionStats } from "@/lib/predictions";
 import { getMyPredictionsMap } from "@/lib/predictions-server";
 import { getTodayMatches, matches as allMatches } from "@/lib/matches";
+import { readTier, isPaid, creatorTakePct } from "@/lib/tier";
 
 export const metadata: Metadata = {
   title: "你的儀表板",
@@ -61,6 +62,11 @@ export default async function MemberPage() {
 
   const email = session.user.email ?? "";
   const emailName = email.split("@")[0] || "會員";
+  const tier = readTier(
+    (session.user.user_metadata ?? null) as Record<string, unknown> | null,
+  );
+  const tierZh =
+    tier === "founder" ? "創始會員" : tier === "black" ? "BLACK CARD 會員" : "FREE 會員";
 
   const predictionsMap = await getMyPredictionsMap();
   const stats = aggregatePredictionStats(
@@ -78,7 +84,7 @@ export default async function MemberPage() {
         {/* 1 · 身分列 · 一行 ────────────────────────── */}
         <div className="flex items-baseline justify-between gap-3 flex-wrap">
           <p className="font-mono text-mute text-[11px] tracking-[0.2em]">
-            <span className="text-gold">{emailName}</span> · FREE 會員
+            <span className="text-gold">{emailName}</span> · {tierZh}
           </p>
           <form action="/auth/signout" method="post">
             <button
@@ -143,7 +149,30 @@ export default async function MemberPage() {
           )}
         </section>
 
-        {/* 點數錢包 · 儲值 → 買付費分析(0009)*/}
+        {/* ★ 升級入口 · 免費會員專屬 · 賺錢的路要看得見(Apple:付費路徑永遠不藏)*/}
+        {!isPaid(tier) && (
+          <Link
+            href="/membership"
+            className="mt-6 block border border-gold/50 bg-gold/5 glow-soft p-5 sm:p-6 hover:bg-gold/10 hover:border-gold transition-colors group"
+          >
+            <p className="font-mono text-gold text-[10px] tracking-[0.4em] mb-2">
+              升級 · 開始賣分析賺錢
+            </p>
+            <p className="text-bone text-lg sm:text-xl font-light leading-snug mb-3">
+              解鎖<span className="text-gold">標價賣你的分析</span> · 賣出你拿 90–95%。
+            </p>
+            <p className="font-mono text-mute text-[12px] tracking-[0.12em] leading-relaxed mb-4">
+              BLACK CARD <span className="text-bone tabular">NT$ 500/月</span> · 你拿 90%
+              <br />
+              創始會員 <span className="text-bone tabular">NT$ 2,700/年</span> · 你拿 95% + 創始編號
+            </p>
+            <span className="inline-flex items-center gap-2 font-mono text-navy bg-gold px-5 py-2.5 text-xs tracking-[0.25em] group-hover:bg-gold-soft transition-colors">
+              看方案並升級 →
+            </span>
+          </Link>
+        )}
+
+        {/* 點數錢包 · 儲值 → 買別人的付費分析(0009)· 跟「升級賣分析」是兩回事 */}
         <WalletPanel />
 
         {/* 3 · 今晚可以押 ───────────────────────────── */}
@@ -204,16 +233,18 @@ export default async function MemberPage() {
           )}
         </section>
 
-        {/* 4 · 一行賣分析入口(不推銷 · 直接指到能發文的地方)──────── */}
-        <p className="mt-10 text-center font-mono text-mute/55 text-[10px] tracking-[0.2em] leading-relaxed">
-          想把你的分析標價賣?平台抽 5-10% · 你拿 90-95%{" "}
-          <Link
-            href={tonight.length > 0 ? `/matches/${tonight[0].id}#say` : "/matches"}
-            className="text-gold/70 hover:text-gold underline-offset-4 hover:underline"
-          >
-            去發一篇 →
-          </Link>
-        </p>
+        {/* 4 · 付費會員 → 你已解鎖賣分析 · 直接去發文(免費會員看上面升級卡)*/}
+        {isPaid(tier) && (
+          <p className="mt-10 text-center font-mono text-mute/55 text-[10px] tracking-[0.2em] leading-relaxed">
+            你已解鎖賣分析 · 賣出你拿 {creatorTakePct(tier)}%{" "}
+            <Link
+              href={tonight.length > 0 ? `/matches/${tonight[0].id}#say` : "/matches"}
+              className="text-gold/70 hover:text-gold underline-offset-4 hover:underline"
+            >
+              去發一篇 →
+            </Link>
+          </p>
+        )}
       </main>
 
       <Footer />
