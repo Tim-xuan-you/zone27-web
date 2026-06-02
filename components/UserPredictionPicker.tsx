@@ -409,7 +409,7 @@ function CrowdLine({
   if (!tally || tally.total === 0 || tally.homePct === null) {
     return (
       <p className="font-mono text-mute/60 text-[10px] tracking-[0.25em]">
-        群眾市場 · 尚無人進場 · 登入後你可以是第一個 ▸
+        群眾市場 · 還沒人進場 · 第一手是你的 ▸
       </p>
     );
   }

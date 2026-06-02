@@ -190,7 +190,7 @@ export default async function FoundersPage({
           <div className="grid sm:grid-cols-2 gap-3">
             <DepthLink href="/membership" label="比較三種會員" en="FREE · BLACK · FOUNDERS" />
             <DepthLink href="/track-record" label="引擎公開戰績" en="言中跟落空一樣掛" />
-            <DepthLink href="/integrity" label="永遠不變的事" en="13 條紅線 + 9 條承諾" />
+            <DepthLink href="/integrity" label="永遠不變的事" en="22 條永遠不變" />
             <DepthLink href="/faq" label="完整問答" en="現在留 email 要付錢嗎?引擎免費那我付什麼?" />
           </div>
 

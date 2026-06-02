@@ -118,7 +118,7 @@ export default function WalletPanel() {
               </span>
               {b > 0 ? (
                 <span className="block font-mono text-gold/80 text-[9px] tracking-[0.05em] tabular mt-0.5">
-                  +{BONUS_PCT[a]}% · 多送 {fmt(b)} 點{best ? " 🔥" : ""}
+                  +{BONUS_PCT[a]}% · 多送 {fmt(b)} 點
                 </span>
               ) : (
                 <span className="block font-mono text-mute/45 text-[9px] tracking-[0.1em] mt-0.5">

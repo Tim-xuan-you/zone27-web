@@ -1,60 +1,52 @@
 import Link from "next/link";
 
-// ── ZONE 27 · AI Confidence Stars ──────────────────────
-// Round 33 W-A · Customer-driven product redesign per agent verdict
-// (commercial pivot for prediction-seeking audience)。
-//
-// Psychological hook(canonical · sports-betting subscription benchmark):
-//   - Authority bias + expert simplification(#1 reason bettors pay)
-//   - Decision-cost collapse from raw % → discrete 1-5 stars
-//   - "Confidence-priming" — give 信號強度 not certainty
-//
-// Mechanical mapping(NO editorial judgment · derives from engine
-// aiConfidence field directly · /audit S02 ESTIMATION DISCLOSURE
-// canonical cross-link):
-//   - aiConfidence >= 80 → ★★★★★ STRONG SIGNAL
-//   - aiConfidence 70-79 → ★★★★☆ CLEAR SIGNAL
-//   - aiConfidence 60-69 → ★★★☆☆ DECENT SIGNAL
-//   - aiConfidence 50-59 → ★★☆☆☆ WEAK SIGNAL
-//   - aiConfidence < 50  → ★☆☆☆☆ COIN-FLIP
-//
-// Vocabulary discipline(per agent brand-IP redline verdict):
-//   - 「STRONG SIGNAL」 NOT「LOCK」(LOCK is 報明牌 grifter literal vocab)
-//   - 「COIN-FLIP」 NOT「不押」(scientist not tipster)
-//   - Tooltip cross-link /audit S02 makes ESTIMATION DISCLOSURE one-click
-//
-// Brand IP compatibility:
-//   - ✓ Authority bias + Confidence-priming(2 of 7 canonical hooks)
-//   - ✓ No vocabulary slip toward 老師 ecosystem
-//   - ✓ Pratfall axiom honored(tooltip surfaces ESTIMATION DISCLOSURE)
-//   - ✓ Mechanical from engine variance · no human curation
-//
-// References:
-//   - Round 31 W-B StatPercentileBar canonical pattern
-//   - Baseball Savant percentile aesthetic
-//   - FanGraphs + Baseball Prospectus star-rating convention
+// ── ZONE 27 · 引擎信號強度 meter(前身 ConfidenceStars · 已去五星)──
+// 五星「★★★★★ STRONG SIGNAL」是報馬仔 / 賣明牌生態的視覺語彙 —— 一個會
+// 公開自己過度自信、連 DIVERGED 都掛的量化品牌,不該在「單場」掛五顆金星
+// 喊「強烈訊號」。 改成 quant 原生的分段強度條(同 StatPercentileBar /
+// UncertaintyStripe 的語言):階梯式 5 段、亮金填滿 = 訊號越強,讀起來像
+// 終端機儀表,不像算命仙的明牌。 機械對應(NO editorial · 純從引擎
+// aiConfidence 推):
+//   >=80 → 5 段 STRONG · 70-79 → 4 段 CLEAR · 60-69 → 3 段 DECENT ·
+//   50-59 → 2 段 WEAK · <50 → 1 段 COIN-FLIP
+// tooltip 仍一鍵連 /audit 的算法揭露(Pratfall 不藏)。
 // ─────────────────────────────────────────────────────
 
 type Props = {
-  /** Engine's aiConfidence field · 0-100 integer */
+  /** 引擎 aiConfidence 欄 · 0-100 整數 */
   confidence: number;
-  /** Optional layout · "inline" 緊湊 (HeroLiveCard / MiniMatchCard) · "stack" 大 (match detail page hero) */
+  /** "inline" 緊湊(賽事頁 hero)· "stack" 大 */
   variant?: "inline" | "stack";
-  /** Optional · disable tooltip (default false) */
   noTooltip?: boolean;
 };
 
-type Tier = {
-  stars: 1 | 2 | 3 | 4 | 5;
-  label: string;
-};
+type Tier = { level: 1 | 2 | 3 | 4 | 5; label: string };
 
 function tierFor(confidence: number): Tier {
-  if (confidence >= 80) return { stars: 5, label: "STRONG SIGNAL" };
-  if (confidence >= 70) return { stars: 4, label: "CLEAR SIGNAL" };
-  if (confidence >= 60) return { stars: 3, label: "DECENT SIGNAL" };
-  if (confidence >= 50) return { stars: 2, label: "WEAK SIGNAL" };
-  return { stars: 1, label: "COIN-FLIP" };
+  if (confidence >= 80) return { level: 5, label: "STRONG SIGNAL" };
+  if (confidence >= 70) return { level: 4, label: "CLEAR SIGNAL" };
+  if (confidence >= 60) return { level: 3, label: "DECENT SIGNAL" };
+  if (confidence >= 50) return { level: 2, label: "WEAK SIGNAL" };
+  return { level: 1, label: "COIN-FLIP" };
+}
+
+// 階梯式訊號條(equalizer 樣) · 越右越高、填滿到 level 為止
+function Segments({ level, tall = false }: { level: number; tall?: boolean }) {
+  const heights = tall
+    ? ["h-2", "h-3", "h-4", "h-5", "h-6"]
+    : ["h-1.5", "h-2", "h-2.5", "h-3", "h-3.5"];
+  return (
+    <span className="inline-flex items-end gap-[3px]" aria-hidden="true">
+      {heights.map((h, idx) => (
+        <span
+          key={idx}
+          className={`block w-[3px] ${tall ? "sm:w-1" : ""} ${h} ${
+            idx < level ? "bg-gold glow-gold" : "bg-line/60"
+          }`}
+        />
+      ))}
+    </span>
+  );
 }
 
 export default function ConfidenceStars({
@@ -63,43 +55,32 @@ export default function ConfidenceStars({
   noTooltip = false,
 }: Props) {
   const clamped = Math.max(0, Math.min(100, Math.round(confidence)));
-  const { stars, label } = tierFor(clamped);
+  const { level, label } = tierFor(clamped);
 
   const tooltipText = noTooltip
     ? undefined
-    : `AI Confidence ${clamped}/100 · derived mechanically from engine variance · 不是 editorial 不是 個人 tipster · ESTIMATION DISCLOSURE 見 /audit S02`;
-
-  const filled = "★";
-  const empty = "☆";
-  const starString =
-    filled.repeat(stars) + empty.repeat(5 - stars);
+    : `引擎信號強度 ${clamped}/100 · 純從引擎變異數機械推算 · 不是編輯也不是個人明牌 · 算法見 /audit`;
 
   if (variant === "stack") {
     return (
-      <div
-        className="inline-flex flex-col items-start gap-1"
-        title={tooltipText}
-      >
-        <div className="flex items-baseline gap-3">
-          <span
-            aria-label={`AI Confidence ${stars} of 5 stars · ${label}`}
-            className="font-mono text-gold text-2xl sm:text-3xl tabular tracking-[0.1em] leading-none"
-          >
-            {starString}
+      <div className="inline-flex flex-col items-start gap-1.5" title={tooltipText}>
+        <div className="flex items-end gap-2.5">
+          <span aria-label={`引擎信號強度 ${level}/5 · ${label}`}>
+            <Segments level={level} tall />
           </span>
-          <span className="font-mono text-mute text-[10px] tracking-[0.25em] tabular">
-            {clamped}/100
+          <span className="font-mono text-bone text-[10px] tracking-[0.35em] leading-none">
+            {label}
           </span>
         </div>
         <div className="flex items-baseline gap-3">
-          <span className="font-mono text-bone text-[10px] tracking-[0.35em]">
-            {label}
+          <span className="font-mono text-mute text-[9px] tracking-[0.25em] tabular">
+            信號強度 {clamped}/100
           </span>
           {!noTooltip && (
             <Link
               href="/audit#disclosure"
               className="font-mono text-mute/60 hover:text-gold text-[9px] tracking-[0.3em] underline-offset-4 hover:underline transition-colors"
-              title="ESTIMATION DISCLOSURE · 引擎置信度怎麼算"
+              title="這個強度怎麼算出來的"
             >
               方法?
             </Link>
@@ -109,21 +90,13 @@ export default function ConfidenceStars({
     );
   }
 
-  // inline variant · 緊湊 1 行
+  // inline · 緊湊 1 行
   return (
-    <span
-      className="inline-flex items-baseline gap-2"
-      title={tooltipText}
-    >
-      <span
-        aria-label={`AI Confidence ${stars} of 5 stars · ${label}`}
-        className="font-mono text-gold text-base tabular tracking-[0.08em] leading-none"
-      >
-        {starString}
+    <span className="inline-flex items-center gap-2" title={tooltipText}>
+      <span aria-label={`引擎信號強度 ${level}/5 · ${label}`}>
+        <Segments level={level} />
       </span>
-      <span className="font-mono text-mute text-[9px] tracking-[0.3em]">
-        {label}
-      </span>
+      <span className="font-mono text-mute text-[9px] tracking-[0.3em]">{label}</span>
     </span>
   );
 }
