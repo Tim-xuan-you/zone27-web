@@ -211,7 +211,7 @@ export default function InteractPage() {
             </p>
             <p>
               <strong className="text-bone">2 · 訂閱是支持 Tim 做下去 · 不是解鎖社群。</strong>{" "}
-              LINE 老師 / 報馬仔 需要靠群組熱度變現 · ZONE 27 剛好相反。
+              靠賣明牌的生意要靠群組熱度變現 · ZONE 27 剛好相反。
             </p>
             <p>
               <strong className="text-bone">3 · 球迷的社群已經在 LINE / FB / PTT。</strong>{" "}
@@ -328,7 +328,7 @@ export default function InteractPage() {
             <p>
               CPBL 球迷社群已在 60+ 個活躍 LINE 群 + Facebook 粉專 +
               PTT 棒球板 滿足。 ZONE 27 再加社群功能只是重複又稀釋。
-              LINE 老師 / 報馬仔 / 玩運彩 需要靠群組熱度才能變現 ·
+              靠賣明牌的生意,要靠群組熱度才能變現 ·
               ZONE 27 不靠熱度變現 · 靠量化分析 + 公開可信。 兩者並存 · 不取代。
             </p>
           </div>

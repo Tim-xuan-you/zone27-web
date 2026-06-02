@@ -110,35 +110,35 @@ export default function AboutPage() {
         kicker="我寫這封情書的原因"
       >
         <p>
-          過去 20 多年 · 我見過台灣棒球商業形態的所有版本:
+          過去 20 多年 · 我見過台灣棒球資訊的每一種賺錢方式:
         </p>
         <ul className="space-y-2.5 text-mute leading-relaxed list-none pl-0">
           <li className="flex items-baseline gap-3">
             <span className="font-mono text-gold/70 text-[10px] tracking-[0.2em] shrink-0">▸</span>
             <span className="flex-1">
-              <strong className="text-bone">LINE 老師</strong>收會員費 ·
-              輸了刪文 · 群組解散後重新開另一個
+              <strong className="text-bone">收費明牌群組</strong> — 收會員費 ·
+              輸了刪文 · 群組解散後再開一個
             </span>
           </li>
           <li className="flex items-baseline gap-3">
             <span className="font-mono text-gold/70 text-[10px] tracking-[0.2em] shrink-0">▸</span>
             <span className="flex-1">
-              <strong className="text-bone">報馬仔網站</strong>paid picks 點數 1:1 NT$ ·
-              9 駐站名家自稱「55-59% 勝率」 · 戰績無第三方審計
+              <strong className="text-bone">賣牌支的站</strong> — 一支幾百塊 ·
+              自稱「五成五勝率」 · 戰績沒有人審計
             </span>
           </li>
           <li className="flex items-baseline gap-3">
             <span className="font-mono text-gold/70 text-[10px] tracking-[0.2em] shrink-0">▸</span>
             <span className="flex-1">
-              <strong className="text-bone">殺手平台</strong>(地下莊家)抽下注金額
-              30-50% · 贏家帳號被砍 · 跟報馬仔/玩運彩是不同 mechanism
+              <strong className="text-bone">抽下注的莊家</strong> — 抽走下注金額
+              三到五成 · 你贏太多 · 帳號就被砍
             </span>
           </li>
           <li className="flex items-baseline gap-3">
             <span className="font-mono text-gold/70 text-[10px] tracking-[0.2em] shrink-0">▸</span>
             <span className="flex-1">
-              <strong className="text-bone">免費論壇</strong>資訊雜亂 ·
-              沒人為 prediction 負責 · 信任歸零
+              <strong className="text-bone">免費論壇</strong> — 資訊雜亂 ·
+              沒有人為自己的預測負責 · 信任歸零
             </span>
           </li>
         </ul>
@@ -170,7 +170,7 @@ export default function AboutPage() {
         kicker="這群球迷值得一個更好的場所"
       >
         <p>
-          PROLOGUE 4 失敗形態(LINE 老師 · 報馬仔 · 殺手 · 免費論壇)的共同問題:
+          PROLOGUE 4 失敗形態(收費明牌群組 · 賣明牌的站 · 抽下注的莊家 · 免費論壇)的共同問題:
           沒有人對自己的預測負責 · 沒有透明的勝率紀錄 · 沒有產品化。
         </p>
         <p className="text-bone">
@@ -210,7 +210,7 @@ export default function AboutPage() {
         kicker="蒙地卡羅四步驟"
       >
         <p>
-          每一場比賽出現在 ZONE 27,都經歷四個獨立步驟。沒有星座、沒有命盤、沒有殺手憑感覺。
+          每一場比賽出現在 ZONE 27,都經歷四個獨立步驟。沒有星座、沒有命盤、沒有靠感覺報牌。
         </p>
         <ol className="space-y-4">
           <li className="flex gap-4">
@@ -275,7 +275,7 @@ export default function AboutPage() {
         <ul className="space-y-3">
           <li>
             <strong className="text-bone">極低抽成。</strong>
-            黑金會員 creator 抽成,平台只抽 10%(創始 27 只 5%)。對比 LINE 老師 / 投顧老師業界 30-50% 是降維打擊。
+            黑金會員 creator 抽成,平台只抽 10%(創始 27 只 5%)。對比收費明牌群組 / 收費老師業界 30-50% 是降維打擊。
           </li>
           <li>
             <strong className="text-bone">不可篡改紀錄。</strong>
@@ -321,7 +321,7 @@ export default function AboutPage() {
         <p className="text-mute mt-5 leading-relaxed border-l-2 border-gold/40 pl-5 py-2">
           <strong className="text-bone">每一個承諾 Tim 簽名 · 可被驗證 ·
           違反任何一條 = <Link href="/ethics" className="text-gold underline-offset-4 hover:underline">/ethics</Link> 紅字永久標 · 不可刪</strong> ·
-          這是 ZONE 27 跟 玩運彩+報馬仔 anonymity+deletion model 的
+          這是 ZONE 27 跟靠賣明牌的生意 anonymity+deletion model 的
           structural asymmetry。
         </p>
         <p className="font-mono text-mute text-[10px] tracking-[0.3em] mt-6">

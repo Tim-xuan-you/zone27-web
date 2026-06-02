@@ -200,7 +200,7 @@ export default function DisciplinePage() {
                 Section 04 Environmental Impact)。
               </Item>
               <Item label="從零想 quant baseball 品牌">
-                沒有抄 LINE 老師 / 殺手平台模式 · 從零問「what&apos;s a quant baseball
+                沒有抄收費明牌群組 / 抽下注的莊家模式 · 從零問「what&apos;s a quant baseball
                 community really for」。這就是 First Principles。
               </Item>
               <Item label="自綁抽成 5% = forced discipline">
@@ -392,7 +392,7 @@ export default function DisciplinePage() {
             <SynthRow
               axis="D · 守紀律拒絕容易"
               examples="Buffett 拒網路泡沫 · Musk 親手算每零件 cost · Costco 14% 毛利上限自綁 · Jobs 拒 stylus (iPhone 2007) · 拒 netbook · 拒 7-inch tablet"
-              z27="拒 LINE 老師模式 · 拒運彩抽佣 · 拒博彩寄生 · 拒 user tracking · 拒 multi-engine paywall"
+              z27="拒賣明牌模式 · 拒下注抽佣 · 拒博彩寄生 · 拒 user tracking · 拒 multi-engine paywall"
             />
 
             <P className="text-mute/70">

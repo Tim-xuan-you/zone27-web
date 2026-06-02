@@ -418,7 +418,7 @@ export default function AnnualIndex() {
           <p>
             Berkshire Hathaway 60 年 letter archive + Defector 5 年 annual
             report + Hell Gate + Aftermath radical-transparency pattern · ZONE
-            27 採同樣 axis。 玩運彩+報馬仔 結構性無法 ship 同樣 page · 因為
+            27 採同樣 axis。 靠賣明牌的生意,結構上無法 ship 同樣 page · 因為
             他們業務 model 需要 reset narrative every season。 ZONE 27 不
             reset · 不 cherry-pick · 只 append。
           </p>

@@ -313,7 +313,7 @@ export default async function RewardsPage() {
             真實 · ZONE 27 用 mechanical PROVED 計分 + 實體獎品(恆美 ecosystem)
             + 規則公開(binding 30-day notice)+ 連同失準的場次(DIVERGED)同等大公布
             滿足 · 不靠 cash · 不靠 referral · 不靠 social transfer</strong>。
-            「displacement mission · 對標幹掉 玩運彩+報馬仔」 brand-pure 路徑。
+            「displacement mission · 對標取代靠賣明牌的生意」 brand-pure 路徑。
           </p>
         </FounderSignOff>
 

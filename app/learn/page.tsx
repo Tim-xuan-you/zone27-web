@@ -134,7 +134,7 @@ export default function LearnPage() {
 
           <p className="mt-6 text-mute/80">
             <strong className="text-bone">沒有更多了。</strong>{" "}
-            這就是 v0.2 引擎的全部輸入 — 3 個數字,沒有玄學、沒有星座、沒有殺手憑感覺。
+            這就是 v0.2 引擎的全部輸入 — 3 個數字,沒有玄學、沒有星座、沒有靠感覺報牌。
             想看更多進階指標(<StatTerm term="OPS" />,
             {" "}<StatTerm term="wRC+" />,{" "}
             <StatTerm term="WAR" />)的解釋?
@@ -156,11 +156,11 @@ export default function LearnPage() {
           anchor="why-not-gambling"
         >
           <p>
-            如果您看到「機率」「賠率」「edge」這些字 · 可能會以為 ZONE 27 是某種運彩或殺手平台。
+            如果您看到「機率」「賠率」「edge」這些字 · 可能會以為 ZONE 27 是某種運彩或抽下注的莊家。
             <strong className="text-bone">不是。</strong>
           </p>
           <p>
-            台灣運彩 / 報馬仔 / LINE 老師群組賣的是「下注方向」 —
+            下注平台、賣明牌的站、收費明牌群組賣的是「下注方向」 —
             「兄弟今天贏 · 讓 1.5 · 押這個」。這套東西的問題不是準不準
             · 是<strong className="text-bone">商業模式跟您站在對立面</strong>:
             您輸越多 · 平台抽得越多 · 您贏太多 · 帳號被砍。

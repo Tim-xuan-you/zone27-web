@@ -102,7 +102,7 @@ export default function SubmitPage() {
           </h1>
           <p className="mt-5 text-mute text-sm sm:text-base leading-relaxed">
             Stratechery Guest Post pattern · 沒 10% 抽成 · 沒 public 自動 post ·
-            純 Tim 親手 curate(LINE 老師 archetype 防線)。 不過稿的 reply 您
+            純 Tim 親手 curate(防的是收費明牌那一套)。 不過稿的 reply 您
             reason · 不藏。 1 週 1 篇 cadence。
           </p>
         </section>

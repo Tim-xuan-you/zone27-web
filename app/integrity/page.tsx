@@ -57,7 +57,7 @@ const REDLINES: ReadonlyArray<{ no: string; rule: string; basis: string }> = [
   {
     no: "06",
     rule: "不 寄生 gambling 平台",
-    basis: "0 爬取 玩運彩 / 報馬仔 / 投顧老師 · 0 抽成 / 分潤 · 我們要取代它們 · 不是幫它們導流。",
+    basis: "0 爬取 賣明牌的站 / 收費明牌群組 / 收費老師 · 0 抽成 / 分潤 · 我們要取代它們 · 不是幫它們導流。",
   },
   {
     no: "07",
@@ -212,7 +212,7 @@ export default function IntegrityPage() {
             / §01 · 13 BRAND-IP REDLINES · 永遠不做
           </p>
           <p className="text-mute text-sm leading-relaxed mb-6">
-            這 13 件「永遠不做」是 ZONE 27 跟玩運彩 + 報馬仔 + LINE 老師劃清界線的
+            這 13 件「永遠不做」是 ZONE 27 跟賣明牌的站、收費明牌群組劃清界線的
             底線。 違反任一 = 品牌自殺 · 修改需 30 天前 /changelog 公告。
           </p>
           <ol className="space-y-4 mt-4">
@@ -287,7 +287,7 @@ export default function IntegrityPage() {
 
             <p>
               <strong className="text-bone">Boundary case ZONE 27 已 pre-commit:</strong>
-              若 sportsbook / 玩運彩 / 報馬仔 / LINE 老師生態 / 任何 betting
+              若 sportsbook / 賣明牌的站 / 收費明牌群組 / 任何 betting
               platform 主動 contact 提出 NT$ X K 買 engine API · whitelabel
               · co-branded launch · affiliate program · sponsored content · 任何
               形式 commerce relationship · Tim 將: (1) 在 /audit 公開拒絕往來 ·
@@ -336,7 +336,7 @@ export default function IntegrityPage() {
                   </p>
                 </div>
                 <p className="text-mute text-[12px] sm:text-sm leading-relaxed">
-                  玩運彩 / 報馬仔 / sportsbook / LINE 老師 / betting platform / affiliate
+                  賣明牌的站 / 收費明牌群組 / sportsbook / betting platform / affiliate
                   / sponsored content / API license / whitelabel / 任何形式 incentive 全
                   decline · 不 counter-offer 不 negotiation · email refuse 收 PII 不 leak ·
                   違反 = brand 信用永久 collapse · /ethics 紅字

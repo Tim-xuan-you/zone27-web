@@ -171,7 +171,7 @@ export default function CreatorAnalysis({
         每位作者名字旁那個 <span className="text-gold font-medium">✓ 已驗證準度</span> 章 ——
         是 ZONE 27 從他<span className="text-bone">每一手鎖死的紀錄</span>自動算的:賽前選邊鎖死、
         賽後自動掛準/不準、<span className="text-gold">連輸的全留著、刪不掉</span>。
-        報馬仔掛「近 15 天 77 過 55」是自己挑窗、輸的刪掉;<span className="text-bone">這個章他永遠掛不出來</span>。
+        賣明牌的站掛「近 15 天 77 過 55」是自己挑窗、輸的刪掉;<span className="text-bone">這個章他永遠掛不出來</span>。
       </p>
 
       {/* posts */}

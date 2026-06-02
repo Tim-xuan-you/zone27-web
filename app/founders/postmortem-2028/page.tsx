@@ -8,7 +8,7 @@ import ArticleMeta from "@/components/ArticleMeta";
 export const metadata: Metadata = {
   title: "我們的訃聞 · 寫在 ZONE 27 倒下前 2 年",
   description:
-    "Tim 親手用過去式寫下 2028 年 ZONE 27 最可能倒下的 5 種劇本 · 每個劇本包含失敗的故事、早期警訊、觸發後要做的事 · 不藏未來可能死掉的方式。 若這 5 個劇本到 2028-05-26 都沒發生 · ZONE 27 活了下來 · 若有一個發生 · 這頁就變成證據。 LINE 老師、報馬仔永遠不會做這樣一頁 · 因為他們不公布失敗劇本 · 也不替自己的失敗先立下承諾。",
+    "Tim 親手用過去式寫下 2028 年 ZONE 27 最可能倒下的 5 種劇本 · 每個劇本包含失敗的故事、早期警訊、觸發後要做的事 · 不藏未來可能死掉的方式。 若這 5 個劇本到 2028-05-26 都沒發生 · ZONE 27 活了下來 · 若有一個發生 · 這頁就變成證據。 靠賣明牌的生意結構上做不出這樣一頁 · 因為他們不公布失敗劇本 · 也不替自己的失敗先立下承諾。",
   openGraph: {
     title: "我們的訃聞 · 寫在 ZONE 27 倒下前 2 年",
     description:
@@ -192,7 +192,7 @@ export default function PostmortemPage() {
           </p>
           <div className="space-y-4 zh-body text-mute text-base leading-relaxed">
             <p>
-              每一個 LINE 老師、報馬仔都宣稱自己永遠會贏。 他們的生意要靠{" "}
+              靠賣明牌的生意都宣稱自己永遠會贏。 這種生意要靠{" "}
               <strong className="text-bone">永遠看起來很有把握</strong> ·
               結構上做不出這樣一頁。 ZONE 27 反過來 ·{" "}
               <strong className="text-bone">公開自己的訃聞</strong> · 這是

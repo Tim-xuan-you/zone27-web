@@ -141,7 +141,7 @@ export default async function EthicsOgImage() {
             gap: 24,
           }}
         >
-          <TierStat n="6" label="DISPLACEMENT" sub="玩運彩 違反 6/6" gold />
+          <TierStat n="6" label="DISPLACEMENT" sub="賣明牌的站 違反 6/6" gold />
           <TierStat n="2" label="SUBSCRIBER PROTECT" sub="0 ads · annual rev publish" />
           <TierStat n="1" label="BRAND" sub="never become tipster" />
         </div>
@@ -167,7 +167,7 @@ export default async function EthicsOgImage() {
               maxWidth: 720,
             }}
           >
-            玩運彩+報馬仔 violate 7/9 of these. Publishing this = business suicide for them.
+            Paid-pick businesses violate 7/9 of these. Publishing this = business suicide for them.
           </span>
           <span
             style={{

@@ -187,7 +187,7 @@ export default async function CalibrationPage() {
             你的準度級別
           </h2>
           <p className="text-mute/85 text-sm leading-relaxed mb-6">
-            這跟玩運彩、報馬仔的排行榜本質不同 —
+            這跟賣明牌的站的排行榜本質不同 —
             我們排的是「<strong className="text-bone">你說的把握程度,跟實際結果有多吻合</strong>」,
             不是排「誰猜最準」(那是賭博排行榜的玩法)。 而且只有你自己看得到,
             不跟別人比。

@@ -142,7 +142,7 @@ export default function MethodologyDiffPage() {
             {" "}· 不需 fork。
           </p>
           <p className="text-mute/80">
-            <strong className="text-bone">玩運彩+報馬仔不 publish 引擎 diff。</strong>
+            <strong className="text-bone">靠賣明牌的站不 publish 引擎 diff。</strong>
             {" "}publish 等於暴露 cherry-picking(回頭改 model)或 retroactive
             curation(刪掉 losing weeks)。 ZONE 27 ship 此頁 = 物理 ban 這條
             退路 · per{" "}
@@ -415,7 +415,7 @@ export default function MethodologyDiffPage() {
         <Section no="05" label="WHAT v0.3 DOES NOT FIX" zh="v0.3 不修正的 6 件事">
           <p>
             <strong className="text-bone">主動列出 v0.3 沒有修的 6 個 limitation</strong>
-            (主動揭短 · 詳見 <Link href="/audit" className="text-gold underline-offset-4 hover:underline">/audit</Link>)。 玩運彩+報馬仔 marketing 標準是「升級了
+            (主動揭短 · 詳見 <Link href="/audit" className="text-gold underline-offset-4 hover:underline">/audit</Link>)。 賣明牌的站 marketing 標準是「升級了
             model」 不交代細節 · ZONE 27 倒置:列出來。
           </p>
 

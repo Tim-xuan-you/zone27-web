@@ -28,7 +28,7 @@ const REFUSAL_RATIONALES: ReadonlyArray<RefusalRationale> = [
   {
     pattern: "想轉賣收據 / 會員卡 / 編號",
     rationale:
-      "明示或暗示要把賽後收據截圖、BLACK CARD 月卡 access、或創始編號轉賣給 LINE 老師社群 · 不通過。收據是你個人的信任憑證 · 不是拿來賣的商品 · 我們也不寄生任何下注平台。",
+      "明示或暗示要把賽後收據截圖、BLACK CARD 月卡 access、或創始編號轉賣給收費明牌群組 · 不通過。收據是你個人的信任憑證 · 不是拿來賣的商品 · 我們也不寄生任何下注平台。",
     seeHref: "/audit#section-02",
     seeLabel: "/audit § 02 · 我們永遠不做的事",
   },
@@ -94,7 +94,7 @@ export default function RefusalLedgerHint() {
           在任何人被拒絕之前 · 先把拒絕的標準公開
         </strong>{" "}
         · 你讀完這 5 條 · 自己判斷合不合 · 不用浪費你跟 Tim 1-3 天的審核時間。
-        LINE 老師 / 報馬仔 結構上做不出這一頁 · 因為他們不拒絕任何人 ·
+        靠賣明牌的生意結構上做不出這一頁 · 因為他們不拒絕任何人 ·
         來者不拒只想收錢 · 這一頁就是差別。
       </p>
       <p className="text-mute/85 leading-relaxed mb-6">

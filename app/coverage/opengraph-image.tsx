@@ -148,7 +148,7 @@ export default async function CoverageOgImage() {
           />
           <LedgerRow
             status="NEVER"
-            league="運彩 · 報馬仔 · 殺手平台"
+            league="下注平台 · 賣明牌 · 抽佣莊家"
             note="與品牌信用相反 · 永遠不寄生"
             statusColor={BRAND.loss}
           />

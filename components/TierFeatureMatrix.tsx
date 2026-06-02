@@ -135,7 +135,7 @@ const FEATURES: Feature[] = [
   },
   {
     label: "創作者抽成",
-    detail: "您發文 · ZONE 27 抽 · 業界 LINE 老師 30-50% · 我們 ↓↓",
+    detail: "您發文 · ZONE 27 抽 · 業界收費老師 30-50% · 我們 ↓↓",
     unlock: {
       anonymous: "na",
       free: "na",

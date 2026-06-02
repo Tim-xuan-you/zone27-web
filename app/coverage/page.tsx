@@ -113,16 +113,16 @@ const REQUESTED_QUEUE: LeagueRow[] = [
 
 const NEVER_COVER: { name: string; reason: string }[] = [
   {
-    name: "台灣運彩 article.sportslottery.com.tw",
-    reason: "博彩平台 · 抓資料會綁定 ZONE 27 與運彩,違反 /about /faq /privacy 已寫死的定位",
+    name: "任何下注 / 博彩平台",
+    reason: "抓它們的資料會把 ZONE 27 跟下注綁在一起,違反 /about /faq /privacy 已寫死的定位。",
   },
   {
-    name: "玩運彩 playsport.cc/forum",
-    reason: "Taiwan 最大運彩討論區 · 牌支戰績 +「老師」生態 · 跟 ZONE 27 結構相反(我們不抽下注 · 不販售明牌 · 不排名「老師」)· 我們不爬賭博平台的資料。",
+    name: "運彩討論區的牌支戰績",
+    reason: "牌支 +「老師」生態 · 跟 ZONE 27 結構相反(我們不抽下注 · 不賣明牌 · 不排名「老師」)· 我們不爬下注平台的資料。",
   },
   {
-    name: "報馬仔 fengyuncai.com",
-    reason: "明牌販售平台 · 同上邏輯",
+    name: "賣明牌的站",
+    reason: "明牌販售 · 同上邏輯。",
   },
   {
     name: "Sportradar / Stats Perform / Pinnacle 等付費 API",
@@ -189,15 +189,15 @@ export default function CoveragePage() {
               <br />
               <span className="text-mute">
                 客群 = 會下注的 sports 迷(包括賭徒)· 對標
-                <span className="text-gold">玩運彩 / 報馬仔 / LINE 老師</span> ·
+                <span className="text-gold">靠賣明牌賺錢的對手</span> ·
                 提供更好的<span className="text-gold">資訊層</span>。
               </span>
             </p>
             <p className="text-bone text-base leading-relaxed mb-6 max-w-2xl">
-              不同 玩運彩 / 報馬仔 / LINE 老師:<strong className="text-gold">引擎永遠免費 · 不賣明牌(tipster picks)· PROVED + DIVERGED 等大公開 · model 完整公開在 GitHub</strong>。 您拿我們的資料自己決定下哪個 platform · ZONE 27 自己不接受下注(我們不是賭場)。
+              不同靠賣明牌賺錢的對手:<strong className="text-gold">引擎永遠免費 · 不賣明牌(tipster picks)· PROVED + DIVERGED 等大公開 · model 完整公開在 GitHub</strong>。 您拿我們的資料自己決定下哪個 platform · ZONE 27 自己不接受下注(我們不是賭場)。
             </p>
             <p className="text-mute/85 text-sm leading-relaxed mb-6 max-w-2xl">
-              <strong className="text-bone">老實認:</strong> BLACK CARD 訂閱者寫文章賣 · ZONE 27 抽 5% commission · 跟 LINE 老師 5-30% / Substack 10% / OnlyFans 20% / YouTube 45% 抽傭結構同類 · 業界最低 50% · 不假裝「我們不抽傭」 = 假面 disclosure。
+              <strong className="text-bone">老實認:</strong> BLACK CARD 訂閱者寫文章賣 · ZONE 27 抽 5% commission · 跟收費明牌群組 5-30% / Substack 10% / OnlyFans 20% / YouTube 45% 抽傭結構同類 · 業界最低 50% · 不假裝「我們不抽傭」 = 假面 disclosure。
             </p>
             <div className="mb-6">
               <ArticleMeta readingMin={8} />
@@ -291,7 +291,7 @@ export default function CoveragePage() {
               00 · BRAND BOUNDARY · WHAT WE&apos;LL NEVER COVER
             </p>
             <p className="text-bone text-base sm:text-lg leading-relaxed mb-5 max-w-2xl">
-              來自 玩運彩 / 報馬仔 / 殺手平台 / 任何博彩生態 ·{" "}
+              來自賣明牌的站、收費明牌群組、抽下注的莊家 / 任何博彩生態 ·{" "}
               <span className="text-gold">我們永遠不接</span>。
               下方是完整 5-item list 的 quick preview · 點 §05 看 reasoning。
             </p>

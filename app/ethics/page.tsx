@@ -10,7 +10,7 @@ import ReadingProgress from "@/components/ReadingProgress";
 export const metadata: Metadata = {
   title: "Ethics Policy · 9 binding commitments",
   description:
-    "ZONE 27 的 9 條「我永遠不做」承諾,Tim 親筆簽名。對標、取代玩運彩 / 報馬仔 / LINE 老師。每一條都公開、可追蹤,修改任何一條都要 30 天前在 /changelog 公告。違反 = 品牌信用崩盤。",
+    "ZONE 27 的 9 條「我永遠不做」承諾,Tim 親筆簽名。對標、取代賣明牌的站、收費明牌群組。每一條都公開、可追蹤,修改任何一條都要 30 天前在 /changelog 公告。違反 = 品牌信用崩盤。",
 };
 
 // /ethics · Stratechery About page transplant · 9 ZONE 27 binding NOT-DO
@@ -108,7 +108,7 @@ export default function EthicsPage() {
 
           <div className="mt-8 border-l-2 border-gold/60 pl-5 sm:pl-6 py-2 max-w-2xl">
             <p className="text-bone text-lg sm:text-xl leading-relaxed">
-              <strong>玩運彩+報馬仔 不可能 ship 這頁</strong> · 因為他們的每
+              <strong>靠賣明牌的生意,結構上做不出這頁</strong> · 因為他們的每
               一條 revenue stream 都 violate 下面 9 條 · 公開等於商業自殺。
             </p>
             <p className="mt-3 text-mute text-base leading-relaxed">
@@ -119,7 +119,7 @@ export default function EthicsPage() {
 
           <p className="mt-6 text-bone text-base sm:text-lg leading-relaxed border-l-4 border-gold pl-5 py-2 max-w-2xl">
             <strong>每一個承諾 Tim 簽名 · 可被驗證 · 違反任何一條 = 此 page 紅字
-            永久標 · 不可刪</strong> · ZONE 27 vs 玩運彩+報馬仔 anonymity+deletion
+            永久標 · 不可刪</strong> · ZONE 27 vs 賣明牌的站 anonymity+deletion
             model 的 structural asymmetry。
           </p>
 
@@ -182,15 +182,15 @@ export default function EthicsPage() {
             lang="en"
             className="font-mono text-gold text-[10px] tracking-[0.45em] mb-6"
           >
-            / 02 · WHY 玩運彩 + 報馬仔 STRUCTURALLY CANNOT SHIP THIS
+            / 02 · WHY PAID-PICK BUSINESSES STRUCTURALLY CANNOT SHIP THIS
           </p>
           <h2 className="text-2xl sm:text-3xl text-bone font-light tracking-tight mb-6 leading-tight">
             這 9 條對他們是商業自殺 · 對我們是 <span className="text-gold">brand moat</span>
           </h2>
           <div className="space-y-4 text-mute leading-relaxed zh-body">
             <p>
-              玩運彩 · 報馬仔 · sportsbook adjacents · LINE 老師生態 · 整個
-              台灣博彩附屬 service 經濟結構 violate 上面 1-5 + 8 共 6 條:
+              賣明牌的站 · 收費明牌群組 · sportsbook adjacents · 整個
+              靠賣明牌賺錢的 service 經濟結構 violate 上面 1-5 + 8 共 6 條:
             </p>
             <ul className="space-y-2 pl-6">
               <li className="flex gap-3 items-baseline">
@@ -399,7 +399,7 @@ export default function EthicsPage() {
 
         <FounderSignOff>
           <p>
-            這頁是 ZONE 27 對標、取代 玩運彩+報馬仔 的品牌底層落地 ·
+            這頁是 ZONE 27 對標、取代 靠賣明牌的生意 的品牌底層落地 ·
             <strong>不是 marketing copy</strong>。 9 條是 hard commitments +
             單人風險的接管安排 · 違反任一條 = brand 信用
             collapse · 即使違反 1 次 · /ethics page 上會出現「{COMMITMENTS[0].num}
@@ -411,7 +411,7 @@ export default function EthicsPage() {
             Stratechery About page Ben Thompson 6 commitments · ZONE 27 9
             commitments · 不是 incremental more · 是 displacement-specific
             more · 第 1 + 2 + 4 + 5 + 8 + 9 是 ZONE 27-only 6 條 ·
-            <strong>玩運彩+報馬仔 永遠 ship 不出來</strong> · 因為他們 violate
+            <strong>靠賣明牌的生意,結構上永遠 ship 不出來</strong> · 因為他們 violate
             這 6 條 == 他們整個 revenue model 構成。
           </p>
           <p>

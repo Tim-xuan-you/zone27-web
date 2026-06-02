@@ -143,7 +143,7 @@ export default function VsRowFold() {
               <th className="text-center py-3 px-2 font-mono text-mute/70 text-[10px] tracking-[0.25em] font-normal align-bottom">
                 付費明牌
                 <span className="block text-[9px] tracking-[0.2em] text-mute/50 mt-1 normal-case">
-                  老師 · 報馬仔
+                  收費老師 · 明牌站
                 </span>
               </th>
               <th className="text-center py-3 px-2 font-mono text-mute/70 text-[10px] tracking-[0.25em] font-normal align-bottom">

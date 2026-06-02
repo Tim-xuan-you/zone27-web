@@ -742,7 +742,7 @@ repeat 10,000 times → aggregate
           <p className="text-mute leading-relaxed text-base mb-4">
             <span className="text-bone">ZONE 27「自 v0.1 起每個 lens 永久看得到」</span>。
             未來你 fork 我們的 GitHub repo · 用 git log 找 v0.1 的準度變化 ·
-            都查得到。 報馬仔輸了就刪文 · 我們是保留版本 + 永久留下記錄。
+            都查得到。 賣明牌的站輸了就刪文 · 我們是保留版本 + 永久留下記錄。
           </p>
           <p className="font-mono text-mute/80 text-[10px] tracking-[0.3em] leading-relaxed">
             ⚓ 修改此 pledge 需 30 天前 /changelog 公告 · 同 /audit S05

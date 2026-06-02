@@ -34,7 +34,7 @@ const CATEGORIES: Category[] = [
         q: "什麼是 ZONE 27?",
         a: (
           <>
-            <strong className="text-bone">ZONE 27 = 賭徒的 Bloomberg Terminal。</strong> 客群 = 會下注的 sports 迷(包括賭徒)· 對標 玩運彩 / 報馬仔 / LINE 老師 · 提供更好的資訊層。 不同他們的是:引擎永遠免費 · 不賣明牌 · PROVED + DIVERGED 等大公開 · model 完整 GitHub 公開。 您拿我們的資料自己決定下哪個 platform · ZONE 27 自己不接受下注(我們不是賭場)。 老實認:BLACK CARD 訂閱者寫文章賣 · ZONE 27 抽 5% commission(業界最低 · Substack 10% / OnlyFans 20% / YouTube 45%)· 不假裝「我們不抽傭」。 Phase 1 CPBL · Phase 2 NBA + 未來 leagues · Tim 親手 curate。 完整 brand 方法論見{" "}
+            <strong className="text-bone">ZONE 27 = 賭徒的 Bloomberg Terminal。</strong> 客群 = 會下注的 sports 迷(包括賭徒)· 對標靠賣明牌賺錢的對手 · 提供更好的資訊層。 不同他們的是:引擎永遠免費 · 不賣明牌 · PROVED + DIVERGED 等大公開 · model 完整 GitHub 公開。 您拿我們的資料自己決定下哪個 platform · ZONE 27 自己不接受下注(我們不是賭場)。 老實認:BLACK CARD 訂閱者寫文章賣 · ZONE 27 抽 5% commission(業界最低 · Substack 10% / OnlyFans 20% / YouTube 45%)· 不假裝「我們不抽傭」。 Phase 1 CPBL · Phase 2 NBA + 未來 leagues · Tim 親手 curate。 完整 brand 方法論見{" "}
             <Link href="/about" className="text-gold underline-offset-4 hover:underline">
               /about
             </Link>
@@ -87,7 +87,7 @@ const CATEGORIES: Category[] = [
         a: (
           <>
             Tim 是唯一 curator · 目前先做 CPBL · 同 Stratechery / Ben Thompson 親手 curate 所有內容。
-            玩運彩 / 報馬仔 抽傭 model 需要 user 推薦 · ZONE 27 結構性相反 · 0 抽傭 + 0 third-party 內容。
+            靠賣明牌的生意抽傭 model 需要 user 推薦 · ZONE 27 結構性相反 · 0 抽傭 + 0 third-party 內容。
             您可以走{" "}
             <Link href="/hey-tim" className="text-gold underline-offset-4 hover:underline">
               /hey-tim

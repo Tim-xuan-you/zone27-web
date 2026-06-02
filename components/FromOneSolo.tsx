@@ -164,9 +164,9 @@ export default function FromOneSolo() {
 
         <p className="text-mute/85 text-sm sm:text-base leading-relaxed mt-4">
           ZONE 27 採同 pattern · 因為我 Tim is solo · 因為 hardcore CPBL fan
-          audience burned by LINE 老師 · {" "}
+          audience burned by 收費明牌群組 · {" "}
           <strong className="text-bone">
-            social proof 看起來像 LINE 老師 social proof 一模一樣
+            social proof 看起來像收費明牌群組 social proof 一模一樣
           </strong>{" "}
           · 我不能 use that path · 必須走 inverse path。 您 read 完 4 deltas
           後自己判斷是否 fit · 那是把話講清楚、可被追蹤檢驗的誠實。

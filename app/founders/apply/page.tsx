@@ -271,7 +271,7 @@ export default function FoundersApplyPage() {
               <li>
                 <span className="font-mono text-bone tabular mr-2">03B</span>
                 <strong className="text-bone">不通過</strong> · Tim email
-                解釋原因(non-CPBL · 非 fan-grammar · LINE 老師 affiliation 等)·
+                解釋原因(non-CPBL · 非 fan-grammar · 明牌生意 affiliation 等)·
                 您可選 30 天後重新申請
               </li>
               <li>

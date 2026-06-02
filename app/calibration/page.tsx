@@ -208,7 +208,7 @@ export default function CalibrationPublicPage() {
           </h2>
           <div className="space-y-4 text-mute leading-relaxed">
             <p>
-              玩運彩駐站名家自稱 55-59% 勝率 · LINE 老師自稱連勝八九場。
+              自稱很準的老師掛著 55-59% 勝率 · 收費明牌群組自稱連勝八九場。
               沒有一家敢攤開這種對照圖 · 因為一攤開就露餡:
             </p>
             <ul className="space-y-2 pl-6">

@@ -9,7 +9,7 @@ import ArticleMeta from "@/components/ArticleMeta";
 export const metadata: Metadata = {
   title: "BLACK CARD Public Ledger · 0 paid · 第 1 位 = 您",
   description:
-    "ZONE 27 BLACK CARD 公開訂閱者帳本 · Aftermath subscriber goals + Patek allocation ledger pattern · 0 paid sub state honest publish · 第 1 位的 handle 永久顯示在這裡 · 我們不會用機器人灌水 · 也不會假裝有客戶。 玩運彩+報馬仔 結構上無法 publish 訂閱者帳本(regulatory + privacy + churn 暴露)· structurally 不可 copy。",
+    "ZONE 27 BLACK CARD 公開訂閱者帳本 · Aftermath subscriber goals + Patek allocation ledger pattern · 0 paid sub state honest publish · 第 1 位的 handle 永久顯示在這裡 · 我們不會用機器人灌水 · 也不會假裝有客戶。 靠賣明牌的生意結構上無法 publish 訂閱者帳本(regulatory + privacy + churn 暴露)· structurally 不可 copy。",
 };
 
 // ── ZONE 27 · /membership/black-card/ledger ──────────────
@@ -206,7 +206,7 @@ export default function BlackCardLedgerPage() {
             / 02 · WHY THIS PAGE EXISTS
           </p>
           <h2 className="text-2xl sm:text-3xl text-bone font-light tracking-tight mb-6 leading-tight">
-            玩運彩 + 報馬仔 · structurally <span className="text-gold">不可</span> publish
+            靠賣明牌的生意 · structurally <span className="text-gold">不可</span> publish
           </h2>
           <div className="space-y-4 text-mute leading-relaxed">
             <p>
@@ -320,7 +320,7 @@ export default function BlackCardLedgerPage() {
             state 標 cancelled。 不藏 churn · 不假裝。
           </p>
           <p>
-            Aftermath 公布 subscriber goals · 玩運彩 不公布 paying VIP 名單 ·
+            Aftermath 公布 subscriber goals · 賣明牌的站不公布 paying VIP 名單 ·
             兩者結構性差別:incentive alignment。 ZONE 27 訂閱費 = 整個 revenue
             model · 您贏您輸我都一樣賺。 ledger 公布 跟 incentive 完全 align ·
             這個 page 是 structural moat 不是 marketing decoration。

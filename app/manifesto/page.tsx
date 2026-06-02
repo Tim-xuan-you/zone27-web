@@ -322,7 +322,7 @@ export default function ManifestoPage() {
           >
             <P>
               <strong className="text-bone">行業為什麼覆蓋全部:</strong>{" "}
-              運彩 / 報馬仔平台的收入線性綁定上架賽事數 — 多一場 CPBL
+              運彩 / 賣明牌的站的收入線性綁定上架賽事數 — 多一場 CPBL
               次級聯盟 · 多一場 K-League · 多一場非洲冠軍盃 = 多一條抽佣管道。
               這套商業模式底下,
               <strong className="text-bone">引擎能不能算 ≠ 該不該上架</strong>。
@@ -526,7 +526,7 @@ export default function ManifestoPage() {
                   「保留訂閱者特權」訪客還是想加入(因為神秘感)。
                 </Item>
                 <Item label="紅海 vs 藍海">
-                  「假裝有秘密」進的是紅海(LINE 老師 / 報馬仔 / 殺手平台 50+ 個競品)。
+                  「假裝有秘密」進的是紅海(收費明牌群組 / 賣明牌的站 / 抽下注的莊家 50+ 個競品)。
                   「公開方法 + 私藏身分」進的是藍海(0 競品)。
                 </Item>
               </List>
