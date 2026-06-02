@@ -134,6 +134,25 @@ const NEVER_COVER: { name: string; reason: string }[] = [
   },
 ];
 
+// R185 · 全運動路線圖 · Tim explicit「所有台灣運彩有賣的項目我都會上去 · 各裝不同
+// 引擎」(2026-06-02)。 把運彩 8 運動扁平菜單翻成「閘門式路線圖」: CPBL 亮 · 其餘
+// 引擎研發中(驗證夠準才開)= 同時喊紀律 + 野心 · 運彩做不出這頁(它沒準度可秀)。
+const SPORT_ROADMAP: {
+  sport: string;
+  en: string;
+  status: "LIVE" | "BUILDING";
+  note: string;
+}[] = [
+  { sport: "棒球", en: "BASEBALL", status: "LIVE", note: "CPBL 引擎上線中 · MLB 等逐步接" },
+  { sport: "籃球", en: "BASKETBALL", status: "BUILDING", note: "引擎研發中" },
+  { sport: "足球", en: "FOOTBALL", status: "BUILDING", note: "引擎研發中" },
+  { sport: "網球", en: "TENNIS", status: "BUILDING", note: "引擎研發中" },
+  { sport: "冰球", en: "ICE HOCKEY", status: "BUILDING", note: "引擎研發中" },
+  { sport: "電競", en: "ESPORTS · LoL", status: "BUILDING", note: "引擎研發中" },
+  { sport: "羽球", en: "BADMINTON", status: "BUILDING", note: "引擎研發中" },
+  { sport: "手球", en: "HANDBALL", status: "BUILDING", note: "引擎研發中" },
+];
+
 export default function CoveragePage() {
   return (
     <div className="flex flex-col flex-1 min-h-screen">
@@ -209,6 +228,62 @@ export default function CoveragePage() {
               </div>
             </div>
           </header>
+
+          {/* ── 全運動路線圖 · the gated-roadmap thesis(R185)──────── */}
+          <section className="py-12 border-b border-line/40 section-reveal">
+            <p className="font-mono text-gold/90 text-[10px] tracking-[0.45em] mb-3">
+              全運動路線圖 · 一次點亮一個
+            </p>
+            <h2 className="text-2xl sm:text-3xl text-bone font-light tracking-tight mb-4 leading-snug">
+              台灣運彩賣的每種運動,我們都會做 ——
+              <br className="hidden sm:inline" />
+              但一次只點亮一個
+            </h2>
+            <p className="text-mute leading-relaxed mb-7 max-w-2xl">
+              運彩把 8 種運動一次全端上來、而且全部它預測不準 —— 那是賭場菜單。
+              ZONE 27 反過來:<strong className="text-bone">每種運動的引擎,沒驗證到夠準,絕不開盤。</strong>{" "}
+              棒球先從 CPBL 做到極致,其餘正在排隊研發。 寧可少做、做得準。
+            </p>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+              {SPORT_ROADMAP.map((s) => (
+                <div
+                  key={s.en}
+                  className={`border p-3.5 ${
+                    s.status === "LIVE"
+                      ? "border-gold/60 bg-gold/5 glow-soft"
+                      : "border-line/50 bg-slate/20"
+                  }`}
+                >
+                  <div className="flex items-baseline justify-between gap-2">
+                    <span
+                      className={`text-lg font-light tracking-tight ${
+                        s.status === "LIVE" ? "text-gold" : "text-bone/70"
+                      }`}
+                    >
+                      {s.sport}
+                    </span>
+                    <span
+                      className={`font-mono text-[9px] tracking-[0.2em] ${
+                        s.status === "LIVE" ? "text-gold/90" : "text-mute/60"
+                      }`}
+                    >
+                      {s.status === "LIVE" ? "● 上線中" : "○ 研發中"}
+                    </span>
+                  </div>
+                  <p className="font-mono text-[9px] tracking-[0.2em] text-mute/55 mt-1">
+                    {s.en}
+                  </p>
+                  <p className="text-mute/75 text-[11px] leading-snug mt-2">
+                    {s.note}
+                  </p>
+                </div>
+              ))}
+            </div>
+            <p className="mt-5 font-mono text-mute/70 text-[10px] tracking-[0.25em] leading-relaxed">
+              亮 = 引擎上線中 · 暗 = 引擎研發中(驗證夠準才開盤)· 上線順序 Tim 親手定 ·
+              不接受催進度投票 · 每次擴張提前公告。
+            </p>
+          </section>
 
           {/* ── 00 NEVER COVER ABOVE-THE-FOLD · brand boundary preview ── */}
           <section className="py-10 border-b border-line/40 section-reveal">
