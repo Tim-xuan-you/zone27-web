@@ -12,10 +12,8 @@
 import { useEffect, useState } from "react";
 import { getWalletBalance } from "@/lib/wallet";
 
-// Tim R187:最低儲值 500 · 最高 30,000 · 中間 preset 我決定
+// Tim R187:儲值 preset · 500 → 30,000(自訂欄太複雜 · Tim 拍板拿掉 · 只留固定按鈕)
 const TOPUP_AMOUNTS = [500, 1000, 3000, 10000, 30000];
-const TOPUP_MIN = 500;
-const TOPUP_MAX = 30000;
 
 // 收款資料 · Vercel 私密 env(不在 GitHub)· 未設則 fallback
 const BANK = {
@@ -38,9 +36,7 @@ type State = { mounted: false } | { mounted: true; balance: number };
 export default function WalletPanel() {
   const [state, setState] = useState<State>({ mounted: false });
   const [amount, setAmount] = useState<number | null>(null);
-  const [custom, setCustom] = useState(0);
   const [copied, setCopied] = useState(false);
-  const customOk = custom >= TOPUP_MIN && custom <= TOPUP_MAX;
 
   useEffect(() => {
     let cancelled = false;
@@ -95,35 +91,6 @@ export default function WalletPanel() {
           </button>
         ))}
       </div>
-
-      {/* 1b · 自訂金額 · NT$ 500–30,000 */}
-      <div className="flex items-center gap-2 mb-1.5 flex-wrap">
-        <span className="font-mono text-mute/70 text-[10px] tracking-[0.2em] shrink-0">
-          或自訂:
-        </span>
-        <input
-          type="number"
-          min={TOPUP_MIN}
-          max={TOPUP_MAX}
-          step={100}
-          value={custom || ""}
-          onChange={(e) => setCustom(Number(e.target.value) || 0)}
-          placeholder="500 – 30000"
-          aria-label="自訂儲值金額 · NT$ 500 到 30000"
-          className="w-32 bg-ink/60 border border-line/70 text-bone px-2 py-2 outline-none focus:border-gold/60 placeholder:text-mute/55 font-mono text-sm tabular transition-colors"
-        />
-        <button
-          type="button"
-          onClick={() => customOk && setAmount(custom)}
-          disabled={!customOk}
-          className="px-3 py-2 border border-gold/50 text-gold font-mono text-[11px] tracking-[0.2em] hover:bg-gold/10 hover:border-gold disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
-        >
-          儲值 →
-        </button>
-      </div>
-      <p className="font-mono text-mute/50 text-[9px] tracking-[0.15em] mb-3">
-        最低 NT$ 500 · 最高 NT$ 30,000
-      </p>
 
       {/* 2 · 選了金額 → 直接秀轉帳資訊(不用 email 去要)*/}
       {amount !== null && (

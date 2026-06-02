@@ -46,37 +46,37 @@ type Tier = {
   rule: string;
 };
 
-// 五段天梯 · 每一階 = 贏過更難的對手(coin → crowd → engine → 三個都贏)
+// 五段天梯 · 一個月只能往上爬一階 · 每階 = 那個月要清掉的關卡
 const TIERS: Tier[] = [
   {
     en: "ROOKIE",
     zh: "新秀",
-    beat: "入榜",
-    rule: "累積 10 場已結算的預測即登榜。 在這之前 · 先到賽事頁進場練手。",
+    beat: "第 1 階 · 入榜",
+    rule: "累積 10 場已結算的預測 → 站上天梯第一階。 從這裡開始,一個月爬一階。",
   },
   {
     en: "ANALYST",
     zh: "分析師",
-    beat: "贏過丟硬幣",
-    rule: "樣本加權準度穩定站上五成以上 —— 證明你不是純運氣。",
+    beat: "第 2 階",
+    rule: "某個月準度站上五成(贏過丟硬幣)→ 從新秀升上來。 證明你不是純運氣。",
   },
   {
     en: "TRADER",
     zh: "操盤手",
-    beat: "贏過群眾",
-    rule: "你的準度高過「群眾市場線」—— 你比大盤聰明。",
+    beat: "第 3 階",
+    rule: "某個月準度贏過「群眾市場線」→ 再往上一階。 你比大盤聰明。",
   },
   {
     en: "SHARP",
     zh: "神準手",
-    beat: "贏過引擎",
-    rule: "你的準度高過 ZONE 27 引擎 —— 你比機器算得準。",
+    beat: "第 4 階",
+    rule: "某個月準度贏過 ZONE 27 引擎 → 再往上一階。 你比機器算得準。",
   },
   {
     en: "ORACLE",
     zh: "神諭",
-    beat: "三個都贏",
-    rule: "同時長期贏過 引擎 + 群眾 · 且站上全站最高。 每月只有極少數登頂。 這是王座。",
+    beat: "第 5 階 · 王座",
+    rule: "連續贏過 引擎 + 群眾、且站上全站最高,才守得住。 一個月最多升一階 → 爬到這裡至少要連續四個月夠準。 一次到頂 · 不可能。",
   },
 ];
 
@@ -175,8 +175,18 @@ export default function LadderPage() {
             lang="en"
             className="font-mono text-gold text-[10px] tracking-[0.45em] mb-6"
           >
-            / 02 · 五段天梯 · 每一階 = 贏過更難的對手
+            / 02 · 五段天梯 · 一個月只能爬一階
           </p>
+          <div className="mb-6 border-l-2 border-gold/60 pl-5 py-2">
+            <p className="text-bone text-base sm:text-lg leading-relaxed">
+              這不是「準度一夠就跳到頂」。{" "}
+              <strong className="text-gold">每個月結算一次 · 達標就往上爬一階 —— 一次最多一階</strong>,退步也會掉階。
+            </p>
+            <p className="mt-2 text-mute text-sm leading-relaxed">
+              所以從最底的新秀爬到頂端的神諭,最快也要<strong className="text-bone">連續四個月</strong>都夠準。
+              一晚手氣、一場爆冷 · 升不上王座。
+            </p>
+          </div>
           <div className="flex flex-col gap-3">
             {TIERS.slice()
               .reverse()
