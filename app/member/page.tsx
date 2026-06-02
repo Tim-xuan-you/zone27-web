@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import WalletPanel from "@/components/WalletPanel";
-import { getSession } from "@/lib/supabase/server";
+import { getUser } from "@/lib/supabase/server";
 import { aggregatePredictionStats } from "@/lib/predictions";
 import { getMyPredictionsMap } from "@/lib/predictions-server";
 import { getTodayAndFutureMatches, matches as allMatches } from "@/lib/matches";
@@ -29,10 +29,12 @@ export const metadata: Metadata = {
 // ─────────────────────────────────────────────────────
 
 export default async function MemberPage() {
-  const session = await getSession();
+  // getUser() re-validates with Supabase auth server(JWT verify)· 渲染會員
+  // 自己的 email / tier / 資料屬於 trust-critical · 不可用可偽造的 getSession()。
+  const user = await getUser();
 
   // 未登入 → 一頁式登入邀請(不再是長預覽)
-  if (!session) {
+  if (!user) {
     return (
       <div className="flex flex-col flex-1 min-h-screen">
         <Nav active="member" />
@@ -60,10 +62,10 @@ export default async function MemberPage() {
     );
   }
 
-  const email = session.user.email ?? "";
+  const email = user.email ?? "";
   const emailName = email.split("@")[0] || "會員";
   const tier = readTier(
-    (session.user.user_metadata ?? null) as Record<string, unknown> | null,
+    (user.user_metadata ?? null) as Record<string, unknown> | null,
   );
   const tierZh =
     tier === "founder" ? "創始會員" : tier === "black" ? "BLACK CARD 會員" : "FREE 會員";

@@ -48,12 +48,14 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  // Require authenticated session(防 anon spam)
+  // Require authenticated user(防 anon spam)· getUser() re-validates JWT
+  // 跟 Supabase auth server(getSession() 只讀 cookie · 可被偽造 · 不可拿來
+  // 做信任決策 · 見 lib/supabase/server.ts 註記)。
   const supabase = await createSupabaseServerClient();
   const {
-    data: { session },
-  } = await supabase.auth.getSession();
-  if (!session) {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) {
     return NextResponse.json(
       { ok: false, error: "not_logged_in" },
       { status: 401 }
@@ -101,7 +103,7 @@ export async function POST(request: NextRequest) {
   // 認 session 必有 valid email(password signup flow guarantees Supabase
   // confirmation step · 不可能沒 email)· 缺 = system invariant break · 應
   // log + 500 不藏。
-  const memberEmail = session.user.email;
+  const memberEmail = user.email;
   if (!memberEmail || !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(memberEmail)) {
     return NextResponse.json(
       { ok: false, error: "session_email_missing" },
