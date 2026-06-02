@@ -15,6 +15,22 @@ import { getWalletBalance } from "@/lib/wallet";
 // Tim R187:儲值 preset · 500 → 30,000(自訂欄太複雜 · Tim 拍板拿掉 · 只留固定按鈕)
 const TOPUP_AMOUNTS = [500, 1000, 3000, 10000, 30000];
 
+// 儲值回饋 · 越儲越多 %(Tim 全權交我定 · 上網查的結論)。 設計依據:
+//   · Rule-of-100 → 大額(>~NT$3,000)同時秀「%」+「實得點數」最有感
+//   · 遞增 % + 頂檔當 anchor → 拉大額(同 Starbucks reload / 手遊儲值回饋慣例)
+//   · 乾淨整數 %(5/10/15/20)+ 整數回饋點(50/300/1,500/6,000)好懂好記
+const BONUS_PCT: Record<number, number> = {
+  500: 0,
+  1000: 5,
+  3000: 10,
+  10000: 15,
+  30000: 20,
+};
+const BEST_AMOUNT = 30000; // 視覺 anchor「最划算」
+const fmt = (n: number) => n.toLocaleString("en-US");
+const bonusPts = (a: number) => Math.round((a * (BONUS_PCT[a] ?? 0)) / 100);
+const totalPts = (a: number) => a + bonusPts(a);
+
 // 收款資料 · Vercel 私密 env(不在 GitHub)· 未設則 fallback
 const BANK = {
   name: process.env.NEXT_PUBLIC_BANK_NAME ?? "",
@@ -24,8 +40,11 @@ const BANK = {
 const BANK_SET = BANK.account.length > 0;
 
 function notifyHref(amount: number): string {
-  const subject = `我已轉帳儲值 NT$ ${amount}`;
-  const body = `Tim 好,\n\n我已經轉帳 NT$ ${amount} 到 ZONE 27 儲值。\n轉帳帳號末五碼:______(請填)\n\n請幫我加點。謝謝。`;
+  const bonus = bonusPts(amount);
+  const subject = `我已轉帳儲值 NT$ ${fmt(amount)}`;
+  const body = `Tim 好,\n\n我已經轉帳 NT$ ${fmt(amount)} 到 ZONE 27 儲值。\n轉帳帳號末五碼:______(請填)\n\n請幫我加 ${fmt(totalPts(amount))} 點${
+    bonus > 0 ? `(NT$ ${fmt(amount)} + 回饋 ${fmt(bonus)} 點)` : ""
+  }。謝謝。`;
   return `mailto:tatayngiti@gmail.com?subject=${encodeURIComponent(
     subject
   )}&body=${encodeURIComponent(body)}`;
@@ -70,26 +89,44 @@ export default function WalletPanel() {
         </p>
       </div>
       <p className="text-mute/85 text-sm leading-relaxed mb-4">
-        儲值點數買付費分析。點數只能買分析 ·{" "}
-        <span className="text-bone">不能提現、不能轉人</span> · 不自動扣款(像 Steam 錢包)。
+        儲值點數買付費分析 · <span className="text-gold">儲越多、送越多</span>。
+        點數只能買分析 · <span className="text-bone">不能提現、不能轉人</span> · 不自動扣款(像 Steam 錢包)。
       </p>
 
-      {/* 1 · 選金額 */}
-      <div className="flex flex-wrap gap-2 mb-3">
-        {TOPUP_AMOUNTS.map((a) => (
-          <button
-            key={a}
-            type="button"
-            onClick={() => setAmount(a)}
-            className={`px-4 py-2.5 border font-mono text-xs tracking-[0.2em] tabular transition-colors ${
-              amount === a
-                ? "border-gold bg-gold/10 text-gold"
-                : "border-gold/40 text-gold hover:bg-gold/10 hover:border-gold"
-            }`}
-          >
-            儲 NT$ {a.toLocaleString("en-US")}
-          </button>
-        ))}
+      {/* 1 · 選金額 · 儲越多送越多(頂檔 anchor「最划算」)*/}
+      <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 mb-3">
+        {TOPUP_AMOUNTS.map((a) => {
+          const b = bonusPts(a);
+          const best = a === BEST_AMOUNT;
+          const on = amount === a;
+          return (
+            <button
+              key={a}
+              type="button"
+              onClick={() => setAmount(a)}
+              className={`px-3 py-2.5 border text-left transition-colors ${
+                on
+                  ? "border-gold bg-gold/15"
+                  : best
+                    ? "border-gold/60 bg-gold/[0.05] hover:bg-gold/10"
+                    : "border-gold/40 hover:bg-gold/10 hover:border-gold"
+              }`}
+            >
+              <span className="block font-mono text-gold text-sm tracking-[0.08em] tabular">
+                儲 NT$ {fmt(a)}
+              </span>
+              {b > 0 ? (
+                <span className="block font-mono text-gold/80 text-[9px] tracking-[0.05em] tabular mt-0.5">
+                  +{BONUS_PCT[a]}% · 多送 {fmt(b)} 點{best ? " 🔥" : ""}
+                </span>
+              ) : (
+                <span className="block font-mono text-mute/45 text-[9px] tracking-[0.1em] mt-0.5">
+                  入門 · 無加碼
+                </span>
+              )}
+            </button>
+          );
+        })}
       </div>
 
       {/* 2 · 選了金額 → 直接秀轉帳資訊(不用 email 去要)*/}
@@ -98,7 +135,7 @@ export default function WalletPanel() {
           {BANK_SET ? (
             <>
               <p className="font-mono text-gold/90 text-[10px] tracking-[0.3em] mb-3">
-                轉帳 NT$ {amount} 到 ↓
+                轉帳 NT$ {fmt(amount)} 到 ↓
               </p>
               <dl className="space-y-1.5 font-mono text-sm mb-3">
                 <Row label="銀行" value={BANK.name} />
@@ -116,7 +153,7 @@ export default function WalletPanel() {
                   }
                 />
                 <Row label="戶名" value={BANK.holder} />
-                <Row label="金額" value={`NT$ ${amount}`} gold />
+                <Row label="金額" value={`NT$ ${fmt(amount)}`} gold />
               </dl>
               <a
                 href={notifyHref(amount)}
@@ -124,8 +161,14 @@ export default function WalletPanel() {
               >
                 轉好了 · 通知加點 →
               </a>
-              <p className="mt-2 font-mono text-mute/60 text-[9px] tracking-[0.15em] leading-relaxed">
-                ▸ 我們確認入帳後幫你加 {amount} 點 · 不自動扣款 · 點數只能買分析。
+              <p className="mt-2 font-mono text-mute/70 text-[10px] tracking-[0.12em] leading-relaxed">
+                ▸ 入帳後幫你加 <span className="text-gold">{fmt(totalPts(amount))} 點</span>
+                {bonusPts(amount) > 0 && (
+                  <span className="text-mute/60">
+                    {" "}(NT$ {fmt(amount)} + 回饋 {fmt(bonusPts(amount))} 點)
+                  </span>
+                )}{" "}
+                · 不自動扣款 · 點數只能買分析。
               </p>
             </>
           ) : (
@@ -137,7 +180,7 @@ export default function WalletPanel() {
                 href={notifyHref(amount)}
                 className="inline-block px-4 py-2 bg-gold text-navy font-mono text-[10px] tracking-[0.25em] hover:bg-gold-soft transition-colors"
               >
-                先 email Tim 儲值 NT$ {amount} →
+                先 email Tim 儲值 NT$ {fmt(amount)} →
               </a>
             </>
           )}
