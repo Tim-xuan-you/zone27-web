@@ -28,6 +28,13 @@
 - 測試殘留(都掛假賽事 `cpbl-rpctest-260602` · 不顯示在任何真實頁 · Tim 想清可在 Studio 刪):2 個 `z27.rpctest.*@example.com` 帳號 + 1 prediction + 1 creator post
 - 註:0002 過時別套(指向已刪 /leaderboard)· 0004 沒前端用不必套。
 
+### ⏳ Apply migration 0010 creator_comments(5 分 · Supabase SQL Editor)· 分析回覆串
+
+R185 Tim dogfood 後新增:創作者分析下的「回覆串」對話層(讀者↔作者 · 買家↔賣家 · 作者回覆標「作者」)。
+表 + 2 RPC(submit_creator_comment / get_creator_comments)· RLS-locked + SECURITY DEFINER · 同 0004 game_posts 模式。
+**跑了才會真的能留言**(現在前端 graceful 顯示空串、不 crash)。 預測(選邊)一場一篇鎖死不動 ·
+這只加「不評分的對話層」· 不碰 ✓已驗證準度 章的根基。 檔:supabase/migrations/0010_creator_comments.sql。
+
 ### 🔴 今晚(2026-05-30)· 3 場 CPBL 賽後結算 — 唯一 gated-on-Tim
 
 3 場 pre-game 已 ingest(cpbl-260530-01 味全/台鋼 · -02 中信/富邦 · -03 樂天/統一)·
