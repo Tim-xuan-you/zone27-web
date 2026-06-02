@@ -144,7 +144,7 @@ const FEATURES: Feature[] = [
     },
   },
   {
-    label: "年度 access · 續訂價永遠鎖定(無 auto-renewal)",
+    label: "年度 access · 續訂價永遠鎖定(不自動續扣)",
     detail: "Founders 27 NT$ 2,700/年 手動續訂 · 月卡 / 季票永遠不會自動綁您",
     unlock: {
       anonymous: "locked",

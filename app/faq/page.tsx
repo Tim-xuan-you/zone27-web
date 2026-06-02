@@ -108,7 +108,7 @@ const CATEGORIES: Category[] = [
             <strong className="text-bone">Founders 27</strong> NT$ 2,700/365 天 · 會員不限量
             (前 270 拿永久創始編號 · 目前 263 號待領)。
             <strong className="text-bone">BLACK CARD</strong> NT$ 500/31 天 × N 訂戶
-            (0 auto-renewal · 每 31 天 explicit click)。
+            (不自動續扣 · 每 31 天 explicit click)。
             再加上創作者賣分析 · 平台抽 5–10%(業界最低,老實認、不假裝不抽)。
             不抽真錢下注的傭 · 不接廣告 / 業配 / 導購分潤。
           </>
@@ -129,7 +129,7 @@ const CATEGORIES: Category[] = [
             「NT$ 2,700/365 天 年度會員」(前 270 名拿永久創始編號)。
             <strong className="text-bone">BLACK CARD</strong> 是 31-day pass NT$ 500/31 天
             (3 月–11 月 · 240 場 + 季後賽 · ≈ NT$ 6/場 · 手動銀行轉帳 ·
-            0 auto-renewal · per /integrity rule #13)。創始會員額外好處:creator 抽成 5%
+            不自動續扣 · per /integrity rule #13)。創始會員額外好處:creator 抽成 5%
             (BLACK CARD creators 10%)、AI 模型優先試用、實體招待。完整對照請見{" "}
             <Link href="/founders" className="text-gold underline-offset-4 hover:underline">
               /founders
@@ -153,7 +153,7 @@ const CATEGORIES: Category[] = [
         a: (
           <>
             <span className="font-mono text-gold">BLACK CARD CPBL 季票 · 手動銀行轉帳</span>
-            (NT$ 500/31 天 · 每 31 天你主動轉帳一次 · 0 auto-renewal)。
+            (NT$ 500/31 天 · 每 31 天你主動轉帳一次 · 不自動續扣)。
             <span className="font-mono text-gold mx-1">Founders 27 payment infra 就緒後開放</span>
             (milestone-triggered · 不綁日期)。 在此之前,加入等候名單 =
             排隊優先權,<strong className="text-bone">完全免費</strong>,

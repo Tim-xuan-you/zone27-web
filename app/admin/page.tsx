@@ -106,7 +106,7 @@ export default async function AdminPage() {
           </p>
           <p className="mt-4 text-mute/80 text-sm leading-relaxed max-w-2xl">
             為什麼不做「一鍵按鈕」後台?因為碰錢的動作<strong className="text-bone">故意手動 + 留痕</strong>
-            (你的鐵律 #13:0 自動扣款)· 一個人經營的階段不過度造後台。 下面的數字是即時的,動作走 Supabase。
+            (你的鐵律 #13:不自動扣款)· 一個人經營的階段不過度造後台。 下面的數字是即時的,動作走 Supabase。
           </p>
           <div className="mt-6">
             <ArticleMeta readingMin={3} />

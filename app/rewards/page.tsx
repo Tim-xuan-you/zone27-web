@@ -92,7 +92,7 @@ const RULES = [
   {
     no: "02",
     title: "兌換流程",
-    body: "您累計足夠 PROVED → /rewards 點選兌換 → email 收到確認 + 取貨選項(來店 OR 郵寄 NT$ 100)→ Tim 親手 fulfill。 0 自動扣款 · 0 cash · 0 wallet · 0 訂閱。 來店 = 恆美攝影 × 伶 Kopi(台南東區)免費。 郵寄 = NT$ 100 小額 covers shipping cost · 不賺錢 · 純物流。",
+    body: "您累計足夠 PROVED → /rewards 點選兌換 → email 收到確認 + 取貨選項(來店 OR 郵寄 NT$ 100)→ Tim 親手 fulfill。 不自動扣款 · 0 cash · 0 wallet · 0 訂閱。 來店 = 恆美攝影 × 伶 Kopi(台南東區)免費。 郵寄 = NT$ 100 小額 covers shipping cost · 不賺錢 · 純物流。",
   },
   {
     no: "03",

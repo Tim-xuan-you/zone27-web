@@ -441,7 +441,7 @@ function PostCard({
             </Link>
           )}
           <p className="mt-2 font-mono text-mute/50 text-[9px] tracking-[0.15em] leading-relaxed">
-            點數買 · 0 自動扣款 · 買了立即解鎖。
+            點數買 · 不自動扣款 · 買了立即解鎖。
           </p>
         </div>
       ) : (

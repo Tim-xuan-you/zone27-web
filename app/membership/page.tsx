@@ -7,7 +7,7 @@ import MembershipUpgrade from "@/components/MembershipUpgrade";
 export const metadata: Metadata = {
   title: "升級會員",
   description:
-    "升級解鎖「標價賣你的分析賺錢」。BLACK CARD NT$ 500/31 天(你拿 90%)· 創始會員 NT$ 2,700/365 天(你拿 95%,全站最低抽成)· 點一下直接顯示轉帳帳號 · 0 自動續扣 · 14 天退款。",
+    "升級解鎖「標價賣你的分析賺錢」。BLACK CARD NT$ 500/31 天(你拿 90%)· 創始會員 NT$ 2,700/365 天(你拿 95%,全站最低抽成)· 點一下直接顯示轉帳帳號 · 不自動續扣 · 14 天退款。",
 };
 
 export const revalidate = 3600;
@@ -73,7 +73,7 @@ export default function MembershipPage() {
 
         {/* 最底下一行 · 不擋買 · 誠實說明手動轉帳 */}
         <p className="mt-6 text-center font-mono text-mute/65 text-[10px] tracking-[0.18em] leading-relaxed">
-          引擎永遠免費 · 0 自動續扣 · 14 天退款 · 隨時可停。
+          引擎永遠免費 · 不自動續扣 · 14 天退款 · 隨時可停。
           <br className="hidden sm:block" />
           點「立即升級」會<span className="text-mute">直接顯示轉帳帳號</span> → 轉完一鍵通知 → Tim 確認入帳幫你開通。{" "}
           <Link

@@ -4,7 +4,7 @@
 // Tim canary(R187):點「立即升級」開的是 mailto 去「要」帳號 = 跟 R184 砍掉的
 // 慢流程一樣蠢。 改成 = 點一下「立即升級」→ 直接秀收款帳號 + 複製 + 轉完一鍵
 // 通知開通(完全同 WalletPanel 儲值的 UX)。 收款資料走 Vercel 私密 env
-// (NEXT_PUBLIC_BANK_*)· 未設 → graceful「設定中」。 0 自動續扣(per /integrity #13)。
+// (NEXT_PUBLIC_BANK_*)· 未設 → graceful「設定中」。 不自動續扣(per /integrity #13)。
 // ─────────────────────────────────────────────────────
 
 import { useState } from "react";
@@ -84,7 +84,7 @@ export default function MembershipUpgrade({
         NT$ {priceLabel}
       </p>
       <p className="font-mono text-mute text-[11px] tracking-[0.18em] mb-5">
-        每 {period} · 手動轉帳 · 0 自動續扣
+        每 {period} · 手動轉帳 · 不自動續扣
       </p>
 
       <ul className="space-y-2 mb-6 text-sm leading-relaxed flex-grow list-none pl-0">
@@ -148,7 +148,7 @@ export default function MembershipUpgrade({
                 我轉好了 · 通知開通 →
               </a>
               <p className="mt-2 font-mono text-mute/60 text-[9px] tracking-[0.15em] leading-relaxed">
-                ▸ 我們確認入帳後幫你開通 {name} · 0 自動續扣 · 14 天無條件退款。
+                ▸ 我們確認入帳後幫你開通 {name} · 不自動續扣 · 14 天無條件退款。
               </p>
             </>
           ) : (

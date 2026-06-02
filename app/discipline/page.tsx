@@ -206,7 +206,7 @@ export default function DisciplinePage() {
               <Item label="自綁抽成 5% = forced discipline">
                 Musk 為什麼能造火箭?因為他<strong className="text-bone">限制自己</strong>
                 只做幾件事。ZONE 27 版:引擎永遠免費 · 創作者抽成自綁 5%(業界 30-50%)·
-                0 廣告 · 0 自動續扣 — 我們限制的是自己賺錢的方式 · 不是限制能服務多少人。
+                0 廣告 · 不自動續扣 — 我們限制的是自己賺錢的方式 · 不是限制能服務多少人。
               </Item>
             </List>
           </RuleSection>

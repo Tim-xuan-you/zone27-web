@@ -98,7 +98,7 @@ export default async function BlackCardOgImage() {
               display: "flex",
             }}
           >
-            NT$ 500 / 31 天 · 手動 · 0 自動續扣
+            NT$ 500 / 31 天 · 手動 · 不自動續扣
           </span>
         </div>
 

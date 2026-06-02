@@ -71,7 +71,7 @@ export default function WalletPanel() {
       </div>
       <p className="text-mute/85 text-sm leading-relaxed mb-4">
         儲值點數買付費分析。點數只能買分析 ·{" "}
-        <span className="text-bone">不能提現、不能轉人</span> · 0 自動扣款(像 Steam 錢包)。
+        <span className="text-bone">不能提現、不能轉人</span> · 不自動扣款(像 Steam 錢包)。
       </p>
 
       {/* 1 · 選金額 */}
@@ -125,7 +125,7 @@ export default function WalletPanel() {
                 轉好了 · 通知加點 →
               </a>
               <p className="mt-2 font-mono text-mute/60 text-[9px] tracking-[0.15em] leading-relaxed">
-                ▸ 我們確認入帳後幫你加 {amount} 點 · 0 自動扣款 · 點數只能買分析。
+                ▸ 我們確認入帳後幫你加 {amount} 點 · 不自動扣款 · 點數只能買分析。
               </p>
             </>
           ) : (

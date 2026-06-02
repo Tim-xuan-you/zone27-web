@@ -10,7 +10,7 @@ import { useMounted } from "@/lib/use-mounted";
 // 4 tier(對齊 /membership 4-tier ladder):
 //   - anonymous · 匿名訪客 · 未登入
 //   - free · FREE TIER · 已登入 · 終身免費
-//   - black-card · BLACK CARD · NT$ 500/31 天(每 31 天手動 ECPay · 0 auto-renewal per rule #13)
+//   - black-card · BLACK CARD · NT$ 500/31 天(每 31 天手動 ECPay · 不自動續扣 per rule #13)
 //   - founders27 · Founders 27 · NT$ 2,700/年
 //
 // localStorage-based · 跟 PreviewModeBanner 共享 zone27_preview_tier key。
@@ -39,7 +39,7 @@ const TIERS: { value: string; label: string; body: string; price: string }[] = [
   {
     value: "black-card",
     label: "BLACK CARD",
-    body: "每 31 天手動 ECPay · 6 unlocks(Engine + Lens + 討論 + 抽成 + voting + 筆記)· 0 auto-renewal",
+    body: "每 31 天手動 ECPay · 6 unlocks(Engine + Lens + 討論 + 抽成 + voting + 筆記)· 不自動續扣",
     price: "NT$ 500/31 天",
   },
   {
