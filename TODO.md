@@ -125,6 +125,8 @@ R172 pivot · BLACK CARD 從 TapPay 自動訂閱改成 manual ATM / 跨行轉帳
 
 R174 pivot build queue · Claude 可主動 ship(三綠 + auto-push):
 
+- ✅ **群眾市場線守樣本紀律(2026-06-02 · push 4513247 · 三綠)**:N=1 不再畫「100% 共識」假 bar(= 報馬仔拿小樣本當大盤的手法 · 跟全站樣本紀律 + 上方開盤線「不假裝確定」自打臉)· 新增 `CROWD_LINE_MIN=5`(lib/predictions-market 單一來源)· 低於門檻只報真實人數 +「滿 5 人才畫群眾市場線」· 賽事頁 CrowdLine + 首頁卡 CardBetStrip 同步 · dogfood 親見 cpbl-260602-01 真實 1 人場驗證三分支(0/1/≥5)。
+- ✅ **「下個窗」三項 verify 後其實早完成(2026-06-02)**:① /founders R187 已砍到 244 行(Apple 式 · 對標 /membership)· ② 押注/錢包/買文章 RPC R185 已 live-test · ③ 創作者「已驗證準度」徽章已實作(CreatorAnalysis `AuthorBadge` 三態 + `gradeAuthorRecords` + 0007 RPC · 賽事頁 finalResults 已正確接線)。 ⚠️ **教訓:TODO 會落後實際 · 動工前先 grep/讀碼 verify,別盲信清單。**
 - ✅ **R185 fan-grammar 大掃除 + 動線 + 減法(2026-06-02 · push b938d49 · net −2605 行 · 三綠)**· Tim 全權 mandate · 4 路 agent(全球研究 / 碼審 / 動線 / 資料檔清掃)synthesize:
   - **看準度全線白話化(🔴 最優先)**:`/calibration`(砍整段 Brier 分數區)+ `/member/calibration` + 等級徽章 + 樣本進度條 + 分級資料 + OG 卡 · 全清 Brier / Tetlock / Murphy / reliability diagram / SAMPLE DEBT / Pratfall / axiom 學術詞 → 球迷白話、留實質誠實(「引擎說幾成 vs 實際中幾成」)
   - **全站黑話清掃**:延伸閱讀(~38 標題)+ 命令面板(11 標籤)+ OG 分享卡(清 Aronson / Cialdini / Spence 引用 + HeroLiveCard / UserPredictionPicker 元件名外洩)+ ArticleMeta 樣本 chip · sabermetric → 進階數據
@@ -133,7 +135,7 @@ R174 pivot build queue · Claude 可主動 ship(三綠 + auto-push):
   - 🧭 研究 agent 找到的「缺的靈魂」= 公開、可驗證的準度本身就是產品(不是功能堆疊)· 已部分落地(白話化讓誠實看得懂)· 下一步可做「創作者已驗證準度徽章」(Substack Bestseller 式 · 不可造假 · 掛在作者名旁)
   - 🌐 **全運動願景對齊(Tim MLB 頁 + 運彩 8 運動選單 dogfood · 同 session 追加 · push 72f49df + e73956b)**:MLB 頁去黑話牆(/INTEGRITY RULE #12 辯護書牆 → 一句自信話)+ 改路線圖框架 · **/integrity 綁定鐵律 #12** 從「永久只做 CPBL · MLB 跟風是雜訊」**reframe** 成「沒驗證夠準不開盤 + 擴張提前公告絕不偷加」(永久守的是**品質閘門**不是只做 CPBL)· 站內 9 處「CPBL only forever / 永遠 only」掃成 phased · **/coverage 新增「全運動路線圖」section**(8 運動:棒球亮、其餘 7 研發中)· 詳見 [[zone27-coverage-philosophy]] R185 amplify
   - ⚠️ **rule #12 是「永久不會變」鐵律的改動** · 按 Tim 自己的 30 天公告紀律,可能要補一則 /changelog · wording 也可由 Tim 調
-  - ⏳ 還沒做(下個窗):**/founders Apple 式砍乾淨(880 行 · 對標 /membership)** · **live-test 押注/錢包/買文章 RPC**(用 anon key 自建帳號打 RPC)· (可選)創作者「已驗證準度」徽章(研究 agent 的 missing-soul · Substack Bestseller 式)
+  - ✅ 下個窗三項全部完成(2026-06-02 · 見本 section 頂部 entry):/founders 已砍到 244 行 + 押注/錢包/買文章 RPC live-test + 創作者「已驗證準度」徽章已實作
 - ✅ **R180 攻頂 session(2026-06-01 · 5 commit · full build 綠)**· Tim 全權 mandate · 3 路 agent(全球研究/碼審計/心理動線)
   synthesize → multi-wave ship:
   - **減法**:刪 21 個孤兒檔(-3395 行 · 7-Lens canvas 全退場 + follow/note/orphan lib)· 直擊「檔案多到離譜」
