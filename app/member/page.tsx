@@ -6,7 +6,7 @@ import WalletPanel from "@/components/WalletPanel";
 import { getSession } from "@/lib/supabase/server";
 import { aggregatePredictionStats } from "@/lib/predictions";
 import { getMyPredictionsMap } from "@/lib/predictions-server";
-import { getTodayMatches, matches as allMatches } from "@/lib/matches";
+import { getTodayAndFutureMatches, matches as allMatches } from "@/lib/matches";
 import { readTier, isPaid, creatorTakePct } from "@/lib/tier";
 
 export const metadata: Metadata = {
@@ -74,7 +74,11 @@ export default async function MemberPage() {
     allMatches.map((m) => ({ id: m.id, finalWinner: m.finalResult?.winner ?? null }))
   );
 
-  const tonight = getTodayMatches().filter((m) => !m.finalResult);
+  // 今晚 + 即將(同首頁 getTodayAndFutureMatches · 已排除已結算)· 修會員 vs 訪客
+  // 不對等的 bug:原本只抓「今天」· 休賽日但明後天有排賽時,登入會員看到死路
+  // (track-record / lab),沒登入的人在首頁卻看得到、還能先押 = 高意願的會員反而
+  // 拿到比較差的答案。 改抓今天+未來,跟首頁同一份資料。
+  const upcoming = getTodayAndFutureMatches();
 
   return (
     <div className="flex flex-col flex-1 min-h-screen">
@@ -191,18 +195,18 @@ export default async function MemberPage() {
         {/* 3 · 今晚可以押 ───────────────────────────── */}
         <section className="mt-6">
           <p className="font-mono text-gold text-[10px] tracking-[0.4em] mb-3">
-            {tonight.length > 0 ? "今晚可以押" : "今天賽事"}
+            {upcoming.length > 0 ? "接下來可以押" : "今天賽事"}
           </p>
-          {tonight.length > 0 ? (
+          {upcoming.length > 0 ? (
             <div className="border border-line/60 bg-slate/30">
-              {tonight.map((m, i) => {
+              {upcoming.map((m, i) => {
                 const homeFav = m.home.winRate >= m.away.winRate;
                 return (
                   <Link
                     key={m.id}
                     href={`/matches/${m.id}`}
                     className={`flex items-center justify-between gap-3 px-4 py-3.5 hover:bg-gold/5 transition-colors ${
-                      i === tonight.length - 1 ? "" : "border-b border-line/40"
+                      i === upcoming.length - 1 ? "" : "border-b border-line/40"
                     }`}
                   >
                     <div className="min-w-0">
@@ -226,7 +230,7 @@ export default async function MemberPage() {
           ) : (
             <div className="border border-line/60 bg-slate/30 p-5">
               <p className="text-mute text-sm leading-relaxed mb-4">
-                今天沒排 CPBL 賽事。
+                目前沒有排定的 CPBL 賽事。
               </p>
               <div className="flex flex-wrap gap-3">
                 <Link
@@ -251,7 +255,7 @@ export default async function MemberPage() {
           <p className="mt-10 text-center font-mono text-mute/55 text-[10px] tracking-[0.2em] leading-relaxed">
             你已解鎖賣分析 · 賣出你拿 {creatorTakePct(tier)}%{" "}
             <Link
-              href={tonight.length > 0 ? `/matches/${tonight[0].id}#say` : "/matches"}
+              href={upcoming.length > 0 ? `/matches/${upcoming[0].id}#say` : "/matches"}
               className="text-gold/70 hover:text-gold underline-offset-4 hover:underline"
             >
               去發一篇 →
