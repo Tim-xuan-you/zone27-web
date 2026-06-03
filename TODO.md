@@ -143,6 +143,12 @@ R172 pivot · BLACK CARD 從 TapPay 自動訂閱改成 manual ATM / 跨行轉帳
 
 R174 pivot build queue · Claude 可主動 ship(三綠 + auto-push):
 
+- ✅ **R188 註冊閘門 pivot(2026-06-03 · Tim 看玩運彩討論區 app 後拍板 · 3 commit 全三綠 · d473140/abb4496/f8b6851)**· 三條 = 同一策略「有帳本的玩運彩」(匿名老師贏截圖輸刪文是對手弱點):
+  - **升階要贏過引擎(d473140)**:/ladder 升階硬條件 · 每往上爬一階那個月必須贏過引擎 · 累積場數夠了還不算。 品牌調和成 alpha-over-baseline 非 win-rate 虛榮榜(calibration-tiers 紅線明列 win-rate ranking = 品牌自殺)。 目前無 enforcement engine · 規則明文化。
+  - **押注閘門(abb4496 · net −247)**:押要先登入免費會員 · 拿掉免登入 localStorage 押注 + AnonVerdict + 錯文案「不用註冊·先押著」· 順手修押注按鈕被群眾線網路抓取卡 skeleton(改 getSession 先定狀態)· StickyFoundersCTA 改登入感知前門(不催已是會員的人)。
+  - **引擎閘門(f8b6851)**:新 EngineGate wrapper · 跑 10K 模擬要登入 · 套 /lab + /lab/custom + 賽事頁「進階驗算」摺疊 sim。 **看免費 · 動作(押注/跑引擎)要登入。**
+  - ⚠️ **REVERSES 舊「免登入試押」冷啟動護城河** · 同窗早上的 AnonPickMigrator(2d6f151)被 supersede(只剩 graceful 處理 legacy)· **別再加回匿名押注/跑引擎** · 詳見 [[project-zone27-registration-gate]] memory。
+  - ⏳ **B3 待清(下輪 subtraction · 沒擅自做)**:anon-picks 系統(AnonCalibrationStrip / CalibrationTierBadge / LadderPosition anon 路 / AnonPickMigrator / lib/anon-picks)= 對新用戶 render null 的死碼 · 可整批刪。 ⏳ **首頁登入後沒有個人戰績 strip**(舊「你的戰績」是 anon-only · 新模型該補一個讀 DB 的登入版 · 不然登入用戶首頁少了 personal hook)。 ⏳ **討論區 Phase 3**(綁戰績版玩運彩 · 需真實用戶才發光)。
 - ✅ **攻頂 round 3(2026-06-03 · 6 commit 全三綠 · 2d6f151→7e4ab23 · 全 pushed main)**· Tim「全權 · 上網查全世界找『缺的靈魂』· 重心理學+操作邏輯+極致美觀+操作直覺 · 別 push 上線/別碰 SEO 社群」· 3 路 agent(操作動線體檢 / 缺的靈魂全球研究 / 視覺工藝+認知負荷)synthesize → 6 波:
   - **修登入留存 CRITICAL bug(2d6f151)**:訪客本地押注(localStorage)登入後從沒被寫進共享預測表 = 全站講 5+ 次的「登入→存成永久戰績/進群眾市場/爬天梯」是空話 · 押 8 手登入後 /member 仍顯示 0 場。 新 `AnonPickMigrator`(layout 全站掛載 · 帶 session 把**尚未結算**的場 submitPrediction 重放 · 冪等 · 移除本地副本 · refresh)· 誠信護欄只遷移未結算場(防賽後補單污染天梯/準度)。
   - **缺的靈魂 OpenPositionCard(c4200d5)**:3 agent 一致最尖 —— 所有情緒高潮都在賽後/年度回顧 · 押下去到打完之間的 live 中段一片空白(資料模型有 today-live 卻沒畫)。「你的未結算押注」放 /member 準度數字之上 · 你 vs 引擎 vs 群眾三方張力 · LIVE 呼吸金線 · **絕不造假即時比分**(賽果仍賽後 ingest)。
