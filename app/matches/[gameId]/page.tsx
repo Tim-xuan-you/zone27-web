@@ -194,10 +194,10 @@ export default async function MatchDetailPage({
               同頁兩個勝率(開盤鎖定 estimate vs 下方逐打席 10K)= 信任 bug。
               假標籤「10K MONTE CARLO」已從開盤線移除(它是賽前估算 · 不是模擬)。
               落差 framed 成 Pratfall:兩種算法都公開 · 不挑好看的講。 */}
-          <p className="mt-3 text-center text-mute/75 text-[11px] sm:text-xs leading-relaxed">
-            這頁給你<span className="text-gold">兩種算法對照</span>:開盤線是賽前鎖定的<span className="text-bone">快攻估算</span>
-            (戰績 · 主場 · 投手),往下能自己跑<span className="text-bone">逐打席 10K 深算</span>。
-            數字有出入很正常 —— 多數站只給一個數字假裝確定,<span className="text-bone">我們兩種都免費攤開讓你自己對照</span>。
+          <p className="mt-3 text-center text-mute/70 text-[11px] sm:text-xs leading-relaxed">
+            上面是賽前鎖定的<span className="text-bone">開盤線</span>(戰績 · 主場 · 投手的快攻估算)。
+            想深究?往下可以自己跑<span className="text-bone">逐打席 10K 深算</span>驗證 ——
+            多數站只給一個數字假裝確定,<span className="text-bone">我們兩種都免費攤開</span>。
           </p>
 
           {/* 進場預測 · 群眾線 + 你的一手 */}
@@ -212,7 +212,9 @@ export default async function MatchDetailPage({
 
           {/* 這題怎麼算贏 · 預測市場第一信任機制(賭徒最怕模糊結算)· 補全球標竿研究「缺的靈魂①」 */}
           <div className="mt-4 border border-line/60 bg-slate/30 px-4 py-3">
-            <p className="font-mono text-gold/80 text-[9px] tracking-[0.35em] mb-1.5">
+            {/* eyebrow 降成 mute · 結算規則是次要保證(內容才重要)· 金色留給上方
+                開盤線當焦點(gold discipline · 不每個 section 都 gold 標籤搶眼)。 */}
+            <p className="font-mono text-mute text-[9px] tracking-[0.35em] mb-1.5">
               這題怎麼算贏
             </p>
             <p className="text-mute/85 text-[12px] sm:text-[13px] leading-relaxed">
