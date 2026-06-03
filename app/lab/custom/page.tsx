@@ -6,6 +6,7 @@ import { useSearchParams } from "next/navigation";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import MatchSimulator from "@/components/MatchSimulator";
+import EngineGate from "@/components/EngineGate";
 import RecentSims from "@/components/RecentSims";
 import EngineFreeBrandBlock from "@/components/EngineFreeBrandBlock";
 import type { Match, PitcherStats, TeamSide } from "@/lib/matches";
@@ -353,7 +354,9 @@ function CustomLabInner() {
               {copied ? "✓ 已複製" : "🔗 複製分享連結"}
             </button>
           </div>
-          <MatchSimulator key={builtMatch.id} match={builtMatch} />
+          <EngineGate next="/lab/custom">
+            <MatchSimulator key={builtMatch.id} match={builtMatch} />
+          </EngineGate>
         </section>
       )}
 

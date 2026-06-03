@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import MatchSimulator from "@/components/MatchSimulator";
+import EngineGate from "@/components/EngineGate";
 import StatPercentileBar from "@/components/StatPercentileBar";
 import ConfidenceStars from "@/components/ConfidenceStars";
 import CreatorAnalysis from "@/components/CreatorAnalysis";
@@ -340,7 +341,9 @@ export default async function MatchDetailPage({
               這是更細的另一套算法(數字會跟開盤線有點出入)· 你親手看引擎憑什麼開這個盤。{" "}
               <span className="text-bone">這是驗算工具 · 不是第二個官方盤口</span>。
             </p>
-            <MatchSimulator key={m.id} match={m} />
+            <EngineGate next={`/matches/${m.id}`}>
+              <MatchSimulator key={m.id} match={m} />
+            </EngineGate>
           </details>
         </section>
 

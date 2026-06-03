@@ -5,6 +5,7 @@ import Link from "next/link";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import MatchSimulator from "@/components/MatchSimulator";
+import EngineGate from "@/components/EngineGate";
 import RecentSims from "@/components/RecentSims";
 import EngineFreeBrandBlock from "@/components/EngineFreeBrandBlock";
 import { matches } from "@/lib/matches";
@@ -257,9 +258,11 @@ export default function LabPage() {
         ↓ ENGINE ↓
       </p>
 
-      {/* ── THE SIMULATOR (shared component) ─────── */}
+      {/* ── THE SIMULATOR (shared component) · R188 跑引擎要登入 ─────── */}
       <section className="mx-auto max-w-4xl w-full px-6 sm:px-10 pb-12 border-t border-gold/20 pt-8">
-        <MatchSimulator key={match.id} match={match} />
+        <EngineGate next="/lab">
+          <MatchSimulator key={match.id} match={match} />
+        </EngineGate>
       </section>
 
       {/* ── POST-SIM TRUST LOOP ────────────────────
