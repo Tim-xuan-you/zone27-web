@@ -6,8 +6,13 @@ import WalletPanel from "@/components/WalletPanel";
 import { getUser } from "@/lib/supabase/server";
 import { aggregatePredictionStats } from "@/lib/predictions";
 import { getMyPredictionsMap } from "@/lib/predictions-server";
-import { getTodayAndFutureMatches, matches as allMatches } from "@/lib/matches";
+import {
+  getTodayAndFutureMatches,
+  getMatchPhase,
+  matches as allMatches,
+} from "@/lib/matches";
 import { readTier, isPaid, creatorTakePct } from "@/lib/tier";
+import OpenPositionCard, { type OpenPosition } from "@/components/OpenPositionCard";
 
 export const metadata: Metadata = {
   title: "你的儀表板",
@@ -27,6 +32,19 @@ export const metadata: Metadata = {
 // 招募 bar(StickyFoundersCTA)+ 創始編號 strip(ScarcityStrip)已在
 // /member 隱藏 — 不對已是會員的人推入會。
 // ─────────────────────────────────────────────────────
+
+// "2026 · 06 · 03 · 星期三" → "06/03"(未結算押注卡只在未來場顯示日期)
+function compactDate(dateStr: string): string {
+  const parts = dateStr.split("·").map((s) => s.trim());
+  return parts.length >= 3 && parts[1] && parts[2]
+    ? `${parts[1]}/${parts[2]}`
+    : "";
+}
+
+// 持倉排序:進行中 → 今晚待開 → 未來(最急的在最上面)
+function phaseRank(phase: OpenPosition["phase"]): number {
+  return phase === "today-live" ? 0 : phase === "today-pregame" ? 1 : 2;
+}
 
 export default async function MemberPage() {
   // getUser() re-validates with Supabase auth server(JWT verify)· 渲染會員
@@ -76,11 +94,44 @@ export default async function MemberPage() {
     allMatches.map((m) => ({ id: m.id, finalWinner: m.finalResult?.winner ?? null }))
   );
 
+  // 你的未結算押注(the live middle · soul)· 你押過、還沒結算的場 —— 押下去到
+  // 打完之間那段以前 /member 一片空白。 你 vs 引擎 vs 群眾 的張力撐住「我現在
+  // 有一手在賭」。 LIVE 場(getMatchPhase today-live)多一道呼吸金線。
+  const openPositions: OpenPosition[] = allMatches
+    .map((m): OpenPosition | null => {
+      const entry = predictionsMap[m.id];
+      // table 只存 home/away · 但 map 型別保留舊的 "skip" · skip 不是一手持倉
+      if (!entry || (entry.pick !== "home" && entry.pick !== "away")) return null;
+      const phase = getMatchPhase(m);
+      if (
+        phase !== "today-live" &&
+        phase !== "today-pregame" &&
+        phase !== "future"
+      ) {
+        return null;
+      }
+      return {
+        matchId: m.id,
+        homeName: m.home.name,
+        awayName: m.away.name,
+        startTime: m.startTime,
+        dateLabel: compactDate(m.date),
+        myPick: entry.pick,
+        engineHomePicked: m.home.winRate >= m.away.winRate,
+        engineConfidence: Math.max(m.home.winRate, m.away.winRate),
+        phase,
+      };
+    })
+    .filter((p): p is OpenPosition => p !== null)
+    .sort((a, b) => phaseRank(a.phase) - phaseRank(b.phase));
+  const heldIds = new Set(openPositions.map((p) => p.matchId));
+
   // 今晚 + 即將(同首頁 getTodayAndFutureMatches · 已排除已結算)· 修會員 vs 訪客
   // 不對等的 bug:原本只抓「今天」· 休賽日但明後天有排賽時,登入會員看到死路
   // (track-record / lab),沒登入的人在首頁卻看得到、還能先押 = 高意願的會員反而
   // 拿到比較差的答案。 改抓今天+未來,跟首頁同一份資料。
-  const upcoming = getTodayAndFutureMatches();
+  // 已押的場移到上方「你的未結算押注」· 這裡只留「還沒押」的,不重複。
+  const upcoming = getTodayAndFutureMatches().filter((m) => !heldIds.has(m.id));
 
   return (
     <div className="flex flex-col flex-1 min-h-screen">
@@ -101,6 +152,22 @@ export default async function MemberPage() {
             </button>
           </form>
         </div>
+
+        {/* 1.5 · 你的未結算押注 · the live middle(soul)· 只在有持倉時出現 ──
+            押下去到打完之間那段 —— 你 vs 引擎 vs 群眾。 放在準度數字之上,因為
+            這是你今天回來的理由(動態 · 時效)· 沒持倉時自動隱藏,準度數字遞補為首。 */}
+        {openPositions.length > 0 && (
+          <section className="mt-8">
+            <p className="font-mono text-gold text-[10px] tracking-[0.4em] mb-3">
+              你的未結算押注
+            </p>
+            <div className="flex flex-col gap-3">
+              {openPositions.map((p) => (
+                <OpenPositionCard key={p.matchId} position={p} />
+              ))}
+            </div>
+          </section>
+        )}
 
         {/* 2 · 你的準度 · THE number ────────────────── */}
         <section className="mt-8 bg-slate/40 border border-gold/30 p-6 sm:p-8">
