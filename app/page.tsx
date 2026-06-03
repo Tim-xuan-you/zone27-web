@@ -3,7 +3,7 @@ import Link from "next/link";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import MiniMatchCard from "@/components/MiniMatchCard";
-import AnonCalibrationStrip from "@/components/AnonCalibrationStrip";
+import YourRecordStrip from "@/components/YourRecordStrip";
 import {
   getTodayAndFutureMatches,
   getFinalizedMatches,
@@ -30,9 +30,15 @@ export default function Home() {
   // 收據(✓言中 / ✕落空都掛)· per getFeaturedMatch 哲學「引擎沒在跑時,
   // proof-of-work(收據)勝過空泛的未來預測 = 轉換槓桿」。 首頁 2 場上限
   // (mobile ≤ 3 viewport 鐵律 · 看完整去 /track-record)。
-  const recentReceipts =
-    upcoming.length === 0 ? getFinalizedMatches().slice(0, 2) : [];
+  const finalized = getFinalizedMatches();
+  const recentReceipts = upcoming.length === 0 ? finalized.slice(0, 2) : [];
   const tr = getTrackRecordStats();
+  // 已結算賽事的勝方 · 傳給登入後個人戰績條(client 端用它評分本人押注 ·
+  // 靜態資料 · 無隱私問題)。 首頁維持 ISR 靜態,戰績條 hydrate 後才填本人資料。
+  const matchResults = finalized.map((m) => ({
+    id: m.id,
+    finalWinner: m.finalResult?.winner ?? null,
+  }));
 
   return (
     <div className="flex flex-col flex-1 min-h-screen">
@@ -79,11 +85,11 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ── 你的戰績 vs 引擎 · 回訪鉤子 · 只在這台裝置押過才出現 ──
-            放在市場看板「之上」· 回訪押過的人一進來先看到自己跟引擎誰準
-            (= 明天回來的理由)· 不再被 hero CTA 跳過。 新訪客 0 picks →
-            自動隱藏 · 看板遞補為第一屏。 per 操作動線 agent。 */}
-        <AnonCalibrationStrip variant="homepage" />
+        {/* ── 你 vs 引擎 · 回訪鉤子 · 只在登入且押過才出現 ──
+            放在市場看板「之上」· 回訪的會員一進來先看到自己跟引擎誰準
+            (= 明天回來的理由)· 不再被 hero CTA 跳過。 沒登入 / 0 押注 →
+            自動隱藏 · 看板遞補為第一屏。 R189 改讀 DB(取代死掉的匿名版)。 */}
+        <YourRecordStrip variant="home" matchResults={matchResults} />
 
         {/* ── THE FLOOR · 市場看板 / 賽後收據(休賽日 fallback)──── */}
         <section id="floor" className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-14 scroll-mt-20">

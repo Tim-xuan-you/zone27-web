@@ -7,10 +7,13 @@
 // key 加入時 此表必須同步 update · drift = brand IP 自殺」 clause。
 //
 // Content fidelity:
-//   - 11 keys verbatim from /audit S06 R43 W-B verified ground truth
+//   - keys verbatim from /audit S06 R43 W-B verified ground truth
 //   - SAME labels · SAME notes · SAME order · no policy change
 //   - per /audit S05 PRE-COMMIT clause this is REFACTOR not POLICY MODIFICATION
 //   - rules stay binding · architecture improves · drift impossible
+//   - R189(2026-06-03)· removed zone27_anon_picks_v1 entry · R188 註冊閘門
+//     拿掉免登入押注後沒人再寫這 key · 留著=drift(訪客 DevTools 驗不到)·
+//     刪 anon-picks 死碼整串時同步移除此條 · count 自動 11→10
 //
 // The endowment mechanic(Loewenstein/Issacharoff 1994):
 //   - visitor's localStorage holds their personal ZONE 27 state
@@ -95,12 +98,6 @@ export const LOCAL_STORAGE_INVENTORY: ReadonlyArray<LocalStorageKeyEntry> = [
     shippedIn: "R30 W-5",
   },
   {
-    key: "zone27_anon_picks_v1",
-    value: "您 anonymous picks · 個人 calibration vs engine",
-    note: "AnonPickWidget 寫入 · /matches/[gameId] 訪客 pick before peeking · AnonCalibrationStrip 讀 · 0 server · 0 PII · /calibration + homepage 只在您裝置 render",
-    shippedIn: "R45 W-A",
-  },
-  {
     key: "zone27_last_ledger_n_v1",
     value: "您上次看 /track-record 時的 N · 用於 delta chip 顯示",
     note: "LedgerDeltaChip 寫入 + 讀取 · 每次訪 /track-record 看到「+X since YYYY-MM-DD」 · 純 Endowment effect 心理 hook · 0 server · 0 PII",
@@ -126,6 +123,7 @@ export const LOCAL_STORAGE_INVENTORY: ReadonlyArray<LocalStorageKeyEntry> = [
   },
 ];
 
-/** Canonical key count · used by component header chip · brand IP「11 keys」
- *  surface · 5-second DevTools verifiable claim · drift = self-debunk。 */
+/** Canonical key count · used by component header chip · the rendered count
+ *  is always derived from the array length (never hardcoded) · 5-second
+ *  DevTools verifiable claim · drift = self-debunk。 */
 export const LOCAL_STORAGE_KEY_COUNT = LOCAL_STORAGE_INVENTORY.length;

@@ -127,8 +127,6 @@ export const COMMAND_ITEMS: CommandItem[] = [
       "recommend",
       "贏家",
       "黑馬",
-      "AnonPick",
-      "UserPrediction",
       // R137 W6 · 場館暱稱 + 季事關鍵詞 per Agent C 球迷 slang gap audit
       // (filtered to brand-IP-fit only · CPBL fan audience grammar per
       // [[feedback-zone27-audience-fans-not-engineers]])

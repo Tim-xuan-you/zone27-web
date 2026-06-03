@@ -4,7 +4,6 @@ import Footer from "@/components/Footer";
 import RelatedReading from "@/components/RelatedReading";
 import FounderSignOff from "@/components/FounderSignOff";
 import ArticleMeta from "@/components/ArticleMeta";
-import CalibrationTierBadge from "@/components/CalibrationTierBadge";
 import { createPageMetadata } from "@/lib/page-og";
 import {
   getFinalizedMatches,
@@ -168,31 +167,6 @@ export default async function CalibrationPage() {
               sample={{ current: n, threshold: 30 }}
             />
           </div>
-        </section>
-
-        <div className="mx-auto w-32 gold-line mb-12" />
-
-        {/* ── Round 53 W-A · CalibrationTierBadge · 7-tier epistemic
-            discipline ladder · brand-pure Tetlock pattern · 0 social
-            leaderboard · client-side localStorage only · per agent's
-            anti-leaderboard guard · 永遠不在 /calibration public page。
-            Tier 0 觀測者 N<10 · Tier 1 校準學徒 · Tier 2 守紀者 ·
-            Tier 3 守紀者 II · Tier 4 超級守紀者(Tetlock top-2%)·
-            Tier 5 27(brand-aligned 270 picks)· Tier 6 終身校準者。 */}
-        <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-12">
-          <p className="font-mono text-gold text-[10px] tracking-[0.4em] mb-4">
-            / 你的準度級別 · 7 階 · 只有你自己看得到
-          </p>
-          <h2 className="text-2xl sm:text-3xl text-bone font-light tracking-tight mb-3">
-            你的準度級別
-          </h2>
-          <p className="text-mute/85 text-sm leading-relaxed mb-6">
-            這跟賣明牌的站的排行榜本質不同 —
-            我們排的是「<strong className="text-bone">你說的把握程度,跟實際結果有多吻合</strong>」,
-            不是排「誰猜最準」(那是賭博排行榜的玩法)。 而且只有你自己看得到,
-            不跟別人比。
-          </p>
-          <CalibrationTierBadge />
         </section>
 
         <div className="mx-auto w-32 gold-line mb-12" />

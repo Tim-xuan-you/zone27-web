@@ -4,8 +4,6 @@ import CommandPalette from "@/components/CommandPalette";
 import StickyFoundersCTA from "@/components/StickyFoundersCTA";
 import PreviewModeBanner from "@/components/PreviewModeBanner";
 import GlobalShortcuts from "@/components/GlobalShortcuts";
-import AnonPickMigrator from "@/components/AnonPickMigrator";
-import { matches } from "@/lib/matches";
 import "./globals.css";
 
 // ── Viewport · themeColor + colorScheme (Next.js 16 pattern) ──
@@ -93,13 +91,6 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  // Matches still open for a fresh pick (no final result ingested yet) ·
-  // the only ones AnonPickMigrator may replay into the shared market after
-  // login (resolved games are excluded to protect calibration integrity).
-  const nonFinalMatchIds = matches
-    .filter((m) => !m.finalResult)
-    .map((m) => m.id);
-
   return (
     <html
       lang="zh-Hant"
@@ -147,9 +138,6 @@ export default function RootLayout({
             sticky top · 顯示 active tier preview · click cancel 回真實 session ·
             client island self-hides 如果無 localStorage zone27_preview_tier */}
         <PreviewModeBanner />
-        {/* Replays anon localStorage picks into the shared market once a
-            visitor logs in · fixes the「登入 → 存成永久戰績」 funnel promise. */}
-        <AnonPickMigrator nonFinalMatchIds={nonFinalMatchIds} />
         {children}
         <CommandPalette />
         <StickyFoundersCTA />

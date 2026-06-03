@@ -1,7 +1,8 @@
 import Link from "next/link";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
-import LadderPosition from "@/components/LadderPosition";
+import YourRecordStrip from "@/components/YourRecordStrip";
+import { getFinalizedMatches } from "@/lib/matches";
 import { createPageMetadata } from "@/lib/page-og";
 
 export const metadata = createPageMetadata({
@@ -27,6 +28,13 @@ const TIERS = [
 ];
 
 export default function LadderPage() {
+  // 已結算賽事勝方 · 傳給「你現在的位置」戰績條(client 端評分本人押注)。
+  // /ladder 維持 ISR 靜態 · 戰績條 hydrate 後才填本人進度。
+  const matchResults = getFinalizedMatches().map((m) => ({
+    id: m.id,
+    finalWinner: m.finalResult?.winner ?? null,
+  }));
+
   return (
     <div className="flex flex-col flex-1 min-h-screen">
       <Nav />
@@ -44,8 +52,9 @@ export default function LadderPage() {
           <span className="text-bone">跟一台公開的機器正面比準度</span>。
         </p>
 
-        {/* 你現在的位置(押過的人才顯示 · 把死路 brochure 變個人目標梯度)*/}
-        <LadderPosition />
+        {/* 你現在的位置(登入且押過才顯示 · 把死路 brochure 變個人目標梯度)·
+            R189 改讀 DB(取代死掉的匿名版 LadderPosition)*/}
+        <YourRecordStrip variant="ladder" matchResults={matchResults} />
 
         {/* ── 5 階(神諭在最上面)──────────────── */}
         <div className="flex flex-col gap-2">

@@ -60,7 +60,7 @@ export default function LocalStorageReceipt({ variant = "receipt" }: Props) {
     // philosophy]] axiom · 不假裝 + 不藏 + drift impossible by design。
     return (
       <table
-        aria-label="Local Storage Inventory · 11 canonical keys · audit-table variant"
+        aria-label={`Local Storage Inventory · ${LOCAL_STORAGE_KEY_COUNT} canonical keys · audit-table variant`}
         className="w-full text-sm font-mono border-collapse my-2"
       >
         <tbody>
@@ -86,7 +86,7 @@ export default function LocalStorageReceipt({ variant = "receipt" }: Props) {
   // endowment-via-inventory surface
   return (
     <section
-      aria-label="Local Storage Receipt · your 11 device-local data points · Loewenstein/Issacharoff endowment-via-inventory"
+      aria-label={`Local Storage Receipt · your ${LOCAL_STORAGE_KEY_COUNT} device-local data points · Loewenstein/Issacharoff endowment-via-inventory`}
       className="border border-line/60 bg-slate/30 p-5 sm:p-6"
     >
       <div className="flex items-baseline justify-between gap-3 flex-wrap mb-3">

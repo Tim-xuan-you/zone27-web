@@ -20,6 +20,7 @@
 // ─────────────────────────────────────────────────────
 
 import { createSupabaseBrowserClient } from "@/lib/supabase/browser";
+import type { UserPredictionsMap } from "@/lib/predictions";
 
 export type MarketTally = {
   homeCount: number;
@@ -85,6 +86,35 @@ export async function getMyPrediction(
     return pick === "home" || pick === "away" ? pick : null;
   } catch {
     return null;
+  }
+}
+
+/** All of my picks across every match (logged-in) · shaped into the same
+ *  UserPredictionsMap the dashboard already grades with
+ *  aggregatePredictionStats。 Mirrors the server-side getMyPredictionsMap but
+ *  runs in the browser — so ISR pages (homepage · /ladder) can stay static
+ *  and hydrate the「你 vs 引擎」strip per-user after load. Returns {} on any
+ *  error / anon / pre-migration so the strip just stays hidden. */
+export async function getMyPredictionsClient(): Promise<UserPredictionsMap> {
+  try {
+    const supabase = createSupabaseBrowserClient();
+    const { data, error } = await supabase.rpc("get_my_predictions");
+    if (error || !Array.isArray(data)) return {};
+    const map: UserPredictionsMap = {};
+    for (const row of data as {
+      match_id?: unknown;
+      pick?: unknown;
+      created_at?: unknown;
+    }[]) {
+      const matchId = typeof row.match_id === "string" ? row.match_id : null;
+      const pick =
+        row.pick === "home" || row.pick === "away" ? row.pick : null;
+      const ts = typeof row.created_at === "string" ? row.created_at : "";
+      if (matchId && pick) map[matchId] = { pick, ts };
+    }
+    return map;
+  } catch {
+    return {};
   }
 }
 
