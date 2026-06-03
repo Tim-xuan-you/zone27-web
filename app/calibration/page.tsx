@@ -189,6 +189,58 @@ export default function CalibrationPublicPage() {
           ) : null}
         </section>
 
+        {/* ── 為什麼沒有「神準」這種引擎(57% 天花板)──────────────
+            engine-strategy memory #4:57% = 對手謊言的數學證據。
+            研究核對(2026-06 · 不 render 給訪客):全世界最準的 MLB 賽前
+            模型 + Vegas 盤口單場命中率 ≈ 57-58%(Vegas 6 年 58.2%)· 理論
+            上限 ~60%。 學術文獻(Elfrink/Valero/Jia 等)57-59.5% · 少數
+            ML 宣稱 64% 多是 in-sample 過擬合、不可複製。 → 沒有神準引擎 ·
+            護城河 = 敢承認 57% + 逐場對帳,不是準度本身。 升級走「更好輸入」
+            非換引擎(= 三引擎策略地基)。 plain words only per
+            [[feedback-zone27-pratfall-brand-ip]](不 render Brier/Tetlock/論文引用)。 */}
+        <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-16 border-t border-line/40 pt-12">
+          <p className="font-mono text-gold text-[10px] tracking-[0.45em] mb-6">
+            / 為什麼沒有「神準」這種引擎
+          </p>
+          <h2 className="text-2xl sm:text-3xl text-bone font-light tracking-tight mb-6 leading-tight">
+            全世界最準的模型 · 也只到大約{" "}
+            <span className="text-gold">5 成 7</span>
+          </h2>
+          <div className="space-y-4 text-mute leading-relaxed">
+            <p>
+              這是一件幾乎沒人在台灣跟你講白的事:全世界最準的棒球賽前預測 ——
+              包括拉斯維加斯的盤口、最頂尖的 AI 模型 —— 單場命中率大約就是{" "}
+              <strong className="text-bone">5 成 7(57%)</strong> ·
+              理論上限也就 6 成上下。 再多的數據、再強的 AI · 都打不破這道牆。
+            </p>
+            <p>
+              為什麼?因為棒球本質上就帶著大量{" "}
+              <strong className="text-bone">洗不掉的運氣</strong> ——
+              王牌也會被打爆,墊底的也會爆冷。 這不是模型不夠強 ·
+              是這項運動天生就長這樣。
+            </p>
+            <p>
+              所以任何宣稱「<span className="text-loss/90">94% 勝率</span>」「鐵口神準」的老師 ·
+              <strong className="text-bone">數學上不可能</strong>。
+              那不是厲害 · 那是話術 —— 用一個本來就不存在的準度當賣點。
+            </p>
+            <div className="border-l-2 border-gold/60 pl-5 sm:pl-6 py-1 my-2">
+              <p className="text-bone text-lg leading-relaxed">
+                ZONE 27 的護城河 · 從來不是「比別人準」。
+              </p>
+              <p className="mt-2 text-mute leading-relaxed">
+                沒有人能準多少 —— 是我們敢把這道 5 成 7 的天花板 ·
+                當成招牌掛出來、還讓你逐場對帳。 誠實 · 是唯一抄不走的東西。
+              </p>
+            </div>
+            <p className="text-mute/80 text-sm">
+              那我們怎麼變更準?靠<strong className="text-bone">更好的「輸入」</strong> ——
+              更細的擊球數據、球場、牛棚狀況 —— 不是換一個「更神」的引擎。
+              引擎這東西全世界都差不多 · 差別在誰餵的料更乾淨、誰更敢認帳。
+            </p>
+          </div>
+        </section>
+
         {/* ── 為什麼明牌站不敢做這頁 ── */}
         <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-16 border-t border-line/40 pt-12">
           <p className="font-mono text-gold text-[10px] tracking-[0.45em] mb-6">
