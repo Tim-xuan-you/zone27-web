@@ -206,7 +206,6 @@ export default async function MatchDetailPage({
             homeName={m.home.name}
             awayName={m.away.name}
             engineHomePicked={m.home.winRate >= m.away.winRate}
-            engineConfidence={Math.max(m.home.winRate, m.away.winRate)}
             finalWinner={m.finalResult?.winner ?? null}
           />
 

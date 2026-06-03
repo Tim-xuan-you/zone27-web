@@ -10,37 +10,26 @@ import {
   CROWD_LINE_MIN,
   type MarketTally,
 } from "@/lib/predictions-market";
-import { getAnonPickForMatch, pushAnonPick } from "@/lib/anon-picks";
 
-// ── ZONE 27 · Card Bet Strip (R177 · Polymarket 化) ─────
-// 首頁市場卡上的一鍵押 + 群眾市場線。 把押注從「點完整分析 → 進賽事頁 →
-// 滑到 picker」(4 步)壓成「卡上直接押」(1 步)= Polymarket 核心體驗。
+// ── ZONE 27 · Card Bet Strip ─────────────────────────────
+// 首頁 / 賽事列表市場卡上的一鍵押 + 群眾市場線。
 //
-// 兩條腿,同一個動作(跟賽事頁 UserPredictionPicker 完全一致):
-//   · 還沒登入 → 押在這台裝置(localStorage · 0 註冊)· 一秒 own 一手
-//   · 已登入 → 押進共享 predictions 表(0003 RPC · 餵群眾線)· 一場一人一次
-// GRACEFUL:0 用戶 → 群眾線收起 · RPC error → 不 crash。
+// R188(2026-06-03 · Tim 拍板「要註冊才能押」)· 押注一律要登入(免費會員)。
+// 拿掉舊的免登入 localStorage 押注 —— 一手存在瀏覽器、刪一下就沒、爬不了榜的
+// 「注」不算數(那正是玩運彩匿名老師的病)。 登入後每一手從第一手就是真戰績:
+// 進共享 predictions 表(0003 RPC · 一場一人一次 · server 鎖死不可改)· 餵群眾
+// 線 + 海選天梯。 **看(群眾線)免費 · 押(下注)要登入。**
 // ─────────────────────────────────────────────────────
 
 type Props = {
   matchId: string;
   homeName: string;
   awayName: string;
-  /** 引擎賽前看好哪邊(home ≥ away)· 存進本地 pick 供賽後對照 */
-  engineHomePicked: boolean;
-  /** 引擎對 favorite 的把握度(0-100)*/
-  engineConfidence: number;
 };
 
-type Status = "loading" | "anon-open" | "anon-locked" | "open" | "locked";
+type Status = "loading" | "logged-out" | "open" | "locked";
 
-export default function CardBetStrip({
-  matchId,
-  homeName,
-  awayName,
-  engineHomePicked,
-  engineConfidence,
-}: Props) {
+export default function CardBetStrip({ matchId, homeName, awayName }: Props) {
   const [status, setStatus] = useState<Status>("loading");
   const [myPick, setMyPick] = useState<"home" | "away" | null>(null);
   const [tally, setTally] = useState<MarketTally | null>(null);
@@ -49,35 +38,33 @@ export default function CardBetStrip({
   useEffect(() => {
     let cancelled = false;
     (async () => {
-      const t = await getMatchTally(matchId);
-      if (!cancelled) setTally(t);
+      // 1) 先定押注狀態 · getSession 讀本地 session(不卡網路)→ 押注閘門/按鈕
+      //    立刻出現,不被下面的群眾線網路抓取拖住(原本 await tally 在前會卡 skeleton)。
       try {
         const supabase = createSupabaseBrowserClient();
         const { data } = await supabase.auth.getSession();
         if (cancelled) return;
         if (!data.session) {
-          const local = getAnonPickForMatch(matchId);
-          setMyPick(local ? local.pickedSide : null);
-          setStatus(local ? "anon-locked" : "anon-open");
-          return;
+          setStatus("logged-out");
+        } else {
+          const mine = await getMyPrediction(matchId);
+          if (cancelled) return;
+          setMyPick(mine);
+          setStatus(mine ? "locked" : "open");
         }
-        const mine = await getMyPrediction(matchId);
-        if (cancelled) return;
-        setMyPick(mine);
-        setStatus(mine ? "locked" : "open");
       } catch {
-        if (cancelled) return;
-        const local = getAnonPickForMatch(matchId);
-        setMyPick(local ? local.pickedSide : null);
-        setStatus(local ? "anon-locked" : "anon-open");
+        if (!cancelled) setStatus("logged-out");
       }
+      // 2) 群眾線另外抓 · 慢就慢 · 不阻擋押注動作
+      const t = await getMatchTally(matchId);
+      if (!cancelled) setTally(t);
     })();
     return () => {
       cancelled = true;
     };
   }, [matchId]);
 
-  // 會員 · Supabase
+  // 會員押注 · Supabase(server 端 getUser 再驗一次身分)
   const enterMember = async (pick: "home" | "away") => {
     setSaving(true);
     const res = await submitPrediction(matchId, pick);
@@ -91,30 +78,14 @@ export default function CardBetStrip({
       setMyPick(mine);
       setStatus(mine ? "locked" : "open");
     } else if (res.reason === "not_logged_in") {
-      const local = getAnonPickForMatch(matchId);
-      setMyPick(local ? local.pickedSide : null);
-      setStatus(local ? "anon-locked" : "anon-open");
+      setStatus("logged-out");
     }
     setSaving(false);
   };
 
-  // 訪客 · localStorage(0 註冊)
-  const enterLocal = (pick: "home" | "away") => {
-    const res = pushAnonPick({
-      matchId,
-      pickedSide: pick,
-      enginePickedSide: engineHomePicked ? "home" : "away",
-      engineConfidence,
-    });
-    if (res.ok) {
-      setMyPick(pick);
-      setStatus("anon-locked");
-    }
-  };
-
   return (
     <div className="mt-3 pt-3 border-t border-gold/15">
-      {/* 群眾市場線 · 滿門檻才畫百分比(低於門檻只報人數 · 不拿小樣本假裝共識)*/}
+      {/* 群眾市場線 · 看免費 · 滿門檻才畫百分比(不拿小樣本假裝共識)*/}
       {tally && tally.total >= CROWD_LINE_MIN && tally.homePct !== null && (
         <div
           role="img"
@@ -140,7 +111,7 @@ export default function CardBetStrip({
         </div>
       )}
 
-      {/* 樣本太小 · 只報人數,不畫滿格 bar(不拿 N=1 假裝 100% 共識)*/}
+      {/* 樣本太小 · 只報人數不畫滿格 bar */}
       {tally && tally.total > 0 && tally.total < CROWD_LINE_MIN && (
         <p className="mb-2 font-mono text-mute/70 text-[9px] tracking-[0.18em]">
           <span className="text-bone tabular">{tally.total}</span> 人押了 · 滿{" "}
@@ -148,26 +119,33 @@ export default function CardBetStrip({
         </p>
       )}
 
-      {/* 冷啟動鉤子 · 還沒人押時,把空盤翻成「第一手是你的」邀請 */}
-      {tally &&
-        tally.total === 0 &&
-        (status === "open" || status === "anon-open") && (
-          <p className="mb-2 font-mono text-gold/70 text-[9px] tracking-[0.2em]">
-            還沒人押這場 · 第一手是你的 ▸
-          </p>
-        )}
+      {/* 登入後沒人押 · 冷啟動鉤子(第一手是你的)*/}
+      {tally && tally.total === 0 && status === "open" && (
+        <p className="mb-2 font-mono text-gold/70 text-[9px] tracking-[0.2em]">
+          還沒人押這場 · 第一手是你的 ▸
+        </p>
+      )}
 
-      {/* 一鍵押 */}
       {status === "loading" && (
         <div className="h-10 skeleton rounded" aria-hidden="true" />
       )}
-      {(status === "open" || status === "anon-open") && (
+
+      {/* 沒登入 → 押注要先成為免費會員(看免費 · 押要登入)*/}
+      {status === "logged-out" && (
+        <Link
+          href={`/login?next=${encodeURIComponent(`/matches/${matchId}`)}`}
+          className="block text-center px-3 py-2.5 min-h-[40px] border border-gold/40 text-gold hover:bg-gold/10 hover:border-gold font-mono text-[10px] tracking-[0.15em] transition-colors"
+        >
+          登入免費註冊 → 押這場
+        </Link>
+      )}
+
+      {/* 已登入未押 · 一鍵押 */}
+      {status === "open" && (
         <div className="grid grid-cols-2 gap-2">
           <button
             type="button"
-            onClick={() =>
-              status === "open" ? enterMember("home") : enterLocal("home")
-            }
+            onClick={() => enterMember("home")}
             disabled={saving}
             className="px-2 py-2.5 min-h-[40px] border border-gold/40 text-bone hover:border-gold hover:bg-gold/10 font-mono text-[10px] tracking-[0.15em] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
@@ -175,9 +153,7 @@ export default function CardBetStrip({
           </button>
           <button
             type="button"
-            onClick={() =>
-              status === "open" ? enterMember("away") : enterLocal("away")
-            }
+            onClick={() => enterMember("away")}
             disabled={saving}
             className="px-2 py-2.5 min-h-[40px] border border-gold/40 text-bone hover:border-gold hover:bg-gold/10 font-mono text-[10px] tracking-[0.15em] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
@@ -185,33 +161,17 @@ export default function CardBetStrip({
           </button>
         </div>
       )}
-      {status === "anon-open" && (
-        <p className="mt-1.5 font-mono text-mute/55 text-[9px] tracking-[0.18em] text-center">
-          不用註冊 · 先押著
-        </p>
-      )}
-      {(status === "locked" || status === "anon-locked") && myPick && (
+
+      {/* 已押 · 鎖定(乾淨峰終點)*/}
+      {status === "locked" && myPick && (
         <div className="text-center py-1.5">
           <p className="font-mono text-bone text-[11px] tracking-[0.15em]">
             ✓ 已押{" "}
             <span className="text-gold">
               {myPick === "home" ? homeName : awayName}
             </span>
-            <span className="text-mute/50 text-[9px] ml-1.5">
-              {status === "anon-locked" ? "· 存這裝置" : "· 鎖定"}
-            </span>
+            <span className="text-mute/50 text-[9px] ml-1.5">· 鎖定</span>
           </p>
-          {status === "anon-locked" && (
-            <Link
-              href={`/login?next=/matches/${matchId}`}
-              className="inline-block mt-1 font-mono text-gold/70 hover:text-gold text-[9px] tracking-[0.18em] underline-offset-4 hover:underline transition-colors"
-            >
-              登入 → 存成永久戰績、進群眾市場 ▸
-            </Link>
-          )}
-          {/* 移除「再選一場 → /matches」· 卡片永遠在 grid 裡(首頁 / 賽事頁)·
-              下一場就在旁邊 · 這條 link 只會把你彈到一頁幾乎一樣的清單(per
-              操作動線 agent)。 押完就停在「✓ 已押 X」這個乾淨的峰終點。 */}
         </div>
       )}
     </div>

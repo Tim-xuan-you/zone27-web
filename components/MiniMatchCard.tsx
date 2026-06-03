@@ -182,14 +182,12 @@ export default function MiniMatchCard({ match }: { match: Match }) {
 
       </div>
 
-      {/* R177 · Polymarket 化:卡上一鍵押 + 群眾線(未結算場)· 押注從埋 4 步 → 1 步 */}
+      {/* 卡上押注(未結算場)· R188:押注要登入(看免費 · 押要免費會員)*/}
       {!match.finalResult && (
         <CardBetStrip
           matchId={match.id}
           homeName={match.home.name}
           awayName={match.away.name}
-          engineHomePicked={homeFav}
-          engineConfidence={Math.max(homePct, awayPct)}
         />
       )}
 
