@@ -143,6 +143,15 @@ R172 pivot · BLACK CARD 從 TapPay 自動訂閱改成 manual ATM / 跨行轉帳
 
 R174 pivot build queue · Claude 可主動 ship(三綠 + auto-push):
 
+- ✅ **攻頂 round 2 · 全球研究 + 碼審 + 設計審計(2026-06-03 · 6 commit 全三綠 · cd34794→9c248da)**· Tim「全權 · 上網查全世界 · 攻頂 · 讓網站極致完美 · 重操作邏輯 · 怎樣熱銷 · 認真看 bug」· 3 路 agent(全球成功網站研究 / bug+安全碼審 / 設計+轉換審計)synthesize → 6 波 ship,並用 `next start` prod server 真實截圖驗證視覺:
+  - **量化品牌(cd34794)**:ConfidenceStars 五星「★★★★★ STRONG SIGNAL」→ 分段強度條(去報馬仔賣明牌的視覺語彙)· /founders「22 條」對齊 · 群眾線空狀態文案修(原誤導「登入才能押」)· WalletPanel 去 🔥 emoji(違反不放 emoji 鐵律)。
+  - **安全前端(424c4c4)**:/member + /api/submit 改用 getUser() 驗身分(不用可偽造的 getSession · 違反 codebase 自己的鐵律)。
+  - **賽事卡 craft(f88f586)**:砍冗餘英文隊名 + 收緊節奏 + 字級三階化 + 加「不確定性接縫」(量化簽名筆觸 · UncertaintyStripe 迷你版)· 更 action-first · 加 .claude prod 預覽設定(補 dev 預覽對 SSR 卡 loading 的不可靠)。
+  - **天梯個人位置(746c5f5)**:死路 brochure → 「你現在的位置」進度條(離新秀差幾場 + 登入上公開天梯)· 修 /member「看你排第幾」點過來看不到自己的斷裂迴路。
+  - **🔒 migration 安全(4aeeca2 · 待 Tim 套 · 見本檔最上方紅框)**:claim_admin 綁 founder email + fail-closed(防上線後任何人搶後台)· 作者代號 4→8 碼(防撞號陷害)· 賣文價後端夾 0–10000。
+  - **市場頁減法(9c248da)**:/matches 兩張 hero 大 CTA 卡 → 精簡兩欄 slim link + 拿掉違規綠框。
+  - 🧭 **「缺的靈魂」研究結論 + 我的覆核(回答 Tim「什麼大工程沒做」)**:全球研究指三大缺口(① 可分享的收據經濟 ② 設計化的頭 60 秒 ③ 每日習慣 streak)· **但覆核既有碼後 → 地基其實比研究以為的紮實**:免登入試押 ✓(冷啟動護城河 · 設計 agent 也認證 excellent)· 你 vs 引擎 seeding ✓ · 看準度頁 ✓ · 引擎收據分享(純文字 + OG 卡 + 永久連結)✓ · 海選天梯 ✓ · 創作者市場 ✓。 真正剩下的是「隨真實使用量才會發光」的增量:**使用者自己的「你贏引擎」verdict 變可分享(病毒線)· 每日 pick-streak · 賽事卡社群熱度**。 建議在「有真實內容 / 用戶」時、或下一輪專注做(同社群熱度暫緩的邏輯 —— 0 用戶時做這些是看不到效果的投資)。
+  - ⏳ **剩餘設計 P2(下輪可做)**:賽事頁把 10K 模擬器收進 `<details>` disclosure(消「同頁兩個勝率打架」的困惑 · 預設只露一個開盤線)· 賽後場改「收據優先」排序(分享連結直接落在 PROVED/DIVERGED 證據,而非死掉的押注框)· 錢包 deep-link(`去儲值`→`/member#wallet`)· globals.css 死碼清理(.scintillate / .engine-settle 等已刪元件殘留)。
 - ✅ **心理學 + 操作邏輯打磨(2026-06-03 · 4 commit 全三綠 · 96fd67e→eee159e · 接上窗 marathon)**· Tim「全權攻頂 · 重人的心理學+操作邏輯 · 先更新碼別上線」· 2 路 agent(心理/動線審計 + a11y lang 審計)synthesize · 6 條心理發現全 ship:
   - **W1 冷啟動迴路(96fd67e)**:AnonCalibrationStrip 訂閱 `zone27:anon-picks-changed` → 押完「你的戰績」strip 即時亮(原本要重整才出現 = 押完最熱那刻 endowment 回饋斷)· 首頁 strip 準度 % 滿 3 場結算才報(1 場不喊「你準度 100%」· 對齊 CROWD_LINE_MIN/天梯/看準度紀律)· CardBetStrip 會員押完加「再選一場 →」。
   - **W2 賽事卡 + 峰終(df24360)**:MiniMatchCard「一萬次模擬贏 6300 次」→「一萬次模擬 · 贏 6,300 次」(千分位 + Math.round 防脆裂)· UserPredictionPicker 賽後「押下一場」迴路原本 gate `!finalWinner` 在賽果出爐時消失(峰終斷頭)→ 改賽後也留低門檻「去押下一場」(贏可寫分析也可再押 · 輸不斷頭)。
