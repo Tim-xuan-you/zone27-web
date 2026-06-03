@@ -11,12 +11,14 @@ import ReproducibilityReceipt from "@/components/ReproducibilityReceipt";
 import LedgerDeltaChip from "@/components/LedgerDeltaChip";
 import TeamPickPanel from "@/components/TeamPickPanel";
 import MyTeamTrackRecord, { type MyTeamMatch } from "@/components/MyTeamTrackRecord";
+import MyTeamNextGame, { type MyTeamUpcoming } from "@/components/MyTeamNextGame";
 import CalibrationProgressBar from "@/components/CalibrationProgressBar";
 import QuietHandoffCard from "@/components/QuietHandoffCard";
 import SilentReceiptStream from "@/components/SilentReceiptStream";
 import {
   matches,
   getFinalizedMatches,
+  getTodayAndFutureMatches,
   getCalibration,
   getEnginePctOnWinner,
   getMatchDateIso,
@@ -207,6 +209,10 @@ export default function TrackRecordPage() {
         <div className="mt-5 flex items-baseline justify-between flex-wrap gap-3">
           <TeamPickPanel variant="header" />
         </div>
+
+        {/* 2026-06-04 · 球隊勝率推播 forward 半:你支持的隊下一場 + 萬象開盤
+            勝率 % + 賽後對帳承諾(由下方 past-record 兌現)· engine-strategy #5 */}
+        <MyTeamNextGame matches={buildMyTeamUpcoming(getTodayAndFutureMatches())} />
 
         {/* Round 31 Wave N · personal counter · 您支持的隊 N=X · ✓Y ✕Z
             · 只在 myTeam 已選後 render(client-hydrate) */}
@@ -600,6 +606,22 @@ function buildMyTeamMatches(finalized: Match[]): MyTeamMatch[] {
       isFinal: !!m.finalResult,
     };
   });
+}
+
+// ── 2026-06-04 · buildMyTeamUpcoming ───────────────────
+// 同 buildMyTeamMatches 的 forward 版:把 upcoming Match[] 轉成 client-side
+// MyTeamNextGame 需要的輕量 shape(只送 filter + 開盤線顯示要的欄位)。
+function buildMyTeamUpcoming(upcoming: Match[]): MyTeamUpcoming[] {
+  return upcoming.map((m) => ({
+    id: m.id,
+    date: m.date,
+    startTime: m.startTime,
+    venue: m.venue,
+    homeName: m.home.name,
+    awayName: m.away.name,
+    homeWinRate: m.home.winRate,
+    awayWinRate: m.away.winRate,
+  }));
 }
 
 // ── Sub-components ─────────────────────────────────────
