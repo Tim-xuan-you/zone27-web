@@ -5,13 +5,6 @@ import Footer from "@/components/Footer";
 import FounderSignOff from "@/components/FounderSignOff";
 import ArticleMeta from "@/components/ArticleMeta";
 import { matches, getFinalizedMatches } from "@/lib/matches";
-import {
-  FOUNDERS_TOTAL,
-  FOUNDERS_CLAIMED,
-  FOUNDERS_REMAINING,
-  FOUNDERS_NEXT,
-  formatBadge,
-} from "@/lib/founders-stats";
 import { getWaitlistCount } from "@/lib/waitlist-stats";
 import { getSession } from "@/lib/supabase/server";
 import AdminTierSwitcher from "@/components/AdminTierSwitcher";
@@ -250,15 +243,9 @@ export default async function AdminPage() {
                 waitlistCount === -1
                   ? "Supabase RPC 暫時不可達 · 請開 Supabase Studio 確認"
                   : waitlistCount === 0
-                  ? "尚無人加入 · 第一個就會是 #001"
+                  ? "尚無人加入 · 等第一個早鳥"
                   : `${waitlistCount} 個 email · Supabase Tokyo`
               }
-            />
-            <KpiCard
-              label="FOUNDERS"
-              zh="創始席位"
-              value={`${FOUNDERS_CLAIMED} / ${FOUNDERS_TOTAL}`}
-              hint={`剩 ${FOUNDERS_REMAINING} · NEXT IS ${formatBadge(FOUNDERS_NEXT)}`}
             />
             <KpiCard
               label="MATCHES"

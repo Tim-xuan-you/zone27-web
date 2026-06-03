@@ -17,7 +17,6 @@ import {
   type RunDiffBucket,
 } from "@/lib/simulator";
 import { saveSimHistory } from "@/lib/sim-history";
-import { FOUNDERS_REMAINING } from "@/lib/founders-stats";
 
 // ── ZONE 27 · Match Simulator (shared) ────────────────
 // 把 /lab 的核心互動 UI 抽出來,讓任何給定一場比賽的頁面
@@ -435,17 +434,15 @@ export default function MatchSimulator({ match }: Props) {
                 10K sims converge in 2s · commitment-consistency peak
                 (Cialdini). Tertiary Founders link catches the dopamine
                 spike inside the card · doesn't compete with /matches CTA. */}
-            {FOUNDERS_REMAINING > 0 && (
-              <p className="mt-6 pt-5 border-t border-gold/20 font-mono text-mute/80 text-[10px] tracking-[0.3em] tabular">
-                喜歡這個引擎? ·{" "}
-                <Link
-                  href="/founders"
-                  className="text-gold hover:text-gold-soft underline-offset-4 hover:underline transition-colors"
-                >
-                  加入 {FOUNDERS_REMAINING} 個剩下的位置 →
-                </Link>
-              </p>
-            )}
+            <p className="mt-6 pt-5 border-t border-gold/20 font-mono text-mute/80 text-[10px] tracking-[0.3em] tabular">
+              喜歡這個引擎? ·{" "}
+              <Link
+                href="/founders"
+                className="text-gold hover:text-gold-soft underline-offset-4 hover:underline transition-colors"
+              >
+                成為 FOUNDER →
+              </Link>
+            </p>
           </div>
         </section>
       )}

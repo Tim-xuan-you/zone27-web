@@ -5,7 +5,6 @@ import Footer from "@/components/Footer";
 import RelatedReading from "@/components/RelatedReading";
 import LongReadHandoff from "@/components/LongReadHandoff";
 import ArticleMeta from "@/components/ArticleMeta";
-import { FOUNDERS_NEXT, formatBadge } from "@/lib/founders-stats";
 
 export const metadata: Metadata = {
   title: "About — 我們不是博彩公司,是相信數字比運氣誠實的棒球迷",
@@ -347,11 +346,11 @@ export default function AboutPage() {
         </p>
         <p>
           <strong className="text-gold">第三層:</strong>{" "}
-          我們相信 270 位創始會員能用同樣的精準、同樣的紀律,定義這個品牌的開局。
+          我們相信 創始會員能用同樣的精準、同樣的紀律,定義這個品牌的開局。
         </p>
         <p className="text-bone">
           所以,黑金會員年費是 NT$ 3,588。
-          但這 270 位創始會員,只需要付一次 NT$ 2,700 ——
+          但這 創始會員,只需要付一次 NT$ 2,700 ——
           一輩子。
         </p>
       </Chapter>
@@ -457,7 +456,7 @@ export default function AboutPage() {
               FOUNDER ONBOARDING
             </p>
             <p className="text-bone text-base">
-              FOUNDER 全 270 位 Tim 親手 onboard · 銀行轉帳 · personal email
+              FOUNDER · Tim 親手 onboard 每一位 · 銀行轉帳 · personal email
               ·{" "}
               <a
                 href="https://github.com/Tim-xuan-you/zone27-web/blob/main/docs/MANUAL-ONBOARDING.md"
@@ -498,20 +497,18 @@ export default function AboutPage() {
       {/* ── FINAL CTA ────────────────────────────── */}
       <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 py-20 text-center border-t border-line/40">
         <p className="font-mono text-gold text-[10px] tracking-[0.4em] mb-6">
-          THE 27 ARE BEING FORGED.
+          最早的一批,正在進場。
         </p>
         <h3 className="text-3xl sm:text-4xl text-bone font-light tracking-tight">
           您準備好成為{" "}
-          <span className="text-gold tabular mx-1">
-            {formatBadge(FOUNDERS_NEXT)}
-          </span>{" "}
+          <span className="text-gold mx-1">FOUNDER</span>{" "}
           嗎?
         </h3>
         <Link
           href="/founders"
           className="inline-block mt-10 px-12 py-4 bg-gold text-navy text-xs tracking-[0.3em] hover:bg-gold-soft transition-colors font-medium"
         >
-          加入創始名冊 →
+          成為 FOUNDER →
         </Link>
       </section>
 

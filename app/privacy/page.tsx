@@ -74,7 +74,7 @@ export default function PrivacyPage() {
             如果您點進來的 URL 帶有 <Code>?ref=reserve-NNN</Code> 參數,
             <strong className="text-bone">我們會把該標籤存下</strong>(例如:
             <Code>reserve-001</Code>)。這是<strong className="text-bone">通道歸因</strong>,
-            告訴創辦人「#001 那位會員的分享連結帶來了多少新報名」。
+            告訴創辦人「某位早鳥的分享連結帶來了多少新報名」。
             <strong className="text-bone">這 NOT 是個人追蹤</strong>:我們不知道
             <em>哪位特定訪客</em>透過該連結進來,只知道「總共多少報名來自該通道」。
             sanitize regex 限制 <Code>[a-z0-9-]{"{1,40}"}</Code>,防止 injection 與超長字串。
@@ -117,11 +117,10 @@ export default function PrivacyPage() {
           >
             /founders/apply
           </Link>{" "}
-          · Patek-style application form。 該 form 收{" "}
+          · FOUNDER 申請表。 該 form 收{" "}
           <strong className="text-bone">4 個額外欄位</strong>(Section 02 waitlist
-          5 欄之外)· Tim 親手 review 1-3 days · per /founders/ledger 5-step
-          allocation rules。 此 section codify 該 4 欄資料用途 + 保留期間 + per-
-          field rationale:
+          5 欄之外)· Tim 親手 onboard 1-3 days。 此 section codify 該 4 欄資料
+          用途 + 保留期間 + per-field rationale:
         </p>
         <ul className="space-y-4 mt-6">
           <li>
@@ -210,7 +209,7 @@ export default function PrivacyPage() {
               Section 02B
             </Link>{" "}
             /founders/apply 確實收 name + email + cpbl_connection + why_zone27 ·
-            因為 Patek 式人工審核需要(不藏)
+            因為人工 onboard 需要(不藏)
           </li>
           <li>❌ 沒有電話 / 地址(application 也不收)</li>
           <li>❌ 沒有瀏覽行為紀錄(您在 /lab 跑幾次 simulation 我們不知道)</li>
@@ -423,10 +422,9 @@ export default function PrivacyPage() {
             主動要求刪除 OR ZONE 27 brand 永久關閉 · whichever first
           </li>
           <li>
-            <strong className="text-bone">FOUNDER ledger row</strong> · 永久
-            保留 · 創始編號永久屬於該屆 · 同 /founders/ledger 的承諾:創始編號
-            發完即止 · 永遠只有最初 270 個 · 您即使退款 ledger
-            row 仍 release reserved 標記但保留歷史記錄
+            <strong className="text-bone">FOUNDER 會員紀錄</strong> · 永久
+            保留 · 您即使退款 · 歷史記錄仍保留(release reserved 標記但保留
+            紀錄)
           </li>
           <li>
             <strong className="text-bone">Resend email delivery logs</strong> ·

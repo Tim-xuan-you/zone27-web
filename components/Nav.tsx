@@ -237,7 +237,7 @@ export default function Nav({ active }: { active?: NavKey }) {
       </nav>
       {/* R187 · 整個移除頂部「7/270 創始編號」稀缺條(ScarcityStrip)· per Tim
           dogfood「不想要前 270 · 太複雜 · 用戶一頭霧水」· chrome 改 Polymarket 式乾淨。
-          稀有感改由 /membership「最高階·創始席位」承載 · 不再用全站倒數條轟炸。 */}
+          稀有感改由 /membership「最高階·創始會員」承載 · 不再用全站倒數條轟炸。 */}
     </>
   );
 }

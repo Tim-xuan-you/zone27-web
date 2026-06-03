@@ -47,7 +47,7 @@ export default function EngineFreeBrandBlock() {
           href="/founders"
           className="text-gold hover:text-gold-soft transition-colors"
         >
-          FOUNDER 創始名冊
+          FOUNDER 創始會員
         </Link>
         {" "}與 BLACK CPBL 季票社群運作 —— 工具給每個人,身分留給入會的人。
       </p>

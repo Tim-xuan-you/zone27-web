@@ -413,7 +413,7 @@ export default function FoundersApplicationForm() {
           >
             support@zone27
           </a>
-          (zone27 domain 啟用後即啟動 support alias · 暫用 Tim 個人 inbox · 0 outsource · per Patek allocation pattern)。
+          (zone27 domain 啟用後即啟動 support alias · 暫用 Tim 個人 inbox · 0 outsource)。
         </p>
 
         <div className="mt-8 pt-6 border-t border-line/40">
@@ -444,8 +444,7 @@ export default function FoundersApplicationForm() {
             </li>
             <li>
               <span className="font-mono text-bone tabular mr-2">04</span>{" "}
-              轉帳完成 → 您 Founder ID{" "}
-              <span className="text-bone font-mono">#008-#270</span> 鎖定 ·
+              轉帳完成 → 您的 FOUNDER 身分開通 ·
               365 天 access · 每年 1/1 續訂價永不調漲
             </li>
           </ol>
@@ -497,21 +496,13 @@ export default function FoundersApplicationForm() {
       )}
 
       <h3 className="text-2xl sm:text-3xl text-bone font-light tracking-tight mb-2">
-        申請 FOUNDER 創始席位
+        成為 FOUNDER 創始會員
       </h3>
       <p className="text-mute text-sm mb-8 leading-relaxed">
-        Tim 親手 review 每一份申請 · 1-3 business days · per{" "}
-        <Link
-          href="/founders/ledger"
-          className="text-gold underline-offset-4 hover:underline"
-        >
-          /founders/ledger
-        </Link>{" "}
-        5-step allocation rules。{" "}
-        <strong className="text-bone">
-          這不是註冊表單 · 是 Patek-style application
-        </strong>{" "}
-        · 通過後您才會收到付款方式。
+        留下你的資料 ·{" "}
+        <strong className="text-bone">Tim 親手 onboard 每一位</strong>{" "}
+        · 1-3 天內寄付款方式給你(銀行轉帳)· 轉帳完成就開通。 會員不限量 ·
+        抽成 5% 全站最低。
       </p>
 
       {/* R142 W4 · a11y fix · WCAG 1.3.1 + 4.1.2 · all 4 form fields(email

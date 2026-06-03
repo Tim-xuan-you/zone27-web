@@ -62,7 +62,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "ZONE 27 — We Don't Guess. We Compute.",
     description:
-      "為硬核棒球迷打造的暗黑黃金級數據俱樂部 · 我跑 1 萬次模擬給您看 · 引擎永遠免費 · 前 270 名拿創始編號",
+      "為硬核棒球迷打造的暗黑黃金級數據俱樂部 · 我跑 1 萬次模擬給您看 · 引擎永遠免費 · 會員不限量",
     type: "website",
     locale: "zh_TW",
     siteName: "ZONE 27",
@@ -70,7 +70,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "ZONE 27 — We Don't Guess. We Compute.",
-    description: "為硬核棒球迷打造的暗黑黃金級數據俱樂部 · 270 finite founders",
+    description: "為硬核棒球迷打造的暗黑黃金級數據俱樂部 · 賭徒的 Bloomberg Terminal",
   },
   // Round 51 W-E · /feed.xml Atom RSS discovery · <link rel="alternate"
   // type="application/atom+xml"> in HTML head · 訪客 RSS reader auto-detect

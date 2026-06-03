@@ -560,7 +560,7 @@ export default function CoveragePage() {
               ZONE 27 找的不是「想要更多賽事預測」的人 — 那是博彩平台的客戶。
               我們找的是「**寧可少看一場,也不要看雜訊**」的人。如果這聽起來像您,
               <Link href="/founders" className="text-gold hover:text-gold-soft transition-colors">
-                {" "}FOUNDER 創始名冊{" "}
+                {" "}FOUNDER 創始會員{" "}
               </Link>
               還開著。
             </p>
@@ -570,7 +570,7 @@ export default function CoveragePage() {
                 href="/founders"
                 className="inline-flex items-center gap-2 px-5 py-3 bg-gold text-navy hover:bg-gold-soft transition-colors font-mono text-[11px] tracking-[0.3em]"
               >
-                加入創始名冊 →
+                加入創始會員 →
               </Link>
               <Link
                 href="/audit"

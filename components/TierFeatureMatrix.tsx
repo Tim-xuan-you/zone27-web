@@ -95,7 +95,7 @@ const FEATURES: Feature[] = [
   },
   {
     label: "FOUNDER 預售優先通知",
-    detail: "270 個 founding seats · OPEN first dibs",
+    detail: "付款通道開放時 · OPEN 先收到",
     unlock: {
       anonymous: "locked",
       free: "unlocked",
@@ -146,16 +146,6 @@ const FEATURES: Feature[] = [
   {
     label: "年度 access · 續訂價永遠鎖定(不自動續扣)",
     detail: "FOUNDER NT$ 2,700/年 手動續訂 · 月卡 / 季票永遠不會自動綁您",
-    unlock: {
-      anonymous: "locked",
-      free: "locked",
-      "black-card": "locked",
-      founders27: "unlocked",
-    },
-  },
-  {
-    label: "編號 #001-#270 永久 identity",
-    detail: "永久綁定編號 · 像 Patek serial number · 公開於 /founders/ledger",
     unlock: {
       anonymous: "locked",
       free: "locked",
@@ -224,7 +214,7 @@ const TIER_META: Record<
     label: "FOUNDER",
     en: "FOUNDER",
     price: "NT$ 2,700",
-    priceUnit: "/ 年 · 前 270 創始編號",
+    priceUnit: "/ 年 · 最早一批創始會員",
     href: "/founders",
     accent: "text-gold",
   },

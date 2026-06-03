@@ -79,7 +79,7 @@ const LOCKED: { quarter: string; items: RoadmapItem[] }[] = [
     items: [
       {
         title: "FOUNDER 正式預售開啟",
-        body: "NT$ 2,700/年 · 會員不限量 · 前 270 拿永久創始編號 · 手工銀行轉帳 · Tim 親手 onboarding 每一位。BLACK 一年約 12 期 × NT$ 500 = NT$ 6,000 · FOUNDER NT$ 2,700/年(含 BLACK)省 55%。流程細節已寫進 docs/MANUAL-ONBOARDING.md。",
+        body: "NT$ 2,700/年 · 會員不限量 · 最早一批創始會員 · 手工銀行轉帳 · Tim 親手 onboarding 每一位。BLACK 一年約 12 期 × NT$ 500 = NT$ 6,000 · FOUNDER NT$ 2,700/年(含 BLACK)省 55%。流程細節已寫進 docs/MANUAL-ONBOARDING.md。",
         evidenceHref: "/founders",
         evidenceLabel: "/founders 完整邏輯",
       },
@@ -136,7 +136,7 @@ const EXPLICIT_NO: RoadmapItem[] = [
   },
   {
     title: "永遠不接受創投 / 不投放廣告 / 不上市",
-    body: "ZONE 27 用 270 位 Founders × NT$ 2,700 自籌資金啟動 · BLACK 月費維持運轉。創投錢進來後會被估值倒推「ARR 50x 線性增長」邏輯,跟 270 人封閉俱樂部本質衝突。",
+    body: "ZONE 27 靠 FOUNDER 年費 + BLACK 月費自籌啟動 · 不拿創投。創投錢進來後會被估值倒推「ARR 50x 線性增長」邏輯,跟「慢慢長、靠會員自籌」的本質衝突。",
     evidenceHref: "/manifesto",
     evidenceLabel: "/manifesto Section II",
   },
@@ -152,7 +152,7 @@ const EXPLICIT_NO: RoadmapItem[] = [
   // 為 /roadmap BRAND BOUNDARIES canonical permanent decision。
   {
     title: "永遠不做「Launch loudly to warm list」72-hour blitz",
-    body: "2026 年最紅的獨立產品上線玩法(Tom Orbach:靠 5,000+ 人的暖名單 72 小時衝 $50K · 七成營收集中在頭三天)對 ZONE 27 不適用:(1)我們刻意低調潛行 ·「大聲喧嘩」跟初衷相反 ·(2)死忠棒球迷不在那些科技創業圈 · 72 小時的觸及打不到對的人。對的節奏:6 到 18 個月慢慢累積到第 270 位 · /founders 第 1 天跟第 400 天長得一樣 · 只是數字不同 · 這份慢本身就是篩選的證明。",
+    body: "2026 年最紅的獨立產品上線玩法(Tom Orbach:靠 5,000+ 人的暖名單 72 小時衝 $50K · 七成營收集中在頭三天)對 ZONE 27 不適用:(1)我們刻意低調潛行 ·「大聲喧嘩」跟初衷相反 ·(2)死忠棒球迷不在那些科技創業圈 · 72 小時的觸及打不到對的人。對的節奏:6 到 18 個月慢慢累積會員 · /founders 第 1 天跟第 400 天長得一樣 · 不靠倒數催 · 這份慢本身就是篩選的證明。",
     evidenceHref: "/now",
     evidenceLabel: "/now UNRESOLVED · Wave 10B agent finding",
   },

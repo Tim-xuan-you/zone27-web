@@ -81,17 +81,9 @@ export default function FromOneSolo() {
               01
             </span>
             <strong className="text-bone">Zero paid social proof yet</strong>
-            {" "}· #001-#007 是 system-test placeholders Tim 親手 forged ·
-            per{" "}
-            <Link
-              href="/founders/ledger"
-              className="text-gold underline-offset-4 hover:underline"
-            >
-              /founders/ledger
-            </Link>{" "}
-            5-step allocation pre-commit · 「real Founder #001 onboarded
-            sometime Q3+ after payment infra ships」 · 您可能是真實 #008 ·
-            前面沒有真實 testimonial 可 quote。
+            {" "}· 目前還沒有真實付費會員 · 只有 Tim 親手做的系統測試帳號。
+            真實第一位 FOUNDER 等付款通道開了(Q3+)才會加入 ·
+            您可能就是第一個 · 前面沒有真實 testimonial 可 quote。
           </li>
           <li>
             <span className="font-mono text-gold/85 tabular mr-2 text-xs tracking-[0.2em]">
@@ -176,7 +168,7 @@ export default function FromOneSolo() {
           ⚓ 同 patio11 + Pieter Levels + Justin Jackson + Linear 2019
           invite-only · 「first 100 users without social proof」 canonical
           path · per /audit S05 PRE-COMMIT this disclosure stays here even
-          after #270 fills · 永久 receipt of solo-founder origin。
+          after 真實會員陸續加入 · 永久 receipt of solo-founder origin。
         </p>
       </div>
     </section>

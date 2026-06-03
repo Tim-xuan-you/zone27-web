@@ -9,20 +9,19 @@ import RelatedReading from "@/components/RelatedReading";
 import FounderSignOff from "@/components/FounderSignOff";
 import ArticleMeta from "@/components/ArticleMeta";
 import RefusalLedgerHint from "@/components/RefusalLedgerHint";
-import { FOUNDERS_TOTAL, FOUNDERS_NEXT } from "@/lib/founders-stats";
 
 export const metadata: Metadata = {
-  title: "申請 FOUNDER · Patek-style allocation",
+  title: "成為 FOUNDER · 最高階年度會員",
   description:
-    "FOUNDER 創始席位申請表 · Tim 親手 review 每一份申請 · 1-3 business days · per /founders/ledger 5-step allocation rules · 通過後您才會收到付款方式 · 這不是註冊表單 · 是 Patek-style application。",
+    "FOUNDER 創始會員 · 留下資料 · Tim 親手 onboard 每一位 · 1-3 天內寄付款方式(銀行轉帳)· 轉帳完成就開通。 會員不限量 · 抽成 5% 全站最低。",
   // R69 W-G · Agent B audit F11 fix · explicit openGraph re-using /founders
   // OG card · NEW-CONVERSATION-PROMPT advertised 「29 custom OG cards」 ·
   // highest-conversion R68 W-A page was sharing with global fallback OG ·
   // 此 fix 對齊 /founders parent OG until dedicated card ships R70+。
   openGraph: {
-    title: "申請 FOUNDER · Patek-style allocation",
+    title: "成為 FOUNDER · 最高階年度會員",
     description:
-      "Tim 親手 review 1-3 days · 通過後收到付款方式(銀行轉帳 + 24h window)· per /founders/ledger 5-step allocation rules。",
+      "Tim 親手 onboard · 1-3 天內寄付款方式(銀行轉帳)· 轉帳完成就開通 · 會員不限量。",
     images: ["/founders/opengraph-image"],
   },
 };
@@ -69,28 +68,18 @@ export default function FoundersApplyPage() {
         {/* ── HERO ────────────────────────────────── */}
         <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pt-10 pb-8">
           <p className="font-mono text-gold text-[10px] tracking-[0.4em] mb-4">
-            FOUNDER · APPLICATION PHASE · PATEK ALLOCATION
+            FOUNDER · 最高階年度會員
           </p>
           <h1 className="text-4xl sm:text-5xl text-bone font-light tracking-tight leading-tight">
-            申請 FOUNDER ·{" "}
-            <span className="text-gold">前 270 個創始編號</span>
+            成為 <span className="text-gold">FOUNDER</span>
           </h1>
           <p className="mt-6 text-mute leading-relaxed text-base sm:text-lg">
-            這不是註冊表單 · 是 Patek-style application。{" "}
-            <strong className="text-bone">Tim 親手 review 每一份</strong>{" "}
-            · 1-3 business days · 通過後您才會收到付款方式(銀行轉帳 + 24
-            小時 window)。
+            留下你的資料 ·{" "}
+            <strong className="text-bone">Tim 親手 onboard 每一位</strong>{" "}
+            · 1-3 天內寄付款方式給你(銀行轉帳)· 轉帳完成就開通。
           </p>
           <p className="mt-3 font-mono text-mute/85 text-xs tracking-[0.25em]">
-            目前 #{String(FOUNDERS_NEXT).padStart(3, "0")} 待領 · 創始編號共{" "}
-            {FOUNDERS_TOTAL} 個 · 1st Edition 發完即止 · 會員仍不限量(per{" "}
-            <Link
-              href="/audit"
-              className="text-gold underline-offset-4 hover:underline"
-            >
-              /audit S05 PRE-COMMIT
-            </Link>
-            )
+            會員不限量 · 最高階年度 · 賣分析抽成 5%(全站最低)· 沒有編號、沒有名額倒數。
           </p>
           <div className="mt-6">
             <ArticleMeta readingMin={4} />
@@ -290,7 +279,7 @@ export default function FoundersApplyPage() {
                 >
                   /founders/ledger
                 </Link>{" "}
-                公開帳本 · 365 天訂閱 · NT$ 2,700 永不調漲 · 會員不限量 · 前 270 拿編號
+                公開帳本 · 365 天訂閱 · NT$ 2,700 永不調漲 · 會員不限量
               </li>
             </ol>
           </div>
@@ -299,14 +288,13 @@ export default function FoundersApplyPage() {
         {/* ── FOUNDER SIGN-OFF ─────────────────────── */}
         <FounderSignOff signedAt="2026-05-23">
           <p>
-            這個 form 是 <strong>Patek-style</strong> 而不是 Stripe-style。
-            因為 ZONE 27 不是 SaaS · 是稀缺手工 product。
+            我不用自動化的註冊流程 · 因為 ZONE 27 不是工廠式 SaaS ·
+            是一個人親手做的東西。
           </p>
           <p>
-            前 270 個創始編號 = 我親手 review 每一個 applicant 的階段 · 365 天 ÷ 1.35
-            是我一年親手 onboard 的節奏。 我不外包 review · 不 hire intern · 不
-            auto-approve 任何 case。 創始編號發完後 FOUNDER 仍不限量開放 · 但
-            #001–#270 這批是我一個一個親手讀完「why」才發出去的。
+            每一位 FOUNDER · 我都親手 onboard。 我不外包 · 不 hire intern ·
+            不自動化。 會員不限量 · 但每一個加入的人 · 我都親手讀完他的「why」
+            才開通。
           </p>
           <p>
             您 click submit 那一刻 · 我在台南某家咖啡店或某個夜班會親手讀完

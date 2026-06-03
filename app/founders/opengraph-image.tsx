@@ -1,16 +1,10 @@
 import { ImageResponse } from "next/og";
 import { BRAND, OG_SIZE, OG_CONTENT_TYPE } from "@/lib/brand";
-import {
-  FOUNDERS_TOTAL,
-  FOUNDERS_REMAINING,
-  FOUNDERS_NEXT,
-  formatBadge,
-} from "@/lib/founders-stats";
 
 // ── ZONE 27 · /founders Dynamic OG ─────────────────────
 // 當有人把 https://zone27-web.vercel.app/founders 貼到 LINE/FB,
-// 顯示的不是通用品牌卡,而是「FOUNDERS · 27 · 270 / 365 天」
-// 銷售情境卡 — 直接是 sales pitch in image form。
+// 顯示的是 FOUNDER 銷售情境卡(最高階年度 · 最低抽成 · NT$ 2,700/年)。
+// R189「全砍前270編號」· 不再 render 數字/編號/REMAINING/CLAIM(純開放)。
 // ─────────────────────────────────────────────────────
 
 export const size = OG_SIZE;
@@ -79,7 +73,7 @@ export default async function FoundersOgImage() {
             display: "flex",
           }}
         >
-          FOUNDERS · 27
+          FOUNDER · 27
         </div>
 
         {/* CENTER */}
@@ -100,35 +94,35 @@ export default async function FoundersOgImage() {
               display: "flex",
             }}
           >
-            2026 FOUNDING CLASS · NEVER REOPENS
+            最高階年度 · 抽成全站最低
           </div>
 
-          {/* 270 big numeral */}
+          {/* FOUNDER 字標(取代舊的 270 大數字)*/}
           <div
             style={{
-              fontSize: 220,
+              fontSize: 140,
               color: BRAND.gold,
               fontWeight: 300,
-              letterSpacing: "-0.04em",
+              letterSpacing: "-0.03em",
               lineHeight: 1,
               textShadow: "0 0 80px rgba(212,175,55,0.35)",
               display: "flex",
             }}
           >
-            {FOUNDERS_TOTAL}
+            FOUNDER
           </div>
 
           <div
             style={{
-              fontSize: 32,
+              fontSize: 30,
               color: BRAND.bone,
               fontWeight: 300,
               letterSpacing: "-0.01em",
-              marginTop: 6,
+              marginTop: 10,
               display: "flex",
             }}
           >
-            FOUNDING MEMBERS
+            最早一批進場支持的人
           </div>
 
           {/* divider */}
@@ -189,7 +183,7 @@ export default async function FoundersOgImage() {
           }}
         >
           <span style={{ color: "rgba(245,242,234,0.55)", display: "flex" }}>
-            {FOUNDERS_REMAINING} OF {FOUNDERS_TOTAL} REMAINING
+            賣分析抽成 5% · 全站最低 · 不限量
           </span>
           <span
             style={{
@@ -198,7 +192,7 @@ export default async function FoundersOgImage() {
               display: "flex",
             }}
           >
-            CLAIM {formatBadge(FOUNDERS_NEXT)} →
+            立即加入 →
           </span>
         </div>
       </div>

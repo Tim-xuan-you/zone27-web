@@ -96,7 +96,7 @@ export default function TermsPage() {
           </li>
           <li>
             <strong className="text-bone">不保證取得 #號碼。</strong>
-            最終 270 個正式創始會員將以「正式付款完成」順序鎖定。
+            最終 創始會員將以「正式付款完成」順序鎖定。
             waitlist 給予優先通知權,不保證最終取得位置。
           </li>
           <li>

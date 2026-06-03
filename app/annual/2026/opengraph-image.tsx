@@ -1,9 +1,5 @@
 import { ImageResponse } from "next/og";
 import { BRAND, OG_SIZE, OG_CONTENT_TYPE } from "@/lib/brand";
-import {
-  FOUNDERS_TOTAL,
-  FOUNDERS_CLAIMED,
-} from "@/lib/founders-stats";
 
 // ── ZONE 27 · /annual/2026 Dynamic OG ──────────────────
 // Round 34 W-B · 補 R33 W-E ship gap · /annual/2026 missing OG card 是
@@ -28,9 +24,6 @@ export const alt =
   "ZONE 27 · 2026 年度報告 · 第 0 年 · 0 付費會員 · 0 營收 · 誠實的上線前狀態";
 
 export default async function AnnualReportOgImage() {
-  const forged = FOUNDERS_CLAIMED;
-  const total = FOUNDERS_TOTAL;
-
   return new ImageResponse(
     (
       <div
@@ -172,7 +165,7 @@ export default async function AnnualReportOgImage() {
         >
           <StatBlock n="0" label="PAID SUBS" tone="loss" />
           <StatBlock n="0" label="REVENUE NT$" tone="loss" />
-          <StatBlock n={`${forged}/${total}`} label="FORGED · LIMIT" tone="gold" />
+          <StatBlock n="7" label="系統測試占位" tone="gold" />
           <StatBlock n="1" label="PROVED ✓ · N=" tone="bone" />
         </div>
 

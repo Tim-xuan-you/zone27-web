@@ -8,11 +8,6 @@ import ArticleMeta from "@/components/ArticleMeta";
 import ReadingProgress from "@/components/ReadingProgress";
 import EngineStamp from "@/components/EngineStamp";
 import ReproducibilityReceipt from "@/components/ReproducibilityReceipt";
-import {
-  FOUNDERS_TOTAL,
-  FOUNDERS_CLAIMED,
-  FOUNDERS_REMAINING,
-} from "@/lib/founders-stats";
 
 export const metadata: Metadata = {
   title: "年度公開報告 · 2026 第 0 年",
@@ -28,7 +23,7 @@ export const metadata: Metadata = {
 // Year 0 honest content(2026 pre-launch state):
 //   - 0 paid subscribers(BLACK not launched)
 //   - 7 forged founders(placeholder · clearly SYSTEM-TEST labeled)
-//   - 263 待領創始編號(NT$ 2,700/365 天 · 會員不限量 · 前 270 拿編號 · Patek annual collection 模式)
+//   - 263 待領創始編號(NT$ 2,700/365 天 · 會員不限量 · Patek annual collection 模式)
 //   - 1 PROVED receipt(cpbl-260521-01 · 富邦 win @ 60% engine)
 //   - NT$ 0 revenue
 //   - Costs:Vercel Free + Supabase Free + Resend Free + GitHub Free
@@ -57,9 +52,7 @@ const REPORT_PHASE = "Year 0 · Pre-Launch · Stealth Build";
 const METRICS = {
   paidSubscribers: 0,
   waitlistEmails: "pending Supabase migrate", // 等 Resend integration metric
-  founders27Claimed: FOUNDERS_CLAIMED, // 7 SYSTEM-TEST forged
-  founders27Total: FOUNDERS_TOTAL, // 270
-  founders27Remaining: FOUNDERS_REMAINING, // 263
+  founders27Placeholders: 7, // 7 SYSTEM-TEST forged · R189 全砍 270 cap 後不再有 total/remaining
   receiptsProved: 1, // cpbl-260521-01
   receiptsDiverged: 0,
   receiptsTotal: 1,
@@ -208,10 +201,10 @@ export default function AnnualReport2026Page() {
               note="Vercel / Supabase / Resend / GitHub 全 free tier"
             />
             <MetricBlock
-              label="FOUNDER · 已認領"
-              value={`${METRICS.founders27Claimed} / ${METRICS.founders27Total}`}
+              label="FOUNDER · 占位"
+              value={String(METRICS.founders27Placeholders)}
               tone="gold"
-              note="7 SYSTEM-TEST forged · 263 待認領"
+              note="7 個系統測試占位 · 0 真實付費 · 會員不限量"
             />
             <MetricBlock
               label="ENGINE RECEIPTS · 戰績"

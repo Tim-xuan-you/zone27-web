@@ -1,7 +1,5 @@
 "use server";
 
-import { FOUNDERS_TOTAL } from "@/lib/founders-stats";
-
 // ── ZONE 27 · Email sender · Resend REST API direct ────
 // Brand IP "no unnecessary deps" — uses fetch instead of the `resend`
 // npm package. Single dependency-free function. Free tier 100/day.
@@ -147,7 +145,7 @@ function buildHtmlBody({
 
 <!-- Tim's note -->
 <p style="margin:0 0 16px 0;color:#F5F2EA;font-size:15px;line-height:1.6;">Hi ${escapeHtml(greeting)},</p>
-<p style="margin:0 0 16px 0;color:#8A93A8;font-size:14px;line-height:1.7;">我是 Tim · ZONE 27 創辦人。您剛剛在 zone27-web.vercel.app/founders 留下 email · 預留了 FOUNDER 預售名單中的位置。<br><span style="color:#F5F2EA;">會員不限量 · 前 ${FOUNDERS_TOTAL} 位拿永久創始編號 · 您是第 ${queuePos} 位早到。</span></p>
+<p style="margin:0 0 16px 0;color:#8A93A8;font-size:14px;line-height:1.7;">我是 Tim · ZONE 27 創辦人。您剛剛在 zone27-web.vercel.app/founders 留下 email · 預留了 FOUNDER 預售名單中的位置。<br><span style="color:#F5F2EA;">會員不限量 · 您是最早一批進場支持的人 · 第 ${queuePos} 位早到。</span></p>
 
 <p style="margin:24px 0 12px 0;color:#F5F2EA;font-size:14px;letter-spacing:0.5px;">接下來幾件事:</p>
 <ul style="margin:0 0 24px 0;padding-left:22px;color:#8A93A8;font-size:14px;line-height:1.8;">
@@ -195,7 +193,7 @@ Hi ${greeting},
 
 我是 Tim · ZONE 27 創辦人。您剛剛在 zone27-web.vercel.app/founders 留下 email · 預留了 FOUNDER 預售名單中的位置。
 
-會員不限量 · 前 ${FOUNDERS_TOTAL} 位拿永久創始編號 · 您是第 ${queuePos} 位早到。
+會員不限量 · 您是最早一批進場支持的人 · 第 ${queuePos} 位早到。
 
 接下來:
 - 付款系統 payment infra 就緒後啟動(milestone-triggered · 手工銀行轉帳 + TapPay)

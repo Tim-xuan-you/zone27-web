@@ -10,7 +10,7 @@ import { getWaitlistCount } from "@/lib/waitlist-stats";
 import { createPageMetadata } from "@/lib/page-og";
 
 // ── /founders · R187 · 拿掉「創始 270 名冊」(per Tim「太複雜 · 刪掉吧」)──
-// 砍掉:NEXT IS #008 倒數 · 前 270 創始編號 · 鑲金編號 unlock · #001–#270 ·
+// 砍掉:NEXT IS #008 倒數 · 最早一批創始會員 · 鑲金編號 unlock · #001–#270 ·
 // 分配帳本連結 · founders-stats(FOUNDERS_TOTAL/NEXT/formatBadge)依賴。
 // FOUNDER 改框成「最高階年度會員」· 稀有感用身分+全站最低抽成承載,不用數字。
 // /founders/ledger 已改成 redirect · FoundingMemberLedger / ScarcityStrip 已刪。

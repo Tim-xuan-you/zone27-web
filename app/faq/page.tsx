@@ -47,7 +47,7 @@ const CATEGORIES: Category[] = [
         a: (
           <>
             棒球場上的最後一個 OUT — 9 局 × 3 個出局數 = 27,也是完美比賽的數字
-            (27 上 27 下)。我們相信 270 位創始會員能用同樣的精準定義這個品牌。
+            (27 上 27 下)。我們相信 創始會員能用同樣的精準定義這個品牌。
             詳見{" "}
             <Link href="/about" className="text-gold underline-offset-4 hover:underline">
               /about 第 6 章 Why 27
@@ -106,7 +106,7 @@ const CATEGORIES: Category[] = [
         a: (
           <>
             <strong className="text-bone">FOUNDER</strong> NT$ 2,700/365 天 · 會員不限量
-            (前 270 拿永久創始編號 · 目前 263 號待領)。
+            。
             <strong className="text-bone">BLACK</strong> NT$ 500/31 天 × N 訂戶
             (不自動續扣 · 每 31 天 explicit click)。
             再加上創作者賣分析 · 平台抽 5–10%(業界最低,老實認、不假裝不抽)。
@@ -126,7 +126,7 @@ const CATEGORIES: Category[] = [
         a: (
           <>
             <strong className="text-bone">FOUNDER</strong> 是會員不限量的
-            「NT$ 2,700/365 天 年度會員」(前 270 名拿永久創始編號)。
+            「NT$ 2,700/365 天 年度會員」。
             <strong className="text-bone">BLACK</strong> 是 31-day pass NT$ 500/31 天
             (3 月–11 月 · 240 場 + 季後賽 · ≈ NT$ 6/場 · 手動銀行轉帳 ·
             不自動續扣 · per /integrity rule #13)。創始會員額外好處:creator 抽成 5%
@@ -142,7 +142,7 @@ const CATEGORIES: Category[] = [
         q: "NT$ 2,700 為什麼這麼便宜?",
         a: (
           <>
-            因為這是「品牌共建價」,不是「永久市場價」。270 位創始會員會永遠是 ZONE 27
+            因為這是「品牌共建價」,不是「永久市場價」。創始會員會永遠是 ZONE 27
             的傳教士;後續黑金會員一年約 12 期 × NT$ 500 = NT$ 6,000 · FOUNDER NT$ 2,700/年(含 BLACK)等於省 55%。
             創始者扛了「品牌還沒驗證」的風險,所以拿每年續訂價永遠不漲的回報。
           </>
@@ -207,35 +207,13 @@ const CATEGORIES: Category[] = [
         ),
       },
       {
-        q: "創始編號發完後 · 還能加入 FOUNDER 嗎?",
-        a: (
-          <>
-            <strong className="text-gold">可以 · 會員永遠不限量。</strong> 當 #270 創始編號被認領的那一秒,
-            創始編號 1st Edition 永久關閉 · 您再也無法拿到創始編號。 但 FOUNDER 會員資格永遠開放
-            (同樣 NT$ 2,700/年 · 同樣 5% 抽成 · 只是沒有創始編號)· 1st Edition 永遠只有最初 270 個。 寫在{" "}
-            <Link href="/about" className="text-gold underline-offset-4 hover:underline">
-              /about
-            </Link>
-            、
-            <Link href="/founders" className="text-gold underline-offset-4 hover:underline">
-              /founders
-            </Link>
-            、
-            <Link href="/founders/ledger" className="text-gold underline-offset-4 hover:underline">
-              /founders/ledger
-            </Link>{" "}
-            三處。
-          </>
-        ),
-      },
-      {
         q: "跟傳銷(MLM)有什麼不同?",
         id: "mlm",
         a: (
           <>
             <strong className="text-bone">沒 downline 結構。</strong>{" "}
             0 推薦獎金 · 0 多層抽佣 · 0 業績 quota · 0 招募下線 · 會員不限量但零金字塔抽佣 ·
-            前 270 名拿永久創始編號(1st Edition · 發完即關)。 BLACK 10% 抽成是 platform fee(類 Stripe / Spotify)
+            最早一批創始會員。 BLACK 10% 抽成是 platform fee(類 Stripe / Spotify)
             · FOUNDER 5%。
           </>
         ),

@@ -115,10 +115,10 @@ export default function DisciplinePage() {
 
             <Subhead>ZONE 27 應用</Subhead>
             <List>
-              <Item label="前 270 創始編號 · 永久">
+              <Item label="最早一批創始會員 · 永久">
                 FOUNDER 不是「early bird 折扣」,
                 是<strong className="text-bone">一輩子</strong>關係。
-                前 270 個創始編號永久屬於您 · Buffett 的 forever holding 哲學寫進編號裡。
+                這份創始身分永久屬於您 · Buffett 的 forever holding 哲學寫進這份關係裡。
               </Item>
               <Item label="壞消息誠實揭露">
                 <Link href="/audit" className="text-gold hover:underline">
@@ -312,9 +312,8 @@ export default function DisciplinePage() {
               </Item>
               <Item label="Quality of 1 > Quantity of 100">
                 Jobs 名言「我寧願有 1 個 A 級人才,不要 100 個 B 級」。
-                ZONE 27 版:前 270 個創始編號 · Tim 一個一個親手 onboard(每位 12-15 分鐘 ·
-                270 × 15 min ≈ 70 小時)· 這是 1st Edition 的工藝。 會員不限量 · 但「親手」
-                這件事用在最初 270 個編號上 · 不稀釋。
+                ZONE 27 版:創始會員 · Tim 一個一個親手 onboard(每位 12-15 分鐘)·
+                不外包、不批量。 會員不限量 · 但「親手」這件事每一位都一樣 · 不稀釋。
               </Item>
               <Item label="Design is how it works">
                 Jobs 1996 WIRED:「Design is not just what it looks like and feels
@@ -377,7 +376,7 @@ export default function DisciplinePage() {
             <SynthRow
               axis="A · 長期 > 短期"
               examples="Buffett 26 年持 Coca-Cola · Musk 10-year SpaceX roadmap · Costco 7 年才漲一次會費 · Jobs iPhone 從 2000 概念到 2007 發布 7 年"
-              z27="270 個 365 天席位 · 不收量化分數 · 拒絕季度 KPI 誘惑"
+              z27="365 天年度會員 · 不收量化分數 · 拒絕季度 KPI 誘惑"
             />
             <SynthRow
               axis="B · 集中 > 分散"

@@ -217,7 +217,7 @@ export default function EthicsPage() {
             <ul className="space-y-2 pl-6">
               <li className="flex gap-3 items-baseline">
                 <span className="font-mono text-gold/80 text-[10px] tracking-[0.25em]">▸</span>
-                <span>FOUNDER NT$ 2,700/365 天 · 5% 抽成(BLACK 一半)· 會員不限量 · 前 270 拿編號</span>
+                <span>FOUNDER NT$ 2,700/365 天 · 5% 抽成(BLACK 一半)· 會員不限量</span>
               </li>
               <li className="flex gap-3 items-baseline">
                 <span className="font-mono text-gold/80 text-[10px] tracking-[0.25em]">▸</span>
