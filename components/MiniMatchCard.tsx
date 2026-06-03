@@ -76,7 +76,7 @@ export default function MiniMatchCard({ match }: { match: Match }) {
       style={{ viewTransitionName: `match-${match.id}` } as React.CSSProperties}
       data-match-card
       data-final={match.finalResult ? "true" : "false"}
-      className="@container/card bg-slate/40 border border-line/60 p-4 sm:p-5 flex flex-col gap-3 transition-colors hover:border-gold/40"
+      className="@container/card bg-slate/40 border border-line/60 p-4 sm:p-5 flex flex-col gap-2.5 transition-colors hover:border-gold/40"
     >
       {/* 日期 + 時間 + phase badge · 日期每卡必帶(per Tim R185 · 跨日不搞混) */}
       <div className="flex items-center justify-between gap-2">
@@ -92,31 +92,25 @@ export default function MiniMatchCard({ match }: { match: Match }) {
           Critic agent surface「3 場 grid 沒投手名 = LOCK 沒重量 · skeptic
           會嗆『連投手都沒確認就 LOCK 機率?』」。 投手名是 brand IP claim
           的物理錨點 — 引擎吃 K/9 BB/9 HR/9 · 該 surface「機率綁定哪個投手」。 */}
-      <div className="grid grid-cols-2 gap-3 mt-1">
+      <div className="grid grid-cols-2 gap-3 mt-0.5">
         <div>
-          <p className="font-mono text-mute text-[8px] tracking-[0.3em] mb-0.5">
+          <p className="font-mono text-mute text-[9px] tracking-[0.3em] mb-1">
             HOME
           </p>
           <h3 className="text-bone text-sm @[260px]/card:text-base font-light tracking-tight leading-snug">
             {match.home.name}
           </h3>
-          <p className="font-mono text-gold/60 text-[9px] tracking-[0.25em] mt-0.5">
-            {match.home.en}
-          </p>
           <p className="font-mono text-mute/70 text-[9px] tracking-[0.2em] mt-1 leading-snug">
             P · {match.home.pitcher.name}
           </p>
         </div>
         <div className="text-right">
-          <p className="font-mono text-mute text-[8px] tracking-[0.3em] mb-0.5">
+          <p className="font-mono text-mute text-[9px] tracking-[0.3em] mb-1">
             AWAY
           </p>
           <h3 className="text-bone text-sm @[260px]/card:text-base font-light tracking-tight leading-snug">
             {match.away.name}
           </h3>
-          <p className="font-mono text-gold/60 text-[9px] tracking-[0.25em] mt-0.5">
-            {match.away.en}
-          </p>
           <p className="font-mono text-mute/70 text-[9px] tracking-[0.2em] mt-1 leading-snug">
             P · {match.away.pitcher.name}
           </p>
@@ -161,6 +155,19 @@ export default function MiniMatchCard({ match }: { match: Match }) {
           <div
             className={`h-full ${!homeFav ? "bg-gold glow-gold" : "bg-mute/45"}`}
             style={{ width: `${awayPct}%` }}
+          />
+          {/* 不確定性接縫 · 兩邊機率交界羽化一道柔光 = 視覺上「這是機率,不是鐵口」·
+              量化品牌簽名筆觸(UncertaintyStripe fan-chart 精神 · 卡片迷你版)·
+              絕對定位 overlay · clip 在 bar 內 · 不佔高度、不擋點擊。 */}
+          <div
+            aria-hidden="true"
+            className="absolute inset-y-0 pointer-events-none"
+            style={{
+              left: `calc(${homePct}% - 7px)`,
+              width: "14px",
+              background:
+                "linear-gradient(90deg, transparent, rgba(245,242,234,0.5), transparent)",
+            }}
           />
         </div>
         <p className="mt-1.5 text-center font-mono text-mute/65 text-[9px] tracking-[0.12em] leading-snug">
