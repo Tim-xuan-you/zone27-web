@@ -440,7 +440,7 @@ export default function MatchSimulator({ match }: Props) {
                 href="/founders"
                 className="text-gold hover:text-gold-soft underline-offset-4 hover:underline transition-colors"
               >
-                成為 FOUNDER →
+                成為 GOLD →
               </Link>
             </p>
           </div>

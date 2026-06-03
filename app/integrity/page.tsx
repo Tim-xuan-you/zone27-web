@@ -54,8 +54,8 @@ const REDLINES: ReadonlyArray<{ no: string; rule: string; basis: string; revised
   },
   {
     no: "05",
-    rule: "不 ship「X of 270 sold」 即時搶購倒數",
-    basis: "名冊是每週手寫更新 · 不是即時跳動 · 0 即時人數 · 0 倒數計時 · 不用「再不買就沒了」催你下單。",
+    rule: "不 ship「剩 X 個名額」即時搶購倒數",
+    basis: "會員不限量 · 0 即時人數跳動 · 0 倒數計時 · 不用「再不買就沒了」催你下單。",
   },
   {
     no: "06",
@@ -85,7 +85,7 @@ const REDLINES: ReadonlyArray<{ no: string; rule: string; basis: string; revised
   {
     no: "11",
     rule: "不 ship fake testimonials / 偽造 social proof",
-    basis: "等真實FOUNDER 會員加入後才放他們的話 · 0 代筆好評 · 0 假推薦 · 0「已有 1000+ 人加入」灌水。",
+    basis: "等真實 GOLD 會員加入後才放他們的話 · 0 代筆好評 · 0 假推薦 · 0「已有 1000+ 人加入」灌水。",
   },
   {
     no: "12",
@@ -123,7 +123,7 @@ const ETHICS_COMMITMENTS: ReadonlyArray<{
   {
     no: "04",
     rule: "0 fake testimonials · 公開 founders 全名清單(Q3+ onboard 後)",
-    basis: "等真實FOUNDER 會員加入 6 個月後才放他們的話 · 0 假推薦 · 現在是空的就誠實留空。",
+    basis: "等真實 GOLD 會員加入 6 個月後才放他們的話 · 0 假推薦 · 現在是空的就誠實留空。",
   },
   {
     no: "05",
@@ -282,9 +282,9 @@ export default function IntegrityPage() {
               <strong className="text-bone">這道牆的具體形狀:</strong>
               ZONE 27 引擎 output(K/9 · BB/9 · HR/9 推 Monte Carlo · 7-LENS
               CANVAS · /audit S02 全部 estimation disclosure)對<strong className="text-bone">
-              FREE tier 訪客 = BLACK 訂閱者 = FOUNDER 永久會員</strong>
+              FREE tier 訪客 = BLACK 訂閱者 = GOLD 永久會員</strong>
               · 物理上同一份 lib/simulator.ts 跑出來。 paid tier 買的是 IDENTITY
-              + 創作者抽成 + FOUNDER LINE 群 · 不買 engine accuracy
+              + 創作者抽成 + GOLD LINE 群 · 不買 engine accuracy
               升級 · 不買 secret edge · 不買 paywall predictions。
             </p>
 
@@ -321,7 +321,7 @@ export default function IntegrityPage() {
                   </p>
                 </div>
                 <p className="text-mute text-[12px] sm:text-sm leading-relaxed">
-                  FREE tier 訪客看到的 win probability = BLACK 訂閱者 = FOUNDER 永久會員
+                  FREE tier 訪客看到的 win probability = BLACK 訂閱者 = GOLD 永久會員
                   · 同一份 lib/simulator.ts 同一份 lib/matches.ts 跑出來 · 任何時刻 fork repo
                   可驗證 · 違反 = Tim 親手 在 /ethics 紅字標永久 audit trail
                 </p>
@@ -359,7 +359,7 @@ export default function IntegrityPage() {
                 </div>
                 <p className="text-mute text-[12px] sm:text-sm leading-relaxed">
                   BLACK 解鎖的(見 /membership/black-card)全是身分層的東西
-                  (LINE 群 + Tim 工程筆記完整版 + voting + 創作者抽成 + FOUNDER LINE 群)·
+                  (LINE 群 + Tim 工程筆記完整版 + voting + 創作者抽成 + GOLD LINE 群)·
                   沒有任何一項是「讓引擎變更準」· 違反 = 品牌鐵律直接崩。
                 </p>
               </li>

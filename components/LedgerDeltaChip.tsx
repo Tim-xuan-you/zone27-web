@@ -24,7 +24,7 @@ import { useEffect, useState } from "react";
 //
 // Brand IP:
 //   - per [[zone27-disclosure-philosophy]] · storage key 公開 in /audit S06
-//   - per FUNDED BY FOUNDERS · NO TRACKERS axiom · 0 server-side
+//   - per FUNDED BY GOLD · NO TRACKERS axiom · 0 server-side
 //   - per /audit S05 PRE-COMMIT · same discipline · LedgerDeltaChip 寫法
 //     若改需 30-day notice
 //   - per [[feedback-zone27-audience-fans-not-engineers]] · 「+3 since」

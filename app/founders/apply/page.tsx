@@ -11,29 +11,29 @@ import ArticleMeta from "@/components/ArticleMeta";
 import RefusalLedgerHint from "@/components/RefusalLedgerHint";
 
 export const metadata: Metadata = {
-  title: "成為 FOUNDER · 最高階年度會員",
+  title: "成為 GOLD · 最高階年度會員",
   description:
-    "FOUNDER FOUNDER 會員 · 留下資料 · Tim 親手 onboard 每一位 · 1-3 天內寄付款方式(銀行轉帳)· 轉帳完成就開通。 會員不限量 · 抽成 5% 全站最低。",
+    "GOLD 會員 · 留下資料 · Tim 親手 onboard 每一位 · 1-3 天內寄付款方式(銀行轉帳)· 轉帳完成就開通。 會員不限量 · 抽成 5% 全站最低。",
   // R69 W-G · Agent B audit F11 fix · explicit openGraph re-using /founders
   // OG card · NEW-CONVERSATION-PROMPT advertised 「29 custom OG cards」 ·
   // highest-conversion R68 W-A page was sharing with global fallback OG ·
   // 此 fix 對齊 /founders parent OG until dedicated card ships R70+。
   openGraph: {
-    title: "成為 FOUNDER · 最高階年度會員",
+    title: "成為 GOLD · 最高階年度會員",
     description:
       "Tim 親手 onboard · 1-3 天內寄付款方式(銀行轉帳)· 轉帳完成就開通 · 會員不限量。",
     images: ["/founders/opengraph-image"],
   },
 };
 
-// ── R68 W-A · FOUNDER Application Page ──────────────
+// ── R68 W-A · GOLD Application Page ──────────────
 // /founders/apply · 1 layer deeper than /founders WaitlistForm · for
 // visitors who want to actually apply for one of 270 founding seats
 // (#008-#270 · #001-#007 are Tim's system-test placeholders per
 // /founders/ledger)。
 //
 // Brand IP fit:
-//   - per [[zone27-payment-architecture]] · FOUNDER = manual bank
+//   - per [[zone27-payment-architecture]] · GOLD = manual bank
 //     transfer · this form is the PRE-REQUISITE before Tim sends bank
 //     details · NOT a payment form itself
 //   - per [[feedback-zone27-pratfall-brand-ip]] · 明示「1-3 days 內 manual
@@ -58,7 +58,7 @@ export default function FoundersApplyPage() {
             </Link>
             <span className="text-mute/60">/</span>
             <Link href="/founders" className="hover:text-gold transition-colors">
-              FOUNDER
+              GOLD
             </Link>
             <span className="text-mute/60">/</span>
             <span className="text-gold">APPLY</span>
@@ -68,10 +68,10 @@ export default function FoundersApplyPage() {
         {/* ── HERO ────────────────────────────────── */}
         <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pt-10 pb-8">
           <p className="font-mono text-gold text-[10px] tracking-[0.4em] mb-4">
-            FOUNDER · 最高階年度會員
+            GOLD · 最高階年度會員
           </p>
           <h1 className="text-4xl sm:text-5xl text-bone font-light tracking-tight leading-tight">
-            成為 <span className="text-gold">FOUNDER</span>
+            成為 <span className="text-gold">GOLD</span>
           </h1>
           <p className="mt-6 text-mute leading-relaxed text-base sm:text-lg">
             留下你的資料 ·{" "}
@@ -292,7 +292,7 @@ export default function FoundersApplyPage() {
             是一個人親手做的東西。
           </p>
           <p>
-            每一位 FOUNDER · 我都親手 onboard。 我不外包 · 不 hire intern ·
+            每一位 GOLD · 我都親手 onboard。 我不外包 · 不 hire intern ·
             不自動化。 會員不限量 · 但每一個加入的人 · 我都親手讀完他的「why」
             才開通。
           </p>

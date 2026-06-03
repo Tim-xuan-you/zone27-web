@@ -190,7 +190,7 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
       // conversion-warmth link.
       href: "/founders",
       kicker: "founders",
-      title: "讀完了 · 成為FOUNDER 會員之一",
+      title: "讀完了 · 成為GOLD 會員之一",
     },
   ],
   "/matches/[gameId]": [
@@ -207,7 +207,7 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
     {
       href: "/founders",
       kicker: "founders",
-      title: "加入 FOUNDER · 前 270 拿創始編號",
+      title: "加入 GOLD · 前 270 拿創始編號",
     },
   ],
   "/track-record": [
@@ -273,7 +273,7 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
     {
       href: "/founders/ledger",
       kicker: "founders/ledger",
-      title: "FOUNDER 公開名額帳本",
+      title: "GOLD 公開名額帳本",
     },
     {
       href: "/annual/2026",
@@ -346,7 +346,7 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
     {
       href: "/founders",
       kicker: "founders",
-      title: "看完了 · 加入 FOUNDER",
+      title: "看完了 · 加入 GOLD",
     },
   ],
   "/discipline": [
@@ -384,7 +384,7 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
     {
       href: "/founders",
       kicker: "founders",
-      title: "FOUNDER 詳情頁 · FOUNDER 會員 · 年度",
+      title: "GOLD 詳情頁 · GOLD 會員 · 年度",
     },
     {
       href: "/track-record",
@@ -481,7 +481,7 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
     {
       href: "/founders",
       kicker: "founders",
-      title: "FOUNDER 銷售頁 · FOUNDER 會員 · 年度",
+      title: "GOLD 銷售頁 · GOLD 會員 · 年度",
     },
     {
       href: "/audit",
@@ -507,7 +507,7 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
     {
       href: "/founders",
       kicker: "founders",
-      title: "FOUNDER · 對照第 4 階 NT$ 2,700/年",
+      title: "GOLD · 對照第 4 階 NT$ 2,700/年",
     },
     {
       href: "/privacy",
@@ -558,12 +558,12 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
   ],
   // R166 W1 · /rewards DELETED · then R170 W1 RESTORED per Tim explicit endorse
   // R165 W1 · /pricing/why DELETED R164 · swap to /annual/2026(Year 0 empty state ·
-  // 同 transparency axis · 申請者可 audit FOUNDER 真實狀態)。
+  // 同 transparency axis · 申請者可 audit GOLD 真實狀態)。
   "/founders/apply": [
     {
       href: "/founders",
       kicker: "founders",
-      title: "FOUNDER 介紹 · 6 件買不到的東西 + 權益",
+      title: "GOLD 介紹 · 6 件買不到的東西 + 權益",
     },
     {
       href: "/founders/ledger",

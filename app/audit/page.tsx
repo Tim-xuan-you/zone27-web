@@ -164,7 +164,7 @@ export default function AuditPage() {
                 <span className="text-bone">N={finalizedCount} · {finalizedCount} PROVED · 0 DIVERGED</span>
               </li>
               <li className="font-mono tabular">
-                <span className="text-mute/60">FOUNDER</span>{" "}
+                <span className="text-mute/60">GOLD</span>{" "}
                 <span className="text-bone">7 SYSTEM-TEST · 0 real</span>
               </li>
               <li className="font-mono tabular">
@@ -530,7 +530,7 @@ export default function AuditPage() {
             </P>
             <P>
               <strong className="text-bone">ZONE 27 是 AI 公司的倒影</strong> —
-              我們賣身分(<Link href="/founders" className="text-gold hover:underline">FOUNDER</Link>)+ 社群(BLACK),
+              我們賣身分(<Link href="/founders" className="text-gold hover:underline">GOLD</Link>)+ 社群(BLACK),
               引擎是免費送的工具,本來就沒有可藏的價值。
               硬藏算法 = 假裝有秘密 = 對訪客撒謊 = 品牌信用自殺。
             </P>

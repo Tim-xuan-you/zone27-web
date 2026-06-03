@@ -270,7 +270,7 @@ export default function LabPage() {
           10K 收斂後,下一個 instinct 是「show me where this engine
           has been wrong」· 沒有 /track-record CTA = 高 trust visitor
           無處可去。這兩張卡完成 trust loop:看引擎跑 → 看引擎過去
-          PROVED/DIVERGED 紀錄 → FOUNDER。和 CUSTOM MODE CTA
+          PROVED/DIVERGED 紀錄 → GOLD。和 CUSTOM MODE CTA
           視覺上分層 · 那是「power-user 再玩」· 這是「verify the
           engine has receipts」. */}
       <section
@@ -331,7 +331,7 @@ export default function LabPage() {
               lang="en"
               className="font-mono text-gold/70 group-hover:text-gold text-[10px] tracking-[0.35em] mb-2 transition-colors"
             >
-              FOUNDER · 最高階年度
+              GOLD · 最高階年度
             </p>
             <h3 className="text-lg text-bone font-light tracking-tight mb-2">
               引擎免費 · 賣分析抽成全站最低 →

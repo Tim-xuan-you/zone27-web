@@ -143,7 +143,7 @@ export default async function CoverageOgImage() {
           <LedgerRow
             status="ON QUEUE"
             league="NPB · KBO · NCAA"
-            note="FOUNDER 會員投票決定優先順序"
+            note="GOLD 會員投票決定優先順序"
             statusColor="rgba(245,242,234,0.6)"
           />
           <LedgerRow

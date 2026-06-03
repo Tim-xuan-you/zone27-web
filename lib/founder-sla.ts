@@ -29,7 +29,7 @@
 
 /** SLA binding commitment · permanent · per /audit S05 PRE-COMMIT clause
  *  · 修改需 30 天 /changelog 公告 · same Costly Signaling 100× pattern。 */
-export const FOUNDER_SLA_COMMITMENT = "1-3 business days · TIM 親手 · 不外包";
+export const GOLD_SLA_COMMITMENT = "1-3 business days · TIM 親手 · 不外包";
 
 /** Pre-launch state · numerical fields HONEST empty until first real
  *  application lands · Tim updates manually post-Founder-#001 onboard ·
@@ -49,7 +49,7 @@ export type FounderSlaState = {
 /** Manual single-source state · Tim updates weekly per CadencePulseChip
  *  cadence pattern · pre-launch all null values · 4-cell shows TBD/honest
  *  empty until first real application。 */
-export const FOUNDER_SLA_STATE: FounderSlaState = {
+export const GOLD_SLA_STATE: FounderSlaState = {
   lastReplyDate: null,
   avgReplyHours: null,
   queueDepth: null,
@@ -58,7 +58,7 @@ export const FOUNDER_SLA_STATE: FounderSlaState = {
 
 /** Helper · returns true when ALL numerical fields are pre-launch null ·
  *  used by TimResponseSLA to swap UI to honest「pre-launch · TBD」 state。 */
-export function isPreLaunchSlaState(s: FounderSlaState = FOUNDER_SLA_STATE): boolean {
+export function isPreLaunchSlaState(s: FounderSlaState = GOLD_SLA_STATE): boolean {
   return (
     s.lastReplyDate === null &&
     s.avgReplyHours === null &&

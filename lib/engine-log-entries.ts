@@ -26,7 +26,7 @@
 //   - per /audit S05 PRE-COMMIT clause · log entries APPEND-ONLY · NEVER
 //     retroactively edit / delete · same single-source append-only as
 //     ENGINE_DIFF_BEACONS + NO_PUSH_INVENTORY + RECIPROCITY_LEDGER +
-//     LOCAL_STORAGE_INVENTORY + SOLO_FOUNDER_PEERS pattern
+//     LOCAL_STORAGE_INVENTORY + SOLO_GOLD_PEERS pattern
 //   - per /ethics commitment #5 · 7-day post-final ingest SLA · /engine-log
 //     entries 物理 codify the SLA discharge events
 //
@@ -86,7 +86,7 @@ export type EngineOpsLogEntry = {
  *  /audit S05 PRE-COMMIT clause extension · 修改任 entry 需 30 天前
  *  /changelog 公告 · same Costly Signaling discipline as canonical pattern
  *  (ENGINE_DIFF_BEACONS + NO_PUSH_INVENTORY + RECIPROCITY_LEDGER +
- *  LOCAL_STORAGE_INVENTORY + SOLO_FOUNDER_PEERS + REFUSAL_RATIONALES)。 */
+ *  LOCAL_STORAGE_INVENTORY + SOLO_GOLD_PEERS + REFUSAL_RATIONALES)。 */
 export const ENGINE_OPS_LOG: ReadonlyArray<EngineOpsLogEntry> = [
   {
     date: "2026-05-21",

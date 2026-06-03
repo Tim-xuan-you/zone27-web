@@ -15,7 +15,7 @@
 // Visual hierarchy: small (text-sm), mute/90 body, gold/40 left
 // border, mono signature kicker — secondary to main content but
 // distinct from generic body copy. Same visual rhythm as quote
-// blockquotes in /about Chapter 05 + /founders FROM THE FOUNDER.
+// blockquotes in /about Chapter 05 + /founders FROM THE GOLD.
 // ─────────────────────────────────────────────────────
 
 import { LAST_BRAND_REVIEW } from "@/lib/brand-constants";

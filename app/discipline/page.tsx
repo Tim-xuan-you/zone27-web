@@ -115,10 +115,10 @@ export default function DisciplinePage() {
 
             <Subhead>ZONE 27 應用</Subhead>
             <List>
-              <Item label="FOUNDER 會員 · 永久">
-                FOUNDER 不是「early bird 折扣」,
+              <Item label="GOLD 會員 · 永久">
+                GOLD 不是「early bird 折扣」,
                 是<strong className="text-bone">一輩子</strong>關係。
-                這份 FOUNDER 身分永久屬於您 · Buffett 的 forever holding 哲學寫進這份關係裡。
+                這份 GOLD 身分永久屬於您 · Buffett 的 forever holding 哲學寫進這份關係裡。
               </Item>
               <Item label="壞消息誠實揭露">
                 <Link href="/audit" className="text-gold hover:underline">
@@ -237,11 +237,11 @@ export default function DisciplinePage() {
             <List>
               <Item label="會員制 > 商品收費">
                 引擎 markup = 0%(永遠免費)·
-                BLACK NT$ 500/31 天 + FOUNDER NT$ 2,700/365 天 = membership revenue ·
+                BLACK NT$ 500/31 天 + GOLD NT$ 2,700/365 天 = membership revenue ·
                 跟 Costco 一樣 — 「賣會員身分,不賣商品本身」。
               </Item>
               <Item label="自設創作者抽成上限">
-                FOUNDER 創作者 5% · BLACK 10% · vs 業界 30-50%。
+                GOLD 創作者 5% · BLACK 10% · vs 業界 30-50%。
                 Costco 14% 上限 = 把客戶利益放在毛利之前。
                 ZONE 27 同樣邏輯 · 但更狠(5%)。
               </Item>
@@ -312,7 +312,7 @@ export default function DisciplinePage() {
               </Item>
               <Item label="Quality of 1 > Quantity of 100">
                 Jobs 名言「我寧願有 1 個 A 級人才,不要 100 個 B 級」。
-                ZONE 27 版:FOUNDER 會員 · Tim 一個一個親手 onboard(每位 12-15 分鐘)·
+                ZONE 27 版:GOLD 會員 · Tim 一個一個親手 onboard(每位 12-15 分鐘)·
                 不外包、不批量。 會員不限量 · 但「親手」這件事每一位都一樣 · 不稀釋。
               </Item>
               <Item label="Design is how it works">

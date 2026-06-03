@@ -33,16 +33,16 @@ export function creatorTakePct(tier: MemberTier): number {
   return 100 - creatorFeePct(tier);
 }
 
-// ── Canonical 等級名(R189 · Tim 拍板 Polymarket 極簡 OPEN/BLACK/FOUNDER)──
+// ── Canonical 等級名(R189 · Tim 拍板 Polymarket 極簡 OPEN/BLACK/GOLD)──
 // 單一真相 · 所有顯示等級名的 surface 從這裡取 · 改名只動這一處(防 drift)。
-// 心理學:地位 = 身份不是價格。「免費」是價格標籤(把最大群用戶貼成「沒付錢」)
-// → 換成「OPEN」身份。 王牌留單一粗體字 · 留白即自信(Amex 黑卡不打廣告 ·
-// 真正的優越感安靜到別人偷不走)。「FOUNDER 會員」稀缺機制不動(那是 perk
-// 不是等級名)。
+// 心理學:地位 = 身份不是價格 · 留白即自信(三個乾淨單字)。 頂層 GOLD = 黃金標準
+// (深藏青+冷金品牌色)· 零「創始/早鳥」故事(Tim 砍了 founding mystique · 地位
+// 交給天梯=賺來的)。 ⚠️ tier KEY 仍是 `founder`(DB user_metadata.tier 值 · 不可改)·
+// 只有「顯示名」是 GOLD。 站上「Tim 是 founder/創辦人」是不同意思 · 不要改成 GOLD。
 export const TIER_NAME: Record<MemberTier, string> = {
   free: "OPEN",
   black: "BLACK",
-  founder: "FOUNDER",
+  founder: "GOLD",
 };
 
 export function tierLabel(tier: MemberTier): string {

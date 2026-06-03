@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 // ── ZONE 27 · 拒絕標準(申請前先公開)─────────────────────
-// 申請 FOUNDER 之前 · 先把「我們會拒絕哪 5 種人」攤開講清楚。
+// 申請 GOLD 之前 · 先把「我們會拒絕哪 5 種人」攤開講清楚。
 // 申請者讀完自己判斷合不合 · 不用浪費你跟 Tim 的審核時間。
 // 多數平台先誘你進門再推銷 · ZONE 27 反過來 · 先講拒絕條件。
 // ─────────────────────────────────────────────────────
@@ -28,7 +28,7 @@ const REFUSAL_RATIONALES: ReadonlyArray<RefusalRationale> = [
   {
     pattern: "想轉賣收據 / 會員卡 / 身分",
     rationale:
-      "明示或暗示要把賽後收據截圖、BLACK 月卡 access、或 FOUNDER 身分轉賣給收費明牌群組 · 不通過。收據是你個人的信任憑證 · 不是拿來賣的商品 · 我們也不寄生任何下注平台。",
+      "明示或暗示要把賽後收據截圖、BLACK 月卡 access、或 GOLD 身分轉賣給收費明牌群組 · 不通過。收據是你個人的信任憑證 · 不是拿來賣的商品 · 我們也不寄生任何下注平台。",
     seeHref: "/audit#section-02",
     seeLabel: "/audit § 02 · 我們永遠不做的事",
   },
@@ -42,7 +42,7 @@ const REFUSAL_RATIONALES: ReadonlyArray<RefusalRationale> = [
   {
     pattern: "要求投票權 / 治理權 / DAO",
     rationale:
-      "要求加入產品投票、治理權、DAO、或FOUNDER 會員的決策投票權 · 不通過。產品方向由 Tim 一個人扛 · FOUNDER 會員不投票。真正的透明 · 是把開發日誌(/now)跟路線圖(/roadmap)公開給你看 · 不是搞一個投票的形式。",
+      "要求加入產品投票、治理權、DAO、或 GOLD 會員的決策投票權 · 不通過。產品方向由 Tim 一個人扛 · GOLD 會員不投票。真正的透明 · 是把開發日誌(/now)跟路線圖(/roadmap)公開給你看 · 不是搞一個投票的形式。",
     seeHref: "/roadmap",
     seeLabel: "/roadmap · 鎖定 / 探索 / 不做的事",
   },

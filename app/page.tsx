@@ -161,7 +161,7 @@ export default function Home() {
             </Link>
             <span aria-hidden="true" className="text-mute/40">·</span>
             <Link href="/founders" className="text-mute hover:text-gold transition-colors">
-              FOUNDER →
+              GOLD →
             </Link>
           </p>
         </section>

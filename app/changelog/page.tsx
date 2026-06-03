@@ -33,7 +33,7 @@ const MILESTONES: { date: string; title: string; detail: string }[] = [
     date: "2026-05-30",
     title: "商業模式拍板:「台灣版・合法的 Polymarket」",
     detail:
-      "四根支柱:引擎永遠免費、群眾即時預測市場(虛擬點數・零真錢)、創作者標價賣分析平台抽 5–10%、準度海選天梯。會員不限量,FOUNDER 會員。",
+      "四根支柱:引擎永遠免費、群眾即時預測市場(虛擬點數・零真錢)、創作者標價賣分析平台抽 5–10%、準度海選天梯。會員不限量,GOLD 會員。",
   },
   {
     date: "2026-05-26",
@@ -43,9 +43,9 @@ const MILESTONES: { date: string; title: string; detail: string }[] = [
   },
   {
     date: "2026-05-23",
-    title: "FOUNDER 申請表單上線 + 信任頁打磨",
+    title: "GOLD 申請表單上線 + 信任頁打磨",
     detail:
-      "FOUNDER 申請頁上線,退款與隱私條款對齊台灣消保法與個資法。多個頁面的可信度與動線一起優化。",
+      "GOLD 申請頁上線,退款與隱私條款對齊台灣消保法與個資法。多個頁面的可信度與動線一起優化。",
   },
   {
     date: "2026-05-21",

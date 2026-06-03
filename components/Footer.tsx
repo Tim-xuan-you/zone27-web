@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 // ── Footer · R181 大砍(Tim canary 4「footer 亂七八糟 · 有人要看這一堆東西?」)──
-// 砍掉:中英雙語重複(FUNDED BY FOUNDERS…)· 錯誤宣稱「不收下注佣 · NO
+// 砍掉:中英雙語重複(FUNDED BY GOLD…)· 錯誤宣稱「不收下注佣 · NO
 // COMMISSION」(我們其實有創作者抽傭)· ledger 繼承詩句 · 7/270 placeholder
 // 計數 · LAST SHIPPED 節奏 · 雙語 tagline。 留:桌機連結網格(導覽)+ 精簡
 // 底部 bar(法律 + 一句信任 + 版權 + 版本)。

@@ -61,7 +61,7 @@ export async function sendWaitlistConfirmation({
   // 原 subject 「ZONE 27 等候名單 · 您是 #N · NT$ 2,700 終身」隱含
   // 「訂閱者是想付錢的人」 · OPEN 訂閱者讀到會困惑「我又沒要付錢」。
   // 新 framing dual-purpose · 跟 WaitlistForm kicker 對齊。
-  const subject = `✓ ZONE 27 · 您是 #${pos} · 免費訂閱 + FOUNDER 預售`;
+  const subject = `✓ ZONE 27 · 您是 #${pos} · 免費訂閱 + GOLD 預售`;
 
   const html = buildHtmlBody({ greeting, queuePos, pos });
   const text = buildTextBody({ greeting, queuePos, pos });
@@ -134,7 +134,7 @@ function buildHtmlBody({
 
 <!-- Brand kicker · Round 24 dual-purpose framing -->
 <p style="margin:0 0 6px 0;font-family:${mono};color:#D4AF37;font-size:11px;letter-spacing:5px;text-transform:uppercase;">ZONE · 27</p>
-<p style="margin:0 0 32px 0;font-family:${mono};color:#8A93A8;font-size:10px;letter-spacing:4px;text-transform:uppercase;">OPEN + FOUNDER PRE-LAUNCH</p>
+<p style="margin:0 0 32px 0;font-family:${mono};color:#8A93A8;font-size:10px;letter-spacing:4px;text-transform:uppercase;">OPEN + GOLD PRE-LAUNCH</p>
 
 <!-- Queue position headline -->
 <p style="margin:0;color:#F5F2EA;font-size:14px;letter-spacing:0.5px;">您已預留位置 ·</p>
@@ -145,7 +145,7 @@ function buildHtmlBody({
 
 <!-- Tim's note -->
 <p style="margin:0 0 16px 0;color:#F5F2EA;font-size:15px;line-height:1.6;">Hi ${escapeHtml(greeting)},</p>
-<p style="margin:0 0 16px 0;color:#8A93A8;font-size:14px;line-height:1.7;">我是 Tim · ZONE 27 創辦人。您剛剛在 zone27-web.vercel.app/founders 留下 email · 預留了 FOUNDER 預售名單中的位置。<br><span style="color:#F5F2EA;">會員不限量 · 您是賣分析賺最多的人 · 第 ${queuePos} 位早到。</span></p>
+<p style="margin:0 0 16px 0;color:#8A93A8;font-size:14px;line-height:1.7;">我是 Tim · ZONE 27 創辦人。您剛剛在 zone27-web.vercel.app/founders 留下 email · 預留了 GOLD 預售名單中的位置。<br><span style="color:#F5F2EA;">會員不限量 · 您是賣分析賺最多的人 · 第 ${queuePos} 位早到。</span></p>
 
 <p style="margin:24px 0 12px 0;color:#F5F2EA;font-size:14px;letter-spacing:0.5px;">接下來幾件事:</p>
 <ul style="margin:0 0 24px 0;padding-left:22px;color:#8A93A8;font-size:14px;line-height:1.8;">
@@ -163,7 +163,7 @@ function buildHtmlBody({
 <hr style="border:0;border-top:1px solid #1E2A47;margin:32px 0 20px 0;">
 
 <!-- Footer trust line -->
-<p style="margin:0 0 6px 0;font-family:${mono};color:#8A93A8;font-size:10px;letter-spacing:3px;text-align:center;">FUNDED BY FOUNDERS · NO VC · NO ADS · NO TRACKERS</p>
+<p style="margin:0 0 6px 0;font-family:${mono};color:#8A93A8;font-size:10px;letter-spacing:3px;text-align:center;">FUNDED BY GOLD · NO VC · NO ADS · NO TRACKERS</p>
 <p style="margin:0;color:#8A93A8;font-size:11px;text-align:center;line-height:1.7;"><a href="https://zone27-web.vercel.app" style="color:#D4AF37;text-decoration:none;">zone27-web.vercel.app</a> · <a href="https://github.com/Tim-xuan-you/zone27-web" style="color:#D4AF37;text-decoration:none;">github 開源</a></p>
 <p style="margin:14px 0 0 0;color:#8A93A8;font-size:11px;text-align:center;line-height:1.7;">想退出?reply UNSUBSCRIBE · 我手動移除您 · 不用 click track link</p>
 
@@ -184,14 +184,14 @@ function buildTextBody({
   queuePos: number;
   pos: string;
 }): string {
-  return `ZONE 27 · 免費訂閱 + FOUNDER 預售名單
+  return `ZONE 27 · 免費訂閱 + GOLD 預售名單
 
 您已預留位置 · 第 ${queuePos} 位
 #${pos}
 
 Hi ${greeting},
 
-我是 Tim · ZONE 27 創辦人。您剛剛在 zone27-web.vercel.app/founders 留下 email · 預留了 FOUNDER 預售名單中的位置。
+我是 Tim · ZONE 27 創辦人。您剛剛在 zone27-web.vercel.app/founders 留下 email · 預留了 GOLD 預售名單中的位置。
 
 會員不限量 · 您是賣分析賺最多的人 · 第 ${queuePos} 位早到。
 
@@ -208,7 +208,7 @@ Tim
 ZONE 27 創辦人 · CPBL 球迷 27 年
 
 ──
-FUNDED BY FOUNDERS · NO VC · NO ADS · NO TRACKERS
+FUNDED BY GOLD · NO VC · NO ADS · NO TRACKERS
 https://zone27-web.vercel.app
 
 想退出?reply UNSUBSCRIBE 即可
@@ -226,7 +226,7 @@ function escapeHtml(s: string): string {
     .replace(/'/g, "&#39;");
 }
 
-// ── R68 W-B · FOUNDER Application Received (visitor confirmation) ──
+// ── R68 W-B · GOLD Application Received (visitor confirmation) ──
 // Sent immediately after /founders/apply form submit · brand-tone HTML +
 // plain-text · explicit「1-3 business days 內 Tim 手動 review」 wait time
 // per Pratfall axiom honesty。 Re-uses Resend infrastructure · graceful
@@ -246,27 +246,27 @@ export async function sendFoundersApplicationReceived({
   const apiKey = process.env.RESEND_API_KEY;
   if (!apiKey) {
     console.warn(
-      `[ZONE27 · FOUNDERS_APPLY_EMAIL · SKIP] RESEND_API_KEY not set · email skipped for ${to}`,
+      `[ZONE27 · GOLD_APPLY_EMAIL · SKIP] RESEND_API_KEY not set · email skipped for ${to}`,
     );
     return { ok: false, error: "RESEND_API_KEY missing" };
   }
 
   const safeName = escapeHtml(name);
   const safeId = escapeHtml(applicationId);
-  const subject = `✓ ZONE 27 · FOUNDER 申請已收到 · ${applicationId}`;
+  const subject = `✓ ZONE 27 · GOLD 申請已收到 · ${applicationId}`;
   const mono = `'SF Mono', 'Menlo', 'Consolas', monospace`;
   const sans = `'Helvetica Neue', 'Helvetica', Arial, sans-serif`;
 
   const html = `<!DOCTYPE html>
 <html lang="zh-Hant">
-<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>ZONE 27 · FOUNDER 申請已收到</title></head>
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>ZONE 27 · GOLD 申請已收到</title></head>
 <body style="margin:0;padding:0;background:#0F1A2E;color:#F5F2EA;font-family:${sans};">
 <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background:#0F1A2E;">
 <tr><td align="center" style="padding:48px 16px;">
 <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="max-width:560px;background:#131F38;border:1px solid #1E2A47;">
 <tr><td style="padding:40px 32px;">
 
-<p style="margin:0 0 6px 0;font-family:${mono};color:#D4AF37;font-size:11px;letter-spacing:5px;text-transform:uppercase;">ZONE · 27 · FOUNDERS</p>
+<p style="margin:0 0 6px 0;font-family:${mono};color:#D4AF37;font-size:11px;letter-spacing:5px;text-transform:uppercase;">ZONE · 27 · GOLD</p>
 <p style="margin:0 0 32px 0;font-family:${mono};color:#8A93A8;font-size:10px;letter-spacing:4px;text-transform:uppercase;">APPLICATION RECEIVED · MANUAL REVIEW QUEUE</p>
 
 <p style="margin:0;color:#F5F2EA;font-size:14px;letter-spacing:0.5px;">您的申請已收到 ·</p>
@@ -276,7 +276,7 @@ export async function sendFoundersApplicationReceived({
 <hr style="border:0;border-top:1px solid #1E2A47;margin:28px 0;">
 
 <p style="margin:0 0 16px 0;color:#F5F2EA;font-size:15px;line-height:1.6;">Hi ${safeName},</p>
-<p style="margin:0 0 16px 0;color:#8A93A8;font-size:14px;line-height:1.7;">您剛剛在 <a href="https://zone27-web.vercel.app/founders/apply" style="color:#D4AF37;text-decoration:none;">zone27-web.vercel.app/founders/apply</a> 提交了 FOUNDER 申請。<br><span style="color:#F5F2EA;">這封信只是 receipt confirmation</span> · 您還沒被批准。</p>
+<p style="margin:0 0 16px 0;color:#8A93A8;font-size:14px;line-height:1.7;">您剛剛在 <a href="https://zone27-web.vercel.app/founders/apply" style="color:#D4AF37;text-decoration:none;">zone27-web.vercel.app/founders/apply</a> 提交了 GOLD 申請。<br><span style="color:#F5F2EA;">這封信只是 receipt confirmation</span> · 您還沒被批准。</p>
 
 <p style="margin:24px 0 12px 0;color:#F5F2EA;font-size:14px;letter-spacing:0.5px;">接下來的流程:</p>
 <ol style="margin:0 0 24px 0;padding-left:22px;color:#8A93A8;font-size:14px;line-height:1.8;">
@@ -293,7 +293,7 @@ export async function sendFoundersApplicationReceived({
 
 <hr style="border:0;border-top:1px solid #1E2A47;margin:32px 0 20px 0;">
 
-<p style="margin:0 0 6px 0;font-family:${mono};color:#8A93A8;font-size:10px;letter-spacing:3px;text-align:center;">FUNDED BY FOUNDERS · NO VC · NO ADS · NO TRACKERS</p>
+<p style="margin:0 0 6px 0;font-family:${mono};color:#8A93A8;font-size:10px;letter-spacing:3px;text-align:center;">FUNDED BY GOLD · NO VC · NO ADS · NO TRACKERS</p>
 <p style="margin:0;color:#8A93A8;font-size:11px;text-align:center;line-height:1.7;"><a href="https://zone27-web.vercel.app" style="color:#D4AF37;text-decoration:none;">zone27-web.vercel.app</a> · <a href="https://zone27-web.vercel.app/founders/ledger" style="color:#D4AF37;text-decoration:none;">/founders/ledger 5-step rules</a></p>
 <p style="margin:14px 0 0 0;color:#8A93A8;font-size:11px;text-align:center;line-height:1.7;">想取消申請?reply CANCEL · 我手動移除 · 不用 click track link</p>
 
@@ -304,13 +304,13 @@ export async function sendFoundersApplicationReceived({
 </body>
 </html>`;
 
-  const text = `ZONE 27 · FOUNDER 申請已收到
+  const text = `ZONE 27 · GOLD 申請已收到
 
 Application ID: ${applicationId}
 
 Hi ${name},
 
-您剛剛在 zone27-web.vercel.app/founders/apply 提交了 FOUNDER 申請。
+您剛剛在 zone27-web.vercel.app/founders/apply 提交了 GOLD 申請。
 這封信只是 receipt confirmation · 您還沒被批准。
 
 接下來的流程:
@@ -326,7 +326,7 @@ Tim
 ZONE 27 創辦人 · CPBL 球迷 27 年
 
 ──
-FUNDED BY FOUNDERS · NO VC · NO ADS · NO TRACKERS
+FUNDED BY GOLD · NO VC · NO ADS · NO TRACKERS
 https://zone27-web.vercel.app
 https://zone27-web.vercel.app/founders/ledger
 
@@ -352,7 +352,7 @@ https://zone27-web.vercel.app/founders/ledger
     if (!response.ok) {
       const errorBody = await response.text();
       console.error(
-        `[ZONE27 · FOUNDERS_APPLY_EMAIL · ERROR] http=${response.status} to=${to} body=${errorBody}`,
+        `[ZONE27 · GOLD_APPLY_EMAIL · ERROR] http=${response.status} to=${to} body=${errorBody}`,
       );
       return {
         ok: false,
@@ -362,19 +362,19 @@ https://zone27-web.vercel.app/founders/ledger
     const data = (await response.json()) as { id?: string };
     const id = data.id ?? "unknown";
     console.log(
-      `[ZONE27 · FOUNDERS_APPLY_EMAIL · SENT] to=${to} app=${applicationId} id=${id}`,
+      `[ZONE27 · GOLD_APPLY_EMAIL · SENT] to=${to} app=${applicationId} id=${id}`,
     );
     return { ok: true, id };
   } catch (err) {
     const message = err instanceof Error ? err.message : String(err);
     console.error(
-      `[ZONE27 · FOUNDERS_APPLY_EMAIL · ERROR] uncaught to=${to} err=${message}`,
+      `[ZONE27 · GOLD_APPLY_EMAIL · ERROR] uncaught to=${to} err=${message}`,
     );
     return { ok: false, error: message };
   }
 }
 
-// ── R68 W-B · FOUNDER Application Notification (Tim's inbox) ──
+// ── R68 W-B · GOLD Application Notification (Tim's inbox) ──
 // Sent to Tim's Gmail simultaneous with visitor confirmation · primary
 // audit trail backstop pre-Supabase migration 0003 · review queue source
 // of truth · reply 直接 → applicant · forward 給自己手動 transfer to
@@ -398,12 +398,12 @@ export async function sendFoundersApplicationNotification({
   const apiKey = process.env.RESEND_API_KEY;
   if (!apiKey) {
     console.warn(
-      `[ZONE27 · FOUNDERS_APPLY_NOTIFY · SKIP] RESEND_API_KEY not set · notification skipped for ${applicationId}`,
+      `[ZONE27 · GOLD_APPLY_NOTIFY · SKIP] RESEND_API_KEY not set · notification skipped for ${applicationId}`,
     );
     return { ok: false, error: "RESEND_API_KEY missing" };
   }
 
-  const subject = `[ZONE 27 · FOUNDERS_APPLY] ${applicationId} · ${applicantName} · ${applicantEmail}`;
+  const subject = `[ZONE 27 · GOLD_APPLY] ${applicationId} · ${applicantName} · ${applicantEmail}`;
   const safeName = escapeHtml(applicantName);
   const safeEmail = escapeHtml(applicantEmail);
   const safeCpbl = escapeHtml(cpblConnection).replace(/\n/g, "<br>");
@@ -419,7 +419,7 @@ export async function sendFoundersApplicationNotification({
 <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="max-width:680px;background:#131F38;border:2px solid #D4AF37;">
 <tr><td style="padding:32px;">
 
-<p style="margin:0 0 6px 0;font-family:'SF Mono',monospace;color:#D4AF37;font-size:11px;letter-spacing:4px;">/ ZONE 27 · FOUNDERS_APPLY</p>
+<p style="margin:0 0 6px 0;font-family:'SF Mono',monospace;color:#D4AF37;font-size:11px;letter-spacing:4px;">/ ZONE 27 · GOLD_APPLY</p>
 <p style="margin:0 0 24px 0;font-family:'SF Mono',monospace;color:#8A93A8;font-size:10px;letter-spacing:3px;">REVIEW QUEUE · MANUAL APPROVAL · 1-3 BUSINESS DAYS</p>
 
 <p style="margin:0 0 6px 0;color:#8A93A8;font-size:12px;">Application ID</p>
@@ -454,7 +454,7 @@ export async function sendFoundersApplicationNotification({
 </body>
 </html>`;
 
-  const text = `ZONE 27 · FOUNDERS_APPLY
+  const text = `ZONE 27 · GOLD_APPLY
 REVIEW QUEUE · MANUAL APPROVAL · 1-3 BUSINESS DAYS
 
 Application ID: ${applicationId}
@@ -496,7 +496,7 @@ Reply 此 email 直接給 applicant · 通過後寄銀行資訊 24h window 完�
     if (!response.ok) {
       const errorBody = await response.text();
       console.error(
-        `[ZONE27 · FOUNDERS_APPLY_NOTIFY · ERROR] http=${response.status} app=${applicationId}`,
+        `[ZONE27 · GOLD_APPLY_NOTIFY · ERROR] http=${response.status} app=${applicationId}`,
       );
       return {
         ok: false,
@@ -506,13 +506,13 @@ Reply 此 email 直接給 applicant · 通過後寄銀行資訊 24h window 完�
     const data = (await response.json()) as { id?: string };
     const id = data.id ?? "unknown";
     console.log(
-      `[ZONE27 · FOUNDERS_APPLY_NOTIFY · SENT] app=${applicationId} id=${id}`,
+      `[ZONE27 · GOLD_APPLY_NOTIFY · SENT] app=${applicationId} id=${id}`,
     );
     return { ok: true, id };
   } catch (err) {
     const message = err instanceof Error ? err.message : String(err);
     console.error(
-      `[ZONE27 · FOUNDERS_APPLY_NOTIFY · ERROR] uncaught app=${applicationId} err=${message}`,
+      `[ZONE27 · GOLD_APPLY_NOTIFY · ERROR] uncaught app=${applicationId} err=${message}`,
     );
     return { ok: false, error: message };
   }

@@ -9,7 +9,7 @@ import Link from "next/link";
 //
 // Pre-empts those doubts with the architectural truth (engine runs on
 // the visitor's CPU, ZONE 27 server does zero compute per sim) and the
-// monetization inversion (we sell identity via FOUNDER, not the
+// monetization inversion (we sell identity via GOLD, not the
 // tool).
 //
 // Used in both /lab and /lab/custom so the brand axiom appears at the
@@ -47,7 +47,7 @@ export default function EngineFreeBrandBlock() {
           href="/founders"
           className="text-gold hover:text-gold-soft transition-colors"
         >
-          FOUNDER FOUNDER 會員
+          GOLD 會員
         </Link>
         {" "}與 BLACK CPBL 季票社群運作 —— 工具給每個人,身分留給入會的人。
       </p>

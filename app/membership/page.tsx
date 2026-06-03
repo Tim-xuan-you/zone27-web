@@ -7,7 +7,7 @@ import MembershipUpgrade from "@/components/MembershipUpgrade";
 export const metadata: Metadata = {
   title: "升級會員",
   description:
-    "升級解鎖「標價賣你的分析賺錢」。BLACK NT$ 500/31 天(你拿 90%)· FOUNDER NT$ 2,700/365 天(你拿 95%,全站最低抽成)· 點一下直接顯示轉帳帳號 · 不自動續扣 · 14 天退款。",
+    "升級解鎖「標價賣你的分析賺錢」。BLACK NT$ 500/31 天(你拿 90%)· GOLD NT$ 2,700/365 天(你拿 95%,全站最低抽成)· 點一下直接顯示轉帳帳號 · 不自動續扣 · 14 天退款。",
 };
 
 export const revalidate = 3600;
@@ -18,7 +18,7 @@ export const revalidate = 3600;
 // ② 內容看不懂、不吸引人 → 重寫成「升級 = 賣分析賺錢 + 稀有身分」。
 // ③「一般付費會員」這詞讓黑卡顯得廉價 → 換成有身分感的 kicker。
 // ④ 不要月費/年費 → 寫「每 31 天 / 每 365 天」。
-// ⑤ 拿掉「前 270 / 263 待領」倒數 → 太複雜一頭霧水(稀有感改用「最高階·FOUNDER 會員」)。
+// ⑤ 拿掉「前 270 / 263 待領」倒數 → 太複雜一頭霧水(稀有感改用「最高階·GOLD 會員」)。
 // ⚠ 站上其他地方(頂部 7/270 條 ScarcityStrip · /founders 深頁)還有 270 字樣 ·
 //   那是更大的品牌決定 · 待 Tim 確認後一起掃。
 // ─────────────────────────────────────────────────────
@@ -29,10 +29,10 @@ const BLACK_PERKS = [
   { text: "「✓ 驗證準度」徽章(連輸都算 · 不可造假)" },
 ];
 
-const FOUNDER_PERKS = [
+const GOLD_PERKS = [
   { text: "BLACK 全部功能 · 你拿", strong: "95%（全站最低抽成）" },
   { text: "引擎新版搶先試 + 投票權" },
-  { text: "FOUNDER 會員 · 賣分析賺最多的人" },
+  { text: "GOLD 會員 · 賣分析賺最多的人" },
 ];
 
 export default function MembershipPage() {
@@ -62,11 +62,11 @@ export default function MembershipPage() {
             perks={BLACK_PERKS}
           />
           <MembershipUpgrade
-            name="FOUNDER"
-            kicker="最高階 · FOUNDER 會員"
+            name="GOLD"
+            kicker="最高階 · GOLD 會員"
             priceLabel="2,700"
             period="365 天"
-            perks={FOUNDER_PERKS}
+            perks={GOLD_PERKS}
             highlight
           />
         </div>

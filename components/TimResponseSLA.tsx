@@ -1,7 +1,7 @@
 import Link from "next/link";
 import {
-  FOUNDER_SLA_COMMITMENT,
-  FOUNDER_SLA_STATE,
+  GOLD_SLA_COMMITMENT,
+  GOLD_SLA_STATE,
   isPreLaunchSlaState,
 } from "@/lib/founder-sla";
 
@@ -31,7 +31,7 @@ import {
 // ─────────────────────────────────────────────────────
 
 export default function TimResponseSLA() {
-  const state = FOUNDER_SLA_STATE;
+  const state = GOLD_SLA_STATE;
   const isPreLaunch = isPreLaunchSlaState(state);
 
   return (
@@ -55,7 +55,7 @@ export default function TimResponseSLA() {
       </div>
       <p className="text-bone text-sm sm:text-base leading-relaxed mb-3">
         <strong className="text-gold tabular tracking-tight">
-          {FOUNDER_SLA_COMMITMENT}
+          {GOLD_SLA_COMMITMENT}
         </strong>
         {" "}· 「I will personally email you」 1-3 business days · 0 cron ·
         0 外包 · 0 auto-responder · per /audit S05 PRE-COMMIT 30-day notice

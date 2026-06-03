@@ -1,5 +1,5 @@
-// ── ZONE 27 · FOUNDER Application Types + Helpers ───
-// R68 W-A · FOUNDER application form (1 layer deeper than waitlist) ·
+// ── ZONE 27 · GOLD Application Types + Helpers ───
+// R68 W-A · GOLD application form (1 layer deeper than waitlist) ·
 // Patek Philippe allocation pattern · Tim 手動 review · /founders/ledger
 // 5-step allocation rules 物理 codify。
 //
@@ -23,7 +23,7 @@
 // error discipline says「declare what you actually do」 · re-add when
 // migration 0003 ships with Supabase RLS-locked applications table +
 // per-IP cooldown rate-limit。 8 codes remaining(all reachable):
-export const FOUNDERS_APPLY_ERROR_CODES = [
+export const GOLD_APPLY_ERROR_CODES = [
   "missing_email",
   "invalid_email",
   "missing_name",
@@ -35,14 +35,14 @@ export const FOUNDERS_APPLY_ERROR_CODES = [
 ] as const;
 
 export type FoundersApplyErrorCode =
-  (typeof FOUNDERS_APPLY_ERROR_CODES)[number];
+  (typeof GOLD_APPLY_ERROR_CODES)[number];
 
 export type FoundersApplyResult =
   | { ok: true; applicationId: string }
   | { ok: false; error: FoundersApplyErrorCode };
 
 /** User-facing 中文 message · exhaustive switch · 新 code 加入
- *  FOUNDERS_APPLY_ERROR_CODES auto-typesafe surface · 同 R67 W-D
+ *  GOLD_APPLY_ERROR_CODES auto-typesafe surface · 同 R67 W-D
  *  Tetlock track-able-error pattern。 */
 export function getFoundersApplyErrorMessage(
   code: FoundersApplyErrorCode,
@@ -68,7 +68,7 @@ export function getFoundersApplyErrorMessage(
 }
 
 /** Application field length constraints · server + client share */
-export const FOUNDERS_APPLY_LIMITS = {
+export const GOLD_APPLY_LIMITS = {
   whyMinChars: 50,
   whyMaxChars: 600,
   nameMaxChars: 60,

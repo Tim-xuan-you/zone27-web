@@ -274,7 +274,7 @@ export default function AboutPage() {
         <ul className="space-y-3">
           <li>
             <strong className="text-bone">極低抽成。</strong>
-            黑金會員 creator 抽成,平台只抽 10%(FOUNDER 只 5%)。對比收費明牌群組 / 收費老師業界 30-50% 是降維打擊。
+            黑金會員 creator 抽成,平台只抽 10%(GOLD 只 5%)。對比收費明牌群組 / 收費老師業界 30-50% 是降維打擊。
           </li>
           <li>
             <strong className="text-bone">不可篡改紀錄。</strong>
@@ -346,11 +346,11 @@ export default function AboutPage() {
         </p>
         <p>
           <strong className="text-gold">第三層:</strong>{" "}
-          我們相信 FOUNDER 會員能用同樣的精準、同樣的紀律,定義這個品牌的開局。
+          我們相信 GOLD 會員能用同樣的精準、同樣的紀律,定義這個品牌的開局。
         </p>
         <p className="text-bone">
           所以,黑金會員年費是 NT$ 3,588。
-          但這 FOUNDER 會員,只需要付一次 NT$ 2,700 ——
+          但這 GOLD 會員,只需要付一次 NT$ 2,700 ——
           一輩子。
         </p>
       </Chapter>
@@ -456,7 +456,7 @@ export default function AboutPage() {
               FOUNDER ONBOARDING
             </p>
             <p className="text-bone text-base">
-              FOUNDER · Tim 親手 onboard 每一位 · 銀行轉帳 · personal email
+              GOLD · Tim 親手 onboard 每一位 · 銀行轉帳 · personal email
               ·{" "}
               <a
                 href="https://github.com/Tim-xuan-you/zone27-web/blob/main/docs/MANUAL-ONBOARDING.md"
@@ -501,14 +501,14 @@ export default function AboutPage() {
         </p>
         <h3 className="text-3xl sm:text-4xl text-bone font-light tracking-tight">
           您準備好成為{" "}
-          <span className="text-gold mx-1">FOUNDER</span>{" "}
+          <span className="text-gold mx-1">GOLD</span>{" "}
           嗎?
         </h3>
         <Link
           href="/founders"
           className="inline-block mt-10 px-12 py-4 bg-gold text-navy text-xs tracking-[0.3em] hover:bg-gold-soft transition-colors font-medium"
         >
-          成為 FOUNDER →
+          成為 GOLD →
         </Link>
       </section>
 

@@ -41,7 +41,7 @@ export default function PrivacyPage() {
       <Section no="01" label="SCOPE" zh="適用範圍">
         <p>
           本政策適用於 <Code>zone27-web.vercel.app</Code> 與其所有子路徑。
-          當您訪問本網站、加入 FOUNDER 等候名單,或使用任何互動功能時,
+          當您訪問本網站、加入 GOLD 等候名單,或使用任何互動功能時,
           皆受本政策約束。
         </p>
       </Section>
@@ -101,14 +101,14 @@ export default function PrivacyPage() {
         </p>
       </Section>
 
-      {/* ── 02B FOUNDER APPLICATION DATA · R69 W-G fix ─────
+      {/* ── 02B GOLD APPLICATION DATA · R69 W-G fix ─────
           R69 W-G · Agent B audit finding F1 critical fix · R68 W-A shipped
           /founders/apply collecting 4 NEW fields(email + name + cpbl_connection
           + why_zone27)but /privacy stale-said「5 個欄位」 + 「沒有個人身分資料」
           self-falsifiable in 30 seconds via DevTools Network on /founders/apply
           submit。 此 section codify NEW PII collection + retention policy +
           per-field rationale · brand IP「方法公開」 axiom 物理 codify · 不藏。 */}
-      <Section no="02B" label="FOUNDER APPLICATION DATA · 申請資料" zh="申請 FOUNDER 額外 4 欄">
+      <Section no="02B" label="GOLD APPLICATION DATA · 申請資料" zh="申請 GOLD 額外 4 欄">
         <p>
           2026-05-23 上線的{" "}
           <Link
@@ -117,7 +117,7 @@ export default function PrivacyPage() {
           >
             /founders/apply
           </Link>{" "}
-          · FOUNDER 申請表。 該 form 收{" "}
+          · GOLD 申請表。 該 form 收{" "}
           <strong className="text-bone">4 個額外欄位</strong>(Section 02 waitlist
           5 欄之外)· Tim 親手 onboard 1-3 days。 此 section codify 該 4 欄資料
           用途 + 保留期間 + per-field rationale:
@@ -422,7 +422,7 @@ export default function PrivacyPage() {
             主動要求刪除 OR ZONE 27 brand 永久關閉 · whichever first
           </li>
           <li>
-            <strong className="text-bone">FOUNDER 會員紀錄</strong> · 永久
+            <strong className="text-bone">GOLD 會員紀錄</strong> · 永久
             保留 · 您即使退款 · 歷史記錄仍保留(release reserved 標記但保留
             紀錄)
           </li>
@@ -441,7 +441,7 @@ export default function PrivacyPage() {
         <ul className="space-y-2">
           <li>
             <strong className="text-bone">PDPA 第 19 條</strong>(蒐集前告知)
-            · 我們蒐集您的 email 限於「launch 通知」 + 「FOUNDER onboarding
+            · 我們蒐集您的 email 限於「launch 通知」 + 「GOLD onboarding
             個人化 email」 · 不作任何 marketing / cross-selling / 廣告投放 /
             個資 monetization 用途。
           </li>
@@ -481,7 +481,7 @@ export default function PrivacyPage() {
             /ethics#bus-factor 公開的接管安排
           </li>
           <li>
-            <strong className="text-bone">FOUNDER 退款優先</strong> · 即使
+            <strong className="text-bone">GOLD 退款優先</strong> · 即使
             14 天 cooling-off window 已過 · 這個緊急情境啟動時當期未用完的
             年度 access 按剩餘天數比例退款(NT$ 2,700 × 剩餘天數 / 365)·
             executor 親手處理 · 不外包 · per Taiwan 消保法 § 19 spirit

@@ -11,7 +11,7 @@ import ReadingProgress from "@/components/ReadingProgress";
 export const metadata: Metadata = {
   title: "Coverage — 我們覆蓋哪些賽事 · 為什麼不覆蓋全部",
   description:
-    "ZONE 27 不覆蓋每一場可下注的比賽,只覆蓋引擎可以誠實計算的比賽。完整公開:作用中的聯盟、追蹤但未啟用的賽事、FOUNDER 會員可投票請求的賽事、我們永遠不會覆蓋的(博彩平台清單)。",
+    "ZONE 27 不覆蓋每一場可下注的比賽,只覆蓋引擎可以誠實計算的比賽。完整公開:作用中的聯盟、追蹤但未啟用的賽事、GOLD 會員可投票請求的賽事、我們永遠不會覆蓋的(博彩平台清單)。",
 };
 
 // /coverage — Coverage Manifesto · 4th trust-artifact joining /audit + /methodology + /privacy。
@@ -67,7 +67,7 @@ const ACTIVE_LEAGUES: LeagueRow[] = [
     code: "CPBL",
     zh: "中華職棒",
     source: "stats.cpbl.com.tw · 官方公開資料 · 由 Tim 親手讀過每一場 + 寫進引擎",
-    sampleNote: "目標 ~240 場/年 · 創辦人親自 curate · 自動化等 FOUNDER 滿員後啟動",
+    sampleNote: "目標 ~240 場/年 · 創辦人親自 curate · 自動化等 GOLD 滿員後啟動",
     status: "HAND_CURATED",
     statusLabel: "HAND-CURATED",
   },
@@ -89,7 +89,7 @@ const REQUESTED_QUEUE: LeagueRow[] = [
     code: "NPB",
     zh: "日本職棒",
     source: "npb.jp · Yahoo Japan Sports · TBD pipeline",
-    sampleNote: "FOUNDER 會員可投票優先順序",
+    sampleNote: "GOLD 會員可投票優先順序",
     status: "PENDING",
     statusLabel: "NOT YET · ON QUEUE",
   },
@@ -97,7 +97,7 @@ const REQUESTED_QUEUE: LeagueRow[] = [
     code: "KBO",
     zh: "韓國職棒",
     source: "koreabaseball.com · mykbo.net (community) · TBD pipeline",
-    sampleNote: "FOUNDER 會員可投票優先順序",
+    sampleNote: "GOLD 會員可投票優先順序",
     status: "PENDING",
     statusLabel: "NOT YET · ON QUEUE",
   },
@@ -426,18 +426,18 @@ export default function CoveragePage() {
             <p className="text-mute leading-relaxed mb-6">
               這些聯盟我們**取得到資料**,但**選擇不啟用** —
               因為樣本變異大、誤差會放大,違反「不靠直覺,只看演算法」的承諾。
-              當資料品質改善或FOUNDER 會員強烈要求時,我們會評估啟用。
+              當資料品質改善或 GOLD 會員強烈要求時,我們會評估啟用。
             </p>
             <LeagueTable rows={TRACKED_NOT_ACTIVE} />
           </section>
 
-          {/* ── 04 REQUESTED BY FOUNDERS ──────────────── */}
+          {/* ── 04 REQUESTED BY GOLD ──────────────── */}
           <section className="py-12 border-b border-line/40 section-reveal">
             <p lang="en" className="font-mono text-mute text-[10px] tracking-[0.45em] mb-4">
               04 REQUESTED · ON QUEUE
             </p>
             <h2 className="text-2xl sm:text-3xl text-bone font-light tracking-tight mb-6">
-              FOUNDER 會員投票決定下一個 league
+              GOLD 會員投票決定下一個 league
             </h2>
             <p className="text-mute leading-relaxed mb-6">
               這些聯盟在我們的雷達上,但資料管道還沒建。
@@ -445,9 +445,9 @@ export default function CoveragePage() {
                 href="/founders"
                 className="text-gold hover:text-gold-soft transition-colors"
               >
-                FOUNDER FOUNDER 會員
+                GOLD 會員
               </Link>
-              可在每月會議投票決定下個啟用順序。一般會員可以申請,但優先順序由FOUNDER 會員決定。
+              可在每月會議投票決定下個啟用順序。一般會員可以申請,但優先順序由 GOLD 會員決定。
             </p>
             <LeagueTable rows={REQUESTED_QUEUE} />
           </section>
@@ -560,7 +560,7 @@ export default function CoveragePage() {
               ZONE 27 找的不是「想要更多賽事預測」的人 — 那是博彩平台的客戶。
               我們找的是「**寧可少看一場,也不要看雜訊**」的人。如果這聽起來像您,
               <Link href="/founders" className="text-gold hover:text-gold-soft transition-colors">
-                {" "}FOUNDER FOUNDER 會員{" "}
+                {" "}GOLD 會員{" "}
               </Link>
               還開著。
             </p>
@@ -570,7 +570,7 @@ export default function CoveragePage() {
                 href="/founders"
                 className="inline-flex items-center gap-2 px-5 py-3 bg-gold text-navy hover:bg-gold-soft transition-colors font-mono text-[11px] tracking-[0.3em]"
               >
-                加入FOUNDER 會員 →
+                加入 GOLD 會員 →
               </Link>
               <Link
                 href="/audit"

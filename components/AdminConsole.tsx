@@ -25,7 +25,7 @@ import {
 const TIER_ZH: Record<string, string> = {
   free: "OPEN",
   black: "BLACK",
-  founder: "FOUNDER",
+  founder: "GOLD",
 };
 const KIND_ZH: Record<AdminContentRow["kind"], string> = {
   creator_post: "分析",
@@ -329,7 +329,7 @@ function SetTierCard({ onDone }: { onDone: () => void }) {
           className="bg-ink/60 border border-line/70 text-bone px-3 py-2 outline-none focus:border-gold/60 font-mono text-sm transition-colors"
         >
           <option value="black">BLACK</option>
-          <option value="founder">FOUNDER</option>
+          <option value="founder">GOLD</option>
           <option value="free">OPEN(取消付費)</option>
         </select>
         <ActionBtn onClick={submit} busy={busy} label="設定" />

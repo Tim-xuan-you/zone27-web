@@ -292,7 +292,7 @@ export default function HeyTimPage() {
             className="text-mute text-base leading-relaxed mb-4"
             style={{ fontFamily: "Georgia, serif", textWrap: "pretty" }}
           >
-            花 NT$ 2,700 加入 FOUNDER 的人 · 在決定前應該看得到 Tim
+            花 NT$ 2,700 加入 GOLD 的人 · 在決定前應該看得到 Tim
             親手、有日期的回覆 · 而不是一句「我們很懂台灣棒球」的廣告詞。
             讓人年復一年留下來的 · 從來不是預測 100% 命中 · 是有人真的會回你。
           </p>

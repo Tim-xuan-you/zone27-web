@@ -11,7 +11,7 @@ import { useMounted } from "@/lib/use-mounted";
 //   - anonymous · 匿名訪客 · 未登入
 //   - free · OPEN · 已登入 · 終身免費
 //   - black-card · BLACK · NT$ 500/31 天(每 31 天手動 ECPay · 不自動續扣 per rule #13)
-//   - founders27 · FOUNDER · NT$ 2,700/年
+//   - founders27 · GOLD · NT$ 2,700/年
 //
 // localStorage-based · 跟 PreviewModeBanner 共享 zone27_preview_tier key。
 // Tim 切換 → reload → 全 page client-side tier-aware components 切換
@@ -44,7 +44,7 @@ const TIERS: { value: string; label: string; body: string; price: string }[] = [
   },
   {
     value: "founders27",
-    label: "FOUNDER",
+    label: "GOLD",
     body: "年度 · 全 unlocks + 5% 抽成 + 未來所有 lenses/engines 解鎖",
     price: "NT$ 2,700/年",
   },
@@ -211,7 +211,7 @@ export default function AdminTierSwitcher() {
         ▸ Phase 2 future · cookie-based + server-side tier-aware rendering
         (BLACK-only thread / Lens variety unlock / etc.)
         <br />
-        ▸ 切到 BLACK / FOUNDER 看 /member · /membership ·
+        ▸ 切到 BLACK / GOLD 看 /member · /membership ·
         /matches/[gameId] · 全 tier-aware components 跟著切
       </p>
     </div>

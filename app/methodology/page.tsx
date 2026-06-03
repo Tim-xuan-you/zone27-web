@@ -109,7 +109,7 @@ export default function MethodologyPage() {
               <span className="text-bone">N=1 · 1 PROVED · 0 DIVERGED</span>
             </li>
             <li className="font-mono tabular">
-              <span className="text-mute/60">FOUNDER</span>{" "}
+              <span className="text-mute/60">GOLD</span>{" "}
               <span className="text-bone">7 SYSTEM-TEST · 0 real</span>
             </li>
             <li className="font-mono tabular">
@@ -556,7 +556,7 @@ repeat 10,000 times → aggregate
           </li>
           <li className="flex gap-3 items-baseline">
             <span className="font-mono text-gold/70 text-[10px] tracking-[0.25em]">▸</span>
-            <span className="flex-1">FOUNDER 解鎖未來所有 lenses · 續訂價永鎖(NT$ 2,700/年)· 真實「無限解鎖」 value</span>
+            <span className="flex-1">GOLD 解鎖未來所有 lenses · 續訂價永鎖(NT$ 2,700/年)· 真實「無限解鎖」 value</span>
           </li>
         </ul>
 
@@ -945,7 +945,7 @@ repeat 10,000 times → aggregate
             href="/founders"
             className="px-8 py-3 bg-gold text-navy text-xs tracking-[0.3em] hover:bg-gold-soft transition-colors"
           >
-            加入FOUNDER 會員 →
+            加入 GOLD 會員 →
           </Link>
         </div>
 

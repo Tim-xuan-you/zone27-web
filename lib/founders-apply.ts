@@ -1,6 +1,6 @@
 "use server";
 
-// ── ZONE 27 · FOUNDER Application Server Action ─────
+// ── ZONE 27 · GOLD Application Server Action ─────
 // R68 W-A · Patek Philippe-style application form · 1 layer deeper than
 // waitlist email signup · for visitors who actually want one of 270
 // founding seats(#008-#270 · #001-#007 are Tim's system-test placeholders
@@ -25,7 +25,7 @@
 // Brand IP fit:
 //   - per [[feedback-no-waiting-rule]] · ships NOW · 不等 Supabase migration
 //     · 不 surface options · email-only MVP works
-//   - per [[zone27-payment-architecture]] · FOUNDER = manual bank
+//   - per [[zone27-payment-architecture]] · GOLD = manual bank
 //     transfer · application is the PRE-REQUISITE step before Tim emails
 //     bank details · brand-IP-pure
 //   - per [[feedback-zone27-pratfall-brand-ip]] · application explicitly
@@ -39,7 +39,7 @@ import {
   sendFoundersApplicationNotification,
 } from "@/lib/email";
 import {
-  FOUNDERS_APPLY_LIMITS,
+  GOLD_APPLY_LIMITS,
   type FoundersApplyResult,
 } from "@/lib/founders-apply-types";
 
@@ -63,7 +63,7 @@ export async function submitFoundersApplication(
   // try/catch · server_error code now reachable when Resend / runtime throws ·
   // Tetlock「declare what you actually do」 discipline。 Tim's Gmail flood
   // protection deferred to migration 0003 rate-limit · rate_limited code
-  // already removed from FOUNDERS_APPLY_ERROR_CODES per F5 part 2。
+  // already removed from GOLD_APPLY_ERROR_CODES per F5 part 2。
   try {
     const emailRaw = formData.get("email");
     const nameRaw = formData.get("name");
@@ -86,7 +86,7 @@ export async function submitFoundersApplication(
     }
     const name = stripControlChars(nameRaw.trim()).slice(
       0,
-      FOUNDERS_APPLY_LIMITS.nameMaxChars,
+      GOLD_APPLY_LIMITS.nameMaxChars,
     );
 
     // Validate cpbl connection · R70 W-G Agent B audit F9 fix · strip
@@ -103,7 +103,7 @@ export async function submitFoundersApplication(
     const cpblConnection = cpblConnectionRaw
       .trim()
       .replace(/[\r\t\0]/g, "")
-      .slice(0, FOUNDERS_APPLY_LIMITS.cpblConnectionMaxChars);
+      .slice(0, GOLD_APPLY_LIMITS.cpblConnectionMaxChars);
 
     // Validate why · R70 W-G Agent B audit F9 fix · same \r/\t/\0 sanitization ·
     // keep \n internal newlines as body content
@@ -111,10 +111,10 @@ export async function submitFoundersApplication(
       return { ok: false, error: "missing_why" };
     }
     const why = whyRaw.trim().replace(/[\r\t\0]/g, "");
-    if (why.length < FOUNDERS_APPLY_LIMITS.whyMinChars) {
+    if (why.length < GOLD_APPLY_LIMITS.whyMinChars) {
       return { ok: false, error: "why_too_short" };
     }
-    if (why.length > FOUNDERS_APPLY_LIMITS.whyMaxChars) {
+    if (why.length > GOLD_APPLY_LIMITS.whyMaxChars) {
       return { ok: false, error: "why_too_long" };
     }
 
@@ -140,7 +140,7 @@ export async function submitFoundersApplication(
     const emailDomain = email.split("@")[1] ?? "unknown";
     const namePreview = name.length > 0 ? `${name.slice(0, 1)}***` : "";
     console.log(
-      `[ZONE27 · FOUNDERS_APPLY · NEW] id=${applicationId} email_domain=${emailDomain} name_prefix=${namePreview} why_len=${why.length} ts=${now.toISOString()}`,
+      `[ZONE27 · GOLD_APPLY · NEW] id=${applicationId} email_domain=${emailDomain} name_prefix=${namePreview} why_len=${why.length} ts=${now.toISOString()}`,
     );
 
     // Send 2 emails parallel · don't block on either · graceful degradation
@@ -163,12 +163,12 @@ export async function submitFoundersApplication(
 
     if (!visitorEmailResult.ok) {
       console.warn(
-        `[ZONE27 · FOUNDERS_APPLY · VISITOR_EMAIL_FAILED] id=${applicationId} domain=${emailDomain} reason=${visitorEmailResult.error}`,
+        `[ZONE27 · GOLD_APPLY · VISITOR_EMAIL_FAILED] id=${applicationId} domain=${emailDomain} reason=${visitorEmailResult.error}`,
       );
     }
     if (!timEmailResult.ok) {
       console.warn(
-        `[ZONE27 · FOUNDERS_APPLY · TIM_EMAIL_FAILED] id=${applicationId} reason=${timEmailResult.error}`,
+        `[ZONE27 · GOLD_APPLY · TIM_EMAIL_FAILED] id=${applicationId} reason=${timEmailResult.error}`,
       );
     }
 
@@ -180,7 +180,7 @@ export async function submitFoundersApplication(
     // raw exception to client per /audit S05 disclosure pattern。
     const message = err instanceof Error ? err.message : String(err);
     console.error(
-      `[ZONE27 · FOUNDERS_APPLY · ERROR] uncaught err=${message} ts=${new Date().toISOString()}`,
+      `[ZONE27 · GOLD_APPLY · ERROR] uncaught err=${message} ts=${new Date().toISOString()}`,
     );
     return { ok: false, error: "server_error" };
   }

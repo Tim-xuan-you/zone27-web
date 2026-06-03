@@ -162,7 +162,7 @@ export default function ManifestoPage() {
               <strong className="text-bone">為什麼我們接受這個代價:</strong>{" "}
               因為 ZONE 27 賣的不是演算法,是身分。
               <Link href="/founders" className="text-gold hover:underline underline-offset-4">
-                FOUNDER
+                GOLD
               </Link>{" "}
               的價值是創辦人親手 onboarding + 建立期社群的位置 —{" "}
               <strong className="text-bone">這些東西 fork 不走</strong>。
@@ -193,7 +193,7 @@ export default function ManifestoPage() {
             label="MONETIZATION"
             zh="工具免費,身分付費"
             industry="工具 per-use 計費 (SaaS) 或免費釣魚後抽佣 (運彩平台)"
-            zone27="引擎完全免費 · 收費僅在身分層 (FOUNDER + BLACK)"
+            zone27="引擎完全免費 · 收費僅在身分層 (GOLD + BLACK)"
           >
             <P>
               <strong className="text-bone">行業為什麼這樣收費:</strong>{" "}
@@ -212,7 +212,7 @@ export default function ManifestoPage() {
             <P>
               <strong className="text-bone">這個倒置讓我們失去什麼:</strong>{" "}
               我們永遠不會有「ARR 50x 線性成長」的故事可以講給創投。
-              收入靠會員費(FOUNDER NT$ 2,700/年 · BLACK NT$ 500/月)+
+              收入靠會員費(GOLD NT$ 2,700/年 · BLACK NT$ 500/月)+
               創作者抽成 5–10% · 會員不限量 · 但 CPBL 市場本身就小。這是一個{" "}
               <Link href="/about" className="text-gold hover:underline underline-offset-4">
                 俱樂部規模的事業
@@ -221,13 +221,13 @@ export default function ManifestoPage() {
             </P>
             <P>
               <strong className="text-bone">為什麼我們接受這個代價:</strong>{" "}
-              因為我們蓋的不是消耗品 SaaS,是一個FOUNDER 會員社群 + 一個
+              因為我們蓋的不是消耗品 SaaS,是一個GOLD 會員社群 + 一個
               開放給所有人的精緻工具。引擎免費讓任何懷疑者可以親手驗證 ·
               身分付費讓真正想成為品牌一部分的人有專屬位置。
               這兩件事不能反過來:免費身分 + 收費工具 = 我們變成普通 SaaS。
             </P>
             {/* Round 29 Wave 1 · MLM disambiguation brand defense.
-                台灣訪客看到「FOUNDER 會員 + 親手 onboard + 年度 + LINE 群 +
+                台灣訪客看到「GOLD 會員 + 親手 onboard + 年度 + LINE 群 +
                 未來實體聚會」很容易 surface-level 聯想到 MLM/安麗式
                 「限量早期合夥人」框架 · 但 ZONE 27 經濟結構跟 MLM 完全
                 相反。先前這個 disambiguation 埋在 /founders + /audit +
@@ -243,7 +243,7 @@ export default function ManifestoPage() {
               </p>
               <P className="!mb-3">
                 <strong className="text-bone">這結構長得像 MLM 嗎?</strong>{" "}
-                表面有幾個 visual cue 確實會被聯想:FOUNDER 會員身分 ·
+                表面有幾個 visual cue 確實會被聯想:GOLD 會員身分 ·
                 年度會員 · Tim 親手 onboard · 未來 LINE 群 + 實體聚會。
                 但 ZONE 27 的經濟結構跟 MLM / 安麗式平台
                 <strong className="text-bone">完全相反</strong>。
@@ -259,7 +259,7 @@ export default function ManifestoPage() {
                 </li>
                 <li>
                   <span className="text-loss/80">✕</span> MLM 業績 quota →{" "}
-                  <span className="text-bone">FOUNDER 年度付款 · 沒 quota</span>
+                  <span className="text-bone">GOLD 年度付款 · 沒 quota</span>
                 </li>
                 <li>
                   <span className="text-loss/80">✕</span> MLM 強制庫存 →{" "}
@@ -276,8 +276,8 @@ export default function ManifestoPage() {
               </ul>
               <P className="text-mute/70 !mb-0 mt-4 text-sm">
                 BLACK 創作者抽成 10% 是平台費 ·
-                FOUNDER 創作者抽成 5%(BLACK 的一半 · 不是推薦回扣)。
-                FOUNDER 會員是
+                GOLD 創作者抽成 5%(BLACK 的一半 · 不是推薦回扣)。
+                GOLD 會員是
                 <strong className="text-bone">一個付費身分(賣分析抽成最低)</strong> · 不是招募階梯 ·
                 不是未來業績的領先指標。
               </P>
@@ -392,7 +392,7 @@ export default function ManifestoPage() {
               <strong className="text-bone">為什麼我們接受這個代價:</strong>{" "}
               因為我們本來就不打廣告 — 沒有 audience profiling 的需求 ·
               沒有 retargeting 的對象。
-              真正的回饋管道是 FOUNDER 直接寫信給創辦人 ·
+              真正的回饋管道是 GOLD 直接寫信給創辦人 ·
               這比任何 heatmap 都精確一千倍。
               <strong className="text-bone">放棄追蹤的代價剛好是 0</strong> —
               我們失去的能力本來就不在我們的成長路徑上。
@@ -489,7 +489,7 @@ export default function ManifestoPage() {
                 </p>
                 <ul className="space-y-2.5 text-bone text-sm leading-relaxed list-none pl-0">
                   <SynthItem gold>
-                    FOUNDER 身分(訪客買不到的)
+                    GOLD 身分(訪客買不到的)
                   </SynthItem>
                   <SynthItem gold>
                     Founders LINE 群對話(關門的)
@@ -517,7 +517,7 @@ export default function ManifestoPage() {
               <List>
                 <Item label="假厲害 vs 真厲害">
                   「藏算法」是假厲害(對手 30 分鐘 fork 就拆穿)。
-                  「藏 FOUNDER 身分 + Tim 的品味」是真厲害(本來就 fork 不走)。
+                  「藏 GOLD 身分 + Tim 的品味」是真厲害(本來就 fork 不走)。
                 </Item>
                 <Item label="信任 vs 神秘感">
                   「全部攤」訪客信任你(可驗證)。
@@ -583,7 +583,7 @@ export default function ManifestoPage() {
                   href="/founders"
                   className="text-gold underline-offset-4 hover:underline"
                 >
-                  FOUNDER 就是為您留的
+                  GOLD 就是為您留的
                 </Link>
                 。
               </P>

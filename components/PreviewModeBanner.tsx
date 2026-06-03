@@ -46,14 +46,14 @@ const TIERS: { value: string; label: string; price: string }[] = [
   { value: "anonymous", label: "匿名訪客", price: "NT$ 0" },
   { value: "free", label: "FREE", price: "NT$ 0" },
   { value: "black-card", label: "BLACK", price: "NT$ 500/31 天" },
-  { value: "founders27", label: "FOUNDERS", price: "NT$ 2,700" },
+  { value: "founders27", label: "GOLD", price: "NT$ 2,700" },
 ];
 
 const TIER_LABELS: Record<string, string> = {
   anonymous: "匿名訪客",
   free: "OPEN",
   "black-card": "BLACK",
-  founders27: "FOUNDER",
+  founders27: "GOLD",
 };
 
 export default function PreviewModeBanner() {

@@ -7,7 +7,7 @@ import { createPageMetadata } from "@/lib/page-og";
 export const metadata = createPageMetadata({
   title: "Terms of Service — 我們對您的承諾,您對我們的同意",
   description:
-    "ZONE 27 服務條款 · pre-launch 階段的真實情境合約 · 不是模板 · AI 是娛樂用途 · FOUNDER waitlist 不收費不綁定 · 含台灣 14-day 退款主動延伸(消保法 § 19 distance-selling)。",
+    "ZONE 27 服務條款 · pre-launch 階段的真實情境合約 · 不是模板 · AI 是娛樂用途 · GOLD waitlist 不收費不綁定 · 含台灣 14-day 退款主動延伸(消保法 § 19 distance-selling)。",
   ogTitle: "Terms of Service · 我們對您的承諾 · ZONE 27",
   ogDescription:
     "pre-launch 真實情境合約 · 不是模板 · 含台灣 14-day 退款主動延伸 · 消保法 § 19",
@@ -80,10 +80,10 @@ export default function TermsPage() {
         </ul>
       </Section>
 
-      {/* ── 04 FOUNDER WAITLIST ─────────────── */}
-      <Section no="04" label="FOUNDER WAITLIST" zh="FOUNDER 等候名單聲明">
+      {/* ── 04 GOLD WAITLIST ─────────────── */}
+      <Section no="04" label="GOLD WAITLIST" zh="GOLD 等候名單聲明">
         <p>
-          您加入 FOUNDER waitlist 時,請理解以下事項:
+          您加入 GOLD waitlist 時,請理解以下事項:
         </p>
         <ul className="space-y-3">
           <li>
@@ -96,7 +96,7 @@ export default function TermsPage() {
           </li>
           <li>
             <strong className="text-bone">不保證取得 #號碼。</strong>
-            最終 FOUNDER 會員將以「正式付款完成」順序鎖定。
+            最終 GOLD 會員將以「正式付款完成」順序鎖定。
             waitlist 給予優先通知權,不保證最終取得位置。
           </li>
           <li>
@@ -108,7 +108,7 @@ export default function TermsPage() {
           </li>
           <li>
             <strong className="text-bone">通道歸因標籤。</strong>
-            若您透過某FOUNDER 會員的分享連結進入(<Code>?ref=reserve-NNN</Code>),
+            若您透過某GOLD 會員的分享連結進入(<Code>?ref=reserve-NNN</Code>),
             該標籤會存進您的 waitlist row(<Code>source</Code> 欄位)。
             這是<strong className="text-bone">通道層的彙總</strong>,不是個人追蹤 —
             完整解釋見{" "}
@@ -135,7 +135,7 @@ export default function TermsPage() {
           天</strong> · 翻倍法定下限。
         </p>
 
-        <h3 className="text-bone text-lg mt-6 mb-3">FOUNDER(NT$ 2,700 / 365 天)</h3>
+        <h3 className="text-bone text-lg mt-6 mb-3">GOLD(NT$ 2,700 / 365 天)</h3>
         <ul className="space-y-2">
           <li>
             <strong className="text-bone">14 天無條件退款</strong> · 從 Tim

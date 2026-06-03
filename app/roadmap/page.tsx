@@ -78,8 +78,8 @@ const LOCKED: { quarter: string; items: RoadmapItem[] }[] = [
     quarter: "下一階段 · 2026 Q3(Jul-Sep)",
     items: [
       {
-        title: "FOUNDER 正式預售開啟",
-        body: "NT$ 2,700/年 · 會員不限量 · FOUNDER 會員 · 手工銀行轉帳 · Tim 親手 onboarding 每一位。BLACK 一年約 12 期 × NT$ 500 = NT$ 6,000 · FOUNDER NT$ 2,700/年(含 BLACK)省 55%。流程細節已寫進 docs/MANUAL-ONBOARDING.md。",
+        title: "GOLD 正式預售開啟",
+        body: "NT$ 2,700/年 · 會員不限量 · GOLD 會員 · 手工銀行轉帳 · Tim 親手 onboarding 每一位。BLACK 一年約 12 期 × NT$ 500 = NT$ 6,000 · GOLD NT$ 2,700/年(含 BLACK)省 55%。流程細節已寫進 docs/MANUAL-ONBOARDING.md。",
         evidenceHref: "/founders",
         evidenceLabel: "/founders 完整邏輯",
       },
@@ -136,7 +136,7 @@ const EXPLICIT_NO: RoadmapItem[] = [
   },
   {
     title: "永遠不接受創投 / 不投放廣告 / 不上市",
-    body: "ZONE 27 靠 FOUNDER 年費 + BLACK 月費自籌啟動 · 不拿創投。創投錢進來後會被估值倒推「ARR 50x 線性增長」邏輯,跟「慢慢長、靠會員自籌」的本質衝突。",
+    body: "ZONE 27 靠 GOLD 年費 + BLACK 月費自籌啟動 · 不拿創投。創投錢進來後會被估值倒推「ARR 50x 線性增長」邏輯,跟「慢慢長、靠會員自籌」的本質衝突。",
     evidenceHref: "/manifesto",
     evidenceLabel: "/manifesto Section II",
   },

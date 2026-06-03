@@ -32,7 +32,7 @@ const TIER_LABELS: Record<string, { label: string; href: string }> = {
   anonymous: { label: "ANON", href: "/membership" },
   free: { label: "FREE", href: "/membership" },
   "black-card": { label: "BLACK", href: "/membership/black-card" },
-  founders27: { label: "FOUNDERS", href: "/founders" },
+  founders27: { label: "GOLD", href: "/founders" },
 };
 
 export default function TierBadge() {

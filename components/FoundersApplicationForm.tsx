@@ -1,6 +1,6 @@
 "use client";
 
-// ── ZONE 27 · FOUNDER Application Form ──────────────
+// ── ZONE 27 · GOLD Application Form ──────────────
 // R69 W-G · Agent B audit F8 fix · success state focus management ·
 // WCAG 2.4.3 Focus Order + 4.1.3 Status Messages · 訪客 submit 後
 // focus 自動移到 success container · role="status" + aria-live · 不
@@ -62,7 +62,7 @@
 //     helper(no silent fall-through)
 //
 // 不做 anti-pattern:
-//   ✕ no "FOUNDER 投票權" / "private LINE group access" promises
+//   ✕ no "GOLD 投票權" / "private LINE group access" promises
 //   ✕ no "instant approval" / "guaranteed slot" framing
 //   ✕ no captcha / no Cloudflare Turnstile(rate-limited via Supabase
 //     when migration applies · MVP relies on Tim manual review filter)
@@ -75,7 +75,7 @@ import Link from "next/link";
 import { submitFoundersApplication } from "@/lib/founders-apply";
 import {
   getFoundersApplyErrorMessage,
-  FOUNDERS_APPLY_LIMITS,
+  GOLD_APPLY_LIMITS,
   type FoundersApplyResult,
 } from "@/lib/founders-apply-types";
 import TimResponseSLA from "@/components/TimResponseSLA";
@@ -315,7 +315,7 @@ export default function FoundersApplicationForm() {
       whyFull.length > 400
         ? `\n\n(您 why_zone27 第一個 400 字符 saved · 剩餘 ${whyFull.length - 400} 字在 resume 時補寫 · per iOS mailto 2000-char safe-zone)`
         : "";
-    const subject = "ZONE 27 · FOUNDER application 暫存 · resume link";
+    const subject = "ZONE 27 · GOLD application 暫存 · resume link";
     const body = [
       `Hi,`,
       ``,
@@ -404,7 +404,7 @@ export default function FoundersApplicationForm() {
         </p>
         <p className="text-mute text-sm max-w-md mx-auto leading-relaxed text-center mb-6">
           請保留此編號做後續參考。 您應該已經收到一封 confirmation
-          email(主旨開頭「✓ ZONE 27 · FOUNDER 申請已收到」)·
+          email(主旨開頭「✓ ZONE 27 · GOLD 申請已收到」)·
           沒收到請檢查 spam folder 或 email{" "}
           <a
             href="mailto:tatayngiti@gmail.com?subject=ZONE%2027%20%C2%B7%20application%20email%20missing"
@@ -444,7 +444,7 @@ export default function FoundersApplicationForm() {
             </li>
             <li>
               <span className="font-mono text-bone tabular mr-2">04</span>{" "}
-              轉帳完成 → 您的 FOUNDER 身分開通 ·
+              轉帳完成 → 您的 GOLD 身分開通 ·
               365 天 access · 每年 1/1 續訂價永不調漲
             </li>
           </ol>
@@ -465,7 +465,7 @@ export default function FoundersApplicationForm() {
       className="bg-slate/70 border border-gold/40 glow-soft p-8 sm:p-10"
     >
       <p className="font-mono text-gold text-[10px] tracking-[0.4em] mb-3">
-        FOUNDER · PATEK ALLOCATION FORM
+        GOLD · PATEK ALLOCATION FORM
       </p>
 
       {/* R72 W-D · Agent B audit F04 fix · visible「draft restored」 banner ·
@@ -496,7 +496,7 @@ export default function FoundersApplicationForm() {
       )}
 
       <h3 className="text-2xl sm:text-3xl text-bone font-light tracking-tight mb-2">
-        成為 FOUNDER FOUNDER 會員
+        成為 GOLD 會員
       </h3>
       <p className="text-mute text-sm mb-8 leading-relaxed">
         留下你的資料 ·{" "}
@@ -540,7 +540,7 @@ export default function FoundersApplicationForm() {
           aria-required="true"
           placeholder="Tim · 或 球迷暱稱"
           autoComplete="nickname"
-          maxLength={FOUNDERS_APPLY_LIMITS.nameMaxChars}
+          maxLength={GOLD_APPLY_LIMITS.nameMaxChars}
           className="w-full bg-ink/60 border border-line/70 focus-visible:border-gold/70 text-bone px-4 py-3 outline-none transition-colors placeholder:text-mute/70 font-mono text-sm"
         />
       </label>
@@ -557,7 +557,7 @@ export default function FoundersApplicationForm() {
           required
           aria-required="true"
           placeholder="例:統一獅球迷 15 年 · 從興農牛時代開始看"
-          maxLength={FOUNDERS_APPLY_LIMITS.cpblConnectionMaxChars}
+          maxLength={GOLD_APPLY_LIMITS.cpblConnectionMaxChars}
           className="w-full bg-ink/60 border border-line/70 focus-visible:border-gold/70 text-bone px-4 py-3 outline-none transition-colors placeholder:text-mute/70 font-mono text-sm"
         />
         <span className="block mt-2 font-mono text-mute/70 text-[10px] tracking-[0.2em] leading-relaxed">
@@ -594,8 +594,8 @@ export default function FoundersApplicationForm() {
       {/* Why ZONE 27 */}
       <label htmlFor="founders-apply-why" className="block mb-6">
         <span className="font-mono text-mute text-[10px] tracking-[0.3em] block mb-2">
-          為什麼想成為 FOUNDER · 必填 · {FOUNDERS_APPLY_LIMITS.whyMinChars}-
-          {FOUNDERS_APPLY_LIMITS.whyMaxChars} 字
+          為什麼想成為 GOLD · 必填 · {GOLD_APPLY_LIMITS.whyMinChars}-
+          {GOLD_APPLY_LIMITS.whyMaxChars} 字
         </span>
         <textarea
           id="founders-apply-why"
@@ -604,8 +604,8 @@ export default function FoundersApplicationForm() {
           aria-required="true"
           rows={6}
           placeholder="您 ZONE 27 哪一頁讓您決定要申請的?(/audit · /methodology · /track-record · /founders/ledger 等)為什麼這頁 hit?Tim 不要 marketing 答案 · 要您真實 reasoning 邏輯。"
-          minLength={FOUNDERS_APPLY_LIMITS.whyMinChars}
-          maxLength={FOUNDERS_APPLY_LIMITS.whyMaxChars}
+          minLength={GOLD_APPLY_LIMITS.whyMinChars}
+          maxLength={GOLD_APPLY_LIMITS.whyMaxChars}
           // R109 W5 · field-sizing: content auto-grow(Chrome 123+ Baseline)·
           // textarea 自動隨 content 高度長 · Baymard 2025「4+ field forms with
           // 100+ char text areas 有 ~68% mobile abandonment if interrupted」 ·
@@ -634,7 +634,7 @@ export default function FoundersApplicationForm() {
         <textarea
           value={ifThenPlan}
           onChange={handleIfThenChange}
-          placeholder={"例:「如果 Tim email 通過 → 我 24h 內完成轉帳」 · 「如果 ledger 加入我名字 → 我截圖傳給太太說明 270 founding seat」 · 您自己寫 · Tim 不看 · 不送 server"}
+          placeholder={"例:「如果 Tim email 通過 → 我 24h 內完成轉帳」 · 「如果開通 → 我截圖傳給太太說明這筆 GOLD 會員」 · 您自己寫 · Tim 不看 · 不送 server"}
           rows={2}
           maxLength={240}
           aria-label="Optional if-then implementation intention plan · client-side only"

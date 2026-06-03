@@ -12,7 +12,7 @@ import ReproducibilityReceipt from "@/components/ReproducibilityReceipt";
 export const metadata: Metadata = {
   title: "年度公開報告 · 2026 第 0 年",
   description:
-    "ZONE 27 第 0 年公開年度報告。 0 訂閱者 · NT$ 0 收入 · 7 個系統測試用的佔位FOUNDER 會員 · 只結算過 1 場 · 完整成本 · 完整今年砍掉的清單 · 上線前的誠實狀態。 一般網站隱藏營收 · 我們從第 0 年就公開。",
+    "ZONE 27 第 0 年公開年度報告。 0 訂閱者 · NT$ 0 收入 · 7 個系統測試用的佔位 GOLD 會員 · 只結算過 1 場 · 完整成本 · 完整今年砍掉的清單 · 上線前的誠實狀態。 一般網站隱藏營收 · 我們從第 0 年就公開。",
 };
 
 // ── ZONE 27 · /annual/2026 ─────────────────────────────
@@ -85,7 +85,7 @@ const WHAT_FAILED_2026: { item: string; lesson: string }[] = [
     lesson: "會員方案一度做得很虛、沒人想付費 · 而我們的客群是會下注的人。 後來把重心轉回棒球預測引擎 · 把 BLACK 重新定義成 — 工程筆記、AI 信心度、賽事討論、Q&A · 為想練預測的人量身設計、給得出實際價值。",
   },
   {
-    item: "FOUNDER 上線時間一度寫 2026 Q3 · 至今 7 個仍是系統測試佔位",
+    item: "GOLD 上線時間一度寫 2026 Q3 · 至今 7 個仍是系統測試佔位",
     lesson: "金流平台還沒拍板 · 品牌域名還沒買 · 第一筆真實會員認領延後。 我們大方把這件事寫進空白的認領帳本 · 等通道開了再上。",
   },
 ];
@@ -97,7 +97,7 @@ const WHATS_NEXT_2027: { milestone: string; description: string; q: string }[] =
     q: "2026 Q3",
   },
   {
-    milestone: "FOUNDER 第一週 review window",
+    milestone: "GOLD 第一週 review window",
     description: "申請通道開放 · 第一筆 real founder 認領 · /founders/ledger empty scaffold 變實 weekly review log · 拒絕原因(去 PII)同等 visual 公開。",
     q: "2026 Q3",
   },
@@ -142,7 +142,7 @@ export default function AnnualReport2026Page() {
           </h1>
           <p className="mt-6 text-mute leading-relaxed max-w-2xl">
             {REPORT_PHASE}。 0 訂閱者 · NT$ 0 收入 · 7 個系統測試用的佔位
-            FOUNDER 會員 · 只結算過 1 場(命中)· 引擎 v0.2。 所有數字都是
+            GOLD 會員 · 只結算過 1 場(命中)· 引擎 v0.2。 所有數字都是
             誠實的空白 · 不造假。 有些獨立媒體靠讀者直接資助起家、把一切
             攤開給人看 · 我們從第 0 年就這樣做。
           </p>
@@ -201,7 +201,7 @@ export default function AnnualReport2026Page() {
               note="Vercel / Supabase / Resend / GitHub 全 free tier"
             />
             <MetricBlock
-              label="FOUNDER · 占位"
+              label="GOLD · 占位"
               value={String(METRICS.founders27Placeholders)}
               tone="gold"
               note="7 個系統測試占位 · 0 真實付費 · 會員不限量"
@@ -220,8 +220,8 @@ export default function AnnualReport2026Page() {
             />
           </div>
           <p className="mt-5 font-mono text-loss/80 text-[10px] tracking-[0.3em] leading-relaxed">
-            ⚠ 上線前 · FOUNDER 付費相關數字全為 0。 BLACK 與
-            FOUNDER 都採人工轉帳 · 品牌域名還沒買 · 等時機到了再上線。
+            ⚠ 上線前 · GOLD 付費相關數字全為 0。 BLACK 與
+            GOLD 都採人工轉帳 · 品牌域名還沒買 · 等時機到了再上線。
           </p>
 
           {/* Round 44 W-B · ReproducibilityReceipt drop-in · /annual/2026

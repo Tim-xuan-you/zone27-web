@@ -176,7 +176,7 @@ export default async function MembershipOgImage() {
               ·
             </span>
             <span style={{ color: BRAND.bone, display: "flex" }}>
-              FOUNDER
+              GOLD
             </span>
           </div>
         </div>

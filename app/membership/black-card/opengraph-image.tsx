@@ -180,7 +180,7 @@ export default async function BlackCardOgImage() {
           <UnlockRow label="創作者抽成 10%(業界 30-50% 降維打擊)" />
           <UnlockRow label="每月 voting 影響引擎下個 ship 方向" />
           <UnlockRow label="Tim 每週工程筆記 full 版" />
-          <UnlockRow label="FOUNDER LINE 群 read-only access" />
+          <UnlockRow label="GOLD LINE 群 read-only access" />
         </div>
 
         {/* ── BOTTOM · differentiator punchline ──────── */}

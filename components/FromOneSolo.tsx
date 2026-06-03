@@ -82,7 +82,7 @@ export default function FromOneSolo() {
             </span>
             <strong className="text-bone">Zero paid social proof yet</strong>
             {" "}· 目前還沒有真實付費會員 · 只有 Tim 親手做的系統測試帳號。
-            真實第一位 FOUNDER 等付款通道開了(Q3+)才會加入 ·
+            真實第一位 GOLD 等付款通道開了(Q3+)才會加入 ·
             您可能就是第一個 · 前面沒有真實 testimonial 可 quote。
           </li>
           <li>
@@ -123,8 +123,8 @@ export default function FromOneSolo() {
               04
             </span>
             <strong className="text-bone">Methodology already 公開</strong> ·
-            您不是 buy「access to secret model」 · 您 buy「allocation
-            #NNN/270 limited seat」 · 引擎邏輯全 publish at{" "}
+            您不是 buy「access to secret model」 · 您買的是 GOLD 身分 +
+            Tim 親手 onboard · 引擎邏輯全 publish at{" "}
             <Link
               href="/methodology"
               className="text-gold underline-offset-4 hover:underline"
@@ -138,8 +138,8 @@ export default function FromOneSolo() {
             >
               /methodology/diff
             </Link>{" "}
-            · GitHub MIT licensed · 您 fork OK · 您買的是 allocation +
-            Tim 親手 onboard not access to secret · per /audit S05 PRE-COMMIT。
+            · GitHub MIT licensed · 您 fork OK · 您買的是 GOLD 身分 +
+            Tim 親手 onboard · not access to secret · per /audit S05 PRE-COMMIT。
           </li>
         </ol>
 

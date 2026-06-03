@@ -100,7 +100,7 @@ export default function BlackCardLedgerPage() {
             </p>
             <p className="mt-3 text-mute text-base leading-relaxed">
               這頁 publish 當前訂閱者 handle(opt-in)+ 第一個月 + 已 sustain
-              幾個月。 第 1 位的 handle 永久 row 1 · 同 FOUNDER allocation
+              幾個月。 第 1 位的 handle 永久 row 1 · 同 GOLD allocation
               ledger 邏輯延伸到 monthly tier。
             </p>
           </div>
@@ -150,7 +150,7 @@ export default function BlackCardLedgerPage() {
                   href="/founders/ledger"
                   className="inline-block px-6 py-3 border border-gold/50 text-gold font-mono text-[10px] tracking-[0.3em] hover:bg-gold/10 transition-colors"
                 >
-                  → FOUNDER ledger
+                  → GOLD ledger
                 </Link>
               </div>
             </div>
@@ -270,7 +270,7 @@ export default function BlackCardLedgerPage() {
               <li className="flex gap-3 items-baseline">
                 <span className="font-mono text-gold/80 text-[10px] tracking-[0.25em]">▸</span>
                 <span>
-                  FOUNDER ledger 已 ship · pattern + brand IP 已建立 ·
+                  GOLD ledger 已 ship · pattern + brand IP 已建立 ·
                   BLACK ledger = 同 ledger discipline 延伸到 monthly tier
                 </span>
               </li>

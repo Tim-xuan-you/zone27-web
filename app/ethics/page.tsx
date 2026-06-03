@@ -50,13 +50,13 @@ const COMMITMENTS: { num: string; title: string; body: string; tier: "displaceme
   {
     num: "06",
     title: "我永遠不跑 ads / affiliate / paid placement on ZONE 27",
-    body: "整個 ZONE 27 站上 · 0 廣告 · 0 業配 · 0 付費置入 · 0 贊助內容 · 0 合作推廣。 訂閱費(FOUNDER + BLACK)就是全部的收入來源 · 從設計上就這樣定。",
+    body: "整個 ZONE 27 站上 · 0 廣告 · 0 業配 · 0 付費置入 · 0 贊助內容 · 0 合作推廣。 訂閱費(GOLD + BLACK)就是全部的收入來源 · 從設計上就這樣定。",
     tier: "subscriber",
   },
   {
     num: "07",
     title: "我每年 5 月 publish 全年收入 + 開銷 + subscriber count",
-    body: "每年 5/31 publish /annual/{year} report · 含全年收入 · 全年開銷 · BLACK subscriber count · FOUNDER 認領數 · 同 /audit S05 PRE-COMMIT pattern · 修改此 publish cadence 需 30 天 /changelog 公告。",
+    body: "每年 5/31 publish /annual/{year} report · 含全年收入 · 全年開銷 · BLACK subscriber count · GOLD 認領數 · 同 /audit S05 PRE-COMMIT pattern · 修改此 publish cadence 需 30 天 /changelog 公告。",
     tier: "subscriber",
   },
   {
@@ -112,7 +112,7 @@ export default function EthicsPage() {
               一條 revenue stream 都 violate 下面 9 條 · 公開等於商業自殺。
             </p>
             <p className="mt-3 text-mute text-base leading-relaxed">
-              ZONE 27 可以 ship · 因為訂閱費(FOUNDER + BLACK CPBL
+              ZONE 27 可以 ship · 因為訂閱費(GOLD + BLACK CPBL
               Season Pass)是整個 revenue model · 您贏您輸我都一樣賺。
             </p>
           </div>
@@ -217,7 +217,7 @@ export default function EthicsPage() {
             <ul className="space-y-2 pl-6">
               <li className="flex gap-3 items-baseline">
                 <span className="font-mono text-gold/80 text-[10px] tracking-[0.25em]">▸</span>
-                <span>FOUNDER NT$ 2,700/365 天 · 5% 抽成(BLACK 一半)· 會員不限量</span>
+                <span>GOLD NT$ 2,700/365 天 · 5% 抽成(BLACK 一半)· 會員不限量</span>
               </li>
               <li className="flex gap-3 items-baseline">
                 <span className="font-mono text-gold/80 text-[10px] tracking-[0.25em]">▸</span>
@@ -362,7 +362,7 @@ export default function EthicsPage() {
               可從 Supabase Auth 直接 recover。
             </li>
             <li>
-              <strong className="text-bone">您 NT$ 2,700 paid FOUNDER</strong>{" "}
+              <strong className="text-bone">您 NT$ 2,700 paid GOLD</strong>{" "}
               · 14 天 cooling-off window 隨時可退款 · per /terms § 4B Taiwan
               消保法 § 19。 Tim 失蹤情境 · 因 service interruption · 您可
               email{" "}
@@ -439,7 +439,7 @@ export default function EthicsPage() {
           </h3>
           {/* Round 51 W-C · Agent 3 HIGH #6 fix · /ethics 缺 conversion
               CTA at page end · 讀完 9 commitments 訪客是 strongest possible
-              warm-up state · trust loop must close to FOUNDER / BLACK
+              warm-up state · trust loop must close to GOLD / BLACK
               CARD entry · 不 dump 到 navigation 即跑路。 加 explicit Founders
               27 + BLACK chip · 同 trust artifacts 並列 surface · 訪客
               可 1-tap action。 */}
@@ -451,7 +451,7 @@ export default function EthicsPage() {
               href="/founders"
               className="inline-block px-6 py-3 bg-gold text-navy font-mono text-[10px] tracking-[0.3em] hover:bg-gold-soft transition-colors"
             >
-              → FOUNDER · NT$ 2,700/365 天
+              → GOLD · NT$ 2,700/365 天
             </Link>
             <Link
               href="/membership/black-card"
