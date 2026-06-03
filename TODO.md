@@ -142,13 +142,14 @@ R172 pivot · BLACK CARD 從 TapPay 自動訂閱改成 manual ATM / 跨行轉帳
 
 R174 pivot build queue · Claude 可主動 ship(三綠 + auto-push):
 
-- 🟢🟢🟢 **下一窗要做(2026-06-03 Tim 拍板/「您決定」· 詳見 [[project-zone27-engine-strategy]] memory)**:
-  1. **引擎改名 sweep**(第一個 · 零風險 · 已決定):站上「蒙地卡羅 / Monte Carlo」全換 **萬象** + 白話描述(去學術術語)· ⚠️ 紅線:**可改名但「方法」白話講清楚、絕不藏/裝神祕**(擋下 Tim「搞神祕+AI」· 那=變 LINE 老師殺 disclosure)· GitHub 保持開源。
-  2. **三引擎分層**:免費=萬象 1 個 / BLACK·GOLD=萬象+戰力(Elo)+局勢(Markov)3 個 · 天梯只要贏萬象 · (戰力/局勢 是新引擎工程 = 大件)。
-  3. **球隊勝率推播**:你支持的隊(z27_team)+ 下一場 + 我們勝率% + **賽後自動對帳**(贏 Google 那個冷數字 · Google 來源是 Opta/盤口)。
-  4. **57% 彈藥內容**:/calibration 或 /audit 加「為什麼沒有神準引擎(57%=對手謊言的數學證據)」。
-  5. **MLB**:引擎驗證中(0/30 · 今天剛鎖第一批)· ⚠️ 確認 GitHub Action(grade-mlb-locked)真的有在跑 · 累積 ≥30 場且夠準才開 MLB 押注/接進整套(押注/市場/天梯/賣分析)· 終極願景=台灣運彩有的賽事都做整套(各運動引擎驗證夠才開盤)。
-  6. ⚠️ **CLAUDE.md 已過時**(還寫 Founders 27 / BLACK CARD / 270 徽章)· 真相在記憶 · 有空做一輪 CLAUDE.md 刷新。
+- ✅✅✅ **R190 完成 5/6(2026-06-04 · 5 commit 全三綠 · 9253026→12247ae · auto-push)· 詳見下方 R190 entry**:
+  1. ✅ **引擎改名 sweep → 萬象**(9253026 · 26 檔 rendered 訪客文字去學術術語 · 信任頁改白話機制+GitHub 開源錨點 · OG 卡/延伸閱讀/Cmd-K/錯誤頁彩蛋 · **程式碼註解+simulator.ts+README 保留 Monte Carlo = 方法公開的 GitHub 層**(刻意不掃)· SSR 13 頁驗證 0 殘留)。
+  2. ⏳🔴 **三引擎分層 — DATA-BLOCKED · 別硬做(評估後 defer)**:戰力(Elo)現在只有 ~16 場 CPBL finalized → 從 1500 baseline 幾乎沒動 = 全部 ~50% 無資訊量(看起來像壞掉)· 局勢(Markov)需要**逐打席 play-by-play 轉移資料**,CPBL 不開放、我們只 ingest box score = **無料可做**。 且曝光 3 引擎還要建付費 gating + 對照 UI(大件)。 三條都卡 → 硬做會違反 #12 engine-validated 紅線(= 上 unvalidated 引擎)+ no-vapor。 **正解:等 CPBL ≥50 場(Elo 才有訊號)或改用 MLB API(料更多)· 連同付費對照 UI 一起做一個專窗 · 別現在半做出個全 50% 的假引擎。**
+  3. ✅ **球隊勝率推播 forward 半**(3bbe2df · 新 `MyTeamNextGame` 掛 /track-record · 你支持的隊下一場 + 萬象開盤% + 賽後對帳承諾 · pick→下一場→過去戰績完整迴路 · 誠實版手機勝率推播 · 目前 off-day 空狀態,下個 slate ingest 自動點亮)。
+  4. ✅ **57% 彈藥內容**(d66d994 · /calibration 加「為什麼沒有神準引擎」· 全球最準賽前模型+Vegas 盤口 ≈57%、理論上限 ~60% · 94% 神準=數學上不可能=話術 · 護城河=敢承認 57%+逐場對帳、不是準度 · plain words · 來源在註解)。
+  5. ✅ **MLB 驗證 = CONFIRMED 在跑**(無需改碼):GitHub Action `mlb-engine.yml`(每天 2 次 cron)真的有自動 lock+grade+push(本窗 push 撞到它的 commit 6a0d324 → rebase 整合)· 現況 **25 鎖 / 3 結算**(2 diverged · 1 push · N=2 純雜訊)· `MlbEngineRecord` 讀法正確(decided=proved+diverged · push/tie 排除)· ≥30 decided 才開 MLB = **正確維持關閉**。
+  6. ✅ **CLAUDE.md 刷新**(12247ae · 兩個 canonical 定價段 + brand framing 抽傭命名全改 **OPEN/BLACK/GOLD** · 清 Founders 27/BLACK CARD/270 stale · 指向 tier-naming 記憶 · 提醒 tier key 仍 `founder`/URL /founders 不動/「TIM·FOUNDER」簽名保留)。
+  - 🧭 **下一窗候選**:① **#2 三引擎專窗**(等資料夠 · Elo 先做 · 連付費對照 UI)② 真實用戶後才發光的增量(可分享 verdict 病毒線 / pick-streak / 賽事卡社群熱度 · 同 R51 結論)③ CLAUDE.md routing-map section 仍有歷史 stale(/leaderboard 已刪等 · 低危 · 有空再掃)。
 - ✅ **R189 全窗(2026-06-03 · 1e02127→9126755 共 7 commit · 全三綠 · auto-push)· 品牌淨化到「誠實 Polymarket」**:
   - 清匿名死碼(B3)+ 首頁/天梯讀 DB 戰績條 + 收合兩準度頁(下方原 R189 段)· 然後四輪砍會員系統:
   - **等級改名 OPEN/BLACK/GOLD**(8c9987f→9126755)· 四輪:免費→OPEN 黑卡→BLACK 創始→FOUNDER→**全砍前270編號**→**剝創始/最早支持者故事**→**FOUNDER→GOLD** · 三層純功能 · 地位交給天梯 · ⚠️tier key 仍 `founder`/URL /founders 不動 · ⚠️「TIM·FOUNDER」創辦人簽名保留(別改 GOLD)· 詳見 [[project-zone27-tier-naming]]。
