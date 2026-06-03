@@ -1098,8 +1098,7 @@ function FirstReceiptHero({
             </>
           ) : (
             <>
-              ▌ <span lang="en">269 more will follow as the engine runs through
-              the CPBL season</span> · 不刪 · 不修飾 · 不重新加權 ·{" "}
+              ▌ 收據會隨球季一場一場累積 · 不刪 · 不修飾 · 不重新加權 ·{" "}
               <Link
                 href={`/receipts/${match.id}`}
                 className="text-gold hover:text-gold-soft underline-offset-4 hover:underline transition-colors"

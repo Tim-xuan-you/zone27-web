@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { FOUNDERS_REMAINING } from "@/lib/founders-stats";
 import { readAnonPicks } from "@/lib/anon-picks";
 
 // Sticky Founders 27 CTA Bar(mobile-only)· hidden on /founders + /lab/custom
@@ -67,7 +66,8 @@ export default function StickyFoundersCTA() {
     pathname.startsWith("/member")
   )
     return null;
-  if (FOUNDERS_REMAINING === 0) return null;
+  // R187 後會員不限量 · 不再有「售罄」狀態 · 移除舊的 FOUNDERS_REMAINING === 0
+  // gate(否則該常數一旦歸零 · 全站手機主轉換 bar 會無聲消失)。
   if (isHomepage && !scrolledPastHero) return null;
 
   return (
