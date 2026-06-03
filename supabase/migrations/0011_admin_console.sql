@@ -25,14 +25,31 @@ create or replace function public.is_admin()
 returns boolean language sql security definer set search_path = public stable
 as $$ select exists (select 1 from public.app_admins a where a.user_id = auth.uid()); $$;
 
--- ── claim_admin · 表空 + 登入 → 認領第一個 admin(零 SQL bootstrap · 認領後鎖死)──
+-- ── claim_admin · 只有「founder 本人」+ 表空 → 認領第一個 admin(認領後鎖死)──
+-- 🔒 安全修補(碼審 HIGH):舊版是「表空 + 任何登入者」即可認領 = 上線後任何人
+--    註冊帳號、直接打這支 RPC 就能搶走 admin(→ 加點數 / 改 tier / 撈全會員 email
+--    / 刪文)。 改成綁定 founder email · 且「忘了改 placeholder」會 fail-closed
+--    (誰都不能認領)· 不會因為疏忽而變開放認領。
 create or replace function public.claim_admin()
 returns boolean language plpgsql security definer set search_path = public
 as $$
-declare v_uid uuid;
+declare
+  v_uid   uuid;
+  v_email text;
+  -- ⚠️⚠️ Tim:套用前把下面這行 email 改成「你註冊 ZONE 27 用的那個 email」⚠️⚠️
+  --    沒改 → 維持 placeholder → 下方 fail-closed → 沒有人能認領(安全預設)。
+  v_founder_email text := 'CHANGE-ME-TO-YOUR-EMAIL@example.com';
 begin
   v_uid := auth.uid();
   if v_uid is null then raise exception 'not_logged_in'; end if;
+  -- fail closed:placeholder 沒改成真 email → 誰都不能認領
+  if lower(v_founder_email) = 'change-me-to-your-email@example.com' then
+    raise exception 'founder_email_not_set';
+  end if;
+  select lower(u.email) into v_email from auth.users u where u.id = v_uid;
+  if v_email is distinct from lower(v_founder_email) then
+    raise exception 'not_founder'; -- 只有 founder 本人能認領 · 防任何登入者搶 admin
+  end if;
   if exists (select 1 from public.app_admins) then
     return false; -- 已有 admin · 不能再認領(防搶)
   end if;
@@ -113,17 +130,17 @@ begin
     select x.kind, x.id, x.handle, x.snippet, x.created_at
     from (
       select 'creator_post'::text as kind, p.id,
-             ('球迷 #' || substr(md5(p.user_id::text), 1, 4))::text as handle,
+             ('球迷 #' || substr(md5(p.user_id::text), 1, 8))::text as handle,
              left(p.title, 40) as snippet, p.created_at
       from public.creator_posts p
       union all
       select 'creator_comment'::text, c.id,
-             ('球迷 #' || substr(md5(c.user_id::text), 1, 4))::text,
+             ('球迷 #' || substr(md5(c.user_id::text), 1, 8))::text,
              left(c.body, 40), c.created_at
       from public.creator_comments c
       union all
       select 'game_post'::text, g.id,
-             ('球迷 #' || substr(md5(g.user_id::text), 1, 4))::text,
+             ('球迷 #' || substr(md5(g.user_id::text), 1, 8))::text,
              left(g.body, 40), g.created_at
       from public.game_posts g
     ) x

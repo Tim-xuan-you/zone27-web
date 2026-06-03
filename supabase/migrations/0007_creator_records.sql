@@ -27,7 +27,7 @@ security definer
 set search_path = public
 as $$
   select
-    '球迷 #' || substr(md5(p.user_id::text), 1, 4) as handle,
+    '球迷 #' || substr(md5(p.user_id::text), 1, 8) as handle,
     p.match_id,
     p.pick
   from public.creator_posts p

@@ -60,7 +60,7 @@ begin
   return query
   select
     p.id as post_id,
-    '球迷 #' || substr(md5(p.user_id::text), 1, 4) as handle,
+    '球迷 #' || substr(md5(p.user_id::text), 1, 8) as handle,
     p.title,
     case
       when p.price_ntd = 0 then p.body

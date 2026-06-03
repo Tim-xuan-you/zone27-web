@@ -87,7 +87,10 @@ begin
     raise exception 'invalid_pick';
   end if;
 
-  v_price := greatest(0, coalesce(p_price, 0));
+  -- 🔒 安全(碼審 MEDIUM):server 端夾上限。 前端 max=2000 只是 client cap ·
+  --    直接拿 anon key 打這支可塞 int max(→「🔒 NT$ 2147483647」破 UI / 溢位)。
+  --    夾在 0–10000(高於前端 2000 的寬鬆天花板 · 防荒謬值)。
+  v_price := least(10000, greatest(0, coalesce(p_price, 0)));
 
   if exists (
     select 1 from public.creator_posts
@@ -120,7 +123,7 @@ security definer
 set search_path = public
 as $$
   select
-    '球迷 #' || substr(md5(p.user_id::text), 1, 4) as handle,
+    '球迷 #' || substr(md5(p.user_id::text), 1, 8) as handle,
     p.title,
     p.body,
     p.pick,
