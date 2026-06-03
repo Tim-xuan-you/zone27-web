@@ -8,6 +8,7 @@ import {
   type MatchPhase,
   type Calibration,
 } from "@/lib/matches";
+import { getEngineConviction } from "@/lib/conviction";
 
 // ── ZONE 27 · Mini Match Card ────────────────────────────
 // Round 31 Wave A · Compact static-engine card for the homepage
@@ -64,6 +65,10 @@ export default function MiniMatchCard({ match }: { match: Match }) {
   const homePct = match.home.winRate;
   const awayPct = match.away.winRate;
   const homeFav = homePct >= awayPct;
+  // 引擎信心溫度 · 純衍生(favorite 的 %)· per lib/conviction.ts
+  const favPct = Math.max(homePct, awayPct);
+  const dogPct = Math.min(homePct, awayPct);
+  const conviction = getEngineConviction(favPct);
 
   return (
     <article
@@ -170,15 +175,23 @@ export default function MiniMatchCard({ match }: { match: Match }) {
             }}
           />
         </div>
-        <p className="mt-1.5 text-center font-mono text-mute/65 text-[9px] tracking-[0.12em] leading-snug">
-          引擎看好{" "}
-          <span className="text-gold/80">
-            {homeFav ? match.home.name : match.away.name}
-          </span>{" "}
-          · 一萬次模擬 · 贏{" "}
-          {Math.round(Math.max(homePct, awayPct) * 100).toLocaleString("en-US")}{" "}
-          次
-        </p>
+        {conviction.tier === "tossup" ? (
+          // 銅板局:把「連引擎都難分」當主打 · gold 讓它在看板 grid 裡跳出來
+          //(Polymarket「勢均力敵盤=主角」+ /calibration 57% 誠實護城河 · 不裝鐵口)
+          <p className="mt-1.5 text-center font-mono text-gold/90 text-[9px] tracking-[0.12em] leading-snug">
+            勢均力敵 · 連萬象都只敢說 {favPct} / {dogPct}
+          </p>
+        ) : (
+          <p className="mt-1.5 text-center font-mono text-mute/65 text-[9px] tracking-[0.12em] leading-snug">
+            萬象{conviction.tier === "strong" ? "重壓" : "看好"}{" "}
+            <span className="text-gold/80">
+              {homeFav ? match.home.name : match.away.name}
+            </span>{" "}
+            · 一萬次模擬 · 贏{" "}
+            {Math.round(favPct * 100).toLocaleString("en-US")}{" "}
+            次
+          </p>
+        )}
 
       </div>
 
