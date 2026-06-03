@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
+import LadderPosition from "@/components/LadderPosition";
 import { createPageMetadata } from "@/lib/page-og";
 
 export const metadata = createPageMetadata({
@@ -42,6 +43,9 @@ export default function LadderPage() {
           證明你比機器準。 別的地方只能跟「大家」比 —— 這裡你還能
           <span className="text-bone">跟一台公開的機器正面比準度</span>。
         </p>
+
+        {/* 你現在的位置(押過的人才顯示 · 把死路 brochure 變個人目標梯度)*/}
+        <LadderPosition />
 
         {/* ── 5 階(神諭在最上面)──────────────── */}
         <div className="flex flex-col gap-2">
