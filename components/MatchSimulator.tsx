@@ -102,7 +102,7 @@ export default function MatchSimulator({ match }: Props) {
     setDone(false);
     lastMilestoneRef.current = 0;
     setLiveMsg(
-      `Starting Monte Carlo simulation: ${TOTAL_SIMS.toLocaleString()} games for ${match.home.name} versus ${match.away.name}.`
+      `Starting simulation: ${TOTAL_SIMS.toLocaleString()} games for ${match.home.name} versus ${match.away.name}.`
     );
 
     const homePitcher = match.home.pitcher;
@@ -190,8 +190,8 @@ export default function MatchSimulator({ match }: Props) {
             running
               ? `Running ${stats.completed.toLocaleString()} of ${TOTAL_SIMS.toLocaleString()} simulations`
               : done
-              ? `Re-run ${TOTAL_SIMS.toLocaleString()} Monte Carlo simulations`
-              : `Run ${TOTAL_SIMS.toLocaleString()} Monte Carlo simulations for ${match.home.name} vs ${match.away.name}`
+              ? `Re-run ${TOTAL_SIMS.toLocaleString()} simulations`
+              : `Run ${TOTAL_SIMS.toLocaleString()} simulations for ${match.home.name} vs ${match.away.name}`
           }
           className={`w-full py-6 border text-sm tracking-[0.35em] font-medium transition-colors ${
             running

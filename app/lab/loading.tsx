@@ -14,7 +14,7 @@ export default function LabLoading() {
       <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pt-20 pb-12">
         <div className="text-center">
           <p className="font-mono text-gold text-[10px] tracking-[0.45em] mb-8 shimmer">
-            ▸ INITIALIZING MONTE CARLO ENGINE
+            ▸ INITIALIZING ENGINE
           </p>
           <div className="h-12 sm:h-16 w-3/4 mx-auto bg-slate/40 border border-line/40 rounded-sm animate-pulse mb-4" />
           <div className="h-12 sm:h-16 w-2/3 mx-auto bg-slate/30 border border-line/40 rounded-sm animate-pulse" />

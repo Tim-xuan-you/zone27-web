@@ -257,7 +257,7 @@ export default async function MatchOgImage({
           }}
         >
           <span style={{ display: "flex" }}>
-            MONTE CARLO · 10,000 SIMS
+            萬象引擎 · 10,000 SIMS
           </span>
           <span style={{ display: "flex", color: "rgba(212,175,55,0.65)" }}>
             zone27-web.vercel.app

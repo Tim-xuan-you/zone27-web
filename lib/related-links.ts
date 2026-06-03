@@ -37,7 +37,7 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
     {
       href: "/methodology",
       kicker: "methodology",
-      title: "這些指標怎麼餵進引擎 · 蒙地卡羅 程式碼公開",
+      title: "這些指標怎麼餵進引擎 · 萬象引擎程式碼公開",
     },
   ],
   "/audit": [
@@ -150,7 +150,7 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
     {
       href: "/methodology",
       kicker: "methodology",
-      title: "蒙地卡羅引擎白皮書",
+      title: "萬象引擎白皮書",
     },
   ],
   "/faq": [
@@ -202,7 +202,7 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
     {
       href: "/lab",
       kicker: "lab",
-      title: "親手跑一場 Monte Carlo",
+      title: "親手跑一場萬象模擬",
     },
     {
       href: "/founders",
@@ -336,7 +336,7 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
     {
       href: "/lab",
       kicker: "lab",
-      title: "親手跑一場 Monte Carlo 模擬",
+      title: "親手跑一場萬象引擎模擬",
     },
     {
       href: "/methodology",

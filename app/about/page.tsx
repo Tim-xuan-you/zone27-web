@@ -9,7 +9,7 @@ import ArticleMeta from "@/components/ArticleMeta";
 export const metadata: Metadata = {
   title: "About — 我們不是博彩公司,是相信數字比運氣誠實的棒球迷",
   description:
-    "ZONE 27 的品牌方法論、AI 蒙地卡羅引擎背後的哲學、以及為什麼是 27。",
+    "ZONE 27 的品牌方法論、「萬象」引擎背後的哲學、以及為什麼是 27。",
 };
 
 export default function AboutPage() {
@@ -187,7 +187,7 @@ export default function AboutPage() {
         <p>
           <strong className="text-gold">A.</strong>
           沒有人能準確預測單場比賽。但用 10,000
-          次蒙地卡羅模擬出的機率分布,比直覺、運勢、神祕學有意義 100 倍。
+          次「萬象」模擬出的機率分布,比直覺、運勢、神祕學有意義 100 倍。
         </p>
         <p>
           <strong className="text-gold">B.</strong>
@@ -206,7 +206,7 @@ export default function AboutPage() {
         no="03"
         en="THE METHOD"
         zh="方法論"
-        kicker="蒙地卡羅四步驟"
+        kicker="萬象引擎四步驟"
       >
         <p>
           每一場比賽出現在 ZONE 27,都經歷四個獨立步驟。沒有星座、沒有命盤、沒有靠感覺報牌。
@@ -236,7 +236,7 @@ export default function AboutPage() {
           <li className="flex gap-4">
             <span className="font-mono text-gold/70 tabular shrink-0">C.</span>
             <span>
-              <strong className="text-bone">蒙地卡羅萬次推演。</strong>{" "}
+              <strong className="text-bone">萬象萬次推演。</strong>{" "}
               引擎在<strong className="text-bone">您的瀏覽器內</strong>跑 10,000 場虛擬 9 局比賽
               (~ 1.5 - 2.0 秒收斂),ZONE 27 伺服器零運算 — 詳見{" "}
               <Link href="/audit" className="text-gold hover:underline">

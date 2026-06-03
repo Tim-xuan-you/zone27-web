@@ -19,7 +19,7 @@ import { createPageMetadata } from "@/lib/page-og";
 export const metadata: Metadata = createPageMetadata({
   title: "Methodology · The ZONE 27 Engine Whitepaper",
   description:
-    "完整論文等級的技術白皮書 · 4 sections · 蒙地卡羅 9 局逐打席引擎、壘上推進物理、10,000 次收斂統計、v0.4 路線圖。零行銷語言。",
+    "完整論文等級的技術白皮書 · 4 sections · 「萬象」9 局逐打席引擎、壘上推進物理、10,000 次收斂統計、v0.4 路線圖。零行銷語言。",
   path: "/methodology",
 });
 
@@ -47,7 +47,7 @@ export default function MethodologyPage() {
         <div className="zone27-rule mx-auto max-w-[260px] mt-4" aria-hidden="true" />
         <p className="editorial-dropcap mt-8 max-w-xl mx-auto text-mute leading-relaxed">
           我們不寫公關稿,只寫技術筆記。
-          這是 ZONE 27 蒙地卡羅引擎完整的內部運作說明。
+          這是 ZONE 27「萬象」引擎完整的內部運作說明。
         </p>
         <div className="mt-8 flex justify-center">
           <ArticleMeta readingMin={6} />
@@ -142,7 +142,7 @@ export default function MethodologyPage() {
       {/* ── ABSTRACT ─────────────────────────────── */}
       <Section no="00" label="ABSTRACT" zh="摘要">
         <p>
-          ZONE 27 採用蒙地卡羅(Monte Carlo)模擬法
+          ZONE 27 的「萬象」引擎
           <FootnoteRef n={1} />
           {" "}估算 CPBL 比賽的勝率分布。
           引擎 v0.2 為逐打席對決模型(Real At-Bat),每場虛擬比賽包含
@@ -308,7 +308,7 @@ repeat 10,000 times → aggregate
         {/* Pokemon TCG SET release narrative · 工程術語升 collectible signal。 */}
         <p className="mt-4 text-mute/85 leading-relaxed">
           <strong className="text-bone">v0.2 是 BASE SET</strong> · 七 lens
-          canvas + Pitcher-Only Monte Carlo · ZONE 27 的奠基引擎。{" "}
+          canvas + 投手主導逐打席模型 · ZONE 27 的奠基引擎。{" "}
           <strong className="text-bone">v0.3 是 EXPANSION 1</strong> · 加 Park
           Factor · 把 4 個 CPBL 場館的 dimension delta 寫進 HR sensitivity。{" "}
           <strong className="text-bone">v0.4 是 EXPANSION 2</strong> · Bayesian
@@ -347,7 +347,7 @@ repeat 10,000 times → aggregate
                 engine="v0.2"
                 statusLabel="BASE SET · ✓ LIVE"
                 statusTone="gold"
-                method="Pitcher-Only Monte Carlo · K/9 + BB/9 + HR/9"
+                method="逐打席機率模型 · K/9 + BB/9 + HR/9"
                 tier="FREE"
                 tierTone="bone"
                 record="N=1 (cpbl-260521-01)"
@@ -608,8 +608,7 @@ repeat 10,000 times → aggregate
               </span>
             </div>
             <p className="text-mute text-sm sm:text-base leading-relaxed">
-              <strong className="text-bone">v0.2 BASE</strong> · 逐打席 Monte
-              Carlo · 100% client-side · 您 browser 跑 10K simulations · 同
+              <strong className="text-bone">v0.2 BASE</strong> · 逐打席「萬象」引擎 · 100% client-side · 您 browser 跑 10K simulations · 同
               GitHub source · 詳見{" "}
               <Link
                 href="/methodology/diff"
@@ -764,10 +763,10 @@ repeat 10,000 times → aggregate
               <span className="font-mono text-gold tabular tracking-[0.18em] mr-2">
                 [1]
               </span>
-              <strong className="text-bone">Monte Carlo 模擬法</strong> · 隨機
-              採樣大量 trial 估算 distribution · Metropolis &amp; Ulam 1949
-              (Los Alamos Manhattan Project)首創於物理模擬 · 1990s+ 被
-              進階數據社群採用於勝率 / Run Expectancy 估算。
+              <strong className="text-bone">「萬象」的原理:把整場球在電腦裡打一萬次</strong> ·
+              每個打席依投手指標擲一次機率、累加成完整 9 局、再重複一萬場 ·
+              數哪一隊贏比較多次,就是引擎輸出的勝率。 沒有玄學、沒有黑箱 ·
+              完整程式碼公開在 GitHub(<Mono>lib/simulator.ts</Mono> · MIT 授權)· 任何工程師可複製驗證。
             </p>
             <p className="mt-1 text-mute/65 text-[12px] font-mono">
               ▸{" "}
@@ -777,7 +776,7 @@ repeat 10,000 times → aggregate
                 rel="noopener noreferrer"
                 className="text-gold/80 hover:text-gold underline-offset-4 hover:underline break-all"
               >
-                en.wikipedia.org/wiki/Monte_Carlo_method
+                這個技術的學術原理 · 維基百科
               </a>
               <br />▸{" "}
               <a

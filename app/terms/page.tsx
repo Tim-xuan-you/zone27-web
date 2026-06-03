@@ -202,7 +202,7 @@ export default function TermsPage() {
           ZONE 27 提供的 AI 模擬、勝率分布、比分預測,本質上為:
         </p>
         <ul className="space-y-3">
-          <li>▸ 統計模型輸出(基於蒙地卡羅採樣)</li>
+          <li>▸ 統計模型輸出(基於萬次模擬採樣)</li>
           <li>▸ 機率分布,而非確定性結論</li>
           <li>▸ 娛樂、教育、研究用途</li>
         </ul>

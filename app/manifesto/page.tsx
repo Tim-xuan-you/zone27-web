@@ -98,7 +98,7 @@ export default function ManifestoPage() {
           <section className="pt-12 pb-2 space-y-5 zh-body text-mute text-base leading-relaxed max-w-2xl">
             <P>
               ZONE 27 是台灣硬核棒球迷的暗黑黃金級量化分析品牌。
-              我們做的事不獨特:Monte Carlo 模擬器、勝率分布、賽事資料。
+              我們做的事不獨特:把比賽在電腦裡跑一萬次、算勝率分布、彙整賽事資料。
               <strong className="text-bone">獨特的是我們刻意不做什麼。</strong>
             </P>
             <P>

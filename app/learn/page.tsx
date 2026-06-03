@@ -54,7 +54,7 @@ export default function LearnPage() {
             <span className="text-gold">就可以開始</span>。
           </h1>
           <p className="mt-10 max-w-xl mx-auto text-mute leading-relaxed">
-            ZONE 27 用 Monte Carlo 模擬器拆解棒球比賽勝率。
+            ZONE 27 用「萬象」引擎拆解棒球比賽勝率。
             但如果您從來沒讀過進階棒球數據 · 這頁是專屬給您的 5 分鐘入門。
           </p>
           <p className="mt-4 max-w-xl mx-auto font-mono text-mute/70 text-[10px] tracking-[0.3em]">
@@ -91,7 +91,7 @@ export default function LearnPage() {
             但您可以說「6 點出現的機率是 25%」 — 這個機率是可驗證的、可重現的、不是猜的。
           </p>
           <p>
-            ZONE 27 的 Monte Carlo 引擎做的是後者:**機率分布**,不是鐵口直斷。
+            ZONE 27 的「萬象」引擎做的是後者:**機率分布**,不是鐵口直斷。
           </p>
           <ChapterFooter
             cta="親手試一場 →"

@@ -241,7 +241,7 @@ export default function AuditPage() {
           {/* ── 01 MODEL DESCRIPTION ────────────────── */}
           <ReportSection no="01" label="MODEL DESCRIPTION">
             <P>
-              ZONE 27 Engine 是逐打席對決 Monte Carlo 模型,用於估算棒球比賽
+              ZONE 27 的「萬象」引擎是逐打席對決模型,用於估算棒球比賽
               的勝率分布。每場虛擬比賽模擬 9 局共 ~70 個獨立打席,每個打席依
               投手 <StatTerm term="K/9" /> · <StatTerm term="BB/9" /> ·{" "}
               <StatTerm term="HR/9" /> 推
@@ -412,7 +412,7 @@ export default function AuditPage() {
               <Item label="守備差異 + 場地天氣">
                 BABIP 假設聯盟均值 · 強守備隊伍可降低 ~2-3 pp · 極端天氣未建模
               </Item>
-              <Item label="連續事件假設 (Markov)">
+              <Item label="打席獨立假設">
                 每個打席視為獨立事件 · clutch / momentum / 代打換投決策未建模
               </Item>
             </List>
@@ -503,8 +503,8 @@ export default function AuditPage() {
             <DataTable>
               <DataRow
                 label="OUR MATH"
-                value="rate stats + Monte Carlo"
-                note="per-9 rate stats(20 世紀標準)· Monte Carlo(Metropolis 1953)· 圖書館全公開"
+                value="機率 + 一萬次模擬"
+                note="每打席算機率 · 在電腦裡跑一萬次數誰贏 · 高中數學等級 · 圖書館 + GitHub 全公開"
               />
               <DataRow
                 label="OUR INPUTS"
@@ -514,7 +514,7 @@ export default function AuditPage() {
               <DataRow
                 label="OUR ENGINE"
                 value="GitHub 開源"
-                note="JavaScript Monte Carlo · 任何工程師 30 分鐘可複製"
+                note="JavaScript 寫的 · 任何工程師 30 分鐘可複製"
               />
               <DataRow
                 label="OUR MOAT"

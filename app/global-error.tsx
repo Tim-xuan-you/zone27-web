@@ -228,7 +228,7 @@ export default function GlobalError({
               letterSpacing: "0.3em",
             }}
           >
-            EVEN MONTE CARLO HAS BAD INNINGS.
+            EVEN THE BEST ENGINE HAS BAD INNINGS.
           </p>
         </div>
       </body>

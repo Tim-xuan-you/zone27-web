@@ -12,7 +12,7 @@ import { BRAND, OG_SIZE, OG_CONTENT_TYPE } from "@/lib/brand";
 
 export const size = OG_SIZE;
 export const contentType = OG_CONTENT_TYPE;
-export const alt = "ZONE 27 · Engineering Whitepaper · Real At-Bat Monte Carlo";
+export const alt = "ZONE 27 · Engineering Whitepaper · 逐打席萬象引擎";
 
 export default async function MethodologyOgImage() {
   return new ImageResponse(
@@ -103,7 +103,7 @@ export default async function MethodologyOgImage() {
               display: "flex",
             }}
           >
-            Real At-Bat
+            逐打席
           </span>
           <span
             style={{
@@ -116,7 +116,7 @@ export default async function MethodologyOgImage() {
               display: "flex",
             }}
           >
-            Monte Carlo
+            萬象引擎
           </span>
         </div>
 

@@ -94,7 +94,7 @@ export default function RouteError({
         </div>
 
         <p className="mt-16 font-mono text-mute text-[10px] tracking-[0.3em]">
-          EVEN MONTE CARLO HAS BAD INNINGS.
+          EVEN THE BEST ENGINE HAS BAD INNINGS.
         </p>
       </div>
     </div>

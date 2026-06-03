@@ -113,7 +113,7 @@ export default async function LabOgImage() {
               display: "flex",
             }}
           >
-            MONTE CARLO SIMULATIONS
+            萬象引擎模擬
           </div>
 
           <div
