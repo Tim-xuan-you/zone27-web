@@ -114,6 +114,18 @@ export const cpblParks: ParkFactor[] = [
     tilt: "neutral",
     rationale: "1918 開幕 · 多次 renovation · 中型場 · 嘉義市區 · neutral baseline",
   },
+  {
+    // 2026-06-03 ingest 補:味全龍主場 · cpbl-260531-01 等場次使用 · 1999 開幕
+    venue: "天母棒球場",
+    en: "TIANMU",
+    homeTeam: "味全龍",
+    openedYear: 1999,
+    // 台北市區 · 中型場 · 中外野約 121m · 海平面 · neutral baseline
+    estimatedHomeWinPct: 53,
+    estimatedRunsPerGame: 9.5,
+    tilt: "neutral",
+    rationale: "1999 開幕 · 台北天母市區 · 中外野約 121m · 海平面 · neutral baseline",
+  },
 ];
 
 export function getParkFactorByVenue(venue: string): ParkFactor | null {
