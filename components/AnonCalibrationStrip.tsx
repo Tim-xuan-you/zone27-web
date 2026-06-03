@@ -42,6 +42,20 @@ export default function AnonCalibrationStrip({ variant }: Props) {
       setState({ mounted: true, picks: readAnonPicks() });
     }
     refresh();
+    // 深連捲動:首頁「你的戰績」strip 連到 /calibration#your-record · 但
+    // #your-record 段是 client mount 後才渲染 · 瀏覽器 load 時的 hash scroll
+    // 會早於 client render 抓不到 · 等一拍再捲(picks=0 時段不存在 · no-op)。
+    if (
+      variant === "calibration" &&
+      typeof window !== "undefined" &&
+      window.location.hash === "#your-record"
+    ) {
+      window.setTimeout(() => {
+        document
+          .getElementById("your-record")
+          ?.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 180);
+    }
     // 押完即時亮:pushAnonPick / updatePickOutcome 會 dispatch 這個事件 ·
     // 不訂閱的話「你的戰績」strip 要等重整才出現 = 押完最熱那一刻 endowment
     // 的回饋斷掉(同 CalibrationTierBadge 的訂閱)。 storage event 補跨分頁。
@@ -54,7 +68,7 @@ export default function AnonCalibrationStrip({ variant }: Props) {
       window.removeEventListener("storage", onStorage);
       window.removeEventListener("zone27:anon-picks-changed", refresh);
     };
-  }, []);
+  }, [variant]);
 
   // SSR-safe: render nothing during SSR
   if (!state.mounted) return null;
@@ -75,8 +89,11 @@ export default function AnonCalibrationStrip({ variant }: Props) {
         className="mx-auto max-w-3xl px-6 sm:px-10 pb-10"
         aria-label="你的戰績 · 你 vs 引擎"
       >
+        {/* 深連到 /calibration 的「你的戰績」段(#your-record)· 不再丟到頁頂的
+            引擎自評 · 點「你的戰績」就直接看到自己的紀錄(per 操作動線 agent A#3)。
+            首頁三步玩法的「看準度 · 引擎準不準」仍連 /calibration 頁頂 = 引擎視角。 */}
         <Link
-          href="/calibration"
+          href="/calibration#your-record"
           className="block border border-gold/40 bg-slate/30 p-4 sm:p-5 hover:bg-slate/40 hover:border-gold/60 transition-colors group"
         >
           <div className="flex items-baseline justify-between gap-3 flex-wrap">
@@ -165,6 +182,7 @@ export default function AnonCalibrationStrip({ variant }: Props) {
   // ── 看準度頁完整版 ────────────────────────────────────
   return (
     <section
+      id="your-record"
       className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-16 border-t border-line/40 pt-12"
       aria-label="你的戰績 · 你 vs 引擎"
     >
