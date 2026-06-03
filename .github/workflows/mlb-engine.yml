@@ -1,0 +1,49 @@
+name: MLB Engine · lock + grade
+
+# ZONE 27 · MLB 引擎自動盤 pipeline。
+#   · lock-mlb-predictions.mjs  → 把還沒開打的 MLB 場次的引擎開盤線「賽前鎖定」進
+#                                 lib/mlb-locked.json(commit = 公開的賽前鎖定證據)
+#   · grade-mlb-locked.mjs      → 把打完的場次對「鎖定值」評 proved / diverged
+# 一天跑兩次(美國夜場前鎖、結束後結算)· 純 MLB 官方公開 API · 0 auth / 0 付費。
+# 手動也可在 Actions 頁按 "Run workflow"。
+
+on:
+  schedule:
+    - cron: "0 21 * * *" # 21:00 UTC ≈ 美國夜場前 → 鎖當天 slate
+    - cron: "0 8 * * *" # 08:00 UTC ≈ 美國夜場結束後 → 結算
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+# 同一時間只跑一個,避免兩個 cron 撞在一起推 commit
+concurrency:
+  group: mlb-engine
+  cancel-in-progress: false
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Lock pre-game MLB predictions
+        run: node scripts/lock-mlb-predictions.mjs
+      - name: Grade finished MLB predictions
+        run: node scripts/grade-mlb-locked.mjs
+      - name: Commit if changed
+        run: |
+          git config user.name "zone27-mlb-bot"
+          git config user.email "noreply@anthropic.com"
+          git add lib/mlb-locked.json
+          if git diff --staged --quiet; then
+            echo "no MLB changes this run"
+          else
+            git commit -m "MLB 引擎自動盤:賽前鎖定 + 賽後結算(GitHub Action)
+
+          Co-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>"
+            git pull --rebase --autostash origin "${GITHUB_REF_NAME}" || true
+            git push
+          fi

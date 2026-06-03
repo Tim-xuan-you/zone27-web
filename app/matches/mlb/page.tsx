@@ -3,6 +3,7 @@ import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import { createPageMetadata } from "@/lib/page-og";
 import { fetchTodayMlb, type MlbGame } from "@/lib/mlb";
+import MlbEngineRecord from "@/components/MlbEngineRecord";
 
 export const metadata = createPageMetadata({
   title: "今日 MLB 賽程 — 即時資料來自 MLB 官方 API",
@@ -67,6 +68,9 @@ export default async function MlbMatchesPage() {
         </p>
         <div className="mt-6 w-full h-px bg-line/60" />
       </section>
+
+      {/* ── MLB 引擎自動盤戰績(賽前鎖定 + 賽後對帳 · 累積驗證中)── */}
+      <MlbEngineRecord />
 
       {/* ── EMPTY STATE ─────────────────────── */}
       {games.length === 0 ? (
