@@ -143,6 +143,15 @@ R172 pivot · BLACK CARD 從 TapPay 自動訂閱改成 manual ATM / 跨行轉帳
 
 R174 pivot build queue · Claude 可主動 ship(三綠 + auto-push):
 
+- ✅ **攻頂 round 3(2026-06-03 · 6 commit 全三綠 · 2d6f151→7e4ab23 · 全 pushed main)**· Tim「全權 · 上網查全世界找『缺的靈魂』· 重心理學+操作邏輯+極致美觀+操作直覺 · 別 push 上線/別碰 SEO 社群」· 3 路 agent(操作動線體檢 / 缺的靈魂全球研究 / 視覺工藝+認知負荷)synthesize → 6 波:
+  - **修登入留存 CRITICAL bug(2d6f151)**:訪客本地押注(localStorage)登入後從沒被寫進共享預測表 = 全站講 5+ 次的「登入→存成永久戰績/進群眾市場/爬天梯」是空話 · 押 8 手登入後 /member 仍顯示 0 場。 新 `AnonPickMigrator`(layout 全站掛載 · 帶 session 把**尚未結算**的場 submitPrediction 重放 · 冪等 · 移除本地副本 · refresh)· 誠信護欄只遷移未結算場(防賽後補單污染天梯/準度)。
+  - **缺的靈魂 OpenPositionCard(c4200d5)**:3 agent 一致最尖 —— 所有情緒高潮都在賽後/年度回顧 · 押下去到打完之間的 live 中段一片空白(資料模型有 today-live 卻沒畫)。「你的未結算押注」放 /member 準度數字之上 · 你 vs 引擎 vs 群眾三方張力 · LIVE 呼吸金線 · **絕不造假即時比分**(賽果仍賽後 ingest)。
+  - **craft 減法(e23a890 · net −9)**:首頁戰績降成 proof 行(金色 CTA 變唯一焦點)+「你的戰績」strip 移到看板**之上**(回訪先看到自己)+ /member 升級卡 glow-soft 大卡降成一行(會員介面不推銷 tier)+ 押注卡 .skeleton + 拿掉彈到重複清單的「再選一場」。
+  - **270 漂移(ef2887c)**:戰績頁「269 more」錯數字(已 16 收據 · 一季~300 場)改非數字 + 移除 `FOUNDERS_REMAINING===0` gate(會員已不限量 · 防該常數歸零時全站手機主 CTA 無聲消失)。
+  - **賽事頁市場層次(441ed2f)**:開盤線說明對齊已收摺的 10K 深算(不再承諾並排)+「這題怎麼算贏」eyebrow gold→mute(開盤線當唯一金色焦點)。
+  - **看準度深連(7e4ab23)**:首頁「你的戰績」→ /calibration#your-record(client mount 後補捲 · 實測落點正確)· 直接看自己紀錄不丟到引擎自評頁頂。
+  - 🧭 **Deferred(都 flag Tim · 沒擅自做)**:① **/calibration vs /member/calibration 命名/IA 決策**(兩頁標題太像「準度對照」· 需 Tim 定名 · 不擅改信任頁名)② **賽季報告 / 結算時刻 soul**(Agent B #2#3「最強品牌轉移」· 但需真實用戶 N≥10 · 0 用戶時做看不到效果 · 上線後再做)③ PhaseBadge 三份 inline 複本 DRY + ReliabilityDiagram 兩頁複本已 drift + eyebrow tracking scale 統一(低 · consistency)。
+  - ⚙️ **工具備忘**:本專案 tsc 要跑 `node node_modules/typescript/bin/tsc --noEmit`(`npx tsc` 會抓到 global stub exit 0 = 假綠)· Bash cwd 不持久 · 每個指令前 `cd` 錨定 · 已更新 [[feedback-zone27-tsc-verification-discipline]] memory。
 - ✅ **MLB 引擎自動盤 pipeline(2026-06-03 · ba90e2e)**· Tim「引擎 16 場太慢 · 接 MLB 衝樣本」·
   lib/mlb.ts 早會即時算 MLB 引擎勝率 + grade,缺的是「賽前鎖定」→ 補齊:`scripts/lock-mlb-predictions.mjs`
   (抓 Preview 場算開盤線寫 `lib/mlb-locked.json` + lockedAt)+ `scripts/grade-mlb-locked.mjs`(賽後對鎖定值評)·
