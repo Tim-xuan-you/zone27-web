@@ -142,6 +142,10 @@ R172 pivot · BLACK CARD 從 TapPay 自動訂閱改成 manual ATM / 跨行轉帳
 
 R174 pivot build queue · Claude 可主動 ship(三綠 + auto-push):
 
+- ✅ **R188 後續 · 安全 SQL 套用 + 創作者定價 + 後台扣點(2026-06-03 · 同窗 · 09b837e / 9f91923 / ea6585f)**:
+  - **6 支安全 SQL 全套用 + Tim 認領 admin** —— 門鎖死(詳見上方 ✅🔒 紅框)· 套 0005 時撞 42P13「cannot change return type」(prod 已是 0008 9 欄版)· 已在 0005 加 `drop function if exists get_creator_posts(text)` 解掉。
+  - **賣文定價(9f91923)**:自填數字 input → 勾選預設 **免費/50/100/200/300/500** · 階級上限 **BLACK≤200 / Founders≤500** · 免費會員只免費發 · 心理學「**價格=證明**(靠刪不掉的 ✓ 已驗證準度撐)· 衝動帶 50–150 · 不玩 99 charm pricing」· DB clamp 留 0–10000 當防溢位後盾(真 500 上限在表單擋 · 不用再碰 SQL)。
+  - **後台點數(ea6585f)**:加點卡升級成「**＋加點 / −扣點**」點擊 toggle(非工程師不用記負數 · per 營運動作一律點擊)· 扣點走同支 admin_give_points 負 delta(帳本留痕 · 餘額=加總)。 錢包買文章「扣+解鎖」本就全自動原子(0009 buy_creator_post · advisory lock 防雙扣 · R185 實測)· Tim 唯一手動=入金(儲值)。
 - ✅ **R188 註冊閘門 pivot(2026-06-03 · Tim 看玩運彩討論區 app 後拍板 · 3 commit 全三綠 · d473140/abb4496/f8b6851)**· 三條 = 同一策略「有帳本的玩運彩」(匿名老師贏截圖輸刪文是對手弱點):
   - **升階要贏過引擎(d473140)**:/ladder 升階硬條件 · 每往上爬一階那個月必須贏過引擎 · 累積場數夠了還不算。 品牌調和成 alpha-over-baseline 非 win-rate 虛榮榜(calibration-tiers 紅線明列 win-rate ranking = 品牌自殺)。 目前無 enforcement engine · 規則明文化。
   - **押注閘門(abb4496 · net −247)**:押要先登入免費會員 · 拿掉免登入 localStorage 押注 + AnonVerdict + 錯文案「不用註冊·先押著」· 順手修押注按鈕被群眾線網路抓取卡 skeleton(改 getSession 先定狀態)· StickyFoundersCTA 改登入感知前門(不催已是會員的人)。
