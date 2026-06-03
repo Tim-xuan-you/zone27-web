@@ -143,6 +143,14 @@ R172 pivot · BLACK CARD 從 TapPay 自動訂閱改成 manual ATM / 跨行轉帳
 
 R174 pivot build queue · Claude 可主動 ship(三綠 + auto-push):
 
+- ✅ **MLB 引擎自動盤 pipeline(2026-06-03 · ba90e2e)**· Tim「引擎 16 場太慢 · 接 MLB 衝樣本」·
+  lib/mlb.ts 早會即時算 MLB 引擎勝率 + grade,缺的是「賽前鎖定」→ 補齊:`scripts/lock-mlb-predictions.mjs`
+  (抓 Preview 場算開盤線寫 `lib/mlb-locked.json` + lockedAt)+ `scripts/grade-mlb-locked.mjs`(賽後對鎖定值評)·
+  `.github/workflows/mlb-engine.yml`(每天 2 次自動 lock+grade+commit)· `components/MlbEngineRecord.tsx`
+  掛 /matches/mlb(戰績區 · framing 嚴守 #12 品質閘門:「驗證中 · 夠準才開盤 · 跟 CPBL 分開計 · 落空照掛」)。
+  種子已鎖 18 場(待結算)。 ⚠️ **Tim 待確認**:repo Settings → Actions 是否啟用(預設開)· main 若有
+  branch protection 要放行 bot push。 NPB/KBO 無同級公開 API(暫不做)· MLB 開盤公式同 lib/mlb.ts。
+- ✅ **賽事頁 10K 模擬器收進 disclosure(2026-06-03 · 9e2c59f)**· 消「同頁兩個勝率打架」困惑 · 預設只露開盤線。
 - ✅ **攻頂 round 2 · 全球研究 + 碼審 + 設計審計(2026-06-03 · 6 commit 全三綠 · cd34794→9c248da)**· Tim「全權 · 上網查全世界 · 攻頂 · 讓網站極致完美 · 重操作邏輯 · 怎樣熱銷 · 認真看 bug」· 3 路 agent(全球成功網站研究 / bug+安全碼審 / 設計+轉換審計)synthesize → 6 波 ship,並用 `next start` prod server 真實截圖驗證視覺:
   - **量化品牌(cd34794)**:ConfidenceStars 五星「★★★★★ STRONG SIGNAL」→ 分段強度條(去報馬仔賣明牌的視覺語彙)· /founders「22 條」對齊 · 群眾線空狀態文案修(原誤導「登入才能押」)· WalletPanel 去 🔥 emoji(違反不放 emoji 鐵律)。
   - **安全前端(424c4c4)**:/member + /api/submit 改用 getUser() 驗身分(不用可偽造的 getSession · 違反 codebase 自己的鐵律)。
