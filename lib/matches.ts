@@ -81,6 +81,60 @@ function mergePitcherStats(p: PitcherStats): PitcherStats {
 }
 
 const rawMatches: Match[] = [
+  // ── 2026-06-04 · DAY 12 ingest · #141(富邦 vs 台鋼 @ 澄清湖)· Tim 截圖 cpbl.com.tw ──
+  // 來源:Tim 截圖 cpbl.com.tw 一軍賽程 2026/06/04 星期四 #141 + 先發投手成績表(李東洛 + 黃子鵬)。
+  //   #141 澄清湖 18:35 · 富邦 李東洛(away · 投手表 real · 2026 ERA 1.83 · 44.1 IP · 43 H · 1 HR · 13 BB · 30 K · WHIP 1.26 ·
+  //              breakout 年 · 2024/25 ERA 4.23/4.52 → 2026 大躍進但 44 IP 中樣本、有回歸風險)
+  //              vs 台鋼 黃子鵬(home · 投手表 real · 2026 ERA 2.96 · 54.2 IP · 51 H · 2 HR · 10 BB · 20 K · WHIP 1.12 ·
+  //              低三振 pitch-to-contact + elite 控球 BB/9 1.7 · 54 IP 樣本較紮實)
+  //   隊伍 W-L:富邦 23-20-0(.535)· 台鋼 25-20-1(.556)· 天氣 29-31°C 降雨 60%(不建模 · per /audit S02)
+  //   winRate:接近五五波 —— 李東洛 ERA 明顯優(1.83 vs 2.96)抵掉台鋼 home + 黃子鵬更紮實控球 + 戰績微優 →
+  //   台鋼 52 / 富邦 48 · 比昨日 #140 富邦(47)微升(今日富邦先發更穩 vs 台鋼先發較弱)· aiConfidence 51
+  //   (低 · 誠實:勢均力敵 + 雨機率 60% · 引擎不裝把握)(格式 home : away = 台鋼 : 富邦)
+  {
+    id: "cpbl-260604-01",
+    league: "CPBL",
+    date: "2026 · 06 · 04  ·  星期四",
+    startTime: "18:35",
+    venue: "澄清湖棒球場",
+    home: {
+      name: "台鋼雄鷹",
+      en: "HAWKS",
+      pitcher: {
+        name: "黃子鵬",
+        era: "2.96", // real · 2026 · 54.2 IP
+        k9: "3.3", // real · 20 K / 54.2 IP × 9 · pitch-to-contact
+        whip: "1.12", // real · (51 H + 10 BB) / 54.2 IP
+        bb9: "1.7", // real · 10 BB / 54.2 IP × 9 · elite 控球
+        hr9: "0.33", // real · 2 HR / 54.2 IP × 9
+      },
+      recent: ["L", "W", "L", "W", "W"], // placeholder · 台鋼 25-20-1(含 6/3 勝富邦 13:2)
+      winRate: 52,
+    },
+    away: {
+      name: "富邦悍將",
+      en: "GUARDIANS",
+      pitcher: {
+        name: "李東洛",
+        era: "1.83", // real · 2026 · 44.1 IP · breakout(2024/25 4.23/4.52 → 有回歸風險)
+        k9: "6.1", // real · 30 K / 44.1 IP × 9
+        whip: "1.26", // real · (43 H + 13 BB) / 44.1 IP
+        bb9: "2.6", // real · 13 BB / 44.1 IP × 9
+        hr9: "0.20", // real · 1 HR / 44.1 IP × 9
+      },
+      recent: ["W", "L", "W", "W", "L"], // placeholder · 富邦 23-20-0(含 6/3 敗台鋼 2:13)
+      winRate: 48,
+    },
+    topScores: [
+      // 勢均力敵投手戰 · 台鋼 home 微 favored 但李東洛 ERA 壓制 → 低-中比分、近一兩分(格式 home : away = 台鋼 : 富邦)
+      { score: "3 : 2", probability: 10.0 },
+      { score: "2 : 3", probability: 9.5 },
+      { score: "4 : 3", probability: 9.0 },
+      { score: "3 : 4", probability: 8.5 },
+      { score: "2 : 1", probability: 8.0 },
+    ],
+    aiConfidence: 51,
+  },
   // ── 2026-06-03 · DAY 11 ingest · 3 一軍 games · Tim 截圖 cpbl.com.tw ──
   // 來源:Tim 截圖 cpbl.com.tw 一軍賽程 2026/06/03 星期三 #138 + #139 + #140 + #138 先發投手成績表。
   //
@@ -143,6 +197,15 @@ const rawMatches: Match[] = [
       { score: "3 : 5", probability: 8.0 },
     ],
     aiConfidence: 58,
+    // 賽後結算(2026-06-04 · Tim 截圖 box score):統一(客)2:0 中信 · 統一(away)贏 ·
+    // 引擎賽前偏 away 統一 58% → PROVED ✓(銳力獅 elite WHIP 0.94 壓制兌現)。
+    finalResult: {
+      homeScore: 0,
+      awayScore: 2,
+      winner: "away",
+      ingestedAt: "2026-06-04",
+      innings: 9,
+    },
   },
   {
     id: "cpbl-260603-02",
@@ -192,6 +255,15 @@ const rawMatches: Match[] = [
       { score: "4 : 5", probability: 8.0 },
     ],
     aiConfidence: 54, // 中 · record 差距明確(味全聯盟第一)+ 先發投手表已 real(郭郁政小樣本 / 陳克羿用 2025 基準)
+    // 賽後結算(2026-06-04):味全(客)7:3 樂天 · 味全(away)贏 ·
+    // 引擎賽前偏 away 味全 57% → PROVED ✓(聯盟第一戰績兌現)。
+    finalResult: {
+      homeScore: 3,
+      awayScore: 7,
+      winner: "away",
+      ingestedAt: "2026-06-04",
+      innings: 9,
+    },
   },
   {
     id: "cpbl-260603-03",
@@ -242,6 +314,16 @@ const rawMatches: Match[] = [
       { score: "0 : 1", probability: 7.5 },
     ],
     aiConfidence: 50, // 中低 · 投手對決 real data · 但低比分高變異 = 引擎不裝有把握
+    // 賽後結算(2026-06-04):台鋼(主)13:2 富邦 · 台鋼(home)贏 ·
+    // 引擎賽前偏 home 台鋼 53% → PROVED ✓(方向對)· 但比分爆掉:阿部雄大 0.93 ERA 的
+    // 19 IP 小樣本大幅回歸(被打 13 分)= /calibration「沒有神準引擎 + 小樣本會回歸」活教材。
+    finalResult: {
+      homeScore: 13,
+      awayScore: 2,
+      winner: "home",
+      ingestedAt: "2026-06-04",
+      innings: 9,
+    },
   },
   // ── 2026-06-02 · DAY 10 ingest · #137(統一 vs 中信 @ 大巨蛋)· Tim 截圖 cpbl.com.tw ──
   // ⚠️ 修正(2026-06-03):原本還有一筆 cpbl-260602-01,把「樂天 vs 味全 @ 天母」誤植成
