@@ -50,17 +50,20 @@ export default function Home() {
 
           {/* 引擎戰績 · Pratfall「連輸的也掛」· compact · 永遠不刪 */}
           {tr.total > 0 && (
+            // 量化品牌:hero 只留一個「按鈕」= 下方金色 CTA。 戰績是 proof 不是
+            // 按鈕 · 拿掉 border/bg 框 · 降成一行安靜的 mono · 數字仍金(訊號)·
+            // ✓/✕ 維持品牌收據色(揭露對等 · 不偏袒 PROVED)。
             <Link
               href="/track-record"
-              className="mt-5 inline-flex items-baseline gap-3 sm:gap-4 border border-gold/40 bg-slate/30 hover:border-gold/60 transition-colors px-4 py-2.5 font-mono tabular flex-wrap justify-center"
+              className="mt-5 inline-flex items-baseline gap-2.5 sm:gap-3 font-mono tabular flex-wrap justify-center hover:opacity-80 transition-opacity"
               aria-label={`公開戰績 · ${tr.total} 場已對賬 · 引擎言中 ${tr.proved} · 落空 ${tr.diverged}`}
             >
-              <span className="text-gold/90 text-[10px] tracking-[0.3em]">引擎戰績</span>
+              <span className="text-mute text-[10px] tracking-[0.3em]">引擎戰績</span>
               <span className="text-bone text-sm">
                 <strong className="text-gold">{tr.total}</strong> 場
               </span>
               <span className="text-gold text-sm">✓{tr.proved}</span>
-              <span className="text-loss text-sm">✕{tr.diverged}</span>
+              <span className="text-loss/85 text-sm">✕{tr.diverged}</span>
               <span className="text-mute/60 text-[9px] tracking-[0.2em]">連輸的也掛 →</span>
             </Link>
           )}
@@ -75,6 +78,12 @@ export default function Home() {
             </a>
           </div>
         </section>
+
+        {/* ── 你的戰績 vs 引擎 · 回訪鉤子 · 只在這台裝置押過才出現 ──
+            放在市場看板「之上」· 回訪押過的人一進來先看到自己跟引擎誰準
+            (= 明天回來的理由)· 不再被 hero CTA 跳過。 新訪客 0 picks →
+            自動隱藏 · 看板遞補為第一屏。 per 操作動線 agent。 */}
+        <AnonCalibrationStrip variant="homepage" />
 
         {/* ── THE FLOOR · 市場看板 / 賽後收據(休賽日 fallback)──── */}
         <section id="floor" className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-14 scroll-mt-20">
@@ -116,11 +125,6 @@ export default function Home() {
             <EmptyFloor />
           )}
         </section>
-
-        {/* ── 你的戰績 vs 引擎 · 回訪鉤子 · 只在這台裝置押過才出現 ──
-            新訪客 0 picks → 自動隱藏(不佔空間)· 回訪押過的人 → 看到
-            自己跟引擎誰準 = 明天回來的理由。 per 轉換動線 agent #1。 */}
-        <AnonCalibrationStrip variant="homepage" />
 
         {/* ── 三步玩法 · 圖示卡(child-level · 圖取代字)──── */}
         <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-14 border-t border-line/40 pt-12">

@@ -159,7 +159,7 @@ export default function CardBetStrip({
 
       {/* 一鍵押 */}
       {status === "loading" && (
-        <div className="h-10 bg-line/20 animate-pulse rounded" aria-hidden="true" />
+        <div className="h-10 skeleton rounded" aria-hidden="true" />
       )}
       {(status === "open" || status === "anon-open") && (
         <div className="grid grid-cols-2 gap-2">
@@ -209,16 +209,9 @@ export default function CardBetStrip({
               登入 → 存成永久戰績、進群眾市場 ▸
             </Link>
           )}
-          {/* 會員押完接下一手 · 不斷頭(同賽事頁 picker 的「押下一場」迴路)·
-              訪客不加這條:他的下一步是「登入升級」+ 下方即時亮的你的戰績。 */}
-          {status === "locked" && (
-            <Link
-              href="/matches"
-              className="inline-block mt-1 font-mono text-gold/70 hover:text-gold text-[9px] tracking-[0.18em] underline-offset-4 hover:underline transition-colors"
-            >
-              再選一場 →
-            </Link>
-          )}
+          {/* 移除「再選一場 → /matches」· 卡片永遠在 grid 裡(首頁 / 賽事頁)·
+              下一場就在旁邊 · 這條 link 只會把你彈到一頁幾乎一樣的清單(per
+              操作動線 agent)。 押完就停在「✓ 已押 X」這個乾淨的峰終點。 */}
         </div>
       )}
     </div>

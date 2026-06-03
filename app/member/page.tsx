@@ -235,25 +235,19 @@ export default async function MemberPage() {
           )}
         </section>
 
-        {/* ★ 升級入口 · 免費會員專屬 · 賺錢的路要看得見(Apple:付費路徑永遠不藏)*/}
+        {/* 升級入口 · 賺錢的路要看得見(Apple:付費路徑永遠不藏)· 但這是會員
+            自己的介面 · 不對他推銷 tier · 從 glow-soft 金色大卡降成一行安靜入口 ·
+            價格/方案在 /membership 不在這裡轟炸 · 讓上面的「你的準度」當唯一金色主角。 */}
         {!isPaid(tier) && (
           <Link
             href="/membership"
-            className="mt-6 block border border-gold/50 bg-gold/5 glow-soft p-5 sm:p-6 hover:bg-gold/10 hover:border-gold transition-colors group"
+            className="mt-6 flex items-baseline justify-between gap-3 border-b border-line/40 pb-3 hover:border-gold/40 transition-colors group"
           >
-            <p className="font-mono text-gold text-[10px] tracking-[0.4em] mb-2">
-              升級 · 開始賣分析賺錢
-            </p>
-            <p className="text-bone text-lg sm:text-xl font-light leading-snug mb-3">
-              解鎖<span className="text-gold">標價賣你的分析</span> · 賣出你拿 90–95%。
-            </p>
-            <p className="font-mono text-mute text-[12px] tracking-[0.12em] leading-relaxed mb-4">
-              BLACK CARD <span className="text-bone tabular">NT$ 500 / 31 天</span> · 你拿 90%
-              <br />
-              創始會員 <span className="text-bone tabular">NT$ 2,700 / 365 天</span> · 你拿 95%（全站最低抽成）
-            </p>
-            <span className="inline-flex items-center gap-2 font-mono text-navy bg-gold px-5 py-2.5 text-xs tracking-[0.25em] group-hover:bg-gold-soft transition-colors">
-              看方案並升級 →
+            <span className="text-mute text-sm leading-snug">
+              想<span className="text-bone">標價賣自己的分析</span>賺錢?賣出你拿 90–95%
+            </span>
+            <span className="shrink-0 font-mono text-gold/70 group-hover:text-gold text-[10px] tracking-[0.3em] transition-colors">
+              看方案 →
             </span>
           </Link>
         )}
