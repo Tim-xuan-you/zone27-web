@@ -39,6 +39,13 @@ import {
 
 const T_MAX = 80;
 const B_MAX = 2000;
+// 賣文價位 · 勾選不自填 · 圓整誠實(不玩 99/168 賭場 charm pricing = 品牌宣言)。
+// 上限綁會員階級:BLACK CARD ≤ 200(衝動帶)· Founders 27 ≤ 500(頂級分析師
+// premium · 年費會員的實質好處)。 免費會員只能免費發(建戰績 · 還不能賣)。
+const PRICE_OPTIONS = [0, 50, 100, 200, 300, 500] as const;
+function tierPriceMax(tier: MemberTier): number {
+  return tier === "founder" ? 500 : 200; // black → 200 · founder → 500
+}
 
 type Status = "loading" | "anonymous" | "open" | "posted";
 
@@ -117,8 +124,10 @@ export default function CreatorAnalysis({
     if (!t || !b || !pick) return;
     setSaving(true);
     setError(null);
-    // 付費會員才可標價(price>0)· 免費會員一律免費發(price 0)
-    const sellPrice = isPaidTier(tier) ? Math.max(0, Math.round(price)) : 0;
+    // 付費會員才可標價(price>0)· 免費會員一律免費發(price 0)· 夾在該階級上限內
+    const sellPrice = isPaidTier(tier)
+      ? Math.min(tierPriceMax(tier), Math.max(0, Math.round(price)))
+      : 0;
     const res = await submitCreatorPost(matchId, t, b, pick, sellPrice);
     if (res.ok) {
       setStatus("posted");
@@ -244,19 +253,26 @@ export default function CreatorAnalysis({
                 買了才解鎖(migration 0008 · server 端 gate body)= 賣得出去的前提。 */}
             {isPaidTier(tier) ? (
               <div className="border-t border-line/40 pt-3 space-y-2">
-                <div className="flex items-center gap-2 flex-wrap">
-                  <label className="font-mono text-mute/70 text-[10px] tracking-[0.2em]">
-                    標價賣(NT$ · 0 = 免費):
-                  </label>
-                  <input
-                    type="number"
-                    min={0}
-                    max={2000}
-                    value={price || ""}
-                    onChange={(e) => setPrice(Number(e.target.value) || 0)}
-                    placeholder="0"
-                    className="w-24 bg-ink/60 border border-line/70 text-bone px-2 py-1.5 outline-none focus:border-gold/60 font-mono text-sm tabular transition-colors"
-                  />
+                <label className="block font-mono text-mute/70 text-[10px] tracking-[0.2em]">
+                  標價賣(NT$ · 0 = 免費):
+                </label>
+                {/* 預設價位 · 勾選不自填 · 圓整誠實(不玩 99 把戲)· 上限綁階級 */}
+                <div className="flex items-center gap-1.5 flex-wrap">
+                  {PRICE_OPTIONS.filter((p) => p <= tierPriceMax(tier)).map((p) => (
+                    <button
+                      key={p}
+                      type="button"
+                      onClick={() => setPrice(p)}
+                      aria-pressed={price === p}
+                      className={`px-2.5 py-1.5 font-mono text-[11px] tracking-[0.15em] border transition-colors tabular ${
+                        price === p
+                          ? "border-gold bg-gold/10 text-gold"
+                          : "border-line/60 text-mute hover:border-gold/40"
+                      }`}
+                    >
+                      {p === 0 ? "免費" : p}
+                    </button>
+                  ))}
                 </div>
                 {price > 0 ? (
                   <p className="font-mono text-mute/70 text-[10px] tracking-[0.12em] leading-relaxed">
@@ -269,10 +285,18 @@ export default function CreatorAnalysis({
                   </p>
                 ) : (
                   <p className="font-mono text-mute/60 text-[10px] tracking-[0.12em] leading-relaxed">
-                    ▸ 0 = 免費發 · 填金額即變付費分析(你是 {tierLabel(tier)} · 抽成{" "}
+                    ▸ 免費發 · 點上面的數字即變付費分析(你是 {tierLabel(tier)} · 抽成{" "}
                     {creatorFeePct(tier)}%)。
                   </p>
                 )}
+                {/* 心理學 · 價格 = 證明(玩運彩給不了)· 不玩 99 把戲 = 品牌宣言 */}
+                <p className="font-mono text-mute/45 text-[9px] tracking-[0.1em] leading-relaxed">
+                  ▸ 我們不玩「99 元」那種心理把戲 · 價格乾淨。 賣越貴 · 越要你名字旁的{" "}
+                  <span className="text-gold/70">✓ 已驗證準度</span> 撐得起(買家看的是真戰績 · 不是話術)。
+                  新手先 0–50 建口碑 · 準度上來再升價。
+                  {tier !== "founder" &&
+                    "（BLACK CARD 上限 NT$ 200;Founders 27 可賣到 NT$ 500）"}
+                </p>
               </div>
             ) : (
               <p className="border-t border-line/40 pt-3 font-mono text-mute/60 text-[10px] tracking-[0.12em] leading-relaxed">
