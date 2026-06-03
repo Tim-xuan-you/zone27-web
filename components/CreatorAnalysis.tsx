@@ -418,7 +418,7 @@ function PostCard({
       {p.isPaid && !p.purchased ? (
         <div className="mt-2 border border-gold/30 bg-gold/5 px-3 py-3">
           <p className="font-mono text-gold/90 text-[11px] tracking-[0.2em] mb-1">
-            🔒 完整分析 · NT$ {p.priceNtd}
+            完整分析 · 鎖定 · NT$ {p.priceNtd}
           </p>
           <p className="font-mono text-mute/70 text-[10px] tracking-[0.12em] leading-relaxed mb-3">
             標題 + 推薦哪一邊免費看 · 完整內文買了才解鎖。 賽後一樣自動掛準度(賣家賴不掉)。
@@ -548,7 +548,7 @@ function CommentThread({
         aria-expanded={open}
         className="font-mono text-gold/70 hover:text-gold text-[10px] tracking-[0.2em] transition-colors"
       >
-        💬 {loaded ? `${comments.length} 則討論` : "留言・回覆作者"} {open ? "▾" : "▸"}
+        {loaded ? `${comments.length} 則討論` : "留言 · 回覆作者"} {open ? "▾" : "▸"}
       </button>
 
       {open && (

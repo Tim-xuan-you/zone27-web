@@ -73,6 +73,11 @@ export default function TeamPickPanel({
     setMyTeam(id);
     setPickerOpen(false);
     onChange?.(id);
+    // 同分頁的兄弟元件(MyTeamNextGame / MyTeamTrackRecord)靠這個自訂事件即時刷新 ——
+    // storage 事件只在「其他分頁」觸發、不在寫入的同一分頁,故手動廣播一次。
+    if (typeof window !== "undefined") {
+      window.dispatchEvent(new Event("z27-team-change"));
+    }
   };
 
   if (variant === "section") {

@@ -34,6 +34,7 @@ export default function CardBetStrip({ matchId, homeName, awayName }: Props) {
   const [myPick, setMyPick] = useState<"home" | "away" | null>(null);
   const [tally, setTally] = useState<MarketTally | null>(null);
   const [saving, setSaving] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     let cancelled = false;
@@ -67,6 +68,7 @@ export default function CardBetStrip({ matchId, homeName, awayName }: Props) {
   // 會員押注 · Supabase(server 端 getUser 再驗一次身分)
   const enterMember = async (pick: "home" | "away") => {
     setSaving(true);
+    setError(null);
     const res = await submitPrediction(matchId, pick);
     if (res.ok) {
       setMyPick(res.pick);
@@ -79,6 +81,10 @@ export default function CardBetStrip({ matchId, homeName, awayName }: Props) {
       setStatus(mine ? "locked" : "open");
     } else if (res.reason === "not_logged_in") {
       setStatus("logged-out");
+    } else {
+      // RPC error / invalid · 不靜默吞掉 —— 誠實報錯讓用戶重試(同 UserPredictionPicker)·
+      // 防「按了沒反應、卻以為押到了」的假成功陷阱(42702 家族)。
+      setError("押注沒送出 · 請再試一次");
     }
     setSaving(false);
   };
@@ -160,6 +166,16 @@ export default function CardBetStrip({ matchId, homeName, awayName }: Props) {
             押 {awayName.slice(0, 4)}
           </button>
         </div>
+      )}
+
+      {/* 押注失敗 · 誠實報錯(不靜默)· role=alert 讓螢幕閱讀器也讀到 */}
+      {status === "open" && error && (
+        <p
+          role="alert"
+          className="mt-2 text-center font-mono text-loss/90 text-[9px] tracking-[0.15em]"
+        >
+          {error}
+        </p>
       )}
 
       {/* 已押 · 鎖定(乾淨峰終點)*/}

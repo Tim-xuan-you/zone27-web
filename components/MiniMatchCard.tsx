@@ -183,13 +183,10 @@ export default function MiniMatchCard({ match }: { match: Match }) {
           </p>
         ) : (
           <p className="mt-1.5 text-center font-mono text-mute/65 text-[9px] tracking-[0.12em] leading-snug">
-            萬象{conviction.tier === "strong" ? "重壓" : "看好"}{" "}
+            萬象開盤{conviction.tier === "strong" ? "重壓" : "看好"}{" "}
             <span className="text-gold/80">
               {homeFav ? match.home.name : match.away.name}
-            </span>{" "}
-            · 一萬次模擬 · 贏{" "}
-            {Math.round(favPct * 100).toLocaleString("en-US")}{" "}
-            次
+            </span>
           </p>
         )}
 

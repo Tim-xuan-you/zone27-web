@@ -35,10 +35,15 @@ export default function MyTeamTrackRecord({ matches }: Props) {
   const [, refresh] = useState(0);
 
   useEffect(() => {
-    // Listen for storage events (other tabs / cross-component team changes)
-    const onStorage = () => refresh((x) => x + 1);
-    window.addEventListener("storage", onStorage);
-    return () => window.removeEventListener("storage", onStorage);
+    // storage(其他分頁)+ z27-team-change(同分頁 TeamPickPanel 改隊廣播)都刷新。
+    // 同分頁不會收到 storage 事件,故選隊後靠自訂事件即時亮出本記錄。
+    const bump = () => refresh((x) => x + 1);
+    window.addEventListener("storage", bump);
+    window.addEventListener("z27-team-change", bump);
+    return () => {
+      window.removeEventListener("storage", bump);
+      window.removeEventListener("z27-team-change", bump);
+    };
   }, []);
 
   if (!mounted) return null;

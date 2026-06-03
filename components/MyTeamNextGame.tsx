@@ -38,10 +38,15 @@ export default function MyTeamNextGame({ matches }: Props) {
   const [, refresh] = useState(0);
 
   useEffect(() => {
-    // 跨分頁 / 跨元件改隊時即時刷新(同 MyTeamTrackRecord)
-    const onStorage = () => refresh((x) => x + 1);
-    window.addEventListener("storage", onStorage);
-    return () => window.removeEventListener("storage", onStorage);
+    // 跨分頁(storage)+ 同分頁改隊(TeamPickPanel 廣播 z27-team-change)都即時刷新。
+    // storage 事件不在寫入的同一分頁觸發,所以同分頁選隊要靠自訂事件,否則本卡不會出現。
+    const bump = () => refresh((x) => x + 1);
+    window.addEventListener("storage", bump);
+    window.addEventListener("z27-team-change", bump);
+    return () => {
+      window.removeEventListener("storage", bump);
+      window.removeEventListener("z27-team-change", bump);
+    };
   }, []);
 
   if (!mounted) return null;

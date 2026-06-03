@@ -149,56 +149,16 @@ export default function CalibrationPublicPage() {
 
         <div className="mx-auto w-32 gold-line mb-12" />
 
-        {/* ── 引擎說的 vs 實際發生 ──────────────────── */}
+        {/* ── 為什麼沒有「神準」這種引擎(57% 天花板)· LEAD ──────────
+            設計審計(2026-06-04 · 3-agent):別讓 N<30 的空校準圖當第一印象
+            (資料不足時它是 liability)· 改用「0 資料就成立」的 57% 論證打頭陣 ·
+            校準圖退到下方當「我們兌現它的方式」。 engine-strategy memory #4:57%
+            = 對手謊言的數學證據。 研究核對(不 render 給訪客):全世界最準的 MLB
+            賽前模型 + Vegas 盤口單場命中率 ≈ 57-58%(Vegas 6 年 58.2%)· 理論上限
+            ~60%。 學術文獻(Elfrink/Valero/Jia 等)57-59.5% · 少數 ML 宣稱 64% 多是
+            in-sample 過擬合不可複製。 護城河 = 敢承認 57% + 逐場對帳 · plain words
+            per [[feedback-zone27-pratfall-brand-ip]](不 render Brier/Tetlock/論文)。 */}
         <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-16">
-          <p className="font-mono text-gold text-[10px] tracking-[0.45em] mb-3">
-            / 引擎說的 vs 實際發生
-          </p>
-          <p className="text-mute text-sm leading-relaxed mb-6 max-w-2xl">
-            橫軸是引擎賽前看好的成數,直軸是實際真的中的成數。 點越靠近那條金色
-            斜線,代表引擎「說幾成、就真的中幾成」· 越準。
-          </p>
-          <ReliabilityDiagram bins={bins} n={n} />
-          {n === 0 ? (
-            <div className="mt-6 border border-dashed border-gold/30 bg-slate/30 p-6 sm:p-8 text-center">
-              <p className="font-mono text-gold text-[10px] tracking-[0.4em] mb-3">
-                還沒有資料 · 等第一場結算
-              </p>
-              <p className="text-mute text-sm sm:text-base leading-relaxed max-w-md mx-auto">
-                引擎還沒結算任何一場。 第一個落點 · 統一 vs 富邦
-                (2026-05-21 新莊)。
-              </p>
-            </div>
-          ) : n < 30 ? (
-            <div className="mt-6 border border-loss/30 bg-loss/5 p-5 sm:p-6">
-              <p className="font-mono text-loss text-[10px] tracking-[0.35em] mb-2">
-                ⚠ 資料還太少 · 目前 {n} 場 / 滿 30 場才算數
-              </p>
-              <p className="text-mute text-sm leading-relaxed">
-                場數不到 30 之前,這張圖還看不出名堂 · 任何偏移都可能只是運氣、
-                不是引擎的問題。 完整算法見{" "}
-                <Link
-                  href="/methodology"
-                  className="text-gold underline-offset-4 hover:underline"
-                >
-                  方法說明
-                </Link>
-                。
-              </p>
-            </div>
-          ) : null}
-        </section>
-
-        {/* ── 為什麼沒有「神準」這種引擎(57% 天花板)──────────────
-            engine-strategy memory #4:57% = 對手謊言的數學證據。
-            研究核對(2026-06 · 不 render 給訪客):全世界最準的 MLB 賽前
-            模型 + Vegas 盤口單場命中率 ≈ 57-58%(Vegas 6 年 58.2%)· 理論
-            上限 ~60%。 學術文獻(Elfrink/Valero/Jia 等)57-59.5% · 少數
-            ML 宣稱 64% 多是 in-sample 過擬合、不可複製。 → 沒有神準引擎 ·
-            護城河 = 敢承認 57% + 逐場對帳,不是準度本身。 升級走「更好輸入」
-            非換引擎(= 三引擎策略地基)。 plain words only per
-            [[feedback-zone27-pratfall-brand-ip]](不 render Brier/Tetlock/論文引用)。 */}
-        <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-16 border-t border-line/40 pt-12">
           <p className="font-mono text-gold text-[10px] tracking-[0.45em] mb-6">
             / 為什麼沒有「神準」這種引擎
           </p>
@@ -239,6 +199,47 @@ export default function CalibrationPublicPage() {
               引擎這東西全世界都差不多 · 差別在誰餵的料更乾淨、誰更敢認帳。
             </p>
           </div>
+        </section>
+
+        {/* ── 引擎說的 vs 實際發生 · 我們逐場兌現 57% 的方式 ──────── */}
+        <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-16 border-t border-line/40 pt-12">
+          <p className="font-mono text-gold text-[10px] tracking-[0.45em] mb-3">
+            / 引擎說的 vs 實際發生
+          </p>
+          <p className="text-mute text-sm leading-relaxed mb-6 max-w-2xl">
+            上面那道 5 成 7 的天花板 · 這張圖就是我們逐場兌現它的地方 ——
+            橫軸是引擎賽前看好的成數,直軸是實際真的中的成數。 點越靠近金色斜線 ·
+            代表引擎「說幾成、就真的中幾成」。 滿 30 場才開始算數。
+          </p>
+          <ReliabilityDiagram bins={bins} n={n} />
+          {n === 0 ? (
+            <div className="mt-6 border border-dashed border-gold/30 bg-slate/30 p-6 sm:p-8 text-center">
+              <p className="font-mono text-gold text-[10px] tracking-[0.4em] mb-3">
+                還沒有資料 · 等第一場結算
+              </p>
+              <p className="text-mute text-sm sm:text-base leading-relaxed max-w-md mx-auto">
+                引擎還沒結算任何一場。 第一個落點 · 統一 vs 富邦
+                (2026-05-21 新莊)。
+              </p>
+            </div>
+          ) : n < 30 ? (
+            <div className="mt-6 border border-loss/30 bg-loss/5 p-5 sm:p-6">
+              <p className="font-mono text-loss text-[10px] tracking-[0.35em] mb-2">
+                ⚠ 資料還太少 · 目前 {n} 場 / 滿 30 場才算數
+              </p>
+              <p className="text-mute text-sm leading-relaxed">
+                場數不到 30 之前,這張圖還看不出名堂 · 任何偏移都可能只是運氣、
+                不是引擎的問題。 完整算法見{" "}
+                <Link
+                  href="/methodology"
+                  className="text-gold underline-offset-4 hover:underline"
+                >
+                  方法說明
+                </Link>
+                。
+              </p>
+            </div>
+          ) : null}
         </section>
 
         {/* ── 為什麼明牌站不敢做這頁 ── */}
