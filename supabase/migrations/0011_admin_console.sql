@@ -36,9 +36,11 @@ as $$
 declare
   v_uid   uuid;
   v_email text;
-  -- ⚠️⚠️ Tim:套用前把下面這行 email 改成「你註冊 ZONE 27 用的那個 email」⚠️⚠️
-  --    沒改 → 維持 placeholder → 下方 fail-closed → 沒有人能認領(安全預設)。
-  v_founder_email text := 'CHANGE-ME-TO-YOUR-EMAIL@example.com';
+  -- founder email gate · Tim 2026-06-03 已提供。 只有用「這個 email 註冊」的帳號能認領 admin。
+  --   · 此 email 公開在 repo 不是漏洞:認領靠的是該帳號的「密碼」(Supabase auth)· email 只
+  --     是身分匹配。 想換 email → 改這行再重套此檔即可。
+  --   · 下方 fail-closed 仍在:萬一這行被改回 placeholder,誰都不能認領。
+  v_founder_email text := 'tatayngiti@gmail.com';
 begin
   v_uid := auth.uid();
   if v_uid is null then raise exception 'not_logged_in'; end if;
