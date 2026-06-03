@@ -96,7 +96,7 @@ export default function TermsPage() {
           </li>
           <li>
             <strong className="text-bone">不保證取得 #號碼。</strong>
-            最終 創始會員將以「正式付款完成」順序鎖定。
+            最終 FOUNDER 會員將以「正式付款完成」順序鎖定。
             waitlist 給予優先通知權,不保證最終取得位置。
           </li>
           <li>
@@ -108,7 +108,7 @@ export default function TermsPage() {
           </li>
           <li>
             <strong className="text-bone">通道歸因標籤。</strong>
-            若您透過某創始會員的分享連結進入(<Code>?ref=reserve-NNN</Code>),
+            若您透過某FOUNDER 會員的分享連結進入(<Code>?ref=reserve-NNN</Code>),
             該標籤會存進您的 waitlist row(<Code>source</Code> 欄位)。
             這是<strong className="text-bone">通道層的彙總</strong>,不是個人追蹤 —
             完整解釋見{" "}

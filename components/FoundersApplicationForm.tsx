@@ -496,7 +496,7 @@ export default function FoundersApplicationForm() {
       )}
 
       <h3 className="text-2xl sm:text-3xl text-bone font-light tracking-tight mb-2">
-        成為 FOUNDER 創始會員
+        成為 FOUNDER FOUNDER 會員
       </h3>
       <p className="text-mute text-sm mb-8 leading-relaxed">
         留下你的資料 ·{" "}

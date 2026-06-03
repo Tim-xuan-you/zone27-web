@@ -190,7 +190,7 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
       // conversion-warmth link.
       href: "/founders",
       kicker: "founders",
-      title: "讀完了 · 成為最早一批創始會員之一",
+      title: "讀完了 · 成為FOUNDER 會員之一",
     },
   ],
   "/matches/[gameId]": [
@@ -384,7 +384,7 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
     {
       href: "/founders",
       kicker: "founders",
-      title: "FOUNDER 詳情頁 · 最早一批創始會員 · 年度",
+      title: "FOUNDER 詳情頁 · FOUNDER 會員 · 年度",
     },
     {
       href: "/track-record",
@@ -481,7 +481,7 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
     {
       href: "/founders",
       kicker: "founders",
-      title: "FOUNDER 銷售頁 · 最早一批創始會員 · 年度",
+      title: "FOUNDER 銷售頁 · FOUNDER 會員 · 年度",
     },
     {
       href: "/audit",

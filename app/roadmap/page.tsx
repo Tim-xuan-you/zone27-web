@@ -79,7 +79,7 @@ const LOCKED: { quarter: string; items: RoadmapItem[] }[] = [
     items: [
       {
         title: "FOUNDER 正式預售開啟",
-        body: "NT$ 2,700/年 · 會員不限量 · 最早一批創始會員 · 手工銀行轉帳 · Tim 親手 onboarding 每一位。BLACK 一年約 12 期 × NT$ 500 = NT$ 6,000 · FOUNDER NT$ 2,700/年(含 BLACK)省 55%。流程細節已寫進 docs/MANUAL-ONBOARDING.md。",
+        body: "NT$ 2,700/年 · 會員不限量 · FOUNDER 會員 · 手工銀行轉帳 · Tim 親手 onboarding 每一位。BLACK 一年約 12 期 × NT$ 500 = NT$ 6,000 · FOUNDER NT$ 2,700/年(含 BLACK)省 55%。流程細節已寫進 docs/MANUAL-ONBOARDING.md。",
         evidenceHref: "/founders",
         evidenceLabel: "/founders 完整邏輯",
       },

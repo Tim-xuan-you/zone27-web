@@ -274,7 +274,7 @@ export default function AboutPage() {
         <ul className="space-y-3">
           <li>
             <strong className="text-bone">極低抽成。</strong>
-            黑金會員 creator 抽成,平台只抽 10%(創始 27 只 5%)。對比收費明牌群組 / 收費老師業界 30-50% 是降維打擊。
+            黑金會員 creator 抽成,平台只抽 10%(FOUNDER 只 5%)。對比收費明牌群組 / 收費老師業界 30-50% 是降維打擊。
           </li>
           <li>
             <strong className="text-bone">不可篡改紀錄。</strong>
@@ -346,11 +346,11 @@ export default function AboutPage() {
         </p>
         <p>
           <strong className="text-gold">第三層:</strong>{" "}
-          我們相信 創始會員能用同樣的精準、同樣的紀律,定義這個品牌的開局。
+          我們相信 FOUNDER 會員能用同樣的精準、同樣的紀律,定義這個品牌的開局。
         </p>
         <p className="text-bone">
           所以,黑金會員年費是 NT$ 3,588。
-          但這 創始會員,只需要付一次 NT$ 2,700 ——
+          但這 FOUNDER 會員,只需要付一次 NT$ 2,700 ——
           一輩子。
         </p>
       </Chapter>
@@ -497,7 +497,7 @@ export default function AboutPage() {
       {/* ── FINAL CTA ────────────────────────────── */}
       <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 py-20 text-center border-t border-line/40">
         <p className="font-mono text-gold text-[10px] tracking-[0.4em] mb-6">
-          最早的一批,正在進場。
+          賣分析 · 你拿最多。
         </p>
         <h3 className="text-3xl sm:text-4xl text-bone font-light tracking-tight">
           您準備好成為{" "}

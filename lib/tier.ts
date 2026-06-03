@@ -37,7 +37,7 @@ export function creatorTakePct(tier: MemberTier): number {
 // 單一真相 · 所有顯示等級名的 surface 從這裡取 · 改名只動這一處(防 drift)。
 // 心理學:地位 = 身份不是價格。「免費」是價格標籤(把最大群用戶貼成「沒付錢」)
 // → 換成「OPEN」身份。 王牌留單一粗體字 · 留白即自信(Amex 黑卡不打廣告 ·
-// 真正的優越感安靜到別人偷不走)。「最早一批創始會員」稀缺機制不動(那是 perk
+// 真正的優越感安靜到別人偷不走)。「FOUNDER 會員」稀缺機制不動(那是 perk
 // 不是等級名)。
 export const TIER_NAME: Record<MemberTier, string> = {
   free: "OPEN",

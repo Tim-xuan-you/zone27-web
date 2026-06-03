@@ -582,7 +582,7 @@ export const COMMAND_ITEMS: CommandItem[] = [
 
   // ── 轉換 ───────────────────────────────────────────
   {
-    label: "FOUNDER · 年度創始會員 · 最早一批創始會員",
+    label: "FOUNDER · 年度FOUNDER 會員 · FOUNDER 會員",
     kicker: "/founders",
     path: "/founders",
     group: "轉換",
@@ -590,7 +590,7 @@ export const COMMAND_ITEMS: CommandItem[] = [
       "founder",
       "founders",
       "創始",
-      "創始會員",
+      "FOUNDER 會員",
       "27",
       "annual",
       "年度",
@@ -608,7 +608,7 @@ export const COMMAND_ITEMS: CommandItem[] = [
     ],
   },
   {
-    label: "申請 FOUNDER · 創始會員 · Tim 親手審核",
+    label: "申請 FOUNDER · FOUNDER 會員 · Tim 親手審核",
     kicker: "/founders/apply",
     path: "/founders/apply",
     group: "轉換",

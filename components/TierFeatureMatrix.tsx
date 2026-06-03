@@ -214,7 +214,7 @@ const TIER_META: Record<
     label: "FOUNDER",
     en: "FOUNDER",
     price: "NT$ 2,700",
-    priceUnit: "/ 年 · 最早一批創始會員",
+    priceUnit: "/ 年 · FOUNDER 會員",
     href: "/founders",
     accent: "text-gold",
   },

@@ -13,7 +13,7 @@ import RefusalLedgerHint from "@/components/RefusalLedgerHint";
 export const metadata: Metadata = {
   title: "成為 FOUNDER · 最高階年度會員",
   description:
-    "FOUNDER 創始會員 · 留下資料 · Tim 親手 onboard 每一位 · 1-3 天內寄付款方式(銀行轉帳)· 轉帳完成就開通。 會員不限量 · 抽成 5% 全站最低。",
+    "FOUNDER FOUNDER 會員 · 留下資料 · Tim 親手 onboard 每一位 · 1-3 天內寄付款方式(銀行轉帳)· 轉帳完成就開通。 會員不限量 · 抽成 5% 全站最低。",
   // R69 W-G · Agent B audit F11 fix · explicit openGraph re-using /founders
   // OG card · NEW-CONVERSATION-PROMPT advertised 「29 custom OG cards」 ·
   // highest-conversion R68 W-A page was sharing with global fallback OG ·

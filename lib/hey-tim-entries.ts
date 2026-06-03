@@ -76,7 +76,7 @@ export const HEY_TIM_ENTRIES: ReadonlyArray<HeyTimEntry> = [
     asker: "Tim · 自問自答",
     question: "為什麼有這個 page?它跟 /faq 有什麼不一樣?",
     answer:
-      "Bill James 從 2009 年開始 ship「Hey Bill」 — 球迷 email questions · Bill 親手 reply · 公開 ledger 不藏。15+ 年來這個 page 是 Bill James Online subscription 第 1 retention driver(讓人續訂的原因不是預測準度 · 是「Bill 在另一頭」 的感覺)。Defector 有 Funbag · Stratechery 有 Daily Update reply · Tom Tango 有 comments dialogue · patio11 收 3 年後 reader emails 還回。ZONE 27 採同 axis from Year 0。\n\n跟 /faq 不一樣:/faq 是 Tim pre-anticipated 的 14 個 question · 已經知道答案。/hey-tim 是 visitor 想到我 沒想到 的 question · Tim 親手 reply · 包括「我答錯了」 的 correction。/faq 是 monologue · /hey-tim 是 dialogue。\n\n為什麼 Year 0 就 ship 而不等有 N=50 questions 才 ship?因為「方法公開」就是原則 · 空的紀錄也是紀錄 · 跟創始會員上 263 個還沒人認領的空位、/annual/2026 第 0 年那份誠實的空白報表一樣 · 空 = 一種訊號。",
+      "Bill James 從 2009 年開始 ship「Hey Bill」 — 球迷 email questions · Bill 親手 reply · 公開 ledger 不藏。15+ 年來這個 page 是 Bill James Online subscription 第 1 retention driver(讓人續訂的原因不是預測準度 · 是「Bill 在另一頭」 的感覺)。Defector 有 Funbag · Stratechery 有 Daily Update reply · Tom Tango 有 comments dialogue · patio11 收 3 年後 reader emails 還回。ZONE 27 採同 axis from Year 0。\n\n跟 /faq 不一樣:/faq 是 Tim pre-anticipated 的 14 個 question · 已經知道答案。/hey-tim 是 visitor 想到我 沒想到 的 question · Tim 親手 reply · 包括「我答錯了」 的 correction。/faq 是 monologue · /hey-tim 是 dialogue。\n\n為什麼 Year 0 就 ship 而不等有 N=50 questions 才 ship?因為「方法公開」就是原則 · 空的紀錄也是紀錄 · 跟FOUNDER 會員上 263 個還沒人認領的空位、/annual/2026 第 0 年那份誠實的空白報表一樣 · 空 = 一種訊號。",
     certainty: "certain",
     tags: ["meta", "year-zero", "ledger-family"],
   },

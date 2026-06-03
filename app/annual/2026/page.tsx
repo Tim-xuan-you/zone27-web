@@ -12,7 +12,7 @@ import ReproducibilityReceipt from "@/components/ReproducibilityReceipt";
 export const metadata: Metadata = {
   title: "年度公開報告 · 2026 第 0 年",
   description:
-    "ZONE 27 第 0 年公開年度報告。 0 訂閱者 · NT$ 0 收入 · 7 個系統測試用的佔位創始會員 · 只結算過 1 場 · 完整成本 · 完整今年砍掉的清單 · 上線前的誠實狀態。 一般網站隱藏營收 · 我們從第 0 年就公開。",
+    "ZONE 27 第 0 年公開年度報告。 0 訂閱者 · NT$ 0 收入 · 7 個系統測試用的佔位FOUNDER 會員 · 只結算過 1 場 · 完整成本 · 完整今年砍掉的清單 · 上線前的誠實狀態。 一般網站隱藏營收 · 我們從第 0 年就公開。",
 };
 
 // ── ZONE 27 · /annual/2026 ─────────────────────────────
@@ -142,7 +142,7 @@ export default function AnnualReport2026Page() {
           </h1>
           <p className="mt-6 text-mute leading-relaxed max-w-2xl">
             {REPORT_PHASE}。 0 訂閱者 · NT$ 0 收入 · 7 個系統測試用的佔位
-            創始會員 · 只結算過 1 場(命中)· 引擎 v0.2。 所有數字都是
+            FOUNDER 會員 · 只結算過 1 場(命中)· 引擎 v0.2。 所有數字都是
             誠實的空白 · 不造假。 有些獨立媒體靠讀者直接資助起家、把一切
             攤開給人看 · 我們從第 0 年就這樣做。
           </p>

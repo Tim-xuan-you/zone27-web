@@ -85,7 +85,7 @@ const REDLINES: ReadonlyArray<{ no: string; rule: string; basis: string; revised
   {
     no: "11",
     rule: "不 ship fake testimonials / 偽造 social proof",
-    basis: "等真實創始會員加入後才放他們的話 · 0 代筆好評 · 0 假推薦 · 0「已有 1000+ 人加入」灌水。",
+    basis: "等真實FOUNDER 會員加入後才放他們的話 · 0 代筆好評 · 0 假推薦 · 0「已有 1000+ 人加入」灌水。",
   },
   {
     no: "12",
@@ -123,7 +123,7 @@ const ETHICS_COMMITMENTS: ReadonlyArray<{
   {
     no: "04",
     rule: "0 fake testimonials · 公開 founders 全名清單(Q3+ onboard 後)",
-    basis: "等真實創始會員加入 6 個月後才放他們的話 · 0 假推薦 · 現在是空的就誠實留空。",
+    basis: "等真實FOUNDER 會員加入 6 個月後才放他們的話 · 0 假推薦 · 現在是空的就誠實留空。",
   },
   {
     no: "05",

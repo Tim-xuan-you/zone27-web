@@ -10,7 +10,7 @@ import { getWaitlistCount } from "@/lib/waitlist-stats";
 import { createPageMetadata } from "@/lib/page-og";
 
 // ── /founders · R187 · 拿掉「創始 270 名冊」(per Tim「太複雜 · 刪掉吧」)──
-// 砍掉:NEXT IS #008 倒數 · 最早一批創始會員 · 鑲金編號 unlock · #001–#270 ·
+// 砍掉:NEXT IS #008 倒數 · FOUNDER 會員 · 鑲金編號 unlock · #001–#270 ·
 // 分配帳本連結 · founders-stats(FOUNDERS_TOTAL/NEXT/formatBadge)依賴。
 // FOUNDER 改框成「最高階年度會員」· 稀有感用身分+全站最低抽成承載,不用數字。
 // /founders/ledger 已改成 redirect · FoundingMemberLedger / ScarcityStrip 已刪。
@@ -32,7 +32,7 @@ const UNLOCKS = [
   "「✓ 驗證準度」徽章 · 掛在你署名旁(連輸都算 · 不可造假)",
   "賣分析只抽 5% · 你拿 95%(BLACK 是 10%)· 全站最低",
   "引擎每次改版 · 提前 7 天搶先試 + 投票權",
-  "BOTTOM 27 棒球手遊上線 · 創始限定球員卡空投",
+  "BOTTOM 27 棒球手遊上線 · FOUNDER 限定球員卡空投",
   "恆美攝影 × 伶 Kopi 旗艦店 · 一品紅茶招待",
 ];
 
@@ -72,7 +72,7 @@ export default async function FoundersPage({
             FOUNDER
             <br />
             <span className="text-2xl sm:text-3xl md:text-4xl text-mute">
-              最高階 · 創始會員
+              最高階年度會員
             </span>
           </h1>
 

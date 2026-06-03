@@ -945,7 +945,7 @@ repeat 10,000 times → aggregate
             href="/founders"
             className="px-8 py-3 bg-gold text-navy text-xs tracking-[0.3em] hover:bg-gold-soft transition-colors"
           >
-            加入創始會員 →
+            加入FOUNDER 會員 →
           </Link>
         </div>
 

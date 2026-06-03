@@ -122,7 +122,7 @@ export default async function FoundersOgImage() {
               display: "flex",
             }}
           >
-            最早一批進場支持的人
+            賣分析賺最多的人
           </div>
 
           {/* divider */}

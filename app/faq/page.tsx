@@ -47,7 +47,7 @@ const CATEGORIES: Category[] = [
         a: (
           <>
             棒球場上的最後一個 OUT — 9 局 × 3 個出局數 = 27,也是完美比賽的數字
-            (27 上 27 下)。我們相信 創始會員能用同樣的精準定義這個品牌。
+            (27 上 27 下)。我們相信 FOUNDER 會員能用同樣的精準定義這個品牌。
             詳見{" "}
             <Link href="/about" className="text-gold underline-offset-4 hover:underline">
               /about 第 6 章 Why 27
@@ -119,7 +119,7 @@ const CATEGORIES: Category[] = [
   {
     key: "pricing",
     label: "FOUNDER & PRICING",
-    zh: "創始會員 / 定價",
+    zh: "FOUNDER 會員 / 定價",
     qas: [
       {
         q: "FOUNDER 跟 BLACK 一般會員有什麼差別?",
@@ -129,7 +129,7 @@ const CATEGORIES: Category[] = [
             「NT$ 2,700/365 天 年度會員」。
             <strong className="text-bone">BLACK</strong> 是 31-day pass NT$ 500/31 天
             (3 月–11 月 · 240 場 + 季後賽 · ≈ NT$ 6/場 · 手動銀行轉帳 ·
-            不自動續扣 · per /integrity rule #13)。創始會員額外好處:creator 抽成 5%
+            不自動續扣 · per /integrity rule #13)。FOUNDER 會員額外好處:creator 抽成 5%
             (BLACK creators 10%)、AI 模型優先試用、實體招待。完整對照請見{" "}
             <Link href="/founders" className="text-gold underline-offset-4 hover:underline">
               /founders
@@ -142,9 +142,9 @@ const CATEGORIES: Category[] = [
         q: "NT$ 2,700 為什麼這麼便宜?",
         a: (
           <>
-            因為這是「品牌共建價」,不是「永久市場價」。創始會員會永遠是 ZONE 27
-            的傳教士;後續黑金會員一年約 12 期 × NT$ 500 = NT$ 6,000 · FOUNDER NT$ 2,700/年(含 BLACK)等於省 55%。
-            創始者扛了「品牌還沒驗證」的風險,所以拿每年續訂價永遠不漲的回報。
+            因為 FOUNDER 是年費 · 抽成 5% 全站最低 —— 你賣分析賺最多 · 而且每年
+            續訂價永遠不漲。 跟 BLACK 比:黑卡一年約 12 期 × NT$ 500 = NT$ 6,000 ·
+            FOUNDER NT$ 2,700/年(含 BLACK 全部功能)等於省 55%。
           </>
         ),
       },
@@ -213,7 +213,7 @@ const CATEGORIES: Category[] = [
           <>
             <strong className="text-bone">沒 downline 結構。</strong>{" "}
             0 推薦獎金 · 0 多層抽佣 · 0 業績 quota · 0 招募下線 · 會員不限量但零金字塔抽佣 ·
-            最早一批創始會員。 BLACK 10% 抽成是 platform fee(類 Stripe / Spotify)
+            FOUNDER 會員。 BLACK 10% 抽成是 platform fee(類 Stripe / Spotify)
             · FOUNDER 5%。
           </>
         ),

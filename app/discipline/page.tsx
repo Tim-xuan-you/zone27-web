@@ -115,10 +115,10 @@ export default function DisciplinePage() {
 
             <Subhead>ZONE 27 應用</Subhead>
             <List>
-              <Item label="最早一批創始會員 · 永久">
+              <Item label="FOUNDER 會員 · 永久">
                 FOUNDER 不是「early bird 折扣」,
                 是<strong className="text-bone">一輩子</strong>關係。
-                這份創始身分永久屬於您 · Buffett 的 forever holding 哲學寫進這份關係裡。
+                這份 FOUNDER 身分永久屬於您 · Buffett 的 forever holding 哲學寫進這份關係裡。
               </Item>
               <Item label="壞消息誠實揭露">
                 <Link href="/audit" className="text-gold hover:underline">
@@ -312,7 +312,7 @@ export default function DisciplinePage() {
               </Item>
               <Item label="Quality of 1 > Quantity of 100">
                 Jobs 名言「我寧願有 1 個 A 級人才,不要 100 個 B 級」。
-                ZONE 27 版:創始會員 · Tim 一個一個親手 onboard(每位 12-15 分鐘)·
+                ZONE 27 版:FOUNDER 會員 · Tim 一個一個親手 onboard(每位 12-15 分鐘)·
                 不外包、不批量。 會員不限量 · 但「親手」這件事每一位都一樣 · 不稀釋。
               </Item>
               <Item label="Design is how it works">
