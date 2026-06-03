@@ -157,6 +157,28 @@ export function clearAnonPicks(): void {
   }
 }
 
+/** Remove specific picks by matchId · keeps the rest(unlike clearAnonPicks).
+ * Used by AnonPickMigrator after a logged-in visitor's anon picks are
+ * replayed into the shared predictions table(0003)· so the same pick
+ * doesn't double-count(once in the DB-backed record · once in the local
+ * anon strip)。 Dispatches the change event so tier badge / strips re-derive. */
+export function removeAnonPicks(matchIds: string[]): void {
+  if (typeof window === "undefined") return;
+  if (matchIds.length === 0) return;
+  try {
+    const drop = new Set(matchIds);
+    const kept = readAnonPicks().filter((p) => !drop.has(p.matchId));
+    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(kept));
+    try {
+      window.dispatchEvent(new CustomEvent("zone27:anon-picks-changed"));
+    } catch {
+      /* safe to ignore */
+    }
+  } catch {
+    /* swallow */
+  }
+}
+
 /** Aggregate stats from picks · used in AnonCalibrationStrip */
 export function computeAnonStats(picks: AnonPick[]): {
   total: number;
