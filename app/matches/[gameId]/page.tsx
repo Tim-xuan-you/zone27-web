@@ -321,17 +321,26 @@ export default async function MatchDetailPage({
           </div>
         </section>
 
-        {/* ── RUN IT YOURSELF · 自己跑引擎 ───────────── */}
+        {/* ── RUN IT YOURSELF · 自己跑引擎(收進 disclosure)──
+            設計審計 P1:同頁兩個勝率(上方開盤線 + 這裡 10K 模擬另一個數字)= 球迷的
+            「為什麼有兩個 63%?」困惑。 收進「點開才跑」的進階面板 → 95% 訪客只看到
+            一個乾淨開盤線;想自己驗算的 skeptic 一鍵展開即得(costly-signal proof 保留)。
+            模擬器本來就是「按 RUN 才跑」· 收起 0 CPU 成本。 */}
         <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-16 border-t border-line/40 pt-8">
-          <p className="font-mono text-gold text-[9px] tracking-[0.4em] mb-3">
-            / 自己驗算 · 逐打席 10K
-          </p>
-          <p className="text-mute text-sm leading-relaxed mb-6 max-w-xl">
-            上面的開盤線不用信我們 · 在你瀏覽器裡親手跑 10,000 次逐打席模擬 ·
-            這是更細的另一套算法(數字會跟開盤線有點出入)· 你親手看引擎憑什麼開這個盤。{" "}
-            <span className="text-bone">這是驗算工具 · 不是第二個官方盤口</span>。
-          </p>
-          <MatchSimulator key={m.id} match={m} />
+          <details className="group">
+            <summary className="cursor-pointer select-none list-none [&::-webkit-details-marker]:hidden flex items-center gap-2 font-mono text-gold/80 hover:text-gold text-[11px] sm:text-xs tracking-[0.3em] transition-colors">
+              <span className="text-gold/60 transition-transform group-open:rotate-90">
+                ▸
+              </span>
+              自己跑 10K 逐打席模擬 · 進階驗算
+            </summary>
+            <p className="text-mute text-sm leading-relaxed mt-4 mb-6 max-w-xl">
+              上面的開盤線不用信我們 · 在你瀏覽器裡親手跑 10,000 次逐打席模擬 ·
+              這是更細的另一套算法(數字會跟開盤線有點出入)· 你親手看引擎憑什麼開這個盤。{" "}
+              <span className="text-bone">這是驗算工具 · 不是第二個官方盤口</span>。
+            </p>
+            <MatchSimulator key={m.id} match={m} />
+          </details>
         </section>
 
         {/* ── back ───────────────────────────────────── */}
