@@ -142,6 +142,12 @@ R172 pivot · BLACK CARD 從 TapPay 自動訂閱改成 manual ATM / 跨行轉帳
 
 R174 pivot build queue · Claude 可主動 ship(三綠 + auto-push):
 
+- ✅ **R189 · 清匿名死碼 + 登入後戰績條 + 收合兩準度頁(2026-06-03 · 新窗 · 1e02127 / be5778d · 全三綠 · 淨 −1800 行)**· 接續 R188 註冊閘門:
+  - **B3 清完**:anon-picks 系統整串刪(AnonCalibrationStrip / CalibrationTierBadge / AnonPickMigrator / LadderPosition / lib/anon-picks / lib/calibration-tiers 共 6 檔)· R188 拿掉免登入押注後沒人再寫 `zone27_anon_picks_v1` = 死碼 · localStorage inventory 同步拔那條(11→10 防 drift)· Cmd-K 拔開發符號關鍵字 AnonPick/UserPrediction。
+  - **首頁 + 天梯個人戰績條**:新 `YourRecordStrip`(client 端讀 0006 get_my_predictions · 同 /member 的 aggregatePredictionStats 評分 · 頁面維持 ISR 靜態 hydrate 後填)· 登入且押過才顯示「你 vs 引擎」· 取代死掉的匿名版。⚠️ 登入後實機視覺未 dogfood(需帳號)· 資料路徑全沿用已驗證 primitives。
+  - **收合 /member/calibration → /calibration**:那頁個人模式靠已死的「追蹤賽事」(FollowMatchButton 早刪)· 且二元押注畫不出 45° 校準曲線 = 概念上不成立 · 整頁改 redirect · lib/follows.ts 一併刪(唯一 import)· /calibration「另一頁」段落誠實重寫指向 /member · 修 /track-record 撞名連結 + related-links 4 處。
+  - ⏳ 殘留 code 註解(predictions.ts / track-record / calibration design comment 提到 /member/calibration)留下輪 sweep(同 R187 慣例 · 不 render)。
+  - ⚙️ 踩到 stale-server 假綠陷阱(殺 npm pid 不殺 next 子進程)· 已存 [[feedback-stale-server-false-green]] memory。
 - ✅ **R188 後續 · 安全 SQL 套用 + 創作者定價 + 後台扣點(2026-06-03 · 同窗 · 09b837e / 9f91923 / ea6585f)**:
   - **6 支安全 SQL 全套用 + Tim 認領 admin** —— 門鎖死(詳見上方 ✅🔒 紅框)· 套 0005 時撞 42P13「cannot change return type」(prod 已是 0008 9 欄版)· 已在 0005 加 `drop function if exists get_creator_posts(text)` 解掉。
   - **賣文定價(9f91923)**:自填數字 input → 勾選預設 **免費/50/100/200/300/500** · 階級上限 **BLACK≤200 / Founders≤500** · 免費會員只免費發 · 心理學「**價格=證明**(靠刪不掉的 ✓ 已驗證準度撐)· 衝動帶 50–150 · 不玩 99 charm pricing」· DB clamp 留 0–10000 當防溢位後盾(真 500 上限在表單擋 · 不用再碰 SQL)。
@@ -151,7 +157,7 @@ R174 pivot build queue · Claude 可主動 ship(三綠 + auto-push):
   - **押注閘門(abb4496 · net −247)**:押要先登入免費會員 · 拿掉免登入 localStorage 押注 + AnonVerdict + 錯文案「不用註冊·先押著」· 順手修押注按鈕被群眾線網路抓取卡 skeleton(改 getSession 先定狀態)· StickyFoundersCTA 改登入感知前門(不催已是會員的人)。
   - **引擎閘門(f8b6851)**:新 EngineGate wrapper · 跑 10K 模擬要登入 · 套 /lab + /lab/custom + 賽事頁「進階驗算」摺疊 sim。 **看免費 · 動作(押注/跑引擎)要登入。**
   - ⚠️ **REVERSES 舊「免登入試押」冷啟動護城河** · 同窗早上的 AnonPickMigrator(2d6f151)被 supersede(只剩 graceful 處理 legacy)· **別再加回匿名押注/跑引擎** · 詳見 [[project-zone27-registration-gate]] memory。
-  - ⏳ **B3 待清(下輪 subtraction · 沒擅自做)**:anon-picks 系統(AnonCalibrationStrip / CalibrationTierBadge / LadderPosition anon 路 / AnonPickMigrator / lib/anon-picks)= 對新用戶 render null 的死碼 · 可整批刪。 ⏳ **首頁登入後沒有個人戰績 strip**(舊「你的戰績」是 anon-only · 新模型該補一個讀 DB 的登入版 · 不然登入用戶首頁少了 personal hook)。 ⏳ **討論區 Phase 3**(綁戰績版玩運彩 · 需真實用戶才發光)。
+  - ✅ **B3 已清(R189 · 見上)** · ✅ **首頁登入後個人戰績條已補(R189 · YourRecordStrip 讀 DB)** · ⏳ **討論區 Phase 3**(綁戰績版玩運彩 · 需真實用戶才發光)。
 - ✅ **攻頂 round 3(2026-06-03 · 6 commit 全三綠 · 2d6f151→7e4ab23 · 全 pushed main)**· Tim「全權 · 上網查全世界找『缺的靈魂』· 重心理學+操作邏輯+極致美觀+操作直覺 · 別 push 上線/別碰 SEO 社群」· 3 路 agent(操作動線體檢 / 缺的靈魂全球研究 / 視覺工藝+認知負荷)synthesize → 6 波:
   - **修登入留存 CRITICAL bug(2d6f151)**:訪客本地押注(localStorage)登入後從沒被寫進共享預測表 = 全站講 5+ 次的「登入→存成永久戰績/進群眾市場/爬天梯」是空話 · 押 8 手登入後 /member 仍顯示 0 場。 新 `AnonPickMigrator`(layout 全站掛載 · 帶 session 把**尚未結算**的場 submitPrediction 重放 · 冪等 · 移除本地副本 · refresh)· 誠信護欄只遷移未結算場(防賽後補單污染天梯/準度)。
   - **缺的靈魂 OpenPositionCard(c4200d5)**:3 agent 一致最尖 —— 所有情緒高潮都在賽後/年度回顧 · 押下去到打完之間的 live 中段一片空白(資料模型有 today-live 卻沒畫)。「你的未結算押注」放 /member 準度數字之上 · 你 vs 引擎 vs 群眾三方張力 · LIVE 呼吸金線 · **絕不造假即時比分**(賽果仍賽後 ingest)。
@@ -159,7 +165,7 @@ R174 pivot build queue · Claude 可主動 ship(三綠 + auto-push):
   - **270 漂移(ef2887c)**:戰績頁「269 more」錯數字(已 16 收據 · 一季~300 場)改非數字 + 移除 `FOUNDERS_REMAINING===0` gate(會員已不限量 · 防該常數歸零時全站手機主 CTA 無聲消失)。
   - **賽事頁市場層次(441ed2f)**:開盤線說明對齊已收摺的 10K 深算(不再承諾並排)+「這題怎麼算贏」eyebrow gold→mute(開盤線當唯一金色焦點)。
   - **看準度深連(7e4ab23)**:首頁「你的戰績」→ /calibration#your-record(client mount 後補捲 · 實測落點正確)· 直接看自己紀錄不丟到引擎自評頁頂。
-  - 🧭 **Deferred(都 flag Tim · 沒擅自做)**:① **/calibration vs /member/calibration 命名/IA 決策**(兩頁標題太像「準度對照」· 需 Tim 定名 · 不擅改信任頁名)② **賽季報告 / 結算時刻 soul**(Agent B #2#3「最強品牌轉移」· 但需真實用戶 N≥10 · 0 用戶時做看不到效果 · 上線後再做)③ PhaseBadge 三份 inline 複本 DRY + ReliabilityDiagram 兩頁複本已 drift + eyebrow tracking scale 統一(低 · consistency)。
+  - 🧭 **Deferred**:✅ ① **/calibration IA 已解(R189 · 收合成一頁 · 不再兩頁撞名)** · ② **賽季報告 / 結算時刻 soul**(Agent B #2#3「最強品牌轉移」· 但需真實用戶 N≥10 · 0 用戶時做看不到效果 · 上線後再做)③ PhaseBadge 三份 inline 複本 DRY + ReliabilityDiagram 複本(收合後只剩 /calibration 一份 + 元件內一份 · drift 縮小)+ eyebrow tracking scale 統一(低 · consistency)。
   - ⚙️ **工具備忘**:本專案 tsc 要跑 `node node_modules/typescript/bin/tsc --noEmit`(`npx tsc` 會抓到 global stub exit 0 = 假綠)· Bash cwd 不持久 · 每個指令前 `cd` 錨定 · 已更新 [[feedback-zone27-tsc-verification-discipline]] memory。
 - ✅ **MLB 引擎自動盤 pipeline(2026-06-03 · ba90e2e)**· Tim「引擎 16 場太慢 · 接 MLB 衝樣本」·
   lib/mlb.ts 早會即時算 MLB 引擎勝率 + grade,缺的是「賽前鎖定」→ 補齊:`scripts/lock-mlb-predictions.mjs`
