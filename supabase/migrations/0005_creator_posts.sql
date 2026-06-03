@@ -114,6 +114,10 @@ grant  execute on function public.submit_creator_post(text, text, text, text, in
 -- ── get_creator_posts ────────────────────────────────
 -- 一場的創作者分析 · anon 可讀 · handle + title + body + pick + price + created_at。
 -- v1 全免費 · body 直接回。 Phase 2 selling:price_ntd>0 時 body gated until purchased。
+-- 🔧 R188:若 prod 已套過 0008(把這支升成 9 欄 post_id/is_paid/purchased)· 再跑
+--    0005 的 create-or-replace 會撞 42P13「cannot change return type」。 先 drop 再建 ·
+--    讓 0005 永遠可重跑(跑到 0008 時會再 drop + 重建成最終 9 欄版)。
+drop function if exists public.get_creator_posts(text);
 create or replace function public.get_creator_posts(
   p_match_id text
 )

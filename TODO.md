@@ -14,23 +14,22 @@
 
 ## ⏳ 仍 pending Tim 親手動作
 
-### 🔴🔒 安全修補 · 套 SQL 前先看(2026-06-03 碼審 · 3 洞 · 都還沒上線、還沒被打)
+### ✅🔒 安全修補 · 全部完成(2026-06-03 · Tim 親手套 6 支 SQL + 確認自己是唯一 admin · 門鎖好了)
 
-3 路 agent 碼審找到 3 個「上線後可能被攻擊」的洞,已在 repo 修好,但要 Tim 套用才生效:
-1. **後台認領漏洞(最嚴重)**:舊 `claim_admin` 是「表空 + 任何登入者」就能認領 admin
-   = 上線後任何人註冊帳號、直接打這支 RPC 就能搶走整個後台(加點數 / 改 tier / 撈全
-   會員 email / 刪文)。 已改成「只有 founder 本人 email 能認領」· 且忘了設會 fail-closed
-   (誰都不能認領)。 ✅ **email 已幫你設成 `tatayngiti@gmail.com`(2026-06-03)** → 直接貼整支
-   `0011` 進 Run 即可;之後用這個 email 註冊的帳號去 /admin 按「設為管理員」就能認領後台。
-2. **作者代號會撞號**:代號只取 md5 前 4 碼(65536 種)· 約 300 人就有兩人同號 → 戰績/
-   準度徽章被混在一起(可被惡意註冊灌號陷害對手)。 已加寬到 8 碼。 不急(200 人前處理就好)·
-   但跟下面一起套最省事。
-3. **賣文價格沒上限**:前端限 2000 但後端沒夾 · 直接打 API 可塞天價破 UI · 已夾 0–10000。
+3 路 agent 碼審找到的 3 個洞,已**全部修好並上線**:
+1. **後台認領漏洞(最嚴重)** ✅:claim_admin 綁定 founder email(`tatayngiti@gmail.com`)+ fail-closed ·
+   上線後沒人能搶後台。 Tim 已在 /admin 確認**自己是唯一 admin**(看得到全套管理工具 = isAdmin ·
+   「把我設為管理員」按鈕已消失 = 早就認領、鎖死了)。
+2. **作者代號撞號** ✅:md5 前 4 碼 → 加寬到 8 碼。
+3. **賣文價格沒上限** ✅:後端夾 0–10000。
 
-**Tim 要做(下次開 Supabase SQL Editor 時一次做完)**:把這幾支檔案「各自整支」貼進 SQL
-Editor 按 Run(都是 create-or-replace 冪等 · 重套安全):**0004 · 0005 · 0007 · 0008 ·
-0010 · 0011**(`0011` 記得先改 email)。 套完 = 代號 8 碼 + 後台只有你能認領 + 賣文價有
-上限。 (前端 `getUser` 那筆已直接上線 · 不用你動。)
+**Tim 已完成(2026-06-03)**:0004 · 0005 · 0007 · 0008 · 0010 · 0011 六支全部套進 Supabase SQL
+Editor。 中途 0005 撞 42P13「cannot change return type」(prod 的 get_creator_posts 已是 0008 的
+9 欄版 · 0005 想用 6 欄 create-or-replace 蓋回去被擋)→ 已在 0005 檔案加 `drop function if exists
+get_creator_posts(text)` 先 drop 再建解掉(讓 0005 永遠可重跑)· 當下也用「先跑一行 drop、再貼
+0005」解掉。 + /admin 確認 admin 身分。 前端 getUser 早已上線。 **資安全部 LIVE。**
+⚠️ 會員列表有測試殘留帳號(`z27.final.a.*` / `z27.gp.*` / `z27.rpctest.*@example.com` · dogfood 產生 ·
+0 點 · 無害)· Tim 想清可在 Supabase Studio 刪 row。
 
 ### ✅ 已解決並驗證(R185 live-test · 2026-06-02)· 押注 + 發表 + 錢包 + 買文章 RPC 全部 LIVE
 
