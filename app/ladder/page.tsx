@@ -97,7 +97,26 @@ export default function LadderPage() {
             })}
         </div>
 
-        {/* ── 一句話規則 ──────────────────────── */}
+        {/* ── 升階硬條件 · Tim 拍板(2026-06-03)─────────────────
+            每往上爬一階,那個月都得贏過引擎。 累積場數夠了還不算 —— 你得證明你
+            「現在」還在贏機器。 這是玩運彩那種自封高手結構上給不了的東西。
+            品牌調和:這不是「比誰勝率高」的虛榮榜(= 對手死穴 · calibration-tiers
+            紅線明列 win-rate ranking 為品牌自殺)· 而是「你得贏過免費引擎」的硬門檻
+            = alpha over baseline · 守紀律不靠一晚手氣。 鐵則放在機械規則之上。 */}
+        <div className="mt-8 border-l-2 border-gold/60 bg-gold/[0.05] pl-4 py-3">
+          <p className="font-mono text-gold text-[10px] tracking-[0.3em] mb-1.5">
+            升階硬條件
+          </p>
+          <p className="text-bone text-sm sm:text-base leading-relaxed">
+            每往上爬一階,<span className="text-gold">那個月你都得贏過引擎</span> ——
+            累積場數夠了還不算,你得證明你「現在」還在贏機器。
+          </p>
+          <p className="mt-1.5 text-mute text-sm leading-relaxed">
+            別處的「高手」是自己說的;這裡的高手,是<span className="text-bone">打贏那台公開機器</span>才配。 贏不過引擎,這個月就升不上去。
+          </p>
+        </div>
+
+        {/* ── 機械規則 ──────────────────────── */}
         <p className="mt-6 text-bone text-sm sm:text-base leading-relaxed">
           每個月結算一次 · <span className="text-gold">一個月最多往上爬一階</span> ·
           退步就會掉階。 想爬到神諭,至少要連續好幾個月都夠準 —— 一晚手氣,升不上去。
