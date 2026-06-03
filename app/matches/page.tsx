@@ -147,63 +147,47 @@ export default function MatchesPage() {
         </section>
       )}
 
-      {/* ── MLB CTA(即時資料) ───────────────── */}
-      <section className="mx-auto max-w-6xl w-full px-6 sm:px-10 pb-12">
-        <Link
-          href="/matches/mlb"
-          className="block bg-slate/40 border border-win/30 hover:border-win/70 transition-colors p-6 sm:p-8 group"
-        >
-          <div className="flex items-center justify-between flex-wrap gap-4">
-            <div>
-              <div className="flex items-baseline gap-2 mb-2 font-mono text-[10px] tracking-[0.35em]">
-                <span className="text-win">MLB · 即時資料</span>
-                <span className="px-1.5 py-0.5 border border-win/40 text-win">
-                  LIVE
-                </span>
-              </div>
-              <h3 className="text-xl sm:text-2xl text-bone font-light tracking-tight">
-                想看美國職棒今日全部賽程?
-              </h3>
-              <p className="text-mute text-sm mt-2 max-w-xl">
-                資料直接來自 MLB 官方 Stats API,每 10 分鐘更新。
-                ~15 場比賽含戰績、開賽時間(台北時區)、即時比分。
-              </p>
-            </div>
-            <span className="font-mono text-win text-xs tracking-[0.3em] group-hover:translate-x-1 transition-transform inline-flex items-center gap-2">
-              今日 MLB 賽程 →
-            </span>
-          </div>
-        </Link>
-      </section>
-
-      {/* ── CPBL 投手排行 CTA · Baseball Savant Custom Leaderboards pattern ── */}
+      {/* ── 其他工具 · 精簡兩欄 ───────────────────
+          原本是兩張 hero 重量大卡(MLB + CPBL 投手)· 把市場頁拉長近兩倍 ·
+          且 MLB 那張用綠框(border-win)= 違反「不紅綠對比」品牌鐵律。 降成兩個
+          compact slim link(全 gold/mute · 不搶主看板)· 該有的入口都還在。 */}
       <section className="mx-auto max-w-6xl w-full px-6 sm:px-10 pb-24">
-        <Link
-          href="/cpbl-pitchers"
-          className="block bg-slate/40 border border-gold/30 hover:border-gold/70 transition-colors p-6 sm:p-8 group"
-        >
-          <div className="flex items-center justify-between flex-wrap gap-4">
-            <div>
-              <div className="flex items-baseline gap-2 mb-2 font-mono text-[10px] tracking-[0.35em]">
-                <span className="text-gold">CPBL 投手排行 · NEW</span>
-                <span className="px-1.5 py-0.5 border border-gold/40 text-gold">
-                  FREE
-                </span>
-              </div>
-              <h3 className="text-xl sm:text-2xl text-bone font-light tracking-tight">
-                K/9 · BB/9 · HR/9 · WHIP · ERA · IP · 1 鍵排序
-              </h3>
-              <p className="text-mute text-sm mt-2 max-w-xl">
-                Baseball Savant Custom Leaderboards pattern · URL 可分享
-                · LINE 轉傳直接看相同排序。 資料來自 stats.cpbl.com.tw 公開
-                box score · 0 付費 API。
-              </p>
+        <div className="grid sm:grid-cols-2 gap-3">
+          <Link
+            href="/matches/mlb"
+            className="block bg-slate/30 border border-line/60 hover:border-gold/50 hover:bg-slate/40 transition-colors p-4 sm:p-5 group"
+          >
+            <div className="flex items-baseline justify-between gap-2 mb-1.5">
+              <span className="font-mono text-gold text-[10px] tracking-[0.35em]">
+                MLB · 即時資料
+              </span>
+              <span className="font-mono text-mute/60 text-[9px] tracking-[0.2em]">
+                每 10 分更新
+              </span>
             </div>
-            <span className="font-mono text-gold text-xs tracking-[0.3em] group-hover:translate-x-1 transition-transform inline-flex items-center gap-2">
-              排行 + 解釋 →
-            </span>
-          </div>
-        </Link>
+            <p className="text-bone text-sm leading-snug">
+              美國職棒今日全部賽程 · 戰績 · 台北時區開賽時間 ·{" "}
+              <span className="text-gold/80 group-hover:text-gold">看賽程 →</span>
+            </p>
+          </Link>
+          <Link
+            href="/cpbl-pitchers"
+            className="block bg-slate/30 border border-line/60 hover:border-gold/50 hover:bg-slate/40 transition-colors p-4 sm:p-5 group"
+          >
+            <div className="flex items-baseline justify-between gap-2 mb-1.5">
+              <span className="font-mono text-gold text-[10px] tracking-[0.35em]">
+                CPBL 投手排行
+              </span>
+              <span className="font-mono text-mute/60 text-[9px] tracking-[0.2em]">
+                FREE
+              </span>
+            </div>
+            <p className="text-bone text-sm leading-snug">
+              K/9 · BB/9 · HR/9 · WHIP · 1 鍵排序 · URL 可分享 ·{" "}
+              <span className="text-gold/80 group-hover:text-gold">看排行 →</span>
+            </p>
+          </Link>
+        </div>
       </section>
 
       </main>
