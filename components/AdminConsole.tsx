@@ -210,21 +210,30 @@ function GivePointsCard({ onDone }: { onDone: () => void }) {
   const [email, setEmail] = useState("");
   const [amount, setAmount] = useState("");
   const [ref, setRef] = useState("");
+  const [mode, setMode] = useState<"add" | "deduct">("add"); // 加點 / 扣點(扣回加錯)
   const [busy, setBusy] = useState(false);
   const [msg, setMsg] = useState<{ ok: boolean; text: string } | null>(null);
 
   const submit = async () => {
-    const amt = Number(amount);
-    if (!email.trim() || !amt) {
-      setMsg({ ok: false, text: "填對方 email + 金額。" });
+    // 點擊選方向(非工程師不用記負數)· abs 防使用者又自己打負號變雙重否定
+    const raw = Math.abs(Number(amount));
+    if (!email.trim() || !raw) {
+      setMsg({ ok: false, text: "填對方 email + 點數。" });
       return;
     }
+    const signed = mode === "deduct" ? -raw : raw;
     setBusy(true);
     setMsg(null);
-    const res = await adminGivePoints(email.trim(), amt, ref.trim());
+    const res = await adminGivePoints(email.trim(), signed, ref.trim());
     setBusy(false);
     if (res.ok) {
-      setMsg({ ok: true, text: `已加 ${amt} 點給 ${email.trim()}` });
+      setMsg({
+        ok: true,
+        text:
+          mode === "deduct"
+            ? `已扣回 ${raw} 點 · ${email.trim()}`
+            : `已加 ${raw} 點給 ${email.trim()}`,
+      });
       setEmail("");
       setAmount("");
       setRef("");
@@ -235,12 +244,47 @@ function GivePointsCard({ onDone }: { onDone: () => void }) {
   };
 
   return (
-    <Card title="加點數(有人轉帳後)" hint="打對方 email、金額、轉帳末5碼(選填)→ 按「加點」。 這就是你的手動確認,系統自動留紀錄。">
+    <Card
+      title="加 / 扣 點數"
+      hint="加點 = 有人轉帳入金後記一筆;扣點 = 加錯了扣回。 點上面選方向 → 打 email + 點數 → 按按鈕。 帳本每筆都留痕(餘額 = 全部加總)· 這就是你的手動確認(不自動扣款)。"
+    >
+      {/* 加 / 扣 點擊選方向 · 不用記負數(per「營運動作一律點擊」)*/}
+      <div className="flex gap-1.5 mb-3">
+        <button
+          type="button"
+          onClick={() => setMode("add")}
+          aria-pressed={mode === "add"}
+          className={`px-3 py-1.5 font-mono text-[11px] tracking-[0.15em] border transition-colors ${
+            mode === "add"
+              ? "border-gold bg-gold/10 text-gold"
+              : "border-line/60 text-mute hover:border-gold/40"
+          }`}
+        >
+          ＋ 加點(入金)
+        </button>
+        <button
+          type="button"
+          onClick={() => setMode("deduct")}
+          aria-pressed={mode === "deduct"}
+          className={`px-3 py-1.5 font-mono text-[11px] tracking-[0.15em] border transition-colors ${
+            mode === "deduct"
+              ? "border-loss bg-loss/10 text-loss"
+              : "border-line/60 text-mute hover:border-loss/40"
+          }`}
+        >
+          − 扣點(扣回加錯)
+        </button>
+      </div>
       <div className="flex flex-wrap gap-2">
-        <Field value={email} onChange={setEmail} placeholder="買家 email" className="flex-1 min-w-[180px]" />
-        <Field value={amount} onChange={setAmount} placeholder="金額" type="number" className="w-24" />
-        <Field value={ref} onChange={setRef} placeholder="轉帳末5碼(選填)" className="w-40" />
-        <ActionBtn onClick={submit} busy={busy} label="加點" />
+        <Field value={email} onChange={setEmail} placeholder="會員 email" className="flex-1 min-w-[180px]" />
+        <Field value={amount} onChange={setAmount} placeholder="點數" type="number" className="w-24" />
+        <Field
+          value={ref}
+          onChange={setRef}
+          placeholder={mode === "deduct" ? "原因(選填)" : "轉帳末5碼(選填)"}
+          className="w-40"
+        />
+        <ActionBtn onClick={submit} busy={busy} label={mode === "deduct" ? "扣回" : "加點"} />
       </div>
       <ResultMsg msg={msg} />
     </Card>
