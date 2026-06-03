@@ -109,11 +109,11 @@ export default function MethodologyPage() {
               <span className="text-bone">N=1 · 1 PROVED · 0 DIVERGED</span>
             </li>
             <li className="font-mono tabular">
-              <span className="text-mute/60">FOUNDERS 27</span>{" "}
+              <span className="text-mute/60">FOUNDER</span>{" "}
               <span className="text-bone">7 SYSTEM-TEST · 0 real</span>
             </li>
             <li className="font-mono tabular">
-              <span className="text-mute/60">BLACK CARD</span>{" "}
+              <span className="text-mute/60">BLACK</span>{" "}
               <span className="text-bone">0 paid subscribers</span>
             </li>
           </ul>
@@ -357,7 +357,7 @@ repeat 10,000 times → aggregate
                 statusLabel="EXPANSION 1 · ✓ LIVE · DEV PREVIEW"
                 statusTone="gold"
                 method="+ Park Factor HR rate adjustment(v0.3.0)· wOBA 留 v0.3.1"
-                tier="FREE 預覽 · 將來 BLACK CARD"
+                tier="FREE 預覽 · 將來 BLACK"
                 tierTone="bone"
                 record="每個引擎 N=0 · v0.2 vs v0.3 準度差距等 30 場後才比"
               />
@@ -366,7 +366,7 @@ repeat 10,000 times → aggregate
                 statusLabel="EXPANSION 2 · PLANNED · Q4 2026"
                 statusTone="loss"
                 method="Bayesian Model Averaging across v0.2 + v0.3 votes"
-                tier="BLACK CARD"
+                tier="BLACK"
                 tierTone="gold"
                 record="TBD · Q4 launch"
               />
@@ -487,7 +487,7 @@ repeat 10,000 times → aggregate
                 angle="連勝 / 連敗 streak · 提醒你別被「手感正熱」的錯覺帶著走"
                 status="✓ LIVE"
                 statusTone="gold"
-                tier="FREE 預覽 · 將來 BLACK CARD"
+                tier="FREE 預覽 · 將來 BLACK"
                 tierTone="bone"
               />
               <LensRow
@@ -495,7 +495,7 @@ repeat 10,000 times → aggregate
                 angle="4 場館 home advantage 比較 · 哪場有利投/打"
                 status="✓ LIVE"
                 statusTone="gold"
-                tier="FREE 預覽 · 將來 BLACK CARD"
+                tier="FREE 預覽 · 將來 BLACK"
                 tierTone="bone"
               />
               <LensRow
@@ -503,7 +503,7 @@ repeat 10,000 times → aggregate
                 angle="WHIP + BB9 + K9 command stability proxy(v0.1)· v0.2 = rest_days + IP load real fatigue"
                 status="✓ LIVE · v0.1"
                 statusTone="gold"
-                tier="FREE 預覽 · 將來 BLACK CARD"
+                tier="FREE 預覽 · 將來 BLACK"
                 tierTone="bone"
               />
               <LensRow
@@ -511,7 +511,7 @@ repeat 10,000 times → aggregate
                 angle="upset probability + dominance gap · 黑馬機率 lens · 0 contrarian play"
                 status="✓ LIVE"
                 statusTone="gold"
-                tier="FREE 預覽 · 將來 BLACK CARD"
+                tier="FREE 預覽 · 將來 BLACK"
                 tierTone="bone"
               />
               <LensRow
@@ -519,7 +519,7 @@ repeat 10,000 times → aggregate
                 angle="team recent W-L derive late-inning resilience proxy(v0.1)· v0.2 = bullpen ERA + IP usage"
                 status="✓ LIVE · v0.1 PROXY"
                 statusTone="gold"
-                tier="FREE 預覽 · 將來 BLACK CARD"
+                tier="FREE 預覽 · 將來 BLACK"
                 tierTone="bone"
               />
               <LensRow
@@ -527,7 +527,7 @@ repeat 10,000 times → aggregate
                 angle="此 matchup 過去 H2H + 趨勢 · real data · educational at N<10"
                 status="✓ LIVE"
                 statusTone="gold"
-                tier="FREE 預覽 · 將來 BLACK CARD"
+                tier="FREE 預覽 · 將來 BLACK"
                 tierTone="bone"
               />
             </tbody>
@@ -548,15 +548,15 @@ repeat 10,000 times → aggregate
           </li>
           <li className="flex gap-3 items-baseline">
             <span className="font-mono text-gold/70 text-[10px] tracking-[0.25em]">▸</span>
-            <span className="flex-1">BLACK CARD voting decide next lens · IKEA Effect · 訂閱者 voting 影響 ship 順序</span>
+            <span className="flex-1">BLACK voting decide next lens · IKEA Effect · 訂閱者 voting 影響 ship 順序</span>
           </li>
           <li className="flex gap-3 items-baseline">
             <span className="font-mono text-gold/70 text-[10px] tracking-[0.25em]">▸</span>
-            <span className="flex-1">每 1-2 月 ship 1 new lens · sustained BLACK CARD value compounding · 訂閱越久 越多 lenses 可用</span>
+            <span className="flex-1">每 1-2 月 ship 1 new lens · sustained BLACK value compounding · 訂閱越久 越多 lenses 可用</span>
           </li>
           <li className="flex gap-3 items-baseline">
             <span className="font-mono text-gold/70 text-[10px] tracking-[0.25em]">▸</span>
-            <span className="flex-1">Founders 27 解鎖未來所有 lenses · 續訂價永鎖(NT$ 2,700/年)· 真實「無限解鎖」 value</span>
+            <span className="flex-1">FOUNDER 解鎖未來所有 lenses · 續訂價永鎖(NT$ 2,700/年)· 真實「無限解鎖」 value</span>
           </li>
         </ul>
 

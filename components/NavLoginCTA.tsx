@@ -54,7 +54,7 @@ type SessionState = "loading" | "anonymous" | "logged_in";
 
 export default function NavLoginCTA({ variant = "desktop" }: Props) {
   const [session, setSession] = useState<SessionState>("loading");
-  // R124 W1 · Tim 第四級 founder-dogfood fire · PREVIEW Founders 27 mode 但
+  // R124 W1 · Tim 第四級 founder-dogfood fire · PREVIEW FOUNDER mode 但
   // 看到「登入」 button · click 跳 /login · 卡在 register form · 看不到
   // /member。 fix · 也讀 localStorage zone27_preview_tier · 若 active = 視為
   // logged_in for Nav purposes · NavLoginCTA hides · MembershipNavCTA 切「您的

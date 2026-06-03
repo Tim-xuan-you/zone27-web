@@ -1,6 +1,6 @@
-// ── ZONE 27 · /api/submit · FREE TIER 投稿 endpoint ────
+// ── ZONE 27 · /api/submit · OPEN 投稿 endpoint ────
 // Round 30 Wave 10 · per /membership Creator Permissions FAQ
-// 「FREE TIER 投稿 · Tim 親手 curate · 1 篇 / 週」。
+// 「OPEN 投稿 · Tim 親手 curate · 1 篇 / 週」。
 //
 // Flow:
 //   1. /member/submit form POST title + body
@@ -10,7 +10,7 @@
 //   5. Return JSON ok / error
 //
 // Brand IP:
-//   - 沒 public posting(per BLACK CARD Q3+ TapPay axiom)
+//   - 沒 public posting(per BLACK Q3+ TapPay axiom)
 //   - 純 Tim-curate flow · Stratechery Guest Post pattern
 //   - 不存資料庫 · 只 email · 0 server-side archive(per /privacy)
 // ─────────────────────────────────────────────────────

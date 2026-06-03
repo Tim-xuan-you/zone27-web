@@ -81,7 +81,7 @@ export const LOCAL_STORAGE_INVENTORY: ReadonlyArray<LocalStorageKeyEntry> = [
   },
   {
     key: "zone27_engine_voting_v1",
-    value: "您 BLACK CARD voting 排序",
+    value: "您 BLACK voting 排序",
     note: "RoadmapVotingPanel 寫入 · drag-rank schema-versioned · /member Section 03 IKEA Effect(per MemberDashboardPreview.tsx)",
     shippedIn: "R29",
   },

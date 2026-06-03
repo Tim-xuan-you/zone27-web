@@ -9,9 +9,9 @@ import { useMounted } from "@/lib/use-mounted";
 //
 // 4 tier(對齊 /membership 4-tier ladder):
 //   - anonymous · 匿名訪客 · 未登入
-//   - free · FREE TIER · 已登入 · 終身免費
-//   - black-card · BLACK CARD · NT$ 500/31 天(每 31 天手動 ECPay · 不自動續扣 per rule #13)
-//   - founders27 · Founders 27 · NT$ 2,700/年
+//   - free · OPEN · 已登入 · 終身免費
+//   - black-card · BLACK · NT$ 500/31 天(每 31 天手動 ECPay · 不自動續扣 per rule #13)
+//   - founders27 · FOUNDER · NT$ 2,700/年
 //
 // localStorage-based · 跟 PreviewModeBanner 共享 zone27_preview_tier key。
 // Tim 切換 → reload → 全 page client-side tier-aware components 切換
@@ -32,19 +32,19 @@ const TIERS: { value: string; label: string; body: string; price: string }[] = [
   },
   {
     value: "free",
-    label: "FREE TIER",
+    label: "OPEN",
     body: "已登入 · 5 unlocks 解鎖 · 終身免費",
     price: "NT$ 0",
   },
   {
     value: "black-card",
-    label: "BLACK CARD",
+    label: "BLACK",
     body: "每 31 天手動 ECPay · 6 unlocks(Engine + Lens + 討論 + 抽成 + voting + 筆記)· 不自動續扣",
     price: "NT$ 500/31 天",
   },
   {
     value: "founders27",
-    label: "Founders 27",
+    label: "FOUNDER",
     body: "年度 · 全 unlocks + 5% 抽成 + 未來所有 lenses/engines 解鎖",
     price: "NT$ 2,700/年",
   },
@@ -209,9 +209,9 @@ export default function AdminTierSwitcher() {
         sufficient for design verification
         <br />
         ▸ Phase 2 future · cookie-based + server-side tier-aware rendering
-        (BLACK CARD-only thread / Lens variety unlock / etc.)
+        (BLACK-only thread / Lens variety unlock / etc.)
         <br />
-        ▸ 切到 BLACK CARD / Founders 27 看 /member · /membership ·
+        ▸ 切到 BLACK / FOUNDER 看 /member · /membership ·
         /matches/[gameId] · 全 tier-aware components 跟著切
       </p>
     </div>

@@ -1,6 +1,6 @@
 "use client";
 
-// ── ZONE 27 · Founders 27 Application Form ──────────────
+// ── ZONE 27 · FOUNDER Application Form ──────────────
 // R69 W-G · Agent B audit F8 fix · success state focus management ·
 // WCAG 2.4.3 Focus Order + 4.1.3 Status Messages · 訪客 submit 後
 // focus 自動移到 success container · role="status" + aria-live · 不
@@ -62,7 +62,7 @@
 //     helper(no silent fall-through)
 //
 // 不做 anti-pattern:
-//   ✕ no "Founders 27 投票權" / "private LINE group access" promises
+//   ✕ no "FOUNDER 投票權" / "private LINE group access" promises
 //   ✕ no "instant approval" / "guaranteed slot" framing
 //   ✕ no captcha / no Cloudflare Turnstile(rate-limited via Supabase
 //     when migration applies · MVP relies on Tim manual review filter)
@@ -315,11 +315,11 @@ export default function FoundersApplicationForm() {
       whyFull.length > 400
         ? `\n\n(您 why_zone27 第一個 400 字符 saved · 剩餘 ${whyFull.length - 400} 字在 resume 時補寫 · per iOS mailto 2000-char safe-zone)`
         : "";
-    const subject = "ZONE 27 · Founders 27 application 暫存 · resume link";
+    const subject = "ZONE 27 · FOUNDER application 暫存 · resume link";
     const body = [
       `Hi,`,
       ``,
-      `This is your ZONE 27 Founders 27 application 暫存 link · click to`,
+      `This is your ZONE 27 FOUNDER application 暫存 link · click to`,
       `resume filling on any device:`,
       ``,
       resumeUrl,
@@ -404,7 +404,7 @@ export default function FoundersApplicationForm() {
         </p>
         <p className="text-mute text-sm max-w-md mx-auto leading-relaxed text-center mb-6">
           請保留此編號做後續參考。 您應該已經收到一封 confirmation
-          email(主旨開頭「✓ ZONE 27 · Founders 27 申請已收到」)·
+          email(主旨開頭「✓ ZONE 27 · FOUNDER 申請已收到」)·
           沒收到請檢查 spam folder 或 email{" "}
           <a
             href="mailto:tatayngiti@gmail.com?subject=ZONE%2027%20%C2%B7%20application%20email%20missing"
@@ -466,7 +466,7 @@ export default function FoundersApplicationForm() {
       className="bg-slate/70 border border-gold/40 glow-soft p-8 sm:p-10"
     >
       <p className="font-mono text-gold text-[10px] tracking-[0.4em] mb-3">
-        FOUNDERS 27 · PATEK ALLOCATION FORM
+        FOUNDER · PATEK ALLOCATION FORM
       </p>
 
       {/* R72 W-D · Agent B audit F04 fix · visible「draft restored」 banner ·
@@ -497,7 +497,7 @@ export default function FoundersApplicationForm() {
       )}
 
       <h3 className="text-2xl sm:text-3xl text-bone font-light tracking-tight mb-2">
-        申請 Founders 27 創始席位
+        申請 FOUNDER 創始席位
       </h3>
       <p className="text-mute text-sm mb-8 leading-relaxed">
         Tim 親手 review 每一份申請 · 1-3 business days · per{" "}

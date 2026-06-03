@@ -3,7 +3,7 @@ import { BRAND, OG_SIZE, OG_CONTENT_TYPE } from "@/lib/brand";
 
 // ── ZONE 27 · /member Dynamic OG ───────────────────────
 // Round 29 Wave 2 · 當 /member 連結被分享 · 預覽顯示
-// "FREE TIER 會員儀表板 · 預覽版" + 4 個 cognitive bias chip
+// "OPEN 會員儀表板 · 預覽版" + 4 個 cognitive bias chip
 // (ENDOWMENT · IKEA · LOSS · COLLECTION) — visitor 看圖就知道
 // 這頁是會員預覽 + 心理學設計 driven。
 // ─────────────────────────────────────────────────────
@@ -86,7 +86,7 @@ export default async function MemberOgImage() {
               display: "flex",
             }}
           >
-            FREE TIER · 會員儀表板預覽
+            OPEN · 會員儀表板預覽
           </span>
           <span
             style={{

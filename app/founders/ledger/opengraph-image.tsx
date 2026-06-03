@@ -25,7 +25,7 @@ import {
 export const size = OG_SIZE;
 export const contentType = OG_CONTENT_TYPE;
 export const alt =
-  "ZONE 27 · Founders 27 公開名額帳本 · 連被拒的原因都公布";
+  "ZONE 27 · FOUNDER 公開名額帳本 · 連被拒的原因都公布";
 
 export default async function FoundersLedgerOgImage() {
   const forged = FOUNDERS_CLAIMED;

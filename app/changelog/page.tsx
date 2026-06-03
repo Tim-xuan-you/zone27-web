@@ -45,7 +45,7 @@ const MILESTONES: { date: string; title: string; detail: string }[] = [
     date: "2026-05-23",
     title: "創始申請表單上線 + 信任頁打磨",
     detail:
-      "Founders 27 申請頁上線,退款與隱私條款對齊台灣消保法與個資法。多個頁面的可信度與動線一起優化。",
+      "FOUNDER 申請頁上線,退款與隱私條款對齊台灣消保法與個資法。多個頁面的可信度與動線一起優化。",
   },
   {
     date: "2026-05-21",

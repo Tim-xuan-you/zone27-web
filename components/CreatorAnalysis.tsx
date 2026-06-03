@@ -40,7 +40,7 @@ import {
 const T_MAX = 80;
 const B_MAX = 2000;
 // 賣文價位 · 勾選不自填 · 圓整誠實(不玩 99/168 賭場 charm pricing = 品牌宣言)。
-// 上限綁會員階級:BLACK CARD ≤ 200(衝動帶)· Founders 27 ≤ 500(頂級分析師
+// 上限綁會員階級:BLACK ≤ 200(衝動帶)· FOUNDER ≤ 500(頂級分析師
 // premium · 年費會員的實質好處)。 免費會員只能免費發(建戰績 · 還不能賣)。
 const PRICE_OPTIONS = [0, 50, 100, 200, 300, 500] as const;
 function tierPriceMax(tier: MemberTier): number {
@@ -295,7 +295,7 @@ export default function CreatorAnalysis({
                   <span className="text-gold/70">✓ 已驗證準度</span> 撐得起(買家看的是真戰績 · 不是話術)。
                   新手先 0–50 建口碑 · 準度上來再升價。
                   {tier !== "founder" &&
-                    "（BLACK CARD 上限 NT$ 200;Founders 27 可賣到 NT$ 500）"}
+                    "（BLACK 上限 NT$ 200;FOUNDER 可賣到 NT$ 500）"}
                 </p>
               </div>
             ) : (

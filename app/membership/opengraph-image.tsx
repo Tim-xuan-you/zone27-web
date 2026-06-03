@@ -164,19 +164,19 @@ export default async function MembershipOgImage() {
                 display: "flex",
               }}
             >
-              FREE TIER
+              OPEN
             </span>
             <span style={{ color: "rgba(245,242,234,0.3)", display: "flex" }}>
               ·
             </span>
             <span style={{ color: BRAND.bone, display: "flex" }}>
-              BLACK CARD
+              BLACK
             </span>
             <span style={{ color: "rgba(245,242,234,0.3)", display: "flex" }}>
               ·
             </span>
             <span style={{ color: BRAND.bone, display: "flex" }}>
-              FOUNDERS 27
+              FOUNDER
             </span>
           </div>
         </div>
@@ -205,7 +205,7 @@ export default async function MembershipOgImage() {
               display: "flex",
             }}
           >
-            JOIN FREE TIER →
+            JOIN OPEN →
           </span>
         </div>
       </div>

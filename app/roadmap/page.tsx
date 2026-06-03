@@ -78,16 +78,16 @@ const LOCKED: { quarter: string; items: RoadmapItem[] }[] = [
     quarter: "下一階段 · 2026 Q3(Jul-Sep)",
     items: [
       {
-        title: "Founders 27 正式預售開啟",
-        body: "NT$ 2,700/年 · 會員不限量 · 前 270 拿永久創始編號 · 手工銀行轉帳 · Tim 親手 onboarding 每一位。BLACK CARD 一年約 12 期 × NT$ 500 = NT$ 6,000 · Founders 27 NT$ 2,700/年(含 BLACK CARD)省 55%。流程細節已寫進 docs/MANUAL-ONBOARDING.md。",
+        title: "FOUNDER 正式預售開啟",
+        body: "NT$ 2,700/年 · 會員不限量 · 前 270 拿永久創始編號 · 手工銀行轉帳 · Tim 親手 onboarding 每一位。BLACK 一年約 12 期 × NT$ 500 = NT$ 6,000 · FOUNDER NT$ 2,700/年(含 BLACK)省 55%。流程細節已寫進 docs/MANUAL-ONBOARDING.md。",
         evidenceHref: "/founders",
         evidenceLabel: "/founders 完整邏輯",
       },
       {
-        title: "BLACK CARD · CPBL Season Pass NT$ 500/31 天 上線(手動轉帳 · 不自動續扣)",
+        title: "BLACK · CPBL Season Pass NT$ 500/31 天 上線(手動轉帳 · 不自動續扣)",
         body: "賣的不是引擎(永遠免費)· 賣的是社群 + 策展 + 創作者 take。對標 Stratechery / The Athletic / Bankless Premium / TradingView Pro。R81 pivot · 自 NT$ 299/月 auto → NT$ 500/31 天 explicit · per /integrity rule #13 binding(ECPay/TapPay/Stripe 自動扣款全 refused forever)。",
         evidenceHref: "/membership/black-card",
-        evidenceLabel: "BLACK CARD season pass canonical",
+        evidenceLabel: "BLACK season pass canonical",
       },
       {
         title: "品牌正式域名上線",
@@ -136,7 +136,7 @@ const EXPLICIT_NO: RoadmapItem[] = [
   },
   {
     title: "永遠不接受創投 / 不投放廣告 / 不上市",
-    body: "ZONE 27 用 270 位 Founders × NT$ 2,700 自籌資金啟動 · BLACK CARD 月費維持運轉。創投錢進來後會被估值倒推「ARR 50x 線性增長」邏輯,跟 270 人封閉俱樂部本質衝突。",
+    body: "ZONE 27 用 270 位 Founders × NT$ 2,700 自籌資金啟動 · BLACK 月費維持運轉。創投錢進來後會被估值倒推「ARR 50x 線性增長」邏輯,跟 270 人封閉俱樂部本質衝突。",
     evidenceHref: "/manifesto",
     evidenceLabel: "/manifesto Section II",
   },

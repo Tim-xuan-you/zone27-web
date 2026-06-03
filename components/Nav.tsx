@@ -49,7 +49,7 @@ type NavKey =
 // 27 之牆 / 關於 · Tim cannot miss this · Nav 是 highest visibility surface
 // 全 site。 dynamic href to today's first match #game-thread anchor ·
 // fallback /interact when 0 matches today · per R148 6-constraint scaffold
-// + BLACK CARD-gated brand IP 維持 minimum-violation。
+// + BLACK-gated brand IP 維持 minimum-violation。
 const NAV_ITEMS_STATIC: {
   key: Exclude<NavKey, "home" | "founders" | "discuss">;
   href: string;

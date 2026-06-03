@@ -5,9 +5,9 @@ import Footer from "@/components/Footer";
 import MembershipUpgrade from "@/components/MembershipUpgrade";
 
 export const metadata: Metadata = {
-  title: "BLACK CARD · CPBL 季票 · NT$ 500 / 31 天",
+  title: "BLACK · CPBL 季票 · NT$ 500 / 31 天",
   description:
-    "BLACK CARD · NT$ 500 / 31 天 · 升級解鎖賣分析賺錢(你拿 90%)+ 賽事討論室發言 + 驗證準度標章。 手動轉帳 · 不自動續扣 · 14 天退款。",
+    "BLACK · NT$ 500 / 31 天 · 升級解鎖賣分析賺錢(你拿 90%)+ 賽事討論室發言 + 驗證準度標章。 手動轉帳 · 不自動續扣 · 14 天退款。",
 };
 
 export const revalidate = 86400;
@@ -40,10 +40,10 @@ export default function BlackCardPage() {
       <main id="main" className="mx-auto max-w-xl w-full px-6 sm:px-10 pt-12 pb-24">
         {/* ── 是什麼 ──────────────────────────── */}
         <p className="font-mono text-gold text-[10px] tracking-[0.45em] mb-3">
-          / BLACK CARD · CPBL 季票
+          / BLACK · CPBL 季票
         </p>
         <h1 className="text-3xl sm:text-4xl text-bone font-light tracking-tight leading-tight mb-3">
-          BLACK CARD
+          BLACK
         </h1>
         <p className="text-mute text-sm sm:text-base leading-relaxed mb-10">
           NT$ 500 / 31 天。 引擎永遠免費 —— 你付的是
@@ -70,7 +70,7 @@ export default function BlackCardPage() {
 
         {/* ── 直接付款(同錢包 UX · 點了直接給帳號)──── */}
         <MembershipUpgrade
-          name="BLACK CARD"
+          name="BLACK"
           kicker="CPBL 季票 · 每 31 天"
           priceLabel="500"
           period="31 天"

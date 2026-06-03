@@ -7,7 +7,7 @@ import MembershipUpgrade from "@/components/MembershipUpgrade";
 export const metadata: Metadata = {
   title: "升級會員",
   description:
-    "升級解鎖「標價賣你的分析賺錢」。BLACK CARD NT$ 500/31 天(你拿 90%)· 創始會員 NT$ 2,700/365 天(你拿 95%,全站最低抽成)· 點一下直接顯示轉帳帳號 · 不自動續扣 · 14 天退款。",
+    "升級解鎖「標價賣你的分析賺錢」。BLACK NT$ 500/31 天(你拿 90%)· FOUNDER NT$ 2,700/365 天(你拿 95%,全站最低抽成)· 點一下直接顯示轉帳帳號 · 不自動續扣 · 14 天退款。",
 };
 
 export const revalidate = 3600;
@@ -30,7 +30,7 @@ const BLACK_PERKS = [
 ];
 
 const FOUNDER_PERKS = [
-  { text: "黑卡全部功能 · 你拿", strong: "95%（全站最低抽成）" },
+  { text: "BLACK 全部功能 · 你拿", strong: "95%（全站最低抽成）" },
   { text: "引擎新版搶先試 + 投票權" },
   { text: "創始席位 · 最早一批進場的人" },
 ];
@@ -55,14 +55,14 @@ export default function MembershipPage() {
         {/* 兩張卡 · 點「立即升級」直接秀轉帳帳號(不再 email 去要)*/}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <MembershipUpgrade
-            name="BLACK CARD"
+            name="BLACK"
             kicker="開始靠分析賺錢"
             priceLabel="500"
             period="31 天"
             perks={BLACK_PERKS}
           />
           <MembershipUpgrade
-            name="FOUNDERS 27"
+            name="FOUNDER"
             kicker="最高階 · 創始席位"
             priceLabel="2,700"
             period="365 天"

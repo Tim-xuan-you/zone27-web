@@ -336,7 +336,7 @@ export default function LoginPage() {
             lang="en"
             className="font-mono text-gold text-[10px] tracking-[0.45em] mb-6"
           >
-            / LOGIN · FREE TIER · 登入或註冊
+            / LOGIN · OPEN · 登入或註冊
           </p>
           <h1 className="text-4xl sm:text-5xl text-bone font-light tracking-tight leading-[1.1]">
             <span className="text-gold">加入 ZONE 27</span>

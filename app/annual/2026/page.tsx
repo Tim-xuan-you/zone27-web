@@ -26,7 +26,7 @@ export const metadata: Metadata = {
 // signaling form · trust > marketing per agent verdict).
 //
 // Year 0 honest content(2026 pre-launch state):
-//   - 0 paid subscribers(BLACK CARD not launched)
+//   - 0 paid subscribers(BLACK not launched)
 //   - 7 forged founders(placeholder · clearly SYSTEM-TEST labeled)
 //   - 263 待領創始編號(NT$ 2,700/365 天 · 會員不限量 · 前 270 拿編號 · Patek annual collection 模式)
 //   - 1 PROVED receipt(cpbl-260521-01 · 富邦 win @ 60% engine)
@@ -88,23 +88,23 @@ const WHAT_FAILED_2026: { item: string; lesson: string }[] = [
     lesson: "沒有公開數據佐證的抽成數字 · 講死了就是沒憑據的指控 · 有風險。 改成只講『這個生意抽成普遍偏高』這種有共識的範圍 · 不掛在特定對象上。",
   },
   {
-    item: "BLACK CARD 一度只賣「身份」、不給實際功能",
-    lesson: "會員方案一度做得很虛、沒人想付費 · 而我們的客群是會下注的人。 後來把重心轉回棒球預測引擎 · 把 BLACK CARD 重新定義成 — 工程筆記、AI 信心度、賽事討論、Q&A · 為想練預測的人量身設計、給得出實際價值。",
+    item: "BLACK 一度只賣「身份」、不給實際功能",
+    lesson: "會員方案一度做得很虛、沒人想付費 · 而我們的客群是會下注的人。 後來把重心轉回棒球預測引擎 · 把 BLACK 重新定義成 — 工程筆記、AI 信心度、賽事討論、Q&A · 為想練預測的人量身設計、給得出實際價值。",
   },
   {
-    item: "Founders 27 上線時間一度寫 2026 Q3 · 至今 7 個仍是系統測試佔位",
+    item: "FOUNDER 上線時間一度寫 2026 Q3 · 至今 7 個仍是系統測試佔位",
     lesson: "金流平台還沒拍板 · 品牌域名還沒買 · 第一筆真實會員認領延後。 我們大方把這件事寫進空白的認領帳本 · 等通道開了再上。",
   },
 ];
 
 const WHATS_NEXT_2027: { milestone: string; description: string; q: string }[] = [
   {
-    milestone: "BLACK CARD 上線",
+    milestone: "BLACK 上線",
     description: "NT$ 500/31 天 訂閱 · 收款開放(手動銀行轉帳 · 不自動續扣)· weekly AI 引擎 deep-dive + match thread + Tim Q&A 每月。",
     q: "2026 Q3",
   },
   {
-    milestone: "Founders 27 第一週 review window",
+    milestone: "FOUNDER 第一週 review window",
     description: "申請通道開放 · 第一筆 real founder 認領 · /founders/ledger empty scaffold 變實 weekly review log · 拒絕原因(去 PII)同等 visual 公開。",
     q: "2026 Q3",
   },
@@ -193,7 +193,7 @@ export default function AnnualReport2026Page() {
               label="PAID SUBS · 付費"
               value={String(METRICS.paidSubscribers)}
               tone="loss"
-              note="0 · BLACK CARD 未上線"
+              note="0 · BLACK 未上線"
             />
             <MetricBlock
               label="REVENUE NT$ · 收入"
@@ -208,7 +208,7 @@ export default function AnnualReport2026Page() {
               note="Vercel / Supabase / Resend / GitHub 全 free tier"
             />
             <MetricBlock
-              label="FOUNDERS 27 · 已認領"
+              label="FOUNDER · 已認領"
               value={`${METRICS.founders27Claimed} / ${METRICS.founders27Total}`}
               tone="gold"
               note="7 SYSTEM-TEST forged · 263 待認領"
@@ -227,8 +227,8 @@ export default function AnnualReport2026Page() {
             />
           </div>
           <p className="mt-5 font-mono text-loss/80 text-[10px] tracking-[0.3em] leading-relaxed">
-            ⚠ 上線前 · Founders 27 付費相關數字全為 0。 BLACK CARD 與
-            Founders 27 都採人工轉帳 · 品牌域名還沒買 · 等時機到了再上線。
+            ⚠ 上線前 · FOUNDER 付費相關數字全為 0。 BLACK 與
+            FOUNDER 都採人工轉帳 · 品牌域名還沒買 · 等時機到了再上線。
           </p>
 
           {/* Round 44 W-B · ReproducibilityReceipt drop-in · /annual/2026
@@ -319,7 +319,7 @@ export default function AnnualReport2026Page() {
             上線前的誠實現實 · 不造假數字、不灌虛榮數據。
           </p>
           <p>
-            第 1 年報告預計 2027/05/31 公開 · 第一次會有真實的 BLACK CARD
+            第 1 年報告預計 2027/05/31 公開 · 第一次會有真實的 BLACK
             訂閱人數、收入、流失率、以及命中與失準的場數 · 從第 0 年到
             第 1 年全程公開。 我們從第 0 年就承諾每年 5/31 公開 · 這個承諾
             本身就是品牌的一部分。

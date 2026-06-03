@@ -1,6 +1,6 @@
 "use server";
 
-// ── ZONE 27 · Founders 27 Pre-launch Waitlist ──────────
+// ── ZONE 27 · FOUNDER Pre-launch Waitlist ──────────
 // Server Action that persists waitlist signups to Supabase.
 //
 // Flow:

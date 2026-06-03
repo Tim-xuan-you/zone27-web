@@ -94,9 +94,9 @@ const STEELMAN_OBJECTIONS: {
     num: "05",
     title: "現在 0 付費、收入 NT$ 0、只結算過 1 場 · 這真的是「品牌力」 · 還是其實還沒做出成績?",
     objection:
-      "ZONE 27 通篇公開「0 個 BLACK CARD 付費會員」 · 「年收入 NT$ 0」 · 「只結算過 1 場預測」 · 還把這包裝成「徹底透明」。 但「有實力的人承認自己會犯錯」會贏得好感 · 跟「還沒做出成績的人承認自己還沒做出成績」是兩回事。 ZONE 27 公開這個起步狀態 · 到底是坦誠 · 還是把弱點美化成美德?",
+      "ZONE 27 通篇公開「0 個 BLACK 付費會員」 · 「年收入 NT$ 0」 · 「只結算過 1 場預測」 · 還把這包裝成「徹底透明」。 但「有實力的人承認自己會犯錯」會贏得好感 · 跟「還沒做出成績的人承認自己還沒做出成績」是兩回事。 ZONE 27 公開這個起步狀態 · 到底是坦誠 · 還是把弱點美化成美德?",
     response:
-      "這個質疑很狠 · 但很重要。 我們誠實回答:(1) 「承認犯錯」會加分的前提是你本來就有實力 · 不是「還沒證明就先自誇透明」 ·(2) ZONE 27 現在公開 0 付費 · 唯一說得過去的條件是 — 之後真的要做出付費會員、真的要累積結算過的預測 · 否則這套說法就垮了 ·(3) 因此我們在這裡先把話講死:第一年(2027)至少要有 10 個 BLACK CARD 付費會員、30 場結算過的預測、3 位真實認領的 Founders 27。 若第一年沒達標 · /annual/2027 必須明寫「我們行銷透明 · 但沒做出真正的成績」 · 不能藏 ·(4) /annual/2026 的年度報告也要先公開這組第一年標準。",
+      "這個質疑很狠 · 但很重要。 我們誠實回答:(1) 「承認犯錯」會加分的前提是你本來就有實力 · 不是「還沒證明就先自誇透明」 ·(2) ZONE 27 現在公開 0 付費 · 唯一說得過去的條件是 — 之後真的要做出付費會員、真的要累積結算過的預測 · 否則這套說法就垮了 ·(3) 因此我們在這裡先把話講死:第一年(2027)至少要有 10 個 BLACK 付費會員、30 場結算過的預測、3 位真實認領的 FOUNDER。 若第一年沒達標 · /annual/2027 必須明寫「我們行銷透明 · 但沒做出真正的成績」 · 不能藏 ·(4) /annual/2026 的年度報告也要先公開這組第一年標準。",
     concession:
       "起步階段的徹底透明 · 唯一成立的前提是之後真的做起來 · 否則就只是「公開承認自己在用一套輸的策略」。 這個質疑逼我們必須公開具體的 2027 成功門檻 · 不能無限期停在起步狀態。 質疑成立 · 我們給出具體承諾。",
   },
@@ -295,7 +295,7 @@ export default function SteelmanPage() {
             <ul className="space-y-3 list-disc pl-6 text-mute leading-relaxed">
               <li>
                 到 2027-05-31 · 至少 <strong className="text-bone">10 位</strong>
-                BLACK CARD 付費會員
+                BLACK 付費會員
               </li>
               <li>
                 到 2027-05-31 · 至少 <strong className="text-bone">30 場</strong>
@@ -303,7 +303,7 @@ export default function SteelmanPage() {
               </li>
               <li>
                 至少 <strong className="text-bone">3 位</strong> 真實訪客認領
-                Founders 27(目前 7 個都還是系統測試用的佔位)
+                FOUNDER(目前 7 個都還是系統測試用的佔位)
               </li>
             </ul>
             <p className="mt-5 font-mono text-mute/80 text-sm tracking-[0.18em] leading-relaxed">
@@ -345,7 +345,7 @@ export default function SteelmanPage() {
           {/* Round 51 W-C · Agent 3 HIGH #6 fix · /steelman conversion CTA
               at page end · 同 /ethics pattern · 訪客讀完 6 strongest
               objections + Tim 自己 concede = strongest warm-up state ·
-              trust loop must close to Founders 27 / BLACK CARD entry。 */}
+              trust loop must close to FOUNDER / BLACK entry。 */}
           <p className="text-mute text-sm sm:text-base max-w-xl mx-auto mb-8 leading-relaxed">
             這 6 條最強反對沒勸退您嗎? 加入 ZONE 27 ·
           </p>
@@ -354,13 +354,13 @@ export default function SteelmanPage() {
               href="/founders"
               className="inline-block px-6 py-3 bg-gold text-navy font-mono text-[10px] tracking-[0.3em] hover:bg-gold-soft transition-colors"
             >
-              → Founders 27 · NT$ 2,700 / 年
+              → FOUNDER · NT$ 2,700 / 年
             </Link>
             <Link
               href="/membership/black-card"
               className="inline-block px-6 py-3 border border-gold text-gold font-mono text-[10px] tracking-[0.3em] hover:bg-gold/10 transition-colors"
             >
-              → BLACK CARD · NT$ 500/31 天
+              → BLACK · NT$ 500/31 天
             </Link>
           </div>
           <p

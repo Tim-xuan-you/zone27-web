@@ -74,7 +74,7 @@ export const FEED_ENTRIES: FeedEntry[] = [
     summary:
       "5 brand strengthening · /ethics + /steelman 加 conversion CTA at page end · /about Ch07 mailto:tim@zone27.tw accountability · Homepage F6 strip + Footer WCAG AA contrast fix。",
     content:
-      "Agent 3 conversion funnel audit synthesize · trust pages 讀完訪客是 strongest warm-up state · 必須 trust loop close to Founders 27 / BLACK CARD entry · 不 dump 到 navigation 即跑路。 加 explicit conversion sections + 2 primary CTA chip。 同時 WCAG AA contrast fix · homepage F6 declarative strip dividers 加 aria-hidden + text-mute/60 → text-mute (5.6:1 AA pass) · Footer FUNDED row text-mute/70 → text-mute/85。",
+      "Agent 3 conversion funnel audit synthesize · trust pages 讀完訪客是 strongest warm-up state · 必須 trust loop close to FOUNDER / BLACK entry · 不 dump 到 navigation 即跑路。 加 explicit conversion sections + 2 primary CTA chip。 同時 WCAG AA contrast fix · homepage F6 declarative strip dividers 加 aria-hidden + text-mute/60 → text-mute (5.6:1 AA pass) · Footer FUNDED row text-mute/70 → text-mute/85。",
     href: "/ethics",
     updated: "2026-05-22",
   },

@@ -1,5 +1,5 @@
-// ── ZONE 27 · Founders 27 Application Types + Helpers ───
-// R68 W-A · Founders 27 application form (1 layer deeper than waitlist) ·
+// ── ZONE 27 · FOUNDER Application Types + Helpers ───
+// R68 W-A · FOUNDER application form (1 layer deeper than waitlist) ·
 // Patek Philippe allocation pattern · Tim 手動 review · /founders/ledger
 // 5-step allocation rules 物理 codify。
 //

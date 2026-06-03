@@ -163,7 +163,7 @@ export default function ManifestoPage() {
               <strong className="text-bone">為什麼我們接受這個代價:</strong>{" "}
               因為 ZONE 27 賣的不是演算法,是身分。
               <Link href="/founders" className="text-gold hover:underline underline-offset-4">
-                Founders 27
+                FOUNDER
               </Link>{" "}
               的價值是 #001 ~ #270 創始編號 + 創辦人親手 onboarding +
               建立期社群的位置 —{" "}
@@ -195,7 +195,7 @@ export default function ManifestoPage() {
             label="MONETIZATION"
             zh="工具免費,身分付費"
             industry="工具 per-use 計費 (SaaS) 或免費釣魚後抽佣 (運彩平台)"
-            zone27="引擎完全免費 · 收費僅在身分層 (Founders 27 + BLACK CARD)"
+            zone27="引擎完全免費 · 收費僅在身分層 (FOUNDER + BLACK)"
           >
             <P>
               <strong className="text-bone">行業為什麼這樣收費:</strong>{" "}
@@ -214,7 +214,7 @@ export default function ManifestoPage() {
             <P>
               <strong className="text-bone">這個倒置讓我們失去什麼:</strong>{" "}
               我們永遠不會有「ARR 50x 線性成長」的故事可以講給創投。
-              收入靠會員費(Founders 27 NT$ 2,700/年 · BLACK CARD NT$ 500/月)+
+              收入靠會員費(FOUNDER NT$ 2,700/年 · BLACK NT$ 500/月)+
               創作者抽成 5–10% · 會員不限量 · 但 CPBL 市場本身就小。這是一個{" "}
               <Link href="/about" className="text-gold hover:underline underline-offset-4">
                 俱樂部規模的事業
@@ -261,7 +261,7 @@ export default function ManifestoPage() {
                 </li>
                 <li>
                   <span className="text-loss/80">✕</span> MLM 業績 quota →{" "}
-                  <span className="text-bone">Founders 27 年度付款 · 沒 quota</span>
+                  <span className="text-bone">FOUNDER 年度付款 · 沒 quota</span>
                 </li>
                 <li>
                   <span className="text-loss/80">✕</span> MLM 強制庫存 →{" "}
@@ -277,8 +277,8 @@ export default function ManifestoPage() {
                 </li>
               </ul>
               <P className="text-mute/70 !mb-0 mt-4 text-sm">
-                BLACK CARD 創作者抽成 10% 是平台費 ·
-                Founders 27 創作者抽成 5%(BLACK CARD 的一半 · 不是推薦回扣)。
+                BLACK 創作者抽成 10% 是平台費 ·
+                FOUNDER 創作者抽成 5%(BLACK 的一半 · 不是推薦回扣)。
                 前 270 創始編號是
                 <strong className="text-bone">給最早期支持者的永久徽章</strong> · 不是招募階梯 ·
                 不是未來業績的領先指標。
@@ -394,7 +394,7 @@ export default function ManifestoPage() {
               <strong className="text-bone">為什麼我們接受這個代價:</strong>{" "}
               因為我們本來就不打廣告 — 沒有 audience profiling 的需求 ·
               沒有 retargeting 的對象。
-              真正的回饋管道是 Founders 27 直接寫信給創辦人 ·
+              真正的回饋管道是 FOUNDER 直接寫信給創辦人 ·
               這比任何 heatmap 都精確一千倍。
               <strong className="text-bone">放棄追蹤的代價剛好是 0</strong> —
               我們失去的能力本來就不在我們的成長路徑上。
@@ -497,10 +497,10 @@ export default function ManifestoPage() {
                     Founders LINE 群對話(關門的)
                   </SynthItem>
                   <SynthItem gold>
-                    Tim 每日策展焦點(人工 · BLACK CARD 訂閱限定)
+                    Tim 每日策展焦點(人工 · BLACK 訂閱限定)
                   </SynthItem>
                   <SynthItem gold>
-                    每週工程筆記(BLACK CARD 訂閱限定)
+                    每週工程筆記(BLACK 訂閱限定)
                   </SynthItem>
                   <SynthItem gold>
                     線上工作坊 + 模型 voting / preview(訂閱限定)

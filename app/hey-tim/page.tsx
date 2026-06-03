@@ -36,7 +36,7 @@ export const metadata = createPageMetadata({
 // 此 page closes structural gap。
 //
 // The cognitive frame this closes(per Agent A R80 honest answer):
-//   - Founders 27 spending NT$ 2,700 應該看到 Tim's name on dated replies
+//   - FOUNDER spending NT$ 2,700 應該看到 Tim's name on dated replies
 //     before deciding · 不是 marketing「我們很懂台灣棒球」 self-claim
 //   - Bill James Online sub renews because Bill replies on Hey Bill ·
 //     not because predictions are 100% right
@@ -292,7 +292,7 @@ export default function HeyTimPage() {
             className="text-mute text-base leading-relaxed mb-4"
             style={{ fontFamily: "Georgia, serif", textWrap: "pretty" }}
           >
-            花 NT$ 2,700 加入 Founders 27 的人 · 在決定前應該看得到 Tim
+            花 NT$ 2,700 加入 FOUNDER 的人 · 在決定前應該看得到 Tim
             親手、有日期的回覆 · 而不是一句「我們很懂台灣棒球」的廣告詞。
             讓人年復一年留下來的 · 從來不是預測 100% 命中 · 是有人真的會回你。
           </p>

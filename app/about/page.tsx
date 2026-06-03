@@ -457,7 +457,7 @@ export default function AboutPage() {
               FOUNDER ONBOARDING
             </p>
             <p className="text-bone text-base">
-              Founders 27 全 270 位 Tim 親手 onboard · 銀行轉帳 · personal email
+              FOUNDER 全 270 位 Tim 親手 onboard · 銀行轉帳 · personal email
               ·{" "}
               <a
                 href="https://github.com/Tim-xuan-you/zone27-web/blob/main/docs/MANUAL-ONBOARDING.md"

@@ -95,7 +95,7 @@ const REDLINES: ReadonlyArray<{ no: string; rule: string; basis: string; revised
   {
     no: "13",
     rule: "不 ship subscription auto-renewal · 永遠 · ECPay / TapPay / 綠界定期定額 / Stripe / 藍新 / 任何 payment gateway 自動扣款 全 refused",
-    basis: "每次續訂都要你親手按一次 + 自己轉帳 · 自動扣款 = 「忘記取消就一直被扣」的暗黑設計 · 我們不做。每一季由你主動「我還在乎」重新加入 · 而不是靠你忘記取消來留住你。BLACK CARD 從月費自動扣款改成 NT$ 500/31 天親手一次性付款 · 沒有自動續訂對我們是機會不是限制 · 違反 = 品牌信用永久留下記錄。",
+    basis: "每次續訂都要你親手按一次 + 自己轉帳 · 自動扣款 = 「忘記取消就一直被扣」的暗黑設計 · 我們不做。每一季由你主動「我還在乎」重新加入 · 而不是靠你忘記取消來留住你。BLACK 從月費自動扣款改成 NT$ 500/31 天親手一次性付款 · 沒有自動續訂對我們是機會不是限制 · 違反 = 品牌信用永久留下記錄。",
   },
 ];
 
@@ -282,9 +282,9 @@ export default function IntegrityPage() {
               <strong className="text-bone">這道牆的具體形狀:</strong>
               ZONE 27 引擎 output(K/9 · BB/9 · HR/9 推 Monte Carlo · 7-LENS
               CANVAS · /audit S02 全部 estimation disclosure)對<strong className="text-bone">
-              FREE tier 訪客 = BLACK CARD 訂閱者 = Founders 27 永久會員</strong>
+              FREE tier 訪客 = BLACK 訂閱者 = FOUNDER 永久會員</strong>
               · 物理上同一份 lib/simulator.ts 跑出來。 paid tier 買的是 IDENTITY
-              + 創作者抽成 + Founders 27 LINE 群 · 不買 engine accuracy
+              + 創作者抽成 + FOUNDER LINE 群 · 不買 engine accuracy
               升級 · 不買 secret edge · 不買 paywall predictions。
             </p>
 
@@ -321,7 +321,7 @@ export default function IntegrityPage() {
                   </p>
                 </div>
                 <p className="text-mute text-[12px] sm:text-sm leading-relaxed">
-                  FREE tier 訪客看到的 win probability = BLACK CARD 訂閱者 = Founders 27 永久會員
+                  FREE tier 訪客看到的 win probability = BLACK 訂閱者 = FOUNDER 永久會員
                   · 同一份 lib/simulator.ts 同一份 lib/matches.ts 跑出來 · 任何時刻 fork repo
                   可驗證 · 違反 = Tim 親手 在 /ethics 紅字標永久 audit trail
                 </p>
@@ -358,8 +358,8 @@ export default function IntegrityPage() {
                   </p>
                 </div>
                 <p className="text-mute text-[12px] sm:text-sm leading-relaxed">
-                  BLACK CARD 解鎖的(見 /membership/black-card)全是身分層的東西
-                  (LINE 群 + Tim 工程筆記完整版 + voting + 創作者抽成 + Founders 27 LINE 群)·
+                  BLACK 解鎖的(見 /membership/black-card)全是身分層的東西
+                  (LINE 群 + Tim 工程筆記完整版 + voting + 創作者抽成 + FOUNDER LINE 群)·
                   沒有任何一項是「讓引擎變更準」· 違反 = 品牌鐵律直接崩。
                 </p>
               </li>

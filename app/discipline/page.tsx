@@ -116,7 +116,7 @@ export default function DisciplinePage() {
             <Subhead>ZONE 27 應用</Subhead>
             <List>
               <Item label="前 270 創始編號 · 永久">
-                Founders 27 不是「early bird 折扣」,
+                FOUNDER 不是「early bird 折扣」,
                 是<strong className="text-bone">一輩子</strong>關係。
                 前 270 個創始編號永久屬於您 · Buffett 的 forever holding 哲學寫進編號裡。
               </Item>
@@ -237,11 +237,11 @@ export default function DisciplinePage() {
             <List>
               <Item label="會員制 > 商品收費">
                 引擎 markup = 0%(永遠免費)·
-                BLACK CARD NT$ 500/31 天 + Founders 27 NT$ 2,700/365 天 = membership revenue ·
+                BLACK NT$ 500/31 天 + FOUNDER NT$ 2,700/365 天 = membership revenue ·
                 跟 Costco 一樣 — 「賣會員身分,不賣商品本身」。
               </Item>
               <Item label="自設創作者抽成上限">
-                Founders 27 創作者 5% · BLACK CARD 10% · vs 業界 30-50%。
+                FOUNDER 創作者 5% · BLACK 10% · vs 業界 30-50%。
                 Costco 14% 上限 = 把客戶利益放在毛利之前。
                 ZONE 27 同樣邏輯 · 但更狠(5%)。
               </Item>

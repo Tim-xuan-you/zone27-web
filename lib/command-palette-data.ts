@@ -582,11 +582,12 @@ export const COMMAND_ITEMS: CommandItem[] = [
 
   // ── 轉換 ───────────────────────────────────────────
   {
-    label: "Founders 27 · 年度創始席位 · 前 270 創始編號",
+    label: "FOUNDER · 年度創始席位 · 前 270 創始編號",
     kicker: "/founders",
     path: "/founders",
     group: "轉換",
     keywords: [
+      "founder",
       "founders",
       "創始",
       "創始會員",
@@ -607,7 +608,7 @@ export const COMMAND_ITEMS: CommandItem[] = [
     ],
   },
   {
-    label: "申請 Founders 27 · 創始席位 · Tim 親手審核",
+    label: "申請 FOUNDER · 創始席位 · Tim 親手審核",
     kicker: "/founders/apply",
     path: "/founders/apply",
     group: "轉換",
@@ -667,7 +668,7 @@ export const COMMAND_ITEMS: CommandItem[] = [
     ],
   },
   {
-    label: "BLACK CARD · CPBL 季票 · NT$ 500/31 天",
+    label: "BLACK · CPBL 季票 · NT$ 500/31 天",
     kicker: "/membership/black-card",
     path: "/membership/black-card",
     group: "轉換",
@@ -752,8 +753,8 @@ export const COMMAND_ITEMS: CommandItem[] = [
       "身份切換",
       "視角",
       "方案",
-      "看 BLACK CARD",
-      "看 FREE TIER",
+      "看 BLACK",
+      "看 OPEN",
       "看訪客",
       "看 Founders",
       "cmd shift p",

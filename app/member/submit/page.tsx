@@ -7,7 +7,7 @@ import Footer from "@/components/Footer";
 import { createSupabaseBrowserClient } from "@/lib/supabase/browser";
 
 // ── ZONE 27 · /member/submit ───────────────────────────
-// Round 30 Wave 10 · FREE TIER「投稿給 Tim 親手 curate」 form。
+// Round 30 Wave 10 · OPEN「投稿給 Tim 親手 curate」 form。
 // Stratechery Guest Post + Tim 1/週 cadence pattern。
 //
 // Flow:
@@ -15,7 +15,7 @@ import { createSupabaseBrowserClient } from "@/lib/supabase/browser";
 //   anonymous → render "/login" prompt
 //
 // Brand IP:
-//   - 沒 public posting(per BLACK CARD Q3+ TapPay axiom)
+//   - 沒 public posting(per BLACK Q3+ TapPay axiom)
 //   - 純 Tim-curate · 不存資料庫 · 0 server-side archive
 //   - 1/週 cadence per /membership Creator Permissions FAQ
 // ─────────────────────────────────────────────────────
@@ -121,7 +121,7 @@ export default function SubmitPage() {
                 / LOGIN REQUIRED
               </p>
               <p className="text-mute text-sm leading-relaxed mb-5">
-                投稿需要 FREE TIER 會員身份(防 anon spam)· Email + 密碼
+                投稿需要 OPEN 會員身份(防 anon spam)· Email + 密碼
                 1 分鐘註冊 → 回此頁。
               </p>
               <Link
@@ -227,7 +227,7 @@ export default function SubmitPage() {
                 ▸ 0 server-side archive · 您 submission 只走 Resend → Tim
                 Gmail · 不存 DB · per /privacy
                 <br />
-                ▸ 沒 10% 創作者抽成(那是 BLACK CARD Q3+ 才有 · 純付費 model)
+                ▸ 沒 10% 創作者抽成(那是 BLACK Q3+ 才有 · 純付費 model)
               </p>
             </form>
           )}

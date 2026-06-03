@@ -11,7 +11,7 @@ import {
   getMatchPhase,
   matches as allMatches,
 } from "@/lib/matches";
-import { readTier, isPaid, creatorTakePct } from "@/lib/tier";
+import { readTier, isPaid, creatorTakePct, tierLabel } from "@/lib/tier";
 import OpenPositionCard, { type OpenPosition } from "@/components/OpenPositionCard";
 
 export const metadata: Metadata = {
@@ -85,8 +85,7 @@ export default async function MemberPage() {
   const tier = readTier(
     (user.user_metadata ?? null) as Record<string, unknown> | null,
   );
-  const tierZh =
-    tier === "founder" ? "創始會員" : tier === "black" ? "BLACK CARD 會員" : "FREE 會員";
+  const tierZh = `${tierLabel(tier)} 會員`;
 
   const predictionsMap = await getMyPredictionsMap();
   const stats = aggregatePredictionStats(

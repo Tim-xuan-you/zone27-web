@@ -67,7 +67,7 @@ const ACTIVE_LEAGUES: LeagueRow[] = [
     code: "CPBL",
     zh: "中華職棒",
     source: "stats.cpbl.com.tw · 官方公開資料 · 由 Tim 親手讀過每一場 + 寫進引擎",
-    sampleNote: "目標 ~240 場/年 · 創辦人親自 curate · 自動化等 Founders 27 滿員後啟動",
+    sampleNote: "目標 ~240 場/年 · 創辦人親自 curate · 自動化等 FOUNDER 滿員後啟動",
     status: "HAND_CURATED",
     statusLabel: "HAND-CURATED",
   },
@@ -197,7 +197,7 @@ export default function CoveragePage() {
               不同靠賣明牌賺錢的對手:<strong className="text-gold">引擎永遠免費 · 不賣明牌(tipster picks)· PROVED + DIVERGED 等大公開 · model 完整公開在 GitHub</strong>。 您拿我們的資料自己決定下哪個 platform · ZONE 27 自己不接受下注(我們不是賭場)。
             </p>
             <p className="text-mute/85 text-sm leading-relaxed mb-6 max-w-2xl">
-              <strong className="text-bone">老實認:</strong> BLACK CARD 訂閱者寫文章賣 · ZONE 27 抽 5% commission · 跟收費明牌群組 5-30% / Substack 10% / OnlyFans 20% / YouTube 45% 抽傭結構同類 · 業界最低 50% · 不假裝「我們不抽傭」 = 假面 disclosure。
+              <strong className="text-bone">老實認:</strong> BLACK 訂閱者寫文章賣 · ZONE 27 抽 5% commission · 跟收費明牌群組 5-30% / Substack 10% / OnlyFans 20% / YouTube 45% 抽傭結構同類 · 業界最低 50% · 不假裝「我們不抽傭」 = 假面 disclosure。
             </p>
             <div className="mb-6">
               <ArticleMeta readingMin={8} />
@@ -445,7 +445,7 @@ export default function CoveragePage() {
                 href="/founders"
                 className="text-gold hover:text-gold-soft transition-colors"
               >
-                Founders 27 創始會員
+                FOUNDER 創始會員
               </Link>
               可在每月會議投票決定下個啟用順序。一般會員可以申請,但優先順序由創始會員決定。
             </p>
@@ -560,7 +560,7 @@ export default function CoveragePage() {
               ZONE 27 找的不是「想要更多賽事預測」的人 — 那是博彩平台的客戶。
               我們找的是「**寧可少看一場,也不要看雜訊**」的人。如果這聽起來像您,
               <Link href="/founders" className="text-gold hover:text-gold-soft transition-colors">
-                {" "}Founders 27 創始名冊{" "}
+                {" "}FOUNDER 創始名冊{" "}
               </Link>
               還開著。
             </p>

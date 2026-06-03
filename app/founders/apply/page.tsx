@@ -12,29 +12,29 @@ import RefusalLedgerHint from "@/components/RefusalLedgerHint";
 import { FOUNDERS_TOTAL, FOUNDERS_NEXT } from "@/lib/founders-stats";
 
 export const metadata: Metadata = {
-  title: "申請 Founders 27 · Patek-style allocation",
+  title: "申請 FOUNDER · Patek-style allocation",
   description:
-    "Founders 27 創始席位申請表 · Tim 親手 review 每一份申請 · 1-3 business days · per /founders/ledger 5-step allocation rules · 通過後您才會收到付款方式 · 這不是註冊表單 · 是 Patek-style application。",
+    "FOUNDER 創始席位申請表 · Tim 親手 review 每一份申請 · 1-3 business days · per /founders/ledger 5-step allocation rules · 通過後您才會收到付款方式 · 這不是註冊表單 · 是 Patek-style application。",
   // R69 W-G · Agent B audit F11 fix · explicit openGraph re-using /founders
   // OG card · NEW-CONVERSATION-PROMPT advertised 「29 custom OG cards」 ·
   // highest-conversion R68 W-A page was sharing with global fallback OG ·
   // 此 fix 對齊 /founders parent OG until dedicated card ships R70+。
   openGraph: {
-    title: "申請 Founders 27 · Patek-style allocation",
+    title: "申請 FOUNDER · Patek-style allocation",
     description:
       "Tim 親手 review 1-3 days · 通過後收到付款方式(銀行轉帳 + 24h window)· per /founders/ledger 5-step allocation rules。",
     images: ["/founders/opengraph-image"],
   },
 };
 
-// ── R68 W-A · Founders 27 Application Page ──────────────
+// ── R68 W-A · FOUNDER Application Page ──────────────
 // /founders/apply · 1 layer deeper than /founders WaitlistForm · for
 // visitors who want to actually apply for one of 270 founding seats
 // (#008-#270 · #001-#007 are Tim's system-test placeholders per
 // /founders/ledger)。
 //
 // Brand IP fit:
-//   - per [[zone27-payment-architecture]] · Founders 27 = manual bank
+//   - per [[zone27-payment-architecture]] · FOUNDER = manual bank
 //     transfer · this form is the PRE-REQUISITE before Tim sends bank
 //     details · NOT a payment form itself
 //   - per [[feedback-zone27-pratfall-brand-ip]] · 明示「1-3 days 內 manual
@@ -59,7 +59,7 @@ export default function FoundersApplyPage() {
             </Link>
             <span className="text-mute/60">/</span>
             <Link href="/founders" className="hover:text-gold transition-colors">
-              FOUNDERS 27
+              FOUNDER
             </Link>
             <span className="text-mute/60">/</span>
             <span className="text-gold">APPLY</span>
@@ -69,10 +69,10 @@ export default function FoundersApplyPage() {
         {/* ── HERO ────────────────────────────────── */}
         <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pt-10 pb-8">
           <p className="font-mono text-gold text-[10px] tracking-[0.4em] mb-4">
-            FOUNDERS 27 · APPLICATION PHASE · PATEK ALLOCATION
+            FOUNDER · APPLICATION PHASE · PATEK ALLOCATION
           </p>
           <h1 className="text-4xl sm:text-5xl text-bone font-light tracking-tight leading-tight">
-            申請 Founders 27 ·{" "}
+            申請 FOUNDER ·{" "}
             <span className="text-gold">前 270 個創始編號</span>
           </h1>
           <p className="mt-6 text-mute leading-relaxed text-base sm:text-lg">
@@ -305,7 +305,7 @@ export default function FoundersApplyPage() {
           <p>
             前 270 個創始編號 = 我親手 review 每一個 applicant 的階段 · 365 天 ÷ 1.35
             是我一年親手 onboard 的節奏。 我不外包 review · 不 hire intern · 不
-            auto-approve 任何 case。 創始編號發完後 Founders 27 仍不限量開放 · 但
+            auto-approve 任何 case。 創始編號發完後 FOUNDER 仍不限量開放 · 但
             #001–#270 這批是我一個一個親手讀完「why」才發出去的。
           </p>
           <p>

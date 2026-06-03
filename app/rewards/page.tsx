@@ -399,7 +399,7 @@ function AnonymousPointsBlock() {
         / ANONYMOUS · 您未登入
       </p>
       <p className="text-mute text-sm sm:text-base leading-relaxed mb-5">
-        登入 FREE TIER 解鎖 prediction tracker · 賽前 lock-in 您預測 · 賽後
+        登入 OPEN 解鎖 prediction tracker · 賽前 lock-in 您預測 · 賽後
         對照 actual · 累計 PROVED 兌換實體獎品(底片 / 咖啡 / 沖洗 / 護照
         代辦折抵)。 0 cash · 0 訂閱 · skill-based fantasy league prize 結構。
       </p>

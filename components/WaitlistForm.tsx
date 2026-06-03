@@ -151,15 +151,15 @@ export default function WaitlistForm({
           DB knows which share channel produced this signup. */}
       {refSource && <input type="hidden" name="ref" value={refSource} />}
       <div className="flex items-center justify-between gap-3 flex-wrap mb-2">
-        {/* Round 24 stale-ref fix(post-Round-21 FREE TIER · Round-23 Nav
+        {/* Round 24 stale-ref fix(post-Round-21 OPEN · Round-23 Nav
             "會員")· kicker 從「創始會員 · 預售等候名單」改成 dual-purpose
             framing · 訪客現在 1 個動作填表 = 自動進入 2 個 tier:免費
-            訂閱層(永久)+ Founders 27 預售名單(前 270 拿創始編號 · 開放時優
+            訂閱層(永久)+ FOUNDER 預售名單(前 270 拿創始編號 · 開放時優
             先)。原 kicker 把表單框成「只有想當創始會員才填」· bounce
-            掉真正只想留 email 的訪客 · 跟下方 Round 21 FREE TIER
+            掉真正只想留 email 的訪客 · 跟下方 Round 21 OPEN
             clarifier 邏輯衝突。 */}
         <p className="font-mono text-gold text-[10px] tracking-[0.4em]">
-          ZONE 27 訂閱 · 免費 + Founders 27 預售
+          ZONE 27 訂閱 · 免費 + FOUNDER 預售
         </p>
         {showLiveCount && (
           <p
@@ -205,7 +205,7 @@ export default function WaitlistForm({
         </span>
         {" "}+{" "}
         <span className="text-bone font-medium">
-          Founders 27 預售名單
+          FOUNDER 預售名單
         </span>
         (開放時優先取得購買權)。
         <br />

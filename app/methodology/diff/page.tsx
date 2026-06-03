@@ -493,7 +493,7 @@ export default function MethodologyDiffPage() {
               </li>
               <li className="flex gap-3 items-baseline">
                 <span className="font-mono text-gold/70 text-[10px] tracking-[0.25em]">▸</span>
-                <span>BLACK CARD tier unlock(per Section 04 ENGINE LINEUP TIER column)</span>
+                <span>BLACK tier unlock(per Section 04 ENGINE LINEUP TIER column)</span>
               </li>
               <li className="flex gap-3 items-baseline">
                 <span className="font-mono text-gold/70 text-[10px] tracking-[0.25em]">▸</span>
@@ -509,7 +509,7 @@ export default function MethodologyDiffPage() {
           <p className="mt-6 text-mute/85 leading-relaxed">
             <strong className="text-bone">v0.4 ship 前 30 天 /changelog 公告 ·
             modifications via 同 /audit S05 PRE-COMMIT pattern。</strong>{" "}
-            訂閱 BLACK CARD 不是「等 model 神奇升級」 · 是 see-through 看
+            訂閱 BLACK 不是「等 model 神奇升級」 · 是 see-through 看
             entire process · v0.4 ship 那天 您可以打開 lib/simulator-v04.ts
             audit 整個 Bayesian weight derivation · 不需相信 marketing。
           </p>

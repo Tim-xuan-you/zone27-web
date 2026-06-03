@@ -12,13 +12,13 @@ import { createPageMetadata } from "@/lib/page-og";
 // ── /founders · R187 · 拿掉「創始 270 名冊」(per Tim「太複雜 · 刪掉吧」)──
 // 砍掉:NEXT IS #008 倒數 · 前 270 創始編號 · 鑲金編號 unlock · #001–#270 ·
 // 分配帳本連結 · founders-stats(FOUNDERS_TOTAL/NEXT/formatBadge)依賴。
-// FOUNDERS 27 改框成「最高階年度會員」· 稀有感用身分+全站最低抽成承載,不用數字。
+// FOUNDER 改框成「最高階年度會員」· 稀有感用身分+全站最低抽成承載,不用數字。
 // /founders/ledger 已改成 redirect · FoundingMemberLedger / ScarcityStrip 已刪。
 // ⚠ 站上其他散落的「270 / 創始編號」文字提及(faq/terms/privacy/annual 等)
 //   留下一輪文字 sweep。
 // ─────────────────────────────────────────────────────
 export const metadata: Metadata = createPageMetadata({
-  title: "Founders 27 · 最高階年度會員 · NT$ 2,700 / 365 天",
+  title: "FOUNDER · 最高階年度會員 · NT$ 2,700 / 365 天",
   description:
     "ZONE 27 最高階年度會員 · NT$ 2,700/365 天 · 賣分析你拿 95%(全站最低抽成)· 引擎新版搶先試 + 投票權 · 每年 1/1 加入 / 續訂 · Tim 親手 onboard。",
   path: "/founders",
@@ -28,9 +28,9 @@ export const revalidate = 3600;
 
 // 你拿到什麼 · 6 個權益 · 一行一個
 const UNLOCKS = [
-  "365 天會員資格 · BLACK CARD 全部功能都包含",
+  "365 天會員資格 · BLACK 全部功能都包含",
   "「✓ 驗證準度」徽章 · 掛在你署名旁(連輸都算 · 不可造假)",
-  "賣分析只抽 5% · 你拿 95%(BLACK CARD 是 10%)· 全站最低",
+  "賣分析只抽 5% · 你拿 95%(BLACK 是 10%)· 全站最低",
   "引擎每次改版 · 提前 7 天搶先試 + 投票權",
   "BOTTOM 27 棒球手遊上線 · 創始限定球員卡空投",
   "恆美攝影 × 伶 Kopi 旗艦店 · 一品紅茶招待",
@@ -61,7 +61,7 @@ export default async function FoundersPage({
         {/* ── HERO ───────────────────────────────── */}
         <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pt-10 sm:pt-20 pb-10 text-center">
           <div className="inline-flex items-center gap-2 mb-5 sm:mb-7 font-mono text-[9px] sm:text-[10px] tracking-[0.4em]">
-            <span className="text-gold">FOUNDERS · 27</span>
+            <span className="text-gold">FOUNDER · 27</span>
             <span className="text-mute/60">·</span>
             <span className="px-1.5 py-0.5 border border-gold/40 text-gold">
               PRE-LAUNCH WAITLIST
@@ -69,7 +69,7 @@ export default async function FoundersPage({
           </div>
 
           <h1 className="text-4xl sm:text-6xl md:text-7xl font-light leading-[1.05] tracking-tight text-bone">
-            FOUNDERS 27
+            FOUNDER
             <br />
             <span className="text-2xl sm:text-3xl md:text-4xl text-mute">
               最高階 · 創始會員
@@ -84,14 +84,14 @@ export default async function FoundersPage({
             <span className="text-bone">NO AUTO-RENEW</span>
           </p>
           <p className="mt-2 text-mute/70 text-xs sm:text-[13px] leading-relaxed">
-            賣分析你拿 <span className="text-gold">95%</span>(全站最低抽成)· 等同每場 ~NT$ 11 · 比 BLACK CARD 整年省 55%
+            賣分析你拿 <span className="text-gold">95%</span>(全站最低抽成)· 等同每場 ~NT$ 11 · 比 BLACK 整年省 55%
           </p>
 
           {/* 一段親筆 founder voice */}
           <div className="mt-7 max-w-xl mx-auto bg-slate/30 border-l-2 border-gold/60 px-5 py-4 text-left">
             <p className="text-bone text-[14px] sm:text-[15px] leading-relaxed">
               我寫這個引擎,是因為台灣硬核棒球迷沒有自己的 Bloomberg。引擎永遠免費 ——
-              Founders 27 賣的不是工具,是一個不靠明牌、不抽下注活下去的品牌的
+              FOUNDER 賣的不是工具,是一個不靠明牌、不抽下注活下去的品牌的
               <strong className="text-bone">最高階席位</strong>:賣分析只抽 5%、新版搶先試、Tim 親手 onboard。
             </p>
             <p className="font-mono text-mute/70 text-[10px] tracking-[0.3em] mt-3 pt-3 border-t border-line/40">

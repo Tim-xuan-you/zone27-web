@@ -1,6 +1,6 @@
 "use server";
 
-// ── ZONE 27 · Founders 27 Application Server Action ─────
+// ── ZONE 27 · FOUNDER Application Server Action ─────
 // R68 W-A · Patek Philippe-style application form · 1 layer deeper than
 // waitlist email signup · for visitors who actually want one of 270
 // founding seats(#008-#270 · #001-#007 are Tim's system-test placeholders
@@ -25,7 +25,7 @@
 // Brand IP fit:
 //   - per [[feedback-no-waiting-rule]] · ships NOW · 不等 Supabase migration
 //     · 不 surface options · email-only MVP works
-//   - per [[zone27-payment-architecture]] · Founders 27 = manual bank
+//   - per [[zone27-payment-architecture]] · FOUNDER = manual bank
 //     transfer · application is the PRE-REQUISITE step before Tim emails
 //     bank details · brand-IP-pure
 //   - per [[feedback-zone27-pratfall-brand-ip]] · application explicitly

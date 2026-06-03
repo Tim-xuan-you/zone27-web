@@ -36,7 +36,7 @@ export const metadata: Metadata = createPageMetadata({
 //   - /track-record DIVERGED(receipt misses equal weight)
 //   - /steelman(external objections wrote first)
 //   - /founders/postmortem-2028(project-level failure scenarios)
-//   - R141 W1 BLACK CARD HONEST IMPLEMENTATION DISCLOSURE banner
+//   - R141 W1 BLACK HONEST IMPLEMENTATION DISCLOSURE banner
 //   - /interact(this page · model-by-design refusal of community)
 //
 // Brand IP per [[feedback-zone27-one-way-by-design]] iron rule:
@@ -135,7 +135,7 @@ const CHANNELS: Channel[] = [
   {
     no: "06",
     icon: "📜",
-    zhTitle: "Founders 27 · 申請信",
+    zhTitle: "FOUNDER · 申請信",
     enLabel: "APPLICATION",
     body: "寫一封信 · Tim 親手審核 · 通過後才邀請加入。",
     surface: "/founders/apply",
@@ -271,7 +271,7 @@ export default function InteractPage() {
             <li>
               <strong className="text-bone">公開的使用者論壇 / 討論板</strong>{" "}
               · 沒有「ZONE 27 板」 · 沒有自由發文的「球迷區」。
-              唯一例外是 BLACK CARD 訂閱者的「賽事討論室」 · 範圍很窄 ·
+              唯一例外是 BLACK 訂閱者的「賽事討論室」 · 範圍很窄 ·
               每場一串 + 24 小時後關閉 + 200 字 + 每人每場限一篇 + Tim 親手把關 ·
               不是自由論壇 · 詳見 /matches/[gameId]#game-thread。
               球迷社群已在 LINE 群 + FB 滿足。
@@ -358,16 +358,16 @@ export default function InteractPage() {
                 </span>
               </div>
               <h3 className="text-bone text-base sm:text-lg font-light tracking-tight leading-snug mb-2">
-                Founders 27 私人 LINE 群 · Tim 親自答
+                FOUNDER 私人 LINE 群 · Tim 親自答
               </h3>
               <p className="text-mute/85 text-[12px] sm:text-sm leading-relaxed mb-2">
-                Founders 27 訂戶私人 LINE 群 · Tim 親自參與 ·
+                FOUNDER 訂戶私人 LINE 群 · Tim 親自參與 ·
                 訂戶之間可以互相聊 · 也能一起找 Tim。 群組開在 LINE 上 ·
                 不在 ZONE 27 網站內 —— 站內是綁戰績的討論 · 這個 LINE 群是純內圈交流 ·
                 兩種剛好互補。 加入身分本身就包含這個圈子 · 不是另外解鎖的功能。
               </p>
               <p className="font-mono text-mute/70 text-[10px] tracking-[0.25em] mb-3">
-                ACCESS · 待 Founders 27 application 通過(/founders/apply)+ NT$
+                ACCESS · 待 FOUNDER application 通過(/founders/apply)+ NT$
                 2,700 onboard 完成 · Tim 親自 invite link
               </p>
               <p>

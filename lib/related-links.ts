@@ -207,7 +207,7 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
     {
       href: "/founders",
       kicker: "founders",
-      title: "加入 Founders 27 · 前 270 拿創始編號",
+      title: "加入 FOUNDER · 前 270 拿創始編號",
     },
   ],
   "/track-record": [
@@ -268,12 +268,12 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
     {
       href: "/membership/black-card",
       kicker: "black-card",
-      title: "BLACK CARD 完整介紹 · NT$ 500/31 天",
+      title: "BLACK 完整介紹 · NT$ 500/31 天",
     },
     {
       href: "/founders/ledger",
       kicker: "founders/ledger",
-      title: "Founders 27 公開名額帳本",
+      title: "FOUNDER 公開名額帳本",
     },
     {
       href: "/annual/2026",
@@ -346,7 +346,7 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
     {
       href: "/founders",
       kicker: "founders",
-      title: "看完了 · 加入 Founders 27 · 前 270 拿編號",
+      title: "看完了 · 加入 FOUNDER · 前 270 拿編號",
     },
   ],
   "/discipline": [
@@ -384,7 +384,7 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
     {
       href: "/founders",
       kicker: "founders",
-      title: "Founders 27 詳情頁 · 前 270 創始編號 · 年度",
+      title: "FOUNDER 詳情頁 · 前 270 創始編號 · 年度",
     },
     {
       href: "/track-record",
@@ -452,7 +452,7 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
       title: "我們 0 追蹤 · email 只用於登入 + 通知",
     },
   ],
-  // Round 30 Wave 10 · /member/submit NEW · FREE TIER 投稿 · Tim 1/週
+  // Round 30 Wave 10 · /member/submit NEW · OPEN 投稿 · Tim 1/週
   // curate · Stratechery Guest Post pattern。 Siblings: /member(回 dashboard)
   // · /membership Creator Permissions section · /signal-board(過稿落點)。
   "/member/submit": [
@@ -481,7 +481,7 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
     {
       href: "/founders",
       kicker: "founders",
-      title: "Founders 27 銷售頁 · 前 270 創始編號 · 年度",
+      title: "FOUNDER 銷售頁 · 前 270 創始編號 · 年度",
     },
     {
       href: "/audit",
@@ -507,7 +507,7 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
     {
       href: "/founders",
       kicker: "founders",
-      title: "Founders 27 · 對照第 4 階 NT$ 2,700/年",
+      title: "FOUNDER · 對照第 4 階 NT$ 2,700/年",
     },
     {
       href: "/privacy",
@@ -558,12 +558,12 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
   ],
   // R166 W1 · /rewards DELETED · then R170 W1 RESTORED per Tim explicit endorse
   // R165 W1 · /pricing/why DELETED R164 · swap to /annual/2026(Year 0 empty state ·
-  // 同 transparency axis · 申請者可 audit Founders 27 真實狀態)。
+  // 同 transparency axis · 申請者可 audit FOUNDER 真實狀態)。
   "/founders/apply": [
     {
       href: "/founders",
       kicker: "founders",
-      title: "Founders 27 介紹 · 6 件買不到的東西 + 權益",
+      title: "FOUNDER 介紹 · 6 件買不到的東西 + 權益",
     },
     {
       href: "/founders/ledger",

@@ -5,7 +5,7 @@ import { BRAND, OG_SIZE, OG_CONTENT_TYPE } from "@/lib/brand";
 // Round 32 W-A · Wire-up sync for Round 31 W-X3 new route。
 // R62 W-A · Q3 2026 → milestone-trigger language(per Agent A R59 Vector 10)。
 //
-// /membership/black-card 是 BLACK CARD UI mockup · payment infra 就緒後上線。
+// /membership/black-card 是 BLACK UI mockup · payment infra 就緒後上線。
 // OG card 必須誠實標 PRE-LAUNCH(同 page 上 status badge)否則 visitor
 // 從 LINE/FB 點進來會誤以為現在可訂閱。 brand IP「方法公開」延伸到
 // preview state itself。
@@ -20,7 +20,7 @@ import { BRAND, OG_SIZE, OG_CONTENT_TYPE } from "@/lib/brand";
 export const size = OG_SIZE;
 export const contentType = OG_CONTENT_TYPE;
 export const alt =
-  "ZONE 27 · BLACK CARD · 訂閱會員 UI preview · NT$ 500/31 天 · PRE-LAUNCH milestone-triggered · 6 unlocks · 10% 創作者抽成";
+  "ZONE 27 · BLACK · 訂閱會員 UI preview · NT$ 500/31 天 · PRE-LAUNCH milestone-triggered · 6 unlocks · 10% 創作者抽成";
 
 export default async function BlackCardOgImage() {
   return new ImageResponse(
@@ -120,7 +120,7 @@ export default async function BlackCardOgImage() {
               display: "flex",
             }}
           >
-            BLACK CARD
+            BLACK
           </span>
           <span
             style={{
@@ -175,12 +175,12 @@ export default async function BlackCardOgImage() {
             gap: 8,
           }}
         >
-          <UnlockRow label="v0.3 + v0.4 engine variants(BLACK CARD 解鎖)" />
-          <UnlockRow label="/hey-tim 賽前 BLACK CARD 優先通道 · Tim 直答" />
+          <UnlockRow label="v0.3 + v0.4 engine variants(BLACK 解鎖)" />
+          <UnlockRow label="/hey-tim 賽前 BLACK 優先通道 · Tim 直答" />
           <UnlockRow label="創作者抽成 10%(業界 30-50% 降維打擊)" />
           <UnlockRow label="每月 voting 影響引擎下個 ship 方向" />
           <UnlockRow label="Tim 每週工程筆記 full 版" />
-          <UnlockRow label="Founders 27 LINE 群 read-only access" />
+          <UnlockRow label="FOUNDER LINE 群 read-only access" />
         </div>
 
         {/* ── BOTTOM · differentiator punchline ──────── */}

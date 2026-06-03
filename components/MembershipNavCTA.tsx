@@ -46,7 +46,7 @@ export default function MembershipNavCTA({
   variant = "desktop",
 }: Props) {
   const [loggedIn, setLoggedIn] = useState<boolean>(false);
-  // R124 W1 · Tim 第四級 founder-dogfood fire · PREVIEW Founders 27 mode 但
+  // R124 W1 · Tim 第四級 founder-dogfood fire · PREVIEW FOUNDER mode 但
   // 「會員 →」 跳 /membership ladder 不是 /member dashboard · designer dogfood
   // UX 應 mirror logged-in flow · fix · 也讀 localStorage zone27_preview_tier ·
   // 若 active = 視為 logged-in · label「您的引擎 (PREVIEW) →」 → /member。
@@ -105,7 +105,7 @@ export default function MembershipNavCTA({
     ? "PREVIEW mode · /member dashboard preview · 同 dogfood mirror logged-in UX"
     : loggedIn
     ? "您的 /member 個人儀表板 · 已登入會員專屬"
-    : "加入會員 · FREE TIER 免費訂閱 + BLACK CARD + Founders 27 三層 ladder";
+    : "加入會員 · OPEN 免費訂閱 + BLACK + FOUNDER 三層 ladder";
 
   if (variant === "mobile") {
     return (

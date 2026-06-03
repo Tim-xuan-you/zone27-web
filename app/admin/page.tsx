@@ -290,7 +290,7 @@ export default async function AdminPage() {
             </p>
             <ul className="space-y-2 text-sm border-l-2 border-mute/30 pl-5 sm:pl-6 list-none">
               <li>▸ 月活 &gt; 1000(目前 stealth · 還沒)</li>
-              <li>▸ BLACK CARD 月費已上線(目前還沒)</li>
+              <li>▸ BLACK 月費已上線(目前還沒)</li>
               <li>▸ 你決定要做產品決策(哪個 feature 留 · 哪個砍)</li>
             </ul>
             <p className="text-mute/70 text-sm">

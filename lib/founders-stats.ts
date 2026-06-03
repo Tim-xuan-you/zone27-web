@@ -1,11 +1,11 @@
-// ── ZONE 27 · Founders 27 — single source of truth ────
+// ── ZONE 27 · FOUNDER — single source of truth ────
 // Founders state used everywhere: /leaderboard wall, /founders sales
 // page, OG cards, ScarcityStrip site-wide counter.
 //
 // 為保護隱私,只公布編號與認領日,絕不公布身分。
 //
 // Status: still hardcoded by design. The 7 founders below are
-// placeholder until Tim manually onboards real Founders 27 members
+// placeholder until Tim manually onboards real FOUNDER members
 // (per [[zone27-payment-architecture]] memory · manual bank
 // transfer · ~Q3 2026 launch). At that point, build a
 // `public.founders` Supabase table parallel to `waitlist`, and

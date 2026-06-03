@@ -1,5 +1,5 @@
 // ── ZONE 27 · CPBL Park Factor Reference Data ──────────
-// Round 37 W-C · Park Factor lens scaffold(第 2 個 BLACK CARD analytical
+// Round 37 W-C · Park Factor lens scaffold(第 2 個 BLACK analytical
 // lens 真實 LIVE · 接 R37 W-B Vibe Check)· per [[feedback-no-waiting-rule]]
 // 鐵律「任何現在能做就做 · 不等 Q3」。
 //

@@ -53,7 +53,7 @@ function explain(rawMsg: string): string {
   if (m.includes("not_admin")) return "你不是管理員。";
   if (m.includes("user_not_found")) return "找不到這個 email 的會員。";
   if (m.includes("invalid_amount")) return "金額不能是 0 或空白。";
-  if (m.includes("invalid_tier")) return "等級只能是 免費 / 黑卡 / 創始。";
+  if (m.includes("invalid_tier")) return "等級只能是 OPEN / BLACK / FOUNDER。";
   if (m.includes("function") && m.includes("does not exist"))
     return "後台功能還沒開通(請先在 Supabase 套用 0011)。";
   return "操作失敗 · 請再試一次。";

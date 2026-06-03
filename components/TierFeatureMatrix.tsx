@@ -21,7 +21,7 @@ import Link from "next/link";
 //   - per /integrity rule · ENGINE features never paywalled → all 4 tiers
 //     show ENGINE row as ✓ UNLOCKED · no locked padlock for engine
 //   - per [[zone27-monetization-philosophy]] · IDENTITY features 在 BLACK
-//     CARD + Founders 27 才解鎖 · 此 component 把 identity-tier feature
+//     CARD + FOUNDER 才解鎖 · 此 component 把 identity-tier feature
 //     locked-state visualize 給 lower-tier user · Loss Aversion + Goal
 //     Gradient psychology · 不違反 brand IP(不藏 · 顯式 surface tier
 //     unlock path)
@@ -94,8 +94,8 @@ const FEATURES: Feature[] = [
     },
   },
   {
-    label: "Founders 27 預售優先通知",
-    detail: "270 個 founding seats · FREE TIER first dibs",
+    label: "FOUNDER 預售優先通知",
+    detail: "270 個 founding seats · OPEN first dibs",
     unlock: {
       anonymous: "locked",
       free: "unlocked",
@@ -115,7 +115,7 @@ const FEATURES: Feature[] = [
   },
   {
     label: "每月 voting 影響引擎迭代方向",
-    detail: "v0.4 + 未來 lens 優先級 · BLACK CARD + Founders 27 vote",
+    detail: "v0.4 + 未來 lens 優先級 · BLACK + FOUNDER vote",
     unlock: {
       anonymous: "locked",
       free: "locked",
@@ -145,7 +145,7 @@ const FEATURES: Feature[] = [
   },
   {
     label: "年度 access · 續訂價永遠鎖定(不自動續扣)",
-    detail: "Founders 27 NT$ 2,700/年 手動續訂 · 月卡 / 季票永遠不會自動綁您",
+    detail: "FOUNDER NT$ 2,700/年 手動續訂 · 月卡 / 季票永遠不會自動綁您",
     unlock: {
       anonymous: "locked",
       free: "locked",
@@ -165,7 +165,7 @@ const FEATURES: Feature[] = [
   },
   {
     label: "BOTTOM 27 早鳥獨家虛擬資產",
-    detail: "ZONE 27 ↔ BOTTOM 27 雙生品牌 cross-promotion · Founders 27 only",
+    detail: "ZONE 27 ↔ BOTTOM 27 雙生品牌 cross-promotion · FOUNDER only",
     unlock: {
       anonymous: "locked",
       free: "locked",
@@ -175,7 +175,7 @@ const FEATURES: Feature[] = [
   },
   {
     label: "恆美 × 伶 Kopi 紅茶招待 QR(台南)",
-    detail: "實體 ecosystem 整合 · Founders 27 持卡實體驗證",
+    detail: "實體 ecosystem 整合 · FOUNDER 持卡實體驗證",
     unlock: {
       anonymous: "locked",
       free: "locked",
@@ -205,24 +205,24 @@ const TIER_META: Record<
     accent: "text-mute",
   },
   free: {
-    label: "FREE TIER",
-    en: "FREE",
+    label: "OPEN",
+    en: "OPEN",
     price: "NT$ 0",
     priceUnit: "永久免費 · email only",
     href: "/login",
     accent: "text-bone",
   },
   "black-card": {
-    label: "BLACK CARD",
-    en: "BLACK CARD",
+    label: "BLACK",
+    en: "BLACK",
     price: "NT$ 500",
     priceUnit: "每 31 天 · 手動 ECPay · 0 auto-renew",
     href: "/membership/black-card",
     accent: "text-bone",
   },
   founders27: {
-    label: "Founders 27",
-    en: "FOUNDERS 27",
+    label: "FOUNDER",
+    en: "FOUNDER",
     price: "NT$ 2,700",
     priceUnit: "/ 年 · 前 270 創始編號",
     href: "/founders",
@@ -411,7 +411,7 @@ export default function TierFeatureMatrix() {
             → /member dashboard
           </p>
           <p className="text-mute group-hover:text-bone text-[11px] leading-snug transition-colors">
-            tier-aware <strong className="text-bone">PaidTierLockedGrid</strong> · BLACK CARD + Founders 27 unlock preview
+            tier-aware <strong className="text-bone">PaidTierLockedGrid</strong> · BLACK + FOUNDER unlock preview
           </p>
         </Link>
         <Link
@@ -433,7 +433,7 @@ export default function TierFeatureMatrix() {
             → /founders
           </p>
           <p className="text-mute group-hover:text-bone text-[11px] leading-snug transition-colors">
-            Patek-style 270 limited founder seat allocation · Founders 27 sales page
+            Patek-style 270 limited founder seat allocation · FOUNDER sales page
           </p>
         </Link>
       </div>
@@ -511,16 +511,16 @@ export default function TierFeatureMatrix() {
         </p>
         <p className="text-mute text-[12px] leading-relaxed mb-3">
           <strong className="text-bone">為什麼 0 風險</strong>:
-          ZONE 27 目前 0 paid features have been built · 「BLACK CARD 月 voting」 ·
+          ZONE 27 目前 0 paid features have been built · 「BLACK 月 voting」 ·
           「Tim 工程筆記 full」 · 「創作者抽成」 全沒 ship · spoof preview 後
           看到的只是 visual UI mockup · 沒實際 paid functionality 可以「unlock」 ·
           per `/integrity` rule #13 + `[[zone27-payment-architecture]]` manual
-          ECPay flow · 沒 paid auth gate by design。 連 Founders 27 編號 #001-#270
+          ECPay flow · 沒 paid auth gate by design。 連 FOUNDER 編號 #001-#270
           都是 Tim 親手 add ledger · spoof preview 不會 add 您名字到 ledger。
         </p>
         <p className="text-mute text-[12px] leading-relaxed">
           <strong className="text-bone">未來 real defense</strong>:
-          當 paid features 真實 ship(R200+ Founders 27 launch · BLACK CARD
+          當 paid features 真實 ship(R200+ FOUNDER launch · BLACK
           recurring)· real gate 由{" "}
           <span className="text-bone">Supabase RLS(Row-Level Security)</span>
           {" + "}

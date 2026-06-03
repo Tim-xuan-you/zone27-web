@@ -15,7 +15,7 @@ import { BRAND, OG_SIZE, OG_CONTENT_TYPE } from "@/lib/brand";
 
 export const size = OG_SIZE;
 export const contentType = OG_CONTENT_TYPE;
-export const alt = "ZONE 27 · BLACK CARD Public Ledger · 0 paid · 您會是第 1 位";
+export const alt = "ZONE 27 · BLACK Public Ledger · 0 paid · 您會是第 1 位";
 
 export default async function BlackCardLedgerOgImage() {
   return new ImageResponse(
@@ -72,7 +72,7 @@ export default async function BlackCardLedgerOgImage() {
               display: "flex",
             }}
           >
-            BLACK CARD · PUBLIC LEDGER
+            BLACK · PUBLIC LEDGER
           </span>
         </div>
 
@@ -118,7 +118,7 @@ export default async function BlackCardLedgerOgImage() {
               display: "flex",
             }}
           >
-            目前 0 位 BLACK CARD 訂閱者 · 您會是第 1 位 · row 1 永久
+            目前 0 位 BLACK 訂閱者 · 您會是第 1 位 · row 1 永久
           </span>
         </div>
 

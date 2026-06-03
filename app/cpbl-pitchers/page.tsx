@@ -881,7 +881,7 @@ export default async function CpblPitchersPage({
           </p>
           <p>
             這份頁面永遠 FREE · 不 paywall · 不 email gate · per /integrity
-            「engine FREE forever」 binding。 BLACK CARD 加深的方向 = per-pitcher
+            「engine FREE forever」 binding。 BLACK 加深的方向 = per-pitcher
             × per-batter probability split(engine 跑出來公開 · 同 base 排行
             一樣全 visible)· 沒有「上面 free 下面 paywall」 dark pattern。
           </p>

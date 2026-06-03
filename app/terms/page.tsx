@@ -7,7 +7,7 @@ import { createPageMetadata } from "@/lib/page-og";
 export const metadata = createPageMetadata({
   title: "Terms of Service — 我們對您的承諾,您對我們的同意",
   description:
-    "ZONE 27 服務條款 · pre-launch 階段的真實情境合約 · 不是模板 · AI 是娛樂用途 · Founders 27 waitlist 不收費不綁定 · 含台灣 14-day 退款主動延伸(消保法 § 19 distance-selling)。",
+    "ZONE 27 服務條款 · pre-launch 階段的真實情境合約 · 不是模板 · AI 是娛樂用途 · FOUNDER waitlist 不收費不綁定 · 含台灣 14-day 退款主動延伸(消保法 § 19 distance-selling)。",
   ogTitle: "Terms of Service · 我們對您的承諾 · ZONE 27",
   ogDescription:
     "pre-launch 真實情境合約 · 不是模板 · 含台灣 14-day 退款主動延伸 · 消保法 § 19",
@@ -80,10 +80,10 @@ export default function TermsPage() {
         </ul>
       </Section>
 
-      {/* ── 04 FOUNDERS 27 WAITLIST ─────────────── */}
-      <Section no="04" label="FOUNDERS 27 WAITLIST" zh="Founders 27 等候名單聲明">
+      {/* ── 04 FOUNDER WAITLIST ─────────────── */}
+      <Section no="04" label="FOUNDER WAITLIST" zh="FOUNDER 等候名單聲明">
         <p>
-          您加入 Founders 27 waitlist 時,請理解以下事項:
+          您加入 FOUNDER waitlist 時,請理解以下事項:
         </p>
         <ul className="space-y-3">
           <li>
@@ -135,7 +135,7 @@ export default function TermsPage() {
           天</strong> · 翻倍法定下限。
         </p>
 
-        <h3 className="text-bone text-lg mt-6 mb-3">Founders 27(NT$ 2,700 / 365 天)</h3>
+        <h3 className="text-bone text-lg mt-6 mb-3">FOUNDER(NT$ 2,700 / 365 天)</h3>
         <ul className="space-y-2">
           <li>
             <strong className="text-bone">14 天無條件退款</strong> · 從 Tim
@@ -161,12 +161,12 @@ export default function TermsPage() {
           <li>
             <strong className="text-bone">您退款後失去</strong> · #NNN 編號的
             ledger 入帳(/founders/ledger 上的 reserved 標記 release)· 365 天
-            access flag · BLACK CARD 免費 perk · BOTTOM 27 ecosystem
+            access flag · BLACK 免費 perk · BOTTOM 27 ecosystem
             cross-pass(未來 ship)。
           </li>
         </ul>
 
-        <h3 className="text-bone text-lg mt-6 mb-3">BLACK CARD(NT$ 500/31 天)</h3>
+        <h3 className="text-bone text-lg mt-6 mb-3">BLACK(NT$ 500/31 天)</h3>
         <ul className="space-y-2">
           <li>
             <strong className="text-bone">每期 14 天退款</strong> · 您每 31 天手動
@@ -183,7 +183,7 @@ export default function TermsPage() {
           <li>
             <strong className="text-bone">期中未滿</strong> · 您退款後當期
             access 立即停止 · ZONE 27 不會繼續發您 period-end newsletter ·
-            您也不能 access BLACK CARD-only content 直到下期主動轉帳。
+            您也不能 access BLACK-only content 直到下期主動轉帳。
           </li>
         </ul>
 

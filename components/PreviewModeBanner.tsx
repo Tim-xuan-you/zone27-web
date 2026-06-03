@@ -51,9 +51,9 @@ const TIERS: { value: string; label: string; price: string }[] = [
 
 const TIER_LABELS: Record<string, string> = {
   anonymous: "匿名訪客",
-  free: "FREE TIER",
-  "black-card": "BLACK CARD",
-  founders27: "Founders 27",
+  free: "OPEN",
+  "black-card": "BLACK",
+  founders27: "FOUNDER",
 };
 
 export default function PreviewModeBanner() {

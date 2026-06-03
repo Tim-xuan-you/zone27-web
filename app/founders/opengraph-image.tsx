@@ -15,7 +15,7 @@ import {
 
 export const size = OG_SIZE;
 export const contentType = OG_CONTENT_TYPE;
-export const alt = "ZONE 27 · Founders 27 · Annual Founding Class";
+export const alt = "ZONE 27 · FOUNDER · Annual Founding Class";
 
 export default async function FoundersOgImage() {
   return new ImageResponse(

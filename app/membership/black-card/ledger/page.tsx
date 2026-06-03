@@ -7,9 +7,9 @@ import FounderSignOff from "@/components/FounderSignOff";
 import ArticleMeta from "@/components/ArticleMeta";
 
 export const metadata: Metadata = {
-  title: "BLACK CARD Public Ledger · 0 paid · 第 1 位 = 您",
+  title: "BLACK Public Ledger · 0 paid · 第 1 位 = 您",
   description:
-    "ZONE 27 BLACK CARD 公開訂閱者帳本 · Aftermath subscriber goals + Patek allocation ledger pattern · 0 paid sub state honest publish · 第 1 位的 handle 永久顯示在這裡 · 我們不會用機器人灌水 · 也不會假裝有客戶。 靠賣明牌的生意結構上無法 publish 訂閱者帳本(regulatory + privacy + churn 暴露)· structurally 不可 copy。",
+    "ZONE 27 BLACK 公開訂閱者帳本 · Aftermath subscriber goals + Patek allocation ledger pattern · 0 paid sub state honest publish · 第 1 位的 handle 永久顯示在這裡 · 我們不會用機器人灌水 · 也不會假裝有客戶。 靠賣明牌的生意結構上無法 publish 訂閱者帳本(regulatory + privacy + churn 暴露)· structurally 不可 copy。",
 };
 
 // ── ZONE 27 · /membership/black-card/ledger ──────────────
@@ -18,10 +18,10 @@ export const metadata: Metadata = {
 //
 // Aftermath「Subscriber Goals 2026」 + Hell Gate ledger + Patek allocation
 // transparency 三 pattern 合一 · 同 /founders/ledger structure transplant
-// 到 monthly BLACK CARD tier。
+// 到 monthly BLACK tier。
 //
 // Pre-launch state(post-R81 pivot):
-//   - 0 BLACK CARD subscribers · CPBL Season Pass LIVE manual ECPay
+//   - 0 BLACK subscribers · CPBL Season Pass LIVE manual ECPay
 //   - 「第 1 位的 handle 會永久顯示在這裡」 inverse-FOMO
 //   - empty state IS the point per Aronson 1966 Pratfall
 //
@@ -70,7 +70,7 @@ export default function BlackCardLedgerPage() {
               lang="en"
               className="font-mono text-gold text-[10px] tracking-[0.45em]"
             >
-              / BLACK CARD · PUBLIC LEDGER · 公開訂閱者帳本
+              / BLACK · PUBLIC LEDGER · 公開訂閱者帳本
             </p>
             <span
               lang="en"
@@ -86,7 +86,7 @@ export default function BlackCardLedgerPage() {
             </span>
           </div>
           <h1 className="text-4xl sm:text-5xl text-bone font-light tracking-tight max-w-3xl leading-[1.1]">
-            目前 <span className="text-gold">{totalSubs}</span> 位 BLACK CARD 訂閱者 ·
+            目前 <span className="text-gold">{totalSubs}</span> 位 BLACK 訂閱者 ·
             <br className="hidden sm:inline" /> 第 {totalSubs + 1} 位的 handle{" "}
             <span className="text-gold">永久</span> 顯示在這裡
           </h1>
@@ -95,12 +95,12 @@ export default function BlackCardLedgerPage() {
             <p className="text-bone text-lg sm:text-xl leading-relaxed">
               <strong>每個 SaaS 訂閱頁面都告訴您「25,000 公司信任我們」</strong>{" "}
               · ZONE 27 倒置:目前{" "}
-              <span className="text-gold">{totalSubs} 位 BLACK CARD 訂閱者</span> ·
+              <span className="text-gold">{totalSubs} 位 BLACK 訂閱者</span> ·
               我們不會用機器人灌水 · 也不會假裝有客戶。
             </p>
             <p className="mt-3 text-mute text-base leading-relaxed">
               這頁 publish 當前訂閱者 handle(opt-in)+ 第一個月 + 已 sustain
-              幾個月。 第 1 位的 handle 永久 row 1 · 同 Founders 27 allocation
+              幾個月。 第 1 位的 handle 永久 row 1 · 同 FOUNDER allocation
               ledger 邏輯延伸到 monthly tier。
             </p>
           </div>
@@ -129,7 +129,7 @@ export default function BlackCardLedgerPage() {
                 EMPTY LEDGER · BY DESIGN
               </p>
               <p className="text-bone text-xl sm:text-2xl font-light tracking-tight mb-4 leading-tight">
-                目前 0 位 BLACK CARD 訂閱者
+                目前 0 位 BLACK 訂閱者
               </p>
               <p className="text-mute text-sm sm:text-base leading-relaxed max-w-md mx-auto mb-5">
                 payment 基礎建設 {BLACK_CARD_LAUNCH_DATE} 啟用後 · 第 1 位的
@@ -144,13 +144,13 @@ export default function BlackCardLedgerPage() {
                   href="/membership/black-card"
                   className="inline-block px-6 py-3 bg-gold text-navy font-mono text-[10px] tracking-[0.3em] hover:bg-gold-soft transition-colors"
                 >
-                  → BLACK CARD 完整介紹
+                  → BLACK 完整介紹
                 </Link>
                 <Link
                   href="/founders/ledger"
                   className="inline-block px-6 py-3 border border-gold/50 text-gold font-mono text-[10px] tracking-[0.3em] hover:bg-gold/10 transition-colors"
                 >
-                  → Founders 27 ledger
+                  → FOUNDER ledger
                 </Link>
               </div>
             </div>
@@ -270,8 +270,8 @@ export default function BlackCardLedgerPage() {
               <li className="flex gap-3 items-baseline">
                 <span className="font-mono text-gold/80 text-[10px] tracking-[0.25em]">▸</span>
                 <span>
-                  Founders 27 ledger 已 ship · pattern + brand IP 已建立 ·
-                  BLACK CARD ledger = 同 ledger discipline 延伸到 monthly tier
+                  FOUNDER ledger 已 ship · pattern + brand IP 已建立 ·
+                  BLACK ledger = 同 ledger discipline 延伸到 monthly tier
                 </span>
               </li>
             </ul>
@@ -316,7 +316,7 @@ export default function BlackCardLedgerPage() {
         <FounderSignOff>
           <p>
             這頁是 ZONE 27 commercial model 最 expensive 的 trust artifact ·
-            BLACK CARD 訂閱者 from day 1 是 row 1 · 永久。 cancel 也保留 row ·
+            BLACK 訂閱者 from day 1 是 row 1 · 永久。 cancel 也保留 row ·
             state 標 cancelled。 不藏 churn · 不假裝。
           </p>
           <p>
@@ -347,7 +347,7 @@ export default function BlackCardLedgerPage() {
             href="/membership/black-card"
             className="inline-block px-8 py-3 bg-gold text-navy font-mono text-xs tracking-[0.3em] hover:bg-gold-soft transition-colors"
           >
-            → BLACK CARD 完整介紹
+            → BLACK 完整介紹
           </Link>
           <p className="mt-4 font-mono text-mute/70 text-[10px] tracking-[0.25em]">
             opted-in handles: {opted_in_handles} · total: {totalSubs} ·

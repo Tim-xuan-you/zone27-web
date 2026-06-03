@@ -7,7 +7,7 @@ import RelatedReading from "@/components/RelatedReading";
 export const metadata: Metadata = {
   title: "FAQ — 預先掃雷的 15 個問題",
   description:
-    "ZONE 27 是什麼?是博彩嗎?是傳銷嗎?Founders 27 跟 Black Card 差別?付款什麼時候開放?15 個誠實到不能再誠實的回答 — 包括「你們會追蹤我嗎?」(不會)+「跟 MLM 有什麼不同?」(全方位不同)。",
+    "ZONE 27 是什麼?是博彩嗎?是傳銷嗎?FOUNDER 跟 BLACK 差別?付款什麼時候開放?15 個誠實到不能再誠實的回答 — 包括「你們會追蹤我嗎?」(不會)+「跟 MLM 有什麼不同?」(全方位不同)。",
 };
 
 type QA = {
@@ -34,7 +34,7 @@ const CATEGORIES: Category[] = [
         q: "什麼是 ZONE 27?",
         a: (
           <>
-            <strong className="text-bone">ZONE 27 = 賭徒的 Bloomberg Terminal。</strong> 客群 = 會下注的 sports 迷(包括賭徒)· 對標靠賣明牌賺錢的對手 · 提供更好的資訊層。 不同他們的是:引擎永遠免費 · 不賣明牌 · PROVED + DIVERGED 等大公開 · model 完整 GitHub 公開。 您拿我們的資料自己決定下哪個 platform · ZONE 27 自己不接受下注(我們不是賭場)。 老實認:BLACK CARD 訂閱者寫文章賣 · ZONE 27 抽 5% commission(業界最低 · Substack 10% / OnlyFans 20% / YouTube 45%)· 不假裝「我們不抽傭」。 Phase 1 CPBL · Phase 2 NBA + 未來 leagues · Tim 親手 curate。 完整 brand 方法論見{" "}
+            <strong className="text-bone">ZONE 27 = 賭徒的 Bloomberg Terminal。</strong> 客群 = 會下注的 sports 迷(包括賭徒)· 對標靠賣明牌賺錢的對手 · 提供更好的資訊層。 不同他們的是:引擎永遠免費 · 不賣明牌 · PROVED + DIVERGED 等大公開 · model 完整 GitHub 公開。 您拿我們的資料自己決定下哪個 platform · ZONE 27 自己不接受下注(我們不是賭場)。 老實認:BLACK 訂閱者寫文章賣 · ZONE 27 抽 5% commission(業界最低 · Substack 10% / OnlyFans 20% / YouTube 45%)· 不假裝「我們不抽傭」。 Phase 1 CPBL · Phase 2 NBA + 未來 leagues · Tim 親手 curate。 完整 brand 方法論見{" "}
             <Link href="/about" className="text-gold underline-offset-4 hover:underline">
               /about
             </Link>
@@ -105,9 +105,9 @@ const CATEGORIES: Category[] = [
         id: "no-commission",
         a: (
           <>
-            <strong className="text-bone">Founders 27</strong> NT$ 2,700/365 天 · 會員不限量
+            <strong className="text-bone">FOUNDER</strong> NT$ 2,700/365 天 · 會員不限量
             (前 270 拿永久創始編號 · 目前 263 號待領)。
-            <strong className="text-bone">BLACK CARD</strong> NT$ 500/31 天 × N 訂戶
+            <strong className="text-bone">BLACK</strong> NT$ 500/31 天 × N 訂戶
             (不自動續扣 · 每 31 天 explicit click)。
             再加上創作者賣分析 · 平台抽 5–10%(業界最低,老實認、不假裝不抽)。
             不抽真錢下注的傭 · 不接廣告 / 業配 / 導購分潤。
@@ -118,19 +118,19 @@ const CATEGORIES: Category[] = [
   },
   {
     key: "pricing",
-    label: "FOUNDERS 27 & PRICING",
+    label: "FOUNDER & PRICING",
     zh: "創始會員 / 定價",
     qas: [
       {
-        q: "Founders 27 跟 BLACK CARD 一般會員有什麼差別?",
+        q: "FOUNDER 跟 BLACK 一般會員有什麼差別?",
         a: (
           <>
-            <strong className="text-bone">Founders 27</strong> 是會員不限量的
+            <strong className="text-bone">FOUNDER</strong> 是會員不限量的
             「NT$ 2,700/365 天 年度會員」(前 270 名拿永久創始編號)。
-            <strong className="text-bone">BLACK CARD</strong> 是 31-day pass NT$ 500/31 天
+            <strong className="text-bone">BLACK</strong> 是 31-day pass NT$ 500/31 天
             (3 月–11 月 · 240 場 + 季後賽 · ≈ NT$ 6/場 · 手動銀行轉帳 ·
             不自動續扣 · per /integrity rule #13)。創始會員額外好處:creator 抽成 5%
-            (BLACK CARD creators 10%)、AI 模型優先試用、實體招待。完整對照請見{" "}
+            (BLACK creators 10%)、AI 模型優先試用、實體招待。完整對照請見{" "}
             <Link href="/founders" className="text-gold underline-offset-4 hover:underline">
               /founders
             </Link>
@@ -143,7 +143,7 @@ const CATEGORIES: Category[] = [
         a: (
           <>
             因為這是「品牌共建價」,不是「永久市場價」。270 位創始會員會永遠是 ZONE 27
-            的傳教士;後續黑金會員一年約 12 期 × NT$ 500 = NT$ 6,000 · Founders 27 NT$ 2,700/年(含 BLACK CARD)等於省 55%。
+            的傳教士;後續黑金會員一年約 12 期 × NT$ 500 = NT$ 6,000 · FOUNDER NT$ 2,700/年(含 BLACK)等於省 55%。
             創始者扛了「品牌還沒驗證」的風險,所以拿每年續訂價永遠不漲的回報。
           </>
         ),
@@ -152,9 +152,9 @@ const CATEGORIES: Category[] = [
         q: "付款系統現況?",
         a: (
           <>
-            <span className="font-mono text-gold">BLACK CARD CPBL 季票 · 手動銀行轉帳</span>
+            <span className="font-mono text-gold">BLACK CPBL 季票 · 手動銀行轉帳</span>
             (NT$ 500/31 天 · 每 31 天你主動轉帳一次 · 不自動續扣)。
-            <span className="font-mono text-gold mx-1">Founders 27 payment infra 就緒後開放</span>
+            <span className="font-mono text-gold mx-1">FOUNDER payment infra 就緒後開放</span>
             (milestone-triggered · 不綁日期)。 在此之前,加入等候名單 =
             排隊優先權,<strong className="text-bone">完全免費</strong>,
             不收任何資料以外的東西。下方按鈕直接加入:
@@ -195,7 +195,7 @@ const CATEGORIES: Category[] = [
             <br />
             <br />
             如果您是 corporate 想用 ZONE 27 · 同 rates 同 access:
-            自己 NT$ 2,700(Founders 27)· 或 NT$ 500/31 天(BLACK CARD)· self-serve。
+            自己 NT$ 2,700(FOUNDER)· 或 NT$ 500/31 天(BLACK)· self-serve。
             <br />
             <br />
             完整 pricing rationale 見{" "}
@@ -207,11 +207,11 @@ const CATEGORIES: Category[] = [
         ),
       },
       {
-        q: "創始編號發完後 · 還能加入 Founders 27 嗎?",
+        q: "創始編號發完後 · 還能加入 FOUNDER 嗎?",
         a: (
           <>
             <strong className="text-gold">可以 · 會員永遠不限量。</strong> 當 #270 創始編號被認領的那一秒,
-            創始編號 1st Edition 永久關閉 · 您再也無法拿到創始編號。 但 Founders 27 會員資格永遠開放
+            創始編號 1st Edition 永久關閉 · 您再也無法拿到創始編號。 但 FOUNDER 會員資格永遠開放
             (同樣 NT$ 2,700/年 · 同樣 5% 抽成 · 只是沒有創始編號)· 1st Edition 永遠只有最初 270 個。 寫在{" "}
             <Link href="/about" className="text-gold underline-offset-4 hover:underline">
               /about
@@ -235,8 +235,8 @@ const CATEGORIES: Category[] = [
           <>
             <strong className="text-bone">沒 downline 結構。</strong>{" "}
             0 推薦獎金 · 0 多層抽佣 · 0 業績 quota · 0 招募下線 · 會員不限量但零金字塔抽佣 ·
-            前 270 名拿永久創始編號(1st Edition · 發完即關)。 BLACK CARD 10% 抽成是 platform fee(類 Stripe / Spotify)
-            · Founders 27 5%。
+            前 270 名拿永久創始編號(1st Edition · 發完即關)。 BLACK 10% 抽成是 platform fee(類 Stripe / Spotify)
+            · FOUNDER 5%。
           </>
         ),
       },
@@ -359,7 +359,7 @@ const CATEGORIES: Category[] = [
         a: (
           <>
             Tim 同步開發的棒球經營手遊 · 雙生品牌 · 共用「27」概念與深藏青 × 冷金視覺。
-            Founders 27 會員未來自動獲得 BOTTOM 27 獨家虛擬資產。
+            FOUNDER 會員未來自動獲得 BOTTOM 27 獨家虛擬資產。
           </>
         ),
       },
