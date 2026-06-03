@@ -231,10 +231,10 @@ export default function TrackRecordPage() {
           <p className="font-mono text-loss/85 text-[10px] tracking-[0.3em] leading-relaxed">
             ⚠ N &lt; 30 · PROVED 數字 surface 方向命中 · NOT 機率校準 ·{" "}
             <Link
-              href="/member/calibration"
+              href="/calibration"
               className="text-gold hover:underline underline-offset-4"
             >
-              /member/calibration 引擎自評
+              /calibration 引擎自評
             </Link>{" "}
             等 N≥30 才有統計意義。
           </p>

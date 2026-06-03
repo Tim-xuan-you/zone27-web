@@ -21,12 +21,11 @@ export const metadata: Metadata = {
 // FiveThirtyEight「Checking Our Work」 pattern · public engine self-
 // grading page · 不 gated · 不需 login · 任何 visitor 都看得到。
 //
-// 跟 /member/calibration 的差別:
-//   - /member/calibration · personal mode (登入後 follow filter) ·
-//     epistemic mirror framing · 您自己的 drift
-//   - /calibration · public · ENGINE self-grading framing · ALL ZONE 27
-//     公開 predictions · Brier score(NEW)· coin-flip baseline 對照(NEW)·
-//     founder voice opening
+// R189:這是站上唯一的校準頁。 舊的 /member/calibration(個人模式靠已死的
+// 追蹤過濾 · 且二元押注畫不出校準曲線)已收合 redirect 到這頁。 會員自己的
+// 命中率在 /member 儀表板 · 不在這。
+//   - /calibration · public · ENGINE self-grading · ALL ZONE 27 公開
+//     predictions · Brier score · coin-flip baseline 對照 · founder voice
 //
 // Brier score 公式 · Tetlock currency:
 //   B = (1/N) Σ (forecast_probability - outcome)²
@@ -233,33 +232,32 @@ export default function CalibrationPublicPage() {
           </div>
         </section>
 
-        {/* ── 你自己的準度在另一頁 ─────────── */}
+        {/* ── 這頁是「引擎」準不準 · 你自己準不準是另一回事 ───────────
+            R189 收合:原本指「你的準度對照頁(/member/calibration)」· 那頁的
+            個人模式靠已死的「追蹤賽事」過濾 · 且二元押注本來就畫不出校準曲線
+            (要有機率預測才有 45° 校準)· 已收掉。 誠實重寫:校準圖是引擎的事 ·
+            你押的有沒有中是「命中率」· 在儀表板從第一注算起 · 指向 /member。 */}
         <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-16 border-t border-line/40 pt-12">
           <p className="font-mono text-gold text-[10px] tracking-[0.45em] mb-6">
-            / 你自己的準度在另一頁
+            / 你自己準不準
           </p>
           <div className="bg-slate/30 border border-line/60 p-6 sm:p-8">
             <h3 className="text-xl sm:text-2xl text-bone font-light tracking-tight mb-4">
-              這頁是 <span className="text-gold">引擎</span> 的準度 ·{" "}
-              <span className="text-gold">你自己</span> 的在另一頁
+              這頁攤開的是 <span className="text-gold">引擎</span> 準不準 ·{" "}
+              <span className="text-gold">你</span> 準不準是另一回事
             </h3>
             <p className="text-mute leading-relaxed mb-4">
-              這頁是全站公開預測的平均 · 任何人都看得到 · 不用登入。
-              你押過的那些場、你自己準不準,在{" "}
-              <Link
-                href="/member/calibration"
-                className="text-gold underline-offset-4 hover:underline"
-              >
-                你的準度對照頁
-              </Link>{" "}
-              · 登入就看得到。 同一張圖、同一套算法 · 只是換成你的資料。
+              這頁是全站公開預測的平均 · 任何人都看得到 · 不用登入 —— 它回答
+              「引擎說七成的時候、是不是真的中七成」。 你自己押的那些場有沒有中,
+              是<span className="text-bone">你的命中率</span> · 那在你的儀表板:
+              從第一注開始算 · 每場賽後自動對照引擎 · 押了刪不掉。
             </p>
             <div className="flex flex-wrap gap-3">
               <Link
-                href="/login?next=/member/calibration"
+                href="/login?next=/member"
                 className="inline-block px-6 py-2.5 border border-gold/50 text-gold font-mono text-[10px] tracking-[0.3em] hover:bg-gold/10 transition-colors"
               >
-                → 登入看你自己的準度
+                → 登入看你的準度
               </Link>
               <Link
                 href="/methodology"

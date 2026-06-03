@@ -211,15 +211,13 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
     },
   ],
   "/track-record": [
-    // Round 52 W-A · Agent 3 #10 fix · /track-record(global aggregate)→
-    // /member/calibration(personal mirror)cross-link · Endowment Effect +
-    // Loss Aversion psychology · 訪客看 global PROVED rate 後可對照 personal
-    // accuracy · conversion moment · 之前 /calibration 已 link · 但
-    // /member/calibration personal-mode 沒 cross-link from /track-record。
+    // 訪客看完全站 PROVED rate · 下一步 = 對照自己的命中率(Endowment +
+    // Loss Aversion · conversion moment)· R189 收合後個人準度在 /member
+    // 儀表板(不再是 /member/calibration · 那頁已 redirect 到 /calibration)。
     {
-      href: "/member/calibration",
-      kicker: "member/calibration",
-      title: "你自己的準度 · 跟全站平均對照",
+      href: "/member",
+      kicker: "member",
+      title: "你的準度 · 押注命中率從第一注算起",
     },
     {
       href: "/calibration",
@@ -414,15 +412,14 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
       title: "倒置宣言 · 為什麼當下的工藝也重要",
     },
   ],
-  // Round 29 Wave 2 · /member NEW · 3 sibling
-  // Round 30 Wave 2B updated · 把 /now sibling 換 /member/calibration ·
-  // /member 的下一步是 epistemic mirror · 不是工程現狀(/now 仍在 Footer
-  // + Cmd-K 主動 reach)。
+  // /member 的下一步 sibling。 R189:原本指 /member/calibration(個人對照圖)·
+  // 那頁收合後個人準度直接在儀表板 · 改指公開的 /calibration「引擎準不準」·
+  // 讓會員看到自己要追平/贏過的那台機器的自評。
   "/member": [
     {
-      href: "/member/calibration",
+      href: "/calibration",
       kicker: "calibration",
-      title: "你自己的判斷對照圖",
+      title: "引擎準不準 · 你要贏過的那台機器自評",
     },
     {
       href: "/membership",
@@ -433,26 +430,6 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
       href: "/manifesto",
       kicker: "manifesto",
       title: "為什麼你的資料屬於你自己",
-    },
-  ],
-  // Round 30 Wave 2B · /member/calibration NEW · 3 sibling: /track-record
-  // (data source · 同一份 finalized matches drive both)· /methodology
-  // (calibration math 完整白皮書)· /member(回 4-bias dashboard preview)。
-  "/member/calibration": [
-    {
-      href: "/track-record",
-      kicker: "track-record",
-      title: "完整賽後收據 · 對照圖的資料來源",
-    },
-    {
-      href: "/methodology",
-      kicker: "methodology",
-      title: "準度怎麼算 · 完整白皮書",
-    },
-    {
-      href: "/member",
-      kicker: "member",
-      title: "回會員儀表板",
     },
   ],
   // Round 30 Wave 5 · /login NEW · Phase 1 magic link auth。 3 sibling:
@@ -569,9 +546,9 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
       title: "今日賽事 · 你下預測的地方",
     },
     {
-      href: "/member/calibration",
-      kicker: "member/calibration",
-      title: "你自己的準度 · PROVED 比率細項",
+      href: "/member",
+      kicker: "member",
+      title: "你的準度 · 你押的命中率細項",
     },
     {
       href: "/audit",
