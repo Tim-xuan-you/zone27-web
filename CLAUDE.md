@@ -18,11 +18,14 @@ ZONE 27 從「CPBL 量化預測站」pivot 成合法群眾預測平台(R171-R172
 **真錢對賭 / 抽賭注的傭** = 唯一紅線 · 絕對不碰。其餘灰色但可做:顯示賠率 · 免費預測換小獎(無賭注≠賭博)· 單層分潤(蝦皮式)· 會員/內容抽傭 · 虛擬點數市場。碰真錢的功能上線前找律師(TIER 2/3)。
 **自我修正:**「賠率顯示」「/rewards」過去曾被誤判成紅線 · 其實灰色可做。真紅線只有真錢對賭。
 
-### 💰 賺錢(canonical · 覆蓋下方舊數字)
+### 💰 賺錢(canonical · 2026-06-03 等級改名 OPEN/BLACK/GOLD · 覆蓋下方所有舊數字)
 
-- **BLACK CARD** NT$ 500/月(31天)· 第二名會員 · 抽傭 **10%** · manual ATM · 0 auto-renewal
-- **FOUNDERS 27** NT$ 2,700/年(365天)· 第一名會員 · 抽傭 **5%**(floor)· manual transfer · 0 auto-renewal · 前 270 名拿永久創始編號徽章
-- **會員不限量**(2026-05-30 砍掉舊 270 硬上限 ·「270」改為前 270 創始徽章 · 不再是 membership cap)
+> ⚠️ 等級名以 memory/project_zone27_tier_naming.md 為準:三層純功能(地位交給天梯)· 已砍光 270/創始編號/早鳥故事 · tier KEY 仍 `founder`(DB 值)· URL /founders 不動 ·「TIM · FOUNDER」創辦人簽名保留(別改成 GOLD)。
+
+- **OPEN**(免費)· 引擎(萬象)永遠免費 · 看免費 · 押注 + 跑引擎要登入免費會員
+- **BLACK**(黑卡)NT$ 500/月(31天)· 創作者抽傭 **10%** · manual ATM · 0 auto-renewal
+- **GOLD**(原 FOUNDERS 27 改名)NT$ 2,700/年(365天)· 創作者抽傭 **5%**(floor)· manual transfer · 0 auto-renewal
+- **會員不限量** · 無人數上限、無創始編號、無早鳥徽章 · 地位 = 天梯贏來的(不是買的)
 - **動態內容抽傭:** 10% 起 · 每升一階 −1% · 年費再 −1% · 最低 5% floor
 - **單層分潤**(蝦皮式 · 只一層 · 不做多層 = 避開金字塔/老鼠會)
 - **拒絕不變:** 廣告(AdMob)· 抽賭注傭(0 sportsbook)· auto-renewal(/integrity #13)
@@ -33,7 +36,7 @@ ZONE 27 從「CPBL 量化預測站」pivot 成合法群眾預測平台(R171-R172
 
 ### 🧭 與舊 brand IP 的關係
 
-- **被取代:**「one-way by design · 不建社群/leaderboard/live counter」→ 現在建市場+海選+(Phase 3)討論區。「0 commission 任何形式」→ 只有**賭注**抽傭是紅線,**內容**抽傭是 model。「270 硬上限」→ 不限量+創始徽章。
+- **被取代:**「one-way by design · 不建社群/leaderboard/live counter」→ 現在建市場+海選+(Phase 3)討論區。「0 commission 任何形式」→ 只有**賭注**抽傭是紅線,**內容**抽傭是 model。「270 硬上限 / 創始編號徽章」→ 全砍 · 會員不限量 · 三層純功能 · 地位交給天梯(2026-06-03 等級改名 OPEN/BLACK/GOLD)。
 - **仍 binding:** 引擎永遠免費 · disclosure(方法公開)· Pratfall(公開弱點含此 reversal)· 不爬 gambling platforms · 不接受下注 · engine-validated 才上架。
 - ⚠️ **Brand guardrail(新增):** 創作者市場引入別人的預測 → 信任護城河有稀釋風險。**引擎預測 vs 創作者預測必須視覺/可信度分離**,海選(樣本加權)是品質過濾。
 
@@ -215,16 +218,16 @@ Current pending (as of 2026-05-20 DAY 2 collapse):
   - 不賣 tipster picks · 我們公開 engine sim 您自己看
   - PROVED + DIVERGED 等大公開(他們輸了刪文)
   - model 完整公開在 GitHub(他們黑箱)
-  - 創作者抽傭業界最低:Founders 27 抽 5% · BLACK CARD 抽 10%(Substack 10% · OnlyFans 20% · YouTube 45%)· 動態 10%→5% floor
-- **不假裝:** 我們抽 5-10%(Founders 5% / BLACK CARD 10%)· 跟 LINE 老師 5-30% 抽傭結構同類 · 我們只是抽得少 · 不講「我們不抽傭」 = honest disclosure
+  - 創作者抽傭業界最低:GOLD 抽 5% · BLACK 抽 10%(Substack 10% · OnlyFans 20% · YouTube 45%)· 動態 10%→5% floor
+- **不假裝:** 我們抽 5-10%(GOLD 5% / BLACK 10%)· 跟 LINE 老師 5-30% 抽傭結構同類 · 我們只是抽得少 · 不講「我們不抽傭」 = honest disclosure
 - **同類成功 displacement model:** Defector vs ESPN · Stratechery vs CNBC · Bloomberg Terminal vs 各券商 · Bill James vs MLB establishment
 - **Coverage:** Phase 1 CPBL · Phase 2 NBA + 未來 leagues · Tim 親手 curate · 不爬 gambling platforms · 我們自己不接受下注(我們不是賭場)
 
 ## 🏛️ 商業模式定錨(R172 W4-W6 explicit Tim override)
 
-- **FREE:** NT$ 0 · 引擎跑 10K Monte Carlo · /track-record + 所有 trust artifacts 全公開 · 永遠免費
-- **BLACK CARD:** NT$ 500/31 天 · 一般付費會員 · 10% 創作者抽成(您拿 90%)· ATM 跨行轉帳免手續費 · 0 auto-renewal · 從付款日起算 31 天
-- **FOUNDERS 27:** NT$ 2,700/365 天 · **會員不限量**(2026-05-30 砍舊 270 硬上限 · 前 270 名拿永久創始編號徽章)· 5% 創作者抽成(您拿 95% · BLACK CARD 一半)· 每年 1/1 開放新班(同 Patek 1996/1997 annual collection · 不再設人數上限)· existing 訂戶享 1/1 24h pre-access renew
+- **OPEN:** NT$ 0 · 引擎(萬象)跑 10K 模擬 · /track-record + 所有 trust artifacts 全公開 · 永遠免費 · 押注/跑引擎要登入免費會員
+- **BLACK:** NT$ 500/31 天 · 一般付費會員 · 10% 創作者抽成(您拿 90%)· ATM 跨行轉帳免手續費 · 0 auto-renewal · 從付款日起算 31 天
+- **GOLD:**(原 FOUNDERS 27 改名 · tier key 仍 `founder`)NT$ 2,700/365 天 · **會員不限量** · 5% 創作者抽成(您拿 95% · BLACK 一半)· 0 auto-renewal · 無 270 上限、無創始編號徽章 · 地位交給天梯
 - **拒絕:** 廣告營收(AdMob 永久封殺) · 抽下注分成(0 sportsbook revenue) · 賣 tipster picks(不賣明牌) · auto-renewal(/integrity #13 binding)
 
 ## 🤝 生態系連動
