@@ -142,6 +142,17 @@ R172 pivot · BLACK CARD 從 TapPay 自動訂閱改成 manual ATM / 跨行轉帳
 
 R174 pivot build queue · Claude 可主動 ship(三綠 + auto-push):
 
+- 🟢🟢🟢 **下一窗要做(2026-06-03 Tim 拍板/「您決定」· 詳見 [[project-zone27-engine-strategy]] memory)**:
+  1. **引擎改名 sweep**(第一個 · 零風險 · 已決定):站上「蒙地卡羅 / Monte Carlo」全換 **萬象** + 白話描述(去學術術語)· ⚠️ 紅線:**可改名但「方法」白話講清楚、絕不藏/裝神祕**(擋下 Tim「搞神祕+AI」· 那=變 LINE 老師殺 disclosure)· GitHub 保持開源。
+  2. **三引擎分層**:免費=萬象 1 個 / BLACK·GOLD=萬象+戰力(Elo)+局勢(Markov)3 個 · 天梯只要贏萬象 · (戰力/局勢 是新引擎工程 = 大件)。
+  3. **球隊勝率推播**:你支持的隊(z27_team)+ 下一場 + 我們勝率% + **賽後自動對帳**(贏 Google 那個冷數字 · Google 來源是 Opta/盤口)。
+  4. **57% 彈藥內容**:/calibration 或 /audit 加「為什麼沒有神準引擎(57%=對手謊言的數學證據)」。
+  5. **MLB**:引擎驗證中(0/30 · 今天剛鎖第一批)· ⚠️ 確認 GitHub Action(grade-mlb-locked)真的有在跑 · 累積 ≥30 場且夠準才開 MLB 押注/接進整套(押注/市場/天梯/賣分析)· 終極願景=台灣運彩有的賽事都做整套(各運動引擎驗證夠才開盤)。
+  6. ⚠️ **CLAUDE.md 已過時**(還寫 Founders 27 / BLACK CARD / 270 徽章)· 真相在記憶 · 有空做一輪 CLAUDE.md 刷新。
+- ✅ **R189 全窗(2026-06-03 · 1e02127→9126755 共 7 commit · 全三綠 · auto-push)· 品牌淨化到「誠實 Polymarket」**:
+  - 清匿名死碼(B3)+ 首頁/天梯讀 DB 戰績條 + 收合兩準度頁(下方原 R189 段)· 然後四輪砍會員系統:
+  - **等級改名 OPEN/BLACK/GOLD**(8c9987f→9126755)· 四輪:免費→OPEN 黑卡→BLACK 創始→FOUNDER→**全砍前270編號**→**剝創始/最早支持者故事**→**FOUNDER→GOLD** · 三層純功能 · 地位交給天梯 · ⚠️tier key 仍 `founder`/URL /founders 不動 · ⚠️「TIM·FOUNDER」創辦人簽名保留(別改 GOLD)· 詳見 [[project-zone27-tier-naming]]。
+  - **⚠️ 登入後個人視覺(首頁戰績條 / GOLD 頁 / 切換器)未實機 dogfood**(需 Tim 帳號)· 資料路徑沿用已驗證 primitives + 型別過。
 - ✅ **R189 · 清匿名死碼 + 登入後戰績條 + 收合兩準度頁(2026-06-03 · 新窗 · 1e02127 / be5778d · 全三綠 · 淨 −1800 行)**· 接續 R188 註冊閘門:
   - **B3 清完**:anon-picks 系統整串刪(AnonCalibrationStrip / CalibrationTierBadge / AnonPickMigrator / LadderPosition / lib/anon-picks / lib/calibration-tiers 共 6 檔)· R188 拿掉免登入押注後沒人再寫 `zone27_anon_picks_v1` = 死碼 · localStorage inventory 同步拔那條(11→10 防 drift)· Cmd-K 拔開發符號關鍵字 AnonPick/UserPrediction。
   - **首頁 + 天梯個人戰績條**:新 `YourRecordStrip`(client 端讀 0006 get_my_predictions · 同 /member 的 aggregatePredictionStats 評分 · 頁面維持 ISR 靜態 hydrate 後填)· 登入且押過才顯示「你 vs 引擎」· 取代死掉的匿名版。⚠️ 登入後實機視覺未 dogfood(需帳號)· 資料路徑全沿用已驗證 primitives。
