@@ -142,6 +142,22 @@ R172 pivot · BLACK CARD 從 TapPay 自動訂閱改成 manual ATM / 跨行轉帳
 
 R174 pivot build queue · Claude 可主動 ship(三綠 + auto-push):
 
+- ✅✅✅ **R195 全權攻頂大窗(2026-06-04 · 35e6dd3→5bea0e0 ~9 commit 全三綠 + auto-push · 接 R194 同對話)· Tim 全權 AFK「極致完美/修bug/更好看/更直覺/熱銷/上網查全世界找缺的靈魂/盡可能迭代/只做最好」· 連續 dogfood + 3 路 agent(碼審/全球研究/轉換工藝)synthesize**:
+  - **MLB 即時化(Polymarket「數字會動」誠實版)**:① 即時比分救回(原被「賽後 finalResult only」過度套用丟掉)+ 帶局數 + 誠實標「約10分鐘前·不秒跳」② 修時區漏 live 洞(抓昨天+今天兩天 merge·live 排最前 · fetchRelevantMlb)③ 已結束場加賽後對帳 ✓命中/✕落空(用 lib/mlb-locked.json 賽前鎖定值對真實比分·誠信純正·沒鎖的誠實標「引擎沒鎖這場」)④ 準度 N<30 顯示「—」不報率(2場0中的「0%」誤導+自打臉)⑤ 鎖定頻率 2×/天→每3小時(投手太晚公布漏抓·mlb-engine.yml)⑥ 「最後對帳」用 gradedAt only(不混 lockedAt 假時效)。
+  - **57% 從道歉變 flex(Tim 最大焦慮「57%感覺很弱·想包裝得像專家」)**:🔴 **守住 disclosure 紅線**——擋下「藏57%/裝很多人用/搞神祕AI」(=變LINE老師、燒掉唯一護城河)· 改 flex 框法:57%=全世界天花板(非我們的弱點)+ 我們唯一誠實掛 + **它讓品牌「開除不掉」**(引擎必連敗·沒先講=第一次連敗就崩;有先講=越輸越證明誠實)· 首頁 57% 行去暗化(text-mute/70 fine-print→領頭打騙子「94%在騙你」)。
+  - **缺的靈魂(全球研究 #1)= 校準遊戲當首頁門**:/calibration/test 接首頁「不信?先別下注·測你自己有多準」→ 把 57% 從 claim 變訪客自己發現的 aha · humility first → 引擎權威 second · 0用戶唯一冷啟動引擎。
+  - **操作邏輯/一致性**:詳情頁「選邊兩次」困惑(押注 vs 創作者分析都用「押」)→ 分析改「看好」+說明分開 · /member 巨大「—」→「N手在場上·等賽後揭曉」· 失敗「開通中」(誤導)→ 誠實「送出失敗」。
+  - **極簡 + 去黑話**:footer 4欄20→3欄10(玩→信任→帳號·深度頁不刪只是不轟炸)· 詳情頁金色聚焦(eyebrow 降mute)· 全站「言中」→「命中」(15檔·台灣人秒懂+不踩鐵口)。
+  - ✅ **碼審認證地基紮實**:getUser 全 trust path · wallet 原子無雙扣 · claim_admin 鎖死 · sanitizeNext 防 open-redirect · 無 XSS/SQLi · 全45路由煙霧測試全200·0死連結·0錯誤頁。
+  - ⚠️ **下一窗 backlog(prioritized · 3-agent 共識)**:
+    1. 🔴 **創作者徽章時間鎖(碼審兩輪都點名=最該補命門洞)**:gradeAuthorRecords 無時間比對·直接 RPC 可對已打完場刷完美徽章。 修=migration 給 get_creator_records 回 created_at + gradeAuthorRecords 濾開賽後(graceful·同預測側 isLatePick 的鏡像)。
+    2. 🔴 **MLB-open/引擎=標尺**(Tim 強力拍板):開放所有賽事預測·引擎當基準線非閘門·server match_locks gate·公開翻「驗證夠才開盤」鐵律(Pratfall 式公開修訂)·結算靠比分(用戶端永遠通·不靠引擎鎖)。
+    3. **球隊戰績 fallback**(MLB 菜鳥投手0數據算不出線·Tim 上線必修·動 lib/mlb.ts + lock script 一致 + 誠實揭露估算層)。
+    4. **WalletPanel 軟化**(碼審+轉換兩agent都flag):「儲越多送越多·最划算NT$30000」=品牌自打臉的賭場 reload 套路(兩屏外才寫「不玩99把戲」)· 砍「最划算」anchor 或 bonus codify server 端(現前端承諾後端沒執行)· **錢包 Tim 敏感 → 需 Tim 定**。
+    5. **行動版 sticky 碰撞**(轉換#3):TonightMatchRail offset 76px 但 StickyFoundersCTA 對會員 return null → 會員看懸空、訪客疊116px擋押注 · 把 memberState 傳進 rail。
+    6. **萬象/引擎命名決定**(Tim 的call):卡片「萬象」下頁「引擎」像兩套系統 · 全萬象 or 全引擎+萬象當代號。
+    7. **研究 agent「把已有誠實用昂貴儀器渲染」大件**(都0用戶成立):每場「為什麼」展開(Bill James 問句式+承認盲點)· 不確定區間「67%(61-72)」(Savant式·把57%從弱變嚴謹)· 結算依據 above-fold(Kalshi)· /學院教育(Pinnacle·「為什麼94%是謊言」)· 引擎線賽中擺動 sparkline。
+    8. **頁面正式刪**(changelog/manifesto/discipline·Tim 點頭·護城河頁不刪·要轉址+清Cmd-K+內文連結)· engineFavorite >= 漏網(/member:122+OpenPositionCard·latent)· /ladder 階級邏輯(SHARP「贏機器」跟通則 collapse)。
 - ✅✅✅ **R194 攻頂迭代(2026-06-04 · 5 commit 全三綠 + 校準遊戲實機驗證 · 8f6f7c2→26216df · auto-push)· Tim「全權上網查/找缺的靈魂/攻頂迭代/重心理學+操作邏輯+極致美觀+操作直覺/別上線/別碰SEO社群」· 3 並行 agent(碼審 / 全球研究缺的靈魂 / 轉換心理工藝)synthesize → 5 波**:
   - **🔒 命門信任洞(8f6f7c2)**:碼審抓到創作者「✓ 已驗證準度」徽章**完全沒時間鎖**(連預測那邊的顯示層 isLatePick 防線都沒)= 可對已打完的比賽發分析、刷完美戰績再賣付費分析 = **反轉品牌命門**(報馬仔賴不掉戰績 → 可造假)。 修:押注/發分析 UI 開賽後封盤(新 `lib/matches.matchHasStarted` · CardBetStrip/UserPredictionPicker/CreatorAnalysis 都加 startISO write-guard · 補押注 live 視窗漏網 + 創作者徽章從沒網到有網)+ `getEngineFavorite` 統一平手判定(50/50 兩邊不上金、押注標「引擎也難分」· 解散落各處 `>=` 把平手算 home 的接縫)+ /rewards /admin 改 getUser()(不用可偽造 getSession)+ /admin 等候名單只給登入者(stealth)。 ⚠️ **server 端 `match_locks` 表 gate 仍待補**(belt-and-suspenders · 顯示層+UI write-guard 已防 · 公開天梯/創作者徽章上線前補:賽程開賽時間進 DB → submit_prediction/submit_creator_post 拒收開賽後 + get_match_prediction_tally 過濾 + get_creator_records 回 created_at 供徽章 server 過濾)。
   - **🎨 貴感(a9426a9)**:抽 `components/MarketSplitBar.tsx` 共用元件收 4 處手刻雙色市場條(引擎線/群眾線各 2)· 兩 variant 視覺分離(engine=亮金+glow+羽化接縫·新帶到詳情頁 / crowd=暗金細條無光暈)= 補 CLAUDE.md「引擎預測 vs 群眾預測必須視覺分離」鐵律 + 解「同卡兩條金條沒區分」· MiniMatchCard 大數字 + 收據比分字重 400→`font-light`(全站最常出現的數字本來比精緻詳情頁更粗 = Baseball-Savant 級貴感)。
