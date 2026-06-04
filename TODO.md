@@ -149,6 +149,14 @@ R172 pivot · BLACK CARD 從 TapPay 自動訂閱改成 manual ATM / 跨行轉帳
 
 R174 pivot build queue · Claude 可主動 ship(三綠 + auto-push):
 
+- ✅✅✅ **R198 全權自主攻頂(2026-06-04 · Tim AFK 全權「攻頂/查全世界/找缺的靈魂/認真看bug/學成功網站」· 3 並行 agent synthesize → 多波 ship · 4f7efc7→5ba295a 全三綠 + 實機驗 + auto-push)**:
+  - **3-agent 偵察**(全球研究缺的靈魂 / 碼審 / 轉換設計)· 碼審結論:**碼庫狀態很好 · 0 P0/P1 · tsc 淨 · 全 45 路由 200 · auth/integrity(先鎖後結/wallet原子/getUser)紮實** —— Tim「任何缺陷會被攻擊」的擔憂在 integrity 面大致不成立 · 真正機會在**漏斗順序 + 缺的靈魂功能**,不是修 bug。
+  - **Wave 1 清理+去英文標+文案(4f7efc7)**:刪孤兒 SilentReceiptStream(R197 移除後 0 import)· 修 related-links 過時「前270創始編號」· Nav 拿掉「實驗室 BETA」(undersell 核心引擎 · 同 MLB de-BETA)· 「TONIGHT N」→「今晚 N」· 押注鈕「登入免費註冊」(糊)→「免費加入」。
+  - **Wave 2 首頁漏斗+金色紀律(b4fd538)**:hero 兩個競爭 CTA → 單一實心金鈕「看今晚誰會贏」+ 校準遊戲降為安靜次要鏈 · PromiseChip 金框金底→灰框(只留 ✓ 金 · 焦點還給主鈕+戰績數字)。 實機 mobile 截圖驗。
+  - **Wave 3 校準遊戲轉換鈕(5ba295a)**:結果頁三個等重 outline 鈕 → 主轉換「開始記你的真實戰績」做實心金大鈕(最高意圖時刻)+ 一行價值 + 另兩個降文字鏈。
+  - 🔴🔴 **缺的靈魂 roadmap = 下窗重點(全寫進 [[project-zone27-soul-roadmap]] · Agent A 全球研究 + 競品證明 + 紅線)· 0 用戶優先**:①**個人校準身分**(自己的可靠度圖+對比亂猜+本月 vs 引擎=升階閘門)②每日對帳 streak(點數非賭場)③**含輸收據分享卡**(0用戶病毒頭號槓桿·絕不只選贏)④鎖定結算來源(Kalshi 式)⑤持倉者徽章+profile 含輸戰績⑥校準排行榜(**按校準非 PnL**)。 🔴 紅線:分享卡/榜絕不只選贏、榜按校準非 PnL、streak 給點數非現金、profile 看校準非粉絲數。
+  - **Agent C craft 剩餘(下窗 craft 波)**:O2 詳情頁兩個「選邊」困惑(已押者預填分析 pick)· C4 創作者「✓已驗證準度」proof 埋太深(/matches 露出範例)· V2 可押卡 vs 已結算收據視覺分層 · V3 砍雙語 echo 標(ENGINE LINE/CROWD LINE)升微字 · C5 /membership 改 lead 身分非「賣分析賺錢」。
+  - **碼審剩餘(latent 低急)**:engineFavorite raw `>=`/`>` vs getEngineFavorite() = latent 不 live(無 50/50 場)· 未來 ingest 50/50 才 flip · 有空硬化。
 - ✅✅✅ **R197 視覺身分(2026-06-04 · 接 R196 同窗 · Tim interrupt 3 點 dogfood + 行銷設計專家 mandate + 「Polymarket go」· ac9fdbb→9a36dd7 共 4 commit 全三綠 + 實機截圖 + auto-push)**:
   - **Tim 痛點**:① 「球迷 #46f6741a 根本不知道是誰 · 能自己設名嗎」② 「網站很死板/理工男/都字跟線/沒圖像/像陰沉地獄/看得很累」③ Polymarket go。 對照截圖=玩運彩(暱稱+頭像+招財貓+亮色)。
   - **🔭 專家診斷(canonical · 寫進 [[project-zone27-visual-identity]])**:問題不是「太暗」,是「太空」—— Polymarket 一樣暗但每盤有圖、每人有名+臉,我們把人跟圖全拿掉只剩試算表。 ⚠️ 解法紅線=加身分+圖像、留高級暗色,**絕不抄玩運彩招財貓/紅綠/閃亮**(踩爆禁止鐵律=變另一個玩運彩)。
