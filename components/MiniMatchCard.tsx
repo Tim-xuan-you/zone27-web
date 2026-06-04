@@ -1,5 +1,6 @@
 import Link from "next/link";
 import CardBetStrip from "@/components/CardBetStrip";
+import MarketSplitBar from "@/components/MarketSplitBar";
 import {
   getMatchPhase,
   getCalibration,
@@ -131,7 +132,7 @@ export default function MiniMatchCard({ match }: { match: Match }) {
       <div className="mt-2">
         <div className="flex items-baseline justify-between mb-1.5">
           <span
-            className={`font-mono text-xl sm:text-2xl tabular tracking-tight ${
+            className={`font-mono text-xl sm:text-2xl font-light tabular tracking-tight ${
               homeFav ? "text-gold" : "text-mute"
             }`}
           >
@@ -139,7 +140,7 @@ export default function MiniMatchCard({ match }: { match: Match }) {
             <span className="text-xs opacity-60 ml-0.5">%</span>
           </span>
           <span
-            className={`font-mono text-xl sm:text-2xl tabular tracking-tight ${
+            className={`font-mono text-xl sm:text-2xl font-light tabular tracking-tight ${
               awayFav ? "text-gold" : "text-mute"
             }`}
           >
@@ -153,33 +154,13 @@ export default function MiniMatchCard({ match }: { match: Match }) {
             as「63 / 37」。 This is the ENGINE opening line now · crowd-driven
             movement layers on once migration 0003(predictions table)is applied。
             Any gap = tie probability(home%+away% < 100)· honest residual。 */}
-        <div
-          className="relative h-2 sm:h-2.5 flex overflow-hidden rounded-full bg-line/50"
-          role="img"
-          aria-label={`引擎開盤線 · ${match.home.en} ${homePct}% / ${match.away.en} ${awayPct}%`}
-        >
-          <div
-            className={`h-full ${homeFav ? "bg-gold glow-gold" : "bg-mute/45"}`}
-            style={{ width: `${homePct}%` }}
-          />
-          <div
-            className={`h-full ${awayFav ? "bg-gold glow-gold" : "bg-mute/45"}`}
-            style={{ width: `${awayPct}%` }}
-          />
-          {/* 不確定性接縫 · 兩邊機率交界羽化一道柔光 = 視覺上「這是機率,不是鐵口」·
-              量化品牌簽名筆觸(UncertaintyStripe fan-chart 精神 · 卡片迷你版)·
-              絕對定位 overlay · clip 在 bar 內 · 不佔高度、不擋點擊。 */}
-          <div
-            aria-hidden="true"
-            className="absolute inset-y-0 pointer-events-none"
-            style={{
-              left: `calc(${homePct}% - 7px)`,
-              width: "14px",
-              background:
-                "linear-gradient(90deg, transparent, rgba(245,242,234,0.5), transparent)",
-            }}
-          />
-        </div>
+        <MarketSplitBar
+          homePct={homePct}
+          awayPct={awayPct}
+          goldSide={fav}
+          variant="engine"
+          ariaLabel={`引擎開盤線 · ${match.home.en} ${homePct}% / ${match.away.en} ${awayPct}%`}
+        />
         {conviction.tier === "tossup" ? (
           // 銅板局:把「連引擎都難分」當主打 · gold 讓它在看板 grid 裡跳出來
           //(Polymarket「勢均力敵盤=主角」+ /calibration 57% 誠實護城河 · 不裝鐵口)
@@ -214,7 +195,7 @@ export default function MiniMatchCard({ match }: { match: Match }) {
             <span className="font-mono text-mute text-[9px] tracking-[0.25em]">
               ACTUAL
             </span>
-            <span className="font-mono text-bone text-base tabular tracking-tight">
+            <span className="font-mono text-bone text-base font-light tabular tracking-tight">
               {match.finalResult.homeScore}:{match.finalResult.awayScore}
               <span className="text-mute text-[10px] ml-1.5">
                 {match.finalResult.winner === "home"

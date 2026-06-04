@@ -7,6 +7,7 @@ import MatchSimulator from "@/components/MatchSimulator";
 import EngineGate from "@/components/EngineGate";
 import StatPercentileBar from "@/components/StatPercentileBar";
 import ConfidenceStars from "@/components/ConfidenceStars";
+import MarketSplitBar from "@/components/MarketSplitBar";
 import CreatorAnalysis from "@/components/CreatorAnalysis";
 import UserPredictionPicker from "@/components/UserPredictionPicker";
 import ReceiptForwardButton from "@/components/ReceiptForwardButton";
@@ -178,20 +179,13 @@ export default async function MatchDetailPage({
                 <span className="text-xl opacity-60 ml-0.5">%</span>
               </span>
             </div>
-            <div
-              className="relative h-2 flex overflow-hidden rounded-full bg-line/60"
-              role="img"
-              aria-label={`引擎開盤線 · ${m.home.en} ${m.home.winRate}% / ${m.away.en} ${m.away.winRate}%`}
-            >
-              <div
-                className={`h-full ${homeFavored ? "bg-gold glow-gold" : "bg-mute/45"}`}
-                style={{ width: `${m.home.winRate}%` }}
-              />
-              <div
-                className={`h-full ${awayFavored ? "bg-gold glow-gold" : "bg-mute/45"}`}
-                style={{ width: `${m.away.winRate}%` }}
-              />
-            </div>
+            <MarketSplitBar
+              homePct={m.home.winRate}
+              awayPct={m.away.winRate}
+              goldSide={fav}
+              variant="engine"
+              ariaLabel={`引擎開盤線 · ${m.home.en} ${m.home.winRate}% / ${m.away.en} ${m.away.winRate}%`}
+            />
             <p className="mt-2 text-center font-mono text-mute/55 text-[8px] tracking-[0.3em]">
               引擎開盤線 · ENGINE LINE
             </p>

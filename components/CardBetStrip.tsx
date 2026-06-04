@@ -11,6 +11,7 @@ import {
   type MarketTally,
 } from "@/lib/predictions-market";
 import { matchHasStarted } from "@/lib/matches";
+import MarketSplitBar from "@/components/MarketSplitBar";
 
 // ── ZONE 27 · Card Bet Strip ─────────────────────────────
 // 首頁 / 賽事列表市場卡上的一鍵押 + 群眾市場線。
@@ -115,16 +116,12 @@ export default function CardBetStrip({
             </span>
             <span>{tally.total} 人</span>
           </div>
-          <div className="relative h-1.5 flex overflow-hidden rounded-full bg-line/50">
-            <div
-              className="h-full bg-gold/70"
-              style={{ width: `${tally.homePct}%` }}
-            />
-            <div
-              className="h-full bg-mute/35"
-              style={{ width: `${100 - tally.homePct}%` }}
-            />
-          </div>
+          <MarketSplitBar
+            homePct={tally.homePct}
+            awayPct={100 - tally.homePct}
+            goldSide="home"
+            variant="crowd"
+          />
         </div>
       )}
 

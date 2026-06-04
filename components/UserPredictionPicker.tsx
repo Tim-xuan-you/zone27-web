@@ -11,6 +11,7 @@ import {
   type MarketTally,
 } from "@/lib/predictions-market";
 import { matchHasStarted } from "@/lib/matches";
+import MarketSplitBar from "@/components/MarketSplitBar";
 
 // ── ZONE 27 · 進場預測 / Market Predict ─────────────────
 // 一場比賽唯一的押注 widget。 R188(2026-06-03 · Tim 拍板「要註冊才能押」)·
@@ -295,10 +296,12 @@ function CrowdLine({
           {awayPct}% 押 {awayName.slice(0, 4)}
         </span>
       </div>
-      <div className="relative h-2 flex overflow-hidden rounded-full bg-line/50">
-        <div className="h-full bg-gold/80" style={{ width: `${homePct}%` }} />
-        <div className="h-full bg-mute/40" style={{ width: `${awayPct}%` }} />
-      </div>
+      <MarketSplitBar
+        homePct={homePct}
+        awayPct={awayPct}
+        goldSide="home"
+        variant="crowd"
+      />
       <p className="mt-1 font-mono text-mute/50 text-[8px] tracking-[0.3em] text-center">
         群眾市場線 · CROWD LINE
       </p>
