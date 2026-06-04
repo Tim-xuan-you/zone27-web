@@ -126,6 +126,18 @@ export const cpblParks: ParkFactor[] = [
     tilt: "neutral",
     rationale: "1999 開幕 · 台北天母市區 · 中外野約 121m · 海平面 · neutral baseline",
   },
+  {
+    // 2026-06-05 ingest 補:中信兄弟主場 · cpbl-260605-01 使用 · 2006 開幕
+    venue: "臺中洲際棒球場",
+    en: "TAICHUNG INTERCONTINENTAL",
+    homeTeam: "中信兄弟",
+    openedYear: 2006,
+    // 大型場 · 中外野深 · 海平面 · 略偏投手(ESTIMATE · per /audit S02)
+    estimatedHomeWinPct: 53,
+    estimatedRunsPerGame: 9.0,
+    tilt: "pitcher",
+    rationale: "2006 開幕 · 中外野深 · 大型場 · 海平面 · 略偏投手",
+  },
 ];
 
 export function getParkFactorByVenue(venue: string): ParkFactor | null {

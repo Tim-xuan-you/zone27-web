@@ -84,6 +84,154 @@ function mergePitcherStats(p: PitcherStats): PitcherStats {
 }
 
 const rawMatches: Match[] = [
+  // ── 2026-06-05 · 一軍 3 場 ingest · Tim 截圖 cpbl.com.tw 賽程 + 先發投手成績表 ──
+  //   投手 2026 累計 real(K9/BB9/HR9/WHIP 由 IP/K/BB/HR 換算)· winRate 手 curate 整數
+  //   (ERA + 控球 + 主場 + 隊伍 W-L · 接近五五波就誠實低 conviction · 不裝把握)· 天氣不建模(/audit S02)。
+  //
+  //   #142 洲際 · 樂天(艾菩樂 away)vs 中信(鄭浩均 home)· 降雨 40% · W-L 樂天 18-25-1 / 中信 13-31-1
+  //     兩隊兩投手 2026 都偏弱:艾菩樂 ERA 4.02(HR9 1.45 偏高 · 三年 2.75→3.21→4.02 走下坡);
+  //     鄭浩均 ERA 5.21(2025 是 1.49 的 ace · 2026 大回吐 · 但 K9 8.4 還在)。 樂天戰績明顯較佳
+  //     + 投手 ERA 微優 → 客隊樂天微 favored · 中信主場 + K 撐住 → 不大分。 樂天 54 / 中信 46 · conf 53。
+  {
+    id: "cpbl-260605-01",
+    league: "CPBL",
+    date: "2026 · 06 · 05  ·  星期五",
+    startTime: "18:35",
+    venue: "臺中洲際棒球場",
+    home: {
+      name: "中信兄弟",
+      en: "BROTHERS",
+      pitcher: {
+        name: "鄭浩均",
+        era: "5.21", // real · 2026 · 48.1 IP(2025 為 1.49 ace · 今年大回吐)
+        k9: "8.4", // real · 45 K / 48.1 IP × 9 · K 仍在
+        whip: "1.24", // real · (44 H + 16 BB) / 48.1 IP
+        bb9: "3.0", // real · 16 BB / 48.1 IP × 9
+        hr9: "0.93", // real · 5 HR / 48.1 IP × 9
+      },
+      recent: ["L", "L", "W", "L", "L"], // placeholder · 中信 13-31-1(全聯盟最差)
+      winRate: 46,
+    },
+    away: {
+      name: "樂天桃猿",
+      en: "MONKEYS",
+      pitcher: {
+        name: "艾菩樂",
+        era: "4.02", // real · 2026 · 56 IP(三年 2.75→3.21→4.02 走下坡)
+        k9: "5.9", // real · 37 K / 56 IP × 9
+        whip: "1.25", // real · (57 H + 13 BB) / 56 IP
+        bb9: "2.1", // real · 13 BB / 56 IP × 9
+        hr9: "1.45", // real · 9 HR / 56 IP × 9 · 偏高
+      },
+      recent: ["W", "L", "W", "L", "W"], // placeholder · 樂天 18-25-1
+      winRate: 54,
+    },
+    topScores: [
+      // 兩投手都偏弱 · 中分為主 · 樂天微 lean(格式 home : away = 中信 : 樂天)
+      { score: "3 : 4", probability: 8.5 },
+      { score: "2 : 3", probability: 8.0 },
+      { score: "4 : 5", probability: 7.5 },
+      { score: "3 : 5", probability: 7.0 },
+      { score: "2 : 4", probability: 7.0 },
+    ],
+    aiConfidence: 53,
+  },
+  //   #143 大巨蛋 · 富邦(魔力藍 away)vs 統一(布雷克 home)· 降雨 60% · W-L 富邦 23-20-0 / 統一 23-22-1
+  //     王牌對決:布雷克 ERA 1.87 + WHIP 0.95 + BB9 0.6(頂級控球)主場;魔力藍 ERA 2.13 + HR9 0.16
+  //     (頂級壓制長打)。 統一主場 + 布雷克微優;富邦戰績微優。 低分膠著、高變異 → 統一 52 / 富邦 48
+  //     · conf 50(兩王牌 · 銅板局 · 引擎不裝把握)。
+  {
+    id: "cpbl-260605-02",
+    league: "CPBL",
+    date: "2026 · 06 · 05  ·  星期五",
+    startTime: "18:35",
+    venue: "臺北大巨蛋",
+    home: {
+      name: "統一7-ELEVEn獅",
+      en: "LIONS",
+      pitcher: {
+        name: "布雷克",
+        era: "1.87", // real · 2026 · 57.2 IP · 頂級
+        k9: "4.7", // real · 30 K / 57.2 IP × 9 · 低 K · 打 contact
+        whip: "0.95", // real · (51 H + 4 BB) / 57.2 IP · 頂級
+        bb9: "0.6", // real · 4 BB / 57.2 IP × 9 · 頂級控球
+        hr9: "0.62", // real · 4 HR / 57.2 IP × 9
+      },
+      recent: ["W", "L", "W", "W", "L"], // placeholder · 統一 23-22-1
+      winRate: 52,
+    },
+    away: {
+      name: "富邦悍將",
+      en: "GUARDIANS",
+      pitcher: {
+        name: "魔力藍",
+        era: "2.13", // real · 2026 · 55 IP · 強
+        k9: "6.2", // real · 38 K / 55 IP × 9
+        whip: "1.15", // real · (48 H + 15 BB) / 55 IP
+        bb9: "2.5", // real · 15 BB / 55 IP × 9
+        hr9: "0.16", // real · 1 HR / 55 IP × 9 · 頂級壓制長打
+      },
+      recent: ["W", "W", "L", "W", "L"], // placeholder · 富邦 23-20-0
+      winRate: 48,
+    },
+    topScores: [
+      // 兩王牌投手戰 · 低分 · 統一主場微 favored(格式 home : away = 統一 : 富邦)
+      { score: "2 : 1", probability: 10.0 },
+      { score: "1 : 2", probability: 9.5 },
+      { score: "3 : 2", probability: 9.0 },
+      { score: "2 : 3", probability: 8.5 },
+      { score: "1 : 0", probability: 7.5 },
+    ],
+    aiConfidence: 50,
+  },
+  //   #144 澄清湖 · 味全(伍鐸 away)vs 台鋼(後勁 home)· 降雨 40% · W-L 味全 31-15-0 / 台鋼 25-20-1
+  //     味全全聯盟最強隊(.674)· 但客場派伍鐸(K9 2.6 極低 = 很好打 · 靠守備 · 高變異);台鋼主場
+  //     派後勁(2025 ace · 2026 ERA 3.89 但 .210 BAA + 0 HR · 控球野 BB9 4.1)。 隊伍實力偏味全、
+  //     投手對決微偏台鋼 → 味全 53 / 台鋼 47 · conf 53(味全隊強拉過微弱投手對決)。
+  {
+    id: "cpbl-260605-03",
+    league: "CPBL",
+    date: "2026 · 06 · 05  ·  星期五",
+    startTime: "18:35",
+    venue: "澄清湖棒球場",
+    home: {
+      name: "台鋼雄鷹",
+      en: "HAWKS",
+      pitcher: {
+        name: "後勁",
+        era: "3.89", // real · 2026 · 44 IP(2025 ace 1.89)· .210 BAA 難打但控球野
+        k9: "7.8", // real · 38 K / 44 IP × 9
+        whip: "1.23", // real · (34 H + 20 BB) / 44 IP
+        bb9: "4.1", // real · 20 BB / 44 IP × 9 · 偏野
+        hr9: "0.00", // real · 0 HR / 44 IP · 完全不被轟
+      },
+      recent: ["W", "L", "W", "W", "L"], // placeholder · 台鋼 25-20-1
+      winRate: 47,
+    },
+    away: {
+      name: "味全龍",
+      en: "DRAGONS",
+      pitcher: {
+        name: "伍鐸",
+        era: "3.83", // real · 2026 · 42.1 IP
+        k9: "2.6", // real · 12 K / 42.1 IP × 9 · 極低 K · 很靠守備 · 高變異
+        whip: "1.30", // real · (44 H + 11 BB) / 42.1 IP
+        bb9: "2.3", // real · 11 BB / 42.1 IP × 9
+        hr9: "0.85", // real · 4 HR / 42.1 IP × 9
+      },
+      recent: ["W", "W", "L", "W", "W"], // placeholder · 味全 31-15-0(全聯盟最強)
+      winRate: 53,
+    },
+    topScores: [
+      // 味全隊強 · 但兩投手都不穩 · 中分 · 味全微 lean(格式 home : away = 台鋼 : 味全)
+      { score: "3 : 4", probability: 8.5 },
+      { score: "2 : 3", probability: 8.0 },
+      { score: "4 : 5", probability: 7.5 },
+      { score: "2 : 4", probability: 7.0 },
+      { score: "3 : 5", probability: 7.0 },
+    ],
+    aiConfidence: 53,
+  },
   // ── 2026-06-04 · DAY 12 ingest · #141(富邦 vs 台鋼 @ 澄清湖)· Tim 截圖 cpbl.com.tw ──
   // 來源:Tim 截圖 cpbl.com.tw 一軍賽程 2026/06/04 星期四 #141 + 先發投手成績表(李東洛 + 黃子鵬)。
   //   #141 澄清湖 18:35 · 富邦 李東洛(away · 投手表 real · 2026 ERA 1.83 · 44.1 IP · 43 H · 1 HR · 13 BB · 30 K · WHIP 1.26 ·
