@@ -47,8 +47,10 @@
 //   - <= 1 today match · component returns null(empty UI)
 // ─────────────────────────────────────────────────────
 
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { createSupabaseBrowserClient } from "@/lib/supabase/browser";
 
 export type TonightMatchPillData = {
   /** Match ID · same as URL slug · used in href */
@@ -77,6 +79,26 @@ export default function TonightMatchRail({
   currentMatchId,
 }: Props) {
   const pathname = usePathname();
+  // R195 · 登入感知 · 修行動版碰撞(轉換 agent #3):rail 原本固定 +76px 坐在
+  // StickyFoundersCTA 之上,但 CTA 對登入會員 return null → 會員看到 rail 懸空 76px、
+  // 下面一片空。 會員時 offset 歸 0(貼底)· 訪客時維持 +76px(讓出 CTA 空間)。
+  // "checking"(初始 false→effect 後才更新)當訪客處理 · 避免蓋到 CTA。
+  const [isMember, setIsMember] = useState(false);
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      try {
+        const supabase = createSupabaseBrowserClient();
+        const { data } = await supabase.auth.getSession();
+        if (!cancelled) setIsMember(!!data.session);
+      } catch {
+        /* guest fallback */
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   // Same hide rules as StickyFoundersCTA · don't compete with form/conversion pages
   if (pathname === "/founders" || pathname === "/lab/custom") return null;
@@ -96,7 +118,9 @@ export default function TonightMatchRail({
         // StickyFoundersCTA at py-3 sm:py-4 + 1px border + content =
         // ~76px on iPhone SE base · matches actual paint on all CPBL
         // 3-game nights · no more z-29-vs-z-30 visual collision。
-        bottom: "calc(env(safe-area-inset-bottom, 0px) + 76px)",
+        bottom: isMember
+          ? "env(safe-area-inset-bottom, 0px)"
+          : "calc(env(safe-area-inset-bottom, 0px) + 76px)",
         paddingLeft: "env(safe-area-inset-left, 0px)",
         paddingRight: "env(safe-area-inset-right, 0px)",
       }}
