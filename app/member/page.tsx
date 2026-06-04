@@ -190,12 +190,19 @@ export default async function MemberPage() {
           {stats.total > 0 ? (
             <>
               <div className="flex items-baseline gap-3">
-                <span className="font-mono text-gold text-6xl sm:text-7xl font-light tracking-tight tabular">
-                  {stats.accuracy ?? "—"}
-                  {stats.accuracy !== null && (
+                {stats.accuracy !== null ? (
+                  <span className="font-mono text-gold text-6xl sm:text-7xl font-light tracking-tight tabular">
+                    {stats.accuracy}
                     <span className="text-2xl opacity-60 ml-1">%</span>
-                  )}
-                </span>
+                  </span>
+                ) : (
+                  // 都還沒結算(全在場上)· 不顯示巨大的「—」(讀起來像壞掉)·
+                  // 改「N 手在場上 · 等賽後揭曉」(同 YourRecordStrip 的優雅空狀態)
+                  <span className="font-mono text-bone text-4xl sm:text-5xl font-light tracking-tight tabular">
+                    {stats.total}
+                    <span className="font-sans text-mute text-xl ml-2">手在場上</span>
+                  </span>
+                )}
               </div>
               <p className="mt-4 text-bone text-base leading-relaxed">
                 押了 <span className="font-mono text-gold tabular">{stats.total}</span> 場 ·{" "}

@@ -42,11 +42,14 @@ export default function MlbEngineRecord() {
     decided.length > 0 ? Math.round((proved / decided.length) * 100) : null;
   // 最後更新戳(賽後對帳 gradedAt · 沒有就用最近 lockedAt)· 補 Tim 指出的「沒寫日期」·
   // 也強化「賽後自動對帳」誠實感(看得到上次什麼時候對的)。
-  const latestTs = [...preds.map((p) => p.gradedAt), ...preds.map((p) => p.lockedAt)]
+  // 「最後對帳」只看 gradedAt(賽後結算時間)· 不混 lockedAt —— lockedAt 對未來
+  // 還沒打的場也有,混進去會把「最後對帳」顯示成未來日期 = 假時效。 無結算則不顯示。
+  const gradedTs = preds
+    .map((p) => p.gradedAt)
     .filter((t): t is string => Boolean(t))
     .sort();
   const lastUpdated =
-    latestTs.length > 0 ? latestTs[latestTs.length - 1].slice(0, 10) : null;
+    gradedTs.length > 0 ? gradedTs[gradedTs.length - 1].slice(0, 10) : null;
 
   return (
     <section className="mx-auto max-w-6xl w-full px-6 sm:px-10 pb-12">

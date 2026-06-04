@@ -55,13 +55,25 @@ export default function Home() {
           <p className="mt-4 sm:mt-5 max-w-xl mx-auto text-mute leading-relaxed text-base sm:text-lg">
             免費跑一萬次 · <span className="text-bone">告訴你誰會贏。</span>
           </p>
-          {/* 誠實鉤子 · 對手首頁喊「高手 94% 勝率」· 我們反過來:沒人能算命、
-              連全世界最準也才 57%、不喊神準只對帳 = disarm 懷疑者的第一印象 ·
-              全球研究 agent #3 · 對手 fake-win-rate banner 的誠實 inverse。 */}
-          <p className="mt-3 max-w-xl mx-auto text-mute/70 leading-relaxed text-sm">
-            沒人能算命 —— 連全世界最準的也才 <span className="text-bone">5 成 7</span>。
+          {/* 誠實鉤子 = flex(不是道歉)· R195 去暗化(原 text-mute/70 fine-print 讀起來
+              像心虛)+ 措辭領頭打騙子 · per 轉換 agent「57% 該以強項領頭、不是耳語」·
+              把全世界的天花板掛出來當招牌 = 對手 94% fake-win-rate 的誠實 inverse。 */}
+          <p className="mt-3 max-w-xl mx-auto text-mute leading-relaxed text-sm sm:text-base">
+            全世界沒有「神準」這回事 —— 連最強的模型,賽前單場也才{" "}
+            <span className="text-bone">5 成 7</span>。 喊「94% 神準」的,數學上在騙你。
             我們不喊神準 · 只<span className="text-gold">逐場對帳給你看</span>。
           </p>
+          {/* 缺的靈魂(全球研究 #1)· 把 57% 從「我們的 claim」變「訪客自己發現的 aha」:
+              先別下注、先測你自己 → 校準遊戲(0 登入)· humility first → 引擎權威 second。
+              外框文字鏈(非實心金鈕)· 主 CTA 仍是下方「看今晚誰會贏」(gold discipline 留一個實心金)。 */}
+          <div className="mt-4">
+            <Link
+              href="/calibration/test"
+              className="inline-flex items-center gap-1.5 border border-gold/40 text-gold/90 hover:text-gold hover:border-gold/70 font-mono text-[11px] sm:text-xs tracking-[0.18em] px-4 py-2 transition-colors"
+            >
+              不信?先別下注 · 測你自己有多準 →
+            </Link>
+          </div>
 
           {/* 引擎戰績 · Pratfall「連輸的也掛」· compact · 永遠不刪 */}
           {tr.total > 0 && (

@@ -152,7 +152,7 @@ export default function CreatorAnalysis({
     } else if (res.reason === "invalid") {
       setError("標題 ≤80 字、內容 ≤2000 字,並選一邊。");
     } else {
-      setError("發表系統正在開通中 · 請稍後再試。");
+      setError("送出失敗 · 請再試一次。");
     }
     setSaving(false);
   };
@@ -550,7 +550,7 @@ function CommentThread({
     } else if (res.reason === "invalid") {
       setErr("回覆 1–500 字。");
     } else {
-      setErr("討論功能開通中 · 請稍後再試。");
+      setErr("送出失敗 · 請再試一次。");
     }
     setSending(false);
   };
