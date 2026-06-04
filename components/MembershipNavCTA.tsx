@@ -95,17 +95,21 @@ export default function MembershipNavCTA({
   // Tim 進 /member 看 anonymous preview content · 但 Nav 路徑 1-click 不再卡 /login。
   const effectiveLoggedIn = loggedIn || previewActive;
 
-  const href = effectiveLoggedIn ? "/member" : "/membership";
+  // R199 · Tim「登入 + 會員 → 兩顆是同一件事 · 選一個就好」→ 收成單一 auth 鈕。
+  // anon = 「登入」→ /login(該頁同時處理登入/註冊 · 直接到得了 = 守 R50「登入別藏」);
+  // logged-in = 「您的引擎」→ /member。 NavLoginCTA(原本另一顆「登入」)已刪。
+  // /membership(三層方案總覽)改由 Cmd-K + footer 進(同 Apple:右上是帳號不是定價)。
+  const href = effectiveLoggedIn ? "/member" : "/login";
   const label = previewActive
     ? "您的引擎 (PREVIEW)"
     : loggedIn
     ? "您的引擎"
-    : "會員";
+    : "登入";
   const aria = previewActive
     ? "PREVIEW mode · /member dashboard preview · 同 dogfood mirror logged-in UX"
     : loggedIn
     ? "您的 /member 個人儀表板 · 已登入會員專屬"
-    : "加入會員 · OPEN 免費訂閱 + BLACK + GOLD 三層 ladder";
+    : "登入或註冊 · Email + 密碼 · 終身免費 · 0 tracking";
 
   if (variant === "mobile") {
     return (

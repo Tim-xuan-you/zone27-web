@@ -1,7 +1,6 @@
 import Link from "next/link";
 import MobileNavToggle from "@/components/MobileNavToggle";
 import MembershipNavCTA from "@/components/MembershipNavCTA";
-import NavLoginCTA from "@/components/NavLoginCTA";
 import TierBadge from "@/components/TierBadge";
 import CmdKTrigger from "@/components/CmdKTrigger";
 import { getTodayMatches } from "@/lib/matches";
@@ -161,7 +160,8 @@ export default function Nav({ active }: { active?: NavKey }) {
                 public visitor 看不到 noise · per agent locked-preview research
                 Pattern 3。 */}
             <TierBadge />
-            <NavLoginCTA variant="desktop" />
+            {/* R199 · 單一 auth 鈕(anon「登入」→ /login · 登入後「您的引擎」→ /member)·
+                原本另一顆 NavLoginCTA「登入」已刪(Tim「兩顆同一件事 · 選一個」)。 */}
             <MembershipNavCTA
               active={active === "founders"}
               variant="desktop"
@@ -169,12 +169,10 @@ export default function Nav({ active }: { active?: NavKey }) {
             <CmdKTrigger />
           </div>
 
-          {/* Mobile · LOGIN + GOLD 會員 gold CTA · The secondary nav
-              lives below on its own row to keep this line uncramped.
-              Round 50 W-B · 加 NavLoginCTA mobile variant 左邊 ·
-              Apple-pattern「登入」 永遠 visible · 不再隱藏 essential entry。 */}
+          {/* Mobile · 單一 auth gold CTA(MobileNavToggle = MembershipNavCTA mobile)·
+              anon「登入」→ /login · 登入後「您的引擎」→ /member。 R199 收掉重複的
+              NavLoginCTA(Tim「登入 + 會員 兩顆同一件事 · 選一個」)· 仍永遠 visible。 */}
           <div className="sm:hidden flex items-center gap-2 shrink-0">
-            <NavLoginCTA variant="mobile" />
             <MobileNavToggle active={active} />
           </div>
         </div>
