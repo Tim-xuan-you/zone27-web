@@ -36,6 +36,11 @@ export type MlbGame = {
   /** R48 W-A · Final score from MLB API linescore hydrate · only when
    *  state === "final" · null otherwise · home/away runs at end of game。 */
   finalScore: { home: number; away: number } | null;
+  /** R194 · 即時比分 + 局數(只在 state==="live")· linescore 每 10 分鐘 ISR
+   *  抓一次官方值 · 誠實標「約 10 分鐘前 · 不逐球跳動」(我們不做賭場式秒跳)。
+   *  與引擎 prediction 完全分離:引擎仍賽前鎖、賽後對帳;這只是「現在發生什麼」·
+   *  不是判決、不進 /track-record。 之前被「賽後 finalResult only」過度套用而丟掉。 */
+  live: { home: number; away: number; inning: number; half: string } | null;
   /** R48 W-A · Verdict computed from engine pick vs actual outcome ·
    *  only when state === "final" + engineWinHomePct + finalScore · 「proved」
    *  = engine pick matches winner · 「diverged」 = miss · 「tie」 = tie game。
@@ -165,6 +170,37 @@ function todayTaipeiYmd(): string {
 export async function fetchTodayMlb(): Promise<MlbGame[]> {
   const dateYmd = todayTaipeiYmd();
   return fetchMlbForDate(dateYmd);
+}
+
+/** YYYY-MM-DD 位移 N 天(UTC 算 · 純字串進出 · 給跨日合併用)。 */
+function ymdPlusDays(ymd: string, delta: number): string {
+  const [y, m, d] = ymd.split("-").map(Number);
+  const dt = new Date(Date.UTC(y, m - 1, d));
+  dt.setUTCDate(dt.getUTCDate() + delta);
+  return new Intl.DateTimeFormat("en-CA", {
+    timeZone: "UTC",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).format(dt);
+}
+
+/**
+ * R194 · 抓「對台灣此刻有意義」的 MLB 場次 = 昨天 + 今天(台北日期)兩天合併 ·
+ * dedupe by gamePk。 修時區漏洞:台北中午正在打的美國夜場,MLB 歸在美國日期
+ * (= 台北昨天)· 只抓台北 today 會漏掉所有「現在進行中」的比賽(Tim 看到一排
+ * 「即將開打」的根因)。 兩天足以涵蓋 live + 最近結束 + 今晚即將。
+ */
+export async function fetchRelevantMlb(): Promise<MlbGame[]> {
+  const today = todayTaipeiYmd();
+  const yesterday = ymdPlusDays(today, -1);
+  const [y, t] = await Promise.all([
+    fetchMlbForDate(yesterday),
+    fetchMlbForDate(today),
+  ]);
+  const byPk = new Map<number, MlbGame>();
+  for (const g of [...y, ...t]) byPk.set(g.gamePk, g);
+  return [...byPk.values()];
 }
 
 /**
@@ -317,9 +353,12 @@ type RawGame = {
     away: RawTeam & { score?: number };
   };
   venue: { name: string };
-  /** R48 W-A · Hydrated when &hydrate=linescore added · final innings + runs */
+  /** R48 W-A · Hydrated when &hydrate=linescore added · final innings + runs ·
+   *  R194 · 加 inningState/isTopInning 供 live 局數顯示(7局上/下) */
   linescore?: {
     currentInning?: number;
+    inningState?: string; // "Top" | "Bottom" | "Middle" | "End"
+    isTopInning?: boolean;
     teams?: {
       home?: { runs?: number };
       away?: { runs?: number };
@@ -445,6 +484,29 @@ function mapGame(
     }
   }
 
+  // R194 · 即時比分(進行中)· 救回被丟掉的 live linescore · 與引擎判決分離 ·
+  // 誠實標 live game state(不是預測、不秒跳)= Polymarket「數字會動」誠實版。
+  let live: MlbGame["live"] = null;
+  if (state === "live") {
+    const hr = g.linescore?.teams?.home?.runs ?? g.teams.home.score;
+    const ar = g.linescore?.teams?.away?.runs ?? g.teams.away.score;
+    const inning = g.linescore?.currentInning;
+    if (hr !== undefined && ar !== undefined && inning !== undefined) {
+      const st = (g.linescore?.inningState ?? "").toLowerCase();
+      const half =
+        g.linescore?.isTopInning === true || st.startsWith("top")
+          ? "上"
+          : st.startsWith("bot")
+          ? "下"
+          : st.startsWith("mid")
+          ? "中"
+          : st.startsWith("end")
+          ? ""
+          : "";
+      live = { home: hr, away: ar, inning, half };
+    }
+  }
+
   // R48 W-A · Verdict computed only when state=Final + both engine pick
   // exists + finalScore exists · 「proved」 = engine pick matches actual
   // winner · 「diverged」 = miss · 「tie」 = rare MLB tie。
@@ -472,6 +534,7 @@ function mapGame(
     simulateUrl: buildSimulateUrl(home, away),
     engineWinHomePct,
     finalScore,
+    live,
     verdict,
   };
 }

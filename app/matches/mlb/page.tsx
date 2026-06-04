@@ -2,7 +2,7 @@ import Link from "next/link";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import { createPageMetadata } from "@/lib/page-og";
-import { fetchTodayMlb, type MlbGame } from "@/lib/mlb";
+import { fetchRelevantMlb, type MlbGame } from "@/lib/mlb";
 import MlbEngineRecord from "@/components/MlbEngineRecord";
 
 export const metadata = createPageMetadata({
@@ -19,7 +19,18 @@ export const metadata = createPageMetadata({
 export const revalidate = 600;
 
 export default async function MlbMatchesPage() {
-  const games = await fetchTodayMlb();
+  // R194 · 抓昨天+今天兩天(修時區漏掉 live 的洞)· 排序:進行中 → 即將 → 最近結束
+  // (最近結束只留 6 張,不堆昨天一整排死卡)。
+  const all = await fetchRelevantMlb();
+  const liveGames = all.filter((g) => g.state === "live");
+  const upcoming = all
+    .filter((g) => g.state === "preview" || g.state === "other")
+    .sort((a, b) => a.startUTC.localeCompare(b.startUTC));
+  const recentFinals = all
+    .filter((g) => g.state === "final")
+    .sort((a, b) => b.startUTC.localeCompare(a.startUTC))
+    .slice(0, 6);
+  const games = [...liveGames, ...upcoming, ...recentFinals];
 
   return (
     <div className="flex flex-col flex-1 min-h-screen">
@@ -31,11 +42,17 @@ export default async function MlbMatchesPage() {
       <section className="mx-auto max-w-6xl w-full px-6 sm:px-10 pt-16 pb-10">
         <div className="flex items-baseline gap-3 mb-3 flex-wrap">
           <p className="font-mono text-gold/70 text-[10px] tracking-[0.4em]">
-            今日賽事板 · MLB
+            MLB 賽事板 · 進行中 / 今晚 / 最近
           </p>
-          <span className="font-mono text-[9px] tracking-[0.3em] px-1.5 py-0.5 border border-win/40 text-win">
-            即時資料
-          </span>
+          {liveGames.length > 0 ? (
+            <span className="font-mono text-[9px] tracking-[0.3em] px-1.5 py-0.5 border border-win text-win shimmer">
+              ● {liveGames.length} 場進行中
+            </span>
+          ) : (
+            <span className="font-mono text-[9px] tracking-[0.3em] px-1.5 py-0.5 border border-win/40 text-win">
+              即時資料
+            </span>
+          )}
         </div>
         <div className="flex items-end justify-between flex-wrap gap-4">
           <h1 className="text-4xl sm:text-5xl text-bone font-light tracking-tight">
@@ -45,7 +62,7 @@ export default async function MlbMatchesPage() {
             </span>
           </h1>
           <p className="font-mono text-mute text-xs tracking-[0.25em]">
-            時間以台北時區顯示 · 每 10 分鐘更新
+            台北時區 · 進行中比分每 10 分鐘更新(不秒跳)
           </p>
         </div>
         <p className="mt-3 font-mono text-mute text-[10px] tracking-[0.25em]">
@@ -130,15 +147,22 @@ export default async function MlbMatchesPage() {
 // brand redline 完全 honor。 enginePickHome / favoriteTeam / favoriteWinPct
 // 計算 變數 全 removed(unused)· 同 axis as Patek 不做 Apple Watch。
 function MlbCard({ game }: { game: MlbGame }) {
-  const stateLabel = STATE_LABEL[game.state];
   const stateClass = STATE_COLOR[game.state];
+  const live = game.live;
+  // R194 · 進行中帶局數(死卡變活卡)· 即時比分救回 = Polymarket「數字會動」誠實版。
+  const stateLabel =
+    game.state === "live" && live
+      ? `進行中 · ${live.inning} 局${live.half}`
+      : STATE_LABEL[game.state];
 
   return (
     <article className="bg-slate/60 border border-line/70 hover:border-gold/40 transition-colors p-5 flex flex-col">
       {/* meta */}
       <div className="flex items-center justify-between mb-4">
         <span
-          className={`font-mono text-[9px] tracking-[0.3em] px-1.5 py-0.5 border ${stateClass}`}
+          className={`font-mono text-[9px] tracking-[0.3em] px-1.5 py-0.5 border whitespace-nowrap ${stateClass} ${
+            game.state === "live" ? "shimmer" : ""
+          }`}
         >
           {stateLabel}
         </span>
@@ -147,19 +171,26 @@ function MlbCard({ game }: { game: MlbGame }) {
         </span>
       </div>
 
-      {/* teams */}
+      {/* teams · 比分:進行中用即時、賽後用最終(同一個 slot) */}
       <div className="space-y-3 mb-5">
         <TeamRow
           label="AWAY"
           team={game.away}
-          finalScore={game.finalScore?.away}
+          score={live?.away ?? game.finalScore?.away}
         />
         <TeamRow
           label="HOME"
           team={game.home}
-          finalScore={game.finalScore?.home}
+          score={live?.home ?? game.finalScore?.home}
         />
       </div>
+
+      {/* R194 · 即時比分誠實標(只在進行中)· 不秒跳 = 不裝賭場感 · 守品牌 */}
+      {live && (
+        <p className="mb-3 font-mono text-mute/55 text-[9px] tracking-[0.18em] leading-relaxed">
+          ▸ 比分約 10 分鐘前 · MLB 官方 API · 我們不做逐球秒跳(那是賭場感)
+        </p>
+      )}
 
       {/* venue · 日期已移到卡頭(同 CPBL · per Tim 2026-06-05:MLB 卡頭原本只有
           時間沒日期 · 美國夜場 = 台北隔天清晨更要標日期才不搞混) */}
@@ -175,12 +206,12 @@ function MlbCard({ game }: { game: MlbGame }) {
 function TeamRow({
   label,
   team,
-  finalScore,
+  score,
 }: {
   label: "HOME" | "AWAY";
   team: MlbGame["home"];
-  /** R48 W-B · Optional final-game runs · displayed inline when state=Final */
-  finalScore?: number;
+  /** 得分 · 進行中=即時、賽後=最終(同一個 slot · undefined=賽前不顯示) */
+  score?: number;
 }) {
   return (
     <div>
@@ -195,9 +226,9 @@ function TeamRow({
           </span>
         </div>
         <div className="flex items-baseline gap-2 shrink-0">
-          {finalScore !== undefined && (
+          {score !== undefined && (
             <span className="font-mono text-gold text-base tabular font-light">
-              {finalScore}
+              {score}
             </span>
           )}
           <span className="font-mono text-mute/70 text-xs tabular">
