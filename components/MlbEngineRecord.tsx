@@ -50,6 +50,12 @@ export default function MlbEngineRecord() {
     .sort();
   const lastUpdated =
     gradedTs.length > 0 ? gradedTs[gradedTs.length - 1].slice(0, 10) : null;
+  // 打完對帳的場數(有勝負 + 五五波)· 讓「25 鎖死 = 22 待打 + N 打完」對得起來
+  // (原本只報 decided · 五五波那場憑空消失 → 數字兜不攏 = 看起來像壞掉)。
+  const played = decided.length + noLine;
+  // 滿 30 場才報總準度(同 CPBL / /calibration 同一把尺)· 之前才幾場就用大字「命中 0」
+  // 等於違反自己「幾場是運氣不是準度」原則 + 讓正確數字讀起來像引擎壞掉。
+  const firm = decided.length >= 30;
 
   return (
     <section className="mx-auto max-w-6xl w-full px-6 sm:px-10 pb-12">
@@ -76,28 +82,43 @@ export default function MlbEngineRecord() {
           <Stat
             label="賽前鎖死"
             value={String(total)}
-            sub={`${pending} 場待結算 · 改不了`}
+            sub={`${pending} 場還沒打 · 改不了`}
             tone="gold"
           />
+          {/* 打完對帳 = 有勝負 + 五五波 · 讓 25 = 22 待打 + 這格 對得起來(修兜不攏) */}
           <Stat
-            label="已結算"
-            value={String(decided.length)}
-            sub={noLine > 0 ? `${noLine} 平/無盤` : "已對帳"}
+            label="打完對帳"
+            value={String(played)}
+            sub={noLine > 0 ? `${noLine} 場五五波不計` : "已對帳"}
             tone="bone"
           />
-          <Stat label="✓ 命中" value={String(proved)} sub="賽前就鎖的" tone="gold" />
+          <Stat
+            label="✓ 命中"
+            value={String(proved)}
+            sub={`${decided.length} 場有看好邊`}
+            tone="gold"
+          />
           {/* ✕ 落空照掛、同等大方 —— 這格報馬仔永遠不敢有(Pratfall · 不藏輸) */}
           <Stat label="✕ 落空" value={String(diverged)} sub="照掛 · 刪不掉" tone="bone" />
         </div>
-        <p className="mt-4 font-mono text-mute/55 text-[10px] tracking-[0.2em] leading-relaxed">
-          引擎開盤公式公開(主場優勢 + 先發投手 ERA / K9 / HR9)· 幾場的勝率是運氣不是準度 ——
-          等樣本夠了才看總準度(同「沒人能神準」的誠實)。
-          {decided.length >= 30 && rate !== null && (
+        {/* 小樣本誠實:才幾場分勝負時 · 別讓「命中 0」大字讀成「引擎壞掉/爛掉」的判決
+            (那違反自己「幾場是運氣不是準度」原則)。 跟 CPBL / /calibration 同一把尺:
+            滿 30 場才報準度。 輸的照掛(Pratfall 不藏輸)· 只是用文字框成「還太早」不是「判決」。 */}
+        {!firm && decided.length > 0 && (
+          <p className="mt-4 border-l-2 border-gold/55 bg-gold/[0.05] pl-4 py-2.5 text-mute/90 text-[13px] leading-relaxed">
+            才 <span className="font-mono text-bone tabular">{decided.length}</span> 場分出勝負 ——
+            <span className="text-bone"> 還看不出引擎準不準</span>。 棒球幾場的輸贏是運氣,
+            賽前再看好也可能爆冷;跟 CPBL 同一把尺,<span className="text-bone">滿 30 場才報總準度</span>。
+            這幾場的輸 · 一樣照掛、永不刪。
+          </p>
+        )}
+        <p className="mt-3 font-mono text-mute/55 text-[10px] tracking-[0.2em] leading-relaxed">
+          引擎開盤公式公開(主場優勢 + 先發投手 ERA / K9 / HR9)。
+          {firm && rate !== null && (
             <span className="text-gold/80"> 目前總準度 {rate}% ·</span>
-          )}{" "}
-          引擎落空照掛、永不刪。
+          )}
           {lastUpdated && (
-            <span className="text-mute/75"> · 最後對帳 {lastUpdated}</span>
+            <span className="text-mute/75"> 最後對帳 {lastUpdated}</span>
           )}
         </p>
       </div>
