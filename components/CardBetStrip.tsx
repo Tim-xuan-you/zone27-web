@@ -178,7 +178,8 @@ export default function CardBetStrip({ matchId, homeName, awayName }: Props) {
         </p>
       )}
 
-      {/* 已押 · 鎖定(乾淨峰終點)*/}
+      {/* 已押 · 鎖定 + 峰終回路 —— 別斷在死路 · 接去看「你的未結算押注 vs 引擎」
+          (押下那刻 endowment 最高 · 給一條往自己戰績的線 · 不催不逼)*/}
       {status === "locked" && myPick && (
         <div className="text-center py-1.5">
           <p className="font-mono text-bone text-[11px] tracking-[0.15em]">
@@ -188,6 +189,12 @@ export default function CardBetStrip({ matchId, homeName, awayName }: Props) {
             </span>
             <span className="text-mute/50 text-[9px] ml-1.5">· 鎖定</span>
           </p>
+          <Link
+            href="/member"
+            className="mt-1.5 inline-block font-mono text-gold/70 hover:text-gold text-[9px] tracking-[0.25em] underline-offset-4 hover:underline transition-colors"
+          >
+            看你 vs 引擎 →
+          </Link>
         </div>
       )}
     </div>

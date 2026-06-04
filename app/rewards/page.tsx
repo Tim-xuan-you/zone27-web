@@ -381,9 +381,9 @@ function AuthedPointsBlock({
           href="/member"
           className="text-gold underline-offset-4 hover:underline ml-1"
         >
-          /member · 您 calibration mirror
+          /member · 你的準度
         </Link>
-        看完整 accuracy breakdown。
+        看你押注的命中率。
       </p>
     </div>
   );

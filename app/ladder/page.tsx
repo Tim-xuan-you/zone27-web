@@ -47,10 +47,23 @@ export default function LadderPage() {
         <h1 className="text-3xl sm:text-4xl text-bone font-light tracking-tight leading-tight mb-4">
           從新秀,爬到<span className="text-gold">神諭</span>。
         </h1>
-        <p className="text-mute text-sm sm:text-base leading-relaxed mb-10">
+        <p className="text-mute text-sm sm:text-base leading-relaxed mb-6">
           證明你比機器準。 別的地方只能跟「大家」比 —— 這裡你還能
           <span className="text-bone">跟一台公開的機器正面比準度</span>。
         </p>
+
+        {/* winners-welcome 立場(Pinnacle「不封贏家」誠實版 · 對比收費明牌站封號/刪文 ·
+            behavior-category 不點名 · 全球研究 agent F9)· 你打贏引擎 = 我們要的結果 */}
+        <div className="border-l-2 border-gold/60 pl-5 py-1 mb-10">
+          <p className="text-bone text-base sm:text-lg leading-relaxed">
+            你打贏萬象 · 是我們<span className="text-gold">最想看到</span>的事。
+          </p>
+          <p className="mt-2 text-mute text-sm leading-relaxed">
+            收費明牌的地方剛好相反 —— 你贏太多會被冷處理、輸的截圖被默默刪掉。
+            這裡沒有莊家、沒有對作:引擎是一個公開的靶 · 越多人打贏它 ·
+            越證明這套是玩真的。
+          </p>
+        </div>
 
         {/* 你現在的位置(登入且押過才顯示 · 把死路 brochure 變個人目標梯度)·
             R189 改讀 DB(取代死掉的匿名版 LadderPosition)*/}
