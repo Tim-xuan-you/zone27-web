@@ -304,7 +304,12 @@ export default async function MatchDetailPage({
 
         {/* ── PITCHER MATCHUP · 精簡 ─────────────────── */}
         <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-8 border-t border-line/40 pt-8">
-          <p className="font-mono text-gold text-[9px] tracking-[0.4em] mb-5">/ 先發投手</p>
+          <p className="font-mono text-gold text-[9px] tracking-[0.4em] mb-3">/ 先發投手</p>
+          {/* 給非數據迷的圖例 · 解掉「金條到底是好是壞」的方向歧義(設計審計:
+              ERA/BB/HR 越低越好、K 越高越好 · 視覺統一成金色端=強)*/}
+          <p className="font-mono text-mute/55 text-[9px] tracking-[0.12em] mb-5 leading-relaxed">
+            每條<span className="text-gold/80">金色端 = 該項聯盟頂尖</span> · 金點越靠金色 · 該投手該項越強。
+          </p>
           <div className="grid sm:grid-cols-2 gap-4">
             <PitcherCard side="HOME" team={m.home.name} pitcher={m.home.pitcher} />
             <PitcherCard side="AWAY" team={m.away.name} pitcher={m.away.pitcher} />

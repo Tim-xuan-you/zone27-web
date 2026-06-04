@@ -133,7 +133,7 @@ export default function Nav({ active }: { active?: NavKey }) {
                   {showTonightChip && (
                     <span
                       aria-label={`今晚 ${tonightCount} 場 CPBL 賽事 prediction 可看`}
-                      className="px-1 py-px text-[8px] tracking-[0.15em] border border-gold/40 text-gold tabular"
+                      className="px-1 py-px text-[8px] tracking-[0.15em] border border-mute/40 text-mute tabular"
                     >
                       <span lang="en">TONIGHT </span>
                       {tonightCount}
@@ -142,7 +142,7 @@ export default function Nav({ active }: { active?: NavKey }) {
                   {item.badge && (
                     <span
                       aria-label={`${item.label} 是 ${item.badge} 階段功能`}
-                      className="px-1 py-px text-[8px] tracking-[0.15em] border border-gold/40 text-gold"
+                      className="px-1 py-px text-[8px] tracking-[0.15em] border border-mute/40 text-mute/70"
                     >
                       {item.badge}
                     </span>
