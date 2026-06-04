@@ -15,6 +15,7 @@ import {
   matches as allMatches,
 } from "@/lib/matches";
 import CalibrationIdentityCard from "@/components/CalibrationIdentityCard";
+import HonorWall from "@/components/HonorWall";
 import { readTier, isPaid, creatorTakePct, tierLabel } from "@/lib/tier";
 import OpenPositionCard, { type OpenPosition } from "@/components/OpenPositionCard";
 import MyCreatorPanel from "@/components/MyCreatorPanel";
@@ -209,6 +210,10 @@ export default async function MemberPage() {
         {/* 2 · 你的校準身分 · 含輸帳本 · 你 vs 亂猜 vs 引擎 + 本月升階閘門 ──
             「有帳本的玩運彩」脊椎(soul-roadmap #1)· 計算在 aggregateIdentity。 */}
         <CalibrationIdentityCard identity={identity} />
+
+        {/* 3 · 你的榮譽牆(soul-roadmap #5 · 「靠誠實賺來的地位」三樓第一塊)· 章全部
+            從含輸帳本自動算 · 報馬仔掛不出 · Apple 紀律只放 5 個 · 框 mute 不搶校準卡主角。 */}
+        <HonorWall identity={identity} />
 
         {/* 升級入口 · 賺錢的路要看得見(Apple:付費路徑永遠不藏)· 但這是會員
             自己的介面 · 不對他推銷 tier · 從 glow-soft 金色大卡降成一行安靜入口 ·
