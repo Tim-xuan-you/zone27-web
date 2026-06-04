@@ -146,7 +146,7 @@ export default async function MemberPage() {
           <form action="/auth/signout" method="post">
             <button
               type="submit"
-              className="font-mono text-mute/70 hover:text-loss text-[10px] tracking-[0.3em] underline-offset-4 hover:underline transition-colors"
+              className="font-mono text-mute/70 hover:text-bone text-[10px] tracking-[0.3em] underline-offset-4 hover:underline transition-colors"
             >
               登出
             </button>

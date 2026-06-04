@@ -67,7 +67,7 @@ function computeBins(finalized: Match[]): Bin[] {
     if (!m.finalResult) continue;
     const fr = m.finalResult;
     const enginePctFav = Math.max(m.home.winRate, m.away.winRate);
-    if (enginePctFav < 50) continue;
+    if (enginePctFav <= 50) continue; // 排除真・五五波(50)· 不讓銅板局假裝有 favorite
     const binIndex = Math.min(Math.floor(enginePctFav / 10), 9);
     const centerPct = binIndex * 10 + 5;
 

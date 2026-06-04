@@ -428,8 +428,8 @@ function ScoreRow({
       <span className="font-mono text-bone tabular text-base w-16">{score}</span>
       <div className="flex-1 relative h-[2px] bg-line/80">
         <div
-          className="absolute top-0 left-0 h-full bg-gold glow-gold"
-          style={{ width: `${(pct / 20) * 100}%` }}
+          className="absolute top-0 left-0 h-full bg-gold"
+          style={{ width: `${Math.min(100, (pct / 20) * 100)}%` }}
         />
       </div>
       <span className="font-mono text-gold tabular text-sm w-14 text-right">
