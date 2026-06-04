@@ -43,6 +43,22 @@ const nextConfig: NextConfig = {
     ],
   },
 
+  // ── 收合已刪的內部 voice / 重複頁(R199 Tim canary「極簡 · 砍多餘」)──
+  // 這些頁是「創辦人寫爽的長文 / 重複 git」· 沒人從頭看 · 已從 Cmd-K + footer 移除。
+  // 內容不是消失 —— 精華併進保留的頁(身分→/about · 路線→/roadmap · 方法→/methodology)。
+  // redirect 讓任何舊連結 / 書籤不 404 · permanent:false(可逆 · 反正 stealth 無 SEO)。
+  async redirects() {
+    return [
+      { source: "/annual", destination: "/about", permanent: false },
+      { source: "/annual/2026", destination: "/about", permanent: false },
+      { source: "/founders/postmortem-2028", destination: "/founders", permanent: false },
+      { source: "/hey-tim", destination: "/faq", permanent: false },
+      { source: "/now", destination: "/roadmap", permanent: false },
+      { source: "/changelog", destination: "/roadmap", permanent: false },
+      { source: "/methodology/diff", destination: "/methodology", permanent: false },
+    ];
+  },
+
   // Security headers · production-ready defense baseline。
   // 對應 Agent B Finding #5 + CSP-lite defense vs OWASP top 10。
   async headers() {
