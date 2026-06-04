@@ -1856,6 +1856,13 @@ export function getTodayTaipei(): string {
   return canonicalTodayCache;
 }
 
+/** YYYY-MM in Asia/Taipei timezone(= getTodayTaipei() 的前 7 碼)。
+ *  個人校準身分「本月你 vs 引擎」升階閘門(R188)用來把已結算的押注
+ *  bucket 進「這個月」· 跟每場 startISO 的前 7 碼比對。 */
+export function getCurrentTaipeiMonthKey(): string {
+  return getTodayTaipei().slice(0, 7);
+}
+
 /** Extract the YYYY-MM-DD portion from match.date format
  *  ("2026 · 05 · 19  ·  星期二" → "2026-05-19").
  *  Returns null if the format doesn't match. */

@@ -4,14 +4,17 @@ import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import WalletPanel from "@/components/WalletPanel";
 import { getUser } from "@/lib/supabase/server";
-import { aggregatePredictionStats } from "@/lib/predictions";
+import { aggregateIdentity } from "@/lib/predictions";
 import { getMyPredictionsMap } from "@/lib/predictions-server";
 import {
   getTodayAndFutureMatches,
   getMatchPhase,
   getMatchStartIso,
+  getEngineFavorite,
+  getCurrentTaipeiMonthKey,
   matches as allMatches,
 } from "@/lib/matches";
+import CalibrationIdentityCard from "@/components/CalibrationIdentityCard";
 import { readTier, isPaid, creatorTakePct, tierLabel } from "@/lib/tier";
 import OpenPositionCard, { type OpenPosition } from "@/components/OpenPositionCard";
 import MyCreatorPanel from "@/components/MyCreatorPanel";
@@ -100,9 +103,17 @@ export default async function MemberPage() {
   // R198 · 併 MLB(全套):押 MLB 也計進你 vs 引擎準度 + 顯示為未結算持倉。
   const mlbMatches = await getMlbAsMatches();
   const allWithMlb = [...allMatches, ...mlbMatches];
-  const stats = aggregatePredictionStats(
+  // 個人校準身分:你的紀錄(含輸)+ 對比亂猜 + 同場 你 vs 引擎 + 本月升階閘門。
+  // engineFav 走 getEngineFavorite()(50/50 真銅板局回 null · 不灌引擎水)。
+  const identity = aggregateIdentity(
     predictionsMap,
-    allWithMlb.map((m) => ({ id: m.id, finalWinner: m.finalResult?.winner ?? null, startISO: getMatchStartIso(m) }))
+    allWithMlb.map((m) => ({
+      id: m.id,
+      finalWinner: m.finalResult?.winner ?? null,
+      engineFav: getEngineFavorite(m),
+      startISO: getMatchStartIso(m),
+    })),
+    getCurrentTaipeiMonthKey()
   );
 
   // 你的未結算押注(the live middle · soul)· 你押過、還沒結算的場 —— 押下去到
@@ -195,78 +206,9 @@ export default async function MemberPage() {
           </section>
         )}
 
-        {/* 2 · 你的準度 · THE number ────────────────── */}
-        <section className="mt-8 bg-slate/40 border border-gold/30 p-6 sm:p-8">
-          <p className="font-mono text-gold text-[10px] tracking-[0.4em] mb-4">
-            你的準度 · 你 vs 引擎
-          </p>
-          {stats.total > 0 ? (
-            <>
-              <div className="flex items-baseline gap-3">
-                {stats.accuracy !== null ? (
-                  <span className="font-mono text-gold text-6xl sm:text-7xl font-light tracking-tight tabular">
-                    {stats.accuracy}
-                    <span className="text-2xl opacity-60 ml-1">%</span>
-                  </span>
-                ) : (
-                  // 都還沒結算(全在場上)· 不顯示巨大的「—」(讀起來像壞掉)·
-                  // 改「N 手在場上 · 等賽後揭曉」(同 YourRecordStrip 的優雅空狀態)
-                  <span className="font-mono text-bone text-4xl sm:text-5xl font-light tracking-tight tabular">
-                    {stats.total}
-                    <span className="font-sans text-mute text-xl ml-2">手在場上</span>
-                  </span>
-                )}
-              </div>
-              <p className="mt-4 text-bone text-base leading-relaxed">
-                押了 <span className="font-mono text-gold tabular">{stats.total}</span> 場 ·{" "}
-                <span className="font-mono text-gold tabular">✓{stats.proved}</span> 中 ·{" "}
-                <span className="font-mono text-loss/85 tabular">✕{stats.diverged}</span> 沒中
-                {stats.push > 0 && (
-                  <>
-                    {" "}· <span className="font-mono text-mute tabular">={stats.push}</span> 平
-                  </>
-                )}
-                {stats.pending > 0 && (
-                  <span className="text-mute/70 text-sm"> · {stats.pending} 場待開</span>
-                )}
-              </p>
-              {/* 準度接天梯進度 · 把孤兒數字接上「排名感」(UX M2)· 門檻 10 場同 /ladder */}
-              <p className="mt-2 font-mono text-mute/60 text-[10px] tracking-[0.2em] leading-relaxed">
-                每場賽後自動對照引擎 · 押了刪不掉。{" "}
-                {stats.total >= 10 ? (
-                  <>
-                    你已達上天梯門檻 ·{" "}
-                    <Link href="/ladder" className="text-gold/80 hover:text-gold underline-offset-4 hover:underline">
-                      看你排第幾 →
-                    </Link>
-                  </>
-                ) : (
-                  <>
-                    再押 <span className="text-bone tabular">{10 - stats.total}</span> 場 · 你就能上天梯排名 ·{" "}
-                    <Link href="/ladder" className="text-gold/80 hover:text-gold underline-offset-4 hover:underline">
-                      天梯怎麼爬 →
-                    </Link>
-                  </>
-                )}
-              </p>
-            </>
-          ) : (
-            <>
-              <p className="text-bone text-lg leading-relaxed">
-                還沒押任何一場。
-              </p>
-              <p className="mt-1 text-mute text-sm leading-relaxed">
-                押一邊,賽後自動掛準 / 不準,你的準度從這一場開始累積。
-              </p>
-              <Link
-                href="/matches"
-                className="mt-5 inline-block px-6 py-3 bg-gold text-navy font-mono text-xs tracking-[0.3em] hover:bg-gold-soft transition-colors"
-              >
-                去押第一注 →
-              </Link>
-            </>
-          )}
-        </section>
+        {/* 2 · 你的校準身分 · 含輸帳本 · 你 vs 亂猜 vs 引擎 + 本月升階閘門 ──
+            「有帳本的玩運彩」脊椎(soul-roadmap #1)· 計算在 aggregateIdentity。 */}
+        <CalibrationIdentityCard identity={identity} />
 
         {/* 升級入口 · 賺錢的路要看得見(Apple:付費路徑永遠不藏)· 但這是會員
             自己的介面 · 不對他推銷 tier · 從 glow-soft 金色大卡降成一行安靜入口 ·

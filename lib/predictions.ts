@@ -135,3 +135,194 @@ function isLatePick(ts: string, startISO: string | null | undefined): boolean {
   if (Number.isNaN(t) || Number.isNaN(start)) return false;
   return t >= start;
 }
+
+// ── 個人校準身分(soul-roadmap #1 · 「有帳本的玩運彩」脊椎)─────────
+// R189 已確立:二元押注(home/away)畫不出 45° 校準曲線(要有機率預測才有)·
+// 所以個人「可靠度」不是校準曲線 · 而是三方命中率對照:你 vs 亂猜(50%)vs
+// 引擎(同一批你押過的已結算場)。 全部含輸(不可造假)· 不誇大(滿軸 0-100 ·
+// 不放大小差距 = 不捏造精確度 per engine-strategy §4)。
+//
+// 兩個誠實分(soul-roadmap):
+//   1. 對比亂猜:你的準度 − 50(Metaculus baseline · 1 人就成立)。
+//   2. 本月你 vs 引擎:當月你押的已結算場 · 你命中 vs 引擎命中 = R188 升階閘門
+//      「當月贏過引擎」的實作(同 /ladder 硬條件)。
+//
+// 公平對照(apples-to-apples):引擎命中率只算「你押過、且引擎當時有看好一邊」
+// 的同一批場(50/50 真銅板局引擎沒選邊 · 不灌水 · 同 /calibration 排除 ≤50)。
+// 場數相同時用整數命中數直接比(精確)· 否則退回四捨五入準度比(極少數 50/50 場)。
+// ─────────────────────────────────────────────────────
+
+/** 評分用的單場輸入:賽果 + 引擎當時看好的一邊(null = 真 50/50 沒選邊)。 */
+export type IdentityMatch = {
+  id: string;
+  finalWinner: "home" | "away" | "tie" | null;
+  /** 引擎賽前看好的一邊 · getEngineFavorite() · null = 50/50 不選邊 */
+  engineFav: "home" | "away" | null;
+  /** 開賽 instant ISO(Taipei +08:00)· 先鎖後結 + 本月分桶用 */
+  startISO?: string | null;
+};
+
+/** 一方在一批同樣場次上的命中(你 / 引擎共用)。 */
+type SideTally = {
+  proved: number; // 命中數
+  decided: number; // 有效對照場數(分母)
+  accuracy: number | null; // round(proved/decided*100) · decided=0 回 null
+};
+
+export type CalibrationIdentity = {
+  // 你的完整紀錄(含輸 · 同 aggregatePredictionStats)
+  total: number;
+  proved: number;
+  diverged: number;
+  push: number;
+  pending: number;
+  decided: number; // proved + diverged
+  accuracy: number | null;
+  /** 對比亂猜:accuracy − 50 · null = 還沒有結算的場 */
+  vsCoinPts: number | null;
+  // 引擎在「你押過、且引擎有選邊」的同一批已結算場上的表現
+  engine: SideTally;
+  /** 你 > 引擎(同場對照)· null = 任一方無有效對照場 */
+  beatEngine: boolean | null;
+  tiedEngine: boolean;
+  /** 你的準度 − 引擎準度(百分點)· null = 無法對照 */
+  edgeVsEnginePts: number | null;
+  // 本月(升階閘門)· 你 vs 引擎 同一批本月已結算場
+  month: {
+    key: string; // "2026-06"
+    you: SideTally;
+    engine: SideTally;
+    beatEngine: boolean | null;
+    tiedEngine: boolean;
+  };
+};
+
+function makeTally(proved: number, decided: number): SideTally {
+  return {
+    proved,
+    decided,
+    accuracy: decided > 0 ? Math.round((proved / decided) * 100) : null,
+  };
+}
+
+/** 你 vs 引擎裁決(同一批場)· 場數相同用整數命中數比(精確)· 否則用準度比。 */
+function judgeVsEngine(
+  you: SideTally,
+  engine: SideTally
+): { beat: boolean | null; tied: boolean } {
+  if (you.decided === 0 || engine.decided === 0) return { beat: null, tied: false };
+  if (you.decided === engine.decided) {
+    return { beat: you.proved > engine.proved, tied: you.proved === engine.proved };
+  }
+  const ya = you.accuracy ?? 0;
+  const ea = engine.accuracy ?? 0;
+  return { beat: ya > ea, tied: ya === ea };
+}
+
+/**
+ * 從本人押注 map + 賽果(含引擎選邊)算出完整「個人校準身分」。
+ * currentMonthKey = getCurrentTaipeiMonthKey()(由 caller 傳入 · 維持本函式純粹）。
+ *
+ * 基礎計數(total/proved/diverged/push/pending/accuracy)與 aggregatePredictionStats
+ * 完全一致(同一份先鎖後結守則)· 只是多算了引擎同場對照 + 本月分桶。
+ */
+export function aggregateIdentity(
+  predictions: UserPredictionsMap,
+  matches: IdentityMatch[],
+  currentMonthKey: string
+): CalibrationIdentity {
+  const byId = new Map(matches.map((m) => [m.id, m]));
+
+  let total = 0;
+  let proved = 0;
+  let diverged = 0;
+  let push = 0;
+  let pending = 0;
+
+  // 同場對照累積(全期 + 本月)· 引擎只在 engineFav !== null 的場上算
+  let youProvedAll = 0;
+  let youDecidedAll = 0;
+  let engProvedAll = 0;
+  let engDecidedAll = 0;
+  let youProvedMo = 0;
+  let youDecidedMo = 0;
+  let engProvedMo = 0;
+  let engDecidedMo = 0;
+
+  for (const [matchId, pred] of Object.entries(predictions)) {
+    const m = byId.get(matchId);
+    // 先鎖後結:已結算場 · 開賽後/賽後才下的押注整筆不計(防刷準度/刷天梯)。
+    if (m && m.finalWinner !== null && isLatePick(pred.ts, m.startISO)) continue;
+
+    total++;
+    if (!m || m.finalWinner === null) {
+      pending++;
+      continue;
+    }
+
+    const verdict = computeUserVerdict(pred.pick, m.finalWinner);
+    if (verdict === "proved") proved++;
+    else if (verdict === "diverged") diverged++;
+    else if (verdict === "push") push++;
+
+    // 同場對照只看真正分出勝負的場(winner = home/away · 平局/skip 不進對照)
+    if (m.finalWinner === "tie" || pred.pick === "skip") continue;
+    const inMonth =
+      typeof m.startISO === "string" && m.startISO.slice(0, 7) === currentMonthKey;
+
+    // 你(分母 = 你所有分勝負的已結算押注場)
+    youDecidedAll++;
+    if (verdict === "proved") youProvedAll++;
+    if (inMonth) {
+      youDecidedMo++;
+      if (verdict === "proved") youProvedMo++;
+    }
+
+    // 引擎(同一場 · 但只在引擎有選邊時計入它的分母)
+    if (m.engineFav !== null) {
+      engDecidedAll++;
+      if (m.engineFav === m.finalWinner) engProvedAll++;
+      if (inMonth) {
+        engDecidedMo++;
+        if (m.engineFav === m.finalWinner) engProvedMo++;
+      }
+    }
+  }
+
+  const decided = proved + diverged;
+  const accuracy = decided > 0 ? Math.round((proved / decided) * 100) : null;
+
+  const engineAll = makeTally(engProvedAll, engDecidedAll);
+  const youAll = makeTally(youProvedAll, youDecidedAll);
+  const vsEngineAll = judgeVsEngine(youAll, engineAll);
+  const edgeVsEnginePts =
+    youAll.accuracy !== null && engineAll.accuracy !== null
+      ? youAll.accuracy - engineAll.accuracy
+      : null;
+
+  const youMo = makeTally(youProvedMo, youDecidedMo);
+  const engineMo = makeTally(engProvedMo, engDecidedMo);
+  const vsEngineMo = judgeVsEngine(youMo, engineMo);
+
+  return {
+    total,
+    proved,
+    diverged,
+    push,
+    pending,
+    decided,
+    accuracy,
+    vsCoinPts: accuracy !== null ? accuracy - 50 : null,
+    engine: engineAll,
+    beatEngine: vsEngineAll.beat,
+    tiedEngine: vsEngineAll.tied,
+    edgeVsEnginePts,
+    month: {
+      key: currentMonthKey,
+      you: youMo,
+      engine: engineMo,
+      beatEngine: vsEngineMo.beat,
+      tiedEngine: vsEngineMo.tied,
+    },
+  };
+}
