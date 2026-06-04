@@ -4,13 +4,16 @@ name: MLB Engine · lock + grade
 #   · lock-mlb-predictions.mjs  → 把還沒開打的 MLB 場次的引擎開盤線「賽前鎖定」進
 #                                 lib/mlb-locked.json(commit = 公開的賽前鎖定證據)
 #   · grade-mlb-locked.mjs      → 把打完的場次對「鎖定值」評 proved / diverged
-# 一天跑兩次(美國夜場前鎖、結束後結算)· 純 MLB 官方公開 API · 0 auth / 0 付費。
+# 每 3 小時跑一次(投手一公布就鎖、賽事一結束就結算)· 純 MLB 官方公開 API · 0 auth / 0 付費。
 # 手動也可在 Actions 頁按 "Run workflow"。
 
 on:
   schedule:
-    - cron: "0 21 * * *" # 21:00 UTC ≈ 美國夜場前 → 鎖當天 slate
-    - cron: "0 8 * * *" # 08:00 UTC ≈ 美國夜場結束後 → 結算
+    # R194 · Tim 指出「投手太晚公布的場會漏抓」→ 從一天 2 次提到每 3 小時(8×/天)。
+    # 每次 lock+grade 都跑 · lock 冪等(已鎖的 gamePk 不重鎖)· grade 只評新結束的:
+    # 投手一公布,下一個整點窗(≤3h)就鎖到 · 賽事一結束,下一個窗就結算(同時解掉
+    # 「賽後對帳中」的延遲)。 8 runs/day × ~1min 遠在 GitHub Actions 免費額度內。
+    - cron: "0 */3 * * *"
   workflow_dispatch: {}
 
 permissions:
