@@ -49,9 +49,10 @@ export default function YourRecordStrip({ variant, matchResults }: Props) {
     (async () => {
       try {
         const supabase = createSupabaseBrowserClient();
-        const { data } = await supabase.auth.getSession();
+        // getUser(JWT 驗證)· 不用 getSession(只讀 cookie)· 同全站 trust path 慣例
+        const { data } = await supabase.auth.getUser();
         if (cancelled) return;
-        if (!data.session) return; // 沒登入 → 安靜不顯示
+        if (!data.user) return; // 沒登入 → 安靜不顯示
         const map = await getMyPredictionsClient();
         if (cancelled) return;
         setStats(aggregatePredictionStats(map, matchResults));

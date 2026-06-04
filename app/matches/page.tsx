@@ -83,7 +83,7 @@ export default async function MatchesPage() {
           </p>
         </div>
         <p className="mt-3 font-mono text-mute text-[10px] tracking-[0.25em]">
-          引擎只覆蓋親手 ingest 過的場次(per /coverage philosophy)· 賽後過期卡會自動移到 /track-record receipt ledger
+          只收老闆親自確認過的場次 · 比完的會自動移到公開戰績
         </p>
         <div className="mt-6 w-full h-px bg-line/60" />
       </section>
@@ -191,23 +191,26 @@ export default async function MatchesPage() {
           compact slim link(全 gold/mute · 不搶主看板)· 該有的入口都還在。 */}
       <section className="mx-auto max-w-6xl w-full px-6 sm:px-10 pb-24">
         <div className="grid sm:grid-cols-2 gap-3">
-          <Link
-            href="/matches/mlb"
-            className="block bg-slate/30 border border-line/60 hover:border-gold/50 hover:bg-slate/40 transition-colors p-4 sm:p-5 group"
-          >
-            <div className="flex items-baseline justify-between gap-2 mb-1.5">
-              <span className="font-mono text-gold text-[10px] tracking-[0.35em]">
-                MLB · 即時資料
-              </span>
-              <span className="font-mono text-mute/60 text-[9px] tracking-[0.2em]">
-                每 10 分更新
-              </span>
-            </div>
-            <p className="text-bone text-sm leading-snug">
-              美國職棒今日全部賽程 · 戰績 · 台北時區開賽時間 ·{" "}
-              <span className="text-gold/80 group-hover:text-gold">看賽程 →</span>
-            </p>
-          </Link>
+          {/* MLB 入口 · 只在上面沒有 MLB 看板時當 fallback 顯示(避免同頁兩個 /matches/mlb 重複) */}
+          {mlbBoard.length === 0 && (
+            <Link
+              href="/matches/mlb"
+              className="block bg-slate/30 border border-line/60 hover:border-gold/50 hover:bg-slate/40 transition-colors p-4 sm:p-5 group"
+            >
+              <div className="flex items-baseline justify-between gap-2 mb-1.5">
+                <span className="font-mono text-gold text-[10px] tracking-[0.35em]">
+                  MLB · 即時資料
+                </span>
+                <span className="font-mono text-mute/60 text-[9px] tracking-[0.2em]">
+                  每 10 分更新
+                </span>
+              </div>
+              <p className="text-bone text-sm leading-snug">
+                美國職棒今日全部賽程 · 戰績 · 台北時區開賽時間 ·{" "}
+                <span className="text-gold/80 group-hover:text-gold">看賽程 →</span>
+              </p>
+            </Link>
+          )}
           <Link
             href="/cpbl-pitchers"
             className="block bg-slate/30 border border-line/60 hover:border-gold/50 hover:bg-slate/40 transition-colors p-4 sm:p-5 group"

@@ -215,16 +215,16 @@ export default async function MemberPage() {
             從含輸帳本自動算 · 報馬仔掛不出 · Apple 紀律只放 5 個 · 框 mute 不搶校準卡主角。 */}
         <HonorWall identity={identity} />
 
-        {/* 升級入口 · 賺錢的路要看得見(Apple:付費路徑永遠不藏)· 但這是會員
-            自己的介面 · 不對他推銷 tier · 從 glow-soft 金色大卡降成一行安靜入口 ·
-            價格/方案在 /membership 不在這裡轟炸 · 讓上面的「你的準度」當唯一金色主角。 */}
+        {/* 升級入口 · 路要看得見(Apple:付費路徑永遠不藏)· 但這是會員自己的介面 ·
+            不對他推銷、不打「賺錢」· 接著上面的榮譽牆 → 用「身分/地位」當主軸(paid=身分
+            非功能)· 賣分析變現降成括號副利 · 價格/方案在 /membership 不在這裡轟炸。 */}
         {!isPaid(tier) && (
           <Link
             href="/membership"
             className="mt-6 flex items-baseline justify-between gap-3 border-b border-line/40 pb-3 hover:border-gold/40 transition-colors group"
           >
             <span className="text-mute text-sm leading-snug">
-              想<span className="text-bone">標價賣自己的分析</span>賺錢?賣出你拿 90–95%
+              想把<span className="text-bone">準度變成身分</span>?升級 BLACK / GOLD(分析還能標價賣 · 你拿 90–95%)
             </span>
             <span className="shrink-0 font-mono text-gold/70 group-hover:text-gold text-[10px] tracking-[0.3em] transition-colors">
               看方案 →
