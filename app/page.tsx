@@ -9,8 +9,10 @@ import {
   getFinalizedMatches,
   getTrackRecordStats,
   getMatchStartIso,
+  getMatchPhase,
+  type Match,
 } from "@/lib/matches";
-import { getMlbFinalizedResults } from "@/lib/mlb-matches";
+import { getMlbAsMatches } from "@/lib/mlb-matches";
 
 // ── ZONE 27 · Homepage · 市場看板(R175 Polymarket pivot)──────
 // Tim 2026-05-30「請變成 Polymarket · 很亂很雜」· per
@@ -27,24 +29,56 @@ import { getMlbFinalizedResults } from "@/lib/mlb-matches";
 export const revalidate = 600; // ISR · 賽事 lifecycle transitions
 
 export default async function Home() {
-  const upcoming = getTodayAndFutureMatches(); // 今晚 + 即將 · asc
-  // 休賽日 fallback · 看板永不空白:沒有可押賽事時,改放引擎最近的賽後
-  // 收據(✓命中 / ✕落空都掛)· per getFeaturedMatch 哲學「引擎沒在跑時,
-  // proof-of-work(收據)勝過空泛的未來預測 = 轉換槓桿」。 首頁 2 場上限
-  // (mobile ≤ 3 viewport 鐵律 · 看完整去 /track-record)。
+  const cpblUpcoming = getTodayAndFutureMatches(); // 今晚 + 即將 · asc
   const finalized = getFinalizedMatches();
-  const recentReceipts = upcoming.length === 0 ? finalized.slice(0, 2) : [];
   const tr = getTrackRecordStats();
-  // 已結算賽事的勝方 · 傳給登入後個人戰績條(client 端用它評分本人押注 ·
-  // 靜態資料 · 無隱私問題)。 首頁維持 ISR 靜態,戰績條 hydrate 後才填本人資料。
-  // R198 · 併入 MLB 已結算結果 → 登入會員押的 MLB 也計進首頁「你 vs 引擎」(MLB 全套)。
+
+  // MLB:一次抓 · 同時供「今晚可押」+「個人戰績評分」(避免重複 fetch live API)。
+  const mlbAll = await getMlbAsMatches();
+  const mlbUpcoming = mlbAll.filter((m) => {
+    const ph = getMatchPhase(m);
+    return ph === "today-pregame" || ph === "today-live" || ph === "future";
+  });
+
+  // ── 跨聯盟「今晚精選」(Polymarket 式策展)──────────────────────
+  // 主頁不是賽事目錄(那是玩運彩的賠率牆)· 是「今晚最值得看的幾場 + 你的帳本」。
+  // 規則:第一格錨定 CPBL 頭條(自家主場 · 報紙頭版 local-first · 品牌主場不從
+  // 首頁消失),其餘按引擎把握度跨聯盟填(離 50% 越遠 = 引擎越敢喊 = 最有看法、
+  // 最可被驗證的那幾場 · 可能是 MLB)。 這是「編輯策展(選看哪幾場)」· 跟「動真相
+  //(賽果 / 結算)」是兩回事 —— 後者永遠不碰。 上幾種運動主頁形狀都不變 · 只是
+  // 選池變大 = 結構天生可擴。
+  const byConviction = (a: Match, b: Match) =>
+    Math.max(b.home.winRate, b.away.winRate) -
+    Math.max(a.home.winRate, a.away.winRate);
+  const allUpcoming = [...cpblUpcoming, ...mlbUpcoming].sort(byConviction);
+  const HOMEPAGE_CAP = 3; // mobile ≤ 3 viewport 鐵律 · 精選不是全部
+  const cpblAnchor = [...cpblUpcoming].sort(byConviction)[0];
+  const featured: Match[] = [];
+  if (cpblAnchor) featured.push(cpblAnchor); // CPBL 頭條永遠有座位
+  for (const m of allUpcoming) {
+    if (featured.length >= HOMEPAGE_CAP) break;
+    if (!featured.includes(m)) featured.push(m); // 其餘按把握度跨聯盟填(去重)
+  }
+
+  // 休賽日 fallback · 看板永不空白:全聯盟都沒可押賽事時 · 改放引擎最近賽後
+  // 收據(✓命中 / ✕落空都掛)· proof-of-work 勝過空泛未來預測。
+  const recentReceipts = allUpcoming.length === 0 ? finalized.slice(0, 2) : [];
+
+  // 已結算賽事的勝方 · 傳給登入後個人戰績條(client 端用它評分本人押注 · 靜態
+  // 資料無隱私問題)。 R198 · 併 MLB 已結算 → 押的 MLB 也計進首頁「你 vs 引擎」。
   const matchResults = [
     ...finalized.map((m) => ({
       id: m.id,
       finalWinner: m.finalResult?.winner ?? null,
       startISO: getMatchStartIso(m),
     })),
-    ...(await getMlbFinalizedResults()),
+    ...mlbAll
+      .filter((m) => m.finalResult)
+      .map((m) => ({
+        id: m.id,
+        finalWinner: m.finalResult?.winner ?? null,
+        startISO: getMatchStartIso(m),
+      })),
   ];
 
   return (
@@ -94,7 +128,7 @@ export default async function Home() {
               href="#floor"
               className="inline-flex items-center gap-2 bg-gold text-navy font-mono text-xs sm:text-sm tracking-[0.25em] px-6 py-3 hover:bg-gold-soft transition-colors"
             >
-              {upcoming.length > 0 ? "↓ 看今晚誰會贏" : "↓ 看引擎最近戰績"}
+              {allUpcoming.length > 0 ? "↓ 看今晚誰會贏" : "↓ 看引擎最近戰績"}
             </a>
           </div>
           {/* 校準遊戲 = 安靜次要文字鏈(降為次要 · 不跟主金鈕搶)· 仍是最強 0-登入 hook:
@@ -121,20 +155,22 @@ export default async function Home() {
             <p
               className="font-mono text-gold text-[10px] sm:text-[11px] tracking-[0.45em]"
             >
-              {upcoming.length > 0
-                ? "/ 市場看板 · 今晚 / 即將"
+              {allUpcoming.length > 0
+                ? "/ 今晚精選"
                 : "/ 引擎最近戰績 · 賽後收據"}
             </p>
             <Link
-              href={upcoming.length > 0 ? "/matches" : "/track-record"}
+              href={allUpcoming.length > 0 ? "/matches" : "/track-record"}
               className="font-mono text-mute/70 hover:text-gold text-[10px] tracking-[0.3em] transition-colors"
             >
-              {upcoming.length > 0 ? "全部賽事 →" : "完整戰績 →"}
+              {allUpcoming.length > 0
+                ? `今晚全部 ${allUpcoming.length} 場 →`
+                : "完整戰績 →"}
             </Link>
           </div>
-          {upcoming.length > 0 ? (
+          {allUpcoming.length > 0 ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {upcoming.map((m) => (
+              {featured.map((m) => (
                 <MiniMatchCard key={m.id} match={m} />
               ))}
             </div>
@@ -319,10 +355,10 @@ function EmptyFloor() {
   return (
     <div className="bg-slate/40 border border-line/60 p-8 sm:p-10 text-center">
       <p className="text-bone text-base sm:text-lg font-light tracking-tight mb-2">
-        今日沒有排定的 CPBL 賽事
+        今晚沒有排定的賽事
       </p>
       <p className="text-mute text-sm max-w-md mx-auto leading-relaxed mb-6">
-        季外或休賽日。 往下看引擎最近的公開戰績 · 或自己跑一場模擬。
+        休賽日。 往下看引擎最近的公開戰績 · 或自己跑一場模擬。
       </p>
       <div className="flex flex-wrap items-center justify-center gap-3">
         <Link
