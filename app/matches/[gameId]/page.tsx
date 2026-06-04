@@ -28,6 +28,7 @@ import {
 } from "@/lib/matches";
 import { getEngineConviction } from "@/lib/conviction";
 import { getEngineReasoning, type EngineReasoning } from "@/lib/reasoning";
+import { teamIdentity } from "@/lib/identity";
 
 // ── ZONE 27 · /matches/[gameId] · 市場頁(R175 Polymarket pivot)──
 // Tim 2026-05-30「資訊多到爆炸 · 划不到底 · 該刪就刪 · 變成 Polymarket」·
@@ -81,6 +82,9 @@ export default async function MatchDetailPage({
   // 引擎信心溫度 · 同卡片同一套中文詞(勢均力敵/看好/重壓)· 取代英文 SIGNAL 條
   // (解兩套信心系統打架 + 英文黑話漏到 hero)· 純從開盤線 favorite % 衍生 · 不另立 aiConfidence 第二尺
   const conviction = getEngineConviction(Math.max(m.home.winRate, m.away.winRate));
+  // 隊色 · 給「最可能比分」標頭 + 比分數字上色(解「3:2 誰是誰」歧義)
+  const homeColor = teamIdentity(m.home.name)?.color ?? "#D4AF37";
+  const awayColor = teamIdentity(m.away.name)?.color ?? "#8AA0C4";
 
   return (
     <div className="flex flex-col flex-1 min-h-screen">
@@ -358,12 +362,26 @@ export default async function MatchDetailPage({
 
         {/* ── SCORE DISTRIBUTION · top 5 ─────────────── */}
         <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-8 border-t border-line/40 pt-8">
-          <p className="font-mono text-mute text-[9px] tracking-[0.4em] mb-5">
+          <p className="font-mono text-mute text-[9px] tracking-[0.4em] mb-2">
             / 最可能比分 · TOP 5
+          </p>
+          {/* 標頭:比分以 主 : 客 排列 · 兩隊各上隊色 → 解「3:2 誰是誰」歧義(Tim dogfood)*/}
+          <p className="font-mono text-[11px] tracking-[0.15em] mb-4 flex items-center gap-1.5 flex-wrap">
+            <span style={{ color: homeColor }}>{m.home.name}</span>
+            <span className="text-mute/50">:</span>
+            <span style={{ color: awayColor }}>{m.away.name}</span>
+            <span className="text-mute/45 ml-1 text-[9px] tracking-[0.2em]">主 : 客</span>
           </p>
           <div className="space-y-2.5">
             {m.topScores.map((s, i) => (
-              <ScoreRow key={s.score} rank={i + 1} score={s.score} pct={s.probability} />
+              <ScoreRow
+                key={s.score}
+                rank={i + 1}
+                score={s.score}
+                pct={s.probability}
+                homeColor={homeColor}
+                awayColor={awayColor}
+              />
             ))}
           </div>
         </section>
@@ -501,21 +519,40 @@ function ScoreRow({
   rank,
   score,
   pct,
+  homeColor,
+  awayColor,
 }: {
   rank: number;
   score: string;
   pct: number;
+  homeColor: string;
+  awayColor: string;
 }) {
+  // 比分格式 "3 : 2" = 主 : 客 · 拆開各上隊色(解歧義)
+  const [hRaw, aRaw] = score.split(":");
+  const h = (hRaw ?? "").trim();
+  const a = (aRaw ?? "").trim();
+  const hn = parseInt(h, 10);
+  const an = parseInt(a, 10);
+  // 比分條依「誰贏這比分」上隊色(主勝=主色 · 客勝=客色 · 平=金)= 迷你勝負分佈
+  const barColor = hn > an ? homeColor : an > hn ? awayColor : "#D4AF37";
   return (
     <div className="flex items-center gap-4">
       <span className="font-mono text-mute text-[10px] tracking-[0.3em] w-8">
         / {String(rank).padStart(2, "0")}
       </span>
-      <span className="font-mono text-bone tabular text-base w-16">{score}</span>
+      <span className="font-mono tabular text-base w-16">
+        <span style={{ color: homeColor }}>{h}</span>
+        <span className="text-mute/50"> : </span>
+        <span style={{ color: awayColor }}>{a}</span>
+      </span>
       <div className="flex-1 relative h-[2px] bg-line/80">
         <div
-          className="absolute top-0 left-0 h-full bg-gold"
-          style={{ width: `${Math.min(100, (pct / 20) * 100)}%` }}
+          className="absolute top-0 left-0 h-full"
+          style={{
+            width: `${Math.min(100, (pct / 20) * 100)}%`,
+            background: barColor,
+          }}
         />
       </div>
       <span className="font-mono text-gold tabular text-sm w-14 text-right">

@@ -28,6 +28,7 @@ import {
 } from "@/lib/creator-comments";
 import { matchHasStarted } from "@/lib/matches";
 import Avatar from "@/components/Avatar";
+import { mentionToken } from "@/lib/identity";
 
 // ── ZONE 27 · CreatorAnalysis · 創作者賣分析(migration 0005)──────
 // Tim 2026-05-30 報馬仔/明燈 screenshot · 要:發文 + 推薦賽事(選邊)+ 寫分析 +
@@ -521,20 +522,17 @@ function PostCard({
   );
 }
 
-// 回覆 body 若以 @某人 開頭(且對得上串裡的 handle)→ 把 @mention 染金 · 其餘原樣。
-// 用實際 handle 比對(非 regex 猜邊界)= 穩:中文名 / 含空格的代號(球迷 #xxxx)都對得上。
-function renderCommentBody(body: string, handles: string[]) {
-  if (body.startsWith("@")) {
-    const rest = body.slice(1);
-    const h = handles.find((hh) => rest.startsWith(hh));
-    if (h) {
-      return (
-        <>
-          <span className="text-gold/80">@{h}</span>
-          {rest.slice(h.length)}
-        </>
-      );
-    }
+// 回覆 body 開頭若是 @某詞 → 染金 · 其餘原樣。 認「@ + 一串非空白」(regex)·
+// 自動 @(@#xxxx / @名字)或手打的(@2b8e59f9)都亮 —— 比對完整 handle 太脆(原 bug)。
+function renderCommentBody(body: string) {
+  const m = body.match(/^@(\S+)/);
+  if (m) {
+    return (
+      <>
+        <span className="text-gold/80">@{m[1]}</span>
+        {body.slice(m[0].length)}
+      </>
+    );
   }
   return body;
 }
@@ -582,8 +580,8 @@ function CommentThread({
     if (!b) return;
     setSending(true);
     setErr(null);
-    // 回覆某人 → body 前綴 @handle(扁平串裡看得出在回誰 · 0 migration · 純文字)
-    const finalBody = replyTo ? `@${replyTo} ${b}` : b;
+    // 回覆某人 → body 前綴 @乾淨短碼(扁平串裡看得出在回誰 · 0 migration · 純文字)
+    const finalBody = replyTo ? `@${mentionToken(replyTo)} ${b}` : b;
     const res = await submitCreatorComment(postId, finalBody);
     if (res.ok) {
       setText("");
@@ -601,9 +599,6 @@ function CommentThread({
 
   // 舊 RPC 沒回 post_id → 無法綁回覆 · 不顯示(graceful)
   if (!postId) return null;
-
-  // 串裡所有人的 handle · 給 @ 標記 render 高亮(對得上才染金)
-  const mentionHandles = comments.map((c) => c.handle);
 
   return (
     <div className="mt-3 pt-3 border-t border-line/30">
@@ -646,7 +641,7 @@ function CommentThread({
                 )}
               </p>
               <p className="mt-1 text-bone/80 text-[13px] leading-relaxed whitespace-pre-wrap">
-                {renderCommentBody(c.body, mentionHandles)}
+                {renderCommentBody(c.body)}
               </p>
             </div>
           ))}
@@ -656,7 +651,7 @@ function CommentThread({
               {replyTo && (
                 <div className="flex items-center gap-2">
                   <span className="font-mono text-gold/80 text-[9px] tracking-[0.15em]">
-                    ↳ 回覆 {replyTo}
+                    ↳ 回覆 @{mentionToken(replyTo)}
                   </span>
                   <button
                     type="button"

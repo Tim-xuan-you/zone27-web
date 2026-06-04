@@ -99,3 +99,11 @@ export function teamIdentity(
 ): { color: string; glyph: string } | null {
   return TEAM_IDENTITY.find((t) => name.includes(t.kw)) ?? null;
 }
+
+// @ 標記用的乾淨短碼:「球迷 #2b8e59f9」→「#2b8e59f9」(去「球迷 」前綴 + 空格 ·
+// 不然 @ 出來是醜長的「@球迷 #2b8e59f9」且帶空格難 highlight)· 顯示名 → 原樣(@阿宏)。
+export function mentionToken(handle: string): string {
+  const hex = handle.match(/#\s*([0-9a-fA-F]+)/);
+  if (hex) return "#" + hex[1];
+  return handle.trim();
+}
