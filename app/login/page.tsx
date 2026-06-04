@@ -497,25 +497,15 @@ export default function LoginPage() {
           </ul>
         </section>
 
-        {/* ── ALT PATH ──────────────────────────────── */}
+        {/* 全景連結 · R194 移除「不用註冊也行 → waitlist」逃生口:R188 後押注/跑引擎
+            都要免費帳號 · 一個「不用註冊」出口會弱化閘門 + 多一個 Hick's law 決策。 */}
         <section className="mx-auto max-w-2xl w-full px-6 sm:px-10 pb-24 text-center">
-          <p className="font-mono text-mute/70 text-[10px] tracking-[0.3em] mb-4">
-            不想註冊 · 只想被通知?
-          </p>
           <Link
-            href="/founders#waitlist"
-            className="font-mono text-mute hover:text-gold text-[11px] tracking-[0.35em] underline-offset-4 hover:underline transition-colors"
+            href="/membership"
+            className="font-mono text-mute hover:text-gold text-[10px] tracking-[0.4em] transition-colors"
           >
-            → 只想收通知信?不用註冊也行 →
+            ← 看會員等級全景 · /membership
           </Link>
-          <div className="mt-12 pt-8 border-t border-line/40">
-            <Link
-              href="/membership"
-              className="font-mono text-mute hover:text-gold text-[10px] tracking-[0.4em] transition-colors"
-            >
-              ← 4-tier ladder 全景 · /membership
-            </Link>
-          </div>
         </section>
       </main>
 
