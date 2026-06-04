@@ -235,15 +235,26 @@ export default async function MatchDetailPage({
             </p>
           )}
 
-          {/* 進場預測 · 群眾線 + 你的一手 */}
-          <UserPredictionPicker
-            matchId={m.id}
-            homeName={m.home.name}
-            awayName={m.away.name}
-            engineFavorite={fav}
-            finalWinner={m.finalResult?.winner ?? null}
-            startISO={startISO}
-          />
+          {/* 進場預測 · 群眾線 + 你的一手 · 延賽則關閉(誠實:沒打的比賽不收押注) */}
+          {m.postponed ? (
+            <div className="mt-4 border border-line/60 bg-slate/30 px-4 py-4 text-center">
+              <p className="font-mono text-mute/80 text-[11px] tracking-[0.3em]">⚠ 此場延賽</p>
+              <p className="mt-1.5 text-mute/75 text-[13px] leading-relaxed max-w-md mx-auto">
+                這場因故延賽 · 暫不開放押注。 上面賽前鎖定的開盤線
+                <span className="text-bone">保留不動</span> · 補賽日才對帳 ——
+                沒打的比賽不掛結果,是我們的誠實。
+              </p>
+            </div>
+          ) : (
+            <UserPredictionPicker
+              matchId={m.id}
+              homeName={m.home.name}
+              awayName={m.away.name}
+              engineFavorite={fav}
+              finalWinner={m.finalResult?.winner ?? null}
+              startISO={startISO}
+            />
+          )}
 
           {/* 這題怎麼算贏 · 預測市場第一信任機制(賭徒最怕模糊結算)· soul-roadmap #4
               升級成 Kalshi 式結算規格表:具名官方來源 + 開賽前鎖定時間戳 + 不可改對帳

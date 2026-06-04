@@ -52,6 +52,9 @@ export type Match = {
   topScores: ScoreBucket[]; // AI 模擬的常見終局比分(top 5)
   aiConfidence: number;     // 0-100 模型對自己預測的信心
   finalResult?: FinalResult; // set after game · powers /track-record receipt
+  /** CPBL 延賽(雨備等)· true = 不顯示為「今晚可押」(誠實:沒打的比賽不掛預測上盤)·
+   *  賽前鎖好的引擎線保留(擇期重賽時 Tim 再處理)· getMatchPhase 視同已歸檔。 */
+  postponed?: boolean;
 };
 
 // ── Auto-merge real CPBL stats over hardcoded estimates ──
@@ -97,6 +100,9 @@ const rawMatches: Match[] = [
     date: "2026 · 06 · 04  ·  星期四",
     startTime: "18:35",
     venue: "澄清湖棒球場",
+    // 2026-06-04 延賽(雨 · 攝氏29-30 降雨40% · Tim 截圖 cpbl.com.tw 標「延賽」)。
+    // 不上今晚板/不可押(誠實:沒打就不掛預測)· 賽前鎖的線(台鋼52/富邦48)保留待擇期重賽。
+    postponed: true,
     home: {
       name: "台鋼雄鷹",
       en: "HAWKS",
@@ -1983,6 +1989,9 @@ export type MatchPhase =
 export function getMatchPhase(match: Match | undefined): MatchPhase | null {
   if (!match) return null;
   if (match.finalResult) return "final";
+  // 延賽 · 視同已歸檔:不上今晚板、不可押(誠實 —— 沒打的比賽不掛預測)。 賽前鎖的線保留;
+  // 重賽時 Tim 清旗標或補結果。 放在 finalResult 之後 → 萬一延賽場後來補了結果仍走 final。
+  if (match.postponed) return "stale-archived";
   const matchDate = getMatchDateIso(match);
   if (!matchDate) return null;
   const today = getTodayTaipei();
