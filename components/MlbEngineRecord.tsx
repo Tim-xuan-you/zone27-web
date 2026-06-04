@@ -69,32 +69,33 @@ export default function MlbEngineRecord() {
           <span className="text-gold">落空照掛、永不刪</span>。 樣本累積比 CPBL 快很多 ·
           跟 CPBL 戰績分開計(不讓一個聯盟的雜訊污染另一個)。
         </p>
+        {/* 主角 = 「賽前鎖死 N 場」(N 個改不了的承諾)+ 完整戰績(✓ 與 ✕ 同等大方秀)·
+            不是軟弱的「準度 —」框。 我們的肌肉是「敢全攤開、連輸都掛」· 不是準度%
+            (57% 當大字弱 + 要 30 場才誠實)。 % 退到 /calibration 深頁當細節。 */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-          <Stat label="賽前鎖定" value={String(total)} sub={`${pending} 場待結算`} />
+          <Stat
+            label="賽前鎖死"
+            value={String(total)}
+            sub={`${pending} 場待結算 · 改不了`}
+            tone="gold"
+          />
           <Stat
             label="已結算"
             value={String(decided.length)}
             sub={noLine > 0 ? `${noLine} 平/無盤` : "已對帳"}
             tone="bone"
           />
-          <Stat
-            label="引擎命中"
-            value={`✓${proved}`}
-            sub={`✕${diverged} 落空`}
-            tone="gold"
-          />
-          <Stat
-            label="準度"
-            // 樣本少不報率(2 場的勝率是運氣不是準度 · 報「0%」既誤導又自打臉)·
-            // 顯示「—」= 不騙你一個雜訊數字(不是「驗證中」· 是同「沒人能神準」的誠實)。
-            value={decided.length >= 30 && rate !== null ? `${rate}%` : "—"}
-            sub={decided.length < 30 ? "樣本還少 · 別用幾場論準度" : "樣本足夠"}
-            tone={decided.length >= 30 && rate !== null && rate >= 55 ? "gold" : "mute"}
-          />
+          <Stat label="✓ 命中" value={String(proved)} sub="賽前就鎖的" tone="gold" />
+          {/* ✕ 落空照掛、同等大方 —— 這格報馬仔永遠不敢有(Pratfall · 不藏輸) */}
+          <Stat label="✕ 落空" value={String(diverged)} sub="照掛 · 刪不掉" tone="bone" />
         </div>
         <p className="mt-4 font-mono text-mute/55 text-[10px] tracking-[0.2em] leading-relaxed">
           引擎開盤公式公開(主場優勢 + 先發投手 ERA / K9 / HR9)· 幾場的勝率是運氣不是準度 ——
-          等樣本夠了才看總準度(同「沒人能神準」的誠實)· 引擎落空照掛、永不刪。
+          等樣本夠了才看總準度(同「沒人能神準」的誠實)。
+          {decided.length >= 30 && rate !== null && (
+            <span className="text-gold/80"> 目前總準度 {rate}% ·</span>
+          )}{" "}
+          引擎落空照掛、永不刪。
           {lastUpdated && (
             <span className="text-mute/75"> · 最後對帳 {lastUpdated}</span>
           )}
