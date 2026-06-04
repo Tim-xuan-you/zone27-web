@@ -2,7 +2,7 @@ import Link from "next/link";
 import CardBetStrip from "@/components/CardBetStrip";
 import MarketSplitBar from "@/components/MarketSplitBar";
 import Avatar from "@/components/Avatar";
-import { teamIdentity } from "@/lib/identity";
+import { getTeamCrest } from "@/lib/identity";
 import {
   getMatchPhase,
   getCalibration,
@@ -77,9 +77,10 @@ export default function MiniMatchCard({ match }: { match: Match }) {
   const favPct = Math.max(homePct, awayPct);
   const dogPct = Math.min(homePct, awayPct);
   const conviction = getEngineConviction(favPct);
-  // 隊徽:真隊色(調過 · 深藍底可辨)+ 中文單字 · 球迷靠顏色秒認隊(辨識度)
-  const homeTeam = teamIdentity(match.home.name);
-  const awayTeam = teamIdentity(match.away.name);
+  // 隊徽:CPBL = 中文單字 + 真隊色;MLB = 英文官方縮寫(LAD/NYY)+ 真招牌色。
+  // 球迷靠縮寫 + 顏色秒認隊(MLB 中文首字毫無辨識度)· per getTeamCrest。
+  const homeTeam = getTeamCrest(match.home.name, match.home.en, match.league);
+  const awayTeam = getTeamCrest(match.away.name, match.away.en, match.league);
 
   return (
     <article

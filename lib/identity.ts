@@ -100,6 +100,43 @@ export function teamIdentity(
   return TEAM_IDENTITY.find((t) => name.includes(t.kw)) ?? null;
 }
 
+// ── MLB 30 隊真隊色 · 隊徽用英文官方縮寫(LAD/NYY/HOU)──────────────
+// R199 Tim「MLB 隊徽很爛 · 沒象徵性 · 換英文?顏色改?」→ 兩個都對:
+//   · 中文首字(休/匹/亞)對 MLB 隊毫無辨識度 + 生成色毫無意義。
+//   · 全球球迷認 MLB 隊靠的就是官方縮寫 + 招牌色(道奇藍 LAD · 洋基藍 NYY)。
+// 縮寫 keyed by abbr(lib/mlb.ts TEAM_ZH 的 abbr · 穩定)· 顏色 = 各隊真招牌色
+// 調成「深藍底可辨 + 不 neon」(同 CPBL 隊徽紀律:小重點不大色塊 · 當字色+細框)。
+// 紅藍橘多隊撞色是 MLB 現實 —— 縮寫負責區分 · 顏色是輔助識別。
+const MLB_TEAM_COLORS: Record<string, string> = {
+  LAA: "#D86470", ARI: "#C76B7E", BAL: "#E8843E", BOS: "#DB535D",
+  CHC: "#5E8FD8", CIN: "#DC5560", CLE: "#CB5A66", COL: "#9B7BD4",
+  DET: "#5E84C4", HOU: "#EE7E32", KC: "#4D8FCF", LAD: "#3E9BE0",
+  WSH: "#CB5560", NYM: "#F0843C", ATH: "#E0B84C", PIT: "#F5C542",
+  SD: "#C39A6B", SEA: "#3D9B8E", SF: "#F58C46", STL: "#DB535D",
+  TB: "#7FB6E2", TEX: "#4D7FCF", TOR: "#5A8FD8", MIN: "#CC5E74",
+  PHI: "#E2565F", ATL: "#D44E5E", CHW: "#AEB4BE", MIA: "#3AAEE0",
+  NYY: "#6A9BD8", MIL: "#C9A24E",
+};
+
+/**
+ * 隊徽身分(顏色 + 字符)· 跨聯盟:
+ *   · MLB → 英文官方縮寫 + 真招牌色(en = abbr)。
+ *   · CPBL → 中文單字 + 真隊色(keyword 比對 name)。
+ *   · 不認得 → null(Avatar 退回 seed 衍生臉)。
+ */
+export function getTeamCrest(
+  name: string,
+  en: string | undefined,
+  league: string | undefined,
+): { color: string; glyph: string } | null {
+  if (league === "MLB" && en) {
+    const abbr = en.toUpperCase();
+    const color = MLB_TEAM_COLORS[abbr];
+    if (color) return { color, glyph: abbr };
+  }
+  return teamIdentity(name);
+}
+
 // @ 標記用的乾淨短碼:「球迷 #2b8e59f9」→「#2b8e59f9」(去「球迷 」前綴 + 空格 ·
 // 不然 @ 出來是醜長的「@球迷 #2b8e59f9」且帶空格難 highlight)· 顯示名 → 原樣(@阿宏)。
 export function mentionToken(handle: string): string {

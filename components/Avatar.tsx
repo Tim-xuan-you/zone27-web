@@ -25,7 +25,12 @@ export default function Avatar({
   const g = glyph ?? handleGlyph(seed);
   const { bg1, bg2, accent } = avatarColors(stableSeed(seed));
   const ink = color ?? accent;
-  const fontSize = Math.round(size * (g.length > 1 ? 0.36 : 0.46));
+  // 字數越多越縮:1 字(中文/單碼)0.46 · 2 字(KC/SF)0.40 · 3 字(LAD/NYY)0.32
+  // → MLB 三碼縮寫塞得進小圓徽不溢出。
+  const glyphLen = [...g].length;
+  const fontSize = Math.round(
+    size * (glyphLen >= 3 ? 0.32 : glyphLen === 2 ? 0.4 : 0.46),
+  );
   return (
     <span
       aria-hidden="true"

@@ -29,7 +29,7 @@ import {
 } from "@/lib/matches";
 import { getEngineConviction } from "@/lib/conviction";
 import { getEngineReasoning, type EngineReasoning } from "@/lib/reasoning";
-import { teamIdentity } from "@/lib/identity";
+import { getTeamCrest } from "@/lib/identity";
 import { getMlbMatchById } from "@/lib/mlb-matches";
 
 // ── ZONE 27 · /matches/[gameId] · 市場頁(R175 Polymarket pivot)──
@@ -95,8 +95,8 @@ export default async function MatchDetailPage({
   // (解兩套信心系統打架 + 英文黑話漏到 hero)· 純從開盤線 favorite % 衍生 · 不另立 aiConfidence 第二尺
   const conviction = getEngineConviction(Math.max(m.home.winRate, m.away.winRate));
   // 隊色 · 給「最可能比分」標頭 + 比分數字上色(解「3:2 誰是誰」歧義)
-  const homeColor = teamIdentity(m.home.name)?.color ?? "#D4AF37";
-  const awayColor = teamIdentity(m.away.name)?.color ?? "#8AA0C4";
+  const homeColor = getTeamCrest(m.home.name, m.home.en, m.league)?.color ?? "#D4AF37";
+  const awayColor = getTeamCrest(m.away.name, m.away.en, m.league)?.color ?? "#8AA0C4";
 
   return (
     <div className="flex flex-col flex-1 min-h-screen">
