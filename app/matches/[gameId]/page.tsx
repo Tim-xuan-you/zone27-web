@@ -316,7 +316,7 @@ export default async function MatchDetailPage({
 
         {/* ── PITCHER MATCHUP · 精簡 ─────────────────── */}
         <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-8 border-t border-line/40 pt-8">
-          <p className="font-mono text-gold text-[9px] tracking-[0.4em] mb-3">/ 先發投手</p>
+          <p className="font-mono text-mute text-[9px] tracking-[0.4em] mb-3">/ 先發投手</p>
           {/* 給非數據迷的圖例 · 解掉「金條到底是好是壞」的方向歧義(設計審計:
               ERA/BB/HR 越低越好、K 越高越好 · 視覺統一成金色端=強)*/}
           <p className="font-mono text-mute/55 text-[9px] tracking-[0.12em] mb-5 leading-relaxed">
@@ -330,7 +330,7 @@ export default async function MatchDetailPage({
 
         {/* ── SCORE DISTRIBUTION · top 5 ─────────────── */}
         <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-8 border-t border-line/40 pt-8">
-          <p className="font-mono text-gold text-[9px] tracking-[0.4em] mb-5">
+          <p className="font-mono text-mute text-[9px] tracking-[0.4em] mb-5">
             / 最可能比分 · TOP 5
           </p>
           <div className="space-y-2.5">
