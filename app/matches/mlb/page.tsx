@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import { createPageMetadata } from "@/lib/page-og";
 import { fetchRelevantMlb, type MlbGame } from "@/lib/mlb";
 import MlbEngineRecord from "@/components/MlbEngineRecord";
+import mlbLocked from "@/lib/mlb-locked.json";
 
 export const metadata = createPageMetadata({
   title: "今日 MLB 賽程 — 即時資料來自 MLB 官方 API",
@@ -31,6 +32,19 @@ export default async function MlbMatchesPage() {
     .sort((a, b) => b.startUTC.localeCompare(a.startUTC))
     .slice(0, 6);
   const games = [...liveGames, ...upcoming, ...recentFinals];
+
+  // R194 · gamePk → 賽前鎖定的引擎勝率%(lib/mlb-locked.json · GitHub Action 賽前鎖、
+  // 留時間戳)。 已結束的場用「當初鎖的那個數字」對真實比分判 ✓/✗ = 跟 CPBL 一樣
+  // 賽後對帳 · 誠信純正(不是賽後拿即時重算的數字假裝賽前就猜中)。
+  const lockedByPk = new Map<number, number>();
+  for (const p of (mlbLocked.predictions ?? []) as {
+    gamePk?: number;
+    engineWinHomePct?: number;
+  }[]) {
+    if (typeof p.gamePk === "number" && typeof p.engineWinHomePct === "number") {
+      lockedByPk.set(p.gamePk, p.engineWinHomePct);
+    }
+  }
 
   return (
     <div className="flex flex-col flex-1 min-h-screen">
@@ -114,7 +128,7 @@ export default async function MlbMatchesPage() {
         <section className="mx-auto max-w-6xl w-full px-6 sm:px-10 pb-20">
           <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
             {games.map((g) => (
-              <MlbCard key={g.gamePk} game={g} />
+              <MlbCard key={g.gamePk} game={g} lockedPct={lockedByPk.get(g.gamePk)} />
             ))}
           </div>
         </section>
@@ -146,7 +160,7 @@ export default async function MlbMatchesPage() {
 // fields(R81+ deeper refactor remove)· 此 round 只 stop rendering 確保
 // brand redline 完全 honor。 enginePickHome / favoriteTeam / favoriteWinPct
 // 計算 變數 全 removed(unused)· 同 axis as Patek 不做 Apple Watch。
-function MlbCard({ game }: { game: MlbGame }) {
+function MlbCard({ game, lockedPct }: { game: MlbGame; lockedPct?: number }) {
   const stateClass = STATE_COLOR[game.state];
   const live = game.live;
   // R194 · 進行中帶局數(死卡變活卡)· 即時比分救回 = Polymarket「數字會動」誠實版。
@@ -172,7 +186,7 @@ function MlbCard({ game }: { game: MlbGame }) {
       </div>
 
       {/* teams · 比分:進行中用即時、賽後用最終(同一個 slot) */}
-      <div className="space-y-3 mb-5">
+      <div className="space-y-3 mb-4">
         <TeamRow
           label="AWAY"
           team={game.away}
@@ -185,21 +199,81 @@ function MlbCard({ game }: { game: MlbGame }) {
         />
       </div>
 
-      {/* R194 · 即時比分誠實標(只在進行中)· 不秒跳 = 不裝賭場感 · 守品牌 */}
+      {/* R194 · 即時比分時效標(只在進行中)· 乾淨講事實 · 不替自己辯解 */}
       {live && (
-        <p className="mb-3 font-mono text-mute/55 text-[9px] tracking-[0.18em] leading-relaxed">
-          ▸ 比分約 10 分鐘前 · MLB 官方 API · 我們不做逐球秒跳(那是賭場感)
+        <p className="mb-3 font-mono text-mute/50 text-[9px] tracking-[0.18em]">
+          ▸ 比分 · 約 10 分鐘前更新(MLB 官方)
         </p>
+      )}
+
+      {/* R194 · 賽後對帳:用「賽前鎖定」的引擎勝率對真實比分判 ✓/✗ = 跟 CPBL 一樣
+          引擎準不準照掛。 誠信:只認賽前鎖過的數字(沒鎖的誠實說沒鎖、不裝)。 */}
+      {game.state === "final" && game.finalScore && (
+        <MlbEngineVerdict
+          lockedPct={lockedPct}
+          finalScore={game.finalScore}
+          homeName={game.home.zhName}
+          awayName={game.away.zhName}
+        />
       )}
 
       {/* venue · 日期已移到卡頭(同 CPBL · per Tim 2026-06-05:MLB 卡頭原本只有
           時間沒日期 · 美國夜場 = 台北隔天清晨更要標日期才不搞混) */}
-      <div className="pt-3 mt-1 border-t border-line/40">
+      <div className="pt-3 mt-auto border-t border-line/40">
         <span className="font-mono text-mute/70 text-[10px] tracking-[0.2em] truncate">
           {game.venue}
         </span>
       </div>
     </article>
+  );
+}
+
+// ── 賽後對帳 · 引擎準不準(用 lib/mlb-locked.json 賽前鎖定的數字)──────
+// 誠信核心:只認「賽前鎖過、留時間戳」的預測對真實比分判 ✓/✗(不是賽後拿即時
+// 重算的數字假裝賽前就猜中 = 那才是報馬仔挑窗)。 引擎沒鎖的場誠實說沒鎖。
+// 落空照掛、永不刪(同 CPBL + /calibration 紀律)。
+function MlbEngineVerdict({
+  lockedPct,
+  finalScore,
+  homeName,
+  awayName,
+}: {
+  lockedPct?: number;
+  finalScore: { home: number; away: number };
+  homeName: string;
+  awayName: string;
+}) {
+  if (lockedPct === undefined) {
+    return (
+      <p className="mb-3 font-mono text-mute/45 text-[9px] tracking-[0.18em] leading-relaxed">
+        ▸ 引擎沒鎖這場(賽前沒抓到先發投手數據)
+      </p>
+    );
+  }
+  const tie = finalScore.home === finalScore.away;
+  const noLine = lockedPct === 50; // 賽前 50/50 = 引擎沒押一邊
+  const favHome = lockedPct > 50;
+  const favPct = Math.max(lockedPct, 100 - lockedPct);
+  const favName = (favHome ? homeName : awayName).slice(0, 4);
+  const homeWon = finalScore.home > finalScore.away;
+  const proved = !tie && !noLine && homeWon === favHome;
+
+  if (tie || noLine) {
+    return (
+      <p className="mb-3 font-mono text-mute text-[10px] tracking-[0.2em]">
+        = {tie ? "平手 · 無勝負" : "引擎沒押(賽前 50/50)"}
+      </p>
+    );
+  }
+  return (
+    <p
+      className={`mb-3 font-mono text-[10px] tracking-[0.2em] leading-relaxed ${
+        proved ? "text-gold" : "text-loss/85"
+      }`}
+    >
+      {proved ? "✓ 引擎言中" : "✕ 引擎落空"} · 賽前{" "}
+      <span className="tabular">{favPct}%</span> 看好 {favName}
+    </p>
   );
 }
 
