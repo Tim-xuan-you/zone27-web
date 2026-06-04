@@ -65,7 +65,7 @@ export function getEngineReasoning(m: Match): EngineReasoning {
       const decisive = gap >= 0.8 ? "明顯" : "略";
       factors.push({
         label: "先發投手壓制力",
-        detail: `${better.pitcher.name} 防禦率 ${better.pitcher.era},比 ${worse.pitcher.name} 的 ${worse.pitcher.era} ${decisive}低 —— 這項偏${better.name}。`,
+        detail: `${better.pitcher.name} 防禦率 ${better.pitcher.era},比${worse.pitcher.name}的 ${worse.pitcher.era} ${decisive}低 —— 這項偏${better.name}。`,
         lean,
       });
     }
