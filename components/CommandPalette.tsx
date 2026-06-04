@@ -157,6 +157,13 @@ export default function CommandPalette() {
   // ── Input keyboard handlers ──
   const onInputKeyDown = useCallback(
     (e: React.KeyboardEvent) => {
+      if (e.key === "Tab") {
+        // 焦點陷阱:輸入框已用 aria-activedescendant 驅動選項導覽 · 吞掉 Tab 讓焦點
+        // 不會跑到 aria-modal 對話框「後面」那些視覺被遮、仍在 tab order 的頁面元素
+        // (WCAG 2.1.2/2.4.3 · 全站 ⌘K power-user primitive 的鍵盤無障礙命門)。 Esc 仍可關。
+        e.preventDefault();
+        return;
+      }
       if (e.key === "ArrowDown") {
         e.preventDefault();
         setSelectedIndex((i) => Math.min(i + 1, flat.length - 1));

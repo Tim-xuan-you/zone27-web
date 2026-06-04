@@ -158,7 +158,7 @@ export default function UserPredictionPicker({
 
         {/* 已封盤 · 不可進場(不分登入)· 已結算 vs 已開賽 不同說法 */}
         {auth !== "loading" && closed && !locked && (
-          <p className="font-mono text-mute/60 text-[10px] tracking-[0.25em] leading-relaxed">
+          <p className="font-mono text-mute/85 text-[10px] tracking-[0.25em] leading-relaxed">
             {finalWinner
               ? "此場已結束 · 已無法進場(先鎖後結 · 防賽後補登)"
               : "此場已開賽 · 已封盤 · 押注賽前才收(先鎖後結 · 防賽後補登)"}
@@ -337,7 +337,7 @@ function PickButton({
       className="px-3 py-2.5 min-h-[44px] border border-gold/40 text-bone hover:border-gold hover:bg-gold/10 font-mono text-[11px] tracking-[0.2em] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
     >
       <span className="block">{label}</span>
-      <span className="block text-[8px] opacity-60 mt-1 tracking-[0.15em]">
+      <span className="block text-[10px] opacity-70 mt-1 tracking-[0.15em]">
         {mark}
       </span>
     </button>

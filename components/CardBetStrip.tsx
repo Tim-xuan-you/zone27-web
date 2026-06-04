@@ -146,7 +146,7 @@ export default function CardBetStrip({
 
       {/* 已開賽 · 封盤(先鎖後結)· 群眾線仍看得到 · 只是不再收新押注 */}
       {status === "closed" && (
-        <p className="text-center py-1.5 font-mono text-mute/60 text-[9px] tracking-[0.2em] leading-relaxed">
+        <p className="text-center py-1.5 font-mono text-mute/85 text-[9px] tracking-[0.2em] leading-relaxed">
           已開賽 · 封盤 · 押注賽前才收
         </p>
       )}

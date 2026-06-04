@@ -185,6 +185,7 @@ function QuizCard({
             value={homePct}
             onChange={(e) => onChange(Number(e.target.value))}
             aria-label={`${m.awayName} 對 ${m.homeName} · 你給主隊的勝率 ${homePct}%`}
+            aria-valuetext={`主隊 ${homePct}% · 客隊 ${100 - homePct}%`}
             className="w-full cursor-pointer"
             style={{ accentColor: "var(--zone-gold)" }}
           />

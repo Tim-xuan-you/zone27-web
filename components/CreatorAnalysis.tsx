@@ -707,7 +707,7 @@ function CommentThread({
                   <button
                     type="button"
                     onClick={() => setReplyTo(null)}
-                    className="font-mono text-mute/50 hover:text-loss text-[9px] tracking-[0.15em] transition-colors"
+                    className="font-mono text-mute/85 hover:text-loss text-[9px] tracking-[0.15em] transition-colors"
                   >
                     ✕ 取消
                   </button>
