@@ -28,7 +28,7 @@ export const revalidate = 600; // ISR · 賽事 lifecycle transitions
 export default function Home() {
   const upcoming = getTodayAndFutureMatches(); // 今晚 + 即將 · asc
   // 休賽日 fallback · 看板永不空白:沒有可押賽事時,改放引擎最近的賽後
-  // 收據(✓言中 / ✕落空都掛)· per getFeaturedMatch 哲學「引擎沒在跑時,
+  // 收據(✓命中 / ✕落空都掛)· per getFeaturedMatch 哲學「引擎沒在跑時,
   // proof-of-work(收據)勝過空泛的未來預測 = 轉換槓桿」。 首頁 2 場上限
   // (mobile ≤ 3 viewport 鐵律 · 看完整去 /track-record)。
   const finalized = getFinalizedMatches();
@@ -71,7 +71,7 @@ export default function Home() {
             <Link
               href="/track-record"
               className="mt-5 inline-flex items-baseline gap-2.5 sm:gap-3 font-mono tabular flex-wrap justify-center hover:opacity-80 transition-opacity"
-              aria-label={`公開戰績 · ${tr.total} 場已對賬 · 引擎言中 ${tr.proved} · 落空 ${tr.diverged}`}
+              aria-label={`公開戰績 · ${tr.total} 場已對賬 · 引擎命中 ${tr.proved} · 落空 ${tr.diverged}`}
             >
               <span className="text-mute text-[10px] tracking-[0.3em]">引擎戰績</span>
               <span className="text-bone text-sm">

@@ -271,7 +271,7 @@ function MlbEngineVerdict({
         proved ? "text-gold" : "text-loss/85"
       }`}
     >
-      {proved ? "✓ 引擎言中" : "✕ 引擎落空"} · 賽前{" "}
+      {proved ? "✓ 引擎命中" : "✕ 引擎落空"} · 賽前{" "}
       <span className="tabular">{favPct}%</span> 看好 {favName}
     </p>
   );

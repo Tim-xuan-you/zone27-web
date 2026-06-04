@@ -166,7 +166,7 @@ export default async function ReceiptPage({ params }: { params: Params }) {
     push: "border-mute/60",
   }[cal];
   const verdictLabel = {
-    proved: "✓ PROVED · ENGINE 言中",
+    proved: "✓ PROVED · ENGINE 命中",
     diverged: "✕ DIVERGED · ENGINE 落空",
     push: "= PUSH · 平局或無 favorite",
   }[cal];

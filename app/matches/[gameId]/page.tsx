@@ -467,7 +467,7 @@ function PhaseBadgeLg({
       push: "border-mute/60 text-mute",
     } as const;
     const labels = {
-      proved: "✓ PROVED · 引擎言中",
+      proved: "✓ PROVED · 引擎命中",
       diverged: "✕ DIVERGED · 引擎落空",
       push: "= PUSH · 平局",
     } as const;
@@ -538,7 +538,7 @@ function CalibrationVerdictLg({
     push: "= PUSH",
   } as const;
   const subtexts = {
-    proved: "引擎方向言中 · 賽前公開預測命中實際贏家",
+    proved: "引擎方向命中 · 賽前公開的預測對上實際贏家",
     diverged: "引擎方向落空 · 賽前預測與實際贏家相反 · 不修飾照掛",
     push: "平局或 50/50 預測 · 無方向可驗證",
   } as const;

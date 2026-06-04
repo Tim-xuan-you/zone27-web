@@ -159,7 +159,7 @@ export default async function TrackRecordOgImage() {
         >
           <StatBlock
             n={proved}
-            label="PROVED · 引擎言中"
+            label="PROVED · 引擎命中"
             tone="gold"
           />
           <StatBlock

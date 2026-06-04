@@ -322,7 +322,7 @@ function MiniCalibrationVerdict({
         calibration === "proved" ? "text-gold/80" : "text-loss/80"
       }`}
     >
-      {calibration === "proved" ? "✓ 引擎言中" : "✕ 引擎落空"}
+      {calibration === "proved" ? "✓ 引擎命中" : "✕ 引擎落空"}
       {enginePctOnWinner !== null && (
         <span className="opacity-70 ml-1">
           ({enginePctOnWinner}% → {calibration === "proved" ? "WIN" : "卻贏"})

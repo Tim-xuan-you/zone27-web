@@ -772,7 +772,7 @@ export default function AuditPage() {
             <dl className="mt-6 space-y-5">
               <div id="proved" className="border-l-2 border-gold/60 pl-4 scroll-mt-20">
                 <dt className="font-mono text-gold text-[10px] tracking-[0.35em] mb-1">
-                  PROVED · 引擎言中
+                  PROVED · 引擎命中
                 </dt>
                 <dd className="text-mute text-sm leading-relaxed">
                   賽前引擎指向的 favorite(winRate &gt; 50%)在實際比賽中獲勝 · gold ✓

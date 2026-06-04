@@ -54,7 +54,7 @@ function buildReceiptText(match: Match): string {
   const enginePctOnWinner = getEnginePctOnWinner(match);
   const verdictLabel =
     cal === "proved"
-      ? "✓ PROVED · ENGINE 言中"
+      ? "✓ PROVED · ENGINE 命中"
       : cal === "diverged"
       ? "✕ DIVERGED · ENGINE 落空"
       : "= PUSH · 平局或無 favorite";

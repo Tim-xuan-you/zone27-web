@@ -134,7 +134,7 @@ export const ENGINE_OPS_LOG: ReadonlyArray<EngineOpsLogEntry> = [
     eventType: "receipt-ingest",
     label: "cpbl-260523-01 ingested · 味全 0:2 台鋼 @ 澄清湖 · PROVED ✓",
     detail:
-      "Tim 親手 cpbl.com.tw screenshot ingest · 味全龍 vs 台鋼雄鷹 @ 澄清湖棒球場 · final 0-2 home wins · WP 坎南(台鋼)· LP 布雷克(味全)· SV 林詩翔(台鋼)· Engine 賽前 51% home → home wins 2-0 → PROVED ✓ · brand IP「engine 言中」 物理 codify · per /ethics commitment #5 7-day post-final SLA · /track-record N=1→2 finalized。",
+      "Tim 親手 cpbl.com.tw screenshot ingest · 味全龍 vs 台鋼雄鷹 @ 澄清湖棒球場 · final 0-2 home wins · WP 坎南(台鋼)· LP 布雷克(味全)· SV 林詩翔(台鋼)· Engine 賽前 51% home → home wins 2-0 → PROVED ✓ · brand IP「engine 命中」 物理 codify · per /ethics commitment #5 7-day post-final SLA · /track-record N=1→2 finalized。",
     receiptId: "cpbl-260523-01",
     href: "/receipts/cpbl-260523-01",
   },

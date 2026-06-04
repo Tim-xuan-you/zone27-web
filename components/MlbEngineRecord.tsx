@@ -77,7 +77,7 @@ export default function MlbEngineRecord() {
             tone="bone"
           />
           <Stat
-            label="引擎言中"
+            label="引擎命中"
             value={`✓${proved}`}
             sub={`✕${diverged} 落空`}
             tone="gold"

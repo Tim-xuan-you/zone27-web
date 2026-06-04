@@ -92,7 +92,7 @@ export default function MatchesPage() {
             <p className="text-mute text-sm leading-relaxed mb-6 max-w-2xl">
               今日無 CPBL 場次 · 現在沒有可押的賽事。 這是引擎最近{" "}
               {offSeasonReceipts.length} 場的公開判決 —{" "}
-              <span className="text-gold">✓ 言中</span> 跟{" "}
+              <span className="text-gold">✓ 命中</span> 跟{" "}
               <span className="text-loss">✕ 落空</span>{" "}
               一樣掛上來,從不藏。
             </p>
