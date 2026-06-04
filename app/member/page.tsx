@@ -15,7 +15,10 @@ import {
 import { readTier, isPaid, creatorTakePct, tierLabel } from "@/lib/tier";
 import OpenPositionCard, { type OpenPosition } from "@/components/OpenPositionCard";
 import MyCreatorPanel from "@/components/MyCreatorPanel";
+import DisplayNameSetting from "@/components/DisplayNameSetting";
 import { SUPPORT_EMAIL } from "@/lib/brand-constants";
+import { readDisplayName } from "@/lib/identity";
+import { createHash } from "crypto";
 
 export const metadata: Metadata = {
   title: "你的儀表板",
@@ -83,12 +86,14 @@ export default async function MemberPage() {
     );
   }
 
-  const email = user.email ?? "";
-  const emailName = email.split("@")[0] || "會員";
-  const tier = readTier(
-    (user.user_metadata ?? null) as Record<string, unknown> | null,
-  );
+  const meta = (user.user_metadata ?? null) as Record<string, unknown> | null;
+  const tier = readTier(meta);
   const tierZh = `${tierLabel(tier)} 會員`;
+  // 公開身分:顯示名(會員自填 · opt-in)否則匿名代號「球迷 #hash」。
+  // anonHandle 的 md5 必須跟 SQL 的 md5(user_id::text) 一致 → 頭像、署名同一張臉。
+  const displayName = readDisplayName(meta);
+  const anonHandle =
+    "球迷 #" + createHash("md5").update(user.id).digest("hex").slice(0, 8);
 
   const predictionsMap = await getMyPredictionsMap();
   const stats = aggregatePredictionStats(
@@ -151,11 +156,15 @@ export default async function MemberPage() {
       <Nav active="member" />
 
       <main id="main" className="mx-auto max-w-2xl w-full px-6 sm:px-10 pt-10 pb-24">
-        {/* 1 · 身分列 · 一行 ────────────────────────── */}
-        <div className="flex items-baseline justify-between gap-3 flex-wrap">
-          <p className="font-mono text-mute text-[11px] tracking-[0.2em]">
-            <span className="text-gold">{emailName}</span> · {tierZh}
-          </p>
+        {/* 1 · 身分列 · 頭像 + 公開名(可改)+ tier + 登出 ──────
+            Tim dogfood「球迷#hash 不知道是誰 · 能自己設名嗎」→ 頭像 + 改名 inline。
+            預設一行(守極簡)· 點「改名」才展開。 */}
+        <div className="flex items-start justify-between gap-3 flex-wrap">
+          <DisplayNameSetting
+            initialName={displayName}
+            anonHandle={anonHandle}
+            tierLabel={tierZh}
+          />
           <form action="/auth/signout" method="post">
             <button
               type="submit"

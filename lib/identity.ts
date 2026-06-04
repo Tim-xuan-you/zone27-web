@@ -67,3 +67,12 @@ export function stableSeed(handle: string): string {
   const hash = handle.match(/#\s*([0-9a-fA-F]+)/);
   return hash ? hash[1] : handle;
 }
+
+// 從 user_metadata 讀公開顯示名(會員自己填 · opt-in · 預設空 = 用匿名代號)。
+export function readDisplayName(
+  meta: Record<string, unknown> | null | undefined,
+): string {
+  if (!meta) return "";
+  const n = meta["display_name"];
+  return typeof n === "string" ? n.trim() : "";
+}
