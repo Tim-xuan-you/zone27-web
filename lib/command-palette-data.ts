@@ -1,16 +1,21 @@
 // ── ZONE 27 · Command Palette Index ─────────────────────
-// PRIMARY routes only · ~26 → 38 entries · power-user search · Hick's Law-aware
-// editorial priority。 Secondary routes accessed via /transparency aggregator
-// + Footer + parent-page cross-links(e.g. /founders/* sub-pages 從 /founders
-// 探索 · /letter + /year-zero + /heritage + /hey-tim + /annual 從 /transparency
-// aggregator · /methodology/diff 從 /methodology · /receipts/* 從 /track-record ·
-// /member/calibration + /member/submit 從 /member · /engine-log direct since R120 W5)。
-// (/poster + /auth/* intentionally NOT indexed · 同 framing。)
-// R122 W1 · /admin 從 「NOT indexed」 改 indexed · per founder-dogfood-canary
-// 第 N 次 fire · designer 需要 1-click access to tier preview · per
-// [[feedback-zone27-tier-dogfood-method]] memory · client-side spoofable BUT 0
-// risk(R113 W1 Kerckhoffs')· /admin still noindex on Vercel(meta robots)·
-// 但 Cmd-K visible for designer。
+// R199(2026-06-04 · Tim canary fire「37 個頁面太多太扯 · 一堆內部討論的東西 ·
+// 幾乎沒人要看 · 極簡再極簡 · 看 Apple / Polymarket」)· 37 → 13 essentials。
+//
+// 原則(Apple / Polymarket IA):全站快搜不是「把所有頁面倒出來」· 是「一個球迷
+// 真正會搜的東西」。 Apple 有上萬頁 · top nav 只放 ~10。 我們同理:這裡只留
+// 用戶動線(入門 → 看賽事/押注 → 信任證據 → 帳號)· 品牌哲學長文(宣言/鐵律/
+// 反方/誠信/倫理/路線圖…)+ 內部 voice(年報/驗屍/Hey Tim/craft journal)+
+// 設計者工具(/admin)全部退出「快搜」—— 頁面不刪(護城河仍在 · footer + 內文
+// 交叉連結 + 直接打網址到得了)· 只是不再對每個訪客轟炸 37 條。
+//
+// /admin(設計者切 tier 預覽)退出快搜:它是內部工具 · render 在公開搜尋裡像漏餡 ·
+// 仍可直接打 /admin 進(dogfood 不斷)· 同 footer 早就沒列它的紀律。
+//
+// Design principles(per [[zone27-disclosure-philosophy]]):
+//   - No external deps · plain substring filter · no telemetry / personalization
+//   - Group-order editorial(入門 → 賽事 → 信任 → 轉換 → 帳號)
+// ─────────────────────────────────────────────────────
 
 export type CommandItem = {
   label: string;
@@ -19,13 +24,7 @@ export type CommandItem = {
   /** Route path (internal) or full URL (external · opens new tab) */
   path: string;
   /** Group label · controls section ordering in palette */
-  group:
-    | "入門"
-    | "賽事 · 引擎"
-    | "品牌 IP"
-    | "信任文件"
-    | "轉換"
-    | "工具 · 外部";
+  group: "入門" | "賽事 · 引擎" | "信任文件" | "轉換" | "工具 · 外部";
   /** Searchable aliases · Chinese + English + abbrev */
   keywords?: string[];
   external?: boolean;
@@ -38,123 +37,44 @@ export const COMMAND_ITEMS: CommandItem[] = [
     kicker: "/",
     path: "/",
     group: "入門",
-    keywords: ["home", "zone 27", "hero", "首頁", "主頁"],
+    keywords: ["home", "zone 27", "hero", "首頁", "主頁", "今晚"],
   },
   {
-    label: "5 分鐘入門",
+    label: "5 分鐘入門 · 給沒聽過的人",
     kicker: "/learn",
     path: "/learn",
     group: "入門",
-    keywords: ["learn", "primer", "bill james", "入門", "新手", "introduction"],
+    keywords: ["learn", "primer", "bill james", "入門", "新手", "introduction", "怎麼玩", "怎麼用"],
   },
   {
     label: "FAQ · 誠實回答",
     kicker: "/faq",
     path: "/faq",
     group: "入門",
-    keywords: ["faq", "questions", "常見問題", "問與答"],
+    keywords: ["faq", "questions", "常見問題", "問與答", "為什麼"],
   },
-  {
-    label: "關於 · 品牌方法論",
-    kicker: "/about",
-    path: "/about",
-    group: "入門",
-    keywords: ["about", "story", "關於"],
-  },
-  // R168 W1 · /glossary DELETED · Tim canary 3「使用者不是工程師」 · 27 industry stat 字典 = engineer-grammar dump · Z27 LEXICON 5 terms ported to /audit §08 · Cmd-K entry removed · per Agent P TIER A #4
-  // R170 W1 · /rewards RESTORED · Tim 38th 同 mandate explicit endorse Q4 launch · R166 W1 削 reason(Q4 vapor)obsolete · revive with Cmd-K entry
-  {
-    label: "Rewards · PROVED 預測兌換實體獎品(底片 / 咖啡 / 沖洗)",
-    kicker: "/rewards",
-    path: "/rewards",
-    group: "入門",
-    keywords: [
-      "rewards",
-      "獎品",
-      "兌換",
-      "集點",
-      "底片",
-      "咖啡",
-      "沖洗",
-      "護照代辦",
-      "點數",
-      "proved",
-      "預測兌換",
-      "恆美",
-      "伶 Kopi",
-      "skill prize",
-      "fantasy league",
-    ],
-  },
+
   // ── 賽事 · 引擎 ────────────────────────────────────
   {
-    label: "今日賽事板 · CPBL",
+    label: "今日賽事板 · CPBL + MLB",
     kicker: "/matches",
     path: "/matches",
     group: "賽事 · 引擎",
     keywords: [
-      "matches",
-      "cpbl",
-      "今日賽事",
-      "賽程",
-      "板",
-      "今晚",
-      "下午",
-      "比賽",
-      "戰況",
-      "賽況",
-      "對戰",
-      "對戰組合",
-      "戰報",
-      "看球",
-      "選邊",
-      "誰贏",
-      "今晚誰贏",
-      "預測",
-      "賽前",
-      "盤口",
-      // R115 W2 · Tim 2026-05-25 dogfood「在哪裡可以分享、推薦賽事? 找不到呀!」
-      // /matches/[gameId] 內 UserPredictionPicker + AnonPickWidget + ReceiptForwardButton
-      // 都 ship 但 share/predict 動作 keywords 之前不 surface · 加 keyword sets
-      // 讓 Cmd-K 搜索「分享」「我也猜」「投票」「推薦」 都能找到 → /matches。
-      "分享",
-      "share",
-      "我也猜",
-      "您也猜",
-      "猜輸贏",
-      "投票",
-      "推薦",
-      "recommend",
-      "贏家",
-      "黑馬",
-      // R137 W6 · 場館暱稱 + 季事關鍵詞 per Agent C 球迷 slang gap audit
-      // (filtered to brand-IP-fit only · CPBL fan audience grammar per
-      // [[feedback-zone27-audience-fans-not-engineers]])
-      "洲際",
-      "天母",
-      "新莊",
-      "澄清湖",
-      "場館",
-      "球場",
-      "主場",
-      "客場",
-      "台灣大賽",
-      "季後賽",
-      "明星賽",
-      "總冠軍",
-      // R155 W3e · Agent C 5 new 球迷 slang per CPBL/PTT/FB 粉專 vernacular
-      // (filtered to brand-IP-fit · 0 betting term · per
-      // [[feedback-zone27-audience-fans-not-engineers]])· 滿貫砲 + 再見全壘打 +
-      // sayonara = high-leverage moments · 牛棚崩盤 + 救援失敗 + 失火 = late-inning
-      // event grammar
-      "滿貫砲",
-      "再見全壘打",
-      "再見",
-      "sayonara",
-      "牛棚崩盤",
-      "救援失敗",
-      "失火",
-      "炸裂",
+      "matches", "cpbl", "今日賽事", "賽程", "板", "今晚", "下午", "比賽",
+      "戰況", "賽況", "對戰", "對戰組合", "戰報", "看球", "選邊", "誰贏",
+      "今晚誰贏", "預測", "賽前", "盤口", "押注", "押", "下注",
+      "分享", "share", "我也猜", "您也猜", "猜輸贏", "投票", "推薦",
+      "recommend", "贏家", "黑馬",
+      // 場館 + 季事
+      "洲際", "天母", "新莊", "澄清湖", "場館", "球場", "主場", "客場",
+      "台灣大賽", "季後賽", "明星賽", "總冠軍",
+      // 高張力時刻 slang
+      "滿貫砲", "再見全壘打", "再見", "sayonara", "牛棚崩盤", "救援失敗", "失火", "炸裂",
+      // 球員 / 球隊 slang(/cpbl-pitchers · /cpbl-teams 從這探索)
+      "投手", "pitcher", "球員", "球員卡", "球員數據",
+      "統一獅", "中信兄弟", "富邦悍將", "樂天桃猿", "味全龍", "台鋼雄鷹",
+      "獅迷", "象迷", "兄弟", "悍將", "桃猿", "龍迷", "雄鷹", "球隊", "支持的球隊",
     ],
   },
   {
@@ -162,7 +82,7 @@ export const COMMAND_ITEMS: CommandItem[] = [
     kicker: "/matches/mlb",
     path: "/matches/mlb",
     group: "賽事 · 引擎",
-    keywords: ["mlb", "美國職棒", "即時", "stats api"],
+    keywords: ["mlb", "美國職棒", "即時", "stats api", "大聯盟"],
   },
   {
     label: "海選天梯 · 準度排行(新秀 → 神諭)",
@@ -170,17 +90,8 @@ export const COMMAND_ITEMS: CommandItem[] = [
     path: "/ladder",
     group: "賽事 · 引擎",
     keywords: [
-      "ladder",
-      "天梯",
-      "海選",
-      "排行榜",
-      "leaderboard",
-      "神諭",
-      "oracle",
-      "準度",
-      "ranking",
-      "市場",
-      "market",
+      "ladder", "天梯", "海選", "排行榜", "leaderboard", "神諭", "oracle",
+      "準度", "ranking", "市場", "market", "贏過引擎", "升階",
     ],
   },
   {
@@ -189,255 +100,22 @@ export const COMMAND_ITEMS: CommandItem[] = [
     path: "/lab",
     group: "賽事 · 引擎",
     keywords: [
-      "lab",
-      "engine",
-      "simulator",
-      "推演引擎",
-      "推演",
-      "引擎",
-      "模擬",
-      "勝率",
-      "預測",
-      "誰贏",
-      "推算",
-      "演算",
-      "勝負",
-      "賠率",
-    ],
-  },
-  {
-    label: "自訂實驗室 · Power User",
-    kicker: "/lab/custom",
-    path: "/lab/custom",
-    group: "賽事 · 引擎",
-    keywords: [
-      "custom",
-      "power",
-      "自訂",
-      "投手",
-      "pitcher",
-      // R155 W3e · Agent C 球迷 slang · 二刀流 / Ohtani 大谷 SHO power-user
-      // simulation · CPBL fan 想 mock two-way player · brand IP fit
-      "二刀流",
-      "大谷",
-      "sho",
-      "ohtani",
-      "two-way",
-    ],
-  },
-  // R167 W1b · /signal-board DELETED · daily promise we don't keep(violates [[feedback-no-waiting-rule]] same as /rewards Q4 vapor)· per Agent P TIER B #7 + Tim canary 3 · Cmd-K entry removed
-  {
-    label: "CPBL 投手排行 · 6 項數據 · 可分享連結",
-    kicker: "/cpbl-pitchers",
-    path: "/cpbl-pitchers",
-    group: "賽事 · 引擎",
-    keywords: [
-      "cpbl pitchers",
-      "排行",
-      "leaderboard",
-      "投手",
-      "pitchers",
-      "k9",
-      "bb9",
-      "hr9",
-      "whip",
-      "era",
-      "ip",
-      "stat",
-      "ranking",
-      "baseball savant",
-      "savant",
-      "ace",
-      "control",
-      "波球",
-      "勝投",
-      "防禦率",
-      "三振",
-      "保送",
-      "王牌",
-      "頭號投手",
-      "頂尖",
-      "球速",
-      "球威",
-      "速球",
-      "變化球",
-      "牛棚",
-      "終結者",
-      "守護神",
-      "救援",
-      "先發",
-      "中繼",
-      "外籍投手",
-      "洋投",
-      "本土投手",
-      "球員卡",
-      "球員數據",
-      "進階數據",
-      "進階指標",
-      "trackman",
-      "advanced",
-      // R137 W6 · 投手 archetype 球迷 slang per Agent C · CPBL/Asian baseball
-      // 文化 reference · 火球男 = fastball specialist · 控球魔術師 = command
-      // specialist · brand IP fit per [[feedback-zone27-audience-fans-not-engineers]]
-      "火球男",
-      "火球",
-      "控球魔術師",
-      "控球",
-      "魔術師",
-      "怪力男",
-      "養生球路",
-      "肩傷",
-      "復出",
-      "球速王",
-      // R155 W3e · Agent C 球迷 slang · pitcher-vulnerability narrative ·
-      // 「誰被開轟」 是 CPBL fan canonical pitcher rank question · HR9 leaderboard
-      // 已 on /cpbl-pitchers 但這些 fan grammar keywords 之前未 surface
-      "開轟",
-      "全壘打",
-      "場外開花",
-      "被打爆",
-      "失分王",
-    ],
-  },
-  {
-    label: "CPBL 6 隊投手總覽 · 你支持的球隊在這",
-    kicker: "/cpbl-teams",
-    path: "/cpbl-teams",
-    group: "賽事 · 引擎",
-    keywords: [
-      "cpbl teams",
-      "teams",
-      "隊伍",
-      "球團",
-      "team page",
-      "tribal",
-      "統一獅",
-      "中信兄弟",
-      "富邦悍將",
-      "樂天桃猿",
-      "味全龍",
-      "台鋼雄鷹",
-      "lions",
-      "brothers",
-      "guardians",
-      "monkeys",
-      "dragons",
-      "hawks",
-      "獅迷",
-      "象迷",
-      "兄弟象",
-      "兄迷",
-      "悍將",
-      "猿迷",
-      "桃猿",
-      "龍迷",
-      "鷹迷",
-      "鋼鷹",
-      "雄鷹",
-      "魔猴",
-      "球迷",
-      "鄉民",
-      "支持的球隊",
-      "母隊",
-      // R137 W6 · 場館暱稱 per Agent C 球迷 slang gap audit · CPBL ballpark
-      // affinity = team loyalty hinge · brand IP fit per
-      // [[feedback-zone27-audience-fans-not-engineers]]
-      "洲際",
-      "天母",
-      "新莊",
-      "澄清湖",
-      "場館",
-      "球場",
-      "主場",
-      // R155 W3e · Agent C 球迷 slang · team-form tribal query · 「兄弟連敗」
-      // 「獅子王朝」 是 fan 查 team-aggregation page 的 canonical narrative ·
-      // brand IP fit per [[feedback-zone27-audience-fans-not-engineers]]
-      "連敗",
-      "連勝",
-      "王朝",
-      "氣勢",
-      "低潮",
-      "翻身",
+      "lab", "engine", "simulator", "推演引擎", "推演", "引擎", "模擬",
+      "勝率", "預測", "誰贏", "推算", "演算", "勝負", "賠率", "自訂", "custom",
     ],
   },
 
-  // ── 品牌 IP ────────────────────────────────────────
+  // ── 信任文件(只留用戶真正會搜的兩張「證據」)──────────────
   {
-    label: "倒置宣言 · 4 個刻意倒置",
-    kicker: "/manifesto",
-    path: "/manifesto",
-    group: "品牌 IP",
-    keywords: ["manifesto", "倒置", "inversion", "philosophy", "宣言"],
-  },
-  {
-    label: "鐵律 · Buffett · Musk · Costco · Jobs 共識",
-    kicker: "/discipline",
-    path: "/discipline",
-    group: "品牌 IP",
-    keywords: ["discipline", "鐵律", "buffett", "musk", "costco", "jobs"],
-  },
-  {
-    label: "公開路線圖 · 含「永遠不做」清單",
-    kicker: "/roadmap",
-    path: "/roadmap",
-    group: "品牌 IP",
-    keywords: ["roadmap", "路線圖", "未來", "永遠不做"],
-  },
-  {
-    label: "版本紀錄 · 以 git 為準",
-    kicker: "/changelog",
-    path: "/changelog",
-    group: "品牌 IP",
-    keywords: ["changelog", "版本", "git", "歷史", "log"],
-  },
-  // R164 NUCLEAR DELETE · /heritage + /transparency + /engine-log Cmd-K
-  // entries removed per Tim canary fire「頁面多到一個離譜」 · Apple discipline
-  // 12-page max · pages deleted from app/ · cross-references redirected to
-  // canonical parents(/heritage→/about · /transparency→/audit · /engine-log→
-  // /audit)。
-
-  // ── 信任文件 ───────────────────────────────────────
-  {
-    label: "Model Report · 引擎範圍 + 揭露哲學",
-    kicker: "/audit",
-    path: "/audit",
-    group: "信任文件",
-    keywords: ["audit", "model", "report", "稽核"],
-  },
-  {
-    label: "技術白皮書 · GitHub 程式碼",
-    kicker: "/methodology",
-    path: "/methodology",
-    group: "信任文件",
-    keywords: ["methodology", "技術", "白皮書", "whitepaper"],
-  },
-  {
-    label: "公開戰績 · PROVED vs DIVERGED 帳本",
+    label: "公開戰績 · 引擎準不準的帳本",
     kicker: "/track-record",
     path: "/track-record",
     group: "信任文件",
     keywords: [
-      "track",
-      "record",
-      "戰績",
-      "proved",
-      "diverged",
-      "ledger",
-      "準不準",
-      "對了",
-      "錯了",
-      "命中",
-      "Brier",
-      "中沒中",
-      "命中率",
-      "準度",
-      "歷史紀錄",
-      "對錯",
-      "對中",
-      "預測紀錄",
-      "賭神",
-      "報明牌",
-      "誰才是神",
+      "track", "record", "戰績", "proved", "diverged", "ledger", "準不準",
+      "對了", "錯了", "命中", "中沒中", "命中率", "準度", "歷史紀錄",
+      "對錯", "預測紀錄", "賭神", "報明牌", "誰才是神", "audit", "稽核",
+      "方法公開", "methodology", "白皮書", "開源",
     ],
   },
   {
@@ -445,263 +123,28 @@ export const COMMAND_ITEMS: CommandItem[] = [
     kicker: "/calibration",
     path: "/calibration",
     group: "信任文件",
-    keywords: ["calibration", "brier", "校準", "538", "tetlock"],
-  },
-  {
-    label: "校準練習 · 換你當引擎 · 你有多準?",
-    kicker: "/calibration/test",
-    path: "/calibration/test",
-    group: "賽事 · 引擎",
-    keywords: ["校準練習", "你有多準", "遊戲", "game", "calibration test", "練習", "猜比賽"],
-  },
-  {
-    label: "誠信 · 22 條永遠不變",
-    kicker: "/integrity",
-    path: "/integrity",
-    group: "信任文件",
-    keywords: [
-      "integrity",
-      "誠信",
-      "berkshire",
-      "buffett",
-      "22 binding",
-      "redlines",
-      "ethics",
-      "binding rules",
-      "承諾",
-      "保證",
-      "不會變",
-      "永遠",
-    ],
-  },
-  {
-    label: "互動 · 怎麼跟我們說話",
-    kicker: "/interact",
-    path: "/interact",
-    group: "信任文件",
-    keywords: [
-      "interact",
-      "互動",
-      "討論",
-      "討論區",
-      "留言板",
-      "comment",
-      "forum",
-      "community",
-      "社群",
-      "推薦賽事",
-      "分享",
-      "share",
-      "推薦",
-      "talk",
-      "talk to tim",
-      "聊天",
-      "chat",
-      "互相",
-      "彼此",
-      "其他人",
-      "球迷區",
-      "讀者",
-      "reader",
-      "writer",
-      "single voice",
-      "stratechery",
-      "bill james",
-      "hey bill",
-      "delta japan",
-      "one-way",
-      "10 channels",
-      "投稿",
-      "submit",
-      "申請",
-      "意見",
-      "feedback",
-      "為什麼沒有",
-      "沒有 community",
-      "沒有 forum",
-      "沒有討論區",
-      "在哪",
-      "where",
-    ],
-  },
-  {
-    label: "倫理 · 9 條永遠不做的承諾",
-    kicker: "/ethics",
-    path: "/ethics",
-    group: "信任文件",
-    keywords: ["ethics", "policy", "倫理", "承諾", "stratechery", "binding"],
-  },
-  {
-    label: "最強反方 · 反 ZONE 27 的 6 個論點",
-    kicker: "/steelman",
-    path: "/steelman",
-    group: "信任文件",
-    keywords: [
-      "steelman",
-      "objection",
-      "反方",
-      "論證",
-      "pratfall",
-      // R109 W5 · LLM / Quark NBA / AI 對立面 keywords 指 Objection #06(R108 W7)·
-      // 搜「為什麼不用 AI」 / 「Quark」 / 「LLM」 / 「ChatGPT」 → 直接跳 /steelman ·
-      // brand IP「LLM hallucination ≠ deterministic Monte Carlo」 positioning surface。
-      "llm",
-      "ai 對話",
-      "ai 看球",
-      "ai 助手",
-      "quark",
-      "夸克",
-      "千问",
-      "chatgpt",
-      "gpt",
-      "claude",
-      "豆包",
-      "deepseek",
-      "為什麼不用 AI",
-      "為什麼不用 LLM",
-      "natural language",
-      "自然語言",
-      "多模態",
-      "multimodal",
-    ],
-  },
-  {
-    label: "覆蓋範圍 · 永遠不做清單",
-    kicker: "/coverage",
-    path: "/coverage",
-    group: "信任文件",
-    keywords: ["coverage", "覆蓋", "範圍", "scope", "never"],
-  },
-  {
-    label: "隱私政策 · 0 追蹤",
-    kicker: "/privacy",
-    path: "/privacy",
-    group: "信任文件",
-    keywords: ["privacy", "隱私", "tracker", "cookie", "ga", "pixel"],
-  },
-  {
-    label: "服務條款",
-    kicker: "/terms",
-    path: "/terms",
-    group: "信任文件",
-    keywords: ["terms", "條款", "tos", "service"],
+    keywords: ["calibration", "校準", "準度", "57%", "天花板", "你有多準", "練習", "校準練習"],
   },
 
   // ── 轉換 ───────────────────────────────────────────
   {
-    label: "GOLD · 最高階年度會員 · NT$ 2,700",
-    kicker: "/founders",
-    path: "/founders",
-    group: "轉換",
-    keywords: [
-      "gold",
-      "founder",
-      "founders",
-      "創始",
-      "GOLD 會員",
-      "27",
-      "annual",
-      "年度",
-      "2700",
-      "270",
-      "贊助",
-      "支持",
-      "入主",
-      "席位",
-      "席次",
-      "年度會員",
-      "ico",
-      "天使",
-      "patreon",
-    ],
-  },
-  {
-    label: "申請 GOLD · 最高階年度會員 · Tim 親手審核",
-    kicker: "/founders/apply",
-    path: "/founders/apply",
-    group: "轉換",
-    keywords: [
-      "apply",
-      "application",
-      "申請",
-      "founders",
-      "patek",
-      "申請表",
-      "submit",
-    ],
-  },
-  // R167 W1a · /leaderboard DELETED · Tim canary 3「每個網頁滑不到底 · 大部分不必要」 · per Agent P TIER A #3 · Cmd-K entry removed · 「席位」 keyword now points to /founders/ledger
-  {
-    label: "公開名額帳本 · 連被拒的原因都貼出來",
-    kicker: "/founders/ledger",
-    path: "/founders/ledger",
-    group: "轉換",
-    keywords: [
-      "ledger",
-      "allocation",
-      "open allocation",
-      "refusal",
-      "refusals",
-      "拒絕",
-      "拒絕原因",
-      "rejection",
-      "rejected",
-      "approval",
-      "approval rate",
-      "通過率",
-      "weekly review",
-      "review log",
-      "patek",
-      "hermes",
-      "tesla",
-      "process transparency",
-      "我會被拒絕嗎",
-      "誰被拒絕",
-      "為什麼被拒",
-    ],
-  },
-  {
-    label: "會員制 · 會員全景",
+    label: "會員制 · OPEN / BLACK / GOLD",
     kicker: "/membership",
     path: "/membership",
     group: "轉換",
     keywords: [
-      "會員",
-      "membership",
-      "tier",
-      "ladder",
-      "訂閱",
-      "免費",
-      "free",
+      "會員", "membership", "tier", "訂閱", "免費", "free", "付費",
+      "black", "黑卡", "gold", "founder", "創始", "方案", "升級", "賣分析",
     ],
   },
-  {
-    label: "BLACK · CPBL 季票 · NT$ 500/31 天",
-    kicker: "/membership/black-card",
-    path: "/membership/black-card",
-    group: "轉換",
-    keywords: [
-      "black card",
-      "blackcard",
-      "subscribe",
-      "訂閱",
-      "黑卡",
-      "季票",
-      "season pass",
-      "500",
-    ],
-  },
-  // R164 NUCLEAR DELETE · /pricing/why Cmd-K entry removed · /pricing route
-  // deleted per Tim canary fire · NT$ 2,700 justification 已在 /founders body +
-  // BreakEvenCell + MultiYearAnchor + GenerationsLine consolidated · 不需獨立 page。
 
   // ── 工具 · 外部 ────────────────────────────────────
   {
-    label: "會員 · 你的引擎時間軸",
+    label: "你的儀表板 · 校準身分 + 持倉",
     kicker: "/member",
     path: "/member",
     group: "工具 · 外部",
-    keywords: ["member", "dashboard", "會員頁", "個人", "時間軸"],
+    keywords: ["member", "dashboard", "會員頁", "個人", "儀表板", "我的準度", "持倉", "帳本"],
   },
   {
     label: "登入 · Email + 密碼 · 免費會員",
@@ -709,15 +152,7 @@ export const COMMAND_ITEMS: CommandItem[] = [
     path: "/login",
     group: "工具 · 外部",
     keywords: [
-      "login",
-      "登入",
-      "註冊",
-      "register",
-      "signup",
-      "password",
-      "密碼",
-      "email",
-      "auth",
+      "login", "登入", "註冊", "register", "signup", "password", "密碼", "email", "auth",
     ],
   },
   {
@@ -725,50 +160,8 @@ export const COMMAND_ITEMS: CommandItem[] = [
     kicker: "github.com/Tim-xuan-you/zone27-web",
     path: "https://github.com/Tim-xuan-you/zone27-web",
     group: "工具 · 外部",
-    keywords: ["github", "source", "code", "原始碼", "open source", "mit"],
+    keywords: ["github", "source", "code", "原始碼", "open source", "mit", "公開", "驗證"],
     external: true,
-  },
-  {
-    // R122 W1 · Tim 第 N 次 founder-dogfood-canary fire(R36 / R47 / R60 / R113 / R122)
-    // 問「設計者怎麼切換 tier 方案?」 · 此非 missing feature · 是 discoverability bug ·
-    // /admin AdminTierSwitcher + PreviewModeBanner + Cmd+Shift+P + URL deep link 4 個 entry
-    // points 全 ship since R36 W-D · 但 Tim 仍 forget · 加 Cmd-K entry 1-click 可達 ·
-    // per [[feedback-zone27-tier-dogfood-method]] memory codify · DO NOT rebuild · DO NOT
-    // create separate accounts · ONLY surface existing infrastructure。 安全:per R113 W1
-    // Kerckhoffs' principle · client-side spoofable but 0 risk · 0 paid features built。
-    label: "🎭 設計者 · 切換會員視角(設計者預覽工具)",
-    kicker: "/admin",
-    path: "/admin",
-    group: "工具 · 外部",
-    keywords: [
-      "admin",
-      "tier",
-      "切換",
-      "preview",
-      "dogfood",
-      "設計者",
-      "designer",
-      "anonymous",
-      "free",
-      "black",
-      "founders",
-      "切到 black",
-      "切到 founders",
-      "切到 free",
-      "切到 anonymous",
-      "tier switcher",
-      "預覽",
-      "身份切換",
-      "視角",
-      "方案",
-      "看 BLACK",
-      "看 OPEN",
-      "看訪客",
-      "看 Founders",
-      "cmd shift p",
-      "ctrl shift p",
-      "keyboard shortcut",
-    ],
   },
 ];
 
@@ -776,7 +169,6 @@ export const COMMAND_ITEMS: CommandItem[] = [
 export const COMMAND_GROUP_ORDER = [
   "入門",
   "賽事 · 引擎",
-  "品牌 IP",
   "信任文件",
   "轉換",
   "工具 · 外部",
@@ -793,9 +185,7 @@ export function filterCommandItems(
     if (item.label.toLowerCase().includes(trimmed)) return true;
     if (item.kicker.toLowerCase().includes(trimmed)) return true;
     if (item.path.toLowerCase().includes(trimmed)) return true;
-    if (
-      item.keywords?.some((k) => k.toLowerCase().includes(trimmed))
-    ) {
+    if (item.keywords?.some((k) => k.toLowerCase().includes(trimmed))) {
       return true;
     }
     return false;
