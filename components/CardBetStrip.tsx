@@ -10,6 +10,7 @@ import {
   CROWD_LINE_MIN,
   type MarketTally,
 } from "@/lib/predictions-market";
+import { matchHasStarted } from "@/lib/matches";
 
 // ── ZONE 27 · Card Bet Strip ─────────────────────────────
 // 首頁 / 賽事列表市場卡上的一鍵押 + 群眾市場線。
@@ -25,11 +26,18 @@ type Props = {
   matchId: string;
   homeName: string;
   awayName: string;
+  /** 開賽 instant ISO · 開賽後封盤(先鎖後結 · 防賽後補登)· 缺則 fail-open */
+  startISO?: string | null;
 };
 
-type Status = "loading" | "logged-out" | "open" | "locked";
+type Status = "loading" | "logged-out" | "open" | "locked" | "closed";
 
-export default function CardBetStrip({ matchId, homeName, awayName }: Props) {
+export default function CardBetStrip({
+  matchId,
+  homeName,
+  awayName,
+  startISO,
+}: Props) {
   const [status, setStatus] = useState<Status>("loading");
   const [myPick, setMyPick] = useState<"home" | "away" | null>(null);
   const [tally, setTally] = useState<MarketTally | null>(null);
@@ -39,6 +47,9 @@ export default function CardBetStrip({ matchId, homeName, awayName }: Props) {
   useEffect(() => {
     let cancelled = false;
     (async () => {
+      // 先鎖後結:已開賽即封盤(client 端算 · effect 內 · 無 hydration 風險)·
+      // 已押的人仍看得到自己那手(locked 優先於 closed)。
+      const started = matchHasStarted(startISO);
       // 1) 先定押注狀態 · getSession 讀本地 session(不卡網路)→ 押注閘門/按鈕
       //    立刻出現,不被下面的群眾線網路抓取拖住(原本 await tally 在前會卡 skeleton)。
       try {
@@ -46,15 +57,15 @@ export default function CardBetStrip({ matchId, homeName, awayName }: Props) {
         const { data } = await supabase.auth.getSession();
         if (cancelled) return;
         if (!data.session) {
-          setStatus("logged-out");
+          setStatus(started ? "closed" : "logged-out");
         } else {
           const mine = await getMyPrediction(matchId);
           if (cancelled) return;
           setMyPick(mine);
-          setStatus(mine ? "locked" : "open");
+          setStatus(mine ? "locked" : started ? "closed" : "open");
         }
       } catch {
-        if (!cancelled) setStatus("logged-out");
+        if (!cancelled) setStatus(started ? "closed" : "logged-out");
       }
       // 2) 群眾線另外抓 · 慢就慢 · 不阻擋押注動作
       const t = await getMatchTally(matchId);
@@ -63,7 +74,7 @@ export default function CardBetStrip({ matchId, homeName, awayName }: Props) {
     return () => {
       cancelled = true;
     };
-  }, [matchId]);
+  }, [matchId, startISO]);
 
   // 會員押注 · Supabase(server 端 getUser 再驗一次身分)
   const enterMember = async (pick: "home" | "away") => {
@@ -134,6 +145,13 @@ export default function CardBetStrip({ matchId, homeName, awayName }: Props) {
 
       {status === "loading" && (
         <div className="h-10 skeleton rounded" aria-hidden="true" />
+      )}
+
+      {/* 已開賽 · 封盤(先鎖後結)· 群眾線仍看得到 · 只是不再收新押注 */}
+      {status === "closed" && (
+        <p className="text-center py-1.5 font-mono text-mute/60 text-[9px] tracking-[0.2em] leading-relaxed">
+          已開賽 · 封盤 · 押注賽前才收
+        </p>
       )}
 
       {/* 沒登入 → 押注要先成為免費會員(看免費 · 押要登入)*/}

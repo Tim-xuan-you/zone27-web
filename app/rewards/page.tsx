@@ -6,7 +6,7 @@ import RelatedReading from "@/components/RelatedReading";
 import FounderSignOff from "@/components/FounderSignOff";
 import ArticleMeta from "@/components/ArticleMeta";
 import EngineStamp from "@/components/EngineStamp";
-import { getSession } from "@/lib/supabase/server";
+import { getUser } from "@/lib/supabase/server";
 import { aggregatePredictionStats } from "@/lib/predictions";
 import { getMyPredictionsMap } from "@/lib/predictions-server";
 import { getFinalizedMatches, getMatchStartIso, type Match } from "@/lib/matches";
@@ -107,10 +107,11 @@ const RULES = [
 ];
 
 export default async function RewardsPage() {
-  const session = await getSession();
+  // getUser()(server 再驗身分)· 不用可偽造的 getSession 做 per-user 資料抓取
+  const user = await getUser();
   // 接通押注電線(Wave 2)· 點數改讀 0003 predictions 表(0006 RPC)·
   // 不再讀已無人寫入的 user_metadata = 修「押了卻 0 點」死讀。
-  const predictionsMap = session ? await getMyPredictionsMap() : {};
+  const predictionsMap = user ? await getMyPredictionsMap() : {};
   const finalized: Match[] = getFinalizedMatches();
   const matchSummaries = finalized.map((m) => ({
     id: m.id,
@@ -181,7 +182,7 @@ export default async function RewardsPage() {
           >
             / YOUR POINTS · 您累計
           </p>
-          {session ? (
+          {user ? (
             <AuthedPointsBlock
               points={points}
               pending={pending}

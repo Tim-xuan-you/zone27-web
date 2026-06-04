@@ -1879,6 +1879,31 @@ export function getMatchStartIso(match: Match): string | null {
   return `${dateIso}T${hh.padStart(2, "0")}:${mm}:00+08:00`;
 }
 
+/** 比賽是否已開賽 · 用於「先鎖後結」UI write-guard:押注 / 發分析的輸入元件
+ *  在開賽後關閉(client 端 · 在 effect 裡呼叫 · 不在 render 期算 = 無 hydration 風險)。
+ *  缺 startISO / 無法解析 → false(fail-open · 不誤鎖正當賽前押注)。
+ *  ⚠ 這是顯示層第二道防線;server 端 submit RPC 仍應拒收開賽後寫入
+ *  (belt-and-suspenders · 見 TODO 安全項「公開天梯上線前必補」)。 */
+export function matchHasStarted(startISO: string | null | undefined): boolean {
+  if (!startISO) return false;
+  const start = Date.parse(startISO);
+  if (Number.isNaN(start)) return false;
+  return Date.now() >= start;
+}
+
+/** 引擎開盤偏好的一邊 · 平手(home==away)回 null = 引擎無偏好(不硬塞一邊)。
+ *  全站 favorite 判定的單一來源 · 解掉散落各處 `>=` 把 50/50 也算 home 的不一致
+ *  (對齊 getCalibration 平手 = push 的語意 · 校準誠實品牌不能在這留接縫)。 */
+export function getEngineFavorite(
+  match: Match | undefined
+): "home" | "away" | null {
+  if (!match) return null;
+  const h = match.home.winRate;
+  const a = match.away.winRate;
+  if (h === a) return null;
+  return h > a ? "home" : "away";
+}
+
 /** True when the match's date is in the PAST relative to Taipei today.
  *  Used to render a "DATA · ARCHIVED" badge — predictions can be
  *  evaluated against actual outcome. */

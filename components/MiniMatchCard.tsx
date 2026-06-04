@@ -4,6 +4,8 @@ import {
   getMatchPhase,
   getCalibration,
   getEnginePctOnWinner,
+  getEngineFavorite,
+  getMatchStartIso,
   type Match,
   type MatchPhase,
   type Calibration,
@@ -64,7 +66,10 @@ export default function MiniMatchCard({ match }: { match: Match }) {
   // ingestion time · NOT re-sampled per visitor.
   const homePct = match.home.winRate;
   const awayPct = match.away.winRate;
-  const homeFav = homePct >= awayPct;
+  // 統一 favorite 判定(平手回 null = 兩邊都不上金 · 不硬塞一邊)· per getEngineFavorite
+  const fav = getEngineFavorite(match);
+  const homeFav = fav === "home";
+  const awayFav = fav === "away";
   // 引擎信心溫度 · 純衍生(favorite 的 %)· per lib/conviction.ts
   const favPct = Math.max(homePct, awayPct);
   const dogPct = Math.min(homePct, awayPct);
@@ -135,7 +140,7 @@ export default function MiniMatchCard({ match }: { match: Match }) {
           </span>
           <span
             className={`font-mono text-xl sm:text-2xl tabular tracking-tight ${
-              !homeFav ? "text-gold" : "text-mute"
+              awayFav ? "text-gold" : "text-mute"
             }`}
           >
             {awayPct}
@@ -158,7 +163,7 @@ export default function MiniMatchCard({ match }: { match: Match }) {
             style={{ width: `${homePct}%` }}
           />
           <div
-            className={`h-full ${!homeFav ? "bg-gold glow-gold" : "bg-mute/45"}`}
+            className={`h-full ${awayFav ? "bg-gold glow-gold" : "bg-mute/45"}`}
             style={{ width: `${awayPct}%` }}
           />
           {/* 不確定性接縫 · 兩邊機率交界羽化一道柔光 = 視覺上「這是機率,不是鐵口」·
@@ -198,6 +203,7 @@ export default function MiniMatchCard({ match }: { match: Match }) {
           matchId={match.id}
           homeName={match.home.name}
           awayName={match.away.name}
+          startISO={getMatchStartIso(match)}
         />
       )}
 

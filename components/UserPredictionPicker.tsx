@@ -10,6 +10,7 @@ import {
   CROWD_LINE_MIN,
   type MarketTally,
 } from "@/lib/predictions-market";
+import { matchHasStarted } from "@/lib/matches";
 
 // ── ZONE 27 · 進場預測 / Market Predict ─────────────────
 // 一場比賽唯一的押注 widget。 R188(2026-06-03 · Tim 拍板「要註冊才能押」)·
@@ -24,10 +25,12 @@ type Props = {
   matchId: string;
   homeName: string;
   awayName: string;
-  /** Pre-game engine pick(home/away ≥50%)· 用於「對照引擎」 framing */
-  engineHomePicked: boolean;
+  /** 引擎開盤偏好的一邊 · null = 引擎無偏好(50/50)· 用於「對照引擎」 framing */
+  engineFavorite: "home" | "away" | null;
   /** Final result if ingested · 控制 verdict 顯示 + 鎖進場 */
   finalWinner?: "home" | "away" | "tie" | null;
+  /** 開賽 instant ISO · 開賽後關閉押注(先鎖後結 · 防賽後補登)· 缺則 fail-open */
+  startISO?: string | null;
 };
 
 type Auth = "loading" | "logged-out" | "member";
@@ -36,18 +39,22 @@ export default function UserPredictionPicker({
   matchId,
   homeName,
   awayName,
-  engineHomePicked,
+  engineFavorite,
   finalWinner,
+  startISO,
 }: Props) {
   const [auth, setAuth] = useState<Auth>("loading");
   const [myPick, setMyPick] = useState<"home" | "away" | null>(null);
   const [tally, setTally] = useState<MarketTally | null>(null);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  // 先鎖後結:已開賽即封盤(client 端算 · effect 內 · 無 hydration 風險)
+  const [started, setStarted] = useState(false);
 
   useEffect(() => {
     let cancelled = false;
     (async () => {
+      if (!cancelled) setStarted(matchHasStarted(startISO));
       // 1) 先定登入狀態 · getSession 讀本地 session(不卡網路)→ 押注按鈕/閘門
       //    立刻出現,不被下面的群眾線網路抓取拖住。
       try {
@@ -72,7 +79,7 @@ export default function UserPredictionPicker({
     return () => {
       cancelled = true;
     };
-  }, [matchId]);
+  }, [matchId, startISO]);
 
   // 會員押注 · Supabase
   const enterMember = async (pick: "home" | "away") => {
@@ -95,6 +102,8 @@ export default function UserPredictionPicker({
   };
 
   const locked = auth === "member" && myPick !== null;
+  // 封盤 = 已結算 OR 已開賽(先鎖後結 · 防賽後補登)· 已押的人仍看得到自己那手
+  const closed = !!finalWinner || started;
   const loginHref = `/login?next=${encodeURIComponent(`/matches/${matchId}`)}`;
 
   return (
@@ -146,15 +155,17 @@ export default function UserPredictionPicker({
           </p>
         )}
 
-        {/* 賽事已結束 · 不可進場(不分登入)*/}
-        {auth !== "loading" && finalWinner && !locked && (
-          <p className="font-mono text-mute/60 text-[10px] tracking-[0.25em]">
-            此場已結束 · 已無法進場(先鎖後結 · 防賽後補登)
+        {/* 已封盤 · 不可進場(不分登入)· 已結算 vs 已開賽 不同說法 */}
+        {auth !== "loading" && closed && !locked && (
+          <p className="font-mono text-mute/60 text-[10px] tracking-[0.25em] leading-relaxed">
+            {finalWinner
+              ? "此場已結束 · 已無法進場(先鎖後結 · 防賽後補登)"
+              : "此場已開賽 · 已封盤 · 押注賽前才收(先鎖後結 · 防賽後補登)"}
           </p>
         )}
 
-        {/* 沒登入 + 未結束 → 押要先成為免費會員 */}
-        {auth === "logged-out" && !finalWinner && (
+        {/* 沒登入 + 未封盤 → 押要先成為免費會員 */}
+        {auth === "logged-out" && !closed && (
           <>
             <Link
               href={loginHref}
@@ -168,18 +179,19 @@ export default function UserPredictionPicker({
           </>
         )}
 
-        {/* 會員 + 未結束 + 未押 → 押 */}
-        {auth === "member" && !locked && !finalWinner && (
+        {/* 會員 + 未封盤 + 未押 → 押 · 引擎無偏好(50/50)時兩邊都標「引擎也難分」
+            (不硬塞一邊當「同側/相反」= 校準誠實品牌不在這留接縫)*/}
+        {auth === "member" && !locked && !closed && (
           <div className="grid grid-cols-2 gap-2">
             <PickButton
               label={`押 ${homeName.slice(0, 5)}`}
-              mark={engineHomePicked ? "引擎同側" : "與引擎相反"}
+              mark={engineMark("home", engineFavorite)}
               disabled={saving}
               onClick={() => enterMember("home")}
             />
             <PickButton
               label={`押 ${awayName.slice(0, 5)}`}
-              mark={!engineHomePicked ? "引擎同側" : "與引擎相反"}
+              mark={engineMark("away", engineFavorite)}
               disabled={saving}
               onClick={() => enterMember("away")}
             />
@@ -292,6 +304,15 @@ function CrowdLine({
       </p>
     </div>
   );
+}
+
+/** 這一邊相對引擎開盤的位置 · 引擎無偏好(null)→ 兩邊都「引擎也難分」(誠實) */
+function engineMark(
+  side: "home" | "away",
+  favorite: "home" | "away" | null
+): string {
+  if (favorite === null) return "引擎也難分";
+  return side === favorite ? "引擎同側" : "與引擎相反";
 }
 
 function PickButton({

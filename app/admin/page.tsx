@@ -6,7 +6,7 @@ import FounderSignOff from "@/components/FounderSignOff";
 import ArticleMeta from "@/components/ArticleMeta";
 import { matches, getFinalizedMatches } from "@/lib/matches";
 import { getWaitlistCount } from "@/lib/waitlist-stats";
-import { getSession } from "@/lib/supabase/server";
+import { getUser } from "@/lib/supabase/server";
 import AdminTierSwitcher from "@/components/AdminTierSwitcher";
 import TierFeatureMatrix from "@/components/TierFeatureMatrix";
 import AdminConsole from "@/components/AdminConsole";
@@ -53,11 +53,26 @@ export default async function AdminPage() {
   // preview。 不是 admin gate(任何 logged-in user 都看得到)· 只是給
   // Tim visual confirmation 他 auth 鏈通了。 真正的 admin actions
   // gate 是 Stage 2 後台 · 還沒 ship。
-  const session = await getSession();
+  // getUser()(server 再驗身分)· 不用可偽造的 getSession · 並用它 gate 數字
+  const user = await getUser();
   const waitlistCount = await getWaitlistCount();
   const finalizedCount = getFinalizedMatches().length;
   const ingestedCount = matches.length;
   const pendingIngest = matches.filter((m) => !m.finalResult).length;
+  // stealth 紀律:等候名單人數只給登入者(= 實務上只有 Tim)看 · 匿名訪客看不到
+  // 真實人數(後台設計仍公開展示 = disclosure philosophy · 但 stealth 期間不洩用戶量)
+  const waitlistValue = !user
+    ? "—"
+    : waitlistCount === -1
+    ? "—"
+    : waitlistCount;
+  const waitlistHint = !user
+    ? "登入後可見 · stealth 期間不對訪客顯示用戶量"
+    : waitlistCount === -1
+    ? "Supabase RPC 暫時不可達 · 請開 Supabase Studio 確認"
+    : waitlistCount === 0
+    ? "尚無人加入 · 等第一個早鳥"
+    : `${waitlistCount} 個 email · Supabase Tokyo`;
 
   return (
     <div className="flex flex-col flex-1 min-h-screen">
@@ -79,13 +94,13 @@ export default async function AdminPage() {
             >
               只有你看得到
             </span>
-            {session && (
+            {user && (
               <span
                 lang="en"
                 className="font-mono text-[9px] tracking-[0.3em] px-1.5 py-0.5 border border-gold/60 text-gold shimmer"
-                title={`您 logged in as ${session.user.email}`}
+                title={`您 logged in as ${user.email}`}
               >
-                ✓ SESSION · {session.user.email}
+                ✓ SESSION · {user.email}
               </span>
             )}
           </div>
@@ -238,14 +253,8 @@ export default async function AdminPage() {
             <KpiCard
               label="WAITLIST"
               zh="等候名單"
-              value={waitlistCount === -1 ? "—" : waitlistCount}
-              hint={
-                waitlistCount === -1
-                  ? "Supabase RPC 暫時不可達 · 請開 Supabase Studio 確認"
-                  : waitlistCount === 0
-                  ? "尚無人加入 · 等第一個早鳥"
-                  : `${waitlistCount} 個 email · Supabase Tokyo`
-              }
+              value={waitlistValue}
+              hint={waitlistHint}
             />
             <KpiCard
               label="MATCHES"

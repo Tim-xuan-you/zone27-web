@@ -18,6 +18,8 @@ import {
   getMatchPhase,
   getCalibration,
   getEnginePctOnWinner,
+  getEngineFavorite,
+  getMatchStartIso,
   getTodayMatches,
   getFinalizedMatches,
   type Match,
@@ -66,10 +68,14 @@ export default async function MatchDetailPage({
   if (!match) notFound();
 
   const m = match as Match;
-  const homeFavored = m.home.winRate > m.away.winRate;
+  // 統一 favorite 判定(平手 null = 兩邊都不上金)· 解掉散落的 `>=` / `>` 不一致
+  const fav = getEngineFavorite(m);
+  const homeFavored = fav === "home";
+  const awayFavored = fav === "away";
   const phase = getMatchPhase(m);
   const calibration = getCalibration(m);
   const enginePctOnWinner = getEnginePctOnWinner(m);
+  const startISO = getMatchStartIso(m);
 
   return (
     <div className="flex flex-col flex-1 min-h-screen">
@@ -116,7 +122,7 @@ export default async function MatchDetailPage({
               <p className="font-mono text-mute text-[9px] tracking-[0.3em] mb-1">主 HOME</p>
               <h2
                 className={`text-2xl sm:text-4xl font-light tracking-tight leading-[1] ${
-                  m.home.winRate >= m.away.winRate ? "text-gold" : "text-bone/70"
+                  homeFavored ? "text-gold" : "text-bone/70"
                 }`}
               >
                 {m.home.name}
@@ -130,7 +136,7 @@ export default async function MatchDetailPage({
               <p className="font-mono text-mute text-[9px] tracking-[0.3em] mb-1">客 AWAY</p>
               <h2
                 className={`text-2xl sm:text-4xl font-light tracking-tight leading-[1] ${
-                  m.away.winRate > m.home.winRate ? "text-gold" : "text-bone/70"
+                  awayFavored ? "text-gold" : "text-bone/70"
                 }`}
               >
                 {m.away.name}
@@ -165,7 +171,7 @@ export default async function MatchDetailPage({
               </span>
               <span
                 className={`font-mono tabular tracking-tight ${
-                  !homeFavored ? "text-gold" : "text-mute"
+                  awayFavored ? "text-gold" : "text-mute"
                 } text-5xl sm:text-6xl font-light`}
               >
                 {m.away.winRate}
@@ -182,7 +188,7 @@ export default async function MatchDetailPage({
                 style={{ width: `${m.home.winRate}%` }}
               />
               <div
-                className={`h-full ${!homeFavored ? "bg-gold glow-gold" : "bg-mute/45"}`}
+                className={`h-full ${awayFavored ? "bg-gold glow-gold" : "bg-mute/45"}`}
                 style={{ width: `${m.away.winRate}%` }}
               />
             </div>
@@ -206,8 +212,9 @@ export default async function MatchDetailPage({
             matchId={m.id}
             homeName={m.home.name}
             awayName={m.away.name}
-            engineHomePicked={m.home.winRate >= m.away.winRate}
+            engineFavorite={fav}
             finalWinner={m.finalResult?.winner ?? null}
+            startISO={startISO}
           />
 
           {/* 這題怎麼算贏 · 預測市場第一信任機制(賭徒最怕模糊結算)· 補全球標竿研究「缺的靈魂①」 */}
@@ -249,7 +256,7 @@ export default async function MatchDetailPage({
                     {Math.max(m.home.winRate, m.away.winRate)}%
                   </p>
                   <p className="font-mono text-gold/70 text-[10px] mt-1">
-                    {m.home.winRate >= m.away.winRate ? m.home.name : m.away.name} W
+                    {homeFavored ? m.home.name : m.away.name} W
                   </p>
                 </div>
                 <div className="text-right">
@@ -293,6 +300,7 @@ export default async function MatchDetailPage({
             homeName={m.home.name}
             awayName={m.away.name}
             finalWinner={m.finalResult?.winner ?? null}
+            startISO={startISO}
             finalResults={Object.fromEntries(
               getFinalizedMatches().map((fm) => [
                 fm.id,

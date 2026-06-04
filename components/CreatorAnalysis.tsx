@@ -26,6 +26,7 @@ import {
   submitCreatorComment,
   type CreatorComment,
 } from "@/lib/creator-comments";
+import { matchHasStarted } from "@/lib/matches";
 
 // ── ZONE 27 · CreatorAnalysis · 創作者賣分析(migration 0005)──────
 // Tim 2026-05-30 報馬仔/明燈 screenshot · 要:發文 + 推薦賽事(選邊)+ 寫分析 +
@@ -56,6 +57,8 @@ type Props = {
   finalWinner?: "home" | "away" | "tie" | null;
   /** 全站已結算賽果 map · 給作者戰績 badge 評分用(賽果在 app 端 · 不在 DB)*/
   finalResults?: Record<string, "home" | "away" | "tie">;
+  /** 開賽 instant ISO · 開賽後關閉「發新分析」(選邊賽前鎖 · 賽後只能討論)· 缺則 fail-open */
+  startISO?: string | null;
 };
 
 export default function CreatorAnalysis({
@@ -64,8 +67,12 @@ export default function CreatorAnalysis({
   awayName,
   finalWinner,
   finalResults = {},
+  startISO,
 }: Props) {
   const [status, setStatus] = useState<Status>("loading");
+  // 先鎖後結:已開賽即不收新分析(選邊會進「已驗證準度」徽章 · 賽後補發=可造假
+  // → 反轉品牌命門)· 留言討論不受影響(那層不評分)。 effect 內算 · 無 hydration 風險。
+  const [started, setStarted] = useState(false);
   const [posts, setPosts] = useState<CreatorPost[]>([]);
   const [records, setRecords] = useState<Record<string, AuthorRecord>>({});
   const [title, setTitle] = useState("");
@@ -80,6 +87,7 @@ export default function CreatorAnalysis({
   useEffect(() => {
     let cancelled = false;
     (async () => {
+      if (!cancelled) setStarted(matchHasStarted(startISO));
       const list = await getCreatorPosts(matchId);
       if (!cancelled) setPosts(list);
       // 作者公開戰績 · 撈全站選邊紀錄 → 對賽果評分 → 每位作者命中率(badge 用)
@@ -116,7 +124,7 @@ export default function CreatorAnalysis({
     return () => {
       cancelled = true;
     };
-  }, [matchId]);
+  }, [matchId, startISO]);
 
   const submit = async () => {
     const t = title.trim();
@@ -226,7 +234,17 @@ export default function CreatorAnalysis({
           </div>
         )}
 
-        {status === "open" && (
+        {/* 已開賽 · 不收新分析(選邊賽前鎖死才算數)· 但討論不擋:到任一篇下面留言 */}
+        {status === "open" && started && (
+          <p className="font-mono text-mute/70 text-[10px] tracking-[0.2em] leading-relaxed">
+            ▸ 此場已開賽 · 不再收新分析 ——
+            <span className="text-mute/85">推薦選邊賽前鎖死才算進「已驗證準度」</span>
+            (賽後補發 = 報馬仔挑窗,正是這裡要擋的)。 想聊?到上面任一篇分析下面
+            <span className="text-gold/80">留言、回覆作者</span>都可以。
+          </p>
+        )}
+
+        {status === "open" && !started && (
           <div className="space-y-3">
             <input
               type="text"
