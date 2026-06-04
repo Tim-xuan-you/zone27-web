@@ -27,6 +27,7 @@ import {
   type Calibration,
 } from "@/lib/matches";
 import { getEngineConviction } from "@/lib/conviction";
+import { getEngineReasoning, type EngineReasoning } from "@/lib/reasoning";
 
 // ── ZONE 27 · /matches/[gameId] · 市場頁(R175 Polymarket pivot)──
 // Tim 2026-05-30「資訊多到爆炸 · 划不到底 · 該刪就刪 · 變成 Polymarket」·
@@ -229,13 +230,24 @@ export default async function MatchDetailPage({
               這題怎麼算贏
             </p>
             <p className="text-mute/85 text-[12px] sm:text-[13px] leading-relaxed">
-              以 <span className="text-bone">CPBL 官網最終比分</span>為準 · 賽後自動結算:分數高的隊贏 · 你押對掛 ✓、押錯掛 ✕(連輸都留著、刪不掉)。<span className="text-mute/70"> 延賽順延到補賽日才算 · 和局兩邊都不算贏。</span>
+              以 <span className="text-bone">CPBL 官網最終比分</span>為準,<span className="text-bone">不是我們說了算</span> —— 分數高的隊贏。 賽後自動對帳:押對掛 ✓、押錯掛 ✕,<span className="text-bone">命中、落空都留著,刪不掉</span>。<span className="text-mute/70"> 延賽順延到補賽日才算 · 和局兩邊都不算贏。</span>
             </p>
           </div>
 
           <div className="mt-3 flex justify-end">
             <CopyLinkButton refTag={`match-${m.id}`} />
           </div>
+        </section>
+
+        {/* ── 引擎為什麼這樣看 · 每場推理 + 盲點 ──────────
+            全球研究「缺的靈魂 #2」(Bill James 多軸 + Silver steelman)·
+            對手永遠不公布「我的方法看不到什麼」· 自我拆解 = 結構性學不來的 costly signal。
+            純衍生既有真實資料(投手 ERA/BB9 + 主場)· 0 vapor · 見 lib/reasoning.ts。 */}
+        <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-8 border-t border-line/40 pt-8">
+          <p className="font-mono text-mute text-[9px] tracking-[0.4em] mb-5">
+            / 引擎為什麼這樣看
+          </p>
+          <EngineReasoningBlock reasoning={getEngineReasoning(m)} />
         </section>
 
         {/* ── RECEIPT · 賽後結果(only when final)─────── */}
@@ -401,6 +413,52 @@ export default async function MatchDetailPage({
 }
 
 // ── Sub-components ─────────────────────────────────────
+
+function EngineReasoningBlock({ reasoning }: { reasoning: EngineReasoning }) {
+  return (
+    <div className="space-y-5">
+      {/* ① 看到什麼 · 逐項(含方向 · 偏某隊 = 金色左框 · 打平 = 灰)*/}
+      <div className="space-y-3">
+        {reasoning.factors.map((f) => (
+          <div
+            key={f.label}
+            className={`pl-3 border-l-2 ${
+              f.lean === "even" ? "border-line/50" : "border-gold/40"
+            }`}
+          >
+            <p className="font-mono text-mute text-[9px] tracking-[0.3em] mb-0.5">
+              {f.label}
+            </p>
+            <p className="text-bone/85 text-[13px] sm:text-sm leading-relaxed">
+              {f.detail}
+            </p>
+          </div>
+        ))}
+      </div>
+
+      {/* ②③ 誠實層 · 盲點 + 什麼情況會錯(moat · 對手學不來)·
+          收進一個低調框 · 跟上方推理視覺分層 = 後設的自我拆解 */}
+      <div className="bg-slate/30 border border-line/60 px-4 py-3.5 space-y-3">
+        <div>
+          <p className="font-mono text-mute/70 text-[9px] tracking-[0.3em] mb-1">
+            哪裡可能看走眼
+          </p>
+          <p className="text-mute/85 text-[12px] sm:text-[13px] leading-relaxed">
+            {reasoning.blindSpots}
+          </p>
+        </div>
+        <div className="border-t border-line/40 pt-3">
+          <p className="font-mono text-mute/70 text-[9px] tracking-[0.3em] mb-1">
+            什麼情況我們會錯
+          </p>
+          <p className="text-mute/85 text-[12px] sm:text-[13px] leading-relaxed">
+            {reasoning.wrongWhen}
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 function PitcherCard({
   side,
