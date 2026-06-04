@@ -76,3 +76,26 @@ export function readDisplayName(
   const n = meta["display_name"];
   return typeof n === "string" ? n.trim() : "";
 }
+
+// ── 隊伍視覺身分 · 真隊色(調過)+ 中文單字隊徽 ──────────────
+// R197 Tim「隊徽要用各隊真隊色嗎?」→ 要(辨識度 · 球迷靠顏色秒認隊)· 但工藝處理:
+//   · 富邦藍 #1E3A8A 跟深藍底幾乎隱形 → 提亮成天藍
+//   · 樂天紅 / 味全紅 兩支撞色 → 味全偏緋紅、樂天偏橘紅,微分開
+//   · 全部夠亮可在深藍底辨認 · 當「小重點(字+細框)」不當大色塊(守不變賭場)
+// 中文單字隊徽(兄/統/樂/富/龍/台)· 台灣球迷秒懂 · 勝過模糊的拉丁字母(G/W/R)。
+// 平面(非 3D 吉祥物)= ESPN/The Athletic/Polymarket 運動的高級語彙,非玩運彩立體 logo。
+// keyword 比對(富邦/統一… 永遠是隊名子字串)· 比 getTeamByName 精確比對更耐名稱變體。
+const TEAM_IDENTITY: { kw: string; color: string; glyph: string }[] = [
+  { kw: "富邦", color: "#5E8FD8", glyph: "富" }, // 富邦藍 → 提亮天藍(原 #1E3A8A 會隱形)
+  { kw: "統一", color: "#F0863C", glyph: "統" }, // 統一橘
+  { kw: "兄弟", color: "#E6C04A", glyph: "兄" }, // 兄弟黃
+  { kw: "樂天", color: "#E85C4A", glyph: "樂" }, // 樂天紅(偏橘紅)
+  { kw: "味全", color: "#D44E6E", glyph: "龍" }, // 味全紅(偏緋 · 跟樂天分開)
+  { kw: "台鋼", color: "#2FB08C", glyph: "台" }, // 台鋼綠(偏 teal · 提亮)
+];
+
+export function teamIdentity(
+  name: string,
+): { color: string; glyph: string } | null {
+  return TEAM_IDENTITY.find((t) => name.includes(t.kw)) ?? null;
+}

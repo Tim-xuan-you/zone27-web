@@ -2,6 +2,7 @@ import Link from "next/link";
 import CardBetStrip from "@/components/CardBetStrip";
 import MarketSplitBar from "@/components/MarketSplitBar";
 import Avatar from "@/components/Avatar";
+import { teamIdentity } from "@/lib/identity";
 import {
   getMatchPhase,
   getCalibration,
@@ -76,6 +77,9 @@ export default function MiniMatchCard({ match }: { match: Match }) {
   const favPct = Math.max(homePct, awayPct);
   const dogPct = Math.min(homePct, awayPct);
   const conviction = getEngineConviction(favPct);
+  // 隊徽:真隊色(調過 · 深藍底可辨)+ 中文單字 · 球迷靠顏色秒認隊(辨識度)
+  const homeTeam = teamIdentity(match.home.name);
+  const awayTeam = teamIdentity(match.away.name);
 
   return (
     <article
@@ -110,7 +114,7 @@ export default function MiniMatchCard({ match }: { match: Match }) {
             HOME
           </p>
           <div className="flex items-center gap-1.5">
-            <Avatar seed={match.home.name} size={22} />
+            <Avatar seed={match.home.name} size={22} glyph={homeTeam?.glyph} color={homeTeam?.color} />
             <h3 className="text-bone text-sm @[260px]/card:text-base font-light tracking-tight leading-snug">
               {match.home.name}
             </h3>
@@ -127,7 +131,7 @@ export default function MiniMatchCard({ match }: { match: Match }) {
             <h3 className="text-bone text-sm @[260px]/card:text-base font-light tracking-tight leading-snug">
               {match.away.name}
             </h3>
-            <Avatar seed={match.away.name} size={22} />
+            <Avatar seed={match.away.name} size={22} glyph={awayTeam?.glyph} color={awayTeam?.color} />
           </div>
           <p className="font-mono text-mute/70 text-[9px] tracking-[0.2em] mt-1 leading-snug">
             P · {match.away.pitcher.name}
