@@ -184,7 +184,7 @@ export const COMMAND_ITEMS: CommandItem[] = [
     ],
   },
   {
-    label: "即時引擎 · 模擬實驗室",
+    label: "推演引擎 · 模擬實驗室",
     kicker: "/lab",
     path: "/lab",
     group: "賽事 · 引擎",
@@ -192,7 +192,8 @@ export const COMMAND_ITEMS: CommandItem[] = [
       "lab",
       "engine",
       "simulator",
-      "引擎",
+      "推演引擎",
+      "推演",
       "引擎",
       "模擬",
       "勝率",
@@ -202,7 +203,6 @@ export const COMMAND_ITEMS: CommandItem[] = [
       "演算",
       "勝負",
       "賠率",
-      "引擎",
     ],
   },
   {

@@ -9,7 +9,7 @@ import type { Metadata } from "next";
 // ─────────────────────────────────────────────────────
 
 export const metadata: Metadata = {
-  title: "Lab — 引擎實驗室",
+  title: "Lab — 推演引擎實驗室",
   description:
     "親眼看引擎在您的瀏覽器內跑 10,000 場虛擬比賽 — 從亂數收斂為穩定勝率分布,再用文字直播一場 9 局逐打席的虛擬戰局。",
 };

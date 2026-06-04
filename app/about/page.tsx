@@ -9,7 +9,7 @@ import ArticleMeta from "@/components/ArticleMeta";
 export const metadata: Metadata = {
   title: "About — 我們不是博彩公司,是相信數字比運氣誠實的棒球迷",
   description:
-    "ZONE 27 的品牌方法論、引擎背後的哲學、以及為什麼是 27。",
+    "ZONE 27 的品牌方法論、推演引擎背後的哲學、以及為什麼是 27。",
 };
 
 export default function AboutPage() {
@@ -187,7 +187,7 @@ export default function AboutPage() {
         <p>
           <strong className="text-gold">A.</strong>
           沒有人能準確預測單場比賽。但用 10,000
-          次引擎模擬出的機率分布,比直覺、運勢、神祕學有意義 100 倍。
+          次推演引擎模擬出的機率分布,比直覺、運勢、神祕學有意義 100 倍。
         </p>
         <p>
           <strong className="text-gold">B.</strong>
@@ -206,7 +206,7 @@ export default function AboutPage() {
         no="03"
         en="THE METHOD"
         zh="方法論"
-        kicker="引擎四步驟"
+        kicker="推演引擎四步驟"
       >
         <p>
           每一場比賽出現在 ZONE 27,都經歷四個獨立步驟。沒有星座、沒有命盤、沒有靠感覺報牌。

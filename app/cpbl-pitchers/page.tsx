@@ -819,7 +819,7 @@ export default async function CpblPitchersPage({
               這就是進階數據的核心:
               <strong className="text-bone">用數字問更好的問題</strong>,不是
               用數字 mute 觀察。 排行只是入口 · 真正的洞察在 /matches
-              引擎模擬 + /track-record 賽後對賬。
+              推演引擎模擬 + /track-record 賽後對賬。
             </p>
           </div>
           <div className="mt-7 grid sm:grid-cols-3 gap-3">
@@ -834,7 +834,7 @@ export default async function CpblPitchersPage({
                 / MATCHES
               </p>
               <p className="text-bone text-sm leading-snug group-hover:text-gold transition-colors">
-                今日 CPBL 賽事 + 引擎模擬
+                今日 CPBL 賽事 + 推演引擎模擬
               </p>
             </Link>
             <Link

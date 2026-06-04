@@ -165,11 +165,11 @@ export default function MiniMatchCard({ match }: { match: Match }) {
           // 銅板局:把「連引擎都難分」當主打 · gold 讓它在看板 grid 裡跳出來
           //(Polymarket「勢均力敵盤=主角」+ /calibration 57% 誠實護城河 · 不裝鐵口)
           <p className="mt-1.5 text-center font-mono text-gold/90 text-[9px] tracking-[0.12em] leading-snug">
-            勢均力敵 · 連引擎都只敢說 {favPct} / {dogPct}
+            勢均力敵 · 連推演都只敢說 {favPct} / {dogPct}
           </p>
         ) : (
           <p className="mt-1.5 text-center font-mono text-mute/65 text-[9px] tracking-[0.12em] leading-snug">
-            引擎開盤{conviction.tier === "strong" ? "重壓" : "看好"}{" "}
+            推演開盤{conviction.tier === "strong" ? "重壓" : "看好"}{" "}
             <span className="text-gold/80">
               {homeFav ? match.home.name : match.away.name}
             </span>

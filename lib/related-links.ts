@@ -32,7 +32,7 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
     {
       href: "/matches",
       kicker: "matches",
-      title: "今日 CPBL 賽事 + 引擎模擬 · 看誰先發",
+      title: "今日 CPBL 賽事 + 推演引擎模擬 · 看誰先發",
     },
     {
       href: "/methodology",
@@ -150,7 +150,7 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
     {
       href: "/methodology",
       kicker: "methodology",
-      title: "引擎白皮書",
+      title: "推演引擎白皮書",
     },
   ],
   "/faq": [
@@ -202,7 +202,7 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
     {
       href: "/lab",
       kicker: "lab",
-      title: "親手跑一場引擎模擬",
+      title: "親手跑一場推演引擎模擬",
     },
     {
       href: "/founders",
@@ -336,7 +336,7 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
     {
       href: "/lab",
       kicker: "lab",
-      title: "親手跑一場引擎模擬",
+      title: "親手跑一場推演引擎模擬",
     },
     {
       href: "/methodology",

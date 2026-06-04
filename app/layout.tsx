@@ -51,6 +51,7 @@ export const metadata: Metadata = {
     "中華職棒",
     "CPBL",
     "MLB",
+    "推演引擎",
     "引擎",
     "棒球數據",
     "Sabermetrics",

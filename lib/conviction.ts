@@ -24,6 +24,6 @@ export type EngineConviction = {
  */
 export function getEngineConviction(favPct: number): EngineConviction {
   if (favPct <= 53) return { tier: "tossup", label: "勢均力敵" };
-  if (favPct >= 61) return { tier: "strong", label: "引擎重壓" };
-  return { tier: "lean", label: "引擎看好" };
+  if (favPct >= 61) return { tier: "strong", label: "推演重壓" };
+  return { tier: "lean", label: "推演看好" };
 }

@@ -69,7 +69,7 @@ const MILESTONES: { date: string; title: string; detail: string }[] = [
     date: "2026-05-18 之前",
     title: "v0.1–v0.26 · 從零打造",
     detail:
-      "打造 ZONE 27 品牌系統、逐打席引擎模擬引擎、/lab 模擬器、整合 MLB 官方資料。完整逐版歷史見 GitHub commits。",
+      "打造 ZONE 27 品牌系統、逐打席推演引擎模擬引擎、/lab 模擬器、整合 MLB 官方資料。完整逐版歷史見 GitHub commits。",
   },
 ];
 
