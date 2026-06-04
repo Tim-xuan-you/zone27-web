@@ -55,6 +55,13 @@ export default function Home() {
           <p className="mt-4 sm:mt-5 max-w-xl mx-auto text-mute leading-relaxed text-base sm:text-lg">
             免費跑一萬次 · <span className="text-bone">告訴你誰會贏。</span>
           </p>
+          {/* 誠實鉤子 · 對手首頁喊「高手 94% 勝率」· 我們反過來:沒人能算命、
+              連全世界最準也才 57%、不喊神準只對帳 = disarm 懷疑者的第一印象 ·
+              全球研究 agent #3 · 對手 fake-win-rate banner 的誠實 inverse。 */}
+          <p className="mt-3 max-w-xl mx-auto text-mute/70 leading-relaxed text-sm">
+            沒人能算命 —— 連全世界最準的也才 <span className="text-bone">5 成 7</span>。
+            我們不喊神準 · 只<span className="text-gold">逐場對帳給你看</span>。
+          </p>
 
           {/* 引擎戰績 · Pratfall「連輸的也掛」· compact · 永遠不刪 */}
           {tr.total > 0 && (
@@ -152,8 +159,8 @@ export default function Home() {
         <section className="mx-auto max-w-3xl px-6 sm:px-10 pb-16 text-center border-t border-line/40 pt-10">
           <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-2.5">
             <PromiseChip>引擎免費</PromiseChip>
-            <PromiseChip>方法公開</PromiseChip>
-            <PromiseChip>不藏輸的</PromiseChip>
+            <PromiseChip href="/methodology">方法公開</PromiseChip>
+            <PromiseChip href="/track-record">不藏輸的</PromiseChip>
             <PromiseChip>不追蹤你</PromiseChip>
             <PromiseChip>不自動續扣</PromiseChip>
           </div>
@@ -207,14 +214,33 @@ function IconCard({
 }
 
 // 信任承諾 chip · ✓ + 短詞 · 取代一整串「不…不…不…」
-function PromiseChip({ children }: { children: ReactNode }) {
-  return (
-    <span className="inline-flex items-center gap-1 border border-gold/25 bg-gold/5 px-2.5 py-1 text-[11px] sm:text-xs tracking-wide text-bone/90">
+function PromiseChip({ children, href }: { children: ReactNode; href?: string }) {
+  const base =
+    "inline-flex items-center gap-1 border border-gold/25 bg-gold/5 px-2.5 py-1 text-[11px] sm:text-xs tracking-wide text-bone/90";
+  const inner = (
+    <>
       <span aria-hidden="true" className="text-gold text-[10px]">
         ✓
       </span>
       {children}
-    </span>
+      {href && (
+        <span aria-hidden="true" className="text-gold/50 text-[9px] ml-0.5">
+          →
+        </span>
+      )}
+    </>
+  );
+  // 可點的承諾 = 點下去直接攤證據(方法公開→白皮書 · 不藏輸的→公開戰績)·
+  // costly signal:別人的「保證」是空話 · 我們的承諾按一下就見真章。
+  return href ? (
+    <Link
+      href={href}
+      className={`${base} hover:border-gold/50 hover:bg-gold/10 transition-colors`}
+    >
+      {inner}
+    </Link>
+  ) : (
+    <span className={base}>{inner}</span>
   );
 }
 
