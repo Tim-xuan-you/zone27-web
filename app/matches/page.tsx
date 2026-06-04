@@ -11,6 +11,7 @@ import {
   type MatchPhase,
   type Calibration,
 } from "@/lib/matches";
+import { getMlbAsMatches } from "@/lib/mlb-matches";
 
 export const metadata = createPageMetadata({
   title: "今日 CPBL 賽事板",
@@ -25,7 +26,7 @@ export const metadata = createPageMetadata({
 // ── ISR · Re-render daily so the today/archived state stays honest.
 export const revalidate = 86400; // 24 hours
 
-export default function MatchesPage() {
+export default async function MatchesPage() {
   // Round 10: filter to today + future only.
   // Past matches with finalResult become RECEIPTS · they live on
   // /track-record + permalink /matches/[gameId] · not in this list.
@@ -37,6 +38,12 @@ export default function MatchesPage() {
   // 賽後收據(✓/✕ 都掛)而非空盒子 · 看板永不空白。
   const offSeasonReceipts =
     upcomingMatches.length === 0 ? allReceipts.slice(0, 6) : [];
+  // R198 · MLB 全套 first-class(Tim「MLB 全套 · Polymarket go」)· 同一套引擎 ·
+  // 轉接 lib/mlb-matches(賽前鎖定線 · 誠信純正)· 板上只放未結算(可押)·
+  // 已結束的在 /matches/mlb + 各自詳情頁。 同 CPBL 一條押注/分析管線。
+  const mlbBoard = (await getMlbAsMatches())
+    .filter((m) => !m.finalResult)
+    .sort((a, b) => a.startTime.localeCompare(b.startTime));
 
   return (
     <div className="flex flex-col flex-1 min-h-screen">
@@ -141,6 +148,34 @@ export default function MatchesPage() {
           </div>
           <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
             {recentReceipts.map((m) => (
+              <MiniMatchCard key={m.id} match={m} />
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* ── MLB 市場 · 同一套引擎 first-class(R198 · Polymarket go)──
+          MLB 跟 CPBL 同型卡(隊徽 + 賽前鎖定開盤線 + 一鍵押 + 點進完整詳情)·
+          引擎線用賽前鎖定值(誠信)· 賽後對帳同 CPBL。 */}
+      {mlbBoard.length > 0 && (
+        <section className="mx-auto max-w-6xl w-full px-6 sm:px-10 pb-16 border-t border-line/40 pt-10">
+          <div className="flex items-baseline justify-between flex-wrap gap-3 mb-3">
+            <p className="font-mono text-gold/70 text-[10px] tracking-[0.4em]">
+              / MLB · 美國職棒 · 即時開盤
+            </p>
+            <Link
+              href="/matches/mlb"
+              className="font-mono text-mute hover:text-gold text-[10px] tracking-[0.3em] transition-colors"
+            >
+              全部 MLB 賽程 + 戰績 →
+            </Link>
+          </div>
+          <p className="text-mute/80 text-sm leading-relaxed mb-6 max-w-2xl">
+            棒球就是棒球 —— MLB 跟 CPBL <span className="text-bone">同一套引擎</span>:
+            一樣賽前鎖定開盤線、一鍵押、賽後對帳、落空照掛。
+          </p>
+          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+            {mlbBoard.map((m) => (
               <MiniMatchCard key={m.id} match={m} />
             ))}
           </div>

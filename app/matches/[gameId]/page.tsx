@@ -29,6 +29,7 @@ import {
 import { getEngineConviction } from "@/lib/conviction";
 import { getEngineReasoning, type EngineReasoning } from "@/lib/reasoning";
 import { teamIdentity } from "@/lib/identity";
+import { getMlbMatchById } from "@/lib/mlb-matches";
 
 // ── ZONE 27 · /matches/[gameId] · 市場頁(R175 Polymarket pivot)──
 // Tim 2026-05-30「資訊多到爆炸 · 划不到底 · 該刪就刪 · 變成 Polymarket」·
@@ -53,11 +54,17 @@ export async function generateMetadata({
   params: Promise<{ gameId: string }>;
 }): Promise<Metadata> {
   const { gameId } = await params;
-  const match = getMatchById(gameId);
+  const match =
+    getMatchById(gameId) ??
+    (gameId.startsWith("mlb-") ? await getMlbMatchById(gameId) : null) ??
+    undefined;
   if (!match) return { title: "Match not found" };
+  // MLB 引擎是 Log5 公式(非逐打席 10K sim)· description 別誤掛「自己跑 10K」
+  const simNote =
+    match.league === "MLB" ? "" : " · 站內可自己跑 10K 逐打席模擬";
   return {
     title: `${match.home.name} vs ${match.away.name} · ${match.league}`,
-    description: `引擎開盤線 · 賽前鎖定 — ${match.home.name} ${match.home.winRate}% / ${match.away.name} ${match.away.winRate}% · 站內可自己跑 10K 逐打席模擬。${match.home.pitcher.name} vs ${match.away.pitcher.name}。`,
+    description: `引擎開盤線 · 賽前鎖定 — ${match.home.name} ${match.home.winRate}% / ${match.away.name} ${match.away.winRate}%${simNote}。${match.home.pitcher.name} vs ${match.away.pitcher.name}。`,
   };
 }
 
@@ -67,7 +74,11 @@ export default async function MatchDetailPage({
   params: Promise<{ gameId: string }>;
 }) {
   const { gameId } = await params;
-  const match = getMatchById(gameId);
+  // R198 · MLB 全套:詳情頁也吃 "mlb-{gamePk}"(轉接 lib/mlb-matches · async lookup)。
+  // CPBL 走 static getMatchById(SSG)· MLB 動態 ISR(dynamicParams 預設開)。
+  const match =
+    getMatchById(gameId) ??
+    (gameId.startsWith("mlb-") ? await getMlbMatchById(gameId) : null);
   if (!match) notFound();
 
   const m = match as Match;
@@ -210,11 +221,18 @@ export default async function MatchDetailPage({
               同頁兩個勝率(開盤鎖定 estimate vs 下方逐打席 10K)= 信任 bug。
               假標籤「10K MONTE CARLO」已從開盤線移除(它是賽前估算 · 不是模擬)。
               落差 framed 成 Pratfall:兩種算法都公開 · 不挑好看的講。 */}
-          <p className="mt-3 text-center text-mute/70 text-[11px] sm:text-xs leading-relaxed">
-            上面是賽前鎖定的<span className="text-bone">開盤線</span>(戰績 · 主場 · 投手的快攻估算)。
-            想深究?往下可以自己跑<span className="text-bone">逐打席 10K 深算</span>驗證 ——
-            多數站只給一個數字假裝確定,<span className="text-bone">我們兩種都免費攤開</span>。
-          </p>
+          {m.league === "MLB" ? (
+            <p className="mt-3 text-center text-mute/70 text-[11px] sm:text-xs leading-relaxed">
+              上面是<span className="text-bone">賽前鎖定的開盤線</span>(主場優勢 + 先發投手 ERA / K9 / HR9)·
+              留時間戳、改不了 · 賽後對真實比分結算 · <span className="text-bone">跟 CPBL 同一套引擎</span>。
+            </p>
+          ) : (
+            <p className="mt-3 text-center text-mute/70 text-[11px] sm:text-xs leading-relaxed">
+              上面是賽前鎖定的<span className="text-bone">開盤線</span>(戰績 · 主場 · 投手的快攻估算)。
+              想深究?往下可以自己跑<span className="text-bone">逐打席 10K 深算</span>驗證 ——
+              多數站只給一個數字假裝確定,<span className="text-bone">我們兩種都免費攤開</span>。
+            </p>
+          )}
 
           {/* 進場預測 · 群眾線 + 你的一手 */}
           <UserPredictionPicker
@@ -234,7 +252,7 @@ export default async function MatchDetailPage({
               這題怎麼算贏
             </p>
             <p className="text-mute/85 text-[12px] sm:text-[13px] leading-relaxed">
-              以 <span className="text-bone">CPBL 官網最終比分</span>為準,<span className="text-bone">不是我們說了算</span> —— 分數高的隊贏。 賽後自動對帳:押對掛 ✓、押錯掛 ✕,<span className="text-bone">命中、落空都留著,刪不掉</span>。<span className="text-mute/70"> 延賽順延到補賽日才算 · 和局兩邊都不算贏。</span>
+              以 <span className="text-bone">{m.league === "MLB" ? "MLB 官方計分" : "CPBL 官網最終比分"}</span>為準,<span className="text-bone">不是我們說了算</span> —— 分數高的隊贏。 賽後自動對帳:押對掛 ✓、押錯掛 ✕,<span className="text-bone">命中、落空都留著,刪不掉</span>。<span className="text-mute/70"> 延賽順延到補賽日才算 · 和局兩邊都不算贏。</span>
             </p>
           </div>
 
@@ -360,7 +378,8 @@ export default async function MatchDetailPage({
           </div>
         </section>
 
-        {/* ── SCORE DISTRIBUTION · top 5 ─────────────── */}
+        {/* ── SCORE DISTRIBUTION · top 5 · MLB 引擎是 Log5 公式無比分分佈 → 略過 ── */}
+        {m.topScores.length > 0 && (
         <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-8 border-t border-line/40 pt-8">
           <p className="font-mono text-mute text-[9px] tracking-[0.4em] mb-2">
             / 最可能比分 · TOP 5
@@ -385,12 +404,15 @@ export default async function MatchDetailPage({
             ))}
           </div>
         </section>
+        )}
 
         {/* ── RUN IT YOURSELF · 自己跑引擎(收進 disclosure)──
             設計審計 P1:同頁兩個勝率(上方開盤線 + 這裡 10K 模擬另一個數字)= 球迷的
             「為什麼有兩個 63%?」困惑。 收進「點開才跑」的進階面板 → 95% 訪客只看到
             一個乾淨開盤線;想自己驗算的 skeptic 一鍵展開即得(costly-signal proof 保留)。
-            模擬器本來就是「按 RUN 才跑」· 收起 0 CPU 成本。 */}
+            模擬器本來就是「按 RUN 才跑」· 收起 0 CPU 成本。
+            R198 · MLB 引擎是 Log5 公式(非逐打席 10K)→ MLB 略過此段。 */}
+        {m.league !== "MLB" && (
         <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-16 border-t border-line/40 pt-8">
           <details className="group">
             <summary className="cursor-pointer select-none list-none [&::-webkit-details-marker]:hidden flex items-center gap-2 font-mono text-gold/80 hover:text-gold text-[11px] sm:text-xs tracking-[0.3em] transition-colors">
@@ -409,6 +431,7 @@ export default async function MatchDetailPage({
             </EngineGate>
           </details>
         </section>
+        )}
 
         {/* ── back ───────────────────────────────────── */}
         <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-24 text-center">
