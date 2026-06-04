@@ -213,8 +213,8 @@ export default async function MatchDetailPage({
               variant="engine"
               ariaLabel={`引擎開盤線 · ${m.home.en} ${m.home.winRate}% / ${m.away.en} ${m.away.winRate}%`}
             />
-            <p className="mt-2 text-center font-mono text-mute/55 text-[8px] tracking-[0.3em]">
-              引擎開盤線 · ENGINE LINE
+            <p className="mt-2 text-center font-mono text-mute/55 text-[10px] tracking-[0.3em]">
+              引擎開盤線
             </p>
           </div>
 

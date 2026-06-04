@@ -302,8 +302,8 @@ function CrowdLine({
         goldSide="home"
         variant="crowd"
       />
-      <p className="mt-1 font-mono text-mute/50 text-[8px] tracking-[0.3em] text-center">
-        群眾市場線 · CROWD LINE
+      <p className="mt-1 font-mono text-mute/50 text-[10px] tracking-[0.3em] text-center">
+        群眾市場線
       </p>
     </div>
   );
