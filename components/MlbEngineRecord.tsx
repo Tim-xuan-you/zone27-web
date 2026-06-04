@@ -8,11 +8,11 @@ import mlbLocked from "@/lib/mlb-locked.json";
 // Action 每天自動跑)補上「賽前鎖定 → 賽後對帳」那塊,寫進 lib/mlb-locked.json。
 // 這個 component 把那份戰績呈現出來。
 //
-// brand 紀律(per /integrity #12 R185 reframe = 品質閘門,不是「只做 CPBL」):
-//   · 這不是「開放 MLB 押注」· 是「引擎在公開累積 MLB 戰績、證明自己」。
-//   · 累積到夠準(同 /calibration 30 場門檻)才會開放 MLB 押注。
+// brand 紀律(R197 Tim de-BETA:蒙地卡羅是全世界在用的方法 · 不需要「測 30 場驗證」):
+//   · MLB 跟 CPBL 同一套引擎 · 賽前鎖定、賽後對帳、落空照掛(first-class · 非「驗證中」)。
 //   · 跟 CPBL 戰績分開計(避免一個 league 的雜訊污染另一個)。
-//   · 引擎落空(DIVERGED)照掛不刪 = 同站上 costly-signal 紀律。
+//   · 準度% 等樣本夠了才報:幾場的勝率是運氣不是準度 = 同「沒人能神準」的誠實 ·
+//     這不是「引擎不夠格」· 是「不騙你一個雜訊數字」(保留的唯一小樣本紀律)。
 // 資料賽後由 Action 更新 → commit → Vercel 重佈 · 此頁靜態讀 JSON。
 // ─────────────────────────────────────────────────────
 
@@ -56,20 +56,18 @@ export default function MlbEngineRecord() {
       <div className="bg-slate/40 border border-gold/30 p-5 sm:p-7">
         <div className="flex items-baseline gap-3 flex-wrap mb-3">
           <p className="font-mono text-gold text-[10px] tracking-[0.4em]">
-            MLB 引擎 · 驗證中
+            MLB 引擎 · 賽後對帳
           </p>
           <span className="font-mono text-[9px] tracking-[0.3em] px-1.5 py-0.5 border border-gold/40 text-gold/80">
             賽前鎖定 · 賽後對帳
           </span>
         </div>
         <p className="text-mute/90 text-sm leading-relaxed mb-5 max-w-2xl">
-          引擎每天自動抓 MLB 官方先發投手數據、
-          <span className="text-bone">賽前鎖定開盤線</span>(留時間戳、改不了)·
-          賽後自動對「當初鎖定的那個數字」結算。
-          <span className="text-gold"> 樣本累積比 CPBL 快很多</span> —— 這是引擎在
-          公開證明自己。{" "}
-          <span className="text-bone">累積到夠準,才會開放 MLB 押注</span>
-          (沒驗證夠不開盤 = 鐵律)· 跟 CPBL 戰績分開計。
+          棒球就是棒球 —— MLB 跟 CPBL <span className="text-bone">同一套引擎</span>:
+          每天自動抓 MLB 官方先發投手數據、<span className="text-bone">賽前鎖定開盤線</span>
+          (留時間戳、改不了)· 賽後自動對「當初鎖的那個數字」結算 ·{" "}
+          <span className="text-gold">落空照掛、永不刪</span>。 樣本累積比 CPBL 快很多 ·
+          跟 CPBL 戰績分開計(不讓一個聯盟的雜訊污染另一個)。
         </p>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
           <Stat label="賽前鎖定" value={String(total)} sub={`${pending} 場待結算`} />
@@ -87,20 +85,16 @@ export default function MlbEngineRecord() {
           />
           <Stat
             label="準度"
-            // 不到 30 場不報率(同卡片自己寫的「才作數」門檻)· 2 場 0 中報「0%」
-            // 既誤導又自打臉 · 改顯示「—」誠實表示樣本還不夠算。
+            // 樣本少不報率(2 場的勝率是運氣不是準度 · 報「0%」既誤導又自打臉)·
+            // 顯示「—」= 不騙你一個雜訊數字(不是「驗證中」· 是同「沒人能神準」的誠實)。
             value={decided.length >= 30 && rate !== null ? `${rate}%` : "—"}
-            sub={
-              decided.length < 30
-                ? `還差 ${30 - decided.length} 場才作數`
-                : "已達門檻"
-            }
+            sub={decided.length < 30 ? "樣本還少 · 別用幾場論準度" : "樣本足夠"}
             tone={decided.length >= 30 && rate !== null && rate >= 55 ? "gold" : "mute"}
           />
         </div>
         <p className="mt-4 font-mono text-mute/55 text-[10px] tracking-[0.2em] leading-relaxed">
-          引擎開盤公式公開(主場優勢 + 先發投手 ERA / K9 / HR9)· 30 場以上準度才有
-          統計意義(同 /calibration 誠實門檻)· 引擎落空照掛、永不刪。
+          引擎開盤公式公開(主場優勢 + 先發投手 ERA / K9 / HR9)· 幾場的勝率是運氣不是準度 ——
+          等樣本夠了才看總準度(同「沒人能神準」的誠實)· 引擎落空照掛、永不刪。
           {lastUpdated && (
             <span className="text-mute/75"> · 最後對帳 {lastUpdated}</span>
           )}

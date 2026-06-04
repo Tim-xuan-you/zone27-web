@@ -83,24 +83,23 @@ export default async function MlbMatchesPage() {
           資料來源:MLB Stats API(官方公開、完全免費) ·
           ZONE 27 不修改任何原始資料
         </p>
-        {/* MLB = 免費即時比分鉤子 · 閘門式多運動路線圖框架(非永久拒絕)·
-            台灣運彩有的都會做 · 但每個運動的引擎驗證夠準才開盤 · CPBL 先攻頂 ·
-            per Tim R185:全運動願景 · supersedes 舊「CPBL-only-forever」框架。 */}
+        {/* R197 Tim de-BETA:MLB 跟 CPBL 同一套引擎 · 拿掉「驗證夠才開盤」閘門 framing
+            (蒙地卡羅是全世界在用的方法 · 不需要我們「測30場驗證」)· 棒球就是棒球 ·
+            MLB first-class(賽前鎖定、賽後對帳、同 CPBL)。 supersedes R185 閘門框架。 */}
         <p className="mt-4 text-mute text-sm sm:text-[15px] leading-relaxed max-w-2xl">
-          <strong className="text-bone">一個運動、一個引擎,逐步點亮。</strong>{" "}
-          台灣運彩有的,我們都會做 —— 但鐵律是:每個運動的引擎沒驗證到夠準,絕不開盤。
-          棒球先把 CPBL 做到極致 · MLB 跟其他運動的引擎正在路上 · 這頁先給你看即時比分。{" "}
+          <strong className="text-bone">棒球就是棒球 —— MLB 跟 CPBL 用同一套引擎。</strong>{" "}
+          一樣賽前鎖定開盤線、賽後對真實比分結算、落空照掛不刪。 即時比分每 10 分鐘更新(不秒跳)。{" "}
           <Link
             href="/matches"
             className="text-gold/90 hover:text-gold underline-offset-4 hover:underline whitespace-nowrap"
           >
-            想押已經開盤的?→ 今日 CPBL
+            也看今日 CPBL →
           </Link>
         </p>
         <div className="mt-6 w-full h-px bg-line/60" />
       </section>
 
-      {/* ── MLB 引擎自動盤戰績(賽前鎖定 + 賽後對帳 · 累積驗證中)── */}
+      {/* ── MLB 引擎自動盤戰績(賽前鎖定 + 賽後對帳 · 同 CPBL 一套引擎)── */}
       <MlbEngineRecord />
 
       {/* ── EMPTY STATE ─────────────────────── */}
