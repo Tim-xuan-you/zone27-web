@@ -14,6 +14,13 @@
 
 ## ⏳ 仍 pending Tim 親手動作
 
+### 🔴 跑 migration 0013(R195 · Supabase SQL Editor · 補創作者徽章命門洞)
+創作者「✓ 已驗證準度」徽章原本沒驗「賽前」→ 有人能對已打完的場發分析刷完美戰績。 修法
+已上線但 **graceful**:`supabase/migrations/0013_creator_records_created_at.sql` 沒套之前
+徽章照舊算(不破壞)· 套了之後「開賽後才發的分析」就不算進徽章(洞關上)。 **Tim 待做**:
+Supabase SQL Editor 貼 0013 整支 Run(冪等可重跑 · 含 drop 先建避 42P13)。 ⚠ 這只關顯示層
++ 直接 RPC 寫入的 server gate(match_locks 表)仍待補 · 公開天梯/創作者徽章正式上線前再補。
+
 ### ✅🔒 安全修補 · 全部完成(2026-06-03 · Tim 親手套 6 支 SQL + 確認自己是唯一 admin · 門鎖好了)
 
 3 路 agent 碼審找到的 3 個洞,已**全部修好並上線**:
