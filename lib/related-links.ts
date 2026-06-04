@@ -37,11 +37,15 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
     { href: "/manifesto", kicker: "manifesto", title: "倒置宣言 · 4 個刻意倒置" },
     { href: "/methodology", kicker: "methodology", title: "完整工程白皮書" },
   ],
-  // /methodology/diff 已刪 → 換 /track-record(逐場收據)
   "/methodology": [
-    TRACK_RECORD,
+    { href: "/methodology/diff", kicker: "methodology/diff", title: "v0.2 → v0.3 逐行 diff · 14 unchanged + 1 new" },
     AUDIT,
     { href: "/manifesto", kicker: "manifesto", title: "倒置宣言 · 為何完整公開" },
+  ],
+  "/methodology/diff": [
+    { href: "/methodology", kicker: "methodology", title: "回完整白皮書 · 4 章 + 引擎陣容" },
+    { href: "/audit", kicker: "audit", title: "Model Report · 改規則前先公告 30 天" },
+    TRACK_RECORD,
   ],
   "/terms": [
     { href: "/ethics", kicker: "ethics", title: "9 條永遠不做的承諾 · 違反 = 紅字永久標" },

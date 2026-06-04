@@ -55,7 +55,6 @@ const nextConfig: NextConfig = {
       { source: "/hey-tim", destination: "/faq", permanent: false },
       { source: "/now", destination: "/roadmap", permanent: false },
       { source: "/changelog", destination: "/roadmap", permanent: false },
-      { source: "/methodology/diff", destination: "/methodology", permanent: false },
     ];
   },
 
