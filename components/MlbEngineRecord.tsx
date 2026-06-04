@@ -84,13 +84,15 @@ export default function MlbEngineRecord() {
           />
           <Stat
             label="準度"
-            value={rate !== null ? `${rate}%` : "—"}
+            // 不到 30 場不報率(同卡片自己寫的「才作數」門檻)· 2 場 0 中報「0%」
+            // 既誤導又自打臉 · 改顯示「—」誠實表示樣本還不夠算。
+            value={decided.length >= 30 && rate !== null ? `${rate}%` : "—"}
             sub={
               decided.length < 30
                 ? `還差 ${30 - decided.length} 場才作數`
                 : "已達門檻"
             }
-            tone={rate !== null && rate >= 55 ? "gold" : "mute"}
+            tone={decided.length >= 30 && rate !== null && rate >= 55 ? "gold" : "mute"}
           />
         </div>
         <p className="mt-4 font-mono text-mute/55 text-[10px] tracking-[0.2em] leading-relaxed">
