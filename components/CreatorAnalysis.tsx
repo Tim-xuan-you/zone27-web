@@ -27,6 +27,7 @@ import {
   type CreatorComment,
 } from "@/lib/creator-comments";
 import { matchHasStarted } from "@/lib/matches";
+import { getMyPrediction } from "@/lib/predictions-market";
 import Avatar from "@/components/Avatar";
 import {
   mentionToken,
@@ -87,6 +88,8 @@ export default function CreatorAnalysis({
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   const [pick, setPick] = useState<"home" | "away" | null>(null);
+  // O2 · 你在這場押的那邊(getMyPrediction)· 用來預填分析推薦邊 → 解「選邊兩次」困惑。
+  const [myBet, setMyBet] = useState<"home" | "away" | null>(null);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [tier, setTier] = useState<MemberTier>("free"); // 付費會員才能標價賣
@@ -120,12 +123,18 @@ export default function CreatorAnalysis({
         getWalletBalance().then((b) => {
           if (!cancelled) setBalance(b);
         });
+        // O2 · 撈你在這場押的那邊 → 開發表時預填同一邊(一鍵可改)= 不用「再選一次」
+        const bet = await getMyPrediction(matchId);
+        if (cancelled) return;
+        setMyBet(bet);
         const my = await getMyCreatorPost(matchId);
         if (cancelled) return;
         if (my) {
           setStatus("posted");
         } else {
           setStatus("open");
+          // 預填押注那邊(若有押)· pick 仍 null 才填 = 不蓋掉手動選擇
+          if (bet) setPick((cur) => cur ?? bet);
         }
       } catch {
         if (!cancelled) setStatus("anonymous");
@@ -277,18 +286,29 @@ export default function CreatorAnalysis({
               placeholder="你的看法 / 分析"
               className="w-full bg-ink/60 border border-line/70 text-bone px-3 py-2.5 outline-none focus:border-gold/60 placeholder:text-mute/60 font-mono text-sm leading-relaxed transition-colors"
             />
-            {/* R195 · 解「選邊兩次」困惑(轉換 agent #1)· 押注用「押」、分析推薦用
-                「看好」· 加一行說明這跟上面的押注是兩回事(這篇是公開給讀者的推薦)。 */}
+            {/* R195 · 解「選邊兩次」困惑(押注用「押」、分析推薦用「看好」)。
+                O2(R200)· 已押者把推薦邊預填成押注那邊(一鍵可改)→ 預設情況不用再選一次。 */}
             <div className="flex flex-col gap-2">
               <p className="font-mono text-mute/70 text-[10px] tracking-[0.15em] leading-relaxed">
                 這篇分析你看好哪邊?
-                <span className="text-mute/55">
-                  (跟你上面的押注分開 · 這是公開給讀者看的推薦 · 賽後一樣自動掛準度)
-                </span>
+                {myBet ? (
+                  <span className="text-mute/55">
+                    (已預填你押的那邊 · 想公開推薦另一邊直接點另一顆 · 賽後一樣自動掛準度)
+                  </span>
+                ) : (
+                  <span className="text-mute/55">
+                    (跟你上面的押注分開 · 這是公開給讀者看的推薦 · 賽後一樣自動掛準度)
+                  </span>
+                )}
               </p>
               <div className="flex items-center gap-2 flex-wrap">
                 <PickBtn label={`看好 ${homeName.slice(0, 5)}`} active={pick === "home"} onClick={() => setPick("home")} />
                 <PickBtn label={`看好 ${awayName.slice(0, 5)}`} active={pick === "away"} onClick={() => setPick("away")} />
+                {myBet && pick === myBet && (
+                  <span className="font-mono text-gold/55 text-[9px] tracking-[0.15em]">
+                    ✓ 你押的那邊
+                  </span>
+                )}
               </div>
             </div>
             {/* 標價賣分析:付費會員可標價(你拿 90-95%)· 免費會員只能免費發 + 升級提示。
