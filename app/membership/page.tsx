@@ -45,18 +45,18 @@ export default function MembershipPage() {
           / 升級會員
         </p>
         <h1 className="text-3xl sm:text-4xl text-bone font-light tracking-tight leading-tight mb-3">
-          升級 · 解鎖<span className="text-gold">賣分析賺錢</span>
+          升級 · 把你的準度<span className="text-gold">變成身分</span>
         </h1>
         <p className="text-mute text-sm sm:text-base leading-relaxed mb-8 max-w-lg">
-          引擎永遠免費。升級不是買功能 —— 是解鎖把你的分析
-          <span className="text-bone">標價賣出去、開始賺錢</span>,加一個夠稀有的身分。
+          引擎永遠免費。升級不是買功能 —— 是把你<span className="text-bone">誠實累積的準度</span>
+          變成一個夠稀有的身分(順帶解鎖把分析標價賣 · 你拿 90–95%)。
         </p>
 
         {/* 兩張卡 · 點「立即升級」直接秀轉帳帳號(不再 email 去要)*/}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <MembershipUpgrade
             name="BLACK"
-            kicker="開始靠分析賺錢"
+            kicker="進場 · 黑卡會員"
             priceLabel="500"
             period="31 天"
             perks={BLACK_PERKS}
