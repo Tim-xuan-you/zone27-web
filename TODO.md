@@ -142,6 +142,14 @@ R172 pivot · BLACK CARD 從 TapPay 自動訂閱改成 manual ATM / 跨行轉帳
 
 R174 pivot build queue · Claude 可主動 ship(三綠 + auto-push):
 
+- ✅✅✅ **R191 攻頂迭代(2026-06-04 · 6 commit 全三綠 · 6803bb4→2a37a25 · auto-push)· Tim「全權上網查/找缺的靈魂/修bug/極致美觀直覺/熱銷」· 3 並行 agent(碼審 / 全球研究 / 設計轉換)synthesize**:
+  - **06-04 ingest**(d7e095a):結算 06-03 三場全 PROVED(統一/味全/台鋼)+ 新增 #141 富邦vs台鋼 coin-flip · calibration N 16→19 · 板從休賽復活成今晚。
+  - **Polymarket 信心溫度**(9b6ea93):勢均力敵盤(favorite ≤53)當主打「連萬象都只敢說 52/48」· lib/conviction.ts + MiniMatchCard。
+  - **WAVE 1 真 bug**(dc6ba1b):① MiniMatchCard 假「一萬次模擬·贏N次」拔掉(winRate=賽前鎖定開盤線非模擬 · R176 詳情頁已修這裡漏網 · 守準度護城河)② CardBetStrip RPC 失敗誠實報錯(不再靜默吞=假成功 42702 陷阱)③ TeamPickPanel 廣播 `z27-team-change`(同分頁選隊 MyTeamNextGame/TrackRecord 才即時亮 · 原靠 storage 同分頁不觸發=要重整)④ CreatorAnalysis 拔 🔒💬 真 emoji ⑤ /calibration 改 57% 論證領頭、空校準圖(N<30)退下方當「兌現方式」。
+  - **WAVE 2**(da01d41):/ladder winners-welcome 立場(打贏萬象=我們最想看到 · 對比明牌站封贏家/刪輸文 · Pinnacle 誠實版)· CardBetStrip 押後峰終回路「看你 vs 引擎 →」· /admin KPI grid 空格 · /rewards 死標籤「calibration mirror」。
+  - **WAVE 3**(2a37a25):nav 狀態 chip(TONIGHT/BETA)金→mute(金保留給轉換 pill · pre-attentive)· 投手條加圖例「金色端=該項聯盟頂尖·越靠金色越強」(操作直覺 · 解方向歧義)。
+  - ⚠️ **評估後沒做**:免登入試押(設計 agent P0 · 但 REVERSES R188 註冊閘門 · 不加回匿名押注)· TCG 收據框(agent 想砍 · 刻意品牌裝置 · 留)· TonightReceiptsCard 孤兒檔(agent 提報 · 查證早已不存在=從註解幻覺)。
+  - 🧭 **「還有什麼大工程沒做但必要」(Tim 問 · 全球研究 agent 答)**:最缺的不是功能、是 **「結算→評分→排名→顯示」閉環 feedback loop**(每場賽後自動結算每注 · 更新每人 edge-over-engine · 重算天梯 · 刷新即時 calibration)+ **reputation/identity 系統**(一個帶 sample-weighted edge / tier / 公開不可造假戰績卡的 user 物件 · 同時餵天梯+創作者市場賣家認證+討論串署名)。 這兩根脊椎建好 · 其餘(週賽 league 升降級 / 賣家門檻綁天梯 / loss-wall「本月最大誤判」/ 即時部位 P&L)才 snap 上去。 ⚠️ **都需真實用戶才發光 · 同 3-engine 一樣等用戶/資料 · 別 0 用戶時硬建**。 anti-pattern(別碰):簽到 streak 髒化校準 · 正和計分變虛榮榜 · 註冊獎金 · 假精準度。
 - ✅✅✅ **R190 完成 5/6(2026-06-04 · 5 commit 全三綠 · 9253026→12247ae · auto-push)· 詳見下方 R190 entry**:
   1. ✅ **引擎改名 sweep → 萬象**(9253026 · 26 檔 rendered 訪客文字去學術術語 · 信任頁改白話機制+GitHub 開源錨點 · OG 卡/延伸閱讀/Cmd-K/錯誤頁彩蛋 · **程式碼註解+simulator.ts+README 保留 Monte Carlo = 方法公開的 GitHub 層**(刻意不掃)· SSR 13 頁驗證 0 殘留)。
   2. ⏳🔴 **三引擎分層 — DATA-BLOCKED · 別硬做(評估後 defer)**:戰力(Elo)現在只有 ~16 場 CPBL finalized → 從 1500 baseline 幾乎沒動 = 全部 ~50% 無資訊量(看起來像壞掉)· 局勢(Markov)需要**逐打席 play-by-play 轉移資料**,CPBL 不開放、我們只 ingest box score = **無料可做**。 且曝光 3 引擎還要建付費 gating + 對照 UI(大件)。 三條都卡 → 硬做會違反 #12 engine-validated 紅線(= 上 unvalidated 引擎)+ no-vapor。 **正解:等 CPBL ≥50 場(Elo 才有訊號)或改用 MLB API(料更多)· 連同付費對照 UI 一起做一個專窗 · 別現在半做出個全 50% 的假引擎。**
