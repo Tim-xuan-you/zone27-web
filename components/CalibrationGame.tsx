@@ -448,27 +448,34 @@ function ResultPanel({ score: s }: { score: Score }) {
 }
 
 function ResultPanelFooter({ onReset }: { onReset: () => void }) {
+  // C3(轉換 agent)· 剛親手摸到「我太有把握」= 最高意圖時刻 · 原本三個等重 outline 鈕、
+  // 真正的轉換鏈藏在第三個 → 主轉換做成實心金 · 另兩個降為安靜文字鏈(一個焦點)。
   return (
-    <div className="flex flex-wrap items-center gap-3 justify-center">
-      <button
-        type="button"
-        onClick={onReset}
-        className="px-6 py-2.5 border border-gold/50 text-gold font-mono text-[10px] tracking-[0.3em] hover:bg-gold/10 transition-colors"
-      >
-        ↻ 再玩一次
-      </button>
-      <Link
-        href="/calibration"
-        className="px-6 py-2.5 border border-line/60 text-mute font-mono text-[10px] tracking-[0.3em] hover:text-gold hover:border-gold/40 transition-colors"
-      >
-        → 看引擎自己的準度
-      </Link>
+    <div className="flex flex-col items-center gap-3">
       <Link
         href="/login?next=/matches"
-        className="px-6 py-2.5 border border-line/60 text-mute font-mono text-[10px] tracking-[0.3em] hover:text-gold hover:border-gold/40 transition-colors"
+        className="inline-flex items-center gap-2 bg-gold text-navy font-mono text-xs tracking-[0.25em] px-7 py-3 hover:bg-gold-soft transition-colors"
       >
-        → 開始記你的真實戰績
+        開始記你的真實戰績 →
       </Link>
+      <p className="font-mono text-mute/55 text-[9px] tracking-[0.2em] leading-relaxed text-center">
+        免費 · 押一邊,賽後自動掛準 / 不準、刪不掉
+      </p>
+      <div className="flex flex-wrap items-center gap-5 justify-center mt-1">
+        <button
+          type="button"
+          onClick={onReset}
+          className="font-mono text-mute/70 hover:text-gold text-[10px] tracking-[0.25em] underline-offset-4 hover:underline transition-colors"
+        >
+          ↻ 再玩一次
+        </button>
+        <Link
+          href="/calibration"
+          className="font-mono text-mute/70 hover:text-gold text-[10px] tracking-[0.25em] underline-offset-4 hover:underline transition-colors"
+        >
+          看引擎自己的準度 →
+        </Link>
+      </div>
     </div>
   );
 }
