@@ -11,6 +11,7 @@ import CreatorAnalysis from "@/components/CreatorAnalysis";
 import UserPredictionPicker from "@/components/UserPredictionPicker";
 import ReceiptForwardButton from "@/components/ReceiptForwardButton";
 import CopyLinkButton from "@/components/CopyLinkButton";
+import SettlementResolution from "@/components/SettlementResolution";
 import TonightMatchRail from "@/components/TonightMatchRail";
 import {
   getMatchById,
@@ -244,17 +245,10 @@ export default async function MatchDetailPage({
             startISO={startISO}
           />
 
-          {/* 這題怎麼算贏 · 預測市場第一信任機制(賭徒最怕模糊結算)· 補全球標竿研究「缺的靈魂①」 */}
-          <div className="mt-4 border border-line/60 bg-slate/30 px-4 py-3">
-            {/* eyebrow 降成 mute · 結算規則是次要保證(內容才重要)· 金色留給上方
-                開盤線當焦點(gold discipline · 不每個 section 都 gold 標籤搶眼)。 */}
-            <p className="font-mono text-mute text-[9px] tracking-[0.35em] mb-1.5">
-              這題怎麼算贏
-            </p>
-            <p className="text-mute/85 text-[12px] sm:text-[13px] leading-relaxed">
-              以 <span className="text-bone">{m.league === "MLB" ? "MLB 官方計分" : "CPBL 官網最終比分"}</span>為準,<span className="text-bone">不是我們說了算</span> —— 分數高的隊贏。 賽後自動對帳:押對掛 ✓、押錯掛 ✕,<span className="text-bone">命中、落空都留著,刪不掉</span>。<span className="text-mute/70"> 延賽順延到補賽日才算 · 和局兩邊都不算贏。</span>
-            </p>
-          </div>
+          {/* 這題怎麼算贏 · 預測市場第一信任機制(賭徒最怕模糊結算)· soul-roadmap #4
+              升級成 Kalshi 式結算規格表:具名官方來源 + 開賽前鎖定時間戳 + 不可改對帳
+              + 爭議裁定 · 全程 mute 不上金(守 gold discipline · 焦點留給上方開盤線)。 */}
+          <SettlementResolution league={m.league} startISO={startISO} />
 
           <div className="mt-3 flex justify-end">
             <CopyLinkButton refTag={`match-${m.id}`} />
