@@ -13,6 +13,7 @@ import {
   type Match,
 } from "@/lib/matches";
 import { getMlbAsMatches } from "@/lib/mlb-matches";
+import { getCreatorPostCounts } from "@/lib/creator-posts-server";
 
 // ── ZONE 27 · Homepage · 市場看板(R175 Polymarket pivot)──────
 // Tim 2026-05-30「請變成 Polymarket · 很亂很雜」· per
@@ -63,6 +64,10 @@ export default async function Home() {
   // 休賽日 fallback · 看板永不空白:全聯盟都沒可押賽事時 · 改放引擎最近賽後
   // 收據(✓命中 / ✕落空都掛)· proof-of-work 勝過空泛未來預測。
   const recentReceipts = allUpcoming.length === 0 ? finalized.slice(0, 2) : [];
+
+  // 每場分析篇數 · 看板標「N 篇分析」讓用戶一眼看出哪場有大神可跟單(抽傭入口)。
+  // 無 cookie anon fetch · 不破首頁 ISR 靜態。
+  const analysisCounts = await getCreatorPostCounts();
 
   // 已結算賽事的勝方 · 傳給登入後個人戰績條(client 端用它評分本人押注 · 靜態
   // 資料無隱私問題)。 R198 · 併 MLB 已結算 → 押的 MLB 也計進首頁「你 vs 引擎」。
@@ -171,7 +176,7 @@ export default async function Home() {
           {allUpcoming.length > 0 ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {featured.map((m) => (
-                <MiniMatchCard key={m.id} match={m} />
+                <MiniMatchCard key={m.id} match={m} analysisCount={analysisCounts[m.id] ?? 0} />
               ))}
             </div>
           ) : recentReceipts.length > 0 ? (
@@ -183,7 +188,7 @@ export default async function Home() {
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 {recentReceipts.map((m) => (
-                  <MiniMatchCard key={m.id} match={m} />
+                  <MiniMatchCard key={m.id} match={m} analysisCount={analysisCounts[m.id] ?? 0} />
                 ))}
               </div>
             </>

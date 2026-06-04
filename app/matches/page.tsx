@@ -12,6 +12,7 @@ import {
   type Calibration,
 } from "@/lib/matches";
 import { getMlbAsMatches } from "@/lib/mlb-matches";
+import { getCreatorPostCounts } from "@/lib/creator-posts-server";
 
 export const metadata = createPageMetadata({
   title: "今日 CPBL 賽事板",
@@ -44,6 +45,8 @@ export default async function MatchesPage() {
   const mlbBoard = (await getMlbAsMatches())
     .filter((m) => !m.finalResult)
     .sort((a, b) => a.startTime.localeCompare(b.startTime));
+  // 每場分析篇數 · 看板標「N 篇分析」(跟單入口)· 無 cookie · 不破 ISR。
+  const analysisCounts = await getCreatorPostCounts();
 
   return (
     <div className="flex flex-col flex-1 min-h-screen">
@@ -90,7 +93,7 @@ export default async function MatchesPage() {
         {upcomingMatches.length > 0 ? (
           <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
             {upcomingMatches.map((m) => (
-              <MiniMatchCard key={m.id} match={m} />
+              <MiniMatchCard key={m.id} match={m} analysisCount={analysisCounts[m.id] ?? 0} />
             ))}
           </div>
         ) : offSeasonReceipts.length > 0 ? (
@@ -105,7 +108,7 @@ export default async function MatchesPage() {
             </p>
             <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
               {offSeasonReceipts.map((m) => (
-                <MiniMatchCard key={m.id} match={m} />
+                <MiniMatchCard key={m.id} match={m} analysisCount={analysisCounts[m.id] ?? 0} />
               ))}
             </div>
           </>
@@ -148,7 +151,7 @@ export default async function MatchesPage() {
           </div>
           <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
             {recentReceipts.map((m) => (
-              <MiniMatchCard key={m.id} match={m} />
+              <MiniMatchCard key={m.id} match={m} analysisCount={analysisCounts[m.id] ?? 0} />
             ))}
           </div>
         </section>
@@ -176,7 +179,7 @@ export default async function MatchesPage() {
           </p>
           <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
             {mlbBoard.map((m) => (
-              <MiniMatchCard key={m.id} match={m} />
+              <MiniMatchCard key={m.id} match={m} analysisCount={analysisCounts[m.id] ?? 0} />
             ))}
           </div>
         </section>

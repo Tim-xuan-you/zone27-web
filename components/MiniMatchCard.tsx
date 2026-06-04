@@ -59,7 +59,14 @@ function compactMatchDate(dateStr: string): string {
   return dateStr;
 }
 
-export default function MiniMatchCard({ match }: { match: Match }) {
+export default function MiniMatchCard({
+  match,
+  analysisCount = 0,
+}: {
+  match: Match;
+  /** 這場有幾篇創作者分析(看板用 · >0 顯金色「N 篇分析」讓用戶一眼看出哪場有大神可跟單)*/
+  analysisCount?: number;
+}) {
   const matchPhase: MatchPhase | null = getMatchPhase(match);
   const calibration = getCalibration(match);
   const enginePctOnWinner = getEnginePctOnWinner(match);
@@ -102,7 +109,18 @@ export default function MiniMatchCard({ match }: { match: Match }) {
           <span className="text-mute/50 mx-1">·</span>
           {match.startTime}
         </span>
-        <MiniPhaseBadge phase={matchPhase} calibration={calibration} />
+        <div className="flex items-center gap-1.5">
+          {/* 有分析 = 金色 chip · 看板一眼看出哪場有人分析可跟單(賺抽傭的入口)*/}
+          {analysisCount > 0 && (
+            <span
+              aria-label={`這場有 ${analysisCount} 篇創作者分析可看`}
+              className="px-1 py-px text-[8px] tracking-[0.15em] border border-gold/60 text-gold font-mono tabular whitespace-nowrap"
+            >
+              {analysisCount} 篇分析
+            </span>
+          )}
+          <MiniPhaseBadge phase={matchPhase} calibration={calibration} />
+        </div>
       </div>
 
       {/* Team labels — symmetric layout · Round 31 Wave G A1 fix:加投手名
@@ -228,9 +246,11 @@ export default function MiniMatchCard({ match }: { match: Match }) {
       <div className="mt-auto pt-2 flex items-baseline justify-end gap-2">
         <Link
           href={`/matches/${match.id}`}
-          className="font-mono text-gold/70 hover:text-gold text-[10px] tracking-[0.3em] transition-colors"
+          className={`font-mono text-[10px] tracking-[0.3em] transition-colors hover:text-gold ${
+            analysisCount > 0 ? "text-gold" : "text-gold/70"
+          }`}
         >
-          完整分析 →
+          {analysisCount > 0 ? `看 ${analysisCount} 篇分析 →` : "完整分析 →"}
         </Link>
       </div>
     </article>

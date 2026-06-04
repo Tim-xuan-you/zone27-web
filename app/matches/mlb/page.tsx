@@ -5,6 +5,7 @@ import { createPageMetadata } from "@/lib/page-og";
 import { fetchRelevantMlb, type MlbGame } from "@/lib/mlb";
 import MlbEngineRecord from "@/components/MlbEngineRecord";
 import mlbLocked from "@/lib/mlb-locked.json";
+import { getCreatorPostCounts } from "@/lib/creator-posts-server";
 
 export const metadata = createPageMetadata({
   title: "今日 MLB 賽程 — 即時資料來自 MLB 官方 API",
@@ -45,6 +46,8 @@ export default async function MlbMatchesPage() {
       lockedByPk.set(p.gamePk, p.engineWinHomePct);
     }
   }
+  // 每場分析篇數(key = mlb-{gamePk})· 看板標「N 篇分析」+ 點進去看/買(跟單入口)。
+  const analysisCounts = await getCreatorPostCounts();
 
   return (
     <div className="flex flex-col flex-1 min-h-screen">
@@ -127,7 +130,12 @@ export default async function MlbMatchesPage() {
         <section className="mx-auto max-w-6xl w-full px-6 sm:px-10 pb-20">
           <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
             {games.map((g) => (
-              <MlbCard key={g.gamePk} game={g} lockedPct={lockedByPk.get(g.gamePk)} />
+              <MlbCard
+                key={g.gamePk}
+                game={g}
+                lockedPct={lockedByPk.get(g.gamePk)}
+                analysisCount={analysisCounts[`mlb-${g.gamePk}`] ?? 0}
+              />
             ))}
           </div>
         </section>
@@ -159,7 +167,15 @@ export default async function MlbMatchesPage() {
 // fields(R81+ deeper refactor remove)· 此 round 只 stop rendering 確保
 // brand redline 完全 honor。 enginePickHome / favoriteTeam / favoriteWinPct
 // 計算 變數 全 removed(unused)· 同 axis as Patek 不做 Apple Watch。
-function MlbCard({ game, lockedPct }: { game: MlbGame; lockedPct?: number }) {
+function MlbCard({
+  game,
+  lockedPct,
+  analysisCount = 0,
+}: {
+  game: MlbGame;
+  lockedPct?: number;
+  analysisCount?: number;
+}) {
   const stateClass = STATE_COLOR[game.state];
   const live = game.live;
   // R194 · 進行中帶局數(死卡變活卡)· 即時比分救回 = Polymarket「數字會動」誠實版。
@@ -171,15 +187,26 @@ function MlbCard({ game, lockedPct }: { game: MlbGame; lockedPct?: number }) {
   return (
     <article className="bg-slate/60 border border-line/70 hover:border-gold/40 transition-colors p-5 flex flex-col">
       {/* meta */}
-      <div className="flex items-center justify-between mb-4">
-        <span
-          className={`font-mono text-[9px] tracking-[0.3em] px-1.5 py-0.5 border whitespace-nowrap ${stateClass} ${
-            game.state === "live" ? "shimmer" : ""
-          }`}
-        >
-          {stateLabel}
-        </span>
-        <span className="font-mono text-mute text-[10px] tracking-[0.25em] tabular">
+      <div className="flex items-center justify-between mb-4 gap-2">
+        <div className="flex items-center gap-1.5">
+          <span
+            className={`font-mono text-[9px] tracking-[0.3em] px-1.5 py-0.5 border whitespace-nowrap ${stateClass} ${
+              game.state === "live" ? "shimmer" : ""
+            }`}
+          >
+            {stateLabel}
+          </span>
+          {/* 有分析 = 金色 chip · 一眼看出哪場有大神可跟單(抽傭入口)*/}
+          {analysisCount > 0 && (
+            <span
+              aria-label={`這場有 ${analysisCount} 篇創作者分析可看`}
+              className="font-mono text-[9px] tracking-[0.2em] px-1.5 py-0.5 border border-gold/60 text-gold tabular whitespace-nowrap"
+            >
+              {analysisCount} 篇分析
+            </span>
+          )}
+        </div>
+        <span className="font-mono text-mute text-[10px] tracking-[0.25em] tabular whitespace-nowrap">
           台北 {compactMlbDate(game.dateTaipei)} {game.startTaipei}
         </span>
       </div>
@@ -216,12 +243,25 @@ function MlbCard({ game, lockedPct }: { game: MlbGame; lockedPct?: number }) {
         />
       )}
 
-      {/* venue · 日期已移到卡頭(同 CPBL · per Tim 2026-06-05:MLB 卡頭原本只有
-          時間沒日期 · 美國夜場 = 台北隔天清晨更要標日期才不搞混) */}
-      <div className="pt-3 mt-auto border-t border-line/40">
+      {/* venue + 點進詳情(看/買分析、押注)· R199 補:MLB 板卡本來點不進去(舊 schedule
+          viewer 遺留)· Tim「用戶看到有分析想跟單卻點不進去買」→ 加詳情連結=抽傭入口。 */}
+      <div className="pt-3 mt-auto border-t border-line/40 flex items-center justify-between gap-2">
         <span className="font-mono text-mute/70 text-[10px] tracking-[0.2em] truncate">
           {game.venue}
         </span>
+        <Link
+          href={`/matches/mlb-${game.gamePk}`}
+          aria-label={
+            analysisCount > 0
+              ? `看這場 ${analysisCount} 篇分析 + 押注`
+              : "看完整分析 + 押注"
+          }
+          className={`shrink-0 font-mono text-[10px] tracking-[0.25em] transition-colors hover:text-gold ${
+            analysisCount > 0 ? "text-gold" : "text-gold/70"
+          }`}
+        >
+          {analysisCount > 0 ? `看 ${analysisCount} 篇分析 →` : "完整分析 →"}
+        </Link>
       </div>
     </article>
   );
