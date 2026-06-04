@@ -10,7 +10,9 @@
 import { createSupabaseBrowserClient } from "@/lib/supabase/browser";
 
 export type CreatorComment = {
-  handle: string; // 「球迷 #XXXX」· 0 PII · 跟分析署名同碼
+  handle: string; // 「球迷 #XXXX」· 0 PII · 跟分析署名同碼 · 顯示 fallback(0015 前)+ @mention
+  authorCode: string; // 永久碼(0015 · 舊 RPC → "")· 顯示永久身分章
+  displayName: string; // 會員自填顯示名(0015 · 舊 RPC → "")
   isAuthor: boolean; // 回覆者是否為原分析作者 → UI 標「作者」
   body: string;
   createdAt: string; // ISO
@@ -29,12 +31,17 @@ export async function getCreatorComments(postId: string): Promise<CreatorComment
       .map((row) => {
         const r = row as {
           handle?: unknown;
+          author_code?: unknown;
+          display_name?: unknown;
           is_author?: unknown;
           body?: unknown;
           created_at?: unknown;
         };
         return {
           handle: typeof r.handle === "string" ? r.handle : "球迷",
+          // 0015 未套用的舊 RPC 無這兩欄 → ""(creatorIdentity fallback 用 handle)
+          authorCode: typeof r.author_code === "string" ? r.author_code : "",
+          displayName: typeof r.display_name === "string" ? r.display_name : "",
           isAuthor: r.is_author === true,
           body: typeof r.body === "string" ? r.body : "",
           createdAt: typeof r.created_at === "string" ? r.created_at : "",

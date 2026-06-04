@@ -21,6 +21,16 @@
 Supabase SQL Editor 貼 0013 整支 Run(冪等可重跑 · 含 drop 先建避 42P13)。 ⚠ 這只關顯示層
 + 直接 RPC 寫入的 server gate(match_locks 表)仍待補 · 公開天梯/創作者徽章正式上線前再補。
 
+### 🔴 跑 migration 0015(R200 · Supabase SQL Editor · 補「改名洗掉戰績」命門 bug)
+創作者改名會把戰績洗掉:0014 讓三支 RPC 的 `handle` = 顯示名,前端拿它當戰績 key →
+改名 → key 變 → 舊紀錄孤兒、變回「新分析師」= 報馬仔刪輸文的反面(同名也會撞號 merge)。
+修法已上線但 **graceful**:`supabase/migrations/0015_creator_author_code.sql` 沒套之前
+戰績照舊綁 handle(不破)· 套了之後三支 RPC 多回 `author_code`(永久碼)+ `display_name`,
+前端改用永久碼當 key → **改名/同名再也洗不掉、撞不到戰績**(改名永遠免費無限次,永久碼扛問責)。
+**Tim 待做**:Supabase SQL Editor 貼 0015 整支 Run(冪等可重跑 · 每支先 `drop function if exists`
+避 42P13 改回傳型別 · 全欄位 qualify 避 42702)。 ⚠ 套前設名只在自己看得到問責碼 · 套後公開生效。
+這是創作者天梯/「✓已驗證準度」徽章正式上線前**必修**的命門(發射前一定要套)。
+
 ### ✅🔒 安全修補 · 全部完成(2026-06-03 · Tim 親手套 6 支 SQL + 確認自己是唯一 admin · 門鎖好了)
 
 3 路 agent 碼審找到的 3 個洞,已**全部修好並上線**:
@@ -148,6 +158,10 @@ R172 pivot · BLACK CARD 從 TapPay 自動訂閱改成 manual ATM / 跨行轉帳
 ## 🤖 Claude 自己推進(不 gated-on-Tim · per [[feedback-no-waiting-rule]])
 
 R174 pivot build queue · Claude 可主動 ship(三綠 + auto-push):
+
+- ✅✅✅ **R200(2026-06-04 · 新窗省 token · 接 R199 · 全三綠 + 13/13 單元驗 rename 不變量 + 實機 SSR + auto-push)· Tim 全權「攻頂 · 先把顯示名問責命門補掉」**:
+  - 🔴🔴 **顯示名問責命門 = DONE(本窗第一件 · 比美觀重要)**:修「創作者改名洗掉戰績」架構命門 —— 0014 讓戰績 key 綁可變的 `handle`(顯示名)→ 改名/同名洗掉、撞掉戰績 = 報馬仔刪輸文的反面。 **正解**(全平台標準 X/Discord/Reddit/Polymarket):戰績綁**永久碼** `author_code`(md5(uid) 前 8 · 改名洗不掉、同名不撞)· 永久碼永遠顯示在名字旁(`大師 · #46f6741a`)· 改名免費無限次。 落地:`migration 0015`(三支 RPC posts/comments/records 各多回 `author_code` + `display_name` · 先 drop 避 42P13 · 全 qualify 避 42702 · **Tim 待套** 見上方 🔴)· `lib/identity.ts` 新 `creatorIdentity` + `creatorRecordKey`(單一真相 · graceful fallback 舊 RPC 回 handle 不破)· `gradeAuthorRecords` key 改永久碼 · `CreatorAnalysis`(分析署名 + 留言者)+ `DisplayNameSetting`(/member 自己的臉/碼)全 reuse `creatorIdentity` = 公開署名跟後台同一張臉、頭像色綁永久碼改名不換。 文案「取代代號」→「名字只是標籤 · 永久碼扛問責 · 改名免費」。 **驗證**:13/13 單元(改名 key 不變 / 同名不撞 / 色穩定 / fallback / 格式 / posts↔records 對得上)against 真實編譯的 identity.ts · 三綠 + 5 路由 SSR 200 + reverse-grep 確認 fresh build。
+  - **下窗 backlog(同 R199 未動)**:soul ②streak ③含輸分享卡(待 Tim social go)⑤持倉徽章+profile 含輸戰績 ⑥校準榜 · craft O2/C4/C5 · 哲學長文 consolidate 進 /about · body 殘留指向已刪頁 redirect prose 清理 · MLB 真隊色微調。
 
 - ✅✅✅ **R199 超長窗(2026-06-04 · 14 commit `7faae27`→`0905eaa` · 全三綠 + 實機驗 + auto-push)
   · Tim 全程 dogfood 指頁 + 全權攻頂 · 換新窗省 token 收尾**:

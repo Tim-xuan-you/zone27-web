@@ -12,10 +12,13 @@
 // ─────────────────────────────────────────────────────
 
 import { createSupabaseBrowserClient } from "@/lib/supabase/browser";
+import { creatorRecordKey } from "@/lib/identity";
 
 export type CreatorPost = {
   postId: string; // 0008+ · 付費購買用 · 舊 RPC 無 → ""
-  handle: string; // 「球迷 #XXXX」· 0 PII
+  handle: string; // 「球迷 #XXXX」· 0 PII · 顯示 fallback(0015 前)
+  authorCode: string; // 永久碼「md5(uid) 前8碼」· 戰績 key + 永久身分(0015 · 舊 RPC → "")
+  displayName: string; // 會員自填顯示名(純標籤)· 沒設 → ""(0015 · 舊 RPC → "")
   title: string;
   body: string; // 付費未購 → ""(0008 server 端 gate · body 不進 payload)
   pick: "home" | "away";
@@ -39,6 +42,8 @@ export async function getCreatorPosts(matchId: string): Promise<CreatorPost[]> {
         const r = row as {
           post_id?: unknown;
           handle?: unknown;
+          author_code?: unknown;
+          display_name?: unknown;
           title?: unknown;
           body?: unknown;
           pick?: unknown;
@@ -54,6 +59,9 @@ export async function getCreatorPosts(matchId: string): Promise<CreatorPost[]> {
         return {
           postId: typeof r.post_id === "string" ? r.post_id : "",
           handle: typeof r.handle === "string" ? r.handle : "球迷",
+          // 0015 未套用的舊 RPC 無這兩欄 → ""(前端 creatorIdentity fallback 用 handle)
+          authorCode: typeof r.author_code === "string" ? r.author_code : "",
+          displayName: typeof r.display_name === "string" ? r.display_name : "",
           title: typeof r.title === "string" ? r.title : "",
           body: typeof r.body === "string" ? r.body : "",
           pick,
@@ -145,6 +153,8 @@ export async function getMyCreatorPostsClient(): Promise<MyCreatorPostRow[] | nu
 
 export type CreatorPickRow = {
   handle: string;
+  /** 永久碼(戰績 key · 改名洗不掉)· 0015 未套用 → ""(gradeAuthorRecords fallback handle) */
+  authorCode: string;
   matchId: string;
   pick: "home" | "away";
   /** 發文時間戳 ISO · 給「先鎖後結」徽章過濾用 · 0013 未套用 → ""(fail-open 照算) */
@@ -160,12 +170,15 @@ export async function getCreatorRecords(): Promise<CreatorPickRow[]> {
     return data.map((row) => {
       const r = row as {
         handle?: unknown;
+        author_code?: unknown;
         match_id?: unknown;
         pick?: unknown;
         created_at?: unknown;
       };
       return {
         handle: typeof r.handle === "string" ? r.handle : "球迷",
+        // 0015 未套用的舊 RPC 無此欄 → ""(creatorRecordKey fallback 回 handle)
+        authorCode: typeof r.author_code === "string" ? r.author_code : "",
         matchId: typeof r.match_id === "string" ? r.match_id : "",
         pick: r.pick === "away" ? ("away" as const) : ("home" as const),
         // 0013 未套用的舊 RPC 無此欄 → ""(gradeAuthorRecords fail-open 照算)
@@ -199,10 +212,12 @@ function isLateCreatorPost(ts: string, startISO: string | undefined): boolean {
   return t >= s;
 }
 
-/** 把選邊紀錄對 finalResult map 評分 → 每位作者(handle)的命中戰績。
+/** 把選邊紀錄對 finalResult map 評分 → 每位作者的命中戰績。 key = 永久碼(改名洗不掉)。
  *  finals:{ [matchId]: "home"|"away"|"tie" } · 平局不計入分母。
  *  starts:{ [matchId]: 開賽 ISO } · 「先鎖後結」:發文時間 ≥ 開賽的不算進徽章
  *  (防直接 RPC / 開賽後對已打完的場刷完美徽章 = 反轉品牌命門)· 缺時間 fail-open。
+ *  ⚠ 命門修復(0015):key 改 creatorRecordKey(永久 author_code 優先 · 改名/同名不再洗
+ *  /撞戰績)· 0015 未套用時 authorCode 為 "" → fallback 回 handle(行為同舊版 · graceful)。
  *  ⚠ 0013 未套用時 createdAt 為 "" → fail-open 照算(行為同舊版 · graceful)。 */
 export function gradeAuthorRecords(
   rows: CreatorPickRow[],
@@ -215,10 +230,11 @@ export function gradeAuthorRecords(
     if (!w || w === "tie") continue; // 只算已結算、非平局
     // 先鎖後結 · 防賽後補登:賽後/開賽後才發的不算進「已驗證準度」徽章
     if (isLateCreatorPost(r.createdAt, starts[r.matchId])) continue;
-    const a = acc[r.handle] ?? { n: 0, hits: 0 };
+    const key = creatorRecordKey(r); // 永久碼優先 · 改名洗不掉
+    const a = acc[key] ?? { n: 0, hits: 0 };
     a.n += 1;
     if (r.pick === w) a.hits += 1;
-    acc[r.handle] = a;
+    acc[key] = a;
   }
   const out: Record<string, AuthorRecord> = {};
   for (const h of Object.keys(acc)) {

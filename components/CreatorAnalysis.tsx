@@ -28,7 +28,11 @@ import {
 } from "@/lib/creator-comments";
 import { matchHasStarted } from "@/lib/matches";
 import Avatar from "@/components/Avatar";
-import { mentionToken } from "@/lib/identity";
+import {
+  mentionToken,
+  creatorIdentity,
+  type ResolvedCreatorIdentity,
+} from "@/lib/identity";
 
 // ── ZONE 27 · CreatorAnalysis · 創作者賣分析(migration 0005)──────
 // Tim 2026-05-30 報馬仔/明燈 screenshot · 要:發文 + 推薦賽事(選邊)+ 寫分析 +
@@ -200,19 +204,24 @@ export default function CreatorAnalysis({
       {/* posts */}
       {posts.length > 0 ? (
         <div className="space-y-3 mb-6">
-          {posts.map((p, i) => (
-            <PostCard
-              key={`${p.handle}-${i}`}
-              post={p}
-              homeName={homeName}
-              awayName={awayName}
-              finalWinner={finalWinner}
-              record={records[p.handle]}
-              loggedIn={status === "open" || status === "posted"}
-              balance={balance}
-              onBuy={handleBuy}
-            />
-          ))}
+          {posts.map((p, i) => {
+            // 永久碼 key(改名洗不掉)· 戰績 lookup + 顯示身分都走 creatorIdentity 同一把
+            const id = creatorIdentity(p);
+            return (
+              <PostCard
+                key={`${id.key}-${i}`}
+                post={p}
+                identity={id}
+                homeName={homeName}
+                awayName={awayName}
+                finalWinner={finalWinner}
+                record={records[id.key]}
+                loggedIn={status === "open" || status === "posted"}
+                balance={balance}
+                onBuy={handleBuy}
+              />
+            );
+          })}
         </div>
       ) : (
         <p className="mb-6 font-mono text-mute/55 text-[11px] tracking-[0.2em]">
@@ -381,6 +390,7 @@ export default function CreatorAnalysis({
 
 function PostCard({
   post: p,
+  identity: id,
   homeName,
   awayName,
   finalWinner,
@@ -390,6 +400,7 @@ function PostCard({
   onBuy,
 }: {
   post: CreatorPost;
+  identity: ResolvedCreatorIdentity;
   homeName: string;
   awayName: string;
   finalWinner?: "home" | "away" | "tie" | null;
@@ -428,8 +439,17 @@ function PostCard({
     <article className="p-4 sm:p-5 border border-line/60 bg-slate/30">
       <div className="flex items-baseline justify-between gap-3 mb-1.5 flex-wrap">
         <span className="flex items-center gap-2 flex-wrap">
-          <Avatar seed={p.handle} size={26} />
-          <span className="font-mono text-bone text-[11px] tracking-[0.2em]">{p.handle}</span>
+          <Avatar seed={id.seed} glyph={id.glyph} size={26} />
+          <span className="font-mono text-bone text-[11px] tracking-[0.2em]">{id.label}</span>
+          {/* 永久碼章 · 改名洗不掉 = 認得出同一人(報馬仔換馬甲也賴不掉) */}
+          {id.code && (
+            <span
+              title="永久代號 · 改名也認得出同一人 · 戰績綁這個碼"
+              className="font-mono text-mute/45 text-[9px] tracking-[0.15em]"
+            >
+              {id.code}
+            </span>
+          )}
           <span className="font-mono text-gold/80 text-[9px] tracking-[0.2em] px-1.5 py-0.5 border border-gold/40">
             推薦 {pickName.slice(0, 5)}
           </span>
@@ -618,13 +638,21 @@ function CommentThread({
               還沒有人留言 · 留第一則。
             </p>
           )}
-          {comments.map((c, i) => (
+          {comments.map((c, i) => {
+            const cid = creatorIdentity(c);
+            return (
             <div key={i} className="border-l-2 border-line/40 pl-3">
               <p className="flex items-center gap-2 flex-wrap">
-                <Avatar seed={c.handle} size={20} />
+                <Avatar seed={cid.seed} glyph={cid.glyph} size={20} />
                 <span className="font-mono text-bone/90 text-[10px] tracking-[0.15em]">
-                  {c.handle}
+                  {cid.label}
                 </span>
+                {/* 永久碼章 · 改名洗不掉(留言者也認得出同一人) */}
+                {cid.code && (
+                  <span className="font-mono text-mute/45 text-[8px] tracking-[0.12em]">
+                    {cid.code}
+                  </span>
+                )}
                 {c.isAuthor && (
                   <span className="font-mono text-gold/90 text-[8px] tracking-[0.2em] px-1 py-0.5 border border-gold/40">
                     作者
@@ -646,7 +674,8 @@ function CommentThread({
                 </button>
               )}
             </div>
-          ))}
+            );
+          })}
 
           {loggedIn ? (
             <div className="flex flex-col gap-1.5">

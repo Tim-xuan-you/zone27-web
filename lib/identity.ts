@@ -144,3 +144,59 @@ export function mentionToken(handle: string): string {
   if (hex) return "#" + hex[1];
   return handle.trim();
 }
+
+// ── 創作者身分解析 · 問責命門(migration 0015)──────────────────
+// 命門 bug:戰績 key 原綁可變的 handle(顯示名)→ 改名洗掉戰績 = 報馬仔刪輸文的反面。
+// 正解:戰績綁**永久碼** author_code(md5(uid) 前 8 碼 · 改名洗不掉、同名不撞)· 顯示名
+// 純標籤 · 永久碼永遠顯示在名字旁(大師 · #46f6741a)· 改名免費無限次(永久碼扛問責)。
+// 同 X / Discord / Reddit / Polymarket(錢包地址)全平台標準。
+//
+// GRACEFUL:0015 未套用前 RPC 無 author_code(authorCode 為空)→ 全靠 handle(行為同舊版)。
+type CreatorIdentityInput = {
+  handle: string;
+  authorCode?: string | null;
+  displayName?: string | null;
+};
+
+// 戰績 key(+ React key)· 永久碼優先(改名洗不掉)· 舊 RPC 無碼 → fallback handle(不破)。
+// gradeAuthorRecords(records 側)+ 顯示(posts 側)必須走同一把 → 對得上。
+export function creatorRecordKey(row: CreatorIdentityInput): string {
+  const code = (row.authorCode ?? "").trim();
+  return code || row.handle;
+}
+
+export type ResolvedCreatorIdentity = {
+  /** 戰績 / React key(= creatorRecordKey)· 永久碼優先 */
+  key: string;
+  /** 主要顯示名(有設→顯示名;沒設→「球迷 #碼」) */
+  label: string;
+  /** 永久碼 chip「#xxxx」· null = 不另外顯示(舊 RPC,或沒設名時碼已在 label 內) */
+  code: string | null;
+  /** 頭像穩定 seed(綁永久碼 → 改名不換臉色) */
+  seed: string;
+  /** 頭像字符覆寫(有名取名首字 · 無名取碼前 2)· undefined = 讓 Avatar 自己從 seed 推 */
+  glyph?: string;
+};
+
+// 一處解析:名字 + 永久碼 chip + 頭像 seed/glyph + 戰績 key。 元件全走這支 = 一致。
+export function creatorIdentity(row: CreatorIdentityInput): ResolvedCreatorIdentity {
+  const code = (row.authorCode ?? "").trim();
+  const name = (row.displayName ?? "").trim();
+  // 舊 RPC(0015 未套)· 無永久碼 → 行為同舊版:全靠 handle(顯示 + key + 頭像色)
+  if (!code) {
+    return { key: row.handle, label: row.handle, code: null, seed: row.handle };
+  }
+  const seed = "#" + code; // stableSeed 會抽出 hex → 顏色綁永久碼 · 改名不換臉
+  if (name) {
+    // 有設名:名字當招牌、永久碼當問責印章 一直掛在旁邊(改名也認得出同一人)
+    return { key: code, label: name, code: "#" + code, seed, glyph: handleGlyph(name) };
+  }
+  // 沒設名:永久碼即身分 · label 已含碼 → 不重複顯示 code chip
+  return {
+    key: code,
+    label: "球迷 #" + code,
+    code: null,
+    seed,
+    glyph: code.slice(0, 2).toUpperCase(),
+  };
+}
