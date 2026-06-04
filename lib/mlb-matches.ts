@@ -104,15 +104,48 @@ export async function getMlbMatchById(id: string): Promise<Match | null> {
 
 // MLB 已結算場的結果(給個人準度評分用 · 同 CPBL getFinalizedMatches 的 shape)·
 // 讓「押 MLB」也計進你 vs 引擎的命中率(aggregatePredictionStats / YourRecordStrip)。
+//
+// 🔒 永久戰績修復(R200 碼審):結果一律先讀 lib/mlb-locked.json 的 finalScore
+// (grade:mlb GitHub Action 賽後寫回 · 永久存)· 不再只靠即時 API 的「昨天+今天」窗 ——
+// 否則 settled 的 MLB 押注 2 天後從 API 窗掉出去 → 重新被當 pending → 命中/落空從你的
+// 帳本消失、準度分母縮水 = 違反「刪不掉的帳本」。 JSON 永久結果為主 + live API 只補剛
+// 打完還沒 grade 到的場(graceful:API 失敗也不影響永久結果)。 對齊 CPBL 永久戰績。
+type LockedFinal = {
+  gamePk?: number;
+  gameDate?: string;
+  finalScore?: { home?: number; away?: number };
+};
 export async function getMlbFinalizedResults(): Promise<
   { id: string; finalWinner: "home" | "away" | "tie" | null; startISO: string | null }[]
 > {
-  const all = await getMlbAsMatches();
-  return all
-    .filter((m) => m.finalResult)
-    .map((m) => ({
-      id: m.id,
-      finalWinner: m.finalResult?.winner ?? null,
-      startISO: getMatchStartIso(m),
-    }));
+  const byId = new Map<
+    string,
+    { id: string; finalWinner: "home" | "away" | "tie" | null; startISO: string | null }
+  >();
+  // 1 · 永久結果(mlb-locked.json · 賽後 Action 寫回 finalScore)· settled 永遠可評
+  for (const p of (mlbLocked.predictions ?? []) as LockedFinal[]) {
+    const h = p.finalScore?.home;
+    const a = p.finalScore?.away;
+    if (typeof p.gamePk !== "number" || typeof h !== "number" || typeof a !== "number") continue;
+    byId.set(`mlb-${p.gamePk}`, {
+      id: `mlb-${p.gamePk}`,
+      finalWinner: h > a ? "home" : a > h ? "away" : "tie",
+      startISO: typeof p.gameDate === "string" ? p.gameDate : null,
+    });
+  }
+  // 2 · 補剛打完、JSON 還沒 grade 到的場(live API · 失敗不破永久結果)
+  try {
+    const live = await getMlbAsMatches();
+    for (const m of live) {
+      if (!m.finalResult || byId.has(m.id)) continue; // JSON 永久結果優先
+      byId.set(m.id, {
+        id: m.id,
+        finalWinner: m.finalResult.winner,
+        startISO: getMatchStartIso(m),
+      });
+    }
+  } catch {
+    // 永久結果(JSON)已足夠 · live 補強失敗不影響帳本
+  }
+  return [...byId.values()];
 }
