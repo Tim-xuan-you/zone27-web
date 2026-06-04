@@ -7,12 +7,12 @@ import StatTerm from "@/components/StatTerm";
 import { createPageMetadata } from "@/lib/page-og";
 
 export const metadata = createPageMetadata({
-  title: "5 分鐘看懂 ZONE 27 — 給沒聽過 Bill James 的人",
+  title: "6 分鐘看懂 ZONE 27 — 給沒聽過 Bill James 的人",
   description:
-    "對棒球有興趣但不懂進階數據?從這裡開始。3 個章節 · 5 分鐘 · 不需要統計學背景。為什麼運氣不是答案 · 機率分布到底在說什麼 · 為什麼 ZONE 27 不是博彩。",
-  ogTitle: "5 分鐘看懂 ZONE 27 · 給沒聽過 Bill James 的人",
+    "對棒球有興趣但不懂進階數據?從這裡開始。4 個章節 · 6 分鐘 · 不需要統計學背景。為什麼運氣不是答案 · 機率分布到底在說什麼 · 為什麼 ZONE 27 不是博彩 · 為什麼沒有神準。",
+  ogTitle: "6 分鐘看懂 ZONE 27 · 給沒聽過 Bill James 的人",
   ogDescription:
-    "3 章節 · 5 分鐘 · 不需要統計學背景 · 為什麼運氣不是答案 · 為什麼不是博彩",
+    "4 章節 · 6 分鐘 · 不需要統計學背景 · 為什麼運氣不是答案 · 為什麼不是博彩 · 沒有神準",
   path: "/learn",
 });
 
@@ -29,8 +29,8 @@ export const metadata = createPageMetadata({
 // instead it's "explain like I'm a curious adult who happens not
 // to know this domain yet."
 //
-// Each of the 3 chapters ends with a concrete next-step link
-// (to /lab, /glossary, /founders) to avoid dead-end pages.
+// Each of the 4 chapters ends with a concrete next-step link
+// (to /lab, /methodology, /membership, /calibration) to avoid dead-end pages.
 //
 // Aligned with [[zone27-disclosure-philosophy]]:
 //   Teaching the public the math IS the disclosure.
@@ -46,7 +46,7 @@ export default function LearnPage() {
         {/* ── HERO ─────────────────────────────────── */}
         <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pt-20 pb-12 text-center">
           <p className="font-mono text-gold text-[10px] tracking-[0.45em] mb-8">
-            5 分鐘入門 · BEFORE YOU INVEST AN HOUR
+            6 分鐘入門 · BEFORE YOU INVEST AN HOUR
           </p>
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-light leading-[1.1] tracking-tight text-bone">
             您不需要懂 Bill James
@@ -55,13 +55,13 @@ export default function LearnPage() {
           </h1>
           <p className="mt-10 max-w-xl mx-auto text-mute leading-relaxed">
             ZONE 27 用引擎拆解棒球比賽勝率。
-            但如果您從來沒讀過進階棒球數據 · 這頁是專屬給您的 5 分鐘入門。
+            但如果您從來沒讀過進階棒球數據 · 這頁是專屬給您的 6 分鐘入門。
           </p>
           <p className="mt-4 max-w-xl mx-auto font-mono text-mute/70 text-[10px] tracking-[0.3em]">
-            3 CHAPTERS · NO STATS DEGREE REQUIRED · NO PREVIOUS BASEBALL VOCAB
+            4 CHAPTERS · NO STATS DEGREE REQUIRED · NO PREVIOUS BASEBALL VOCAB
           </p>
           <div className="mt-6 flex justify-center">
-            <ArticleMeta readingMin={5} />
+            <ArticleMeta readingMin={6} />
           </div>
         </section>
 
@@ -182,6 +182,46 @@ export default function LearnPage() {
             cta="ZONE 27 4-tier 會員制 →"
             href="/membership"
             note="從匿名免費到 NT$ 2,700 / 年 · 任時可選 · 我們不催"
+          />
+        </Chapter>
+
+        {/* ── CHAPTER 04 · 缺的核心概念:校準 ──────────
+            新手讀完機率/指標/不是博彩,卻沒學到品牌的地基 = 校準 + 57% 天花板。
+            補完概念弧:機率 → 指標 → 不是博彩 → 沒人是神,我們比誠實。
+            接到 /calibration(完整證據)+ /calibration/test(換你當引擎)。 */}
+        <Chapter
+          no="04"
+          en="NOBODY IS PSYCHIC"
+          zh="為什麼沒有「神準」這回事"
+          kicker="1 分鐘"
+          anchor="no-oracle"
+        >
+          <p>看到這裡您可能想問:那 ZONE 27 的引擎,到底準不準?</p>
+          <p>
+            老實說 —— 全世界最強的模型,賽前單場勝率也只到大約{" "}
+            <strong className="text-bone">5 成 7</strong>。 這是天花板,不是我們不夠努力:
+            棒球本來就有一半是運氣。 所以任何喊「<strong className="text-bone">94% 神準</strong>」的,
+            數學上就是在騙你。
+          </p>
+          <p>
+            既然沒人能神準,我們就不比「誰猜得準」 · 改比
+            <strong className="text-bone">「誰夠誠實」</strong>。 衡量的方式叫
+            <strong className="text-bone">校準</strong>:當引擎說 67%,長期下來那種場,
+            真的要有大約 67% 發生才算數。 一個說 6 成、就真的中 6 成的人,
+            比一個天天截圖喊神準、輸了就刪文的人,可信太多。
+          </p>
+          <p>
+            而且這不是嘴上講。 我們把每一場的賽前預測對上實際結果全攤開,
+            <strong className="text-bone">命中、落空都掛,刪不掉</strong> —— 您可以自己驗。
+            不信引擎?{" "}
+            <Link href="/calibration/test" className="text-gold hover:underline">
+              先別下注,玩一次「換你當引擎」測你自己有多準 →
+            </Link>
+          </p>
+          <ChapterFooter
+            cta="看引擎準不準 · 公開校準 →"
+            href="/calibration"
+            note="當引擎說 67% · 實際發生幾成?賽前預測對上真實結果 · 命中落空都掛"
           />
         </Chapter>
 

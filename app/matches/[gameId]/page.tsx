@@ -248,6 +248,16 @@ export default async function MatchDetailPage({
             / 引擎為什麼這樣看
           </p>
           <EngineReasoningBlock reasoning={getEngineReasoning(m)} />
+          {/* 信任迴路:每場推理都承認「只到約 5 成 7」· 把這句謙虛綁回 aggregate 證據
+              (= claim + receipt)。 只在未結算場顯示 —— 已結算場下方就是收據本身 = 證據。 */}
+          {!m.finalResult && (
+            <Link
+              href="/calibration"
+              className="mt-5 inline-flex items-center gap-1.5 font-mono text-mute/70 hover:text-gold text-[10px] tracking-[0.25em] transition-colors"
+            >
+              引擎到底準不準?看公開校準 →
+            </Link>
+          )}
         </section>
 
         {/* ── RECEIPT · 賽後結果(only when final)─────── */}
