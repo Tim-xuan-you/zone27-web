@@ -630,19 +630,21 @@ function CommentThread({
                     作者
                   </span>
                 )}
-                {loggedIn && (
-                  <button
-                    type="button"
-                    onClick={() => startReply(c.handle)}
-                    className="font-mono text-mute/50 hover:text-gold text-[9px] tracking-[0.2em] underline-offset-4 hover:underline transition-colors"
-                  >
-                    ↳ 回覆
-                  </button>
-                )}
               </p>
               <p className="mt-1 text-bone/80 text-[13px] leading-relaxed whitespace-pre-wrap">
                 {renderCommentBody(c.body)}
               </p>
+              {/* 回覆鈕放內容下方(Twitter/X 慣例位置)+ 金色加底線 = 找得到
+                  (原本灰 9px 藏在名字旁 · Tim「找不到」)*/}
+              {loggedIn && (
+                <button
+                  type="button"
+                  onClick={() => startReply(c.handle)}
+                  className="mt-2 inline-flex items-center font-mono text-gold/70 hover:text-gold text-[10px] tracking-[0.2em] underline underline-offset-2 decoration-gold/40 hover:decoration-gold transition-colors"
+                >
+                  ↳ 回覆
+                </button>
+              )}
             </div>
           ))}
 

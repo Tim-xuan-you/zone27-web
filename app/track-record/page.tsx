@@ -14,7 +14,6 @@ import MyTeamTrackRecord, { type MyTeamMatch } from "@/components/MyTeamTrackRec
 import MyTeamNextGame, { type MyTeamUpcoming } from "@/components/MyTeamNextGame";
 import CalibrationProgressBar from "@/components/CalibrationProgressBar";
 import QuietHandoffCard from "@/components/QuietHandoffCard";
-import SilentReceiptStream from "@/components/SilentReceiptStream";
 import {
   matches,
   getFinalizedMatches,
@@ -455,14 +454,10 @@ export default function TrackRecordPage() {
         )}
       </section>
 
-      {/* R70 W-C · SilentReceiptStream · Agent A R69 SHIP 4 deferred ·
-          Pinboard.in archive view paradigm · single-line typographic
-          rows · oldest first · ledger paper aesthetic · parallel ARCHIVE
-          INDEX axis 對 Bloomberg-grid LedgerRow newest-first view above ·
-          building NOW(N=1)means it lives in architecture before sample
-          debt closes · same physics-of-time discipline as /founders/ledger
-          + /annual/2026 + /founders/from-one-current-founder empty scaffolds。 */}
-      <SilentReceiptStream finalizedMatches={finalized} />
+      {/* R197 · 砍重複的「收據總表」(SilentReceiptStream)· Tim dogfood「為什麼寫了
+          這個還要寫這個?不是一樣東西?」· 上面的詳細表(LedgerRow · 新→舊 · 含引擎
+          線/比分/判決)已涵蓋全部已結算場;下面那份(舊→新純文字列)是同一批資料第二
+          種畫法 = 重複。 減法優先 · 留資訊較豐的詳細表當唯一公開 ledger。 */}
 
       {/* ── METHODOLOGY ──────────────────────────── */}
       <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-16 border-t border-line/40 pt-12">
