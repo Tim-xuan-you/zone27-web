@@ -142,8 +142,8 @@ function MlbCard({ game }: { game: MlbGame }) {
         >
           {stateLabel}
         </span>
-        <span className="font-mono text-mute text-[10px] tracking-[0.25em]">
-          台北 {game.startTaipei}
+        <span className="font-mono text-mute text-[10px] tracking-[0.25em] tabular">
+          台北 {compactMlbDate(game.dateTaipei)} {game.startTaipei}
         </span>
       </div>
 
@@ -161,13 +161,11 @@ function MlbCard({ game }: { game: MlbGame }) {
         />
       </div>
 
-      {/* venue + 日期 · per Tim R185:每張賽事卡都帶日期(會被截圖/分享/跨日並排 · 沒日期會搞混) */}
-      <div className="pt-3 mt-1 border-t border-line/40 flex items-baseline justify-between gap-2">
+      {/* venue · 日期已移到卡頭(同 CPBL · per Tim 2026-06-05:MLB 卡頭原本只有
+          時間沒日期 · 美國夜場 = 台北隔天清晨更要標日期才不搞混) */}
+      <div className="pt-3 mt-1 border-t border-line/40">
         <span className="font-mono text-mute/70 text-[10px] tracking-[0.2em] truncate">
           {game.venue}
-        </span>
-        <span className="font-mono text-mute text-[9px] tracking-[0.2em] shrink-0">
-          {game.dateTaipei}
         </span>
       </div>
     </article>
@@ -238,3 +236,9 @@ const STATE_COLOR: Record<MlbGame["state"], string> = {
   final: "border-line text-mute",
   other: "border-line text-mute",
 };
+
+// CPBL 卡同款:把 dateTaipei「2026 · 05 · 20」壓成「05/20」放卡頭(跨日不搞混)。
+function compactMlbDate(dateStr: string): string {
+  const parts = dateStr.split("·").map((s) => s.trim());
+  return parts.length >= 3 ? `${parts[1]}/${parts[2]}` : dateStr;
+}

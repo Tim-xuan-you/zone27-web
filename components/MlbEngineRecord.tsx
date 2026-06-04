@@ -20,6 +20,8 @@ type Verdict = "proved" | "diverged" | "tie" | "push" | null;
 type Pred = {
   engineWinHomePct: number;
   verdict: Verdict;
+  lockedAt?: string;
+  gradedAt?: string;
 };
 
 export default function MlbEngineRecord() {
@@ -38,6 +40,13 @@ export default function MlbEngineRecord() {
   ).length;
   const rate =
     decided.length > 0 ? Math.round((proved / decided.length) * 100) : null;
+  // 最後更新戳(賽後對帳 gradedAt · 沒有就用最近 lockedAt)· 補 Tim 指出的「沒寫日期」·
+  // 也強化「賽後自動對帳」誠實感(看得到上次什麼時候對的)。
+  const latestTs = [...preds.map((p) => p.gradedAt), ...preds.map((p) => p.lockedAt)]
+    .filter((t): t is string => Boolean(t))
+    .sort();
+  const lastUpdated =
+    latestTs.length > 0 ? latestTs[latestTs.length - 1].slice(0, 10) : null;
 
   return (
     <section className="mx-auto max-w-6xl w-full px-6 sm:px-10 pb-12">
@@ -87,6 +96,9 @@ export default function MlbEngineRecord() {
         <p className="mt-4 font-mono text-mute/55 text-[10px] tracking-[0.2em] leading-relaxed">
           引擎開盤公式公開(主場優勢 + 先發投手 ERA / K9 / HR9)· 30 場以上準度才有
           統計意義(同 /calibration 誠實門檻)· 引擎落空照掛、永不刪。
+          {lastUpdated && (
+            <span className="text-mute/75"> · 最後對帳 {lastUpdated}</span>
+          )}
         </p>
       </div>
     </section>
