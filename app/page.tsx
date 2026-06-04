@@ -63,18 +63,6 @@ export default function Home() {
             <span className="text-bone">5 成 7</span>。 喊「94% 神準」的,數學上在騙你。
             我們不喊神準 · 只<span className="text-gold">逐場對帳給你看</span>。
           </p>
-          {/* 缺的靈魂(全球研究 #1)· 把 57% 從「我們的 claim」變「訪客自己發現的 aha」:
-              先別下注、先測你自己 → 校準遊戲(0 登入)· humility first → 引擎權威 second。
-              外框文字鏈(非實心金鈕)· 主 CTA 仍是下方「看今晚誰會贏」(gold discipline 留一個實心金)。 */}
-          <div className="mt-4">
-            <Link
-              href="/calibration/test"
-              className="inline-flex items-center gap-1.5 border border-gold/40 text-gold/90 hover:text-gold hover:border-gold/70 font-mono text-[11px] sm:text-xs tracking-[0.18em] px-4 py-2 transition-colors"
-            >
-              不信?先別下注 · 測你自己有多準 →
-            </Link>
-          </div>
-
           {/* 引擎戰績 · Pratfall「連輸的也掛」· compact · 永遠不刪 */}
           {tr.total > 0 && (
             // 量化品牌:hero 只留一個「按鈕」= 下方金色 CTA。 戰績是 proof 不是
@@ -95,7 +83,7 @@ export default function Home() {
             </Link>
           )}
 
-          {/* 主 CTA · hero 的明確下一步 · 滑到今晚的盤(UX:第一屏要有「現在按哪」)*/}
+          {/* 主 CTA · hero 唯一實心金鈕(C2:解兩個競爭 CTA · gold discipline 一屏一焦點)*/}
           <div className="mt-7">
             <a
               href="#floor"
@@ -103,6 +91,16 @@ export default function Home() {
             >
               {upcoming.length > 0 ? "↓ 看今晚誰會贏" : "↓ 看引擎最近戰績"}
             </a>
+          </div>
+          {/* 校準遊戲 = 安靜次要文字鏈(降為次要 · 不跟主金鈕搶)· 仍是最強 0-登入 hook:
+              先別下注、先測你自己 → 把 57% 從 claim 變訪客自己發現的 aha。 */}
+          <div className="mt-3">
+            <Link
+              href="/calibration/test"
+              className="font-mono text-mute/70 hover:text-gold text-[11px] tracking-[0.18em] underline-offset-4 hover:underline transition-colors"
+            >
+              還不信?先測你自己有多準 →
+            </Link>
           </div>
         </section>
 
@@ -227,8 +225,10 @@ function IconCard({
 
 // 信任承諾 chip · ✓ + 短詞 · 取代一整串「不…不…不…」
 function PromiseChip({ children, href }: { children: ReactNode; href?: string }) {
+  // V1 gold discipline(轉換 agent)· 5 個金框金底 chip 讓金色失焦 → 降成灰框 ·
+  // 只留 ✓ 是金(訊號)· 把焦點還給主金鈕 + 金色戰績數字。
   const base =
-    "inline-flex items-center gap-1 border border-gold/25 bg-gold/5 px-2.5 py-1 text-[11px] sm:text-xs tracking-wide text-bone/90";
+    "inline-flex items-center gap-1 border border-line/60 px-2.5 py-1 text-[11px] sm:text-xs tracking-wide text-bone/85";
   const inner = (
     <>
       <span aria-hidden="true" className="text-gold text-[10px]">
