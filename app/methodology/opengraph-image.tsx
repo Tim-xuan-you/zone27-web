@@ -12,7 +12,7 @@ import { BRAND, OG_SIZE, OG_CONTENT_TYPE } from "@/lib/brand";
 
 export const size = OG_SIZE;
 export const contentType = OG_CONTENT_TYPE;
-export const alt = "ZONE 27 · Engineering Whitepaper · 逐打席萬象引擎";
+export const alt = "ZONE 27 · Engineering Whitepaper · 逐打席引擎";
 
 export default async function MethodologyOgImage() {
   return new ImageResponse(
@@ -116,7 +116,7 @@ export default async function MethodologyOgImage() {
               display: "flex",
             }}
           >
-            萬象引擎
+            引擎
           </span>
         </div>
 

@@ -210,7 +210,7 @@ export default function TrackRecordPage() {
           <TeamPickPanel variant="header" />
         </div>
 
-        {/* 2026-06-04 · 球隊勝率推播 forward 半:你支持的隊下一場 + 萬象開盤
+        {/* 2026-06-04 · 球隊勝率推播 forward 半:你支持的隊下一場 + 引擎開盤
             勝率 % + 賽後對帳承諾(由下方 past-record 兌現)· engine-strategy #5 */}
         <MyTeamNextGame matches={buildMyTeamUpcoming(getTodayAndFutureMatches())} />
 
@@ -477,7 +477,7 @@ export default function TrackRecordPage() {
           <GradingStep
             no="01"
             title="引擎賽前公開預測"
-            body="每場 CPBL 賽前 (與 MLB · 排程公開) 跑 10K 萬象模擬 · 輸出主隊勝率 / 客隊勝率 · 公開在 /matches 與首頁 · 鎖定不再改。"
+            body="每場 CPBL 賽前 (與 MLB · 排程公開) 跑 10K 引擎模擬 · 輸出主隊勝率 / 客隊勝率 · 公開在 /matches 與首頁 · 鎖定不再改。"
           />
           <GradingStep
             no="02"
@@ -1187,7 +1187,7 @@ function EmptyLedger() {
         <div className="text-center">
           <p className="text-gold/80">ENGINE RUN</p>
           <p className="text-bone mt-1">18:30 → 22:00 TPE</p>
-          <p className="text-mute/60 text-[9px] tracking-[0.2em] mt-0.5">10K 萬象模擬 · 賽前公開鎖定</p>
+          <p className="text-mute/60 text-[9px] tracking-[0.2em] mt-0.5">10K 引擎模擬 · 賽前公開鎖定</p>
         </div>
         <span aria-hidden="true" className="text-mute/85 text-base hidden sm:inline">→</span>
         <span aria-hidden="true" className="text-mute/85 text-base sm:hidden">↓</span>

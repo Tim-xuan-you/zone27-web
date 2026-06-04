@@ -29,7 +29,7 @@ export default function EngineFreeBrandBlock() {
         ENGINE · FREE · UNLIMITED · RUNS IN YOUR BROWSER
       </p>
       <p className="text-mute text-sm leading-relaxed mb-3">
-        您點 RUN,「萬象」引擎在
+        您點 RUN,引擎在
         <span className="text-bone font-medium">您本機 CPU</span>
         {" "}跑 10,000 次,ZONE 27 伺服器一行運算都不做 —{" "}
         <Link

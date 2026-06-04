@@ -54,7 +54,7 @@ type Feature = {
 
 const FEATURES: Feature[] = [
   {
-    label: "全引擎可跑(10K 萬象模擬)",
+    label: "全引擎可跑(10K 引擎模擬)",
     detail: "/lab · /lab/custom · per /integrity rule engine FREE 永遠",
     unlock: {
       anonymous: "unlocked",

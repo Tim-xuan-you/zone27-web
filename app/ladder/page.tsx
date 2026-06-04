@@ -57,7 +57,7 @@ export default function LadderPage() {
             behavior-category 不點名 · 全球研究 agent F9)· 你打贏引擎 = 我們要的結果 */}
         <div className="border-l-2 border-gold/60 pl-5 py-1 mb-10">
           <p className="text-bone text-base sm:text-lg leading-relaxed">
-            你打贏萬象 · 是我們<span className="text-gold">最想看到</span>的事。
+            你打贏引擎 · 是我們<span className="text-gold">最想看到</span>的事。
           </p>
           <p className="mt-2 text-mute text-sm leading-relaxed">
             收費明牌的地方剛好相反 —— 你贏太多會被冷處理、輸的截圖被默默刪掉。

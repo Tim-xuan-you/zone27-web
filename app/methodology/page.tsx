@@ -19,7 +19,7 @@ import { createPageMetadata } from "@/lib/page-og";
 export const metadata: Metadata = createPageMetadata({
   title: "Methodology · The ZONE 27 Engine Whitepaper",
   description:
-    "完整論文等級的技術白皮書 · 4 sections · 「萬象」9 局逐打席引擎、壘上推進物理、10,000 次收斂統計、v0.4 路線圖。零行銷語言。",
+    "完整論文等級的技術白皮書 · 4 sections · 引擎9 局逐打席引擎、壘上推進物理、10,000 次收斂統計、v0.4 路線圖。零行銷語言。",
   path: "/methodology",
 });
 
@@ -47,7 +47,7 @@ export default function MethodologyPage() {
         <div className="zone27-rule mx-auto max-w-[260px] mt-4" aria-hidden="true" />
         <p className="editorial-dropcap mt-8 max-w-xl mx-auto text-mute leading-relaxed">
           我們不寫公關稿,只寫技術筆記。
-          這是 ZONE 27「萬象」引擎完整的內部運作說明。
+          這是 ZONE 27引擎完整的內部運作說明。
         </p>
         <div className="mt-8 flex justify-center">
           <ArticleMeta readingMin={6} />
@@ -142,7 +142,7 @@ export default function MethodologyPage() {
       {/* ── ABSTRACT ─────────────────────────────── */}
       <Section no="00" label="ABSTRACT" zh="摘要">
         <p>
-          ZONE 27 的「萬象」引擎
+          ZONE 27 的引擎
           <FootnoteRef n={1} />
           {" "}估算 CPBL 比賽的勝率分布。
           引擎 v0.2 為逐打席對決模型(Real At-Bat),每場虛擬比賽包含
@@ -608,7 +608,7 @@ repeat 10,000 times → aggregate
               </span>
             </div>
             <p className="text-mute text-sm sm:text-base leading-relaxed">
-              <strong className="text-bone">v0.2 BASE</strong> · 逐打席「萬象」引擎 · 100% client-side · 您 browser 跑 10K simulations · 同
+              <strong className="text-bone">v0.2 BASE</strong> · 逐打席引擎 · 100% client-side · 您 browser 跑 10K simulations · 同
               GitHub source · 詳見{" "}
               <Link
                 href="/methodology/diff"
@@ -763,7 +763,7 @@ repeat 10,000 times → aggregate
               <span className="font-mono text-gold tabular tracking-[0.18em] mr-2">
                 [1]
               </span>
-              <strong className="text-bone">「萬象」的原理:把整場球在電腦裡打一萬次</strong> ·
+              <strong className="text-bone">引擎的原理:把整場球在電腦裡打一萬次</strong> ·
               每個打席依投手指標擲一次機率、累加成完整 9 局、再重複一萬場 ·
               數哪一隊贏比較多次,就是引擎輸出的勝率。 沒有玄學、沒有黑箱 ·
               完整程式碼公開在 GitHub(<Mono>lib/simulator.ts</Mono> · MIT 授權)· 任何工程師可複製驗證。

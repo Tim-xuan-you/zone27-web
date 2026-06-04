@@ -241,7 +241,7 @@ export default function AuditPage() {
           {/* ── 01 MODEL DESCRIPTION ────────────────── */}
           <ReportSection no="01" label="MODEL DESCRIPTION">
             <P>
-              ZONE 27 的「萬象」引擎是逐打席對決模型,用於估算棒球比賽
+              ZONE 27 的引擎是逐打席對決模型,用於估算棒球比賽
               的勝率分布。每場虛擬比賽模擬 9 局共 ~70 個獨立打席,每個打席依
               投手 <StatTerm term="K/9" /> · <StatTerm term="BB/9" /> ·{" "}
               <StatTerm term="HR/9" /> 推

@@ -11,7 +11,7 @@ import { getMyTeam, getTeamById, getTeamByName } from "@/lib/teams";
 // 0 server / 0 PII · 純 localStorage z27_team(同既有兩件)。
 //
 // 缺的那一半:MyTeamTrackRecord 只攤「過去」(✓proved ✕diverged)· 這件補
-// 「未來」—— 你支持的隊下一場 + 萬象開盤勝率 % + 賽後自動對帳承諾(該承諾由
+// 「未來」—— 你支持的隊下一場 + 引擎開盤勝率 % + 賽後自動對帳承諾(該承諾由
 // 下方 MyTeamTrackRecord 真的兌現 · 不是 vapor)。
 //   = 手機那種「你的球隊今天幾 %」冷數字推播的誠實版(它不回來認帳 · 我們回來)。
 //
@@ -116,7 +116,7 @@ export default function MyTeamNextGame({ matches }: Props) {
       <div className="mt-4 flex items-end gap-4 flex-wrap">
         <div>
           <p className="font-mono text-mute/55 text-[9px] tracking-[0.3em] mb-1">
-            萬象引擎開盤
+            引擎開盤
           </p>
           <p className="text-bone leading-none">
             <span className="text-gold text-4xl sm:text-5xl font-light tabular">
@@ -143,7 +143,7 @@ export default function MyTeamNextGame({ matches }: Props) {
       <p className="mt-4 text-mute text-sm leading-relaxed">
         手機上那種「你的球隊今天幾 %」的勝率 · 給你一個冷數字就沒了 ·
         <strong className="text-bone">不會回來告訴你它到底準不準</strong>。
-        我們會 —— 這場打完 · 萬象猜對了沒 · 自動記進你下面的戰績 · 不刪、不藏。
+        我們會 —— 這場打完 · 引擎猜對了沒 · 自動記進你下面的戰績 · 不刪、不藏。
       </p>
 
       <div className="mt-4">
@@ -151,7 +151,7 @@ export default function MyTeamNextGame({ matches }: Props) {
           href={`/matches/${next.id}`}
           className="inline-block px-5 py-2 border border-gold/50 text-gold font-mono text-[10px] tracking-[0.3em] hover:bg-gold/10 transition-colors"
         >
-          → 看萬象怎麼算這場
+          → 看引擎怎麼算這場
         </Link>
       </div>
     </div>

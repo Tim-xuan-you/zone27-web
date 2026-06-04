@@ -51,7 +51,7 @@ export const metadata: Metadata = {
     "中華職棒",
     "CPBL",
     "MLB",
-    "萬象引擎",
+    "引擎",
     "棒球數據",
     "Sabermetrics",
     "ZONE 27",

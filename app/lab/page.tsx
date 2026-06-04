@@ -147,7 +147,7 @@ export default function LabPage() {
       {/* ── HERO · R110 W2 Apple-style minimal · 1 chip + 1 H1 + 1 subtitle line ── */}
       <section className="mx-auto max-w-4xl w-full px-6 sm:px-10 pt-20 pb-10 text-center">
         <p className="font-mono text-[10px] tracking-[0.35em] mb-8 text-gold">
-          萬象引擎實驗室 · v0.2
+          引擎實驗室 · v0.2
         </p>
         <h1 className="text-4xl sm:text-5xl md:text-6xl font-light leading-[1.1] tracking-tight text-bone">
           親眼看
@@ -155,7 +155,7 @@ export default function LabPage() {
           跑。
         </h1>
         <p className="mt-6 max-w-md mx-auto text-mute leading-relaxed text-base">
-          選一場 CPBL · 跑 10,000 次「萬象」模擬 · &lt; 2 秒收斂。
+          選一場 CPBL · 跑 10,000 次引擎模擬 · &lt; 2 秒收斂。
         </p>
 
         {/* Universal engine-free brand block — same on /lab/custom. */}

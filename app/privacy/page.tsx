@@ -251,7 +251,7 @@ export default function PrivacyPage() {
         </div>
 
         <p className="text-mute/80 mt-6">
-          這也代表:目前的 ZONE 27 是一個「客戶端透明」的網站,所有互動(「萬象」模擬、REPLAY 動畫、自訂引擎)全部在您的瀏覽器執行,
+          這也代表:目前的 ZONE 27 是一個「客戶端透明」的網站,所有互動(引擎模擬、REPLAY 動畫、自訂引擎)全部在您的瀏覽器執行,
           資料從不離開您的裝置。
         </p>
       </Section>

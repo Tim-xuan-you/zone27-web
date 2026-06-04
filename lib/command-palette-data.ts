@@ -192,7 +192,7 @@ export const COMMAND_ITEMS: CommandItem[] = [
       "lab",
       "engine",
       "simulator",
-      "萬象",
+      "引擎",
       "引擎",
       "模擬",
       "勝率",
@@ -202,7 +202,7 @@ export const COMMAND_ITEMS: CommandItem[] = [
       "演算",
       "勝負",
       "賠率",
-      "萬象引擎",
+      "引擎",
     ],
   },
   {

@@ -113,7 +113,7 @@ export default async function LabOgImage() {
               display: "flex",
             }}
           >
-            萬象引擎模擬
+            引擎模擬
           </div>
 
           <div

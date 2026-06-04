@@ -280,7 +280,7 @@ export default function IntegrityPage() {
 
             <p>
               <strong className="text-bone">這道牆的具體形狀:</strong>
-              ZONE 27 引擎 output(K/9 · BB/9 · HR/9 推「萬象」模擬 · 7-LENS
+              ZONE 27 引擎 output(K/9 · BB/9 · HR/9 推引擎模擬 · 7-LENS
               CANVAS · /audit S02 全部 estimation disclosure)對<strong className="text-bone">
               FREE tier 訪客 = BLACK 訂閱者 = GOLD 永久會員</strong>
               · 物理上同一份 lib/simulator.ts 跑出來。 paid tier 買的是 IDENTITY

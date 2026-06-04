@@ -300,7 +300,7 @@ export default function CpblTeamsIndexPage() {
                 這些指標怎麼餵進引擎 · 程式碼公開
               </p>
               <p className="text-mute text-[12px] leading-relaxed">
-                lib/simulator.ts · 萬象引擎 · GitHub MIT licensed
+                lib/simulator.ts · 引擎 · GitHub MIT licensed
               </p>
             </Link>
           </div>
