@@ -157,7 +157,7 @@ export default function CardBetStrip({
           href={`/login?next=${encodeURIComponent(`/matches/${matchId}`)}`}
           className="block text-center px-3 py-2.5 min-h-[40px] border border-gold/40 text-gold hover:bg-gold/10 hover:border-gold font-mono text-[10px] tracking-[0.15em] transition-colors"
         >
-          登入免費註冊 → 押這場
+          免費加入 → 押這場
         </Link>
       )}
 

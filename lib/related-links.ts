@@ -207,7 +207,7 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
     {
       href: "/founders",
       kicker: "founders",
-      title: "加入 GOLD · 前 270 拿創始編號",
+      title: "加入 GOLD · 最高階年度會員",
     },
   ],
   "/track-record": [

@@ -57,7 +57,9 @@ const NAV_ITEMS_STATIC: {
   badge?: string;
 }[] = [
   { key: "matches", href: "/matches", label: "賽事" },
-  { key: "lab", href: "/lab", label: "實驗室", badge: "BETA" },
+  // R197 · 拿掉「實驗室 BETA」badge:BETA 在核心引擎旁 = 對每個訪客說「引擎還沒做完」·
+  // 跟 MLB de-BETA 一致(蒙地卡羅是全世界在用的成熟方法 · 不是 beta)。
+  { key: "lab", href: "/lab", label: "實驗室" },
   { key: "about", href: "/about", label: "關於" },
 ];
 
@@ -135,8 +137,7 @@ export default function Nav({ active }: { active?: NavKey }) {
                       aria-label={`今晚 ${tonightCount} 場 CPBL 賽事 prediction 可看`}
                       className="px-1 py-px text-[8px] tracking-[0.15em] border border-mute/40 text-mute tabular"
                     >
-                      <span lang="en">TONIGHT </span>
-                      {tonightCount}
+                      今晚 {tonightCount}
                     </span>
                   )}
                   {item.badge && (

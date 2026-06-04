@@ -172,7 +172,7 @@ export default function UserPredictionPicker({
               href={loginHref}
               className="block text-center px-4 py-3 min-h-[44px] bg-gold text-navy font-mono text-[11px] tracking-[0.2em] hover:bg-gold-soft transition-colors"
             >
-              登入免費註冊 → 押這場
+              免費加入 → 押這場
             </Link>
             <p className="mt-2 font-mono text-mute/60 text-[9px] tracking-[0.2em] leading-relaxed text-center">
               押注要先成為免費會員 —— 每一手才算進你的永久戰績、能上海選天梯。
