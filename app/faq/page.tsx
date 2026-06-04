@@ -87,16 +87,12 @@ const CATEGORIES: Category[] = [
         a: (
           <>
             Tim 是唯一 curator · 目前先做 CPBL · 同 Stratechery / Ben Thompson 親手 curate 所有內容。
-            靠賣明牌的生意抽傭 model 需要 user 推薦 · ZONE 27 結構性相反 · 0 抽傭 + 0 third-party 內容。
-            您可以走{" "}
-            <Link href="/hey-tim" className="text-gold underline-offset-4 hover:underline">
-              /hey-tim
-            </Link>
-            {" "}公開問 ·{" "}
+            靠賣明牌的生意抽傭 model 需要 user 推薦 · ZONE 27 結構性相反 · 不接受 third-party 內容。
+            您可以到{" "}
             <Link href="/member/submit" className="text-gold underline-offset-4 hover:underline">
               /member/submit
             </Link>
-            {" "}投稿 to Tim · LensFocusVote 投票 lens 優先序。
+            {" "}投稿給 Tim · 或用 LensFocusVote 投票 lens 優先序。
           </>
         ),
       },
@@ -247,11 +243,16 @@ const CATEGORIES: Category[] = [
           <>
             賽後我們會自動生成「AI 偏差值報告」,公開告訴會員模型在哪個變數失算
             (例如:「先發投手第 3 局變化球轉速高於賽季平均 15%」),
-            並把這個變數寫進下一次模型迭代。模型在{" "}
-            <Link href="/changelog" className="text-gold underline-offset-4 hover:underline">
-              /changelog
-            </Link>{" "}
-            持續公開升級紀錄。
+            並把這個變數寫進下一次模型迭代。模型升級紀錄持續公開在{" "}
+            <a
+              href="https://github.com/Tim-xuan-you/zone27-web/commits/main"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gold underline-offset-4 hover:underline"
+            >
+              GitHub commit 史
+            </a>
+            。
           </>
         ),
       },

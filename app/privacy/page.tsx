@@ -189,7 +189,7 @@ export default function PrivacyPage() {
           <strong className="text-bone">不 share 第三方規則</strong> · 您 application
           內容 0 third-party tracking · 0 analytics · 0 marketing list · 0 LLM
           training corpus · 0 cross-product sharing。 違反此 disclosure 需 30 天前
-          /changelog 公告 + 您可選 opt-out · per /audit S05 + S06 PRE-COMMIT pattern。
+          公告於公開 GitHub commit 史 + 您可選 opt-out · per /audit S05 + S06 PRE-COMMIT pattern。
         </p>
       </Section>
 
@@ -245,7 +245,7 @@ export default function PrivacyPage() {
             <li>✕ Cloudflare Web Analytics / Plausible(都未安裝)</li>
           </ul>
           <p className="mt-4 font-mono text-mute/70 text-[10px] tracking-[0.3em] leading-relaxed">
-            ⚓ 這份清單每加 1 個工具 · 都要 30 天前先在 /changelog 公告 ·
+            ⚓ 這份清單每加 1 個工具 · 都要 30 天前先在公開 GitHub commit 史公告 ·
             從清單上偷砍任何一個 = 品牌信用自殺。
           </p>
         </div>
@@ -447,7 +447,7 @@ export default function PrivacyPage() {
           <li>
             <strong className="text-bone">第 20 條</strong>(原蒐集目的範圍內)
             · 我們承諾不超出 launch 通知 + onboarding 兩個目的 · 任何擴張需 30
-            天 /changelog 公告 + 您可選 opt-out。
+            天前公告於公開 GitHub commit 史 + 您可選 opt-out。
           </li>
         </ul>
 
@@ -497,7 +497,7 @@ export default function PrivacyPage() {
         <p className="mt-6 text-mute/85 text-sm">
           ▸ 完整 PDPA-compliant 承諾 同步顯示在 <Link href="/audit#disclosure" className="text-gold underline-offset-4 hover:underline">/audit DISCLOSURE block</Link>
           + <Link href="/integrity" className="text-gold underline-offset-4 hover:underline">/integrity binding rules</Link>
-          · 任何 update 需 30 天 /changelog 公告 · per /audit S05 PRE-COMMIT pattern。
+          · 任何 update 需 30 天前公告於公開 GitHub commit 史 · per /audit S05 PRE-COMMIT pattern。
         </p>
       </Section>
 
@@ -520,7 +520,7 @@ export default function PrivacyPage() {
             <Code>publishable key</Code> 也無法繞過存取邊界
           </li>
           <li>▸ 創辦人本機不留任何 email 副本</li>
-          <li>▸ 若發生資料外洩,72 小時內公開揭露於 /changelog</li>
+          <li>▸ 若發生資料外洩,72 小時內公開揭露於公開 GitHub 紀錄</li>
         </ul>
       </Section>
 
@@ -550,9 +550,14 @@ export default function PrivacyPage() {
         </p>
         <p className="text-mute leading-relaxed max-w-md mx-auto">
           所有政策變動會公開於{" "}
-          <Link href="/changelog" className="text-gold underline-offset-4 hover:underline">
-            /changelog
-          </Link>
+          <a
+            href="https://github.com/Tim-xuan-you/zone27-web/commits/main"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-gold underline-offset-4 hover:underline"
+          >
+            公開 GitHub commit 史
+          </a>
           。
         </p>
         <Link

@@ -118,14 +118,8 @@ export default function MethodologyPage() {
             </li>
           </ul>
           <p className="mt-3 text-mute/65 text-[11px] leading-relaxed border-t border-line/40 pt-3">
-            完整 enterprise state 公開於{" "}
-            <Link
-              href="/annual/2026"
-              className="text-gold/80 hover:text-gold underline-offset-4 hover:underline"
-            >
-              /annual/2026
-            </Link>{" "}
-            · 5/31 每年 publish commitment · 違反 = brand 信用 collapse(per{" "}
+            完整年度透明報表 · 每年 5/31 publish commitment(同 /audit 的事前承諾原則)·
+            違反 = brand 信用 collapse(per{" "}
             <Link
               href="/ethics"
               className="text-gold/80 hover:text-gold underline-offset-4 hover:underline"
@@ -264,9 +258,14 @@ repeat 10,000 times → aggregate
           </Link>
           · 含 LOCKED / EXPLORING / BRAND BOUNDARIES 三段。
           每次升級都出現在
-          <Link href="/changelog" className="text-gold underline-offset-4 hover:underline mx-1">
-            /changelog
-          </Link>
+          <a
+            href="https://github.com/Tim-xuan-you/zone27-web/commits/main"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-gold underline-offset-4 hover:underline mx-1"
+          >
+            GitHub commit 史
+          </a>
           · 變動 commit message 公開可審。
         </p>
         <p className="text-mute/80 text-sm">
@@ -392,7 +391,7 @@ repeat 10,000 times → aggregate
           </li>
           <li className="flex gap-3 items-baseline">
             <span className="font-mono text-gold/70 text-[10px] tracking-[0.25em]">▸</span>
-            <span className="flex-1">30-day notice via <Link href="/changelog" className="text-gold underline-offset-4 hover:underline">/changelog</Link> for any rule modification(同 /audit S05 PRE-COMMIT pattern)</span>
+            <span className="flex-1">30-day notice via <a href="https://github.com/Tim-xuan-you/zone27-web/commits/main" target="_blank" rel="noopener noreferrer" className="text-gold underline-offset-4 hover:underline">公開 GitHub commit 史</a> for any rule modification(同 /audit S05 PRE-COMMIT pattern)</span>
           </li>
           <li className="flex gap-3 items-baseline">
             <span className="font-mono text-gold/70 text-[10px] tracking-[0.25em]">▸</span>
@@ -699,12 +698,14 @@ repeat 10,000 times → aggregate
             <p className="text-mute text-sm sm:text-base leading-relaxed">
               下一個要做什麼還沒拍板 · 不是預先承諾的清單。 已經 ship 的東西
               記在{" "}
-              <Link
-                href="/changelog"
+              <a
+                href="https://github.com/Tim-xuan-you/zone27-web/commits/main"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-gold underline-offset-4 hover:underline"
               >
-                /changelog
-              </Link>
+                GitHub commit 史
+              </a>
               · 長期方向看{" "}
               <Link
                 href="/roadmap"
@@ -744,7 +745,7 @@ repeat 10,000 times → aggregate
             都查得到。 賣明牌的站輸了就刪文 · 我們是保留版本 + 永久留下記錄。
           </p>
           <p className="font-mono text-mute/80 text-[10px] tracking-[0.3em] leading-relaxed">
-            ⚓ 修改此 pledge 需 30 天前 /changelog 公告 · 同 /audit S05
+            ⚓ 修改此 pledge 需 30 天前公告於公開 GitHub commit 史 · 同 /audit S05
             PRE-COMMIT pattern。
           </p>
         </div>

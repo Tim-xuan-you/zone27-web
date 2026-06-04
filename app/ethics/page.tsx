@@ -10,7 +10,7 @@ import ReadingProgress from "@/components/ReadingProgress";
 export const metadata: Metadata = {
   title: "Ethics Policy · 9 binding commitments",
   description:
-    "ZONE 27 的 9 條「我永遠不做」承諾,Tim 親筆簽名。對標、取代賣明牌的站、收費明牌群組。每一條都公開、可追蹤,修改任何一條都要 30 天前在 /changelog 公告。違反 = 品牌信用崩盤。",
+    "ZONE 27 的 9 條「我永遠不做」承諾,Tim 親筆簽名。對標、取代賣明牌的站、收費明牌群組。每一條都公開、可追蹤,修改任何一條都要 30 天前公告於公開 GitHub commit 史。違反 = 品牌信用崩盤。",
 };
 
 // /ethics · Stratechery About page transplant · 9 ZONE 27 binding NOT-DO
@@ -20,7 +20,7 @@ const COMMITMENTS: { num: string; title: string; body: string; tier: "displaceme
   {
     num: "01",
     title: "我不賣引擎預測給 bookmakers 或 scrapers",
-    body: "若我收到 offer 來自任何博彩平台 / data scraper / sportsbook 想授權 ZONE 27 引擎輸出 · 我會把 offer 內容 + 我的拒絕 publish 在 /changelog · 不私下交易 · 不簽 NDA。",
+    body: "若我收到 offer 來自任何博彩平台 / data scraper / sportsbook 想授權 ZONE 27 引擎輸出 · 我會把 offer 內容 + 我的拒絕 publish 在公開 GitHub 紀錄 · 不私下交易 · 不簽 NDA。",
     tier: "displacement",
   },
   {
@@ -56,7 +56,7 @@ const COMMITMENTS: { num: string; title: string; body: string; tier: "displaceme
   {
     num: "07",
     title: "我每年 5 月 publish 全年收入 + 開銷 + subscriber count",
-    body: "每年 5/31 publish /annual/{year} report · 含全年收入 · 全年開銷 · BLACK subscriber count · GOLD 認領數 · 同 /audit S05 PRE-COMMIT pattern · 修改此 publish cadence 需 30 天 /changelog 公告。",
+    body: "每年 5/31 publish 年度報告 · 含全年收入 · 全年開銷 · BLACK subscriber count · GOLD 認領數 · 同 /audit S05 PRE-COMMIT pattern · 修改此 publish cadence 需 30 天前公告於公開 GitHub commit 史。",
     tier: "subscriber",
   },
   {
@@ -279,16 +279,16 @@ export default function EthicsPage() {
           </p>
           <div className="border border-loss/30 bg-loss/5 p-5 sm:p-7">
             <h3 className="text-bone text-lg sm:text-xl font-light tracking-tight mb-4 leading-snug">
-              修改任何 commitment 需 30 天 /changelog 公告
+              修改任何 commitment 需 30 天前公告於公開 GitHub commit 史
             </h3>
             <p className="text-mute leading-relaxed mb-4">
-              同 /audit S05 PRE-COMMIT pattern · /annual yearly publish
+              同 /audit S05 PRE-COMMIT pattern · 年度報告 yearly publish
               pattern · /membership/black-card/ledger 5 rules pattern。
               此 /ethics page 上的 9 commitments 任一條 wording 改動 / 條件
               加 / 條件砍 · 全部需要:
             </p>
             <ol className="space-y-2 list-decimal pl-6 text-mute leading-relaxed mb-4">
-              <li>30 天前 /changelog publish 公告 · 含 before/after diff + 理由</li>
+              <li>30 天前在公開 GitHub commit 史 publish 公告 · 含 before/after diff + 理由</li>
               <li>30 天 freeze window · visitor 可在此期間發 GitHub Issue 反對</li>
               <li>30 天後新 commitment 生效 · /ethics page rewrite · git commit 為 source of truth</li>
               <li>每次修改在 commit message 強制 cite issue link · audit trail 1-click 可達</li>
@@ -403,7 +403,7 @@ export default function EthicsPage() {
             <strong>不是 marketing copy</strong>。 9 條是 hard commitments +
             單人風險的接管安排 · 違反任一條 = brand 信用
             collapse · 即使違反 1 次 · /ethics page 上會出現「{COMMITMENTS[0].num}
-            {" "}- VIOLATED YYYY-MM-DD · see /changelog」 紅色 alert · 永久
+            {" "}- VIOLATED YYYY-MM-DD · see GitHub」 紅色 alert · 永久
             visible · per /audit S05 PRE-COMMIT
             「不刪不藏」 pattern。
           </p>
@@ -415,7 +415,7 @@ export default function EthicsPage() {
             這 6 條 == 他們整個 revenue model 構成。
           </p>
           <p>
-            修改此 page 9 commitments 需 30 天 /changelog 公告 · 同{" "}
+            修改此 page 9 commitments 需 30 天前公告於公開 GitHub commit 史 · 同{" "}
             <Link href="/audit#section-05" className="text-gold hover:underline">/audit S05</Link>{" "}
             PRE-COMMIT pattern · 用實際成本背書 · 同{" "}
             <Link href="/integrity" className="text-gold hover:underline">/integrity 22 binding rules</Link>{" "}

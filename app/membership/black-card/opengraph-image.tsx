@@ -176,7 +176,7 @@ export default async function BlackCardOgImage() {
           }}
         >
           <UnlockRow label="v0.3 + v0.4 engine variants(BLACK 解鎖)" />
-          <UnlockRow label="/hey-tim 賽前 BLACK 優先通道 · Tim 直答" />
+          <UnlockRow label="寫信給 Tim · 24 小時內親手回(免費 7 天)" />
           <UnlockRow label="創作者抽成 10%(業界 30-50% 降維打擊)" />
           <UnlockRow label="每月 voting 影響引擎下個 ship 方向" />
           <UnlockRow label="Tim 每週工程筆記 full 版" />

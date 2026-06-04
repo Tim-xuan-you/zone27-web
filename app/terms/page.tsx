@@ -73,9 +73,14 @@ export default function TermsPage() {
           <li>▸ 部分元件標記 <Code>BETA</Code> 是正常狀態</li>
           <li>▸ 我們可能在不通知的情況下進行重大改版</li>
           <li>▸ 所有改動會公開於{" "}
-            <Link href="/changelog" className="text-gold underline-offset-4 hover:underline">
-              /changelog
-            </Link>
+            <a
+              href="https://github.com/Tim-xuan-you/zone27-web/commits/main"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gold underline-offset-4 hover:underline"
+            >
+              公開 GitHub commit 史
+            </a>
           </li>
         </ul>
       </Section>
@@ -191,7 +196,7 @@ export default function TermsPage() {
           ▸ 完整 refund 政策同步顯示在 <Link href="/founders" className="text-gold underline-offset-4 hover:underline">/founders Payment Trust block</Link>
           + <Link href="/faq" className="text-gold underline-offset-4 hover:underline">/faq Q「14 天退款怎麼運作」</Link>
           + <Link href="/membership/black-card" className="text-gold underline-offset-4 hover:underline">/membership/black-card hero「14-DAY 退款保證」 chip</Link>
-          · 三處 surface synchronized · 任何 update 需 30 天 /changelog 公告 · per
+          · 三處 surface synchronized · 任何 update 需 30 天前公告於公開 GitHub commit 史 · per
           /audit S05 PRE-COMMIT pattern。
         </p>
       </Section>
@@ -284,9 +289,14 @@ export default function TermsPage() {
       <Section no="09" label="CHANGES + GOVERNING LAW" zh="條款變更與管轄法律">
         <p>
           本服務條款可能隨產品演進而調整。所有重大變更會公開於{" "}
-          <Link href="/changelog" className="text-gold underline-offset-4 hover:underline">
-            /changelog
-          </Link>
+          <a
+            href="https://github.com/Tim-xuan-you/zone27-web/commits/main"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-gold underline-offset-4 hover:underline"
+          >
+            公開 GitHub commit 史
+          </a>
           。您繼續使用本網站即視為同意修訂後條款。
         </p>
         <p>

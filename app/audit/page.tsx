@@ -177,14 +177,8 @@ export default function AuditPage() {
               </li>
             </ul>
             <p className="mt-3 text-mute/65 text-[11px] leading-relaxed border-t border-line/40 pt-3">
-              完整 enterprise state 公開於{" "}
-              <Link
-                href="/annual/2026"
-                className="text-gold/80 hover:text-gold underline-offset-4 hover:underline"
-              >
-                /annual/2026
-              </Link>{" "}
-              · 5/31 每年 publish commitment · 違反 = brand 信用 collapse(per{" "}
+              完整年度透明報表 · 每年 5/31 publish commitment(同此頁的事前承諾原則)·
+              違反 = brand 信用 collapse(per{" "}
               <Link
                 href="/ethics"
                 className="text-gold/80 hover:text-gold underline-offset-4 hover:underline"
@@ -423,9 +417,9 @@ export default function AuditPage() {
               </ExtLink>
               {" · "}任何 simplification 都可在 30 秒內 verify。
               當預測明顯偏離時,變動會出現在{" "}
-              <Link href="/changelog" className="text-gold hover:underline">
-                /changelog
-              </Link>
+              <ExtLink href="https://github.com/Tim-xuan-you/zone27-web/commits/main">
+                GitHub commit 史
+              </ExtLink>
               ,對應變數會寫進下一次引擎迭代。
             </P>
           </ReportSection>
@@ -614,9 +608,9 @@ export default function AuditPage() {
               </div>
               <p className="font-mono text-mute/80 text-[10px] tracking-[0.25em] leading-relaxed mt-3">
                 本規則適用 engine v0.X 全部版本 · 修改需至少 30 天前公告於{" "}
-                <Link href="/changelog" className="text-gold hover:underline underline-offset-4">
-                  /changelog
-                </Link>
+                <ExtLink href="https://github.com/Tim-xuan-you/zone27-web/commits/main">
+                  公開 GitHub commit 史
+                </ExtLink>
                 。 先講好規則 · 比事後找理由解釋更可信。
               </p>
             </div>
@@ -632,16 +626,16 @@ export default function AuditPage() {
                 lang="en"
                 className="font-mono text-loss/85 text-[10px] tracking-[0.35em] mb-2"
               >
-                ⚓ POSTMORTEM 2028 · 我們可能怎麼失敗
+                ⚓ 我們可能怎麼失敗 · 自己先講
               </p>
               <p className="text-mute text-sm leading-relaxed">
                 上面那條規則處理引擎第一筆失手 · 但整個 ZONE 27 本身也可能做不
-                下去。 我們先把 5 種可能的失敗情境 + 早期警訊公開在{" "}
+                下去。 我們把對自己最狠的質疑、可能失敗的情境公開在{" "}
                 <Link
-                  href="/founders/postmortem-2028"
+                  href="/steelman"
                   className="text-loss/90 hover:text-loss underline-offset-4 hover:underline"
                 >
-                  /founders/postmortem-2028
+                  /steelman
                 </Link>
                 。 願意先公開「自己可能怎麼死」這件事 · 明牌站不會做。
               </p>
@@ -699,7 +693,7 @@ export default function AuditPage() {
             </P>
 
             <P className="text-mute/70">
-              修改此 localStorage transparency policy 需 30 天 /changelog 公告 ·
+              修改此 localStorage transparency policy 需 30 天前公告於公開 GitHub commit 史 ·
               同 Section 05 PRE-COMMIT pattern · 新 localStorage key 加入時
               此表必須同步 update · 對不上 = 品牌自殺。
             </P>
@@ -850,9 +844,9 @@ export default function AuditPage() {
               </li>
               <li>
                 ▸ 版本與變動歷史:{" "}
-                <Link href="/changelog" className="text-gold hover:underline">
-                  /changelog
-                </Link>
+                <ExtLink href="https://github.com/Tim-xuan-you/zone27-web/commits/main">
+                  GitHub commit 史
+                </ExtLink>
               </li>
             </ul>
 

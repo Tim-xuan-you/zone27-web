@@ -287,7 +287,7 @@ export default function BlackCardLedgerPage() {
             / 03 · PRE-COMMIT LEDGER RULES
           </p>
           <h2 className="text-2xl sm:text-3xl text-bone font-light tracking-tight mb-6 leading-tight">
-            5 rules · 修改需 30 天 /changelog 公告
+            5 rules · 修改需 30 天前公告於公開 GitHub commit 史
           </h2>
           <ol className="space-y-4">
             {[
@@ -326,7 +326,7 @@ export default function BlackCardLedgerPage() {
             這個 page 是 structural moat 不是 marketing decoration。
           </p>
           <p>
-            修改這頁的 5 條規則 · 需要 30 天前先在 /changelog 公告。
+            修改這頁的 5 條規則 · 需要 30 天前先在公開 GitHub commit 史公告。
           </p>
         </FounderSignOff>
 

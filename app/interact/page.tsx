@@ -84,16 +84,6 @@ type Channel = {
 const CHANNELS: Channel[] = [
   {
     no: "01",
-    icon: "📮",
-    zhTitle: "Hey Tim · 公開問答",
-    enLabel: "PUBLIC Q&A",
-    body: "你問一個問題 · Tim 賽後 24 小時內公開回覆。",
-    surface: "/hey-tim",
-    href: "/hey-tim",
-    status: "live",
-  },
-  {
-    no: "02",
     icon: "📝",
     zhTitle: "投稿 · 讀者客座",
     enLabel: "GUEST POST",
@@ -103,7 +93,7 @@ const CHANNELS: Channel[] = [
     status: "logged-in",
   },
   {
-    no: "03",
+    no: "02",
     icon: "✓",
     zhTitle: "押注 · 選一邊",
     enLabel: "PICK A SIDE",
@@ -113,7 +103,7 @@ const CHANNELS: Channel[] = [
     status: "logged-in",
   },
   {
-    no: "04",
+    no: "03",
     icon: "🗒️",
     zhTitle: "發表分析 · 選邊 + 寫看法",
     enLabel: "POST ANALYSIS",
@@ -123,7 +113,7 @@ const CHANNELS: Channel[] = [
     status: "logged-in",
   },
   {
-    no: "05",
+    no: "04",
     icon: "🔗",
     zhTitle: "分享賽後收據",
     enLabel: "SHARE RECEIPT",
@@ -133,7 +123,7 @@ const CHANNELS: Channel[] = [
     status: "post-final",
   },
   {
-    no: "06",
+    no: "05",
     icon: "📜",
     zhTitle: "GOLD · 申請信",
     enLabel: "APPLICATION",
@@ -223,24 +213,20 @@ export default function InteractPage() {
             <p>
               <strong className="text-bone">5 · 討論綁問責 · 不綁熱度。</strong>{" "}
               一般論壇靠匿名嘴砲衝熱度;ZONE 27 的討論綁在你賽前鎖死的那一手上 ——
-              賽後自動算帳、賴不掉。 拿戰績說話的討論才留得下,{" "}
-              <Link href="/hey-tim" className="text-gold/85 underline-offset-4 hover:underline">
-                /hey-tim
-              </Link>
-              {" "}的公開問答也是同一個原則。
+              賽後自動算帳、賴不掉。 拿戰績說話的討論才留得下。
             </p>
           </div>
         </section>
 
-        {/* ── 10 CHANNELS CATALOG ────────────────── */}
+        {/* ── CHANNELS CATALOG ────────────────── */}
         <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 py-10 border-t border-line/40">
           <p
             className="font-mono text-gold text-[10px] tracking-[0.4em] mb-4"
           >
-            / 6 個參與管道 · 你能在哪裡出手
+            / 5 個參與管道 · 你能在哪裡出手
           </p>
           <h2 className="text-2xl sm:text-3xl text-bone font-light tracking-tight mb-6">
-            你的互動都在這 6 個地方
+            你的互動都在這 5 個地方
           </h2>
           <div className="space-y-3">
             {CHANNELS.map((c) => (
@@ -293,13 +279,15 @@ export default function InteractPage() {
             </li>
           </ol>
           <p className="font-mono text-mute/80 text-[10px] tracking-[0.25em] leading-relaxed mt-6">
-            這 5 條只增不刪 · 修改任一條需 30 天前{" "}
-            <Link
-              href="/changelog"
+            這 5 條只增不刪 · 修改任一條需 30 天前在{" "}
+            <a
+              href="https://github.com/Tim-xuan-you/zone27-web/commits/main"
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-gold/85 underline-offset-4 hover:underline"
             >
-              /changelog
-            </Link>
+              公開 GitHub commit 史
+            </a>
             {" "}公告 · 同 /audit 的事前承諾做法一致 · 同{" "}
             <Link
               href="/integrity"
@@ -471,15 +459,6 @@ export default function InteractPage() {
                 /steelman
               </Link>
               {" · 5 strongest external objections wrote first"}
-            </li>
-            <li>
-              <Link
-                href="/founders/postmortem-2028"
-                className="text-loss/85 underline-offset-4 hover:underline"
-              >
-                /founders/postmortem-2028
-              </Link>
-              {" · 預想 5 種失敗情境"}
             </li>
             <li>
               <Link

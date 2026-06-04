@@ -207,14 +207,16 @@ export default async function ReceiptPage({ params }: { params: Params }) {
           <p className="text-mute text-base leading-relaxed">
             這個 page IS the receipt · 不是 marketing wrapper · 不是 narrative
             section · 是 the object 本身。 per /audit S05 PRE-COMMIT clause ·
-            append-only · 修改 receipt content 需 30 天前{" "}
-            <Link
-              href="/changelog"
+            append-only · 修改 receipt content 需 30 天前公告於{" "}
+            <a
+              href="https://github.com/Tim-xuan-you/zone27-web/commits/main"
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-gold underline-offset-4 hover:underline"
             >
-              /changelog
-            </Link>{" "}
-            公告 · 同 Stripe Press book detail page + Patek Reference Number
+              公開 GitHub commit 史
+            </a>{" "}
+            · 同 Stripe Press book detail page + Patek Reference Number
             archive pattern。
           </p>
         </section>
@@ -470,21 +472,6 @@ export default async function ReceiptPage({ params }: { params: Params }) {
                 ▸
               </span>
               <Link
-                href="/annual"
-                className="text-gold/85 hover:text-gold underline-offset-4 hover:underline"
-              >
-                /annual
-              </Link>
-              <span className="text-mute/70">
-                · 10-year letter index · Berkshire 60-year pattern · permanence
-                commitment Year 0 → Year 9
-              </span>
-            </li>
-            <li className="flex gap-3 items-baseline">
-              <span aria-hidden="true" className="text-gold/70">
-                ▸
-              </span>
-              <Link
                 href="/audit"
                 className="text-gold/85 hover:text-gold underline-offset-4 hover:underline"
               >
@@ -511,7 +498,7 @@ export default async function ReceiptPage({ params }: { params: Params }) {
             ZONE 27 不知道誰 click · 同 /privacy 0-tracker promise。
           </p>
           <p>
-            修改此 receipt 內容需 30 天前 /changelog 公告 · per /audit S05
+            修改此 receipt 內容需 30 天前公告於公開 GitHub commit 史 · per /audit S05
             PRE-COMMIT · append-only · git diff log = source of truth。
             違反 = brand 信用 collapse 永久 audit trail。
           </p>

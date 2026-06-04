@@ -157,7 +157,7 @@ export default async function IntegrityOgImage() {
         >
           <PaperRow label="REDLINES · 永遠不做" value="13" />
           <PaperRow label="ETHICS COMMITMENTS · 永遠會做" value="9" />
-          <PaperRow label="MODIFICATION NOTICE PERIOD" value="30 days · /changelog" />
+          <PaperRow label="MODIFICATION NOTICE PERIOD" value="30 days · GitHub" />
         </div>
 
         {/* BOTTOM · public-bond punchline */}

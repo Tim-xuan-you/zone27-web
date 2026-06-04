@@ -108,15 +108,7 @@ export default function NotFound() {
               / IF YOU FOLLOWED A LINK
             </p>
             <p className="text-mute text-xs leading-relaxed">
-              所有 ZONE 27 路由的完整列表在{" "}
-              <Link
-                href="/changelog"
-                className="text-gold underline-offset-4 hover:underline"
-              >
-                /changelog
-              </Link>
-              。
-              真正過往連結的 source of truth 是{" "}
+              ZONE 27 完整的變動歷史在{" "}
               <a
                 href="https://github.com/Tim-xuan-you/zone27-web/commits/main"
                 target="_blank"
@@ -125,7 +117,7 @@ export default function NotFound() {
               >
                 GitHub commits
               </a>
-              。
+              (唯一事實來源)。
             </p>
           </div>
         </section>

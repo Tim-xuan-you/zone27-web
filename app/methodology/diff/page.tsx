@@ -459,9 +459,14 @@ export default function MethodologyDiffPage() {
               /roadmap
             </Link>{" "}
             列得到 · 30 天前在{" "}
-            <Link href="/changelog" className="text-gold underline-offset-4 hover:underline">
-              /changelog
-            </Link>{" "}
+            <a
+              href="https://github.com/Tim-xuan-you/zone27-web/commits/main"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gold underline-offset-4 hover:underline"
+            >
+              公開 GitHub commit 史
+            </a>{" "}
             公告 modifications · 同 /audit S05 PRE-COMMIT pattern。
           </p>
         </Section>
@@ -507,7 +512,7 @@ export default function MethodologyDiffPage() {
           </div>
 
           <p className="mt-6 text-mute/85 leading-relaxed">
-            <strong className="text-bone">v0.4 ship 前 30 天 /changelog 公告 ·
+            <strong className="text-bone">v0.4 ship 前 30 天公告於公開 GitHub commit 史 ·
             modifications via 同 /audit S05 PRE-COMMIT pattern。</strong>{" "}
             訂閱 BLACK 不是「等 model 神奇升級」 · 是 see-through 看
             entire process · v0.4 ship 那天 您可以打開 lib/simulator-v04.ts
@@ -535,7 +540,7 @@ export default function MethodologyDiffPage() {
               不 silently rotate。
             </p>
             <p className="font-mono text-mute/80 text-[10px] tracking-[0.3em] leading-relaxed">
-              ⚓ 修改此承諾需 30 天前在 /changelog 公告 · 同 /audit S05
+              ⚓ 修改此承諾需 30 天前公告於公開 GitHub commit 史 · 同 /audit S05
               「先承諾」原則 · 用實際成本背書。
             </p>
           </div>
