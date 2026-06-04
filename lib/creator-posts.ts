@@ -147,6 +147,8 @@ export type CreatorPickRow = {
   handle: string;
   matchId: string;
   pick: "home" | "away";
+  /** 發文時間戳 ISO · 給「先鎖後結」徽章過濾用 · 0013 未套用 → ""(fail-open 照算) */
+  createdAt: string;
 };
 
 /** 所有創作者的選邊紀錄(anon-readable)· 空陣列 on any error/未套用。 */
@@ -156,11 +158,18 @@ export async function getCreatorRecords(): Promise<CreatorPickRow[]> {
     const { data, error } = await supabase.rpc("get_creator_records");
     if (error || !Array.isArray(data)) return [];
     return data.map((row) => {
-      const r = row as { handle?: unknown; match_id?: unknown; pick?: unknown };
+      const r = row as {
+        handle?: unknown;
+        match_id?: unknown;
+        pick?: unknown;
+        created_at?: unknown;
+      };
       return {
         handle: typeof r.handle === "string" ? r.handle : "球迷",
         matchId: typeof r.match_id === "string" ? r.match_id : "",
         pick: r.pick === "away" ? ("away" as const) : ("home" as const),
+        // 0013 未套用的舊 RPC 無此欄 → ""(gradeAuthorRecords fail-open 照算)
+        createdAt: typeof r.created_at === "string" ? r.created_at : "",
       };
     });
   } catch {
@@ -180,16 +189,32 @@ export type AuthorRecord = {
 
 const LADDER_MIN = 10; // 同 /ladder 新秀門檻
 
+/** 發文時間是否「開賽後」才下(= 不該算進徽章)· 缺資料 fail-open 回 false。
+ *  同 lib/predictions.ts isLatePick 的創作者鏡像 · Date.parse 對固定字串 deterministic。 */
+function isLateCreatorPost(ts: string, startISO: string | undefined): boolean {
+  if (!ts || !startISO) return false;
+  const t = Date.parse(ts);
+  const s = Date.parse(startISO);
+  if (Number.isNaN(t) || Number.isNaN(s)) return false;
+  return t >= s;
+}
+
 /** 把選邊紀錄對 finalResult map 評分 → 每位作者(handle)的命中戰績。
- *  finals:{ [matchId]: "home"|"away"|"tie" } · 平局不計入分母。 */
+ *  finals:{ [matchId]: "home"|"away"|"tie" } · 平局不計入分母。
+ *  starts:{ [matchId]: 開賽 ISO } · 「先鎖後結」:發文時間 ≥ 開賽的不算進徽章
+ *  (防直接 RPC / 開賽後對已打完的場刷完美徽章 = 反轉品牌命門)· 缺時間 fail-open。
+ *  ⚠ 0013 未套用時 createdAt 為 "" → fail-open 照算(行為同舊版 · graceful)。 */
 export function gradeAuthorRecords(
   rows: CreatorPickRow[],
-  finals: Record<string, "home" | "away" | "tie">
+  finals: Record<string, "home" | "away" | "tie">,
+  starts: Record<string, string> = {}
 ): Record<string, AuthorRecord> {
   const acc: Record<string, { n: number; hits: number }> = {};
   for (const r of rows) {
     const w = finals[r.matchId];
     if (!w || w === "tie") continue; // 只算已結算、非平局
+    // 先鎖後結 · 防賽後補登:賽後/開賽後才發的不算進「已驗證準度」徽章
+    if (isLateCreatorPost(r.createdAt, starts[r.matchId])) continue;
     const a = acc[r.handle] ?? { n: 0, hits: 0 };
     a.n += 1;
     if (r.pick === w) a.hits += 1;

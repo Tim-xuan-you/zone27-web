@@ -311,6 +311,12 @@ export default async function MatchDetailPage({
                 fm.finalResult!.winner,
               ])
             )}
+            matchStarts={Object.fromEntries(
+              getFinalizedMatches().map((fm) => [
+                fm.id,
+                getMatchStartIso(fm) ?? "",
+              ])
+            )}
           />
         </div>
 

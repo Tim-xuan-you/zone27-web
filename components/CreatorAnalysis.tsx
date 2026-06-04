@@ -57,6 +57,8 @@ type Props = {
   finalWinner?: "home" | "away" | "tie" | null;
   /** 全站已結算賽果 map · 給作者戰績 badge 評分用(賽果在 app 端 · 不在 DB)*/
   finalResults?: Record<string, "home" | "away" | "tie">;
+  /** 已結算場的開賽時間 map(matchId→ISO)· 給徽章「先鎖後結」過濾(發文 ≥ 開賽不算進徽章)*/
+  matchStarts?: Record<string, string>;
   /** 開賽 instant ISO · 開賽後關閉「發新分析」(選邊賽前鎖 · 賽後只能討論)· 缺則 fail-open */
   startISO?: string | null;
 };
@@ -67,6 +69,7 @@ export default function CreatorAnalysis({
   awayName,
   finalWinner,
   finalResults = {},
+  matchStarts = {},
   startISO,
 }: Props) {
   const [status, setStatus] = useState<Status>("loading");
@@ -92,7 +95,8 @@ export default function CreatorAnalysis({
       if (!cancelled) setPosts(list);
       // 作者公開戰績 · 撈全站選邊紀錄 → 對賽果評分 → 每位作者命中率(badge 用)
       getCreatorRecords().then((rows) => {
-        if (!cancelled) setRecords(gradeAuthorRecords(rows, finalResults));
+        if (!cancelled)
+          setRecords(gradeAuthorRecords(rows, finalResults, matchStarts));
       });
       try {
         const supabase = createSupabaseBrowserClient();
