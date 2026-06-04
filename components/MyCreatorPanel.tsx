@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { getMyCreatorPost } from "@/lib/creator-posts";
+import { getMyCreatorPost, getMyCreatorPostsClient } from "@/lib/creator-posts";
 
 // ── ZONE 27 · 你的分析 · 創作者後台 ─────────────────────────
 // 2026-06-05 · Tim dogfood:「會員介面看不到我發了哪些文章/幾勝幾敗/有人回嗎」。
@@ -24,7 +24,12 @@ type MatchLite = {
   dateLabel: string;
 };
 
-type MyPost = MatchLite & { pick: "home" | "away"; title: string };
+type MyPost = MatchLite & {
+  pick: "home" | "away";
+  title: string;
+  buyerCount: number | null; // null = 0012 未套(fall back · 無此數字)
+  replyCount: number | null;
+};
 
 export default function MyCreatorPanel({ matches }: { matches: MatchLite[] }) {
   const [posts, setPosts] = useState<MyPost[] | null>(null);
@@ -32,10 +37,33 @@ export default function MyCreatorPanel({ matches }: { matches: MatchLite[] }) {
   useEffect(() => {
     let cancelled = false;
     (async () => {
+      const byId = new Map(matches.map((m) => [m.id, m]));
+      // 優先用 0012 的 get_my_creator_posts(一次回我所有文 + 買/回數)。
+      const rpc = await getMyCreatorPostsClient();
+      if (cancelled) return;
+      if (rpc !== null) {
+        const out: MyPost[] = [];
+        for (const r of rpc) {
+          const m = byId.get(r.matchId);
+          if (!m) continue; // 賽事不在清單(理論上不會)
+          out.push({
+            ...m,
+            pick: r.pick,
+            title: r.title,
+            buyerCount: r.buyerCount,
+            replyCount: r.replyCount,
+          });
+        }
+        setPosts(out);
+        return;
+      }
+      // 0012 未套 → fall back:逐場 getMyCreatorPost(看得到文+命中率 · 無買/回數)
       const results = await Promise.all(
         matches.map(async (m) => {
           const p = await getMyCreatorPost(m.id);
-          return p ? ({ ...m, pick: p.pick, title: p.title } as MyPost) : null;
+          return p
+            ? ({ ...m, pick: p.pick, title: p.title, buyerCount: null, replyCount: null } as MyPost)
+            : null;
         }),
       );
       if (!cancelled) {
@@ -53,6 +81,9 @@ export default function MyCreatorPanel({ matches }: { matches: MatchLite[] }) {
   const decided = posts.filter((p) => p.finalWinner && p.finalWinner !== "tie");
   const hits = decided.filter((p) => p.pick === p.finalWinner).length;
   const rate = decided.length > 0 ? Math.round((hits / decided.length) * 100) : null;
+  const hasCounts = posts.some((p) => p.buyerCount !== null);
+  const totalBuyers = posts.reduce((s, p) => s + (p.buyerCount ?? 0), 0);
+  const totalReplies = posts.reduce((s, p) => s + (p.replyCount ?? 0), 0);
 
   return (
     <section className="mt-8">
@@ -75,6 +106,21 @@ export default function MyCreatorPanel({ matches }: { matches: MatchLite[] }) {
             </>
           )}
         </p>
+        {hasCounts && (totalBuyers > 0 || totalReplies > 0) && (
+          <p className="mt-1.5 text-mute text-[13px] leading-relaxed">
+            {totalBuyers > 0 && (
+              <>
+                共 <span className="font-mono text-gold tabular">{totalBuyers}</span> 人買過你的分析
+              </>
+            )}
+            {totalBuyers > 0 && totalReplies > 0 && " · "}
+            {totalReplies > 0 && (
+              <>
+                <span className="font-mono text-gold tabular">{totalReplies}</span> 則讀者回覆
+              </>
+            )}
+          </p>
+        )}
         <p className="mt-1 mb-4 font-mono text-mute/60 text-[10px] tracking-[0.2em] leading-relaxed">
           賽後自動掛準度 · 選邊鎖死賴不掉 —— 這就是你贏收費明牌的地方。
         </p>
@@ -99,6 +145,12 @@ export default function MyCreatorPanel({ matches }: { matches: MatchLite[] }) {
                   </span>
                   <span className="block font-mono text-mute/60 text-[10px] tracking-[0.15em] mt-0.5">
                     {p.dateLabel} · 押 {myTeam}
+                    {p.buyerCount !== null && p.buyerCount > 0 && (
+                      <span className="text-gold/70"> · {p.buyerCount} 人買</span>
+                    )}
+                    {p.replyCount !== null && p.replyCount > 0 && (
+                      <span> · {p.replyCount} 回覆</span>
+                    )}
                   </span>
                 </span>
                 <span className="shrink-0 font-mono text-[10px] tracking-[0.2em] text-right">

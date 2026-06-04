@@ -91,6 +91,53 @@ export async function getMyCreatorPost(
   }
 }
 
+// ── 我的創作者後台(migration 0012 · 一次回我所有文 + 買/回數)──────────
+export type MyCreatorPostRow = {
+  postId: string;
+  matchId: string;
+  title: string;
+  pick: "home" | "away";
+  priceNtd: number;
+  createdAt: string;
+  buyerCount: number; // 幾人買
+  replyCount: number; // 幾則別人的回覆
+};
+
+/** 我的所有分析 + 每篇幾人買/幾人回(get_my_creator_posts · 0012)。
+ *  回 `null` = RPC 未套用 / 錯誤(前端 fall back 到逐場 getMyCreatorPost)·
+ *  回陣列(可能空)= 成功。 這個 null vs [] 的區分讓 panel 在 0012 未套時不至於變空白。 */
+export async function getMyCreatorPostsClient(): Promise<MyCreatorPostRow[] | null> {
+  try {
+    const supabase = createSupabaseBrowserClient();
+    const { data, error } = await supabase.rpc("get_my_creator_posts");
+    if (error || !Array.isArray(data)) return null; // 未套用 → 讓前端 fall back
+    return data.map((row) => {
+      const r = row as {
+        post_id?: unknown;
+        match_id?: unknown;
+        title?: unknown;
+        pick?: unknown;
+        price_ntd?: unknown;
+        created_at?: unknown;
+        buyer_count?: unknown;
+        reply_count?: unknown;
+      };
+      return {
+        postId: typeof r.post_id === "string" ? r.post_id : "",
+        matchId: typeof r.match_id === "string" ? r.match_id : "",
+        title: typeof r.title === "string" ? r.title : "",
+        pick: r.pick === "away" ? ("away" as const) : ("home" as const),
+        priceNtd: Number(r.price_ntd) || 0,
+        createdAt: typeof r.created_at === "string" ? r.created_at : "",
+        buyerCount: Number(r.buyer_count) || 0,
+        replyCount: Number(r.reply_count) || 0,
+      };
+    });
+  } catch {
+    return null;
+  }
+}
+
 // ── 作者公開戰績(每篇分析旁的 credibility badge · migration 0007)──
 // 撈所有創作者鎖過的 (handle, match_id, pick) · app 端對 finalResult 自動評
 // 準/不準 → 算每位作者命中率。 報馬仔挑窗 + 刪輸的文;這裡全撈、連輸的都算。
