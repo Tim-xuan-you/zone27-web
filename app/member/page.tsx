@@ -14,6 +14,8 @@ import {
 } from "@/lib/matches";
 import { readTier, isPaid, creatorTakePct, tierLabel } from "@/lib/tier";
 import OpenPositionCard, { type OpenPosition } from "@/components/OpenPositionCard";
+import MyCreatorPanel from "@/components/MyCreatorPanel";
+import { SUPPORT_EMAIL } from "@/lib/brand-constants";
 
 export const metadata: Metadata = {
   title: "你的儀表板",
@@ -132,6 +134,17 @@ export default async function MemberPage() {
   // 拿到比較差的答案。 改抓今天+未來,跟首頁同一份資料。
   // 已押的場移到上方「你的未結算押注」· 這裡只留「還沒押」的,不重複。
   const upcoming = getTodayAndFutureMatches().filter((m) => !heldIds.has(m.id));
+
+  // 創作者後台:付費會員傳輕量賽事清單給 MyCreatorPanel(client 端撈我在每場的分析)。
+  const creatorCheckMatches = isPaid(tier)
+    ? allMatches.map((m) => ({
+        id: m.id,
+        homeName: m.home.name,
+        awayName: m.away.name,
+        finalWinner: m.finalResult?.winner ?? null,
+        dateLabel: compactDate(m.date),
+      }))
+    : [];
 
   return (
     <div className="flex flex-col flex-1 min-h-screen">
@@ -255,6 +268,10 @@ export default async function MemberPage() {
         {/* 點數錢包 · 儲值 → 買別人的付費分析(0009)· 跟「升級賣分析」是兩回事 */}
         <WalletPanel />
 
+        {/* 你的分析 · 創作者後台(付費會員 · 沒發過分析自動隱藏)· Tim dogfood:
+            「看不到我發了哪些文章/幾勝幾敗/有人回嗎」· 答 #1 #5 #7 */}
+        {isPaid(tier) && <MyCreatorPanel matches={creatorCheckMatches} />}
+
         {/* 3 · 今晚可以押 ───────────────────────────── */}
         <section className="mt-6">
           <p className="font-mono text-gold text-[10px] tracking-[0.4em] mb-3">
@@ -325,6 +342,17 @@ export default async function MemberPage() {
             </Link>
           </p>
         )}
+
+        {/* 聯絡站長 · Tim dogfood:會員找不到「怎麼聯絡站長」· 直接 mailto Tim 個人 inbox */}
+        <p className="mt-10 text-center font-mono text-mute/50 text-[10px] tracking-[0.2em] leading-relaxed">
+          有問題、想回報、或要找站長?{" "}
+          <a
+            href={`mailto:${SUPPORT_EMAIL}`}
+            className="text-gold/70 hover:text-gold underline-offset-4 hover:underline transition-colors"
+          >
+            聯絡 Tim →
+          </a>
+        </p>
       </main>
 
       <Footer />
