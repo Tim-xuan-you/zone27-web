@@ -18,6 +18,7 @@ import MyCreatorPanel from "@/components/MyCreatorPanel";
 import DisplayNameSetting from "@/components/DisplayNameSetting";
 import { SUPPORT_EMAIL } from "@/lib/brand-constants";
 import { readDisplayName } from "@/lib/identity";
+import { getMlbAsMatches } from "@/lib/mlb-matches";
 import { createHash } from "crypto";
 
 export const metadata: Metadata = {
@@ -96,15 +97,18 @@ export default async function MemberPage() {
     "球迷 #" + createHash("md5").update(user.id).digest("hex").slice(0, 8);
 
   const predictionsMap = await getMyPredictionsMap();
+  // R198 · 併 MLB(全套):押 MLB 也計進你 vs 引擎準度 + 顯示為未結算持倉。
+  const mlbMatches = await getMlbAsMatches();
+  const allWithMlb = [...allMatches, ...mlbMatches];
   const stats = aggregatePredictionStats(
     predictionsMap,
-    allMatches.map((m) => ({ id: m.id, finalWinner: m.finalResult?.winner ?? null, startISO: getMatchStartIso(m) }))
+    allWithMlb.map((m) => ({ id: m.id, finalWinner: m.finalResult?.winner ?? null, startISO: getMatchStartIso(m) }))
   );
 
   // 你的未結算押注(the live middle · soul)· 你押過、還沒結算的場 —— 押下去到
   // 打完之間那段以前 /member 一片空白。 你 vs 引擎 vs 群眾 的張力撐住「我現在
   // 有一手在賭」。 LIVE 場(getMatchPhase today-live)多一道呼吸金線。
-  const openPositions: OpenPosition[] = allMatches
+  const openPositions: OpenPosition[] = allWithMlb
     .map((m): OpenPosition | null => {
       const entry = predictionsMap[m.id];
       // table 只存 home/away · 但 map 型別保留舊的 "skip" · skip 不是一手持倉

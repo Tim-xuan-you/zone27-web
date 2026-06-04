@@ -9,6 +9,7 @@
 // ─────────────────────────────────────────────────────
 
 import type { Match, TeamSide } from "@/lib/matches";
+import { getMatchStartIso } from "@/lib/matches";
 import { fetchRelevantMlb, type MlbGame, type MlbTeamSide } from "@/lib/mlb";
 import mlbLocked from "@/lib/mlb-locked.json";
 
@@ -99,4 +100,19 @@ export async function getMlbMatchById(id: string): Promise<Match | null> {
   if (!id.startsWith("mlb-")) return null;
   const all = await getMlbAsMatches();
   return all.find((m) => m.id === id) ?? null;
+}
+
+// MLB 已結算場的結果(給個人準度評分用 · 同 CPBL getFinalizedMatches 的 shape)·
+// 讓「押 MLB」也計進你 vs 引擎的命中率(aggregatePredictionStats / YourRecordStrip)。
+export async function getMlbFinalizedResults(): Promise<
+  { id: string; finalWinner: "home" | "away" | "tie" | null; startISO: string | null }[]
+> {
+  const all = await getMlbAsMatches();
+  return all
+    .filter((m) => m.finalResult)
+    .map((m) => ({
+      id: m.id,
+      finalWinner: m.finalResult?.winner ?? null,
+      startISO: getMatchStartIso(m),
+    }));
 }

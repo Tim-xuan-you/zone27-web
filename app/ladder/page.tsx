@@ -3,6 +3,7 @@ import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import YourRecordStrip from "@/components/YourRecordStrip";
 import { getFinalizedMatches, getMatchStartIso } from "@/lib/matches";
+import { getMlbFinalizedResults } from "@/lib/mlb-matches";
 import { createPageMetadata } from "@/lib/page-og";
 
 export const metadata = createPageMetadata({
@@ -27,14 +28,18 @@ const TIERS = [
   { n: 5, zh: "神諭", en: "ORACLE", one: "機器、大家都贏 · 全站最強。 這是王座。" },
 ];
 
-export default function LadderPage() {
+export default async function LadderPage() {
   // 已結算賽事勝方 · 傳給「你現在的位置」戰績條(client 端評分本人押注)。
   // /ladder 維持 ISR 靜態 · 戰績條 hydrate 後才填本人進度。
-  const matchResults = getFinalizedMatches().map((m) => ({
-    id: m.id,
-    finalWinner: m.finalResult?.winner ?? null,
-    startISO: getMatchStartIso(m),
-  }));
+  // R198 · 併入 MLB 已結算結果 → 押 MLB 也計進個人準度(MLB 全套)。
+  const matchResults = [
+    ...getFinalizedMatches().map((m) => ({
+      id: m.id,
+      finalWinner: m.finalResult?.winner ?? null,
+      startISO: getMatchStartIso(m),
+    })),
+    ...(await getMlbFinalizedResults()),
+  ];
 
   return (
     <div className="flex flex-col flex-1 min-h-screen">

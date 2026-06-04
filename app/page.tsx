@@ -10,6 +10,7 @@ import {
   getTrackRecordStats,
   getMatchStartIso,
 } from "@/lib/matches";
+import { getMlbFinalizedResults } from "@/lib/mlb-matches";
 
 // ── ZONE 27 · Homepage · 市場看板(R175 Polymarket pivot)──────
 // Tim 2026-05-30「請變成 Polymarket · 很亂很雜」· per
@@ -25,7 +26,7 @@ import {
 
 export const revalidate = 600; // ISR · 賽事 lifecycle transitions
 
-export default function Home() {
+export default async function Home() {
   const upcoming = getTodayAndFutureMatches(); // 今晚 + 即將 · asc
   // 休賽日 fallback · 看板永不空白:沒有可押賽事時,改放引擎最近的賽後
   // 收據(✓命中 / ✕落空都掛)· per getFeaturedMatch 哲學「引擎沒在跑時,
@@ -36,11 +37,15 @@ export default function Home() {
   const tr = getTrackRecordStats();
   // 已結算賽事的勝方 · 傳給登入後個人戰績條(client 端用它評分本人押注 ·
   // 靜態資料 · 無隱私問題)。 首頁維持 ISR 靜態,戰績條 hydrate 後才填本人資料。
-  const matchResults = finalized.map((m) => ({
-    id: m.id,
-    finalWinner: m.finalResult?.winner ?? null,
-    startISO: getMatchStartIso(m),
-  }));
+  // R198 · 併入 MLB 已結算結果 → 登入會員押的 MLB 也計進首頁「你 vs 引擎」(MLB 全套)。
+  const matchResults = [
+    ...finalized.map((m) => ({
+      id: m.id,
+      finalWinner: m.finalResult?.winner ?? null,
+      startISO: getMatchStartIso(m),
+    })),
+    ...(await getMlbFinalizedResults()),
+  ];
 
   return (
     <div className="flex flex-col flex-1 min-h-screen">
