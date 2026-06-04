@@ -17,6 +17,11 @@ function getTaipeiTodayChip(): string {
 type FooterLink = { label: string; href: string; external?: boolean };
 type FooterGroup = { label: string; enLabel: string; links: FooterLink[] };
 
+// R194 · Tim canary「footer 雜亂無比 · 資訊轟炸 · 變成沒人要點的網站 · Apple 式極簡」。
+// 從 4 欄 ~20 連結砍成 3 欄 10 連結 —— footer 不是把所有頁面倒出來,是反映用戶心裡
+// 的地圖:玩(賽事/引擎)→ 信任(公開的證據)→ 帳號。 其餘深度頁(audit/methodology/
+// integrity/manifesto/discipline/roadmap/learn/faq/changelog/投手排行)不刪(護城河 +
+// 靠 Cmd-K 全站快搜 + 內文交叉連結到得了),只是不再 footer 轟炸。 Linear/Stripe 式。
 const FOOTER_GROUPS: FooterGroup[] = [
   {
     label: "賽事 · 引擎",
@@ -24,46 +29,30 @@ const FOOTER_GROUPS: FooterGroup[] = [
     links: [
       { label: "今日 CPBL 賽事", href: "/matches" },
       { label: "MLB · 即時資料", href: "/matches/mlb" },
-      { label: "模擬實驗室", href: "/lab" },
-      { label: "CPBL 投手排行", href: "/cpbl-pitchers" },
       { label: "海選天梯", href: "/ladder" },
+      { label: "模擬實驗室", href: "/lab" },
+    ],
+  },
+  {
+    label: "信任 · 公開",
+    enLabel: "PROOF",
+    links: [
+      { label: "公開戰績", href: "/track-record" },
+      { label: "引擎自評 · 準不準", href: "/calibration" },
       {
-        label: "GitHub 開源",
+        label: "GitHub 開源(全部程式碼)",
         href: "https://github.com/Tim-xuan-you/zone27-web",
         external: true,
       },
     ],
   },
   {
-    label: "信任文件",
-    enLabel: "DOCS",
-    links: [
-      { label: "模型報告", href: "/audit" },
-      { label: "公開戰績", href: "/track-record" },
-      { label: "引擎自評", href: "/calibration" },
-      { label: "永遠不變 22 件事", href: "/integrity" },
-      { label: "技術白皮書", href: "/methodology" },
-    ],
-  },
-  {
-    label: "入門",
+    label: "帳號 · 關於",
     enLabel: "ENTRY",
     links: [
-      { label: "5 分鐘入門", href: "/learn" },
-      { label: "關於 ZONE 27", href: "/about" },
       { label: "登入 / 註冊", href: "/login" },
       { label: "會員制", href: "/membership" },
-      { label: "常見問題", href: "/faq" },
-    ],
-  },
-  {
-    label: "品牌 IP",
-    enLabel: "BRAND",
-    links: [
-      { label: "倒置宣言", href: "/manifesto" },
-      { label: "鐵律", href: "/discipline" },
-      { label: "公開路線圖", href: "/roadmap" },
-      { label: "版本紀錄", href: "/changelog" },
+      { label: "關於 ZONE 27", href: "/about" },
     ],
   },
 ];
@@ -81,7 +70,7 @@ export default function Footer() {
     >
       <div className="mx-auto max-w-6xl px-6 sm:px-10 py-8 sm:py-12">
         {/* 桌機 · 4 欄連結網格(導覽)· 手機隱藏(改用 Nav + Cmd-K) */}
-        <div className="hidden sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-10 pb-10">
+        <div className="hidden sm:grid sm:grid-cols-3 gap-x-8 gap-y-10 pb-10">
           {FOOTER_GROUPS.map((group) => (
             <div key={group.enLabel}>
               <p
