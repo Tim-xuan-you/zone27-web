@@ -27,6 +27,7 @@ import {
   type CreatorComment,
 } from "@/lib/creator-comments";
 import { matchHasStarted } from "@/lib/matches";
+import Avatar from "@/components/Avatar";
 
 // ── ZONE 27 · CreatorAnalysis · 創作者賣分析(migration 0005)──────
 // Tim 2026-05-30 報馬仔/明燈 screenshot · 要:發文 + 推薦賽事(選邊)+ 寫分析 +
@@ -425,7 +426,8 @@ function PostCard({
   return (
     <article className="p-4 sm:p-5 border border-line/60 bg-slate/30">
       <div className="flex items-baseline justify-between gap-3 mb-1.5 flex-wrap">
-        <span className="flex items-baseline gap-2 flex-wrap">
+        <span className="flex items-center gap-2 flex-wrap">
+          <Avatar seed={p.handle} size={26} />
           <span className="font-mono text-bone text-[11px] tracking-[0.2em]">{p.handle}</span>
           <span className="font-mono text-gold/80 text-[9px] tracking-[0.2em] px-1.5 py-0.5 border border-gold/40">
             推薦 {pickName.slice(0, 5)}
@@ -591,7 +593,8 @@ function CommentThread({
           )}
           {comments.map((c, i) => (
             <div key={i} className="border-l-2 border-line/40 pl-3">
-              <p className="flex items-baseline gap-2 flex-wrap">
+              <p className="flex items-center gap-2 flex-wrap">
+                <Avatar seed={c.handle} size={20} />
                 <span className="font-mono text-bone/90 text-[10px] tracking-[0.15em]">
                   {c.handle}
                 </span>
