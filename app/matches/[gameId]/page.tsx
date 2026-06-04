@@ -6,7 +6,6 @@ import Footer from "@/components/Footer";
 import MatchSimulator from "@/components/MatchSimulator";
 import EngineGate from "@/components/EngineGate";
 import StatPercentileBar from "@/components/StatPercentileBar";
-import ConfidenceStars from "@/components/ConfidenceStars";
 import MarketSplitBar from "@/components/MarketSplitBar";
 import CreatorAnalysis from "@/components/CreatorAnalysis";
 import UserPredictionPicker from "@/components/UserPredictionPicker";
@@ -27,6 +26,7 @@ import {
   type MatchPhase,
   type Calibration,
 } from "@/lib/matches";
+import { getEngineConviction } from "@/lib/conviction";
 
 // ── ZONE 27 · /matches/[gameId] · 市場頁(R175 Polymarket pivot)──
 // Tim 2026-05-30「資訊多到爆炸 · 划不到底 · 該刪就刪 · 變成 Polymarket」·
@@ -77,6 +77,9 @@ export default async function MatchDetailPage({
   const calibration = getCalibration(m);
   const enginePctOnWinner = getEnginePctOnWinner(m);
   const startISO = getMatchStartIso(m);
+  // 引擎信心溫度 · 同卡片同一套中文詞(勢均力敵/看好/重壓)· 取代英文 SIGNAL 條
+  // (解兩套信心系統打架 + 英文黑話漏到 hero)· 純從開盤線 favorite % 衍生 · 不另立 aiConfidence 第二尺
+  const conviction = getEngineConviction(Math.max(m.home.winRate, m.away.winRate));
 
   return (
     <div className="flex flex-col flex-1 min-h-screen">
@@ -155,11 +158,18 @@ export default async function MatchDetailPage({
         {/* ── THE MARKET · 引擎開盤線 + 進場 ──────────── */}
         <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-8">
           <div className="bg-slate/60 border border-line/70 p-6 sm:p-8">
-            <div className="flex items-baseline justify-between mb-3">
+            <div className="flex items-baseline justify-between gap-2 mb-3">
               <span className="font-mono text-gold/80 text-[9px] tracking-[0.35em]">
                 引擎開盤線 · 賽前鎖定
               </span>
-              <ConfidenceStars confidence={m.aiConfidence} variant="inline" />
+              {/* 信心溫度 · 勢均力敵=金(主打誠實不確定 · 同卡片)· 看好/重壓=mute */}
+              <span
+                className={`font-mono text-[9px] tracking-[0.3em] whitespace-nowrap ${
+                  conviction.tier === "tossup" ? "text-gold" : "text-mute/70"
+                }`}
+              >
+                {conviction.label}
+              </span>
             </div>
             <div className="flex items-baseline justify-between mb-3">
               <span
