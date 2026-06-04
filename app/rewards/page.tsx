@@ -9,7 +9,7 @@ import EngineStamp from "@/components/EngineStamp";
 import { getSession } from "@/lib/supabase/server";
 import { aggregatePredictionStats } from "@/lib/predictions";
 import { getMyPredictionsMap } from "@/lib/predictions-server";
-import { getFinalizedMatches, type Match } from "@/lib/matches";
+import { getFinalizedMatches, getMatchStartIso, type Match } from "@/lib/matches";
 
 export const metadata: Metadata = {
   title: "Rewards · 預測兌換獎品",
@@ -115,6 +115,7 @@ export default async function RewardsPage() {
   const matchSummaries = finalized.map((m) => ({
     id: m.id,
     finalWinner: m.finalResult?.winner ?? null,
+    startISO: getMatchStartIso(m),
   }));
   const stats = aggregatePredictionStats(predictionsMap, matchSummaries);
 

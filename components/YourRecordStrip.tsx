@@ -29,7 +29,7 @@ import { aggregatePredictionStats } from "@/lib/predictions";
 
 const ROOKIE_MIN = 10; // 上「新秀」門檻 · 同 /member · /ladder
 
-type MatchResult = { id: string; finalWinner: "home" | "away" | "tie" | null };
+type MatchResult = { id: string; finalWinner: "home" | "away" | "tie" | null; startISO?: string | null };
 
 type Stats = ReturnType<typeof aggregatePredictionStats>;
 

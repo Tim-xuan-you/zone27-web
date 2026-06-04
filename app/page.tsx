@@ -8,6 +8,7 @@ import {
   getTodayAndFutureMatches,
   getFinalizedMatches,
   getTrackRecordStats,
+  getMatchStartIso,
 } from "@/lib/matches";
 
 // ── ZONE 27 · Homepage · 市場看板(R175 Polymarket pivot)──────
@@ -38,6 +39,7 @@ export default function Home() {
   const matchResults = finalized.map((m) => ({
     id: m.id,
     finalWinner: m.finalResult?.winner ?? null,
+    startISO: getMatchStartIso(m),
   }));
 
   return (

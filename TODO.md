@@ -142,6 +142,10 @@ R172 pivot · BLACK CARD 從 TapPay 自動訂閱改成 manual ATM / 跨行轉帳
 
 R174 pivot build queue · Claude 可主動 ship(三綠 + auto-push):
 
+- ✅🔒 **R192 攻頂迭代 2(2026-06-05 · 3-agent 深審)· 修「先鎖後結」未強制的核心 integrity 洞**:
+  - 🔴 **CORE FIX(已修顯示層)**:深審抓到 ——「先鎖後結 · 防賽後補登」是站上最常講的信任宣稱,卻**完全沒強制**:submit_prediction 任何時間都收、grader 從不比對押注時間 vs 開賽 → 天梯/準度可刷(押已開獎的場猜贏方=100% 準)。 目前 latent(公開天梯未上線)但正是 skeptic 第一攻擊點。 **修法**:新 `getMatchStartIso(match)` + `aggregatePredictionStats` 加「押注 created_at 必須 < 開賽 instant 才算數」(開賽後/賽後押注整筆不計;缺時間 fail-open 不誤殺正當押注)· 4 caller(首頁/天梯/member/rewards)全傳 startISO。 → 顯示的準度/天梯現在誠實、刷不動。
+  - 🔴 **待 Tim 做(belt-and-suspenders · server 端 · 非急)**:submit_prediction RPC 也該拒收開賽後押注。 需把賽程開賽時間寫進 DB(現只在 lib/matches.ts)= 加 `match_locks` 表 + ingest 時寫 + RPC 檢查。 顯示層已防 · 但**公開天梯/創作者準度徽章上線前要補**。
+  - ✅ **agent 認證乾淨**:auth getUser / wallet 原子性 / admin gate / RPC 報錯 / XSS / hydration / 死連結 / a11y / open-redirect 全查過 = clean(地基紮實)。
 - ✅✅✅ **R191 攻頂迭代(2026-06-04 · 6 commit 全三綠 · 6803bb4→2a37a25 · auto-push)· Tim「全權上網查/找缺的靈魂/修bug/極致美觀直覺/熱銷」· 3 並行 agent(碼審 / 全球研究 / 設計轉換)synthesize**:
   - **06-04 ingest**(d7e095a):結算 06-03 三場全 PROVED(統一/味全/台鋼)+ 新增 #141 富邦vs台鋼 coin-flip · calibration N 16→19 · 板從休賽復活成今晚。
   - **Polymarket 信心溫度**(9b6ea93):勢均力敵盤(favorite ≤53)當主打「連萬象都只敢說 52/48」· lib/conviction.ts + MiniMatchCard。

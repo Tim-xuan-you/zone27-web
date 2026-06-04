@@ -9,6 +9,7 @@ import { getMyPredictionsMap } from "@/lib/predictions-server";
 import {
   getTodayAndFutureMatches,
   getMatchPhase,
+  getMatchStartIso,
   matches as allMatches,
 } from "@/lib/matches";
 import { readTier, isPaid, creatorTakePct, tierLabel } from "@/lib/tier";
@@ -90,7 +91,7 @@ export default async function MemberPage() {
   const predictionsMap = await getMyPredictionsMap();
   const stats = aggregatePredictionStats(
     predictionsMap,
-    allMatches.map((m) => ({ id: m.id, finalWinner: m.finalResult?.winner ?? null }))
+    allMatches.map((m) => ({ id: m.id, finalWinner: m.finalResult?.winner ?? null, startISO: getMatchStartIso(m) }))
   );
 
   // 你的未結算押注(the live middle · soul)· 你押過、還沒結算的場 —— 押下去到

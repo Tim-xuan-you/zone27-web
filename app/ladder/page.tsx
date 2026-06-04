@@ -2,7 +2,7 @@ import Link from "next/link";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import YourRecordStrip from "@/components/YourRecordStrip";
-import { getFinalizedMatches } from "@/lib/matches";
+import { getFinalizedMatches, getMatchStartIso } from "@/lib/matches";
 import { createPageMetadata } from "@/lib/page-og";
 
 export const metadata = createPageMetadata({
@@ -33,6 +33,7 @@ export default function LadderPage() {
   const matchResults = getFinalizedMatches().map((m) => ({
     id: m.id,
     finalWinner: m.finalResult?.winner ?? null,
+    startISO: getMatchStartIso(m),
   }));
 
   return (

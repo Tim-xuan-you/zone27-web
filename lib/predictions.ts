@@ -83,7 +83,12 @@ export function computeUserVerdict(
  */
 export function aggregatePredictionStats(
   predictions: UserPredictionsMap,
-  matches: { id: string; finalWinner: "home" | "away" | "tie" | null }[]
+  matches: {
+    id: string;
+    finalWinner: "home" | "away" | "tie" | null;
+    /** 開賽 instant ISO(Taipei +08:00)· 給「先鎖後結」用 · 缺則 fail-open 照算 */
+    startISO?: string | null;
+  }[]
 ): {
   total: number;
   proved: number;
@@ -98,8 +103,15 @@ export function aggregatePredictionStats(
   let push = 0;
   let pending = 0;
   for (const [matchId, pred] of Object.entries(predictions)) {
-    total++;
     const m = matches.find((x) => x.id === matchId);
+    // 先鎖後結 · 防賽後補登:已結算的場 · 押注時間戳必須早於開賽才算數。 開賽後/
+    // 賽後才下的押注一律不計入(防刷準度、刷天梯 = 站上最常被攻擊的點)· 缺開賽
+    // 時間或時間戳則 fail-open 照算(不誤殺正當押注)。 ⚠ 這是顯示層防線;server
+    // 端 RPC 應一併拒收開賽後押注(belt-and-suspenders · 見 TODO 安全項)。
+    if (m && m.finalWinner !== null && isLatePick(pred.ts, m.startISO)) {
+      continue; // 整筆略過 · 不進 total / proved / diverged / pending
+    }
+    total++;
     if (!m || m.finalWinner === null) {
       pending++;
       continue;
@@ -112,4 +124,14 @@ export function aggregatePredictionStats(
   const decided = proved + diverged;
   const accuracy = decided > 0 ? Math.round((proved / decided) * 100) : null;
   return { total, proved, diverged, push, pending, accuracy };
+}
+
+/** 押注時間戳是否「開賽後/賽後」才下(= 不該算數)· 缺資料 fail-open 回 false。
+ *  Date.parse 對固定字串 deterministic · 不造成 hydration mismatch。 */
+function isLatePick(ts: string, startISO: string | null | undefined): boolean {
+  if (!startISO || !ts) return false;
+  const t = Date.parse(ts);
+  const start = Date.parse(startISO);
+  if (Number.isNaN(t) || Number.isNaN(start)) return false;
+  return t >= start;
 }

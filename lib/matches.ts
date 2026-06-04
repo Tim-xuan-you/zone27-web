@@ -1869,6 +1869,16 @@ export function getMatchDateIso(match: Match): string | null {
   return `${y}-${m.padStart(2, "0")}-${d.padStart(2, "0")}`;
 }
 
+/** Match start as an absolute ISO instant (Taipei +08:00)· null if date 不可解析。
+ *  用於「先鎖後結」防賽後補登:押注的 created_at 必須早於此 instant 才算數。 */
+export function getMatchStartIso(match: Match): string | null {
+  const dateIso = getMatchDateIso(match);
+  if (!dateIso) return null;
+  const t = /^\d{1,2}:\d{2}$/.test(match.startTime) ? match.startTime : "00:00";
+  const [hh, mm] = t.split(":");
+  return `${dateIso}T${hh.padStart(2, "0")}:${mm}:00+08:00`;
+}
+
 /** True when the match's date is in the PAST relative to Taipei today.
  *  Used to render a "DATA · ARCHIVED" badge — predictions can be
  *  evaluated against actual outcome. */
