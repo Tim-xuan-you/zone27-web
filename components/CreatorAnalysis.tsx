@@ -262,10 +262,19 @@ export default function CreatorAnalysis({
               placeholder="你的看法 / 分析"
               className="w-full bg-ink/60 border border-line/70 text-bone px-3 py-2.5 outline-none focus:border-gold/60 placeholder:text-mute/60 font-mono text-sm leading-relaxed transition-colors"
             />
-            <div className="flex items-center gap-2 flex-wrap">
-              <span className="font-mono text-mute/70 text-[10px] tracking-[0.2em]">推薦:</span>
-              <PickBtn label={`押 ${homeName.slice(0, 5)}`} active={pick === "home"} onClick={() => setPick("home")} />
-              <PickBtn label={`押 ${awayName.slice(0, 5)}`} active={pick === "away"} onClick={() => setPick("away")} />
+            {/* R195 · 解「選邊兩次」困惑(轉換 agent #1)· 押注用「押」、分析推薦用
+                「看好」· 加一行說明這跟上面的押注是兩回事(這篇是公開給讀者的推薦)。 */}
+            <div className="flex flex-col gap-2">
+              <p className="font-mono text-mute/70 text-[10px] tracking-[0.15em] leading-relaxed">
+                這篇分析你看好哪邊?
+                <span className="text-mute/55">
+                  (跟你上面的押注分開 · 這是公開給讀者看的推薦 · 賽後一樣自動掛準度)
+                </span>
+              </p>
+              <div className="flex items-center gap-2 flex-wrap">
+                <PickBtn label={`看好 ${homeName.slice(0, 5)}`} active={pick === "home"} onClick={() => setPick("home")} />
+                <PickBtn label={`看好 ${awayName.slice(0, 5)}`} active={pick === "away"} onClick={() => setPick("away")} />
+              </div>
             </div>
             {/* 標價賣分析:付費會員可標價(你拿 90-95%)· 免費會員只能免費發 + 升級提示。
                 買了才解鎖(migration 0008 · server 端 gate body)= 賣得出去的前提。 */}
