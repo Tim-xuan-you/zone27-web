@@ -149,6 +149,16 @@ R172 pivot · BLACK CARD 從 TapPay 自動訂閱改成 manual ATM / 跨行轉帳
 
 R174 pivot build queue · Claude 可主動 ship(三綠 + auto-push):
 
+- ✅✅✅ **R199 超長窗(2026-06-04 · 14 commit `7faae27`→`0905eaa` · 全三綠 + 實機驗 + auto-push)
+  · Tim 全程 dogfood 指頁 + 全權攻頂 · 換新窗省 token 收尾**:
+  - **缺的靈魂**:🪪 #1 個人校準身分(`7faae27` · /member CalibrationIdentityCard + aggregateIdentity · 同場三方對照「你 vs 亂猜 vs 引擎」+ 本月升階閘門 · 否決 45°曲線改誠實命中率)· 🔒 #4 鎖定結算來源(`38c2d0b` · SettlementResolution Kalshi 式規格表)。
+  - **IA 大掃除(Tim canary「頁面多到爆 · 第一印象 · Apple/Polymarket」)**:全站快搜 37→13(`b873543`)· /about 8章節→一屏對比錨定(`d19a014`)· 砍 6 內部 cosplay 頁→redirect(`16b997b` · 救回 /methodology/diff `19ad465` 是 moat)· 砍 /rewards vapor。
+  - **MLB**:戰績卡修兜不攏+小樣本誠實(`df306a4`)· 補對帳真實 6-6(`bfd7af3`)· 隊徽改英文縮寫+真隊色 HOU/NYY/LAD(`ffe2570`)· 板補可點擊+「N篇分析」chip(`0905eaa`)。
+  - **轉換/美觀**:主頁跨聯盟精選(`3bcefe5` · CPBL 頭條錨點 + 跨聯盟最敢喊)· Nav 收單一 auth 鈕(`83bc346`)· 砍雙語 echo 標(`2162cca`)。
+  - 🔴🔴 **下窗第一件(比美觀重要)= 顯示名問責命門**:改名洗掉創作者戰績(綁可變名字非永久碼)· 詳 [[project-zone27-displayname-accountability-bug]] · 需 migration 0015。
+  - **下窗 backlog**:soul ②streak ③含輸分享卡 ⑤持倉徽章 ⑥校準榜(詳 [[project-zone27-soul-roadmap]])· craft O2/C4/C5 · 哲學長文(/manifesto·/discipline)consolidate 進 /about · body 內文殘留指向已刪頁的 redirect 連結 prose 清理 · MLB 真隊色微調。
+
+
 - ✅✅✅ **R199 缺的靈魂落地(2026-06-04 新窗 · Tim 全權「攻頂盡可能迭代 · 先從 ①個人校準身分 開始」· 7faae27→2162cca 3 commit 全三綠 + 多情境/實機驗 + auto-push)**:
   - 🪪 **soul #1 個人校準身分(7faae27)= 本窗主菜「有帳本的玩運彩」脊椎**:`/member` 主卡 `CalibrationIdentityCard` + `lib/predictions.ts aggregateIdentity`(單一真相 · 同先鎖後結守則)。 **設計關鍵**:R189 已確立二元押注畫不出 45° 校準曲線(沒機率軸)→ 我**否決了 roadmap 寫的「重用 ReliabilityDiagram」**,改用**同場命中率三方對照**(亂猜 50% 虛線基準 + 你 + 引擎同一批已結算場 · 對二元才誠實 · 滿軸 0-100 不放大小差距=不捏造精確度)。 含輸 ✓/✕ · 落後亂猜也照講 · 本月你 vs 引擎=R188 升階閘門實作。 多情境 dev render + 截圖驗(贏/輸/平/低樣本/空/pending 全誠實)。 新增 `getCurrentTaipeiMonthKey()`。
   - 🔒 **soul #4 鎖定結算來源(38c2d0b)**:`components/SettlementResolution.tsx`(可重用)· /matches/[gameId]「這題怎麼算贏」散文 → Kalshi 式四列規格表(結算依據具名官方+規則鎖定開賽前時間戳+押注對帳✓✕刪不掉+爭議裁定)· 全程 mute 不上金(守 gold discipline)。 = 「我們刪不了輸」的整數版「我們改不了計分」。 prod 截圖驗。
