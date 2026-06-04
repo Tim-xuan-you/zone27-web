@@ -149,6 +149,12 @@ R172 pivot · BLACK CARD 從 TapPay 自動訂閱改成 manual ATM / 跨行轉帳
 
 R174 pivot build queue · Claude 可主動 ship(三綠 + auto-push):
 
+- ✅✅✅ **R199 缺的靈魂落地(2026-06-04 新窗 · Tim 全權「攻頂盡可能迭代 · 先從 ①個人校準身分 開始」· 7faae27→2162cca 3 commit 全三綠 + 多情境/實機驗 + auto-push)**:
+  - 🪪 **soul #1 個人校準身分(7faae27)= 本窗主菜「有帳本的玩運彩」脊椎**:`/member` 主卡 `CalibrationIdentityCard` + `lib/predictions.ts aggregateIdentity`(單一真相 · 同先鎖後結守則)。 **設計關鍵**:R189 已確立二元押注畫不出 45° 校準曲線(沒機率軸)→ 我**否決了 roadmap 寫的「重用 ReliabilityDiagram」**,改用**同場命中率三方對照**(亂猜 50% 虛線基準 + 你 + 引擎同一批已結算場 · 對二元才誠實 · 滿軸 0-100 不放大小差距=不捏造精確度)。 含輸 ✓/✕ · 落後亂猜也照講 · 本月你 vs 引擎=R188 升階閘門實作。 多情境 dev render + 截圖驗(贏/輸/平/低樣本/空/pending 全誠實)。 新增 `getCurrentTaipeiMonthKey()`。
+  - 🔒 **soul #4 鎖定結算來源(38c2d0b)**:`components/SettlementResolution.tsx`(可重用)· /matches/[gameId]「這題怎麼算贏」散文 → Kalshi 式四列規格表(結算依據具名官方+規則鎖定開賽前時間戳+押注對帳✓✕刪不掉+爭議裁定)· 全程 mute 不上金(守 gold discipline)。 = 「我們刪不了輸」的整數版「我們改不了計分」。 prod 截圖驗。
+  - 🧹 **V3 craft(2162cca)**:砍雙語 echo 標「· ENGINE LINE」「· CROWD LINE」(中文留 · 8→10px 暖一點)· 只砍純翻譯 echo · 留品牌術語 gloss(PROVED/DIVERGED/RECEIPT)。
+  - ⚠️ **本窗刻意沒做(留下窗 · 理由寫清)**:② #3 含輸收據分享卡 = roadmap 標「病毒成長槓桿」偏 social-adjacent · Tim 本窗「別碰社群」→ HOLD 待 Tim go(infra 已有 ReceiptForwardButton + /receipts)。 ② #2 每日 streak 有「CPBL 賽程稀疏 → 純每日 pick streak 結構性會無辜斷」設計問題 + gamification 紅線 · 需先想清「對帳 streak」定義再做。 ③ V2 可押卡視覺分層 = 多檔高流量面 sweep(首頁+/matches+MiniMatchCard+CardBetStrip)· 且 preview 截圖工具對 /matches 動畫頁一直 timeout 無法視覺驗 → 留新窗當一波做(別盲改視覺)。
+  - 🔴 **下窗 soul 剩**(詳 [[project-zone27-soul-roadmap]]):#2 streak(需 schedule-aware 設計)· #3 分享卡(待 Tim social go)· #5 持倉者徽章+profile 含輸戰績(需 comment-author×position join · RPC)· #6 校準排行榜(按校準非 PnL · 需用戶)。 craft:O2/C4/V2/C5。
 - ✅✅✅ **R198 全權自主攻頂(2026-06-04 · Tim AFK 全權「攻頂/查全世界/找缺的靈魂/認真看bug/學成功網站」· 3 並行 agent synthesize → 多波 ship · 4f7efc7→5ba295a 全三綠 + 實機驗 + auto-push)**:
   - **3-agent 偵察**(全球研究缺的靈魂 / 碼審 / 轉換設計)· 碼審結論:**碼庫狀態很好 · 0 P0/P1 · tsc 淨 · 全 45 路由 200 · auth/integrity(先鎖後結/wallet原子/getUser)紮實** —— Tim「任何缺陷會被攻擊」的擔憂在 integrity 面大致不成立 · 真正機會在**漏斗順序 + 缺的靈魂功能**,不是修 bug。
   - **Wave 1 清理+去英文標+文案(4f7efc7)**:刪孤兒 SilentReceiptStream(R197 移除後 0 import)· 修 related-links 過時「前270創始編號」· Nav 拿掉「實驗室 BETA」(undersell 核心引擎 · 同 MLB de-BETA)· 「TONIGHT N」→「今晚 N」· 押注鈕「登入免費註冊」(糊)→「免費加入」。
