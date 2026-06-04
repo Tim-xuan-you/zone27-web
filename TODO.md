@@ -149,6 +149,13 @@ R172 pivot · BLACK CARD 從 TapPay 自動訂閱改成 manual ATM / 跨行轉帳
 
 R174 pivot build queue · Claude 可主動 ship(三綠 + auto-push):
 
+- ✅✅✅ **R195 第二輪(同窗續攻 · 35e6dd3→f80fc97 接續 · 第二批 3-agent 深審 synthesize)**:
+  - 🔒 **創作者徽章命門洞補好(碼審兩輪 #1)= DONE**:migration 0013(get_creator_records 回 created_at)**Tim 已套上 prod**(Supabase Success)· gradeAuthorRecords 加 isLateCreatorPost 過濾(發文≥開賽不算進徽章 · 同預測側鏡像)· graceful。 ⚠ server match_locks 寫入閘門仍待補(公開天梯前)。
+  - 🏷️ **引擎正式命名「推演引擎」= DONE**(Tim「什麼是萬象?不懂」dogfood → 拍板):先全站「萬象」→「引擎」(22檔)、再立「推演引擎」之名(d2671fd)。 心理學:推演的厲害=「精」(嚴謹·沙盤推演)vs 萬象=「玄」(神祕=對手神準老師那排)· 推演自含「引擎」二字不再像兩套系統 · 三核 = **推演(蒙地卡羅)/戰力(Elo)/局勢(Markov)** 全2字秒懂(永久取代萬象)· 卡片用「推演開盤/連推演」· 泛用功能保留「引擎」· 詳見 [[project-zone27-engine-strategy]] §4 R195。
+  - 🎯 **57% 從道歉變 flex + 校準遊戲當首頁門 + 操作邏輯**(0f79dc1/72cee7e/5bea0e0):守住 disclosure 紅線(擋藏57%/裝神祕)· 首頁去暗化領頭打「94%在騙你」· /calibration/test 接首頁「測你自己有多準」(57%→訪客自己的aha)· 解詳情頁「選邊兩次」困惑(分析改「看好」)· /member 空值優雅化 · 詳情頁金色聚焦 · 誠實錯誤訊息 · MLB 對帳時效修。
+  - 📱 **行動版 sticky 碰撞修**(f80fc97):TonightMatchRail 對會員貼底(原懸空76px)。
+  - ✅ **碼審認證地基紮實 + 全45路由煙霧測試全200·0死連結·0錯誤頁**。
+  - ⚠️ **backlog 更新**:創作者徽章 ✅(0013已套)· 萬象命名 ✅(推演引擎)· 其餘見下方 R195 第一輪 backlog(MLB-open標尺/球隊fallback/WalletPanel軟化-需Tim定/研究大件:不確定區間Savant式·每場為什麼Bill-James式·結算依據Kalshi式·學院教育Pinnacle式/頁面正式刪/engineFavorite漏網/ladder階級邏輯)。
 - ✅✅✅ **R195 全權攻頂大窗(2026-06-04 · 35e6dd3→5bea0e0 ~9 commit 全三綠 + auto-push · 接 R194 同對話)· Tim 全權 AFK「極致完美/修bug/更好看/更直覺/熱銷/上網查全世界找缺的靈魂/盡可能迭代/只做最好」· 連續 dogfood + 3 路 agent(碼審/全球研究/轉換工藝)synthesize**:
   - **MLB 即時化(Polymarket「數字會動」誠實版)**:① 即時比分救回(原被「賽後 finalResult only」過度套用丟掉)+ 帶局數 + 誠實標「約10分鐘前·不秒跳」② 修時區漏 live 洞(抓昨天+今天兩天 merge·live 排最前 · fetchRelevantMlb)③ 已結束場加賽後對帳 ✓命中/✕落空(用 lib/mlb-locked.json 賽前鎖定值對真實比分·誠信純正·沒鎖的誠實標「引擎沒鎖這場」)④ 準度 N<30 顯示「—」不報率(2場0中的「0%」誤導+自打臉)⑤ 鎖定頻率 2×/天→每3小時(投手太晚公布漏抓·mlb-engine.yml)⑥ 「最後對帳」用 gradedAt only(不混 lockedAt 假時效)。
   - **57% 從道歉變 flex(Tim 最大焦慮「57%感覺很弱·想包裝得像專家」)**:🔴 **守住 disclosure 紅線**——擋下「藏57%/裝很多人用/搞神祕AI」(=變LINE老師、燒掉唯一護城河)· 改 flex 框法:57%=全世界天花板(非我們的弱點)+ 我們唯一誠實掛 + **它讓品牌「開除不掉」**(引擎必連敗·沒先講=第一次連敗就崩;有先講=越輸越證明誠實)· 首頁 57% 行去暗化(text-mute/70 fine-print→領頭打騙子「94%在騙你」)。
