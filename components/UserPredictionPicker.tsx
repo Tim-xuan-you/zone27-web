@@ -175,7 +175,7 @@ export default function UserPredictionPicker({
               免費加入 → 押這場
             </Link>
             <p className="mt-2 font-mono text-mute/60 text-[9px] tracking-[0.2em] leading-relaxed text-center">
-              押注要先成為免費會員 —— 每一手才算進你的永久戰績、能上海選天梯。
+              押一手 · 賽後看你跟引擎誰準 —— 免費會員,每一手都算進你的公開戰績(含輸、刪不掉)。
             </p>
           </>
         )}

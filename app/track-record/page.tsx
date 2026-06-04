@@ -149,6 +149,20 @@ export default function TrackRecordPage() {
           <span className="text-bone">PROVED ✓ 跟 DIVERGED ✕ 等大等亮列出</span>,
           不藏、不修飾、不重新加權。
         </p>
+        {/* 冷訪客的第一個問題「引擎到底準不準」· 首屏就給一個含輸的數字回答 ——
+            「連同沒中的一起算」= 報馬仔不敢做的事(含輸分母當 flex)· N<30 照誠實守則
+            標小樣本(同站上 SAMPLE DEBT 紀律)· decided=0 不顯示(下方 WAITING 狀態接手)。 */}
+        {decided > 0 && (
+          <p className="mt-4 font-mono text-bone text-sm sm:text-base tracking-[0.12em] leading-relaxed">
+            目前 <span className="text-gold tabular">{decided}</span> 場分出勝負 ·
+            引擎方向命中 <span className="text-gold tabular">{provedPct}%</span>
+            <span className="text-mute">
+              {" —— 連同沒中的 "}
+              <span className="tabular">{diverged}</span>
+              {decided < 30 ? " 場一起算 · 樣本還小,滿 30 場才算數。" : " 場一起算給你看。"}
+            </span>
+          </p>
+        )}
         {/* R117 W2 · R115 W4 4-stat row REMOVED · per Apple/Stripe minimalism
             audit · 與 HEADLINE STATS section(line 282-310 下方)4 cells 內容
             完全 duplicate(TOTAL · PROVED · DIVERGED · PROVED RATE 對 FINALIZED
@@ -770,7 +784,7 @@ function LedgerRow({ match }: { match: Match }) {
             <span className="text-mute">{dogName}</span>
           </p>
           <p className="font-mono text-mute text-[10px] tracking-[0.2em] mt-1 tabular">
-            ENGINE · {favoritePct}% / {100 - favoritePct}% · CONF {match.aiConfidence}/100
+            引擎 · {favoritePct}% / {100 - favoritePct}%
           </p>
         </div>
         <span className="font-mono text-bone text-base tabular self-center text-right">
@@ -1015,7 +1029,7 @@ function FirstReceiptHero({
               </span>
             </p>
             <p className="font-mono text-mute text-[10px] tracking-[0.25em] mt-3 tabular">
-              FAVORITE · {favoriteName} · CONF {match.aiConfidence ?? 0}/100
+              FAVORITE · {favoriteName}
             </p>
           </div>
           <div className="border-l-2 border-bone/30 pl-5 pr-2 py-2 sm:text-right sm:border-l-0 sm:border-r-2 sm:pr-5 sm:pl-2">
