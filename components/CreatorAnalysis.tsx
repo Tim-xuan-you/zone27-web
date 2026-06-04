@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { createSupabaseBrowserClient } from "@/lib/supabase/browser";
 import {
@@ -521,6 +521,24 @@ function PostCard({
   );
 }
 
+// 回覆 body 若以 @某人 開頭(且對得上串裡的 handle)→ 把 @mention 染金 · 其餘原樣。
+// 用實際 handle 比對(非 regex 猜邊界)= 穩:中文名 / 含空格的代號(球迷 #xxxx)都對得上。
+function renderCommentBody(body: string, handles: string[]) {
+  if (body.startsWith("@")) {
+    const rest = body.slice(1);
+    const h = handles.find((hh) => rest.startsWith(hh));
+    if (h) {
+      return (
+        <>
+          <span className="text-gold/80">@{h}</span>
+          {rest.slice(h.length)}
+        </>
+      );
+    }
+  }
+  return body;
+}
+
 // ── 回覆串 · 分析下的對話層 ──────────────────────────────
 // flat thread(不深層巢狀 · 乾淨)· 折疊預設(subtraction-first · 點開才載入)·
 // 登入可回覆 · 作者本人的回覆標「作者」(解 Tim「賣家回覆買家」)。 GRACEFUL:
@@ -538,6 +556,14 @@ function CommentThread({
   const [text, setText] = useState("");
   const [sending, setSending] = useState(false);
   const [err, setErr] = useState<string | null>(null);
+  // 回覆某位留言者(非作者)· @ 標記扁平串(Polymarket/X 式 · 不做巢狀)
+  const [replyTo, setReplyTo] = useState<string | null>(null);
+  const taRef = useRef<HTMLTextAreaElement>(null);
+
+  const startReply = (handle: string) => {
+    setReplyTo(handle);
+    requestAnimationFrame(() => taRef.current?.focus());
+  };
 
   const load = async () => {
     const list = await getCreatorComments(postId);
@@ -556,9 +582,12 @@ function CommentThread({
     if (!b) return;
     setSending(true);
     setErr(null);
-    const res = await submitCreatorComment(postId, b);
+    // 回覆某人 → body 前綴 @handle(扁平串裡看得出在回誰 · 0 migration · 純文字)
+    const finalBody = replyTo ? `@${replyTo} ${b}` : b;
+    const res = await submitCreatorComment(postId, finalBody);
     if (res.ok) {
       setText("");
+      setReplyTo(null);
       await load();
     } else if (res.reason === "not_logged_in") {
       setErr("請先登入再回覆。");
@@ -572,6 +601,9 @@ function CommentThread({
 
   // 舊 RPC 沒回 post_id → 無法綁回覆 · 不顯示(graceful)
   if (!postId) return null;
+
+  // 串裡所有人的 handle · 給 @ 標記 render 高亮(對得上才染金)
+  const mentionHandles = comments.map((c) => c.handle);
 
   return (
     <div className="mt-3 pt-3 border-t border-line/30">
@@ -603,31 +635,57 @@ function CommentThread({
                     作者
                   </span>
                 )}
+                {loggedIn && (
+                  <button
+                    type="button"
+                    onClick={() => startReply(c.handle)}
+                    className="font-mono text-mute/50 hover:text-gold text-[9px] tracking-[0.2em] underline-offset-4 hover:underline transition-colors"
+                  >
+                    ↳ 回覆
+                  </button>
+                )}
               </p>
               <p className="mt-1 text-bone/80 text-[13px] leading-relaxed whitespace-pre-wrap">
-                {c.body}
+                {renderCommentBody(c.body, mentionHandles)}
               </p>
             </div>
           ))}
 
           {loggedIn ? (
-            <div className="flex items-end gap-2">
-              <textarea
-                rows={2}
-                value={text}
-                maxLength={500}
-                onChange={(e) => setText(e.target.value)}
-                placeholder="回覆這篇分析 / 問作者問題"
-                className="flex-1 bg-ink/60 border border-line/70 text-bone px-3 py-2 outline-none focus:border-gold/60 placeholder:text-mute/55 font-mono text-[13px] leading-relaxed transition-colors"
-              />
-              <button
-                type="button"
-                onClick={send}
-                disabled={sending || !text.trim()}
-                className="shrink-0 px-4 py-2 bg-gold text-navy font-mono text-[10px] tracking-[0.2em] hover:bg-gold-soft transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                {sending ? "送出中" : "回覆"}
-              </button>
+            <div className="flex flex-col gap-1.5">
+              {replyTo && (
+                <div className="flex items-center gap-2">
+                  <span className="font-mono text-gold/80 text-[9px] tracking-[0.15em]">
+                    ↳ 回覆 {replyTo}
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() => setReplyTo(null)}
+                    className="font-mono text-mute/50 hover:text-loss text-[9px] tracking-[0.15em] transition-colors"
+                  >
+                    ✕ 取消
+                  </button>
+                </div>
+              )}
+              <div className="flex items-end gap-2">
+                <textarea
+                  ref={taRef}
+                  rows={2}
+                  value={text}
+                  maxLength={500}
+                  onChange={(e) => setText(e.target.value)}
+                  placeholder={replyTo ? `回覆 ${replyTo}` : "回覆這篇分析 / 問作者問題"}
+                  className="flex-1 bg-ink/60 border border-line/70 text-bone px-3 py-2 outline-none focus:border-gold/60 placeholder:text-mute/55 font-mono text-[13px] leading-relaxed transition-colors"
+                />
+                <button
+                  type="button"
+                  onClick={send}
+                  disabled={sending || !text.trim()}
+                  className="shrink-0 px-4 py-2 bg-gold text-navy font-mono text-[10px] tracking-[0.2em] hover:bg-gold-soft transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {sending ? "送出中" : "回覆"}
+                </button>
+              </div>
             </div>
           ) : (
             <p className="font-mono text-mute/60 text-[10px] tracking-[0.2em]">
