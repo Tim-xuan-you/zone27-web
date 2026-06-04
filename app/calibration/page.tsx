@@ -305,6 +305,20 @@ export default function CalibrationPublicPage() {
               是<span className="text-bone">你的命中率</span> · 那在你的儀表板:
               從第一注開始算 · 每場賽後自動對照引擎 · 押了刪不掉。
             </p>
+            {/* 缺的靈魂:讓訪客親手玩一次校準 —— 用打完的比賽藏住比分、滑信心、攤開
+                對照「你以為的把握 vs 實際中」· 親身摸到 5 成 7 天花板(0 登入 · 純練習)*/}
+            <div className="mb-5 border border-gold/40 bg-gold/5 p-4 sm:p-5">
+              <p className="text-bone text-base sm:text-lg leading-relaxed mb-3">
+                <strong>與其聽我們講「沒人是神」· 不如你自己試一次。</strong>{" "}
+                拿幾場打完的比賽藏住比分 · 換你當引擎滑出把握 · 攤開看你有多準。
+              </p>
+              <Link
+                href="/calibration/test"
+                className="inline-block px-6 py-2.5 bg-gold text-navy font-mono text-[10px] tracking-[0.3em] hover:bg-gold-soft transition-colors"
+              >
+                → 玩一次校準練習 · 你有多準?
+              </Link>
+            </div>
             <div className="flex flex-wrap gap-3">
               <Link
                 href="/login?next=/member"

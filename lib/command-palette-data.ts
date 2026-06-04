@@ -448,6 +448,13 @@ export const COMMAND_ITEMS: CommandItem[] = [
     keywords: ["calibration", "brier", "校準", "538", "tetlock"],
   },
   {
+    label: "校準練習 · 換你當引擎 · 你有多準?",
+    kicker: "/calibration/test",
+    path: "/calibration/test",
+    group: "賽事 · 引擎",
+    keywords: ["校準練習", "你有多準", "遊戲", "game", "calibration test", "練習", "猜比賽"],
+  },
+  {
     label: "誠信 · 22 條永遠不變",
     kicker: "/integrity",
     path: "/integrity",
