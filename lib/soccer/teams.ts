@@ -1,56 +1,81 @@
 // ── ZONE 27 · 國家隊實力分 seed(足球引擎輸入)──────────────────
 // 跟棒球的投手數據一樣 = 靜態 curate 的資料 seed,引擎吃它算勝率。
 //
-// rating = 國際 Elo 風格的實力分(~1500 平庸、~1800 強、~2100 世界頂尖)。
-// ⚠️ 誠實標註:這批是「近似初始值」(approximate seed),用來先把引擎跑起來 +
-//    驗證。 正式上線前會用公開的國際排名/近期戰績校準到當前數值(同棒球「估算值
-//    逐步換成真實數據」的揭露原則 · 見 /audit ESTIMATION DISCLOSURE)。
-// 🔴 紅線:絕不抄博弈平台盤口換算的隱含實力 —— 用公開中立的國際排名來源。
+// rating = World Football Elo 風格實力分(真實量級:頂尖 ~1880、強 ~1780、
+//   中 ~1700、弱 ~1550)。 2026 世界盃全 48 隊。 數值錨定 eloratings.net 2026-06
+//   公開值(西班牙 1876 / 阿根廷 1875 / 英格蘭 1826 ...)· 其餘按相對實力校準。
+// ⚠️ 仍是「近似 curate 值」(同棒球估算逐步換真實數據的揭露原則 · /audit
+//   ESTIMATION DISCLOSURE)· 之後可接公開排名自動更新。
+// 🔴 紅線:絕不抄博弈盤口換算 —— 用公開中立的國際排名來源。
 //
-// color = 品牌化隊徽色(無紅綠刺眼對撞 · 守暗金品牌)· 之後接 Avatar 隊徽用。
+// en 必須對齊資料源(football-data.org)的隊名,getRatingByName 才查得到
+//   (例:United States / South Korea / Bosnia-Herzegovina / Czechia / Curaçao)。
 // 本檔 0 外部依賴,純資料 + 純查詢。
 // ─────────────────────────────────────────────────────
 
 export type SoccerTeam = {
-  /** 三碼國際代號(FIFA/IOC 風格 · 隊徽縮寫用) */
+  /** 三碼國際代號(FIFA/IOC 風格) */
   code: string;
   /** 中文隊名 */
   name: string;
-  /** 英文隊名 */
+  /** 英文隊名 · 必須對齊資料源隊名 */
   en: string;
-  /** 國際 Elo 風格實力分(近似 seed · 待校準) */
+  /** Elo 風格實力分(近似 seed · 待校準) */
   rating: number;
-  /** 品牌化隊色(隊徽用 · 避開刺眼紅綠對撞) */
-  color: string;
+  /** 品牌化隊色(隊徽用 · 可省 · 現卡片用 seed 衍生色) */
+  color?: string;
 };
 
-// 近似初始值(2026 量級 · 待用公開排名校準)。 涵蓋世界盃主要競爭者 +
-// 台灣球迷熟悉的亞洲隊 + 地主。 之後補滿 48 隊。
+// 2026 世界盃 48 隊(eloratings 2026-06 量級 · 近似校準)。
 export const SOCCER_TEAMS: SoccerTeam[] = [
-  { code: "ARG", name: "阿根廷", en: "Argentina", rating: 2105, color: "#74A9E8" },
-  { code: "FRA", name: "法國", en: "France", rating: 2055, color: "#4F7FD0" },
-  { code: "ESP", name: "西班牙", en: "Spain", rating: 2050, color: "#E8B04B" },
-  { code: "BRA", name: "巴西", en: "Brazil", rating: 2020, color: "#E8C24B" },
-  { code: "ENG", name: "英格蘭", en: "England", rating: 1985, color: "#9FB4D8" },
-  { code: "POR", name: "葡萄牙", en: "Portugal", rating: 1990, color: "#C85765" },
-  { code: "NED", name: "荷蘭", en: "Netherlands", rating: 1965, color: "#E8923C" },
-  { code: "BEL", name: "比利時", en: "Belgium", rating: 1925, color: "#D4A23C" },
-  { code: "GER", name: "德國", en: "Germany", rating: 1930, color: "#B9C2CC" },
-  { code: "CRO", name: "克羅埃西亞", en: "Croatia", rating: 1900, color: "#C75D6A" },
-  { code: "URU", name: "烏拉圭", en: "Uruguay", rating: 1895, color: "#7FB0E0" },
-  { code: "COL", name: "哥倫比亞", en: "Colombia", rating: 1875, color: "#E8C24B" },
-  { code: "MAR", name: "摩洛哥", en: "Morocco", rating: 1865, color: "#C85765" },
-  { code: "USA", name: "美國", en: "USA", rating: 1835, color: "#6F8FC8" },
-  { code: "MEX", name: "墨西哥", en: "Mexico", rating: 1805, color: "#5BA88C" },
-  { code: "JPN", name: "日本", en: "Japan", rating: 1840, color: "#7FA8DC" },
-  { code: "KOR", name: "南韓", en: "South Korea", rating: 1785, color: "#7FB0E0" },
-  { code: "SEN", name: "塞內加爾", en: "Senegal", rating: 1830, color: "#5BA88C" },
-  { code: "CAN", name: "加拿大", en: "Canada", rating: 1780, color: "#D86A6A" },
-  { code: "AUS", name: "澳洲", en: "Australia", rating: 1750, color: "#D4A23C" },
-  { code: "SUI", name: "瑞士", en: "Switzerland", rating: 1840, color: "#D86A6A" },
-  { code: "DEN", name: "丹麥", en: "Denmark", rating: 1830, color: "#C85765" },
-  { code: "SRB", name: "塞爾維亞", en: "Serbia", rating: 1810, color: "#9FB4D8" },
-  { code: "SA", name: "南非", en: "South Africa", rating: 1660, color: "#5BA88C" },
+  { code: "ESP", name: "西班牙", en: "Spain", rating: 1876 },
+  { code: "ARG", name: "阿根廷", en: "Argentina", rating: 1875 },
+  { code: "FRA", name: "法國", en: "France", rating: 1852 },
+  { code: "ENG", name: "英格蘭", en: "England", rating: 1826 },
+  { code: "NED", name: "荷蘭", en: "Netherlands", rating: 1792 },
+  { code: "BRA", name: "巴西", en: "Brazil", rating: 1790 },
+  { code: "POR", name: "葡萄牙", en: "Portugal", rating: 1788 },
+  { code: "GER", name: "德國", en: "Germany", rating: 1786 },
+  { code: "CRO", name: "克羅埃西亞", en: "Croatia", rating: 1772 },
+  { code: "MAR", name: "摩洛哥", en: "Morocco", rating: 1768 },
+  { code: "BEL", name: "比利時", en: "Belgium", rating: 1764 },
+  { code: "SUI", name: "瑞士", en: "Switzerland", rating: 1762 },
+  { code: "COL", name: "哥倫比亞", en: "Colombia", rating: 1758 },
+  { code: "URY", name: "烏拉圭", en: "Uruguay", rating: 1756 },
+  { code: "NOR", name: "挪威", en: "Norway", rating: 1735 },
+  { code: "AUT", name: "奧地利", en: "Austria", rating: 1732 },
+  { code: "JPN", name: "日本", en: "Japan", rating: 1722 },
+  { code: "CZE", name: "捷克", en: "Czechia", rating: 1718 },
+  { code: "TUR", name: "土耳其", en: "Turkey", rating: 1716 },
+  { code: "ECU", name: "厄瓜多", en: "Ecuador", rating: 1714 },
+  { code: "SEN", name: "塞內加爾", en: "Senegal", rating: 1708 },
+  { code: "MEX", name: "墨西哥", en: "Mexico", rating: 1702 },
+  { code: "KOR", name: "南韓", en: "South Korea", rating: 1701 },
+  { code: "SCO", name: "蘇格蘭", en: "Scotland", rating: 1700 },
+  { code: "ALG", name: "阿爾及利亞", en: "Algeria", rating: 1699 },
+  { code: "BIH", name: "波士尼亞", en: "Bosnia-Herzegovina", rating: 1698 },
+  { code: "CAN", name: "加拿大", en: "Canada", rating: 1696 },
+  { code: "SWE", name: "瑞典", en: "Sweden", rating: 1694 },
+  { code: "USA", name: "美國", en: "United States", rating: 1692 },
+  { code: "CIV", name: "象牙海岸", en: "Ivory Coast", rating: 1688 },
+  { code: "IRN", name: "伊朗", en: "Iran", rating: 1684 },
+  { code: "GHA", name: "迦納", en: "Ghana", rating: 1674 },
+  { code: "AUS", name: "澳洲", en: "Australia", rating: 1670 },
+  { code: "EGY", name: "埃及", en: "Egypt", rating: 1666 },
+  { code: "PAR", name: "巴拉圭", en: "Paraguay", rating: 1660 },
+  { code: "TUN", name: "突尼西亞", en: "Tunisia", rating: 1654 },
+  { code: "COD", name: "剛果民主共和國", en: "Congo DR", rating: 1648 },
+  { code: "RSA", name: "南非", en: "South Africa", rating: 1636 },
+  { code: "PAN", name: "巴拿馬", en: "Panama", rating: 1626 },
+  { code: "QAT", name: "卡達", en: "Qatar", rating: 1620 },
+  { code: "UZB", name: "烏茲別克", en: "Uzbekistan", rating: 1616 },
+  { code: "KSA", name: "沙烏地阿拉伯", en: "Saudi Arabia", rating: 1612 },
+  { code: "IRQ", name: "伊拉克", en: "Iraq", rating: 1598 },
+  { code: "JOR", name: "約旦", en: "Jordan", rating: 1586 },
+  { code: "CPV", name: "維德角", en: "Cape Verde Islands", rating: 1582 },
+  { code: "HAI", name: "海地", en: "Haiti", rating: 1548 },
+  { code: "CUW", name: "古拉索", en: "Curaçao", rating: 1532 },
+  { code: "NZL", name: "紐西蘭", en: "New Zealand", rating: 1508 },
 ];
 
 const BY_CODE: Record<string, SoccerTeam> = Object.fromEntries(
@@ -62,11 +87,14 @@ export function getSoccerTeam(code: string): SoccerTeam | null {
   return BY_CODE[code] ?? null;
 }
 
-// 資料源(football-data.org)的英文隊名 → 我們 seed 的別名(常見差異)。
+// 資料源隊名 → seed 別名(萬一資料源用不同寫法時的安全網)。
 const NAME_ALIASES: Record<string, string> = {
-  "united states": "usa",
+  usa: "united states",
   "korea republic": "south korea",
   "republic of korea": "south korea",
+  "bosnia and herzegovina": "bosnia-herzegovina",
+  türkiye: "turkey",
+  "côte d'ivoire": "ivory coast",
 };
 
 const BY_EN: Record<string, number> = Object.fromEntries(
@@ -82,7 +110,7 @@ export function getRatingByName(name: string): number | null {
   return null;
 }
 
-/** 全聯盟平均實力分 · 給未列隊伍的 fallback 用(誠實的「中位水準」基準)。 */
+/** 全表平均實力分 · 給未列隊伍的 fallback(誠實的「中位水準」基準)。 */
 export const SOCCER_RATING_BASELINE = Math.round(
   SOCCER_TEAMS.reduce((s, t) => s + t.rating, 0) / SOCCER_TEAMS.length,
 );
