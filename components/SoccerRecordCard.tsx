@@ -16,7 +16,14 @@ import type { SoccerResult } from "@/lib/soccer/football-data";
 // 🔴 跟棒球兩本帳分開:本卡只讀 fd-* · 棒球 getMyPredictionsMap 已排除 fd-*。
 // ─────────────────────────────────────────────────────
 
-export default function SoccerRecordCard({ results }: { results: SoccerResult[] }) {
+export default function SoccerRecordCard({
+  results,
+  wrapperClass = "",
+}: {
+  results: SoccerResult[];
+  /** 外層定位/寬度由各頁給:/soccer = max-w-6xl section · /member = mt-6 */
+  wrapperClass?: string;
+}) {
   const [record, setRecord] = useState<SoccerRecord | null>(null);
 
   useEffect(() => {
@@ -48,7 +55,7 @@ export default function SoccerRecordCard({ results }: { results: SoccerResult[] 
   const { n, hits, misses, rate, pending } = record;
 
   return (
-    <section className="mx-auto max-w-6xl w-full px-6 sm:px-10 pb-8">
+    <div className={wrapperClass}>
       <div className="bg-slate/40 border border-gold/30 p-4 sm:p-5">
         <p className="font-mono text-gold/80 text-[10px] tracking-[0.35em] mb-2">
           你的足球戰績 · 含輸
@@ -73,6 +80,6 @@ export default function SoccerRecordCard({ results }: { results: SoccerResult[] 
           三向對帳(主勝 / 和 / 客勝)· 賽前鎖死、賽後自動結算 · 跟你的棒球準度分開算。
         </p>
       </div>
-    </section>
+    </div>
   );
 }

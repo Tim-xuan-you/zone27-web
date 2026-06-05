@@ -72,7 +72,10 @@ export default async function SoccerPage() {
         </section>
 
         {/* 你的足球戰績(含輸 · 登入且押過才出現 · client 端對帳不破 ISR)*/}
-        <SoccerRecordCard results={soccerResults} />
+        <SoccerRecordCard
+          results={soccerResults}
+          wrapperClass="mx-auto max-w-6xl w-full px-6 sm:px-10 pb-8"
+        />
 
         {/* ── GROUPS ── */}
         <section className="mx-auto max-w-6xl w-full px-6 sm:px-10 pb-24">
