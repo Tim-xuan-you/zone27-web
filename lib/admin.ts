@@ -166,19 +166,104 @@ export async function adminRecentContent(): Promise<AdminContentRow[]> {
   }
 }
 
-/** 刪一篇/一則。 */
-export async function adminDelete(
+export type AdminFullContent = {
+  kind: AdminContentRow["kind"];
+  id: string;
+  handle: string;
+  title: string;
+  body: string;
+  ref: string; // match_id / post_id / game_id
+  priceNtd: number | null; // 付費分析的價格 · null = 留言/討論室
+  createdAt: string;
+};
+
+/** 看完整內文(含付費分析 body · admin override 付費牆 · migration 0017)。
+ *  null = 0017 未套用 / 非 admin / 找不到(UI 退回顯示 snippet)。 */
+export async function adminViewContent(
   kind: AdminContentRow["kind"],
   id: string
-): Promise<ActionResult> {
+): Promise<AdminFullContent | null> {
   try {
     const supabase = createSupabaseBrowserClient();
-    const { error } = await supabase.rpc("admin_delete", {
+    const { data, error } = await supabase.rpc("admin_view_content", {
       p_kind: kind,
       p_id: id,
     });
-    return error ? { ok: false, msg: explain(error.message) } : { ok: true };
+    if (error || !Array.isArray(data) || data.length === 0) return null;
+    const r = data[0] as Record<string, unknown>;
+    return {
+      kind:
+        r.kind === "creator_comment" || r.kind === "game_post"
+          ? r.kind
+          : "creator_post",
+      id: typeof r.id === "string" ? r.id : id,
+      handle: typeof r.handle === "string" ? r.handle : "球迷",
+      title: typeof r.title === "string" ? r.title : "",
+      body: typeof r.body === "string" ? r.body : "",
+      ref: typeof r.ref === "string" ? r.ref : "",
+      priceNtd: typeof r.price_ntd === "number" ? r.price_ntd : null,
+      createdAt: typeof r.created_at === "string" ? r.created_at : "",
+    };
+  } catch {
+    return null;
+  }
+}
+
+/** 刪一篇/一則 + 留痕(原因)。 留痕版(0017)優先 · 未套用 → fall back 裸刪(0011)。 */
+export async function adminDelete(
+  kind: AdminContentRow["kind"],
+  id: string,
+  reason = ""
+): Promise<ActionResult> {
+  try {
+    const supabase = createSupabaseBrowserClient();
+    // 留痕版(admin_delete_logged · 0017)優先
+    const logged = await supabase.rpc("admin_delete_logged", {
+      p_kind: kind,
+      p_id: id,
+      p_reason: reason,
+    });
+    if (!logged.error) return { ok: true };
+    // PGRST202 = schema cache 找不到函式(0017 未套)→ fall back 裸刪 0011
+    if ((logged.error as { code?: string }).code === "PGRST202") {
+      const { error } = await supabase.rpc("admin_delete", {
+        p_kind: kind,
+        p_id: id,
+      });
+      return error ? { ok: false, msg: explain(error.message) } : { ok: true };
+    }
+    return { ok: false, msg: explain(logged.error.message) };
   } catch {
     return { ok: false, msg: "操作失敗 · 請再試一次。" };
+  }
+}
+
+export type AdminAuditRow = {
+  action: string;
+  targetKind: string;
+  targetSnippet: string;
+  reason: string;
+  createdAt: string;
+};
+
+/** 最近審核紀錄(刪除留痕 · 透明)。 空陣列 = 0017 未套 / 無紀錄。 */
+export async function adminAuditRecent(): Promise<AdminAuditRow[]> {
+  try {
+    const supabase = createSupabaseBrowserClient();
+    const { data, error } = await supabase.rpc("admin_audit_recent");
+    if (error || !Array.isArray(data)) return [];
+    return data.map((row) => {
+      const r = row as Record<string, unknown>;
+      return {
+        action: typeof r.action === "string" ? r.action : "",
+        targetKind: typeof r.target_kind === "string" ? r.target_kind : "",
+        targetSnippet:
+          typeof r.target_snippet === "string" ? r.target_snippet : "",
+        reason: typeof r.reason === "string" ? r.reason : "",
+        createdAt: typeof r.created_at === "string" ? r.created_at : "",
+      };
+    });
+  } catch {
+    return [];
   }
 }

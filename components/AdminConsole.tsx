@@ -16,10 +16,14 @@ import {
   adminSetTier,
   adminMembers,
   adminRecentContent,
+  adminViewContent,
   adminDelete,
+  adminAuditRecent,
   type AdminStatus,
   type AdminMember,
   type AdminContentRow,
+  type AdminFullContent,
+  type AdminAuditRow,
 } from "@/lib/admin";
 
 const TIER_ZH: Record<string, string> = {
@@ -37,19 +41,28 @@ export default function AdminConsole() {
   const [status, setStatus] = useState<AdminStatus | null>(null);
   const [members, setMembers] = useState<AdminMember[]>([]);
   const [content, setContent] = useState<AdminContentRow[]>([]);
+  const [audit, setAudit] = useState<AdminAuditRow[]>([]);
   const [claiming, setClaiming] = useState(false);
 
   const reloadMembers = async () => setMembers(await adminMembers());
-  const reloadContent = async () => setContent(await adminRecentContent());
+  const reloadAudit = async () => setAudit(await adminAuditRecent());
+  // 刪除後同時刷新內容清單 + 審核留痕
+  const reloadContent = async () => {
+    setContent(await adminRecentContent());
+    setAudit(await adminAuditRecent());
+  };
+
+  const loadAll = async () => {
+    setMembers(await adminMembers());
+    setContent(await adminRecentContent());
+    setAudit(await adminAuditRecent());
+  };
 
   useEffect(() => {
     (async () => {
       const s = await getAdminStatus();
       setStatus(s);
-      if (s.isAdmin) {
-        setMembers(await adminMembers());
-        setContent(await adminRecentContent());
-      }
+      if (s.isAdmin) await loadAll();
     })();
   }, []);
 
@@ -60,8 +73,7 @@ export default function AdminConsole() {
     if (ok) {
       const s = await getAdminStatus();
       setStatus(s);
-      setMembers(await adminMembers());
-      setContent(await adminRecentContent());
+      await loadAll();
     }
   };
 
@@ -119,6 +131,7 @@ export default function AdminConsole() {
       <SetTierCard onDone={reloadMembers} />
       <MembersCard members={members} onReload={reloadMembers} />
       <ModerationCard content={content} onReload={reloadContent} />
+      <AuditCard audit={audit} onReload={reloadAudit} />
     </div>
   );
 }
@@ -402,21 +415,11 @@ function ModerationCard({
   content: AdminContentRow[];
   onReload: () => void;
 }) {
-  const [deleting, setDeleting] = useState<string | null>(null);
-
-  const onDelete = async (row: AdminContentRow) => {
-    if (typeof window !== "undefined" && !window.confirm(`確定刪除這則${KIND_ZH[row.kind]}?刪了救不回。`)) {
-      return;
-    }
-    setDeleting(row.id);
-    const res = await adminDelete(row.kind, row.id);
-    setDeleting(null);
-    if (res.ok) onReload();
-    else if (typeof window !== "undefined") window.alert(res.msg);
-  };
-
   return (
-    <Card title={`最近文章 / 留言(${content.length})· 違規就刪`}>
+    <Card
+      title={`最近文章 / 留言(${content.length})· 違規就刪`}
+      hint="點「看全文」讀完整內容(付費分析的內文也看得到 · 審核用)→ 違規填原因 → 刪除。 刪除會留痕(下方審核紀錄)。"
+    >
       <button
         type="button"
         onClick={onReload}
@@ -429,31 +432,179 @@ function ModerationCard({
       ) : (
         <div className="space-y-2">
           {content.map((row) => (
-            <div
-              key={`${row.kind}-${row.id}`}
-              className="flex items-start justify-between gap-3 border-t border-line/30 pt-2"
+            <ModRow key={`${row.kind}-${row.id}`} row={row} onDeleted={onReload} />
+          ))}
+        </div>
+      )}
+    </Card>
+  );
+}
+
+// 一則內容 · 可展開看全文(含付費)+ 填原因刪除(留痕)
+function ModRow({
+  row,
+  onDeleted,
+}: {
+  row: AdminContentRow;
+  onDeleted: () => void;
+}) {
+  const [open, setOpen] = useState(false);
+  const [full, setFull] = useState<AdminFullContent | null>(null);
+  const [loadingFull, setLoadingFull] = useState(false);
+  const [reason, setReason] = useState("");
+  const [deleting, setDeleting] = useState(false);
+  const [err, setErr] = useState<string | null>(null);
+
+  const toggle = async () => {
+    const next = !open;
+    setOpen(next);
+    if (next && full === null && !loadingFull) {
+      setLoadingFull(true);
+      setFull(await adminViewContent(row.kind, row.id));
+      setLoadingFull(false);
+    }
+  };
+
+  const onDelete = async () => {
+    if (
+      typeof window !== "undefined" &&
+      !window.confirm(`確定刪除這則${KIND_ZH[row.kind]}?刪了救不回(會留痕)。`)
+    ) {
+      return;
+    }
+    setDeleting(true);
+    setErr(null);
+    const res = await adminDelete(row.kind, row.id, reason.trim());
+    setDeleting(false);
+    if (res.ok) onDeleted();
+    else setErr(res.msg);
+  };
+
+  return (
+    <div className="border-t border-line/30 pt-2">
+      <div className="flex items-start justify-between gap-3">
+        <div className="min-w-0">
+          <p className="flex items-baseline gap-2 flex-wrap">
+            <span className="font-mono text-gold/80 text-[9px] tracking-[0.2em] px-1 py-0.5 border border-gold/30">
+              {KIND_ZH[row.kind]}
+            </span>
+            <span className="font-mono text-mute/80 text-[10px] tracking-[0.15em]">
+              {row.handle}
+            </span>
+          </p>
+          <p className="mt-1 text-bone/80 text-[13px] leading-snug break-all">
+            {row.snippet || "（無文字）"}
+          </p>
+        </div>
+        <div className="shrink-0 flex flex-col gap-1.5">
+          <button
+            type="button"
+            onClick={toggle}
+            className="px-3 py-1.5 border border-gold/40 text-gold/85 font-mono text-[10px] tracking-[0.2em] hover:bg-gold/10 transition-colors"
+          >
+            {open ? "收合" : "看全文"}
+          </button>
+        </div>
+      </div>
+
+      {open && (
+        <div className="mt-2 border border-line/50 bg-ink/40 p-3">
+          {loadingFull ? (
+            <p className="font-mono text-mute/55 text-[10px] tracking-[0.25em]">載入中...</p>
+          ) : full === null ? (
+            <p className="text-mute/70 text-[12px] leading-relaxed">
+              讀不到全文(可能 migration 0017 還沒套用)· 上方 40 字摘要仍可審。
+            </p>
+          ) : (
+            <>
+              {full.title && (
+                <p className="text-bone text-sm font-medium mb-1">{full.title}</p>
+              )}
+              {full.priceNtd !== null && full.priceNtd > 0 && (
+                <p className="font-mono text-gold/70 text-[10px] tracking-[0.2em] mb-1">
+                  付費分析 · {full.priceNtd} 點
+                </p>
+              )}
+              <p className="text-bone/85 text-[13px] leading-relaxed whitespace-pre-wrap break-words">
+                {full.body || "（無內文）"}
+              </p>
+              {full.ref && (
+                <p className="mt-2 font-mono text-mute/45 text-[9px] tracking-[0.15em] break-all">
+                  {full.ref}
+                </p>
+              )}
+            </>
+          )}
+
+          <div className="mt-3 flex flex-wrap items-center gap-2 border-t border-line/40 pt-3">
+            <Field
+              value={reason}
+              onChange={setReason}
+              placeholder="刪除原因(選填 · 會留痕)"
+              className="flex-1 min-w-[160px]"
+            />
+            <button
+              type="button"
+              onClick={onDelete}
+              disabled={deleting}
+              className="shrink-0 px-3 py-2 border border-loss/50 text-loss/85 font-mono text-[10px] tracking-[0.2em] hover:bg-loss/10 transition-colors disabled:opacity-50"
             >
-              <div className="min-w-0">
-                <p className="flex items-baseline gap-2 flex-wrap">
-                  <span className="font-mono text-gold/80 text-[9px] tracking-[0.2em] px-1 py-0.5 border border-gold/30">
-                    {KIND_ZH[row.kind]}
-                  </span>
-                  <span className="font-mono text-mute/80 text-[10px] tracking-[0.15em]">
-                    {row.handle}
-                  </span>
+              {deleting ? "刪除中" : "刪除這則"}
+            </button>
+          </div>
+          {err && (
+            <p className="mt-2 font-mono text-loss/85 text-[11px] tracking-[0.15em]">⚠ {err}</p>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ── 審核留痕(透明 · 自己對自己留痕 = 公開揭露的審核權)──
+function AuditCard({
+  audit,
+  onReload,
+}: {
+  audit: AdminAuditRow[];
+  onReload: () => void;
+}) {
+  return (
+    <Card
+      title={`審核紀錄(${audit.length})`}
+      hint="你刪了什麼、何時、為什麼 —— 都留痕。 這就是「公開揭露 + 留痕」的審核權(不是秘密上帝視角 · 同你的 disclosure 護城河)。"
+    >
+      <button
+        type="button"
+        onClick={onReload}
+        className="mb-3 font-mono text-gold/70 hover:text-gold text-[10px] tracking-[0.25em] transition-colors"
+      >
+        ↻ 重新整理
+      </button>
+      {audit.length === 0 ? (
+        <p className="font-mono text-mute/55 text-[11px] tracking-[0.2em]">
+          還沒有刪除紀錄(套用 migration 0017 後生效)。
+        </p>
+      ) : (
+        <div className="space-y-2">
+          {audit.map((a, i) => (
+            <div key={i} className="border-t border-line/30 pt-2">
+              <p className="flex items-baseline gap-2 flex-wrap">
+                <span className="font-mono text-loss/75 text-[9px] tracking-[0.2em] px-1 py-0.5 border border-loss/30">
+                  刪除 {KIND_ZH[a.targetKind as AdminContentRow["kind"]] ?? a.targetKind}
+                </span>
+                <span className="font-mono text-mute/55 text-[9px] tracking-[0.15em] tabular">
+                  {a.createdAt.slice(0, 16).replace("T", " ")}
+                </span>
+              </p>
+              <p className="mt-1 text-mute/80 text-[12px] leading-snug break-all">
+                {a.targetSnippet || "（無內容快照）"}
+              </p>
+              {a.reason && (
+                <p className="mt-0.5 font-mono text-mute/55 text-[10px] tracking-[0.1em]">
+                  原因:{a.reason}
                 </p>
-                <p className="mt-1 text-bone/80 text-[13px] leading-snug break-all">
-                  {row.snippet || "（無文字）"}
-                </p>
-              </div>
-              <button
-                type="button"
-                onClick={() => onDelete(row)}
-                disabled={deleting === row.id}
-                className="shrink-0 px-3 py-1.5 border border-loss/50 text-loss/85 font-mono text-[10px] tracking-[0.2em] hover:bg-loss/10 transition-colors disabled:opacity-50"
-              >
-                {deleting === row.id ? "刪除中" : "刪除"}
-              </button>
+              )}
             </div>
           ))}
         </div>
