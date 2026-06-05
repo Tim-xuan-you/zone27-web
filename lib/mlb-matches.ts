@@ -10,7 +10,13 @@
 
 import type { Match, TeamSide } from "@/lib/matches";
 import { getMatchStartIso } from "@/lib/matches";
-import { fetchRelevantMlb, type MlbGame, type MlbTeamSide } from "@/lib/mlb";
+import {
+  fetchRelevantMlb,
+  teamZh,
+  toTaipeiTime,
+  type MlbGame,
+  type MlbTeamSide,
+} from "@/lib/mlb";
 import mlbLocked from "@/lib/mlb-locked.json";
 
 // gamePk → 賽前鎖定的引擎主隊勝率%
@@ -95,11 +101,113 @@ export async function getMlbAsMatches(): Promise<Match[]> {
   return out;
 }
 
+// ── MLB 詳情頁永久化(R201 碼審 · 修「買過/回過的 MLB 場 2 天後點進去 404」)──────
+// getMlbAsMatches 只抓「昨天+今天」live 窗 → settled 的 MLB 場掉出窗 → 詳情頁 notFound
+// → /member「你的東西」「重看/回到那串」連到死路 = 打臉「永久找得回」+ R198 MLB first-class。
+// 修法:從 mlb-locked.json 重建已封存場的完整 Match(同 getMlbFinalizedResults 的 JSON 永久
+// 結果思路 · 但這裡重建整個 Match 給詳情頁渲染)。 locked.json 存了隊 id/英文名/投手/數據/
+// 引擎線/finalScore/gameDate = 足以重建跟 live 同形的 Match(venue 缺 → "—" · 純展示)。
+type LockedPrediction = {
+  gamePk?: number;
+  gameDate?: string;
+  homeId?: number;
+  homeEn?: string;
+  awayId?: number;
+  awayEn?: string;
+  homePitcher?: string;
+  awayPitcher?: string;
+  homeStats?: { era?: string; k9?: string; bb9?: string; hr9?: string };
+  awayStats?: { era?: string; k9?: string; bb9?: string; hr9?: string };
+  engineWinHomePct?: number;
+  finalScore?: { home?: number; away?: number };
+};
+
+function lockedSide(
+  zhName: string,
+  abbr: string,
+  pitcherName: string | undefined,
+  stats: LockedPrediction["homeStats"],
+  winRate: number
+): TeamSide {
+  return {
+    name: zhName,
+    en: abbr,
+    pitcher: {
+      name: pitcherName || "未定",
+      era: stats?.era ?? "—",
+      k9: stats?.k9 ?? "—",
+      whip: "—",
+      bb9: stats?.bb9 ?? "—",
+      hr9: stats?.hr9 ?? "—",
+    },
+    recent: [],
+    winRate,
+  };
+}
+
+function lockedToMatch(p: LockedPrediction): Match | null {
+  if (
+    typeof p.gamePk !== "number" ||
+    typeof p.engineWinHomePct !== "number" ||
+    typeof p.gameDate !== "string" ||
+    typeof p.homeId !== "number" ||
+    typeof p.awayId !== "number"
+  ) {
+    return null;
+  }
+  const homePct = Math.round(p.engineWinHomePct);
+  const awayPct = 100 - homePct;
+  const home = teamZh(p.homeId, p.homeEn ?? "");
+  const away = teamZh(p.awayId, p.awayEn ?? "");
+  const tp = toTaipeiTime(p.gameDate);
+  const finalResult: Match["finalResult"] =
+    p.finalScore &&
+    typeof p.finalScore.home === "number" &&
+    typeof p.finalScore.away === "number"
+      ? {
+          homeScore: p.finalScore.home,
+          awayScore: p.finalScore.away,
+          winner:
+            p.finalScore.home > p.finalScore.away
+              ? "home"
+              : p.finalScore.away > p.finalScore.home
+                ? "away"
+                : "tie",
+          ingestedAt: p.gameDate,
+        }
+      : undefined;
+  return {
+    id: `mlb-${p.gamePk}`,
+    league: "MLB",
+    date: `${tp.date}  ·  ${weekdayZh(p.gameDate)}`,
+    startTime: tp.time,
+    venue: "—",
+    home: lockedSide(home.zh, home.abbr, p.homePitcher, p.homeStats, homePct),
+    away: lockedSide(away.zh, away.abbr, p.awayPitcher, p.awayStats, awayPct),
+    topScores: [],
+    aiConfidence: Math.max(homePct, awayPct),
+    finalResult,
+  };
+}
+
+/** 從 mlb-locked.json 重建的「已封存」MLB 場(同步 · 不打 API)· 永久可達。
+ *  給詳情頁 fallback + /member 隊名 lookup 補齊用(live 窗掉出去的舊場)。 */
+export function getMlbLockedMatches(): Match[] {
+  const out: Match[] = [];
+  for (const p of (mlbLocked.predictions ?? []) as LockedPrediction[]) {
+    const m = lockedToMatch(p);
+    if (m) out.push(m);
+  }
+  return out;
+}
+
 // 單場查(詳情頁用)· id = "mlb-{gamePk}" → 對應的 Match(找不到回 null)。
+// live 窗(昨+今)優先;掉出窗的 settled 場走 locked.json 永久重建(不再 404)。
 export async function getMlbMatchById(id: string): Promise<Match | null> {
   if (!id.startsWith("mlb-")) return null;
-  const all = await getMlbAsMatches();
-  return all.find((m) => m.id === id) ?? null;
+  const live = (await getMlbAsMatches()).find((m) => m.id === id);
+  if (live) return live;
+  return getMlbLockedMatches().find((m) => m.id === id) ?? null;
 }
 
 // MLB 已結算場的結果(給個人準度評分用 · 同 CPBL getFinalizedMatches 的 shape)·

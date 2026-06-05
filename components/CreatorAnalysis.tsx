@@ -456,7 +456,12 @@ function PostCard({
   };
 
   return (
-    <article className="p-4 sm:p-5 border border-line/60 bg-slate/30">
+    // id=post-{postId} = per-post 錨點 · /member「你的東西」的「重看 →」直接捲到買的那篇
+    // (同場多人發分析時不必再掃)· scroll-mt-24 避免被 sticky nav 蓋住。
+    <article
+      id={`post-${p.postId}`}
+      className="scroll-mt-24 p-4 sm:p-5 border border-line/60 bg-slate/30"
+    >
       <div className="flex items-baseline justify-between gap-3 mb-1.5 flex-wrap">
         <span className="flex items-center gap-2 flex-wrap">
           <Avatar seed={id.seed} glyph={id.glyph} size={26} />

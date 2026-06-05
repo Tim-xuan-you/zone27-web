@@ -113,7 +113,7 @@ const TEAM_ZH: Record<number, { zh: string; abbr: string }> = {
   158: { zh: "密爾瓦基釀酒人", abbr: "MIL" },
 };
 
-function teamZh(id: number, fallbackEn: string) {
+export function teamZh(id: number, fallbackEn: string) {
   const t = TEAM_ZH[id];
   if (t) return t;
   // Fallback: use English + 3-letter slice
@@ -132,7 +132,7 @@ function classifyState(abstractState: string): MlbGame["state"] {
 // MLB is in US — start times are typically late-night Taipei (early morning).
 // We display in Taipei time so Taiwanese visitors see "明天上午 09:10" etc.
 
-function toTaipeiTime(isoUtc: string): { time: string; date: string } {
+export function toTaipeiTime(isoUtc: string): { time: string; date: string } {
   const d = new Date(isoUtc);
   // Use Intl.DateTimeFormat with Taipei TZ
   const time = new Intl.DateTimeFormat("zh-Hant", {

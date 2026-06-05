@@ -21,10 +21,12 @@ import DisciplineStreak from "@/components/DisciplineStreak";
 import { readTier, isPaid, creatorTakePct, tierLabel } from "@/lib/tier";
 import OpenPositionCard, { type OpenPosition } from "@/components/OpenPositionCard";
 import MyCreatorPanel from "@/components/MyCreatorPanel";
+import MyActivityPanel from "@/components/MyActivityPanel";
+import { getMyPurchases, getMyComments } from "@/lib/creator-activity-server";
 import DisplayNameSetting from "@/components/DisplayNameSetting";
 import { SUPPORT_EMAIL } from "@/lib/brand-constants";
 import { readDisplayName } from "@/lib/identity";
-import { getMlbAsMatches } from "@/lib/mlb-matches";
+import { getMlbAsMatches, getMlbLockedMatches } from "@/lib/mlb-matches";
 import { createHash } from "crypto";
 
 export const metadata: Metadata = {
@@ -122,6 +124,23 @@ export default async function MemberPage() {
   // 對帳紀律 streak(soul-roadmap #2)· 連續性按「下注日」的台北日曆日算(見
   // aggregateStreak 註解:下注日 ≠ 比賽日 · 衡量你哪幾天回來面對帳本)。
   const streak = aggregateStreak(predictionsMap, getTodayTaipei());
+
+  // 你的東西(soul · Tim 2026-06-05 dogfood:買過的分析 / 回過的留言找不回去)·
+  // server-side 撈本人活動 + 用 allWithMlb 解析隊名(不把賽程 lookup 送前端)·
+  // 沒買/沒回 → panel 自動隱藏(同其他 graceful 元件)。
+  const [myPurchases, myComments] = await Promise.all([
+    getMyPurchases(),
+    getMyComments(),
+  ]);
+  // 隊名 lookup:CPBL(永久)+ MLB live 窗 + MLB 已封存(locked.json)→ 連舊的 MLB
+  // 買/回也顯示隊名(且詳情頁已永久可達 · 不 404)。 同 id 後者覆蓋 · 資料一致無害。
+  const matchNames: Record<string, { home: string; away: string }> =
+    Object.fromEntries(
+      [...allWithMlb, ...getMlbLockedMatches()].map((m) => [
+        m.id,
+        { home: m.home.name, away: m.away.name },
+      ])
+    );
 
   // 你的未結算押注(the live middle · soul)· 你押過、還沒結算的場 —— 押下去到
   // 打完之間那段以前 /member 一片空白。 你 vs 引擎 vs 群眾 的張力撐住「我現在
@@ -244,6 +263,15 @@ export default async function MemberPage() {
 
         {/* 點數錢包 · 儲值 → 買別人的付費分析(0009)· 跟「升級賣分析」是兩回事 */}
         <WalletPanel />
+
+        {/* 你的東西 · 買過的分析(書架)+ 回過的留言(足跡)· Tim dogfood:做完即蒸發、
+            找不回去 = 點數白花 + 留言被吞。 接在錢包後(花了點數 → 這是你買到的東西)·
+            沒買/沒回自動隱藏。 需 migration 0016(get_my_purchases / get_my_comments)。 */}
+        <MyActivityPanel
+          purchases={myPurchases}
+          comments={myComments}
+          matchNames={matchNames}
+        />
 
         {/* 你的分析 · 創作者後台(付費會員 · 沒發過分析自動隱藏)· Tim dogfood:
             「看不到我發了哪些文章/幾勝幾敗/有人回嗎」· 答 #1 #5 #7 */}
