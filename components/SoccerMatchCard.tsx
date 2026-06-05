@@ -59,7 +59,7 @@ export default function SoccerMatchCard({ match }: { match: SoccerMatchPredictio
         </p>
       )}
 
-      {/* 三向押注(主勝/和/客勝)· 登入才能押 · 押了不可改 · 賽後自動掛你的足球準度 */}
+      {/* 三向押注(主勝/和/客勝)· 登入才能押 · 押了不可改 · 賽後逐場對帳(結算建置中) */}
       <SoccerBetStrip matchId={id} dateISO={dateISO} homeLabel={home} awayLabel={away} />
     </article>
   );

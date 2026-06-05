@@ -57,7 +57,7 @@ export default async function SoccerPage() {
           <p className="mt-4 text-mute text-sm leading-relaxed max-w-2xl">
             這不是莊家的盤口 —— 是我們的推演引擎用足球預測的學術標準(每隊預期進球 +
             低比分修正)<span className="text-bone">自己算出來</span>的機率。 賽後一樣
-            <span className="text-gold">逐場掛準 / 不準、連輸的都留著</span>。 不接受下注。
+            <span className="text-gold">逐場對帳、連輸都留</span>(足球自動結算即將上線)。 不接受下注。
           </p>
           <p className="mt-3 font-mono text-mute/60 text-[10px] tracking-[0.2em]">
             {total > 0

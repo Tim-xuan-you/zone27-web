@@ -107,10 +107,12 @@ export async function getMyPredictionsClient(): Promise<UserPredictionsMap> {
       created_at?: unknown;
     }[]) {
       const matchId = typeof row.match_id === "string" ? row.match_id : null;
+      // 🔴 足球(fd-*)走獨立計算 · 不混進棒球帳本(同 predictions-server · 準度分開算)。
+      if (!matchId || matchId.startsWith("fd-")) continue;
       const pick =
         row.pick === "home" || row.pick === "away" ? row.pick : null;
       const ts = typeof row.created_at === "string" ? row.created_at : "";
-      if (matchId && pick) map[matchId] = { pick, ts };
+      if (pick) map[matchId] = { pick, ts };
     }
     return map;
   } catch {

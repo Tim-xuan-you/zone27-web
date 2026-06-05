@@ -104,7 +104,7 @@ export default function SoccerBetStrip({
           className="flex items-center justify-between gap-2 group"
         >
           <span className="font-mono text-mute/70 text-[10px] tracking-[0.2em]">
-            ▸ 登入就能押這場(免費 · 賽後自動掛你的準度)
+            ▸ 登入就能押這場(免費 · 押了鎖死、賽後對帳)
           </span>
           <span className="font-mono text-gold/80 group-hover:text-gold text-[10px] tracking-[0.25em] shrink-0">
             登入 →
@@ -131,7 +131,7 @@ export default function SoccerBetStrip({
           <span className="text-gold">
             {pick === "home" ? homeLabel : pick === "away" ? awayLabel : "和局"}
           </span>{" "}
-          <span className="text-mute/60">· 鎖死、賽後自動掛準度(算進你的足球天梯)</span>
+          <span className="text-mute/60">· 押了鎖死 · 賽後逐場對帳(足球結算建置中)</span>
         </p>
       )}
 

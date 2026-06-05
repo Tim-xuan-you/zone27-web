@@ -42,13 +42,17 @@ export async function getMyPredictionsMap(): Promise<UserPredictionsMap> {
     const map: UserPredictionsMap = {};
     for (const row of data as RpcRow[]) {
       const matchId = typeof row.match_id === "string" ? row.match_id : null;
+      // 🔴 足球(fd-*)走完全獨立的計算(三向 + 自己的結算/天梯 · 準度分開算)·
+      //   絕不混進棒球帳本 —— 否則世界盃押注會灌爆首頁戰績條 / /ladder 入場門檻 /
+      //   /member 校準身分(且足球沒結算 = 永遠 pending 灌不掉)。 棒球只認 cpbl-*/mlb-*。
+      if (!matchId || matchId.startsWith("fd-")) continue;
       const pick =
         row.pick === "home" || row.pick === "away" ? row.pick : null;
       const ts = typeof row.created_at === "string" ? row.created_at : "";
       // ts(created_at)缺失/非字串 → 整列丟棄 · 讓「數天數」(aggregateStreak)與
       // 「算準度」(aggregateIdentity)對同一壞列一致(否則 identity fail-open 計入、
       // streak 卻丟掉 = 兩面數字打架)。 timestamptz 實務上必為字串 · 純防禦不變既有行為。
-      if (matchId && pick && ts) map[matchId] = { pick, ts };
+      if (pick && ts) map[matchId] = { pick, ts };
     }
     return map;
   } catch {
