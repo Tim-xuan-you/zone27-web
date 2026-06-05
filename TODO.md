@@ -14,6 +14,12 @@
 
 ## ⏳ 仍 pending Tim 親手動作
 
+### ✅ migration 0016 — 已套(2026-06-05 · R201 ·「你的東西」買過/回過找得回)
+Tim dogfood「買了分析/回了留言卻找不回去(賽事太多)」→ 新增 get_my_purchases / get_my_comments
+本人專屬 RPC + /member「你的東西」區(書架 + 足跡 · 一鍵回該篇 #post 錨點 · 沒買/沒回自動隱藏)。
+Tim 親手套完回 Success。 連帶修:**MLB 詳情頁永久化**(locked.json 重建 · 修「買過的 MLB 場 2 天後
+點進去 404」· 實測 mlb-822727 從 404 → 200)。 3-agent 對抗審查 7 項全修。 commit `431e165`。
+
 ### ✅ migration 0015 — 已套(2026-06-05 · R201 · 改名洗不掉戰績的命門鎖好了)
 創作者改名洗掉戰績的命門 bug 已關:三支讀取 RPC(get_creator_posts / get_creator_comments /
 get_creator_records)現在多回 `author_code`(永久碼 md5 前 8 碼)+ `display_name`,前端用永久碼
