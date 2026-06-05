@@ -2,12 +2,15 @@ import Link from "next/link";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import MiniMatchCard from "@/components/MiniMatchCard";
+import MatchBoardFilter from "@/components/MatchBoardFilter";
 import { createPageMetadata } from "@/lib/page-og";
 import {
   getMatchPhase,
   getCalibration,
   getTodayAndFutureMatches,
   getFinalizedMatches,
+  getMatchStartIso,
+  type Match,
   type MatchPhase,
   type Calibration,
 } from "@/lib/matches";
@@ -32,21 +35,24 @@ export default async function MatchesPage() {
   // Past matches with finalResult become RECEIPTS · they live on
   // /track-record + permalink /matches/[gameId] · not in this list.
   // This is the "daily refresh" UX visitors expect from a sport page.
-  const upcomingMatches = getTodayAndFutureMatches();
-  const allReceipts = getFinalizedMatches();
-  const recentReceipts = allReceipts.slice(0, 3); // 有賽事時 · 下方輔助 strip
-  // 休賽日主看板 fallback · 同首頁:沒有可押賽事時,看板改放引擎最近 6 場
-  // 賽後收據(✓/✕ 都掛)而非空盒子 · 看板永不空白。
-  const offSeasonReceipts =
-    upcomingMatches.length === 0 ? allReceipts.slice(0, 6) : [];
-  // R198 · MLB 全套 first-class(Tim「MLB 全套 · Polymarket go」)· 同一套引擎 ·
-  // 轉接 lib/mlb-matches(賽前鎖定線 · 誠信純正)· 板上只放未結算(可押)·
-  // 已結束的在 /matches/mlb + 各自詳情頁。 同 CPBL 一條押注/分析管線。
-  const mlbBoard = (await getMlbAsMatches())
+  // 統一排序鍵:完整台北 instant(date+time)· 修「6/5↔6/6 穿插」(原本 CPBL 只比日期、
+  // MLB 只比 HH:MM 時間字串忽略日期)。 各組內各自 sort,渲染時固定 CPBL→MLB(權重排序
+  // 護核心 · 絕不 concat 後全域 time-sort = 會把 15 場清晨 MLB 排到 CPBL 前面埋掉核心)。
+  const byStart = (a: Match, b: Match) =>
+    (getMatchStartIso(a) ?? "").localeCompare(getMatchStartIso(b) ?? "");
+  const cpblSorted = getTodayAndFutureMatches().slice().sort(byStart);
+  // R198 · MLB 全套 first-class · 同一套引擎 · 板上只放未結算(可押)· 已結束的在 /matches/mlb。
+  const mlbSorted = (await getMlbAsMatches())
     .filter((m) => !m.finalResult)
-    .sort((a, b) => a.startTime.localeCompare(b.startTime));
+    .sort(byStart);
+  const hasUpcoming = cpblSorted.length > 0 || mlbSorted.length > 0;
+  // 休賽日 fallback · 兩聯盟都沒可押場時,看板改放引擎最近 6 場收據(✓/✕ 都掛)· 看板永不空白。
+  const offSeasonReceipts = !hasUpcoming ? getFinalizedMatches().slice(0, 6) : [];
   // 每場分析篇數 · 看板標「N 篇分析」(跟單入口)· 無 cookie · 不破 ISR。
   const analysisCounts = await getCreatorPostCounts();
+  // header 顯示:CPBL 為主,CPBL 空時退 MLB(不讓「今日無覆蓋」跟下方 MLB 場矛盾)。
+  const boardDate = cpblSorted[0]?.date ?? mlbSorted[0]?.date ?? "今日無覆蓋場次";
+  const headMatch = cpblSorted[0] ?? mlbSorted[0];
 
   return (
     <div className="flex flex-col flex-1 min-h-screen">
@@ -58,12 +64,12 @@ export default async function MatchesPage() {
       <section className="mx-auto max-w-6xl w-full px-6 sm:px-10 pt-16 pb-10">
         <div className="flex items-baseline gap-3 mb-3 flex-wrap">
           <p className="font-mono text-gold/70 text-[10px] tracking-[0.4em]">
-            今日賽事板 · {upcomingMatches[0]?.league ?? "CPBL"}
+            今日賽事板
           </p>
-          {upcomingMatches[0] && (
+          {headMatch && (
             <PhaseChip
-              phase={getMatchPhase(upcomingMatches[0])}
-              calibration={getCalibration(upcomingMatches[0])}
+              phase={getMatchPhase(headMatch)}
+              calibration={getCalibration(headMatch)}
             />
           )}
           <Link
@@ -76,10 +82,10 @@ export default async function MatchesPage() {
         </div>
         <div className="flex items-end justify-between flex-wrap gap-4">
           <h1 className="text-4xl sm:text-5xl text-bone font-light tracking-tight">
-            {upcomingMatches[0]?.date ?? "今日無覆蓋場次"}
+            {boardDate}
           </h1>
           <p className="font-mono text-mute text-xs tracking-[0.25em]">
-            {upcomingMatches.length} 場引擎覆蓋 · AI 模型 15:00 鎖定
+            {cpblSorted.length + mlbSorted.length} 場引擎覆蓋 · AI 模型 15:00 鎖定
           </p>
         </div>
         <p className="mt-3 font-mono text-mute text-[10px] tracking-[0.25em]">
@@ -90,17 +96,19 @@ export default async function MatchesPage() {
 
       {/* ── MATCH GRID ──────────────────────── */}
       <section className="mx-auto max-w-6xl w-full px-6 sm:px-10 pb-12">
-        {upcomingMatches.length > 0 ? (
-          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-            {upcomingMatches.map((m) => (
-              <MiniMatchCard key={m.id} match={m} analysisCount={analysisCounts[m.id] ?? 0} />
-            ))}
-          </div>
+        {hasUpcoming ? (
+          /* 一個看板 · league 篩選 chip(預設 CPBL 護核心)· 按完整開賽時間排 ·
+             CPBL→MLB 權重排序 · 戰績歸 /track-record(header 已有連結)。 */
+          <MatchBoardFilter
+            cpbl={cpblSorted}
+            mlb={mlbSorted}
+            analysisCounts={analysisCounts}
+          />
         ) : offSeasonReceipts.length > 0 ? (
           /* 休賽日 · 看板永不空白 → 引擎最近戰績收據(同首頁 fallback) */
           <>
             <p className="text-mute text-sm leading-relaxed mb-6 max-w-2xl">
-              今日無 CPBL 場次 · 現在沒有可押的賽事。 這是引擎最近{" "}
+              現在沒有可押的賽事。 這是引擎最近{" "}
               {offSeasonReceipts.length} 場的公開判決 —{" "}
               <span className="text-gold">✓ 命中</span> 跟{" "}
               <span className="text-loss">✕ 落空</span>{" "}
@@ -115,10 +123,10 @@ export default async function MatchesPage() {
         ) : (
           <div className="bg-slate/40 border border-line/60 p-10 sm:p-12 text-center">
             <p className="font-mono text-mute text-xs tracking-[0.25em] mb-4">
-              今日 CPBL · 無引擎覆蓋場次
+              今日無引擎覆蓋場次
             </p>
             <p className="text-mute text-sm leading-relaxed max-w-md mx-auto mb-8">
-              今日無 CPBL 場次 · 改為檢視過去的公開戰績:
+              現在沒有可押的賽事 · 改為檢視過去的公開戰績:
             </p>
             <Link
               href="/track-record"
@@ -130,61 +138,6 @@ export default async function MatchesPage() {
         )}
       </section>
 
-      {/* ── RECENT RECEIPTS · brand IP signal ──
-          When there's an upcoming match, also show 1-3 past receipts
-          as "engine track record" signal. Brand-IP: 引擎 + 收據 visible
-          together is the conversion lever. */}
-      {upcomingMatches.length > 0 && recentReceipts.length > 0 && (
-        <section className="mx-auto max-w-6xl w-full px-6 sm:px-10 pb-16">
-          <div className="flex items-baseline justify-between flex-wrap gap-3 mb-6">
-            <p
-              className="font-mono text-gold/70 text-[10px] tracking-[0.35em]"
-            >
-              / RECENT RECEIPTS · 引擎過去戰績
-            </p>
-            <Link
-              href="/track-record"
-              className="font-mono text-mute hover:text-gold text-[10px] tracking-[0.3em] transition-colors"
-            >
-              完整 ledger →
-            </Link>
-          </div>
-          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-            {recentReceipts.map((m) => (
-              <MiniMatchCard key={m.id} match={m} analysisCount={analysisCounts[m.id] ?? 0} />
-            ))}
-          </div>
-        </section>
-      )}
-
-      {/* ── MLB 市場 · 同一套引擎 first-class(R198 · Polymarket go)──
-          MLB 跟 CPBL 同型卡(隊徽 + 賽前鎖定開盤線 + 一鍵押 + 點進完整詳情)·
-          引擎線用賽前鎖定值(誠信)· 賽後對帳同 CPBL。 */}
-      {mlbBoard.length > 0 && (
-        <section className="mx-auto max-w-6xl w-full px-6 sm:px-10 pb-16 border-t border-line/40 pt-10">
-          <div className="flex items-baseline justify-between flex-wrap gap-3 mb-3">
-            <p className="font-mono text-gold/70 text-[10px] tracking-[0.4em]">
-              / MLB · 美國職棒 · 即時開盤
-            </p>
-            <Link
-              href="/matches/mlb"
-              className="font-mono text-mute hover:text-gold text-[10px] tracking-[0.3em] transition-colors"
-            >
-              全部 MLB 賽程 + 戰績 →
-            </Link>
-          </div>
-          <p className="text-mute/80 text-sm leading-relaxed mb-6 max-w-2xl">
-            棒球就是棒球 —— MLB 跟 CPBL <span className="text-bone">同一套引擎</span>:
-            一樣賽前鎖定開盤線、一鍵押、賽後對帳、落空照掛。
-          </p>
-          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-            {mlbBoard.map((m) => (
-              <MiniMatchCard key={m.id} match={m} analysisCount={analysisCounts[m.id] ?? 0} />
-            ))}
-          </div>
-        </section>
-      )}
-
       {/* ── 其他工具 · 精簡兩欄 ───────────────────
           原本是兩張 hero 重量大卡(MLB + CPBL 投手)· 把市場頁拉長近兩倍 ·
           且 MLB 那張用綠框(border-win)= 違反「不紅綠對比」品牌鐵律。 降成兩個
@@ -192,7 +145,7 @@ export default async function MatchesPage() {
       <section className="mx-auto max-w-6xl w-full px-6 sm:px-10 pb-24">
         <div className="grid sm:grid-cols-2 gap-3">
           {/* MLB 入口 · 只在上面沒有 MLB 看板時當 fallback 顯示(避免同頁兩個 /matches/mlb 重複) */}
-          {mlbBoard.length === 0 && (
+          {mlbSorted.length === 0 && (
             <Link
               href="/matches/mlb"
               className="block bg-slate/30 border border-line/60 hover:border-gold/50 hover:bg-slate/40 transition-colors p-4 sm:p-5 group"

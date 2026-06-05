@@ -86,15 +86,12 @@ export default async function MlbMatchesPage() {
           資料來源:MLB Stats API(官方公開、完全免費) ·
           ZONE 27 不修改任何原始資料
         </p>
-        {/* R197 Tim de-BETA:MLB 跟 CPBL 同一套引擎 · 拿掉「驗證夠才開盤」閘門 framing
-            (蒙地卡羅是全世界在用的方法 · 不需要我們「測30場驗證」)· 棒球就是棒球 ·
-            MLB first-class(賽前鎖定、賽後對帳、同 CPBL)。 supersedes R185 閘門框架。 */}
-        <p className="mt-4 text-mute text-sm sm:text-[15px] leading-relaxed max-w-2xl">
-          <strong className="text-bone">棒球就是棒球 —— MLB 跟 CPBL 用同一套引擎。</strong>{" "}
-          一樣賽前鎖定開盤線、賽後對真實比分結算、落空照掛不刪。 即時比分每 10 分鐘更新(不秒跳)。{" "}
+        {/* R201:刪「棒球就是棒球…同一套引擎」解釋段(寫字解釋排版=IA 失敗 · 同型卡自說明)·
+            只留回 CPBL 看板的導航(非解釋)。 */}
+        <p className="mt-3">
           <Link
             href="/matches"
-            className="text-gold/90 hover:text-gold underline-offset-4 hover:underline whitespace-nowrap"
+            className="font-mono text-gold/80 hover:text-gold text-[10px] tracking-[0.3em] underline-offset-4 hover:underline transition-colors"
           >
             也看今日 CPBL →
           </Link>
