@@ -587,8 +587,12 @@
       },
       "engineWinHomePct": 80,
       "lockedAt": "2026-06-03T01:44:13.339Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 1,
+        "away": 5
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-06-05T11:53:05.269Z"
     },
     {
       "gamePk": 825076,
@@ -616,6 +620,39 @@
       },
       "engineWinHomePct": 40,
       "lockedAt": "2026-06-03T01:44:13.339Z",
+      "finalScore": {
+        "home": 3,
+        "away": 2
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-06-05T11:53:05.269Z"
+    },
+    {
+      "gamePk": 824673,
+      "gameDate": "2026-06-05T18:20:00Z",
+      "scheduleDate": "2026-06-05",
+      "homeId": 112,
+      "homeEn": "Chicago Cubs",
+      "homeRecord": "33-30",
+      "awayId": 137,
+      "awayEn": "San Francisco Giants",
+      "awayRecord": "25-38",
+      "homePitcher": "Edward Cabrera",
+      "awayPitcher": "Robbie Ray",
+      "homeStats": {
+        "era": "4.00",
+        "k9": "7.83",
+        "bb9": "3.33",
+        "hr9": "1.33"
+      },
+      "awayStats": {
+        "era": "4.45",
+        "k9": "8.47",
+        "bb9": "4.45",
+        "hr9": "1.87"
+      },
+      "engineWinHomePct": 58,
+      "lockedAt": "2026-06-05T11:53:04.568Z",
       "finalScore": null,
       "verdict": null
     },
