@@ -100,6 +100,80 @@ export async function getMySoccerPrediction(
   }
 }
 
+export type SoccerPickRow = { matchId: string; pick: SoccerPick; ts: string };
+
+/** 我所有的足球押注(fd-* · 三向 · 登入)· 給「你的足球戰績」對帳。 錯/anon → 空陣列。
+ *  注意:棒球的 getMyPredictionsMap 已把 fd-* 排除(準度分開算)· 這支專讀 fd-*。 */
+export async function getMySoccerPicks(): Promise<SoccerPickRow[]> {
+  try {
+    const supabase = createSupabaseBrowserClient();
+    const { data, error } = await supabase.rpc("get_my_predictions");
+    if (error || !Array.isArray(data)) return [];
+    const out: SoccerPickRow[] = [];
+    for (const row of data as {
+      match_id?: unknown;
+      pick?: unknown;
+      created_at?: unknown;
+    }[]) {
+      const matchId = typeof row.match_id === "string" ? row.match_id : "";
+      if (!matchId.startsWith("fd-") || !isPick(row.pick)) continue;
+      out.push({
+        matchId,
+        pick: row.pick,
+        ts: typeof row.created_at === "string" ? row.created_at : "",
+      });
+    }
+    return out;
+  } catch {
+    return [];
+  }
+}
+
+export type SoccerRecord = {
+  /** 已結算場數(先鎖後結後 · 不含平台 pending) */
+  n: number;
+  hits: number;
+  misses: number;
+  /** 命中率 0-100 · null 當 n=0 */
+  rate: number | null;
+  /** 還沒結算(比賽還沒打完 / 結果還沒回來) */
+  pending: number;
+};
+
+/**
+ * 三向對帳(主勝/和/客勝)· **先鎖後結**:開賽後才下的不計入(同棒球 isLatePick)。
+ * results:{ [matchId]: { outcome, kickoffISO } }。 純函式 deterministic。
+ * 🔴 含輸:✕ 跟 ✓ 一樣進分母 · 不藏(品牌命門)。
+ */
+export function gradeSoccerPicks(
+  picks: SoccerPickRow[],
+  results: Record<string, { outcome: SoccerPick; kickoffISO: string }>,
+): SoccerRecord {
+  let n = 0;
+  let hits = 0;
+  let pending = 0;
+  for (const p of picks) {
+    const r = results[p.matchId];
+    if (!r) {
+      pending += 1; // 還沒結算
+      continue;
+    }
+    // 先鎖後結:押注時間 ≥ 開賽 → 賽後補登,不算進戰績(防作弊 · 同棒球)
+    const t = Date.parse(p.ts);
+    const k = Date.parse(r.kickoffISO);
+    if (!Number.isNaN(t) && !Number.isNaN(k) && t >= k) continue;
+    n += 1;
+    if (p.pick === r.outcome) hits += 1;
+  }
+  return {
+    n,
+    hits,
+    misses: n - hits,
+    rate: n > 0 ? Math.round((hits / n) * 100) : null,
+    pending,
+  };
+}
+
 export type SoccerSubmitResult =
   | { ok: true; pick: SoccerPick }
   | { ok: false; reason: "not_logged_in" | "already_predicted" | "invalid" | "error" };

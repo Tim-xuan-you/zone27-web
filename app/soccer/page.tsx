@@ -2,10 +2,12 @@ import Link from "next/link";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import SoccerMatchCard from "@/components/SoccerMatchCard";
+import SoccerRecordCard from "@/components/SoccerRecordCard";
 import { createPageMetadata } from "@/lib/page-og";
 import {
   ACTIVE_COMPETITIONS,
   getCompetitionPredictions,
+  getRecentSoccerResults,
   type SoccerMatchPrediction,
 } from "@/lib/soccer/football-data";
 
@@ -37,6 +39,8 @@ export default async function SoccerPage() {
   );
   const nonEmpty = groups.filter((g) => g.matches.length > 0);
   const total = nonEmpty.reduce((s, g) => s + g.matches.length, 0);
+  // 賽後結果(公開 · ISR)· 給「你的足球戰績」client 卡對帳本人押注。
+  const soccerResults = await getRecentSoccerResults();
 
   return (
     <div className="flex flex-col flex-1 min-h-screen">
@@ -66,6 +70,9 @@ export default async function SoccerPage() {
           </p>
           <div className="mt-6 w-full h-px bg-line/60" />
         </section>
+
+        {/* 你的足球戰績(含輸 · 登入且押過才出現 · client 端對帳不破 ISR)*/}
+        <SoccerRecordCard results={soccerResults} />
 
         {/* ── GROUPS ── */}
         <section className="mx-auto max-w-6xl w-full px-6 sm:px-10 pb-24">

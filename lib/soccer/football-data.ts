@@ -103,6 +103,40 @@ async function fetchMatches(
   }
 }
 
+// 賽後結果(公開 · 給「你的足球戰績」對帳用 · ISR 可快取 · 不含 user 資料)。
+export type SoccerResult = {
+  /** fd-{id} · 對齊押注 match_id */
+  matchId: string;
+  outcome: "home" | "draw" | "away";
+  homeGoals: number;
+  awayGoals: number;
+  /** 開賽 UTC ISO · 給「先鎖後結」過濾(開賽後才下的不算) */
+  kickoffISO: string;
+};
+
+/** ACTIVE_COMPETITIONS 已結束的比賽結果(公開)· 給賽後對帳。 缺 token / 錯 → 空陣列。
+ *  速率:fetchMatches 有 revalidate 快取 · 且 FINISHED 多與 getCompetitionPredictions
+ *  俱樂部路徑同 URL → Next dedupe · 不額外爆 10/min。 */
+export async function getRecentSoccerResults(): Promise<SoccerResult[]> {
+  const out: SoccerResult[] = [];
+  for (const code of ACTIVE_COMPETITIONS) {
+    const finished = await fetchMatches(code, "FINISHED");
+    for (const m of finished) {
+      const h = m.score?.fullTime?.home;
+      const a = m.score?.fullTime?.away;
+      if (typeof h !== "number" || typeof a !== "number" || !m.id) continue;
+      out.push({
+        matchId: `fd-${m.id}`,
+        outcome: h > a ? "home" : h < a ? "away" : "draw",
+        homeGoals: h,
+        awayGoals: a,
+        kickoffISO: m.utcDate ?? "",
+      });
+    }
+  }
+  return out;
+}
+
 export type SoccerMatchPrediction = {
   id: string;
   competitionCode: string;
