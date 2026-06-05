@@ -1,4 +1,5 @@
 import Avatar from "@/components/Avatar";
+import SoccerBetStrip from "@/components/SoccerBetStrip";
 import { toDisplayPercents, type SoccerPrediction } from "@/lib/soccer/engine";
 import type { SoccerMatchPrediction } from "@/lib/soccer/football-data";
 
@@ -22,7 +23,7 @@ function kickoffTPE(iso: string): string {
 }
 
 export default function SoccerMatchCard({ match }: { match: SoccerMatchPrediction }) {
-  const { home, away, homeSeed, awaySeed, prediction, competitionName, dateISO } = match;
+  const { id, home, away, homeSeed, awaySeed, prediction, competitionName, dateISO } = match;
   const ko = kickoffTPE(dateISO);
 
   return (
@@ -57,6 +58,9 @@ export default function SoccerMatchCard({ match }: { match: SoccerMatchPredictio
           覆蓋建置中 · 這個聯賽的戰績還不夠讓引擎誠實開盤。 賭場什麼都敢開,我們只開算得出的。
         </p>
       )}
+
+      {/* 三向押注(主勝/和/客勝)· 登入才能押 · 押了不可改 · 賽後自動掛你的足球準度 */}
+      <SoccerBetStrip matchId={id} dateISO={dateISO} homeLabel={home} awayLabel={away} />
     </article>
   );
 }
