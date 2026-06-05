@@ -14,6 +14,13 @@
 
 ## ⏳ 仍 pending Tim 親手動作
 
+### ✅ migration 0017 — 已套(2026-06-05 · R201 · 後台審核看全文 + 留痕刪除)
+Tim「審核看不到付費全文怎麼判斷該不該刪 + 後台門禁 + 大公司怎麼做」→ 核實門禁早已穩(0011
+is_admin gate)· 補:admin_view_content(看完整內文含付費 body · admin override 付費牆)+ admin_audit
+表 + admin_delete_logged(留痕刪)+ admin_audit_recent。 /admin「看全文 → 填原因 → 刪除」+ 審核紀錄卡。
+Tim 親手套完回 Success。 2-agent 對抗式資安審查 0 findings(沿用 0011 gate 模式)。 commit `da13bd7`。
+⏳ 後續(非阻擋):把「站方可審閱任何內容含付費」寫進 /terms 或 /privacy(公開揭露 = 跟 disclosure 護城河一致)。
+
 ### ✅ migration 0016 — 已套(2026-06-05 · R201 ·「你的東西」買過/回過找得回)
 Tim dogfood「買了分析/回了留言卻找不回去(賽事太多)」→ 新增 get_my_purchases / get_my_comments
 本人專屬 RPC + /member「你的東西」區(書架 + 足跡 · 一鍵回該篇 #post 錨點 · 沒買/沒回自動隱藏)。
