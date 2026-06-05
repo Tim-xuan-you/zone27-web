@@ -17,7 +17,6 @@ import {
 } from "@/lib/matches";
 import CalibrationIdentityCard from "@/components/CalibrationIdentityCard";
 import HonorWall from "@/components/HonorWall";
-import DisciplineStreak from "@/components/DisciplineStreak";
 import { readTier, isPaid, creatorTakePct, tierLabel } from "@/lib/tier";
 import OpenPositionsPanel from "@/components/OpenPositionsPanel";
 import type { OpenPosition } from "@/components/OpenPositionCard";
@@ -233,11 +232,9 @@ export default async function MemberPage() {
 
         {/* 3 · 你的榮譽牆(soul-roadmap #5 · 「靠誠實賺來的地位」三樓第一塊)· 章全部
             從含輸帳本自動算 · 報馬仔掛不出 · Apple 紀律只放 5 個 · 框 mute 不搶校準卡主角。 */}
+        {/* 對帳紀律已折進榮譽牆(R201:獨立區塊+自我辯解=Tim「感覺沒用」· 里程碑走 streak
+            徽章 · current 在牆內一行)· streak 物件仍傳給 HonorWall。 */}
         <HonorWall identity={identity} streak={streak} />
-
-        {/* 3.5 · 對帳紀律 streak(soul-roadmap #2 · 「交易員紀律」鏡子)· 接在榮譽牆後當
-            三樓 status 配角 · mute 不搶校準卡金色主角 · 沒對帳過自動隱藏(計算同單一真相)。 */}
-        <DisciplineStreak streak={streak} />
 
         {/* 升級入口 · 路要看得見(Apple:付費路徑永遠不藏)· 但這是會員自己的介面 ·
             不對他推銷、不打「賺錢」· 接著上面的榮譽牆 → 用「身分/地位」當主軸(paid=身分

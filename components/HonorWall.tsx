@@ -1,4 +1,5 @@
 import Link from "next/link";
+import BadgeIcon from "@/components/BadgeIcon";
 import type { CalibrationIdentity, DisciplineStreak } from "@/lib/predictions";
 
 // ── ZONE 27 · 你的榮譽牆(soul-roadmap #5 · 「靠誠實賺來的地位」· 三樓第一塊)──────
@@ -164,6 +165,26 @@ function buildHonors(id: CalibrationIdentity, st: DisciplineStreak): Honor[] {
 
 const TIER_ORDER: Tier[] = ["入門", "進階", "精英"];
 
+// 鑄印章樣式 · earned = 灌好的金章(精英多印璽外環 + 放大)· locked = 空模子(等灌金)。
+// 徽記用 BadgeIcon(currentColor):earned 走 badge-engrave(藏青蝕刻)· locked 幽靈金線。
+function sealClass(tier: Tier, earned: boolean): {
+  box: string;
+  iconWrap: string;
+  iconSize: number;
+} {
+  const elite = tier === "精英";
+  const dim = elite ? "w-12 h-12" : "w-10 h-10";
+  const iconSize = elite ? 24 : 20;
+  if (earned) {
+    return {
+      box: `${dim} rounded-full ${elite ? "badge-relief" : "badge-minted"}`,
+      iconWrap: "badge-engrave",
+      iconSize,
+    };
+  }
+  return { box: `${dim} rounded-full badge-mold`, iconWrap: "text-gold/30", iconSize };
+}
+
 export default function HonorWall({
   identity: id,
   streak,
@@ -187,10 +208,27 @@ export default function HonorWall({
       </div>
 
       {/* 誠實 frame · 這面牆抄不走 = 護城河(玩運彩靠連勝/人氣/賣量發章 · 結構上掛不出這個) */}
-      <p className="mb-5 text-mute/85 text-[13px] leading-relaxed max-w-xl">
+      <p className="mb-4 text-mute/85 text-[13px] leading-relaxed max-w-xl">
         每個章都從你<span className="text-bone">含輸的帳本</span>自動算 —— 刪不掉、裝不來。
         賣明牌的站靠連勝、人氣、賣量發章;
         <span className="text-gold">這面牆,他們掛不出來</span>。
+      </p>
+
+      {/* 對帳紀律 · 收成一行(原獨立區塊已折進來 · 紀律里程碑走下方 streak 徽章)·
+          current 是徽章表達不出的「現在進行式」+ onboarding 鉤子 · 骨白數字不搶金色主角。 */}
+      <p className="mb-5 font-mono text-mute/65 text-[11px] tracking-[0.15em] leading-relaxed">
+        對帳紀律 ·{" "}
+        {streak.current > 0 ? (
+          <>
+            連續 <span className="text-bone tabular">{streak.current}</span> 天
+            {streak.activeToday ? "" : "(今天可接上)"}
+          </>
+        ) : streak.activeToday ? (
+          <span className="text-bone">今天已對帳</span>
+        ) : (
+          <span className="text-mute">今天還沒對帳 · 押一手接上</span>
+        )}
+        <span className="text-mute/40"> · 紀律,不是準度</span>
       </p>
 
       {/* 入門 → 進階 → 精英 · 易到難的收集梯度(分階小標 + 各階一格 grid)*/}
@@ -205,24 +243,24 @@ export default function HonorWall({
                 {tier} <span className="text-mute/40">· {tierEarned}/{rows.length}</span>
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                {rows.map((h) => (
+                {rows.map((h) => {
+                  const s = sealClass(h.tier, h.earned);
+                  return (
                   <div
                     key={h.key}
-                    className={`flex items-center gap-3 px-3 py-3 border transition-colors ${
+                    className={`flex items-center gap-3.5 px-3 py-3 border transition-colors ${
                       h.earned
-                        ? "border-gold/55 bg-gold/[0.06] glow-soft"
+                        ? "border-gold/45 bg-gold/[0.05]"
                         : "border-line/50 bg-ink/30"
                     }`}
                   >
                     <span
                       aria-hidden="true"
-                      className={`inline-flex shrink-0 items-center justify-center w-9 h-9 rounded-[30%] font-mono text-[13px] font-medium tabular leading-none ring-1 ring-inset ${
-                        h.earned
-                          ? "bg-gold/15 text-gold ring-gold/50"
-                          : "bg-line/20 text-mute/40 ring-line/40"
-                      }`}
+                      className={`inline-flex shrink-0 items-center justify-center ${s.box}`}
                     >
-                      {h.earned ? h.glyph : "·"}
+                      <span className={`inline-flex ${s.iconWrap}`}>
+                        <BadgeIcon name={h.key} size={s.iconSize} />
+                      </span>
                     </span>
                     <span className="min-w-0">
                       <span
@@ -242,7 +280,8 @@ export default function HonorWall({
                       </span>
                     </span>
                   </div>
-                ))}
+                  );
+                })}
               </div>
             </div>
           );
