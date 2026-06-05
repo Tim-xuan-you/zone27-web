@@ -4,7 +4,7 @@ import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import WalletPanel from "@/components/WalletPanel";
 import { getUser } from "@/lib/supabase/server";
-import { aggregateIdentity } from "@/lib/predictions";
+import { aggregateIdentity, aggregateStreak } from "@/lib/predictions";
 import { getMyPredictionsMap } from "@/lib/predictions-server";
 import {
   getTodayAndFutureMatches,
@@ -12,10 +12,12 @@ import {
   getMatchStartIso,
   getEngineFavorite,
   getCurrentTaipeiMonthKey,
+  getTodayTaipei,
   matches as allMatches,
 } from "@/lib/matches";
 import CalibrationIdentityCard from "@/components/CalibrationIdentityCard";
 import HonorWall from "@/components/HonorWall";
+import DisciplineStreak from "@/components/DisciplineStreak";
 import { readTier, isPaid, creatorTakePct, tierLabel } from "@/lib/tier";
 import OpenPositionCard, { type OpenPosition } from "@/components/OpenPositionCard";
 import MyCreatorPanel from "@/components/MyCreatorPanel";
@@ -117,6 +119,10 @@ export default async function MemberPage() {
     getCurrentTaipeiMonthKey()
   );
 
+  // 對帳紀律 streak(soul-roadmap #2)· 連續性按「下注日」的台北日曆日算(見
+  // aggregateStreak 註解:下注日 ≠ 比賽日 · 衡量你哪幾天回來面對帳本)。
+  const streak = aggregateStreak(predictionsMap, getTodayTaipei());
+
   // 你的未結算押注(the live middle · soul)· 你押過、還沒結算的場 —— 押下去到
   // 打完之間那段以前 /member 一片空白。 你 vs 引擎 vs 群眾 的張力撐住「我現在
   // 有一手在賭」。 LIVE 場(getMatchPhase today-live)多一道呼吸金線。
@@ -214,6 +220,10 @@ export default async function MemberPage() {
         {/* 3 · 你的榮譽牆(soul-roadmap #5 · 「靠誠實賺來的地位」三樓第一塊)· 章全部
             從含輸帳本自動算 · 報馬仔掛不出 · Apple 紀律只放 5 個 · 框 mute 不搶校準卡主角。 */}
         <HonorWall identity={identity} />
+
+        {/* 3.5 · 對帳紀律 streak(soul-roadmap #2 · 「交易員紀律」鏡子)· 接在榮譽牆後當
+            三樓 status 配角 · mute 不搶校準卡金色主角 · 沒對帳過自動隱藏(計算同單一真相)。 */}
+        <DisciplineStreak streak={streak} />
 
         {/* 升級入口 · 路要看得見(Apple:付費路徑永遠不藏)· 但這是會員自己的介面 ·
             不對他推銷、不打「賺錢」· 接著上面的榮譽牆 → 用「身分/地位」當主軸(paid=身分

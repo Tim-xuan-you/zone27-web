@@ -326,3 +326,111 @@ export function aggregateIdentity(
     },
   };
 }
+
+// ── 每日對帳 streak(soul-roadmap #2 · 「交易員紀律」不是 Candy Crush)──────────
+// 你連續幾天回來下注 / 面對自己的帳本(含贏含輸)。 Manifold 證實 streak 撐 retention ·
+// 但我們刻意拆掉賭場那套(不發點數、不放動畫、不製造「別斷了!」焦慮)· 只當紀律鏡子。
+//
+// 🔴 紅線(別把護城河燒掉):
+//   - streak ≠ 更準 —— 連續天數不代表勝率(component 文案明講 · 防誤導)。
+//   - 不獎勵連續(不發點數/現金/動畫)· 獎勵是身分/紀律本身。
+//   - lapsed(斷了)時平靜顯示紀錄,不羞辱、不嚇人、不用「失去 N 天連勝」恐嚇。
+//
+// ⚙️ 為什麼用「下注日」(ts 的台北日)而不是「比賽日」:賭客賽前數天就 pre-bet ·
+//   下注日 ≠ 比賽日。 streak 衡量的是「你哪幾天回來面對帳本」= 由你掌控的下注那天。
+//   單一軸 · 連續性按台北日曆日算。 「休賽沒得押」的疑慮用文案中性處理(永不羞辱)+
+//   累計天數只增不減承接 —— 而不是用不可靠的歷史排程假裝橋接(MLB 滾動視窗根本沒料)。
+// ─────────────────────────────────────────────────────
+
+/** ISO 時間戳 → 台北日「YYYY-MM-DD」· 不可解析回 null。 與 getTodayTaipei 同口徑
+ *  (en-CA + Asia/Taipei)· 純伺服器端讀取(get_my_predictions)· 無 hydration 風險。 */
+export function taipeiDayOf(iso: string | null | undefined): string | null {
+  if (!iso) return null;
+  const t = Date.parse(iso);
+  if (Number.isNaN(t)) return null;
+  return new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Taipei" }).format(
+    new Date(t)
+  );
+}
+
+/** 「YYYY-MM-DD」→ 自 epoch 起的整數日序(UTC 午夜為錨 · 只用來算相鄰差 = 1)。
+ *  字串本身已是台北日 · 這裡僅作純算術比較 · 不涉時區轉換。 不合法回 NaN。 */
+function dayIndex(ymd: string): number {
+  const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(ymd);
+  if (!m) return NaN;
+  const t = Date.UTC(Number(m[1]), Number(m[2]) - 1, Number(m[3]));
+  return Math.floor(t / 86_400_000);
+}
+
+export type DisciplineStreak = {
+  /** 目前連續(到今天 · 或押到昨天今天仍可接上)的對帳天數 · 斷了 = 0 */
+  current: number;
+  /** 史上最長連續對帳天數(個人紀錄 · 只增不減) */
+  longest: number;
+  /** 累計對帳的不同天數(只增不減 · 無焦慮的主數)· 全期 */
+  totalDays: number;
+  /** 今天(台北)已對帳 */
+  activeToday: boolean;
+};
+
+/**
+ * 從本人押注 map(完整歷史)算出「對帳紀律 streak」· 連續性按下注日的台北日曆日。
+ *
+ * @param predictions 本人 picks(get_my_predictions · 含 ts)
+ * @param todayTaipei getTodayTaipei()(由 caller 傳入 · 維持本函式純粹/可測)
+ *
+ * current 採標準 streak 語意:押到今天 → active;押到昨天、今天還沒押 → 仍算 active
+ * (你還有今天可接上);最後一押在前天或更早 → current=0(已斷)。 totalDays/longest
+ * 只增不減(斷了也不掉)· 承接「休賽沒押」的情況,不靠羞辱。
+ */
+export function aggregateStreak(
+  predictions: UserPredictionsMap,
+  todayTaipei: string
+): DisciplineStreak {
+  // 你押過注的不同台北日(全期 · ts 不可解析的 pick 略過 · graceful)· 升序日序。
+  const dayKeys = new Set<string>();
+  for (const pred of Object.values(predictions)) {
+    const d = taipeiDayOf(pred.ts);
+    if (d) dayKeys.add(d);
+  }
+  const totalDays = dayKeys.size;
+  const idxs = Array.from(dayKeys, dayIndex)
+    .filter((n) => !Number.isNaN(n))
+    .sort((a, b) => a - b);
+
+  if (idxs.length === 0) {
+    return { current: 0, longest: 0, totalDays, activeToday: false };
+  }
+
+  // longest:相鄰日序差 = 1 的最長連續段。
+  let longest = 1;
+  let run = 1;
+  for (let i = 1; i < idxs.length; i++) {
+    run = idxs[i] - idxs[i - 1] === 1 ? run + 1 : 1;
+    if (run > longest) longest = run;
+  }
+
+  // current:最後一個下注日往回數連續段;只有當它是今天或昨天才算 active(否則已斷)。
+  // current/active 只看「今天或更早」的下注日 —— 防時鐘偏移/手動 DB 寫入產生的未來日
+  // 把今天的連續算成 0(正常 app 寫入 created_at = server now() 不會有未來日 · 純防禦)。
+  // longest/totalDays 仍用完整 idxs(未來日仍是合法的終身紀錄 · 只是不該影響「到今天為止」)。
+  const todayIdx = dayIndex(todayTaipei);
+  const curIdxs = Number.isNaN(todayIdx)
+    ? idxs
+    : idxs.filter((n) => n <= todayIdx);
+  const lastIdx = curIdxs.length > 0 ? curIdxs[curIdxs.length - 1] : NaN;
+  const activeToday = !Number.isNaN(todayIdx) && lastIdx === todayIdx;
+  let current = 0;
+  if (
+    !Number.isNaN(todayIdx) &&
+    (lastIdx === todayIdx || lastIdx === todayIdx - 1)
+  ) {
+    current = 1;
+    for (let i = curIdxs.length - 1; i > 0; i--) {
+      if (curIdxs[i] - curIdxs[i - 1] === 1) current++;
+      else break;
+    }
+  }
+
+  return { current, longest, totalDays, activeToday };
+}
