@@ -1,4 +1,9 @@
 -- ── ZONE 27 · Migration 0013 · Creator Records 加 created_at(先鎖後結徽章)──
+-- ⛔⛔ SUPERSEDED BY 0015(2026-06-05)· 切勿在裝完 0015 後單獨重跑這支 ⛔⛔
+--   0013 只給 get_creator_records 加 created_at(4 欄版)。 0015 已把同一支 RPC 重建成
+--   5 欄版(author_code + created_at 都有)· 完全涵蓋並超越本檔。 單獨重跑本檔會 drop +
+--   重建回舊 4 欄版,把 0015 的永久碼洗掉(倒退)。 全新 DB 從 0001 依序套到 0015 沒問題
+--   (0015 在後面會贏);只有「0015 之後再單獨跑 0013」才有害。 保留本檔僅為歷史順序完整性。
 -- Created: 2026-06-04
 -- Purpose: 補「✓ 已驗證準度」徽章的命門洞 —— 0007 的 get_creator_records 只回
 --          (handle, match_id, pick),沒有發文時間戳,所以 app 端的 gradeAuthorRecords
