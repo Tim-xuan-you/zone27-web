@@ -27,11 +27,8 @@ const AUDIT: RelatedLink = {
 };
 
 export const RELATED_LINKS: Record<string, RelatedLink[]> = {
-  "/cpbl-pitchers": [
-    { href: "/cpbl-teams", kicker: "cpbl-teams", title: "CPBL 6 球團投手總覽 · 你支持的球隊在這" },
-    { href: "/matches", kicker: "matches", title: "今日 CPBL 賽事 + 推演引擎模擬 · 看誰先發" },
-    { href: "/methodology", kicker: "methodology", title: "這些指標怎麼餵進引擎 · 引擎程式碼公開" },
-  ],
+  // R202 · /cpbl-pitchers + /cpbl-teams 微站已砍(手動靜態快照會發霉 · 引擎仍吃資料 ·
+  // 只是不再有公開排行頁)· 此處 further-reading 入口連帶移除。
   "/audit": [
     TRACK_RECORD,
     { href: "/manifesto", kicker: "manifesto", title: "倒置宣言 · 4 個刻意倒置" },

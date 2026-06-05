@@ -138,51 +138,32 @@ export default async function MatchesPage() {
         )}
       </section>
 
-      {/* ── 其他工具 · 精簡兩欄 ───────────────────
-          原本是兩張 hero 重量大卡(MLB + CPBL 投手)· 把市場頁拉長近兩倍 ·
-          且 MLB 那張用綠框(border-win)= 違反「不紅綠對比」品牌鐵律。 降成兩個
-          compact slim link(全 gold/mute · 不搶主看板)· 該有的入口都還在。 */}
-      <section className="mx-auto max-w-6xl w-full px-6 sm:px-10 pb-24">
-        <div className="grid sm:grid-cols-2 gap-3">
-          {/* MLB 入口 · 只在上面沒有 MLB 看板時當 fallback 顯示(避免同頁兩個 /matches/mlb 重複) */}
-          {mlbSorted.length === 0 && (
-            <Link
-              href="/matches/mlb"
-              className="block bg-slate/30 border border-line/60 hover:border-gold/50 hover:bg-slate/40 transition-colors p-4 sm:p-5 group"
-            >
-              <div className="flex items-baseline justify-between gap-2 mb-1.5">
-                <span className="font-mono text-gold text-[10px] tracking-[0.35em]">
-                  MLB · 即時資料
-                </span>
-                <span className="font-mono text-mute/60 text-[9px] tracking-[0.2em]">
-                  每 10 分更新
-                </span>
-              </div>
-              <p className="text-bone text-sm leading-snug">
-                美國職棒今日全部賽程 · 戰績 · 台北時區開賽時間 ·{" "}
-                <span className="text-gold/80 group-hover:text-gold">看賽程 →</span>
-              </p>
-            </Link>
-          )}
+      {/* ── MLB fallback 入口 · 只在上面看板沒有 MLB 場時顯示(避免同頁兩個 /matches/mlb)──
+          R202 · 旁邊原本的「CPBL 投手排行」入口已移除:該頁是手動跑 script 抓的靜態
+          快照(凍在 fetch 當天 · solo 不會持續重抓 → 一張會發霉的旁支表 = 反「敢對帳」訊號)。
+          引擎仍吃投手資料(lib/cpbl-pitchers.ts · getPitcherStatsByName)· 只是不再有公開排行頁 ·
+          真正的證明在賽事頁(引擎實際用的投手 K/9 BB/9 就秀在那)。 */}
+      {mlbSorted.length === 0 && (
+        <section className="mx-auto max-w-6xl w-full px-6 sm:px-10 pb-24">
           <Link
-            href="/cpbl-pitchers"
-            className="block bg-slate/30 border border-line/60 hover:border-gold/50 hover:bg-slate/40 transition-colors p-4 sm:p-5 group"
+            href="/matches/mlb"
+            className="block max-w-md bg-slate/30 border border-line/60 hover:border-gold/50 hover:bg-slate/40 transition-colors p-4 sm:p-5 group"
           >
             <div className="flex items-baseline justify-between gap-2 mb-1.5">
               <span className="font-mono text-gold text-[10px] tracking-[0.35em]">
-                CPBL 投手排行
+                MLB · 即時資料
               </span>
               <span className="font-mono text-mute/60 text-[9px] tracking-[0.2em]">
-                FREE
+                每 10 分更新
               </span>
             </div>
             <p className="text-bone text-sm leading-snug">
-              K/9 · BB/9 · HR/9 · WHIP · 1 鍵排序 · URL 可分享 ·{" "}
-              <span className="text-gold/80 group-hover:text-gold">看排行 →</span>
+              美國職棒今日全部賽程 · 戰績 · 台北時區開賽時間 ·{" "}
+              <span className="text-gold/80 group-hover:text-gold">看賽程 →</span>
             </p>
           </Link>
-        </div>
-      </section>
+        </section>
+      )}
 
       </main>
 
