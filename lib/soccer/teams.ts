@@ -53,7 +53,7 @@ export const SOCCER_TEAMS: SoccerTeam[] = [
   { code: "KOR", name: "南韓", en: "South Korea", rating: 1701 },
   { code: "SCO", name: "蘇格蘭", en: "Scotland", rating: 1700 },
   { code: "ALG", name: "阿爾及利亞", en: "Algeria", rating: 1699 },
-  { code: "BIH", name: "波士尼亞", en: "Bosnia-Herzegovina", rating: 1698 },
+  { code: "BIH", name: "波赫", en: "Bosnia-Herzegovina", rating: 1698 },
   { code: "CAN", name: "加拿大", en: "Canada", rating: 1696 },
   { code: "SWE", name: "瑞典", en: "Sweden", rating: 1694 },
   { code: "USA", name: "美國", en: "United States", rating: 1692 },
@@ -64,7 +64,7 @@ export const SOCCER_TEAMS: SoccerTeam[] = [
   { code: "EGY", name: "埃及", en: "Egypt", rating: 1666 },
   { code: "PAR", name: "巴拉圭", en: "Paraguay", rating: 1660 },
   { code: "TUN", name: "突尼西亞", en: "Tunisia", rating: 1654 },
-  { code: "COD", name: "剛果民主共和國", en: "Congo DR", rating: 1648 },
+  { code: "COD", name: "民主剛果", en: "Congo DR", rating: 1648 },
   { code: "RSA", name: "南非", en: "South Africa", rating: 1636 },
   { code: "PAN", name: "巴拿馬", en: "Panama", rating: 1626 },
   { code: "QAT", name: "卡達", en: "Qatar", rating: 1620 },
@@ -107,6 +107,19 @@ export function getRatingByName(name: string): number | null {
   if (BY_EN[k] != null) return BY_EN[k];
   const alias = NAME_ALIASES[k];
   if (alias && BY_EN[alias] != null) return BY_EN[alias];
+  return null;
+}
+
+const BY_EN_ZH: Record<string, string> = Object.fromEntries(
+  SOCCER_TEAMS.map((t) => [t.en.toLowerCase(), t.name]),
+);
+
+/** 用英文隊名查中文顯示名(國家隊 · 對齊台灣運彩寫法)· 查不到回 null。 */
+export function getNationalZh(name: string): string | null {
+  const k = name.trim().toLowerCase();
+  if (BY_EN_ZH[k] != null) return BY_EN_ZH[k];
+  const alias = NAME_ALIASES[k];
+  if (alias && BY_EN_ZH[alias] != null) return BY_EN_ZH[alias];
   return null;
 }
 

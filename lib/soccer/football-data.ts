@@ -21,7 +21,8 @@ import {
   MIN_GAMES_FOR_RATING,
 } from "./elo";
 import { predictSoccer, type SoccerPrediction } from "./engine";
-import { getRatingByName, SOCCER_RATING_BASELINE } from "./teams";
+import { getRatingByName, getNationalZh, SOCCER_RATING_BASELINE } from "./teams";
+import { getClubZh } from "./club-names";
 
 const BASE = "https://api.football-data.org/v4";
 const REVALIDATE_SECONDS = 3600; // 1h ISR · 遠低於 10/min
@@ -63,6 +64,18 @@ function teamName(t: FdTeam | undefined): string {
   return t?.shortName || t?.tla || t?.name || "?";
 }
 
+// 顯示名:國家隊→中文(對齊台灣運彩)· 俱樂部→中文(盡力版)· 都查不到 fallback 英文。
+// 國家隊用 full name 查(較規範)· 俱樂部用 shortName/full name 查。
+function displayName(t: FdTeam | undefined): string {
+  if (!t) return "?";
+  return (
+    getNationalZh(t.name ?? "") ??
+    getClubZh(t.shortName ?? "") ??
+    getClubZh(t.name ?? "") ??
+    teamName(t)
+  );
+}
+
 function getToken(): string {
   return process.env.FOOTBALL_DATA_API_TOKEN ?? "";
 }
@@ -96,8 +109,12 @@ export type SoccerMatchPrediction = {
   competitionName: string;
   /** 開賽 UTC ISO */
   dateISO: string;
+  /** 顯示名(中文 · 對齊台灣運彩 · 查不到 fallback 英文) */
   home: string;
   away: string;
+  /** 英文原名 · 給隊徽 seed(顏色穩定 · Tim:隊徽維持英文) */
+  homeSeed: string;
+  awaySeed: string;
   /** null = 覆蓋建置中(其中一隊戰績不足 · 不硬開假盤) */
   prediction: SoccerPrediction | null;
 };
@@ -120,17 +137,19 @@ export async function getCompetitionPredictions(
   // ── 國家隊賽事:seed 實力分(賽事內沒戰績可算 Elo)──
   if (comp?.isNationalTeam) {
     return scheduled.map((m) => {
-      const home = teamName(m.homeTeam);
-      const away = teamName(m.awayTeam);
-      const rH = getRatingByName(m.homeTeam?.name ?? home) ?? SOCCER_RATING_BASELINE;
-      const rA = getRatingByName(m.awayTeam?.name ?? away) ?? SOCCER_RATING_BASELINE;
+      const homeSeed = teamName(m.homeTeam);
+      const awaySeed = teamName(m.awayTeam);
+      const rH = getRatingByName(m.homeTeam?.name ?? homeSeed) ?? SOCCER_RATING_BASELINE;
+      const rA = getRatingByName(m.awayTeam?.name ?? awaySeed) ?? SOCCER_RATING_BASELINE;
       return {
-        id: `fd-${m.id ?? `${home}-${away}`}`,
+        id: `fd-${m.id ?? `${homeSeed}-${awaySeed}`}`,
         competitionCode: code,
         competitionName: compName,
         dateISO: m.utcDate ?? "",
-        home,
-        away,
+        home: displayName(m.homeTeam),
+        away: displayName(m.awayTeam),
+        homeSeed,
+        awaySeed,
         // 國際大賽多在中立場 → 不灌主場優勢
         prediction: predictSoccer(rH, rA, { homeAdvantage: 0 }),
       };
@@ -155,20 +174,22 @@ export async function getCompetitionPredictions(
   const counts = gameCounts(results);
 
   return scheduled.map((m) => {
-    const home = teamName(m.homeTeam);
-    const away = teamName(m.awayTeam);
+    const homeSeed = teamName(m.homeTeam);
+    const awaySeed = teamName(m.awayTeam);
     const enough =
-      (counts[home] ?? 0) >= MIN_GAMES_FOR_RATING &&
-      (counts[away] ?? 0) >= MIN_GAMES_FOR_RATING;
+      (counts[homeSeed] ?? 0) >= MIN_GAMES_FOR_RATING &&
+      (counts[awaySeed] ?? 0) >= MIN_GAMES_FOR_RATING;
     return {
-      id: `fd-${m.id ?? `${home}-${away}`}`,
+      id: `fd-${m.id ?? `${homeSeed}-${awaySeed}`}`,
       competitionCode: code,
       competitionName: compName,
       dateISO: m.utcDate ?? "",
-      home,
-      away,
+      home: displayName(m.homeTeam),
+      away: displayName(m.awayTeam),
+      homeSeed,
+      awaySeed,
       prediction: enough
-        ? predictSoccer(getRating(ratings, home), getRating(ratings, away), {
+        ? predictSoccer(getRating(ratings, homeSeed), getRating(ratings, awaySeed), {
             homeAdvantage: 60,
           })
         : null,

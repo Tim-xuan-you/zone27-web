@@ -22,7 +22,7 @@ function kickoffTPE(iso: string): string {
 }
 
 export default function SoccerMatchCard({ match }: { match: SoccerMatchPrediction }) {
-  const { home, away, prediction, competitionName, dateISO } = match;
+  const { home, away, homeSeed, awaySeed, prediction, competitionName, dateISO } = match;
   const ko = kickoffTPE(dateISO);
 
   return (
@@ -40,13 +40,13 @@ export default function SoccerMatchCard({ match }: { match: SoccerMatchPredictio
       {/* 兩隊 · 隊徽(seed 顏色秒認隊)+ 名字 */}
       <div className="flex items-center justify-between gap-2">
         <span className="flex items-center gap-1.5 min-w-0">
-          <Avatar seed={home} size={22} />
+          <Avatar seed={homeSeed} size={22} />
           <span className="text-bone text-sm font-light tracking-tight truncate">{home}</span>
         </span>
         <span className="font-mono text-mute/50 text-[10px] shrink-0">vs</span>
         <span className="flex items-center gap-1.5 min-w-0 justify-end">
           <span className="text-bone text-sm font-light tracking-tight truncate text-right">{away}</span>
-          <Avatar seed={away} size={22} />
+          <Avatar seed={awaySeed} size={22} />
         </span>
       </div>
 
