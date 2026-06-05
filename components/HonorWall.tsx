@@ -1,40 +1,56 @@
 import Link from "next/link";
-import type { CalibrationIdentity } from "@/lib/predictions";
+import type { CalibrationIdentity, DisciplineStreak } from "@/lib/predictions";
 
 // ── ZONE 27 · 你的榮譽牆(soul-roadmap #5 · 「靠誠實賺來的地位」· 三樓第一塊)──────
 // Tim 看玩運彩的徽章/殺手榜 → 要「景仰 / 收藏 / 優越」。 但他們的章獎勵連勝 + 人氣 +
-// 挑好看的窗(全部裝得出來)。 我們的章**全部從含輸的帳本自動算** —— 刪不掉、裝不來、
-// 報馬仔結構上掛不出來(他們的生意建立在藏輸之上)= 抄不走的 costly signal。
+// 賣量 + 發文量(全部裝得出來、刷得到、輸了刪)。 我們的章**全部從含輸的帳本自動算**
+// —— 刪不掉、裝不來、報馬仔結構上掛不出來(他們的生意建立在藏輸之上)= 抄不走的 costly
+// signal。 北極星:讓「誠實」成為全站最稀有的收藏品。
 //
-// 🔴 紅線:絕不獎勵「連勝 / 人氣 / 發文量」· 只獎勵「校準 / 含輸 / 贏引擎 / 紀律」
-//   (一獎勵連勝就變成另一個玩運彩 · 護城河當場燒掉)。 勝過亂猜要先過樣本門檻
-//   (防 1-2 場僥倖 = 守「不獎勵挑窗」)。
-// 🍎 Apple 紀律:只放 5 個真正賺得來的章 · 不做玩運彩那種一整面徽章動物園。
-// 排版:章是配角(三樓)· 首頁 / 二樓不動 · 框用 mute(讓上面的金色校準卡當唯一主角)·
-//   你要爬進 /member 才看得到 = 稀缺才有份量、才值得景仰。
+// 🔴 紅線(R201 成就系統設計 · 3-agent 紅隊過):絕不獎勵「連勝 / 人氣 / 粉絲 / 賣量 /
+//   發文量」· 只獎勵「校準 / 含輸命中 / 贏公開引擎 / 紀律(回來對帳,不是連贏)」。 streak 章
+//   一律綁 longest/totalDays(回來面對的天數)· 絕非連勝。 場數(25)當「公信力入場券」非名次
+//   (場數=地位 = 對手的 22 級發文量崇拜 · 紅線)。 樣本門檻防 1-2 場僥倖。
+// 🪜 收集梯度(Tim「要讓人想蒐集、挑戰、有層級」):入門 → 進階 → 精英,易到難,新人立刻
+//   點得亮一排、高手要爬很久。「已點亮 N/M」= 收集進度條(goal-gradient)。 全部現有資料算得出
+//   (Wave 1 · 零新資料)· 傳奇章(校準大師/透明帳本/連月勝引擎)需新資料,等開門後 Wave 2 補。
+// 排版:章是配角(三樓)· 框 mute(讓上面金色校準卡當唯一主角)· 爬進 /member 才看得到 = 稀缺。
 //
-// 純展示 server component · 計算全部來自 lib/predictions.ts aggregateIdentity(單一真相)。
+// 純展示 server component · 計算來自 aggregateIdentity + aggregateStreak(單一真相)。
 // ─────────────────────────────────────────────────────
 
 const ROOKIE_MIN = 10; // 上天梯門檻 · 同 /ladder · CalibrationIdentityCard
 const FIRM = 8; // 「勝過亂猜」最低樣本 · 同 CalibrationIdentityCard SAMPLE_FIRM
+const THICK = 25; // 帳本夠厚 · 公信力入場券(非名次)
+const EDGE_BIG = 10; // 大幅勝引擎 · 含輸還領先引擎 ≥10 分
+const STREAK_WK = 7; // 連續對帳一週
+const STREAK_MO = 30; // 連續對帳一個月
+const DISCIPLINE_100 = 100; // 紀律百日(回來對帳累積/最長 100 天)
+
+type Tier = "入門" | "進階" | "精英";
 
 type Honor = {
   key: string;
   glyph: string; // 幾何 / 數字字符(無 emoji · 無星等 · 守品牌)
   name: string;
+  tier: Tier;
   earned: boolean;
-  detail: string; // 點亮:你怎麼賺到的;未點亮:怎麼解鎖(不只是灰掉 = 給目標)
+  detail: string; // 點亮:你怎麼賺到的;未點亮:怎麼解鎖(給目標 · 非只是灰掉)
 };
 
-function buildHonors(id: CalibrationIdentity): Honor[] {
+// 易 → 難排序(收集梯度)· 全部 integrity-based · 全部用既有欄位算得出。
+function buildHonors(id: CalibrationIdentity, st: DisciplineStreak): Honor[] {
   const firm = id.decided >= FIRM;
   const beatCoin = id.vsCoinPts !== null && id.vsCoinPts > 0 && firm;
+  const edge = id.edgeVsEnginePts;
+  const bigEdge = id.beatEngine === true && edge !== null && edge >= EDGE_BIG;
   return [
+    // ── 入門 ──────────────────────────────
     {
       key: "first",
       glyph: "1",
       name: "首戰登錄",
+      tier: "入門",
       earned: id.total >= 1,
       detail: "押下第一手 · 進了刪不掉的帳本",
     },
@@ -42,6 +58,7 @@ function buildHonors(id: CalibrationIdentity): Honor[] {
       key: "ladder",
       glyph: "10",
       name: "上天梯",
+      tier: "入門",
       earned: id.total >= ROOKIE_MIN,
       detail:
         id.total >= ROOKIE_MIN
@@ -49,9 +66,22 @@ function buildHonors(id: CalibrationIdentity): Honor[] {
           : `再 ${ROOKIE_MIN - id.total} 場 · 上天梯排名`,
     },
     {
+      key: "thick",
+      glyph: "25",
+      name: "帳本夠厚",
+      tier: "入門",
+      earned: id.decided >= THICK,
+      detail:
+        id.decided >= THICK
+          ? "滿 25 場結算 · 你的命中率有公信力了(刷不出來)"
+          : `再 ${THICK - id.decided} 場結算 · 命中率才站得住(防僥倖)`,
+    },
+    // ── 進階 ──────────────────────────────
+    {
       key: "coin",
       glyph: "△",
       name: "勝過亂猜",
+      tier: "進階",
       earned: beatCoin,
       detail: beatCoin
         ? `含輸還是比丟銅板準 ${id.vsCoinPts} 分`
@@ -60,9 +90,23 @@ function buildHonors(id: CalibrationIdentity): Honor[] {
           : `先累到 ${FIRM} 場結算 · 數字才算數`,
     },
     {
+      key: "streak7",
+      glyph: "7",
+      name: "連續對帳 7 日",
+      tier: "進階",
+      earned: st.longest >= STREAK_WK,
+      detail:
+        st.longest >= STREAK_WK
+          ? "連 7 天回來面對帳本 · 不管輸贏"
+          : st.longest > 0
+            ? `最長連 ${st.longest} 天 · 衝到 7`
+            : "連續 7 天回來對帳(紀律,不是連贏)",
+    },
+    {
       key: "engine",
       glyph: "◆",
       name: "贏過引擎",
+      tier: "進階",
       earned: id.beatEngine === true,
       detail:
         id.beatEngine === true
@@ -73,24 +117,64 @@ function buildHonors(id: CalibrationIdentity): Honor[] {
       key: "month",
       glyph: "↑",
       name: "本月勝引擎",
+      tier: "進階",
       earned: id.month.beatEngine === true,
       detail:
         id.month.beatEngine === true
           ? "這個月領先引擎 = 升階要的那一條"
           : "這個月命中率贏過引擎(每月重算)",
     },
+    // ── 精英 ──────────────────────────────
+    {
+      key: "edge",
+      glyph: "◆◆",
+      name: "大幅勝引擎",
+      tier: "精英",
+      earned: bigEdge,
+      detail: bigEdge
+        ? `含輸還領先引擎 ${edge} 分 · 壓制級`
+        : "同一批場 · 領先引擎 10 分以上(不只贏一點)",
+    },
+    {
+      key: "streak30",
+      glyph: "30",
+      name: "連續對帳 30 日",
+      tier: "精英",
+      earned: st.longest >= STREAK_MO,
+      detail:
+        st.longest >= STREAK_MO
+          ? "連 30 天回來面對帳本 · 紀律成形"
+          : st.longest > 0
+            ? `最長連 ${st.longest} 天 · 朝 30 天前進`
+            : "連續 30 天回來對帳",
+    },
+    {
+      key: "discipline",
+      glyph: "100",
+      name: "紀律百日",
+      tier: "精英",
+      earned: st.longest >= DISCIPLINE_100 || st.totalDays >= DISCIPLINE_100,
+      detail:
+        st.longest >= DISCIPLINE_100 || st.totalDays >= DISCIPLINE_100
+          ? "累積 100 天回來對帳 · 報馬仔世界不存在的物種"
+          : `已累積 ${st.totalDays} 天 · 朝 100 天紀律前進`,
+    },
   ];
 }
 
+const TIER_ORDER: Tier[] = ["入門", "進階", "精英"];
+
 export default function HonorWall({
   identity: id,
+  streak,
 }: {
   identity: CalibrationIdentity;
+  streak: DisciplineStreak;
 }) {
   // 還沒押任何一場 → 不顯示(上面校準卡已有「去押第一注」· 不擺一面灰章嚇新人)
   if (id.total === 0) return null;
 
-  const honors = buildHonors(id);
+  const honors = buildHonors(id, streak);
   const earned = honors.filter((h) => h.earned).length;
 
   return (
@@ -102,52 +186,67 @@ export default function HonorWall({
         </p>
       </div>
 
-      {/* 誠實 frame · 這面牆抄不走 = 護城河(玩運彩靠連勝/人氣發章 · 結構上掛不出這個) */}
+      {/* 誠實 frame · 這面牆抄不走 = 護城河(玩運彩靠連勝/人氣/賣量發章 · 結構上掛不出這個) */}
       <p className="mb-5 text-mute/85 text-[13px] leading-relaxed max-w-xl">
         每個章都從你<span className="text-bone">含輸的帳本</span>自動算 —— 刪不掉、裝不來。
-        賣明牌的站靠連勝、人氣、挑好看的窗發章;
+        賣明牌的站靠連勝、人氣、賣量發章;
         <span className="text-gold">這面牆,他們掛不出來</span>。
       </p>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-        {honors.map((h) => (
-          <div
-            key={h.key}
-            className={`flex items-center gap-3 px-3 py-3 border transition-colors ${
-              h.earned
-                ? "border-gold/55 bg-gold/[0.06] glow-soft"
-                : "border-line/50 bg-ink/30"
-            }`}
-          >
-            <span
-              aria-hidden="true"
-              className={`inline-flex shrink-0 items-center justify-center w-9 h-9 rounded-[30%] font-mono text-sm font-medium tabular leading-none ring-1 ring-inset ${
-                h.earned
-                  ? "bg-gold/15 text-gold ring-gold/50"
-                  : "bg-line/20 text-mute/40 ring-line/40"
-              }`}
-            >
-              {h.earned ? h.glyph : "·"}
-            </span>
-            <span className="min-w-0">
-              <span
-                className={`flex items-center gap-1.5 font-mono text-[12px] tracking-[0.15em] ${
-                  h.earned ? "text-bone" : "text-mute/55"
-                }`}
-              >
-                {h.name}
-                {h.earned && <span className="text-gold/80 text-[10px]">✓</span>}
-              </span>
-              <span
-                className={`block text-[11px] leading-snug mt-0.5 ${
-                  h.earned ? "text-mute/80" : "text-mute/45"
-                }`}
-              >
-                {h.detail}
-              </span>
-            </span>
-          </div>
-        ))}
+      {/* 入門 → 進階 → 精英 · 易到難的收集梯度(分階小標 + 各階一格 grid)*/}
+      <div className="flex flex-col gap-5">
+        {TIER_ORDER.map((tier) => {
+          const rows = honors.filter((h) => h.tier === tier);
+          if (rows.length === 0) return null;
+          const tierEarned = rows.filter((h) => h.earned).length;
+          return (
+            <div key={tier}>
+              <p className="font-mono text-mute/55 text-[9px] tracking-[0.35em] mb-2">
+                {tier} <span className="text-mute/40">· {tierEarned}/{rows.length}</span>
+              </p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                {rows.map((h) => (
+                  <div
+                    key={h.key}
+                    className={`flex items-center gap-3 px-3 py-3 border transition-colors ${
+                      h.earned
+                        ? "border-gold/55 bg-gold/[0.06] glow-soft"
+                        : "border-line/50 bg-ink/30"
+                    }`}
+                  >
+                    <span
+                      aria-hidden="true"
+                      className={`inline-flex shrink-0 items-center justify-center w-9 h-9 rounded-[30%] font-mono text-[13px] font-medium tabular leading-none ring-1 ring-inset ${
+                        h.earned
+                          ? "bg-gold/15 text-gold ring-gold/50"
+                          : "bg-line/20 text-mute/40 ring-line/40"
+                      }`}
+                    >
+                      {h.earned ? h.glyph : "·"}
+                    </span>
+                    <span className="min-w-0">
+                      <span
+                        className={`flex items-center gap-1.5 font-mono text-[12px] tracking-[0.15em] ${
+                          h.earned ? "text-bone" : "text-mute/55"
+                        }`}
+                      >
+                        {h.name}
+                        {h.earned && <span className="text-gold/80 text-[10px]">✓</span>}
+                      </span>
+                      <span
+                        className={`block text-[11px] leading-snug mt-0.5 ${
+                          h.earned ? "text-mute/80" : "text-mute/45"
+                        }`}
+                      >
+                        {h.detail}
+                      </span>
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          );
+        })}
       </div>
 
       {/* 三樓出口 · 地位的歸宿(公開天梯)· 安靜次要 · 不搶上面校準卡的金色主角 */}

@@ -238,7 +238,7 @@ export default async function MemberPage() {
 
         {/* 3 · 你的榮譽牆(soul-roadmap #5 · 「靠誠實賺來的地位」三樓第一塊)· 章全部
             從含輸帳本自動算 · 報馬仔掛不出 · Apple 紀律只放 5 個 · 框 mute 不搶校準卡主角。 */}
-        <HonorWall identity={identity} />
+        <HonorWall identity={identity} streak={streak} />
 
         {/* 3.5 · 對帳紀律 streak(soul-roadmap #2 · 「交易員紀律」鏡子)· 接在榮譽牆後當
             三樓 status 配角 · mute 不搶校準卡金色主角 · 沒對帳過自動隱藏(計算同單一真相)。 */}
