@@ -3,11 +3,11 @@ import type { Metadata } from "next";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import WalletPanel from "@/components/WalletPanel";
+import Avatar from "@/components/Avatar";
 import { getUser } from "@/lib/supabase/server";
 import { aggregateIdentity, aggregateStreak } from "@/lib/predictions";
 import { getMyPredictionsMap } from "@/lib/predictions-server";
 import {
-  getTodayAndFutureMatches,
   getMatchPhase,
   getMatchStartIso,
   getEngineFavorite,
@@ -25,7 +25,7 @@ import MyActivityPanel from "@/components/MyActivityPanel";
 import { getMyPurchases, getMyComments } from "@/lib/creator-activity-server";
 import DisplayNameSetting from "@/components/DisplayNameSetting";
 import { SUPPORT_EMAIL } from "@/lib/brand-constants";
-import { readDisplayName } from "@/lib/identity";
+import { readDisplayName, getTeamCrest } from "@/lib/identity";
 import { getMlbAsMatches, getMlbLockedMatches } from "@/lib/mlb-matches";
 import { createHash } from "crypto";
 
@@ -177,12 +177,28 @@ export default async function MemberPage() {
     .sort((a, b) => phaseRank(a.phase) - phaseRank(b.phase));
   const heldIds = new Set(openPositions.map((p) => p.matchId));
 
-  // 今晚 + 即將(同首頁 getTodayAndFutureMatches · 已排除已結算)· 修會員 vs 訪客
-  // 不對等的 bug:原本只抓「今天」· 休賽日但明後天有排賽時,登入會員看到死路
-  // (track-record / lab),沒登入的人在首頁卻看得到、還能先押 = 高意願的會員反而
-  // 拿到比較差的答案。 改抓今天+未來,跟首頁同一份資料。
+  // 今晚 + 即將 · 修會員 vs 訪客不對等的 bug(兩層):
+  //  ① 原本只抓「今天」· 休賽日但明後天有排賽時,登入會員看到死路(track-record /
+  //     lab),沒登入的人在首頁卻看得到、還能先押 = 高意願的會員反而拿到比較差的答案。
+  //  ② R202 · 原本只抓 CPBL(舊 getTodayAndFutureMatches 只跑靜態 matches 陣列)· 但
+  //     上方「你的未結算押注」是用 allWithMlb 建的 —— 你押了一場 MLB,在這裡卻永遠
+  //     找不到新的 MLB 場可押(同一個 bug class 的第二段)。 改用 allWithMlb(跟持倉
+  //     同一份)· 同 phase 規則(今晚待開/進行中/未來)· 按完整開賽 instant 排
+  //     (跨聯盟/跨日正確 · 同 /matches 看板的排序鍵)。
   // 已押的場移到上方「你的未結算押注」· 這裡只留「還沒押」的,不重複。
-  const upcoming = getTodayAndFutureMatches().filter((m) => !heldIds.has(m.id));
+  const upcoming = allWithMlb
+    .filter((m) => {
+      if (heldIds.has(m.id)) return false;
+      const phase = getMatchPhase(m);
+      return (
+        phase === "today-pregame" ||
+        phase === "today-live" ||
+        phase === "future"
+      );
+    })
+    .sort((a, b) =>
+      (getMatchStartIso(a) ?? "").localeCompare(getMatchStartIso(b) ?? ""),
+    );
 
   // 創作者後台:付費會員傳輕量賽事清單給 MyCreatorPanel(client 端撈我在每場的分析)。
   const creatorCheckMatches = isPaid(tier)
@@ -278,6 +294,15 @@ export default async function MemberPage() {
             <div className="border border-line/60 bg-slate/30">
               {upcoming.map((m, i) => {
                 const homeFav = m.home.winRate >= m.away.winRate;
+                // 引擎看好那隊的隊徽 + 隊色 → 一行密清單也能「顏色秒認隊」
+                // (同上方持倉 OpenPositionCard / 看板 MiniMatchCard 的隊徽掛法)。
+                // 這是 /member 最後一個純文字的押注面 · Tim R197「球迷用顏色秒認隊」。
+                const favName = homeFav ? m.home.name : m.away.name;
+                const crest = getTeamCrest(
+                  favName,
+                  homeFav ? m.home.en : m.away.en,
+                  m.league,
+                );
                 return (
                   <Link
                     key={m.id}
@@ -286,16 +311,24 @@ export default async function MemberPage() {
                       i === upcoming.length - 1 ? "" : "border-b border-line/40"
                     }`}
                   >
-                    <div className="min-w-0">
-                      <p className="text-bone text-sm sm:text-base font-light leading-snug truncate">
-                        <span className={homeFav ? "text-gold" : ""}>{m.home.name}</span>
-                        <span className="text-mute/60 mx-1.5 text-xs">vs</span>
-                        <span className={!homeFav ? "text-gold" : ""}>{m.away.name}</span>
-                      </p>
-                      <p className="font-mono text-mute/70 text-[10px] tracking-[0.2em] mt-1 tabular">
-                        {m.startTime} · 引擎看好 {homeFav ? m.home.name : m.away.name}{" "}
-                        {Math.max(m.home.winRate, m.away.winRate)}%
-                      </p>
+                    <div className="flex items-center gap-2.5 min-w-0">
+                      <Avatar
+                        seed={favName}
+                        glyph={crest?.glyph}
+                        color={crest?.color}
+                        size={22}
+                      />
+                      <div className="min-w-0">
+                        <p className="text-bone text-sm sm:text-base font-light leading-snug truncate">
+                          <span className={homeFav ? "text-gold" : ""}>{m.home.name}</span>
+                          <span className="text-mute/60 mx-1.5 text-xs">vs</span>
+                          <span className={!homeFav ? "text-gold" : ""}>{m.away.name}</span>
+                        </p>
+                        <p className="font-mono text-mute/70 text-[10px] tracking-[0.2em] mt-1 tabular">
+                          {m.startTime} · 引擎看好 {favName}{" "}
+                          {Math.max(m.home.winRate, m.away.winRate)}%
+                        </p>
+                      </div>
                     </div>
                     <span className="shrink-0 font-mono text-gold/70 text-[10px] tracking-[0.3em]">
                       押 →
@@ -307,7 +340,7 @@ export default async function MemberPage() {
           ) : (
             <div className="border border-line/60 bg-slate/30 p-5">
               <p className="text-mute text-sm leading-relaxed mb-4">
-                目前沒有排定的 CPBL 賽事。
+                目前沒有可以押的賽事。
               </p>
               <div className="flex flex-wrap gap-3">
                 <Link
