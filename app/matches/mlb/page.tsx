@@ -61,12 +61,14 @@ export default async function MlbMatchesPage() {
           <p className="font-mono text-gold/70 text-[10px] tracking-[0.4em]">
             MLB 賽事板 · 進行中 / 今晚 / 最近
           </p>
+          {/* R201:live/即時 badge 從綠框(border-win/text-win)改金色 —— 守「不紅綠對比」
+              品牌鐵律 · 同 MiniMatchCard 的 LIVE 徽章(border-gold text-gold shimmer)一致。 */}
           {liveGames.length > 0 ? (
-            <span className="font-mono text-[9px] tracking-[0.3em] px-1.5 py-0.5 border border-win text-win shimmer">
+            <span className="font-mono text-[9px] tracking-[0.3em] px-1.5 py-0.5 border border-gold text-gold shimmer">
               ● {liveGames.length} 場進行中
             </span>
           ) : (
-            <span className="font-mono text-[9px] tracking-[0.3em] px-1.5 py-0.5 border border-win/40 text-win">
+            <span className="font-mono text-[9px] tracking-[0.3em] px-1.5 py-0.5 border border-gold/40 text-gold/70">
               即時資料
             </span>
           )}
@@ -373,7 +375,9 @@ const STATE_LABEL: Record<MlbGame["state"], string> = {
 
 const STATE_COLOR: Record<MlbGame["state"], string> = {
   preview: "border-mute/60 text-mute/80",
-  live: "border-win text-win",
+  // R201:live 從綠框改金色 = 守「不紅綠對比」鐵律(別改回 border-win/text-win)·
+  // 進行中 = 全金 + shimmer(line 191 條件套)· 同 MiniMatchCard LIVE 徽章。
+  live: "border-gold text-gold",
   final: "border-line text-mute",
   other: "border-line text-mute",
 };

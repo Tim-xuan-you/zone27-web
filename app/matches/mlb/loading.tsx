@@ -18,7 +18,8 @@ export default function MlbMatchesLoading() {
             <p className="font-mono text-gold/70 text-[10px] tracking-[0.4em]">
               今日賽事板 · MLB
             </p>
-            <span className="font-mono text-[9px] tracking-[0.3em] px-1.5 py-0.5 border border-win/40 text-win shimmer">
+            {/* R201:載入徽章從綠框改金色 = 守「不紅綠對比」鐵律(冷載入時也不閃綠)。 */}
+            <span className="font-mono text-[9px] tracking-[0.3em] px-1.5 py-0.5 border border-gold/40 text-gold/70 shimmer">
               載入中
             </span>
           </div>
