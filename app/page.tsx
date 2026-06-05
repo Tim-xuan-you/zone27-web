@@ -197,6 +197,30 @@ export default async function Home() {
           )}
         </section>
 
+        {/* ── 足球 · 引擎開盤(新上線)· 世界盃即將開踢 · 棒球之外的新戰場 ──
+            靜態連結(不在首頁打 football API · 不破 ISR / 不耗 10-req/min 上限)。 */}
+        <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-14">
+          <Link
+            href="/soccer"
+            className="block bg-slate/30 border border-gold/30 hover:border-gold/60 hover:bg-slate/40 transition-colors p-4 sm:p-5 group"
+          >
+            <div className="flex items-center justify-between gap-3 flex-wrap">
+              <div className="min-w-0">
+                <p className="font-mono text-gold text-[10px] tracking-[0.35em] mb-1">
+                  足球 · 引擎開盤 · 新上線
+                </p>
+                <p className="text-bone text-sm sm:text-base font-light leading-snug">
+                  世界盃 + 各大聯賽 · 我們<span className="text-gold">自己算</span>的勝 / 平 / 負
+                  (不是盤口)· 押一邊試試
+                </p>
+              </div>
+              <span className="shrink-0 font-mono text-gold/80 group-hover:text-gold text-[10px] tracking-[0.3em]">
+                看足球 →
+              </span>
+            </div>
+          </Link>
+        </section>
+
         {/* ── 三步玩法 · 圖示卡(child-level · 圖取代字)──── */}
         <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-14 border-t border-line/40 pt-12">
           <p

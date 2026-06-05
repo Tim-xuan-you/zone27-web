@@ -54,6 +54,35 @@ export async function getSoccerTally(matchId: string): Promise<SoccerTally> {
   }
 }
 
+/** 三向人數 → 整數百分比、且三者相加恰為 100(最大餘數法 · 同引擎 toDisplayPercents ·
+ *  避免「33/33/33=99」或「34/33/34=101」跟上方引擎開盤的精準顯示打架)。 */
+export function crowdPercents(t: SoccerTally): {
+  home: number;
+  draw: number;
+  away: number;
+} {
+  const total = t.total || 1;
+  const raw = [
+    { k: "home" as const, v: (t.homeCount / total) * 100 },
+    { k: "draw" as const, v: (t.drawCount / total) * 100 },
+    { k: "away" as const, v: (t.awayCount / total) * 100 },
+  ];
+  const floored = raw.map((r) => ({ ...r, f: Math.floor(r.v), rem: r.v - Math.floor(r.v) }));
+  let rem = 100 - floored.reduce((s, r) => s + r.f, 0);
+  floored
+    .slice()
+    .sort((a, b) => b.rem - a.rem)
+    .forEach((r) => {
+      if (rem > 0) {
+        r.f += 1;
+        rem -= 1;
+      }
+    });
+  const out = { home: 0, draw: 0, away: 0 };
+  for (const r of floored) out[r.k] = r.f;
+  return out;
+}
+
 /** 我對某場的押注(登入)· 無 / anon / 錯 → null。 */
 export async function getMySoccerPrediction(
   matchId: string,

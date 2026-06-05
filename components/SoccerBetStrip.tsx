@@ -7,6 +7,7 @@ import {
   getMySoccerPrediction,
   getSoccerTally,
   submitSoccerPrediction,
+  crowdPercents,
   SOCCER_CROWD_MIN,
   type SoccerPick,
   type SoccerTally,
@@ -35,11 +36,28 @@ export default function SoccerBetStrip({
   const [pick, setPick] = useState<SoccerPick | null>(null);
   const [tally, setTally] = useState<SoccerTally | null>(null);
   const [saving, setSaving] = useState(false);
+  const [kickedOff, setKickedOff] = useState(false);
 
-  const started = (() => {
+  const started =
+    kickedOff ||
+    (() => {
+      const t = Date.parse(dateISO);
+      return !Number.isNaN(t) && Date.now() >= t;
+    })();
+
+  // 開賽瞬間自動鎖手(即使分頁一直開著沒重整)· 只對 24h 內的場設「一次性」timer(不輪詢 · 省資源)。
+  useEffect(() => {
     const t = Date.parse(dateISO);
-    return !Number.isNaN(t) && Date.now() >= t;
-  })();
+    if (Number.isNaN(t)) return;
+    const ms = t - Date.now();
+    if (ms <= 0) {
+      setKickedOff(true);
+      return;
+    }
+    if (ms > 24 * 3600 * 1000) return;
+    const id = setTimeout(() => setKickedOff(true), ms);
+    return () => clearTimeout(id);
+  }, [dateISO]);
 
   useEffect(() => {
     let cancelled = false;
@@ -178,11 +196,11 @@ function CrowdLine({
       </p>
     );
   }
-  const pct = (n: number) => Math.round((n / tally.total) * 100);
+  const p = crowdPercents(tally);
   return (
     <p className="mt-2 font-mono text-mute/55 text-[9px] tracking-[0.12em] tabular">
-      群眾:{homeLabel.slice(0, 4)} {pct(tally.homeCount)}% · 和 {pct(tally.drawCount)}% ·{" "}
-      {awayLabel.slice(0, 4)} {pct(tally.awayCount)}%{" "}
+      群眾:{homeLabel.slice(0, 4)} {p.home}% · 和 {p.draw}% ·{" "}
+      {awayLabel.slice(0, 4)} {p.away}%{" "}
       <span className="text-mute/40">({tally.total} 人)</span>
     </p>
   );

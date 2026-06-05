@@ -85,6 +85,16 @@ export const COMMAND_ITEMS: CommandItem[] = [
     keywords: ["mlb", "美國職棒", "即時", "stats api", "大聯盟"],
   },
   {
+    label: "足球 · 世界盃/巴甲 引擎開盤(勝/平/負)",
+    kicker: "/soccer",
+    path: "/soccer",
+    group: "賽事 · 引擎",
+    keywords: [
+      "soccer", "football", "足球", "世界盃", "world cup", "wc",
+      "巴甲", "巴西", "brazil", "歐冠", "英超", "勝平負", "和局", "draw",
+    ],
+  },
+  {
     label: "海選天梯 · 準度排行(新秀 → 神諭)",
     kicker: "/ladder",
     path: "/ladder",

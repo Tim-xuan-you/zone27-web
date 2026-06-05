@@ -139,8 +139,25 @@ export async function getCompetitionPredictions(
     return scheduled.map((m) => {
       const homeSeed = teamName(m.homeTeam);
       const awaySeed = teamName(m.awayTeam);
-      const rH = getRatingByName(m.homeTeam?.name ?? homeSeed) ?? SOCCER_RATING_BASELINE;
-      const rA = getRatingByName(m.awayTeam?.name ?? awaySeed) ?? SOCCER_RATING_BASELINE;
+      const rawH = getRatingByName(m.homeTeam?.name ?? homeSeed);
+      const rawA = getRatingByName(m.awayTeam?.name ?? awaySeed);
+      // WC 地主(美/墨/加)在自己國家踢 = 真主場 → 給保守主場優勢;其餘國際賽中立 0。
+      const homeNameLc = (m.homeTeam?.name ?? "").toLowerCase();
+      const isHost =
+        code === "WC" &&
+        (homeNameLc === "united states" ||
+          homeNameLc === "mexico" ||
+          homeNameLc === "canada");
+      // 兩隊都查不到實力分(都掉 baseline)→ 不硬開 ~33/33/33 假盤 · 標覆蓋建置中
+      // (同俱樂部誠實態:賭場什麼都敢開,我們只開算得出的)。 只一隊缺 → 照算(有訊號)。
+      const prediction =
+        rawH === null && rawA === null
+          ? null
+          : predictSoccer(
+              rawH ?? SOCCER_RATING_BASELINE,
+              rawA ?? SOCCER_RATING_BASELINE,
+              { homeAdvantage: isHost ? 35 : 0 },
+            );
       return {
         id: `fd-${m.id ?? `${homeSeed}-${awaySeed}`}`,
         competitionCode: code,
@@ -150,8 +167,7 @@ export async function getCompetitionPredictions(
         away: displayName(m.awayTeam),
         homeSeed,
         awaySeed,
-        // 國際大賽多在中立場 → 不灌主場優勢
-        prediction: predictSoccer(rH, rA, { homeAdvantage: 0 }),
+        prediction,
       };
     });
   }
