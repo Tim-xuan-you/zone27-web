@@ -123,6 +123,19 @@ export function getNationalZh(name: string): string | null {
   return null;
 }
 
+const BY_EN_CODE: Record<string, string> = Object.fromEntries(
+  SOCCER_TEAMS.map((t) => [t.en.toLowerCase(), t.code]),
+);
+
+/** 用英文隊名查三碼國際代號(隊徽 glyph 用 · 國家隊辨識度遠高於前兩字)· 查不到回 null。 */
+export function getNationalCode(name: string): string | null {
+  const k = name.trim().toLowerCase();
+  if (BY_EN_CODE[k] != null) return BY_EN_CODE[k];
+  const alias = NAME_ALIASES[k];
+  if (alias && BY_EN_CODE[alias] != null) return BY_EN_CODE[alias];
+  return null;
+}
+
 /** 全表平均實力分 · 給未列隊伍的 fallback(誠實的「中位水準」基準)。 */
 export const SOCCER_RATING_BASELINE = Math.round(
   SOCCER_TEAMS.reduce((s, t) => s + t.rating, 0) / SOCCER_TEAMS.length,

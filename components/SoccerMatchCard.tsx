@@ -2,6 +2,7 @@ import Avatar from "@/components/Avatar";
 import SoccerBetStrip from "@/components/SoccerBetStrip";
 import { toDisplayPercents, type SoccerPrediction } from "@/lib/soccer/engine";
 import type { SoccerMatchPrediction } from "@/lib/soccer/football-data";
+import { getNationalCode } from "@/lib/soccer/teams";
 
 // ── ZONE 27 · 足球賽事卡(勝/平/負 三向 · 非棒球兩向)──────────────
 // 足球跟棒球結構不同:有「平手」→ 三向開盤(主勝 / 和 / 客勝)。 顯示「我們引擎
@@ -41,13 +42,13 @@ export default function SoccerMatchCard({ match }: { match: SoccerMatchPredictio
       {/* 兩隊 · 隊徽(seed 顏色秒認隊)+ 名字 */}
       <div className="flex items-center justify-between gap-2">
         <span className="flex items-center gap-1.5 min-w-0">
-          <Avatar seed={homeSeed} size={22} />
+          <Avatar seed={homeSeed} glyph={getNationalCode(homeSeed) ?? undefined} size={22} />
           <span className="text-bone text-sm font-light tracking-tight truncate">{home}</span>
         </span>
         <span className="font-mono text-mute/50 text-[10px] shrink-0">vs</span>
         <span className="flex items-center gap-1.5 min-w-0 justify-end">
           <span className="text-bone text-sm font-light tracking-tight truncate text-right">{away}</span>
-          <Avatar seed={awaySeed} size={22} />
+          <Avatar seed={awaySeed} glyph={getNationalCode(awaySeed) ?? undefined} size={22} />
         </span>
       </div>
 
@@ -105,6 +106,10 @@ function Prediction({
           引擎自己算的機率,不是盤口 · 賽後逐場對帳
         </p>
       )}
+      {/* 盲點揭露(538/Savant 式)· 把引擎看不到的攤在下注點 = 報馬仔黑箱的反面 */}
+      <p className="mt-1.5 font-mono text-mute/40 text-[9px] tracking-[0.1em] leading-snug">
+        引擎沒看到:傷停 · 紅黃牌停賽 · 陣容輪換 · 天候 —— 我們攤開,讓你自己加權
+      </p>
     </div>
   );
 }
