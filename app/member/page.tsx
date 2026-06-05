@@ -19,7 +19,8 @@ import CalibrationIdentityCard from "@/components/CalibrationIdentityCard";
 import HonorWall from "@/components/HonorWall";
 import DisciplineStreak from "@/components/DisciplineStreak";
 import { readTier, isPaid, creatorTakePct, tierLabel } from "@/lib/tier";
-import OpenPositionCard, { type OpenPosition } from "@/components/OpenPositionCard";
+import OpenPositionsPanel from "@/components/OpenPositionsPanel";
+import type { OpenPosition } from "@/components/OpenPositionCard";
 import MyCreatorPanel from "@/components/MyCreatorPanel";
 import MyActivityPanel from "@/components/MyActivityPanel";
 import { getMyPurchases, getMyComments } from "@/lib/creator-activity-server";
@@ -165,6 +166,9 @@ export default async function MemberPage() {
         startTime: m.startTime,
         dateLabel: compactDate(m.date),
         myPick: entry.pick,
+        // 你押的那隊縮寫 + 聯盟 → 密清單掛隊徽顏色(getTeamCrest)
+        myTeamEn: entry.pick === "home" ? m.home.en : m.away.en,
+        league: m.league,
         engineHomePicked: m.home.winRate >= m.away.winRate,
         engineConfidence: Math.max(m.home.winRate, m.away.winRate),
         phase,
@@ -218,19 +222,10 @@ export default async function MemberPage() {
 
         {/* 1.5 · 你的未結算押注 · the live middle(soul)· 只在有持倉時出現 ──
             押下去到打完之間那段 —— 你 vs 引擎 vs 群眾。 放在準度數字之上,因為
-            這是你今天回來的理由(動態 · 時效)· 沒持倉時自動隱藏,準度數字遞補為首。 */}
-        {openPositions.length > 0 && (
-          <section className="mt-8">
-            <p className="font-mono text-gold text-[10px] tracking-[0.4em] mb-3">
-              你的未結算押注
-            </p>
-            <div className="flex flex-col gap-3">
-              {openPositions.map((p) => (
-                <OpenPositionCard key={p.matchId} position={p} />
-              ))}
-            </div>
-          </section>
-        )}
+            這是你今天回來的理由(動態 · 時效)· 沒持倉時自動隱藏,準度數字遞補為首。
+            ⚡ adaptive(Tim dogfood「押十幾場版面爆了」):≤2 注大卡(時刻)· ≥3 注密清單
+            (投資組合 · 隊徽顏色秒掃 · 結算說明只說一次)· 見 OpenPositionsPanel。 */}
+        <OpenPositionsPanel positions={openPositions} />
 
         {/* 2 · 你的校準身分 · 含輸帳本 · 你 vs 亂猜 vs 引擎 + 本月升階閘門 ──
             「有帳本的玩運彩」脊椎(soul-roadmap #1)· 計算在 aggregateIdentity。 */}

@@ -7,6 +7,8 @@ import {
   CROWD_LINE_MIN,
   type MarketTally,
 } from "@/lib/predictions-market";
+import Avatar from "@/components/Avatar";
+import { getTeamCrest } from "@/lib/identity";
 
 // ── ZONE 27 · Open Position ──────────────────────────────
 // The missing middle. Every emotional payoff in ZONE 27 used to land at
@@ -35,6 +37,10 @@ export type OpenPosition = {
   /** compact date e.g. "06/05" · only shown for future games */
   dateLabel: string;
   myPick: "home" | "away";
+  /** 你押的那隊的官方縮寫(getTeamCrest 用 · 隊徽顏色) */
+  myTeamEn: string;
+  /** 聯盟 "MLB" | "CPBL"(getTeamCrest 用) */
+  league: string;
   /** engine's pre-game favorite side */
   engineHomePicked: boolean;
   /** engine's confidence on its favorite (0-100) */
@@ -72,6 +78,7 @@ export default function OpenPositionCard({
   }, [matchId]);
 
   const myTeam = myPick === "home" ? homeName : awayName;
+  const crest = getTeamCrest(myTeam, position.myTeamEn, position.league);
   const engineTeam = engineHomePicked ? homeName : awayName;
   const withEngine = (myPick === "home") === engineHomePicked;
   const isLive = phase === "today-live";
@@ -126,9 +133,12 @@ export default function OpenPositionCard({
           </span>
         </div>
 
-        {/* 你的承諾 · the held stake */}
-        <p className="text-bone text-lg sm:text-xl font-light leading-snug">
-          你押 <span className="text-gold">{myTeam}</span>
+        {/* 你的承諾 · the held stake · 掛隊徽顏色(解「全是字」· 顏色秒認隊) */}
+        <p className="flex items-center gap-2.5 text-bone text-lg sm:text-xl font-light leading-snug">
+          <Avatar seed={myTeam} glyph={crest?.glyph} color={crest?.color} size={26} />
+          <span>
+            你押 <span className="text-gold">{myTeam}</span>
+          </span>
         </p>
 
         {/* 你 vs 引擎 · 同邊被背書 / 對面是張力 */}
