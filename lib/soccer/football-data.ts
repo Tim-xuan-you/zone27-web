@@ -21,6 +21,7 @@ import {
   MIN_GAMES_FOR_RATING,
 } from "./elo";
 import { predictSoccer, type SoccerPrediction } from "./engine";
+import { getRatingByName, SOCCER_RATING_BASELINE } from "./teams";
 
 const BASE = "https://api.football-data.org/v4";
 const REVALIDATE_SECONDS = 3600; // 1h ISR · 遠低於 10/min
@@ -42,6 +43,11 @@ export const SOCCER_COMPETITIONS = [
 ] as const;
 
 export type SoccerCompetitionCode = (typeof SOCCER_COMPETITIONS)[number]["code"];
+
+// 目前「正在跑、值得展示」的競賽(rate-limit 紀律:一頁只打這幾個 · 每個 ≤2 call ·
+// 全站 revalidate 快取 → 遠低於 10/min)。 隨季節擴充:8 月歐洲開季再加 PL/PD/...。
+// 2026-06:世界盃(6/11 開踢)+ 巴西甲(季中,已驗證有真實資料)。
+export const ACTIVE_COMPETITIONS: SoccerCompetitionCode[] = ["WC", "BSA"];
 
 type FdTeam = { name?: string; shortName?: string; tla?: string };
 type FdMatch = {
@@ -98,8 +104,10 @@ export type SoccerMatchPrediction = {
 
 /**
  * 一個競賽的未來賽程 + 我們引擎的開盤。
- * 俱樂部聯賽:自建 Elo(從本季已結束比賽算)。 0 比賽/缺 token → 空陣列。
- * （國家隊競賽的 seed-rating 路徑下一步接 · 見檔頭。）
+ *  - 俱樂部聯賽:自建 Elo(從本季已結束比賽算)· 戰績不足的隊 prediction=null(覆蓋建置中)。
+ *  - 國家隊賽事(世界盃/歐國盃):該競賽內無歷史戰績可算 → 用 teams.ts 國際排名 seed
+ *    (查不到的隊 fallback baseline · 中立場 homeAdvantage 0)。
+ * 缺 token / 0 比賽 → 空陣列(graceful)。
  */
 export async function getCompetitionPredictions(
   code: SoccerCompetitionCode,
@@ -107,6 +115,29 @@ export async function getCompetitionPredictions(
   const comp = SOCCER_COMPETITIONS.find((c) => c.code === code);
   const compName = comp?.name ?? code;
 
+  const scheduled = await fetchMatches(code, "SCHEDULED");
+
+  // ── 國家隊賽事:seed 實力分(賽事內沒戰績可算 Elo)──
+  if (comp?.isNationalTeam) {
+    return scheduled.map((m) => {
+      const home = teamName(m.homeTeam);
+      const away = teamName(m.awayTeam);
+      const rH = getRatingByName(m.homeTeam?.name ?? home) ?? SOCCER_RATING_BASELINE;
+      const rA = getRatingByName(m.awayTeam?.name ?? away) ?? SOCCER_RATING_BASELINE;
+      return {
+        id: `fd-${m.id ?? `${home}-${away}`}`,
+        competitionCode: code,
+        competitionName: compName,
+        dateISO: m.utcDate ?? "",
+        home,
+        away,
+        // 國際大賽多在中立場 → 不灌主場優勢
+        prediction: predictSoccer(rH, rA, { homeAdvantage: 0 }),
+      };
+    });
+  }
+
+  // ── 俱樂部聯賽:自建 Elo(從本季已結束比賽算)──
   const finished = await fetchMatches(code, "FINISHED");
   const results = finished
     .map((m) => ({
@@ -123,7 +154,6 @@ export async function getCompetitionPredictions(
   const ratings = buildRatings(results);
   const counts = gameCounts(results);
 
-  const scheduled = await fetchMatches(code, "SCHEDULED");
   return scheduled.map((m) => {
     const home = teamName(m.homeTeam);
     const away = teamName(m.awayTeam);

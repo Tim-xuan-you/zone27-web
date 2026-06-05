@@ -62,6 +62,26 @@ export function getSoccerTeam(code: string): SoccerTeam | null {
   return BY_CODE[code] ?? null;
 }
 
+// 資料源(football-data.org)的英文隊名 → 我們 seed 的別名(常見差異)。
+const NAME_ALIASES: Record<string, string> = {
+  "united states": "usa",
+  "korea republic": "south korea",
+  "republic of korea": "south korea",
+};
+
+const BY_EN: Record<string, number> = Object.fromEntries(
+  SOCCER_TEAMS.map((t) => [t.en.toLowerCase(), t.rating]),
+);
+
+/** 用英文隊名查 seed 實力分(國家隊賽事用 · 查不到回 null → 呼叫端用 baseline fallback)。 */
+export function getRatingByName(name: string): number | null {
+  const k = name.trim().toLowerCase();
+  if (BY_EN[k] != null) return BY_EN[k];
+  const alias = NAME_ALIASES[k];
+  if (alias && BY_EN[alias] != null) return BY_EN[alias];
+  return null;
+}
+
 /** 全聯盟平均實力分 · 給未列隊伍的 fallback 用(誠實的「中位水準」基準)。 */
 export const SOCCER_RATING_BASELINE = Math.round(
   SOCCER_TEAMS.reduce((s, t) => s + t.rating, 0) / SOCCER_TEAMS.length,

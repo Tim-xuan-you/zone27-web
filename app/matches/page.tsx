@@ -79,6 +79,13 @@ export default async function MatchesPage() {
           >
             公開戰績 →
           </Link>
+          <Link
+            href="/soccer"
+            className="font-mono text-[9px] tracking-[0.3em] px-1.5 py-0.5 border border-gold/30 text-gold/70 hover:border-gold hover:text-gold transition-colors"
+            title="世界盃 + 各大足球聯賽 · 引擎開盤(勝/平/負)"
+          >
+            足球 →
+          </Link>
         </div>
         <div className="flex items-end justify-between flex-wrap gap-4">
           <h1 className="text-4xl sm:text-5xl text-bone font-light tracking-tight">
