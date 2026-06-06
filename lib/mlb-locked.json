@@ -1115,8 +1115,12 @@
       },
       "engineWinHomePct": 41,
       "lockedAt": "2026-06-04T17:33:36.199Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 0,
+        "away": 4
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-06-06T19:56:09.043Z"
     },
     {
       "gamePk": 823697,
@@ -1869,6 +1873,64 @@
       },
       "engineWinHomePct": 39,
       "lockedAt": "2026-06-05T18:31:38.597Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 823289,
+      "gameDate": "2026-06-09T01:40:00Z",
+      "scheduleDate": "2026-06-08",
+      "homeId": 135,
+      "homeEn": "San Diego Padres",
+      "homeRecord": "32-30",
+      "awayId": 113,
+      "awayEn": "Cincinnati Reds",
+      "awayRecord": "31-31",
+      "homePitcher": "Walker Buehler",
+      "awayPitcher": "Andrew Abbott",
+      "homeStats": {
+        "era": "4.53",
+        "k9": "7.65",
+        "bb9": "3.12",
+        "hr9": "0.62"
+      },
+      "awayStats": {
+        "era": "4.06",
+        "k9": "6.16",
+        "bb9": "4.06",
+        "hr9": "1.18"
+      },
+      "engineWinHomePct": 58,
+      "lockedAt": "2026-06-06T19:56:08.273Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 824998,
+      "gameDate": "2026-06-09T02:05:00Z",
+      "scheduleDate": "2026-06-08",
+      "homeId": 133,
+      "homeEn": "Athletics",
+      "homeRecord": "30-33",
+      "awayId": 158,
+      "awayEn": "Milwaukee Brewers",
+      "awayRecord": "38-23",
+      "homePitcher": "Jeffrey Springs",
+      "awayPitcher": "Kyle Harrison",
+      "homeStats": {
+        "era": "4.37",
+        "k9": "7.71",
+        "bb9": "2.70",
+        "hr9": "1.80"
+      },
+      "awayStats": {
+        "era": "1.57",
+        "k9": "11.46",
+        "bb9": "2.51",
+        "hr9": "0.63"
+      },
+      "engineWinHomePct": 28,
+      "lockedAt": "2026-06-06T19:56:08.273Z",
       "finalScore": null,
       "verdict": null
     }
