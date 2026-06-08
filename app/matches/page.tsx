@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Nav from "@/components/Nav";
+import SportTabs from "@/components/SportTabs";
 import Footer from "@/components/Footer";
 import MiniMatchCard from "@/components/MiniMatchCard";
 import MatchBoardFilter from "@/components/MatchBoardFilter";
@@ -57,6 +58,7 @@ export default async function MatchesPage() {
   return (
     <div className="flex flex-col flex-1 min-h-screen">
       <Nav active="matches" />
+      <SportTabs active="baseball" />
 
       <main id="main">
 
@@ -79,13 +81,7 @@ export default async function MatchesPage() {
           >
             公開戰績 →
           </Link>
-          <Link
-            href="/soccer"
-            className="font-mono text-[9px] tracking-[0.3em] px-1.5 py-0.5 border border-gold/30 text-gold/70 hover:border-gold hover:text-gold transition-colors"
-            title="世界盃 + 各大足球聯賽 · 引擎開盤(勝/平/負)"
-          >
-            足球 →
-          </Link>
+          {/* 足球切換已移到上方 SportTabs(棒球 | 足球)· 不再雙頭重複 */}
         </div>
         <div className="flex items-end justify-between flex-wrap gap-4">
           <h1 className="text-4xl sm:text-5xl text-bone font-light tracking-tight">

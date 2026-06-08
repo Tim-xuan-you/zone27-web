@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Nav from "@/components/Nav";
+import SportTabs from "@/components/SportTabs";
 import Footer from "@/components/Footer";
 import SoccerMatchCard from "@/components/SoccerMatchCard";
 import SoccerRecordCard from "@/components/SoccerRecordCard";
@@ -49,6 +50,7 @@ export default async function SoccerPage() {
   return (
     <div className="flex flex-col flex-1 min-h-screen">
       <Nav active="matches" />
+      <SportTabs active="soccer" />
 
       <main id="main">
         {/* ── HEADER ── */}

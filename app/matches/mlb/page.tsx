@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Nav from "@/components/Nav";
+import SportTabs from "@/components/SportTabs";
 import Footer from "@/components/Footer";
 import { createPageMetadata } from "@/lib/page-og";
 import { fetchRelevantMlb, type MlbGame } from "@/lib/mlb";
@@ -52,6 +53,7 @@ export default async function MlbMatchesPage() {
   return (
     <div className="flex flex-col flex-1 min-h-screen">
       <Nav />
+      <SportTabs active="baseball" />
 
       <main id="main">
 

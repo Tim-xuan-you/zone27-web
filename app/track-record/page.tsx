@@ -13,6 +13,7 @@ import {
   type Match,
 } from "@/lib/matches";
 import { getMlbLockedMatches } from "@/lib/mlb-matches";
+import SoccerEngineRecord from "@/components/SoccerEngineRecord";
 import { createPageMetadata } from "@/lib/page-og";
 
 // ── R201 · Tim dogfood「太複雜/太多廢話/沒人看/該有 MLB」→ 從 1250 行(TCG 卡 / build
@@ -90,7 +91,7 @@ export default function TrackRecordPage() {
             lang="en"
             className="font-mono text-gold text-[10px] tracking-[0.45em] mb-4"
           >
-            / TRACK RECORD · 公開戰績 · CPBL + MLB
+            / TRACK RECORD · 公開戰績 · 棒球(CPBL + MLB)+ 足球
           </p>
           <h1 className="text-4xl sm:text-5xl text-bone font-light tracking-tight max-w-3xl">
             每一場引擎的公開預測 · 賽後實際結果在這
@@ -219,6 +220,19 @@ export default function TrackRecordPage() {
             </p>
           )}
         </section>
+
+        {/* ── 足球 · 三向引擎戰績(獨立帳本 · 棒球三向不混池)· 公開戰績一頁涵蓋兩運動 ──
+            足球是三向(主/和/客)+ RPS 校準 · 跟棒球兩向 getCalibration 不同尺 → 不硬併進上方帳本,
+            而是同一頁、下方獨立一節呈現(訪客一捲就看到我們在所有運動的誠實總帳)。 */}
+        <div className="mx-auto max-w-5xl w-full px-6 sm:px-10">
+          <div className="w-full h-px bg-line/60" />
+        </div>
+        <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pt-10 pb-1">
+          <p lang="en" className="font-mono text-gold/70 text-[10px] tracking-[0.35em]">
+            / 足球 · 三向引擎戰績 · 跟棒球分開計(不混池)
+          </p>
+        </section>
+        <SoccerEngineRecord />
 
         {/* ── 怎麼評分 · inline 1 行 + 連深層 ─────────────────── */}
         <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-16 border-t border-line/40 pt-10">
