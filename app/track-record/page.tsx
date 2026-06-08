@@ -14,6 +14,9 @@ import {
 } from "@/lib/matches";
 import { getMlbLockedMatches } from "@/lib/mlb-matches";
 import SoccerEngineRecord from "@/components/SoccerEngineRecord";
+import SportToggle from "@/components/SportToggle";
+import SoccerPendingFrame from "@/components/SoccerPendingFrame";
+import { getLockedSoccerPredictions } from "@/lib/soccer/locked";
 import { createPageMetadata } from "@/lib/page-og";
 
 // ── R201 · Tim dogfood「太複雜/太多廢話/沒人看/該有 MLB」→ 從 1250 行(TCG 卡 / build
@@ -80,6 +83,110 @@ export default function TrackRecordPage() {
     return iso ? iso < todayTaipei : false;
   }).length;
 
+  // 足球(三向 · 獨立帳本)· 給運動切換的足球 view + PENDING 尊嚴框(0 結算 = 結果還沒開始)
+  const soccerPreds = getLockedSoccerPredictions();
+  const soccerLocked = soccerPreds.length;
+  const soccerDecided = soccerPreds.filter(
+    (p) => p.verdict === "proved" || p.verdict === "diverged",
+  ).length;
+
+  // ── 棒球明細 view(進運動切換 · 預設顯示)· 六件誠實全在裡面:3-stat / 最自信兩場 /
+  //    LEDGER 表 / 未補錄債務行(hero 的含輸率 + N<30 留在永遠可見層,不進 toggle)。 ──
+  const baseballView = (
+    <>
+      <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pt-2 pb-2">
+        <p lang="en" className="font-mono text-gold/70 text-[10px] tracking-[0.35em]">
+          / 棒球 · CPBL + MLB · 同一把尺算對錯
+        </p>
+      </section>
+      {/* HEADLINE STATS · 3-cell · PROVED/DIVERGED 等大等亮 */}
+      <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pt-2 pb-16">
+        <div className="grid grid-cols-3 gap-4 sm:gap-6 bg-slate/40 border border-line/70 p-6 sm:p-8">
+          <LedgerStat label="PROVED · 引擎命中" value={String(proved)} tone="gold" />
+          <LedgerStat label="DIVERGED · 引擎落空" value={String(diverged)} tone="loss" />
+          <LedgerStat
+            label="命中率 · 含輸一起算"
+            value={provedPct === null ? "—" : `${provedPct}%`}
+            tone={provedPct === null ? "mute" : "bone"}
+          />
+        </div>
+        {push > 0 && (
+          <p className="mt-3 font-mono text-mute/60 text-[10px] tracking-[0.25em]">
+            · 另 {push} 場 PUSH(平局或 50/50 無 favorite · 不計入命中率分母)
+          </p>
+        )}
+      </section>
+
+      {/* 引擎最自信的兩場 · 一中一沒中 */}
+      {biggestHit && biggestMiss && (
+        <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-16">
+          <p lang="en" className="font-mono text-gold/70 text-[10px] tracking-[0.35em] mb-2">
+            / 引擎押最重的兩場
+          </p>
+          <p className="text-mute/85 text-sm leading-relaxed mb-6">
+            一場對 · 一場錯 · 等大擺一起。
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <BiggestCallCard match={biggestHit} kind="proved" />
+            <BiggestCallCard match={biggestMiss} kind="diverged" />
+          </div>
+        </section>
+      )}
+
+      {/* LEDGER · 含輸帳本(跨聯盟 · 新→舊 · 不刪不修飾) */}
+      <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-16">
+        <p lang="en" className="font-mono text-gold/70 text-[10px] tracking-[0.35em] mb-8">
+          / LEDGER · NEWEST FIRST · 不刪不修飾
+        </p>
+        {finalized.length === 0 ? (
+          <div className="border border-dashed border-gold/30 bg-slate/30 p-10 text-center">
+            <p className="text-mute text-sm leading-relaxed max-w-md mx-auto">
+              帳本等第一筆 · 不回填歷史 · 沒有 cherry-picked 過往。
+              從引擎首次公開預測過的賽事 ingest 後第一筆亮起。
+            </p>
+          </div>
+        ) : (
+          <div className="border border-line/70">
+            <div
+              className="hidden lg:grid grid-cols-[100px_1fr_120px_130px_100px_44px] gap-3 px-5 py-3 bg-slate/50 border-b border-line/60 font-mono text-mute text-[9px] tracking-[0.3em]"
+              role="row"
+            >
+              <span lang="en">DATE · 聯盟</span>
+              <span lang="en">MATCHUP · ENGINE PREDICTION</span>
+              <span lang="en" className="text-right">FINAL</span>
+              <span lang="en" className="text-right">ENGINE % ON WINNER</span>
+              <span lang="en" className="text-right">VERDICT</span>
+              <span className="sr-only">link</span>
+            </div>
+            {finalized.map((m) => (
+              <LedgerRow key={m.id} match={m} />
+            ))}
+          </div>
+        )}
+        {unfiledArchived > 0 && (
+          <p className="mt-6 font-mono text-mute/70 text-[10px] tracking-[0.25em] leading-relaxed">
+            ⚠ {unfiledArchived} 場 CPBL 已結束但未補錄最終比分 · 引擎預測已不可驗證 ·
+            維持 ARCHIVED · 不會出現在此表。
+          </p>
+        )}
+      </section>
+    </>
+  );
+
+  // ── 足球明細 view(進運動切換)· 0 結算 → 上方 PENDING 尊嚴框(結果還沒開始)·
+  //    下方 SoccerEngineRecord(三向引擎戰績 · 誠實段原封不動)。 ──
+  const soccerView = (
+    <>
+      <section className="mx-auto max-w-6xl w-full px-6 sm:px-10 pt-2 pb-1">
+        <p lang="en" className="font-mono text-gold/70 text-[10px] tracking-[0.35em]">
+          / 足球 · 三向引擎戰績 · 跟棒球分開計(不混池)
+        </p>
+      </section>
+      {soccerDecided === 0 && <SoccerPendingFrame locked={soccerLocked} />}
+      <SoccerEngineRecord />
+    </>
+  );
+
   return (
     <div className="flex flex-col flex-1 min-h-screen">
       <Nav active="matches" />
@@ -91,7 +198,7 @@ export default function TrackRecordPage() {
             lang="en"
             className="font-mono text-gold text-[10px] tracking-[0.45em] mb-4"
           >
-            / TRACK RECORD · 公開戰績 · 棒球(CPBL + MLB)+ 足球
+            / TRACK RECORD · 公開戰績 · 棒球與足球 · 同一套誠實
           </p>
           <h1 className="text-4xl sm:text-5xl text-bone font-light tracking-tight max-w-3xl">
             每一場引擎的公開預測 · 賽後實際結果在這
@@ -141,98 +248,10 @@ export default function TrackRecordPage() {
           <div className="w-full h-px bg-line/60" />
         </div>
 
-        {/* ── HEADLINE STATS · 3-cell · PROVED/DIVERGED 等大等亮 ──────── */}
-        <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pt-10 pb-16">
-          <div className="grid grid-cols-3 gap-4 sm:gap-6 bg-slate/40 border border-line/70 p-6 sm:p-8">
-            <LedgerStat label="PROVED · 引擎命中" value={String(proved)} tone="gold" />
-            <LedgerStat label="DIVERGED · 引擎落空" value={String(diverged)} tone="loss" />
-            <LedgerStat
-              label="命中率 · 含輸一起算"
-              value={provedPct === null ? "—" : `${provedPct}%`}
-              tone={provedPct === null ? "mute" : "bone"}
-            />
-          </div>
-          {push > 0 && (
-            <p className="mt-3 font-mono text-mute/60 text-[10px] tracking-[0.25em]">
-              · 另 {push} 場 PUSH(平局或 50/50 無 favorite · 不計入命中率分母)
-            </p>
-          )}
-        </section>
-
-        {/* ── 引擎最自信的兩場 · 一中一沒中(全頁最強誠實信號 · 卡自己說話)── */}
-        {biggestHit && biggestMiss && (
-          <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-16">
-            <p
-              lang="en"
-              className="font-mono text-gold/70 text-[10px] tracking-[0.35em] mb-2"
-            >
-              / 引擎押最重的兩場
-            </p>
-            <p className="text-mute/85 text-sm leading-relaxed mb-6">
-              一場對 · 一場錯 · 等大擺一起。
-            </p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <BiggestCallCard match={biggestHit} kind="proved" />
-              <BiggestCallCard match={biggestMiss} kind="diverged" />
-            </div>
-          </section>
-        )}
-
-        {/* ── LEDGER · 含輸帳本(跨聯盟 · 新→舊 · 不刪不修飾)──────── */}
-        <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-16">
-          <p
-            lang="en"
-            className="font-mono text-gold/70 text-[10px] tracking-[0.35em] mb-8"
-          >
-            / LEDGER · NEWEST FIRST · 不刪不修飾
-          </p>
-
-          {finalized.length === 0 ? (
-            <div className="border border-dashed border-gold/30 bg-slate/30 p-10 text-center">
-              <p className="text-mute text-sm leading-relaxed max-w-md mx-auto">
-                帳本等第一筆 · 不回填歷史 · 沒有 cherry-picked 過往。
-                從引擎首次公開預測過的賽事 ingest 後第一筆亮起。
-              </p>
-            </div>
-          ) : (
-            <div className="border border-line/70">
-              <div
-                className="hidden lg:grid grid-cols-[100px_1fr_120px_130px_100px_44px] gap-3 px-5 py-3 bg-slate/50 border-b border-line/60 font-mono text-mute text-[9px] tracking-[0.3em]"
-                role="row"
-              >
-                <span lang="en">DATE · 聯盟</span>
-                <span lang="en">MATCHUP · ENGINE PREDICTION</span>
-                <span lang="en" className="text-right">FINAL</span>
-                <span lang="en" className="text-right">ENGINE % ON WINNER</span>
-                <span lang="en" className="text-right">VERDICT</span>
-                <span className="sr-only">link</span>
-              </div>
-              {finalized.map((m) => (
-                <LedgerRow key={m.id} match={m} />
-              ))}
-            </div>
-          )}
-
-          {unfiledArchived > 0 && (
-            <p className="mt-6 font-mono text-mute/70 text-[10px] tracking-[0.25em] leading-relaxed">
-              ⚠ {unfiledArchived} 場 CPBL 已結束但未補錄最終比分 · 引擎預測已不可驗證 ·
-              維持 ARCHIVED · 不會出現在此表。
-            </p>
-          )}
-        </section>
-
-        {/* ── 足球 · 三向引擎戰績(獨立帳本 · 棒球三向不混池)· 公開戰績一頁涵蓋兩運動 ──
-            足球是三向(主/和/客)+ RPS 校準 · 跟棒球兩向 getCalibration 不同尺 → 不硬併進上方帳本,
-            而是同一頁、下方獨立一節呈現(訪客一捲就看到我們在所有運動的誠實總帳)。 */}
-        <div className="mx-auto max-w-5xl w-full px-6 sm:px-10">
-          <div className="w-full h-px bg-line/60" />
-        </div>
-        <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pt-10 pb-1">
-          <p lang="en" className="font-mono text-gold/70 text-[10px] tracking-[0.35em]">
-            / 足球 · 三向引擎戰績 · 跟棒球分開計(不混池)
-          </p>
-        </section>
-        <SoccerEngineRecord />
+        {/* ── 運動切換(等寬 = 等尊嚴)· 棒球明細 / 足球明細 各占整個舞台 · 預設棒球 ──
+            hero 的含輸命中率 + N<30 老實標留在上方永遠可見層(不進 toggle = 不藏誠實);
+            這裡切換的只是「分運動明細」。 足球 0 結算 = 上方 PENDING 尊嚴框(不是底部空卡)。 */}
+        <SportToggle baseball={baseballView} soccer={soccerView} />
 
         {/* ── 怎麼評分 · inline 1 行 + 連深層 ─────────────────── */}
         <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-16 border-t border-line/40 pt-10">
