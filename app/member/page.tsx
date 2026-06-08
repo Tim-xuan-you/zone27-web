@@ -18,7 +18,8 @@ import {
 import CalibrationIdentityCard from "@/components/CalibrationIdentityCard";
 import HonorWall from "@/components/HonorWall";
 import SoccerRecordCard from "@/components/SoccerRecordCard";
-import { getRecentSoccerResults } from "@/lib/soccer/football-data";
+import { getSoccerLedgerResults } from "@/lib/soccer/football-data";
+import { getSoccerEnginePicks } from "@/lib/soccer/locked";
 import { readTier, isPaid, creatorTakePct, tierLabel } from "@/lib/tier";
 import OpenPositionsPanel from "@/components/OpenPositionsPanel";
 import type { OpenPosition } from "@/components/OpenPositionCard";
@@ -112,7 +113,8 @@ export default async function MemberPage() {
   const allWithMlb = [...allMatches, ...mlbMatches];
   // 你的足球戰績(含輸 · 跟棒球分開算)· 公開賽後結果(ISR 快取 · 與 /soccer 共用)·
   // 本人 picks 由 SoccerRecordCard client 端讀 · 沒押足球 → 卡自動隱藏(不破會員極簡)。
-  const soccerResults = await getRecentSoccerResults();
+  const soccerResults = await getSoccerLedgerResults();
+  const soccerEnginePicks = getSoccerEnginePicks();
   // 個人校準身分:你的紀錄(含輸)+ 對比亂猜 + 同場 你 vs 引擎 + 本月升階閘門。
   // engineFav 走 getEngineFavorite()(50/50 真銅板局回 null · 不灌引擎水)。
   const identity = aggregateIdentity(
@@ -251,8 +253,12 @@ export default async function MemberPage() {
             「有帳本的玩運彩」脊椎(soul-roadmap #1)· 計算在 aggregateIdentity。 */}
         <CalibrationIdentityCard identity={identity} />
 
-        {/* 你的足球戰績(含輸 · 跟棒球分開算)· 沒押足球自動隱藏(adaptive density) */}
-        <SoccerRecordCard results={soccerResults} wrapperClass="mt-6" />
+        {/* 你的足球戰績(含輸 · 跟棒球分開算 · 含你 vs 引擎)· 沒押足球自動隱藏 */}
+        <SoccerRecordCard
+          results={soccerResults}
+          enginePicks={soccerEnginePicks}
+          wrapperClass="mt-6"
+        />
 
         {/* 3 · 你的榮譽牆(soul-roadmap #5 · 「靠誠實賺來的地位」三樓第一塊)· 章全部
             從含輸帳本自動算 · 報馬仔掛不出 · Apple 紀律只放 5 個 · 框 mute 不搶校準卡主角。 */}

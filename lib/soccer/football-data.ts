@@ -3,52 +3,53 @@
 // 賽程+戰績+積分 · 10 req/min)。 我們**只拿中性的賽程/比分**(絕不拿盤口)。
 //
 // 管線:抓某競賽「已結束的比賽」→ 自建 Elo 算實力分 → 抓「未來賽程」→ 引擎開盤。
+//   ⚠️ 開盤那段純邏輯已抽到 lib/soccer/predict-core.mjs(computeCompetitionPredictions)·
+//   站上(本檔)與賽前鎖定 script 共用同一份 → 站上顯示的數字 == 鎖進 JSON 的數字(誠信)。
 //   實力分不夠的隊老實標「覆蓋建置中」不硬開假盤(MIN_GAMES_FOR_RATING 把關)。
 //
 // 速率紀律:Next fetch `revalidate` 快取 → 同一份資料一小時內只打一次 API,
-//   全站共用快取 = 遠低於 10/min 上限(daniel 提醒看標頭控流量 · 快取直接根治)。
-// GRACEFUL:沒設 FOOTBALL_DATA_API_TOKEN(例如還沒接 Vercel env)→ 一律回空 ·
-//   不 crash、不顯示假資料(同其他 graceful 元件)。 0 cookie · 不破 ISR。
+//   全站共用快取 = 遠低於 10/min 上限。
+// GRACEFUL:沒設 FOOTBALL_DATA_API_TOKEN → 一律回空 · 不 crash、不顯示假資料。
 //
-// ⚠️ 國家隊賽事(世界盃/歐國盃)在「該競賽內」沒有歷史戰績可算 Elo → 走 teams.ts
-//   的國際排名 seed(下一步接;本檔先把已驗證的「俱樂部聯賽」路徑做穩)。
+// 賽前鎖定盤一旦存在(lib/soccer-locked.json · GitHub Action 寫),卡片就「顯示鎖定線」
+//   (用鎖定的實力分重現 predictSoccer)而非 live 重算 → 跟賽後對帳同一個數字(同 MLB
+//   「引擎線一律用賽前鎖定值」)。 未鎖的場(或 JSON 空)仍走 live 重算。
 // ─────────────────────────────────────────────────────
 
-import {
-  buildRatings,
-  gameCounts,
-  getRating,
-  MIN_GAMES_FOR_RATING,
-} from "./elo";
 import { predictSoccer, type SoccerPrediction } from "./engine";
-import { getRatingByName, getNationalZh, SOCCER_RATING_BASELINE } from "./teams";
+import {
+  computeCompetitionPredictions,
+  toScheduledInput,
+  toResultInput,
+} from "./predict-core.mjs";
+import { getNationalZh } from "./teams";
 import { getClubZh } from "./club-names";
+import { getLockedSoccerById, getSoccerFinalizedResults } from "./locked";
+import {
+  SOCCER_COMPETITIONS as SOCCER_COMPETITIONS_CORE,
+  ACTIVE_COMPETITIONS as ACTIVE_COMPETITIONS_CORE,
+} from "./competitions.mjs";
 
 const BASE = "https://api.football-data.org/v4";
 const REVALIDATE_SECONDS = 3600; // 1h ISR · 遠低於 10/min
 
-/** 免費方案涵蓋的 12 個競賽(code 對應 football-data.org · 中文展示名)。 */
-export const SOCCER_COMPETITIONS = [
-  { code: "WC", name: "世界盃", en: "World Cup", isNationalTeam: true },
-  { code: "EC", name: "歐國盃", en: "Euro", isNationalTeam: true },
-  { code: "CL", name: "歐冠", en: "Champions League", isNationalTeam: false },
-  { code: "PL", name: "英超", en: "Premier League", isNationalTeam: false },
-  { code: "PD", name: "西甲", en: "La Liga", isNationalTeam: false },
-  { code: "BL1", name: "德甲", en: "Bundesliga", isNationalTeam: false },
-  { code: "SA", name: "義甲", en: "Serie A", isNationalTeam: false },
-  { code: "FL1", name: "法甲", en: "Ligue 1", isNationalTeam: false },
-  { code: "DED", name: "荷甲", en: "Eredivisie", isNationalTeam: false },
-  { code: "PPL", name: "葡超", en: "Primeira Liga", isNationalTeam: false },
-  { code: "ELC", name: "英冠", en: "Championship", isNationalTeam: false },
-  { code: "BSA", name: "巴西甲", en: "Brazil Série A", isNationalTeam: false },
-] as const;
+export type SoccerCompetition = {
+  code: string;
+  name: string;
+  en: string;
+  isNationalTeam: boolean;
+};
 
-export type SoccerCompetitionCode = (typeof SOCCER_COMPETITIONS)[number]["code"];
+/** 免費方案涵蓋的 12 個競賽(資料在 competitions.mjs · 站上 + lock script 共用)。 */
+export const SOCCER_COMPETITIONS: readonly SoccerCompetition[] = SOCCER_COMPETITIONS_CORE;
 
-// 目前「正在跑、值得展示」的競賽(rate-limit 紀律:一頁只打這幾個 · 每個 ≤2 call ·
-// 全站 revalidate 快取 → 遠低於 10/min)。 隨季節擴充:8 月歐洲開季再加 PL/PD/...。
-// 2026-06:世界盃(6/11 開踢)+ 巴西甲(季中,已驗證有真實資料)。
-export const ACTIVE_COMPETITIONS: SoccerCompetitionCode[] = ["WC", "BSA"];
+/** football-data.org 競賽代號(免費 12 賽 · 與 competitions.mjs 同步)。 */
+export type SoccerCompetitionCode =
+  | "WC" | "EC" | "CL" | "PL" | "PD" | "BL1"
+  | "SA" | "FL1" | "DED" | "PPL" | "ELC" | "BSA";
+
+// 目前「正在跑、值得展示」的競賽(rate-limit 紀律 · 隨季節擴充:8 月歐洲開季再加 PL/PD/...)。
+export const ACTIVE_COMPETITIONS = ACTIVE_COMPETITIONS_CORE as SoccerCompetitionCode[];
 
 type FdTeam = { name?: string; shortName?: string; tla?: string };
 type FdMatch = {
@@ -60,19 +61,17 @@ type FdMatch = {
   score?: { fullTime?: { home?: number | null; away?: number | null } };
 };
 
-function teamName(t: FdTeam | undefined): string {
-  return t?.shortName || t?.tla || t?.name || "?";
-}
-
 // 顯示名:國家隊→中文(對齊台灣運彩)· 俱樂部→中文(盡力版)· 都查不到 fallback 英文。
-// 國家隊用 full name 查(較規範)· 俱樂部用 shortName/full name 查。
 function displayName(t: FdTeam | undefined): string {
   if (!t) return "?";
   return (
     getNationalZh(t.name ?? "") ??
     getClubZh(t.shortName ?? "") ??
     getClubZh(t.name ?? "") ??
-    teamName(t)
+    t.shortName ??
+    t.tla ??
+    t.name ??
+    "?"
   );
 }
 
@@ -80,11 +79,12 @@ function getToken(): string {
   return process.env.FOOTBALL_DATA_API_TOKEN ?? "";
 }
 
+// 未開踢的賽程要同時抓 SCHEDULED + TIMED:時間一旦確定,football-data 會把 status 從
+// SCHEDULED 翻成 TIMED(世界盃 6/08 全部已是 TIMED)→ 只抓 SCHEDULED 會整個聯賽看不到。
+const UPCOMING_STATUS = "SCHEDULED,TIMED";
+
 /** 抓某競賽某狀態的比賽 · 空陣列 on 缺 token / 錯誤(graceful · ISR 快取)。 */
-async function fetchMatches(
-  code: string,
-  status: "FINISHED" | "SCHEDULED",
-): Promise<FdMatch[]> {
+async function fetchMatches(code: string, status: string): Promise<FdMatch[]> {
   const token = getToken();
   if (!token) return [];
   try {
@@ -114,9 +114,9 @@ export type SoccerResult = {
   kickoffISO: string;
 };
 
-/** ACTIVE_COMPETITIONS 已結束的比賽結果(公開)· 給賽後對帳。 缺 token / 錯 → 空陣列。
- *  速率:fetchMatches 有 revalidate 快取 · 且 FINISHED 多與 getCompetitionPredictions
- *  俱樂部路徑同 URL → Next dedupe · 不額外爆 10/min。 */
+/** ACTIVE_COMPETITIONS 已結束的比賽結果(公開 · live 窗)· 給賽後對帳。 缺 token / 錯 → 空陣列。
+ *  ⚠️ 這是「live 窗」(API 只回近期)→ 舊場會掉出 → 個人帳本請改用 getSoccerLedgerResults
+ *  (疊上永久鎖定結果 getSoccerFinalizedResults · 永久者勝 · 不縮水)。 */
 export async function getRecentSoccerResults(): Promise<SoccerResult[]> {
   const out: SoccerResult[] = [];
   for (const code of ACTIVE_COMPETITIONS) {
@@ -151,98 +151,74 @@ export type SoccerMatchPrediction = {
   awaySeed: string;
   /** null = 覆蓋建置中(其中一隊戰績不足 · 不硬開假盤) */
   prediction: SoccerPrediction | null;
+  /** 此場的引擎開盤是否已「賽前鎖定」(true = 顯示的是鎖定線,改不了) */
+  locked: boolean;
 };
 
 /**
- * 一個競賽的未來賽程 + 我們引擎的開盤。
- *  - 俱樂部聯賽:自建 Elo(從本季已結束比賽算)· 戰績不足的隊 prediction=null(覆蓋建置中)。
- *  - 國家隊賽事(世界盃/歐國盃):該競賽內無歷史戰績可算 → 用 teams.ts 國際排名 seed
- *    (查不到的隊 fallback baseline · 中立場 homeAdvantage 0)。
- * 缺 token / 0 比賽 → 空陣列(graceful)。
+ * 一個競賽的未來賽程 + 我們引擎的開盤(走共用 predict-core · 與賽前鎖定 script 同源)。
+ * 已鎖定的場顯示「賽前鎖定線」(用鎖定實力分重現 predictSoccer · 同賽後對帳數字);
+ * 未鎖的場走 live 重算。 缺 token / 0 比賽 → 空陣列(graceful)。
  */
 export async function getCompetitionPredictions(
   code: SoccerCompetitionCode,
 ): Promise<SoccerMatchPrediction[]> {
   const comp = SOCCER_COMPETITIONS.find((c) => c.code === code);
-  const compName = comp?.name ?? code;
+  if (!comp) return [];
+  const compName = comp.name;
 
-  const scheduled = await fetchMatches(code, "SCHEDULED");
+  const scheduledRaw = await fetchMatches(code, UPCOMING_STATUS);
+  // 國家隊賽事內沒有歷史戰績可算 Elo → 不抓 FINISHED(走 teams seed)。 俱樂部才抓。
+  const finishedRaw = comp.isNationalTeam ? [] : await fetchMatches(code, "FINISHED");
 
-  // ── 國家隊賽事:seed 實力分(賽事內沒戰績可算 Elo)──
-  if (comp?.isNationalTeam) {
-    return scheduled.map((m) => {
-      const homeSeed = teamName(m.homeTeam);
-      const awaySeed = teamName(m.awayTeam);
-      const rawH = getRatingByName(m.homeTeam?.name ?? homeSeed);
-      const rawA = getRatingByName(m.awayTeam?.name ?? awaySeed);
-      // WC 地主(美/墨/加)在自己國家踢 = 真主場 → 給保守主場優勢;其餘國際賽中立 0。
-      const homeNameLc = (m.homeTeam?.name ?? "").toLowerCase();
-      const isHost =
-        code === "WC" &&
-        (homeNameLc === "united states" ||
-          homeNameLc === "mexico" ||
-          homeNameLc === "canada");
-      // 兩隊都查不到實力分(都掉 baseline)→ 不硬開 ~33/33/33 假盤 · 標覆蓋建置中
-      // (同俱樂部誠實態:賭場什麼都敢開,我們只開算得出的)。 只一隊缺 → 照算(有訊號)。
-      const prediction =
-        rawH === null && rawA === null
-          ? null
-          : predictSoccer(
-              rawH ?? SOCCER_RATING_BASELINE,
-              rawA ?? SOCCER_RATING_BASELINE,
-              { homeAdvantage: isHost ? 35 : 0 },
-            );
-      return {
-        id: `fd-${m.id ?? `${homeSeed}-${awaySeed}`}`,
-        competitionCode: code,
-        competitionName: compName,
-        dateISO: m.utcDate ?? "",
-        home: displayName(m.homeTeam),
-        away: displayName(m.awayTeam),
-        homeSeed,
-        awaySeed,
-        prediction,
-      };
-    });
-  }
+  const scheduledInputs = scheduledRaw.map(toScheduledInput);
+  const finishedResults = finishedRaw
+    .map(toResultInput)
+    .filter((r): r is NonNullable<typeof r> => r !== null);
 
-  // ── 俱樂部聯賽:自建 Elo(從本季已結束比賽算)──
-  const finished = await fetchMatches(code, "FINISHED");
-  const results = finished
-    .map((m) => ({
-      home: teamName(m.homeTeam),
-      away: teamName(m.awayTeam),
-      homeGoals: m.score?.fullTime?.home,
-      awayGoals: m.score?.fullTime?.away,
-    }))
-    .filter(
-      (r): r is { home: string; away: string; homeGoals: number; awayGoals: number } =>
-        typeof r.homeGoals === "number" && typeof r.awayGoals === "number",
-    );
+  const core = computeCompetitionPredictions(
+    { code: comp.code, isNationalTeam: comp.isNationalTeam },
+    finishedResults,
+    scheduledInputs,
+  );
 
-  const ratings = buildRatings(results);
-  const counts = gameCounts(results);
+  const lockedById = getLockedSoccerById();
 
-  return scheduled.map((m) => {
-    const homeSeed = teamName(m.homeTeam);
-    const awaySeed = teamName(m.awayTeam);
-    const enough =
-      (counts[homeSeed] ?? 0) >= MIN_GAMES_FOR_RATING &&
-      (counts[awaySeed] ?? 0) >= MIN_GAMES_FOR_RATING;
+  // core 與 scheduledRaw 一一對應(同序、同長)→ index 取原始隊物件補中文顯示名。
+  return core.map((c, i) => {
+    const raw = scheduledRaw[i];
+    const locked = lockedById.get(c.id);
+    // 已鎖定 → 用鎖定的實力分重現 predictSoccer(顯示=賽後對帳同一個數字)。
+    const prediction = locked
+      ? predictSoccer(locked.ratingHome, locked.ratingAway, {
+          homeAdvantage: locked.homeAdvantage,
+        })
+      : c.prediction;
     return {
-      id: `fd-${m.id ?? `${homeSeed}-${awaySeed}`}`,
+      id: c.id,
       competitionCode: code,
       competitionName: compName,
-      dateISO: m.utcDate ?? "",
-      home: displayName(m.homeTeam),
-      away: displayName(m.awayTeam),
-      homeSeed,
-      awaySeed,
-      prediction: enough
-        ? predictSoccer(getRating(ratings, homeSeed), getRating(ratings, awaySeed), {
-            homeAdvantage: 60,
-          })
-        : null,
+      dateISO: c.dateISO,
+      home: displayName(raw?.homeTeam),
+      away: displayName(raw?.awayTeam),
+      homeSeed: c.homeSeed,
+      awaySeed: c.awaySeed,
+      prediction,
+      locked: Boolean(locked),
     };
   });
+}
+
+/**
+ * 個人帳本用的「結果來源」:永久鎖定結果(getSoccerFinalizedResults · settled 永不掉)
+ * 疊在 live 窗(getRecentSoccerResults)之上,key 撞 → 永久者勝。 修「賽事掉出 live 窗 →
+ * 已結算押注變回 pending → 帳本縮水」的命門(同 MLB 永久結果修復)。
+ */
+export async function getSoccerLedgerResults(): Promise<SoccerResult[]> {
+  const live = await getRecentSoccerResults();
+  const permanent = getSoccerFinalizedResults();
+  const byId = new Map<string, SoccerResult>();
+  for (const r of live) byId.set(r.matchId, r);
+  for (const r of permanent) byId.set(r.matchId, r); // 永久者勝
+  return [...byId.values()];
 }

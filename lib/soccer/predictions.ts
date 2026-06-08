@@ -138,20 +138,38 @@ export type SoccerRecord = {
   rate: number | null;
   /** 還沒結算(比賽還沒打完 / 結果還沒回來) */
   pending: number;
+  // ── 你 vs 引擎(同一批已結算、且引擎當初有鎖定線的場 · apples-to-apples)──
+  /** 對照子集場數(你押的、已結算、且有鎖定引擎線的場) */
+  vsN: number;
+  /** 你在對照子集的命中數 */
+  vsYouHits: number;
+  /** 引擎在同一子集的命中數 */
+  vsEngineHits: number;
+  /** 你在子集命中率 0-100 · null 當 vsN=0 */
+  vsYouRate: number | null;
+  /** 引擎在子集命中率 0-100 · null 當 vsN=0 */
+  vsEngineRate: number | null;
 };
 
 /**
  * 三向對帳(主勝/和/客勝)· **先鎖後結**:開賽後才下的不計入(同棒球 isLatePick)。
  * results:{ [matchId]: { outcome, kickoffISO } }。 純函式 deterministic。
  * 🔴 含輸:✕ 跟 ✓ 一樣進分母 · 不藏(品牌命門)。
+ *
+ * enginePicks(選填):matchId → 引擎當初鎖定的看好邊。 給「你 vs 引擎」同場對照
+ * (只比兩邊都有的場 = 公平)· 沒傳 → vs* 全 0/null。
  */
 export function gradeSoccerPicks(
   picks: SoccerPickRow[],
   results: Record<string, { outcome: SoccerPick; kickoffISO: string }>,
+  enginePicks: Record<string, SoccerPick> = {},
 ): SoccerRecord {
   let n = 0;
   let hits = 0;
   let pending = 0;
+  let vsN = 0;
+  let vsYouHits = 0;
+  let vsEngineHits = 0;
   for (const p of picks) {
     const r = results[p.matchId];
     if (!r) {
@@ -163,7 +181,15 @@ export function gradeSoccerPicks(
     const k = Date.parse(r.kickoffISO);
     if (!Number.isNaN(t) && !Number.isNaN(k) && t >= k) continue;
     n += 1;
-    if (p.pick === r.outcome) hits += 1;
+    const youHit = p.pick === r.outcome;
+    if (youHit) hits += 1;
+    // 你 vs 引擎:只在「引擎當初也有鎖定線」的同一場比(公平對照)。
+    const ePick = enginePicks[p.matchId];
+    if (ePick === "home" || ePick === "draw" || ePick === "away") {
+      vsN += 1;
+      if (youHit) vsYouHits += 1;
+      if (ePick === r.outcome) vsEngineHits += 1;
+    }
   }
   return {
     n,
@@ -171,6 +197,11 @@ export function gradeSoccerPicks(
     misses: n - hits,
     rate: n > 0 ? Math.round((hits / n) * 100) : null,
     pending,
+    vsN,
+    vsYouHits,
+    vsEngineHits,
+    vsYouRate: vsN > 0 ? Math.round((vsYouHits / vsN) * 100) : null,
+    vsEngineRate: vsN > 0 ? Math.round((vsEngineHits / vsN) * 100) : null,
   };
 }
 

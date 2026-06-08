@@ -14,7 +14,10 @@
     "validate:data": "node scripts/validate-match-data.mjs",
     "validate:data:warn": "node scripts/validate-match-data.mjs --warn",
     "lock:mlb": "node scripts/lock-mlb-predictions.mjs",
-    "grade:mlb": "node scripts/grade-mlb-locked.mjs"
+    "grade:mlb": "node scripts/grade-mlb-locked.mjs",
+    "lock:soccer": "node scripts/lock-soccer-predictions.mjs",
+    "grade:soccer": "node scripts/grade-soccer-locked.mjs",
+    "verify:soccer-core": "node scripts/verify-soccer-core.mjs"
   },
   "dependencies": {
     "@supabase/ssr": "^0.10.3",

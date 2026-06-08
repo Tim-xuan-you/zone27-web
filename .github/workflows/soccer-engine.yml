@@ -1,0 +1,55 @@
+name: Soccer Engine · lock + grade
+
+# ZONE 27 · 足球引擎自動盤 pipeline(鏡 mlb-engine.yml)。
+#   · lock-soccer-predictions.mjs → 把還沒開踢的場的引擎開盤線「賽前鎖定」進 lib/soccer-locked.json
+#                                   (commit = 公開的賽前鎖定證據)
+#   · grade-soccer-locked.mjs     → 把踢完的場對「鎖定的那組三向機率」評 proved / diverged
+# 每 3 小時跑一次(賽程一確定就鎖、賽事一結束就結算)· 純 football-data.org 中立公開賽程/比分 ·
+# 絕不抓盤口 · 0 付費。 手動也可在 Actions 頁按 "Run workflow"。
+#
+# ⚠️ 需 repo secret FOOTBALL_DATA_API_TOKEN(= 已在 Vercel env 的那把免費 football-data.org token)。
+#    沒設前 lock/grade 會 graceful exit 0(no-op)→ 先 ship workflow 不會壞。
+
+on:
+  schedule:
+    - cron: "0 */3 * * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+# 同一時間只跑一個,避免兩個 cron 撞在一起推 commit
+concurrency:
+  group: soccer-engine
+  cancel-in-progress: false
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Lock pre-kickoff soccer predictions
+        run: node scripts/lock-soccer-predictions.mjs
+        env:
+          FOOTBALL_DATA_API_TOKEN: ${{ secrets.FOOTBALL_DATA_API_TOKEN }}
+      - name: Grade finished soccer predictions
+        run: node scripts/grade-soccer-locked.mjs
+        env:
+          FOOTBALL_DATA_API_TOKEN: ${{ secrets.FOOTBALL_DATA_API_TOKEN }}
+      - name: Commit if changed
+        run: |
+          git config user.name "zone27-soccer-bot"
+          git config user.email "noreply@anthropic.com"
+          git add lib/soccer-locked.json
+          if git diff --staged --quiet; then
+            echo "no soccer changes this run"
+          else
+            git commit -m "足球引擎自動盤:賽前鎖定 + 賽後結算(GitHub Action)
+
+          Co-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>"
+            git pull --rebase --autostash origin "${GITHUB_REF_NAME}" || true
+            git push
+          fi

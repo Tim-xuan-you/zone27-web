@@ -14,6 +14,14 @@
 
 ## ⏳ 仍 pending Tim 親手動作
 
+### ⏳ GitHub repo secret `FOOTBALL_DATA_API_TOKEN`(TIER-1 免費 · 解鎖足球引擎自動鎖定/結算)
+2026-06-08:足球「你 vs 引擎」賽前鎖定 + 賽後對帳系統上線(鏡 MLB)。 GitHub Action
+`.github/workflows/soccer-engine.yml` 每 3h 自動鎖未開踢的場 + 結算踢完的場 → 寫 `lib/soccer-locked.json`。
+**需要那把已經在 Vercel env 的 football-data.org 免費 token 也加到 GitHub repo secret**,Action 才跑得起來:
+GitHub repo → Settings → Secrets and variables → Actions → New repository secret →
+Name `FOOTBALL_DATA_API_TOKEN` · Value = 同一把 token。 沒設前 Action 會 graceful no-op(不會壞)·
+站上已先 commit 11 場世界盃開幕戰的鎖定線(手動實跑鎖的 · 誠實賽前)→ 引擎公開戰績卡已會顯示。
+
 ### ✅ migration 0017 — 已套(2026-06-05 · R201 · 後台審核看全文 + 留痕刪除)
 Tim「審核看不到付費全文怎麼判斷該不該刪 + 後台門禁 + 大公司怎麼做」→ 核實門禁早已穩(0011
 is_admin gate)· 補:admin_view_content(看完整內文含付費 body · admin override 付費牆)+ admin_audit

@@ -3,13 +3,15 @@ import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import SoccerMatchCard from "@/components/SoccerMatchCard";
 import SoccerRecordCard from "@/components/SoccerRecordCard";
+import SoccerEngineRecord from "@/components/SoccerEngineRecord";
 import { createPageMetadata } from "@/lib/page-og";
 import {
   ACTIVE_COMPETITIONS,
   getCompetitionPredictions,
-  getRecentSoccerResults,
+  getSoccerLedgerResults,
   type SoccerMatchPrediction,
 } from "@/lib/soccer/football-data";
+import { getSoccerEnginePicks } from "@/lib/soccer/locked";
 
 export const metadata = createPageMetadata({
   title: "足球 · 引擎開盤",
@@ -39,8 +41,10 @@ export default async function SoccerPage() {
   );
   const nonEmpty = groups.filter((g) => g.matches.length > 0);
   const total = nonEmpty.reduce((s, g) => s + g.matches.length, 0);
-  // 賽後結果(公開 · ISR)· 給「你的足球戰績」client 卡對帳本人押注。
-  const soccerResults = await getRecentSoccerResults();
+  // 賽後結果(永久鎖定結果 ∪ live 公開 · 永久者勝 = 帳本不縮水)· 給「你的足球戰績」對帳。
+  const soccerResults = await getSoccerLedgerResults();
+  // 引擎當初鎖定的看好邊 · 給「你 vs 引擎」同場對照。
+  const enginePicks = getSoccerEnginePicks();
 
   return (
     <div className="flex flex-col flex-1 min-h-screen">
@@ -71,9 +75,10 @@ export default async function SoccerPage() {
           <div className="mt-6 w-full h-px bg-line/60" />
         </section>
 
-        {/* 你的足球戰績(含輸 · 登入且押過才出現 · client 端對帳不破 ISR)*/}
+        {/* 你的足球戰績(含輸 · 登入且押過才出現 · client 端對帳不破 ISR · 含你 vs 引擎)*/}
         <SoccerRecordCard
           results={soccerResults}
+          enginePicks={enginePicks}
           wrapperClass="mx-auto max-w-6xl w-full px-6 sm:px-10 pb-8"
         />
 
@@ -127,6 +132,9 @@ export default async function SoccerPage() {
             </div>
           )}
         </section>
+
+        {/* 公開引擎戰績(賽前鎖定 · 賽後對帳 · 含輸照掛 · 三向)· 滿 30 場才報數字 */}
+        <SoccerEngineRecord />
       </main>
 
       <Footer />
