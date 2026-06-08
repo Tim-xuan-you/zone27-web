@@ -624,7 +624,7 @@ function PhaseBadgeLg({
       <span
         className="font-mono text-[9px] tracking-[0.3em] px-1.5 py-0.5 border border-gold text-gold ml-1 shimmer"
       >
-        TODAY · 今晚開賽
+        TODAY · 即將開賽
       </span>
     );
   }

@@ -119,7 +119,7 @@ export default function OpenPositionCard({
             </span>
           ) : phase === "today-pregame" ? (
             <span className="font-mono text-[9px] tracking-[0.28em] border border-gold/50 text-gold px-1.5 py-0.5 tabular">
-              今晚 {startTime} 開打
+              今日 {startTime} 開打
             </span>
           ) : (
             <span className="font-mono text-[9px] tracking-[0.28em] border border-mute/50 text-mute px-1.5 py-0.5 tabular">

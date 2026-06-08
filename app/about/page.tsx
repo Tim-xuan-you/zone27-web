@@ -57,7 +57,7 @@ export default function AboutPage() {
             有<span className="text-gold">帳本</span>的玩運彩。
           </h1>
           <p className="mt-6 max-w-xl mx-auto text-mute text-base sm:text-lg leading-relaxed">
-            免費引擎告訴你今晚誰會贏。 押了、贏了、輸了 ——
+            免費引擎告訴你接下來誰會贏。 押了、贏了、輸了 ——
             <span className="text-bone"> 全部攤開,刪不掉。</span>
           </p>
         </section>
@@ -171,7 +171,7 @@ export default function AboutPage() {
               href="/"
               className="inline-flex items-center gap-2 bg-gold text-navy font-mono text-xs tracking-[0.25em] px-7 py-3.5 hover:bg-gold-soft transition-colors"
             >
-              看今晚誰會贏 →
+              看接下來誰會贏 →
             </Link>
             <Link
               href="/track-record"

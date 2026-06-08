@@ -217,7 +217,7 @@ export default function UserPredictionPicker({
           href="/matches"
           className="mt-3 block text-center font-mono text-gold/80 hover:text-gold text-[10px] tracking-[0.2em] underline-offset-4 hover:underline transition-colors"
         >
-          {finalWinner ? "去押下一場 →" : "押下一場 · 看今晚其他賽事 →"}
+          {finalWinner ? "去押下一場 →" : "押下一場 · 看其他賽事 →"}
         </Link>
       )}
 

@@ -116,10 +116,10 @@ export default function WaitlistForm({
                 lang="en"
                 className="font-mono text-mute text-[9px] tracking-[0.3em] mb-1"
               >
-                / TONIGHT
+                / UPCOMING
               </p>
               <p className="text-bone text-sm leading-snug group-hover:text-gold transition-colors">
-                看今晚的引擎開盤線 →
+                看接下來的引擎開盤線 →
               </p>
               <p className="font-mono text-mute text-[10px] tracking-[0.2em] mt-1">
                 每場賽前鎖定 · 賽後對賬 · 中沒中都掛

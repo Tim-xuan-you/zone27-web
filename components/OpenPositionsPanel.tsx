@@ -28,7 +28,7 @@ function StatusTag({ p }: { p: OpenPosition }) {
   if (p.phase === "today-pregame") {
     return (
       <span className="shrink-0 font-mono text-[9px] tracking-[0.22em] border border-gold/50 text-gold px-1.5 py-0.5 tabular">
-        今晚 {p.startTime}
+        今日 {p.startTime}
       </span>
     );
   }
@@ -96,7 +96,7 @@ export default function OpenPositionsPanel({
   const future = positions.filter((p) => p.phase === "future").length;
   const parts: string[] = [];
   if (live > 0) parts.push(`${live} 進行中`);
-  if (tonight > 0) parts.push(`${tonight} 今晚`);
+  if (tonight > 0) parts.push(`${tonight} 今日待開`);
   if (future > 0) parts.push(`${future} 等待`);
 
   return (

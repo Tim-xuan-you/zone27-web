@@ -133,10 +133,10 @@ export default function Nav({ active }: { active?: NavKey }) {
                   {item.label}
                   {showTonightChip && (
                     <span
-                      aria-label={`今晚 ${tonightCount} 場 CPBL 賽事 prediction 可看`}
+                      aria-label={`今日 ${tonightCount} 場 CPBL 賽事 prediction 可看`}
                       className="px-1 py-px text-[8px] tracking-[0.15em] border border-mute/40 text-mute tabular"
                     >
-                      今晚 {tonightCount}
+                      今日 {tonightCount}
                     </span>
                   )}
                   {item.badge && (
@@ -210,7 +210,7 @@ export default function Nav({ active }: { active?: NavKey }) {
                     {item.label}
                     {showTonightChip && (
                       <span
-                        aria-label={`今晚 ${tonightCount} 場 CPBL 賽事 prediction 可看`}
+                        aria-label={`今日 ${tonightCount} 場 CPBL 賽事 prediction 可看`}
                         className="px-1 py-px text-[8px] tracking-[0.15em] border border-gold/40 text-gold tabular"
                       >
                         {tonightCount}

@@ -19,12 +19,12 @@ import { getMlbAsMatches } from "@/lib/mlb-matches";
 import { getCreatorPostCounts } from "@/lib/creator-posts-server";
 
 export const metadata = createPageMetadata({
-  title: "今日 CPBL 賽事板",
+  title: "今日賽事板 · CPBL + MLB",
   description:
-    "今日中華職棒比賽列表 · AI 勝率模型每天 15:00 鎖定 · 點進任一場看引擎開盤線 + 完整 10,000 次模擬與重播 · 不接受下注。",
-  ogTitle: "今日 CPBL 賽事板 · ZONE 27",
+    "今日中職 + MLB 比賽列表 · AI 勝率模型賽前鎖定開盤線 · 點進任一場看引擎開盤線 + 完整模擬與重播 · 不接受下注。",
+  ogTitle: "今日賽事板 · CPBL + MLB · ZONE 27",
   ogDescription:
-    "今日 CPBL 比賽列表 · 勝率模型 15:00 鎖定 · 10,000 次模擬 · 引擎開盤線 · 不接受下注",
+    "今日中職 + MLB 比賽列表 · 勝率模型賽前鎖定 · 引擎開盤線 · 不接受下注",
   path: "/matches",
 });
 
@@ -219,9 +219,9 @@ function PhaseChip({
     return (
       <span
         className={`font-mono ${baseSize} border border-gold text-gold shimmer`}
-        title="今晚開賽 · 預測已公開鎖定"
+        title="今日即將開賽 · 預測已公開鎖定"
       >
-        TODAY · 今晚開賽
+        TODAY · 即將開賽
       </span>
     );
   }

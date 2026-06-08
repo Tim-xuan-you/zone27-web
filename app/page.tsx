@@ -133,7 +133,7 @@ export default async function Home() {
               href="#floor"
               className="inline-flex items-center gap-2 bg-gold text-navy font-mono text-xs sm:text-sm tracking-[0.25em] px-6 py-3 hover:bg-gold-soft transition-colors"
             >
-              {allUpcoming.length > 0 ? "↓ 看今晚誰會贏" : "↓ 看引擎最近戰績"}
+              {allUpcoming.length > 0 ? "↓ 看接下來誰會贏" : "↓ 看引擎最近戰績"}
             </a>
           </div>
           {/* 校準遊戲 = 安靜次要文字鏈(降為次要 · 不跟主金鈕搶)· 仍是最強 0-登入 hook:
@@ -161,7 +161,7 @@ export default async function Home() {
               className="font-mono text-gold text-[10px] sm:text-[11px] tracking-[0.45em]"
             >
               {allUpcoming.length > 0
-                ? "/ 今晚精選"
+                ? "/ 接下來精選"
                 : "/ 引擎最近戰績 · 賽後收據"}
             </p>
             <Link
@@ -169,7 +169,7 @@ export default async function Home() {
               className="font-mono text-mute/70 hover:text-gold text-[10px] tracking-[0.3em] transition-colors"
             >
               {allUpcoming.length > 0
-                ? `今晚全部 ${allUpcoming.length} 場 →`
+                ? `接下來全部 ${allUpcoming.length} 場 →`
                 : "完整戰績 →"}
             </Link>
           </div>
@@ -384,7 +384,7 @@ function EmptyFloor() {
   return (
     <div className="bg-slate/40 border border-line/60 p-8 sm:p-10 text-center">
       <p className="text-bone text-base sm:text-lg font-light tracking-tight mb-2">
-        今晚沒有排定的賽事
+        目前沒有排定的賽事
       </p>
       <p className="text-mute text-sm max-w-md mx-auto leading-relaxed mb-6">
         休賽日。 往下看引擎最近的公開戰績 · 或自己跑一場模擬。

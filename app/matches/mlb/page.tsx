@@ -61,7 +61,7 @@ export default async function MlbMatchesPage() {
       <section className="mx-auto max-w-6xl w-full px-6 sm:px-10 pt-16 pb-10">
         <div className="flex items-baseline gap-3 mb-3 flex-wrap">
           <p className="font-mono text-gold/70 text-[10px] tracking-[0.4em]">
-            MLB 賽事板 · 進行中 / 今晚 / 最近
+            MLB 賽事板 · 進行中 / 即將 / 最近
           </p>
           {/* R201:live/即時 badge 從綠框(border-win/text-win)改金色 —— 守「不紅綠對比」
               品牌鐵律 · 同 MiniMatchCard 的 LIVE 徽章(border-gold text-gold shimmer)一致。 */}

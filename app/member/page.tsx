@@ -34,7 +34,7 @@ import { createHash } from "crypto";
 
 export const metadata: Metadata = {
   title: "你的儀表板",
-  description: "你的準度 · 你 vs 引擎 · 今晚可以押的賽事。終身免費。",
+  description: "你的準度 · 你 vs 引擎 · 接下來可以押的賽事。終身免費。",
 };
 
 // ── ZONE 27 · /member · 會員自己的儀表板 ─────────────────

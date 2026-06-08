@@ -58,7 +58,7 @@ export default function AuditPage() {
   const finalizedCount = getFinalizedMatches().length;
   const sampleSize =
     finalizedCount === 0
-      ? `n = 0 · ${ingestedCount} ingested · 第一筆收錄今晚`
+      ? `n = 0 · ${ingestedCount} ingested · 等第一筆收錄`
       : `n = ${finalizedCount} · ${ingestedCount} ingested · CPBL 2026-05-21 起`;
 
   return (
