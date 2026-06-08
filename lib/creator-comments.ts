@@ -16,6 +16,9 @@ export type CreatorComment = {
   isAuthor: boolean; // 回覆者是否為原分析作者 → UI 標「作者」
   body: string;
   createdAt: string; // ISO
+  // 本場持倉(migration 0020 · 舊 RPC → false/null)· costly signal:這位在本場有沒有鎖死的押注。
+  hasPosition: boolean; // 留言者對「該分析掛的同一場」有沒有押注 → UI 標「本場已押」
+  positionPick: "home" | "away" | "draw" | null; // 押了哪邊(棒球 home/away · 足球加 draw · 沒押 null)
 };
 
 /** 一篇分析的回覆串(anon 可讀)· 舊到新 · 空陣列 on any error/未套用。 */
@@ -36,7 +39,15 @@ export async function getCreatorComments(postId: string): Promise<CreatorComment
           is_author?: unknown;
           body?: unknown;
           created_at?: unknown;
+          has_position?: unknown;
+          position_pick?: unknown;
         };
+        const pick: "home" | "away" | "draw" | null =
+          r.position_pick === "home" ||
+          r.position_pick === "away" ||
+          r.position_pick === "draw"
+            ? r.position_pick
+            : null;
         return {
           handle: typeof r.handle === "string" ? r.handle : "球迷",
           // 0015 未套用的舊 RPC 無這兩欄 → ""(creatorIdentity fallback 用 handle)
@@ -45,6 +56,9 @@ export async function getCreatorComments(postId: string): Promise<CreatorComment
           isAuthor: r.is_author === true,
           body: typeof r.body === "string" ? r.body : "",
           createdAt: typeof r.created_at === "string" ? r.created_at : "",
+          // 0020 未套用的舊 RPC 無這兩欄 → false/null(徽章不顯示 · graceful)
+          hasPosition: r.has_position === true,
+          positionPick: pick,
         };
       })
       .filter((c) => c.body.length > 0);

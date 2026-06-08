@@ -582,7 +582,12 @@ function PostCard({
 
       {/* 回覆串 · 分析下的對話層(讀者↔作者 · 買家↔賣家)· 預測仍鎖死一場一篇,
           回覆無上限不評分 = 拿到互動、不丟問責 · per Tim R185 dogfood · migration 0010 */}
-      <CommentThread postId={p.postId} loggedIn={loggedIn} />
+      <CommentThread
+        postId={p.postId}
+        loggedIn={loggedIn}
+        homeName={homeName}
+        awayName={awayName}
+      />
     </article>
   );
 }
@@ -606,12 +611,28 @@ function renderCommentBody(body: string) {
 // flat thread(不深層巢狀 · 乾淨)· 折疊預設(subtraction-first · 點開才載入)·
 // 登入可回覆 · 作者本人的回覆標「作者」(解 Tim「賣家回覆買家」)。 GRACEFUL:
 // 0010 未套用 → 空串 + 送出回「開通中」· 不 crash。 預測一場一篇不動,這只是對話。
+// 留言者本場持倉的「押了哪邊」白話標籤(棒球 home/away · 足球 draw=和局 · 沒押→空)。
+function positionSideLabel(
+  pick: "home" | "away" | "draw" | null,
+  homeName: string,
+  awayName: string,
+): string {
+  if (pick === "home") return homeName.slice(0, 5);
+  if (pick === "away") return awayName.slice(0, 5);
+  if (pick === "draw") return "和局";
+  return "";
+}
+
 function CommentThread({
   postId,
   loggedIn,
+  homeName,
+  awayName,
 }: {
   postId: string;
   loggedIn: boolean;
+  homeName: string;
+  awayName: string;
 }) {
   const [open, setOpen] = useState(false);
   const [loaded, setLoaded] = useState(false);
@@ -688,19 +709,53 @@ function CommentThread({
             return (
             <div key={i} className="border-l-2 border-line/40 pl-3">
               <p className="flex items-center gap-2 flex-wrap">
-                <Avatar seed={cid.seed} glyph={cid.glyph} size={20} />
-                <span className="font-mono text-bone/90 text-[10px] tracking-[0.15em]">
-                  {cid.label}
-                </span>
-                {/* 永久碼章 · 改名洗不掉(留言者也認得出同一人) */}
-                {cid.code && (
-                  <span className="font-mono text-mute/45 text-[8px] tracking-[0.12em]">
-                    {cid.code}
-                  </span>
+                {/* 留言者身分連到公開含輸檔案 /u/[code](永久碼)= 一鍵驗證「他到底多準·含輸」·
+                    跟分析作者同一條迴路(報馬仔換馬甲也賴不掉)。 舊 RPC 無永久碼 → 不連(graceful)。 */}
+                {isProfileCode(cid.key) ? (
+                  <Link
+                    href={`/u/${cid.key}`}
+                    title="看這位的公開含輸戰績"
+                    className="flex items-center gap-2 hover:opacity-80 transition-opacity"
+                  >
+                    <Avatar seed={cid.seed} glyph={cid.glyph} size={20} />
+                    <span className="font-mono text-bone/90 text-[10px] tracking-[0.15em]">
+                      {cid.label}
+                    </span>
+                    {cid.code && (
+                      <span className="font-mono text-mute/45 text-[8px] tracking-[0.12em]">
+                        {cid.code}
+                      </span>
+                    )}
+                  </Link>
+                ) : (
+                  <>
+                    <Avatar seed={cid.seed} glyph={cid.glyph} size={20} />
+                    <span className="font-mono text-bone/90 text-[10px] tracking-[0.15em]">
+                      {cid.label}
+                    </span>
+                    {/* 永久碼章 · 改名洗不掉(留言者也認得出同一人) */}
+                    {cid.code && (
+                      <span className="font-mono text-mute/45 text-[8px] tracking-[0.12em]">
+                        {cid.code}
+                      </span>
+                    )}
+                  </>
                 )}
                 {c.isAuthor && (
                   <span className="font-mono text-gold/90 text-[8px] tracking-[0.2em] px-1 py-0.5 border border-gold/40">
                     作者
+                  </span>
+                )}
+                {/* 本場持倉徽章 · costly signal(有帳本 vs 嘴砲)· migration 0020 ·
+                    這位在本場有鎖死的一注 = 不是嘴砲;沒押則不標(留白本身就是訊號)。 */}
+                {c.hasPosition && (
+                  <span
+                    title="這位在本場有一注鎖死的押注(押了不能改 · 賽後當眾對帳)· 點頭像看他含輸的公開戰績"
+                    className="inline-flex items-center font-mono text-gold/85 text-[8px] tracking-[0.18em] px-1 py-0.5 border border-gold/40 bg-gold/5 whitespace-nowrap"
+                  >
+                    ✓ 本場已押
+                    {positionSideLabel(c.positionPick, homeName, awayName) &&
+                      ` · ${positionSideLabel(c.positionPick, homeName, awayName)}`}
                   </span>
                 )}
               </p>

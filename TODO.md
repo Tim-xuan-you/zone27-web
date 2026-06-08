@@ -33,6 +33,24 @@
 ⚠ 我這端驗到:三綠(tsc / build / dev render 5 情境 + 手機 + OG 收據卡 + 沒套 RPC 時 graceful 404)。
 活體(真資料)要等你套完 0019 + 用你的 dogfood 帳號登入才看得到實際數字。
 
+### ⏳ migration 0020 — 留言者「本場已押」徽章(貼一次 SQL · 解鎖 costly signal)
+2026-06-08 · R206:分析底下的留言串,現在每個留言者只是一行字 = 跟報馬仔/玩運彩那種
+匿名嘴砲沒兩樣。 這支讓系統標出「這個留言者**在本場**自己也鎖了一注」——
+有帳本的人 vs 只動嘴的人,讀者一眼分得出來。 沒押的就不標(留白本身就是訊號)。
+
+**已經先上線、不用等你的部分(Layer A):** 每個留言者的頭像/名字現在都**連到他的公開
+含輸戰績頁 `/u/{他的碼}`**(本來只有分析作者有連)· 點下去就能驗證「他到底多準·含輸」。
+這塊是純前端、已 ship。
+
+**你要做的(一次 · 解鎖徽章 Layer B):** 打開 Supabase → SQL Editor → 貼整支
+`supabase/migrations/0020_commenter_position.sql` → Run(出現 Success 就好)。
+沒套之前留言照常顯示、只是不會出現「✓ 本場已押」徽章(graceful · 不會壞)· 套完就活。
+
+**套完怎麼驗:** 用 dogfood 帳號 → 在某場先押一注(/matches/該場)→ 到同一場某篇分析下面留言
+→ 你那則留言旁邊會出現金色「✓ 本場已押 · {你押的隊}」。 換一個沒押那場的帳號留言 → 不會有徽章。
+⚠ 我這端驗到:三綠(tsc / build / dev render · CreatorAnalysis 掛載 0 console 錯誤 + 沒套 0020 時
+graceful 不顯示徽章)· 活體(真徽章)要等你套完 0020 + dogfood 押注+留言才看得到。
+
 ### ⏳ GitHub repo secret `FOOTBALL_DATA_API_TOKEN`(TIER-1 免費 · 解鎖足球引擎自動鎖定/結算)
 2026-06-08:足球「你 vs 引擎」賽前鎖定 + 賽後對帳系統上線(鏡 MLB)。 GitHub Action
 `.github/workflows/soccer-engine.yml` 每 3h 自動鎖未開踢的場 + 結算踢完的場 → 寫 `lib/soccer-locked.json`。
