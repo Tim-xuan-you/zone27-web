@@ -190,6 +190,15 @@ export default function ProfileView({ profile, identity: id, streak, soccer }: P
           賣明牌的靠連勝截圖、輸了刪文;
           <span className="text-gold">這份帳本,他們攤不出來</span>。
         </p>
+        {/* 可驗證性 = 護城河:給訪客一條「自己去查」的路(不是要他信,是讓他驗) */}
+        <p className="mt-2.5">
+          <Link
+            href="/audit"
+            className="font-mono text-gold/75 hover:text-gold text-[11px] tracking-[0.15em] underline-offset-4 hover:underline transition-colors"
+          >
+            這些數字怎麼來的、怎麼驗 →
+          </Link>
+        </p>
       </section>
 
       {/* ── 榮譽牆(第三人稱 public 視角)· 章全部從含輸帳本自動算 ─────────── */}

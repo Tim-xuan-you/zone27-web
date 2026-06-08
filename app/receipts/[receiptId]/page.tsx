@@ -121,14 +121,14 @@ export async function generateMetadata({
   }
   const ref = deriveReferenceNumber(match.id, match.league);
   const cal = getCalibration(match) ?? "push";
-  const verdict = cal === "proved" ? "PROVED ✓" : cal === "diverged" ? "DIVERGED ✕" : "PUSH";
+  const verdict = cal === "proved" ? "命中" : cal === "diverged" ? "落空" : "平";
+  // images 不再覆寫 → Next 自動帶上本路由的 opengraph-image.tsx(單場引擎收據卡)。
   return {
-    title: `${ref} · ${verdict} · ZONE 27 Receipt`,
-    description: `${match.home.name} vs ${match.away.name} · ${match.date} · ${verdict} · ZONE 27 engine receipt · single-object page · per /audit S05 PRE-COMMIT clause · append-only。`,
+    title: `${ref} · 引擎${verdict} · ZONE 27 收據`,
+    description: `${match.home.name} vs ${match.away.name} · ${match.date} · 引擎賽前鎖定、賽後對帳的單場收據 —— 命中與落空都留著、改不了。`,
     openGraph: {
-      title: `${ref} · ${verdict}`,
-      description: `${match.home.name} vs ${match.away.name} · ${match.date} · ZONE 27 engine receipt object`,
-      images: ["/track-record/opengraph-image"],
+      title: `${match.home.name} vs ${match.away.name} · 引擎${verdict}`,
+      description: `引擎賽前鎖定、賽後逐場對帳 · 含贏含輸、改不了。`,
     },
   };
 }
@@ -197,7 +197,7 @@ export default async function ReceiptPage({ params }: { params: Params }) {
         {/* ── HERO · Patek-style reference number ──── */}
         <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pt-10 pb-8">
           <p className="font-mono text-gold text-[10px] tracking-[0.45em] mb-6">
-            ZONE 27 ENGINE RECEIPT · OBJECT PAGE · APPEND-ONLY
+            ZONE 27 引擎收據 · 賽前鎖定 · 改不了
           </p>
           <h1 className="font-mono text-bone tabular text-3xl sm:text-4xl md:text-5xl font-light tracking-tight leading-tight mb-4 break-all">
             {ref}
@@ -205,19 +205,17 @@ export default async function ReceiptPage({ params }: { params: Params }) {
           {/* Cold gold hairline · R54 W-C signature moat */}
           <div className="zone27-rule max-w-[320px] mb-6" aria-hidden="true" />
           <p className="text-mute text-base leading-relaxed">
-            這個 page IS the receipt · 不是 marketing wrapper · 不是 narrative
-            section · 是 the object 本身。 per /audit S05 PRE-COMMIT clause ·
-            append-only · 修改 receipt content 需 30 天前公告於{" "}
+            這一頁,就是那張收據本身。 賽前鎖定的預測 + 賽後的結果 —— 命中或落空,都釘在這裡、改不了。
+            要改內容,得 30 天前先公告在{" "}
             <a
               href="https://github.com/Tim-xuan-you/zone27-web/commits/main"
               target="_blank"
               rel="noopener noreferrer"
               className="text-gold underline-offset-4 hover:underline"
             >
-              公開 GitHub commit 史
-            </a>{" "}
-            · 同 Stripe Press book detail page + Patek Reference Number
-            archive pattern。
+              公開的 GitHub 紀錄
+            </a>
+            (誰都查得到的那份)。
           </p>
         </section>
 
@@ -232,10 +230,9 @@ export default async function ReceiptPage({ params }: { params: Params }) {
             {/* ── TOP-LINE · TCG card anatomy(R60 W-B established pattern) ── */}
             <div className="border-b border-gold/40 bg-gold/5 px-5 sm:px-8 py-3 flex items-center justify-between flex-wrap gap-2">
               <p
-                lang="en"
                 className="font-mono text-gold tracking-[0.35em] text-[10px] sm:text-[11px]"
               >
-                ZONE 27 ENGINE · v0.2 · RECEIPT OBJECT
+                ZONE 27 引擎 · v0.2 · 收據
               </p>
               <p
                 lang="en"
@@ -362,13 +359,10 @@ export default async function ReceiptPage({ params }: { params: Params }) {
             {/* ── TIM SIGNATURE FOOTER ───────────────── */}
             <div className="border-t border-line/40 px-5 sm:px-8 py-5 flex items-baseline justify-between flex-wrap gap-3">
               <p className="font-mono text-mute/70 text-[10px] tracking-[0.3em] tabular">
-                — TIM · ZONE 27 FOUNDER · {dateIso}
+                — TIM · ZONE 27 創辦人 · {dateIso}
               </p>
-              <p
-                lang="en"
-                className="font-mono text-gold/70 text-[9px] tracking-[0.3em] tabular"
-              >
-                APPEND-ONLY · /audit S05 PRE-COMMIT
+              <p className="font-mono text-gold/70 text-[9px] tracking-[0.3em] tabular">
+                只增不改 · 改了會留公開紀錄
               </p>
             </div>
           </div>
@@ -378,13 +372,11 @@ export default async function ReceiptPage({ params }: { params: Params }) {
         <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-12">
           <div className="border border-line/40 bg-slate/20 p-5 sm:p-6">
             <p className="font-mono text-gold/85 text-[10px] tracking-[0.4em] mb-4">
-              ⚓ SHARE THIS RECEIPT · NO TRACKING · NO REFERRAL CODE
+              分享這張收據 · 沒有追蹤碼
             </p>
             <p className="text-mute text-sm leading-relaxed mb-5">
-              此 URL 是 receipt 的 permanent home · 您可直接 share · 0 UTM
-              parameter · 0 referral code · 0 tracking pixel · 同 /privacy
-              0-tracker promise。 ZONE 27 不 track 誰 share 給誰 · 不會
-              發 push 提醒「您 share 的 receipt 收到 N views」。
+              這個網址就是這張收據的永久位置 —— 直接傳就好。 沒有追蹤碼、沒有推薦碼,
+              我們不記錄誰把它傳給誰,也不會推播「你分享的收據被看了幾次」。
             </p>
             <CopyLinkButton />
             {/* R77 W-B · LineKeepHint · Agent A R76 SHIP E · mobile-only
@@ -398,7 +390,7 @@ export default async function ReceiptPage({ params }: { params: Params }) {
         {/* ── RELATED CROSS-LINKS ─────────────────── */}
         <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-16">
           <p className="font-mono text-mute text-[10px] tracking-[0.4em] mb-4">
-            / RELATED · TRACEABILITY CROSS-LINKS
+            / 順著查下去
           </p>
           <ul className="space-y-2 text-mute text-sm">
             <li className="flex gap-3 items-baseline">
@@ -409,11 +401,9 @@ export default async function ReceiptPage({ params }: { params: Params }) {
                 href="/track-record"
                 className="text-gold/85 hover:text-gold underline-offset-4 hover:underline"
               >
-                /track-record
+                完整戰績
               </Link>
-              <span className="text-mute/70">
-                · parent ledger · all receipts in chronological order
-              </span>
+              <span className="text-mute/70">· 所有收據,按時間排,含贏含輸</span>
             </li>
             <li className="flex gap-3 items-baseline">
               <span aria-hidden="true" className="text-gold/70">
@@ -423,11 +413,9 @@ export default async function ReceiptPage({ params }: { params: Params }) {
                 href={`/matches/${match.id}`}
                 className="text-gold/85 hover:text-gold underline-offset-4 hover:underline"
               >
-                /matches/{match.id}
+                這場的賽事頁
               </Link>
-              <span className="text-mute/70">
-                · match page · pre-game / live / post-final detail
-              </span>
+              <span className="text-mute/70">· 賽前 / 進行中 / 賽後完整資訊</span>
             </li>
             <li className="flex gap-3 items-baseline">
               <span aria-hidden="true" className="text-gold/70">
@@ -437,12 +425,9 @@ export default async function ReceiptPage({ params }: { params: Params }) {
                 href="/audit"
                 className="text-gold/85 hover:text-gold underline-offset-4 hover:underline"
               >
-                /audit
+                引擎報告
               </Link>
-              <span className="text-mute/70">
-                · model report · engine v0.2 description + estimation
-                disclosure
-              </span>
+              <span className="text-mute/70">· 引擎怎麼算的、哪些是估計值,全攤開</span>
             </li>
             <li className="flex gap-3 items-baseline">
               <span aria-hidden="true" className="text-gold/70">
@@ -452,55 +437,25 @@ export default async function ReceiptPage({ params }: { params: Params }) {
                 href="/methodology"
                 className="text-gold/85 hover:text-gold underline-offset-4 hover:underline"
               >
-                /methodology
+                方法白皮書
               </Link>
-              <span className="text-mute/70">
-                · engineering paper · how this prediction was computed
-              </span>
-            </li>
-            {/* R120 W4 · Agent C R120 niche-subscription cold-start research
-                · Stratechery「trust-of-permanence」 mechanism · ZONE 27 audience
-                faces「will this guy still be here in a year?」 fear · Tim's
-                CPBL fan audience facing Taiwan tipster sites die monthly ·
-                此 receipt-as-shared-artifact 是 visitor first impression · 加
-                /annual + /engine-log 兩個 permanence anchors · 同時 close
-                Defector + Stratechery cold-start gap · 0 email capture(brand
-                IP 守)· 0 push · 0 social proof · 純 cross-link 物理 surface
-                permanence artifacts。 */}
-            <li className="flex gap-3 items-baseline">
-              <span aria-hidden="true" className="text-gold/70">
-                ▸
-              </span>
-              <Link
-                href="/audit"
-                className="text-gold/85 hover:text-gold underline-offset-4 hover:underline"
-              >
-                /audit
-              </Link>
-              <span className="text-mute/70">
-                · Model Report canonical hub · 7 sections + DISCLOSURE
-                PHILOSOPHY · operational state + dated ops events collapsed here
-              </span>
+              <span className="text-mute/70">· 這個預測是怎麼跑出來的</span>
             </li>
           </ul>
         </section>
 
         <FounderSignOff>
           <p>
-            這個 page 是 Stripe Press / Patek Reference Number / Defector
-            permalink pattern 對標 · receipt-as-object 不 receipt-in-narrative。
-            ZONE 27 第一個 visitor-grabbable thing。
+            我做這一頁,是想讓每一場預測都有一個可以單獨拿出來、傳給別人看的地方 ——
+            不是埋在一長串戰績裡,而是這一場、這個結果,自己一張。
           </p>
           <p>
-            每場 finalized match 自動 generate own /receipts/[id] page ·
-            generateStaticParams 從 lib/matches.ts 拉 · 0 server cost · 0
-            dynamic rendering · 0 PII transit · 0 tracking。 您 share 此 URL ·
-            ZONE 27 不知道誰 click · 同 /privacy 0-tracker promise。
+            每場打完,系統自動幫它生一頁,網址永久不變。 你把它傳出去,我這邊不會知道是誰點的、
+            也不會偷偷記錄 —— 跟我在隱私頁講的一樣,不追蹤。
           </p>
           <p>
-            修改此 receipt 內容需 30 天前公告於公開 GitHub commit 史 · per /audit S05
-            PRE-COMMIT · append-only · git diff log = source of truth。
-            違反 = brand 信用 collapse 永久 audit trail。
+            這張收據的內容我不能偷偷改。 真要更正,得 30 天前先公告在公開的 GitHub 紀錄上,
+            誰都查得到。 命中我留著,落空我也留著 —— 這就是這整個站值得信的地方。
           </p>
         </FounderSignOff>
 
