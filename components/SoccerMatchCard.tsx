@@ -23,13 +23,14 @@ function kickoffTPE(iso: string): string {
   return `${mm}/${dd} ${hh}:${mi}`;
 }
 
-// ISO → 台北「M/D」(封印戳日期)。 deterministic = ISR-safe。
-function stampDate(iso: string | null): string {
-  if (!iso) return "";
-  const t = Date.parse(iso);
-  if (Number.isNaN(t)) return "";
-  const tpe = new Date(t + 8 * 3600 * 1000);
-  return `${tpe.getUTCMonth() + 1}/${tpe.getUTCDate()}`;
+// 鎖定領先天數(開賽 − 鎖定)。 把「6/8 鎖一場 6/14 的賽」講成「開賽前 6 天就寫死」——
+// 早鎖是承諾的力道、不是錯(越早鎖、賽後對比越重)。 deterministic = ISR-safe。
+function leadDays(lockedAt: string | null, kickoffISO: string): number | null {
+  if (!lockedAt || !kickoffISO) return null;
+  const l = Date.parse(lockedAt);
+  const k = Date.parse(kickoffISO);
+  if (Number.isNaN(l) || Number.isNaN(k)) return null;
+  return Math.max(0, Math.round((k - l) / 86400000));
 }
 
 export default function SoccerMatchCard({ match }: { match: SoccerMatchPrediction }) {
@@ -37,7 +38,7 @@ export default function SoccerMatchCard({ match }: { match: SoccerMatchPredictio
     match;
   const ko = kickoffTPE(dateISO);
   const sealed = locked && Boolean(prediction);
-  const stamp = stampDate(lockedAt);
+  const lead = leadDays(lockedAt, dateISO);
 
   return (
     <article
@@ -55,27 +56,27 @@ export default function SoccerMatchCard({ match }: { match: SoccerMatchPredictio
         </span>
       </div>
 
-      {/* 兩隊 · 隊徽(seed 顏色秒認隊)+ 名字 */}
+      {/* 兩隊 · 隊徽(seed 顏色秒認隊)+ 名字(放大 · 主角) */}
       <div className="flex items-center justify-between gap-2">
-        <span className="flex items-center gap-1.5 min-w-0">
-          <Avatar seed={homeSeed} glyph={getNationalCode(homeSeed) ?? undefined} size={22} />
-          <span className="text-bone text-sm font-light tracking-tight truncate">{home}</span>
+        <span className="flex items-center gap-2 min-w-0">
+          <Avatar seed={homeSeed} glyph={getNationalCode(homeSeed) ?? undefined} size={26} />
+          <span className="text-bone text-base font-light tracking-tight truncate">{home}</span>
         </span>
         <span className="font-mono text-mute/50 text-[10px] shrink-0">vs</span>
-        <span className="flex items-center gap-1.5 min-w-0 justify-end">
-          <span className="text-bone text-sm font-light tracking-tight truncate text-right">{away}</span>
-          <Avatar seed={awaySeed} glyph={getNationalCode(awaySeed) ?? undefined} size={22} />
+        <span className="flex items-center gap-2 min-w-0 justify-end">
+          <span className="text-bone text-base font-light tracking-tight truncate text-right">{away}</span>
+          <Avatar seed={awaySeed} glyph={getNationalCode(awaySeed) ?? undefined} size={26} />
         </span>
       </div>
 
-      {/* 封印戳:這條線開賽前就鎖死、改不了(我們的 Polymarket 信任武器 · 賽後對比才砸得下來)*/}
+      {/* 封印戳:一行 · 早鎖是力道不是錯(開賽前 N 天就寫死、改不了)· Polymarket 信任武器 */}
       {sealed && (
         <div className="flex items-center gap-2 flex-wrap">
           <span className="font-mono text-[8.5px] tracking-[0.25em] text-gold/90 border border-gold/45 px-1.5 py-[3px] leading-none">
-            賽前鎖定 · {stamp}
+            賽前鎖定
           </span>
           <span className="font-mono text-mute/55 text-[8.5px] tracking-[0.18em] leading-none">
-            開賽前寫死、改不了 · 賽後逐場對帳
+            {lead !== null ? `開賽前 ${lead} 天就寫死 · 改不了` : "開賽前寫死 · 改不了"}
           </span>
         </div>
       )}
@@ -130,32 +131,26 @@ function Prediction({
         <span style={{ width: `${d.awayWin}%` }} className={awayGold ? "bg-gold" : "bg-mute/40"} />
       </div>
 
-      {/* 預期進球(per-match 一定會變的真信號)取代「最可能比分 1-1」——
-          後者其實是模型常數(引擎假設每場平均 2.6 球 → 平衡場的最可能比分永遠塌成 1-1,
-          每張卡一樣 = 雜訊)。 預期進球的拆分(誰比較能進)才隨對戰變、才誠實有資訊。 */}
-      <p className="mt-2 font-mono text-mute/55 text-[9px] tracking-[0.12em] leading-snug">
+      {/* 預期進球(per-match 會變的真信號 · 取代每張都一樣的「最可能比分 1-1」模型常數)·
+          「不是盤口 / 賽後對帳」已是首頁旗幟 + 封印戳,不在每張卡重複(刪廢話、字才放得大)。 */}
+      <p className="mt-2 font-mono text-mute/60 text-[10px] tracking-[0.1em]">
         預期進球{" "}
-        <span className="text-bone/85 tabular">
+        <span className="text-bone tabular text-[11px]">
           {prediction.xgHome.toFixed(1)}–{prediction.xgAway.toFixed(1)}
-        </span>{" "}
-        · 引擎自己算的,不是盤口 · 賽後逐場對帳
+        </span>
       </p>
-      {tossup ? (
-        /* 膠著場 = 把「無力感」翻成「你的主場」(玩家優越感 · 你 vs 引擎)· 唯一誠實的挑釁 */
-        <div className="mt-2">
+      {/* 只有膠著場(最高 ≤38%)留一句挑釁:把無力感翻成「你的主場」。 其餘場不塞盲點清單
+          (那是每張都一樣、大部分人不看的廢話 · 已併進首頁誠實旗幟)。 */}
+      {tossup && (
+        <div className="mt-1.5">
           <span className="inline-block font-mono text-[8.5px] tracking-[0.2em] text-gold/90 border border-gold/45 px-1.5 py-[3px] leading-none mb-1.5">
             膠著 · 最難一題
           </span>
-          <p className="font-mono text-mute/55 text-[9px] tracking-[0.1em] leading-snug">
-            三邊都擠在四成內,引擎自己都拿不準 —— 這種場,你的獨家判斷(傷停 / 輪換 / 直覺)
-            <span className="text-bone/80">最值錢</span>。 換你開盤,賽後看誰準。
+          <p className="font-mono text-mute/60 text-[10px] tracking-[0.08em] leading-snug">
+            三邊擠在四成內 · 引擎也拿不準 —— 這場
+            <span className="text-bone/85">你的判斷最值錢</span>,換你開盤。
           </p>
         </div>
-      ) : (
-        /* 盲點揭露(538/Savant 式)· 把引擎看不到的攤在下注點 = 報馬仔黑箱的反面 */
-        <p className="mt-1.5 font-mono text-mute/40 text-[9px] tracking-[0.1em] leading-snug">
-          引擎沒看到:傷停 · 紅黃牌停賽 · 陣容輪換 · 天候 —— 我們攤開,讓你自己加權
-        </p>
       )}
     </div>
   );
