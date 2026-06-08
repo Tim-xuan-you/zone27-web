@@ -12,9 +12,9 @@ import TierFeatureMatrix from "@/components/TierFeatureMatrix";
 import AdminConsole from "@/components/AdminConsole";
 
 export const metadata: Metadata = {
-  title: "Admin · Tim's ZONE 27 ops dashboard preview",
+  title: "Admin · Tim 的 ZONE 27 管理台",
   description:
-    "ZONE 27 admin dashboard preview · Tim 親自看後台是這個樣子(規劃中 · Stage 2)· 目前 Stage 1 = Supabase Studio 直接登入。本頁面公開但 noindex · 是 ops mockup 不是真實 admin。",
+    "ZONE 27 後台 · Tim 的管理台 —— 加點數、標付費等級、審文章全用點按鈕(後端上鎖 · 只有你能動)。本頁公開但 noindex · 連後台都公開設計(disclosure)。",
   // Round 29 Wave 2 · noindex to keep this out of any future SEO crawl ·
   // public preview only · not for visitor traffic.
   robots: {
@@ -27,32 +27,26 @@ export const metadata: Metadata = {
 export const revalidate = 60;
 
 // ── ZONE 27 · /admin ───────────────────────────────────
-// Round 29 Wave 2 · Tim 直擊:「我要如何管理會員?操作介面在哪裡?」
+// Round 29 Wave 2 起點 · Tim 直擊:「我要如何管理會員?操作介面在哪裡?」
+// R185 起 = 真・點擊後台(AdminConsole + migration 0011 · 不再是 mockup):
+//   · 加 / 扣點數(記手動轉帳入金)· 標付費等級(OPEN/BLACK/GOLD)·
+//     會員列表 · 文章 / 留言審核(看全文 + 留痕刪)· 審核紀錄。
+//   · 全程點按鈕、0 SQL · 後端 is_admin() gate(只有 Tim 能動 · 別人硬打 RPC 也被擋)。
+//   · 碰錢動作親手按一次確認 + 留痕(鐵律 #13 不自動扣款)。
+// designer preview(Cmd+Shift+P / AdminTierSwitcher / TierFeatureMatrix)= 純
+//   localStorage 視覺切換,跟上面真實 admin actions 是兩套獨立系統。
 //
-// 目前真實的 ops 狀態:
-//   Stage 1 · Supabase Studio 直接登入(supabase.com 點您的 project)
-//            看 waitlist 表 · 排序篩選匯出 · SQL Editor 跑簡單 query
-//   Stage 2 · 自家 /admin 後台(ADMIN-PLAN.md 已 design · 還沒寫)
-//   Stage 3 · Plausible cookieless analytics(三條件 trigger 後 · 還早)
-//
-// 這個 /admin 頁面是 Stage 2 mockup · 顯示 dashboard WILL look like 但
-// 還沒 auth-gated · 還沒接真實 admin queries · 完全是 preview。
-//
-// noindex 因為:
-//   - 不是公開內容 · 是 ops surface
-//   - 但放公開資料夾 OK · 訪客看到也只是看到「ops mockup」
-//   - 對齊 ZONE 27 disclosure philosophy:連 admin 後台都公開設計
-//
-// Pratfall: 顯示真實 numbers(waitlist count · founders state · ingest queue)
-// 從 live data 拉 · 但沒 admin actions(刪除 / 改 state 等)· 純預覽。
+// noindex 因為:不是公開內容 · 是 ops surface · 但放公開資料夾 OK
+//   (訪客看到也只是「後台長這樣」)· 對齊 disclosure philosophy:連後台都公開設計。
+// KPI numbers(waitlist / ingest queue)從 live data 拉。
 // ─────────────────────────────────────────────────────
 
 export default async function AdminPage() {
   // Round 30 Wave 10 · auth-aware /admin · Tim 自己 login 後 page 顯示
   // 他的 session info(email + 加入天數)· anonymous visitor 看 noindex
   // preview。 不是 admin gate(任何 logged-in user 都看得到)· 只是給
-  // Tim visual confirmation 他 auth 鏈通了。 真正的 admin actions
-  // gate 是 Stage 2 後台 · 還沒 ship。
+  // Tim visual confirmation 他 auth 鏈通了。 真正的 admin actions gate 在
+  // AdminConsole(migration 0011 is_admin · 已 ship)· 本頁這層只 gate KPI 數字。
   // getUser()(server 再驗身分)· 不用可偽造的 getSession · 並用它 gate 數字
   const user = await getUser();
   const waitlistCount = await getWaitlistCount();
@@ -301,17 +295,17 @@ export default async function AdminPage() {
         <FounderSignOff>
           <p>
             這頁是給<strong>你自己</strong>看的 — 不是給訪客看的。但放公開資料夾 OK ·
-            因為 ZONE 27 disclosure philosophy 連 admin 後台都公開設計(see also
-            ADMIN-PLAN.md 在 GitHub)。
+            因為 ZONE 27 連後台都公開設計(連同 ADMIN-PLAN.md 在 GitHub)。
           </p>
           <p>
-            目前你 90% 的 admin work 是 git commit + Supabase Studio + 親手寫 email。
-            這完全合理 · founder solo 階段沒道理 over-engineer dashboard ·
-            <strong>Stage 2 寫程式的時機是 waitlist 突破 100 人</strong> · 不是現在。
+            上面那個管理台是<strong>真的</strong> —— 加點數、標付費等級、審文章,
+            全是點按鈕、後端上鎖(只有你能動)。 碰錢的動作故意要你親手按一次確認、
+            而且留痕,不是限制,是你的鐵律。
           </p>
           <p>
-            如果有一天你看 admin metric 比看 git commit history 多 · 那是品牌走偏的信號。
-            這頁存在的部分意義 = 提醒這件事(per /discipline Buffett「track record」)。
+            但別讓它長太大。 founder solo 階段,夠用就好。 如果有一天你盯後台數字
+            比盯自己的公開戰績還多 · 那是品牌走偏的信號 —— 這頁存在的部分意義,也是提醒這件事
+            (per /discipline Buffett「track record」)。
           </p>
         </FounderSignOff>
 
