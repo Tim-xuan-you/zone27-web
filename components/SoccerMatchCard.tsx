@@ -23,12 +23,28 @@ function kickoffTPE(iso: string): string {
   return `${mm}/${dd} ${hh}:${mi}`;
 }
 
+// ISO → 台北「M/D」(封印戳日期)。 deterministic = ISR-safe。
+function stampDate(iso: string | null): string {
+  if (!iso) return "";
+  const t = Date.parse(iso);
+  if (Number.isNaN(t)) return "";
+  const tpe = new Date(t + 8 * 3600 * 1000);
+  return `${tpe.getUTCMonth() + 1}/${tpe.getUTCDate()}`;
+}
+
 export default function SoccerMatchCard({ match }: { match: SoccerMatchPrediction }) {
-  const { id, home, away, homeSeed, awaySeed, prediction, competitionName, dateISO } = match;
+  const { id, home, away, homeSeed, awaySeed, prediction, competitionName, dateISO, locked, lockedAt } =
+    match;
   const ko = kickoffTPE(dateISO);
+  const sealed = locked && Boolean(prediction);
+  const stamp = stampDate(lockedAt);
 
   return (
-    <article className="bg-slate/40 border border-line/60 p-4 sm:p-5 flex flex-col gap-3 transition-colors hover:border-gold/40">
+    <article
+      className={`bg-slate/40 border p-4 sm:p-5 flex flex-col gap-3 transition-colors hover:border-gold/40 ${
+        sealed ? "border-gold/30" : "border-line/60"
+      }`}
+    >
       {/* 競賽 + 開賽(台北) */}
       <div className="flex items-center justify-between gap-2">
         <span className="font-mono text-gold/80 text-[9px] tracking-[0.3em]">
@@ -51,6 +67,18 @@ export default function SoccerMatchCard({ match }: { match: SoccerMatchPredictio
           <Avatar seed={awaySeed} glyph={getNationalCode(awaySeed) ?? undefined} size={22} />
         </span>
       </div>
+
+      {/* 封印戳:這條線開賽前就鎖死、改不了(我們的 Polymarket 信任武器 · 賽後對比才砸得下來)*/}
+      {sealed && (
+        <div className="flex items-center gap-2 flex-wrap">
+          <span className="font-mono text-[8.5px] tracking-[0.25em] text-gold/90 border border-gold/45 px-1.5 py-[3px] leading-none">
+            賽前鎖定 · {stamp}
+          </span>
+          <span className="font-mono text-mute/55 text-[8.5px] tracking-[0.18em] leading-none">
+            開賽前寫死、改不了 · 賽後逐場對帳
+          </span>
+        </div>
+      )}
 
       {prediction ? (
         <Prediction home={home} away={away} prediction={prediction} />

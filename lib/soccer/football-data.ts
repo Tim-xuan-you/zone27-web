@@ -153,6 +153,8 @@ export type SoccerMatchPrediction = {
   prediction: SoccerPrediction | null;
   /** 此場的引擎開盤是否已「賽前鎖定」(true = 顯示的是鎖定線,改不了) */
   locked: boolean;
+  /** 鎖定時間 ISO(封印戳:賽前就寫死的證據)· 未鎖為 null */
+  lockedAt: string | null;
 };
 
 /**
@@ -205,6 +207,7 @@ export async function getCompetitionPredictions(
       awaySeed: c.awaySeed,
       prediction,
       locked: Boolean(locked),
+      lockedAt: locked?.lockedAt ?? null,
     };
   });
 }
