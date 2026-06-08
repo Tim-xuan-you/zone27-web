@@ -37,9 +37,9 @@ const LOCK_FILE = join(HERE, "..", "lib", "soccer-locked.json");
 const BASE = "https://api.football-data.org/v4";
 // 只留最近 N 筆(避免檔案無限長大 · 夠戰績/校準顯示)。
 const MAX_KEEP = 800;
-// 鎖「未來 N 天內開踢」的場(同 MLB「今天+明天」精神:接近開賽、實力分最新時才鎖,
-// 不把整季 200 場 6 週後的賽程用過時 Elo 一次鎖死)。 Action 每 3h 跑 → 場進入窗就鎖到。
-const LOCK_HORIZON_DAYS = 7;
+// 鎖「未來 N 天內開踢」的場 = 接近開賽才鎖(同 MLB「今天+明天」精神)。 Tim:提前太多天鎖
+// 沒意義(賽前還有傷兵/陣容變化),開賽前再鎖即可 → 收到 2 天(每 3h 一跑 · 場進窗就鎖)。
+const LOCK_HORIZON_DAYS = 2;
 
 function getToken() {
   return process.env.FOOTBALL_DATA_API_TOKEN ?? "";

@@ -23,22 +23,11 @@ function kickoffTPE(iso: string): string {
   return `${mm}/${dd} ${hh}:${mi}`;
 }
 
-// 鎖定領先天數(開賽 − 鎖定)。 把「6/8 鎖一場 6/14 的賽」講成「開賽前 6 天就寫死」——
-// 早鎖是承諾的力道、不是錯(越早鎖、賽後對比越重)。 deterministic = ISR-safe。
-function leadDays(lockedAt: string | null, kickoffISO: string): number | null {
-  if (!lockedAt || !kickoffISO) return null;
-  const l = Date.parse(lockedAt);
-  const k = Date.parse(kickoffISO);
-  if (Number.isNaN(l) || Number.isNaN(k)) return null;
-  return Math.max(0, Math.round((k - l) / 86400000));
-}
-
 export default function SoccerMatchCard({ match }: { match: SoccerMatchPrediction }) {
-  const { id, home, away, homeSeed, awaySeed, prediction, competitionName, dateISO, locked, lockedAt } =
+  const { id, home, away, homeSeed, awaySeed, prediction, competitionName, dateISO, locked } =
     match;
   const ko = kickoffTPE(dateISO);
   const sealed = locked && Boolean(prediction);
-  const lead = leadDays(lockedAt, dateISO);
 
   return (
     <article
@@ -46,12 +35,19 @@ export default function SoccerMatchCard({ match }: { match: SoccerMatchPredictio
         sealed ? "border-gold/30" : "border-line/60"
       }`}
     >
-      {/* 競賽 + 開賽(台北) */}
+      {/* 競賽(+ 賽前鎖定 micro-chip · 信任訊號收成一顆小章,不再佔一整行小字)+ 開賽 */}
       <div className="flex items-center justify-between gap-2">
-        <span className="font-mono text-gold/80 text-[9px] tracking-[0.3em]">
-          {competitionName}
+        <span className="flex items-center gap-2 min-w-0">
+          <span className="font-mono text-gold/80 text-[9px] tracking-[0.3em]">
+            {competitionName}
+          </span>
+          {sealed && (
+            <span className="font-mono text-gold/85 text-[8px] tracking-[0.18em] border border-gold/40 px-1 py-[2px] leading-none shrink-0">
+              賽前鎖定
+            </span>
+          )}
         </span>
-        <span className="font-mono text-mute text-[9px] tracking-[0.25em] tabular">
+        <span className="font-mono text-mute text-[9px] tracking-[0.25em] tabular shrink-0">
           {ko} <span className="text-mute/50">TPE</span>
         </span>
       </div>
@@ -68,18 +64,6 @@ export default function SoccerMatchCard({ match }: { match: SoccerMatchPredictio
           <Avatar seed={awaySeed} glyph={getNationalCode(awaySeed) ?? undefined} size={26} />
         </span>
       </div>
-
-      {/* 封印戳:一行 · 早鎖是力道不是錯(開賽前 N 天就寫死、改不了)· Polymarket 信任武器 */}
-      {sealed && (
-        <div className="flex items-center gap-2 flex-wrap">
-          <span className="font-mono text-[8.5px] tracking-[0.25em] text-gold/90 border border-gold/45 px-1.5 py-[3px] leading-none">
-            賽前鎖定
-          </span>
-          <span className="font-mono text-mute/55 text-[8.5px] tracking-[0.18em] leading-none">
-            {lead !== null ? `開賽前 ${lead} 天就寫死 · 改不了` : "開賽前寫死 · 改不了"}
-          </span>
-        </div>
-      )}
 
       {prediction ? (
         <Prediction home={home} away={away} prediction={prediction} />
@@ -116,9 +100,8 @@ function Prediction({
 
   return (
     <div className="border-t border-line/40 pt-2.5">
-      {/* 三個數字 · favored 那格掛「比亂猜 +N」錨點(把 41% 從「<50% 像丟銅板」重新錨在
-          三選一亂猜的 33% 上 → 讀成「比亂猜高 8 分」的真實領先 · 心理學參考點重設) */}
-      <div className="flex items-baseline justify-between mb-1.5 font-mono tabular">
+      {/* 三個數字(放大主角)· favored 上金 · 亂猜各 33% 的框架在首頁講過 · 金條長度直接秀領先 */}
+      <div className="flex items-baseline justify-between mb-2 font-mono tabular">
         <Pct label={home} value={d.homeWin} gold={homeGold} align="left" />
         <Pct label="和局" value={d.draw} gold={drawGold} align="center" />
         <Pct label={away} value={d.awayWin} gold={awayGold} align="right" />
@@ -133,22 +116,22 @@ function Prediction({
 
       {/* 預期進球(per-match 會變的真信號 · 取代每張都一樣的「最可能比分 1-1」模型常數)·
           「不是盤口 / 賽後對帳」已是首頁旗幟 + 封印戳,不在每張卡重複(刪廢話、字才放得大)。 */}
-      <p className="mt-2 font-mono text-mute/60 text-[10px] tracking-[0.1em]">
+      <p className="mt-2.5 font-mono text-mute/70 text-[11px] tracking-[0.08em]">
         預期進球{" "}
-        <span className="text-bone tabular text-[11px]">
+        <span className="text-bone tabular text-[13px]">
           {prediction.xgHome.toFixed(1)}–{prediction.xgAway.toFixed(1)}
         </span>
       </p>
       {/* 只有膠著場(最高 ≤38%)留一句挑釁:把無力感翻成「你的主場」。 其餘場不塞盲點清單
           (那是每張都一樣、大部分人不看的廢話 · 已併進首頁誠實旗幟)。 */}
       {tossup && (
-        <div className="mt-1.5">
-          <span className="inline-block font-mono text-[8.5px] tracking-[0.2em] text-gold/90 border border-gold/45 px-1.5 py-[3px] leading-none mb-1.5">
+        <div className="mt-2">
+          <span className="inline-block font-mono text-[9px] tracking-[0.2em] text-gold/90 border border-gold/45 px-1.5 py-[3px] leading-none mb-1.5">
             膠著 · 最難一題
           </span>
-          <p className="font-mono text-mute/60 text-[10px] tracking-[0.08em] leading-snug">
+          <p className="font-mono text-mute/70 text-[11px] tracking-[0.05em] leading-snug">
             三邊擠在四成內 · 引擎也拿不準 —— 這場
-            <span className="text-bone/85">你的判斷最值錢</span>,換你開盤。
+            <span className="text-bone/90">你的判斷最值錢</span>,換你開盤。
           </p>
         </div>
       )}
@@ -175,15 +158,9 @@ function Pct({
         {value}
         <span className="text-[10px] opacity-60">%</span>
       </span>
-      <span className="text-mute/55 text-[8px] tracking-[0.15em] truncate max-w-[6rem]">
+      <span className="text-mute/65 text-[10px] tracking-[0.1em] truncate max-w-[6rem]">
         {label.length > 6 ? label.slice(0, 6) : label}
       </span>
-      {/* 只在 favored 那格 · 把絕對數字錨在「三選一亂猜 33%」上 = 比亂猜高幾分的真領先 */}
-      {gold && value > 33 && (
-        <span className="font-mono text-gold/70 text-[8px] tracking-[0.08em] leading-none whitespace-nowrap">
-          比亂猜 +{value - 33}
-        </span>
-      )}
     </span>
   );
 }
