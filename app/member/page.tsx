@@ -104,8 +104,9 @@ export default async function MemberPage() {
   // 公開身分:顯示名(會員自填 · opt-in)否則匿名代號「球迷 #hash」。
   // anonHandle 的 md5 必須跟 SQL 的 md5(user_id::text) 一致 → 頭像、署名同一張臉。
   const displayName = readDisplayName(meta);
-  const anonHandle =
-    "球迷 #" + createHash("md5").update(user.id).digest("hex").slice(0, 8);
+  // 永久碼(md5(uid) 前 8 碼)· 同 SQL z27_author_code · 公開檔案 /u/[code] 的 URL key。
+  const authorCode = createHash("md5").update(user.id).digest("hex").slice(0, 8);
+  const anonHandle = "球迷 #" + authorCode;
 
   const predictionsMap = await getMyPredictionsMap();
   // R198 · 併 MLB(全套):押 MLB 也計進你 vs 引擎準度 + 顯示為未結算持倉。
@@ -265,6 +266,21 @@ export default async function MemberPage() {
         {/* 對帳紀律已折進榮譽牆(R201:獨立區塊+自我辯解=Tim「感覺沒用」· 里程碑走 streak
             徽章 · current 在牆內一行)· streak 物件仍傳給 HonorWall。 */}
         <HonorWall identity={identity} streak={streak} />
+
+        {/* 你的公開檔案(soul-roadmap P0)· 把含輸帳本變成可以丟給懷疑者的證物 —— 地位是
+            賺來的、也是可以攤開驗證的。 URL 用永久碼(改名洗不掉)· 任何人免登入可看
+            (預設匿名球迷#碼 · 設了顯示名才露名)。 接在榮譽牆後 = 賺來的地位 → 拿去公開驗證。 */}
+        <Link
+          href={`/u/${authorCode}`}
+          className="mt-6 flex items-baseline justify-between gap-3 border-b border-line/40 pb-3 hover:border-gold/40 transition-colors group"
+        >
+          <span className="text-mute text-sm leading-snug">
+            你的<span className="text-bone">公開檔案</span> —— 含輸帳本、賽前鎖定、刪不掉。把這頁丟給任何懷疑你的人。
+          </span>
+          <span className="shrink-0 font-mono text-gold/70 group-hover:text-gold text-[10px] tracking-[0.3em] transition-colors">
+            打開 →
+          </span>
+        </Link>
 
         {/* 升級入口 · 路要看得見(Apple:付費路徑永遠不藏)· 但這是會員自己的介面 ·
             不對他推銷、不打「賺錢」· 接著上面的榮譽牆 → 用「身分/地位」當主軸(paid=身分

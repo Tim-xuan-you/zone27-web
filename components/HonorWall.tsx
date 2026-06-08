@@ -74,7 +74,7 @@ function buildHonors(id: CalibrationIdentity, st: DisciplineStreak): Honor[] {
       earned: id.decided >= THICK,
       detail:
         id.decided >= THICK
-          ? "滿 25 場結算 · 你的命中率有公信力了(刷不出來)"
+          ? "滿 25 場結算 · 命中率有公信力了(刷不出來)"
           : `再 ${THICK - id.decided} 場結算 · 命中率才站得住(防僥倖)`,
     },
     // ── 進階 ──────────────────────────────
@@ -111,7 +111,7 @@ function buildHonors(id: CalibrationIdentity, st: DisciplineStreak): Honor[] {
       earned: id.beatEngine === true,
       detail:
         id.beatEngine === true
-          ? "同一批場 · 你比免費引擎還準"
+          ? "同一批場 · 命中率超過免費引擎"
           : "同一批已結算場 · 命中率要超過引擎",
     },
     {
@@ -188,20 +188,27 @@ function sealClass(tier: Tier, earned: boolean): {
 export default function HonorWall({
   identity: id,
   streak,
+  subject = "self",
 }: {
   identity: CalibrationIdentity;
   streak: DisciplineStreak;
+  /** "self" = 會員看自己(/member · 第二人稱「你」)· "public" = 別人看這份檔案
+   *  (/u/[code] · 去人稱 · streak 改報最長/累計而非「今天接上」CTA)。 預設 self 不動既有。 */
+  subject?: "self" | "public";
 }) {
   // 還沒押任何一場 → 不顯示(上面校準卡已有「去押第一注」· 不擺一面灰章嚇新人)
   if (id.total === 0) return null;
 
   const honors = buildHonors(id, streak);
   const earned = honors.filter((h) => h.earned).length;
+  const pub = subject === "public";
 
   return (
     <section className="mt-8 bg-slate/40 border border-line/50 p-6 sm:p-8">
       <div className="flex items-baseline justify-between gap-3 flex-wrap mb-1.5">
-        <p className="font-mono text-gold text-[10px] tracking-[0.4em]">你的榮譽</p>
+        <p className="font-mono text-gold text-[10px] tracking-[0.4em]">
+          {pub ? "榮譽牆" : "你的榮譽"}
+        </p>
         <p className="font-mono text-mute/70 text-[10px] tracking-[0.25em] tabular">
           已點亮 <span className="text-gold">{earned}</span> / {honors.length}
         </p>
@@ -209,16 +216,27 @@ export default function HonorWall({
 
       {/* 誠實 frame · 這面牆抄不走 = 護城河(玩運彩靠連勝/人氣/賣量發章 · 結構上掛不出這個) */}
       <p className="mb-4 text-mute/85 text-[13px] leading-relaxed max-w-xl">
-        每個章都從你<span className="text-bone">含輸的帳本</span>自動算 —— 刪不掉、裝不來。
+        每個章都從{pub ? "" : "你"}
+        <span className="text-bone">含輸的帳本</span>自動算 —— 刪不掉、裝不來。
         賣明牌的站靠連勝、人氣、賣量發章;
         <span className="text-gold">這面牆,他們掛不出來</span>。
       </p>
 
-      {/* 對帳紀律 · 收成一行(原獨立區塊已折進來 · 紀律里程碑走下方 streak 徽章)·
-          current 是徽章表達不出的「現在進行式」+ onboarding 鉤子 · 骨白數字不搶金色主角。 */}
+      {/* 對帳紀律 · 收成一行(原獨立區塊已折進來 · 紀律里程碑走下方 streak 徽章)。
+          self:current 是徽章表達不出的「現在進行式」+ onboarding 鉤子。
+          public:看別人不該被「今天接上」催 · 改報最長/累計(回來對帳的天數 = 紀律證據)。 */}
       <p className="mb-5 font-mono text-mute/65 text-[11px] tracking-[0.15em] leading-relaxed">
         對帳紀律 ·{" "}
-        {streak.current > 0 ? (
+        {pub ? (
+          streak.longest > 0 || streak.totalDays > 0 ? (
+            <>
+              最長連續 <span className="text-bone tabular">{streak.longest}</span> 天 ·
+              累計回來對帳 <span className="text-bone tabular">{streak.totalDays}</span> 天
+            </>
+          ) : (
+            <span className="text-mute">還在累積</span>
+          )
+        ) : streak.current > 0 ? (
           <>
             連續 <span className="text-bone tabular">{streak.current}</span> 天
             {streak.activeToday ? "" : "(今天可接上)"}

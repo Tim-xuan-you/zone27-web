@@ -14,6 +14,25 @@
 
 ## ⏳ 仍 pending Tim 親手動作
 
+### ⏳ migration 0019 — 公開含輸 Profile 頁 /u/[code](貼一次 SQL · 解鎖把戰績丟給懷疑者)
+2026-06-08 · R204:公開「含輸」個人檔案頁上線 —— 任何人(免登入)用你的永久碼看你攤開、
+刪不掉、含贏含輸的押注帳本(準度 + 對帳紀律 + 榮譽牆 + 足球)+ 網址自動生成黑金「含輸收據」分享卡。
+這是 P0 keystone:0 用戶就成立 —— 今天就能把網址丟給一個不信你的人。
+
+**你要做的(一次):** 打開 Supabase → SQL Editor → 貼整支
+`supabase/migrations/0019_public_profile.sql` → Run(出現 Success 就好)。
+沒套之前所有 /u/... 網址會 graceful 顯示 404(不會壞)· 套完就活。
+
+**套完怎麼用 / 怎麼驗:**
+1. 登入 → /member → 榮譽牆下方多了一行「你的公開檔案 · 打開 →」→ 點進去就是你的 /u/{你的碼}。
+2. 複製那個網址 → 用無痕視窗(沒登入)打開 → 看得到你的含輸帳本 = 成功。
+3. 把網址貼到 LINE 給自己 → 預覽卡會自動帶上黑金「含輸收據」(準度 + 中/沒中 + 賽前鎖定)。
+
+隱私:預設匿名(顯示「球迷 #碼」)· 只有你自己在 /member 設了顯示名才會露名字 ·
+0 email / 0 其他個資 · 只回押注紀錄(本來公開戰績就用同一個碼當署名)。
+⚠ 我這端驗到:三綠(tsc / build / dev render 5 情境 + 手機 + OG 收據卡 + 沒套 RPC 時 graceful 404)。
+活體(真資料)要等你套完 0019 + 用你的 dogfood 帳號登入才看得到實際數字。
+
 ### ⏳ GitHub repo secret `FOOTBALL_DATA_API_TOKEN`(TIER-1 免費 · 解鎖足球引擎自動鎖定/結算)
 2026-06-08:足球「你 vs 引擎」賽前鎖定 + 賽後對帳系統上線(鏡 MLB)。 GitHub Action
 `.github/workflows/soccer-engine.yml` 每 3h 自動鎖未開踢的場 + 結算踢完的場 → 寫 `lib/soccer-locked.json`。

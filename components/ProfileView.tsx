@@ -1,0 +1,324 @@
+import Link from "next/link";
+import Avatar from "@/components/Avatar";
+import HonorWall from "@/components/HonorWall";
+import { creatorIdentity } from "@/lib/identity";
+import type { CalibrationIdentity, DisciplineStreak } from "@/lib/predictions";
+import type { SoccerRecord } from "@/lib/soccer/predictions";
+import type { PublicProfile } from "@/lib/profile-server";
+
+// ── ZONE 27 · 公開含輸 Profile(soul-roadmap P0 keystone)──────────────────
+// /u/[code] 的主體:把任一位會員攤開的、刪不掉的、含贏含輸押注帳本,做成一張
+// 可以丟給懷疑者的「證物」。 不是儀表板(沒有「去押一注」那種對自己人的 CTA)——
+// 是一份對外的 costly signal:敢把輸的也公開 = 報馬仔結構上做不到(他們靠藏輸活)。
+//
+// 設計脈絡(同 soul-roadmap / visual-identity 紅線):
+//   · 主角是「帳本」不是「粉絲數」—— 名字旁唯一的大數字永遠是「他多準 · 含輸」。
+//   · 第三人稱、去人稱(主詞用「這份帳本」)· 訪客讀起來不會以為在講自己。
+//   · 暗金 · 無紅綠(輸用 loss token 的柔紅)· 無 emoji · 無動畫 · 無吉祥物。
+//   · 校準排非 PnL · ✕ 跟 ✓ 一樣大 · 滿軸 0-100 不放大小差距(不捏造精確度)。
+//   · 結尾轉換 = 免費建你自己的帳本(引擎永遠免費)· 付費身分(BLACK/GOLD)當安靜副線,
+//     永不暗示「付錢看起來比較準」(那會自打 57% 天花板那張誠實王牌)。
+//
+// 純展示 server component · 計算全在 aggregateIdentity / aggregateStreak / gradeSoccerPicks
+// (單一真相 · 跟 /member 同一套函式 · 只是讀的是「那個碼的人」)。 無 client JS。
+// ─────────────────────────────────────────────────────
+
+const FIRM = 8; // 低於此 · 數字還會跳(同 CalibrationIdentityCard SAMPLE_FIRM)
+
+type Props = {
+  profile: PublicProfile;
+  identity: CalibrationIdentity;
+  streak: DisciplineStreak;
+  soccer: SoccerRecord;
+};
+
+// 一句話總結這份帳本的站位 · 第三人稱(主詞 = 帳本)· 誠實雙向(贏照講、輸也照講)。
+function standingVerdict(id: CalibrationIdentity): string {
+  const v = id.vsCoinPts;
+  if (v === null) return "場還沒結算 —— 帳本才剛開始記。";
+  if (v < 0) return `還落後亂猜 ${-v} 分 —— 帳本不騙人,也刪不掉。`;
+  if (v === 0) return "跟亂猜打平 —— 還沒證明比丟銅板強。";
+  const coin = `比亂猜準 ${v} 分`;
+  if (id.beatEngine === null) return `${coin}。`;
+  if (id.beatEngine) return `${coin},而且贏過引擎 —— 這份帳本看得出有東西。`;
+  if (id.tiedEngine) return `${coin},跟引擎打平 —— 差臨門一腳。`;
+  return `${coin},但還沒贏過引擎。`;
+}
+
+export default function ProfileView({ profile, identity: id, streak, soccer }: Props) {
+  // 身分解析(同創作者署名 · 顯示名 or 球迷#碼 + 永久碼 chip + 頭像 seed/glyph)。
+  const who = creatorIdentity({
+    handle: profile.handle,
+    authorCode: profile.authorCode,
+    displayName: profile.displayName,
+  });
+
+  const hasBaseball = id.total > 0;
+  const hasSoccer = soccer.n > 0 || soccer.pending > 0;
+  const hasDecided = id.accuracy !== null;
+  const youPct = Math.max(0, Math.min(100, id.accuracy ?? 0));
+  const engPct = Math.max(0, Math.min(100, id.engine.accuracy ?? 0));
+  const showEngineBar = id.engine.decided > 0 && id.engine.accuracy !== null;
+  const lowSample = id.decided > 0 && id.decided < FIRM;
+
+  return (
+    <div className="mx-auto max-w-2xl w-full px-6 sm:px-10 pt-12 pb-24">
+      {/* ── 身分列 · 頭像 + 名字 + 永久碼 ──────────────────────── */}
+      <header className="flex items-center gap-4">
+        <Avatar seed={who.seed} glyph={who.glyph} size={60} />
+        <div className="min-w-0">
+          <h1 className="text-2xl sm:text-3xl text-bone font-light tracking-tight leading-tight truncate">
+            {who.label}
+          </h1>
+          <p className="mt-1 flex items-center gap-2 flex-wrap">
+            {who.code && (
+              <span className="font-mono text-gold/70 text-[11px] tracking-[0.2em] tabular">
+                {who.code}
+              </span>
+            )}
+            <span className="font-mono text-mute/60 text-[10px] tracking-[0.3em]">
+              ZONE 27 · 公開戰績
+            </span>
+          </p>
+        </div>
+      </header>
+
+      {/* ── 空檔案 · 尊嚴框(profile 存在但還沒結算的場)──────────────
+          不寫「沒資料」· 寫「已經開始鎖了」—— 把弱點翻成最強信號(同足球 SoccerPendingFrame)。 */}
+      {!hasBaseball && !hasSoccer && (
+        <section className="mt-9 bg-slate/40 border border-gold/30 p-6 sm:p-8">
+          <p className="font-mono text-gold text-[10px] tracking-[0.4em] mb-4">
+            這份帳本
+          </p>
+          <p className="text-bone text-lg leading-relaxed">
+            還沒有結算的押注 —— 但它已經開始記了。
+          </p>
+          <p className="mt-2 text-mute text-sm leading-relaxed">
+            這裡的每一手都在<span className="text-bone">賽前就鎖死</span>、含贏含輸、刪不掉。
+            第一場結算後,準度就會出現在這裡 —— 連輸的也一起。
+          </p>
+        </section>
+      )}
+
+      {/* ── 校準身分 · 含輸帳本(主角)──────────────────────────── */}
+      {hasBaseball && (
+        <section className="mt-9 bg-slate/40 border border-gold/30 p-6 sm:p-8">
+          <p className="font-mono text-gold text-[10px] tracking-[0.4em] mb-4">
+            棒球 · 含輸命中率
+          </p>
+
+          {/* THE number */}
+          <div className="flex items-baseline gap-3">
+            {hasDecided ? (
+              <span className="font-mono text-gold text-6xl sm:text-7xl font-light tracking-tight tabular">
+                {id.accuracy}
+                <span className="text-2xl opacity-60 ml-1">%</span>
+              </span>
+            ) : (
+              <span className="font-mono text-bone text-4xl sm:text-5xl font-light tracking-tight tabular">
+                {id.total}
+                <span className="font-sans text-mute text-xl ml-2">手在場上</span>
+              </span>
+            )}
+          </div>
+
+          <p className="mt-4 text-bone text-base leading-relaxed">
+            押了 <span className="font-mono text-gold tabular">{id.total}</span> 場 ·{" "}
+            <span className="font-mono text-gold tabular">✓{id.proved}</span> 中 ·{" "}
+            <span className="font-mono text-loss/85 tabular">✕{id.diverged}</span> 沒中
+            {id.push > 0 && (
+              <>
+                {" "}· <span className="font-mono text-mute tabular">={id.push}</span> 平
+              </>
+            )}
+            {id.pending > 0 && (
+              <span className="text-mute/70 text-sm"> · {id.pending} 場待開</span>
+            )}
+          </p>
+          <p className="mt-2 font-mono text-mute/60 text-[10px] tracking-[0.2em] leading-relaxed">
+            每場賽前鎖定、賽後自動對照引擎 · 押了刪不掉。
+          </p>
+
+          {/* 三方對照 · 這份帳本 vs 亂猜 vs 引擎(同一批已結算場)*/}
+          {hasDecided && (
+            <div className="mt-6 pt-5 border-t border-line/40">
+              <p className="font-mono text-mute/70 text-[10px] tracking-[0.3em] mb-4">
+                同樣這 {id.decided} 場 · 帳本 vs 引擎
+              </p>
+              <div className="space-y-2.5">
+                <CompareBar label="本人" pct={youPct} hit={id.proved} of={id.decided} gold />
+                {showEngineBar && (
+                  <CompareBar
+                    label="引擎"
+                    pct={engPct}
+                    hit={id.engine.proved}
+                    of={id.engine.decided}
+                  />
+                )}
+              </div>
+              {/* 亂猜 50% 基準字 · 落在虛線正下方 */}
+              <div className="mt-1.5 flex items-center gap-3">
+                <span className="w-8 shrink-0" aria-hidden />
+                <span className="flex-1 text-center font-mono text-mute/45 text-[9px] tracking-[0.25em]">
+                  亂猜 50%
+                </span>
+                <span className="w-[3.25rem] shrink-0" aria-hidden />
+                <span className="hidden sm:inline w-12 shrink-0" aria-hidden />
+              </div>
+
+              <p className="mt-4 text-bone text-sm sm:text-base leading-relaxed">
+                {standingVerdict(id)}
+              </p>
+              {lowSample && (
+                <p className="mt-1.5 font-mono text-mute/55 text-[10px] tracking-[0.15em] leading-relaxed">
+                  場數還少({id.decided} 場)· 這些數字還會跳。
+                </p>
+              )}
+            </div>
+          )}
+        </section>
+      )}
+
+      {/* ── 足球戰績(含輸 · 三向 · 跟棒球分開算)· 沒押足球自動隱藏 ──────── */}
+      {hasSoccer && <SoccerSection r={soccer} />}
+
+      {/* ── costly-signal 框 · 整頁的論點 · 只說一次 ──────────────────── */}
+      <section className="mt-8 border-l-2 border-gold/50 pl-4 py-1">
+        <p className="text-mute/90 text-[13px] sm:text-sm leading-relaxed max-w-xl">
+          這裡每一手都在<span className="text-bone">賽前就鎖死</span>、
+          <span className="text-bone">含輸照算</span>、刪不掉。
+          賣明牌的靠連勝截圖、輸了刪文;
+          <span className="text-gold">這份帳本,他們攤不出來</span>。
+        </p>
+      </section>
+
+      {/* ── 榮譽牆(第三人稱 public 視角)· 章全部從含輸帳本自動算 ─────────── */}
+      <HonorWall identity={id} streak={streak} subject="public" />
+
+      {/* ── 結尾轉換 · 免費建你自己的帳本(引擎永遠免費)· 付費身分當安靜副線 ───── */}
+      <section className="mt-12 pt-8 border-t border-line/50 text-center">
+        <p className="font-mono text-gold text-[10px] tracking-[0.4em] mb-3">
+          換你
+        </p>
+        <h2 className="text-xl sm:text-2xl text-bone font-light tracking-tight leading-snug">
+          看完別人的帳本,該建<span className="text-gold">你自己的</span>了。
+        </h2>
+        <p className="mt-4 text-mute text-sm leading-relaxed max-w-md mx-auto">
+          ZONE 27 的引擎<span className="text-bone">永遠免費</span>。
+          押一手、賽前鎖死、含輸照算 —— 你也會有一份刪不掉的公開帳本。
+        </p>
+        <Link
+          href="/login?next=/member"
+          className="mt-7 inline-block px-7 py-3 bg-gold text-navy font-mono text-xs tracking-[0.3em] hover:bg-gold-soft transition-colors"
+        >
+          免費建立你的帳本 →
+        </Link>
+        <p className="mt-5 text-mute/70 text-[13px] leading-relaxed">
+          想支持這個專案、或把你的分析標價賣(你拿 90–95%)?{" "}
+          <Link
+            href="/membership"
+            className="text-gold/75 hover:text-gold underline-offset-4 hover:underline transition-colors"
+          >
+            認識 BLACK / GOLD →
+          </Link>
+        </p>
+      </section>
+    </div>
+  );
+}
+
+// ── 單條對照軌 · 命中率橫條 + 50% 亂猜虛線(同 CalibrationIdentityCard 視覺語言)─────
+function CompareBar({
+  label,
+  pct,
+  hit,
+  of,
+  gold = false,
+}: {
+  label: string;
+  pct: number;
+  hit: number;
+  of: number;
+  gold?: boolean;
+}) {
+  return (
+    <div className="flex items-center gap-3">
+      <span
+        className={`w-8 shrink-0 font-mono text-[10px] tracking-[0.1em] ${
+          gold ? "text-gold" : "text-mute/70"
+        }`}
+      >
+        {label}
+      </span>
+      <div className="relative flex-1 h-4 bg-line/30 overflow-hidden">
+        <div
+          className={`absolute inset-y-0 left-0 ${gold ? "bg-gold/85" : "bg-bone/30"}`}
+          style={{ width: `${pct}%` }}
+        />
+        <div
+          className="absolute inset-y-0 border-l border-dashed border-mute/50"
+          style={{ left: "50%" }}
+        />
+      </div>
+      <span
+        className={`w-[3.25rem] shrink-0 text-right font-mono tabular text-sm ${
+          gold ? "text-gold" : "text-mute"
+        }`}
+      >
+        {Math.round(pct)}%
+      </span>
+      <span className="hidden sm:inline w-12 shrink-0 text-right font-mono text-mute/50 text-[10px] tabular">
+        {hit}/{of}
+      </span>
+    </div>
+  );
+}
+
+// ── 足球戰績區(第三人稱 · 含輸 · 含同場 你 vs 引擎)──────────────────────
+function SoccerSection({ r }: { r: SoccerRecord }) {
+  const { n, hits, misses, rate, pending, vsN, vsYouHits, vsEngineHits } = r;
+  return (
+    <section className="mt-6 bg-slate/40 border border-gold/30 p-5 sm:p-6">
+      <p className="font-mono text-gold/80 text-[10px] tracking-[0.35em] mb-2">
+        足球 · 含輸命中率
+      </p>
+      {n > 0 ? (
+        <p className="text-bone text-lg sm:text-xl font-light tracking-tight">
+          <span className="text-gold tabular">{rate}%</span> 準 ·{" "}
+          <span className="text-gold tabular">✓{hits}</span>{" "}
+          <span className="text-loss tabular">✕{misses}</span>
+          <span className="text-mute/60 text-sm"> · {n} 場已結算</span>
+          {pending > 0 && (
+            <span className="text-mute/50 text-sm"> · {pending} 場進行中</span>
+          )}
+        </p>
+      ) : (
+        <p className="text-bone text-base font-light leading-snug">
+          押了 <span className="text-gold tabular">{pending}</span> 場 ·
+          <span className="text-mute/70"> 都還沒結算 —— 賽後自動掛準 / 不準,連輸的也留著</span>
+        </p>
+      )}
+
+      {vsN > 0 && (
+        <p className="mt-2.5 pt-2.5 border-t border-line/40 font-mono text-[12px] tracking-[0.04em] text-mute/80">
+          同 <span className="text-bone tabular">{vsN}</span> 場 本人 vs 引擎:
+          <span className="text-bone"> 本人 ✓{vsYouHits}</span> ·
+          <span className="text-bone"> 引擎 ✓{vsEngineHits}</span>
+          <span className="text-mute/55">
+            {" "}
+            ·{" "}
+            {vsYouHits > vsEngineHits
+              ? "本人領先"
+              : vsYouHits < vsEngineHits
+                ? "引擎暫時領先"
+                : "打平"}
+          </span>
+        </p>
+      )}
+
+      <p className="mt-2 font-mono text-mute/45 text-[9px] tracking-[0.12em] leading-snug">
+        三向對帳(主勝 / 和 / 客勝)· 賽前鎖死、賽後自動結算 · 跟棒球準度分開算。
+      </p>
+    </section>
+  );
+}
