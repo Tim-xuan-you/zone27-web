@@ -12,15 +12,18 @@ import { useState } from "react";
 export default function SportToggle({
   baseball,
   soccer,
+  containerClass = "mx-auto max-w-5xl w-full px-6 sm:px-10 pt-4 pb-8",
 }: {
   baseball: React.ReactNode;
   soccer: React.ReactNode;
+  /** 外層定位/寬度(預設給寬頁 · 窄頁如 /ladder 傳無 max-w/px 的縮版,避免雙重 padding) */
+  containerClass?: string;
 }) {
   const [sport, setSport] = useState<"baseball" | "soccer">("baseball");
 
   return (
     <>
-      <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pt-4 pb-8">
+      <section className={containerClass}>
         <div
           role="tablist"
           aria-label="選擇運動"

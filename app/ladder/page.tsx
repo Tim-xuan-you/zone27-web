@@ -2,6 +2,7 @@ import Link from "next/link";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import YourRecordStrip from "@/components/YourRecordStrip";
+import SportToggle from "@/components/SportToggle";
 import { getFinalizedMatches, getMatchStartIso } from "@/lib/matches";
 import { getMlbFinalizedResults } from "@/lib/mlb-matches";
 import { createPageMetadata } from "@/lib/page-og";
@@ -71,9 +72,31 @@ export default async function LadderPage() {
           </p>
         </div>
 
-        {/* 你現在的位置(登入且押過才顯示 · 把死路 brochure 變個人目標梯度)·
+        {/* 你現在的位置 · 棒球 / 足球 分開算(三本帳不混池)· 同一套天梯規則套兩運動 ·
+            等寬切換 = 不凌亂(各占整塊不堆疊)· 足球 0 結算 → 設計過的「即將開始」不是空卡。
             R189 改讀 DB(取代死掉的匿名版 LadderPosition)*/}
-        <YourRecordStrip variant="ladder" matchResults={matchResults} />
+        <div className="mb-10">
+          <SportToggle
+            containerClass="pt-1 pb-5"
+            baseball={
+              <YourRecordStrip variant="ladder" matchResults={matchResults} />
+            }
+            soccer={
+              <div className="border border-gold/30 bg-slate/40 p-5">
+                <span className="inline-block font-mono text-gold/80 text-[9px] tracking-[0.3em] px-2 py-1 border border-gold/40 mb-3">
+                  足球天梯 · 世界盃 6/11 開始
+                </span>
+                <p className="text-bone text-base leading-relaxed">
+                  足球的賽後對帳,<span className="text-gold">從世界盃 6/11 第一場開始</span>。
+                </p>
+                <p className="mt-2 text-mute text-sm leading-relaxed">
+                  跟棒球<span className="text-bone">分開算</span>(各算各的準度)—— 押滿 10 場、
+                  而且那個月贏過足球引擎,才上得了足球天梯。 你押的每一場,結果都會當眾對帳、連輸都掛。
+                </p>
+              </div>
+            }
+          />
+        </div>
 
         {/* ── 5 階(神諭在最上面)──────────────── */}
         <div className="flex flex-col gap-2">
