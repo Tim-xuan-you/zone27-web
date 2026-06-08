@@ -109,11 +109,11 @@ function Prediction({
   const homeGold = d.homeWin === max;
   const drawGold = d.draw === max && !homeGold;
   const awayGold = d.awayWin === max && !homeGold && !drawGold;
-  const top = prediction.topScores[0];
 
   return (
     <div className="border-t border-line/40 pt-2.5">
-      {/* 三個數字 */}
+      {/* 三個數字 · favored 那格掛「比亂猜 +N」錨點(把 41% 從「<50% 像丟銅板」重新錨在
+          三選一亂猜的 33% 上 → 讀成「比亂猜高 8 分」的真實領先 · 心理學參考點重設) */}
       <div className="flex items-baseline justify-between mb-1.5 font-mono tabular">
         <Pct label={home} value={d.homeWin} gold={homeGold} align="left" />
         <Pct label="和局" value={d.draw} gold={drawGold} align="center" />
@@ -127,13 +127,16 @@ function Prediction({
         <span style={{ width: `${d.awayWin}%` }} className={awayGold ? "bg-gold" : "bg-mute/40"} />
       </div>
 
-      {/* 最可能比分 + 誠實小字 */}
-      {top && (
-        <p className="mt-2 font-mono text-mute/55 text-[9px] tracking-[0.12em] leading-snug">
-          最可能比分 <span className="text-mute/80 tabular">{top.home}-{top.away}</span> ·
-          引擎自己算的機率,不是盤口 · 賽後逐場對帳
-        </p>
-      )}
+      {/* 預期進球(per-match 一定會變的真信號)取代「最可能比分 1-1」——
+          後者其實是模型常數(引擎假設每場平均 2.6 球 → 平衡場的最可能比分永遠塌成 1-1,
+          每張卡一樣 = 雜訊)。 預期進球的拆分(誰比較能進)才隨對戰變、才誠實有資訊。 */}
+      <p className="mt-2 font-mono text-mute/55 text-[9px] tracking-[0.12em] leading-snug">
+        預期進球{" "}
+        <span className="text-bone/85 tabular">
+          {prediction.xgHome.toFixed(1)}–{prediction.xgAway.toFixed(1)}
+        </span>{" "}
+        · 引擎自己算的,不是盤口 · 賽後逐場對帳
+      </p>
       {/* 盲點揭露(538/Savant 式)· 把引擎看不到的攤在下注點 = 報馬仔黑箱的反面 */}
       <p className="mt-1.5 font-mono text-mute/40 text-[9px] tracking-[0.1em] leading-snug">
         引擎沒看到:傷停 · 紅黃牌停賽 · 陣容輪換 · 天候 —— 我們攤開,讓你自己加權
@@ -164,6 +167,12 @@ function Pct({
       <span className="text-mute/55 text-[8px] tracking-[0.15em] truncate max-w-[6rem]">
         {label.length > 6 ? label.slice(0, 6) : label}
       </span>
+      {/* 只在 favored 那格 · 把絕對數字錨在「三選一亂猜 33%」上 = 比亂猜高幾分的真領先 */}
+      {gold && value > 33 && (
+        <span className="font-mono text-gold/70 text-[8px] tracking-[0.08em] leading-none whitespace-nowrap">
+          比亂猜 +{value - 33}
+        </span>
+      )}
     </span>
   );
 }

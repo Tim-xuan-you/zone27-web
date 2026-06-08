@@ -63,9 +63,11 @@ export default async function SoccerPage() {
             我們<span className="text-gold">自己算</span>的勝 / 平 / 負
           </h1>
           <p className="mt-4 text-mute text-sm leading-relaxed max-w-2xl">
-            這不是莊家的盤口 —— 是我們的推演引擎用足球預測的學術標準(每隊預期進球 +
-            低比分修正)<span className="text-bone">自己算出來</span>的機率。 賽後一樣
-            <span className="text-gold">逐場對帳、連輸都留</span>(足球自動結算即將上線)。 不接受下注。
+            這不是莊家的盤口 —— 是我們的推演引擎<span className="text-bone">自己算出來</span>的勝 / 平 / 負。
+            足球三選一,<span className="text-bone">亂猜每邊就 33%</span>;全世界沒有人(莊家也是)能算到八九成,
+            <span className="text-bone">敢喊穩贏的都在騙你</span>。 我們不裝神準 —— 只老實開出引擎偏哪邊、
+            比亂猜多幾分,你自己判斷它<span className="text-gold">開高了還是開低了</span>,
+            賽前鎖死、賽後逐場對帳、連輸都留。 不接受下注。
           </p>
           <p className="mt-3 font-mono text-mute/60 text-[10px] tracking-[0.2em]">
             {total > 0
