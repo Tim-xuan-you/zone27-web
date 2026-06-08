@@ -24,28 +24,17 @@ function kickoffTPE(iso: string): string {
 }
 
 export default function SoccerMatchCard({ match }: { match: SoccerMatchPrediction }) {
-  const { id, home, away, homeSeed, awaySeed, prediction, competitionName, dateISO, locked } =
-    match;
+  const { id, home, away, homeSeed, awaySeed, prediction, competitionName, dateISO } = match;
   const ko = kickoffTPE(dateISO);
-  const sealed = locked && Boolean(prediction);
 
+  // 註:鎖定 / 賽後對帳的信任故事在首頁旗幟 + 公開引擎戰績卡講(整體)· 不在每張卡badge —
+  // 因為只有「進入鎖定窗(開賽前 2 天)」的場才鎖,逐卡badge 會「有的有有的沒有」看起來像 bug。
   return (
-    <article
-      className={`bg-slate/40 border p-4 sm:p-5 flex flex-col gap-3 transition-colors hover:border-gold/40 ${
-        sealed ? "border-gold/30" : "border-line/60"
-      }`}
-    >
-      {/* 競賽(+ 賽前鎖定 micro-chip · 信任訊號收成一顆小章,不再佔一整行小字)+ 開賽 */}
+    <article className="bg-slate/40 border border-line/60 p-4 sm:p-5 flex flex-col gap-3 transition-colors hover:border-gold/40">
+      {/* 競賽 + 開賽(台北) */}
       <div className="flex items-center justify-between gap-2">
-        <span className="flex items-center gap-2 min-w-0">
-          <span className="font-mono text-gold/80 text-[9px] tracking-[0.3em]">
-            {competitionName}
-          </span>
-          {sealed && (
-            <span className="font-mono text-gold/85 text-[8px] tracking-[0.18em] border border-gold/40 px-1 py-[2px] leading-none shrink-0">
-              賽前鎖定
-            </span>
-          )}
+        <span className="font-mono text-gold/80 text-[9px] tracking-[0.3em]">
+          {competitionName}
         </span>
         <span className="font-mono text-mute text-[9px] tracking-[0.25em] tabular shrink-0">
           {ko} <span className="text-mute/50">TPE</span>
