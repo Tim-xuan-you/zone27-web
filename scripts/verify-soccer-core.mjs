@@ -6,11 +6,13 @@
 // (CI 在動到 lib/soccer/** 時跑;本機重構/調參後也跑。)
 // ─────────────────────────────────────────────────────
 
-import { predictSoccer, toDisplayPercents } from "../lib/soccer/engine-core.mjs";
+import { predictSoccer, predictFromGoals, toDisplayPercents } from "../lib/soccer/engine-core.mjs";
 import { buildRatings, getRating, gameCounts, MIN_GAMES_FOR_RATING } from "../lib/soccer/elo-core.mjs";
 import { getRatingByName, SOCCER_RATING_BASELINE } from "../lib/soccer/teams-data.mjs";
 import {
   computeCompetitionPredictions,
+  computeTeamStrengths,
+  clubLambdas,
   enginePickOf,
   gradeLockedVerdict,
   isLockable,
@@ -130,7 +132,43 @@ const club = computeCompetitionPredictions(
   [toScheduledInput({ id: 3, utcDate: "2026-06-11T18:00:00Z", status: "SCHEDULED", homeTeam: { shortName: "A" }, awayTeam: { shortName: "B" } })],
 );
 eq("BSA under MIN_GAMES → null", club[0].prediction, null);
-eq("BSA homeAdvantage 60", club[0].homeAdvantage, 60);
+eq("BSA club homeAdvantage legacy 0", club[0].homeAdvantage, 0);
+
+console.log("predictFromGoals (俱樂部攻防 λ → 比分表)");
+{
+  const even = predictFromGoals(1.44, 1.19); // 勢均(主場略強)→ ~40% 主勝
+  approx("even λ sums to 1", even.homeWin + even.draw + even.awayWin, 1, 1e-9);
+  eq("even λ home favored", even.homeWin > even.awayWin && even.homeWin < 0.5, true);
+  const blowout = predictFromGoals(2.4, 0.6); // 強攻碰弱守 → 大勝率 + 高比分
+  approx("blowout λ sums to 1", blowout.homeWin + blowout.draw + blowout.awayWin, 1, 1e-9);
+  eq("blowout home win > 0.6", blowout.homeWin > 0.6, true);
+  eq("blowout vs even: bigger spread", blowout.homeWin > even.homeWin + 0.2, true);
+  // predictFromGoals(predictSoccer 的 λ) === predictSoccer(rating)(overlay 用 xg 重現的等價性)
+  const viaRating = predictSoccer(1875, 1636, { homeAdvantage: 0 });
+  const viaGoals = predictFromGoals(viaRating.xgHome, viaRating.xgAway);
+  approx("xg-path ≡ rating-path homeWin", viaGoals.homeWin, viaRating.homeWin, 1e-12);
+  approx("xg-path ≡ rating-path draw", viaGoals.draw, viaRating.draw, 1e-12);
+}
+
+console.log("computeTeamStrengths + clubLambdas (攻防隨對戰變 · 總進球不再固定)");
+{
+  // 合成聯賽:STRONG 大勝 / WEAK 大敗 / MID 中庸
+  const league = [
+    { home: "STRONG", away: "WEAK", homeGoals: 4, awayGoals: 0 },
+    { home: "MID", away: "STRONG", homeGoals: 1, awayGoals: 3 },
+    { home: "WEAK", away: "MID", homeGoals: 0, awayGoals: 2 },
+    { home: "STRONG", away: "MID", homeGoals: 3, awayGoals: 1 },
+    { home: "WEAK", away: "STRONG", homeGoals: 1, awayGoals: 5 },
+    { home: "MID", away: "WEAK", homeGoals: 2, awayGoals: 0 },
+  ];
+  const s = computeTeamStrengths(league);
+  eq("STRONG att > MID att > WEAK att", s.byTeam.STRONG.att > s.byTeam.MID.att && s.byTeam.MID.att > s.byTeam.WEAK.att, true);
+  eq("WEAK def worst (>1)", s.byTeam.WEAK.def > 1 && s.byTeam.STRONG.def < 1, true);
+  const strongVweak = clubLambdas(s, "STRONG", "WEAK"); // 強攻弱守 → 高 λ
+  const weakVstrong = clubLambdas(s, "WEAK", "STRONG");
+  eq("STRONG home λ > WEAK home λ", strongVweak.xgHome > weakVstrong.xgHome, true);
+  eq("總進球隨對戰變(非固定 2.6)", Math.abs((strongVweak.xgHome + strongVweak.xgAway) - (weakVstrong.xgHome + weakVstrong.xgAway)) > 0.3, true);
+}
 
 console.log("gradeLockedVerdict (三向 · 含輸照掛 · 和局永不 push)");
 // 引擎看好主(0.5/0.3/0.2)· 主贏 2-1 → proved

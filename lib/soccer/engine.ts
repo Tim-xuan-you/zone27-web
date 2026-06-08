@@ -11,6 +11,7 @@
 
 import {
   predictSoccer as predictSoccerCore,
+  predictFromGoals as predictFromGoalsCore,
   toDisplayPercents as toDisplayPercentsCore,
 } from "./engine-core.mjs";
 
@@ -58,6 +59,13 @@ export const predictSoccer: (
   ratingAway: number,
   params?: SoccerEngineParams,
 ) => SoccerPrediction = predictSoccerCore;
+
+/** 直接用兩邊預期進球 λ 開盤(俱樂部攻防模型 · 進球數隨對戰變)。 */
+export const predictFromGoals: (
+  xgHome: number,
+  xgAway: number,
+  params?: SoccerEngineParams,
+) => SoccerPrediction = predictFromGoalsCore;
 
 /**
  * 把預測轉成「四捨五入到整數百分比、且三者相加恰為 100」的展示用數字(最大餘數法)。

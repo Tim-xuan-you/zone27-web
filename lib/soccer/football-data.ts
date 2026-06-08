@@ -16,7 +16,7 @@
 //   「引擎線一律用賽前鎖定值」)。 未鎖的場(或 JSON 空)仍走 live 重算。
 // ─────────────────────────────────────────────────────
 
-import { predictSoccer, type SoccerPrediction } from "./engine";
+import { predictSoccer, predictFromGoals, type SoccerPrediction } from "./engine";
 import {
   computeCompetitionPredictions,
   toScheduledInput,
@@ -190,11 +190,14 @@ export async function getCompetitionPredictions(
   return core.map((c, i) => {
     const raw = scheduledRaw[i];
     const locked = lockedById.get(c.id);
-    // 已鎖定 → 用鎖定的實力分重現 predictSoccer(顯示=賽後對帳同一個數字)。
+    // 已鎖定 → 重現鎖定線(顯示=賽後對帳同一個數字 · 改不了)。 優先用鎖定的預期進球 λ
+    // (俱樂部攻防 + 國家隊新鎖皆存 xg);舊紀錄(首批世界盃)無 xg → fallback 實力分。
     const prediction = locked
-      ? predictSoccer(locked.ratingHome, locked.ratingAway, {
-          homeAdvantage: locked.homeAdvantage,
-        })
+      ? typeof locked.xgHome === "number" && typeof locked.xgAway === "number"
+        ? predictFromGoals(locked.xgHome, locked.xgAway)
+        : predictSoccer(locked.ratingHome, locked.ratingAway, {
+            homeAdvantage: locked.homeAdvantage,
+          })
       : c.prediction;
     return {
       id: c.id,

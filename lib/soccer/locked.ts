@@ -21,10 +21,14 @@ export type LockedSoccerPrediction = {
   awaySeed: string;
   home: string;
   away: string;
-  /** 餵進引擎的實力分 + 主場優勢(給站上「顯示鎖定線」重現 predictSoccer · 零 drift) */
+  /** 餵進引擎的實力分 + 主場優勢(國家隊 · 舊紀錄 overlay 用 predictSoccer 重現) */
   ratingHome: number;
   ratingAway: number;
   homeAdvantage: number;
+  /** 餵進比分表的兩邊預期進球 λ(overlay 優先用 predictFromGoals 重現 · 俱樂部攻防模型必需)·
+   *  舊紀錄(R203 首批 11 場世界盃)無此欄 → fallback predictSoccer(rating)。 */
+  xgHome?: number;
+  xgAway?: number;
   /** 鎖定的引擎開盤(raw 0-1 · 給 RPS / 校準)+ 整數展示 + 看好邊 */
   homeWin: number;
   draw: number;

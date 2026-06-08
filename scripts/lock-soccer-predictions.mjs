@@ -155,6 +155,9 @@ async function main() {
         ratingHome: c.ratingHome,
         ratingAway: c.ratingAway,
         homeAdvantage: c.homeAdvantage,
+        // 餵進比分表的兩邊預期進球 λ(overlay 用 predictFromGoals 重現鎖定線 · 俱樂部/國家隊共用)
+        xgHome: pred.xgHome,
+        xgAway: pred.xgAway,
         // 鎖定的引擎開盤:raw 0-1(給 RPS/校準)+ 整數展示 + 看好邊
         homeWin: pred.homeWin,
         draw: pred.draw,

@@ -109,6 +109,9 @@ function Prediction({
   const homeGold = d.homeWin === max;
   const drawGold = d.draw === max && !homeGold;
   const awayGold = d.awayWin === max && !homeGold && !drawGold;
+  // 真・膠著場(最高才 ≤38% · 三邊擠在四成內)= 引擎自己都拿不準 → 不是缺點,是把舞台讓給你:
+  // 這種場你的獨家判斷(傷停/輪換/直覺)最值錢 = 打敗引擎、賺校準分的最好機會(你 vs 引擎)。
+  const tossup = max <= 38;
 
   return (
     <div className="border-t border-line/40 pt-2.5">
@@ -137,10 +140,23 @@ function Prediction({
         </span>{" "}
         · 引擎自己算的,不是盤口 · 賽後逐場對帳
       </p>
-      {/* 盲點揭露(538/Savant 式)· 把引擎看不到的攤在下注點 = 報馬仔黑箱的反面 */}
-      <p className="mt-1.5 font-mono text-mute/40 text-[9px] tracking-[0.1em] leading-snug">
-        引擎沒看到:傷停 · 紅黃牌停賽 · 陣容輪換 · 天候 —— 我們攤開,讓你自己加權
-      </p>
+      {tossup ? (
+        /* 膠著場 = 把「無力感」翻成「你的主場」(玩家優越感 · 你 vs 引擎)· 唯一誠實的挑釁 */
+        <div className="mt-2">
+          <span className="inline-block font-mono text-[8.5px] tracking-[0.2em] text-gold/90 border border-gold/45 px-1.5 py-[3px] leading-none mb-1.5">
+            膠著 · 最難一題
+          </span>
+          <p className="font-mono text-mute/55 text-[9px] tracking-[0.1em] leading-snug">
+            三邊都擠在四成內,引擎自己都拿不準 —— 這種場,你的獨家判斷(傷停 / 輪換 / 直覺)
+            <span className="text-bone/80">最值錢</span>。 換你開盤,賽後看誰準。
+          </p>
+        </div>
+      ) : (
+        /* 盲點揭露(538/Savant 式)· 把引擎看不到的攤在下注點 = 報馬仔黑箱的反面 */
+        <p className="mt-1.5 font-mono text-mute/40 text-[9px] tracking-[0.1em] leading-snug">
+          引擎沒看到:傷停 · 紅黃牌停賽 · 陣容輪換 · 天候 —— 我們攤開,讓你自己加權
+        </p>
+      )}
     </div>
   );
 }
