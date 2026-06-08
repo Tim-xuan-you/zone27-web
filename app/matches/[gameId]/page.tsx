@@ -21,7 +21,6 @@ import {
   getEnginePctOnWinner,
   getEngineFavorite,
   getMatchStartIso,
-  getTodayMatches,
   getFinalizedMatches,
   type Match,
   type MatchPhase,
@@ -30,7 +29,7 @@ import {
 import { getEngineConviction } from "@/lib/conviction";
 import { getEngineReasoning, type EngineReasoning } from "@/lib/reasoning";
 import { getTeamCrest } from "@/lib/identity";
-import { getMlbMatchById } from "@/lib/mlb-matches";
+import { getMlbMatchById, getTodayMatchesAllLeagues } from "@/lib/mlb-matches";
 
 // ── ZONE 27 · /matches/[gameId] · 市場頁(R175 Polymarket pivot)──
 // Tim 2026-05-30「資訊多到爆炸 · 划不到底 · 該刪就刪 · 變成 Polymarket」·
@@ -88,6 +87,11 @@ export default async function MatchDetailPage({
   const homeFavored = fav === "home";
   const awayFavored = fav === "away";
   const phase = getMatchPhase(m);
+  // 「換一場」側欄 rail · 跨聯盟(CPBL + 今天的 MLB)· 只在今日賽前/進行中才需要(省一次 MLB fetch)。
+  const railMatches =
+    phase === "today-pregame" || phase === "today-live"
+      ? await getTodayMatchesAllLeagues()
+      : [];
   const calibration = getCalibration(m);
   const enginePctOnWinner = getEnginePctOnWinner(m);
   const startISO = getMatchStartIso(m);
@@ -452,7 +456,7 @@ export default async function MatchDetailPage({
       {(phase === "today-pregame" || phase === "today-live") && (
         <TonightMatchRail
           currentMatchId={m.id}
-          matches={getTodayMatches().map((tm) => ({
+          matches={railMatches.map((tm) => ({
             id: tm.id,
             homeName: tm.home.name,
             awayName: tm.away.name,

@@ -9,7 +9,14 @@
 // ─────────────────────────────────────────────────────
 
 import type { Match, TeamSide } from "@/lib/matches";
-import { getMatchStartIso } from "@/lib/matches";
+import {
+  getMatchStartIso,
+  getTodayMatches,
+  getTodayTaipei,
+  getMatchPhase,
+  getMatchDateIso,
+  parseHHMM,
+} from "@/lib/matches";
 import {
   fetchRelevantMlb,
   teamZh,
@@ -99,6 +106,29 @@ export async function getMlbAsMatches(): Promise<Match[]> {
     out.push(mlbGameToMatch(g, pct));
   }
   return out;
+}
+
+// ── 跨聯盟「今日賽事」(CPBL + MLB)─────────────────────────────────────
+// getTodayMatches() 只看 CPBL 靜態陣列 → 跨聯盟後 Nav「今日 N」計數 + 詳情頁「換一場」
+// 側欄 rail 會漏掉今天的 MLB 場(MLB 台灣早上開賽)。 這支把今天的 MLB(賽前/進行中/今日剛
+// 結束)併進來,讓計數與 rail 都涵蓋兩聯盟。 async(MLB 走 ISR 快取的 API)· 呼叫端皆 server。
+// 放在 mlb-matches.ts(本來就依賴 matches.ts · 單向不循環)。
+export async function getTodayMatchesAllLeagues(): Promise<Match[]> {
+  const today = getTodayTaipei();
+  const cpbl = getTodayMatches();
+  let mlb: Match[] = [];
+  try {
+    mlb = (await getMlbAsMatches()).filter((m) => {
+      const phase = getMatchPhase(m);
+      if (phase === "today-pregame" || phase === "today-live") return true;
+      return phase === "final" && getMatchDateIso(m) === today;
+    });
+  } catch {
+    mlb = []; // graceful · MLB API 失敗不影響 CPBL 計數
+  }
+  return [...cpbl, ...mlb].sort(
+    (a, b) => parseHHMM(a.startTime) - parseHHMM(b.startTime),
+  );
 }
 
 // ── MLB 詳情頁永久化(R201 碼審 · 修「買過/回過的 MLB 場 2 天後點進去 404」)──────

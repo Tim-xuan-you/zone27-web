@@ -3,7 +3,7 @@ import MobileNavToggle from "@/components/MobileNavToggle";
 import MembershipNavCTA from "@/components/MembershipNavCTA";
 import TierBadge from "@/components/TierBadge";
 import CmdKTrigger from "@/components/CmdKTrigger";
-import { getTodayMatches } from "@/lib/matches";
+import { getTodayMatchesAllLeagues } from "@/lib/mlb-matches";
 
 type NavKey =
   | "home"
@@ -62,10 +62,11 @@ const NAV_ITEMS_STATIC: {
   { key: "about", href: "/about", label: "關於" },
 ];
 
-export default function Nav({ active }: { active?: NavKey }) {
+export default async function Nav({ active }: { active?: NavKey }) {
   // Round 50 W-D · server-side today's match count for「賽事」 dynamic chip。
-  // 0 場日子 chip 自動 hidden · Nav fallback plain「賽事」。
-  const todayMatches = getTodayMatches();
+  // 0 場日子 chip 自動 hidden · Nav fallback plain「賽事」。 跨聯盟:CPBL + 今天的 MLB
+  // (getTodayMatchesAllLeagues · MLB ISR 快取 + try/catch graceful · 失敗只少算不卡頁)。
+  const todayMatches = await getTodayMatchesAllLeagues();
   const tonightCount = todayMatches.length;
   // R175 Polymarket pivot · 移除 💬 討論室 nav item(+ 舊 #game-thread dead
   // anchor)· 討論已併入賽事頁的「看法 · 分析」(CreatorAnalysis)· 點任一場
