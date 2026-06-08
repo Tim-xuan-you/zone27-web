@@ -16,6 +16,7 @@ import {
   matches as allMatches,
 } from "@/lib/matches";
 import { getMlbAsMatches } from "@/lib/mlb-matches";
+import { normalizeProfileCode } from "@/lib/profile-code";
 
 // ── ZONE 27 · /u/[code] 動態 OG 卡 = 含輸收據(soul-roadmap #3 收斂進 P0)─────
 // 把 https://zone27-web.vercel.app/u/{code} 貼到 LINE/FB/Threads/X/Discord/Slack,
@@ -37,7 +38,8 @@ export default async function ProfileOgImage({
   params: Promise<{ code: string }>;
 }) {
   const { code: raw } = await params;
-  const code = (raw ?? "").trim().toLowerCase();
+  const code = normalizeProfileCode(raw);
+  if (!code) return brandFallback();
 
   const profile = await getProfileByCode(code);
   if (!profile) return brandFallback();

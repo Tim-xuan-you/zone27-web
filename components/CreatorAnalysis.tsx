@@ -28,6 +28,7 @@ import {
 } from "@/lib/creator-comments";
 import { matchHasStarted } from "@/lib/matches";
 import { getMyPrediction } from "@/lib/predictions-market";
+import { isProfileCode } from "@/lib/profile-code";
 import Avatar from "@/components/Avatar";
 import {
   mentionToken,
@@ -464,16 +465,35 @@ function PostCard({
     >
       <div className="flex items-baseline justify-between gap-3 mb-1.5 flex-wrap">
         <span className="flex items-center gap-2 flex-wrap">
-          <Avatar seed={id.seed} glyph={id.glyph} size={26} />
-          <span className="font-mono text-bone text-[11px] tracking-[0.2em]">{id.label}</span>
-          {/* 永久碼章 · 改名洗不掉 = 認得出同一人(報馬仔換馬甲也賴不掉) */}
-          {id.code && (
-            <span
-              title="永久代號 · 改名也認得出同一人 · 戰績綁這個碼"
-              className="font-mono text-mute/45 text-[9px] tracking-[0.15em]"
+          {/* 作者身分連到公開含輸檔案 /u/[code](永久碼)· 讀完分析 → 一鍵驗證「他到底多準·含輸」
+              = 創作者可信度迴路(報馬仔換馬甲也賴不掉)。 舊 RPC 無永久碼 → 不連(graceful)。 */}
+          {isProfileCode(id.key) ? (
+            <Link
+              href={`/u/${id.key}`}
+              title="看這位的公開含輸戰績"
+              className="flex items-center gap-2 hover:opacity-80 transition-opacity"
             >
-              {id.code}
-            </span>
+              <Avatar seed={id.seed} glyph={id.glyph} size={26} />
+              <span className="font-mono text-bone text-[11px] tracking-[0.2em]">{id.label}</span>
+              {id.code && (
+                <span className="font-mono text-mute/45 text-[9px] tracking-[0.15em]">
+                  {id.code}
+                </span>
+              )}
+            </Link>
+          ) : (
+            <>
+              <Avatar seed={id.seed} glyph={id.glyph} size={26} />
+              <span className="font-mono text-bone text-[11px] tracking-[0.2em]">{id.label}</span>
+              {id.code && (
+                <span
+                  title="永久代號 · 改名也認得出同一人 · 戰績綁這個碼"
+                  className="font-mono text-mute/45 text-[9px] tracking-[0.15em]"
+                >
+                  {id.code}
+                </span>
+              )}
+            </>
           )}
           <span className="font-mono text-gold/80 text-[9px] tracking-[0.2em] px-1.5 py-0.5 border border-gold/40">
             推薦 {pickName.slice(0, 5)}

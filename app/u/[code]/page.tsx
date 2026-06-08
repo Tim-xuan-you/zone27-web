@@ -17,6 +17,7 @@ import { getMlbAsMatches } from "@/lib/mlb-matches";
 import { getSoccerLedgerResults } from "@/lib/soccer/football-data";
 import { getSoccerEnginePicks } from "@/lib/soccer/locked";
 import { createPageMetadata } from "@/lib/page-og";
+import { normalizeProfileCode } from "@/lib/profile-code";
 
 // ── ZONE 27 · /u/[code] · 公開含輸 Profile(soul-roadmap P0 keystone)────────
 // 任何人(免登入)用永久碼看一位會員攤開、刪不掉、含贏含輸的押注帳本。
@@ -30,26 +31,13 @@ import { createPageMetadata } from "@/lib/page-og";
 
 export const revalidate = 60;
 
-const CODE_RE = /^[0-9a-f]{8}$/;
-
-function normalizeCode(raw: string): string | null {
-  let c = "";
-  try {
-    c = decodeURIComponent(raw ?? "");
-  } catch {
-    c = raw ?? "";
-  }
-  c = c.trim().toLowerCase();
-  return CODE_RE.test(c) ? c : null;
-}
-
 export async function generateMetadata({
   params,
 }: {
   params: Promise<{ code: string }>;
 }): Promise<Metadata> {
   const { code: raw } = await params;
-  const code = normalizeCode(raw);
+  const code = normalizeProfileCode(raw);
   if (!code) return { title: "找不到這個檔案" };
   const profile = await getProfileByCode(code);
   if (!profile) return { title: "找不到這個檔案" };
@@ -68,7 +56,7 @@ export default async function PublicProfilePage({
   params: Promise<{ code: string }>;
 }) {
   const { code: raw } = await params;
-  const code = normalizeCode(raw);
+  const code = normalizeProfileCode(raw);
   if (!code) notFound();
 
   const profile = await getProfileByCode(code);

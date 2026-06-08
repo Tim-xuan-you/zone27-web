@@ -47,9 +47,14 @@ export default function MembershipPage() {
         <h1 className="text-3xl sm:text-4xl text-bone font-light tracking-tight leading-tight mb-3">
           升級 · 把你的準度<span className="text-gold">變成身分</span>
         </h1>
-        <p className="text-mute text-sm sm:text-base leading-relaxed mb-8 max-w-lg">
+        <p className="text-mute text-sm sm:text-base leading-relaxed mb-3 max-w-lg">
           引擎永遠免費。升級不是買功能 —— 是把你<span className="text-bone">誠實累積的準度</span>
           變成一個夠稀有的身分(順帶解鎖把分析標價賣 · 你拿 90–95%)。
+        </p>
+        {/* 任務型支持框架(Substack 最高信任轉換語)· 對誠實品牌:付費 = 養著那本刪不掉的帳本 */}
+        <p className="text-mute text-sm sm:text-base leading-relaxed mb-8 max-w-lg">
+          你的訂閱養著這個地方 —— 讓<span className="text-bone">引擎永遠免費</span>、讓
+          <span className="text-bone">贏和輸的帳本永遠刪不掉</span>。
         </p>
 
         {/* 兩張卡 · 點「立即升級」直接秀轉帳帳號(不再 email 去要)*/}
