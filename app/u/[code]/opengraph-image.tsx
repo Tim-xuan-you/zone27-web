@@ -32,6 +32,12 @@ export const size = OG_SIZE;
 export const contentType = OG_CONTENT_TYPE;
 export const alt = "ZONE 27 · 公開含輸戰績";
 
+// 「贏過引擎」金章只在樣本夠穩(≥ 此數的同場引擎對照)才出 —— 防小樣本(押 2 場贏 1)
+// 就喊贏過機器=過度宣稱(燒 57% 誠實王牌)。 8 = 全站「數字才不跳」的 FIRM 門檻(同
+// ProfileView FIRM / CalibrationIdentityCard SAMPLE_FIRM)· 比 /ladder 上榜 10 略寬,
+// 但已足以讓「贏過公開引擎」這句話站得住。 含輸照算(沒中數仍印在卡上 · 不是只選贏)。
+const ENGINE_FLEX_MIN = 8;
+
 export default async function ProfileOgImage({
   params,
 }: {
@@ -68,6 +74,9 @@ export default async function ProfileOgImage({
 function receiptResponse(name: string, authorCode: string, id: CalibrationIdentity) {
   const hasDecided = id.accuracy !== null;
   const showVs = id.engine.decided > 0 && id.engine.accuracy !== null;
+  // 贏過引擎金章:真贏(含輸對照)+ 樣本夠穩才出 · 同頁面 standingVerdict「贏過引擎」一致,
+  // 但門檻更嚴(viral 卡不靠小樣本喊贏)· 報馬仔結構上掛不出這句(他們沒有公開引擎當靶)。
+  const beatEngine = id.beatEngine === true && id.engine.decided >= ENGINE_FLEX_MIN;
 
   return new ImageResponse(
     (
@@ -105,7 +114,7 @@ function receiptResponse(name: string, authorCode: string, id: CalibrationIdenti
         </div>
 
         {/* NAME + CODE */}
-        <div style={{ display: "flex", flexDirection: "column", marginTop: 48 }}>
+        <div style={{ display: "flex", flexDirection: "column", marginTop: 38 }}>
           <span
             style={{
               fontSize: 60,
@@ -124,7 +133,7 @@ function receiptResponse(name: string, authorCode: string, id: CalibrationIdenti
 
         {/* THE NUMBER */}
         {hasDecided ? (
-          <div style={{ display: "flex", flexDirection: "column", marginTop: 40 }}>
+          <div style={{ display: "flex", flexDirection: "column", marginTop: 26 }}>
             <div style={{ display: "flex", alignItems: "baseline", gap: 18 }}>
               <span style={{ fontSize: 150, color: BRAND.gold, fontWeight: 300, letterSpacing: "-0.03em", lineHeight: 1 }}>
                 {id.accuracy}
@@ -138,17 +147,37 @@ function receiptResponse(name: string, authorCode: string, id: CalibrationIdenti
               押 {id.total} 場 · 中 {id.proved} · 沒中 {id.diverged}
               {showVs ? ` · 同 ${id.engine.decided} 場 引擎 ${id.engine.accuracy}%` : ""}
             </span>
-            {/* the bar */}
-            <div style={{ position: "relative", height: 5, background: boneRgba(0.1), marginTop: 26, display: "flex" }}>
-              <div
-                style={{
-                  width: `${Math.max(0, Math.min(100, id.accuracy ?? 0))}%`,
-                  height: 5,
-                  background: BRAND.gold,
-                  boxShadow: "0 0 24px rgba(212,175,55,0.45)",
-                }}
-              />
-            </div>
+            {/* 贏過引擎金章 vs 準度條 · 二擇一(贏了引擎就掛金章 · 進度條變多餘噪音)·
+                金章只在真贏 + 樣本夠穩才出(否則照常顯示準度條 · 不喊空話)·
+                無 ✓ glyph(OG 字缺 → 純中文)· navy on gold = 全卡最亮的一句。 */}
+            {beatEngine ? (
+              <div style={{ display: "flex", marginTop: 16 }}>
+                <span
+                  style={{
+                    fontSize: 27,
+                    color: BRAND.navy,
+                    background: BRAND.gold,
+                    padding: "9px 24px",
+                    letterSpacing: "0.12em",
+                    fontWeight: 600,
+                    display: "flex",
+                  }}
+                >
+                  贏過公開引擎
+                </span>
+              </div>
+            ) : (
+              <div style={{ position: "relative", height: 5, background: boneRgba(0.1), marginTop: 18, display: "flex" }}>
+                <div
+                  style={{
+                    width: `${Math.max(0, Math.min(100, id.accuracy ?? 0))}%`,
+                    height: 5,
+                    background: BRAND.gold,
+                    boxShadow: "0 0 24px rgba(212,175,55,0.45)",
+                  }}
+                />
+              </div>
+            )}
           </div>
         ) : (
           <div style={{ display: "flex", flexDirection: "column", marginTop: 44 }}>
@@ -176,7 +205,9 @@ function receiptResponse(name: string, authorCode: string, id: CalibrationIdenti
             letterSpacing: "0.28em",
           }}
         >
-          <span style={{ display: "flex" }}>賽前鎖定 · 含輸 · 刪不掉</span>
+          {/* 贏過引擎金章已掛時 · 隱去此標語(留白給金章呼吸 · 含輸訊息上方已有 3 處)·
+              空 span 仍占 space-between 左槽 → URL 維持靠右。 */}
+          <span style={{ display: "flex" }}>{beatEngine ? "" : "賽前鎖定 · 含輸 · 刪不掉"}</span>
           <span style={{ display: "flex", color: goldRgba(0.65) }}>
             zone27-web.vercel.app/u/{authorCode}
           </span>
