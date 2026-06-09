@@ -178,16 +178,21 @@ async function main() {
     });
   }
 
-  store.predictions.sort((a, b) =>
+  // 🔴 護城河:已評分的收據(verdict 非 null)= 刪不掉的公開帳本,永不丟。
+  // 只有「還沒結算的 pending 鎖定」在爆量時才修剪(留最近 MAX_KEEP 筆)· 避免無限長大;
+  // 絕不像舊版 slice(-MAX_KEEP) 那樣連最早的『已評分』收據一起從帳本前端刪掉
+  //(那正是報馬仔「輸了刪文」· 我們存在就是要取代它)。 鏡 lock-mlb-predictions.mjs 同款護城河。
+  const graded = store.predictions.filter((p) => p.verdict != null);
+  const pending = store.predictions.filter((p) => p.verdict == null);
+  const keptPending =
+    pending.length > MAX_KEEP ? pending.slice(-MAX_KEEP) : pending;
+  store.predictions = [...graded, ...keptPending].sort((a, b) =>
     (a.kickoffISO ?? "") < (b.kickoffISO ?? "")
       ? -1
       : (a.kickoffISO ?? "") > (b.kickoffISO ?? "")
         ? 1
         : 0,
   );
-  if (store.predictions.length > MAX_KEEP) {
-    store.predictions = store.predictions.slice(-MAX_KEEP);
-  }
 
   mkdirSync(dirname(LOCK_FILE), { recursive: true });
   writeFileSync(LOCK_FILE, JSON.stringify(store, null, 2) + "\n");
