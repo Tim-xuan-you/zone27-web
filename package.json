@@ -10,6 +10,7 @@
     "fetch-cpbl": "node scripts/fetch-cpbl-pitchers.mjs",
     "fetch-cpbl-advanced": "node scripts/fetch-cpbl-advanced.mjs",
     "fetch-cpbl-schedule": "node scripts/fetch-cpbl-schedule.mjs",
+    "fetch:cpbl-results": "node scripts/fetch-cpbl-results.mjs",
     "process-signature": "node scripts/process-signature.mjs",
     "validate:data": "node scripts/validate-match-data.mjs",
     "validate:data:warn": "node scripts/validate-match-data.mjs --warn",

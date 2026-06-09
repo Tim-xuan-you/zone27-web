@@ -39,6 +39,11 @@ export type FinalResult = {
   winner: "home" | "away" | "tie";
   ingestedAt: string;       // ISO date · when Tim's screenshot was processed
   innings?: number;         // 9 standard · note extra-innings if other
+  /** 結算來源 · 預設(undefined)= Tim 手動截圖補錄;"official-auto" = 由
+   *  scripts/fetch-cpbl-results.mjs 從 cpbl.com.tw 官方賽程自動鏡像、
+   *  在 lib/matches.ts 載入時依隊名配對補位(手動永遠優先覆蓋自動)。
+   *  讓 /track-record 能誠實標示「官方自動結算」(disclosure red line)。 */
+  source?: "manual" | "official-auto";
 };
 
 export type Match = {
@@ -1962,13 +1967,108 @@ const rawMatches: Match[] = [
   },
 ];
 
+// ── CPBL 官方賽果自動鏡像 → 補進缺手動結算的場 ───────────
+// 來源:lib/cpbl-results.json(scripts/fetch-cpbl-results.mjs · GitHub Action
+// 每 3h 從 cpbl.com.tw 官方賽程抓「已打完」的場)。 解掉 CPBL 唯一還在手動
+// 的痛點:賽後比分。 MLB/足球早就自動結算,CPBL(旗艦)卻還靠 Tim 截圖打字
+// = 發霉風險(漏記/打錯/隔天才補)。
+//
+// 配對紅線(守帳本誠實 · 任何疑慮一律 skip 退回手動):
+//   1. 手動 finalResult 永遠優先(Tim 的賽前 slot-frame 校正不可被自動蓋)。
+//   2. 隊名先正規化(matches.ts 內「統一獅 / 統一7-ELEVEn獅」不一致 → 收斂同隊)。
+//   3. 同日 + 兩隊「集合完全相等」才算配上(防把別場誤配上來)。
+//   4. 比分依「賽前 slot」逐隊歸位(吃掉官方主客對調 · 跟 getCalibration 的
+//      slot frame 一致)。
+//   5. 配到 0 場或 >1 場、隊名認不得 → undefined 退回手動(安全方向:寧可不補,
+//      不亂寫一筆毒害公開戰績)。
+import cpblAutoResults from "./cpbl-results.json";
+
+const CPBL_TEAM_KEY: Record<string, string> = {
+  中信兄弟: "CTBC_BROTHERS",
+  樂天桃猿: "RAKUTEN_MONKEYS",
+  "統一7-ELEVEn獅": "UNI_LIONS",
+  統一獅: "UNI_LIONS", // 短寫變體(matches.ts 內部不一致)· 收斂同隊
+  台鋼雄鷹: "TSG_HAWKS",
+  味全龍: "WEICHUAN_DRAGONS",
+  富邦悍將: "FUBON_GUARDIANS",
+};
+function cpblTeamKey(name: string | undefined): string | null {
+  return name ? CPBL_TEAM_KEY[name.trim()] ?? null : null;
+}
+
+type CpblAutoGame = {
+  gameSno: number;
+  date: string; // YYYY-MM-DD(官方賽程日)
+  homeName: string;
+  homeScore: number;
+  awayName: string;
+  awayScore: number;
+  result: "home" | "away" | "tie";
+  endedAt: string;
+};
+const CPBL_AUTO_GAMES = ((cpblAutoResults as { games?: CpblAutoGame[] }).games ??
+  []) as CpblAutoGame[];
+
+/** 官方賽果自動補位:給一場 CPBL 比賽,回官方比分轉成「賽前 slot frame」的
+ *  FinalResult,或 undefined(配不到 / 不唯一 / 有疑慮 → 退回手動)。 */
+function deriveCpblAutoResult(match: Match): FinalResult | undefined {
+  if (!match.id.startsWith("cpbl-")) return undefined;
+  // 延賽的場留給 Tim 手動掌控(線先鎖著、重賽再處理)· 不自動補位 —— 否則
+  // 萬一官方賽程短暫帶原始日期,可能把「未打·線保留」的場誤標成 final 上帳本。
+  if (match.postponed) return undefined;
+  const iso = getMatchDateIso(match);
+  if (!iso) return undefined;
+  const slotHome = cpblTeamKey(match.home.name);
+  const slotAway = cpblTeamKey(match.away.name);
+  if (!slotHome || !slotAway || slotHome === slotAway) return undefined;
+
+  const hits = CPBL_AUTO_GAMES.filter((g) => {
+    if (g.date !== iso) return false;
+    const oh = cpblTeamKey(g.homeName);
+    const oa = cpblTeamKey(g.awayName);
+    if (!oh || !oa) return false;
+    // 兩隊集合完全相等(吃掉官方主客方向)
+    return (
+      (oh === slotHome && oa === slotAway) ||
+      (oh === slotAway && oa === slotHome)
+    );
+  });
+  if (hits.length !== 1) return undefined; // 0 配不到 / >1 不唯一 → 退手動
+
+  const g = hits[0];
+  const officialHomeIsSlotHome = cpblTeamKey(g.homeName) === slotHome;
+  // 比分依 slot 歸位(官方主客可能跟賽前 slot 相反)
+  const homeScore = officialHomeIsSlotHome ? g.homeScore : g.awayScore;
+  const awayScore = officialHomeIsSlotHome ? g.awayScore : g.homeScore;
+  if (!Number.isFinite(homeScore) || !Number.isFinite(awayScore)) return undefined;
+  const winner: FinalResult["winner"] =
+    homeScore === awayScore ? "tie" : homeScore > awayScore ? "home" : "away";
+  return {
+    homeScore,
+    awayScore,
+    winner,
+    ingestedAt: String(g.endedAt).slice(0, 10),
+    source: "official-auto",
+  };
+}
+
 // Auto-applied real-stats overlay · raw estimates 被 CPBL fetched 真值蓋
-// per Round 31 W-J · 不在 leaderboard 的 pitcher 仍 estimate
-export const matches: Match[] = rawMatches.map((m) => ({
-  ...m,
-  home: { ...m.home, pitcher: mergePitcherStats(m.home.pitcher) },
-  away: { ...m.away, pitcher: mergePitcherStats(m.away.pitcher) },
-}));
+// per Round 31 W-J · 不在 leaderboard 的 pitcher 仍 estimate。
+// 同一個 map 順手補官方賽果(手動 finalResult 優先 · 同 mergePitcherStats pattern):
+// 一處注入 → 全站讀賽果的 helper(getCalibration / getFinalizedMatches /
+// getMatchPhase / 個人天梯 / 校準圖)自動吃到,0 consumer 改動。
+export const matches: Match[] = rawMatches.map((m) => {
+  const merged: Match = {
+    ...m,
+    home: { ...m.home, pitcher: mergePitcherStats(m.home.pitcher) },
+    away: { ...m.away, pitcher: mergePitcherStats(m.away.pitcher) },
+  };
+  if (!merged.finalResult) {
+    const auto = deriveCpblAutoResult(merged);
+    if (auto) merged.finalResult = auto;
+  }
+  return merged;
+});
 
 export function getMatchById(id: string): Match | undefined {
   return matches.find((m) => m.id === id);

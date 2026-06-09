@@ -56,7 +56,7 @@ Current pending (as of 2026-05-20 DAY 2 collapse):
 ⏳ ② Resend signup (5 min) → unlocks confirmation emails
 ⏳ ③ Brand domain purchase (after name decision · zone27.tw / .app / .cc / .io)
 ⏳ ④ Footer chip bump v0.27 → v0.28 (Tim 拍板 milestone)
-⏳ ⑤ CPBL screenshots ongoing → Tim 截圖 + Claude ingest(已 ship 第一場 2026-05-21 統一 vs 富邦)
+✅ ⑤ CPBL 賽果 ingest — **賽後比分自動化(2026-06-09)** · Tim 不再需要截 box score 打分數 · `cpbl-engine.yml` 每 3h 從官方賽程鏡像 + `lib/matches.ts` 載入時配對結算(手動優先 · 配不到退手動)· Tim 賽前仍親手 curate 投手對戰 + 引擎 winRate(分析判斷,刻意人工)
 ⏳ ⑥ Optional · 截圖 cpbl 球員 profile 右滑顯示 K/BB 真實值 → 升級 estimate 為真實數據
 
 
@@ -434,8 +434,9 @@ OG + favicon + chrome
 - Geist Sans + Geist Mono(`next/font/google`)
 - Vercel(部署) · GitHub(原始碼)
 - 後端: **Supabase Tokyo (ap-northeast-1)** · waitlist 表 RLS-locked + 2 個 SECURITY DEFINER 函式(reserve_waitlist_spot + get_waitlist_count) · NEXT_PUBLIC_SUPABASE_URL + ANON_KEY 在 Vercel env vars
-- MLB 資料:MLB Stats API(免費官方)· 每 10 分鐘 ISR
-- CPBL 資料:**Tim 手動截圖 + Claude 解析 ingest**(暫定 path C · cpbl.com.tw 是 Vue SPA · 沒有 public API)
+- CPBL 賽前(投手對戰 + 引擎 winRate):**Tim 親手 curate**(分析判斷 = 賽前鎖定的線,刻意人工)
+- CPBL 賽果(賽後比分):**官方自動鏡像**(2026-06-09 起)· cpbl.com.tw 其實有 public JSON endpoint(`schedule/getgamedatas`,0 auth)—— 推翻舊「Vue SPA 沒有 public API」結論。 `scripts/fetch-cpbl-results.mjs` → `lib/cpbl-results.json`(GitHub Action `cpbl-engine.yml` 每 3h)· 配對 + PROVED/DIVERGED 在 `lib/matches.ts` 載入時做(隊名正規化 + 賽前 slot frame · **手動 finalResult 永遠優先** · 配不到一律退手動 = 不毒害帳本)。 鏡 MLB/足球 lock-grade pattern · CPBL 終於補上自動結算
+- MLB 資料:MLB Stats API(免費官方)· 每 10 分鐘 ISR · lock/grade GitHub Action
 - 引擎 v0.2:逐打席 Monte Carlo · client-side(訪客瀏覽器內跑 10K sims · ~2 秒收斂)
 
 ## 🎯 8 字品牌 grammar(寫進 /manifesto Section V)

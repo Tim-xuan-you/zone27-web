@@ -1,0 +1,50 @@
+name: CPBL Engine · official results ingest
+
+# ZONE 27 · CPBL 賽果自動鏡像 pipeline。
+#   · fetch-cpbl-results.mjs → 從 cpbl.com.tw 官方賽程抓「已打完」的場 → 寫
+#     lib/cpbl-results.json(commit = 公開的賽果鏡像證據 · 同 MLB/足球 pattern)。
+# 配對 + PROVED/DIVERGED 計算在 lib/matches.ts 載入時做(隊名正規化 + 賽前 slot
+# frame + 手動結算永遠優先)· 任何配不到的場一律退回手動(安全方向 · 不毒害帳本)。
+#
+# 每 3 小時跑一次(賽事一結束、下一個窗 ≤3h 就鏡像進來)。
+# 純 cpbl.com.tw 官方公開 endpoint · 0 auth / 0 付費 / 0 secret · 手動也可在
+# Actions 頁按 "Run workflow"。
+
+on:
+  schedule:
+    # 對齊 mlb-engine / soccer-engine 的每 3 小時節奏。 一天 8 次遠在免費額度內。
+    - cron: "30 */3 * * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+# 同一時間只跑一個,避免兩個 cron 撞在一起推 commit
+concurrency:
+  group: cpbl-engine
+  cancel-in-progress: false
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Fetch CPBL official results
+        run: node scripts/fetch-cpbl-results.mjs
+      - name: Commit if changed
+        run: |
+          git config user.name "zone27-cpbl-bot"
+          git config user.email "noreply@anthropic.com"
+          git add lib/cpbl-results.json
+          if git diff --staged --quiet; then
+            echo "no CPBL result changes this run"
+          else
+            git commit -m "CPBL 賽果自動鏡像:官方賽程已打完場次入帳本(GitHub Action)
+
+          Co-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>"
+            git pull --rebase --autostash origin "${GITHUB_REF_NAME}" || true
+            git push
+          fi
