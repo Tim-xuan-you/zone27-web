@@ -52,7 +52,7 @@ export default async function MatchesPage() {
   // 每場分析篇數 · 看板標「N 篇分析」(跟單入口)· 無 cookie · 不破 ISR。
   const analysisCounts = await getCreatorPostCounts();
   // header 顯示:CPBL 為主,CPBL 空時退 MLB(不讓「今日無覆蓋」跟下方 MLB 場矛盾)。
-  const boardDate = cpblSorted[0]?.date ?? mlbSorted[0]?.date ?? "今日無覆蓋場次";
+  const boardDate = cpblSorted[0]?.date ?? mlbSorted[0]?.date ?? "休賽日 · 看引擎判決";
   const headMatch = cpblSorted[0] ?? mlbSorted[0];
 
   return (

@@ -268,8 +268,11 @@ export function aggregateIdentity(
 
     // 同場對照只看真正分出勝負的場(winner = home/away · 平局/skip 不進對照)
     if (m.finalWinner === "tie" || pred.pick === "skip") continue;
-    const inMonth =
-      typeof m.startISO === "string" && m.startISO.slice(0, 7) === currentMonthKey;
+    // 本月分桶一律過 taipeiDayOf 收斂台北月再比 —— CPBL startISO 帶 +08:00、MLB 是
+    // UTC ISO(...Z),裸 slice(0,7) 會在月初/月末把跨台北月界的 MLB 場分錯月桶,
+    // 污染「本月你 vs 引擎」升階閘門的分母(R209 修)。
+    const startDay = taipeiDayOf(m.startISO);
+    const inMonth = startDay !== null && startDay.slice(0, 7) === currentMonthKey;
 
     // 你(分母 = 你所有分勝負的已結算押注場)
     youDecidedAll++;

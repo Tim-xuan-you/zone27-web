@@ -169,6 +169,38 @@ export default function CalibrationIdentityCard({ identity: id, series }: Props)
             <span className="hidden sm:inline w-12 shrink-0" aria-hidden />
           </div>
 
+          {/* soul R209 · THE 炫耀數字:你比公開引擎準 +X 個百分點(edgeVsEnginePts 已算好 ·
+              「賭徒的 Bloomberg」最該有的單一 alpha 數字)· 場數夠(≥ROOKIE_MIN)才掛 ·
+              負的照誠實掛(Pratfall · 不是勝率虛榮榜是 alpha over baseline)。 */}
+          {id.edgeVsEnginePts !== null && id.engine.decided >= ROOKIE_MIN && (
+            <div className="mt-5 border-l-2 border-gold/60 bg-gold/[0.05] pl-4 py-2.5">
+              {id.edgeVsEnginePts > 0 ? (
+                <p className="text-bone text-base sm:text-lg leading-snug">
+                  你比那台公開引擎準{" "}
+                  <span className="font-mono text-gold tabular text-2xl">
+                    +{id.edgeVsEnginePts}
+                  </span>{" "}
+                  個百分點
+                </p>
+              ) : id.edgeVsEnginePts === 0 ? (
+                <p className="text-bone text-base sm:text-lg leading-snug">
+                  你跟那台公開引擎 <span className="text-gold">一樣準</span>。
+                </p>
+              ) : (
+                <p className="text-bone text-base sm:text-lg leading-snug">
+                  你比公開引擎低{" "}
+                  <span className="font-mono text-loss/85 tabular text-2xl">
+                    {-id.edgeVsEnginePts}
+                  </span>{" "}
+                  個百分點 —— 帳本不騙人。
+                </p>
+              )}
+              <p className="mt-1 font-mono text-mute/55 text-[10px] tracking-[0.2em] leading-relaxed">
+                同一批 {id.engine.decided} 場 · 跟一台公開機器正面比 · 含輸照算
+              </p>
+            </div>
+          )}
+
           <p className="mt-4 text-bone text-sm sm:text-base leading-relaxed">
             {standingVerdict(id)}
           </p>
