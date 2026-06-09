@@ -98,9 +98,14 @@ export default function UserPredictionPicker({
     const res = await submitPrediction(matchId, pick);
     if (res.ok) {
       setMyPick(res.pick);
-      setMyTotal((n) => (n === null ? null : n + 1)); // 押成一場 → 上天梯進度 +1
-      const t = await getMatchTally(matchId); // refresh 含自己這一手
+      // refresh 群眾線 + 本人累計場數 · re-fetch 取準確值(不靠樂觀 +1 · 防跨分頁/裝置
+      // 的 out-of-band 押注漂移、也修「初次抓取失敗→基數錯」)。
+      const [t, all] = await Promise.all([
+        getMatchTally(matchId),
+        getMyPredictionsClient(),
+      ]);
       setTally(t);
+      setMyTotal(Object.keys(all).length);
     } else if (res.reason === "already_predicted") {
       const mine = await getMyPrediction(matchId);
       setMyPick(mine);
@@ -233,7 +238,7 @@ export default function UserPredictionPicker({
           soul R209 #7 · 加「離上天梯還差 N 場」進度鉤(對帳紀律進度,非賭場連押獎勵)。 */}
       {locked && (
         <div className="mt-3 space-y-1.5">
-          {myTotal !== null && myTotal < LADDER_MIN ? (
+          {myTotal !== null && myTotal >= 1 && myTotal < LADDER_MIN ? (
             <p className="text-center font-mono text-mute/70 text-[10px] tracking-[0.2em] leading-relaxed">
               你押了 <span className="text-bone tabular">{myTotal}</span> 場 · 再{" "}
               <span className="text-gold tabular">{LADDER_MIN - myTotal}</span> 場 · 就上

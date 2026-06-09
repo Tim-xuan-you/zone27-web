@@ -184,7 +184,9 @@ export default function ProfileView({ profile, identity: id, streak, soccer, ser
               </div>
 
               {/* soul R209 · THE 炫耀數字(第三人稱)· 場數夠(≥10)才掛 · 負的照誠實掛 */}
-              {id.edgeVsEnginePts !== null && id.engine.decided >= 10 && (
+              {id.edgeVsEnginePts !== null &&
+                id.decided >= 10 &&
+                id.engine.decided >= 10 && (
                 <div className="mt-5 border-l-2 border-gold/60 bg-gold/[0.05] pl-4 py-2.5">
                   {id.edgeVsEnginePts > 0 ? (
                     <p className="text-bone text-base sm:text-lg leading-snug">

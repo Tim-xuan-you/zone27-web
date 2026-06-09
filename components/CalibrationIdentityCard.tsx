@@ -187,7 +187,9 @@ export default function CalibrationIdentityCard({ identity: id, series }: Props)
           {/* soul R209 · THE 炫耀數字:你比公開引擎準 +X 個百分點(edgeVsEnginePts 已算好 ·
               「賭徒的 Bloomberg」最該有的單一 alpha 數字)· 場數夠(≥ROOKIE_MIN)才掛 ·
               負的照誠實掛(Pratfall · 不是勝率虛榮榜是 alpha over baseline)。 */}
-          {id.edgeVsEnginePts !== null && id.engine.decided >= ROOKIE_MIN && (
+          {id.edgeVsEnginePts !== null &&
+            id.decided >= ROOKIE_MIN &&
+            id.engine.decided >= ROOKIE_MIN && (
             <div className="mt-5 border-l-2 border-gold/60 bg-gold/[0.05] pl-4 py-2.5">
               {id.edgeVsEnginePts > 0 ? (
                 <p className="text-bone text-base sm:text-lg leading-snug">
