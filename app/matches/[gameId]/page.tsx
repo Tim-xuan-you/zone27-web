@@ -339,6 +339,27 @@ export default async function MatchDetailPage({
                   calibration={calibration}
                   enginePctOnWinner={enginePctOnWinner}
                 />
+                {/* R207 close-the-loop:把收據綁回護城河敘事 —— 引擎賽前鎖死、賽後對帳、
+                    刪不掉。 DIVERGED 時連回「賽前自己列的盲點」(報馬仔結構上給不了
+                    「我賽前承認的風險」這張截圖)。 全球研究「生命週期迴路」#1。 */}
+                <p className="mt-4 text-mute/85 text-[13px] leading-relaxed max-w-xl">
+                  {calibration === "diverged" ? (
+                    <>
+                      這場引擎<span className="text-loss/90">猜錯邊</span>。 但它賽前就把
+                      「自己可能看走眼的地方」攤在上面（見「引擎為什麼這樣看」）· 而且這筆
+                      賽前鎖死的紀錄<span className="text-bone">刪不掉</span> —— 賣明牌的輸了
+                      刪文,我們把輸的也留著。
+                    </>
+                  ) : calibration === "proved" ? (
+                    <>
+                      引擎賽前鎖死的方向、賽後<span className="text-gold/90">對中了</span>。
+                      賽前估算 · 賽後對帳 · 時間戳<span className="text-bone">刪不掉</span> ——
+                      贏的、輸的都在同一本帳。
+                    </>
+                  ) : (
+                    <>和局 · 不計入準度(引擎不裝把握的場,誠實 push)。</>
+                  )}
+                </p>
                 <div className="mt-5 flex items-center justify-between gap-3 flex-wrap">
                   <Link
                     href="/track-record"
