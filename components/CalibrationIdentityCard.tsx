@@ -1,5 +1,6 @@
 import Link from "next/link";
-import type { CalibrationIdentity } from "@/lib/predictions";
+import type { CalibrationIdentity, AccuracyPoint } from "@/lib/predictions";
+import AccuracySparkline from "@/components/AccuracySparkline";
 
 // ── ZONE 27 · 你的校準身分(soul-roadmap #1 · 「有帳本的玩運彩」脊椎)──────
 // 會員儀表板的主角:把你押過的場攤成一份不可造假的帳本 —— 你的準度(含輸)·
@@ -18,6 +19,8 @@ const SAMPLE_FIRM = 8; // 低於此 · 數字還會跳 · 掛誠實小字(反過
 
 type Props = {
   identity: CalibrationIdentity;
+  /** 準度歷程序列(computeAccuracySeries)· 場數夠多(≥SAMPLE_FIRM)才畫 sparkline */
+  series?: AccuracyPoint[];
 };
 
 // "2026-06" → "6 月"
@@ -53,7 +56,7 @@ function gateVerdict(id: CalibrationIdentity): string {
   return "本月還沒贏過引擎 —— 贏過,才升得上去。";
 }
 
-export default function CalibrationIdentityCard({ identity: id }: Props) {
+export default function CalibrationIdentityCard({ identity: id, series }: Props) {
   // ── 空狀態:還沒押任何一場 ─────────────────────────
   if (id.total === 0) {
     return (
@@ -118,6 +121,17 @@ export default function CalibrationIdentityCard({ identity: id }: Props) {
       <p className="mt-2 font-mono text-mute/60 text-[10px] tracking-[0.2em] leading-relaxed">
         每場賽後自動對照引擎 · 押了刪不掉。
       </p>
+
+      {/* ── 1.5 · 準度歷程 sparkline(soul R208 · 會動的數字 = 回訪鉤)──────
+          場數夠多才畫(≥SAMPLE_FIRM · 場太少不假裝趨勢 = 不捏造精確度)。 */}
+      {hasDecided && id.decided >= SAMPLE_FIRM && series && series.length >= 2 && (
+        <div className="mt-5">
+          <AccuracySparkline series={series} />
+          <p className="mt-1.5 font-mono text-mute/55 text-[10px] tracking-[0.2em] leading-relaxed">
+            準度歷程 · 按比賽日累計 · 虛線 = 亂猜 50%
+          </p>
+        </div>
+      )}
 
       {/* ── 2 · 三方對照 · 你 vs 亂猜 vs 引擎(同一批已結算場)──────
           二元押注沒有校準曲線 · 改用同場命中率對照。 亂猜 = 50% 那條虛線 ·

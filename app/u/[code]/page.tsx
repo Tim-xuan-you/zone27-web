@@ -4,7 +4,11 @@ import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import ProfileView from "@/components/ProfileView";
 import { getProfileByCode, getPredictionsByCode } from "@/lib/profile-server";
-import { aggregateIdentity, aggregateStreak } from "@/lib/predictions";
+import {
+  aggregateIdentity,
+  aggregateStreak,
+  computeAccuracySeries,
+} from "@/lib/predictions";
 import { gradeSoccerPicks, type SoccerPick } from "@/lib/soccer/predictions";
 import {
   getEngineFavorite,
@@ -67,17 +71,16 @@ export default async function PublicProfilePage({
   // 棒球校準身分(CPBL + MLB · 同 /member 的 allWithMlb · fd-* 已在 server 分流排除)。
   const mlbMatches = await getMlbAsMatches();
   const allWithMlb = [...allMatches, ...mlbMatches];
-  const identity = aggregateIdentity(
-    baseball,
-    allWithMlb.map((m) => ({
-      id: m.id,
-      finalWinner: m.finalResult?.winner ?? null,
-      engineFav: getEngineFavorite(m),
-      startISO: getMatchStartIso(m),
-    })),
-    getCurrentTaipeiMonthKey(),
-  );
+  const idMatches = allWithMlb.map((m) => ({
+    id: m.id,
+    finalWinner: m.finalResult?.winner ?? null,
+    engineFav: getEngineFavorite(m),
+    startISO: getMatchStartIso(m),
+  }));
+  const identity = aggregateIdentity(baseball, idMatches, getCurrentTaipeiMonthKey());
   const streak = aggregateStreak(baseball, getTodayTaipei());
+  // 準度歷程 sparkline(這份帳本 · 按比賽日累計 · 場數夠多才畫 · 同 /member)。
+  const accuracySeries = computeAccuracySeries(baseball, idMatches);
 
   // 足球戰績(三向 · 含輸 · 含同場 你 vs 引擎)· 公開賽後結果 + 引擎鎖定線(server 讀)。
   const soccerResults = await getSoccerLedgerResults();
@@ -97,6 +100,7 @@ export default async function PublicProfilePage({
           identity={identity}
           streak={streak}
           soccer={soccerRecord}
+          series={accuracySeries}
         />
       </main>
       <Footer />

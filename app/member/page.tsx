@@ -5,7 +5,13 @@ import Footer from "@/components/Footer";
 import WalletPanel from "@/components/WalletPanel";
 import Avatar from "@/components/Avatar";
 import { getUser } from "@/lib/supabase/server";
-import { aggregateIdentity, aggregateStreak } from "@/lib/predictions";
+import {
+  aggregateIdentity,
+  aggregateStreak,
+  computeAccuracySeries,
+  computeSettlementDelta,
+  readLastSeenFromMeta,
+} from "@/lib/predictions";
 import { getMyPredictionsMap } from "@/lib/predictions-server";
 import {
   getMatchPhase,
@@ -16,6 +22,7 @@ import {
   matches as allMatches,
 } from "@/lib/matches";
 import CalibrationIdentityCard from "@/components/CalibrationIdentityCard";
+import ReturnedWhileAwayCard from "@/components/ReturnedWhileAwayCard";
 import HonorWall from "@/components/HonorWall";
 import ProfileShareCard from "@/components/ProfileShareCard";
 import SoccerRecordCard from "@/components/SoccerRecordCard";
@@ -117,17 +124,29 @@ export default async function MemberPage() {
   // 本人 picks 由 SoccerRecordCard client 端讀 · 沒押足球 → 卡自動隱藏(不破會員極簡)。
   const soccerResults = await getSoccerLedgerResults();
   const soccerEnginePicks = getSoccerEnginePicks();
+  // 一份賽果輸入餵三支(同一真相):校準身分 + 準度歷程 sparkline + 回訪 delta。
+  // engineFav 走 getEngineFavorite()(50/50 真銅板局回 null · 不灌引擎水)·
+  // settledDay = finalResult.ingestedAt(賽果入帳台北日 · 回訪卡判「你不在時結算的」用)。
+  const idMatches = allWithMlb.map((m) => ({
+    id: m.id,
+    finalWinner: m.finalResult?.winner ?? null,
+    engineFav: getEngineFavorite(m),
+    startISO: getMatchStartIso(m),
+    settledDay: m.finalResult?.ingestedAt ?? null,
+  }));
   // 個人校準身分:你的紀錄(含輸)+ 對比亂猜 + 同場 你 vs 引擎 + 本月升階閘門。
-  // engineFav 走 getEngineFavorite()(50/50 真銅板局回 null · 不灌引擎水)。
   const identity = aggregateIdentity(
     predictionsMap,
-    allWithMlb.map((m) => ({
-      id: m.id,
-      finalWinner: m.finalResult?.winner ?? null,
-      engineFav: getEngineFavorite(m),
-      startISO: getMatchStartIso(m),
-    })),
+    idMatches,
     getCurrentTaipeiMonthKey()
+  );
+  // 準度歷程(會動的數字 · 回訪鉤)· 按比賽日累計命中率 · sparkline 在校準卡內畫。
+  const accuracySeries = computeAccuracySeries(predictionsMap, idMatches);
+  // 回訪卡 delta:上次造訪後新結算的場(首訪 / 0 新 → null)· last_seen 由卡的 client 端寫回。
+  const settlementDelta = computeSettlementDelta(
+    predictionsMap,
+    idMatches,
+    readLastSeenFromMeta(meta)
   );
 
   // 對帳紀律 streak(soul-roadmap #2)· 連續性按「下注日」的台北日曆日算(見
@@ -251,9 +270,14 @@ export default async function MemberPage() {
             (投資組合 · 隊徽顏色秒掃 · 結算說明只說一次)· 見 OpenPositionsPanel。 */}
         <OpenPositionsPanel positions={openPositions} />
 
+        {/* 你不在時結算了 N 場(soul-roadmap R208 #5 · 單人回訪鉤)· 平靜對帳語氣 ·
+            含輸照數(引擎贏你也講)· 首訪/0 新結算自動隱藏 · 永遠寫回 last_seen。 */}
+        <ReturnedWhileAwayCard delta={settlementDelta} />
+
         {/* 2 · 你的校準身分 · 含輸帳本 · 你 vs 亂猜 vs 引擎 + 本月升階閘門 ──
-            「有帳本的玩運彩」脊椎(soul-roadmap #1)· 計算在 aggregateIdentity。 */}
-        <CalibrationIdentityCard identity={identity} />
+            「有帳本的玩運彩」脊椎(soul-roadmap #1)· 計算在 aggregateIdentity。
+            series = 準度歷程 sparkline(會動的數字 · 場數夠多才畫)。 */}
+        <CalibrationIdentityCard identity={identity} series={accuracySeries} />
 
         {/* 你的足球戰績(含輸 · 跟棒球分開算 · 含你 vs 引擎)· 沒押足球自動隱藏 */}
         <SoccerRecordCard

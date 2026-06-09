@@ -7,12 +7,14 @@ import CopyLinkButton from "@/components/CopyLinkButton";
 import EngineRerunBadge from "@/components/EngineRerunBadge";
 import LineKeepHint from "@/components/LineKeepHint";
 import FounderSignOff from "@/components/FounderSignOff";
+import UserReceiptPick from "@/components/UserReceiptPick";
 import {
   getMatchById,
   getFinalizedMatches,
   getCalibration,
   getEnginePctOnWinner,
   getMatchDateIso,
+  getMatchStartIso,
 } from "@/lib/matches";
 
 // ── ZONE 27 · /receipts/[receiptId] · Single Receipt Object Page ──
@@ -355,6 +357,17 @@ export default async function ReceiptPage({ params }: { params: Params }) {
                 </p>
               )}
             </div>
+
+            {/* ── 本人這手 pick + 鎖定時戳(soul R208 #1 · close-the-loop b)──────
+                SSG 收據蓋上「登入本人對這場的押注 + 賽前鎖定時戳」= 最可截圖的 proof。
+                graceful client island:沒登入 / 沒押這場 / 開賽後才補登 → 不顯示。 */}
+            <UserReceiptPick
+              matchId={match.id}
+              finalWinner={fr.winner}
+              startISO={getMatchStartIso(match)}
+              homeName={match.home.name}
+              awayName={match.away.name}
+            />
 
             {/* ── TIM SIGNATURE FOOTER ───────────────── */}
             <div className="border-t border-line/40 px-5 sm:px-8 py-5 flex items-baseline justify-between flex-wrap gap-3">

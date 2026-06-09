@@ -1,8 +1,13 @@
 import Link from "next/link";
 import Avatar from "@/components/Avatar";
 import HonorWall from "@/components/HonorWall";
+import AccuracySparkline from "@/components/AccuracySparkline";
 import { creatorIdentity } from "@/lib/identity";
-import type { CalibrationIdentity, DisciplineStreak } from "@/lib/predictions";
+import type {
+  CalibrationIdentity,
+  DisciplineStreak,
+  AccuracyPoint,
+} from "@/lib/predictions";
 import type { SoccerRecord } from "@/lib/soccer/predictions";
 import type { PublicProfile } from "@/lib/profile-server";
 
@@ -30,6 +35,8 @@ type Props = {
   identity: CalibrationIdentity;
   streak: DisciplineStreak;
   soccer: SoccerRecord;
+  /** 準度歷程序列(棒球 · computeAccuracySeries)· 場數夠多才畫 sparkline */
+  series?: AccuracyPoint[];
 };
 
 // 一句話總結這份帳本的站位 · 第三人稱(主詞 = 帳本)· 誠實雙向(贏照講、輸也照講)。
@@ -45,7 +52,7 @@ function standingVerdict(id: CalibrationIdentity): string {
   return `${coin},但還沒贏過引擎。`;
 }
 
-export default function ProfileView({ profile, identity: id, streak, soccer }: Props) {
+export default function ProfileView({ profile, identity: id, streak, soccer, series }: Props) {
   // 身分解析(同創作者署名 · 顯示名 or 球迷#碼 + 永久碼 chip + 頭像 seed/glyph)。
   const who = creatorIdentity({
     handle: profile.handle,
@@ -138,6 +145,16 @@ export default function ProfileView({ profile, identity: id, streak, soccer }: P
           <p className="mt-2 font-mono text-mute/60 text-[10px] tracking-[0.2em] leading-relaxed">
             每場賽前鎖定、賽後自動對照引擎 · 押了刪不掉。
           </p>
+
+          {/* 準度歷程 sparkline(soul R208)· 場數夠多才畫(≥FIRM · 不假裝趨勢)*/}
+          {hasDecided && id.decided >= FIRM && series && series.length >= 2 && (
+            <div className="mt-5">
+              <AccuracySparkline series={series} />
+              <p className="mt-1.5 font-mono text-mute/55 text-[10px] tracking-[0.2em] leading-relaxed">
+                準度歷程 · 按比賽日累計 · 虛線 = 亂猜 50%
+              </p>
+            </div>
+          )}
 
           {/* 三方對照 · 這份帳本 vs 亂猜 vs 引擎(同一批已結算場)*/}
           {hasDecided && (

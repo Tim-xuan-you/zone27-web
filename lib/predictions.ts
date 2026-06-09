@@ -127,8 +127,9 @@ export function aggregatePredictionStats(
 }
 
 /** 押注時間戳是否「開賽後/賽後」才下(= 不該算數)· 缺資料 fail-open 回 false。
- *  Date.parse 對固定字串 deterministic · 不造成 hydration mismatch。 */
-function isLatePick(ts: string, startISO: string | null | undefined): boolean {
+ *  Date.parse 對固定字串 deterministic · 不造成 hydration mismatch。
+ *  exported:顯示層(收據本人 pick 戳)也用同一份判定 · 單一真相不另寫。 */
+export function isLatePick(ts: string, startISO: string | null | undefined): boolean {
   if (!startISO || !ts) return false;
   const t = Date.parse(ts);
   const start = Date.parse(startISO);
@@ -433,4 +434,153 @@ export function aggregateStreak(
   }
 
   return { current, longest, totalDays, activeToday };
+}
+
+// ── 準度時間序列(soul-roadmap R208 #2 · 「會動的數字」= 回訪鉤)──────────────
+// aggregateIdentity 給的是「現在」的快照(一個準度數字)。 這支給「歷程」——
+// 隨著一場一場結算,你的累積命中率怎麼爬/掉。 一條會動的線 = 你下次回來想看的東西。
+//
+// 🔴 紅線:
+//   · 按「比賽日」(startISO)排序累積 · 不是下注日 —— 序列是「場」的順序,不是你哪天押。
+//   · 同 aggregateIdentity 的先鎖後結(isLatePick)+ 只算分出勝負的場(平局/skip 不進)。
+//   · 不捏造精確度:每個點就是「到這場為止的累積命中率」· 低樣本由 UI 端誠實處理
+//     (場太少不連線假裝趨勢)· 本函式只給乾淨的數,不做美化。
+// ─────────────────────────────────────────────────────
+
+/** 時間序列上的一個點:到這場(含)為止的累積命中率。 */
+export type AccuracyPoint = {
+  /** 累積已結算(分出勝負)的場數 = x 軸 */
+  n: number;
+  /** 到此為止累積命中率 0-100 */
+  accuracy: number;
+  /** 這場的台北日(YYYY-MM-DD · 給 alt text / tooltip) */
+  date: string | null;
+};
+
+/**
+ * 從本人押注 map + 賽果算出「累積命中率序列」。 與 aggregateIdentity 同一份
+ * 先鎖後結守則(isLatePick · 只算 home/away 分勝負的場)· 只是改成「每結算一場
+ * 就吐一個累積點」而非聚合。 按比賽開賽時間(startISO)升序累積。
+ *
+ * 回傳陣列長度 = 你分出勝負的已結算場數(每場一個點 · n 從 1 遞增)。
+ * 0 場 → 空陣列(UI 端據此顯示空狀態)。
+ */
+export function computeAccuracySeries(
+  predictions: UserPredictionsMap,
+  matches: IdentityMatch[]
+): AccuracyPoint[] {
+  const byId = new Map(matches.map((m) => [m.id, m]));
+  // 你押過、已結算、分出勝負(home/away)、且先鎖後結合法的場 —— 收集後按比賽日排。
+  const decidedMatches: { m: IdentityMatch; verdict: PredictionVerdict }[] = [];
+  for (const [matchId, pred] of Object.entries(predictions)) {
+    const m = byId.get(matchId);
+    if (!m || m.finalWinner === null) continue; // 未結算 / 不在清單
+    if (isLatePick(pred.ts, m.startISO)) continue; // 開賽後補登 · 不算
+    if (m.finalWinner === "tie" || pred.pick === "skip") continue; // 不進對照
+    decidedMatches.push({ m, verdict: computeUserVerdict(pred.pick, m.finalWinner) });
+  }
+  decidedMatches.sort((a, b) =>
+    (a.m.startISO ?? "").localeCompare(b.m.startISO ?? "")
+  );
+
+  const series: AccuracyPoint[] = [];
+  let proved = 0;
+  for (let i = 0; i < decidedMatches.length; i++) {
+    if (decidedMatches[i].verdict === "proved") proved++;
+    const n = i + 1;
+    series.push({
+      n,
+      accuracy: Math.round((proved / n) * 100),
+      date: taipeiDayOf(decidedMatches[i].m.startISO),
+    });
+  }
+  return series;
+}
+
+// ── 「你不在時結算了 N 場」回訪卡(soul-roadmap R208 #5 · 單人事件驅動回訪鉤)──────
+// 進 /member 時比對「上次造訪後」哪些你押的場結算了 + 你 vs 引擎誰猜中。 平靜紀律
+// 語氣(交易員日誌)· 絕不賭場「快回來!」· 含輸照數(引擎贏你也照講)。 0 migration:
+// last_seen 存 user_metadata(同 display_name/follows pattern)。
+//
+// 🔴 紅線:
+//   · 結算時刻用 finalResult.ingestedAt(賽果入帳日)· 不是開賽時間 —— 防賽前補登。
+//   · 含輸:youWon 跟 engineWon 同權重數 · 不只報你贏的。
+//   · 首訪(無 last_seen baseline)/ 0 新結算 → 回 null · UI 隱藏卡(不發空頭)。
+//   · 先鎖後結:開賽後才押的不算(同 aggregateIdentity)。
+// ─────────────────────────────────────────────────────
+
+/** 算回訪 delta 用的單場輸入:同 IdentityMatch + 結算時刻(finalResult.ingestedAt)。
+ *  ⚠ ingestedAt 跨運動格式不一致 —— CPBL 是台北日字串("2026-06-04")· MLB 是開賽
+ *  instant 的 full ISO UTC("2026-06-09T18:05:00Z")。 故 computeSettlementDelta 一律
+ *  過 taipeiDayOf() 收斂成台北日再比(不可裸字串比 · 否則 ISO vs 日期前綴比會錯)。 */
+export type SettlementMatch = IdentityMatch & {
+  /** finalResult.ingestedAt(賽果入帳時刻 · 可能是台北日或 full ISO)· null = 還沒結算 ·
+   *  不計入 delta。 永遠帶這個欄位(caller 一律 `?? null`)· 故非 optional。 */
+  settledDay: string | null;
+};
+
+export type SettlementDelta = {
+  /** 上次造訪後新結算、且你有合法押注、分出勝負的場數 */
+  total: number;
+  /** 其中你猜中的場數(分母 = total) */
+  youWon: number;
+  /** 引擎有選邊、納入 you-vs-engine 同場對照的分母(≤ total) */
+  vsEngineN: number;
+  /** 你在「引擎對照子集」(vsEngineN 場)猜中的場數 · 跟 engineWon 同分母 = 公平比 */
+  youWonVs: number;
+  /** 引擎在同一子集猜中的場數 */
+  engineWon: number;
+};
+
+/** 從 user_metadata 讀上次造訪時戳(ISO)· 無 / 壞 → null(= 首訪 · 不顯示卡)。 */
+export function readLastSeenFromMeta(
+  meta: Record<string, unknown> | null | undefined
+): string | null {
+  if (!meta) return null;
+  const v = meta.last_seen_member;
+  return typeof v === "string" && v ? v : null;
+}
+
+/**
+ * 比對「上次造訪後」新結算的押注場。 lastSeenISO 為 null(首訪)→ 回 null。
+ * 沒有任何新結算場 → 回 null(UI 隱藏)。 settledDay(ingestedAt 台北日)> 上次造訪
+ * 的台北日 才算「你不在時結算的」。 純函式 deterministic(同 aggregateIdentity 守則)。
+ */
+export function computeSettlementDelta(
+  predictions: UserPredictionsMap,
+  matches: SettlementMatch[],
+  lastSeenISO: string | null
+): SettlementDelta | null {
+  if (!lastSeenISO) return null; // 首訪 · 無基準 · 只記時戳不顯示
+  const lastSeenDay = taipeiDayOf(lastSeenISO);
+  if (!lastSeenDay) return null;
+  const byId = new Map(matches.map((m) => [m.id, m]));
+
+  let total = 0;
+  let youWon = 0;
+  let vsEngineN = 0;
+  let youWonVs = 0;
+  let engineWon = 0;
+  for (const [matchId, pred] of Object.entries(predictions)) {
+    const m = byId.get(matchId);
+    if (!m || m.finalWinner === null) continue; // 未結算
+    // ingestedAt 跨運動格式不一致 → 收斂成台北日再比(CPBL 日期字串 / MLB full ISO 都吃)。
+    const settledDay = taipeiDayOf(m.settledDay);
+    if (!settledDay || settledDay <= lastSeenDay) continue; // 不是「你不在時」結算的
+    if (isLatePick(pred.ts, m.startISO)) continue; // 開賽後補登 · 不算
+    if (m.finalWinner === "tie" || pred.pick === "skip") continue; // 不進對照
+
+    total++;
+    const youHit = computeUserVerdict(pred.pick, m.finalWinner) === "proved";
+    if (youHit) youWon++;
+    // 你 vs 引擎只在引擎當時有選邊的場上比(apples-to-apples · 同 aggregateIdentity)。
+    if (m.engineFav !== null) {
+      vsEngineN++;
+      if (youHit) youWonVs++;
+      if (m.engineFav === m.finalWinner) engineWon++;
+    }
+  }
+
+  if (total === 0) return null;
+  return { total, youWon, vsEngineN, youWonVs, engineWon };
 }

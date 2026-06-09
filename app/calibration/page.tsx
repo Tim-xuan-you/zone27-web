@@ -5,7 +5,13 @@ import Footer from "@/components/Footer";
 import RelatedReading from "@/components/RelatedReading";
 import FounderSignOff from "@/components/FounderSignOff";
 import ArticleMeta from "@/components/ArticleMeta";
+import SportToggle from "@/components/SportToggle";
 import { getFinalizedMatches, type Match } from "@/lib/matches";
+import {
+  computeSoccerBins,
+  getSoccerGradedCount,
+} from "@/lib/soccer/calibration";
+import { getLockedSoccerPredictions } from "@/lib/soccer/locked";
 
 export const metadata: Metadata = {
   title: "引擎自評 · ZONE 27 公開準不準",
@@ -97,6 +103,11 @@ export default function CalibrationPublicPage() {
   const finalized = getFinalizedMatches();
   const n = finalized.length;
   const bins = computeBins(finalized);
+  // 足球(soul R208 #4 · 跟棒球分開算 · 各運動各自套 N≥30 門檻)。 世界盃 6/11 才開賽 →
+  // 目前 soccerN=0 已結算 → SportToggle 足球側顯示誠實「已鎖定、未結算」frame。
+  const soccerBins = computeSoccerBins();
+  const soccerN = getSoccerGradedCount();
+  const soccerLockedN = getLockedSoccerPredictions().length;
 
   return (
     <div className="flex flex-col flex-1 min-h-screen">
@@ -209,37 +220,18 @@ export default function CalibrationPublicPage() {
           <p className="text-mute text-sm leading-relaxed mb-6 max-w-2xl">
             上面那道 5 成 7 的天花板 · 這張圖就是我們逐場兌現它的地方 ——
             橫軸是引擎賽前看好的成數,直軸是實際真的中的成數。 點越靠近金色斜線 ·
-            代表引擎「說幾成、就真的中幾成」。 滿 30 場才開始算數。
+            代表引擎「說幾成、就真的中幾成」。 滿 30 場才開始算數 ·{" "}
+            <span className="text-mute/80">兩個運動分開算、各自對帳</span>。
           </p>
-          <ReliabilityDiagram bins={bins} n={n} />
-          {n === 0 ? (
-            <div className="mt-6 border border-dashed border-gold/30 bg-slate/30 p-6 sm:p-8 text-center">
-              <p className="font-mono text-gold text-[10px] tracking-[0.4em] mb-3">
-                還沒有資料 · 等第一場結算
-              </p>
-              <p className="text-mute text-sm sm:text-base leading-relaxed max-w-md mx-auto">
-                引擎還沒結算任何一場。 第一個落點 · 統一 vs 富邦
-                (2026-05-21 新莊)。
-              </p>
-            </div>
-          ) : n < 30 ? (
-            <div className="mt-6 border border-loss/30 bg-loss/5 p-5 sm:p-6">
-              <p className="font-mono text-loss text-[10px] tracking-[0.35em] mb-2">
-                ⚠ 資料還太少 · 目前 {n} 場 / 滿 30 場才算數
-              </p>
-              <p className="text-mute text-sm leading-relaxed">
-                場數不到 30 之前,這張圖還看不出名堂 · 任何偏移都可能只是運氣、
-                不是引擎的問題。 完整算法見{" "}
-                <Link
-                  href="/methodology"
-                  className="text-gold underline-offset-4 hover:underline"
-                >
-                  方法說明
-                </Link>
-                。
-              </p>
-            </div>
-          ) : null}
+          {/* soul R208 #4 · 運動 filter(538 Checking-Our-Work 式)· 棒球 / 足球各自一張圖、
+              各自套 N≥30 門檻 —— 絕不把兩運動混成一條曲線(會遮掉各運動的真實校準)。 */}
+          <SportToggle
+            containerClass="pt-1 pb-5"
+            baseball={<BaseballCalView bins={bins} n={n} />}
+            soccer={
+              <SoccerCalView bins={soccerBins} n={soccerN} lockedN={soccerLockedN} />
+            }
+          />
         </section>
 
         {/* ── 為什麼明牌站不敢做這頁 ── */}
@@ -369,6 +361,88 @@ export default function CalibrationPublicPage() {
 }
 
 // ── Sub-components ─────────────────────────────────────
+
+// 棒球校準 view · 圖 + 低樣本誠實說明(N<30 任何偏移都可能是運氣 · 不算數)。
+function BaseballCalView({ bins, n }: { bins: Bin[]; n: number }) {
+  return (
+    <div>
+      <ReliabilityDiagram bins={bins} n={n} />
+      {n === 0 ? (
+        <div className="mt-6 border border-dashed border-gold/30 bg-slate/30 p-6 sm:p-8 text-center">
+          <p className="font-mono text-gold text-[10px] tracking-[0.4em] mb-3">
+            還沒有資料 · 等第一場結算
+          </p>
+          <p className="text-mute text-sm sm:text-base leading-relaxed max-w-md mx-auto">
+            引擎還沒結算任何一場。 第一個落點 · 統一 vs 富邦(2026-05-21 新莊)。
+          </p>
+        </div>
+      ) : n < 30 ? (
+        <div className="mt-6 border border-loss/30 bg-loss/5 p-5 sm:p-6">
+          <p className="font-mono text-loss text-[10px] tracking-[0.35em] mb-2">
+            ⚠ 棒球資料還太少 · 目前 {n} 場 / 滿 30 場才算數
+          </p>
+          <p className="text-mute text-sm leading-relaxed">
+            場數不到 30 之前,這張圖還看不出名堂 · 任何偏移都可能只是運氣、
+            不是引擎的問題。 完整算法見{" "}
+            <Link
+              href="/methodology"
+              className="text-gold underline-offset-4 hover:underline"
+            >
+              方法說明
+            </Link>
+            。
+          </p>
+        </div>
+      ) : null}
+    </div>
+  );
+}
+
+// 足球校準 view · 0 場已結算(世界盃 6/11 才開賽)→ 誠實「已鎖未結算」frame
+// (把「鎖了還沒對帳」當特色不是 bug · 同 /ladder 足球側)· 結算後才長出圖。
+function SoccerCalView({
+  bins,
+  n,
+  lockedN,
+}: {
+  bins: Bin[];
+  n: number;
+  lockedN: number;
+}) {
+  if (n === 0) {
+    return (
+      <div className="border border-gold/30 bg-slate/40 p-5 sm:p-6">
+        <span className="inline-block font-mono text-gold/80 text-[9px] tracking-[0.3em] px-2 py-1 border border-gold/40 mb-3">
+          足球 · 世界盃 6/11 開賽
+        </span>
+        <p className="text-bone text-base leading-relaxed">
+          足球引擎已經<span className="text-gold">賽前鎖死 {lockedN} 場</span>
+          預測 —— 但還沒有一場結算。
+        </p>
+        <p className="mt-2 text-mute text-sm leading-relaxed">
+          這張校準圖,從世界盃 6/11 第一場打完開始長。 鎖在那裡的每一場、
+          賽後逐場對帳,跟棒球<span className="text-bone">分開算</span> ——
+          引擎說幾成、實際中幾成,連估錯的也照畫。
+        </p>
+      </div>
+    );
+  }
+  return (
+    <div>
+      <ReliabilityDiagram bins={bins} n={n} />
+      {n < 30 ? (
+        <div className="mt-6 border border-loss/30 bg-loss/5 p-5 sm:p-6">
+          <p className="font-mono text-loss text-[10px] tracking-[0.35em] mb-2">
+            ⚠ 足球資料還太少 · 目前 {n} 場 / 滿 30 場才算數
+          </p>
+          <p className="text-mute text-sm leading-relaxed">
+            足球跟棒球分開算 · 場數不到 30 之前,任何偏移都可能只是運氣。
+          </p>
+        </div>
+      ) : null}
+    </div>
+  );
+}
 
 // Inline SVG reliability diagram · same math as /member/calibration
 // (Round 30 W2B agent deepest call)· copied here intentionally instead
