@@ -3,7 +3,7 @@ import MobileNavToggle from "@/components/MobileNavToggle";
 import MembershipNavCTA from "@/components/MembershipNavCTA";
 import TierBadge from "@/components/TierBadge";
 import CmdKTrigger from "@/components/CmdKTrigger";
-import { getTodayMatchesAllLeagues } from "@/lib/mlb-matches";
+import { getTodayMatches } from "@/lib/matches";
 
 type NavKey =
   | "home"
@@ -62,12 +62,15 @@ const NAV_ITEMS_STATIC: {
   { key: "about", href: "/about", label: "關於" },
 ];
 
-export default async function Nav({ active }: { active?: NavKey }) {
-  // Round 50 W-D · server-side today's match count for「賽事」 dynamic chip。
-  // 0 場日子 chip 自動 hidden · Nav fallback plain「賽事」。 跨聯盟:CPBL + 今天的 MLB
-  // (getTodayMatchesAllLeagues · MLB ISR 快取 + try/catch graceful · 失敗只少算不卡頁)。
-  const todayMatches = await getTodayMatchesAllLeagues();
-  const tonightCount = todayMatches.length;
+export default function Nav({ active }: { active?: NavKey }) {
+  // 🔴 R207 CRITICAL fix · Nav 全站每頁都有。 原本 `await getTodayMatchesAllLeagues()`
+  // 在 render 期間 fetch MLB。 當 Nav 被「client component」頁面(如 /login)render 時,
+  // 這個 render-time async = uncached promise → React 每次 re-render 都 re-suspend →
+  // 打字每個鍵都讓輸入框失焦(Tim「每打一字就跳掉、要用滑鼠重點才能打下一字」的真 bug ·
+  // 全站客戶端頁面通用 · console 報 "A component was suspended by an uncached promise")。
+  // 改成「同步」算今日場數:只 CPBL(getTodayMatches · 同 aria-label「CPBL 賽事」· 0 場
+  // 自動 collapse)· Nav 不再 render 時 fetch · MLB 在 /matches 看板上仍完整顯示。
+  const tonightCount = getTodayMatches().length;
   // R175 Polymarket pivot · 移除 💬 討論室 nav item(+ 舊 #game-thread dead
   // anchor)· 討論已併入賽事頁的「看法 · 分析」(CreatorAnalysis)· 點任一場
   // 賽事即達 · nav 回到 market-first 乾淨 3 軸。
