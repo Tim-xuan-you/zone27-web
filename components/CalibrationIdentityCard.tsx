@@ -66,11 +66,26 @@ export default function CalibrationIdentityCard({ identity: id, series }: Props)
         </p>
         <p className="text-bone text-lg leading-relaxed">還沒押任何一場。</p>
         <p className="mt-1 text-mute text-sm leading-relaxed">
-          押一邊,賽後自動掛準 / 不準。 你的帳本 —— 含贏含輸、刪不掉 —— 從這一場開始記。
+          你的帳本 —— 含贏含輸、刪不掉 —— 從這一場開始記。 接下來會這樣走:
         </p>
+        {/* soul R209 · 新會員 3 步引導(member 介面 scale 的「0 態」· 引導非催單 · 押了即消失)*/}
+        <ol className="mt-4 space-y-2.5 list-none pl-0">
+          {[
+            "押一場 · 賽前鎖死、改不了",
+            "賽後自動生一張收據 · 中、沒中都留著",
+            "滿 10 場 · 上天梯,跟公開引擎正面比準度",
+          ].map((step, i) => (
+            <li key={i} className="flex items-baseline gap-3">
+              <span className="font-mono text-gold/80 tabular text-xs shrink-0 w-4">
+                {i + 1}
+              </span>
+              <span className="text-mute text-sm leading-snug">{step}</span>
+            </li>
+          ))}
+        </ol>
         <Link
           href="/matches"
-          className="mt-5 inline-block px-6 py-3 bg-gold text-navy font-mono text-xs tracking-[0.3em] hover:bg-gold-soft transition-colors"
+          className="mt-6 inline-block px-6 py-3 bg-gold text-navy font-mono text-xs tracking-[0.3em] hover:bg-gold-soft transition-colors"
         >
           去押第一注 →
         </Link>

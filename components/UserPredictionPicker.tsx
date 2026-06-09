@@ -6,12 +6,16 @@ import { createSupabaseBrowserClient } from "@/lib/supabase/browser";
 import {
   getMatchTally,
   getMyPrediction,
+  getMyPredictionsClient,
   submitPrediction,
   CROWD_LINE_MIN,
   type MarketTally,
 } from "@/lib/predictions-market";
 import { matchHasStarted } from "@/lib/matches";
 import MarketSplitBar from "@/components/MarketSplitBar";
+
+// 上天梯門檻(同 /ladder · CalibrationIdentityCard ROOKIE_MIN)· 押滿 10 場上榜。
+const LADDER_MIN = 10;
 
 // ── ZONE 27 · 進場預測 / Market Predict ─────────────────
 // 一場比賽唯一的押注 widget。 R188(2026-06-03 · Tim 拍板「要註冊才能押」)·
@@ -51,6 +55,8 @@ export default function UserPredictionPicker({
   const [error, setError] = useState<string | null>(null);
   // 先鎖後結:已開賽即封盤(client 端算 · effect 內 · 無 hydration 風險)
   const [started, setStarted] = useState(false);
+  // soul R209 · 本人累計押注場數 · 給「離上天梯還差 N 場」進度鉤(graceful · null = 不顯示)
+  const [myTotal, setMyTotal] = useState<number | null>(null);
 
   useEffect(() => {
     let cancelled = false;
@@ -67,6 +73,9 @@ export default function UserPredictionPicker({
           if (cancelled) return;
           setMyPick(mine);
           setAuth("member");
+          // 累計押注場數(給上天梯進度)· 不阻擋押注動作 · 錯誤回 {} → null 隱藏
+          const all = await getMyPredictionsClient();
+          if (!cancelled) setMyTotal(Object.keys(all).length);
         } else {
           setAuth("logged-out");
         }
@@ -89,6 +98,7 @@ export default function UserPredictionPicker({
     const res = await submitPrediction(matchId, pick);
     if (res.ok) {
       setMyPick(res.pick);
+      setMyTotal((n) => (n === null ? null : n + 1)); // 押成一場 → 上天梯進度 +1
       const t = await getMatchTally(matchId); // refresh 含自己這一手
       setTally(t);
     } else if (res.reason === "already_predicted") {
@@ -140,11 +150,19 @@ export default function UserPredictionPicker({
           {myPick === finalWinner && (
             <a
               href="#say"
-              className="mt-2 inline-block font-mono text-gold/80 hover:text-gold text-[10px] tracking-[0.2em] underline-offset-4 hover:underline transition-colors"
+              className="mt-2 block font-mono text-gold/80 hover:text-gold text-[10px] tracking-[0.2em] underline-offset-4 hover:underline transition-colors"
             >
               把這一手寫成分析 · 賽後準度自動掛上 →
             </a>
           )}
+          {/* soul R209 #8 · 分享收據(贏輸都可分享 = Pratfall · 主動邀請非分享獎勵)·
+              帶到這場的單場收據(賽前鎖定 + 賽後對帳,改不了)*/}
+          <Link
+            href={`/receipts/${matchId}`}
+            className="mt-2 block font-mono text-mute/70 hover:text-gold text-[10px] tracking-[0.2em] underline-offset-4 hover:underline transition-colors"
+          >
+            把這張收據給朋友看 →
+          </Link>
         </div>
       )}
 
@@ -211,14 +229,40 @@ export default function UserPredictionPicker({
         )}
       </div>
 
-      {/* 押完接下一步 · 峰值不斷頭(Kahneman peak-end)· 押完最熱那刻接「下一場」迴路 */}
+      {/* 押完接下一步 · 峰值不斷頭(Kahneman peak-end)· 押完最熱那刻接「下一場」迴路。
+          soul R209 #7 · 加「離上天梯還差 N 場」進度鉤(對帳紀律進度,非賭場連押獎勵)。 */}
       {locked && (
-        <Link
-          href="/matches"
-          className="mt-3 block text-center font-mono text-gold/80 hover:text-gold text-[10px] tracking-[0.2em] underline-offset-4 hover:underline transition-colors"
-        >
-          {finalWinner ? "去押下一場 →" : "押下一場 · 看其他賽事 →"}
-        </Link>
+        <div className="mt-3 space-y-1.5">
+          {myTotal !== null && myTotal < LADDER_MIN ? (
+            <p className="text-center font-mono text-mute/70 text-[10px] tracking-[0.2em] leading-relaxed">
+              你押了 <span className="text-bone tabular">{myTotal}</span> 場 · 再{" "}
+              <span className="text-gold tabular">{LADDER_MIN - myTotal}</span> 場 · 就上
+              <Link
+                href="/ladder"
+                className="text-gold/80 hover:text-gold underline-offset-4 hover:underline transition-colors"
+              >
+                天梯(新秀)
+              </Link>
+            </p>
+          ) : myTotal !== null && myTotal >= LADDER_MIN ? (
+            <p className="text-center font-mono text-mute/70 text-[10px] tracking-[0.2em] leading-relaxed">
+              你已滿 <span className="text-gold tabular">{LADDER_MIN}</span> 場 · 已在
+              <Link
+                href="/ladder"
+                className="text-gold/80 hover:text-gold underline-offset-4 hover:underline transition-colors"
+              >
+                天梯
+              </Link>
+              上 —— 繼續把準度做厚
+            </p>
+          ) : null}
+          <Link
+            href="/matches"
+            className="block text-center font-mono text-gold/80 hover:text-gold text-[10px] tracking-[0.2em] underline-offset-4 hover:underline transition-colors"
+          >
+            {finalWinner ? "去押下一場 →" : "押下一場 · 看其他賽事 →"}
+          </Link>
+        </div>
       )}
 
       {error && (

@@ -157,6 +157,14 @@ export default async function ReceiptPage({ params }: { params: Params }) {
   const favoriteName = homeFavored ? match.home.name : match.away.name;
   const favoritePct = Math.max(match.home.winRate, match.away.winRate);
 
+  // soul R209 · 賽果來源(Kalshi 式事前公開「用哪個資料源、何時算、怎麼判」)·
+  // 把現成的自動對帳基建變成可見的信任聲明 —— 官方賽程,不爬盤口。
+  const resultSource = match.id.startsWith("cpbl")
+    ? "cpbl.com.tw 官方賽程 · 每 3 小時自動鏡像對帳"
+    : match.id.startsWith("mlb")
+      ? "MLB 官方 Stats API · 自動對帳"
+      : "官方賽程 · 自動對帳";
+
   const verdictColor = {
     proved: "text-gold",
     diverged: "text-loss",
@@ -327,6 +335,13 @@ export default async function ReceiptPage({ params }: { params: Params }) {
                   </p>
                 </div>
               </div>
+            </div>
+
+            {/* ── 賽果來源(soul R209 · 事前公開結算規則 = Kalshi 式信任)──────── */}
+            <div className="px-5 sm:px-8 pb-6 -mt-1">
+              <p className="font-mono text-mute/65 text-[9px] sm:text-[10px] tracking-[0.25em] leading-relaxed">
+                ▸ 賽果來源 · {resultSource} · 賽前鎖定的線永遠優先 · 改不了
+              </p>
             </div>
 
             {/* ── VERDICT BAND · R67 W-B Peak-End rule axiom 物理 codify ─── */}
