@@ -627,3 +627,66 @@ export function buildRunDiffBuckets(
     },
   ];
 }
+
+// ── 讓分 + 大小盤機率(soul R208 · 給賭徒熟悉的玩法視角 · 我們自己算的機率)──────
+// 賭徒最常押的兩種盤(台灣運彩主力):讓分(run line)+ 大小盤(over/under)。
+// 全部從「免費已存」的 scoreCounts 直接推導 —— 不碰莊家賠率、不出「押這邊」建議。
+// 這是把同一份 10K 模擬「換個賭徒熟悉的角度」秀,秀的是我們自己算的機率,你自己判斷。
+//
+// 🔴 紅線:純機率陳述(home/away 互補加總 100 · 大/小互補)· 不轉成賠率、不標「最佳推薦」。
+
+/** 讓分機率:對一條讓分線 L(如 1.5)· 主隊贏「超過 L 分」的機率 vs 其補數(客隊受讓守住)。 */
+export type RunLineProb = {
+  line: number; // 1.5 · 2.5 ...
+  homePct: number; // 主隊讓 L 分守得住(主隊贏 > L 分)· 0-100
+  awayPct: number; // 客隊 +L 分(= 100 - homePct)
+};
+
+/** 大小盤機率:對一條總分線 L(如 8.5)· 總分「大於 L」(大)的機率 vs 「小於 L」(小)。 */
+export type TotalLineProb = {
+  line: number; // 7.5 · 8.5 · 9.5 ...
+  overPct: number; // 大 · 總分 > L · 0-100
+  underPct: number; // 小 · 總分 < L · = 100 - overPct
+};
+
+/** 從 scoreCounts 算讓分機率。 L 取 .5 線(無 push)→ 主贏>L 與 主贏<L 互補加總 100。 */
+export function deriveRunLineProbs(
+  scoreCounts: Record<string, number>,
+  lines: number[] = [1.5, 2.5]
+): RunLineProb[] {
+  const total = Object.values(scoreCounts).reduce((s, n) => s + n, 0);
+  if (total === 0) return [];
+  return lines.map((L) => {
+    let homeCover = 0; // 主隊贏超過 L 分(diff > L)
+    for (const [score, count] of Object.entries(scoreCounts)) {
+      const parts = score.split("-").map(Number);
+      if (parts.length !== 2) continue;
+      const [home, away] = parts;
+      if (!Number.isFinite(home) || !Number.isFinite(away)) continue;
+      if (home - away > L) homeCover += count;
+    }
+    const homePct = Math.round((homeCover / total) * 100);
+    return { line: L, homePct, awayPct: 100 - homePct };
+  });
+}
+
+/** 從 scoreCounts 算大小盤機率。 L 取 .5 線(無 push)→ 大與小互補加總 100。 */
+export function deriveTotalLineProbs(
+  scoreCounts: Record<string, number>,
+  lines: number[] = [7.5, 8.5, 9.5, 10.5]
+): TotalLineProb[] {
+  const total = Object.values(scoreCounts).reduce((s, n) => s + n, 0);
+  if (total === 0) return [];
+  return lines.map((L) => {
+    let over = 0; // 總分大於 L
+    for (const [score, count] of Object.entries(scoreCounts)) {
+      const parts = score.split("-").map(Number);
+      if (parts.length !== 2) continue;
+      const [home, away] = parts;
+      if (!Number.isFinite(home) || !Number.isFinite(away)) continue;
+      if (home + away > L) over += count;
+    }
+    const overPct = Math.round((over / total) * 100);
+    return { line: L, overPct, underPct: 100 - overPct };
+  });
+}

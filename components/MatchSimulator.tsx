@@ -12,6 +12,8 @@ import {
   initialStats,
   topScores,
   buildRunDiffBuckets,
+  deriveRunLineProbs,
+  deriveTotalLineProbs,
   type RunningStats,
   type GameResult,
   type RunDiffBucket,
@@ -169,6 +171,9 @@ export default function MatchSimulator({ match }: Props) {
     (m, b) => Math.max(m, b.pct),
     0
   );
+  // soul R208 · 讓分 + 大小盤(賭徒熟悉的玩法視角 · 從同一份 scoreCounts 推 · 零賠率)
+  const runLines = deriveRunLineProbs(stats.scoreCounts);
+  const totalLines = deriveTotalLineProbs(stats.scoreCounts);
 
   return (
     <>
@@ -400,6 +405,87 @@ export default function MatchSimulator({ match }: Props) {
         </section>
       )}
 
+      {/* ── 讓分 · 大小盤(soul R208 · 賭徒熟悉的玩法視角 · 我們自己算的機率 · 零賠率)──
+          台灣運彩兩大主力玩法(讓分 / 大小盤)· 從同一份 10K scoreCounts 直接推導。
+          🔴 守線:純機率陳述 · 不接莊家盤口 · 不出「最佳推薦 · 押這邊」· 你自己判斷。 */}
+      {stats.completed > 0 && runLines.length > 0 && (
+        <section className="pb-14" aria-labelledby="market-views-heading">
+          <div className="flex items-baseline justify-between flex-wrap gap-2 mb-2">
+            <p
+              id="market-views-heading"
+              className="font-mono text-gold/70 text-[10px] tracking-[0.35em]"
+            >
+              / 讓分 · 大小盤
+            </p>
+            <p
+              lang="en"
+              className="font-mono text-mute/60 text-[9px] tracking-[0.3em]"
+              title="從同一份 10K 模擬推導 · 不接任何莊家盤口"
+            >
+              N = {stats.completed.toLocaleString()} · 0 ODDS
+            </p>
+          </div>
+          <p className="font-mono text-mute/70 text-[10px] tracking-[0.25em] mb-6 leading-relaxed">
+            ▸ 賭徒熟悉的玩法視角 —— 但這是引擎模擬算出來的機率,
+            <span className="text-bone">不是賠率,也不是叫你押哪邊</span>。 數字我們自己算,你自己判斷。
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+            {/* 讓分 */}
+            <div className="bg-slate/40 border border-line/70 p-5 sm:p-6">
+              <div className="flex items-baseline justify-between mb-4">
+                <p className="font-mono text-mute text-[10px] tracking-[0.3em]">/ 讓分</p>
+                <p lang="en" className="font-mono text-mute/50 text-[9px] tracking-[0.3em]">
+                  RUN LINE
+                </p>
+              </div>
+              <ul className="space-y-3 list-none pl-0">
+                {runLines.map((r) => (
+                  <li
+                    key={r.line}
+                    className="grid grid-cols-[5rem_1fr_1fr] gap-3 items-baseline"
+                  >
+                    <span className="font-mono text-mute text-xs tabular">
+                      讓 {r.line} 分
+                    </span>
+                    <MarketSide side="主" pct={r.homePct} lead={r.homePct >= r.awayPct} />
+                    <MarketSide side="客" pct={r.awayPct} lead={r.awayPct > r.homePct} />
+                  </li>
+                ))}
+              </ul>
+              <p className="font-mono text-mute/50 text-[9px] tracking-[0.2em] leading-relaxed mt-4 pt-3 border-t border-line/40">
+                ▸ 主 = 主隊贏「超過這個分數」的機率 · 客 = 客隊受讓守住的機率
+              </p>
+            </div>
+            {/* 大小盤 */}
+            <div className="bg-slate/40 border border-line/70 p-5 sm:p-6">
+              <div className="flex items-baseline justify-between mb-4">
+                <p className="font-mono text-mute text-[10px] tracking-[0.3em]">/ 大小盤</p>
+                <p lang="en" className="font-mono text-mute/50 text-[9px] tracking-[0.3em]">
+                  OVER · UNDER
+                </p>
+              </div>
+              <ul className="space-y-3 list-none pl-0">
+                {totalLines.map((t) => (
+                  <li
+                    key={t.line}
+                    className="grid grid-cols-[5rem_1fr_1fr] gap-3 items-baseline"
+                  >
+                    <span className="font-mono text-mute text-xs tabular">
+                      總分 {t.line}
+                    </span>
+                    <MarketSide side="大" pct={t.overPct} lead={t.overPct >= t.underPct} />
+                    <MarketSide side="小" pct={t.underPct} lead={t.underPct > t.overPct} />
+                  </li>
+                ))}
+              </ul>
+              <p className="font-mono text-mute/50 text-[9px] tracking-[0.2em] leading-relaxed mt-4 pt-3 border-t border-line/40">
+                ▸ 大 = 雙方總得分「超過這個數」的機率 · 小 = 不到的機率
+              </p>
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* ── COMPLETION CARD ──────────────────────── */}
       {done && (
         <section className="pb-14">
@@ -538,6 +624,34 @@ function RunDiffRow({
         {bucket.pct.toFixed(1)}%
       </span>
     </li>
+  );
+}
+
+// ── 讓分 / 大小盤 單側機率(soul R208)· 領先側上金 · 另一側 mute ──────────
+function MarketSide({
+  side,
+  pct,
+  lead,
+}: {
+  side: string;
+  pct: number;
+  lead: boolean;
+}) {
+  return (
+    <span className="flex items-baseline gap-1.5">
+      <span
+        className={`font-mono text-[10px] tracking-[0.2em] ${
+          lead ? "text-bone" : "text-mute/55"
+        }`}
+      >
+        {side}
+      </span>
+      <span
+        className={`font-mono tabular text-sm ${lead ? "text-gold" : "text-mute"}`}
+      >
+        {pct}%
+      </span>
+    </span>
   );
 }
 
