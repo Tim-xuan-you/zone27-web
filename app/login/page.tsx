@@ -300,6 +300,37 @@ export default function LoginPage() {
     }
   }
 
+  // Google 一鍵登入(R208 · soul-roadmap「學對手該學的:摩擦歸零」)· OAuth code flow:
+  // signInWithOAuth → 整頁跳 Google → 回 Supabase /auth/v1/callback → 帶 ?code= 跳回我們
+  // /auth/callback(現成 · exchangeCodeForSession 同 email 確認流程,0 改動)→ /member。
+  // 失敗 graceful:退回 email + 密碼,不卡死。
+  async function handleGoogle() {
+    setState({ kind: "submitting" });
+    try {
+      const supabase = createSupabaseBrowserClient();
+      const callbackUrl = new URL("/auth/callback", window.location.origin);
+      if (nextPath) callbackUrl.searchParams.set("next", nextPath);
+      const { error } = await supabase.auth.signInWithOAuth({
+        provider: "google",
+        options: { redirectTo: callbackUrl.toString() },
+      });
+      // 成功時瀏覽器會自動整頁跳轉到 Google · 不會走到這行之後。
+      if (error) {
+        if (error.message) console.error("[login handleGoogle]", error.message);
+        setState({
+          kind: "error",
+          message: "Google 登入暫時無法使用 · 改用 email + 密碼,或稍候再試",
+        });
+      }
+    } catch (err) {
+      if (err instanceof Error) console.error("[login handleGoogle]", err.message);
+      setState({
+        kind: "error",
+        message: "Google 登入暫時無法使用 · 改用 email + 密碼,或稍候再試",
+      });
+    }
+  }
+
   // 忘記密碼 · Supabase 標準 recovery · 寄重設信 → 點 link 落地 /auth/reset 設新密碼。
   async function handleForgot() {
     const trimmed = email.trim().toLowerCase();
@@ -342,7 +373,7 @@ export default function LoginPage() {
             <span className="text-gold">加入 ZONE 27</span>
           </h1>
           <p className="mt-6 text-mute text-base leading-relaxed max-w-xl mx-auto">
-            Email + 密碼,就這樣。 新帳號自動建立 · 已有帳號自動登入。
+            Email + 密碼,或 Google 一鍵登入。 新帳號自動建立 · 已有帳號自動登入。
             終身免費 · 永不調漲 · 0 tracking。
           </p>
         </section>
@@ -387,6 +418,7 @@ export default function LoginPage() {
           ) : state.kind === "reset_sent" ? (
             <ResetSentState email={state.email} />
           ) : (
+            <>
             <form
               onSubmit={handleSubmit}
               className="bg-slate/40 border border-gold/40 p-6 sm:p-8 space-y-5"
@@ -467,10 +499,27 @@ export default function LoginPage() {
                   <br />
                   ▸ 用過了 = 直接打密碼登入 · 登入狀態只留在這台裝置
                   <br />
-                  ▸ 不綁臉書 / Google · 不追蹤你(詳見 /privacy)
+                  ▸ Google 或 email 都行 · 我們一樣 0 追蹤(詳見 /privacy)
                 </p>
               </div>
             </form>
+
+            {/* ── 或 · Google 一鍵登入(R208 · 摩擦歸零 · 連密碼都不用打)── */}
+            <div className="flex items-center gap-3 my-5" aria-hidden="true">
+              <span className="h-px flex-1 bg-line/50" />
+              <span className="font-mono text-mute/50 text-[10px] tracking-[0.3em]">或</span>
+              <span className="h-px flex-1 bg-line/50" />
+            </div>
+            <button
+              type="button"
+              onClick={handleGoogle}
+              disabled={state.kind === "submitting"}
+              className="w-full flex items-center justify-center gap-3 px-6 py-3 border border-line/70 bg-navy/40 text-bone font-mono text-sm tracking-[0.15em] hover:border-gold/40 hover:bg-gold/5 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              <GoogleGlyph />
+              使用 Google 登入
+            </button>
+            </>
           )}
         </section>
 
@@ -481,7 +530,7 @@ export default function LoginPage() {
             elaboration 全砍。 訪客想知 detail click /privacy。 */}
         <section className="mx-auto max-w-md w-full px-6 sm:px-10 pb-16">
           <p className="font-mono text-mute/70 text-[10px] tracking-[0.3em] leading-relaxed text-center mb-6">
-            只要 email + 密碼 · 不問姓名 / 國家 / 生日 · 因為我們連註冊都 0 追蹤。{" "}
+            Email + 密碼或 Google · 不問姓名 / 國家 / 生日 · 我們連註冊都 0 追蹤。{" "}
             <Link
               href="/privacy"
               className="text-gold underline-offset-4 hover:underline"
@@ -634,4 +683,28 @@ function friendlyPasswordError(raw: string): string {
     console.error("[login friendlyPasswordError unknown]", raw);
   }
   return "錯誤 · 請稍候再試 · 持續寫信 " + SUPPORT_EMAIL;
+}
+
+// 官方 Google 4 色「G」標記(inline SVG · 0 依賴)· 用於「使用 Google 登入」鈕。
+function GoogleGlyph() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true" className="shrink-0">
+      <path
+        fill="#4285F4"
+        d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844a4.14 4.14 0 0 1-1.796 2.716v2.259h2.908c1.702-1.567 2.684-3.875 2.684-6.615z"
+      />
+      <path
+        fill="#34A853"
+        d="M9 18c2.43 0 4.467-.806 5.956-2.18l-2.908-2.259c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332A8.997 8.997 0 0 0 9 18z"
+      />
+      <path
+        fill="#FBBC05"
+        d="M3.964 10.71A5.41 5.41 0 0 1 3.682 9c0-.593.102-1.17.282-1.71V4.958H.957A8.996 8.996 0 0 0 0 9c0 1.452.348 2.827.957 4.042l3.007-2.332z"
+      />
+      <path
+        fill="#EA4335"
+        d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0A8.997 8.997 0 0 0 .957 4.958L3.964 7.29C4.672 5.163 6.656 3.58 9 3.58z"
+      />
+    </svg>
+  );
 }
