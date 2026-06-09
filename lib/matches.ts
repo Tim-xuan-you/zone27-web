@@ -2142,6 +2142,85 @@ export const matches: Match[] = rawMatches.map((m) => {
   return merged;
 });
 
+// ── 近期戰績 + 本季對戰(從官方賽果 lib/cpbl-results.json 算 · 非 placeholder)──
+// soul:賽前卡原本用 TeamSide.recent 的 placeholder 假資料(reasoning.ts 刻意不用它)。
+// 現在整季官方賽果都在 CPBL_AUTO_GAMES,可以算真實近況 + 對戰史 = 誠實的賽前 context。
+// 只算 CPBL(MLB/足球隊名對不到 cpblTeamKey → 回 null → render gracefully 隱藏)。
+export type TeamForm = {
+  results: ("W" | "L" | "T")[]; // 新到舊 · 最近 n 場
+  record: { w: number; l: number; t: number }; // 賽季至該日(不含當日)
+};
+
+/** 某隊在某日之前的最近 n 場官方戰績 + 賽季 W-L-T · 配不到回 null。 */
+export function getCpblTeamForm(
+  teamName: string,
+  beforeIso: string,
+  n = 5
+): TeamForm | null {
+  const key = cpblTeamKey(teamName);
+  if (!key) return null;
+  const games = CPBL_AUTO_GAMES.filter((g) => g.date < beforeIso).sort((a, b) =>
+    a.date === b.date ? b.gameSno - a.gameSno : b.date.localeCompare(a.date)
+  );
+  const results: ("W" | "L" | "T")[] = [];
+  let w = 0,
+    l = 0,
+    t = 0;
+  for (const g of games) {
+    const oh = cpblTeamKey(g.homeName);
+    const oa = cpblTeamKey(g.awayName);
+    let r: "W" | "L" | "T" | null = null;
+    if (oh === key)
+      r = g.homeScore > g.awayScore ? "W" : g.homeScore < g.awayScore ? "L" : "T";
+    else if (oa === key)
+      r = g.awayScore > g.homeScore ? "W" : g.awayScore < g.homeScore ? "L" : "T";
+    if (!r) continue;
+    if (r === "W") w++;
+    else if (r === "L") l++;
+    else t++;
+    if (results.length < n) results.push(r);
+  }
+  if (w + l + t === 0) return null;
+  return { results, record: { w, l, t } };
+}
+
+export type H2H = {
+  total: number;
+  homeWins: number; // homeName 那隊贏幾場(不分主客)
+  awayWins: number; // awayName 那隊贏幾場
+  ties: number;
+};
+
+/** 兩隊在某日之前的本季對戰史(以傳入的 home/away 隊為框)· 配不到回 null。 */
+export function getCpblH2H(
+  homeName: string,
+  awayName: string,
+  beforeIso: string
+): H2H | null {
+  const hk = cpblTeamKey(homeName);
+  const ak = cpblTeamKey(awayName);
+  if (!hk || !ak || hk === ak) return null;
+  let total = 0,
+    homeWins = 0,
+    awayWins = 0,
+    ties = 0;
+  for (const g of CPBL_AUTO_GAMES) {
+    if (g.date >= beforeIso) continue;
+    const oh = cpblTeamKey(g.homeName);
+    const oa = cpblTeamKey(g.awayName);
+    if (!oh || !oa) continue;
+    if (!((oh === hk && oa === ak) || (oh === ak && oa === hk))) continue;
+    total++;
+    const winnerKey: string | null =
+      g.homeScore > g.awayScore ? oh : g.homeScore < g.awayScore ? oa : null;
+    if (winnerKey === hk) homeWins++;
+    else if (winnerKey === ak) awayWins++;
+    else ties++;
+  }
+  if (total === 0) return null;
+  return { total, homeWins, awayWins, ties };
+}
+
 export function getMatchById(id: string): Match | undefined {
   return matches.find((m) => m.id === id);
 }

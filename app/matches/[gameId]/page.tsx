@@ -13,6 +13,7 @@ import ReceiptForwardButton from "@/components/ReceiptForwardButton";
 import CopyLinkButton from "@/components/CopyLinkButton";
 import SettlementResolution from "@/components/SettlementResolution";
 import TonightMatchRail from "@/components/TonightMatchRail";
+import RecentFormBlock from "@/components/RecentFormBlock";
 import {
   getMatchById,
   getAllMatchIds,
@@ -290,6 +291,9 @@ export default async function MatchDetailPage({
             </Link>
           )}
         </section>
+
+        {/* ── 近期戰績 + 本季對戰(官方賽果 · CPBL 限定 · graceful 隱藏)── */}
+        <RecentFormBlock match={m} />
 
         {/* ── RECEIPT · 賽後結果(only when final)─────── */}
         {m.finalResult && calibration && (
