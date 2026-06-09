@@ -127,14 +127,16 @@ export default async function Home() {
             </Link>
           )}
 
-          {/* 主 CTA · hero 唯一實心金鈕(C2:解兩個競爭 CTA · gold discipline 一屏一焦點)*/}
+          {/* 主 CTA · hero 唯一實心金鈕(C2:解兩個競爭 CTA · gold discipline 一屏一焦點)·
+              R207 conversion:原 href="#floor" 在手機上看板就在下方一屏、點了幾乎不動 =
+              「按了大金鈕卻沒反應」· 改成真的換頁讓點擊有明確回饋。 */}
           <div className="mt-7">
-            <a
-              href="#floor"
+            <Link
+              href={allUpcoming.length > 0 ? "/matches" : "/track-record"}
               className="inline-flex items-center gap-2 bg-gold text-navy font-mono text-xs sm:text-sm tracking-[0.25em] px-6 py-3 hover:bg-gold-soft transition-colors"
             >
-              {allUpcoming.length > 0 ? "↓ 看接下來誰會贏" : "↓ 看引擎最近戰績"}
-            </a>
+              {allUpcoming.length > 0 ? "看今晚誰會贏 →" : "看引擎最近戰績 →"}
+            </Link>
           </div>
           {/* 校準遊戲 = 安靜次要文字鏈(降為次要 · 不跟主金鈕搶)· 仍是最強 0-登入 hook:
               先別下注、先測你自己 → 把 57% 從 claim 變訪客自己發現的 aha。 */}

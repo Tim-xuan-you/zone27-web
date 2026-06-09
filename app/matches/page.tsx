@@ -88,7 +88,7 @@ export default async function MatchesPage() {
             {boardDate}
           </h1>
           <p className="font-mono text-mute text-xs tracking-[0.25em]">
-            {cpblSorted.length + mlbSorted.length} 場引擎覆蓋 · AI 模型 15:00 鎖定
+            {cpblSorted.length + mlbSorted.length} 場引擎覆蓋 · 開賽前鎖定
           </p>
         </div>
         <p className="mt-3 font-mono text-mute text-[10px] tracking-[0.25em]">
