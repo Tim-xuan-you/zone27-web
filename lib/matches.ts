@@ -341,6 +341,9 @@ const rawMatches: Match[] = [
       { score: "3 : 5", probability: 7.0 },
     ],
     aiConfidence: 53,
+    // 2026-06-09:官網 06-05 無此對戰(台鋼/味全 該日延賽 · sno141/144 改期)→ 標延賽,
+    // 不掛「賽果待補」· 賽前鎖的引擎線保留(重賽 Tim 再處理)· 自動結算/隊名核對正確略過。
+    postponed: true,
   },
   // ── 2026-06-04 · DAY 12 ingest · #141(富邦 vs 台鋼 @ 澄清湖)· Tim 截圖 cpbl.com.tw ──
   // 來源:Tim 截圖 cpbl.com.tw 一軍賽程 2026/06/04 星期四 #141 + 先發投手成績表(李東洛 + 黃子鵬)。
@@ -885,17 +888,19 @@ const rawMatches: Match[] = [
       winRate: 51,
     },
     away: {
-      name: "台鋼雄鷹",
-      en: "HAWKS",
+      name: "統一7-ELEVEn獅",
+      en: "LIONS",
       pitcher: {
+        // 布雷克 = 統一7-ELEVEn獅 洋投(official #131 LP)· 原客隊隊名誤植「台鋼雄鷹」
+        // (統一橘 ↔ 台鋼綠 logo 看反 · 投手布雷克本就是統一)· 2026-06-09 對官網校回。
         name: "布雷克",
         era: "1.78", // 真實 · 2026 累計
-        k9: "8.5", // estimate · 菁英 ERA
+        k9: "8.5", // estimate
         whip: "1.10", // estimate
         bb9: "2.5", // estimate
         hr9: "0.53", // 真實 · 3 HR / 50.2 局 × 9
       },
-      recent: ["L", "W", "L", "W", "L"], // placeholder · 台鋼 20-21
+      recent: ["W", "L", "W", "L", "W"], // placeholder · 統一 ~20-21 around .500
       winRate: 49,
     },
     topScores: [
@@ -906,14 +911,11 @@ const rawMatches: Match[] = [
       { score: "4 : 3", probability: 9.5 },
     ],
     aiConfidence: 55,
-    // ── FINAL · 2026-05-30 · 天母 · 9 局完整 · per Tim 賽後 screenshot #131 ──
-    // ⚠ INGEST DATA INTEGRITY DISCLOSURE(per /audit S05 + Pratfall axiom):
-    // pre-game away team 記為「台鋼雄鷹」· 官方 #131 box score away = 統一7-ELEVEn獅
-    // (台鋼/統一 在 pre-game #131↔#133 之間 swap · 同 cpbl-260524 ingest-error pattern)。
-    // 處理:pre-game winRate(home 51 · away 49)immutable 不改 · finalResult 記官方真實。
-    // 比分:味全(home)2 : 0 統一(away)· WP 梅賽鏔(味全)· LP 布雷克 · SV 林凱威(味全)
-    // Engine 賽前 home 51% favored → home(味全)win → PROVED ✓(side prediction 正確 ·
-    // identity error 不影響 home/away calibration)。
+    // ── FINAL · 2026-05-30 · 天母 · 9 局 · 官網 #131 ──
+    // 2026-06-09 校正:客隊隊名原誤植「台鋼雄鷹」→ 官方實際「統一7-ELEVEn獅」(統一橘 ↔ 台鋼綠
+    // logo 看反 · 投手布雷克本就是統一 · 同日 #133 對調)· 已對回官方。 賽前 winRate(home 51 /
+    // away 49)immutable 不動 → home 微傾 51% 且 home(味全)贏 = PROVED ✓。
+    // 比分:味全(主)2 : 統一(客)0 · WP 梅賽鏔(味全)· LP 布雷克(統一)· SV 林凱威(味全)
     finalResult: {
       homeScore: 2,
       awayScore: 0,
@@ -1001,17 +1003,19 @@ const rawMatches: Match[] = [
       winRate: 54,
     },
     away: {
-      name: "統一7-ELEVEn獅",
-      en: "LIONS",
+      name: "台鋼雄鷹",
+      en: "HAWKS",
       pitcher: {
+        // 後勁 = 台鋼雄鷹 本土投手 · 原客隊隊名誤植「統一7-ELEVEn獅」(統一橘 ↔ 台鋼綠
+        // logo 看反 · 投手後勁本就是台鋼 · 同日 #131 對調)· 2026-06-09 對官網校回。
         name: "後勁",
-        era: "4.15", // 真實 · 2026 累計(生涯佳 · 今年較高)
+        era: "4.15", // 真實 · 2026 累計
         k9: "7.5", // estimate
-        whip: "1.28", // estimate · 被安打低 28/39
+        whip: "1.28", // estimate
         bb9: "3.5", // estimate
-        hr9: "0.00", // 真實 · 0 HR / 39 局(極佳壓制)
+        hr9: "0.00", // 真實 · 0 HR / 39 局
       },
-      recent: ["W", "L", "W", "W", "L"], // placeholder · 統一 23-19
+      recent: ["L", "W", "L", "W", "L"], // placeholder · 台鋼 ~20-21
       winRate: 46,
     },
     topScores: [
@@ -1022,14 +1026,12 @@ const rawMatches: Match[] = [
       { score: "5 : 3", probability: 8.5 },
     ],
     aiConfidence: 54,
-    // ── FINAL · 2026-05-30 · 樂天桃園 · 9 局完整 · per Tim 賽後 screenshot #133 ──
-    // ⚠ INGEST DATA INTEGRITY DISCLOSURE(per /audit S05 + Pratfall axiom):
-    // pre-game away team 記為「統一7-ELEVEn獅(後勁)」· 官方 #133 box score away = 台鋼雄鷹
-    // (台鋼/統一 在 pre-game #131↔#133 之間 swap)。 決勝投手 WP 黃群(台鋼)· LP 朱承洋(樂天)·
-    // SV 林詩翔(台鋼)· 非 pre-game 掛名先發(後勁/曾家輝)。
-    // 處理:pre-game winRate(home 樂天 54 · away 46)immutable 不改 · finalResult 記官方真實。
-    // 比分:樂天(home)3 : 5 台鋼(away)· away 勝。 Engine 賽前 home 54% favored → home(樂天)
-    // 輸 → DIVERGED ✕(同 PROVED 等大公開於 /track-record + /calibration)。
+    // ── FINAL · 2026-05-30 · 樂天桃園 · 9 局 · 官網 #133 ──
+    // 2026-06-09 校正:客隊隊名原誤植「統一7-ELEVEn獅」→ 官方實際「台鋼雄鷹」(統一橘 ↔ 台鋼綠
+    // logo 看反 · 投手後勁本就是台鋼 · 同日 #131 對調)· 已對回官方。 賽前 winRate(home 樂天 54 /
+    // away 46)immutable 不動 → home 微傾 54% 但 away(台鋼)贏 = DIVERGED ✕(引擎這場猜錯邊 ·
+    // 照掛不藏 · 同 PROVED 等大)。
+    // 比分:樂天(主)3 : 台鋼(客)5 · WP 黃群(台鋼)· LP 朱承洋(樂天)· SV 林詩翔(台鋼)
     finalResult: {
       homeScore: 3,
       awayScore: 5,

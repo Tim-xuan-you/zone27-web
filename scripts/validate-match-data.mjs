@@ -14,6 +14,8 @@
 //      OR flagged with「ESTIMATE」 comment
 //   7. Venue references valid park in cpbl-parks.ts
 //   8. Venue homeTeam matches park.homeTeam(catch venue mismatch)
+//   8.5 CPBL 已完成賽事(日期 + 兩隊)對 lib/cpbl-results.json 官方賽程核對
+//       (R207 · 防 logo 看反把客隊隊名標錯上公開帳本 · 延賽場略過)
 //   9. Stale-pending detection · match.date > 14h ago without finalResult
 //
 // brand IP fit:
@@ -266,6 +268,78 @@ for (const block of finalResultBlocks) {
 }
 if (finalResultCount > 0 && finalResultErrors === 0) {
   ok(`${finalResultCount} finalResult entries · schema valid`);
+}
+
+// ── Step 6.5 · CPBL 隊名 ↔ 官方賽果交叉核對(防 logo 看反誤植)──────────
+// R207 · 整季有 7 場曾因「味全 W ↔ 統一橘 / 中信 B ↔ 富邦 G」logo 看反而把客隊
+// 隊名標錯(主隊/比分/勝負都對 · 只隊名錯)。 此 check 把每場已完成 CPBL 賽事的
+// (日期 + 兩隊集合)對 lib/cpbl-results.json 官方賽程核對 → 下一次誤植在 commit 前
+// 就被抓到、不會默默上公開帳本。 純隊名比對 · 不碰 winRate / 結算(immutable)。
+const CPBL_TEAM_KEY = {
+  中信兄弟: "CTBC",
+  樂天桃猿: "RAKU",
+  "統一7-ELEVEn獅": "UNI",
+  統一獅: "UNI",
+  台鋼雄鷹: "TSG",
+  味全龍: "WEI",
+  富邦悍將: "FUBON",
+};
+const normTeam = (n) => (n ? CPBL_TEAM_KEY[n.trim()] ?? null : null);
+
+let officialByDate = null;
+try {
+  const res = JSON.parse(readFileSync(join(ROOT, "lib/cpbl-results.json"), "utf-8"));
+  officialByDate = new Map();
+  for (const g of res.games ?? []) {
+    if (!officialByDate.has(g.date)) officialByDate.set(g.date, []);
+    officialByDate.get(g.date).push([normTeam(g.homeName), normTeam(g.awayName)]);
+  }
+} catch {
+  officialByDate = null; // 沒有 results 檔就 graceful 跳過此 check
+}
+
+if (officialByDate) {
+  const isoFromDate = (d) => {
+    const parts = d.split("·").map((s) => s.trim()).filter(Boolean);
+    if (parts.length < 3) return null;
+    const [y, m, dd] = parts;
+    if (!/^\d{4}$/.test(y) || !/^\d{1,2}$/.test(m) || !/^\d{1,2}$/.test(dd)) return null;
+    return `${y}-${m.padStart(2, "0")}-${dd.padStart(2, "0")}`;
+  };
+  const blocks = matchesSource.split(/id:\s*"/).slice(1);
+  const mismatches = [];
+  let checked = 0;
+  for (const b of blocks) {
+    const idm = b.match(/^(cpbl-[0-9-]+)"/);
+    if (!idm) continue;
+    const id = idm[1];
+    if (/postponed:\s*true/.test(b)) continue; // 延賽場:官方原日無此賽果 · 略過(非誤植)
+    const cut = b.indexOf("topScores");
+    const seg = b.slice(0, cut >= 0 ? cut : 2000);
+    const dateM = seg.match(/date:\s*"([^"]+)"/);
+    const iso = dateM ? isoFromDate(dateM[1]) : null;
+    if (!iso || !officialByDate.has(iso)) continue; // 官方還沒那天賽果(未來場/賽前)→ 跳過
+    const homeM = seg.match(/home:\s*\{[\s\S]*?name:\s*"([^"]+)"/);
+    const awayM = seg.match(/away:\s*\{[\s\S]*?name:\s*"([^"]+)"/);
+    const hk = normTeam(homeM?.[1]);
+    const ak = normTeam(awayM?.[1]);
+    if (!hk || !ak) continue;
+    checked++;
+    const found = officialByDate
+      .get(iso)
+      .some(([oh, oa]) => (oh === hk && oa === ak) || (oh === ak && oa === hk));
+    if (!found) {
+      mismatches.push(`${id}(${homeM?.[1]} vs ${awayM?.[1]} · ${iso})`);
+    }
+  }
+  if (mismatches.length > 0) {
+    warn(
+      "CPBL 賽事隊名對不到官方賽果(疑似 logo 看反誤植 · 對官方 box score 核對主/客隊):\n     " +
+        mismatches.join("\n     ")
+    );
+  } else if (checked > 0) {
+    ok(`${checked} 場已完成 CPBL 賽事隊名 ↔ 官方賽果 全對得上`);
+  }
 }
 
 // ── Step 7 · Stale-pending detection ────────────────────
