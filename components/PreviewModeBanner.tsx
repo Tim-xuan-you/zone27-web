@@ -124,51 +124,12 @@ export default function PreviewModeBanner() {
     window.location.reload();
   }, []);
 
-  // Round 47 W-B · Keyboard shortcut Cmd+Shift+P · from any page activate
-  // preview mode · default to anonymous tier · Tim 不需 visit /admin
-  // brand IP:invisible to public · only Tim know shortcut · same axiom as
-  // /admin noindex pattern from R29 W2。
-  //
-  // R61 W-E · Agent 2 audit 🟡 #7 fix · Firefox Cmd+Shift+P opens Private
-  // Window(real conflict) · skip preventDefault + handler 當 target 在 input/
-  // textarea/contenteditable inside · 避免 Tim 在 form 內打字時被 banner 干擾。
-  // 同 Linear / Notion command-palette pattern · respect input focus context。
-  useEffect(() => {
-    const onKey = (e: KeyboardEvent) => {
-      const modifier = e.metaKey || e.ctrlKey;
-      if (!modifier || !e.shiftKey || (e.key !== "P" && e.key !== "p")) {
-        return;
-      }
-      // Skip if user is currently typing in any input field
-      const target = e.target as HTMLElement | null;
-      if (target) {
-        const tag = target.tagName;
-        const isEditable =
-          tag === "INPUT" ||
-          tag === "TEXTAREA" ||
-          tag === "SELECT" ||
-          target.isContentEditable;
-        if (isEditable) {
-          return;
-        }
-      }
-      e.preventDefault();
-      try {
-        const stored = localStorage.getItem(STORAGE_KEY);
-        if (stored && stored in TIER_LABELS) {
-          // Already active · cancel
-          handleCancel();
-        } else {
-          // Not active · default to anonymous
-          handleSwitch("anonymous");
-        }
-      } catch {
-        // ignore
-      }
-    };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [handleSwitch, handleCancel]);
+  // R207 · 全域 Cmd+Shift+P 快捷鍵已移除。 原本「任何頁面按 Cmd+Shift+P 進預覽」
+  // 是「全站熱鍵召喚一條紅 banner」—— Tim 常不小心按到、又跟瀏覽器快捷鍵衝突(Firefox
+  // 的無痕視窗)。 大公司(Stripe impersonate / Vercel·Linear preview)的做法是:
+  // 切換身份只放在 admin 後台「刻意進入」· 進入後才掛一條「克制但明確 · 可一鍵離開」
+  // 的指示條 —— 不靠遊走的全域熱鍵。 進入預覽改走 /admin 的 AdminTierSwitcher(刻意 ·
+  // is_admin 守門);本 banner 退化成「你正在預覽 · 離開」的指示器(下方)。
 
   if (!mounted || !tier) return null;
 
@@ -231,14 +192,13 @@ export default function PreviewModeBanner() {
           onClick={handleCancel}
           className="font-mono text-loss/80 hover:text-loss text-[10px] sm:text-[11px] tracking-[0.2em] tabular underline underline-offset-4 hover:underline transition-colors min-h-[32px] px-2 py-1"
         >
-          ✕ 取消
+          ✕ 結束預覽
         </button>
         <span
-          lang="en"
           aria-hidden="true"
           className="hidden sm:inline font-mono text-loss/40 text-[9px] tracking-[0.2em] ml-1"
         >
-          (or Cmd+Shift+P)
+          · 從 /admin 進入
         </span>
       </div>
     </div>
