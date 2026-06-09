@@ -23,6 +23,7 @@ import {
 } from "@/lib/matches";
 import CalibrationIdentityCard from "@/components/CalibrationIdentityCard";
 import ReturnedWhileAwayCard from "@/components/ReturnedWhileAwayCard";
+import ExportLedgerButton from "@/components/ExportLedgerButton";
 import HonorWall from "@/components/HonorWall";
 import ProfileShareCard from "@/components/ProfileShareCard";
 import SoccerRecordCard from "@/components/SoccerRecordCard";
@@ -418,6 +419,9 @@ export default async function MemberPage() {
             </Link>
           </p>
         )}
+
+        {/* 帳本可攜(soul R209)· 你的歷史我們改不了、你也能帶走 = 對手結構上做不到 */}
+        <ExportLedgerButton />
 
         {/* 聯絡站長 · Tim dogfood:會員找不到「怎麼聯絡站長」· 直接 mailto Tim 個人 inbox */}
         <p className="mt-10 text-center font-mono text-mute/50 text-[10px] tracking-[0.2em] leading-relaxed">
