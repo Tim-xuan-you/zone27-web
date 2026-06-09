@@ -14,6 +14,7 @@ import {
   type Calibration,
 } from "@/lib/matches";
 import { getEngineConviction } from "@/lib/conviction";
+import { getEngineReasoning } from "@/lib/reasoning";
 
 // ── ZONE 27 · Mini Match Card ────────────────────────────
 // Round 31 Wave A · Compact static-engine card for the homepage
@@ -84,6 +85,12 @@ export default function MiniMatchCard({
   const favPct = Math.max(homePct, awayPct);
   const dogPct = Math.min(homePct, awayPct);
   const conviction = getEngineConviction(favPct);
+  // soul R209 · 看板主因縮影:把詳情頁已算好的「為什麼」(getEngineReasoning)往看板前擺
+  // 一格 —— 訪客看到一堆 % 卻不知憑什麼,給 top-1 與 favorite 同向的因子標籤(純衍生)。
+  // MLB 缺 ERA/BB9 時,沒有與 fav 同向的因子 → null → graceful 不顯示(不硬編假數據)。
+  const topFactor = fav
+    ? getEngineReasoning(match).factors.find((f) => f.lean === fav) ?? null
+    : null;
   // 隊徽:CPBL = 中文單字 + 真隊色;MLB = 英文官方縮寫(LAD/NYY)+ 真招牌色。
   // 球迷靠縮寫 + 顏色秒認隊(MLB 中文首字毫無辨識度)· per getTeamCrest。
   const homeTeam = getTeamCrest(match.home.name, match.home.en, match.league);
@@ -206,6 +213,12 @@ export default function MiniMatchCard({
           </p>
         )}
 
+        {/* soul R209 · 主因縮影:給數字一個「為什麼」(不喊去押 · 只解釋機率)*/}
+        {topFactor && conviction.tier !== "tossup" && (
+          <p className="mt-1 text-center font-mono text-mute/45 text-[9px] tracking-[0.08em] leading-snug">
+            主因 · {topFactor.label}
+          </p>
+        )}
       </div>
 
       {/* 卡上押注(未結算場)· R188:押注要登入(看免費 · 押要免費會員)*/}
