@@ -1518,19 +1518,19 @@ const rawMatches: Match[] = [
       winRate: 35,
     },
     away: {
-      name: "統一7-ELEVEn獅",
-      en: "LIONS",
+      name: "味全龍",
+      en: "DRAGONS",
       pitcher: {
-        // 鋼龍 = Uni-Lions 洋將 starter · per Tim 5/24 preview
-        // 無 stats in cpbl-pitchers.ts leaderboard yet · 全 estimate
+        // 鋼龍 = 味全龍 洋投(official #119 WP)。 原 pre-game 把客隊隊名誤植成
+        // 「統一7-ELEVEn獅」· 但投手 鋼龍 本就是味全 → 2026-06-09 對官網 box score 校回味全。
         name: "鋼龍",
-        era: "3.30",       // estimate · 洋將 quality · 統一 league leader
+        era: "3.30",       // estimate · 洋投 quality
         k9: "8.2",         // estimate
         whip: "1.22",      // estimate
         bb9: "2.6",        // estimate
         hr9: "0.65",       // estimate
       },
-      recent: ["W", "W", "L", "W", "W"],  // estimate · 26-13-0 .667(post 5/23 win)
+      recent: ["W", "W", "L", "W", "W"],  // estimate · 味全 26-13-0 全聯盟最強
       winRate: 65,
     },
     topScores: [
@@ -1541,25 +1541,11 @@ const rawMatches: Match[] = [
       { score: "3 : 1", probability: 8.7 },
     ],
     aiConfidence: 67,
-    // ── FINAL · 2026-05-24 evening TPE · 大巨蛋 · 9 局完整 ──
-    // 從 Tim 賽後 screenshot 2026-05-25 ingest · 比賽 #119。
-    //
-    // ⚠ INGEST DATA INTEGRITY DISCLOSURE(per /audit S05 + Pratfall axiom):
-    // 此 game 的 pre-game lock-in away team identity 為「統一7-ELEVEn獅 with 鋼龍」 ·
-    // 但 CPBL 賽後官方 screenshot 顯示實際 away team 為「味全龍 with 鋼龍」 ·
-    // 鋼龍 為 味全龍 starter(per lib/cpbl-pitchers.ts canonical · acnt 0000006497 ·
-    // ERA 2.63 · K/9 8.34)· 不是 統一獅 player · pre-game 截圖 ingest 時
-    // identity 錯掛(可能 Tim screenshot 比賽編號 swap with cpbl-260524-02)。
-    //
-    // 處理 per Costly Signaling immutability axiom: pre-game winRate(home 35 ·
-    // away 65)不修改 · 不 retroactive 重算 stat-derived probability。 finalResult
-    // record 真實官方 5-0 away 勝利。 /track-record calibration 計算 AWAY 65%
-    // 預測 vs AWAY actual win = PROVED ✓(engine 對「哪一側」 的判斷正確 ·
-    // identity bug 不影響 side prediction)· 但 brand IP 必須顯式 surface 此
-    // identity error · 不藏 · 同 /audit DIVERGED 等大 axiom。
-    //
-    // 比分: 味全龍(away · 5)at 中信兄弟(home · 0)· 9 局完整 · 大巨蛋
-    // 勝投: 鋼龍(味全)· 敗投: 鄭浩均(中信)
+    // ── FINAL · 2026-05-24 · 大巨蛋 · 9 局 · 官網 #119 ──
+    // 2026-06-09 校正:客隊隊名原誤植「統一7-ELEVEn獅」→ 官方實際「味全龍」(W 紅 ↔ 橘
+    // logo 看反 · 投手 鋼龍 本就是味全)· 已對回官方。 賽前 winRate(home 35 / away 65)
+    // immutable 不動 → away 65% 預測 vs away 實際贏 = PROVED ✓。
+    // 比分:味全(客)5 : 中信(主)0 · WP 鋼龍(味全)· LP 鄭浩均(中信)
     finalResult: {
       homeScore: 0,
       awayScore: 5,
@@ -1591,19 +1577,19 @@ const rawMatches: Match[] = [
       winRate: 52,
     },
     away: {
-      name: "味全龍",
-      en: "DRAGONS",
+      name: "統一7-ELEVEn獅",
+      en: "LIONS",
       pitcher: {
-        // 胡智為 = Wei Chuan Dragons 本土 starter · per Tim 5/24 preview
-        // 無 stats in cpbl-pitchers.ts leaderboard yet · 全 estimate
-        name: "胡智為",
-        era: "3.80",       // estimate · 本土 quality
+        // 高塩將樹 = 統一7-ELEVEn獅 日籍洋投(official #120 WP)。 原 pre-game 把客隊整個
+        // 誤植成「味全龍 / 胡智為」(實際是統一 / 高塩將樹)· 2026-06-09 對官網 box score 校回。
+        name: "高塩將樹",
+        era: "3.80",       // estimate · 洋投 quality(賽前線不回改 · 沿用當時估值)
         k9: "7.8",         // estimate
         whip: "1.32",      // estimate
         bb9: "2.9",        // estimate
         hr9: "0.85",       // estimate
       },
-      recent: ["L", "W", "L", "L", "W"],  // estimate · 18-20-1 sub-.500(post 5/23 loss)
+      recent: ["W", "L", "W", "L", "W"],  // estimate · 統一 19-19-1 around .500
       winRate: 48,
     },
     topScores: [
@@ -1614,23 +1600,12 @@ const rawMatches: Match[] = [
       { score: "5 : 3", probability: 8.5 },
     ],
     aiConfidence: 51,
-    // ── FINAL · 2026-05-24 evening TPE · 澄清湖 · 9 局完整 ──
-    // 從 Tim 賽後 screenshot 2026-05-25 ingest · 比賽 #120。
-    //
-    // ⚠ INGEST DATA INTEGRITY DISCLOSURE(per /audit S05 + Pratfall axiom):
-    // 此 game 的 pre-game lock-in away team identity 為「味全龍 with 胡智為」 ·
-    // 但 CPBL 賽後官方 screenshot 顯示實際 away team 為「統一7-ELEVEn獅 with
-    // 高塩將樹」 · 高塩將樹 為 統一獅 player · 胡智為 在 official roster 未現 ·
-    // pre-game 截圖 ingest 時 identity 錯掛(同 cpbl-260524-01 配對 swap error)。
-    //
-    // 處理: 同 cpbl-260524-01 disclosure pattern · pre-game winRate(home 52 ·
-    // away 48)immutable 不修改 · finalResult record 真實官方 7-5 away 勝利。
-    // /track-record calibration: HOME 52%(slight favorite)vs HOME 實際輸 5 ·
-    // AWAY 實際贏 7 · DIVERGED ✕(engine 微傾 home 但 away 贏)· 同 PROVED 等大
-    // 公開於 /track-record + /receipts ledger per /audit S05 disclosure parity。
-    //
-    // 比分: 統一7-ELEVEn獅(away · 7)at 台鋼雄鷹(home · 5)· 9 局完整 · 澄清湖
-    // 勝投: 高塩將樹(統一)· 敗投: 林詩翔(台鋼)· 救援成功: 鍾允華(統一)
+    // ── FINAL · 2026-05-24 · 澄清湖 · 9 局 · 官網 #120 ──
+    // 2026-06-09 校正:客隊原整個誤植「味全龍 / 胡智為」→ 官方實際「統一7-ELEVEn獅 /
+    // 高塩將樹」(同日 #119 的味全↔統一 配對看反)· 已對回官方。 賽前 winRate(home 52 /
+    // away 48)immutable 不動 → home 微傾 52% 但 away 贏 = DIVERGED ✕(引擎這場猜錯邊 ·
+    // 照掛不藏 · 同 PROVED 等大)。
+    // 比分:統一(客)7 : 台鋼(主)5 · WP 高塩將樹(統一)· LP 林詩翔(台鋼)· SV 鍾允華(統一)
     finalResult: {
       homeScore: 5,
       awayScore: 7,
@@ -1772,20 +1747,20 @@ const rawMatches: Match[] = [
       winRate: 52,
     },
     away: {
-      name: "中信兄弟",
-      en: "BROTHERS",
+      name: "富邦悍將",
+      en: "GUARDIANS",
       pitcher: {
-        // 阿部雄大 = Brothers 洋投 · per Tim 5/26 screenshot · 2026 ERA 0.68 elite small-sample ·
-        // 13.1 IP 2 GS · 不在 cpbl-pitchers.ts leaderboard yet(13.1 IP under qualifying
-        // threshold)· K/9 + BB/9 + WHIP estimate · 阿部雄大 Japanese-named import
+        // 阿部雄大 = 富邦悍將 日籍洋投(official #122 · 也是 06-09 富邦先發)。 原 pre-game 把
+        // 客隊隊名誤植成「中信兄弟」(中信 B 金 ↔ 富邦 G 藍 logo 看反 · 投手 阿部雄大 本就是富邦)·
+        // 2026-06-09 對官網 box score 校回富邦。
         name: "阿部雄大",
-        era: "0.68",       // from screenshot 直接 · elite small-sample
-        k9: "9.0",         // estimate · low-ERA 洋投 typical K rate
-        whip: "0.95",      // estimate · ERA 0.68 implies low WHIP
-        bb9: "3.0",        // estimate · 洋投 control profile mid
-        hr9: "0.68",       // computed · 1 HR / 13.1 IP × 9 ≈ 0.677
+        era: "0.68",       // estimate · 2026 small-sample(13.1 IP)
+        k9: "9.0",         // estimate
+        whip: "0.95",      // estimate
+        bb9: "3.0",        // estimate
+        hr9: "0.68",       // estimate
       },
-      recent: ["W", "W", "L", "W", "L"],  // estimate · 21-16-0 .568 upper-mid profile
+      recent: ["W", "W", "L", "W", "L"],  // estimate · 富邦 21-16-0
       winRate: 48,
     },
     topScores: [
@@ -1798,25 +1773,11 @@ const rawMatches: Match[] = [
       { score: "4 : 3", probability: 9.7 },
     ],
     aiConfidence: 52,
-    // ── FINAL · 2026-05-26 evening TPE · 大巨蛋 · 9 局完整 ──
-    // 從 Tim 賽後 screenshot 2026-05-27 ingest · 比賽 #122。
-    //
-    // ⚠ INGEST DATA INTEGRITY DISCLOSURE(per /audit S05 + Pratfall axiom):
-    // 此 game 的 pre-game lock-in away team identity 為「中信兄弟 with 阿部雄大」 ·
-    // 但 CPBL 賽後官方 screenshot 顯示實際 away team 為「富邦悍將」 ·
-    // 林楔呈(敗投)為 富邦悍將 player · 林凱威(勝投)為 味全龍 player ·
-    // pre-game 截圖 ingest 時 away team identity G logo 誤判為中信兄弟(actual 富邦悍將)·
-    // 5/27 Tim screenshot 顯示 5/27 game 124 同 大巨蛋 G vs W matchup · clear G = 富邦悍將。
-    //
-    // 處理 per Costly Signaling immutability axiom: pre-game winRate(home 52 ·
-    // away 48)不修改 · 不 retroactive 重算 stat-derived probability。 finalResult
-    // record 真實官方 4-3 home(味全龍)勝利。 /track-record calibration 計算 HOME 52%
-    // 微傾 vs HOME actual win = PROVED ✓(engine「哪一側」 判斷正確 ·
-    // identity bug 不影響 side prediction)· 但 brand IP 必須顯式 surface 此
-    // identity error · 不藏 · 同 cpbl-260524-01 ingest-correction canonical pattern。
-    //
-    // 比分: 富邦悍將(away · 3)at 味全龍(home · 4)· 9 局完整 · 大巨蛋
-    // 勝投: 林凱威(味全)· 敗投: 林楔呈(富邦)
+    // ── FINAL · 2026-05-26 · 大巨蛋 · 9 局 · 官網 #122 ──
+    // 2026-06-09 校正:客隊隊名原誤植「中信兄弟」→ 官方實際「富邦悍將」(中信 B 金 ↔ 富邦 G 藍
+    // logo 看反 · 投手 阿部雄大 本就是富邦)· 已對回官方。 賽前 winRate(home 52 / away 48)
+    // immutable 不動 → home 微傾 52% 且 home(味全)贏 = PROVED ✓。
+    // 比分:富邦(客)3 : 味全(主)4 · WP 林凱威(味全)· LP 林楔呈(富邦)
     finalResult: {
       homeScore: 4,
       awayScore: 3,
