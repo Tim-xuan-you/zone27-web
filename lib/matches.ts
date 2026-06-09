@@ -1208,20 +1208,22 @@ const rawMatches: Match[] = [
       winRate: 40,
     },
     away: {
-      name: "統一7-ELEVEn獅",
-      en: "LIONS",
+      name: "味全龍",
+      en: "DRAGONS",
       pitcher: {
-        // Round 31 W-L · Tim 截圖矯正 logo + pitcher-team 對應 ·
-        // 獅帝芬 (LL 橘 = 統一)· 不是味全 (W 紅)
-        // 2026 real ERA 2.45 from /team/person?acnt=0000007597
-        name: "獅帝芬",
-        era: "2.45",       // real · 自動同步 from cpbl-pitchers.ts
-        k9: "6.61",        // real
-        whip: "1.22",      // real
-        bb9: "2.83",       // real
-        hr9: "0.19",       // real
+        // 2026-06-09 校正(Tim 補官網 box score):#114 大巨蛋 = 中信(主)2 : 味全(客)7 ·
+        // WP 林子昱(味全)。 原把客隊誤植成「統一/獅帝芬」(味全 W 紅 ↔ 統一橘 logo 看反 ·
+        // 統一其實在 #115 澄清湖打台鋼)。 已對回官方;賽前 winRate 不改(per 05-30 INGEST
+        // INTEGRITY pattern · 味全本就是全聯盟最強 → 客場 60% favored 對真實對戰一樣成立)。
+        // 味全先發以隊上 elite 洋投 魔神龍 estimate(0.61 ERA)。
+        name: "魔神龍",
+        era: "0.61",       // estimate · 2026 (elite · per Tim screenshot)
+        k9: "8.0",         // estimate
+        whip: "1.25",      // estimate
+        bb9: "2.8",        // estimate
+        hr9: "0.00",       // estimate · 0 HR
       },
-      recent: ["W", "W", "L", "W", "W"],  // estimate · 23-13 league leader
+      recent: ["W", "W", "L", "W", "W"],  // estimate · 味全 24-13 全聯盟最強
       winRate: 60,
     },
     topScores: [
@@ -1256,21 +1258,21 @@ const rawMatches: Match[] = [
       winRate: 51,
     },
     away: {
-      name: "味全龍",
-      en: "DRAGONS",
+      name: "統一7-ELEVEn獅",
+      en: "LIONS",
       pitcher: {
-        // Round 31 W-L · Tim 截圖矯正 logo + pitcher-team 對應 ·
-        // 魔神龍 (W 紅 = 味全)· 不是統一 (LL 橘)
-        // 2026 real ERA 0.61 · 29.1 IP · 27 H · 2 R · 2 ER per Tim screenshot
-        // K/BB 不在 Tim 截圖 · 待 individual page fetch 補
-        name: "魔神龍",
-        era: "0.61",       // real · per Tim screenshot 2026 (elite)
-        k9: "8.0",         // estimate · K column not in Tim screenshot
-        whip: "1.25",      // estimate · approximated from H/IP ratio
-        bb9: "2.8",        // estimate
-        hr9: "0.00",       // real · 0 HR / 29.1 IP per Tim screenshot
+        // 2026-06-09 校正(Tim 補官網 box score):#115 澄清湖 = 台鋼(主)3 : 統一(客)1 ·
+        // LP 獅帝芬(統一)。 原把客隊誤植成「味全/魔神龍」(W 紅 ↔ 橘 logo 看反 · 味全其實
+        // 在 #114 大巨蛋打中信)。 已對回官方;賽前 winRate 不改(台鋼/統一 皆 ~.500 · 主場
+        // 微 favored 對真實對戰一樣成立)。
+        name: "獅帝芬",
+        era: "2.45",       // real · 自動同步 from cpbl-pitchers.ts
+        k9: "6.61",        // real
+        whip: "1.22",      // real
+        bb9: "2.83",       // real
+        hr9: "0.19",       // real
       },
-      recent: ["L", "W", "W", "L", "W"],  // estimate · 18-16 slightly above .500
+      recent: ["W", "L", "W", "L", "W"],  // estimate · 統一 18-18 around .500
       winRate: 49,
     },
     topScores: [
@@ -1322,19 +1324,20 @@ const rawMatches: Match[] = [
       winRate: 51,
     },
     away: {
-      name: "味全龍",
-      en: "DRAGONS",
+      name: "統一7-ELEVEn獅",
+      en: "LIONS",
       pitcher: {
-        // 布雷克 = Wei Chuan Dragons 洋將 starter · LP this game
-        // 無 stats in cpbl-pitchers.ts leaderboard yet · 全 estimate
+        // 2026-06-09 校正(Tim 補官網 box score):#116 澄清湖 = 台鋼(主)2 : 統一(客)0 ·
+        // LP 布雷克。 布雷克是統一洋投(見 06-05 #143 統一先發 ERA 1.87)· 原誤標成「味全」隊
+        // (味全其實在 #118 大巨蛋打中信)。 比分/結算/PROVED 都正確、只客隊隊名標錯 · 已對回官方。
         name: "布雷克",
-        era: "4.20",       // estimate · 洋將 mid-tier
+        era: "4.20",       // estimate · 賽前估(後續 leaderboard real 1.87 · 賽前線不回改)
         k9: "7.5",         // estimate
         whip: "1.40",      // estimate
         bb9: "3.5",        // estimate
         hr9: "1.00",       // estimate
       },
-      recent: ["L", "W", "L", "L", "W"],  // estimate · 18-19-1 sub-.500
+      recent: ["L", "W", "L", "L", "W"],  // estimate · 統一 18-19-1 around .500
       winRate: 49,
     },
     topScores: [
@@ -1438,19 +1441,20 @@ const rawMatches: Match[] = [
       winRate: 36,
     },
     away: {
-      name: "統一7-ELEVEn獅",
-      en: "LIONS",
+      name: "味全龍",
+      en: "DRAGONS",
       pitcher: {
-        // 梅賽鎂 = Uni-Lions 洋將 starter · WP this game · Mejia
-        // 無 stats in cpbl-pitchers.ts leaderboard yet · 全 estimate
+        // 2026-06-09 校正(Tim 補官網 box score):#118 大巨蛋 = 中信(主)0 : 味全(客)2 ·
+        // WP 梅賽鎂(味全)。 原誤標成「統一」隊(統一其實在 #116 澄清湖打台鋼)。 比分/結算/
+        // PROVED 都正確、只客隊隊名標錯 · 已對回官方。 味全 = 全聯盟最強(25-13)→ 客場 64% 成立。
         name: "梅賽鎂",
-        era: "2.80",       // estimate · 洋將 elite · 統一 25-13 league leader
+        era: "2.80",       // estimate · 洋將 elite
         k9: "9.0",         // estimate
         whip: "1.18",      // estimate
         bb9: "2.5",        // estimate
         hr9: "0.55",       // estimate
       },
-      recent: ["W", "W", "L", "W", "W"],  // estimate · 25-13-0 .658 leader
+      recent: ["W", "W", "L", "W", "W"],  // estimate · 味全 25-13-0 全聯盟最強
       winRate: 64,
     },
     topScores: [
