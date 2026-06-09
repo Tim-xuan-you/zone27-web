@@ -424,15 +424,20 @@ export default async function MatchDetailPage({
             「為什麼有兩個 63%?」困惑。 收進「點開才跑」的進階面板 → 95% 訪客只看到
             一個乾淨開盤線;想自己驗算的 skeptic 一鍵展開即得(costly-signal proof 保留)。
             模擬器本來就是「按 RUN 才跑」· 收起 0 CPU 成本。
-            R198 · MLB 引擎是 Log5 公式(非逐打席 10K)→ MLB 略過此段。 */}
+            R198 · MLB 引擎是 Log5 公式(非逐打席 10K)→ MLB 略過此段。
+            R207 conversion:首頁 hero 主打「免費跑一萬次」· 但這動作原本藏在叫「進階驗算」
+            的灰色小三角裡 = 招牌功能對訪客等於隱形。 改成顯眼的金框按鈕 + 接回 hero 文案
+            (仍預設收合 · 守「不同頁兩個勝率」紀律 · 點了才展開)。 */}
         {m.league !== "MLB" && (
         <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-16 border-t border-line/40 pt-8">
           <details className="group">
-            <summary className="cursor-pointer select-none list-none [&::-webkit-details-marker]:hidden flex items-center gap-2 font-mono text-gold/80 hover:text-gold text-[11px] sm:text-xs tracking-[0.3em] transition-colors">
-              <span className="text-gold/60 transition-transform group-open:rotate-90">
-                ▸
+            <summary className="cursor-pointer select-none list-none [&::-webkit-details-marker]:hidden">
+              <span className="inline-flex items-center gap-2.5 border border-gold/50 bg-gold/[0.06] hover:bg-gold/[0.12] hover:border-gold/70 px-5 py-3 font-mono text-gold text-xs sm:text-sm tracking-[0.18em] transition-colors">
+                <span className="text-gold/70 transition-transform group-open:rotate-90">
+                  ▸
+                </span>
+                親手跑這場一萬次 · 看引擎憑什麼開這個盤
               </span>
-              自己跑 10K 逐打席模擬 · 進階驗算
             </summary>
             <p className="text-mute text-sm leading-relaxed mt-4 mb-6 max-w-xl">
               上面的開盤線不用信我們 · 在你瀏覽器裡親手跑 10,000 次逐打席模擬 ·
