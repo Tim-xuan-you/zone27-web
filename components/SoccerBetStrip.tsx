@@ -41,6 +41,10 @@ export default function SoccerBetStrip({
   const [tally, setTally] = useState<SoccerTally | null>(null);
   const [saving, setSaving] = useState(false);
   const [kickedOff, setKickedOff] = useState(false);
+  // 樂觀 UI:點下那刻就翻「已鎖」(感知 0 延遲 · 體育/預測站房規)· 但**誠實**:server 確認前
+  // 只說「鎖定中…」不假裝刪不掉;確認後才亮「✓ 賽前鎖定 · 刪不掉」+ 收據連結。 失敗回滾 + 一行輕提示。
+  const [pending, setPending] = useState(false);
+  const [errMsg, setErrMsg] = useState<string | null>(null);
 
   // 開賽瞬間自動鎖手(即使分頁一直開著沒重整)· 只對 24h 內的場設「一次性」timer(不輪詢 ·
   // 省資源)。 已開賽的場走 0ms timer(setState 只在 timer callback 裡 · 不在 render/effect
@@ -99,18 +103,34 @@ export default function SoccerBetStrip({
       setState("started");
       return;
     }
+    // 樂觀:先翻「已鎖(鎖定中…)」→ 收據島/迷你收據立刻出現 = 感知 0 延遲。 背景送 RPC。
+    const prev = state;
+    setErrMsg(null);
+    setPick(p);
+    setState("picked");
+    setPending(true);
     setSaving(true);
     const res = await submitSoccerPrediction(matchId, p);
     if (res.ok) {
-      setPick(p);
-      setState("picked");
+      setPending(false); // server 確認 → 才亮「刪不掉」+ 收據連結
+      getSoccerTally(matchId).then(setTally);
+    } else if (res.reason === "already_predicted") {
+      // 已存在(冪等)→ 以 server 那筆為準(可能跟樂觀的不同 · 雖 UI 已擋重複)。
+      const mine = await getMySoccerPrediction(matchId);
+      if (mine) setPick(mine);
+      setPending(false);
       getSoccerTally(matchId).then(setTally);
     } else if (res.reason === "not_logged_in") {
+      // 回滾:沒登入 → 退回登入餌(不假裝鎖成功)。
+      setPick(null);
+      setPending(false);
       setState("anon");
-    } else if (res.reason === "already_predicted") {
-      const mine = await getMySoccerPrediction(matchId);
-      setPick(mine);
-      setState("picked");
+    } else {
+      // 回滾:其餘錯誤 → 退回原狀 + 一行輕提示(不留假的「已鎖」)。
+      setPick(null);
+      setPending(false);
+      setState(prev === "picked" ? "open" : prev);
+      setErrMsg("沒鎖成功 · 再試一次");
     }
     setSaving(false);
   };
@@ -156,6 +176,12 @@ export default function SoccerBetStrip({
           <p className="mt-1.5 font-mono text-mute/55 text-[9px] tracking-[0.12em] leading-snug">
             以 90 分鐘正規賽結果對帳 · 延長賽 / PK 不計
           </p>
+          {/* 樂觀 UI 回滾 → 輕提示(不彈窗 · 不洗版)。 */}
+          {errMsg && (
+            <p className="mt-1.5 font-mono text-loss/80 text-[9px] tracking-[0.15em]">
+              {errMsg}
+            </p>
+          )}
         </>
       )}
 
@@ -164,33 +190,39 @@ export default function SoccerBetStrip({
           守紅線:暗金、無 emoji、無動畫(用既有 enter-fade-up)。 */}
       {state === "picked" && pick && (
         <div className="enter-fade-up border border-gold/40 bg-gold/5 px-3 py-2.5">
+          {/* 誠實:server 確認前只說「鎖定中…」· 確認後才亮「刪不掉」(樂觀 UI 不假裝已成定局)。 */}
           <p className="font-mono text-mute/55 text-[8px] tracking-[0.3em] mb-1">
-            ✓ 賽前鎖定 · 刪不掉
+            {pending ? "鎖定中…" : "✓ 賽前鎖定 · 刪不掉"}
           </p>
           <p className="text-gold text-sm sm:text-base font-light tracking-tight leading-none">
             你押了 {pick === "home" ? homeLabel : pick === "away" ? awayLabel : "和局"}
           </p>
-          {/* 押下那一刻 = 最想曬的時候(病毒槓桿)· 有賽前鎖定線的場給一張現在就能外傳的單場
-              收據(賽前鎖死、改不了)。 沒鎖定線的場不掛(避免 /receipts 404 死連結)。 */}
-          {locked && (
-            <Link
-              href={`/receipts/${matchId}`}
-              className="mt-2 inline-flex items-center gap-1.5 min-h-[36px] font-mono text-gold/90 hover:text-gold text-[10px] tracking-[0.2em] border border-gold/40 hover:border-gold/70 hover:bg-gold/10 px-2.5 py-1.5 transition-colors"
-            >
-              ▸ 外傳這手 · 賽前鎖定收據 →
-            </Link>
+          {/* 收據連結 / 帳本連結等 server 確認後才出(收據島讀的是 server 那筆 · 未存前出來會空)。 */}
+          {!pending && (
+            <>
+              {/* 押下那一刻 = 最想曬的時候(病毒槓桿)· 有賽前鎖定線的場給一張現在就能外傳的單場
+                  收據(賽前鎖死、改不了)。 沒鎖定線的場不掛(避免 /receipts 404 死連結)。 */}
+              {locked && (
+                <Link
+                  href={`/receipts/${matchId}`}
+                  className="mt-2 inline-flex items-center gap-1.5 min-h-[36px] font-mono text-gold/90 hover:text-gold text-[10px] tracking-[0.2em] border border-gold/40 hover:border-gold/70 hover:bg-gold/10 px-2.5 py-1.5 transition-colors"
+                >
+                  ▸ 外傳這手 · 賽前鎖定收據 →
+                </Link>
+              )}
+              <div className="mt-2 flex items-center justify-between gap-2 flex-wrap">
+                <span className="font-mono text-mute/55 text-[9px] tracking-[0.15em]">
+                  賽後逐場對帳 · 連輸的都留著
+                </span>
+                <Link
+                  href="/member"
+                  className="font-mono text-gold/70 hover:text-gold text-[9px] tracking-[0.25em] underline-offset-4 hover:underline transition-colors shrink-0"
+                >
+                  進你的帳本 →
+                </Link>
+              </div>
+            </>
           )}
-          <div className="mt-2 flex items-center justify-between gap-2 flex-wrap">
-            <span className="font-mono text-mute/55 text-[9px] tracking-[0.15em]">
-              賽後逐場對帳 · 連輸的都留著
-            </span>
-            <Link
-              href="/member"
-              className="font-mono text-gold/70 hover:text-gold text-[9px] tracking-[0.25em] underline-offset-4 hover:underline transition-colors shrink-0"
-            >
-              進你的帳本 →
-            </Link>
-          </div>
         </div>
       )}
 
