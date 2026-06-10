@@ -2761,8 +2761,12 @@
       },
       "engineWinHomePct": 52,
       "lockedAt": "2026-06-08T21:28:27.249Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 4,
+        "away": 8
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-06-10T21:24:27.457Z"
     },
     {
       "gamePk": 822970,
@@ -2790,8 +2794,12 @@
       },
       "engineWinHomePct": 69,
       "lockedAt": "2026-06-10T11:10:19.097Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 7,
+        "away": 5
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-06-10T21:24:27.457Z"
     },
     {
       "gamePk": 823215,
@@ -3312,6 +3320,35 @@
       },
       "engineWinHomePct": 52,
       "lockedAt": "2026-06-09T19:36:03.568Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 823778,
+      "gameDate": "2026-06-12T23:40:00Z",
+      "scheduleDate": "2026-06-12",
+      "homeId": 158,
+      "homeEn": "Milwaukee Brewers",
+      "homeRecord": "41-24",
+      "awayId": 143,
+      "awayEn": "Philadelphia Phillies",
+      "awayRecord": "36-31",
+      "homePitcher": "Jacob Misiorowski",
+      "awayPitcher": "Andrew Painter",
+      "homeStats": {
+        "era": "1.50",
+        "k9": "13.38",
+        "bb9": "2.54",
+        "hr9": "0.46"
+      },
+      "awayStats": {
+        "era": "6.21",
+        "k9": "7.29",
+        "bb9": "2.95",
+        "hr9": "1.71"
+      },
+      "engineWinHomePct": 80,
+      "lockedAt": "2026-06-10T21:24:26.825Z",
       "finalScore": null,
       "verdict": null
     }
