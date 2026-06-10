@@ -204,7 +204,9 @@ function ObjRow({ num, title }: { num: string; title: string }) {
     >
       <span
         style={{
-          color: "rgba(232,69,69,0.7)",
+          // 守紅線:落空一律用品牌 loss 柔紅(#F87171)· 不用飽和紅(避免紅綠交通燈聯想)·
+          // 同站上其餘 ✕ / 收據 OG 卡同源 · OG 卡是分享出去的可見輸出。
+          color: BRAND.loss,
           fontSize: 14,
           letterSpacing: "0.3em",
           minWidth: 40,
