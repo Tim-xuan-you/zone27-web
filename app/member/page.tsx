@@ -293,6 +293,20 @@ export default async function MemberPage() {
             徽章 · current 在牆內一行)· streak 物件仍傳給 HonorWall。 */}
         <HonorWall identity={identity} streak={streak} />
 
+        {/* 戰功卡收藏(soul-roadmap 願景3)· 你押過、賽前鎖死的每一手 → 個人畫廊(含輸照收)。
+            接在榮譽牆後:章是榮譽的「總結」· 收藏是一張張可點進收據的「證物」· 沒結算過 → 牆自己空狀態。 */}
+        <Link
+          href="/member/collection"
+          className="mt-6 flex items-baseline justify-between gap-3 border-b border-line/40 pb-3 hover:border-gold/40 transition-colors group"
+        >
+          <span className="text-mute text-sm leading-snug">
+            你鎖死的每一手都收成<span className="text-bone">戰功卡</span> · 命中落空都在、改不了
+          </span>
+          <span className="shrink-0 font-mono text-gold/70 group-hover:text-gold text-[10px] tracking-[0.3em] transition-colors">
+            看收藏 →
+          </span>
+        </Link>
+
         {/* 你的公開檔案(soul-roadmap P0)· 把含輸帳本變成可以丟給懷疑者的證物 —— 地位是
             賺來的、也是可以攤開驗證的。 URL 用永久碼(改名洗不掉)· 任何人免登入可看
             (預設匿名球迷#碼 · 設了顯示名才露名)。 接在榮譽牆後 = 賺來的地位 → 拿去公開驗證。
