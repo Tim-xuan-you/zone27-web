@@ -106,6 +106,8 @@ const rawMatches: Match[] = [
     date: "2026 · 06 · 09  ·  星期二",
     startTime: "18:35",
     venue: "新莊棒球場",
+    postponed: true, // 官方 cpbl.com.tw 6/9 確認延賽(降雨 90%)· 不入帳本(不毒害誠實戰績)
+
     home: {
       name: "富邦悍將",
       en: "GUARDIANS",
@@ -156,6 +158,8 @@ const rawMatches: Match[] = [
     date: "2026 · 06 · 09  ·  星期二",
     startTime: "18:35",
     venue: "臺中洲際棒球場",
+    postponed: true, // 官方 cpbl.com.tw 6/9 確認延賽(降雨 70%)· 不入帳本(不毒害誠實戰績)
+
     home: {
       name: "中信兄弟",
       en: "BROTHERS",
