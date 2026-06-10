@@ -46,7 +46,7 @@ export const metadata: Metadata = {
   // - Tiered commission honest (5% Founders / 10% BLACK vs flat "零手續費")
   // - "git 不可篡改" specific (matches Pillar 02 wording)
   description:
-    "為硬核棒球迷打造的暗黑黃金級數據俱樂部。我跑 1 萬次模擬給您看 CPBL 勝率 · git 不可篡改紀錄 · 創作者抽成 5%(GOLD)/ 10%(BLACK)。",
+    "為硬核運動迷打造的暗黑黃金級數據終端。棒球 · 足球,我用自己的引擎算勝率給您看(CPBL · MLB · 世界盃)· git 不可篡改紀錄 · 賽前鎖定、賽後逐場對帳,連輸的都留著。",
   keywords: [
     "中華職棒",
     "CPBL",
@@ -62,7 +62,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "ZONE 27 — We Don't Guess. We Compute.",
     description:
-      "為硬核棒球迷打造的暗黑黃金級數據俱樂部 · 我跑 1 萬次模擬給您看 · 引擎永遠免費 · 會員不限量",
+      "棒球 · 足球 · 賭徒的暗黑黃金級數據終端 · 引擎自己算勝率給你看 · 賽前鎖定、賽後對帳 · 引擎永遠免費",
     type: "website",
     locale: "zh_TW",
     siteName: "ZONE 27",
@@ -70,7 +70,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "ZONE 27 — We Don't Guess. We Compute.",
-    description: "為硬核棒球迷打造的暗黑黃金級數據俱樂部 · 賭徒的 Bloomberg Terminal",
+    description: "棒球 · 足球 · 賭徒的暗黑黃金級數據終端 · 引擎自己算、賽後逐場對帳",
   },
   // Round 51 W-E · /feed.xml Atom RSS discovery · <link rel="alternate"
   // type="application/atom+xml"> in HTML head · 訪客 RSS reader auto-detect

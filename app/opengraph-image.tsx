@@ -151,7 +151,7 @@ export default async function OgImage() {
             display: "flex",
           }}
         >
-          為硬核棒球迷打造的暗黑黃金級數據俱樂部
+          棒球 · 足球 · 賭徒的暗黑黃金級數據終端
         </div>
 
         {/* BOTTOM RIGHT: live model badge */}
@@ -180,7 +180,7 @@ export default async function OgImage() {
               letterSpacing: "0.35em",
             }}
           >
-            LIVE AI MODEL
+            ENGINE · LIVE
           </span>
         </div>
       </div>

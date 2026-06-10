@@ -91,6 +91,10 @@ export default function ProfileView({ profile, identity: id, streak, soccer, ser
         </div>
       </header>
 
+      {/* 招牌黃金比例髮絲線(品牌唯一可辨識幾何記號 · 校準卡尺 IP)· 把這張最會被
+          截圖外傳的公開檔案,錨上品牌記號(同收據頁)· 提升 viral 表面的辨識度。 */}
+      <div className="zone27-rule max-w-[300px] mt-6" aria-hidden="true" />
+
       {/* ── 空檔案 · 尊嚴框(profile 存在但還沒結算的場)──────────────
           不寫「沒資料」· 寫「已經開始鎖了」—— 把弱點翻成最強信號(同足球 SoccerPendingFrame)。 */}
       {!hasBaseball && !hasSoccer && (
@@ -188,7 +192,7 @@ export default function ProfileView({ profile, identity: id, streak, soccer, ser
               {id.edgeVsEnginePts !== null &&
                 id.decided >= 10 &&
                 id.engine.decided >= 10 && (
-                <div className="mt-5 border-l-2 border-gold/60 bg-gold/[0.05] pl-4 py-2.5">
+                <div className="enter-verdict-reveal mt-5 border-l-2 border-gold/60 bg-gold/[0.05] pl-4 py-2.5">
                   {id.edgeVsEnginePts > 0 ? (
                     <p className="text-bone text-base sm:text-lg leading-snug">
                       這份帳本比那台公開引擎準{" "}
