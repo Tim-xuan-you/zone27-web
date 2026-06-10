@@ -15,7 +15,7 @@ import {
   getCurrentTaipeiMonthKey,
   matches as allMatches,
 } from "@/lib/matches";
-import { getMlbAsMatches } from "@/lib/mlb-matches";
+import { getMlbAsMatches, getMlbLockedMatches } from "@/lib/mlb-matches";
 import { normalizeProfileCode } from "@/lib/profile-code";
 
 // ── ZONE 27 · /u/[code] 動態 OG 卡 = 含輸收據(soul-roadmap #3 收斂進 P0)─────
@@ -53,9 +53,11 @@ export default async function ProfileOgImage({
   const name = profile.displayName || `球迷 #${profile.authorCode}`;
 
   // 棒球校準身分(同頁面 · OG 只取頭條數字 · 不打 football-data)。
+  // ⚠️ MLB 賽果用永久鎖定源(getMlbLockedMatches · 放最前)· live 窗只補今日/未鎖定 ——
+  // 分享預覽卡是最會被外傳的「廣告」· 若用 2 天 live 窗 → 招牌數字每天亂跳且少算(同頁面修法)。
   const { baseball } = await getPredictionsByCode(code);
-  const mlbMatches = await getMlbAsMatches();
-  const allWithMlb = [...allMatches, ...mlbMatches];
+  const mlbLive = await getMlbAsMatches();
+  const allWithMlb = [...allMatches, ...getMlbLockedMatches(), ...mlbLive];
   const id = aggregateIdentity(
     baseball,
     allWithMlb.map((m) => ({
