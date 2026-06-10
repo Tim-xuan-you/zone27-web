@@ -25,7 +25,7 @@ function kickoffTPE(iso: string): string {
 }
 
 export default function SoccerMatchCard({ match }: { match: SoccerMatchPrediction }) {
-  const { id, home, away, homeSeed, awaySeed, prediction, competitionName, dateISO } = match;
+  const { id, home, away, homeSeed, awaySeed, prediction, competitionName, dateISO, locked } = match;
   const ko = kickoffTPE(dateISO);
 
   // 註:鎖定 / 賽後對帳的信任故事在首頁旗幟 + 公開引擎戰績卡講(整體)· 不在每張卡badge —
@@ -67,8 +67,9 @@ export default function SoccerMatchCard({ match }: { match: SoccerMatchPredictio
         </p>
       )}
 
-      {/* 三向押注(主勝/和/客勝)· 登入才能押 · 押了不可改 · 賽後逐場對帳(結算建置中) */}
-      <SoccerBetStrip matchId={id} dateISO={dateISO} homeLabel={home} awayLabel={away} />
+      {/* 三向押注(主勝/和/客勝)· 登入才能押 · 押了不可改 · 賽後逐場對帳(結算建置中)·
+          locked = 這場有賽前鎖定線(押完給一張可外傳的單場收據連結) */}
+      <SoccerBetStrip matchId={id} dateISO={dateISO} homeLabel={home} awayLabel={away} locked={locked} />
     </article>
   );
 }

@@ -27,11 +27,14 @@ export default function SoccerBetStrip({
   dateISO,
   homeLabel,
   awayLabel,
+  locked = false,
 }: {
   matchId: string;
   dateISO: string;
   homeLabel: string;
   awayLabel: string;
+  /** 這場是否有「賽前鎖定線」(= 有單場收據可外傳)· 沒鎖的場不掛收據連結(避免 404 死連結) */
+  locked?: boolean;
 }) {
   const [state, setState] = useState<State>("loading");
   const [pick, setPick] = useState<SoccerPick | null>(null);
@@ -167,6 +170,16 @@ export default function SoccerBetStrip({
           <p className="text-gold text-sm sm:text-base font-light tracking-tight leading-none">
             你押了 {pick === "home" ? homeLabel : pick === "away" ? awayLabel : "和局"}
           </p>
+          {/* 押下那一刻 = 最想曬的時候(病毒槓桿)· 有賽前鎖定線的場給一張現在就能外傳的單場
+              收據(賽前鎖死、改不了)。 沒鎖定線的場不掛(避免 /receipts 404 死連結)。 */}
+          {locked && (
+            <Link
+              href={`/receipts/${matchId}`}
+              className="mt-2 inline-flex items-center gap-1.5 min-h-[36px] font-mono text-gold/90 hover:text-gold text-[10px] tracking-[0.2em] border border-gold/40 hover:border-gold/70 hover:bg-gold/10 px-2.5 py-1.5 transition-colors"
+            >
+              ▸ 外傳這手 · 賽前鎖定收據 →
+            </Link>
+          )}
           <div className="mt-2 flex items-center justify-between gap-2 flex-wrap">
             <span className="font-mono text-mute/55 text-[9px] tracking-[0.15em]">
               賽後逐場對帳 · 連輸的都留著

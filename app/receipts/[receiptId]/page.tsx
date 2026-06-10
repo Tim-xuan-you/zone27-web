@@ -121,13 +121,24 @@ export async function generateMetadata({
   params: Params;
 }): Promise<Metadata> {
   const { receiptId } = await params;
-  // 足球收據(fd-*)· 三向 · 走 getSoccerReceipt(賽後才有)。
+  // 足球收據(fd-*)· 三向 · 賽前(鎖定中)就存在,賽後長出比分與判決(走 getSoccerReceipt)。
   if (receiptId.startsWith("fd-")) {
     const sr = await getSoccerReceipt(receiptId);
     if (!sr) {
       return {
         title: "Receipt not found",
-        description: "此足球收據不存在或還沒踢完 · 完整足球戰績在 /soccer。",
+        description: "此足球收據不存在(這場沒有賽前鎖定線)· 完整足球戰績在 /soccer。",
+      };
+    }
+    // 賽前 / 已開賽待對帳 → 賽前鎖定卡(無比分判決 · 「你也想鎖一手?」轉換鉤子)。
+    if (sr.phase !== "settled") {
+      return {
+        title: `${sr.home} vs ${sr.away} · 賽前鎖定 · ZONE 27 足球收據`,
+        description: `引擎賽前鎖定看好 ${sr.favoredLabel}(${sr.favoredPct}%)· 鎖在結果還不存在的時候、改不了 · 賽後逐場對帳。你也想對著引擎的線鎖一手?`,
+        openGraph: {
+          title: `${sr.home} vs ${sr.away} · 賽前鎖定中`,
+          description: `引擎賽前鎖定看好 ${sr.favoredLabel}(${sr.favoredPct}%)· 鎖在結果還不存在的時候、改不了。`,
+        },
       };
     }
     const vt = sr.verdict === "proved" ? "命中" : sr.verdict === "diverged" ? "落空" : "平";

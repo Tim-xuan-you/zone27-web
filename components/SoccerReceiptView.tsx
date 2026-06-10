@@ -12,7 +12,12 @@ import type { SoccerReceipt } from "@/lib/soccer/receipt";
 // 鏡棒球收據(Patek 式 reference + TCG 卡解剖 + 命中/落空同等揭露)· 但足球是三向
 // (主勝/和/客勝)· 無局數/場館。 一手鎖在結果還不存在的時候,賽後攤開 —— 這正是
 // ZONE 27 賣的東西。 暗金、無 emoji、無賠率;命中上金、落空用既有收據色(非紅綠對比)。
-// 引擎名暫用「足球引擎」(經緯命名待全站統一 sweep · 不在這一頁半套)。
+//
+// R213 賽前可外傳收據:收據不再只活在賽後。 三階段都渲染同一個 reference 物件 ——
+//   · locked(賽前鎖定中)= 押完當下就能外傳的那張 · 引擎線在、結果待對帳
+//   · live(已開賽待對帳)= 誠實標「已開賽」· 不假裝賽前鎖定中
+//   · settled(已結算)= 命中/落空都釘在這、改不了
+// 賽前/賽後同一個網址 → 賽後自動長出比分與判決(收據頁 10 分鐘 ISR)。
 // ─────────────────────────────────────────────────────
 
 export default function SoccerReceiptView({ r }: { r: SoccerReceipt }) {
@@ -22,27 +27,10 @@ export default function SoccerReceiptView({ r }: { r: SoccerReceipt }) {
   const drawGold = r.enginePick === "draw";
   const awayGold = r.enginePick === "away";
 
-  const verdict = r.verdict;
-  const verdictColor =
-    verdict === "proved"
-      ? "text-gold"
-      : verdict === "diverged"
-        ? "text-loss"
-        : "text-mute";
-  const verdictBorder =
-    verdict === "proved"
-      ? "border-gold"
-      : verdict === "diverged"
-        ? "border-loss/70"
-        : "border-mute/60";
-  const verdictLabel =
-    verdict === "proved"
-      ? "✓ 命中 · 引擎看對了"
-      : verdict === "diverged"
-        ? "✕ 落空 · 引擎看錯了"
-        : "平 · 引擎三向同分";
-  const outcomeLabel =
-    r.outcome === "home" ? `${r.home} 勝` : r.outcome === "away" ? `${r.away} 勝` : "和局";
+  const settled = r.phase === "settled";
+  // 賽前鎖定中 / 已開賽待對帳 · 上方那行狀態詞要誠實分(不在已開踢的場掛「還沒開踢」)。
+  const pendingStatus =
+    r.phase === "locked" ? "賽前鎖定中" : "已開賽 · 待對帳";
 
   return (
     <div className="flex flex-col flex-1 min-h-screen">
@@ -69,11 +57,20 @@ export default function SoccerReceiptView({ r }: { r: SoccerReceipt }) {
             {ref}
           </h1>
           <div className="zone27-rule max-w-[320px] mb-6" aria-hidden="true" />
-          <p className="text-mute text-base leading-relaxed">
-            這一頁,就是那張收據本身。 賽前鎖死的三向機率 + 賽後的真實結果 —— 命中或落空,
-            都釘在這裡、改不了。 我們把預測押在結果還不存在的時候 ——
-            <span className="text-bone"> 這正是 ZONE 27 賣的東西。</span>
-          </p>
+          {settled ? (
+            <p className="text-mute text-base leading-relaxed">
+              這一頁,就是那張收據本身。 賽前鎖死的三向機率 + 賽後的真實結果 —— 命中或落空,
+              都釘在這裡、改不了。 我們把預測押在結果還不存在的時候 ——
+              <span className="text-bone"> 這正是 ZONE 27 賣的東西。</span>
+            </p>
+          ) : (
+            <p className="text-mute text-base leading-relaxed">
+              這一頁,就是那張收據本身 —— 而且<span className="text-bone">現在就存在</span>,
+              不用等賽後。 引擎賽前鎖死的三向機率釘在下面、改不了;結果還沒發生,
+              賽後這同一個網址會自己長出比分與判決。 把預測押在結果還不存在的時候 ——
+              <span className="text-bone"> 這正是 ZONE 27 賣的東西。</span>
+            </p>
+          )}
         </section>
 
         <div className="mx-auto w-32 gold-line mb-10" />
@@ -90,7 +87,7 @@ export default function SoccerReceiptView({ r }: { r: SoccerReceipt }) {
                 ZONE 27 足球引擎 · v0.1 · 收據
               </p>
               <p className="font-mono text-gold/80 tracking-[0.3em] text-[9px] sm:text-[10px]">
-                {r.competitionName}
+                {settled ? r.competitionName : pendingStatus}
               </p>
             </div>
 
@@ -144,34 +141,57 @@ export default function SoccerReceiptView({ r }: { r: SoccerReceipt }) {
               </p>
             </div>
 
-            {/* ACTUAL RESULT */}
-            <div className="px-5 sm:px-8 pb-6 border-t border-mute/20 pt-5">
-              <p className="font-mono text-mute text-[10px] tracking-[0.35em] mb-2">/ 賽後 · 90 分鐘</p>
-              <p className="font-mono text-bone tabular text-3xl sm:text-4xl font-light tracking-tight leading-none">
-                {r.finalHome}:{r.finalAway}
-                <span className="text-mute text-base ml-3">{outcomeLabel}</span>
-              </p>
-              <p className="mt-3 font-mono text-mute/60 text-[9px] sm:text-[10px] tracking-[0.25em] leading-relaxed">
-                ▸ 賽果來源 · football-data.org 中立公開比分 · 賽前鎖定的線永遠優先 · 改不了 ·
-                淘汰賽延長賽 / PK 不算(只認 90 分鐘 1X2)
-              </p>
-            </div>
+            {/* ACTUAL RESULT · settled = 真實比分 · pending = 待對帳 frame(不假裝有結果)*/}
+            {settled ? (
+              <div className="px-5 sm:px-8 pb-6 border-t border-mute/20 pt-5">
+                <p className="font-mono text-mute text-[10px] tracking-[0.35em] mb-2">/ 賽後 · 90 分鐘</p>
+                <p className="font-mono text-bone tabular text-3xl sm:text-4xl font-light tracking-tight leading-none">
+                  {r.finalHome}:{r.finalAway}
+                  <span className="text-mute text-base ml-3">
+                    {r.outcome === "home" ? `${r.home} 勝` : r.outcome === "away" ? `${r.away} 勝` : "和局"}
+                  </span>
+                </p>
+                <p className="mt-3 font-mono text-mute/60 text-[9px] sm:text-[10px] tracking-[0.25em] leading-relaxed">
+                  ▸ 賽果來源 · football-data.org 中立公開比分 · 賽前鎖定的線永遠優先 · 改不了 ·
+                  淘汰賽延長賽 / PK 不算(只認 90 分鐘 1X2)
+                </p>
+              </div>
+            ) : (
+              <div className="px-5 sm:px-8 pb-6 border-t border-mute/20 pt-5">
+                <p className="font-mono text-mute text-[10px] tracking-[0.35em] mb-2">/ 賽後 · 90 分鐘</p>
+                <p className="font-mono text-mute tabular text-2xl sm:text-3xl font-light tracking-tight leading-none">
+                  待對帳
+                </p>
+                <p className="mt-3 font-mono text-mute/60 text-[9px] sm:text-[10px] tracking-[0.25em] leading-relaxed">
+                  ▸ {r.phase === "locked"
+                    ? `還沒開踢 · 開賽 ${r.kickoffTPE} TPE`
+                    : "已開賽 · 終場後逐場對帳"}{" "}
+                  · 結果由 football-data.org 中立公開比分自動對帳 · 賽前鎖定的線改不了 ·
+                  只認 90 分鐘 1X2(延長賽 / PK 不算)
+                </p>
+              </div>
+            )}
 
-            {/* VERDICT BAND */}
-            <div className={`border-t-2 ${verdictBorder} px-5 sm:px-8 py-6 sm:py-7 text-center enter-verdict-reveal`}>
-              <p className={`font-mono ${verdictColor} text-lg sm:text-2xl tracking-[0.25em] font-medium`}>
-                {verdictLabel}
-              </p>
-              <p className="font-mono text-mute/65 text-[10px] tracking-[0.25em] mt-3 leading-relaxed">
-                三向結算 · 和局是真實結果照常評 · 命中與落空同等揭露 · 永不刪
-              </p>
-            </div>
+            {/* VERDICT BAND · settled = 判決 · pending = 待揭曉 frame(無假 verdict · mute)*/}
+            {settled ? (
+              <VerdictBand verdict={r.verdict} />
+            ) : (
+              <div className="border-t-2 border-mute/50 px-5 sm:px-8 py-6 sm:py-7 text-center">
+                <p className="font-mono text-mute text-lg sm:text-2xl tracking-[0.25em] font-medium">
+                  {r.phase === "locked" ? "賽前鎖死 · 等開賽見真章" : "已開賽 · 終場後揭曉"}
+                </p>
+                <p className="font-mono text-mute/65 text-[10px] tracking-[0.25em] mt-3 leading-relaxed">
+                  賽前鎖死、刪不掉 · 賽後命中與落空同等揭露 · 永不刪
+                </p>
+              </div>
+            )}
 
             {/* 本人這手 pick(soul R208 close-the-loop)· 登入本人押過這場才蓋上 ·
+                賽前 = 待對帳版(outcome=null)· 賽後 = 命中/落空版 ·
                 沒登入 / 沒押 / 開賽後才補登 → 自動隱藏(graceful)。 */}
             <SoccerUserReceiptPick
               matchId={r.matchId}
-              outcome={r.outcome}
+              outcome={settled ? r.outcome : null}
               kickoffISO={r.kickoffISO}
               homeName={r.home}
               awayName={r.away}
@@ -186,10 +206,57 @@ export default function SoccerReceiptView({ r }: { r: SoccerReceipt }) {
               <Link href="/track-record" className="text-mute hover:text-gold transition-colors">公開戰績 →</Link>
             </div>
           </div>
+
+          {/* 賽前/進行中 · 把外傳這張的人接成下一個押注者(轉換漏斗 · 不是空喊分享)·
+              連回這場的卡(#m-{id})· 未開賽就還能鎖、已開賽就看別場。 */}
+          {!settled && (
+            <div className="mt-6 border border-gold/30 bg-gold/5 px-5 py-4">
+              <p className="font-mono text-gold/85 text-[10px] tracking-[0.3em] mb-2">
+                / 也想鎖一手?
+              </p>
+              <p className="text-mute text-sm leading-relaxed mb-3">
+                這張收據現在就能外傳 —— 賽前鎖死、改不了。 你也可以在結果還沒發生前,
+                對著引擎開的線鎖下你自己的判斷,賽後逐場對帳、含輸都留。
+              </p>
+              <Link
+                href={`/soccer#m-${r.matchId}`}
+                className="inline-flex items-center gap-2 font-mono text-gold/90 hover:text-gold text-[11px] tracking-[0.25em] underline-offset-4 hover:underline transition-colors"
+              >
+                ▸ 去鎖你的這一手 →
+              </Link>
+            </div>
+          )}
         </article>
       </main>
 
       <Footer />
+    </div>
+  );
+}
+
+function VerdictBand({
+  verdict,
+}: {
+  verdict: "proved" | "diverged" | "push";
+}) {
+  const verdictColor =
+    verdict === "proved" ? "text-gold" : verdict === "diverged" ? "text-loss" : "text-mute";
+  const verdictBorder =
+    verdict === "proved" ? "border-gold" : verdict === "diverged" ? "border-loss/70" : "border-mute/60";
+  const verdictLabel =
+    verdict === "proved"
+      ? "✓ 命中 · 引擎看對了"
+      : verdict === "diverged"
+        ? "✕ 落空 · 引擎看錯了"
+        : "平 · 引擎三向同分";
+  return (
+    <div className={`border-t-2 ${verdictBorder} px-5 sm:px-8 py-6 sm:py-7 text-center enter-verdict-reveal`}>
+      <p className={`font-mono ${verdictColor} text-lg sm:text-2xl tracking-[0.25em] font-medium`}>
+        {verdictLabel}
+      </p>
+      <p className="font-mono text-mute/65 text-[10px] tracking-[0.25em] mt-3 leading-relaxed">
+        三向結算 · 和局是真實結果照常評 · 命中與落空同等揭露 · 永不刪
+      </p>
     </div>
   );
 }
