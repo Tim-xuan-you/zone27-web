@@ -16,6 +16,13 @@ import {
   getMatchDateIso,
   getMatchStartIso,
 } from "@/lib/matches";
+import { getSoccerReceipt } from "@/lib/soccer/receipt";
+import SoccerReceiptView from "@/components/SoccerReceiptView";
+
+// 足球收據是 on-demand(fd-* 不在 generateStaticParams · dynamicParams 預設允許)·
+// 結果隨比賽打完才出現 → ISR 10 分鐘讓「還沒踢完(404)」在賽後自動變成 200。
+// 棒球收據本來就靜態,加 revalidate 只是每 10 分鐘重出同樣內容 · 無害。
+export const revalidate = 600;
 
 // ── ZONE 27 · /receipts/[receiptId] · Single Receipt Object Page ──
 // R75 W-F · Agent A R75 SHIP 1 ★★★★★ BIGGEST GAP CLOSURE · Stripe Press
@@ -114,6 +121,25 @@ export async function generateMetadata({
   params: Params;
 }): Promise<Metadata> {
   const { receiptId } = await params;
+  // 足球收據(fd-*)· 三向 · 走 getSoccerReceipt(賽後才有)。
+  if (receiptId.startsWith("fd-")) {
+    const sr = await getSoccerReceipt(receiptId);
+    if (!sr) {
+      return {
+        title: "Receipt not found",
+        description: "此足球收據不存在或還沒踢完 · 完整足球戰績在 /soccer。",
+      };
+    }
+    const vt = sr.verdict === "proved" ? "命中" : sr.verdict === "diverged" ? "落空" : "平";
+    return {
+      title: `${sr.home} vs ${sr.away} · 引擎${vt} · ZONE 27 足球收據`,
+      description: `${sr.home} ${sr.finalHome}:${sr.finalAway} ${sr.away} · 引擎賽前鎖定看好 ${sr.favoredLabel}(${sr.favoredPct}%）· 賽後逐場對帳 · 命中與落空都留著、改不了。`,
+      openGraph: {
+        title: `${sr.home} vs ${sr.away} · 引擎${vt}`,
+        description: `引擎賽前鎖定、賽後對帳 · 含贏含輸、改不了。`,
+      },
+    };
+  }
   const match = getMatchById(receiptId);
   if (!match || !match.finalResult) {
     return {
@@ -137,6 +163,13 @@ export async function generateMetadata({
 
 export default async function ReceiptPage({ params }: { params: Params }) {
   const { receiptId } = await params;
+  // 足球單場戰功收據(fd-*)· 三向 · 賽後才有(查無鎖定 / 還沒踢完 → 404)。
+  // 走獨立的 SoccerReceiptView · 完全不碰下方棒球收據邏輯(零風險)。
+  if (receiptId.startsWith("fd-")) {
+    const sr = await getSoccerReceipt(receiptId);
+    if (!sr) notFound();
+    return <SoccerReceiptView r={sr} />;
+  }
   const match = getMatchById(receiptId);
   // Receipt page only exists for finalized matches · 404 for live/pre/future
   // matches · per /audit S05 disclosure parity · 不假裝 pre-final receipt。

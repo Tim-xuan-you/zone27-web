@@ -8,6 +8,7 @@ import {
   boneRgba,
 } from "@/lib/brand";
 import { getMatchById, getCalibration } from "@/lib/matches";
+import { getSoccerReceipt, type SoccerReceipt } from "@/lib/soccer/receipt";
 
 // ── ZONE 27 · /receipts/[id] 動態 OG 卡 = 單場引擎收據 ──────────────────
 // 之前收據頁共用 /track-record 的通用 OG → 貼到 LINE/FB 看不出是「哪一場·命中還落空」。
@@ -26,6 +27,11 @@ export default async function ReceiptOgImage({
   params: Promise<{ receiptId: string }>;
 }) {
   const { receiptId } = await params;
+  // 足球收據(fd-*)· 三向 OG 卡。
+  if (receiptId.startsWith("fd-")) {
+    const sr = await getSoccerReceipt(receiptId);
+    return sr ? soccerOgCard(sr) : brandFallback();
+  }
   const match = getMatchById(receiptId);
   if (!match || !match.finalResult) return brandFallback();
 
@@ -139,6 +145,97 @@ export default async function ReceiptOgImage({
           <span style={{ display: "flex", color: goldRgba(0.65) }}>
             zone27-web.vercel.app
           </span>
+        </div>
+      </div>
+    ),
+    { ...OG_SIZE },
+  );
+}
+
+// 足球三向收據 OG 卡(鏡棒球 · 命中金/落空 loss 柔紅 · 無 emoji · 無賠率)。
+function soccerOgCard(sr: SoccerReceipt) {
+  const verdictText =
+    sr.verdict === "proved" ? "引擎命中" : sr.verdict === "diverged" ? "引擎落空" : "平";
+  const verdictColor =
+    sr.verdict === "proved" ? BRAND.gold : sr.verdict === "diverged" ? BRAND.loss : BRAND.mute;
+  return new ImageResponse(
+    (
+      <div
+        style={{
+          width: "100%",
+          height: "100%",
+          background: BRAND.navy,
+          backgroundImage: OG_BACKGROUND_IMAGE,
+          display: "flex",
+          flexDirection: "column",
+          padding: 70,
+          position: "relative",
+        }}
+      >
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
+          <div style={{ display: "flex", gap: 14 }}>
+            <span style={{ fontSize: 26, color: BRAND.gold, letterSpacing: "0.22em", fontWeight: 500 }}>ZONE</span>
+            <span style={{ fontSize: 26, color: BRAND.bone, letterSpacing: "0.22em", fontWeight: 500 }}>27</span>
+          </div>
+          <span style={{ fontSize: 18, color: boneRgba(0.5), letterSpacing: "0.3em" }}>
+            足球引擎收據 · 賽前鎖定
+          </span>
+        </div>
+
+        <div style={{ display: "flex", flexDirection: "column", marginTop: 36 }}>
+          <span style={{ fontSize: 16, color: boneRgba(0.45), letterSpacing: "0.3em", marginBottom: 12, display: "flex" }}>
+            {sr.competitionName}
+          </span>
+          <div style={{ display: "flex", alignItems: "baseline", flexWrap: "wrap" }}>
+            <span style={{ fontSize: 50, color: BRAND.bone, fontWeight: 300, letterSpacing: "-0.02em" }}>{sr.home}</span>
+            <span style={{ fontSize: 26, color: goldRgba(0.6), letterSpacing: "0.2em", margin: "0 20px", display: "flex" }}>vs</span>
+            <span style={{ fontSize: 50, color: BRAND.bone, fontWeight: 300, letterSpacing: "-0.02em" }}>{sr.away}</span>
+          </div>
+        </div>
+
+        <div style={{ display: "flex", gap: 60, marginTop: 30 }}>
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            <span style={{ fontSize: 16, color: boneRgba(0.45), letterSpacing: "0.25em", marginBottom: 6, display: "flex" }}>
+              引擎賽前看好
+            </span>
+            <span style={{ fontSize: 50, color: BRAND.gold, fontWeight: 300, letterSpacing: "-0.02em", display: "flex" }}>
+              {sr.favoredPct}
+              <span style={{ fontSize: 24, opacity: 0.6 }}>%</span>
+            </span>
+            <span style={{ fontSize: 20, color: boneRgba(0.55), marginTop: 6, display: "flex" }}>{sr.favoredLabel}</span>
+          </div>
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            <span style={{ fontSize: 16, color: boneRgba(0.45), letterSpacing: "0.25em", marginBottom: 6, display: "flex" }}>
+              90 分鐘結果
+            </span>
+            <span style={{ fontSize: 50, color: BRAND.bone, fontWeight: 300, letterSpacing: "-0.02em", display: "flex" }}>
+              {sr.finalHome}:{sr.finalAway}
+            </span>
+            <span style={{ fontSize: 20, color: boneRgba(0.55), marginTop: 6, display: "flex" }}>
+              {sr.outcome === "home" ? `${sr.home} 勝` : sr.outcome === "away" ? `${sr.away} 勝` : "和局"}
+            </span>
+          </div>
+        </div>
+
+        <div style={{ display: "flex", marginTop: 30 }}>
+          <span style={{ fontSize: 72, color: verdictColor, fontWeight: 400, letterSpacing: "0.08em", display: "flex" }}>
+            {verdictText}
+          </span>
+        </div>
+
+        <div
+          style={{
+            marginTop: "auto",
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "baseline",
+            fontSize: 18,
+            color: boneRgba(0.5),
+            letterSpacing: "0.28em",
+          }}
+        >
+          <span style={{ display: "flex" }}>賽前鎖定 · 含輸 · 改不了</span>
+          <span style={{ display: "flex", color: goldRgba(0.65) }}>zone27-web.vercel.app</span>
         </div>
       </div>
     ),
