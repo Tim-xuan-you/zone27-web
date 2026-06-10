@@ -44,6 +44,9 @@ export default function CardBetStrip({
   const [tally, setTally] = useState<MarketTally | null>(null);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  // 樂觀 UI(同 SoccerBetStrip 房規):點下瞬間翻「已鎖」=感知 0 延遲 · 但誠實:server 確認前
+  // 只說「鎖定中…」不亮「不可改」/ 不發光 / 不出帳本連結;確認後才定局。 失敗乾淨回滾。
+  const [pending, setPending] = useState(false);
 
   useEffect(() => {
     let cancelled = false;
@@ -85,23 +88,34 @@ export default function CardBetStrip({
       setStatus("closed");
       return;
     }
-    setSaving(true);
+    // 樂觀:先翻「已鎖(鎖定中…)」→ 確認卡立刻出現 = 感知 0 延遲 · 背景送 RPC。
+    const prev = status;
     setError(null);
+    setMyPick(pick);
+    setStatus("locked");
+    setPending(true);
+    setSaving(true);
     const res = await submitPrediction(matchId, pick);
     if (res.ok) {
       setMyPick(res.pick);
-      setStatus("locked");
+      setPending(false); // server 確認 → 才亮「不可改」+ 帳本連結 + 發光
       const t = await getMatchTally(matchId);
       setTally(t);
     } else if (res.reason === "already_predicted") {
       const mine = await getMyPrediction(matchId);
       setMyPick(mine);
       setStatus(mine ? "locked" : "open");
+      setPending(false);
     } else if (res.reason === "not_logged_in") {
+      // 回滾:沒登入 → 退回登入餌(不假裝鎖成功)。
+      setMyPick(null);
+      setPending(false);
       setStatus("logged-out");
     } else {
-      // RPC error / invalid · 不靜默吞掉 —— 誠實報錯讓用戶重試(同 UserPredictionPicker)·
-      // 防「按了沒反應、卻以為押到了」的假成功陷阱(42702 家族)。
+      // 回滾:RPC error / invalid → 退回可押 + 誠實報錯(不留假的「已鎖」· 防假成功陷阱 42702 家族)。
+      setMyPick(null);
+      setPending(false);
+      setStatus(prev === "locked" ? "open" : prev);
       setError("押注沒送出 · 請再試一次");
     }
     setSaving(false);
@@ -210,19 +224,27 @@ export default function CardBetStrip({
           把確認做成視覺高潮:glow-soft 金卡 + 隊名放大上金 + enter-fade-up ·
           原本只是 9px 灰字像腳註,浪費了全漏斗最高張力那一刻 · 再接往自己戰績的線。 */}
       {status === "locked" && myPick && (
-        <div className="text-center py-2.5 px-2 border border-gold/40 bg-gold/5 glow-soft enter-fade-up rounded-sm">
+        <div
+          className={`text-center py-2.5 px-2 border border-gold/40 bg-gold/5 enter-fade-up rounded-sm ${
+            pending ? "" : "glow-soft"
+          }`}
+        >
+          {/* 誠實:server 確認前只說「鎖定中…」· 不發光 · 不亮「不可改」(樂觀 UI 不假裝定局)。 */}
           <p className="font-mono text-mute/55 text-[8px] tracking-[0.3em] mb-1">
-            ✓ 已鎖定 · 不可改
+            {pending ? "鎖定中…" : "✓ 已鎖定 · 不可改"}
           </p>
           <p className="font-mono text-gold text-base sm:text-lg tracking-[0.08em] leading-none mb-1.5">
             押 {myPick === "home" ? homeName : awayName}
           </p>
-          <Link
-            href="/member"
-            className="inline-block font-mono text-gold/70 hover:text-gold text-[9px] tracking-[0.25em] underline-offset-4 hover:underline transition-colors"
-          >
-            看你 vs 引擎 →
-          </Link>
+          {/* 帳本連結等 server 確認後才出(未存前進去看不到這手)。 */}
+          {!pending && (
+            <Link
+              href="/member"
+              className="inline-block font-mono text-gold/70 hover:text-gold text-[9px] tracking-[0.25em] underline-offset-4 hover:underline transition-colors"
+            >
+              看你 vs 引擎 →
+            </Link>
+          )}
         </div>
       )}
     </div>
