@@ -6,6 +6,7 @@ import Avatar from "@/components/Avatar";
 import EngineThreeWayBar from "@/components/EngineThreeWayBar";
 import SoccerUserReceiptPick from "@/components/SoccerUserReceiptPick";
 import KickoffCountdown from "@/components/KickoffCountdown";
+import LockStamp from "@/components/LockStamp";
 import { getNationalCode } from "@/lib/soccer/teams";
 import type { SoccerReceipt } from "@/lib/soccer/receipt";
 
@@ -92,13 +93,10 @@ export default function SoccerReceiptView({ r }: { r: SoccerReceipt }) {
               </p>
             </div>
 
-            {/* REFERENCE BAND */}
-            <div className="border-b border-mute/30 px-5 sm:px-8 py-4 flex items-baseline justify-between flex-wrap gap-3">
+            {/* REFERENCE BAND · 鎖定時戳已升級成下方招牌徽章(LockStamp)· 這裡不重複,只留參考編號。 */}
+            <div className="border-b border-mute/30 px-5 sm:px-8 py-4">
               <p lang="en" className="font-mono text-mute/85 text-[10px] sm:text-xs tracking-[0.4em] break-all">
                 REF · {r.matchId}
-              </p>
-              <p className="font-mono text-mute text-[10px] tracking-[0.25em] tabular">
-                賽前鎖定 {r.lockedAtTPE} TPE
               </p>
             </div>
 
@@ -140,6 +138,12 @@ export default function SoccerReceiptView({ r }: { r: SoccerReceipt }) {
               <p className="mt-2.5 font-mono text-mute/75 text-[11px] tracking-[0.1em]">
                 引擎看好 <span className="text-bone">{r.favoredLabel}</span>(<span className="tabular">{r.favoredPct}%</span>)
               </p>
+            </div>
+
+            {/* 賽前鎖定戳記 = 全站最強「抄不走」信任徽章 · 擺在引擎線之後(先看到開的值=競 · 再看到
+                改不了=誠實/拙)· 全球研究:賽前公開+事後改不了 是造假唯一做不到的 costly signal。 */}
+            <div className="px-5 sm:px-8 pb-6">
+              <LockStamp lockedAtTPE={r.lockedAtTPE} />
             </div>
 
             {/* ACTUAL RESULT · settled = 真實比分 · pending = 待對帳 frame(不假裝有結果)*/}
