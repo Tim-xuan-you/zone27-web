@@ -366,7 +366,7 @@ export default function CalibrationPublicPage() {
 function BaseballCalView({ bins, n }: { bins: Bin[]; n: number }) {
   return (
     <div>
-      <ReliabilityDiagram bins={bins} n={n} />
+      <ReliabilityDiagram bins={bins} n={n} engineVersion="v0.2" />
       {n === 0 ? (
         <div className="mt-6 border border-dashed border-gold/30 bg-slate/30 p-6 sm:p-8 text-center">
           <p className="font-mono text-gold text-[10px] tracking-[0.4em] mb-3">
@@ -429,7 +429,7 @@ function SoccerCalView({
   }
   return (
     <div>
-      <ReliabilityDiagram bins={bins} n={n} />
+      <ReliabilityDiagram bins={bins} n={n} engineVersion="v0.1" />
       {n < 30 ? (
         <div className="mt-6 border border-loss/30 bg-loss/5 p-5 sm:p-6">
           <p className="font-mono text-loss text-[10px] tracking-[0.35em] mb-2">
@@ -450,7 +450,15 @@ function SoccerCalView({
 // share local state · 不 share component complexity edge cases。 將來
 // 若 extract 為 shared <ReliabilityDiagram /> component · 同時 refactor
 // /member/calibration 來 import。
-function ReliabilityDiagram({ bins, n }: { bins: Bin[]; n: number }) {
+function ReliabilityDiagram({
+  bins,
+  n,
+  engineVersion,
+}: {
+  bins: Bin[];
+  n: number;
+  engineVersion: string;
+}) {
   // SVG coordinate system: 400x400 with 40px left/bottom margin · 20px top/right
   const px = (pct: number) => 40 + (pct / 100) * 340;
   const py = (pct: number) => 360 - (pct / 100) * 340;
@@ -462,7 +470,7 @@ function ReliabilityDiagram({ bins, n }: { bins: Bin[]; n: number }) {
           / 引擎說的 vs 實際發生
         </p>
         <p className="font-mono text-mute/70 text-[10px] tracking-[0.3em] tabular">
-          引擎 v0.2 · 已 {n} 場
+          引擎 {engineVersion} · 已 {n} 場
         </p>
       </div>
       <div className="aspect-square max-w-md mx-auto">
