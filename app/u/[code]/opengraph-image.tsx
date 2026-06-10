@@ -53,11 +53,12 @@ export default async function ProfileOgImage({
   const name = profile.displayName || `球迷 #${profile.authorCode}`;
 
   // 棒球校準身分(同頁面 · OG 只取頭條數字 · 不打 football-data)。
-  // ⚠️ MLB 賽果用永久鎖定源(getMlbLockedMatches · 放最前)· live 窗只補今日/未鎖定 ——
-  // 分享預覽卡是最會被外傳的「廣告」· 若用 2 天 live 窗 → 招牌數字每天亂跳且少算(同頁面修法)。
+  // ⚠️ MLB 賽果用永久鎖定源(getMlbLockedMatches 放最後 → 下游 new Map『後者勝出』· 永久源蓋過 live)·
+  // live 窗只在永久源缺該場時補 —— 分享預覽卡是最會被外傳的「廣告」· 用 2 天 live 窗 → 招牌數字每天
+  // 亂跳少算 + 「locked 已 grade 但 live 回非 final → null 蓋掉 winner」窄反例倒退 pending(同頁面修法)。
   const { baseball } = await getPredictionsByCode(code);
   const mlbLive = await getMlbAsMatches();
-  const allWithMlb = [...allMatches, ...getMlbLockedMatches(), ...mlbLive];
+  const allWithMlb = [...allMatches, ...mlbLive, ...getMlbLockedMatches()];
   const id = aggregateIdentity(
     baseball,
     allWithMlb.map((m) => ({

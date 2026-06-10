@@ -153,11 +153,17 @@ export default async function Home() {
               R207 conversion:原 href="#floor" 在手機上看板就在下方一屏、點了幾乎不動 =
               「按了大金鈕卻沒反應」· 改成真的換頁讓點擊有明確回饋。 */}
           <div className="mt-7">
+            {/* 世界盃夜:最高意圖的那一下點擊導向四年一次的主秀(allUpcoming 刻意不含足球 →
+                沒這條 wcActive 優先,CPBL/MLB 休賽時大金鈕會把世界盃略過、誤導去棒球收據)。 */}
             <Link
-              href={allUpcoming.length > 0 ? "/matches" : "/track-record"}
+              href={wcActive ? "/soccer" : allUpcoming.length > 0 ? "/matches" : "/track-record"}
               className="inline-flex items-center gap-2 bg-gold text-navy font-mono text-xs sm:text-sm tracking-[0.25em] px-6 py-3 hover:bg-gold-soft transition-colors"
             >
-              {allUpcoming.length > 0 ? "看今晚誰會贏 →" : "看引擎最近戰績 →"}
+              {wcActive
+                ? "看世界盃 · 引擎開盤 →"
+                : allUpcoming.length > 0
+                  ? "看今晚誰會贏 →"
+                  : "看引擎最近戰績 →"}
             </Link>
           </div>
           {/* 校準遊戲 = 安靜次要文字鏈(降為次要 · 不跟主金鈕搶)· 仍是最強 0-登入 hook:

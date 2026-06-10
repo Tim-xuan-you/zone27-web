@@ -163,7 +163,13 @@ export function computeTrophies(
     });
   }
 
+  // 同一場只取一張卡:棒球側 getPredictionsByCode/getMyPredictionsClient 已去重(一場一 key)·
+  // 足球 picks 是陣列、若 DB「一場一押」唯一約束某天失守會出現同 matchId 兩列 → 這裡用 seen 去重
+  // (RPC 已 created_at desc → first-seen 即最新)· 防 TrophyGrid 重複 React key。 世界盃今晚足球首次大量寫入。
+  const seenSoccer = new Set<string>();
   for (const row of soccer) {
+    if (seenSoccer.has(row.matchId)) continue;
+    seenSoccer.add(row.matchId);
     const card = byId.get(row.matchId);
     if (!card) continue;
     const t = Date.parse(row.ts);

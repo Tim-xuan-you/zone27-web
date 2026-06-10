@@ -70,11 +70,12 @@ export default async function PublicProfilePage({
   const { baseball, soccer } = await getPredictionsByCode(code);
 
   // 棒球校準身分(CPBL + MLB · fd-* 已在 server 分流排除)。
-  // ⚠️ MLB 結果用永久鎖定源(getMlbLockedMatches · 放最前 · find 取第一筆)· live 窗只補
-  // 還沒鎖定/今日的場 —— 修「MLB 賽果掉出 2 天 live 窗 → 已結算押注倒退回 pending → 公開
-  // 準度數字每天亂跳、且嚴重少算」(同首頁/天梯永久帳本修法 · 公開檔案是最會被外傳的面)。
+  // ⚠️ MLB 結果用永久鎖定源(getMlbLockedMatches 放最後 → 下游 new Map 同 key『後者勝出』·
+  // 永久源蓋過 live)· live 窗只在永久源缺該場時補今日/未鎖定 —— 修「賽果掉出 2 天 live 窗 →
+  // 已結算押注倒退回 pending → 公開準度每天亂跳少算」+ 堵「locked 已 grade 但 live 此刻回非 final →
+  // null 蓋掉永久 winner」窄反例(對齊 canonical getMlbFinalizedResults 的 JSON-first)。 公開檔案是最會被外傳的面。
   const mlbLive = await getMlbAsMatches();
-  const allWithMlb = [...allMatches, ...getMlbLockedMatches(), ...mlbLive];
+  const allWithMlb = [...allMatches, ...mlbLive, ...getMlbLockedMatches()];
   const idMatches = allWithMlb.map((m) => ({
     id: m.id,
     finalWinner: m.finalResult?.winner ?? null,
