@@ -5,6 +5,7 @@ import CopyLinkButton from "@/components/CopyLinkButton";
 import Avatar from "@/components/Avatar";
 import EngineThreeWayBar from "@/components/EngineThreeWayBar";
 import SoccerUserReceiptPick from "@/components/SoccerUserReceiptPick";
+import KickoffCountdown from "@/components/KickoffCountdown";
 import { getNationalCode } from "@/lib/soccer/teams";
 import type { SoccerReceipt } from "@/lib/soccer/receipt";
 
@@ -159,14 +160,11 @@ export default function SoccerReceiptView({ r }: { r: SoccerReceipt }) {
             ) : (
               <div className="px-5 sm:px-8 pb-6 border-t border-mute/20 pt-5">
                 <p className="font-mono text-mute text-[10px] tracking-[0.35em] mb-2">/ 賽後 · 90 分鐘</p>
-                <p className="font-mono text-mute tabular text-2xl sm:text-3xl font-light tracking-tight leading-none">
-                  待對帳
-                </p>
+                {/* 開賽倒數:把「賽前鎖死、改不了」變成會跳動的對帳張力(倒數歸零=這條線拿去對現實)·
+                    島自己判斷開賽了沒 → 倒數中 / 已開賽待對帳;降噪 / 無 JS → 靜態開賽時間。 */}
+                <KickoffCountdown kickoffISO={r.kickoffISO} fallbackTPE={r.kickoffTPE} />
                 <p className="mt-3 font-mono text-mute/60 text-[9px] sm:text-[10px] tracking-[0.25em] leading-relaxed">
-                  ▸ {r.phase === "locked"
-                    ? `還沒開踢 · 開賽 ${r.kickoffTPE} TPE`
-                    : "已開賽 · 終場後逐場對帳"}{" "}
-                  · 結果由 football-data.org 中立公開比分自動對帳 · 賽前鎖定的線改不了 ·
+                  ▸ 結果由 football-data.org 中立公開比分自動對帳 · 賽前鎖定的線改不了 ·
                   只認 90 分鐘 1X2(延長賽 / PK 不算)
                 </p>
               </div>
