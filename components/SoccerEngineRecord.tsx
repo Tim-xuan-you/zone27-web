@@ -1,6 +1,8 @@
+import Link from "next/link";
 import {
   getLockedSoccerPredictions,
   splitUngradedByKickoff,
+  type LockedSoccerPrediction,
 } from "@/lib/soccer/locked";
 
 // ── ZONE 27 · 足球引擎賽前鎖定 · 賽後對帳(公開戰績 · 三向)──────────────
@@ -44,9 +46,18 @@ const UNIFORM = { h: 1 / 3, d: 1 / 3, a: 1 / 3 };
 const HOME_PRIOR = { h: 0.46, d: 0.27, a: 0.27 };
 
 export default function SoccerEngineRecord() {
-  const preds = getLockedSoccerPredictions() as Pred[];
+  const lockedAll = getLockedSoccerPredictions();
+  const preds = lockedAll as Pred[];
   const total = preds.length;
   if (total === 0) return null;
+
+  // 逐場「戰功收據」· 已對帳(命中/落空)的場 → 點進單場收據(/receipts/fd-*)· 含輸照列。
+  // 兌現 SoccerPendingFrame 的「每一場都會當眾對帳」承諾 = 可點的證物,不只一個總數。
+  const gradedReceipts: LockedSoccerPrediction[] = lockedAll
+    .filter((p) => p.verdict === "proved" || p.verdict === "diverged")
+    .slice()
+    .sort((a, b) => (b.kickoffISO || "").localeCompare(a.kickoffISO || ""))
+    .slice(0, 12);
 
   const decided = preds.filter(
     (p) => p.verdict === "proved" || p.verdict === "diverged",
@@ -181,6 +192,47 @@ export default function SoccerEngineRecord() {
             <span className="text-mute/75"> 最後對帳 {lastUpdated}</span>
           )}
         </p>
+
+        {/* 逐場戰功收據 · 已對帳的場 → 點進單場收據(可截圖外傳)· 兌現「每一場都當眾對帳」。 */}
+        {gradedReceipts.length > 0 && (
+          <div className="mt-5 pt-4 border-t border-line/40">
+            <p className="font-mono text-gold/80 text-[10px] tracking-[0.3em] mb-2.5">
+              逐場收據 · 點進去看 / 外傳
+            </p>
+            <ul className="space-y-1.5">
+              {gradedReceipts.map((p) => {
+                const hit = p.verdict === "proved";
+                return (
+                  <li key={p.matchId}>
+                    <Link
+                      href={`/receipts/${p.matchId}`}
+                      className="flex items-center justify-between gap-3 group py-1"
+                    >
+                      <span className="text-bone/90 text-sm font-light tracking-tight truncate group-hover:text-gold transition-colors">
+                        {p.home} <span className="text-mute/50 text-xs">vs</span> {p.away}
+                        {p.finalScore && (
+                          <span className="font-mono text-mute/70 text-xs tabular ml-2">
+                            {p.finalScore.home}:{p.finalScore.away}
+                          </span>
+                        )}
+                      </span>
+                      <span className="shrink-0 flex items-center gap-2">
+                        <span
+                          className={`font-mono text-[11px] tabular ${hit ? "text-gold" : "text-loss/85"}`}
+                        >
+                          {hit ? "✓ 命中" : "✕ 落空"}
+                        </span>
+                        <span className="font-mono text-mute/40 group-hover:text-gold text-[10px] tracking-[0.2em] transition-colors">
+                          收據 →
+                        </span>
+                      </span>
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        )}
       </div>
     </section>
   );
