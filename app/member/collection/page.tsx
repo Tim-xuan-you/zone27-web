@@ -2,23 +2,15 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
-import CollectionWall, { type SettledCard } from "@/components/CollectionWall";
+import CollectionWall from "@/components/CollectionWall";
 import { getUser } from "@/lib/supabase/server";
-import {
-  getFinalizedMatches,
-  getMatchStartIso,
-  getEngineFavorite,
-} from "@/lib/matches";
-import { getMlbLockedMatches } from "@/lib/mlb-matches";
-import { getSoccerFinalizedResults, getLockedSoccerById } from "@/lib/soccer/locked";
-import { getTeamCrest } from "@/lib/identity";
-import { getNationalCode } from "@/lib/soccer/teams";
+import { buildSettledCards } from "@/lib/trophies";
 
 // ── ZONE 27 · /member/collection · 個人戰功卡收藏牆 ─────────────────────
 // 會員看自己「所有已結算的 call」的畫廊 —— 一場結算 = 一張刪不掉的戰功卡(含輸照收)。
 // 純讀本人已結算帳本(0 migration)· 1 個真人就成立(收的是自己的眼光,不是別人的榜
-// = 不碰「0 用戶不上空榜」紅線)· server 備齊賽事資訊 → client CollectionWall 用 session
-// 端讀本人 picks 配對(不破頁面靜態)。 世界盃今晚第一批結算 → 牆立刻長出第一張卡。
+// = 不碰「0 用戶不上空榜」紅線)· server 備齊賽事資訊(buildSettledCards · 0 API)→ client
+// CollectionWall 用 session 端讀本人 picks 配對(不破頁面靜態)。 世界盃今晚第一批結算 → 長卡。
 // ─────────────────────────────────────────────────────
 
 export const metadata: Metadata = {
@@ -26,67 +18,10 @@ export const metadata: Metadata = {
   description: "你所有賽前鎖死、改不了的 call —— 命中與落空都收著。收的是自己的眼光,不是中獎彩券。",
 };
 
-// UTC ISO → 台北 MM/DD(deterministic UTC+8 · 不在 client 讀時鐘)。
-function taipeiMMDD(iso: string): string {
-  const t = Date.parse(iso);
-  if (Number.isNaN(t)) return "";
-  const d = new Date(t + 8 * 3600 * 1000);
-  return `${String(d.getUTCMonth() + 1).padStart(2, "0")}/${String(d.getUTCDate()).padStart(2, "0")}`;
-}
-
 export default async function CollectionPage() {
   const user = await getUser();
-
-  // ── server 備齊「已結算賽事資訊」(永久來源 · 0 API for 足球 · 含名字/隊徽/引擎看好邊)──
-  const settled: SettledCard[] = [];
-
-  // 棒球(CPBL 已結算 + MLB 永久鎖定已結算)· 含輸照收 = 結算就進收藏
-  const baseball = [
-    ...getFinalizedMatches(),
-    ...getMlbLockedMatches().filter((m) => m.finalResult),
-  ];
-  for (const m of baseball) {
-    const winner = m.finalResult?.winner;
-    if (winner !== "home" && winner !== "away" && winner !== "tie") continue;
-    const hc = getTeamCrest(m.home.name, m.home.en, m.league);
-    const ac = getTeamCrest(m.away.name, m.away.en, m.league);
-    const startISO = getMatchStartIso(m) ?? "";
-    settled.push({
-      id: m.id,
-      sport: "baseball",
-      tag: m.league,
-      home: m.home.name,
-      away: m.away.name,
-      homeGlyph: hc?.glyph,
-      homeColor: hc?.color,
-      awayGlyph: ac?.glyph,
-      awayColor: ac?.color,
-      result: winner,
-      startISO,
-      dateLabel: taipeiMMDD(startISO),
-      engineFav: getEngineFavorite(m),
-    });
-  }
-
-  // 足球(永久鎖定結算 · 讀 bundled locked.json · 0 API · 不依賴 secret)
-  const lockedById = getLockedSoccerById();
-  for (const r of getSoccerFinalizedResults()) {
-    const lk = lockedById.get(r.matchId);
-    if (!lk) continue;
-    settled.push({
-      id: r.matchId,
-      sport: "soccer",
-      tag: lk.competitionName,
-      home: lk.home,
-      away: lk.away,
-      homeGlyph: getNationalCode(lk.homeSeed) ?? undefined,
-      awayGlyph: getNationalCode(lk.awaySeed) ?? undefined,
-      result: r.outcome,
-      startISO: r.kickoffISO,
-      dateLabel: taipeiMMDD(r.kickoffISO),
-      engineFav: lk.enginePick,
-    });
-  }
+  // 已結算賽事資訊(永久來源 · 0 API · 含名字/隊徽/引擎看好邊)· 共用 lib/trophies。
+  const settled = buildSettledCards();
 
   return (
     <div className="flex flex-col flex-1 min-h-screen">

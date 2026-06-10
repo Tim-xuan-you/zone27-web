@@ -128,7 +128,11 @@ export default async function MemberPage() {
   // 一份賽果輸入餵三支(同一真相):校準身分 + 準度歷程 sparkline + 回訪 delta。
   // engineFav 走 getEngineFavorite()(50/50 真銅板局回 null · 不灌引擎水)·
   // settledDay = finalResult.ingestedAt(賽果入帳台北日 · 回訪卡判「你不在時結算的」用)。
-  const idMatches = allWithMlb.map((m) => ({
+  // ⚠️ 校準身分/準度的賽果輸入用「永久鎖定源」(getMlbLockedMatches 放最前 · find 取第一筆)·
+  // live 窗(allWithMlb)只補今日/未鎖定的場 —— 修「MLB 賽果掉出 2 天 live 窗 → 已結算押注
+  // 倒退回 pending → 準度數字每天亂跳、且少算」(同首頁/天梯/公開檔案永久帳本修法)。 allWithMlb
+  // 不動(下方持倉/可押賽事仍要 live 窗)。 同 id 後者忽略 · locked(含 finalResult)先贏。
+  const idMatches = [...allMatches, ...getMlbLockedMatches(), ...mlbMatches].map((m) => ({
     id: m.id,
     finalWinner: m.finalResult?.winner ?? null,
     engineFav: getEngineFavorite(m),

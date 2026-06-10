@@ -2,6 +2,7 @@ import Link from "next/link";
 import Avatar from "@/components/Avatar";
 import HonorWall from "@/components/HonorWall";
 import AccuracySparkline from "@/components/AccuracySparkline";
+import TrophyGrid from "@/components/TrophyGrid";
 import { creatorIdentity } from "@/lib/identity";
 import type {
   CalibrationIdentity,
@@ -10,6 +11,7 @@ import type {
 } from "@/lib/predictions";
 import type { SoccerRecord } from "@/lib/soccer/predictions";
 import type { PublicProfile } from "@/lib/profile-server";
+import type { Trophy } from "@/lib/trophies";
 
 // ── ZONE 27 · 公開含輸 Profile(soul-roadmap P0 keystone)──────────────────
 // /u/[code] 的主體:把任一位會員攤開的、刪不掉的、含贏含輸押注帳本,做成一張
@@ -37,6 +39,8 @@ type Props = {
   soccer: SoccerRecord;
   /** 準度歷程序列(棒球 · computeAccuracySeries)· 場數夠多才畫 sparkline */
   series?: AccuracyPoint[];
+  /** 戰功卡(已結算的每一手 · 連單場收據)· 把數字背後的「實物證物」攤給懷疑者看 */
+  trophies?: Trophy[];
 };
 
 // 一句話總結這份帳本的站位 · 第三人稱(主詞 = 帳本)· 誠實雙向(贏照講、輸也照講)。
@@ -52,7 +56,7 @@ function standingVerdict(id: CalibrationIdentity): string {
   return `${coin},但還沒贏過引擎。`;
 }
 
-export default function ProfileView({ profile, identity: id, streak, soccer, series }: Props) {
+export default function ProfileView({ profile, identity: id, streak, soccer, series, trophies }: Props) {
   // 身分解析(同創作者署名 · 顯示名 or 球迷#碼 + 永久碼 chip + 頭像 seed/glyph)。
   const who = creatorIdentity({
     handle: profile.handle,
@@ -257,6 +261,21 @@ export default function ProfileView({ profile, identity: id, streak, soccer, ser
 
       {/* ── 榮譽牆(第三人稱 public 視角)· 章全部從含輸帳本自動算 ─────────── */}
       <HonorWall identity={id} streak={streak} subject="public" />
+
+      {/* ── 戰功卡 · 數字背後的「實物證物」(soul 願景3)· 每張賽前鎖死、可點進單場收據
+          自己驗 —— 把「敢曬輸」從一個數字變成一櫃可外傳、刪不掉的收藏。 沒結算過 → 不顯示。 */}
+      {trophies && trophies.length > 0 && (
+        <section className="mt-9">
+          <p className="font-mono text-gold/80 text-[10px] tracking-[0.4em] mb-1.5">
+            戰功卡 · 賽前鎖死的每一手
+          </p>
+          <p className="text-mute/70 text-[13px] leading-relaxed mb-4 max-w-xl">
+            數字背後的證物 —— 點任一張進去看單場收據,鎖定時戳改不了。 含贏含輸,
+            <span className="text-gold">敢留輸的</span>,賣明牌的攤不出來。
+          </p>
+          <TrophyGrid trophies={trophies} showSummary={false} />
+        </section>
+      )}
 
       {/* ── 結尾轉換 · 免費建你自己的帳本(引擎永遠免費)· 付費身分當安靜副線 ───── */}
       <section className="mt-12 pt-8 border-t border-line/50 text-center">

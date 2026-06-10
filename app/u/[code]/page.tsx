@@ -17,11 +17,12 @@ import {
   getTodayTaipei,
   matches as allMatches,
 } from "@/lib/matches";
-import { getMlbAsMatches } from "@/lib/mlb-matches";
+import { getMlbAsMatches, getMlbLockedMatches } from "@/lib/mlb-matches";
 import { getSoccerLedgerResults } from "@/lib/soccer/football-data";
 import { getSoccerEnginePicks } from "@/lib/soccer/locked";
 import { createPageMetadata } from "@/lib/page-og";
 import { normalizeProfileCode } from "@/lib/profile-code";
+import { buildSettledCards, computeTrophies } from "@/lib/trophies";
 
 // ── ZONE 27 · /u/[code] · 公開含輸 Profile(soul-roadmap P0 keystone)────────
 // 任何人(免登入)用永久碼看一位會員攤開、刪不掉、含贏含輸的押注帳本。
@@ -68,9 +69,12 @@ export default async function PublicProfilePage({
 
   const { baseball, soccer } = await getPredictionsByCode(code);
 
-  // 棒球校準身分(CPBL + MLB · 同 /member 的 allWithMlb · fd-* 已在 server 分流排除)。
-  const mlbMatches = await getMlbAsMatches();
-  const allWithMlb = [...allMatches, ...mlbMatches];
+  // 棒球校準身分(CPBL + MLB · fd-* 已在 server 分流排除)。
+  // ⚠️ MLB 結果用永久鎖定源(getMlbLockedMatches · 放最前 · find 取第一筆)· live 窗只補
+  // 還沒鎖定/今日的場 —— 修「MLB 賽果掉出 2 天 live 窗 → 已結算押注倒退回 pending → 公開
+  // 準度數字每天亂跳、且嚴重少算」(同首頁/天梯永久帳本修法 · 公開檔案是最會被外傳的面)。
+  const mlbLive = await getMlbAsMatches();
+  const allWithMlb = [...allMatches, ...getMlbLockedMatches(), ...mlbLive];
   const idMatches = allWithMlb.map((m) => ({
     id: m.id,
     finalWinner: m.finalResult?.winner ?? null,
@@ -91,6 +95,9 @@ export default async function PublicProfilePage({
   }
   const soccerRecord = gradeSoccerPicks(soccer, resultsMap, soccerEnginePicks);
 
+  // 戰功卡:這份帳本所有已結算的 call(含輸 · 連單場收據)· server 端配對(picks 來自 0019 RPC)。
+  const trophies = computeTrophies(baseball, soccer, buildSettledCards());
+
   return (
     <div className="flex flex-col flex-1 min-h-screen">
       <Nav />
@@ -101,6 +108,7 @@ export default async function PublicProfilePage({
           streak={streak}
           soccer={soccerRecord}
           series={accuracySeries}
+          trophies={trophies}
         />
       </main>
       <Footer />
