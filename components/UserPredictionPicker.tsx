@@ -112,7 +112,7 @@ export default function UserPredictionPicker({
     } else if (res.reason === "not_logged_in") {
       setAuth("logged-out");
     } else {
-      setError("進場失敗 · 請重試,或到 /login 重新登入");
+      setError("押注沒送出 · 請重試,或到 /login 重新登入");
     }
     setSaving(false);
   };
@@ -183,7 +183,7 @@ export default function UserPredictionPicker({
         {auth !== "loading" && closed && !locked && (
           <p className="font-mono text-mute/85 text-[10px] tracking-[0.25em] leading-relaxed">
             {finalWinner
-              ? "此場已結束 · 已無法進場(先鎖後結 · 防賽後補登)"
+              ? "此場已結束 · 已無法押注(先鎖後結 · 防賽後補登)"
               : "此場已開賽 · 已封盤 · 押注賽前才收(先鎖後結 · 防賽後補登)"}
           </p>
         )}
@@ -225,7 +225,7 @@ export default function UserPredictionPicker({
         {/* 會員已押 → locked */}
         {locked && myPick && (
           <p className="font-mono text-bone text-sm tracking-[0.15em]">
-            ✓ 你已進場:押{" "}
+            ✓ 你押了{" "}
             <span className="text-gold">
               {myPick === "home" ? homeName : awayName}
             </span>
@@ -307,7 +307,7 @@ function CrowdLine({
   if (!tally || tally.total === 0 || tally.homePct === null) {
     return (
       <p className="font-mono text-mute/60 text-[10px] tracking-[0.25em]">
-        群眾市場 · 還沒人進場 · 第一手是你的 ▸
+        群眾市場 · 還沒人押這場 · 第一手是你的 ▸
       </p>
     );
   }
@@ -317,7 +317,7 @@ function CrowdLine({
     return (
       <div className="font-mono text-[10px] tracking-[0.2em] leading-relaxed">
         <p className="text-mute/85">
-          目前 <span className="text-bone tabular">{tally.total}</span> 人進場 ·{" "}
+          目前 <span className="text-bone tabular">{tally.total}</span> 人押了 ·{" "}
           <span className="text-gold/90 tabular">{tally.homeCount}</span> 押{" "}
           {homeName.slice(0, 4)} ·{" "}
           <span className="text-mute tabular">{tally.awayCount}</span> 押{" "}
@@ -334,13 +334,13 @@ function CrowdLine({
   return (
     <div
       role="img"
-      aria-label={`群眾市場線 · ${homePct}% 押 ${homeName} · ${awayPct}% 押 ${awayName} · 共 ${tally.total} 人進場`}
+      aria-label={`群眾市場線 · ${homePct}% 押 ${homeName} · ${awayPct}% 押 ${awayName} · 共 ${tally.total} 人押了`}
     >
       <div className="flex items-baseline justify-between mb-1.5 font-mono text-[10px] tracking-[0.22em] tabular gap-2 flex-wrap">
         <span className="text-gold">
           {homePct}% 押 {homeName.slice(0, 4)}
         </span>
-        <span className="text-mute/70">{tally.total} 人進場</span>
+        <span className="text-mute/70">{tally.total} 人押了</span>
         <span className="text-mute">
           {awayPct}% 押 {awayName.slice(0, 4)}
         </span>

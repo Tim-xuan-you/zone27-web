@@ -112,7 +112,9 @@ export async function getMyPredictionsClient(): Promise<UserPredictionsMap> {
       const pick =
         row.pick === "home" || row.pick === "away" ? row.pick : null;
       const ts = typeof row.created_at === "string" ? row.created_at : "";
-      if (pick) map[matchId] = { pick, ts };
+      // ts 缺失/非字串 → 整列丟棄(同 server 版 getMyPredictionsMap)· 讓數天數(streak)
+      // 與算準度(identity)對同一壞列一致 · 不留 client/server 不對稱接縫。
+      if (pick && ts) map[matchId] = { pick, ts };
     }
     return map;
   } catch {

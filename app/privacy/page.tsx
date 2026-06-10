@@ -197,13 +197,13 @@ export default function PrivacyPage() {
       <Section no="03" label="WHAT WE DON'T COLLECT" zh="我們不收什麼">
         <p>列出我們<strong className="text-bone">沒有</strong>做的事很重要:</p>
         <ul className="space-y-3">
-          <li>❌ 沒有 Google Analytics</li>
-          <li>❌ 沒有 Facebook Pixel</li>
-          <li>❌ 沒有第三方追蹤 cookies</li>
-          <li>❌ 沒有 IP 蒐集(Vercel 預設不對外公開)</li>
-          <li>❌ 沒有信用卡 / 卡號(付費會員走手動銀行轉帳 · 不經過我們)</li>
+          <li>✕ 沒有 Google Analytics</li>
+          <li>✕ 沒有 Facebook Pixel</li>
+          <li>✕ 沒有第三方追蹤 cookies</li>
+          <li>✕ 沒有 IP 蒐集(Vercel 預設不對外公開)</li>
+          <li>✕ 沒有信用卡 / 卡號(付費會員走手動銀行轉帳 · 不經過我們)</li>
           <li>
-            ❌ 沒有個人身分資料 <strong className="text-bone">(/founders + waitlist 部分)</strong>{" "}
+            ✕ 沒有個人身分資料 <strong className="text-bone">(/founders + waitlist 部分)</strong>{" "}
             · 但{" "}
             <Link href="#section-02b" className="text-gold underline-offset-4 hover:underline">
               Section 02B
@@ -211,8 +211,8 @@ export default function PrivacyPage() {
             /founders/apply 確實收 name + email + cpbl_connection + why_zone27 ·
             因為人工 onboard 需要(不藏)
           </li>
-          <li>❌ 沒有電話 / 地址(application 也不收)</li>
-          <li>❌ 沒有瀏覽行為紀錄(您在 /lab 跑幾次 simulation 我們不知道)</li>
+          <li>✕ 沒有電話 / 地址(application 也不收)</li>
+          <li>✕ 沒有瀏覽行為紀錄(您在 /lab 跑幾次 simulation 我們不知道)</li>
         </ul>
 
         {/* Round 52 W-C · Agent 3 #4 fix · 「我們不收」 list explicit 但
@@ -226,7 +226,7 @@ export default function PrivacyPage() {
             lang="en"
             className="font-mono text-gold text-[10px] tracking-[0.4em] mb-4"
           >
-            ⚠ EXPLICITLY DISABLED TOOLS · 我們審計過 但 不用
+            ✕ EXPLICITLY DISABLED TOOLS · 我們審計過 但 不用
           </p>
           <p className="text-mute/85 text-sm leading-relaxed mb-4">
             泛說「我們不追蹤」 不夠 — 列出我們{" "}
@@ -245,7 +245,7 @@ export default function PrivacyPage() {
             <li>✕ Cloudflare Web Analytics / Plausible(都未安裝)</li>
           </ul>
           <p className="mt-4 font-mono text-mute/70 text-[10px] tracking-[0.3em] leading-relaxed">
-            ⚓ 這份清單每加 1 個工具 · 都要 30 天前先在公開 GitHub commit 史公告 ·
+            ▸ 這份清單每加 1 個工具 · 都要 30 天前先在公開 GitHub commit 史公告 ·
             從清單上偷砍任何一個 = 品牌信用自殺。
           </p>
         </div>

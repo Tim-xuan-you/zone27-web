@@ -85,7 +85,7 @@ export default function WalletPanel() {
         <p className="font-mono text-bone text-sm">
           餘額{" "}
           <span className="text-gold text-xl tabular">
-            NT$ {state.mounted ? state.balance : "—"}
+            NT$ {state.mounted ? fmt(state.balance) : "—"}
           </span>
         </p>
       </div>
