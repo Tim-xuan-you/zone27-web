@@ -135,7 +135,7 @@ export default function SoccerBetStrip({
       {(state === "open" || state === "started") && (
         <>
           <p className="font-mono text-mute/60 text-[9px] tracking-[0.2em] mb-1.5">
-            {state === "started" ? "已開賽 · 押注已鎖" : "你押哪邊?(押了不可改)"}
+            {state === "started" ? "已開賽 · 封盤 · 賽前才收" : "你押哪邊?(押了不可改)"}
           </p>
           <div className="flex items-stretch gap-1.5">
             <BetBtn label={`看好 ${homeLabel.slice(0, 5)}`} disabled={state === "started" || saving} onClick={() => choose("home")} />
