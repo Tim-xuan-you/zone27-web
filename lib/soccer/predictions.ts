@@ -138,6 +138,8 @@ export type SoccerRecord = {
   rate: number | null;
   /** 還沒結算(比賽還沒打完 / 結果還沒回來) */
   pending: number;
+  /** 開賽後才押 · 誠實剔除不計入戰績(但要「看得見地」剔除 · 不是黑洞) */
+  late: number;
   // ── 你 vs 引擎(同一批已結算、且引擎當初有鎖定線的場 · apples-to-apples)──
   /** 對照子集場數(你押的、已結算、且有鎖定引擎線的場) */
   vsN: number;
@@ -167,6 +169,7 @@ export function gradeSoccerPicks(
   let n = 0;
   let hits = 0;
   let pending = 0;
+  let late = 0;
   let vsN = 0;
   let vsYouHits = 0;
   let vsEngineHits = 0;
@@ -176,10 +179,15 @@ export function gradeSoccerPicks(
       pending += 1; // 還沒結算
       continue;
     }
-    // 先鎖後結:押注時間 ≥ 開賽 → 賽後補登,不算進戰績(防作弊 · 同棒球)
+    // 先鎖後結:押注時間 ≥ 開賽 → 賽後補登,不算進戰績(防作弊 · 同棒球)。
+    // 計入 late 而非無聲略過:用戶看過「✓ 你押了」,這手卻永遠不出現在戰績
+    // = 黑洞;誠實的剔除要看得見(UI 一行「開賽後才押 · 不計入」)。
     const t = Date.parse(p.ts);
     const k = Date.parse(r.kickoffISO);
-    if (!Number.isNaN(t) && !Number.isNaN(k) && t >= k) continue;
+    if (!Number.isNaN(t) && !Number.isNaN(k) && t >= k) {
+      late += 1;
+      continue;
+    }
     n += 1;
     const youHit = p.pick === r.outcome;
     if (youHit) hits += 1;
@@ -197,6 +205,7 @@ export function gradeSoccerPicks(
     misses: n - hits,
     rate: n > 0 ? Math.round((hits / n) * 100) : null,
     pending,
+    late,
     vsN,
     vsYouHits,
     vsEngineHits,

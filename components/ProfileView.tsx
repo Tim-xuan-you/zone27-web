@@ -61,7 +61,8 @@ export default function ProfileView({ profile, identity: id, streak, soccer, ser
   });
 
   const hasBaseball = id.total > 0;
-  const hasSoccer = soccer.n > 0 || soccer.pending > 0;
+  // late 也算「有足球」:只有晚押的人 · 區塊若在結算瞬間整個消失 = 比剔除更傷信任。
+  const hasSoccer = soccer.n > 0 || soccer.pending > 0 || soccer.late > 0;
   const hasDecided = id.accuracy !== null;
   const youPct = Math.max(0, Math.min(100, id.accuracy ?? 0));
   const engPct = Math.max(0, Math.min(100, id.engine.accuracy ?? 0));
@@ -334,7 +335,7 @@ function CompareBar({
 
 // ── 足球戰績區(第三人稱 · 含輸 · 含同場 你 vs 引擎)──────────────────────
 function SoccerSection({ r }: { r: SoccerRecord }) {
-  const { n, hits, misses, rate, pending, vsN, vsYouHits, vsEngineHits } = r;
+  const { n, hits, misses, rate, pending, late, vsN, vsYouHits, vsEngineHits } = r;
   return (
     <section className="mt-6 bg-slate/40 border border-gold/30 p-5 sm:p-6">
       <p className="font-mono text-gold/80 text-[10px] tracking-[0.35em] mb-2">
@@ -350,10 +351,17 @@ function SoccerSection({ r }: { r: SoccerRecord }) {
             <span className="text-mute/50 text-sm"> · {pending} 場進行中</span>
           )}
         </p>
-      ) : (
+      ) : pending > 0 ? (
         <p className="text-bone text-base font-light leading-snug">
           押了 <span className="text-gold tabular">{pending}</span> 場 ·
           <span className="text-mute/70"> 都還沒結算 —— 賽後自動掛準 / 不準,連輸的也留著</span>
+        </p>
+      ) : null}
+
+      {/* 晚押誠實剔除 · 公開面同 /member(無聲消失比剔除更傷信任 · 同一把尺)。 */}
+      {late > 0 && (
+        <p className="mt-2 font-mono text-mute/55 text-[10px] tracking-[0.12em] leading-snug">
+          {late} 場開賽後才押 · 不計入戰績(先鎖後結 · 開賽前押的才算數)
         </p>
       )}
 

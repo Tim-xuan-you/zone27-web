@@ -21,6 +21,7 @@ import {
   computeCompetitionPredictions,
   toScheduledInput,
   toResultInput,
+  regulationScore,
 } from "./predict-core.mjs";
 import { getNationalZh } from "./teams";
 import { getClubZh } from "./club-names";
@@ -52,13 +53,16 @@ export type SoccerCompetitionCode =
 export const ACTIVE_COMPETITIONS = ACTIVE_COMPETITIONS_CORE as SoccerCompetitionCode[];
 
 type FdTeam = { name?: string; shortName?: string; tla?: string };
+type FdGoals = { home?: number | null; away?: number | null };
 type FdMatch = {
   id?: number;
   utcDate?: string;
   status?: string;
   homeTeam?: FdTeam;
   awayTeam?: FdTeam;
-  score?: { fullTime?: { home?: number | null; away?: number | null } };
+  // duration/regularTime:淘汰賽延長賽/PK 時 fullTime 是「最終」含加時進球 ·
+  // 90 分鐘真比分在 regularTime(結算一律走 regulationScore · 90 分鐘 1X2)。
+  score?: { duration?: string; fullTime?: FdGoals; regularTime?: FdGoals };
 };
 
 // 顯示名:國家隊→中文(對齊台灣運彩)· 俱樂部→中文(盡力版)· 都查不到 fallback 英文。
@@ -83,18 +87,28 @@ function getToken(): string {
 // SCHEDULED 翻成 TIMED(世界盃 6/08 全部已是 TIMED)→ 只抓 SCHEDULED 會整個聯賽看不到。
 const UPCOMING_STATUS = "SCHEDULED,TIMED";
 
-/** 抓某競賽某狀態的比賽 · 空陣列 on 缺 token / 錯誤(graceful · ISR 快取)。 */
+/** 抓某競賽某狀態的比賽 · 空陣列 on 缺 token / 錯誤(graceful · ISR 快取)。
+ *  429(跟 GitHub Action 共用同一顆 token 撞 10 req/min)→ 等 2s 重試一次:
+ *  別讓「空板」被快取住一小時 —— 世界盃日空板比慢 2 秒貴太多。
+ *  ⚠️ 重試的 headers 必須跟第一發不同:Next 在同一個 render pass 對「同 URL +
+ *  同 options」的 GET 做 request memoization(不分狀態碼),原樣重打只會拿回
+ *  記憶化的同一個 429 —— headers 是 cache key 的一部分,加一個差異才真的上網路。 */
 async function fetchMatches(code: string, status: string): Promise<FdMatch[]> {
   const token = getToken();
   if (!token) return [];
   try {
-    const res = await fetch(
-      `${BASE}/competitions/${code}/matches?status=${status}`,
-      {
-        headers: { "X-Auth-Token": token },
+    const url = `${BASE}/competitions/${code}/matches?status=${status}`;
+    let res = await fetch(url, {
+      headers: { "X-Auth-Token": token },
+      next: { revalidate: REVALIDATE_SECONDS },
+    });
+    if (res.status === 429) {
+      await new Promise((r) => setTimeout(r, 2000));
+      res = await fetch(url, {
+        headers: { "X-Auth-Token": token, "x-z27-retry": "1" },
         next: { revalidate: REVALIDATE_SECONDS },
-      },
-    );
+      });
+    }
     if (!res.ok) return [];
     const data = (await res.json()) as { matches?: FdMatch[] };
     return Array.isArray(data.matches) ? data.matches : [];
@@ -120,11 +134,14 @@ export type SoccerResult = {
 export async function getRecentSoccerResults(): Promise<SoccerResult[]> {
   const out: SoccerResult[] = [];
   for (const code of ACTIVE_COMPETITIONS) {
-    const finished = await fetchMatches(code, "FINISHED");
+    // FINISHED + AWARDED(棄賽判定也有官方結果 · 不讓押注永遠掛「進行中」)。
+    const finished = await fetchMatches(code, "FINISHED,AWARDED");
     for (const m of finished) {
-      const h = m.score?.fullTime?.home;
-      const a = m.score?.fullTime?.away;
-      if (typeof h !== "number" || typeof a !== "number" || !m.id) continue;
+      // 90 分鐘 1X2(regulationScore)· 淘汰賽 fullTime 含延長賽/PK 進球,
+      // 直接用會把「90 分鐘押和」判成輸(跟引擎帳本同一把尺 · 同源 helper)。
+      const reg = regulationScore(m.score);
+      if (!reg || !m.id) continue;
+      const { home: h, away: a } = reg;
       out.push({
         matchId: `fd-${m.id}`,
         outcome: h > a ? "home" : h < a ? "away" : "draw",

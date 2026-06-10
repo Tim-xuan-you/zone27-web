@@ -10,15 +10,15 @@ export default function SoccerPendingFrame({ locked }: { locked: number }) {
     <section className="mx-auto max-w-6xl w-full px-6 sm:px-10 pb-3">
       <div className="bg-slate/40 border border-gold/30 p-5 sm:p-7">
         <span className="inline-block font-mono text-gold/80 text-[9px] tracking-[0.3em] px-2 py-1 border border-gold/40 mb-4">
-          賽後對帳即將開始 · 世界盃 6/11
+          賽後對帳即將開始 · 世界盃 6/12 凌晨開踢(台北)
         </span>
         <h2 className="text-bone text-2xl sm:text-3xl font-light tracking-tight">
           第一個足球預測 · 已經鎖死了
         </h2>
         <p className="mt-4 text-mute/90 text-sm leading-relaxed max-w-2xl">
           <span className="font-mono text-gold tabular">{locked}</span> 場世界盃預測,
-          在開賽前就公開鎖死、改不了。 結果從 6/11 第一顆球開賽起算 —— 每一場都會當眾對帳,
-          贏或輸照掛。 我們把預測押在結果還不存在的時候 ——
+          在開賽前就公開鎖死、改不了。 結果從第一顆球起算(台北時間 6/12 凌晨 03:00 開踢)——
+          每一場都會當眾對帳,贏或輸照掛。 我們把預測押在結果還不存在的時候 ——
           <span className="text-bone"> 這正是 ZONE 27 賣的東西。</span>
         </p>
       </div>

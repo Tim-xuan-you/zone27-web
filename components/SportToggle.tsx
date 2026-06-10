@@ -39,7 +39,7 @@ export default function SportToggle({
             active={sport === "soccer"}
             onClick={() => setSport("soccer")}
             label="足球"
-            sub="世界盃 · 6/11 開賽"
+            sub="世界盃 6/12–7/20 · 台北時間"
           />
         </div>
       </section>

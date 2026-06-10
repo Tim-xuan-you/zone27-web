@@ -7,8 +7,11 @@
 //   · 引擎三向剛好同分(機率上幾乎不可能)→ push(無偏向 · 不計入分母)
 //   🔴 和局**永遠不 push**:和是真實的 1X2 結果,要照常評(押 push 和局 = 偷藏 ~1/4 場 = 報馬仔藏輸)。
 //
-// 一律對「鎖定值」評,不重算(守先鎖後結 · 防賽後偷改)。 用 score.fullTime(正規賽 1X2 ·
-// 延長賽/PK 的晉級不影響我們開的是「90 分鐘 1X2」這條線)。 idempotent:已評過(verdict 非 null)跳過。
+// 一律對「鎖定值」評,不重算(守先鎖後結 · 防賽後偷改)。 比分走 regulationScore(90 分鐘
+// 1X2):⚠️ v4 的 score.fullTime 是「最終」比分 —— 延長賽/PK 進球全被加總(90 分鐘 1-1 ·
+// PK 4-3 → fullTime 回 5-4),90 分鐘真比分在 duration!=='REGULAR' 時存於 score.regularTime。
+// 我們開的線是 90 分鐘 1X2 → 淘汰賽的延長賽/PK 晉級不影響對帳。 idempotent:已評過跳過。
+// AWARDED(棄賽判定)也結算(有官方結果就不留殭屍 pending)。
 // 每 3h 跑(GitHub Action)· 0 auth · football-data.org 中立公開比分。
 // ─────────────────────────────────────────────────────
 
@@ -16,7 +19,7 @@ import { readFileSync, writeFileSync, existsSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 
-import { gradeLockedVerdict } from "../lib/soccer/predict-core.mjs";
+import { gradeLockedVerdict, regulationScore } from "../lib/soccer/predict-core.mjs";
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const LOCK_FILE = join(HERE, "..", "lib", "soccer-locked.json");
@@ -47,8 +50,9 @@ async function fetchFd(url, token) {
 
 async function fetchFinished(code, token) {
   try {
+    // FINISHED + AWARDED:棄賽判定(走 walkover 官方比分)也要結算,不留殭屍 pending。
     const data = await fetchFd(
-      `${BASE}/competitions/${code}/matches?status=FINISHED`,
+      `${BASE}/competitions/${code}/matches?status=FINISHED,AWARDED`,
       token,
     );
     return Array.isArray(data?.matches) ? data.matches : [];
@@ -64,12 +68,26 @@ async function main() {
     return;
   }
   const token = getToken();
-  if (!token) {
-    console.log("[grade-soccer] no FOOTBALL_DATA_API_TOKEN · skip(graceful)");
-    return;
-  }
   const store = JSON.parse(readFileSync(LOCK_FILE, "utf8"));
   const pending = (store.predictions ?? []).filter((p) => p.verdict === null);
+  if (!token) {
+    // 死管線不准沉默:已有「踢完卻沒對帳」的場 = 公開帳本正在當眾過期 →
+    // exit 1 讓 Action 變紅(GitHub 會寄失敗通知)。 賽季開打前(沒有過期場)仍 graceful。
+    const overdue = pending.filter((p) => {
+      const t = Date.parse(p.kickoffISO ?? "");
+      return !Number.isNaN(t) && t < Date.now();
+    }).length;
+    if (overdue > 0) {
+      console.error(
+        `[grade-soccer] 🔴 ${overdue} 場已開踢/踢完但沒有 FOOTBALL_DATA_API_TOKEN · 公開帳本正在過期。\n` +
+          `  修法(2 分鐘):GitHub repo → Settings → Secrets and variables → Actions →\n` +
+          `  New repository secret → Name: FOOTBALL_DATA_API_TOKEN · Value: 跟 Vercel env 同一把 token。`,
+      );
+      process.exit(1);
+    }
+    console.log("[grade-soccer] no FOOTBALL_DATA_API_TOKEN · skip(graceful · 尚無踢完待對帳的場)");
+    return;
+  }
   if (pending.length === 0) {
     console.log("[grade-soccer] 0 ungraded · nothing to do");
     return;
@@ -91,10 +109,18 @@ async function main() {
     const byId = new Map(finished.map((m) => [`fd-${m.id}`, m]));
     for (const p of preds) {
       const m = byId.get(p.matchId);
-      if (!m || m.status !== "FINISHED") continue;
-      const h = m.score?.fullTime?.home;
-      const a = m.score?.fullTime?.away;
-      if (typeof h !== "number" || typeof a !== "number") continue;
+      if (!m || (m.status !== "FINISHED" && m.status !== "AWARDED")) continue;
+      // 90 分鐘 1X2(regulationScore)· 不是 fullTime(那會把延長賽/PK 進球算進來)。
+      const reg = regulationScore(m.score);
+      if (!reg) {
+        // 已 FINISHED/AWARDED 卻取不到正規賽比分(理論上 v4 一定有 regularTime)→
+        // 別無聲跳過讓它永久掛 pending · 響亮告警(下一輪會重試,料補回就自動結算)。
+        console.error(
+          `[grade-soccer] ⚠ ${p.matchId} 已 ${m.status} 但取不到正規賽比分(duration=${m.score?.duration ?? "?"})· 暫不結算 · 下輪重試`,
+        );
+        continue;
+      }
+      const { home: h, away: a } = reg;
       p.finalScore = { home: h, away: a };
       const { outcome, verdict } = gradeLockedVerdict(p.homeWin, p.draw, p.awayWin, h, a);
       p.outcome = outcome;

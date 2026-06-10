@@ -422,6 +422,56 @@ export default function AuditPage() {
               </ExtLink>
               ,對應變數會寫進下一次引擎迭代。
             </P>
+
+            {/* ── 足球引擎 v0.1 揭露(2026-06-10 世界盃前夜補)──────────
+                第二顆引擎進站的第一個結算週不能黑箱:公式、實力分來源、地主
+                規則、結算的尺全攤開(同棒球等級)。 站上各處只有一行「公式公開」
+                沒有內容 = disclosure 缺口 · 這段是 canonical。 */}
+            <div className="mt-10 pt-8 border-t border-line/40">
+              <P>
+                <strong className="text-bone">足球引擎 v0.1(Dixon-Coles)</strong>
+                —— 2026 世界盃起用 · 跟棒球同一個揭露標準:
+              </P>
+              <List>
+                <Item label="怎麼開盤">
+                  兩隊「國際實力分」差距 + 主場優勢 → 換算兩邊預期進球 →
+                  Dixon-Coles 比分機率表(對 0-0 / 1-0 / 0-1 / 1-1
+                  這類低比分做修正)→ 加總成 主勝 / 和 / 客勝 三向機率
+                </Item>
+                <Item label="實力分是哪來的">
+                  48 隊的分數是創辦人手工錨定的近似值(量級對齊公開的國際 Elo
+                  排名 · 非即時、非官方)。 老實說:這套近似值的強弱差距壓得比真實
+                  榜單窄 · 大熱門可能被我們系統性低開 —— 校準圖會照實畫出這件事 ·
+                  之後由創辦人對照賽果手動修(每次改動都在 GitHub commit 史)
+                </Item>
+                <Item label="主場規則">
+                  世界盃是中立場 —— 只有被列為主隊的地主(美國 / 墨西哥 / 加拿大)
+                  拿主場加成,其餘全部中立 0。 老實說:這是看「列名主隊是不是地主」·
+                  不是看比賽實際在哪國場館踢 —— 小組賽地主都在本國踢、大致吻合,
+                  到了淘汰賽主客只是籤表位置,這個近似會有誤差
+                </Item>
+                <Item label="對帳的尺">
+                  一律算 90 分鐘正規賽 1X2 · 淘汰賽的延長賽 / PK 晉級不影響
+                  這條線 · 和局是真實結果照常評(永不 push · 藏和局 = 偷藏約
+                  1/4 的場次)
+                </Item>
+                <Item label="沒建模的">
+                  陣容 / 傷兵 / 近期狀態 / 天氣 · 全部沒看 —— 引擎只看實力分
+                  與地主 · 你判讀時自己加上去
+                </Item>
+              </List>
+              <P className="text-mute/70">
+                完整程式碼公開於{" "}
+                <ExtLink href="https://github.com/Tim-xuan-you/zone27-web/tree/main/lib/soccer">
+                  lib/soccer/
+                </ExtLink>
+                {" · "}賽前鎖定的每一場(含機率、實力分、鎖定時間戳)都在{" "}
+                <ExtLink href="https://github.com/Tim-xuan-you/zone27-web/blob/main/lib/soccer-locked.json">
+                  lib/soccer-locked.json
+                </ExtLink>
+                {" · "}任何人可逐場核對。
+              </P>
+            </div>
           </ReportSection>
 
           {/* ── 04 ENVIRONMENTAL IMPACT ──────────────────

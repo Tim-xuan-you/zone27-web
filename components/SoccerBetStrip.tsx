@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { createSupabaseBrowserClient } from "@/lib/supabase/browser";
+import { matchHasStarted } from "@/lib/matches";
 import {
   getMySoccerPrediction,
   getSoccerTally,
@@ -38,30 +39,23 @@ export default function SoccerBetStrip({
   const [saving, setSaving] = useState(false);
   const [kickedOff, setKickedOff] = useState(false);
 
-  const started =
-    kickedOff ||
-    (() => {
-      const t = Date.parse(dateISO);
-      return !Number.isNaN(t) && Date.now() >= t;
-    })();
-
-  // 開賽瞬間自動鎖手(即使分頁一直開著沒重整)· 只對 24h 內的場設「一次性」timer(不輪詢 · 省資源)。
+  // 開賽瞬間自動鎖手(即使分頁一直開著沒重整)· 只對 24h 內的場設「一次性」timer(不輪詢 ·
+  // 省資源)。 已開賽的場走 0ms timer(setState 只在 timer callback 裡 · 不在 render/effect
+  // 本體讀時鐘 → 無 purity / 無同步 setState 連鎖)。 >24h 的殭屍分頁由 choose() 點擊時重驗兜底。
   useEffect(() => {
     const t = Date.parse(dateISO);
     if (Number.isNaN(t)) return;
     const ms = t - Date.now();
-    if (ms <= 0) {
-      setKickedOff(true);
-      return;
-    }
     if (ms > 24 * 3600 * 1000) return;
-    const id = setTimeout(() => setKickedOff(true), ms);
+    const id = setTimeout(() => setKickedOff(true), Math.max(ms, 0));
     return () => clearTimeout(id);
   }, [dateISO]);
 
   useEffect(() => {
     let cancelled = false;
     (async () => {
+      // effect 內讀時鐘(house style 同 CardBetStrip)· 蓋掉 0ms timer 還沒 fire 的窗。
+      const startedNow = kickedOff || matchHasStarted(dateISO);
       getSoccerTally(matchId).then((t) => {
         if (!cancelled) setTally(t);
       });
@@ -72,7 +66,8 @@ export default function SoccerBetStrip({
         } = await supabase.auth.getUser();
         if (cancelled) return;
         if (!user) {
-          setState("anon");
+          // 已開賽就不掛「登入就能押」的餌(登入後也押不了 = 釣魚)· 直接顯示封盤。
+          setState(startedNow ? "started" : "anon");
           return;
         }
         const mine = await getMySoccerPrediction(matchId);
@@ -81,19 +76,26 @@ export default function SoccerBetStrip({
           setPick(mine);
           setState("picked");
         } else {
-          setState(started ? "started" : "open");
+          setState(startedNow ? "started" : "open");
         }
       } catch {
-        if (!cancelled) setState("anon");
+        if (!cancelled) setState(startedNow ? "started" : "anon");
       }
     })();
     return () => {
       cancelled = true;
     };
-  }, [matchId, started]);
+  }, [matchId, dateISO, kickedOff]);
 
   const choose = async (p: SoccerPick) => {
     if (saving) return;
+    // 點擊瞬間重驗開賽(殭屍分頁兜底:>24h 沒 timer、或手機分頁喚醒)· server 端
+    // 0018 尚無時間閘 → 這裡是先鎖後結的最後一道顯示層防線。
+    if (matchHasStarted(dateISO)) {
+      setKickedOff(true);
+      setState("started");
+      return;
+    }
     setSaving(true);
     const res = await submitSoccerPrediction(matchId, p);
     if (res.ok) {
@@ -149,7 +151,7 @@ export default function SoccerBetStrip({
           <span className="text-gold">
             {pick === "home" ? homeLabel : pick === "away" ? awayLabel : "和局"}
           </span>{" "}
-          <span className="text-mute/60">· 押了鎖死 · 賽後逐場對帳(足球結算建置中)</span>
+          <span className="text-mute/60">· 押了鎖死 · 賽後逐場對帳 · 連輸的都留著</span>
         </p>
       )}
 

@@ -413,15 +413,15 @@ function SoccerCalView({
     return (
       <div className="border border-gold/30 bg-slate/40 p-5 sm:p-6">
         <span className="inline-block font-mono text-gold/80 text-[9px] tracking-[0.3em] px-2 py-1 border border-gold/40 mb-3">
-          足球 · 世界盃 6/11 開賽
+          足球 · 世界盃 6/12 凌晨開踢(台北)
         </span>
         <p className="text-bone text-base leading-relaxed">
           足球引擎已經<span className="text-gold">賽前鎖死 {lockedN} 場</span>
           預測 —— 但還沒有一場結算。
         </p>
         <p className="mt-2 text-mute text-sm leading-relaxed">
-          這張校準圖,從世界盃 6/11 第一場打完開始長。 鎖在那裡的每一場、
-          賽後逐場對帳,跟棒球<span className="text-bone">分開算</span> ——
+          這張校準圖,從世界盃第一場打完開始長(台北時間 6/12 凌晨開踢)。
+          鎖在那裡的每一場、賽後逐場對帳,跟棒球<span className="text-bone">分開算</span> ——
           引擎說幾成、實際中幾成,連估錯的也照畫。
         </p>
       </div>

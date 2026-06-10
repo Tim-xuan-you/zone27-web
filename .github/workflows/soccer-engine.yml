@@ -8,7 +8,9 @@ name: Soccer Engine · lock + grade
 # 絕不抓盤口 · 0 付費。 手動也可在 Actions 頁按 "Run workflow"。
 #
 # ⚠️ 需 repo secret FOOTBALL_DATA_API_TOKEN(= 已在 Vercel env 的那把免費 football-data.org token)。
-#    沒設前 lock/grade 會 graceful exit 0(no-op)→ 先 ship workflow 不會壞。
+#    沒設前:賽季還沒開打 → lock/grade graceful no-op(不會壞);但**一旦有「已開踢卻沒對帳」的場**,
+#    grade 會故意 exit 1 變紅(每 3h 一次 · GitHub 寄失敗信)= 公開帳本正在過期的警報,不是 bug。
+#    別把這個紅當成壞掉拆掉警報 —— 設好 secret(同 Vercel env)自然轉綠。 詳見 TODO.md。
 
 on:
   schedule:

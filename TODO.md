@@ -51,13 +51,21 @@
 ⚠ 我這端驗到:三綠(tsc / build / dev render · CreatorAnalysis 掛載 0 console 錯誤 + 沒套 0020 時
 graceful 不顯示徽章)· 活體(真徽章)要等你套完 0020 + dogfood 押注+留言才看得到。
 
-### ⏳ GitHub repo secret `FOOTBALL_DATA_API_TOKEN`(TIER-1 免費 · 解鎖足球引擎自動鎖定/結算)
-2026-06-08:足球「你 vs 引擎」賽前鎖定 + 賽後對帳系統上線(鏡 MLB)。 GitHub Action
-`.github/workflows/soccer-engine.yml` 每 3h 自動鎖未開踢的場 + 結算踢完的場 → 寫 `lib/soccer-locked.json`。
-**需要那把已經在 Vercel env 的 football-data.org 免費 token 也加到 GitHub repo secret**,Action 才跑得起來:
-GitHub repo → Settings → Secrets and variables → Actions → New repository secret →
-Name `FOOTBALL_DATA_API_TOKEN` · Value = 同一把 token。 沒設前 Action 會 graceful no-op(不會壞)·
-站上已先 commit 11 場世界盃開幕戰的鎖定線(手動實跑鎖的 · 誠實賽前)→ 引擎公開戰績卡已會顯示。
+### 🔴 GitHub repo secret `FOOTBALL_DATA_API_TOKEN` —— 有硬期限:世界盃 6/12 凌晨開踢(台北)
+**(2026-06-10 升級成最高優先 · TIER-1 免費 · 2 分鐘 · 全部用台北時間)** 沒設這把 secret,世界盃開打後會發生兩件事:
+1. **台北 6/12 凌晨開踢、約清晨結算起**:會員自己的押注照常結算,但引擎公開帳本凍在「11 場未對帳」——
+   同一頁自打臉(像極了「只結算你的輸贏、不認自己帳」的明牌站 · 這是我們最不能輸的那一格)。
+2. **鎖定不能回補(防作弊設計)→ 破洞逐場累積**:目前只鎖到台北 6/15 早上那場;下一批世界盃比賽
+   約台北 6/16 凌晨起開踢。 從那之後,**每晚一天設 secret,就永久少鎖「那天已開踢」的那幾場**(不是
+   全有全無 —— 其餘還沒開踢的場,只要 secret 一落地就會自動補鎖、照常進帳)。 結算可以事後補、鎖定不行,
+   所以越早設越好,別讓世界盃的場一場一場漏掉。
+
+**做法(2 分鐘):** GitHub repo → Settings → Secrets and variables → Actions →
+New repository secret → Name `FOOTBALL_DATA_API_TOKEN` · Value = 跟 Vercel env 同一把
+football-data.org token。 設完到 Actions 頁手動按一次「Soccer Engine · lock + grade」的
+Run workflow,看到綠勾 + 有新 commit 就成了。
+⚠ 2026-06-10 起:第一場踢完後若 secret 還沒設,這個 Action 會**故意變紅**(每 3h 一次 ·
+GitHub 會寄失敗信給你)—— 那不是壞掉,是帳本在過期的警報,設好 secret 自然轉綠。
 
 ### ✅ migration 0017 — 已套(2026-06-05 · R201 · 後台審核看全文 + 留痕刪除)
 Tim「審核看不到付費全文怎麼判斷該不該刪 + 後台門禁 + 大公司怎麼做」→ 核實門禁早已穩(0011

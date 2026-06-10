@@ -76,6 +76,14 @@ export default async function SoccerPage() {
               ? `引擎覆蓋 ${total} 場 · 世界盃 + 季中聯賽 · 顯示最近賽事 · 台北時區`
               : "賽程資料接通中"}
           </p>
+          {/* 世界盃日誠實說明:板只列「未開賽」· 開賽中的場會從板上消失 ~2h
+              (不是 bug 是設計:引擎不做 live · 終場後逐場對帳)· 先講免猜。
+              不寫「自動」:引擎公開帳本要等 secret 落地才會跑(避免承諾系統還沒做到的事)。 */}
+          {total > 0 && (
+            <p className="mt-1.5 font-mono text-mute/45 text-[9px] tracking-[0.18em]">
+              開賽中的場次不掛板上 · 終場後逐場對帳(這裡只列未開賽的場)
+            </p>
+          )}
           <div className="mt-6 w-full h-px bg-line/60" />
         </section>
 

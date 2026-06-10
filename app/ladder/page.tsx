@@ -84,10 +84,11 @@ export default async function LadderPage() {
             soccer={
               <div className="border border-gold/30 bg-slate/40 p-5">
                 <span className="inline-block font-mono text-gold/80 text-[9px] tracking-[0.3em] px-2 py-1 border border-gold/40 mb-3">
-                  足球天梯 · 世界盃 6/11 開始
+                  足球天梯 · 世界盃開踢後起算
                 </span>
                 <p className="text-bone text-base leading-relaxed">
-                  足球的賽後對帳,<span className="text-gold">從世界盃 6/11 第一場開始</span>。
+                  足球的賽後對帳,<span className="text-gold">從世界盃第一場打完開始</span>
+                  (台北時間 6/12 凌晨開踢)。
                 </p>
                 <p className="mt-2 text-mute text-sm leading-relaxed">
                   跟棒球<span className="text-bone">分開算</span>(各算各的準度)—— 押滿 10 場、

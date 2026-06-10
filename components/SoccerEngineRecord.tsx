@@ -1,4 +1,7 @@
-import { getLockedSoccerPredictions } from "@/lib/soccer/locked";
+import {
+  getLockedSoccerPredictions,
+  splitUngradedByKickoff,
+} from "@/lib/soccer/locked";
 
 // ── ZONE 27 · 足球引擎賽前鎖定 · 賽後對帳(公開戰績 · 三向)──────────────
 // 鏡 components/MlbEngineRecord.tsx,但足球是三向(主勝/和/客勝)。 讀 lib/soccer-locked.json
@@ -50,7 +53,10 @@ export default function SoccerEngineRecord() {
   );
   const proved = decided.filter((p) => p.verdict === "proved").length;
   const diverged = decided.length - proved;
+  // verdict null = 還沒結算 ≠ 還沒踢:結算每 3h 跑一輪,終場到入帳之間誠實分兩格
+  // (時鐘分流在 lib/soccer/locked.ts · 元件 render 不讀時鐘)。
   const pending = preds.filter((p) => p.verdict === null).length;
+  const { notKicked, awaitingGrade } = splitUngradedByKickoff();
   const noLine = preds.filter((p) => p.verdict === "push").length;
   const played = decided.length + noLine;
   const rate =
@@ -103,7 +109,11 @@ export default function SoccerEngineRecord() {
           <Stat
             label="賽前鎖死"
             value={String(total)}
-            sub={`${pending} 場還沒踢 · 改不了`}
+            sub={
+              awaitingGrade > 0
+                ? `未開賽 ${notKicked} · 開踢後待對帳 ${awaitingGrade}`
+                : `${pending} 場還沒踢 · 改不了`
+            }
             tone="gold"
           />
           <Stat
@@ -162,7 +172,8 @@ export default function SoccerEngineRecord() {
         )}
 
         <p className="mt-3 font-mono text-mute/55 text-[10px] tracking-[0.2em] leading-relaxed">
-          引擎開盤公式公開(國際實力分 + Dixon-Coles 低比分修正)。
+          引擎開盤公式公開(國際實力分 + Dixon-Coles 低比分修正 · 完整揭露見 /audit)。
+          對帳一律算 90 分鐘正規賽 1X2 —— 淘汰賽的延長賽 / PK 晉級不影響這條線。
           {firm && rate !== null && (
             <span className="text-gold/80"> 看好邊命中 {rate}% ·</span>
           )}

@@ -18,9 +18,14 @@ import type { SoccerResult } from "@/lib/soccer/football-data";
 // 🔴 跟棒球兩本帳分開:本卡只讀 fd-* · 棒球 getMyPredictionsMap 已排除 fd-*。
 // ─────────────────────────────────────────────────────
 
+// 穩定的空物件 default:enginePicks 進 effect deps · 若 default 寫 inline `{}`,
+// 任何 client 父層 re-render 都是新 identity → effect 無限重抓(今天兩個掛載點都是
+// server component 所以沒炸 · 但這顆雷不留)。
+const EMPTY_PICKS: Record<string, SoccerPick> = {};
+
 export default function SoccerRecordCard({
   results,
-  enginePicks = {},
+  enginePicks = EMPTY_PICKS,
   wrapperClass = "",
 }: {
   results: SoccerResult[];
@@ -54,10 +59,11 @@ export default function SoccerRecordCard({
     };
   }, [results, enginePicks]);
 
-  // 沒押任何足球(或未登入)→ 隱藏
-  if (!record || (record.n === 0 && record.pending === 0)) return null;
+  // 沒押任何足球(或未登入)→ 隱藏(唯一例外:只有晚押 → 仍顯示,把剔除講清楚)
+  if (!record || (record.n === 0 && record.pending === 0 && record.late === 0))
+    return null;
 
-  const { n, hits, misses, rate, pending, vsN, vsYouHits, vsEngineHits } = record;
+  const { n, hits, misses, rate, pending, late, vsN, vsYouHits, vsEngineHits } = record;
 
   return (
     <div className={wrapperClass}>
@@ -75,10 +81,18 @@ export default function SoccerRecordCard({
               <span className="text-mute/50 text-sm"> · {pending} 場進行中</span>
             )}
           </p>
-        ) : (
+        ) : pending > 0 ? (
           <p className="text-bone text-base font-light leading-snug">
             你押了 <span className="text-gold tabular">{pending}</span> 場 ·
             <span className="text-mute/70"> 都還沒結算 —— 賽後自動掛準 / 不準,連輸的都留著</span>
+          </p>
+        ) : null}
+
+        {/* 晚押誠實剔除 · 看得見(不是黑洞):用戶按過「✓ 你押了」· 這手若無聲消失
+            = 比剔除本身更傷信任。 */}
+        {late > 0 && (
+          <p className="mt-2 font-mono text-mute/55 text-[10px] tracking-[0.12em] leading-snug">
+            {late} 場開賽後才押 · 不計入戰績(先鎖後結 · 開賽前押的才算數)
           </p>
         )}
 

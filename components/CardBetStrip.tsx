@@ -79,6 +79,12 @@ export default function CardBetStrip({
 
   // 會員押注 · Supabase(server 端 getUser 再驗一次身分)
   const enterMember = async (pick: "home" | "away") => {
+    // 點擊瞬間重驗開賽:mount 時算的 started 不會自己更新(手機分頁隔天喚醒 ·
+    // 殭屍分頁)→ 開賽後按下去會送出晚押 · 結算端雖會剔除但用戶看到的是黑洞。
+    if (matchHasStarted(startISO)) {
+      setStatus("closed");
+      return;
+    }
     setSaving(true);
     setError(null);
     const res = await submitPrediction(matchId, pick);
