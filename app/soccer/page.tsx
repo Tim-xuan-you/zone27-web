@@ -49,7 +49,7 @@ export default async function SoccerPage() {
 
   return (
     <div className="flex flex-col flex-1 min-h-screen">
-      <Nav active="matches" />
+      <Nav active="soccer" />
       <SportTabs active="soccer" />
 
       <main id="main">
@@ -70,6 +70,13 @@ export default async function SoccerPage() {
             <span className="text-bone">敢喊穩贏的都在騙你</span>。 我們不裝神準 —— 只老實開出引擎偏哪邊、
             比亂猜多幾分,你自己判斷它<span className="text-gold">開高了還是開低了</span>,
             賽前鎖死、賽後逐場對帳、連輸都留。 不接受下注。
+          </p>
+          {/* 傷兵盲點 = 誠實揭露 + costly signal(頁面層講一次 · 不塞每張卡 = 守卡片「不重複盲點清單」紀律)。
+              把「引擎沒看傷停」翻成「你的判斷比引擎值錢」的入口:這正是賭徒該下手反向押的地方。 */}
+          <p className="mt-3 border-l-2 border-gold/50 pl-4 text-mute text-[13px] sm:text-sm leading-relaxed max-w-2xl">
+            引擎只看實力分,<span className="text-bone">沒看傷停 / 輪換 / 臨場陣容</span> ——
+            這不是我們藏起來,是<span className="text-gold">你的判斷比引擎值錢的地方</span>。
+            你知道誰沒上、誰剛踢完歐冠,就敢跟引擎開的線反向押。
           </p>
           <p className="mt-3 font-mono text-mute/60 text-[10px] tracking-[0.2em]">
             {total > 0

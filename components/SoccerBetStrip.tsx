@@ -145,14 +145,29 @@ export default function SoccerBetStrip({
         </>
       )}
 
+      {/* 押下那一刻 = 全漏斗最高張力(Kahneman peak-end + endowment)· 不再只是一行灰字。
+          把它做成「迷你收據」:賽前鎖死、刪不掉、這是你帳本第一筆 → 接往你的戰績。
+          守紅線:暗金、無 emoji、無動畫(用既有 enter-fade-up)。 */}
       {state === "picked" && pick && (
-        <p className="font-mono text-gold text-[10px] tracking-[0.2em]">
-          ✓ 你押了{" "}
-          <span className="text-gold">
-            {pick === "home" ? homeLabel : pick === "away" ? awayLabel : "和局"}
-          </span>{" "}
-          <span className="text-mute/60">· 押了鎖死 · 賽後逐場對帳 · 連輸的都留著</span>
-        </p>
+        <div className="enter-fade-up border border-gold/40 bg-gold/5 px-3 py-2.5">
+          <p className="font-mono text-mute/55 text-[8px] tracking-[0.3em] mb-1">
+            ✓ 賽前鎖定 · 刪不掉
+          </p>
+          <p className="text-gold text-sm sm:text-base font-light tracking-tight leading-none">
+            你押了 {pick === "home" ? homeLabel : pick === "away" ? awayLabel : "和局"}
+          </p>
+          <div className="mt-2 flex items-center justify-between gap-2 flex-wrap">
+            <span className="font-mono text-mute/55 text-[9px] tracking-[0.15em]">
+              賽後逐場對帳 · 連輸的都留著
+            </span>
+            <Link
+              href="/member"
+              className="font-mono text-gold/70 hover:text-gold text-[9px] tracking-[0.25em] underline-offset-4 hover:underline transition-colors shrink-0"
+            >
+              進你的帳本 →
+            </Link>
+          </div>
+        </div>
       )}
 
       <CrowdLine tally={tally} homeLabel={homeLabel} awayLabel={awayLabel} />

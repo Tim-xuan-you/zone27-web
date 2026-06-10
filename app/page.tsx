@@ -14,6 +14,12 @@ import {
 } from "@/lib/matches";
 import { getMlbAsMatches } from "@/lib/mlb-matches";
 import { getCreatorPostCounts } from "@/lib/creator-posts-server";
+import {
+  getUpcomingWorldCupMatches,
+  hasWorldCupLocked,
+  kickoffTaipei,
+  type LockedSoccerPrediction,
+} from "@/lib/soccer/locked";
 
 // ── ZONE 27 · Homepage · 市場看板(R175 Polymarket pivot)──────
 // Tim 2026-05-30「請變成 Polymarket · 很亂很雜」· per
@@ -68,6 +74,13 @@ export default async function Home() {
   // 每場分析篇數 · 看板標「N 篇分析」讓用戶一眼看出哪場有大神可跟單(抽傭入口)。
   // 無 cookie anon fetch · 不破首頁 ISR 靜態。
   const analysisCounts = await getCreatorPostCounts();
+
+  // ── 世界盃 rail(四年一次的窗 · 開站當晚把世界盃推到第一屏)──────────────
+  // 純靜態(讀 lib/soccer-locked.json · 0 API · ISR-safe)· 引擎已賽前鎖死的場 +
+  // 自己算的主/和/客 % 直接秀在首頁 = 賭徒最想要的「show me a pick」即時鉤子。
+  // 世界盃結束後 wcActive 自動回 false → rail 自動收起(無需手動 revert)。
+  const wcUpcoming = getUpcomingWorldCupMatches(2);
+  const wcActive = hasWorldCupLocked();
 
   // 已結算賽事的勝方 · 傳給登入後個人戰績條(client 端用它評分本人押注 · 靜態
   // 資料無隱私問題)。 R198 · 併 MLB 已結算 → 押的 MLB 也計進首頁「你 vs 引擎」。
@@ -156,6 +169,11 @@ export default async function Home() {
             自動隱藏 · 看板遞補為第一屏。 R189 改讀 DB(取代死掉的匿名版)。 */}
         <YourRecordStrip variant="home" matchResults={matchResults} />
 
+        {/* ── 世界盃 rail · 開站當晚的頭條(四年一次)· 在 CPBL 看板「之上」───
+            純靜態鎖定資料(0 API)· 把引擎自己算的主/和/客 % 直接攤在第一屏 ·
+            賭徒一眼看到「引擎看好誰」→ 點進去押。 WC 結束自動收起。 */}
+        {wcActive && <WorldCupRail upcoming={wcUpcoming} />}
+
         {/* ── THE FLOOR · 市場看板 / 賽後收據(休賽日 fallback)──── */}
         <section id="floor" className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-14 scroll-mt-20">
           <div className="flex items-baseline justify-between gap-3 mb-5 flex-wrap">
@@ -199,29 +217,30 @@ export default async function Home() {
           )}
         </section>
 
-        {/* ── 足球 · 引擎開盤(新上線)· 世界盃即將開踢 · 棒球之外的新戰場 ──
-            靜態連結(不在首頁打 football API · 不破 ISR / 不耗 10-req/min 上限)。 */}
-        <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-14">
-          <Link
-            href="/soccer"
-            className="block bg-slate/30 border border-gold/30 hover:border-gold/60 hover:bg-slate/40 transition-colors p-4 sm:p-5 group"
-          >
-            <div className="flex items-center justify-between gap-3 flex-wrap">
-              <div className="min-w-0">
-                <p className="font-mono text-gold text-[10px] tracking-[0.35em] mb-1">
-                  足球 · 引擎開盤 · 新上線
-                </p>
-                <p className="text-bone text-sm sm:text-base font-light leading-snug">
-                  世界盃 + 各大聯賽 · 我們<span className="text-gold">自己算</span>的勝 / 平 / 負
-                  (不是盤口)· 押一邊試試
-                </p>
+        {/* 非世界盃期間(wcActive=false)· 才退回原本安靜的足球入口卡。 */}
+        {!wcActive && (
+          <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-14">
+            <Link
+              href="/soccer"
+              className="block bg-slate/30 border border-gold/30 hover:border-gold/60 hover:bg-slate/40 transition-colors p-4 sm:p-5 group"
+            >
+              <div className="flex items-center justify-between gap-3 flex-wrap">
+                <div className="min-w-0">
+                  <p className="font-mono text-gold text-[10px] tracking-[0.35em] mb-1">
+                    足球 · 引擎開盤
+                  </p>
+                  <p className="text-bone text-sm sm:text-base font-light leading-snug">
+                    各大聯賽 · 我們<span className="text-gold">自己算</span>的勝 / 平 / 負
+                    (不是盤口)· 押一邊試試
+                  </p>
+                </div>
+                <span className="shrink-0 font-mono text-gold/80 group-hover:text-gold text-[10px] tracking-[0.3em]">
+                  看足球 →
+                </span>
               </div>
-              <span className="shrink-0 font-mono text-gold/80 group-hover:text-gold text-[10px] tracking-[0.3em]">
-                看足球 →
-              </span>
-            </div>
-          </Link>
-        </section>
+            </Link>
+          </section>
+        )}
 
         {/* ── 三步玩法 · 圖示卡(child-level · 圖取代字)──── */}
         <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-14 border-t border-line/40 pt-12">
@@ -264,6 +283,119 @@ export default async function Home() {
 }
 
 // ── Sub-components ─────────────────────────────────────
+
+// ── 世界盃 rail · 開站當晚頭條 ───────────────────────────────────
+// 引擎賽前鎖死的世界盃場 + 自己算的主/和/客 % 直接秀(賭徒要的「給我一個 pick」)。
+// 全靜態、無 API、無 client(首頁 ISR 不破)· 暗金、無紅綠、無 emoji。
+function WorldCupRail({ upcoming }: { upcoming: LockedSoccerPrediction[] }) {
+  return (
+    <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-14">
+      <div className="border border-gold/40 bg-gold/[0.04] p-5 sm:p-7">
+        <div className="flex items-baseline justify-between gap-3 mb-1 flex-wrap">
+          <p className="font-mono text-gold text-[10px] sm:text-[11px] tracking-[0.4em]">
+            / 世界盃 · 引擎已賽前鎖死
+          </p>
+          <Link
+            href="/soccer"
+            className="font-mono text-gold/80 hover:text-gold text-[10px] tracking-[0.3em] transition-colors"
+          >
+            看全部 · 押一邊 →
+          </Link>
+        </div>
+        <p className="text-bone text-lg sm:text-2xl font-light tracking-tight leading-snug mb-1">
+          四年一次 · <span className="text-gold">引擎自己算</span>的勝 / 平 / 負
+        </p>
+        <p className="text-mute text-[13px] sm:text-sm leading-relaxed mb-5">
+          台北 6/12 凌晨開踢 · 賽前鎖死、賽後逐場對帳 ·{" "}
+          <span className="text-mute/70">不是盤口 · 連輸的都留著</span>
+        </p>
+
+        {upcoming.length > 0 ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            {upcoming.map((m) => (
+              <WorldCupRailCard key={m.matchId} m={m} />
+            ))}
+          </div>
+        ) : (
+          <Link
+            href="/soccer"
+            className="inline-flex items-center gap-2 font-mono text-gold/90 hover:text-gold text-xs tracking-[0.25em] transition-colors"
+          >
+            世界盃進行中 · 看引擎開盤 →
+          </Link>
+        )}
+      </div>
+    </section>
+  );
+}
+
+// 世界盃單場（首頁 rail）· 隊名 + 三向 % + favored 上金 + 三段條（同 SoccerMatchCard 語彙）。
+function WorldCupRailCard({ m }: { m: LockedSoccerPrediction }) {
+  const ko = kickoffTaipei(m.kickoffISO);
+  const max = Math.max(m.homeWinPct, m.drawPct, m.awayWinPct);
+  const homeGold = m.homeWinPct === max;
+  const drawGold = m.drawPct === max && !homeGold;
+  const awayGold = m.awayWinPct === max && !homeGold && !drawGold;
+  const favoredLabel =
+    m.enginePick === "home" ? m.home : m.enginePick === "away" ? m.away : "和局";
+  return (
+    <Link
+      href="/soccer"
+      className="block bg-slate/40 border border-line/60 hover:border-gold/50 transition-colors p-4 group"
+    >
+      <div className="flex items-center justify-between gap-2 mb-2">
+        <span className="font-mono text-gold/70 text-[9px] tracking-[0.3em]">世界盃</span>
+        <span className="font-mono text-mute text-[9px] tracking-[0.25em] tabular shrink-0">
+          {ko} <span className="text-mute/50">TPE</span>
+        </span>
+      </div>
+      <div className="flex items-center justify-between gap-2 mb-2.5">
+        <span className="text-bone text-base font-light tracking-tight truncate">{m.home}</span>
+        <span className="font-mono text-mute/50 text-[10px] shrink-0">vs</span>
+        <span className="text-bone text-base font-light tracking-tight truncate text-right">
+          {m.away}
+        </span>
+      </div>
+      <div className="flex items-baseline justify-between font-mono tabular mb-1.5">
+        <RailPct label="主勝" value={m.homeWinPct} gold={homeGold} align="left" />
+        <RailPct label="和" value={m.drawPct} gold={drawGold} align="center" />
+        <RailPct label="客勝" value={m.awayWinPct} gold={awayGold} align="right" />
+      </div>
+      <div className="flex h-1.5 w-full overflow-hidden rounded-sm bg-ink/60" aria-hidden="true">
+        <span style={{ width: `${m.homeWinPct}%` }} className={homeGold ? "bg-gold" : "bg-mute/40"} />
+        <span style={{ width: `${m.drawPct}%` }} className={drawGold ? "bg-gold" : "bg-mute/25"} />
+        <span style={{ width: `${m.awayWinPct}%` }} className={awayGold ? "bg-gold" : "bg-mute/40"} />
+      </div>
+      <p className="mt-2.5 font-mono text-mute/70 text-[10px] tracking-[0.1em] group-hover:text-gold/80 transition-colors">
+        引擎看好 <span className="text-bone group-hover:text-gold">{favoredLabel}</span> · 押一邊 →
+      </p>
+    </Link>
+  );
+}
+
+function RailPct({
+  label,
+  value,
+  gold,
+  align,
+}: {
+  label: string;
+  value: number;
+  gold: boolean;
+  align: "left" | "center" | "right";
+}) {
+  const alignCls =
+    align === "left" ? "items-start" : align === "right" ? "items-end" : "items-center";
+  return (
+    <span className={`flex flex-col ${alignCls} gap-0.5`}>
+      <span className={`text-lg font-light ${gold ? "text-gold" : "text-mute"}`}>
+        {value}
+        <span className="text-[10px] opacity-60">%</span>
+      </span>
+      <span className="text-mute/65 text-[9px] tracking-[0.1em]">{label}</span>
+    </span>
+  );
+}
 
 // 三步玩法的圖示卡 · 圖 + 兩三個字 · 不放句子(child-level glance)
 function IconCard({

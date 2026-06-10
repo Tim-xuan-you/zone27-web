@@ -37,7 +37,9 @@ export const metadata: Metadata = createPageMetadata({
   path: "/track-record",
 });
 
-export const revalidate = 86400; // ISR · daily
+// R211 · 86400→3600:SoccerEngineRecord 的開踢分流標籤讀 ISR 快照時鐘 · 世界盃
+// 期間 1 天 ISR 會讓「未開賽 N」最久延遲 24h(誠實鐵律下不可接受)· 收緊到 1h。
+export const revalidate = 3600;
 
 // 跨聯盟挑「引擎押最重」用 · favorite = winRate 大的那邊有多高
 const favPct = (m: Match) => Math.max(m.home.winRate, m.away.winRate);

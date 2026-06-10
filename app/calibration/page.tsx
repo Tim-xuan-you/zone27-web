@@ -56,7 +56,9 @@ export const metadata: Metadata = {
 // Routing: /calibration · public · 35th visitor-discoverable route。
 // ─────────────────────────────────────────────────────
 
-export const revalidate = 86400; // re-evaluate daily · /track-record cadence
+// R211 · 86400→3600:足球引擎卡的「未開賽 N / 開踢後待對帳 M」分流讀 ISR 快照時鐘 ·
+// 1 天 ISR 會讓世界盃開踢後標籤最久延遲 24h(說謊)。 1h ISR 收緊到跟 /soccer 一致。
+export const revalidate = 3600;
 
 type Bin = {
   centerPct: number;

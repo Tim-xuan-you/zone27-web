@@ -83,6 +83,41 @@ export function getSoccerFinalizedResults(): SoccerResult[] {
 }
 
 /**
+ * 即將開踢的世界盃鎖定場(給首頁「世界盃今晚」rail)。 純靜態(讀 JSON · 0 API · ISR-safe)·
+ * 只回還沒開踢、還沒結算的場,按開賽時間排序。 時鐘讀在 lib(首頁 10 分鐘 ISR · 夠新)·
+ * 不在元件 render 內讀(react-hooks/purity)。
+ */
+export function getUpcomingWorldCupMatches(limit = 2): LockedSoccerPrediction[] {
+  const nowMs = Date.now();
+  return getLockedSoccerPredictions()
+    .filter((p) => p.competitionCode === "WC")
+    .filter((p) => {
+      const t = Date.parse(p.kickoffISO ?? "");
+      return !Number.isNaN(t) && t > nowMs && p.verdict === null;
+    })
+    .sort((a, b) => (a.kickoffISO || "").localeCompare(b.kickoffISO || ""))
+    .slice(0, limit);
+}
+
+/** 有沒有任何已鎖定的世界盃場(不管開踢沒)· 給首頁/Nav 判斷「世界盃期間」要不要露 rail。 */
+export function hasWorldCupLocked(): boolean {
+  return getLockedSoccerPredictions().some((p) => p.competitionCode === "WC");
+}
+
+/** UTC ISO → 台北「MM/DD HH:mm」(deterministic UTC+8 · ISR-safe · 同 SoccerMatchCard)。 */
+export function kickoffTaipei(iso: string): string {
+  if (!iso) return "";
+  const t = Date.parse(iso);
+  if (Number.isNaN(t)) return "";
+  const tpe = new Date(t + 8 * 3600 * 1000);
+  const mm = String(tpe.getUTCMonth() + 1).padStart(2, "0");
+  const dd = String(tpe.getUTCDate()).padStart(2, "0");
+  const hh = String(tpe.getUTCHours()).padStart(2, "0");
+  const mi = String(tpe.getUTCMinutes()).padStart(2, "0");
+  return `${mm}/${dd} ${hh}:${mi}`;
+}
+
+/**
  * verdict null(還沒結算)的鎖定條目,按「開賽了沒」分流。 給 SoccerEngineRecord
  * 把「還沒踢」跟「踢完待對帳」誠實分開標 ——「還沒踢」掛在已踢完的場上 = 當眾說謊
  * (結算每 3h 跑 · 終場到入帳有空窗)。 時鐘讀在 lib(server request/ISR 時間粒度

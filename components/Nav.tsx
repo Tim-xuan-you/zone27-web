@@ -8,6 +8,7 @@ import { getTodayMatches } from "@/lib/matches";
 type NavKey =
   | "home"
   | "matches"
+  | "soccer"
   | "discuss"
   | "lab"
   | "founders"
@@ -56,6 +57,11 @@ const NAV_ITEMS_STATIC: {
   badge?: string;
 }[] = [
   { key: "matches", href: "/matches", label: "賽事" },
+  // R211 · 世界盃開站(2026-06-12)· 足球進永久 Nav = 可發現性(原本只能從首頁卡 /
+  //  /matches 的 SportTabs / Cmd-K 進 · 世界盃當晚等於把頭條藏起來)。 純靜態連結 ·
+  //  不在 Nav render 時 fetch(守 R207「Nav 不 render-fetch」鐵律)。 無 badge =
+  //  守手機第二排寬度(世界盃的急迫感由首頁 rail + /soccer 頁承載,不靠 Nav 小標)。
+  { key: "soccer", href: "/soccer", label: "足球" },
   // R197 · 拿掉「實驗室 BETA」badge:BETA 在核心引擎旁 = 對每個訪客說「引擎還沒做完」·
   // 跟 MLB de-BETA 一致(蒙地卡羅是全世界在用的成熟方法 · 不是 beta)。
   { key: "lab", href: "/lab", label: "實驗室" },
