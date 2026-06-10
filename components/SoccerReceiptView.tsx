@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import CopyLinkButton from "@/components/CopyLinkButton";
 import Avatar from "@/components/Avatar";
 import EngineThreeWayBar from "@/components/EngineThreeWayBar";
+import SoccerUserReceiptPick from "@/components/SoccerUserReceiptPick";
 import { getNationalCode } from "@/lib/soccer/teams";
 import type { SoccerReceipt } from "@/lib/soccer/receipt";
 
@@ -165,6 +166,16 @@ export default function SoccerReceiptView({ r }: { r: SoccerReceipt }) {
                 三向結算 · 和局是真實結果照常評 · 命中與落空同等揭露 · 永不刪
               </p>
             </div>
+
+            {/* 本人這手 pick(soul R208 close-the-loop)· 登入本人押過這場才蓋上 ·
+                沒登入 / 沒押 / 開賽後才補登 → 自動隱藏(graceful)。 */}
+            <SoccerUserReceiptPick
+              matchId={r.matchId}
+              outcome={r.outcome}
+              kickoffISO={r.kickoffISO}
+              homeName={r.home}
+              awayName={r.away}
+            />
           </div>
 
           {/* SHARE + BACK */}

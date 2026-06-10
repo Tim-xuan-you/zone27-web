@@ -40,6 +40,8 @@ export type SoccerReceipt = {
   lockedAtTPE: string;
   /** 開賽時間(台北 MM/DD HH:mm) */
   kickoffTPE: string;
+  /** 開賽 UTC ISO(給「本人這手」島做先鎖後結 late-pick 剔除) */
+  kickoffISO: string;
 };
 
 /** 取一場足球收據資料(fd-* · 賽後才有)。 查無鎖定 / 還沒踢完 → null。 */
@@ -119,5 +121,6 @@ export async function getSoccerReceipt(
     verdict,
     lockedAtTPE: kickoffTaipei(locked.lockedAt),
     kickoffTPE: kickoffTaipei(locked.kickoffISO),
+    kickoffISO: locked.kickoffISO ?? "",
   };
 }
