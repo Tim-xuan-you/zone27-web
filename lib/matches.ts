@@ -89,6 +89,156 @@ function mergePitcherStats(p: PitcherStats): PitcherStats {
 }
 
 const rawMatches: Match[] = [
+  // ── 2026-06-11 · 一軍 3 場 ingest · Tim 截圖 cpbl.com.tw 賽程 + 先發投手成績表 ──
+  //   投手值由官網截圖 IP/K/BB/HR 換算 · 未進自動 leaderboard 故標 // estimate(per /audit S02 ESTIMATION
+  //   DISCLOSURE · 手抄 < 自動驗證一級)· winRate 手 curate 整數(ERA + 控球 + 主場 + 隊伍 W-L · 接近
+  //   五五波就誠實低 conviction · 不裝把握)· 天氣不建模。 6/9 兩場因雨延賽 → 這三場是 6/11 賽程(投手部分沿用)。
+  //
+  //   #154 天母 · 中信(菲力士 away)vs 味全(蔣鎬 home)· W-L 中信 15-31-1 / 味全 32-16-0
+  //     味全全聯盟最強(.667)+ 蔣鎬 ERA 1.07 頂級 + 主場 = 三優齊發。 中信全聯盟最差(.326)·
+  //     菲力士 2026 ERA 9.00 但僅 9 IP 雜訊 → 用 2025 ERA 1.91 真實力錨定(不對 9 局過度反應)。
+  //     味全三優扣中信主場單場變異 → 味全 60 / 中信 40 · conf 57(明顯但不裝神準)。
+  {
+    id: "cpbl-260611-01",
+    league: "CPBL",
+    date: "2026 · 06 · 11  ·  星期四",
+    startTime: "18:35",
+    venue: "天母棒球場",
+    home: {
+      name: "味全龍",
+      en: "DRAGONS",
+      pitcher: {
+        name: "蔣鎬",
+        era: "1.07", // estimate · 2026 官網截圖 · 50.1 IP 實打、頂級(.164 BAA)
+        k9: "9.5", // estimate · 53 K / 50.1 IP × 9
+        whip: "0.95", // estimate · (29 H + 19 BB) / 50.1 IP
+        bb9: "3.4", // estimate · 19 BB / 50.1 IP × 9
+        hr9: "0.36", // estimate · 2 HR / 50.1 IP × 9
+      },
+      recent: ["W", "W", "L", "W", "W"], // placeholder · 味全 32-16-0(全聯盟最強)
+      winRate: 60,
+    },
+    away: {
+      name: "中信兄弟",
+      en: "BROTHERS",
+      pitcher: {
+        name: "菲力士",
+        era: "1.91", // estimate · 2025 基準(2026 僅 9 IP / ERA 9.00 樣本不足 · 用 2025 真實力錨定)
+        k9: "6.7", // estimate · 2025 · 95 K / 127.1 IP × 9
+        whip: "1.06", // estimate · 2025 · (101 H + 34 BB) / 127.1 IP
+        bb9: "2.4", // estimate · 2025 · 34 BB / 127.1 IP × 9
+        hr9: "0.28", // estimate · 2025 · 4 HR / 127.1 IP × 9
+      },
+      recent: ["L", "L", "W", "L", "L"], // placeholder · 中信 15-31-1(全聯盟最差)
+      winRate: 40,
+    },
+    topScores: [
+      // 味全主場+隊強+蔣鎬頂級 → 低分、味全 lean(格式 home : away = 味全 : 中信)
+      { score: "3 : 1", probability: 11.0 },
+      { score: "2 : 1", probability: 10.5 },
+      { score: "2 : 0", probability: 9.5 },
+      { score: "3 : 2", probability: 8.5 },
+      { score: "4 : 2", probability: 8.0 },
+    ],
+    aiConfidence: 57,
+  },
+  //   #155 新莊 · 統一(林詔恩 away)vs 富邦(阿部雄大 home)· W-L 統一 24-24-1 / 富邦 25-21-0
+  //     兩隊戰績接近(富邦 .543 / 統一 .500)。 阿部 ERA 3.86 表面普通,但 .150 BAA + WHIP 0.81 = 真實力
+  //     明顯更好(失分多半序列/長打)。 林詔恩 2026 ERA 3.21(14 IP 小樣本 · 控球偏散 BB9 4.5)· 2025
+  //     ERA 2.62 顯示有實力。 阿部真實力 + 富邦主場 + 戰績微優 → 富邦微 favored、接近五五波
+  //     → 富邦 54 / 統一 46 · conf 52(誠實低把握)。
+  {
+    id: "cpbl-260611-02",
+    league: "CPBL",
+    date: "2026 · 06 · 11  ·  星期四",
+    startTime: "18:35",
+    venue: "新莊棒球場",
+    home: {
+      name: "富邦悍將",
+      en: "GUARDIANS",
+      pitcher: {
+        name: "阿部雄大",
+        era: "3.86", // estimate · 2026 官網截圖 · 23.1 IP 小樣本(.150 BAA + WHIP 0.81 真實力應更好)
+        k9: "8.1", // estimate · 21 K / 23.1 IP × 9
+        whip: "0.81", // estimate · (12 H + 7 BB) / 23.1 IP · 頂級壓制(失分多半序列/長打)
+        bb9: "2.7", // estimate · 7 BB / 23.1 IP × 9
+        hr9: "0.77", // estimate · 2 HR / 23.1 IP × 9
+      },
+      recent: ["W", "L", "W", "L", "W"], // placeholder · 富邦 25-21-0
+      winRate: 54,
+    },
+    away: {
+      name: "統一獅",
+      en: "LIONS",
+      pitcher: {
+        name: "林詔恩",
+        era: "3.21", // estimate · 2026 官網截圖 · 14 IP 小樣本(2025 ERA 2.62 顯示有實力)
+        k9: "7.7", // estimate · 12 K / 14 IP × 9
+        whip: "1.21", // estimate · (10 H + 7 BB) / 14 IP
+        bb9: "4.5", // estimate · 7 BB / 14 IP × 9 · 控球偏散
+        hr9: "0.4", // estimate · 2026 0 HR/14 IP 小樣本 · 取生涯約值(2024 0.64 / 2025 0.33)
+      },
+      recent: ["L", "W", "L", "W", "L"], // placeholder · 統一 24-24-1(五成)
+      winRate: 46,
+    },
+    topScores: [
+      // 兩隊接近、阿部壓制 vs 林詔恩控球散 → 中分、富邦微 lean(格式 home : away = 富邦 : 統一)
+      { score: "3 : 2", probability: 10.0 },
+      { score: "4 : 3", probability: 9.0 },
+      { score: "2 : 1", probability: 9.0 },
+      { score: "4 : 2", probability: 8.5 },
+      { score: "3 : 1", probability: 8.0 },
+    ],
+    aiConfidence: 52,
+  },
+  //   #156 澄清湖 · 樂天(魔爾曼 away)vs 台鋼(艾速特 home)· W-L 樂天 18-27-1 / 台鋼 26-21-1
+  //     台鋼戰績明顯較佳(.553 vs 樂天 .400)+ 艾速特多年王牌(2024 2.77 → 2025 2.23 → 2026 1.53 越來越強)
+  //     + 主場 = 隊伍+投手+主場三優。 魔爾曼 ERA 3.26(58 IP 紮實 · K9 7.9 · HR9 0.16 極少被轟)= 穩但非頂。
+  //     台鋼三優 vs 樂天穩中段投手 → 台鋼 60 / 樂天 40 · conf 57。
+  {
+    id: "cpbl-260611-03",
+    league: "CPBL",
+    date: "2026 · 06 · 11  ·  星期四",
+    startTime: "18:35",
+    venue: "澄清湖棒球場",
+    home: {
+      name: "台鋼雄鷹",
+      en: "HAWKS",
+      pitcher: {
+        name: "艾速特",
+        era: "1.53", // estimate · 2026 官網截圖 · 53 IP · 多年王牌(2024 2.77 / 2025 2.23 → 1.53)
+        k9: "8.8", // estimate · 52 K / 53 IP × 9
+        whip: "0.94", // estimate · (34 H + 16 BB) / 53 IP
+        bb9: "2.7", // estimate · 16 BB / 53 IP × 9
+        hr9: "0.17", // estimate · 1 HR / 53 IP × 9 · 極少被轟
+      },
+      recent: ["W", "L", "W", "W", "L"], // placeholder · 台鋼 26-21-1
+      winRate: 60,
+    },
+    away: {
+      name: "樂天桃猿",
+      en: "MONKEYS",
+      pitcher: {
+        name: "魔爾曼",
+        era: "3.26", // estimate · 2026 官網截圖 · 58 IP 紮實
+        k9: "7.9", // estimate · 51 K / 58 IP × 9
+        whip: "1.26", // estimate · (53 H + 20 BB) / 58 IP
+        bb9: "3.1", // estimate · 20 BB / 58 IP × 9
+        hr9: "0.16", // estimate · 1 HR / 58 IP × 9 · 極少被轟
+      },
+      recent: ["L", "L", "W", "L", "W"], // placeholder · 樂天 18-27-1
+      winRate: 40,
+    },
+    topScores: [
+      // 台鋼主場+隊強+艾速特王牌 → 低分、台鋼 lean(格式 home : away = 台鋼 : 樂天)
+      { score: "3 : 1", probability: 10.5 },
+      { score: "2 : 1", probability: 10.0 },
+      { score: "4 : 2", probability: 9.0 },
+      { score: "3 : 2", probability: 8.5 },
+      { score: "2 : 0", probability: 8.0 },
+    ],
+    aiConfidence: 57,
+  },
   // ── 2026-06-09 · 一軍 2 場 ingest · Tim 截圖 cpbl.com.tw 賽程 + 先發投手成績表 ──
   //   投手值由官網截圖 IP/K/BB/HR 換算 · 未進自動 leaderboard 故標 // estimate(per /audit
   //   S02 ESTIMATION DISCLOSURE · 手抄 < 自動驗證一級)· winRate 手 curate · 天氣不建模(/audit S02)。
