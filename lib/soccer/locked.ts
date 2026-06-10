@@ -99,9 +99,20 @@ export function getUpcomingWorldCupMatches(limit = 2): LockedSoccerPrediction[] 
     .slice(0, limit);
 }
 
-/** 有沒有任何已鎖定的世界盃場(不管開踢沒)· 給首頁/Nav 判斷「世界盃期間」要不要露 rail。 */
+/** 有沒有任何已鎖定的世界盃場(不管開踢沒)· 給 Nav 判斷世界盃入口要不要亮。 */
 export function hasWorldCupLocked(): boolean {
   return getLockedSoccerPredictions().some((p) => p.competitionCode === "WC");
+}
+
+/**
+ * 世界盃還「進行中」= 還有任一場世界盃鎖定預測未對帳(verdict null · 還沒踢完或剛踢完待結算)。
+ * 給首頁判斷 rail 要不要露:賽季全打完、全部結算後自動回 false → rail 自動收起。
+ * (不能用 hasWorldCupLocked():已對帳的世界盃收據永久保留 → 那個函式賽季結束後仍永遠 true。)
+ */
+export function hasActiveWorldCup(): boolean {
+  return getLockedSoccerPredictions().some(
+    (p) => p.competitionCode === "WC" && p.verdict === null,
+  );
 }
 
 /** UTC ISO → 台北「MM/DD HH:mm」(deterministic UTC+8 · ISR-safe · 同 SoccerMatchCard)。 */

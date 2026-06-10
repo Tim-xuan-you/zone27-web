@@ -4,6 +4,10 @@ import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import MiniMatchCard from "@/components/MiniMatchCard";
 import YourRecordStrip from "@/components/YourRecordStrip";
+import SoccerRecordCard from "@/components/SoccerRecordCard";
+import Avatar from "@/components/Avatar";
+import EngineThreeWayBar from "@/components/EngineThreeWayBar";
+import { getNationalCode } from "@/lib/soccer/teams";
 import {
   getTodayAndFutureMatches,
   getFinalizedMatches,
@@ -12,11 +16,13 @@ import {
   getMatchPhase,
   type Match,
 } from "@/lib/matches";
-import { getMlbAsMatches } from "@/lib/mlb-matches";
+import { getMlbAsMatches, getMlbFinalizedResults } from "@/lib/mlb-matches";
 import { getCreatorPostCounts } from "@/lib/creator-posts-server";
 import {
   getUpcomingWorldCupMatches,
-  hasWorldCupLocked,
+  hasActiveWorldCup,
+  getSoccerFinalizedResults,
+  getSoccerEnginePicks,
   kickoffTaipei,
   type LockedSoccerPrediction,
 } from "@/lib/soccer/locked";
@@ -80,23 +86,26 @@ export default async function Home() {
   // 自己算的主/和/客 % 直接秀在首頁 = 賭徒最想要的「show me a pick」即時鉤子。
   // 世界盃結束後 wcActive 自動回 false → rail 自動收起(無需手動 revert)。
   const wcUpcoming = getUpcomingWorldCupMatches(2);
-  const wcActive = hasWorldCupLocked();
+  // 世界盃還沒結束 = 還有任一場鎖定預測未對帳(verdict null)。 賽季全打完、全結算後
+  // 自動回 false → rail 自動收起(舊版用 hasWorldCupLocked() 會因「收據永久保留」永遠 true)。
+  const wcActive = hasActiveWorldCup();
+  // 首頁足球回訪鉤子用的永久結算表(0 API · 讀 bundled locked.json · ISR-safe · 不依賴
+  // FOOTBALL_DATA secret)+ 引擎當初鎖的看好邊(給「你 vs 引擎」同場對照)。
+  const soccerFinalized = getSoccerFinalizedResults();
+  const soccerEnginePicks = getSoccerEnginePicks();
 
   // 已結算賽事的勝方 · 傳給登入後個人戰績條(client 端用它評分本人押注 · 靜態
   // 資料無隱私問題)。 R198 · 併 MLB 已結算 → 押的 MLB 也計進首頁「你 vs 引擎」。
+  // ⚠️ MLB 已結算結果一律用永久版 getMlbFinalizedResults()(讀 mlb-locked.json · 同
+  // /ladder)· 不用 mlbAll(只有「昨天+今天」live 窗 → 押過的 MLB 場 2 天後掉出窗會
+  // 從『已對帳』倒退回『進行中』· 帳本縮水 · 違反刪不掉的帳本)。
   const matchResults = [
     ...finalized.map((m) => ({
       id: m.id,
       finalWinner: m.finalResult?.winner ?? null,
       startISO: getMatchStartIso(m),
     })),
-    ...mlbAll
-      .filter((m) => m.finalResult)
-      .map((m) => ({
-        id: m.id,
-        finalWinner: m.finalResult?.winner ?? null,
-        startISO: getMatchStartIso(m),
-      })),
+    ...(await getMlbFinalizedResults()),
   ];
 
   return (
@@ -168,6 +177,17 @@ export default async function Home() {
             (= 明天回來的理由)· 不再被 hero CTA 跳過。 沒登入 / 0 押注 →
             自動隱藏 · 看板遞補為第一屏。 R189 改讀 DB(取代死掉的匿名版)。 */}
         <YourRecordStrip variant="home" matchResults={matchResults} />
+
+        {/* ── 你的足球戰績 · 回訪鉤子(只押世界盃的人也有「明天回來看自己 vs 引擎」的理由)──
+            棒球(YourRecordStrip)只算 fd-* 以外 · 足球兩本帳分開 · 用永久結算表(0 API ·
+            ISR-safe)· 沒押足球 / 未登入 → 自動隱藏(graceful · 不破首頁極簡)。 */}
+        {wcActive && (
+          <SoccerRecordCard
+            results={soccerFinalized}
+            enginePicks={soccerEnginePicks}
+            wrapperClass="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-2"
+          />
+        )}
 
         {/* ── 世界盃 rail · 開站當晚的頭條(四年一次)· 在 CPBL 看板「之上」───
             純靜態鎖定資料(0 API)· 把引擎自己算的主/和/客 % 直接攤在第一屏 ·
@@ -290,7 +310,7 @@ export default async function Home() {
 function WorldCupRail({ upcoming }: { upcoming: LockedSoccerPrediction[] }) {
   return (
     <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-14">
-      <div className="border border-gold/40 bg-gold/[0.04] p-5 sm:p-7">
+      <div className="border border-gold/40 bg-slate/30 p-5 sm:p-7">
         <div className="flex items-baseline justify-between gap-3 mb-1 flex-wrap">
           <p className="font-mono text-gold text-[10px] sm:text-[11px] tracking-[0.4em]">
             / 世界盃 · 引擎已賽前鎖死
@@ -329,18 +349,19 @@ function WorldCupRail({ upcoming }: { upcoming: LockedSoccerPrediction[] }) {
   );
 }
 
-// 世界盃單場（首頁 rail）· 隊名 + 三向 % + favored 上金 + 三段條（同 SoccerMatchCard 語彙）。
+// 世界盃單場（首頁 rail）· 隊徽 + 隊名 + 三向 % + favored 上金 + 三段條（同 SoccerMatchCard 語彙）。
+// 點擊帶 #m-{matchId} 錨點 → 落地到 /soccer 該場那張卡(不是清單頂端 · 接起「看到 pick → 去押」漏斗）。
 function WorldCupRailCard({ m }: { m: LockedSoccerPrediction }) {
   const ko = kickoffTaipei(m.kickoffISO);
-  const max = Math.max(m.homeWinPct, m.drawPct, m.awayWinPct);
-  const homeGold = m.homeWinPct === max;
-  const drawGold = m.drawPct === max && !homeGold;
-  const awayGold = m.awayWinPct === max && !homeGold && !drawGold;
+  // 上金的邊綁 enginePick(原始機率 argmax)· 不從展示%重算 → 金條/金數字與「引擎看好 X」永遠同源。
+  const homeGold = m.enginePick === "home";
+  const drawGold = m.enginePick === "draw";
+  const awayGold = m.enginePick === "away";
   const favoredLabel =
     m.enginePick === "home" ? m.home : m.enginePick === "away" ? m.away : "和局";
   return (
     <Link
-      href="/soccer"
+      href={`/soccer#m-${m.matchId}`}
       className="block bg-slate/40 border border-line/60 hover:border-gold/50 transition-colors p-4 group"
     >
       <div className="flex items-center justify-between gap-2 mb-2">
@@ -350,10 +371,16 @@ function WorldCupRailCard({ m }: { m: LockedSoccerPrediction }) {
         </span>
       </div>
       <div className="flex items-center justify-between gap-2 mb-2.5">
-        <span className="text-bone text-base font-light tracking-tight truncate">{m.home}</span>
+        <span className="flex items-center gap-2 min-w-0">
+          <Avatar seed={m.homeSeed} glyph={getNationalCode(m.homeSeed) ?? undefined} size={22} />
+          <span className="text-bone text-base font-light tracking-tight truncate">{m.home}</span>
+        </span>
         <span className="font-mono text-mute/50 text-[10px] shrink-0">vs</span>
-        <span className="text-bone text-base font-light tracking-tight truncate text-right">
-          {m.away}
+        <span className="flex items-center gap-2 min-w-0 justify-end">
+          <span className="text-bone text-base font-light tracking-tight truncate text-right">
+            {m.away}
+          </span>
+          <Avatar seed={m.awaySeed} glyph={getNationalCode(m.awaySeed) ?? undefined} size={22} />
         </span>
       </div>
       <div className="flex items-baseline justify-between font-mono tabular mb-1.5">
@@ -361,11 +388,12 @@ function WorldCupRailCard({ m }: { m: LockedSoccerPrediction }) {
         <RailPct label="和" value={m.drawPct} gold={drawGold} align="center" />
         <RailPct label="客勝" value={m.awayWinPct} gold={awayGold} align="right" />
       </div>
-      <div className="flex h-1.5 w-full overflow-hidden rounded-sm bg-ink/60" aria-hidden="true">
-        <span style={{ width: `${m.homeWinPct}%` }} className={homeGold ? "bg-gold" : "bg-mute/40"} />
-        <span style={{ width: `${m.drawPct}%` }} className={drawGold ? "bg-gold" : "bg-mute/25"} />
-        <span style={{ width: `${m.awayWinPct}%` }} className={awayGold ? "bg-gold" : "bg-mute/40"} />
-      </div>
+      <EngineThreeWayBar
+        homePct={m.homeWinPct}
+        drawPct={m.drawPct}
+        awayPct={m.awayWinPct}
+        goldSide={m.enginePick}
+      />
       <p className="mt-2.5 font-mono text-mute/70 text-[10px] tracking-[0.1em] group-hover:text-gold/80 transition-colors">
         引擎看好 <span className="text-bone group-hover:text-gold">{favoredLabel}</span> · 押一邊 →
       </p>

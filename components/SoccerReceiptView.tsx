@@ -3,6 +3,7 @@ import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import CopyLinkButton from "@/components/CopyLinkButton";
 import Avatar from "@/components/Avatar";
+import EngineThreeWayBar from "@/components/EngineThreeWayBar";
 import { getNationalCode } from "@/lib/soccer/teams";
 import type { SoccerReceipt } from "@/lib/soccer/receipt";
 
@@ -15,10 +16,10 @@ import type { SoccerReceipt } from "@/lib/soccer/receipt";
 
 export default function SoccerReceiptView({ r }: { r: SoccerReceipt }) {
   const ref = `Z27 · ${r.competitionName} · ${r.matchId}`;
-  const max = Math.max(r.homeWinPct, r.drawPct, r.awayWinPct);
-  const homeGold = r.homeWinPct === max;
-  const drawGold = r.drawPct === max && !homeGold;
-  const awayGold = r.awayWinPct === max && !homeGold && !drawGold;
+  // 上金的邊綁 enginePick(原始機率 argmax)· 不從展示%重算 → 金數字與「引擎看好 X」同源。
+  const homeGold = r.enginePick === "home";
+  const drawGold = r.enginePick === "draw";
+  const awayGold = r.enginePick === "away";
 
   const verdict = r.verdict;
   const verdictColor =
@@ -95,7 +96,7 @@ export default function SoccerReceiptView({ r }: { r: SoccerReceipt }) {
             {/* REFERENCE BAND */}
             <div className="border-b border-mute/30 px-5 sm:px-8 py-4 flex items-baseline justify-between flex-wrap gap-3">
               <p lang="en" className="font-mono text-mute/85 text-[10px] sm:text-xs tracking-[0.4em] break-all">
-                ★ REF · {r.matchId}
+                REF · {r.matchId}
               </p>
               <p className="font-mono text-mute text-[10px] tracking-[0.25em] tabular">
                 賽前鎖定 {r.lockedAtTPE} TPE
@@ -131,11 +132,12 @@ export default function SoccerReceiptView({ r }: { r: SoccerReceipt }) {
                 <Cell label="和局" value={r.drawPct} gold={drawGold} align="center" />
                 <Cell label={r.away} value={r.awayWinPct} gold={awayGold} align="right" />
               </div>
-              <div className="flex h-1.5 w-full overflow-hidden rounded-sm bg-ink/60" aria-hidden="true">
-                <span style={{ width: `${r.homeWinPct}%` }} className={homeGold ? "bg-gold" : "bg-mute/40"} />
-                <span style={{ width: `${r.drawPct}%` }} className={drawGold ? "bg-gold" : "bg-mute/25"} />
-                <span style={{ width: `${r.awayWinPct}%` }} className={awayGold ? "bg-gold" : "bg-mute/40"} />
-              </div>
+              <EngineThreeWayBar
+                homePct={r.homeWinPct}
+                drawPct={r.drawPct}
+                awayPct={r.awayWinPct}
+                goldSide={r.enginePick}
+              />
               <p className="mt-2.5 font-mono text-mute/75 text-[11px] tracking-[0.1em]">
                 引擎看好 <span className="text-bone">{r.favoredLabel}</span>(<span className="tabular">{r.favoredPct}%</span>)
               </p>

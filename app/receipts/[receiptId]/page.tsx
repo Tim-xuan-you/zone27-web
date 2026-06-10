@@ -291,7 +291,7 @@ export default async function ReceiptPage({ params }: { params: Params }) {
                 lang="en"
                 className="font-mono text-mute/85 text-[10px] sm:text-xs tracking-[0.4em]"
               >
-                ★ REFERENCE · {ref}
+                REFERENCE · {ref}
               </p>
               <div className="flex items-baseline gap-3 flex-wrap">
                 {/* R77 W-A · EngineRerunBadge · Agent A R76 SHIP F · Cloudflare

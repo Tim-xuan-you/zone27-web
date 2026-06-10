@@ -1,6 +1,7 @@
 import Avatar from "@/components/Avatar";
 import SoccerBetStrip from "@/components/SoccerBetStrip";
-import { toDisplayPercents, type SoccerPrediction } from "@/lib/soccer/engine";
+import EngineThreeWayBar from "@/components/EngineThreeWayBar";
+import { toDisplayPercents, enginePickOf, type SoccerPrediction } from "@/lib/soccer/engine";
 import type { SoccerMatchPrediction } from "@/lib/soccer/football-data";
 import { getNationalCode } from "@/lib/soccer/teams";
 
@@ -30,7 +31,11 @@ export default function SoccerMatchCard({ match }: { match: SoccerMatchPredictio
   // 註:鎖定 / 賽後對帳的信任故事在首頁旗幟 + 公開引擎戰績卡講(整體)· 不在每張卡badge —
   // 因為只有「進入鎖定窗(開賽前 2 天)」的場才鎖,逐卡badge 會「有的有有的沒有」看起來像 bug。
   return (
-    <article className="bg-slate/40 border border-line/60 p-4 sm:p-5 flex flex-col gap-3 transition-colors hover:border-gold/40">
+    // id 錨點:首頁世界盃 rail / 登入回跳用 #m-{id} 落地到這張卡(scroll-mt 避開固定 Nav)。
+    <article
+      id={`m-${id}`}
+      className="scroll-mt-24 bg-slate/40 border border-line/60 p-4 sm:p-5 flex flex-col gap-3 transition-colors hover:border-gold/40"
+    >
       {/* 競賽 + 開賽(台北) */}
       <div className="flex items-center justify-between gap-2">
         <span className="font-mono text-gold/80 text-[9px] tracking-[0.3em]">
@@ -78,13 +83,16 @@ function Prediction({
   prediction: SoccerPrediction;
 }) {
   const d = toDisplayPercents(prediction);
-  // 引擎看好哪個結果(主勝 / 和 / 客勝)→ 上金;其餘 mute。
-  const max = Math.max(d.homeWin, d.draw, d.awayWin);
-  const homeGold = d.homeWin === max;
-  const drawGold = d.draw === max && !homeGold;
-  const awayGold = d.awayWin === max && !homeGold && !drawGold;
+  // 引擎看好哪個結果(主勝 / 和 / 客勝)→ 上金;其餘 mute。 上金的邊綁 enginePick(原始
+  // 機率 argmax · 單一真相)· 不從展示%重算 → 金數字/金條與「引擎看好」永遠同源(近 50/50
+  // 場不會四捨五入翻轉成金條跟文字打架)。
+  const pick = enginePickOf(prediction);
+  const homeGold = pick === "home";
+  const drawGold = pick === "draw";
+  const awayGold = pick === "away";
   // 真・膠著場(最高才 ≤38% · 三邊擠在四成內)= 引擎自己都拿不準 → 不是缺點,是把舞台讓給你:
   // 這種場你的獨家判斷(傷停/輪換/直覺)最值錢 = 打敗引擎、賺校準分的最好機會(你 vs 引擎)。
+  const max = Math.max(d.homeWin, d.draw, d.awayWin);
   const tossup = max <= 38;
 
   return (
@@ -96,12 +104,14 @@ function Prediction({
         <Pct label={away} value={d.awayWin} gold={awayGold} align="right" />
       </div>
 
-      {/* 三段條 · 主勝 / 和 / 客勝(favored 金 · 其餘 mute · 無紅綠) */}
-      <div className="flex h-1.5 w-full overflow-hidden rounded-sm bg-ink/60" aria-hidden="true">
-        <span style={{ width: `${d.homeWin}%` }} className={homeGold ? "bg-gold" : "bg-mute/40"} />
-        <span style={{ width: `${d.draw}%` }} className={drawGold ? "bg-gold" : "bg-mute/25"} />
-        <span style={{ width: `${d.awayWin}%` }} className={awayGold ? "bg-gold" : "bg-mute/40"} />
-      </div>
+      {/* 三段條 · 主勝 / 和 / 客勝(favored 亮金 glow + 羽化接縫 · 其餘 mute · 無紅綠 ·
+          同首頁 rail / 收據 / 棒球 MarketSplitBar 的招牌引擎語彙) */}
+      <EngineThreeWayBar
+        homePct={d.homeWin}
+        drawPct={d.draw}
+        awayPct={d.awayWin}
+        goldSide={pick}
+      />
 
       {/* 預期進球(per-match 會變的真信號 · 取代每張都一樣的「最可能比分 1-1」模型常數)·
           「不是盤口 / 賽後對帳」已是首頁旗幟 + 封印戳,不在每張卡重複(刪廢話、字才放得大)。 */}

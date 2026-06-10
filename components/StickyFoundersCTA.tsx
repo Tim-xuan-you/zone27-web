@@ -75,6 +75,9 @@ export default function StickyFoundersCTA() {
   if (memberState !== "guest") return null;
   if (isHomepage && !scrolledPastHero) return null;
 
+  // 登入後送回他正在看的運動(在 /soccer 看世界盃 → 回 /soccer · 不硬拉去棒球板)。
+  const nextDest = pathname.startsWith("/soccer") ? "/soccer" : "/matches";
+
   return (
     <div
       role="region"
@@ -90,7 +93,7 @@ export default function StickyFoundersCTA() {
     >
       <div className="flex items-stretch">
         <Link
-          href="/login?next=/matches"
+          href={`/login?next=${nextDest}`}
           className="flex items-center justify-between gap-3 px-4 py-3 group flex-1 min-w-0"
           aria-label="免費加入會員 · 解鎖押注與引擎 · 跟機器正面比準度"
         >
@@ -110,9 +113,9 @@ export default function StickyFoundersCTA() {
           </span>
         </Link>
 
-        {/* 已是會員 → 登入(回訪會員的入口 · 不破壞主 CTA hierarchy)*/}
+        {/* 已是會員 → 登入(回訪會員的入口 · 不破壞主 CTA hierarchy)· 同樣帶回當前運動 */}
         <Link
-          href="/login"
+          href={`/login?next=${nextDest}`}
           aria-label="已是會員 · 登入"
           className="shrink-0 min-h-[44px] border-l border-line/60 px-3 py-2 flex flex-col items-center justify-center group"
         >

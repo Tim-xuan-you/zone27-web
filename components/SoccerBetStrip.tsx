@@ -119,11 +119,13 @@ export default function SoccerBetStrip({
       )}
 
       {state === "anon" && (
+        // 撞牆點做成「清楚可點的引導」(金框 + ≥44px 可點區)· 不照搬棒球整片實心金底
+        // (一頁多張卡會壓過引擎 % 這個刻意 hero)· next 帶 #m-{matchId} → 登入後落回這張卡。
         <Link
-          href={`/login?next=${encodeURIComponent("/soccer")}`}
-          className="flex items-center justify-between gap-2 group"
+          href={`/login?next=${encodeURIComponent(`/soccer#m-${matchId}`)}`}
+          className="flex items-center justify-between gap-2 border border-gold/40 px-3 py-2.5 min-h-[44px] hover:border-gold/70 hover:bg-gold/5 transition-colors group"
         >
-          <span className="font-mono text-mute/70 text-[10px] tracking-[0.2em]">
+          <span className="font-mono text-gold/75 text-[11px] tracking-[0.15em]">
             ▸ 登入就能押這場(免費 · 押了鎖死、賽後對帳)
           </span>
           <span className="font-mono text-gold/80 group-hover:text-gold text-[10px] tracking-[0.25em] shrink-0">
@@ -134,14 +136,23 @@ export default function SoccerBetStrip({
 
       {(state === "open" || state === "started") && (
         <>
-          <p className="font-mono text-mute/60 text-[9px] tracking-[0.2em] mb-1.5">
-            {state === "started" ? "已開賽 · 封盤 · 賽前才收" : "你押哪邊?(押了不可改)"}
+          <p
+            className={`font-mono text-[10px] tracking-[0.2em] mb-1.5 ${
+              state === "started" ? "text-mute/60" : "text-gold/80"
+            }`}
+          >
+            {state === "started" ? "已開賽 · 封盤 · 押注賽前才收" : "你押哪邊?(押了不可改)"}
           </p>
           <div className="flex items-stretch gap-1.5">
             <BetBtn label={`看好 ${homeLabel.slice(0, 5)}`} disabled={state === "started" || saving} onClick={() => choose("home")} />
             <BetBtn label="和局" disabled={state === "started" || saving} onClick={() => choose("draw")} />
             <BetBtn label={`看好 ${awayLabel.slice(0, 5)}`} disabled={state === "started" || saving} onClick={() => choose("away")} />
           </div>
+          {/* 押注當下就講清楚怎麼算贏(同棒球詳情頁結算規格的精神 · 卡級一行版)·
+              世界盃淘汰賽:延長賽 / PK 不影響我們開的 90 分鐘 1X2 線 → 押下前就講明。 */}
+          <p className="mt-1.5 font-mono text-mute/55 text-[9px] tracking-[0.12em] leading-snug">
+            以 90 分鐘正規賽結果對帳 · 延長賽 / PK 不計
+          </p>
         </>
       )}
 
@@ -170,7 +181,7 @@ export default function SoccerBetStrip({
         </div>
       )}
 
-      <CrowdLine tally={tally} homeLabel={homeLabel} awayLabel={awayLabel} />
+      <CrowdLine tally={tally} homeLabel={homeLabel} awayLabel={awayLabel} state={state} />
     </div>
   );
 }
@@ -189,7 +200,7 @@ function BetBtn({
       type="button"
       onClick={onClick}
       disabled={disabled}
-      className="flex-1 px-2 py-1.5 font-mono text-[10px] tracking-[0.1em] border border-line/60 text-mute hover:border-gold/50 hover:text-gold transition-colors disabled:opacity-40 disabled:cursor-not-allowed whitespace-nowrap"
+      className="flex-1 px-2 py-2.5 min-h-[40px] font-mono text-[10px] tracking-[0.1em] border border-gold/40 text-bone hover:border-gold hover:bg-gold/10 transition-colors disabled:opacity-40 disabled:cursor-not-allowed whitespace-nowrap"
     >
       {label}
     </button>
@@ -200,16 +211,28 @@ function CrowdLine({
   tally,
   homeLabel,
   awayLabel,
+  state,
 }: {
   tally: SoccerTally | null;
   homeLabel: string;
   awayLabel: string;
+  state: State;
 }) {
-  if (!tally || tally.total === 0) return null;
+  // 登入未押、還沒人押 → 冷啟動鉤子(第一手是你的)· 同棒球 CardBetStrip。 其餘狀態 N=0 不顯示。
+  if (!tally || tally.total === 0) {
+    if (state === "open") {
+      return (
+        <p className="mt-2 font-mono text-gold/70 text-[9px] tracking-[0.2em]">
+          群眾市場 · 還沒人押這場 · 第一手是你的 ▸
+        </p>
+      );
+    }
+    return null;
+  }
   if (tally.total < SOCCER_CROWD_MIN) {
     return (
       <p className="mt-2 font-mono text-mute/45 text-[9px] tracking-[0.15em]">
-        {tally.total} 人押了 · 滿 {SOCCER_CROWD_MIN} 人才畫群眾市場線
+        {tally.total} 人押了 · 滿 {SOCCER_CROWD_MIN} 人才畫群眾市場線 —— 不拿幾個人假裝是大盤
       </p>
     );
   }

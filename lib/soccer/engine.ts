@@ -14,6 +14,7 @@ import {
   predictFromGoals as predictFromGoalsCore,
   toDisplayPercents as toDisplayPercentsCore,
 } from "./engine-core.mjs";
+import { enginePickOf as enginePickOfCore } from "./predict-core.mjs";
 
 export type SoccerScore = {
   home: number;
@@ -75,3 +76,8 @@ export const toDisplayPercents: (pred: SoccerPrediction) => {
   draw: number;
   awayWin: number;
 } = toDisplayPercentsCore;
+
+/** 引擎看好哪個結果(原始機率 argmax · tie-break 主>和>客)· 卡片「上金的邊」單一真相 ·
+ *  不從展示整數%重算(避免四捨五入翻轉 → 金條與「引擎看好 X」打架)。 */
+export const enginePickOf: (pred: SoccerPrediction) => "home" | "draw" | "away" =
+  enginePickOfCore;
