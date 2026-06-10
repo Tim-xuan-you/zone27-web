@@ -28,6 +28,10 @@ type Props = {
   kickoffISO: string;
   homeName: string;
   awayName: string;
+  /** 引擎當初鎖定看好的一邊(三向 argmax)· 給「你 vs 引擎 · 對賭/同調」對照 */
+  enginePick: SoccerPick;
+  /** 引擎看好那邊的顯示名(home/away 隊名 or「和局」) */
+  engineLabel: string;
 };
 
 function fmtTaipei(iso: string): string {
@@ -53,6 +57,8 @@ export default function SoccerUserReceiptPick({
   kickoffISO,
   homeName,
   awayName,
+  enginePick,
+  engineLabel,
 }: Props) {
   const [ready, setReady] = useState(false);
   const [pick, setPick] = useState<SoccerPick | null>(null);
@@ -97,6 +103,16 @@ export default function SoccerUserReceiptPick({
           你賽前鎖了 <span className="text-gold">{teamName}</span> ·{" "}
           <span className="text-mute/80">待對帳</span>
         </p>
+        {/* 你 vs 引擎:對賭 = 「我敢跟演算法對著幹」的炫耀物(金 · 病毒槓桿)· 同調 = mute。 */}
+        {pick === enginePick ? (
+          <p className="mt-1.5 font-mono text-mute/65 text-[11px] tracking-[0.08em]">
+            跟引擎同調 · 都看好 {engineLabel}
+          </p>
+        ) : (
+          <p className="mt-1.5 font-mono text-gold/85 text-[11px] tracking-[0.08em]">
+            ▸ 你跟引擎對賭 —— 引擎偏 {engineLabel}、你押 {teamName} · 賽後見真章
+          </p>
+        )}
         {when && (
           <p className="mt-2 font-mono text-mute/70 text-[10px] tracking-[0.2em] tabular">
             鎖定於 {when} · 賽前鎖死 · 改不了 · 賽後自動揭曉命中或落空
@@ -121,11 +137,33 @@ export default function SoccerUserReceiptPick({
         你賽前押了 <span className="text-gold">{teamName}</span> ·{" "}
         <span className={markColor}>{verdictWord}</span>
       </p>
+      {/* 你 vs 引擎結果對照:你對它錯 = 你贏過引擎了(金 · 最爽的炫耀物)· 其餘含輸照誠實(mute)。 */}
+      <EngineContrast hit={hit} engineHit={enginePick === outcome} />
       {when && (
         <p className="mt-2 font-mono text-mute/70 text-[10px] tracking-[0.2em] tabular">
           鎖定於 {when} · 賽前鎖死 · 改不了
         </p>
       )}
     </div>
+  );
+}
+
+// 賽後「你 vs 引擎」四象限:你對它錯=你贏過引擎(金 · 炫耀物)· 其餘含輸照誠實(mute · 無紅綠)。
+function EngineContrast({ hit, engineHit }: { hit: boolean; engineHit: boolean }) {
+  if (hit && !engineHit) {
+    return (
+      <p className="mt-1.5 font-mono text-gold/90 text-[11px] tracking-[0.08em]">
+        ▸ 引擎沒看好你押的這邊 —— 你贏過引擎了
+      </p>
+    );
+  }
+  const text =
+    !hit && engineHit
+      ? "這場引擎看對了 · 你沒中"
+      : hit && engineHit
+        ? "你跟引擎都看好這邊 · 一起中了"
+        : "你跟引擎都看走眼了 · 含輸照留";
+  return (
+    <p className="mt-1.5 font-mono text-mute/65 text-[11px] tracking-[0.08em]">{text}</p>
   );
 }

@@ -193,6 +193,8 @@ export default function SoccerReceiptView({ r }: { r: SoccerReceipt }) {
               kickoffISO={r.kickoffISO}
               homeName={r.home}
               awayName={r.away}
+              enginePick={r.enginePick}
+              engineLabel={r.favoredLabel}
             />
           </div>
 
