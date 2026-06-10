@@ -25,7 +25,11 @@ import {
 } from "./predict-core.mjs";
 import { getNationalZh } from "./teams";
 import { getClubZh } from "./club-names";
-import { getLockedSoccerById, getSoccerFinalizedResults } from "./locked";
+import {
+  getLockedSoccerById,
+  getLockedSoccerPredictions,
+  getSoccerFinalizedResults,
+} from "./locked";
 import {
   SOCCER_COMPETITIONS as SOCCER_COMPETITIONS_CORE,
   ACTIVE_COMPETITIONS as ACTIVE_COMPETITIONS_CORE,
@@ -230,6 +234,41 @@ export async function getCompetitionPredictions(
       lockedAt: locked?.lockedAt ?? null,
     };
   });
+}
+
+/**
+ * 韌性 fallback:把「賽前鎖定檔」(lib/soccer-locked.json)裡還沒開踢的鎖定場直接當可押卡渲染。
+ * 給 /soccer 在 live API 斷線 / token 失效(getCompetitionPredictions 整片回空)時兜底 —— 板不變空白。
+ *   · 0 API · 0 secret(純讀打包進 build 的 JSON · 不依賴 FOOTBALL_DATA_API_TOKEN)。
+ *   · 只回未開踢、未結算的場(已開踢/已結算不能押 · 同站上「板只列未開賽」誠實規則)。
+ *   · 引擎線用鎖定的預期進球 λ 重現(predictFromGoals · 同站上 overlay)→ 跟賽後對帳同一個數字(零 drift)。
+ * 時鐘讀在 lib(/soccer 1h ISR · 開賽分流粒度夠用)· 不在元件 render 內讀(react-hooks/purity)。
+ */
+export function getLockedUpcomingPredictions(): SoccerMatchPrediction[] {
+  const nowMs = Date.now();
+  return getLockedSoccerPredictions()
+    .filter((p) => {
+      const t = Date.parse(p.kickoffISO ?? "");
+      return !Number.isNaN(t) && t > nowMs && p.verdict === null;
+    })
+    .sort((a, b) => (a.kickoffISO || "").localeCompare(b.kickoffISO || ""))
+    .map((p) => ({
+      id: p.matchId,
+      competitionCode: p.competitionCode,
+      competitionName: p.competitionName,
+      dateISO: p.kickoffISO,
+      // 國家隊鎖定時已存中文;俱樂部存英文 → 盡力升中文(查不到留原樣 · 同 displayName 精神)。
+      home: getClubZh(p.home) ?? p.home,
+      away: getClubZh(p.away) ?? p.away,
+      homeSeed: p.homeSeed,
+      awaySeed: p.awaySeed,
+      prediction:
+        typeof p.xgHome === "number" && typeof p.xgAway === "number"
+          ? predictFromGoals(p.xgHome, p.xgAway)
+          : predictSoccer(p.ratingHome, p.ratingAway, { homeAdvantage: p.homeAdvantage }),
+      locked: true,
+      lockedAt: p.lockedAt ?? null,
+    }));
 }
 
 /**

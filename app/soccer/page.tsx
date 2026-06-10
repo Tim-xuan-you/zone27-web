@@ -9,6 +9,7 @@ import { createPageMetadata } from "@/lib/page-og";
 import {
   ACTIVE_COMPETITIONS,
   getCompetitionPredictions,
+  getLockedUpcomingPredictions,
   getSoccerLedgerResults,
   type SoccerMatchPrediction,
 } from "@/lib/soccer/football-data";
@@ -32,13 +33,21 @@ const PER_GROUP_CAP = 12;
 
 export default async function SoccerPage() {
   // 只打 ACTIVE_COMPETITIONS(rate-limit 紀律)· 各自 graceful → 缺 token/錯誤回空。
+  // 韌性兜底來源(0 API · 純讀打包的賽前鎖定檔)· 某聯賽 live 整片空時退這個 → 板不變空白。
+  const lockedUpcoming = getLockedUpcomingPredictions();
   const groups = await Promise.all(
-    ACTIVE_COMPETITIONS.map(async (code) => ({
-      code,
-      matches: (await getCompetitionPredictions(code))
+    ACTIVE_COMPETITIONS.map(async (code) => {
+      const live = (await getCompetitionPredictions(code))
         .slice()
-        .sort((a, b) => (a.dateISO || "").localeCompare(b.dateISO || "")),
-    })),
+        .sort((a, b) => (a.dateISO || "").localeCompare(b.dateISO || ""));
+      // live 有就用 live(已含鎖定 overlay + 未鎖的 live 場 · 不雙渲染)· live 空(API 斷/token
+      // 失效)才退同聯賽的賽前鎖定場 —— 世界盃夜板絕不因一次 API 抽風變整片空白。
+      const matches =
+        live.length > 0
+          ? live
+          : lockedUpcoming.filter((p) => p.competitionCode === code);
+      return { code, matches };
+    }),
   );
   const nonEmpty = groups.filter((g) => g.matches.length > 0);
   const total = nonEmpty.reduce((s, g) => s + g.matches.length, 0);
