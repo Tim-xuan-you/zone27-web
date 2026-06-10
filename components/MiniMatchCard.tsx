@@ -337,12 +337,13 @@ function MiniPhaseBadge({
     );
   }
 
+  // 「ARCHIVED」對中文訪客讀起來像系統錯誤(不是品牌詞 · 跟 PROVED/DIVERGED 的
+  //  Z27 LEXICON 不同)→ 改白話「已結束」(plain Chinese visitor 鐵律)。
   return (
     <span
-      lang="en"
       className="px-1 py-0.5 text-[7px] tracking-[0.2em] border border-mute/60 text-mute font-mono whitespace-nowrap"
     >
-      ARCHIVED
+      已結束
     </span>
   );
 }

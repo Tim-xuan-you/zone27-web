@@ -157,14 +157,21 @@ export default function CardBetStrip({
         </p>
       )}
 
-      {/* 沒登入 → 押注要先成為免費會員(看免費 · 押要登入)*/}
+      {/* 沒登入 → 押注要先成為免費會員(看免費 · 押要登入)。 在「決策點」講清楚遊戲
+          規則:看引擎開盤免費,押一手才要登入(免費)· 賽後對帳算進你的公開戰績。
+          原本只有一顆「免費加入」鈕、沒講為什麼 = 整個產品的核心邏輯在第一眼隱形。 */}
       {status === "logged-out" && (
-        <Link
-          href={`/login?next=${encodeURIComponent(`/matches/${matchId}`)}`}
-          className="block text-center px-3 py-2.5 min-h-[40px] border border-gold/40 text-gold hover:bg-gold/10 hover:border-gold font-mono text-[10px] tracking-[0.15em] transition-colors"
-        >
-          免費加入 → 押這場
-        </Link>
+        <>
+          <p className="mb-1.5 text-center font-mono text-mute/55 text-[9px] tracking-[0.12em] leading-snug">
+            看開盤免費 · 押一手要登入(免費)· 賽後對帳進你的公開戰績
+          </p>
+          <Link
+            href={`/login?next=${encodeURIComponent(`/matches/${matchId}`)}`}
+            className="block text-center px-3 py-2.5 min-h-[40px] border border-gold/40 text-gold hover:bg-gold/10 hover:border-gold font-mono text-[10px] tracking-[0.15em] transition-colors"
+          >
+            免費加入 → 押這場
+          </Link>
+        </>
       )}
 
       {/* 已登入未押 · 一鍵押 */}
