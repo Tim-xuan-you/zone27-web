@@ -65,8 +65,9 @@ export default function SoccerBetStrip({
   useEffect(() => {
     let cancelled = false;
     (async () => {
-      // effect 內讀時鐘(house style 同 CardBetStrip)· 蓋掉 0ms timer 還沒 fire 的窗。
-      const startedNow = kickedOff || matchHasStarted(dateISO);
+      // effect 內讀時鐘(house style 同 CardBetStrip)· mount 當下 kickedOff 必為 false
+      // (timer 還沒 fire),所以不讀 kickedOff(deps 才乾淨)· 開賽中的封盤由 render displayState 算。
+      const startedNow = matchHasStarted(dateISO);
       getSoccerTally(matchId).then((t) => {
         if (!cancelled) setTally(t);
       });
@@ -96,7 +97,9 @@ export default function SoccerBetStrip({
     return () => {
       cancelled = true;
     };
-  }, [matchId, dateISO, kickedOff]);
+    // kickedOff 刻意不在依賴:開賽瞬間不重跑 loader(否則會覆蓋剛確認的 picked 卡)·
+    // 封盤改在 render 用 displayState 算。 開賽前的時鐘判斷在 effect 內讀(mount 當下)夠用。
+  }, [matchId, dateISO]);
 
   const choose = async (p: SoccerPick) => {
     if (saving) return;
@@ -140,13 +143,23 @@ export default function SoccerBetStrip({
     setSaving(false);
   };
 
+  // 開賽後封盤改「render 時算」(不再讓 loader effect 在開賽瞬間重跑覆蓋狀態 = 把剛確認的押注卡
+  // 連同信心追問打回封盤的迴歸 bug)。 🔴「已押」永遠優先:開賽不蓋掉已鎖的確認卡。
+  // open/anon + 開賽(kickedOff 由一次性 timer 翻)→ 顯示封盤;picked → 永遠顯示 picked。
+  const displayState: State =
+    state === "picked"
+      ? "picked"
+      : kickedOff && (state === "open" || state === "anon")
+        ? "started"
+        : state;
+
   return (
     <div className="mt-3 pt-2.5 border-t border-line/40">
-      {state === "loading" && (
+      {displayState === "loading" && (
         <p className="font-mono text-mute/40 text-[9px] tracking-[0.3em]">···</p>
       )}
 
-      {state === "anon" && (
+      {displayState === "anon" && (
         // 撞牆點做成「清楚可點的引導」(金框 + ≥44px 可點區)· 不照搬棒球整片實心金底
         // (一頁多張卡會壓過引擎 % 這個刻意 hero)· next 帶 #m-{matchId} → 登入後落回這張卡。
         <Link
@@ -162,19 +175,19 @@ export default function SoccerBetStrip({
         </Link>
       )}
 
-      {(state === "open" || state === "started") && (
+      {(displayState === "open" || displayState === "started") && (
         <>
           <p
             className={`font-mono text-[10px] tracking-[0.2em] mb-1.5 ${
-              state === "started" ? "text-mute/60" : "text-gold/80"
+              displayState === "started" ? "text-mute/60" : "text-gold/80"
             }`}
           >
-            {state === "started" ? "已開賽 · 封盤 · 押注賽前才收" : "你押哪邊?(押了不可改)"}
+            {displayState === "started" ? "已開賽 · 封盤 · 押注賽前才收" : "你押哪邊?(押了不可改)"}
           </p>
           <div className="flex items-stretch gap-1.5">
-            <BetBtn label={`看好 ${homeLabel.slice(0, 5)}`} disabled={state === "started" || saving} onClick={() => choose("home")} />
-            <BetBtn label="和局" disabled={state === "started" || saving} onClick={() => choose("draw")} />
-            <BetBtn label={`看好 ${awayLabel.slice(0, 5)}`} disabled={state === "started" || saving} onClick={() => choose("away")} />
+            <BetBtn label={`看好 ${homeLabel.slice(0, 5)}`} disabled={displayState === "started" || saving} onClick={() => choose("home")} />
+            <BetBtn label="和局" disabled={displayState === "started" || saving} onClick={() => choose("draw")} />
+            <BetBtn label={`看好 ${awayLabel.slice(0, 5)}`} disabled={displayState === "started" || saving} onClick={() => choose("away")} />
           </div>
           {/* 押注當下就講清楚怎麼算贏(同棒球詳情頁結算規格的精神 · 卡級一行版)·
               世界盃淘汰賽:延長賽 / PK 不影響我們開的 90 分鐘 1X2 線 → 押下前就講明。 */}
@@ -193,7 +206,7 @@ export default function SoccerBetStrip({
       {/* 押下那一刻 = 全漏斗最高張力(Kahneman peak-end + endowment)· 不再只是一行灰字。
           把它做成「迷你收據」:賽前鎖死、刪不掉、這是你帳本第一筆 → 接往你的戰績。
           守紅線:暗金、無 emoji、無動畫(用既有 enter-fade-up)。 */}
-      {state === "picked" && pick && (
+      {displayState === "picked" && pick && (
         <div className="enter-fade-up border border-gold/40 bg-gold/5 px-3 py-2.5">
           {/* 誠實:server 確認前只說「鎖定中…」· 確認後才亮「刪不掉」(樂觀 UI 不假裝已成定局)。 */}
           <p className="font-mono text-mute/55 text-[8px] tracking-[0.3em] mb-1">
@@ -235,7 +248,7 @@ export default function SoccerBetStrip({
         </div>
       )}
 
-      <CrowdLine tally={tally} homeLabel={homeLabel} awayLabel={awayLabel} state={state} />
+      <CrowdLine tally={tally} homeLabel={homeLabel} awayLabel={awayLabel} state={displayState} />
     </div>
   );
 }

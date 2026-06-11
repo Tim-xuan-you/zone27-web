@@ -44,6 +44,8 @@ export type CalibrationReport = {
   pending: number;
   /** 開賽後才押 · 不計(看得見的剔除) */
   late: number;
+  /** 平手 = push · 不計入分母(同全站 aggregateIdentity 口徑 · 棒球押 home/away 永不等於 tie) */
+  push: number;
   buckets: CalibrationBucket[];
   /** 已結算場「平均宣告把握」%（整體一句話用) */
   statedAvg: number | null;
@@ -66,6 +68,7 @@ export function computeConfidenceCalibration(
   let decided = 0;
   let pending = 0;
   let late = 0;
+  let push = 0;
   let statedSum = 0;
   let hitSum = 0;
 
@@ -73,6 +76,13 @@ export function computeConfidenceCalibration(
     const r = results[p.matchId];
     if (!r || r.result === null || r.result === "") {
       pending += 1;
+      continue;
+    }
+    // 平手 = push:全站口徑(aggregateIdentity / computeAccuracySeries)都把 tie 排除分母。
+    // 棒球押注只有 home/away(0003/0018 約束),tie 永不等於 pick → 不能當「沒中」算進去。
+    // (足球的 'draw' 是合法 pick · 不在此列 · 押和、結果和 = 真命中。)
+    if (r.result === "tie") {
+      push += 1;
       continue;
     }
     const t = Date.parse(p.ts);
@@ -114,6 +124,7 @@ export function computeConfidenceCalibration(
     decided,
     pending,
     late,
+    push,
     buckets,
     statedAvg,
     actualAvg,

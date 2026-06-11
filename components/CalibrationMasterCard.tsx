@@ -44,9 +44,12 @@ export default function CalibrationMasterCard({
   }, [results]);
 
   // 還沒抓完 / 沒填過任何把握 → 整卡隱藏(不對沒用過的人佔版面)。
+  // 只剩平手/晚押(沒已結算、也沒待結算)→ 沒東西可校準也沒東西可等 → 一樣隱藏。
   if (!ready || !report || report.total === 0) return null;
+  if (report.decided === 0 && report.pending === 0) return null;
 
-  const { decided, pending, late, buckets, statedAvg, actualAvg, verdict } = report;
+  const { decided, pending, late, push, buckets, statedAvg, actualAvg, verdict } =
+    report;
 
   return (
     <section className={wrapperClass}>
@@ -141,6 +144,7 @@ export default function CalibrationMasterCard({
               ▸ 骨白線 = 你說的把握 · 金 = 實際中的 · 兩個越貼近,你越「說幾成就真幾成」。
               {decided < 30 && <> 才 {decided} 場 · 多打幾場才更準。</>}
               {late > 0 && <> {late} 場開賽後才押 · 不計入。</>}
+              {push > 0 && <> {push} 場平手 · 不計入(同戰績口徑)。</>}
             </p>
           </>
         )}

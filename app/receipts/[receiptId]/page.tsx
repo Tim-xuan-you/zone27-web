@@ -131,13 +131,23 @@ export async function generateMetadata({
       };
     }
     // 賽前 / 已開賽待對帳 → 賽前鎖定卡(無比分判決 · 「你也想鎖一手?」轉換鉤子)。
+    // 🔴 已開賽(live)絕不標「賽前鎖定中」= 對已開踢的場說謊(對齊 OG 卡 headerTag + view pendingStatus)。
     if (sr.phase !== "settled") {
+      const live = sr.phase === "live";
       return {
-        title: `${sr.home} vs ${sr.away} · 賽前鎖定 · ZONE 27 足球收據`,
-        description: `引擎賽前鎖定看好 ${sr.favoredLabel}(${sr.favoredPct}%)· 鎖在結果還不存在的時候、改不了 · 賽後逐場對帳。你也想對著引擎的線鎖一手?`,
+        title: live
+          ? `${sr.home} vs ${sr.away} · 已開賽 · 待對帳 · ZONE 27 足球收據`
+          : `${sr.home} vs ${sr.away} · 賽前鎖定 · ZONE 27 足球收據`,
+        description: live
+          ? `引擎賽前鎖定看好 ${sr.favoredLabel}(${sr.favoredPct}%)· 賽前鎖死、已開賽 · 終場後逐場對帳 · 含贏含輸、改不了。`
+          : `引擎賽前鎖定看好 ${sr.favoredLabel}(${sr.favoredPct}%)· 鎖在結果還不存在的時候、改不了 · 賽後逐場對帳。你也想對著引擎的線鎖一手?`,
         openGraph: {
-          title: `${sr.home} vs ${sr.away} · 賽前鎖定中`,
-          description: `引擎賽前鎖定看好 ${sr.favoredLabel}(${sr.favoredPct}%)· 鎖在結果還不存在的時候、改不了。`,
+          title: live
+            ? `${sr.home} vs ${sr.away} · 待對帳`
+            : `${sr.home} vs ${sr.away} · 賽前鎖定中`,
+          description: live
+            ? `賽前鎖死 · 終場後對帳 · 含贏含輸、改不了。`
+            : `引擎賽前鎖定看好 ${sr.favoredLabel}(${sr.favoredPct}%)· 鎖在結果還不存在的時候、改不了。`,
         },
       };
     }
