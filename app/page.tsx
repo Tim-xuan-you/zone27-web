@@ -248,7 +248,7 @@ export default async function Home() {
           <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-14">
             <Link
               href="/soccer"
-              className="block bg-slate/30 border border-gold/30 hover:border-gold/60 hover:bg-slate/40 transition-colors p-4 sm:p-5 group"
+              className="block bg-slate/30 border border-gold/30 hover:border-gold/40 hover:bg-slate/40 transition-colors p-4 sm:p-5 group"
             >
               <div className="flex items-center justify-between gap-3 flex-wrap">
                 <div className="min-w-0">
@@ -368,7 +368,7 @@ function WorldCupRailCard({ m }: { m: LockedSoccerPrediction }) {
   return (
     <Link
       href={`/soccer#m-${m.matchId}`}
-      className="block bg-slate/40 border border-line/60 hover:border-gold/50 transition-colors p-4 group"
+      className="block bg-slate/40 border border-line/60 hover:border-gold/40 transition-colors p-4 group"
     >
       <div className="flex items-center justify-between gap-2 mb-2">
         <span className="font-mono text-gold/70 text-[9px] tracking-[0.3em]">世界盃</span>
@@ -446,7 +446,7 @@ function IconCard({
   return (
     <Link
       href={href}
-      className="flex flex-col items-center text-center gap-2 p-3 sm:p-5 border border-line/60 bg-slate/30 hover:border-gold/50 hover:bg-slate/40 transition-colors group"
+      className="flex flex-col items-center text-center gap-2 p-3 sm:p-5 border border-line/60 bg-slate/30 hover:border-gold/40 hover:bg-slate/40 transition-colors group"
     >
       <span className="text-gold/80 group-hover:text-gold transition-colors">
         {icon}
