@@ -152,13 +152,12 @@ export default async function SteelmanOgImage() {
           <ObjRow num="05" title="還沒上線就大談公開 · 是真誠還是公關?" />
         </div>
 
-        {/* BOTTOM · differentiator */}
+        {/* BOTTOM · differentiator
+            🔴 R223:原本 position:absolute bottom:70 · 5 條 objection 流排下來會壓到這行
+            (實機驗證:文字相疊)。 改 marginTop:auto 推到底、不被內容壓到(同 /receipts OG 房規)。 */}
         <div
           style={{
-            position: "absolute",
-            bottom: 70,
-            left: 70,
-            right: 70,
+            marginTop: "auto",
             display: "flex",
             justifyContent: "space-between",
             alignItems: "baseline",
@@ -204,16 +203,29 @@ function ObjRow({ num, title }: { num: string; title: string }) {
     >
       <span
         style={{
-          // 守紅線:落空一律用品牌 loss 柔紅(#F87171)· 不用飽和紅(避免紅綠交通燈聯想)·
-          // 同站上其餘 ✕ / 收據 OG 卡同源 · OG 卡是分享出去的可見輸出。
+          // 守紅線:落空一律用品牌 loss 柔紅(#F87171)· 不用飽和紅(避免紅綠交通燈聯想)。
+          // 🔴 OG glyph 硬化(R223):原本前綴的 ✕(U+2715)是 Dingbat,Satori 系統字缺 →
+          //   分享到 LINE/FB 的預覽卡 render 成豆腐方塊(實機驗證屬實)。 改用純 CSS 幾何方塊
+          //   (loss 色 · 0 字型依賴 · 幾何形狀是品牌允許的 emoji 例外)+ 編號 · 同 /u·soccer OG
+          //   「OG 不靠 glyph、缺字就用中文/形狀」房規。
           color: BRAND.loss,
           fontSize: 14,
-          letterSpacing: "0.3em",
+          letterSpacing: "0.2em",
           minWidth: 40,
           display: "flex",
+          alignItems: "center",
+          gap: 8,
         }}
       >
-        ✕ {num}
+        <span
+          style={{
+            width: 7,
+            height: 7,
+            background: BRAND.loss,
+            display: "flex",
+          }}
+        />
+        {num}
       </span>
       <span
         style={{

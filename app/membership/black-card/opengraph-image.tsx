@@ -183,13 +183,13 @@ export default async function BlackCardOgImage() {
           <UnlockRow label="GOLD LINE 群 read-only access" />
         </div>
 
-        {/* ── BOTTOM · differentiator punchline ──────── */}
+        {/* ── BOTTOM · differentiator punchline ──────────
+            🔴 R223:原本 position:absolute bottom:50 · 6 條 unlock 流排下來會壓到這行 punchline
+            (實機驗證:文字相疊)。 改 marginTop:auto 讓它在 flex column 內被推到底、不被內容壓到
+            (同 /receipts OG 既有房規「flow · marginTop auto · 不用 absolute 以免被內容壓到」)。 */}
         <div
           style={{
-            position: "absolute",
-            bottom: 50,
-            left: 70,
-            right: 70,
+            marginTop: "auto",
             display: "flex",
             justifyContent: "space-between",
             alignItems: "baseline",
@@ -234,16 +234,26 @@ function UnlockRow({ label }: { label: string }) {
         gap: 12,
       }}
     >
+      {/* 🔴 OG glyph 硬化(R223):原本的 ▸(U+25B8)Satori 系統字缺 → 分享卡 render 成豆腐方塊
+          (實機驗證屬實)。 改用純 CSS 金色圓點(0 字型依賴 · 幾何形狀=品牌允許例外)·
+          同 /u·soccer OG「OG 不靠 glyph」房規。 */}
       <span
         style={{
-          color: BRAND.gold,
-          fontSize: 18,
-          fontWeight: 500,
-          display: "flex",
           width: 16,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
         }}
       >
-        ▸
+        <span
+          style={{
+            width: 7,
+            height: 7,
+            borderRadius: 7,
+            background: BRAND.gold,
+            display: "flex",
+          }}
+        />
       </span>
       <span
         style={{
