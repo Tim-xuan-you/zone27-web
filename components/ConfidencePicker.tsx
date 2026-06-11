@@ -42,10 +42,17 @@ export default function ConfidencePicker({
   };
 
   if (conf !== null) {
+    // 確認 + 教「校準」是什麼(538/Metaculus 信心識讀):不是賽後看這一場準不準,
+    // 是把你所有「同把握」的場收一起,看你說的把握是不是真的(高估 = 過度自信)。
     return (
-      <p className="mt-2.5 font-mono text-gold/85 text-[10px] tracking-[0.12em]">
-        ✓ 你說 {conf / 10} 成把握 · 賽後驗你的校準準度
-      </p>
+      <div className="mt-2.5">
+        <p className="font-mono text-gold/85 text-[10px] tracking-[0.12em]">
+          ✓ 你說 {conf / 10} 成把握
+        </p>
+        <p className="mt-1 font-mono text-mute/55 text-[9px] tracking-[0.1em] leading-relaxed">
+          賽後跟你其他「{conf / 10} 成」的場一起對 —— 看你是真的 {conf / 10} 成、還是高估了。
+        </p>
+      </div>
     );
   }
 
@@ -67,6 +74,10 @@ export default function ConfidencePicker({
           </button>
         ))}
       </div>
+      {/* 把握尺的兩端講白話(新手不知道為何從 5 成起跳)= 信心識讀 · 賽後一場場誠實對帳。 */}
+      <p className="mt-1.5 font-mono text-mute/45 text-[9px] tracking-[0.12em] leading-relaxed">
+        5 成 = 跟丟銅板一樣沒把握 · 9 成 = 幾乎篤定。
+      </p>
       {err && (
         <p className="mt-1 font-mono text-loss/75 text-[9px] tracking-[0.15em]">
           沒記下 · 再點一次
