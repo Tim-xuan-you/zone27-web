@@ -39,6 +39,7 @@ import MyCreatorPanel from "@/components/MyCreatorPanel";
 import MyActivityPanel from "@/components/MyActivityPanel";
 import { getMyPurchases, getMyComments } from "@/lib/creator-activity-server";
 import DisplayNameSetting from "@/components/DisplayNameSetting";
+import { hasMonthActivity, monthLabel } from "@/lib/season-recap";
 import { SUPPORT_EMAIL } from "@/lib/brand-constants";
 import { readDisplayName, getTeamCrest } from "@/lib/identity";
 import { getMlbAsMatches, getMlbLockedMatches } from "@/lib/mlb-matches";
@@ -103,6 +104,16 @@ export default async function MemberPage() {
             >
               登入 / 註冊 →
             </Link>
+            {/* 冷訪客的「先搞懂再登入」軟入口 · /learn 本來只在 ⌘K 找得到(R220 稽核)。 */}
+            <p className="mt-5 font-mono text-mute/60 text-[10px] tracking-[0.2em] leading-relaxed">
+              第一次來?{" "}
+              <Link
+                href="/learn"
+                className="text-gold/75 hover:text-gold underline-offset-4 hover:underline transition-colors"
+              >
+                5 分鐘看懂這在玩什麼 →
+              </Link>
+            </p>
           </section>
         </main>
         <Footer />
@@ -176,6 +187,10 @@ export default async function MemberPage() {
   // 「今天」焦點條的日期短標(台北 "YYYY-MM-DD" → "M/D")· 每日變 = 儀式的「活」感。
   const [, todayMM, todayDD] = todayTaipei.split("-");
   const todayLabel = `${Number(todayMM)}/${Number(todayDD)}`;
+  // 本月賽季回顧入口:把已建好、卻只在 /u 連得到的月度回顧接到會員頁 · 有本月(棒球)押注才連
+  //(避免連到空回顧)· 足球-only 的人仍從 /u 進得去(graceful · 不誤導)。
+  const currentMonth = getCurrentTaipeiMonthKey();
+  const hasSeasonActivity = hasMonthActivity(predictionsMap, [], currentMonth);
 
   // 校準大師(R217 · 你說的把握 vs 實際中的)· 跨運動賽果輸入(同一真相):
   // 棒球用永久鎖定源的 finalWinner(idMatches 已含 CPBL+MLB+locked)· 足球用 outcome。
@@ -364,6 +379,22 @@ export default async function MemberPage() {
             (預設匿名球迷#碼 · 設了顯示名才露名)。 接在榮譽牆後 = 賺來的地位 → 拿去公開驗證。
             R204:從一行小字升成「連結 + 一鍵複製」卡(轉換審 P1:核心 costly-signal 入口太隱)。 */}
         <ProfileShareCard code={authorCode} />
+
+        {/* 本月賽季回顧入口(R220 稽核:已建好但只在 /u 連得到 → 接到會員頁)· 有本月押注才連 ·
+            同「看收藏」列樣式(不新增大卡 · 守會員頁極簡)。 */}
+        {hasSeasonActivity && (
+          <Link
+            href={`/u/${authorCode}/season/${currentMonth}`}
+            className="mt-6 flex items-baseline justify-between gap-3 border-b border-line/40 pb-3 hover:border-gold/40 transition-colors group"
+          >
+            <span className="text-mute text-sm leading-snug">
+              <span className="text-bone">{monthLabel(currentMonth)}的回顧</span> · 這個月你押了什麼、準不準 · 一張可外傳的月度收據
+            </span>
+            <span className="shrink-0 font-mono text-gold/70 group-hover:text-gold text-[10px] tracking-[0.3em] transition-colors">
+              看回顧 →
+            </span>
+          </Link>
+        )}
 
         {/* 升級入口 · 路要看得見(Apple:付費路徑永遠不藏)· 但這是會員自己的介面 ·
             不對他推銷、不打「賺錢」· 接著上面的榮譽牆 → 用「身分/地位」當主軸(paid=身分
