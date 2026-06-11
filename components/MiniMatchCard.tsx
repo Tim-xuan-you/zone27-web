@@ -228,6 +228,7 @@ export default function MiniMatchCard({
           homeName={match.home.name}
           awayName={match.away.name}
           startISO={getMatchStartIso(match)}
+          engineHomePct={match.home.winRate}
         />
       )}
 

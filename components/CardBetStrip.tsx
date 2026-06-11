@@ -33,6 +33,8 @@ type Props = {
   awayName: string;
   /** 開賽 instant ISO · 開賽後封盤(先鎖後結 · 防賽後補登)· 缺則 fail-open */
   startISO?: string | null;
+  /** 引擎開盤的主隊勝率 % · 給「引擎 vs 群眾共識線」對照(Polymarket 招牌)· 缺則不顯示對照 */
+  engineHomePct?: number;
 };
 
 type Status = "loading" | "logged-out" | "open" | "locked" | "closed";
@@ -42,6 +44,7 @@ export default function CardBetStrip({
   homeName,
   awayName,
   startISO,
+  engineHomePct,
 }: Props) {
   const [status, setStatus] = useState<Status>("loading");
   const [myPick, setMyPick] = useState<"home" | "away" | null>(null);
@@ -152,6 +155,25 @@ export default function CardBetStrip({
             goldSide="home"
             variant="crowd"
           />
+          {/* 引擎 vs 群眾共識線(Polymarket 招牌)· 哪裡群眾跟模型不同調 = 最有看頭的訊號。
+              🔴 純資訊、不喊押(誠實:我們秀差距,不叫你跟單)· graceful:engineHomePct 缺 → 不顯示。
+              已在「滿 CROWD_LINE_MIN 人」的 block 內 → 0/小樣本自動躲(不拿幾個人假裝共識)。 */}
+          {typeof engineHomePct === "number" &&
+            (() => {
+              const d = tally.homePct! - engineHomePct;
+              const same = Math.abs(d) < 3;
+              return (
+                <p className="mt-1 font-mono text-mute/60 text-[9px] tracking-[0.12em] tabular leading-snug">
+                  引擎 <span className="text-gold/80">{engineHomePct}%</span> · 群眾{" "}
+                  <span className="text-bone/80">{tally.homePct}%</span>
+                  {same
+                    ? " · 群眾與引擎同調"
+                    : d > 0
+                      ? ` · 群眾更看好 ${homeName.slice(0, 4)}（+${d}）`
+                      : ` · 群眾更看好 ${awayName.slice(0, 4)}（+${-d}）`}
+                </p>
+              );
+            })()}
         </div>
       )}
 
