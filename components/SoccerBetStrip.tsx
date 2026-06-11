@@ -8,11 +8,13 @@ import {
   getMySoccerPrediction,
   getSoccerTally,
   submitSoccerPrediction,
+  setSoccerConfidence,
   crowdPercents,
   SOCCER_CROWD_MIN,
   type SoccerPick,
   type SoccerTally,
 } from "@/lib/soccer/predictions";
+import ConfidencePicker from "@/components/ConfidencePicker";
 
 // ── ZONE 27 · 足球三向押注條 ──────────────────────────────
 // 主勝 / 和 / 客勝。 押了不可改(先鎖後結)· 登入才能押(R188)· 開賽後鎖手。
@@ -45,6 +47,8 @@ export default function SoccerBetStrip({
   // 只說「鎖定中…」不假裝刪不掉;確認後才亮「✓ 賽前鎖定 · 刪不掉」+ 收據連結。 失敗回滾 + 一行輕提示。
   const [pending, setPending] = useState(false);
   const [errMsg, setErrMsg] = useState<string | null>(null);
+  // 信心值只在「剛押完這一刻」追問(declare conviction at lock time · reload 不再問)。
+  const [justPicked, setJustPicked] = useState(false);
 
   // 開賽瞬間自動鎖手(即使分頁一直開著沒重整)· 只對 24h 內的場設「一次性」timer(不輪詢 ·
   // 省資源)。 已開賽的場走 0ms timer(setState 只在 timer callback 裡 · 不在 render/effect
@@ -113,6 +117,7 @@ export default function SoccerBetStrip({
     const res = await submitSoccerPrediction(matchId, p);
     if (res.ok) {
       setPending(false); // server 確認 → 才亮「刪不掉」+ 收據連結
+      setJustPicked(true); // 剛押完 → 追問「幾成把握」(校準大師)
       getSoccerTally(matchId).then(setTally);
     } else if (res.reason === "already_predicted") {
       // 已存在(冪等)→ 以 server 那筆為準(可能跟樂觀的不同 · 雖 UI 已擋重複)。
@@ -197,6 +202,10 @@ export default function SoccerBetStrip({
           <p className="text-gold text-sm sm:text-base font-light tracking-tight leading-none">
             你押了 {pick === "home" ? homeLabel : pick === "away" ? awayLabel : "和局"}
           </p>
+          {/* 校準大師:押完那刻追問「幾成把握」(只此刻問 · server 確認後 · declare-at-lock)。 */}
+          {!pending && justPicked && (
+            <ConfidencePicker matchId={matchId} submit={setSoccerConfidence} />
+          )}
           {/* 收據連結 / 帳本連結等 server 確認後才出(收據島讀的是 server 那筆 · 未存前出來會空)。 */}
           {!pending && (
             <>

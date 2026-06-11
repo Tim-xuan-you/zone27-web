@@ -214,6 +214,24 @@ export function gradeSoccerPicks(
   };
 }
 
+/** 賽前宣告「我幾成把握」(校準大師 · 0021)· 一次性(server 端已設過不覆蓋)· 失敗 graceful。
+ *  跟 submit_prediction 分開的 RPC(set_prediction_confidence)→ 對既有押注路徑零風險。 */
+export async function setSoccerConfidence(
+  matchId: string,
+  confidence: number,
+): Promise<boolean> {
+  try {
+    const supabase = createSupabaseBrowserClient();
+    const { error } = await supabase.rpc("set_prediction_confidence", {
+      p_match_id: matchId,
+      p_confidence: confidence,
+    });
+    return !error;
+  } catch {
+    return false;
+  }
+}
+
 export type SoccerSubmitResult =
   | { ok: true; pick: SoccerPick }
   | { ok: false; reason: "not_logged_in" | "already_predicted" | "invalid" | "error" };
