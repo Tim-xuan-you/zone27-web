@@ -27,6 +27,8 @@ import ExportLedgerButton from "@/components/ExportLedgerButton";
 import HonorWall from "@/components/HonorWall";
 import ProfileShareCard from "@/components/ProfileShareCard";
 import SoccerRecordCard from "@/components/SoccerRecordCard";
+import CalibrationMasterCard from "@/components/CalibrationMasterCard";
+import type { CalibrationResult } from "@/lib/calibration-master";
 import { getSoccerLedgerResults } from "@/lib/soccer/football-data";
 import { getSoccerEnginePicks } from "@/lib/soccer/locked";
 import { readTier, isPaid, creatorTakePct, tierLabel } from "@/lib/tier";
@@ -158,6 +160,17 @@ export default async function MemberPage() {
   // 對帳紀律 streak(soul-roadmap #2)· 連續性按「下注日」的台北日曆日算(見
   // aggregateStreak 註解:下注日 ≠ 比賽日 · 衡量你哪幾天回來面對帳本)。
   const streak = aggregateStreak(predictionsMap, getTodayTaipei());
+
+  // 校準大師(R217 · 你說的把握 vs 實際中的)· 跨運動賽果輸入(同一真相):
+  // 棒球用永久鎖定源的 finalWinner(idMatches 已含 CPBL+MLB+locked)· 足球用 outcome。
+  // CalibrationMasterCard client 端讀本人 confidence 押注 · 先鎖後結用 startISO 過濾。
+  const calibrationResults: Record<string, CalibrationResult> = {};
+  for (const m of idMatches) {
+    calibrationResults[m.id] = { result: m.finalWinner, startISO: m.startISO ?? "" };
+  }
+  for (const r of soccerResults) {
+    calibrationResults[r.matchId] = { result: r.outcome, startISO: r.kickoffISO };
+  }
 
   // 你的東西(soul · Tim 2026-06-05 dogfood:買過的分析 / 回過的留言找不回去)·
   // server-side 撈本人活動 + 用 allWithMlb 解析隊名(不把賽程 lookup 送前端)·
@@ -291,6 +304,9 @@ export default async function MemberPage() {
           enginePicks={soccerEnginePicks}
           wrapperClass="mt-6"
         />
+
+        {/* 校準大師(R217)· 你說的把握 vs 實際中的 · 沒填過把握自動隱藏(守極簡)*/}
+        <CalibrationMasterCard results={calibrationResults} wrapperClass="mt-6" />
 
         {/* 3 · 你的榮譽牆(soul-roadmap #5 · 「靠誠實賺來的地位」三樓第一塊)· 章全部
             從含輸帳本自動算 · 報馬仔掛不出 · Apple 紀律只放 5 個 · 框 mute 不搶校準卡主角。 */}

@@ -147,6 +147,44 @@ export async function setPredictionConfidence(
   }
 }
 
+export type CalibrationPickRow = {
+  matchId: string;
+  pick: string;
+  confidence: number;
+  ts: string;
+};
+
+/** 本人所有「有填把握」的押注(跨運動 · 校準大師資料源)· anon/錯 → 空。
+ *  走 0021 的 get_my_calibration_picks(只回有 confidence 的列)。 */
+export async function getMyCalibrationPicks(): Promise<CalibrationPickRow[]> {
+  try {
+    const supabase = createSupabaseBrowserClient();
+    const { data, error } = await supabase.rpc("get_my_calibration_picks");
+    if (error || !Array.isArray(data)) return [];
+    const out: CalibrationPickRow[] = [];
+    for (const row of data as {
+      match_id?: unknown;
+      pick?: unknown;
+      confidence?: unknown;
+      created_at?: unknown;
+    }[]) {
+      const matchId = typeof row.match_id === "string" ? row.match_id : "";
+      const pick = typeof row.pick === "string" ? row.pick : "";
+      const confidence = Number(row.confidence);
+      if (!matchId || !pick || !Number.isFinite(confidence)) continue;
+      out.push({
+        matchId,
+        pick,
+        confidence,
+        ts: typeof row.created_at === "string" ? row.created_at : "",
+      });
+    }
+    return out;
+  } catch {
+    return [];
+  }
+}
+
 /** Enter the market: submit a pick (logged-in). One per match · immutable
  *  (server-enforced). */
 export async function submitPrediction(
