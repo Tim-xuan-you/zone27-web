@@ -615,6 +615,47 @@ function ReliabilityDiagram({
           </text>
         </svg>
       </div>
+
+      {/* ── 白話判決層(538「Checking Our Work」caption · R222)─────────────────
+          散點圖只有座標軸 + 金點,賭徒(非分析師)讀不出本頁 hero 問的那句
+          「引擎說 70% 的時候、實際贏多少?」。 這層用「一句一桶」的白話直接回答 ——
+          引擎喊幾成看好、那幾場真的中幾成。 把校準護城河從統計層降到情緒層。
+          🔴 誠實:每行掛場數(讀者自己判斷樣本大小)+ 沿用 N<30 caveat · 不下精確結論 ·
+          純白話不出現 Brier / 校準 等術語 · 無紅綠(實際命中率一律金)。 */}
+      {n > 0 && bins.length > 0 && (
+        <div className="mt-5 pt-5 border-t border-line/40">
+          <p className="font-mono text-gold/80 text-[10px] tracking-[0.3em] mb-3">
+            / 白話講 · 喊幾成、真的中幾成
+          </p>
+          <ul className="space-y-1.5">
+            {bins.map((b) => {
+              const low = Math.max(0, b.centerPct - 5);
+              const high = Math.min(100, b.centerPct + 5);
+              return (
+                <li
+                  key={b.centerPct}
+                  className="text-mute text-[13px] sm:text-sm leading-relaxed"
+                >
+                  引擎喊{" "}
+                  <span className="font-mono tabular text-bone">
+                    {low}–{high}%
+                  </span>{" "}
+                  看好的那 <span className="font-mono tabular text-bone">{b.count}</span> 場
+                  —— 真的中了{" "}
+                  <span className="font-mono tabular text-gold">
+                    {Math.round(b.favoriteActualPct)}%
+                  </span>
+                  。
+                </li>
+              );
+            })}
+          </ul>
+          <p className="mt-3 font-mono text-mute/55 text-[9px] tracking-[0.15em] leading-relaxed">
+            ▸ 「喊幾成」越貼近「中幾成」· 引擎就越誠實 —— 這正是上面那條金色斜線的意思。
+            {n < 30 && <> 目前才 {n} 場 · 還看不出穩定名堂,多打幾場才算數。</>}
+          </p>
+        </div>
+      )}
     </div>
   );
 }
