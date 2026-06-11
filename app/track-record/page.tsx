@@ -137,9 +137,19 @@ export default function TrackRecordPage() {
 
       {/* LEDGER · 含輸帳本(跨聯盟 · 新→舊 · 不刪不修飾) */}
       <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-16">
-        <p lang="en" className="font-mono text-gold/70 text-[10px] tracking-[0.35em] mb-8">
+        <p lang="en" className="font-mono text-gold/70 text-[10px] tracking-[0.35em] mb-3">
           / LEDGER · NEWEST FIRST · 不刪不修飾
         </p>
+        {/* 護城河一句話:對手公開「一個數字」· 我們公開「每一筆」(不指名 · 用行為類別)。
+            只在帳本非空時掛 —— 不在空表上喊「每一筆」(誠實先於文案)。 */}
+        {finalized.length > 0 && (
+          <p className="mb-8 text-mute/85 text-sm leading-relaxed max-w-2xl">
+            賣明牌的站只給你<span className="text-bone">一個數字</span> —— 自己挑窗、輸的刪掉的「勝率」。
+            這裡是<span className="text-gold">每一筆</span>:每一場賽前公開的引擎預測、賽後實際結果,
+            連沒中的都排在下面。 一個數字誰都喊得出口;
+            <span className="text-bone">每一筆攤開,只有不怕被驗的人做得到</span>。
+          </p>
+        )}
         {finalized.length === 0 ? (
           <div className="border border-dashed border-gold/30 bg-slate/30 p-10 text-center">
             <p className="text-mute text-sm leading-relaxed max-w-md mx-auto">
