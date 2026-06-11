@@ -3,8 +3,10 @@ import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import YourRecordStrip from "@/components/YourRecordStrip";
 import SportToggle from "@/components/SportToggle";
+import LadderBoard from "@/components/LadderBoard";
 import { getFinalizedMatches, getMatchStartIso } from "@/lib/matches";
 import { getMlbFinalizedResults } from "@/lib/mlb-matches";
+import { getLadderBoard } from "@/lib/ladder-server";
 import { createPageMetadata } from "@/lib/page-og";
 
 export const metadata = createPageMetadata({
@@ -18,7 +20,7 @@ export const metadata = createPageMetadata({
 // 從 ~540 行(三個聲音卡 / 王座戰績卡 / 5 條規則 / FounderSignOff / 雙 CTA)
 // 砍成 3 段:這是什麼 → 5 階怎麼爬 → 去押。 每階一句白話 · 不囉嗦。
 // ─────────────────────────────────────────────────────
-export const revalidate = 86400;
+export const revalidate = 3600; // 海選榜每小時更新一次(賽果結算後不必等一天才反映)
 
 // 5 階 · 由低到高 · 每階一句國中生看得懂的話
 const TIERS = [
@@ -41,6 +43,10 @@ export default async function LadderPage() {
     })),
     ...(await getMlbFinalizedResults()),
   ];
+
+  // 海選天梯榜(跨用戶 · 誰比機器準)· 合格用戶不足 → board.show=false → 自動不渲染
+  // (維持「王座上只有機器」優雅空榜 · 0 用戶不上空榜的紅線)。 graceful:未套 0022 / 0 資料 → 空榜。
+  const board = await getLadderBoard();
 
   return (
     <div className="flex flex-col flex-1 min-h-screen">
@@ -71,6 +77,9 @@ export default async function LadderPage() {
             越證明這套是玩真的。
           </p>
         </div>
+
+        {/* 海選榜(跨用戶 · 誰比機器準)· 合格用戶不足時自動不出現(維持下方「王座只有機器」)。 */}
+        <LadderBoard board={board} />
 
         {/* 你現在的位置 · 棒球 / 足球 分開算(三本帳不混池)· 同一套天梯規則套兩運動 ·
             等寬切換 = 不凌亂(各占整塊不堆疊)· 足球 0 結算 → 設計過的「即將開始」不是空卡。
@@ -179,17 +188,30 @@ export default async function LadderPage() {
 
         {/* ── 王座狀態 + 去押 ──────────────────── */}
         <div className="mt-10 border-t border-line/40 pt-8">
-          <p className="text-bone text-base leading-relaxed mb-1">
-            現在 · 王座上只有機器。
-          </p>
-          <p className="text-mute text-sm leading-relaxed mb-6">
-            第一個贏過它的人類,還沒出現。 換你了。
-          </p>
+          {board.show ? (
+            <>
+              <p className="text-bone text-base leading-relaxed mb-1">
+                榜上有人了 —— 換你擠上去。
+              </p>
+              <p className="text-mute text-sm leading-relaxed mb-6">
+                押滿 10 場、那個月還贏過引擎,你也會出現在上面。 含贏含輸、刪不掉。
+              </p>
+            </>
+          ) : (
+            <>
+              <p className="text-bone text-base leading-relaxed mb-1">
+                現在 · 王座上只有機器。
+              </p>
+              <p className="text-mute text-sm leading-relaxed mb-6">
+                第一個贏過它的人類,還沒出現。 換你了。
+              </p>
+            </>
+          )}
           <Link
             href="/matches"
             className="inline-block px-7 py-3 bg-gold text-navy font-mono text-xs tracking-[0.3em] hover:bg-gold-soft transition-colors"
           >
-            去押第一注 →
+            {board.show ? "去押 · 擠上榜 →" : "去押第一注 →"}
           </Link>
         </div>
       </main>
