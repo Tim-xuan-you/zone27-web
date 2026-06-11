@@ -23,6 +23,7 @@ import { getSoccerEnginePicks } from "@/lib/soccer/locked";
 import { createPageMetadata } from "@/lib/page-og";
 import { normalizeProfileCode } from "@/lib/profile-code";
 import { buildSettledCards, computeTrophies } from "@/lib/trophies";
+import { hasMonthActivity, monthLabel } from "@/lib/season-recap";
 
 // ── ZONE 27 · /u/[code] · 公開含輸 Profile(soul-roadmap P0 keystone)────────
 // 任何人(免登入)用永久碼看一位會員攤開、刪不掉、含贏含輸的押注帳本。
@@ -82,7 +83,10 @@ export default async function PublicProfilePage({
     engineFav: getEngineFavorite(m),
     startISO: getMatchStartIso(m),
   }));
-  const identity = aggregateIdentity(baseball, idMatches, getCurrentTaipeiMonthKey());
+  const currentMonth = getCurrentTaipeiMonthKey();
+  const identity = aggregateIdentity(baseball, idMatches, currentMonth);
+  // 本月賽季回顧入口:有本月押注才連(避免連到空回顧)· R218。
+  const hasSeasonActivity = hasMonthActivity(baseball, soccer, currentMonth);
   const streak = aggregateStreak(baseball, getTodayTaipei());
   // 準度歷程 sparkline(這份帳本 · 按比賽日累計 · 場數夠多才畫 · 同 /member)。
   const accuracySeries = computeAccuracySeries(baseball, idMatches);
@@ -110,6 +114,9 @@ export default async function PublicProfilePage({
           soccer={soccerRecord}
           series={accuracySeries}
           trophies={trophies}
+          seasonPeriod={currentMonth}
+          seasonLabel={monthLabel(currentMonth)}
+          hasSeasonActivity={hasSeasonActivity}
         />
       </main>
       <Footer />

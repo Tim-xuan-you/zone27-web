@@ -42,6 +42,12 @@ type Props = {
   series?: AccuracyPoint[];
   /** 戰功卡(已結算的每一手 · 連單場收據)· 把數字背後的「實物證物」攤給懷疑者看 */
   trophies?: Trophy[];
+  /** 本月賽季回顧入口(R218 · 有本月押注才連 · 避免連到空回顧)· "2026-06" */
+  seasonPeriod?: string;
+  /** 本月顯示標「2026 年 6 月」· 配 seasonPeriod */
+  seasonLabel?: string;
+  /** 本月有沒有任何押注(false → 不顯示回顧入口) */
+  hasSeasonActivity?: boolean;
 };
 
 // 一句話總結這份帳本的站位 · 第三人稱(主詞 = 帳本)· 誠實雙向(贏照講、輸也照講)。
@@ -57,7 +63,7 @@ function standingVerdict(id: CalibrationIdentity): string {
   return `${coin},但還沒贏過引擎。`;
 }
 
-export default function ProfileView({ profile, identity: id, streak, soccer, series, trophies }: Props) {
+export default function ProfileView({ profile, identity: id, streak, soccer, series, trophies, seasonPeriod, seasonLabel, hasSeasonActivity }: Props) {
   // 身分解析(同創作者署名 · 顯示名 or 球迷#碼 + 永久碼 chip + 頭像 seed/glyph)。
   const who = creatorIdentity({
     handle: profile.handle,
@@ -274,6 +280,19 @@ export default function ProfileView({ profile, identity: id, streak, soccer, ser
           </Link>
         </p>
       </section>
+
+      {/* 本月賽季回顧入口(R218 · 有本月押注才連 · 避免連到空回顧)· 子路由 /season/[期] ·
+          公開檔是全期證物 · 回顧是單月故事(高光 + 一筆誠實失手 + 紀律天數)。 */}
+      {hasSeasonActivity && seasonPeriod && (
+        <section className="mt-5">
+          <Link
+            href={`/u/${profile.authorCode}/season/${seasonPeriod}`}
+            className="inline-flex items-center font-mono text-gold/75 hover:text-gold text-[11px] tracking-[0.15em] underline-offset-4 hover:underline transition-colors"
+          >
+            看 {seasonLabel ?? "本月"} 回顧 · 這個月的故事 →
+          </Link>
+        </section>
+      )}
 
       {/* ── 榮譽牆(第三人稱 public 視角)· 章全部從含輸帳本自動算 ─────────── */}
       <HonorWall identity={id} streak={streak} subject="public" />
