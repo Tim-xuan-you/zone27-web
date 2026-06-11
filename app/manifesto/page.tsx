@@ -7,6 +7,7 @@ import RelatedReading from "@/components/RelatedReading";
 import ArticleMeta from "@/components/ArticleMeta";
 import VsRowFold from "@/components/VsRowFold";
 import { createPageMetadata } from "@/lib/page-og";
+import { PRODUCT_VERSION } from "@/lib/build-meta";
 
 // R159 W1.L1 · Agent L CRITICAL · backfill createPageMetadata · /manifesto
 // 是 canonical brand IP page · per /audit S05 PRE-COMMIT · share preview 必須
@@ -42,7 +43,7 @@ export const metadata: Metadata = createPageMetadata({
 // ─────────────────────────────────────────────────────
 
 const MANIFESTO_DATE = "2026-05-21";
-const MANIFESTO_VERSION = "v0.28";
+const MANIFESTO_VERSION = PRODUCT_VERSION;
 
 export default function ManifestoPage() {
   return (

@@ -27,7 +27,7 @@ export type SoccerCalibrationBin = {
  *  n≠0,害足球側顯示空圖而不是「已鎖未結算」frame。 */
 export function getSoccerGradedCount(): number {
   return getLockedSoccerPredictions().filter(
-    (p) => p.outcome !== null && p.verdict !== null
+    (p) => p.outcome !== null && p.verdict !== null && p.verdict !== "push"
   ).length;
 }
 
@@ -42,6 +42,7 @@ export function computeSoccerBins(): SoccerCalibrationBin[] {
 
   for (const p of getLockedSoccerPredictions()) {
     if (p.outcome === null || p.verdict === null) continue; // 未結算 · 略過
+    if (p.verdict === "push") continue; // 三向平手無偏向 · 不進分母(同 SoccerEngineRecord · 全站「push 不算」口徑)
     // 三向市場:favorite = 引擎開盤機率最高的那一邊(常落在 35-55% · 不套棒球二元
     // 的「>50 才算 favorite」· 否則三向的方向性判斷會被整批丟掉)。 校準問的是
     // 「引擎說最高那邊 X% · 真的中 X% 嗎」· 對任何信心水平都成立。

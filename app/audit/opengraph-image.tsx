@@ -1,5 +1,6 @@
 import { ImageResponse } from "next/og";
 import { BRAND, OG_SIZE, OG_CONTENT_TYPE } from "@/lib/brand";
+import { PRODUCT_VERSION } from "@/lib/build-meta";
 
 // ── ZONE 27 · /audit Dynamic OG ─────────────────────────
 // 當有人把 https://zone27-web.vercel.app/audit 貼到 LINE / FB / Discord,
@@ -15,7 +16,7 @@ import { BRAND, OG_SIZE, OG_CONTENT_TYPE } from "@/lib/brand";
 
 export const size = OG_SIZE;
 export const contentType = OG_CONTENT_TYPE;
-export const alt = "ZONE 27 · Model Report v0.28 · Engine v0.2";
+export const alt = `ZONE 27 · Model Report ${PRODUCT_VERSION} · Engine v0.2`;
 
 export default async function AuditOgImage() {
   return new ImageResponse(
@@ -72,7 +73,7 @@ export default async function AuditOgImage() {
               display: "flex",
             }}
           >
-            MODEL REPORT · v0.28
+            MODEL REPORT · {PRODUCT_VERSION}
           </span>
         </div>
 
@@ -106,7 +107,7 @@ export default async function AuditOgImage() {
               display: "flex",
             }}
           >
-            v0.28
+            {PRODUCT_VERSION}
           </span>
           <span
             style={{

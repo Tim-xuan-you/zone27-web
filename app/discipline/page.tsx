@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import CopyLinkButton from "@/components/CopyLinkButton";
 import RelatedReading from "@/components/RelatedReading";
 import ArticleMeta from "@/components/ArticleMeta";
+import { PRODUCT_VERSION } from "@/lib/build-meta";
 
 export const metadata: Metadata = {
   title: "鐵律 · Operating Discipline · Buffett · Musk · Costco · Jobs",
@@ -29,7 +30,7 @@ export const metadata: Metadata = {
 //     aspiration / fanboy / corporate worship
 // ─────────────────────────────────────────────────────
 
-const PAGE_VERSION = "v0.28";
+const PAGE_VERSION = PRODUCT_VERSION;
 const PAGE_DATE = "2026-05-21";
 
 export default function DisciplinePage() {

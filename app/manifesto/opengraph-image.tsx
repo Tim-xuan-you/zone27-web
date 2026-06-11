@@ -1,5 +1,6 @@
 import { ImageResponse } from "next/og";
 import { BRAND, OG_SIZE, OG_CONTENT_TYPE } from "@/lib/brand";
+import { PRODUCT_VERSION } from "@/lib/build-meta";
 
 // ── ZONE 27 · /manifesto Dynamic OG ─────────────────────
 // When someone shares https://zone27-web.vercel.app/manifesto in LINE
@@ -72,7 +73,7 @@ export default async function ManifestoOgImage() {
               display: "flex",
             }}
           >
-            MANIFESTO · v0.28
+            MANIFESTO · {PRODUCT_VERSION}
           </span>
         </div>
 

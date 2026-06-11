@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { PRODUCT_VERSION } from "@/lib/build-meta";
 
 // ── Footer · R181 大砍(Tim canary 4「footer 亂七八糟 · 有人要看這一堆東西?」)──
 // 砍掉:中英雙語重複(FUNDED BY GOLD…)· 錯誤宣稱「不收下注佣 · NO
@@ -151,7 +152,7 @@ export default function Footer() {
               title="完整版本歷史 · GitHub commits"
             >
               <span className="w-1.5 h-1.5 rounded-full bg-gold/70" />
-              v0.29 · {getTaipeiTodayChip()} TPE
+              {PRODUCT_VERSION} · {getTaipeiTodayChip()} TPE
             </a>
           </div>
         </div>

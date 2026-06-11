@@ -18,8 +18,9 @@
   --zone-gold-light: #F0E3B8;   /* 亮金(鑄印窄高光帶 · 車削反光) */
   --zone-bone: #F5F2EA;         /* 骨白(主文字) */
   --zone-mute: #8A93A8;         /* 灰藍(次要文字) */
-  --zone-win: #4ADE80;          /* 勝(綠) */
-  --zone-loss: #F87171;         /* 負(紅) */
+  /* 勝色(綠)刻意「不定義」—— 暗金品牌無紅綠對比 · 落空一律用 --zone-loss 柔紅 ·
+     別新增綠色 token(紅線:無紅綠)。 */
+  --zone-loss: #F87171;         /* 負(柔紅 · 唯一冷暖訊號色) */
 
   --background: var(--zone-navy);
   --foreground: var(--zone-bone);
@@ -61,7 +62,6 @@
   --color-gold-soft: var(--zone-gold-soft);
   --color-bone: var(--zone-bone);
   --color-mute: var(--zone-mute);
-  --color-win: var(--zone-win);
   --color-loss: var(--zone-loss);
 
   /* R108 W4 · color-mix() oklab interpolation palette · Chrome 111+ /

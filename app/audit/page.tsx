@@ -10,11 +10,12 @@ import ArticleMeta from "@/components/ArticleMeta";
 import ReadingProgress from "@/components/ReadingProgress";
 import ReproducibilityReceipt from "@/components/ReproducibilityReceipt";
 import LocalStorageReceipt from "@/components/LocalStorageReceipt";
-import { matches, getFinalizedMatches } from "@/lib/matches";
+import { matches, getFinalizedMatches, getTrackRecordStats } from "@/lib/matches";
 import {
   COMMIT_SHA,
   COMMIT_PERMALINK,
   DEPLOYED_AT,
+  PRODUCT_VERSION,
 } from "@/lib/build-meta";
 import { createPageMetadata } from "@/lib/page-og";
 
@@ -56,6 +57,9 @@ export default function AuditPage() {
   // number /track-record reads · they can't drift.
   const ingestedCount = matches.length;
   const finalizedCount = getFinalizedMatches().length;
+  // 同 /track-record 讀的那支函式 —— /audit 的 PROVED/DIVERGED 數字跟公開戰績逐字同源,
+  // 物理上不可能各說各話(這頁的整個命門就是「數字不會漂移」)。
+  const trackStats = getTrackRecordStats();
   const sampleSize =
     finalizedCount === 0
       ? `n = 0 · ${ingestedCount} ingested · 等第一筆收錄`
@@ -77,7 +81,7 @@ export default function AuditPage() {
             className="print-only mb-6 pb-3 border-b border-line/60 font-mono text-[10px] uppercase tracking-[0.2em]"
           >
             <div className="flex justify-between gap-4">
-              <span>ZONE 27 — MODEL REPORT v0.28</span>
+              <span>ZONE 27 — MODEL REPORT {PRODUCT_VERSION}</span>
               <span>
                 PRINTED · zone27-web.vercel.app/audit
               </span>
@@ -97,7 +101,7 @@ export default function AuditPage() {
                 lang="en"
                 className="font-mono text-mute text-[10px] tracking-[0.35em] tabular"
               >
-                REPORT v0.28
+                REPORT {PRODUCT_VERSION}
               </p>
             </div>
             <h1 className="text-4xl sm:text-5xl text-bone font-light tracking-tight leading-[1.1] mb-3">
@@ -161,7 +165,12 @@ export default function AuditPage() {
               </li>
               <li className="font-mono tabular">
                 <span className="text-mute/60">RECEIPTS</span>{" "}
-                <span className="text-bone">N={finalizedCount} · {finalizedCount} PROVED · 0 DIVERGED</span>
+                <span className="text-bone">
+                  N={trackStats.total} · {trackStats.proved} PROVED ·{" "}
+                  <span className={trackStats.diverged > 0 ? "text-loss" : ""}>
+                    {trackStats.diverged} DIVERGED
+                  </span>
+                </span>
               </li>
               <li className="font-mono tabular">
                 <span className="text-mute/60">GOLD</span>{" "}
@@ -613,14 +622,14 @@ export default function AuditPage() {
                 lang="en"
                 className="font-mono text-loss text-[10px] tracking-[0.35em] mb-3"
               >
-                ⚓ PRE-COMMIT · 第一筆 DIVERGED 出現時的處理規則
+                ⚓ PRE-COMMIT · DIVERGED 的處理規則(失準前就先寫好)
               </p>
               <p className="text-mute text-sm leading-relaxed mb-3">
-                截至 v0.28(2026-05-22)· /track-record DIVERGED = 0。 趁
-                miss 還沒發生先 commit handling rule:
+                這條規則在引擎第一次失準前就先寫好 —— 不等出包了才回頭
+                定義什麼叫「失準」、該怎麼處理。 規則:
               </p>
               <ul className="space-y-2 text-mute text-sm leading-relaxed list-disc pl-6">
-                <li>第一筆 DIVERGED 出現當日 · 該場收據自動出現
+                <li>每一筆 DIVERGED 出現當日 · 該場收據自動出現
                   在 <Link href="/" className="text-gold hover:underline underline-offset-4">首頁</Link>
                   · 不撤、不藏、不在 7 天內被新的蓋掉</li>
                 <li>/track-record ledger 編號不重排 · DIVERGED entry 跟
@@ -647,21 +656,21 @@ export default function AuditPage() {
                   lang="en"
                   className="font-mono text-loss/85 text-[9px] tracking-[0.3em] mb-2"
                 >
-                  THE FIRST MISS · 命名空位
+                  RULE FOLLOWED · 規則已生效
                 </p>
                 <p className="text-mute text-sm leading-relaxed">
-                  當第一筆 DIVERGED 發生 · 它將獲得一個專屬名字 ·{" "}
+                  引擎已經失準過。 截至目前{" "}
                   <span className="font-mono text-bone bg-loss/10 px-2 py-0.5 border-b border-loss/40">
-                    [ AWAITING · {finalizedCount > 0 ? `N=${finalizedCount} 皆 PROVED` : "N=0"} ]
+                    N={trackStats.total} · {trackStats.diverged} 筆 DIVERGED
                   </span>{" "}
-                  (the first miss earns the first name on this wall)· matchup ID +
-                  engine 估值 + 最終比分 一同 pinned to homepage for 7 days · 此 slot
-                  永遠不重複使用 · 第二筆 DIVERGED 獲得「THE SECOND MISS」 序號 · 序號
-                  monotonic · 寫進 source code audit trail · 不能 retroactively
-                  rebrand。
+                  —— 一筆都沒藏、沒撤、沒在 7 天內被新的蓋掉,全部按上面這條規則攤在{" "}
+                  <Link href="/track-record" className="text-gold hover:underline underline-offset-4">
+                    公開戰績
+                  </Link>
+                  。 規則寫在前、失準在後、照做不誤 —— 這就是「敢攤輸」跟「嘴上喊敢」唯一的差別。
                 </p>
                 <p className="font-mono text-mute/70 text-[10px] tracking-[0.2em] leading-relaxed mt-3">
-                  第一筆 DIVERGED 會 pin 上 homepage、永遠不刪。
+                  每一筆 DIVERGED 都按同一條規則處理 · 永遠不刪。
                 </p>
               </div>
               <p className="font-mono text-mute/80 text-[10px] tracking-[0.25em] leading-relaxed mt-3">

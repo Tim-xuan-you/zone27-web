@@ -1,5 +1,6 @@
 import { ImageResponse } from "next/og";
 import { BRAND, OG_SIZE, OG_CONTENT_TYPE } from "@/lib/brand";
+import { PRODUCT_VERSION } from "@/lib/build-meta";
 
 // ── ZONE 27 · /discipline Dynamic OG ────────────────────
 // Visual artifact for the "鐵律" page · three philosopher-CEO
@@ -68,7 +69,7 @@ export default async function DisciplineOgImage() {
               display: "flex",
             }}
           >
-            OPERATING DISCIPLINE · v0.28
+            OPERATING DISCIPLINE · {PRODUCT_VERSION}
           </span>
         </div>
 

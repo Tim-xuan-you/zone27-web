@@ -19,7 +19,7 @@ export const BRAND = {
   goldSoft: "#BFA15A",
   bone: "#F5F2EA",
   mute: "#8A93A8",
-  win: "#4ADE80",
+  // 勝色(綠)刻意移除 —— 暗金品牌無紅綠對比 · 落空一律用 loss 柔紅(紅線:無紅綠)。
   loss: "#F87171",
 } as const;
 

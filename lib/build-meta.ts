@@ -12,6 +12,11 @@
 // Reference: https://vercel.com/docs/projects/environment-variables/system-environment-variables
 // ─────────────────────────────────────────────────────
 
+/** 站台/報告版本號(milestone · Tim 拍板才 bump)。 單一來源 —— Footer、/audit、
+ *  /coverage、/discipline、/manifesto 與各自 OG 卡全部 import 這一個常數,物理上
+ *  不可能各頁顯示不同版號(「同站兩個版號」= 自打「數字不漂移」的臉)。 */
+export const PRODUCT_VERSION = "v0.29";
+
 /** Short 7-char commit SHA. "local" during dev. Refreshes each deploy. */
 export const COMMIT_SHA =
   process.env.VERCEL_GIT_COMMIT_SHA?.slice(0, 7) ?? "local";
