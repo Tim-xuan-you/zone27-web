@@ -1,4 +1,6 @@
 import Link from "next/link";
+import Avatar from "@/components/Avatar";
+import { handleGlyph } from "@/lib/identity";
 import type { LadderBoard as LadderBoardData } from "@/lib/ladder-server";
 
 // ── ZONE 27 · 海選天梯榜(跨用戶 · 誰比機器準)──────────────────────────
@@ -48,6 +50,16 @@ export default function LadderBoard({ board }: { board: LadderBoardData }) {
                 >
                   {e.rank}
                 </span>
+
+                {/* 幾何頭像(同 /u/[code] · seed 綁永久碼 → 同一個人同一張臉)·
+                    付費支持者亮金環 = 身分標記,不是名次(名次只看上面那欄 alpha)。 */}
+                <Avatar
+                  seed={`#${e.authorCode}`}
+                  glyph={handleGlyph(e.handle)}
+                  size={30}
+                  supporter={e.supporter}
+                  className="shrink-0"
+                />
 
                 {/* 身分 + 階級 */}
                 <span className="flex-1 min-w-0">

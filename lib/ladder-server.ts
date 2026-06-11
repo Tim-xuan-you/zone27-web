@@ -54,6 +54,8 @@ export type LadderEntry = {
   beatEngine: boolean;
   /** 本月是否還在贏引擎(升階硬條件的「現在還準」訊號) */
   monthBeatEngine: boolean;
+  /** 付費支持者(BLACK/GOLD · 0023)· 亮金環 = 身分標記,不是準度 · 永不影響名次 */
+  supporter: boolean;
 };
 
 export type LadderBoard = {
@@ -168,6 +170,7 @@ export async function getLadderBoard(): Promise<LadderBoard> {
       edgeVsEnginePts: id.edgeVsEnginePts,
       beatEngine: id.beatEngine === true, // boolean | null → boolean(null = 無對照 = 沒贏)
       monthBeatEngine: id.month.beatEngine === true,
+      supporter: false, // 佔位 · 下面對 top 切片逐碼解析 0023 後填(只解析上榜的 ≤100 人)
       _sortEdge: id.edgeVsEnginePts ?? -999, // 無引擎對照 → 排最後
     });
   }
@@ -191,7 +194,30 @@ export async function getLadderBoard(): Promise<LadderBoard> {
       b.accuracyPct - a.accuracyPct,
   );
 
-  const entries: LadderEntry[] = qualified.slice(0, LADDER_MAX_ROWS).map((e, i) => {
+  const top = qualified.slice(0, LADDER_MAX_ROWS);
+
+  // 付費支持者金環(0023 get_tier_by_code)· 逐碼解析(榜 ≤100 列 · 走 ISR 快取 · 早期榜很小)。
+  // 🔴 名次永遠只看 alpha(上面的排序)· 金環只是「贊助開放引擎」的身分標記,絕不參與排名。
+  // graceful:0023 未套 / RPC 錯 / 非付費 → false(不顯示金環 · 榜照常渲染)。
+  const supporterByCode = new Map<string, boolean>();
+  const supa = anonClient(); // 回快取的 stateless anon client(同上)
+  if (supa) {
+    await Promise.all(
+      top.map(async (e) => {
+        try {
+          const { data, error } = await supa.rpc("get_tier_by_code", {
+            p_code: e.authorCode,
+          });
+          const t = !error && typeof data === "string" ? data : "";
+          supporterByCode.set(e.authorCode, t === "black" || t === "founder");
+        } catch {
+          supporterByCode.set(e.authorCode, false);
+        }
+      }),
+    );
+  }
+
+  const entries: LadderEntry[] = top.map((e, i) => {
     const rank = i + 1;
     // 神諭(王座 · tier 5)= 全站第一、且真的贏過機器。 沒人贏機器 → 王座仍只有機器(不硬封王)。
     const tier = rank === 1 && e.beatEngine ? 5 : e.tier;
@@ -205,6 +231,7 @@ export async function getLadderBoard(): Promise<LadderBoard> {
       edgeVsEnginePts: e.edgeVsEnginePts,
       beatEngine: e.beatEngine,
       monthBeatEngine: e.monthBeatEngine,
+      supporter: supporterByCode.get(e.authorCode) ?? false,
     };
   });
 

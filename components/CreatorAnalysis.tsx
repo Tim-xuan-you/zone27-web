@@ -35,6 +35,7 @@ import {
   creatorIdentity,
   type ResolvedCreatorIdentity,
 } from "@/lib/identity";
+import { resolveTierByCode } from "@/lib/tier-client";
 
 // ── ZONE 27 · CreatorAnalysis · 創作者賣分析(migration 0005)──────
 // Tim 2026-05-30 報馬仔/明燈 screenshot · 要:發文 + 推薦賽事(選邊)+ 寫分析 +
@@ -436,6 +437,18 @@ function PostCard({
   const [buying, setBuying] = useState(false);
   const [buyMsg, setBuyMsg] = useState<string | null>(null);
   const [insufficient, setInsufficient] = useState(false);
+  // 作者付費身分(金環)· cache 去重 · graceful(0023 未套 → free 不顯示)· 永遠次於準度章
+  const [authorTier, setAuthorTier] = useState<MemberTier>("free");
+  useEffect(() => {
+    let alive = true;
+    resolveTierByCode(id.key).then((t) => {
+      if (alive) setAuthorTier(t);
+    });
+    return () => {
+      alive = false;
+    };
+  }, [id.key]);
+  const authorSupporter = isPaidTier(authorTier);
 
   const doBuy = async () => {
     setBuying(true);
@@ -473,7 +486,7 @@ function PostCard({
               title="看這位的公開含輸戰績"
               className="flex items-center gap-2 hover:opacity-80 transition-opacity"
             >
-              <Avatar seed={id.seed} glyph={id.glyph} size={26} />
+              <Avatar seed={id.seed} glyph={id.glyph} size={26} supporter={authorSupporter} />
               <span className="font-mono text-bone text-[11px] tracking-[0.2em]">{id.label}</span>
               {id.code && (
                 <span className="font-mono text-mute/45 text-[9px] tracking-[0.15em]">
@@ -483,7 +496,7 @@ function PostCard({
             </Link>
           ) : (
             <>
-              <Avatar seed={id.seed} glyph={id.glyph} size={26} />
+              <Avatar seed={id.seed} glyph={id.glyph} size={26} supporter={authorSupporter} />
               <span className="font-mono text-bone text-[11px] tracking-[0.2em]">{id.label}</span>
               {id.code && (
                 <span
@@ -637,6 +650,8 @@ function CommentThread({
   const [open, setOpen] = useState(false);
   const [loaded, setLoaded] = useState(false);
   const [comments, setComments] = useState<CreatorComment[]>([]);
+  // 留言者付費身分(金環)· code → tier · 載入留言後一次解析(cache 去重)· graceful
+  const [tierMap, setTierMap] = useState<Map<string, MemberTier>>(new Map());
   const [text, setText] = useState("");
   const [sending, setSending] = useState(false);
   const [err, setErr] = useState<string | null>(null);
@@ -653,6 +668,13 @@ function CommentThread({
     const list = await getCreatorComments(postId);
     setComments(list);
     setLoaded(true);
+    // 留言者付費身分(金環)· 去重後逐碼解析 · resolveTierByCode 內含 cache/inflight 去重 ·
+    // graceful(0023 未套 / 非永久碼 → free 不顯示)· 永遠次於問責(本場已押 / 永久碼)。
+    const keys = Array.from(new Set(list.map((c) => creatorIdentity(c).key)));
+    const pairs = await Promise.all(
+      keys.map(async (k) => [k, await resolveTierByCode(k)] as const),
+    );
+    setTierMap(new Map(pairs));
   };
 
   const toggle = () => {
@@ -717,7 +739,7 @@ function CommentThread({
                     title="看這位的公開含輸戰績"
                     className="flex items-center gap-2 hover:opacity-80 transition-opacity"
                   >
-                    <Avatar seed={cid.seed} glyph={cid.glyph} size={20} />
+                    <Avatar seed={cid.seed} glyph={cid.glyph} size={20} supporter={isPaidTier(tierMap.get(cid.key) ?? "free")} />
                     <span className="font-mono text-bone/90 text-[10px] tracking-[0.15em]">
                       {cid.label}
                     </span>
@@ -729,7 +751,7 @@ function CommentThread({
                   </Link>
                 ) : (
                   <>
-                    <Avatar seed={cid.seed} glyph={cid.glyph} size={20} />
+                    <Avatar seed={cid.seed} glyph={cid.glyph} size={20} supporter={isPaidTier(tierMap.get(cid.key) ?? "free")} />
                     <span className="font-mono text-bone/90 text-[10px] tracking-[0.15em]">
                       {cid.label}
                     </span>
