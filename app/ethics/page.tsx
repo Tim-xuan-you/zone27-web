@@ -176,6 +176,57 @@ export default function EthicsPage() {
           </ol>
         </section>
 
+        {/* ── 玩家保護 · 量力而為(R216 · 借鑑對手的責任投注頁,但說得更大聲——
+            我們沒有他「一邊喊投注 -EV、一邊收月費賣明牌」的矛盾)· 純中文 · 無 emoji。
+            上面 9 條是「我們不做的壞事」· 這段是「我們為玩家做的事」—— 客群是賭徒,
+            站上卻沒有任何玩家保護 = 既是道德缺口、也是信任/法律攻擊面。 ───────── */}
+        <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-16 border-t border-line/40 pt-12">
+          <p className="font-mono text-gold text-[10px] tracking-[0.4em] mb-6">
+            / 玩家保護 · 量力而為
+          </p>
+          <h2 className="text-2xl sm:text-3xl text-bone font-light tracking-tight mb-6 leading-tight">
+            我們站在<span className="text-gold">你</span>這邊,不是莊家那邊
+          </h2>
+          <div className="space-y-4 text-mute leading-relaxed zh-body">
+            <p>
+              說清楚:<strong className="text-bone">我們不是莊家</strong> ——
+              不收賭注、不參與任何投注交易、不抽你下注的傭。 引擎永遠免費,我們賺的是
+              會員身分費(手動轉帳、0 自動續扣)。 你贏你輸我們一樣賺,所以
+              <strong className="text-bone">沒有動機騙你押</strong>。
+            </p>
+            <p>
+              也說一件莊家不會大聲講的事:<strong className="text-bone">莊家的賠率裡
+              含他的抽水,長期跟著任何明牌押,數學期望上對玩家不利。</strong> 這正是
+              我們<span className="text-gold">不秀盤口、不叫你押哪邊</span>的原因 ——
+              我們給你自己算的機率 + 誠實的對帳紀錄,押不押、押多少,是你自己的決定。
+            </p>
+            <p>
+              預測是<strong className="text-bone">分析工具,不是收入來源</strong>。
+              別借錢押、別把它當提款機。 如果下注已經影響到你的生活、或身邊的人有
+              賭博困擾,請找人聊聊 —— 這不丟臉:
+            </p>
+          </div>
+          <div className="mt-6 p-5 sm:p-6 border border-gold/30 bg-slate/30">
+            <p className="font-mono text-gold/85 text-[10px] tracking-[0.3em] mb-3">
+              求助資源 · 台灣 · 免費
+            </p>
+            <ul className="space-y-2 text-mute leading-relaxed list-none pl-0">
+              <li className="flex items-baseline gap-3">
+                <span className="font-mono text-bone tabular text-base shrink-0">1925</span>
+                <span className="text-sm">衛福部 安心專線 · 24 小時免費心理諮詢</span>
+              </li>
+              <li className="flex items-baseline gap-3">
+                <span className="font-mono text-bone tabular text-base shrink-0">1995</span>
+                <span className="text-sm">生命線協談專線</span>
+              </li>
+              <li className="flex items-baseline gap-3">
+                <span className="font-mono text-bone tabular text-base shrink-0">1980</span>
+                <span className="text-sm">張老師輔導專線</span>
+              </li>
+            </ul>
+          </div>
+        </section>
+
         {/* ── 02 WHY STRUCTURALLY NON-COPYABLE ──────── */}
         <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-16 border-t border-line/40 pt-12">
           <p

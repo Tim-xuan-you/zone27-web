@@ -62,6 +62,7 @@ const FOOTER_GROUPS: FooterGroup[] = [
 const LEGAL_LINKS = [
   { label: "隱私政策", href: "/privacy" },
   { label: "服務條款", href: "/terms" },
+  { label: "量力而為", href: "/ethics" },
 ];
 
 export default function Footer() {
