@@ -121,13 +121,15 @@ export default async function Home() {
           <p className="mt-4 sm:mt-5 max-w-xl mx-auto text-mute leading-relaxed text-base sm:text-lg">
             免費跑一萬次 · <span className="text-bone">告訴你誰會贏。</span>
           </p>
-          {/* 誠實鉤子 = flex(不是道歉)· R195 去暗化(原 text-mute/70 fine-print 讀起來
-              像心虛)+ 措辭領頭打騙子 · per 轉換 agent「57% 該以強項領頭、不是耳語」·
-              把全世界的天花板掛出來當招牌 = 對手 94% fake-win-rate 的誠實 inverse。 */}
-          <p className="mt-3 max-w-xl mx-auto text-mute leading-relaxed text-sm sm:text-base">
-            全世界沒有「神準」這回事 —— 連最強的模型,賽前單場也才{" "}
-            <span className="text-bone">5 成 7</span>。 喊「94% 神準」的,數學上在騙你。
-            我們不喊神準 · 只<span className="text-gold">逐場對帳給你看</span>。
+          {/* 情緒鉤子領頭(R216 · 4 輪策略討論結論):被坑過的賭徒一眼就懂、對手結構上抄不走的
+              開場白 —— 把「不刪輸的記分板」從藏在 /audit 搬到第一眼。 行為類別不指名對手(晒單/
+              刪文 · 守不指名鐵律)。 57% 引擎誠實降為支撐句(仍領頭打騙子 · 只是換更狠的角度)。 */}
+          <p className="mt-4 max-w-xl mx-auto text-bone leading-relaxed text-base sm:text-lg">
+            別人贏了晒單、輸了刪文。 <span className="text-gold">我們贏輸都掛</span> —— 賽前鎖死、刪不掉。
+          </p>
+          <p className="mt-2.5 max-w-xl mx-auto text-mute leading-relaxed text-sm">
+            全世界沒有「神準」—— 連最強的模型賽前單場也才{" "}
+            <span className="text-bone">5 成 7</span>;喊「94% 神準」的,數學上在騙你。
           </p>
           {/* 引擎戰績 · Pratfall「連輸的也掛」· compact · 永遠不刪 */}
           {tr.total > 0 && (
@@ -149,12 +151,13 @@ export default async function Home() {
             </Link>
           )}
 
-          {/* 主 CTA · hero 唯一實心金鈕(C2:解兩個競爭 CTA · gold discipline 一屏一焦點)·
-              R207 conversion:原 href="#floor" 在手機上看板就在下方一屏、點了幾乎不動 =
-              「按了大金鈕卻沒反應」· 改成真的換頁讓點擊有明確回饋。 */}
-          <div className="mt-7">
-            {/* 世界盃夜:最高意圖的那一下點擊導向四年一次的主秀(allUpcoming 刻意不含足球 →
-                沒這條 wcActive 優先,CPBL/MLB 休賽時大金鈕會把世界盃略過、誤導去棒球收據)。 */}
+          {/* 兩條路(R216 · 承 R207 的「點擊要有回饋」+ 解 4 輪討論的 conversion 結論):
+              · 主金鈕(實心)= 看開盤 = 產品,世界盃夜導四年一次的主秀(allUpcoming 不含足球 →
+                沒這條 wcActive 優先,CPBL/MLB 休賽時大金鈕會略過世界盃、誤導去棒球收據)。
+              · 次金框(outline)= 校準練習 = 全站最強 0-登入 aha(消方塊式一拖就撞 57% 牆)·
+                從原本角落 11px 小字救上來。 金框明顯次於實心金 → 仍守「一屏一焦點」(主清楚是金鈕)·
+                只是把最強鉤子從耳語升成看得見的第二條路。 */}
+          <div className="mt-7 flex items-center justify-center gap-3 flex-wrap">
             <Link
               href={wcActive ? "/soccer" : allUpcoming.length > 0 ? "/matches" : "/track-record"}
               className="inline-flex items-center gap-2 bg-gold text-navy font-mono text-xs sm:text-sm tracking-[0.25em] px-6 py-3 hover:bg-gold-soft transition-colors"
@@ -165,15 +168,11 @@ export default async function Home() {
                   ? "看今晚誰會贏 →"
                   : "看引擎最近戰績 →"}
             </Link>
-          </div>
-          {/* 校準遊戲 = 安靜次要文字鏈(降為次要 · 不跟主金鈕搶)· 仍是最強 0-登入 hook:
-              先別下注、先測你自己 → 把 57% 從 claim 變訪客自己發現的 aha。 */}
-          <div className="mt-3">
             <Link
               href="/calibration/test"
-              className="font-mono text-mute/70 hover:text-gold text-[11px] tracking-[0.18em] underline-offset-4 hover:underline transition-colors"
+              className="inline-flex items-center gap-2 border border-gold/45 text-gold font-mono text-xs sm:text-sm tracking-[0.2em] px-6 py-3 hover:border-gold hover:bg-gold/5 transition-colors"
             >
-              還不信?先測你自己有多準 →
+              先測你自己多準 · 30 秒 →
             </Link>
           </div>
         </section>
