@@ -126,6 +126,9 @@ export default function CardBetStrip({
     setSaving(false);
   };
 
+  // 賽前可外傳收據(R220)· 只 CPBL 有(MLB 賽前收據暫緩)· 避免 /receipts 404 死連結。
+  const cpbl = matchId.startsWith("cpbl-");
+
   return (
     <div className="mt-3 pt-3 border-t border-gold/15">
       {/* 群眾市場線 · 看免費 · 滿門檻才畫百分比(不拿小樣本假裝共識)*/}
@@ -247,14 +250,26 @@ export default function CardBetStrip({
               <ConfidencePicker matchId={matchId} submit={setPredictionConfidence} />
             </div>
           )}
-          {/* 帳本連結等 server 確認後才出(未存前進去看不到這手)。 */}
+          {/* 帳本連結 + 賽前可外傳收據(R220)等 server 確認後才出(未存前進去看不到這手)。 */}
           {!pending && (
-            <Link
-              href="/member"
-              className="inline-block font-mono text-gold/70 hover:text-gold text-[9px] tracking-[0.25em] underline-offset-4 hover:underline transition-colors"
-            >
-              看你 vs 引擎 →
-            </Link>
+            <div className="flex flex-col items-center gap-1.5">
+              {/* 押下那一刻 = 最想曬的時候(病毒槓桿)· CPBL 給一張現在就能外傳的賽前收據
+                  (賽前鎖死、改不了)· 非 CPBL 不掛(避免 /receipts 404 死連結)。 */}
+              {cpbl && (
+                <Link
+                  href={`/receipts/${matchId}`}
+                  className="inline-flex items-center gap-1.5 min-h-[36px] font-mono text-gold/90 hover:text-gold text-[10px] tracking-[0.2em] border border-gold/40 hover:border-gold/70 hover:bg-gold/10 px-2.5 py-1.5 transition-colors"
+                >
+                  ▸ 外傳這手 · 賽前鎖定收據 →
+                </Link>
+              )}
+              <Link
+                href="/member"
+                className="inline-block font-mono text-gold/70 hover:text-gold text-[9px] tracking-[0.25em] underline-offset-4 hover:underline transition-colors"
+              >
+                看你 vs 引擎 →
+              </Link>
+            </div>
           )}
         </div>
       )}

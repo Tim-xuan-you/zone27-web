@@ -23,6 +23,9 @@ type Props = {
   startISO: string | null;
   homeName: string;
   awayName: string;
+  /** 賽前可外傳收據(R220)· true 時 finalWinner=null 不再隱藏,改蓋「你賽前押了 X · 待對帳」。
+   *  預設 false → 賽後收據頁(原本唯一用法)行為完全不變(未結算就隱藏)。 */
+  pending?: boolean;
 };
 
 // ISO 時戳 → 「6月9日 18:35」(台北)· client-only render · 無 hydration 風險(掛載後才填)。
@@ -49,6 +52,7 @@ export default function UserReceiptPick({
   startISO,
   homeName,
   awayName,
+  pending = false,
 }: Props) {
   const [ready, setReady] = useState(false);
   const [pick, setPick] = useState<"home" | "away" | null>(null);
@@ -71,13 +75,39 @@ export default function UserReceiptPick({
     };
   }, [matchId]);
 
-  // graceful 隱藏:還沒抓完 / 沒押 / 未結算 / 開賽後才補登 → 不顯示。
-  if (!ready || pick === null || finalWinner === null) return null;
+  // graceful 隱藏:還沒抓完 / 沒押這場 → 不顯示。
+  if (!ready || pick === null) return null;
+  // 先鎖後結:開賽後才補登 → 不蓋在收據上(同準度 late 剔除 · 不假裝賽前鎖死)。
   if (isLatePick(ts, startISO)) return null;
 
-  const verdict = computeUserVerdict(pick, finalWinner); // proved | diverged | push
   const teamName = pick === "home" ? homeName : awayName;
   const when = fmtTaipei(ts);
+
+  // 還沒結算 · 賽前鎖定中 / 待對帳:
+  //   · pending(賽前可外傳收據 R220)→ 蓋「你賽前押了 X · 待對帳」(無 ✓/✕ · 不假裝有結果)。
+  //   · 非 pending(賽後收據頁但結果還沒進來)→ 維持原行為隱藏(收據乾淨)。
+  if (finalWinner === null) {
+    if (!pending) return null;
+    return (
+      <div className="px-5 sm:px-8 py-5 border-t border-line/40 bg-slate/20">
+        <p className="font-mono text-mute/70 text-[10px] tracking-[0.35em] mb-2">
+          / 你的這一手
+        </p>
+        <p className="text-bone text-base sm:text-lg leading-relaxed">
+          <span className="font-mono text-gold mr-1.5">▸</span>
+          你賽前押了 <span className="text-gold">{teamName}</span> ·{" "}
+          <span className="text-mute/80">待對帳</span>
+        </p>
+        {when && (
+          <p className="mt-2 font-mono text-mute/70 text-[10px] tracking-[0.2em] tabular">
+            鎖定於 {when} · 賽前鎖死 · 改不了 · 賽後自動揭曉命中或落空
+          </p>
+        )}
+      </div>
+    );
+  }
+
+  const verdict = computeUserVerdict(pick, finalWinner); // proved | diverged | push
 
   const mark = verdict === "proved" ? "✓" : verdict === "diverged" ? "✕" : "=";
   const markColor =

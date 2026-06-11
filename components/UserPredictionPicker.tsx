@@ -121,6 +121,8 @@ export default function UserPredictionPicker({
   // 封盤 = 已結算 OR 已開賽(先鎖後結 · 防賽後補登)· 已押的人仍看得到自己那手
   const closed = !!finalWinner || started;
   const loginHref = `/login?next=${encodeURIComponent(`/matches/${matchId}`)}`;
+  // 賽前可外傳收據(R220)· 只 CPBL 有(MLB 賽前收據暫緩)· 結算後改走上方賽後分享連結。
+  const cpbl = matchId.startsWith("cpbl-");
 
   return (
     <div className="mt-4 bg-gold/5 border border-gold/40 px-4 py-3">
@@ -238,6 +240,16 @@ export default function UserPredictionPicker({
           soul R209 #7 · 加「離上天梯還差 N 場」進度鉤(對帳紀律進度,非賭場連押獎勵)。 */}
       {locked && (
         <div className="mt-3 space-y-1.5">
+          {/* 賽前 / 進行中(未結算)· 押下那刻就能外傳的賽前鎖定收據(病毒槓桿 · 同足球)·
+              賽後改走上方 finalWinner 區的「把這張收據給朋友看」· 非 CPBL 暫不掛(避免 404)。 */}
+          {cpbl && !finalWinner && (
+            <Link
+              href={`/receipts/${matchId}`}
+              className="block text-center font-mono text-gold/90 hover:text-gold text-[11px] tracking-[0.2em] border border-gold/40 hover:border-gold/70 hover:bg-gold/10 px-3 py-2 transition-colors"
+            >
+              ▸ 外傳這手 · 賽前鎖定收據 →
+            </Link>
+          )}
           {myTotal !== null && myTotal >= 1 && myTotal < LADDER_MIN ? (
             <p className="text-center font-mono text-mute/70 text-[10px] tracking-[0.2em] leading-relaxed">
               你押了 <span className="text-bone tabular">{myTotal}</span> 場 · 再{" "}

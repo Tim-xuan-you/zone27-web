@@ -18,6 +18,11 @@ import {
 } from "@/lib/matches";
 import { getSoccerReceipt } from "@/lib/soccer/receipt";
 import SoccerReceiptView from "@/components/SoccerReceiptView";
+import {
+  getBaseballPendingReceipt,
+  deriveReferenceNumber,
+} from "@/lib/baseball-receipt";
+import BaseballReceiptPendingView from "@/components/BaseballReceiptPendingView";
 
 // 足球收據是 on-demand(fd-* 不在 generateStaticParams · dynamicParams 預設允許)·
 // 結果隨比賽打完才出現 → ISR 10 分鐘讓「還沒踢完(404)」在賽後自動變成 200。
@@ -91,29 +96,9 @@ export async function generateStaticParams(): Promise<{ receiptId: string }[]> {
   return getFinalizedMatches().map((m) => ({ receiptId: m.id }));
 }
 
-// R75 W-F · canonical Patek-style reference number derivation · Z27-{league}-
-// {date-YYMMDD}-{seq}。 date pulled from match.id "cpbl-YYMMDD-NN" pattern ·
-// seq from same。 brand IP 「不藏 / 不假裝」 · reference IS the match.id
-// with cosmetic Z27- prefix · 5-second DevTools verify。
-//
-// R76 W-G · Agent B R76 audit M-4 fix · strict CPBL-only guard · matchId
-// format MUST be exactly「cpbl-YYMMDD-NN」 3-part shape · MLB matches
-// (hypothetical「mlb-2026-05-21-LAD-vs-SF」)would break the date+seq slot
-// assumption。 此 fix:require parts.length === 3 + 「cpbl」 league exact ·
-// fallback to full matchId for other leagues · per Agent A R76 spec
-// 「Patek Reference grammar」 only CPBL ID shape conforms today。
-function deriveReferenceNumber(matchId: string, league: string): string {
-  const parts = matchId.split("-");
-  // Strict CPBL 3-part shape · cpbl-YYMMDD-NN · Patek-style 4-segment ref
-  if (parts.length === 3 && parts[0] === "cpbl") {
-    const date = parts[1];
-    const seq = parts[2];
-    return `Z27 · ${league.toUpperCase()} · ${date} · ${seq}`;
-  }
-  // Fallback for non-CPBL or non-standard shapes · 不假裝 Patek grammar
-  // 適用 · 直接 use full matchId · per /audit S05 disclosure parity。
-  return `Z27 · ${league.toUpperCase()} · ${matchId}`;
-}
+// R75 W-F · canonical Patek-style reference number derivation(Z27 · {league} ·
+// {YYMMDD} · {seq})已抽到 lib/baseball-receipt.ts 共用 —— 保證同一場的「賽前」與
+// 「賽後」收據顯示完全相同的參考編號(R220 賽前可外傳收據)· 見該檔註解。
 
 export async function generateMetadata({
   params,
@@ -163,6 +148,31 @@ export async function generateMetadata({
   }
   const match = getMatchById(receiptId);
   if (!match || !match.finalResult) {
+    // 賽前 / 進行中(CPBL · 尚未結算)→ 賽前鎖定卡 metadata(押完當下就能外傳)。
+    // 🔴 已開賽(live)絕不標「賽前鎖定中」= 對已開打的場說謊(對齊 OG 卡 + view)。
+    const bp = getBaseballPendingReceipt(receiptId);
+    if (bp) {
+      const live = bp.phase === "live";
+      const favLine = bp.favoriteName
+        ? `引擎賽前鎖定看好 ${bp.favoriteName}(${bp.favoritePct}%)`
+        : `引擎這場約五五波(${bp.homeWinRate}% : ${bp.awayWinRate}%)`;
+      return {
+        title: live
+          ? `${bp.homeName} vs ${bp.awayName} · 已開賽 · 待對帳 · ZONE 27 收據`
+          : `${bp.homeName} vs ${bp.awayName} · 賽前鎖定 · ZONE 27 收據`,
+        description: live
+          ? `${favLine} · 賽前鎖死、已開賽 · 終場後逐場對帳 · 含贏含輸、改不了。`
+          : `${favLine} · 鎖在結果還不存在的時候、改不了 · 賽後逐場對帳。你也想對著引擎的線鎖一手?`,
+        openGraph: {
+          title: live
+            ? `${bp.homeName} vs ${bp.awayName} · 待對帳`
+            : `${bp.homeName} vs ${bp.awayName} · 賽前鎖定中`,
+          description: live
+            ? `賽前鎖死 · 終場後對帳 · 含贏含輸、改不了。`
+            : `${favLine} · 鎖在結果還不存在的時候、改不了。`,
+        },
+      };
+    }
     return {
       title: "Receipt not found",
       description: "此 receipt 不存在或未 finalized · 完整 ledger 在 /track-record。",
@@ -192,9 +202,12 @@ export default async function ReceiptPage({ params }: { params: Params }) {
     return <SoccerReceiptView r={sr} />;
   }
   const match = getMatchById(receiptId);
-  // Receipt page only exists for finalized matches · 404 for live/pre/future
-  // matches · per /audit S05 disclosure parity · 不假裝 pre-final receipt。
   if (!match || !match.finalResult) {
+    // 賽前 / 進行中(CPBL · 尚未結算)→ 賽前可外傳收據(R220)· 走獨立 view · 完全不碰
+    // 下方賽後棒球收據邏輯(零風險)。 賽後同一網址自己長出比分判決(ISR 10 分鐘)。
+    // MLB 賽前 / 延賽 / 查無 → 仍 404(維持原行為 · 不假裝 pre-final receipt)。
+    const bp = getBaseballPendingReceipt(receiptId);
+    if (bp) return <BaseballReceiptPendingView r={bp} />;
     notFound();
   }
 

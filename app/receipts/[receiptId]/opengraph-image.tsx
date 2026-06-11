@@ -13,6 +13,10 @@ import {
   type SoccerReceiptSettled,
   type SoccerReceiptPending,
 } from "@/lib/soccer/receipt";
+import {
+  getBaseballPendingReceipt,
+  type BaseballReceiptPending,
+} from "@/lib/baseball-receipt";
 
 // ── ZONE 27 · /receipts/[id] 動態 OG 卡 = 單場引擎收據 ──────────────────
 // 之前收據頁共用 /track-record 的通用 OG → 貼到 LINE/FB 看不出是「哪一場·命中還落空」。
@@ -38,7 +42,12 @@ export default async function ReceiptOgImage({
     return sr.phase === "settled" ? soccerOgCard(sr) : soccerOgCardPending(sr);
   }
   const match = getMatchById(receiptId);
-  if (!match || !match.finalResult) return brandFallback();
+  if (!match || !match.finalResult) {
+    // 賽前 / 進行中(CPBL · 尚未結算)→ 賽前鎖定中卡(押完當下就能外傳的那張 · R220)。
+    const bp = getBaseballPendingReceipt(receiptId);
+    if (bp) return baseballOgCardPending(bp);
+    return brandFallback();
+  }
 
   const cal = getCalibration(match);
   if (!cal) return brandFallback();
@@ -305,6 +314,101 @@ function soccerOgCardPending(sr: SoccerReceiptPending) {
               <span style={{ fontSize: 24, opacity: 0.6 }}>%</span>
             </span>
             <span style={{ fontSize: 20, color: boneRgba(0.55), marginTop: 6, display: "flex" }}>{sr.favoredLabel}</span>
+          </div>
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            <span style={{ fontSize: 16, color: boneRgba(0.45), letterSpacing: "0.25em", marginBottom: 6, display: "flex" }}>
+              {rightLabel}
+            </span>
+            <span style={{ fontSize: 30, color: BRAND.bone, fontWeight: 300, letterSpacing: "-0.01em", marginTop: 14, display: "flex" }}>
+              {rightValue}
+            </span>
+          </div>
+        </div>
+
+        <div style={{ display: "flex", marginTop: 30 }}>
+          <span style={{ fontSize: 66, color: BRAND.gold, fontWeight: 400, letterSpacing: "0.06em", display: "flex" }}>
+            {bigWord}
+          </span>
+        </div>
+
+        <div
+          style={{
+            marginTop: "auto",
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "baseline",
+            fontSize: 18,
+            color: boneRgba(0.5),
+            letterSpacing: "0.28em",
+          }}
+        >
+          <span style={{ display: "flex" }}>{footerLine}</span>
+          <span style={{ display: "flex", color: goldRgba(0.65) }}>zone27-web.vercel.app</span>
+        </div>
+      </div>
+    ),
+    { ...OG_SIZE },
+  );
+}
+
+// 賽前(locked)/ 已開賽待對帳(live)CPBL 收據 OG 卡 = 押完當下就能外傳的那張(R220)。
+// 鏡 soccerOgCardPending:沒有結果/判決 → 不假裝命中(右欄改秀「開賽時間」· 大字「賽前鎖定中」金)。
+// 🔴 已開賽(live)絕不掛「賽前鎖定」標頭/「結果還不存在」結語 = 對已開打的場說謊。
+function baseballOgCardPending(bp: BaseballReceiptPending) {
+  const locked = bp.phase === "locked";
+  const bigWord = locked ? "賽前鎖定中" : "待對帳";
+  const rightLabel = locked ? "開賽時間" : "賽況";
+  const rightValue = locked ? bp.startDisplay : "已開賽 · 終場後揭曉";
+  const favLabel = bp.favoriteName ?? "引擎難分 · 約五五波";
+  const headerTag = locked ? "賽前鎖定" : "待對帳";
+  const footerLine = locked
+    ? "鎖在結果還不存在的時候 · 改不了"
+    : "賽前鎖死 · 終場後對帳 · 改不了";
+  return new ImageResponse(
+    (
+      <div
+        style={{
+          width: "100%",
+          height: "100%",
+          background: BRAND.navy,
+          backgroundImage: OG_BACKGROUND_IMAGE,
+          display: "flex",
+          flexDirection: "column",
+          padding: 70,
+          position: "relative",
+        }}
+      >
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
+          <div style={{ display: "flex", gap: 14 }}>
+            <span style={{ fontSize: 26, color: BRAND.gold, letterSpacing: "0.22em", fontWeight: 500 }}>ZONE</span>
+            <span style={{ fontSize: 26, color: BRAND.bone, letterSpacing: "0.22em", fontWeight: 500 }}>27</span>
+          </div>
+          <span style={{ fontSize: 18, color: boneRgba(0.5), letterSpacing: "0.3em" }}>
+            引擎收據 · {headerTag}
+          </span>
+        </div>
+
+        <div style={{ display: "flex", flexDirection: "column", marginTop: 36 }}>
+          <span style={{ fontSize: 16, color: boneRgba(0.45), letterSpacing: "0.3em", marginBottom: 12, display: "flex" }}>
+            {bp.league} · {bp.dateIso}
+          </span>
+          <div style={{ display: "flex", alignItems: "baseline", flexWrap: "wrap" }}>
+            <span style={{ fontSize: 50, color: BRAND.bone, fontWeight: 300, letterSpacing: "-0.02em" }}>{bp.homeName}</span>
+            <span style={{ fontSize: 26, color: goldRgba(0.6), letterSpacing: "0.2em", margin: "0 20px", display: "flex" }}>vs</span>
+            <span style={{ fontSize: 50, color: BRAND.bone, fontWeight: 300, letterSpacing: "-0.02em" }}>{bp.awayName}</span>
+          </div>
+        </div>
+
+        <div style={{ display: "flex", gap: 60, marginTop: 30 }}>
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            <span style={{ fontSize: 16, color: boneRgba(0.45), letterSpacing: "0.25em", marginBottom: 6, display: "flex" }}>
+              引擎賽前看好
+            </span>
+            <span style={{ fontSize: 50, color: BRAND.gold, fontWeight: 300, letterSpacing: "-0.02em", display: "flex" }}>
+              {bp.favoritePct}
+              <span style={{ fontSize: 24, opacity: 0.6 }}>%</span>
+            </span>
+            <span style={{ fontSize: 20, color: boneRgba(0.55), marginTop: 6, display: "flex" }}>{favLabel}</span>
           </div>
           <div style={{ display: "flex", flexDirection: "column" }}>
             <span style={{ fontSize: 16, color: boneRgba(0.45), letterSpacing: "0.25em", marginBottom: 6, display: "flex" }}>
