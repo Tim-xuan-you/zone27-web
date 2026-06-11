@@ -222,32 +222,23 @@ export default function HonorWall({
         <span className="text-gold">這面牆,他們掛不出來</span>。
       </p>
 
-      {/* 對帳紀律 · 收成一行(原獨立區塊已折進來 · 紀律里程碑走下方 streak 徽章)。
-          self:current 是徽章表達不出的「現在進行式」+ onboarding 鉤子。
-          public:看別人不該被「今天接上」催 · 改報最長/累計(回來對帳的天數 = 紀律證據)。 */}
-      <p className="mb-5 font-mono text-mute/65 text-[11px] tracking-[0.15em] leading-relaxed">
-        對帳紀律 ·{" "}
-        {pub ? (
-          streak.longest > 0 || streak.totalDays > 0 ? (
+      {/* 對帳紀律一行 · 只在 public(/u 公開檔)掛:報最長/累計(回來對帳天數 = 紀律證據)。
+          self(/member)的「現在連續 + 今天接上」已收進頂端「今天」焦點條 TodayStrip ——
+          此處不重複(R218 收乾淨 · 單一動作面)。 紀律里程碑(7/30/100 日)走下方 streak 徽章。 */}
+      {pub && (
+        <p className="mb-5 font-mono text-mute/65 text-[11px] tracking-[0.15em] leading-relaxed">
+          對帳紀律 ·{" "}
+          {streak.longest > 0 || streak.totalDays > 0 ? (
             <>
               最長連續 <span className="text-bone tabular">{streak.longest}</span> 天 ·
               累計回來對帳 <span className="text-bone tabular">{streak.totalDays}</span> 天
             </>
           ) : (
             <span className="text-mute">還在累積</span>
-          )
-        ) : streak.current > 0 ? (
-          <>
-            連續 <span className="text-bone tabular">{streak.current}</span> 天
-            {streak.activeToday ? "" : "(今天可接上)"}
-          </>
-        ) : streak.activeToday ? (
-          <span className="text-bone">今天已對帳</span>
-        ) : (
-          <span className="text-mute">今天還沒對帳 · 押一手接上</span>
-        )}
-        <span className="text-mute/40"> · 紀律,不是準度</span>
-      </p>
+          )}
+          <span className="text-mute/40"> · 紀律,不是準度</span>
+        </p>
+      )}
 
       {/* 入門 → 進階 → 精英 · 易到難的收集梯度(分階小標 + 各階一格 grid)*/}
       <div className="flex flex-col gap-5">

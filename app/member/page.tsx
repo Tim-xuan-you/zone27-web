@@ -33,6 +33,7 @@ import { getSoccerLedgerResults } from "@/lib/soccer/football-data";
 import { getSoccerEnginePicks } from "@/lib/soccer/locked";
 import { readTier, isPaid, creatorTakePct, tierLabel } from "@/lib/tier";
 import OpenPositionsPanel from "@/components/OpenPositionsPanel";
+import TodayStrip from "@/components/TodayStrip";
 import type { OpenPosition } from "@/components/OpenPositionCard";
 import MyCreatorPanel from "@/components/MyCreatorPanel";
 import MyActivityPanel from "@/components/MyActivityPanel";
@@ -170,7 +171,11 @@ export default async function MemberPage() {
 
   // 對帳紀律 streak(soul-roadmap #2)· 連續性按「下注日」的台北日曆日算(見
   // aggregateStreak 註解:下注日 ≠ 比賽日 · 衡量你哪幾天回來面對帳本)。
-  const streak = aggregateStreak(predictionsMap, getTodayTaipei());
+  const todayTaipei = getTodayTaipei();
+  const streak = aggregateStreak(predictionsMap, todayTaipei);
+  // 「今天」焦點條的日期短標(台北 "YYYY-MM-DD" → "M/D")· 每日變 = 儀式的「活」感。
+  const [, todayMM, todayDD] = todayTaipei.split("-");
+  const todayLabel = `${Number(todayMM)}/${Number(todayDD)}`;
 
   // 校準大師(R217 · 你說的把握 vs 實際中的)· 跨運動賽果輸入(同一真相):
   // 棒球用永久鎖定源的 finalWinner(idMatches 已含 CPBL+MLB+locked)· 足球用 outcome。
@@ -258,6 +263,12 @@ export default async function MemberPage() {
       (getMatchStartIso(a) ?? "").localeCompare(getMatchStartIso(b) ?? ""),
     );
 
+  // 「今天」焦點條:今晚還沒押、賽前可鎖的場數(today-pregame · 不含已開賽的 live ·
+  // 從 upcoming 算 = 跟下方「接下來可以押」同一份來源、同一份去重)。
+  const tonightLockable = upcoming.filter(
+    (m) => getMatchPhase(m) === "today-pregame",
+  ).length;
+
   // 創作者後台:付費會員傳輕量賽事清單給 MyCreatorPanel(client 端撈我在每場的分析)。
   const creatorCheckMatches = isPaid(tier)
     ? allMatches.map((m) => ({
@@ -293,6 +304,15 @@ export default async function MemberPage() {
           </form>
         </div>
 
+        {/* 今天 · 每日對帳儀式(soul · Defector 高路 / 柏青哥低路討論收斂)· 把「今天的一手 +
+            對帳紀律」收成一條放最上 = 會員一打開就知道今天的一個誠實動作,然後就走。
+            🔴 紀律 = 回來對帳天數,不是連勝 · 斷了不羞辱 · 無拉霸/聲光/點數 · 不推銷。 */}
+        <TodayStrip
+          tonightLockable={tonightLockable}
+          streak={streak}
+          dateLabel={todayLabel}
+        />
+
         {/* 1.5 · 你的未結算押注 · the live middle(soul)· 只在有持倉時出現 ──
             押下去到打完之間那段 —— 你 vs 引擎 vs 群眾。 放在準度數字之上,因為
             這是你今天回來的理由(動態 · 時效)· 沒持倉時自動隱藏,準度數字遞補為首。
@@ -321,8 +341,8 @@ export default async function MemberPage() {
 
         {/* 3 · 你的榮譽牆(soul-roadmap #5 · 「靠誠實賺來的地位」三樓第一塊)· 章全部
             從含輸帳本自動算 · 報馬仔掛不出 · Apple 紀律只放 5 個 · 框 mute 不搶校準卡主角。 */}
-        {/* 對帳紀律已折進榮譽牆(R201:獨立區塊+自我辯解=Tim「感覺沒用」· 里程碑走 streak
-            徽章 · current 在牆內一行)· streak 物件仍傳給 HonorWall。 */}
+        {/* 對帳紀律:current(現在連續 + 今天接上)已移到頂端「今天」焦點條 TodayStrip(R218
+            收乾淨 · 單一動作面);榮譽牆只留里程碑徽章(7/30/100 日)· streak 物件仍傳給它算章。 */}
         <HonorWall identity={identity} streak={streak} />
 
         {/* 戰功卡收藏(soul-roadmap 願景3)· 你押過、賽前鎖死的每一手 → 個人畫廊(含輸照收)。
