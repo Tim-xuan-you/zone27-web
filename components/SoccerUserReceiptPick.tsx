@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { getMySoccerPicks, type SoccerPick } from "@/lib/soccer/predictions";
+import { getMyCalibrationPicks } from "@/lib/predictions-market";
 
 // ── ZONE 27 · 足球收據蓋「本人這手 pick」(soul R208 close-the-loop · 三向版)──────
 // 足球單場收據(/receipts/fd-* · SoccerReceiptView)是 SSG/ISR,無本人 context。
@@ -63,17 +64,24 @@ export default function SoccerUserReceiptPick({
   const [ready, setReady] = useState(false);
   const [pick, setPick] = useState<SoccerPick | null>(null);
   const [ts, setTs] = useState<string>("");
+  // 你押注時宣告的把握(校準大師 · 0021)· 收據上同時蓋「喊了幾成把握」= 比單純的 pick 更強的 flex。
+  const [conf, setConf] = useState<number | null>(null);
 
   useEffect(() => {
     let alive = true;
     (async () => {
-      const picks = await getMySoccerPicks();
+      const [picks, calPicks] = await Promise.all([
+        getMySoccerPicks(),
+        getMyCalibrationPicks(),
+      ]);
       if (!alive) return;
       const mine = picks.find((p) => p.matchId === matchId);
       if (mine) {
         setPick(mine.pick);
         setTs(mine.ts);
       }
+      const myConf = calPicks.find((c) => c.matchId === matchId);
+      if (myConf) setConf(myConf.confidence);
       setReady(true);
     })();
     return () => {
@@ -100,8 +108,11 @@ export default function SoccerUserReceiptPick({
         </p>
         <p className="text-bone text-base sm:text-lg leading-relaxed">
           <span className="font-mono text-gold mr-1.5">▸</span>
-          你賽前鎖了 <span className="text-gold">{teamName}</span> ·{" "}
-          <span className="text-mute/80">待對帳</span>
+          你賽前鎖了 <span className="text-gold">{teamName}</span>
+          {conf !== null && (
+            <span className="text-gold/80"> · 喊 {conf / 10} 成把握</span>
+          )}{" "}
+          · <span className="text-mute/80">待對帳</span>
         </p>
         {/* 你 vs 引擎:對賭 = 「我敢跟演算法對著幹」的炫耀物(金 · 病毒槓桿)· 同調 = mute。 */}
         {pick === enginePick ? (
@@ -134,8 +145,11 @@ export default function SoccerUserReceiptPick({
       </p>
       <p className="text-bone text-base sm:text-lg leading-relaxed">
         <span className={`font-mono ${markColor} mr-1.5`}>{mark}</span>
-        你賽前押了 <span className="text-gold">{teamName}</span> ·{" "}
-        <span className={markColor}>{verdictWord}</span>
+        你賽前押了 <span className="text-gold">{teamName}</span>
+        {conf !== null && (
+          <span className="text-gold/80"> · 喊 {conf / 10} 成把握</span>
+        )}{" "}
+        · <span className={markColor}>{verdictWord}</span>
       </p>
       {/* 你 vs 引擎結果對照:你對它錯 = 你贏過引擎了(金 · 最爽的炫耀物)· 其餘含輸照誠實(mute)。 */}
       <EngineContrast hit={hit} engineHit={enginePick === outcome} />
