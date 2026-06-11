@@ -89,6 +89,152 @@ function mergePitcherStats(p: PitcherStats): PitcherStats {
 }
 
 const rawMatches: Match[] = [
+  // ── 2026-06-12 · 一軍 3 場 ingest · Tim 截圖 cpbl.com.tw 賽程 + 先發投手成績表 ──
+  //   投手值由官網累計成績表(IP/K/BB/HR)換算 · 標 real(本季官網成績表直接抓)· winRate 手 curate
+  //   整數(ERA + 控球 + 主場 + 隊伍 W-L · 接近五五波就誠實低 conviction · 不裝把握)· 天氣不建模(/audit S02)。
+  //
+  //   #157 天母 · 中信(羅戈 away)vs 味全(魔神龍 home)· W-L 中信 15-32-1 / 味全 33-16-0
+  //     味全全聯盟最強(.673)+ 主場 + 魔神龍 2026 ERA 0.74(36 IP 小樣本 · 生涯 2.0-2.5 有回歸風險,但極壓制)。
+  //     中信全聯盟最差(.319)· 但羅戈是真好投手(2026 3.00 / 生涯 1.8-2.2)→ 不會被血洗。 三優扣羅戈水準
+  //     + 單場變異 → 味全 60 / 中信 40 · conf 57(明顯但不裝神準:羅戈是好投手 + 魔神龍 36IP 小樣本回歸風險 → 不喊更高)。
+  //   #158 新莊 · 統一(布雷克 away)vs 富邦(魔力藍 home)· W-L 統一 24-25-1 / 富邦 26-21-0
+  //     富邦主場 + 戰績微優(.553 vs .490)· 但統一先發布雷克 2026 ERA 1.98 + WHIP 0.94 + BB9 0.8(頂級控球)
+  //     比富邦魔力藍(2.21 穩)更壓制 → 隊伍/主場 vs 先發 互抵 → 近五五波 · 富邦 52 / 統一 48 · conf 50(誠實低把握)。
+  //   #159 澄清湖 · 樂天(魔爾曼 away)vs 台鋼(後勁 home)· W-L 樂天 18-27-1 / 台鋼 26-21-1
+  //     台鋼隊強(.553)+ 主場 vs 樂天(.400)· 但台鋼先發後勁 2026 ERA 4.88(2025 ace 1.89 大回吐 · 控球野 BB9 4.1)
+  //     掙扎,樂天魔爾曼 3.26 較穩 → 先發優勢偏樂天、抵掉大半隊伍差 → 中分、近五五波微偏台鋼 · 台鋼 53 / 樂天 47 · conf 50。
+  {
+    id: "cpbl-260612-01",
+    league: "CPBL",
+    date: "2026 · 06 · 12  ·  星期五",
+    startTime: "18:35",
+    venue: "天母棒球場",
+    home: {
+      name: "味全龍",
+      en: "DRAGONS",
+      pitcher: {
+        name: "魔神龍",
+        era: "0.74", // real · 2026 官網截圖 · 36.1 IP 小樣本(生涯 2024 2.04 / 2025 2.51 · 有回歸風險)
+        k9: "5.9", // real · 24 K / 36.1 IP × 9 · 低三振、靠守備與殘壘
+        whip: "1.13", // real · (33 H + 8 BB) / 36.1 IP(ERA 0.74 但 WHIP 1.13 = 讓上壘卻極會殘壘)
+        bb9: "2.0", // real · 8 BB / 36.1 IP × 9
+        hr9: "0.00", // real · 0 HR / 36.1 IP · 完全不被轟
+      },
+      recent: ["W", "W", "W", "L", "W"], // placeholder · 味全 33-16-0(全聯盟最強 .673)
+      winRate: 60,
+    },
+    away: {
+      name: "中信兄弟",
+      en: "BROTHERS",
+      pitcher: {
+        name: "羅戈",
+        era: "3.00", // real · 2026 官網截圖 · 66 IP(生涯 2024 2.16 / 2025 1.84 = 真好投手)
+        k9: "8.0", // real · 59 K / 66 IP × 9
+        whip: "1.12", // real · (54 H + 20 BB) / 66 IP
+        bb9: "2.7", // real · 20 BB / 66 IP × 9
+        hr9: "0.41", // real · 3 HR / 66 IP × 9
+      },
+      recent: ["L", "L", "W", "L", "L"], // placeholder · 中信 15-32-1(全聯盟最差 .319)
+      winRate: 40,
+    },
+    topScores: [
+      // 味全最強+主場+魔神龍極低失分 vs 中信墊底但羅戈真好投手 → 低分、味全 lean(格式 home : away = 味全 : 中信)
+      { score: "3 : 1", probability: 10.5 },
+      { score: "2 : 1", probability: 10.0 },
+      { score: "3 : 2", probability: 9.0 },
+      { score: "2 : 0", probability: 8.5 },
+      { score: "4 : 2", probability: 8.0 },
+    ],
+    aiConfidence: 57,
+  },
+  {
+    id: "cpbl-260612-02",
+    league: "CPBL",
+    date: "2026 · 06 · 12  ·  星期五",
+    startTime: "18:35",
+    venue: "新莊棒球場",
+    home: {
+      name: "富邦悍將",
+      en: "GUARDIANS",
+      pitcher: {
+        name: "魔力藍",
+        era: "2.21", // real · 2026 官網截圖 · 61 IP(2025 2.98 · 穩定)
+        k9: "6.2", // real · 42 K / 61 IP × 9
+        whip: "1.16", // real · (53 H + 18 BB) / 61 IP
+        bb9: "2.7", // real · 18 BB / 61 IP × 9
+        hr9: "0.15", // real · 1 HR / 61 IP × 9 · 極少被轟
+      },
+      recent: ["W", "L", "W", "W", "L"], // placeholder · 富邦 26-21-0(.553)
+      winRate: 52,
+    },
+    away: {
+      name: "統一獅",
+      en: "LIONS",
+      pitcher: {
+        name: "布雷克",
+        era: "1.98", // real · 2026 官網截圖 · 63.2 IP(2025 4.13 大反彈)
+        k9: "5.2", // real · 37 K / 63.2 IP × 9 · 低三振 pitch-to-contact
+        whip: "0.94", // real · (54 H + 6 BB) / 63.2 IP · 頂級
+        bb9: "0.8", // real · 6 BB / 63.2 IP × 9 · 頂級控球(極少保送)
+        hr9: "0.57", // real · 4 HR / 63.2 IP × 9
+      },
+      recent: ["L", "W", "L", "W", "W"], // placeholder · 統一 24-25-1(.490)
+      winRate: 48,
+    },
+    topScores: [
+      // 兩位好投手(魔力藍 2.21 / 布雷克 1.98 + 頂級控球)→ 低分;富邦主場+戰績微優 vs 統一先發更壓制 → 近五五波(格式 home : away = 富邦 : 統一)
+      { score: "2 : 1", probability: 10.0 },
+      { score: "1 : 2", probability: 9.5 },
+      { score: "3 : 2", probability: 9.0 },
+      { score: "2 : 3", probability: 8.5 },
+      { score: "1 : 0", probability: 7.5 },
+    ],
+    aiConfidence: 50,
+  },
+  {
+    id: "cpbl-260612-03",
+    league: "CPBL",
+    date: "2026 · 06 · 12  ·  星期五",
+    startTime: "18:35",
+    venue: "澄清湖棒球場",
+    home: {
+      name: "台鋼雄鷹",
+      en: "HAWKS",
+      pitcher: {
+        name: "後勁",
+        era: "4.88", // real · 2026 官網截圖 · 48 IP(2025 ace 1.89 大回吐 · 今年掙扎)
+        k9: "7.9", // real · 42 K / 48 IP × 9
+        whip: "1.38", // real · (44 H + 22 BB) / 48 IP · 控球變野
+        bb9: "4.1", // real · 22 BB / 48 IP × 9 · 偏野
+        hr9: "0.19", // real · 1 HR / 48 IP × 9
+      },
+      recent: ["W", "L", "W", "W", "L"], // placeholder · 台鋼 26-21-1(.553)
+      winRate: 53,
+    },
+    away: {
+      name: "樂天桃猿",
+      en: "MONKEYS",
+      pitcher: {
+        name: "魔爾曼",
+        era: "3.26", // real · 2026 官網截圖 · 58 IP 紮實
+        k9: "7.9", // real · 51 K / 58 IP × 9
+        whip: "1.26", // real · (53 H + 20 BB) / 58 IP
+        bb9: "3.1", // real · 20 BB / 58 IP × 9
+        hr9: "0.16", // real · 1 HR / 58 IP × 9 · 極少被轟
+      },
+      recent: ["L", "L", "W", "L", "W"], // placeholder · 樂天 18-27-1(.400)
+      winRate: 47,
+    },
+    topScores: [
+      // 台鋼隊強+主場 vs 樂天 · 但台鋼先發後勁 4.88 掙扎、樂天魔爾曼 3.26 較穩 → 抵掉大半隊伍差 → 中分、近五五波微偏台鋼(格式 home : away = 台鋼 : 樂天)
+      { score: "4 : 3", probability: 9.0 },
+      { score: "3 : 4", probability: 8.5 },
+      { score: "5 : 4", probability: 8.0 },
+      { score: "3 : 2", probability: 7.5 },
+      { score: "4 : 5", probability: 7.0 },
+    ],
+    aiConfidence: 50,
+  },
   // ── 2026-06-11 · 一軍 3 場 ingest · Tim 截圖 cpbl.com.tw 賽程 + 先發投手成績表 ──
   //   投手值由官網截圖 IP/K/BB/HR 換算 · 未進自動 leaderboard 故標 // estimate(per /audit S02 ESTIMATION
   //   DISCLOSURE · 手抄 < 自動驗證一級)· winRate 手 curate 整數(ERA + 控球 + 主場 + 隊伍 W-L · 接近
@@ -201,6 +347,9 @@ const rawMatches: Match[] = [
     date: "2026 · 06 · 11  ·  星期四",
     startTime: "18:35",
     venue: "澄清湖棒球場",
+    // 2026-06-11 官方 cpbl.com.tw 確認延賽(降雨 60%)· 不上今晚板/不可押(沒打的比賽不掛預測)·
+    // 賽前鎖的線(台鋼60/樂天40)保留待擇期重賽 · 自動結算正確略過(官網無 GameResult)。
+    postponed: true,
     home: {
       name: "台鋼雄鷹",
       en: "HAWKS",
