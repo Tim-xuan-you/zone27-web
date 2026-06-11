@@ -13,6 +13,7 @@ import {
   predictSoccer as predictSoccerCore,
   predictFromGoals as predictFromGoalsCore,
   toDisplayPercents as toDisplayPercentsCore,
+  deriveSoccerMarkets as deriveSoccerMarketsCore,
 } from "./engine-core.mjs";
 import { enginePickOf as enginePickOfCore } from "./predict-core.mjs";
 
@@ -81,3 +82,44 @@ export const toDisplayPercents: (pred: SoccerPrediction) => {
  *  不從展示整數%重算(避免四捨五入翻轉 → 金條與「引擎看好 X」打架)。 */
 export const enginePickOf: (pred: SoccerPrediction) => "home" | "draw" | "away" =
   enginePickOfCore;
+
+// ── 賭徒熟悉的玩法視角(大小球 / 讓球 / 兩隊進球)· 棒球「讓分 + 大小盤」的足球雙生 ─────
+// 數學在 engine-core.mjs(deriveSoccerMarkets)· 從預測自帶的 λ 重建同一張比分表推導 →
+// 與卡片上的 勝/平/負 % 同源、零 drift。 🔴 純機率陳述 · 不接盤口、不轉賠率、不出「押這邊」。
+
+/** 大小球機率:對一條總進球線 L(.5)· 大(總進球 > L)vs 小(總進球 < L)· 互補加總 100。 */
+export type SoccerOverUnder = {
+  line: number;
+  overPct: number; // 大 · 0-100
+  underPct: number; // 小 · = 100 - overPct
+};
+
+/** 讓球機率:對一條讓球線 L(.5)· 主 −L(主隊贏 > L 球)vs 客 +L(受讓守住)· 互補加總 100。 */
+export type SoccerHandicap = {
+  line: number;
+  homePct: number; // 主 −L · 0-100
+  awayPct: number; // 客 +L · = 100 - homePct
+};
+
+/** 三個賭徒熟悉的足球玩法視角(全是我們引擎自己算的機率 · 零盤口)。 */
+export type SoccerMarkets = {
+  totals: SoccerOverUnder[];
+  handicaps: SoccerHandicap[];
+  bttsYesPct: number; // 兩隊進球「是」· 0-100
+  bttsNoPct: number; // 兩隊進球「否」· = 100 - bttsYesPct
+};
+
+/**
+ * 從預測的兩邊預期進球 λ 推導 大小球 / 讓球 / 兩隊進球 機率。
+ * 用同一份 DEFAULTS(rho / maxGoals)重建比分表 → 跟 1X2 同源(誠實對帳的前提)。
+ */
+export const deriveSoccerMarkets: (
+  xgHome: number,
+  xgAway: number,
+  opts?: {
+    totalLines?: number[];
+    handicapLines?: number[];
+    rho?: number;
+    maxGoals?: number;
+  },
+) => SoccerMarkets = deriveSoccerMarketsCore;

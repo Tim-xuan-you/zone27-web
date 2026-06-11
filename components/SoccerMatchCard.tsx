@@ -1,5 +1,6 @@
 import Avatar from "@/components/Avatar";
 import SoccerBetStrip from "@/components/SoccerBetStrip";
+import SoccerMarketLines from "@/components/SoccerMarketLines";
 import EngineThreeWayBar from "@/components/EngineThreeWayBar";
 import { toDisplayPercents, enginePickOf, type SoccerPrediction } from "@/lib/soccer/engine";
 import type { SoccerMatchPrediction } from "@/lib/soccer/football-data";
@@ -122,6 +123,11 @@ function Prediction({
           {prediction.xgHome.toFixed(1)}–{prediction.xgAway.toFixed(1)}
         </span>
       </p>
+
+      {/* 賭徒熟悉的玩法視角(大小球 / 讓球 / 兩隊進球)· 從同一張比分表推 · 零盤口 ·
+          視覺次要(招牌是上面那條亮金三向條)· 棒球「讓分 + 大小盤」的足球雙生。 */}
+      <SoccerMarketLines prediction={prediction} />
+
       {/* 只有膠著場(最高 ≤38%)留一句挑釁:把無力感翻成「你的主場」。 其餘場不塞盲點清單
           (那是每張都一樣、大部分人不看的廢話 · 已併進首頁誠實旗幟)。 */}
       {tossup && (
