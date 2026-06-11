@@ -118,18 +118,21 @@ export default async function Home() {
           <h1 className="text-3xl sm:text-5xl font-light leading-[1.08] tracking-tight text-bone">
             不靠直覺,<span className="text-gold">只看演算法。</span>
           </h1>
-          <p className="mt-4 sm:mt-5 max-w-xl mx-auto text-mute leading-relaxed text-base sm:text-lg">
-            免費跑一萬次 · <span className="text-bone">告訴你誰會贏。</span>
-          </p>
-          {/* 情緒鉤子領頭(R216 · 4 輪策略討論結論):被坑過的賭徒一眼就懂、對手結構上抄不走的
-              開場白 —— 把「不刪輸的記分板」從藏在 /audit 搬到第一眼。 行為類別不指名對手(晒單/
-              刪文 · 守不指名鐵律)。 57% 引擎誠實降為支撐句(仍領頭打騙子 · 只是換更狠的角度)。 */}
-          <p className="mt-4 max-w-xl mx-auto text-bone leading-relaxed text-base sm:text-lg">
+          {/* R221 第一屏視覺升級(Tim「您決定」· 設計稿先給過 · 一鍵可 revert):訊息一字不改
+              (R216 鉤子全保留),只升層次 —— 四段平鋪 → 標語 + 招牌金線 + 一句狠話 + 一行支撐
+              (Apple/Linear「一個 beat 然後留白」)。 */}
+          {/* 招牌金髮絲線(zone27-rule · 黃金比例刻度)· 標語與情緒鉤子間留一道品牌記號的呼吸。 */}
+          <div className="zone27-rule max-w-[300px] mx-auto mt-6 sm:mt-7" aria-hidden="true" />
+          {/* 情緒鉤子升成第一屏主角(R216 訊息不動):最不可造假、對手抄不走的一句,放大成第一眼
+              的情緒高潮。 行為類別不指名對手(晒單/刪文 · 守不指名鐵律)。 */}
+          <p className="mt-7 max-w-xl mx-auto text-bone leading-snug text-xl sm:text-2xl font-light tracking-tight">
             別人贏了晒單、輸了刪文。 <span className="text-gold">我們贏輸都掛</span> —— 賽前鎖死、刪不掉。
           </p>
-          <p className="mt-2.5 max-w-xl mx-auto text-mute leading-relaxed text-sm">
-            全世界沒有「神準」—— 連最強的模型賽前單場也才{" "}
-            <span className="text-bone">5 成 7</span>;喊「94% 神準」的,數學上在騙你。
+          {/* 支撐句(合併原本兩段:免費萬次 + 57% 神準)· 降成一行 mute · wall-of-text → 呼吸感。
+              57% 誠實王牌仍在(收進支撐句)· 「喊神準的在騙你」打騙子角度保留。 */}
+          <p className="mt-4 max-w-xl mx-auto text-mute leading-relaxed text-sm sm:text-base">
+            免費跑一萬次告訴你誰會贏。 全世界最強的模型賽前單場也才{" "}
+            <span className="text-bone">5 成 7</span> —— 喊「94% 神準」的,數學上在騙你。
           </p>
           {/* 引擎戰績 · Pratfall「連輸的也掛」· compact · 永遠不刪 */}
           {tr.total > 0 && (
