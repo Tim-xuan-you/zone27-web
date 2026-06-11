@@ -4,6 +4,7 @@ import HonorWall from "@/components/HonorWall";
 import AccuracySparkline from "@/components/AccuracySparkline";
 import TrophyGrid from "@/components/TrophyGrid";
 import { creatorIdentity } from "@/lib/identity";
+import { isPaid, tierLabel } from "@/lib/tier";
 import type {
   CalibrationIdentity,
   DisciplineStreak,
@@ -77,7 +78,12 @@ export default function ProfileView({ profile, identity: id, streak, soccer, ser
     <div className="mx-auto max-w-2xl w-full px-6 sm:px-10 pt-12 pb-24">
       {/* ── 身分列 · 頭像 + 名字 + 永久碼 ──────────────────────── */}
       <header className="flex items-center gap-4">
-        <Avatar seed={who.seed} glyph={who.glyph} size={60} />
+        <Avatar
+          seed={who.seed}
+          glyph={who.glyph}
+          size={60}
+          supporter={isPaid(profile.tier)}
+        />
         <div className="min-w-0">
           <h1 className="text-2xl sm:text-3xl text-bone font-light tracking-tight leading-tight truncate">
             {who.label}
@@ -91,6 +97,16 @@ export default function ProfileView({ profile, identity: id, streak, soccer, ser
             <span className="font-mono text-mute/60 text-[10px] tracking-[0.3em]">
               ZONE 27 · 公開戰績
             </span>
+            {/* 支持者身分(0023 tier)· 低調金框 chip · 框成「贊助開放引擎」而非準度
+                (守紅線:付費≠比較準 · 永遠次於下方校準大數字)。 免費 / 未套 0023 → 不顯示。 */}
+            {isPaid(profile.tier) && (
+              <span
+                className="font-mono text-gold/80 text-[9px] tracking-[0.2em] px-1.5 py-0.5 border border-gold/40"
+                title="付費支持「引擎永遠免費」· 這是身分,不是準度"
+              >
+                {tierLabel(profile.tier)} · 支持開放引擎
+              </span>
+            )}
           </p>
         </div>
       </header>

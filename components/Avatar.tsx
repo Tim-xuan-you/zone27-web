@@ -11,6 +11,7 @@ export default function Avatar({
   size = 28,
   glyph,
   color,
+  supporter = false,
   className = "",
 }: {
   /** handle 或顯示名 · 用來衍生顏色(取穩定代號)+ 預設字符 */
@@ -20,6 +21,9 @@ export default function Avatar({
   glyph?: string;
   /** 覆寫 accent 色(隊徽傳真隊色)· 同時把細框染成隊色 = 隊徽感 */
   color?: string;
+  /** 付費支持者(BLACK/GOLD)· 加一圈低調金環 = 看得見的「身分」標記 ·
+   *  🔴 這是「贊助開放引擎」的身分,不是準度 —— 絕不暗示付費比較準(守 57% 誠實王牌)。 */
+  supporter?: boolean;
   className?: string;
 }) {
   const g = glyph ?? handleGlyph(seed);
@@ -31,11 +35,15 @@ export default function Avatar({
   const fontSize = Math.round(
     size * (glyphLen >= 3 ? 0.32 : glyphLen === 2 ? 0.4 : 0.46),
   );
+  // 隊色內框(隊徽辨識)+ 支持者金環(身分標記)· 可同時存在 · 沒有就 undefined。
+  const teamInset = color ? `inset 0 0 0 1px ${color}66` : null;
+  const supporterRing = supporter ? "0 0 0 1.5px rgba(212,175,55,0.75)" : null;
+  const boxShadow = [teamInset, supporterRing].filter(Boolean).join(", ") || undefined;
   return (
     <span
       aria-hidden="true"
       className={`inline-flex shrink-0 items-center justify-center rounded-[30%] font-mono font-medium tabular leading-none select-none ${
-        color ? "" : "ring-1 ring-inset ring-bone/10"
+        color || supporter ? "" : "ring-1 ring-inset ring-bone/10"
       } ${className}`}
       style={{
         width: size,
@@ -43,8 +51,7 @@ export default function Avatar({
         background: `linear-gradient(140deg, ${bg1}, ${bg2})`,
         color: ink,
         fontSize,
-        // 隊色版:細框染成隊色(半透明)= 隊徽辨識 · 不是大色塊(守不變賭場)
-        boxShadow: color ? `inset 0 0 0 1px ${color}66` : undefined,
+        boxShadow,
       }}
     >
       {g}

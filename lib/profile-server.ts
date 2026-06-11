@@ -1,6 +1,7 @@
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 import type { UserPredictionsMap } from "@/lib/predictions";
 import type { SoccerPickRow } from "@/lib/soccer/predictions";
+import type { MemberTier } from "@/lib/tier";
 
 // ── ZONE 27 · 公開 Profile 讀取(server · 無 cookie · 用永久碼)──────────
 // soul-roadmap P0:/u/[code] 公開含輸戰績頁的資料源。 用 stateless anon client 打
@@ -35,6 +36,9 @@ export type PublicProfile = {
   displayName: string;
   /** 顯示 handle(顯示名 or「球迷 #碼」)· 0019 z27_display_handle */
   handle: string;
+  /** 付費身分(0023 get_tier_by_code)· 'black'/'founder' = 顯示支持者金環 ·
+   *  🔴 這是「贊助開放引擎」的身分標記,不是準度。 0023 未套 / 免費 → 'free'(無環)。 */
+  tier: MemberTier;
 };
 
 /**
@@ -47,9 +51,13 @@ export async function getProfileByCode(
   try {
     const supabase = anonClient();
     if (!supabase) return null;
-    const { data, error } = await supabase.rpc("get_profile_by_code", {
-      p_code: code,
-    });
+    // 公開身分 + 付費 tier 平行讀(同一個碼)· tier 走 0023(get_tier_by_code)·
+    // 0023 未套 / 錯 → tier 回 free(graceful · 不顯示金環 · 不擋 profile)。
+    const [profileRes, tierRes] = await Promise.all([
+      supabase.rpc("get_profile_by_code", { p_code: code }),
+      supabase.rpc("get_tier_by_code", { p_code: code }),
+    ]);
+    const { data, error } = profileRes;
     if (error || !Array.isArray(data) || data.length === 0) return null;
     const row = data[0] as {
       author_code?: unknown;
@@ -65,7 +73,11 @@ export async function getProfileByCode(
       typeof row.handle === "string" && row.handle
         ? row.handle
         : "球迷 #" + authorCode;
-    return { authorCode, displayName, handle };
+    // get_tier_by_code 回純量 text('black'/'founder'/'')· 任何其他值/錯 → free。
+    const tStr = typeof tierRes?.data === "string" ? tierRes.data : "";
+    const tier: MemberTier =
+      tStr === "black" || tStr === "founder" ? tStr : "free";
+    return { authorCode, displayName, handle, tier };
   } catch {
     return null;
   }
