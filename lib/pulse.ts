@@ -194,3 +194,41 @@ export async function getActivityPulse(limit = 24): Promise<PulseEvent[]> {
     .sort((a, b) => b.ts - a.ts)
     .slice(0, limit);
 }
+
+// ── 首頁活動脈動精華(會動的前門訊號)──────────────────────────────────────
+// 最近有幾個「不重複的人」賽前鎖定 + 最新一手 + 幾顆頭像。 給首頁一塊低調的 liveness 訊號
+// (訪客 / 朋友分享的連結一打開,就感覺「有人在、牆在動」)· 整塊連到 /pulse 完整牆。
+// 🔴 守紅線:不重複人數 < HOMEPAGE_PULSE_MIN → 回空(首頁元件據此整塊隱藏 · 不曝光單一用戶、
+//   不假裝人潮)· 只數真實公開鎖定(同 /pulse)· 無 PnL / 連勝 / 排名 · graceful(0 用戶 / 錯誤
+//   → 空、首頁不破)。
+export const HOMEPAGE_PULSE_MIN = 3; // 至少 3 個不重複的人才上首頁(一兩個人不算「牆在動」)
+
+export type PulseSummary = {
+  /** 最近不重複的賽前鎖定人數(< HOMEPAGE_PULSE_MIN 時回 0 = 首頁不顯示) */
+  lockerCount: number;
+  /** 最近不重複押注者永久碼(最新在前 · 給首頁頭像列 · 最多 maxAvatars 顆) */
+  avatars: string[];
+  /** 最新一手(滾動的「牆在動」鉤子)· 0 鎖定 → null */
+  latest: { handle: string; teamLabel: string } | null;
+};
+
+const EMPTY_SUMMARY: PulseSummary = { lockerCount: 0, avatars: [], latest: null };
+
+export async function getPulseSummary(
+  scanLimit = 80,
+  maxAvatars = 5,
+): Promise<PulseSummary> {
+  const locks = await getRecentLocks(scanLimit); // 全是 lock 事件 · created_at desc(最新在前)
+  const seen = new Set<string>();
+  const avatars: string[] = [];
+  let latest: PulseSummary["latest"] = null;
+  for (const e of locks) {
+    if (e.kind !== "lock") continue;
+    if (!latest) latest = { handle: e.handle, teamLabel: e.teamLabel }; // 第一筆 = 最新
+    if (seen.has(e.authorCode)) continue;
+    seen.add(e.authorCode);
+    if (avatars.length < maxAvatars) avatars.push(e.authorCode);
+  }
+  if (seen.size < HOMEPAGE_PULSE_MIN) return EMPTY_SUMMARY; // 不到門檻 → 首頁整塊隱藏
+  return { lockerCount: seen.size, avatars, latest };
+}

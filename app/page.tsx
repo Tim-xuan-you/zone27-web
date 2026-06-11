@@ -7,6 +7,7 @@ import YourRecordStrip from "@/components/YourRecordStrip";
 import SoccerRecordCard from "@/components/SoccerRecordCard";
 import Avatar from "@/components/Avatar";
 import EngineThreeWayBar from "@/components/EngineThreeWayBar";
+import HomepagePulseStrip from "@/components/HomepagePulseStrip";
 import { getNationalCode } from "@/lib/soccer/teams";
 import {
   getTodayAndFutureMatches,
@@ -18,6 +19,7 @@ import {
 } from "@/lib/matches";
 import { getMlbAsMatches, getMlbFinalizedResults } from "@/lib/mlb-matches";
 import { getCreatorPostCounts } from "@/lib/creator-posts-server";
+import { getPulseSummary } from "@/lib/pulse";
 import {
   getUpcomingWorldCupMatches,
   hasActiveWorldCup,
@@ -80,6 +82,10 @@ export default async function Home() {
   // 每場分析篇數 · 看板標「N 篇分析」讓用戶一眼看出哪場有大神可跟單(抽傭入口)。
   // 無 cookie anon fetch · 不破首頁 ISR 靜態。
   const analysisCounts = await getCreatorPostCounts();
+
+  // ── 活動脈動精華(會動的前門)· 最近 N 人賽前鎖定 + 最新一手 ────────────────
+  // 公開全站資料(0 auth · ISR-cached)· 不到門檻(lib HOMEPAGE_PULSE_MIN)→ 元件整塊隱藏。
+  const pulseSummary = await getPulseSummary();
 
   // ── 世界盃 rail(四年一次的窗 · 開站當晚把世界盃推到第一屏)──────────────
   // 純靜態(讀 lib/soccer-locked.json · 0 API · ISR-safe)· 引擎已賽前鎖死的場 +
@@ -179,6 +185,11 @@ export default async function Home() {
             </Link>
           </div>
         </section>
+
+        {/* ── 活動脈動條 · 會動的前門(R227)· 最近 N 人賽前鎖定 + 最新一手 → /pulse ──
+            訪客 / 朋友分享的連結一打開就感覺「有人在、牆在動」(人潮就是錢潮)· 連到剛補上足球的
+            脈動牆。 不到門檻 / 0 用戶 → 自動隱藏(graceful · 守首頁極簡)。 */}
+        <HomepagePulseStrip summary={pulseSummary} />
 
         {/* ── 你 vs 引擎 · 回訪鉤子 · 只在登入且押過才出現 ──
             放在市場看板「之上」· 回訪的會員一進來先看到自己跟引擎誰準
