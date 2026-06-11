@@ -20,6 +20,7 @@
 // ─────────────────────────────────────────────────────
 
 import { SUPPORT_EMAIL, BRAND_NAME } from "@/lib/brand-constants";
+import { redactEmail } from "@/lib/redact-email";
 
 const RESEND_ENDPOINT = "https://api.resend.com/emails";
 const FROM_ADDRESS = `${BRAND_NAME} <onboarding@resend.dev>`;
@@ -49,7 +50,7 @@ export async function sendWaitlistConfirmation({
   // succeeded, just log + return without throwing.
   if (!apiKey) {
     console.warn(
-      `[ZONE27 · EMAIL · SKIP] RESEND_API_KEY not set · waitlist email skipped for ${to}`
+      `[ZONE27 · EMAIL · SKIP] RESEND_API_KEY not set · waitlist email skipped for ${redactEmail(to)}`
     );
     return { ok: false, error: "RESEND_API_KEY missing" };
   }
@@ -86,7 +87,7 @@ export async function sendWaitlistConfirmation({
     if (!response.ok) {
       const errorBody = await response.text();
       console.error(
-        `[ZONE27 · EMAIL · ERROR] http=${response.status} to=${to} body=${errorBody}`
+        `[ZONE27 · EMAIL · ERROR] http=${response.status} to=${redactEmail(to)} body=${errorBody}`
       );
       return { ok: false, error: `HTTP ${response.status}: ${errorBody.slice(0, 200)}` };
     }
@@ -94,12 +95,12 @@ export async function sendWaitlistConfirmation({
     const data = (await response.json()) as { id?: string };
     const id = data.id ?? "unknown";
     console.log(
-      `[ZONE27 · EMAIL · SENT] to=${to} queue=#${pos} id=${id} ts=${new Date().toISOString()}`
+      `[ZONE27 · EMAIL · SENT] to=${redactEmail(to)} queue=#${pos} id=${id} ts=${new Date().toISOString()}`
     );
     return { ok: true, id };
   } catch (err) {
     const message = err instanceof Error ? err.message : String(err);
-    console.error(`[ZONE27 · EMAIL · ERROR] uncaught to=${to} err=${message}`);
+    console.error(`[ZONE27 · EMAIL · ERROR] uncaught to=${redactEmail(to)} err=${message}`);
     return { ok: false, error: message };
   }
 }
@@ -246,7 +247,7 @@ export async function sendFoundersApplicationReceived({
   const apiKey = process.env.RESEND_API_KEY;
   if (!apiKey) {
     console.warn(
-      `[ZONE27 · GOLD_APPLY_EMAIL · SKIP] RESEND_API_KEY not set · email skipped for ${to}`,
+      `[ZONE27 · GOLD_APPLY_EMAIL · SKIP] RESEND_API_KEY not set · email skipped for ${redactEmail(to)}`,
     );
     return { ok: false, error: "RESEND_API_KEY missing" };
   }
@@ -352,7 +353,7 @@ https://zone27-web.vercel.app/founders/ledger
     if (!response.ok) {
       const errorBody = await response.text();
       console.error(
-        `[ZONE27 · GOLD_APPLY_EMAIL · ERROR] http=${response.status} to=${to} body=${errorBody}`,
+        `[ZONE27 · GOLD_APPLY_EMAIL · ERROR] http=${response.status} to=${redactEmail(to)} body=${errorBody}`,
       );
       return {
         ok: false,
@@ -362,13 +363,13 @@ https://zone27-web.vercel.app/founders/ledger
     const data = (await response.json()) as { id?: string };
     const id = data.id ?? "unknown";
     console.log(
-      `[ZONE27 · GOLD_APPLY_EMAIL · SENT] to=${to} app=${applicationId} id=${id}`,
+      `[ZONE27 · GOLD_APPLY_EMAIL · SENT] to=${redactEmail(to)} app=${applicationId} id=${id}`,
     );
     return { ok: true, id };
   } catch (err) {
     const message = err instanceof Error ? err.message : String(err);
     console.error(
-      `[ZONE27 · GOLD_APPLY_EMAIL · ERROR] uncaught to=${to} err=${message}`,
+      `[ZONE27 · GOLD_APPLY_EMAIL · ERROR] uncaught to=${redactEmail(to)} err=${message}`,
     );
     return { ok: false, error: message };
   }
@@ -541,7 +542,7 @@ export async function sendSubmissionNotification({
   const apiKey = process.env.RESEND_API_KEY;
   if (!apiKey) {
     console.warn(
-      `[ZONE27 · SUBMISSION · SKIP] RESEND_API_KEY not set · submission email skipped from ${memberEmail}`
+      `[ZONE27 · SUBMISSION · SKIP] RESEND_API_KEY not set · submission email skipped from ${redactEmail(memberEmail)}`
     );
     return { ok: false, error: "RESEND_API_KEY missing" };
   }
@@ -607,7 +608,7 @@ Reply 此 email 直接給 member · 或 forward 給自己 curate 後 publish 到
     if (!response.ok) {
       const errorBody = await response.text();
       console.error(
-        `[ZONE27 · SUBMISSION · ERROR] http=${response.status} from=${memberEmail}`
+        `[ZONE27 · SUBMISSION · ERROR] http=${response.status} from=${redactEmail(memberEmail)}`
       );
       return {
         ok: false,
@@ -617,13 +618,13 @@ Reply 此 email 直接給 member · 或 forward 給自己 curate 後 publish 到
     const data = (await response.json()) as { id?: string };
     const id = data.id ?? "unknown";
     console.log(
-      `[ZONE27 · SUBMISSION · SENT] from=${memberEmail} title="${title.slice(0, 40)}" id=${id}`
+      `[ZONE27 · SUBMISSION · SENT] from=${redactEmail(memberEmail)} title="${title.slice(0, 40)}" id=${id}`
     );
     return { ok: true, id };
   } catch (err) {
     const message = err instanceof Error ? err.message : String(err);
     console.error(
-      `[ZONE27 · SUBMISSION · ERROR] uncaught from=${memberEmail} err=${message}`
+      `[ZONE27 · SUBMISSION · ERROR] uncaught from=${redactEmail(memberEmail)} err=${message}`
     );
     return { ok: false, error: message };
   }

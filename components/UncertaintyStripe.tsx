@@ -51,7 +51,9 @@ export default function UncertaintyStripe({
   height = 4,
 }: Props) {
   // Guard: pre-convergence and impossible-edge values render no stripe.
-  if (n < 30 || estimate <= 0 || estimate >= 100) {
+  // !Number.isFinite 防 NaN/Infinity:NaN 比較永遠 false 會穿過 <=0/>=100 → se=sqrt(NaN)
+  // → CSS「NaN%」破圖(防禦性 · estimate 來自計數理應有限 · 但守住邊界)。
+  if (!Number.isFinite(estimate) || n < 30 || estimate <= 0 || estimate >= 100) {
     return (
       <div
         style={{ height: `${height}px` }}

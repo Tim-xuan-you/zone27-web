@@ -21,6 +21,7 @@ import { revalidatePath } from "next/cache";
 import type { WaitlistResult } from "@/lib/waitlist-types";
 import { supabase } from "@/lib/supabase";
 import { sendWaitlistConfirmation } from "@/lib/email";
+import { redactEmail } from "@/lib/redact-email";
 
 // R67 W-D · types + non-async helpers live in lib/waitlist-types.ts
 // because "use server" requires all exports here to be async。 R68 W-D
@@ -78,7 +79,7 @@ export async function reserveSpot(
       return { ok: false, error: "invalid_email" };
     }
     console.error(
-      `[ZONE27 · WAITLIST · ERROR] email=${email} error=${message} ts=${new Date().toISOString()}`
+      `[ZONE27 · WAITLIST · ERROR] email=${redactEmail(email)} error=${message} ts=${new Date().toISOString()}`
     );
     return { ok: false, error: "server_error" };
   }
@@ -87,7 +88,7 @@ export async function reserveSpot(
   const queuePos = Number(row?.queue_position);
   if (!Number.isFinite(queuePos)) {
     console.error(
-      `[ZONE27 · WAITLIST · ERROR] malformed RPC response email=${email} data=${JSON.stringify(
+      `[ZONE27 · WAITLIST · ERROR] malformed RPC response email=${redactEmail(email)} data=${JSON.stringify(
         data
       )} ts=${new Date().toISOString()}`
     );
@@ -99,8 +100,8 @@ export async function reserveSpot(
   console.log(
     `[ZONE27 · WAITLIST · ${
       alreadyReserved ? "DUPE" : "NEW"
-    }] queue=${queuePos} email=${email} name=${
-      name ?? "—"
+    }] queue=${queuePos} email=${redactEmail(email)} name=${
+      name ? "[set]" : "—"
     } ts=${new Date().toISOString()}`
   );
 
@@ -126,7 +127,7 @@ export async function reserveSpot(
   });
   if (!emailResult.ok) {
     console.warn(
-      `[ZONE27 · WAITLIST · EMAIL_FAILED] queue=${queuePos} email=${email} reason=${emailResult.error}`
+      `[ZONE27 · WAITLIST · EMAIL_FAILED] queue=${queuePos} email=${redactEmail(email)} reason=${emailResult.error}`
     );
   }
 
