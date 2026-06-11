@@ -7,11 +7,13 @@ import {
   getMatchTally,
   getMyPrediction,
   submitPrediction,
+  setPredictionConfidence,
   CROWD_LINE_MIN,
   type MarketTally,
 } from "@/lib/predictions-market";
 import { matchHasStarted } from "@/lib/matches";
 import MarketSplitBar from "@/components/MarketSplitBar";
+import ConfidencePicker from "@/components/ConfidencePicker";
 
 // ── ZONE 27 · Card Bet Strip ─────────────────────────────
 // 首頁 / 賽事列表市場卡上的一鍵押 + 群眾市場線。
@@ -47,6 +49,8 @@ export default function CardBetStrip({
   // 樂觀 UI(同 SoccerBetStrip 房規):點下瞬間翻「已鎖」=感知 0 延遲 · 但誠實:server 確認前
   // 只說「鎖定中…」不亮「不可改」/ 不發光 / 不出帳本連結;確認後才定局。 失敗乾淨回滾。
   const [pending, setPending] = useState(false);
+  // 信心值只在「剛押完這一刻」追問(declare-at-lock · reload 不再問)。
+  const [justPicked, setJustPicked] = useState(false);
 
   useEffect(() => {
     let cancelled = false;
@@ -99,6 +103,7 @@ export default function CardBetStrip({
     if (res.ok) {
       setMyPick(res.pick);
       setPending(false); // server 確認 → 才亮「不可改」+ 帳本連結 + 發光
+      setJustPicked(true); // 剛押完 → 追問「幾成把握」(校準大師)
       const t = await getMatchTally(matchId);
       setTally(t);
     } else if (res.reason === "already_predicted") {
@@ -236,6 +241,12 @@ export default function CardBetStrip({
           <p className="font-mono text-gold text-base sm:text-lg tracking-[0.08em] leading-none mb-1.5">
             押 {myPick === "home" ? homeName : awayName}
           </p>
+          {/* 校準大師:押完那刻追問「幾成把握」(只此刻問 · declare-at-lock)· 左對齊不被卡片置中壓扁。 */}
+          {!pending && justPicked && (
+            <div className="text-left mt-1">
+              <ConfidencePicker matchId={matchId} submit={setPredictionConfidence} />
+            </div>
+          )}
           {/* 帳本連結等 server 確認後才出(未存前進去看不到這手)。 */}
           {!pending && (
             <Link
