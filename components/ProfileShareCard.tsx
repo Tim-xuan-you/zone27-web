@@ -86,7 +86,8 @@ export default function ProfileShareCard({
           <>
             含輸帳本、賽前鎖定、刪不掉。 傳到 LINE / FB / IG,會自動帶上{" "}
             <span className="text-bone">你的含輸戰績卡</span> —— 賣明牌的結構上做不出這張
-            (他們靠藏輸活)。
+            (他們靠藏輸活)。 把它<span className="text-bone">丟給不信你的人</span>:
+            他不用登入,就能驗證你到底多準。
           </>
         )}
       </p>

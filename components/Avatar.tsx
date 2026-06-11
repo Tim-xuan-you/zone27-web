@@ -37,7 +37,9 @@ export default function Avatar({
   );
   // 隊色內框(隊徽辨識)+ 支持者金環(身分標記)· 可同時存在 · 沒有就 undefined。
   const teamInset = color ? `inset 0 0 0 1px ${color}66` : null;
-  const supporterRing = supporter ? "0 0 0 1.5px rgba(212,175,55,0.75)" : null;
+  // 2px / 0.9：1.5px/0.75 在 28px 小頭像上幾乎看不出來(audit 驗)· 加粗提亮到一眼可辨
+  // 「付費支持者」· 仍是低調金環(不加外發光,避免密清單視覺噪音)· 守暗金克制。
+  const supporterRing = supporter ? "0 0 0 2px rgba(212,175,55,0.9)" : null;
   const boxShadow = [teamInset, supporterRing].filter(Boolean).join(", ") || undefined;
   return (
     <span

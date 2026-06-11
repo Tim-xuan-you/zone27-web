@@ -440,6 +440,8 @@ export default function LoginPage() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="you@example.com"
+                  aria-invalid={state.kind === "error"}
+                  aria-describedby={state.kind === "error" ? "login-error" : undefined}
                   className="w-full bg-navy/60 border border-line/70 px-4 py-3 text-bone text-base focus:outline-none focus-visible:border-gold focus-visible:ring-2 focus-visible:ring-gold/20 transition-colors"
                   disabled={state.kind === "submitting"}
                 />
@@ -461,6 +463,8 @@ export default function LoginPage() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••"
+                  aria-invalid={state.kind === "error"}
+                  aria-describedby={state.kind === "error" ? "login-error" : undefined}
                   className="w-full bg-navy/60 border border-line/70 px-4 py-3 text-bone text-base focus:outline-none focus-visible:border-gold focus-visible:ring-2 focus-visible:ring-gold/20 transition-colors"
                   disabled={state.kind === "submitting"}
                 />
@@ -476,6 +480,7 @@ export default function LoginPage() {
 
               {state.kind === "error" && (
                 <p
+                  id="login-error"
                   role="alert"
                   aria-live="polite"
                   className="font-mono text-loss text-xs tracking-[0.15em] leading-relaxed"
