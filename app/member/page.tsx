@@ -135,13 +135,24 @@ export default async function MemberPage() {
   // 修「MLB 賽果掉出 2 天 live 窗 → 已結算押注倒退回 pending → 準度數字每天亂跳、且少算」+ 堵
   // 「locked 已 grade 但 live 此刻回非 final → live 的 null 蓋掉永久 winner」窄反例(對齊 canonical
   // getMlbFinalizedResults 的 JSON-first 政策)。 allWithMlb 不動(下方持倉/可押賽事仍要 live 窗)。
-  const idMatches = [...allMatches, ...mlbMatches, ...getMlbLockedMatches()].map((m) => ({
-    id: m.id,
-    finalWinner: m.finalResult?.winner ?? null,
-    engineFav: getEngineFavorite(m),
-    startISO: getMatchStartIso(m),
-    settledDay: m.finalResult?.ingestedAt ?? null,
-  }));
+  const mlbLockedMatches = getMlbLockedMatches();
+  const lockedMlbIds = new Set(mlbLockedMatches.map((m) => m.id));
+  const idMatches = [...allMatches, ...mlbMatches, ...mlbLockedMatches].map((m) => {
+    // 你 vs 引擎只認「賽前真的鎖定過引擎線」的場。 CPBL 永遠有賽前鎖定 winRate;MLB 只有
+    // 在 mlb-locked.json 內的才算。 未鎖定的 MLB 已結束場,它的引擎線是「賽後用當下球季
+    // 數據即時重算」(賽後還會變)→ 拿來當「賽前引擎看好誰」= 用後見之明灌引擎水(正是
+    // 我們最該避免的「賽後假裝賽前就猜中」)。 故未鎖定 MLB 排除出你 vs 引擎(engineFav=null,
+    // 同 50/50 銅板局),但你自己這手的對錯照常計入個人戰績。 鎖定過的 MLB 由
+    // getMlbLockedMatches 那筆帶正確賽前線(陣列最後 · 下游 Map 後者勝)。
+    const isUnlockedMlb = m.id.startsWith("mlb-") && !lockedMlbIds.has(m.id);
+    return {
+      id: m.id,
+      finalWinner: m.finalResult?.winner ?? null,
+      engineFav: isUnlockedMlb ? null : getEngineFavorite(m),
+      startISO: getMatchStartIso(m),
+      settledDay: m.finalResult?.ingestedAt ?? null,
+    };
+  });
   // 個人校準身分:你的紀錄(含輸)+ 對比亂猜 + 同場 你 vs 引擎 + 本月升階閘門。
   const identity = aggregateIdentity(
     predictionsMap,
