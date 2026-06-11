@@ -96,7 +96,7 @@ export default function CalibrationGame({ matches }: { matches: QuizMatch[] }) {
 
       {revealed && score && (
         <div className="pt-2">
-          <ResultPanelFooter onReset={reset} />
+          <ResultPanelFooter onReset={reset} score={score} />
         </div>
       )}
     </div>
@@ -448,7 +448,13 @@ function ResultPanel({ score: s }: { score: Score }) {
   );
 }
 
-function ResultPanelFooter({ onReset }: { onReset: () => void }) {
+function ResultPanelFooter({
+  onReset,
+  score,
+}: {
+  onReset: () => void;
+  score: Score;
+}) {
   // C3(轉換 agent)· 剛親手摸到「我太有把握」= 最高意圖時刻 · 原本三個等重 outline 鈕、
   // 真正的轉換鏈藏在第三個 → 主轉換做成實心金 · 另兩個降為安靜文字鏈(一個焦點)。
   return (
@@ -462,6 +468,9 @@ function ResultPanelFooter({ onReset }: { onReset: () => void }) {
       <p className="font-mono text-mute/55 text-[9px] tracking-[0.2em] leading-relaxed text-center">
         免費 · 押一邊,賽後自動掛準 / 不準、刪不掉
       </p>
+      {/* 病毒回路:剛照完鏡子那刻最想「叫朋友也來試」· 分享的是你的成績(不洩題)·
+          朋友點進去是全新一局、撞自己的牆 = Wordle 式不劇透招募。 純前端 · 0 後端。 */}
+      <ShareResultButton score={score} />
       <div className="flex flex-wrap items-center gap-5 justify-center mt-1">
         <button
           type="button"
@@ -478,6 +487,62 @@ function ResultPanelFooter({ onReset }: { onReset: () => void }) {
         </Link>
       </div>
     </div>
+  );
+}
+
+// 把校準結果做成一句不洩題、會招募的分享文 —— 自己的成數(可炫/可自嘲)+ 一條乾淨連結。
+// 朋友點進去看不到你的答案,是全新一局,得自己撞那道 57% 的牆(= 病毒擴散的真正引擎)。
+function buildShareLine(s: Score): string {
+  if (s.decided === 0 || s.avgConf === null || s.youHitPct === null) {
+    return "我剛測了自己判斷比賽有多準 —— 沒有人是神。換你也來測測看(60 秒):";
+  }
+  if (s.gap !== null && s.gap > 12) {
+    return `我以為自己有 ${s.avgConf}% 把握,實際只中 ${s.youHitPct}% —— 連我都沒那麼準。換你測測你有多準:`;
+  }
+  if (s.gap !== null && s.gap < -8) {
+    return `我說 ${s.avgConf}% 把握、實際中了 ${s.youHitPct}% —— 原來我太保守。換你測測自己的判斷:`;
+  }
+  return `我測了自己判斷比賽的校準:說 ${s.avgConf}% 把握、實際中 ${s.youHitPct}%,算誠實的。換你也試試:`;
+}
+
+function ShareResultButton({ score }: { score: Score }) {
+  const [copied, setCopied] = useState(false);
+
+  async function onShare() {
+    const line = buildShareLine(score);
+    const url =
+      typeof window !== "undefined"
+        ? `${window.location.origin}/calibration/test`
+        : "https://zone27-web.vercel.app/calibration/test";
+    // 手機原生分享面板優先(LINE / IG / 訊息一鍵)· 桌機沒有 → 退回複製到剪貼簿。
+    if (typeof navigator !== "undefined" && typeof navigator.share === "function") {
+      try {
+        await navigator.share({ title: "ZONE 27 · 你有多準?", text: line, url });
+        return;
+      } catch {
+        // 使用者取消或失敗 → 落到複製
+      }
+    }
+    if (typeof navigator !== "undefined" && navigator.clipboard) {
+      try {
+        await navigator.clipboard.writeText(`${line}\n${url}`);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2200);
+      } catch {
+        // 連剪貼簿都沒有 → 安靜略過(不報錯嚇人)
+      }
+    }
+  }
+
+  return (
+    <button
+      type="button"
+      onClick={onShare}
+      aria-label="分享你的校準結果 · 不洩題 · 朋友點進去是全新一局"
+      className="inline-flex items-center gap-2 border border-gold/45 hover:border-gold hover:bg-gold/5 text-gold font-mono text-[11px] tracking-[0.2em] px-5 py-2.5 transition-colors"
+    >
+      {copied ? "已複製 · 貼給朋友" : "把這面鏡子傳給朋友 →"}
+    </button>
   );
 }
 
