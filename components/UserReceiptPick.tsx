@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { getMyPredictionsClient } from "@/lib/predictions-market";
+import { getMyPredictionsClient, getMyRationales } from "@/lib/predictions-market";
 import { computeUserVerdict, isLatePick } from "@/lib/predictions";
 
 // ── ZONE 27 · 收據蓋「本人這手 pick + 鎖定時戳」(soul-roadmap R208 #1 · close-the-loop b)──
@@ -57,17 +57,23 @@ export default function UserReceiptPick({
   const [ready, setReady] = useState(false);
   const [pick, setPick] = useState<"home" | "away" | null>(null);
   const [ts, setTs] = useState<string>("");
+  // 你賽前鎖的那句理由(押注理由 · 0024)· 沒寫 / migration 未套 / 未登入 → 空字串(graceful 不顯示)。
+  const [rationale, setRationale] = useState<string>("");
 
   useEffect(() => {
     let alive = true;
     (async () => {
-      const map = await getMyPredictionsClient();
+      const [map, rats] = await Promise.all([
+        getMyPredictionsClient(),
+        getMyRationales(),
+      ]);
       if (!alive) return;
       const entry = map[matchId];
       if (entry && (entry.pick === "home" || entry.pick === "away")) {
         setPick(entry.pick);
         setTs(entry.ts);
       }
+      setRationale(rats[matchId] ?? "");
       setReady(true);
     })();
     return () => {
@@ -82,6 +88,15 @@ export default function UserReceiptPick({
 
   const teamName = pick === "home" ? homeName : awayName;
   const when = fmtTaipei(ts);
+  // 你賽前鎖死的那句理由(押注理由 · 0024)· 賽前 / 賽後都掛(讓收據從「我押了 X」升級成「我押了 X,因為 Y」)。
+  const rationaleBlock = rationale ? (
+    <p className="mt-2 text-bone/90 text-[13px] sm:text-sm leading-relaxed">
+      <span className="font-mono text-gold/60 text-[10px] tracking-[0.2em] mr-1.5">
+        你賽前寫的
+      </span>
+      「{rationale}」
+    </p>
+  ) : null;
 
   // 還沒結算 · 賽前鎖定中 / 待對帳:
   //   · pending(賽前可外傳收據 R220)→ 蓋「你賽前押了 X · 待對帳」(無 ✓/✕ · 不假裝有結果)。
@@ -98,6 +113,7 @@ export default function UserReceiptPick({
           你賽前押了 <span className="text-gold">{teamName}</span> ·{" "}
           <span className="text-mute/80">待對帳</span>
         </p>
+        {rationaleBlock}
         {when && (
           <p className="mt-2 font-mono text-mute/70 text-[10px] tracking-[0.2em] tabular">
             鎖定於 {when} · 賽前鎖死 · 改不了 · 賽後自動揭曉命中或落空
@@ -129,6 +145,7 @@ export default function UserReceiptPick({
         你賽前押了 <span className="text-gold">{teamName}</span> ·{" "}
         <span className={markColor}>{verdictWord}</span>
       </p>
+      {rationaleBlock}
       {when && (
         <p className="mt-2 font-mono text-mute/70 text-[10px] tracking-[0.2em] tabular">
           鎖定於 {when} · 賽前鎖死 · 改不了

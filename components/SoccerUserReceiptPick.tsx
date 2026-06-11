@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { getMySoccerPicks, type SoccerPick } from "@/lib/soccer/predictions";
-import { getMyCalibrationPicks } from "@/lib/predictions-market";
+import { getMyCalibrationPicks, getMyRationales } from "@/lib/predictions-market";
 
 // ── ZONE 27 · 足球收據蓋「本人這手 pick」(soul R208 close-the-loop · 三向版)──────
 // 足球單場收據(/receipts/fd-* · SoccerReceiptView)是 SSG/ISR,無本人 context。
@@ -66,13 +66,16 @@ export default function SoccerUserReceiptPick({
   const [ts, setTs] = useState<string>("");
   // 你押注時宣告的把握(校準大師 · 0021)· 收據上同時蓋「喊了幾成把握」= 比單純的 pick 更強的 flex。
   const [conf, setConf] = useState<number | null>(null);
+  // 你賽前鎖的那句理由(押注理由 · 0024)· 沒寫 / migration 未套 / 未登入 → 空(graceful)。
+  const [rationale, setRationale] = useState<string>("");
 
   useEffect(() => {
     let alive = true;
     (async () => {
-      const [picks, calPicks] = await Promise.all([
+      const [picks, calPicks, rats] = await Promise.all([
         getMySoccerPicks(),
         getMyCalibrationPicks(),
+        getMyRationales(),
       ]);
       if (!alive) return;
       const mine = picks.find((p) => p.matchId === matchId);
@@ -82,6 +85,7 @@ export default function SoccerUserReceiptPick({
       }
       const myConf = calPicks.find((c) => c.matchId === matchId);
       if (myConf) setConf(myConf.confidence);
+      setRationale(rats[matchId] ?? "");
       setReady(true);
     })();
     return () => {
@@ -98,6 +102,15 @@ export default function SoccerUserReceiptPick({
 
   const teamName = pick === "home" ? homeName : pick === "away" ? awayName : "和局";
   const when = fmtTaipei(ts);
+  // 你賽前鎖死的那句理由(押注理由 · 0024)· 賽前/賽後都掛(收據從「我押了 X」升級成「我押了 X,因為 Y」)。
+  const rationaleBlock = rationale ? (
+    <p className="mt-2 text-bone/90 text-[13px] sm:text-sm leading-relaxed">
+      <span className="font-mono text-gold/60 text-[10px] tracking-[0.2em] mr-1.5">
+        你賽前寫的
+      </span>
+      「{rationale}」
+    </p>
+  ) : null;
 
   // 還沒結算(賽前鎖定中 / 待對帳)→ 蓋「你賽前鎖了 X · 待對帳」(無 ✓/✕ · 不假裝有結果)。
   if (outcome === null) {
@@ -114,6 +127,7 @@ export default function SoccerUserReceiptPick({
           )}{" "}
           · <span className="text-mute/80">待對帳</span>
         </p>
+        {rationaleBlock}
         {/* 你 vs 引擎:對賭 = 「我敢跟演算法對著幹」的炫耀物(金 · 病毒槓桿)· 同調 = mute。 */}
         {pick === enginePick ? (
           <p className="mt-1.5 font-mono text-mute/65 text-[11px] tracking-[0.08em]">
@@ -151,6 +165,7 @@ export default function SoccerUserReceiptPick({
         )}{" "}
         · <span className={markColor}>{verdictWord}</span>
       </p>
+      {rationaleBlock}
       {/* 你 vs 引擎結果對照:你對它錯 = 你贏過引擎了(金 · 最爽的炫耀物)· 其餘含輸照誠實(mute)。 */}
       <EngineContrast hit={hit} engineHit={enginePick === outcome} />
       {when && (

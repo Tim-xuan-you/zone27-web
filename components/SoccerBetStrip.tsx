@@ -9,12 +9,14 @@ import {
   getSoccerTally,
   submitSoccerPrediction,
   setSoccerConfidence,
+  setSoccerRationale,
   crowdPercents,
   SOCCER_CROWD_MIN,
   type SoccerPick,
   type SoccerTally,
 } from "@/lib/soccer/predictions";
 import ConfidencePicker from "@/components/ConfidencePicker";
+import RationalePicker from "@/components/RationalePicker";
 
 // ── ZONE 27 · 足球三向押注條 ──────────────────────────────
 // 主勝 / 和 / 客勝。 押了不可改(先鎖後結)· 登入才能押(R188)· 開賽後鎖手。
@@ -217,7 +219,10 @@ export default function SoccerBetStrip({
           </p>
           {/* 校準大師:押完那刻追問「幾成把握」(只此刻問 · server 確認後 · declare-at-lock)。 */}
           {!pending && justPicked && (
-            <ConfidencePicker matchId={matchId} submit={setSoccerConfidence} />
+            <>
+              <ConfidencePicker matchId={matchId} submit={setSoccerConfidence} />
+              <RationalePicker matchId={matchId} submit={setSoccerRationale} />
+            </>
           )}
           {/* 收據連結 / 帳本連結等 server 確認後才出(收據島讀的是 server 那筆 · 未存前出來會空)。 */}
           {!pending && (

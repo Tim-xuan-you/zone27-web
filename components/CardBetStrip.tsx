@@ -8,12 +8,14 @@ import {
   getMyPrediction,
   submitPrediction,
   setPredictionConfidence,
+  setPredictionRationale,
   CROWD_LINE_MIN,
   type MarketTally,
 } from "@/lib/predictions-market";
 import { matchHasStarted } from "@/lib/matches";
 import MarketSplitBar from "@/components/MarketSplitBar";
 import ConfidencePicker from "@/components/ConfidencePicker";
+import RationalePicker from "@/components/RationalePicker";
 
 // ── ZONE 27 · Card Bet Strip ─────────────────────────────
 // 首頁 / 賽事列表市場卡上的一鍵押 + 群眾市場線。
@@ -248,6 +250,7 @@ export default function CardBetStrip({
           {!pending && justPicked && (
             <div className="text-left mt-1">
               <ConfidencePicker matchId={matchId} submit={setPredictionConfidence} />
+              <RationalePicker matchId={matchId} submit={setPredictionRationale} />
             </div>
           )}
           {/* 帳本連結 + 賽前可外傳收據(R220)等 server 確認後才出(未存前進去看不到這手)。 */}

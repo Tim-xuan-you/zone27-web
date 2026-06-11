@@ -232,6 +232,24 @@ export async function setSoccerConfidence(
   }
 }
 
+/** 賽前寫一句「我為什麼看好」(押注理由 · 0024)· 一次性(server 已寫過不覆蓋)· 失敗 graceful。
+ *  同 set_prediction_rationale RPC(sport-agnostic · 走共用 predictions 表 by match_id)· 跟棒球同源。 */
+export async function setSoccerRationale(
+  matchId: string,
+  rationale: string,
+): Promise<boolean> {
+  try {
+    const supabase = createSupabaseBrowserClient();
+    const { error } = await supabase.rpc("set_prediction_rationale", {
+      p_match_id: matchId,
+      p_rationale: rationale,
+    });
+    return !error;
+  } catch {
+    return false;
+  }
+}
+
 export type SoccerSubmitResult =
   | { ok: true; pick: SoccerPick }
   | { ok: false; reason: "not_logged_in" | "already_predicted" | "invalid" | "error" };

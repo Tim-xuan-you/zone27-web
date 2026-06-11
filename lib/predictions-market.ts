@@ -185,6 +185,45 @@ export async function getMyCalibrationPicks(): Promise<CalibrationPickRow[]> {
   }
 }
 
+/** 賽前寫一句「我為什麼看好」(押注理由 · 0024)· 一次性(server 已設過不覆蓋 = 先鎖後結)·
+ *  失敗 graceful。 跟 submit_prediction 分開的 RPC(set_prediction_rationale)→ 零風險。 */
+export async function setPredictionRationale(
+  matchId: string,
+  rationale: string
+): Promise<boolean> {
+  try {
+    const supabase = createSupabaseBrowserClient();
+    const { error } = await supabase.rpc("set_prediction_rationale", {
+      p_match_id: matchId,
+      p_rationale: rationale,
+    });
+    return !error;
+  } catch {
+    return false;
+  }
+}
+
+/** 本人所有「有寫理由」的押注 → map(matchId → 理由)· 給收據島蓋上「你賽前寫的理由」。
+ *  走 0024 的 get_my_rationales(只回有 rationale 的列)· anon/錯/migration 未套 → 空 map(graceful)。
+ *  跨運動(不濾 fd-*)· 收據島自己用 matchId 取。 */
+export async function getMyRationales(): Promise<Record<string, string>> {
+  try {
+    const supabase = createSupabaseBrowserClient();
+    const { data, error } = await supabase.rpc("get_my_rationales");
+    if (error || !Array.isArray(data)) return {};
+    const map: Record<string, string> = {};
+    for (const row of data as { match_id?: unknown; rationale?: unknown }[]) {
+      const matchId = typeof row.match_id === "string" ? row.match_id : null;
+      const rationale =
+        typeof row.rationale === "string" ? row.rationale.trim() : "";
+      if (matchId && rationale) map[matchId] = rationale;
+    }
+    return map;
+  } catch {
+    return {};
+  }
+}
+
 /** Enter the market: submit a pick (logged-in). One per match · immutable
  *  (server-enforced). */
 export async function submitPrediction(
