@@ -56,7 +56,9 @@ const NAV_ITEMS_STATIC: {
   label: string;
   badge?: string;
 }[] = [
-  { key: "matches", href: "/matches", label: "賽事" },
+  // 標「棒球」而非「賽事」—— 足球已是並列的 Nav 項,「賽事」(泛指)擺在「足球」旁邊
+  // 讀起來怪(足球也是賽事)· 改「棒球」跟頁內 SportTabs 的「棒球 | 足球」同一套詞(認得出>記得住)。
+  { key: "matches", href: "/matches", label: "棒球" },
   // R211 · 世界盃開站(2026-06-12)· 足球進永久 Nav = 可發現性(原本只能從首頁卡 /
   //  /matches 的 SportTabs / Cmd-K 進 · 世界盃當晚等於把頭條藏起來)。 純靜態連結 ·
   //  不在 Nav render 時 fetch(守 R207「Nav 不 render-fetch」鐵律)。 無 badge =

@@ -110,17 +110,29 @@ export default function CalibrationTestPage() {
           )}
         </section>
 
-        {/* ── back ───────────────────────────────────── */}
+        {/* ── 接轉換:剛測完那刻是最熱的線索,別只給一條 back-link 就放生 ──────── */}
         <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-24 text-center border-t border-line/40 pt-10">
           <p className="font-mono text-gold text-[10px] tracking-[0.4em] mb-4">
             你摸到的那道牆 · 我們天天對帳
           </p>
+          <p className="text-mute text-sm leading-relaxed max-w-md mx-auto mb-5">
+            剛剛是練習題。 想把你自己<span className="text-bone">真實</span>的準度,
+            記成一份別人刪不掉的戰績?押一手真的、賽後逐場幫你對帳。
+          </p>
           <Link
-            href="/calibration"
-            className="font-mono text-mute hover:text-gold text-[10px] tracking-[0.4em] transition-colors"
+            href="/login?next=/member"
+            className="inline-block font-mono text-gold border border-gold/45 hover:border-gold hover:bg-gold/5 text-[11px] tracking-[0.2em] px-5 py-2.5 transition-colors"
           >
-            ← 看引擎自己準不準 · /calibration
+            記下我真實的戰績 · 免費註冊 →
           </Link>
+          <div className="mt-5">
+            <Link
+              href="/calibration"
+              className="font-mono text-mute hover:text-gold text-[10px] tracking-[0.4em] transition-colors"
+            >
+              ← 看引擎自己準不準 · /calibration
+            </Link>
+          </div>
         </section>
       </main>
 

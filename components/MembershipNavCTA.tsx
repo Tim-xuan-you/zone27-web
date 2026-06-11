@@ -100,15 +100,17 @@ export default function MembershipNavCTA({
   // logged-in = 「您的引擎」→ /member。 NavLoginCTA(原本另一顆「登入」)已刪。
   // /membership(三層方案總覽)改由 Cmd-K + footer 進(同 Apple:右上是帳號不是定價)。
   const href = effectiveLoggedIn ? "/member" : "/login";
+  // 登入後標「我的帳本」而非「您的引擎」——「您的引擎」讀起來像產品名,使用者不知道
+  // 那是「回我自己的紀錄」。「我的帳本」對齊足球押完的「進你的帳本」+ 品牌「有帳本的玩運彩」。
   const label = previewActive
-    ? "您的引擎 (PREVIEW)"
+    ? "我的帳本 (PREVIEW)"
     : loggedIn
-    ? "您的引擎"
+    ? "我的帳本"
     : "登入";
   const aria = previewActive
     ? "PREVIEW mode · /member dashboard preview · 同 dogfood mirror logged-in UX"
     : loggedIn
-    ? "您的 /member 個人儀表板 · 已登入會員專屬"
+    ? "我的帳本 · /member 個人儀表板 · 已登入會員專屬"
     : "登入或註冊 · Email + 密碼 · 終身免費 · 0 tracking";
 
   if (variant === "mobile") {

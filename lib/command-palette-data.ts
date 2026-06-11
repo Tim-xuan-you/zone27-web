@@ -135,6 +135,18 @@ export const COMMAND_ITEMS: CommandItem[] = [
     group: "信任文件",
     keywords: ["calibration", "校準", "準度", "57%", "天花板", "你有多準", "練習", "校準練習"],
   },
+  {
+    // 全站最強的「免登入」鉤子(換你當引擎、親手撞 57% 天花板)· 原本只能從首頁小字 /
+    // /calibration 內文進 · Cmd-K 沒收 → 深連結進站的人找不到。 補進可搜尋索引。
+    label: "校準練習 · 換你當引擎 · 測你自己多準",
+    kicker: "/calibration/test",
+    path: "/calibration/test",
+    group: "信任文件",
+    keywords: [
+      "calibration", "test", "校準", "練習", "校準練習", "測自己", "測你自己",
+      "你有多準", "換你當引擎", "self test", "quiz", "互動", "玩玩看",
+    ],
+  },
 
   // ── 轉換 ───────────────────────────────────────────
   {

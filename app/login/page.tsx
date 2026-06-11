@@ -373,8 +373,9 @@ export default function LoginPage() {
             <span className="text-gold">加入 ZONE 27</span>
           </h1>
           <p className="mt-6 text-mute text-base leading-relaxed max-w-xl mx-auto">
-            Email + 密碼,或 Google 一鍵登入。 新帳號自動建立 · 已有帳號自動登入。
-            終身免費 · 永不調漲 · 0 tracking。
+            押一手就鎖死 · 賽後我們逐場幫你對帳 ——{" "}
+            <span className="text-bone">你 vs 引擎的戰績,別人刪不掉</span>。
+            Email + 密碼,或 Google 一鍵登入。 終身免費 · 永不調漲 · 0 tracking。
           </p>
         </section>
 

@@ -261,6 +261,14 @@ export default function UserPredictionPicker({
               上 —— 繼續把準度做厚
             </p>
           ) : null}
+          {/* 鎖完最該去的地方 = 看它被結算的那一頁(同足球押完導「進你的帳本」)·
+              修「棒球押完只導天梯/下一場、卻沒路回到顯示這手的 /member」這個動線斷頭。 */}
+          <Link
+            href="/member"
+            className="block text-center font-mono text-gold hover:underline text-[11px] tracking-[0.2em] underline-offset-4 transition-colors"
+          >
+            進你的帳本 · 看你 vs 引擎 →
+          </Link>
           <Link
             href="/matches"
             className="block text-center font-mono text-gold/80 hover:text-gold text-[10px] tracking-[0.2em] underline-offset-4 hover:underline transition-colors"

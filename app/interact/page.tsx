@@ -138,7 +138,7 @@ const STATUS_BADGES: Record<Channel["status"], { glyph: string; cls: string; lab
   live: { glyph: "✓", cls: "text-gold", label: "LIVE · 任何人" },
   "logged-in": { glyph: "◐", cls: "text-mute", label: "LIVE · 登入後" },
   "post-final": { glyph: "◐", cls: "text-mute", label: "LIVE · 賽後" },
-  "pre-launch": { glyph: "⏳", cls: "text-loss/85", label: "PRE-LAUNCH · Q3 2026" },
+  "pre-launch": { glyph: "⏳", cls: "text-loss/85", label: "PRE-LAUNCH · 付費上線後開放" },
 };
 
 export default function InteractPage() {
@@ -342,7 +342,7 @@ export default function InteractPage() {
                   lang="en"
                   className="font-mono text-loss/85 text-[9px] tracking-[0.25em] tabular"
                 >
-                  ⏳ PRE-LAUNCH · Q3 2026
+                  ⏳ PRE-LAUNCH · 付費上線後開放
                 </span>
               </div>
               <h3 className="text-bone text-base sm:text-lg font-light tracking-tight leading-snug mb-2">
