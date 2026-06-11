@@ -85,11 +85,14 @@ export async function sendWaitlistConfirmation({
     });
 
     if (!response.ok) {
-      const errorBody = await response.text();
+      // 🔒 R224:不記 Resend errorBody —— 4xx 驗證錯誤的 body 會回吐收件人 email,
+      // 把上面 redactEmail(to) 的遮蔽又洩回去(違 /privacy「0 email 進 log」承諾)。
+      // 對齊站上 Tim-facing 寄信函式(SUBMISSION / FOUNDERS 通知)早就只記 http、不記 body 的房規
+      // (defense parity · 同類入口不留不對稱弱點)。 回傳也改通用碼,不外吐上游 body。
       console.error(
-        `[ZONE27 · EMAIL · ERROR] http=${response.status} to=${redactEmail(to)} body=${errorBody}`
+        `[ZONE27 · EMAIL · ERROR] http=${response.status} to=${redactEmail(to)}`
       );
-      return { ok: false, error: `HTTP ${response.status}: ${errorBody.slice(0, 200)}` };
+      return { ok: false, error: `resend_http_${response.status}` };
     }
 
     const data = (await response.json()) as { id?: string };
@@ -351,13 +354,14 @@ https://zone27-web.vercel.app/founders/ledger
       }),
     });
     if (!response.ok) {
-      const errorBody = await response.text();
+      // 🔒 R224:不記 Resend errorBody(4xx body 會回吐收件人 email · 違 /privacy「0 email 進 log」)·
+      // 對齊 Tim-facing 寄信函式只記 http 的房規(defense parity)· 回傳改通用碼不外吐上游 body。
       console.error(
-        `[ZONE27 · GOLD_APPLY_EMAIL · ERROR] http=${response.status} to=${redactEmail(to)} body=${errorBody}`,
+        `[ZONE27 · GOLD_APPLY_EMAIL · ERROR] http=${response.status} to=${redactEmail(to)}`,
       );
       return {
         ok: false,
-        error: `HTTP ${response.status}: ${errorBody.slice(0, 200)}`,
+        error: `resend_http_${response.status}`,
       };
     }
     const data = (await response.json()) as { id?: string };
