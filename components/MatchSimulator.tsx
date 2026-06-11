@@ -205,9 +205,9 @@ export default function MatchSimulator({ match }: Props) {
           }`}
         >
           {running
-            ? `▸ 演算法收斂中 · ${stats.completed.toLocaleString()} / ${TOTAL_SIMS.toLocaleString()} 次採樣`
+            ? `演算法收斂中 · ${stats.completed.toLocaleString()} / ${TOTAL_SIMS.toLocaleString()} 次採樣`
             : done
-            ? "▸ 再跑一次"
+            ? "▶ 再跑一次"
             : "▶ 跑 10,000 次模擬"}
         </button>
 
@@ -338,8 +338,10 @@ export default function MatchSimulator({ match }: Props) {
                   {row.score.replace("-", " : ")}
                 </span>
                 <div className="flex-1 relative h-[2px] bg-line/80">
+                  {/* 招牌金光只留給「收斂後的勝率主條」· 這種一排細分布條不再加 glow
+                      (glow 灑在十幾條 2px 上 = 通通高亮 = 等於沒高亮 · 留白才顯貴)。 */}
                   <div
-                    className="absolute top-0 left-0 h-full bg-gold glow-gold"
+                    className="absolute top-0 left-0 h-full bg-gold"
                     style={{
                       width: `${Math.min(100, (row.pct / 20) * 100)}%`,
                       transition: "width 200ms ease-out",
@@ -609,9 +611,7 @@ function RunDiffRow({
         aria-label={`${bucket.label} · ${bucket.pct.toFixed(1)}% of 10K trials`}
       >
         <div
-          className={`absolute top-0 left-0 h-full ${sideColor} ${
-            bucket.side === "home" ? "glow-gold" : ""
-          }`}
+          className={`absolute top-0 left-0 h-full ${sideColor}`}
           style={{
             width: `${widthPct}%`,
             transition: "width 250ms ease-out",

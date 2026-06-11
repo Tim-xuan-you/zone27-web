@@ -117,7 +117,7 @@ export const COMMAND_ITEMS: CommandItem[] = [
 
   // ── 信任文件(只留用戶真正會搜的兩張「證據」)──────────────
   {
-    label: "公開戰績 · 引擎準不準的帳本",
+    label: "公開戰績 · 每一場對錯的帳本",
     kicker: "/track-record",
     path: "/track-record",
     group: "信任文件",
@@ -129,7 +129,7 @@ export const COMMAND_ITEMS: CommandItem[] = [
     ],
   },
   {
-    label: "引擎自評 · 準不準一目了然",
+    label: "引擎校準 · 說七成、實際中幾成",
     kicker: "/calibration",
     path: "/calibration",
     group: "信任文件",

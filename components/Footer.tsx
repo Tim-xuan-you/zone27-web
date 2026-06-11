@@ -39,8 +39,8 @@ const FOOTER_GROUPS: FooterGroup[] = [
     label: "信任 · 公開",
     enLabel: "PROOF",
     links: [
-      { label: "公開戰績", href: "/track-record" },
-      { label: "引擎自評 · 準不準", href: "/calibration" },
+      { label: "公開戰績 · 每場對錯", href: "/track-record" },
+      { label: "引擎校準 · 說七成中幾成", href: "/calibration" },
       {
         label: "GitHub 開源(全部程式碼)",
         href: "https://github.com/Tim-xuan-you/zone27-web",
