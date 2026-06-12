@@ -8,10 +8,12 @@ import EngineThreeWayBar from "@/components/EngineThreeWayBar";
 import SoccerMarketLines from "@/components/SoccerMarketLines";
 import SoccerBetStrip from "@/components/SoccerBetStrip";
 import CreatorAnalysis from "@/components/CreatorAnalysis";
+import MatchSegment from "@/components/MatchSegment";
 import { getSoccerMatchById } from "@/lib/soccer/football-data";
 import { toDisplayPercents, enginePickOf } from "@/lib/soccer/engine";
 import { getNationalCode } from "@/lib/soccer/teams";
 import { getSoccerFinalizedResults, kickoffTaipei } from "@/lib/soccer/locked";
+import { getMatchSegment } from "@/lib/match-segment";
 
 // ── ZONE 27 · /soccer/[matchId] · 足球單場詳情頁(R228 · 補到跟 CPBL 同級)─────────────
 // 足球本來只有 /soccer 看板卡 + /receipts 收據,沒有「每場一個討論/分析的家」(棒球在
@@ -69,6 +71,12 @@ export default async function SoccerMatchPage({ params }: { params: Params }) {
     matchStarts[r.matchId] = r.kickoffISO;
   }
   const thisFinal = finalResults[m.id] ?? null;
+
+  // R230 · 誰賽前鎖了這場(per-match segment · 足球版)· 走公開 ladder · 0 migration。
+  // ⚠️ 足球詳情頁只 reachable 未開踢的場(getSoccerMatchById 不回已踢完場 · 已結算的看
+  //   /receipts)→ 這裡是「賽前:誰鎖了這場」名單(無 ✓/✕ · winner 留 null)= 社會證明 +
+  //   發現可追的高手。 賽後「誰押對」的足球版屬未來 follow-up(需詳情頁認已結算場)。
+  const segment = await getMatchSegment(m.id);
 
   return (
     <div className="flex flex-col flex-1 min-h-screen">
@@ -187,6 +195,10 @@ export default async function SoccerMatchPage({ params }: { params: Params }) {
             </div>
           )}
         </section>
+
+        {/* ── 誰賽前鎖了這場(per-match segment · 足球版 · 三向含和局)· 賽後逐人對帳誰押對 ──
+            沒人鎖 → 整塊隱藏(graceful)· 走公開 ladder · 每格連 /u 公開校準檔。 */}
+        <MatchSegment lockers={segment} homeName={m.home} awayName={m.away} />
 
         {/* ── 討論 / 分析(R228 足球補上 · 跟棒球同一套 · 綁戰績非匿名論壇)──
             id="creator-analysis" = 登入回跳錨點(CreatorAnalysis 內 login next 已 sport-aware)*/}
