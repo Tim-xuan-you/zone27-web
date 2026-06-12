@@ -3289,8 +3289,12 @@
       },
       "engineWinHomePct": 54,
       "lockedAt": "2026-06-09T19:36:03.568Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 2,
+        "away": 4
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-06-12T12:40:25.462Z"
     },
     {
       "gamePk": 824346,
@@ -3351,8 +3355,12 @@
       },
       "engineWinHomePct": 47,
       "lockedAt": "2026-06-09T19:36:03.568Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 6,
+        "away": 8
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-06-12T12:40:25.462Z"
     },
     {
       "gamePk": 824827,
@@ -3380,8 +3388,12 @@
       },
       "engineWinHomePct": 52,
       "lockedAt": "2026-06-09T19:36:03.568Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 7,
+        "away": 5
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-06-12T12:40:25.462Z"
     },
     {
       "gamePk": 823370,
@@ -3616,6 +3628,35 @@
       "verdict": null
     },
     {
+      "gamePk": 824588,
+      "gameDate": "2026-06-12T23:40:00Z",
+      "scheduleDate": "2026-06-12",
+      "homeId": 145,
+      "homeEn": "Chicago White Sox",
+      "homeRecord": "36-31",
+      "awayId": 119,
+      "awayEn": "Los Angeles Dodgers",
+      "awayRecord": "44-25",
+      "homePitcher": "Anthony Kay",
+      "awayPitcher": "Roki Sasaki",
+      "homeStats": {
+        "era": "4.40",
+        "k9": "6.75",
+        "bb9": "3.82",
+        "hr9": "1.47"
+      },
+      "awayStats": {
+        "era": "4.03",
+        "k9": "9.31",
+        "bb9": "3.26",
+        "hr9": "1.55"
+      },
+      "engineWinHomePct": 48,
+      "lockedAt": "2026-06-12T12:40:25.027Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
       "gamePk": 824102,
       "gameDate": "2026-06-13T00:10:00Z",
       "scheduleDate": "2026-06-12",
@@ -3699,6 +3740,35 @@
       },
       "engineWinHomePct": 49,
       "lockedAt": "2026-06-11T13:05:41.103Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 823211,
+      "gameDate": "2026-06-13T02:15:00Z",
+      "scheduleDate": "2026-06-12",
+      "homeId": 137,
+      "homeEn": "San Francisco Giants",
+      "homeRecord": "28-41",
+      "awayId": 112,
+      "awayEn": "Chicago Cubs",
+      "awayRecord": "35-34",
+      "homePitcher": "Landen Roupp",
+      "awayPitcher": "Javier Assad",
+      "homeStats": {
+        "era": "4.00",
+        "k9": "9.95",
+        "bb9": "3.88",
+        "hr9": "0.52"
+      },
+      "awayStats": {
+        "era": "4.73",
+        "k9": "5.29",
+        "bb9": "2.23",
+        "hr9": "1.11"
+      },
+      "engineWinHomePct": 70,
+      "lockedAt": "2026-06-12T12:40:25.027Z",
       "finalScore": null,
       "verdict": null
     },
@@ -3873,6 +3943,35 @@
       },
       "engineWinHomePct": 57,
       "lockedAt": "2026-06-11T22:21:09.900Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 824587,
+      "gameDate": "2026-06-13T20:10:00Z",
+      "scheduleDate": "2026-06-13",
+      "homeId": 145,
+      "homeEn": "Chicago White Sox",
+      "homeRecord": "36-31",
+      "awayId": 119,
+      "awayEn": "Los Angeles Dodgers",
+      "awayRecord": "44-25",
+      "homePitcher": "Sean Burke",
+      "awayPitcher": "Yoshinobu Yamamoto",
+      "homeStats": {
+        "era": "3.88",
+        "k9": "8.66",
+        "bb9": "2.97",
+        "hr9": "0.90"
+      },
+      "awayStats": {
+        "era": "2.68",
+        "k9": "8.50",
+        "bb9": "1.75",
+        "hr9": "1.05"
+      },
+      "engineWinHomePct": 50,
+      "lockedAt": "2026-06-12T12:40:25.027Z",
       "finalScore": null,
       "verdict": null
     },
