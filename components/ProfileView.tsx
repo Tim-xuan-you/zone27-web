@@ -3,6 +3,7 @@ import Avatar from "@/components/Avatar";
 import HonorWall from "@/components/HonorWall";
 import AccuracySparkline from "@/components/AccuracySparkline";
 import TrophyGrid from "@/components/TrophyGrid";
+import FollowLedgerButton from "@/components/FollowLedgerButton";
 import { creatorIdentity } from "@/lib/identity";
 import { isPaid, tierLabel } from "@/lib/tier";
 import type {
@@ -116,6 +117,10 @@ export default function ProfileView({ profile, identity: id, streak, soccer, ser
           </p>
         </div>
       </header>
+
+      {/* 追蹤這份帳本(liveness · 登入的非本人訪客才出現 · 自己/未套 0025 → 隱藏)·
+          追的是準度不是人氣 · 名單私密 · 旁邊永遠不放粉絲數(紅線)。 */}
+      <FollowLedgerButton targetCode={profile.authorCode} />
 
       {/* 招牌黃金比例髮絲線(品牌唯一可辨識幾何記號 · 校準卡尺 IP)· 把這張最會被
           截圖外傳的公開檔案,錨上品牌記號(同收據頁)· 提升 viral 表面的辨識度。 */}
