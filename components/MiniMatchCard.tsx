@@ -15,6 +15,7 @@ import {
 } from "@/lib/matches";
 import { getEngineConviction } from "@/lib/conviction";
 import { getEngineReasoning } from "@/lib/reasoning";
+import type { HeatDisplay } from "@/lib/match-heat";
 
 // ── ZONE 27 · Mini Match Card ────────────────────────────
 // Round 31 Wave A · Compact static-engine card for the homepage
@@ -63,10 +64,14 @@ function compactMatchDate(dateStr: string): string {
 export default function MiniMatchCard({
   match,
   analysisCount = 0,
+  heat,
 }: {
   match: Match;
   /** 這場有幾篇創作者分析(看板用 · >0 顯金色「N 篇分析」讓用戶一眼看出哪場有大神可跟單)*/
   analysisCount?: number;
+  /** 這場熱度(鎖定人數 + 分析篇數 + 相對條寬 + 是否最熱)· 傳了就顯示熱度列、取代分析 chip ·
+   *  讓賭徒一眼看出哪場在燒 → 點進去那場討論(lib/match-heat)。 沒傳 → 維持原本只顯分析 chip。 */
+  heat?: HeatDisplay;
 }) {
   const matchPhase: MatchPhase | null = getMatchPhase(match);
   const calibration = getCalibration(match);
@@ -117,8 +122,9 @@ export default function MiniMatchCard({
           {match.startTime}
         </span>
         <div className="flex items-center gap-1.5">
-          {/* 有分析 = 金色 chip · 看板一眼看出哪場有人分析可跟單(賺抽傭的入口)*/}
-          {analysisCount > 0 && (
+          {/* 有分析 = 金色 chip · 看板一眼看出哪場有人分析可跟單(賺抽傭的入口)·
+              有傳 heat 時這顆併進下方熱度列(避免分析數顯示兩次)。 */}
+          {!heat && analysisCount > 0 && (
             <span
               aria-label={`這場有 ${analysisCount} 篇創作者分析可看`}
               className="px-1 py-px text-[8px] tracking-[0.15em] border border-gold/60 text-gold font-mono tabular whitespace-nowrap"
@@ -129,6 +135,26 @@ export default function MiniMatchCard({
           <MiniPhaseBadge phase={matchPhase} calibration={calibration} />
         </div>
       </div>
+
+      {/* 熱度列(R228)· 讓賭徒一眼看出哪場在燒 → 點進去那場討論。 金色條寬 = 相對熱度,
+          「最熱」標掛在這組最熱、且夠熱(≥5)的那場。 只在有真實活動時出現(graceful · 不假裝熱鬧)。 */}
+      {heat && (heat.locks > 0 || heat.analyses > 0) && (
+        <div className="flex items-center gap-2 -mt-0.5">
+          {heat.hottest && (
+            <span className="shrink-0 bg-gold text-navy font-mono text-[8px] tracking-[0.15em] px-1.5 py-px font-medium">
+              最熱
+            </span>
+          )}
+          <div className="flex-1 h-[3px] bg-line/40 rounded-sm overflow-hidden" aria-hidden="true">
+            <div className="h-full bg-gold/70" style={{ width: `${Math.max(8, heat.barPct)}%` }} />
+          </div>
+          <span className="shrink-0 font-mono text-mute/70 text-[9px] tracking-[0.1em] tabular whitespace-nowrap">
+            {heat.locks > 0 && `${heat.locks} 人已鎖定`}
+            {heat.locks > 0 && heat.analyses > 0 && " · "}
+            {heat.analyses > 0 && `${heat.analyses} 篇分析`}
+          </span>
+        </div>
+      )}
 
       {/* Team labels — symmetric layout · Round 31 Wave G A1 fix:加投手名
           Critic agent surface「3 場 grid 沒投手名 = LOCK 沒重量 · skeptic

@@ -19,7 +19,7 @@
 //     引擎沒鎖該場(認不到隊名)→ graceful 跳過。
 // ─────────────────────────────────────────────────────
 
-import { createClient, type SupabaseClient } from "@supabase/supabase-js";
+import { fetchLadderRows } from "@/lib/ladder-rows";
 import {
   getMatchById,
   getFinalizedMatches,
@@ -52,20 +52,6 @@ export type PulseEvent =
       verdict: Calibration; // proved | diverged | push
     };
 
-// stateless anon client(同 lib/ladder-server.ts · 讀「全站」資料 · 不混登入者 · ISR-safe)。
-let cached: SupabaseClient | null = null;
-function anonClient(): SupabaseClient | null {
-  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-  if (!url || !key) return null;
-  if (!cached) {
-    cached = createClient(url, key, {
-      auth: { persistSession: false, autoRefreshToken: false },
-    });
-  }
-  return cached;
-}
-
 function str(v: unknown): string {
   return typeof v === "string" ? v : "";
 }
@@ -73,22 +59,8 @@ function str(v: unknown): string {
 // 跨用戶「賽前鎖定」事件 · 走 0022 get_ladder_entries(已按 created_at desc)→ 取最近的。
 // 棒球(cpbl-*/mlb-* · matchById)+ 足球(fd-* · getLockedSoccerById · 三向含和局)· 認不到隊名 → 跳過。
 async function getRecentLocks(limit: number): Promise<PulseEvent[]> {
-  let rows: {
-    author_code?: unknown;
-    handle?: unknown;
-    match_id?: unknown;
-    pick?: unknown;
-    created_at?: unknown;
-  }[];
-  try {
-    const supabase = anonClient();
-    if (!supabase) return [];
-    const { data, error } = await supabase.rpc("get_ladder_entries");
-    if (error || !Array.isArray(data)) return [];
-    rows = data;
-  } catch {
-    return [];
-  }
+  // 全站押注列 · 走共用的 fetchLadderRows(React cache 去重 → 跟同頁熱度共用同一次 RPC · 不重複全表掃)。
+  const rows = await fetchLadderRows();
 
   const soccerById = getLockedSoccerById(); // fd-* → 隊名 / 看好邊(世界盃夜命門)· 一次建好
   // mlb-* → Match(同 /ladder 的 getMlbLockedMatches 口徑 · 0 fetch · 讀打包好的鎖定盤)· 一次建好。

@@ -18,7 +18,7 @@ import {
   type Match,
 } from "@/lib/matches";
 import { getMlbAsMatches, getMlbFinalizedResults } from "@/lib/mlb-matches";
-import { getCreatorPostCounts } from "@/lib/creator-posts-server";
+import { getMatchHeat, heatDisplayFor } from "@/lib/match-heat";
 import { getPulseSummary } from "@/lib/pulse";
 import {
   getUpcomingWorldCupMatches,
@@ -79,9 +79,10 @@ export default async function Home() {
   // 收據(✓命中 / ✕落空都掛)· proof-of-work 勝過空泛未來預測。
   const recentReceipts = allUpcoming.length === 0 ? finalized.slice(0, 2) : [];
 
-  // 每場分析篇數 · 看板標「N 篇分析」讓用戶一眼看出哪場有大神可跟單(抽傭入口)。
-  // 無 cookie anon fetch · 不破首頁 ISR 靜態。
-  const analysisCounts = await getCreatorPostCounts();
+  // 每場熱度(鎖定人數 + 分析篇數)· 無 cookie anon · 不破首頁 ISR · 0 migration。 精選卡標
+  // 「N 人已鎖定 · N 篇分析」+ 最熱標 = 從首頁就把賭徒導去在燒的那場討論(人潮就是錢潮)。
+  const matchHeat = await getMatchHeat();
+  const featuredHeat = heatDisplayFor(matchHeat, featured.map((m) => m.id));
 
   // ── 活動脈動精華(會動的前門)· 最近 N 人賽前鎖定 + 最新一手 ────────────────
   // 公開全站資料(0 auth · ISR-cached)· 不到門檻(lib HOMEPAGE_PULSE_MIN)→ 元件整塊隱藏。
@@ -235,7 +236,12 @@ export default async function Home() {
           {allUpcoming.length > 0 ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {featured.map((m) => (
-                <MiniMatchCard key={m.id} match={m} analysisCount={analysisCounts[m.id] ?? 0} />
+                <MiniMatchCard
+                  key={m.id}
+                  match={m}
+                  analysisCount={matchHeat[m.id]?.analyses ?? 0}
+                  heat={featuredHeat[m.id]}
+                />
               ))}
             </div>
           ) : recentReceipts.length > 0 ? (
@@ -247,7 +253,7 @@ export default async function Home() {
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 {recentReceipts.map((m) => (
-                  <MiniMatchCard key={m.id} match={m} analysisCount={analysisCounts[m.id] ?? 0} />
+                  <MiniMatchCard key={m.id} match={m} analysisCount={matchHeat[m.id]?.analyses ?? 0} />
                 ))}
               </div>
             </>

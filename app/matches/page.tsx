@@ -16,7 +16,7 @@ import {
   type Calibration,
 } from "@/lib/matches";
 import { getMlbAsMatches } from "@/lib/mlb-matches";
-import { getCreatorPostCounts } from "@/lib/creator-posts-server";
+import { getMatchHeat, heatDisplayFor, heatScore } from "@/lib/match-heat";
 
 export const metadata = createPageMetadata({
   title: "今日賽事板 · CPBL + MLB",
@@ -41,16 +41,22 @@ export default async function MatchesPage() {
   // 護核心 · 絕不 concat 後全域 time-sort = 會把 15 場清晨 MLB 排到 CPBL 前面埋掉核心)。
   const byStart = (a: Match, b: Match) =>
     (getMatchStartIso(a) ?? "").localeCompare(getMatchStartIso(b) ?? "");
-  const cpblSorted = getTodayAndFutureMatches().slice().sort(byStart);
+  // 每場熱度(鎖定 + 分析)· 無 cookie · 不破 ISR · 0 migration(走既有 ladder + creator RPC)。
+  const heat = await getMatchHeat();
+  // R228 · 看板按「熱度」排 = 讓在燒的那場浮上來(同 Reddit hot / StockTwits trending)·
+  // 0 活動 → 退回開賽時間排(穩定)· league 分組維持(護核心 CPBL→MLB · 不全域 time-sort)。
+  const byHeat = (a: Match, b: Match) =>
+    heatScore(heat, b.id) - heatScore(heat, a.id) || byStart(a, b);
+  const cpblSorted = getTodayAndFutureMatches().slice().sort(byHeat);
   // R198 · MLB 全套 first-class · 同一套引擎 · 板上只放未結算(可押)· 已結束的在 /matches/mlb。
   const mlbSorted = (await getMlbAsMatches())
     .filter((m) => !m.finalResult)
-    .sort(byStart);
+    .sort(byHeat);
   const hasUpcoming = cpblSorted.length > 0 || mlbSorted.length > 0;
   // 休賽日 fallback · 兩聯盟都沒可押場時,看板改放引擎最近 6 場收據(✓/✕ 都掛)· 看板永不空白。
   const offSeasonReceipts = !hasUpcoming ? getFinalizedMatches().slice(0, 6) : [];
-  // 每場分析篇數 · 看板標「N 篇分析」(跟單入口)· 無 cookie · 不破 ISR。
-  const analysisCounts = await getCreatorPostCounts();
+  // 熱度顯示(相對條寬 + 最熱標)· 跨兩聯盟一起算「誰最熱」= 全板唯一一個最熱標。
+  const boardHeat = heatDisplayFor(heat, [...cpblSorted, ...mlbSorted].map((m) => m.id));
   // header 顯示:CPBL 為主,CPBL 空時退 MLB(不讓「今日無覆蓋」跟下方 MLB 場矛盾)。
   const boardDate = cpblSorted[0]?.date ?? mlbSorted[0]?.date ?? "休賽日 · 看引擎判決";
   const headMatch = cpblSorted[0] ?? mlbSorted[0];
@@ -105,7 +111,7 @@ export default async function MatchesPage() {
           <MatchBoardFilter
             cpbl={cpblSorted}
             mlb={mlbSorted}
-            analysisCounts={analysisCounts}
+            heat={boardHeat}
           />
         ) : offSeasonReceipts.length > 0 ? (
           /* 休賽日 · 看板永不空白 → 引擎最近戰績收據(同首頁 fallback) */
@@ -119,7 +125,7 @@ export default async function MatchesPage() {
             </p>
             <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
               {offSeasonReceipts.map((m) => (
-                <MiniMatchCard key={m.id} match={m} analysisCount={analysisCounts[m.id] ?? 0} />
+                <MiniMatchCard key={m.id} match={m} analysisCount={heat[m.id]?.analyses ?? 0} />
               ))}
             </div>
           </>

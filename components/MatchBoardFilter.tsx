@@ -14,20 +14,26 @@
 import { useState } from "react";
 import MiniMatchCard from "@/components/MiniMatchCard";
 import type { Match } from "@/lib/matches";
+import type { HeatDisplay } from "@/lib/match-heat";
 
 type Filter = "all" | "cpbl" | "mlb";
 
 function Grid({
   matches,
-  counts,
+  heat,
 }: {
   matches: Match[];
-  counts: Record<string, number>;
+  heat: Record<string, HeatDisplay>;
 }) {
   return (
     <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
       {matches.map((m) => (
-        <MiniMatchCard key={m.id} match={m} analysisCount={counts[m.id] ?? 0} />
+        <MiniMatchCard
+          key={m.id}
+          match={m}
+          analysisCount={heat[m.id]?.analyses ?? 0}
+          heat={heat[m.id]}
+        />
       ))}
     </div>
   );
@@ -36,18 +42,19 @@ function Grid({
 export default function MatchBoardFilter({
   cpbl,
   mlb,
-  analysisCounts,
+  heat,
 }: {
   cpbl: Match[];
   mlb: Match[];
-  analysisCounts: Record<string, number>;
+  /** 每場熱度(鎖定+分析+相對條寬+最熱)· 看板已按熱度排好,這裡只負責顯示 */
+  heat: Record<string, HeatDisplay>;
 }) {
   const both = cpbl.length > 0 && mlb.length > 0;
   const [filter, setFilter] = useState<Filter>("cpbl");
 
   // 只有一個聯盟有場 → 直接一個 grid,不顯示 chips/label(最乾淨)
   if (!both) {
-    return <Grid matches={cpbl.length > 0 ? cpbl : mlb} counts={analysisCounts} />;
+    return <Grid matches={cpbl.length > 0 ? cpbl : mlb} heat={heat} />;
   }
 
   const chips: { k: Filter; label: string }[] = [
@@ -84,18 +91,18 @@ export default function MatchBoardFilter({
             <p className="font-mono text-gold/70 text-[10px] tracking-[0.4em] mb-4">
               CPBL
             </p>
-            <Grid matches={cpbl} counts={analysisCounts} />
+            <Grid matches={cpbl} heat={heat} />
           </div>
           <div>
             <p className="font-mono text-gold/70 text-[10px] tracking-[0.4em] mb-4">
               MLB
             </p>
-            <Grid matches={mlb} counts={analysisCounts} />
+            <Grid matches={mlb} heat={heat} />
           </div>
         </div>
       ) : (
         // 單一聯盟 · 不需 label(active chip 已說明)
-        <Grid matches={filter === "cpbl" ? cpbl : mlb} counts={analysisCounts} />
+        <Grid matches={filter === "cpbl" ? cpbl : mlb} heat={heat} />
       )}
     </div>
   );
