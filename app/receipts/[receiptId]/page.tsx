@@ -16,6 +16,7 @@ import {
   getMatchDateIso,
   getMatchStartIso,
 } from "@/lib/matches";
+import { getMlbMatchById } from "@/lib/mlb-matches";
 import { getSoccerReceipt } from "@/lib/soccer/receipt";
 import SoccerReceiptView from "@/components/SoccerReceiptView";
 import {
@@ -146,7 +147,10 @@ export async function generateMetadata({
       },
     };
   }
-  const match = getMatchById(receiptId);
+  // CPBL(sync)+ MLB(async · R228 修:MLB 戰功卡點收據 404 —— getMatchById 只認 CPBL)。
+  const match =
+    getMatchById(receiptId) ??
+    (receiptId.startsWith("mlb-") ? await getMlbMatchById(receiptId) : null);
   if (!match || !match.finalResult) {
     // 賽前 / 進行中(CPBL · 尚未結算)→ 賽前鎖定卡 metadata(押完當下就能外傳)。
     // 🔴 已開賽(live)絕不標「賽前鎖定中」= 對已開打的場說謊(對齊 OG 卡 + view)。
@@ -201,11 +205,15 @@ export default async function ReceiptPage({ params }: { params: Params }) {
     if (!sr) notFound();
     return <SoccerReceiptView r={sr} />;
   }
-  const match = getMatchById(receiptId);
+  // CPBL(sync)+ MLB(async · R228 修:MLB 戰功卡點收據 404 —— getMatchById 只認 CPBL ·
+  // 已結算 MLB 由 getMlbMatchById 從 mlb-locked.json 永久重建 · 走下方同一份賽後收據渲染)。
+  const match =
+    getMatchById(receiptId) ??
+    (receiptId.startsWith("mlb-") ? await getMlbMatchById(receiptId) : null);
   if (!match || !match.finalResult) {
     // 賽前 / 進行中(CPBL · 尚未結算)→ 賽前可外傳收據(R220)· 走獨立 view · 完全不碰
     // 下方賽後棒球收據邏輯(零風險)。 賽後同一網址自己長出比分判決(ISR 10 分鐘)。
-    // MLB 賽前 / 延賽 / 查無 → 仍 404(維持原行為 · 不假裝 pre-final receipt)。
+    // MLB 賽前 / 延賽 / 查無 → 仍 404(無 MLB 賽前 receipt view · 不假裝 pre-final receipt)。
     const bp = getBaseballPendingReceipt(receiptId);
     if (bp) return <BaseballReceiptPendingView r={bp} />;
     notFound();

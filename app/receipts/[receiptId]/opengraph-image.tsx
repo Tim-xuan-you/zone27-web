@@ -8,6 +8,7 @@ import {
   boneRgba,
 } from "@/lib/brand";
 import { getMatchById, getCalibration } from "@/lib/matches";
+import { getMlbMatchById } from "@/lib/mlb-matches";
 import {
   getSoccerReceipt,
   type SoccerReceiptSettled,
@@ -41,7 +42,10 @@ export default async function ReceiptOgImage({
     if (!sr) return brandFallback();
     return sr.phase === "settled" ? soccerOgCard(sr) : soccerOgCardPending(sr);
   }
-  const match = getMatchById(receiptId);
+  // CPBL(sync)+ MLB(async · R228:MLB 收據 OG 卡同步補上 · 不再退通用卡)。
+  const match =
+    getMatchById(receiptId) ??
+    (receiptId.startsWith("mlb-") ? await getMlbMatchById(receiptId) : null);
   if (!match || !match.finalResult) {
     // 賽前 / 進行中(CPBL · 尚未結算)→ 賽前鎖定中卡(押完當下就能外傳的那張 · R220)。
     const bp = getBaseballPendingReceipt(receiptId);
