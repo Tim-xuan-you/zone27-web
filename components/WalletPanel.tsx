@@ -16,21 +16,11 @@ import { SUPPORT_EMAIL } from "@/lib/brand-constants";
 // Tim R187:儲值 preset · 500 → 30,000(自訂欄太複雜 · Tim 拍板拿掉 · 只留固定按鈕)
 const TOPUP_AMOUNTS = [500, 1000, 3000, 10000, 30000];
 
-// 儲值回饋 · 越儲越多 %(Tim 全權交我定 · 上網查的結論)。 設計依據:
-//   · Rule-of-100 → 大額(>~NT$3,000)同時秀「%」+「實得點數」最有感
-//   · 遞增 % + 頂檔當 anchor → 拉大額(同 Starbucks reload / 手遊儲值回饋慣例)
-//   · 乾淨整數 %(5/10/15/20)+ 整數回饋點(50/300/1,500/6,000)好懂好記
-const BONUS_PCT: Record<number, number> = {
-  500: 0,
-  1000: 5,
-  3000: 10,
-  10000: 15,
-  30000: 20,
-};
-const BEST_AMOUNT = 30000; // 視覺 anchor「最划算」
+// R229:砍掉「儲越多送越多」回饋階梯(原 +5/10/15/20%)。 理由 = 那是賭場/手遊的「充值誘餌」
+//   —— 鼓勵用戶預先壓一大筆錢進來買明牌,正好踩到品牌唯一一台「會打自己臉」的收銀機(內容付費牆)。
+//   我們不是要你多壓注的地方。 點數一律 1:1(NT$1 = 1 點)· 乾淨、無誘餌。 錢包本身(儲值→買分析)
+//   完全不動 —— 只拿掉那個加碼階梯。
 const fmt = (n: number) => n.toLocaleString("en-US");
-const bonusPts = (a: number) => Math.round((a * (BONUS_PCT[a] ?? 0)) / 100);
-const totalPts = (a: number) => a + bonusPts(a);
 
 // 收款資料 · Vercel 私密 env(不在 GitHub)· 未設則 fallback
 const BANK = {
@@ -41,11 +31,8 @@ const BANK = {
 const BANK_SET = BANK.account.length > 0;
 
 function notifyHref(amount: number): string {
-  const bonus = bonusPts(amount);
   const subject = `我已轉帳儲值 NT$ ${fmt(amount)}`;
-  const body = `Tim 好,\n\n我已經轉帳 NT$ ${fmt(amount)} 到 ZONE 27 儲值。\n轉帳帳號末五碼:______(請填)\n\n請幫我加 ${fmt(totalPts(amount))} 點${
-    bonus > 0 ? `(NT$ ${fmt(amount)} + 回饋 ${fmt(bonus)} 點)` : ""
-  }。謝謝。`;
+  const body = `Tim 好,\n\n我已經轉帳 NT$ ${fmt(amount)} 到 ZONE 27 儲值。\n轉帳帳號末五碼:______(請填)\n\n請幫我加 ${fmt(amount)} 點。謝謝。`;
   return `mailto:${SUPPORT_EMAIL}?subject=${encodeURIComponent(
     subject
   )}&body=${encodeURIComponent(body)}`;
@@ -90,15 +77,13 @@ export default function WalletPanel() {
         </p>
       </div>
       <p className="text-mute/85 text-sm leading-relaxed mb-4">
-        儲值點數買付費分析 · <span className="text-gold">儲越多、送越多</span>。
+        儲值點數買付費分析 · 點數一律 <span className="text-gold">1:1</span>(NT$1 = 1 點)· 無充值加碼。
         點數只能買分析 · <span className="text-bone">不能提現、不能轉人</span> · 不自動扣款(像 Steam 錢包)。
       </p>
 
       {/* 1 · 選金額 · 儲越多送越多(頂檔 anchor「最划算」)*/}
       <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 mb-3">
         {TOPUP_AMOUNTS.map((a) => {
-          const b = bonusPts(a);
-          const best = a === BEST_AMOUNT;
           const on = amount === a;
           return (
             <button
@@ -108,23 +93,15 @@ export default function WalletPanel() {
               className={`px-3 py-2.5 border text-left transition-colors ${
                 on
                   ? "border-gold bg-gold/15"
-                  : best
-                    ? "border-gold/60 bg-gold/[0.05] hover:bg-gold/10"
-                    : "border-gold/40 hover:bg-gold/10 hover:border-gold"
+                  : "border-gold/40 hover:bg-gold/10 hover:border-gold"
               }`}
             >
               <span className="block font-mono text-gold text-sm tracking-[0.08em] tabular">
                 儲 NT$ {fmt(a)}
               </span>
-              {b > 0 ? (
-                <span className="block font-mono text-gold/80 text-[9px] tracking-[0.05em] tabular mt-0.5">
-                  +{BONUS_PCT[a]}% · 多送 {fmt(b)} 點
-                </span>
-              ) : (
-                <span className="block font-mono text-mute/45 text-[9px] tracking-[0.1em] mt-0.5">
-                  入門 · 無加碼
-                </span>
-              )}
+              <span className="block font-mono text-mute/45 text-[9px] tracking-[0.1em] mt-0.5">
+                = {fmt(a)} 點
+              </span>
             </button>
           );
         })}
@@ -163,13 +140,7 @@ export default function WalletPanel() {
                 轉好了 · 通知加點 →
               </a>
               <p className="mt-2 font-mono text-mute/70 text-[10px] tracking-[0.12em] leading-relaxed">
-                ▸ 入帳後幫你加 <span className="text-gold">{fmt(totalPts(amount))} 點</span>
-                {bonusPts(amount) > 0 && (
-                  <span className="text-mute/60">
-                    {" "}(NT$ {fmt(amount)} + 回饋 {fmt(bonusPts(amount))} 點)
-                  </span>
-                )}{" "}
-                · 不自動扣款 · 點數只能買分析。
+                ▸ 入帳後幫你加 <span className="text-gold">{fmt(amount)} 點</span> · 不自動扣款 · 點數只能買分析。
               </p>
             </>
           ) : (
