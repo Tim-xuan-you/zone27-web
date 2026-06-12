@@ -149,11 +149,12 @@ async function getRecentSoccerSettlements(limit: number): Promise<PulseEvent[]> 
     // 又比「cron 剛好幾點跑」更符合直覺(按比賽踢完的先後排)。
     const kt = Date.parse(p.kickoffISO ?? "");
     if (Number.isNaN(kt)) continue;
-    const ts = kt + 110 * 60 * 1000;
+    const ts = kt + 110 * 60 * 1000; // 排序用「約終場」(開賽 + 110 分)
     all.push({
       kind: "settle",
       ts,
-      whenISO: new Date(ts).toISOString(),
+      // 顯示日期用「開賽日」而非開賽+110 —— 深夜場(~23:00 台北)+110 會跨午夜顯示成隔天。
+      whenISO: p.kickoffISO ?? new Date(ts).toISOString(),
       matchId: p.matchId,
       matchup: `${p.home} vs ${p.away}`,
       verdict: p.verdict, // proved | diverged | push(非 null · 同棒球口徑)

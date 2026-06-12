@@ -9,6 +9,7 @@ type NavKey =
   | "home"
   | "matches"
   | "soccer"
+  | "pulse"
   | "discuss"
   | "lab"
   | "founders"
@@ -64,6 +65,11 @@ const NAV_ITEMS_STATIC: {
   //  不在 Nav render 時 fetch(守 R207「Nav 不 render-fetch」鐵律)。 無 badge =
   //  守手機第二排寬度(世界盃的急迫感由首頁 rail + /soccer 頁承載,不靠 Nav 小標)。
   { key: "soccer", href: "/soccer", label: "足球" },
+  // R230 · 活動脈動進永久 Nav = 可發現性(原本只能從 Footer + 首頁 strip 進 · 但它是
+  //  社群/liveness 的心臟「誰賽前鎖了哪一手、引擎又對帳了哪場」)。 純靜態連結 · 不在
+  //  render 時 fetch(守 R207「Nav 不 render-fetch」鐵律)· 擺在運動(棒球/足球)之後、
+  //  工具(實驗室)之前 = 市場 → 活動牆 → 引擎 → 品牌 的動線。
+  { key: "pulse", href: "/pulse", label: "脈動" },
   // R197 · 拿掉「實驗室 BETA」badge:BETA 在核心引擎旁 = 對每個訪客說「引擎還沒做完」·
   // 跟 MLB de-BETA 一致(蒙地卡羅是全世界在用的成熟方法 · 不是 beta)。
   { key: "lab", href: "/lab", label: "實驗室" },

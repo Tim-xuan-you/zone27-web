@@ -68,7 +68,13 @@ export default function FollowLedgerButton({
     setState(following ? "not_following" : "following");
     const res = await toggleFollow(targetCode);
     if (!mountedRef.current) return; // 切換途中已卸載 → 不對已卸載元件 setState
-    setState(res === "following" || res === "not_following" ? res : prev);
+    // 正常切換 → 套新狀態;session 中途過期(res='anon')→ 重現登入提示(不假裝成功);
+    // 其餘(unavailable/self)→ 退回點擊前狀態。
+    setState(
+      res === "following" || res === "not_following" || res === "anon"
+        ? res
+        : prev,
+    );
     setBusy(false);
   };
 

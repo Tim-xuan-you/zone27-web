@@ -53,6 +53,11 @@ export async function getFollowState(code: string): Promise<FollowState> {
 export async function toggleFollow(code: string): Promise<FollowState> {
   try {
     const supabase = createSupabaseBrowserClient();
+    // session 中途過期 → 本地先攔 → 回 'anon'(呼叫端重現登入提示 · 不假裝追蹤成功)。
+    const {
+      data: { session },
+    } = await supabase.auth.getSession();
+    if (!session) return "anon";
     const { data, error } = await supabase.rpc("toggle_follow", {
       p_code: code,
     });

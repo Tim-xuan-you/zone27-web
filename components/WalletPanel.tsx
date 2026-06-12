@@ -81,7 +81,7 @@ export default function WalletPanel() {
         點數只能買分析 · <span className="text-bone">不能提現、不能轉人</span> · 不自動扣款(像 Steam 錢包)。
       </p>
 
-      {/* 1 · 選金額 · 儲越多送越多(頂檔 anchor「最划算」)*/}
+      {/* 1 · 選金額 · 一律 1:1(NT$1 = 1 點)· 無充值加碼(R229 砍掉誘餌階梯)*/}
       <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 mb-3">
         {TOPUP_AMOUNTS.map((a) => {
           const on = amount === a;

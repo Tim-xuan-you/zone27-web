@@ -25,7 +25,7 @@ export default async function PulsePage() {
 
   return (
     <div className="flex flex-col flex-1 min-h-screen">
-      <Nav />
+      <Nav active="pulse" />
 
       <main id="main">
         {/* ── HERO ── */}
