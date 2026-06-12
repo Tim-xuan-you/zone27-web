@@ -30,6 +30,7 @@ import {
   getLockedSoccerById,
   getLockedSoccerPredictions,
 } from "@/lib/soccer/locked";
+import { getMlbLockedMatches } from "@/lib/mlb-matches";
 
 export type PulseEvent =
   | {
@@ -90,6 +91,9 @@ async function getRecentLocks(limit: number): Promise<PulseEvent[]> {
   }
 
   const soccerById = getLockedSoccerById(); // fd-* → 隊名 / 看好邊(世界盃夜命門)· 一次建好
+  // mlb-* → Match(同 /ladder 的 getMlbLockedMatches 口徑 · 0 fetch · 讀打包好的鎖定盤)· 一次建好。
+  // 之前非足球 id 一律走 getMatchById(只認 CPBL)→ MLB 鎖定被靜默丟掉、不上牆也不計首頁人數。
+  const mlbById = new Map(getMlbLockedMatches().map((m) => [m.id, m] as const));
   const out: PulseEvent[] = [];
   const seen = new Set<string>(); // 同一人同一場只播最近一筆(同 ladder/profile first-seen)
   for (const r of rows) {
@@ -118,8 +122,8 @@ async function getRecentLocks(limit: number): Promise<PulseEvent[]> {
       teamLabel = pick === "home" ? s.home : pick === "away" ? s.away : "和局";
       matchup = `${s.home} vs ${s.away}`;
     } else {
-      const m = getMatchById(matchId);
-      if (!m) continue; // 認不到的場(舊資料)跳過
+      const m = getMatchById(matchId) ?? mlbById.get(matchId);
+      if (!m) continue; // CPBL + MLB 都認不到(舊資料 / 未鎖定)→ 跳過
       teamLabel = pick === "home" ? m.home.name : m.away.name;
       matchup = `${m.home.name} vs ${m.away.name}`;
     }

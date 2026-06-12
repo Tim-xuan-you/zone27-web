@@ -94,7 +94,7 @@ export default function RationalePicker({
           type="button"
           disabled={saving || text.trim().length === 0}
           onClick={save}
-          className="font-mono text-[10px] tracking-[0.15em] border border-gold/40 text-gold hover:bg-gold/10 hover:border-gold/70 px-3 py-1.5 min-h-[34px] transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+          className="font-mono text-[10px] tracking-[0.15em] border border-gold/40 text-gold hover:bg-gold/10 hover:border-gold/70 px-3 py-1.5 min-h-[40px] transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
         >
           鎖死這一句 →
         </button>

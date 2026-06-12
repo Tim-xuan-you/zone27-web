@@ -108,6 +108,20 @@ export default function LoginPage() {
           setNextPath(sanitized);
         }
       }
+      // R228 · 確認連結失敗時把原因講出來(之前只讀 next、不讀 error → 朋友被丟回空白表單以為壞了)。
+      // /auth/callback 失敗會帶 ?error=exchange_failed|missing_code|unknown_error 導回這裡。 最常見:
+      // LINE 內建瀏覽器註冊 → 確認信在外部瀏覽器開 → PKCE 同裝置驗證失效。 白話講原因 + 指向最穩的
+      // Google 一鍵登入(funnel 命門 · 今晚朋友多從 LINE 連結進來)。 用既有 error state(form 內紅字 alert)。
+      const rawError = sp.get("error");
+      if (rawError) {
+        const msg =
+          rawError === "exchange_failed"
+            ? "確認連結失效了(常見原因:信在另一個瀏覽器打開)· 用同一支手機重寄一次,或直接用下面的 Google 一鍵登入"
+            : rawError === "missing_code"
+              ? "連結不完整 · 重新點一次確認信,或改用下面的 Google 一鍵登入"
+              : "登入時出了點狀況 · 再試一次,或改用下面的 Google 一鍵登入";
+        setState({ kind: "error", message: msg });
+      }
       // Probe existing session(已登入訪客不需重 register)
       try {
         const supabase = createSupabaseBrowserClient();
@@ -645,6 +659,12 @@ function SentState({
             : "↻ 沒收到 · 重寄一封"}
         </button>
       </div>
+
+      {/* R228 · LINE 內建瀏覽器註冊的人,確認信常在外部瀏覽器開 → PKCE 同裝置驗證失效。
+          給一條最穩的逃生路:Google 一鍵登入(不用收信、無跨瀏覽器問題)· 重整本頁即回表單。 */}
+      <p className="font-mono text-gold/75 text-[10px] tracking-[0.2em] leading-relaxed text-center mb-3">
+        ▸ 收不到 / 點了沒反應?最穩改用 Google 一鍵登入(不用收信)· 重新整理這頁就能改用
+      </p>
 
       <p className="font-mono text-mute/70 text-[10px] tracking-[0.25em] leading-relaxed text-center">
         ▸ 確認連結 1 小時內有效 · 過期就重寄
