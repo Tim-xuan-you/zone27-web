@@ -224,6 +224,11 @@ export default async function ReceiptPage({ params }: { params: Params }) {
   const favoriteName = homeFavored ? match.home.name : match.away.name;
   const favoritePct = Math.max(match.home.winRate, match.away.winRate);
 
+  // R228 · 外傳這張時帶一句具體鉤子(預寫具體訊息比通用標語點閱高 2-4 倍)· 講引擎鎖死的線 + 結果。
+  const verdictWord =
+    cal === "proved" ? "引擎命中" : cal === "diverged" ? "引擎落空" : "平";
+  const shareText = `ZONE 27 · ${match.home.name} vs ${match.away.name} · 引擎賽前鎖死看好 ${favoriteName} ${favoritePct}% · 結果 ${fr.homeScore}:${fr.awayScore} · ${verdictWord} · 一張改不了的收據`;
+
   // soul R209 · 賽果來源(Kalshi 式事前公開「用哪個資料源、何時算、怎麼判」)·
   // 把現成的自動對帳基建變成可見的信任聲明 —— 官方賽程,不爬盤口。
   const resultSource = match.id.startsWith("cpbl")
@@ -473,12 +478,32 @@ export default async function ReceiptPage({ params }: { params: Params }) {
               這個網址就是這張收據的永久位置 —— 直接傳就好。 沒有追蹤碼、沒有推薦碼,
               我們不記錄誰把它傳給誰,也不會推播「你分享的收據被看了幾次」。
             </p>
-            <CopyLinkButton />
+            <CopyLinkButton shareText={shareText} />
             {/* R77 W-B · LineKeepHint · Agent A R76 SHIP E · mobile-only
                 long-press → LINE Keep · 不需加好友 · 不 push · session-only
                 dismiss(NOT localStorage · per 11-key cap discipline)·
                 client component · graceful degrade desktop。 */}
             <LineKeepHint />
+          </div>
+        </section>
+
+        {/* R228 · 閉漏斗:外傳這張(常是命中)收據、點進來的朋友多半沒登入,給一條「也免費鎖一手」
+            的下一步 —— 之前 settled 收據只有內部交叉連結 = 迴圈開了卻不閉。 這場鎖不了了 → 連去今日板。 */}
+        <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-12">
+          <div className="border border-gold/30 bg-gold/5 px-5 py-4">
+            <p className="font-mono text-gold/85 text-[10px] tracking-[0.3em] mb-2">
+              / 也想鎖一手?
+            </p>
+            <p className="text-mute text-sm leading-relaxed mb-3">
+              引擎開盤免費看,押一手要登入(免費)· 賽後逐場對帳、含輸都留 ——
+              跟一台公開機器正面比準度,你 vs 引擎誰準。
+            </p>
+            <Link
+              href="/matches"
+              className="inline-flex items-center gap-2 font-mono text-gold/90 hover:text-gold text-[11px] tracking-[0.25em] underline-offset-4 hover:underline transition-colors"
+            >
+              ▸ 去鎖今日的一手 →
+            </Link>
           </div>
         </section>
 

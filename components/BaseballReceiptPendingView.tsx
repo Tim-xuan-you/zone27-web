@@ -27,6 +27,12 @@ export default function BaseballReceiptPendingView({
   const locked = r.phase === "locked";
   const yy = r.dateIso !== "—" ? r.dateIso.slice(0, 4) : "—";
 
+  // R228 · 外傳這張時帶一句具體鉤子(預寫具體訊息比通用標語點閱高 2-4 倍)· 講引擎那條鎖死的線。
+  const shareText =
+    r.favorite !== null
+      ? `ZONE 27 · ${r.homeName} vs ${r.awayName} · 引擎賽前鎖死看好 ${r.favoriteName} ${r.favoritePct}% · 改不了、賽後對帳 · 敢不敢也鎖一手?`
+      : `ZONE 27 · ${r.homeName} vs ${r.awayName} · 引擎賽前鎖死的勝率收據 · 改不了、賽後對帳 · 敢不敢也鎖一手?`;
+
   return (
     <div className="flex flex-col flex-1 min-h-screen">
       <Nav />
@@ -221,7 +227,7 @@ export default function BaseballReceiptPendingView({
 
           {/* SHARE + BACK */}
           <div className="mt-7 flex items-center justify-between gap-4 flex-wrap">
-            <CopyLinkButton refTag="cpbl-receipt" />
+            <CopyLinkButton refTag="cpbl-receipt" shareText={shareText} />
             <div className="flex items-center gap-4 font-mono text-[10px] tracking-[0.3em]">
               <Link href="/matches" className="text-mute hover:text-gold transition-colors">
                 今日賽事 →

@@ -34,6 +34,14 @@ export default function SoccerReceiptView({ r }: { r: SoccerReceipt }) {
   const pendingStatus =
     r.phase === "locked" ? "賽前鎖定中" : "已開賽 · 待對帳";
 
+  // R228 · 外傳這張時帶一句具體鉤子(研究:預寫具體訊息在聊天列點閱高 2-4 倍)· 講收據本體
+  // = 引擎那條鎖死的線 + 結果,不冒充本人 pick(本人那手是 client overlay · 這裡誠實只講引擎線)。
+  // 用 r.phase === "settled" 直接窄化型別(verdict/finalHome 只在 settled 變體上)。
+  const shareText =
+    r.phase === "settled"
+      ? `ZONE 27 · ${r.home} vs ${r.away} · 引擎賽前鎖死看好 ${r.favoredLabel} ${r.favoredPct}% · 結果 ${r.finalHome}:${r.finalAway} · ${r.verdict === "proved" ? "引擎命中" : r.verdict === "diverged" ? "引擎落空" : "平"} · 一張改不了的收據`
+      : `ZONE 27 · ${r.home} vs ${r.away} · 引擎賽前鎖死看好 ${r.favoredLabel} ${r.favoredPct}% · 改不了、賽後對帳 · 敢不敢也鎖一手?`;
+
   return (
     <div className="flex flex-col flex-1 min-h-screen">
       <Nav active="soccer" />
@@ -204,32 +212,32 @@ export default function SoccerReceiptView({ r }: { r: SoccerReceipt }) {
 
           {/* SHARE + BACK */}
           <div className="mt-7 flex items-center justify-between gap-4 flex-wrap">
-            <CopyLinkButton refTag="soccer-receipt" />
+            <CopyLinkButton refTag="soccer-receipt" shareText={shareText} />
             <div className="flex items-center gap-4 font-mono text-[10px] tracking-[0.3em]">
               <Link href="/soccer" className="text-mute hover:text-gold transition-colors">看更多足球 →</Link>
               <Link href="/track-record" className="text-mute hover:text-gold transition-colors">公開戰績 →</Link>
             </div>
           </div>
 
-          {/* 賽前/進行中 · 把外傳這張的人接成下一個押注者(轉換漏斗 · 不是空喊分享)·
-              連回這場的卡(#m-{id})· 未開賽就還能鎖、已開賽就看別場。 */}
-          {!settled && (
-            <div className="mt-6 border border-gold/30 bg-gold/5 px-5 py-4">
-              <p className="font-mono text-gold/85 text-[10px] tracking-[0.3em] mb-2">
-                / 也想鎖一手?
-              </p>
-              <p className="text-mute text-sm leading-relaxed mb-3">
-                這張收據現在就能外傳 —— 賽前鎖死、改不了。 你也可以在結果還沒發生前,
-                對著引擎開的線鎖下你自己的判斷,賽後逐場對帳、含輸都留。
-              </p>
-              <Link
-                href={`/soccer#m-${r.matchId}`}
-                className="inline-flex items-center gap-2 font-mono text-gold/90 hover:text-gold text-[11px] tracking-[0.25em] underline-offset-4 hover:underline transition-colors"
-              >
-                ▸ 去鎖你的這一手 →
-              </Link>
-            </div>
-          )}
+          {/* R228 · 把外傳這張、點進來的(多半沒登入)朋友接成下一個押注者 = 漏斗閉環。
+              這塊永遠在(含賽後)—— 之前只在 !settled 顯示,結果最該被外傳的「命中收據」反而沒了
+              下一步,等於迴圈開了卻不閉。 賽前 → 連回這場的卡;賽後(這場鎖不了了)→ 連去今晚的板。 */}
+          <div className="mt-6 border border-gold/30 bg-gold/5 px-5 py-4">
+            <p className="font-mono text-gold/85 text-[10px] tracking-[0.3em] mb-2">
+              / 也想鎖一手?
+            </p>
+            <p className="text-mute text-sm leading-relaxed mb-3">
+              {settled
+                ? "引擎開盤免費看,押一手要登入(免費)· 賽後逐場對帳、含輸都留 —— 跟一台公開機器正面比準度。"
+                : "這張收據現在就能外傳 —— 賽前鎖死、改不了。 你也可以在結果還沒發生前,對著引擎開的線鎖下你自己的判斷,賽後逐場對帳、含輸都留。"}
+            </p>
+            <Link
+              href={settled ? "/soccer" : `/soccer#m-${r.matchId}`}
+              className="inline-flex items-center gap-2 font-mono text-gold/90 hover:text-gold text-[11px] tracking-[0.25em] underline-offset-4 hover:underline transition-colors"
+            >
+              {settled ? "▸ 去鎖今晚的一手 →" : "▸ 去鎖你的這一手 →"}
+            </Link>
+          </div>
         </article>
       </main>
 

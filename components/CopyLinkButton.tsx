@@ -43,11 +43,14 @@ type CopyLinkButtonProps = {
   // Optional channel-attribution tag appended as ?ref=<refTag>.
   // Pass something like "reserve-001" or "audit-share".
   refTag?: string;
+  // R228 · 可選:外傳時帶的一句具體鉤子(預設用通用品牌標語)。 研究顯示「預寫的具體訊息」
+  // 在聊天列的點閱率比通用 share 高 2-4 倍 —— 收據頁傳這場的引擎線 + 結果,而不是每張都一樣的標語。
+  shareText?: string;
 };
 
 type Phase = "idle" | "done";
 
-export default function CopyLinkButton({ refTag }: CopyLinkButtonProps = {}) {
+export default function CopyLinkButton({ refTag, shareText }: CopyLinkButtonProps = {}) {
   const [phase, setPhase] = useState<Phase>("idle");
   // R166 W1 · Agent Q bug audit LOW #4 · async race guard for 2s "done→idle"
   // timer · prevents setState on unmounted component if visitor navigates away
@@ -91,15 +94,14 @@ export default function CopyLinkButton({ refTag }: CopyLinkButtonProps = {}) {
   async function handleShare() {
     const url = buildUrl();
     if (!url) return;
+    // R228 · 具體鉤子優先(收據頁傳這場的引擎線/結果)· 沒傳 → 回退通用標語(其餘頁不變)。
+    const text =
+      shareText ?? "不靠直覺,只看演算法 · A QUANTITATIVE SPORTS INTELLIGENCE CLUB";
 
     // Try Web Share API first (mobile-friendly · one tap to LINE / iMessage)
     if (hasShareApi && navigator.share) {
       try {
-        await navigator.share({
-          title: "ZONE 27",
-          text: "不靠直覺,只看演算法 · A QUANTITATIVE SPORTS INTELLIGENCE CLUB",
-          url,
-        });
+        await navigator.share({ title: "ZONE 27", text, url });
         setPhase("done");
         scheduleIdle();
         return;
@@ -110,13 +112,15 @@ export default function CopyLinkButton({ refTag }: CopyLinkButtonProps = {}) {
       }
     }
 
-    // Clipboard fallback (desktop · or browsers without share API)
+    // Clipboard fallback (desktop · or browsers without share API)·
+    // 帶 shareText 時連鉤子一起複製(貼進聊天就有那句話 + 連結),沒帶就只複製連結。
+    const clip = shareText ? `${text}\n${url}` : url;
     try {
-      await navigator.clipboard.writeText(url);
+      await navigator.clipboard.writeText(clip);
       setPhase("done");
       scheduleIdle();
     } catch {
-      window.prompt("Copy this link:", url);
+      window.prompt("Copy this link:", clip);
     }
   }
 
