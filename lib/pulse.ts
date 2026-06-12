@@ -26,10 +26,8 @@ import {
   getCalibration,
   type Calibration,
 } from "@/lib/matches";
-import {
-  getLockedSoccerById,
-  getLockedSoccerPredictions,
-} from "@/lib/soccer/locked";
+import { getLockedSoccerById } from "@/lib/soccer/locked";
+import { resolveLockedSoccer } from "@/lib/soccer/engine-settle";
 import { getMlbLockedMatches } from "@/lib/mlb-matches";
 
 export type PulseEvent =
@@ -140,16 +138,22 @@ function getRecentSettlements(limit: number): PulseEvent[] {
 
 // 足球引擎結算事件 · 已對帳(verdict 非 null)的鎖定場(含輸 · 平照播)· ts = gradedAt。
 // 世界盃夜引擎也在逐場對帳足球 → 牆上不只棒球結算。 按 gradedAt 由新到舊取前 limit 筆。
-function getRecentSoccerSettlements(limit: number): PulseEvent[] {
+// ⚠️ 走 resolveLockedSoccer(站上即時對帳)而非生 JSON —— 終場一進 live 窗(~1h)牆就亮,
+//    不等 GitHub cron commit(常延遲數小時)· 世界盃夜「踢完就上牆」是命脈。
+async function getRecentSoccerSettlements(limit: number): Promise<PulseEvent[]> {
   const all: PulseEvent[] = [];
-  for (const p of getLockedSoccerPredictions()) {
-    if (!p.verdict || !p.gradedAt) continue;
-    const ts = Date.parse(p.gradedAt);
-    if (Number.isNaN(ts)) continue;
+  for (const p of await resolveLockedSoccer()) {
+    if (!p.verdict) continue;
+    // 牆上時戳/排序用「約終場 = 開賽 + 110 分」(固定值)· 不用 gradedAt —— on-read 與 cron
+    // 之後補寫的 gradedAt 不同,用它排序會在 cron commit 那刻跳位;改用開賽時間既穩定、
+    // 又比「cron 剛好幾點跑」更符合直覺(按比賽踢完的先後排)。
+    const kt = Date.parse(p.kickoffISO ?? "");
+    if (Number.isNaN(kt)) continue;
+    const ts = kt + 110 * 60 * 1000;
     all.push({
       kind: "settle",
       ts,
-      whenISO: p.gradedAt,
+      whenISO: new Date(ts).toISOString(),
       matchId: p.matchId,
       matchup: `${p.home} vs ${p.away}`,
       verdict: p.verdict, // proved | diverged | push(非 null · 同棒球口徑)
@@ -164,7 +168,7 @@ export async function getActivityPulse(limit = 24): Promise<PulseEvent[]> {
   const [locks, settles, soccerSettles] = await Promise.all([
     getRecentLocks(limit),
     Promise.resolve(getRecentSettlements(limit)),
-    Promise.resolve(getRecentSoccerSettlements(limit)),
+    getRecentSoccerSettlements(limit),
   ]);
   return [...locks, ...settles, ...soccerSettles]
     .sort((a, b) => b.ts - a.ts)

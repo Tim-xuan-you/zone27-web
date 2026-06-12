@@ -128,27 +128,9 @@ export function kickoffTaipei(iso: string): string {
   return `${mm}/${dd} ${hh}:${mi}`;
 }
 
-/**
- * verdict null(還沒結算)的鎖定條目,按「開賽了沒」分流。 給 SoccerEngineRecord
- * 把「還沒踢」跟「踢完待對帳」誠實分開標 ——「還沒踢」掛在已踢完的場上 = 當眾說謊
- * (結算每 3h 跑 · 終場到入帳有空窗)。 時鐘讀在 lib(server request/ISR 時間粒度
- * 對這個標籤夠用)· 不在元件 render 內讀(react-hooks/purity)。
- */
-export function splitUngradedByKickoff(): {
-  notKicked: number;
-  awaitingGrade: number;
-} {
-  let notKicked = 0;
-  let awaitingGrade = 0;
-  const nowMs = Date.now();
-  for (const p of getLockedSoccerPredictions()) {
-    if (p.verdict !== null) continue;
-    const t = Date.parse(p.kickoffISO ?? "");
-    if (Number.isNaN(t) || t > nowMs) notKicked += 1;
-    else awaitingGrade += 1;
-  }
-  return { notKicked, awaitingGrade };
-}
+// (splitUngradedByKickoff 已移除 · R229:開賽分流改在 lib/soccer/engine-settle.ts
+//  getResolvedSoccerEngine 內算 —— 那裡吃「站上即時對帳後」的盤,不像舊版只讀生 JSON 會把
+//  on-read 剛結算的場誤判成「待對帳」。)
 
 /**
  * matchId → 引擎當初鎖定的看好邊(只含有鎖定線的場)。 給「你 vs 引擎」同場對照

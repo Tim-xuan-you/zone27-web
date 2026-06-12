@@ -1,9 +1,6 @@
 import Link from "next/link";
-import {
-  getLockedSoccerPredictions,
-  splitUngradedByKickoff,
-  type LockedSoccerPrediction,
-} from "@/lib/soccer/locked";
+import { type LockedSoccerPrediction } from "@/lib/soccer/locked";
+import { getResolvedSoccerEngine } from "@/lib/soccer/engine-settle";
 
 // ── ZONE 27 · 足球引擎賽前鎖定 · 賽後對帳(公開戰績 · 三向)──────────────
 // 鏡 components/MlbEngineRecord.tsx,但足球是三向(主勝/和/客勝)。 讀 lib/soccer-locked.json
@@ -45,8 +42,10 @@ const UNIFORM = { h: 1 / 3, d: 1 / 3, a: 1 / 3 };
 // 引擎要「賺到」它的說法,得贏過這條先驗,不只贏過亂猜。
 const HOME_PRIOR = { h: 0.46, d: 0.27, a: 0.27 };
 
-export default function SoccerEngineRecord() {
-  const lockedAll = getLockedSoccerPredictions();
+export default async function SoccerEngineRecord() {
+  // 站上即時對帳(resolveLockedSoccer)· 終場一進 live 窗就算進戰績,不等 GitHub cron commit。
+  const { predictions: lockedAll, notKicked, awaitingGrade } =
+    await getResolvedSoccerEngine();
   const preds = lockedAll as Pred[];
   const total = preds.length;
   if (total === 0) return null;
@@ -67,7 +66,6 @@ export default function SoccerEngineRecord() {
   // verdict null = 還沒結算 ≠ 還沒踢:結算每 3h 跑一輪,終場到入帳之間誠實分兩格
   // (時鐘分流在 lib/soccer/locked.ts · 元件 render 不讀時鐘)。
   const pending = preds.filter((p) => p.verdict === null).length;
-  const { notKicked, awaitingGrade } = splitUngradedByKickoff();
   const noLine = preds.filter((p) => p.verdict === "push").length;
   const played = decided.length + noLine;
   const rate =
