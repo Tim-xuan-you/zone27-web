@@ -8,6 +8,7 @@ import EngineGate from "@/components/EngineGate";
 import StatPercentileBar from "@/components/StatPercentileBar";
 import MarketSplitBar from "@/components/MarketSplitBar";
 import CreatorAnalysis from "@/components/CreatorAnalysis";
+import MatchSegment from "@/components/MatchSegment";
 import UserPredictionPicker from "@/components/UserPredictionPicker";
 import ReceiptForwardButton from "@/components/ReceiptForwardButton";
 import CopyLinkButton from "@/components/CopyLinkButton";
@@ -31,6 +32,7 @@ import { getEngineConviction } from "@/lib/conviction";
 import { getEngineReasoning, type EngineReasoning } from "@/lib/reasoning";
 import { getTeamCrest } from "@/lib/identity";
 import { getMlbMatchById, getTodayMatchesAllLeagues } from "@/lib/mlb-matches";
+import { getMatchSegment } from "@/lib/match-segment";
 
 // ── ZONE 27 · /matches/[gameId] · 市場頁(R175 Polymarket pivot)──
 // Tim 2026-05-30「資訊多到爆炸 · 划不到底 · 該刪就刪 · 變成 Polymarket」·
@@ -96,6 +98,8 @@ export default async function MatchDetailPage({
   const calibration = getCalibration(m);
   const enginePctOnWinner = getEnginePctOnWinner(m);
   const startISO = getMatchStartIso(m);
+  // R230 · 誰賽前鎖了這場(per-match segment · 公開 ladder get_ladder_entries · 0 migration · ISR-safe)
+  const segment = await getMatchSegment(m.id);
   // 引擎信心溫度 · 同卡片同一套中文詞(勢均力敵/看好/重壓)· 取代英文 SIGNAL 條
   // (解兩套信心系統打架 + 英文黑話漏到 hero)· 純從開盤線 favorite % 衍生 · 不另立 aiConfidence 第二尺
   const conviction = getEngineConviction(Math.max(m.home.winRate, m.away.winRate));
@@ -373,6 +377,15 @@ export default async function MatchDetailPage({
             </div>
           </section>
         )}
+
+        {/* ── 誰賽前鎖了這場(per-match segment · Strava 式微競技場)· 賽後逐人對帳誰押對 ──
+            沒人鎖 → 整塊隱藏(graceful)· 走公開 ladder · 每格連 /u 公開校準檔。 */}
+        <MatchSegment
+          lockers={segment}
+          homeName={m.home.name}
+          awayName={m.away.name}
+          winner={m.finalResult?.winner ?? null}
+        />
 
         {/* ── 看法 · 分析(唯一發言區:留看法/寫分析 + 選邊 + 賽後自動評準度)──
             id="say" = 峰終錨點 · UserPredictionPicker 猜中時的「寫成分析 →」連到這 */}
