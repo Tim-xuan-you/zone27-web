@@ -252,7 +252,8 @@ export default function CreatorAnalysis({
               ▸ 登入就能發表你的分析(免費)
             </span>
             <Link
-              href={`/login?next=${encodeURIComponent(`/matches/${matchId}#creator-analysis`)}`}
+              // 足球(fd-*)詳情頁在 /soccer/[matchId]、棒球在 /matches/[gameId] → 登入後回對的頁。
+              href={`/login?next=${encodeURIComponent(`${matchId.startsWith("fd-") ? `/soccer/${matchId}` : `/matches/${matchId}`}#creator-analysis`)}`}
               className="inline-block px-4 py-2 bg-gold text-navy font-mono text-xs tracking-[0.25em] hover:bg-gold-soft transition-colors"
             >
               → 登入後發表

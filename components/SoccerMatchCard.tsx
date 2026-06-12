@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Avatar from "@/components/Avatar";
 import SoccerBetStrip from "@/components/SoccerBetStrip";
 import SoccerMarketLines from "@/components/SoccerMarketLines";
@@ -71,6 +72,14 @@ export default function SoccerMatchCard({ match }: { match: SoccerMatchPredictio
       {/* 三向押注(主勝/和/客勝)· 登入才能押 · 押了不可改 · 賽後逐場對帳(結算建置中)·
           locked = 這場有賽前鎖定線(押完給一張可外傳的單場收據連結) */}
       <SoccerBetStrip matchId={id} dateISO={dateISO} homeLabel={home} awayLabel={away} locked={locked} />
+
+      {/* 進這場詳情 = 完整引擎(最可能比分 / 玩法視角)+ 討論 / 分析(R228 足球補到 CPBL 同級)*/}
+      <Link
+        href={`/soccer/${id}`}
+        className="pt-1 flex items-baseline justify-end font-mono text-gold/70 hover:text-gold text-[10px] tracking-[0.3em] transition-colors"
+      >
+        完整分析 · 討論 →
+      </Link>
     </article>
   );
 }

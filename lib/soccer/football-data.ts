@@ -272,6 +272,22 @@ export function getLockedUpcomingPredictions(): SoccerMatchPrediction[] {
 }
 
 /**
+ * 單場足球完整預測(/soccer/[matchId] 詳情頁用 · R228 足球補到 CPBL 同級)· 先查賽前鎖定
+ * (0 API · 打包檔)· 再退 live 各 active 聯賽(已 1h 快取)· 查無 → null(詳情頁 notFound)。
+ */
+export async function getSoccerMatchById(
+  id: string,
+): Promise<SoccerMatchPrediction | null> {
+  const locked = getLockedUpcomingPredictions().find((p) => p.id === id);
+  if (locked) return locked;
+  for (const code of ACTIVE_COMPETITIONS) {
+    const m = (await getCompetitionPredictions(code)).find((p) => p.id === id);
+    if (m) return m;
+  }
+  return null;
+}
+
+/**
  * 個人帳本用的「結果來源」:永久鎖定結果(getSoccerFinalizedResults · settled 永不掉)
  * 疊在 live 窗(getRecentSoccerResults)之上,key 撞 → 永久者勝。 修「賽事掉出 live 窗 →
  * 已結算押注變回 pending → 帳本縮水」的命門(同 MLB 永久結果修復)。
