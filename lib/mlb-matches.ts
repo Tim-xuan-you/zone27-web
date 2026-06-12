@@ -25,6 +25,7 @@ import {
   type MlbTeamSide,
 } from "@/lib/mlb";
 import mlbLocked from "@/lib/mlb-locked.json";
+import { deriveMlbTopScores } from "@/lib/mlb-scores";
 
 // gamePk → 賽前鎖定的引擎主隊勝率%
 function lockedByPk(): Map<number, number> {
@@ -68,6 +69,8 @@ function mlbSide(t: MlbTeamSide, winRate: number): TeamSide {
 export function mlbGameToMatch(g: MlbGame, lockedPct: number): Match {
   const homePct = Math.round(lockedPct);
   const awayPct = 100 - homePct;
+  const home = mlbSide(g.home, homePct);
+  const away = mlbSide(g.away, awayPct);
   const finalResult: Match["finalResult"] = g.finalScore
     ? {
         homeScore: g.finalScore.home,
@@ -87,9 +90,10 @@ export function mlbGameToMatch(g: MlbGame, lockedPct: number): Match {
     date: `${g.dateTaipei}  ·  ${weekdayZh(g.startUTC)}`,
     startTime: g.startTaipei,
     venue: g.venue,
-    home: mlbSide(g.home, homePct),
-    away: mlbSide(g.away, awayPct),
-    topScores: [], // MLB 引擎是 Log5 公式非逐打席模擬 · 無比分分佈(詳情頁該段自動略過)
+    home,
+    away,
+    // R228 · 由鎖定勝率 + 兩隊先發 ERA 推導最可能比分(投手未定 → 回空 · 詳情頁該段自動隱藏)。
+    topScores: deriveMlbTopScores(homePct, home.pitcher.era, away.pitcher.era),
     aiConfidence: Math.max(homePct, awayPct),
     finalResult,
   };
@@ -206,15 +210,18 @@ function lockedToMatch(p: LockedPrediction): Match | null {
           ingestedAt: p.gameDate,
         }
       : undefined;
+  const homeSide = lockedSide(home.zh, home.abbr, p.homePitcher, p.homeStats, homePct);
+  const awaySide = lockedSide(away.zh, away.abbr, p.awayPitcher, p.awayStats, awayPct);
   return {
     id: `mlb-${p.gamePk}`,
     league: "MLB",
     date: `${tp.date}  ·  ${weekdayZh(p.gameDate)}`,
     startTime: tp.time,
     venue: "—",
-    home: lockedSide(home.zh, home.abbr, p.homePitcher, p.homeStats, homePct),
-    away: lockedSide(away.zh, away.abbr, p.awayPitcher, p.awayStats, awayPct),
-    topScores: [],
+    home: homeSide,
+    away: awaySide,
+    // R228 · 同 live 路徑 · 由鎖定勝率 + 兩隊先發 ERA 推導最可能比分(永久重建場也有 · 同源一致)。
+    topScores: deriveMlbTopScores(homePct, homeSide.pitcher.era, awaySide.pitcher.era),
     aiConfidence: Math.max(homePct, awayPct),
     finalResult,
   };

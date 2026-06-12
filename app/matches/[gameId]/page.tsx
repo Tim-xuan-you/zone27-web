@@ -412,7 +412,10 @@ export default async function MatchDetailPage({
           </div>
         </section>
 
-        {/* ── SCORE DISTRIBUTION · top 5 · MLB 引擎是 Log5 公式無比分分佈 → 略過 ── */}
+        {/* ── SCORE DISTRIBUTION · top 5 ──
+            CPBL = 逐打席 10K 模擬的常見終局比分 · MLB(R228)= 由賽前鎖定的勝率 + 兩隊
+            先發 ERA 推導的 9 局比分投影(卜瓦松 · lib/mlb-scores.ts)· 兩者算法不同但同樣
+            賽前鎖死。 投手未定 → topScores 為空 → 該段自動隱藏。 */}
         {m.topScores.length > 0 && (
         <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-8 border-t border-line/40 pt-8">
           <p className="font-mono text-mute text-[9px] tracking-[0.4em] mb-2">
@@ -437,6 +440,13 @@ export default async function MatchDetailPage({
               />
             ))}
           </div>
+          {/* MLB 誠實揭露:這張比分表怎麼來的(不偷偷另開一個盤 · 跟上方鎖定勝率同源)。 */}
+          {m.league === "MLB" && (
+            <p className="mt-4 font-mono text-mute/45 text-[9px] tracking-[0.12em] leading-relaxed">
+              由上方賽前鎖定的勝率 + 兩隊先發 ERA 推導的 9 局比分投影(卜瓦松)· 跟 CPBL 的逐打席
+              10K 模擬是不同算法 · 一樣賽前鎖死、賽後對帳 · 延長賽分勝負故不列平手。
+            </p>
+          )}
         </section>
         )}
 
