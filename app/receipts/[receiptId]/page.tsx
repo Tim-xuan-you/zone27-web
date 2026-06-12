@@ -8,6 +8,8 @@ import EngineRerunBadge from "@/components/EngineRerunBadge";
 import LineKeepHint from "@/components/LineKeepHint";
 import FounderSignOff from "@/components/FounderSignOff";
 import UserReceiptPick from "@/components/UserReceiptPick";
+import MatchSegment from "@/components/MatchSegment";
+import { getMatchSegment } from "@/lib/match-segment";
 import {
   getMatchById,
   getFinalizedMatches,
@@ -203,7 +205,10 @@ export default async function ReceiptPage({ params }: { params: Params }) {
   if (receiptId.startsWith("fd-")) {
     const sr = await getSoccerReceipt(receiptId);
     if (!sr) notFound();
-    return <SoccerReceiptView r={sr} />;
+    // R230 · 這場的「誰賽前鎖了 · 賽後誰押對」人類記分板(足球版 · settled 顯示 ✓/✕)·
+    // 走公開 ladder(0 migration)· 在 async 父層算好傳進 view(view 維持 sync)。
+    const sseg = await getMatchSegment(receiptId);
+    return <SoccerReceiptView r={sr} segment={sseg} />;
   }
   // CPBL(sync)+ MLB(async · R228 修:MLB 戰功卡點收據 404 —— getMatchById 只認 CPBL ·
   // 已結算 MLB 由 getMlbMatchById 從 mlb-locked.json 永久重建 · 走下方同一份賽後收據渲染)。
@@ -231,6 +236,8 @@ export default async function ReceiptPage({ params }: { params: Params }) {
   const homeFavored = match.home.winRate > match.away.winRate;
   const favoriteName = homeFavored ? match.home.name : match.away.name;
   const favoritePct = Math.max(match.home.winRate, match.away.winRate);
+  // R230 · 這場的「誰賽前鎖了 · 賽後誰押對」人類記分板(per-match segment · 公開 ladder · 0 migration)
+  const segment = await getMatchSegment(match.id);
 
   // R228 · 外傳這張時帶一句具體鉤子(預寫具體訊息比通用標語點閱高 2-4 倍)· 講引擎鎖死的線 + 結果。
   const verdictWord =
@@ -475,6 +482,15 @@ export default async function ReceiptPage({ params }: { params: Params }) {
             </div>
           </div>
         </article>
+
+        {/* ── 誰賽前鎖了這場 · 賽後誰押對(per-match segment · 人類記分板 · 沒人鎖→整塊隱藏)──
+            引擎的收據在上面 · 這裡是「真人」的記分板:誰賽前押了手、賽後誰押對 · 每格連 /u 公開校準檔。 */}
+        <MatchSegment
+          lockers={segment}
+          homeName={match.home.name}
+          awayName={match.away.name}
+          winner={fr.winner}
+        />
 
         {/* ── COPY-LINK + CROSS-LINKS ─────────────── */}
         <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-12">

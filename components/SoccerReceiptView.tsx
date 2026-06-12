@@ -7,8 +7,10 @@ import EngineThreeWayBar from "@/components/EngineThreeWayBar";
 import SoccerUserReceiptPick from "@/components/SoccerUserReceiptPick";
 import KickoffCountdown from "@/components/KickoffCountdown";
 import LockStamp from "@/components/LockStamp";
+import MatchSegment from "@/components/MatchSegment";
 import { getNationalCode } from "@/lib/soccer/teams";
 import type { SoccerReceipt } from "@/lib/soccer/receipt";
+import type { SegmentLocker } from "@/lib/match-segment";
 
 // ── ZONE 27 · 足球單場「戰功收據」頁 ───────────────────────────────────
 // 鏡棒球收據(Patek 式 reference + TCG 卡解剖 + 命中/落空同等揭露)· 但足球是三向
@@ -22,7 +24,14 @@ import type { SoccerReceipt } from "@/lib/soccer/receipt";
 // 賽前/賽後同一個網址 → 賽後自動長出比分與判決(收據頁 10 分鐘 ISR)。
 // ─────────────────────────────────────────────────────
 
-export default function SoccerReceiptView({ r }: { r: SoccerReceipt }) {
+export default function SoccerReceiptView({
+  r,
+  segment = [],
+}: {
+  r: SoccerReceipt;
+  /** 這場的「誰賽前鎖了 · 賽後誰押對」名單(父層算好傳進 · view 維持 sync)*/
+  segment?: SegmentLocker[];
+}) {
   const ref = `Z27 · ${r.competitionName} · ${r.matchId}`;
   // 上金的邊綁 enginePick(原始機率 argmax)· 不從展示%重算 → 金數字與「引擎看好 X」同源。
   const homeGold = r.enginePick === "home";
@@ -239,6 +248,15 @@ export default function SoccerReceiptView({ r }: { r: SoccerReceipt }) {
             </Link>
           </div>
         </article>
+
+        {/* ── 誰賽前鎖了這場 · 賽後誰押對(per-match segment · 人類記分板 · 沒人鎖→整塊隱藏)──
+            引擎收據在上面 · 這裡是真人的記分板:誰賽前押了手、賽後誰押對(三向含和局)· 每格連 /u。 */}
+        <MatchSegment
+          lockers={segment}
+          homeName={r.home}
+          awayName={r.away}
+          winner={r.phase === "settled" ? r.outcome : null}
+        />
       </main>
 
       <Footer />
