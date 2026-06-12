@@ -97,6 +97,8 @@ export default function CreatorAnalysis({
   const [tier, setTier] = useState<MemberTier>("free"); // 付費會員才能標價賣
   const [price, setPrice] = useState(0); // NT$ · 0 = 免費發
   const [balance, setBalance] = useState(0); // 錢包餘額(NT$ · 1 點 = NT$1)
+  // R229「免費封神」· 標價賣降級成付費會員的安靜進階選項 · 預設收起(收起 = price 0 = 免費發)。
+  const [sellOpen, setSellOpen] = useState(false);
 
   useEffect(() => {
     let cancelled = false;
@@ -164,6 +166,7 @@ export default function CreatorAnalysis({
       setBody("");
       setPick(null);
       setPrice(0);
+      setSellOpen(false);
       const list = await getCreatorPosts(matchId);
       setPosts(list);
     } else if (res.reason === "already_posted") {
@@ -314,67 +317,94 @@ export default function CreatorAnalysis({
                 )}
               </div>
             </div>
-            {/* 標價賣分析:付費會員可標價(你拿 90-95%)· 免費會員只能免費發 + 升級提示。
-                買了才解鎖(migration 0008 · server 端 gate body)= 賣得出去的前提。 */}
-            {isPaidTier(tier) ? (
-              <div className="border-t border-line/40 pt-3 space-y-2">
-                <label className="block font-mono text-mute/70 text-[10px] tracking-[0.2em]">
-                  標價賣(NT$ · 0 = 免費):
-                </label>
-                {/* 預設價位 · 勾選不自填 · 圓整誠實(不玩 99 把戲)· 上限綁階級 */}
-                <div className="flex items-center gap-1.5 flex-wrap">
-                  {PRICE_OPTIONS.filter((p) => p <= tierPriceMax(tier)).map((p) => (
-                    <button
-                      key={p}
-                      type="button"
-                      onClick={() => setPrice(p)}
-                      aria-pressed={price === p}
-                      className={`px-2.5 py-1.5 font-mono text-[11px] tracking-[0.15em] border transition-colors tabular ${
-                        price === p
-                          ? "border-gold bg-gold/10 text-gold"
-                          : "border-line/60 text-mute hover:border-gold/40"
-                      }`}
-                    >
-                      {p === 0 ? "免費" : p}
-                    </button>
-                  ))}
-                </div>
-                {price > 0 ? (
-                  <p className="font-mono text-mute/70 text-[10px] tracking-[0.12em] leading-relaxed">
-                    ▸ 標題 + 推薦邊公開 · 完整內文買了才看得到(防免費複製)· 賣出 NT$ {price} · 你拿{" "}
-                    <span className="text-gold tabular">
-                      {Math.round((price * creatorTakePct(tier)) / 100)}
-                    </span>{" "}
-                    元(<span className="text-gold">{creatorTakePct(tier)}%</span> · 平台抽{" "}
-                    {creatorFeePct(tier)}%)· 賽後一樣自動掛準度。
-                  </p>
-                ) : (
-                  <p className="font-mono text-mute/60 text-[10px] tracking-[0.12em] leading-relaxed">
-                    ▸ 免費發 · 點上面的數字即變付費分析(你是 {tierLabel(tier)} · 抽成{" "}
-                    {creatorFeePct(tier)}%)。
-                  </p>
-                )}
-                {/* 心理學 · 價格 = 證明(玩運彩給不了)· 不玩 99 把戲 = 品牌宣言 */}
-                <p className="font-mono text-mute/45 text-[9px] tracking-[0.1em] leading-relaxed">
-                  ▸ 我們不玩「99 元」那種心理把戲 · 價格乾淨。 賣越貴 · 越要你名字旁的{" "}
-                  <span className="text-gold/70">✓ 已驗證準度</span> 撐得起(買家看的是真戰績 · 不是話術)。
-                  新手先 0–50 建口碑 · 準度上來再升價。
-                  {tier !== "founder" &&
-                    "（BLACK 上限 NT$ 200;GOLD 可賣到 NT$ 500）"}
-                </p>
-              </div>
-            ) : (
-              <p className="border-t border-line/40 pt-3 font-mono text-mute/60 text-[10px] tracking-[0.12em] leading-relaxed">
-                ▸ 先免費發 · 賽後自動掛準度(刪不掉)。 想
-                <span className="text-gold/80">標價賣分析變現</span>?{" "}
-                <Link
-                  href="/membership"
-                  className="text-gold underline-offset-4 hover:underline"
-                >
-                  升級會員 →
-                </Link>
+            {/* R229「免費封神」· 公開判斷的回報是地位(天梯 / 校準 / 被追蹤),不是牆後的 NT$。
+                標價賣降級成付費會員的安靜「進階」選項(預設收起 · price 0 = 免費發)。 */}
+            <div className="border-t border-line/40 pt-3 space-y-2">
+              <p className="font-mono text-mute/75 text-[10px] tracking-[0.12em] leading-relaxed">
+                ▸ 免費公開 —— 賽後自動對帳,名字旁那個{" "}
+                <span className="text-gold/80">✓ 已驗證準度</span>{" "}
+                會自己長出來,爬天梯、被人追蹤。{" "}
+                <span className="text-mute/55">地位是賺來的,不是買來的。</span>
               </p>
-            )}
+
+              {isPaidTier(tier) ? (
+                sellOpen ? (
+                  <div className="space-y-2 border-l border-gold/25 pl-3">
+                    <label className="block font-mono text-mute/70 text-[10px] tracking-[0.2em]">
+                      標價賣(NT$ · 0 = 免費):
+                    </label>
+                    {/* 預設價位 · 勾選不自填 · 圓整誠實(不玩 99 把戲)· 上限綁階級 */}
+                    <div className="flex items-center gap-1.5 flex-wrap">
+                      {PRICE_OPTIONS.filter((p) => p <= tierPriceMax(tier)).map((p) => (
+                        <button
+                          key={p}
+                          type="button"
+                          onClick={() => setPrice(p)}
+                          aria-pressed={price === p}
+                          className={`px-2.5 py-1.5 font-mono text-[11px] tracking-[0.15em] border transition-colors tabular ${
+                            price === p
+                              ? "border-gold bg-gold/10 text-gold"
+                              : "border-line/60 text-mute hover:border-gold/40"
+                          }`}
+                        >
+                          {p === 0 ? "免費" : p}
+                        </button>
+                      ))}
+                    </div>
+                    {price > 0 ? (
+                      <p className="font-mono text-mute/70 text-[10px] tracking-[0.12em] leading-relaxed">
+                        ▸ 標題 + 推薦邊公開 · 完整內文買了才看得到(防免費複製)· 賣出 NT$ {price} · 你拿{" "}
+                        <span className="text-gold tabular">
+                          {Math.round((price * creatorTakePct(tier)) / 100)}
+                        </span>{" "}
+                        元(<span className="text-gold">{creatorTakePct(tier)}%</span> · 平台抽{" "}
+                        {creatorFeePct(tier)}%)· 賽後一樣自動掛準度。
+                      </p>
+                    ) : (
+                      <p className="font-mono text-mute/60 text-[10px] tracking-[0.12em] leading-relaxed">
+                        ▸ 點上面的數字即變付費分析(你是 {tierLabel(tier)} · 抽成{" "}
+                        {creatorFeePct(tier)}%)。
+                      </p>
+                    )}
+                    {/* 心理學 · 價格 = 證明(玩運彩給不了)· 不玩 99 把戲 = 品牌宣言 */}
+                    <p className="font-mono text-mute/45 text-[9px] tracking-[0.1em] leading-relaxed">
+                      ▸ 不玩「99 元」那種心理把戲 · 價格乾淨。 賣越貴 · 越要你名字旁的{" "}
+                      <span className="text-gold/70">✓ 已驗證準度</span> 撐得起(買家看的是真戰績 · 不是話術)。
+                      {tier !== "founder" &&
+                        "（BLACK 上限 NT$ 200;GOLD 可賣到 NT$ 500）"}
+                    </p>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setSellOpen(false);
+                        setPrice(0);
+                      }}
+                      className="font-mono text-mute/45 hover:text-gold text-[9px] tracking-[0.15em] underline-offset-4 hover:underline transition-colors"
+                    >
+                      收起 · 免費發就好
+                    </button>
+                  </div>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={() => setSellOpen(true)}
+                    className="font-mono text-mute/45 hover:text-gold text-[10px] tracking-[0.15em] underline-offset-4 hover:underline transition-colors"
+                  >
+                    ▸ 進階:也可以把這篇標價賣(你是 {tierLabel(tier)})
+                  </button>
+                )
+              ) : (
+                <p className="font-mono text-mute/55 text-[10px] tracking-[0.12em] leading-relaxed">
+                  ▸ 想把分析標價賣是付費會員的進階功能 —— 但先免費封神,地位比點數值錢。{" "}
+                  <Link
+                    href="/membership"
+                    className="text-gold/80 underline-offset-4 hover:underline"
+                  >
+                    認識 BLACK / GOLD →
+                  </Link>
+                </p>
+              )}
+            </div>
             <div className="flex items-center justify-between gap-3 flex-wrap">
               <span className="font-mono text-mute/55 text-[10px] tracking-[0.2em] tabular">
                 {title.trim().length}/{T_MAX} · {body.trim().length}/{B_MAX}
