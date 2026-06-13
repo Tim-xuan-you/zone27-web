@@ -190,6 +190,55 @@ const rawMatches: Match[] = [
     ],
     aiConfidence: 51,
   },
+  //   #165 洲際 · 樂天(曾家輝 away)vs 中信(羅戈 home)· W-L 樂天 19-27-1(.413)/ 中信 15-32-1(.319 全聯盟最差)
+  //     兩支弱旅 · 中信主場(~+3%)+ 先發羅戈 2026 ERA 3.00 / K9 8.0(真好投手 · 生涯 1.8-2.2);
+  //     樂天先發曾家輝 2026 ERA 3.05 / WHIP 1.04 / 控球穩(BB9 2.0)· 兩位先發幾乎同級(羅戈三振略多、
+  //     曾家輝 WHIP 略優)→ 投手互抵 · 剩隊伍 vs 主場:樂天戰績明顯較佳(.413 vs .319)略蓋中信主場 →
+  //     樂天 52 / 中信 48 · conf 50(兩弱旅、誠實近銅板)。 ⚠️ 曾家輝 未進自動 leaderboard → 標 estimate(官網手抄)。
+  {
+    id: "cpbl-260614-03",
+    league: "CPBL",
+    date: "2026 · 06 · 14  ·  星期日",
+    startTime: "17:05",
+    venue: "臺中洲際棒球場",
+    home: {
+      name: "中信兄弟",
+      en: "BROTHERS",
+      pitcher: {
+        name: "羅戈",
+        era: "3.00", // real · 2026 官網累計成績表 · 66 IP(11 先發 · 生涯 2024 2.16 / 2025 1.84 = 真好投手)
+        k9: "8.0", // real · 59 K / 66 IP × 9
+        whip: "1.12", // real · (54 H + 20 BB) / 66 IP
+        bb9: "2.7", // real · 20 BB / 66 IP × 9
+        hr9: "0.41", // real · 3 HR / 66 IP × 9
+      },
+      recent: ["L", "L", "W", "L", "L"], // placeholder · 中信 15-32-1(全聯盟最差 .319)
+      winRate: 48,
+    },
+    away: {
+      name: "樂天桃猿",
+      en: "MONKEYS",
+      pitcher: {
+        name: "曾家輝",
+        era: "3.05", // estimate · 2026 官網累計成績表(手抄)· 41.1 IP(8 先發)
+        k9: "7.2", // estimate · 33 K / 41.1 IP × 9
+        whip: "1.04", // estimate · 官網每局被上壘率 1.040(34 H + 9 BB / 41.1 IP)· 控球穩
+        bb9: "2.0", // estimate · 9 BB / 41.1 IP × 9
+        hr9: "0.44", // estimate · 2 HR / 41.1 IP × 9
+      },
+      recent: ["W", "L", "L", "W", "L"], // placeholder · 樂天 19-27-1(.413)
+      winRate: 52,
+    },
+    topScores: [
+      // 兩位 ~3 ERA 先發 → 中分;先發互抵、樂天戰績較佳略蓋中信主場 → 樂天微 lean(格式 home : away = 中信 : 樂天)
+      { score: "3 : 4", probability: 8.5 },
+      { score: "4 : 3", probability: 8.0 },
+      { score: "2 : 3", probability: 7.5 },
+      { score: "4 : 5", probability: 7.0 },
+      { score: "5 : 4", probability: 7.0 },
+    ],
+    aiConfidence: 50,
+  },
   // ── 2026-06-12 · 一軍 3 場 ingest · Tim 截圖 cpbl.com.tw 賽程 + 先發投手成績表 ──
   //   投手值由官網累計成績表(IP/K/BB/HR)換算 · 標 real(本季官網成績表直接抓)· winRate 手 curate
   //   整數(ERA + 控球 + 主場 + 隊伍 W-L · 接近五五波就誠實低 conviction · 不裝把握)· 天氣不建模(/audit S02)。
