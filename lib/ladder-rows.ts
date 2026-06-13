@@ -13,6 +13,9 @@ export type LadderRow = {
   handle?: unknown;
   match_id?: unknown;
   pick?: unknown;
+  // 0026 起多回的「賽前鎖死的一句理由」(公開)· 0026 未套用前這欄不存在 → undefined
+  //（graceful build-ahead:segment 讀不到就不顯示那行,套用後自動亮)。
+  rationale?: unknown;
   created_at?: unknown;
 };
 

@@ -49,7 +49,7 @@ export default function RationalePicker({
     return (
       <div className="mt-2.5">
         <p className="font-mono text-gold/85 text-[10px] tracking-[0.12em] mb-1">
-          ✓ 賽前鎖死你的理由 · 改不了
+          ✓ 賽前鎖死你的理由 · 公開 · 改不了
         </p>
         <p className="text-bone/90 text-[13px] leading-relaxed">「{locked}」</p>
       </div>
@@ -64,7 +64,7 @@ export default function RationalePicker({
         onClick={() => setOpen(true)}
         className="mt-2.5 inline-flex items-center font-mono text-mute/70 hover:text-gold text-[10px] tracking-[0.15em] underline-offset-4 hover:underline transition-colors"
       >
-        ▸ 寫一句你為什麼看好(選填 · 賽前鎖死)
+        ▸ 寫一句你為什麼看好(選填 · 公開 · 賽前鎖死)
       </button>
     );
   }
@@ -74,7 +74,10 @@ export default function RationalePicker({
   return (
     <div className="mt-2.5">
       <p className="font-mono text-mute/70 text-[9px] tracking-[0.18em] mb-1.5">
-        你為什麼看好這一手?(選填 · 鎖下就改不了 · 賽後攤開看打不打臉)
+        你為什麼看好這一手?(選填 · 鎖下就改不了)
+      </p>
+      <p className="text-mute/60 text-[11px] leading-snug mb-1.5">
+        這句會<span className="text-gold/80">公開</span>掛在這場、連著你的校準檔 —— 賽後攤開看打不打臉。
       </p>
       <textarea
         value={text}

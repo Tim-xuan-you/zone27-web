@@ -63,29 +63,38 @@ export default function MatchSegment({
         {ordered.map((l, i) => {
           const correct = isCorrect(l.pick);
           return (
-            <li
-              key={`${l.authorCode}-${i}`}
-              className="flex items-center gap-3 py-2.5"
-            >
+            <li key={`${l.authorCode}-${i}`} className="flex items-start gap-3 py-2.5">
               <Avatar seed={l.authorCode} size={26} />
-              <Link
-                href={`/u/${l.authorCode}`}
-                className="min-w-0 flex-1 text-bone hover:text-gold text-sm truncate underline-offset-4 hover:underline transition-colors"
-              >
-                {l.handle}
-              </Link>
-              <span className="shrink-0 font-mono text-gold/75 text-[10px] tracking-[0.15em]">
-                看好 {sideLabel(l.pick).slice(0, 5)}
-              </span>
-              {settled && (
-                <span
-                  className={`shrink-0 font-mono text-[10px] tracking-[0.2em] tabular ${
-                    correct ? "text-gold" : "text-loss/85"
-                  }`}
-                >
-                  {correct ? "✓ 中" : "✕ 沒中"}
-                </span>
-              )}
+              {/* 名字 + 理由同一欄(flex column)· 理由自然對齊頭像右側 = 不靠寫死的 ml(改頭像/間距也不歪)。 */}
+              <div className="min-w-0 flex-1">
+                <div className="flex items-center gap-3">
+                  <Link
+                    href={`/u/${l.authorCode}`}
+                    className="min-w-0 flex-1 text-bone hover:text-gold text-sm truncate underline-offset-4 hover:underline transition-colors"
+                  >
+                    {l.handle}
+                  </Link>
+                  <span className="shrink-0 font-mono text-gold/75 text-[10px] tracking-[0.15em]">
+                    看好 {sideLabel(l.pick).slice(0, 5)}
+                  </span>
+                  {settled && (
+                    <span
+                      className={`shrink-0 font-mono text-[10px] tracking-[0.2em] tabular ${
+                        correct ? "text-gold" : "text-loss/85"
+                      }`}
+                    >
+                      {correct ? "✓ 中" : "✕ 沒中"}
+                    </span>
+                  )}
+                </div>
+                {/* 賽前鎖死的一句理由(0026 公開)· 報馬仔最撐不住的東西:賽前把話講死、賽後攤開 ·
+                    React 預設跳脫純文字(無 XSS)· 沒寫 → 不顯示(graceful · 多數人不寫也乾淨)。 */}
+                {l.rationale && (
+                  <p className="mt-1 text-mute/90 text-[12px] leading-relaxed">
+                    「{l.rationale}」
+                  </p>
+                )}
+              </div>
             </li>
           );
         })}

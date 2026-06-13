@@ -1,13 +1,16 @@
 // ── ZONE 27 · 誰賽前鎖了這場(per-match segment 資料層)──────────────────────
 // Strava 的真正留存引擎不是全站總榜,是「segment」—— 只跟「跑過同一段路的人」比。
 // 我們的 segment = 「賽前鎖了同一場的人」:這一場有誰賽前押了手、押哪邊,賽後誰押對。
-// 走 0022 get_ladder_entries(公開署名 · 同脈動 / 天梯口徑 · React-cached 同頁共用一次 RPC)·
-// 同一人同場只取最近一筆 · 0 新 migration · 錯 / 空 → []。
+// 走 0022/0026 get_ladder_entries(公開署名 + 賽前鎖死的理由 · 同脈動 / 天梯口徑 · React-cached 同頁共用一次 RPC)·
+// 同一人同場只取最近一筆 · 0026 公開 rationale(未套用前該欄不存在 → 無理由行,graceful)· 錯 / 空 → []。
 //
 // 🔴 紅線:只按「賽後誰押對」排(非 PnL / 人氣 / 粉絲數)· 含輸照掛 · 每格連 /u 公開校準檔。
 // ─────────────────────────────────────────────────────
 
 import { fetchLadderRows } from "@/lib/ladder-rows";
+
+/** 理由顯示硬上限(DB 0024 已 ≤200 · 這裡再砍一刀防爆版 · 純文字由 React 跳脫)。 */
+const RATIONALE_MAX = 200;
 
 export type SegmentLocker = {
   /** 永久碼(公開署名 + 連 /u 校準檔) */
@@ -16,6 +19,8 @@ export type SegmentLocker = {
   handle: string;
   /** 押的邊(棒球 home/away · 足球三向含 draw) */
   pick: "home" | "away" | "draw";
+  /** 賽前鎖死的一句理由(0024 寫 · 0026 公開)· "" = 沒寫 / 0026 未套用 → 不顯示那行(graceful) */
+  rationale: string;
 };
 
 function str(v: unknown): string {
@@ -45,6 +50,9 @@ export async function getMatchSegment(matchId: string): Promise<SegmentLocker[]>
       authorCode: code,
       handle: str(r.handle) || `球迷 #${code}`,
       pick,
+      // 賽前鎖死的一句理由(0026 公開)· 內部換行/連續空白收成單一空白(公開面保持「一句話」·
+      // 防有人用換行洗版)+ 再砍 200 · 沒寫 → ""(segment 不顯示那行)。
+      rationale: str(r.rationale).replace(/\s+/g, " ").trim().slice(0, RATIONALE_MAX),
     });
   }
   return out;
