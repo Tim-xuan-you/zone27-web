@@ -113,8 +113,13 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
   ],
   "/learn": [
     { href: "/lab", kicker: "lab", title: "親手跑一場推演引擎模擬" },
+    { href: "/learn/streaks", kicker: "learn/streaks", title: "為什麼連勝會騙你 · 誠實讀一個機率" },
     { href: "/methodology", kicker: "methodology", title: "完整方法論白皮書 · 進階指標逐一解釋" },
-    { href: "/founders", kicker: "founders", title: "看完了 · 加入 GOLD" },
+  ],
+  "/learn/streaks": [
+    { href: "/calibration", kicker: "calibration", title: "校準怎麼量 · 說的把握 vs 實際中的" },
+    TRACK_RECORD,
+    { href: "/steelman", kicker: "steelman", title: "反對 ZONE 27 最強的 6 個論點" },
   ],
   "/discipline": [
     { href: "/manifesto", kicker: "manifesto", title: "倒置宣言 · 4 個品牌軸線" },
