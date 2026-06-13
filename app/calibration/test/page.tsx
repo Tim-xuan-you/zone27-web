@@ -1,15 +1,23 @@
 import Link from "next/link";
-import type { Metadata } from "next";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import CalibrationGame, { type QuizMatch } from "@/components/CalibrationGame";
 import { getFinalizedMatches } from "@/lib/matches";
+import { createPageMetadata } from "@/lib/page-og";
 
-export const metadata: Metadata = {
-  title: "你有多準?· 校準練習 · ZONE 27",
+// R232:改用 createPageMetadata → 補上 openGraph + twitter summary_large_image,
+// 讓本頁專屬 opengraph-image.tsx(校準鏡子分享卡)被 LINE/FB 抓到大圖預覽。
+// 原本是裸 Metadata(只有 title/description),分享時退回 root 通用卡。
+export const metadata = createPageMetadata({
+  title: "你有多準?· 校準練習",
   description:
     "別人都在告訴你他多準。 ZONE 27 讓你自己試一次:拿幾場已經打完的 CPBL 比賽、藏住比分,你滑出把握、再攤開對照。 你會親手摸到那道「沒人是神、5 成 7 是天花板」的牆。 不是押注、不進戰績,純自我校準練習。",
-};
+  ogTitle: "你以為的把握,真有那麼準?· 換你當引擎",
+  ogDescription:
+    "別人都說自己多準 · 換你自己試一次:藏住比分、滑出把握、攤開對照 · 親手摸到那道「沒人是神 · 5 成 7」的牆 · 不用登入",
+  path: "/calibration/test",
+  type: "website",
+});
 
 export const revalidate = 86400; // 隨賽事結算更新題庫
 
