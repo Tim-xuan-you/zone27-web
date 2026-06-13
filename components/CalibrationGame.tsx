@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { encodeResult } from "@/lib/calibration-result";
 
 // ── ZONE 27 · 校準小遊戲(Solo Calibration Game)─────────────
 // 「缺的靈魂」研究頭號發現:全站揭露護城河已世界級、幾乎做完 —— 缺的不是更多
@@ -510,10 +511,16 @@ function ShareResultButton({ score }: { score: Score }) {
 
   async function onShare() {
     const line = buildShareLine(score);
-    const url =
+    // 分享連結帶上「我的成績」→ 預覽卡 server-render 出個人版(我以為 X% 實際 Y%)·
+    // 銅板局太多算不出成績(encodeResult→null)→ 退回通用 /calibration/test 卡。
+    // 朋友點進去看的是「某人的成績 + 換你測」· 全新一局、不洩題(只帶聚合數字)。
+    const encoded = encodeResult(score.avgConf, score.youHitPct, score.decided);
+    const path = encoded ? `/calibration/result/${encoded}` : "/calibration/test";
+    const origin =
       typeof window !== "undefined"
-        ? `${window.location.origin}/calibration/test`
-        : "https://zone27-web.vercel.app/calibration/test";
+        ? window.location.origin
+        : "https://zone27-web.vercel.app";
+    const url = `${origin}${path}`;
     // 手機原生分享面板優先(LINE / IG / 訊息一鍵)· 桌機沒有 → 退回複製到剪貼簿。
     if (typeof navigator !== "undefined" && typeof navigator.share === "function") {
       try {
