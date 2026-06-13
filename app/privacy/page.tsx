@@ -515,6 +515,12 @@ export default function PrivacyPage() {
             <Code>service_role</Code> 鑰匙不離開 Tim 的本機
           </li>
           <li>
+            ▸ 結算推播(賽果出來提醒你回來對帳)用的是<strong className="text-bone">另一把只能送提醒的窄權限鑰匙</strong> ——
+            它只能讀「誰押了已結算的那幾場」的推播管道、記下已送、清掉失效訂閱,做不了別的事;
+            <Code>service_role</Code> 仍只在 Tim 本機。 推播內容只帶「N 場結算了 · 回來對帳」一句話 +
+            站內連結,<strong className="text-bone">不含 email、隊伍、比分或輸贏</strong>(細節留在登入後的站內收件匣)。
+          </li>
+          <li>
             ▸ RLS lock-down +{" "}
             <Code>SECURITY DEFINER</Code> 函式架構,即使公開{" "}
             <Code>publishable key</Code> 也無法繞過存取邊界

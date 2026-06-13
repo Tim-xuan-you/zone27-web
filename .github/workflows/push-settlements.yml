@@ -1,0 +1,50 @@
+name: Push · Settlement Reminders
+
+# ZONE 27 · 結算推播送出端(web-push)· R233。
+#   CPBL 賽果鏡像(CPBL Engine)成功跑完後 → 撈「押了已結算場、還沒推過」的人 → 推
+#   「你押的 N 場有結果了 · 回來對帳」。 站內收件匣是顯示面;這支只負責主動「送出去」。
+#
+# 🔴 故意跟 CPBL Engine 分開兩支:那支是純官方賽果鏡像(0 secret · 單一職責);這支才握
+#   push 金鑰 + 對外送出副作用。 送出失敗(這支變紅)永不影響賽果鏡像 / 站上結算顯示(鐵律)。
+# 🔴 隱私:不用 service_role(留 Tim 本機)· 用 anon key + PUSH_FUNCTION_SECRET token 走窄
+#   權限函式(migration 0028)。 細節見 scripts/send-push.ts + /privacy。
+# 🔴 graceful:任一金鑰未設(Tim 還沒啟動)→ 腳本 no-op exit 0 · 這個 Action 不會變紅。
+# v1 只 CPBL(唯一有 committed 賽果鏡像的可靠來源)· 未來擴 MLB 再串 mlb-engine。
+
+on:
+  # CPBL 賽果鏡像成功落地後才送(賽果落地 ≤3h 內推 · 不另設 cron 避免跟資料還沒落地賽跑)。
+  workflow_run:
+    workflows: ["CPBL Engine · official results ingest"]
+    types: [completed]
+  # 手動補送(Actions 頁 Run workflow)。
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+concurrency:
+  group: push-settlements
+  cancel-in-progress: false
+
+jobs:
+  send:
+    # 只在 CPBL 鏡像「成功」後送(失敗的鏡像不觸發)· 或手動 dispatch。
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm ci
+      - name: Send settlement push reminders
+        run: npx tsx scripts/send-push.ts
+        env:
+          # 都是 GitHub repo secrets。 SUPABASE_URL / ANON_KEY / VAPID_PUBLIC_KEY / VAPID_SUBJECT
+          # 本來就是公開值(放 secret 只為集中管理);PUSH_FUNCTION_SECRET + VAPID_PRIVATE_KEY 才敏感。
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+          PUSH_FUNCTION_SECRET: ${{ secrets.PUSH_FUNCTION_SECRET }}
+          VAPID_PUBLIC_KEY: ${{ secrets.VAPID_PUBLIC_KEY }}
+          VAPID_PRIVATE_KEY: ${{ secrets.VAPID_PRIVATE_KEY }}
+          VAPID_SUBJECT: ${{ secrets.VAPID_SUBJECT }}
