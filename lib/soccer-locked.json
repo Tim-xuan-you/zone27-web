@@ -341,6 +341,34 @@
       "outcome": null,
       "verdict": null,
       "gradedAt": null
+    },
+    {
+      "matchId": "fd-537363",
+      "competitionCode": "WC",
+      "competitionName": "世界盃",
+      "kickoffISO": "2026-06-15T19:00:00Z",
+      "status": "TIMED",
+      "homeSeed": "Belgium",
+      "awaySeed": "Egypt",
+      "home": "比利時",
+      "away": "埃及",
+      "ratingHome": 1764,
+      "ratingAway": 1666,
+      "homeAdvantage": 0,
+      "xgHome": 1.5205,
+      "xgAway": 1.0795000000000001,
+      "homeWin": 0.46453264211520584,
+      "draw": 0.2758489329904074,
+      "awayWin": 0.25961842489438663,
+      "homeWinPct": 46,
+      "drawPct": 28,
+      "awayWinPct": 26,
+      "enginePick": "home",
+      "lockedAt": "2026-06-13T21:54:09.024Z",
+      "finalScore": null,
+      "outcome": null,
+      "verdict": null,
+      "gradedAt": null
     }
   ]
 }
