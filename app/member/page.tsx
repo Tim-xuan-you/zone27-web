@@ -34,6 +34,7 @@ import { getSoccerEnginePicks } from "@/lib/soccer/locked";
 import { readTier, isPaid, creatorTakePct, tierLabel } from "@/lib/tier";
 import OpenPositionsPanel from "@/components/OpenPositionsPanel";
 import TodayStrip from "@/components/TodayStrip";
+import PushToggle from "@/components/PushToggle";
 import type { OpenPosition } from "@/components/OpenPositionCard";
 import MyCreatorPanel from "@/components/MyCreatorPanel";
 import MyActivityPanel from "@/components/MyActivityPanel";
@@ -374,6 +375,12 @@ export default async function MemberPage() {
             收件匣 →
           </span>
         </Link>
+
+        {/* 結算提醒開關(R233 web-push)· graceful:站方未設 VAPID 金鑰 / 瀏覽器不支援 → 整顆隱藏。
+            放在收件匣下方:賽果結算後主動敲你回來看這個收件匣。 */}
+        <div className="mt-4">
+          <PushToggle />
+        </div>
 
         {/* 戰功卡收藏(soul-roadmap 願景3)· 你押過、賽前鎖死的每一手 → 個人畫廊(含輸照收)。
             接在榮譽牆後:章是榮譽的「總結」· 收藏是一張張可點進收據的「證物」· 沒結算過 → 牆自己空狀態。 */}
