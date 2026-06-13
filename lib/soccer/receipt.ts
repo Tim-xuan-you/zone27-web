@@ -7,16 +7,17 @@
 //   · live     = 已開賽、還沒對帳 · 終場後自動揭曉(引擎不做 live 比分)
 //   · settled  = 已 grade · 命中/落空都釘在這、改不了(原本唯一的狀態)
 //
-// 結果來源(settled):優先用已 grade 的 locked.finalScore(sync · 無 API);沒 grade 但
-//   已開賽就拉 live 賽果窗(getSoccerLedgerResults · Vercel env token)現場算判決 →
-//   世界盃比賽一打完今晚就有 settled 收據,不用等 Action 跑。
+// 結果來源(settled):走 resolveLockedSoccer()(engine-settle · on-read 站上即時對帳)——
+//   跟「脈動 /pulse」「引擎戰績 /track-record」「per-match segment」用的是同一支解析,故
+//   零 drift:同一場比賽,收據顯示 settled 的那一刻,就是脈動顯示 ✓/✕ 的那一刻(不會出現
+//   「脈動說對完帳了、收據還掛『待對帳』」的自打臉)。 已持久化(locked.json 寫回 verdict)→
+//   原樣用;已踢完未持久化 → 用 live 賽果窗即時評(同 grade script 同源)· 缺 token → graceful。
 // 判決一律對「賽前鎖定的那組三向機率」評(守先鎖後結)· 比分走 90 分鐘正規賽(上游已濾延長賽/PK)。
 // 收據只在「有賽前鎖定線」時存在:查無鎖定 → null → 頁面 404(沒鎖過的場沒有收據可曬)。
 // ─────────────────────────────────────────────────────
 
-import { getLockedSoccerById, kickoffTaipei } from "./locked";
-import { getSoccerLedgerResults } from "./football-data";
-import { gradeLockedVerdict } from "./predict-core.mjs";
+import { kickoffTaipei } from "./locked";
+import { resolveLockedSoccer } from "./engine-settle";
 import type { SoccerPick } from "./predictions";
 
 /** 收據階段 · 賽前鎖定中 / 已開賽待對帳 / 已結算。 */
@@ -72,7 +73,8 @@ export async function getSoccerReceipt(
   matchId: string,
 ): Promise<SoccerReceipt | null> {
   if (!matchId.startsWith("fd-")) return null;
-  const locked = getLockedSoccerById().get(matchId);
+  // on-read 解析(同脈動/引擎戰績)· 已踢完未持久化的場會在這裡即時補上 verdict/finalScore/outcome。
+  const locked = (await resolveLockedSoccer()).find((p) => p.matchId === matchId);
   if (!locked) return null;
 
   const favoredLabel =
@@ -126,35 +128,12 @@ export async function getSoccerReceipt(
     };
   }
 
-  // 2. 還沒 grade · 看開賽了沒(時鐘讀在 lib · 收據頁 10 分鐘 ISR · 階段轉換粒度夠用)。
+  // 2. resolveLockedSoccer 已對「已踢完、live 窗有終場」的場即時補了 verdict —— 走到這裡
+  //    還沒 settled 的,只剩兩種:還沒開踢(賽前鎖定中)· 或剛踢完但 live 窗暫時沒回終場
+  //    (真·短暫待對帳 · 通常 0)。 看開賽了沒分流(時鐘讀在 lib · 收據頁 10 分鐘 ISR · 夠用)。
   const ko = Date.parse(locked.kickoffISO ?? "");
   const kickedOff = !Number.isNaN(ko) && Date.now() >= ko;
-
-  if (kickedOff) {
-    // 開賽了 → 拉 live 賽果窗現場算判決(剛踢完但 Action 還沒寫回 JSON 也能即時 settled)。
-    const results = await getSoccerLedgerResults();
-    const r = results.find((x) => x.matchId === matchId);
-    if (r) {
-      const g = gradeLockedVerdict(
-        locked.homeWin,
-        locked.draw,
-        locked.awayWin,
-        r.homeGoals,
-        r.awayGoals,
-      );
-      return {
-        ...common,
-        phase: "settled",
-        finalHome: r.homeGoals,
-        finalAway: r.awayGoals,
-        outcome: r.outcome,
-        verdict: g.verdict,
-      };
-    }
-    // 開賽了、還沒有賽果 → live 待對帳(誠實:不假裝「賽前鎖定中」掛在已開踢的場上)。
-    return { ...common, phase: "live" };
-  }
-
-  // 3. 還沒開踢 → 賽前鎖定中(0 API · 0 secret · 押完當下就能曬的那張)。
-  return { ...common, phase: "locked" };
+  // 開賽了、還沒有賽果 → live 待對帳(誠實:不假裝「賽前鎖定中」掛在已開踢的場上)。
+  // 還沒開踢 → 賽前鎖定中(押完當下就能曬的那張)。
+  return { ...common, phase: kickedOff ? "live" : "locked" };
 }

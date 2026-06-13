@@ -3,6 +3,7 @@ import MobileNavToggle from "@/components/MobileNavToggle";
 import MembershipNavCTA from "@/components/MembershipNavCTA";
 import TierBadge from "@/components/TierBadge";
 import CmdKTrigger from "@/components/CmdKTrigger";
+import SettlementBell from "@/components/SettlementBell";
 import { getTodayMatches } from "@/lib/matches";
 
 type NavKey =
@@ -178,6 +179,9 @@ export default function Nav({ active }: { active?: NavKey }) {
                 public visitor 看不到 noise · per agent locked-preview research
                 Pattern 3。 */}
             <TierBadge />
+            {/* R231 · 結算鈴鐺(client island · R207-safe · 登入且有新結算才顯)· 擺在
+                會員入口左邊 = 像每個 app 的帳號旁通知數 · anon/0 新自動隱藏。 */}
+            <SettlementBell />
             {/* R199 · 單一 auth 鈕(anon「登入」→ /login · 登入後「您的引擎」→ /member)·
                 原本另一顆 NavLoginCTA「登入」已刪(Tim「兩顆同一件事 · 選一個」)。 */}
             <MembershipNavCTA
@@ -191,6 +195,8 @@ export default function Nav({ active }: { active?: NavKey }) {
               anon「登入」→ /login · 登入後「您的引擎」→ /member。 R199 收掉重複的
               NavLoginCTA(Tim「登入 + 會員 兩顆同一件事 · 選一個」)· 仍永遠 visible。 */}
           <div className="sm:hidden flex items-center gap-2 shrink-0">
+            {/* R231 · 結算鈴鐺 mobile(登入且有新結算才顯 · 擺在會員 CTA 左邊)。 */}
+            <SettlementBell />
             <MobileNavToggle active={active} />
           </div>
         </div>

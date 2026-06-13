@@ -169,6 +169,15 @@ export const COMMAND_ITEMS: CommandItem[] = [
     keywords: ["member", "dashboard", "會員頁", "個人", "儀表板", "我的準度", "持倉", "帳本"],
   },
   {
+    label: "結算收件匣 · 你不在時結算了什麼",
+    kicker: "/member/inbox",
+    path: "/member/inbox",
+    group: "工具 · 外部",
+    keywords: [
+      "inbox", "收件匣", "結算", "對帳", "settlement", "回訪", "通知", "新結算", "逐筆",
+    ],
+  },
+  {
     label: "登入 · Email + 密碼 · 免費會員",
     kicker: "/login",
     path: "/login",

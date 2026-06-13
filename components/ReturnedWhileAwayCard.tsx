@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { createSupabaseBrowserClient } from "@/lib/supabase/browser";
+import { markBellSeen } from "@/lib/settlement-bell-cache";
 import type { SettlementDelta } from "@/lib/predictions";
 
 // ── ZONE 27 ·「你不在時結算了 N 場」回訪卡(soul-roadmap R208 #5 · 單人回訪鉤)──────
@@ -24,9 +25,13 @@ export default function ReturnedWhileAwayCard({
   const wrote = useRef(false);
 
   // 掛載時把 last_seen 更新為現在(只寫一次)· 失敗靜默(下次再寫)。
+  // 進 /member = 對帳了(這張卡就是「你不在時結算」的對帳面)→ 同時把 Nav 鈴鐺快取歸零,
+  // 否則 last_seen 前進、server 端 newCount 變 0,但鈴鐺徽章還殘留舊數字 ≤90s · 點進去
+  // 收件匣的「新結算」卻是空的 = 自打臉(R231 稽核 must-fix · 對帳的兩個面都要清鈴鐺)。
   useEffect(() => {
     if (wrote.current) return;
     wrote.current = true;
+    markBellSeen();
     (async () => {
       try {
         const supabase = createSupabaseBrowserClient();

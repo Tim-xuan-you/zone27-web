@@ -360,6 +360,21 @@ export default async function MemberPage() {
             收乾淨 · 單一動作面);榮譽牆只留里程碑徽章(7/30/100 日)· streak 物件仍傳給它算章。 */}
         <HonorWall identity={identity} streak={streak} />
 
+        {/* 結算收件匣(R231 · #1 回訪迴路的不卡網域那半)· 「你不在時結算了什麼」的逐筆對帳隊列 ·
+            Nav 鈴鐺點進來的家 · 跟收藏(全部畫廊)分工:這是時間序、標出新結算的隊列。
+            同列樣式(不新增大卡 · 守會員頁極簡)· 接在收藏之前(對帳 → 收藏 的動線)。 */}
+        <Link
+          href="/member/inbox"
+          className="mt-6 flex items-baseline justify-between gap-3 border-b border-line/40 pb-3 hover:border-gold/40 transition-colors group"
+        >
+          <span className="text-mute text-sm leading-snug">
+            你不在時<span className="text-bone">結算了什麼</span> · 命中落空逐筆對帳(連得到單場收據)
+          </span>
+          <span className="shrink-0 font-mono text-gold/70 group-hover:text-gold text-[10px] tracking-[0.3em] transition-colors">
+            收件匣 →
+          </span>
+        </Link>
+
         {/* 戰功卡收藏(soul-roadmap 願景3)· 你押過、賽前鎖死的每一手 → 個人畫廊(含輸照收)。
             接在榮譽牆後:章是榮譽的「總結」· 收藏是一張張可點進收據的「證物」· 沒結算過 → 牆自己空狀態。 */}
         <Link
