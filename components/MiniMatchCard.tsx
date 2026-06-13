@@ -241,7 +241,7 @@ export default function MiniMatchCard({
 
         {/* soul R209 · 主因縮影:給數字一個「為什麼」(不喊去押 · 只解釋機率)*/}
         {topFactor && conviction.tier !== "tossup" && (
-          <p className="mt-1 text-center font-mono text-mute/45 text-[9px] tracking-[0.08em] leading-snug">
+          <p className="mt-1 text-center font-mono text-mute text-[9px] tracking-[0.08em] leading-snug">
             主因 · {topFactor.label}
           </p>
         )}

@@ -76,7 +76,7 @@ export default function ReturnedWhileAwayCard({
           </span>
         </p>
       )}
-      <p className="mt-2.5 font-mono text-mute/45 text-[9px] tracking-[0.12em] leading-snug">
+      <p className="mt-2.5 font-mono text-mute text-[9px] tracking-[0.12em] leading-snug">
         賽前鎖死、賽後自動對帳 · 贏的輸的都留著、改不了。
       </p>
     </section>

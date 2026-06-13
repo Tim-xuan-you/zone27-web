@@ -454,7 +454,7 @@ export default function MatchSimulator({ match }: Props) {
                   </li>
                 ))}
               </ul>
-              <p className="font-mono text-mute/50 text-[9px] tracking-[0.2em] leading-relaxed mt-4 pt-3 border-t border-line/40">
+              <p className="font-mono text-mute text-[9px] tracking-[0.2em] leading-relaxed mt-4 pt-3 border-t border-line/40">
                 ▸ 主 = 主隊贏「超過這個分數」的機率 · 客 = 客隊受讓守住的機率
               </p>
             </div>
@@ -480,7 +480,7 @@ export default function MatchSimulator({ match }: Props) {
                   </li>
                 ))}
               </ul>
-              <p className="font-mono text-mute/50 text-[9px] tracking-[0.2em] leading-relaxed mt-4 pt-3 border-t border-line/40">
+              <p className="font-mono text-mute text-[9px] tracking-[0.2em] leading-relaxed mt-4 pt-3 border-t border-line/40">
                 ▸ 大 = 雙方總得分「超過這個數」的機率 · 小 = 不到的機率
               </p>
             </div>

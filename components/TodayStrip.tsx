@@ -89,7 +89,7 @@ export default function TodayStrip({
           <span className="text-mute/65"> · {d.soft}</span>
         </p>
       </div>
-      <p className="mt-2 text-mute/45 text-[11px] leading-relaxed">
+      <p className="mt-2 text-mute text-[11px] leading-relaxed">
         面對自己的帳本,不是追連勝。
         {lapsed && " 斷了也不羞辱你 —— 接上今天就好。"}
       </p>

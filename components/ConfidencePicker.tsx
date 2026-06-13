@@ -76,7 +76,7 @@ export default function ConfidencePicker({
         ))}
       </div>
       {/* 把握尺的兩端講白話(新手不知道為何從 5 成起跳)= 信心識讀 · 賽後一場場誠實對帳。 */}
-      <p className="mt-1.5 font-mono text-mute/45 text-[9px] tracking-[0.12em] leading-relaxed">
+      <p className="mt-1.5 font-mono text-mute text-[9px] tracking-[0.12em] leading-relaxed">
         5 成 = 跟丟銅板一樣沒把握 · 9 成 = 幾乎篤定。
       </p>
       {err && (

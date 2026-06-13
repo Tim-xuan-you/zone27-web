@@ -157,7 +157,7 @@ export default async function Home() {
               </span>
               <span className="text-gold text-sm">✓{tr.proved}</span>
               <span className="text-loss/85 text-sm">✕{tr.diverged}</span>
-              <span className="text-mute/60 text-[9px] tracking-[0.2em]">連輸的也掛 →</span>
+              <span className="text-mute text-[9px] tracking-[0.2em]">連輸的也掛 →</span>
             </Link>
           )}
 

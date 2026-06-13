@@ -455,7 +455,7 @@ export default async function MatchDetailPage({
           </div>
           {/* MLB 誠實揭露:這張比分表怎麼來的(不偷偷另開一個盤 · 跟上方鎖定勝率同源)。 */}
           {m.league === "MLB" && (
-            <p className="mt-4 font-mono text-mute/45 text-[9px] tracking-[0.12em] leading-relaxed">
+            <p className="mt-4 font-mono text-mute text-[9px] tracking-[0.12em] leading-relaxed">
               由上方賽前鎖定的勝率 + 兩隊先發 ERA 推導的 9 局比分投影(卜瓦松)· 跟 CPBL 的逐打席
               10K 模擬是不同算法 · 一樣賽前鎖死、賽後對帳 · 延長賽分勝負故不列平手。
             </p>

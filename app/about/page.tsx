@@ -181,7 +181,7 @@ export default function AboutPage() {
             </Link>
           </div>
           {/* 深度一鍵到得了 · 給少數想挖的人(不在主動線轟炸)*/}
-          <p className="mt-9 font-mono text-mute/55 text-[10px] tracking-[0.2em] leading-relaxed">
+          <p className="mt-9 font-mono text-mute text-[10px] tracking-[0.2em] leading-relaxed">
             想挖更深?{" "}
             <Link href="/methodology" className="text-mute hover:text-gold underline-offset-4 hover:underline">引擎方法</Link>
             {" · "}

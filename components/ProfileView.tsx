@@ -455,7 +455,7 @@ function SoccerSection({ r }: { r: SoccerRecord }) {
         </p>
       )}
 
-      <p className="mt-2 font-mono text-mute/45 text-[9px] tracking-[0.12em] leading-snug">
+      <p className="mt-2 font-mono text-mute text-[9px] tracking-[0.12em] leading-snug">
         三向對帳(主勝 / 和 / 客勝)· 賽前鎖死、賽後自動結算 · 跟棒球準度分開算。
       </p>
     </section>

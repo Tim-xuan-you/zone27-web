@@ -69,8 +69,8 @@ export default function SoccerMarketLines({
         />
       </ul>
 
-      <p className="font-mono text-mute/45 text-[8px] tracking-[0.2em] leading-relaxed mt-1.5">
-        ▸ 我們引擎算的機率 · <span className="text-mute/65">不是賠率</span>
+      <p className="font-mono text-mute text-[10px] tracking-[0.2em] leading-relaxed mt-1.5">
+        ▸ 我們引擎算的機率 · <span className="text-mute">不是賠率</span>
       </p>
     </div>
   );
