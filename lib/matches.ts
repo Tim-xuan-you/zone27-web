@@ -141,6 +141,55 @@ const rawMatches: Match[] = [
     ],
     aiConfidence: 55,
   },
+  //   #164 新莊 · 台鋼(艾速特 away)vs 富邦(李東洛 home)· W-L 台鋼 27-22-1(.551)/ 富邦 26-22-0(.542)
+  //     兩隊近五五波 · 富邦主場(~+3-4%)· 但台鋼先發艾速特 2026 ERA 1.53 / K9 8.8 / 被打擊率 .181 / WHIP 0.94
+  //     是壓制級;富邦李東洛 1.79 ERA 不差,但 WHIP 1.27 / K9 5.4 → ERA 略優於內容(回歸風險)。 低分膠著局
+  //     裡較壓制的先發吃重 → 客隊台鋼的先發優勢略蓋過富邦主場 → 台鋼 52 / 富邦 48 · conf 51(誠實接近銅板)。
+  //     ⚠️ 艾速特/李東洛 未進自動 leaderboard(cpbl-pitchers.ts)→ 投手值標 // estimate(官網累計成績表手抄)。
+  {
+    id: "cpbl-260614-02",
+    league: "CPBL",
+    date: "2026 · 06 · 14  ·  星期日",
+    startTime: "17:05",
+    venue: "新莊棒球場",
+    home: {
+      name: "富邦悍將",
+      en: "GUARDIANS",
+      pitcher: {
+        name: "李東洛",
+        era: "1.79", // estimate · 2026 官網累計成績表(手抄)· 50.1 IP(9 先發)
+        k9: "5.4", // estimate · 30 K / 50.1 IP × 9 · 低三振
+        whip: "1.27", // estimate · 官網每局被上壘率 1.271(47 H + 17 BB / 50.1 IP)· 上壘偏多
+        bb9: "3.0", // estimate · 17 BB / 50.1 IP × 9
+        hr9: "0.18", // estimate · 1 HR / 50.1 IP × 9 · 極少被轟
+      },
+      recent: ["W", "L", "W", "W", "L"], // placeholder · 富邦 26-22-0(.542)
+      winRate: 48,
+    },
+    away: {
+      name: "台鋼雄鷹",
+      en: "HAWKS",
+      pitcher: {
+        name: "艾速特",
+        era: "1.53", // estimate · 2026 官網累計成績表(手抄)· 53 IP(9 先發)· 壓制級
+        k9: "8.8", // estimate · 52 K / 53 IP × 9 · 會吊人
+        whip: "0.94", // estimate · 官網每局被上壘率 0.943(34 H + 16 BB / 53 IP)· 頂級
+        bb9: "2.7", // estimate · 16 BB / 53 IP × 9
+        hr9: "0.17", // estimate · 1 HR / 53 IP × 9
+      },
+      recent: ["W", "W", "L", "W", "W"], // placeholder · 台鋼 27-22-1(.551)
+      winRate: 52,
+    },
+    topScores: [
+      // 兩位低 ERA 先發 → 低分膠著;台鋼先發艾速特更壓制(K9 8.8 / 被打擊率 .181)略蓋富邦主場 → 台鋼微 lean(格式 home : away = 富邦 : 台鋼)
+      { score: "1 : 2", probability: 9.5 },
+      { score: "2 : 1", probability: 9.0 },
+      { score: "2 : 3", probability: 8.5 },
+      { score: "3 : 2", probability: 8.0 },
+      { score: "0 : 1", probability: 7.5 },
+    ],
+    aiConfidence: 51,
+  },
   // ── 2026-06-12 · 一軍 3 場 ingest · Tim 截圖 cpbl.com.tw 賽程 + 先發投手成績表 ──
   //   投手值由官網累計成績表(IP/K/BB/HR)換算 · 標 real(本季官網成績表直接抓)· winRate 手 curate
   //   整數(ERA + 控球 + 主場 + 隊伍 W-L · 接近五五波就誠實低 conviction · 不裝把握)· 天氣不建模(/audit S02)。
