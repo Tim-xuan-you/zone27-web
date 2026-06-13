@@ -38,12 +38,33 @@ export async function generateMetadata({
   const favLine = p
     ? `引擎自己算的勝 / 平 / 負(${m.competitionName})`
     : `引擎覆蓋建置中`;
+  // 分享卡描述帶上引擎那條線(有覆蓋才帶數字)= Polymarket「分享市場本身」。
+  let ogDescription: string;
+  if (p) {
+    const d = toDisplayPercents(p);
+    const pick = enginePickOf(p);
+    const fav = pick === "home" ? m.home : pick === "away" ? m.away : "和局";
+    ogDescription = `引擎賽前鎖定:${m.home} ${d.homeWin}% · 和 ${d.draw}% · ${m.away} ${d.awayWin}% · 看好 ${fav} · 不是盤口、賽後對帳。`;
+  } else {
+    ogDescription = "引擎覆蓋建置中 · 算得出才開盤 · 不是盤口、賽後對帳。";
+  }
+  const ogTitle = `${m.home} vs ${m.away} · 足球引擎開盤`;
   return {
-    title: `${m.home} vs ${m.away} · 足球引擎開盤 · ZONE 27`,
+    // 標題不含「· ZONE 27」· root layout template(%s · ZONE 27)會補一次(原本手寫會疊兩次)。
+    title: ogTitle,
     description: `${m.home} vs ${m.away} · ${favLine} · 不是盤口 · 賽前鎖死、賽後逐場對帳 · 含贏含輸、改不了。`,
     openGraph: {
-      title: `${m.home} vs ${m.away} · 足球引擎開盤`,
-      description: `引擎自己算的勝 / 平 / 負 · 不是盤口 · 賽後對帳。`,
+      title: ogTitle,
+      description: ogDescription,
+      type: "article",
+      // R159 教訓:page 自宣告 openGraph → Next shallow merge 會丟掉 root 的 locale/siteName · 明寫補回。
+      locale: "zh_TW",
+      siteName: "ZONE 27",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: ogTitle,
+      description: ogDescription,
     },
   };
 }
