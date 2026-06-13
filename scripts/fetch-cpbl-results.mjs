@@ -46,7 +46,11 @@ const BASE = "https://www.cpbl.com.tw";
 const UA =
   "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36";
 
-// ── 1. 拿 CSRF 雙 token(cookie + DOM token + header token,DOM/header 兩個不同但成對) ──
+// ── 1. 拿 CSRF token(DOM token + header token 成對 · cookie 選配) ──
+// ⚠️ 2026-06-13 修:cpbl.com.tw 改成「cookieless」防偽 —— GET /schedule 不再回 set-cookie
+//    (實測 set-cookie = null)。 POST 只認 DOM + header 兩個 token,不帶 cookie 也 Success:true
+//    (實測 148 場已打完、最新到當日)。 故 cookie 不再是必要條件:原本 `!cookie` 把整支卡死
+//    = 賽果鏡像從 6/08 起凍結 5 天的真因。 cookie 仍保留(萬一未來又設,順手帶上),但不強制。
 async function getTokens() {
   const res = await fetch(`${BASE}/schedule`, { headers: { "User-Agent": UA } });
   if (!res.ok) throw new Error(`GET /schedule → HTTP ${res.status}`);
@@ -56,7 +60,7 @@ async function getTokens() {
   const html = await res.text();
   const dom = html.match(/__RequestVerificationToken"[^>]*value="([^"]+)"/)?.[1];
   const hdr = html.match(/RequestVerificationToken:\s*'([^']+)'/)?.[1];
-  if (!cookie || !dom || !hdr) throw new Error("CSRF token scrape failed");
+  if (!dom || !hdr) throw new Error("CSRF token scrape failed");
   return { cookie, dom, hdr };
 }
 
@@ -68,17 +72,19 @@ async function getSeason(t) {
     kindCode: KIND,
     __RequestVerificationToken: t.dom,
   });
+  const headers = {
+    "User-Agent": UA,
+    "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+    "X-Requested-With": "XMLHttpRequest",
+    Origin: BASE,
+    Referer: `${BASE}/schedule`,
+    RequestVerificationToken: t.hdr,
+  };
+  // cookieless 防偽下 t.cookie = ""(別送空 Cookie 標頭)· 未來若又設 cookie 再帶上。
+  if (t.cookie) headers.Cookie = t.cookie;
   const res = await fetch(`${BASE}/schedule/getgamedatas`, {
     method: "POST",
-    headers: {
-      "User-Agent": UA,
-      "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
-      "X-Requested-With": "XMLHttpRequest",
-      Origin: BASE,
-      Referer: `${BASE}/schedule`,
-      Cookie: t.cookie,
-      RequestVerificationToken: t.hdr,
-    },
+    headers,
     body: body.toString(),
   });
   if (!res.ok) throw new Error(`POST getgamedatas → HTTP ${res.status}`);
