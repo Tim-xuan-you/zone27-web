@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import RelatedReading from "@/components/RelatedReading";
+import CopyLinkButton from "@/components/CopyLinkButton";
 import {
   matches,
   getFinalizedMatches,
@@ -287,6 +288,23 @@ export default function TrackRecordPage() {
           <p className="mt-6 font-mono text-mute/60 text-[10px] tracking-[0.3em]">
             — TIM · FOUNDER
           </p>
+        </section>
+
+        {/* 把這份含輸帳本傳出去 · 病毒迴路:最強的證據就是「連輸的都掛」這頁本身 ·
+            真人朋友要說服還在信明牌的人,丟這頁最有力(分享卡已自帶 PROVED vs DIVERGED)。 */}
+        <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-16 text-center">
+          <p className="text-mute text-sm leading-relaxed mb-4 max-w-md mx-auto">
+            認識還在追明牌、被「贏了曬、輸了刪」唬住的人?
+            把這份<span className="text-bone">連輸的都掛、賽前鎖死、刪不掉</span>的帳本丟給他 —— 讓數字自己說。
+          </p>
+          <div className="flex justify-center">
+            <CopyLinkButton
+              label="把這份含輸帳本傳出去"
+              doneLabel="已複製 · 貼給他"
+              shareText="ZONE 27 引擎公開戰績:賽前鎖定的每一場預測 vs 賽後實際,命中、落空都等大掛著、刪不掉 —— 連輸的都認。 自己驗:"
+              refTag="track-record-share"
+            />
+          </div>
         </section>
 
         <RelatedReading currentPath="/track-record" />

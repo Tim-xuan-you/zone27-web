@@ -4,6 +4,7 @@ import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import RelatedReading from "@/components/RelatedReading";
 import FounderSignOff from "@/components/FounderSignOff";
+import CopyLinkButton from "@/components/CopyLinkButton";
 import ArticleMeta from "@/components/ArticleMeta";
 import SportToggle from "@/components/SportToggle";
 import { getFinalizedMatches, type Match } from "@/lib/matches";
@@ -343,6 +344,22 @@ export default function CalibrationPublicPage() {
             這頁的計算方式要改,得先在更新紀錄公告 30 天才動 · 不偷改。
           </p>
         </FounderSignOff>
+
+        {/* 把這張「自評準度」傳出去 · 明牌站不敢公開的那張圖本身就是最強證據(分享卡已自帶命題)。 */}
+        <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-16 text-center">
+          <p className="text-mute text-sm leading-relaxed mb-4 max-w-md mx-auto">
+            這張「我們說幾成、實際中幾成」的圖,<span className="text-bone">明牌站不敢公開</span>。
+            把它丟給還在信「神準」的人 —— 讓他自己看一個敢攤開準度的長怎樣。
+          </p>
+          <div className="flex justify-center">
+            <CopyLinkButton
+              label="把這張自評準度傳出去"
+              doneLabel="已複製 · 貼給他"
+              shareText="ZONE 27 把自己引擎準不準一張圖攤開:說幾成把握、實際中幾成,命中落空都算、刪不掉。 明牌站不敢公開這個。 自己看:"
+              refTag="calibration-share"
+            />
+          </div>
+        </section>
 
         <RelatedReading currentPath="/calibration" />
 
