@@ -3,6 +3,8 @@ import Avatar from "@/components/Avatar";
 import HonorWall from "@/components/HonorWall";
 import AccuracySparkline from "@/components/AccuracySparkline";
 import TrophyGrid from "@/components/TrophyGrid";
+import CalibrationMasterView from "@/components/CalibrationMasterView";
+import type { CalibrationReport } from "@/lib/calibration-master";
 import FollowLedgerButton from "@/components/FollowLedgerButton";
 import { creatorIdentity } from "@/lib/identity";
 import { isPaid, tierLabel } from "@/lib/tier";
@@ -43,6 +45,8 @@ type Props = {
   series?: AccuracyPoint[];
   /** 戰功卡(已結算的每一手 · 連單場收據)· 把數字背後的「實物證物」攤給懷疑者看 */
   trophies?: Trophy[];
+  /** 公開校準曲線(0027 · 信心桶 vs 實際命中)· 沒宣告過把握 / 未套 0027 → null → 不顯示 */
+  calibration?: CalibrationReport | null;
   /** 本月賽季回顧入口(R218 · 有本月押注才連 · 避免連到空回顧)· "2026-06" */
   seasonPeriod?: string;
   /** 本月顯示標「2026 年 6 月」· 配 seasonPeriod */
@@ -64,7 +68,7 @@ function standingVerdict(id: CalibrationIdentity): string {
   return `${coin},但還沒贏過引擎。`;
 }
 
-export default function ProfileView({ profile, identity: id, streak, soccer, series, trophies, seasonPeriod, seasonLabel, hasSeasonActivity }: Props) {
+export default function ProfileView({ profile, identity: id, streak, soccer, series, trophies, calibration, seasonPeriod, seasonLabel, hasSeasonActivity }: Props) {
   // 身分解析(同創作者署名 · 顯示名 or 球迷#碼 + 永久碼 chip + 頭像 seed/glyph)。
   const who = creatorIdentity({
     handle: profile.handle,
@@ -266,6 +270,12 @@ export default function ProfileView({ profile, identity: id, streak, soccer, ser
 
       {/* ── 足球戰績(含輸 · 三向 · 跟棒球分開算)· 沒押足球自動隱藏 ──────── */}
       {hasSoccer && <SoccerSection r={soccer} />}
+
+      {/* ── 公開校準曲線(0027 · Metaculus「Checking Our Work」個人公開版)· 報馬仔最不敢攤的 ──
+          「TA 說 8 成把握的場、真的中 8 成嗎」逐桶公開含輸 · 沒宣告過把握 / 未套 0027 → view 自回 null。
+          同 /member 校準大師卡共用呈現層(CalibrationMasterView)· 口徑零漂移 · subject 換成「TA」。 */}
+      <CalibrationMasterView report={calibration} subject="TA" wrapperClass="mt-9" />
+
 
       {/* ── costly-signal 框 · 整頁的論點 · 只說一次 ──────────────────── */}
       <section className="mt-8 border-l-2 border-gold/50 pl-4 py-1">

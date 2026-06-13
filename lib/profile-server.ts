@@ -2,6 +2,7 @@ import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 import type { UserPredictionsMap } from "@/lib/predictions";
 import type { SoccerPickRow } from "@/lib/soccer/predictions";
 import type { MemberTier } from "@/lib/tier";
+import type { CalibrationPick } from "@/lib/calibration-master";
 
 // ── ZONE 27 · 公開 Profile 讀取(server · 無 cookie · 用永久碼)──────────
 // soul-roadmap P0:/u/[code] 公開含輸戰績頁的資料源。 用 stateless anon client 打
@@ -88,6 +89,9 @@ export type CodePredictions = {
   baseball: UserPredictionsMap;
   /** 足球(fd-*)· 三向 home/draw/away · 給 gradeSoccerPicks */
   soccer: SoccerPickRow[];
+  /** 賽前宣告把握的押注(跨運動 · 含 confidence)· 給公開校準曲線(0027 才有值)·
+   *  0027 未套用 → RPC 不回 confidence → 此陣列空 → 公開檔不顯示曲線(graceful build-ahead)。 */
+  calibrationPicks: CalibrationPick[];
 };
 
 /**
@@ -100,7 +104,7 @@ export type CodePredictions = {
 export async function getPredictionsByCode(
   code: string,
 ): Promise<CodePredictions> {
-  const empty: CodePredictions = { baseball: {}, soccer: [] };
+  const empty: CodePredictions = { baseball: {}, soccer: [], calibrationPicks: [] };
   try {
     const supabase = anonClient();
     if (!supabase) return empty;
@@ -110,14 +114,32 @@ export async function getPredictionsByCode(
     if (error || !Array.isArray(data)) return empty;
     const baseball: UserPredictionsMap = {};
     const soccer: SoccerPickRow[] = [];
+    const calibrationPicks: CalibrationPick[] = [];
+    const seenConf = new Set<string>(); // 校準同場只取最近一筆(已 desc → first-seen 最新)
     for (const row of data as {
       match_id?: unknown;
       pick?: unknown;
+      confidence?: unknown;
       created_at?: unknown;
     }[]) {
       const matchId = typeof row.match_id === "string" ? row.match_id : "";
       const ts = typeof row.created_at === "string" ? row.created_at : "";
       if (!matchId || !ts) continue;
+      // 賽前宣告的把握(0027 才回 · 1-99 整數)→ 跨運動收進校準曲線(沒值/未套 0027 → 跳過)。
+      const conf = row.confidence;
+      const validPick =
+        row.pick === "home" || row.pick === "draw" || row.pick === "away";
+      if (
+        validPick &&
+        typeof conf === "number" &&
+        Number.isFinite(conf) &&
+        conf >= 1 &&
+        conf <= 99 &&
+        !seenConf.has(matchId)
+      ) {
+        seenConf.add(matchId);
+        calibrationPicks.push({ matchId, pick: row.pick as string, confidence: conf, ts });
+      }
       if (matchId.startsWith("fd-")) {
         // 足球三向(含 draw)
         if (row.pick === "home" || row.pick === "draw" || row.pick === "away") {
@@ -130,7 +152,7 @@ export async function getPredictionsByCode(
         if (pick && !(matchId in baseball)) baseball[matchId] = { pick, ts };
       }
     }
-    return { baseball, soccer };
+    return { baseball, soccer, calibrationPicks };
   } catch {
     return empty;
   }

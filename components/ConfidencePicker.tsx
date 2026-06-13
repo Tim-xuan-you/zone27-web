@@ -51,6 +51,7 @@ export default function ConfidencePicker({
         </p>
         <p className="mt-1 font-mono text-mute/55 text-[9px] tracking-[0.1em] leading-relaxed">
           賽後跟你其他「{conf / 10} 成」的場一起對 —— 看你是真的 {conf / 10} 成、還是高估了。
+          這條校準曲線公開掛在你的戰績檔。
         </p>
       </div>
     );
@@ -59,7 +60,7 @@ export default function ConfidencePicker({
   return (
     <div className="mt-2.5">
       <p className="font-mono text-mute/70 text-[9px] tracking-[0.18em] mb-1.5">
-        你幾成把握?(選填 · 賽後算「你說的 vs 實際中的」)
+        你幾成把握?(選填 · 公開 · 賽後算「你說的 vs 實際中的」)
       </p>
       <div className="flex items-stretch gap-1">
         {LEVELS.map((v) => (

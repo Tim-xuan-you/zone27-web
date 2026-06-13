@@ -11,6 +11,10 @@ import {
 } from "@/lib/predictions";
 import { gradeSoccerPicks, type SoccerPick } from "@/lib/soccer/predictions";
 import {
+  computeConfidenceCalibration,
+  type CalibrationResult,
+} from "@/lib/calibration-master";
+import {
   getEngineFavorite,
   getMatchStartIso,
   getCurrentTaipeiMonthKey,
@@ -68,7 +72,7 @@ export default async function PublicProfilePage({
   const profile = await getProfileByCode(code);
   if (!profile) notFound();
 
-  const { baseball, soccer } = await getPredictionsByCode(code);
+  const { baseball, soccer, calibrationPicks } = await getPredictionsByCode(code);
 
   // 棒球校準身分(CPBL + MLB · fd-* 已在 server 分流排除)。
   // ⚠️ MLB 結果用永久鎖定源(getMlbLockedMatches 放最後 → 下游 new Map 同 key『後者勝出』·
@@ -100,6 +104,24 @@ export default async function PublicProfilePage({
   }
   const soccerRecord = gradeSoccerPicks(soccer, resultsMap, soccerEnginePicks);
 
+  // 公開校準曲線(0027 · Metaculus「Checking Our Work」個人公開版):這份帳本「賽前宣告過把握」
+  // 的場 × 賽果 → 信心桶 vs 實際命中率。 跨運動同一份賽果(棒球 finalWinner + 足球 outcome)·
+  // 同 /member CalibrationMasterCard 口徑。 0027 未套用 → calibrationPicks 空 → report 空 → 不顯示。
+  const calibrationResults: Record<string, CalibrationResult> = {};
+  for (const m of idMatches) {
+    calibrationResults[m.id] = {
+      result: m.finalWinner,
+      startISO: m.startISO ?? "",
+    };
+  }
+  for (const [matchId, r] of Object.entries(resultsMap)) {
+    calibrationResults[matchId] = { result: r.outcome, startISO: r.kickoffISO };
+  }
+  const calibrationReport = computeConfidenceCalibration(
+    calibrationPicks,
+    calibrationResults,
+  );
+
   // 戰功卡:這份帳本所有已結算的 call(含輸 · 連單場收據)· server 端配對(picks 來自 0019 RPC)。
   const trophies = computeTrophies(baseball, soccer, buildSettledCards());
 
@@ -114,6 +136,7 @@ export default async function PublicProfilePage({
           soccer={soccerRecord}
           series={accuracySeries}
           trophies={trophies}
+          calibration={calibrationReport}
           seasonPeriod={currentMonth}
           seasonLabel={monthLabel(currentMonth)}
           hasSeasonActivity={hasSeasonActivity}
