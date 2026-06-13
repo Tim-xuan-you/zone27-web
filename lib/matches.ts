@@ -89,6 +89,58 @@ function mergePitcherStats(p: PitcherStats): PitcherStats {
 }
 
 const rawMatches: Match[] = [
+  // ── 2026-06-14 · 一軍 ingest(週日)· Tim 截圖 cpbl.com.tw 賽程 + 先發投手成績表 ──
+  //   投手值由官網累計成績表(IP/K/BB/HR)換算 · 標 real · winRate 手 curate(ERA+控球+主場+隊伍 W-L ·
+  //   接近五五波就誠實低 conviction · 不裝把握)· 天氣不建模(/audit S02 · 6/14 降雨 80% 但不進模型)。
+  //   #163 天母 · 統一(布雷克 away)vs 味全(鋼龍 home)· W-L 統一 25-25-1(.500)/ 味全 33-17-0(.660 最強)
+  //     味全全聯盟最強+主場+鋼龍 2026 ERA 1.92 / K9 9.0 / 被打擊率 .203(會吊人、最壓制)。
+  //     統一 .500 中庸 · 但先發布雷克 2026 ERA 1.98 / WHIP 0.94 / BB9 0.8(頂級控球 pitch-to-contact)
+  //     → 兩位好投手低分局 · 味全隊強+主場+鋼龍更會吊人 → 味全 lean;但統一 .500+1.98 ERA 不會被血洗、
+  //     低分局單場變異大 → 味全 58 / 統一 42 · conf 55(明顯偏味全但不裝神準 · 比 #157 對墊底中信的 60 低)。
+  {
+    id: "cpbl-260614-01",
+    league: "CPBL",
+    date: "2026 · 06 · 14  ·  星期日",
+    startTime: "16:05",
+    venue: "天母棒球場",
+    home: {
+      name: "味全龍",
+      en: "DRAGONS",
+      pitcher: {
+        name: "鋼龍",
+        era: "1.92", // real · 2026 官網累計成績表 · 61 IP(10 先發)
+        k9: "9.0", // real · 61 K / 61 IP × 9 · 會吊人(最壓制)
+        whip: "0.93", // real · (45 H + 12 BB) / 61 IP · 頂級
+        bb9: "1.8", // real · 12 BB / 61 IP × 9
+        hr9: "0.59", // real · 4 HR / 61 IP × 9
+      },
+      recent: ["W", "W", "L", "W", "W"], // placeholder · 味全 33-17-0(全聯盟最強 .660)
+      winRate: 58,
+    },
+    away: {
+      name: "統一獅",
+      en: "LIONS",
+      pitcher: {
+        name: "布雷克",
+        era: "1.98", // real · 2026 官網累計成績表 · 63.2 IP(9 先發)
+        k9: "5.3", // real · 37 K / 63.2 IP × 9 · 低三振 pitch-to-contact
+        whip: "0.94", // real · (54 H + 6 BB) / 63.2 IP · 頂級
+        bb9: "0.8", // real · 6 BB / 63.2 IP × 9 · 頂級控球(極少保送)
+        hr9: "0.57", // real · 4 HR / 63.2 IP × 9
+      },
+      recent: ["W", "L", "W", "L", "W"], // placeholder · 統一 25-25-1(.500)
+      winRate: 42,
+    },
+    topScores: [
+      // 兩位好投手(鋼龍 1.92 / 布雷克 1.98 頂控)→ 低分;味全最強+主場+鋼龍更會吊人 → 味全 lean(格式 home : away = 味全 : 統一)
+      { score: "2 : 1", probability: 10.0 },
+      { score: "3 : 1", probability: 9.0 },
+      { score: "2 : 0", probability: 8.5 },
+      { score: "3 : 2", probability: 8.0 },
+      { score: "1 : 0", probability: 7.5 },
+    ],
+    aiConfidence: 55,
+  },
   // ── 2026-06-12 · 一軍 3 場 ingest · Tim 截圖 cpbl.com.tw 賽程 + 先發投手成績表 ──
   //   投手值由官網累計成績表(IP/K/BB/HR)換算 · 標 real(本季官網成績表直接抓)· winRate 手 curate
   //   整數(ERA + 控球 + 主場 + 隊伍 W-L · 接近五五波就誠實低 conviction · 不裝把握)· 天氣不建模(/audit S02)。
@@ -106,6 +158,9 @@ const rawMatches: Match[] = [
   {
     id: "cpbl-260612-01",
     league: "CPBL",
+    // 6/12 延賽(雨 · 攝氏 25-26 / 降雨 50%)· 賽前鎖定線保留(擇期重賽 Tim 再處理)·
+    // postponed = getMatchPhase 視同已歸檔 → 不顯示為「待結算」也不毒害帳本(同 6/9 延賽處理)。
+    postponed: true,
     date: "2026 · 06 · 12  ·  星期五",
     startTime: "18:35",
     venue: "天母棒球場",
@@ -150,6 +205,8 @@ const rawMatches: Match[] = [
   {
     id: "cpbl-260612-02",
     league: "CPBL",
+    // 6/12 延賽(雨 · 攝氏 25 / 降雨 50%)· 賽前鎖定線保留 · 同上不顯示為待結算。
+    postponed: true,
     date: "2026 · 06 · 12  ·  星期五",
     startTime: "18:35",
     venue: "新莊棒球場",
@@ -234,6 +291,17 @@ const rawMatches: Match[] = [
       { score: "4 : 5", probability: 7.0 },
     ],
     aiConfidence: 50,
+    // 6/12 賽果(Tim 截圖 cpbl.com.tw · 認隊靠場館+勝敗投不靠 logo):澄清湖=台鋼主場 ·
+    // 敗投 林詩翔(台鋼)· 勝投 陳冠宇(樂天)· 比分 客:主 = 樂天 1 : 台鋼 0 → 台鋼(主)0 / 樂天(客)1。
+    // 🔴 引擎賽前看好台鋼 53%(主場+隊強)· 結果樂天 1-0 完封 → DIVERGED · 誠實記引擎失手(帳本改不了)。
+    finalResult: {
+      homeScore: 0, // 台鋼(主)
+      awayScore: 1, // 樂天(客)
+      winner: "away", // 樂天勝 → 引擎(看好台鋼)落空 = DIVERGED
+      ingestedAt: "2026-06-13",
+      innings: 9,
+      source: "manual",
+    },
   },
   // ── 2026-06-11 · 一軍 3 場 ingest · Tim 截圖 cpbl.com.tw 賽程 + 先發投手成績表 ──
   //   投手值由官網截圖 IP/K/BB/HR 換算 · 未進自動 leaderboard 故標 // estimate(per /audit S02 ESTIMATION
