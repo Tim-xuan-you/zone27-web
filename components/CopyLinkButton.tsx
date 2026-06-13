@@ -46,11 +46,15 @@ type CopyLinkButtonProps = {
   // R228 · 可選:外傳時帶的一句具體鉤子(預設用通用品牌標語)。 研究顯示「預寫的具體訊息」
   // 在聊天列的點閱率比通用 share 高 2-4 倍 —— 收據頁傳這場的引擎線 + 結果,而不是每張都一樣的標語。
   shareText?: string;
+  // R231 · 可選:覆寫鈕的文字(預設英文 Share / Copy Link)。 收據「我這手」用中文「外傳我這手」
+  // 跟頁底「外傳這張收據」(引擎口吻)區隔 —— 同頁兩個 share 各有各的家、不會撞。
+  label?: string;
+  doneLabel?: string;
 };
 
 type Phase = "idle" | "done";
 
-export default function CopyLinkButton({ refTag, shareText }: CopyLinkButtonProps = {}) {
+export default function CopyLinkButton({ refTag, shareText, label, doneLabel }: CopyLinkButtonProps = {}) {
   const [phase, setPhase] = useState<Phase>("idle");
   // R166 W1 · Agent Q bug audit LOW #4 · async race guard for 2s "done→idle"
   // timer · prevents setState on unmounted component if visitor navigates away
@@ -125,8 +129,9 @@ export default function CopyLinkButton({ refTag, shareText }: CopyLinkButtonProp
   }
 
   const isDone = phase === "done";
-  const idleLabel = hasShareApi ? "Share" : "Copy Link";
-  const doneLabel = hasShareApi ? "Shared" : "Copied";
+  // 自訂 label(中文)優先;否則回退英文 Share/Copy 預設(頁底引擎 share 不變)。
+  const idleLabel = label ?? (hasShareApi ? "Share" : "Copy Link");
+  const doneText = doneLabel ?? label ?? (hasShareApi ? "Shared" : "Copied");
   const idleIcon = "⌁";
   const doneIcon = "✓";
   const ariaLabel = isDone
@@ -145,7 +150,7 @@ export default function CopyLinkButton({ refTag, shareText }: CopyLinkButtonProp
       className="inline-flex items-center gap-2 px-4 py-2 border border-line/60 hover:border-gold/60 text-mute hover:text-gold transition-colors font-mono text-[11px] tracking-[0.25em] uppercase"
     >
       <span aria-hidden="true">{isDone ? doneIcon : idleIcon}</span>
-      <span lang="en">{isDone ? doneLabel : idleLabel}</span>
+      <span lang={label ? undefined : "en"}>{isDone ? doneText : idleLabel}</span>
     </button>
   );
 }

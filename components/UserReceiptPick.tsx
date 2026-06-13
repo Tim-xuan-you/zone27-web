@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { getMyPredictionsClient, getMyRationales } from "@/lib/predictions-market";
 import { computeUserVerdict, isLatePick } from "@/lib/predictions";
+import CopyLinkButton from "@/components/CopyLinkButton";
 
 // ── ZONE 27 · 收據蓋「本人這手 pick + 鎖定時戳」(soul-roadmap R208 #1 · close-the-loop b)──
 // 收據頁(/receipts/[receiptId])是 SSG 靜態引擎收據,無本人 context。 這個 client island
@@ -98,6 +99,20 @@ export default function UserReceiptPick({
     </p>
   ) : null;
 
+  // R231 · 個人化外傳:把外傳那句話從「引擎口吻」(頁底)升級成「我的口吻 + 我的理由」——
+  // 「我賽前鎖了 X · 命中/落空了 · 因為 Y · 賽前鎖死改不了」。 含輸照傳(落空也敢曬 = 報馬仔的反面)。
+  // 走 /receipts 當前網址(CopyLinkButton 讀 location.href)· label 中文跟頁底引擎 share 區隔。
+  const reasonSuffix = rationale ? ` · 「${rationale}」` : "";
+  const shareMyCall = (verdictStr: string) => (
+    <div className="mt-3">
+      <CopyLinkButton
+        shareText={`ZONE 27 · 我賽前鎖了 ${teamName} · ${verdictStr}${reasonSuffix} · 賽前鎖死、改不了`}
+        label="外傳我這手"
+        doneLabel="複製了"
+      />
+    </div>
+  );
+
   // 還沒結算 · 賽前鎖定中 / 待對帳:
   //   · pending(賽前可外傳收據 R220)→ 蓋「你賽前押了 X · 待對帳」(無 ✓/✕ · 不假裝有結果)。
   //   · 非 pending(賽後收據頁但結果還沒進來)→ 維持原行為隱藏(收據乾淨)。
@@ -119,6 +134,7 @@ export default function UserReceiptPick({
             鎖定於 {when} · 賽前鎖死 · 改不了 · 賽後自動揭曉命中或落空
           </p>
         )}
+        {shareMyCall("待對帳")}
       </div>
     );
   }
@@ -151,6 +167,7 @@ export default function UserReceiptPick({
           鎖定於 {when} · 賽前鎖死 · 改不了
         </p>
       )}
+      {shareMyCall(verdictWord)}
     </div>
   );
 }
