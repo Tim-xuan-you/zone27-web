@@ -22,17 +22,13 @@
 --
 -- 法律邊界(同 0003):純精神預測 = 遊戲 · 0 金額 · 0 金流。
 --
--- ⚠️ 知情同意(一次性 · 套用本 migration「之前」做):0024 的寫入 RPC 是這個窗才套用的,
---    所以理論上「舊文案(沒寫『公開』)下寫的理由」幾乎不存在(寫入路徑在今天之前是壞的)。
---    但「攤開前先驗、別假設」—— 套 0026 前先在 SQL Editor 跑一次:
---        select count(*) from public.predictions where rationale is not null;
---    · 回 0(幾乎確定)→ 沒有舊理由,直接套本 migration 即可。
---    · 回 >0(例如你自己測過)→ 那幾筆是「公開」文案上線前寫的、同意基礎不清楚 · 先跑一次:
---        update public.predictions set rationale = null where rationale is not null;
---      把它們清掉(清掉後該欄變 null · 用戶能在新『公開』文案下重寫)· 再套本 migration。
---    🔴 這條 NULL 是「一次性前置」· 故意不放進本 migration(否則重跑會把日後公開寫的理由也清掉)。
+-- 知情同意:本檔上線時 RationalePicker 文案已明說「公開掛在這場」→ 此後寫的理由都是知情。
+--    寫入 RPC(set_prediction_rationale)是 R231 這個窗才套用的,所以「公開字樣之前寫的理由」
+--    幾乎不存在(寫入路徑在今天之前是壞的);萬一有少數(多為自測),由維運者在套用後抽查
+--    公開資料(get_ladder_entries 回的 rationale)再清理即可。 🔴 故意不在本 migration 內自動清——
+--    冪等重跑會把日後「公開寫的」理由也誤刪;清理走一次性人工、不混進可重貼的 migration。
 --
--- 套用:Tim 在 Supabase SQL Editor 貼整支、按 RUN 跑一次即可(drop+建 · 冪等可重貼)。
+-- 套用:在 Supabase SQL Editor 貼整支、按 RUN 跑一次即可(drop+建 · 冪等可重貼 · 同 0024/0025)。
 -- ─────────────────────────────────────────────────────
 
 -- get_ladder_entries · 跨用戶撈所有押注 + 公開署名 + 賽前鎖死的理由(多 rationale 一欄)。
