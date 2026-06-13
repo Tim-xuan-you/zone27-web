@@ -225,6 +225,43 @@ export default function LearnPage() {
           />
         </Chapter>
 
+        {/* ── SERIES · 誠實讀一個機率 ───────────────────
+            修 R231:此三篇科普(streaks/sample-size/reading-a-probability)原本只能從
+            footer 的延伸閱讀摸到 = 形同孤兒。 在 primer 正文補一個系列入口,讓前門就看得到。 */}
+        <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-8 pt-16 border-t border-line/40">
+          <p className="font-mono text-gold/70 text-[10px] tracking-[0.4em] mb-3">
+            誠實讀一個機率 · 科普系列
+          </p>
+          <h2 className="text-3xl sm:text-4xl text-bone font-light tracking-tight mb-4 leading-snug">
+            想再深一點?<span className="text-gold">三篇,把機率讀懂。</span>
+          </h2>
+          <p className="text-mute leading-relaxed mb-8 max-w-xl">
+            賣明牌的,靠你「看不懂機率」賺錢。 這三篇免費把它說白:連勝為什麼會騙你、
+            一個準度要打幾場才算數、「62%」到底在說什麼。
+            讀完,你就拆得掉任何一張神準截圖。
+          </p>
+          <div className="space-y-3">
+            <SeriesItem
+              no="第一篇"
+              href="/learn/streaks"
+              title="連勝,是最會騙人的那個數字"
+              note="變異數 · 銅板也能連 7 次正面"
+            />
+            <SeriesItem
+              no="第二篇"
+              href="/learn/sample-size"
+              title="10 場的神準,是運氣還沒被攤平"
+              note="樣本量 · 沒掛場數的準度等於沒說"
+            />
+            <SeriesItem
+              no="第三篇"
+              href="/learn/reading-a-probability"
+              title="「62%」,不是「他會贏」的意思"
+              note="讀一個機率 · 它早就把會輸算進去了"
+            />
+          </div>
+        </section>
+
         {/* ── WHERE NEXT ─────────────────────────── */}
         <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-20 pt-16 border-t border-line/40 text-center">
           <p className="font-mono text-gold text-[10px] tracking-[0.4em] mb-6">
@@ -361,6 +398,43 @@ function PrimerStat({
         ▸ {example}
       </p>
     </div>
+  );
+}
+
+function SeriesItem({
+  no,
+  href,
+  title,
+  note,
+}: {
+  no: string;
+  href: string;
+  title: string;
+  note: string;
+}) {
+  return (
+    <Link
+      href={href}
+      className="flex items-center gap-4 p-4 border border-line/60 hover:border-gold/50 hover:bg-slate/30 transition-colors group"
+    >
+      <span className="font-mono text-gold/70 text-[10px] tracking-[0.3em] shrink-0 w-14">
+        {no}
+      </span>
+      <span className="flex-1 min-w-0">
+        <span className="block text-bone text-base sm:text-lg font-light tracking-tight group-hover:text-gold transition-colors">
+          {title}
+        </span>
+        <span className="block font-mono text-mute/70 text-[10px] tracking-[0.2em] mt-1">
+          {note}
+        </span>
+      </span>
+      <span
+        className="font-mono text-mute/60 text-[10px] tracking-[0.2em] shrink-0 group-hover:text-gold/70 transition-colors"
+        aria-hidden="true"
+      >
+        →
+      </span>
+    </Link>
   );
 }
 
