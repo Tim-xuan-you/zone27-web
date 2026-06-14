@@ -113,7 +113,12 @@ async function fetchMatches(code: string, status: string): Promise<FdMatch[]> {
         next: { revalidate: REVALIDATE_SECONDS },
       });
     }
-    if (!res.ok) return [];
+    if (!res.ok) {
+      // 🔴 別靜默吞 —— 公開帳本的命門:整批回 [] 的 4xx(如曾經的無效 status→400)會讓結算
+      // 凍住數天而無聲(這次 bug 的真因)。 只記 code+status+HTTP 狀態(不記 body · 避洩 · R224 教訓)。
+      console.error(`[soccer] ${code} status=${status} → HTTP ${res.status} ${res.statusText}`);
+      return [];
+    }
     const data = (await res.json()) as { matches?: FdMatch[] };
     return Array.isArray(data.matches) ? data.matches : [];
   } catch {
@@ -138,8 +143,10 @@ export type SoccerResult = {
 export async function getRecentSoccerResults(): Promise<SoccerResult[]> {
   const out: SoccerResult[] = [];
   for (const code of ACTIVE_COMPETITIONS) {
-    // FINISHED + AWARDED(棄賽判定也有官方結果 · 不讓押注永遠掛「進行中」)。
-    const finished = await fetchMatches(code, "FINISHED,AWARDED");
+    // 🔴 只查 FINISHED —— football-data v4 的 status enum 沒有 AWARDED(v2 才有)·
+    // 混進去整條 query 會 400 → 整批回 [](這是足球從沒結算成功過的真因)。 棄賽/walkover
+    // 在 v4 也是掛 FINISHED,所以單 FINISHED 已涵蓋,不漏。
+    const finished = await fetchMatches(code, "FINISHED");
     for (const m of finished) {
       // 90 分鐘 1X2(regulationScore)· 淘汰賽 fullTime 含延長賽/PK 進球,
       // 直接用會把「90 分鐘押和」判成輸(跟引擎帳本同一把尺 · 同源 helper)。

@@ -50,9 +50,11 @@ async function fetchFd(url, token) {
 
 async function fetchFinished(code, token) {
   try {
-    // FINISHED + AWARDED:棄賽判定(走 walkover 官方比分)也要結算,不留殭屍 pending。
+    // 🔴 只查 FINISHED —— football-data v4 沒有 AWARDED 這個 status(v2 才有)· 混進去整條
+    // query 會 400 → 永遠回 []（這是足球 cron 結算從沒寫回 verdict 的真因）。 棄賽/walkover
+    // 在 v4 也掛 FINISHED,單 FINISHED 已涵蓋。
     const data = await fetchFd(
-      `${BASE}/competitions/${code}/matches?status=FINISHED,AWARDED`,
+      `${BASE}/competitions/${code}/matches?status=FINISHED`,
       token,
     );
     return Array.isArray(data?.matches) ? data.matches : [];

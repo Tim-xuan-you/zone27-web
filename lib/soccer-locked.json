@@ -21,10 +21,13 @@
       "awayWinPct": 26,
       "enginePick": "home",
       "lockedAt": "2026-06-07T23:58:28.032Z",
-      "finalScore": null,
-      "outcome": null,
-      "verdict": null,
-      "gradedAt": null
+      "finalScore": {
+        "home": 2,
+        "away": 0
+      },
+      "outcome": "home",
+      "verdict": "proved",
+      "gradedAt": "2026-06-14T01:40:49.148Z"
     },
     {
       "matchId": "fd-537328",
@@ -47,10 +50,13 @@
       "awayWinPct": 38,
       "enginePick": "away",
       "lockedAt": "2026-06-07T23:58:28.032Z",
-      "finalScore": null,
-      "outcome": null,
-      "verdict": null,
-      "gradedAt": null
+      "finalScore": {
+        "home": 2,
+        "away": 1
+      },
+      "outcome": "home",
+      "verdict": "diverged",
+      "gradedAt": "2026-06-14T01:40:49.148Z"
     },
     {
       "matchId": "fd-537333",
@@ -99,10 +105,13 @@
       "awayWinPct": 29,
       "enginePick": "home",
       "lockedAt": "2026-06-07T23:58:28.032Z",
-      "finalScore": null,
-      "outcome": null,
-      "verdict": null,
-      "gradedAt": null
+      "finalScore": {
+        "home": 4,
+        "away": 1
+      },
+      "outcome": "home",
+      "verdict": "proved",
+      "gradedAt": "2026-06-14T01:40:49.148Z"
     },
     {
       "matchId": "fd-537334",
@@ -125,10 +134,13 @@
       "awayWinPct": 51,
       "enginePick": "away",
       "lockedAt": "2026-06-07T23:58:28.032Z",
-      "finalScore": null,
-      "outcome": null,
-      "verdict": null,
-      "gradedAt": null
+      "finalScore": {
+        "home": 1,
+        "away": 1
+      },
+      "outcome": "draw",
+      "verdict": "diverged",
+      "gradedAt": "2026-06-14T01:40:49.148Z"
     },
     {
       "matchId": "fd-537339",
@@ -151,10 +163,13 @@
       "awayWinPct": 34,
       "enginePick": "home",
       "lockedAt": "2026-06-07T23:58:28.032Z",
-      "finalScore": null,
-      "outcome": null,
-      "verdict": null,
-      "gradedAt": null
+      "finalScore": {
+        "home": 1,
+        "away": 1
+      },
+      "outcome": "draw",
+      "verdict": "diverged",
+      "gradedAt": "2026-06-14T01:40:49.148Z"
     },
     {
       "matchId": "fd-537340",
