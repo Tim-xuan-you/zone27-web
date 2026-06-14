@@ -16,6 +16,7 @@ import webpush from "web-push";
 import { createClient } from "@supabase/supabase-js";
 import { getFinalizedMatches } from "@/lib/matches";
 import mlbLocked from "@/lib/mlb-locked.json";
+import soccerLocked from "@/lib/soccer-locked.json";
 
 const RECENT_DAYS = 3; // 只推近 3 天結算的場 → 防上線時把陳年舊場一次轟炸 + 收斂查詢量。
 
@@ -81,10 +82,29 @@ async function main(): Promise<void> {
     )
     .map((p) => `mlb-${p.gamePk}`);
 
-  const matchIds = [...cpblIds, ...mlbIds];
+  // 足球(R233 · 結算的 AWARDED bug 修好後解鎖):只認 soccer-locked.json 裡已 graded(verdict
+  // 非 null)的場 —— grade script 只在官方判定 FINISHED 才寫 verdict,所以是「已確認完場」才推
+  // (防誤發 · 解掉之前排除足球的真正顧慮)· id = matchId(fd-* · 押注存的 id)· gradedAt 比近 N 天。
+  const soccerIds = (
+    (soccerLocked.predictions ?? []) as Array<{
+      matchId?: string;
+      verdict?: string | null;
+      gradedAt?: string | null;
+    }>
+  )
+    .filter(
+      (p) =>
+        typeof p.matchId === "string" &&
+        p.verdict != null &&
+        typeof p.gradedAt === "string" &&
+        new Date(p.gradedAt).getTime() >= mlbCutoffMs,
+    )
+    .map((p) => p.matchId as string);
+
+  const matchIds = [...cpblIds, ...mlbIds, ...soccerIds];
 
   if (matchIds.length === 0) {
-    console.log("push: no recent CPBL/MLB settlements — nothing to send.");
+    console.log("push: no recent CPBL/MLB/Soccer settlements — nothing to send.");
     return;
   }
 
