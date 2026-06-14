@@ -40,6 +40,7 @@ import MyCreatorPanel from "@/components/MyCreatorPanel";
 import MyActivityPanel from "@/components/MyActivityPanel";
 import { getMyPurchases, getMyComments } from "@/lib/creator-activity-server";
 import DisplayNameSetting from "@/components/DisplayNameSetting";
+import NicknamePrompt from "@/components/NicknamePrompt";
 import { hasMonthActivity, monthLabel } from "@/lib/season-recap";
 import { SUPPORT_EMAIL } from "@/lib/brand-constants";
 import { readDisplayName, getTeamCrest } from "@/lib/identity";
@@ -301,6 +302,17 @@ export default async function MemberPage() {
       <Nav active="member" />
 
       <main id="main" className="mx-auto max-w-2xl w-full px-6 sm:px-10 pt-10 pb-24">
+        {/* 0 · 取暱稱 onboarding 提示(R237)· 研究結論:別在註冊強制取名(降轉換)·
+            改在已投入的時刻漸進邀請。 只在「還沒設顯示名 && 沒按過之後再說」時出現在最頂 ·
+            取名 / 跳過就消失(守極簡)· 解決脈動/聯盟「一堆球迷#碼」impersonal 牆。 */}
+        <NicknamePrompt
+          show={
+            displayName.trim() === "" && meta?.nick_prompt_dismissed !== true
+          }
+          anonHandle={anonHandle}
+          code={authorCode}
+        />
+
         {/* 1 · 身分列 · 頭像 + 公開名(可改)+ tier + 登出 ──────
             Tim dogfood「球迷#hash 不知道是誰 · 能自己設名嗎」→ 頭像 + 改名 inline。
             預設一行(守極簡)· 點「改名」才展開。 */}
