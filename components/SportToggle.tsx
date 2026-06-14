@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 // ── ZONE 27 · 公開戰績運動切換(等寬 segmented control)─────────────────
 // 等寬兩段 = 等尊嚴:每個運動拿到「整個內容舞台」,不再是棒球厚段壓著足球薄片
@@ -20,6 +20,14 @@ export default function SportToggle({
   containerClass?: string;
 }) {
   const [sport, setSport] = useState<"baseball" | "soccer">("baseball");
+
+  // R234 · 從足球賽事板的「引擎公開戰績」條進來會帶 #soccer → 直接開足球視圖
+  // (client-only · 不影響 SSR / ISR / canonical · 無 hash 時維持預設 baseball · 無 JS 時兩 view 皆顯示)。
+  useEffect(() => {
+    if (typeof window !== "undefined" && window.location.hash === "#soccer") {
+      setSport("soccer");
+    }
+  }, []);
 
   return (
     <>

@@ -5,7 +5,9 @@ import Footer from "@/components/Footer";
 import SoccerMatchCard from "@/components/SoccerMatchCard";
 import SoccerRecordCard from "@/components/SoccerRecordCard";
 import SoccerEngineRecord from "@/components/SoccerEngineRecord";
+import TrackRecordStrip from "@/components/TrackRecordStrip";
 import { createPageMetadata } from "@/lib/page-og";
+import { getResolvedSoccerEngine } from "@/lib/soccer/engine-settle";
 import {
   ACTIVE_COMPETITIONS,
   getCompetitionPredictions,
@@ -56,6 +58,13 @@ export default async function SoccerPage() {
   // 引擎當初鎖定的看好邊 · 給「你 vs 引擎」同場對照。
   const enginePicks = getSoccerEnginePicks();
 
+  // R234 · 足球引擎公開戰績摘要(板頂證物條)· 同 SoccerEngineRecord 口徑(verdict proved/diverged)·
+  // resolveLockedSoccer 的 live fetch 走 1h ISR 共用快取 → 與下方 SoccerEngineRecord 不重複打 API。
+  const { predictions: engPreds, notKicked, awaitingGrade } =
+    await getResolvedSoccerEngine();
+  const soccerHits = engPreds.filter((p) => p.verdict === "proved").length;
+  const soccerMisses = engPreds.filter((p) => p.verdict === "diverged").length;
+
   return (
     <div className="flex flex-col flex-1 min-h-screen">
       <Nav active="soccer" />
@@ -102,6 +111,14 @@ export default async function SoccerPage() {
           )}
           <div className="mt-6 w-full h-px bg-line/60" />
         </section>
+
+        {/* ── 引擎公開戰績條(證物 · 第一眼 · 與棒球板同款同位 · 連到 /track-record 足球視圖)── */}
+        <TrackRecordStrip
+          hits={soccerHits}
+          misses={soccerMisses}
+          pending={notKicked + awaitingGrade}
+          href="/track-record#soccer"
+        />
 
         {/* 你的足球戰績(含輸 · 登入且押過才出現 · client 端對帳不破 ISR · 含你 vs 引擎)*/}
         <SoccerRecordCard

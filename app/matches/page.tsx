@@ -4,6 +4,7 @@ import SportTabs from "@/components/SportTabs";
 import Footer from "@/components/Footer";
 import MiniMatchCard from "@/components/MiniMatchCard";
 import MatchBoardFilter from "@/components/MatchBoardFilter";
+import TrackRecordStrip from "@/components/TrackRecordStrip";
 import { createPageMetadata } from "@/lib/page-og";
 import {
   getMatchPhase,
@@ -15,7 +16,7 @@ import {
   type MatchPhase,
   type Calibration,
 } from "@/lib/matches";
-import { getMlbAsMatches } from "@/lib/mlb-matches";
+import { getMlbAsMatches, getMlbLockedMatches } from "@/lib/mlb-matches";
 import { getMatchHeat, heatDisplayFor, heatScore } from "@/lib/match-heat";
 
 export const metadata = createPageMetadata({
@@ -61,6 +62,15 @@ export default async function MatchesPage() {
   const boardDate = cpblSorted[0]?.date ?? mlbSorted[0]?.date ?? "休賽日 · 看引擎判決";
   const headMatch = cpblSorted[0] ?? mlbSorted[0];
 
+  // R234 · 引擎公開戰績條(賽事板頂端證物)· CPBL + MLB 跨聯盟 · 同 /track-record 口徑
+  // (永久鎖定源 getMlbLockedMatches · 不用 live 窗 · 帳本不縮水)。
+  const recordFinal = [
+    ...getFinalizedMatches(),
+    ...getMlbLockedMatches().filter((m) => m.finalResult),
+  ];
+  const recHits = recordFinal.filter((m) => getCalibration(m) === "proved").length;
+  const recMisses = recordFinal.filter((m) => getCalibration(m) === "diverged").length;
+
   return (
     <div className="flex flex-col flex-1 min-h-screen">
       <Nav active="matches" />
@@ -80,14 +90,8 @@ export default async function MatchesPage() {
               calibration={getCalibration(headMatch)}
             />
           )}
-          <Link
-            href="/track-record"
-            className="font-mono text-[9px] tracking-[0.3em] px-1.5 py-0.5 border border-gold/30 text-gold/70 hover:border-gold hover:text-gold transition-colors"
-            title="所有有最終結果的比賽公開戰績"
-          >
-            公開戰績 →
-          </Link>
-          {/* 足球切換已移到上方 SportTabs(棒球 | 足球)· 不再雙頭重複 */}
+          {/* R234 · 「公開戰績」從這個角落小 chip 升成 header 下方、帶真實 ✓/✕ 數字的
+              證物條(TrackRecordStrip)· 兩運動板同款同位 = 第一眼就看到含輸帳本。 */}
         </div>
         <div className="flex items-end justify-between flex-wrap gap-4">
           <h1 className="text-4xl sm:text-5xl text-bone font-light tracking-tight">
@@ -102,6 +106,13 @@ export default async function MatchesPage() {
         </p>
         <div className="mt-6 w-full h-px bg-line/60" />
       </section>
+
+      {/* ── 引擎公開戰績條(證物 · 第一眼)──────── */}
+      <TrackRecordStrip
+        hits={recHits}
+        misses={recMisses}
+        pending={cpblSorted.length + mlbSorted.length}
+      />
 
       {/* ── MATCH GRID ──────────────────────── */}
       <section className="mx-auto max-w-6xl w-full px-6 sm:px-10 pb-12">
