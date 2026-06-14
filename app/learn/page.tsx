@@ -272,11 +272,14 @@ export default function LearnPage() {
           </h2>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
+            {/* 峰終 = 緊接第 04 章「沒人神準 · 我們比校準 · 不信換你當引擎」的最強 0-登入體感 ·
+                把第 04 章剛吸收的情緒 payload 直接接到「親手測你自己」。 /lab 入口仍在第 01 章
+                ChapterFooter(不孤兒)· 這格不重複放,讓位給轉換力更強的鏡子。 */}
             <NextStep
-              kicker="LAB"
-              zh="親手跑一場引擎"
-              href="/lab"
-              note="2 秒收斂 · 10,000 場 · 在您本機跑"
+              kicker="CALIBRATION"
+              zh="先測你自己多準"
+              href="/calibration/test"
+              note="藏住比分 · 滑出你的把握 · 30 秒撞到那道 5 成 7 的牆 · 不用登入"
             />
             <NextStep
               kicker="AUDIT"

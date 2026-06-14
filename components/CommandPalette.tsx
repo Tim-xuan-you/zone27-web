@@ -280,7 +280,7 @@ export default function CommandPalette() {
               </p>
               <p className="text-mute text-sm">
                 搜尋「<span className="text-gold">{query}</span>」找不到結果。
-                試試「manifesto」「audit」「founder」「lab」「公開戰績」。
+                試試「校準」「公開戰績」「賽事」「會員」「lab」。
               </p>
             </div>
           ) : (
