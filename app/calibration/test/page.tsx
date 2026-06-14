@@ -2,7 +2,7 @@ import Link from "next/link";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import CalibrationGame, { type QuizMatch } from "@/components/CalibrationGame";
-import { getFinalizedMatches } from "@/lib/matches";
+import { getFinalizedMatches, getTodayTaipei } from "@/lib/matches";
 import { createPageMetadata } from "@/lib/page-og";
 
 // R232:改用 createPageMetadata → 補上 openGraph + twitter summary_large_image,
@@ -32,11 +32,43 @@ function compactDate(dateStr: string): string {
   return dateStr;
 }
 
+// 決定性「每日抽題」:seed 字串(台北日期)→ FNV-1a hash → mulberry32 PRNG 洗牌取前 n,
+// 再按原始(新→舊)順序排回顯示。 同 seed 同結果(SSR / ISR / 分享連結當天一致),跨天換批。
+// 候選 ≤ n → 原樣回傳(不輪換 · 不假裝有更多題)。
+function pickDaily<T>(items: T[], n: number, seed: string): T[] {
+  if (items.length <= n) return items;
+  let h = 2166136261 >>> 0;
+  for (let i = 0; i < seed.length; i++) {
+    h ^= seed.charCodeAt(i);
+    h = Math.imul(h, 16777619);
+  }
+  const rand = () => {
+    h += 0x6d2b79f5;
+    let t = h;
+    t = Math.imul(t ^ (t >>> 15), t | 1);
+    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+  const order = items.map((_, i) => i);
+  for (let i = order.length - 1; i > 0; i--) {
+    const j = Math.floor(rand() * (i + 1));
+    [order[i], order[j]] = [order[j], order[i]];
+  }
+  return order
+    .slice(0, n)
+    .sort((a, b) => a - b)
+    .map((i) => items[i]);
+}
+
 export default function CalibrationTestPage() {
   // 已結算、非平手(平手沒有贏家、評不了你猜對沒)· 取最近 QUIZ_SIZE 場
-  const quiz: QuizMatch[] = getFinalizedMatches()
-    .filter((m) => m.finalResult && m.finalResult.winner !== "tie")
-    .slice(0, QUIZ_SIZE)
+  // 每日輪換題庫:候選 = 所有已結算非平手場(隨賽事自動增長)。 同一天全站 / 重訪 / 分享
+  // 連結看到同一份(ISR 友善 · revalidate 本來就每天),跨天自動換新考卷(Wordle 式每日新題)
+  // —— 解「永遠最新 8 場、人人同題、重玩=同一份考卷」的重玩疲乏 + 朋友點分享連結撞同題。
+  const candidates = getFinalizedMatches().filter(
+    (m) => m.finalResult && m.finalResult.winner !== "tie"
+  );
+  const quiz: QuizMatch[] = pickDaily(candidates, QUIZ_SIZE, getTodayTaipei())
     .map((m) => ({
       id: m.id,
       date: compactDate(m.date),
