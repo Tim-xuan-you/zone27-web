@@ -53,26 +53,22 @@ type NavKey =
 // fallback /interact when 0 matches today · per R148 6-constraint scaffold
 // + BLACK-gated brand IP 維持 minimum-violation。
 const NAV_ITEMS_STATIC: {
-  key: Exclude<NavKey, "home" | "founders" | "discuss">;
+  key: Exclude<NavKey, "home" | "founders" | "discuss" | "soccer">;
   href: string;
   label: string;
   badge?: string;
 }[] = [
-  // 標「棒球」而非「賽事」—— 足球已是並列的 Nav 項,「賽事」(泛指)擺在「足球」旁邊
-  // 讀起來怪(足球也是賽事)· 改「棒球」跟頁內 SportTabs 的「棒球 | 足球」同一套詞(認得出>記得住)。
-  { key: "matches", href: "/matches", label: "棒球" },
-  // R211 · 世界盃開站(2026-06-12)· 足球進永久 Nav = 可發現性(原本只能從首頁卡 /
-  //  /matches 的 SportTabs / Cmd-K 進 · 世界盃當晚等於把頭條藏起來)。 純靜態連結 ·
-  //  不在 Nav render 時 fetch(守 R207「Nav 不 render-fetch」鐵律)。 無 badge =
-  //  守手機第二排寬度(世界盃的急迫感由首頁 rail + /soccer 頁承載,不靠 Nav 小標)。
-  { key: "soccer", href: "/soccer", label: "足球" },
-  // R230 · 活動脈動進永久 Nav = 可發現性(原本只能從 Footer + 首頁 strip 進 · 但它是
-  //  社群/liveness 的心臟「誰賽前鎖了哪一手、引擎又對帳了哪場」)。 純靜態連結 · 不在
-  //  render 時 fetch(守 R207「Nav 不 render-fetch」鐵律)· 擺在運動(棒球/足球)之後、
-  //  工具(實驗室)之前 = 市場 → 活動牆 → 引擎 → 品牌 的動線。
+  // R234 · 收掉重複的運動切換 + 修分類學(Tim 截圖抱怨「為什麼有 2 組棒球+足球」)。
+  //  原本「棒球」「足球」兩格,與頁內 SportTabs(棒球 | 足球)連到完全相同的 /matches、
+  //  /soccer = 同一個切換器出現兩次;而且把「運動」(內容分類)跟「脈動/實驗室/關於」
+  //  (功能)混在同一排。 收成單一「賽事」入口(Polymarket / Sofascore 式:頂層是市場,
+  //  棒球|足球 是市場底下、由頁內「唯一」SportTabs 切的次級分類)· 頂 Nav 一排只代表功能。
+  //  世界盃可發現性改由 首頁世界盃 rail + 脈動 + Cmd-K 三路承載(比頂 Nav 一個小字更醒目)。
+  { key: "matches", href: "/matches", label: "賽事" },
+  // R230 · 活動脈動 = 社群 / liveness 的心臟(誰賽前鎖了哪一手、引擎對帳了哪場)· 功能層。
+  //  純靜態連結 · 不在 render 時 fetch(守 R207「Nav 不 render-fetch」鐵律)。
   { key: "pulse", href: "/pulse", label: "脈動" },
-  // R197 · 拿掉「實驗室 BETA」badge:BETA 在核心引擎旁 = 對每個訪客說「引擎還沒做完」·
-  // 跟 MLB de-BETA 一致(蒙地卡羅是全世界在用的成熟方法 · 不是 beta)。
+  // R197 · 拿掉「實驗室 BETA」badge(蒙地卡羅是全世界在用的成熟方法 · 不是 beta)。
   { key: "lab", href: "/lab", label: "實驗室" },
   { key: "about", href: "/about", label: "關於" },
 ];
@@ -90,6 +86,11 @@ export default function Nav({ active }: { active?: NavKey }) {
   // anchor)· 討論已併入賽事頁的「看法 · 分析」(CreatorAnalysis)· 點任一場
   // 賽事即達 · nav 回到 market-first 乾淨 3 軸。
   const NAV_ITEMS = NAV_ITEMS_STATIC;
+
+  // R234 · /matches · /soccer · /matches/mlb 都收在單一「賽事」入口底下(運動切換交給頁內
+  //  SportTabs)→ 任一進來都高亮「賽事」那一格(soccer 的 active 映射到 matches)。
+  const isActive = (key: string) =>
+    active === key || (key === "matches" && active === "soccer");
 
   return (
     <>
@@ -142,9 +143,9 @@ export default function Nav({ active }: { active?: NavKey }) {
                 <Link
                   key={item.key}
                   href={item.href}
-                  aria-current={active === item.key ? "page" : undefined}
+                  aria-current={isActive(item.key) ? "page" : undefined}
                   className={`font-mono text-[10px] sm:text-xs tracking-[0.22em] whitespace-nowrap transition-colors inline-flex items-center gap-1.5 ${
-                    active === item.key
+                    isActive(item.key)
                       ? "text-gold"
                       : "text-mute hover:text-gold"
                   }`}
@@ -221,12 +222,12 @@ export default function Nav({ active }: { active?: NavKey }) {
                 <li key={item.key}>
                   <Link
                     href={item.href}
-                    aria-current={active === item.key ? "page" : undefined}
+                    aria-current={isActive(item.key) ? "page" : undefined}
                     /* Round 9: py-2.5 ensures ≥44px tap target per
                        Apple HIG / WCAG 2.5.5. Was zero v-padding · agent
                        flagged 14-16px tap target. */
                     className={`py-2.5 -my-1.5 tracking-[0.18em] whitespace-nowrap transition-colors inline-flex items-center gap-1 ${
-                      active === item.key
+                      isActive(item.key)
                         ? "text-gold"
                         : "text-mute hover:text-gold"
                     }`}
