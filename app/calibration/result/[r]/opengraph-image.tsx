@@ -88,9 +88,14 @@ export default async function ResultOgImage({
 
         {/* TWO-BAR COMPARE(只有有效成績才畫)· 你以為 vs 實際 = 一眼看到落差 */}
         {res ? (
-          <div style={{ marginTop: 40, display: "flex", flexDirection: "column", gap: 22 }}>
-            <CompareBar label="你以為的把握" pct={res.conf} tone="mute" />
-            <CompareBar label="實際中" pct={res.hit} tone="gold" />
+          <div style={{ marginTop: 32, display: "flex", gap: 40, alignItems: "center" }}>
+            <div style={{ display: "flex", flexDirection: "column", gap: 22, flex: 1, minWidth: 0 }}>
+              <CompareBar label="你以為的把握" pct={res.conf} tone="mute" />
+              <CompareBar label="實際中" pct={res.hit} tone="gold" />
+            </div>
+            {/* 45° 校準散點 = 品牌最不可抄的視覺(明牌站只敢曬連勝 · 不敢畫自己高估)·
+                點落在金線右下 = 過度自信。 峰終法則:結尾的視覺記憶決定轉傳意願。 */}
+            <CalibPlot conf={res.conf} hit={res.hit} tone={res.tone} />
           </div>
         ) : (
           <span style={{ fontSize: 26, color: "rgba(245,242,234,0.72)", lineHeight: 1.5, marginTop: 34, display: "flex", maxWidth: 980 }}>
@@ -127,6 +132,53 @@ export default async function ResultOgImage({
       </div>
     ),
     { ...size }
+  );
+}
+
+// 45° 校準散點(Satori inline SVG · 純 line/rect/circle 幾何 · 0 字型依賴 = 0 豆腐風險)。
+// 一條金色 45° 虛線(說幾成就中幾成)+ 一顆你的點(x=你以為、y=實際中)。
+// 點在金線右下 = 過度自信(最常見、品牌的命題)· 右上 = 太保守 · 線上 = 校準良好。
+function CalibPlot({
+  conf,
+  hit,
+  tone,
+}: {
+  conf: number;
+  hit: number;
+  tone: "over" | "under" | "calibrated";
+}) {
+  const S = 188;
+  const pad = 10;
+  const span = S - pad * 2;
+  const cx = pad + (Math.max(0, Math.min(100, conf)) / 100) * span;
+  const cy = pad + (1 - Math.max(0, Math.min(100, hit)) / 100) * span; // SVG y 反向
+  const verdict =
+    tone === "over" ? "點在線下 = 過度自信" : tone === "under" ? "點在線上 = 太保守" : "點貼著線 = 校準良好";
+  return (
+    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 9, width: S, flexShrink: 0 }}>
+      <svg width={S} height={S} viewBox={`0 0 ${S} ${S}`}>
+        <rect x={pad} y={pad} width={span} height={span} fill="none" stroke="rgba(138,147,168,0.28)" strokeWidth="1" />
+        {/* 45° 完美校準金線(左下 → 右上) */}
+        <line
+          x1={pad}
+          y1={pad + span}
+          x2={pad + span}
+          y2={pad}
+          stroke="#D4AF37"
+          strokeWidth="2"
+          strokeDasharray="6 5"
+          strokeOpacity="0.75"
+        />
+        {/* 你的點 */}
+        <circle cx={cx} cy={cy} r="10" fill="#D4AF37" stroke="#0F1A2E" strokeWidth="2.5" />
+      </svg>
+      <span style={{ fontSize: 13, color: "rgba(245,242,234,0.55)", letterSpacing: "0.08em", display: "flex" }}>
+        橫=你以為 · 直=實際中
+      </span>
+      <span style={{ fontSize: 13, color: "rgba(212,175,55,0.8)", letterSpacing: "0.06em", display: "flex" }}>
+        {verdict}
+      </span>
+    </div>
   );
 }
 
