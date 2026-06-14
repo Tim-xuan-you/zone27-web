@@ -35,7 +35,10 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          # 🔴 Node 22(非 20):@supabase/supabase-js 建立 client 時要 native WebSocket,
+          # Node 20 沒有(會 fatal「Node.js 20 detected without native WebSocket support」)·
+          # Node 22+ 內建 global WebSocket → 修掉。 本 Action 是唯一用 supabase-js 的(其餘引擎只 fetch)。
+          node-version: 22
       - run: npm ci
       - name: Send settlement push reminders
         run: npx tsx scripts/send-push.ts
