@@ -79,10 +79,13 @@
       "awayWinPct": 33,
       "enginePick": "home",
       "lockedAt": "2026-06-07T23:58:28.032Z",
-      "finalScore": null,
-      "outcome": null,
-      "verdict": null,
-      "gradedAt": null
+      "finalScore": {
+        "home": 1,
+        "away": 1
+      },
+      "outcome": "draw",
+      "verdict": "diverged",
+      "gradedAt": "2026-06-14T10:54:17.469Z"
     },
     {
       "matchId": "fd-537345",
@@ -192,10 +195,13 @@
       "awayWinPct": 53,
       "enginePick": "away",
       "lockedAt": "2026-06-07T23:58:28.032Z",
-      "finalScore": null,
-      "outcome": null,
-      "verdict": null,
-      "gradedAt": null
+      "finalScore": {
+        "home": 0,
+        "away": 1
+      },
+      "outcome": "away",
+      "verdict": "proved",
+      "gradedAt": "2026-06-14T10:54:17.469Z"
     },
     {
       "matchId": "fd-537346",
@@ -218,10 +224,13 @@
       "awayWinPct": 41,
       "enginePick": "away",
       "lockedAt": "2026-06-07T23:58:28.032Z",
-      "finalScore": null,
-      "outcome": null,
-      "verdict": null,
-      "gradedAt": null
+      "finalScore": {
+        "home": 2,
+        "away": 0
+      },
+      "outcome": "home",
+      "verdict": "diverged",
+      "gradedAt": "2026-06-14T10:54:17.469Z"
     },
     {
       "matchId": "fd-537351",
@@ -380,6 +389,62 @@
       "awayWinPct": 26,
       "enginePick": "home",
       "lockedAt": "2026-06-13T21:54:09.024Z",
+      "finalScore": null,
+      "outcome": null,
+      "verdict": null,
+      "gradedAt": null
+    },
+    {
+      "matchId": "fd-537370",
+      "competitionCode": "WC",
+      "competitionName": "世界盃",
+      "kickoffISO": "2026-06-15T22:00:00Z",
+      "status": "TIMED",
+      "homeSeed": "Saudi Arabia",
+      "awaySeed": "Uruguay",
+      "home": "沙烏地阿拉伯",
+      "away": "烏拉圭",
+      "ratingHome": 1612,
+      "ratingAway": 1756,
+      "homeAdvantage": 0,
+      "xgHome": 0.9760000000000001,
+      "xgAway": 1.624,
+      "homeWin": 0.21759351458878506,
+      "draw": 0.2665816503522679,
+      "awayWin": 0.515824835058947,
+      "homeWinPct": 22,
+      "drawPct": 27,
+      "awayWinPct": 51,
+      "enginePick": "away",
+      "lockedAt": "2026-06-14T10:54:16.275Z",
+      "finalScore": null,
+      "outcome": null,
+      "verdict": null,
+      "gradedAt": null
+    },
+    {
+      "matchId": "fd-537364",
+      "competitionCode": "WC",
+      "competitionName": "世界盃",
+      "kickoffISO": "2026-06-16T01:00:00Z",
+      "status": "TIMED",
+      "homeSeed": "Iran",
+      "awaySeed": "New Zealand",
+      "home": "伊朗",
+      "away": "紐西蘭",
+      "ratingHome": 1684,
+      "ratingAway": 1508,
+      "homeAdvantage": 0,
+      "xgHome": 1.696,
+      "xgAway": 0.9040000000000001,
+      "homeWin": 0.551545576429571,
+      "draw": 0.258228517673631,
+      "awayWin": 0.19022590589679791,
+      "homeWinPct": 55,
+      "drawPct": 26,
+      "awayWinPct": 19,
+      "enginePick": "home",
+      "lockedAt": "2026-06-14T10:54:16.275Z",
       "finalScore": null,
       "outcome": null,
       "verdict": null,
