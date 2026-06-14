@@ -15,6 +15,7 @@
 import webpush from "web-push";
 import { createClient } from "@supabase/supabase-js";
 import { getFinalizedMatches } from "@/lib/matches";
+import mlbLocked from "@/lib/mlb-locked.json";
 
 const RECENT_DAYS = 3; // 只推近 3 天結算的場 → 防上線時把陳年舊場一次轟炸 + 收斂查詢量。
 
@@ -43,11 +44,12 @@ async function main(): Promise<void> {
   webpush.setVapidDetails(vapidSubject, vapidPublic, vapidPrivate);
   const sb = createClient(url, anon, { auth: { persistSession: false } });
 
-  // 近 N 天已結算的 CPBL 場(用站上同一份權威結算判定 getFinalizedMatches · 零 drift)。
+  // ── 近 N 天已結算的場(CPBL + MLB · 都用站上的權威結算來源 · 零 drift)──────────
+  // CPBL:getFinalizedMatches(matches.ts 載入時配對官方賽果)· ingestedAt = 台北日(粗但可靠)。
   const cutoff = new Date(Date.now() + 8 * 3600e3 - RECENT_DAYS * 86400e3)
     .toISOString()
     .slice(0, 10); // 台北日 YYYY-MM-DD
-  const matchIds = getFinalizedMatches()
+  const cpblIds = getFinalizedMatches()
     .filter(
       (m) =>
         m.id.startsWith("cpbl-") &&
@@ -57,8 +59,32 @@ async function main(): Promise<void> {
     )
     .map((m) => m.id);
 
+  // MLB(v1.1 · 純加法):只認 mlb-locked.json 裡「已 grade(有 finalScore + gradedAt)」的場 ——
+  // grade:mlb Action 賽後寫回的永久結果(同站上永久戰績來源)· id = mlb-{gamePk}(=押注存的 id)。
+  // gradedAt 是精確 instant → 直接用毫秒比近 N 天(比 CPBL 日粒度更準)。 未鎖定的 MLB 押注(走
+  // live on-read · 不在 lock 檔)本就不在此 → 不推(設計刻意 · 站內收件匣仍 on-read 顯示)。
+  const mlbCutoffMs = Date.now() - RECENT_DAYS * 86400e3;
+  const mlbIds = (
+    (mlbLocked.predictions ?? []) as Array<{
+      gamePk?: number;
+      gradedAt?: string;
+      finalScore?: { home?: number; away?: number };
+    }>
+  )
+    .filter(
+      (p) =>
+        typeof p.gamePk === "number" &&
+        typeof p.gradedAt === "string" &&
+        p.finalScore &&
+        typeof p.finalScore.home === "number" &&
+        new Date(p.gradedAt).getTime() >= mlbCutoffMs,
+    )
+    .map((p) => `mlb-${p.gamePk}`);
+
+  const matchIds = [...cpblIds, ...mlbIds];
+
   if (matchIds.length === 0) {
-    console.log("push: no recent CPBL settlements — nothing to send.");
+    console.log("push: no recent CPBL/MLB settlements — nothing to send.");
     return;
   }
 

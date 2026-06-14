@@ -9,12 +9,15 @@ name: Push · Settlement Reminders
 # 🔴 隱私:不用 service_role(留 Tim 本機)· 用 anon key + PUSH_FUNCTION_SECRET token 走窄
 #   權限函式(migration 0028)。 細節見 scripts/send-push.ts + /privacy。
 # 🔴 graceful:任一金鑰未設(Tim 還沒啟動)→ 腳本 no-op exit 0 · 這個 Action 不會變紅。
-# v1 只 CPBL(唯一有 committed 賽果鏡像的可靠來源)· 未來擴 MLB 再串 mlb-engine。
+# 範圍 = CPBL + MLB(兩個都有 committed 可靠賽果來源:CPBL cpbl-results.json · MLB mlb-locked.json
+# 的 graded finalScore)。 足球仍排除(on-read 結算 · cron 不可靠 · 見 send-push.ts 註解)。
 
 on:
-  # CPBL 賽果鏡像成功落地後才送(賽果落地 ≤3h 內推 · 不另設 cron 避免跟資料還沒落地賽跑)。
+  # CPBL / MLB 賽果落地成功後才送(賽果落地 ≤3h 內推 · 不另設 cron 避免跟資料還沒落地賽跑)。
   workflow_run:
-    workflows: ["CPBL Engine · official results ingest"]
+    workflows:
+      - "CPBL Engine · official results ingest"
+      - "MLB Engine · lock + grade"
     types: [completed]
   # 手動補送(Actions 頁 Run workflow)。
   workflow_dispatch: {}
