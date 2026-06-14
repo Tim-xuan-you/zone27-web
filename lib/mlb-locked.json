@@ -4720,6 +4720,122 @@
       "lockedAt": "2026-06-12T21:19:01.489Z",
       "finalScore": null,
       "verdict": null
+    },
+    {
+      "gamePk": 823452,
+      "gameDate": "2026-06-15T22:40:00Z",
+      "scheduleDate": "2026-06-15",
+      "homeId": 143,
+      "homeEn": "Philadelphia Phillies",
+      "homeRecord": "38-32",
+      "awayId": 146,
+      "awayEn": "Miami Marlins",
+      "awayRecord": "35-36",
+      "homePitcher": "Zack Wheeler",
+      "awayPitcher": "Ryan Gusto",
+      "homeStats": {
+        "era": "2.22",
+        "k9": "8.42",
+        "bb9": "1.91",
+        "hr9": "1.11"
+      },
+      "awayStats": {
+        "era": "6.00",
+        "k9": "9.00",
+        "bb9": "2.00",
+        "hr9": "0.00"
+      },
+      "engineWinHomePct": 61,
+      "lockedAt": "2026-06-14T17:01:32.346Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 823451,
+      "gameDate": "2026-06-16T22:40:00Z",
+      "scheduleDate": "2026-06-16",
+      "homeId": 143,
+      "homeEn": "Philadelphia Phillies",
+      "homeRecord": "38-32",
+      "awayId": 146,
+      "awayEn": "Miami Marlins",
+      "awayRecord": "35-36",
+      "homePitcher": "Jesús Luzardo",
+      "awayPitcher": "Tyler Phillips",
+      "homeStats": {
+        "era": "4.35",
+        "k9": "10.07",
+        "bb9": "2.86",
+        "hr9": "0.92"
+      },
+      "awayStats": {
+        "era": "1.86",
+        "k9": "7.63",
+        "bb9": "4.47",
+        "hr9": "0.37"
+      },
+      "engineWinHomePct": 46,
+      "lockedAt": "2026-06-14T17:01:32.346Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 824504,
+      "gameDate": "2026-06-16T23:10:00Z",
+      "scheduleDate": "2026-06-16",
+      "homeId": 113,
+      "homeEn": "Cincinnati Reds",
+      "homeRecord": "33-36",
+      "awayId": 121,
+      "awayEn": "New York Mets",
+      "awayRecord": "31-39",
+      "homePitcher": "Brady Singer",
+      "awayPitcher": "Christian Scott",
+      "homeStats": {
+        "era": "5.61",
+        "k9": "6.93",
+        "bb9": "2.95",
+        "hr9": "2.51"
+      },
+      "awayStats": {
+        "era": "3.10",
+        "k9": "10.40",
+        "bb9": "4.20",
+        "hr9": "0.89"
+      },
+      "engineWinHomePct": 27,
+      "lockedAt": "2026-06-14T17:01:32.346Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 823775,
+      "gameDate": "2026-06-16T23:40:00Z",
+      "scheduleDate": "2026-06-16",
+      "homeId": 158,
+      "homeEn": "Milwaukee Brewers",
+      "homeRecord": "42-26",
+      "awayId": 114,
+      "awayEn": "Cleveland Guardians",
+      "awayRecord": "39-33",
+      "homePitcher": "Robert Gasser",
+      "awayPitcher": "Slade Cecconi",
+      "homeStats": {
+        "era": "6.38",
+        "k9": "9.33",
+        "bb9": "4.42",
+        "hr9": "2.95"
+      },
+      "awayStats": {
+        "era": "4.83",
+        "k9": "7.56",
+        "bb9": "2.85",
+        "hr9": "1.24"
+      },
+      "engineWinHomePct": 41,
+      "lockedAt": "2026-06-14T17:01:32.346Z",
+      "finalScore": null,
+      "verdict": null
     }
   ]
 }
