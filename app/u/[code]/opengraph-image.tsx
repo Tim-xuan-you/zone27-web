@@ -152,7 +152,9 @@ function receiptResponse(name: string, authorCode: string, id: CalibrationIdenti
             </span>
             {/* 贏過引擎金章 vs 準度條 · 二擇一(贏了引擎就掛金章 · 進度條變多餘噪音)·
                 金章只在真贏 + 樣本夠穩才出(否則照常顯示準度條 · 不喊空話)·
-                無 ✓ glyph(OG 字缺 → 純中文)· navy on gold = 全卡最亮的一句。 */}
+                無 ✓ glyph(OG 字缺 → 純中文)· navy on gold = 全卡最亮的一句。
+                R234:帶上「+N 分」具體數字(edgeVsEnginePts 已算好)—— 分享卡上「贏過引擎」是口號,
+                「贏過引擎 +9 分」是無法反駁的證物(Strava 永遠把數字放最大)· 只在 >0 才印,守誠實。 */}
             {beatEngine ? (
               <div style={{ display: "flex", marginTop: 16 }}>
                 <span
@@ -166,7 +168,9 @@ function receiptResponse(name: string, authorCode: string, id: CalibrationIdenti
                     display: "flex",
                   }}
                 >
-                  贏過公開引擎
+                  {id.edgeVsEnginePts !== null && id.edgeVsEnginePts > 0
+                    ? `贏過公開引擎 +${id.edgeVsEnginePts} 分`
+                    : "贏過公開引擎"}
                 </span>
               </div>
             ) : (
