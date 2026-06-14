@@ -741,6 +741,11 @@ export default function AuditPage() {
               <strong className="text-bone">⚓ Drift correction history</strong> ·
               此表早期上線時 keys 6 個有 3 個不對 · 1 個是捏造的 · 1 個漏掉 ·
               自己用站時發現、立即修正 · 不藏錯 · 公開記在這裡 · 不刪 commit history。
+              這件事也收進{" "}
+              <Link href="/corrections" className="text-gold underline-offset-4 hover:underline">
+                我們搞砸過的事
+              </Link>
+              (集中認錯頁)。
             </P>
             <P className="text-mute/70">
               <strong className="text-bone">NOT in localStorage</strong>:Match notes

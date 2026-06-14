@@ -25,6 +25,11 @@ const AUDIT: RelatedLink = {
   kicker: "audit",
   title: "Model Report · 全部假設公開",
 };
+const CORRECTIONS: RelatedLink = {
+  href: "/corrections",
+  kicker: "corrections",
+  title: "我們搞砸過的事 · 公開認錯、不刪",
+};
 
 export const RELATED_LINKS: Record<string, RelatedLink[]> = {
   // R202 · /cpbl-pitchers + /cpbl-teams 微站已砍(手動靜態快照會發霉 · 引擎仍吃資料 ·
@@ -101,9 +106,14 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
     { href: "/coverage", kicker: "coverage", title: "永遠不做的事 · 品牌界線" },
   ],
   "/steelman": [
+    CORRECTIONS,
     { href: "/ethics", kicker: "ethics", title: "9 條永遠不做的承諾" },
     { href: "/audit", kicker: "audit", title: "Model Report · 揭露哲學" },
-    { href: "/calibration", kicker: "calibration", title: "引擎自評 · 公開我們準不準" },
+  ],
+  "/corrections": [
+    { href: "/steelman", kicker: "steelman", title: "反對我們最強的 6 個論點 · 假設性的反方" },
+    { href: "/integrity", kicker: "integrity", title: "22 件永久不會變的事 · 含 3 條已修訂" },
+    AUDIT,
   ],
   // /changelog 已刪 → 換 /track-record
   "/roadmap": [
@@ -170,8 +180,8 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
     { href: "/privacy", kicker: "privacy", title: "付款走手動轉帳 · 0 卡號經過我們 · 完整不追蹤清單" },
   ],
   "/integrity": [
+    CORRECTIONS,
     { href: "/audit", kicker: "audit", title: "Model Report · 7 章 + 揭露區塊" },
-    { href: "/ethics", kicker: "ethics", title: "9 條倫理承諾 · 正式出處" },
     { href: "/steelman", kicker: "steelman", title: "反對 ZONE 27 最強的 6 個論點" },
   ],
   "/receipts/cpbl-260521-01": [

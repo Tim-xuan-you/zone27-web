@@ -217,6 +217,11 @@ export default function IntegrityPage() {
           <p className="text-mute text-sm leading-relaxed mb-6">
             這 13 件「永遠不做」是 ZONE 27 跟賣明牌的站、收費明牌群組劃清界線的
             底線。 違反任一 = 品牌自殺 · 修改需 30 天前公告於公開 GitHub commit 史。
+            其中 3 條我們確實修訂過(下方標「↻ 已修訂」)· 完整經過收在{" "}
+            <Link href="/corrections" className="text-gold underline-offset-4 hover:underline">
+              我們搞砸過的事
+            </Link>
+            。
           </p>
           <ol className="space-y-4 mt-4">
             {REDLINES.map((item) => (

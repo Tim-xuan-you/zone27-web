@@ -147,6 +147,16 @@ export const COMMAND_ITEMS: CommandItem[] = [
       "你有多準", "換你當引擎", "self test", "quiz", "互動", "玩玩看",
     ],
   },
+  {
+    label: "我們搞砸過的事 · 公開認錯、不刪",
+    kicker: "/corrections",
+    path: "/corrections",
+    group: "信任文件",
+    keywords: [
+      "corrections", "mistakes", "搞砸", "認錯", "錯誤", "犯錯", "修正", "糾錯",
+      "我們的錯", "改過", "誠實", "honest", "我們搞砸過的事",
+    ],
+  },
 
   // ── 轉換 ───────────────────────────────────────────
   {
