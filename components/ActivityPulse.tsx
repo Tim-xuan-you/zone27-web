@@ -21,16 +21,17 @@ import type { PulseEvent } from "@/lib/pulse";
 function fmtTPE(iso: string, withTime: boolean): string {
   const t = Date.parse(iso);
   if (Number.isNaN(t)) return "";
-  try {
-    return new Intl.DateTimeFormat("zh-Hant", {
-      timeZone: "Asia/Taipei",
-      month: "numeric",
-      day: "numeric",
-      ...(withTime ? { hour: "2-digit", minute: "2-digit", hour12: false } : {}),
-    }).format(new Date(t));
-  } catch {
-    return "";
-  }
+  // 🔴 Asia/Taipei = 固定 UTC+8(無 DST)→ 手動格式化,避免 Intl.DateTimeFormat 在
+  //   Node(server)與瀏覽器(client)之間 ICU 版本差異造成 hydration mismatch
+  //   (同 timeZone 但輸出可能差一個分隔字元 → React 整棵 client 重建 + console 報錯)。
+  //   純算術 + 字串 = server/client 逐位元一致。
+  const d = new Date(t + 8 * 60 * 60 * 1000);
+  const mo = d.getUTCMonth() + 1;
+  const day = d.getUTCDate();
+  if (!withTime) return `${mo}/${day}`;
+  const hh = String(d.getUTCHours()).padStart(2, "0");
+  const mm = String(d.getUTCMinutes()).padStart(2, "0");
+  return `${mo}/${day} ${hh}:${mm}`;
 }
 
 export default function ActivityPulse({ events }: { events: PulseEvent[] }) {
