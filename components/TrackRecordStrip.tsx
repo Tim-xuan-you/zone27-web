@@ -1,4 +1,5 @@
 import Link from "next/link";
+import type { ReactNode } from "react";
 
 // ── ZONE 27 · 引擎公開戰績條(賽事板頂端 · 兩運動共用)· R234 ──────────────────
 // 把品牌最強、對手抄不走的證物(每場預測 ✓命中 / ✕落空、賽前鎖死、永不刪)從「角落
@@ -17,6 +18,7 @@ export default function TrackRecordStrip({
   misses,
   pending = 0,
   href = "/track-record",
+  caption = "賽前鎖死、連輸的都留著、永不刪。",
 }: {
   /** 引擎看好邊 == 終場(✓ 命中) */
   hits: number;
@@ -26,6 +28,9 @@ export default function TrackRecordStrip({
   pending?: number;
   /** 連到完整含輸帳本 · 預設 /track-record(足球板傳 /track-record#soccer 直接開足球視圖) */
   href?: string;
+  /** 板底一行 caption · 預設棒球版兩選一;足球三選一傳專屬版 —— 老實講「和局最難喊、
+   *  幾乎不是任一場首選 → 命中率天生比棒球低、真正的尺是校準」,讓第一眼的 ✓/✕ 不被誤讀成「弱」。 */
+  caption?: ReactNode;
 }) {
   const decided = hits + misses;
   return (
@@ -62,7 +67,7 @@ export default function TrackRecordStrip({
         </div>
 
         <p className="mt-1.5 text-mute/70 text-[12px] leading-snug">
-          賽前鎖死、連輸的都留著、永不刪。
+          {caption}
         </p>
       </Link>
     </section>

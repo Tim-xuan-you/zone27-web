@@ -118,6 +118,7 @@ export default async function SoccerPage() {
           misses={soccerMisses}
           pending={notKicked + awaitingGrade}
           href="/track-record#soccer"
+          caption="足球三選一(主 / 和 / 客)· 和局最難喊,我們連喊不出的和局都老實算自己落空 → 命中率天生比棒球低,真正的尺是校準。"
         />
 
         {/* 你的足球戰績(含輸 · 登入且押過才出現 · client 端對帳不破 ISR · 含你 vs 引擎)*/}

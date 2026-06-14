@@ -63,6 +63,11 @@ export default async function SoccerEngineRecord() {
   );
   const proved = decided.filter((p) => p.verdict === "proved").length;
   const diverged = decided.length - proved;
+  // 和局結構性壓低命中率的「具體證物」· 把抽象說明變成看得見的數字:已對帳裡有幾場其實是和局、
+  // 且被算落空(引擎賽前給了和局機率,但和局幾乎不是最高那欄 → 計分算我們落空,不挑、不藏)。
+  const drawMisses = decided.filter(
+    (p) => p.outcome === "draw" && p.verdict === "diverged",
+  ).length;
   // verdict null = 還沒結算 ≠ 還沒踢:結算每 3h 跑一輪,終場到入帳之間誠實分兩格
   // (時鐘分流在 lib/soccer/locked.ts · 元件 render 不讀時鐘)。
   const pending = preds.filter((p) => p.verdict === null).length;
@@ -155,7 +160,17 @@ export default async function SoccerEngineRecord() {
           <span className="text-bone">為什麼命中率不是我們的排名尺:</span>{" "}
           和局幾乎永遠不是任何一場的「最高機率結果」(長期大致 主勝多 / 和居中 / 客勝其次),
           所以引擎幾乎不會把「和」當首選 —— 這個命中率<span className="text-bone">結構性地低估</span>
-          了引擎讀準和局的能力。 命中率是誠實的計分板,<span className="text-gold">但真正的尺是校準</span>
+          了引擎讀準和局的能力。
+          {drawMisses > 0 && (
+            <>
+              {" "}（光是目前,
+              <span className="font-mono text-bone tabular">{diverged}</span> 場落空裡就有{" "}
+              <span className="font-mono text-bone tabular">{drawMisses}</span>{" "}
+              場其實是和局 —— 引擎賽前明明給了和局機率,只是它不是最高那欄,計分一律算我們落空、
+              <span className="text-gold">不挑、不藏</span>。）
+            </>
+          )}{" "}
+          命中率是誠實的計分板,<span className="text-gold">但真正的尺是校準</span>
           (RPS · 看引擎押的機率分佈準不準,不是只看猜對沒)。 而且足球更難(進球少、平手多),
           <span className="text-bone">命中率再高都不是「神準」</span>(全世界沒有神準引擎)。
         </p>
