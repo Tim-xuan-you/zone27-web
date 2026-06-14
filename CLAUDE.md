@@ -217,7 +217,7 @@ Current pending (as of 2026-05-20 DAY 2 collapse):
   - 引擎永遠免費(他們收明牌費)
   - 不賣 tipster picks · 我們公開 engine sim 您自己看
   - PROVED + DIVERGED 等大公開(他們輸了刪文)
-  - model 完整公開在 GitHub(他們黑箱)
+  - 方法完整「解釋」公開在 /methodology + /audit · 失敗模式照掛(他們黑箱)〔🔴 R237 2026-06-14:Tim 拍板「站上不再提 GitHub/開源」· repo 仍公開(部署/Action)但**站上任何訪客面絕不再 feature/連結 GitHub·開源·原始碼·fork·MIT·公開 commit 史**;差異化 = 方法解釋公開 + 公開戰績,不是「程式碼在 GitHub」。 commit `373e893`〕
   - 創作者抽傭業界最低:GOLD 抽 5% · BLACK 抽 10%(Substack 10% · OnlyFans 20% · YouTube 45%)· 動態 10%→5% floor
 - **不假裝:** 我們抽 5-10%(GOLD 5% / BLACK 10%)· 跟 LINE 老師 5-30% 抽傭結構同類 · 我們只是抽得少 · 不講「我們不抽傭」 = honest disclosure
 - **同類成功 displacement model:** Defector vs ESPN · Stratechery vs CNBC · Bloomberg Terminal vs 各券商 · Bill James vs MLB establishment
