@@ -94,7 +94,8 @@ function str(v: unknown): string {
 
 // 已結算 + 賽前鎖定引擎線的場(CPBL finalized + MLB locked)· 都帶 engineFav · 給跨用戶對帳。
 // 只收「鎖定過引擎線」的場 → 沒有未鎖定 MLB 的後見之明問題(同 /member 帳本誠信修)。
-function buildIdMatches(): IdentityMatch[] {
+// exported:私人聯盟標準(lib/leagues)重用同一份「棒球榜」對帳基準(CPBL+MLB · 零漂移)。
+export function buildIdMatches(): IdentityMatch[] {
   const out: IdentityMatch[] = [];
   for (const m of [...getFinalizedMatches(), ...getMlbLockedMatches()]) {
     out.push({

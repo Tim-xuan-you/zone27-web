@@ -402,6 +402,20 @@ export default async function MemberPage() {
             R204:從一行小字升成「連結 + 一鍵複製」卡(轉換審 P1:核心 costly-signal 入口太隱)。 */}
         <ProfileShareCard code={authorCode} />
 
+        {/* 私人預測聯盟(R236)· 把含輸帳本變成「跟朋友整季較勁」的盟(校準計分 · 不是連勝)·
+            同列樣式守極簡 · 接在公開檔後 = 賺來的地位 → 揪朋友一起比。 */}
+        <Link
+          href="/member/leagues"
+          className="mt-6 flex items-baseline justify-between gap-3 border-b border-line/40 pb-3 hover:border-gold/40 transition-colors group"
+        >
+          <span className="text-mute text-sm leading-snug">
+            揪朋友開一個<span className="text-bone">私人預測聯盟</span> · 整季比誰最會讀球(校準計分 · 不是連勝)
+          </span>
+          <span className="shrink-0 font-mono text-gold/70 group-hover:text-gold text-[10px] tracking-[0.3em] transition-colors">
+            我的盟 →
+          </span>
+        </Link>
+
         {/* 本月賽季回顧入口(R220 稽核:已建好但只在 /u 連得到 → 接到會員頁)· 有本月押注才連 ·
             同「看收藏」列樣式(不新增大卡 · 守會員頁極簡)。 */}
         {hasSeasonActivity && (

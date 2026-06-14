@@ -33,6 +33,7 @@ const FOOTER_GROUPS: FooterGroup[] = [
       { label: "足球 · 世界盃開盤", href: "/soccer" },
       { label: "活動脈動 · 大家在押什麼", href: "/pulse" },
       { label: "海選天梯", href: "/ladder" },
+      { label: "私人預測聯盟", href: "/member/leagues" },
       { label: "模擬實驗室", href: "/lab" },
     ],
   },

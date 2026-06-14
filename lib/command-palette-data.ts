@@ -105,6 +105,16 @@ export const COMMAND_ITEMS: CommandItem[] = [
     ],
   },
   {
+    label: "私人預測聯盟 · 揪朋友比誰最會讀球",
+    kicker: "/member/leagues",
+    path: "/member/leagues",
+    group: "賽事 · 引擎",
+    keywords: [
+      "league", "聯盟", "私人聯盟", "預測聯盟", "fantasy", "朋友", "揪團",
+      "群組", "join", "建立", "加入", "邀請碼", "比準度", "誰最準",
+    ],
+  },
+  {
     label: "推演引擎 · 模擬實驗室",
     kicker: "/lab",
     path: "/lab",
