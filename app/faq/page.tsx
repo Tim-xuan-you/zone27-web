@@ -34,7 +34,7 @@ const CATEGORIES: Category[] = [
         q: "什麼是 ZONE 27?",
         a: (
           <>
-            <strong className="text-bone">ZONE 27 = 賭徒的 Bloomberg Terminal。</strong> 客群 = 會下注的 sports 迷(包括賭徒)· 對標靠賣明牌賺錢的對手 · 提供更好的資訊層。 不同他們的是:引擎永遠免費 · 不賣明牌 · PROVED + DIVERGED 等大公開 · model 完整 GitHub 公開。 您拿我們的資料自己決定下哪個 platform · ZONE 27 自己不接受下注(我們不是賭場)。 老實認:BLACK 訂閱者寫文章賣 · ZONE 27 抽 5% commission(業界最低 · Substack 10% / OnlyFans 20% / YouTube 45%)· 不假裝「我們不抽傭」。 Phase 1 CPBL · Phase 2 NBA + 未來 leagues · Tim 親手 curate。 完整 brand 方法論見{" "}
+            <strong className="text-bone">ZONE 27 = 賭徒的 Bloomberg Terminal。</strong> 客群 = 會下注的 sports 迷(包括賭徒)· 對標靠賣明牌賺錢的對手 · 提供更好的資訊層。 不同他們的是:引擎永遠免費 · 不賣明牌 · PROVED + DIVERGED 等大公開 · 方法完整公開(見 /methodology + /audit)。 您拿我們的資料自己決定下哪個 platform · ZONE 27 自己不接受下注(我們不是賭場)。 老實認:BLACK 訂閱者寫文章賣 · ZONE 27 抽 5% commission(業界最低 · Substack 10% / OnlyFans 20% / YouTube 45%)· 不假裝「我們不抽傭」。 Phase 1 CPBL · Phase 2 NBA + 未來 leagues · Tim 親手 curate。 完整 brand 方法論見{" "}
             <Link href="/about" className="text-gold underline-offset-4 hover:underline">
               /about
             </Link>
@@ -244,14 +244,9 @@ const CATEGORIES: Category[] = [
             賽後我們會自動生成「AI 偏差值報告」,公開告訴會員模型在哪個變數失算
             (例如:「先發投手第 3 局變化球轉速高於賽季平均 15%」),
             並把這個變數寫進下一次模型迭代。模型升級紀錄持續公開在{" "}
-            <a
-              href="https://github.com/Tim-xuan-you/zone27-web/commits/main"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gold underline-offset-4 hover:underline"
-            >
-              GitHub commit 史
-            </a>
+            <Link href="/methodology/diff" className="text-gold underline-offset-4 hover:underline">
+              /methodology/diff
+            </Link>
             。
           </>
         ),
@@ -284,16 +279,7 @@ const CATEGORIES: Category[] = [
             存{" "}
             <span className="font-mono text-gold/90">Supabase Tokyo</span> 加密 PostgreSQL ·
             RLS 鎖住 · 連 publishable key 都讀不到全表 · 只能透過 SECURITY DEFINER 回傳 COUNT。
-            不分享 · 不販售 · 不轉手。 完整 schema{" "}
-            <a
-              href="https://github.com/Tim-xuan-you/zone27-web/blob/main/supabase/migrations/0001_waitlist.sql"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gold underline-offset-4 hover:underline"
-            >
-              GitHub
-            </a>
-            {" "}審計 ·{" "}
+            不分享 · 不販售 · 不轉手。 完整儲存方式見{" "}
             <Link href="/privacy" className="text-gold underline-offset-4 hover:underline">
               /privacy §04
             </Link>
@@ -319,16 +305,14 @@ const CATEGORIES: Category[] = [
         q: "怎麼取消等候名單?",
         a: (
           <>
-            隨時 ·{" "}
+            隨時 · 寄信到{" "}
             <a
-              href="https://github.com/Tim-xuan-you/zone27-web/issues"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="mailto:tatayngiti@gmail.com?subject=ZONE%2027%20%C2%B7%20UNSUBSCRIBE"
               className="text-gold underline-offset-4 hover:underline"
             >
-              GitHub Issues
+              tatayngiti@gmail.com
             </a>
-            {" "}留 email · Tim 24h 內從 Supabase 永久刪除 · 不留備份。
+            {" "}· Tim 24h 內從 Supabase 永久刪除 · 不留備份。
             等候名單不收費 · 不簽約 · 不綁定。
           </>
         ),

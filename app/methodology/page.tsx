@@ -155,7 +155,6 @@ export default function MethodologyPage() {
             seed={null}
             dataAt="2026-05-22"
             n={10000}
-            fileLink="https://github.com/Tim-xuan-you/zone27-web/blob/main/lib/simulator.ts"
           />
         </div>
         <p className="text-mute/80">
@@ -173,17 +172,8 @@ export default function MethodologyPage() {
           ,PROVED ✓ 與 DIVERGED ✕ 等大列出 · 不藏 miss。
         </p>
         <p>
-          本白皮書解釋這個引擎的每一個內部決策、簡化假設、與已知限制。
-          所有程式碼皆開源:
-          <a
-            href="https://github.com/Tim-xuan-you/zone27-web/blob/main/lib/simulator.ts"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-gold underline-offset-4 hover:underline mx-1"
-          >
-            lib/simulator.ts
-          </a>
-          。
+          本白皮書解釋這個引擎的每一個內部決策、簡化假設、與已知限制 ——
+          每一步推導都寫在下面各節,不藏一行邏輯。
         </p>
         <p className="text-mute/80">
           <strong className="text-bone">想要兩分鐘的速覽版?</strong> 完整 model
@@ -257,16 +247,14 @@ repeat 10,000 times → aggregate
             /roadmap
           </Link>
           · 含 LOCKED / EXPLORING / BRAND BOUNDARIES 三段。
-          每次升級都出現在
-          <a
-            href="https://github.com/Tim-xuan-you/zone27-web/commits/main"
-            target="_blank"
-            rel="noopener noreferrer"
+          每次升級都會反映在
+          <Link
+            href="/track-record"
             className="text-gold underline-offset-4 hover:underline mx-1"
           >
-            GitHub commit 史
-          </a>
-          · 變動 commit message 公開可審。
+            公開戰績
+          </Link>
+          · 變動公開可審。
         </p>
         <p className="text-mute/80 text-sm">
           引擎核心出處:Bill James <em>Baseball Abstract</em> (1985) · Pete Palmer
@@ -281,15 +269,13 @@ repeat 10,000 times → aggregate
           >
             FanGraphs Glossary
           </a>
-          。引擎程式碼 100% 公開於
-          <a
-            href="https://github.com/Tim-xuan-you/zone27-web/blob/main/lib/simulator.ts"
-            target="_blank"
-            rel="noopener noreferrer"
+          。引擎方法 100% 公開於本頁與
+          <Link
+            href="/methodology/diff"
             className="text-gold underline-offset-4 hover:underline mx-1"
           >
-            lib/simulator.ts
-          </a>
+            /methodology/diff
+          </Link>
           。
         </p>
       </Section>
@@ -379,7 +365,7 @@ repeat 10,000 times → aggregate
         <ul className="space-y-2 mt-3 text-mute">
           <li className="flex gap-3 items-baseline">
             <span className="font-mono text-gold/70 text-[10px] tracking-[0.25em]">▸</span>
-            <span className="flex-1">publish entire methodology(simulator-vN.ts on GitHub · per /audit S05 disclosure-philosophy)</span>
+            <span className="flex-1">publish entire methodology(每版引擎方法全攤在 /methodology · per /audit S05 disclosure-philosophy)</span>
           </li>
           <li className="flex gap-3 items-baseline">
             <span className="font-mono text-gold/70 text-[10px] tracking-[0.25em]">▸</span>
@@ -391,7 +377,7 @@ repeat 10,000 times → aggregate
           </li>
           <li className="flex gap-3 items-baseline">
             <span className="font-mono text-gold/70 text-[10px] tracking-[0.25em]">▸</span>
-            <span className="flex-1">30-day notice via <a href="https://github.com/Tim-xuan-you/zone27-web/commits/main" target="_blank" rel="noopener noreferrer" className="text-gold underline-offset-4 hover:underline">公開 GitHub commit 史</a> for any rule modification(同 /audit S05 PRE-COMMIT pattern)</span>
+            <span className="flex-1">30-day notice 提前公告 for any rule modification(同 /audit S05 PRE-COMMIT pattern)</span>
           </li>
           <li className="flex gap-3 items-baseline">
             <span className="font-mono text-gold/70 text-[10px] tracking-[0.25em]">▸</span>
@@ -405,7 +391,7 @@ repeat 10,000 times → aggregate
             <span className="text-gold">We built 2 open ones · 1 in queue.</span>
           </p>
           <p className="mt-3 text-mute text-sm leading-relaxed">
-            v0.2 base + v0.3 Park Factor · 各自 lib/simulator-vN.ts on GitHub
+            v0.2 base + v0.3 Park Factor · 各自方法全攤在 /methodology
             可 audit · v0.4 Bayesian ensemble 排程中。 訂閱解鎖 progression
             是 commercial · methodology 永遠不靠 secret · 每個 lens 永久
             viewable 不 silently rotate。
@@ -607,8 +593,7 @@ repeat 10,000 times → aggregate
               </span>
             </div>
             <p className="text-mute text-sm sm:text-base leading-relaxed">
-              <strong className="text-bone">v0.2 BASE</strong> · 逐打席引擎 · 100% client-side · 您 browser 跑 10K simulations · 同
-              GitHub source · 詳見{" "}
+              <strong className="text-bone">v0.2 BASE</strong> · 逐打席引擎 · 100% client-side · 您 browser 跑 10K simulations · 詳見{" "}
               <Link
                 href="/methodology/diff"
                 className="text-gold underline-offset-4 hover:underline"
@@ -697,15 +682,13 @@ repeat 10,000 times → aggregate
             </div>
             <p className="text-mute text-sm sm:text-base leading-relaxed">
               下一個要做什麼還沒拍板 · 不是預先承諾的清單。 已經 ship 的東西
-              記在{" "}
-              <a
-                href="https://github.com/Tim-xuan-you/zone27-web/commits/main"
-                target="_blank"
-                rel="noopener noreferrer"
+              會反映在{" "}
+              <Link
+                href="/track-record"
                 className="text-gold underline-offset-4 hover:underline"
               >
-                GitHub commit 史
-              </a>
+                公開戰績
+              </Link>
               · 長期方向看{" "}
               <Link
                 href="/roadmap"
@@ -741,11 +724,11 @@ repeat 10,000 times → aggregate
           </p>
           <p className="text-mute leading-relaxed text-base mb-4">
             <span className="text-bone">ZONE 27「自 v0.1 起每個 lens 永久看得到」</span>。
-            未來你 fork 我們的 GitHub repo · 用 git log 找 v0.1 的準度變化 ·
-            都查得到。 賣明牌的站輸了就刪文 · 我們是保留版本 + 永久留下記錄。
+            每一版引擎、每一版準度變化 · 都永久查得到 ·
+            賽果攤在公開戰績。 賣明牌的站輸了就刪文 · 我們是保留版本 + 永久留下記錄。
           </p>
           <p className="font-mono text-mute/80 text-[10px] tracking-[0.3em] leading-relaxed">
-            ⚓ 修改此 pledge 需 30 天前公告於公開 GitHub commit 史 · 同 /audit S05
+            ⚓ 修改此 pledge 需 30 天前公告 · 同 /audit S05
             PRE-COMMIT pattern。
           </p>
         </div>
@@ -767,7 +750,7 @@ repeat 10,000 times → aggregate
               <strong className="text-bone">引擎的原理:把整場球在電腦裡打一萬次</strong> ·
               每個打席依投手指標擲一次機率、累加成完整 9 局、再重複一萬場 ·
               數哪一隊贏比較多次,就是引擎輸出的勝率。 沒有玄學、沒有黑箱 ·
-              完整程式碼公開在 GitHub(<Mono>lib/simulator.ts</Mono> · MIT 授權)· 任何工程師可複製驗證。
+              完整方法寫在本頁各節 · 任何人可逐步複製驗證。
             </p>
             <p className="mt-1 text-mute/65 text-[12px] font-mono">
               ▸{" "}
@@ -842,15 +825,6 @@ repeat 10,000 times → aggregate
               >
                 en.wikipedia.org/wiki/Central_limit_theorem
               </a>
-              <br />▸{" "}
-              <a
-                href="https://github.com/Tim-xuan-you/zone27-web/blob/main/lib/simulator.ts"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gold/80 hover:text-gold underline-offset-4 hover:underline break-all"
-              >
-                github.com/Tim-xuan-you/zone27-web · lib/simulator.ts
-              </a>
             </p>
           </li>
           <li id="footnote-4" className="border-l-2 border-gold/50 pl-4">
@@ -886,14 +860,12 @@ repeat 10,000 times → aggregate
           </li>
         </ol>
         <p className="mt-6 text-mute/65 text-[12px] leading-relaxed border-t border-line/40 pt-4">
-          ▸ 發現 broken link / 過期 URL / 更好的 primary source · 發 PR 到{" "}
+          ▸ 發現 broken link / 過期 URL / 更好的 primary source · 寫信到{" "}
           <a
-            href="https://github.com/Tim-xuan-you/zone27-web"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="mailto:tatayngiti@gmail.com"
             className="text-gold/80 hover:text-gold underline-offset-4 hover:underline"
           >
-            zone27-web GitHub
+            tatayngiti@gmail.com
           </a>
           {" "}· 我們不藏出處 · 歡迎你指正。
         </p>
@@ -908,12 +880,11 @@ repeat 10,000 times → aggregate
       <FounderSignOff>
         <p>
           這份白皮書沒有打算讓所有人讀完。寫給的對象是
-          <strong>「想自己 fork 來改」的工程師朋友</strong>。
+          <strong>真的想搞懂引擎怎麼算的朋友</strong>。
         </p>
         <p>
-          <code className="font-mono text-bone bg-slate/40 px-1.5 py-0.5 rounded-sm">lib/simulator.ts</code>
-          {" "}是真實程式碼 · 不是 marketing pseudo-code ·
-          您比我更懂的話請發 PR 修我們。
+          上面寫的每一步都是引擎真正在做的事 · 不是 marketing pseudo-code ·
+          您比我更懂的話 · 歡迎寫信告訴我哪裡該修。
         </p>
         <p>
           ABSTRACT 裡的 ±2% 是引擎內部一致性 · 不是 calibration accuracy ·

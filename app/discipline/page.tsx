@@ -422,11 +422,7 @@ export default function DisciplinePage() {
                 <strong className="text-bone">非協商的紀律邊界</strong>。
               </Item>
               <Item label="不是不能挑戰">
-                如果您看到我們違反任何一條 · 請開{" "}
-                <ExtLink href="https://github.com/Tim-xuan-you/zone27-web/issues">
-                  GitHub Issue
-                </ExtLink>{" "}
-                公開指出。違反這 5 條 = ZONE 27 變質。
+                如果您看到我們違反任何一條 · 寫信公開指出。違反這 5 條 = ZONE 27 變質。
               </Item>
             </List>
           </RuleSection>

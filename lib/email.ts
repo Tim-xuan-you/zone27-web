@@ -168,7 +168,7 @@ function buildHtmlBody({
 
 <!-- Footer trust line -->
 <p style="margin:0 0 6px 0;font-family:${mono};color:#8A93A8;font-size:10px;letter-spacing:3px;text-align:center;">FUNDED BY GOLD · NO VC · NO ADS · NO TRACKERS</p>
-<p style="margin:0;color:#8A93A8;font-size:11px;text-align:center;line-height:1.7;"><a href="https://zone27-web.vercel.app" style="color:#D4AF37;text-decoration:none;">zone27-web.vercel.app</a> · <a href="https://github.com/Tim-xuan-you/zone27-web" style="color:#D4AF37;text-decoration:none;">github 開源</a></p>
+<p style="margin:0;color:#8A93A8;font-size:11px;text-align:center;line-height:1.7;"><a href="https://zone27-web.vercel.app" style="color:#D4AF37;text-decoration:none;">zone27-web.vercel.app</a></p>
 <p style="margin:14px 0 0 0;color:#8A93A8;font-size:11px;text-align:center;line-height:1.7;">想退出?reply UNSUBSCRIBE · 我手動移除您 · 不用 click track link</p>
 
 </td></tr>

@@ -51,7 +51,7 @@ export default function CorrectionsPage() {
           {/* Cold Gold Hairline · 品牌記號 */}
           <div className="zone27-rule max-w-[280px] mb-6" aria-hidden="true" />
           <p className="font-mono text-mute text-xs tracking-[0.3em] tabular mb-6">
-            目前公開 {CORRECTIONS.length} 件 · 只增不刪 · 連公開 commit
+            目前公開 {CORRECTIONS.length} 件 · 只增不刪 · 連到原始紀錄
           </p>
           <p
             className="text-mute text-base leading-relaxed mb-4 zh-body"
@@ -59,7 +59,7 @@ export default function CorrectionsPage() {
           >
             別人的網站把搞砸的事藏在最深處,或乾脆刪掉。 我們把自己做錯、
             後來自己抓到並修好的事,集中記在這一頁。 每一筆都寫清楚:
-            <strong className="text-bone">當初錯在哪 → 怎麼被發現 → 哪天修的 → 連到公開的程式碼紀錄。</strong>
+            <strong className="text-bone">當初錯在哪 → 怎麼被發現 → 哪天修的 → 連到站上原始紀錄。</strong>
           </p>
           <p
             className="text-mute/85 text-sm leading-relaxed zh-body"
@@ -122,7 +122,7 @@ export default function CorrectionsPage() {
             / 這頁只增不刪
           </p>
           <p className="text-mute text-sm leading-relaxed mb-3">
-            未來每一個被我們自己、或被你抓到的真錯,都會進這頁,連到當時的公開 commit。
+            未來每一個被我們自己、或被你抓到的真錯,都會進這頁,連到當時的原始紀錄。
             不挑好聽的留、不悄悄拿掉難看的。
           </p>
           <p className="text-mute/85 text-sm leading-relaxed">
@@ -133,7 +133,7 @@ export default function CorrectionsPage() {
             >
               tatayngiti@gmail.com
             </a>{" "}
-            或開 GitHub Issue,我們補上。
+            告訴我們,我們補上。
           </p>
         </section>
 
@@ -163,14 +163,12 @@ export default function CorrectionsPage() {
             >
               /integrity · 永久不會變的事 →
             </Link>
-            <a
-              href="https://github.com/Tim-xuan-you/zone27-web/commits/main"
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              href="/audit"
               className="font-mono text-mute hover:text-gold text-[10px] tracking-[0.4em] transition-colors"
             >
-              公開 GitHub commit 史 →
-            </a>
+              /audit · 我們為什麼全部公開 →
+            </Link>
           </div>
         </section>
 

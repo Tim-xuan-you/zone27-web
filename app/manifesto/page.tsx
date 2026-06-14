@@ -153,10 +153,13 @@ export default function ManifestoPage() {
               >
                 /methodology
               </Link>{" "}
-              + 30 分鐘 fork 我們的{" "}
-              <ExtLink href="https://github.com/Tim-xuan-you/zone27-web">
-                GitHub repository
-              </ExtLink>
+              +{" "}
+              <Link
+                href="/audit"
+                className="text-gold hover:underline underline-offset-4"
+              >
+                /audit
+              </Link>
               ,就可以複製出功能等效的引擎。沒有算法護城河。
             </P>
             <P>
@@ -469,7 +472,7 @@ export default function ManifestoPage() {
                   PUBLIC · 攤陽光下 · 訪客可驗證
                 </p>
                 <ul className="space-y-2.5 text-mute text-sm leading-relaxed list-none pl-0">
-                  <SynthItem>演算法 · 程式碼 · GitHub source</SynthItem>
+                  <SynthItem>演算法 · 方法論(完整公開)</SynthItem>
                   <SynthItem>方法論 · 假設 · 排除清單</SynthItem>
                   <SynthItem>商業模式 · 完整定價結構</SynthItem>
                   <SynthItem>不收集什麼 · 不做什麼</SynthItem>
@@ -531,7 +534,7 @@ export default function ManifestoPage() {
               </List>
               <P className="text-mute/70">
                 公開做事的方法、把錢收在身分與品味上 — 這套組合不是我們發明的 ·
-                許多把原始碼或內容攤在陽光下的品牌 · 一樣靠信任與認同活得很好。
+                許多把方法或內容攤在陽光下的品牌 · 一樣靠信任與認同活得很好。
                 我們只是把它用在台灣棒球上。
               </P>
             </div>
@@ -558,7 +561,7 @@ export default function ManifestoPage() {
                   反感、想要乾淨的數據與透明的方法論。
                 </Item>
                 <Item label="工程師同好">
-                  習慣讀 paper、檢查 source code、會 fork repo 自己跑驗證的人。
+                  習慣讀 paper、檢查方法、會自己跑驗證的人。
                   你 30 分鐘可以複製我們的引擎 — 我們知道。
                 </Item>
                 <Item label="厭惡掠奪式平台的人">
@@ -628,17 +631,11 @@ export default function ManifestoPage() {
                 </Link>{" "}
                 Section 03
               </li>
-              <li>
-                ▸ 完整原始碼:{" "}
-                <ExtLink href="https://github.com/Tim-xuan-you/zone27-web">
-                  github.com/Tim-xuan-you/zone27-web
-                </ExtLink>
-              </li>
             </ul>
 
             <p className="mt-12 font-mono text-mute text-[10px] tracking-[0.25em]">
               本文件採 ZONE 27 Engineering Disclosure 規範 · 任何版本變動
-              於 GitHub commits 留存 · 不可被刪除
+              都會留存 · 不可被刪除
             </p>
 
             <div className="mt-10 flex items-center justify-center">
@@ -755,25 +752,6 @@ function SynthItem({
       </span>
       <span className="flex-1">{children}</span>
     </li>
-  );
-}
-
-function ExtLink({
-  href,
-  children,
-}: {
-  href: string;
-  children: React.ReactNode;
-}) {
-  return (
-    <a
-      href={href}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="text-gold underline-offset-4 hover:underline"
-    >
-      {children}
-    </a>
   );
 }
 

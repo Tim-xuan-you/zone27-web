@@ -190,16 +190,7 @@ export default function BaseballReceiptPendingView({
                 {locked ? "賽前鎖死 · 等開賽見真章" : "已開賽 · 終場後揭曉"}
               </p>
               <p className="font-mono text-mute/65 text-[10px] tracking-[0.25em] mt-3 leading-relaxed">
-                這條線賽前就鎖進{" "}
-                <a
-                  href="https://github.com/Tim-xuan-you/zone27-web/commits/main"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-gold/80 hover:text-gold underline-offset-4 hover:underline"
-                >
-                  公開的 GitHub 紀錄
-                </a>
-                、改不了 · 賽後命中與落空同等揭露 · 永不刪
+                這條線賽前就鎖死、改不了 · 賽後命中與落空同等揭露 · 永不刪
               </p>
             </div>
 

@@ -72,16 +72,7 @@ export default function TermsPage() {
           <li>▸ 功能、文案、定價、UI 隨時可能調整</li>
           <li>▸ 部分元件標記 <Code>BETA</Code> 是正常狀態</li>
           <li>▸ 我們可能在不通知的情況下進行重大改版</li>
-          <li>▸ 所有改動會公開於{" "}
-            <a
-              href="https://github.com/Tim-xuan-you/zone27-web/commits/main"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gold underline-offset-4 hover:underline"
-            >
-              公開 GitHub commit 史
-            </a>
-          </li>
+          <li>▸ 所有改動都會提前公開公告</li>
         </ul>
       </Section>
 
@@ -158,8 +149,7 @@ export default function TermsPage() {
             不要求填問卷 · 不寄挽留文案 · 我們不裝挽留。
           </li>
           <li>
-            <strong className="text-bone">您退款後仍保留</strong> · GitHub
-            source code(MIT licensed · 我們不能 revoke)· 已下載的 methodology
+            <strong className="text-bone">您退款後仍保留</strong> · 已下載的 methodology
             docs · 全部 /audit + /methodology + /track-record 公開 trust artifacts ·
             這些不在退款範圍 · 我們無權收回。
           </li>
@@ -196,7 +186,7 @@ export default function TermsPage() {
           ▸ 完整 refund 政策同步顯示在 <Link href="/founders" className="text-gold underline-offset-4 hover:underline">/founders Payment Trust block</Link>
           + <Link href="/faq" className="text-gold underline-offset-4 hover:underline">/faq Q「14 天退款怎麼運作」</Link>
           + <Link href="/membership/black-card" className="text-gold underline-offset-4 hover:underline">/membership/black-card hero「14-DAY 退款保證」 chip</Link>
-          · 三處 surface synchronized · 任何 update 需 30 天前公告於公開 GitHub commit 史 · per
+          · 三處 surface synchronized · 任何 update 需 30 天前先公告 · per
           /audit S05 PRE-COMMIT pattern。
         </p>
       </Section>
@@ -248,22 +238,15 @@ export default function TermsPage() {
           所有,保留全部權利。
         </p>
         <p>
-          網站原始碼<strong className="text-bone">完全開源</strong>於 GitHub
-          (採用 MIT 授權):
-        </p>
-        <p>
-          ▸{" "}
-          <a
-            href="https://github.com/Tim-xuan-you/zone27-web"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-gold underline-offset-4 hover:underline"
-          >
-            github.com/Tim-xuan-you/zone27-web
-          </a>
-        </p>
-        <p>
-          您可在 MIT 授權範圍內自由 fork、引用、學習。但<strong className="text-bone">不得</strong>
+          引擎的<strong className="text-bone">方法完整公開</strong>(見{" "}
+          <Link href="/methodology" className="text-gold underline-offset-4 hover:underline">
+            /methodology
+          </Link>
+          {" + "}
+          <Link href="/audit" className="text-gold underline-offset-4 hover:underline">
+            /audit
+          </Link>
+          )· 任何人都可以閱讀、引用、學習。但<strong className="text-bone">不得</strong>
           使用 ZONE 27 品牌名稱、Logo、設計系統再開發競品。
         </p>
       </Section>
@@ -278,7 +261,7 @@ export default function TermsPage() {
           <li>▸ 您因 AI 預測結果產生的任何金錢損失</li>
           <li>▸ 網站宕機或資料暫時無法取用</li>
           <li>
-            ▸ 第三方平台(<Code>GitHub</Code> · <Code>Vercel</Code> ·{" "}
+            ▸ 第三方平台(原始碼代管 · <Code>Vercel</Code> ·{" "}
             <Code>Supabase</Code>(Tokyo ap-northeast-1))的服務中斷或資料事故
           </li>
           <li>▸ 您自身違反本服務條款導致的後果</li>
@@ -288,16 +271,8 @@ export default function TermsPage() {
       {/* ── 09 CHANGES + GOVERNING LAW ──────────── */}
       <Section no="09" label="CHANGES + GOVERNING LAW" zh="條款變更與管轄法律">
         <p>
-          本服務條款可能隨產品演進而調整。所有重大變更會公開於{" "}
-          <a
-            href="https://github.com/Tim-xuan-you/zone27-web/commits/main"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-gold underline-offset-4 hover:underline"
-          >
-            公開 GitHub commit 史
-          </a>
-          。您繼續使用本網站即視為同意修訂後條款。
+          本服務條款可能隨產品演進而調整。所有重大變更都會提前公開公告。
+          您繼續使用本網站即視為同意修訂後條款。
         </p>
         <p>
           本服務條款適用<strong className="text-bone">中華民國法律</strong>。
@@ -311,14 +286,12 @@ export default function TermsPage() {
           TERMS EFFECTIVE 2026 · 05 · 20 · SUPABASE MIGRATION
         </p>
         <p className="text-mute leading-relaxed max-w-md mx-auto">
-          如有疑問請開{" "}
+          如有疑問請寫信給{" "}
           <a
-            href="https://github.com/Tim-xuan-you/zone27-web/issues"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="mailto:tatayngiti@gmail.com?subject=ZONE%2027%20%C2%B7%20terms"
             className="text-gold underline-offset-4 hover:underline"
           >
-            GitHub Issue
+            tatayngiti@gmail.com
           </a>
           。
         </p>

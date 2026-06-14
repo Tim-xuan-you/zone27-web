@@ -1,7 +1,5 @@
-import Link from "next/link";
 import {
   COMMIT_SHA,
-  COMMIT_PERMALINK,
   DEPLOYED_AT,
 } from "@/lib/build-meta";
 
@@ -39,7 +37,7 @@ type Props = {
   engineVersion?: string;
   /** Override the "locked" date · default = build deploy date */
   lockedAt?: string;
-  /** Show BUILD chip · default true(GitHub permalink) */
+  /** Show BUILD chip · default true */
   showBuild?: boolean;
   /** Compact mode strips「ENGINE」/「LOCKED」 prefix labels · for tight slots */
   compact?: boolean;
@@ -61,7 +59,7 @@ export default function EngineStamp({
     <p
       lang="en"
       className={`font-mono text-mute/60 text-[9px] sm:text-[10px] tracking-[0.3em] tabular leading-relaxed ${className}`}
-      title={`ENGINE ${engineVersion} · LOCKED ${dateStr} (Asia/Taipei) · BUILD ${COMMIT_SHA} · click BUILD chip to view the exact commit on GitHub`}
+      title={`ENGINE ${engineVersion} · LOCKED ${dateStr} (Asia/Taipei) · BUILD ${COMMIT_SHA}`}
     >
       {compact ? (
         <>
@@ -71,19 +69,9 @@ export default function EngineStamp({
           {showBuild && (
             <>
               <span className="text-mute/60 mx-2">·</span>
-              {isLocalDev ? (
-                <span className="text-mute/50">{COMMIT_SHA}</span>
-              ) : (
-                <Link
-                  href={COMMIT_PERMALINK}
-                  className="text-mute/70 hover:text-gold underline-offset-4 hover:underline transition-colors"
-                  title="View the exact GitHub commit producing this bundle"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {COMMIT_SHA}
-                </Link>
-              )}
+              <span className={isLocalDev ? "text-mute/50" : "text-mute/70"}>
+                {COMMIT_SHA}
+              </span>
             </>
           )}
         </>
@@ -96,19 +84,9 @@ export default function EngineStamp({
             <>
               <span className="text-mute/60 mx-2">·</span>
               <span className="text-mute/60">BUILD </span>
-              {isLocalDev ? (
-                <span className="text-mute/50">{COMMIT_SHA}</span>
-              ) : (
-                <Link
-                  href={COMMIT_PERMALINK}
-                  className="text-mute/70 hover:text-gold underline-offset-4 hover:underline transition-colors"
-                  title="View the exact GitHub commit producing this bundle"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {COMMIT_SHA}
-                </Link>
-              )}
+              <span className={isLocalDev ? "text-mute/50" : "text-mute/70"}>
+                {COMMIT_SHA}
+              </span>
             </>
           )}
         </>

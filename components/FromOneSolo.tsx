@@ -138,7 +138,7 @@ export default function FromOneSolo() {
             >
               /methodology/diff
             </Link>{" "}
-            · GitHub MIT licensed · 您 fork OK · 您買的是 GOLD 身分 +
+            · 方法完整公開 · 您買的是 GOLD 身分 +
             Tim 親手 onboard · not access to secret · per /audit S05 PRE-COMMIT。
           </li>
         </ol>

@@ -44,11 +44,6 @@ const FOOTER_GROUPS: FooterGroup[] = [
       { label: "公開戰績 · 每場對錯", href: "/track-record" },
       { label: "引擎校準 · 說七成中幾成", href: "/calibration" },
       { label: "我們搞砸過的事 · 公開認錯", href: "/corrections" },
-      {
-        label: "GitHub 開源(全部程式碼)",
-        href: "https://github.com/Tim-xuan-you/zone27-web",
-        external: true,
-      },
     ],
   },
   {
@@ -127,37 +122,23 @@ export default function Footer() {
                 {link.label}
               </Link>
             ))}
-            <a
-              href="https://github.com/Tim-xuan-you/zone27-web"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-mono text-mute hover:text-gold text-[10px] tracking-[0.3em] transition-colors"
-            >
-              GitHub 開源
-            </a>
           </div>
 
           <Link
             href="/privacy"
             className="font-mono text-mute/70 hover:text-gold text-[9px] tracking-[0.3em] transition-colors"
           >
-            不追蹤你 · 0 廣告 · 程式碼公開
+            不追蹤你 · 0 廣告
           </Link>
 
           <div className="flex items-center gap-3 flex-wrap justify-center mt-1">
             <span className="font-mono text-mute/80 text-[10px] tracking-[0.22em]">
               <span className="text-gold">ZONE</span> 27 © 2026 · by Tim
             </span>
-            <a
-              href="https://github.com/Tim-xuan-you/zone27-web/commits/main"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 font-mono text-[9px] tracking-[0.25em] text-mute/70 hover:text-gold transition-colors"
-              title="完整版本歷史 · GitHub commits"
-            >
+            <span className="inline-flex items-center gap-1.5 font-mono text-[9px] tracking-[0.25em] text-mute/70">
               <span className="w-1.5 h-1.5 rounded-full bg-gold/70" />
               {PRODUCT_VERSION} · {getTaipeiTodayChip()} TPE
-            </a>
+            </span>
           </div>
         </div>
       </div>

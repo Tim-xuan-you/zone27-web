@@ -22,7 +22,7 @@
 //     curation)· ZONE 27 ship 等於 displacement narrative concrete
 // ─────────────────────────────────────────────────────
 
-import { COMMIT_SHA, COMMIT_SHA_FULL, GH_OWNER_REPO } from "@/lib/build-meta";
+import { COMMIT_SHA } from "@/lib/build-meta";
 
 type Props = {
   /** RNG seed used · null for deterministic non-MC computations */
@@ -31,7 +31,7 @@ type Props = {
   dataAt?: string;
   /** Sample size · null for derived constants(e.g. CPBL baseline) */
   n?: number | null;
-  /** Optional override of which file produced this number · default uses build commit */
+  /** Deprecated · no longer rendered as a link · kept for caller compatibility */
   fileLink?: string;
   /** Compact mode · smaller chip without full hover detail · use inline beside numbers */
   compact?: boolean;
@@ -41,16 +41,8 @@ export default function ReproducibilityReceipt({
   seed = null,
   dataAt,
   n = null,
-  fileLink,
   compact = false,
 }: Props) {
-  const commitUrl =
-    COMMIT_SHA_FULL === "local"
-      ? `https://github.com/${GH_OWNER_REPO}`
-      : `https://github.com/${GH_OWNER_REPO}/commit/${COMMIT_SHA_FULL}`;
-
-  const sourceUrl = fileLink ?? commitUrl;
-
   // Compact variant · single-line inline chip · uses semantic HTML for screen readers
   if (compact) {
     return (
@@ -67,14 +59,7 @@ export default function ReproducibilityReceipt({
           n !== null ? `sample size ${n}` : "derived constant"
         }`}
       >
-        <a
-          href={sourceUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="hover:text-gold transition-colors underline-offset-2 hover:underline"
-        >
-          ⌗ {COMMIT_SHA}
-        </a>
+        <span>⌗ {COMMIT_SHA}</span>
         {seed !== null && (
           <>
             <span aria-hidden="true" className="text-mute/40">·</span>
@@ -112,14 +97,7 @@ export default function ReproducibilityReceipt({
       </p>
       <div className="grid grid-cols-[auto_1fr] gap-x-3 gap-y-1">
         <span className="text-mute/60">COMMIT</span>
-        <a
-          href={sourceUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-bone hover:text-gold transition-colors underline-offset-2 hover:underline"
-        >
-          {COMMIT_SHA}
-        </a>
+        <span className="text-bone">{COMMIT_SHA}</span>
         {dataAt && (
           <>
             <span className="text-mute/60">DATA AS-OF</span>

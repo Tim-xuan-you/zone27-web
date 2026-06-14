@@ -88,16 +88,7 @@ export default function PrivacyPage() {
           >
             /founders/apply
           </Link>
-          {" "}per Section 02B below · 共 9 fields total。 完整 schema 開放在{" "}
-          <a
-            href="https://github.com/Tim-xuan-you/zone27-web/blob/main/supabase/migrations/0001_waitlist.sql"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-gold underline-offset-4 hover:underline"
-          >
-            supabase/migrations/0001_waitlist.sql
-          </a>
-          ,任何人都可以審計。
+          {" "}per Section 02B below · 共 9 fields total。 就這些 · 沒有藏起來的欄位。
         </p>
       </Section>
 
@@ -189,7 +180,7 @@ export default function PrivacyPage() {
           <strong className="text-bone">不 share 第三方規則</strong> · 您 application
           內容 0 third-party tracking · 0 analytics · 0 marketing list · 0 LLM
           training corpus · 0 cross-product sharing。 違反此 disclosure 需 30 天前
-          公告於公開 GitHub commit 史 + 您可選 opt-out · per /audit S05 + S06 PRE-COMMIT pattern。
+          先公告 + 您可選 opt-out · per /audit S05 + S06 PRE-COMMIT pattern。
         </p>
       </Section>
 
@@ -245,7 +236,7 @@ export default function PrivacyPage() {
             <li>✕ Cloudflare Web Analytics / Plausible(都未安裝)</li>
           </ul>
           <p className="mt-4 font-mono text-mute/70 text-[10px] tracking-[0.3em] leading-relaxed">
-            ▸ 這份清單每加 1 個工具 · 都要 30 天前先在公開 GitHub commit 史公告 ·
+            ▸ 這份清單每加 1 個工具 · 都要 30 天前先公開公告 ·
             從清單上偷砍任何一個 = 品牌信用自殺。
           </p>
         </div>
@@ -290,16 +281,7 @@ export default function PrivacyPage() {
         <p>
           這個架構代表:即使我們公開的 <Code>NEXT_PUBLIC_SUPABASE_ANON_KEY</Code>{" "}
           被任何人撿到,他<strong className="text-bone">依然無法 exfiltrate
-          任何一個 email</strong>。RLS 是物理防線,不是嘴炮。完整 SQL schema 公開於{" "}
-          <a
-            href="https://github.com/Tim-xuan-you/zone27-web/blob/main/supabase/migrations/0001_waitlist.sql"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-gold underline-offset-4 hover:underline"
-          >
-            supabase/migrations/0001_waitlist.sql
-          </a>
-          。
+          任何一個 email</strong>。RLS 是物理防線,不是嘴炮。
         </p>
       </Section>
 
@@ -403,8 +385,8 @@ export default function PrivacyPage() {
             standard data processing agreement
           </li>
           <li>
-            <strong className="text-bone">GitHub</strong>(USA-based · Microsoft) ·
-            source code repository · 不存任何 visitor 個資 · 純 git commit
+            <strong className="text-bone">原始碼代管商</strong>(USA-based) ·
+            source code repository · 不存任何 visitor 個資 · 純版本控制
             metadata
           </li>
           <li>
@@ -430,8 +412,8 @@ export default function PrivacyPage() {
             Resend default 7-day retention · ZONE 27 不主動 export · 不留 local copy
           </li>
           <li>
-            <strong className="text-bone">GitHub commit metadata</strong> ·
-            永久 public · 同 git nature · 不可刪除 · 但您的個資 NEVER appears
+            <strong className="text-bone">版本控制紀錄 metadata</strong> ·
+            永久 public · 不可刪除 · 但您的個資 NEVER appears
             in commit content
           </li>
         </ul>
@@ -447,7 +429,7 @@ export default function PrivacyPage() {
           <li>
             <strong className="text-bone">第 20 條</strong>(原蒐集目的範圍內)
             · 我們承諾不超出 launch 通知 + onboarding 兩個目的 · 任何擴張需 30
-            天前公告於公開 GitHub commit 史 + 您可選 opt-out。
+            天前先公告 + 您可選 opt-out。
           </li>
         </ul>
 
@@ -464,8 +446,8 @@ export default function PrivacyPage() {
           <li>
             <strong className="text-bone">Tim 失蹤 / incapacity 情境</strong>{" "}
             · Tim 健康問題 / 意外 / 失蹤超過 30 天 · 由 Tim 預先指定
-            executor(目前是 Tim 配偶 + Tim 兄弟姊妹 2 人)接管 ZONE 27 GitHub
-            repository + Supabase admin + Resend 帳號 · 處理現有 Founders
+            executor(目前是 Tim 配偶 + Tim 兄弟姊妹 2 人)接管 ZONE 27 原始碼代管
+            + Supabase admin + Resend 帳號 · 處理現有 Founders
             退款 + 公告 brand 狀態
           </li>
           <li>
@@ -497,7 +479,7 @@ export default function PrivacyPage() {
         <p className="mt-6 text-mute/85 text-sm">
           ▸ 完整 PDPA-compliant 承諾 同步顯示在 <Link href="/audit#disclosure" className="text-gold underline-offset-4 hover:underline">/audit DISCLOSURE block</Link>
           + <Link href="/integrity" className="text-gold underline-offset-4 hover:underline">/integrity binding rules</Link>
-          · 任何 update 需 30 天前公告於公開 GitHub commit 史 · per /audit S05 PRE-COMMIT pattern。
+          · 任何 update 需 30 天前先公告 · per /audit S05 PRE-COMMIT pattern。
         </p>
       </Section>
 
@@ -526,7 +508,7 @@ export default function PrivacyPage() {
             <Code>publishable key</Code> 也無法繞過存取邊界
           </li>
           <li>▸ 創辦人本機不留任何 email 副本</li>
-          <li>▸ 若發生資料外洩,72 小時內公開揭露於公開 GitHub 紀錄</li>
+          <li>▸ 若發生資料外洩,72 小時內公開揭露</li>
         </ul>
       </Section>
 
@@ -534,17 +516,15 @@ export default function PrivacyPage() {
       <Section no="08" label="CONTACT" zh="聯絡我們">
         <p>
           官方聯絡 email 將於正式 launch 時公布。在此之前,
-          任何隱私相關詢問可透過 GitHub Issues 提出:
+          任何隱私相關詢問可直接寫信給創辦人:
         </p>
         <p>
           ▸{" "}
           <a
-            href="https://github.com/Tim-xuan-you/zone27-web/issues"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="mailto:tatayngiti@gmail.com?subject=ZONE%2027%20%C2%B7%20privacy"
             className="text-gold underline-offset-4 hover:underline"
           >
-            github.com/Tim-xuan-you/zone27-web/issues
+            tatayngiti@gmail.com
           </a>
         </p>
       </Section>
@@ -555,16 +535,7 @@ export default function PrivacyPage() {
           POLICY EFFECTIVE 2026 · 05 · 20 · SUPABASE MIGRATION
         </p>
         <p className="text-mute leading-relaxed max-w-md mx-auto">
-          所有政策變動會公開於{" "}
-          <a
-            href="https://github.com/Tim-xuan-you/zone27-web/commits/main"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-gold underline-offset-4 hover:underline"
-          >
-            公開 GitHub commit 史
-          </a>
-          。
+          所有政策變動都會提前公開公告 · 不偷改。
         </p>
         <Link
           href="/terms"

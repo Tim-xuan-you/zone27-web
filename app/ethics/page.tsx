@@ -10,7 +10,7 @@ import ReadingProgress from "@/components/ReadingProgress";
 export const metadata: Metadata = {
   title: "Ethics Policy · 9 binding commitments",
   description:
-    "ZONE 27 的 9 條「我永遠不做」承諾,Tim 親筆簽名。對標、取代賣明牌的站、收費明牌群組。每一條都公開、可追蹤,修改任何一條都要 30 天前公告於公開 GitHub commit 史。違反 = 品牌信用崩盤。",
+    "ZONE 27 的 9 條「我永遠不做」承諾,Tim 親筆簽名。對標、取代賣明牌的站、收費明牌群組。每一條都公開、可追蹤,修改任何一條都要 30 天前先公告。違反 = 品牌信用崩盤。",
 };
 
 // /ethics · Stratechery About page transplant · 9 ZONE 27 binding NOT-DO
@@ -20,7 +20,7 @@ const COMMITMENTS: { num: string; title: string; body: string; tier: "displaceme
   {
     num: "01",
     title: "我不賣引擎預測給 bookmakers 或 scrapers",
-    body: "若我收到 offer 來自任何博彩平台 / data scraper / sportsbook 想授權 ZONE 27 引擎輸出 · 我會把 offer 內容 + 我的拒絕 publish 在公開 GitHub 紀錄 · 不私下交易 · 不簽 NDA。",
+    body: "若我收到 offer 來自任何博彩平台 / data scraper / sportsbook 想授權 ZONE 27 引擎輸出 · 我會把 offer 內容 + 我的拒絕公開在 /audit · 不私下交易 · 不簽 NDA。",
     tier: "displacement",
   },
   {
@@ -56,7 +56,7 @@ const COMMITMENTS: { num: string; title: string; body: string; tier: "displaceme
   {
     num: "07",
     title: "我每年 5 月 publish 全年收入 + 開銷 + subscriber count",
-    body: "每年 5/31 publish 年度報告 · 含全年收入 · 全年開銷 · BLACK subscriber count · GOLD 認領數 · 同 /audit S05 PRE-COMMIT pattern · 修改此 publish cadence 需 30 天前公告於公開 GitHub commit 史。",
+    body: "每年 5/31 publish 年度報告 · 含全年收入 · 全年開銷 · BLACK subscriber count · GOLD 認領數 · 同 /audit S05 PRE-COMMIT pattern · 修改此 publish cadence 需 30 天前先公告。",
     tier: "subscriber",
   },
   {
@@ -286,35 +286,35 @@ export default function EthicsPage() {
           </div>
         </section>
 
-        {/* ── 02B · MIT LICENSE LIMIT · honest limit-of-power disclosure ── */}
+        {/* ── 02B · LIMIT OF POWER · honest limit-of-power disclosure ── */}
         <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-12 border-t border-line/40 pt-10">
           <p
             lang="en"
             className="font-mono text-gold text-[10px] tracking-[0.45em] mb-6"
           >
-            / 02B · MIT LICENSE LIMIT · 我們做不到的事
+            / 02B · LIMIT OF POWER · 我們做不到的事
           </p>
           <div className="border border-line/70 bg-slate/30 p-5 sm:p-7">
             <h3 className="text-bone text-lg sm:text-xl font-light tracking-tight mb-4 leading-snug">
-              我們承諾我們不做 · 但我們不能阻止 fork
+              我們承諾我們不做 · 但我們不能阻止別人複製
             </h3>
             <p className="text-mute leading-relaxed mb-4">
-              ZONE 27 引擎是 MIT 授權的開源軟體(這就是我們「方法公開」的原則)。 任何 sportsbook 明天可以 fork lib/simulator.ts +
-              lib/simulator-v03.ts · 包成 odds 服務賣。 我們的 9 commitments
+              ZONE 27 的引擎方法完整公開(這就是我們「方法公開」的原則)。 任何 sportsbook
+              明天都可以照著我們公開的方法,自己做一套 odds 服務賣。 我們的 9 commitments
               只 bind 我們的 actions · <strong className="text-bone">不能 bind
-              code 的流向</strong>。
+              別人怎麼用公開的方法</strong>。
             </p>
             <p className="text-mute/85 leading-relaxed mb-4">
               <strong className="text-bone">透明 limit-of-power 比假裝沒 contradiction 強</strong>。
               此 commitment 「不分潤博彩」 = Tim signs 「ZONE 27 entity 不
-              license / sell / API access 給 sportsbook」 · 不是「ZONE 27 code
-              永遠不會出現在 sportsbook tool」 — 後者是 MIT license 物理 上做
+              license / sell / API access 給 sportsbook」 · 不是「ZONE 27 的方法
+              永遠不會出現在 sportsbook tool」 — 後者在我們把方法公開的前提下,物理上做
               不到。
             </p>
             <p className="font-mono text-mute/80 text-[10px] tracking-[0.3em] leading-relaxed">
-              ⚓ 若 sportsbook fork ZONE 27 · 我們會在{" "}
+              ⚓ 若 sportsbook 拿我們公開的方法去做 · 我們會在{" "}
               <Link href="/audit" className="text-gold underline-offset-4 hover:underline">/audit</Link>
-              {" "}列出 fork 事實 + publicly disavow · 不收 brand 利益關聯。
+              {" "}列出事實 + publicly disavow · 不收 brand 利益關聯。
               限制公開 = 比假裝強大更可信。
             </p>
           </div>
@@ -330,7 +330,7 @@ export default function EthicsPage() {
           </p>
           <div className="border border-loss/30 bg-loss/5 p-5 sm:p-7">
             <h3 className="text-bone text-lg sm:text-xl font-light tracking-tight mb-4 leading-snug">
-              修改任何 commitment 需 30 天前公告於公開 GitHub commit 史
+              修改任何 commitment 需 30 天前先公告
             </h3>
             <p className="text-mute leading-relaxed mb-4">
               同 /audit S05 PRE-COMMIT pattern · 年度報告 yearly publish
@@ -339,10 +339,10 @@ export default function EthicsPage() {
               加 / 條件砍 · 全部需要:
             </p>
             <ol className="space-y-2 list-decimal pl-6 text-mute leading-relaxed mb-4">
-              <li>30 天前在公開 GitHub commit 史 publish 公告 · 含 before/after diff + 理由</li>
-              <li>30 天 freeze window · visitor 可在此期間發 GitHub Issue 反對</li>
-              <li>30 天後新 commitment 生效 · /ethics page rewrite · git commit 為 source of truth</li>
-              <li>每次修改在 commit message 強制 cite issue link · audit trail 1-click 可達</li>
+              <li>30 天前公開公告 · 含 before/after diff + 理由</li>
+              <li>30 天 freeze window · visitor 可在此期間寫信反對</li>
+              <li>30 天後新 commitment 生效 · /ethics page rewrite · 公開紀錄為 source of truth</li>
+              <li>每次修改都留下公開可追溯的紀錄 · audit trail 可達</li>
             </ol>
             <p className="font-mono text-mute/80 text-[10px] tracking-[0.25em] leading-relaxed">
               ⚓ 事前綁定的承諾 · 比事後找理由強 100× ·
@@ -385,17 +385,14 @@ export default function EthicsPage() {
           <ul className="space-y-3 text-mute leading-relaxed zh-body">
             <li>
               <strong className="text-bone">您的 Founder ID + ledger row</strong>{" "}
-              · 在{" "}
-              <a
-                href="https://github.com/Tim-xuan-you/zone27-web"
-                target="_blank"
-                rel="noopener noreferrer"
+              · 公開顯示在{" "}
+              <Link
+                href="/founders/ledger"
                 className="text-gold underline-offset-4 hover:underline"
               >
-                GitHub zone27-web
-              </a>{" "}
-              repository · MIT licensed · 您 fork 自己 host 沒問題 · per /audit
-              S05 + /transparency 02 NEVER list
+                /founders/ledger
+              </Link>
+              {" "}· 任何人都查得到、隨時可截圖留存 · per /audit S05 NEVER list
             </li>
             <li>
               <strong className="text-bone">您的 PDF 證書 + welcome kit</strong>{" "}
@@ -454,7 +451,7 @@ export default function EthicsPage() {
             <strong>不是 marketing copy</strong>。 9 條是 hard commitments +
             單人風險的接管安排 · 違反任一條 = brand 信用
             collapse · 即使違反 1 次 · /ethics page 上會出現「{COMMITMENTS[0].num}
-            {" "}- VIOLATED YYYY-MM-DD · see GitHub」 紅色 alert · 永久
+            {" "}- VIOLATED YYYY-MM-DD」 紅色 alert · 永久
             visible · per /audit S05 PRE-COMMIT
             「不刪不藏」 pattern。
           </p>
@@ -466,7 +463,7 @@ export default function EthicsPage() {
             這 6 條 == 他們整個 revenue model 構成。
           </p>
           <p>
-            修改此 page 9 commitments 需 30 天前公告於公開 GitHub commit 史 · 同{" "}
+            修改此 page 9 commitments 需 30 天前先公告 · 同{" "}
             <Link href="/audit#section-05" className="text-gold hover:underline">/audit S05</Link>{" "}
             PRE-COMMIT pattern · 用實際成本背書 · 同{" "}
             <Link href="/integrity" className="text-gold hover:underline">/integrity 22 binding rules</Link>{" "}

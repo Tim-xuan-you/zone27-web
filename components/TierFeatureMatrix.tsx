@@ -74,8 +74,8 @@ const FEATURES: Feature[] = [
     },
   },
   {
-    label: "GitHub MIT 開源可 fork",
-    detail: "全 model code public · 不藏 algorithm",
+    label: "引擎方法完整公開",
+    detail: "演算法 · 假設 · 排除清單全攤開 · 不藏 algorithm",
     unlock: {
       anonymous: "unlocked",
       free: "unlocked",

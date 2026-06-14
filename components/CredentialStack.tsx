@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { COMMIT_SHA, COMMIT_PERMALINK } from "@/lib/build-meta";
+import { COMMIT_SHA } from "@/lib/build-meta";
 import { getFinalizedMatches, matches } from "@/lib/matches";
 
 // ── ZONE 27 · Credential Stack ────────────────────────
@@ -60,15 +60,7 @@ export default function CredentialStack() {
             v0.2 LIVE
           </p>
           <p className="font-mono text-mute/85 text-[11px] tracking-[0.15em] mt-1 tabular">
-            BUILD{" "}
-            <a
-              href={COMMIT_PERMALINK}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gold/85 hover:text-gold underline-offset-4 hover:underline"
-            >
-              {COMMIT_SHA}
-            </a>
+            BUILD <span className="text-gold/85">{COMMIT_SHA}</span>
           </p>
           <p className="font-mono text-mute/65 text-[10px] tracking-[0.2em] mt-2">
             N={finalizedCount} receipts · {ingestedCount} ingested

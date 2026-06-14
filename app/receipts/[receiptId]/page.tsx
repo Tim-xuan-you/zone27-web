@@ -303,16 +303,7 @@ export default async function ReceiptPage({ params }: { params: Params }) {
           <div className="zone27-rule max-w-[320px] mb-6" aria-hidden="true" />
           <p className="text-mute text-base leading-relaxed">
             這一頁,就是那張收據本身。 賽前鎖定的預測 + 賽後的結果 —— 命中或落空,都釘在這裡、改不了。
-            要改內容,得 30 天前先公告在{" "}
-            <a
-              href="https://github.com/Tim-xuan-you/zone27-web/commits/main"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gold underline-offset-4 hover:underline"
-            >
-              公開的 GitHub 紀錄
-            </a>
-            (誰都查得到的那份)。
+            要改內容,得 30 天前先公開公告(誰都查得到的那份)。
           </p>
         </section>
 
@@ -598,7 +589,7 @@ export default async function ReceiptPage({ params }: { params: Params }) {
             也不會偷偷記錄 —— 跟我在隱私頁講的一樣,不追蹤。
           </p>
           <p>
-            這張收據的內容我不能偷偷改。 真要更正,得 30 天前先公告在公開的 GitHub 紀錄上,
+            這張收據的內容我不能偷偷改。 真要更正,得 30 天前先公開公告,
             誰都查得到。 命中我留著,落空我也留著 —— 這就是這整個站值得信的地方。
           </p>
         </FounderSignOff>

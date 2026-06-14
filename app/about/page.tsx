@@ -7,7 +7,7 @@ import { SUPPORT_EMAIL } from "@/lib/brand-constants";
 export const metadata: Metadata = {
   title: "關於 · 有帳本的玩運彩",
   description:
-    "收費明牌輸了刪文、黑箱、喊神準。 ZONE 27 引擎免費、輸了照掛、程式碼全公開、誠實講沒人能準。 一個看 27 年中華職棒的球迷做的,不是博彩公司。",
+    "收費明牌輸了刪文、黑箱、喊神準。 ZONE 27 引擎免費、輸了照掛、方法全公開、誠實講沒人能準。 一個看 27 年中華職棒的球迷做的,不是博彩公司。",
 };
 
 // ── ZONE 27 · /about ───────────────────────────────────
@@ -38,7 +38,7 @@ const THEM = [
 const US: { text: string; href?: string; external?: boolean }[] = [
   { text: "引擎永遠免費 · 自己跑一萬次", href: "/lab" },
   { text: "輸了照掛 · 刪不掉", href: "/track-record" },
-  { text: "整套程式碼公開在 GitHub", href: "https://github.com/Tim-xuan-you/zone27-web", external: true },
+  { text: "方法完整公開 · 怎麼算的都攤開", href: "/methodology" },
   { text: "誠實講:全世界最準也才 5 成 7", href: "/calibration" },
 ];
 
@@ -127,15 +127,13 @@ export default function AboutPage() {
             </p>
             <p className="mt-3 text-mute text-sm sm:text-base leading-relaxed">
               不是公司、不是工程師、不是博彩業者 —— 就是受不了「收錢報明牌、輸了刪文」
-              這套劇本反覆上演。 每天的進度都 commit 在{" "}
-              <a
-                href="https://github.com/Tim-xuan-you/zone27-web/commits/main"
-                target="_blank"
-                rel="noopener noreferrer"
+              這套劇本反覆上演。 每一場預測都攤在{" "}
+              <Link
+                href="/track-record"
                 className="text-gold/90 underline-offset-4 hover:underline"
               >
-                GitHub
-              </a>
+                公開戰績
+              </Link>
               ;輸的紀錄刪不掉 —— 因為「刪不掉」才是整件事的重點。
             </p>
             <p className="mt-3 text-mute/80 text-sm leading-relaxed">

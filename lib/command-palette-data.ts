@@ -135,7 +135,7 @@ export const COMMAND_ITEMS: CommandItem[] = [
       "track", "record", "戰績", "proved", "diverged", "ledger", "準不準",
       "對了", "錯了", "命中", "中沒中", "命中率", "準度", "歷史紀錄",
       "對錯", "預測紀錄", "賭神", "報明牌", "誰才是神", "audit", "稽核",
-      "方法公開", "methodology", "白皮書", "開源",
+      "方法公開", "methodology", "白皮書",
     ],
   },
   {
@@ -205,14 +205,6 @@ export const COMMAND_ITEMS: CommandItem[] = [
     keywords: [
       "login", "登入", "註冊", "register", "signup", "password", "密碼", "email", "auth",
     ],
-  },
-  {
-    label: "GitHub · 完整原始碼開源",
-    kicker: "github.com/Tim-xuan-you/zone27-web",
-    path: "https://github.com/Tim-xuan-you/zone27-web",
-    group: "工具 · 外部",
-    keywords: ["github", "source", "code", "原始碼", "open source", "mit", "公開", "驗證"],
-    external: true,
   },
 ];
 

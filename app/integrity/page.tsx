@@ -142,8 +142,8 @@ const ETHICS_COMMITMENTS: ReadonlyArray<{
   },
   {
     no: "08",
-    rule: "0 fine print · 任何 rule modification 30 天前公告於公開 GitHub commit 史",
-    basis: "/audit S05 PRE-COMMIT clause · 修改任一 rule 需 30 天前公告於公開 GitHub commit 史 · 此 page integrity 同 binding · 違反 = brand 信用 collapse",
+    rule: "0 fine print · 任何 rule modification 30 天前提前公告",
+    basis: "/audit S05 PRE-COMMIT clause · 修改任一 rule 需 30 天前提前公告 · 此 page integrity 同 binding · 違反 = brand 信用 collapse",
   },
   {
     no: "09",
@@ -216,7 +216,7 @@ export default function IntegrityPage() {
           </p>
           <p className="text-mute text-sm leading-relaxed mb-6">
             這 13 件「永遠不做」是 ZONE 27 跟賣明牌的站、收費明牌群組劃清界線的
-            底線。 違反任一 = 品牌自殺 · 修改需 30 天前公告於公開 GitHub commit 史。
+            底線。 違反任一 = 品牌自殺 · 修改需 30 天前提前公告。
             其中 3 條我們確實修訂過(下方標「↻ 已修訂」)· 完整經過收在{" "}
             <Link href="/corrections" className="text-gold underline-offset-4 hover:underline">
               我們搞砸過的事
@@ -327,8 +327,8 @@ export default function IntegrityPage() {
                 </div>
                 <p className="text-mute text-[12px] sm:text-sm leading-relaxed">
                   FREE tier 訪客看到的 win probability = BLACK 訂閱者 = GOLD 永久會員
-                  · 同一份 lib/simulator.ts 同一份 lib/matches.ts 跑出來 · 任何時刻 fork repo
-                  可驗證 · 違反 = Tim 親手 在 /ethics 紅字標永久 audit trail
+                  · 同一個引擎、同一份賽事資料跑出來 · 任何人比對得出來
+                  · 違反 = Tim 親手 在 /ethics 紅字標永久 audit trail
                 </p>
               </li>
               <li className="border-l-2 border-gold/40 pl-4 py-2">
@@ -426,19 +426,25 @@ export default function IntegrityPage() {
           </p>
           <ol className="space-y-2.5 text-mute text-sm leading-relaxed ml-4">
             <li>
-              <strong className="text-bone">1.</strong> Tim 親手寫一筆公開
-              GitHub 紀錄 · 註明 modify which rule · 為什麼 · 30 天 notice period
+              <strong className="text-bone">1.</strong> Tim 親手公開記一筆 ·
+              註明 modify which rule · 為什麼 · 30 天 notice period
               開始 dated。
             </li>
             <li>
               <strong className="text-bone">2.</strong> 30 天內 fan 可以
-              讀那筆公開 GitHub 紀錄 · 公開反對 via GitHub Issue OR email
+              讀那筆公開紀錄 · 公開反對 via email
               tatayngiti@gmail.com · Tim 親手 reply 解釋 reasoning。
             </li>
             <li>
               <strong className="text-bone">3.</strong> 30 天後 IF Tim 仍
-              堅持 modify · /integrity page entry 更新 · 並 append 公開 GitHub
-              紀錄 second entry「modified, effective YYYY-MM-DD」。
+              堅持 modify · /integrity page entry 更新 · 並收進{" "}
+              <Link
+                href="/corrections"
+                className="text-gold underline-offset-4 hover:underline"
+              >
+                我們搞砸過的事
+              </Link>
+              {" "}「modified, effective YYYY-MM-DD」。
             </li>
             <li>
               <strong className="text-bone">4.</strong> 違反 protocol(silently
@@ -447,7 +453,7 @@ export default function IntegrityPage() {
             </li>
             <li>
               <strong className="text-bone">5.</strong> 加 NEW binding rule
-              同 protocol · Tim 親手 signature 一句即決 · 公開 GitHub 紀錄
+              同 protocol · Tim 親手 signature 一句即決 · 公開記一筆
               「added, effective YYYY-MM-DD」· 「擴」 protocol 跟「改」
               protocol 同 axis · 不藏 hidden expansion。
             </li>
@@ -465,12 +471,12 @@ export default function IntegrityPage() {
           </p>
           <p>
             如果未來你看到 ZONE 27 違反任一條 · 你有權質問:email
-            tatayngiti@gmail.com 直接問 Tim · 或開 GitHub Issue 公開留下記錄 ·
-            或在 /faq 留言。 「方法公開 · 品味私藏」這八個字寫進承諾裡 ·
+            tatayngiti@gmail.com 直接問 Tim · 或在 /faq 留言。
+            「方法公開 · 品味私藏」這八個字寫進承諾裡 ·
             沒有藏起來的彈性空間。
           </p>
           <p>
-            修改任一條都要提前 30 天在公開 GitHub commit 史公告。 違反這個流程 =
+            修改任一條都要提前 30 天公告。 違反這個流程 =
             品牌信用崩掉 · 你永遠有權檢查、有權公開質問。
           </p>
         </FounderSignOff>
@@ -496,14 +502,12 @@ export default function IntegrityPage() {
             >
               /audit § 02 · 13 NEVER source →
             </Link>
-            <a
-              href="https://github.com/Tim-xuan-you/zone27-web/commits/main"
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              href="/corrections"
               className="font-mono text-mute hover:text-gold text-[10px] tracking-[0.4em] transition-colors"
             >
-              公開 GitHub commit 史 →
-            </a>
+              /corrections · 我們搞砸過的事 →
+            </Link>
           </div>
         </section>
       </main>

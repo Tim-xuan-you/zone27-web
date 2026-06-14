@@ -108,16 +108,14 @@ export default function NotFound() {
               / IF YOU FOLLOWED A LINK
             </p>
             <p className="text-mute text-xs leading-relaxed">
-              ZONE 27 完整的變動歷史在{" "}
-              <a
-                href="https://github.com/Tim-xuan-you/zone27-web/commits/main"
-                target="_blank"
-                rel="noopener noreferrer"
+              ZONE 27 每一場預測的對錯都記在{" "}
+              <Link
+                href="/track-record"
                 className="text-gold underline-offset-4 hover:underline"
               >
-                GitHub commits
-              </a>
-              (唯一事實來源)。
+                公開戰績
+              </Link>
+              {" "}— 連輸都掛、刪不掉。
             </p>
           </div>
         </section>

@@ -101,7 +101,14 @@ export default function RefusalLedgerHint() {
         上線前狀態 · 這 5 條{" "}
         <strong className="text-bone">已經是綁定的承諾</strong>{" "}
         · 第一筆真實拒絕發生後 · Tim 會親手更新每週件數 + 拒絕原因範例(去個資)·
-        要修改任何一條 · 都得 30 天前先在公開 GitHub commit 史公告 · 只增不刪。
+        要修改任何一條 · 都得 30 天前先公開公告 · 只增不刪 · 紀錄公開在{" "}
+        <Link
+          href="/corrections"
+          className="text-gold/80 hover:text-gold underline-offset-4 hover:underline"
+        >
+          /corrections
+        </Link>
+        。
       </p>
 
       <ol className="space-y-3 mt-6">

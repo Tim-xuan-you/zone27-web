@@ -1,4 +1,4 @@
-import { COMMIT_SHA, COMMIT_PERMALINK } from "@/lib/build-meta";
+import { COMMIT_SHA } from "@/lib/build-meta";
 
 // ── ZONE 27 · Provenance Stamp ─────────────────────────
 // Citation-grade footer for every page that shows engine output.
@@ -60,15 +60,9 @@ export default function ProvenanceStamp({ matchId, className = "" }: Props) {
           ·
         </span>
         <span lang="en">BUILD </span>
-        <a
-          href={COMMIT_PERMALINK}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-mute/80 hover:text-gold underline-offset-4 hover:underline"
-          title={`此頁產出的 commit · GitHub permalink · ${COMMIT_SHA}`}
-        >
+        <span lang="en" className="text-mute/80">
           {COMMIT_SHA}
-        </a>
+        </span>
         {matchId && (
           <>
             <span className="text-mute/60 mx-2" aria-hidden="true">
@@ -80,14 +74,12 @@ export default function ProvenanceStamp({ matchId, className = "" }: Props) {
         )}
       </p>
       <p className="mt-1 text-mute/50">
-        引擎產出可截圖引用 · 任何結果可重現 ·{" "}
+        引擎產出可截圖引用 · 任何結果可重現 · 方法公開於{" "}
         <a
-          href="https://github.com/Tim-xuan-you/zone27-web/blob/main/lib/simulator.ts"
-          target="_blank"
-          rel="noopener noreferrer"
+          href="/methodology"
           className="text-mute/70 hover:text-gold underline-offset-4 hover:underline"
         >
-          fork lib/simulator.ts
+          /methodology
         </a>
       </p>
     </div>

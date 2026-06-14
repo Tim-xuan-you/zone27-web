@@ -13,7 +13,6 @@ import LocalStorageReceipt from "@/components/LocalStorageReceipt";
 import { matches, getFinalizedMatches, getTrackRecordStats } from "@/lib/matches";
 import {
   COMMIT_SHA,
-  COMMIT_PERMALINK,
   DEPLOYED_AT,
   PRODUCT_VERSION,
 } from "@/lib/build-meta";
@@ -195,7 +194,7 @@ export default function AuditPage() {
                 /ethics
               </Link>
               )。 Section 05 DISCLOSURE PHILOSOPHY 解釋為什麼 publish 這些 ·
-              GitHub source 公開全模型 · 不留 secret。
+              方法完整公開 · 不留 secret。
             </p>
             {/* R161 W1.O3 · Agent O Gap 3 · lateral cross-link to sibling
                 disclosure surfaces · /audit 是 trust artifact hub but star-graph
@@ -253,11 +252,14 @@ export default function AuditPage() {
             </P>
             <P>
               引擎完全在使用者瀏覽器內執行(JavaScript runtime),無後端 API
-              呼叫,可離線運作。原始碼公開於{" "}
-              <ExtLink href="https://github.com/Tim-xuan-you/zone27-web/blob/main/lib/simulator.ts">
-                lib/simulator.ts
-              </ExtLink>
-              ,任何人可 fork、reproduce、稽核。
+              呼叫,可離線運作。完整方法公開於{" "}
+              <Link
+                href="/methodology"
+                className="text-gold underline-offset-4 hover:underline"
+              >
+                /methodology
+              </Link>
+              ,每一個機率推導、簡化假設與已知限制都寫清楚。
             </P>
             <P className="text-mute/70">
               想看完整工程白皮書(引擎架構、PA 機率推導、壘間物理規則、CLT 證明)?
@@ -330,17 +332,10 @@ export default function AuditPage() {
               </p>
               <p className="text-mute text-sm leading-relaxed">
                 CPBL 主站 cpbl.com.tw 不公開投手 plate-appearance 級 K/9 · BB/9 ·
-                HR/9 真值。 ZONE 27 從球速 + ERA + 聯盟均值反推 estimate ·{" "}
-                <ExtLink href="https://github.com/Tim-xuan-you/zone27-web/blob/main/lib/matches.ts">
-                  lib/matches.ts
-                </ExtLink>
-                {" "}註解 explicit 標每位投手的 estimate path · 不藏。 但 W-I
-                自動 fetch cpbl.com.tw 主站 K/9 BB/9 HR/9 leaderboard · 16+
-                qualifying 投手已 auto-overlay real values from{" "}
-                <ExtLink href="https://github.com/Tim-xuan-you/zone27-web/blob/main/lib/cpbl-pitchers.ts">
-                  lib/cpbl-pitchers.ts
-                </ExtLink>
-                (npm run fetch-cpbl 1 鍵 30 秒 refresh)。
+                HR/9 真值。 ZONE 27 從球速 + ERA + 聯盟均值反推 estimate · 每位
+                投手的 estimate path 都 explicit 標出來 · 不藏。 此外自動 fetch
+                cpbl.com.tw 主站 K/9 BB/9 HR/9 leaderboard · 16+ qualifying
+                投手已 auto-overlay 官方真值。
               </p>
               <p className="text-mute/70 text-xs leading-relaxed mt-3">
                 這個 caveat 是 disclosure philosophy 的物理產出 ·
@@ -366,11 +361,8 @@ export default function AuditPage() {
                   stats.cpbl.com.tw
                 </ExtLink>
                 {" "}CPBL 進階數據(Trackman radar)· wOBA-against · K% · 揮空% ·
-                強擊球% · 擊球初速 Avg/Max · CPBL 內部 percentile。 fetch script{" "}
-                <ExtLink href="https://github.com/Tim-xuan-you/zone27-web/blob/main/scripts/fetch-cpbl-advanced.mjs">
-                  GitHub 公開
-                </ExtLink>
-                · 不假裝自己 collect Trackman data。
+                強擊球% · 擊球初速 Avg/Max · CPBL 內部 percentile。 資料直接取自
+                官方 · 不假裝自己 collect Trackman data。
               </p>
             </div>
             <P className="text-mute/70">
@@ -420,15 +412,21 @@ export default function AuditPage() {
               </Item>
             </List>
             <P className="text-mute/70">
-              完整程式碼公開於{" "}
-              <ExtLink href="https://github.com/Tim-xuan-you/zone27-web/blob/main/lib/simulator.ts">
-                lib/simulator.ts
-              </ExtLink>
-              {" · "}任何 simplification 都可在 30 秒內 verify。
-              當預測明顯偏離時,變動會出現在{" "}
-              <ExtLink href="https://github.com/Tim-xuan-you/zone27-web/commits/main">
-                GitHub commit 史
-              </ExtLink>
+              完整方法公開於{" "}
+              <Link
+                href="/methodology"
+                className="text-gold underline-offset-4 hover:underline"
+              >
+                /methodology
+              </Link>
+              {" · "}任何 simplification 都寫得清清楚楚。
+              當預測明顯偏離時,逐場結果會出現在{" "}
+              <Link
+                href="/track-record"
+                className="text-gold underline-offset-4 hover:underline"
+              >
+                公開戰績
+              </Link>
               ,對應變數會寫進下一次引擎迭代。
             </P>
 
@@ -459,7 +457,7 @@ export default function AuditPage() {
                   48 隊的分數是創辦人手工錨定的近似值(量級對齊公開的國際 Elo
                   排名 · 非即時、非官方)。 老實說:這套近似值的強弱差距壓得比真實
                   榜單窄 · 大熱門可能被我們系統性低開 —— 校準圖會照實畫出這件事 ·
-                  之後由創辦人對照賽果手動修(每次改動都在 GitHub commit 史)
+                  之後由創辦人對照賽果手動修(每次改動都公開記錄)
                 </Item>
                 <Item label="主場規則">
                   世界盃是中立場 —— 只有被列為主隊的地主(美國 / 墨西哥 / 加拿大)
@@ -478,14 +476,20 @@ export default function AuditPage() {
                 </Item>
               </List>
               <P className="text-mute/70">
-                完整程式碼公開於{" "}
-                <ExtLink href="https://github.com/Tim-xuan-you/zone27-web/tree/main/lib/soccer">
-                  lib/soccer/
-                </ExtLink>
+                完整方法公開於{" "}
+                <Link
+                  href="/methodology"
+                  className="text-gold underline-offset-4 hover:underline"
+                >
+                  /methodology
+                </Link>
                 {" · "}賽前鎖定的每一場(含機率、實力分、鎖定時間戳)都在{" "}
-                <ExtLink href="https://github.com/Tim-xuan-you/zone27-web/blob/main/lib/soccer-locked.json">
-                  lib/soccer-locked.json
-                </ExtLink>
+                <Link
+                  href="/track-record"
+                  className="text-gold underline-offset-4 hover:underline"
+                >
+                  公開戰績
+                </Link>
                 {" · "}任何人可逐場核對。
               </P>
             </div>
@@ -549,7 +553,6 @@ export default function AuditPage() {
                 seed={null}
                 dataAt="2026-05-22"
                 n={10000}
-                fileLink="https://github.com/Tim-xuan-you/zone27-web/blob/main/app/audit/page.tsx"
               />
             </div>
           </ReportSection>
@@ -565,7 +568,7 @@ export default function AuditPage() {
               <DataRow
                 label="OUR MATH"
                 value="機率 + 一萬次模擬"
-                note="每打席算機率 · 在電腦裡跑一萬次數誰贏 · 高中數學等級 · 圖書館 + GitHub 全公開"
+                note="每打席算機率 · 在電腦裡跑一萬次數誰贏 · 高中數學等級 · 方法全公開"
               />
               <DataRow
                 label="OUR INPUTS"
@@ -574,8 +577,8 @@ export default function AuditPage() {
               />
               <DataRow
                 label="OUR ENGINE"
-                value="GitHub 開源"
-                note="JavaScript 寫的 · 任何工程師 30 分鐘可複製"
+                value="方法完整公開"
+                note="JavaScript 寫的 · 邏輯全攤在 /methodology"
               />
               <DataRow
                 label="OUR MOAT"
@@ -634,8 +637,9 @@ export default function AuditPage() {
                   · 不撤、不藏、不在 7 天內被新的蓋掉</li>
                 <li>/track-record ledger 編號不重排 · DIVERGED entry 跟
                   PROVED entry 共用同 sort order(time-based)</li>
-                <li>每筆 DIVERGED 自動帶 git commit permalink 至 lib/matches.ts
-                  該 finalResult 的 ingest commit · audit trail 1-click 可達</li>
+                <li>每筆 DIVERGED 都永久留在{" "}
+                  <Link href="/track-record" className="text-gold hover:underline underline-offset-4">公開戰績</Link>
+                  · 標賽前機率與賽後實際結果 · 任何人可逐場核對</li>
                 <li>不開「為什麼 diverged 解釋」excuse paragraph — 留空 ·
                   讓數字自己說話</li>
               </ul>
@@ -674,10 +678,14 @@ export default function AuditPage() {
                 </p>
               </div>
               <p className="font-mono text-mute/80 text-[10px] tracking-[0.25em] leading-relaxed mt-3">
-                本規則適用 engine v0.X 全部版本 · 修改需至少 30 天前公告於{" "}
-                <ExtLink href="https://github.com/Tim-xuan-you/zone27-web/commits/main">
-                  公開 GitHub commit 史
-                </ExtLink>
+                本規則適用 engine v0.X 全部版本 · 修改需至少 30 天前公告 ·
+                收進{" "}
+                <Link
+                  href="/corrections"
+                  className="text-gold/80 hover:text-gold underline-offset-4 hover:underline"
+                >
+                  我們搞砸過的事
+                </Link>
                 。 先講好規則 · 比事後找理由解釋更可信。
               </p>
             </div>
@@ -765,7 +773,7 @@ export default function AuditPage() {
             </P>
 
             <P className="text-mute/70">
-              修改此 localStorage transparency policy 需 30 天前公告於公開 GitHub commit 史 ·
+              修改此 localStorage transparency policy 需 30 天前公告 ·
               同 Section 05 PRE-COMMIT pattern · 新 localStorage key 加入時
               此表必須同步 update · 對不上 = 品牌自殺。
             </P>
@@ -818,11 +826,14 @@ export default function AuditPage() {
             </P>
 
             <P className="text-mute/70">
-              引擎 v0.3 程式碼公開:
-              <ExtLink href="https://github.com/Tim-xuan-you/zone27-web/blob/main/lib/simulator-v03.ts">
-                lib/simulator-v03.ts
-              </ExtLink>
-              {" "}· 同 v0.2 simulator.ts 同 repo · 任何工程師可 fork
+              引擎 v0.3 方法完整公開於{" "}
+              <Link
+                href="/methodology/diff"
+                className="text-gold underline-offset-4 hover:underline"
+              >
+                /methodology/diff
+              </Link>
+              {" "}· 逐行 diff 攤出 v0.2 → v0.3 改了什麼
               · 30 分鐘理解 · per /methodology Section 04 ENGINE LINEUP。
             </P>
           </ReportSection>
@@ -890,12 +901,6 @@ export default function AuditPage() {
             </p>
             <ul className="space-y-3 text-sm text-mute leading-relaxed">
               <li>
-                ▸ 程式碼:{" "}
-                <ExtLink href="https://github.com/Tim-xuan-you/zone27-web">
-                  github.com/Tim-xuan-you/zone27-web
-                </ExtLink>
-              </li>
-              <li>
                 ▸ 親手跑一場:{" "}
                 <Link href="/lab" className="text-gold hover:underline">
                   /lab
@@ -915,10 +920,10 @@ export default function AuditPage() {
                 </Link>
               </li>
               <li>
-                ▸ 版本與變動歷史:{" "}
-                <ExtLink href="https://github.com/Tim-xuan-you/zone27-web/commits/main">
-                  GitHub commit 史
-                </ExtLink>
+                ▸ 逐場戰績與結果:{" "}
+                <Link href="/track-record" className="text-gold hover:underline">
+                  公開戰績
+                </Link>
               </li>
             </ul>
 
@@ -933,15 +938,9 @@ export default function AuditPage() {
                 commit that built this page. */}
             <p className="mt-3 font-mono text-mute/60 text-[10px] tracking-[0.2em] tabular">
               BUILD ·{" "}
-              <a
-                href={COMMIT_PERMALINK}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-mute/80 hover:text-gold underline-offset-4 hover:underline"
-                title={`This page built from commit ${COMMIT_SHA} · deployed ${DEPLOYED_AT}`}
-              >
+              <span className="text-mute/80">
                 {COMMIT_SHA} · {DEPLOYED_AT}
-              </a>
+              </span>
             </p>
 
             {/* ── Share this report · private-DM lever ──
@@ -963,7 +962,7 @@ export default function AuditPage() {
             「我們現在做不到什麼」清單 · 寫進來反而踏實。
           </p>
           <p>
-            您比我更懂的話可以發 PR 修我們。
+            您比我更懂的話 · 歡迎寫信告訴我哪裡該修。
           </p>
         </FounderSignOff>
 

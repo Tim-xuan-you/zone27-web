@@ -53,7 +53,7 @@ type ComparisonRow = {
 
 const ROWS: ComparisonRow[] = [
   {
-    axis: "公開 engine source code(GitHub MIT)",
+    axis: "公開引擎方法(演算法 · 假設 · 排除清單)",
     paidTip: "none",
     closedModel: "none",
     zone27: "full",

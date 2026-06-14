@@ -50,7 +50,7 @@ export const CORRECTIONS: ReadonlyArray<Correction> = [
     caught:
       "轉方向時,自己回頭對照 /integrity 一條一條檢查抓到的。",
     fixed:
-      "我們沒有偷偷改掉、假裝沒寫過 —— 在每一條旁邊標「已修訂」,寫清楚原文是什麼、為什麼改。 並立下流程:之後要改任何一條,都必須提前 30 天公告在公開的 commit 史。",
+      "我們沒有偷偷改掉、假裝沒寫過 —— 在每一條旁邊標「已修訂」,寫清楚原文是什麼、為什麼改。 並立下流程:之後要改任何一條,都必須提前 30 天公告,並把改動逐筆記在這一頁。",
     source: { label: "/integrity · ↻ 已修訂的條款", href: "/integrity#section-01" },
   },
 ];

@@ -120,26 +120,8 @@ export default function MethodologyDiffPage() {
           </p>
           <p>
             這頁是 entire delta · 同 React.dev release notes · Stripe API
-            changelog · Anthropic model card revision history。 您可以打開
-            兩個 tab 對照{" "}
-            <a
-              href="https://github.com/Tim-xuan-you/zone27-web/blob/main/lib/simulator.ts"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gold underline-offset-4 hover:underline"
-            >
-              lib/simulator.ts
-            </a>{" "}
-            +{" "}
-            <a
-              href="https://github.com/Tim-xuan-you/zone27-web/blob/main/lib/simulator-v03.ts"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gold underline-offset-4 hover:underline"
-            >
-              lib/simulator-v03.ts
-            </a>
-            {" "}· 不需 fork。
+            changelog · Anthropic model card revision history。 v0.2 與 v0.3
+            的每一處差異 · 下面各節逐行攤出來 · 不用你自己去翻一行行程式。
           </p>
           <p className="text-mute/80">
             <strong className="text-bone">靠賣明牌的站不 publish 引擎 diff。</strong>
@@ -217,7 +199,6 @@ export default function MethodologyDiffPage() {
               seed={null}
               dataAt="2026-05-22"
               n={null}
-              fileLink="https://github.com/Tim-xuan-you/zone27-web/blob/main/lib/simulator-v03.ts#L51"
             />
           </div>
         </Section>
@@ -292,17 +273,9 @@ export default function MethodologyDiffPage() {
           </p>
 
           <p className="text-mute/80 text-sm leading-relaxed">
-            完整 v0.3 source: 88 行 · 含 simulateGameV03 + applyOutcomeV03 +
+            完整 v0.3 邏輯: 88 行 · 含 simulateGameV03 + applyOutcomeV03 +
             ENGINE_V03_TRACE_STEPS preset。 95% 同 v0.2 邏輯 · 5% Park Factor
-            adjustment。{" "}
-            <a
-              href="https://github.com/Tim-xuan-you/zone27-web/blob/main/lib/simulator-v03.ts"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gold underline-offset-4 hover:underline"
-            >
-              view source →
-            </a>
+            adjustment · 全部攤在本頁各節。
           </p>
         </Section>
 
@@ -406,7 +379,6 @@ export default function MethodologyDiffPage() {
               seed={null}
               dataAt="2026-05-22"
               n={null}
-              fileLink="https://github.com/Tim-xuan-you/zone27-web/blob/main/lib/cpbl-parks.ts"
             />
           </div>
         </Section>
@@ -458,16 +430,8 @@ export default function MethodologyDiffPage() {
             <Link href="/roadmap" className="text-gold underline-offset-4 hover:underline">
               /roadmap
             </Link>{" "}
-            列得到 · 30 天前在{" "}
-            <a
-              href="https://github.com/Tim-xuan-you/zone27-web/commits/main"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gold underline-offset-4 hover:underline"
-            >
-              公開 GitHub commit 史
-            </a>{" "}
-            公告 modifications · 同 /audit S05 PRE-COMMIT pattern。
+            列得到 · 任何 modifications 都 30 天前提前公告 · 同 /audit S05
+            PRE-COMMIT pattern。
           </p>
         </Section>
 
@@ -502,7 +466,7 @@ export default function MethodologyDiffPage() {
               </li>
               <li className="flex gap-3 items-baseline">
                 <span className="font-mono text-gold/70 text-[10px] tracking-[0.25em]">▸</span>
-                <span>Source code published lib/simulator-v04.ts · 同 v0.2 + v0.3 pattern · 不藏</span>
+                <span>v0.4 方法完整公開 · 同 v0.2 + v0.3 pattern · 不藏</span>
               </li>
               <li className="flex gap-3 items-baseline">
                 <span className="font-mono text-gold/70 text-[10px] tracking-[0.25em]">▸</span>
@@ -512,11 +476,11 @@ export default function MethodologyDiffPage() {
           </div>
 
           <p className="mt-6 text-mute/85 leading-relaxed">
-            <strong className="text-bone">v0.4 ship 前 30 天公告於公開 GitHub commit 史 ·
+            <strong className="text-bone">v0.4 ship 前 30 天提前公告 ·
             modifications via 同 /audit S05 PRE-COMMIT pattern。</strong>{" "}
             訂閱 BLACK 不是「等 model 神奇升級」 · 是 see-through 看
-            entire process · v0.4 ship 那天 您可以打開 lib/simulator-v04.ts
-            audit 整個 Bayesian weight derivation · 不需相信 marketing。
+            entire process · v0.4 ship 那天 整個 Bayesian weight derivation
+            會跟此頁一樣逐行攤開 · 不需相信 marketing。
           </p>
         </Section>
 
@@ -540,7 +504,7 @@ export default function MethodologyDiffPage() {
               不 silently rotate。
             </p>
             <p className="font-mono text-mute/80 text-[10px] tracking-[0.3em] leading-relaxed">
-              ⚓ 修改此承諾需 30 天前公告於公開 GitHub commit 史 · 同 /audit S05
+              ⚓ 修改此承諾需 30 天前提前公告 · 同 /audit S05
               「先承諾」原則 · 用實際成本背書。
             </p>
           </div>
@@ -554,7 +518,7 @@ export default function MethodologyDiffPage() {
           </p>
           <p>
             列得出來的 6 件 v0.3 不修正 · 一條一條寫在 Section 05。
-            您比我懂進階數據 · 看到漏了什麼請發 PR。
+            您比我懂進階數據 · 看到漏了什麼 · 歡迎寫信告訴我。
           </p>
           <p>
             v0.4 ship 那天 · 同此頁 pattern publish v0.3 → v0.4 diff。
@@ -584,14 +548,12 @@ export default function MethodologyDiffPage() {
             >
               ← 回完整白皮書
             </Link>
-            <a
-              href="https://github.com/Tim-xuan-you/zone27-web/blob/main/lib/simulator-v03.ts"
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              href="/lab"
               className="px-8 py-3 bg-gold text-navy text-xs tracking-[0.3em] hover:bg-gold-soft transition-colors"
             >
-              v0.3 SOURCE →
-            </a>
+              親手跑引擎 →
+            </Link>
           </div>
 
           <div className="mt-12 pt-8 border-t border-line/40 flex items-center justify-center">

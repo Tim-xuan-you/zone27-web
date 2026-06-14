@@ -287,14 +287,14 @@ export default function BlackCardLedgerPage() {
             / 03 · PRE-COMMIT LEDGER RULES
           </p>
           <h2 className="text-2xl sm:text-3xl text-bone font-light tracking-tight mb-6 leading-tight">
-            5 rules · 修改需 30 天前公告於公開 GitHub commit 史
+            5 rules · 修改需 30 天前先公告
           </h2>
           <ol className="space-y-4">
             {[
               "Handle 完全 opt-in · 默認顯示「—」 · row 1 永遠是第 1 位 · 編號不重排",
               "Months sustained · cancel 後不 delete row · state 從 active 改 cancelled · 保留歷史",
               "Aggregate count 數字 sync 此 ledger row count · 不在其他 page hardcode 矛盾數字",
-              "新訂閱 batch 寫入時間 = payment confirmation 時間 · 不可 backdate · git commit 為 source of truth",
+              "新訂閱 batch 寫入時間 = payment confirmation 時間 · 不可 backdate · 公開紀錄為 source of truth",
               "就算 0 付費會員 · 空名冊也永遠留在頁面上 · 不藏不假裝",
             ].map((rule, i) => (
               <li
@@ -326,7 +326,7 @@ export default function BlackCardLedgerPage() {
             這個 page 是 structural moat 不是 marketing decoration。
           </p>
           <p>
-            修改這頁的 5 條規則 · 需要 30 天前先在公開 GitHub commit 史公告。
+            修改這頁的 5 條規則 · 需要 30 天前先公開公告。
           </p>
         </FounderSignOff>
 

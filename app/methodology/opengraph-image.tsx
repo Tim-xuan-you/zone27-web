@@ -144,7 +144,7 @@ export default async function MethodologyOgImage() {
           <PaperRow label="ITERATIONS / SIM" value="10,000" />
           <PaperRow label="STANDARD ERROR" value="± 0.5%" />
           <PaperRow label="EVENT MODEL" value="8-outcome PA · Markov" />
-          <PaperRow label="OPEN SOURCE" value="github.com/Tim-xuan-you/zone27-web" />
+          <PaperRow label="METHOD" value="方法公開 · /methodology" />
         </div>
 
         {/* BOTTOM · CTA */}

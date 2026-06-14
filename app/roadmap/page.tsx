@@ -10,7 +10,7 @@ import ReadingProgress from "@/components/ReadingProgress";
 export const metadata: Metadata = {
   title: "Roadmap · 公開路線圖 · 含品牌鐵律",
   description:
-    "ZONE 27 接下來在做什麼 · 在評估什麼 · 不變的品牌鐵律是什麼。GitHub commit 史是過去的記錄;這頁是未來的承諾。沒有「即將推出」的銷售話術,只有 LOCKED / EXPLORING / BRAND BOUNDARIES 三類。",
+    "ZONE 27 接下來在做什麼 · 在評估什麼 · 不變的品牌鐵律是什麼。公開戰績是過去的記錄;這頁是未來的承諾。沒有「即將推出」的銷售話術,只有 LOCKED / EXPLORING / BRAND BOUNDARIES 三類。",
 };
 
 // ── ZONE 27 · /roadmap ───────────────────────────────
@@ -184,15 +184,13 @@ export default function RoadmapPage() {
           接下來在做什麼 · 在評估什麼 · <span className="text-gold">不變的鐵律是什麼</span>
         </h1>
         <p className="mt-6 text-mute leading-relaxed max-w-2xl">
-          <a
-            href="https://github.com/Tim-xuan-you/zone27-web/commits/main"
-            target="_blank"
-            rel="noopener noreferrer"
+          <Link
+            href="/track-record"
             className="text-gold underline-offset-4 hover:underline"
           >
-            GitHub commit 史
-          </a>
-          {" "}是過去的事實(git 為 source of truth)· 這頁是未來的承諾。
+            公開戰績
+          </Link>
+          {" "}是過去的事實 · 這頁是未來的承諾。
           <strong className="text-bone">公開鐵律比含糊承諾更難</strong> —
           所以底下有一個「BRAND BOUNDARIES」section · 跟 LOCKED / EXPLORING 同等視覺權重。
         </p>
@@ -339,7 +337,7 @@ export default function RoadmapPage() {
             FULL DISCLOSURE · PAST · PRESENT · FUTURE
           </p>
           <p className="text-mute text-sm leading-relaxed max-w-md mx-auto">
-            GitHub commit 史是過去 · 首頁是現在 · /roadmap 是未來。
+            公開戰績是過去 · 首頁是現在 · /roadmap 是未來。
             三端封閉時間軸 = 訪客可在任意時刻檢驗我們是否守諾。
           </p>
         </div>
@@ -351,8 +349,7 @@ export default function RoadmapPage() {
         </p>
         <p>
           EXPLORING 區塊那幾項都還沒落地 · BRAND BOUNDARIES 區塊那幾項
-          是我已經想清楚不做。任何項目 timing 偏差 · 在 GitHub 公開 commit 史看得到 ·
-          因為 git history 不可改。
+          是我已經想清楚不做。任何項目 timing 偏差 · 都會留下公開、不可改的紀錄。
         </p>
         <p>
           沒有「即將推出」的銷售話術 · 只有 LOCKED / EXPLORING /
@@ -364,14 +361,12 @@ export default function RoadmapPage() {
 
       {/* ── BACK ─────────────────────────────────── */}
       <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-24 text-center">
-        <a
-          href="https://github.com/Tim-xuan-you/zone27-web/commits/main"
-          target="_blank"
-          rel="noopener noreferrer"
+        <Link
+          href="/track-record"
           className="font-mono text-mute hover:text-gold text-[10px] tracking-[0.4em] transition-colors"
         >
-          ← 看過去的事實 · GitHub commit 史
-        </a>
+          ← 看過去的事實 · 公開戰績
+        </Link>
       </section>
 
       </main>
