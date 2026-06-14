@@ -171,7 +171,7 @@ export default async function MemberOgImage() {
               display: "flex",
             }}
           >
-            /member →
+            /member
           </span>
         </div>
       </div>
@@ -208,7 +208,7 @@ function BiasChip({ label, zh }: { label: string; zh: string }) {
           display: "flex",
         }}
       >
-        ψ {label}
+        {label}
       </span>
       <span
         style={{

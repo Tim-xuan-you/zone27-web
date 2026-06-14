@@ -164,7 +164,7 @@ export default async function AboutOgImage() {
               display: "flex",
             }}
           >
-            /about · 6 chapters →
+            /about · 6 chapters
           </span>
         </div>
       </div>

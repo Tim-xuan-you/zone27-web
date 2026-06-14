@@ -175,7 +175,7 @@ export default async function CalibrationOgImage() {
               display: "flex",
             }}
           >
-            /calibration →
+            /calibration
           </span>
         </div>
       </div>

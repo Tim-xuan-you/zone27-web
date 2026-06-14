@@ -182,7 +182,7 @@ export default async function BlackCardLedgerOgImage() {
               display: "flex",
             }}
           >
-            /ledger →
+            /ledger
           </span>
         </div>
       </div>

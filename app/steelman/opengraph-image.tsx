@@ -183,7 +183,7 @@ export default async function SteelmanOgImage() {
               display: "flex",
             }}
           >
-            /steelman →
+            /steelman
           </span>
         </div>
       </div>

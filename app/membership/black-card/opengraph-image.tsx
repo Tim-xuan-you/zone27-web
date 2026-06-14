@@ -214,7 +214,7 @@ export default async function BlackCardOgImage() {
               display: "flex",
             }}
           >
-            /membership/black-card →
+            /membership/black-card
           </span>
         </div>
       </div>

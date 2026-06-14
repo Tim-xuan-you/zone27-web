@@ -189,7 +189,7 @@ export default async function RoadmapOgImage() {
               display: "flex",
             }}
           >
-            /roadmap →
+            /roadmap
           </span>
         </div>
       </div>

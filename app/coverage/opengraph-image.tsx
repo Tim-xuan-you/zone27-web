@@ -185,7 +185,7 @@ export default async function CoverageOgImage() {
               display: "flex",
             }}
           >
-            /coverage →
+            /coverage
           </span>
         </div>
       </div>

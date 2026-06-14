@@ -1,5 +1,6 @@
 import { ImageResponse } from "next/og";
 import { BRAND, OG_SIZE, OG_CONTENT_TYPE } from "@/lib/brand";
+import { Tri } from "@/lib/og-marks";
 
 // ── ZONE 27 · /methodology Dynamic OG ──────────────────
 // 當有人把 /methodology 連結貼到 LINE / Discord(對棒球量化有興趣的朋友),
@@ -163,8 +164,10 @@ export default async function MethodologyOgImage() {
           <span style={{ color: "rgba(245,242,234,0.6)", display: "flex" }}>
             4 sections · n=1 CPBL start · honest boundaries
           </span>
-          <span style={{ color: BRAND.gold, fontWeight: 500, display: "flex" }}>
-            親手驗證 → /lab
+          <span style={{ color: BRAND.gold, fontWeight: 500, display: "flex", alignItems: "center", gap: 8 }}>
+            親手驗證
+            <Tri size={13} color={BRAND.gold} />
+            /lab
           </span>
         </div>
       </div>

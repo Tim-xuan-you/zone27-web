@@ -201,7 +201,7 @@ export default async function TrackRecordOgImage() {
               display: "flex",
             }}
           >
-            /track-record →
+            /track-record
           </span>
         </div>
       </div>

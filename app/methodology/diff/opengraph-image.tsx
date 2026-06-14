@@ -1,5 +1,6 @@
 import { ImageResponse } from "next/og";
 import { BRAND, OG_SIZE, OG_CONTENT_TYPE } from "@/lib/brand";
+import { Tri } from "@/lib/og-marks";
 
 // ── ZONE 27 · /methodology/diff Dynamic OG ─────────────
 // Round 50 W-A · 接 /methodology OG paper-style framing 但 axis 改
@@ -99,7 +100,7 @@ export default async function MethodologyDiffOgImage() {
           <div
             style={{
               display: "flex",
-              alignItems: "baseline",
+              alignItems: "center",
               gap: 32,
             }}
           >
@@ -115,17 +116,8 @@ export default async function MethodologyDiffOgImage() {
             >
               v0.2
             </span>
-            <span
-              style={{
-                fontSize: 60,
-                color: "rgba(212,175,55,0.5)",
-                fontWeight: 300,
-                letterSpacing: "0.05em",
-                lineHeight: 1,
-                display: "flex",
-              }}
-            >
-              →
+            <span style={{ display: "flex", alignItems: "center" }}>
+              <Tri size={42} color={BRAND.gold} opacity={0.5} />
             </span>
             <span
               style={{

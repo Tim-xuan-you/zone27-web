@@ -178,7 +178,7 @@ export default async function IntegrityOgImage() {
             public bond not implicit · dated · Tim signature
           </span>
           <span style={{ color: BRAND.gold, fontWeight: 500, display: "flex" }}>
-            /integrity →
+            /integrity
           </span>
         </div>
       </div>

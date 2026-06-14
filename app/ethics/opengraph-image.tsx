@@ -178,7 +178,7 @@ export default async function EthicsOgImage() {
               display: "flex",
             }}
           >
-            /ethics →
+            /ethics
           </span>
         </div>
       </div>

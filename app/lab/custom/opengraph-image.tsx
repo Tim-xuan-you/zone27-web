@@ -165,7 +165,7 @@ export default async function LabCustomOgImage() {
               display: "flex",
             }}
           >
-            RUN 10,000 SIMULATIONS →
+            RUN 10,000 SIMULATIONS
           </span>
         </div>
 
@@ -200,7 +200,7 @@ export default async function LabCustomOgImage() {
               display: "flex",
             }}
           >
-            /lab/custom →
+            /lab/custom
           </span>
         </div>
       </div>

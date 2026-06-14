@@ -154,7 +154,7 @@ export default async function PrivacyOgImage() {
               display: "flex",
             }}
           >
-            /privacy →
+            /privacy
           </span>
         </div>
       </div>

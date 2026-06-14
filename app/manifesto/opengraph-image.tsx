@@ -197,7 +197,7 @@ export default async function ManifestoOgImage() {
               display: "flex",
             }}
           >
-            /manifesto →
+            /manifesto
           </span>
         </div>
       </div>

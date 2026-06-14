@@ -200,7 +200,7 @@ export default async function AuditOgImage() {
               display: "flex",
             }}
           >
-            /audit →
+            /audit
           </span>
         </div>
       </div>

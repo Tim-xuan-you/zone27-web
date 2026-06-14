@@ -205,7 +205,7 @@ export default async function MembershipOgImage() {
               display: "flex",
             }}
           >
-            JOIN OPEN →
+            JOIN OPEN
           </span>
         </div>
       </div>

@@ -192,7 +192,7 @@ export default async function FoundersOgImage() {
               display: "flex",
             }}
           >
-            立即加入 →
+            立即加入
           </span>
         </div>
       </div>

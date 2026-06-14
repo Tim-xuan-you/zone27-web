@@ -231,7 +231,7 @@ export default async function FaqOgImage() {
               display: "flex",
             }}
           >
-            /faq →
+            /faq
           </span>
         </div>
       </div>

@@ -1,5 +1,6 @@
 import { ImageResponse } from "next/og";
 import { BRAND, OG_SIZE, OG_CONTENT_TYPE } from "@/lib/brand";
+import { Tri } from "@/lib/og-marks";
 
 // ── ZONE 27 · /lab Dynamic OG ──────────────────────────
 // 當有人把 https://zone27-web.vercel.app/lab 貼到任何平台,
@@ -185,9 +186,10 @@ export default async function LabOgImage() {
             REAL AT-BAT ENGINE · v0.2
           </span>
           <span
-            style={{ color: BRAND.gold, fontWeight: 500, display: "flex" }}
+            style={{ color: BRAND.gold, fontWeight: 500, display: "flex", alignItems: "center", gap: 10 }}
           >
-            ▶ RUN IT YOURSELF →
+            <Tri size={18} color={BRAND.gold} />
+            RUN IT YOURSELF
           </span>
         </div>
       </div>

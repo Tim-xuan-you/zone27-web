@@ -1,5 +1,6 @@
 import { ImageResponse } from "next/og";
 import { BRAND, OG_SIZE, OG_CONTENT_TYPE } from "@/lib/brand";
+import { Tri } from "@/lib/og-marks";
 
 // ── ZONE 27 · /ladder Dynamic OG ───────────────────────
 // R174 Polymarket pivot · 準度海選天梯 share card。 行銷洞察物理化:
@@ -149,11 +150,7 @@ export default async function LadderOgImage() {
                   {r}
                 </span>
                 {i < RUNGS.length - 1 && (
-                  <span
-                    style={{ fontSize: 18, color: "rgba(212,175,55,0.6)", display: "flex" }}
-                  >
-                    →
-                  </span>
+                  <Tri size={13} color={BRAND.gold} opacity={0.6} />
                 )}
               </div>
             );
@@ -191,7 +188,7 @@ export default async function LadderOgImage() {
               display: "flex",
             }}
           >
-            /ladder →
+            /ladder
           </span>
         </div>
       </div>

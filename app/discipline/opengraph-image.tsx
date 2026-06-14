@@ -172,7 +172,7 @@ export default async function DisciplineOgImage() {
               display: "flex",
             }}
           >
-            /discipline →
+            /discipline
           </span>
         </div>
       </div>
