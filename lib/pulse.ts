@@ -56,7 +56,11 @@ function str(v: unknown): string {
 
 // 跨用戶「賽前鎖定」事件 · 走 0022 get_ladder_entries(已按 created_at desc)→ 取最近的。
 // 棒球(cpbl-*/mlb-* · matchById)+ 足球(fd-* · getLockedSoccerById · 三向含和局)· 認不到隊名 → 跳過。
-async function getRecentLocks(limit: number): Promise<PulseEvent[]> {
+// codes(選填)· 傳入時只留「這群永久碼」的鎖定 = 私人聯盟的盟友活動(同口徑、同隊名解析 · DRY)。
+async function getRecentLocks(
+  limit: number,
+  codes?: Set<string>,
+): Promise<PulseEvent[]> {
   // 全站押注列 · 走共用的 fetchLadderRows(React cache 去重 → 跟同頁熱度共用同一次 RPC · 不重複全表掃)。
   const rows = await fetchLadderRows();
 
@@ -79,6 +83,7 @@ async function getRecentLocks(limit: number): Promise<PulseEvent[]> {
           : null;
     const whenISO = str(r.created_at);
     if (!code || !matchId || !pick || !whenISO) continue;
+    if (codes && !codes.has(code)) continue; // 聯盟視圖:只留盟員的鎖定
     const key = `${code}|${matchId}`;
     if (seen.has(key)) continue;
     const ts = Date.parse(whenISO);
@@ -174,6 +179,21 @@ export async function getActivityPulse(limit = 24): Promise<PulseEvent[]> {
   return [...locks, ...settles, ...soccerSettles]
     .sort((a, b) => b.ts - a.ts)
     .slice(0, limit);
+}
+
+/** 私人聯盟活動 · 只取「這群盟員永久碼」最近的賽前鎖定(棒球+足球 · 同 /pulse 隊名解析、含和局)。
+ *  reuse getRecentLocks + fetchLadderRows(React cache → 跟聯盟天梯同一次 RPC · 0 額外讀)·
+ *  只回 lock 事件(結算是引擎的事、不分盟)· codes 為空 → []。 任何錯 → []。 */
+export async function getLeagueLocks(
+  codes: Set<string>,
+  limit = 8,
+): Promise<PulseEvent[]> {
+  if (codes.size === 0) return [];
+  try {
+    return await getRecentLocks(limit, codes);
+  } catch {
+    return [];
+  }
 }
 
 // ── 首頁活動脈動精華(會動的前門訊號)──────────────────────────────────────

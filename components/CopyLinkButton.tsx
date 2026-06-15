@@ -147,7 +147,7 @@ export default function CopyLinkButton({ refTag, shareText, label, doneLabel }: 
       type="button"
       onClick={handleShare}
       aria-label={ariaLabel}
-      className="inline-flex items-center gap-2 px-4 py-2 border border-line/60 hover:border-gold/60 text-mute hover:text-gold transition-colors font-mono text-[11px] tracking-[0.25em] uppercase"
+      className="inline-flex items-center gap-2 px-4 py-2.5 min-h-[44px] border border-line/60 hover:border-gold/60 text-mute hover:text-gold transition-colors font-mono text-[11px] tracking-[0.25em] uppercase"
     >
       <span aria-hidden="true">{isDone ? doneIcon : idleIcon}</span>
       <span lang={label ? undefined : "en"}>{isDone ? doneText : idleLabel}</span>

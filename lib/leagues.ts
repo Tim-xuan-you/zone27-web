@@ -16,6 +16,10 @@ import { aggregateIdentity, type UserPredictionsMap } from "@/lib/predictions";
 import { buildIdMatches } from "@/lib/ladder-server";
 import { getCurrentTaipeiMonthKey } from "@/lib/matches";
 import { fetchLadderRows } from "@/lib/ladder-rows";
+import { getLeagueLocks, type PulseEvent } from "@/lib/pulse";
+
+/** 盟友最近鎖定一筆(reuse /pulse 的 lock 事件型別 · 只 lock kind)。 */
+export type LeagueLock = Extract<PulseEvent, { kind: "lock" }>;
 
 // 排名門檻:押滿 10 場「已分勝負」才上榜(同 /ladder)· 不到 → 暫不評(provisional)。
 const LEAGUE_RANK_MIN_GRADED = 10;
@@ -270,4 +274,28 @@ export async function getLeagueStandings(
   }));
 
   return { ranked, provisional, memberCount: members.length };
+}
+
+/**
+ * 盟友最近鎖了什麼(私人聯盟活動條 · 解冷啟動)· 朋友剛加盟、還沒有人押滿 10 場時,天梯一片空 ——
+ * 這條把「盟員最近的賽前鎖定」串起來,盟一有人動就活(Strava segment「看朋友在練什麼」式)。
+ *
+ * memberCodes 由 getLeagueStandings 的結果衍生(ranked + provisional 的 authorCode = 全體盟員 ·
+ *   不必再打一次 get_league_members)· getLeagueLocks 走 fetchLadderRows(React cache → 跟天梯
+ *   同一次 RPC · 0 額外讀)· 棒球+足球都認(世界盃夜朋友押足球也上)· 結算是引擎的事不分盟、不入此條。
+ *
+ * 🔴 守紅線:只播「鎖定」這種真帳本事件(同 /pulse)· 無 PnL / 連勝 / 排名 · 每筆連那人的 /u 公開檔。
+ * GRACEFUL:0029 未套(memberCodes 空)/ 0 鎖定 / 任何錯 → [](元件據此整條隱藏 · 不破頁)。
+ */
+export async function getLeagueActivity(
+  memberCodes: string[],
+  limit = 8,
+): Promise<LeagueLock[]> {
+  if (memberCodes.length === 0) return [];
+  try {
+    const events = await getLeagueLocks(new Set(memberCodes), limit);
+    return events.filter((e): e is LeagueLock => e.kind === "lock");
+  } catch {
+    return [];
+  }
 }

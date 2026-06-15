@@ -4,8 +4,9 @@ import { createHash } from "crypto";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import { getUser } from "@/lib/supabase/server";
-import { getLeague, getLeagueStandings } from "@/lib/leagues";
+import { getLeague, getLeagueStandings, getLeagueActivity } from "@/lib/leagues";
 import LeagueStandingsView from "@/components/LeagueStandings";
+import LeagueActivity from "@/components/LeagueActivity";
 import LeagueInviteShare from "@/components/LeagueInviteShare";
 import LeagueLeaveButton from "@/components/LeagueLeaveButton";
 
@@ -92,6 +93,14 @@ export default async function LeagueStandingsPage({
 
   const standings = await getLeagueStandings(id, viewerCode);
 
+  // 盟友活動條(解冷啟動)· 盟員碼直接從天梯結果衍生(ranked + provisional = 全體盟員)·
+  // 不必再打一次 get_league_members · getLeagueActivity 走 React-cache 的 fetchLadderRows
+  // (跟天梯同一次 RPC · 0 額外讀)。 0029 未套 / 無盟員鎖定 → [] → 元件整條隱藏(graceful)。
+  const memberCodes = standings
+    ? [...standings.ranked, ...standings.provisional].map((s) => s.authorCode)
+    : [];
+  const activity = await getLeagueActivity(memberCodes);
+
   return (
     <Shell>
       <div className="flex items-baseline justify-between gap-3 flex-wrap mb-1">
@@ -112,6 +121,10 @@ export default async function LeagueStandingsPage({
       <div className="mb-6">
         <LeagueInviteShare inviteCode={meta.inviteCode} leagueName={meta.name} />
       </div>
+
+      {/* 盟友最近鎖了什麼(R239 · 解冷啟動)· 朋友剛加盟、天梯還沒長出來時,這條讓盟活起來 ——
+          跟下方「整季排名」是不同軸(這是「現在有人在動」)· 無人鎖定時整條隱藏。 */}
+      <LeagueActivity events={activity} viewerCode={viewerCode} />
 
       {standings ? (
         <LeagueStandingsView standings={standings} />
