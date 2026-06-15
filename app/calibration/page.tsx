@@ -13,6 +13,8 @@ import {
   getSoccerGradedCount,
 } from "@/lib/soccer/calibration";
 import { getLockedSoccerPredictions } from "@/lib/soccer/locked";
+import { getLatestMomentumReversal } from "@/lib/momentum-reversal";
+import MomentumReversalExhibit from "@/components/MomentumReversal";
 
 export const metadata: Metadata = {
   title: "引擎自評 · ZONE 27 公開準不準",
@@ -106,6 +108,9 @@ export default function CalibrationPublicPage() {
   const finalized = getFinalizedMatches();
   const n = finalized.length;
   const bins = computeBins(finalized);
+  // 氣勢反轉證物(R239)· 從官方賽果自動撈最近一組「同兩隊、隔幾天、贏家換邊」的戲劇反轉,
+  // 把上面「沒有神準 / 別跟氣勢」的論點換成一筆真資料。 找不到 → null → 整段不顯示(graceful)。
+  const reversal = getLatestMomentumReversal();
   // 足球(soul R208 #4 · 跟棒球分開算 · 各運動各自套 N≥30 門檻)。 世界盃 6/11 才開賽 →
   // 目前 soccerN=0 已結算 → SportToggle 足球側顯示誠實「已鎖定、未結算」frame。
   const soccerBins = computeSoccerBins();
@@ -214,6 +219,28 @@ export default function CalibrationPublicPage() {
             </p>
           </div>
         </section>
+
+        {/* ── 氣勢的真面目 · 現實親手打臉「跟氣勢押」(R239)──────────
+            把上面「沒有神準 / 別跟氣勢」的論點,換成一筆官方賽果真資料:同兩隊、隔幾天、
+            贏家完全換邊。 🔴 不主張我們預測到 —— 只證「昨天的比分對今天幾乎沒有預測力」。
+            找不到夠戲劇的反轉(門檻見 lib)→ reversal=null → 整段不顯示(graceful)。 */}
+        {reversal && (
+          <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-16 border-t border-line/40 pt-12">
+            <p className="font-mono text-gold text-[10px] tracking-[0.45em] mb-6">
+              / 氣勢的真面目
+            </p>
+            <h2 className="text-2xl sm:text-3xl text-bone font-light tracking-tight mb-6 leading-tight">
+              昨天大勝 · 今天大敗 ·{" "}
+              <span className="text-gold">同樣兩隊</span>
+            </h2>
+            <p className="text-mute leading-relaxed mb-6 max-w-2xl">
+              不用我們講理論 —— 看最近這兩場。 同樣的兩支球隊、只隔幾天,結果完全顛倒。
+              這不是哪個模型不夠強,是這項運動天生就帶著洗不掉的運氣。 賣「明牌、跟氣勢」的,
+              最怕你看到這種畫面。
+            </p>
+            <MomentumReversalExhibit reversal={reversal} />
+          </section>
+        )}
 
         {/* ── 引擎說的 vs 實際發生 · 我們逐場兌現 57% 的方式 ──────── */}
         <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-16 border-t border-line/40 pt-12">
