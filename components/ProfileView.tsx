@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Avatar from "@/components/Avatar";
 import HonorWall from "@/components/HonorWall";
+import FounderCalls from "@/components/FounderCalls";
 import AccuracySparkline from "@/components/AccuracySparkline";
 import TrophyGrid from "@/components/TrophyGrid";
 import CalibrationMasterView from "@/components/CalibrationMasterView";
@@ -147,6 +148,10 @@ export default function ProfileView({ profile, identity: id, streak, soccer, ser
       {/* 招牌黃金比例髮絲線(品牌唯一可辨識幾何記號 · 校準卡尺 IP)· 把這張最會被
           截圖外傳的公開檔案,錨上品牌記號(同收據頁)· 提升 viral 表面的辨識度。 */}
       <div className="zone27-rule max-w-[300px] mt-6" aria-hidden="true" />
+
+      {/* 創辦人跨運動個人鎖定(只創辦人帳本顯示)· 引擎沒覆蓋的運動(籃球/電競…)的
+          人類賽道 · 同樣賽前鎖死、逐場打分、連輸都留 · lib/founder-calls.ts。 */}
+      {founder && <FounderCalls />}
 
       {/* ── 空檔案 · 尊嚴框(profile 存在但還沒結算的場)──────────────
           不寫「沒資料」· 寫「已經開始鎖了」—— 把弱點翻成最強信號(同足球 SoccerPendingFrame)。 */}
