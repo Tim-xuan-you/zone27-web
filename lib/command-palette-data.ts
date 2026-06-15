@@ -12,6 +12,13 @@
 // /admin(設計者切 tier 預覽)退出快搜:它是內部工具 · render 在公開搜尋裡像漏餡 ·
 // 仍可直接打 /admin 進(dogfood 不斷)· 同 footer 早就沒列它的紀律。
 //
+// R239(Tim canary 再起「資訊轟炸 · 極簡再極簡 · Apple」)· 13 隨功能慢慢長回 17 → 收回 13。
+// 砍 4 條「子頁 / 重複」(頁面不刪 · 從父項到得了 · 關鍵字併進父項不漏搜):
+//   · /matches/mlb → 併進「今日賽事板 · CPBL + MLB」(本來就含 MLB · 搜 mlb/大聯盟 落這)
+//   · /calibration/test → 併進「引擎校準」(那頁就有大顆「玩一次校準練習」鈕 + 首頁也連)
+//   · /member/inbox · /member/leagues → 會員子頁 · 從 /member 儀表板到得了(非會員不會搜)
+// 留下的就是「一個球迷真正會搜的東西」· 同 Apple top-nav ~10 紀律(深度頁靠內文連結 + 直打網址)。
+//
 // Design principles(per [[zone27-disclosure-philosophy]]):
 //   - No external deps · plain substring filter · no telemetry / personalization
 //   - Group-order editorial(入門 → 賽事 → 信任 → 轉換 → 帳號)
@@ -75,14 +82,9 @@ export const COMMAND_ITEMS: CommandItem[] = [
       "投手", "pitcher", "球員", "球員卡", "球員數據",
       "統一獅", "中信兄弟", "富邦悍將", "樂天桃猿", "味全龍", "台鋼雄鷹",
       "獅迷", "象迷", "兄弟", "悍將", "桃猿", "龍迷", "雄鷹", "球隊", "支持的球隊",
+      // R239 · /matches/mlb 併進來(同一個賽事板含 CPBL + MLB · 搜這些落這)
+      "mlb", "美國職棒", "大聯盟", "即時", "stats api",
     ],
-  },
-  {
-    label: "MLB · 即時資料",
-    kicker: "/matches/mlb",
-    path: "/matches/mlb",
-    group: "賽事 · 引擎",
-    keywords: ["mlb", "美國職棒", "即時", "stats api", "大聯盟"],
   },
   {
     label: "足球 · 世界盃/巴甲 引擎開盤(勝/平/負)",
@@ -102,16 +104,6 @@ export const COMMAND_ITEMS: CommandItem[] = [
     keywords: [
       "ladder", "天梯", "海選", "排行榜", "leaderboard", "神諭", "oracle",
       "準度", "ranking", "市場", "market", "贏過引擎", "升階",
-    ],
-  },
-  {
-    label: "私人預測聯盟 · 揪朋友比誰最會讀球",
-    kicker: "/member/leagues",
-    path: "/member/leagues",
-    group: "賽事 · 引擎",
-    keywords: [
-      "league", "聯盟", "私人聯盟", "預測聯盟", "fantasy", "朋友", "揪團",
-      "群組", "join", "建立", "加入", "邀請碼", "比準度", "誰最準",
     ],
   },
   {
@@ -143,18 +135,11 @@ export const COMMAND_ITEMS: CommandItem[] = [
     kicker: "/calibration",
     path: "/calibration",
     group: "信任文件",
-    keywords: ["calibration", "校準", "準度", "57%", "天花板", "你有多準", "練習", "校準練習"],
-  },
-  {
-    // 全站最強的「免登入」鉤子(換你當引擎、親手撞 57% 天花板)· 原本只能從首頁小字 /
-    // /calibration 內文進 · Cmd-K 沒收 → 深連結進站的人找不到。 補進可搜尋索引。
-    label: "校準練習 · 換你當引擎 · 測你自己多準",
-    kicker: "/calibration/test",
-    path: "/calibration/test",
-    group: "信任文件",
+    // R239 · /calibration/test(免登入「換你當引擎」鉤子)併進關鍵字 —— 搜「練習/測自己」
+    // 仍落這頁,那頁頂端就有大顆「玩一次校準練習」鈕(+ 首頁也連)· 不需在快搜各佔一條。
     keywords: [
-      "calibration", "test", "校準", "練習", "校準練習", "測自己", "測你自己",
-      "你有多準", "換你當引擎", "self test", "quiz", "互動", "玩玩看",
+      "calibration", "校準", "準度", "57%", "天花板", "你有多準",
+      "練習", "校準練習", "測自己", "測你自己", "換你當引擎", "互動", "玩玩看", "self test", "quiz",
     ],
   },
   {
@@ -187,15 +172,6 @@ export const COMMAND_ITEMS: CommandItem[] = [
     path: "/member",
     group: "工具 · 外部",
     keywords: ["member", "dashboard", "會員頁", "個人", "儀表板", "我的準度", "持倉", "帳本"],
-  },
-  {
-    label: "結算收件匣 · 你不在時結算了什麼",
-    kicker: "/member/inbox",
-    path: "/member/inbox",
-    group: "工具 · 外部",
-    keywords: [
-      "inbox", "收件匣", "結算", "對帳", "settlement", "回訪", "通知", "新結算", "逐筆",
-    ],
   },
   {
     label: "登入 · Email + 密碼 · 免費會員",

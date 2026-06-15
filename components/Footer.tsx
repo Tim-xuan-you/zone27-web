@@ -23,18 +23,19 @@ type FooterGroup = { label: string; enLabel: string; links: FooterLink[] };
 // 的地圖:玩(賽事/引擎)→ 信任(公開的證據)→ 帳號。 其餘深度頁(audit/methodology/
 // integrity/manifesto/discipline/roadmap/learn/faq/changelog/投手排行)不刪(護城河 +
 // 靠 Cmd-K 全站快搜 + 內文交叉連結到得了),只是不再 footer 轟炸。 Linear/Stripe 式。
+//
+// R239 · Tim canary「資訊轟炸 · 極簡再極簡 · Apple」再一刀:FOR FANS 欄又長回 7 連結
+// (隨功能慢慢加上來)→ 收回 2。 砍掉的全部在別處到得了、不製造孤兒:MLB / 足球 → 頂 Nav
+// 「賽事」的頁內 SportTabs(R234 已把運動切換收進去)· 模擬實驗室 → 頂 Nav「實驗室」·
+// 海選天梯 / 私人預測聯盟 → Cmd-K + /member 儀表板。 footer 只留「天天會動」的兩個:
+// 今日賽事 + 活動脈動。 PROOF 三個是護城河(戰績 / 校準 / 認錯)= 該被看見、不動。
 const FOOTER_GROUPS: FooterGroup[] = [
   {
     label: "賽事 · 引擎",
     enLabel: "FOR FANS",
     links: [
       { label: "今日 CPBL 賽事", href: "/matches" },
-      { label: "MLB · 即時資料", href: "/matches/mlb" },
-      { label: "足球 · 世界盃開盤", href: "/soccer" },
       { label: "活動脈動 · 大家在押什麼", href: "/pulse" },
-      { label: "海選天梯", href: "/ladder" },
-      { label: "私人預測聯盟", href: "/member/leagues" },
-      { label: "模擬實驗室", href: "/lab" },
     ],
   },
   {
