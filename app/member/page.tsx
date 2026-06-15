@@ -446,7 +446,7 @@ export default async function MemberPage() {
 
         {/* 升級入口 · 路要看得見(Apple:付費路徑永遠不藏)· 但這是會員自己的介面 ·
             不對他推銷、不打「賺錢」· 接著上面的榮譽牆 → 用「身分/地位」當主軸(paid=身分
-            非功能)· 賣分析變現降成括號副利 · 價格/方案在 /membership 不在這裡轟炸。 */}
+            非功能 · Defector:出錢養免費引擎,不是買功能/不賣分析)· 價格/方案在 /membership 不在這裡轟炸。 */}
         {!isPaid(tier) && (
           <Link
             href="/membership"
@@ -461,7 +461,8 @@ export default async function MemberPage() {
           </Link>
         )}
 
-        {/* 點數錢包 · 儲值 → 買別人的付費分析(0009)· 跟「升級賣分析」是兩回事 */}
+        {/* 點數錢包(0009)· ⚠ R237 Defector pivot 後「買付費分析」用途已暫停(MARKETPLACE_ENABLED=false)·
+            錢包結構/文案的去留是 owner 決定(R187 別擅自刪)· 此處只掛元件、不動其內容。 */}
         <WalletPanel />
 
         {/* 你的東西 · 買過的分析(書架)+ 回過的留言(足跡)· Tim dogfood:做完即蒸發、

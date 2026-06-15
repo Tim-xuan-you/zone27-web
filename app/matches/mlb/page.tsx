@@ -47,7 +47,7 @@ export default async function MlbMatchesPage() {
       lockedByPk.set(p.gamePk, p.engineWinHomePct);
     }
   }
-  // 每場分析篇數(key = mlb-{gamePk})· 看板標「N 篇分析」+ 點進去看/買(跟單入口)。
+  // 每場分析篇數(key = mlb-{gamePk})· 看板標「N 篇分析」+ 點進去免費看(Defector:不賣分析)。
   const analysisCounts = await getCreatorPostCounts();
 
   return (
@@ -197,7 +197,7 @@ function MlbCard({
           >
             {stateLabel}
           </span>
-          {/* 有分析 = 金色 chip · 一眼看出哪場有大神可跟單(抽傭入口)*/}
+          {/* 有分析 = 金色 chip · 一眼看出哪場有人發了分析(免費看 · Defector:不賣分析、無抽傭)*/}
           {analysisCount > 0 && (
             <span
               aria-label={`這場有 ${analysisCount} 篇創作者分析可看`}
@@ -244,8 +244,8 @@ function MlbCard({
         />
       )}
 
-      {/* venue + 點進詳情(看/買分析、押注)· R199 補:MLB 板卡本來點不進去(舊 schedule
-          viewer 遺留)· Tim「用戶看到有分析想跟單卻點不進去買」→ 加詳情連結=抽傭入口。 */}
+      {/* venue + 點進詳情(看免費分析、押注)· R199 補:MLB 板卡本來點不進去(舊 schedule
+          viewer 遺留)· 加詳情連結讓人點得進那場的免費分析 + 押注(Defector:不賣分析、無抽傭)。 */}
       <div className="pt-3 mt-auto border-t border-line/40 flex items-center justify-between gap-2">
         <span className="font-mono text-mute/70 text-[10px] tracking-[0.2em] truncate">
           {game.venue}

@@ -61,8 +61,8 @@ const CATEGORIES: Category[] = [
         a: (
           <>
             不是。我們不接受下注、不出彩金、不撮合對賭。
-            ZONE 27 是「資訊與社群平台」 — 出售 AI 分析的訂閱權限與會員身分,
-            模式類似 Bloomberg、TradingView、Action Network,而非運彩公司。
+            ZONE 27 是「資訊與社群平台」 —— 引擎與分析都免費,賣的是<strong className="text-bone">會員身分</strong>
+            (出錢養著免費引擎),模式類似 Bloomberg、TradingView、Action Network,而非運彩公司。
             我們嚴格遵守台灣法規邊界,所有經濟系統皆為單向(虛擬點數無法兌回新台幣)。
           </>
         ),
