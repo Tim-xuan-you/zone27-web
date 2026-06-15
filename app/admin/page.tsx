@@ -295,7 +295,7 @@ export default async function AdminPage() {
         <FounderSignOff>
           <p>
             這頁是給<strong>你自己</strong>看的 — 不是給訪客看的。但放公開資料夾 OK ·
-            因為 ZONE 27 連後台都公開設計(連同 ADMIN-PLAN.md 在 GitHub)。
+            因為 ZONE 27 連後台都公開設計(連同 ADMIN-PLAN.md 一起公開)。
           </p>
           <p>
             上面那個管理台是<strong>真的</strong> —— 加點數、標付費等級、審文章,

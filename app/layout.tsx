@@ -44,9 +44,9 @@ export const metadata: Metadata = {
   // Honest copy aligned with homepage hero body + /faq Q3 brand stance:
   // - "數據俱樂部" not "預測社群" (we're not gambling-adjacent)
   // - Tiered commission honest (5% Founders / 10% BLACK vs flat "零手續費")
-  // - "git 不可篡改" specific (matches Pillar 02 wording)
+  // - "改不了、刪不掉" kept-substance immutability framing (R238 · R237② · 不提 git/開源/commit)
   description:
-    "為硬核運動迷打造的暗黑黃金級數據終端。棒球 · 足球,我用自己的引擎算勝率給您看(CPBL · MLB · 世界盃)· git 不可篡改紀錄 · 賽前鎖定、賽後逐場對帳,連輸的都留著。",
+    "為硬核運動迷打造的暗黑黃金級數據終端。棒球 · 足球,我用自己的引擎算勝率給您看(CPBL · MLB · 世界盃)· 賽前鎖定、改不了、刪不掉,賽後逐場對帳,連輸的都留著。",
   keywords: [
     "中華職棒",
     "CPBL",
@@ -59,6 +59,16 @@ export const metadata: Metadata = {
     "量化棒球",
   ],
   authors: [{ name: "ZONE 27" }],
+  // appleWebApp · R238 · 配合 app/manifest.ts 補完 iOS「加入主畫面」體驗:
+  // capable → <meta name="mobile-web-app-capable" content="yes">(iOS standalone ·
+  // web-push 前置)· title → 主畫面圖示名稱「ZONE 27」(不用冗長的 meta title)·
+  // statusBarStyle "black-translucent" → 配合既有 viewportFit:"cover" + safe-area
+  // 邊到邊深色狀態列。 純 client 安裝描述符 · 非 SEO 動作。
+  appleWebApp: {
+    capable: true,
+    title: "ZONE 27",
+    statusBarStyle: "black-translucent",
+  },
   openGraph: {
     title: "ZONE 27 — We Don't Guess. We Compute.",
     description:

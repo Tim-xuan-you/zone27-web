@@ -126,6 +126,13 @@ export default function UserPredictionPicker({
 
   return (
     <div className="mt-4 bg-gold/5 border border-gold/40 px-4 py-3">
+      {/* 螢幕報讀器:鎖定成功的常駐 polite 播報區(此 root 永遠在 DOM → 內容由空變成
+          確認句時可靠播報)· 錯誤路徑已有 role=alert · 這補上「成功」路徑的對等播報(R238)。 */}
+      <div role="status" aria-live="polite" className="sr-only">
+        {locked && myPick
+          ? `你押了 ${myPick === "home" ? homeName : awayName} · 已鎖定 · 不可改`
+          : ""}
+      </div>
       <div className="flex items-baseline justify-between flex-wrap gap-2 mb-3">
         <p className="font-mono text-gold text-[10px] tracking-[0.35em]">
           押一邊 · 你看好誰

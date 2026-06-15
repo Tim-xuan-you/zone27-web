@@ -58,6 +58,18 @@ export default function CalibrationGame({ matches }: { matches: QuizMatch[] }) {
 
   return (
     <div className="space-y-4">
+      {/* 螢幕報讀器播報「攤開結果」· 此區常駐 DOM(revealed 切換前後都在)→ polite
+          live region 在內容由空變成裁決時可靠播報 · 視覺無變化(sr-only)。 字串走
+          同一支 deriveVerdict → 跟可見的 <h2> 不漂移(R238)。 視覺玩家看 ResultPanel,
+          看不見畫面的人靠這一句聽見「攤開那刻」的結果。 */}
+      <div role="status" aria-live="polite" aria-atomic="true" className="sr-only">
+        {revealed && score
+          ? `攤開結果:${deriveVerdict(score).head} · 你押對 ${score.youHits}/${score.decided} 場,以為的把握 ${
+              score.avgConf !== null ? `${score.avgConf}%` : "—"
+            },實際中 ${score.youHitPct !== null ? `${score.youHitPct}%` : "—"}`
+          : ""}
+      </div>
+
       {/* 進度 / 攤開列 · sticky 讓玩到一半也按得到 */}
       {!revealed && (
         <div className="sticky top-2 z-10 flex items-center justify-between gap-3 bg-navy/85 backdrop-blur border border-gold/30 px-4 py-2.5 rounded">
@@ -347,30 +359,36 @@ function computeScore(matches: QuizMatch[], picks: Record<string, number>) {
   };
 }
 
-function ResultPanel({ score: s }: { score: Score }) {
-  // 校準裁決(誠實 · 不羞辱)· gap = 你以為的把握 − 實際
-  let verdict: { head: string; body: string };
+// 校準裁決(誠實 · 不羞辱)· gap = 你以為的把握 − 實際。
+// 抽成共用 helper 讓「攤開」的 sr-only 播報(主元件)跟可見的 <h2>
+// 永遠是同一句 · 不漂移(R238 a11y)。
+function deriveVerdict(s: Score): { head: string; body: string } {
   if (s.decided === 0) {
-    verdict = {
+    return {
       head: "你每一場都說銅板局",
       body: "全押 50/50 也是一種誠實 —— 但試著真的選一邊、給個把握,才看得出你的校準。再玩一次?",
     };
-  } else if (s.gap !== null && s.gap > 12) {
-    verdict = {
+  }
+  if (s.gap !== null && s.gap > 12) {
+    return {
       head: `你高估了自己 ${s.gap} 個百分點`,
       body: "跟大多數人一樣 —— 你以為的把握,比實際中的高出一截。這不丟臉:這正是「過度自信」,也正是賣明牌的人利用的東西。連最強的引擎都只能到 5 成 7。",
     };
-  } else if (s.gap !== null && s.gap < -8) {
-    verdict = {
+  }
+  if (s.gap !== null && s.gap < -8) {
+    return {
       head: "你太保守了",
       body: "你其實比自己以為的準 —— 把握給太低。少數人會這樣。下次敢一點。",
     };
-  } else {
-    verdict = {
-      head: "你算誠實的",
-      body: "你的把握,跟實際中的差不多 —— 這叫「校準良好」,多數人辦不到。你沒有騙自己。",
-    };
   }
+  return {
+    head: "你算誠實的",
+    body: "你的把握,跟實際中的差不多 —— 這叫「校準良好」,多數人辦不到。你沒有騙自己。",
+  };
+}
+
+function ResultPanel({ score: s }: { score: Score }) {
+  const verdict = deriveVerdict(s);
 
   return (
     <div className="bg-gold/5 border border-gold/50 glow-soft p-5 sm:p-7 enter-fade-up">

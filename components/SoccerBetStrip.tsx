@@ -157,6 +157,15 @@ export default function SoccerBetStrip({
 
   return (
     <div className="mt-3 pt-2.5 border-t border-line/40">
+      {/* 螢幕報讀器:賽前鎖定成功的常駐 polite 播報區(此 root 永遠在 DOM → 內容由空
+          變成確認句時可靠播報)· 看不見畫面的人靠這一句聽見「押下那刻」(R238)。 */}
+      <div role="status" aria-live="polite" className="sr-only">
+        {displayState === "picked" && pick && !pending
+          ? `賽前鎖定 · 你押了 ${
+              pick === "home" ? homeLabel : pick === "away" ? awayLabel : "和局"
+            } · 刪不掉`
+          : ""}
+      </div>
       {displayState === "loading" && (
         <p className="font-mono text-mute/40 text-[9px] tracking-[0.3em]">···</p>
       )}
@@ -198,7 +207,10 @@ export default function SoccerBetStrip({
           </p>
           {/* 樂觀 UI 回滾 → 輕提示(不彈窗 · 不洗版)。 */}
           {errMsg && (
-            <p className="mt-1.5 font-mono text-loss/80 text-[9px] tracking-[0.15em]">
+            <p
+              role="alert"
+              className="mt-1.5 font-mono text-loss/80 text-[9px] tracking-[0.15em]"
+            >
               {errMsg}
             </p>
           )}

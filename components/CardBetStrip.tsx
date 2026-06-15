@@ -136,6 +136,14 @@ export default function CardBetStrip({
 
   return (
     <div className="mt-3 pt-3 border-t border-gold/15">
+      {/* 螢幕報讀器:鎖定成功的常駐 polite 播報區(此 root 永遠在 DOM → 內容由空
+          變成確認句時可靠播報)· 視覺玩家看下方金卡 · 看不見的人靠這一句聽見「押下那刻」。
+          錯誤路徑已有 role=alert · 這補上「成功」路徑的對等播報(R238)。 */}
+      <div role="status" aria-live="polite" className="sr-only">
+        {status === "locked" && myPick && !pending
+          ? `已鎖定 · 押 ${myPick === "home" ? homeName : awayName} · 不可改`
+          : ""}
+      </div>
       {/* 群眾市場線 · 看免費 · 滿門檻才畫百分比(不拿小樣本假裝共識)*/}
       {tally && tally.total >= CROWD_LINE_MIN && tally.homePct !== null && (
         <div

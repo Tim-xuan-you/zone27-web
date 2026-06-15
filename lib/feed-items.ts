@@ -50,7 +50,9 @@ export const FEED_META = {
   // future tim@zone27.tw post-domain-launch swap-back per /audit S05。
   authorEmail: "tatayngiti@gmail.com",
   language: "zh-TW",
-  rights: "© 2026 ZONE 27 · MIT-licensed source code",
+  // R238 · R237② · Atom <rights> 只需版權聲明 · 拿掉「MIT / source code」
+  // 開源招牌(站上任何訪客面不再 feature 開源 · RSS reader 也是訪客面)。
+  rights: "© 2026 ZONE 27",
 } as const;
 
 /**
