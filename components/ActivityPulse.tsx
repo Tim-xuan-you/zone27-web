@@ -132,13 +132,15 @@ function PulseList({ events }: { events: PulseEvent[] }) {
                 <span className="text-gold">{e.teamLabel}</span>
               </p>
               <p className="mt-0.5 font-mono text-mute/55 text-[10px] tracking-[0.12em]">
-                {/* 棒球 → /matches/<id>(永遠在的單場頁)· 足球無單場頁,改連 /receipts/<id>
-                    (賽前/進行中/已結算三階段都解析得到 · 不像 /soccer 只掛未開賽場會死捲動)。 */}
+                {/* 棒球 → /matches/<id>(永遠在的單場頁)· 足球 → /receipts/<id>(三階段都解析得到)·
+                    群眾盤 mkt-* → /markets#m-<id>(那張卡的家 · 沒有 /matches/mkt- 單場頁,直連會 404)。 */}
                 <Link
                   href={
                     e.matchId.startsWith("fd-")
                       ? `/receipts/${e.matchId}`
-                      : `/matches/${e.matchId}`
+                      : e.matchId.startsWith("mkt-")
+                        ? `/markets#m-${e.matchId}`
+                        : `/matches/${e.matchId}`
                   }
                   className="hover:text-gold transition-colors"
                 >

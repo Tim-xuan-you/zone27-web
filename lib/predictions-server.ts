@@ -42,10 +42,11 @@ export async function getMyPredictionsMap(): Promise<UserPredictionsMap> {
     const map: UserPredictionsMap = {};
     for (const row of data as RpcRow[]) {
       const matchId = typeof row.match_id === "string" ? row.match_id : null;
-      // 🔴 足球(fd-*)走完全獨立的計算(三向 + 自己的結算/天梯 · 準度分開算)·
-      //   絕不混進棒球帳本 —— 否則世界盃押注會灌爆首頁戰績條 / /ladder 入場門檻 /
-      //   /member 校準身分(且足球沒結算 = 永遠 pending 灌不掉)。 棒球只認 cpbl-*/mlb-*。
-      if (!matchId || matchId.startsWith("fd-")) continue;
+      // 🔴 足球(fd-*)+ 群眾盤(mkt-*)走完全獨立、不混進棒球帳本 —— 否則世界盃 / 群眾盤押注會灌爆
+      //   首頁戰績條 / /ladder 入場門檻 / /member 校準身分。 棒球只認 cpbl-*/mlb-*。
+      //   (mkt-* 無引擎線、本就不在 idMatches → 下游 aggregateIdentity 已忽略;這裡再擋一層 = 防未來
+      //    新 consumer 直接 iterate predictionsMap 時誤把群眾盤算進棒球準度。)
+      if (!matchId || matchId.startsWith("fd-") || matchId.startsWith("mkt-")) continue;
       const pick =
         row.pick === "home" || row.pick === "away" ? row.pick : null;
       const ts = typeof row.created_at === "string" ? row.created_at : "";

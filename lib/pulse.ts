@@ -29,6 +29,7 @@ import {
 import { getLockedSoccerById } from "@/lib/soccer/locked";
 import { resolveLockedSoccer } from "@/lib/soccer/engine-settle";
 import { getMlbLockedMatches } from "@/lib/mlb-matches";
+import { getMarketById } from "@/lib/markets";
 
 export type PulseEvent =
   | {
@@ -74,11 +75,12 @@ async function getRecentLocks(
     const code = str(r.author_code);
     const matchId = str(r.match_id);
     const isSoccer = matchId.startsWith("fd-");
-    // 棒球兩向(home/away)· 足球三向(home/draw/away)。
+    const isMarket = matchId.startsWith("mkt-"); // 群眾盤(/markets · 引擎沒覆蓋的場)· 三向同足球
+    // 棒球兩向(home/away)· 足球 + 群眾盤三向(home/draw/away)。
     const pick =
       r.pick === "home" || r.pick === "away"
         ? r.pick
-        : isSoccer && r.pick === "draw"
+        : (isSoccer || isMarket) && r.pick === "draw"
           ? "draw"
           : null;
     const whenISO = str(r.created_at);
@@ -96,6 +98,12 @@ async function getRecentLocks(
       if (!s) continue; // 引擎沒鎖這場(認不到隊名)→ 跳過(graceful · 同棒球 matchById miss)
       teamLabel = pick === "home" ? s.home : pick === "away" ? s.away : "和局";
       matchup = `${s.home} vs ${s.away}`;
+    } else if (isMarket) {
+      // 群眾盤(/markets)· 從策展名單解隊名 · 三向(和局)· 認不到(舊/已撤)→ 跳過。
+      const mk = getMarketById(matchId);
+      if (!mk) continue;
+      teamLabel = pick === "home" ? mk.home : pick === "away" ? mk.away : "和局";
+      matchup = `${mk.home} vs ${mk.away}`;
     } else {
       const m = getMatchById(matchId) ?? mlbById.get(matchId);
       if (!m) continue; // CPBL + MLB 都認不到(舊資料 / 未鎖定)→ 跳過
