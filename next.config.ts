@@ -48,7 +48,7 @@ const nextConfig: NextConfig = {
   // 內容不是消失 —— 精華併進保留的頁(身分→/about · 路線→/roadmap · 方法→/methodology)。
   // redirect 讓任何舊連結 / 書籤不 404 · permanent:false(可逆 · 反正 stealth 無 SEO)。
   async redirects() {
-    return [
+    const base = [
       { source: "/annual", destination: "/about", permanent: false },
       { source: "/annual/2026", destination: "/about", permanent: false },
       { source: "/founders/postmortem-2028", destination: "/founders", permanent: false },
@@ -56,6 +56,14 @@ const nextConfig: NextConfig = {
       { source: "/now", destination: "/roadmap", permanent: false },
       { source: "/changelog", destination: "/roadmap", permanent: false },
     ];
+    // /tim → 創辦人公開帳本 /u/[他的永久碼](R238 · Michelin 記分板捷徑)。
+    // 乾淨的路由層 307(無 1 秒 meta-refresh)· FOUNDER_AUTHOR_CODE(Vercel env · build 時讀)
+    // 設好 + 8-hex 才加;未設 → 不加 → app/tim/page.tsx 接手退 /track-record(graceful)。
+    const fc = (process.env.FOUNDER_AUTHOR_CODE ?? "").trim().toLowerCase();
+    if (/^[0-9a-f]{8}$/.test(fc)) {
+      base.push({ source: "/tim", destination: `/u/${fc}`, permanent: false });
+    }
+    return base;
   },
 
   // Security headers · production-ready defense baseline。

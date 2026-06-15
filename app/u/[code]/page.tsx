@@ -26,6 +26,7 @@ import { getSoccerLedgerResults } from "@/lib/soccer/football-data";
 import { getSoccerEnginePicks } from "@/lib/soccer/locked";
 import { createPageMetadata } from "@/lib/page-og";
 import { normalizeProfileCode } from "@/lib/profile-code";
+import { isFounderCode } from "@/lib/founder";
 import { buildSettledCards, computeTrophies } from "@/lib/trophies";
 import { hasMonthActivity, monthLabel } from "@/lib/season-recap";
 
@@ -140,6 +141,7 @@ export default async function PublicProfilePage({
           seasonPeriod={currentMonth}
           seasonLabel={monthLabel(currentMonth)}
           hasSeasonActivity={hasSeasonActivity}
+          founder={isFounderCode(code)}
         />
       </main>
       <Footer />

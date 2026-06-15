@@ -53,6 +53,8 @@ type Props = {
   seasonLabel?: string;
   /** 本月有沒有任何押注(false → 不顯示回顧入口) */
   hasSeasonActivity?: boolean;
+  /** 這份帳本是創辦人(Tim)的?→ 頂端掛「創辦人框」(R238 · isFounderCode) */
+  founder?: boolean;
 };
 
 // 一句話總結這份帳本的站位 · 第三人稱(主詞 = 帳本)· 誠實雙向(贏照講、輸也照講)。
@@ -68,7 +70,7 @@ function standingVerdict(id: CalibrationIdentity): string {
   return `${coin},但還沒贏過引擎。`;
 }
 
-export default function ProfileView({ profile, identity: id, streak, soccer, series, trophies, calibration, seasonPeriod, seasonLabel, hasSeasonActivity }: Props) {
+export default function ProfileView({ profile, identity: id, streak, soccer, series, trophies, calibration, seasonPeriod, seasonLabel, hasSeasonActivity, founder }: Props) {
   // 身分解析(同創作者署名 · 顯示名 or 球迷#碼 + 永久碼 chip + 頭像 seed/glyph)。
   const who = creatorIdentity({
     handle: profile.handle,
@@ -87,6 +89,22 @@ export default function ProfileView({ profile, identity: id, streak, soccer, ser
 
   return (
     <div className="mx-auto max-w-2xl w-full px-6 sm:px-10 pt-12 pb-24">
+      {/* ── 創辦人框(R238 · Michelin 記分板)· 只在 Tim 的碼出現 ──────────
+          框成「記分的人,自己也被同一把尺量」——「裁判親自下場、而且照規矩記分」=
+          公信力的源頭(米其林評審自掏腰包吃飯)· 不是「站長報明牌」。 */}
+      {founder && (
+        <div className="mb-7 pb-5 border-b border-gold/30">
+          <p className="font-mono text-gold text-[10px] tracking-[0.45em] mb-2">
+            / 創辦人帳本 · FOUNDER
+          </p>
+          <p className="text-mute text-sm sm:text-[15px] leading-relaxed max-w-xl">
+            Tim 跟引擎用<span className="text-bone">同一把尺</span>記分 ——
+            賽前鎖死、輸了照留、看校準不看勝率。
+            <span className="text-mute/75"> 評價買不到、名次也買不到 —— 這份帳本就是證明。</span>
+          </p>
+        </div>
+      )}
+
       {/* ── 身分列 · 頭像 + 名字 + 永久碼 ──────────────────────── */}
       <header className="flex items-center gap-4">
         <Avatar
