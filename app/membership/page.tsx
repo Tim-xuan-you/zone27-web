@@ -55,7 +55,8 @@ export default function MembershipPage() {
         </p>
         {/* 任務型支持框架(Substack 最高信任轉換語)· 對誠實品牌:付費 = 養著那本刪不掉的帳本 */}
         <p className="text-mute text-sm sm:text-base leading-relaxed mb-8 max-w-lg">
-          你的訂閱養著這個地方 —— 讓<span className="text-bone">引擎永遠免費</span>、讓
+          在一個靠「刪掉你的輸單」賺錢的產業裡 —— 你的訂閱養著一個反過來做的地方:讓
+          <span className="text-bone">引擎永遠免費</span>、讓
           <span className="text-bone">贏和輸的帳本永遠刪不掉</span>。
         </p>
 
