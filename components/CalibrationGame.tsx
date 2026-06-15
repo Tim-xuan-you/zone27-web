@@ -296,6 +296,11 @@ function computeScore(matches: QuizMatch[], picks: Record<string, number>) {
   let confSum = 0;
   let engineHits = 0;
   let engineDecided = 0;
+  // 你跟引擎「看法不同」的場(你押一邊、引擎看好另一邊)· 那幾場誰押對 = 最直接的「你 vs 機器」·
+  // 比總命中更有 agency 感(在它沒看到的地方,你看到了)· 仍誠實:小樣本 + 57% 天花板照講。
+  let disagreeN = 0;
+  let disagreeYouHits = 0;
+  let disagreeEngineHits = 0;
   // 信心分桶(訪客)· 給 45° 散點
   const buckets: { lo: number; hi: number; n: number; hits: number; confSum: number }[] =
     [
@@ -327,6 +332,15 @@ function computeScore(matches: QuizMatch[], picks: Record<string, number>) {
       (pickedHome && m.winner === "home") ||
       (!pickedHome && m.winner === "away");
     if (correct) youHits++;
+    // 你跟引擎看法不同(你押一邊、引擎看好另一邊 · 且引擎有 lean)→ 記這場誰對。
+    if (m.engineHomePct !== m.engineAwayPct && pickedHome !== engineHome) {
+      disagreeN++;
+      if (correct) disagreeYouHits++;
+      const engineRightHere =
+        (engineHome && m.winner === "home") ||
+        (!engineHome && m.winner === "away");
+      if (engineRightHere) disagreeEngineHits++;
+    }
     const b = buckets.find((x) => conf >= x.lo && conf < x.hi);
     if (b) {
       b.n++;
@@ -355,6 +369,9 @@ function computeScore(matches: QuizMatch[], picks: Record<string, number>) {
     gap,
     engineHits,
     engineDecided,
+    disagreeN,
+    disagreeYouHits,
+    disagreeEngineHits,
     dots,
   };
 }
@@ -436,6 +453,21 @@ function ResultPanel({ score: s }: { score: Score }) {
             </span>
           )}
         </p>
+        {/* 你 vs 引擎「看法不同」那幾場誰對 = 最有 agency 的對照(在它沒看到的地方你看到了)·
+            humble:贏了也說運氣有份、輸了說正常 · 不喊「你贏了 AI」(守 AI 不吹噓紅線)。 */}
+        {s.disagreeN > 0 && (
+          <p className="mt-2.5 text-mute/75 text-[13px] leading-relaxed">
+            你跟引擎<span className="text-bone">看法不同</span>的{" "}
+            <span className="font-mono tabular">{s.disagreeN}</span> 場 —— 你押對{" "}
+            <span className="font-mono text-gold tabular">{s.disagreeYouHits}</span>、引擎押對{" "}
+            <span className="font-mono text-bone tabular">{s.disagreeEngineHits}</span>。{" "}
+            {s.disagreeYouHits > s.disagreeEngineHits
+              ? "在它沒看到的地方,你看到了 —— 但這幾場運氣也有份,別當常態。"
+              : s.disagreeYouHits === s.disagreeEngineHits
+                ? "分歧時打平,誰也沒壓倒誰。"
+                : "這次分歧它略勝 —— 正常,它也只是逼近 5 成 7 那道牆。"}
+          </p>
+        )}
       </div>
 
       {/* 45° 校準散點(你的點)· 同 /calibration 引擎自評那張圖的語言 */}
