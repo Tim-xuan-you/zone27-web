@@ -33,19 +33,15 @@ export type FounderCall = {
   settledAt?: string;
 };
 
-// 2026-06-15 Tim 第一批親手鎖定(10 手 · 跨足球/籃球/棒球/電競)。
-export const FOUNDER_CALLS: FounderCall[] = [
-  { ref: "1035", sport: "足球", event: "厄瓜多 vs 象牙海岸", read: "總進球 偏少 · 小於 1.5", lockedAt: "2026-06-15", result: null },
-  { ref: "1034", sport: "足球", event: "日本 vs 荷蘭", read: "兩隊都會進球", lockedAt: "2026-06-15", result: null },
-  { ref: "1033", sport: "足球", event: "古拉索 vs 德國", read: "總進球 偏多 · 大於 4.5", lockedAt: "2026-06-15", result: null },
-  { ref: "319", sport: "籃球", event: "紐約尼克 vs 聖安東尼奧馬刺", read: "首節 馬刺 有贏面", lockedAt: "2026-06-15", result: null },
-  { ref: "1032", sport: "足球", event: "土耳其 vs 澳洲", read: "總進球 偏少 · 小於 2.5", lockedAt: "2026-06-15", result: null },
-  { ref: "1030", sport: "足球", event: "摩洛哥 vs 巴西", read: "兩隊都會進球", lockedAt: "2026-06-15", result: null },
-  { ref: "110", sport: "棒球", event: "聖路易紅雀 vs 明尼蘇達雙城", read: "紅雀 贏面較大", lockedAt: "2026-06-15", result: null },
-  { ref: "1016", sport: "足球", event: "巴拉圭 vs 美國", read: "兩隊都會進球", lockedAt: "2026-06-15", result: null },
-  { ref: "1015", sport: "足球", event: "波赫 vs 加拿大", read: "總進球 偏少 · 小於 2.5", lockedAt: "2026-06-15", result: null },
-  { ref: "3600", sport: "電競", event: "T1 vs HLE", read: "HLE 有贏面", lockedAt: "2026-06-15", result: null },
-];
+// 🔴🔴 命門鐵律(R238 學到的最貴一課 · 永遠別違反):
+//   只放「在 ZONE 27、開賽『前』」鎖的手 —— commit 時間戳就是『賽前』的公開證明。
+//   **絕對不准 back-date**(事後把已經比完的場填進來、標成「賽前鎖定」)。 那是明牌老師
+//   「我早就說了!」的詐術,而且 commit 時間在賽後、任何人一比對就拆穿 → 整個記分板的
+//   「賽前鎖定」承諾當場自爆、後面每一筆真的也被懷疑。
+//   2026-06-15 Tim 給的第一批 10 手 = 他『在別處、賽前』推薦但「已經比完」的舊單 →
+//   我們無法在這裡證明賽前鎖定 → 移除(這不是刪輸單;它們從來沒在這裡被合法鎖過)。
+//   從 0 乾淨開始:只收 Tim 「現在、開賽前」給的手,當場 commit 鎖死。
+export const FOUNDER_CALLS: FounderCall[] = [];
 
 /** 拆「鎖定中(待對帳)」vs「已對帳(含輸)」· 已對帳的新→舊。 */
 export function splitFounderCalls(calls: FounderCall[] = FOUNDER_CALLS) {
