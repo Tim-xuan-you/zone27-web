@@ -18,6 +18,7 @@ import {
 } from "@/lib/matches";
 import { getMlbAsMatches, getMlbLockedMatches } from "@/lib/mlb-matches";
 import { getMatchHeat, heatDisplayFor, heatScore } from "@/lib/match-heat";
+import { getOpenMarkets } from "@/lib/markets";
 
 export const metadata = createPageMetadata({
   title: "今日賽事板 · CPBL + MLB",
@@ -71,6 +72,10 @@ export default async function MatchesPage() {
   const recHits = recordFinal.filter((m) => getCalibration(m) === "proved").length;
   const recMisses = recordFinal.filter((m) => getCalibration(m) === "diverged").length;
 
+  // R240 · 群眾盤入口(/markets · 引擎沒覆蓋的場)· 只在有開盤中才顯示(休賽/0 盤 → 不掛空連結)·
+  // 守 R234② 單一頂 Nav 入口:這是「賽事」面底下的次級發現點,不新增頂層導覽格。
+  const openMarketCount = getOpenMarkets().length;
+
   return (
     <div className="flex flex-col flex-1 min-h-screen">
       <Nav active="matches" />
@@ -113,6 +118,23 @@ export default async function MatchesPage() {
         misses={recMisses}
         pending={cpblSorted.length + mlbSorted.length}
       />
+
+      {/* ── 群眾盤入口(R240)· 引擎沒覆蓋的場也能押 · 有開盤中才顯示 ──────── */}
+      {openMarketCount > 0 && (
+        <section className="mx-auto max-w-6xl w-full px-6 sm:px-10 pb-2">
+          <Link
+            href="/markets"
+            className="flex items-baseline justify-between gap-3 border border-line/60 bg-slate/30 px-4 py-3 hover:border-gold/40 hover:bg-slate/40 transition-colors group"
+          >
+            <span className="text-mute text-sm leading-snug">
+              引擎沒覆蓋的場?<span className="text-bone">{openMarketCount} 場群眾盤開盤中</span> · 任何一場都能賽前鎖一手、看群眾共識
+            </span>
+            <span className="shrink-0 font-mono text-gold/70 group-hover:text-gold text-[10px] tracking-[0.3em] transition-colors">
+              開盤 →
+            </span>
+          </Link>
+        </section>
+      )}
 
       {/* ── MATCH GRID ──────────────────────── */}
       <section className="mx-auto max-w-6xl w-full px-6 sm:px-10 pb-12">

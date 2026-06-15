@@ -16,6 +16,7 @@ import {
   type SoccerMatchPrediction,
 } from "@/lib/soccer/football-data";
 import { getSoccerEnginePicks } from "@/lib/soccer/locked";
+import { getOpenMarkets } from "@/lib/markets";
 
 export const metadata = createPageMetadata({
   title: "足球 · 引擎開盤",
@@ -70,6 +71,9 @@ export default async function SoccerPage() {
     await getResolvedSoccerEngine();
   const soccerHits = engPreds.filter((p) => p.verdict === "proved").length;
   const soccerMisses = engPreds.filter((p) => p.verdict === "diverged").length;
+
+  // R240 · 群眾盤入口(/markets)· 引擎沒覆蓋的聯賽也能押 · 有開盤中才顯示。
+  const openMarketCount = getOpenMarkets().length;
 
   return (
     <div className="flex flex-col flex-1 min-h-screen">
@@ -168,6 +172,23 @@ export default async function SoccerPage() {
             </div>
           )}
         </section>
+
+        {/* ── 群眾盤入口(R240)· 引擎沒覆蓋的聯賽也能押 · 有開盤中才顯示 ──────── */}
+        {openMarketCount > 0 && (
+          <section className="mx-auto max-w-6xl w-full px-6 sm:px-10 pb-8">
+            <Link
+              href="/markets"
+              className="flex items-baseline justify-between gap-3 border border-line/60 bg-slate/30 px-4 py-3 hover:border-gold/40 hover:bg-slate/40 transition-colors group"
+            >
+              <span className="text-mute text-sm leading-snug">
+                引擎沒覆蓋的聯賽?<span className="text-bone">{openMarketCount} 場群眾盤開盤中</span> · 任何一場都能賽前鎖一手、看群眾共識
+              </span>
+              <span className="shrink-0 font-mono text-gold/70 group-hover:text-gold text-[10px] tracking-[0.3em] transition-colors">
+                開盤 →
+              </span>
+            </Link>
+          </section>
+        )}
 
         {/* ── 引擎公開戰績條 + 你的足球戰績(移到賽事看板下方 · 賽事擺前面)──
             證物仍在第一屏可掃範圍(賽事卡通常一兩屏內)· 但「先看今晚有哪些場」優先於「先看戰績」。 */}
