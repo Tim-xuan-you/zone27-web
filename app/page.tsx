@@ -122,6 +122,12 @@ export default async function Home() {
       <main id="main">
         {/* ── HERO · slim · market-first ─────────────── */}
         <section className="mx-auto max-w-5xl px-6 sm:px-10 pt-12 sm:pt-16 pb-8 text-center">
+          {/* R239 · 把「AI」放上前門(Tim 要)· 但走 Apple「discipline over hype」非 AI-washing:
+              名分=「AI 勝率引擎」· 緊接「公開準度」= 在一個被「AI 神準」洗到麻木的市場,唯一敢
+              公開 AI 到底準幾成的那個 = 把 AI 趨勢變成護城河,不是口號。 honest AI · 不裝神祕。 */}
+          <p className="font-mono text-gold text-[10px] sm:text-[11px] tracking-[0.4em] mb-5">
+            AI 勝率引擎 · 公開準度
+          </p>
           <h1 className="text-3xl sm:text-5xl font-light leading-[1.08] tracking-tight text-bone">
             不靠直覺,<span className="text-gold">只看演算法。</span>
           </h1>
@@ -138,7 +144,7 @@ export default async function Home() {
           {/* 支撐句(合併原本兩段:免費萬次 + 57% 神準)· 降成一行 mute · wall-of-text → 呼吸感。
               57% 誠實王牌仍在(收進支撐句)· 「喊神準的在騙你」打騙子角度保留。 */}
           <p className="mt-4 max-w-xl mx-auto text-mute leading-relaxed text-sm sm:text-base">
-            免費跑一萬次告訴你誰會贏。 全世界最強的模型賽前單場也才{" "}
+            免費讓 AI 跑一萬次告訴你誰會贏。 連全世界最強的 AI,賽前單場也才{" "}
             <span className="text-bone">5 成 7</span> —— 喊「94% 神準」的,數學上在騙你。
           </p>
           {/* 引擎戰績 · Pratfall「連輸的也掛」· compact · 永遠不刪 */}
