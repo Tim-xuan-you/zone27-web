@@ -15,6 +15,7 @@ import {
 } from "@/lib/matches";
 import { getMlbLockedMatches } from "@/lib/mlb-matches";
 import SoccerEngineRecord from "@/components/SoccerEngineRecord";
+import AnalystPanel from "@/components/AnalystPanel";
 import SportToggle from "@/components/SportToggle";
 import SoccerPendingFrame from "@/components/SoccerPendingFrame";
 import { getLockedSoccerPredictions } from "@/lib/soccer/locked";
@@ -306,6 +307,10 @@ export default function TrackRecordPage() {
             />
           </div>
         </section>
+
+        {/* ── 分析師看法 · 人類賽道(R239)· 引擎是招牌 · 這條是旁邊的人(3 位平權分析師 ·
+            引擎沒覆蓋的球由人賽前鎖定)· 同一套誠實規則 · graceful(沒鎖手 → 只介紹不掛空盒)。 */}
+        <AnalystPanel />
 
         <RelatedReading currentPath="/track-record" />
 

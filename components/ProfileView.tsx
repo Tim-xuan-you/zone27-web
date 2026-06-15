@@ -1,7 +1,6 @@
 import Link from "next/link";
 import Avatar from "@/components/Avatar";
 import HonorWall from "@/components/HonorWall";
-import FounderCalls from "@/components/FounderCalls";
 import AccuracySparkline from "@/components/AccuracySparkline";
 import TrophyGrid from "@/components/TrophyGrid";
 import CalibrationMasterView from "@/components/CalibrationMasterView";
@@ -54,8 +53,6 @@ type Props = {
   seasonLabel?: string;
   /** 本月有沒有任何押注(false → 不顯示回顧入口) */
   hasSeasonActivity?: boolean;
-  /** 這份帳本是創辦人(Tim)的?→ 頂端掛「創辦人框」(R238 · isFounderCode) */
-  founder?: boolean;
 };
 
 // 一句話總結這份帳本的站位 · 第三人稱(主詞 = 帳本)· 誠實雙向(贏照講、輸也照講)。
@@ -71,7 +68,7 @@ function standingVerdict(id: CalibrationIdentity): string {
   return `${coin},但還沒贏過引擎。`;
 }
 
-export default function ProfileView({ profile, identity: id, streak, soccer, series, trophies, calibration, seasonPeriod, seasonLabel, hasSeasonActivity, founder }: Props) {
+export default function ProfileView({ profile, identity: id, streak, soccer, series, trophies, calibration, seasonPeriod, seasonLabel, hasSeasonActivity }: Props) {
   // 身分解析(同創作者署名 · 顯示名 or 球迷#碼 + 永久碼 chip + 頭像 seed/glyph)。
   const who = creatorIdentity({
     handle: profile.handle,
@@ -90,22 +87,6 @@ export default function ProfileView({ profile, identity: id, streak, soccer, ser
 
   return (
     <div className="mx-auto max-w-2xl w-full px-6 sm:px-10 pt-12 pb-24">
-      {/* ── 創辦人框(R238 · Michelin 記分板)· 只在 Tim 的碼出現 ──────────
-          框成「記分的人,自己也被同一把尺量」——「裁判親自下場、而且照規矩記分」=
-          公信力的源頭(米其林評審自掏腰包吃飯)· 不是「站長報明牌」。 */}
-      {founder && (
-        <div className="mb-7 pb-5 border-b border-gold/30">
-          <p className="font-mono text-gold text-[10px] tracking-[0.45em] mb-2">
-            / 創辦人帳本 · FOUNDER
-          </p>
-          <p className="text-mute text-sm sm:text-[15px] leading-relaxed max-w-xl">
-            Tim 跟引擎用<span className="text-bone">同一把尺</span>記分 ——
-            賽前鎖死、輸了照留、看校準不看勝率。
-            <span className="text-mute/75"> 評價買不到、名次也買不到 —— 這份帳本就是證明。</span>
-          </p>
-        </div>
-      )}
-
       {/* ── 身分列 · 頭像 + 名字 + 永久碼 ──────────────────────── */}
       <header className="flex items-center gap-4">
         <Avatar
@@ -148,10 +129,6 @@ export default function ProfileView({ profile, identity: id, streak, soccer, ser
       {/* 招牌黃金比例髮絲線(品牌唯一可辨識幾何記號 · 校準卡尺 IP)· 把這張最會被
           截圖外傳的公開檔案,錨上品牌記號(同收據頁)· 提升 viral 表面的辨識度。 */}
       <div className="zone27-rule max-w-[300px] mt-6" aria-hidden="true" />
-
-      {/* 創辦人跨運動個人鎖定(只創辦人帳本顯示)· 引擎沒覆蓋的運動(籃球/電競…)的
-          人類賽道 · 同樣賽前鎖死、逐場打分、連輸都留 · lib/founder-calls.ts。 */}
-      {founder && <FounderCalls />}
 
       {/* ── 空檔案 · 尊嚴框(profile 存在但還沒結算的場)──────────────
           不寫「沒資料」· 寫「已經開始鎖了」—— 把弱點翻成最強信號(同足球 SoccerPendingFrame)。 */}
