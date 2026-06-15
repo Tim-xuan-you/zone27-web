@@ -39,13 +39,13 @@ const TIERS: { value: string; label: string; body: string; price: string }[] = [
   {
     value: "black-card",
     label: "BLACK",
-    body: "每 31 天手動 ECPay · 6 unlocks(Engine + Lens + 討論 + 抽成 + voting + 筆記)· 不自動續扣",
+    body: "每 31 天手動 ECPay · 6 unlocks(Engine + Lens + 討論 + 金環 + voting + 筆記)· 不自動續扣",
     price: "NT$ 500/31 天",
   },
   {
     value: "founders27",
     label: "GOLD",
-    body: "年度 · 全 unlocks + 5% 抽成 + 未來所有 lenses/engines 解鎖",
+    body: "年度 · 全 unlocks + 搶先試 + 投票權 + 未來所有 lenses/engines 解鎖",
     price: "NT$ 2,700/年",
   },
 ];

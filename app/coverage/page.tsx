@@ -198,7 +198,7 @@ export default function CoveragePage() {
               不同靠賣明牌賺錢的對手:<strong className="text-gold">引擎永遠免費 · 不賣明牌(tipster picks)· PROVED + DIVERGED 等大公開 · 方法完整公開(見 /methodology + /audit)</strong>。 您拿我們的資料自己決定下哪個 platform · ZONE 27 自己不接受下注(我們不是賭場)。
             </p>
             <p className="text-mute/85 text-sm leading-relaxed mb-6 max-w-2xl">
-              <strong className="text-bone">老實認:</strong> 訂閱者寫文章賣 · ZONE 27 抽 5–10% commission(BLACK 10% · GOLD 5%)· 跟收費明牌群組 5-30% / Substack 10% / OnlyFans 20% / YouTube 45% 抽傭結構同類 · 是這裡面最低的 · 不假裝「我們不抽傭」 = 假面 disclosure。
+              <strong className="text-bone">我們靠什麼活:</strong> 會員身分訂閱 · 出錢的人是養著免費引擎 · 不靠廣告 · 不抽你下注的傭 · 也不抽創作者的傭 —— 創作者只免費公開發、賽後自動對帳、爬天梯、被追蹤 · 賺的是看得見的地位,不是錢。
             </p>
             <div className="mb-6">
               <ArticleMeta readingMin={8} />

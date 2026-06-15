@@ -49,8 +49,8 @@ const REDLINES: ReadonlyArray<{ no: string; rule: string; basis: string; revised
   {
     no: "04",
     rule: "不抽真錢下注的傭 · 不做多層次分潤",
-    basis: "0 抽賭注的傭(唯一法律紅線 · 我們自己不接受下注)· 0 referral code / 0 UTM / 0 多層次傳銷分潤。創作者賣分析我們抽 5-10% 內容傭(老實認 · 業界最低)—— 那是內容平台抽成(同 Substack / YouTube),不是下注分潤,兩件事不要混。",
-    revised: "2026-06 隨創作者市場 pivot 修訂:原文「no commission 任何形式」誤把內容抽傭也包進去 · 真紅線只有抽賭注的傭,如實分清楚。",
+    basis: "0 抽賭注的傭(唯一法律紅線 · 我們自己不接受下注)· 0 referral code / 0 UTM / 0 多層次傳銷分潤。創作者只免費公開發分析,回報是地位(天梯 / 校準 / 被追蹤),不是牆後的錢。",
+    revised: "2026-06-15 修訂:原本創作者可標價賣分析、平台抽 5-10% 內容傭;後來把『賣分析賺錢』這條路整個收掉、改回純訂閱身分(Defector 式),所以改成創作者只免費公開發、平台 0 抽傭。 程式碼保留,未來若重開會提前公告。",
   },
   {
     no: "05",
@@ -277,8 +277,8 @@ export default function IntegrityPage() {
 
           <div className="space-y-5 text-mute leading-relaxed zh-body">
             <p>
-              引擎這條線只看數據品質、不受任何金錢關係影響;賺錢那條線(身分、
-              抽成)完全不能反過來干涉引擎算出什麼。 因為 ZONE 27 是一個人做的 ·
+              引擎這條線只看數據品質、不受任何金錢關係影響;賺錢那條線(身分
+              訂閱)完全不能反過來干涉引擎算出什麼。 因為 ZONE 27 是一個人做的 ·
               沒辦法靠公司部門互相隔離 · 所以改用<strong className="text-bone">公開白紙黑字</strong>
               的方式守住這道牆 · 不假裝有牆 · 而是公開講清楚這道牆怎麼維持。
             </p>
@@ -289,7 +289,7 @@ export default function IntegrityPage() {
               CANVAS · /audit S02 全部 estimation disclosure)對<strong className="text-bone">
               FREE tier 訪客 = BLACK 訂閱者 = GOLD 永久會員</strong>
               · 物理上同一份 lib/simulator.ts 跑出來。 paid tier 買的是 IDENTITY
-              + 創作者抽成 + GOLD LINE 群 · 不買 engine accuracy
+              (出錢養著免費引擎 + 驗證準度徽章 + 支持者金環 + GOLD LINE 群)· 不買 engine accuracy
               升級 · 不買 secret edge · 不買 paywall predictions。
             </p>
 
@@ -364,7 +364,7 @@ export default function IntegrityPage() {
                 </div>
                 <p className="text-mute text-[12px] sm:text-sm leading-relaxed">
                   BLACK 解鎖的(見 /membership/black-card)全是身分層的東西
-                  (LINE 群 + Tim 工程筆記完整版 + voting + 創作者抽成 + GOLD LINE 群)·
+                  (LINE 群 + Tim 工程筆記完整版 + 引擎新版搶先試 + voting + 支持者金環)·
                   沒有任何一項是「讓引擎變更準」· 違反 = 品牌鐵律直接崩。
                 </p>
               </li>

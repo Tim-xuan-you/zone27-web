@@ -3,7 +3,7 @@ import { BRAND, OG_SIZE, OG_CONTENT_TYPE } from "@/lib/brand";
 
 // ── ZONE 27 · /founders Dynamic OG ─────────────────────
 // 當有人把 https://zone27-web.vercel.app/founders 貼到 LINE/FB,
-// 顯示的是 GOLD 銷售情境卡(最高階年度 · 最低抽成 · NT$ 2,700/年)。
+// 顯示的是 GOLD 銷售情境卡(最高階年度 · 支持身分 · NT$ 2,700/年)。
 // R189「全砍前270編號」· 不再 render 數字/編號/REMAINING/CLAIM(純開放)。
 // ─────────────────────────────────────────────────────
 
@@ -94,7 +94,7 @@ export default async function FoundersOgImage() {
               display: "flex",
             }}
           >
-            最高階年度 · 抽成全站最低
+            最高階年度 · 支持身分
           </div>
 
           {/* GOLD 字標(取代舊的 270 大數字)*/}

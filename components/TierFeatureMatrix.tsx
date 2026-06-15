@@ -134,11 +134,11 @@ const FEATURES: Feature[] = [
     },
   },
   {
-    label: "創作者抽成",
-    detail: "您發文 · ZONE 27 抽 · 業界收費老師 30-50% · 我們 ↓↓",
+    label: "支持者金環 · 公開檔身分標記",
+    detail: "公開檔頭像旁標出「支持開放引擎」· 出錢養著免費引擎的人專屬身分記號",
     unlock: {
-      anonymous: "na",
-      free: "na",
+      anonymous: "locked",
+      free: "locked",
       "black-card": "unlocked",
       founders27: "unlocked",
     },
@@ -502,7 +502,7 @@ export default function TierFeatureMatrix() {
         <p className="text-mute text-[12px] leading-relaxed mb-3">
           <strong className="text-bone">為什麼 0 風險</strong>:
           ZONE 27 目前 0 paid features have been built · 「BLACK 月 voting」 ·
-          「Tim 工程筆記 full」 · 「創作者抽成」 全沒 ship · spoof preview 後
+          「Tim 工程筆記 full」 全沒 ship · spoof preview 後
           看到的只是 visual UI mockup · 沒實際 paid functionality 可以「unlock」 ·
           per `/integrity` rule #13 + `[[zone27-payment-architecture]]` manual
           ECPay flow · 沒 paid auth gate by design。 連 GOLD 編號 #001-#270

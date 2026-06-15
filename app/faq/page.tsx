@@ -34,7 +34,7 @@ const CATEGORIES: Category[] = [
         q: "什麼是 ZONE 27?",
         a: (
           <>
-            <strong className="text-bone">ZONE 27 = 賭徒的 Bloomberg Terminal。</strong> 客群 = 會下注的 sports 迷(包括賭徒)· 對標靠賣明牌賺錢的對手 · 提供更好的資訊層。 不同他們的是:引擎永遠免費 · 不賣明牌 · PROVED + DIVERGED 等大公開 · 方法完整公開(見 /methodology + /audit)。 您拿我們的資料自己決定下哪個 platform · ZONE 27 自己不接受下注(我們不是賭場)。 老實認:訂閱者寫文章賣 · ZONE 27 抽 5–10% commission(BLACK 10% · GOLD 5% · 業界最低 · Substack 10% / OnlyFans 20% / YouTube 45%)· 不假裝「我們不抽傭」。 Phase 1 CPBL · Phase 2 NBA + 未來 leagues · Tim 親手 curate。 完整 brand 方法論見{" "}
+            <strong className="text-bone">ZONE 27 = 賭徒的 Bloomberg Terminal。</strong> 客群 = 會下注的 sports 迷(包括賭徒)· 對標靠賣明牌賺錢的對手 · 提供更好的資訊層。 不同他們的是:引擎永遠免費 · 不賣明牌 · PROVED + DIVERGED 等大公開 · 方法完整公開(見 /methodology + /audit)。 您拿我們的資料自己決定下哪個 platform · ZONE 27 自己不接受下注(我們不是賭場)。 老實認:我們靠會員身分訂閱活著,出錢的人是養著免費引擎;不接廣告、不抽下注的傭、也不抽創作者的傭 —— 創作者只免費公開發,賺的是地位(賽後自動對帳、爬天梯、被追蹤),不是錢。 Phase 1 CPBL · Phase 2 NBA + 未來 leagues · Tim 親手 curate。 完整 brand 方法論見{" "}
             <Link href="/about" className="text-gold underline-offset-4 hover:underline">
               /about
             </Link>
@@ -77,7 +77,7 @@ const CATEGORIES: Category[] = [
               賽事頁
             </Link>
             {" "}的「看法 · 分析」· <strong className="text-bone">免費看 · 登入發言</strong>(不必付費)·
-            一場一篇 · 押一邊賽後自動掛準/不準(刪不掉)。 高手的完整分析未來可賣(平台抽 5–10%)。
+            一場一篇 · 押一邊賽後自動掛準/不準(刪不掉)。 高手的分析免費公開發 · 賺的是地位(賽後自動對帳、爬天梯、被追蹤)· 不藏在付費牆後。
           </>
         ),
       },
@@ -105,7 +105,7 @@ const CATEGORIES: Category[] = [
             。
             <strong className="text-bone">BLACK</strong> NT$ 500/31 天 × N 訂戶
             (不自動續扣 · 每 31 天 explicit click)。
-            再加上創作者賣分析 · 平台抽 5–10%(業界最低,老實認、不假裝不抽)。
+            付費的唯一理由是身分:出錢養著免費引擎 · 戴一個賺來的身分(驗證準度徽章 · 支持者金環 · 賽事討論室發言)。 創作者只免費公開發 · 平台 0 抽創作者傭。
             不抽真錢下注的傭 · 不接廣告 / 業配 / 導購分潤。
           </>
         ),
@@ -125,8 +125,7 @@ const CATEGORIES: Category[] = [
             「NT$ 2,700/365 天 年度會員」。
             <strong className="text-bone">BLACK</strong> 是 31-day pass NT$ 500/31 天
             (3 月–11 月 · 240 場 + 季後賽 · ≈ NT$ 6/場 · 手動銀行轉帳 ·
-            不自動續扣 · per /integrity rule #13)。GOLD 會員額外好處:creator 抽成 5%
-            (BLACK creators 10%)、AI 模型優先試用、實體招待。完整對照請見{" "}
+            不自動續扣 · per /integrity rule #13)。GOLD 是最深一層的支持者:引擎新版搶先試 + 投票權、Tim 親手 onboard、實體招待。 BLACK 是入門支持者(月度)。完整對照請見{" "}
             <Link href="/founders" className="text-gold underline-offset-4 hover:underline">
               /founders
             </Link>
@@ -209,8 +208,8 @@ const CATEGORIES: Category[] = [
           <>
             <strong className="text-bone">沒 downline 結構。</strong>{" "}
             0 推薦獎金 · 0 多層抽佣 · 0 業績 quota · 0 招募下線 · 會員不限量但零金字塔抽佣 ·
-            GOLD 會員。 BLACK 10% 抽成是 platform fee(類 Stripe / Spotify)
-            · GOLD 5%。
+            GOLD 會員。 我們的收入只有一條腿:會員自己出錢的身分訂閱(NT$ 500 / NT$ 2,700)·
+            出錢養著免費引擎 · 沒有下線、沒有層層分潤。
           </>
         ),
       },

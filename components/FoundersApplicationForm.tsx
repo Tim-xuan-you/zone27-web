@@ -502,7 +502,7 @@ export default function FoundersApplicationForm() {
         留下你的資料 ·{" "}
         <strong className="text-bone">Tim 親手 onboard 每一位</strong>{" "}
         · 1-3 天內寄付款方式給你(銀行轉帳)· 轉帳完成就開通。 會員不限量 ·
-        抽成 5% 全站最低。
+        最高階年度支持身分。
       </p>
 
       {/* R142 W4 · a11y fix · WCAG 1.3.1 + 4.1.2 · all 4 form fields(email

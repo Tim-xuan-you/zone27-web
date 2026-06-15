@@ -100,6 +100,12 @@ export default function CreatorAnalysis({
   // R229「免費封神」· 標價賣降級成付費會員的安靜進階選項 · 預設收起(收起 = price 0 = 免費發)。
   const [sellOpen, setSellOpen] = useState(false);
 
+  // R238「收掉賣分析 · 純 Defector」(Tim 拍板):創作者付費賣這條路整個收掉 ——
+  // 創作者只免費公開發(賺地位不賺錢)· 平台 0 抽傭。 標價賣整段 UI 用這個旗標關掉
+  // (false = 對所有人隱藏)· 底層 submit / RPC / 錢包程式碼一行未刪 → 未來想重開,把這裡
+  // 改回 true 即可(重開前依 /integrity 提前公告)。 ⚠️ 別把這個旗標當「死碼」清掉。
+  const MARKETPLACE_ENABLED: boolean = false;
+
   useEffect(() => {
     let cancelled = false;
     (async () => {
@@ -327,7 +333,7 @@ export default function CreatorAnalysis({
                 <span className="text-mute/55">地位是賺來的,不是買來的。</span>
               </p>
 
-              {isPaidTier(tier) ? (
+              {MARKETPLACE_ENABLED && (isPaidTier(tier) ? (
                 sellOpen ? (
                   <div className="space-y-2 border-l border-gold/25 pl-3">
                     <label className="block font-mono text-mute/70 text-[10px] tracking-[0.2em]">
@@ -403,7 +409,7 @@ export default function CreatorAnalysis({
                     認識 BLACK / GOLD →
                   </Link>
                 </p>
-              )}
+              ))}
             </div>
             <div className="flex items-center justify-between gap-3 flex-wrap">
               <span className="font-mono text-mute/55 text-[10px] tracking-[0.2em] tabular">

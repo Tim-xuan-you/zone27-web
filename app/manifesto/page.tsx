@@ -216,8 +216,8 @@ export default function ManifestoPage() {
             <P>
               <strong className="text-bone">這個倒置讓我們失去什麼:</strong>{" "}
               我們永遠不會有「ARR 50x 線性成長」的故事可以講給創投。
-              收入靠會員費(GOLD NT$ 2,700/年 · BLACK NT$ 500/月)+
-              創作者抽成 5–10% · 會員不限量 · 但 CPBL 市場本身就小。這是一個{" "}
+              收入只靠身分會員費(GOLD NT$ 2,700/年 · BLACK NT$ 500/月)·
+              會員不限量 · 但 CPBL 市場本身就小。這是一個{" "}
               <Link href="/about" className="text-gold hover:underline underline-offset-4">
                 俱樂部規模的事業
               </Link>
@@ -279,11 +279,11 @@ export default function ManifestoPage() {
                 </li>
               </ul>
               <P className="text-mute/70 !mb-0 mt-4 text-sm">
-                BLACK 創作者抽成 10% 是平台費 ·
-                GOLD 創作者抽成 5%(BLACK 的一半 · 不是推薦回扣)。
-                GOLD 會員是
-                <strong className="text-bone">一個付費身分</strong> · 不是招募階梯 ·
-                不是未來業績的領先指標。
+                創作者在 ZONE 27 發分析<strong className="text-bone">完全免費 · 不抽成 ·
+                也不靠賣分析賺錢</strong> · 賺的是地位:公開發、賽後自動對帳、爬天梯、被追蹤。
+                會員費只是
+                <strong className="text-bone">一個付費身分 — 出錢養著免費引擎</strong> ·
+                不是招募階梯 · 不是未來業績的領先指標 · 不做多層次分潤。
               </P>
             </div>
             <P className="text-mute/70">

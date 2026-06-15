@@ -204,9 +204,9 @@ export default function DisciplinePage() {
                 沒有抄收費明牌群組 / 抽下注的莊家模式 · 從零問「what&apos;s a quant baseball
                 community really for」。這就是 First Principles。
               </Item>
-              <Item label="自綁抽成 5% = forced discipline">
+              <Item label="自綁賺錢方式 = forced discipline">
                 Musk 為什麼能造火箭?因為他<strong className="text-bone">限制自己</strong>
-                只做幾件事。ZONE 27 版:引擎永遠免費 · 創作者抽成自綁 5%(業界 30-50%)·
+                只做幾件事。ZONE 27 版:引擎永遠免費 · 創作者只免費公開發 · 0 抽創作者傭 ·
                 0 廣告 · 不自動續扣 — 我們限制的是自己賺錢的方式 · 不是限制能服務多少人。
               </Item>
             </List>
@@ -241,10 +241,13 @@ export default function DisciplinePage() {
                 BLACK NT$ 500/31 天 + GOLD NT$ 2,700/365 天 = membership revenue ·
                 跟 Costco 一樣 — 「賣會員身分,不賣商品本身」。
               </Item>
-              <Item label="自設創作者抽成上限">
-                GOLD 創作者 5% · BLACK 10% · vs 業界 30-50%。
-                Costco 14% 上限 = 把客戶利益放在毛利之前。
-                ZONE 27 同樣邏輯 · 但更狠(5%)。
+              <Item label="不自動續扣">
+                BLACK 每 31 天您自己主動轉一次帳 · 不綁信用卡、不自動扣款(per{" "}
+                <Link href="/integrity" className="text-gold hover:underline">
+                  /integrity
+                </Link>{" "}
+                #13)。Costco 14% 毛利上限 = 把會員利益放在收入之前 ·
+                ZONE 27 同樣邏輯 · 自綁掉「忘了取消就一直扣」這條最好賺的續訂財。
               </Item>
               <Item label="不打廣告">
                 沒 Google Ads · 沒 FB Ads · 沒 retargeting(per{" "}
