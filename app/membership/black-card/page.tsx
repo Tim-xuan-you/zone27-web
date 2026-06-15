@@ -77,9 +77,6 @@ export default function BlackCardPage() {
             </li>
           ))}
         </ul>
-        <p className="font-mono text-mute/55 text-[10px] tracking-[0.15em] mb-10">
-          ⏳ 部分功能(賣文章、發言、通知)等付款系統上線後陸續開放。
-        </p>
 
         {/* ── 直接付款(同錢包 UX · 點了直接給帳號)──── */}
         <MembershipUpgrade

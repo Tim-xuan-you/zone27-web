@@ -34,7 +34,7 @@ const CATEGORIES: Category[] = [
         q: "什麼是 ZONE 27?",
         a: (
           <>
-            <strong className="text-bone">ZONE 27 = 賭徒的 Bloomberg Terminal。</strong> 客群 = 會下注的 sports 迷(包括賭徒)· 對標靠賣明牌賺錢的對手 · 提供更好的資訊層。 不同他們的是:引擎永遠免費 · 不賣明牌 · PROVED + DIVERGED 等大公開 · 方法完整公開(見 /methodology + /audit)。 您拿我們的資料自己決定下哪個 platform · ZONE 27 自己不接受下注(我們不是賭場)。 老實認:我們靠會員身分訂閱活著,出錢的人是養著免費引擎;不接廣告、不抽下注的傭、也不抽創作者的傭 —— 創作者只免費公開發,賺的是地位(賽後自動對帳、爬天梯、被追蹤),不是錢。 Phase 1 CPBL · Phase 2 NBA + 未來 leagues · Tim 親手 curate。 完整 brand 方法論見{" "}
+            <strong className="text-bone">ZONE 27 = 賭徒的 Bloomberg Terminal。</strong> 客群 = 會下注的 sports 迷 · 對標靠賣明牌賺錢的對手。 不同的是:引擎永遠免費 · 不賣明牌 · PROVED + DIVERGED 等大公開 · 方法完整公開(見 /methodology + /audit)。 你拿我們的資料自己決定 · ZONE 27 不接受下注(我們不是賭場)。 怎麼靠這活下來?見下面「怎麼賺錢」。 Phase 1 CPBL · Phase 2 NBA · Tim 親手 curate。 完整方法論見{" "}
             <Link href="/about" className="text-gold underline-offset-4 hover:underline">
               /about
             </Link>
@@ -73,7 +73,7 @@ const CATEGORIES: Category[] = [
         a: (
           <>
             有 · 每場{" "}
-            <Link href="/matches/cpbl-260526-01#creator-analysis" className="text-gold underline-offset-4 hover:underline">
+            <Link href="/matches" className="text-gold underline-offset-4 hover:underline">
               賽事頁
             </Link>
             {" "}的「看法 · 分析」· <strong className="text-bone">免費看 · 登入發言</strong>(不必付費)·
@@ -92,7 +92,7 @@ const CATEGORIES: Category[] = [
             <Link href="/member/submit" className="text-gold underline-offset-4 hover:underline">
               /member/submit
             </Link>
-            {" "}投稿給 Tim · 或用 LensFocusVote 投票 lens 優先序。
+            {" "}投稿給 Tim。
           </>
         ),
       },
@@ -197,7 +197,7 @@ const CATEGORIES: Category[] = [
             <Link href="/founders" className="text-gold underline-offset-4 hover:underline">
               /founders
             </Link>
-            {" "}hero + §定價推導(R164 collapsed 自 /pricing/why 詳細頁)。
+            {" "}的定價推導。
           </>
         ),
       },
