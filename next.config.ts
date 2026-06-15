@@ -59,7 +59,7 @@ const nextConfig: NextConfig = {
     // /tim → 創辦人公開帳本 /u/[他的永久碼](R238 · Michelin 記分板捷徑)。
     // 乾淨的路由層 307(無 1 秒 meta-refresh)· FOUNDER_AUTHOR_CODE(Vercel env · build 時讀)
     // 設好 + 8-hex 才加;未設 → 不加 → app/tim/page.tsx 接手退 /track-record(graceful)。
-    const fc = (process.env.FOUNDER_AUTHOR_CODE ?? "").trim().toLowerCase();
+    const fc = (process.env.FOUNDER_AUTHOR_CODE ?? "a7178cb4").trim().toLowerCase();
     if (/^[0-9a-f]{8}$/.test(fc)) {
       base.push({ source: "/tim", destination: `/u/${fc}`, permanent: false });
     }
