@@ -32,6 +32,7 @@ export default function SoccerBetStrip({
   homeLabel,
   awayLabel,
   locked = false,
+  returnTo = "/soccer",
 }: {
   matchId: string;
   dateISO: string;
@@ -39,6 +40,8 @@ export default function SoccerBetStrip({
   awayLabel: string;
   /** 這場是否有「賽前鎖定線」(= 有單場收據可外傳)· 沒鎖的場不掛收據連結(避免 404 死連結) */
   locked?: boolean;
+  /** 未登入「登入就能押」的回跳基底(預設 /soccer · 群眾盤 /markets 傳自己 → 登入後落回原卡) */
+  returnTo?: string;
 }) {
   const [state, setState] = useState<State>("loading");
   const [pick, setPick] = useState<SoccerPick | null>(null);
@@ -174,7 +177,7 @@ export default function SoccerBetStrip({
         // 撞牆點做成「清楚可點的引導」(金框 + ≥44px 可點區)· 不照搬棒球整片實心金底
         // (一頁多張卡會壓過引擎 % 這個刻意 hero)· next 帶 #m-{matchId} → 登入後落回這張卡。
         <Link
-          href={`/login?next=${encodeURIComponent(`/soccer#m-${matchId}`)}`}
+          href={`/login?next=${encodeURIComponent(`${returnTo}#m-${matchId}`)}`}
           className="flex items-center justify-between gap-2 border border-gold/40 px-3 py-2.5 min-h-[44px] hover:border-gold/70 hover:bg-gold/5 transition-colors group"
         >
           <span className="font-mono text-gold/75 text-[11px] tracking-[0.15em]">

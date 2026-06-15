@@ -87,6 +87,16 @@ export const COMMAND_ITEMS: CommandItem[] = [
     ],
   },
   {
+    label: "開盤 · 群眾預測市場",
+    kicker: "/markets",
+    path: "/markets",
+    group: "賽事 · 引擎",
+    keywords: [
+      "markets", "開盤", "群眾盤", "市場", "預測市場", "群眾共識", "押任一場",
+      "polymarket", "其他聯賽", "冰島", "任何球", "開一張",
+    ],
+  },
+  {
     label: "足球 · 世界盃/巴甲 引擎開盤(勝/平/負)",
     kicker: "/soccer",
     path: "/soccer",

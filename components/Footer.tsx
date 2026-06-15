@@ -35,6 +35,7 @@ const FOOTER_GROUPS: FooterGroup[] = [
     enLabel: "FOR FANS",
     links: [
       { label: "今日 CPBL 賽事", href: "/matches" },
+      { label: "開盤 · 群眾預測市場", href: "/markets" },
       { label: "活動脈動 · 大家在押什麼", href: "/pulse" },
     ],
   },
