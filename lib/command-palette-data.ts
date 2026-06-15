@@ -162,6 +162,16 @@ export const COMMAND_ITEMS: CommandItem[] = [
       "我們的錯", "改過", "誠實", "honest", "我們搞砸過的事",
     ],
   },
+  {
+    label: "我們怎麼算贏輸 · 一場都刪不掉",
+    kicker: "/how-we-grade",
+    path: "/how-we-grade",
+    group: "信任文件",
+    keywords: [
+      "結算", "規則", "怎麼算", "贏輸", "判定", "grade", "grading", "settlement",
+      "rule", "刪不掉", "改不了", "back-date", "賽果", "官方", "公平", "怎麼判贏",
+    ],
+  },
 
   // ── 轉換 ───────────────────────────────────────────
   {

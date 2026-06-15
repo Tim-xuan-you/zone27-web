@@ -286,6 +286,14 @@ export default function TrackRecordPage() {
             </Link>
             。
           </p>
+          {/* R240 · 「結算規則」示範頁:把這條規則攤成 5 步 + 一個我們真的算錯的例子(刪不掉)·
+              最會被外傳給懷疑者的信任證物。 */}
+          <p className="mt-3 text-mute/85 text-sm leading-relaxed">
+            想看規則怎麼綁死到<span className="text-bone">沒人能彎</span>、還有一個我們真的算錯卻還掛著的例子?{" "}
+            <Link href="/how-we-grade" className="text-gold underline-offset-4 hover:underline">
+              我們怎麼算贏輸 →
+            </Link>
+          </p>
           <p className="mt-6 font-mono text-mute/60 text-[10px] tracking-[0.3em]">
             — TIM · FOUNDER
           </p>
