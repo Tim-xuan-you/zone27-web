@@ -7,7 +7,7 @@ import MembershipUpgrade from "@/components/MembershipUpgrade";
 export const metadata: Metadata = {
   title: "BLACK · CPBL 季票 · NT$ 500 / 31 天",
   description:
-    "BLACK · NT$ 500 / 31 天 · 升級解鎖賣分析賺錢(你拿 90%)+ 賽事討論室發言 + 驗證準度標章。 手動轉帳 · 不自動續扣 · 14 天退款。",
+    "BLACK · NT$ 500 / 31 天 · 引擎永遠免費,BLACK 不是買功能 —— 是出錢養著它,戴上一個賺來的「驗證準度」標章 + 支持者金環 + 賽事討論室發言。 手動轉帳 · 不自動續扣 · 14 天退款。",
 };
 
 export const revalidate = 86400;
@@ -19,7 +19,7 @@ export const revalidate = 86400;
 
 // 守暗金:render 無 emoji(原 💵💬⚡📡🎫 移除 · 改站上既有的 ▸ 項目符號)。
 const UNLOCKS: string[] = [
-  "把你的分析標價賣 · 賣出你拿 90%(平台只抽 10%)",
+  "支持者金環 · 公開檔頭像旁的「支持開放引擎」標記",
   "每場比賽發一篇預測 / 觀察(限 200 字 · Tim 看過才上)",
   "「驗證準度」標章(預測滿 10 場、準 6 場自動 · 連輸都算 · 不可造假)",
   "寫信給 Tim · 24 小時內親手回(免費會員 7 天)",
@@ -28,9 +28,9 @@ const UNLOCKS: string[] = [
 ];
 
 const BLACK_PERKS = [
-  { text: "寫整篇分析來賣 · 你拿", strong: "90%" },
-  { text: "賽事討論室發言" },
   { text: "「✓ 驗證準度」標章(連輸都算 · 不可造假)" },
+  { text: "賽事討論室發言" },
+  { text: "支持者金環 · 出錢讓引擎永遠免費" },
 ];
 
 export default function BlackCardPage() {
@@ -49,8 +49,8 @@ export default function BlackCardPage() {
         <p className="text-mute text-sm sm:text-base leading-relaxed mb-4">
           NT$ 500 / 31 天。 引擎永遠免費 —— 所以 BLACK
           <span className="text-bone">不是買功能</span>(功能都免費)。 你買的是
-          <span className="text-gold">一個身分,加一門生意</span>:把你的分析標價賣、
-          賣出你拿 90%。
+          <span className="text-gold">一個賺來的身分</span>:出錢養著這個免費引擎,
+          戴上一個連輸都算、不可造假的「驗證準度」標章。
         </p>
         {/* 「為什麼免費還要付費」的答案:不是買 access(都免費)· 是當這個免費引擎的
             出錢人 + 戴上身分(Defector / Patreon 模式 · 信徒養活所有人的免費)。 */}

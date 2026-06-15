@@ -7,7 +7,7 @@ import MembershipUpgrade from "@/components/MembershipUpgrade";
 export const metadata: Metadata = {
   title: "升級會員",
   description:
-    "升級解鎖「標價賣你的分析賺錢」。BLACK NT$ 500/31 天(你拿 90%)· GOLD NT$ 2,700/365 天(你拿 95%,全站最低抽成)· 點一下直接顯示轉帳帳號 · 不自動續扣 · 14 天退款。",
+    "升級不是買功能 —— 引擎永遠免費。 是把你誠實累積的準度,變成一個夠稀有的身分;你的訂閱養著「引擎永遠免費、贏和輸的帳本永遠刪不掉」。 BLACK NT$ 500/31 天 · GOLD NT$ 2,700/365 天 · 點一下直接顯示轉帳帳號 · 不自動續扣 · 14 天退款。",
 };
 
 export const revalidate = 3600;
@@ -15,7 +15,9 @@ export const revalidate = 3600;
 // ── ZONE 27 · /membership · 升級頁(R187 · Tim canary 重做)──────
 // Tim 實測連環開火:① 點「立即升級」開 mailto 去「要」帳號 = 跟之前一樣慢蠢
 //   → 改成點一下直接秀轉帳帳號(MembershipUpgrade · 同 WalletPanel)。
-// ② 內容看不懂、不吸引人 → 重寫成「升級 = 賣分析賺錢 + 稀有身分」。
+// ② 內容看不懂、不吸引人 → 重寫成稀有身分。 R238(Tim 拍板「免費封神 · 純
+//   Defector」):升級頁完全不提「賣分析賺錢」· 純講身分/贊助(出錢養著免費引擎)·
+//   創作者市集功能保留但對訪客不再 feature(等正式開賣才曝光)。 別把賣分析加回升級頁。
 // ③「一般付費會員」這詞讓黑卡顯得廉價 → 換成有身分感的 kicker。
 // ④ 不要月費/年費 → 寫「每 31 天 / 每 365 天」。
 // ⑤ 拿掉「前 270 / 263 待領」倒數 → 太複雜一頭霧水(稀有感改用「最高階·GOLD 會員」)。
@@ -24,15 +26,15 @@ export const revalidate = 3600;
 // ─────────────────────────────────────────────────────
 
 const BLACK_PERKS = [
-  { text: "標價賣你的分析 · 你拿", strong: "90%" },
+  { text: "「✓ 驗證準度」徽章 · 連輸都算 · 不可造假" },
   { text: "賽事討論室發言" },
-  { text: "「✓ 驗證準度」徽章(連輸都算 · 不可造假)" },
+  { text: "支持者金環 · 出錢讓引擎永遠免費" },
 ];
 
 const GOLD_PERKS = [
-  { text: "BLACK 全部功能 · 你拿", strong: "95%（全站最低抽成）" },
+  { text: "BLACK 全部 · ", strong: "最高階支持身分" },
   { text: "引擎新版搶先試 + 投票權" },
-  { text: "GOLD 會員 · 賣分析賺最多的人" },
+  { text: "Tim 親手 onboard · 養活開放引擎最深的一群" },
 ];
 
 export default function MembershipPage() {
@@ -49,7 +51,7 @@ export default function MembershipPage() {
         </h1>
         <p className="text-mute text-sm sm:text-base leading-relaxed mb-3 max-w-lg">
           引擎永遠免費。升級不是買功能 —— 是把你<span className="text-bone">誠實累積的準度</span>
-          變成一個夠稀有的身分(順帶解鎖把分析標價賣 · 你拿 90–95%)。
+          變成一個夠稀有的身分。
         </p>
         {/* 任務型支持框架(Substack 最高信任轉換語)· 對誠實品牌:付費 = 養著那本刪不掉的帳本 */}
         <p className="text-mute text-sm sm:text-base leading-relaxed mb-8 max-w-lg">

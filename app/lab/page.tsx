@@ -334,10 +334,10 @@ export default function LabPage() {
               GOLD · 最高階年度
             </p>
             <h3 className="text-lg text-bone font-light tracking-tight mb-2">
-              引擎免費 · 賣分析抽成全站最低 →
+              引擎免費 · 養著它的最高階身分 →
             </h3>
             <p className="font-mono text-mute/70 text-[10px] tracking-[0.25em]">
-              NT$ 2,700/年 · 會員不限量 · 抽成 5%
+              NT$ 2,700/年 · 會員不限量 · 最高階支持身分
             </p>
           </Link>
         </div>

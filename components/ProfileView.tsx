@@ -346,7 +346,7 @@ export default function ProfileView({ profile, identity: id, streak, soccer, ser
           免費建立你的帳本 →
         </Link>
         <p className="mt-5 text-mute/70 text-[13px] leading-relaxed">
-          想支持這個專案、或把你的分析標價賣(你拿 90–95%)?{" "}
+          想支持這個專案、出錢養著免費引擎?{" "}
           <Link
             href="/membership"
             className="text-gold/75 hover:text-gold underline-offset-4 hover:underline transition-colors"

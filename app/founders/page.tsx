@@ -20,7 +20,7 @@ import { createPageMetadata } from "@/lib/page-og";
 export const metadata: Metadata = createPageMetadata({
   title: "GOLD · 最高階年度會員 · NT$ 2,700 / 365 天",
   description:
-    "ZONE 27 最高階年度會員 · NT$ 2,700/365 天 · 賣分析你拿 95%(全站最低抽成)· 引擎新版搶先試 + 投票權 · 每年 1/1 加入 / 續訂 · Tim 親手 onboard。",
+    "ZONE 27 最高階年度會員 · NT$ 2,700/365 天 · 引擎永遠免費 —— GOLD 賣的不是工具,是養著它、戴上最高階身分。 引擎新版搶先試 + 投票權 · 每年 1/1 加入 / 續訂 · Tim 親手 onboard。",
   path: "/founders",
 });
 
@@ -30,7 +30,7 @@ export const revalidate = 3600;
 const UNLOCKS = [
   "365 天會員資格 · BLACK 全部功能都包含",
   "「✓ 驗證準度」徽章 · 掛在你署名旁(連輸都算 · 不可造假)",
-  "賣分析只抽 5% · 你拿 95%(BLACK 是 10%)· 全站最低",
+  "最高階支持者金環 · 養活開放引擎最深的一群",
   "引擎每次改版 · 提前 7 天搶先試 + 投票權",
   "BOTTOM 27 棒球手遊上線 · GOLD 限定球員卡空投",
   "恆美攝影 × 伶 Kopi 旗艦店 · 一品紅茶招待",
@@ -84,7 +84,7 @@ export default async function FoundersPage({
             <span className="text-bone">NO AUTO-RENEW</span>
           </p>
           <p className="mt-2 text-mute/70 text-xs sm:text-[13px] leading-relaxed">
-            賣分析你拿 <span className="text-gold">95%</span>(全站最低抽成)· 等同每場 ~NT$ 11 · 比 BLACK 整年省 55%
+            最高階<span className="text-gold">年度身分</span> · 等同每場 ~NT$ 11 · 比 BLACK 整年省 55%
           </p>
 
           {/* 一段親筆 founder voice */}
@@ -92,7 +92,7 @@ export default async function FoundersPage({
             <p className="text-bone text-[14px] sm:text-[15px] leading-relaxed">
               我寫這個引擎,是因為台灣硬核棒球迷沒有自己的 Bloomberg。引擎永遠免費 ——
               GOLD 賣的不是工具,是一個不靠明牌、不抽下注活下去的品牌的
-              <strong className="text-bone">最高階席位</strong>:賣分析只抽 5%、新版搶先試、Tim 親手 onboard。
+              <strong className="text-bone">最高階席位</strong>:新版搶先試 + 投票權、Tim 親手 onboard、養活這個免費引擎最深的那一群。
             </p>
             <p className="font-mono text-mute/70 text-[10px] tracking-[0.3em] mt-3 pt-3 border-t border-line/40">
               — TIM · SOLO FOUNDER · ZONE 27

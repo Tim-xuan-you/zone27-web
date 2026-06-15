@@ -31,7 +31,7 @@ import CalibrationMasterCard from "@/components/CalibrationMasterCard";
 import type { CalibrationResult } from "@/lib/calibration-master";
 import { getSoccerLedgerResults } from "@/lib/soccer/football-data";
 import { getSoccerEnginePicks } from "@/lib/soccer/locked";
-import { readTier, isPaid, creatorTakePct, tierLabel } from "@/lib/tier";
+import { readTier, isPaid, tierLabel } from "@/lib/tier";
 import OpenPositionsPanel from "@/components/OpenPositionsPanel";
 import TodayStrip from "@/components/TodayStrip";
 import PushToggle from "@/components/PushToggle";
@@ -453,7 +453,7 @@ export default async function MemberPage() {
             className="mt-6 flex items-baseline justify-between gap-3 border-b border-line/40 pb-3 hover:border-gold/40 transition-colors group"
           >
             <span className="text-mute text-sm leading-snug">
-              想把<span className="text-bone">準度變成身分</span>?升級 BLACK / GOLD(分析還能標價賣 · 你拿 90–95%)
+              想把<span className="text-bone">準度變成身分</span>?升級 BLACK / GOLD · 出錢養著免費引擎
             </span>
             <span className="shrink-0 font-mono text-gold/70 group-hover:text-gold text-[10px] tracking-[0.3em] transition-colors">
               看方案 →
@@ -552,10 +552,11 @@ export default async function MemberPage() {
           )}
         </section>
 
-        {/* 4 · 付費會員 → 你已解鎖賣分析 · 直接去發文(免費會員看上面升級卡)*/}
+        {/* 4 · 付費會員 → 你的支持身分已開通 · 直接去公開發分析(免費會員看上面升級卡)·
+            R238「免費封神」:不再喊「賣分析賺錢」· 主軸是公開發、賽後自動對帳、地位自己長。 */}
         {isPaid(tier) && (
           <p className="mt-10 text-center font-mono text-mute/55 text-[10px] tracking-[0.2em] leading-relaxed">
-            你已解鎖賣分析 · 賣出你拿 {creatorTakePct(tier)}%{" "}
+            你的支持身分已開通 · 公開發分析、賽後自動對帳{" "}
             <Link
               href={upcoming.length > 0 ? `/matches/${upcoming[0].id}#say` : "/matches"}
               className="text-gold/70 hover:text-gold underline-offset-4 hover:underline"

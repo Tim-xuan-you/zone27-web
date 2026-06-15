@@ -122,7 +122,7 @@ export default async function FoundersOgImage() {
               display: "flex",
             }}
           >
-            賣分析賺最多的人
+            養活開放引擎的人
           </div>
 
           {/* divider */}
@@ -183,7 +183,7 @@ export default async function FoundersOgImage() {
           }}
         >
           <span style={{ color: "rgba(245,242,234,0.55)", display: "flex" }}>
-            賣分析抽成 5% · 全站最低 · 不限量
+            最高階年度身分 · 會員不限量 · 不自動續扣
           </span>
           <span
             style={{

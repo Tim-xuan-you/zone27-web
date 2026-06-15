@@ -282,7 +282,7 @@ export default function ManifestoPage() {
                 BLACK 創作者抽成 10% 是平台費 ·
                 GOLD 創作者抽成 5%(BLACK 的一半 · 不是推薦回扣)。
                 GOLD 會員是
-                <strong className="text-bone">一個付費身分(賣分析抽成最低)</strong> · 不是招募階梯 ·
+                <strong className="text-bone">一個付費身分</strong> · 不是招募階梯 ·
                 不是未來業績的領先指標。
               </P>
             </div>

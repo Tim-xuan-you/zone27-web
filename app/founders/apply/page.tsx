@@ -79,7 +79,7 @@ export default function FoundersApplyPage() {
             · 1-3 天內寄付款方式給你(銀行轉帳)· 轉帳完成就開通。
           </p>
           <p className="mt-3 font-mono text-mute/85 text-xs tracking-[0.25em]">
-            會員不限量 · 最高階年度 · 賣分析抽成 5%(全站最低)· 沒有編號、沒有名額倒數。
+            會員不限量 · 最高階年度支持身分 · 沒有編號、沒有名額倒數。
           </p>
           <div className="mt-6">
             <ArticleMeta readingMin={4} />
