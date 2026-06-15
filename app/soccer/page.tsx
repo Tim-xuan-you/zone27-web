@@ -51,7 +51,13 @@ export default async function SoccerPage() {
       return { code, matches };
     }),
   );
-  const nonEmpty = groups.filter((g) => g.matches.length > 0);
+  // 快開打的排前面:各 group 內已按時間 asc,再用「group 內最早一場」排 group ——
+  // 下一個開打的聯賽排最上(Tim:賽事應依時間排序、快開打的排前面)。
+  const nonEmpty = groups
+    .filter((g) => g.matches.length > 0)
+    .sort((a, b) =>
+      (a.matches[0].dateISO || "").localeCompare(b.matches[0].dateISO || ""),
+    );
   const total = nonEmpty.reduce((s, g) => s + g.matches.length, 0);
   // 賽後結果(永久鎖定結果 ∪ live 公開 · 永久者勝 = 帳本不縮水)· 給「你的足球戰績」對帳。
   const soccerResults = await getSoccerLedgerResults();
@@ -112,23 +118,7 @@ export default async function SoccerPage() {
           <div className="mt-6 w-full h-px bg-line/60" />
         </section>
 
-        {/* ── 引擎公開戰績條(證物 · 第一眼 · 與棒球板同款同位 · 連到 /track-record 足球視圖)── */}
-        <TrackRecordStrip
-          hits={soccerHits}
-          misses={soccerMisses}
-          pending={notKicked + awaitingGrade}
-          href="/track-record#soccer"
-          caption="足球三選一(主 / 和 / 客)· 和局最難喊,我們連喊不出的和局都老實算自己落空 → 命中率天生比棒球低,真正的尺是校準。"
-        />
-
-        {/* 你的足球戰績(含輸 · 登入且押過才出現 · client 端對帳不破 ISR · 含你 vs 引擎)*/}
-        <SoccerRecordCard
-          results={soccerResults}
-          enginePicks={enginePicks}
-          wrapperClass="mx-auto max-w-6xl w-full px-6 sm:px-10 pb-8"
-        />
-
-        {/* ── GROUPS ── */}
+        {/* ── GROUPS · 賽事看板優先(Tim:賽事擺最前面 · 依時間排序 · 戰績條移到下方)── */}
         <section className="mx-auto max-w-6xl w-full px-6 sm:px-10 pb-24">
           {nonEmpty.length > 0 ? (
             <div className="space-y-10">
@@ -178,6 +168,21 @@ export default async function SoccerPage() {
             </div>
           )}
         </section>
+
+        {/* ── 引擎公開戰績條 + 你的足球戰績(移到賽事看板下方 · 賽事擺前面)──
+            證物仍在第一屏可掃範圍(賽事卡通常一兩屏內)· 但「先看今晚有哪些場」優先於「先看戰績」。 */}
+        <TrackRecordStrip
+          hits={soccerHits}
+          misses={soccerMisses}
+          pending={notKicked + awaitingGrade}
+          href="/track-record#soccer"
+          caption="足球三選一(主 / 和 / 客)· 和局最難喊,我們連喊不出的和局都老實算自己落空 → 命中率天生比棒球低,真正的尺是校準。"
+        />
+        <SoccerRecordCard
+          results={soccerResults}
+          enginePicks={enginePicks}
+          wrapperClass="mx-auto max-w-6xl w-full px-6 sm:px-10 pb-8"
+        />
 
         {/* 公開引擎戰績(賽前鎖定 · 賽後對帳 · 含輸照掛 · 三向)· 滿 30 場才報數字 */}
         <SoccerEngineRecord />

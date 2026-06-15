@@ -42,13 +42,12 @@ export type AdHocMarket = {
 //    開賽前隨時可一字翻面(賽前鎖定的場、結算前改 home/away 無誠實問題;賽果出來前確認即可)。
 export const MARKETS: AdHocMarket[] = [
   {
-    // 台灣運彩 #1007 · 冰島超級聯賽 · 6/16 02:00(台北)· 弗拉姆 vs 阿克雷里
-    // ⚠ home/away 為截圖最合理讀法(弗拉姆=主)· 待 Tim 確認;錯就翻面(賽果前可改)。
+    // 台灣運彩 #1007 · 冰島超級聯賽 · 6/16 02:00(台北)· Tim 確認:阿克雷里(AKU)主、弗拉姆(FRR)客。
     id: "mkt-isl-260616-fram-akureyri",
     sport: "足球",
     league: "冰島超級聯賽",
-    home: "弗拉姆",
-    away: "阿克雷里",
+    home: "阿克雷里",
+    away: "弗拉姆",
     kickoffISO: "2026-06-16T02:00:00+08:00",
     result: null,
   },
