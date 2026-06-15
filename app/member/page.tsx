@@ -2,7 +2,6 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
-import WalletPanel from "@/components/WalletPanel";
 import Avatar from "@/components/Avatar";
 import { getUser } from "@/lib/supabase/server";
 import {
@@ -38,7 +37,7 @@ import PushToggle from "@/components/PushToggle";
 import type { OpenPosition } from "@/components/OpenPositionCard";
 import MyCreatorPanel from "@/components/MyCreatorPanel";
 import MyActivityPanel from "@/components/MyActivityPanel";
-import { getMyPurchases, getMyComments } from "@/lib/creator-activity-server";
+import { getMyComments } from "@/lib/creator-activity-server";
 import DisplayNameSetting from "@/components/DisplayNameSetting";
 import NicknamePrompt from "@/components/NicknamePrompt";
 import { hasMonthActivity, monthLabel } from "@/lib/season-recap";
@@ -205,22 +204,10 @@ export default async function MemberPage() {
     calibrationResults[r.matchId] = { result: r.outcome, startISO: r.kickoffISO };
   }
 
-  // 你的東西(soul · Tim 2026-06-05 dogfood:買過的分析 / 回過的留言找不回去)·
-  // server-side 撈本人活動 + 用 allWithMlb 解析隊名(不把賽程 lookup 送前端)·
-  // 沒買/沒回 → panel 自動隱藏(同其他 graceful 元件)。
-  const [myPurchases, myComments] = await Promise.all([
-    getMyPurchases(),
-    getMyComments(),
-  ]);
-  // 隊名 lookup:CPBL(永久)+ MLB live 窗 + MLB 已封存(locked.json)→ 連舊的 MLB
-  // 買/回也顯示隊名(且詳情頁已永久可達 · 不 404)。 同 id 後者覆蓋 · 資料一致無害。
-  const matchNames: Record<string, { home: string; away: string }> =
-    Object.fromEntries(
-      [...allWithMlb, ...getMlbLockedMatches()].map((m) => [
-        m.id,
-        { home: m.home.name, away: m.away.name },
-      ])
-    );
+  // 你的足跡(soul · Tim 2026-06-05 dogfood:回過的留言找不回去)· server-side 撈本人留言 ·
+  // 沒回過 → panel 自動隱藏(同其他 graceful 元件)。
+  // ⚠ R237 Defector pivot:「買過的分析」書架已隨賣分析/錢包收掉(R237 移除錢包)· 這裡只留留言足跡。
+  const myComments = await getMyComments();
 
   // 你的未結算押注(the live middle · soul)· 你押過、還沒結算的場 —— 押下去到
   // 打完之間那段以前 /member 一片空白。 你 vs 引擎 vs 群眾 的張力撐住「我現在
@@ -461,18 +448,12 @@ export default async function MemberPage() {
           </Link>
         )}
 
-        {/* 點數錢包(0009)· ⚠ R237 Defector pivot 後「買付費分析」用途已暫停(MARKETPLACE_ENABLED=false)·
-            錢包結構/文案的去留是 owner 決定(R187 別擅自刪)· 此處只掛元件、不動其內容。 */}
-        <WalletPanel />
+        {/* 點數錢包已移除(R239 · Tim 拍板「整個移除」)—— Defector 下沒有付費分析可買,儲值卻無處可花 =
+            文案在說謊。 拿掉可見錢包面板;後端(migrations 0008/0009 · lib/wallet.ts)保留休眠、未來要重開可復活。 */}
 
-        {/* 你的東西 · 買過的分析(書架)+ 回過的留言(足跡)· Tim dogfood:做完即蒸發、
-            找不回去 = 點數白花 + 留言被吞。 接在錢包後(花了點數 → 這是你買到的東西)·
-            沒買/沒回自動隱藏。 需 migration 0016(get_my_purchases / get_my_comments)。 */}
-        <MyActivityPanel
-          purchases={myPurchases}
-          comments={myComments}
-          matchNames={matchNames}
-        />
+        {/* 你的足跡 · 回過的留言(說過的話找得回 · 一鍵回到那串)· Tim dogfood:回了留言找不到在哪。
+            「買過的分析」書架已隨錢包收掉(Defector:分析免費、不賣)· 沒回過自動隱藏。 */}
+        <MyActivityPanel comments={myComments} />
 
         {/* 你的分析 · 創作者後台(付費會員 · 沒發過分析自動隱藏)· Tim dogfood:
             「看不到我發了哪些文章/幾勝幾敗/有人回嗎」· 答 #1 #5 #7 */}
