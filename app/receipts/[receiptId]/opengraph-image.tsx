@@ -18,6 +18,7 @@ import {
   getBaseballPendingReceipt,
   type BaseballReceiptPending,
 } from "@/lib/baseball-receipt";
+import { getMatchSegment } from "@/lib/match-segment";
 
 // ── ZONE 27 · /receipts/[id] 動態 OG 卡 = 單場引擎收據 ──────────────────
 // 之前收據頁共用 /track-record 的通用 OG → 貼到 LINE/FB 看不出是「哪一場·命中還落空」。
@@ -30,6 +31,51 @@ export const size = OG_SIZE;
 export const contentType = OG_CONTENT_TYPE;
 export const alt = "ZONE 27 · 引擎收據(含輸)";
 
+// ── 社證:本場有幾個真人賽前鎖了這手(+ 賽後幾人押對)──────────────────────────
+// 收據外傳出去時帶一行「不是只有引擎在玩 —— N 個真人也賽前把話講死了這場」· 賽後再加「M 人押對」。
+// 🔴 這是「賽前鎖死的 costly signal」· 不是瀏覽數 vanity(收據頁明令 NO view-count 社證)——
+//   跟收據頁的 <MatchSegment> 同一份公開 ladder、同一個鎖定人數 / 押對數,卡上只取精華數字。
+// graceful:不到 SOCIAL_PROOF_MIN 個真人 → 整行不顯示(一兩個人不算社證 · 同首頁脈動 HOMEPAGE_PULSE_MIN)。
+const SOCIAL_PROOF_MIN = 3;
+
+type LockProof = { n: number; hits: number | null }; // hits=null → 未結算(只報鎖定人數)
+
+// 走公開 ladder(getMatchSegment · React-cached anon · ISR-safe · 任何錯 → [])。
+// winner 給賽後算押對數;賽前 / 棒球和局(tie)→ 傳 null = 不評,只報鎖定人數(同 MatchSegment)。
+async function getLockProof(
+  matchId: string,
+  winner: "home" | "away" | "draw" | null,
+): Promise<LockProof | null> {
+  const lockers = await getMatchSegment(matchId);
+  const n = lockers.length;
+  if (n < SOCIAL_PROOF_MIN) return null; // 不到門檻 → 整行不顯示(graceful · 不假裝熱鬧)
+  const hits = winner ? lockers.filter((l) => l.pick === winner).length : null;
+  return { n, hits };
+}
+
+// 卡上社證行(暗金 · 純數字 + 中點 · 0 symbol glyph · 對齊 OG 房規)· null → 不渲染。
+function socialProofLine(proof: LockProof | null) {
+  if (!proof) return null;
+  const text =
+    proof.hits !== null
+      ? `本場 ${proof.n} 人賽前鎖手 · ${proof.hits} 人押對`
+      : `本場 ${proof.n} 人賽前鎖了這場`;
+  return (
+    <div style={{ display: "flex", marginTop: 18 }}>
+      <span
+        style={{
+          fontSize: 22,
+          color: goldRgba(0.6),
+          letterSpacing: "0.1em",
+          display: "flex",
+        }}
+      >
+        {text}
+      </span>
+    </div>
+  );
+}
+
 export default async function ReceiptOgImage({
   params,
 }: {
@@ -40,7 +86,14 @@ export default async function ReceiptOgImage({
   if (receiptId.startsWith("fd-")) {
     const sr = await getSoccerReceipt(receiptId);
     if (!sr) return brandFallback();
-    return sr.phase === "settled" ? soccerOgCard(sr) : soccerOgCardPending(sr);
+    // 社證:本場有幾個真人賽前鎖了這手(賽後加幾人押對)· 賽前/待對帳只報鎖定人數。
+    const proof = await getLockProof(
+      receiptId,
+      sr.phase === "settled" ? sr.outcome : null,
+    );
+    return sr.phase === "settled"
+      ? soccerOgCard(sr, proof)
+      : soccerOgCardPending(sr, proof);
   }
   // CPBL(sync)+ MLB(async · R228:MLB 收據 OG 卡同步補上 · 不再退通用卡)。
   const match =
@@ -49,7 +102,10 @@ export default async function ReceiptOgImage({
   if (!match || !match.finalResult) {
     // 賽前 / 進行中(CPBL · 尚未結算)→ 賽前鎖定中卡(押完當下就能外傳的那張 · R220)。
     const bp = getBaseballPendingReceipt(receiptId);
-    if (bp) return baseballOgCardPending(bp);
+    if (bp) {
+      const proof = await getLockProof(bp.matchId, null); // 賽前 → 只報鎖定人數
+      return baseballOgCardPending(bp, proof);
+    }
     return brandFallback();
   }
 
@@ -57,6 +113,11 @@ export default async function ReceiptOgImage({
   if (!cal) return brandFallback();
 
   const fr = match.finalResult;
+  // 社證:本場幾人賽前鎖手 + 幾人押對(棒球和局 tie → 不評,只報人數 · 同 MatchSegment)。
+  const proof = await getLockProof(
+    match.id,
+    fr.winner === "home" || fr.winner === "away" ? fr.winner : null,
+  );
   const homeFavored = match.home.winRate > match.away.winRate;
   const favoriteName = homeFavored ? match.home.name : match.away.name;
   const favoritePct = Math.max(match.home.winRate, match.away.winRate);
@@ -147,6 +208,9 @@ export default async function ReceiptOgImage({
           </span>
         </div>
 
+        {/* 社證 · 本場幾人賽前鎖手 + 幾人押對(≥3 才顯 · graceful)*/}
+        {socialProofLine(proof)}
+
         {/* BOTTOM(flow · marginTop auto 推到底 · 不用 absolute 以免被內容壓到)*/}
         <div
           style={{
@@ -171,7 +235,7 @@ export default async function ReceiptOgImage({
 }
 
 // 足球三向收據 OG 卡(鏡棒球 · 命中金/落空 loss 柔紅 · 無 emoji · 無賠率)。
-function soccerOgCard(sr: SoccerReceiptSettled) {
+function soccerOgCard(sr: SoccerReceiptSettled, proof: LockProof | null) {
   const verdictText =
     sr.verdict === "proved" ? "引擎命中" : sr.verdict === "diverged" ? "引擎落空" : "平";
   const verdictColor =
@@ -241,6 +305,9 @@ function soccerOgCard(sr: SoccerReceiptSettled) {
           </span>
         </div>
 
+        {/* 社證 · 本場幾人賽前鎖手 + 幾人押對(≥3 才顯 · graceful)*/}
+        {socialProofLine(proof)}
+
         <div
           style={{
             marginTop: "auto",
@@ -263,7 +330,7 @@ function soccerOgCard(sr: SoccerReceiptSettled) {
 
 // 賽前(locked)/ 已開賽待對帳(live)足球收據 OG 卡 = 押完當下就能外傳的那張。
 // 沒有結果/判決 → 不假裝命中:右欄改秀「開賽時間」· 大字改「賽前鎖定中」(金 · 不是 verdict)。
-function soccerOgCardPending(sr: SoccerReceiptPending) {
+function soccerOgCardPending(sr: SoccerReceiptPending, proof: LockProof | null) {
   const locked = sr.phase === "locked";
   const bigWord = locked ? "賽前鎖定中" : "待對帳";
   const rightLabel = locked ? "開賽時間" : "賽況";
@@ -335,6 +402,9 @@ function soccerOgCardPending(sr: SoccerReceiptPending) {
           </span>
         </div>
 
+        {/* 社證 · 本場幾人也賽前鎖了這場(≥3 才顯 · 賽前只報人數 · graceful)*/}
+        {socialProofLine(proof)}
+
         <div
           style={{
             marginTop: "auto",
@@ -358,7 +428,7 @@ function soccerOgCardPending(sr: SoccerReceiptPending) {
 // 賽前(locked)/ 已開賽待對帳(live)CPBL 收據 OG 卡 = 押完當下就能外傳的那張(R220)。
 // 鏡 soccerOgCardPending:沒有結果/判決 → 不假裝命中(右欄改秀「開賽時間」· 大字「賽前鎖定中」金)。
 // 🔴 已開賽(live)絕不掛「賽前鎖定」標頭/「結果還不存在」結語 = 對已開打的場說謊。
-function baseballOgCardPending(bp: BaseballReceiptPending) {
+function baseballOgCardPending(bp: BaseballReceiptPending, proof: LockProof | null) {
   const locked = bp.phase === "locked";
   const bigWord = locked ? "賽前鎖定中" : "待對帳";
   const rightLabel = locked ? "開賽時間" : "賽況";
@@ -429,6 +499,9 @@ function baseballOgCardPending(bp: BaseballReceiptPending) {
             {bigWord}
           </span>
         </div>
+
+        {/* 社證 · 本場幾人也賽前鎖了這場(≥3 才顯 · 賽前只報人數 · graceful)*/}
+        {socialProofLine(proof)}
 
         <div
           style={{
