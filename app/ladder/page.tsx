@@ -27,7 +27,7 @@ const TIERS = [
   { n: 1, zh: "新秀", en: "ROOKIE", one: "押滿 10 場 · 就上榜。" },
   { n: 2, zh: "分析師", en: "ANALYST", one: "準度過一半 —— 證明你不是純猜的。" },
   { n: 3, zh: "操盤手", en: "TRADER", one: "比「大家的平均」還準。" },
-  { n: 4, zh: "神準手", en: "SHARP", one: "比「機器」還準。" },
+  { n: 4, zh: "神準手", en: "SHARP", one: "在 ≥30 場裡 · 比「機器」還準。" },
   { n: 5, zh: "神諭", en: "ORACLE", one: "機器、大家都贏 · 全站最強。 這是王座。" },
 ];
 
@@ -169,18 +169,18 @@ export default async function LadderPage() {
             升階硬條件
           </p>
           <p className="text-bone text-sm sm:text-base leading-relaxed">
-            每往上爬一階,<span className="text-gold">那個月你都得贏過引擎</span> ——
-            累積場數夠了還不算,你得證明你「現在」還在贏機器。
+            坐上神準手 / 神諭,要在 <span className="text-gold">≥30 場</span>的公開對帳裡、準度
+            <span className="text-gold">真的贏過那台免費引擎</span> —— 十場、一晚的手氣不算。
           </p>
           <p className="mt-1.5 text-mute text-sm leading-relaxed">
-            別處的「高手」是自己說的;這裡的高手,是<span className="text-bone">打贏那台公開機器</span>才配。 贏不過引擎,這個月就升不上去。
+            別處的「高手」是自己說的;這裡的高手,是<span className="text-bone">打贏那台公開機器</span>才配。 榜上還會標出「本月仍贏引擎」,讓你看到誰<span className="text-bone">現在</span>還在贏。
           </p>
         </div>
 
         {/* ── 機械規則 ──────────────────────── */}
         <p className="mt-6 text-bone text-sm sm:text-base leading-relaxed">
-          每個月結算一次 · <span className="text-gold">一個月最多往上爬一階</span> ·
-          退步就會掉階。 想爬到神諭,至少要連續好幾個月都夠準 —— 一晚手氣,升不上去。
+          你的位置<span className="text-gold">隨賽果更新</span> · 準度守不住、階級就掉 ——
+          跟米其林的星一樣,不是永久的、會被收回。
         </p>
         <p className="mt-2 font-mono text-mute/60 text-[11px] tracking-[0.15em] leading-relaxed">
           靠的是真實準度 · 不是付費、不是年資、不是運氣。

@@ -35,6 +35,11 @@ const LADDER_MIN_GRADED = 10;
 const LADDER_MIN_USERS = 3;
 // 榜長上限(早期防爆 · 之後要分頁再說)。
 const LADDER_MAX_ROWS = 100;
+// 神準手/神諭(贏過引擎)的最低樣本 · 10 場/一晚手氣不算頂 —— 對齊 /u 對帳之星(≥30 含輸贏過引擎)·
+// 同一個「贏過機器」成就、同一把尺。 ⚠️ R241 honest:完整「月度升降」(每月一階上限 / 本月必須贏才升
+// / 掉階歷史)需另存月度快照(migration)· 尚未實作。 本檔目前是「即時累積快照」:隨賽果更新即上下、
+// 守不住就掉階(米其林式可被收回),但沒有月度節奏與一階上限。
+const LADDER_SHARP_MIN = 30;
 
 export type LadderEntry = {
   rank: number;
@@ -113,8 +118,10 @@ function tierOf(
   accuracy: number,
   beatEngine: boolean,
   crowdAvgAccuracy: number,
+  decided: number,
 ): number {
-  if (beatEngine) return 4; // 神準手:贏過機器
+  // 神準手 = 贏過機器 + 夠厚樣本(≥LADDER_SHARP_MIN)· 10 場的手氣不算頂(同對帳之星門檻)。
+  if (beatEngine && decided >= LADDER_SHARP_MIN) return 4; // 神準手:夠多場裡真的贏過機器
   if (accuracy > crowdAvgAccuracy) return 3; // 操盤手:贏過大家的平均
   if (accuracy > 50) return 2; // 分析師:準度過半
   return 1; // 新秀:上榜但還沒過半
@@ -184,7 +191,7 @@ export async function getLadderBoard(): Promise<LadderBoard> {
   const crowdAvg =
     qualified.reduce((s, e) => s + e.accuracyPct, 0) / qualified.length;
   for (const e of qualified) {
-    e.tier = tierOf(e.accuracyPct, e.beatEngine, crowdAvg);
+    e.tier = tierOf(e.accuracyPct, e.beatEngine, crowdAvg, e.decided);
   }
 
   // 排名:贏過引擎的幅度(alpha)優先 · 再樣本厚 · 再命中率 —— 不是裸勝率/連勝/盈虧虛榮榜。
@@ -220,8 +227,10 @@ export async function getLadderBoard(): Promise<LadderBoard> {
 
   const entries: LadderEntry[] = top.map((e, i) => {
     const rank = i + 1;
-    // 神諭(王座 · tier 5)= 全站第一、且真的贏過機器。 沒人贏機器 → 王座仍只有機器(不硬封王)。
-    const tier = rank === 1 && e.beatEngine ? 5 : e.tier;
+    // 神諭(王座 · tier 5)= 全站第一、且在夠厚樣本(≥LADDER_SHARP_MIN)裡真的贏過機器(同對帳之星)。
+    // 沒人達標 → 王座仍只有機器(不硬封王 · 寧可空著也不發給樣本不足的人)。
+    const tier =
+      rank === 1 && e.beatEngine && e.decided >= LADDER_SHARP_MIN ? 5 : e.tier;
     return {
       rank,
       authorCode: e.authorCode,

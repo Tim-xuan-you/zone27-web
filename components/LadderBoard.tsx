@@ -120,7 +120,7 @@ export default function LadderBoard({ board }: { board: LadderBoardData }) {
 
       <p className="font-mono text-mute/50 text-[9px] tracking-[0.15em] leading-relaxed mt-3">
         ▸ 排名按「贏過引擎幾分」+ 樣本厚度,不是裸勝率。 含輸照算、平手不計、開賽後才下的不算。
-        場數少、運氣占大 —— 爬到上面要連著好幾個月都贏機器。
+        場數少、運氣占大 —— 爬到神準手以上,要在 ≥30 場裡真的贏過機器。
       </p>
     </section>
   );
