@@ -148,6 +148,30 @@ export default function LeagueStandingsView({
         </p>
       </div>
 
+      {/* 今天回來對帳的盟友數(Friend-Streak 式集體紀律問責 · 解：看到朋友今天回來了 = 溫和拉力)·
+          🔴 守紅線:看的是「回來對帳天數」非連勝/盈虧 · 無催促按鈕/無倒數/無羞辱 · 只是一條平靜的事實。
+          盟員 ≥2 才顯(獨盟「1/1」無意義)· reconciledToday 由 server 用 aggregateStreak.activeToday 算。 */}
+      {standings.memberCount >= 2 && (
+        <div className="mb-4 border-l-2 border-gold/40 pl-3 py-1">
+          <p className="text-mute text-[13px] leading-snug">
+            {standings.reconciledToday > 0 ? (
+              <>
+                今天{" "}
+                <span className="font-mono text-gold tabular">
+                  {standings.reconciledToday}
+                </span>{" "}
+                / {standings.memberCount} 位盟友回來對帳了。
+              </>
+            ) : (
+              <>今天還沒有盟友回來對帳。</>
+            )}
+          </p>
+          <p className="mt-0.5 font-mono text-mute/50 text-[9px] tracking-[0.18em] leading-relaxed">
+            回來對帳 = 今天有鎖一手 · 看的是紀律,不是輸贏
+          </p>
+        </div>
+      )}
+
       {ranked.length > 0 ? (
         <ul className="flex flex-col gap-2 list-none pl-0 m-0">
           {ranked.map((s) => (

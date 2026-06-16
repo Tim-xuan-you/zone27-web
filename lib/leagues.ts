@@ -12,9 +12,13 @@
 // ─────────────────────────────────────────────────────────────
 
 import { createSupabaseServerClient } from "@/lib/supabase/server";
-import { aggregateIdentity, type UserPredictionsMap } from "@/lib/predictions";
+import {
+  aggregateIdentity,
+  aggregateStreak,
+  type UserPredictionsMap,
+} from "@/lib/predictions";
 import { buildIdMatches } from "@/lib/ladder-server";
-import { getCurrentTaipeiMonthKey } from "@/lib/matches";
+import { getCurrentTaipeiMonthKey, getTodayTaipei } from "@/lib/matches";
 import { fetchLadderRows } from "@/lib/ladder-rows";
 import { getLeagueLocks, type PulseEvent } from "@/lib/pulse";
 
@@ -62,6 +66,10 @@ export type LeagueStandings = {
   /** 場數不足 10、暫不評的盟員(仍列出 · 自己的盟看得到全員) */
   provisional: LeagueStanding[];
   memberCount: number;
+  /** 今天(台北)回來對帳(下了一手)的盟員數 · Duolingo Friend-Streak 式「集體紀律」社會問責 ——
+   *  🔴 數的是「回來對帳天數」非連勝/PnL(同 aggregateStreak.activeToday 口徑)· 無催促/無倒數/無羞辱 ·
+   *  只是一條平靜的「今天有幾個人回來了」。 元件在盟員 ≥2 時才顯(獨盟顯示無意義)。 */
+  reconciledToday: number;
 };
 
 type MemberRow = {
@@ -192,6 +200,15 @@ export async function getLeagueStandings(
     if (!(matchId in map)) map[matchId] = { pick, ts };
   }
 
+  // 今天(台北)回來對帳的盟員數(Friend-Streak 式集體紀律問責 · 同 aggregateStreak.activeToday 口徑)·
+  // 重用已撈好的 byCode → 0 額外讀。 數「回來對帳天數」非連勝/PnL/盈虧 · 守紅線(streak 哲學)。
+  const today = getTodayTaipei();
+  const reconciledToday = members.reduce(
+    (n, m) =>
+      n + (aggregateStreak(byCode.get(m.code) ?? {}, today).activeToday ? 1 : 0),
+    0,
+  );
+
   // 3) 每位盟員套 aggregateIdentity(同一把尺)。
   const idMatches = buildIdMatches();
   const monthKey = getCurrentTaipeiMonthKey();
@@ -273,7 +290,7 @@ export async function getLeagueStandings(
     isYou: e.isYou,
   }));
 
-  return { ranked, provisional, memberCount: members.length };
+  return { ranked, provisional, memberCount: members.length, reconciledToday };
 }
 
 /**
