@@ -315,7 +315,7 @@ export default function UserPredictionPicker({
         >
           海選天梯
         </Link>
-        (新秀 → 神諭)· 0 金錢 · 0 兌獎 · 純精神預測。
+        (新秀 → 神諭)。
       </p>
     </div>
   );

@@ -118,7 +118,7 @@ export default function CalibrationTestPage() {
             </p>
           </div>
           <p className="mt-5 font-mono text-mute/55 text-[10px] tracking-[0.2em] leading-relaxed max-w-2xl">
-            ▸ 這不是押注 · 不進你的戰績 · 不上天梯 —— 純粹照鏡子。 想記真實戰績?攤開後有入口。
+            ▸ 這不是押注 · 不進你的戰績 · 不上天梯 —— 純粹照鏡子。
           </p>
         </section>
 

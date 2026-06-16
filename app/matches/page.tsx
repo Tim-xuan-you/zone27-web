@@ -103,12 +103,9 @@ export default async function MatchesPage() {
             {boardDate}
           </h1>
           <p className="font-mono text-mute text-xs tracking-[0.25em]">
-            {cpblSorted.length + mlbSorted.length} 場引擎覆蓋 · 開賽前鎖定
+            {cpblSorted.length + mlbSorted.length} 場引擎覆蓋 · 開賽前鎖定 · 比完自動移到公開戰績
           </p>
         </div>
-        <p className="mt-3 font-mono text-mute text-[10px] tracking-[0.25em]">
-          只收老闆親自確認過的場次 · 比完的會自動移到公開戰績
-        </p>
         <div className="mt-6 w-full h-px bg-line/60" />
       </section>
 
@@ -150,11 +147,7 @@ export default async function MatchesPage() {
           /* 休賽日 · 看板永不空白 → 引擎最近戰績收據(同首頁 fallback) */
           <>
             <p className="text-mute text-sm leading-relaxed mb-6 max-w-2xl">
-              現在沒有可押的賽事。 這是引擎最近{" "}
-              {offSeasonReceipts.length} 場的公開判決 —{" "}
-              <span className="text-gold">✓ 命中</span> 跟{" "}
-              <span className="text-loss">✕ 落空</span>{" "}
-              一樣掛上來,從不藏。
+              現在沒有可押的賽事。 這是引擎最近 {offSeasonReceipts.length} 場的公開判決 —— 命中 <span className="text-gold">✓</span>、落空 <span className="text-loss">✕</span> 都掛。
             </p>
             <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
               {offSeasonReceipts.map((m) => (
