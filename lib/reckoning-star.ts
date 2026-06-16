@@ -41,3 +41,50 @@ export function reckoningStar(id: CalibrationIdentity): ReckoningStar {
   const toGo = Math.max(1, RECKONING_STAR_MIN - sample);
   return { earned, decided: id.decided, edge: id.edgeVsEnginePts, onTrack, toGo };
 }
+
+// ── 定版「卡尺話術」單行格式(單一真相 · 給徽章圖 / OG 卡 / 一鍵拿取履歷句共用 · 口徑零漂移)──
+// 🔴 鐵律(防退化成報馬仔連勝截圖):數字永遠連著卡尺旅行 —— 任何「準度 X%」一律掛「含輸 N 場 ·
+//   vs 一台 57% 引擎」· 單獨的 X% 不准外傳。 verifyUrl 有給 → 句尾加查驗連結(圖永遠服從 live /u ·
+//   截圖不是憑證)。 無對照/無結算 → 退中性「公開含輸帳本」(不喊贏引擎 = 不灌水)。
+export type CredentialLevel = "star" | "beat" | "record" | "open";
+const CALIPER_ENGINE_MIN = 8; // 喊「贏過引擎」的最低同場對照(小樣本不喊 · 同 OG/徽章 ENGINE_FLEX_MIN)
+
+export function credentialHeadline(
+  id: CalibrationIdentity,
+  verifyUrl?: string,
+): { level: CredentialLevel; short: string; sentence: string } {
+  const star = reckoningStar(id);
+  const beat = id.beatEngine === true && id.engine.decided >= CALIPER_ENGINE_MIN;
+  const verify = verifyUrl ? ` · 查驗 ${verifyUrl}` : "";
+  if (star.earned) {
+    const plus = star.edge !== null && star.edge > 0 ? ` +${star.edge}` : "";
+    return {
+      level: "star",
+      short: `對帳之星 · ${id.decided} 場含輸 · 贏引擎${plus}`,
+      sentence: `ZONE 27 對帳之星 —— 在 ${id.decided} 場含輸、賽前鎖死的公開對帳裡,準度贏過一台只敢喊 57% 的誠實引擎${plus ? `(${plus.trim()} 分)` : ""}。${verify}`,
+    };
+  }
+  if (beat) {
+    const plus =
+      id.edgeVsEnginePts !== null && id.edgeVsEnginePts > 0
+        ? ` +${id.edgeVsEnginePts}`
+        : "";
+    return {
+      level: "beat",
+      short: `${id.decided} 場含輸 · 贏過公開引擎${plus}`,
+      sentence: `ZONE 27 公開戰績 —— 在 ${id.decided} 場含輸的公開對帳裡,準度贏過一台只敢喊 57% 的誠實引擎${plus ? `(${plus.trim()} 分)` : ""}。${verify}`,
+    };
+  }
+  if (id.accuracy !== null) {
+    return {
+      level: "record",
+      short: `含輸命中率 ${id.accuracy}% · ${id.decided} 場`,
+      sentence: `ZONE 27 公開戰績 —— 賽前鎖死、含贏含輸的押注帳本,${id.decided} 場已對帳、含輸命中率 ${id.accuracy}%(對著一台只敢喊 57% 的引擎)。${verify}`,
+    };
+  }
+  return {
+    level: "open",
+    short: "公開含輸帳本 · 已開始",
+    sentence: `ZONE 27 公開戰績 —— 賽前鎖死、含贏含輸、刪不掉的押注帳本。${verify}`,
+  };
+}

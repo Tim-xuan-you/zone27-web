@@ -2,7 +2,7 @@ import { ImageResponse } from "next/og";
 import { BRAND, goldRgba, boneRgba } from "@/lib/brand";
 import { getProfileByCode, getPredictionsByCode } from "@/lib/profile-server";
 import { aggregateIdentity, type CalibrationIdentity } from "@/lib/predictions";
-import { reckoningStar } from "@/lib/reckoning-star";
+import { reckoningStar, credentialHeadline } from "@/lib/reckoning-star";
 import {
   getEngineFavorite,
   getMatchStartIso,
@@ -23,8 +23,6 @@ import { normalizeProfileCode } from "@/lib/profile-code";
 
 export const runtime = "nodejs";
 const SIZE = { width: 680, height: 200 } as const;
-// 「贏過引擎」徽章門檻(同 OG 卡 ENGINE_FLEX_MIN · 小樣本不喊贏);對帳之星另走 reckoningStar(≥30)。
-const ENGINE_FLEX_MIN = 8;
 
 export async function GET(
   _req: Request,
@@ -70,16 +68,8 @@ function StarGlyph({ size = 58 }: { size?: number }) {
 function badge(name: string, authorCode: string, id: CalibrationIdentity) {
   const hasDecided = id.accuracy !== null;
   const star = reckoningStar(id);
-  const beatEngine =
-    id.beatEngine === true && id.engine.decided >= ENGINE_FLEX_MIN;
-  // 第二行的「資歷句」:對帳之星 > 贏過引擎 +N > 含輸場數 > 帳本剛開始。
-  const credline = star.earned
-    ? `對帳之星 · 贏過引擎${star.edge !== null && star.edge > 0 ? ` +${star.edge}` : ""}`
-    : beatEngine
-      ? `贏過公開引擎${id.edgeVsEnginePts !== null && id.edgeVsEnginePts > 0 ? ` +${id.edgeVsEnginePts} 分` : ""}`
-      : hasDecided
-        ? `押 ${id.total} 場 · 中 ${id.proved} · 沒中 ${id.diverged}`
-        : "賽前鎖定 · 含贏含輸 · 刪不掉";
+  // 第二行資歷句走單一真相 credentialHeadline(.short)· 跟 OG 卡 / 一鍵拿取履歷句口徑零漂移。
+  const credline = credentialHeadline(id).short;
 
   return new ImageResponse(
     (

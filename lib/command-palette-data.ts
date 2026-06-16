@@ -172,6 +172,16 @@ export const COMMAND_ITEMS: CommandItem[] = [
       "rule", "刪不掉", "改不了", "back-date", "賽果", "官方", "公平", "怎麼判贏",
     ],
   },
+  {
+    label: "查驗一份戰績 · 貼碼看 live 含輸帳本",
+    kicker: "/verify",
+    path: "/verify",
+    group: "信任文件",
+    keywords: [
+      "verify", "查驗", "驗證", "查證", "貼碼", "永久碼", "code", "真的嗎",
+      "怎麼驗", "查他", "查這個人", "認證", "憑證", "credential", "查戰績", "徽章",
+    ],
+  },
 
   // ── 轉換 ───────────────────────────────────────────
   {

@@ -31,8 +31,9 @@ import type { CalibrationResult } from "@/lib/calibration-master";
 import { getSoccerLedgerResults } from "@/lib/soccer/football-data";
 import { getSoccerEnginePicks } from "@/lib/soccer/locked";
 import { readTier, isPaid, tierLabel } from "@/lib/tier";
-import { reckoningStar, RECKONING_STAR_MIN } from "@/lib/reckoning-star";
+import { reckoningStar, credentialHeadline, RECKONING_STAR_MIN } from "@/lib/reckoning-star";
 import ReckoningStarMark from "@/components/ReckoningStarMark";
+import CredentialGrabPanel from "@/components/CredentialGrabPanel";
 import OpenPositionsPanel from "@/components/OpenPositionsPanel";
 import TodayStrip from "@/components/TodayStrip";
 import PushToggle from "@/components/PushToggle";
@@ -176,6 +177,8 @@ export default async function MemberPage() {
   );
   // 對帳之星(米其林式最高榮譽 · lib/reckoning-star 單一真相)· 達標金星 / 在軌道上給目標 / 其餘不顯。
   const star = reckoningStar(identity);
+  // 一鍵拿取可攜憑證 · 句子走單一真相 credentialHeadline(含卡尺話術)· 達星 / 贏過引擎才給面板。
+  const cred = credentialHeadline(identity);
   // 準度歷程(會動的數字 · 回訪鉤)· 按比賽日累計命中率 · sparkline 在校準卡內畫。
   const accuracySeries = computeAccuracySeries(predictionsMap, idMatches);
   // 回訪卡 delta:上次造訪後新結算的場(首訪 / 0 新 → null)· last_seen 由卡的 client 端寫回。
@@ -434,6 +437,12 @@ export default async function MemberPage() {
             (預設匿名球迷#碼 · 設了顯示名才露名)。 接在榮譽牆後 = 賺來的地位 → 拿去公開驗證。
             R204:從一行小字升成「連結 + 一鍵複製」卡(轉換審 P1:核心 costly-signal 入口太隱)。 */}
         <ProfileShareCard code={authorCode} />
+
+        {/* 一鍵拿取可攜憑證(對帳之星 / 已贏過引擎 ≥8 場才亮)· 把準度貼到 bio / LinkedIn / 簽名 / 論壇,
+            點擊一律落回 live /u 含輸帳本(圖只是鉤子)· 沒夠格自動隱藏(graceful · 不灌水)。 */}
+        {(cred.level === "star" || cred.level === "beat") && (
+          <CredentialGrabPanel code={authorCode} sentence={cred.sentence} />
+        )}
 
         {/* 私人預測聯盟(R236)· 把含輸帳本變成「跟朋友整季較勁」的盟(校準計分 · 不是連勝)·
             同列樣式守極簡 · 接在公開檔後 = 賺來的地位 → 揪朋友一起比。 */}

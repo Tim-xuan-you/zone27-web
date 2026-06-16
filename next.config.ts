@@ -82,6 +82,17 @@ const nextConfig: NextConfig = {
         ],
       },
       {
+        // 可攜憑證徽章圖快取(/u/[code]/badge)· 同 OG · 貼到處被大量爬時不重燒 Vercel CPU。
+        // 24h immutable 的「舊」沒問題:徽章只是鉤子,憑證 live 真相在點進去的 /u 頁。
+        source: "/:path*/badge",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=86400, immutable",
+          },
+        ],
+      },
+      {
         // Global security headers · defense-in-depth
         source: "/:path*",
         headers: [
