@@ -35,6 +35,7 @@ import type { Trophy } from "@/lib/trophies";
 // ─────────────────────────────────────────────────────
 
 const FIRM = 8; // 低於此 · 數字還會跳(同 CalibrationIdentityCard SAMPLE_FIRM)
+const STAR_MIN = 30; // 對帳之星門檻(Bill James SAMPLE DEBT 慣例)· 米其林式:稀有來自高門檻、不是限量名額
 
 type Props = {
   profile: PublicProfile;
@@ -268,6 +269,10 @@ export default function ProfileView({ profile, identity: id, streak, soccer, ser
         </section>
       )}
 
+      {/* ── 對帳之星(米其林式賺來的稀有星)· on-read 即時算、滑落即收回、錢買不到 ──
+          只在有像樣樣本(≥FIRM)才出現 · 達標 = 金星;未達 = 暗星 + 誠實寫出門檻(製造嚮往不製造焦慮)。 */}
+      {hasBaseball && id.decided >= FIRM && <ReckoningStar id={id} />}
+
       {/* ── 足球戰績(含輸 · 三向 · 跟棒球分開算)· 沒押足球自動隱藏 ──────── */}
       {hasSoccer && <SoccerSection r={soccer} />}
 
@@ -459,5 +464,77 @@ function SoccerSection({ r }: { r: SoccerRecord }) {
         三向對帳(主勝 / 和 / 客勝)· 賽前鎖死、賽後自動結算 · 跟棒球準度分開算。
       </p>
     </section>
+  );
+}
+
+// ── 對帳之星 · 米其林式「賺來的稀有」榮譽 ───────────────────────────────
+// 🔴 設計核心:稀有來自「高門檻」(≥STAR_MIN 場含輸還贏過引擎)· 不是「限量名額」
+//   (那是賭場 FOMO · /integrity #05 紅線)。 on-read 即時算 → 滑落自動收回(同米其林每年複評)·
+//   錢永遠買不到(付費拿不到這顆星 = 它值錢的原因 · 對齊「準是免費的 · 撐著它是金環」)。
+//   未達標也誠實寫出門檻(製造嚮往、不製造焦慮)· 達標金星 / 未達暗星。 含輸照算(非連勝/PnL)。
+function ReckoningStar({ id }: { id: CalibrationIdentity }) {
+  const earned =
+    id.edgeVsEnginePts !== null &&
+    id.edgeVsEnginePts > 0 &&
+    id.decided >= STAR_MIN &&
+    id.engine.decided >= STAR_MIN;
+  return (
+    <section
+      className={`mt-9 border p-5 sm:p-6 ${
+        earned ? "border-gold/55 bg-gold/[0.06]" : "border-line/50 bg-slate/30"
+      }`}
+    >
+      <div className="flex items-center gap-3">
+        <StarMark dim={!earned} />
+        <div className="min-w-0">
+          <p
+            className={`text-base sm:text-lg font-light tracking-tight ${
+              earned ? "text-gold" : "text-mute"
+            }`}
+          >
+            對帳之星{earned ? "" : " · 還沒達成"}
+          </p>
+          <p className="font-mono text-mute/55 text-[10px] tracking-[0.2em] mt-0.5">
+            ZONE 27 認證 · 賺來的、錢買不到
+          </p>
+        </div>
+      </div>
+      {earned ? (
+        <p className="mt-4 text-bone text-sm sm:text-base leading-relaxed">
+          這份帳本在{" "}
+          <span className="font-mono text-gold tabular">{id.decided}</span> 場含輸的公開對帳裡 ·
+          準度<span className="text-gold">贏過那台只敢喊 57% 的誠實引擎</span> · 全站極少人做得到。
+          滑落了會被收回 —— 這顆星 · 錢買不到。
+        </p>
+      ) : (
+        <p className="mt-4 text-mute/90 text-[13px] sm:text-sm leading-relaxed">
+          要在 <span className="text-bone">≥{STAR_MIN} 場含輸</span>的公開對帳裡、準度
+          <span className="text-bone">還贏過引擎</span> · 才拿得到這顆星。
+          錢買不到、滑落會被收回 —— 這正是它值錢的地方。
+        </p>
+      )}
+    </section>
+  );
+}
+
+// 幾何金星(非 emoji · 米其林克制版)· dim = 未達標暗星(只描邊不填)。
+function StarMark({ dim = false }: { dim?: boolean }) {
+  return (
+    <svg
+      width="32"
+      height="32"
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+      className={`shrink-0 ${dim ? "text-mute/45" : "text-gold"}`}
+    >
+      <path
+        d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
+        fill="currentColor"
+        fillOpacity={dim ? 0 : 0.18}
+        stroke="currentColor"
+        strokeWidth="1.3"
+        strokeLinejoin="round"
+      />
+    </svg>
   );
 }
