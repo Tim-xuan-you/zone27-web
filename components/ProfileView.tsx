@@ -3,11 +3,13 @@ import Avatar from "@/components/Avatar";
 import HonorWall from "@/components/HonorWall";
 import AccuracySparkline from "@/components/AccuracySparkline";
 import TrophyGrid from "@/components/TrophyGrid";
+import ReckoningStarMark from "@/components/ReckoningStarMark";
 import CalibrationMasterView from "@/components/CalibrationMasterView";
 import type { CalibrationReport } from "@/lib/calibration-master";
 import FollowLedgerButton from "@/components/FollowLedgerButton";
 import { creatorIdentity } from "@/lib/identity";
 import { isPaid, tierLabel } from "@/lib/tier";
+import { reckoningStar, RECKONING_STAR_MIN } from "@/lib/reckoning-star";
 import type {
   CalibrationIdentity,
   DisciplineStreak,
@@ -35,7 +37,7 @@ import type { Trophy } from "@/lib/trophies";
 // ─────────────────────────────────────────────────────
 
 const FIRM = 8; // 低於此 · 數字還會跳(同 CalibrationIdentityCard SAMPLE_FIRM)
-const STAR_MIN = 30; // 對帳之星門檻(Bill James SAMPLE DEBT 慣例)· 米其林式:稀有來自高門檻、不是限量名額
+// 對帳之星門檻 + 判定改走單一真相 lib/reckoning-star(同 /ladder / OG 卡 / member · 免漂移)。
 
 type Props = {
   profile: PublicProfile;
@@ -473,11 +475,7 @@ function SoccerSection({ r }: { r: SoccerRecord }) {
 //   錢永遠買不到(付費拿不到這顆星 = 它值錢的原因 · 對齊「準是免費的 · 撐著它是金環」)。
 //   未達標也誠實寫出門檻(製造嚮往、不製造焦慮)· 達標金星 / 未達暗星。 含輸照算(非連勝/PnL)。
 function ReckoningStar({ id }: { id: CalibrationIdentity }) {
-  const earned =
-    id.edgeVsEnginePts !== null &&
-    id.edgeVsEnginePts > 0 &&
-    id.decided >= STAR_MIN &&
-    id.engine.decided >= STAR_MIN;
+  const earned = reckoningStar(id).earned;
   return (
     <section
       className={`mt-9 border p-5 sm:p-6 ${
@@ -485,7 +483,7 @@ function ReckoningStar({ id }: { id: CalibrationIdentity }) {
       }`}
     >
       <div className="flex items-center gap-3">
-        <StarMark dim={!earned} />
+        <ReckoningStarMark size={32} dim={!earned} />
         <div className="min-w-0">
           <p
             className={`text-base sm:text-lg font-light tracking-tight ${
@@ -508,7 +506,7 @@ function ReckoningStar({ id }: { id: CalibrationIdentity }) {
         </p>
       ) : (
         <p className="mt-4 text-mute/90 text-[13px] sm:text-sm leading-relaxed">
-          要在 <span className="text-bone">≥{STAR_MIN} 場含輸</span>的公開對帳裡、準度
+          要在 <span className="text-bone">≥{RECKONING_STAR_MIN} 場含輸</span>的公開對帳裡、準度
           <span className="text-bone">還贏過引擎</span> · 才拿得到這顆星。
           錢買不到、滑落會被收回 —— 這正是它值錢的地方。
         </p>
@@ -517,24 +515,3 @@ function ReckoningStar({ id }: { id: CalibrationIdentity }) {
   );
 }
 
-// 幾何金星(非 emoji · 米其林克制版)· dim = 未達標暗星(只描邊不填)。
-function StarMark({ dim = false }: { dim?: boolean }) {
-  return (
-    <svg
-      width="32"
-      height="32"
-      viewBox="0 0 24 24"
-      aria-hidden="true"
-      className={`shrink-0 ${dim ? "text-mute/45" : "text-gold"}`}
-    >
-      <path
-        d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
-        fill="currentColor"
-        fillOpacity={dim ? 0 : 0.18}
-        stroke="currentColor"
-        strokeWidth="1.3"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}

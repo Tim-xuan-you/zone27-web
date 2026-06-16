@@ -9,6 +9,7 @@ import {
 } from "@/lib/brand";
 import { getProfileByCode, getPredictionsByCode } from "@/lib/profile-server";
 import { aggregateIdentity, type CalibrationIdentity } from "@/lib/predictions";
+import { reckoningStar } from "@/lib/reckoning-star";
 import {
   getEngineFavorite,
   getMatchStartIso,
@@ -80,6 +81,8 @@ function receiptResponse(name: string, authorCode: string, id: CalibrationIdenti
   // 贏過引擎金章:真贏(含輸對照)+ 樣本夠穩才出 · 同頁面 standingVerdict「贏過引擎」一致,
   // 但門檻更嚴(viral 卡不靠小樣本喊贏)· 報馬仔結構上掛不出這句(他們沒有公開引擎當靶)。
   const beatEngine = id.beatEngine === true && id.engine.decided >= ENGINE_FLEX_MIN;
+  // 對帳之星(≥30 含輸贏過引擎)· 比下面「+N 分」金章更高一階的米其林榮譽 —— 分享卡上的最高 flex。
+  const star = reckoningStar(id);
 
   return new ImageResponse(
     (
@@ -155,7 +158,28 @@ function receiptResponse(name: string, authorCode: string, id: CalibrationIdenti
                 無 ✓ glyph(OG 字缺 → 純中文)· navy on gold = 全卡最亮的一句。
                 R234:帶上「+N 分」具體數字(edgeVsEnginePts 已算好)—— 分享卡上「贏過引擎」是口號,
                 「贏過引擎 +9 分」是無法反駁的證物(Strava 永遠把數字放最大)· 只在 >0 才印,守誠實。 */}
-            {beatEngine ? (
+            {star.earned ? (
+              // 對帳之星 = 分享卡最高榮譽(米其林式 · ≥30 含輸贏過引擎)· 幾何金星(SVG polygon ·
+              // 🔴 絕不用 ★ glyph → Satori 豆腐)· 比「+N 分」金章更稀有、更想要。
+              <div style={{ display: "flex", alignItems: "center", gap: 16, marginTop: 18 }}>
+                <svg width="48" height="48" viewBox="0 0 32 32">
+                  <polygon
+                    points="16,2 19.5,11.5 29.5,11.5 21.5,18 24.5,29 16,22.5 7.5,29 10.5,18 2.5,11.5 12.5,11.5"
+                    fill={BRAND.gold}
+                    fillOpacity="0.95"
+                  />
+                </svg>
+                <div style={{ display: "flex", flexDirection: "column" }}>
+                  <span style={{ fontSize: 36, color: BRAND.gold, letterSpacing: "0.06em", fontWeight: 500, display: "flex" }}>
+                    對帳之星
+                  </span>
+                  <span style={{ fontSize: 22, color: boneRgba(0.6), letterSpacing: "0.04em", marginTop: 2, display: "flex" }}>
+                    {id.decided} 場含輸贏過引擎
+                    {star.edge !== null && star.edge > 0 ? ` +${star.edge} 分` : ""} · 全站極少人有
+                  </span>
+                </div>
+              </div>
+            ) : beatEngine ? (
               <div style={{ display: "flex", marginTop: 16 }}>
                 <span
                   style={{

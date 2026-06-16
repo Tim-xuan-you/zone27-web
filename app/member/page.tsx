@@ -31,6 +31,8 @@ import type { CalibrationResult } from "@/lib/calibration-master";
 import { getSoccerLedgerResults } from "@/lib/soccer/football-data";
 import { getSoccerEnginePicks } from "@/lib/soccer/locked";
 import { readTier, isPaid, tierLabel } from "@/lib/tier";
+import { reckoningStar, RECKONING_STAR_MIN } from "@/lib/reckoning-star";
+import ReckoningStarMark from "@/components/ReckoningStarMark";
 import OpenPositionsPanel from "@/components/OpenPositionsPanel";
 import TodayStrip from "@/components/TodayStrip";
 import PushToggle from "@/components/PushToggle";
@@ -172,6 +174,8 @@ export default async function MemberPage() {
     idMatches,
     getCurrentTaipeiMonthKey()
   );
+  // 對帳之星(米其林式最高榮譽 · lib/reckoning-star 單一真相)· 達標金星 / 在軌道上給目標 / 其餘不顯。
+  const star = reckoningStar(identity);
   // 準度歷程(會動的數字 · 回訪鉤)· 按比賽日累計命中率 · sparkline 在校準卡內畫。
   const accuracySeries = computeAccuracySeries(predictionsMap, idMatches);
   // 回訪卡 delta:上次造訪後新結算的場(首訪 / 0 新 → null)· last_seen 由卡的 client 端寫回。
@@ -343,6 +347,36 @@ export default async function MemberPage() {
             「有帳本的玩運彩」脊椎(soul-roadmap #1)· 計算在 aggregateIdentity。
             series = 準度歷程 sparkline(會動的數字 · 場數夠多才畫)。 */}
         <CalibrationIdentityCard identity={identity} series={accuracySeries} />
+
+        {/* 對帳之星進度(米其林式最高榮譽 · lib/reckoning-star 單一真相)· 達標 = 金星卡(連去公開檔外傳)·
+            在軌道上 = 給「還差 X 場」目標(回訪鉤 · 米其林那種「快摘星了」)· 其餘不顯(graceful · 不嘮叨剛上路的人)。 */}
+        {star.earned ? (
+          <Link
+            href={`/u/${authorCode}`}
+            className="mt-6 flex items-center gap-3 border border-gold/55 bg-gold/[0.06] p-4 hover:border-gold transition-colors group"
+          >
+            <ReckoningStarMark size={34} />
+            <span className="flex-1 min-w-0">
+              <span className="block text-gold text-base font-light tracking-tight">
+                你拿到了對帳之星
+              </span>
+              <span className="block text-mute/80 text-[12px] leading-relaxed mt-0.5">
+                {identity.decided} 場含輸裡贏過引擎 · 全站極少人做得到 · 守不住會被收回
+              </span>
+            </span>
+            <span className="shrink-0 font-mono text-gold/70 group-hover:text-gold text-[10px] tracking-[0.3em] transition-colors">
+              外傳 →
+            </span>
+          </Link>
+        ) : star.onTrack ? (
+          <div className="mt-6 flex items-center gap-3 border-b border-line/40 pb-3">
+            <ReckoningStarMark size={28} dim />
+            <span className="flex-1 min-w-0 text-mute text-sm leading-snug">
+              你正在追<span className="text-bone">對帳之星</span> · 已贏引擎 +{star.edge} 分 · 還差{" "}
+              <span className="text-gold">{star.toGo} 場</span>(滿 {RECKONING_STAR_MIN} 場、含輸贏過引擎)
+            </span>
+          </div>
+        ) : null}
 
         {/* 你的足球戰績(含輸 · 跟棒球分開算 · 含你 vs 引擎)· 沒押足球自動隱藏 */}
         <SoccerRecordCard

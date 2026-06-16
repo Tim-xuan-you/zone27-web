@@ -22,6 +22,7 @@ import {
   type UserPredictionsMap,
   type IdentityMatch,
 } from "@/lib/predictions";
+import { RECKONING_STAR_MIN } from "@/lib/reckoning-star";
 import {
   getFinalizedMatches,
   getMatchStartIso,
@@ -40,7 +41,7 @@ const LADDER_MAX_ROWS = 100;
 // 同一個「贏過機器」成就、同一把尺。 ⚠️ R241 honest:完整「月度升降」(每月一階上限 / 本月必須贏才升
 // / 掉階歷史)需另存月度快照(migration)· 尚未實作。 本檔目前是「即時累積快照」:隨賽果更新即上下、
 // 守不住就掉階(米其林式可被收回),但沒有月度節奏與一階上限。
-const LADDER_SHARP_MIN = 30;
+const LADDER_SHARP_MIN = RECKONING_STAR_MIN; // 同對帳之星門檻 · 單一真相 lib/reckoning-star(免漂移)
 
 export type LadderEntry = {
   rank: number;
