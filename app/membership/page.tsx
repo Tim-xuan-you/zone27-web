@@ -62,34 +62,53 @@ export default function MembershipPage() {
           你是出錢撐住一個反過來做的地方的人。
         </p>
 
-        {/* ── 那我幹嘛付錢(直接回答訪客疑問)+ 看得見的身分 ── */}
+        {/* ── 那我幹嘛付錢:準是免費的 · 撐著它是金環(誠實分清 free-earned vs paid-ring)──
+            真相 = 整份「證明你準」的公開戰績(含輸帳本/戰功卡/贏過引擎/校準)免費就能建(ProfileView)·
+            付費唯一加的是支持環(Avatar supporter)= 出錢撐免費引擎的記號。 別把這條再寫成空話 perk。 */}
         <p className="font-mono text-gold text-[10px] tracking-[0.4em] mb-4">
           / 那,我幹嘛付錢?
         </p>
-        <p className="text-mute text-sm sm:text-base leading-relaxed mb-5 max-w-lg">
-          真正有用的東西,大部分免費。 付的錢不買功能 · 買的是一個
-          <span className="text-bone">看得見、造不了假的身分</span> —— 它長這樣:
+        <p className="text-mute text-sm sm:text-base leading-relaxed mb-3 max-w-lg">
+          你押的每一手 · 賽前鎖死、賽後對帳 · 贏輸都掛在你的公開戰績頁(連你
+          <span className="text-bone">贏過引擎</span>都會標出來)。 證明你「準」的這一整份 ——
+          <span className="text-bone">免費就能建</span>。
+        </p>
+        <p className="text-mute text-sm sm:text-base leading-relaxed mb-6 max-w-lg">
+          付費 · 加的是另一件事:那一圈<span className="text-gold">金環</span>。 它不證明你準
+          (那個用賺的)· 它證明你「<span className="text-bone">撐著這個</span>」—— 出錢讓引擎對下一個
+          懷疑的人也免費。 <span className="text-gold">準是免費的 · 撐著它是金環。</span>
         </p>
         <div className="border border-gold/30 bg-gold/5 p-5 sm:p-6 max-w-md">
           <p className="font-mono text-gold/70 text-[9px] tracking-[0.3em] mb-4">
-            你的公開資料頁會長這樣
+            你的公開戰績頁會長這樣
           </p>
           <div className="flex items-center gap-3 mb-4">
             <Avatar seed="zone27-you" size={46} supporter glyph="你" />
             <div className="min-w-0">
               <p className="text-bone text-base leading-tight">你的名字</p>
               <p className="font-mono text-gold/80 text-[10px] tracking-[0.12em] mt-1 leading-snug">
-                金色支持環 · 一眼看出你撐著免費引擎
+                金色支持環 · 出錢讓引擎免費的記號
               </p>
             </div>
           </div>
-          <span className="inline-flex items-center gap-1.5 border border-gold/40 bg-gold/10 px-3 py-1.5 text-[12px] text-gold tracking-wide">
-            <span aria-hidden="true">✓</span> 驗證準度 · 連輸都算
-          </span>
+          <div className="border-t border-line/40 pt-3 space-y-2">
+            <p className="text-bone/90 text-[13px] leading-relaxed">
+              <span className="text-gold">含輸命中率</span> · 每一手賽前鎖死 · 賽後{" "}
+              <span className="text-gold">✓ 中</span> / <span className="text-loss/85">✕ 沒中</span> 都掛
+            </p>
+            <p className="text-mute/80 text-[12px] leading-relaxed">
+              還會標出你<span className="text-bone">贏過公開引擎</span>的場 —— 賺得到、買不到、刪不掉。
+            </p>
+          </div>
         </div>
         <p className="mt-4 mb-10 text-mute text-[13px] sm:text-sm leading-relaxed max-w-lg">
-          這個徽章連你<span className="text-bone">輸的場</span>都算進去 ·
-          所以賣明牌的永遠拿不到(他們靠刪輸單活著)。 賺得到、買不到。
+          這份帳本敢把<span className="text-bone">輸的</span>也留著 · 賣明牌的攤不出來。{" "}
+          <Link
+            href="/track-record"
+            className="text-gold/75 hover:text-gold underline-offset-4 hover:underline transition-colors"
+          >
+            看我們怎麼公開每一場(連引擎自己的輸)→
+          </Link>
         </p>
 
         {/* ── 兩種深度 ── */}
