@@ -91,7 +91,7 @@ export default function LearnPage() {
             但您可以說「6 點出現的機率是 25%」 — 這個機率是可驗證的、可重現的、不是猜的。
           </p>
           <p>
-            ZONE 27 的引擎做的是後者:**機率分布**,不是鐵口直斷。
+            ZONE 27 的引擎做的是後者:<strong className="text-gold">機率分布</strong>,不是鐵口直斷。
           </p>
           <ChapterFooter
             cta="親手試一場 →"
