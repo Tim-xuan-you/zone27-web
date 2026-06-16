@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useSyncExternalStore } from "react";
 
 // ── ZONE 27 · 公開戰績運動切換(等寬 segmented control)─────────────────
 // 等寬兩段 = 等尊嚴:每個運動拿到「整個內容舞台」,不再是棒球厚段壓著足球薄片
@@ -8,6 +8,25 @@ import { useState, useEffect } from "react";
 // CSS display(守 ISR + SSR 一致 · 無 hash/無 localStorage → 不污染 canonical · 關 JS 兩 view 皆顯示)。
 // 預設 baseball(成熟、最可信的 view)。 暗金、無紅綠、無 emoji。
 // ─────────────────────────────────────────────────────
+
+// 深連結 #soccer → 開足球視圖的水合安全讀取(R239)。
+// 走 useSyncExternalStore:server / 水合期一律回 getServerSnapshot("baseball"),
+// 水合完成後 React 才讀 client 端 hash —— 這是官方對「server/client 不同值」的解,
+// 不觸發 hydration mismatch、也不用在 effect 內同步 setState(過 react-hooks/set-state-in-effect)。
+type Sport = "baseball" | "soccer";
+function subscribeHash(onChange: () => void): () => void {
+  window.addEventListener("hashchange", onChange);
+  return () => window.removeEventListener("hashchange", onChange);
+}
+function getHashSport(): Sport {
+  return typeof window !== "undefined" && window.location.hash === "#soccer"
+    ? "soccer"
+    : "baseball";
+}
+// SSR / 水合的回退 = 預設棒球(無 hash context · 守 canonical 不分歧)。
+function getServerSport(): Sport {
+  return "baseball";
+}
 
 export default function SportToggle({
   baseball,
@@ -19,15 +38,12 @@ export default function SportToggle({
   /** 外層定位/寬度(預設給寬頁 · 窄頁如 /ladder 傳無 max-w/px 的縮版,避免雙重 padding) */
   containerClass?: string;
 }) {
-  const [sport, setSport] = useState<"baseball" | "soccer">("baseball");
-
-  // R234 · 從足球賽事板的「引擎公開戰績」條進來會帶 #soccer → 直接開足球視圖
-  // (client-only · 不影響 SSR / ISR / canonical · 無 hash 時維持預設 baseball · 無 JS 時兩 view 皆顯示)。
-  useEffect(() => {
-    if (typeof window !== "undefined" && window.location.hash === "#soccer") {
-      setSport("soccer");
-    }
-  }, []);
+  // R234 · 從足球賽事板的「引擎公開戰績」條進來會帶 #soccer → 直接開足球視圖。
+  // hashSport = 深連結來源(SSR 一律 baseball · 水合後才讀 hash · 訂 hashchange 跟著切)。
+  const hashSport = useSyncExternalStore(subscribeHash, getHashSport, getServerSport);
+  // 手動覆寫:任一按鈕點過後,使用者的選擇優先於網址 hash(深連結只決定初始視圖)。
+  const [override, setOverride] = useState<Sport | null>(null);
+  const sport = override ?? hashSport;
 
   return (
     <>
@@ -39,13 +55,13 @@ export default function SportToggle({
         >
           <SegBtn
             active={sport === "baseball"}
-            onClick={() => setSport("baseball")}
+            onClick={() => setOverride("baseball")}
             label="棒球"
             sub="CPBL + MLB · 已對帳"
           />
           <SegBtn
             active={sport === "soccer"}
-            onClick={() => setSport("soccer")}
+            onClick={() => setOverride("soccer")}
             label="足球"
             sub="世界盃 6/12–7/20 · 台北時間"
           />
