@@ -262,44 +262,84 @@ export default function LearnPage() {
           </div>
         </section>
 
-        {/* ── WHERE NEXT ─────────────────────────── */}
-        <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-20 pt-16 border-t border-line/40 text-center">
-          <p className="font-mono text-gold text-[10px] tracking-[0.4em] mb-6">
-            NOW YOU&apos;RE READY
+        {/* ── 這條路 · 路線圖 ─────────────────────────
+            把入門/科普/校準/讀球/帳本串成一條「你在這 → 畢業」的路,收尾閉環到真實鎖定 +
+            掙來的榮譽(準心/對帳之星)。 不賣明牌、教到你不需要我們 = 反報馬仔終局。
+            軟脊椎:不開 /school 頂層、不改首頁、不命名儀式。 取代原本散開的 WHERE NEXT 三格 ——
+            那是「接下來去哪」的清單,這是「整條路、有頭有尾、最後落在你自己的帳本」的旅程。 */}
+        <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-24 pt-16 border-t border-line/40">
+          <p className="font-mono text-gold text-[10px] tracking-[0.4em] mb-4">
+            這條路 · 你在哪、接下來去哪
           </p>
-          <h2 className="text-3xl sm:text-4xl text-bone font-light tracking-tight mb-12">
-            看完了 · 接下來?
+          <h2 className="text-3xl sm:text-4xl text-bone font-light tracking-tight leading-snug mb-5">
+            從這裡 · 一直到你<span className="text-gold">不需要任何人報牌</span>。
           </h2>
+          <p className="text-mute leading-relaxed mb-10 max-w-xl">
+            ZONE 27 不賣明牌。 我們做的是另一件事 —— 把「自己讀球、自己對帳」一階一階交到你手上,
+            教到你連我們的引擎都可以站上去挑戰。 下面是整條路,你已經踏出前兩步了。
+          </p>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
-            {/* 峰終 = 緊接第 04 章「沒人神準 · 我們比校準 · 不信換你當引擎」的最強 0-登入體感 ·
-                把第 04 章剛吸收的情緒 payload 直接接到「親手測你自己」。 /lab 入口仍在第 01 章
-                ChapterFooter(不孤兒)· 這格不重複放,讓位給轉換力更強的鏡子。 */}
-            <NextStep
-              kicker="CALIBRATION"
-              zh="先測你自己多準"
-              href="/calibration/test"
-              note="藏住比分 · 滑出你的把握 · 30 秒撞到那道 5 成 7 的牆 · 不用登入"
-            />
-            <NextStep
-              kicker="AUDIT"
-              zh="讀完整 model report"
-              href="/audit"
-              note="7 sections · 引擎範圍 + 揭露哲學 + LocalStorage · v0.3 ESTIMATE"
-            />
-            <NextStep
-              kicker="MEMBERSHIP"
-              zh="ZONE 27 4-tier 會員制"
-              href="/membership"
-              note="從免費到 NT$ 2,700 / 年 · 任時可選"
+          <div>
+            <PathStage no="第 0 階" done title="讀懂一個機率">
+              62% 不是「他會贏」,是「看好、但內含 38% 會輸」。 你剛讀完的四章就是這一階 ——
+              從此沒有人能用「神準」「穩賺」唬住你。
+            </PathStage>
+            <PathStage no="第 1 階" done title="拆穿任何一張神準截圖">
+              連勝會騙人、十場神準是運氣還沒攤平、信心不是保證。 上面那三篇科普就是這一階 ——
+              讀完,賣明牌的截圖你一眼看穿。
+            </PathStage>
+            <PathStage
+              no="第 2 階"
+              title="換你當引擎 —— 先測你自己多準"
+              links={[{ cta: "玩一次「換你當引擎」→", href: "/calibration/test" }]}
+            >
+              藏住比分,你滑出你的把握,再翻開。 30 秒,你會撞到那道「全世界最強模型也只到
+              5 成 7」的牆。 不用登入。
+              <span className="block mt-3 text-mute/85">
+                ▸ 而且這把尺不只量球。 你的直覺、你阿公教的「逢七必勝」、你看了一週的數據 ——
+                哪一套讓你的把握更準,你自己量得出來。{" "}
+                <span className="text-bone">我們不評斷你信什麼,只把尺交給你。</span>
+              </span>
+            </PathStage>
+            <PathStage
+              no="第 3 階"
+              title="自己讀一場球"
+              links={[
+                { cta: "看今天的比賽 · 打開那些鏡頭 →", href: "/matches" },
+                { cta: "進實驗室 · 親手跑一萬場 →", href: "/lab" },
+              ]}
+            >
+              不靠任何人報牌,自己過一遍:先發投手壓不壓得住、球場吃不吃打、牛棚撐不撐得到第九局。
+              讀完,進實驗室按 RUN 跑一萬場,看你眼睛看到的、跟模型算的差多少。
+            </PathStage>
+            <PathStage
+              no="第 4 階"
+              title="立你自己的帳本 —— 這就是畢業"
               gold
-            />
+              links={[{ cta: "免費 · 鎖你的第一手 →", href: "/login?next=/member" }]}
+            >
+              練習結束,來真的:賽前鎖一手、賽後自動對帳、含贏含輸全掛在你的公開檔案,刪不掉。
+              這裡沒有畢業證書 —— 你的畢業證書,是一本你親手掙來、連輸都記著的帳本。
+              撐到「說幾成、就真的中幾成」,你掙到<span className="text-gold">準心</span>;
+              撐滿 30 場還贏過引擎,你掙到<span className="text-gold">對帳之星</span>。
+              到那天,你連我們的引擎都可以挑戰 —— 那,就是我們最想教會你的一課。
+            </PathStage>
           </div>
 
-          <p className="mt-12 font-mono text-mute text-[10px] tracking-[0.3em]">
-            或回首頁繼續逛 →{" "}
-            <Link href="/" className="text-gold hover:underline">
-              zone27-web.vercel.app
+          <p className="mt-10 font-mono text-mute text-[10px] tracking-[0.25em] leading-relaxed">
+            想先看引擎自己準不準?{" "}
+            <Link
+              href="/calibration"
+              className="text-gold/75 hover:text-gold underline-offset-4 hover:underline transition-colors"
+            >
+              公開校準 →
+            </Link>
+            {"　"}讀完整 model report?{" "}
+            <Link
+              href="/audit"
+              className="text-gold/75 hover:text-gold underline-offset-4 hover:underline transition-colors"
+            >
+              /audit →
             </Link>
           </p>
         </section>
@@ -441,41 +481,75 @@ function SeriesItem({
   );
 }
 
-function NextStep({
-  kicker,
-  zh,
-  href,
-  note,
+// ── 路線圖的一階(時間線式 · 左側金線 + 階段點 · 已走過=金實心、未走=描邊)─────────
+// done = 你已經走過(暗、實心點)· gold = 畢業階(金線金點)· links = 該階的真實去處(閉環到動作)。
+function PathStage({
+  no,
+  title,
+  children,
+  links,
+  done = false,
   gold = false,
 }: {
-  kicker: string;
-  zh: string;
-  href: string;
-  note: string;
+  no: string;
+  title: string;
+  children: React.ReactNode;
+  links?: { cta: string; href: string }[];
+  done?: boolean;
   gold?: boolean;
 }) {
   return (
-    <Link
-      href={href}
-      className={`block p-5 border transition-colors group ${
-        gold
-          ? "border-gold/60 bg-gold/5 hover:bg-gold/10"
-          : "border-line/60 hover:border-gold/40 hover:bg-slate/30"
+    <div
+      className={`relative pl-8 pb-9 border-l last:pb-0 ${
+        gold ? "border-gold/45" : "border-line/50"
       }`}
     >
-      <p
-        className={`font-mono text-[10px] tracking-[0.3em] mb-2 ${
-          gold ? "text-gold" : "text-mute group-hover:text-gold/80"
+      {/* 階段點 */}
+      <span
+        className={`absolute -left-[6px] top-1 w-[11px] h-[11px] rounded-full border ${
+          done
+            ? "bg-gold/70 border-gold/70"
+            : gold
+              ? "bg-navy border-gold"
+              : "bg-navy border-mute/70"
+        }`}
+        aria-hidden="true"
+      />
+      <div className="flex items-baseline gap-3 flex-wrap mb-1.5">
+        <span
+          className={`font-mono text-[10px] tracking-[0.3em] ${
+            done ? "text-mute/60" : "text-gold"
+          }`}
+        >
+          {no}
+        </span>
+        {done && (
+          <span className="font-mono text-mute/45 text-[9px] tracking-[0.25em]">
+            你已經走過
+          </span>
+        )}
+      </div>
+      <h3
+        className={`text-lg sm:text-xl font-light tracking-tight mb-2 ${
+          done ? "text-mute" : "text-bone"
         }`}
       >
-        {kicker}
-      </p>
-      <p className="text-bone text-base font-light tracking-tight mb-2">
-        {zh}
-      </p>
-      <p className="font-mono text-mute text-[10px] tracking-[0.2em] leading-relaxed">
-        {note}
-      </p>
-    </Link>
+        {title}
+      </h3>
+      <p className="text-mute text-sm leading-relaxed max-w-xl">{children}</p>
+      {links && links.length > 0 && (
+        <div className="mt-3 flex flex-col gap-1.5 items-start">
+          {links.map((l) => (
+            <Link
+              key={l.href}
+              href={l.href}
+              className="font-mono text-gold/85 hover:text-gold text-[11px] tracking-[0.2em] underline-offset-4 hover:underline transition-colors"
+            >
+              {l.cta}
+            </Link>
+          ))}
+        </div>
+      )}
+    </div>
   );
 }
