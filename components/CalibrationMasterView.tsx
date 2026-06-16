@@ -2,6 +2,8 @@ import {
   VERDICT_MIN,
   type CalibrationReport,
 } from "@/lib/calibration-master";
+import { trueAim, TRUE_AIM_MIN_DECIDED, type TrueAim } from "@/lib/true-aim";
+import TrueAimMark from "@/components/TrueAimMark";
 
 // ── ZONE 27 · 校準大師「呈現層」(純展示 · 無 hook)──────────────────────────────
 // 「你說的把握 vs 實際中的」逐桶圖。 抽成純 presentational 元件 → /member 的客戶端卡
@@ -28,6 +30,8 @@ export default function CalibrationMasterView({
 
   const { decided, pending, late, push, buckets, statedAvg, actualAvg, verdict } =
     report;
+  // 準心(米其林必比登式姊妹榮譽 · 校準軸)· on-read 即時算 · 達標金準心 / 在軌道上給目標 / 其餘不顯。
+  const aim = trueAim(report);
 
   return (
     <section className={wrapperClass}>
@@ -59,6 +63,10 @@ export default function CalibrationMasterView({
           </div>
         ) : (
           <>
+            {/* 準心 · 米其林必比登式姊妹榮譽(下面那張逐桶圖就是它的證據)──────────────
+                達標 = 金準心卡;在軌道上 = 一行目標鉤(製造嚮往不製造焦慮)· 其餘不顯(graceful)。 */}
+            <TrueAimBlock aim={aim} subject={subject} />
+
             {/* 整體判語(夠場數才下 · 含輸照算)*/}
             {verdict && statedAvg !== null && actualAvg !== null ? (
               <p className="text-bone text-base sm:text-lg leading-relaxed mb-4">
@@ -154,4 +162,52 @@ export default function CalibrationMasterView({
       </div>
     </section>
   );
+}
+
+// ── 準心 榮譽塊(米其林必比登式 · 校準軸 · 跟對帳之星平行、不分高下)─────────────────
+// 🔴 達標 = 金準心卡(賺來的、錢買不到、滑掉收回);在軌道上 = 一行誠實目標(還差 X 場 · 非 near-miss 陷阱);
+//   其餘不顯。 subject「你」(本人)/「TA」(公開檔)只換稱呼。 數字永遠連著「含輸 N 場」卡尺,不裸奔。
+function TrueAimBlock({ aim, subject }: { aim: TrueAim; subject: string }) {
+  if (aim.earned) {
+    return (
+      <div className="mb-5 border border-gold/55 bg-gold/[0.06] p-4 sm:p-5">
+        <div className="flex items-center gap-3">
+          <TrueAimMark size={32} />
+          <div className="min-w-0">
+            <p className="text-gold text-base sm:text-lg font-light tracking-tight">
+              {subject}拿到了準心
+            </p>
+            <p className="font-mono text-mute/55 text-[10px] tracking-[0.2em] mt-0.5">
+              ZONE 27 認證 · 賺來的、錢買不到
+            </p>
+          </div>
+        </div>
+        <p className="mt-3 text-bone text-sm sm:text-base leading-relaxed">
+          在 <span className="font-mono text-gold tabular">{aim.decided}</span> 場含輸的公開對帳裡 ·{" "}
+          {subject}說幾成把握、就真的中了幾成
+          {aim.statedAvg !== null && aim.actualAvg !== null && (
+            <>
+              （平均說{" "}
+              <span className="font-mono tabular">{Math.round(aim.statedAvg)}%</span>、實際也中{" "}
+              <span className="font-mono tabular">{Math.round(aim.actualAvg)}%</span>）
+            </>
+          )}
+          。 不是贏最多,是<span className="text-gold">看得準自己</span> —— 這比贏更難裝。 滑掉了會被收回。
+        </p>
+      </div>
+    );
+  }
+  if (aim.onTrack) {
+    return (
+      <div className="mb-4 flex items-center gap-3 border-b border-line/40 pb-3">
+        <TrueAimMark size={26} dim />
+        <span className="flex-1 min-w-0 text-mute text-[13px] leading-snug">
+          {subject}在追<span className="text-bone">準心</span> · 還差{" "}
+          <span className="text-gold">{aim.toGo} 場</span>（滿 {TRUE_AIM_MIN_DECIDED}{" "}
+          場含輸、說的把握跟實際中的夠貼）· 獎勵的不是贏最多,是看得準自己。
+        </span>
+      </div>
+    );
+  }
+  return null;
 }
