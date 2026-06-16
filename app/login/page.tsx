@@ -389,7 +389,7 @@ export default function LoginPage() {
           <p className="mt-6 text-mute text-base leading-relaxed max-w-xl mx-auto">
             押一手就鎖死 · 賽後我們逐場幫你對帳 ——{" "}
             <span className="text-bone">你 vs 引擎的戰績,別人刪不掉</span>。
-            Email + 密碼,或 Google 一鍵登入。 終身免費 · 永不調漲 · 0 tracking。
+            
           </p>
         </section>
 
@@ -518,8 +518,6 @@ export default function LoginPage() {
                   ▸ 第一次用這個信箱 = 自動幫你開帳號 · 寄一封確認信 · 點信裡的連結就完成
                   <br />
                   ▸ 用過了 = 直接打密碼登入 · 登入狀態只留在這台裝置
-                  <br />
-                  ▸ Google 或 email 都行 · 我們一樣 0 追蹤(詳見 /privacy)
                 </p>
               </div>
             </form>
@@ -562,7 +560,6 @@ export default function LoginPage() {
             <li>▸ 終身免費</li>
             <li>▸ 你的準度儀表板 · 你 vs 引擎誰準</li>
             <li>▸ 模型改版時 email 通知你</li>
-            <li>▸ 0 追蹤工具 · 只留登入用的紀錄 · 登出就刪</li>
           </ul>
         </section>
 

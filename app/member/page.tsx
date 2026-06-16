@@ -405,7 +405,7 @@ export default async function MemberPage() {
           className="mt-6 flex items-baseline justify-between gap-3 border-b border-line/40 pb-3 hover:border-gold/40 transition-colors group"
         >
           <span className="text-mute text-sm leading-snug">
-            你不在時<span className="text-bone">結算了什麼</span> · 命中落空逐筆對帳(連得到單場收據)
+            <span className="text-bone">結算收件匣</span> · 命中落空逐筆對帳
           </span>
           <span className="shrink-0 font-mono text-gold/70 group-hover:text-gold text-[10px] tracking-[0.3em] transition-colors">
             收件匣 →
@@ -425,7 +425,7 @@ export default async function MemberPage() {
           className="mt-6 flex items-baseline justify-between gap-3 border-b border-line/40 pb-3 hover:border-gold/40 transition-colors group"
         >
           <span className="text-mute text-sm leading-snug">
-            你鎖死的每一手都收成<span className="text-bone">戰功卡</span> · 命中落空都在、改不了
+            <span className="text-bone">戰功卡收藏</span> · 每一手都改不了
           </span>
           <span className="shrink-0 font-mono text-gold/70 group-hover:text-gold text-[10px] tracking-[0.3em] transition-colors">
             看收藏 →
@@ -451,7 +451,7 @@ export default async function MemberPage() {
           className="mt-6 flex items-baseline justify-between gap-3 border-b border-line/40 pb-3 hover:border-gold/40 transition-colors group"
         >
           <span className="text-mute text-sm leading-snug">
-            揪朋友開一個<span className="text-bone">私人預測聯盟</span> · 整季比誰最會讀球(校準計分 · 不是連勝)
+            揪朋友開<span className="text-bone">私人預測聯盟</span> · 整季比校準
           </span>
           <span className="shrink-0 font-mono text-gold/70 group-hover:text-gold text-[10px] tracking-[0.3em] transition-colors">
             我的盟 →
@@ -466,7 +466,7 @@ export default async function MemberPage() {
             className="mt-6 flex items-baseline justify-between gap-3 border-b border-line/40 pb-3 hover:border-gold/40 transition-colors group"
           >
             <span className="text-mute text-sm leading-snug">
-              <span className="text-bone">{monthLabel(currentMonth)}的回顧</span> · 這個月你押了什麼、準不準 · 一張可外傳的月度收據
+              <span className="text-bone">{monthLabel(currentMonth)}的回顧</span> · 一張可外傳的月度收據
             </span>
             <span className="shrink-0 font-mono text-gold/70 group-hover:text-gold text-[10px] tracking-[0.3em] transition-colors">
               看回顧 →
@@ -483,7 +483,7 @@ export default async function MemberPage() {
             className="mt-6 flex items-baseline justify-between gap-3 border-b border-line/40 pb-3 hover:border-gold/40 transition-colors group"
           >
             <span className="text-mute text-sm leading-snug">
-              想把<span className="text-bone">準度變成身分</span>?升級 BLACK / GOLD · 出錢養著免費引擎
+              把<span className="text-bone">準度變成身分</span> · 升級 BLACK / GOLD
             </span>
             <span className="shrink-0 font-mono text-gold/70 group-hover:text-gold text-[10px] tracking-[0.3em] transition-colors">
               看方案 →
@@ -596,7 +596,7 @@ export default async function MemberPage() {
 
         {/* 聯絡站長 · Tim dogfood:會員找不到「怎麼聯絡站長」· 直接 mailto Tim 個人 inbox */}
         <p className="mt-10 text-center font-mono text-mute/50 text-[10px] tracking-[0.2em] leading-relaxed">
-          有問題、想回報、或要找站長?{" "}
+          有問題?{" "}
           <a
             href={`mailto:${SUPPORT_EMAIL}`}
             className="text-gold/70 hover:text-gold underline-offset-4 hover:underline transition-colors"

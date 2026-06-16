@@ -57,9 +57,6 @@ export default function LearnPage() {
             ZONE 27 用引擎拆解棒球比賽勝率。
             但如果您從來沒讀過進階棒球數據 · 這頁是專屬給您的 6 分鐘入門。
           </p>
-          <p className="mt-4 max-w-xl mx-auto font-mono text-mute/70 text-[10px] tracking-[0.3em]">
-            4 CHAPTERS · NO STATS DEGREE REQUIRED · NO PREVIOUS BASEBALL VOCAB
-          </p>
           <div className="mt-6 flex justify-center">
             <ArticleMeta readingMin={6} />
           </div>
@@ -275,8 +272,7 @@ export default function LearnPage() {
             從這裡 · 一直到你<span className="text-gold">不需要任何人報牌</span>。
           </h2>
           <p className="text-mute leading-relaxed mb-10 max-w-xl">
-            ZONE 27 不賣明牌。 我們做的是另一件事 —— 把「自己讀球、自己對帳」一階一階交到你手上,
-            教到你連我們的引擎都可以站上去挑戰。 下面是整條路,你已經踏出前兩步了。
+            我們把「自己讀球、自己對帳」一階一階交給你 —— 教到你連我們的引擎都能挑戰。
           </p>
 
           <div>
