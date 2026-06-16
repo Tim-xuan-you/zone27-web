@@ -12,6 +12,28 @@ import type { LadderBoard as LadderBoardData } from "@/lib/ladder-server";
 
 const TIER_ZH = ["", "新秀", "分析師", "操盤手", "神準手", "神諭"];
 
+// 米其林式月度升降標記(本月 vs 上月底)· 幾何三角非 emoji · 升=金、降=loss 柔紅、新上榜=金框。
+// 持平不顯示(不囉嗦)。 同 /ladder 文案:位置會升也會降,星不是永久的。
+function MoveMark({ move }: { move: "up" | "down" | "same" | "new" }) {
+  if (move === "same") return null;
+  if (move === "new") {
+    return (
+      <span className="font-mono text-gold/80 text-[8px] tracking-[0.18em] px-1 border border-gold/40">
+        新上榜
+      </span>
+    );
+  }
+  const up = move === "up";
+  return (
+    <span
+      className={`font-mono text-[8px] tracking-[0.18em] ${up ? "text-gold" : "text-loss/80"}`}
+      title={up ? "本月升階" : "本月掉階"}
+    >
+      {up ? "▲ 本月升" : "▼ 本月降"}
+    </span>
+  );
+}
+
 export default function LadderBoard({ board }: { board: LadderBoardData }) {
   if (!board.show || board.entries.length === 0) return null;
 
@@ -80,6 +102,7 @@ export default function LadderBoard({ board }: { board: LadderBoardData }) {
                     >
                       {TIER_ZH[e.tier] ?? "新秀"}
                     </span>
+                    <MoveMark move={e.move} />
                     {e.monthBeatEngine && (
                       <span className="font-mono text-gold/70 text-[8px] tracking-[0.18em]">
                         本月仍贏引擎

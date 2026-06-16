@@ -182,6 +182,11 @@ export default async function LadderPage() {
           你的位置<span className="text-gold">隨賽果更新</span> · 準度守不住、階級就掉 ——
           跟米其林的星一樣,不是永久的、會被收回。
         </p>
+        <p className="mt-2 text-mute text-sm leading-relaxed">
+          榜上每個人旁邊會標<span className="text-gold">▲本月升</span> /{" "}
+          <span className="text-loss/80">▼本月降</span> / 新上榜 —— 跟<span className="text-bone">上個月底</span>比,
+          你這個月是爬了還是掉了,看得見。
+        </p>
         <p className="mt-2 font-mono text-mute/60 text-[11px] tracking-[0.15em] leading-relaxed">
           靠的是真實準度 · 不是付費、不是年資、不是運氣。
         </p>

@@ -18,6 +18,7 @@
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 import {
   aggregateIdentity,
+  taipeiDayOf,
   type UserPredictionsMap,
   type IdentityMatch,
 } from "@/lib/predictions";
@@ -61,6 +62,9 @@ export type LadderEntry = {
   monthBeatEngine: boolean;
   /** 付費支持者(BLACK/GOLD · 0023)· 亮金環 = 身分標記,不是準度 · 永不影響名次 */
   supporter: boolean;
+  /** 米其林式月度升降:本月階級 vs「上月底」階級。 on-read 從不可竄改的押注+賽果歷史推導 ·
+   *  0 migration。 up=升階 · down=掉階 · same=持平 · new=本月新上榜。 */
+  move: "up" | "down" | "same" | "new";
 };
 
 export type LadderBoard = {
@@ -127,6 +131,57 @@ function tierOf(
   return 1; // 新秀:上榜但還沒過半
 }
 
+// ── 米其林式月度升降 · 「某個月之前」每人會落在哪一階 ──────────────────────
+// 跑同一套 qualify → 大家平均 → tierOf → 排名定神諭 的管線,只是吃「過濾過的 idMatches」
+// (只留比賽日在 monthKey 之前的場)→ 回傳 code → 階級(1-5)= 那個人「上月底」的位置。
+// 純函式、on-read、0 migration —— 完全從不可竄改的押注 ts + 賽果歷史推導,不存任何月度快照。
+function tiersAsOf(
+  byUser: Map<string, { handle: string; map: UserPredictionsMap }>,
+  idMatches: IdentityMatch[],
+  monthKey: string,
+): Map<string, number> {
+  const out = new Map<string, number>();
+  type Q = {
+    code: string;
+    tier: number;
+    accuracyPct: number;
+    beatEngine: boolean;
+    decided: number;
+    sortEdge: number;
+  };
+  const qualified: Q[] = [];
+  for (const [code, u] of byUser) {
+    const id = aggregateIdentity(u.map, idMatches, monthKey);
+    if (id.decided < LADDER_MIN_GRADED || id.accuracy === null) continue;
+    qualified.push({
+      code,
+      tier: 1,
+      accuracyPct: id.accuracy,
+      beatEngine: id.beatEngine === true,
+      decided: id.decided,
+      sortEdge: id.edgeVsEnginePts ?? -999,
+    });
+  }
+  if (qualified.length === 0) return out;
+  const crowdAvg =
+    qualified.reduce((s, e) => s + e.accuracyPct, 0) / qualified.length;
+  for (const e of qualified) {
+    e.tier = tierOf(e.accuracyPct, e.beatEngine, crowdAvg, e.decided);
+  }
+  qualified.sort(
+    (a, b) =>
+      b.sortEdge - a.sortEdge ||
+      b.decided - a.decided ||
+      b.accuracyPct - a.accuracyPct,
+  );
+  qualified.forEach((e, i) => {
+    const tier =
+      i === 0 && e.beatEngine && e.decided >= LADDER_SHARP_MIN ? 5 : e.tier;
+    out.set(e.code, tier);
+  });
+  return out;
+}
+
 export async function getLadderBoard(): Promise<LadderBoard> {
   let rows: RpcRow[];
   try {
@@ -163,7 +218,8 @@ export async function getLadderBoard(): Promise<LadderBoard> {
   const monthKey = getCurrentTaipeiMonthKey();
 
   // 每人算準度身分 → 取合格者(≥10 已分勝負)。
-  type Computed = LadderEntry & { _sortEdge: number };
+  // move 在最後組 entries 時才算(跟上月底比)· 中間 Computed 不帶 move。
+  type Computed = Omit<LadderEntry, "move"> & { _sortEdge: number };
   const qualified: Computed[] = [];
   for (const [code, u] of byUser) {
     const id = aggregateIdentity(u.map, idMatches, monthKey);
@@ -225,12 +281,30 @@ export async function getLadderBoard(): Promise<LadderBoard> {
     );
   }
 
+  // 米其林式月度升降:跟「上月底」比。 上月底每人會落在哪一階 = 用「比賽日在本月之前」的場
+  // (從歷史推導 · 0 migration)。 砍掉 startISO 解不出台北日的場(graceful · 不誤入上月桶)。
+  const prevMonthMatches = idMatches.filter((m) => {
+    const d = taipeiDayOf(m.startISO ?? null);
+    return d !== null && d.slice(0, 7) < monthKey;
+  });
+  const lastMonthTier = tiersAsOf(byUser, prevMonthMatches, monthKey);
+
   const entries: LadderEntry[] = top.map((e, i) => {
     const rank = i + 1;
     // 神諭(王座 · tier 5)= 全站第一、且在夠厚樣本(≥LADDER_SHARP_MIN)裡真的贏過機器(同對帳之星)。
     // 沒人達標 → 王座仍只有機器(不硬封王 · 寧可空著也不發給樣本不足的人)。
     const tier =
       rank === 1 && e.beatEngine && e.decided >= LADDER_SHARP_MIN ? 5 : e.tier;
+    // 本月升降:上月底沒在榜(prev=undefined)= 新上榜;否則比階級高低。
+    const prev = lastMonthTier.get(e.authorCode);
+    const move: LadderEntry["move"] =
+      prev === undefined
+        ? "new"
+        : tier > prev
+          ? "up"
+          : tier < prev
+            ? "down"
+            : "same";
     return {
       rank,
       authorCode: e.authorCode,
@@ -242,6 +316,7 @@ export async function getLadderBoard(): Promise<LadderBoard> {
       beatEngine: e.beatEngine,
       monthBeatEngine: e.monthBeatEngine,
       supporter: supporterByCode.get(e.authorCode) ?? false,
+      move,
     };
   });
 
