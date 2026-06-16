@@ -40,6 +40,13 @@ const MIN_MEAN_DIST = 8;
 const NOISE_Z = 1.5;
 // 噪音帶下限(分)· 大樣本桶標準誤很小時別把帶收到不近人情 + 吸收 actualPct 量化的最後一格。
 const BAND_FLOOR_PTS = 8;
+// 系統性偏移閘:平均宣告把握 vs 平均實際命中 的差要 ≤ 此(分)。
+// 🔴 為什麼非有不可:逐桶噪音帶只擋「隨機」誤差,擋不住「每桶都往同一個方向高估」的系統性偏
+//   (報馬仔的本性 = 場場喊高)—— 那種偏每桶各自都還落在(因小樣本而很寬的)噪音帶內,卻在
+//   聚合上一眼可見(例如平均喊 70% 實際只中 53%)。 沒這道閘,系統性過度自信者會矇混達標 =
+//   準心最該擋的人反而拿得到。 用 8 分(= 校準大師 GOOD_TOLERANCE)→ 準心達標 ⟹ 校準大師
+//   判語必為「蠻準」· 同一頁永不出現「過度自信」與「拿到準心」自相矛盾。
+const AGG_SKEW_TOL_PTS = 8;
 
 export type TrueAim = {
   /** 達標:≥MIN 場含輸 · 用了 ≥3 個夠厚的不同把握檔且真的下了判斷 · 每個夠厚的桶都落在噪音帶內 */
@@ -100,7 +107,13 @@ export function trueAim(report: CalibrationReport): TrueAim {
   const meanDistFrom50 = wDist / decided;
 
   const sharp = distinct >= MIN_DISTINCT && meanDistFrom50 >= MIN_MEAN_DIST;
-  const calibrated = allWithinBand;
+  // 校準 = 每個夠厚的桶都在噪音帶內(擋「隨機」誤差)· 且 聚合無系統性偏(擋「每桶同方向」的
+  // 過度自信/保守)。 兩者缺一不可 —— 缺後者,場場喊高的報馬仔會矇過去(逐桶各自落在寬帶內)。
+  const aggregateSkewOk =
+    report.statedAvg !== null &&
+    report.actualAvg !== null &&
+    Math.abs(report.statedAvg - report.actualAvg) <= AGG_SKEW_TOL_PTS;
+  const calibrated = allWithinBand && aggregateSkewOk;
 
   const earned = decided >= TRUE_AIM_MIN_DECIDED && sharp && calibrated;
   // 追星軌道:品質(夠分散有主張 + 每桶都在噪音帶內)都已達標、只差場數(誠實門檻,非 near-miss 陷阱)。
