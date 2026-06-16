@@ -4803,8 +4803,12 @@
       },
       "engineWinHomePct": 61,
       "lockedAt": "2026-06-14T17:01:32.346Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 7,
+        "away": 0
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-06-16T16:03:06.889Z"
     },
     {
       "gamePk": 822724,
@@ -4832,8 +4836,12 @@
       },
       "engineWinHomePct": 80,
       "lockedAt": "2026-06-14T22:20:44.786Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 7,
+        "away": 3
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-06-16T16:03:06.890Z"
     },
     {
       "gamePk": 824505,
@@ -4861,8 +4869,12 @@
       },
       "engineWinHomePct": 72,
       "lockedAt": "2026-06-14T22:20:44.786Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 12,
+        "away": 0
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-06-16T16:03:06.890Z"
     },
     {
       "gamePk": 824666,
@@ -4890,8 +4902,12 @@
       },
       "engineWinHomePct": 67,
       "lockedAt": "2026-06-14T22:20:44.786Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 5,
+        "away": 4
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-06-16T16:03:06.890Z"
     },
     {
       "gamePk": 824181,
@@ -4919,8 +4935,12 @@
       },
       "engineWinHomePct": 62,
       "lockedAt": "2026-06-14T22:20:44.786Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 3,
+        "away": 9
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-06-16T16:03:06.890Z"
     },
     {
       "gamePk": 825071,
@@ -4948,8 +4968,12 @@
       },
       "engineWinHomePct": 30,
       "lockedAt": "2026-06-14T22:20:44.786Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 4,
+        "away": 3
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-06-16T16:03:06.890Z"
     },
     {
       "gamePk": 824993,
@@ -4977,8 +5001,12 @@
       },
       "engineWinHomePct": 60,
       "lockedAt": "2026-06-14T22:20:44.786Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 11,
+        "away": 2
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-06-16T16:03:06.890Z"
     },
     {
       "gamePk": 823938,
@@ -5006,8 +5034,12 @@
       },
       "engineWinHomePct": 33,
       "lockedAt": "2026-06-14T22:20:44.786Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 4,
+        "away": 3
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-06-16T16:03:06.890Z"
     },
     {
       "gamePk": 823451,
@@ -5731,6 +5763,151 @@
       },
       "engineWinHomePct": 37,
       "lockedAt": "2026-06-15T18:11:35.548Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 823127,
+      "gameDate": "2026-06-18T01:40:00Z",
+      "scheduleDate": "2026-06-17",
+      "homeId": 136,
+      "homeEn": "Seattle Mariners",
+      "homeRecord": "37-36",
+      "awayId": 110,
+      "awayEn": "Baltimore Orioles",
+      "awayRecord": "34-39",
+      "homePitcher": "George Kirby",
+      "awayPitcher": "Kyle Bradish",
+      "homeStats": {
+        "era": "4.07",
+        "k9": "7.93",
+        "bb9": "2.25",
+        "hr9": "0.86"
+      },
+      "awayStats": {
+        "era": "4.30",
+        "k9": "8.96",
+        "bb9": "4.79",
+        "hr9": "1.35"
+      },
+      "engineWinHomePct": 56,
+      "lockedAt": "2026-06-16T16:03:06.000Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 823772,
+      "gameDate": "2026-06-18T18:10:00Z",
+      "scheduleDate": "2026-06-18",
+      "homeId": 158,
+      "homeEn": "Milwaukee Brewers",
+      "homeRecord": "43-26",
+      "awayId": 114,
+      "awayEn": "Cleveland Guardians",
+      "awayRecord": "39-33",
+      "homePitcher": "Shane Drohan",
+      "awayPitcher": "Parker Messick",
+      "homeStats": {
+        "era": "3.59",
+        "k9": "9.28",
+        "bb9": "2.32",
+        "hr9": "0.63"
+      },
+      "awayStats": {
+        "era": "2.68",
+        "k9": "9.15",
+        "bb9": "2.79",
+        "hr9": "0.89"
+      },
+      "engineWinHomePct": 52,
+      "lockedAt": "2026-06-16T16:03:06.000Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 822889,
+      "gameDate": "2026-06-18T18:35:00Z",
+      "scheduleDate": "2026-06-18",
+      "homeId": 140,
+      "homeEn": "Texas Rangers",
+      "homeRecord": "35-37",
+      "awayId": 142,
+      "awayEn": "Minnesota Twins",
+      "awayRecord": "34-40",
+      "homePitcher": "Jack Leiter",
+      "awayPitcher": "Joe Ryan",
+      "homeStats": {
+        "era": "4.97",
+        "k9": "9.36",
+        "bb9": "3.91",
+        "hr9": "1.42"
+      },
+      "awayStats": {
+        "era": "3.17",
+        "k9": "10.06",
+        "bb9": "1.75",
+        "hr9": "0.87"
+      },
+      "engineWinHomePct": 42,
+      "lockedAt": "2026-06-16T16:03:06.000Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 823533,
+      "gameDate": "2026-06-18T23:05:00Z",
+      "scheduleDate": "2026-06-18",
+      "homeId": 147,
+      "homeEn": "New York Yankees",
+      "homeRecord": "43-27",
+      "awayId": 145,
+      "awayEn": "Chicago White Sox",
+      "awayRecord": "38-32",
+      "homePitcher": "Ryan Weathers",
+      "awayPitcher": "Sean Burke",
+      "homeStats": {
+        "era": "4.36",
+        "k9": "9.81",
+        "bb9": "2.54",
+        "hr9": "1.82"
+      },
+      "awayStats": {
+        "era": "4.15",
+        "k9": "8.92",
+        "bb9": "3.42",
+        "hr9": "1.10"
+      },
+      "engineWinHomePct": 51,
+      "lockedAt": "2026-06-16T16:03:06.000Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 824911,
+      "gameDate": "2026-06-18T23:15:00Z",
+      "scheduleDate": "2026-06-18",
+      "homeId": 144,
+      "homeEn": "Atlanta Braves",
+      "homeRecord": "46-25",
+      "awayId": 137,
+      "awayEn": "San Francisco Giants",
+      "awayRecord": "29-43",
+      "homePitcher": "Martín Pérez",
+      "awayPitcher": "Landen Roupp",
+      "homeStats": {
+        "era": "2.90",
+        "k9": "7.40",
+        "bb9": "3.05",
+        "hr9": "0.87"
+      },
+      "awayStats": {
+        "era": "4.24",
+        "k9": "9.93",
+        "bb9": "3.87",
+        "hr9": "0.48"
+      },
+      "engineWinHomePct": 52,
+      "lockedAt": "2026-06-16T16:03:06.000Z",
       "finalScore": null,
       "verdict": null
     }
