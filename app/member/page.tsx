@@ -458,6 +458,21 @@ export default async function MemberPage() {
           </span>
         </Link>
 
+        {/* 會員房間(R248 · Defector 式專屬空間)· 出錢養著免費引擎那群人的客廳 · 顯示給所有登入者
+            (免費會員點進去看到房間介紹 + 升級邀請 = 偷看門後的 conversion;付費會員 = 直接進場)·
+            同列樣式守極簡 · 接在聯盟後(社群/歸屬群組)。 */}
+        <Link
+          href="/member/lounge"
+          className="mt-6 flex items-baseline justify-between gap-3 border-b border-line/40 pb-3 hover:border-gold/40 transition-colors group"
+        >
+          <span className="text-mute text-sm leading-snug">
+            <span className="text-bone">會員房間</span> · 養著免費引擎那群人的客廳
+          </span>
+          <span className="shrink-0 font-mono text-gold/70 group-hover:text-gold text-[10px] tracking-[0.3em] transition-colors">
+            進房間 →
+          </span>
+        </Link>
+
         {/* 本月賽季回顧入口(R220 稽核:已建好但只在 /u 連得到 → 接到會員頁)· 有本月押注才連 ·
             同「看收藏」列樣式(不新增大卡 · 守會員頁極簡)。 */}
         {hasSeasonActivity && (
