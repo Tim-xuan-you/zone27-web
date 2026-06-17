@@ -144,7 +144,7 @@ export default function AboutPage() {
               >
                 {SUPPORT_EMAIL}
               </a>
-              （24 小時內回)。
+              （Tim 親手回 · 約 1-3 個工作天)。
             </p>
           </div>
         </section>

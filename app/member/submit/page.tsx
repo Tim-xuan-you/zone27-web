@@ -140,7 +140,7 @@ export default function SubmitPage() {
                 ✓ SENT · 寄到 Tim 信箱
               </p>
               <h2 className="text-2xl text-bone font-light tracking-tight mb-3">
-                收到 · 24 小時內 review
+                收到 · Tim 幾天內親手讀
               </h2>
               <p className="text-mute text-sm leading-relaxed max-w-md mx-auto">
                 Tim 親手讀完 reply。 不過 = reply 您 reason · 不藏。 1/週 cadence。
