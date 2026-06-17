@@ -498,10 +498,10 @@ export default async function MemberPage() {
             className="mt-6 flex items-baseline justify-between gap-3 border-b border-line/40 pb-3 hover:border-gold/40 transition-colors group"
           >
             <span className="text-mute text-sm leading-snug">
-              把<span className="text-bone">準度變成身分</span> · 升級 BLACK / GOLD
+              <span className="text-bone">撐著它的人</span> · 讓這個引擎對所有人一直免費
             </span>
             <span className="shrink-0 font-mono text-gold/70 group-hover:text-gold text-[10px] tracking-[0.3em] transition-colors">
-              看方案 →
+              成為其中一個 →
             </span>
           </Link>
         )}

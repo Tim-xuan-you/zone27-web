@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import RelatedReading from "@/components/RelatedReading";
 import FounderSignOff from "@/components/FounderSignOff";
 import CopyLinkButton from "@/components/CopyLinkButton";
+import PatronAsk from "@/components/PatronAsk";
 import ArticleMeta from "@/components/ArticleMeta";
 import SportToggle from "@/components/SportToggle";
 import { getFinalizedMatches, type Match } from "@/lib/matches";
@@ -386,6 +387,19 @@ export default function CalibrationPublicPage() {
               refTag="calibration-share"
             />
           </div>
+        </section>
+
+        {/* 贊助之請(R248③)· 峰值價值面:這頁是引擎公開自己準不準的「最貴信任憑證」· 撐它免費的是會員。 */}
+        <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-16">
+          <PatronAsk
+            line={
+              <>
+                這頁是 ZONE 27 最貴的一張信任憑證 —— 公開自己準不準 ·{" "}
+                <span className="text-bone">免費、沒有廣告</span>。 撐著它一直免費的,是
+                <span className="text-gold">會員</span>。
+              </>
+            }
+          />
         </section>
 
         <RelatedReading currentPath="/calibration" />
