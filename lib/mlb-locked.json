@@ -5199,8 +5199,12 @@
       },
       "engineWinHomePct": 62,
       "lockedAt": "2026-06-14T22:20:44.786Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 2,
+        "away": 7
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-06-17T20:21:57.588Z"
     },
     {
       "gamePk": 823775,
@@ -5525,8 +5529,12 @@
       },
       "engineWinHomePct": 37,
       "lockedAt": "2026-06-15T18:11:35.548Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 1,
+        "away": 9
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-06-17T20:21:57.607Z"
     },
     {
       "gamePk": 822721,
@@ -5554,8 +5562,12 @@
       },
       "engineWinHomePct": 46,
       "lockedAt": "2026-06-15T18:11:35.548Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 2,
+        "away": 6
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-06-17T20:21:57.607Z"
     },
     {
       "gamePk": 823450,
@@ -5583,8 +5595,12 @@
       },
       "engineWinHomePct": 43,
       "lockedAt": "2026-06-15T18:11:35.548Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 4,
+        "away": 12
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-06-17T20:21:57.607Z"
     },
     {
       "gamePk": 824178,
@@ -6105,6 +6121,64 @@
       },
       "engineWinHomePct": 61,
       "lockedAt": "2026-06-17T17:50:55.219Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 824264,
+      "gameDate": "2026-06-19T22:40:00Z",
+      "scheduleDate": "2026-06-19",
+      "homeId": 116,
+      "homeEn": "Detroit Tigers",
+      "homeRecord": "30-43",
+      "awayId": 145,
+      "awayEn": "Chicago White Sox",
+      "awayRecord": "38-33",
+      "homePitcher": "Tarik Skubal",
+      "awayPitcher": "Erick Fedde",
+      "homeStats": {
+        "era": "2.81",
+        "k9": "9.19",
+        "bb9": "1.31",
+        "hr9": "0.56"
+      },
+      "awayStats": {
+        "era": "4.50",
+        "k9": "6.00",
+        "bb9": "3.55",
+        "hr9": "1.91"
+      },
+      "engineWinHomePct": 75,
+      "lockedAt": "2026-06-17T20:21:56.988Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 822966,
+      "gameDate": "2026-06-19T23:10:00Z",
+      "scheduleDate": "2026-06-19",
+      "homeId": 139,
+      "homeEn": "Tampa Bay Rays",
+      "homeRecord": "41-29",
+      "awayId": 120,
+      "awayEn": "Washington Nationals",
+      "awayRecord": "39-36",
+      "homePitcher": "Griffin Jax",
+      "awayPitcher": "Cade Cavalli",
+      "homeStats": {
+        "era": "3.68",
+        "k9": "8.39",
+        "bb9": "3.68",
+        "hr9": "1.43"
+      },
+      "awayStats": {
+        "era": "3.98",
+        "k9": "9.76",
+        "bb9": "3.01",
+        "hr9": "0.72"
+      },
+      "engineWinHomePct": 48,
+      "lockedAt": "2026-06-17T20:21:56.988Z",
       "finalScore": null,
       "verdict": null
     },
