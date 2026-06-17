@@ -2,25 +2,21 @@ import { ImageResponse } from "next/og";
 import { BRAND, OG_SIZE, OG_CONTENT_TYPE } from "@/lib/brand";
 
 // ── ZONE 27 · /membership/black-card Dynamic OG ────────
-// Round 32 W-A · Wire-up sync for Round 31 W-X3 new route。
-// R62 W-A · Q3 2026 → milestone-trigger language(per Agent A R59 Vector 10)。
+// R245 · 對齊 /membership/black-card 誠實重寫:BLACK 不解鎖任何功能(引擎、押注、
+// 天梯、對帳、含輸命中率、校準、驗證準度標章 —— 全部免費)· BLACK 唯一加的就一樣:
+// 一圈金色支持環。 舊版 OG 把「6 unlocks(engine variants / 驗證準度標章 / voting /
+// Tim 筆記 / LINE 群)」當付費解鎖條列 —— 踩了「付費≠比較準·準是免費的」紅線,且與
+// 重寫後的 page 自打臉(page 說全免費、OG 說 BLACK 解鎖)。 此 OG 改成跟 page 同一把
+// 尺:先講「全免費」,再講 BLACK 唯一加的金環。
 //
-// /membership/black-card 是 BLACK UI mockup · payment infra 就緒後上線。
-// OG card 必須誠實標 PRE-LAUNCH(同 page 上 status badge)否則 visitor
-// 從 LINE/FB 點進來會誤以為現在可訂閱。 brand IP「方法公開」延伸到
-// preview state itself。
-//
-// 設計原則:
-//   - PRE-LAUNCH · UI MOCKUP badge 顯眼(同 page hero)
-//   - 6 unlocks 條列(球迷 grammar:engine variants + 賽事討論 + 支持者金環/驗證準度標章 + voting + Tim 筆記 + LINE 群 read-only)· R76 W-A count drift fix
-//   - NT$ 500 / 31 天 · 出錢養著免費引擎
-//   - 反向 marketing punchline:「Subscription preview. milestone-triggered.」
+// 守紅線:付費=身分非功能 · 準是免費的 · 0 假稀缺 · 守暗金(OG render 不用 emoji /
+//   ✓✕▸★→ 等 symbol glyph · 金色圓點用純 CSS 幾何,0 字型依賴)。
 // ─────────────────────────────────────────────────────
 
 export const size = OG_SIZE;
 export const contentType = OG_CONTENT_TYPE;
 export const alt =
-  "ZONE 27 · BLACK · 訂閱會員 UI preview · NT$ 500/31 天 · PRE-LAUNCH milestone-triggered · 6 unlocks · 支持者金環";
+  "ZONE 27 · BLACK · NT$ 500/31 天 · 引擎永遠免費 · BLACK 不解鎖功能 · 你買的是一圈金色支持環 · 手動轉帳 · 不自動續扣";
 
 export default async function BlackCardOgImage() {
   return new ImageResponse(
@@ -144,7 +140,7 @@ export default async function BlackCardOgImage() {
               display: "flex",
             }}
           >
-            訂閱會員 · 6 unlocks · 出錢養著免費引擎
+            引擎永遠免費 · BLACK 不解鎖功能,你買的是金環
           </span>
         </div>
 
@@ -160,14 +156,9 @@ export default async function BlackCardOgImage() {
           }}
         />
 
-        {/* ── 6 UNLOCKS · R77 W-G C-1 fix · Agent B R77 audit 🔴 ·
-            之前 array 有 5 UnlockRow 但 alt + visible text 都 claim「6
-            unlocks」 · 5-second self-debunk · Agent A R75 SHIP 7
-            OutputArtifactSwitcher 主 page UNLOCKS array 是 6 entries
-            including #1 v0.3/v0.4 engine variants · OG card 之前 missing
-            #1 · 此 fix add the missing first UnlockRow · count drift
-            真實 close · brand IP「方法公開 · drift = 5-second self-debunk」
-            axiom 物理 codify。 */}
+        {/* ── 先講「全免費」· 再講 BLACK 唯一加的金環(R245 · 對齊 page)─────
+            舊版列「6 unlocks」當付費解鎖 = 踩「準是免費的」紅線 + 與 page 自打臉。
+            金色圓點是純 CSS 幾何(0 字型依賴)· 只是條列符號、不是付費 checkmark · 守暗金。 */}
         <div
           style={{
             display: "flex",
@@ -175,12 +166,10 @@ export default async function BlackCardOgImage() {
             gap: 8,
           }}
         >
-          <UnlockRow label="v0.3 + v0.4 engine variants(BLACK 解鎖)" />
-          <UnlockRow label="寫信給 Tim · 24 小時內親手回(免費 7 天)" />
-          <UnlockRow label="支持者金環 · 驗證準度標章" />
-          <UnlockRow label="每月 voting 影響引擎下個 ship 方向" />
-          <UnlockRow label="Tim 每週工程筆記 full 版" />
-          <UnlockRow label="GOLD LINE 群 read-only access" />
+          <UnlockRow label="押注 · 引擎 · 爬天梯 · 賽前鎖死賽後對帳:全部免費" />
+          <UnlockRow label="含輸命中率 · 校準 · 哪一場贏過引擎:免費標出來" />
+          <UnlockRow label="BLACK 加的就一樣:一圈金色支持環,造不了假" />
+          <UnlockRow label="你付的是身分,不是解鎖功能" />
         </div>
 
         {/* ── BOTTOM · differentiator punchline ──────────
@@ -203,7 +192,7 @@ export default async function BlackCardOgImage() {
               display: "flex",
             }}
           >
-            Subscription preview. We don&apos;t take money until Q3.
+            準是免費的。 撐著它,是金環。
           </span>
           <span
             style={{

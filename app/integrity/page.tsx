@@ -289,8 +289,8 @@ export default function IntegrityPage() {
               CANVAS · /audit S02 全部 estimation disclosure)對<strong className="text-bone">
               FREE tier 訪客 = BLACK 訂閱者 = GOLD 永久會員</strong>
               · 物理上同一份 lib/simulator.ts 跑出來。 paid tier 買的是 IDENTITY
-              (出錢養著免費引擎 + 驗證準度徽章 + 支持者金環 + GOLD LINE 群)· 不買 engine accuracy
-              升級 · 不買 secret edge · 不買 paywall predictions。
+              (出錢養著免費引擎 + 支持者金環 + GOLD LINE 群)· 不買 engine accuracy
+              升級 · 不買 secret edge · 不買 paywall predictions · 連驗證準度標章都免費(靠戰績賺,不靠付費)。
             </p>
 
             <p>
