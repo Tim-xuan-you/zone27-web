@@ -40,8 +40,8 @@ const FOOTER_GROUPS: FooterGroup[] = [
     ],
   },
   {
-    label: "信任 · 公開",
-    enLabel: "PROOF",
+    label: "證據 · 自己驗",
+    enLabel: "EVIDENCE",
     links: [
       { label: "公開戰績 · 每場對錯", href: "/track-record" },
       { label: "引擎校準 · 說七成中幾成", href: "/calibration" },

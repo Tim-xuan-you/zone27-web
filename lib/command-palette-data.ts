@@ -31,7 +31,7 @@ export type CommandItem = {
   /** Route path (internal) or full URL (external · opens new tab) */
   path: string;
   /** Group label · controls section ordering in palette */
-  group: "入門" | "賽事 · 引擎" | "信任文件" | "轉換" | "工具 · 外部";
+  group: "入門" | "賽事 · 引擎" | "證據 · 自己驗" | "轉換" | "工具 · 外部";
   /** Searchable aliases · Chinese + English + abbrev */
   keywords?: string[];
   external?: boolean;
@@ -127,24 +127,33 @@ export const COMMAND_ITEMS: CommandItem[] = [
     ],
   },
 
-  // ── 信任文件(只留用戶真正會搜的兩張「證據」)──────────────
+  // ── 證據 · 自己驗 ──────────────────────────────────
+  // R248④(Tim 第 6 次「頁面太多·砍文件·像國小生會逛」· 5-agent 心理學掃描):問題不是頁多,是
+  //   discovery 表面把證據攤成「一面 5 條的文件牆」= 選擇過載(Hick / Iyengar 果醬研究)。 解 = 群名
+  //   「信任文件」(作業感)→「證據 · 自己驗」(邀請),5→3(留帳本/校準/認錯 3 張真證據 · how-we-grade
+  //   + verify 從快搜收起、關鍵字併進帳本不漏搜 · 頁面全留 · footer/內文/直打網址仍到得了)。 護城河不動。
   {
     label: "公開戰績 · 每一場對錯的帳本",
     kicker: "/track-record",
     path: "/track-record",
-    group: "信任文件",
+    group: "證據 · 自己驗",
     keywords: [
       "track", "record", "戰績", "proved", "diverged", "ledger", "準不準",
       "對了", "錯了", "命中", "中沒中", "命中率", "準度", "歷史紀錄",
       "對錯", "預測紀錄", "賭神", "報明牌", "誰才是神", "audit", "稽核",
       "方法公開", "methodology", "白皮書",
+      // R248④ · /how-we-grade + /verify 從快搜併進這張帳本(頁面不刪 · 搜這些仍落到證據)
+      "結算", "規則", "怎麼算", "贏輸", "判定", "grade", "grading", "settlement",
+      "rule", "刪不掉", "改不了", "back-date", "賽果", "官方", "公平", "怎麼判贏",
+      "verify", "查驗", "驗證", "貼碼", "永久碼", "code", "怎麼驗", "查他",
+      "查這個人", "認證", "憑證", "credential", "徽章",
     ],
   },
   {
     label: "引擎校準 · 說七成、實際中幾成",
     kicker: "/calibration",
     path: "/calibration",
-    group: "信任文件",
+    group: "證據 · 自己驗",
     // R239 · /calibration/test(免登入「換你當引擎」鉤子)併進關鍵字 —— 搜「練習/測自己」
     // 仍落這頁,那頁頂端就有大顆「玩一次校準練習」鈕(+ 首頁也連)· 不需在快搜各佔一條。
     keywords: [
@@ -156,33 +165,12 @@ export const COMMAND_ITEMS: CommandItem[] = [
     label: "我們搞砸過的事 · 公開認錯、不刪",
     kicker: "/corrections",
     path: "/corrections",
-    group: "信任文件",
+    group: "證據 · 自己驗",
     keywords: [
       "corrections", "mistakes", "搞砸", "認錯", "錯誤", "犯錯", "修正", "糾錯",
       "我們的錯", "改過", "誠實", "honest", "我們搞砸過的事",
     ],
   },
-  {
-    label: "我們怎麼算贏輸 · 一場都刪不掉",
-    kicker: "/how-we-grade",
-    path: "/how-we-grade",
-    group: "信任文件",
-    keywords: [
-      "結算", "規則", "怎麼算", "贏輸", "判定", "grade", "grading", "settlement",
-      "rule", "刪不掉", "改不了", "back-date", "賽果", "官方", "公平", "怎麼判贏",
-    ],
-  },
-  {
-    label: "查驗一份戰績 · 貼碼看 live 含輸帳本",
-    kicker: "/verify",
-    path: "/verify",
-    group: "信任文件",
-    keywords: [
-      "verify", "查驗", "驗證", "查證", "貼碼", "永久碼", "code", "真的嗎",
-      "怎麼驗", "查他", "查這個人", "認證", "憑證", "credential", "查戰績", "徽章",
-    ],
-  },
-
   // ── 轉換 ───────────────────────────────────────────
   {
     label: "會員制 · OPEN / BLACK / GOLD",
@@ -218,7 +206,7 @@ export const COMMAND_ITEMS: CommandItem[] = [
 export const COMMAND_GROUP_ORDER = [
   "入門",
   "賽事 · 引擎",
-  "信任文件",
+  "證據 · 自己驗",
   "轉換",
   "工具 · 外部",
 ] as const;
