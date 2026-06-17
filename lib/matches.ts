@@ -89,6 +89,64 @@ function mergePitcherStats(p: PitcherStats): PitcherStats {
 }
 
 const rawMatches: Match[] = [
+  // ── 2026-06-17 · 一軍 ingest(週三)· Tim 截圖 cpbl.com.tw 賽程 + 先發投手成績表 ──
+  //   投手值由官網累計成績表(IP/K/BB/HR)換算 · 標 estimate(自 Tim 截圖手抄 · 未走自動 leaderboard)·
+  //   winRate 手 curate(ERA+控球+主場+隊伍 W-L · 接近五五波就誠實低 conviction)· 天氣不建模(/audit S02)。
+  //   🔴 誠實邊界:① 6/15-6/16 賽前漏 curate(帳本到 6/14)→ 已比完的場「不 back-date」(只收今天、開賽前
+  //     鎖得了的場)· 6/16 中信1-6台鋼 / 樂天vs統一延賽 因當時沒鎖線、不補進帳本(不捏造賽前預測)。
+  //   ② 同日 #168 富邦 vs 味全 @天母:Tim 只給隊伍/投手名、沒給先發投手成績表 → 不憑空捏造投手數據
+  //     污染永久帳本,暫不收;補上官網成績表即補。
+  //   #156 澄清湖 · 樂天(曾家輝 away)vs 台鋼(江承謙 home)· W-L 樂天 19-27-2(.413)/ 台鋼 28-23-1(.549)
+  //     = 6/11 延賽(cpbl-260611-03)的擇期重賽 · 但先發換人(原 魔爾曼/艾速特 → 今 曾家輝/江承謙)→ 不沿用
+  //     原鎖線(台鋼60/樂天40 那條是艾速特王牌的盤),按新對戰重鎖。 台鋼主場 + 戰績較佳。 先發:台鋼江承謙
+  //     2026 ERA 1.74 漂亮,但 K9 僅 3.3 / WHIP 1.18(三振極少、被上壘不低)= ERA 明顯優於內容、有回歸風險;
+  //     樂天曾家輝 2026 ERA 3.05 但 K9 7.2 / WHIP 1.04(內容優於 ERA)→ 回歸調整後兩位先發其實相近 ·
+  //     江承謙的 ERA 光環被三振太少抵掉。 先發互抵 → 剩主場 + 戰績:台鋼 .549 主場略蓋 → 台鋼 57 / 樂天 43 ·
+  //     conf 52(偏台鋼但不裝把握:艾速特換成江承謙 + 江承謙回歸風險 → 比原 60/40 收斂)。
+  {
+    id: "cpbl-260617-01",
+    league: "CPBL",
+    date: "2026 · 06 · 17  ·  星期三",
+    startTime: "18:35",
+    venue: "澄清湖棒球場",
+    home: {
+      name: "台鋼雄鷹",
+      en: "HAWKS",
+      pitcher: {
+        name: "江承謙",
+        era: "1.74", // estimate · 2026 官網累計成績表(Tim 截圖手抄)· 46.2 IP(8 先發)· ERA 漂亮但 K 太少有回歸風險
+        k9: "3.3", // estimate · 17 K / 46.2 IP × 9 · 三振極少(靠防守/弱接觸/運氣壓 ERA)
+        whip: "1.18", // estimate · 官網每局被上壘率 1.178(40 H + 15 BB / 46.2 IP)
+        bb9: "2.9", // estimate · 15 BB / 46.2 IP × 9
+        hr9: "0.19", // estimate · 1 HR / 46.2 IP × 9 · 極少被轟
+      },
+      recent: ["W", "W", "L", "W", "L"], // placeholder · 台鋼 28-23-1(.549)
+      winRate: 57,
+    },
+    away: {
+      name: "樂天桃猿",
+      en: "MONKEYS",
+      pitcher: {
+        name: "曾家輝",
+        era: "3.05", // estimate · 2026 官網累計成績表(Tim 截圖手抄)· 41.1 IP(8 先發)
+        k9: "7.2", // estimate · 33 K / 41.1 IP × 9
+        whip: "1.04", // estimate · 官網每局被上壘率 1.040(34 H + 9 BB / 41.1 IP)· 控球穩、內容優於 ERA
+        bb9: "2.0", // estimate · 9 BB / 41.1 IP × 9
+        hr9: "0.44", // estimate · 2 HR / 41.1 IP × 9
+      },
+      recent: ["L", "W", "L", "L", "W"], // placeholder · 樂天 19-27-2(.413)
+      winRate: 43,
+    },
+    topScores: [
+      // 江承謙三振少(contact)+ 曾家輝 ~3 ERA → 中低分;台鋼主場+戰績較佳 lean(格式 home : away = 台鋼 : 樂天)
+      { score: "3 : 2", probability: 9.0 },
+      { score: "2 : 1", probability: 8.5 },
+      { score: "4 : 3", probability: 8.0 },
+      { score: "3 : 1", probability: 7.5 },
+      { score: "4 : 2", probability: 7.0 },
+    ],
+    aiConfidence: 52,
+  },
   // ── 2026-06-14 · 一軍 ingest(週日)· Tim 截圖 cpbl.com.tw 賽程 + 先發投手成績表 ──
   //   投手值由官網累計成績表(IP/K/BB/HR)換算 · 標 real · winRate 手 curate(ERA+控球+主場+隊伍 W-L ·
   //   接近五五波就誠實低 conviction · 不裝把握)· 天氣不建模(/audit S02 · 6/14 降雨 80% 但不進模型)。
