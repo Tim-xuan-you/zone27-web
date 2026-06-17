@@ -147,6 +147,56 @@ const rawMatches: Match[] = [
     ],
     aiConfidence: 52,
   },
+  //   #168 天母 · 富邦(阿部雄大 away)vs 味全(梅賽鎁 home)· W-L 富邦 27-22-0(.551)/ 味全 33-18-0(.647 最強)
+  //     味全全聯盟最強 + 主場 + 梅賽鎁 2026 ERA 1.63(60.2 IP · 但 K9 僅 5.6 / WHIP 1.09 / BAA .241 =
+  //     ERA 略優於內容、有回歸風險,控球好 BB9 1.6)。 富邦客場 .551 中段,但先發阿部雄大內容驚人:ERA 3.07
+  //     看似普,WHIP 0.82 / BAA .152 / K9 7.4 全壓制級(29.1 IP 小樣本 · 2 轟拉高 ERA、底子其實比 ERA 好
+  //     很多)→ 客隊先發內容甚至略蓋主隊先發,抵掉一部分味全的隊強+主場。 三優扣阿部壓制 → 味全 56 /
+  //     富邦 44 · conf 52(偏味全但不裝神準:阿部雄大底子壓制 + 小樣本變異 → 比 #163 對統一的 58 再收斂)。
+  {
+    id: "cpbl-260617-02",
+    league: "CPBL",
+    date: "2026 · 06 · 17  ·  星期三",
+    startTime: "18:35",
+    venue: "天母棒球場",
+    home: {
+      name: "味全龍",
+      en: "DRAGONS",
+      pitcher: {
+        name: "梅賽鎁",
+        era: "1.63", // estimate · 2026 官網累計成績表(Tim 截圖手抄)· 60.2 IP(10 先發)· ERA 略優於內容
+        k9: "5.6", // estimate · 38 K / 60.2 IP × 9 · 三振中庸
+        whip: "1.09", // estimate · 官網每局被上壘率 1.087(55 H + 11 BB / 60.2 IP)
+        bb9: "1.6", // estimate · 11 BB / 60.2 IP × 9 · 控球好
+        hr9: "0.30", // estimate · 2 HR / 60.2 IP × 9
+      },
+      recent: ["W", "W", "L", "W", "W"], // placeholder · 味全 33-18-0(.647 全聯盟最強)
+      winRate: 56,
+    },
+    away: {
+      name: "富邦悍將",
+      en: "GUARDIANS",
+      pitcher: {
+        name: "阿部雄大",
+        era: "3.07", // estimate · 2026 官網累計成績表(Tim 截圖手抄)· 29.1 IP(5 先發 · 小樣本)· 底子優於 ERA
+        k9: "7.4", // estimate · 24 K / 29.1 IP × 9 · 會吊人
+        whip: "0.82", // estimate · 官網每局被上壘率 0.818(15 H + 9 BB / 29.1 IP)· 壓制級
+        bb9: "2.8", // estimate · 9 BB / 29.1 IP × 9
+        hr9: "0.61", // estimate · 2 HR / 29.1 IP × 9 · 2 轟拉高 ERA
+      },
+      recent: ["W", "L", "W", "L", "W"], // placeholder · 富邦 27-22-0(.551)
+      winRate: 44,
+    },
+    topScores: [
+      // 兩位好內容先發(梅賽鎁 1.63 / 阿部底子壓制)→ 低分;味全最強+主場 lean、阿部壓制抵一部分(格式 home : away = 味全 : 富邦)
+      { score: "2 : 1", probability: 9.0 },
+      { score: "3 : 2", probability: 8.5 },
+      { score: "3 : 1", probability: 8.0 },
+      { score: "2 : 0", probability: 7.5 },
+      { score: "4 : 2", probability: 7.0 },
+    ],
+    aiConfidence: 52,
+  },
   // ── 2026-06-14 · 一軍 ingest(週日)· Tim 截圖 cpbl.com.tw 賽程 + 先發投手成績表 ──
   //   投手值由官網累計成績表(IP/K/BB/HR)換算 · 標 real · winRate 手 curate(ERA+控球+主場+隊伍 W-L ·
   //   接近五五波就誠實低 conviction · 不裝把握)· 天氣不建模(/audit S02 · 6/14 降雨 80% 但不進模型)。
