@@ -104,6 +104,16 @@ const FEATURES: Feature[] = [
     },
   },
   {
+    label: "會員房間 · 自己人的客廳",
+    detail: "/member/lounge · 只有付費會員進得去的留言牆 · 聊球不押注 · 身分非功能",
+    unlock: {
+      anonymous: "locked",
+      free: "locked",
+      "black-card": "unlocked",
+      founders27: "unlocked",
+    },
+  },
+  {
     label: "年度 access · 續訂價永遠鎖定(不自動續扣)",
     detail: "GOLD NT$ 2,700/年 手動續訂 · 月卡 / 季票永遠不會自動綁您",
     unlock: {
@@ -463,7 +473,7 @@ export default function TierFeatureMatrix() {
           <strong className="text-bone">為什麼 0 風險</strong>:
           改 preview 不會動到任何真實權限 —— 付費買的是身分不是功能,
           所以根本沒有「paid functionality」可以靠 spoof 解鎖。 真實的付費身分
-          (支持者金環 · Tim 本人親手回信 · 創作者較低抽成)由後端驗證 · 前端改不了 ·
+          (支持者金環 · 會員房間 · Tim 本人親手回信)由後端驗證 · 前端改不了 ·
           手動轉帳、沒有自動續扣(per /integrity rule #13)。
         </p>
         <p className="text-mute text-[12px] leading-relaxed">

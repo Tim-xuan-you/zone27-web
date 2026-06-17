@@ -39,13 +39,13 @@ const TIERS: { value: string; label: string; body: string; price: string }[] = [
   {
     value: "black-card",
     label: "BLACK",
-    body: "每 31 天手動轉帳 · 創作者抽傭 10% · 金環身分標記 · 不自動續扣",
+    body: "每 31 天手動轉帳 · 金色支持環 + 會員房間 · 你付的是身分不是功能 · 不自動續扣",
     price: "NT$ 500/31 天",
   },
   {
     value: "founders27",
     label: "GOLD",
-    body: "年度會員 · 創作者抽傭 5%(業界最低)· 金環身分標記 · Tim 本人 1-3 工作天親手回信 · 不自動續扣",
+    body: "年度會員 · 金環 + 會員房間 + Tim 本人 1-3 工作天親手回信 + 實體店招待 · 不自動續扣",
     price: "NT$ 2,700/年",
   },
 ];
