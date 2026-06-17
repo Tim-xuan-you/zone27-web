@@ -70,14 +70,25 @@ export default function MembershipPage() {
         </div>
 
         {/* 你會變成什麼(felt stack · 不是清單是「得到的身分」)── */}
-        <p className="text-mute text-sm sm:text-base leading-relaxed mb-3 max-w-md">
+        <p className="text-mute text-sm sm:text-base leading-relaxed mb-10 max-w-md">
           付費換到的:一圈大家看得見的<span className="text-gold">金環</span>、
           一間只有自己人進得去的<span className="text-gold">房間</span>、
           一個<span className="text-gold">記得你名字</span>的創辦人。
         </p>
-        <p className="text-mute/80 text-sm leading-relaxed mb-12 max-w-md">
-          引擎、押注、戰績、校準 —— 一個功能都不收你錢,永遠。 你付的不是門票,是歸屬。
-        </p>
+
+        {/* 會員信條(R248② · Tim「Defector go · 像蘋果一樣獨樹一格」)= 把「別人不敢學的不」鑄成招牌一句 ·
+            Think Different / Defector「owned by no one」式 · 放在價格卡前當情緒峰值(先給靈魂,再給入口)。
+            🔴 每行都是已成立的真話、0 新承諾:準是賺的(57% 天花板)· 不抽你下注 · 名次 earned(天梯)·
+            引擎免費(client-side)。 這就是對手結構上抄不走的那條線 —— 抄了他賣牌的生意就死了。 */}
+        <blockquote className="my-12 border-l-2 border-gold/50 pl-6 py-1">
+          <p className="text-bone text-lg sm:text-xl font-light leading-loose tracking-tight">
+            錢買不到準 —— <span className="text-mute">準是賺來的</span>。<br />
+            錢讓<span className="text-gold">誠實</span>活下去。<br />
+            名次靠賺,不靠買。<br />
+            你付的不是門票 —— 是替所有人<span className="text-gold">把這台引擎留著免費</span>。<br />
+            其餘全部免費,永遠。
+          </p>
+        </blockquote>
 
         {/* 兩張卡(價 + 真 perk)── */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
