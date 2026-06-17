@@ -4,6 +4,7 @@ import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import RelatedReading from "@/components/RelatedReading";
 import CopyLinkButton from "@/components/CopyLinkButton";
+import PatronAsk from "@/components/PatronAsk";
 import {
   matches,
   getFinalizedMatches,
@@ -319,6 +320,12 @@ export default function TrackRecordPage() {
         {/* ── 分析師看法 · 人類賽道(R239)· 引擎是招牌 · 這條是旁邊的人(3 位平權分析師 ·
             引擎沒覆蓋的球由人賽前鎖定)· 同一套誠實規則 · graceful(沒鎖手 → 只介紹不掛空盒)。 */}
         <AnalystPanel />
+
+        {/* 贊助之請(R248③ · 研究 5 路一致最高槓桿)· 在峰值價值當下(這份含輸帳本本身)誠實請人撐著它 ·
+            非 FOMO · 對所有人顯示(會員=驕傲 · 非會員=邀請)· 賣「讓它一直免費」非 access。 */}
+        <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-16">
+          <PatronAsk />
+        </section>
 
         <RelatedReading currentPath="/track-record" />
 
