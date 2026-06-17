@@ -174,13 +174,7 @@ export default function FoundersApplyPage() {
               </span>
               <span className="block text-mute text-sm sm:text-base leading-relaxed">
                 <strong className="text-bone">您接受 1-3 天 Tim 親手 review</strong>{" "}
-                + 可能 reject + NT$ 2,700 銀行轉帳 24h window ·{" "}
-                <Link
-                  href="/founders/ledger"
-                  className="text-gold underline-offset-4 hover:underline"
-                >
-                  /founders/ledger
-                </Link>
+                + 可能 reject + NT$ 2,700 銀行轉帳 24h window
               </span>
             </li>
           </ol>
@@ -244,14 +238,7 @@ export default function FoundersApplyPage() {
               <li>
                 <span className="font-mono text-bone tabular mr-2">02</span>
                 <strong className="text-bone">1-3 business days</strong> ·
-                Tim 親手 review · 根據{" "}
-                <Link
-                  href="/founders/ledger"
-                  className="text-gold underline-offset-4 hover:underline"
-                >
-                  5-step rules
-                </Link>{" "}
-                通過 / 不通過 / clarifying question
+                Tim 親手 review · 通過 / 不通過 / 或回你一個 clarifying question
               </li>
               <li>
                 <span className="font-mono text-bone tabular mr-2">03A</span>
@@ -272,14 +259,7 @@ export default function FoundersApplyPage() {
               </li>
               <li>
                 <span className="font-mono text-bone tabular mr-2">05</span>
-                <strong className="text-bone">永久</strong> · 您 ID 列入{" "}
-                <Link
-                  href="/founders/ledger"
-                  className="text-gold underline-offset-4 hover:underline"
-                >
-                  /founders/ledger
-                </Link>{" "}
-                公開帳本 · 365 天訂閱 · NT$ 2,700 永不調漲 · 會員不限量
+                <strong className="text-bone">永久</strong> · 365 天訂閱 · NT$ 2,700 永不調漲 · 會員不限量 · 不自動扣款
               </li>
             </ol>
           </div>

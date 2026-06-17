@@ -125,7 +125,7 @@ const CATEGORIES: Category[] = [
             「NT$ 2,700/365 天 年度會員」。
             <strong className="text-bone">BLACK</strong> 是 31-day pass NT$ 500/31 天
             (3 月–11 月 · 240 場 + 季後賽 · ≈ NT$ 6/場 · 手動銀行轉帳 ·
-            不自動續扣 · per /integrity rule #13)。GOLD 是最深一層的支持者:引擎新版搶先試 + 投票權、Tim 親手 onboard、實體招待。 BLACK 是入門支持者(月度)。完整對照請見{" "}
+            不自動續扣 · per /integrity rule #13)。GOLD 是最深一層的支持者:多戴一圈支持者金環、寫信給 Tim 本人親手回、實體店招待。 BLACK 是入門支持者(月度)。完整對照請見{" "}
             <Link href="/founders" className="text-gold underline-offset-4 hover:underline">
               /founders
             </Link>

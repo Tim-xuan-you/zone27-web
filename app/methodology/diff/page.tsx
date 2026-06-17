@@ -462,7 +462,7 @@ export default function MethodologyDiffPage() {
               </li>
               <li className="flex gap-3 items-baseline">
                 <span className="font-mono text-gold/70 text-[10px] tracking-[0.25em]">▸</span>
-                <span>BLACK tier unlock(per Section 04 ENGINE LINEUP TIER column)</span>
+                <span>v0.4 上線時對所有人免費開放(同 v0.2 / v0.3 一樣公開)</span>
               </li>
               <li className="flex gap-3 items-baseline">
                 <span className="font-mono text-gold/70 text-[10px] tracking-[0.25em]">▸</span>
@@ -478,9 +478,9 @@ export default function MethodologyDiffPage() {
           <p className="mt-6 text-mute/85 leading-relaxed">
             <strong className="text-bone">v0.4 ship 前 30 天提前公告 ·
             modifications via 同 /audit S05 PRE-COMMIT pattern。</strong>{" "}
-            訂閱 BLACK 不是「等 model 神奇升級」 · 是 see-through 看
-            entire process · v0.4 ship 那天 整個 Bayesian weight derivation
-            會跟此頁一樣逐行攤開 · 不需相信 marketing。
+            你不用「等 model 神奇升級」 · 整個過程都看得見 · v0.4 上線那天 ·
+            整個 Bayesian 權重推導會跟此頁一樣逐行攤開給所有人 ·
+            不需相信 marketing。
           </p>
         </Section>
 

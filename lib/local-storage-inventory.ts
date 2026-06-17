@@ -80,12 +80,6 @@ export const LOCAL_STORAGE_INVENTORY: ReadonlyArray<LocalStorageKeyEntry> = [
     shippedIn: "R29",
   },
   {
-    key: "zone27_engine_voting_v1",
-    value: "您 BLACK voting 排序",
-    note: "RoadmapVotingPanel 寫入 · drag-rank schema-versioned · /member Section 03 IKEA Effect(per MemberDashboardPreview.tsx)",
-    shippedIn: "R29",
-  },
-  {
     key: "zone27_preview_tier",
     value: "Tim designer dev tool · 預覽 active tier",
     note: "PreviewModeBanner 寫入 · Tim 開發用 · 訪客不會 trigger · 0 PII",
@@ -102,12 +96,6 @@ export const LOCAL_STORAGE_INVENTORY: ReadonlyArray<LocalStorageKeyEntry> = [
     value: "您上次看 /track-record 時的 N · 用於 delta chip 顯示",
     note: "LedgerDeltaChip 寫入 + 讀取 · 每次訪 /track-record 看到「+X since YYYY-MM-DD」 · 純 Endowment effect 心理 hook · 0 server · 0 PII",
     shippedIn: "R49 W-A",
-  },
-  {
-    key: "zone27_lens_focus_votes_v1",
-    value: "您 pre-canvas 1-tap lens vote · per-match commitment artifact",
-    note: "LensFocusVote 寫入 · /matches/[gameId] pre /02 LENS CANVAS hub · 6 lens 選 1 個您認為最 matter · 一旦選定就維持一致 · 0 server · 0 PII · 0 leaderboard · 純您裝置",
-    shippedIn: "R67 W-A",
   },
   {
     key: "zone27_shortcut_hint_seen_v1",

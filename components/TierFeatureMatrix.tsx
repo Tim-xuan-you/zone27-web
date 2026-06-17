@@ -84,51 +84,11 @@ const FEATURES: Feature[] = [
     },
   },
   {
-    label: "模型重大迭代通知",
-    detail: "Email · 不寄行銷信 · 隨時 reply UNSUBSCRIBE",
-    unlock: {
-      anonymous: "locked",
-      free: "unlocked",
-      "black-card": "unlocked",
-      founders27: "unlocked",
-    },
-  },
-  {
-    label: "GOLD 預售優先通知",
-    detail: "付款通道開放時 · OPEN 先收到",
-    unlock: {
-      anonymous: "locked",
-      free: "unlocked",
-      "black-card": "unlocked",
-      founders27: "na",
-    },
-  },
-  {
     label: "賽事頁討論室發言 / 分享預測",
-    detail: "/matches/[gameId] · 球迷 grammar 「明牌」 不導向莊家",
+    detail: "/matches/[gameId] · 登入(免費)就能發表分析、留言、分享預測",
     unlock: {
       anonymous: "locked",
-      free: "locked",
-      "black-card": "unlocked",
-      founders27: "unlocked",
-    },
-  },
-  {
-    label: "每月 voting 影響引擎迭代方向",
-    detail: "v0.4 + 未來 lens 優先級 · BLACK + GOLD vote",
-    unlock: {
-      anonymous: "locked",
-      free: "locked",
-      "black-card": "unlocked",
-      founders27: "unlocked",
-    },
-  },
-  {
-    label: "每週 Tim 工程筆記 full 版",
-    detail: "閃光剪輯 · 失敗實驗 · 不公開部分 · 從 craft journal /now 抽出",
-    unlock: {
-      anonymous: "locked",
-      free: "locked",
+      free: "unlocked",
       "black-card": "unlocked",
       founders27: "unlocked",
     },
@@ -501,12 +461,10 @@ export default function TierFeatureMatrix() {
         </p>
         <p className="text-mute text-[12px] leading-relaxed mb-3">
           <strong className="text-bone">為什麼 0 風險</strong>:
-          ZONE 27 目前 0 paid features have been built · 「BLACK 月 voting」 ·
-          「Tim 工程筆記 full」 全沒 ship · spoof preview 後
-          看到的只是 visual UI mockup · 沒實際 paid functionality 可以「unlock」 ·
-          per `/integrity` rule #13 + `[[zone27-payment-architecture]]` manual
-          ECPay flow · 沒 paid auth gate by design。 連 GOLD 編號 #001-#270
-          都是 Tim 親手 add ledger · spoof preview 不會 add 您名字到 ledger。
+          改 preview 不會動到任何真實權限 —— 付費買的是身分不是功能,
+          所以根本沒有「paid functionality」可以靠 spoof 解鎖。 真實的付費身分
+          (支持者金環 · Tim 本人親手回信 · 創作者較低抽成)由後端驗證 · 前端改不了 ·
+          手動轉帳、沒有自動續扣(per /integrity rule #13)。
         </p>
         <p className="text-mute text-[12px] leading-relaxed">
           <strong className="text-bone">未來 real defense</strong>:

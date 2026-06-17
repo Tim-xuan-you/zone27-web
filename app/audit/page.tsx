@@ -275,7 +275,7 @@ export default function AuditPage() {
             <P className="text-mute/70">
               本報告涵蓋 v0.2 base engine。 v0.3(+ Park Factor HR rate)已
               LIVE DEV PREVIEW · v0.4(Bayesian Model Averaging)Q4 2026 PLANNED。
-              完整 3-engine progression + per-engine tier unlock 見{" "}
+              完整 3 個引擎版本(v0.2 → v0.3 → v0.4)的進程 · 每版改了什麼 · 見{" "}
               <Link
                 href="/methodology"
                 className="text-gold underline-offset-4 hover:underline"

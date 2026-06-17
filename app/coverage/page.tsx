@@ -12,7 +12,7 @@ import ReadingProgress from "@/components/ReadingProgress";
 export const metadata: Metadata = {
   title: "Coverage — 我們覆蓋哪些賽事 · 為什麼不覆蓋全部",
   description:
-    "ZONE 27 不覆蓋每一場可下注的比賽,只覆蓋引擎可以誠實計算的比賽。完整公開:作用中的聯盟、追蹤但未啟用的賽事、GOLD 會員可投票請求的賽事、我們永遠不會覆蓋的(博彩平台清單)。",
+    "ZONE 27 不覆蓋每一場可下注的比賽,只覆蓋引擎可以誠實計算的比賽。完整公開:作用中的聯盟、追蹤但未啟用的賽事、你建議想看 Tim 親手讀的賽事、我們永遠不會覆蓋的(博彩平台清單)。",
 };
 
 // /coverage — Coverage Manifesto · 4th trust-artifact joining /audit + /methodology + /privacy。
@@ -90,7 +90,7 @@ const REQUESTED_QUEUE: LeagueRow[] = [
     code: "NPB",
     zh: "日本職棒",
     source: "npb.jp · Yahoo Japan Sports · TBD pipeline",
-    sampleNote: "GOLD 會員可投票優先順序",
+    sampleNote: "排隊研發中 · 想看就填表單告訴 Tim",
     status: "PENDING",
     statusLabel: "NOT YET · ON QUEUE",
   },
@@ -98,7 +98,7 @@ const REQUESTED_QUEUE: LeagueRow[] = [
     code: "KBO",
     zh: "韓國職棒",
     source: "koreabaseball.com · mykbo.net (community) · TBD pipeline",
-    sampleNote: "GOLD 會員可投票優先順序",
+    sampleNote: "排隊研發中 · 想看就填表單告訴 Tim",
     status: "PENDING",
     statusLabel: "NOT YET · ON QUEUE",
   },
@@ -425,9 +425,9 @@ export default function CoveragePage() {
               引擎可取,但我們選擇先不開
             </h2>
             <p className="text-mute leading-relaxed mb-6">
-              這些聯盟我們**取得到資料**,但**選擇不啟用** —
+              這些聯盟我們<strong className="text-bone">取得到資料</strong>,但<strong className="text-bone">選擇不啟用</strong> —
               因為樣本變異大、誤差會放大,違反「不靠直覺,只看演算法」的承諾。
-              當資料品質改善或 GOLD 會員強烈要求時,我們會評估啟用。
+              當資料品質改善 · 或有人填表單強烈要求時,我們會評估啟用。
             </p>
             <LeagueTable rows={TRACKED_NOT_ACTIVE} />
           </section>
@@ -438,17 +438,17 @@ export default function CoveragePage() {
               04 REQUESTED · ON QUEUE
             </p>
             <h2 className="text-2xl sm:text-3xl text-bone font-light tracking-tight mb-6">
-              GOLD 會員投票決定下一個 league
+              在我們雷達上的下一批聯盟
             </h2>
             <p className="text-mute leading-relaxed mb-6">
-              這些聯盟在我們的雷達上,但資料管道還沒建。
+              這些聯盟在我們的雷達上,但資料管道還沒建。 想看哪個聯盟,登入後
               <Link
-                href="/founders"
+                href="/member/submit"
                 className="text-gold hover:text-gold-soft transition-colors"
               >
-                GOLD 會員
+                填表單告訴 Tim
               </Link>
-              可在每月會議投票決定下個啟用順序。一般會員可以申請,但優先順序由 GOLD 會員決定。
+              —— 他親手讀、親手定上線順序。 不分等級,任何會員都能提。
             </p>
             <LeagueTable rows={REQUESTED_QUEUE} />
           </section>

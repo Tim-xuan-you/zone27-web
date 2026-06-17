@@ -27,25 +27,25 @@ const TIERS: { value: string; label: string; body: string; price: string }[] = [
   {
     value: "anonymous",
     label: "匿名訪客",
-    body: "未登入 · 全引擎可跑 · 5 unlocks 隱藏",
+    body: "未登入 · 看賽事 / 開盤線 / 群眾線 / 公開戰績免費 · 跑引擎與押注要免費登入",
     price: "NT$ 0",
   },
   {
     value: "free",
     label: "OPEN",
-    body: "已登入 · 5 unlocks 解鎖 · 終身免費",
+    body: "已登入 · 跑引擎、押注、發表分析、上海選天梯 —— 全免費 · 終身",
     price: "NT$ 0",
   },
   {
     value: "black-card",
     label: "BLACK",
-    body: "每 31 天手動 ECPay · 6 unlocks(Engine + Lens + 討論 + 金環 + voting + 筆記)· 不自動續扣",
+    body: "每 31 天手動轉帳 · 創作者抽傭 10% · 金環身分標記 · 不自動續扣",
     price: "NT$ 500/31 天",
   },
   {
     value: "founders27",
     label: "GOLD",
-    body: "年度 · 全 unlocks + 搶先試 + 投票權 + 未來所有 lenses/engines 解鎖",
+    body: "年度會員 · 創作者抽傭 5%(業界最低)· 金環身分標記 · Tim 本人 1-3 工作天親手回信 · 不自動續扣",
     price: "NT$ 2,700/年",
   },
 ];

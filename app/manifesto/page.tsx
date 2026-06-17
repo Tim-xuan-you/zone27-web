@@ -496,16 +496,10 @@ export default function ManifestoPage() {
                     GOLD 身分(訪客買不到的)
                   </SynthItem>
                   <SynthItem gold>
-                    Founders LINE 群對話(關門的)
+                    Tim 本人親手回你的信(1-3 個工作天 · 不外包)
                   </SynthItem>
                   <SynthItem gold>
-                    Tim 每日策展焦點(人工 · BLACK 訂閱限定)
-                  </SynthItem>
-                  <SynthItem gold>
-                    每週工程筆記(BLACK 訂閱限定)
-                  </SynthItem>
-                  <SynthItem gold>
-                    線上工作坊 + 模型 voting / preview(訂閱限定)
+                    養著免費引擎的那一群 · 出錢的人才有的歸屬
                   </SynthItem>
                 </ul>
                 <p className="mt-6 pt-4 border-t border-gold/30 font-mono text-gold text-[10px] tracking-[0.25em] leading-relaxed">

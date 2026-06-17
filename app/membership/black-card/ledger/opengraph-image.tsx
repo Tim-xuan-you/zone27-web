@@ -93,7 +93,7 @@ export default async function BlackCardLedgerOgImage() {
               display: "flex",
             }}
           >
-            EMPTY LEDGER · BY DESIGN
+空名冊 · 故意留著
           </span>
           <span
             style={{
@@ -106,7 +106,7 @@ export default async function BlackCardLedgerOgImage() {
               display: "flex",
             }}
           >
-            0 / 270
+0
           </span>
           <span
             style={{

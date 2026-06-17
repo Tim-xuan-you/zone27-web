@@ -20,7 +20,7 @@ import { createPageMetadata } from "@/lib/page-og";
 export const metadata: Metadata = createPageMetadata({
   title: "GOLD · 最高階年度會員 · NT$ 2,700 / 365 天",
   description:
-    "ZONE 27 最高階年度會員 · NT$ 2,700/365 天 · 引擎永遠免費 —— GOLD 賣的不是工具,是養著它、戴上最高階身分。 引擎新版搶先試 + 投票權 · 每年 1/1 加入 / 續訂 · Tim 親手 onboard。",
+    "ZONE 27 最高階年度會員 · NT$ 2,700/365 天 · 引擎永遠免費 —— GOLD 賣的不是工具,是養著它、戴上最高階身分。 你的建議 Tim 親手讀 · 每年 1/1 加入 / 續訂 · 親手 onboard。",
   path: "/founders",
 });
 
@@ -34,7 +34,7 @@ export const revalidate = 3600;
 const UNLOCKS = [
   "365 天會員資格 · BLACK 全部功能都包含",
   "最高階支持者金環 · 養活開放引擎最深的一群",
-  "引擎每次改版 · 提前 7 天搶先試 + 投票權",
+  "你的建議 Tim 親手讀 —— 覆蓋哪些聯賽、引擎怎麼改,聽得到你的聲音",
   "BOTTOM 27 棒球手遊上線 · GOLD 限定球員卡空投",
   "恆美攝影 × 伶 Kopi 旗艦店 · 一品紅茶招待",
 ];
@@ -96,7 +96,7 @@ export default async function FoundersPage({
             <p className="text-bone text-[14px] sm:text-[15px] leading-relaxed">
               我寫這個引擎,是因為台灣硬核棒球迷沒有自己的 Bloomberg。引擎永遠免費 ——
               GOLD 賣的不是工具,是一個不靠明牌、不抽下注活下去的品牌的
-              <strong className="text-bone">最高階席位</strong>:新版搶先試 + 投票權、Tim 親手 onboard、養活這個免費引擎最深的那一群。
+              <strong className="text-bone">最高階席位</strong>:Tim 親手 onboard、你的建議他親手讀、養活這個免費引擎最深的那一群。
             </p>
             <p className="font-mono text-mute/70 text-[10px] tracking-[0.3em] mt-3 pt-3 border-t border-line/40">
               — TIM · SOLO FOUNDER · ZONE 27

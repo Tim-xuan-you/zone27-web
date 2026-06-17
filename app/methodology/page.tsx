@@ -280,8 +280,8 @@ repeat 10,000 times → aggregate
         </p>
       </Section>
 
-      {/* ── 04 ENGINE LINEUP · 3 變體 · tier unlock progression ── */}
-      <Section no="04" label="ENGINE LINEUP" zh="3 變體 · tier unlock">
+      {/* ── 04 ENGINE LINEUP · 3 變體 · 版本進程(全免費) ── */}
+      <Section no="04" label="ENGINE LINEUP" zh="3 個版本 · 全免費">
         <p>
           引擎不是 1 個 black box · 是 <strong className="text-bone">3 個可審
           model variant</strong> · 每個 publish 完整 methodology + publish
@@ -342,7 +342,7 @@ repeat 10,000 times → aggregate
                 statusLabel="EXPANSION 1 · ✓ LIVE · DEV PREVIEW"
                 statusTone="gold"
                 method="+ Park Factor HR rate adjustment(v0.3.0)· wOBA 留 v0.3.1"
-                tier="FREE 預覽 · 將來 BLACK"
+                tier="FREE"
                 tierTone="bone"
                 record="每個引擎 N=0 · v0.2 vs v0.3 準度差距等 30 場後才比"
               />
@@ -351,8 +351,8 @@ repeat 10,000 times → aggregate
                 statusLabel="EXPANSION 2 · PLANNED · Q4 2026"
                 statusTone="loss"
                 method="Bayesian Model Averaging across v0.2 + v0.3 votes"
-                tier="BLACK"
-                tierTone="gold"
+                tier="FREE"
+                tierTone="bone"
                 record="TBD · Q4 launch"
               />
             </tbody>
@@ -472,7 +472,7 @@ repeat 10,000 times → aggregate
                 angle="連勝 / 連敗 streak · 提醒你別被「手感正熱」的錯覺帶著走"
                 status="✓ LIVE"
                 statusTone="gold"
-                tier="FREE 預覽 · 將來 BLACK"
+                tier="FREE"
                 tierTone="bone"
               />
               <LensRow
@@ -480,7 +480,7 @@ repeat 10,000 times → aggregate
                 angle="4 場館 home advantage 比較 · 哪場有利投/打"
                 status="✓ LIVE"
                 statusTone="gold"
-                tier="FREE 預覽 · 將來 BLACK"
+                tier="FREE"
                 tierTone="bone"
               />
               <LensRow
@@ -488,7 +488,7 @@ repeat 10,000 times → aggregate
                 angle="WHIP + BB9 + K9 command stability proxy(v0.1)· v0.2 = rest_days + IP load real fatigue"
                 status="✓ LIVE · v0.1"
                 statusTone="gold"
-                tier="FREE 預覽 · 將來 BLACK"
+                tier="FREE"
                 tierTone="bone"
               />
               <LensRow
@@ -496,7 +496,7 @@ repeat 10,000 times → aggregate
                 angle="upset probability + dominance gap · 黑馬機率 lens · 0 contrarian play"
                 status="✓ LIVE"
                 statusTone="gold"
-                tier="FREE 預覽 · 將來 BLACK"
+                tier="FREE"
                 tierTone="bone"
               />
               <LensRow
@@ -504,7 +504,7 @@ repeat 10,000 times → aggregate
                 angle="team recent W-L derive late-inning resilience proxy(v0.1)· v0.2 = bullpen ERA + IP usage"
                 status="✓ LIVE · v0.1 PROXY"
                 statusTone="gold"
-                tier="FREE 預覽 · 將來 BLACK"
+                tier="FREE"
                 tierTone="bone"
               />
               <LensRow
@@ -512,7 +512,7 @@ repeat 10,000 times → aggregate
                 angle="此 matchup 過去 H2H + 趨勢 · real data · educational at N<10"
                 status="✓ LIVE"
                 statusTone="gold"
-                tier="FREE 預覽 · 將來 BLACK"
+                tier="FREE"
                 tierTone="bone"
               />
             </tbody>
@@ -533,15 +533,15 @@ repeat 10,000 times → aggregate
           </li>
           <li className="flex gap-3 items-baseline">
             <span className="font-mono text-gold/70 text-[10px] tracking-[0.25em]">▸</span>
-            <span className="flex-1">BLACK voting decide next lens · IKEA Effect · 訂閱者 voting 影響 ship 順序</span>
+            <span className="flex-1">下一個做哪個 lens · 你的建議 Tim 親手讀、親手拍板(/member/submit 直接寄到他信箱)</span>
           </li>
           <li className="flex gap-3 items-baseline">
             <span className="font-mono text-gold/70 text-[10px] tracking-[0.25em]">▸</span>
-            <span className="flex-1">每 1-2 月 ship 1 new lens · sustained BLACK value compounding · 訂閱越久 越多 lenses 可用</span>
+            <span className="flex-1">每 1-2 個月 ship 1 個新 lens · 上線就對所有人免費 · 不分免費或付費</span>
           </li>
           <li className="flex gap-3 items-baseline">
             <span className="font-mono text-gold/70 text-[10px] tracking-[0.25em]">▸</span>
-            <span className="flex-1">GOLD 解鎖未來所有 lenses · 續訂價永鎖(NT$ 2,700/年)· 真實「無限解鎖」 value</span>
+            <span className="flex-1">BLACK / GOLD 不解鎖任何 lens —— 付費是養著它們永遠對所有人免費(身分,不是功能)</span>
           </li>
         </ul>
 
@@ -553,8 +553,8 @@ repeat 10,000 times → aggregate
           <p className="mt-3 text-mute text-sm leading-relaxed">
             7 LIVE angles · Win Probability + Vibe Check + Park Factor +
             Workload Proxy + Underdog + Bullpen Depth + Matchup History ·
-            各自 publish methodology + open code。 訂閱者 voting 決定 next
-            lens · payment infra 就緒後 milestone-triggered。
+            各自公開方法。 下一個做哪個 lens · Tim 親手讀你寄來的建議、
+            親手拍板。
           </p>
         </blockquote>
       </Section>

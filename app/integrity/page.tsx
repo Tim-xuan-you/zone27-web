@@ -289,7 +289,7 @@ export default function IntegrityPage() {
               CANVAS · /audit S02 全部 estimation disclosure)對<strong className="text-bone">
               FREE tier 訪客 = BLACK 訂閱者 = GOLD 永久會員</strong>
               · 物理上同一份 lib/simulator.ts 跑出來。 paid tier 買的是 IDENTITY
-              (出錢養著免費引擎 + 支持者金環 + GOLD LINE 群)· 不買 engine accuracy
+              (出錢養著免費引擎 + 支持者金環 + 寫信給 Tim 本人親手回)· 不買 engine accuracy
               升級 · 不買 secret edge · 不買 paywall predictions · 連驗證準度標章都免費(靠戰績賺,不靠付費)。
             </p>
 
@@ -363,9 +363,9 @@ export default function IntegrityPage() {
                   </p>
                 </div>
                 <p className="text-mute text-[12px] sm:text-sm leading-relaxed">
-                  BLACK 解鎖的(見 /membership/black-card)全是身分層的東西
-                  (LINE 群 + Tim 工程筆記完整版 + 引擎新版搶先試 + voting + 支持者金環)·
-                  沒有任何一項是「讓引擎變更準」· 違反 = 品牌鐵律直接崩。
+                  BLACK 不解鎖任何功能(功能全免費 · 見 /membership/black-card)·
+                  它給的只有一圈所有人看得見的支持者金環 —— 身分,不是讓引擎變更準。
+                  違反 = 品牌鐵律直接崩。
                 </p>
               </li>
             </ol>
