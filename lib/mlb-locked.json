@@ -5628,8 +5628,12 @@
       },
       "engineWinHomePct": 45,
       "lockedAt": "2026-06-15T18:11:35.548Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 4,
+        "away": 2
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-06-17T22:47:31.503Z"
     },
     {
       "gamePk": 823940,
@@ -5657,8 +5661,12 @@
       },
       "engineWinHomePct": 64,
       "lockedAt": "2026-06-15T18:11:35.548Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 5,
+        "away": 4
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-06-17T22:47:31.504Z"
     },
     {
       "gamePk": 825072,
@@ -5686,8 +5694,12 @@
       },
       "engineWinHomePct": 51,
       "lockedAt": "2026-06-15T18:11:35.548Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 8,
+        "away": 1
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-06-17T22:47:31.504Z"
     },
     {
       "gamePk": 824746,
@@ -6237,6 +6249,35 @@
       },
       "engineWinHomePct": 57,
       "lockedAt": "2026-06-17T17:50:55.219Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 823124,
+      "gameDate": "2026-06-20T02:10:00Z",
+      "scheduleDate": "2026-06-19",
+      "homeId": 136,
+      "homeEn": "Seattle Mariners",
+      "homeRecord": "38-36",
+      "awayId": 111,
+      "awayEn": "Boston Red Sox",
+      "awayRecord": "29-41",
+      "homePitcher": "Bryce Miller",
+      "awayPitcher": "Ranger Suarez",
+      "homeStats": {
+        "era": "1.54",
+        "k9": "9.26",
+        "bb9": "1.29",
+        "hr9": "1.03"
+      },
+      "awayStats": {
+        "era": "3.21",
+        "k9": "9.00",
+        "bb9": "2.70",
+        "hr9": "0.51"
+      },
+      "engineWinHomePct": 58,
+      "lockedAt": "2026-06-17T22:47:30.923Z",
       "finalScore": null,
       "verdict": null
     }
