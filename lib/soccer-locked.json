@@ -528,10 +528,13 @@
       "awayWinPct": 51,
       "enginePick": "away",
       "lockedAt": "2026-06-14T22:20:18.171Z",
-      "finalScore": null,
-      "outcome": null,
-      "verdict": null,
-      "gradedAt": null
+      "finalScore": {
+        "home": 1,
+        "away": 4
+      },
+      "outcome": "away",
+      "verdict": "proved",
+      "gradedAt": "2026-06-17T13:03:10.548Z"
     },
     {
       "matchId": "fd-537397",
@@ -556,10 +559,13 @@
       "awayWinPct": 19,
       "enginePick": "home",
       "lockedAt": "2026-06-15T18:09:50.169Z",
-      "finalScore": null,
-      "outcome": null,
-      "verdict": null,
-      "gradedAt": null
+      "finalScore": {
+        "home": 3,
+        "away": 0
+      },
+      "outcome": "home",
+      "verdict": "proved",
+      "gradedAt": "2026-06-17T13:03:10.548Z"
     },
     {
       "matchId": "fd-537398",
@@ -584,10 +590,13 @@
       "awayWinPct": 21,
       "enginePick": "home",
       "lockedAt": "2026-06-15T18:09:50.169Z",
-      "finalScore": null,
-      "outcome": null,
-      "verdict": null,
-      "gradedAt": null
+      "finalScore": {
+        "home": 3,
+        "away": 1
+      },
+      "outcome": "home",
+      "verdict": "proved",
+      "gradedAt": "2026-06-17T13:03:10.548Z"
     },
     {
       "matchId": "fd-537403",
@@ -780,6 +789,34 @@
       "awayWinPct": 25,
       "enginePick": "home",
       "lockedAt": "2026-06-16T23:13:14.038Z",
+      "finalScore": null,
+      "outcome": null,
+      "verdict": null,
+      "gradedAt": null
+    },
+    {
+      "matchId": "fd-537330",
+      "competitionCode": "WC",
+      "competitionName": "世界盃",
+      "kickoffISO": "2026-06-19T01:00:00Z",
+      "status": "TIMED",
+      "homeSeed": "Mexico",
+      "awaySeed": "Korea Republic",
+      "home": "墨西哥",
+      "away": "南韓",
+      "ratingHome": 1702,
+      "ratingAway": 1701,
+      "homeAdvantage": 35,
+      "xgHome": 1.381,
+      "xgAway": 1.219,
+      "homeWin": 0.39646079237551896,
+      "draw": 0.28289379388502317,
+      "awayWin": 0.32064541373945804,
+      "homeWinPct": 40,
+      "drawPct": 28,
+      "awayWinPct": 32,
+      "enginePick": "home",
+      "lockedAt": "2026-06-17T13:03:09.338Z",
       "finalScore": null,
       "outcome": null,
       "verdict": null,
