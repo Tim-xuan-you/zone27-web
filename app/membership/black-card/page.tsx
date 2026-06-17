@@ -7,7 +7,7 @@ import MembershipUpgrade from "@/components/MembershipUpgrade";
 export const metadata: Metadata = {
   title: "BLACK · CPBL 季票 · NT$ 500 / 31 天",
   description:
-    "BLACK · NT$ 500 / 31 天 · 引擎永遠免費,BLACK 不解鎖任何功能(功能全免費)—— 你出錢養著它,戴上一圈所有人看得到的金色支持環。 手動轉帳 · 不自動續扣 · 14 天退款。",
+    "BLACK · NT$ 500 / 31 天 · 引擎永遠免費,BLACK 不解鎖任何功能(功能全免費)—— 你出錢養著它,戴上一圈所有人看得到的金色支持環、走進一間只有自己人的房間。 手動轉帳 · 不自動續扣 · 14 天退款。",
 };
 
 export const revalidate = 86400;
@@ -38,8 +38,12 @@ const BLACK_PERKS = [
     strong: "公開戰績頁 / 活動脈動 / 天梯都跟著你 —— 一眼看到你在撐這個免費引擎",
   },
   {
-    text: "就這一樣 ——",
-    strong: "其他本來就全免費。 你付的是身分,不是解鎖功能",
+    text: "一間會員房間 ·",
+    strong: "只有付費會員進得去的客廳 · 聊球聊判斷,不押注",
+  },
+  {
+    text: "兩樣都是身分 ——",
+    strong: "其他本來就全免費。 你付的不是功能",
   },
 ];
 
@@ -59,7 +63,7 @@ export default function BlackCardPage() {
         <p className="text-mute text-sm sm:text-base leading-relaxed mb-4">
           NT$ 500 / 31 天。 引擎永遠免費 —— 所以 BLACK
           <span className="text-bone">不是買功能</span>(功能都免費)。 你買的是
-          <span className="text-gold">一圈所有人看得到的金色支持環</span>:出錢養著這個免費引擎,
+          <span className="text-gold">一圈所有人看得到的金色支持環、一間自己人的房間</span>:出錢養著這個免費引擎,
           讓陌生人也能永遠免費用下去。
         </p>
         {/* 「為什麼免費還要付費」的答案:不是買 access(都免費)· 是當這個免費引擎的出錢人 + 戴上身分。 */}
@@ -90,14 +94,19 @@ export default function BlackCardPage() {
           ))}
         </ul>
 
-        {/* ── BLACK 加的那一樣 ── */}
+        {/* ── BLACK 加的兩樣(都是身分,不是功能)── */}
         <p className="font-mono text-gold text-[10px] tracking-[0.4em] mb-4">
-          BLACK 加的 · 就這一樣
+          BLACK 加的 · 兩樣身分的東西
         </p>
-        <p className="text-mute text-sm sm:text-base leading-relaxed mb-6">
+        <p className="text-mute text-sm sm:text-base leading-relaxed mb-4">
           一圈<span className="text-gold">金環</span>。 在一個人人曬連勝、輸了就刪文的地方,
           它只說一件事:「<span className="text-bone">這個人出錢,讓陌生人也能免費用這個引擎</span>。」
           它買不到準度(那個用賺的)· 造不了假(你是真的轉了錢)· 公開檔、脈動、天梯都看得到。
+        </p>
+        <p className="text-mute text-sm sm:text-base leading-relaxed mb-6">
+          再加一間<span className="text-gold">房間</span>。 出錢養著引擎的這群人,有一面只有自己人進得去的
+          留言牆 —— 聊球、聊判斷、打個招呼。 不是明牌、不押注,就是一間客廳。
+          <span className="text-bone">身分制,不是功能制</span>。
         </p>
 
         {/* ── 直接付款(同錢包 UX · 點了直接給帳號)──── */}
