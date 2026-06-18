@@ -6223,6 +6223,35 @@
       "verdict": null
     },
     {
+      "gamePk": 822886,
+      "gameDate": "2026-06-20T00:05:00Z",
+      "scheduleDate": "2026-06-19",
+      "homeId": 140,
+      "homeEn": "Texas Rangers",
+      "homeRecord": "35-38",
+      "awayId": 135,
+      "awayEn": "San Diego Padres",
+      "awayRecord": "38-35",
+      "homePitcher": "Jacob deGrom",
+      "awayPitcher": "Randy Vásquez",
+      "homeStats": {
+        "era": "3.17",
+        "k9": "10.45",
+        "bb9": "1.76",
+        "hr9": "1.53"
+      },
+      "awayStats": {
+        "era": "3.63",
+        "k9": "7.02",
+        "bb9": "2.66",
+        "hr9": "1.33"
+      },
+      "engineWinHomePct": 62,
+      "lockedAt": "2026-06-18T15:39:19.778Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
       "gamePk": 824179,
       "gameDate": "2026-06-20T00:10:00Z",
       "scheduleDate": "2026-06-19",
