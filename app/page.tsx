@@ -29,16 +29,15 @@ import {
   type LockedSoccerPrediction,
 } from "@/lib/soccer/locked";
 
-// ── ZONE 27 · Homepage · 市場看板(R175 Polymarket pivot)──────
-// Tim 2026-05-30「請變成 Polymarket · 很亂很雜」· per
-// memory/project_zone27_polymarket_pivot.md + [[feedback-zone27-homepage-minimalism]]
-// subtraction-first。
+// ── ZONE 27 · Homepage · 一屏一焦點(R249 Defector 收乾淨)──────────
+// Tim「Defector go · 任何網站都比我們簡潔 · 我們有夠亂」(對手把預測鎖牆收費 ·
+// 我們相反)· per [[feedback-zone27-homepage-minimalism]] subtraction-first。
 //
-// 翻轉 IA:市場優先,出版其次。 首頁 = 一片市場看板(每場賽事 = 一張市場卡 ·
-// 引擎開盤線 + 點進去討論/分析/預測)· 不再是單場 cinematic + 7 條 strip。
-// 舊的 HeroLiveCard / TonightReceiptsCard / 各種 localStorage strip 退場
-// (元件保留 · 一個 git revert 可回)· brand IP Pratfall(F6 negations · 公開
-// 戰績含 DIVERGED)保留但 demote 到看板下方。 引擎 cinematic 仍在 /matches/[gameId]。
+// 前門只留一個主角:一句頭條(贏輸都掛、賽前鎖死=對手抄不走的那句)+ 一張會說話
+// 的「今晚一手」pick 卡(WC 頭條 / 跨聯盟把握度最高 / 休賽日最近判決)+ 兩條路。
+// 舊「市場看板 3 卡 + 世界盃 rail box + 足球入口卡」全收進「看全部 →」(賽事板仍在
+// /matches、/soccer · 深度頁仍在 Nav)。 資料層 0 改動(全部真資料 · graceful 隱藏)。
+// 一張卡會說話,勝過一面搶眼的牆。
 // ─────────────────────────────────────────────────────
 
 export const revalidate = 600; // ISR · 賽事 lifecycle transitions
@@ -55,57 +54,40 @@ export default async function Home() {
     return ph === "today-pregame" || ph === "today-live" || ph === "future";
   });
 
-  // ── 跨聯盟「今晚精選」(Polymarket 式策展)──────────────────────
-  // 主頁不是賽事目錄(那是玩運彩的賠率牆)· 是「今晚最值得看的幾場 + 你的帳本」。
-  // 規則:第一格錨定 CPBL 頭條(自家主場 · 報紙頭版 local-first · 品牌主場不從
-  // 首頁消失),其餘按引擎把握度跨聯盟填(離 50% 越遠 = 引擎越敢喊 = 最有看法、
-  // 最可被驗證的那幾場 · 可能是 MLB)。 這是「編輯策展(選看哪幾場)」· 跟「動真相
-  //(賽果 / 結算)」是兩回事 —— 後者永遠不碰。 上幾種運動主頁形狀都不變 · 只是
-  // 選池變大 = 結構天生可擴。
+  // ── 跨聯盟「今晚一手」(Polymarket 式策展 · 但只挑一張)──────────────────
+  // 第一格錨定 CPBL 頭條(自家主場 local-first),其餘按引擎把握度跨聯盟填(離 50%
+  // 越遠 = 引擎越敢喊)。 編輯策展(選看哪場)· 跟動真相(賽果)是兩回事 —— 後者永不碰。
   const byConviction = (a: Match, b: Match) =>
     Math.max(b.home.winRate, b.away.winRate) -
     Math.max(a.home.winRate, a.away.winRate);
   const allUpcoming = [...cpblUpcoming, ...mlbUpcoming].sort(byConviction);
-  const HOMEPAGE_CAP = 3; // mobile ≤ 3 viewport 鐵律 · 精選不是全部
+  const HOMEPAGE_CAP = 3;
   const cpblAnchor = [...cpblUpcoming].sort(byConviction)[0];
   const featured: Match[] = [];
   if (cpblAnchor) featured.push(cpblAnchor); // CPBL 頭條永遠有座位
   for (const m of allUpcoming) {
     if (featured.length >= HOMEPAGE_CAP) break;
-    if (!featured.includes(m)) featured.push(m); // 其餘按把握度跨聯盟填(去重)
+    if (!featured.includes(m)) featured.push(m);
   }
 
-  // 休賽日 fallback · 看板永不空白:全聯盟都沒可押賽事時 · 改放引擎最近賽後
-  // 收據(✓命中 / ✕落空都掛)· proof-of-work 勝過空泛未來預測。
+  // 休賽日 fallback · 前門永不空白:全聯盟都沒可押賽事時 · 改放引擎最近賽後判決
+  //(✓命中 / ✕落空都掛)· proof-of-work 勝過空泛未來預測。
   const recentReceipts = allUpcoming.length === 0 ? finalized.slice(0, 2) : [];
 
-  // 每場熱度(鎖定人數 + 分析篇數)· 無 cookie anon · 不破首頁 ISR · 0 migration。 精選卡標
-  // 「N 人已鎖定 · N 篇分析」+ 最熱標 = 從首頁就把賭徒導去在燒的那場討論(人潮就是錢潮)。
+  // 每場熱度(鎖定人數 + 分析篇數)· 無 cookie anon · 不破首頁 ISR · 0 migration。
   const matchHeat = await getMatchHeat();
   const featuredHeat = heatDisplayFor(matchHeat, featured.map((m) => m.id));
 
   // ── 活動脈動精華(會動的前門)· 最近 N 人賽前鎖定 + 最新一手 ────────────────
-  // 公開全站資料(0 auth · ISR-cached)· 不到門檻(lib HOMEPAGE_PULSE_MIN)→ 元件整塊隱藏。
   const pulseSummary = await getPulseSummary();
 
-  // ── 世界盃 rail(四年一次的窗 · 開站當晚把世界盃推到第一屏)──────────────
-  // 純靜態(讀 lib/soccer-locked.json · 0 API · ISR-safe)· 引擎已賽前鎖死的場 +
-  // 自己算的主/和/客 % 直接秀在首頁 = 賭徒最想要的「show me a pick」即時鉤子。
-  // 世界盃結束後 wcActive 自動回 false → rail 自動收起(無需手動 revert)。
+  // ── 世界盃(四年一次的窗)· 引擎已賽前鎖死的場 ──────────────
   const wcUpcoming = getUpcomingWorldCupMatches(2);
-  // 世界盃還沒結束 = 還有任一場鎖定預測未對帳(verdict null)。 賽季全打完、全結算後
-  // 自動回 false → rail 自動收起(舊版用 hasWorldCupLocked() 會因「收據永久保留」永遠 true)。
   const wcActive = hasActiveWorldCup();
-  // 首頁足球回訪鉤子用的永久結算表(0 API · 讀 bundled locked.json · ISR-safe · 不依賴
-  // FOOTBALL_DATA secret)+ 引擎當初鎖的看好邊(給「你 vs 引擎」同場對照)。
   const soccerFinalized = getSoccerFinalizedResults();
   const soccerEnginePicks = getSoccerEnginePicks();
 
-  // 已結算賽事的勝方 · 傳給登入後個人戰績條(client 端用它評分本人押注 · 靜態
-  // 資料無隱私問題)。 R198 · 併 MLB 已結算 → 押的 MLB 也計進首頁「你 vs 引擎」。
-  // ⚠️ MLB 已結算結果一律用永久版 getMlbFinalizedResults()(讀 mlb-locked.json · 同
-  // /ladder)· 不用 mlbAll(只有「昨天+今天」live 窗 → 押過的 MLB 場 2 天後掉出窗會
-  // 從『已對帳』倒退回『進行中』· 帳本縮水 · 違反刪不掉的帳本)。
+  // 已結算賽事的勝方 · 傳給登入後個人戰績條(client 端評分本人押注 · 靜態資料無隱私問題)。
   const matchResults = [
     ...finalized.map((m) => ({
       id: m.id,
@@ -115,43 +97,87 @@ export default async function Home() {
     ...(await getMlbFinalizedResults()),
   ];
 
+  // ── 今晚的一手 · 單一主角 ─────────────────────────────────────────
+  // WC 頭條 → 跨聯盟把握度最高 → 休賽日最近判決。 其餘收進「看全部 →」。
+  const showCpblLink = wcActive && cpblUpcoming.length > 0;
+  const heroPick: {
+    label: string;
+    allHref: string;
+    allText: string;
+    card: ReactNode;
+    caption: string;
+  } | null = (() => {
+    if (wcActive && wcUpcoming.length > 0) {
+      return {
+        label: "/ 今晚頭條 · 世界盃 · 引擎已賽前鎖死",
+        allHref: "/soccer",
+        allText: "看世界盃全部 →",
+        card: <WorldCupRailCard m={wcUpcoming[0]} />,
+        caption: "賽前鎖死、賽後逐場對帳 · 不是盤口 · 連輸的都留著。",
+      };
+    }
+    const topUpcoming = featured[0];
+    if (topUpcoming) {
+      return {
+        label: "/ 今晚這場 · 引擎開的盤",
+        allHref: "/matches",
+        allText: `看接下來 ${allUpcoming.length} 場 →`,
+        card: (
+          <MiniMatchCard
+            match={topUpcoming}
+            analysisCount={matchHeat[topUpcoming.id]?.analyses ?? 0}
+            heat={featuredHeat[topUpcoming.id]}
+          />
+        ),
+        caption: "賽前鎖死、賽後對帳 · 連輸的也掛,刪不掉。",
+      };
+    }
+    const topReceipt = recentReceipts[0];
+    if (topReceipt) {
+      return {
+        label: "/ 引擎最近的判決",
+        allHref: "/track-record",
+        allText: "看完整戰績 →",
+        card: (
+          <MiniMatchCard
+            match={topReceipt}
+            analysisCount={matchHeat[topReceipt.id]?.analyses ?? 0}
+          />
+        ),
+        caption: "休賽日 · ✓ 中 / ✕ 沒中 都掛,不藏。",
+      };
+    }
+    return null;
+  })();
+
   return (
     <div className="flex flex-col flex-1 min-h-screen">
       <Nav active="home" />
 
       <main id="main">
-        {/* ── HERO · slim · market-first ─────────────── */}
+        {/* ── HERO · 一句頭條(Defector 式單一主標)─────────────── */}
         <section className="mx-auto max-w-5xl px-6 sm:px-10 pt-12 sm:pt-16 pb-8 text-center">
-          {/* R239 · 把「AI」放上前門(Tim 要)· 但走 Apple「discipline over hype」非 AI-washing:
-              名分=「AI 勝率引擎」· 緊接「公開準度」= 在一個被「AI 神準」洗到麻木的市場,唯一敢
-              公開 AI 到底準幾成的那個 = 把 AI 趨勢變成護城河,不是口號。 honest AI · 不裝神祕。 */}
-          <p className="font-mono text-gold text-[10px] sm:text-[11px] tracking-[0.4em] mb-5">
+          {/* AI 放上前門(Tim 要)· 但走 honest AI:名分=「AI 勝率引擎」緊接「公開準度」=
+              在被「AI 神準」洗到麻木的市場,唯一敢公開 AI 到底準幾成的那個。 */}
+          <p className="font-mono text-gold text-[10px] sm:text-[11px] tracking-[0.4em] mb-6">
             AI 勝率引擎 · 公開準度
           </p>
-          <h1 className="text-3xl sm:text-5xl font-light leading-[1.08] tracking-tight text-bone">
-            不靠直覺,<span className="text-gold">只看演算法。</span>
+          {/* 單一頭條:把最不可造假、對手抄不走的一句當第一屏唯一主標(不再雙標題)。
+              行為類別不指名對手(晒單 / 刪文)。 */}
+          <h1 className="text-3xl sm:text-5xl font-light leading-[1.14] tracking-tight text-bone max-w-2xl mx-auto">
+            別人贏了晒單,輸了刪文。
+            <br />
+            <span className="text-gold">我們贏輸都掛 —— 賽前鎖死,刪不掉。</span>
           </h1>
-          {/* R221 第一屏視覺升級(Tim「您決定」· 設計稿先給過 · 一鍵可 revert):訊息一字不改
-              (R216 鉤子全保留),只升層次 —— 四段平鋪 → 標語 + 招牌金線 + 一句狠話 + 一行支撐
-              (Apple/Linear「一個 beat 然後留白」)。 */}
-          {/* 招牌金髮絲線(zone27-rule · 黃金比例刻度)· 標語與情緒鉤子間留一道品牌記號的呼吸。 */}
-          <div className="zone27-rule max-w-[300px] mx-auto mt-6 sm:mt-7" aria-hidden="true" />
-          {/* 情緒鉤子升成第一屏主角(R216 訊息不動):最不可造假、對手抄不走的一句,放大成第一眼
-              的情緒高潮。 行為類別不指名對手(晒單/刪文 · 守不指名鐵律)。 */}
-          <p className="mt-7 max-w-xl mx-auto text-bone leading-snug text-xl sm:text-2xl font-light tracking-tight">
-            別人贏了晒單、輸了刪文。 <span className="text-gold">我們贏輸都掛</span> —— 賽前鎖死、刪不掉。
-          </p>
-          {/* 支撐句(合併原本兩段:免費萬次 + 57% 神準)· 降成一行 mute · wall-of-text → 呼吸感。
-              57% 誠實王牌仍在(收進支撐句)· 「喊神準的在騙你」打騙子角度保留。 */}
-          <p className="mt-4 max-w-xl mx-auto text-mute leading-relaxed text-sm sm:text-base">
+          {/* 招牌金髮絲線(zone27-rule)· 一道品牌記號的呼吸。 */}
+          <div className="zone27-rule max-w-[300px] mx-auto mt-7" aria-hidden="true" />
+          {/* 支撐句:57% 誠實王牌 · 一行 mute · 打「喊神準=騙你」角度。 */}
+          <p className="mt-7 max-w-xl mx-auto text-mute leading-relaxed text-sm sm:text-base">
             免費讓 AI 跑一萬次告訴你誰會贏。 連全世界最強的 AI,賽前單場也才{" "}
             <span className="text-bone">5 成 7</span> —— 喊「94% 神準」的,數學上在騙你。
           </p>
-          {/* 引擎戰績 · Pratfall「連輸的也掛」· compact · 永遠不刪 */}
+          {/* 引擎戰績 · Pratfall「連輸的也掛」· 一行安靜的 proof(不是按鈕)· 永遠不刪。 */}
           {tr.total > 0 && (
-            // 量化品牌:hero 只留一個「按鈕」= 下方金色 CTA。 戰績是 proof 不是
-            // 按鈕 · 拿掉 border/bg 框 · 降成一行安靜的 mono · 數字仍金(訊號)·
-            // ✓/✕ 維持品牌收據色(揭露對等 · 不偏袒 PROVED)。
             <Link
               href="/track-record"
               className="mt-5 inline-flex items-baseline gap-2.5 sm:gap-3 font-mono tabular flex-wrap justify-center hover:opacity-80 transition-opacity"
@@ -167,12 +193,8 @@ export default async function Home() {
             </Link>
           )}
 
-          {/* 兩條路(R216 · 承 R207 的「點擊要有回饋」+ 解 4 輪討論的 conversion 結論):
-              · 主金鈕(實心)= 看開盤 = 產品,世界盃夜導四年一次的主秀(allUpcoming 不含足球 →
-                沒這條 wcActive 優先,CPBL/MLB 休賽時大金鈕會略過世界盃、誤導去棒球收據)。
-              · 次金框(outline)= 校準練習 = 全站最強 0-登入 aha(消方塊式一拖就撞 57% 牆)·
-                從原本角落 11px 小字救上來。 金框明顯次於實心金 → 仍守「一屏一焦點」(主清楚是金鈕)·
-                只是把最強鉤子從耳語升成看得見的第二條路。 */}
+          {/* 兩條路:主金鈕=看開盤(產品 · WC 夜導四年一次主秀)· 次金框=校準練習
+              (全站最強 0-登入 aha)。 一屏一焦點(主清楚是金鈕)。 */}
           <div className="mt-7 flex items-center justify-center gap-3 flex-wrap">
             <Link
               href={wcActive ? "/soccer" : allUpcoming.length > 0 ? "/matches" : "/track-record"}
@@ -193,20 +215,50 @@ export default async function Home() {
           </div>
         </section>
 
-        {/* ── 活動脈動條 · 會動的前門(R227)· 最近 N 人賽前鎖定 + 最新一手 → /pulse ──
-            訪客 / 朋友分享的連結一打開就感覺「有人在、牆在動」(人潮就是錢潮)· 連到剛補上足球的
-            脈動牆。 不到門檻 / 0 用戶 → 自動隱藏(graceful · 守首頁極簡)。 */}
+        {/* ── 今晚的一手 · 單一主角卡(取代舊看板 3 卡 + WC rail box + 足球入口卡)──
+            只秀今晚最值得看的「一張」引擎已鎖死的 pick · 其餘收進「看全部 →」。 */}
+        <section className="mx-auto max-w-2xl w-full px-6 sm:px-10 pb-12">
+          {heroPick ? (
+            <>
+              <div className="flex items-baseline justify-between gap-3 mb-4 flex-wrap">
+                <p className="font-mono text-gold text-[10px] sm:text-[11px] tracking-[0.45em]">
+                  {heroPick.label}
+                </p>
+                <span className="flex items-baseline gap-3 font-mono text-[10px] tracking-[0.3em]">
+                  <Link
+                    href={heroPick.allHref}
+                    className="text-mute/70 hover:text-gold transition-colors"
+                  >
+                    {heroPick.allText}
+                  </Link>
+                  {showCpblLink && (
+                    <Link
+                      href="/matches"
+                      className="text-mute/70 hover:text-gold transition-colors"
+                    >
+                      · CPBL 今晚 →
+                    </Link>
+                  )}
+                </span>
+              </div>
+              {heroPick.card}
+              <p className="mt-3 text-mute/80 text-xs sm:text-sm leading-relaxed text-center">
+                {heroPick.caption}
+              </p>
+            </>
+          ) : (
+            <EmptyFloor />
+          )}
+        </section>
+
+        {/* ── 活動脈動條 · 會動的前門 · 最近 N 人賽前鎖定 → /pulse ──
+            不到門檻 / 0 用戶 → 自動隱藏(graceful · 守首頁極簡)。 */}
         <HomepagePulseStrip summary={pulseSummary} />
 
-        {/* ── 你 vs 引擎 · 回訪鉤子 · 只在登入且押過才出現 ──
-            放在市場看板「之上」· 回訪的會員一進來先看到自己跟引擎誰準
-            (= 明天回來的理由)· 不再被 hero CTA 跳過。 沒登入 / 0 押注 →
-            自動隱藏 · 看板遞補為第一屏。 R189 改讀 DB(取代死掉的匿名版)。 */}
+        {/* ── 你 vs 引擎 · 回訪鉤子 · 只在登入且押過才出現(否則自動隱藏)── */}
         <YourRecordStrip variant="home" matchResults={matchResults} />
 
-        {/* ── 你的足球戰績 · 回訪鉤子(只押世界盃的人也有「明天回來看自己 vs 引擎」的理由)──
-            棒球(YourRecordStrip)只算 fd-* 以外 · 足球兩本帳分開 · 用永久結算表(0 API ·
-            ISR-safe)· 沒押足球 / 未登入 → 自動隱藏(graceful · 不破首頁極簡)。 */}
+        {/* ── 你的足球戰績 · 回訪鉤子 · 沒押足球 / 未登入 → 自動隱藏 ── */}
         {wcActive && (
           <SoccerRecordCard
             results={soccerFinalized}
@@ -215,89 +267,9 @@ export default async function Home() {
           />
         )}
 
-        {/* ── 世界盃 rail · 開站當晚的頭條(四年一次)· 在 CPBL 看板「之上」───
-            純靜態鎖定資料(0 API)· 把引擎自己算的主/和/客 % 直接攤在第一屏 ·
-            賭徒一眼看到「引擎看好誰」→ 點進去押。 WC 結束自動收起。 */}
-        {wcActive && <WorldCupRail upcoming={wcUpcoming} />}
-
-        {/* ── THE FLOOR · 市場看板 / 賽後收據(休賽日 fallback)──── */}
-        <section id="floor" className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-14 scroll-mt-20">
-          <div className="flex items-baseline justify-between gap-3 mb-5 flex-wrap">
-            <p
-              className="font-mono text-gold text-[10px] sm:text-[11px] tracking-[0.45em]"
-            >
-              {allUpcoming.length > 0
-                ? "/ 接下來精選"
-                : "/ 引擎最近戰績 · 賽後收據"}
-            </p>
-            <Link
-              href={allUpcoming.length > 0 ? "/matches" : "/track-record"}
-              className="font-mono text-mute/70 hover:text-gold text-[10px] tracking-[0.3em] transition-colors"
-            >
-              {allUpcoming.length > 0
-                ? `接下來全部 ${allUpcoming.length} 場 →`
-                : "完整戰績 →"}
-            </Link>
-          </div>
-          {allUpcoming.length > 0 ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {featured.map((m) => (
-                <MiniMatchCard
-                  key={m.id}
-                  match={m}
-                  analysisCount={matchHeat[m.id]?.analyses ?? 0}
-                  heat={featuredHeat[m.id]}
-                />
-              ))}
-            </div>
-          ) : recentReceipts.length > 0 ? (
-            <>
-              <p className="mb-5 text-mute/85 text-sm leading-relaxed">
-                休賽日 · 看引擎最近的判決 ·{" "}
-                <span className="text-gold">✓ 中</span> /{" "}
-                <span className="text-loss">✕ 沒中</span> 都掛,不藏。
-              </p>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                {recentReceipts.map((m) => (
-                  <MiniMatchCard key={m.id} match={m} analysisCount={matchHeat[m.id]?.analyses ?? 0} />
-                ))}
-              </div>
-            </>
-          ) : (
-            <EmptyFloor />
-          )}
-        </section>
-
-        {/* 非世界盃期間(wcActive=false)· 才退回原本安靜的足球入口卡。 */}
-        {!wcActive && (
-          <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-14">
-            <Link
-              href="/soccer"
-              className="block bg-slate/30 border border-gold/30 hover:border-gold/40 hover:bg-slate/40 transition-colors p-4 sm:p-5 group"
-            >
-              <div className="flex items-center justify-between gap-3 flex-wrap">
-                <div className="min-w-0">
-                  <p className="font-mono text-gold text-[10px] tracking-[0.35em] mb-1">
-                    足球 · 引擎開盤
-                  </p>
-                  <p className="text-bone text-sm sm:text-base font-light leading-snug">
-                    各大聯賽 · 我們<span className="text-gold">自己算</span>的勝 / 平 / 負
-                    (不是盤口)· 押一邊試試
-                  </p>
-                </div>
-                <span className="shrink-0 font-mono text-gold/80 group-hover:text-gold text-[10px] tracking-[0.3em]">
-                  看足球 →
-                </span>
-              </div>
-            </Link>
-          </section>
-        )}
-
         {/* ── 三步玩法 · 圖示卡(child-level · 圖取代字)──── */}
         <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-14 border-t border-line/40 pt-12">
-          <p
-            className="font-mono text-gold text-[10px] sm:text-[11px] tracking-[0.45em] mb-6"
-          >
+          <p className="font-mono text-gold text-[10px] sm:text-[11px] tracking-[0.45em] mb-6">
             / 三步玩法
           </p>
           <div className="grid grid-cols-3 gap-3 sm:gap-4">
@@ -307,7 +279,7 @@ export default async function Home() {
           </div>
         </section>
 
-        {/* ── 信任 chips(✓ 取代一串字)+ founders ───────── */}
+        {/* ── 信任 chips(✓ 取代一串字)+ 深度頁 ───────── */}
         <section className="mx-auto max-w-3xl px-6 sm:px-10 pb-16 text-center border-t border-line/40 pt-10">
           <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-2.5">
             <PromiseChip>引擎免費</PromiseChip>
@@ -321,8 +293,8 @@ export default async function Home() {
               完整 audit →
             </Link>
             <span aria-hidden="true" className="text-mute/40">·</span>
-            <Link href="/founders" className="text-mute hover:text-gold transition-colors">
-              GOLD →
+            <Link href="/membership" className="text-mute hover:text-gold transition-colors">
+              撐著它的人 →
             </Link>
           </p>
         </section>
@@ -335,56 +307,10 @@ export default async function Home() {
 
 // ── Sub-components ─────────────────────────────────────
 
-// ── 世界盃 rail · 開站當晚頭條 ───────────────────────────────────
-// 引擎賽前鎖死的世界盃場 + 自己算的主/和/客 % 直接秀(賭徒要的「給我一個 pick」)。
-// 全靜態、無 API、無 client(首頁 ISR 不破)· 暗金、無紅綠、無 emoji。
-function WorldCupRail({ upcoming }: { upcoming: LockedSoccerPrediction[] }) {
-  return (
-    <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-14">
-      <div className="border border-gold/40 bg-slate/30 p-5 sm:p-7">
-        <div className="flex items-baseline justify-between gap-3 mb-1 flex-wrap">
-          <p className="font-mono text-gold text-[10px] sm:text-[11px] tracking-[0.4em]">
-            / 世界盃 · 引擎已賽前鎖死
-          </p>
-          <Link
-            href="/soccer"
-            className="font-mono text-gold/80 hover:text-gold text-[10px] tracking-[0.3em] transition-colors"
-          >
-            看全部 · 押一邊 →
-          </Link>
-        </div>
-        <p className="text-bone text-lg sm:text-2xl font-light tracking-tight leading-snug mb-1">
-          四年一次 · <span className="text-gold">引擎自己算</span>的勝 / 平 / 負
-        </p>
-        <p className="text-mute text-[13px] sm:text-sm leading-relaxed mb-5">
-          台北 6/12 凌晨開踢 · 賽前鎖死、賽後逐場對帳 ·{" "}
-          <span className="text-mute/70">不是盤口 · 連輸的都留著</span>
-        </p>
-
-        {upcoming.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            {upcoming.map((m) => (
-              <WorldCupRailCard key={m.matchId} m={m} />
-            ))}
-          </div>
-        ) : (
-          <Link
-            href="/soccer"
-            className="inline-flex items-center gap-2 font-mono text-gold/90 hover:text-gold text-xs tracking-[0.25em] transition-colors"
-          >
-            世界盃進行中 · 看引擎開盤 →
-          </Link>
-        )}
-      </div>
-    </section>
-  );
-}
-
-// 世界盃單場（首頁 rail）· 隊徽 + 隊名 + 三向 % + favored 上金 + 三段條（同 SoccerMatchCard 語彙）。
-// 點擊帶 #m-{matchId} 錨點 → 落地到 /soccer 該場那張卡(不是清單頂端 · 接起「看到 pick → 去押」漏斗）。
+// 世界盃單場（首頁一手卡）· 隊徽 + 隊名 + 三向 % + favored 上金 + 三段條。
+// 點擊帶 #m-{matchId} 錨點 → 落地到 /soccer 該場那張卡。
 function WorldCupRailCard({ m }: { m: LockedSoccerPrediction }) {
   const ko = kickoffTaipei(m.kickoffISO);
-  // 上金的邊綁 enginePick(原始機率 argmax)· 不從展示%重算 → 金條/金數字與「引擎看好 X」永遠同源。
   const homeGold = m.enginePick === "home";
   const drawGold = m.enginePick === "draw";
   const awayGold = m.enginePick === "away";
@@ -488,8 +414,6 @@ function IconCard({
 
 // 信任承諾 chip · ✓ + 短詞 · 取代一整串「不…不…不…」
 function PromiseChip({ children, href }: { children: ReactNode; href?: string }) {
-  // V1 gold discipline(轉換 agent)· 5 個金框金底 chip 讓金色失焦 → 降成灰框 ·
-  // 只留 ✓ 是金(訊號)· 把焦點還給主金鈕 + 金色戰績數字。
   const base =
     "inline-flex items-center gap-1 border border-line/60 px-2.5 py-1 text-[11px] sm:text-xs tracking-wide text-bone/85";
   const inner = (
@@ -505,8 +429,6 @@ function PromiseChip({ children, href }: { children: ReactNode; href?: string })
       )}
     </>
   );
-  // 可點的承諾 = 點下去直接攤證據(方法公開→白皮書 · 不藏輸的→公開戰績)·
-  // costly signal:別人的「保證」是空話 · 我們的承諾按一下就見真章。
   return href ? (
     <Link
       href={href}
