@@ -11,8 +11,9 @@ import Link from "next/link";
 //   「最高階有哪些功能 · 最低階也顯現出來 · 只是不能讓他點擊 · 等等
 //    這樣低階的人才知道可以解鎖哪些功能 · 誘惑他們花錢」
 //
-// 4 tier(anonymous · free · black-card · founders27)side-by-side
+// 3 tier(anonymous · free · black-card)side-by-side
 // feature matrix · 每個 cell 同 unlock-state visualization:
+// (GOLD/founders27 付費層已收掉 · 只剩單一付費層 BLACK)
 //   ✓ UNLOCKED · 可使用 · gold accent
 //   🔒 LOCKED · padlock + 升級 tier label · muted + slight blur
 //   — N/A · 此 feature 此 tier 不存在
@@ -21,7 +22,7 @@ import Link from "next/link";
 //   - per /integrity rule · ENGINE features never paywalled → all 4 tiers
 //     show ENGINE row as ✓ UNLOCKED · no locked padlock for engine
 //   - per [[zone27-monetization-philosophy]] · IDENTITY features 在 BLACK
-//     CARD + GOLD 才解鎖 · 此 component 把 identity-tier feature
+//     CARD 才解鎖 · 此 component 把 identity-tier feature
 //     locked-state visualize 給 lower-tier user · Loss Aversion + Goal
 //     Gradient psychology · 不違反 brand IP(不藏 · 顯式 surface tier
 //     unlock path)
@@ -41,7 +42,7 @@ import Link from "next/link";
 //   ✕ NO 「Try free for 7 days」 reverse-trial dark pattern
 // ─────────────────────────────────────────────────────
 
-type TierKey = "anonymous" | "free" | "black-card" | "founders27";
+type TierKey = "anonymous" | "free" | "black-card";
 
 type Feature = {
   /** Feature label · 球迷 grammar · NOT engineering jargon */
@@ -60,7 +61,6 @@ const FEATURES: Feature[] = [
       anonymous: "unlocked",
       free: "unlocked",
       "black-card": "unlocked",
-      founders27: "unlocked",
     },
   },
   {
@@ -70,7 +70,6 @@ const FEATURES: Feature[] = [
       anonymous: "unlocked",
       free: "unlocked",
       "black-card": "unlocked",
-      founders27: "unlocked",
     },
   },
   {
@@ -80,7 +79,6 @@ const FEATURES: Feature[] = [
       anonymous: "unlocked",
       free: "unlocked",
       "black-card": "unlocked",
-      founders27: "unlocked",
     },
   },
   {
@@ -90,7 +88,6 @@ const FEATURES: Feature[] = [
       anonymous: "locked",
       free: "unlocked",
       "black-card": "unlocked",
-      founders27: "unlocked",
     },
   },
   {
@@ -100,7 +97,6 @@ const FEATURES: Feature[] = [
       anonymous: "locked",
       free: "locked",
       "black-card": "unlocked",
-      founders27: "unlocked",
     },
   },
   {
@@ -110,37 +106,15 @@ const FEATURES: Feature[] = [
       anonymous: "locked",
       free: "locked",
       "black-card": "unlocked",
-      founders27: "unlocked",
-    },
-  },
-  {
-    label: "年度 access · 續訂價永遠鎖定(不自動續扣)",
-    detail: "GOLD NT$ 2,700/年 手動續訂 · 月卡 / 季票永遠不會自動綁您",
-    unlock: {
-      anonymous: "locked",
-      free: "locked",
-      "black-card": "locked",
-      founders27: "unlocked",
-    },
-  },
-  {
-    label: "BOTTOM 27 早鳥獨家虛擬資產",
-    detail: "ZONE 27 ↔ BOTTOM 27 雙生品牌 cross-promotion · GOLD only",
-    unlock: {
-      anonymous: "locked",
-      free: "locked",
-      "black-card": "locked",
-      founders27: "unlocked",
     },
   },
   {
     label: "恆美 × 伶 Kopi 紅茶招待 QR(台南)",
-    detail: "實體 ecosystem 整合 · GOLD 持卡實體驗證",
+    detail: "實體 ecosystem 整合 · BLACK 持卡實體驗證",
     unlock: {
       anonymous: "locked",
       free: "locked",
-      "black-card": "locked",
-      founders27: "unlocked",
+      "black-card": "unlocked",
     },
   },
 ];
@@ -180,22 +154,14 @@ const TIER_META: Record<
     href: "/membership/black-card",
     accent: "text-bone",
   },
-  founders27: {
-    label: "GOLD",
-    en: "GOLD",
-    price: "NT$ 2,700",
-    priceUnit: "/ 年 · GOLD 會員",
-    href: "/founders",
-    accent: "text-gold",
-  },
 };
 
-const TIER_ORDER: TierKey[] = ["anonymous", "free", "black-card", "founders27"];
+const TIER_ORDER: TierKey[] = ["anonymous", "free", "black-card"];
 
 const STORAGE_KEY = "zone27_preview_tier";
 
 function isTierKey(v: string): v is TierKey {
-  return v === "anonymous" || v === "free" || v === "black-card" || v === "founders27";
+  return v === "anonymous" || v === "free" || v === "black-card";
 }
 
 export default function TierFeatureMatrix() {
@@ -258,7 +224,7 @@ export default function TierFeatureMatrix() {
           lang="en"
           className="font-mono text-gold text-[10px] tracking-[0.4em]"
         >
-          / TIER FEATURE MATRIX · 4 tiers 並列
+          / TIER FEATURE MATRIX · 3 tiers 並列
         </p>
         {mounted && activeTier && (
           <p className="font-mono text-loss/80 text-[10px] tracking-[0.3em]">
@@ -268,7 +234,7 @@ export default function TierFeatureMatrix() {
       </div>
 
       <p className="text-mute text-sm leading-relaxed mb-6 max-w-3xl">
-        4 tier 並列 feature matrix · 每個 cell 顯示該 tier 的 unlock 狀態。
+        3 tier 並列 feature matrix · 每個 cell 顯示該 tier 的 unlock 狀態。
         看到 🔒 表示「升級到此 tier 才解鎖」 ·{" "}
         <span className="text-gold">點 tier header</span>{" "}
         切換 active preview ·{" "}
@@ -277,7 +243,7 @@ export default function TierFeatureMatrix() {
       </p>
 
       {/* ── Tier headers · clickable per-tier preview switch ── */}
-      <div className="grid grid-cols-4 gap-1 sm:gap-2 mb-3">
+      <div className="grid grid-cols-3 gap-1 sm:gap-2 mb-3">
         {TIER_ORDER.map((tierKey) => {
           const meta = TIER_META[tierKey];
           const isActive = activeTier === tierKey;
@@ -321,14 +287,14 @@ export default function TierFeatureMatrix() {
         })}
       </div>
 
-      {/* ── Feature matrix ── R112 W1 · grid ratio 2fr label + 4 × minmax(0,1fr)
-          tier cells · mobile 375px label gets 120px + 4 × 60px cells · 不 wrap
+      {/* ── Feature matrix ── R112 W1 · grid ratio 2fr label + 3 × minmax(0,1fr)
+          tier cells · mobile 375px label gets 120px + 3 × 60px cells · 不 wrap
           中文 feature label 太多 · sm+ wider tier cells for full UNLOCKED/升級 text。 */}
       <div className="border border-line/40">
         {FEATURES.map((feature, idx) => (
           <div
             key={feature.label}
-            className={`grid grid-cols-[2fr_repeat(4,minmax(0,1fr))] gap-1 sm:gap-2 px-2 sm:px-3 py-2.5 sm:py-3 text-[11px] sm:text-xs ${
+            className={`grid grid-cols-[2fr_repeat(3,minmax(0,1fr))] gap-1 sm:gap-2 px-2 sm:px-3 py-2.5 sm:py-3 text-[11px] sm:text-xs ${
               idx % 2 === 0 ? "bg-slate/10" : "bg-transparent"
             }`}
           >
@@ -362,7 +328,7 @@ export default function TierFeatureMatrix() {
           difference · /admin 此 matrix 是 comparison view 不會 self-change · 此 hint
           surface「verify visible difference 該去哪些 page」 · 同 GitHub Copilot
           dashboard「here's where to verify」 pattern。 */}
-      <div className="mt-5 grid sm:grid-cols-3 gap-2">
+      <div className="mt-5 grid sm:grid-cols-2 gap-2">
         <Link
           href="/member"
           className="border border-gold/40 bg-slate/30 hover:bg-slate/50 hover:border-gold/60 px-3 py-2 transition-colors group"
@@ -371,7 +337,7 @@ export default function TierFeatureMatrix() {
             → /member dashboard
           </p>
           <p className="text-mute group-hover:text-bone text-[11px] leading-snug transition-colors">
-            tier-aware <strong className="text-bone">PaidTierLockedGrid</strong> · BLACK + GOLD unlock preview
+            tier-aware <strong className="text-bone">PaidTierLockedGrid</strong> · BLACK unlock preview
           </p>
         </Link>
         <Link
@@ -385,22 +351,11 @@ export default function TierFeatureMatrix() {
             「引擎永久免費 · 您付的是身份」 inverse-paywall single-line(R111 W3)
           </p>
         </Link>
-        <Link
-          href="/founders"
-          className="border border-gold/40 bg-slate/30 hover:bg-slate/50 hover:border-gold/60 px-3 py-2 transition-colors group"
-        >
-          <p className="font-mono text-gold/85 text-[9px] tracking-[0.3em] mb-1">
-            → /founders
-          </p>
-          <p className="text-mute group-hover:text-bone text-[11px] leading-snug transition-colors">
-            GOLD · 最高階年度會員 · NT$ 2,700/年 · 會員不限量
-          </p>
-        </Link>
       </div>
 
-      {/* R113 W1 · 4 bookmarkable URL deep links · per Tim 2026-05-25「我要
-          怎麼分別登入?」 · 答案:不是 4 個 login account(per [[zone27-payment-
-          architecture]] manual ECPay · 沒 paid auth gate by design)· 而是 4
+      {/* R113 W1 · 3 bookmarkable URL deep links · per Tim 2026-05-25「我要
+          怎麼分別登入?」 · 答案:不是 3 個 login account(per [[zone27-payment-
+          architecture]] manual ECPay · 沒 paid auth gate by design)· 而是 3
           個 URL bookmarkable preview deep link · click 直接進入該 tier
           preview · 同 Stripe Connect ?env=test / Linear team switcher pattern。 */}
       <div className="mt-6 border border-gold/30 bg-navy/40 p-4 sm:p-5">
@@ -409,18 +364,18 @@ export default function TierFeatureMatrix() {
             lang="en"
             className="font-mono text-gold text-[10px] tracking-[0.35em]"
           >
-            🔗 4 BOOKMARKABLE TIER PREVIEW DEEP LINKS
+            🔗 3 BOOKMARKABLE TIER PREVIEW DEEP LINKS
           </p>
           <p className="font-mono text-mute/70 text-[9px] tracking-[0.25em]">
             click → instant tier preview · 不需先 navigate
           </p>
         </div>
         <p className="text-mute text-[12px] leading-relaxed mb-4">
-          Bookmark 4 個 URL · 替代「4 個 login account」 mental model。
+          Bookmark 3 個 URL · 替代「3 個 login account」 mental model。
           Click 任一 → URL param 自動 set localStorage + 啟動 PreviewModeBanner ·
           無需先訪問 /admin。 適合 dogfood 切換體驗。
         </p>
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
           {TIER_ORDER.map((tierKey) => {
             const meta = TIER_META[tierKey];
             return (
@@ -464,7 +419,7 @@ export default function TierFeatureMatrix() {
           tier preview 是 client-side localStorage state · 工程師 1 分鐘
           DevTools 即可 spoof(設{" "}
           <code className="font-mono text-bone bg-navy/60 px-1 py-0.5 text-[11px]">
-            zone27_preview_tier = founders27
+            zone27_preview_tier = black-card
           </code>{" "}
           )。 任何 client-side state 都會 spoof · 同 Stripe Connect ?env=test ·
           同 Linear dev banner · 不是 bug 是 dev/QA designer tool。
@@ -478,7 +433,7 @@ export default function TierFeatureMatrix() {
         </p>
         <p className="text-mute text-[12px] leading-relaxed">
           <strong className="text-bone">未來 real defense</strong>:
-          當 paid features 真實 ship(R200+ GOLD launch · BLACK
+          當 paid features 真實 ship(BLACK
           recurring)· real gate 由{" "}
           <span className="text-bone">Supabase RLS(Row-Level Security)</span>
           {" + "}

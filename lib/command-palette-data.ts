@@ -173,13 +173,13 @@ export const COMMAND_ITEMS: CommandItem[] = [
   },
   // ── 轉換 ───────────────────────────────────────────
   {
-    label: "會員制 · OPEN / BLACK / GOLD",
+    label: "會員制 · OPEN / BLACK",
     kicker: "/membership",
     path: "/membership",
     group: "轉換",
     keywords: [
       "會員", "membership", "tier", "訂閱", "免費", "free", "付費",
-      "black", "黑卡", "gold", "founder", "方案", "升級", "支持", "金環", "會員房間",
+      "black", "黑卡", "founder", "方案", "升級", "支持", "金環", "會員房間",
     ],
   },
 

@@ -195,7 +195,7 @@ export default async function FaqOgImage() {
             gap: 6,
           }}
         >
-          <FaqLine n="Q6" q="NT$ 2,700 為什麼這麼便宜?" />
+          <FaqLine n="Q6" q="引擎免費,那我付什麼?" />
           <FaqLine n="Q9" q="你們的 AI 預測準確率多高?" />
           <FaqLine n="Q14" q="你們會追蹤我嗎?" highlight />
         </div>

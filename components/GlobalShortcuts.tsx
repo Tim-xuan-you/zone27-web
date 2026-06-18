@@ -25,7 +25,7 @@ const HINT_DURATION_MS = 5_000;
 //   g m → /matches
 //   g t → /track-record
 //   g l → /lab
-//   g f → /founders
+//   g f → /membership(會員)
 //   g a → /audit
 //   g c → /calibration
 //   g r → /roadmap
@@ -58,7 +58,7 @@ const SHORTCUTS: Record<string, string> = {
   m: "/matches",
   t: "/track-record",
   l: "/lab",
-  f: "/founders",
+  f: "/membership",
   a: "/audit",
   c: "/calibration",
   r: "/roadmap",

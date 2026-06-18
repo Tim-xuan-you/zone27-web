@@ -376,8 +376,6 @@ export default function CreatorAnalysis({
                     <p className="font-mono text-mute/45 text-[9px] tracking-[0.1em] leading-relaxed">
                       ▸ 不玩「99 元」那種心理把戲 · 價格乾淨。 賣越貴 · 越要你名字旁的{" "}
                       <span className="text-gold/70">✓ 已驗證準度</span> 撐得起(買家看的是真戰績 · 不是話術)。
-                      {tier !== "founder" &&
-                        "（BLACK 上限 NT$ 200;GOLD 可賣到 NT$ 500）"}
                     </p>
                     <button
                       type="button"
@@ -406,7 +404,7 @@ export default function CreatorAnalysis({
                     href="/membership"
                     className="text-gold/80 underline-offset-4 hover:underline"
                   >
-                    認識 BLACK / GOLD →
+                    認識 BLACK 會員 →
                   </Link>
                 </p>
               ))}

@@ -270,7 +270,7 @@ export default function LabPage() {
           10K 收斂後,下一個 instinct 是「show me where this engine
           has been wrong」· 沒有 /track-record CTA = 高 trust visitor
           無處可去。這兩張卡完成 trust loop:看引擎跑 → 看引擎過去
-          PROVED/DIVERGED 紀錄 → GOLD。和 CUSTOM MODE CTA
+          PROVED/DIVERGED 紀錄 → BLACK(GOLD 已收掉)。和 CUSTOM MODE CTA
           視覺上分層 · 那是「power-user 再玩」· 這是「verify the
           engine has receipts」. */}
       <section
@@ -286,7 +286,7 @@ export default function LabPage() {
         {/* R160 W2.O1 · Agent O Gap 1 · 2-card → 3-card trust loop · /audit
             是 plain-language Model Report entry · Disclosure Philosophy
             canonical home(S05)· 之前 lab 跑完訪客找「why trust this output」
-            必須 exit page through Cmd-K · /track-record + /audit + /founders
+            必須 exit page through Cmd-K · /track-record + /audit + /membership
             three-card 完整 trust loop · per Anthropic transparency hub pattern。 */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
           <Link
@@ -324,20 +324,20 @@ export default function LabPage() {
             </p>
           </Link>
           <Link
-            href="/founders"
+            href="/membership"
             className="block p-5 sm:p-6 border border-gold/40 hover:border-gold transition-colors group bg-gold/5"
           >
             <p
               lang="en"
               className="font-mono text-gold/70 group-hover:text-gold text-[10px] tracking-[0.35em] mb-2 transition-colors"
             >
-              GOLD · 最高階年度
+              BLACK · 黑卡會員
             </p>
             <h3 className="text-lg text-bone font-light tracking-tight mb-2">
-              引擎免費 · 養著它的最高階身分 →
+              引擎免費 · 養著它的身分 →
             </h3>
             <p className="font-mono text-mute/70 text-[10px] tracking-[0.25em]">
-              NT$ 2,700/年 · 會員不限量 · 最高階支持身分
+              NT$ 500 / 31 天 · 支持開放引擎
             </p>
           </Link>
         </div>

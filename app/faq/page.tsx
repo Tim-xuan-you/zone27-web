@@ -7,7 +7,7 @@ import RelatedReading from "@/components/RelatedReading";
 export const metadata: Metadata = {
   title: "FAQ — 預先掃雷的 15 個問題",
   description:
-    "ZONE 27 是什麼?是博彩嗎?是傳銷嗎?GOLD 跟 BLACK 差別?付款什麼時候開放?15 個誠實到不能再誠實的回答 — 包括「你們會追蹤我嗎?」(不會)+「跟 MLM 有什麼不同?」(全方位不同)。",
+    "ZONE 27 是什麼?是博彩嗎?是傳銷嗎?BLACK 會員是什麼?付款什麼時候開放?誠實到不能再誠實的回答 — 包括「你們會追蹤我嗎?」(不會)+「跟 MLM 有什麼不同?」(全方位不同)。",
 };
 
 type QA = {
@@ -47,7 +47,7 @@ const CATEGORIES: Category[] = [
         a: (
           <>
             棒球場上的最後一個 OUT — 9 局 × 3 個出局數 = 27,也是完美比賽的數字
-            (27 上 27 下)。我們相信 GOLD 會員能用同樣的精準定義這個品牌。
+            (27 上 27 下)。我們相信 BLACK 會員能用同樣的精準定義這個品牌。
             詳見{" "}
             <Link href="/about" className="text-gold underline-offset-4 hover:underline">
               /about 第 6 章 Why 27
@@ -101,11 +101,9 @@ const CATEGORIES: Category[] = [
         id: "no-commission",
         a: (
           <>
-            <strong className="text-bone">GOLD</strong> NT$ 2,700/365 天 · 會員不限量
-            。
             <strong className="text-bone">BLACK</strong> NT$ 500/31 天 × N 訂戶
-            (不自動續扣 · 每 31 天 explicit click)。
-            付費的唯一理由是身分:出錢養著免費引擎 · 戴上一圈支持者金環(GOLD 再多一件:寫信給 Tim 本人親手回)。 準是免費的 —— 含輸命中率、校準、驗證準度標章全靠公開戰績賺,不靠付費解鎖。 創作者只免費公開發 · 平台 0 抽創作者傭。
+            · 會員不限量(不自動續扣 · 每 31 天主動轉帳一次)。
+            付費的唯一理由是身分:出錢養著免費引擎 · 戴上一圈支持者金環,還能寫信給 Tim 本人親手回。 準是免費的 —— 含輸命中率、校準、驗證準度標章全靠公開戰績賺,不靠付費解鎖。 創作者只免費公開發 · 平台 0 抽創作者傭。
             不抽真錢下注的傭 · 不接廣告 / 業配 / 導購分潤。
           </>
         ),
@@ -114,48 +112,22 @@ const CATEGORIES: Category[] = [
   },
   {
     key: "pricing",
-    label: "GOLD & PRICING",
-    zh: "GOLD 會員 / 定價",
+    label: "BLACK & PRICING",
+    zh: "BLACK 會員 / 定價",
     qas: [
-      {
-        q: "GOLD 跟 BLACK 一般會員有什麼差別?",
-        a: (
-          <>
-            <strong className="text-bone">GOLD</strong> 是會員不限量的
-            「NT$ 2,700/365 天 年度會員」。
-            <strong className="text-bone">BLACK</strong> 是 31-day pass NT$ 500/31 天
-            (3 月–11 月 · 240 場 + 季後賽 · ≈ NT$ 6/場 · 手動銀行轉帳 ·
-            不自動續扣 · per /integrity rule #13)。GOLD 是最深一層的支持者:多戴一圈支持者金環、寫信給 Tim 本人親手回、實體店招待。 BLACK 是入門支持者(月度)。完整對照請見{" "}
-            <Link href="/founders" className="text-gold underline-offset-4 hover:underline">
-              /founders
-            </Link>
-            。
-          </>
-        ),
-      },
-      {
-        q: "NT$ 2,700 為什麼這麼便宜?",
-        a: (
-          <>
-            因為 GOLD 是年費 · 每年續訂價永遠不漲。 跟 BLACK 比:黑卡一年約
-            12 期 × NT$ 500 = NT$ 6,000 · GOLD NT$ 2,700/年(含 BLACK 全部身分)
-            等於省 55%。
-          </>
-        ),
-      },
       {
         q: "付款系統現況?",
         a: (
           <>
             <span className="font-mono text-gold">BLACK CPBL 季票 · 手動銀行轉帳</span>
             (NT$ 500/31 天 · 每 31 天你主動轉帳一次 · 不自動續扣)。
-            <span className="font-mono text-gold mx-1">GOLD payment infra 就緒後開放</span>
+            <span className="font-mono text-gold mx-1">付款系統就緒後開放</span>
             (milestone-triggered · 不綁日期)。 在此之前,加入等候名單 =
             排隊優先權,<strong className="text-bone">完全免費</strong>,
             不收任何資料以外的東西。下方按鈕直接加入:
             <br />
             <Link
-              href="/founders"
+              href="/membership"
               className="inline-block mt-3 font-mono text-gold text-[10px] tracking-[0.3em] underline underline-offset-4"
             >
               加入等候名單 →
@@ -169,7 +141,7 @@ const CATEGORIES: Category[] = [
         a: (
           <>
             <strong className="text-bone">14 天無條件退款。</strong>{" "}
-            寄信 tatayngiti@gmail.com · 主旨「REFUND · ZONE 27 GOLD」 · Tim 48h 回覆
+            寄信 tatayngiti@gmail.com · 主旨「REFUND · ZONE 27 BLACK」 · Tim 48h 回覆
             確認 · 原戶頭退全額。 不問原因 · 不挽留 · 不問卷 · 不 retention 文案。
             翻倍消保法 § 19 法定 7-day 下限。 完整條款{" "}
             <Link href="/terms" className="text-gold underline-offset-4 hover:underline">
@@ -190,12 +162,12 @@ const CATEGORIES: Category[] = [
             <br />
             <br />
             如果您是 corporate 想用 ZONE 27 · 同 rates 同 access:
-            自己 NT$ 2,700(GOLD)· 或 NT$ 500/31 天(BLACK)· self-serve。
+            自己加入 BLACK NT$ 500/31 天 · self-serve。
             <br />
             <br />
             完整 pricing rationale 見{" "}
-            <Link href="/founders" className="text-gold underline-offset-4 hover:underline">
-              /founders
+            <Link href="/membership" className="text-gold underline-offset-4 hover:underline">
+              /membership
             </Link>
             {" "}的定價推導。
           </>
@@ -207,8 +179,8 @@ const CATEGORIES: Category[] = [
         a: (
           <>
             <strong className="text-bone">沒 downline 結構。</strong>{" "}
-            0 推薦獎金 · 0 多層抽佣 · 0 業績 quota · 0 招募下線 · 會員不限量但零金字塔抽佣 ·
-            GOLD 會員。 我們的收入只有一條腿:會員自己出錢的身分訂閱(NT$ 500 / NT$ 2,700)·
+            0 推薦獎金 · 0 多層抽佣 · 0 業績 quota · 0 招募下線 · 會員不限量但零金字塔抽佣。
+            我們的收入只有一條腿:會員自己出錢的身分訂閱(BLACK NT$ 500/31 天)·
             出錢養著免費引擎 · 沒有下線、沒有層層分潤。
           </>
         ),
@@ -321,7 +293,7 @@ const CATEGORIES: Category[] = [
         a: (
           <>
             Tim 同步開發的棒球經營手遊 · 雙生品牌 · 共用「27」概念與深藏青 × 冷金視覺。
-            GOLD 會員未來自動獲得 BOTTOM 27 獨家虛擬資產。
+            BLACK 會員未來自動獲得 BOTTOM 27 獨家虛擬資產。
           </>
         ),
       },
@@ -439,7 +411,7 @@ export default function FaqPage() {
             進入實驗室 →
           </Link>
           <Link
-            href="/founders"
+            href="/membership"
             className="px-8 py-3 bg-gold text-navy text-xs tracking-[0.3em] hover:bg-gold-soft transition-colors"
           >
             加入等候名單 →

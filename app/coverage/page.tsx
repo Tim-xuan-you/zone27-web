@@ -68,7 +68,7 @@ const ACTIVE_LEAGUES: LeagueRow[] = [
     code: "CPBL",
     zh: "中華職棒",
     source: "stats.cpbl.com.tw · 官方公開資料 · 由 Tim 親手讀過每一場 + 寫進引擎",
-    sampleNote: "目標 ~240 場/年 · 創辦人親自 curate · 自動化等 GOLD 滿員後啟動",
+    sampleNote: "目標 ~240 場/年 · 創辦人親自 curate · 自動化等規模到時啟動",
     status: "HAND_CURATED",
     statusLabel: "HAND-CURATED",
   },
@@ -432,7 +432,7 @@ export default function CoveragePage() {
             <LeagueTable rows={TRACKED_NOT_ACTIVE} />
           </section>
 
-          {/* ── 04 REQUESTED BY GOLD ──────────────── */}
+          {/* ── 04 REQUESTED · ON QUEUE(任何會員都能提 · 原 GOLD 已收掉)── */}
           <section className="py-12 border-b border-line/40 section-reveal">
             <p lang="en" className="font-mono text-mute text-[10px] tracking-[0.45em] mb-4">
               04 REQUESTED · ON QUEUE
@@ -560,18 +560,18 @@ export default function CoveragePage() {
             <p className="text-mute leading-relaxed mb-8 max-w-2xl">
               ZONE 27 找的不是「想要更多賽事預測」的人 — 那是博彩平台的客戶。
               我們找的是「**寧可少看一場,也不要看雜訊**」的人。如果這聽起來像您,
-              <Link href="/founders" className="text-gold hover:text-gold-soft transition-colors">
-                {" "}GOLD 會員{" "}
+              <Link href="/membership" className="text-gold hover:text-gold-soft transition-colors">
+                {" "}BLACK 會員{" "}
               </Link>
               還開著。
             </p>
 
             <div className="flex flex-wrap items-center gap-4">
               <Link
-                href="/founders"
+                href="/membership"
                 className="inline-flex items-center gap-2 px-5 py-3 bg-gold text-navy hover:bg-gold-soft transition-colors font-mono text-[11px] tracking-[0.3em]"
               >
-                加入 GOLD 會員 →
+                加入 BLACK 會員 →
               </Link>
               <Link
                 href="/audit"

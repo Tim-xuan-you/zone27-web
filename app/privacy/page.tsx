@@ -41,7 +41,7 @@ export default function PrivacyPage() {
       <Section no="01" label="SCOPE" zh="適用範圍">
         <p>
           本政策適用於 <Code>zone27-web.vercel.app</Code> 與其所有子路徑。
-          當您訪問本網站、加入 GOLD 等候名單,或使用任何互動功能時,
+          當您訪問本網站、加入會員等候名單,或使用任何互動功能時,
           皆受本政策約束。
         </p>
       </Section>
@@ -81,14 +81,14 @@ export default function PrivacyPage() {
           </li>
         </ul>
         <p className="text-mute/80 mt-6">
-          就這 5 個欄位 in waitlist · 4 fields in{" "}
+          就這 5 個欄位 in waitlist · 另有{" "}
           <Link
-            href="/founders/apply"
+            href="/membership"
             className="text-gold underline-offset-4 hover:underline"
           >
-            /founders/apply
+            會員申請資料
           </Link>
-          {" "}per Section 02B below · 共 9 fields total。 就這些 · 沒有藏起來的欄位。
+          {" "}見下方 Section 02B · 就這些 · 沒有藏起來的欄位。
         </p>
       </Section>
 
@@ -99,16 +99,16 @@ export default function PrivacyPage() {
           self-falsifiable in 30 seconds via DevTools Network on /founders/apply
           submit。 此 section codify NEW PII collection + retention policy +
           per-field rationale · brand IP「方法公開」 axiom 物理 codify · 不藏。 */}
-      <Section no="02B" label="GOLD APPLICATION DATA · 申請資料" zh="申請 GOLD 額外 4 欄">
+      <Section no="02B" label="MEMBER APPLICATION DATA · 申請資料" zh="會員申請額外 4 欄">
         <p>
-          2026-05-23 上線的{" "}
+          會員{" "}
           <Link
-            href="/founders/apply"
+            href="/membership"
             className="text-gold underline-offset-4 hover:underline"
           >
-            /founders/apply
+            申請表
           </Link>{" "}
-          · GOLD 申請表。 該 form 收{" "}
+          收{" "}
           <strong className="text-bone">4 個額外欄位</strong>(Section 02 waitlist
           5 欄之外)· Tim 親手 onboard 1-3 days。 此 section codify 該 4 欄資料
           用途 + 保留期間 + per-field rationale:
@@ -186,12 +186,12 @@ export default function PrivacyPage() {
           <li>✕ 沒有 IP 蒐集(Vercel 預設不對外公開)</li>
           <li>✕ 沒有信用卡 / 卡號(付費會員走手動銀行轉帳 · 不經過我們)</li>
           <li>
-            ✕ 沒有個人身分資料 <strong className="text-bone">(/founders + waitlist 部分)</strong>{" "}
+            ✕ 沒有個人身分資料 <strong className="text-bone">(會員 + waitlist 部分)</strong>{" "}
             · 但{" "}
             <Link href="#section-02b" className="text-gold underline-offset-4 hover:underline">
               Section 02B
             </Link>{" "}
-            /founders/apply 確實收 name + email + cpbl_connection + why_zone27 ·
+            會員申請表 確實收 name + email + cpbl_connection + why_zone27 ·
             因為人工 onboard 需要(不藏)
           </li>
           <li>✕ 沒有電話 / 地址(application 也不收)</li>
@@ -395,7 +395,7 @@ export default function PrivacyPage() {
             主動要求刪除 OR ZONE 27 brand 永久關閉 · whichever first
           </li>
           <li>
-            <strong className="text-bone">GOLD 會員紀錄</strong> · 永久
+            <strong className="text-bone">BLACK 會員紀錄</strong> · 永久
             保留 · 您即使退款 · 歷史記錄仍保留(release reserved 標記但保留
             紀錄)
           </li>
@@ -414,7 +414,7 @@ export default function PrivacyPage() {
         <ul className="space-y-2">
           <li>
             <strong className="text-bone">PDPA 第 19 條</strong>(蒐集前告知)
-            · 我們蒐集您的 email 限於「launch 通知」 + 「GOLD onboarding
+            · 我們蒐集您的 email 限於「launch 通知」 + 「BLACK onboarding
             個人化 email」 · 不作任何 marketing / cross-selling / 廣告投放 /
             個資 monetization 用途。
           </li>
@@ -454,9 +454,9 @@ export default function PrivacyPage() {
             /ethics#bus-factor 公開的接管安排
           </li>
           <li>
-            <strong className="text-bone">GOLD 退款優先</strong> · 即使
+            <strong className="text-bone">BLACK 退款優先</strong> · 即使
             14 天 cooling-off window 已過 · 這個緊急情境啟動時當期未用完的
-            年度 access 按剩餘天數比例退款(NT$ 2,700 × 剩餘天數 / 365)·
+            會員 access 按剩餘天數比例退款(NT$ 500 × 剩餘天數 / 31)·
             executor 親手處理 · 不外包 · per Taiwan 消保法 § 19 spirit
             extension
           </li>

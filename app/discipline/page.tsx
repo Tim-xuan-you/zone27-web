@@ -116,10 +116,10 @@ export default function DisciplinePage() {
 
             <Subhead>ZONE 27 應用</Subhead>
             <List>
-              <Item label="GOLD 會員 · 永久">
-                GOLD 不是「early bird 折扣」,
-                是<strong className="text-bone">一輩子</strong>關係。
-                這份 GOLD 身分永久屬於您 · Buffett 的 forever holding 哲學寫進這份關係裡。
+              <Item label="BLACK 會員 · 長期關係">
+                BLACK 不是「一次性買賣」,
+                是<strong className="text-bone">一輩子</strong>跟創辦人的關係。
+                每 31 天您主動回來、Tim 親手回您一封信 · Buffett 的 forever holding 哲學寫進這份關係裡。
               </Item>
               <Item label="壞消息誠實揭露">
                 <Link href="/audit" className="text-gold hover:underline">
@@ -238,7 +238,7 @@ export default function DisciplinePage() {
             <List>
               <Item label="會員制 > 商品收費">
                 引擎 markup = 0%(永遠免費)·
-                BLACK NT$ 500/31 天 + GOLD NT$ 2,700/365 天 = membership revenue ·
+                BLACK NT$ 500/31 天 = membership revenue ·
                 跟 Costco 一樣 — 「賣會員身分,不賣商品本身」。
               </Item>
               <Item label="不自動續扣">
@@ -316,7 +316,7 @@ export default function DisciplinePage() {
               </Item>
               <Item label="Quality of 1 > Quantity of 100">
                 Jobs 名言「我寧願有 1 個 A 級人才,不要 100 個 B 級」。
-                ZONE 27 版:GOLD 會員 · Tim 一個一個親手 onboard(每位 12-15 分鐘)·
+                ZONE 27 版:BLACK 會員 · Tim 一個一個親手 onboard(每位 12-15 分鐘)·
                 不外包、不批量。 會員不限量 · 但「親手」這件事每一位都一樣 · 不稀釋。
               </Item>
               <Item label="Design is how it works">
@@ -380,7 +380,7 @@ export default function DisciplinePage() {
             <SynthRow
               axis="A · 長期 > 短期"
               examples="Buffett 26 年持 Coca-Cola · Musk 10-year SpaceX roadmap · Costco 7 年才漲一次會費 · Jobs iPhone 從 2000 概念到 2007 發布 7 年"
-              z27="365 天年度會員 · 不收量化分數 · 拒絕季度 KPI 誘惑"
+              z27="31 天會員 · 每期主動重新加入 · 不收量化分數 · 拒絕季度 KPI 誘惑"
             />
             <SynthRow
               axis="B · 集中 > 分散"

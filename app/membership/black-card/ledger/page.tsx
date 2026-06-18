@@ -118,12 +118,6 @@ export default function BlackCardLedgerPage() {
                 >
                   → BLACK 完整介紹
                 </Link>
-                <Link
-                  href="/founders"
-                  className="inline-block px-6 py-3 border border-gold/50 text-gold font-mono text-[10px] tracking-[0.3em] hover:bg-gold/10 transition-colors"
-                >
-                  → GOLD 介紹
-                </Link>
               </div>
             </div>
           ) : (

@@ -525,10 +525,10 @@ export default function MatchSimulator({ match }: Props) {
             <p className="mt-6 pt-5 border-t border-gold/20 font-mono text-mute/80 text-[10px] tracking-[0.3em] tabular">
               喜歡這個引擎? ·{" "}
               <Link
-                href="/founders"
+                href="/membership"
                 className="text-gold hover:text-gold-soft underline-offset-4 hover:underline transition-colors"
               >
-                成為 GOLD →
+                成為 BLACK 會員 →
               </Link>
             </p>
           </div>

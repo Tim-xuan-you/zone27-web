@@ -358,7 +358,7 @@ export default function ProfileView({ profile, identity: id, streak, soccer, ser
             href="/membership"
             className="text-gold/75 hover:text-gold underline-offset-4 hover:underline transition-colors"
           >
-            認識 BLACK / GOLD →
+            認識 BLACK 會員 →
           </Link>
         </p>
       </section>

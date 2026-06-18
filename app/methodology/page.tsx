@@ -108,14 +108,6 @@ export default function MethodologyPage() {
               <span className="text-mute/60">RECEIPTS</span>{" "}
               <span className="text-bone">N=1 · 1 PROVED · 0 DIVERGED</span>
             </li>
-            <li className="font-mono tabular">
-              <span className="text-mute/60">GOLD</span>{" "}
-              <span className="text-bone">7 SYSTEM-TEST · 0 real</span>
-            </li>
-            <li className="font-mono tabular">
-              <span className="text-mute/60">BLACK</span>{" "}
-              <span className="text-bone">0 paid subscribers</span>
-            </li>
           </ul>
           <p className="mt-3 text-mute/65 text-[11px] leading-relaxed border-t border-line/40 pt-3">
             完整年度透明報表 · 每年 5/31 publish commitment(同 /audit 的事前承諾原則)·
@@ -541,7 +533,7 @@ repeat 10,000 times → aggregate
           </li>
           <li className="flex gap-3 items-baseline">
             <span className="font-mono text-gold/70 text-[10px] tracking-[0.25em]">▸</span>
-            <span className="flex-1">BLACK / GOLD 不解鎖任何 lens —— 付費是養著它們永遠對所有人免費(身分,不是功能)</span>
+            <span className="flex-1">BLACK 不解鎖任何 lens —— 付費是養著它們永遠對所有人免費(身分,不是功能)</span>
           </li>
         </ul>
 
@@ -913,10 +905,10 @@ repeat 10,000 times → aggregate
             完整實驗室 →
           </Link>
           <Link
-            href="/founders"
+            href="/membership"
             className="px-8 py-3 bg-gold text-navy text-xs tracking-[0.3em] hover:bg-gold-soft transition-colors"
           >
-            加入 GOLD 會員 →
+            加入 BLACK 會員 →
           </Link>
         </div>
 

@@ -5,13 +5,12 @@ import { useMounted } from "@/lib/use-mounted";
 
 // ── ZONE 27 · Admin Tier Switcher ───────────────────────
 // Round 36 W-D · Tim founder dogfood designer dev tool requirement:
-// 切換 4 個 tier 身份 · 看 UI 在每個 tier 怎樣 render · 「功能有沒有到位」。
+// 切換 3 個 tier 身份 · 看 UI 在每個 tier 怎樣 render · 「功能有沒有到位」。
 //
-// 4 tier(對齊 /membership 4-tier ladder):
+// 3 tier(對齊 /membership tier ladder · GOLD 付費層已收掉 · 只剩 BLACK):
 //   - anonymous · 匿名訪客 · 未登入
 //   - free · OPEN · 已登入 · 終身免費
 //   - black-card · BLACK · NT$ 500/31 天(每 31 天手動 ECPay · 不自動續扣 per rule #13)
-//   - founders27 · GOLD · NT$ 2,700/年
 //
 // localStorage-based · 跟 PreviewModeBanner 共享 zone27_preview_tier key。
 // Tim 切換 → reload → 全 page client-side tier-aware components 切換
@@ -39,14 +38,8 @@ const TIERS: { value: string; label: string; body: string; price: string }[] = [
   {
     value: "black-card",
     label: "BLACK",
-    body: "每 31 天手動轉帳 · 金色支持環 + 會員房間 · 你付的是身分不是功能 · 不自動續扣",
+    body: "每 31 天手動轉帳 · 金色支持環 + 會員房間 + Tim 本人親手回信 + 實體店招待 · 你付的是身分不是功能 · 不自動續扣",
     price: "NT$ 500/31 天",
-  },
-  {
-    value: "founders27",
-    label: "GOLD",
-    body: "年度會員 · 金環 + 會員房間 + Tim 本人 1-3 工作天親手回信 + 實體店招待 · 不自動續扣",
-    price: "NT$ 2,700/年",
   },
 ];
 
@@ -151,12 +144,12 @@ export default function AdminTierSwitcher() {
             P
           </kbd>
           {" "}(Win)= 從任何頁面開啟 preview mode banner · 預設「匿名訪客」
-          身份 · 再點 banner 4 tier button 切換 · 不需要登入 · 不需要回此頁。
+          身份 · 再點 banner tier button 切換 · 不需要登入 · 不需要回此頁。
         </p>
       </div>
 
       <p className="text-mute text-sm leading-relaxed mb-5">
-        切換 4 個 tier 身份 · 整站 client-side tier-aware components 跟著切。
+        切換 3 個 tier 身份 · 整站 client-side tier-aware components 跟著切。
         Effect:localStorage override · banner sticky-top 顯示 mode · server-rendered
         content 不變(為 Phase 2 cookie-based 升級保留)。 您 click 任 tier
         立即切換 + reload · 再點 banner「取消」 回真實 session。
@@ -211,7 +204,7 @@ export default function AdminTierSwitcher() {
         ▸ Phase 2 future · cookie-based + server-side tier-aware rendering
         (BLACK-only thread / Lens variety unlock / etc.)
         <br />
-        ▸ 切到 BLACK / GOLD 看 /member · /membership ·
+        ▸ 切到 BLACK 看 /member · /membership ·
         /matches/[gameId] · 全 tier-aware components 跟著切
       </p>
     </div>

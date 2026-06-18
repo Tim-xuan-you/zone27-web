@@ -78,12 +78,12 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
   "/manifesto": [
     { href: "/track-record", kicker: "track-record", title: "公開戰績 · 倒置 II 的物理證據" },
     { href: "/audit", kicker: "audit", title: "Model Report · 倒置 I 的完整證據" },
-    { href: "/founders", kicker: "founders", title: "讀完了 · 成為 GOLD 會員之一" },
+    { href: "/membership", kicker: "membership", title: "讀完了 · 成為撐著它的人" },
   ],
   "/matches/[gameId]": [
     { href: "/track-record", kicker: "track-record", title: "公開戰績 · 引擎每場預測 vs 實際" },
     { href: "/lab", kicker: "lab", title: "親手跑一場推演引擎模擬" },
-    { href: "/founders", kicker: "founders", title: "加入 GOLD · 最高階年度會員" },
+    { href: "/membership", kicker: "membership", title: "會員制 · BLACK 黑卡 · NT$ 500/31 天" },
   ],
   "/track-record": [
     { href: "/member", kicker: "member", title: "你的準度 · 押注命中率從第一注算起" },
@@ -103,7 +103,7 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
   // /annual/2026 已刪 → 換 /audit
   "/membership/black-card/ledger": [
     { href: "/membership/black-card", kicker: "black-card", title: "BLACK 完整介紹 · NT$ 500/31 天" },
-    { href: "/founders", kicker: "founders", title: "GOLD · 最高階年度會員 · NT$ 2,700/年" },
+    { href: "/membership", kicker: "membership", title: "會員全景 · 免費到 BLACK NT$ 500" },
     AUDIT,
   ],
   "/ethics": [
@@ -156,12 +156,12 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
   // /annual/2026 已刪 → 換 /audit
   "/membership": [
     AUDIT,
-    { href: "/founders", kicker: "founders", title: "GOLD 詳情頁 · GOLD 會員 · 年度" },
+    { href: "/membership/black-card", kicker: "black-card", title: "BLACK 黑卡 · NT$ 500/31 天" },
     { href: "/track-record", kicker: "track-record", title: "公開戰績 · 訂閱前先看 N 場 PROVED" },
   ],
   "/member": [
     { href: "/calibration", kicker: "calibration", title: "引擎準不準 · 你要贏過的那台機器自評" },
-    { href: "/membership", kicker: "membership", title: "會員全景 · 從免費到 NT$ 2,700/年" },
+    { href: "/membership", kicker: "membership", title: "會員全景 · 免費到 BLACK NT$ 500" },
     { href: "/manifesto", kicker: "manifesto", title: "為什麼你的資料屬於你自己" },
   ],
   "/login": [
@@ -175,8 +175,8 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
     { href: "/membership", kicker: "membership", title: "撐著它的人 · 支持者金環 + 會員房間" },
     { href: "/track-record", kicker: "track-record", title: "公開戰績 · 引擎每場預測 vs 實際" },
   ],  "/membership/black-card": [
-    { href: "/membership", kicker: "membership", title: "會員全景 · 從免費到 NT$ 2,700/年" },
-    { href: "/founders", kicker: "founders", title: "GOLD · 對照第 4 階 NT$ 2,700/年" },
+    { href: "/membership", kicker: "membership", title: "會員全景 · 免費到 BLACK NT$ 500" },
+    { href: "/membership/black-card/ledger", kicker: "black-card", title: "BLACK 帳本 · NT$ 500/31 天" },
     { href: "/privacy", kicker: "privacy", title: "付款走手動轉帳 · 0 卡號經過我們 · 完整不追蹤清單" },
   ],
   "/integrity": [
@@ -190,11 +190,6 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
     { href: "/audit", kicker: "audit", title: "Model Report · 為什麼 PROVED/DIVERGED 等大" },
   ],
   // /annual/2026 已刪 → 換 /track-record
-  "/founders/apply": [
-    { href: "/founders", kicker: "founders", title: "GOLD 介紹 · 6 件買不到的東西 + 權益" },
-    { href: "/integrity", kicker: "integrity", title: "22 件永遠不變的事 · 修改前 30 天公告" },
-    { href: "/track-record", kicker: "track-record", title: "公開戰績 · 申請前先看引擎真實命中" },
-  ],
 };
 
 export function getRelatedLinks(currentPath: string): RelatedLink[] {

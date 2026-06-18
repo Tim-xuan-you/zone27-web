@@ -44,12 +44,12 @@ export default function EngineFreeBrandBlock() {
         因為架構零邊際成本,所以沒有 paywall 也沒有 rate limit。
         我們靠{" "}
         <Link
-          href="/founders"
+          href="/membership"
           className="text-gold hover:text-gold-soft transition-colors"
         >
-          GOLD 會員
+          BLACK 會員
         </Link>
-        {" "}與 BLACK CPBL 季票社群運作 —— 工具給每個人,身分留給入會的人。
+        {" "}的支持運作 —— 工具給每個人,身分留給入會的人。
       </p>
     </div>
   );

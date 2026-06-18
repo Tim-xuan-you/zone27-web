@@ -42,8 +42,12 @@ const BLACK_PERKS = [
     strong: "只有付費會員進得去的客廳 · 聊球聊判斷,不押注",
   },
   {
-    text: "兩樣都是身分 ——",
-    strong: "其他本來就全免費。 你付的不是功能",
+    text: "寫信給 Tim ·",
+    strong: "本人親手回(1–3 個工作天)· 不外包、不罐頭",
+  },
+  {
+    text: "恆美實體店 ·",
+    strong: "一品紅茶招待(台南 · 恆美攝影 × 伶 Kopi)",
   },
 ];
 
@@ -96,7 +100,7 @@ export default function BlackCardPage() {
 
         {/* ── BLACK 加的兩樣(都是身分,不是功能)── */}
         <p className="font-mono text-gold text-[10px] tracking-[0.4em] mb-4">
-          BLACK 加的 · 兩樣身分的東西
+          BLACK 加的 · 身分的東西
         </p>
         <p className="text-mute text-sm sm:text-base leading-relaxed mb-4">
           一圈<span className="text-gold">金環</span>。 在一個人人曬連勝、輸了就刪文的地方,
@@ -107,6 +111,10 @@ export default function BlackCardPage() {
           再加一間<span className="text-gold">房間</span>。 出錢養著引擎的這群人,有一面只有自己人進得去的
           留言牆 —— 聊球、聊判斷、打個招呼。 不是明牌、不押注,就是一間客廳。
           <span className="text-bone">身分制,不是功能制</span>。
+        </p>
+        <p className="text-mute text-sm sm:text-base leading-relaxed mb-6">
+          還有兩件真人的事:你寫信給 Tim,<span className="text-gold">本人親手回</span>(1–3 個工作天、不外包);
+          到台南恆美實體店,出示會員享<span className="text-gold">一品紅茶招待</span>。
         </p>
 
         {/* ── 直接付款(同錢包 UX · 點了直接給帳號)──── */}
@@ -128,7 +136,7 @@ export default function BlackCardPage() {
             href="/membership"
             className="text-mute hover:text-gold underline-offset-4 hover:underline"
           >
-            比較 BLACK / GOLD →
+            回會員頁 →
           </Link>
         </p>
       </main>

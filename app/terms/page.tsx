@@ -7,7 +7,7 @@ import { createPageMetadata } from "@/lib/page-og";
 export const metadata = createPageMetadata({
   title: "Terms of Service — 我們對您的承諾,您對我們的同意",
   description:
-    "ZONE 27 服務條款 · pre-launch 階段的真實情境合約 · 不是模板 · AI 是娛樂用途 · GOLD waitlist 不收費不綁定 · 含台灣 14-day 退款主動延伸(消保法 § 19 distance-selling)。",
+    "ZONE 27 服務條款 · pre-launch 階段的真實情境合約 · 不是模板 · AI 是娛樂用途 · 會員 waitlist 不收費不綁定 · 含台灣 14-day 退款主動延伸(消保法 § 19 distance-selling)。",
   ogTitle: "Terms of Service · 我們對您的承諾 · ZONE 27",
   ogDescription:
     "pre-launch 真實情境合約 · 不是模板 · 含台灣 14-day 退款主動延伸 · 消保法 § 19",
@@ -76,10 +76,10 @@ export default function TermsPage() {
         </ul>
       </Section>
 
-      {/* ── 04 GOLD WAITLIST ─────────────── */}
-      <Section no="04" label="GOLD WAITLIST" zh="GOLD 等候名單聲明">
+      {/* ── 04 BLACK WAITLIST ─────────────── */}
+      <Section no="04" label="BLACK WAITLIST" zh="BLACK 等候名單 / 訂閱聲明">
         <p>
-          您加入 GOLD waitlist 時,請理解以下事項:
+          您加入會員 waitlist 時,請理解以下事項:
         </p>
         <ul className="space-y-3">
           <li>
@@ -92,7 +92,7 @@ export default function TermsPage() {
           </li>
           <li>
             <strong className="text-bone">不保證最終加入。</strong>
-            GOLD 會員不限量、沒有編號、沒有名額;Tim 親手 review 後可婉拒不適合的申請。
+            BLACK 會員不限量、沒有編號、沒有名額;Tim 親手 review 後可婉拒不適合的申請。
             waitlist 只給優先通知權。
           </li>
           <li>
@@ -104,7 +104,7 @@ export default function TermsPage() {
           </li>
           <li>
             <strong className="text-bone">通道歸因標籤。</strong>
-            若您透過某GOLD 會員的分享連結進入(<Code>?ref=reserve-NNN</Code>),
+            若您透過某會員的分享連結進入(<Code>?ref=reserve-NNN</Code>),
             該標籤會存進您的 waitlist row(<Code>source</Code> 欄位)。
             這是<strong className="text-bone">通道層的彙總</strong>,不是個人追蹤 —
             完整解釋見{" "}
@@ -131,22 +131,29 @@ export default function TermsPage() {
           天</strong> · 翻倍法定下限。
         </p>
 
-        <h3 className="text-bone text-lg mt-6 mb-3">GOLD(NT$ 2,700 / 365 天)</h3>
+        <h3 className="text-bone text-lg mt-6 mb-3">BLACK(NT$ 500 / 31 天)</h3>
         <ul className="space-y-2">
           <li>
-            <strong className="text-bone">14 天無條件退款</strong> · 從 Tim
-            確認您的銀行轉帳入帳 + 您收到 365 天 access confirmation email
-            那天起算 · 14 個自然日內可解除契約。
+            <strong className="text-bone">每期 14 天無條件退款</strong> · 您每 31 天手動
+            轉帳當期 NT$ 500 入帳 + 您收到該期 access confirmation email
+            那天起算 · 14 個自然日內可解除該期契約 · 全額退回 · 不按比例。
           </li>
           <li>
             <strong className="text-bone">退款流程</strong> ·
-            寄信 <Code>tatayngiti@gmail.com</Code> · 主旨 <Code>REFUND · ZONE 27 GOLD</Code>
+            寄信 <Code>tatayngiti@gmail.com</Code> · 主旨 <Code>REFUND · ZONE 27 BLACK</Code>
             (附上您註冊的 email)· Tim 48 hr 內回覆確認 · 同步原匯款
-            銀行戶頭退回 NT$ 2,700 全額。
+            銀行戶頭退回當期 NT$ 500 全額。
           </li>
           <li>
             <strong className="text-bone">不問原因</strong> · 不嘗試挽留 ·
             不要求填問卷 · 不寄挽留文案 · 我們不裝挽留。
+          </li>
+          <li>
+            <strong className="text-bone">沒有 auto-renew</strong> · 同 brand
+            IP「倒置 SaaS · 不自動扣款」(per /membership/black-card + /integrity
+            rule #13 binding · ECPay/TapPay/Stripe 自動扣款全 refused forever)·
+            您不主動轉帳下期 · 服務自然停止 · 不需 cancel button · 不需 exit
+            interview · 不寄 reactivation 文案。
           </li>
           <li>
             <strong className="text-bone">您退款後仍保留</strong> · 已下載的 methodology
@@ -154,35 +161,16 @@ export default function TermsPage() {
             這些不在退款範圍 · 我們無權收回。
           </li>
           <li>
-            <strong className="text-bone">您退款後失去</strong> · 該 365 天 GOLD
-            會員資格(支持者金環 + 會員房間 + Tim 親手回信)· BOTTOM 27 ecosystem
-            cross-pass(未來 ship)。
-          </li>
-        </ul>
-
-        <h3 className="text-bone text-lg mt-6 mb-3">BLACK(NT$ 500/31 天)</h3>
-        <ul className="space-y-2">
-          <li>
-            <strong className="text-bone">每期 14 天退款</strong> · 您每 31 天手動
-            轉帳當期 NT$ 500 入帳後 · 14 個自然日內可解除該期契約 · 全額
-            退回 · 不按比例。
-          </li>
-          <li>
-            <strong className="text-bone">沒有 auto-renew</strong> · 同 brand
-            IP「倒置 SaaS · 不自動扣款」(per /membership/black-card + /integrity
-            rule #13 binding · ECPay/TapPay/Stripe 自動扣款全 refused forever)·
-            您不主動轉帳下季 · 服務自然停止 · 不需 cancel button · 不需 exit
-            interview · 不寄 reactivation 文案。
-          </li>
-          <li>
-            <strong className="text-bone">期中未滿</strong> · 您退款後當期
+            <strong className="text-bone">您退款後失去</strong> · 該期 BLACK
+            會員資格(支持者金環 + 會員房間 + Tim 親手回信)· 期中退款後當期
             access 立即停止 · ZONE 27 不會繼續發您 period-end newsletter ·
-            您也不能 access BLACK-only content 直到下期主動轉帳。
+            您也不能 access BLACK-only content 直到下期主動轉帳 · BOTTOM 27
+            ecosystem cross-pass(未來 ship)。
           </li>
         </ul>
 
         <p className="mt-6 text-mute/85 text-sm">
-          ▸ 完整 refund 政策同步顯示在 <Link href="/founders" className="text-gold underline-offset-4 hover:underline">/founders Payment Trust block</Link>
+          ▸ 完整 refund 政策同步顯示在 <Link href="/membership" className="text-gold underline-offset-4 hover:underline">/membership Payment Trust block</Link>
           + <Link href="/faq" className="text-gold underline-offset-4 hover:underline">/faq Q「14 天退款怎麼運作」</Link>
           + <Link href="/membership/black-card" className="text-gold underline-offset-4 hover:underline">/membership/black-card hero「14-DAY 退款保證」 chip</Link>
           · 三處 surface synchronized · 任何 update 需 30 天前先公告 · per

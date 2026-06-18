@@ -85,7 +85,7 @@ const REDLINES: ReadonlyArray<{ no: string; rule: string; basis: string; revised
   {
     no: "11",
     rule: "不 ship fake testimonials / 偽造 social proof",
-    basis: "等真實 GOLD 會員加入後才放他們的話 · 0 代筆好評 · 0 假推薦 · 0「已有 1000+ 人加入」灌水。",
+    basis: "等真實 BLACK 會員加入後才放他們的話 · 0 代筆好評 · 0 假推薦 · 0「已有 1000+ 人加入」灌水。",
   },
   {
     no: "12",
@@ -123,7 +123,7 @@ const ETHICS_COMMITMENTS: ReadonlyArray<{
   {
     no: "04",
     rule: "0 fake testimonials · 公開 founders 全名清單(Q3+ onboard 後)",
-    basis: "等真實 GOLD 會員加入 6 個月後才放他們的話 · 0 假推薦 · 現在是空的就誠實留空。",
+    basis: "等真實 BLACK 會員加入 6 個月後才放他們的話 · 0 假推薦 · 現在是空的就誠實留空。",
   },
   {
     no: "05",
@@ -287,7 +287,7 @@ export default function IntegrityPage() {
               <strong className="text-bone">這道牆的具體形狀:</strong>
               ZONE 27 引擎 output(K/9 · BB/9 · HR/9 推推演引擎模擬 · 7-LENS
               CANVAS · /audit S02 全部 estimation disclosure)對<strong className="text-bone">
-              FREE tier 訪客 = BLACK 訂閱者 = GOLD 永久會員</strong>
+              FREE tier 訪客 = BLACK 訂閱者</strong>
               · 物理上同一份 lib/simulator.ts 跑出來。 paid tier 買的是 IDENTITY
               (出錢養著免費引擎 + 支持者金環 + 寫信給 Tim 本人親手回)· 不買 engine accuracy
               升級 · 不買 secret edge · 不買 paywall predictions · 連驗證準度標章都免費(靠戰績賺,不靠付費)。
@@ -326,7 +326,7 @@ export default function IntegrityPage() {
                   </p>
                 </div>
                 <p className="text-mute text-[12px] sm:text-sm leading-relaxed">
-                  FREE tier 訪客看到的 win probability = BLACK 訂閱者 = GOLD 永久會員
+                  FREE tier 訪客看到的 win probability = BLACK 訂閱者
                   · 同一個引擎、同一份賽事資料跑出來 · 任何人比對得出來
                   · 違反 = Tim 親手 在 /ethics 紅字標永久 audit trail
                 </p>
