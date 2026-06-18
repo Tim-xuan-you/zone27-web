@@ -108,15 +108,6 @@ const FEATURES: Feature[] = [
       "black-card": "unlocked",
     },
   },
-  {
-    label: "恆美 × 伶 Kopi 紅茶招待 QR(台南)",
-    detail: "實體 ecosystem 整合 · BLACK 持卡實體驗證",
-    unlock: {
-      anonymous: "locked",
-      free: "locked",
-      "black-card": "unlocked",
-    },
-  },
 ];
 
 const TIER_META: Record<

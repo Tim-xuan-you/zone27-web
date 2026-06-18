@@ -45,10 +45,6 @@ const BLACK_PERKS = [
     text: "寫信給 Tim ·",
     strong: "本人親手回(1–3 個工作天)· 不外包、不罐頭",
   },
-  {
-    text: "恆美實體店 ·",
-    strong: "一品紅茶招待(台南 · 恆美攝影 × 伶 Kopi)",
-  },
 ];
 
 export default function BlackCardPage() {
@@ -113,8 +109,7 @@ export default function BlackCardPage() {
           <span className="text-bone">身分制,不是功能制</span>。
         </p>
         <p className="text-mute text-sm sm:text-base leading-relaxed mb-6">
-          還有兩件真人的事:你寫信給 Tim,<span className="text-gold">本人親手回</span>(1–3 個工作天、不外包);
-          到台南恆美實體店,出示會員享<span className="text-gold">一品紅茶招待</span>。
+          還有一件真人的事:你寫信給 Tim,<span className="text-gold">本人親手回</span>(1–3 個工作天、不外包、不罐頭)。
         </p>
 
         {/* ── 直接付款(同錢包 UX · 點了直接給帳號)──── */}

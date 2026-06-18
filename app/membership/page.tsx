@@ -14,16 +14,16 @@ export const metadata: Metadata = {
 export const revalidate = 3600;
 
 // ── ZONE 27 · /membership · R250 收成單一付費層(Tim「GOLD 拿掉 · 先留 BLACK · 極簡」)──
-// 兩層併一層:GOLD 收掉,BLACK 吸收原 GOLD 的真 perk(Tim 親手回信 + 恆美紅茶)= 唯一也是最高。
-// 黑卡本來就是頂級的代名詞,GOLD 拿掉後不必改名。 一張卡、四句話、小學生看得懂。
-// 🔴 守紅線:付費=身分非功能 · 準是免費 · 0 假稀缺 · 0 自動續扣 · perk 只用白名單(金環/房間/Tim 親手回信/恆美/未來球員卡)。
+// 兩層併一層:GOLD 收掉,BLACK 吸收原 GOLD 的真 perk(Tim 親手回信)= 唯一也是最高。
+// 黑卡本來就是頂級的代名詞,GOLD 拿掉後不必改名。 一張卡、小學生看得懂。
+// 🔴 R250② 恆美實體店紅茶招待先拿掉(Tim:實體店面還沒規劃好 · 不承諾還沒準備好的東西 = Defector 式誠實)。
+// 🔴 守紅線:付費=身分非功能 · 準是免費 · 0 假稀缺 · 0 自動續扣 · perk 只用白名單(金環/房間/Tim 親手回信/未來球員卡)。
 // ─────────────────────────────────────────────────────
 
 const PERKS = [
   { text: "金色支持環 ·", strong: "公開檔 / 脈動 / 天梯都看得到你" },
   { text: "會員房間 ·", strong: "只有自己人進得去的客廳" },
   { text: "寫信給 Tim ·", strong: "本人親手回(1–3 個工作天)" },
-  { text: "恆美實體店 ·", strong: "一品紅茶招待" },
 ];
 
 export default function MembershipPage() {
