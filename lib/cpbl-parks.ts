@@ -138,6 +138,19 @@ export const cpblParks: ParkFactor[] = [
     tilt: "pitcher",
     rationale: "2006 開幕 · 中外野深 · 大型場 · 海平面 · 略偏投手",
   },
+  {
+    // 2026-06-18 ingest 補:統一獅 2026 新主場 · 台南安南區 · 自台南市立棒球場遷入
+    //（2026-03-29 首戰統一 vs 台鋼）· 台灣最大戶外球場 25,000 席 · cpbl-260618-01 使用。
+    venue: "亞太棒球村",
+    en: "ASIA PACIFIC",
+    homeTeam: "統一獅",
+    openedYear: 2026,
+    // 新場 · 職棒樣本極少 → 場地 tilt 未知 · 誠實採 CPBL 聯盟 baseline(ESTIMATE · per /audit S02)
+    estimatedHomeWinPct: 53,
+    estimatedRunsPerGame: 9.5,
+    tilt: "neutral",
+    rationale: "2026 啟用 · 統一獅新主場(台南安南區 · 台灣最大戶外球場 25,000 席)· 職棒樣本少 · 採聯盟 baseline",
+  },
 ];
 
 export function getParkFactorByVenue(venue: string): ParkFactor | null {

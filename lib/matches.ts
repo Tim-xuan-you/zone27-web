@@ -89,6 +89,60 @@ function mergePitcherStats(p: PitcherStats): PitcherStats {
 }
 
 const rawMatches: Match[] = [
+  // ── 2026-06-18 · 一軍 ingest(週四)· Tim 截圖 cpbl.com.tw 賽程 + 先發投手成績表 ──
+  //   投手值由官網累計成績表(IP/K/BB/HR)換算 · 標 estimate(自 Tim 截圖手抄)· winRate 手 curate
+  //   (ERA+控球+主場+隊伍 W-L · 接近五五波就誠實低 conviction)· 天氣不建模(/audit S02)。
+  //   🔴 誠實邊界:同日 #170(味全 vs 樂天 @樂天桃園)、#171(富邦 vs 中信 @洲際)Tim 只給隊伍/投手名、
+  //     沒給先發投手成績表 → 不憑空捏造投手數據污染永久帳本,暫不收(補上官網成績表即補 · 同 6/17 #168 處理)。
+  //   #169 亞太 · 台鋼(後勁 away)vs 統一(獅帝芬 home)· W-L 台鋼 28-24-1(.538)/ 統一 26-25-1(.510)
+  //     兩隊戰績近五五波(台鋼小幅領先)。 先發:統一獅帝芬 2026 ERA 3.09 / BB9 2.9 / WHIP 1.25(穩、控球好);
+  //     台鋼後勁 2026 ERA 4.33 看似差,但底子優於 ERA —— BAA .235 / HR9 0.17(不被扎實打、極少被轟)、是
+  //     BB9 4.0(控球亂)把 ERA 拉高 · 2025 曾 1.89 王牌底 → 兩位先發差距比帳面 ERA 小。 剩主場 + 獅帝芬當下
+  //     狀態穩 → 統一 lean;但台鋼戰績略佳 + 後勁底子/上限 → 不裝把握 → 統一 55 / 台鋼 45 · conf 52。
+  {
+    id: "cpbl-260618-01",
+    league: "CPBL",
+    date: "2026 · 06 · 18  ·  星期四",
+    startTime: "18:35",
+    venue: "亞太棒球村",
+    home: {
+      name: "統一獅",
+      en: "LIONS",
+      pitcher: {
+        name: "獅帝芬",
+        era: "3.09", // estimate · 2026 官網累計成績表(Tim 截圖手抄)· 58.1 IP(10 先發)· 穩、控球好
+        k9: "6.5", // estimate · 42 K / 58.1 IP × 9
+        whip: "1.25", // estimate · 官網每局被上壘率 1.251(54 H + 19 BB / 58.1 IP)
+        bb9: "2.9", // estimate · 19 BB / 58.1 IP × 9 · 控球佳
+        hr9: "0.31", // estimate · 2 HR / 58.1 IP × 9
+      },
+      recent: ["W", "L", "W", "L", "W"], // placeholder · 統一 26-25-1(.510)
+      winRate: 55,
+    },
+    away: {
+      name: "台鋼雄鷹",
+      en: "HAWKS",
+      pitcher: {
+        name: "後勁",
+        era: "4.33", // estimate · 2026 官網累計成績表(Tim 截圖手抄)· 54 IP(10 先發)· ERA 被控球拉高、底子優於帳面
+        k9: "7.3", // estimate · 44 K / 54 IP × 9
+        whip: "1.33", // estimate · 官網每局被上壘率 1.333(48 H + 24 BB / 54 IP)
+        bb9: "4.0", // estimate · 24 BB / 54 IP × 9 · 控球亂(ERA 主因)
+        hr9: "0.17", // estimate · 1 HR / 54 IP × 9 · 極少被轟(底子優於 ERA)
+      },
+      recent: ["W", "W", "L", "W", "L"], // placeholder · 台鋼 28-24-1(.538)
+      winRate: 45,
+    },
+    topScores: [
+      // 兩位 3-4 ERA 先發(獅帝芬穩 / 後勁控球亂可能多給分)→ 中分;統一主場 lean(格式 home : away = 統一 : 台鋼)
+      { score: "3 : 2", probability: 9.0 },
+      { score: "4 : 3", probability: 8.0 },
+      { score: "3 : 1", probability: 7.5 },
+      { score: "2 : 1", probability: 7.5 },
+      { score: "4 : 2", probability: 7.0 },
+    ],
+    aiConfidence: 52,
+  },
   // ── 2026-06-17 · 一軍 ingest(週三)· Tim 截圖 cpbl.com.tw 賽程 + 先發投手成績表 ──
   //   投手值由官網累計成績表(IP/K/BB/HR)換算 · 標 estimate(自 Tim 截圖手抄 · 未走自動 leaderboard)·
   //   winRate 手 curate(ERA+控球+主場+隊伍 W-L · 接近五五波就誠實低 conviction)· 天氣不建模(/audit S02)。
