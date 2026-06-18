@@ -55,6 +55,8 @@ const nextConfig: NextConfig = {
       { source: "/hey-tim", destination: "/faq", permanent: false },
       { source: "/now", destination: "/roadmap", permanent: false },
       { source: "/changelog", destination: "/roadmap", permanent: false },
+      // /founders/ledger · R187 270 名額帳本已收掉(會員不限量)· 舊連結 / 已寄出的信不 404。
+      { source: "/founders/ledger", destination: "/founders", permanent: false },
     ];
     // /tim → 創辦人公開帳本 /u/[他的永久碼](R238 · Michelin 記分板捷徑)。
     // 乾淨的路由層 307(無 1 秒 meta-refresh)· FOUNDER_AUTHOR_CODE(Vercel env · build 時讀)

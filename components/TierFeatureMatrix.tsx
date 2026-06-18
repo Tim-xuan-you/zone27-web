@@ -393,7 +393,7 @@ export default function TierFeatureMatrix() {
             → /founders
           </p>
           <p className="text-mute group-hover:text-bone text-[11px] leading-snug transition-colors">
-            Patek-style 270 limited founder seat allocation · GOLD sales page
+            GOLD · 最高階年度會員 · NT$ 2,700/年 · 會員不限量
           </p>
         </Link>
       </div>

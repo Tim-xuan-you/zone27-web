@@ -23,8 +23,8 @@ import {
 //
 // brand IP fit:
 //   - per [[feedback-founder-dogfood-canary]] · Tim capacity disclosed
-//   - per [[zone27-disclosure-philosophy]] · refusal-reason-sample link
-//     · /founders/ledger 5-step rules + sample rationales published
+//   - per [[zone27-disclosure-philosophy]] · 拒絕標準在 /founders/apply
+//     的 RefusalLedgerHint(#refusals)· 不再連已刪的 /founders/ledger
 //   - per /audit S05 PRE-COMMIT · SLA commitment binding · 30-day notice
 //   - per Patek dealer model · 「I will personally call you」 inverted
 //     to「Tim will personally email you」 1-3 days · 不外包 axiom
@@ -124,28 +124,26 @@ export default function TimResponseSLA() {
             {state.publishedRefusalCount !== null ? (
               <>{state.publishedRefusalCount} 件 published</>
             ) : (
-              <>TBD · sample 規則 in /founders/ledger</>
+              <>見下方 § 拒絕標準</>
             )}
           </span>
         </div>
       </div>
 
       <p className="font-mono text-mute/70 text-[10px] tracking-[0.22em] leading-relaxed mt-3">
-        {/* R74 W-G · C4 fix · href now points to /founders/ledger#refusals
-            (RefusalLedgerHint id="refusals" anchor)· bidirectional cross-
-            link contract honored · 同 R74 W-B RefusalLedgerHint comment
-            spec · refusal-as-reciprocity pairing 物理 codify。 */}
-        ⚓ 拒絕原因 sample 公開 in{" "}
+        {/* 拒絕標準在同一頁的 RefusalLedgerHint(id="refusals")· 同頁 anchor · 不再
+            連已刪的 /founders/ledger。 */}
+        ⚓ 拒絕標準申請前先公開在下方{" "}
         <Link
-          href="/founders/ledger#refusals"
+          href="#refusals"
           className="text-gold/85 hover:text-gold underline-offset-4 hover:underline"
         >
-          /founders/ledger § REFUSALS
+          § 拒絕標準
         </Link>{" "}
-        5-step allocation rules · 不藏 rejection rationale ·{" "}
+        · 不藏婉拒理由 · Tim 親手回信說明原因 ·{" "}
         {isPreLaunch
-          ? "pre-launch state · 等首位真實 applicant 啟動 numbers"
-          : "real numbers updated weekly · Tim 親手"}
+          ? "上線前 · 等第一筆真實申請啟動數字"
+          : "每週 Tim 親手更新"}
         。
       </p>
     </aside>

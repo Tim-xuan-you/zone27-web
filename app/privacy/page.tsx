@@ -129,11 +129,7 @@ export default function PrivacyPage() {
           <li>
             <strong className="text-bone">B.</strong>{" "}
             <Code>name</Code>(必填 · 最長 60 字元)· 真名 OK · 球迷暱稱也 OK ·
-            Tim 用於 review + personalized email 開頭 + 通過後寫入{" "}
-            <Link href="/founders/ledger" className="text-gold underline-offset-4 hover:underline">
-              /founders/ledger
-            </Link>{" "}
-            public allocation row(您可指定 handle 而非真名)。
+            Tim 用於 review + 通過後個人化 email 開頭 · 不公開、不分享給任何第三方。
           </li>
           <li>
             <strong className="text-bone">C.</strong>{" "}
@@ -143,13 +139,9 @@ export default function PrivacyPage() {
           </li>
           <li>
             <strong className="text-bone">D.</strong>{" "}
-            <Code>why_zone27</Code>(必填 · 50-600 字)· 您 reasoning 邏輯 · Tim 親手
+            <Code>why_zone27</Code>(必填 · 50-600 字)· 您的理由 · Tim 親手
             read 親手 review · 通過 / 不通過 / clarifying question 的依據 · 不 share ·
-            不 publish · 您 6 個月後若想 publish own letter 透過{" "}
-            <Link href="/founders/apply" className="text-gold underline-offset-4 hover:underline">
-              /founders/apply
-            </Link>{" "}
-            ledger entry 是您 own ship 不是此 application 內容。
+            不 publish · 您的申請內容不會被公開上架。
           </li>
         </ul>
         <h3 className="text-bone text-base mt-6 mb-2">保留期間 · RETENTION POLICY</h3>

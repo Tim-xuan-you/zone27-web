@@ -28,16 +28,15 @@ export const metadata: Metadata = {
 
 // ── R68 W-A · GOLD Application Page ──────────────
 // /founders/apply · 1 layer deeper than /founders WaitlistForm · for
-// visitors who want to actually apply for one of 270 founding seats
-// (#008-#270 · #001-#007 are Tim's system-test placeholders per
-// /founders/ledger)。
+// visitors who want to actually become a GOLD member(會員不限量 · 無編號 ·
+// Tim 親手 review → 通過寄銀行轉帳資訊 → 手動轉帳)。
 //
 // Brand IP fit:
 //   - per [[zone27-payment-architecture]] · GOLD = manual bank
 //     transfer · this form is the PRE-REQUISITE before Tim sends bank
 //     details · NOT a payment form itself
 //   - per [[feedback-zone27-pratfall-brand-ip]] · 明示「1-3 days 內 manual
-//     review」 · 明示「未通過會解釋原因」 · 同 /founders/ledger 5-step rules
+//     review」 · 明示「未通過會親手說明原因」
 //   - per [[feedback-zone27-audience-fans-not-engineers]] · 不問「sabermetric
 //     experience」 · 只問 fan-grammar CPBL connection
 //   - per [[feedback-no-waiting-rule]] · ships NOW without Supabase
@@ -94,7 +93,7 @@ export default function FoundersApplyPage() {
             invert no-social-proof weakness into the offer。 4 honest deltas
             published BEFORE form · per /founders/from-one-current-founder
             R69 W-B empty scaffold parallel axis · per /audit S05 PRE-COMMIT
-            permanent disclosure(stays here even after #270 fills)。 */}
+            permanent disclosure(會員不限量 · 此自我揭露永久保留)。 */}
         <FromOneSolo />
 
         {/* ── R70 W-E · PreApplyChecklistMobile · Agent A R70 SHIP 5 ──
@@ -243,7 +242,7 @@ export default function FoundersApplyPage() {
               <li>
                 <span className="font-mono text-bone tabular mr-2">03A</span>
                 <strong className="text-bone">通過</strong> · Tim email 銀行
-                資訊 + 您 ZONE27-#NNN memo code · 您 24h 內完成 NT$ 2,700 wire
+                轉帳資訊 + 轉帳備註碼 · 您 24h 內完成 NT$ 2,700 轉帳
               </li>
               <li>
                 <span className="font-mono text-bone tabular mr-2">03B</span>
@@ -255,7 +254,7 @@ export default function FoundersApplyPage() {
                 <span className="font-mono text-bone tabular mr-2">04</span>
                 <strong className="text-bone">轉帳完成</strong> · Tim 7 天內
                 ship 3-piece welcome kit:certificate + methodology snapshot
-                PDF + receipt index · 您 Founder ID 永久鎖定
+                PDF + receipt index · 您的 GOLD 會員資格正式開通
               </li>
               <li>
                 <span className="font-mono text-bone tabular mr-2">05</span>

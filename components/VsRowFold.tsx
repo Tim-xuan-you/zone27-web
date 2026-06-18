@@ -71,7 +71,7 @@ const ROWS: ComparisonRow[] = [
     zone27: "full",
   },
   {
-    axis: "拒絕原因公開(/founders/ledger #refusals)",
+    axis: "拒絕標準事前公開(/founders/apply)",
     paidTip: "none",
     closedModel: "none",
     zone27: "full",
@@ -208,10 +208,10 @@ export default function VsRowFold() {
         </Link>
         {" · "}
         <Link
-          href="/founders/ledger"
+          href="/founders/apply#refusals"
           className="text-gold/85 underline-offset-4 hover:underline"
         >
-          /founders/ledger
+          /founders/apply
         </Link>
         {" · "}
         <Link href="/about" className="text-gold/85 underline-offset-4 hover:underline">

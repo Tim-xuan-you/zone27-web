@@ -13,8 +13,8 @@ export const metadata: Metadata = {
 };
 
 // ── ZONE 27 · /membership/black-card/ledger · 公開訂閱者帳本 ─────────
-// 公開到「連 0 位付費訂閱者都掛出來」的誠實帳本(同 /founders/ledger 口徑,
-// 延伸到月費 BLACK)。 手動轉帳 = 連流失都敢攤(自動扣款的對手攤了會露餡)。
+// 公開到「連 0 位付費訂閱者都掛出來」的誠實帳本(GOLD 名冊 /founders/ledger 已收掉,
+// 只此 BLACK 帳本保留)。 手動轉帳 = 連流失都敢攤(自動扣款的對手攤了會露餡)。
 //
 // 🔴 R241 改寫:這頁原本把「為什麼敢公開」寫成策略簡報 —— 一堆英文 + 後設
 //   術語(churn / retention / incentive alignment / structural moat /
@@ -79,7 +79,7 @@ export default function BlackCardLedgerPage() {
             </p>
             <p className="mt-3 text-mute text-base leading-relaxed">
               這頁會列出每一位訂閱者願意公開的名字、從哪個月開始、撐了幾個月。
-              第 1 位永遠是第一行 · 號碼不重排 —— 跟 GOLD 那本名冊同一套規矩。
+              第 1 位永遠是第一行 · 號碼不重排。
             </p>
           </div>
 
@@ -119,10 +119,10 @@ export default function BlackCardLedgerPage() {
                   → BLACK 完整介紹
                 </Link>
                 <Link
-                  href="/founders/ledger"
+                  href="/founders"
                   className="inline-block px-6 py-3 border border-gold/50 text-gold font-mono text-[10px] tracking-[0.3em] hover:bg-gold/10 transition-colors"
                 >
-                  → GOLD 名冊
+                  → GOLD 介紹
                 </Link>
               </div>
             </div>

@@ -2,9 +2,9 @@
 
 // ── ZONE 27 · GOLD Application Server Action ─────
 // R68 W-A · Patek Philippe-style application form · 1 layer deeper than
-// waitlist email signup · for visitors who actually want one of 270
-// founding seats(#008-#270 · #001-#007 are Tim's system-test placeholders
-// per /founders/ledger)。
+// waitlist email signup · for visitors who actually want to become a GOLD
+// member(會員不限量 · 無編號 · Tim 親手 review → 通過寄銀行轉帳資訊 →
+// 手動轉帳)。
 //
 // MVP architecture(無 Supabase migration 0003 yet · ships NOW per
 // [[feedback-no-waiting-rule]]):
@@ -31,7 +31,7 @@
 //   - per [[feedback-zone27-pratfall-brand-ip]] · application explicitly
 //     says「1-3 business days 內 manual review」 · not「instant approval」
 //     · honest about Tim being single point of approval
-//   - per /founders/ledger 5-step allocation rules · pre-committed process
+//   - 會員不限量 · Tim 親手 review · 未通過會親手說明原因(無公開分配帳本)
 // ─────────────────────────────────────────────────────
 
 import {

@@ -169,7 +169,7 @@ const CATEGORIES: Category[] = [
         a: (
           <>
             <strong className="text-bone">14 天無條件退款。</strong>{" "}
-            寄信 tatayngiti@gmail.com · 主旨「REFUND · ZONE27-#NNN」 · Tim 48h 回覆
+            寄信 tatayngiti@gmail.com · 主旨「REFUND · ZONE 27 GOLD」 · Tim 48h 回覆
             確認 · 原戶頭退全額。 不問原因 · 不挽留 · 不問卷 · 不 retention 文案。
             翻倍消保法 § 19 法定 7-day 下限。 完整條款{" "}
             <Link href="/terms" className="text-gold underline-offset-4 hover:underline">

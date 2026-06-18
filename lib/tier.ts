@@ -4,9 +4,9 @@
 // Supabase Studio 標 user_metadata.tier(0 auto-charge · per /integrity #13)·
 // 同 follows / notes / predictions 的 user_metadata pattern · 0 額外 migration。
 //
-// 用途:解鎖付費會員「優越」(賣分析標價 + 抽成更低 + 未來 verified 標章)·
+// 用途:標出付費會員身分(支持者金環 + 會員房間 + Tim 親手回信)·
 // 絕不 gate 引擎(引擎永遠免費 · per monetization 鐵律 · /lab NO PAYWALL)。
-// 付費優越 = 「能多做什麼(賣分析賺錢)」+「身分」· 不是「免費被砍」。
+// 付費 = 「身分/支持」· 不是「能多做什麼」· 引擎/功能/驗證標章全免費(R238 收掉賣分析抽成)。
 // ─────────────────────────────────────────────────────
 
 export type MemberTier = "free" | "black" | "founder";

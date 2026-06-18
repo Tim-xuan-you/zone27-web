@@ -179,7 +179,7 @@ export const COMMAND_ITEMS: CommandItem[] = [
     group: "轉換",
     keywords: [
       "會員", "membership", "tier", "訂閱", "免費", "free", "付費",
-      "black", "黑卡", "gold", "founder", "創始", "方案", "升級", "賣分析",
+      "black", "黑卡", "gold", "founder", "方案", "升級", "支持", "金環", "會員房間",
     ],
   },
 

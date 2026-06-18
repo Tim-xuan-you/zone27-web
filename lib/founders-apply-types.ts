@@ -1,7 +1,6 @@
 // ── ZONE 27 · GOLD Application Types + Helpers ───
 // R68 W-A · GOLD application form (1 layer deeper than waitlist) ·
-// Patek Philippe allocation pattern · Tim 手動 review · /founders/ledger
-// 5-step allocation rules 物理 codify。
+// 會員不限量 · 無編號 · Tim 手動 review → 通過寄銀行轉帳資訊 → 手動轉帳。
 //
 // Split from lib/founders-apply.ts because that file has "use server" ·
 // Next.js 16 enforces all exports there must be async server actions ·

@@ -41,8 +41,7 @@ export type FounderSlaState = {
   avgReplyHours: number | null;
   /** Current queue depth · null = pre-launch · honest 0 OK post-launch */
   queueDepth: number | null;
-  /** Number of historical refusals with brand-pure rationale published
-   *  per /founders/ledger 5-step allocation rules · null = pre-launch */
+  /** 已公開說明的婉拒件數 · 拒絕標準見 /founders/apply 的「拒絕標準」段 · null = 上線前 */
   publishedRefusalCount: number | null;
 };
 

@@ -334,7 +334,7 @@ export default function DisciplinePage() {
                 沒裝 fuse.js / 沒 telemetry / 沒 recently-used(per disclosure
                 philosophy)· ProvenanceStamp 在每場引擎輸出底下加 commit SHA(可截圖
                 citable)· chip-pop spring animation 只有 hover footer 才看得到 ·
-                scintillate seats 在 /leaderboard 隨機輕閃。<strong className="text-bone">
+                <strong className="text-bone">
                 這些細節 90% 訪客沒注意 · 但 10% die-hard fans 看到後會知道我們認真</strong>。
               </Item>
             </List>

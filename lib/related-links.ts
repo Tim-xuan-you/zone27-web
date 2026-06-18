@@ -30,19 +30,25 @@ const CORRECTIONS: RelatedLink = {
   kicker: "corrections",
   title: "我們搞砸過的事 · 公開認錯、不刪",
 };
+// 深度頁尾「延伸閱讀」的出口卡:讀夠了就回去玩一場,而不是再扇出第 3 篇文章。
+const PLAY_CALIBRATION: RelatedLink = {
+  href: "/calibration",
+  kicker: "calibration",
+  title: "讀夠了 · 回去玩一場 · 測你自己有多準",
+};
 
 export const RELATED_LINKS: Record<string, RelatedLink[]> = {
   // R202 · /cpbl-pitchers + /cpbl-teams 微站已砍(手動靜態快照會發霉 · 引擎仍吃資料 ·
   // 只是不再有公開排行頁)· 此處 further-reading 入口連帶移除。
   "/audit": [
     TRACK_RECORD,
-    { href: "/manifesto", kicker: "manifesto", title: "倒置宣言 · 4 個刻意倒置" },
     { href: "/methodology", kicker: "methodology", title: "完整工程白皮書" },
+    PLAY_CALIBRATION,
   ],
   "/methodology": [
     { href: "/methodology/diff", kicker: "methodology/diff", title: "v0.2 → v0.3 逐行 diff · 14 unchanged + 1 new" },
     AUDIT,
-    { href: "/manifesto", kicker: "manifesto", title: "倒置宣言 · 為何完整公開" },
+    PLAY_CALIBRATION,
   ],
   "/methodology/diff": [
     { href: "/methodology", kicker: "methodology", title: "回完整白皮書 · 4 章 + 引擎陣容" },
@@ -57,17 +63,17 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
   "/coverage": [
     { href: "/manifesto", kicker: "manifesto", title: "倒置宣言 · 為何不擴大覆蓋" },
     AUDIT,
-    { href: "/methodology", kicker: "methodology", title: "完整工程白皮書" },
+    PLAY_CALIBRATION,
   ],
   "/about": [
     { href: "/manifesto", kicker: "manifesto", title: "倒置宣言 · 4 個刻意倒置" },
-    AUDIT,
     { href: "/methodology", kicker: "methodology", title: "推演引擎白皮書" },
+    PLAY_CALIBRATION,
   ],
   "/faq": [
     { href: "/manifesto", kicker: "manifesto", title: "倒置宣言 · 為何這樣做" },
     AUDIT,
-    { href: "/methodology", kicker: "methodology", title: "完整工程白皮書" },
+    PLAY_CALIBRATION,
   ],
   "/manifesto": [
     { href: "/track-record", kicker: "track-record", title: "公開戰績 · 倒置 II 的物理證據" },
@@ -97,7 +103,7 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
   // /annual/2026 已刪 → 換 /audit
   "/membership/black-card/ledger": [
     { href: "/membership/black-card", kicker: "black-card", title: "BLACK 完整介紹 · NT$ 500/31 天" },
-    { href: "/founders/ledger", kicker: "founders/ledger", title: "GOLD 公開名額帳本" },
+    { href: "/founders", kicker: "founders", title: "GOLD · 最高階年度會員 · NT$ 2,700/年" },
     AUDIT,
   ],
   "/ethics": [
@@ -166,15 +172,9 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
   // /now 已刪 → 換 /track-record
   "/member/submit": [
     { href: "/member", kicker: "member", title: "你的儀表板 · 準度 + 點數錢包" },
-    { href: "/membership", kicker: "membership", title: "升級會員 · 賣分析抽成 5-10%" },
+    { href: "/membership", kicker: "membership", title: "撐著它的人 · 支持者金環 + 會員房間" },
     { href: "/track-record", kicker: "track-record", title: "公開戰績 · 引擎每場預測 vs 實際" },
-  ],
-  "/founders/ledger": [
-    { href: "/founders", kicker: "founders", title: "GOLD 銷售頁 · GOLD 會員 · 年度" },
-    { href: "/audit", kicker: "audit", title: "Model Report · 改規則前先公告 30 天" },
-    { href: "/manifesto", kicker: "manifesto", title: "倒置宣言 · 為什麼「方法公開 · 品味私藏」" },
-  ],
-  "/membership/black-card": [
+  ],  "/membership/black-card": [
     { href: "/membership", kicker: "membership", title: "會員全景 · 從免費到 NT$ 2,700/年" },
     { href: "/founders", kicker: "founders", title: "GOLD · 對照第 4 階 NT$ 2,700/年" },
     { href: "/privacy", kicker: "privacy", title: "付款走手動轉帳 · 0 卡號經過我們 · 完整不追蹤清單" },
@@ -192,7 +192,7 @@ export const RELATED_LINKS: Record<string, RelatedLink[]> = {
   // /annual/2026 已刪 → 換 /track-record
   "/founders/apply": [
     { href: "/founders", kicker: "founders", title: "GOLD 介紹 · 6 件買不到的東西 + 權益" },
-    { href: "/founders/ledger", kicker: "founders/ledger", title: "公開名額帳本 · 5 步規則 · 通過率" },
+    { href: "/integrity", kicker: "integrity", title: "22 件永遠不變的事 · 修改前 30 天公告" },
     { href: "/track-record", kicker: "track-record", title: "公開戰績 · 申請前先看引擎真實命中" },
   ],
 };

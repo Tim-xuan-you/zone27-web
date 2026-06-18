@@ -384,15 +384,8 @@ export default function EthicsPage() {
           <h3 className="text-bone text-lg mt-6 mb-3">您的資料 · 0 vendor lock-in</h3>
           <ul className="space-y-3 text-mute leading-relaxed zh-body">
             <li>
-              <strong className="text-bone">您的 Founder ID + ledger row</strong>{" "}
-              · 公開顯示在{" "}
-              <Link
-                href="/founders/ledger"
-                className="text-gold underline-offset-4 hover:underline"
-              >
-                /founders/ledger
-              </Link>
-              {" "}· 任何人都查得到、隨時可截圖留存 · per /audit S05 NEVER list
+              <strong className="text-bone">您的公開戰績與會員身分</strong>{" "}
+              · 在您的公開檔 /u/你的公開碼 · 含輸的對帳紀錄任何人都查得到、隨時可截圖留存
             </li>
             <li>
               <strong className="text-bone">您的 PDF 證書 + welcome kit</strong>{" "}

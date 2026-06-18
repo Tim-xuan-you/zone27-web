@@ -91,9 +91,9 @@ export default function TermsPage() {
             您留下 email 不構成任何形式的支付承諾或法律義務。
           </li>
           <li>
-            <strong className="text-bone">不保證取得 #號碼。</strong>
-            最終 GOLD 會員將以「正式付款完成」順序鎖定。
-            waitlist 給予優先通知權,不保證最終取得位置。
+            <strong className="text-bone">不保證最終加入。</strong>
+            GOLD 會員不限量、沒有編號、沒有名額;Tim 親手 review 後可婉拒不適合的申請。
+            waitlist 只給優先通知權。
           </li>
           <li>
             <strong className="text-bone">可隨時退出。</strong>
@@ -140,8 +140,8 @@ export default function TermsPage() {
           </li>
           <li>
             <strong className="text-bone">退款流程</strong> ·
-            寄信 <Code>tatayngiti@gmail.com</Code> · 主旨 <Code>REFUND · ZONE27-#NNN</Code>
-            (NNN 為您的 founder 編號)· Tim 48 hr 內回覆確認 · 同步原匯款
+            寄信 <Code>tatayngiti@gmail.com</Code> · 主旨 <Code>REFUND · ZONE 27 GOLD</Code>
+            (附上您註冊的 email)· Tim 48 hr 內回覆確認 · 同步原匯款
             銀行戶頭退回 NT$ 2,700 全額。
           </li>
           <li>
@@ -154,9 +154,8 @@ export default function TermsPage() {
             這些不在退款範圍 · 我們無權收回。
           </li>
           <li>
-            <strong className="text-bone">您退款後失去</strong> · #NNN 編號的
-            ledger 入帳(/founders/ledger 上的 reserved 標記 release)· 365 天
-            access flag · BLACK 免費 perk · BOTTOM 27 ecosystem
+            <strong className="text-bone">您退款後失去</strong> · 該 365 天 GOLD
+            會員資格(支持者金環 + 會員房間 + Tim 親手回信)· BOTTOM 27 ecosystem
             cross-pass(未來 ship)。
           </li>
         </ul>

@@ -34,9 +34,9 @@
 //   ✕ NO「abandoned cart」 retargeting email(redline)
 //   ✕ NO localStorage draft auto-save(per /privacy 11-key cap discipline)
 // R68 W-A · Patek Philippe-style application form · 1 layer deeper than
-// /founders WaitlistForm · for visitors who actually want one of 270
-// founding seats(#008-#270 · #001-#007 are Tim's system-test placeholders
-// per /founders/ledger)。
+// /founders WaitlistForm · for visitors who actually want to become a GOLD
+// member(會員不限量 · 無編號 · Tim 親手 review → 通過寄銀行轉帳資訊 →
+// 手動轉帳)。
 //
 // 4 fields:
 //   1. email · required
@@ -55,7 +55,7 @@
 //     field asks「您 CPBL 球迷 N 年 + 哪隊」 fan-grammar
 //   - per [[feedback-zone27-pratfall-brand-ip]] · explicit「1-3 business
 //     days 內 Tim 手動 review」 wait time · NOT 「instant approval」
-//   - per /founders/ledger 5-step allocation rules · pre-committed process
+//   - 會員不限量 · Tim 親手 review · 未通過會親手說明原因(無公開分配帳本)
 //   - per [[zone27-disclosure-philosophy]] · all 4 fields rationale 解釋
 //     for each → skeptic can audit「what we ask」 = exact review needs
 //   - per R67 W-D Tetlock track-able-error · exhaustive error message
@@ -71,7 +71,6 @@
 
 import { useActionState, useEffect, useRef, useState } from "react";
 import { useFormStatus } from "react-dom";
-import Link from "next/link";
 import { submitFoundersApplication } from "@/lib/founders-apply";
 import {
   getFoundersApplyErrorMessage,
@@ -434,13 +433,7 @@ export default function FoundersApplicationForm() {
             </li>
             <li>
               <span className="font-mono text-bone tabular mr-2">03</span>{" "}
-              未通過 → Tim email 解釋原因 · per{" "}
-              <Link
-                href="/founders/ledger"
-                className="text-gold hover:text-gold-soft underline-offset-4 hover:underline transition-colors"
-              >
-                /founders/ledger 5-step allocation rules
-              </Link>
+              未通過 → Tim 親手 email 跟你說明原因 · 不是罐頭式的「您此次未通過」
             </li>
             <li>
               <span className="font-mono text-bone tabular mr-2">04</span>{" "}
@@ -603,7 +596,7 @@ export default function FoundersApplicationForm() {
           required
           aria-required="true"
           rows={6}
-          placeholder="您 ZONE 27 哪一頁讓您決定要申請的?(/audit · /methodology · /track-record · /founders/ledger 等)為什麼這頁 hit?Tim 不要 marketing 答案 · 要您真實 reasoning 邏輯。"
+          placeholder="您 ZONE 27 哪一頁讓您決定要申請的?(/audit · /methodology · /track-record · /integrity 等)為什麼這頁打中你?Tim 不要場面話 · 要您真實的理由。"
           minLength={GOLD_APPLY_LIMITS.whyMinChars}
           maxLength={GOLD_APPLY_LIMITS.whyMaxChars}
           // R109 W5 · field-sizing: content auto-grow(Chrome 123+ Baseline)·

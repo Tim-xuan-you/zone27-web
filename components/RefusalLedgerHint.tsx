@@ -42,7 +42,7 @@ const REFUSAL_RATIONALES: ReadonlyArray<RefusalRationale> = [
   {
     pattern: "要求投票權 / 治理權 / DAO",
     rationale:
-      "要求加入產品投票、治理權、DAO、或 GOLD 會員的決策投票權 · 不通過。產品方向由 Tim 一個人扛 · GOLD 會員不投票。真正的透明 · 是把開發日誌(/now)跟路線圖(/roadmap)公開給你看 · 不是搞一個投票的形式。",
+      "要求加入產品投票、治理權、DAO、或 GOLD 會員的決策投票權 · 不通過。產品方向由 Tim 一個人扛 · GOLD 會員不投票。真正的透明 · 是把路線圖(/roadmap)跟每一場的對帳(/track-record)公開給你看 · 不是搞一個投票的形式。",
     seeHref: "/roadmap",
     seeLabel: "/roadmap · 鎖定 / 探索 / 不做的事",
   },
