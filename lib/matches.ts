@@ -92,8 +92,7 @@ const rawMatches: Match[] = [
   // ── 2026-06-18 · 一軍 ingest(週四)· Tim 截圖 cpbl.com.tw 賽程 + 先發投手成績表 ──
   //   投手值由官網累計成績表(IP/K/BB/HR)換算 · 標 estimate(自 Tim 截圖手抄)· winRate 手 curate
   //   (ERA+控球+主場+隊伍 W-L · 接近五五波就誠實低 conviction)· 天氣不建模(/audit S02)。
-  //   🔴 誠實邊界:同日 #170(味全 vs 樂天 @樂天桃園)、#171(富邦 vs 中信 @洲際)Tim 只給隊伍/投手名、
-  //     沒給先發投手成績表 → 不憑空捏造投手數據污染永久帳本,暫不收(補上官網成績表即補 · 同 6/17 #168 處理)。
+  //   ✅ 三場齊鎖:Tim 後補齊 #170 / #171 先發投手成績表 → 同步賽前鎖定(原暫缺成績表的兩場已補)。
   //   #169 亞太 · 台鋼(後勁 away)vs 統一(獅帝芬 home)· W-L 台鋼 28-24-1(.538)/ 統一 26-25-1(.510)
   //     兩隊戰績近五五波(台鋼小幅領先)。 先發:統一獅帝芬 2026 ERA 3.09 / BB9 2.9 / WHIP 1.25(穩、控球好);
   //     台鋼後勁 2026 ERA 4.33 看似差,但底子優於 ERA —— BAA .235 / HR9 0.17(不被扎實打、極少被轟)、是
@@ -142,6 +141,105 @@ const rawMatches: Match[] = [
       { score: "4 : 2", probability: 7.0 },
     ],
     aiConfidence: 52,
+  },
+  //   #170 樂天桃園 · 味全(伍鐸 away)vs 樂天(魔爾曼 home)· W-L 味全 34-18-0(.654 全聯盟最強)/
+  //     樂天 20-27-2(.426 後段)。 隊強差距大偏味全 + 味全打線最猛;但今天先發倒過來幫樂天 —— 樂天魔爾曼
+  //     2026 ERA 2.95 / K9 7.9 / HR9 0.14(會吊人、極少被轟)明顯優於味全伍鐸 2026 ERA 3.97 / K9 僅 2.6
+  //    (三振崩、全靠弱接觸、2025 曾 2.36)+ 樂天主場(桃園偏打者)。 隊強 vs 主場+先發兩股力量幾乎抵掉 →
+  //     味全 53 / 樂天 47 · conf 51(味全隊底子+打線略蓋 · 但伍鐸狀態差 + 魔爾曼當下更好 → 誠實壓到接近銅板)。
+  {
+    id: "cpbl-260618-02",
+    league: "CPBL",
+    date: "2026 · 06 · 18  ·  星期四",
+    startTime: "18:35",
+    venue: "樂天桃園棒球場",
+    home: {
+      name: "樂天桃猿",
+      en: "MONKEYS",
+      pitcher: {
+        name: "魔爾曼",
+        era: "2.95", // estimate · 2026 官網累計成績表(Tim 截圖手抄)· 64 IP(11 先發)· 內容紮實
+        k9: "7.9", // estimate · 56 K / 64 IP × 9 · 會吊人
+        whip: "1.23", // estimate · 官網每局被上壘率 1.234(58 H + 21 BB / 64 IP)
+        bb9: "3.0", // estimate · 21 BB / 64 IP × 9
+        hr9: "0.14", // estimate · 1 HR / 64 IP × 9 · 幾乎不被轟
+      },
+      recent: ["L", "L", "W", "L", "W"], // placeholder · 樂天 20-27-2(.426)
+      winRate: 47,
+    },
+    away: {
+      name: "味全龍",
+      en: "DRAGONS",
+      pitcher: {
+        name: "伍鐸",
+        era: "3.97", // estimate · 2026 官網累計成績表(Tim 截圖手抄)· 45.1 IP(7 先發)· 2025 曾 2.36、今年三振崩
+        k9: "2.6", // estimate · 13 K / 45.1 IP × 9 · 三振極低(全靠弱接觸 · 高變異)
+        whip: "1.28", // estimate · 官網每局被上壘率 1.279(47 H + 11 BB / 45.1 IP)
+        bb9: "2.2", // estimate · 11 BB / 45.1 IP × 9 · 控球尚可
+        hr9: "0.79", // estimate · 4 HR / 45.1 IP × 9 · 偶被轟
+      },
+      recent: ["W", "W", "L", "W", "W"], // placeholder · 味全 34-18-0(.654 全聯盟最強)
+      winRate: 53,
+    },
+    topScores: [
+      // 味全打線強+伍鐸控球丟分、樂天主場偏打者 → 中分;隊強 vs 先發+主場抵消(格式 home : away = 樂天 : 味全)
+      { score: "3 : 4", probability: 8.0 },
+      { score: "2 : 3", probability: 7.5 },
+      { score: "4 : 5", probability: 7.5 },
+      { score: "4 : 3", probability: 7.0 },
+      { score: "3 : 5", probability: 7.0 },
+    ],
+    aiConfidence: 51,
+  },
+  //   #171 洲際 · 富邦(江國豪 away)vs 中信(羅戈 home)· W-L 富邦 27-23-0(.540)/ 中信 15-33-2(.313 墊底)。
+  //     戰績差距大,casual 會直接押富邦 —— 但別被帳面騙:今天中信派王牌羅戈(2026 ERA 3.00 / K9 8.0 /
+  //     WHIP 1.12 / 被打 .223,2025 1.84 真王牌)· 富邦江國豪 ERA 3.38 看似可,但 WHIP 1.54 / K9 3.8 =
+  //     上壘一堆、ERA 偏運氣有回歸風險(生涯 24/25 年 4.99/7.59)。 先發對位明顯偏中信 + 主場 + 洲際偏投手
+  //     → 把「墊底 vs 中段」拉成銅板局,我們甚至微偏地主王牌 → 中信 51 / 富邦 49 · conf 51(刻意不押帳面 ·
+  //     先發+主場+羅戈底子 vs 江國豪運氣 ERA · 但中信打線弱、不裝把握 → 壓到 51)。
+  {
+    id: "cpbl-260618-03",
+    league: "CPBL",
+    date: "2026 · 06 · 18  ·  星期四",
+    startTime: "18:35",
+    venue: "臺中洲際棒球場",
+    home: {
+      name: "中信兄弟",
+      en: "BROTHERS",
+      pitcher: {
+        name: "羅戈",
+        era: "3.00", // estimate · 2026 官網累計成績表(Tim 截圖手抄)· 66 IP(11 先發)· 真王牌(2025 1.84)
+        k9: "8.0", // estimate · 59 K / 66 IP × 9 · 會吊人
+        whip: "1.12", // estimate · 官網每局被上壘率 1.121(54 H + 20 BB / 66 IP)· 頂級
+        bb9: "2.7", // estimate · 20 BB / 66 IP × 9 · 控球好
+        hr9: "0.41", // estimate · 3 HR / 66 IP × 9
+      },
+      recent: ["L", "L", "W", "L", "L"], // placeholder · 中信 15-33-2(.313 墊底)
+      winRate: 51,
+    },
+    away: {
+      name: "富邦悍將",
+      en: "GUARDIANS",
+      pitcher: {
+        name: "江國豪",
+        era: "3.38", // estimate · 2026 官網累計成績表(Tim 截圖手抄)· 24 IP(小樣本)· ERA 偏運氣、有回歸風險
+        k9: "3.8", // estimate · 10 K / 24 IP × 9 · 低三振
+        whip: "1.54", // estimate · 官網每局被上壘率 1.541(27 H + 10 BB / 24 IP)· 上壘一堆
+        bb9: "3.8", // estimate · 10 BB / 24 IP × 9 · 控球亂
+        hr9: "0.38", // estimate · 1 HR / 24 IP × 9
+      },
+      recent: ["W", "L", "W", "L", "W"], // placeholder · 富邦 27-23-0(.540)
+      winRate: 49,
+    },
+    topScores: [
+      // 羅戈壓制 + 洲際偏投手 → 低分局;中信派王牌+主場微偏地主(格式 home : away = 中信 : 富邦)
+      { score: "3 : 2", probability: 8.5 },
+      { score: "2 : 1", probability: 8.0 },
+      { score: "2 : 3", probability: 7.5 },
+      { score: "3 : 1", probability: 7.0 },
+      { score: "1 : 2", probability: 7.0 },
+    ],
+    aiConfidence: 51,
   },
   // ── 2026-06-17 · 一軍 ingest(週三)· Tim 截圖 cpbl.com.tw 賽程 + 先發投手成績表 ──
   //   投手值由官網累計成績表(IP/K/BB/HR)換算 · 標 estimate(自 Tim 截圖手抄 · 未走自動 leaderboard)·
