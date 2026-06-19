@@ -30,7 +30,8 @@ import CalibrationMasterCard from "@/components/CalibrationMasterCard";
 import type { CalibrationResult } from "@/lib/calibration-master";
 import { getSoccerLedgerResults } from "@/lib/soccer/football-data";
 import { getSoccerEnginePicks } from "@/lib/soccer/locked";
-import { readTier, isPaid, tierLabel } from "@/lib/tier";
+import { isPaid, tierLabel } from "@/lib/tier";
+import { effectiveTier } from "@/lib/membership";
 import MembershipStatus from "@/components/MembershipStatus";
 import { reckoningStar, credentialHeadline, RECKONING_STAR_MIN } from "@/lib/reckoning-star";
 import ReckoningStarMark from "@/components/ReckoningStarMark";
@@ -127,7 +128,9 @@ export default async function MemberPage() {
   }
 
   const meta = (user.user_metadata ?? null) as Record<string, unknown> | null;
-  const tier = readTier(meta);
+  // effectiveTier = 即時生效的 tier:BLACK 到期 → 自動當免費(等級字/金環/房間入口/升級邀請全自動回退)·
+  // 不用 Tim 手動降級、也不收錢。 到期卡仍由 MembershipStatus(讀原始 meta)顯示「支持期已到 · 想續再轉一次」。
+  const tier = effectiveTier(meta);
   const tierZh = `${tierLabel(tier)} 會員`;
   // 公開身分:顯示名(會員自填 · opt-in)否則匿名代號「球迷 #hash」。
   // anonHandle 的 md5 必須跟 SQL 的 md5(user_id::text) 一致 → 頭像、署名同一張臉。

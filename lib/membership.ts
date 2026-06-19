@@ -66,6 +66,17 @@ export function getMembershipStatus(
   return { tier, paid: true, until: raw, daysLeft, state };
 }
 
+/** 「現在這一刻」實際生效的 tier:付費但已過期 → 自動當免費(顯示層自動回退 · 不用手動降級、也不收錢)。
+ *  active / expiring / undated(舊會員沒日期)→ 維持付費;expired → free;免費本來就 free。
+ *  🔴 這是「顯示用」自動回退;真正的房間 access 邊界由 z27_is_member 在 DB 端即時把關(migration 0032)。 */
+export function effectiveTier(
+  meta: Record<string, unknown> | null | undefined,
+  now: Date = new Date(),
+): MemberTier {
+  const s = getMembershipStatus(meta, now);
+  return s.state === "expired" ? "free" : s.tier;
+}
+
 /** "2026-07-20" → "7/20"(會員卡平靜顯示)。 格式不對原樣回。 */
 export function formatUntilShort(until: string): string {
   const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(until);
