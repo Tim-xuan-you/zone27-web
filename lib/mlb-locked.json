@@ -6090,8 +6090,12 @@
       },
       "engineWinHomePct": 46,
       "lockedAt": "2026-06-17T17:50:55.219Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 4,
+        "away": 6
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-06-19T05:00:19.433Z"
     },
     {
       "gamePk": 823533,
@@ -6119,8 +6123,12 @@
       },
       "engineWinHomePct": 51,
       "lockedAt": "2026-06-16T16:03:06.000Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 1,
+        "away": 5
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-06-19T05:00:19.433Z"
     },
     {
       "gamePk": 824911,
@@ -6177,6 +6185,39 @@
       },
       "engineWinHomePct": 61,
       "lockedAt": "2026-06-17T17:50:55.219Z",
+      "finalScore": {
+        "home": 14,
+        "away": 6
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-06-19T05:00:19.433Z"
+    },
+    {
+      "gamePk": 824663,
+      "gameDate": "2026-06-19T18:20:00Z",
+      "scheduleDate": "2026-06-19",
+      "homeId": 112,
+      "homeEn": "Chicago Cubs",
+      "homeRecord": "39-36",
+      "awayId": 141,
+      "awayEn": "Toronto Blue Jays",
+      "awayRecord": "37-38",
+      "homePitcher": "Ben Brown",
+      "awayPitcher": "Kevin Gausman",
+      "homeStats": {
+        "era": "1.74",
+        "k9": "8.85",
+        "bb9": "2.76",
+        "hr9": "0.15"
+      },
+      "awayStats": {
+        "era": "3.41",
+        "k9": "8.90",
+        "bb9": "1.66",
+        "hr9": "1.03"
+      },
+      "engineWinHomePct": 66,
+      "lockedAt": "2026-06-19T05:00:18.926Z",
       "finalScore": null,
       "verdict": null
     },
@@ -6413,6 +6454,35 @@
       "verdict": null
     },
     {
+      "gamePk": 824990,
+      "gameDate": "2026-06-20T01:40:00Z",
+      "scheduleDate": "2026-06-19",
+      "homeId": 133,
+      "homeEn": "Athletics",
+      "homeRecord": "37-38",
+      "awayId": 108,
+      "awayEn": "Los Angeles Angels",
+      "awayRecord": "30-46",
+      "homePitcher": "Jeffrey Springs",
+      "awayPitcher": "José Soriano",
+      "homeStats": {
+        "era": "5.13",
+        "k9": "7.75",
+        "bb9": "2.62",
+        "hr9": "2.16"
+      },
+      "awayStats": {
+        "era": "2.79",
+        "k9": "9.52",
+        "bb9": "4.34",
+        "hr9": "0.93"
+      },
+      "engineWinHomePct": 34,
+      "lockedAt": "2026-06-19T05:00:18.926Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
       "gamePk": 825069,
       "gameDate": "2026-06-20T01:45:00Z",
       "scheduleDate": "2026-06-19",
@@ -6525,6 +6595,35 @@
       },
       "engineWinHomePct": 64,
       "lockedAt": "2026-06-18T20:33:17.332Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 824665,
+      "gameDate": "2026-06-20T18:20:00Z",
+      "scheduleDate": "2026-06-20",
+      "homeId": 112,
+      "homeEn": "Chicago Cubs",
+      "homeRecord": "39-36",
+      "awayId": 141,
+      "awayEn": "Toronto Blue Jays",
+      "awayRecord": "37-38",
+      "homePitcher": "Colin Rea",
+      "awayPitcher": "Patrick Corbin",
+      "homeStats": {
+        "era": "5.35",
+        "k9": "6.81",
+        "bb9": "3.41",
+        "hr9": "1.46"
+      },
+      "awayStats": {
+        "era": "4.57",
+        "k9": "6.34",
+        "bb9": "2.95",
+        "hr9": "1.03"
+      },
+      "engineWinHomePct": 49,
+      "lockedAt": "2026-06-19T05:00:18.926Z",
       "finalScore": null,
       "verdict": null
     },
