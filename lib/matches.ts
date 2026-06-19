@@ -89,6 +89,63 @@ function mergePitcherStats(p: PitcherStats): PitcherStats {
 }
 
 const rawMatches: Match[] = [
+  // ── 2026-06-20 · 一軍 ingest(週六)· Tim 截圖 cpbl.com.tw 賽程 + 先發投手成績表 ──
+  //   投手值由官網累計成績表(IP/K/BB/HR)換算 · 標 estimate(自 Tim 截圖手抄)· winRate 手 curate
+  //   (ERA+控球+主場+隊伍 W-L · 接近五五波就誠實低 conviction)· 天氣不建模(/audit S02)。
+  //   🔴 誠實邊界:① 6/19 三場(味全 11-3 樂天 / 富邦 11-6 中信 / 台鋼 1-0 統一)當時沒賽前鎖線 →
+  //     不 back-date 比完的場(只收今天、開賽前鎖得了的場 · 同 6/15-16 慣例)。 ② 今日 #176 味全(鋼龍)
+  //     vs 台鋼(坎南)+ #177 富邦(鈴木駿輔)vs 樂天(陳克羿):Tim 只給隊伍/投手名、沒給先發投手成績表
+  //     → 不憑空捏造投手數據污染永久帳本,暫不收;補上官網成績表即補(同 6/17 #168 慣例)。
+  //   #175 亞太 · 中信(德保拉 away)vs 統一(布雷克 home)· W-L 中信 16-34-2(.320 墊底)/ 統一 27-26-1(.509)。
+  //     戰績差距大,casual 會直接押統一 —— 但這是王牌對決:中信德保拉 2026 ERA 2.20 / WHIP 0.89 / BAA .212
+  //    (控球 BB9 1.1、紮實壓制 · 小樣本 5 先發)對上統一布雷克 2026 ERA 1.94 / WHIP 0.92 / BB9 0.9(控球
+  //     藝術家、樣本厚 10 先發)。 兩位當下都頂、先發幾乎抵消 → 剩主場 + 統一隊強 + 中信打線墊底偏統一,
+  //     但低分局變異大 + 中信派當下王牌 → 不裝把握 → 統一 57 / 中信 43 · conf 52(主場+隊強壓住,但德保拉
+  //     壓制力 + 低分變異拉回,壓到接近銅板偏地主)。
+  {
+    id: "cpbl-260620-01",
+    league: "CPBL",
+    date: "2026 · 06 · 20  ·  星期六",
+    startTime: "16:05",
+    venue: "亞太棒球村",
+    home: {
+      name: "統一獅",
+      en: "LIONS",
+      pitcher: {
+        name: "布雷克",
+        era: "1.94", // estimate · 2026 官網累計成績表(Tim 截圖手抄)· 69.2 IP(10 先發)· 控球藝術家、樣本厚
+        k9: "5.3", // estimate · 41 K / 69.2 IP × 9 · 三振不高靠壓制
+        whip: "0.92", // estimate · 官網每局被上壘率 0.918(57 H + 7 BB / 69.2 IP)· 頂級
+        bb9: "0.9", // estimate · 7 BB / 69.2 IP × 9 · 控球極佳(全聯盟頂)
+        hr9: "0.65", // estimate · 5 HR / 69.2 IP × 9
+      },
+      recent: ["W", "L", "W", "W", "L"], // placeholder · 統一 27-26-1(.509)
+      winRate: 57,
+    },
+    away: {
+      name: "中信兄弟",
+      en: "BROTHERS",
+      pitcher: {
+        name: "德保拉",
+        era: "2.20", // estimate · 2026 官網累計成績表(Tim 截圖手抄)· 32.2 IP(5 先發 · 小樣本)· 紮實壓制
+        k9: "5.8", // estimate · 21 K / 32.2 IP × 9
+        whip: "0.89", // estimate · 官網每局被上壘率 0.887(25 H + 4 BB / 32.2 IP)· 頂級
+        bb9: "1.1", // estimate · 4 BB / 32.2 IP × 9 · 控球佳
+        hr9: "0.55", // estimate · 2 HR / 32.2 IP × 9
+      },
+      recent: ["L", "L", "W", "L", "L"], // placeholder · 中信 16-34-2(.320 墊底)
+      winRate: 43,
+    },
+    topScores: [
+      // 兩位當下王牌 → 低分對決;統一主場 + 隊強微偏地主(格式 home : away = 統一 : 中信)
+      { score: "2 : 1", probability: 9.0 },
+      { score: "1 : 0", probability: 8.0 },
+      { score: "3 : 1", probability: 7.5 },
+      { score: "2 : 0", probability: 7.0 },
+      { score: "1 : 2", probability: 7.0 },
+    ],
+    aiConfidence: 52,
+  },
   // ── 2026-06-18 · 一軍 ingest(週四)· Tim 截圖 cpbl.com.tw 賽程 + 先發投手成績表 ──
   //   投手值由官網累計成績表(IP/K/BB/HR)換算 · 標 estimate(自 Tim 截圖手抄)· winRate 手 curate
   //   (ERA+控球+主場+隊伍 W-L · 接近五五波就誠實低 conviction)· 天氣不建模(/audit S02)。
