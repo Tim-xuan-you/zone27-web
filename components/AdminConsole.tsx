@@ -25,6 +25,7 @@ import {
   type AdminFullContent,
   type AdminAuditRow,
 } from "@/lib/admin";
+import { getMembershipStatus, formatUntilShort } from "@/lib/membership";
 
 const TIER_ZH: Record<string, string> = {
   free: "OPEN",
@@ -352,6 +353,26 @@ function SetTierCard({ onDone }: { onDone: () => void }) {
   );
 }
 
+// 到期欄:付費 → 日期 + 剩幾天(快到期/已過用金色,讓 Tim 一眼看出該提醒誰)· 免費 → —
+function MemberUntilCell({ tier, until }: { tier: string; until: string }) {
+  const ms = getMembershipStatus({ tier, member_until: until });
+  if (!ms.paid) return <span className="text-mute/40">—</span>;
+  if (ms.state === "undated") return <span className="text-mute/55">未設定</span>;
+  const d = formatUntilShort(until);
+  if (ms.state === "expired") return <span className="text-gold">{d} · 已過</span>;
+  if (ms.state === "expiring")
+    return (
+      <span className="text-gold">
+        {d} · 剩 {ms.daysLeft} 天
+      </span>
+    );
+  return (
+    <span className="text-mute/80">
+      {d} · 剩 {ms.daysLeft} 天
+    </span>
+  );
+}
+
 // ── 會員列表 ──
 function MembersCard({
   members,
@@ -378,6 +399,7 @@ function MembersCard({
               <tr className="font-mono text-mute/60 text-[9px] tracking-[0.25em]">
                 <th className="py-1.5 pr-3 font-normal">EMAIL</th>
                 <th className="py-1.5 pr-3 font-normal">等級</th>
+                <th className="py-1.5 pr-3 font-normal">到期</th>
                 <th className="py-1.5 font-normal tabular">餘額</th>
               </tr>
             </thead>
@@ -393,6 +415,9 @@ function MembersCard({
                     >
                       {TIER_ZH[m.tier] ?? m.tier}
                     </span>
+                  </td>
+                  <td className="py-2 pr-3 font-mono text-[11px] tabular">
+                    <MemberUntilCell tier={m.tier} until={m.memberUntil} />
                   </td>
                   <td className="py-2 font-mono text-bone/85 text-[13px] tabular">
                     {m.balanceNtd} 點

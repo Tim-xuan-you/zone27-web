@@ -99,6 +99,7 @@ export type AdminMember = {
   email: string;
   tier: string;
   balanceNtd: number;
+  memberUntil: string; // "YYYY-MM-DD" · 空字串 = 免費 / 未設定(0031 前)
   createdAt: string;
 };
 
@@ -113,12 +114,14 @@ export async function adminMembers(): Promise<AdminMember[]> {
         email?: unknown;
         tier?: unknown;
         balance_ntd?: unknown;
+        member_until?: unknown;
         created_at?: unknown;
       };
       return {
         email: typeof r.email === "string" ? r.email : "—",
         tier: typeof r.tier === "string" ? r.tier : "free",
         balanceNtd: Number(r.balance_ntd) || 0,
+        memberUntil: typeof r.member_until === "string" ? r.member_until : "",
         createdAt: typeof r.created_at === "string" ? r.created_at : "",
       };
     });

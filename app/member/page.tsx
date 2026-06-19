@@ -31,6 +31,7 @@ import type { CalibrationResult } from "@/lib/calibration-master";
 import { getSoccerLedgerResults } from "@/lib/soccer/football-data";
 import { getSoccerEnginePicks } from "@/lib/soccer/locked";
 import { readTier, isPaid, tierLabel } from "@/lib/tier";
+import MembershipStatus from "@/components/MembershipStatus";
 import { reckoningStar, credentialHeadline, RECKONING_STAR_MIN } from "@/lib/reckoning-star";
 import ReckoningStarMark from "@/components/ReckoningStarMark";
 import CredentialGrabPanel from "@/components/CredentialGrabPanel";
@@ -325,6 +326,10 @@ export default async function MemberPage() {
             </button>
           </form>
         </div>
+
+        {/* BLACK 會員看自己撐到哪天 + 還有幾天(免費會員 → 不 render,守極簡)·
+            R252 Defector 式誠實日期、零催繳 · 不自動扣款是驕傲的功能不是缺點。 */}
+        <MembershipStatus meta={meta} />
 
         {/* 今天 · 每日對帳儀式(soul · Defector 高路 / 柏青哥低路討論收斂)· 把「今天的一手 +
             對帳紀律」收成一條放最上 = 會員一打開就知道今天的一個誠實動作,然後就走。
