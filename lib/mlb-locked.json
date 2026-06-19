@@ -6309,6 +6309,35 @@
       "verdict": null
     },
     {
+      "gamePk": 823853,
+      "gameDate": "2026-06-19T23:10:00Z",
+      "scheduleDate": "2026-06-19",
+      "homeId": 146,
+      "homeEn": "Miami Marlins",
+      "homeRecord": "37-38",
+      "awayId": 137,
+      "awayEn": "San Francisco Giants",
+      "awayRecord": "31-43",
+      "homePitcher": "Lake Bachar",
+      "awayPitcher": "Landen Roupp",
+      "homeStats": {
+        "era": "2.97",
+        "k9": "10.30",
+        "bb9": "2.97",
+        "hr9": "1.14"
+      },
+      "awayStats": {
+        "era": "4.24",
+        "k9": "9.93",
+        "bb9": "3.87",
+        "hr9": "0.48"
+      },
+      "engineWinHomePct": 56,
+      "lockedAt": "2026-06-19T15:33:02.720Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
       "gamePk": 824910,
       "gameDate": "2026-06-19T23:15:00Z",
       "scheduleDate": "2026-06-19",
