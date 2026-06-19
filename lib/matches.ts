@@ -93,9 +93,8 @@ const rawMatches: Match[] = [
   //   投手值由官網累計成績表(IP/K/BB/HR)換算 · 標 estimate(自 Tim 截圖手抄)· winRate 手 curate
   //   (ERA+控球+主場+隊伍 W-L · 接近五五波就誠實低 conviction)· 天氣不建模(/audit S02)。
   //   🔴 誠實邊界:① 6/19 三場(味全 11-3 樂天 / 富邦 11-6 中信 / 台鋼 1-0 統一)當時沒賽前鎖線 →
-  //     不 back-date 比完的場(只收今天、開賽前鎖得了的場 · 同 6/15-16 慣例)。 ② 今日 #176 味全(鋼龍)
-  //     vs 台鋼(坎南)+ #177 富邦(鈴木駿輔)vs 樂天(陳克羿):Tim 只給隊伍/投手名、沒給先發投手成績表
-  //     → 不憑空捏造投手數據污染永久帳本,暫不收;補上官網成績表即補(同 6/17 #168 慣例)。
+  //     不 back-date 比完的場(只收今天、開賽前鎖得了的場 · 同 6/15-16 慣例)。
+  //   ✅ 三場齊鎖:Tim 後補齊 #176 / #177 先發投手成績表 → 同步賽前鎖定(原暫缺成績表的兩場已補 · 同 6/18 慣例)。
   //   #175 亞太 · 中信(德保拉 away)vs 統一(布雷克 home)· W-L 中信 16-34-2(.320 墊底)/ 統一 27-26-1(.509)。
   //     戰績差距大,casual 會直接押統一 —— 但這是王牌對決:中信德保拉 2026 ERA 2.20 / WHIP 0.89 / BAA .212
   //    (控球 BB9 1.1、紮實壓制 · 小樣本 5 先發)對上統一布雷克 2026 ERA 1.94 / WHIP 0.92 / BB9 0.9(控球
@@ -143,6 +142,104 @@ const rawMatches: Match[] = [
       { score: "3 : 1", probability: 7.5 },
       { score: "2 : 0", probability: 7.0 },
       { score: "1 : 2", probability: 7.0 },
+    ],
+    aiConfidence: 52,
+  },
+  //   #176 澄清湖 · 味全(鋼龍 away)vs 台鋼(坎南 home)· W-L 味全 36-18-0(.667 全聯盟最強)/ 台鋼 29-25-1(.527)。
+  //     又是王牌對決:味全鋼龍 2026 ERA 2.15 / WHIP 0.94 / K9 8.7 / BAA .202(11 先發樣本厚、壓制頂)對上
+  //     台鋼坎南 2026 ERA 2.50 / WHIP 1.08 / K9 8.6 / HR9 0.23(高三振、極少被轟 · 小樣本 6 先發)。 鋼龍略優 +
+  //     味全隊最強 + 打線最猛 → 客隊味全 lean,但台鋼主場 + 坎南當下也頂 + 低分變異 → 不裝把握 →
+  //     味全 57 / 台鋼 43 · conf 52(隊強+先發略優壓住,主場+低分變異拉回)。
+  {
+    id: "cpbl-260620-02",
+    league: "CPBL",
+    date: "2026 · 06 · 20  ·  星期六",
+    startTime: "16:05",
+    venue: "澄清湖棒球場",
+    home: {
+      name: "台鋼雄鷹",
+      en: "HAWKS",
+      pitcher: {
+        name: "坎南",
+        era: "2.50", // estimate · 2026 官網累計成績表(Tim 截圖手抄)· 39.2 IP(6 先發 · 小樣本)· 高三振、極少被轟
+        k9: "8.6", // estimate · 38 K / 39.2 IP × 9 · 會吊人
+        whip: "1.08", // estimate · 官網每局被上壘率 1.084(36 H + 7 BB / 39.2 IP)
+        bb9: "1.6", // estimate · 7 BB / 39.2 IP × 9 · 控球佳
+        hr9: "0.23", // estimate · 1 HR / 39.2 IP × 9 · 極少被轟
+      },
+      recent: ["W", "L", "W", "W", "L"], // placeholder · 台鋼 29-25-1(.527)
+      winRate: 43,
+    },
+    away: {
+      name: "味全龍",
+      en: "DRAGONS",
+      pitcher: {
+        name: "鋼龍",
+        era: "2.15", // estimate · 2026 官網累計成績表(Tim 截圖手抄)· 67 IP(11 先發 · 樣本厚)· 壓制力頂
+        k9: "8.7", // estimate · 65 K / 67 IP × 9 · 會吊人
+        whip: "0.94", // estimate · 官網每局被上壘率 0.940(49 H + 14 BB / 67 IP)· 頂級
+        bb9: "1.9", // estimate · 14 BB / 67 IP × 9 · 控球好
+        hr9: "0.54", // estimate · 4 HR / 67 IP × 9
+      },
+      recent: ["W", "W", "L", "W", "W"], // placeholder · 味全 36-18-0(.667 全聯盟最強)
+      winRate: 57,
+    },
+    topScores: [
+      // 兩位當下王牌 → 低分對決;味全隊強+先發略優偏客隊(格式 home : away = 台鋼 : 味全)
+      { score: "1 : 2", probability: 8.5 },
+      { score: "2 : 3", probability: 7.5 },
+      { score: "1 : 3", probability: 7.0 },
+      { score: "2 : 1", probability: 7.0 },
+      { score: "0 : 2", probability: 6.5 },
+    ],
+    aiConfidence: 52,
+  },
+  //   #177 樂天桃園 · 富邦(鈴木駿輔 away)vs 樂天(陳克羿 home)· W-L 富邦 28-24-0(.538)/ 樂天 20-29-2(.408)。
+  //     富邦隊較強 + 客場;鈴木駿輔 2026 ERA 2.93 / K9 9.0(真三振)/ WHIP 1.26(會上壘 · 8 先發)對上樂天陳克羿
+  //     2026 ERA 3.27 看似可、但只有 2 先發 11 IP 超小樣本 + 生涯偏普(24/25 年 4.39 / 3.68 有回歸風險)。
+  //     桃園偏打者(分數高、變異大)+ 樂天主場拉回,但隊強 + 鈴木較可信 → 富邦 56 / 樂天 44 · conf 52
+  //    (別被陳克羿小樣本騙、富邦隊強+先發較穩,但桃園高分變異+主場壓到接近銅板偏客隊)。
+  {
+    id: "cpbl-260620-03",
+    league: "CPBL",
+    date: "2026 · 06 · 20  ·  星期六",
+    startTime: "17:05",
+    venue: "樂天桃園棒球場",
+    home: {
+      name: "樂天桃猿",
+      en: "MONKEYS",
+      pitcher: {
+        name: "陳克羿",
+        era: "3.27", // estimate · 2026 官網累計成績表(Tim 截圖手抄)· 11 IP(2 先發 · 超小樣本 · 生涯偏普有回歸風險)
+        k9: "10.6", // estimate · 13 K / 11 IP × 9 · 小樣本高三振
+        whip: "1.18", // estimate · 官網每局被上壘率 1.181(9 H + 4 BB / 11 IP)
+        bb9: "3.3", // estimate · 4 BB / 11 IP × 9
+        hr9: "0.00", // estimate · 0 HR / 11 IP(超小樣本 · 生涯約 0.2-0.3 · winRate 已壓不偏袒)
+      },
+      recent: ["L", "W", "L", "L", "W"], // placeholder · 樂天 20-29-2(.408)
+      winRate: 44,
+    },
+    away: {
+      name: "富邦悍將",
+      en: "GUARDIANS",
+      pitcher: {
+        name: "鈴木駿輔",
+        era: "2.93", // estimate · 2026 官網累計成績表(Tim 截圖手抄)· 43 IP(8 先發)· 真三振、會上壘
+        k9: "9.0", // estimate · 43 K / 43 IP × 9 · 三振多(真材料)
+        whip: "1.26", // estimate · 官網每局被上壘率 1.255(42 H + 12 BB / 43 IP)
+        bb9: "2.5", // estimate · 12 BB / 43 IP × 9
+        hr9: "0.63", // estimate · 3 HR / 43 IP × 9
+      },
+      recent: ["W", "L", "W", "L", "W"], // placeholder · 富邦 28-24-0(.538)
+      winRate: 56,
+    },
+    topScores: [
+      // 桃園偏打者 → 中高分;富邦隊強+先發較穩偏客隊(格式 home : away = 樂天 : 富邦)
+      { score: "3 : 4", probability: 7.5 },
+      { score: "4 : 5", probability: 7.0 },
+      { score: "2 : 4", probability: 7.0 },
+      { score: "4 : 3", probability: 7.0 },
+      { score: "3 : 5", probability: 6.5 },
     ],
     aiConfidence: 52,
   },
