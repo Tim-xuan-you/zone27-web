@@ -128,20 +128,20 @@ export default function ManifestoPage() {
             roman="I"
             label="DISCLOSURE"
             zh="完整公開引擎"
-            industry="藏 model weights · 藏 training data · 藏 fine-tuning"
-            zone27="把整個演算法、所有輸入、所有限制全部寫進公開 model report"
+            industry="藏起演算法 · 藏起用了哪些資料 · 藏起怎麼調整的"
+            zone27="把整個演算法、所有輸入、所有限制全部寫成一份公開報告"
           >
             <P>
               <strong className="text-bone">行業為什麼藏:</strong>{" "}
-              OpenAI / Anthropic / Google 的商業模式核心是 API 計費 ·
-              算法是會被複製的資產。藏 weights = 對手不能立刻 fork =
-              billions of dollars 的 R&amp;D 不會在 24 小時內歸零。
+              這些大型 AI 公司的商業模式核心是「每次呼叫收費」·
+              算法是會被複製的資產。藏起演算法 = 對手不能立刻照抄 =
+              砸下的巨額研發費不會在 24 小時內歸零。
               對封閉式 AI 公司,商業邏輯成立。
             </P>
             <P>
               <strong className="text-bone">誰因此受害:</strong>{" "}
-              訪客被迫信任不可驗證的黑盒。「我們的模型在 X 個 benchmark 上
-              拿到 Y 分」這種主張無法獨立檢驗 ·
+              訪客被迫信任不可驗證的黑盒。「我們的模型在 X 項測試上
+              拿到 Y 分」這種說法沒辦法被外人獨立驗證 ·
               使用者只能接受或拒絕,沒有第三條路。
             </P>
             <P>
@@ -160,7 +160,7 @@ export default function ManifestoPage() {
               >
                 /audit
               </Link>
-              ,就可以複製出功能等效的引擎。沒有算法護城河。
+              ,就能做出一個功能一樣的引擎。我們的算法沒有任何不可取代的秘密。
             </P>
             <P>
               <strong className="text-bone">為什麼我們接受這個代價:</strong>{" "}
@@ -168,9 +168,9 @@ export default function ManifestoPage() {
               <Link href="/membership" className="text-gold hover:underline underline-offset-4">
                 BLACK
               </Link>{" "}
-              的價值是創辦人親手 onboarding + 建立期社群的位置 —{" "}
-              <strong className="text-bone">這些東西 fork 不走</strong>。
-              算法本來就沒有可藏的價值,硬藏 = 假裝有秘密 = 對訪客撒謊
+              的價值是創辦人親手帶你入門 + 早期社群裡的位置 —{" "}
+              <strong className="text-bone">這些東西抄不走</strong>。
+              算法本來就沒什麼好藏的,硬要藏 = 假裝有秘密 = 對訪客撒謊
               = 品牌信用自殺。
             </P>
             <P className="text-mute/70">
@@ -196,39 +196,39 @@ export default function ManifestoPage() {
             roman="II"
             label="MONETIZATION"
             zh="工具免費,身分付費"
-            industry="工具 per-use 計費 (SaaS) 或免費釣魚後抽佣 (運彩平台)"
+            industry="工具按使用次數收費(訂閱軟體)· 或免費當餌、賺賭注抽佣(運彩平台)"
             zone27="引擎完全免費 · 收費僅在身分層 (BLACK)"
           >
             <P>
               <strong className="text-bone">行業為什麼這樣收費:</strong>{" "}
-              SaaS 模式收入隨使用量線性成長,投資人估值模型友善
-              (LTV / CAC / Net Revenue Retention 都有現成公式)。
+              訂閱軟體的收入隨使用量穩定成長,投資人很好估值
+              (怎麼算客戶終身價值、獲客成本、續訂率都有現成公式)。
               運彩平台則用免費工具當釣餌,賺真錢靠賭注抽佣 30-50% —
               這種比例只有在「使用者看不見」的地方才可能。
             </P>
             <P>
               <strong className="text-bone">誰因此受害:</strong>{" "}
-              偶爾使用者每月被 charge 卻沒用到那個錢的價值 ·
+              偶爾才用的人每月被扣款,卻沒用到那筆錢該有的價值 ·
               重度使用者繳的也覆蓋不了他造成的真實服務成本(被攤平了)·
               而運彩用戶最大的受害是不知道自己一年付了多少抽佣
               (隱藏在每筆下注的賠率裡)。
             </P>
             <P>
               <strong className="text-bone">這個倒置讓我們失去什麼:</strong>{" "}
-              我們永遠不會有「ARR 50x 線性成長」的故事可以講給創投。
+              我們永遠不會有「年營收翻 50 倍」這種故事可以講給創投。
               收入只靠身分會員費(BLACK NT$ 500/31 天)·
               會員不限量 · 但 CPBL 市場本身就小。這是一個{" "}
               <Link href="/about" className="text-gold hover:underline underline-offset-4">
                 俱樂部規模的事業
               </Link>
-              ,不是 unicorn 路線。
+              ,不是那種估值上看十億美元的獨角獸路線。
             </P>
             <P>
               <strong className="text-bone">為什麼我們接受這個代價:</strong>{" "}
-              因為我們蓋的不是消耗品 SaaS,是一個 BLACK 會員社群 + 一個
+              因為我們蓋的不是用完即丟的訂閱軟體,是一個 BLACK 會員社群 + 一個
               開放給所有人的精緻工具。引擎免費讓任何懷疑者可以親手驗證 ·
               身分付費讓真正想成為品牌一部分的人有專屬位置。
-              這兩件事不能反過來:免費身分 + 收費工具 = 我們變成普通 SaaS。
+              這兩件事不能反過來:免費身分 + 收費工具 = 我們變成普通的訂閱軟體。
             </P>
             {/* Round 29 Wave 1 · MLM disambiguation brand defense.
                 台灣訪客看到「BLACK 會員 + 親手 onboard + LINE 群 +
@@ -243,44 +243,44 @@ export default function ManifestoPage() {
                 lang="en"
                 className="font-mono text-loss text-[10px] tracking-[0.4em] mb-3"
               >
-                ▲ NOT MLM · 結構防線
+                ▲ 我們不是傳銷 · 結構說明
               </p>
               <P className="!mb-3">
-                <strong className="text-bone">這結構長得像 MLM 嗎?</strong>{" "}
-                表面有幾個 visual cue 確實會被聯想:BLACK 會員身分 ·
-                付費會員 · Tim 親手 onboard · 未來 LINE 群 + 實體聚會。
-                但 ZONE 27 的經濟結構跟 MLM / 安麗式平台
+                <strong className="text-bone">這結構長得像傳銷嗎?</strong>{" "}
+                表面上有幾個地方確實容易讓人聯想到傳銷:BLACK 會員身分 ·
+                付費會員 · Tim 親手帶你入門 · 未來 LINE 群 + 實體聚會。
+                但 ZONE 27 的經濟結構跟傳銷 / 安麗式平台
                 <strong className="text-bone">完全相反</strong>。
               </P>
               <ul className="list-none pl-0 space-y-2 text-sm font-mono text-mute">
                 <li>
-                  <span className="text-loss/80">✕</span> MLM downline 抽佣 →{" "}
-                  <span className="text-bone">ZONE 27 · 零 multi-level compensation</span>
+                  <span className="text-loss/80">✕</span> 傳銷靠拉下線抽佣 →{" "}
+                  <span className="text-bone">ZONE 27 · 完全沒有多層抽成</span>
                 </li>
                 <li>
-                  <span className="text-loss/80">✕</span> MLM 推薦獎金 / referral bonus →{" "}
+                  <span className="text-loss/80">✕</span> 傳銷有推薦獎金 →{" "}
                   <span className="text-bone">ZONE 27 · 沒有任何推薦獎金</span>
                 </li>
                 <li>
-                  <span className="text-loss/80">✕</span> MLM 業績 quota →{" "}
-                  <span className="text-bone">BLACK 月費付款 · 沒 quota</span>
+                  <span className="text-loss/80">✕</span> 傳銷有業績門檻 →{" "}
+                  <span className="text-bone">BLACK 只是月費付款 · 沒有任何業績門檻</span>
                 </li>
                 <li>
-                  <span className="text-loss/80">✕</span> MLM 強制庫存 →{" "}
+                  <span className="text-loss/80">✕</span> 傳銷有強制庫存 →{" "}
                   <span className="text-bone">沒實體商品 · 引擎免費</span>
                 </li>
                 <li>
-                  <span className="text-loss/80">✕</span> MLM「成功學」/ 畫餅訓練 →{" "}
-                  <span className="text-bone">沒任何 sales-script · 沒洗腦營</span>
+                  <span className="text-loss/80">✕</span> 傳銷有「成功學」/ 畫餅訓練 →{" "}
+                  <span className="text-bone">沒有任何推銷話術 · 沒有洗腦營</span>
                 </li>
                 <li>
-                  <span className="text-loss/80">✕</span> MLM 無限招募下線 · 每層抽佣 →{" "}
+                  <span className="text-loss/80">✕</span> 傳銷無限拉下線 · 每層抽佣 →{" "}
                   <span className="text-bone">會員不限量 · 但零多層抽佣 · 每位都是平台直接關係</span>
                 </li>
               </ul>
               <P className="text-mute/70 !mb-0 mt-4 text-sm">
                 創作者在 ZONE 27 發分析<strong className="text-bone">完全免費 · 不抽成 ·
-                也不靠賣分析賺錢</strong> · 賺的是地位:公開發、賽後自動對帳、爬天梯、被追蹤。
+                也不靠賣分析賺錢</strong> · 賺的是地位:公開發、賽後自動跟結果對帳、爬天梯、被追蹤。
                 會員費只是
                 <strong className="text-bone">一個付費身分 — 出錢養著免費引擎</strong> ·
                 不是招募階梯 · 不是未來業績的領先指標 · 不做多層次分潤。
@@ -319,7 +319,7 @@ export default function ManifestoPage() {
             roman="III"
             label="COVERAGE"
             zh="引擎能誠實算的才覆蓋"
-            industry="覆蓋全部可下注賽事 (越多上架 · 越多抽佣機會)"
+            industry="把所有能下注的賽事全部上架(上架越多 · 抽佣機會越多)"
             zone27="只覆蓋引擎驗證過、誠實能算的賽事 · 拒絕為了量犧牲信號品質"
           >
             <P>
@@ -368,36 +368,36 @@ export default function ManifestoPage() {
             roman="IV"
             label="PRIVACY"
             zh="零第三方追蹤"
-            industry="Google Analytics + Facebook Pixel + Hotjar + 全套廣告 retargeting"
+            industry="各種網站追蹤工具 + 滑鼠軌跡側錄 + 全套「跟著你跑」的廣告"
             zone27="0 第三方 cookies · 0 trackers · 0 pixels · 0 session recording"
           >
             <P>
               <strong className="text-bone">行業為什麼追蹤:</strong>{" "}
-              個人化能讓轉換率提升 15-30% · retargeting 廣告 ROAS 平均高
-              5-8 倍 · A/B testing 讓產品決策有數據根據。
-              現代行銷的整套 playbook 就是建立在「我們知道訪客每一步動作」這個前提上。
+              個人化能讓轉換率提升 15-30% · 「跟著你跑」的廣告平均每花一塊回收高
+              5-8 倍 · 兩種版本互相比較(A/B 測試)讓決策有數據根據。
+              現代行銷整套打法,就建立在「我們知道訪客每一步動作」這個前提上。
             </P>
             <P>
               <strong className="text-bone">誰因此受害:</strong>{" "}
               訪客 — 但他們大多不知道。
               一次造訪可能在背後觸發 8-12 個追蹤腳本 · 把 IP、瀏覽器指紋、
               滑鼠軌跡、停留時間全部送進 Google / Meta / TikTok 的廣告聯播網。
-              這些資料後續被用來在訪客其他網站做 retargeting · 在他
+              這些資料後續被拿去在你逛的其他網站投放「跟著你跑」的廣告 · 在你
               不知情的狀態下持續追蹤一輩子。
             </P>
             <P>
               <strong className="text-bone">這個倒置讓我們失去什麼:</strong>{" "}
-              我們無法做 A/B testing(看不到使用者行為差異)·
-              無法做 retargeting 廣告(沒有 audience pool)·
-              無法精細測量行銷 funnel 各階段轉換率。
-              這些是現代行銷 SaaS 的標準動作,我們全部放棄。
+              我們無法比較兩種版本哪個好(看不到使用者行為差異)·
+              無法投放「跟著你跑」的廣告(沒有可鎖定的名單)·
+              無法精細測量行銷漏斗每一階段的轉換率。
+              這些是現代行銷工具的標準動作,我們全部放棄。
             </P>
             <P>
               <strong className="text-bone">為什麼我們接受這個代價:</strong>{" "}
-              因為我們本來就不打廣告 — 沒有 audience profiling 的需求 ·
-              沒有 retargeting 的對象。
+              因為我們本來就不打廣告 — 不需要替訪客建檔分類 ·
+              也沒有要追著投廣告的對象。
               真正的回饋管道是 BLACK 直接寫信給創辦人 ·
-              這比任何 heatmap 都精確一千倍。
+              這比任何滑鼠熱區圖都精確一千倍。
               <strong className="text-bone">放棄追蹤的代價剛好是 0</strong> —
               我們失去的能力本來就不在我們的成長路徑上。
             </P>
@@ -456,8 +456,8 @@ export default function ManifestoPage() {
                 。
               </P>
               <P>
-                這跟「全部公開」(naive indie)不一樣,也跟「全部藏」(closed AI lab)
-                不一樣。是兩個世界都要:
+                這跟「全部公開」的素人專案不一樣,也跟「全部藏起來」的封閉 AI 公司
+                不一樣。兩邊的好處我們都要:
               </P>
             </div>
 
@@ -479,7 +479,7 @@ export default function ManifestoPage() {
                   <SynthItem>本身就是公開的事(棒球數據累積知識 · 圖書館 / Wikipedia)</SynthItem>
                 </ul>
                 <p className="mt-6 pt-4 border-t border-line/40 font-mono text-mute/80 text-[10px] tracking-[0.25em] leading-relaxed">
-                  公開的事 fork 走無意義 · 信任卻能換來
+                  公開的東西就算被抄走也沒差 · 但換來了信任
                 </p>
               </div>
 
@@ -503,27 +503,27 @@ export default function ManifestoPage() {
                   </SynthItem>
                 </ul>
                 <p className="mt-6 pt-4 border-t border-gold/30 font-mono text-gold text-[10px] tracking-[0.25em] leading-relaxed">
-                  Tim 本人 · 27 年品味 · 不可能 fork
+                  Tim 本人 · 27 年品味 · 不可能被抄走
                 </p>
               </div>
             </div>
 
             <div className="space-y-5 zh-body text-mute text-base leading-relaxed max-w-2xl">
               <P>
-                <strong className="text-bone">這個 framing 解決兩個矛盾:</strong>
+                <strong className="text-bone">這個說法解決兩個矛盾:</strong>
               </P>
               <List>
                 <Item label="假厲害 vs 真厲害">
-                  「藏算法」是假厲害(對手 30 分鐘 fork 就拆穿)。
-                  「藏 BLACK 身分 + Tim 的品味」是真厲害(本來就 fork 不走)。
+                  「藏算法」是假厲害(對手 30 分鐘照抄就拆穿)。
+                  「藏 BLACK 身分 + Tim 的品味」是真厲害(本來就抄不走)。
                 </Item>
                 <Item label="信任 vs 神秘感">
                   「全部攤」訪客信任你(可驗證)。
                   「保留訂閱者特權」訪客還是想加入(因為神秘感)。
                 </Item>
                 <Item label="紅海 vs 藍海">
-                  「假裝有秘密」進的是紅海(收費明牌群組 / 賣明牌的站 / 抽下注的莊家 50+ 個競品)。
-                  「公開方法 + 私藏身分」進的是藍海(0 競品)。
+                  「假裝有秘密」進的是擠滿人的紅海(收費明牌群組 / 賣明牌的站 / 抽下注的莊家 50+ 個競品)。
+                  「公開方法 + 私藏身分」進的是沒人做的藍海(0 競品)。
                 </Item>
               </List>
               <P className="text-mute/70">
@@ -595,7 +595,7 @@ export default function ManifestoPage() {
             </p>
             <ul className="space-y-3 text-sm text-mute leading-relaxed">
               <li>
-                ▸ 倒置 I · 完整 model report:{" "}
+                ▸ 倒置 I · 完整模型報告:{" "}
                 <Link href="/audit" className="text-gold hover:underline">
                   /audit
                 </Link>{" "}

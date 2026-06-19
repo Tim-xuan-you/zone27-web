@@ -132,11 +132,9 @@ export default function LocalStorageReceipt({ variant = "receipt" }: Props) {
       </ul>
 
       <p className="font-mono text-mute/70 text-[10px] tracking-[0.25em] leading-relaxed mt-4 pt-4 border-t border-line/40">
-        ⚓ 此 inventory 是 device-local data 不是 server snapshot ·
-        Loewenstein/Issacharoff 1994 endowment-via-inventory · visitor&apos;s own
-        browser holds the state · 您 DevTools 一鍵 clear 即清除全部 · 我們不會
-        在 backend 保留 backup · 不會 tracking pixel restore · per /audit S05
-        PRE-COMMIT clause 完整 policy 在{" "}
+        ⚓ 這份清單是存在你裝置上的資料 · 不是我們伺服器的備份 ·
+        資料一直在你自己的瀏覽器裡 · 你隨時可以一鍵清除全部 · 我們不會
+        在伺服器留備份 · 不會用追蹤技術還原 · 完整說明在{" "}
         <Link
           href="/audit#section-06"
           className="text-gold/85 hover:text-gold underline-offset-4 hover:underline"

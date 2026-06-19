@@ -59,14 +59,14 @@ export default function TermsPage() {
       <Section no="02" label="ELIGIBILITY" zh="使用資格">
         <p>
           您必須年滿 <strong className="text-bone">18 歲</strong>(中華民國民法成年年齡)才能使用本服務的會員功能。
-          純瀏覽性質(讀文章、看 /lab 跑模擬)不受此限。
+          純看內容(讀文章、到實驗室看引擎跑模擬)不受此限。
         </p>
       </Section>
 
       {/* ── 03 PRE-LAUNCH STATUS ────────────────── */}
       <Section no="03" label="PRE-LAUNCH STATUS" zh="Pre-launch 階段聲明">
         <p>
-          本網站目前處於 <strong className="text-bone">stealth mode / pre-launch</strong> 階段。意即:
+          本網站目前還沒正式開賣,<strong className="text-bone">還在準備階段</strong>。意思是:
         </p>
         <ul className="space-y-3">
           <li>▸ 功能、文案、定價、UI 隨時可能調整</li>
@@ -134,8 +134,8 @@ export default function TermsPage() {
         <h3 className="text-bone text-lg mt-6 mb-3">BLACK(NT$ 500 / 31 天)</h3>
         <ul className="space-y-2">
           <li>
-            <strong className="text-bone">每期 14 天無條件退款</strong> · 您每 31 天手動
-            轉帳當期 NT$ 500 入帳 + 您收到該期 access confirmation email
+            <strong className="text-bone">每期 14 天無條件退款</strong> · 您每 31 天自己
+            轉帳當期 NT$ 500 入帳 + 從您收到該期「本期開通通知信」
             那天起算 · 14 個自然日內可解除該期契約 · 全額退回 · 不按比例。
           </li>
           <li>
@@ -149,23 +149,22 @@ export default function TermsPage() {
             不要求填問卷 · 不寄挽留文案 · 我們不裝挽留。
           </li>
           <li>
-            <strong className="text-bone">沒有 auto-renew</strong> · 同 brand
-            IP「倒置 SaaS · 不自動扣款」(per /membership/black-card + /integrity
-            rule #13 binding · ECPay/TapPay/Stripe 自動扣款全 refused forever)·
-            您不主動轉帳下期 · 服務自然停止 · 不需 cancel button · 不需 exit
-            interview · 不寄 reactivation 文案。
+            <strong className="text-bone">不會自動續扣</strong> · 我們承諾
+            永遠不自動扣款(任何自動扣款服務都不接)·
+            您不主動轉帳下一期 · 服務就自然停止 · 不用按取消鍵 · 不用填退出
+            問卷 · 我們也不會寄催你回來的信。
           </li>
           <li>
-            <strong className="text-bone">您退款後仍保留</strong> · 已下載的 methodology
-            docs · 全部 /audit + /methodology + /track-record 公開 trust artifacts ·
+            <strong className="text-bone">您退款後仍保留</strong> · 已下載的方法說明文件
+            · 還有所有公開的方法論、稽核、戰績頁內容 ·
             這些不在退款範圍 · 我們無權收回。
           </li>
           <li>
             <strong className="text-bone">您退款後失去</strong> · 該期 BLACK
             會員資格(支持者金環 + 會員房間 + Tim 親手回信)· 期中退款後當期
-            access 立即停止 · ZONE 27 不會繼續發您 period-end newsletter ·
-            您也不能 access BLACK-only content 直到下期主動轉帳 · BOTTOM 27
-            ecosystem cross-pass(未來 ship)。
+            會員權限立即停止 · ZONE 27 不會再發您期末電子報 ·
+            要等下一期主動轉帳才能看 BLACK 專屬內容 · 也包含未來 BOTTOM 27
+            的跨站通行權。
           </li>
         </ul>
 
@@ -173,8 +172,7 @@ export default function TermsPage() {
           ▸ 完整 refund 政策同步顯示在 <Link href="/membership" className="text-gold underline-offset-4 hover:underline">/membership Payment Trust block</Link>
           + <Link href="/faq" className="text-gold underline-offset-4 hover:underline">/faq Q「14 天退款怎麼運作」</Link>
           + <Link href="/membership/black-card" className="text-gold underline-offset-4 hover:underline">/membership/black-card hero「14-DAY 退款保證」 chip</Link>
-          · 三處 surface synchronized · 任何 update 需 30 天前先公告 · per
-          /audit S05 PRE-COMMIT pattern。
+          · 這三個地方寫的都一樣 · 任何修改都會 30 天前先公開公告。
         </p>
       </Section>
 
@@ -209,12 +207,12 @@ export default function TermsPage() {
         <p>使用本網站時,您同意:</p>
         <ul className="space-y-3">
           <li>▸ 不對伺服器發送惡意請求(DDoS、暴力枚舉、注入攻擊)</li>
-          <li>▸ 不大規模 scrape 我們的內容或 endpoints</li>
+          <li>▸ 不大規模自動抓取我們的內容或頁面資料</li>
           <li>▸ 不偽造身分或冒充他人加入 waitlist</li>
           <li>▸ 不利用本網站從事任何違反中華民國法律的行為</li>
         </ul>
         <p>
-          違反上述使用將導致您的 access 被立即終止,且我們可能保留追究法律責任的權利。
+          違反上述使用,我們會立即終止您的使用權限,並可能保留追究法律責任的權利。
         </p>
       </Section>
 
@@ -248,7 +246,7 @@ export default function TermsPage() {
           <li>▸ 您因 AI 預測結果產生的任何金錢損失</li>
           <li>▸ 網站宕機或資料暫時無法取用</li>
           <li>
-            ▸ 第三方平台(原始碼代管 · <Code>Vercel</Code> ·{" "}
+            ▸ 第三方平台(程式部署 · <Code>Vercel</Code> ·{" "}
             <Code>Supabase</Code>(Tokyo ap-northeast-1))的服務中斷或資料事故
           </li>
           <li>▸ 您自身違反本服務條款導致的後果</li>

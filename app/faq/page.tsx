@@ -34,7 +34,7 @@ const CATEGORIES: Category[] = [
         q: "什麼是 ZONE 27?",
         a: (
           <>
-            <strong className="text-bone">ZONE 27 = 賭徒的 Bloomberg Terminal。</strong> 客群 = 會下注的 sports 迷 · 對標靠賣明牌賺錢的對手。 不同的是:引擎永遠免費 · 不賣明牌 · PROVED + DIVERGED 等大公開 · 方法完整公開(見 /methodology + /audit)。 你拿我們的資料自己決定 · ZONE 27 不接受下注(我們不是賭場)。 怎麼靠這活下來?見下面「怎麼賺錢」。 Phase 1 CPBL · Phase 2 NBA · Tim 親手 curate。 完整方法論見{" "}
+            <strong className="text-bone">ZONE 27 = 賭徒的彭博終端機(專業金融資訊台)。</strong> 我們的對象是會下注的運動迷 · 對手是那些靠賣明牌賺錢的人。 不同的是:引擎永遠免費 · 不賣明牌 · PROVED + DIVERGED 等大公開 · 方法完整公開(見 /methodology + /audit)。 你拿我們的資料自己決定 · ZONE 27 不接受下注(我們不是賭場)。 怎麼靠這活下來?見下面「怎麼賺錢」。 Phase 1 CPBL · Phase 2 NBA · Tim 親手 curate。 完整方法論見{" "}
             <Link href="/about" className="text-gold underline-offset-4 hover:underline">
               /about
             </Link>
@@ -62,7 +62,7 @@ const CATEGORIES: Category[] = [
           <>
             不是。我們不接受下注、不出彩金、不撮合對賭。
             ZONE 27 是「資訊與社群平台」 —— 引擎與分析都免費,賣的是<strong className="text-bone">會員身分</strong>
-            (出錢養著免費引擎),模式類似 Bloomberg、TradingView、Action Network,而非運彩公司。
+            (出錢養著免費引擎),模式類似專業財經與運動數據資訊台,而不是運彩公司。
             我們嚴格遵守台灣法規邊界,所有經濟系統皆為單向(虛擬點數無法兌回新台幣)。
           </>
         ),
@@ -86,8 +86,8 @@ const CATEGORIES: Category[] = [
         id: "no-user-recommendations",
         a: (
           <>
-            Tim 是唯一 curator · 目前先做 CPBL · 同 Stratechery / Ben Thompson 親手 curate 所有內容。
-            靠賣明牌的生意抽傭 model 需要 user 推薦 · ZONE 27 結構性相反 · 不接受 third-party 內容。
+            Tim 是唯一挑選內容的人 · 目前先做 CPBL · 所有內容由 Tim 一個人親手挑選。
+            靠賣明牌抽傭的生意需要使用者互相推薦 · ZONE 27 的結構正好相反 · 不接受外部投稿直接上架。
             您可以到{" "}
             <Link href="/member/submit" className="text-gold underline-offset-4 hover:underline">
               /member/submit
@@ -121,8 +121,8 @@ const CATEGORIES: Category[] = [
           <>
             <span className="font-mono text-gold">BLACK CPBL 季票 · 手動銀行轉帳</span>
             (NT$ 500/31 天 · 每 31 天你主動轉帳一次 · 不自動續扣)。
-            <span className="font-mono text-gold mx-1">付款系統就緒後開放</span>
-            (milestone-triggered · 不綁日期)。 在此之前,加入等候名單 =
+            <span className="font-mono text-gold mx-1">付款系統準備好後就開放</span>
+            (看進度,不綁定日期)。 在此之前,加入等候名單 =
             排隊優先權,<strong className="text-bone">完全免費</strong>,
             不收任何資料以外的東西。下方按鈕直接加入:
             <br />
@@ -142,8 +142,8 @@ const CATEGORIES: Category[] = [
           <>
             <strong className="text-bone">14 天無條件退款。</strong>{" "}
             寄信 tatayngiti@gmail.com · 主旨「REFUND · ZONE 27 BLACK」 · Tim 48h 回覆
-            確認 · 原戶頭退全額。 不問原因 · 不挽留 · 不問卷 · 不 retention 文案。
-            翻倍消保法 § 19 法定 7-day 下限。 完整條款{" "}
+            確認 · 原戶頭退全額。 不問原因 · 不挽留 · 不發問卷 · 不寄催你回來的信。
+            比消保法 § 19 規定的 7 天最低標準多一倍。 完整條款{" "}
             <Link href="/terms" className="text-gold underline-offset-4 hover:underline">
               /terms §4B
             </Link>
@@ -156,16 +156,16 @@ const CATEGORIES: Category[] = [
         id: "corporate",
         a: (
           <>
-            <strong className="text-gold">不接。</strong> 不存在 enterprise tier
-            · 不存在「talk to our team」 form · ZONE 27 brand IP = 個人
-            audience-fans · 不接 corporate B2B。
+            <strong className="text-gold">不接。</strong> 沒有企業方案
+            · 沒有「聯絡業務團隊」表單 · ZONE 27 就是做給個人球迷的
+            · 不接企業客戶。
             <br />
             <br />
-            如果您是 corporate 想用 ZONE 27 · 同 rates 同 access:
-            自己加入 BLACK NT$ 500/31 天 · self-serve。
+            如果您是企業想用 ZONE 27 · 價格和權限都一樣:
+            自己加入 BLACK NT$ 500/31 天 · 自助辦理。
             <br />
             <br />
-            完整 pricing rationale 見{" "}
+            完整的定價理由見{" "}
             <Link href="/membership" className="text-gold underline-offset-4 hover:underline">
               /membership
             </Link>
@@ -178,8 +178,8 @@ const CATEGORIES: Category[] = [
         id: "mlm",
         a: (
           <>
-            <strong className="text-bone">沒 downline 結構。</strong>{" "}
-            0 推薦獎金 · 0 多層抽佣 · 0 業績 quota · 0 招募下線 · 會員不限量但零金字塔抽佣。
+            <strong className="text-bone">沒有下線結構。</strong>{" "}
+            沒有推薦獎金 · 沒有多層抽佣 · 沒有業績目標 · 沒有招募下線 · 會員不限量,但完全沒有金字塔式抽佣。
             我們的收入只有一條腿:會員自己出錢的身分訂閱(BLACK NT$ 500/31 天)·
             出錢養著免費引擎 · 沒有下線、沒有層層分潤。
           </>
@@ -196,8 +196,8 @@ const CATEGORIES: Category[] = [
         q: "你們的 AI 預測準確率多高?",
         a: (
           <>
-            目前 Lab v0.2 使用逐打席對決模型(Real At-Bat),
-            10,000 次模擬的收斂結果通常與歷史鎖定 AI 預測落在
+            目前實驗室 v0.2 用的是逐打席對決模型,
+            跑 10,000 次模擬的收斂結果,通常和先前鎖定的 AI 預測落在
             <span className="font-mono text-gold mx-1">±2%</span>
             內。我們不宣稱「鐵口直斷」 — AI 給的是機率分布,不是必勝牌。
             背後的數學基礎請見{" "}
@@ -230,9 +230,9 @@ const CATEGORIES: Category[] = [
             <Link href="/lab" className="text-gold underline-offset-4 hover:underline">
               /lab
             </Link>
-            ,選一場比賽,按 ▶ RUN 10,000 SIMULATIONS,看真實的
-            Poisson 採樣在瀏覽器端跑出收斂結果,然後按 REPLAY MODE
-            看一場 9 局逐打席文字直播。<strong className="text-bone">眼見為憑。</strong>
+            ,選一場比賽,按下「跑 10,000 次模擬」,看真實的
+            隨機抽樣在你的瀏覽器裡跑出收斂結果,然後按「重播模式」
+            看一場 9 局逐打席的文字直播。<strong className="text-bone">眼見為憑。</strong>
           </>
         ),
       },
@@ -249,7 +249,7 @@ const CATEGORIES: Category[] = [
           <>
             存{" "}
             <span className="font-mono text-gold/90">Supabase Tokyo</span> 加密 PostgreSQL ·
-            RLS 鎖住 · 連 publishable key 都讀不到全表 · 只能透過 SECURITY DEFINER 回傳 COUNT。
+            資料庫上鎖 · 連我們公開的金鑰都讀不到整張表 · 只能透過受控函式回傳「總人數」。
             不分享 · 不販售 · 不轉手。 完整儲存方式見{" "}
             <Link href="/privacy" className="text-gold underline-offset-4 hover:underline">
               /privacy §04
@@ -263,8 +263,8 @@ const CATEGORIES: Category[] = [
         a: (
           <>
             <strong className="text-bone">不會。</strong>{" "}
-            0 Google Analytics · 0 Facebook Pixel · 0 Hotjar · 0 third-party cookies。
-            localStorage 只在您自己瀏覽器 · 沒伺服器副本。 完整清單{" "}
+            沒有 Google Analytics · 沒有 Facebook Pixel · 沒有 Hotjar · 沒有第三方追蹤 cookie。
+            你的瀏覽紀錄只存在你自己的瀏覽器裡 · 我們的伺服器沒有副本。 完整清單{" "}
             <Link href="/privacy" className="text-gold underline-offset-4 hover:underline">
               /privacy
             </Link>
@@ -283,7 +283,7 @@ const CATEGORIES: Category[] = [
             >
               tatayngiti@gmail.com
             </a>
-            {" "}· Tim 24h 內從 Supabase 永久刪除 · 不留備份。
+            {" "}· Tim 24 小時內從資料庫永久刪除 · 不留備份。
             等候名單不收費 · 不簽約 · 不綁定。
           </>
         ),

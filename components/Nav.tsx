@@ -124,7 +124,7 @@ export default function Nav({ active }: { active?: NavKey }) {
               below.
 
               Round 22 fix(Tim 問「按哪裡加入會員?」)· 5 nav items 視覺
-              等重 · "GOLD 會員" 不像 CTA · 訪客 wayfinding 失敗。Mobile
+              等重 · "會員" 不像 CTA · 訪客 wayfinding 失敗。Mobile
               已用 gold 填色 pill 凸顯。Desktop 改用 gold-outlined pill
               (less aggressive than mobile filled · 維持 hierarchy 但
               signal CTA) · 一眼可辨「這是 membership 入口」。
@@ -261,7 +261,7 @@ export default function Nav({ active }: { active?: NavKey }) {
       </nav>
       {/* R187 · 整個移除頂部「7/270 創始編號」稀缺條(ScarcityStrip)· per Tim
           dogfood「不想要前 270 · 太複雜 · 用戶一頭霧水」· chrome 改 Polymarket 式乾淨。
-          稀有感改由 /membership「最高階·GOLD 會員」承載 · 不再用全站倒數條轟炸。 */}
+          稀有感改由 /membership「BLACK 會員」承載 · 不再用全站倒數條轟炸。 */}
     </>
   );
 }

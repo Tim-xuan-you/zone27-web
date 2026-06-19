@@ -31,13 +31,13 @@ const SIGNED_AT = "2026-05-23";
 const REDLINES: ReadonlyArray<{ no: string; rule: string; basis: string; revised?: string }> = [
   {
     no: "01",
-    rule: "不做黏著式社交迴圈 · 0 私訊 / 0 即時聊天室 / 0 獨立論壇",
+    rule: "不做把你黏住的社交設計 · 沒有私訊 / 沒有即時聊天室 / 沒有獨立論壇",
     basis: "每篇分析底下可以討論、可以回覆作者(一場一篇預測仍賽前鎖死、不可改)· 但沒有私訊、沒有即時聊天室、沒有獨立論壇 · ZONE 27 是讓你照見自己判斷的鏡子 · 不是想盡辦法黏住你的互動迴圈。",
     revised: "2026-06 隨群眾市場 pivot 修訂:原文「不做任何 user-to-user 互動」· 開了「分析底下可討論」後,如實改成現在的界線。",
   },
   {
     no: "02",
-    rule: "不 ship streak / daily-login farming / Days Followed badge",
+    rule: "不做「連續登入領獎」「追蹤天數徽章」這種把你黏在站上的設計",
     basis: "不用「連續登入天數」「追蹤幾天」這種把你黏在站上的設計 · 不為互動而互動。",
   },
   {
@@ -59,32 +59,32 @@ const REDLINES: ReadonlyArray<{ no: string; rule: string; basis: string; revised
   },
   {
     no: "06",
-    rule: "不 寄生 gambling 平台",
+    rule: "不寄生在賭博平台上",
     basis: "0 爬取 賣明牌的站 / 收費明牌群組 / 收費老師 · 0 抽成 / 分潤 · 我們要取代它們 · 不是幫它們導流。",
   },
   {
     no: "07",
-    rule: "不 接 AdMob 廣告營收",
+    rule: "不接 Google 那類廣告營收",
     basis: "AdMob 永久封殺 · 0 廣告 · 0 業配 · 同步 /privacy + /audit · /ethics 第 2 條 binding。",
   },
   {
     no: "08",
-    rule: "不 multi-step onboarding wizard",
+    rule: "不做一頁接一頁、逼你填一堆欄位的註冊流程",
     basis: "1 個動作 / 1 個 email · 不分好幾頁註冊 · 不一步一步逼你填更多欄位。",
   },
   {
     no: "09",
-    rule: "不 modal paywall scroll-lock",
+    rule: "不用彈窗卡住你、逼你訂閱才能往下看",
     basis: "0 彈窗 · 0 卡住捲動 · 0「訂閱才能看下去」遮罩 · 內容看到底都不擋你。",
   },
   {
     no: "10",
-    rule: "不 ship「管它準不準包裝」 fake methodology",
-    basis: "engine v0.2/v0.3/v0.4 全 publish · 不藏 estimate · 不藏 DIVERGED · 不藏 sample debt N<30 · 這是最核心的一條紅線。",
+    rule: "不做「包裝得好看、其實不管準不準」的假方法論",
+    basis: "引擎每一版(v0.2／v0.3／v0.4)全部公開 · 不藏推估值 · 不藏算錯的那幾場 · 不藏「結算場數還不到 30 場、樣本還不夠」這件事 · 這是最核心的一條紅線。",
   },
   {
     no: "11",
-    rule: "不 ship fake testimonials / 偽造 social proof",
+    rule: "不放假好評 / 不偽造「很多人都在用」這種口碑",
     basis: "等真實 BLACK 會員加入後才放他們的話 · 0 代筆好評 · 0 假推薦 · 0「已有 1000+ 人加入」灌水。",
   },
   {
@@ -94,7 +94,7 @@ const REDLINES: ReadonlyArray<{ no: string; rule: string; basis: string; revised
   },
   {
     no: "13",
-    rule: "不 ship subscription auto-renewal · 永遠 · ECPay / TapPay / 綠界定期定額 / Stripe / 藍新 / 任何 payment gateway 自動扣款 全 refused",
+    rule: "永遠不做訂閱自動續扣 · 綠界 / 藍新 / TapPay / Stripe 這類金流的定期定額自動扣款 · 一律拒絕",
     basis: "每次續訂都要你親手按一次 + 自己轉帳 · 自動扣款 = 「忘記取消就一直被扣」的暗黑設計 · 我們不做。每一季由你主動「我還在乎」重新加入 · 而不是靠你忘記取消來留住你。BLACK 從月費自動扣款改成 NT$ 500/31 天親手一次性付款 · 沒有自動續訂對我們是機會不是限制 · 違反 = 品牌信用永久留下記錄。",
   },
 ];
@@ -107,47 +107,47 @@ const ETHICS_COMMITMENTS: ReadonlyArray<{
 }> = [
   {
     no: "01",
-    rule: "0 betting affiliate / 不分潤博彩平台",
-    basis: "0 sportsbook commission · 0 affiliate revenue · per /ethics commitment #1 binding · 違反 = brand 信用 collapse 永久 audit trail",
+    rule: "不當賭博平台的引薦分潤夥伴 / 不跟博彩平台分錢",
+    basis: "不收任何賭博平台的佣金 · 不靠引薦分潤賺錢 · 對應 /ethics 第 1 條承諾 · 違反 = 品牌信用崩掉、永久留下公開記錄",
   },
   {
     no: "02",
     rule: "0 ads · AdMob 永久封殺",
-    basis: "no Google AdSense · no AdMob · no Meta ads · no display banner · 永久 0 廣告 · 同步 /privacy + /audit。",
+    basis: "沒有 Google 廣告 · 沒有臉書廣告 · 沒有任何橫幅廣告 · 永久零廣告 · 與 /privacy + /audit 同步。",
   },
   {
     no: "03",
     rule: "0 user tracking · GA / Pixel / Hotjar 永遠 0",
-    basis: "0 Google Analytics · 0 Facebook Pixel · 0 Hotjar · 0 Plausible · 0 tracking pixel · per /privacy 0-tracker promise + /audit S06 LocalStorage Transparency 11-key inventory binding",
+    basis: "不裝任何追蹤工具(Google Analytics、臉書 Pixel、Hotjar 等)· 對照 /privacy 的零追蹤承諾 + /audit 第 6 節公開列出本機存的 11 項資料。",
   },
   {
     no: "04",
-    rule: "0 fake testimonials · 公開 founders 全名清單(Q3+ onboard 後)",
+    rule: "0 假推薦 · 公開會員全名清單(等他們入會後)",
     basis: "等真實 BLACK 會員加入 6 個月後才放他們的話 · 0 假推薦 · 現在是空的就誠實留空。",
   },
   {
     no: "05",
     rule: "0 DIVERGED 隱藏 · 賽後 receipt 等大列出 · 7 天 ingest SLA",
-    basis: "PROVED + DIVERGED same visual weight · 不藏 miss · per /track-record + /audit Section 03 + /steelman pattern · CPBL pipeline ingest deadline",
+    basis: "猜中的和算錯的一樣大、一樣亮 · 不藏失手 · 對照 /track-record + /audit 第 3 節 · CPBL 賽果最慢 7 天內補進來。",
   },
   {
     no: "06",
-    rule: "0 silently model rotation · Lens Lifetime Pledge · 每 ship 過的 engine 永久 viewable",
-    basis: "engine v0.2 永久 viewable · v0.3 EXPANSION 永久 viewable · 不 rotate · 不 deprecate · per /methodology Section 04 + Lens Lifetime Pledge canonical",
+    rule: "不偷偷換掉模型 · 每一版上線過的引擎都永久看得到",
+    basis: "引擎 v0.2 永久看得到 · v0.3 也永久看得到 · 不輪替 · 不淘汰下架 · 詳見 /methodology 第 4 節。",
   },
   {
     no: "07",
-    rule: "0「明牌」 framing · prediction = probability 不是 picks",
-    basis: "不販售「鐵口直斷」 · 不顯示賠率 · 純機率分布 + 公開實際準度 · per /audit + /manifesto + /coverage NEVER list + 11-NEVER #10 fake methodology binding",
+    rule: "不用「鐵口直斷的明牌」這種講法 · 我們給的是機率,不是叫你押哪邊的牌",
+    basis: "不賣「鐵口直斷」 · 不顯示賠率 · 只給機率分布 + 公開實際準度 · 詳見 /audit + /coverage 的「永遠不做」清單。",
   },
   {
     no: "08",
-    rule: "0 fine print · 任何 rule modification 30 天前提前公告",
-    basis: "/audit S05 PRE-COMMIT clause · 修改任一 rule 需 30 天前提前公告 · 此 page integrity 同 binding · 違反 = brand 信用 collapse",
+    rule: "沒有藏在小字裡的條款 · 任何規則要改,都提前 30 天公告",
+    basis: "對照 /audit 第 5 節的事前承諾條款 · 要改任何一條都得提前 30 天公告 · 這頁的每一條同樣算數 · 違反 = 品牌信用崩掉。",
   },
   {
     no: "09",
-    rule: "0 cherry-pick · 每筆 CPBL engine prediction → mandatory /track-record entry + /receipts/[receiptId] permalink · 0 retroactive delete",
+    rule: "0 cherry-pick · 引擎每出手預測一場 CPBL,就一定進 /track-record、一定有一個永久查得到的收據連結 · 事後絕不刪",
     basis: "引擎一旦出手預測 · 你就有權看到結果 · 只挑好的公布 = 信任直接崩掉 · PROVED + DIVERGED + PUSH 一樣大、一樣亮 · 不藏失手。無論引擎那場對或錯都一定列出 · 就算 100% 算錯也照樣公布 · 搭配紅線 #12(沒驗證夠準不開盤)= 完整範圍 + 紀律收尾。",
   },
 ];
@@ -285,23 +285,21 @@ export default function IntegrityPage() {
 
             <p>
               <strong className="text-bone">這道牆的具體形狀:</strong>
-              ZONE 27 引擎 output(K/9 · BB/9 · HR/9 推推演引擎模擬 · 7-LENS
-              CANVAS · /audit S02 全部 estimation disclosure)對<strong className="text-bone">
-              FREE tier 訪客 = BLACK 訂閱者</strong>
-              · 物理上同一份 lib/simulator.ts 跑出來。 paid tier 買的是 IDENTITY
-              (出錢養著免費引擎 + 支持者金環 + 寫信給 Tim 本人親手回)· 不買 engine accuracy
-              升級 · 不買 secret edge · 不買 paywall predictions · 連驗證準度標章都免費(靠戰績賺,不靠付費)。
+              引擎算出來的東西(K/9、BB/9、HR/9 等指標、七個分析角度、/audit
+              第 2 節列出的所有推估說明),<strong className="text-bone">
+              免費訪客看到的和 BLACK 付費會員看到的完全一樣</strong>
+              · 是同一支程式跑出來的。 付費會員買的是身分
+              (出錢養著免費引擎 + 支持者金環 + 寫信給 Tim 本人親手回)· 不是買更準的引擎
+              · 不是買藏起來的內幕 · 不是買「付費才能看的預測」· 連驗證準度的標章都免費(靠戰績賺來,不是花錢買)。
             </p>
 
             <p>
-              <strong className="text-bone">Boundary case ZONE 27 已 pre-commit:</strong>
-              若 sportsbook / 賣明牌的站 / 收費明牌群組 / 任何 betting
-              platform 主動 contact 提出 NT$ X K 買 engine API · whitelabel
-              · co-branded launch · affiliate program · sponsored content · 任何
-              形式 commerce relationship · Tim 將: (1) 在 /audit 公開拒絕往來 ·
-              (2) email 回絕、不洽談 · (3) 收到的個資不外洩 · 不談判、不還價。
-              就算 sportsbook 拿我們公開授權的引擎去自己改一份 · 我們也會在
-              /audit 公開這件事 + 公開撇清 + 收 NT$ 0(已寫進 /ethics §02B)。
+              <strong className="text-bone">我們事先講死一種狀況:</strong>
+              如果賭博平台 / 賣明牌的站 / 收費明牌群組,主動上門出錢要買我們的引擎、要掛我們的牌
+              、要聯名、要分潤、要業配 · 任何想跟我們做生意的形式 · Tim 都會: (1) 在 /audit 公開拒絕往來 ·
+              (2) 回信回絕、不洽談 · (3) 對方留的個資不外洩 · 不談判、不還價。
+              就算賭博平台拿我們公開的引擎自己改一份去用 · 我們也會在
+              /audit 把這件事講出來 + 公開撇清 + 一毛錢都不收(已寫進 /ethics §02B)。
             </p>
           </div>
 
@@ -322,13 +320,13 @@ export default function IntegrityPage() {
                     ✓ W-01
                   </span>
                   <p className="text-bone text-sm sm:text-base leading-snug flex-1">
-                    <strong>引擎 output 對所有 tier 物理相同 · 0 paywall on prediction</strong>
+                    <strong>引擎算出的結果,對所有會員等級都一模一樣 · 預測絕不設付費牆</strong>
                   </p>
                 </div>
                 <p className="text-mute text-[12px] sm:text-sm leading-relaxed">
-                  FREE tier 訪客看到的 win probability = BLACK 訂閱者
-                  · 同一個引擎、同一份賽事資料跑出來 · 任何人比對得出來
-                  · 違反 = Tim 親手 在 /ethics 紅字標永久 audit trail
+                  免費訪客看到的勝率,跟 BLACK 付費會員看到的一樣
+                  · 同一個引擎、同一份賽事資料跑出來 · 任何人都能自己比對
+                  · 違反 = Tim 親手在 /ethics 用紅字標記、永久留下記錄
                 </p>
               </li>
               <li className="border-l-2 border-gold/40 pl-4 py-2">
@@ -340,14 +338,14 @@ export default function IntegrityPage() {
                     ✓ W-02
                   </span>
                   <p className="text-bone text-sm sm:text-base leading-snug flex-1">
-                    <strong>0 sportsbook revenue 永久 · 任何 betting 生態 commerce relationship 全 decline</strong>
+                    <strong>永久不賺賭博平台的錢 · 任何跟賭博圈做生意的機會全部拒絕</strong>
                   </p>
                 </div>
                 <p className="text-mute text-[12px] sm:text-sm leading-relaxed">
-                  賣明牌的站 / 收費明牌群組 / sportsbook / betting platform / affiliate
-                  / sponsored content / API license / whitelabel / 任何形式 incentive 全
-                  decline · 不 counter-offer 不 negotiation · email refuse 收 PII 不 leak ·
-                  違反 = brand 信用永久 collapse · /ethics 紅字
+                  賣明牌的站 / 收費明牌群組 / 賭博平台 / 引薦分潤 / 業配
+                  / 授權引擎 / 掛我們的牌 / 任何形式的好處 · 一律拒絕 · 不還價、不談判 ·
+                  回信回絕、對方留的個資不外洩 ·
+                  違反 = 品牌信用永久崩掉 · /ethics 紅字標記
                 </p>
               </li>
               <li className="border-l-2 border-gold/40 pl-4 py-2">
@@ -359,7 +357,7 @@ export default function IntegrityPage() {
                     ✓ W-03
                   </span>
                   <p className="text-bone text-sm sm:text-base leading-snug flex-1">
-                    <strong>identity tier 不 unlock engine accuracy · 不 unlock secret edge · paid tier = SUPPORT/IDENTITY 不 features</strong>
+                    <strong>付費會員不會解鎖更準的引擎 · 不會解鎖任何內幕 · 付費買的是「支持與身分」,不是功能</strong>
                   </p>
                 </div>
                 <p className="text-mute text-[12px] sm:text-sm leading-relaxed">
@@ -421,23 +419,21 @@ export default function IntegrityPage() {
             / §04 · PRE-COMMIT MECHANISM · 修改 protocol
           </p>
           <p className="text-mute text-sm leading-relaxed mb-3">
-            如果 ZONE 27 future 需要修改任一條 22 binding rule · 唯一允許
-            mechanism 是:
+            如果 ZONE 27 將來要改這 22 條承諾裡的任何一條 · 唯一允許的做法是:
           </p>
           <ol className="space-y-2.5 text-mute text-sm leading-relaxed ml-4">
             <li>
               <strong className="text-bone">1.</strong> Tim 親手公開記一筆 ·
-              註明 modify which rule · 為什麼 · 30 天 notice period
-              開始 dated。
+              註明要改哪一條、為什麼 · 並標上日期,30 天的公告期從這天開始算。
             </li>
             <li>
-              <strong className="text-bone">2.</strong> 30 天內 fan 可以
-              讀那筆公開紀錄 · 公開反對 via email
-              tatayngiti@gmail.com · Tim 親手 reply 解釋 reasoning。
+              <strong className="text-bone">2.</strong> 30 天內,任何人都能
+              讀那筆公開紀錄 · 寫信到
+              tatayngiti@gmail.com 公開反對 · Tim 會親手回信解釋理由。
             </li>
             <li>
-              <strong className="text-bone">3.</strong> 30 天後 IF Tim 仍
-              堅持 modify · /integrity page entry 更新 · 並收進{" "}
+              <strong className="text-bone">3.</strong> 30 天後,如果 Tim 還是
+              堅持要改 · 這頁的那條會更新 · 並收進{" "}
               <Link
                 href="/corrections"
                 className="text-gold underline-offset-4 hover:underline"
@@ -447,15 +443,15 @@ export default function IntegrityPage() {
               {" "}「modified, effective YYYY-MM-DD」。
             </li>
             <li>
-              <strong className="text-bone">4.</strong> 違反 protocol(silently
-              modify · skip 30-day notice · backdate)= brand 信用 collapse
-              永久 audit trail · per /ethics commitment #8。
+              <strong className="text-bone">4.</strong> 違反這套流程(偷偷改
+              · 跳過 30 天公告 · 把日期往回填)= 品牌信用崩掉、永久留下公開記錄
+              · 對應 /ethics 第 8 條。
             </li>
             <li>
-              <strong className="text-bone">5.</strong> 加 NEW binding rule
-              同 protocol · Tim 親手 signature 一句即決 · 公開記一筆
-              「added, effective YYYY-MM-DD」· 「擴」 protocol 跟「改」
-              protocol 同 axis · 不藏 hidden expansion。
+              <strong className="text-bone">5.</strong> 要新增一條承諾
+              ,也走同一套流程 · Tim 親手簽名拍板 · 公開記一筆
+              「新增,某年某月某日生效」· 「加新規則」和「改舊規則」
+              用同一個標準 · 不偷偷擴張。
             </li>
           </ol>
           <p className="text-mute/85 text-sm leading-relaxed mt-5">
@@ -488,19 +484,19 @@ export default function IntegrityPage() {
               href="/audit"
               className="font-mono text-mute hover:text-gold text-[10px] tracking-[0.4em] transition-colors"
             >
-              ← /audit · Model Report · DISCLOSURE PHILOSOPHY
+              ← /audit · 模型報告 · 我們為什麼全部公開
             </Link>
             <Link
               href="/ethics"
               className="font-mono text-mute hover:text-gold text-[10px] tracking-[0.4em] transition-colors"
             >
-              /ethics · 9 commitments source →
+              /ethics · 9 條承諾的出處 →
             </Link>
             <Link
               href="/audit#section-02"
               className="font-mono text-mute hover:text-gold text-[10px] tracking-[0.4em] transition-colors"
             >
-              /audit § 02 · 13 NEVER source →
+              /audit § 02 · 13 條「永遠不做」的出處 →
             </Link>
             <Link
               href="/corrections"

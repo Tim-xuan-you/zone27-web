@@ -90,11 +90,11 @@ export default function MethodologyDiffPage() {
         {/* ── 00 · ABSTRACT ───────────────────────── */}
         <Section no="00" label="ABSTRACT" zh="一句話總結">
           <p>
-            v0.3 = v0.2 base + 一個 HR rate multiplier · 由場館 R/G 環境推導 ·
-            <strong className="text-bone">新增 11 行程式碼 · 0 修改 v0.2 既有檔案</strong>
+            v0.3 = v0.2 基礎版 + 一個全壘打率的倍數 · 由球場每場得分環境推導 ·
+            <strong className="text-bone">新增 11 行程式碼 · 0 修改 v0.2 原有檔案</strong>
             (per <Link href="/methodology" className="text-gold underline-offset-4 hover:underline">/methodology</Link>{" "}
-            Section 06 Lens Lifetime Pledge)。 v0.2 永遠 callable · v0.3 是
-            wrapping layer · 不 silently rotate default。
+            Section 06 Lens Lifetime Pledge)。 v0.2 永遠能單獨呼叫 · v0.3 是
+            包在外面的一層 · 不偷偷把預設換掉。
           </p>
           <Pre>
             {`v0.3 atBatProbsV03(pitcher, venue) =
@@ -102,10 +102,10 @@ export default function MethodologyDiffPage() {
   + 其他 outcome rescale 維持 Σ = 1`}
           </Pre>
           <p className="text-mute/80">
-            <strong className="text-bone">不修正 v0.2 任何邏輯</strong> ·
-            不修正 K rate · 不修正 BB rate · 不修正 BABIP · 不修正
-            in-play hit distribution · 不修正 baserunner advancement ·
-            不修正 PA per 9。 純加一個 multiplier。
+            <strong className="text-bone">不改 v0.2 的任何邏輯</strong> ·
+            不改三振率 · 不改保送率 · 不改場內球安打率 · 不改
+            場內球的安打分布 · 不改壘上推進 ·
+            不改每 9 局的打席數。 只加一個倍數。
           </p>
         </Section>
 
@@ -115,23 +115,21 @@ export default function MethodologyDiffPage() {
             <Link href="/methodology" className="text-gold underline-offset-4 hover:underline">/methodology</Link>{" "}
             Section 04 ENGINE LINEUP 用 table 列了「v0.2 LIVE · v0.3 LIVE DEV
             PREVIEW · v0.4 PLANNED」 · 多數 sportsbook 到此為止 ·
-            <strong className="text-bone">「我們升級了 model」</strong> 是
-            marketing 標準語。 我們不停在 marketing。
+            <strong className="text-bone">「我們升級了模型」</strong> 是
+            行銷話術的標準說法。 我們不只是喊喊而已。
           </p>
           <p>
-            這頁是 entire delta · 同 React.dev release notes · Stripe API
-            changelog · Anthropic model card revision history。 v0.2 與 v0.3
-            的每一處差異 · 下面各節逐行攤出來 · 不用你自己去翻一行行程式。
+            這頁把每一處差異都列出來。 v0.2 與 v0.3
+            的每一處差異 · 下面各節逐行攤開 · 不用你自己去翻一行行程式。
           </p>
           <p className="text-mute/80">
-            <strong className="text-bone">靠賣明牌的站不 publish 引擎 diff。</strong>
-            {" "}publish 等於暴露 cherry-picking(回頭改 model)或 retroactive
-            curation(刪掉 losing weeks)。 ZONE 27 ship 此頁 = 物理 ban 這條
-            退路 · per{" "}
+            <strong className="text-bone">靠賣明牌的站不會公開引擎的逐行差異。</strong>
+            {" "}一公開,就等於把「回頭偷改模型」或「事後刪掉輸的那幾週」攤在陽光下。 ZONE 27 把這頁做出來 = 從根上堵死這條
+            退路 · 見{" "}
             <Link href="/audit" className="text-gold underline-offset-4 hover:underline">
               /audit
             </Link>{" "}
-            S05 PRE-COMMIT。
+            S05 事先公開的承諾。
           </p>
         </Section>
 
@@ -206,8 +204,8 @@ export default function MethodologyDiffPage() {
         {/* ── 03 · CODE DIFF ──────────────────────── */}
         <Section no="03" label="CODE DIFF" zh="關鍵函式 diff">
           <p>
-            v0.3 wraps v0.2 · 不 fork。 Function signature 加 1 個 venue
-            parameter · body 加 5 行 multiplier 計算 + 9 行 outcome rescale。
+            v0.3 是包在 v0.2 外面的一層 · 不是另起爐灶。 函式只多接 1 個球場
+            參數 · 內部多 5 行倍數計算 + 9 行機率重新分配(三種結果加起來仍是 100%)。
           </p>
 
           <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -266,10 +264,10 @@ export default function MethodologyDiffPage() {
           </div>
 
           <p className="mt-6 text-mute/85 leading-relaxed">
-            <strong className="text-bone">v0.3 reuse v0.2 atBatProbs()</strong>{" "}
-            · 不 copy paste · 不 fork。 v0.2 任何 future 修正(K/BB/HR rate
-            clamp / in-play distribution / baserunner physics)v0.3 自動 inherit。
-            這是 Lens Lifetime Pledge 的具體落實 · 不 silently divergence。
+            <strong className="text-bone">v0.3 直接沿用 v0.2 的打席機率函式</strong>{" "}
+            · 不複製貼上 · 不另開一份。 v0.2 將來任何修正(三振 / 保送 / 全壘打率
+            上下限 / 場內球分布 / 壘上推進)v0.3 都自動跟著更新。
+            這就是我們「每一版引擎都永久保留」承諾的具體落實 · 不會兩版偷偷各走各的。
           </p>
 
           <p className="text-mute/80 text-sm leading-relaxed">
@@ -358,20 +356,20 @@ export default function MethodologyDiffPage() {
           </div>
 
           <p className="mt-6 text-mute/85 leading-relaxed">
-            <strong className="text-bone">樂天桃園</strong>(hitter park ·
-            10.1 R/G)multiplier 是 ×{(1 + (10.1 - 9.5) / 9.5 * 0.5).toFixed(4)}{" "}
-            · HR rate 從 0.0263 → 0.0271 · 約 +3.2%。 也就是說 · 同 1.0 HR/9
-            的投手在桃園每打席多 ~3% 機率被打出 HR。 9 局約 38 個打席 ·
-            multiplier 累積後對 expected runs allowed 影響 ~0.1-0.2 分。
+            <strong className="text-bone">樂天桃園</strong>(打者球場 ·
+            每場約 10.1 分)的倍數是 ×{(1 + (10.1 - 9.5) / 9.5 * 0.5).toFixed(4)}{" "}
+            · 全壘打率從 0.0263 → 0.0271 · 約 +3.2%。 也就是說 · 同 1.0 HR/9
+            的投手在桃園每打席多 ~3% 機率被打出全壘打。 9 局約 38 個打席 ·
+            倍數累積後對這名投手預期失分的影響約 0.1-0.2 分。
           </p>
 
           <p className="text-mute/80 text-sm leading-relaxed">
             <strong className="text-bone">這是保守 sensitivity 0.5 設計</strong>
-            (per <Mono>HR_PARK_SENSITIVITY = 0.5</Mono>)。 完整 R/G delta
-            直接套會 ×0.5 → ×1.0 sensitivity · 但 R/G delta 本身包含 BABIP /
-            in-play hit / 跑壘 / strikeout 各 component · 不全 attribute 到
-            HR rate。 v0.4 split 各 component(BABIP × park BABIP factor ·
-            HR rate × park HR factor)再 ship。
+            (per <Mono>HR_PARK_SENSITIVITY = 0.5</Mono>)。 如果把整個球場得分差
+            直接套用 · 敏感度會從 ×0.5 變 ×1.0 · 但球場得分差本身包含場內球安打率 /
+            場內安打 / 跑壘 / 三振 等多個成分 · 不該全算到
+            全壘打率上。 v0.4 會把各成分拆開(場內球安打率 × 球場場內球係數 ·
+            全壘打率 × 球場全壘打係數)再推出。
           </p>
 
           <div className="mt-4">
@@ -386,9 +384,9 @@ export default function MethodologyDiffPage() {
         {/* ── 05 · WHAT v0.3 DOES NOT FIX(Pratfall) ── */}
         <Section no="05" label="WHAT v0.3 DOES NOT FIX" zh="v0.3 不修正的 6 件事">
           <p>
-            <strong className="text-bone">主動列出 v0.3 沒有修的 6 個 limitation</strong>
-            (主動揭短 · 詳見 <Link href="/audit" className="text-gold underline-offset-4 hover:underline">/audit</Link>)。 賣明牌的站 marketing 標準是「升級了
-            model」 不交代細節 · ZONE 27 倒置:列出來。
+            <strong className="text-bone">主動列出 v0.3 沒有修的 6 個限制</strong>
+            (主動揭短 · 詳見 <Link href="/audit" className="text-gold underline-offset-4 hover:underline">/audit</Link>)。 賣明牌的站標準話術是「升級了
+            模型」、細節不交代 · ZONE 27 反過來:全列出來。
           </p>
 
           <div className="mt-6 space-y-4">
@@ -405,7 +403,7 @@ export default function MethodologyDiffPage() {
             <NotFix
               n="03"
               what="溫度 / 風 / 濕度"
-              why="台灣夏季高溫 + 北部秋季東北季風 · 物理上影響 ball flight distance · v0.3 不採。 CPBL 沒 published per-game weather feed · ingest 從何拿。"
+              why="台灣夏季高溫 + 北部秋季東北季風 · 物理上會影響球的飛行距離 · v0.3 沒採用。 CPBL 沒有公開每場的天氣資料 · 我們沒地方抓。"
             />
             <NotFix
               n="04"
@@ -420,7 +418,7 @@ export default function MethodologyDiffPage() {
             <NotFix
               n="06"
               what="30 場準度驗證"
-              why="v0.3 上線後每個引擎 N=0 · 不能宣稱「v0.3 比 v0.2 準」 · per /audit S05 PRE-COMMIT · 等每個引擎累積到 30 場 finalized matches 才公布實際準度對照。"
+              why="v0.3 上線後每個引擎都還是 0 場 · 不能宣稱「v0.3 比 v0.2 準」 · 等每個引擎各累積到 30 場已對帳的比賽才公布實際準度對照(這是我們事先公開的承諾)。"
             />
           </div>
 
@@ -430,8 +428,8 @@ export default function MethodologyDiffPage() {
             <Link href="/roadmap" className="text-gold underline-offset-4 hover:underline">
               /roadmap
             </Link>{" "}
-            列得到 · 任何 modifications 都 30 天前提前公告 · 同 /audit S05
-            PRE-COMMIT pattern。
+            列得到 · 任何修改都會 30 天前提前公告 · 跟 /audit S05
+            一樣是事先寫死的規矩。
           </p>
         </Section>
 
@@ -476,11 +474,11 @@ export default function MethodologyDiffPage() {
           </div>
 
           <p className="mt-6 text-mute/85 leading-relaxed">
-            <strong className="text-bone">v0.4 ship 前 30 天提前公告 ·
-            modifications via 同 /audit S05 PRE-COMMIT pattern。</strong>{" "}
+            <strong className="text-bone">v0.4 上線前 30 天提前公告 ·
+            任何修改都跟 /audit S05 一樣是事先寫死的規矩。</strong>{" "}
             你不用「等 model 神奇升級」 · 整個過程都看得見 · v0.4 上線那天 ·
-            整個 Bayesian 權重推導會跟此頁一樣逐行攤開給所有人 ·
-            不需相信 marketing。
+            整個加權混合的推導會跟這頁一樣逐行攤開給所有人 ·
+            不用你相信行銷話術。
           </p>
         </Section>
 
@@ -497,11 +495,11 @@ export default function MethodologyDiffPage() {
               此 diff page 永久 viewable · v0.4 ship 後也不刪
             </h2>
             <p className="text-mute leading-relaxed text-base mb-4">
-              SaaS 標準是 model 升級時 silently delete old changelog · 訪客
-              看不到 history。 ZONE 27 倒置:此 /methodology/diff 在 v0.4 ship
-              後 NOT 刪 · 改為「v0.2 → v0.3 → v0.4」 progression diff · 永遠
-              audit trail。 同 React.dev v17/v18/v19 release notes 並列模式 ·
-              不 silently rotate。
+              業界做法是模型升級時偷偷刪掉舊的更新紀錄 · 訪客
+              看不到歷史。 ZONE 27 反過來:這個差異頁在 v0.4 上線
+              後不刪 · 改成「v0.2 → v0.3 → v0.4」一路並列 · 永遠
+              查得到 ·
+              不偷偷換掉。
             </p>
             <p className="font-mono text-mute/80 text-[10px] tracking-[0.3em] leading-relaxed">
               ⚓ 修改此承諾需 30 天前提前公告 · 同 /audit S05
@@ -512,8 +510,8 @@ export default function MethodologyDiffPage() {
 
         <FounderSignOff>
           <p>
-            v0.3 是 88 行程式碼 · 5 行真正 logic delta。 沒有 marketing 把
-            這個誇成什麼「next-gen AI」。 它就是 v0.2 加一個 HR rate
+            v0.3 是 88 行程式碼 · 真正的邏輯差異只有 5 行。 沒有行銷話術把
+            它誇成什麼「次世代 AI」。 它就是 v0.2 加一個 HR rate
             multiplier。
           </p>
           <p>

@@ -32,7 +32,7 @@ const THEM = [
   "收你明牌費",
   "輸了刪文 · 只截贏的給你看",
   "黑箱 · 不告訴你怎麼算的",
-  "喊「94% 神準」(數學上不可能)",
+  "喊「94% 神準」(根本不可能這麼準)",
 ];
 
 const US: { text: string; href?: string; external?: boolean }[] = [

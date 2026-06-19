@@ -46,29 +46,29 @@ const LOCKED: { quarter: string; items: RoadmapItem[] }[] = [
     items: [
       {
         title: "✓ SHIPPED · /track-record 公開戰績 ledger",
-        body: "2026-05-21 上線 · Bloomberg-terminal aesthetic · PROVED 跟 DIVERGED(定義見 /audit §08 Z27 LEXICON)等大列出 · 從 N=0 honest empty state 起跳。第一筆預定今晚收錄。",
+        body: "2026-05-21 上線 · 命中跟落空一樣大、一起列出(定義見 /audit §08)· 從一筆都還沒有的誠實空白起跳。第一筆預定今晚收錄。",
         evidenceHref: "/track-record",
         evidenceLabel: "/track-record",
       },
       {
         title: "✓ SHIPPED · Cmd-K 全站快搜 palette",
-        body: "2026-05-21 上線 · ⌘K(Mac)/ Ctrl-K(Windows)開啟全站快速搜尋 · 索引所有公開頁面 · ↑↓ 選擇 · ↵ 開啟 · 手機點右上角 ⌕ 圖示。後台與內部跳轉頁面不收錄。無第三方搜尋套件 · 無追蹤 · 無「最近使用」紀錄。",
+        body: "2026-05-21 上線 · ⌘K(Mac)/ Ctrl-K(Windows)開啟全站快速搜尋 · 收錄所有公開頁面 · ↑↓ 選擇 · ↵ 開啟 · 手機點右上角 ⌕ 圖示。後台與內部跳轉頁面不收。沒有用第三方搜尋套件 · 不追蹤 · 不留「最近使用」紀錄。",
       },
       {
         title: "CPBL 每日 ingestion 持續累積 ledger",
-        body: "Tim 每天截圖 cpbl.com.tw 賽前資料 + 賽後最終比分 → Claude 解析 → 寫入 finalResult。目標 90 天內 N≥30 場 · 進入 statistical-meaningful 區間。",
+        body: "Tim 每天把中職官網的賽前資料 + 賽後最終比分整理進系統。目標 90 天內累積到 30 場 · 數字才開始有統計意義。",
         evidenceHref: "/track-record",
         evidenceLabel: "/track-record",
       },
       {
         title: "引擎 v0.2 → v0.3 規劃中",
-        body: "增加「球場因素」(park factor)+「打者個別品質」(平均隊伍 wOBA)兩個輸入,讓 home/away winRate 不再純粹由投手三項指標決定。完成後寫入 /methodology。",
+        body: "增加「球場因素」+「打者個別品質」(以隊伍平均 wOBA 衡量)兩個輸入,讓主、客場勝率不再只看投手三項數據決定。完成後寫進 /methodology。",
         evidenceHref: "/methodology",
         evidenceLabel: "/methodology v0.4 roadmap",
       },
       {
         title: "Resend email confirmation 接 waitlist",
-        body: "目前 waitlist 填表後僅寫入 Supabase 無自動回信。接 Resend 免費 tier(100 mails/day)後送 personal confirmation。",
+        body: "目前等候名單填表後只存進資料庫,還不會自動回信。接上寄信服務的免費方案(每天 100 封)後,會寄一封親筆確認信。",
         evidenceHref: "/membership",
         evidenceLabel: "/membership 等候表單",
       },
@@ -79,19 +79,19 @@ const LOCKED: { quarter: string; items: RoadmapItem[] }[] = [
     items: [
       {
         title: "BLACK 正式預售開啟 · NT$ 500/31 天",
-        body: "NT$ 500/31 天 · 會員不限量 · BLACK 會員 · 手工銀行轉帳 · Tim 親手 onboarding 每一位。流程細節已寫進 docs/MANUAL-ONBOARDING.md。",
+        body: "NT$ 500/31 天 · 會員不限量 · BLACK 會員 · 手動銀行轉帳 · Tim 親手帶每一位入會。",
         evidenceHref: "/membership",
         evidenceLabel: "/membership 完整邏輯",
       },
       {
         title: "BLACK · CPBL Season Pass NT$ 500/31 天 上線(手動轉帳 · 不自動續扣)",
-        body: "賣的不是引擎(永遠免費)· 賣的是社群 + 策展 + 創作者 take。對標 Stratechery / The Athletic / Bankless Premium / TradingView Pro。R81 pivot · 自 NT$ 299/月 auto → NT$ 500/31 天 explicit · per /integrity rule #13 binding(ECPay/TapPay/Stripe 自動扣款全 refused forever)。",
+        body: "賣的不是引擎(永遠免費)· 賣的是社群 + 策展 + 支持者身分。NT$ 500/31 天、手動轉帳、永遠不自動扣款(見 /integrity 第 13 條:任何自動扣款永遠不做)。",
         evidenceHref: "/membership/black-card",
         evidenceLabel: "BLACK season pass canonical",
       },
       {
         title: "品牌正式域名上線",
-        body: "從 zone27-web.vercel.app 升級到 zone27.tw / .app / .cc / .io(Tim 拍板)。同時解凍 SEO / Search Console / 真實品牌資產定版。",
+        body: "從現在的測試網址升級到正式品牌網域 zone27.tw / .app / .cc / .io(Tim 拍板)。同時開始做搜尋曝光、把品牌資產定版。",
       },
     ],
   },
@@ -100,23 +100,23 @@ const LOCKED: { quarter: string; items: RoadmapItem[] }[] = [
 const EXPLORING: RoadmapItem[] = [
   {
     title: "引擎 v0.3 · 球場因素 + 打者品質",
-    body: "目前引擎假設打者隊伍 wOBA 都是 league average · 球場一視同仁。下一版納入。挑戰:小樣本 CPBL 球場數據不夠精細。",
+    body: "目前引擎假設每隊打者的攻擊力(wOBA)都等於聯盟平均 · 每個球場一視同仁。下一版會把差異算進去。難處:中職球場資料樣本太小、不夠細。",
     evidenceHref: "/audit",
     evidenceLabel: "/audit Section 03 排除清單",
   },
   {
     title: "NPB / KBO 評估",
-    body: "MLB(已上)+ CPBL(已上)後 · NPB / KBO 是邏輯延伸。但 coverage philosophy 要求「引擎能誠實算的才覆蓋」,所以要先評估資料品質。",
+    body: "MLB(已上)+ 中職(已上)之後 · 日職 / 韓職是順理成章的下一步。但我們的覆蓋原則是「引擎能誠實算的才覆蓋」,所以要先評估資料品質。",
     evidenceHref: "/coverage",
     evidenceLabel: "/coverage philosophy",
   },
   {
     title: "View Transitions API · 頁面切換 morph",
-    body: "Next.js 16.2 原生支援。但 Firefox 仍在 flag 後(~22% 訪客拿不到效果)· Mobile perf 未驗證 · 再等 1-2 個月看 Safari/Firefox parity 改善。",
+    body: "新版框架原生支援。但這個效果有些瀏覽器還沒開放(約 22% 訪客看不到)· 手機效能也還沒驗證 · 再等 1-2 個月看各家瀏覽器跟上。",
   },
   {
-    title: "「Up and Down the Ladder of Abstraction」式 interactive number demo",
-    body: "Bret Victor pattern — 訪客點首頁某個數字(例如「10,000 場模擬」),展開看那 10K 場是怎麼跑出來的。每個重點數字都能 drill down。Brand IP 「方法公開」的極致 demonstration。",
+    title: "可以點開、看數字怎麼算出來的互動展示",
+    body: "訪客點首頁某個數字(例如「10,000 場模擬」),就能展開看那一萬場是怎麼跑出來的。每個重點數字都能往下點開看細節。這是「方法公開」做到極致的展示。",
   },
 ];
 
@@ -130,19 +130,19 @@ const EXPLICIT_NO: RoadmapItem[] = [
   //     grep · not a brand-IP commitment per se · move to project culture
   {
     title: "永遠不裝 Google Analytics / Facebook Pixel / Hotjar 錄影",
-    body: "ZONE 27 不追蹤訪客足跡 · 不藏 model weights · 不藏失敗預測。這不是技術限制 · 是品牌哲學。寫在 /privacy 第 03 節 + /audit Section 05,違反即品牌信用自殺。",
+    body: "ZONE 27 不追蹤訪客足跡 · 不藏引擎內部的算法 · 不藏失敗的預測。這不是技術限制 · 是品牌哲學。寫在 /privacy 第 03 節 + /audit 第 05 節,違反就是品牌信用自殺。",
     evidenceHref: "/privacy",
     evidenceLabel: "/privacy Section 03",
   },
   {
     title: "永遠不接受創投 / 不投放廣告 / 不上市",
-    body: "ZONE 27 靠 BLACK 會員費自籌啟動 · 不拿創投。創投錢進來後會被估值倒推「ARR 50x 線性增長」邏輯,跟「慢慢長、靠會員自籌」的本質衝突。",
+    body: "ZONE 27 靠 BLACK 會員費自己撐起來 · 不拿創投。一旦拿了創投,就會被逼著追求「營收每年衝幾十倍」,跟「慢慢長、靠會員自籌」的本質衝突。",
     evidenceHref: "/manifesto",
     evidenceLabel: "/manifesto Section II",
   },
   {
     title: "永遠不覆蓋全部可下注賽事 / 不寄生運彩平台",
-    body: "Coverage philosophy:只覆蓋引擎能誠實計算的場次。為 SEO / 流量上線數百場品質次等賽事 = 變運彩平台。從博彩平台抓資料 = 跟博彩綁定 = 定位崩潰。",
+    body: "覆蓋原則:只覆蓋引擎能誠實計算的場次。為了搜尋曝光 / 衝流量而上架數百場品質次等的比賽 = 變成運彩平台。從博彩平台抓資料 = 跟博彩綁在一起 = 定位崩潰。",
     evidenceHref: "/coverage",
     evidenceLabel: "/coverage",
   },
@@ -151,8 +151,8 @@ const EXPLICIT_NO: RoadmapItem[] = [
   // 5K+ email list blitz)wrong for ZONE 27 · 升 /now UNRESOLVED ephemeral
   // 為 /roadmap BRAND BOUNDARIES canonical permanent decision。
   {
-    title: "永遠不做「Launch loudly to warm list」72-hour blitz",
-    body: "2026 年最紅的獨立產品上線玩法(Tom Orbach:靠 5,000+ 人的暖名單 72 小時衝 $50K · 七成營收集中在頭三天)對 ZONE 27 不適用:(1)我們刻意低調潛行 ·「大聲喧嘩」跟初衷相反 ·(2)死忠棒球迷不在那些科技創業圈 · 72 小時的觸及打不到對的人。對的節奏:6 到 18 個月慢慢累積會員 · /membership 第 1 天跟第 400 天長得一樣 · 不靠倒數催 · 這份慢本身就是篩選的證明。",
+    title: "永遠不做「對暖名單大聲開賣」的 72 小時衝刺",
+    body: "2026 年最紅的獨立產品上線玩法(靠 5,000+ 人的名單在 72 小時內衝 $50K、七成營收集中在頭三天)對 ZONE 27 不適用:(1)我們刻意低調潛行 ·「大聲喧嘩」跟初衷相反 ·(2)死忠棒球迷不在那些科技創業圈 · 72 小時的觸及打不到對的人。對的節奏:6 到 18 個月慢慢累積會員 · /membership 第 1 天跟第 400 天長得一樣 · 不靠倒數催 · 這份慢本身就是篩選的證明。",
   },
 ];
 
@@ -197,8 +197,7 @@ export default function RoadmapPage() {
         <p className="mt-4 font-mono text-mute/80 text-[10px] tracking-[0.25em] leading-relaxed max-w-2xl">
           沒有「即將推出 · 敬請期待」的銷售話術 · 沒有「正在規劃」的模糊承諾 ·
           只有 LOCKED(時程 + 邏輯都已定)· EXPLORING(在研究的)·
-          BRAND BOUNDARIES(品牌守則 · 不變的鐵律)。對標 Anthropic Responsible
-          Scaling Policy + Plausible「principled boundaries」。
+          BRAND BOUNDARIES(品牌守則 · 不變的鐵律)。
         </p>
         <div className="mt-6">
           <ArticleMeta readingMin={4} />
@@ -227,8 +226,8 @@ export default function RoadmapPage() {
           時程 + 邏輯都已定
         </h2>
         <p className="text-mute text-sm mb-12 max-w-xl">
-          我們認可以對這些事的時程 · 範圍 · 上線狀態做承諾。
-          每一項都有對應的 evidence link · 不是 vapor。
+          這些事的時程 · 範圍 · 上線狀態,我們敢承諾。
+          每一項都附了證據連結 · 不是空話。
         </p>
 
         <div className="space-y-12">
@@ -306,9 +305,9 @@ export default function RoadmapPage() {
           這頁的最重要 section
         </h2>
         <p className="text-mute text-sm mb-12 max-w-xl">
-          公開承諾的鐵律是品牌 IP 的物理證據。
-          這 section 寫進去後 · 任何相反操作都會被讀者拿出來對照 ·
-          所以這也是「強制紀律」機制 · 讀者也是品牌守護者。
+          公開寫下的鐵律,就是我們說到做到的證據。
+          寫進這一段之後 · 任何違背的舉動,讀者都能拿出來對照 ·
+          這等於逼我們自己守紀律 · 讀者也成了品牌的守門人。
         </p>
 
         <div className="space-y-8">
@@ -328,7 +327,7 @@ export default function RoadmapPage() {
             FROM /AUDIT · SECTION 05
           </p>
           <p className="text-bone text-xl sm:text-2xl font-light tracking-tight leading-snug mb-3">
-            「沒有商業機密 · 沒有 closed weights · 沒有未來計劃藏起來。」
+            「沒有商業機密 · 沒有藏起來的算法 · 沒有偷偷保留的未來計劃。」
           </p>
           <p
             lang="en"

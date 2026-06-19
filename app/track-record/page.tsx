@@ -156,8 +156,8 @@ export default function TrackRecordPage() {
         {finalized.length === 0 ? (
           <div className="border border-dashed border-gold/30 bg-slate/30 p-10 text-center">
             <p className="text-mute text-sm leading-relaxed max-w-md mx-auto">
-              帳本等第一筆 · 不回填歷史 · 沒有 cherry-picked 過往。
-              從引擎首次公開預測過的賽事 ingest 後第一筆亮起。
+              帳本等第一筆 · 不補登舊比賽、不挑好看的塞進來。
+              從引擎第一場公開預測的比賽開始記。
             </p>
           </div>
         ) : (
@@ -235,7 +235,7 @@ export default function TrackRecordPage() {
             </p>
           ) : (
             <p className="mt-7 text-mute leading-relaxed max-w-2xl">
-              帳本等第一筆 PROVED ✓ 或 DIVERGED ✕ · 不回填歷史 · 從引擎首次公開預測過的賽事起記。
+              帳本等第一筆 PROVED ✓ 或 DIVERGED ✕ · 不補登舊比賽 · 從引擎第一場公開預測的比賽開始記。
             </p>
           )}
 
@@ -272,9 +272,9 @@ export default function TrackRecordPage() {
         <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-16 border-t border-line/40 pt-10">
           <p className="text-mute text-sm leading-relaxed">
             <span className="text-bone">怎麼評:</span>{" "}
-            引擎賽前公開鎖定勝率 → favorite(勝率 &gt; 50% 那邊)賽後贏 ={" "}
+            引擎賽前公開鎖定勝率 → 看好的那一邊(勝率 &gt; 50% 那邊)賽後贏 ={" "}
             <span className="text-gold">PROVED ✓</span>、輸 ={" "}
-            <span className="text-loss/85">DIVERGED ✕</span>、平局/50-50 ={" "}
+            <span className="text-loss/85">DIVERGED ✕</span>、平手或五五波 ={" "}
             <span className="text-mute">PUSH =</span>。 三者視覺等大 · 同一把尺算 CPBL 跟 MLB。
             完整方法見{" "}
             <Link href="/methodology" className="text-gold underline-offset-4 hover:underline">
@@ -498,7 +498,7 @@ function LedgerRow({ match }: { match: Match }) {
         <div className="self-center">
           <p className="text-bone text-sm leading-snug">
             <span className="text-gold">{favoriteName}</span>
-            <span className="text-mute mx-1.5 text-xs">favored</span>
+            <span className="text-mute mx-1.5 text-xs">被看好</span>
             <span className="text-mute text-xs">vs</span>{" "}
             <span className="text-mute">{dogName}</span>
           </p>
@@ -558,7 +558,7 @@ function LedgerRow({ match }: { match: Match }) {
         </div>
         <p className="text-bone text-base leading-snug mb-2">
           <span className="text-gold">{favoriteName}</span>
-          <span className="text-mute mx-1.5 text-[11px]">favored</span>
+          <span className="text-mute mx-1.5 text-[11px]">被看好</span>
           <span className="text-mute text-[11px]">vs</span>{" "}
           <span className="text-mute">{dogName}</span>
         </p>

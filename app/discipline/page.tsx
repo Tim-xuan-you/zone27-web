@@ -75,8 +75,8 @@ export default function DisciplinePage() {
             </h1>
             <p className="text-mute text-base leading-relaxed mb-8 max-w-2xl">
               ZONE 27 不靠秘密賺錢 · 靠紀律。
-              這頁是我們的 owner&apos;s manual — 4 個提煉自 Buffett 長期主義 +
-              Musk 第一原理 + Costco 會員制 + Jobs「Say-NO 是設計」的操作鐵律,
+              這頁是我們的「使用說明書」— 4 個提煉自 Buffett 長期主義 +
+              Musk 第一原理 + Costco 會員制 + Jobs「對一千件事說不」的操作鐵律,
               <strong className="text-bone">違反任何一條 · ZONE 27 就不再是 ZONE 27</strong>。
             </p>
 
@@ -129,15 +129,15 @@ export default function DisciplinePage() {
                 因為「壞消息粉飾 = 信譽歸零」是 Buffett 第一守則。
               </Item>
               <Item label="拒絕短期 KPI">
-                沒裝 Google Analytics(per{" "}
+                沒裝任何網站流量追蹤工具(見{" "}
                 <Link href="/privacy" className="text-gold hover:underline">
                   /privacy
                 </Link>
-                )· 沒有「上週訪客 +20%」這種誘惑 · 不會為了 quarterly chart 犧牲長期信譽。
+                )· 沒有「上週訪客 +20%」這種誘惑 · 不會為了一張季報數字漂亮就犧牲長期信譽。
               </Item>
               <Item label="拒絕廣告營收">
-                AdMob / 寄生博彩平台 = 可以馬上賺錢 · 但<strong className="text-bone">傷信譽</strong>。
-                永久封殺(per{" "}
+                塞廣告 / 寄生在博彩平台上 = 可以馬上賺錢 · 但<strong className="text-bone">傷信譽</strong>。
+                永久封殺(見{" "}
                 <Link href="/about" className="text-gold hover:underline">
                   /about
                 </Link>{" "}
@@ -185,26 +185,25 @@ export default function DisciplinePage() {
 
             <Subhead>ZONE 27 應用</Subhead>
             <List>
-              <Item label="引擎 v0.2 是 algorithm 產物">
+              <Item label="引擎 v0.2 是用這套演算法做出來的">
                 從 9 種輸入刪到 3 種(K/9 · BB/9 · HR/9)·{" "}
                 <Link href="/audit" className="text-gold hover:underline">
                   /audit
                 </Link>{" "}
                 Section 03 ENGINE SCOPE 是 Step 2「刪除」的證據。
               </Item>
-              <Item label="0 後端 server">
-                Idiot Index 應用 · 引擎在訪客 CPU 跑 · 我們的 infrastructure cost ≈ 0 ·
-                邊際成本 ≈ 0(per{" "}
+              <Item label="不需要後端主機">
+                「笨蛋指數」的應用 · 引擎在訪客自己的裝置上跑 · 我們的機房成本幾乎是 0 ·
+                每多一個人用的成本也幾乎是 0(見{" "}
                 <Link href="/audit" className="text-gold hover:underline">
                   /audit
                 </Link>{" "}
                 Section 04 Environmental Impact)。
               </Item>
               <Item label="從零想 quant baseball 品牌">
-                沒有抄收費明牌群組 / 抽下注的莊家模式 · 從零問「what&apos;s a quant baseball
-                community really for」。這就是 First Principles。
+                沒有抄收費明牌群組 / 抽下注的莊家模式 · 從零問「一個量化棒球社群到底是為了什麼」。這就是第一原理。
               </Item>
-              <Item label="自綁賺錢方式 = forced discipline">
+              <Item label="自己綁住賺錢的方式 = 逼出來的紀律">
                 Musk 為什麼能造火箭?因為他<strong className="text-bone">限制自己</strong>
                 只做幾件事。ZONE 27 版:引擎永遠免費 · 創作者只免費公開發 · 0 抽創作者傭 ·
                 0 廣告 · 不自動續扣 — 我們限制的是自己賺錢的方式 · 不是限制能服務多少人。
@@ -238,11 +237,11 @@ export default function DisciplinePage() {
             <List>
               <Item label="會員制 > 商品收費">
                 引擎 markup = 0%(永遠免費)·
-                BLACK NT$ 500/31 天 = membership revenue ·
+                BLACK NT$ 500/31 天 = 會員費收入 ·
                 跟 Costco 一樣 — 「賣會員身分,不賣商品本身」。
               </Item>
               <Item label="不自動續扣">
-                BLACK 每 31 天您自己主動轉一次帳 · 不綁信用卡、不自動扣款(per{" "}
+                BLACK 每 31 天您自己主動轉一次帳 · 不綁信用卡、不自動扣款(見{" "}
                 <Link href="/integrity" className="text-gold hover:underline">
                   /integrity
                 </Link>{" "}
@@ -250,20 +249,20 @@ export default function DisciplinePage() {
                 ZONE 27 同樣邏輯 · 自綁掉「忘了取消就一直扣」這條最好賺的續訂財。
               </Item>
               <Item label="不打廣告">
-                沒 Google Ads · 沒 FB Ads · 沒 retargeting(per{" "}
+                沒 Google 廣告 · 沒 FB 廣告 · 沒「跟著你跑」的廣告(見{" "}
                 <Link href="/privacy" className="text-gold hover:underline">
                   /privacy
                 </Link>{" "}
-                Section 03)。Costco 靠 word-of-mouth + 高續訂率長 50 年 · ZONE 27 也是。
+                Section 03)。Costco 靠口碑 + 高續訂率撐了 50 年 · ZONE 27 也是。
               </Item>
               <Item label="品味守住類別界線">
                 Costco 拒賣某些雜誌(價值觀衝突)· 拒接菸草廣告 ·
-                即使有獲利機會。ZONE 27 拒寄生博彩平台 · 拒抓運彩數據 ·
-                即使這些是流量入口(per{" "}
+                即使有獲利機會。ZONE 27 拒絕寄生在博彩平台 · 拒絕抓運彩盤口數據 ·
+                即使這些能帶來流量(見{" "}
                 <Link href="/coverage" className="text-gold hover:underline">
                   /coverage
                 </Link>{" "}
-                NEVER 行)。
+                的 NEVER 清單)。
               </Item>
             </List>
           </RuleSection>
@@ -278,12 +277,12 @@ export default function DisciplinePage() {
           >
             <P>
               Apple 1996 年距離破產 90 天。Jobs 1997 重返後 · 第一件事不是「加新產品」·
-              是<strong className="text-bone">砍</strong>。把 350+ 個 product SKU
-              全砍 · 留下一個 2×2 矩陣(consumer / pro × desktop / portable)·
-              一年內公司轉盈。<strong className="text-bone">Subtraction = strategy。</strong>
+              是<strong className="text-bone">砍</strong>。把 350+ 種產品型號
+              全砍 · 只留一個 2×2 的方格(一般用 / 專業用 × 桌機 / 筆電)·
+              一年內公司轉虧為盈。<strong className="text-bone">減法 = 策略。</strong>
             </P>
             <P>
-              13 年後(1997 → 2010)Apple 從 bankruptcy 邊緣變成世界市值最高公司。
+              13 年後(1997 → 2010)Apple 從快破產變成世界市值最高的公司。
               核心方法不是「加功能」 — 是「拒絕 / 對齊 / 細節到瘋」。
             </P>
 
@@ -305,9 +304,9 @@ export default function DisciplinePage() {
                 BRAND BOUNDARIES — 全是 Jobs subtraction lens 的體現。「我們不做的事」
                 就是設計本身。
               </Item>
-              <Item label="End-to-end ownership">
-                Apple 做硬體 + 軟體 + 零售店 · 全棧自己控。ZONE 27 同邏輯 · Tim 親手
-                onboard 每位 Founder(per{" "}
+              <Item label="從頭到尾自己做">
+                Apple 做硬體 + 軟體 + 零售店 · 整條自己掌控。ZONE 27 同邏輯 · Tim 親手
+                帶每一位會員入門(見{" "}
                 <code className="font-mono text-gold/90 text-[12px] px-1 py-px bg-ink/40 border border-line/60">
                   docs/MANUAL-ONBOARDING.md
                 </code>
@@ -316,24 +315,23 @@ export default function DisciplinePage() {
               </Item>
               <Item label="Quality of 1 > Quantity of 100">
                 Jobs 名言「我寧願有 1 個 A 級人才,不要 100 個 B 級」。
-                ZONE 27 版:BLACK 會員 · Tim 一個一個親手 onboard(每位 12-15 分鐘)·
+                ZONE 27 版:BLACK 會員 · Tim 一個一個親手帶入門(每位 12-15 分鐘)·
                 不外包、不批量。 會員不限量 · 但「親手」這件事每一位都一樣 · 不稀釋。
               </Item>
               <Item label="Design is how it works">
                 Jobs 1996 WIRED:「Design is not just what it looks like and feels
-                like. Design is how it works.」ZONE 27 物理證據:focus-visible 金色
-                ring(only on 鍵盤 nav)· Geist Mono slashed-zero(0 vs O 一眼分)·
-                Chinese text-spacing-trim(CJK 標點修正)·{" "}
+                like. Design is how it works.」ZONE 27 的實際證據:用鍵盤操作時才出現的金色
+                外框 · 數字 0 中間有斜線(跟字母 O 一眼分得開)·
+                中文標點自動修正間距 ·{" "}
                 <Link href="/audit" className="text-gold hover:underline">
                   /audit
                 </Link>{" "}
-                @media print(學術 PDF 級輸出)— 都是「功能 = 美學」對齊。
+                列印出來是學術論文 PDF 等級 — 都是「好用就是美」的對齊。
               </Item>
               <Item label="Insanely Great 細節">
-                Jobs 著名為「別人不會注意的細節」抓狂。ZONE 27 同樣執著:Cmd-K palette
-                沒裝 fuse.js / 沒 telemetry / 沒 recently-used(per disclosure
-                philosophy)· ProvenanceStamp 在每場引擎輸出底下加 commit SHA(可截圖
-                citable)· chip-pop spring animation 只有 hover footer 才看得到 ·
+                Jobs 著名為「別人不會注意的細節」抓狂。ZONE 27 同樣執著:快捷搜尋框
+                沒裝模糊搜尋套件 / 沒蒐集你的使用紀錄 / 沒記你最近點過什麼(見「方法公開」原則)· 每場引擎結果底下都印上版本編號(可截圖
+                佐證)· 小動畫只有滑鼠移到頁尾才看得到 ·
                 <strong className="text-bone">
                 這些細節 90% 訪客沒注意 · 但 10% die-hard fans 看到後會知道我們認真</strong>。
               </Item>
@@ -341,13 +339,13 @@ export default function DisciplinePage() {
 
             <P className="text-mute/70 mt-8">
               <strong className="text-bone">什麼不取(同 Musk methodology filter):</strong>
-              {" "}reality distortion field 跟「不靠直覺只看演算法」反向 · 不取 ·
-              公開羞辱員工(我們 solo 沒員工)· 不取 · 商業機密狂熱(直接打{" "}
+              {" "}「現實扭曲力場」(用個人魅力硬說服)跟「不靠直覺只看演算法」相反 · 不取 ·
+              公開羞辱員工(我們一個人做沒員工)· 不取 · 商業機密狂熱(跟{" "}
               <Link href="/manifesto" className="text-gold hover:underline">
                 /manifesto
               </Link>{" "}
-              V「方法公開」)· 不取 · aesthetic {">"} 實質(我們是量化品牌 · 不是視覺品牌)·
-              不取。<strong className="text-bone">取 craft + subtraction · 拒 personality + secrecy</strong>。
+              V「方法公開」直接衝突)· 不取 · 外觀 {">"} 實質(我們是量化品牌 · 不是視覺品牌)·
+              不取。<strong className="text-bone">我們取的是工藝 + 減法 · 拒絕的是個人崇拜 + 保密</strong>。
             </P>
           </RuleSection>
 
@@ -394,8 +392,8 @@ export default function DisciplinePage() {
             />
             <SynthRow
               axis="D · 守紀律拒絕容易"
-              examples="Buffett 拒網路泡沫 · Musk 親手算每零件 cost · Costco 14% 毛利上限自綁 · Jobs 拒 stylus (iPhone 2007) · 拒 netbook · 拒 7-inch tablet"
-              z27="拒賣明牌模式 · 拒下注抽佣 · 拒博彩寄生 · 拒 user tracking · 拒 multi-engine paywall"
+              examples="Buffett 拒網路泡沫 · Musk 親手算每個零件成本 · Costco 自綁 14% 毛利上限 · Jobs 拒觸控筆(iPhone 2007)· 拒小筆電 · 拒 7 吋平板"
+              z27="拒賣明牌模式 · 拒下注抽佣 · 拒博彩寄生 · 拒追蹤使用者 · 拒把多套引擎鎖起來收費"
             />
 
             <P className="text-mute/70">
@@ -417,12 +415,12 @@ export default function DisciplinePage() {
               <Item label="不是吹捧">
                 我們不認為自己是 Buffett / Musk / Costco / Jobs · 也不假裝有他們的規模或視野。
               </Item>
-              <Item label="不是 aspirational">
+              <Item label="不是喊口號的願景">
                 這 5 條鐵律是<strong className="text-bone">已執行的</strong>事 · 寫在 /audit /privacy /coverage /about · 不是「願景」。
               </Item>
-              <Item label="不是 marketing">
-                這頁存在的理由是給未來的 Tim + 未來的 Claude session 留下{" "}
-                <strong className="text-bone">非協商的紀律邊界</strong>。
+              <Item label="不是行銷話術">
+                這頁存在的理由,是給未來的 Tim 留下{" "}
+                <strong className="text-bone">一道不能討價還價的紀律底線</strong>。
               </Item>
               <Item label="不是不能挑戰">
                 如果您看到我們違反任何一條 · 寫信公開指出。違反這 5 條 = ZONE 27 變質。

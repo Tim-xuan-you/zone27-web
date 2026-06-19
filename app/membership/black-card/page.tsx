@@ -61,16 +61,16 @@ export default function BlackCardPage() {
           BLACK
         </h1>
         <p className="text-mute text-sm sm:text-base leading-relaxed mb-4">
-          NT$ 500 / 31 天。 引擎永遠免費 —— 所以 BLACK
-          <span className="text-bone">不是買功能</span>(功能都免費)。 你買的是
-          <span className="text-gold">一圈所有人看得到的金色支持環、一間自己人的房間</span>:出錢養著這個免費引擎,
-          讓陌生人也能永遠免費用下去。
+          NT$ 500 / 31 天。 引擎永遠免費,BLACK{" "}
+          <span className="text-bone">不是買功能</span> —— 你買的是
+          <span className="text-gold">一圈所有人看得到的金色支持環、一間自己人的房間</span>。 出錢養著這台引擎,
+          讓陌生人也能一直免費用。
         </p>
         {/* 「為什麼免費還要付費」的答案:不是買 access(都免費)· 是當這個免費引擎的出錢人 + 戴上身分。 */}
         <p className="text-mute/85 text-sm leading-relaxed mb-10 border-l-2 border-gold/50 pl-4 py-1">
-          說白:引擎永遠免費,總得有人付錢養它 —— 那個人就是你。 你不是顧客,是
-          <span className="text-bone">出錢讓「引擎永遠免費」活下去的人</span>。
-          我們不靠廣告、不抽你下注的傭、不賣你的數據 —— 靠的就是願意這樣的少數人。
+          說白了:引擎永遠免費,總得有人付錢養它,
+          <span className="text-bone">那個人就是你</span>。
+          我們不靠廣告、不抽你下注的傭、不賣你的數據 —— 只靠願意出錢的少數人。
         </p>
 
         {/* ── 這些本來就免費(誠實 flex)── */}

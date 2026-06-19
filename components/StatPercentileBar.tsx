@@ -78,8 +78,8 @@ export default function StatPercentileBar({ stat, value }: Props) {
     tier === "elite" ? "ELITE" : tier === "mid" ? "MID" : "REBUILD";
 
   const referenceTitle = ref.higherBetter
-    ? `${stat} 高 = 強 · CPBL ref range ${ref.min}(poor)→ ${ref.max}(elite)· per /audit S02 ESTIMATION DISCLOSURE`
-    : `${stat} 低 = 強 · CPBL ref range ${ref.min}(elite)→ ${ref.max}(poor)· per /audit S02 ESTIMATION DISCLOSURE`;
+    ? `${stat} 越高越強 · CPBL 參考範圍 ${ref.min}(弱)→ ${ref.max}(頂)· 估算說明見 /audit S02`
+    : `${stat} 越低越強 · CPBL 參考範圍 ${ref.min}(頂)→ ${ref.max}(弱)· 估算說明見 /audit S02`;
 
   return (
     <div

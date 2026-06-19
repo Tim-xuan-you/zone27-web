@@ -19,56 +19,56 @@ export const metadata: Metadata = {
 const COMMITMENTS: { num: string; title: string; body: string; tier: "displacement" | "subscriber" | "brand"; }[] = [
   {
     num: "01",
-    title: "我不賣引擎預測給 bookmakers 或 scrapers",
-    body: "若我收到 offer 來自任何博彩平台 / data scraper / sportsbook 想授權 ZONE 27 引擎輸出 · 我會把 offer 內容 + 我的拒絕公開在 /audit · 不私下交易 · 不簽 NDA。",
+    title: "我不把引擎預測賣給博彩業者或爬資料的人",
+    body: "如果有任何博彩平台 / 爬資料的人 / 賭博公司來開價,想授權拿 ZONE 27 的引擎結果 · 我會把對方開的條件 + 我的拒絕公開在 /audit · 不私下交易 · 不簽保密協議。",
     tier: "displacement",
   },
   {
     num: "02",
-    title: "我永遠不接受 gambling-platform advertising / affiliate revenue",
-    body: "ZONE 27 不接 sportsbook 廣告 · 不在站上放 affiliate link 到 任何 betting platform · 不接「點擊轉換」 commission · 不收賠率/明牌引流費。",
+    title: "我永遠不接賭博平台的廣告,也不靠引薦分潤賺它們的錢",
+    body: "ZONE 27 不接賭博公司的廣告 · 不在站上放任何導去賭博平台的引薦連結 · 不收「點進去就抽成」的佣金 · 不收賠率/明牌的引流費。",
     tier: "displacement",
   },
   {
     num: "03",
-    title: "我不接受任何形式的 paid recommendations",
-    body: "任何 sponsor wanting ZONE 27 to recommend their service · product · 球員 · 球隊 · 媒體 · 都會被公開拒絕 · 不接 paid placement · 不寫 sponsored content · 不收「我們公司很棒」型 fee。",
+    title: "我不接受任何形式的「收錢幫人推薦」",
+    body: "任何想付錢、要 ZONE 27 推薦它的服務、產品、球員、球隊、媒體的贊助商 · 都會被公開拒絕 · 不接付費置入 · 不寫業配 · 不收「幫我們講好話」的錢。",
     tier: "displacement",
   },
   {
     num: "04",
-    title: "我不接受 data-licensing offers to sportsbooks",
-    body: "ZONE 27 lens output(Vibe Check · Park Factor · Pitcher Fatigue · Underdog · Bullpen · Matchup History · Win Probability)+ engine version 計算結果 永遠不 sell / license / API access 給任何 sportsbook OR gambling-adjacent business。",
+    title: "我不接受把資料授權賣給賭博公司的邀約",
+    body: "ZONE 27 各個分析角度算出的結果(氣勢檢查、場地係數、投球負荷、黑馬指數、牛棚深度、對戰歷史、勝率)+ 引擎的計算結果 · 永遠不賣、不授權、不開放介接給任何賭博公司或賭博相關生意。",
     tier: "displacement",
   },
   {
     num: "05",
-    title: "我不接 CPBL 球隊 / 球員經紀 equity / consulting",
-    body: "ZONE 27 與 CPBL 球隊 / 球員 / 經紀 / agents 之間永遠沒有 financial 關係 · 不持任何隊伍 equity · 不接 consulting fee · 不收 endorsement · 任何 conflict of interest 都會公開 disclose 在 /audit。",
+    title: "我不持有中職球隊／球員經紀的股份,也不接他們的顧問案",
+    body: "ZONE 27 跟中職球隊／球員／經紀人之間永遠沒有金錢關係 · 不持任何球隊股份 · 不收顧問費 · 不收代言費 · 任何利益衝突都會公開講在 /audit。",
     tier: "displacement",
   },
   {
     num: "06",
-    title: "我永遠不跑 ads / affiliate / paid placement on ZONE 27",
-    body: "整個 ZONE 27 站上 · 0 廣告 · 0 業配 · 0 付費置入 · 0 贊助內容 · 0 合作推廣。 訂閱費(BLACK)就是全部的收入來源 · 從設計上就這樣定。",
+    title: "我永遠不在 ZONE 27 上跑廣告、引薦分潤、或付費置入",
+    body: "整個 ZONE 27 站上 · 0 廣告 · 0 業配 · 0 付費置入 · 0 贊助內容 · 0 合作推廣。 訂閱費(BLACK)就是全部的收入來源 · 一開始就刻意這樣設計。",
     tier: "subscriber",
   },
   {
     num: "07",
-    title: "我每年 5 月 publish 全年收入 + 開銷 + subscriber count",
-    body: "每年 5/31 publish 年度報告 · 含全年收入 · 全年開銷 · BLACK 訂閱數 · 同 /audit S05 PRE-COMMIT pattern · 修改此 publish cadence 需 30 天前先公告。",
+    title: "我每年 5 月公開全年收入 + 開銷 + 訂閱人數",
+    body: "每年 5/31 公開年度報告 · 含全年收入 · 全年開銷 · BLACK 訂閱數 · 對照 /audit 第 5 節的事前承諾 · 要改公開的時間表,需提前 30 天公告。",
     tier: "subscriber",
   },
   {
     num: "08",
-    title: "我永遠不接 sportsbook conversion fee / referral commission",
-    body: "若 ZONE 27 visitor 從 ZONE 27 跳出去 register sportsbook account · ZONE 27 不收任何 referral commission · 不在 URL 加 tracking parameter · 不享 conversion fee。 visitor 的選擇是 visitor 自己的。",
+    title: "我永遠不收賭博公司的引流抽成或引薦佣金",
+    body: "如果訪客從 ZONE 27 連出去、自己去開了賭博平台帳號 · ZONE 27 不收任何引薦佣金 · 不在網址裡偷加追蹤碼 · 不抽任何引流費。 訪客的選擇是訪客自己的事。",
     tier: "displacement",
   },
   {
     num: "09",
-    title: "我每筆 engine 預測都 mandatory publish · 0 cherry-pick · 0 retroactive delete",
-    body: "每筆 CPBL engine pre-committed prediction → mandatory /track-record entry + /receipts/[receiptId] permalink + PROVED / DIVERGED / PUSH label。 不選擇性 publish · 不 retroactive delete · 不 cherry-pick high-confidence-only · 即使 engine 100% 錯也 binding publish。 顯示 prediction 後 · 訪客對「我會看到結果」 產生擁有感 · selective publishing = trust 物理崩。 同 Berkshire 70-year annual letter「無論好年壞年 都 mandatory publish」 + Geneva Seal「每只 watch 都印 serial」 pattern · per /audit S05 PRE-COMMIT clause 升級到 /integrity binding rule layer(commitment #09 · R80 加)· 配對 /integrity redline #12(引擎驗證夠準才開盤 scope)close brand IP loop。",
+    title: "引擎每一筆預測都一定公開 · 不挑好的講 · 事後絕不刪",
+    body: "引擎每一筆賽前鎖定的 CPBL 預測,都一定進 /track-record、一定有一個永久查得到的收據連結,並標上「猜中／算錯／平手」· 不挑好的講 · 事後絕不刪 · 不只挑高把握的留 · 就算引擎 100% 算錯也照樣公開。 因為你一旦看到預測,就有權看到結果;只挑好的公開,信任就垮了。",
     // R119 W4 · redline patch · tier corrected displacement → brand · #09 是
     // ZONE 27 internal brand discipline(Berkshire 70-year + Geneva Seal
     // pattern · per body cite)· NOT displacement of 玩運彩 (那 1-5 + 8 在
@@ -108,19 +108,18 @@ export default function EthicsPage() {
 
           <div className="mt-8 border-l-2 border-gold/60 pl-5 sm:pl-6 py-2 max-w-2xl">
             <p className="text-bone text-lg sm:text-xl leading-relaxed">
-              <strong>靠賣明牌的生意,結構上做不出這頁</strong> · 因為他們的每
-              一條 revenue stream 都 violate 下面 9 條 · 公開等於商業自殺。
+              <strong>靠賣明牌的生意,結構上做不出這頁</strong> · 因為他們每
+              一條賺錢的路都違反下面 9 條 · 公開等於商業自殺。
             </p>
             <p className="mt-3 text-mute text-base leading-relaxed">
-              ZONE 27 可以 ship · 因為訂閱費(BLACK)是整個 revenue
-              model · 您贏您輸我都一樣賺。
+              ZONE 27 做得出這頁 · 因為訂閱費(BLACK)就是我們全部的收入
+              · 你贏你輸我都一樣賺。
             </p>
           </div>
 
           <p className="mt-6 text-bone text-base sm:text-lg leading-relaxed border-l-4 border-gold pl-5 py-2 max-w-2xl">
-            <strong>每一個承諾 Tim 簽名 · 可被驗證 · 違反任何一條 = 此 page 紅字
-            永久標 · 不可刪</strong> · ZONE 27 vs 賣明牌的站 anonymity+deletion
-            model 的 structural asymmetry。
+            <strong>每一個承諾 Tim 簽名 · 可被驗證 · 違反任何一條 = 這頁用紅字
+            永久標記 · 不可刪</strong> · 這正是 ZONE 27 跟賣明牌的站最大的不同:他們可以匿名、可以刪文,我們不行。
           </p>
 
           <div className="mt-6">
@@ -236,34 +235,33 @@ export default function EthicsPage() {
             / 02 · WHY PAID-PICK BUSINESSES STRUCTURALLY CANNOT SHIP THIS
           </p>
           <h2 className="text-2xl sm:text-3xl text-bone font-light tracking-tight mb-6 leading-tight">
-            這 9 條對他們是商業自殺 · 對我們是 <span className="text-gold">brand moat</span>
+            這 9 條對他們是商業自殺 · 對我們是 <span className="text-gold">品牌的護城河</span>
           </h2>
           <div className="space-y-4 text-mute leading-relaxed zh-body">
             <p>
-              賣明牌的站 · 收費明牌群組 · sportsbook adjacents · 整個
-              靠賣明牌賺錢的 service 經濟結構 violate 上面 1-5 + 8 共 6 條:
+              賣明牌的站 · 收費明牌群組 · 賭博周邊 · 整個靠賣明牌賺錢的生意結構,違反上面第 1-5 條 + 第 8 條,共 6 條:
             </p>
             <ul className="space-y-2 pl-6">
               <li className="flex gap-3 items-baseline">
                 <span className="font-mono text-loss/80 text-[10px] tracking-[0.25em]">▸</span>
-                <span>他們的 revenue model 直接 OR 間接 來自 sportsbook conversion fee + referral commission(violate #2 #8)</span>
+                <span>他們賺錢的模式,直接或間接來自賭博平台的引流抽成 + 引薦佣金(違反第 2、8 條)</span>
               </li>
               <li className="flex gap-3 items-baseline">
                 <span className="font-mono text-loss/80 text-[10px] tracking-[0.25em]">▸</span>
-                <span>他們的 data partnership 跟 betting platform license 是核心 revenue(violate #1 #4)</span>
+                <span>他們跟賭博平台的資料合作與授權是主要收入(違反第 1、4 條)</span>
               </li>
               <li className="flex gap-3 items-baseline">
                 <span className="font-mono text-loss/80 text-[10px] tracking-[0.25em]">▸</span>
-                <span>他們的 ads / affiliate 是核心 monetization(violate #3 #6)</span>
+                <span>廣告與引薦分潤是他們主要的賺錢方式(違反第 3、6 條)</span>
               </li>
               <li className="flex gap-3 items-baseline">
                 <span className="font-mono text-loss/80 text-[10px] tracking-[0.25em]">▸</span>
-                <span>「明牌」 內容 + paid pick + 老師收費 = paid recommendations(violate #3)</span>
+                <span>「明牌」內容 + 付費牌 + 老師收費 = 收錢推薦(違反第 3 條)</span>
               </li>
             </ul>
             <p className="pt-3">
-              <strong className="text-bone">ZONE 27 structurally 可以 ship</strong> ·
-              因為 incentive alignment 跟訪客在同一邊:
+              <strong className="text-bone">ZONE 27 做得出這頁</strong>,
+              是因為我們的利益跟訪客站在同一邊:
             </p>
             <ul className="space-y-2 pl-6">
               <li className="flex gap-3 items-baseline">
@@ -272,11 +270,11 @@ export default function EthicsPage() {
               </li>
               <li className="flex gap-3 items-baseline">
                 <span className="font-mono text-gold/80 text-[10px] tracking-[0.25em]">▸</span>
-                <span>引擎 FREE forever · 不 paywall predictions · 不藏 lens · 不 silently rotate engine</span>
+                <span>引擎永遠免費 · 預測不設付費牆 · 不藏任何分析角度 · 不偷偷換掉引擎</span>
               </li>
               <li className="flex gap-3 items-baseline">
                 <span className="font-mono text-gold/80 text-[10px] tracking-[0.25em]">▸</span>
-                <span>您贏您輸 ZONE 27 都一樣賺 · 跟您在同一邊 · 不在對立面</span>
+                <span>你贏你輸 ZONE 27 都一樣賺 · 跟你站同一邊 · 不在對立面</span>
               </li>
             </ul>
           </div>
@@ -295,23 +293,23 @@ export default function EthicsPage() {
               我們承諾我們不做 · 但我們不能阻止別人複製
             </h3>
             <p className="text-mute leading-relaxed mb-4">
-              ZONE 27 的引擎方法完整公開(這就是我們「方法公開」的原則)。 任何 sportsbook
-              明天都可以照著我們公開的方法,自己做一套 odds 服務賣。 我們的 9 commitments
-              只 bind 我們的 actions · <strong className="text-bone">不能 bind
-              別人怎麼用公開的方法</strong>。
+              ZONE 27 的引擎方法完整公開(這就是我們「方法公開」的原則)。 任何賭博公司
+              明天都可以照著我們公開的方法,自己做一套賠率服務來賣。 我們這 9 條承諾
+              只約束我們自己的行為 · <strong className="text-bone">沒辦法約束
+              別人怎麼用這套公開的方法</strong>。
             </p>
             <p className="text-mute/85 leading-relaxed mb-4">
-              <strong className="text-bone">透明 limit-of-power 比假裝沒 contradiction 強</strong>。
-              此 commitment 「不分潤博彩」 = Tim signs 「ZONE 27 entity 不
-              license / sell / API access 給 sportsbook」 · 不是「ZONE 27 的方法
-              永遠不會出現在 sportsbook tool」 — 後者在我們把方法公開的前提下,物理上做
+              <strong className="text-bone">老實講出自己的極限,比假裝沒有矛盾更強</strong>。
+              這條「不分潤博彩」的意思是:Tim 簽名保證「ZONE 27 不把方法
+              授權、出售、或開放介接給賭博公司」 · 不是保證「ZONE 27 的方法
+              永遠不會出現在賭博公司的工具裡」 — 後者在我們把方法公開的前提下,本來就做
               不到。
             </p>
             <p className="font-mono text-mute/80 text-[10px] tracking-[0.3em] leading-relaxed">
-              ⚓ 若 sportsbook 拿我們公開的方法去做 · 我們會在{" "}
+              ⚓ 若賭博公司拿我們公開的方法去做 · 我們會在{" "}
               <Link href="/audit" className="text-gold underline-offset-4 hover:underline">/audit</Link>
-              {" "}列出事實 + publicly disavow · 不收 brand 利益關聯。
-              限制公開 = 比假裝強大更可信。
+              {" "}把事實列出來 + 公開撇清 · 不沾任何利益關係。
+              老實講出自己的極限,比假裝強大更可信。
             </p>
           </div>
         </section>
@@ -329,20 +327,20 @@ export default function EthicsPage() {
               修改任何 commitment 需 30 天前先公告
             </h3>
             <p className="text-mute leading-relaxed mb-4">
-              同 /audit S05 PRE-COMMIT pattern · 年度報告 yearly publish
-              pattern · /membership/black-card/ledger 5 rules pattern。
-              此 /ethics page 上的 9 commitments 任一條 wording 改動 / 條件
-              加 / 條件砍 · 全部需要:
+              對照 /audit 第 5 節的事前承諾、年度報告的固定公開方式、
+              以及黑卡帳本的 5 條規則。
+              這頁 9 條承諾,任何一條的文字改動 / 加條件 /
+              砍條件 · 全部都要:
             </p>
             <ol className="space-y-2 list-decimal pl-6 text-mute leading-relaxed mb-4">
               <li>30 天前公開公告 · 含 before/after diff + 理由</li>
-              <li>30 天 freeze window · visitor 可在此期間寫信反對</li>
-              <li>30 天後新 commitment 生效 · /ethics page rewrite · 公開紀錄為 source of truth</li>
-              <li>每次修改都留下公開可追溯的紀錄 · audit trail 可達</li>
+              <li>30 天的凍結期 · 訪客可以在這段期間寫信反對</li>
+              <li>30 天後新承諾生效 · 改寫這頁 · 以公開紀錄為準</li>
+              <li>每次修改都留下公開、可回溯的紀錄</li>
             </ol>
             <p className="font-mono text-mute/80 text-[10px] tracking-[0.25em] leading-relaxed">
-              ⚓ 事前綁定的承諾 · 比事後找理由強 100× ·
-              改 ethics 不是「動 page · 是動 brand 信仰 base」。
+              ⚓ 事前說死的承諾 · 比事後找理由強 100 倍 ·
+              改這些承諾不是「改一頁網頁」,而是動到品牌的根本信念。
             </p>
           </div>
         </section>
@@ -370,93 +368,86 @@ export default function EthicsPage() {
             如果 Tim 失蹤了 · 全靠他一個人
           </h2>
           <p className="text-mute leading-relaxed mb-4">
-            ZONE 27 是 solo founder · 0 employees · 0 contractors · 0
-            outsourced ops。{" "}
+            ZONE 27 是一個人做的 · 沒有員工、沒有外包、沒有委外
+            營運。{" "}
             <strong className="text-bone">就只有 Tim 一個人</strong> · 如果
-            Tim 出車禍 / 失蹤 / health-collapse · 整個 brand pipeline 中斷。
-            這是 brand IP「稀缺手工」 的 cost · 不藏 · 此 section explicit
-            codify what happens then。
+            Tim 出車禍 / 失蹤 / 健康垮掉 · 整條運作就會中斷。
+            這是「稀缺、手工」這個品牌特色的代價 · 我們不藏 · 這一段就把
+            「真的發生時會怎樣」講清楚。
           </p>
-          <h3 className="text-bone text-lg mt-6 mb-3">您的資料 · 0 vendor lock-in</h3>
+          <h3 className="text-bone text-lg mt-6 mb-3">你的資料 · 不會被我們綁死</h3>
           <ul className="space-y-3 text-mute leading-relaxed zh-body">
             <li>
               <strong className="text-bone">您的公開戰績與會員身分</strong>{" "}
               · 在您的公開檔 /u/你的公開碼 · 含輸的對帳紀錄任何人都查得到、隨時可截圖留存
             </li>
             <li>
-              <strong className="text-bone">您的 PDF 證書 + welcome kit</strong>{" "}
-              · 本機 · 您下載後永久 own · 不需要 ZONE 27 server 渲染
+              <strong className="text-bone">你的 PDF 證書 + 歡迎包</strong>{" "}
+              · 存在你自己裝置 · 下載後永久是你的 · 不需要靠 ZONE 27 的伺服器才能打開
             </li>
             <li>
-              <strong className="text-bone">您的 application + Tim email</strong>{" "}
-              · 在您 Gmail inbox + Tim Gmail inbox · 兩處 copy · 即使 Tim
-              帳號 frozen · 您 inbox 完整保留 audit trail
+              <strong className="text-bone">你的申請信 + Tim 的回信</strong>{" "}
+              · 在你的 Gmail 信箱 + Tim 的 Gmail 信箱 · 兩邊各一份 · 就算 Tim
+              的帳號被凍結 · 你信箱裡的完整往來紀錄都還在
             </li>
             <li>
-              <strong className="text-bone">Supabase 資料</strong> · zone27-prod
-              Tokyo region · RLS-locked · 即使 Tim Vercel deploy 停止 · Supabase
-              Pro tier 無人接管下 90 天 auto-pause 但不刪除 · 您 email reset
-              可從 Supabase Auth 直接 recover。
+              <strong className="text-bone">你的資料庫資料</strong> · 存在
+              東京機房 · 上了權限鎖 · 就算 Tim 那邊網站停止部署 · 資料庫
+              在沒人接管時會在 90 天後自動暫停、但不會刪掉 · 你還是能透過
+              信箱重設、直接把帳號救回來。
             </li>
             <li>
-              <strong className="text-bone">您 NT$ 500 paid BLACK</strong>{" "}
-              · 14 天 cooling-off window 隨時可退款 · per /terms § 4B Taiwan
-              消保法 § 19。 Tim 失蹤情境 · 因 service interruption · 您可
-              email{" "}
+              <strong className="text-bone">你付的 NT$ 500 黑卡</strong>{" "}
+              · 14 天鑑賞期內隨時可退款 · 依 /terms 第 4B 條與
+              消保法第 19 條。 如果遇到 Tim 失蹤、服務中斷 · 你可以
+              寫信到{" "}
               <a
                 href="mailto:tatayngiti@gmail.com?subject=ZONE%2027%20%C2%B7%20service%20interruption%20refund"
                 className="text-gold underline-offset-4 hover:underline"
               >
                 tatayngiti@gmail.com
               </a>{" "}
-              · 由 Tim 家人 / executor 退款處理(per /privacy Section 06B
-              emergency contact provision)
+              · 由 Tim 的家人 / 遺產代理人協助退款(依 /privacy 第 06B 節的
+              緊急聯絡人條款)
             </li>
           </ul>
           <h3 className="text-bone text-lg mt-6 mb-3">為什麼不雇人 · 不外包?</h3>
           <p className="text-mute leading-relaxed mb-4">
-            僱人 = 分散這個單人風險 · 但同時稀釋 brand identity。 ZONE 27 brand IP
-            「Tim 親手」 = 「Tim 親眼 verify wire」 + 「Tim 親手 review
-            application」 + 「Tim 親手 manually onboard」。 僱第 2 人 = 變 SaaS
-            · 違反「倒置 SaaS」跟「稀缺、手工」這兩個原則。
+            僱人 = 分散這個單人風險 · 但同時稀釋品牌特色。 ZONE 27
+            「Tim 親手」的意思 = 「Tim 親眼核對轉帳」 + 「Tim 親手審核
+            申請」 + 「Tim 親手一個一個帶新會員進來」。 僱第 2 個人 = 變成制式化的軟體服務
+            · 違反「反其道而行」跟「稀缺、手工」這兩個原則。
           </p>
           <p className="text-mute leading-relaxed mb-4">
-            <strong className="text-bone">所以選擇:</strong> 我選擇「只有一個人」
-            的代價 · 因為這就是 brand 信用的根基。 為了減少您的
-            risk · 我 ship 此 section 公開 · 您 see contingency = 您 conclude
-            您 own 風險決定。
+            <strong className="text-bone">所以這是我的選擇:</strong> 我接受「只有一個人」
+            的代價 · 因為這就是品牌信用的根基。 為了讓你少擔一點
+            風險 · 我把這一段公開出來 · 你看到萬一的安排,就能自己判斷要不要承擔這個風險。
           </p>
           <p className="font-mono text-mute/80 text-[10px] tracking-[0.25em] leading-relaxed">
-            ⚓ 同 Pinboard.in(Maciej Cegłowski 單人 17 年)· 同 Patek Philippe
-            family-business 174 年 · 同 Berkshire Hathaway succession plan
-            公開 · solo founder 老實講出單人風險 · 比 fake「team page · 10
-            people」 brand-pure。
+            ⚓ 一個人老實講出單人風險 · 比假裝有一支十人團隊更乾淨。
           </p>
         </section>
 
         <FounderSignOff>
           <p>
-            這頁是 ZONE 27 對標、取代 靠賣明牌的生意 的品牌底層落地 ·
-            <strong>不是 marketing copy</strong>。 9 條是 hard commitments +
-            單人風險的接管安排 · 違反任一條 = brand 信用
-            collapse · 即使違反 1 次 · /ethics page 上會出現「{COMMITMENTS[0].num}
-            {" "}- VIOLATED YYYY-MM-DD」 紅色 alert · 永久
-            visible · per /audit S05 PRE-COMMIT
-            「不刪不藏」 pattern。
+            這頁是 ZONE 27 要取代「靠賣明牌的生意」的品牌底層 ·
+            <strong>不是行銷話術</strong>。 9 條是硬承諾 +
+            萬一只剩一個人時的接管安排 · 違反任一條 = 品牌信用
+            崩掉 · 就算只違反 1 次 · 這頁上就會出現「{COMMITMENTS[0].num}
+            {" "}- 已違反 某年某月某日」的紅色警示 · 永久
+            看得到 · 對照 /audit 第 5 節
+            「不刪不藏」的原則。
           </p>
           <p>
-            Stratechery About page Ben Thompson 6 commitments · ZONE 27 9
-            commitments · 不是 incremental more · 是 displacement-specific
-            more · 第 1 + 2 + 4 + 5 + 8 + 9 是 ZONE 27-only 6 條 ·
-            <strong>靠賣明牌的生意,結構上永遠 ship 不出來</strong> · 因為他們 violate
-            這 6 條 == 他們整個 revenue model 構成。
+            ZONE 27 有 9 條承諾,比一般的「公開承諾」頁更多 · 而且多的不是隨便湊數,是專門用來取代「賣明牌生意」的 · 其中第 1、2、4、5、8、9 共 6 條,是賣明牌的生意結構上永遠做不出來的 ·
+            <strong>因為他們一違反這 6 條,就等於拆掉自己整個賺錢模式</strong>。
           </p>
           <p>
-            修改此 page 9 commitments 需 30 天前先公告 · 同{" "}
+            要改這頁 9 條承諾,需提前 30 天公告 · 跟{" "}
             <Link href="/audit#section-05" className="text-gold hover:underline">/audit S05</Link>{" "}
-            PRE-COMMIT pattern · 用實際成本背書 · 同{" "}
+            的事前承諾一致 · 用實際成本背書 · 也跟{" "}
             <Link href="/integrity" className="text-gold hover:underline">/integrity 22 binding rules</Link>{" "}
-            modification protocol 軸線一致。 違反任一條 = 紅字永久標 in{" "}
+            的修改流程同一套標準。 違反任一條 = 用紅字永久標記在{" "}
             <Link href="/track-record" className="text-gold hover:underline">/track-record</Link>。
           </p>
         </FounderSignOff>
@@ -502,13 +493,13 @@ export default function EthicsPage() {
               href="/steelman"
               className="inline-block px-6 py-3 border border-gold/50 text-gold font-mono text-[10px] tracking-[0.3em] hover:bg-gold/10 transition-colors"
             >
-              → /steelman 6 strongest objections
+              → /steelman 6 個最強的反對論點
             </Link>
             <Link
               href="/audit"
               className="inline-block px-6 py-3 border border-gold/50 text-gold font-mono text-[10px] tracking-[0.3em] hover:bg-gold/10 transition-colors"
             >
-              → /audit S05 · DISCLOSURE PHILOSOPHY
+              → /audit 第 5 節 · 我們為什麼全部公開
             </Link>
             <Link
               href="/coverage"

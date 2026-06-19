@@ -101,9 +101,9 @@ export default function SubmitPage() {
             您寫 · <span className="text-gold">Tim curate</span> · 1 週 1 篇
           </h1>
           <p className="mt-5 text-mute text-sm sm:text-base leading-relaxed">
-            Stratechery Guest Post pattern · 免費投稿 · 0 抽成 · 沒 public 自動 post ·
-            純 Tim 親手 curate(防的是收費明牌那一套)。 不過稿的 reply 您
-            reason · 不藏。 1 週 1 篇 cadence。
+            免費投稿 · 不抽成 · 不會自動公開 ·
+            純由 Tim 親手挑選(防的是收費明牌那一套)。 沒選上,Tim 會親手回信
+            告訴你原因 · 不藏。 一週 1 篇。
           </p>
         </section>
 
@@ -222,12 +222,12 @@ export default function SubmitPage() {
                 </p>
               )}
               <p className="font-mono text-mute/70 text-[10px] tracking-[0.25em] leading-relaxed pt-3 border-t border-line/40">
-                ▸ Tim 1/週 curate · 不過稿 reply reason · 不藏
+                ▸ Tim 每週挑 1 篇 · 沒選上會回信說明原因 · 不藏
                 <br />
-                ▸ 0 server-side archive · 您 submission 只走 Resend → Tim
-                Gmail · 不存 DB · per /privacy
+                ▸ 我們不留檔 · 你的投稿只寄到 Tim 的 Gmail · 不存進資料庫 ·
+                見 /privacy
                 <br />
-                ▸ 免費投稿 · 0 抽成 · 創作者只免費公開發 · 賺的是地位不是錢
+                ▸ 免費投稿 · 不抽成 · 創作者只免費公開發 · 賺的是地位不是錢
               </p>
             </form>
           )}

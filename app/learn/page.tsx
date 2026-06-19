@@ -74,7 +74,7 @@ export default function LearnPage() {
           <p>
             棒球場上,
             <strong className="text-bone">沒有任何人能準確預測單場比賽</strong>。
-            一支 prime 的兄弟可能輸給冷門的味全,一個王牌投手可能在第 2 局被打爆。
+            一支正當顛峰的兄弟可能輸給冷門的味全,一個王牌投手可能在第 2 局被打爆。
             這是棒球的本質 — 它有<strong className="text-bone">不可預測的隨機性</strong>。
           </p>
           <p>
@@ -153,7 +153,7 @@ export default function LearnPage() {
           anchor="why-not-gambling"
         >
           <p>
-            如果您看到「機率」「賠率」「edge」這些字 · 可能會以為 ZONE 27 是某種運彩或抽下注的莊家。
+            如果您看到「機率」「賠率」「優勢值」這些字 · 可能會以為 ZONE 27 是某種運彩或抽下注的莊家。
             <strong className="text-bone">不是。</strong>
           </p>
           <p>
@@ -176,7 +176,7 @@ export default function LearnPage() {
             <strong className="text-bone">每個機率都有 50% 的相反可能 · 不要把 ZONE 27 當保證</strong>。
           </p>
           <ChapterFooter
-            cta="ZONE 27 4-tier 會員制 →"
+            cta="ZONE 27 會員制 →"
             href="/membership"
             note="從匿名免費到 BLACK · NT$ 500/31 天 · 任時可選 · 我們不催"
           />
@@ -330,7 +330,7 @@ export default function LearnPage() {
             >
               公開校準 →
             </Link>
-            {"　"}讀完整 model report?{" "}
+            {"　"}想看引擎完整的成績報告?{" "}
             <Link
               href="/audit"
               className="text-gold/75 hover:text-gold underline-offset-4 hover:underline transition-colors"

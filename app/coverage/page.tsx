@@ -79,7 +79,7 @@ const TRACKED_NOT_ACTIVE: LeagueRow[] = [
     code: "AAA / AA",
     zh: "MLB 高階小聯盟",
     source: "statsapi.mlb.com(同 MLB · 不同 leagueIds)",
-    sampleNote: "資料可取 · 但球員流動率高 · 樣本變異大 · 預測誤差會放大",
+    sampleNote: "資料可取 · 但球員換隊太頻繁 · 資料起伏大 · 預測誤差會被放大",
     status: "AVAILABLE",
     statusLabel: "AVAILABLE · SUPPRESSED",
   },
@@ -127,11 +127,11 @@ const NEVER_COVER: { name: string; reason: string }[] = [
   },
   {
     name: "Sportradar / Stats Perform / Pinnacle 等付費 API",
-    reason: "年費 NT$ 200K+ · ZONE 27 是 stealth indie · 永遠不走付費資料封閉路線",
+    reason: "年費 NT$ 200K+ · ZONE 27 是低調的獨立小團隊 · 永遠不走付費封閉資料這條路",
   },
   {
     name: "任何要求登入 / 違反 ToS / 私下繞付費牆的來源",
-    reason: "技術可行也不做 · 法律風險 + 品牌風險 + 訊號可信度受質疑",
+    reason: "技術上做得到也不做 · 有法律風險、品牌風險,也讓我們的可信度被質疑",
   },
 ];
 
@@ -189,13 +189,13 @@ export default function CoveragePage() {
               <strong>ZONE 27 = 賭徒的 Bloomberg Terminal。</strong>
               <br />
               <span className="text-mute">
-                客群 = 會下注的 sports 迷(包括賭徒)· 對標
-                <span className="text-gold">靠賣明牌賺錢的對手</span> ·
-                提供更好的<span className="text-gold">資訊層</span>。
+                客群 = 會下注的運動迷(包括賭徒)· 對手是
+                <span className="text-gold">靠賣明牌賺錢的人</span> ·
+                我們提供更好用的<span className="text-gold">資訊</span>。
               </span>
             </p>
             <p className="text-bone text-base leading-relaxed mb-6 max-w-2xl">
-              不同靠賣明牌賺錢的對手:<strong className="text-gold">引擎永遠免費 · 不賣明牌(tipster picks)· PROVED + DIVERGED 等大公開 · 方法完整公開(見 /methodology + /audit)</strong>。 您拿我們的資料自己決定下哪個 platform · ZONE 27 自己不接受下注(我們不是賭場)。
+              跟那些靠賣明牌賺錢的對手不同:<strong className="text-gold">引擎永遠免費 · 不賣明牌 · 命中跟落空一樣大、一樣公開 · 方法完整公開(見 /methodology + /audit)</strong>。 您拿我們的資料自己決定要下哪一注 · ZONE 27 自己不接受下注(我們不是賭場)。
             </p>
             <p className="text-mute/85 text-sm leading-relaxed mb-6 max-w-2xl">
               <strong className="text-bone">我們靠什麼活:</strong> 會員身分訂閱 · 出錢的人是養著免費引擎 · 不靠廣告 · 不抽你下注的傭 · 也不抽創作者的傭 —— 創作者只免費公開發、賽後自動對帳、爬天梯、被追蹤 · 賺的是看得見的地位,不是錢。
@@ -206,8 +206,8 @@ export default function CoveragePage() {
 
             <p className="text-mute text-base leading-relaxed mb-8 max-w-2xl">
               這頁列出我們覆蓋什麼 · 不覆蓋什麼 · 為什麼。
-              ZONE 27 不是「所有可下注賽事的 vending machine」 ·
-              只覆蓋引擎能誠實計算的比賽。 Phase 1: CPBL · Phase 2: NBA + 未來 leagues · Tim 親手 curate scope。
+              ZONE 27 不是「所有能下注的比賽全擺出來的販賣機」 ·
+              只覆蓋引擎能誠實計算的比賽。 第一階段:中職 · 第二階段:NBA + 未來其他聯盟 · 上線範圍由 Tim 親手挑。
             </p>
 
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-x-6 gap-y-3 pt-4 font-mono text-[10px] tracking-[0.18em] section-reveal">
@@ -294,7 +294,7 @@ export default function CoveragePage() {
             <p className="text-bone text-base sm:text-lg leading-relaxed mb-5 max-w-2xl">
               來自賣明牌的站、收費明牌群組、抽下注的莊家 / 任何博彩生態 ·{" "}
               <span className="text-gold">我們永遠不接</span>。
-              下方是完整 5-item list 的 quick preview · 點 §05 看 reasoning。
+              下面先列出這 5 項 · 點 §05 看完整理由。
             </p>
             <div className="flex gap-2 flex-wrap">
               {NEVER_COVER.map((item, idx) => (
@@ -308,7 +308,7 @@ export default function CoveragePage() {
             </div>
             <p className="mt-4 font-mono text-mute/70 text-[10px] tracking-[0.25em]">
               <Link href="#never-cover" className="text-gold hover:text-gold-soft transition-colors">
-                ↓ 完整 reasoning(§05)
+                ↓ 完整理由(§05)
               </Link>
             </p>
           </section>
@@ -323,21 +323,21 @@ export default function CoveragePage() {
             </h2>
             <div className="space-y-4 text-mute leading-relaxed zh-body">
               <p>
-                量化預測模型只有在輸入夠穩定時才能輸出有意義的訊號。
-                ZONE 27 引擎需要每位投手最少 N≥10 場樣本、確認的先發陣容、
-                以及樣本充足的球場 / 氣象因子。沒有這些,
+                預測引擎只有在資料夠穩時,算出來的數字才有意義。
+                ZONE 27 引擎需要每位投手最少 10 場的紀錄、確定的先發名單、
+                以及夠多的球場 / 天氣資料。沒有這些,
                 再怎麼跑一萬次模擬,也只是把雜訊放大。
               </p>
               <p>
                 所以我們不假裝覆蓋一切。當某場比賽的輸入不足,我們直接告訴您
                 「<span className="font-mono text-bone">ENGINE PENDING · 等待先發資訊</span>」
                 或「<span className="font-mono text-bone">ENGINE WAIVED · 樣本 n&lt;10</span>」。
-                這個「沒覆蓋」本身就是我們的 trust artifact —
+                這個「我們不算」本身就是一種誠實 —
                 <span className="text-bone"> 我們選擇沉默,而不是製造雜訊</span>。
               </p>
               <p>
-                Apple 不做 $99 智慧型手機。Stripe 不接 PayPal 的長尾市場。
-                ZONE 27 不覆蓋雜訊賽事。<span className="text-bone">少做,做好。</span>
+                Apple 不做 $99 的廉價手機。
+                ZONE 27 不覆蓋算不準的比賽。<span className="text-bone">少做,做好。</span>
               </p>
             </div>
           </section>
@@ -360,7 +360,7 @@ export default function CoveragePage() {
                 ⚙ DATA PIPELINE TRANSPARENCY · auto vs manual
               </p>
               <p className="text-mute text-sm leading-relaxed mb-4">
-                ZONE 27 不是同一 ingestion 模式 · 兩聯盟各 honest disclose:
+                兩個聯盟的資料抓取方式不一樣 · 我們各自老實說明:
               </p>
               <div className="space-y-4 text-sm">
                 <div className="border-l-2 border-gold/60 pl-4">
@@ -368,21 +368,18 @@ export default function CoveragePage() {
                     MLB · 100% AUTOMATIC ✓
                   </p>
                   <p className="text-mute leading-relaxed mb-2">
-                    MLB Stats API(<code className="font-mono text-bone bg-slate/40 px-1.5 py-0.5 rounded-sm text-[10px]">statsapi.mlb.com</code>)
-                    · 10-min ISR(Vercel auto-cache)· 0 cost · 0 API key ·
-                    全部 ~15 daily games · pitchers · K9 BB9 HR9 ERA · venue ·
-                    time · final scores · 0 founder intervention。
+                    資料來自 MLB 官方公開資料 · 每 10 分鐘自動更新 · 0 費用 ·
+                    每天約 15 場 · 先發投手 · K9 BB9 HR9 ERA · 球場 ·
+                    開賽時間 · 最終比分 · 全自動、創辦人完全不插手。
                   </p>
                   <p className="text-mute/85 text-sm leading-relaxed">
-                    ⚓ <strong className="text-bone">MLB grading discipline:LIVE re-compute · NOT pre-game lock-in</strong>{" "}
-                    · 每 10 min revalidate · engine pick = deterministic Log5-
-                    style formula from K9/BB9/HR9/ERA · 公開 in /audit S07 ·
-                    賽後 verdict ✓ PROVED / ✕ DIVERGED 在 /matches/mlb card
-                    上 display · 但{" "}
-                    <strong className="text-bone">NOT 算進 /track-record</strong> ·
-                    因為我們的原則要求預測在開賽前就鎖定、賽後不回頭重算 · MLB
-                    grading 是 informational layer · CPBL grading 是
-                    accountability layer · 兩 layer brand-IP-pure 區分。
+                    ⚓ <strong className="text-bone">MLB 的算法:即時重算、不是賽前鎖定</strong>{" "}
+                    · 每 10 分鐘更新一次 · 引擎看好誰,是用 K9/BB9/HR9/ERA
+                    套同一條固定公式算出來的 · 公開在 /audit ·
+                    賽後在 /matches/mlb 上標 ✓ 命中 / ✕ 落空 · 但{" "}
+                    <strong className="text-bone">不算進公開戰績</strong> ·
+                    因為我們的規則是「預測要在開賽前就鎖死、賽後不回頭重算」,MLB
+                    是即時參考,只有賽前鎖死的中職才進正式帳本。
                   </p>
                 </div>
                 <div className="border-l-2 border-line/60 pl-4">
@@ -390,8 +387,7 @@ export default function CoveragePage() {
                     CPBL · HYBRID(50% auto · 50% manual)⚠
                   </p>
                   <p className="text-mute leading-relaxed mb-2">
-                    cpbl.com.tw 是 server-rendered HTML 不是 SPA · cheerio
-                    parsing pattern works · 3 scripts auto-fetch:
+                    中職官網的資料可以直接讀取 · 我們用三支程式自動抓:
                   </p>
                   <ul className="space-y-1.5 text-mute/85 pl-4 leading-relaxed">
                     <li>▸ <code className="font-mono text-bone bg-slate/40 px-1 rounded-sm text-[10px]">npm run fetch-cpbl</code> · pitcher K9/BB9/HR9 leaderboard auto-parse</li>
@@ -399,19 +395,15 @@ export default function CoveragePage() {
                     <li>▸ <code className="font-mono text-bone bg-slate/40 px-1 rounded-sm text-[10px]">npm run fetch-cpbl-schedule</code> · 今日賽程 metadata</li>
                   </ul>
                   <p className="text-mute/85 leading-relaxed mt-2">
-                    剩 1 manual step:<strong className="text-bone">賽後 box score finalResult</strong> ·
-                    Tim 22:30+ TPE screenshot ingest · 因 brand IP「物理時刻 +
-                    賽前/賽後 strict timing」 不可 auto · 賽後 receipt 真實
-                    PROVED/DIVERGED 等大 公開。
+                    只剩一步靠人工:<strong className="text-bone">賽後的最終比分</strong> ·
+                    Tim 在台灣時間 22:30 之後親手把比分填進去 · 因為「賽前鎖死、賽後才對帳」這條紀律不能自動化 · 賽後收據把命中跟落空一樣公開。
                   </p>
                 </div>
               </div>
               <p className="font-mono text-mute/70 text-[10px] tracking-[0.25em] leading-relaxed mt-4">
-                ⚓ 為什麼 hybrid · 不全 auto:CPBL 沒 official API(僅 server-
-                rendered HTML)· 賽程 + pitcher stats 可 cheerio parse · box
-                score finalResult 賽後 timing-critical · Tim 親手 ingest 是
-                brand IP physical signature · 不可 silently 自動化(若 auto ·
-                可 backdate · 失 trust signal)。
+                ⚓ 為什麼一半人工:中職沒有官方資料介面 · 賽程跟投手數據可以自動抓 ·
+                但最終比分牽涉賽前/賽後的時間點 · 由 Tim 親手填,是這個品牌的親筆簽名 ·
+                不能偷偷自動化(自動化就能事後補日期、信任就沒了)。
               </p>
             </div>
           </section>
@@ -501,16 +493,16 @@ export default function CoveragePage() {
               所有資料來源 · 公開可查
             </h2>
             <p className="text-mute leading-relaxed mb-8">
-              我們只用**公開可取得**的來源。沒有付費 API。沒有繞付費牆。
-              沒有違反 ToS 的爬蟲。沒有未經授權的私人資料庫。
-              每一筆預測都可以從以下來源向前追溯。
+              我們只用**公開可取得**的來源。沒有付費資料介面。沒有繞付費牆。
+              沒有違反使用條款的爬蟲。沒有未經授權的私人資料庫。
+              每一筆預測都能往回追到以下來源。
             </p>
 
             <div className="border border-line/40 divide-y divide-line/30">
               <SourceRow
                 league="MLB"
                 source="statsapi.mlb.com"
-                license="MLB 公開 API · 商業使用受 MLB ToS 限制 · 我們做的是匿名分析,合規"
+                license="MLB 官方公開資料 · 商業使用受 MLB 條款限制 · 我們做的是匿名分析,合規"
                 status="READY"
               />
               <SourceRow
@@ -558,7 +550,7 @@ export default function CoveragePage() {
               如果這份覆蓋哲學讓您點頭 · 您是我們在找的人
             </h2>
             <p className="text-mute leading-relaxed mb-8 max-w-2xl">
-              ZONE 27 找的不是「想要更多賽事預測」的人 — 那是博彩平台的客戶。
+              ZONE 27 找的不是「想要更多比賽預測」的人 — 那是博彩平台的客戶。
               我們找的是「**寧可少看一場,也不要看雜訊**」的人。如果這聽起來像您,
               <Link href="/membership" className="text-gold hover:text-gold-soft transition-colors">
                 {" "}BLACK 會員{" "}
@@ -597,8 +589,8 @@ export default function CoveragePage() {
               算不出的就誠實 mark 為 PREVIEW。
             </p>
             <p>
-              這個 filter 是我的品味 · 也是 ZONE 27 的牆。
-              覆蓋越廣不等於越強 · 倒置 SaaS 預設「全包才贏」。
+              這道篩選是我的品味 · 也是 ZONE 27 的牆。
+              覆蓋越廣不等於越強 · 跟「什麼都包才會贏」的市場習慣反著來。
             </p>
             <p>
               想看哪場我沒覆蓋的 · 您填表單告訴我 · 我會評估能不能誠實算。

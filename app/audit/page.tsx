@@ -160,7 +160,7 @@ export default function AuditPage() {
               </li>
               <li className="font-mono tabular">
                 <span className="text-mute/60">TRACKERS</span>{" "}
-                <span className="text-bone">0 · per /privacy</span>
+                <span className="text-bone">0 · 見 /privacy</span>
               </li>
               <li className="font-mono tabular">
                 <span className="text-mute/60">RECEIPTS</span>{" "}
@@ -182,15 +182,15 @@ export default function AuditPage() {
             </ul>
             <p className="mt-3 text-mute/65 text-[11px] leading-relaxed border-t border-line/40 pt-3">
               完整年度透明報表 · 每年 5/31 publish commitment(同此頁的事前承諾原則)·
-              違反 = brand 信用 collapse(per{" "}
+              違反就是品牌信用崩盤(見{" "}
               <Link
                 href="/ethics"
                 className="text-gold/80 hover:text-gold underline-offset-4 hover:underline"
               >
                 /ethics
               </Link>
-              )。 Section 05 DISCLOSURE PHILOSOPHY 解釋為什麼 publish 這些 ·
-              方法完整公開 · 不留 secret。
+              )。 第 05 節「為什麼全部公開」解釋我們為什麼把這些攤出來 ·
+              方法完整公開 · 不留秘密。
             </p>
             {/* R161 W1.O3 · Agent O Gap 3 · lateral cross-link to sibling
                 disclosure surfaces · /audit 是 trust artifact hub but star-graph
@@ -199,14 +199,14 @@ export default function AuditPage() {
                 self-exposure)· per NN/g 2026 hub-and-spoke internal-linking
                 research · spokes cross-link reduces /audit single-point load。 */}
             <p className="mt-3 font-mono text-mute/70 text-[10px] tracking-[0.25em] leading-relaxed">
-              ⚓ 完整 22 binding rules →{" "}
+              ⚓ 我們綁死的 22 條規矩 →{" "}
               <Link
                 href="/integrity"
                 className="text-gold/80 hover:text-gold underline-offset-4 hover:underline"
               >
                 /integrity
               </Link>{" "}
-              · 5 strongest objections(self-exposure)→{" "}
+              · 對自己最狠的 5 個質疑(自己先講)→{" "}
               <Link
                 href="/steelman"
                 className="text-gold/80 hover:text-gold underline-offset-4 hover:underline"
@@ -223,16 +223,16 @@ export default function AuditPage() {
                 · 純 closing-line 1-sentence link · multi-surface placement =
                 brand IP consistency。 */}
             <p className="mt-2 text-mute/65 text-[11px] leading-relaxed">
-              ⚓ POSITIONING · ZONE 27 = first-mover「DELTA of CPBL」 17-year
-              empty Asian baseball analytics slot · 完整 reasoning + DELTA Japan
-              14-yr precedent + Rebas TW 對標 + CPBL 2025 TAM math 見{" "}
+              ⚓ 定位 · ZONE 27 是亞洲棒球數據分析空了 17 年的位子裡第一個進場的。
+              完整來龍去脈 + 日本 DELTA 撐了 14 年的前例 + 台灣 Rebas 對照 +
+              CPBL 2025 市場規模算法,見{" "}
               <Link
                 href="/about"
                 className="text-gold/80 hover:text-gold underline-offset-4 hover:underline"
               >
                 /about
-              </Link>{" "}
-              · 同 axis multi-surface placement。
+              </Link>
+              。
             </p>
           </aside>
 
@@ -247,8 +247,7 @@ export default function AuditPage() {
               的條件機率,滾亂數選一個,執行壘上推進物理累計分數。
             </P>
             <P>
-              引擎完全在使用者瀏覽器內執行(JavaScript runtime),無後端 API
-              呼叫,可離線運作。完整方法公開於{" "}
+              引擎完全在你的瀏覽器裡跑,不連任何伺服器,沒網路也能算。完整方法公開於{" "}
               <Link
                 href="/methodology"
                 className="text-gold underline-offset-4 hover:underline"
@@ -258,7 +257,7 @@ export default function AuditPage() {
               ,每一個機率推導、簡化假設與已知限制都寫清楚。
             </P>
             <P className="text-mute/70">
-              想看完整工程白皮書(引擎架構、PA 機率推導、壘間物理規則、CLT 證明)?
+              想看完整技術說明(引擎怎麼搭、每打席機率怎麼推、壘間怎麼跑、為什麼跑一萬次就穩)?
               請見{" "}
               <Link
                 href="/methodology"
@@ -269,8 +268,8 @@ export default function AuditPage() {
               。本頁是精簡的 model report,/methodology 是完整技術論文。
             </P>
             <P className="text-mute/70">
-              本報告涵蓋 v0.2 base engine。 v0.3(+ Park Factor HR rate)已
-              LIVE DEV PREVIEW · v0.4(Bayesian Model Averaging)Q4 2026 PLANNED。
+              本報告涵蓋 v0.2 主引擎。 v0.3(加了球場因素對全壘打率的修正)已經是
+              開發預覽版 · v0.4(把 v0.2、v0.3 兩版結果加權混合)排在 2026 第四季。
               完整 3 個引擎版本(v0.2 → v0.3 → v0.4)的進程 · 每版改了什麼 · 見{" "}
               <Link
                 href="/methodology"
@@ -327,11 +326,11 @@ export default function AuditPage() {
                 ▲ ESTIMATION DISCLOSURE
               </p>
               <p className="text-mute text-sm leading-relaxed">
-                CPBL 主站 cpbl.com.tw 不公開投手 plate-appearance 級 K/9 · BB/9 ·
-                HR/9 真值。 ZONE 27 從球速 + ERA + 聯盟均值反推 estimate · 每位
-                投手的 estimate path 都 explicit 標出來 · 不藏。 此外自動 fetch
-                cpbl.com.tw 主站 K/9 BB/9 HR/9 leaderboard · 16+ qualifying
-                投手已 auto-overlay 官方真值。
+                CPBL 官網 cpbl.com.tw 不公開投手每打席等級的 K/9 · BB/9 ·
+                HR/9 真實數字。 ZONE 27 用球速 + ERA + 聯盟平均反推出估計值 · 每位
+                投手是怎麼估出來的都明白標出 · 不藏。 此外也會自動抓
+                cpbl.com.tw 官網的 K/9 BB/9 HR/9 排行 · 16+ 達標
+                投手已自動疊上官方真實數字。
               </p>
               <p className="text-mute/70 text-xs leading-relaxed mt-3">
                 這個 caveat 是 disclosure philosophy 的物理產出 ·
@@ -501,9 +500,9 @@ export default function AuditPage() {
               + OpenAI on this dimension. */}
           <ReportSection no="04" label="ENVIRONMENTAL IMPACT">
             <P>
-              ZONE 27 Engine 完全在使用者瀏覽器內執行,
-              <strong className="text-bone">沒有任何後端 API 呼叫、沒有 datacenter 訓練</strong>。
-              下表為單次 10,000-iteration 模擬的環境足跡估算:
+              ZONE 27 引擎完全在你的瀏覽器裡跑,
+              <strong className="text-bone">不連任何伺服器、也沒有用機房訓練模型</strong>。
+              下表是跑一次 10,000 場模擬的環境足跡估算:
             </P>
 
             <DataTable>
@@ -540,8 +539,8 @@ export default function AuditPage() {
                 MLCO2 Impact Calculator
               </ExtLink>{" "}
               方法(Lacoste et al. 2019)粗估。引擎的「無後端」架構選擇,
-              讓 ZONE 27 在這個維度上領先 98% 的 ML model cards
-              (含 Anthropic 與 OpenAI · 兩者皆未揭露 Scope 1/2/3 數據)。
+              讓 ZONE 27 在這一項上領先 98% 的 AI 模型說明書
+              (包括 Anthropic 與 OpenAI · 這兩家都沒公開自家碳排數據)。
             </P>
 
             <div className="mt-4">
@@ -584,9 +583,9 @@ export default function AuditPage() {
             </DataTable>
 
             <P>
-              OpenAI 藏 weights · Anthropic 藏 training data · Google 藏 fine-tuning —
-              他們的商業模式靠藏算法,
-              <strong className="text-bone">不藏對手立刻複製,億元 R&amp;D 化為烏有</strong>。
+              OpenAI 藏模型參數 · Anthropic 藏訓練資料 · Google 藏調校手法 —
+              他們的生意靠藏演算法,
+              <strong className="text-bone">一不藏對手馬上複製,幾十億的研發就白做了</strong>。
             </P>
             <P>
               <strong className="text-bone">ZONE 27 是 AI 公司的倒影</strong> —
@@ -595,9 +594,9 @@ export default function AuditPage() {
               硬藏算法 = 假裝有秘密 = 對訪客撒謊 = 品牌信用自殺。
             </P>
             <P className="text-mute/70">
-              這份 model report 整份的存在本身,就是我們對
-              「您憑什麼信任 ZONE 27?」這個問題的具體回答。
-              讀完您可以一行一行驗證 — 任何宣稱「我們有黑盒 AI 模型,你看不到」的對手,正好證明他們的立場跟我們是反的。
+              這份報告本身,就是
+              「您憑什麼信任 ZONE 27?」的具體回答。
+              您可以一行一行驗證 — 任何說「我們有黑盒 AI,你看不到」的對手,剛好證明他們跟我們是反的。
             </P>
             <P className="text-mute/70">
               <strong className="text-bone">物理證據在</strong>{" "}
@@ -716,35 +715,34 @@ export default function AuditPage() {
               <Link href="/manifesto" className="text-gold hover:underline">
                 /manifesto
               </Link>{" "}
-              · DISCLOSURE 只是 4 個倒置之一,其他 3 個(monetization · coverage · privacy)同樣公開。
+              · DISCLOSURE 只是 4 個倒置之一,其他 3 個(賺錢方式 · 覆蓋範圍 · 隱私)同樣公開。
             </P>
           </ReportSection>
 
           {/* ── 06 LOCAL STORAGE TRANSPARENCY · client-side state disclosure ── */}
           <ReportSection no="06" label="LOCAL STORAGE TRANSPARENCY">
             <P>
-              ZONE 27 用 localStorage 存 visitor-local state ·{" "}
-              <strong className="text-bone">0 tracking cookies · 0 server-side write · 0 PII transit</strong>
-              (essential auth session cookies 例外明示 below)。
-              開 DevTools → Application → Local Storage → zone27-web.vercel.app
-              · 您看到的 keys 跟下表一致 · 我們不藏。
+              ZONE 27 把資料存在你自己的瀏覽器裡 ·{" "}
+              <strong className="text-bone">0 追蹤 cookie · 0 寫到我們伺服器 · 0 個資外傳</strong>
+              (維持登入用的 cookie 是例外,下面會明講)。
+              打開瀏覽器的開發者工具看本機儲存
+              · 你看到的項目跟下表一模一樣 · 我們不藏。
             </P>
             <P className="text-mute/80">
-              <strong className="text-bone">Auth session cookies disclosure</strong>:
-              登入後 Supabase 在 first-party domain 設 2 個 cookies
-              (<code className="font-mono text-gold/85 text-[12px]">sb-{`{project}`}-auth-token</code>
-              + refresh)· essential for session persistence · HTTP-only ·
-              Secure · SameSite=Lax · 登出即刪。 不 tracking · 不送第三方 ·
-              不 PII inventory(只 store opaque session token)。 開 DevTools
-              → Application → Cookies 可 audit。
+              <strong className="text-bone">登入用的 cookie 說明</strong>:
+              登入後系統會在本站設 2 個 cookie
+              (一個登入憑證、一個用來續期)· 用來讓你保持登入狀態 ·
+              登出就刪。 不追蹤 · 不送第三方 ·
+              不建個資清單(只存一段你看不懂的登入憑證)。 你可以打開
+              瀏覽器的開發者工具自己查。
             </P>
 
             <LocalStorageReceipt variant="audit" />
 
             <P className="text-mute/70 mt-3">
-              <strong className="text-bone">⚓ Drift correction history</strong> ·
-              此表早期上線時 keys 6 個有 3 個不對 · 1 個是捏造的 · 1 個漏掉 ·
-              自己用站時發現、立即修正 · 不藏錯 · 公開記在這裡 · 不刪 commit history。
+              <strong className="text-bone">⚓ 我們修正過的紀錄</strong> ·
+              這張表剛上線時 6 個項目有 3 個寫錯 · 1 個是憑空捏造的 · 1 個漏掉 ·
+              自己用站時發現、立刻改正 · 不藏錯 · 公開記在這裡。
               這件事也收進{" "}
               <Link href="/corrections" className="text-gold underline-offset-4 hover:underline">
                 我們搞砸過的事
@@ -752,73 +750,72 @@ export default function AuditPage() {
               (集中認錯頁)。
             </P>
             <P className="text-mute/70">
-              <strong className="text-bone">NOT in localStorage</strong>:Match notes
-              (per MatchNoteEditor)store in Supabase{" "}
-              <code className="font-mono text-bone bg-slate/40 px-1.5 py-0.5 rounded-sm">user_metadata.match_notes</code> · 登入後 sync 到 server-side ·
-              不在 localStorage · 此表不列(不藏 · 不假裝)。
-              Match follows(per FollowMatchButton)同樣 in user_metadata 不在 localStorage。
+              <strong className="text-bone">不存在本機的</strong>:你寫的比賽筆記
+              是登入後存在帳號裡、同步到伺服器 ·
+              不在本機 · 此表不列(不藏 · 不假裝)。
+              你追蹤的比賽同樣存在帳號裡,不在本機。
             </P>
 
             <P className="text-mute/70 mt-4">
-              清除 localStorage 完全是您的選擇:DevTools Application tab right-click
-              「Clear」 · 或 browser「Clear site data」 一鍵清除全部 ZONE 27
-              storage。 我們{" "}
+              要清除這些本機資料完全是你的選擇:在瀏覽器的開發者工具裡
+              按「Clear」 · 或用瀏覽器的「清除網站資料」 一鍵清掉全部 ZONE 27
+              的本機資料。 我們{" "}
               <strong className="text-bone">不會</strong>{" "}
-              在您 clear 後試圖重新寫入 · 不會在 backend 保留 backup · 不會用
-              tracking pixel restore — 因為我們從一開始就沒有 backend copy。
+              在你清掉之後偷偷再寫回去 · 不會在伺服器留備份 · 不會用
+              追蹤技術還原 — 因為我們從頭到尾就沒在伺服器留過你的資料。
             </P>
 
             <P className="text-mute/70">
-              修改此 localStorage transparency policy 需 30 天前公告 ·
-              同 Section 05 PRE-COMMIT pattern · 新 localStorage key 加入時
-              此表必須同步 update · 對不上 = 品牌自殺。
+              修改這份本機資料的公開規則需 30 天前公告 ·
+              同 /audit Section 05 事先公開的承諾 · 每加一個新的本機資料項目時
+              此表都必須同步更新 · 對不上 = 品牌自殺。
             </P>
           </ReportSection>
 
           {/* ── 07 ENGINE v0.3 ESTIMATION DISCLOSURE · per engine version disclose ── */}
           <ReportSection no="07" label="ENGINE v0.3 ESTIMATION DISCLOSURE">
             <P>
-              Engine Lineup #2 v0.3 已 LIVE(DEV PREVIEW state · opt-in via
-              /lab 將來 ship)。 v0.3 = v0.2 base + Park Factor HR rate
-              adjustment · 公開 estimation methodology:
+              第 2 號引擎 v0.3 已經是開發預覽版(之後會在
+              /lab 開放讓你自選試用)。 v0.3 = v0.2 主引擎 + 球場因素對全壘打率的
+              修正 · 估算方法公開如下:
             </P>
 
             <DataTable>
               <DataRow
-                label="v0.3 BASE"
-                value="繼承 v0.2 全部"
-                note="K/9 + BB/9 + HR/9 + atBatProbs() 100% inherit from lib/simulator.ts · per Lens Lifetime Pledge"
+                label="v0.3 基礎"
+                value="完全沿用 v0.2"
+                note="K/9 + BB/9 + HR/9 + 打席機率 100% 沿用同一顆引擎 · 每一版永久保留"
               />
               <DataRow
-                label="v0.3 NEW · Park Factor"
+                label="v0.3 新增 · 球場因素"
                 value="HR rate × (1 + Δ/9.5 × 0.5)"
-                note="保守 sensitivity 0.5 · estimate · per lib/cpbl-parks.ts ESTIMATE R/G environment · v0.4 split full effect"
+                note="保守敏感度 0.5 · 估計值 · 用 4 個主場的得分環境推算 · v0.4 會拆得更細"
               />
               <DataRow
-                label="v0.3 NOT YET"
-                value="BABIP · 外野 dimensions · 風阻"
-                note="v0.3 only HR rate · v0.4 commit 加 BABIP × park 因素 + outfield distance + weather data"
+                label="v0.3 還沒做"
+                value="場內球安打率 · 外野尺寸 · 風阻"
+                note="v0.3 只調全壘打率 · v0.4 會再加場內球安打率、外野距離、天氣"
               />
               <DataRow
-                label="v0.3 EDGE CASE"
-                value="Unknown venue → v0.2 fallback"
-                note="venue 不在 lib/cpbl-parks.ts 4 主場 reference data · simulator-v03.ts 透明 fallback to v0.2 · 不假裝有 data"
+                label="v0.3 特殊情況"
+                value="球場不明 → 退回 v0.2"
+                note="球場不在那 4 個主場資料裡時 · 就老實退回 v0.2 · 不假裝有資料"
               />
             </DataTable>
 
             <P className="text-mute/70 mt-4">
-              v0.3 calibration receipts 將與 v0.2 receipts 平行 ingest 在{" "}
+              v0.3 的賽前預測會跟 v0.2 一起記在{" "}
               <Link href="/track-record" className="text-gold hover:underline">
                 /track-record
               </Link>{" "}
-              · 每筆 receipt 標 engine version · N≥30 finalized matches per engine
+              · 每一筆都標清楚是哪一版引擎算的 · 等每一版各滿 30 場已對帳的比賽
               後{" "}
               <Link href="/calibration" className="text-gold hover:underline">
                 /calibration
               </Link>{" "}
-              publish v0.2 vs v0.3 的實際準度對照 · 才決定 v0.3 是否 promote
-              default(per Lens Lifetime Pledge:
-              <strong className="text-bone"> 不 silently rotate</strong>)。
+              會公開 v0.2 跟 v0.3 的實際準度對照 · 才決定要不要把 v0.3 設成預設
+              (我們答應過:
+              <strong className="text-bone">每一版永久保留、不會偷偷換掉</strong>)。
             </P>
 
             <P className="text-mute/70">
@@ -830,7 +827,7 @@ export default function AuditPage() {
                 /methodology/diff
               </Link>
               {" "}· 逐行 diff 攤出 v0.2 → v0.3 改了什麼
-              · 30 分鐘理解 · per /methodology Section 04 ENGINE LINEUP。
+              · 30 分鐘理解 · 見 /methodology Section 04 ENGINE LINEUP。
             </P>
           </ReportSection>
 
@@ -883,8 +880,8 @@ export default function AuditPage() {
                   RECEIPT · 引擎收據
                 </dt>
                 <dd className="text-mute text-sm leading-relaxed">
-                  賽後 Tim 親手截圖 + finalResult ingest · 觸發 /track-record ledger 新一行 ·
-                  Tim 一人手工 · 不自動化。
+                  賽後 Tim 親手截圖、把最終比分輸進去 · 公開戰績就多一行 ·
+                  全程 Tim 一個人手動 · 不自動化。
                 </dd>
               </div>
             </dl>
@@ -924,8 +921,7 @@ export default function AuditPage() {
             </ul>
 
             <p className="mt-12 font-mono text-mute text-[10px] tracking-[0.25em]">
-              本頁採用 Anthropic Transparency Hub model-report 結構為設計範本 ·
-              零行銷語言原則
+              本頁堅持零行銷語言原則
             </p>
 
             {/* Build provenance · Round 4 moved from header MetaPair

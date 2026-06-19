@@ -127,7 +127,7 @@ export default function LabPage() {
                   自訂任意投手 →
                 </h3>
                 <p className="font-mono text-mute/80 text-[10px] tracking-[0.2em]">
-                  輸入 K/9 BB/9 HR/9 跑 10K sim
+                  輸入 K/9 BB/9 HR/9 跑 1 萬場模擬
                 </p>
               </Link>
             </div>
@@ -155,7 +155,7 @@ export default function LabPage() {
           跑。
         </h1>
         <p className="mt-6 max-w-md mx-auto text-mute leading-relaxed text-base">
-          選一場 CPBL · 跑 10,000 次推演引擎模擬 · &lt; 2 秒收斂。
+          選一場 CPBL · 跑 10,000 次模擬 · 不到 2 秒就跑完。
         </p>
 
         {/* Universal engine-free brand block — same on /lab/custom. */}
@@ -303,7 +303,7 @@ export default function LabPage() {
               方法完整公開 · 5 個章節 →
             </h3>
             <p className="font-mono text-mute/70 text-[10px] tracking-[0.25em]">
-              引擎背後的 model card · 零行銷語言
+              引擎背後怎麼算的 · 全部攤開 · 沒有行銷話術
             </p>
           </Link>
           <Link
@@ -403,7 +403,7 @@ export default function LabPage() {
             className="hover:text-gold transition-colors"
             aria-label="讀 Tim 創辦人筆記"
           >
-            TIM · This is where you verify everything yourself
+            TIM · 這裡的每個結果,你都能自己驗
           </Link>
         </p>
       </section>

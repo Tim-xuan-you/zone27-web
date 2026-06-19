@@ -41,7 +41,7 @@ export default function EngineFreeBrandBlock() {
         (碳排 &lt; 0.1g / sim)。
       </p>
       <p className="text-mute text-sm leading-relaxed">
-        因為架構零邊際成本,所以沒有 paywall 也沒有 rate limit。
+        因為引擎在你的裝置上跑、我們幾乎零成本,所以沒有付費牆、也不限用量。
         我們靠{" "}
         <Link
           href="/membership"

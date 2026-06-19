@@ -91,7 +91,7 @@ export default function MethodologyPage() {
             </li>
             <li className="font-mono tabular">
               <span className="text-mute/60">TRACKERS</span>{" "}
-              <span className="text-bone">0 · per /privacy</span>
+              <span className="text-bone">0 · 見 /privacy</span>
             </li>
             <li className="font-mono tabular">
               <span className="text-mute/60">ENGINE</span>{" "}
@@ -199,8 +199,7 @@ repeat 10,000 times → aggregate
         </Pre>
         <p>
           每場虛擬比賽包含 18 個半局,平均 ~70 個打席。10,000 場 = ~700,000 次亂數採樣,
-          全部在使用者瀏覽器端的 JavaScript runtime 執行,使用{" "}
-          <Mono>requestAnimationFrame</Mono> 批次每幀 200 場以維持 UI 流暢。
+          全部在你的瀏覽器裡跑,每一幀批次處理 200 場,讓畫面保持順暢。
         </p>
       </Section>
 
@@ -208,9 +207,9 @@ repeat 10,000 times → aggregate
       <Section no="02" label="TRY IT" zh="親手驗證">
         <p>
           以上所有理論,在下方的引擎裡實際執行。
-          按 <Mono>RUN 10,000 SIMULATIONS</Mono> 看真實的 Poisson 採樣與壘上推進物理,
-          再按 <Mono>REPLAY ONE GAME</Mono> 看一場 9 局逐打席文字直播 ──
-          完全在您的瀏覽器端執行,可離線運作,沒有任何 API 呼叫。
+          按 <Mono>RUN 10,000 SIMULATIONS</Mono> 看引擎真實的隨機抽樣與壘上推進,
+          再按 <Mono>REPLAY ONE GAME</Mono> 看一場 9 局逐打席的文字直播 ──
+          完全在你的瀏覽器裡跑,沒網路也能用,不連任何伺服器。
         </p>
         {demoMatch ? (
           <div className="mt-8">
@@ -275,23 +274,22 @@ repeat 10,000 times → aggregate
       {/* ── 04 ENGINE LINEUP · 3 變體 · 版本進程(全免費) ── */}
       <Section no="04" label="ENGINE LINEUP" zh="3 個版本 · 全免費">
         <p>
-          引擎不是 1 個 black box · 是 <strong className="text-bone">3 個可審
-          model variant</strong> · 每個 publish 完整 methodology + publish
-          DIVERGED per-engine + publish ESTIMATION DISCLOSURE per-engine。
-          訂閱 tier 解鎖 progression · 同 FanGraphs Steamer/ZiPS/ATC +
-          Baseball Prospectus PECOTA tier 結構 · brand-pure 不靠 secret moat。
+          引擎不是 1 個黑盒 · 是 <strong className="text-bone">3 個都能查的
+          版本</strong> · 每一版都公開完整方法 + 公開各自的落空紀錄 +
+          公開各自的估算說明。
+          訂閱會員解鎖更多版本 · 但護城河不靠藏秘密。
         </p>
 
         {/* Pokemon TCG SET release narrative · 工程術語升 collectible signal。 */}
         <p className="mt-4 text-mute/85 leading-relaxed">
-          <strong className="text-bone">v0.2 是 BASE SET</strong> · 七 lens
-          canvas + 投手主導逐打席模型 · ZONE 27 的奠基引擎。{" "}
-          <strong className="text-bone">v0.3 是 EXPANSION 1</strong> · 加 Park
-          Factor · 把 4 個 CPBL 場館的 dimension delta 寫進 HR sensitivity。{" "}
-          <strong className="text-bone">v0.4 是 EXPANSION 2</strong> · Bayesian
-          Model Averaging · v0.2 vs v0.3 之間的投票機制。 這不是 silent 替換 ·
-          是 set release · 每個 set 永久 viewable per Lens Lifetime Pledge ·
-          完整 diff 在{" "}
+          <strong className="text-bone">v0.2 是基礎版</strong> · 七個分析角度
+          + 投手主導逐打席模型 · ZONE 27 的奠基引擎。{" "}
+          <strong className="text-bone">v0.3 是擴充版 1</strong> · 加了球場
+          因素 · 把 4 個 CPBL 球場的差異寫進全壘打率調整。{" "}
+          <strong className="text-bone">v0.4 是擴充版 2</strong> · 把 v0.2、
+          v0.3 兩版結果加權混合投票。 這不是偷偷換掉 ·
+          是一版版加上去 · 每一版都永久看得到 ·
+          完整對照在{" "}
           <Link href="/methodology/diff" className="text-gold underline-offset-4 hover:underline">
             /methodology/diff
           </Link>
@@ -352,24 +350,24 @@ repeat 10,000 times → aggregate
         </div>
 
         <p className="mt-6">
-          <strong className="text-bone">每 engine brand-pure 設計原則(全 ✓):</strong>
+          <strong className="text-bone">每個引擎都守住的原則(全部做到):</strong>
         </p>
         <ul className="space-y-2 mt-3 text-mute">
           <li className="flex gap-3 items-baseline">
             <span className="font-mono text-gold/70 text-[10px] tracking-[0.25em]">▸</span>
-            <span className="flex-1">publish entire methodology(每版引擎方法全攤在 /methodology · per /audit S05 disclosure-philosophy)</span>
+            <span className="flex-1">每一版的完整方法都攤出來(每版引擎方法全攤在 /methodology)</span>
           </li>
           <li className="flex gap-3 items-baseline">
             <span className="font-mono text-gold/70 text-[10px] tracking-[0.25em]">▸</span>
-            <span className="flex-1">publish DIVERGED per-engine in <Link href="/track-record" className="text-gold underline-offset-4 hover:underline">/track-record</Link>(separate bucket · 同等大不藏 miss)</span>
+            <span className="flex-1">每個引擎各自的落空紀錄都公開在 <Link href="/track-record" className="text-gold underline-offset-4 hover:underline">/track-record</Link>(獨立分區 · 同等大不藏失手)</span>
           </li>
           <li className="flex gap-3 items-baseline">
             <span className="font-mono text-gold/70 text-[10px] tracking-[0.25em]">▸</span>
-            <span className="flex-1">publish ESTIMATION DISCLOSURE per-engine in <Link href="/audit" className="text-gold underline-offset-4 hover:underline">/audit S02</Link>(separate row · 同 v0.2 estimate 公開模式)</span>
+            <span className="flex-1">每個引擎各自的估算說明都公開在 <Link href="/audit" className="text-gold underline-offset-4 hover:underline">/audit S02</Link>(獨立列 · 同 v0.2 estimate 公開模式)</span>
           </li>
           <li className="flex gap-3 items-baseline">
             <span className="font-mono text-gold/70 text-[10px] tracking-[0.25em]">▸</span>
-            <span className="flex-1">30-day notice 提前公告 for any rule modification(同 /audit S05 PRE-COMMIT pattern)</span>
+            <span className="flex-1">任何規則修改都會 30 天前先公告(這是我們事先公開的承諾,見 /audit S05)</span>
           </li>
           <li className="flex gap-3 items-baseline">
             <span className="font-mono text-gold/70 text-[10px] tracking-[0.25em]">▸</span>
@@ -383,10 +381,10 @@ repeat 10,000 times → aggregate
             <span className="text-gold">We built 2 open ones · 1 in queue.</span>
           </p>
           <p className="mt-3 text-mute text-sm leading-relaxed">
-            v0.2 base + v0.3 Park Factor · 各自方法全攤在 /methodology
-            可 audit · v0.4 Bayesian ensemble 排程中。 訂閱解鎖 progression
-            是 commercial · methodology 永遠不靠 secret · 每個 lens 永久
-            viewable 不 silently rotate。
+            v0.2 主引擎 + v0.3 球場因素 · 各自的方法全攤在 /methodology
+            可以查 · v0.4 加權混合版排程中。 訂閱解鎖更多版本是生意的一部分
+            · 但方法永遠不靠藏秘密 · 每一版都永久看得到
+            · 不會偷偷換掉。
           </p>
         </blockquote>
 
@@ -477,7 +475,7 @@ repeat 10,000 times → aggregate
               />
               <LensRow
                 lens="Workload Proxy"
-                angle="WHIP + BB9 + K9 command stability proxy(v0.1)· v0.2 = rest_days + IP load real fatigue"
+                angle="用 WHIP + BB9 + K9 估投手控球穩定度(v0.1)· v0.2 會改用休息天數 + 投球局數估真實疲勞"
                 status="✓ LIVE · v0.1"
                 statusTone="gold"
                 tier="FREE"
@@ -493,7 +491,7 @@ repeat 10,000 times → aggregate
               />
               <LensRow
                 lens="Bullpen Depth"
-                angle="team recent W-L derive late-inning resilience proxy(v0.1)· v0.2 = bullpen ERA + IP usage"
+                angle="用球隊近期勝敗估後段局數的續戰力(v0.1)· v0.2 會改用牛棚防禦率 + 用量"
                 status="✓ LIVE · v0.1 PROXY"
                 statusTone="gold"
                 tier="FREE"
@@ -512,12 +510,12 @@ repeat 10,000 times → aggregate
         </div>
 
         <p className="mt-6">
-          <strong className="text-bone">每 lens brand-pure 設計原則(同 Section 04 standard 延伸):</strong>
+          <strong className="text-bone">每個分析角度都守住的設計原則(延續 Section 04 的標準):</strong>
         </p>
         <ul className="space-y-2 mt-3 text-mute">
           <li className="flex gap-3 items-baseline">
             <span className="font-mono text-gold/70 text-[10px] tracking-[0.25em]">▸</span>
-            <span className="flex-1">純 data viz / analyzer · 不假 prediction accuracy promise · 公開 source code per-lens(simulator-vibecheck.ts · simulator-parkfactor.ts 等)</span>
+            <span className="flex-1">純粹是把資料畫出來、做分析 · 不假裝保證準度 · 每個角度的算法全部公開</span>
           </li>
           <li className="flex gap-3 items-baseline">
             <span className="font-mono text-gold/70 text-[10px] tracking-[0.25em]">▸</span>
@@ -554,9 +552,9 @@ repeat 10,000 times → aggregate
       {/* ── 06 · ENGINE DRY DOCK · DHH HEY single-state-per-row pattern ── */}
       <Section no="06" label="ENGINE DRY DOCK" zh="引擎此刻在做什麼 · DRY DOCK">
         <p>
-          每個 engine variant 的當下狀態 single-row · 不藏「coming soon」 ·
-          不放「Q3 roadmap promises」 · 是{" "}
-          <strong className="text-bone">factual single-state per row</strong>。
+          每一版引擎的當下狀態各一行 · 不藏「即將推出」 ·
+          不放「第三季路線圖承諾」 · 就是{" "}
+          <strong className="text-bone">每一行講一個現況、不浮誇</strong>。
           想看引擎現在在做什麼 · 看{" "}
           <Link href="/methodology/diff" className="text-gold underline-offset-4 hover:underline">
             /methodology/diff
@@ -585,14 +583,14 @@ repeat 10,000 times → aggregate
               </span>
             </div>
             <p className="text-mute text-sm sm:text-base leading-relaxed">
-              <strong className="text-bone">v0.2 BASE</strong> · 逐打席引擎 · 100% client-side · 您 browser 跑 10K simulations · 詳見{" "}
+              <strong className="text-bone">v0.2 基礎版</strong> · 逐打席引擎 · 100% 在你的瀏覽器裡跑一萬場模擬 · 完整規格詳見{" "}
               <Link
                 href="/methodology/diff"
                 className="text-gold underline-offset-4 hover:underline"
               >
                 /methodology/diff
-              </Link>{" "}
-              entire v0.2 spec。
+              </Link>
+              。
             </p>
           </li>
 
@@ -613,9 +611,9 @@ repeat 10,000 times → aggregate
               </span>
             </div>
             <p className="text-mute text-sm sm:text-base leading-relaxed">
-              <strong className="text-bone">PARK FACTOR(HR_PARK_SENSITIVITY = 0.5)</strong>
-              {" "}· 4 CPBL 場館已 calibrated(新莊 ×0.9842 / 桃園 ×1.0316 /
-              大巨蛋 ×1.0105 / 澄清湖 ×1.0158)· code 已 ship to{" "}
+              <strong className="text-bone">球場因素(球場全壘打敏感度 = 0.5)</strong>
+              {" "}· 4 個 CPBL 球場已校準(新莊 ×0.9842 / 桃園 ×1.0316 /
+              大巨蛋 ×1.0105 / 澄清湖 ×1.0158)· 程式已上到{" "}
               <Link
                 href="/methodology/diff"
                 className="text-gold underline-offset-4 hover:underline"
@@ -651,8 +649,8 @@ repeat 10,000 times → aggregate
               >
                 /methodology/diff
               </Link>{" "}
-              v0.4 PRE-COMMIT block · implementation 等 v0.3 production ship
-              + N≥30 baseline · timing milestone-triggered 不綁日期。
+              v0.4 預先公開的規格 · 等 v0.3 正式上線 + 滿 30 場基準後再實作
+              · 時程看進度、不綁死日期。
             </p>
           </li>
 
@@ -708,11 +706,11 @@ repeat 10,000 times → aggregate
             每個 ship 過的 lens · 永遠看得到
           </h2>
           <p className="text-mute leading-relaxed text-base mb-4">
-            SaaS 標準是 model 衰退時 silently rotate / 偷偷換掉 · 訪客不會
-            知道。 ZONE 27 倒置:每個 ship 過的 engine 變體 / 每個 ship 過的
-            analytical lens · 永遠在 production 看得到。 我們不{" "}
-            <span className="text-loss/80">silently retire</span> ·
-            我們{" "}<span className="text-gold">deprecate + version</span>。
+            業界做法是模型變差時偷偷換掉 · 你不會
+            知道。 ZONE 27 反過來:每一版上線過的引擎 / 每一個上線過的
+            分析角度 · 永遠看得到。 我們不{" "}
+            <span className="text-loss/80">偷偷下架</span> ·
+            而是{" "}<span className="text-gold">標清楚「這版舊了」並保留版本</span>。
           </p>
           <p className="text-mute leading-relaxed text-base mb-4">
             <span className="text-bone">ZONE 27「自 v0.1 起每個 lens 永久看得到」</span>。
@@ -720,8 +718,8 @@ repeat 10,000 times → aggregate
             賽果攤在公開戰績。 賣明牌的站輸了就刪文 · 我們是保留版本 + 永久留下記錄。
           </p>
           <p className="font-mono text-mute/80 text-[10px] tracking-[0.3em] leading-relaxed">
-            ⚓ 修改此 pledge 需 30 天前公告 · 同 /audit S05
-            PRE-COMMIT pattern。
+            ⚓ 修改這個承諾需 30 天前公告 · 跟 /audit S05
+            一樣是事先寫死的規矩。
           </p>
         </div>
       </section>
@@ -875,7 +873,7 @@ repeat 10,000 times → aggregate
           <strong>真的想搞懂引擎怎麼算的朋友</strong>。
         </p>
         <p>
-          上面寫的每一步都是引擎真正在做的事 · 不是 marketing pseudo-code ·
+          上面寫的每一步都是引擎真正在做的事 · 不是行銷話術編出來的假流程 ·
           您比我更懂的話 · 歡迎寫信告訴我哪裡該修。
         </p>
         <p>

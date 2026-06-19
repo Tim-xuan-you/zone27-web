@@ -54,41 +54,40 @@ export default function PrivacyPage() {
         <ul className="space-y-3">
           <li>
             <strong className="text-bone">Email · 必填</strong> ─
-            您填的 email 字串,正規化為小寫並 trim。用於正式開賣時通知您。
+            您填的 email,我們會自動轉成小寫並去掉前後空白。用於正式開賣時通知您。
           </li>
           <li>
             <strong className="text-bone">稱呼 · 選填</strong> ─
             如果您填寫,我們會存。不填就是 <Code>null</Code>。
           </li>
           <li>
-            <strong className="text-bone">Queue position</strong> ─
-            您加入時系統自動分配的順序號(<Code>bigint generated always as identity</Code>),
-            用於告訴您「您是第 N 位」。
+            <strong className="text-bone">排隊順位</strong> ─
+            您加入時系統自動分配的序號,
+            用來告訴您「您是第 N 位」。
           </li>
           <li>
-            <strong className="text-bone">Created timestamp</strong> ─
-            您加入的時間(UTC),用於排序與「最近 24 小時新增多少」這類匿名彙總。
+            <strong className="text-bone">加入時間</strong> ─
+            您加入的時間,用來排序,以及計算「最近 24 小時新增多少人」這類不含個人身分的統計。
           </li>
           <li>
             <strong className="text-bone">Channel source(若有)</strong> ─
             如果您點進來的 URL 帶有 <Code>?ref=reserve-NNN</Code> 參數,
             <strong className="text-bone">我們會把該標籤存下</strong>(例如:
-            <Code>reserve-001</Code>)。這是<strong className="text-bone">通道歸因</strong>,
-            告訴創辦人「某位早鳥的分享連結帶來了多少新報名」。
-            <strong className="text-bone">這 NOT 是個人追蹤</strong>:我們不知道
+            <Code>reserve-001</Code>)。這是用來看<strong className="text-bone">「某位早鳥的分享連結帶來了多少新報名」</strong>,
+            <strong className="text-bone">不是用來追蹤你個人</strong>:我們不知道
             <em>哪位特定訪客</em>透過該連結進來,只知道「總共多少報名來自該通道」。
-            sanitize regex 限制 <Code>[a-z0-9-]{"{1,40}"}</Code>,防止 injection 與超長字串。
+            我們會檢查並限制這段標籤的字元和長度,防止有人塞惡意內容或超長字串。
           </li>
         </ul>
         <p className="text-mute/80 mt-6">
-          就這 5 個欄位 in waitlist · 另有{" "}
+          等候名單就只有這 5 項 · 另外還有{" "}
           <Link
             href="/membership"
             className="text-gold underline-offset-4 hover:underline"
           >
             會員申請資料
           </Link>
-          {" "}見下方 Section 02B · 就這些 · 沒有藏起來的欄位。
+          {" "}(見下方 Section 02B)· 就這些 · 沒有藏起來的資料。
         </p>
       </Section>
 
@@ -109,16 +108,16 @@ export default function PrivacyPage() {
             申請表
           </Link>{" "}
           收{" "}
-          <strong className="text-bone">4 個額外欄位</strong>(Section 02 waitlist
-          5 欄之外)· Tim 親手 onboard 1-3 days。 此 section codify 該 4 欄資料
-          用途 + 保留期間 + per-field rationale:
+          <strong className="text-bone">4 個額外資料</strong>(在等候名單那
+          5 項之外)· Tim 親手審核帶你進來,約 1 到 3 天。 以下說明這 4 項的
+          用途和保留多久:
         </p>
         <ul className="space-y-4 mt-6">
           <li>
             <strong className="text-bone">A.</strong>{" "}
             <Code>email</Code>{" "}
-            · 寄通過 / 不通過信 + 銀行轉帳指示 + 24h window · 同 Section 02
-            waitlist email · 退出寄{" "}
+            · 用來寄通過/不通過通知、銀行轉帳說明、以及限時 24 小時的開通信 · 與等候名單的
+            email 相同 · 想退出就寄信標題寫{" "}
             <a
               href="mailto:tatayngiti@gmail.com?subject=ZONE%2027%20%C2%B7%20UNSUBSCRIBE"
               className="text-gold underline-offset-4 hover:underline"
@@ -139,9 +138,9 @@ export default function PrivacyPage() {
           </li>
           <li>
             <strong className="text-bone">D.</strong>{" "}
-            <Code>why_zone27</Code>(必填 · 50-600 字)· 您的理由 · Tim 親手
-            read 親手 review · 通過 / 不通過 / clarifying question 的依據 · 不 share ·
-            不 publish · 您的申請內容不會被公開上架。
+            加入理由(必填 · 50-600 字)· 您的理由 · Tim 親手
+            讀、親手審 · 作為通過/不通過/再追問的依據 · 不分享、
+            不公開 · 您的申請內容不會被公開上架。
           </li>
         </ul>
         <h3 className="text-bone text-base mt-6 mb-2">保留期間 · RETENTION POLICY</h3>
@@ -157,22 +156,20 @@ export default function PrivacyPage() {
             </a>{" "}
             · Tim 7 天內手動刪除 Gmail thread + Vercel logs grep。
           </li>
-          <li>▸ <strong className="text-bone">Vercel logs</strong> · structured
-            event log backstop · {" "}
-            <em>只記錄 applicationId + email 網域 · 不記錄完整姓名 / 球隊 / 申請理由內容</em>
-            {" "}· 預設 7 天 retention · Tim 不下載 不分析 不 archive。
+          <li>▸ <strong className="text-bone">主機後台紀錄</strong> · {" "}
+            <em>只記錄申請編號和 email 網域 · 不記錄完整姓名 / 球隊 / 申請理由</em>
+            {" "}· 預設保留 7 天 · Tim 不下載、不分析、不另外備份。
           </li>
           <li>▸ <strong className="text-bone">Supabase</strong> · migration 0003
-            未 apply · 目前不存 application 到 Supabase · pre-launch MVP email-only
-            audit trail · migration apply 後此處更新 30 天前公告 per /audit S05
-            PRE-COMMIT clause。
+            未 apply · 目前不把申請資料存進 Supabase · 開賣前只用 email 信箱當
+            紀錄 · 將來若改用資料庫,會在 30 天前先公告。
           </li>
         </ul>
         <p className="mt-6 text-mute/80">
-          <strong className="text-bone">不 share 第三方規則</strong> · 您 application
-          內容 0 third-party tracking · 0 analytics · 0 marketing list · 0 LLM
-          training corpus · 0 cross-product sharing。 違反此 disclosure 需 30 天前
-          先公告 + 您可選 opt-out · per /audit S05 + S06 PRE-COMMIT pattern。
+          <strong className="text-bone">不分享給第三方</strong> · 您的申請
+          內容:不做第三方追蹤、不丟進分析工具、不進行銷名單、不拿去訓練 AI、
+          不跨產品分享。 若要改變這個規則,需 30 天前
+          先公告,而且您可以選擇退出(這是我們在 /audit S05、S06 事先公開的承諾)。
         </p>
       </Section>
 
@@ -192,7 +189,7 @@ export default function PrivacyPage() {
               Section 02B
             </Link>{" "}
             會員申請表 確實收 name + email + cpbl_connection + why_zone27 ·
-            因為人工 onboard 需要(不藏)
+            因為人工帶入會需要(不藏)
           </li>
           <li>✕ 沒有電話 / 地址(application 也不收)</li>
           <li>✕ 沒有瀏覽行為紀錄(您在 /lab 跑幾次 simulation 我們不知道)</li>
@@ -250,20 +247,17 @@ export default function PrivacyPage() {
         <ul className="space-y-3">
           <li>
             ▸ <strong className="text-bone">沒有任何角色能直接讀 / 寫 waitlist 表</strong>。
-            連我們的公開 <Code>publishable key</Code>(放在前端 JS 裡)
-            都無法繞過 RLS。
+            連我們公開放在網頁程式裡的那把公開金鑰,
+            也沒辦法繞過這道鎖。
           </li>
           <li>
-            ▸ 所有寫入只能透過{" "}
-            <Code>SECURITY DEFINER</Code> 函式{" "}
-            <Code>reserve_waitlist_spot()</Code> ──
-            該函式驗證 email 格式 + 去重 + sanitize source tag,
-            然後 INSERT。
+            ▸ 所有寫入只能透過一個受控的專用函式 ──
+            它會檢查 email 格式、去除重複、清理來源標籤,
+            才寫進資料庫。
           </li>
           <li>
-            ▸ 所有讀取也只能透過{" "}
-            <Code>SECURITY DEFINER</Code> 函式 <Code>get_waitlist_count()</Code> ──
-            <strong className="text-bone">永遠只回傳 COUNT,從不回傳 email/姓名</strong>。
+            ▸ 所有讀取也只能透過一個受控的專用函式 ──
+            <strong className="text-bone">永遠只回傳「總人數」,絕不回傳 email 或姓名</strong>。
           </li>
           <li>
             ▸ 只有 <Code>service_role</Code>(僅創辦人 Tim 透過 Supabase Studio 持有)
@@ -271,9 +265,9 @@ export default function PrivacyPage() {
           </li>
         </ul>
         <p>
-          這個架構代表:即使我們公開的 <Code>NEXT_PUBLIC_SUPABASE_ANON_KEY</Code>{" "}
-          被任何人撿到,他<strong className="text-bone">依然無法 exfiltrate
-          任何一個 email</strong>。RLS 是物理防線,不是嘴炮。
+          這個架構代表:就算我們公開的那把金鑰被任何人撿走,
+          他<strong className="text-bone">依然偷不走
+          任何一個 email</strong>。這道鎖是真的擋得住,不是嘴上說說。
         </p>
       </Section>
 
@@ -289,7 +283,7 @@ export default function PrivacyPage() {
           <li>▸ 不分享給廣告平台(我們也沒有廣告)</li>
           <li>▸ 不販售給數據經紀商</li>
           <li>▸ 不交換給合作品牌</li>
-          <li>▸ 不交給 LINE / FB / Google 進行受眾再行銷</li>
+          <li>▸ 不交給 LINE / FB / Google 拿你的資料去做廣告投放</li>
         </ul>
         <p>
           唯二例外是法律強制:(a) 台灣法院的搜索票/調查令、(b) 跨境執法 MLAT
@@ -337,7 +331,7 @@ export default function PrivacyPage() {
         <p>
           中華民國《個人資料保護法》(2010 年制定 · 2015 年修正)規範非
           公務機關蒐集、處理、利用個人資料應遵循的原則。 ZONE 27 作為非
-          公務機關 · 主動 codify 以下 PDPA-compliant 承諾:
+          公務機關 · 主動寫明以下符合個資法的承諾:
         </p>
 
         <h3 className="text-bone text-lg mt-6 mb-3">資料控制者(Data Controller)</h3>
@@ -350,11 +344,11 @@ export default function PrivacyPage() {
           </li>
           <li>
             <strong className="text-bone">法律地位</strong> · 自然人 · 尚未公司化 ·
-            per /terms Section 01「ZONE 27 ... 目前由創辦人 Tim 以個人名義經營」
+            見 /terms 第 01 節「ZONE 27 ... 目前由創辦人 Tim 以個人名義經營」
           </li>
           <li>
-            <strong className="text-bone">無 DPO 指派</strong> · solo founder ·
-            Tim 親自 handle 全部 PDPA-related 詢問 · 14 天內回覆 per Section 06
+            <strong className="text-bone">沒有指派個資保護專員</strong> · 單人經營 ·
+            個資相關問題都由 Tim 本人處理 · 14 天內回覆(見第 06 節)
           </li>
         </ul>
 
@@ -367,24 +361,22 @@ export default function PrivacyPage() {
             與 PDPA 同等保護等級
           </li>
           <li>
-            <strong className="text-bone">Vercel</strong>(global CDN · USA-based) ·
-            handles HTTP request routing · 您 IP 短暫經 Vercel edge · 不 persist ·
-            per /audit S04 environmental impact disclosure
+            <strong className="text-bone">Vercel</strong>(全球節點 · 美國公司) ·
+            負責把網頁送到你的瀏覽器 · 你的 IP 會短暫經過,但不會被保存。
           </li>
           <li>
-            <strong className="text-bone">Resend</strong>(USA-based) · transactional
-            email delivery · 您的 email + 通知內容 短暫經 Resend SMTP · per their
-            standard data processing agreement
+            <strong className="text-bone">Resend</strong>(美國公司) · 負責幫我們寄通知信 ·
+            你的 email 和信件內容會短暫經過他們的寄信系統 · 依照他們的
+            標準資料處理約定。
           </li>
           <li>
-            <strong className="text-bone">原始碼代管商</strong>(USA-based) ·
-            source code repository · 不存任何 visitor 個資 · 純版本控制
-            metadata
+            <strong className="text-bone">程式部署平台</strong>(美國公司) ·
+            不存放任何訪客個資 · 只有程式版本紀錄。
           </li>
           <li>
             <strong className="text-bone">無中華人民共和國境內節點</strong> ·
-            ZONE 27 不使用任何 PRC-located cloud / CDN · per brand IP「audience
-            是台灣 + 海外華語區 baseball fan · not PRC market」 explicit。
+            ZONE 27 不使用任何中國大陸境內的雲端 / CDN · 我們的對象是台灣與海外華語區的
+            棒球迷,不做中國大陸市場。
           </li>
         </ul>
 
@@ -396,17 +388,17 @@ export default function PrivacyPage() {
           </li>
           <li>
             <strong className="text-bone">BLACK 會員紀錄</strong> · 永久
-            保留 · 您即使退款 · 歷史記錄仍保留(release reserved 標記但保留
-            紀錄)
+            保留 · 即使您退款,歷史紀錄仍然保留(會標記為已釋出,但
+            紀錄不刪)。
           </li>
           <li>
             <strong className="text-bone">Resend email delivery logs</strong> ·
             Resend default 7-day retention · ZONE 27 不主動 export · 不留 local copy
           </li>
           <li>
-            <strong className="text-bone">版本控制紀錄 metadata</strong> ·
-            永久 public · 不可刪除 · 但您的個資 NEVER appears
-            in commit content
+            <strong className="text-bone">程式版本紀錄</strong> ·
+            永久公開 · 不可刪除 · 但您的個資永遠不會
+            出現在這些紀錄裡。
           </li>
         </ul>
 
@@ -414,14 +406,14 @@ export default function PrivacyPage() {
         <ul className="space-y-2">
           <li>
             <strong className="text-bone">PDPA 第 19 條</strong>(蒐集前告知)
-            · 我們蒐集您的 email 限於「launch 通知」 + 「BLACK onboarding
-            個人化 email」 · 不作任何 marketing / cross-selling / 廣告投放 /
-            個資 monetization 用途。
+            · 我們蒐集您的 email 只用於「上線通知」 + 「BLACK 會員入會
+            的個人化信」 · 不作任何行銷 / 推銷別的東西 / 廣告投放 /
+            把個資拿去變現的用途。
           </li>
           <li>
             <strong className="text-bone">第 20 條</strong>(原蒐集目的範圍內)
-            · 我們承諾不超出 launch 通知 + onboarding 兩個目的 · 任何擴張需 30
-            天前先公告 + 您可選 opt-out。
+            · 我們承諾不超出上線通知 + 入會這兩個目的 · 任何擴張需 30
+            天前先公告 + 您可選擇退出。
           </li>
         </ul>
 
@@ -438,8 +430,8 @@ export default function PrivacyPage() {
           <li>
             <strong className="text-bone">Tim 失蹤 / incapacity 情境</strong>{" "}
             · Tim 健康問題 / 意外 / 失蹤超過 30 天 · 由 Tim 預先指定
-            executor(目前是 Tim 配偶 + Tim 兄弟姊妹 2 人)接管 ZONE 27 原始碼代管
-            + Supabase admin + Resend 帳號 · 處理現有 Founders
+            的代理人(目前是 Tim 配偶與兄弟姊妹共 2 人)接管 ZONE 27 的程式碼、資料庫管理權
+            與寄信帳號 · 處理現有 Founders
             退款 + 公告 brand 狀態
           </li>
           <li>
@@ -455,23 +447,23 @@ export default function PrivacyPage() {
           </li>
           <li>
             <strong className="text-bone">BLACK 退款優先</strong> · 即使
-            14 天 cooling-off window 已過 · 這個緊急情境啟動時當期未用完的
-            會員 access 按剩餘天數比例退款(NT$ 500 × 剩餘天數 / 31)·
-            executor 親手處理 · 不外包 · per Taiwan 消保法 § 19 spirit
+            14 天無條件退款期已過 · 啟動這個緊急情境時,當期沒用完的
+            會員天數會按比例退款(NT$ 500 × 剩餘天數 / 31)·
+            由代理人親手處理 · 不外包 · per Taiwan 消保法 § 19 spirit
             extension
           </li>
           <li>
-            <strong className="text-bone">您的個資 fate</strong> · 您 PII 同
-            executor 接管後依您 request 刪除 · executor 不繼承 Tim 的「親手
-            review」 brand IP · 整 brand 30 天內 wind-down 公告 · 不延續 NEW
-            applications
+            <strong className="text-bone">您的個資去向</strong> · 代理人
+            接管後,可依您的要求刪除您的個資 · 代理人不會延續 Tim 的「親手
+            審核」方式 · 整個品牌會在 30 天內公告收尾 · 不再接受
+            新申請。
           </li>
         </ul>
 
         <p className="mt-6 text-mute/85 text-sm">
           ▸ 完整 PDPA-compliant 承諾 同步顯示在 <Link href="/audit#disclosure" className="text-gold underline-offset-4 hover:underline">/audit DISCLOSURE block</Link>
           + <Link href="/integrity" className="text-gold underline-offset-4 hover:underline">/integrity binding rules</Link>
-          · 任何 update 需 30 天前先公告 · per /audit S05 PRE-COMMIT pattern。
+          · 任何修改都會 30 天前先公告(見 /audit S05 事先公開的承諾)。
         </p>
       </Section>
 
@@ -480,18 +472,18 @@ export default function PrivacyPage() {
         <p>
           我們把 <Code>Vercel</Code> 與{" "}
           <Code>Supabase Tokyo</Code> 當成基礎設施,
-          享有它們提供的企業級加密與存取控制。具體來說:
+          享有它們提供的高規格加密與存取控制。具體來說:
         </p>
         <ul className="space-y-3">
           <li>▸ 所有傳輸採 HTTPS / TLS 1.3 加密</li>
           <li>
-            ▸ Supabase 採 SOC 2 Type II + ISO 27001 級別保護 ·{" "}
-            <Code>service_role</Code> 鑰匙不離開 Tim 的本機
+            ▸ Supabase 採用國際資安認證(SOC 2 Type II、ISO 27001)等級的保護 ·{" "}
+            最高權限鑰匙不離開 Tim 的本機
           </li>
           <li>
-            ▸ 結算推播(賽果出來提醒你回來對帳)用的是<strong className="text-bone">另一把只能送提醒的窄權限鑰匙</strong> ——
-            它只能讀「誰押了已結算的那幾場」的推播管道、記下已送、清掉失效訂閱,做不了別的事;
-            <Code>service_role</Code> 仍只在 Tim 本機。 推播內容只帶「N 場結算了 · 回來對帳」一句話 +
+            ▸ 賽果出來提醒你回來對帳的推播,用的是<strong className="text-bone">另一把權限很窄、只能送提醒的鑰匙</strong> ——
+            它只能讀「誰押了已結算的那幾場」的推播管道、記下已送、清掉失效的訂閱,做不了別的事;
+            最高權限的主鑰匙仍只留在 Tim 本機。 推播內容只帶「N 場結算了 · 回來對帳」一句話 +
             站內連結,<strong className="text-bone">不含 email、隊伍、比分或輸贏</strong>(細節留在登入後的站內收件匣)。
           </li>
           <li>
