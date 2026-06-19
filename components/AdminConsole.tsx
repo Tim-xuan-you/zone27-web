@@ -25,7 +25,7 @@ import {
   type AdminFullContent,
   type AdminAuditRow,
 } from "@/lib/admin";
-import { getMembershipStatus, formatUntilShort } from "@/lib/membership";
+import { getMembershipStatus, formatUntilShort, nextMemberUntil } from "@/lib/membership";
 
 const TIER_ZH: Record<string, string> = {
   free: "OPEN",
@@ -130,7 +130,7 @@ export default function AdminConsole() {
   return (
     <div className="space-y-5">
       <GivePointsCard onDone={reloadMembers} />
-      <SetTierCard onDone={reloadMembers} />
+      <SetTierCard onDone={reloadMembers} members={members} />
       <MembersCard members={members} onReload={reloadMembers} />
       <ModerationCard content={content} onReload={reloadContent} />
       <AuditCard audit={audit} onReload={reloadAudit} />
@@ -307,7 +307,7 @@ function GivePointsCard({ onDone }: { onDone: () => void }) {
 }
 
 // ── 標付費等級 ──
-function SetTierCard({ onDone }: { onDone: () => void }) {
+function SetTierCard({ onDone, members }: { onDone: () => void; members: AdminMember[] }) {
   const [email, setEmail] = useState("");
   const [tier, setTier] = useState<"free" | "black" | "founder">("black");
   const [busy, setBusy] = useState(false);
@@ -323,9 +323,17 @@ function SetTierCard({ onDone }: { onDone: () => void }) {
     const res = await adminSetTier(email.trim(), tier);
     setBusy(false);
     if (res.ok) {
+      // 設 BLACK → 順手算到期日顯示給 Tim(可轉告對方「你的 BLACK 有效到 X」)· 鏡 SQL 同公式。
+      let extra = "";
+      if (tier !== "free") {
+        const existing = members.find(
+          (m) => m.email.toLowerCase() === email.trim().toLowerCase(),
+        )?.memberUntil;
+        extra = ` · 有效到 ${formatUntilShort(nextMemberUntil(existing))}`;
+      }
       setMsg({
         ok: true,
-        text: `${email.trim()} 設為「${TIER_ZH[tier]}」· 對方下次登入生效`,
+        text: `${email.trim()} 設為「${TIER_ZH[tier]}」${extra} · 對方下次登入生效`,
       });
       setEmail("");
       onDone();

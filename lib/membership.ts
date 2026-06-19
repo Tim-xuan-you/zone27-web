@@ -77,6 +77,25 @@ export function effectiveTier(
   return s.state === "expired" ? "free" : s.tier;
 }
 
+/** 設 BLACK 時「新的到期日」= max(現有到期, 今天) + 31 天(台北)· 逐字鏡 SQL admin_set_tier。
+ *  existing 空/格式不對 → 從今天起算(早續不少算天數)。 回 "YYYY-MM-DD"。 給 /admin 設定後即時顯示用。 */
+export function nextMemberUntil(
+  existing?: string | null,
+  now: Date = new Date(),
+): string {
+  const today = taipeiMidnightUtcMs(now);
+  const ex =
+    existing && /^\d{4}-\d{2}-\d{2}$/.test(existing.trim())
+      ? parseUntilUtcMs(existing.trim())
+      : null;
+  const base = ex !== null && ex > today ? ex : today;
+  const tpe = new Date(base + 31 * DAY_MS + TPE_OFFSET_MS);
+  const y = tpe.getUTCFullYear();
+  const m = String(tpe.getUTCMonth() + 1).padStart(2, "0");
+  const d = String(tpe.getUTCDate()).padStart(2, "0");
+  return `${y}-${m}-${d}`;
+}
+
 /** "2026-07-20" → "7/20"(會員卡平靜顯示)。 格式不對原樣回。 */
 export function formatUntilShort(until: string): string {
   const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(until);
