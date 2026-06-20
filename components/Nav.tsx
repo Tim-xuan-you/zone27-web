@@ -2,7 +2,6 @@ import Link from "next/link";
 import MobileNavToggle from "@/components/MobileNavToggle";
 import MembershipNavCTA from "@/components/MembershipNavCTA";
 import TierBadge from "@/components/TierBadge";
-import CmdKTrigger from "@/components/CmdKTrigger";
 import SettlementBell from "@/components/SettlementBell";
 import { getTodayMatches } from "@/lib/matches";
 
@@ -189,7 +188,6 @@ export default function Nav({ active }: { active?: NavKey }) {
               active={active === "founders"}
               variant="desktop"
             />
-            <CmdKTrigger />
           </div>
 
           {/* Mobile · 單一 auth gold CTA(MobileNavToggle = MembershipNavCTA mobile)·
@@ -202,16 +200,9 @@ export default function Nav({ active }: { active?: NavKey }) {
           </div>
         </div>
 
-        {/* Mobile · 2nd row: 4 secondary nav links + ⌕ palette trigger.
-            Round 9 hid '更多 ↓' anchor (Apple/Stripe/Linear pattern).
-            Round 12 funnel-audit: mobile visitors had NO way to access
-            the 24-route Cmd-K palette (CmdKTrigger was desktop-only).
-            Skeptics on phones couldn't reach /manifesto · /audit ·
-            /methodology without footer-digging. Adding a tiny ⌕ icon
-            as the 5th item exposes verification routes without
-            telegraphing "we have hidden pages" (icon-only · power-
-            user signal · same affordance as Linear / Notion / Raycast
-            mobile pattern). */}
+        {/* Mobile · 2nd row: secondary nav links（R255 砍掉整層鍵盤 power-user
+            殼:⌘K 快搜 chip + 手機 ⌕ + g-mode 捷徑全移除 —— Tim「國小生想逛 ·
+            Polymarket 沒這套 · 工程師感」· 一般球迷用點的、不用搜)。 */}
         <div className="sm:hidden mx-auto max-w-6xl px-6 pb-3">
           <ul className="flex items-center justify-between gap-2 text-[10px] font-mono">
             {NAV_ITEMS.map((item) => {
@@ -253,9 +244,6 @@ export default function Nav({ active }: { active?: NavKey }) {
                 </li>
               );
             })}
-            <li>
-              <CmdKTrigger variant="icon" />
-            </li>
           </ul>
         </div>
       </nav>

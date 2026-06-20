@@ -1,9 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import CommandPalette from "@/components/CommandPalette";
 import StickyFoundersCTA from "@/components/StickyFoundersCTA";
 import PreviewModeBanner from "@/components/PreviewModeBanner";
-import GlobalShortcuts from "@/components/GlobalShortcuts";
 import "./globals.css";
 
 // ── Viewport · themeColor + colorScheme (Next.js 16 pattern) ──
@@ -149,15 +147,7 @@ export default function RootLayout({
             client island self-hides 如果無 localStorage zone27_preview_tier */}
         <PreviewModeBanner />
         {children}
-        <CommandPalette />
         <StickyFoundersCTA />
-        {/* R62 W-C · Bloomberg/power-user agent Ship #1 · Linear/GitHub-style
-            g-mode two-stroke shortcuts(g+m matches · g+t track-record · g+l
-            lab · g+f 會員 · g+a audit · g+c calibration · g+r roadmap ·
-            g+p methodology · g+s steelman · g+e ethics · g+x transparency ·
-            g+n now · g+h home · g+? Cmd-K help)· power-user retention amplifier ·
-            invisible to public · respect input focus context · 0 tracking。 */}
-        <GlobalShortcuts />
       </body>
     </html>
   );
