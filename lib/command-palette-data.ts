@@ -97,6 +97,17 @@ export const COMMAND_ITEMS: CommandItem[] = [
     ],
   },
   {
+    label: "今晚這桌 · 誠實收據(任意一注 · 含引擎沒模型的)",
+    kicker: "/table",
+    path: "/table",
+    group: "賽事 · 引擎",
+    keywords: [
+      "table", "今晚這桌", "誠實收據", "收據", "receipt", "對帳", "鎖手",
+      "角球", "corner", "總分", "大小", "讓分", "兩隊都得分", "btts",
+      "任意一注", "外傳", "朋友", "這桌", "無模型", "只對帳",
+    ],
+  },
+  {
     label: "足球 · 世界盃/巴甲 引擎開盤(勝/平/負)",
     kicker: "/soccer",
     path: "/soccer",
