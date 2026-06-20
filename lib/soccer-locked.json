@@ -1224,6 +1224,34 @@
       "outcome": null,
       "verdict": null,
       "gradedAt": null
+    },
+    {
+      "matchId": "fd-537393",
+      "competitionCode": "WC",
+      "competitionName": "世界盃",
+      "kickoffISO": "2026-06-22T21:00:00Z",
+      "status": "TIMED",
+      "homeSeed": "France",
+      "awaySeed": "Iraq",
+      "home": "法國",
+      "away": "伊拉克",
+      "ratingHome": 1852,
+      "ratingAway": 1598,
+      "homeAdvantage": 0,
+      "xgHome": 1.8715000000000002,
+      "xgAway": 0.7285,
+      "homeWin": 0.6373839526287762,
+      "draw": 0.23198827190190635,
+      "awayWin": 0.13062777546931761,
+      "homeWinPct": 64,
+      "drawPct": 23,
+      "awayWinPct": 13,
+      "enginePick": "home",
+      "lockedAt": "2026-06-20T22:04:18.544Z",
+      "finalScore": null,
+      "outcome": null,
+      "verdict": null,
+      "gradedAt": null
     }
   ]
 }
