@@ -265,84 +265,6 @@ export default function LabPage() {
         </EngineGate>
       </section>
 
-      {/* ── POST-SIM TRUST LOOP ────────────────────
-          Round 28 · Agent C P1.2 fix: hardcore baseball fan 跑完
-          10K 收斂後,下一個 instinct 是「show me where this engine
-          has been wrong」· 沒有 /track-record CTA = 高 trust visitor
-          無處可去。這兩張卡完成 trust loop:看引擎跑 → 看引擎過去
-          PROVED/DIVERGED 紀錄 → BLACK(GOLD 已收掉)。和 CUSTOM MODE CTA
-          視覺上分層 · 那是「power-user 再玩」· 這是「verify the
-          engine has receipts」. */}
-      <section
-        aria-labelledby="post-sim-trust-heading"
-        className="mx-auto max-w-4xl w-full px-6 sm:px-10 pb-12"
-      >
-        <p
-          id="post-sim-trust-heading"
-          className="font-mono text-gold/70 text-[10px] tracking-[0.35em] mb-4"
-        >
-          / 引擎跑完了 · 接下來?
-        </p>
-        {/* R160 W2.O1 · Agent O Gap 1 · 2-card → 3-card trust loop · /audit
-            是 plain-language Model Report entry · Disclosure Philosophy
-            canonical home(S05)· 之前 lab 跑完訪客找「why trust this output」
-            必須 exit page through Cmd-K · /track-record + /audit + /membership
-            three-card 完整 trust loop · per Anthropic transparency hub pattern。 */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
-          <Link
-            href="/audit"
-            className="block p-5 sm:p-6 border border-line/60 hover:border-gold/60 transition-colors group bg-slate/20"
-          >
-            <p
-              lang="en"
-              className="font-mono text-mute group-hover:text-gold text-[10px] tracking-[0.35em] mb-2 transition-colors"
-            >
-              MODEL REPORT · /audit
-            </p>
-            <h3 className="text-lg text-bone font-light tracking-tight mb-2">
-              方法完整公開 · 5 個章節 →
-            </h3>
-            <p className="font-mono text-mute/70 text-[10px] tracking-[0.25em]">
-              引擎背後怎麼算的 · 全部攤開 · 沒有行銷話術
-            </p>
-          </Link>
-          <Link
-            href="/track-record"
-            className="block p-5 sm:p-6 border border-line/60 hover:border-gold/60 transition-colors group bg-slate/20"
-          >
-            <p
-              lang="en"
-              className="font-mono text-mute group-hover:text-gold text-[10px] tracking-[0.35em] mb-2 transition-colors"
-            >
-              TRACK RECORD · 公開戰績
-            </p>
-            <h3 className="text-lg text-bone font-light tracking-tight mb-2">
-              PROVED · DIVERGED 等大列出 →
-            </h3>
-            <p className="font-mono text-mute/70 text-[10px] tracking-[0.25em]">
-              不藏 miss · sample 累積中
-            </p>
-          </Link>
-          <Link
-            href="/membership"
-            className="block p-5 sm:p-6 border border-gold/40 hover:border-gold transition-colors group bg-gold/5"
-          >
-            <p
-              lang="en"
-              className="font-mono text-gold/70 group-hover:text-gold text-[10px] tracking-[0.35em] mb-2 transition-colors"
-            >
-              BLACK · 黑卡會員
-            </p>
-            <h3 className="text-lg text-bone font-light tracking-tight mb-2">
-              引擎免費 · 養著它的身分 →
-            </h3>
-            <p className="font-mono text-mute/70 text-[10px] tracking-[0.25em]">
-              NT$ 500 / 31 天 · 支持開放引擎
-            </p>
-          </Link>
-        </div>
-      </section>
-
       {/* ── CUSTOM MODE CTA ──────────────────────── */}
       <section className="mx-auto max-w-4xl w-full px-6 sm:px-10 pb-16">
         <Link
@@ -388,22 +310,6 @@ export default function LabPage() {
             className="underline-offset-4 hover:underline transition-colors"
           >
             完整白皮書 →
-          </Link>
-        </p>
-      </section>
-
-      {/* Round 51 W-B · Agent 3 founder voice audit · /lab 缺 Tim signature ·
-          訪客親手跑完 10K sim · founder accountability marker 增強 trust。
-          One-liner mute · 不破 minimalism。 */}
-      <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-12 text-center">
-        <p className="font-mono text-mute/80 text-[10px] tracking-[0.3em]">
-          —{" "}
-          <Link
-            href="/about"
-            className="hover:text-gold transition-colors"
-            aria-label="讀 Tim 創辦人筆記"
-          >
-            TIM · 這裡的每個結果,你都能自己驗
           </Link>
         </p>
       </section>

@@ -109,9 +109,6 @@ export default function AboutPage() {
                   </li>
                 ))}
               </ul>
-              <p className="mt-5 pt-4 border-t border-gold/20 font-mono text-mute/70 text-[10px] tracking-[0.2em] leading-relaxed">
-                每一條都點得進去看證據 · 不是嘴上講。
-              </p>
             </div>
           </div>
         </section>
@@ -134,7 +131,7 @@ export default function AboutPage() {
               >
                 公開戰績
               </Link>
-              ;輸的紀錄刪不掉 —— 因為「刪不掉」才是整件事的重點。
+              ;輸的紀錄刪不掉。
             </p>
             <p className="mt-3 text-mute/80 text-sm leading-relaxed">
               有問題、想回報、或要找我?直接寫信:{" "}
@@ -149,13 +146,10 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* ── 簽名 · 8 字 grammar(一行 · 不再是 glow box + 三段解釋)──── */}
+        {/* ── 簽名 · 8 字 grammar ──── */}
         <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-14 text-center">
           <p className="text-2xl sm:text-3xl text-bone font-light tracking-tight">
             方法公開 <span className="text-gold/50 mx-1.5">·</span> 品味私藏
-          </p>
-          <p className="mt-3 font-mono text-mute/60 text-[10px] tracking-[0.25em]">
-            27 = 一場完美比賽的出局數 · 也是我們的標準
           </p>
         </section>
 

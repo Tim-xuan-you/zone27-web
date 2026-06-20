@@ -65,16 +65,9 @@ export default async function LadderPage() {
           <span className="text-bone">跟一台公開的機器正面比準度</span>。
         </p>
 
-        {/* winners-welcome 立場(Pinnacle「不封贏家」誠實版 · 對比收費明牌站封號/刪文 ·
-            behavior-category 不點名 · 全球研究 agent F9)· 你打贏引擎 = 我們要的結果 */}
         <div className="border-l-2 border-gold/60 pl-5 py-1 mb-10">
           <p className="text-bone text-base sm:text-lg leading-relaxed">
             你打贏引擎 · 是我們<span className="text-gold">最想看到</span>的事。
-          </p>
-          <p className="mt-2 text-mute text-sm leading-relaxed">
-            收費明牌的地方剛好相反 —— 你贏太多會被冷處理、輸的截圖被默默刪掉。
-            這裡沒有莊家、沒有對作:引擎是一個公開的靶 · 越多人打贏它 ·
-            越證明這套是玩真的。
           </p>
         </div>
 
@@ -158,38 +151,16 @@ export default async function LadderPage() {
             })}
         </div>
 
-        {/* ── 升階硬條件 · Tim 拍板(2026-06-03)─────────────────
-            每往上爬一階,那個月都得贏過引擎。 累積場數夠了還不算 —— 你得證明你
-            「現在」還在贏機器。 這是玩運彩那種自封高手結構上給不了的東西。
-            品牌調和:這不是「比誰勝率高」的虛榮榜(= 對手死穴 · calibration-tiers
-            紅線明列 win-rate ranking 為品牌自殺)· 而是「你得贏過免費引擎」的硬門檻
-            = alpha over baseline · 守紀律不靠一晚手氣。 鐵則放在機械規則之上。 */}
+        {/* ── 升階硬條件 ─────────────────── */}
         <div className="mt-8 border-l-2 border-gold/60 bg-gold/[0.05] pl-4 py-3">
           <p className="font-mono text-gold text-[10px] tracking-[0.3em] mb-1.5">
             升階硬條件
           </p>
           <p className="text-bone text-sm sm:text-base leading-relaxed">
             坐上神準手 / 神諭,要在 <span className="text-gold">≥30 場</span>的公開對帳裡、準度
-            <span className="text-gold">真的贏過那台免費引擎</span> —— 十場、一晚的手氣不算。
-          </p>
-          <p className="mt-1.5 text-mute text-sm leading-relaxed">
-            別處的「高手」是自己說的;這裡的高手,是<span className="text-bone">打贏那台公開機器</span>才配。 榜上還會標出「本月仍贏引擎」,讓你看到誰<span className="text-bone">現在</span>還在贏。
+            <span className="text-gold">真的贏過那台免費引擎</span> —— 十場、一晚的手氣不算。 準度守不住、階級就掉。
           </p>
         </div>
-
-        {/* ── 機械規則 ──────────────────────── */}
-        <p className="mt-6 text-bone text-sm sm:text-base leading-relaxed">
-          你的位置<span className="text-gold">隨賽果更新</span> · 準度守不住、階級就掉 ——
-          跟米其林的星一樣,不是永久的、會被收回。
-        </p>
-        <p className="mt-2 text-mute text-sm leading-relaxed">
-          榜上每個人旁邊會標<span className="text-gold">▲本月升</span> /{" "}
-          <span className="text-loss/80">▼本月降</span> / 新上榜 —— 跟<span className="text-bone">上個月底</span>比,
-          你這個月是爬了還是掉了,看得見。
-        </p>
-        <p className="mt-2 font-mono text-mute/60 text-[11px] tracking-[0.15em] leading-relaxed">
-          靠的是真實準度 · 不是付費、不是年資、不是運氣。
-        </p>
 
         {/* ── 王座狀態 + 去押 ──────────────────── */}
         <div className="mt-10 border-t border-line/40 pt-8">

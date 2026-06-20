@@ -48,14 +48,6 @@ export default function MembershipPage() {
           是出錢讓這台引擎<span className="text-gold">永遠免費</span>的人。
         </p>
 
-        {/* 共同敵人 · 一句點火 */}
-        <div className="border-l-2 border-gold/50 pl-5 py-1 mb-10 max-w-md">
-          <p className="text-bone text-base sm:text-lg leading-relaxed">
-            別的地方靠你輸錢過活,贏太多就請你走。 我們不賣明牌、不抽你下注 ——
-            讓它一直免費的,只有這群人。
-          </p>
-        </div>
-
         {/* 一張卡 */}
         <MembershipUpgrade
           name="BLACK"

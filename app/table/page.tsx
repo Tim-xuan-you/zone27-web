@@ -149,11 +149,6 @@ export default function TablePage() {
             引擎只在<span className="text-bone">有把握時</span>開口。 沒把握的,我們閉嘴 ——
             但<span className="text-bone">照樣幫你對帳</span>,贏輸都掛你名下、刪不掉。
           </p>
-          <p className="mt-5 text-mute/70 text-[13px] leading-relaxed">
-            這就是米其林的權威來源:不是給每家店星星,而是
-            <span className="text-bone">敢給零星</span>。 敢說「這盤我不懂」的人,比對什麼都裝懂的,
-            可信一百倍。
-          </p>
           <div className="mt-8 flex items-center gap-3 flex-wrap">
             <Link
               href="/pulse"

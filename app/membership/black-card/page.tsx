@@ -66,14 +66,8 @@ export default function BlackCardPage() {
           <span className="text-gold">一圈所有人看得到的金色支持環、一間自己人的房間</span>。 出錢養著這台引擎,
           讓陌生人也能一直免費用。
         </p>
-        {/* 「為什麼免費還要付費」的答案:不是買 access(都免費)· 是當這個免費引擎的出錢人 + 戴上身分。 */}
-        <p className="text-mute/85 text-sm leading-relaxed mb-10 border-l-2 border-gold/50 pl-4 py-1">
-          說白了:引擎永遠免費,總得有人付錢養它,
-          <span className="text-bone">那個人就是你</span>。
-          我們不靠廣告、不抽你下注的傭、不賣你的數據 —— 只靠願意出錢的少數人。
-        </p>
 
-        {/* ── 這些本來就免費(誠實 flex)── */}
+        {/* ── 這些本來就免費 ── */}
         <p className="font-mono text-gold text-[10px] tracking-[0.4em] mb-1">
           先說清楚 · 這些本來就免費
         </p>
@@ -93,24 +87,6 @@ export default function BlackCardPage() {
             </li>
           ))}
         </ul>
-
-        {/* ── BLACK 加的兩樣(都是身分,不是功能)── */}
-        <p className="font-mono text-gold text-[10px] tracking-[0.4em] mb-4">
-          BLACK 加的 · 身分的東西
-        </p>
-        <p className="text-mute text-sm sm:text-base leading-relaxed mb-4">
-          一圈<span className="text-gold">金環</span>。 在一個人人曬連勝、輸了就刪文的地方,
-          它只說一件事:「<span className="text-bone">這個人出錢,讓陌生人也能免費用這個引擎</span>。」
-          它買不到準度(那個用賺的)· 造不了假(你是真的轉了錢)· 公開檔、脈動、天梯都看得到。
-        </p>
-        <p className="text-mute text-sm sm:text-base leading-relaxed mb-6">
-          再加一間<span className="text-gold">房間</span>。 出錢養著引擎的這群人,有一面只有自己人進得去的
-          留言牆 —— 聊球、聊判斷、打個招呼。 不是明牌、不押注,就是一間客廳。
-          <span className="text-bone">身分制,不是功能制</span>。
-        </p>
-        <p className="text-mute text-sm sm:text-base leading-relaxed mb-6">
-          還有一件真人的事:你寫信給 Tim,<span className="text-gold">本人親手回</span>(1–3 個工作天、不外包、不罐頭)。
-        </p>
 
         {/* ── 直接付款(同錢包 UX · 點了直接給帳號)──── */}
         <MembershipUpgrade

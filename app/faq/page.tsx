@@ -34,23 +34,9 @@ const CATEGORIES: Category[] = [
         q: "什麼是 ZONE 27?",
         a: (
           <>
-            <strong className="text-bone">ZONE 27 = 賭徒的彭博終端機(專業金融資訊台)。</strong> 我們的對象是會下注的運動迷 · 對手是那些靠賣明牌賺錢的人。 不同的是:引擎永遠免費 · 不賣明牌 · PROVED + DIVERGED 等大公開 · 方法完整公開(見 /methodology + /audit)。 你拿我們的資料自己決定 · ZONE 27 不接受下注(我們不是賭場)。 怎麼靠這活下來?見下面「怎麼賺錢」。 Phase 1 CPBL · Phase 2 NBA · Tim 親手 curate。 完整方法論見{" "}
+            運動賽事的免費機率引擎。 跑 10,000 次模擬給你勝率,你自己決定。 ZONE 27 不接受下注。 完整方法論見{" "}
             <Link href="/about" className="text-gold underline-offset-4 hover:underline">
               /about
-            </Link>
-            。
-          </>
-        ),
-      },
-      {
-        q: "為什麼是「27」這個數字?",
-        a: (
-          <>
-            棒球場上的最後一個 OUT — 9 局 × 3 個出局數 = 27,也是完美比賽的數字
-            (27 上 27 下)。我們相信 BLACK 會員能用同樣的精準定義這個品牌。
-            詳見{" "}
-            <Link href="/about" className="text-gold underline-offset-4 hover:underline">
-              /about 第 6 章 Why 27
             </Link>
             。
           </>
@@ -86,9 +72,7 @@ const CATEGORIES: Category[] = [
         id: "no-user-recommendations",
         a: (
           <>
-            Tim 是唯一挑選內容的人 · 目前先做 CPBL · 所有內容由 Tim 一個人親手挑選。
-            靠賣明牌抽傭的生意需要使用者互相推薦 · ZONE 27 的結構正好相反 · 不接受外部投稿直接上架。
-            您可以到{" "}
+            目前所有內容由 Tim 一個人親手挑選 · 先做 CPBL。 您可以到{" "}
             <Link href="/member/submit" className="text-gold underline-offset-4 hover:underline">
               /member/submit
             </Link>
@@ -101,10 +85,7 @@ const CATEGORIES: Category[] = [
         id: "no-commission",
         a: (
           <>
-            <strong className="text-bone">BLACK</strong> NT$ 500/31 天 × N 訂戶
-            · 會員不限量(不自動續扣 · 每 31 天主動轉帳一次)。
-            付費的唯一理由是身分:出錢養著免費引擎 · 戴上一圈支持者金環,還能寫信給 Tim 本人親手回。 準是免費的 —— 含輸命中率、校準、驗證準度標章全靠公開戰績賺,不靠付費解鎖。 創作者只免費公開發 · 平台 0 抽創作者傭。
-            不抽真錢下注的傭 · 不接廣告 / 業配 / 導購分潤。
+            <strong className="text-bone">BLACK</strong> NT$ 500/31 天 · 會員不限量(不自動續扣)。 引擎與準度全免費 · 付費買的是身分,不是解鎖功能。 不抽下注的傭 · 不接廣告 / 業配。
           </>
         ),
       },
@@ -152,36 +133,12 @@ const CATEGORIES: Category[] = [
         ),
       },
       {
-        q: "ZONE 27 接 corporate / 企業客戶?",
-        id: "corporate",
-        a: (
-          <>
-            <strong className="text-gold">不接。</strong> 沒有企業方案
-            · 沒有「聯絡業務團隊」表單 · ZONE 27 就是做給個人球迷的
-            · 不接企業客戶。
-            <br />
-            <br />
-            如果您是企業想用 ZONE 27 · 價格和權限都一樣:
-            自己加入 BLACK NT$ 500/31 天 · 自助辦理。
-            <br />
-            <br />
-            完整的定價理由見{" "}
-            <Link href="/membership" className="text-gold underline-offset-4 hover:underline">
-              /membership
-            </Link>
-            {" "}的定價推導。
-          </>
-        ),
-      },
-      {
         q: "跟傳銷(MLM)有什麼不同?",
         id: "mlm",
         a: (
           <>
             <strong className="text-bone">沒有下線結構。</strong>{" "}
-            沒有推薦獎金 · 沒有多層抽佣 · 沒有業績目標 · 沒有招募下線 · 會員不限量,但完全沒有金字塔式抽佣。
-            我們的收入只有一條腿:會員自己出錢的身分訂閱(BLACK NT$ 500/31 天)·
-            出錢養著免費引擎 · 沒有下線、沒有層層分潤。
+            沒有推薦獎金 · 沒有多層抽佣 · 沒有招募下線。 收入只有一條:會員自己出錢的身分訂閱(BLACK NT$ 500/31 天)。
           </>
         ),
       },
@@ -196,27 +153,9 @@ const CATEGORIES: Category[] = [
         q: "你們的 AI 預測準確率多高?",
         a: (
           <>
-            目前實驗室 v0.2 用的是逐打席對決模型,
-            跑 10,000 次模擬的收斂結果,通常和先前鎖定的 AI 預測落在
-            <span className="font-mono text-gold mx-1">±2%</span>
-            內。我們不宣稱「鐵口直斷」 — AI 給的是機率分布,不是必勝牌。
-            背後的數學基礎請見{" "}
+            引擎給的是機率,不是必勝牌。 數學基礎見{" "}
             <Link href="/methodology" className="text-gold underline-offset-4 hover:underline">
               /methodology
-            </Link>
-            。
-          </>
-        ),
-      },
-      {
-        q: "預測不準的時候會怎樣?",
-        a: (
-          <>
-            賽後我們會自動生成「AI 偏差值報告」,公開告訴會員模型在哪個變數失算
-            (例如:「先發投手第 3 局變化球轉速高於賽季平均 15%」),
-            並把這個變數寫進下一次模型迭代。模型升級紀錄持續公開在{" "}
-            <Link href="/methodology/diff" className="text-gold underline-offset-4 hover:underline">
-              /methodology/diff
             </Link>
             。
           </>
@@ -240,8 +179,8 @@ const CATEGORIES: Category[] = [
   },
   {
     key: "privacy",
-    label: "PRIVACY & ECOSYSTEM",
-    zh: "隱私與生態系",
+    label: "PRIVACY",
+    zh: "隱私",
     qas: [
       {
         q: "我的 email 會怎麼處理?",
@@ -285,15 +224,6 @@ const CATEGORIES: Category[] = [
             </a>
             {" "}· Tim 24 小時內從資料庫永久刪除 · 不留備份。
             等候名單不收費 · 不簽約 · 不綁定。
-          </>
-        ),
-      },
-      {
-        q: "BOTTOM 27 是什麼?",
-        a: (
-          <>
-            Tim 同步開發的棒球經營手遊 · 雙生品牌 · 共用「27」概念與深藏青 × 冷金視覺。
-            BLACK 會員未來自動獲得 BOTTOM 27 獨家虛擬資產。
           </>
         ),
       },

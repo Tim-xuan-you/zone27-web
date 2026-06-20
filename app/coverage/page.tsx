@@ -5,8 +5,6 @@ import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import CopyLinkButton from "@/components/CopyLinkButton";
 import RelatedReading from "@/components/RelatedReading";
-import FounderSignOff from "@/components/FounderSignOff";
-import ArticleMeta from "@/components/ArticleMeta";
 import ReadingProgress from "@/components/ReadingProgress";
 
 export const metadata: Metadata = {
@@ -16,8 +14,6 @@ export const metadata: Metadata = {
 };
 
 // /coverage — Coverage Manifesto · 4th trust-artifact joining /audit + /methodology + /privacy。
-
-const LAST_REVIEWED = "2026-05-21";
 
 type StatusKey = "READY" | "HAND_CURATED" | "DEMO" | "AVAILABLE" | "PENDING" | "NEVER";
 
@@ -74,86 +70,6 @@ const ACTIVE_LEAGUES: LeagueRow[] = [
   },
 ];
 
-const TRACKED_NOT_ACTIVE: LeagueRow[] = [
-  {
-    code: "AAA / AA",
-    zh: "MLB 高階小聯盟",
-    source: "statsapi.mlb.com(同 MLB · 不同 leagueIds)",
-    sampleNote: "資料可取 · 但球員換隊太頻繁 · 資料起伏大 · 預測誤差會被放大",
-    status: "AVAILABLE",
-    statusLabel: "AVAILABLE · SUPPRESSED",
-  },
-];
-
-const REQUESTED_QUEUE: LeagueRow[] = [
-  {
-    code: "NPB",
-    zh: "日本職棒",
-    source: "npb.jp · Yahoo Japan Sports · TBD pipeline",
-    sampleNote: "排隊研發中 · 想看就填表單告訴 Tim",
-    status: "PENDING",
-    statusLabel: "NOT YET · ON QUEUE",
-  },
-  {
-    code: "KBO",
-    zh: "韓國職棒",
-    source: "koreabaseball.com · mykbo.net (community) · TBD pipeline",
-    sampleNote: "排隊研發中 · 想看就填表單告訴 Tim",
-    status: "PENDING",
-    statusLabel: "NOT YET · ON QUEUE",
-  },
-  {
-    code: "NCAA D1",
-    zh: "美國大學一級棒球",
-    source: "NCAA stats portal · 公開",
-    sampleNote: "球員身分變動極大 · 樣本可信度需逐校評估",
-    status: "PENDING",
-    statusLabel: "NOT YET · ON QUEUE",
-  },
-];
-
-const NEVER_COVER: { name: string; reason: string }[] = [
-  {
-    name: "任何下注 / 博彩平台",
-    reason: "抓它們的資料會把 ZONE 27 跟下注綁在一起,違反 /about /faq /privacy 已寫死的定位。",
-  },
-  {
-    name: "運彩討論區的牌支戰績",
-    reason: "牌支 +「老師」生態 · 跟 ZONE 27 結構相反(我們不抽下注 · 不賣明牌 · 不排名「老師」)· 我們不爬下注平台的資料。",
-  },
-  {
-    name: "賣明牌的站",
-    reason: "明牌販售 · 同上邏輯。",
-  },
-  {
-    name: "Sportradar / Stats Perform / Pinnacle 等付費 API",
-    reason: "年費 NT$ 200K+ · ZONE 27 是低調的獨立小團隊 · 永遠不走付費封閉資料這條路",
-  },
-  {
-    name: "任何要求登入 / 違反 ToS / 私下繞付費牆的來源",
-    reason: "技術上做得到也不做 · 有法律風險、品牌風險,也讓我們的可信度被質疑",
-  },
-];
-
-// R185 · 全運動路線圖 · Tim explicit「所有台灣運彩有賣的項目我都會上去 · 各裝不同
-// 引擎」(2026-06-02)。 把運彩 8 運動扁平菜單翻成「閘門式路線圖」: CPBL 亮 · 其餘
-// 引擎研發中(驗證夠準才開)= 同時喊紀律 + 野心 · 運彩做不出這頁(它沒準度可秀)。
-const SPORT_ROADMAP: {
-  sport: string;
-  en: string;
-  status: "LIVE" | "BUILDING";
-  note: string;
-}[] = [
-  { sport: "棒球", en: "BASEBALL", status: "LIVE", note: "CPBL 引擎上線中 · MLB 等逐步接" },
-  { sport: "籃球", en: "BASKETBALL", status: "BUILDING", note: "引擎研發中" },
-  { sport: "足球", en: "FOOTBALL", status: "BUILDING", note: "引擎研發中" },
-  { sport: "網球", en: "TENNIS", status: "BUILDING", note: "引擎研發中" },
-  { sport: "冰球", en: "ICE HOCKEY", status: "BUILDING", note: "引擎研發中" },
-  { sport: "電競", en: "ESPORTS · LoL", status: "BUILDING", note: "引擎研發中" },
-  { sport: "羽球", en: "BADMINTON", status: "BUILDING", note: "引擎研發中" },
-  { sport: "手球", en: "HANDBALL", status: "BUILDING", note: "引擎研發中" },
-];
-
 export default function CoveragePage() {
   return (
     <div className="flex flex-col flex-1 min-h-screen">
@@ -186,416 +102,42 @@ export default function CoveragePage() {
             </h1>
 
             <p className="text-bone text-lg sm:text-xl leading-relaxed mb-6 border-l-2 border-gold/60 pl-5 sm:pl-6 max-w-2xl">
-              <strong>ZONE 27 = 賭徒的 Bloomberg Terminal。</strong>
-              <br />
-              <span className="text-mute">
-                客群 = 會下注的運動迷(包括賭徒)· 對手是
-                <span className="text-gold">靠賣明牌賺錢的人</span> ·
-                我們提供更好用的<span className="text-gold">資訊</span>。
-              </span>
+              目前涵蓋 CPBL + MLB + 部分足球 · 親手挑 · 會擴。
             </p>
-            <p className="text-bone text-base leading-relaxed mb-6 max-w-2xl">
-              跟那些靠賣明牌賺錢的對手不同:<strong className="text-gold">引擎永遠免費 · 不賣明牌 · 命中跟落空一樣大、一樣公開 · 方法完整公開(見 /methodology + /audit)</strong>。 您拿我們的資料自己決定要下哪一注 · ZONE 27 自己不接受下注(我們不是賭場)。
-            </p>
-            <p className="text-mute/85 text-sm leading-relaxed mb-6 max-w-2xl">
-              <strong className="text-bone">我們靠什麼活:</strong> 會員身分訂閱 · 出錢的人是養著免費引擎 · 不靠廣告 · 不抽你下注的傭 · 也不抽創作者的傭 —— 創作者只免費公開發、賽後自動對帳、爬天梯、被追蹤 · 賺的是看得見的地位,不是錢。
-            </p>
-            <div className="mb-6">
-              <ArticleMeta readingMin={8} />
-            </div>
-
-            <p className="text-mute text-base leading-relaxed mb-8 max-w-2xl">
-              這頁列出我們覆蓋什麼 · 不覆蓋什麼 · 為什麼。
-              ZONE 27 不是「所有能下注的比賽全擺出來的販賣機」 ·
-              只覆蓋引擎能誠實計算的比賽。 第一階段:中職 · 第二階段:NBA + 未來其他聯盟 · 上線範圍由 Tim 親手挑。
-            </p>
-
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-x-6 gap-y-3 pt-4 font-mono text-[10px] tracking-[0.18em] section-reveal">
-              <div>
-                <span lang="en" className="text-mute block mb-1">VERSION</span>
-                <span className="text-bone tabular">{PRODUCT_VERSION}</span>
-              </div>
-              <div>
-                <span lang="en" className="text-mute block mb-1">ACTIVE LEAGUES</span>
-                <span className="text-gold tabular">2</span>
-              </div>
-              <div>
-                <span lang="en" className="text-mute block mb-1">ON QUEUE</span>
-                <span className="text-bone tabular">{REQUESTED_QUEUE.length}</span>
-              </div>
-              <div>
-                <span lang="en" className="text-mute block mb-1">LAST REVIEWED</span>
-                <span className="text-bone tabular">{LAST_REVIEWED}</span>
-              </div>
-            </div>
           </header>
 
-          {/* ── 全運動路線圖 · the gated-roadmap thesis(R185)──────── */}
-          <section className="py-12 border-b border-line/40 section-reveal">
-            <p className="font-mono text-gold/90 text-[10px] tracking-[0.45em] mb-3">
-              全運動路線圖 · 一次點亮一個
-            </p>
-            <h2 className="text-2xl sm:text-3xl text-bone font-light tracking-tight mb-4 leading-snug">
-              台灣運彩賣的每種運動,我們都會做 ——
-              <br className="hidden sm:inline" />
-              但一次只點亮一個
-            </h2>
-            <p className="text-mute leading-relaxed mb-7 max-w-2xl">
-              運彩把 8 種運動一次全端上來、而且全部它預測不準 —— 那是賭場菜單。
-              ZONE 27 反過來:<strong className="text-bone">每種運動的引擎,沒驗證到夠準,絕不開盤。</strong>{" "}
-              棒球先從 CPBL 做到極致,其餘正在排隊研發。 寧可少做、做得準。
-            </p>
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-              {SPORT_ROADMAP.map((s) => (
-                <div
-                  key={s.en}
-                  className={`border p-3.5 ${
-                    s.status === "LIVE"
-                      ? "border-gold/60 bg-gold/5 glow-soft"
-                      : "border-line/50 bg-slate/20"
-                  }`}
-                >
-                  <div className="flex items-baseline justify-between gap-2">
-                    <span
-                      className={`text-lg font-light tracking-tight ${
-                        s.status === "LIVE" ? "text-gold" : "text-bone/70"
-                      }`}
-                    >
-                      {s.sport}
-                    </span>
-                    <span
-                      className={`font-mono text-[9px] tracking-[0.2em] ${
-                        s.status === "LIVE" ? "text-gold/90" : "text-mute/60"
-                      }`}
-                    >
-                      {s.status === "LIVE" ? "● 上線中" : "○ 研發中"}
-                    </span>
-                  </div>
-                  <p className="font-mono text-[9px] tracking-[0.2em] text-mute/55 mt-1">
-                    {s.en}
-                  </p>
-                  <p className="text-mute/75 text-[11px] leading-snug mt-2">
-                    {s.note}
-                  </p>
-                </div>
-              ))}
-            </div>
-            <p className="mt-5 font-mono text-mute/70 text-[10px] tracking-[0.25em] leading-relaxed">
-              亮 = 引擎上線中 · 暗 = 引擎研發中(驗證夠準才開盤)· 上線順序 Tim 親手定 ·
-              不接受催進度投票 · 每次擴張提前公告。
-            </p>
-          </section>
-
-          {/* ── 00 NEVER COVER ABOVE-THE-FOLD · brand boundary preview ── */}
-          <section className="py-10 border-b border-line/40 section-reveal">
-            <p lang="en" className="font-mono text-gold/90 text-[10px] tracking-[0.45em] mb-3">
-              00 · BRAND BOUNDARY · WHAT WE&apos;LL NEVER COVER
-            </p>
-            <p className="text-bone text-base sm:text-lg leading-relaxed mb-5 max-w-2xl">
-              來自賣明牌的站、收費明牌群組、抽下注的莊家 / 任何博彩生態 ·{" "}
-              <span className="text-gold">我們永遠不接</span>。
-              下面先列出這 5 項 · 點 §05 看完整理由。
-            </p>
-            <div className="flex gap-2 flex-wrap">
-              {NEVER_COVER.map((item, idx) => (
-                <span
-                  key={idx}
-                  className="font-mono text-[10px] tracking-[0.22em] px-2.5 py-1.5 border border-loss/40 bg-loss/5 text-mute"
-                >
-                  ✕ {item.name.split(" ")[0]}
-                </span>
-              ))}
-            </div>
-            <p className="mt-4 font-mono text-mute/70 text-[10px] tracking-[0.25em]">
-              <Link href="#never-cover" className="text-gold hover:text-gold-soft transition-colors">
-                ↓ 完整理由(§05)
-              </Link>
-            </p>
-          </section>
-
-          {/* ── 01 PHILOSOPHY ─────────────────────────── */}
+          {/* ── ACTIVE LEAGUES ─────────────────────── */}
           <section className="py-12 border-b border-line/40 section-reveal">
             <p lang="en" className="font-mono text-mute text-[10px] tracking-[0.45em] mb-4">
-              01 COVERAGE PHILOSOPHY
-            </p>
-            <h2 className="text-2xl sm:text-3xl text-bone font-light tracking-tight mb-6">
-              覆蓋是策展,不是清單
-            </h2>
-            <div className="space-y-4 text-mute leading-relaxed zh-body">
-              <p>
-                預測引擎只有在資料夠穩時,算出來的數字才有意義。
-                ZONE 27 引擎需要每位投手最少 10 場的紀錄、確定的先發名單、
-                以及夠多的球場 / 天氣資料。沒有這些,
-                再怎麼跑一萬次模擬,也只是把雜訊放大。
-              </p>
-              <p>
-                所以我們不假裝覆蓋一切。當某場比賽的輸入不足,我們直接告訴您
-                「<span className="font-mono text-bone">ENGINE PENDING · 等待先發資訊</span>」
-                或「<span className="font-mono text-bone">ENGINE WAIVED · 樣本 n&lt;10</span>」。
-                這個「我們不算」本身就是一種誠實 —
-                <span className="text-bone"> 我們選擇沉默,而不是製造雜訊</span>。
-              </p>
-              <p>
-                Apple 不做 $99 的廉價手機。
-                ZONE 27 不覆蓋算不準的比賽。<span className="text-bone">少做,做好。</span>
-              </p>
-            </div>
-          </section>
-
-          {/* ── 02 ACTIVE LEAGUES ─────────────────────── */}
-          <section className="py-12 border-b border-line/40 section-reveal">
-            <p lang="en" className="font-mono text-mute text-[10px] tracking-[0.45em] mb-4">
-              02 ACTIVE LEAGUES
+              ACTIVE LEAGUES
             </p>
             <h2 className="text-2xl sm:text-3xl text-bone font-light tracking-tight mb-6">
               引擎已就緒,資料流動中
             </h2>
             <LeagueTable rows={ACTIVE_LEAGUES} />
-
-            <div className="mt-8 border border-gold/30 bg-slate/30 p-5 sm:p-7">
-              <p
-                lang="en"
-                className="font-mono text-gold text-[10px] tracking-[0.4em] mb-4"
-              >
-                ⚙ DATA PIPELINE TRANSPARENCY · auto vs manual
-              </p>
-              <p className="text-mute text-sm leading-relaxed mb-4">
-                兩個聯盟的資料抓取方式不一樣 · 我們各自老實說明:
-              </p>
-              <div className="space-y-4 text-sm">
-                <div className="border-l-2 border-gold/60 pl-4">
-                  <p className="font-mono text-gold/90 text-[10px] tracking-[0.3em] mb-2">
-                    MLB · 100% AUTOMATIC ✓
-                  </p>
-                  <p className="text-mute leading-relaxed mb-2">
-                    資料來自 MLB 官方公開資料 · 每 10 分鐘自動更新 · 0 費用 ·
-                    每天約 15 場 · 先發投手 · K9 BB9 HR9 ERA · 球場 ·
-                    開賽時間 · 最終比分 · 全自動、創辦人完全不插手。
-                  </p>
-                  <p className="text-mute/85 text-sm leading-relaxed">
-                    ⚓ <strong className="text-bone">MLB 的算法:即時重算、不是賽前鎖定</strong>{" "}
-                    · 每 10 分鐘更新一次 · 引擎看好誰,是用 K9/BB9/HR9/ERA
-                    套同一條固定公式算出來的 · 公開在 /audit ·
-                    賽後在 /matches/mlb 上標 ✓ 命中 / ✕ 落空 · 但{" "}
-                    <strong className="text-bone">不算進公開戰績</strong> ·
-                    因為我們的規則是「預測要在開賽前就鎖死、賽後不回頭重算」,MLB
-                    是即時參考,只有賽前鎖死的中職才進正式帳本。
-                  </p>
-                </div>
-                <div className="border-l-2 border-line/60 pl-4">
-                  <p className="font-mono text-bone/90 text-[10px] tracking-[0.3em] mb-2">
-                    CPBL · HYBRID(50% auto · 50% manual)⚠
-                  </p>
-                  <p className="text-mute leading-relaxed mb-2">
-                    中職官網的資料可以直接讀取 · 我們用三支程式自動抓:
-                  </p>
-                  <ul className="space-y-1.5 text-mute/85 pl-4 leading-relaxed">
-                    <li>▸ <code className="font-mono text-bone bg-slate/40 px-1 rounded-sm text-[10px]">npm run fetch-cpbl</code> · pitcher K9/BB9/HR9 leaderboard auto-parse</li>
-                    <li>▸ <code className="font-mono text-bone bg-slate/40 px-1 rounded-sm text-[10px]">npm run fetch-cpbl-advanced</code> · Trackman radar 進階 stats(野球革命)</li>
-                    <li>▸ <code className="font-mono text-bone bg-slate/40 px-1 rounded-sm text-[10px]">npm run fetch-cpbl-schedule</code> · 今日賽程 metadata</li>
-                  </ul>
-                  <p className="text-mute/85 leading-relaxed mt-2">
-                    只剩一步靠人工:<strong className="text-bone">賽後的最終比分</strong> ·
-                    Tim 在台灣時間 22:30 之後親手把比分填進去 · 因為「賽前鎖死、賽後才對帳」這條紀律不能自動化 · 賽後收據把命中跟落空一樣公開。
-                  </p>
-                </div>
-              </div>
-              <p className="font-mono text-mute/70 text-[10px] tracking-[0.25em] leading-relaxed mt-4">
-                ⚓ 為什麼一半人工:中職沒有官方資料介面 · 賽程跟投手數據可以自動抓 ·
-                但最終比分牽涉賽前/賽後的時間點 · 由 Tim 親手填,是這個品牌的親筆簽名 ·
-                不能偷偷自動化(自動化就能事後補日期、信任就沒了)。
-              </p>
-            </div>
-          </section>
-
-          {/* ── 03 TRACKED, NOT ACTIVE ────────────────── */}
-          <section className="py-12 border-b border-line/40 section-reveal">
-            <p lang="en" className="font-mono text-mute text-[10px] tracking-[0.45em] mb-4">
-              03 TRACKED · NOT ACTIVATED
-            </p>
-            <h2 className="text-2xl sm:text-3xl text-bone font-light tracking-tight mb-6">
-              引擎可取,但我們選擇先不開
-            </h2>
-            <p className="text-mute leading-relaxed mb-6">
-              這些聯盟我們<strong className="text-bone">取得到資料</strong>,但<strong className="text-bone">選擇不啟用</strong> —
-              因為樣本變異大、誤差會放大,違反「不靠直覺,只看演算法」的承諾。
-              當資料品質改善 · 或有人填表單強烈要求時,我們會評估啟用。
-            </p>
-            <LeagueTable rows={TRACKED_NOT_ACTIVE} />
-          </section>
-
-          {/* ── 04 REQUESTED · ON QUEUE(任何會員都能提 · 原 GOLD 已收掉)── */}
-          <section className="py-12 border-b border-line/40 section-reveal">
-            <p lang="en" className="font-mono text-mute text-[10px] tracking-[0.45em] mb-4">
-              04 REQUESTED · ON QUEUE
-            </p>
-            <h2 className="text-2xl sm:text-3xl text-bone font-light tracking-tight mb-6">
-              在我們雷達上的下一批聯盟
-            </h2>
-            <p className="text-mute leading-relaxed mb-6">
-              這些聯盟在我們的雷達上,但資料管道還沒建。 想看哪個聯盟,登入後
-              <Link
-                href="/member/submit"
-                className="text-gold hover:text-gold-soft transition-colors"
-              >
-                填表單告訴 Tim
-              </Link>
-              —— 他親手讀、親手定上線順序。 不分等級,任何會員都能提。
-            </p>
-            <LeagueTable rows={REQUESTED_QUEUE} />
-          </section>
-
-          {/* ── 05 NEVER COVER ────────────────────────── */}
-          <section id="never-cover" className="py-12 border-b border-line/40 section-reveal">
-            <p lang="en" className="font-mono text-mute text-[10px] tracking-[0.45em] mb-4">
-              05 WHAT WE&apos;LL NEVER COVER
-            </p>
-            <h2 className="text-2xl sm:text-3xl text-bone font-light tracking-tight mb-6">
-              不是技術不可,是品牌不為
-            </h2>
-            <p className="text-mute leading-relaxed mb-6">
-              這些來源我們**永遠不會**接入,即使技術可行、即使您要求。
-              不是限制,是品牌定義 — 一旦我們的賽事清單等於博彩平台的開盤清單,
-              ZONE 27 就和「明牌販售」是同一個生態系。
-            </p>
-
-            <div className="space-y-3">
-              {NEVER_COVER.map((item, idx) => (
-                <div
-                  key={idx}
-                  className="p-4 border border-loss/30 bg-loss/5 font-mono text-[12px]"
-                >
-                  <div className="flex items-start gap-3 mb-2">
-                    <StatusBadge status="NEVER" />
-                    <span lang="en" className="text-bone leading-relaxed">
-                      {item.name}
-                    </span>
-                  </div>
-                  <p className="text-mute leading-relaxed pl-1">
-                    {item.reason}
-                  </p>
-                </div>
-              ))}
-            </div>
-
-            <p className="text-mute leading-relaxed mt-8 pt-6 border-t border-line/30">
-              如果您想要的是「**全部可下注賽事的勝率清單**」,那是另一個產品,不是 ZONE 27。
-              That&apos;s the entire point.
-            </p>
-          </section>
-
-          {/* ── 06 DATA SOURCES LEDGER ────────────────── */}
-          <section className="py-12 border-b border-line/40 section-reveal">
-            <p lang="en" className="font-mono text-mute text-[10px] tracking-[0.45em] mb-4">
-              06 DATA SOURCES · OPEN LEDGER
-            </p>
-            <h2 className="text-2xl sm:text-3xl text-bone font-light tracking-tight mb-6">
-              所有資料來源 · 公開可查
-            </h2>
-            <p className="text-mute leading-relaxed mb-8">
-              我們只用**公開可取得**的來源。沒有付費資料介面。沒有繞付費牆。
-              沒有違反使用條款的爬蟲。沒有未經授權的私人資料庫。
-              每一筆預測都能往回追到以下來源。
-            </p>
-
-            <div className="border border-line/40 divide-y divide-line/30">
-              <SourceRow
-                league="MLB"
-                source="statsapi.mlb.com"
-                license="MLB 官方公開資料 · 商業使用受 MLB 條款限制 · 我們做的是匿名分析,合規"
-                status="READY"
-              />
-              <SourceRow
-                league="MLB Minor"
-                source="statsapi.mlb.com (同上 · 不同 leagueIds)"
-                license="同 MLB · 我們抑制顯示直到樣本品質夠"
-                status="AVAILABLE"
-              />
-              <SourceRow
-                league="CPBL"
-                source="stats.cpbl.com.tw"
-                license="官方公開展示 · 無 API · 創辦人親手讀每場比賽 → 寫進引擎 · 自動化等規模到時再評估"
-                status="HAND_CURATED"
-              />
-              <SourceRow
-                league="NPB"
-                source="npb.jp · Yahoo Japan · TBD"
-                license="多來源評估中 · 優先選擇官方 + 公開"
-                status="PENDING"
-              />
-              <SourceRow
-                league="KBO"
-                source="koreabaseball.com · mykbo.net (community)"
-                license="官方 + 社群維護資料庫 · 評估中"
-                status="PENDING"
-              />
-              <SourceRow
-                league="NCAA"
-                source="NCAA stats portal"
-                license="公開資料 · 但球員身分變動大 · 樣本可信度需逐校評估"
-                status="PENDING"
-              />
-            </div>
           </section>
 
           {/* ── FINAL CTA / SHARE ─────────────────────── */}
           <section className="py-12">
-            <p
-              lang="en"
-              className="font-mono text-mute text-[10px] tracking-[0.45em] mb-4"
-            >
-              FOR THE READER
-            </p>
-            <h2 className="text-2xl sm:text-3xl text-bone font-light tracking-tight mb-6">
-              如果這份覆蓋哲學讓您點頭 · 您是我們在找的人
-            </h2>
-            <p className="text-mute leading-relaxed mb-8 max-w-2xl">
-              ZONE 27 找的不是「想要更多比賽預測」的人 — 那是博彩平台的客戶。
-              我們找的是「**寧可少看一場,也不要看雜訊**」的人。如果這聽起來像您,
-              <Link href="/membership" className="text-gold hover:text-gold-soft transition-colors">
-                {" "}BLACK 會員{" "}
-              </Link>
-              還開著。
-            </p>
-
             <div className="flex flex-wrap items-center gap-4">
               <Link
-                href="/membership"
+                href="/matches"
                 className="inline-flex items-center gap-2 px-5 py-3 bg-gold text-navy hover:bg-gold-soft transition-colors font-mono text-[11px] tracking-[0.3em]"
               >
-                加入 BLACK 會員 →
+                看今日賽事 →
               </Link>
               <Link
-                href="/audit"
+                href="/membership"
                 className="inline-flex items-center gap-2 px-5 py-3 border border-line/60 hover:border-gold/60 text-mute hover:text-gold transition-colors font-mono text-[11px] tracking-[0.3em]"
               >
-                <span lang="en">VIEW MODEL REPORT</span>
+                加入會員
               </Link>
             </div>
 
             <div className="mt-10 pt-8 border-t border-line/40">
-              <p className="font-mono text-mute text-[10px] tracking-[0.3em] mb-4">
-                把這份覆蓋哲學傳給可能在意的朋友 ·{" "}
-                <span lang="en">SHARE THE LEDGER</span>
-              </p>
               <CopyLinkButton refTag="coverage-share" />
             </div>
           </section>
-
-          <FounderSignOff>
-            <p>
-              我不覆蓋所有 CPBL 比賽 · 也不打算。
-              <strong>引擎能算出有意義數字的</strong>才上 /matches ·
-              算不出的就誠實 mark 為 PREVIEW。
-            </p>
-            <p>
-              這道篩選是我的品味 · 也是 ZONE 27 的牆。
-              覆蓋越廣不等於越強 · 跟「什麼都包才會贏」的市場習慣反著來。
-            </p>
-            <p>
-              想看哪場我沒覆蓋的 · 您填表單告訴我 · 我會評估能不能誠實算。
-            </p>
-          </FounderSignOff>
 
           <RelatedReading currentPath="/coverage" />
         </article>
@@ -631,41 +173,6 @@ function LeagueTable({ rows }: { rows: LeagueRow[] }) {
           </div>
         </div>
       ))}
-    </div>
-  );
-}
-
-function SourceRow({
-  league,
-  source,
-  license,
-  status,
-}: {
-  league: string;
-  source: string;
-  license: string;
-  status: StatusKey;
-}) {
-  return (
-    <div className="p-4 sm:p-5 grid grid-cols-1 sm:grid-cols-[120px_1fr_auto] gap-3 sm:gap-6 items-start">
-      <p
-        lang="en"
-        className="font-mono text-gold text-[12px] tracking-[0.22em] shrink-0"
-      >
-        {league}
-      </p>
-      <div className="space-y-1 min-w-0">
-        <p
-          lang="en"
-          className="font-mono text-bone text-xs break-all leading-relaxed"
-        >
-          {source}
-        </p>
-        <p className="text-mute text-xs leading-relaxed">{license}</p>
-      </div>
-      <div className="shrink-0">
-        <StatusBadge status={status} />
-      </div>
     </div>
   );
 }

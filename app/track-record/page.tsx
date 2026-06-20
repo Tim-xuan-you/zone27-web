@@ -4,7 +4,6 @@ import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import RelatedReading from "@/components/RelatedReading";
 import CopyLinkButton from "@/components/CopyLinkButton";
-import PatronAsk from "@/components/PatronAsk";
 import {
   matches,
   getFinalizedMatches,
@@ -143,16 +142,6 @@ export default function TrackRecordPage() {
         <p lang="en" className="font-mono text-gold/70 text-[10px] tracking-[0.35em] mb-3">
           / LEDGER · NEWEST FIRST · 不刪不修飾
         </p>
-        {/* 護城河一句話:對手公開「一個數字」· 我們公開「每一筆」(不指名 · 用行為類別)。
-            只在帳本非空時掛 —— 不在空表上喊「每一筆」(誠實先於文案)。 */}
-        {finalized.length > 0 && (
-          <p className="mb-8 text-mute/85 text-sm leading-relaxed max-w-2xl">
-            賣明牌的站只給你<span className="text-bone">一個數字</span> —— 自己挑窗、輸的刪掉的「勝率」。
-            這裡是<span className="text-gold">每一筆</span>:每一場賽前公開的引擎預測、賽後實際結果,
-            連沒中的都排在下面。 一個數字誰都喊得出口;
-            <span className="text-bone">每一筆攤開,只有不怕被驗的人做得到</span>。
-          </p>
-        )}
         {finalized.length === 0 ? (
           <div className="border border-dashed border-gold/30 bg-slate/30 p-10 text-center">
             <p className="text-mute text-sm leading-relaxed max-w-md mx-auto">
@@ -268,45 +257,21 @@ export default function TrackRecordPage() {
             這裡切換的只是「分運動明細」。 足球 0 結算 = 上方 PENDING 尊嚴框(不是底部空卡)。 */}
         <SportToggle baseball={baseballView} soccer={soccerView} />
 
-        {/* ── 怎麼評分 · inline 1 行 + 連深層 ─────────────────── */}
+        {/* ── 怎麼評分 · inline 1 行 ─────────────────── */}
         <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-16 border-t border-line/40 pt-10">
           <p className="text-mute text-sm leading-relaxed">
             <span className="text-bone">怎麼評:</span>{" "}
             引擎賽前公開鎖定勝率 → 看好的那一邊(勝率 &gt; 50% 那邊)賽後贏 ={" "}
             <span className="text-gold">PROVED ✓</span>、輸 ={" "}
             <span className="text-loss/85">DIVERGED ✕</span>、平手或五五波 ={" "}
-            <span className="text-mute">PUSH =</span>。 三者視覺等大 · 同一把尺算 CPBL 跟 MLB。
-            完整方法見{" "}
-            <Link href="/methodology" className="text-gold underline-offset-4 hover:underline">
-              /methodology
-            </Link>
-            {" · "}
-            判定詞定義見{" "}
-            <Link href="/audit#section-08" className="text-gold underline-offset-4 hover:underline">
-              /audit §08
-            </Link>
-            。
-          </p>
-          {/* R240 · 「結算規則」示範頁:把這條規則攤成 5 步 + 一個我們真的算錯的例子(刪不掉)·
-              最會被外傳給懷疑者的信任證物。 */}
-          <p className="mt-3 text-mute/85 text-sm leading-relaxed">
-            想看規則怎麼綁死到<span className="text-bone">沒人能彎</span>、還有一個我們真的算錯卻還掛著的例子?{" "}
+            <span className="text-mute">PUSH =</span>。 三者視覺等大 · 同一把尺算 CPBL 跟 MLB。{" "}
             <Link href="/how-we-grade" className="text-gold underline-offset-4 hover:underline">
               我們怎麼算贏輸 →
             </Link>
           </p>
-          <p className="mt-6 font-mono text-mute/60 text-[10px] tracking-[0.3em]">
-            — TIM · FOUNDER
-          </p>
         </section>
 
-        {/* 把這份含輸帳本傳出去 · 病毒迴路:最強的證據就是「連輸的都掛」這頁本身 ·
-            真人朋友要說服還在信明牌的人,丟這頁最有力(分享卡已自帶 PROVED vs DIVERGED)。 */}
         <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-16 text-center">
-          <p className="text-mute text-sm leading-relaxed mb-4 max-w-md mx-auto">
-            認識還在追明牌、被「贏了曬、輸了刪」唬住的人?
-            把這份<span className="text-bone">連輸的都掛、賽前鎖死、刪不掉</span>的帳本丟給他 —— 讓數字自己說。
-          </p>
           <div className="flex justify-center">
             <CopyLinkButton
               label="把這份含輸帳本傳出去"
@@ -320,12 +285,6 @@ export default function TrackRecordPage() {
         {/* ── 分析師看法 · 人類賽道(R239)· 引擎是招牌 · 這條是旁邊的人(3 位平權分析師 ·
             引擎沒覆蓋的球由人賽前鎖定)· 同一套誠實規則 · graceful(沒鎖手 → 只介紹不掛空盒)。 */}
         <AnalystPanel />
-
-        {/* 贊助之請(R248③ · 研究 5 路一致最高槓桿)· 在峰值價值當下(這份含輸帳本本身)誠實請人撐著它 ·
-            非 FOMO · 對所有人顯示(會員=驕傲 · 非會員=邀請)· 賣「讓它一直免費」非 access。 */}
-        <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-16">
-          <PatronAsk />
-        </section>
 
         <RelatedReading currentPath="/track-record" />
 

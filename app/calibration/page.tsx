@@ -3,10 +3,8 @@ import type { Metadata } from "next";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import RelatedReading from "@/components/RelatedReading";
-import FounderSignOff from "@/components/FounderSignOff";
 import CopyLinkButton from "@/components/CopyLinkButton";
 import PatronAsk from "@/components/PatronAsk";
-import ArticleMeta from "@/components/ArticleMeta";
 import SportToggle from "@/components/SportToggle";
 import { getFinalizedMatches, type Match } from "@/lib/matches";
 import {
@@ -146,24 +144,11 @@ export default function CalibrationPublicPage() {
             <br className="hidden sm:inline" /> 實際上贏多少?
           </h1>
 
-          {/* Founder voice opening · Tim 親手姿態 · NOT institutional voice */}
           <div className="mt-8 border-l-2 border-gold/60 pl-5 sm:pl-6 py-2 max-w-2xl">
             <p className="text-bone text-lg sm:text-xl leading-relaxed">
-              <strong>每個拿明牌賺錢的網站都說自己多準</strong>{" "}
-              · 沒有一家告訴你「說 70% 的時候、實際只中 67%」的那{" "}
-              <span className="text-gold">3% 落差</span> ·
-              因為一公開就露餡。
+              引擎賽前說幾成、賽後實際中幾成 ·{" "}
+              <span className="text-gold">一張圖攤開</span>。 命中落空都算、刪不掉。
             </p>
-            <p className="mt-3 text-mute text-base leading-relaxed">
-              ZONE 27 公開。 這頁的數字 · 是我們欠你的一筆帳。
-            </p>
-          </div>
-
-          <div className="mt-6">
-            <ArticleMeta
-              readingMin={4}
-              sample={{ current: n, threshold: 30 }}
-            />
           </div>
         </section>
 
@@ -188,35 +173,16 @@ export default function CalibrationPublicPage() {
           </h2>
           <div className="space-y-4 text-mute leading-relaxed">
             <p>
-              這是一件幾乎沒人在台灣跟你講白的事:全世界最準的棒球賽前預測 ——
-              包括拉斯維加斯的盤口、最頂尖的 AI 模型 —— 單場命中率大約就是{" "}
+              全世界最準的棒球賽前預測 —— 包括拉斯維加斯的盤口、最頂尖的 AI ——
+              單場命中率大約就是{" "}
               <strong className="text-bone">5 成 7(57%)</strong> ·
-              理論上限也就 6 成上下。 再多的數據、再強的 AI · 都打不破這道牆。
+              理論上限也就 6 成上下。 因為棒球本質上就帶著大量洗不掉的運氣:
+              王牌也會被打爆,墊底的也會爆冷。
             </p>
             <p>
-              為什麼?因為棒球本質上就帶著大量{" "}
-              <strong className="text-bone">洗不掉的運氣</strong> ——
-              王牌也會被打爆,墊底的也會爆冷。 這不是模型不夠強 ·
-              是這項運動天生就長這樣。
-            </p>
-            <p>
-              所以任何宣稱「<span className="text-loss/90">94% 勝率</span>」「鐵口神準」的老師 ·
+              所以任何宣稱「<span className="text-loss/90">94% 勝率</span>」「鐵口神準」的,
               <strong className="text-bone">數學上不可能</strong>。
-              那不是厲害 · 那是話術 —— 用一個本來就不存在的準度當賣點。
-            </p>
-            <div className="border-l-2 border-gold/60 pl-5 sm:pl-6 py-1 my-2">
-              <p className="text-bone text-lg leading-relaxed">
-                ZONE 27 的護城河 · 從來不是「比別人準」。
-              </p>
-              <p className="mt-2 text-mute leading-relaxed">
-                沒有人能準多少 —— 是我們敢把這道 5 成 7 的天花板 ·
-                當成招牌掛出來、還讓你逐場對帳。 誠實 · 是唯一抄不走的東西。
-              </p>
-            </div>
-            <p className="text-mute/80 text-sm">
-              那我們怎麼變更準?靠<strong className="text-bone">更好的「輸入」</strong> ——
-              更細的擊球數據、球場、牛棚狀況 —— 不是換一個「更神」的引擎。
-              引擎這東西全世界都差不多 · 差別在誰餵的料更乾淨、誰更敢認帳。
+              我們不比別人準 —— 我們敢把這道 5 成 7 的天花板掛出來、還讓你逐場對帳。
             </p>
           </div>
         </section>
@@ -263,49 +229,6 @@ export default function CalibrationPublicPage() {
               <SoccerCalView bins={soccerBins} n={soccerN} lockedN={soccerLockedN} />
             }
           />
-        </section>
-
-        {/* ── 為什麼明牌站不敢做這頁 ── */}
-        <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-16 border-t border-line/40 pt-12">
-          <p className="font-mono text-gold text-[10px] tracking-[0.45em] mb-6">
-            / 為什麼明牌站不敢做這頁
-          </p>
-          <h2 className="text-2xl sm:text-3xl text-bone font-light tracking-tight mb-6 leading-tight">
-            這頁,他們抄不走
-          </h2>
-          <div className="space-y-4 text-mute leading-relaxed">
-            <p>
-              自稱很準的老師掛著 55-59% 勝率 · 收費明牌群組自稱連勝八九場。
-              沒有一家敢攤開這種對照圖 · 因為一攤開就露餡:
-            </p>
-            <ul className="space-y-2 pl-6">
-              <li className="flex gap-3 items-baseline">
-                <span className="font-mono text-loss/80 text-[10px] tracking-[0.25em]">▸</span>
-                <span>
-                  嘴上「94% 勝率」· 實際只有 50-52% · 足足差了四十幾個百分點。
-                </span>
-              </li>
-              <li className="flex gap-3 items-baseline">
-                <span className="font-mono text-loss/80 text-[10px] tracking-[0.25em]">▸</span>
-                <span>
-                  靠「連勝 X 天」行銷 · 輸的那幾週默默刪文、只截贏的那幾張 ·
-                  挑著給你看的紀錄當然漂亮。
-                </span>
-              </li>
-              <li className="flex gap-3 items-baseline">
-                <span className="font-mono text-loss/80 text-[10px] tracking-[0.25em]">▸</span>
-                <span>
-                  靠賣明牌賺錢 · 一旦公開真實準度就砸自己招牌 · 所以永遠不公開。
-                </span>
-              </li>
-            </ul>
-            <p className="pt-2">
-              <strong className="text-bone">ZONE 27 敢公開</strong>{" "}
-              · 因為我們的訂閱費跟「引擎準不準」沒關係。 你贏你輸 · 我們都一樣。
-              正因為賺錢方式跟「你有沒有贏」脫鉤 · 我們才敢這樣攤開 ·{" "}
-              <span className="text-gold">這就是明牌站學不來的地方</span>。
-            </p>
-          </div>
         </section>
 
         {/* ── 這頁是「引擎」準不準 · 你自己準不準是另一回事 ───────────
@@ -359,20 +282,6 @@ export default function CalibrationPublicPage() {
           </div>
         </section>
 
-        <FounderSignOff>
-          <p>
-            這頁是 ZONE 27 最貴的一張信任憑證 · 因為公布它等於
-            <strong>把自己攤在「準不準大家看得到」之下</strong>。
-          </p>
-          <p>
-            我們公開自己準不準 · 一張圖就攤開 ·
-            明牌站不會這樣做 — 因為一公開就會暴露他們嘴上的勝率和實際差很多。
-          </p>
-          <p>
-            這頁的計算方式要改,得先在更新紀錄公告 30 天才動 · 不偷改。
-          </p>
-        </FounderSignOff>
-
         {/* 把這張「自評準度」傳出去 · 明牌站不敢公開的那張圖本身就是最強證據(分享卡已自帶命題)。 */}
         <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-16 text-center">
           <p className="text-mute text-sm leading-relaxed mb-4 max-w-md mx-auto">
@@ -403,16 +312,6 @@ export default function CalibrationPublicPage() {
         </section>
 
         <RelatedReading currentPath="/calibration" />
-
-        {/* ── FINAL CTA ────────────────────────────── */}
-        <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 py-16 text-center border-t border-line/40">
-          <p className="font-mono text-gold text-[10px] tracking-[0.4em] mb-6">
-            用結果說話 · 不是用行銷話術
-          </p>
-          <h3 className="text-3xl text-bone font-light tracking-tight">
-            這頁不會消失 · 不會偷偷換掉 · 也不會藏起我們高估的地方。
-          </h3>
-        </section>
       </main>
 
       <Footer />

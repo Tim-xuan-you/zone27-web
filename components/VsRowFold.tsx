@@ -199,8 +199,8 @@ export default function VsRowFold() {
           /audit
         </Link>
         {" · "}
-        <Link href="/integrity" className="text-gold/85 underline-offset-4 hover:underline">
-          /integrity
+        <Link href="/ethics" className="text-gold/85 underline-offset-4 hover:underline">
+          /ethics
         </Link>
         {" · "}
         <Link href="/track-record" className="text-gold/85 underline-offset-4 hover:underline">

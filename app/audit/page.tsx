@@ -4,13 +4,9 @@ import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import CopyLinkButton from "@/components/CopyLinkButton";
 import RelatedReading from "@/components/RelatedReading";
-import FounderSignOff from "@/components/FounderSignOff";
 import StatTerm from "@/components/StatTerm";
-import ArticleMeta from "@/components/ArticleMeta";
 import ReadingProgress from "@/components/ReadingProgress";
-import ReproducibilityReceipt from "@/components/ReproducibilityReceipt";
-import LocalStorageReceipt from "@/components/LocalStorageReceipt";
-import { matches, getFinalizedMatches, getTrackRecordStats } from "@/lib/matches";
+import { matches, getFinalizedMatches } from "@/lib/matches";
 import {
   COMMIT_SHA,
   DEPLOYED_AT,
@@ -56,9 +52,6 @@ export default function AuditPage() {
   // number /track-record reads · they can't drift.
   const ingestedCount = matches.length;
   const finalizedCount = getFinalizedMatches().length;
-  // 同 /track-record 讀的那支函式 —— /audit 的 PROVED/DIVERGED 數字跟公開戰績逐字同源,
-  // 物理上不可能各說各話(這頁的整個命門就是「數字不會漂移」)。
-  const trackStats = getTrackRecordStats();
   const sampleSize =
     finalizedCount === 0
       ? `n = 0 · ${ingestedCount} ingested · 等第一筆收錄`
@@ -108,7 +101,7 @@ export default function AuditPage() {
             </h1>
             <div className="zone27-rule max-w-[260px] mb-6" aria-hidden="true" />
             <p className="editorial-dropcap text-mute text-base leading-relaxed mb-8 max-w-2xl">
-              引擎能算什麼 · 不能算什麼 · 為什麼公開全部。
+              引擎能算什麼 · 不能算什麼。
             </p>
 
             <dl className="grid grid-cols-3 gap-x-6 gap-y-4 font-mono text-[11px] tracking-[0.05em]">
@@ -116,125 +109,7 @@ export default function AuditPage() {
               <MetaPair label="ENGINE" value={ENGINE_VERSION} />
               <MetaPair label="SAMPLE SIZE" value={sampleSize} />
             </dl>
-            <div className="mt-6">
-              <ArticleMeta
-                readingMin={8}
-                sample={{ current: finalizedCount, threshold: 30 }}
-              />
-            </div>
           </header>
-
-          {/* Hindenburg-style top-of-doc position disclosure · mirror to /methodology。 */}
-          <aside
-            id="disclosure"
-            aria-labelledby="audit-disclosure-heading"
-            className="mt-8 mb-12 border border-line/60 bg-slate/30 p-5 sm:p-6"
-          >
-            <div className="flex items-baseline gap-3 mb-3 flex-wrap">
-              <span
-                id="audit-disclosure-heading"
-                lang="en"
-                className="font-mono text-gold text-[10px] tracking-[0.4em]"
-              >
-                / DISCLOSURE · WHO WROTE THIS
-              </span>
-              <span
-                lang="en"
-                className="font-mono text-mute/60 text-[9px] tracking-[0.3em]"
-              >
-                LAST UPDATED · 2026-05-23
-              </span>
-            </div>
-            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-1.5 text-mute/85 text-[12px] sm:text-[13px] leading-relaxed">
-              <li className="font-mono tabular">
-                <span className="text-mute/60">EQUITY</span>{" "}
-                <span className="text-bone">100% TIM solo</span>
-              </li>
-              <li className="font-mono tabular">
-                <span className="text-mute/60">SPONSORS</span>{" "}
-                <span className="text-bone">0</span>
-              </li>
-              <li className="font-mono tabular">
-                <span className="text-mute/60">ADS</span>{" "}
-                <span className="text-bone">0 · AdMob permanently banned</span>
-              </li>
-              <li className="font-mono tabular">
-                <span className="text-mute/60">TRACKERS</span>{" "}
-                <span className="text-bone">0 · 見 /privacy</span>
-              </li>
-              <li className="font-mono tabular">
-                <span className="text-mute/60">RECEIPTS</span>{" "}
-                <span className="text-bone">
-                  N={trackStats.total} · {trackStats.proved} PROVED ·{" "}
-                  <span className={trackStats.diverged > 0 ? "text-loss" : ""}>
-                    {trackStats.diverged} DIVERGED
-                  </span>
-                </span>
-              </li>
-              <li className="font-mono tabular">
-                <span className="text-mute/60">BLACK</span>{" "}
-                <span className="text-bone">0 paid subscribers</span>
-              </li>
-              <li className="font-mono tabular">
-                <span className="text-mute/60">REVENUE</span>{" "}
-                <span className="text-bone">NT$ 0 · Year 0 honest empty</span>
-              </li>
-            </ul>
-            <p className="mt-3 text-mute/65 text-[11px] leading-relaxed border-t border-line/40 pt-3">
-              完整年度透明報表 · 每年 5/31 publish commitment(同此頁的事前承諾原則)·
-              違反就是品牌信用崩盤(見{" "}
-              <Link
-                href="/ethics"
-                className="text-gold/80 hover:text-gold underline-offset-4 hover:underline"
-              >
-                /ethics
-              </Link>
-              )。 第 05 節「為什麼全部公開」解釋我們為什麼把這些攤出來 ·
-              方法完整公開 · 不留秘密。
-            </p>
-            {/* R161 W1.O3 · Agent O Gap 3 · lateral cross-link to sibling
-                disclosure surfaces · /audit 是 trust artifact hub but star-graph
-                hub-spoke 過載 · 加 lateral mesh-graph edges to /integrity(22
-                binding rules canonical R109)+ /steelman(5 strongest objections
-                self-exposure)· per NN/g 2026 hub-and-spoke internal-linking
-                research · spokes cross-link reduces /audit single-point load。 */}
-            <p className="mt-3 font-mono text-mute/70 text-[10px] tracking-[0.25em] leading-relaxed">
-              ⚓ 我們綁死的 22 條規矩 →{" "}
-              <Link
-                href="/integrity"
-                className="text-gold/80 hover:text-gold underline-offset-4 hover:underline"
-              >
-                /integrity
-              </Link>{" "}
-              · 對自己最狠的 5 個質疑(自己先講)→{" "}
-              <Link
-                href="/steelman"
-                className="text-gold/80 hover:text-gold underline-offset-4 hover:underline"
-              >
-                /steelman
-              </Link>
-            </p>
-            {/* R129 W1 · DELTA-of-CPBL positioning cross-link · per R126 NEW
-                [[feedback-zone27-delta-of-cpbl-positioning]] memory SOP「DO
-                surface this positioning on /audit + /heritage as canonical」 ·
-                /heritage 已 R127 W2 surface 完整 section · /audit 補 inline
-                cross-link · 不改 8-fact disclosure 結構(避免 count drift in
-                FromOneSolo:108 + NonComparableAnchor:147 兩處 8-fact reference)
-                · 純 closing-line 1-sentence link · multi-surface placement =
-                brand IP consistency。 */}
-            <p className="mt-2 text-mute/65 text-[11px] leading-relaxed">
-              ⚓ 定位 · ZONE 27 是亞洲棒球數據分析空了 17 年的位子裡第一個進場的。
-              完整來龍去脈 + 日本 DELTA 撐了 14 年的前例 + 台灣 Rebas 對照 +
-              CPBL 2025 市場規模算法,見{" "}
-              <Link
-                href="/about"
-                className="text-gold/80 hover:text-gold underline-offset-4 hover:underline"
-              >
-                /about
-              </Link>
-              。
-            </p>
-          </aside>
 
           {/* ── 01 MODEL DESCRIPTION ────────────────── */}
           <ReportSection no="01" label="MODEL DESCRIPTION">
@@ -255,36 +130,6 @@ export default function AuditPage() {
                 /methodology
               </Link>
               ,每一個機率推導、簡化假設與已知限制都寫清楚。
-            </P>
-            <P className="text-mute/70">
-              想看完整技術說明(引擎怎麼搭、每打席機率怎麼推、壘間怎麼跑、為什麼跑一萬次就穩)?
-              請見{" "}
-              <Link
-                href="/methodology"
-                className="text-gold underline-offset-4 hover:underline"
-              >
-                /methodology
-              </Link>
-              。本頁是精簡的 model report,/methodology 是完整技術論文。
-            </P>
-            <P className="text-mute/70">
-              本報告涵蓋 v0.2 主引擎。 v0.3(加了球場因素對全壘打率的修正)已經是
-              開發預覽版 · v0.4(把 v0.2、v0.3 兩版結果加權混合)排在 2026 第四季。
-              完整 3 個引擎版本(v0.2 → v0.3 → v0.4)的進程 · 每版改了什麼 · 見{" "}
-              <Link
-                href="/methodology"
-                className="text-gold underline-offset-4 hover:underline"
-              >
-                /methodology Section 04 ENGINE LINEUP
-              </Link>
-              {" "}+ entire v0.2 → v0.3 delta 見{" "}
-              <Link
-                href="/methodology/diff"
-                className="text-gold underline-offset-4 hover:underline"
-              >
-                /methodology/diff
-              </Link>
-              。
             </P>
           </ReportSection>
 
@@ -331,10 +176,6 @@ export default function AuditPage() {
                 投手是怎麼估出來的都明白標出 · 不藏。 此外也會自動抓
                 cpbl.com.tw 官網的 K/9 BB/9 HR/9 排行 · 16+ 達標
                 投手已自動疊上官方真實數字。
-              </p>
-              <p className="text-mute/70 text-xs leading-relaxed mt-3">
-                這個 caveat 是 disclosure philosophy 的物理產出 ·
-                /audit Section 05 解釋為什麼把弱點貼在門口而不是藏起來。
               </p>
             </div>
 
@@ -490,347 +331,6 @@ export default function AuditPage() {
             </div>
           </ReportSection>
 
-          {/* ── 04 ENVIRONMENTAL IMPACT ──────────────────
-              Round 7: renumbered 05 → 04 after Round 7 consolidation
-              merged S03 + S04 into ONE Section 03 ENGINE SCOPE.
-              Inspired by Hugging Face model card template's
-              Environmental Impact section. 98% of model cards on HF
-              skip this field. ZONE 27's "no backend" architecture means
-              we can disclose it honestly and end up ahead of Anthropic
-              + OpenAI on this dimension. */}
-          <ReportSection no="04" label="ENVIRONMENTAL IMPACT">
-            <P>
-              ZONE 27 引擎完全在你的瀏覽器裡跑,
-              <strong className="text-bone">不連任何伺服器、也沒有用機房訓練模型</strong>。
-              下表是跑一次 10,000 場模擬的環境足跡估算:
-            </P>
-
-            <DataTable>
-              <DataRow
-                label="HARDWARE TYPE"
-                value="使用者裝置"
-                note="M1 / Intel i5 以上 · 一般筆電/手機"
-              />
-              <DataRow
-                label="COMPUTE REGION"
-                value="client-side"
-                note="使用者所在瀏覽器 · 無雲端"
-              />
-              <DataRow
-                label="HOURS USED"
-                value="~0.0005 hr / sim"
-                note="10,000 次模擬約 1.5 - 2.0 秒"
-              />
-              <DataRow
-                label="CLOUD PROVIDER"
-                value="無"
-                note="引擎不呼叫後端 · Vercel 只 serve 靜態 HTML/JS"
-              />
-              <DataRow
-                label="CARBON EMITTED"
-                value="< 0.1 g CO₂e / sim"
-                note="估算 · 依裝置 TDP × 電網碳強度(MLCO2 calculator)"
-              />
-            </DataTable>
-
-            <P className="text-mute/70">
-              依據{" "}
-              <ExtLink href="https://mlco2.github.io/impact#compute">
-                MLCO2 Impact Calculator
-              </ExtLink>{" "}
-              方法(Lacoste et al. 2019)粗估。引擎的「無後端」架構選擇,
-              讓 ZONE 27 在這一項上領先 98% 的 AI 模型說明書
-              (包括 Anthropic 與 OpenAI · 這兩家都沒公開自家碳排數據)。
-            </P>
-
-            <div className="mt-4">
-              <ReproducibilityReceipt
-                seed={null}
-                dataAt="2026-05-22"
-                n={10000}
-              />
-            </div>
-          </ReportSection>
-
-          {/* ── 05 DISCLOSURE PHILOSOPHY · canonical brand-IP anchor ── */}
-          <ReportSection no="05" label="DISCLOSURE PHILOSOPHY">
-            <P>
-              為什麼我們把整份 model report 公開到這個程度?
-              <strong className="text-bone"> 因為我們沒有商業機密。</strong>
-            </P>
-
-            <DataTable>
-              <DataRow
-                label="OUR MATH"
-                value="機率 + 一萬次模擬"
-                note="每打席算機率 · 在電腦裡跑一萬次數誰贏 · 高中數學等級 · 方法全公開"
-              />
-              <DataRow
-                label="OUR INPUTS"
-                value="K/9 · BB/9 · HR/9"
-                note="Baseball Reference / MLB Stats API · 任何人可查"
-              />
-              <DataRow
-                label="OUR ENGINE"
-                value="方法完整公開"
-                note="JavaScript 寫的 · 邏輯全攤在 /methodology"
-              />
-              <DataRow
-                label="OUR MOAT"
-                value="信任,不是算法"
-                note="您能驗證 → 您才有理由信"
-              />
-            </DataTable>
-
-            <P>
-              OpenAI 藏模型參數 · Anthropic 藏訓練資料 · Google 藏調校手法 —
-              他們的生意靠藏演算法,
-              <strong className="text-bone">一不藏對手馬上複製,幾十億的研發就白做了</strong>。
-            </P>
-            <P>
-              <strong className="text-bone">ZONE 27 是 AI 公司的倒影</strong> —
-              我們賣身分(BLACK),
-              引擎是免費送的工具,本來就沒有可藏的價值。
-              硬藏算法 = 假裝有秘密 = 對訪客撒謊 = 品牌信用自殺。
-            </P>
-            <P className="text-mute/70">
-              這份報告本身,就是
-              「您憑什麼信任 ZONE 27?」的具體回答。
-              您可以一行一行驗證 — 任何說「我們有黑盒 AI,你看不到」的對手,剛好證明他們跟我們是反的。
-            </P>
-            <P className="text-mute/70">
-              <strong className="text-bone">物理證據在</strong>{" "}
-              <Link href="/track-record" className="text-gold hover:underline">
-                /track-record
-              </Link>
-              {" "}— 每場引擎公開預測賽後實際結果(
-              <Link href="#proved" className="text-gold underline-offset-4 hover:underline">PROVED</Link>
-              {" "}✓ /{" "}
-              <Link href="#diverged" className="text-gold underline-offset-4 hover:underline">DIVERGED</Link>
-              {" "}✕)等大列出 ·
-              不刪、不修飾、不過濾。揭露哲學 = 文字理論;公開戰績 = 文字理論的物理產出。
-            </P>
-
-            {/* Round 31 Wave G A10 critic patch · pre-commit DIVERGED handling
-                rule。 Critic agent surface:「N=1 還 100% 命中 · 你 SHOW 個屁
-                error?」 修法:先 commit handling rule 在 miss 還沒發生時 ·
-                signal 最強。 brand IP「Pratfall」延伸到 procedural pre-commitment。 */}
-            <div className="mt-6 p-5 sm:p-7 border border-loss/30 bg-loss/5">
-              <p
-                lang="en"
-                className="font-mono text-loss text-[10px] tracking-[0.35em] mb-3"
-              >
-                ⚓ PRE-COMMIT · DIVERGED 的處理規則(失準前就先寫好)
-              </p>
-              <p className="text-mute text-sm leading-relaxed mb-3">
-                這條規則在引擎第一次失準前就先寫好 —— 不等出包了才回頭
-                定義什麼叫「失準」、該怎麼處理。 規則:
-              </p>
-              <ul className="space-y-2 text-mute text-sm leading-relaxed list-disc pl-6">
-                <li>每一筆 DIVERGED 出現當日 · 該場收據自動出現
-                  在 <Link href="/" className="text-gold hover:underline underline-offset-4">首頁</Link>
-                  · 不撤、不藏、不在 7 天內被新的蓋掉</li>
-                <li>/track-record ledger 編號不重排 · DIVERGED entry 跟
-                  PROVED entry 共用同 sort order(time-based)</li>
-                <li>每筆 DIVERGED 都永久留在{" "}
-                  <Link href="/track-record" className="text-gold hover:underline underline-offset-4">公開戰績</Link>
-                  · 標賽前機率與賽後實際結果 · 任何人可逐場核對</li>
-                <li>不開「為什麼 diverged 解釋」excuse paragraph — 留空 ·
-                  讓數字自己說話</li>
-              </ul>
-
-              {/* R138 W7 · Singularity Effect amplifier · Agent C R138 Runner-up 1 ·
-                  Schelling 1968「The Life You Save May Be Your Own」 + Small/Loewenstein/
-                  Slovic 2007「Sympathy and callousness: The impact of deliberative
-                  thought on donations to identifiable and statistical victims」
-                  (Org Behav Hum Decis Process 102:143-153)· Pratfall amplification
-                  via named first-miss slot · 抽象「第一筆」 → identifiable「THE
-                  FIRST MISS」 named entity · psychology mechanism · identifiable
-                  victim donations rise 2x vs statistical victims · 此 slot 是
-                  訪客 emotional commitment 到 verify ZONE 27 publish-failure 承諾
-                  · per [[feedback-zone27-pratfall-brand-ip]] axiom 強化 + per
-                  [[feedback-zone27-psychology-ux-axis]] academic citation 守。 */}
-              <div className="mt-5 pt-5 border-t border-loss/20">
-                <p
-                  lang="en"
-                  className="font-mono text-loss/85 text-[9px] tracking-[0.3em] mb-2"
-                >
-                  RULE FOLLOWED · 規則已生效
-                </p>
-                <p className="text-mute text-sm leading-relaxed">
-                  引擎已經失準過。 截至目前{" "}
-                  <span className="font-mono text-bone bg-loss/10 px-2 py-0.5 border-b border-loss/40">
-                    N={trackStats.total} · {trackStats.diverged} 筆 DIVERGED
-                  </span>{" "}
-                  —— 一筆都沒藏、沒撤、沒在 7 天內被新的蓋掉,全部按上面這條規則攤在{" "}
-                  <Link href="/track-record" className="text-gold hover:underline underline-offset-4">
-                    公開戰績
-                  </Link>
-                  。 規則寫在前、失準在後、照做不誤 —— 這就是「敢攤輸」跟「嘴上喊敢」唯一的差別。
-                </p>
-                <p className="font-mono text-mute/70 text-[10px] tracking-[0.2em] leading-relaxed mt-3">
-                  每一筆 DIVERGED 都按同一條規則處理 · 永遠不刪。
-                </p>
-              </div>
-              <p className="font-mono text-mute/80 text-[10px] tracking-[0.25em] leading-relaxed mt-3">
-                本規則適用 engine v0.X 全部版本 · 修改需至少 30 天前公告 ·
-                收進{" "}
-                <Link
-                  href="/corrections"
-                  className="text-gold/80 hover:text-gold underline-offset-4 hover:underline"
-                >
-                  我們搞砸過的事
-                </Link>
-                。 先講好規則 · 比事後找理由解釋更可信。
-              </p>
-            </div>
-
-            {/* R140 W6 · cross-link to /founders/postmortem-2028 sibling
-                Pratfall surface · per Agent C R140 TOP placement「sibling to
-                PRE-COMMIT」 · 6th Pratfall surface 平行 PRE-COMMIT 預期 first
-                DIVERGED · Postmortem 預期 5 種 project-level death scenarios ·
-                Klein 1998 + HBR 2007 prospective hindsight · brand IP「不藏
-                未來可能 die 方式」 axiom 物理 codify。 */}
-            <div className="mt-4 p-4 sm:p-5 border border-loss/30 bg-loss/[0.03]">
-              <p
-                lang="en"
-                className="font-mono text-loss/85 text-[10px] tracking-[0.35em] mb-2"
-              >
-                ⚓ 我們可能怎麼失敗 · 自己先講
-              </p>
-              <p className="text-mute text-sm leading-relaxed">
-                上面那條規則處理引擎第一筆失手 · 但整個 ZONE 27 本身也可能做不
-                下去。 我們把對自己最狠的質疑、可能失敗的情境公開在{" "}
-                <Link
-                  href="/steelman"
-                  className="text-loss/90 hover:text-loss underline-offset-4 hover:underline"
-                >
-                  /steelman
-                </Link>
-                。 願意先公開「自己可能怎麼死」這件事 · 明牌站不會做。
-              </p>
-            </div>
-            <P className="text-mute/70">
-              完整論證見{" "}
-              <Link href="/manifesto" className="text-gold hover:underline">
-                /manifesto
-              </Link>{" "}
-              · DISCLOSURE 只是 4 個倒置之一,其他 3 個(賺錢方式 · 覆蓋範圍 · 隱私)同樣公開。
-            </P>
-          </ReportSection>
-
-          {/* ── 06 LOCAL STORAGE TRANSPARENCY · client-side state disclosure ── */}
-          <ReportSection no="06" label="LOCAL STORAGE TRANSPARENCY">
-            <P>
-              ZONE 27 把資料存在你自己的瀏覽器裡 ·{" "}
-              <strong className="text-bone">0 追蹤 cookie · 0 寫到我們伺服器 · 0 個資外傳</strong>
-              (維持登入用的 cookie 是例外,下面會明講)。
-              打開瀏覽器的開發者工具看本機儲存
-              · 你看到的項目跟下表一模一樣 · 我們不藏。
-            </P>
-            <P className="text-mute/80">
-              <strong className="text-bone">登入用的 cookie 說明</strong>:
-              登入後系統會在本站設 2 個 cookie
-              (一個登入憑證、一個用來續期)· 用來讓你保持登入狀態 ·
-              登出就刪。 不追蹤 · 不送第三方 ·
-              不建個資清單(只存一段你看不懂的登入憑證)。 你可以打開
-              瀏覽器的開發者工具自己查。
-            </P>
-
-            <LocalStorageReceipt variant="audit" />
-
-            <P className="text-mute/70 mt-3">
-              <strong className="text-bone">⚓ 我們修正過的紀錄</strong> ·
-              這張表剛上線時 6 個項目有 3 個寫錯 · 1 個是憑空捏造的 · 1 個漏掉 ·
-              自己用站時發現、立刻改正 · 不藏錯 · 公開記在這裡。
-              這件事也收進{" "}
-              <Link href="/corrections" className="text-gold underline-offset-4 hover:underline">
-                我們搞砸過的事
-              </Link>
-              (集中認錯頁)。
-            </P>
-            <P className="text-mute/70">
-              <strong className="text-bone">不存在本機的</strong>:你寫的比賽筆記
-              是登入後存在帳號裡、同步到伺服器 ·
-              不在本機 · 此表不列(不藏 · 不假裝)。
-              你追蹤的比賽同樣存在帳號裡,不在本機。
-            </P>
-
-            <P className="text-mute/70 mt-4">
-              要清除這些本機資料完全是你的選擇:在瀏覽器的開發者工具裡
-              按「Clear」 · 或用瀏覽器的「清除網站資料」 一鍵清掉全部 ZONE 27
-              的本機資料。 我們{" "}
-              <strong className="text-bone">不會</strong>{" "}
-              在你清掉之後偷偷再寫回去 · 不會在伺服器留備份 · 不會用
-              追蹤技術還原 — 因為我們從頭到尾就沒在伺服器留過你的資料。
-            </P>
-
-            <P className="text-mute/70">
-              修改這份本機資料的公開規則需 30 天前公告 ·
-              同 /audit Section 05 事先公開的承諾 · 每加一個新的本機資料項目時
-              此表都必須同步更新 · 對不上 = 品牌自殺。
-            </P>
-          </ReportSection>
-
-          {/* ── 07 ENGINE v0.3 ESTIMATION DISCLOSURE · per engine version disclose ── */}
-          <ReportSection no="07" label="ENGINE v0.3 ESTIMATION DISCLOSURE">
-            <P>
-              第 2 號引擎 v0.3 已經是開發預覽版(之後會在
-              /lab 開放讓你自選試用)。 v0.3 = v0.2 主引擎 + 球場因素對全壘打率的
-              修正 · 估算方法公開如下:
-            </P>
-
-            <DataTable>
-              <DataRow
-                label="v0.3 基礎"
-                value="完全沿用 v0.2"
-                note="K/9 + BB/9 + HR/9 + 打席機率 100% 沿用同一顆引擎 · 每一版永久保留"
-              />
-              <DataRow
-                label="v0.3 新增 · 球場因素"
-                value="HR rate × (1 + Δ/9.5 × 0.5)"
-                note="保守敏感度 0.5 · 估計值 · 用 4 個主場的得分環境推算 · v0.4 會拆得更細"
-              />
-              <DataRow
-                label="v0.3 還沒做"
-                value="場內球安打率 · 外野尺寸 · 風阻"
-                note="v0.3 只調全壘打率 · v0.4 會再加場內球安打率、外野距離、天氣"
-              />
-              <DataRow
-                label="v0.3 特殊情況"
-                value="球場不明 → 退回 v0.2"
-                note="球場不在那 4 個主場資料裡時 · 就老實退回 v0.2 · 不假裝有資料"
-              />
-            </DataTable>
-
-            <P className="text-mute/70 mt-4">
-              v0.3 的賽前預測會跟 v0.2 一起記在{" "}
-              <Link href="/track-record" className="text-gold hover:underline">
-                /track-record
-              </Link>{" "}
-              · 每一筆都標清楚是哪一版引擎算的 · 等每一版各滿 30 場已對帳的比賽
-              後{" "}
-              <Link href="/calibration" className="text-gold hover:underline">
-                /calibration
-              </Link>{" "}
-              會公開 v0.2 跟 v0.3 的實際準度對照 · 才決定要不要把 v0.3 設成預設
-              (我們答應過:
-              <strong className="text-bone">每一版永久保留、不會偷偷換掉</strong>)。
-            </P>
-
-            <P className="text-mute/70">
-              引擎 v0.3 方法完整公開於{" "}
-              <Link
-                href="/methodology/diff"
-                className="text-gold underline-offset-4 hover:underline"
-              >
-                /methodology/diff
-              </Link>
-              {" "}· 逐行 diff 攤出 v0.2 → v0.3 改了什麼
-              · 30 分鐘理解 · 見 /methodology Section 04 ENGINE LINEUP。
-            </P>
-          </ReportSection>
-
           {/* ── 08 Z27 LEXICON · R168 W1 port from deleted /glossary · 5 brand
               IP terms used across site · anchor targets for /audit#proved /
               /audit#diverged / /audit#sample-debt / /audit#z27-lexicon。 */}
@@ -920,10 +420,6 @@ export default function AuditPage() {
               </li>
             </ul>
 
-            <p className="mt-12 font-mono text-mute text-[10px] tracking-[0.25em]">
-              本頁堅持零行銷語言原則
-            </p>
-
             {/* Build provenance · Round 4 moved from header MetaPair
                 (where it was loud) to here (quiet · only die-hards
                 find it). Engineers can click through to the exact
@@ -943,20 +439,6 @@ export default function AuditPage() {
             </div>
           </footer>
         </article>
-
-        <FounderSignOff>
-          <p>
-            我把整個引擎攤在這裡 · 不是因為它完美 ·
-            是因為我相信<strong>公開錯誤比藏起來更值得</strong>。
-          </p>
-          <p>
-            上面 ESTIMATION DISCLOSURE 那一段 · 是寫程式時跟自己拉鋸出來的
-            「我們現在做不到什麼」清單 · 寫進來反而踏實。
-          </p>
-          <p>
-            您比我更懂的話 · 歡迎寫信告訴我哪裡該修。
-          </p>
-        </FounderSignOff>
 
         <RelatedReading currentPath="/audit" />
       </main>
@@ -1075,32 +557,3 @@ function Item({
   );
 }
 
-function DataTable({ children }: { children: React.ReactNode }) {
-  return (
-    <table className="w-full text-sm font-mono border-collapse my-2">
-      <tbody>{children}</tbody>
-    </table>
-  );
-}
-
-function DataRow({
-  label,
-  value,
-  note,
-}: {
-  label: string;
-  value: string;
-  note: string;
-}) {
-  return (
-    <tr className="border-b border-line/30">
-      <td className="py-3 pr-4 text-mute text-[11px] tracking-[0.15em] w-1/3 align-top">
-        {label}
-      </td>
-      <td className="py-3 pr-4 text-bone tabular align-top">{value}</td>
-      <td className="py-3 text-mute/70 text-[11px] tracking-[0.1em] align-top">
-        {note}
-      </td>
-    </tr>
-  );
-}

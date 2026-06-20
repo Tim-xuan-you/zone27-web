@@ -3,8 +3,6 @@ import type { Metadata } from "next";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import RelatedReading from "@/components/RelatedReading";
-import FounderSignOff from "@/components/FounderSignOff";
-import ArticleMeta from "@/components/ArticleMeta";
 import ReadingProgress from "@/components/ReadingProgress";
 
 export const metadata: Metadata = {
@@ -106,25 +104,9 @@ export default function EthicsPage() {
             9 件 ZONE 27 <span className="text-gold">永遠不做</span> 的事
           </h1>
 
-          <div className="mt-8 border-l-2 border-gold/60 pl-5 sm:pl-6 py-2 max-w-2xl">
-            <p className="text-bone text-lg sm:text-xl leading-relaxed">
-              <strong>靠賣明牌的生意,結構上做不出這頁</strong> · 因為他們每
-              一條賺錢的路都違反下面 9 條 · 公開等於商業自殺。
-            </p>
-            <p className="mt-3 text-mute text-base leading-relaxed">
-              ZONE 27 做得出這頁 · 因為訂閱費(BLACK)就是我們全部的收入
-              · 你贏你輸我都一樣賺。
-            </p>
-          </div>
-
-          <p className="mt-6 text-bone text-base sm:text-lg leading-relaxed border-l-4 border-gold pl-5 py-2 max-w-2xl">
-            <strong>每一個承諾 Tim 簽名 · 可被驗證 · 違反任何一條 = 這頁用紅字
-            永久標記 · 不可刪</strong> · 這正是 ZONE 27 跟賣明牌的站最大的不同:他們可以匿名、可以刪文,我們不行。
+          <p className="mt-8 text-bone text-lg sm:text-xl leading-relaxed border-l-2 border-gold/60 pl-5 sm:pl-6 py-2 max-w-2xl">
+            每一條 Tim 簽名 · 違反任何一條,這頁就用紅字永久標記。
           </p>
-
-          <div className="mt-6">
-            <ArticleMeta readingMin={4} />
-          </div>
         </section>
 
         <div className="mx-auto w-32 gold-line mb-12" />
@@ -226,125 +208,6 @@ export default function EthicsPage() {
           </div>
         </section>
 
-        {/* ── 02 WHY STRUCTURALLY NON-COPYABLE ──────── */}
-        <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-16 border-t border-line/40 pt-12">
-          <p
-            lang="en"
-            className="font-mono text-gold text-[10px] tracking-[0.45em] mb-6"
-          >
-            / 02 · WHY PAID-PICK BUSINESSES STRUCTURALLY CANNOT SHIP THIS
-          </p>
-          <h2 className="text-2xl sm:text-3xl text-bone font-light tracking-tight mb-6 leading-tight">
-            這 9 條對他們是商業自殺 · 對我們是 <span className="text-gold">品牌的護城河</span>
-          </h2>
-          <div className="space-y-4 text-mute leading-relaxed zh-body">
-            <p>
-              賣明牌的站 · 收費明牌群組 · 賭博周邊 · 整個靠賣明牌賺錢的生意結構,違反上面第 1-5 條 + 第 8 條,共 6 條:
-            </p>
-            <ul className="space-y-2 pl-6">
-              <li className="flex gap-3 items-baseline">
-                <span className="font-mono text-loss/80 text-[10px] tracking-[0.25em]">▸</span>
-                <span>他們賺錢的模式,直接或間接來自賭博平台的引流抽成 + 引薦佣金(違反第 2、8 條)</span>
-              </li>
-              <li className="flex gap-3 items-baseline">
-                <span className="font-mono text-loss/80 text-[10px] tracking-[0.25em]">▸</span>
-                <span>他們跟賭博平台的資料合作與授權是主要收入(違反第 1、4 條)</span>
-              </li>
-              <li className="flex gap-3 items-baseline">
-                <span className="font-mono text-loss/80 text-[10px] tracking-[0.25em]">▸</span>
-                <span>廣告與引薦分潤是他們主要的賺錢方式(違反第 3、6 條)</span>
-              </li>
-              <li className="flex gap-3 items-baseline">
-                <span className="font-mono text-loss/80 text-[10px] tracking-[0.25em]">▸</span>
-                <span>「明牌」內容 + 付費牌 + 老師收費 = 收錢推薦(違反第 3 條)</span>
-              </li>
-            </ul>
-            <p className="pt-3">
-              <strong className="text-bone">ZONE 27 做得出這頁</strong>,
-              是因為我們的利益跟訪客站在同一邊:
-            </p>
-            <ul className="space-y-2 pl-6">
-              <li className="flex gap-3 items-baseline">
-                <span className="font-mono text-gold/80 text-[10px] tracking-[0.25em]">▸</span>
-                <span>BLACK NT$ 500/31 天 · 月度支持身分 · 手動轉帳 · 0 自動續扣 · 會員不限量</span>
-              </li>
-              <li className="flex gap-3 items-baseline">
-                <span className="font-mono text-gold/80 text-[10px] tracking-[0.25em]">▸</span>
-                <span>引擎永遠免費 · 預測不設付費牆 · 不藏任何分析角度 · 不偷偷換掉引擎</span>
-              </li>
-              <li className="flex gap-3 items-baseline">
-                <span className="font-mono text-gold/80 text-[10px] tracking-[0.25em]">▸</span>
-                <span>你贏你輸 ZONE 27 都一樣賺 · 跟你站同一邊 · 不在對立面</span>
-              </li>
-            </ul>
-          </div>
-        </section>
-
-        {/* ── 02B · LIMIT OF POWER · honest limit-of-power disclosure ── */}
-        <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-12 border-t border-line/40 pt-10">
-          <p
-            lang="en"
-            className="font-mono text-gold text-[10px] tracking-[0.45em] mb-6"
-          >
-            / 02B · LIMIT OF POWER · 我們做不到的事
-          </p>
-          <div className="border border-line/70 bg-slate/30 p-5 sm:p-7">
-            <h3 className="text-bone text-lg sm:text-xl font-light tracking-tight mb-4 leading-snug">
-              我們承諾我們不做 · 但我們不能阻止別人複製
-            </h3>
-            <p className="text-mute leading-relaxed mb-4">
-              ZONE 27 的引擎方法完整公開(這就是我們「方法公開」的原則)。 任何賭博公司
-              明天都可以照著我們公開的方法,自己做一套賠率服務來賣。 我們這 9 條承諾
-              只約束我們自己的行為 · <strong className="text-bone">沒辦法約束
-              別人怎麼用這套公開的方法</strong>。
-            </p>
-            <p className="text-mute/85 leading-relaxed mb-4">
-              <strong className="text-bone">老實講出自己的極限,比假裝沒有矛盾更強</strong>。
-              這條「不分潤博彩」的意思是:Tim 簽名保證「ZONE 27 不把方法
-              授權、出售、或開放介接給賭博公司」 · 不是保證「ZONE 27 的方法
-              永遠不會出現在賭博公司的工具裡」 — 後者在我們把方法公開的前提下,本來就做
-              不到。
-            </p>
-            <p className="font-mono text-mute/80 text-[10px] tracking-[0.3em] leading-relaxed">
-              ⚓ 若賭博公司拿我們公開的方法去做 · 我們會在{" "}
-              <Link href="/audit" className="text-gold underline-offset-4 hover:underline">/audit</Link>
-              {" "}把事實列出來 + 公開撇清 · 不沾任何利益關係。
-              老實講出自己的極限,比假裝強大更可信。
-            </p>
-          </div>
-        </section>
-
-        {/* ── 03 PRE-COMMIT BINDING ────────────────── */}
-        <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-16 border-t border-line/40 pt-12">
-          <p
-            lang="en"
-            className="font-mono text-gold text-[10px] tracking-[0.45em] mb-6"
-          >
-            / 03 · PRE-COMMIT · BINDING RULES
-          </p>
-          <div className="border border-loss/30 bg-loss/5 p-5 sm:p-7">
-            <h3 className="text-bone text-lg sm:text-xl font-light tracking-tight mb-4 leading-snug">
-              修改任何 commitment 需 30 天前先公告
-            </h3>
-            <p className="text-mute leading-relaxed mb-4">
-              對照 /audit 第 5 節的事前承諾、年度報告的固定公開方式、
-              以及黑卡帳本的 5 條規則。
-              這頁 9 條承諾,任何一條的文字改動 / 加條件 /
-              砍條件 · 全部都要:
-            </p>
-            <ol className="space-y-2 list-decimal pl-6 text-mute leading-relaxed mb-4">
-              <li>30 天前公開公告 · 含 before/after diff + 理由</li>
-              <li>30 天的凍結期 · 訪客可以在這段期間寫信反對</li>
-              <li>30 天後新承諾生效 · 改寫這頁 · 以公開紀錄為準</li>
-              <li>每次修改都留下公開、可回溯的紀錄</li>
-            </ol>
-            <p className="font-mono text-mute/80 text-[10px] tracking-[0.25em] leading-relaxed">
-              ⚓ 事前說死的承諾 · 比事後找理由強 100 倍 ·
-              改這些承諾不是「改一頁網頁」,而是動到品牌的根本信念。
-            </p>
-          </div>
-        </section>
-
         {/* ── BUS_FACTOR · solo-founder contingency disclosure ── */}
         <section
           id="bus-factor"
@@ -368,12 +231,7 @@ export default function EthicsPage() {
             如果 Tim 失蹤了 · 全靠他一個人
           </h2>
           <p className="text-mute leading-relaxed mb-4">
-            ZONE 27 是一個人做的 · 沒有員工、沒有外包、沒有委外
-            營運。{" "}
-            <strong className="text-bone">就只有 Tim 一個人</strong> · 如果
-            Tim 出車禍 / 失蹤 / 健康垮掉 · 整條運作就會中斷。
-            這是「稀缺、手工」這個品牌特色的代價 · 我們不藏 · 這一段就把
-            「真的發生時會怎樣」講清楚。
+            ZONE 27 只有 Tim 一個人做 · 如果他出車禍 / 失蹤 / 健康垮掉,運作會中斷。 你的資料不會被綁死:
           </p>
           <h3 className="text-bone text-lg mt-6 mb-3">你的資料 · 不會被我們綁死</h3>
           <ul className="space-y-3 text-mute leading-relaxed zh-body">
@@ -411,46 +269,7 @@ export default function EthicsPage() {
               緊急聯絡人條款)
             </li>
           </ul>
-          <h3 className="text-bone text-lg mt-6 mb-3">為什麼不雇人 · 不外包?</h3>
-          <p className="text-mute leading-relaxed mb-4">
-            僱人 = 分散這個單人風險 · 但同時稀釋品牌特色。 ZONE 27
-            「Tim 親手」的意思 = 「Tim 親眼核對轉帳」 + 「Tim 親手審核
-            申請」 + 「Tim 親手一個一個帶新會員進來」。 僱第 2 個人 = 變成制式化的軟體服務
-            · 違反「反其道而行」跟「稀缺、手工」這兩個原則。
-          </p>
-          <p className="text-mute leading-relaxed mb-4">
-            <strong className="text-bone">所以這是我的選擇:</strong> 我接受「只有一個人」
-            的代價 · 因為這就是品牌信用的根基。 為了讓你少擔一點
-            風險 · 我把這一段公開出來 · 你看到萬一的安排,就能自己判斷要不要承擔這個風險。
-          </p>
-          <p className="font-mono text-mute/80 text-[10px] tracking-[0.25em] leading-relaxed">
-            ⚓ 一個人老實講出單人風險 · 比假裝有一支十人團隊更乾淨。
-          </p>
         </section>
-
-        <FounderSignOff>
-          <p>
-            這頁是 ZONE 27 要取代「靠賣明牌的生意」的品牌底層 ·
-            <strong>不是行銷話術</strong>。 9 條是硬承諾 +
-            萬一只剩一個人時的接管安排 · 違反任一條 = 品牌信用
-            崩掉 · 就算只違反 1 次 · 這頁上就會出現「{COMMITMENTS[0].num}
-            {" "}- 已違反 某年某月某日」的紅色警示 · 永久
-            看得到 · 對照 /audit 第 5 節
-            「不刪不藏」的原則。
-          </p>
-          <p>
-            ZONE 27 有 9 條承諾,比一般的「公開承諾」頁更多 · 而且多的不是隨便湊數,是專門用來取代「賣明牌生意」的 · 其中第 1、2、4、5、8、9 共 6 條,是賣明牌的生意結構上永遠做不出來的 ·
-            <strong>因為他們一違反這 6 條,就等於拆掉自己整個賺錢模式</strong>。
-          </p>
-          <p>
-            要改這頁 9 條承諾,需提前 30 天公告 · 跟{" "}
-            <Link href="/audit#section-05" className="text-gold hover:underline">/audit S05</Link>{" "}
-            的事前承諾一致 · 用實際成本背書 · 也跟{" "}
-            <Link href="/integrity" className="text-gold hover:underline">/integrity 22 binding rules</Link>{" "}
-            的修改流程同一套標準。 違反任一條 = 用紅字永久標記在{" "}
-            <Link href="/track-record" className="text-gold hover:underline">/track-record</Link>。
-          </p>
-        </FounderSignOff>
 
         <RelatedReading currentPath="/ethics" />
 
@@ -490,16 +309,10 @@ export default function EthicsPage() {
           </p>
           <div className="flex flex-wrap justify-center gap-3">
             <Link
-              href="/steelman"
-              className="inline-block px-6 py-3 border border-gold/50 text-gold font-mono text-[10px] tracking-[0.3em] hover:bg-gold/10 transition-colors"
-            >
-              → /steelman 6 個最強的反對論點
-            </Link>
-            <Link
               href="/audit"
               className="inline-block px-6 py-3 border border-gold/50 text-gold font-mono text-[10px] tracking-[0.3em] hover:bg-gold/10 transition-colors"
             >
-              → /audit 第 5 節 · 我們為什麼全部公開
+              → /audit
             </Link>
             <Link
               href="/coverage"

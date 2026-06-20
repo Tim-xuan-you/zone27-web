@@ -2,7 +2,6 @@ import Link from "next/link";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import RelatedReading from "@/components/RelatedReading";
-import ArticleMeta from "@/components/ArticleMeta";
 import StatTerm from "@/components/StatTerm";
 import { createPageMetadata } from "@/lib/page-og";
 
@@ -54,12 +53,8 @@ export default function LearnPage() {
             <span className="text-gold">就可以開始</span>。
           </h1>
           <p className="mt-10 max-w-xl mx-auto text-mute leading-relaxed">
-            ZONE 27 用引擎拆解棒球比賽勝率。
-            但如果您從來沒讀過進階棒球數據 · 這頁是專屬給您的 6 分鐘入門。
+            ZONE 27 用引擎拆解棒球比賽勝率 · 這頁是專屬給沒讀過進階棒球數據的人的入門。
           </p>
-          <div className="mt-6 flex justify-center">
-            <ArticleMeta readingMin={6} />
-          </div>
         </section>
 
         <div className="mx-auto w-32 gold-line mb-12" />
@@ -144,76 +139,18 @@ export default function LearnPage() {
           />
         </Chapter>
 
-        {/* ── CHAPTER 03 ───────────────────────────── */}
+        {/* ── CHAPTER 03 · 沒有神準 → 指向校準 ─────── */}
         <Chapter
           no="03"
-          en="WHY NOT GAMBLING"
-          zh="為什麼 ZONE 27 不是博彩平台"
-          kicker="1 分鐘"
-          anchor="why-not-gambling"
-        >
-          <p>
-            如果您看到「機率」「賠率」「優勢值」這些字 · 可能會以為 ZONE 27 是某種運彩或抽下注的莊家。
-            <strong className="text-bone">不是。</strong>
-          </p>
-          <p>
-            下注平台、賣明牌的站、收費明牌群組賣的是「下注方向」 —
-            「兄弟今天贏 · 讓 1.5 · 押這個」。這套東西的問題不是準不準
-            · 是<strong className="text-bone">商業模式跟您站在對立面</strong>:
-            您輸越多 · 平台抽得越多 · 您贏太多 · 帳號被砍。
-          </p>
-          <p>
-            ZONE 27 的商業模式跟您站<strong className="text-bone">同一邊</strong>:
-          </p>
-          <ul className="space-y-2 list-none pl-0">
-            <li>▸ 我們<strong className="text-bone">不接受下注</strong> · 沒有彩金 · 沒有對賭</li>
-            <li>▸ 我們<strong className="text-bone">不收交易抽成</strong>(您下注我們不賺)</li>
-            <li>▸ 我們的收入是 BLACK 黑卡會員 · NT$ 500/31 天 — 您贏您輸都一樣</li>
-          </ul>
-          <p>
-            如果您看完機率之後仍想去博彩平台下注?那是您的選擇 — 我們不阻止也不從中抽錢。
-            但我們會明確告訴您:
-            <strong className="text-bone">每個機率都有 50% 的相反可能 · 不要把 ZONE 27 當保證</strong>。
-          </p>
-          <ChapterFooter
-            cta="ZONE 27 會員制 →"
-            href="/membership"
-            note="從匿名免費到 BLACK · NT$ 500/31 天 · 任時可選 · 我們不催"
-          />
-        </Chapter>
-
-        {/* ── CHAPTER 04 · 缺的核心概念:校準 ──────────
-            新手讀完機率/指標/不是博彩,卻沒學到品牌的地基 = 校準 + 57% 天花板。
-            補完概念弧:機率 → 指標 → 不是博彩 → 沒人是神,我們比誠實。
-            接到 /calibration(完整證據)+ /calibration/test(換你當引擎)。 */}
-        <Chapter
-          no="04"
           en="NOBODY IS PSYCHIC"
           zh="為什麼沒有「神準」這回事"
           kicker="1 分鐘"
           anchor="no-oracle"
         >
-          <p>看到這裡您可能想問:那 ZONE 27 的引擎,到底準不準?</p>
           <p>
-            老實說 —— 全世界最強的模型,賽前單場勝率也只到大約{" "}
-            <strong className="text-bone">5 成 7</strong>。 這是天花板,不是我們不夠努力:
-            棒球本來就有一半是運氣。 所以任何喊「<strong className="text-bone">94% 神準</strong>」的,
-            數學上就是在騙你。
-          </p>
-          <p>
-            既然沒人能神準,我們就不比「誰猜得準」 · 改比
-            <strong className="text-bone">「誰夠誠實」</strong>。 衡量的方式叫
-            <strong className="text-bone">校準</strong>:當引擎說 67%,長期下來那種場,
-            真的要有大約 67% 發生才算數。 一個說 6 成、就真的中 6 成的人,
-            比一個天天截圖喊神準、輸了就刪文的人,可信太多。
-          </p>
-          <p>
-            而且這不是嘴上講。 我們把每一場的賽前預測對上實際結果全攤開,
-            <strong className="text-bone">命中、落空都掛,刪不掉</strong> —— 您可以自己驗。
-            不信引擎?{" "}
-            <Link href="/calibration/test" className="text-gold hover:underline">
-              先別下注,玩一次「換你當引擎」測你自己有多準 →
-            </Link>
+            全世界最強的模型,賽前單場勝率也只到大約{" "}
+            <strong className="text-bone">5 成 7</strong> —— 棒球本來就有一半是運氣。
+            所以我們不比「誰猜得準」,改比「誰夠誠實」:當引擎說 67%,長期那種場真的要中大約 67% 才算數。
           </p>
           <ChapterFooter
             cta="看引擎準不準 · 公開校準 →"
@@ -221,124 +158,6 @@ export default function LearnPage() {
             note="當引擎說 67% · 實際發生幾成?賽前預測對上真實結果 · 命中落空都掛"
           />
         </Chapter>
-
-        {/* ── SERIES · 誠實讀一個機率 ───────────────────
-            修 R231:此三篇科普(streaks/sample-size/reading-a-probability)原本只能從
-            footer 的延伸閱讀摸到 = 形同孤兒。 在 primer 正文補一個系列入口,讓前門就看得到。 */}
-        <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-8 pt-16 border-t border-line/40">
-          <p className="font-mono text-gold/70 text-[10px] tracking-[0.4em] mb-3">
-            誠實讀一個機率 · 科普系列
-          </p>
-          <h2 className="text-3xl sm:text-4xl text-bone font-light tracking-tight mb-4 leading-snug">
-            想再深一點?<span className="text-gold">三篇,把機率讀懂。</span>
-          </h2>
-          <p className="text-mute leading-relaxed mb-8 max-w-xl">
-            賣明牌的,靠你「看不懂機率」賺錢。 這三篇免費把它說白:連勝為什麼會騙你、
-            一個準度要打幾場才算數、「62%」到底在說什麼。
-            讀完,你就拆得掉任何一張神準截圖。
-          </p>
-          <div className="space-y-3">
-            <SeriesItem
-              no="第一篇"
-              href="/learn/streaks"
-              title="連勝,是最會騙人的那個數字"
-              note="變異數 · 銅板也能連 7 次正面"
-            />
-            <SeriesItem
-              no="第二篇"
-              href="/learn/sample-size"
-              title="10 場的神準,是運氣還沒被攤平"
-              note="樣本量 · 沒掛場數的準度等於沒說"
-            />
-            <SeriesItem
-              no="第三篇"
-              href="/learn/reading-a-probability"
-              title="「62%」,不是「他會贏」的意思"
-              note="讀一個機率 · 它早就把會輸算進去了"
-            />
-          </div>
-        </section>
-
-        {/* ── 這條路 · 路線圖 ─────────────────────────
-            把入門/科普/校準/讀球/帳本串成一條「你在這 → 畢業」的路,收尾閉環到真實鎖定 +
-            掙來的榮譽(準心/對帳之星)。 不賣明牌、教到你不需要我們 = 反報馬仔終局。
-            軟脊椎:不開 /school 頂層、不改首頁、不命名儀式。 取代原本散開的 WHERE NEXT 三格 ——
-            那是「接下來去哪」的清單,這是「整條路、有頭有尾、最後落在你自己的帳本」的旅程。 */}
-        <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-24 pt-16 border-t border-line/40">
-          <p className="font-mono text-gold text-[10px] tracking-[0.4em] mb-4">
-            這條路 · 你在哪、接下來去哪
-          </p>
-          <h2 className="text-3xl sm:text-4xl text-bone font-light tracking-tight leading-snug mb-5">
-            從這裡 · 一直到你<span className="text-gold">不需要任何人報牌</span>。
-          </h2>
-          <p className="text-mute leading-relaxed mb-10 max-w-xl">
-            我們把「自己讀球、自己對帳」一階一階交給你 —— 教到你連我們的引擎都能挑戰。
-          </p>
-
-          <div>
-            <PathStage no="第 0 階" done title="讀懂一個機率">
-              62% 不是「他會贏」,是「看好、但內含 38% 會輸」。 你剛讀完的四章就是這一階 ——
-              從此沒有人能用「神準」「穩賺」唬住你。
-            </PathStage>
-            <PathStage no="第 1 階" done title="拆穿任何一張神準截圖">
-              連勝會騙人、十場神準是運氣還沒攤平、信心不是保證。 上面那三篇科普就是這一階 ——
-              讀完,賣明牌的截圖你一眼看穿。
-            </PathStage>
-            <PathStage
-              no="第 2 階"
-              title="換你當引擎 —— 先測你自己多準"
-              links={[{ cta: "玩一次「換你當引擎」→", href: "/calibration/test" }]}
-            >
-              藏住比分,你滑出你的把握,再翻開。 30 秒,你會撞到那道「全世界最強模型也只到
-              5 成 7」的牆。 不用登入。
-              <span className="block mt-3 text-mute/85">
-                ▸ 而且這把尺不只量球。 你的直覺、你阿公教的「逢七必勝」、你看了一週的數據 ——
-                哪一套讓你的把握更準,你自己量得出來。{" "}
-                <span className="text-bone">我們不評斷你信什麼,只把尺交給你。</span>
-              </span>
-            </PathStage>
-            <PathStage
-              no="第 3 階"
-              title="自己讀一場球"
-              links={[
-                { cta: "看今天的比賽 · 打開那些鏡頭 →", href: "/matches" },
-                { cta: "進實驗室 · 親手跑一萬場 →", href: "/lab" },
-              ]}
-            >
-              不靠任何人報牌,自己過一遍:先發投手壓不壓得住、球場吃不吃打、牛棚撐不撐得到第九局。
-              讀完,進實驗室按 RUN 跑一萬場,看你眼睛看到的、跟模型算的差多少。
-            </PathStage>
-            <PathStage
-              no="第 4 階"
-              title="立你自己的帳本 —— 這就是畢業"
-              gold
-              links={[{ cta: "免費 · 鎖你的第一手 →", href: "/login?next=/member" }]}
-            >
-              練習結束,來真的:賽前鎖一手、賽後自動對帳、含贏含輸全掛在你的公開檔案,刪不掉。
-              這裡沒有畢業證書 —— 你的畢業證書,是一本你親手掙來、連輸都記著的帳本。
-              撐到「說幾成、就真的中幾成」,你掙到<span className="text-gold">準心</span>;
-              撐滿 30 場還贏過引擎,你掙到<span className="text-gold">對帳之星</span>。
-              到那天,你連我們的引擎都可以挑戰 —— 那,就是我們最想教會你的一課。
-            </PathStage>
-          </div>
-
-          <p className="mt-10 font-mono text-mute text-[10px] tracking-[0.25em] leading-relaxed">
-            想先看引擎自己準不準?{" "}
-            <Link
-              href="/calibration"
-              className="text-gold/75 hover:text-gold underline-offset-4 hover:underline transition-colors"
-            >
-              公開校準 →
-            </Link>
-            {"　"}想看引擎完整的成績報告?{" "}
-            <Link
-              href="/audit"
-              className="text-gold/75 hover:text-gold underline-offset-4 hover:underline transition-colors"
-            >
-              /audit →
-            </Link>
-          </p>
-        </section>
 
         <RelatedReading currentPath="/learn" />
       </main>
@@ -440,112 +259,3 @@ function PrimerStat({
   );
 }
 
-function SeriesItem({
-  no,
-  href,
-  title,
-  note,
-}: {
-  no: string;
-  href: string;
-  title: string;
-  note: string;
-}) {
-  return (
-    <Link
-      href={href}
-      className="flex items-center gap-4 p-4 border border-line/60 hover:border-gold/50 hover:bg-slate/30 transition-colors group"
-    >
-      <span className="font-mono text-gold/70 text-[10px] tracking-[0.3em] shrink-0 w-14">
-        {no}
-      </span>
-      <span className="flex-1 min-w-0">
-        <span className="block text-bone text-base sm:text-lg font-light tracking-tight group-hover:text-gold transition-colors">
-          {title}
-        </span>
-        <span className="block font-mono text-mute/70 text-[10px] tracking-[0.2em] mt-1">
-          {note}
-        </span>
-      </span>
-      <span
-        className="font-mono text-mute/60 text-[10px] tracking-[0.2em] shrink-0 group-hover:text-gold/70 transition-colors"
-        aria-hidden="true"
-      >
-        →
-      </span>
-    </Link>
-  );
-}
-
-// ── 路線圖的一階(時間線式 · 左側金線 + 階段點 · 已走過=金實心、未走=描邊)─────────
-// done = 你已經走過(暗、實心點)· gold = 畢業階(金線金點)· links = 該階的真實去處(閉環到動作)。
-function PathStage({
-  no,
-  title,
-  children,
-  links,
-  done = false,
-  gold = false,
-}: {
-  no: string;
-  title: string;
-  children: React.ReactNode;
-  links?: { cta: string; href: string }[];
-  done?: boolean;
-  gold?: boolean;
-}) {
-  return (
-    <div
-      className={`relative pl-8 pb-9 border-l last:pb-0 ${
-        gold ? "border-gold/45" : "border-line/50"
-      }`}
-    >
-      {/* 階段點 */}
-      <span
-        className={`absolute -left-[6px] top-1 w-[11px] h-[11px] rounded-full border ${
-          done
-            ? "bg-gold/70 border-gold/70"
-            : gold
-              ? "bg-navy border-gold"
-              : "bg-navy border-mute/70"
-        }`}
-        aria-hidden="true"
-      />
-      <div className="flex items-baseline gap-3 flex-wrap mb-1.5">
-        <span
-          className={`font-mono text-[10px] tracking-[0.3em] ${
-            done ? "text-mute/60" : "text-gold"
-          }`}
-        >
-          {no}
-        </span>
-        {done && (
-          <span className="font-mono text-mute/45 text-[9px] tracking-[0.25em]">
-            你已經走過
-          </span>
-        )}
-      </div>
-      <h3
-        className={`text-lg sm:text-xl font-light tracking-tight mb-2 ${
-          done ? "text-mute" : "text-bone"
-        }`}
-      >
-        {title}
-      </h3>
-      <p className="text-mute text-sm leading-relaxed max-w-xl">{children}</p>
-      {links && links.length > 0 && (
-        <div className="mt-3 flex flex-col gap-1.5 items-start">
-          {links.map((l) => (
-            <Link
-              key={l.href}
-              href={l.href}
-              className="font-mono text-gold/85 hover:text-gold text-[11px] tracking-[0.2em] underline-offset-4 hover:underline transition-colors"
-            >
-              {l.cta}
-            </Link>
-          ))}
-        </div>
-      )}
-    </div>
-  );
-}

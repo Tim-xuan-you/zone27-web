@@ -276,18 +276,6 @@ export default async function Home() {
           />
         )}
 
-        {/* ── 三步玩法 · 圖示卡(child-level · 圖取代字)──── */}
-        <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-14 border-t border-line/40 pt-12">
-          <p className="font-mono text-gold text-[10px] sm:text-[11px] tracking-[0.45em] mb-6">
-            / 三步玩法
-          </p>
-          <div className="grid grid-cols-3 gap-3 sm:gap-4">
-            <IconCard href="/matches" title="押一邊" sub="選你看好的隊" icon={<BetIcon />} />
-            <IconCard href="/ladder" title="爬天梯" sub="準的往上爬" icon={<LadderIcon />} />
-            <IconCard href="/calibration" title="看準度" sub="引擎準不準公開" icon={<TargetIcon />} />
-          </div>
-        </section>
-
         {/* ── 信任 chips(✓ 取代一串字)+ 深度頁 ───────── */}
         <section className="mx-auto max-w-3xl px-6 sm:px-10 pb-16 text-center border-t border-line/40 pt-10">
           <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-2.5">
@@ -391,36 +379,6 @@ function RailPct({
   );
 }
 
-// 三步玩法的圖示卡 · 圖 + 兩三個字 · 不放句子(child-level glance)
-function IconCard({
-  href,
-  title,
-  sub,
-  icon,
-}: {
-  href: string;
-  title: string;
-  sub: string;
-  icon: ReactNode;
-}) {
-  return (
-    <Link
-      href={href}
-      className="flex flex-col items-center text-center gap-2 p-3 sm:p-5 border border-line/60 bg-slate/30 hover:border-gold/40 hover:bg-slate/40 transition-colors group"
-    >
-      <span className="text-gold/80 group-hover:text-gold transition-colors">
-        {icon}
-      </span>
-      <span className="text-bone text-sm sm:text-base font-light tracking-tight leading-snug">
-        {title}
-      </span>
-      <span className="text-mute/70 text-[10px] sm:text-xs leading-tight">
-        {sub}
-      </span>
-    </Link>
-  );
-}
-
 // 信任承諾 chip · ✓ + 短詞 · 取代一整串「不…不…不…」
 function PromiseChip({ children, href }: { children: ReactNode; href?: string }) {
   const base =
@@ -447,60 +405,6 @@ function PromiseChip({ children, href }: { children: ReactNode; href?: string })
     </Link>
   ) : (
     <span className={base}>{inner}</span>
-  );
-}
-
-// ── 乾淨幾何線圖示(非可愛 emoji · 守品牌:量化分析師不是博彩公司)──
-function BetIcon() {
-  return (
-    <svg
-      width="30"
-      height="30"
-      viewBox="0 0 32 32"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      aria-hidden="true"
-    >
-      <rect x="3" y="12" width="26" height="8" rx="4" />
-      <line x1="16" y1="9" x2="16" y2="23" />
-    </svg>
-  );
-}
-
-function LadderIcon() {
-  return (
-    <svg
-      width="30"
-      height="30"
-      viewBox="0 0 32 32"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      strokeLinejoin="round"
-      strokeLinecap="round"
-      aria-hidden="true"
-    >
-      <path d="M4 27 h6 v-6 h6 v-6 h6 v-6 h4" />
-    </svg>
-  );
-}
-
-function TargetIcon() {
-  return (
-    <svg
-      width="30"
-      height="30"
-      viewBox="0 0 32 32"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      aria-hidden="true"
-    >
-      <circle cx="16" cy="16" r="11" />
-      <circle cx="16" cy="16" r="5.5" />
-      <circle cx="16" cy="16" r="1.5" fill="currentColor" stroke="none" />
-    </svg>
   );
 }
 
