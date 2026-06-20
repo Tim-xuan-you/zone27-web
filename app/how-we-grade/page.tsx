@@ -1,7 +1,6 @@
 import Link from "next/link";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
-import RelatedReading from "@/components/RelatedReading";
 import CopyLinkButton from "@/components/CopyLinkButton";
 import FounderSignOff from "@/components/FounderSignOff";
 import {
@@ -191,7 +190,6 @@ export default function HowWeGradePage() {
           </div>
         </section>
 
-        <RelatedReading currentPath="/how-we-grade" />
       </main>
 
       <Footer />

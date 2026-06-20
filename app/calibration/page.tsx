@@ -2,7 +2,6 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
-import RelatedReading from "@/components/RelatedReading";
 import CopyLinkButton from "@/components/CopyLinkButton";
 import PatronAsk from "@/components/PatronAsk";
 import SportToggle from "@/components/SportToggle";
@@ -310,8 +309,6 @@ export default function CalibrationPublicPage() {
             }
           />
         </section>
-
-        <RelatedReading currentPath="/calibration" />
       </main>
 
       <Footer />

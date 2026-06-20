@@ -2,7 +2,6 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
-import RelatedReading from "@/components/RelatedReading";
 
 export const metadata: Metadata = {
   title: "FAQ — 預先掃雷的 15 個問題",
@@ -27,7 +26,7 @@ type Category = {
 const CATEGORIES: Category[] = [
   {
     key: "about",
-    label: "ABOUT ZONE 27",
+    label: "關於 ZONE 27",
     zh: "關於 ZONE 27",
     qas: [
       {
@@ -93,7 +92,7 @@ const CATEGORIES: Category[] = [
   },
   {
     key: "pricing",
-    label: "BLACK & PRICING",
+    label: "BLACK 會員 / 定價",
     zh: "BLACK 會員 / 定價",
     qas: [
       {
@@ -146,7 +145,7 @@ const CATEGORIES: Category[] = [
   },
   {
     key: "ai",
-    label: "AI MODEL",
+    label: "AI 模型",
     zh: "AI 模型",
     qas: [
       {
@@ -179,7 +178,7 @@ const CATEGORIES: Category[] = [
   },
   {
     key: "privacy",
-    label: "PRIVACY",
+    label: "隱私",
     zh: "隱私",
     qas: [
       {
@@ -243,7 +242,7 @@ export default function FaqPage() {
       {/* ── HERO ─────────────────────────────────── */}
       <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pt-20 pb-12 text-center">
         <p className="font-mono text-gold text-[10px] tracking-[0.45em] mb-8">
-          FAQ · {TOTAL_QAS} HONEST ANSWERS
+          常見問題 · {TOTAL_QAS} 個誠實回答
         </p>
         <h1 className="text-4xl sm:text-5xl md:text-6xl font-light leading-[1.1] tracking-tight text-bone">
           預先掃雷的
@@ -295,10 +294,7 @@ export default function FaqPage() {
             <span className="font-mono text-gold/70 text-[10px] tracking-[0.35em]">
               / {String(ci + 1).padStart(2, "0")}
             </span>
-            <span
-              lang="en"
-              className="font-mono text-mute text-[10px] tracking-[0.35em]"
-            >
+            <span className="font-mono text-mute text-[10px] tracking-[0.35em]">
               {c.label}
             </span>
           </div>
@@ -320,12 +316,10 @@ export default function FaqPage() {
         </section>
       ))}
 
-      <RelatedReading currentPath="/faq" />
-
       {/* ── FINAL CTA ────────────────────────────── */}
       <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 py-16 text-center border-t border-line/40">
         <p className="font-mono text-gold text-[10px] tracking-[0.4em] mb-6">
-          STILL NOT SURE?
+          還是不確定?
         </p>
         <h3 className="text-3xl text-bone font-light tracking-tight">
           打開 Lab,親手跑一場。

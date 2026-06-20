@@ -2,7 +2,6 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
-import RelatedReading from "@/components/RelatedReading";
 import CopyLinkButton from "@/components/CopyLinkButton";
 import {
   matches,
@@ -139,8 +138,8 @@ export default function TrackRecordPage() {
 
       {/* LEDGER · 含輸帳本(跨聯盟 · 新→舊 · 不刪不修飾) */}
       <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-16">
-        <p lang="en" className="font-mono text-gold/70 text-[10px] tracking-[0.35em] mb-3">
-          / LEDGER · NEWEST FIRST · 不刪不修飾
+        <p className="font-mono text-gold/70 text-[10px] tracking-[0.35em] mb-3">
+          / 帳本 · 最新在最上面 · 不刪不修飾
         </p>
         {finalized.length === 0 ? (
           <div className="border border-dashed border-gold/30 bg-slate/30 p-10 text-center">
@@ -199,10 +198,9 @@ export default function TrackRecordPage() {
         {/* ── HERO · 先給數字(含分母)· 不寫字解釋「我們多誠實」──────── */}
         <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pt-20 pb-10">
           <p
-            lang="en"
             className="font-mono text-gold text-[10px] tracking-[0.45em] mb-4"
           >
-            / TRACK RECORD · 公開戰績 · 棒球與足球 · 同一套誠實
+            / 公開戰績 · 棒球與足球 · 同一套誠實
           </p>
           <h1 className="text-4xl sm:text-5xl text-bone font-light tracking-tight max-w-3xl">
             每一場引擎的公開預測 · 賽後實際結果在這
@@ -285,8 +283,6 @@ export default function TrackRecordPage() {
         {/* ── 分析師看法 · 人類賽道(R239)· 引擎是招牌 · 這條是旁邊的人(3 位平權分析師 ·
             引擎沒覆蓋的球由人賽前鎖定)· 同一套誠實規則 · graceful(沒鎖手 → 只介紹不掛空盒)。 */}
         <AnalystPanel />
-
-        <RelatedReading currentPath="/track-record" />
 
         <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-24 text-center">
           <Link

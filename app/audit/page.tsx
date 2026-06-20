@@ -3,7 +3,6 @@ import type { Metadata } from "next";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import CopyLinkButton from "@/components/CopyLinkButton";
-import RelatedReading from "@/components/RelatedReading";
 import StatTerm from "@/components/StatTerm";
 import ReadingProgress from "@/components/ReadingProgress";
 import { matches, getFinalizedMatches } from "@/lib/matches";
@@ -69,13 +68,12 @@ export default function AuditPage() {
               source URL + print date so the artifact survives as
               a snapshot. Bloomberg/Reuters/internal-report pattern. */}
           <div
-            lang="en"
-            className="print-only mb-6 pb-3 border-b border-line/60 font-mono text-[10px] uppercase tracking-[0.2em]"
+            className="print-only mb-6 pb-3 border-b border-line/60 font-mono text-[10px] tracking-[0.2em]"
           >
             <div className="flex justify-between gap-4">
-              <span>ZONE 27 — MODEL REPORT {PRODUCT_VERSION}</span>
+              <span>ZONE 27 · 引擎說明書 {PRODUCT_VERSION}</span>
               <span>
-                PRINTED · zone27-web.vercel.app/audit
+                列印自 zone27-web.vercel.app/audit
               </span>
             </div>
           </div>
@@ -84,16 +82,14 @@ export default function AuditPage() {
           <header className="pb-10 border-b border-line/60">
             <div className="flex items-baseline justify-between gap-4 mb-6 flex-wrap">
               <p
-                lang="en"
                 className="font-mono text-gold text-[10px] tracking-[0.45em]"
               >
-                MODEL REPORT
+                引擎說明書
               </p>
               <p
-                lang="en"
                 className="font-mono text-mute text-[10px] tracking-[0.35em] tabular"
               >
-                REPORT {PRODUCT_VERSION}
+                版本 {PRODUCT_VERSION}
               </p>
             </div>
             <h1 className="text-4xl sm:text-5xl text-bone font-light tracking-tight leading-[1.1] mb-3">
@@ -105,14 +101,14 @@ export default function AuditPage() {
             </p>
 
             <dl className="grid grid-cols-3 gap-x-6 gap-y-4 font-mono text-[11px] tracking-[0.05em]">
-              <MetaPair label="LAST REVIEWED" value={LAST_REVIEWED} />
-              <MetaPair label="ENGINE" value={ENGINE_VERSION} />
-              <MetaPair label="SAMPLE SIZE" value={sampleSize} />
+              <MetaPair label="最後檢查" value={LAST_REVIEWED} />
+              <MetaPair label="引擎版本" value={ENGINE_VERSION} />
+              <MetaPair label="累積場數" value={sampleSize} />
             </dl>
           </header>
 
           {/* ── 01 MODEL DESCRIPTION ────────────────── */}
-          <ReportSection no="01" label="MODEL DESCRIPTION">
+          <ReportSection no="01" label="引擎是什麼">
             <P>
               ZONE 27 的引擎是逐打席對決模型,用於估算棒球比賽
               的勝率分布。每場虛擬比賽模擬 9 局共 ~70 個獨立打席,每個打席依
@@ -134,7 +130,7 @@ export default function AuditPage() {
           </ReportSection>
 
           {/* ── 02 INPUTS WE USE ─────────────────────── */}
-          <ReportSection no="02" label="INPUTS WE USE">
+          <ReportSection no="02" label="我們用了哪些資料">
             <P>下列輸入會直接影響模型輸出:</P>
             <List>
               <Item label="K/9">
@@ -165,10 +161,9 @@ export default function AuditPage() {
                 applied correctly = it BECOMES the trust artifact. */}
             <div className="mt-6 border border-loss/30 bg-loss/5 p-5 sm:p-6">
               <p
-                lang="en"
                 className="font-mono text-loss text-[10px] tracking-[0.4em] mb-3"
               >
-                ▲ ESTIMATION DISCLOSURE
+                ▲ 這些數字是估出來的
               </p>
               <p className="text-mute text-sm leading-relaxed">
                 CPBL 官網 cpbl.com.tw 不公開投手每打席等級的 K/9 · BB/9 ·
@@ -186,10 +181,9 @@ export default function AuditPage() {
                「都是字」 mandate · 同 R90 /track-record STAT LITERACY axis。 */}
             <div className="mt-6 border border-gold/40 bg-gold/5 p-5 sm:p-6">
               <p
-                lang="en"
                 className="font-mono text-gold text-[10px] tracking-[0.4em] mb-3"
               >
-                ✦ ADVANCED INPUTS · TRACKMAN RADAR 整合
+                ✦ 進階數據 · 整合官方 Trackman 雷達
               </p>
               <p className="text-mute text-sm leading-relaxed">
                 整合{" "}
@@ -206,7 +200,7 @@ export default function AuditPage() {
               <Link href="/methodology" className="text-gold hover:underline">
                 /methodology
               </Link>{" "}
-              第 03 節 WHAT&apos;S NEXT。
+              第 03 節「接下來要做的」。
             </P>
           </ReportSection>
 
@@ -224,7 +218,7 @@ export default function AuditPage() {
               Removed S04 entirely · removed shareablequote referencing
               「刻意排除的 10 個輸入」 since that number is no longer
               prominent. Renumbered subsequent sections. */}
-          <ReportSection no="03" label="ENGINE SCOPE">
+          <ReportSection no="03" label="引擎算到哪裡">
             <P>
               引擎 v0.2 涵蓋投手三項基礎指標(<StatTerm term="K/9" /> · <StatTerm term="BB/9" /> · <StatTerm term="HR/9" />)
               推導每打席結果。範圍外的事項 — 訪客可在判讀時加上自己直觀調整:
@@ -334,7 +328,7 @@ export default function AuditPage() {
           {/* ── 08 Z27 LEXICON · R168 W1 port from deleted /glossary · 5 brand
               IP terms used across site · anchor targets for /audit#proved /
               /audit#diverged / /audit#sample-debt / /audit#z27-lexicon。 */}
-          <ReportSection no="08" label="Z27 LEXICON">
+          <ReportSection no="08" label="名詞解釋">
             <P>
               5 個 ZONE 27 自己的用語 · 在公開戰績、首頁、賽事頁、/audit 各處出現 ·
               完整定義在這裡。
@@ -390,7 +384,7 @@ export default function AuditPage() {
           {/* ── FOOTER NOTE ───────────────────────── */}
           <footer className="pt-12 mt-12 border-t border-line/60">
             <p className="font-mono text-mute text-[11px] tracking-[0.25em] mb-6">
-              VERIFY THIS REPORT
+              自己驗證這份說明
             </p>
             <ul className="space-y-3 text-sm text-mute leading-relaxed">
               <li>
@@ -439,8 +433,6 @@ export default function AuditPage() {
             </div>
           </footer>
         </article>
-
-        <RelatedReading currentPath="/audit" />
       </main>
 
       <Footer />

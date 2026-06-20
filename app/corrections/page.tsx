@@ -2,7 +2,6 @@ import Link from "next/link";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import ReadingProgress from "@/components/ReadingProgress";
-import RelatedReading from "@/components/RelatedReading";
 import { createPageMetadata } from "@/lib/page-og";
 import { CORRECTIONS, type Correction } from "@/lib/corrections";
 
@@ -36,7 +35,7 @@ export default function CorrectionsPage() {
         {/* ── HERO ─────────────────────────────────── */}
         <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pt-20 pb-12">
           <p className="font-mono text-gold text-[10px] tracking-[0.45em] mb-6">
-            CORRECTIONS · 我們搞砸過的事
+            我們搞砸過的事
           </p>
           <h1
             className="text-4xl sm:text-5xl text-bone font-light tracking-tight leading-tight mb-4"
@@ -100,8 +99,6 @@ export default function CorrectionsPage() {
             </Link>
           </div>
         </section>
-
-        <RelatedReading currentPath="/corrections" />
       </main>
 
       <Footer />

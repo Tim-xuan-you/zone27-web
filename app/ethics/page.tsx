@@ -2,7 +2,6 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
-import RelatedReading from "@/components/RelatedReading";
 import ReadingProgress from "@/components/ReadingProgress";
 
 export const metadata: Metadata = {
@@ -88,16 +87,14 @@ export default function EthicsPage() {
         <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pt-20 pb-12">
           <div className="flex items-baseline gap-3 mb-4 flex-wrap section-reveal">
             <p
-              lang="en"
               className="font-mono text-gold text-[10px] tracking-[0.45em]"
             >
-              / ETHICS POLICY · 9 binding NOT-DO commitments
+              / 我們永遠不做的 9 件事
             </p>
             <span
-              lang="en"
               className="font-mono text-[9px] tracking-[0.3em] px-1.5 py-0.5 border border-gold/60 text-gold"
             >
-              9 LINE · SIGNED · BINDING
+              9 條 · Tim 簽名
             </span>
           </div>
           <h1 className="text-4xl sm:text-5xl text-bone font-light tracking-tight max-w-3xl leading-[1.1]">
@@ -114,10 +111,9 @@ export default function EthicsPage() {
         {/* ── 01 COMMITMENTS ───────────────────────── */}
         <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-16">
           <p
-            lang="en"
             className="font-mono text-gold text-[10px] tracking-[0.45em] mb-6"
           >
-            / 01 · 9 COMMITMENTS · 簽 Tim · 2026-05-23
+            / 9 條承諾 · Tim 簽名 · 2026-05-23
           </p>
 
           <ol className="space-y-6">
@@ -134,7 +130,6 @@ export default function EthicsPage() {
                     {c.num}
                   </span>
                   <span
-                    lang="en"
                     className={`font-mono text-[9px] tracking-[0.3em] px-1.5 py-0.5 border ${
                       c.tier === "displacement"
                         ? "border-gold/60 text-gold"
@@ -142,10 +137,10 @@ export default function EthicsPage() {
                     }`}
                   >
                     {c.tier === "displacement"
-                      ? "DISPLACEMENT"
+                      ? "取代明牌"
                       : c.tier === "subscriber"
-                      ? "SUBSCRIBER PROTECT"
-                      : "BRAND"}
+                      ? "保護會員"
+                      : "品牌信用"}
                   </span>
                 </div>
                 <h3 className="text-bone text-lg sm:text-xl font-light tracking-tight mb-3 leading-snug">
@@ -215,16 +210,14 @@ export default function EthicsPage() {
         >
           <div className="flex items-baseline gap-4 mb-2">
             <span
-              lang="en"
               className="font-mono text-gold/70 text-[10px] tracking-[0.35em]"
             >
               / 單人風險
             </span>
             <span
-              lang="en"
               className="font-mono text-mute text-[10px] tracking-[0.35em]"
             >
-              CONTINGENCY · TIM 失蹤了
+              萬一 Tim 不在了
             </span>
           </div>
           <h2 className="text-3xl text-bone font-light tracking-tight mb-6">
@@ -271,18 +264,15 @@ export default function EthicsPage() {
           </ul>
         </section>
 
-        <RelatedReading currentPath="/ethics" />
-
         {/* ── FINAL CTA ────────────────────────────── */}
         <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 py-16 text-center border-t border-line/40">
           <p
-            lang="en"
             className="font-mono text-gold text-[10px] tracking-[0.4em] mb-6"
           >
-            ETHICS IS PHYSICS · NOT MARKETING.
+            這是規矩 · 不是行銷話術。
           </p>
           <h3 className="text-3xl text-bone font-light tracking-tight mb-4">
-            9 條 binding · 0 wiggle room · 0 fine print。
+            9 條說到做到 · 沒有模糊空間 · 沒有小字。
           </h3>
           {/* Round 51 W-C · Agent 3 HIGH #6 fix · /ethics 缺 conversion
               CTA at page end · 讀完 9 commitments 訪客是 strongest possible
@@ -302,10 +292,9 @@ export default function EthicsPage() {
             </Link>
           </div>
           <p
-            lang="en"
             className="font-mono text-mute/85 text-[10px] tracking-[0.35em] mb-6"
           >
-            OR DIG DEEPER ·
+            或繼續深入了解 ·
           </p>
           <div className="flex flex-wrap justify-center gap-3">
             <Link
@@ -318,7 +307,7 @@ export default function EthicsPage() {
               href="/coverage"
               className="inline-block px-6 py-3 border border-gold/50 text-gold font-mono text-[10px] tracking-[0.3em] hover:bg-gold/10 transition-colors"
             >
-              → /coverage NEVER list
+              → /coverage 我們不碰的清單
             </Link>
           </div>
         </section>

@@ -1,7 +1,6 @@
 import Link from "next/link";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
-import RelatedReading from "@/components/RelatedReading";
 import { createPageMetadata } from "@/lib/page-og";
 
 export const metadata = createPageMetadata({
@@ -24,7 +23,7 @@ export default function TermsPage() {
       {/* ── HERO ─────────────────────────────────── */}
       <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pt-20 pb-12 text-center">
         <p className="font-mono text-gold text-[10px] tracking-[0.45em] mb-8">
-          TERMS OF SERVICE · MAY 2026 · UPDATED 2026-05-20
+          服務條款 · 2026 年 5 月更新
         </p>
         <h1 className="text-4xl sm:text-5xl md:text-6xl font-light leading-[1.1] tracking-tight text-bone">
           我們的<span className="text-gold">承諾</span>。
@@ -40,7 +39,7 @@ export default function TermsPage() {
       <div className="mx-auto w-32 gold-line mb-12" />
 
       {/* ── 01 ABOUT ─────────────────────────────── */}
-      <Section no="01" label="ABOUT THE SERVICE" zh="關於本服務">
+      <Section no="01" label="關於本服務" zh="關於本服務">
         <p>
           ZONE 27 是一個棒球進階數據與 AI 預測模型的資訊社群平台。
           目前由創辦人 Tim(Tim-xuan-you)以個人名義經營,尚未公司化。
@@ -56,7 +55,7 @@ export default function TermsPage() {
       </Section>
 
       {/* ── 02 ELIGIBILITY ──────────────────────── */}
-      <Section no="02" label="ELIGIBILITY" zh="使用資格">
+      <Section no="02" label="使用資格" zh="使用資格">
         <p>
           您必須年滿 <strong className="text-bone">18 歲</strong>(中華民國民法成年年齡)才能使用本服務的會員功能。
           純看內容(讀文章、到實驗室看引擎跑模擬)不受此限。
@@ -64,7 +63,7 @@ export default function TermsPage() {
       </Section>
 
       {/* ── 03 PRE-LAUNCH STATUS ────────────────── */}
-      <Section no="03" label="PRE-LAUNCH STATUS" zh="Pre-launch 階段聲明">
+      <Section no="03" label="還在準備階段" zh="還在準備階段">
         <p>
           本網站目前還沒正式開賣,<strong className="text-bone">還在準備階段</strong>。意思是:
         </p>
@@ -77,7 +76,7 @@ export default function TermsPage() {
       </Section>
 
       {/* ── 04 BLACK WAITLIST ─────────────── */}
-      <Section no="04" label="BLACK WAITLIST" zh="BLACK 等候名單 / 訂閱聲明">
+      <Section no="04" label="BLACK 等候名單" zh="BLACK 等候名單 / 訂閱聲明">
         <p>
           您加入會員 waitlist 時,請理解以下事項:
         </p>
@@ -123,7 +122,7 @@ export default function TermsPage() {
           legal-findable location · brand IP「方法公開」 延伸到 refund
           terms · 不藏。 Section labeled 「4B」 to avoid renumbering 05-09
           downstream sections · low-risk inline amplification。 */}
-      <Section no="4B" label="REFUND POLICY" zh="退款條款 · Taiwan 消保法 § 19">
+      <Section no="4B" label="退款條款" zh="退款條款 · 消保法 § 19">
         <p>
           中華民國消費者保護法 § 19 規定:消費者透過郵購、網購、訪問交易等
           通訊交易方式所為的商品或服務契約 · 享有自接受商品或服務 <strong className="text-bone">至少
@@ -177,7 +176,7 @@ export default function TermsPage() {
       </Section>
 
       {/* ── 05 AI DISCLAIMER ────────────────────── */}
-      <Section no="05" label="AI DISCLAIMER" zh="AI 預測免責">
+      <Section no="05" label="AI 預測免責" zh="AI 預測免責">
         <p>
           ZONE 27 提供的 AI 模擬、勝率分布、比分預測,本質上為:
         </p>
@@ -203,7 +202,7 @@ export default function TermsPage() {
       </Section>
 
       {/* ── 06 ACCEPTABLE USE ───────────────────── */}
-      <Section no="06" label="ACCEPTABLE USE" zh="合理使用">
+      <Section no="06" label="合理使用" zh="合理使用">
         <p>使用本網站時,您同意:</p>
         <ul className="space-y-3">
           <li>▸ 不對伺服器發送惡意請求(DDoS、暴力枚舉、注入攻擊)</li>
@@ -217,7 +216,7 @@ export default function TermsPage() {
       </Section>
 
       {/* ── 07 INTELLECTUAL PROPERTY ────────────── */}
-      <Section no="07" label="INTELLECTUAL PROPERTY" zh="智慧財產權">
+      <Section no="07" label="智慧財產權" zh="智慧財產權">
         <p>
           ZONE 27 品牌名稱、設計、視覺系統、所有文案,皆為 Tim Hsu(Tim-xuan-you)
           所有,保留全部權利。
@@ -237,7 +236,7 @@ export default function TermsPage() {
       </Section>
 
       {/* ── 08 LIABILITY LIMITS ─────────────────── */}
-      <Section no="08" label="LIABILITY LIMITS" zh="責任限制">
+      <Section no="08" label="責任限制" zh="責任限制">
         <p>
           在台灣法律允許範圍內,ZONE 27、創辦人、及未來可能成立的公司實體,
           對於以下情況概不負責:
@@ -254,7 +253,7 @@ export default function TermsPage() {
       </Section>
 
       {/* ── 09 CHANGES + GOVERNING LAW ──────────── */}
-      <Section no="09" label="CHANGES + GOVERNING LAW" zh="條款變更與管轄法律">
+      <Section no="09" label="條款變更與管轄法律" zh="條款變更與管轄法律">
         <p>
           本服務條款可能隨產品演進而調整。所有重大變更都會提前公開公告。
           您繼續使用本網站即視為同意修訂後條款。
@@ -268,7 +267,7 @@ export default function TermsPage() {
       {/* ── FINAL ───────────────────────────────── */}
       <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 py-16 text-center border-t border-line/40">
         <p className="font-mono text-gold text-[10px] tracking-[0.4em] mb-6">
-          TERMS EFFECTIVE 2026 · 05 · 20 · SUPABASE MIGRATION
+          條款自 2026 年 5 月 20 日生效
         </p>
         <p className="text-mute leading-relaxed max-w-md mx-auto">
           如有疑問請寫信給{" "}
@@ -287,11 +286,6 @@ export default function TermsPage() {
           閱讀隱私政策 →
         </Link>
       </section>
-
-      {/* Round 52 W-A · Agent 3 #7 fix · /terms 之前 ORPHAN · 無 sibling
-          links · 加 RelatedReading 連到 /ethics + /privacy + /coverage
-          完成 trust artifact connective tissue。 */}
-      <RelatedReading currentPath="/terms" />
 
       </main>
 

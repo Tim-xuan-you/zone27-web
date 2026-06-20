@@ -4,8 +4,6 @@ import { PRODUCT_VERSION } from "@/lib/build-meta";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import CopyLinkButton from "@/components/CopyLinkButton";
-import RelatedReading from "@/components/RelatedReading";
-import ReadingProgress from "@/components/ReadingProgress";
 
 export const metadata: Metadata = {
   title: "Coverage — 我們覆蓋哪些賽事 · 為什麼不覆蓋全部",
@@ -74,27 +72,24 @@ export default function CoveragePage() {
   return (
     <div className="flex flex-col flex-1 min-h-screen">
       <Nav />
-      <ReadingProgress />
 
       <main id="main">
         <article className="mx-auto max-w-3xl w-full px-6 sm:px-10 pt-20 pb-12">
           <div
-            lang="en"
-            className="print-only mb-6 pb-3 border-b border-line/60 font-mono text-[10px] uppercase tracking-[0.2em]"
+            className="print-only mb-6 pb-3 border-b border-line/60 font-mono text-[10px] tracking-[0.2em]"
           >
             <div className="flex justify-between gap-4">
-              <span>ZONE 27 — COVERAGE LEDGER {PRODUCT_VERSION}</span>
-              <span>PRINTED · zone27-web.vercel.app/coverage</span>
+              <span>ZONE 27 — 我們覆蓋哪些比賽 {PRODUCT_VERSION}</span>
+              <span>zone27-web.vercel.app/coverage</span>
             </div>
           </div>
 
           {/* ── HEADER ──────────────────────────────── */}
           <header className="pb-10 border-b border-line/60">
             <p
-              lang="en"
               className="font-mono text-gold text-[10px] tracking-[0.45em] mb-6"
             >
-              COVERAGE LEDGER
+              我們覆蓋哪些比賽
             </p>
             <h1 className="text-4xl sm:text-5xl text-bone font-light tracking-tight leading-[1.1] mb-6">
               我們覆蓋哪些賽事 ·{" "}
@@ -108,8 +103,8 @@ export default function CoveragePage() {
 
           {/* ── ACTIVE LEAGUES ─────────────────────── */}
           <section className="py-12 border-b border-line/40 section-reveal">
-            <p lang="en" className="font-mono text-mute text-[10px] tracking-[0.45em] mb-4">
-              ACTIVE LEAGUES
+            <p className="font-mono text-mute text-[10px] tracking-[0.45em] mb-4">
+              現在跑的聯盟
             </p>
             <h2 className="text-2xl sm:text-3xl text-bone font-light tracking-tight mb-6">
               引擎已就緒,資料流動中
@@ -138,8 +133,6 @@ export default function CoveragePage() {
               <CopyLinkButton refTag="coverage-share" />
             </div>
           </section>
-
-          <RelatedReading currentPath="/coverage" />
         </article>
       </main>
 

@@ -1,7 +1,6 @@
 import Link from "next/link";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
-import RelatedReading from "@/components/RelatedReading";
 import StatTerm from "@/components/StatTerm";
 import { createPageMetadata } from "@/lib/page-og";
 
@@ -45,7 +44,7 @@ export default function LearnPage() {
         {/* ── HERO ─────────────────────────────────── */}
         <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pt-20 pb-12 text-center">
           <p className="font-mono text-gold text-[10px] tracking-[0.45em] mb-8">
-            6 分鐘入門 · BEFORE YOU INVEST AN HOUR
+            6 分鐘入門
           </p>
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-light leading-[1.1] tracking-tight text-bone">
             您不需要懂 Bill James
@@ -62,7 +61,7 @@ export default function LearnPage() {
         {/* ── CHAPTER 01 ───────────────────────────── */}
         <Chapter
           no="01"
-          en="WHY PROBABILITY"
+          en="為什麼用機率"
           zh="為什麼是「機率」,不是「鐵口直斷」"
           kicker="2 分鐘"
         >
@@ -95,7 +94,7 @@ export default function LearnPage() {
         {/* ── CHAPTER 02 ───────────────────────────── */}
         <Chapter
           no="02"
-          en="WHAT THE STATS MEAN"
+          en="這些數字是什麼意思"
           zh="3 個指標 · 看懂為什麼引擎信任它們"
           kicker="2 分鐘"
         >
@@ -142,7 +141,7 @@ export default function LearnPage() {
         {/* ── CHAPTER 03 · 沒有神準 → 指向校準 ─────── */}
         <Chapter
           no="03"
-          en="NOBODY IS PSYCHIC"
+          en="沒有人會通靈"
           zh="為什麼沒有「神準」這回事"
           kicker="1 分鐘"
           anchor="no-oracle"
@@ -158,8 +157,6 @@ export default function LearnPage() {
             note="當引擎說 67% · 實際發生幾成?賽前預測對上真實結果 · 命中落空都掛"
           />
         </Chapter>
-
-        <RelatedReading currentPath="/learn" />
       </main>
 
       <Footer />

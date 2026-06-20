@@ -1,6 +1,5 @@
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
-import RelatedReading from "@/components/RelatedReading";
 import MarketCard from "@/components/MarketCard";
 import { getOpenMarkets, getSettledMarkets } from "@/lib/markets";
 import { createPageMetadata } from "@/lib/page-og";
@@ -80,8 +79,6 @@ export default function MarketsPage() {
             </div>
           </section>
         )}
-
-        <RelatedReading currentPath="/markets" />
       </main>
 
       <Footer />
