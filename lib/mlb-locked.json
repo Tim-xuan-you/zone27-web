@@ -6680,8 +6680,12 @@
       },
       "engineWinHomePct": 37,
       "lockedAt": "2026-06-20T14:16:43.156Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 4,
+        "away": 1
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-06-20T19:46:14.098Z"
     },
     {
       "gamePk": 823532,
@@ -7376,6 +7380,35 @@
       },
       "engineWinHomePct": 49,
       "lockedAt": "2026-06-19T19:55:37.672Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 824585,
+      "gameDate": "2026-06-22T23:40:00Z",
+      "scheduleDate": "2026-06-22",
+      "homeId": 145,
+      "homeEn": "Chicago White Sox",
+      "homeRecord": "39-36",
+      "awayId": 114,
+      "awayEn": "Cleveland Guardians",
+      "awayRecord": "40-36",
+      "homePitcher": "Anthony Kay",
+      "awayPitcher": "Gavin Williams",
+      "homeStats": {
+        "era": "4.61",
+        "k9": "7.04",
+        "bb9": "3.58",
+        "hr9": "1.41"
+      },
+      "awayStats": {
+        "era": "3.83",
+        "k9": "10.11",
+        "bb9": "2.95",
+        "hr9": "1.47"
+      },
+      "engineWinHomePct": 45,
+      "lockedAt": "2026-06-20T19:46:13.638Z",
       "finalScore": null,
       "verdict": null
     }
