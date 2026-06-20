@@ -6655,6 +6655,35 @@
       "gradedAt": "2026-06-20T09:28:10.382Z"
     },
     {
+      "gamePk": 824263,
+      "gameDate": "2026-06-20T17:10:00Z",
+      "scheduleDate": "2026-06-20",
+      "homeId": 116,
+      "homeEn": "Detroit Tigers",
+      "homeRecord": "31-44",
+      "awayId": 145,
+      "awayEn": "Chicago White Sox",
+      "awayRecord": "39-35",
+      "homePitcher": "Troy Melton",
+      "awayPitcher": "Sean Newcomb",
+      "homeStats": {
+        "era": "2.81",
+        "k9": "4.91",
+        "bb9": "2.10",
+        "hr9": "1.75"
+      },
+      "awayStats": {
+        "era": "2.76",
+        "k9": "8.50",
+        "bb9": "2.34",
+        "hr9": "0.21"
+      },
+      "engineWinHomePct": 37,
+      "lockedAt": "2026-06-20T14:16:43.156Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
       "gamePk": 823532,
       "gameDate": "2026-06-20T17:35:00Z",
       "scheduleDate": "2026-06-20",
