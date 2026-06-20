@@ -33,6 +33,8 @@ export type TableCall = {
   engineModels: boolean;
   /** 無模型時的一句誠實註腳(為什麼引擎閉嘴) */
   engineNote?: string;
+  /** 賽後對帳的依據(秀做法:幾顆角球、幾分、誰進球 → 為什麼中/落空) */
+  resultNote?: string;
   /** 賽後對帳 · 預設 pending(待對帳) */
   result: CallResult;
 };
@@ -72,7 +74,8 @@ const TABLE: TableCall[] = [
     match: "雙城 vs 響尾蛇",
     call: "總分 大 8.5",
     engineModels: true,
-    result: "pending",
+    resultNote: "兩隊合計 14 分 · 過 8.5 → 命中",
+    result: "win",
   },
   {
     handle: "Ron",
@@ -80,7 +83,8 @@ const TABLE: TableCall[] = [
     match: "雙城 vs 響尾蛇",
     call: "響尾蛇 −1.5（讓分）",
     engineModels: true,
-    result: "pending",
+    resultNote: "響尾蛇贏 4 分 · 過 1.5 → 命中",
+    result: "win",
   },
   {
     handle: "Lewi",
@@ -89,7 +93,8 @@ const TABLE: TableCall[] = [
     call: "角球 大 9.5",
     engineModels: false,
     engineNote: "角球不在進球模型內 · 引擎不裝懂",
-    result: "pending",
+    resultNote: "角球 8 顆(海地 4 + 巴西 4)· 不到 9.5 → 落空",
+    result: "lose",
   },
   {
     handle: "Tim",
@@ -97,7 +102,8 @@ const TABLE: TableCall[] = [
     match: "澳洲 vs 美國",
     call: "總分 大 2.5",
     engineModels: true,
-    result: "pending",
+    resultNote: "全場 2 分 · 不到 2.5 → 落空",
+    result: "lose",
   },
   {
     handle: "Ron",
@@ -105,7 +111,8 @@ const TABLE: TableCall[] = [
     match: "澳洲 vs 美國",
     call: "兩隊都得分 · 是",
     engineModels: true,
-    result: "pending",
+    resultNote: "只有美國進球 · 非兩隊都進 → 落空",
+    result: "lose",
   },
 ];
 
@@ -114,7 +121,10 @@ export type TableSummary = {
   total: number;
   pending: number;
   settled: number;
+  win: number; // 命中幾注
+  lose: number; // 落空幾注(贏輸都掛 · 落空照亮)
   noModel: number; // 「無模型 · 只對帳」幾注(誠實克制的計數)
+  faces: string[]; // 不重複的人(給首頁頭像列 · 最多幾顆由 consumer 決定)
 };
 
 /** 取整桌 + 計數(graceful · 空桌也回得了)。 待對帳排前(這桌的「現在進行式」),已對帳排後。 */
@@ -127,11 +137,16 @@ export function getTableCalls(): TableSummary {
     void: 2,
   };
   const calls = [...TABLE].sort((a, b) => order[a.result] - order[b.result]);
+  const faces: string[] = [];
+  for (const c of TABLE) if (!faces.includes(c.handle)) faces.push(c.handle);
   return {
     calls,
     total: TABLE.length,
     pending: TABLE.filter((c) => c.result === "pending").length,
     settled: TABLE.filter((c) => c.result === "win" || c.result === "lose" || c.result === "push").length,
+    win: TABLE.filter((c) => c.result === "win").length,
+    lose: TABLE.filter((c) => c.result === "lose").length,
     noModel: TABLE.filter((c) => !c.engineModels).length,
+    faces,
   };
 }

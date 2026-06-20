@@ -104,6 +104,11 @@ export default function TablePage() {
                           {c.engineNote}
                         </p>
                       )}
+                      {c.resultNote && (
+                        <p className="mt-1 text-mute/75 text-[11px] leading-relaxed">
+                          {c.resultNote}
+                        </p>
+                      )}
                     </div>
                     <div className="shrink-0 flex flex-col items-end gap-1.5">
                       {/* 引擎欄:有模型 vs 無模型(誠實的沉默)· 🔴 不捏造機率數字 */}

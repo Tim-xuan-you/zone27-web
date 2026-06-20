@@ -8,6 +8,7 @@ import SoccerRecordCard from "@/components/SoccerRecordCard";
 import Avatar from "@/components/Avatar";
 import EngineThreeWayBar from "@/components/EngineThreeWayBar";
 import HomepagePulseStrip from "@/components/HomepagePulseStrip";
+import HomepageTableStrip from "@/components/HomepageTableStrip";
 import { getNationalCode } from "@/lib/soccer/teams";
 import {
   getTodayAndFutureMatches,
@@ -20,6 +21,7 @@ import {
 import { getMlbAsMatches, getMlbFinalizedResults } from "@/lib/mlb-matches";
 import { getMatchHeat, heatDisplayFor } from "@/lib/match-heat";
 import { getPulseSummary } from "@/lib/pulse";
+import { getTableCalls } from "@/lib/table-picks";
 import {
   getUpcomingWorldCupMatches,
   hasActiveWorldCup,
@@ -80,6 +82,9 @@ export default async function Home() {
 
   // ── 活動脈動精華(會動的前門)· 最近 N 人賽前鎖定 + 最新一手 ────────────────
   const pulseSummary = await getPulseSummary();
+
+  // ── 今晚這桌(誠實收據)· 真人賽前鎖的任意一注 + 賽後對帳成績(含落空)──────────
+  const tableSummary = getTableCalls();
 
   // ── 世界盃(四年一次的窗)· 引擎已賽前鎖死的場 ──────────────
   const wcUpcoming = getUpcomingWorldCupMatches(2);
@@ -250,6 +255,10 @@ export default async function Home() {
             <EmptyFloor />
           )}
         </section>
+
+        {/* ── 今晚這桌條 · 真人鎖的任意一注 + 賽後誠實對帳(含落空)→ /table ──
+            前門頭條「贏輸都掛」的真人實證 · 空桌 → 自動隱藏(graceful)。 */}
+        <HomepageTableStrip summary={tableSummary} />
 
         {/* ── 活動脈動條 · 會動的前門 · 最近 N 人賽前鎖定 → /pulse ──
             不到門檻 / 0 用戶 → 自動隱藏(graceful · 守首頁極簡)。 */}
