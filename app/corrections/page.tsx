@@ -103,13 +103,8 @@ export default function CorrectionsPage() {
             className="text-mute/85 text-sm leading-relaxed zh-body"
             style={{ fontFamily: "Georgia, serif", textWrap: "pretty" }}
           >
-            這頁跟{" "}
-            <Link href="/steelman" className="text-gold underline-offset-4 hover:underline">
-              /steelman
-            </Link>{" "}
-            是一對:那一頁講「我們<strong className="text-bone">可能</strong>哪裡錯」(還沒發生的假設),
-            這一頁講「我們<strong className="text-bone">已經</strong>錯過、已經認、已經修」(發生過的事實)。
-            前者是壓力測試,後者是帳本。
+            這一頁講「我們<strong className="text-bone">已經</strong>錯過、已經認、已經修」——
+            發生過的事實,不是可能哪裡錯的假設。 一本只增不刪的帳本。
           </p>
         </section>
 
@@ -152,16 +147,10 @@ export default function CorrectionsPage() {
         <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-4 text-center border-t border-line/40 pt-12">
           <div className="flex flex-wrap items-center justify-center gap-4">
             <Link
-              href="/steelman"
+              href="/track-record"
               className="font-mono text-mute hover:text-gold text-[10px] tracking-[0.4em] transition-colors"
             >
-              /steelman · 反對我們最強的論點 →
-            </Link>
-            <Link
-              href="/integrity"
-              className="font-mono text-mute hover:text-gold text-[10px] tracking-[0.4em] transition-colors"
-            >
-              /integrity · 永久不會變的事 →
+              /track-record · 每一場對錯 →
             </Link>
             <Link
               href="/audit"

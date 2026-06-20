@@ -863,8 +863,8 @@ repeat 10,000 times → aggregate
 
       <LongReadHandoff
         readingMin={6}
-        nextHref="/methodology/diff"
-        nextLabel="v0.2 → v0.3 entire delta · 14 unchanged + 1 new constant"
+        nextHref="/track-record"
+        nextLabel="公開戰績 · 引擎每場預測 vs 實際 · 連輸的也掛"
       />
 
       <FounderSignOff>

@@ -43,18 +43,28 @@ const nextConfig: NextConfig = {
     ],
   },
 
-  // ── 收合已刪的內部 voice / 重複頁(R199 Tim canary「極簡 · 砍多餘」)──
-  // 這些頁是「創辦人寫爽的長文 / 重複 git」· 沒人從頭看 · 已從 Cmd-K + footer 移除。
-  // 內容不是消失 —— 精華併進保留的頁(身分→/about · 路線→/roadmap · 方法→/methodology)。
-  // redirect 讓任何舊連結 / 書籤不 404 · permanent:false(可逆 · 反正 stealth 無 SEO)。
+  // ── 收合已刪的內部 voice / 重複頁(R199 + R255 Tim canary「極簡 · 大刀闊斧 · 砍解釋」)──
+  // 砍掉「解釋理念」的長文頁 —— 留「會給看」的證據頁(戰績/校準/認錯/audit/methodology)。
+  // redirect 讓任何舊連結 / 書籤 / 已寄出的信不 404 · permanent:false(可逆 · 反正 stealth 無 SEO)。
   async redirects() {
     const base = [
       { source: "/annual", destination: "/about", permanent: false },
       { source: "/annual/2026", destination: "/about", permanent: false },
       { source: "/founders/postmortem-2028", destination: "/founders", permanent: false },
       { source: "/hey-tim", destination: "/faq", permanent: false },
-      { source: "/now", destination: "/roadmap", permanent: false },
-      { source: "/changelog", destination: "/roadmap", permanent: false },
+      { source: "/now", destination: "/track-record", permanent: false },
+      { source: "/changelog", destination: "/track-record", permanent: false },
+      // R255 大刀闊斧 · 砍掉的「解釋理念」頁 → 對應的證據/survivor 頁(舊連結不 404)。
+      { source: "/manifesto", destination: "/track-record", permanent: false },
+      { source: "/discipline", destination: "/about", permanent: false },
+      { source: "/roadmap", destination: "/track-record", permanent: false },
+      { source: "/steelman", destination: "/corrections", permanent: false },
+      { source: "/integrity", destination: "/ethics", permanent: false },
+      { source: "/methodology/diff", destination: "/methodology", permanent: false },
+      { source: "/learn/reading-a-probability", destination: "/learn", permanent: false },
+      { source: "/learn/sample-size", destination: "/learn", permanent: false },
+      { source: "/learn/streaks", destination: "/learn", permanent: false },
+      { source: "/membership/black-card/ledger", destination: "/membership/black-card", permanent: false },
       // R250 · GOLD(founder 層)收掉 · 兩層併一層只留 BLACK · /founders 系列 → /membership。
       // 舊連結 / 已寄出的信 / 書籤都不 404,直接落到唯一付費頁。
       { source: "/founders", destination: "/membership", permanent: false },

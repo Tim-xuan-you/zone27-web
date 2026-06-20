@@ -91,12 +91,6 @@ export default function NotFound() {
             >
               公開戰績 →
             </Link>
-            <Link
-              href="/manifesto"
-              className="px-6 py-2.5 border border-line/60 text-mute hover:text-gold hover:border-gold/40 text-xs tracking-[0.3em] transition-colors"
-            >
-              倒置宣言 →
-            </Link>
           </div>
 
           {/* Secondary · for visitors who landed here from a stale share */}

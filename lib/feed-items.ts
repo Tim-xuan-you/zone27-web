@@ -150,14 +150,4 @@ export const FEED_ENTRIES: FeedEntry[] = [
     href: "/login",
     updated: "2026-05-22",
   },
-  {
-    id: "r50-w-a-methodology-diff",
-    title: "[R50 W-A] /methodology/diff · v0.2 → v0.3 entire delta · brand IP triple-fire",
-    summary:
-      "「Most prediction sites have 1 secret engine. We built 2 open ones.」 不止 claim 2 engines · ship 整份 v0.2 → v0.3 delta · 同 React.dev release notes / Stripe API changelog / Anthropic model card revision pattern。",
-    content:
-      "Tim 留空指令 → 鐵律 default ship NOW · 接 R50+ TODO 第 1 條。 7 sections:14 unchanged constants + 1 new(HR_PARK_SENSITIVITY = 0.5)+ 5 行 logic delta + 4 場館 worked example(新莊 ×0.9842 / 桃園 ×1.0316 / 大巨蛋 ×1.0105 / 澄清湖 ×1.0158)+ 6 件 v0.3 不修正 Pratfall list(BABIP / dimensions / weather / batter splits / DH / N≥30)+ v0.4 PRE-COMMIT + Lens Lifetime Pledge anchor。 brand IP triple-fire 同時 fire:Disclosure(publish entire delta)+ Pratfall(主動列 6 件 not-fixed)+ Costly Signaling(賣明牌的站結構性無法 ship 同頁)。 第 9 layer displacement moat vs 賣明牌的生意。",
-    href: "/methodology/diff",
-    updated: "2026-05-22",
-  },
 ];

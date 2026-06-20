@@ -462,8 +462,7 @@ export default function PrivacyPage() {
 
         <p className="mt-6 text-mute/85 text-sm">
           ▸ 完整 PDPA-compliant 承諾 同步顯示在 <Link href="/audit#disclosure" className="text-gold underline-offset-4 hover:underline">/audit DISCLOSURE block</Link>
-          + <Link href="/integrity" className="text-gold underline-offset-4 hover:underline">/integrity binding rules</Link>
-          · 任何修改都會 30 天前先公告(見 /audit S05 事先公開的承諾)。
+          · 任何修改都會 30 天前先公告。
         </p>
       </Section>
 
