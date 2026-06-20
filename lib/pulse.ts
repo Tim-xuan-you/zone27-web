@@ -215,8 +215,9 @@ export const HOMEPAGE_PULSE_MIN = 3; // 至少 3 個不重複的人才上首頁(
 export type PulseSummary = {
   /** 最近不重複的賽前鎖定人數(< HOMEPAGE_PULSE_MIN 時回 0 = 首頁不顯示) */
   lockerCount: number;
-  /** 最近不重複押注者永久碼(最新在前 · 給首頁頭像列 · 最多 maxAvatars 顆) */
-  avatars: string[];
+  /** 最近不重複押注者(最新在前 · 給首頁頭像列 · 最多 maxAvatars 顆)·
+   *  帶 handle 讓頭像字符 = 顯示名首字(同一人到哪都同一張臉 · 同 /pulse 牆)。 */
+  avatars: { code: string; handle: string }[];
   /** 最新一手(滾動的「牆在動」鉤子)· 0 鎖定 → null */
   latest: { handle: string; teamLabel: string } | null;
 };
@@ -229,14 +230,14 @@ export async function getPulseSummary(
 ): Promise<PulseSummary> {
   const locks = await getRecentLocks(scanLimit); // 全是 lock 事件 · created_at desc(最新在前)
   const seen = new Set<string>();
-  const avatars: string[] = [];
+  const avatars: PulseSummary["avatars"] = [];
   let latest: PulseSummary["latest"] = null;
   for (const e of locks) {
     if (e.kind !== "lock") continue;
     if (!latest) latest = { handle: e.handle, teamLabel: e.teamLabel }; // 第一筆 = 最新
     if (seen.has(e.authorCode)) continue;
     seen.add(e.authorCode);
-    if (avatars.length < maxAvatars) avatars.push(e.authorCode);
+    if (avatars.length < maxAvatars) avatars.push({ code: e.authorCode, handle: e.handle });
   }
   if (seen.size < HOMEPAGE_PULSE_MIN) return EMPTY_SUMMARY; // 不到門檻 → 首頁整塊隱藏
   return { lockerCount: seen.size, avatars, latest };

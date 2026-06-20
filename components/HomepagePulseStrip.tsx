@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Avatar from "@/components/Avatar";
+import { handleGlyph } from "@/lib/identity";
 import type { PulseSummary } from "@/lib/pulse";
 
 // ── ZONE 27 · 首頁活動脈動條(會動的前門)─────────────────────────────────
@@ -22,12 +23,12 @@ export default function HomepagePulseStrip({ summary }: { summary: PulseSummary 
           {/* 最近押注者頭像列(幾何身分 · 無紅綠)· navy 環分開疊放 */}
           {avatars.length > 0 && (
             <div className="flex shrink-0">
-              {avatars.map((code, i) => (
+              {avatars.map((a, i) => (
                 <span
-                  key={code}
+                  key={a.code}
                   className={`inline-flex rounded-[30%] ring-2 ring-navy ${i === 0 ? "" : "-ml-2"}`}
                 >
-                  <Avatar seed={code} size={26} />
+                  <Avatar seed={`#${a.code}`} glyph={handleGlyph(a.handle)} size={26} />
                 </span>
               ))}
             </div>

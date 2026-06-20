@@ -10,6 +10,7 @@ import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Avatar from "@/components/Avatar";
+import { handleGlyph } from "@/lib/identity";
 import type { LoungeMessage } from "@/lib/lounge";
 import {
   postLoungeMessage,
@@ -114,9 +115,16 @@ export default function LoungeRoom({
           <ul className="flex flex-col gap-4 list-none pl-0 m-0">
             {initialMessages.map((m) => (
               <li key={m.id} className="flex gap-3">
-                <Link href={`/u/${m.authorCode}`} className="shrink-0 mt-0.5">
-                  <Avatar seed={m.authorCode} size={34} supporter={m.supporter} />
-                </Link>
+                {/* 頭像 = 純裝飾(aria-hidden)· 不另外包連結:旁邊的名字已連同一個 /u/[code],
+                    重複的空連結對讀屏/鍵盤是噪音(無障礙 · WCAG 2.4.4)。 臉跟全站同一張:#碼衍生色 +
+                    顯示名首字(同 LeagueActivity/ProfileView · 同一人到哪都同一張臉)。 */}
+                <Avatar
+                  seed={`#${m.authorCode}`}
+                  glyph={handleGlyph(m.authorName)}
+                  size={34}
+                  supporter={m.supporter}
+                  className="shrink-0 mt-0.5"
+                />
                 <div className="min-w-0 flex-1">
                   <div className="flex items-baseline gap-2 flex-wrap">
                     <Link

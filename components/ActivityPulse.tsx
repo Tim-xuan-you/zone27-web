@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Avatar from "@/components/Avatar";
+import { handleGlyph } from "@/lib/identity";
 import { getMyFollowing, type FollowingResult } from "@/lib/follows-client";
 import type { PulseEvent } from "@/lib/pulse";
 
@@ -119,7 +120,11 @@ function PulseList({ events }: { events: PulseEvent[] }) {
             key={`l-${e.authorCode}-${e.matchId}-${i}`}
             className="flex items-start gap-3 py-3.5"
           >
-            <Avatar seed={e.authorCode} size={28} />
+            <Avatar
+              seed={`#${e.authorCode}`}
+              glyph={handleGlyph(e.handle)}
+              size={28}
+            />
             <div className="min-w-0 flex-1">
               <p className="text-bone text-sm leading-snug">
                 <Link

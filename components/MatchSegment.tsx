@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Avatar from "@/components/Avatar";
+import { handleGlyph } from "@/lib/identity";
 import type { SegmentLocker } from "@/lib/match-segment";
 
 // ── ZONE 27 · 誰賽前鎖了這場(per-match segment · Strava 式微競技場)──────────────
@@ -64,7 +65,11 @@ export default function MatchSegment({
           const correct = isCorrect(l.pick);
           return (
             <li key={`${l.authorCode}-${i}`} className="flex items-start gap-3 py-2.5">
-              <Avatar seed={l.authorCode} size={26} />
+              <Avatar
+                seed={`#${l.authorCode}`}
+                glyph={handleGlyph(l.handle)}
+                size={26}
+              />
               {/* 名字 + 理由同一欄(flex column)· 理由自然對齊頭像右側 = 不靠寫死的 ml(改頭像/間距也不歪)。 */}
               <div className="min-w-0 flex-1">
                 <div className="flex items-center gap-3">
