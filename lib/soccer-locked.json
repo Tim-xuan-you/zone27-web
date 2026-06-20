@@ -962,10 +962,13 @@
       "awayWinPct": 30,
       "enginePick": "home",
       "lockedAt": "2026-06-18T03:40:34.076Z",
-      "finalScore": null,
-      "outcome": null,
-      "verdict": null,
-      "gradedAt": null
+      "finalScore": {
+        "home": 0,
+        "away": 1
+      },
+      "outcome": "away",
+      "verdict": "diverged",
+      "gradedAt": "2026-06-20T08:51:48.038Z"
     },
     {
       "matchId": "fd-537359",
