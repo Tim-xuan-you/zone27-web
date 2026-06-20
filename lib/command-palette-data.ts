@@ -31,196 +31,103 @@ export type CommandItem = {
   /** Route path (internal) or full URL (external · opens new tab) */
   path: string;
   /** Group label · controls section ordering in palette */
-  group: "入門" | "賽事 · 引擎" | "證據 · 自己驗" | "轉換" | "工具 · 外部";
+  group: "看球 · 引擎" | "證據 · 帳號";
   /** Searchable aliases · Chinese + English + abbrev */
   keywords?: string[];
   external?: boolean;
 };
 
+// R255 大刀闊斧(Tim 第 7+ 次「還是超多 · 國小生想逛 · 極簡再極簡」)· 15 → 6。
+// 真正讓 Tim「沒感覺」的是這份快搜 + footer = 他每天看到的選單,不是被砍的深頁。
+// 快搜不是 sitemap,是「一個人真的會搜的 6 件事」。 被收起的頁(入門/faq/開盤/天梯/校準/認錯/
+// 個人頁)全留、footer/內文/直打網址/nav 到得了 · 關鍵字併進 survivor → 搜「校準/天梯/開盤/登入」
+// 仍落到對的頁、不漏搜。 護城河(戰績/校準/認錯頁本身)一頁沒動。
 export const COMMAND_ITEMS: CommandItem[] = [
-  // ── 入門 ───────────────────────────────────────────
+  // ── 看球 · 引擎 ────────────────────────────────────
   {
-    label: "首頁 · ZONE 27 主入口",
-    kicker: "/",
-    path: "/",
-    group: "入門",
-    keywords: ["home", "zone 27", "hero", "首頁", "主頁", "今晚"],
-  },
-  {
-    label: "5 分鐘入門 · 給沒聽過的人",
-    kicker: "/learn",
-    path: "/learn",
-    group: "入門",
-    keywords: ["learn", "primer", "bill james", "入門", "新手", "introduction", "怎麼玩", "怎麼用"],
-  },
-  {
-    label: "FAQ · 誠實回答",
-    kicker: "/faq",
-    path: "/faq",
-    group: "入門",
-    keywords: ["faq", "questions", "常見問題", "問與答", "為什麼"],
-  },
-
-  // ── 賽事 · 引擎 ────────────────────────────────────
-  {
-    label: "今日賽事板 · CPBL + MLB",
+    label: "今日賽事 · 棒球",
     kicker: "/matches",
     path: "/matches",
-    group: "賽事 · 引擎",
+    group: "看球 · 引擎",
     keywords: [
-      "matches", "cpbl", "今日賽事", "賽程", "板", "今晚", "下午", "比賽",
-      "戰況", "賽況", "對戰", "對戰組合", "戰報", "看球", "選邊", "誰贏",
-      "今晚誰贏", "預測", "賽前", "盤口", "押注", "押", "下注",
-      "分享", "share", "我也猜", "您也猜", "猜輸贏", "投票", "推薦",
-      "recommend", "贏家", "黑馬",
-      // 場館 + 季事
-      "洲際", "天母", "新莊", "澄清湖", "場館", "球場", "主場", "客場",
-      "台灣大賽", "季後賽", "明星賽", "總冠軍",
-      // 高張力時刻 slang
-      "滿貫砲", "再見全壘打", "再見", "sayonara", "牛棚崩盤", "救援失敗", "失火", "炸裂",
-      // 球員 / 球隊 slang(搜這些 → 落 /matches 看板)
-      "投手", "pitcher", "球員", "球員卡", "球員數據",
+      "matches", "cpbl", "今日賽事", "賽程", "今晚", "比賽", "看球", "選邊", "誰贏",
+      "預測", "賽前", "押注", "押", "下注", "贏家", "黑馬",
+      "投手", "pitcher", "球員", "球隊",
       "統一獅", "中信兄弟", "富邦悍將", "樂天桃猿", "味全龍", "台鋼雄鷹",
-      "獅迷", "象迷", "兄弟", "悍將", "桃猿", "龍迷", "雄鷹", "球隊", "支持的球隊",
-      // R239 · /matches/mlb 併進來(同一個賽事板含 CPBL + MLB · 搜這些落這)
-      "mlb", "美國職棒", "大聯盟", "即時", "stats api",
+      "mlb", "美國職棒", "大聯盟",
+      // 收起的「開盤·群眾市場」+「入門/怎麼玩」關鍵字併進來(搜這些落今日賽事)
+      "markets", "開盤", "群眾盤", "市場", "預測市場", "開一張",
+      "learn", "入門", "新手", "怎麼玩", "怎麼用",
     ],
   },
   {
-    label: "開盤 · 群眾預測市場",
-    kicker: "/markets",
-    path: "/markets",
-    group: "賽事 · 引擎",
+    label: "足球 · 世界盃",
+    kicker: "/soccer",
+    path: "/soccer",
+    group: "看球 · 引擎",
     keywords: [
-      "markets", "開盤", "群眾盤", "市場", "預測市場", "群眾共識", "押任一場",
-      "polymarket", "其他聯賽", "冰島", "任何球", "開一張",
+      "soccer", "football", "足球", "世界盃", "world cup", "巴甲", "巴西",
+      "勝平負", "和局", "draw",
     ],
   },
   {
-    label: "今晚這桌 · 誠實收據(任意一注 · 含引擎沒模型的)",
+    label: "今晚這桌 · 誠實收據",
     kicker: "/table",
     path: "/table",
-    group: "賽事 · 引擎",
+    group: "看球 · 引擎",
     keywords: [
       "table", "今晚這桌", "誠實收據", "收據", "receipt", "對帳", "鎖手",
       "角球", "corner", "總分", "大小", "讓分", "兩隊都得分", "btts",
-      "任意一注", "外傳", "朋友", "這桌", "無模型", "只對帳",
+      "任意一注", "這桌", "無模型", "只對帳",
     ],
   },
   {
-    label: "足球 · 世界盃/巴甲 引擎開盤(勝/平/負)",
-    kicker: "/soccer",
-    path: "/soccer",
-    group: "賽事 · 引擎",
-    keywords: [
-      "soccer", "football", "足球", "世界盃", "world cup", "wc",
-      "巴甲", "巴西", "brazil", "歐冠", "英超", "勝平負", "和局", "draw",
-    ],
-  },
-  {
-    label: "海選天梯 · 準度排行(新秀 → 神諭)",
-    kicker: "/ladder",
-    path: "/ladder",
-    group: "賽事 · 引擎",
-    keywords: [
-      "ladder", "天梯", "海選", "排行榜", "leaderboard", "神諭", "oracle",
-      "準度", "ranking", "市場", "market", "贏過引擎", "升階",
-    ],
-  },
-  {
-    label: "推演引擎 · 模擬實驗室",
+    label: "推演引擎 · 自己跑一場",
     kicker: "/lab",
     path: "/lab",
-    group: "賽事 · 引擎",
+    group: "看球 · 引擎",
     keywords: [
-      "lab", "engine", "simulator", "推演引擎", "推演", "引擎", "模擬",
-      "勝率", "預測", "誰贏", "推算", "演算", "勝負", "賠率", "自訂", "custom",
+      "lab", "engine", "simulator", "推演引擎", "引擎", "模擬",
+      "勝率", "推算", "賠率", "自訂", "custom",
     ],
   },
 
-  // ── 證據 · 自己驗 ──────────────────────────────────
-  // R248④(Tim 第 6 次「頁面太多·砍文件·像國小生會逛」· 5-agent 心理學掃描):問題不是頁多,是
-  //   discovery 表面把證據攤成「一面 5 條的文件牆」= 選擇過載(Hick / Iyengar 果醬研究)。 解 = 群名
-  //   「信任文件」(作業感)→「證據 · 自己驗」(邀請),5→3(留帳本/校準/認錯 3 張真證據 · how-we-grade
-  //   + verify 從快搜收起、關鍵字併進帳本不漏搜 · 頁面全留 · footer/內文/直打網址仍到得了)。 護城河不動。
+  // ── 證據 · 帳號 ────────────────────────────────────
   {
-    label: "公開戰績 · 每一場對錯的帳本",
+    label: "公開戰績 · 每場對錯",
     kicker: "/track-record",
     path: "/track-record",
-    group: "證據 · 自己驗",
+    group: "證據 · 帳號",
     keywords: [
       "track", "record", "戰績", "proved", "diverged", "ledger", "準不準",
-      "對了", "錯了", "命中", "中沒中", "命中率", "準度", "歷史紀錄",
-      "對錯", "預測紀錄", "賭神", "報明牌", "誰才是神", "audit", "稽核",
-      "方法公開", "methodology", "白皮書",
-      // R248④ · /how-we-grade + /verify 從快搜併進這張帳本(頁面不刪 · 搜這些仍落到證據)
-      "結算", "規則", "怎麼算", "贏輸", "判定", "grade", "grading", "settlement",
-      "rule", "刪不掉", "改不了", "back-date", "賽果", "官方", "公平", "怎麼判贏",
-      "verify", "查驗", "驗證", "貼碼", "永久碼", "code", "怎麼驗", "查他",
-      "查這個人", "認證", "憑證", "credential", "徽章",
+      "命中", "中沒中", "命中率", "對錯", "預測紀錄", "audit", "稽核",
+      "方法公開", "methodology", "白皮書", "結算", "規則", "怎麼算", "判定",
+      "grade", "settlement", "刪不掉", "改不了", "賽果", "verify", "查驗", "驗證",
+      "永久碼", "憑證", "徽章",
+      // 收起的「校準/認錯/常見問題/天梯」關鍵字併進證據(搜這些落公開戰績,再一鍵到對應頁)
+      "calibration", "校準", "57%", "你有多準", "練習", "測自己",
+      "corrections", "搞砸", "認錯", "錯誤", "誠實", "honest",
+      "faq", "常見問題", "為什麼", "問與答",
+      "ladder", "天梯", "海選", "排行榜", "leaderboard", "神諭", "準度",
     ],
   },
   {
-    label: "引擎校準 · 說七成、實際中幾成",
-    kicker: "/calibration",
-    path: "/calibration",
-    group: "證據 · 自己驗",
-    // R239 · /calibration/test(免登入「換你當引擎」鉤子)併進關鍵字 —— 搜「練習/測自己」
-    // 仍落這頁,那頁頂端就有大顆「玩一次校準練習」鈕(+ 首頁也連)· 不需在快搜各佔一條。
-    keywords: [
-      "calibration", "校準", "準度", "57%", "天花板", "你有多準",
-      "練習", "校準練習", "測自己", "測你自己", "換你當引擎", "互動", "玩玩看", "self test", "quiz",
-    ],
-  },
-  {
-    label: "我們搞砸過的事 · 公開認錯、不刪",
-    kicker: "/corrections",
-    path: "/corrections",
-    group: "證據 · 自己驗",
-    keywords: [
-      "corrections", "mistakes", "搞砸", "認錯", "錯誤", "犯錯", "修正", "糾錯",
-      "我們的錯", "改過", "誠實", "honest", "我們搞砸過的事",
-    ],
-  },
-  // ── 轉換 ───────────────────────────────────────────
-  {
-    label: "會員制 · OPEN / BLACK",
+    label: "會員 · 登入註冊",
     kicker: "/membership",
     path: "/membership",
-    group: "轉換",
+    group: "證據 · 帳號",
     keywords: [
       "會員", "membership", "tier", "訂閱", "免費", "free", "付費",
-      "black", "黑卡", "founder", "方案", "升級", "支持", "金環", "會員房間",
-    ],
-  },
-
-  // ── 工具 · 外部 ────────────────────────────────────
-  {
-    label: "你的儀表板 · 校準身分 + 持倉",
-    kicker: "/member",
-    path: "/member",
-    group: "工具 · 外部",
-    keywords: ["member", "dashboard", "會員頁", "個人", "儀表板", "我的準度", "持倉", "帳本"],
-  },
-  {
-    label: "登入 · Email + 密碼 · 免費會員",
-    kicker: "/login",
-    path: "/login",
-    group: "工具 · 外部",
-    keywords: [
-      "login", "登入", "註冊", "register", "signup", "password", "密碼", "email", "auth",
+      "black", "黑卡", "方案", "升級", "支持", "金環", "會員房間",
+      // 收起的「登入/註冊/個人儀表板」關鍵字併進來
+      "login", "登入", "註冊", "register", "signup", "password", "密碼", "email",
+      "member", "dashboard", "會員頁", "儀表板", "我的準度", "持倉",
     ],
   },
 ];
 
 /** Group display order — palette renders headers in this sequence. */
-export const COMMAND_GROUP_ORDER = [
-  "入門",
-  "賽事 · 引擎",
-  "證據 · 自己驗",
-  "轉換",
-  "工具 · 外部",
-] as const;
+export const COMMAND_GROUP_ORDER = ["看球 · 引擎", "證據 · 帳號"] as const;
 
 /** Returns filtered items matching the query (case-insensitive substring). */
 export function filterCommandItems(
