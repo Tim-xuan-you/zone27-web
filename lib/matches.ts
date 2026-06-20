@@ -92,7 +92,7 @@ const rawMatches: Match[] = [
   // ── 2026-06-21 · 一軍 ingest(週日)· Tim 截圖 cpbl.com.tw 賽程 + 先發投手成績表 ──
   //   投手值由官網累計成績表(IP/K/BB/HR)換算 · 標 estimate(自 Tim 截圖手抄)· winRate 手 curate
   //   (ERA+控球+主場+隊伍 W-L · 接近五五波就誠實低 conviction)· 天氣不建模(/audit S02)。
-  //   ⏳ #179 味全(曾仁和)@台鋼(黃子鵬)· #180 富邦(李東洛)@樂天(劉家翔)= 先發已定,等 Tim 補成績表再同步鎖。
+  //   ✅ 三場齊鎖(Tim 補齊 #179 / #180 先發投手成績表 → 同步賽前鎖定 · 同 6/18 慣例)。
   //   #178 亞太 · 中信(菲力士 away)vs 統一(銳力獅 home)· W-L 中信 17-34-2(.333 墊底)/ 統一 27-27-1(.500)。
   //     統一三項齊偏:better team + 主場 + 當下先發明顯較利 —— 統一銳力獅 2026 ERA 2.47 / WHIP 0.89 / BAA .196 /
   //     BB9 1.5(壓制+控球俱佳、樣本厚 7 先發)對上中信菲力士:2025 是 1.91 ERA 王牌(127 IP 真材料 → 用 2025 錨定),
@@ -140,6 +140,104 @@ const rawMatches: Match[] = [
       { score: "2 : 1", probability: 7.5 },
       { score: "3 : 2", probability: 7.0 },
       { score: "4 : 1", probability: 7.0 },
+    ],
+    aiConfidence: 54,
+  },
+  //   #179 澄清湖 · 味全(曾仁和 away)vs 台鋼(黃子鵬 home)· W-L 味全 37-18-0(.673 全聯盟最強)/ 台鋼 29-26-1(.527)。
+  //     近銅板:味全隊最強(.673)+ 曾仁和 2026 ERA 1.59 亮眼但僅 17 IP 小樣本 · 生涯 2024/25 ERA 6.38/10.00 ·
+  //     BAA .340/.398 = 回歸風險高、不給滿信。 對上台鋼黃子鵬 2026 ERA 2.29 / WHIP 0.92 / BAA .214(樣本厚
+  //     70.2 IP、控球穩 BB9 1.4 · 當下可信度高)+ 主場。 隊強(味全)≈ 抵 先發較可信+主場(台鋼)→
+  //     台鋼 52 / 味全 48 · conf 51(誠實近銅板 · 只給台鋼一絲主場+先發樣本可信的微偏)。
+  {
+    id: "cpbl-260621-02",
+    league: "CPBL",
+    date: "2026 · 06 · 21  ·  星期日",
+    startTime: "16:05",
+    venue: "澄清湖棒球場",
+    home: {
+      name: "台鋼雄鷹",
+      en: "HAWKS",
+      pitcher: {
+        name: "黃子鵬",
+        era: "2.29", // estimate · 2026 官網累計成績表(Tim 截圖手抄)· 70.2 IP(10 先發 · 樣本厚)· 控球穩、極少被轟
+        k9: "3.6", // estimate · 28 K / 70.2 IP × 9 · 低三振、靠壓制 contact
+        whip: "0.92", // estimate · 官網每局被上壘率 0.919(54 H + 11 BB / 70.2 IP)· 頂級
+        bb9: "1.4", // estimate · 11 BB / 70.2 IP × 9 · 控球極佳
+        hr9: "0.25", // estimate · 2 HR / 70.2 IP × 9
+      },
+      recent: ["W", "L", "W", "L", "W"], // placeholder · 台鋼 29-26-1(.527)
+      winRate: 52,
+    },
+    away: {
+      name: "味全龍",
+      en: "DRAGONS",
+      pitcher: {
+        name: "曾仁和",
+        era: "1.59", // estimate · 2026 官網累計成績表(Tim 截圖手抄)· 僅 17 IP(3 先發 · 小樣本)· ⚠ 生涯回歸風險見註
+        k9: "5.8", // estimate · 11 K / 17 IP × 9
+        whip: "1.18", // estimate · 官網每局被上壘率 1.176(16 H + 4 BB / 17 IP)
+        bb9: "2.1", // estimate · 4 BB / 17 IP × 9
+        hr9: "0.53", // estimate · 1 HR / 17 IP × 9
+      },
+      recent: ["W", "W", "L", "W", "W"], // placeholder · 味全 37-18-0(.673 全聯盟最強)
+      winRate: 48,
+    },
+    topScores: [
+      // 兩位當下都壓得住 → 低分;近銅板、台鋼主場微偏(格式 home : away = 台鋼 : 味全)
+      { score: "2 : 1", probability: 8.0 },
+      { score: "3 : 2", probability: 7.5 },
+      { score: "1 : 2", probability: 7.5 },
+      { score: "2 : 3", probability: 7.0 },
+      { score: "3 : 1", probability: 6.5 },
+    ],
+    aiConfidence: 51,
+  },
+  //   #180 樂天桃園 · 富邦(李東洛 away)vs 樂天(劉家翔 home)· W-L 富邦 29-24-0(.547)/ 樂天 20-30-2(.400)。
+  //     富邦清楚偏:better team + 李東洛 2026 ERA 1.63 / 8-1 / 55.1 IP(樣本厚、當下接近王牌、可信)。 樂天劉家翔
+  //     2026 ERA 0.87 雖亮但僅 10.1 IP 超小樣本 · 生涯 2024/25 ERA 15.75/10.00 = 幾乎沒真實大樣本、極高不確定 →
+  //     不被 0.87 騙。 剩樂天主場 + 桃園偏打(高分高變異)+ 劉家翔當下熱拉回 → 富邦 58 / 樂天 42 · conf 54
+  //    (清楚偏客隊富邦,但留主場+小樣本變異不裝神準)。
+  {
+    id: "cpbl-260621-03",
+    league: "CPBL",
+    date: "2026 · 06 · 21  ·  星期日",
+    startTime: "17:05",
+    venue: "樂天桃園棒球場",
+    home: {
+      name: "樂天桃猿",
+      en: "MONKEYS",
+      pitcher: {
+        name: "劉家翔",
+        era: "0.87", // estimate · 2026 官網累計成績表(Tim 截圖手抄)· 僅 10.1 IP(2 先發 · 超小樣本)· ⚠ 生涯極高不確定見註
+        k9: "3.5", // estimate · 4 K / 10.1 IP × 9
+        whip: "0.87", // estimate · 官網每局被上壘率 0.870(7 H + 2 BB / 10.1 IP)
+        bb9: "1.7", // estimate · 2 BB / 10.1 IP × 9
+        hr9: "0.00", // estimate · 0 HR / 10.1 IP(超小樣本 · 生涯約偏高 · winRate 已壓不偏袒)
+      },
+      recent: ["L", "W", "L", "L", "W"], // placeholder · 樂天 20-30-2(.400)
+      winRate: 42,
+    },
+    away: {
+      name: "富邦悍將",
+      en: "GUARDIANS",
+      pitcher: {
+        name: "李東洛",
+        era: "1.63", // estimate · 2026 官網累計成績表(Tim 截圖手抄)· 55.1 IP(10 先發 · 樣本厚)· 8-1 · 當下接近王牌
+        k9: "5.2", // estimate · 32 K / 55.1 IP × 9
+        whip: "1.25", // estimate · 官網每局被上壘率 1.247(48 H + 21 BB / 55.1 IP)· BB 偏多但抑安打
+        bb9: "3.4", // estimate · 21 BB / 55.1 IP × 9 · 控球偏散
+        hr9: "0.16", // estimate · 1 HR / 55.1 IP × 9 · 極少被轟
+      },
+      recent: ["W", "W", "L", "W", "W"], // placeholder · 富邦 29-24-0(.547)
+      winRate: 58,
+    },
+    topScores: [
+      // 桃園偏打 → 中分;富邦隊強+李東洛當下王牌偏客隊(格式 home : away = 樂天 : 富邦)
+      { score: "2 : 4", probability: 7.5 },
+      { score: "3 : 4", probability: 7.0 },
+      { score: "2 : 3", probability: 7.0 },
+      { score: "3 : 5", probability: 6.5 },
+      { score: "4 : 3", probability: 6.5 },
     ],
     aiConfidence: 54,
   },
