@@ -900,10 +900,13 @@
       "awayWinPct": 43,
       "enginePick": "away",
       "lockedAt": "2026-06-17T22:44:07.134Z",
-      "finalScore": null,
-      "outcome": null,
-      "verdict": null,
-      "gradedAt": null
+      "finalScore": {
+        "home": 0,
+        "away": 1
+      },
+      "outcome": "away",
+      "verdict": "proved",
+      "gradedAt": "2026-06-20T03:26:46.524Z"
     },
     {
       "matchId": "fd-537341",
@@ -928,10 +931,13 @@
       "awayWinPct": 14,
       "enginePick": "home",
       "lockedAt": "2026-06-18T03:40:34.076Z",
-      "finalScore": null,
-      "outcome": null,
-      "verdict": null,
-      "gradedAt": null
+      "finalScore": {
+        "home": 3,
+        "away": 0
+      },
+      "outcome": "home",
+      "verdict": "proved",
+      "gradedAt": "2026-06-20T03:26:46.524Z"
     },
     {
       "matchId": "fd-537347",
@@ -1152,6 +1158,34 @@
       "awayWinPct": 19,
       "enginePick": "home",
       "lockedAt": "2026-06-19T22:02:29.047Z",
+      "finalScore": null,
+      "outcome": null,
+      "verdict": null,
+      "gradedAt": null
+    },
+    {
+      "matchId": "fd-537366",
+      "competitionCode": "WC",
+      "competitionName": "世界盃",
+      "kickoffISO": "2026-06-22T01:00:00Z",
+      "status": "TIMED",
+      "homeSeed": "New Zealand",
+      "awaySeed": "Egypt",
+      "home": "紐西蘭",
+      "away": "埃及",
+      "ratingHome": 1508,
+      "ratingAway": 1666,
+      "homeAdvantage": 0,
+      "xgHome": 0.9445000000000001,
+      "xgAway": 1.6555,
+      "homeWin": 0.20542282288862226,
+      "draw": 0.26311294791502776,
+      "awayWin": 0.5314642291963502,
+      "homeWinPct": 21,
+      "drawPct": 26,
+      "awayWinPct": 53,
+      "enginePick": "away",
+      "lockedAt": "2026-06-20T03:26:45.392Z",
       "finalScore": null,
       "outcome": null,
       "verdict": null,
