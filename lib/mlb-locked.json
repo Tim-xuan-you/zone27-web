@@ -7494,6 +7494,35 @@
       "verdict": null
     },
     {
+      "gamePk": 824261,
+      "gameDate": "2026-06-22T22:10:00Z",
+      "scheduleDate": "2026-06-22",
+      "homeId": 116,
+      "homeEn": "Detroit Tigers",
+      "homeRecord": "32-44",
+      "awayId": 147,
+      "awayEn": "New York Yankees",
+      "awayRecord": "46-29",
+      "homePitcher": "Framber Valdez",
+      "awayPitcher": "Gerrit Cole",
+      "homeStats": {
+        "era": "4.09",
+        "k9": "7.21",
+        "bb9": "3.44",
+        "hr9": "0.97"
+      },
+      "awayStats": {
+        "era": "2.57",
+        "k9": "7.71",
+        "bb9": "2.57",
+        "hr9": "1.29"
+      },
+      "engineWinHomePct": 49,
+      "lockedAt": "2026-06-21T16:49:09.006Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
       "gamePk": 824585,
       "gameDate": "2026-06-22T23:40:00Z",
       "scheduleDate": "2026-06-22",
@@ -7519,6 +7548,64 @@
       },
       "engineWinHomePct": 45,
       "lockedAt": "2026-06-20T19:46:13.638Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 824501,
+      "gameDate": "2026-06-23T23:10:00Z",
+      "scheduleDate": "2026-06-23",
+      "homeId": 113,
+      "homeEn": "Cincinnati Reds",
+      "homeRecord": "36-39",
+      "awayId": 158,
+      "awayEn": "Milwaukee Brewers",
+      "awayRecord": "45-29",
+      "homePitcher": "Nick Lodolo",
+      "awayPitcher": "Brandon Sproat",
+      "homeStats": {
+        "era": "6.12",
+        "k9": "6.75",
+        "bb9": "3.59",
+        "hr9": "1.69"
+      },
+      "awayStats": {
+        "era": "5.94",
+        "k9": "8.91",
+        "bb9": "4.52",
+        "hr9": "1.84"
+      },
+      "engineWinHomePct": 50,
+      "lockedAt": "2026-06-21T16:49:09.006Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 824584,
+      "gameDate": "2026-06-23T23:40:00Z",
+      "scheduleDate": "2026-06-23",
+      "homeId": 145,
+      "homeEn": "Chicago White Sox",
+      "homeRecord": "39-36",
+      "awayId": 114,
+      "awayEn": "Cleveland Guardians",
+      "awayRecord": "41-36",
+      "homePitcher": "Sean Burke",
+      "awayPitcher": "Parker Messick",
+      "homeStats": {
+        "era": "3.89",
+        "k9": "9.00",
+        "bb9": "3.22",
+        "hr9": "1.11"
+      },
+      "awayStats": {
+        "era": "2.70",
+        "k9": "9.45",
+        "bb9": "2.91",
+        "hr9": "0.83"
+      },
+      "engineWinHomePct": 47,
+      "lockedAt": "2026-06-21T16:49:09.006Z",
       "finalScore": null,
       "verdict": null
     }
