@@ -22,7 +22,7 @@ export default function MembershipStatus({
   return (
     <section
       aria-label="你的 BLACK 會員狀態"
-      className="border border-gold/30 bg-gold/[0.04] px-4 py-3.5 sm:px-5"
+      className="mt-6 border border-gold/30 bg-gold/[0.04] px-4 py-3.5 sm:px-5"
     >
       <Body s={s} />
     </section>
