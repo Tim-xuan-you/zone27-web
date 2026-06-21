@@ -44,6 +44,15 @@ export default function MethodologyPage() {
         <p className="editorial-dropcap mt-8 max-w-xl mx-auto text-mute leading-relaxed">
           這是 ZONE 27 引擎完整的內部運作說明。
         </p>
+        {/* 白話前門:深技術版嚇到人 → 先給「認識兩顆引擎」的國小生版入口(R241)。 */}
+        <p className="mt-5 font-mono text-[10px] tracking-[0.3em]">
+          <Link
+            href="/engines"
+            className="text-gold/75 hover:text-gold underline-offset-4 hover:underline transition-colors"
+          >
+            想先看白話版?認識我們的兩顆引擎 →
+          </Link>
+        </p>
       </section>
 
       <div className="mx-auto w-32 gold-line mb-12" />
