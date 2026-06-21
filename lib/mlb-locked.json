@@ -7142,8 +7142,12 @@
       },
       "engineWinHomePct": 44,
       "lockedAt": "2026-06-19T19:55:37.672Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 1,
+        "away": 4
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-06-21T22:18:31.822Z"
     },
     {
       "gamePk": 824908,
@@ -7171,8 +7175,12 @@
       },
       "engineWinHomePct": 66,
       "lockedAt": "2026-06-19T19:55:37.672Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 4,
+        "away": 9
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-06-21T22:18:31.823Z"
     },
     {
       "gamePk": 822968,
@@ -7200,8 +7208,12 @@
       },
       "engineWinHomePct": 48,
       "lockedAt": "2026-06-19T19:55:37.672Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 4,
+        "away": 3
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-06-21T22:18:31.823Z"
     },
     {
       "gamePk": 824260,
@@ -7229,8 +7241,12 @@
       },
       "engineWinHomePct": 45,
       "lockedAt": "2026-06-19T19:55:37.672Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 5,
+        "away": 4
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-06-21T22:18:31.823Z"
     },
     {
       "gamePk": 823852,
@@ -7258,8 +7274,12 @@
       },
       "engineWinHomePct": 31,
       "lockedAt": "2026-06-19T19:55:37.672Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 2,
+        "away": 1
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-06-21T22:18:31.823Z"
     },
     {
       "gamePk": 824177,
@@ -7287,8 +7307,12 @@
       },
       "engineWinHomePct": 58,
       "lockedAt": "2026-06-19T19:55:37.672Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 2,
+        "away": 1
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-06-21T22:18:31.823Z"
     },
     {
       "gamePk": 824095,
@@ -7316,8 +7340,12 @@
       },
       "engineWinHomePct": 52,
       "lockedAt": "2026-06-19T19:55:37.672Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 10,
+        "away": 12
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-06-21T22:18:31.823Z"
     },
     {
       "gamePk": 824664,
@@ -7374,8 +7402,12 @@
       },
       "engineWinHomePct": 50,
       "lockedAt": "2026-06-19T19:55:37.672Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 6,
+        "away": 8
+      },
+      "verdict": "push",
+      "gradedAt": "2026-06-21T22:18:31.823Z"
     },
     {
       "gamePk": 824987,
@@ -7813,6 +7845,64 @@
       "verdict": null
     },
     {
+      "gamePk": 824262,
+      "gameDate": "2026-06-23T22:40:00Z",
+      "scheduleDate": "2026-06-23",
+      "homeId": 116,
+      "homeEn": "Detroit Tigers",
+      "homeRecord": "33-44",
+      "awayId": 147,
+      "awayEn": "New York Yankees",
+      "awayRecord": "46-30",
+      "homePitcher": "Casey Mize",
+      "awayPitcher": "Carlos Rodón",
+      "homeStats": {
+        "era": "2.58",
+        "k9": "8.94",
+        "bb9": "2.24",
+        "hr9": "0.52"
+      },
+      "awayStats": {
+        "era": "3.50",
+        "k9": "10.25",
+        "bb9": "5.00",
+        "hr9": "0.75"
+      },
+      "engineWinHomePct": 56,
+      "lockedAt": "2026-06-21T22:18:31.421Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 822718,
+      "gameDate": "2026-06-23T22:45:00Z",
+      "scheduleDate": "2026-06-23",
+      "homeId": 120,
+      "homeEn": "Washington Nationals",
+      "homeRecord": "40-38",
+      "awayId": 143,
+      "awayEn": "Philadelphia Phillies",
+      "awayRecord": "41-35",
+      "homePitcher": "Zack Littell",
+      "awayPitcher": "Jesús Luzardo",
+      "homeStats": {
+        "era": "5.45",
+        "k9": "5.20",
+        "bb9": "2.92",
+        "hr9": "2.54"
+      },
+      "awayStats": {
+        "era": "4.20",
+        "k9": "10.19",
+        "bb9": "2.84",
+        "hr9": "0.95"
+      },
+      "engineWinHomePct": 29,
+      "lockedAt": "2026-06-21T22:18:31.421Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
       "gamePk": 824501,
       "gameDate": "2026-06-23T23:10:00Z",
       "scheduleDate": "2026-06-23",
@@ -7954,6 +8044,35 @@
       },
       "engineWinHomePct": 25,
       "lockedAt": "2026-06-21T19:51:40.278Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 823210,
+      "gameDate": "2026-06-24T01:45:00Z",
+      "scheduleDate": "2026-06-23",
+      "homeId": 137,
+      "homeEn": "San Francisco Giants",
+      "homeRecord": "31-46",
+      "awayId": 133,
+      "awayEn": "Athletics",
+      "awayRecord": "38-39",
+      "homePitcher": "Robbie Ray",
+      "awayPitcher": "Aaron Civale",
+      "homeStats": {
+        "era": "4.07",
+        "k9": "8.36",
+        "bb9": "4.29",
+        "hr9": "1.58"
+      },
+      "awayStats": {
+        "era": "4.91",
+        "k9": "6.29",
+        "bb9": "2.91",
+        "hr9": "1.84"
+      },
+      "engineWinHomePct": 63,
+      "lockedAt": "2026-06-21T22:18:31.421Z",
       "finalScore": null,
       "verdict": null
     }
