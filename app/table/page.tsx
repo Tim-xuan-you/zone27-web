@@ -101,6 +101,7 @@ export default function TablePage() {
                         <span className="text-bone text-sm font-medium">{c.handle}</span>
                         <span className="font-mono text-mute/50 text-[10px] tracking-[0.18em]">
                           {c.league}
+                          {c.when ? ` · ${c.when}` : ""}
                         </span>
                       </div>
                       <p className="mt-1 text-mute text-[13px] leading-snug">
