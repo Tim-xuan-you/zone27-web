@@ -8,7 +8,7 @@ import { getTableCalls, type CallResult } from "@/lib/table-picks";
 export const metadata: Metadata = {
   title: "今晚這桌 · 誠實收據 · ZONE 27",
   description:
-    "真正的賭徒不只賭誰贏 —— 角球、總分、讓分、兩隊都得分。 有些盤我們的引擎根本沒有模型。 我們不裝懂:沒模型的就老實標『只負責對帳』,照樣賽前記下、賽後逐筆攤開 —— 連輸的都留著,不挑好的講。",
+    "Tim、Ron、Lewi 三個朋友的牌桌(Tim 是這個站的創辦人)。 每一注賽前就講死、不能改;賽後不管中、沒中,全部留著不刪。 與其叫你相信,他們先把自己的攤出來。",
 };
 
 // ── ZONE 27 · /table · 今晚這桌 · 誠實收據 ─────────────────────────────────
@@ -23,20 +23,20 @@ export const revalidate = 300;
 function resultLabel(r: CallResult): { text: string; cls: string } {
   switch (r) {
     case "win":
-      return { text: "命中", cls: "text-gold" };
+      return { text: "中了", cls: "text-gold" };
     case "lose":
-      return { text: "落空", cls: "text-loss/85" };
+      return { text: "沒中", cls: "text-loss/85" };
     case "push":
-      return { text: "退注", cls: "text-mute/60" };
+      return { text: "退錢", cls: "text-mute/60" };
     case "void":
       return { text: "取消", cls: "text-mute/60" };
     default:
-      return { text: "待對帳", cls: "text-mute/55" };
+      return { text: "還沒對帳", cls: "text-mute/55" };
   }
 }
 
 export default function TablePage() {
-  const { calls, total, pending, noModel } = getTableCalls();
+  const { calls, total, pending, settled, win, lose } = getTableCalls();
 
   return (
     <div className="flex flex-col flex-1 min-h-screen">
@@ -49,19 +49,19 @@ export default function TablePage() {
             / 今晚這桌
           </p>
           <h1 className="text-3xl sm:text-4xl text-bone font-light tracking-tight leading-tight">
-            這桌<span className="text-gold">鎖了什麼</span>
+            這桌<span className="text-gold">押了什麼</span>
           </h1>
           <div className="zone27-rule max-w-[280px] mt-5 mb-5" aria-hidden="true" />
+          {/* 誰是 Tim/Ron/Lewi + 為什麼出現(Tim dogfood:用戶不知道這三個人是誰)·
+              行銷框架 = 創辦人帶頭示範,不是版主管你(守 R239③「我們大家一樣」)。 */}
           <p className="text-mute text-base leading-relaxed">
-            真正的賭徒不只賭誰贏 —— 角球、總分、讓分、兩隊都得分。 而有些盤,我們的引擎
-            <span className="text-bone">根本沒有模型</span>。 我們不裝懂:沒模型的,就老實標
-            「只負責對帳」,然後照樣<span className="text-bone">賽前記下、賽後逐筆攤開</span> ——
-            連輸的都留著、不挑好的講。 賣明牌的對什麼都裝有把握 —— 我們敢說哪些不懂。
+            這是 <span className="text-bone">Tim、Ron、Lewi</span> 三個朋友的牌桌 —— 一起看球、一起下注
+            (Tim 就是這個站的創辦人)。 跟別人不一樣的是:他們押的每一注,
+            <span className="text-bone">賽前就講死、不能改</span>;賽後不管
+            <span className="text-bone">中、沒中,全部留著</span>,不刪。
           </p>
-          {/* 誠實的出處(disclosure = 品牌)· 把「這是手記的」攤在陽光下,反而比假裝「不可竄改的
-              個人帳本」更可信:這桌是 Tim 自己一筆一筆記的,連輸的都留著。 名字之後接各自公開準度。 */}
-          <p className="mt-4 font-mono text-mute/55 text-[11px] leading-relaxed">
-            這桌是 Tim 賽前記下、賽後一筆一筆對的(跟賽果手抄同一套紀律)· 名字之後會連到各自的公開準度。
+          <p className="mt-3 text-mute text-base leading-relaxed">
+            與其叫你相信我們,他們先把自己的攤出來。 賣明牌的只敢曬贏的 —— 這桌連自己輸的都掛著。
           </p>
         </section>
 
@@ -69,13 +69,15 @@ export default function TablePage() {
         {total > 0 && (
           <section className="mx-auto max-w-2xl w-full px-6 sm:px-10 pb-2">
             <p className="font-mono text-mute/60 text-[11px] tracking-[0.2em] tabular">
-              <span className="text-bone">{total}</span> 注在桌上
+              桌上 <span className="text-bone">{total}</span> 注
               {" · "}
-              <span className="text-bone">{pending}</span> 待對帳
-              {noModel > 0 && (
+              還沒對帳 <span className="text-bone">{pending}</span> 注
+              {settled > 0 && (
                 <>
                   {" · "}
-                  <span className="text-bone">{noModel}</span> 注引擎沒模型(照樣對帳)
+                  已對帳 <span className="text-bone">{settled}</span> 注(
+                  <span className="text-gold">{win} 中</span>、
+                  <span className="text-loss/85">{lose} 沒中</span>)
                 </>
               )}
             </p>
@@ -115,19 +117,12 @@ export default function TablePage() {
                         </p>
                       )}
                     </div>
-                    <div className="shrink-0 flex flex-col items-end gap-1.5">
-                      {/* 引擎欄:有模型 vs 無模型(誠實的沉默)· 🔴 不捏造機率數字 */}
-                      {c.engineModels ? (
-                        <span className="font-mono text-[9px] tracking-[0.18em] px-1.5 py-0.5 border border-gold/40 text-gold/85 whitespace-nowrap">
-                          引擎有模型
-                        </span>
-                      ) : (
-                        <span className="font-mono text-[9px] tracking-[0.18em] px-1.5 py-0.5 border border-mute/30 text-mute/65 whitespace-nowrap">
-                          無模型 · 只對帳
-                        </span>
-                      )}
+                    {/* R241:拿掉「引擎有模型/無模型」badge(對結果 0 差別=對用戶 0 意義 ·
+                        Tim dogfood)· 只留結果(還沒對帳/中了/沒中)。 引擎不會算的盤,改由
+                        左欄一句白話 engineNote 誠實註記。 */}
+                    <div className="shrink-0 flex flex-col items-end">
                       <span
-                        className={`font-mono text-[9px] tracking-[0.2em] tabular ${res.cls}`}
+                        className={`font-mono text-[10px] tracking-[0.2em] tabular ${res.cls}`}
                       >
                         {res.text}
                       </span>
@@ -151,8 +146,8 @@ export default function TablePage() {
         {/* ── 收尾 · 米其林那一句 ── */}
         <section className="mx-auto max-w-2xl w-full px-6 sm:px-10 pb-20 border-t border-line/40 pt-10">
           <p className="text-mute text-base leading-relaxed">
-            引擎只在<span className="text-bone">有把握時</span>開口。 沒把握的,我們閉嘴 ——
-            但<span className="text-bone">照樣對帳</span>,連輸的都留著、不挑好的講。
+            敢曬贏、也<span className="text-bone">敢曬輸</span> —— 這就是這桌跟「賣明牌」最不一樣的地方。
+            連我們引擎不會算的賭法,他們押了,也一筆一筆幫他對到底。
           </p>
           <div className="mt-8 flex items-center gap-3 flex-wrap">
             <Link
