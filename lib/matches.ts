@@ -142,6 +142,19 @@ const rawMatches: Match[] = [
       { score: "4 : 1", probability: 7.0 },
     ],
     aiConfidence: 54,
+    // 6/21 賽果(Tim 截圖 cpbl.com.tw · 認隊靠場館+勝敗投不靠 logo):亞太=統一主場 ·
+    // 勝投 呂彥青(中信)· 敗投 髙塩將樹(統一)· 救援 李振昌(中信)· 比分 客:主 = 中信 6 : 統一 4 →
+    // 統一(主)4 / 中信(客)6。
+    // 🔴 引擎賽前看好統一 58%(主場+隊強+銳力獅壓制)· 結果墊底中信(.333)6-4 翻盤 → DIVERGED ·
+    //    誠實記引擎失手(本來就只 conf 54 偏地主、不裝把握仍翻車 · 帳本改不了)。
+    finalResult: {
+      homeScore: 4, // 統一(主)
+      awayScore: 6, // 中信(客)
+      winner: "away", // 中信勝 → 引擎(看好統一)落空 = DIVERGED
+      ingestedAt: "2026-06-21",
+      innings: 9,
+      source: "manual",
+    },
   },
   //   #179 澄清湖 · 味全(曾仁和 away)vs 台鋼(黃子鵬 home)· W-L 味全 37-18-0(.673 全聯盟最強)/ 台鋼 29-26-1(.527)。
   //     近銅板:味全隊最強(.673)+ 曾仁和 2026 ERA 1.59 亮眼但僅 17 IP 小樣本 · 生涯 2024/25 ERA 6.38/10.00 ·
@@ -191,6 +204,19 @@ const rawMatches: Match[] = [
       { score: "3 : 1", probability: 6.5 },
     ],
     aiConfidence: 51,
+    // 6/21 賽果(Tim 截圖 cpbl.com.tw · 認隊靠場館+勝敗投不靠 logo):澄清湖=台鋼主場 ·
+    // 勝投 趙璟榮(味全)· 敗投 林詩翔(台鋼)· 救援 林凱威(味全)· 比分 客:主 = 味全 7 : 台鋼 5 →
+    // 台鋼(主)5 / 味全(客)7。
+    // 🔴 引擎賽前微偏台鋼 52%(主場+黃子鵬樣本厚)· 結果味全(隊最強)7-5 帶走 → DIVERGED ·
+    //    near 銅板的失手(conf 51 = 本來就沒把握 · 誠實掛 · 帳本改不了)。
+    finalResult: {
+      homeScore: 5, // 台鋼(主)
+      awayScore: 7, // 味全(客)
+      winner: "away", // 味全勝 → 引擎(微偏台鋼)落空 = DIVERGED
+      ingestedAt: "2026-06-21",
+      innings: 9,
+      source: "manual",
+    },
   },
   //   #180 樂天桃園 · 富邦(李東洛 away)vs 樂天(劉家翔 home)· W-L 富邦 29-24-0(.547)/ 樂天 20-30-2(.400)。
   //     富邦清楚偏:better team + 李東洛 2026 ERA 1.63 / 8-1 / 55.1 IP(樣本厚、當下接近王牌、可信)。 樂天劉家翔
@@ -240,6 +266,18 @@ const rawMatches: Match[] = [
       { score: "4 : 3", probability: 6.5 },
     ],
     aiConfidence: 54,
+    // 6/21 賽果(Tim 截圖 cpbl.com.tw · 認隊靠場館+勝敗投不靠 logo):樂天桃園=樂天主場 ·
+    // 勝投 李東洛(富邦)· 敗投 莊昕諺(樂天)· 救援 曾峻岳(富邦)· 比分 客:主 = 富邦 3 : 樂天 1 →
+    // 樂天(主)1 / 富邦(客)3。
+    // 🟡 引擎賽前看好富邦 58%(隊強+李東洛當下王牌)· 結果富邦 3-1 守成 → PROVED · 引擎命中。
+    finalResult: {
+      homeScore: 1, // 樂天(主)
+      awayScore: 3, // 富邦(客)
+      winner: "away", // 富邦勝 → 引擎(看好富邦)命中 = PROVED
+      ingestedAt: "2026-06-21",
+      innings: 9,
+      source: "manual",
+    },
   },
   // ── 2026-06-20 · 一軍 ingest(週六)· Tim 截圖 cpbl.com.tw 賽程 + 先發投手成績表 ──
   //   投手值由官網累計成績表(IP/K/BB/HR)換算 · 標 estimate(自 Tim 截圖手抄)· winRate 手 curate

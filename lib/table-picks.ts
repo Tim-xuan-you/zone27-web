@@ -53,7 +53,8 @@ const TABLE: TableCall[] = [
     call: "角球 大 8.5",
     engineModels: false,
     engineNote: "角球不在進球模型內 · 引擎不裝懂",
-    result: "pending",
+    resultNote: "角球 8 顆(日本 5 + 突尼西亞 3)· 不到 8.5 → 落空",
+    result: "lose",
   },
   {
     handle: "Ron",
@@ -61,7 +62,8 @@ const TABLE: TableCall[] = [
     match: "瑞典 vs 荷蘭",
     call: "兩隊都得分 · 是",
     engineModels: true,
-    result: "pending",
+    resultNote: "荷蘭 5:1 瑞典 · 兩隊都進球 → 命中",
+    result: "win",
   },
   {
     handle: "Lewi",
@@ -69,7 +71,8 @@ const TABLE: TableCall[] = [
     match: "天使 vs 運動家",
     call: "運動家 不讓分（勝）",
     engineModels: true,
-    result: "pending",
+    resultNote: "天使 7:0 運動家 · 運動家被完封 → 落空",
+    result: "lose",
   },
   {
     handle: "Tim",
