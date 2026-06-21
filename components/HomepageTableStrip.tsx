@@ -5,7 +5,8 @@ import type { TableSummary } from "@/lib/table-picks";
 // ── ZONE 27 · 首頁「今晚這桌」條 ─────────────────────────────────────────
 // Tim「Tim/Ron/Lewi 推的怎麼找不到?不是該在主頁就明顯?」→ 把「今晚這桌 · 誠實收據」
 // 拉上前門。 一塊低調的 liveness 訊號:真人賽前鎖了幾注 + 賽後對帳的誠實成績(含落空照亮)·
-// 整塊一個連結 → /table。 跟首頁頭條「贏輸都掛」同一口氣:這裡就是那句話的真人實證。
+// 整塊一個連結 → /table。 跟首頁頭條「贏輸都掛」同一口氣 —— 但收斂成只敢講機制扛得住的那句:
+//   「連輸的都留著」(Tim 手記的桌 · 名字還沒接公開碼 · 不假裝「個人帳本不可竄改」)。
 // 🔴 graceful:空桌(total 0)→ 整塊不渲染(守首頁極簡)· 無 PnL/排名/粉絲數 · 暗金無紅綠 emoji。
 //   落空數用 text-loss(柔紅 · 非號誌紅)誠實亮出來 —— 那正是跟「只晒贏」最不一樣的地方。
 // ─────────────────────────────────────────────────────
@@ -19,7 +20,7 @@ export default function HomepageTableStrip({ summary }: { summary: TableSummary 
         href="/table"
         aria-label={`今晚這桌 · ${total} 注賽前鎖死${
           settled > 0 ? ` · 已對帳 ${settled} 注(${win} 中、${lose} 落空)` : ""
-        } · 贏輸都掛 · 看這桌`}
+        } · 連輸的都留著 · 看這桌`}
         className="block border border-gold/30 bg-gold/[0.04] hover:border-gold/50 hover:bg-gold/[0.06] transition-colors px-4 py-3 group"
       >
         <div className="flex items-center gap-3">
@@ -47,10 +48,10 @@ export default function HomepageTableStrip({ summary }: { summary: TableSummary 
             <>
               已對帳 <span className="text-bone/80 tabular">{settled}</span> 注 ·{" "}
               <span className="text-gold/90 tabular">{win} 中</span> ·{" "}
-              <span className="text-loss/85 tabular">{lose} 落空</span> · 贏輸都掛、刪不掉
+              <span className="text-loss/85 tabular">{lose} 落空</span> · 連輸的都留著
             </>
           ) : (
-            <>賽後逐筆對帳 · 連引擎沒模型的盤也照樣對 · 贏輸都掛</>
+            <>賽後逐筆對帳 · 連引擎沒模型的盤也照樣對 · 連輸的都留著</>
           )}
         </p>
       </Link>

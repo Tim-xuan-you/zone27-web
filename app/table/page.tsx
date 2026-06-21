@@ -8,7 +8,7 @@ import { getTableCalls, type CallResult } from "@/lib/table-picks";
 export const metadata: Metadata = {
   title: "今晚這桌 · 誠實收據 · ZONE 27",
   description:
-    "真正的賭徒不只賭誰贏 —— 角球、總分、讓分、兩隊都得分。 有些盤我們的引擎根本沒有模型。 我們不裝懂:沒模型的就老實標『只負責對帳』,照樣幫你賽前鎖死、賽後攤開,贏輸都掛你名下。",
+    "真正的賭徒不只賭誰贏 —— 角球、總分、讓分、兩隊都得分。 有些盤我們的引擎根本沒有模型。 我們不裝懂:沒模型的就老實標『只負責對帳』,照樣賽前記下、賽後逐筆攤開 —— 連輸的都留著,不挑好的講。",
 };
 
 // ── ZONE 27 · /table · 今晚這桌 · 誠實收據 ─────────────────────────────────
@@ -55,8 +55,13 @@ export default function TablePage() {
           <p className="text-mute text-base leading-relaxed">
             真正的賭徒不只賭誰贏 —— 角球、總分、讓分、兩隊都得分。 而有些盤,我們的引擎
             <span className="text-bone">根本沒有模型</span>。 我們不裝懂:沒模型的,就老實標
-            「只負責對帳」,然後照樣幫你<span className="text-bone">賽前鎖死、賽後攤開</span>,
-            贏輸都掛你名下、刪不掉。 賣明牌的對什麼都裝有把握 —— 我們敢說哪些不懂。
+            「只負責對帳」,然後照樣<span className="text-bone">賽前記下、賽後逐筆攤開</span> ——
+            連輸的都留著、不挑好的講。 賣明牌的對什麼都裝有把握 —— 我們敢說哪些不懂。
+          </p>
+          {/* 誠實的出處(disclosure = 品牌)· 把「這是手記的」攤在陽光下,反而比假裝「不可竄改的
+              個人帳本」更可信:這桌是 Tim 自己一筆一筆記的,連輸的都留著。 名字之後接各自公開準度。 */}
+          <p className="mt-4 font-mono text-mute/55 text-[11px] leading-relaxed">
+            這桌是 Tim 賽前記下、賽後一筆一筆對的(跟賽果手抄同一套紀律)· 名字之後會連到各自的公開準度。
           </p>
         </section>
 
@@ -147,7 +152,7 @@ export default function TablePage() {
         <section className="mx-auto max-w-2xl w-full px-6 sm:px-10 pb-20 border-t border-line/40 pt-10">
           <p className="text-mute text-base leading-relaxed">
             引擎只在<span className="text-bone">有把握時</span>開口。 沒把握的,我們閉嘴 ——
-            但<span className="text-bone">照樣幫你對帳</span>,贏輸都掛你名下、刪不掉。
+            但<span className="text-bone">照樣對帳</span>,連輸的都留著、不挑好的講。
           </p>
           <div className="mt-8 flex items-center gap-3 flex-wrap">
             <Link
