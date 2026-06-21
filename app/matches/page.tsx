@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import MiniMatchCard from "@/components/MiniMatchCard";
 import MatchBoardFilter from "@/components/MatchBoardFilter";
 import TrackRecordStrip from "@/components/TrackRecordStrip";
+import YourRecordStrip from "@/components/YourRecordStrip";
 import { createPageMetadata } from "@/lib/page-og";
 import {
   getMatchPhase,
@@ -76,6 +77,23 @@ export default async function MatchesPage() {
   // 守 R234② 單一頂 Nav 入口:這是「賽事」面底下的次級發現點,不新增頂層導覽格。
   const openMarketCount = getOpenMarkets().length;
 
+  // R241 · 你的棒球戰績(你 vs 引擎)· 與足球板同款同位:賽事看板下方掛個人對帳條。
+  // 已結算勝方(CPBL + MLB 永久鎖定源)· client 端評分本人押注 · 沒登入/沒押自動隱藏。
+  const matchResults = [
+    ...getFinalizedMatches().map((m) => ({
+      id: m.id,
+      finalWinner: m.finalResult?.winner ?? null,
+      startISO: getMatchStartIso(m),
+    })),
+    ...getMlbLockedMatches()
+      .filter((m) => m.finalResult)
+      .map((m) => ({
+        id: m.id,
+        finalWinner: m.finalResult?.winner ?? null,
+        startISO: getMatchStartIso(m),
+      })),
+  ];
+
   return (
     <div className="flex flex-col flex-1 min-h-screen">
       <Nav active="matches" />
@@ -95,8 +113,8 @@ export default async function MatchesPage() {
               calibration={getCalibration(headMatch)}
             />
           )}
-          {/* R234 · 「公開戰績」從這個角落小 chip 升成 header 下方、帶真實 ✓/✕ 數字的
-              證物條(TrackRecordStrip)· 兩運動板同款同位 = 第一眼就看到含輸帳本。 */}
+          {/* R241 · 引擎公開戰績條(TrackRecordStrip)+ 你的棒球戰績 已移到賽事看板「下方」·
+              與足球板同款同位(賽事擺前面 · 戰績在後)· 兩運動板從此對稱。 */}
         </div>
         <div className="flex items-end justify-between flex-wrap gap-4">
           <h1 className="text-4xl sm:text-5xl text-bone font-light tracking-tight">
@@ -109,31 +127,8 @@ export default async function MatchesPage() {
         <div className="mt-6 w-full h-px bg-line/60" />
       </section>
 
-      {/* ── 引擎公開戰績條(證物 · 第一眼)──────── */}
-      <TrackRecordStrip
-        hits={recHits}
-        misses={recMisses}
-        pending={cpblSorted.length + mlbSorted.length}
-      />
-
-      {/* ── 群眾盤入口(R240)· 引擎沒覆蓋的場也能押 · 有開盤中才顯示 ──────── */}
-      {openMarketCount > 0 && (
-        <section className="mx-auto max-w-6xl w-full px-6 sm:px-10 pb-2">
-          <Link
-            href="/markets"
-            className="flex items-baseline justify-between gap-3 border border-line/60 bg-slate/30 px-4 py-3 hover:border-gold/40 hover:bg-slate/40 transition-colors group"
-          >
-            <span className="text-mute text-sm leading-snug">
-              引擎沒覆蓋的場?<span className="text-bone">{openMarketCount} 場群眾盤開盤中</span> · 任何一場都能賽前鎖一手、看群眾共識
-            </span>
-            <span className="shrink-0 font-mono text-gold/70 group-hover:text-gold text-[10px] tracking-[0.3em] transition-colors">
-              開盤 →
-            </span>
-          </Link>
-        </section>
-      )}
-
-      {/* ── MATCH GRID ──────────────────────── */}
+      {/* ── MATCH GRID(賽事擺前面)· R241 兩運動板同步:games first → 群眾盤 → 引擎戰績 → 你的戰績
+            (原本棒球把引擎戰績放最上、足球放最下 = 不對稱;Tim 已定『賽事擺前面』,棒球補同步)。 */}
       <section className="mx-auto max-w-6xl w-full px-6 sm:px-10 pb-12">
         {hasUpcoming ? (
           /* 一個看板 · league 篩選 chip(預設 CPBL 護核心)· 按完整開賽時間排 ·
@@ -172,6 +167,31 @@ export default async function MatchesPage() {
           </div>
         )}
       </section>
+
+      {/* ── 群眾盤入口(R240)· 引擎沒覆蓋的場也能押 · 有開盤中才顯示 ──────── */}
+      {openMarketCount > 0 && (
+        <section className="mx-auto max-w-6xl w-full px-6 sm:px-10 pb-2">
+          <Link
+            href="/markets"
+            className="flex items-baseline justify-between gap-3 border border-line/60 bg-slate/30 px-4 py-3 hover:border-gold/40 hover:bg-slate/40 transition-colors group"
+          >
+            <span className="text-mute text-sm leading-snug">
+              引擎沒覆蓋的場?<span className="text-bone">{openMarketCount} 場群眾盤開盤中</span> · 任何一場都能賽前鎖一手、看群眾共識
+            </span>
+            <span className="shrink-0 font-mono text-gold/70 group-hover:text-gold text-[10px] tracking-[0.3em] transition-colors">
+              開盤 →
+            </span>
+          </Link>
+        </section>
+      )}
+
+      {/* ── 引擎公開戰績條 + 你的棒球戰績(賽事看板下方 · 與足球板同款同位)──────── */}
+      <TrackRecordStrip
+        hits={recHits}
+        misses={recMisses}
+        pending={cpblSorted.length + mlbSorted.length}
+      />
+      <YourRecordStrip variant="home" matchResults={matchResults} />
 
       {/* ── MLB fallback 入口 · 只在上面看板沒有 MLB 場時顯示(避免同頁兩個 /matches/mlb)──
           R202 · 旁邊原本的「CPBL 投手排行」入口已移除:該頁是手動跑 script 抓的靜態
