@@ -443,8 +443,12 @@ export default async function MemberPage() {
         {/* 你的公開檔案(soul-roadmap P0)· 把含輸帳本變成可以丟給懷疑者的證物 —— 地位是
             賺來的、也是可以攤開驗證的。 URL 用永久碼(改名洗不掉)· 任何人免登入可看
             (預設匿名球迷#碼 · 設了顯示名才露名)。 接在榮譽牆後 = 賺來的地位 → 拿去公開驗證。
-            R204:從一行小字升成「連結 + 一鍵複製」卡(轉換審 P1:核心 costly-signal 入口太隱)。 */}
-        <ProfileShareCard code={authorCode} />
+            R204:從一行小字升成「連結 + 一鍵複製」卡(轉換審 P1:核心 costly-signal 入口太隱)。
+            🔴 R241(設計專家審):只在有「對過帳的紀錄」(decided>0)才出現。 全新會員的 /u 是空的
+            (球迷#碼 · 0 場),這張卡卻喊「丟給不信你的人 · 他能驗證你多準」—— 對方點進去看到空白
+            = 反證據,自打臉「公開驗證」命門。 證據卡只在有證據時才給(同 CredentialGrabPanel 已有的
+            門檻精神 · 那張更強的憑證早就 gate 在有紀錄才亮 · 這張基本版漏掉了 gate · 補上)。 */}
+        {identity.decided > 0 && <ProfileShareCard code={authorCode} />}
 
         {/* 一鍵拿取可攜憑證(對帳之星 / 已贏過引擎 ≥8 場才亮)· 把準度貼到 bio / LinkedIn / 簽名 / 論壇,
             點擊一律落回 live /u 含輸帳本(圖只是鉤子)· 沒夠格自動隱藏(graceful · 不灌水)。 */}
