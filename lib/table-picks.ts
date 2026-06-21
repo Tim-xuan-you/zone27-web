@@ -45,6 +45,39 @@ export type TableCall = {
 // 真實的桌(Tim 賽前轉述 · 賽後對帳)。 新增一注就往這裡加;賽果出來就改 result。
 // 🔴 角球(角球大小)= 唯一「無模型」的盤 —— 那正是這張桌想證明的克制。
 const TABLE: TableCall[] = [
+  // ── 2026-06-21 這一桌(今晚 · 賽前鎖)· Tim/Ron/Lewi 報的注 · 賽後逐筆對帳 ──
+  {
+    handle: "Tim",
+    league: "美國職棒",
+    match: "大都會 vs 費城人",
+    call: "費城人 不讓分（勝）",
+    engineModels: true,
+    result: "pending",
+  },
+  {
+    handle: "Ron",
+    league: "美國職棒",
+    match: "大都會 vs 費城人",
+    call: "總分 小 7.5",
+    engineModels: true,
+    result: "pending",
+  },
+  {
+    handle: "Lewi",
+    league: "世界盃",
+    match: "埃及 vs 紐西蘭",
+    call: "埃及 不讓分（勝）",
+    engineModels: true,
+    result: "pending",
+  },
+  {
+    handle: "Lewi",
+    league: "世界盃",
+    match: "伊朗 vs 比利時",
+    call: "總分 大 2.5",
+    engineModels: true,
+    result: "pending",
+  },
   // ── 2026-06-20 起這一桌 ──────────────────────────────
   {
     handle: "Tim",
