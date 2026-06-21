@@ -94,7 +94,7 @@ export default function CorrectionsOgImage() {
               maxWidth: 720,
             }}
           >
-            <span style={{ display: "flex" }}>贏了晒單、輸了刪文,是別人的玩法。</span>
+            <span style={{ display: "flex" }}>贏了曬單、輸了刪文,是別人的玩法。</span>
             <span style={{ display: "flex" }}>我們把搞砸的事做成一頁、永遠掛著。</span>
           </span>
           <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end" }}>

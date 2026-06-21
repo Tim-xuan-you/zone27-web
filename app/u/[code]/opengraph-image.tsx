@@ -21,7 +21,7 @@ import { normalizeProfileCode } from "@/lib/profile-code";
 
 // ── ZONE 27 · /u/[code] 動態 OG 卡 = 含輸收據(soul-roadmap #3 收斂進 P0)─────
 // 把 https://zone27-web.vercel.app/u/{code} 貼到 LINE/FB/Threads/X/Discord/Slack,
-// 預覽卡自動帶上「這個人的含輸命中率 + 賽前鎖定」黑金收據 —— 不是只選贏的晒單,
+// 預覽卡自動帶上「這個人的含輸命中率 + 賽前鎖定」黑金收據 —— 不是只選贏的曬單,
 // 是含贏含輸、刪不掉的證物(報馬仔結構上做不出這張)。
 //
 // 🔴 紅線:絕不只選贏(含 ✕ 沒中數)· 校準排非 PnL · 無賠率 · 無 emoji · 無 glyph

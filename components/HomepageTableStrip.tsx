@@ -8,7 +8,7 @@ import type { TableSummary } from "@/lib/table-picks";
 // 整塊一個連結 → /table。 跟首頁頭條「贏輸都掛」同一口氣 —— 但收斂成只敢講機制扛得住的那句:
 //   「連輸的都留著」(Tim 手記的桌 · 名字還沒接公開碼 · 不假裝「個人帳本不可竄改」)。
 // 🔴 graceful:空桌(total 0)→ 整塊不渲染(守首頁極簡)· 無 PnL/排名/粉絲數 · 暗金無紅綠 emoji。
-//   落空數用 text-loss(柔紅 · 非號誌紅)誠實亮出來 —— 那正是跟「只晒贏」最不一樣的地方。
+//   落空數用 text-loss(柔紅 · 非號誌紅)誠實亮出來 —— 那正是跟「只曬贏」最不一樣的地方。
 // ─────────────────────────────────────────────────────
 export default function HomepageTableStrip({ summary }: { summary: TableSummary }) {
   if (summary.total === 0) return null;

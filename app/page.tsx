@@ -168,9 +168,9 @@ export default async function Home() {
             AI 勝率引擎 · 公開準度
           </p>
           {/* 單一頭條:把最不可造假、對手抄不走的一句當第一屏唯一主標(不再雙標題)。
-              行為類別不指名對手(晒單 / 刪文)。 */}
+              行為類別不指名對手(曬單 / 刪文)。 */}
           <h1 className="text-3xl sm:text-5xl font-light leading-[1.14] tracking-tight text-bone max-w-2xl mx-auto">
-            別人贏了晒單,輸了刪文。
+            別人贏了曬單,輸了刪文。
             <br />
             <span className="text-gold">我們贏輸都掛 —— 賽前鎖死,刪不掉。</span>
           </h1>
