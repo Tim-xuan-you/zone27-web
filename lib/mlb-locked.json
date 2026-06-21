@@ -6779,8 +6779,12 @@
       },
       "engineWinHomePct": 49,
       "lockedAt": "2026-06-18T20:33:17.332Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 4,
+        "away": 6
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-06-21T04:56:36.221Z"
     },
     {
       "gamePk": 823854,
@@ -6808,8 +6812,12 @@
       },
       "engineWinHomePct": 65,
       "lockedAt": "2026-06-18T20:33:17.332Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 6,
+        "away": 3
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-06-21T04:56:36.221Z"
     },
     {
       "gamePk": 824909,
@@ -6837,8 +6845,12 @@
       },
       "engineWinHomePct": 56,
       "lockedAt": "2026-06-18T20:33:17.332Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 4,
+        "away": 3
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-06-21T04:56:36.221Z"
     },
     {
       "gamePk": 822967,
@@ -6866,8 +6878,12 @@
       },
       "engineWinHomePct": 46,
       "lockedAt": "2026-06-20T04:13:36.374Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 3,
+        "away": 4
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-06-21T04:56:36.221Z"
     },
     {
       "gamePk": 824180,
@@ -6895,8 +6911,12 @@
       },
       "engineWinHomePct": 67,
       "lockedAt": "2026-06-18T20:33:17.332Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 1,
+        "away": 8
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-06-21T04:56:36.221Z"
     },
     {
       "gamePk": 823447,
@@ -6924,8 +6944,12 @@
       },
       "engineWinHomePct": 69,
       "lockedAt": "2026-06-18T20:33:17.332Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 15,
+        "away": 3
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-06-21T04:56:36.221Z"
     },
     {
       "gamePk": 824342,
@@ -6953,8 +6977,12 @@
       },
       "engineWinHomePct": 31,
       "lockedAt": "2026-06-18T20:33:17.332Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 2,
+        "away": 1
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-06-21T04:56:36.221Z"
     },
     {
       "gamePk": 824988,
@@ -7011,8 +7039,12 @@
       },
       "engineWinHomePct": 72,
       "lockedAt": "2026-06-18T20:33:17.332Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 2,
+        "away": 3
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-06-21T04:56:36.221Z"
     },
     {
       "gamePk": 823126,
@@ -7040,8 +7072,12 @@
       },
       "engineWinHomePct": 59,
       "lockedAt": "2026-06-18T20:33:17.332Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 1,
+        "away": 5
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-06-21T04:56:36.221Z"
     },
     {
       "gamePk": 825068,
@@ -7334,6 +7370,35 @@
       "verdict": null
     },
     {
+      "gamePk": 824987,
+      "gameDate": "2026-06-21T20:05:00Z",
+      "scheduleDate": "2026-06-21",
+      "homeId": 133,
+      "homeEn": "Athletics",
+      "homeRecord": "38-38",
+      "awayId": 108,
+      "awayEn": "Los Angeles Angels",
+      "awayRecord": "30-47",
+      "homePitcher": "Jack Perkins",
+      "awayPitcher": "Reid Detmers",
+      "homeStats": {
+        "era": "6.15",
+        "k9": "10.76",
+        "bb9": "3.07",
+        "hr9": "1.10"
+      },
+      "awayStats": {
+        "era": "3.68",
+        "k9": "10.23",
+        "bb9": "2.45",
+        "hr9": "0.72"
+      },
+      "engineWinHomePct": 43,
+      "lockedAt": "2026-06-21T04:56:35.738Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
       "gamePk": 823934,
       "gameDate": "2026-06-21T20:10:00Z",
       "scheduleDate": "2026-06-21",
@@ -7388,6 +7453,35 @@
       },
       "engineWinHomePct": 49,
       "lockedAt": "2026-06-19T19:55:37.672Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 823449,
+      "gameDate": "2026-06-21T23:20:00Z",
+      "scheduleDate": "2026-06-21",
+      "homeId": 143,
+      "homeEn": "Philadelphia Phillies",
+      "homeRecord": "41-35",
+      "awayId": 121,
+      "awayEn": "New York Mets",
+      "awayRecord": "34-42",
+      "homePitcher": "Zack Wheeler",
+      "awayPitcher": "David Peterson",
+      "homeStats": {
+        "era": "2.01",
+        "k9": "8.90",
+        "bb9": "2.15",
+        "hr9": "1.01"
+      },
+      "awayStats": {
+        "era": "5.91",
+        "k9": "8.16",
+        "bb9": "3.94",
+        "hr9": "0.70"
+      },
+      "engineWinHomePct": 69,
+      "lockedAt": "2026-06-21T04:56:35.738Z",
       "finalScore": null,
       "verdict": null
     },
