@@ -50,6 +50,7 @@ import { SUPPORT_EMAIL } from "@/lib/brand-constants";
 import { readDisplayName, getTeamCrest } from "@/lib/identity";
 import { getMlbAsMatches, getMlbLockedMatches } from "@/lib/mlb-matches";
 import { createHash } from "crypto";
+import Disclosure from "@/components/Disclosure";
 
 export const metadata: Metadata = {
   title: "你的儀表板",
@@ -81,6 +82,20 @@ function compactDate(dateStr: string): string {
 // 持倉排序:進行中 → 今晚待開 → 未來(最急的在最上面)
 function phaseRank(phase: OpenPosition["phase"]): number {
   return phase === "today-live" ? 0 : phase === "today-pregame" ? 1 : 2;
+}
+
+// R241 收納:會員頁「接下來可以押」最多露幾場 · 其餘導回 /matches(會員頁=我的資料+下一步,
+// 不重造賽事看板)。 露的是最快開賽的 6 場 = 最 actionable(upcoming 已按開賽時間排)。
+const MEMBER_UPCOMING_MAX = 6;
+
+// R241 收納:區塊白話小標 · 同站上既有 eyebrow 視覺語彙 · mt-10 與上一群拉開。
+// 🔴 用它的群組,標頭必須跟「該組至少一個 child 會 render」一起 gate(防空標頭破 graceful)。
+function SectionLabel({ children }: { children: string }) {
+  return (
+    <p className="font-mono text-gold/60 text-[10px] tracking-[0.4em] mt-10 mb-3">
+      {children}
+    </p>
+  );
 }
 
 export default async function MemberPage() {
@@ -300,9 +315,12 @@ export default async function MemberPage() {
       <Nav active="member" />
 
       <main id="main" className="mx-auto max-w-2xl w-full px-6 sm:px-10 pt-10 pb-24">
-        {/* 0 · 取暱稱 onboarding 提示(R237)· 研究結論:別在註冊強制取名(降轉換)·
-            改在已投入的時刻漸進邀請。 只在「還沒設顯示名 && 沒按過之後再說」時出現在最頂 ·
-            取名 / 跳過就消失(守極簡)· 解決脈動/聯盟「一堆球迷#碼」impersonal 牆。 */}
+        {/* ── R241 收納(Tim「會員功能越來越多、版面雜亂、超長」)· 7 區 + 白話小標 ──
+            只分組/折疊/截斷,不刪功能。 最上焦點(身分 + 今天的一手 + 你現在的一手)永不折。
+            🔴 群組小標必須跟「該組至少一個 child 會 render」一起 gate,避免空標頭破 graceful。 */}
+
+        {/* ═══ 區 1 · 最上焦點(無標 · 永不折)═══ */}
+        {/* 取暱稱漸進提示(沒設名才現)· 身分列(改名 / tier / 登出)· 到期狀態(付費才現)*/}
         <NicknamePrompt
           show={
             displayName.trim() === "" && meta?.nick_prompt_dismissed !== true
@@ -310,10 +328,6 @@ export default async function MemberPage() {
           anonHandle={anonHandle}
           code={authorCode}
         />
-
-        {/* 1 · 身分列 · 頭像 + 公開名(可改)+ tier + 登出 ──────
-            Tim dogfood「球迷#hash 不知道是誰 · 能自己設名嗎」→ 頭像 + 改名 inline。
-            預設一行(守極簡)· 點「改名」才展開。 */}
         <div className="flex items-start justify-between gap-3 flex-wrap">
           <DisplayNameSetting
             initialName={displayName}
@@ -329,38 +343,25 @@ export default async function MemberPage() {
             </button>
           </form>
         </div>
-
-        {/* BLACK 會員看自己撐到哪天 + 還有幾天(免費會員 → 不 render,守極簡)·
-            R252 Defector 式誠實日期、零催繳 · 不自動扣款是驕傲的功能不是缺點。 */}
         <MembershipStatus meta={meta} />
 
-        {/* 今天 · 每日對帳儀式(soul · Defector 高路 / 柏青哥低路討論收斂)· 把「今天的一手 +
-            對帳紀律」收成一條放最上 = 會員一打開就知道今天的一個誠實動作,然後就走。
-            🔴 紀律 = 回來對帳天數,不是連勝 · 斷了不羞辱 · 無拉霸/聲光/點數 · 不推銷。 */}
+        {/* 今天的一手 + 對帳紀律 = 會員每天回來的核心動作(鐵律置頂 · 永不收折)*/}
         <TodayStrip
           tonightLockable={tonightLockable}
           streak={streak}
           dateLabel={todayLabel}
         />
 
-        {/* 1.5 · 你的未結算押注 · the live middle(soul)· 只在有持倉時出現 ──
-            押下去到打完之間那段 —— 你 vs 引擎 vs 群眾。 放在準度數字之上,因為
-            這是你今天回來的理由(動態 · 時效)· 沒持倉時自動隱藏,準度數字遞補為首。
-            ⚡ adaptive(Tim dogfood「押十幾場版面爆了」):≤2 注大卡(時刻)· ≥3 注密清單
-            (投資組合 · 隊徽顏色秒掃 · 結算說明只說一次)· 見 OpenPositionsPanel。 */}
+        {/* 你現在的一手:未結算押注 + 你不在時結算了 N 場(都 graceful 自動隱藏)·
+            放最上=今天回來的理由(動態時效)· 不歸進「成績」(它們還沒分勝負)。 */}
         <OpenPositionsPanel positions={openPositions} />
-
-        {/* 你不在時結算了 N 場(soul-roadmap R208 #5 · 單人回訪鉤)· 平靜對帳語氣 ·
-            含輸照數(引擎贏你也講)· 首訪/0 新結算自動隱藏 · 永遠寫回 last_seen。 */}
         <ReturnedWhileAwayCard delta={settlementDelta} />
 
-        {/* 2 · 你的校準身分 · 含輸帳本 · 你 vs 亂猜 vs 引擎 + 本月升階閘門 ──
-            「有帳本的玩運彩」脊椎(soul-roadmap #1)· 計算在 aggregateIdentity。
-            series = 準度歷程 sparkline(會動的數字 · 場數夠多才畫)。 */}
+        {/* ═══ 區 2 · 你的成績(CalibrationIdentityCard 永遠 render → 標頭恆有內容)═══ */}
+        <SectionLabel>你的成績 · 你 vs 引擎</SectionLabel>
+        {/* 校準身分(含輸帳本脊椎 · 金色主角)+ 準度歷程 sparkline */}
         <CalibrationIdentityCard identity={identity} series={accuracySeries} />
-
-        {/* 對帳之星進度(米其林式最高榮譽 · lib/reckoning-star 單一真相)· 達標 = 金星卡(連去公開檔外傳)·
-            在軌道上 = 給「還差 X 場」目標(回訪鉤 · 米其林那種「快摘星了」)· 其餘不顯(graceful · 不嘮叨剛上路的人)。 */}
+        {/* 對帳之星進度(達標金星卡 / 在軌道上給目標 / 其餘不顯)*/}
         {star.earned ? (
           <Link
             href={`/u/${authorCode}`}
@@ -388,46 +389,28 @@ export default async function MemberPage() {
             </span>
           </div>
         ) : null}
-
-        {/* 你的足球戰績(含輸 · 跟棒球分開算 · 含你 vs 引擎)· 沒押足球自動隱藏 */}
+        {/* 足球戰績(沒押足球自動隱藏)· 校準大師(沒填把握自動隱藏)· 榮譽牆(里程碑章)*/}
         <SoccerRecordCard
           results={soccerResults}
           enginePicks={soccerEnginePicks}
           wrapperClass="mt-6"
         />
-
-        {/* 校準大師(R217)· 你說的把握 vs 實際中的 · 沒填過把握自動隱藏(守極簡)*/}
         <CalibrationMasterCard results={calibrationResults} wrapperClass="mt-6" />
-
-        {/* 3 · 你的榮譽牆(soul-roadmap #5 · 「靠誠實賺來的地位」三樓第一塊)· 章全部
-            從含輸帳本自動算 · 報馬仔掛不出 · Apple 紀律只放 5 個 · 框 mute 不搶校準卡主角。 */}
-        {/* 對帳紀律:current(現在連續 + 今天接上)已移到頂端「今天」焦點條 TodayStrip(R218
-            收乾淨 · 單一動作面);榮譽牆只留里程碑徽章(7/30/100 日)· streak 物件仍傳給它算章。 */}
         <HonorWall identity={identity} streak={streak} />
 
-        {/* 結算收件匣(R231 · #1 回訪迴路的不卡網域那半)· 「你不在時結算了什麼」的逐筆對帳隊列 ·
-            Nav 鈴鐺點進來的家 · 跟收藏(全部畫廊)分工:這是時間序、標出新結算的隊列。
-            同列樣式(不新增大卡 · 守會員頁極簡)· 接在收藏之前(對帳 → 收藏 的動線)。 */}
+        {/* ═══ 區 3 · 你的東西 · 收藏 / 對帳 / 回顧(收件匣+收藏無條件 → 標頭恆有內容)═══ */}
+        <SectionLabel>你的東西 · 收藏、對帳、回顧</SectionLabel>
         <Link
           href="/member/inbox"
           className="mt-6 flex items-baseline justify-between gap-3 border-b border-line/40 pb-3 hover:border-gold/40 transition-colors group"
         >
           <span className="text-mute text-sm leading-snug">
-            <span className="text-bone">結算收件匣</span> · 命中落空逐筆對帳
+            <span className="text-bone">結算收件匣</span> · 中沒中逐筆對帳
           </span>
           <span className="shrink-0 font-mono text-gold/70 group-hover:text-gold text-[10px] tracking-[0.3em] transition-colors">
             收件匣 →
           </span>
         </Link>
-
-        {/* 結算提醒開關(R233 web-push)· graceful:站方未設 VAPID 金鑰 / 瀏覽器不支援 → 整顆隱藏。
-            放在收件匣下方:賽果結算後主動敲你回來看這個收件匣。 */}
-        <div className="mt-4">
-          <PushToggle />
-        </div>
-
-        {/* 戰功卡收藏(soul-roadmap 願景3)· 你押過、賽前鎖死的每一手 → 個人畫廊(含輸照收)。
-            接在榮譽牆後:章是榮譽的「總結」· 收藏是一張張可點進收據的「證物」· 沒結算過 → 牆自己空狀態。 */}
         <Link
           href="/member/collection"
           className="mt-6 flex items-baseline justify-between gap-3 border-b border-line/40 pb-3 hover:border-gold/40 transition-colors group"
@@ -439,54 +422,6 @@ export default async function MemberPage() {
             看收藏 →
           </span>
         </Link>
-
-        {/* 你的公開檔案(soul-roadmap P0)· 把含輸帳本變成可以丟給懷疑者的證物 —— 地位是
-            賺來的、也是可以攤開驗證的。 URL 用永久碼(改名洗不掉)· 任何人免登入可看
-            (預設匿名球迷#碼 · 設了顯示名才露名)。 接在榮譽牆後 = 賺來的地位 → 拿去公開驗證。
-            R204:從一行小字升成「連結 + 一鍵複製」卡(轉換審 P1:核心 costly-signal 入口太隱)。
-            🔴 R241(設計專家審):只在有「對過帳的紀錄」(decided>0)才出現。 全新會員的 /u 是空的
-            (球迷#碼 · 0 場),這張卡卻喊「丟給不信你的人 · 他能驗證你多準」—— 對方點進去看到空白
-            = 反證據,自打臉「公開驗證」命門。 證據卡只在有證據時才給(同 CredentialGrabPanel 已有的
-            門檻精神 · 那張更強的憑證早就 gate 在有紀錄才亮 · 這張基本版漏掉了 gate · 補上)。 */}
-        {identity.decided > 0 && <ProfileShareCard code={authorCode} />}
-
-        {/* 一鍵拿取可攜憑證(對帳之星 / 已贏過引擎 ≥8 場才亮)· 把準度貼到 bio / LinkedIn / 簽名 / 論壇,
-            點擊一律落回 live /u 含輸帳本(圖只是鉤子)· 沒夠格自動隱藏(graceful · 不灌水)。 */}
-        {(cred.level === "star" || cred.level === "beat") && (
-          <CredentialGrabPanel code={authorCode} sentence={cred.sentence} />
-        )}
-
-        {/* 私人預測聯盟(R236)· 把含輸帳本變成「跟朋友整季較勁」的盟(校準計分 · 不是連勝)·
-            同列樣式守極簡 · 接在公開檔後 = 賺來的地位 → 揪朋友一起比。 */}
-        <Link
-          href="/member/leagues"
-          className="mt-6 flex items-baseline justify-between gap-3 border-b border-line/40 pb-3 hover:border-gold/40 transition-colors group"
-        >
-          <span className="text-mute text-sm leading-snug">
-            揪朋友開<span className="text-bone">私人預測聯盟</span> · 整季比校準
-          </span>
-          <span className="shrink-0 font-mono text-gold/70 group-hover:text-gold text-[10px] tracking-[0.3em] transition-colors">
-            我的盟 →
-          </span>
-        </Link>
-
-        {/* 會員房間(R248 · Defector 式專屬空間)· 出錢養著免費引擎那群人的客廳 · 顯示給所有登入者
-            (免費會員點進去看到房間介紹 + 升級邀請 = 偷看門後的 conversion;付費會員 = 直接進場)·
-            同列樣式守極簡 · 接在聯盟後(社群/歸屬群組)。 */}
-        <Link
-          href="/member/lounge"
-          className="mt-6 flex items-baseline justify-between gap-3 border-b border-line/40 pb-3 hover:border-gold/40 transition-colors group"
-        >
-          <span className="text-mute text-sm leading-snug">
-            <span className="text-bone">會員房間</span> · 養著免費引擎那群人的客廳
-          </span>
-          <span className="shrink-0 font-mono text-gold/70 group-hover:text-gold text-[10px] tracking-[0.3em] transition-colors">
-            進房間 →
-          </span>
-        </Link>
-
-        {/* 本月賽季回顧入口(R220 稽核:已建好但只在 /u 連得到 → 接到會員頁)· 有本月押注才連 ·
-            同「看收藏」列樣式(不新增大卡 · 守會員頁極簡)。 */}
         {hasSeasonActivity && (
           <Link
             href={`/u/${authorCode}/season/${currentMonth}`}
@@ -501,9 +436,63 @@ export default async function MemberPage() {
           </Link>
         )}
 
-        {/* 升級入口 · 路要看得見(Apple:付費路徑永遠不藏)· 但這是會員自己的介面 ·
-            不對他推銷、不打「賺錢」· 接著上面的榮譽牆 → 用「身分/地位」當主軸(paid=身分
-            非功能 · Defector:出錢養免費引擎,不是買功能/不賣分析)· 價格/方案在 /membership 不在這裡轟炸。 */}
+        {/* ═══ 區 4 · 拿去給人看 · 把準度丟給懷疑者 ═══
+            🔴 整組標頭 gate `identity.decided > 0`:全新會員(0 場)兩張卡都不 render,
+            裸標頭 = 孤兒標頭破 graceful。 star/beat 必 decided≥8>0,故 decided>0 已涵蓋。 */}
+        {identity.decided > 0 && (
+          <>
+            <SectionLabel>拿去給人看 · 把準度丟給不信你的人</SectionLabel>
+            {/* 基本分享卡:公開檔含輸戰績(有紀錄才到這 · 不發空檔案)*/}
+            <ProfileShareCard code={authorCode} />
+            {/* 進階憑證(整頁最大、高門檻 star/beat 才亮)· 預設折疊 · 點才展開 */}
+            {(cred.level === "star" || cred.level === "beat") && (
+              <Disclosure summary="進階:做成 bio / 簽名嵌入碼 →">
+                <CredentialGrabPanel code={authorCode} sentence={cred.sentence} />
+              </Disclosure>
+            )}
+          </>
+        )}
+
+        {/* ═══ 區 5 · 揪朋友 · 一起玩 · 聯盟 / 房間 / 足跡 / 創作 / 支持
+            (聯盟+房間無條件 → 標頭恆有內容)═══ */}
+        <SectionLabel>揪朋友 · 一起玩</SectionLabel>
+        <Link
+          href="/member/leagues"
+          className="mt-6 flex items-baseline justify-between gap-3 border-b border-line/40 pb-3 hover:border-gold/40 transition-colors group"
+        >
+          <span className="text-mute text-sm leading-snug">
+            揪朋友開<span className="text-bone">私人預測聯盟</span> · 整季比準度
+          </span>
+          <span className="shrink-0 font-mono text-gold/70 group-hover:text-gold text-[10px] tracking-[0.3em] transition-colors">
+            我的盟 →
+          </span>
+        </Link>
+        <Link
+          href="/member/lounge"
+          className="mt-6 flex items-baseline justify-between gap-3 border-b border-line/40 pb-3 hover:border-gold/40 transition-colors group"
+        >
+          <span className="text-mute text-sm leading-snug">
+            <span className="text-bone">會員房間</span> · 養著免費引擎那群人的客廳
+          </span>
+          <span className="shrink-0 font-mono text-gold/70 group-hover:text-gold text-[10px] tracking-[0.3em] transition-colors">
+            進房間 →
+          </span>
+        </Link>
+        {/* 你的足跡(沒留言自動隱藏)· 創作者後台(付費 + 沒發過自動隱藏)*/}
+        <MyActivityPanel comments={myComments} />
+        {isPaid(tier) && <MyCreatorPanel matches={creatorCheckMatches} />}
+        {/* 付費會員:去發一篇(接在創作者後台後 · 同對象)· 免費會員:低調升級 link(不推銷)*/}
+        {isPaid(tier) && (
+          <p className="mt-6 font-mono text-mute/55 text-[10px] tracking-[0.2em] leading-relaxed">
+            你的支持身分已開通 · 公開發分析、賽後自動對帳{" "}
+            <Link
+              href={upcoming.length > 0 ? `/matches/${upcoming[0].id}#say` : "/matches"}
+              className="text-gold/70 hover:text-gold underline-offset-4 hover:underline"
+            >
+              去發一篇 →
+            </Link>
+          </p>
+        )}
         {!isPaid(tier) && (
           <Link
             href="/membership"
@@ -518,41 +507,32 @@ export default async function MemberPage() {
           </Link>
         )}
 
-        {/* 點數錢包已移除(R239 · Tim 拍板「整個移除」)—— Defector 下沒有付費分析可買,儲值卻無處可花 =
-            文案在說謊。 拿掉可見錢包面板;後端(migrations 0008/0009 · lib/wallet.ts)保留休眠、未來要重開可復活。 */}
-
-        {/* 你的足跡 · 回過的留言(說過的話找得回 · 一鍵回到那串)· Tim dogfood:回了留言找不到在哪。
-            「買過的分析」書架已隨錢包收掉(Defector:分析免費、不賣)· 沒回過自動隱藏。 */}
-        <MyActivityPanel comments={myComments} />
-
-        {/* 你的分析 · 創作者後台(付費會員 · 沒發過分析自動隱藏)· Tim dogfood:
-            「看不到我發了哪些文章/幾勝幾敗/有人回嗎」· 答 #1 #5 #7 */}
-        {isPaid(tier) && <MyCreatorPanel matches={creatorCheckMatches} />}
-
-        {/* 3 · 今晚可以押 ───────────────────────────── */}
-        <section className="mt-6">
+        {/* ═══ 區 6 · 接下來可以押(下一步動作)· 截斷 top 6 + 看全部 → 解「超長」═══ */}
+        <section className="mt-10">
           <p className="font-mono text-gold text-[10px] tracking-[0.4em] mb-3">
             {upcoming.length > 0 ? "接下來可以押" : "今天賽事"}
           </p>
           {upcoming.length > 0 ? (
             <div className="border border-line/60 bg-slate/30">
-              {upcoming.map((m, i) => {
+              {upcoming.slice(0, MEMBER_UPCOMING_MAX).map((m, i, arr) => {
                 const homeFav = m.home.winRate >= m.away.winRate;
-                // 引擎看好那隊的隊徽 + 隊色 → 一行密清單也能「顏色秒認隊」
-                // (同上方持倉 OpenPositionCard / 看板 MiniMatchCard 的隊徽掛法)。
-                // 這是 /member 最後一個純文字的押注面 · Tim R197「球迷用顏色秒認隊」。
+                // 引擎看好那隊的隊徽 + 隊色 → 一行密清單也能「顏色秒認隊」。
                 const favName = homeFav ? m.home.name : m.away.name;
                 const crest = getTeamCrest(
                   favName,
                   homeFav ? m.home.en : m.away.en,
                   m.league,
                 );
+                // 最後一列才去掉底線 —— 但若有「看全部」列接在後面(upcoming 超過上限),
+                // 這 6 列都要保留底線(看全部列才是最後)。
+                const noBorder =
+                  i === arr.length - 1 && upcoming.length <= MEMBER_UPCOMING_MAX;
                 return (
                   <Link
                     key={m.id}
                     href={`/matches/${m.id}`}
                     className={`flex items-center justify-between gap-3 px-4 py-3.5 hover:bg-gold/5 transition-colors ${
-                      i === upcoming.length - 1 ? "" : "border-b border-line/40"
+                      noBorder ? "" : "border-b border-line/40"
                     }`}
                   >
                     <div className="flex items-center gap-2.5 min-w-0">
@@ -580,6 +560,16 @@ export default async function MemberPage() {
                   </Link>
                 );
               })}
+              {/* 超過上限 → 一條安靜的「看全部」導回賽事板(不在會員頁重造看板)*/}
+              {upcoming.length > MEMBER_UPCOMING_MAX && (
+                <Link
+                  href="/matches"
+                  className="flex items-center justify-between gap-3 px-4 py-3.5 hover:bg-gold/5 transition-colors font-mono text-[10px] tracking-[0.3em] text-mute hover:text-gold"
+                >
+                  <span>還有 {upcoming.length - MEMBER_UPCOMING_MAX} 場</span>
+                  <span className="text-gold/70">看全部賽事 →</span>
+                </Link>
+              )}
             </div>
           ) : (
             <div className="border border-line/60 bg-slate/30 p-5">
@@ -604,25 +594,14 @@ export default async function MemberPage() {
           )}
         </section>
 
-        {/* 4 · 付費會員 → 你的支持身分已開通 · 直接去公開發分析(免費會員看上面升級卡)·
-            R238「免費封神」:不再喊「賣分析賺錢」· 主軸是公開發、賽後自動對帳、地位自己長。 */}
-        {isPaid(tier) && (
-          <p className="mt-10 text-center font-mono text-mute/55 text-[10px] tracking-[0.2em] leading-relaxed">
-            你的支持身分已開通 · 公開發分析、賽後自動對帳{" "}
-            <Link
-              href={upcoming.length > 0 ? `/matches/${upcoming[0].id}#say` : "/matches"}
-              className="text-gold/70 hover:text-gold underline-offset-4 hover:underline"
-            >
-              去發一篇 →
-            </Link>
-          </p>
-        )}
-
-        {/* 帳本可攜(soul R209)· 你的歷史我們改不了、你也能帶走 = 對手結構上做不到 */}
+        {/* ═══ 區 7 · 設定 · 其他(頁尾收尾)· 提醒開關 + 匯出 + 聯絡
+            (匯出+聯絡無條件 → 標頭恆有內容;PushToggle graceful 隱藏也不破)═══ */}
+        <SectionLabel>設定 · 其他</SectionLabel>
+        {/* 結算提醒開關(web-push · 從中段移來頁尾設定區 · 未設金鑰/不支援→整顆隱藏)*/}
+        <PushToggle />
+        {/* 帳本可攜:你的歷史我們改不了、你也能帶走 */}
         <ExportLedgerButton />
-
-        {/* 聯絡站長 · Tim dogfood:會員找不到「怎麼聯絡站長」· 直接 mailto Tim 個人 inbox */}
-        <p className="mt-10 text-center font-mono text-mute/50 text-[10px] tracking-[0.2em] leading-relaxed">
+        <p className="mt-8 text-center font-mono text-mute/50 text-[10px] tracking-[0.2em] leading-relaxed">
           有問題?{" "}
           <a
             href={`mailto:${SUPPORT_EMAIL}`}
