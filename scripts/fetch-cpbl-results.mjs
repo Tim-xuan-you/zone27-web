@@ -132,14 +132,53 @@ function toRecord(g) {
   };
 }
 
+// 鏡像是否已 stale(最新一場 > STALE_DAYS 天前 · 台北日曆)· 用來分辨「抓不到但鏡像還新鮮
+// = 容忍單次 blip」vs「抓不到且鏡像已凍結好幾天 = 管線真的壞了該報警」。 抓不到才會用到它,
+// off-season / 正常情況 fetch 會成功、根本走不到這裡 → 不會誤報。
+const STALE_DAYS = 3;
+function mirrorStaleDays() {
+  try {
+    if (!existsSync(OUT)) return Infinity;
+    const prev = JSON.parse(readFileSync(OUT, "utf8"));
+    const games = prev.games ?? [];
+    if (games.length === 0) return Infinity;
+    const latest = games.reduce((mx, g) => (g.date > mx ? g.date : mx), "");
+    if (!latest) return Infinity;
+    const today = new Intl.DateTimeFormat("en-CA", {
+      timeZone: "Asia/Taipei",
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+    }).format(new Date());
+    const ms = Date.parse(`${today}T00:00:00Z`) - Date.parse(`${latest}T00:00:00Z`);
+    return Number.isFinite(ms) ? ms / 86400000 : Infinity;
+  } catch {
+    return 0; // 讀不動就別誤報(走容忍路徑)
+  }
+}
+
 async function main() {
   let tokens, season;
   try {
     tokens = await getTokens();
     season = await getSeason(tokens);
   } catch (e) {
-    // fail-soft:抓不到就保留上一版,絕不寫空檔
-    console.error(`[cpbl-results] fetch failed (keeping existing json): ${e.message}`);
+    // R241:不再「無聲 fail-soft」。 cpbl.com.tw 6/13 改了防偽 token 後又把鏡像凍結 8 天,
+    //   workflow 卻一路綠燈、沒人發現 —— 那正是這個 silent-return 的陷阱。 改成:鏡像已 stale
+    //   (最新一場 > STALE_DAYS 天前)還抓不到 = 管線真的壞了 → exit 1 讓 workflow 變紅、寄失敗信
+    //   報警(同 soccer-engine「死管線有過期場故意 exit1」)· 也讓 Actions log 浮上來好查根因
+    //   (token 改版 / GitHub runner IP 被擋)。 鏡像還新鮮(剛抓過 / off-season)時的單次 blip →
+    //   仍容忍、保留上一版好 json、exit 0,不 cry wolf。 永遠不寫空檔/半截(帳本只增不毀)。
+    const stale = mirrorStaleDays();
+    if (stale > STALE_DAYS) {
+      console.error(
+        `[cpbl-results] fetch failed AND mirror is ${stale.toFixed(1)}d stale (> ${STALE_DAYS}d) — failing loud (exit 1) to alarm: ${e.message}`
+      );
+      process.exit(1);
+    }
+    console.error(
+      `[cpbl-results] fetch failed (mirror still fresh ${stale.toFixed(1)}d · tolerating blip · keeping existing json): ${e.message}`
+    );
     return;
   }
 
