@@ -21,7 +21,7 @@ import { dirname, join } from "node:path";
 const HERE = dirname(fileURLToPath(import.meta.url));
 const LOCK_FILE = join(HERE, "..", "lib", "mlb-locked.json");
 const MLB_API = "https://statsapi.mlb.com/api/v1";
-const UA = { "User-Agent": "ZONE-27/0.27 (+zone27-web.vercel.app)" };
+const UA = { "User-Agent": "ZONE-27/0.27 (+zone27.com.tw)" };
 // 上限:只留最近 N 筆(避免檔案無限長大 · 夠 /track-record 顯示 + 校準計算)
 const MAX_KEEP = 600;
 

@@ -17,7 +17,7 @@ import { dirname, join } from "node:path";
 const HERE = dirname(fileURLToPath(import.meta.url));
 const LOCK_FILE = join(HERE, "..", "lib", "mlb-locked.json");
 const MLB_API = "https://statsapi.mlb.com/api/v1";
-const UA = { "User-Agent": "ZONE-27/0.27 (+zone27-web.vercel.app)" };
+const UA = { "User-Agent": "ZONE-27/0.27 (+zone27.com.tw)" };
 
 async function fetchJson(url) {
   const res = await fetch(url, { headers: UA });
