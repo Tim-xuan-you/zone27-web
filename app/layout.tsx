@@ -67,6 +67,12 @@ export const metadata: Metadata = {
     title: "ZONE 27",
     statusBarStyle: "black-translucent",
   },
+  // Google Search Console 擁有權驗證(2026-06-22 · Tim 上線後提供)。
+  // Next 自動 render <meta name="google-site-verification"> 進 <head>。
+  // 🔴 驗證成功後也不可移除(Google 會定期重查)。
+  verification: {
+    google: "PzCJ8S8ZxQSPHJQqqXOff0-ym0pIArJQgIU0u-Co_7g",
+  },
   openGraph: {
     title: "ZONE 27 — We Don't Guess. We Compute.",
     description:
