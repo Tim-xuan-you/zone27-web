@@ -29,14 +29,17 @@ export default function OverUnderStrip({
   overPct,
   underPct,
   result = null,
+  hideIfNoPick = false,
 }: {
   matchId: string;
   dateISO: string;
-  /** 引擎大小分機率(server 端 deriveSoccerMarkets 算好傳進)· 顯示用 */
-  overPct: number;
-  underPct: number;
+  /** 引擎大小分機率(deriveSoccerMarkets 算好)· 顯示用 · 選填(收據 settled 模式不必再秀引擎線) */
+  overPct?: number;
+  underPct?: number;
   /** 賽後結果(server 端從終場總分算好)· null = 還沒結算 */
   result?: OuSide | null;
+  /** 收據模式:本人沒押這手大小分 → 整塊隱藏(同 SoccerUserReceiptPick · 公開收據不留噪音) */
+  hideIfNoPick?: boolean;
 }) {
   const mkt = ouMarketId(matchId);
   const [state, setState] = useState<State>("loading");
@@ -137,15 +140,22 @@ export default function OverUnderStrip({
   const settled = result === "over" || result === "under";
   const youHit = settled && pick !== null ? pick === result : null;
 
+  // 收據模式:本人沒押這手 → 隱藏(loading 也先隱藏避免閃 · 同 SoccerUserReceiptPick graceful)。
+  if (hideIfNoPick && pick === null) return null;
+
   return (
     <div className="mt-2.5 pt-2.5 border-t border-line/40">
       <div className="flex items-baseline justify-between mb-2">
         <p className="font-mono text-mute/70 text-[9px] tracking-[0.3em]">
-          / 大小分 {OU_LINE} · 押一手
+          / 大小分 {OU_LINE}{settled ? "" : " · 押一手"}
         </p>
-        <p className="font-mono text-mute/45 text-[8px] tracking-[0.3em]">
-          引擎 大{overPct}% · 小{underPct}%
-        </p>
+        {typeof overPct === "number" && typeof underPct === "number" ? (
+          <p className="font-mono text-mute/45 text-[8px] tracking-[0.3em]">
+            引擎 大{overPct}% · 小{underPct}%
+          </p>
+        ) : (
+          <span />
+        )}
       </div>
 
       {state === "loading" && !settled ? (
