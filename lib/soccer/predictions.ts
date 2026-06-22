@@ -116,7 +116,9 @@ export async function getMySoccerPicks(): Promise<SoccerPickRow[]> {
       created_at?: unknown;
     }[]) {
       const matchId = typeof row.match_id === "string" ? row.match_id : "";
-      if (!matchId.startsWith("fd-") || !isPick(row.pick)) continue;
+      // 🔴 隔離:`~` 後綴 = 玩法押注(大小分等)· 絕不進「誰贏」戰績(見 lib/soccer/over-under.ts)。
+      if (!matchId.startsWith("fd-") || matchId.includes("~") || !isPick(row.pick))
+        continue;
       out.push({
         matchId,
         pick: row.pick,

@@ -52,6 +52,7 @@ async function getMyPicksSplit(): Promise<{
       const id = typeof row.match_id === "string" ? row.match_id : "";
       const ts = typeof row.created_at === "string" ? row.created_at : "";
       if (!id || !ts) continue; // ts 缺 → 先鎖後結算不了 → 丟(同棒球/足球既有防禦)
+      if (id.includes("~")) continue; // 🔴 玩法押注(大小分等)不進「誰贏」結算收件匣
       if (id.startsWith("fd-")) {
         if (row.pick === "home" || row.pick === "draw" || row.pick === "away") {
           soccer.set(id, { pick: row.pick, ts });

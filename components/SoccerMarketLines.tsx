@@ -22,9 +22,9 @@ export default function SoccerMarketLines({
     totalLines: [2.5],
     handicapLines: [1.5],
   });
-  const ou = m.totals[0];
+  // 大小球已升級成可押的 OverUnderStrip(看大/看小)· 這裡只留讓球 + 兩隊進球的引擎讀數(避免重複)。
   const hc = m.handicaps[0];
-  if (!ou || !hc) return null;
+  if (!hc) return null;
 
   return (
     <div className="mt-2.5 pt-2.5 border-t border-line/40">
@@ -44,14 +44,6 @@ export default function SoccerMarketLines({
         aria-label="玩法機率 · 我們引擎算的機率"
         className="space-y-1 list-none pl-0 m-0"
       >
-        <MarketRow
-          label="大小球"
-          line={`${ou.line}`}
-          aLabel="大"
-          aPct={ou.overPct}
-          bLabel="小"
-          bPct={ou.underPct}
-        />
         <MarketRow
           label="讓球"
           line={`${hc.line}`}

@@ -6,11 +6,12 @@ import Footer from "@/components/Footer";
 import Avatar from "@/components/Avatar";
 import EngineThreeWayBar from "@/components/EngineThreeWayBar";
 import SoccerMarketLines from "@/components/SoccerMarketLines";
+import OverUnderStrip from "@/components/OverUnderStrip";
 import SoccerBetStrip from "@/components/SoccerBetStrip";
 import CreatorAnalysis from "@/components/CreatorAnalysis";
 import MatchSegment from "@/components/MatchSegment";
 import { getSoccerMatchById } from "@/lib/soccer/football-data";
-import { toDisplayPercents, enginePickOf } from "@/lib/soccer/engine";
+import { toDisplayPercents, enginePickOf, deriveSoccerMarkets } from "@/lib/soccer/engine";
 import { getNationalCode } from "@/lib/soccer/teams";
 import { getSoccerFinalizedResults, kickoffTaipei } from "@/lib/soccer/locked";
 import { getMatchSegment } from "@/lib/match-segment";
@@ -198,6 +199,22 @@ export default async function SoccerMatchPage({ params }: { params: Params }) {
 
           {/* 進場押注(三向 · 登入才能押 · 押了不可改 · 賽後對帳)*/}
           <SoccerBetStrip matchId={m.id} dateISO={m.dateISO} homeLabel={m.home} awayLabel={m.away} locked={m.locked} />
+
+          {/* 大小分 2.5 押注(看大 / 看小)· 跟「誰贏」分開記、不污染戰績 */}
+          {pred &&
+            (() => {
+              const ou = deriveSoccerMarkets(pred.xgHome, pred.xgAway, {
+                totalLines: [2.5],
+              }).totals[0];
+              return ou ? (
+                <OverUnderStrip
+                  matchId={m.id}
+                  dateISO={m.dateISO}
+                  overPct={ou.overPct}
+                  underPct={ou.underPct}
+                />
+              ) : null;
+            })()}
 
           {/* 結算規格(賭徒最怕模糊結算)· 90 分鐘 1X2 · 延長賽 / PK 不算 */}
           <p className="mt-4 font-mono text-mute/55 text-[10px] tracking-[0.15em] leading-relaxed">

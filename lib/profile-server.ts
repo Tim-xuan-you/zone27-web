@@ -125,6 +125,7 @@ export async function getPredictionsByCode(
       const matchId = typeof row.match_id === "string" ? row.match_id : "";
       const ts = typeof row.created_at === "string" ? row.created_at : "";
       if (!matchId || !ts) continue;
+      if (matchId.includes("~")) continue; // 🔴 玩法押注(大小分等)不進「誰贏」校準/戰績
       // 賽前宣告的把握(0027 才回 · 1-99 整數)→ 跨運動收進校準曲線(沒值/未套 0027 → 跳過)。
       const conf = row.confidence;
       const validPick =

@@ -72,7 +72,7 @@ export type SoccerReceipt = SoccerReceiptSettled | SoccerReceiptPending;
 export async function getSoccerReceipt(
   matchId: string,
 ): Promise<SoccerReceipt | null> {
-  if (!matchId.startsWith("fd-")) return null;
+  if (!matchId.startsWith("fd-") || matchId.includes("~")) return null; // ~ = 玩法押注 · 無單場收據
   // on-read 解析(同脈動/引擎戰績)· 已踢完未持久化的場會在這裡即時補上 verdict/finalScore/outcome。
   const locked = (await resolveLockedSoccer()).find((p) => p.matchId === matchId);
   if (!locked) return null;

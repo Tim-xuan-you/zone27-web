@@ -74,6 +74,7 @@ async function getRecentLocks(
   for (const r of rows) {
     const code = str(r.author_code);
     const matchId = str(r.match_id);
+    if (matchId.includes("~")) continue; // 🔴 玩法押注(大小分等)不上「誰贏」活動脈動
     const isSoccer = matchId.startsWith("fd-");
     const isMarket = matchId.startsWith("mkt-"); // 群眾盤(/markets · 引擎沒覆蓋的場)· 三向同足球
     // 棒球兩向(home/away)· 足球 + 群眾盤三向(home/draw/away)。
