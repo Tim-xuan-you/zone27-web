@@ -8122,6 +8122,35 @@
       "verdict": null
     },
     {
+      "gamePk": 824017,
+      "gameDate": "2026-06-24T01:38:00Z",
+      "scheduleDate": "2026-06-23",
+      "homeId": 108,
+      "homeEn": "Los Angeles Angels",
+      "homeRecord": "32-47",
+      "awayId": 110,
+      "awayEn": "Baltimore Orioles",
+      "awayRecord": "37-42",
+      "homePitcher": "Ryan Johnson",
+      "awayPitcher": "Shane Baz",
+      "homeStats": {
+        "era": "12.83",
+        "k9": "4.73",
+        "bb9": "5.40",
+        "hr9": "3.37"
+      },
+      "awayStats": {
+        "era": "4.04",
+        "k9": "7.69",
+        "bb9": "3.44",
+        "hr9": "0.81"
+      },
+      "engineWinHomePct": 25,
+      "lockedAt": "2026-06-22T22:50:21.793Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
       "gamePk": 823210,
       "gameDate": "2026-06-24T01:45:00Z",
       "scheduleDate": "2026-06-23",
@@ -8205,6 +8234,35 @@
       },
       "engineWinHomePct": 26,
       "lockedAt": "2026-06-22T18:51:08.498Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 824018,
+      "gameDate": "2026-06-24T20:07:00Z",
+      "scheduleDate": "2026-06-24",
+      "homeId": 108,
+      "homeEn": "Los Angeles Angels",
+      "homeRecord": "32-47",
+      "awayId": 110,
+      "awayEn": "Baltimore Orioles",
+      "awayRecord": "37-42",
+      "homePitcher": "José Soriano",
+      "awayPitcher": "Trey Gibson",
+      "homeStats": {
+        "era": "3.03",
+        "k9": "9.59",
+        "bb9": "4.50",
+        "hr9": "0.98"
+      },
+      "awayStats": {
+        "era": "5.81",
+        "k9": "6.84",
+        "bb9": "5.81",
+        "hr9": "1.37"
+      },
+      "engineWinHomePct": 73,
+      "lockedAt": "2026-06-22T22:50:21.793Z",
       "finalScore": null,
       "verdict": null
     },
@@ -8321,6 +8379,35 @@
       },
       "engineWinHomePct": 46,
       "lockedAt": "2026-06-22T18:51:08.498Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 822798,
+      "gameDate": "2026-06-24T23:07:00Z",
+      "scheduleDate": "2026-06-24",
+      "homeId": 141,
+      "homeEn": "Toronto Blue Jays",
+      "homeRecord": "38-39",
+      "awayId": 117,
+      "awayEn": "Houston Astros",
+      "awayRecord": "37-42",
+      "homePitcher": "Trey Yesavage",
+      "awayPitcher": "Mike Burrows",
+      "homeStats": {
+        "era": "3.76",
+        "k9": "8.67",
+        "bb9": "4.09",
+        "hr9": "0.82"
+      },
+      "awayStats": {
+        "era": "5.79",
+        "k9": "7.49",
+        "bb9": "3.40",
+        "hr9": "2.04"
+      },
+      "engineWinHomePct": 72,
+      "lockedAt": "2026-06-22T22:50:21.793Z",
       "finalScore": null,
       "verdict": null
     },
