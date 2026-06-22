@@ -7435,8 +7435,12 @@
       },
       "engineWinHomePct": 43,
       "lockedAt": "2026-06-21T04:56:35.738Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 7,
+        "away": 9
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-06-22T05:04:18.695Z"
     },
     {
       "gamePk": 823934,
@@ -7464,8 +7468,12 @@
       },
       "engineWinHomePct": 50,
       "lockedAt": "2026-06-19T19:55:37.672Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 1,
+        "away": 12
+      },
+      "verdict": "push",
+      "gradedAt": "2026-06-22T05:04:18.695Z"
     },
     {
       "gamePk": 823123,
@@ -7493,8 +7501,12 @@
       },
       "engineWinHomePct": 49,
       "lockedAt": "2026-06-19T19:55:37.672Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 3,
+        "away": 1
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-06-22T05:04:18.695Z"
     },
     {
       "gamePk": 823449,
@@ -7522,8 +7534,12 @@
       },
       "engineWinHomePct": 69,
       "lockedAt": "2026-06-21T04:56:35.738Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 6,
+        "away": 2
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-06-22T05:04:18.695Z"
     },
     {
       "gamePk": 824261,
@@ -7787,6 +7803,35 @@
       "verdict": null
     },
     {
+      "gamePk": 823288,
+      "gameDate": "2026-06-23T02:10:00Z",
+      "scheduleDate": "2026-06-22",
+      "homeId": 135,
+      "homeEn": "San Diego Padres",
+      "homeRecord": "39-37",
+      "awayId": 144,
+      "awayEn": "Atlanta Braves",
+      "awayRecord": "48-28",
+      "homePitcher": "Michael King",
+      "awayPitcher": "Grant Holmes",
+      "homeStats": {
+        "era": "3.60",
+        "k9": "7.73",
+        "bb9": "3.71",
+        "hr9": "1.06"
+      },
+      "awayStats": {
+        "era": "4.33",
+        "k9": "8.00",
+        "bb9": "4.19",
+        "hr9": "1.70"
+      },
+      "engineWinHomePct": 60,
+      "lockedAt": "2026-06-22T05:04:17.877Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
       "gamePk": 823365,
       "gameDate": "2026-06-23T22:40:00Z",
       "scheduleDate": "2026-06-23",
@@ -7928,6 +7973,35 @@
       },
       "engineWinHomePct": 50,
       "lockedAt": "2026-06-21T16:49:09.006Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 823614,
+      "gameDate": "2026-06-23T23:10:00Z",
+      "scheduleDate": "2026-06-23",
+      "homeId": 121,
+      "homeEn": "New York Mets",
+      "homeRecord": "34-43",
+      "awayId": 112,
+      "awayEn": "Chicago Cubs",
+      "awayRecord": "40-37",
+      "homePitcher": "Nolan McLean",
+      "awayPitcher": "Edward Cabrera",
+      "homeStats": {
+        "era": "3.67",
+        "k9": "10.48",
+        "bb9": "3.46",
+        "hr9": "0.86"
+      },
+      "awayStats": {
+        "era": "5.21",
+        "k9": "8.15",
+        "bb9": "3.34",
+        "hr9": "1.87"
+      },
+      "engineWinHomePct": 71,
+      "lockedAt": "2026-06-22T05:04:17.877Z",
       "finalScore": null,
       "verdict": null
     },
