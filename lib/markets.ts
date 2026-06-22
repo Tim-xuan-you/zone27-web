@@ -49,7 +49,9 @@ export const MARKETS: AdHocMarket[] = [
     home: "阿克雷里",
     away: "弗拉姆",
     kickoffISO: "2026-06-16T02:00:00+08:00",
-    result: null,
+    // 賽果(Tim relays · 官方核對):阿克雷里 3 : 4 弗拉姆 → 客隊弗拉姆 90 分鐘正規賽取勝 = away。
+    result: "away",
+    settledAt: "2026-06-22",
   },
 ];
 
