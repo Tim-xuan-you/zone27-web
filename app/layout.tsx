@@ -33,7 +33,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://zone27-web.vercel.app"),
+  metadataBase: new URL("https://zone27.com.tw"),
   title: {
     default: "ZONE 27 — 不靠直覺,只看演算法",
     template: "%s · ZONE 27",

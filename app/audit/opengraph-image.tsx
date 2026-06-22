@@ -3,7 +3,7 @@ import { BRAND, OG_SIZE, OG_CONTENT_TYPE } from "@/lib/brand";
 import { PRODUCT_VERSION } from "@/lib/build-meta";
 
 // ── ZONE 27 · /audit Dynamic OG ─────────────────────────
-// 當有人把 https://zone27-web.vercel.app/audit 貼到 LINE / FB / Discord,
+// 當有人把 https://zone27.com.tw/audit 貼到 LINE / FB / Discord,
 // 不顯示通用品牌卡(那會誤導),而是顯示一張**像 Bloomberg snapshot**
 // 的 model-report 概要卡 — 直接把「這頁不一樣 · 學術級透明」傳遞出去。
 //

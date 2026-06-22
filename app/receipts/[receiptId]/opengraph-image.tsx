@@ -225,7 +225,7 @@ export default async function ReceiptOgImage({
         >
           <span style={{ display: "flex" }}>賽前鎖定 · 含輸 · 改不了</span>
           <span style={{ display: "flex", color: goldRgba(0.65) }}>
-            zone27-web.vercel.app
+            zone27.com.tw
           </span>
         </div>
       </div>
@@ -320,7 +320,7 @@ function soccerOgCard(sr: SoccerReceiptSettled, proof: LockProof | null) {
           }}
         >
           <span style={{ display: "flex" }}>賽前鎖定 · 含輸 · 改不了</span>
-          <span style={{ display: "flex", color: goldRgba(0.65) }}>zone27-web.vercel.app</span>
+          <span style={{ display: "flex", color: goldRgba(0.65) }}>zone27.com.tw</span>
         </div>
       </div>
     ),
@@ -417,7 +417,7 @@ function soccerOgCardPending(sr: SoccerReceiptPending, proof: LockProof | null) 
           }}
         >
           <span style={{ display: "flex" }}>{footerLine}</span>
-          <span style={{ display: "flex", color: goldRgba(0.65) }}>zone27-web.vercel.app</span>
+          <span style={{ display: "flex", color: goldRgba(0.65) }}>zone27.com.tw</span>
         </div>
       </div>
     ),
@@ -515,7 +515,7 @@ function baseballOgCardPending(bp: BaseballReceiptPending, proof: LockProof | nu
           }}
         >
           <span style={{ display: "flex" }}>{footerLine}</span>
-          <span style={{ display: "flex", color: goldRgba(0.65) }}>zone27-web.vercel.app</span>
+          <span style={{ display: "flex", color: goldRgba(0.65) }}>zone27.com.tw</span>
         </div>
       </div>
     ),

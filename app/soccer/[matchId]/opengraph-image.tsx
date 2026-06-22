@@ -165,7 +165,7 @@ export default async function SoccerMatchOgImage({
           }}
         >
           <span style={{ display: "flex" }}>賽前鎖死 · 賽後逐場對帳 · 含贏含輸</span>
-          <span style={{ display: "flex", color: "rgba(212,175,55,0.65)" }}>zone27-web.vercel.app</span>
+          <span style={{ display: "flex", color: "rgba(212,175,55,0.65)" }}>zone27.com.tw</span>
         </div>
       </div>
     ),

@@ -10,7 +10,7 @@ import { useState } from "react";
 // ─────────────────────────────────────────────────────
 
 // 後備網址(SSR / 無 window 時)· 上線自訂網域後改這裡一處即可。
-const CANON_ORIGIN = "https://zone27-web.vercel.app";
+const CANON_ORIGIN = "https://zone27.com.tw";
 
 export default function CredentialGrabPanel({
   code,

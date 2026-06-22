@@ -149,7 +149,7 @@ function buildHtmlBody({
 
 <!-- Tim's note -->
 <p style="margin:0 0 16px 0;color:#F5F2EA;font-size:15px;line-height:1.6;">Hi ${escapeHtml(greeting)},</p>
-<p style="margin:0 0 16px 0;color:#8A93A8;font-size:14px;line-height:1.7;">我是 Tim · ZONE 27 創辦人。您剛剛在 zone27-web.vercel.app/founders 留下 email · 預留了 GOLD 預售名單中的位置。<br><span style="color:#F5F2EA;">會員不限量 · 你養的是一個不靠明牌、不抽下注活下去的引擎 · 第 ${queuePos} 位早到。</span></p>
+<p style="margin:0 0 16px 0;color:#8A93A8;font-size:14px;line-height:1.7;">我是 Tim · ZONE 27 創辦人。您剛剛在 zone27.com.tw/founders 留下 email · 預留了 GOLD 預售名單中的位置。<br><span style="color:#F5F2EA;">會員不限量 · 你養的是一個不靠明牌、不抽下注活下去的引擎 · 第 ${queuePos} 位早到。</span></p>
 
 <p style="margin:24px 0 12px 0;color:#F5F2EA;font-size:14px;letter-spacing:0.5px;">接下來幾件事:</p>
 <ul style="margin:0 0 24px 0;padding-left:22px;color:#8A93A8;font-size:14px;line-height:1.8;">
@@ -168,7 +168,7 @@ function buildHtmlBody({
 
 <!-- Footer trust line -->
 <p style="margin:0 0 6px 0;font-family:${mono};color:#8A93A8;font-size:10px;letter-spacing:3px;text-align:center;">FUNDED BY GOLD · NO VC · NO ADS · NO TRACKERS</p>
-<p style="margin:0;color:#8A93A8;font-size:11px;text-align:center;line-height:1.7;"><a href="https://zone27-web.vercel.app" style="color:#D4AF37;text-decoration:none;">zone27-web.vercel.app</a></p>
+<p style="margin:0;color:#8A93A8;font-size:11px;text-align:center;line-height:1.7;"><a href="https://zone27.com.tw" style="color:#D4AF37;text-decoration:none;">zone27.com.tw</a></p>
 <p style="margin:14px 0 0 0;color:#8A93A8;font-size:11px;text-align:center;line-height:1.7;">想退出?reply UNSUBSCRIBE · 我手動移除您 · 不用 click track link</p>
 
 </td></tr>
@@ -195,7 +195,7 @@ function buildTextBody({
 
 Hi ${greeting},
 
-我是 Tim · ZONE 27 創辦人。您剛剛在 zone27-web.vercel.app/founders 留下 email · 預留了 GOLD 預售名單中的位置。
+我是 Tim · ZONE 27 創辦人。您剛剛在 zone27.com.tw/founders 留下 email · 預留了 GOLD 預售名單中的位置。
 
 會員不限量 · 你養的是一個不靠明牌、不抽下注活下去的引擎 · 第 ${queuePos} 位早到。
 
@@ -213,7 +213,7 @@ ZONE 27 創辦人 · CPBL 球迷 27 年
 
 ──
 FUNDED BY GOLD · NO VC · NO ADS · NO TRACKERS
-https://zone27-web.vercel.app
+https://zone27.com.tw
 
 想退出?reply UNSUBSCRIBE 即可
 `;

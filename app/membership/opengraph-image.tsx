@@ -2,7 +2,7 @@ import { ImageResponse } from "next/og";
 import { BRAND, OG_SIZE, OG_CONTENT_TYPE } from "@/lib/brand";
 
 // ── ZONE 27 · /membership Dynamic OG ──────────────────
-// 當有人把 https://zone27-web.vercel.app/membership 貼到 LINE/FB,
+// 當有人把 https://zone27.com.tw/membership 貼到 LINE/FB,
 // 顯示的不是通用品牌卡 · 也不是 /founders 「270 年度」scarcity
 // 卡 · 而是「免費引擎 + BLACK 黑卡」全景 — visitor 看圖就知道這頁是
 // 免費引擎加一個付費黑卡(NT$ 500 / 31 天)· 不是 paywall。

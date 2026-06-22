@@ -20,7 +20,7 @@ export default function LeagueInviteShare({
     const origin =
       typeof window !== "undefined"
         ? window.location.origin
-        : "https://zone27-web.vercel.app";
+        : "https://zone27.com.tw";
     return `${origin}/member/leagues?join=${encodeURIComponent(inviteCode)}`;
   }
 

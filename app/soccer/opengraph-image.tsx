@@ -109,7 +109,7 @@ export default function SoccerOgImage() {
           }}
         >
           <span style={{ display: "flex" }}>賽前鎖死 · 含輸照留 · 不刪輸的</span>
-          <span style={{ display: "flex", color: goldRgba(0.65) }}>zone27-web.vercel.app</span>
+          <span style={{ display: "flex", color: goldRgba(0.65) }}>zone27.com.tw</span>
         </div>
       </div>
     ),

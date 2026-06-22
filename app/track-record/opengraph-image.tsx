@@ -3,7 +3,7 @@ import { BRAND, OG_SIZE, OG_CONTENT_TYPE } from "@/lib/brand";
 import { getFinalizedMatches, getCalibration } from "@/lib/matches";
 
 // ── ZONE 27 · /track-record Dynamic OG ──────────────────
-// 當有人把 https://zone27-web.vercel.app/track-record 貼到 LINE / FB,
+// 當有人把 https://zone27.com.tw/track-record 貼到 LINE / FB,
 // 不顯示通用品牌卡,而是顯示一張「公開戰績 ledger」snapshot —
 // PROVED ✓ 跟 DIVERGED ✕ 等大等亮地擺一起 · 第一秒就傳達「這品牌
 // 把 miss 跟 hit 公開放在同一張卡」。

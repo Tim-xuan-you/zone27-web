@@ -2,7 +2,7 @@ import { ImageResponse } from "next/og";
 import { BRAND, OG_SIZE, OG_CONTENT_TYPE } from "@/lib/brand";
 
 // ── ZONE 27 · Global Open Graph Image ──────────────────
-// 當任何人把 zone27-web.vercel.app 貼上 LINE、FB、Threads、Discord、Slack、Twitter
+// 當任何人把 zone27.com.tw 貼上 LINE、FB、Threads、Discord、Slack、Twitter
 // 都會自動 fetch 這張圖,呈現在預覽卡片上 — 黑底冷金、極致品牌一致性。
 // 1200 x 630 是 OG 標準尺寸。
 // ─────────────────────────────────────────────────────

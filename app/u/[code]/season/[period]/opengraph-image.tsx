@@ -187,7 +187,7 @@ function receiptResponse(name: string, label: string, id: CalibrationIdentity) {
         >
           <span style={{ display: "flex" }}>{beatEngine ? "" : "賽前鎖定 · 含輸 · 刪不掉"}</span>
           <span style={{ display: "flex", color: goldRgba(0.65) }}>
-            zone27-web.vercel.app
+            zone27.com.tw
           </span>
         </div>
       </div>

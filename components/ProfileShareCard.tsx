@@ -51,7 +51,7 @@ export default function ProfileShareCard({
   const fullUrl = () =>
     (typeof window !== "undefined"
       ? window.location.origin
-      : "https://zone27-web.vercel.app") + resolvedPath;
+      : "https://zone27.com.tw") + resolvedPath;
 
   const onShare = async () => {
     const url = fullUrl();

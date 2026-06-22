@@ -222,7 +222,7 @@ export async function fetchMlbForDate(dateYmd: string): Promise<MlbGame[]> {
   try {
     const res = await fetch(scheduleUrl, {
       next: { revalidate: REVALIDATE_SECONDS },
-      headers: { "User-Agent": "ZONE-27/0.27 (+zone27-web.vercel.app)" },
+      headers: { "User-Agent": "ZONE-27/0.27 (+zone27.com.tw)" },
       // R209 硬化:外部 API 慢/掛時設 8s 上限,避免拖垮每個 await 它的頁面 render
       // (首頁/賽事/天梯)· 逾時 → AbortError → catch 退 [](graceful · 只顯示 CPBL)。
       signal: AbortSignal.timeout(8000),
@@ -276,7 +276,7 @@ async function fetchPitcherStatsBatch(
   try {
     const res = await fetch(url, {
       next: { revalidate: REVALIDATE_SECONDS },
-      headers: { "User-Agent": "ZONE-27/0.27 (+zone27-web.vercel.app)" },
+      headers: { "User-Agent": "ZONE-27/0.27 (+zone27.com.tw)" },
       // R209 硬化:同 schedule fetch · 8s 上限 · 逾時 catch 退 out(graceful)。
       signal: AbortSignal.timeout(8000),
     });

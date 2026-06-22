@@ -20,7 +20,7 @@ import { getMlbAsMatches, getMlbLockedMatches } from "@/lib/mlb-matches";
 import { normalizeProfileCode } from "@/lib/profile-code";
 
 // ── ZONE 27 · /u/[code] 動態 OG 卡 = 含輸收據(soul-roadmap #3 收斂進 P0)─────
-// 把 https://zone27-web.vercel.app/u/{code} 貼到 LINE/FB/Threads/X/Discord/Slack,
+// 把 https://zone27.com.tw/u/{code} 貼到 LINE/FB/Threads/X/Discord/Slack,
 // 預覽卡自動帶上「這個人的含輸命中率 + 賽前鎖定」黑金收據 —— 不是只選贏的曬單,
 // 是含贏含輸、刪不掉的證物(報馬仔結構上做不出這張)。
 //
@@ -240,7 +240,7 @@ function receiptResponse(name: string, authorCode: string, id: CalibrationIdenti
               空 span 仍占 space-between 左槽 → URL 維持靠右。 */}
           <span style={{ display: "flex" }}>{beatEngine ? "" : "賽前鎖定 · 含輸 · 刪不掉"}</span>
           <span style={{ display: "flex", color: goldRgba(0.65) }}>
-            zone27-web.vercel.app/u/{authorCode}
+            zone27.com.tw/u/{authorCode}
           </span>
         </div>
       </div>

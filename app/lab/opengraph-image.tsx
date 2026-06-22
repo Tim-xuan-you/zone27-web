@@ -3,7 +3,7 @@ import { BRAND, OG_SIZE, OG_CONTENT_TYPE } from "@/lib/brand";
 import { Tri } from "@/lib/og-marks";
 
 // ── ZONE 27 · /lab Dynamic OG ──────────────────────────
-// 當有人把 https://zone27-web.vercel.app/lab 貼到任何平台,
+// 當有人把 https://zone27.com.tw/lab 貼到任何平台,
 // 顯示的是「Live AI Lab · 10,000 sims in browser」邀請卡 —
 // 直接是一張「點進來會看到很酷的東西」的視覺承諾。
 // ─────────────────────────────────────────────────────

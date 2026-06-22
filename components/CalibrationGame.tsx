@@ -569,7 +569,7 @@ function ShareResultButton({ score }: { score: Score }) {
     const origin =
       typeof window !== "undefined"
         ? window.location.origin
-        : "https://zone27-web.vercel.app";
+        : "https://zone27.com.tw";
     const url = `${origin}${path}`;
     // 手機原生分享面板優先(LINE / IG / 訊息一鍵)· 桌機沒有 → 退回複製到剪貼簿。
     if (typeof navigator !== "undefined" && typeof navigator.share === "function") {

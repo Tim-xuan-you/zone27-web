@@ -62,7 +62,7 @@ function buildReceiptText(match: Match): string {
   const url =
     typeof window !== "undefined"
       ? `${window.location.origin}/matches/${match.id}`
-      : `https://zone27-web.vercel.app/matches/${match.id}`;
+      : `https://zone27.com.tw/matches/${match.id}`;
 
   const lines = [
     `ZONE 27 ENGINE · ${match.home.name} vs ${match.away.name}`,

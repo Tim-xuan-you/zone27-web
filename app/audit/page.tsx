@@ -73,7 +73,7 @@ export default function AuditPage() {
             <div className="flex justify-between gap-4">
               <span>ZONE 27 · 引擎說明書 {PRODUCT_VERSION}</span>
               <span>
-                列印自 zone27-web.vercel.app/audit
+                列印自 zone27.com.tw/audit
               </span>
             </div>
           </div>

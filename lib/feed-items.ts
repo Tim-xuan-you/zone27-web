@@ -1,7 +1,7 @@
 // ── ZONE 27 · Atom Feed Items ───────────────────────────
 // Round 51 W-E · Atom RSS feed source · hand-curated ship cycle entries
 // 給 hardcore fan RSS reader audience subscribe。 訪客 1 micro-action
-// 把 zone27-web.vercel.app/feed.xml 加進 Feedly / NetNewsWire / Reeder
+// 把 zone27.com.tw/feed.xml 加進 Feedly / NetNewsWire / Reeder
 // 等 RSS reader · 之後 Tim ship 新 round 自動 surface · 不靠 email · 0
 // tracking · 0 push notification · 0 cookie。
 //
@@ -40,8 +40,8 @@ export type FeedEntry = {
 export const FEED_META = {
   title: "ZONE 27 · Craft Journal",
   subtitle: "硬核棒球迷量化分析品牌 · ship cycle updates · brand-pure transparency",
-  link: "https://zone27-web.vercel.app/",
-  selfLink: "https://zone27-web.vercel.app/feed.xml",
+  link: "https://zone27.com.tw/",
+  selfLink: "https://zone27.com.tw/feed.xml",
   authorName: "Tim",
   // R72 W-D · Agent B audit F03 fix · authorEmail sweep · R71 W-E F03
   // 8-file sweep missed this · public RSS feed exposed dead domain ·

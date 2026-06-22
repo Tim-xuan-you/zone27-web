@@ -40,7 +40,7 @@ export default function PrivacyPage() {
       {/* ── 01 SCOPE ─────────────────────────────── */}
       <Section no="01" label="SCOPE" zh="適用範圍">
         <p>
-          本政策適用於 <Code>zone27-web.vercel.app</Code> 與其所有子路徑。
+          本政策適用於 <Code>zone27.com.tw</Code> 與其所有子路徑。
           當您訪問本網站、加入會員等候名單,或使用任何互動功能時,
           皆受本政策約束。
         </p>

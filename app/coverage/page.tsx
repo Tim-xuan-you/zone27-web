@@ -80,7 +80,7 @@ export default function CoveragePage() {
           >
             <div className="flex justify-between gap-4">
               <span>ZONE 27 — 我們覆蓋哪些比賽 {PRODUCT_VERSION}</span>
-              <span>zone27-web.vercel.app/coverage</span>
+              <span>zone27.com.tw/coverage</span>
             </div>
           </div>
 

@@ -108,7 +108,7 @@ export default function LocalStorageReceipt({ variant = "receipt" }: Props) {
         ZONE 27 在您裝置寫了{" "}
         <strong className="text-bone">{LOCAL_STORAGE_KEY_COUNT} 個 localStorage keys</strong>
         {" "}· 0 cookies(auth session 例外明示 in /privacy)· 0 server-side write ·
-        0 PII transit。 開 DevTools → Application → Local Storage → zone27-web.vercel.app
+        0 PII transit。 開 DevTools → Application → Local Storage → zone27.com.tw
         · 您看到的 keys 跟下表一致 · 我們不藏(同 /audit S06 R43 W-B verified)。
       </p>
 
