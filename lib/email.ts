@@ -340,3 +340,98 @@ Reply 此 email 直接給 member · 或 forward 給自己 curate。`;
     return { ok: false, error: message };
   }
 }
+
+// ── 回報 / bug · 任何人(含匿名訪客)都能告知問題 → 寄給 Tim ─────────────────
+// /feedback 頁 + /api/feedback(anonymous-OK · 連沒註冊的人都能回報)。 跟上面共用
+// Resend infra。 reporter 可匿名(contact 選填 · 留 email/LINE 才能回覆)。
+// 🔴 不存資料庫(同 /privacy「0 server-side archive」)· 只 email。
+// 🔴 不 log 內文 / 聯絡方式(可能含 PII)· 失敗只記 http status、不讀 Resend body(R224 房規)。
+
+type FeedbackEmailArgs = {
+  message: string;
+  contact: string | null; // 選填 · 怎麼回覆(email / LINE)
+  path: string | null; // 在哪一頁發現的(referrer)
+};
+
+export async function sendFeedbackNotification({
+  message,
+  contact,
+  path,
+}: FeedbackEmailArgs): Promise<EmailResult> {
+  const apiKey = process.env.RESEND_API_KEY;
+  if (!apiKey) {
+    console.warn(
+      "[ZONE27 · FEEDBACK · SKIP] RESEND_API_KEY not set · feedback email skipped"
+    );
+    return { ok: false, error: "RESEND_API_KEY missing" };
+  }
+
+  const safeMsg = escapeHtml(message).replace(/\n/g, "<br>");
+  const safeContact = contact ? escapeHtml(contact) : "(匿名 · 未留聯絡方式)";
+  const safePath = path ? escapeHtml(path) : "(未提供)";
+  // contact 看起來像 email → 設成 reply_to(Tim 點 reply 直接回報告者);否則回 Tim 自己。
+  const replyTo =
+    contact && /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(contact) ? contact : REPLY_TO;
+  const subject = `[ZONE 27 · 回報] ${message.slice(0, 50)}`;
+
+  const html = `<!DOCTYPE html>
+<html lang="zh-Hant"><head><meta charset="UTF-8"></head>
+<body style="margin:0;padding:0;background:#0F1A2E;color:#F5F2EA;font-family:'Helvetica Neue',Arial,sans-serif;">
+<table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background:#0F1A2E;">
+<tr><td align="center" style="padding:40px 16px;">
+<table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="max-width:600px;background:#131F38;border:1px solid #D4AF37;">
+<tr><td style="padding:32px;">
+<p style="margin:0 0 6px 0;font-family:'SF Mono',monospace;color:#D4AF37;font-size:11px;letter-spacing:4px;">/ ZONE 27 · 回報</p>
+<p style="margin:0 0 24px 0;font-family:'SF Mono',monospace;color:#8A93A8;font-size:10px;letter-spacing:3px;">使用者回報的問題 / bug</p>
+<p style="margin:0 0 6px 0;color:#8A93A8;font-size:12px;">內容</p>
+<div style="color:#F5F2EA;font-size:15px;line-height:1.7;border-left:2px solid #D4AF37;padding-left:14px;margin-bottom:20px;">${safeMsg}</div>
+<p style="margin:0 0 6px 0;color:#8A93A8;font-size:12px;">怎麼回覆</p>
+<p style="margin:0 0 20px 0;color:#F5F2EA;font-size:14px;font-family:'SF Mono',monospace;">${safeContact}</p>
+<p style="margin:0 0 6px 0;color:#8A93A8;font-size:12px;">在哪一頁發現的</p>
+<p style="margin:0;color:#F5F2EA;font-size:13px;font-family:'SF Mono',monospace;">${safePath}</p>
+<hr style="border:0;border-top:1px solid #1E2A47;margin:24px 0;">
+<p style="margin:0;color:#8A93A8;font-size:11px;line-height:1.6;">修好的記在 /corrections。 若上方有留 email · 點 reply 直接回他。</p>
+</td></tr></table></td></tr></table></body></html>`;
+
+  const text = `ZONE 27 · 回報 / bug
+
+內容:
+${message}
+
+怎麼回覆: ${contact ?? "(匿名)"}
+在哪一頁: ${path ?? "(未提供)"}
+
+──
+修好的記在 /corrections。`;
+
+  try {
+    const response = await fetch(RESEND_ENDPOINT, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        from: FROM_ADDRESS,
+        to: [REPLY_TO], // Tim 自己收
+        reply_to: replyTo,
+        subject,
+        html,
+        text,
+      }),
+    });
+    if (!response.ok) {
+      // 🔒 只記 http status · 不讀/不回 Resend body(同 R224 防洩房規)。
+      console.error(`[ZONE27 · FEEDBACK · ERROR] http=${response.status}`);
+      return { ok: false, error: `resend_http_${response.status}` };
+    }
+    const data = (await response.json()) as { id?: string };
+    const id = data.id ?? "unknown";
+    console.log(`[ZONE27 · FEEDBACK · SENT] id=${id}`);
+    return { ok: true, id };
+  } catch (err) {
+    const m = err instanceof Error ? err.message : String(err);
+    console.error(`[ZONE27 · FEEDBACK · ERROR] uncaught err=${m}`);
+    return { ok: false, error: m };
+  }
+}

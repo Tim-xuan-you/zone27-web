@@ -50,6 +50,8 @@ const ROUTES: Entry[] = [
   { path: "/faq", priority: 0.7, changeFrequency: "monthly" },
   { path: "/membership", priority: 0.7, changeFrequency: "monthly" },
   { path: "/membership/black-card", priority: 0.6, changeFrequency: "monthly" },
+  // 回報問題(每頁 footer 入口 · 任何人可達)
+  { path: "/feedback", priority: 0.5, changeFrequency: "yearly" },
   // 法務(低頻)
   { path: "/privacy", priority: 0.4, changeFrequency: "yearly" },
   { path: "/terms", priority: 0.4, changeFrequency: "yearly" },

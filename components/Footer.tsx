@@ -35,6 +35,15 @@ export default function Footer() {
       className="mt-auto border-t border-line/40 scroll-mt-4"
     >
       <div className="mx-auto max-w-6xl px-6 sm:px-10 py-8 sm:py-10 flex flex-col items-center gap-5 text-center">
+        {/* 回報問題 · 每頁都在 · 任何人(含沒登入的)都能一句話告訴站長哪裡有 bug。
+            獨立一顆金框 chip · 比下方普通連結醒目一級(Tim:要顯眼)。 */}
+        <Link
+          href="/feedback"
+          className="inline-flex items-center gap-2 font-mono text-gold/90 hover:text-gold text-[11px] tracking-[0.25em] border border-gold/35 hover:border-gold/70 px-4 py-2 transition-colors"
+        >
+          發現問題?回報一下 →
+        </Link>
+
         {/* 一排短字 · 最常用的去處 */}
         <nav
           aria-label="Footer"
