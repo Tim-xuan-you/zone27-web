@@ -105,6 +105,36 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col pb-[72px] sm:pb-0">
+        {/* ── 結構化資料 JSON-LD · 上線解凍(2026-06-22)─────────────────────
+            幫搜尋引擎 + AI 回答引擎(GEO)正確認得「ZONE 27 是什麼」· 純機器面 · 0 追蹤。
+            只放真實不誇大的事實(名稱/網址/語言/slogan/logo)· 不提社群或外部連結。 */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@graph": [
+                {
+                  "@type": "WebSite",
+                  "@id": "https://zone27.com.tw/#website",
+                  url: "https://zone27.com.tw",
+                  name: "ZONE 27",
+                  inLanguage: "zh-Hant",
+                  description:
+                    "為硬核運動迷打造的暗黑黃金級數據終端 —— 引擎自己算勝率(CPBL · MLB · 世界盃),賽前鎖定、賽後逐場對帳,連輸的都留著。",
+                },
+                {
+                  "@type": "Organization",
+                  "@id": "https://zone27.com.tw/#org",
+                  name: "ZONE 27",
+                  url: "https://zone27.com.tw",
+                  logo: "https://zone27.com.tw/icon-512.png",
+                  slogan: "不靠直覺,只看演算法",
+                },
+              ],
+            }),
+          }}
+        />
         {/* R142 W6 · skip-link · WCAG 2.4.1 Bypass Blocks · 移自 Nav.tsx ·
             必須 first focusable element in body · 之前 PreviewModeBanner first
             focusable steal Tab focus · 違反 WCAG · 此 link visible only on
