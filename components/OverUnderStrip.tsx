@@ -47,7 +47,6 @@ export default function OverUnderStrip({
   const [over, setOver] = useState(0);
   const [under, setUnder] = useState(0);
   const [saving, setSaving] = useState(false);
-  const [kickedOff, setKickedOff] = useState(false);
 
   // 開賽瞬間自動鎖手(一次性 timer · 不輪詢)。
   useEffect(() => {
@@ -55,7 +54,10 @@ export default function OverUnderStrip({
     if (Number.isNaN(t)) return;
     const ms = t - Date.now();
     if (ms > 24 * 3600 * 1000) return;
-    const id = setTimeout(() => setKickedOff(true), Math.max(ms, 0));
+    const id = setTimeout(
+      () => setState((s) => (s === "open" ? "started" : s)),
+      Math.max(ms, 0),
+    );
     return () => clearTimeout(id);
   }, [dateISO]);
 
@@ -107,7 +109,6 @@ export default function OverUnderStrip({
     // 點擊時重驗開賽(防殭屍分頁)。
     const t = Date.parse(dateISO);
     if (!Number.isNaN(t) && t <= Date.now()) {
-      setKickedOff(true);
       setState("started");
       return;
     }

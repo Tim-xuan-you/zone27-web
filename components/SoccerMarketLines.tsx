@@ -17,14 +17,9 @@ export default function SoccerMarketLines({
 }: {
   prediction: SoccerPrediction;
 }) {
-  // 緊湊卡只取每個玩法最常押的那條線(大小球 2.5 · 讓球 1.5)· 引擎能算更多線,留給未來更寬的版面。
-  const m = deriveSoccerMarkets(prediction.xgHome, prediction.xgAway, {
-    totalLines: [2.5],
-    handicapLines: [1.5],
-  });
-  // 大小球已升級成可押的 OverUnderStrip(看大/看小)· 這裡只留讓球 + 兩隊進球的引擎讀數(避免重複)。
-  const hc = m.handicaps[0];
-  if (!hc) return null;
+  // 大小球 + 讓球都升級成可押的 strip(OverUnderStrip / HandicapStrip · 在卡片下方)·
+  // 這裡只留唯讀的「兩隊進球」引擎讀數 —— 避免同一玩法在卡上出現兩次、且不同線值打架(R257 稽核)。
+  const m = deriveSoccerMarkets(prediction.xgHome, prediction.xgAway);
 
   return (
     <div className="mt-2.5 pt-2.5 border-t border-line/40">
@@ -44,14 +39,6 @@ export default function SoccerMarketLines({
         aria-label="玩法機率 · 我們引擎算的機率"
         className="space-y-1 list-none pl-0 m-0"
       >
-        <MarketRow
-          label="讓球"
-          line={`${hc.line}`}
-          aLabel="主"
-          aPct={hc.homePct}
-          bLabel="客"
-          bPct={hc.awayPct}
-        />
         <MarketRow
           label="兩隊進球"
           aLabel="是"

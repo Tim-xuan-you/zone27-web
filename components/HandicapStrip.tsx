@@ -48,14 +48,16 @@ export default function HandicapStrip({
   const [homeN, setHomeN] = useState(0);
   const [awayN, setAwayN] = useState(0);
   const [saving, setSaving] = useState(false);
-  const [, setKickedOff] = useState(false);
 
   useEffect(() => {
     const t = Date.parse(dateISO);
     if (Number.isNaN(t)) return;
     const ms = t - Date.now();
     if (ms > 24 * 3600 * 1000) return;
-    const id = setTimeout(() => setKickedOff(true), Math.max(ms, 0));
+    const id = setTimeout(
+      () => setState((s) => (s === "open" ? "started" : s)),
+      Math.max(ms, 0),
+    );
     return () => clearTimeout(id);
   }, [dateISO]);
 
@@ -105,7 +107,6 @@ export default function HandicapStrip({
     if (saving) return;
     const t = Date.parse(dateISO);
     if (!Number.isNaN(t) && t <= Date.now()) {
-      setKickedOff(true);
       setState("started");
       return;
     }
