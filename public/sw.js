@@ -18,7 +18,10 @@ self.addEventListener("push", (event) => {
   event.waitUntil(
     self.registration.showNotification(title, {
       body,
-      icon: "/icon",
+      // 大圖示用 512 版(Android 把通知大圖示放大到 ~96dp · 2×/3× 螢幕 = 192–288 實際 px ·
+      // 用 64 的 /icon 會糊)· /icon-512.png 是現成的高解析品牌圖(manifest 也用它)。
+      icon: "/icon-512.png",
+      // badge 是狀態列那顆 ~24dp 單色小圖 · 系統會降採樣 → 留 64 版即可(512 對它是浪費)。
       badge: "/icon",
       // 同一波結算用同 tag → 不疊一堆通知(取代而非堆積)。
       tag: typeof data.tag === "string" ? data.tag : "zone27-settlement",
