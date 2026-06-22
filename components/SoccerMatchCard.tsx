@@ -3,6 +3,7 @@ import Avatar from "@/components/Avatar";
 import SoccerBetStrip from "@/components/SoccerBetStrip";
 import SoccerMarketLines from "@/components/SoccerMarketLines";
 import OverUnderStrip from "@/components/OverUnderStrip";
+import HandicapStrip from "@/components/HandicapStrip";
 import EngineThreeWayBar from "@/components/EngineThreeWayBar";
 import {
   toDisplayPercents,
@@ -79,8 +80,10 @@ export default function SoccerMatchCard({ match }: { match: SoccerMatchPredictio
           locked = 這場有賽前鎖定線(押完給一張可外傳的單場收據連結) */}
       <SoccerBetStrip matchId={id} dateISO={dateISO} homeLabel={home} awayLabel={away} locked={locked} />
 
-      {/* 大小分 2.5 押注(看大 / 看小)· 引擎已算這條線 · 跟「誰贏」分開記、不污染戰績 */}
-      {prediction && <OuMount id={id} dateISO={dateISO} prediction={prediction} />}
+      {/* 大小分 + 讓分押注(看大/看小 · 主-0.5/客+0.5)· 引擎已算 · 跟「誰贏」分開記、不污染戰績 */}
+      {prediction && (
+        <MarketMount id={id} dateISO={dateISO} home={home} away={away} prediction={prediction} />
+      )}
 
       {/* 進這場詳情 = 完整引擎(最可能比分 / 玩法視角)+ 討論 / 分析(R228 足球補到 CPBL 同級)*/}
       <Link
@@ -93,27 +96,47 @@ export default function SoccerMatchCard({ match }: { match: SoccerMatchPredictio
   );
 }
 
-// 大小分押注掛載:從引擎預測算 2.5 線(看大/看小機率)· 傳進可押的 OverUnderStrip。
-function OuMount({
+// 玩法押注掛載:從引擎預測算大小分 2.5 + 讓分 0.5 的線 · 傳進可押的 strip(各自獨立、不污染「誰贏」)。
+function MarketMount({
   id,
   dateISO,
+  home,
+  away,
   prediction,
 }: {
   id: string;
   dateISO: string;
+  home: string;
+  away: string;
   prediction: SoccerPrediction;
 }) {
-  const ou = deriveSoccerMarkets(prediction.xgHome, prediction.xgAway, {
+  const m = deriveSoccerMarkets(prediction.xgHome, prediction.xgAway, {
     totalLines: [2.5],
-  }).totals[0];
-  if (!ou) return null;
+    handicapLines: [0.5],
+  });
+  const ou = m.totals[0];
+  const ah = m.handicaps[0];
   return (
-    <OverUnderStrip
-      matchId={id}
-      dateISO={dateISO}
-      overPct={ou.overPct}
-      underPct={ou.underPct}
-    />
+    <>
+      {ou && (
+        <OverUnderStrip
+          matchId={id}
+          dateISO={dateISO}
+          overPct={ou.overPct}
+          underPct={ou.underPct}
+        />
+      )}
+      {ah && (
+        <HandicapStrip
+          matchId={id}
+          dateISO={dateISO}
+          homeLabel={home}
+          awayLabel={away}
+          homePct={ah.homePct}
+          awayPct={ah.awayPct}
+        />
+      )}
+    </>
   );
 }
 

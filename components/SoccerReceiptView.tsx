@@ -6,12 +6,14 @@ import Avatar from "@/components/Avatar";
 import EngineThreeWayBar from "@/components/EngineThreeWayBar";
 import SoccerUserReceiptPick from "@/components/SoccerUserReceiptPick";
 import OverUnderStrip from "@/components/OverUnderStrip";
+import HandicapStrip from "@/components/HandicapStrip";
 import KickoffCountdown from "@/components/KickoffCountdown";
 import LockStamp from "@/components/LockStamp";
 import MatchSegment from "@/components/MatchSegment";
 import { getNationalCode } from "@/lib/soccer/teams";
 import type { SoccerReceipt } from "@/lib/soccer/receipt";
 import { ouResultFromScore } from "@/lib/soccer/over-under";
+import { ahResultFromScore } from "@/lib/soccer/handicap";
 import type { SegmentLocker } from "@/lib/match-segment";
 
 // ── ZONE 27 · 足球單場「戰功收據」頁 ───────────────────────────────────
@@ -220,13 +222,21 @@ export default function SoccerReceiptView({
               engineLabel={r.favoredLabel}
             />
 
-            {/* 大小分:本人若賽前押過這場的大小分 → 顯示結果 + 命中/落空(沒押這手 → 整塊隱藏)*/}
+            {/* 大小分 + 讓分:本人若賽前押過 → 顯示結果 + 命中/落空(各自沒押這手 → 整塊隱藏)*/}
             {r.phase === "settled" && (
               <div className="px-5 sm:px-8 pb-6">
                 <OverUnderStrip
                   matchId={r.matchId}
                   dateISO={r.kickoffISO}
                   result={ouResultFromScore(r.finalHome, r.finalAway)}
+                  hideIfNoPick
+                />
+                <HandicapStrip
+                  matchId={r.matchId}
+                  dateISO={r.kickoffISO}
+                  homeLabel={r.home}
+                  awayLabel={r.away}
+                  result={ahResultFromScore(r.finalHome, r.finalAway)}
                   hideIfNoPick
                 />
               </div>

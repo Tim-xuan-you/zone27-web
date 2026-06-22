@@ -7,6 +7,7 @@ import Avatar from "@/components/Avatar";
 import EngineThreeWayBar from "@/components/EngineThreeWayBar";
 import SoccerMarketLines from "@/components/SoccerMarketLines";
 import OverUnderStrip from "@/components/OverUnderStrip";
+import HandicapStrip from "@/components/HandicapStrip";
 import SoccerBetStrip from "@/components/SoccerBetStrip";
 import CreatorAnalysis from "@/components/CreatorAnalysis";
 import MatchSegment from "@/components/MatchSegment";
@@ -200,20 +201,37 @@ export default async function SoccerMatchPage({ params }: { params: Params }) {
           {/* 進場押注(三向 · 登入才能押 · 押了不可改 · 賽後對帳)*/}
           <SoccerBetStrip matchId={m.id} dateISO={m.dateISO} homeLabel={m.home} awayLabel={m.away} locked={m.locked} />
 
-          {/* 大小分 2.5 押注(看大 / 看小)· 跟「誰贏」分開記、不污染戰績 */}
+          {/* 大小分 + 讓分押注(看大/看小 · 主-0.5/客+0.5)· 跟「誰贏」分開記、不污染戰績 */}
           {pred &&
             (() => {
-              const ou = deriveSoccerMarkets(pred.xgHome, pred.xgAway, {
+              const mk = deriveSoccerMarkets(pred.xgHome, pred.xgAway, {
                 totalLines: [2.5],
-              }).totals[0];
-              return ou ? (
-                <OverUnderStrip
-                  matchId={m.id}
-                  dateISO={m.dateISO}
-                  overPct={ou.overPct}
-                  underPct={ou.underPct}
-                />
-              ) : null;
+                handicapLines: [0.5],
+              });
+              const ou = mk.totals[0];
+              const ah = mk.handicaps[0];
+              return (
+                <>
+                  {ou && (
+                    <OverUnderStrip
+                      matchId={m.id}
+                      dateISO={m.dateISO}
+                      overPct={ou.overPct}
+                      underPct={ou.underPct}
+                    />
+                  )}
+                  {ah && (
+                    <HandicapStrip
+                      matchId={m.id}
+                      dateISO={m.dateISO}
+                      homeLabel={m.home}
+                      awayLabel={m.away}
+                      homePct={ah.homePct}
+                      awayPct={ah.awayPct}
+                    />
+                  )}
+                </>
+              );
             })()}
 
           {/* 結算規格(賭徒最怕模糊結算)· 90 分鐘 1X2 · 延長賽 / PK 不算 */}
