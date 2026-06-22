@@ -3,84 +3,63 @@ import type { Metadata } from "next";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import FounderSignOff from "@/components/FounderSignOff";
-import ArticleMeta from "@/components/ArticleMeta";
 import { matches, getFinalizedMatches } from "@/lib/matches";
 import { getWaitlistCount } from "@/lib/waitlist-stats";
 import { getUser } from "@/lib/supabase/server";
-import AdminTierSwitcher from "@/components/AdminTierSwitcher";
-import TierFeatureMatrix from "@/components/TierFeatureMatrix";
 import AdminConsole from "@/components/AdminConsole";
 
 export const metadata: Metadata = {
-  title: "Admin · Tim 的 ZONE 27 管理台",
+  title: "Tim 的 ZONE 27 管理台",
   description:
-    "ZONE 27 後台 · Tim 的管理台 —— 加點數、標付費等級、審文章全用點按鈕(後端上鎖 · 只有你能動)。本頁公開但 noindex · 連後台都公開設計(disclosure)。",
-  // Round 29 Wave 2 · noindex to keep this out of any future SEO crawl ·
-  // public preview only · not for visitor traffic.
-  robots: {
-    index: false,
-    follow: false,
-  },
+    "ZONE 27 後台 · 加點數、標付費會員、審文章,全部點按鈕完成(後端上鎖 · 只有你能動)。",
+  // noindex:這頁不該出現在搜尋結果。
+  robots: { index: false, follow: false },
 };
 
-// Re-fetch live numbers every 60s.
+// 即時數字每 60 秒重抓一次。
 export const revalidate = 60;
 
-// ── ZONE 27 · /admin ───────────────────────────────────
-// Round 29 Wave 2 起點 · Tim 直擊:「我要如何管理會員?操作介面在哪裡?」
-// R185 起 = 真・點擊後台(AdminConsole + migration 0011 · 不再是 mockup):
-//   · 加 / 扣點數(記手動轉帳入金)· 標付費等級(OPEN/BLACK/GOLD)·
-//     會員列表 · 文章 / 留言審核(看全文 + 留痕刪)· 審核紀錄。
-//   · 全程點按鈕、0 SQL · 後端 is_admin() gate(只有 Tim 能動 · 別人硬打 RPC 也被擋)。
-//   · 碰錢動作親手按一次確認 + 留痕(鐵律 #13 不自動扣款)。
-// designer preview(Cmd+Shift+P / AdminTierSwitcher / TierFeatureMatrix)= 純
-//   localStorage 視覺切換,跟上面真實 admin actions 是兩套獨立系統。
+// ── ZONE 27 · /admin · Tim 的單人管理台 ────────────────────────────────────
+// 後台研究的一句話結論:後台是「待辦收件匣」不是「儀表板」—— 打開只回答「現在有
+// 什麼需要我親手處理」,處理完就安靜下來。 所以這頁只放 Tim 真的會按的幾個按鈕:
+//   · 加 / 扣點數(記手動轉帳入金)
+//   · 標付費會員(含到期日 + 該提醒誰續費的清單)
+//   · 審文章 / 留言(看全文 + 留痕刪)
+//   · 幾個即時數字
+// 碰錢一律親手按一次確認 + 留痕(鐵律 #13:不自動扣款)· 後端上鎖只有 Tim 能動。
+// noindex · 不對搜尋引擎曝光。
 //
-// noindex 因為:不是公開內容 · 是 ops surface · 但放公開資料夾 OK
-//   (訪客看到也只是「後台長這樣」)· 對齊 disclosure philosophy:連後台都公開設計。
-// KPI numbers(waitlist / ingest queue)從 live data 拉。
+// 2026-06-22 大整理:砍掉開發期的「身分預覽」三大塊(設計者問答 / 切換器 / 功能對照表
+// + 安全模型小論文)= 對日常營運是純雜訊的工程黑話;全頁回到乾淨、安靜、看得懂。
 // ─────────────────────────────────────────────────────
 
 export default async function AdminPage() {
-  // Round 30 Wave 10 · auth-aware /admin · Tim 自己 login 後 page 顯示
-  // 他的 session info(email + 加入天數)· anonymous visitor 看 noindex
-  // preview。 不是 admin gate(任何 logged-in user 都看得到)· 只是給
-  // Tim visual confirmation 他 auth 鏈通了。 真正的 admin actions gate 在
-  // AdminConsole(migration 0011 is_admin · 已 ship)· 本頁這層只 gate KPI 數字。
-  // getUser()(server 再驗身分)· 不用可偽造的 getSession · 並用它 gate 數字
+  // getUser() 再驗一次身分(不用可偽造的 getSession)· 並用它決定數字給不給看。
   const user = await getUser();
   const waitlistCount = await getWaitlistCount();
   const finalizedCount = getFinalizedMatches().length;
   const ingestedCount = matches.length;
   const pendingIngest = matches.filter((m) => !m.finalResult).length;
-  // stealth 紀律:等候名單人數只給登入者(= 實務上只有 Tim)看 · 匿名訪客看不到
-  // 真實人數(後台設計仍公開展示 = disclosure philosophy · 但 stealth 期間不洩用戶量)
-  const waitlistValue = !user
-    ? "—"
-    : waitlistCount === -1
-    ? "—"
-    : waitlistCount;
+
+  const waitlistValue = !user ? "—" : waitlistCount === -1 ? "—" : waitlistCount;
   const waitlistHint = !user
-    ? "登入後可見 · stealth 期間不對訪客顯示用戶量"
+    ? "登入後才看得到"
     : waitlistCount === -1
-    ? "Supabase RPC 暫時不可達 · 請開 Supabase Studio 確認"
+    ? "後台資料庫暫時連不上 · 稍後再試"
     : waitlistCount === 0
-    ? "尚無人加入 · 等第一個早鳥"
-    : `${waitlistCount} 個 email · Supabase Tokyo`;
+    ? "還沒有人加入 · 等第一個"
+    : `${waitlistCount} 個 email`;
 
   return (
     <div className="flex flex-col flex-1 min-h-screen">
       <Nav />
 
       <main id="main">
-        {/* ── HERO ─────────────────────────────────── */}
-        <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pt-20 pb-12">
-          <div className="flex items-baseline gap-3 mb-4 flex-wrap section-reveal">
-            <p
-              lang="en"
-              className="font-mono text-gold text-[10px] tracking-[0.45em]"
-            >
-              / ADMIN · Tim&apos;s OPS DASHBOARD
+        {/* ── 開頭 ── */}
+        <section className="mx-auto max-w-4xl w-full px-6 sm:px-10 pt-20 pb-10">
+          <div className="flex items-baseline gap-3 mb-4 flex-wrap">
+            <p className="font-mono text-gold text-[10px] tracking-[0.45em]">
+              / 你的管理台
             </p>
             <span
               className="font-mono text-[9px] tracking-[0.3em] px-1.5 py-0.5 border border-gold/40 text-gold/80"
@@ -89,236 +68,90 @@ export default async function AdminPage() {
               只有你看得到
             </span>
             {user && (
-              <span
-                lang="en"
-                className="font-mono text-[9px] tracking-[0.3em] px-1.5 py-0.5 border border-gold/60 text-gold shimmer"
-                title={`您 logged in as ${user.email}`}
-              >
-                ✓ SESSION · {user.email}
+              <span className="font-mono text-[9px] tracking-[0.3em] px-1.5 py-0.5 border border-gold/60 text-gold">
+                ✓ 已登入 · {user.email}
               </span>
             )}
           </div>
           <h1 className="text-4xl sm:text-5xl text-bone font-light tracking-tight max-w-3xl">
-            Tim 的 <span className="text-gold">ZONE 27 ops 後台</span>
+            Tim 的 <span className="text-gold">ZONE 27 管理台</span>
           </h1>
           <p className="mt-6 text-mute leading-relaxed max-w-2xl">
-            這是你的管理台。 管理會員、加點數、審文章 ——
-            <strong className="text-bone">全部用點按鈕完成</strong>:打 email、打金額、按按鈕,
-            全程不用寫任何指令。
+            加點數、標付費會員、審文章 ——{" "}
+            <strong className="text-bone">全部點按鈕完成</strong>:打 email、打金額、按按鈕,
+            全程不用寫任何指令。 碰錢的動作要你
+            <strong className="text-bone">親手按一次確認 + 留痕</strong>
+            (你的鐵律:不自動扣款)· 不是限制,是紀律。
           </p>
-          <p className="mt-4 text-mute/80 text-sm leading-relaxed max-w-2xl">
-            碰錢的動作<strong className="text-bone">故意要你親手按一次確認 + 留痕</strong>
-            (你的鐵律 #13:不自動扣款)· 不是限制,是紀律。 下面的數字都是即時的。
-          </p>
-          <div className="mt-6">
-            <ArticleMeta readingMin={3} />
-          </div>
         </section>
 
-        <div className="mx-auto w-32 gold-line mb-12" />
+        <div className="mx-auto w-32 gold-line mb-10" />
 
-        {/* ── 管理台 · 點按鈕(R185 · Tim:不會操作 SQL · 要 WordPress 式)· AdminConsole + migration 0011 ── */}
-        <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-12">
-          <p className="font-mono text-gold text-[10px] tracking-[0.4em] mb-3">
-            / 管理台 · 點按鈕就行
-          </p>
-          <h2 className="text-2xl sm:text-3xl text-bone font-light tracking-tight mb-3">
-            你的管理台
-          </h2>
-          <p className="text-mute/85 text-sm leading-relaxed mb-6 max-w-2xl">
-            像 WordPress 後台一樣 —— 打 email、打金額、按按鈕,全程不用寫任何指令。
-            碰錢的動作要你親手按一次確認(你的鐵律「不自動扣款」)· 不是限制,是紀律。
-          </p>
-
+        {/* ── 管理台(真正天天會用的營運工具)── */}
+        <section className="mx-auto max-w-4xl w-full px-6 sm:px-10 pb-14">
           <AdminConsole />
-
           <p className="mt-6 font-mono text-mute/55 text-[10px] tracking-[0.2em] leading-relaxed max-w-2xl">
-            ▸ 第一次用:登入你的 email → 按「把我設為管理員」(只有第一個人能設,設完鎖死)→ 之後全是按鈕。
-            這些管理「動作」都有上鎖(只有你能執行 · 別人硬打也被擋)· 整頁上鎖是待辦(但別人本來就看不到會員 email)。
+            ▸ 第一次用:登入你的 email → 按「把我設為管理員」(只有第一個人能設,設完就鎖住)
+            → 之後全是按鈕。 這些動作只有你能執行,別人就算想繞過也被擋下。
           </p>
         </section>
 
-        {/* R60 W-C · Designer Quick Reference · Tim 第 3 次 canary fire 同問題
-            「設計者要怎麼切換查看 / 要登入嗎 / 哪個帳號」 · founder dogfood
-            permanent FAQ block · 一進 /admin 就看到 3 個答案。 brand IP「方法
-            公開 · 品味私藏」 延伸到 designer tool ergonomics · per [[feedback-
-            founder-dogfood-canary]] 「founder push back 第 1 次就 trust 即修」 ·
-            第 3 次 explicit physical surface 必須立即修。 同 /admin noindex
-            invisible to public + 只 Tim 看得到 axiom 保留。 */}
-        <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-12">
-          <div className="bg-slate/30 border border-gold/50 p-5 sm:p-6">
-            <p
-              lang="en"
-              className="font-mono text-gold text-[10px] sm:text-[11px] tracking-[0.4em] mb-4"
-            >
-              / DESIGNER QUICK REFERENCE · 設計者 3 個常問
-            </p>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
-              <div className="border-l-2 border-gold/50 pl-4">
-                <p
-                  lang="en"
-                  className="font-mono text-mute text-[10px] tracking-[0.3em] mb-2"
-                >
-                  Q · 要登入嗎?
-                </p>
-                <p className="text-bone text-[13px] sm:text-sm leading-relaxed">
-                  <strong className="text-gold">不需要</strong>。 tier preview
-                  是純 localStorage 不碰 auth · 不寫 server · 不影響真實
-                  session。 您是匿名訪客也 OK · 已登入也 OK。
-                </p>
-              </div>
-              <div className="border-l-2 border-gold/50 pl-4">
-                <p
-                  lang="en"
-                  className="font-mono text-mute text-[10px] tracking-[0.3em] mb-2"
-                >
-                  Q · 怎麼從任何頁面切?
-                </p>
-                <p className="text-bone text-[13px] sm:text-sm leading-relaxed">
-                  按{" "}
-                  <kbd className="font-mono text-gold bg-navy/60 border border-gold/40 px-1.5 py-0.5 text-[11px] tracking-tight">
-                    Cmd+Shift+P
-                  </kbd>
-                  (Mac)或{" "}
-                  <kbd className="font-mono text-gold bg-navy/60 border border-gold/40 px-1.5 py-0.5 text-[11px] tracking-tight">
-                    Ctrl+Shift+P
-                  </kbd>
-                  (Win)= 任何頁面 banner 立即跳出 · 4 tier 一鍵切。 banner 在
-                  全站 sticky top。
-                </p>
-              </div>
-              <div className="border-l-2 border-gold/50 pl-4">
-                <p
-                  lang="en"
-                  className="font-mono text-mute text-[10px] tracking-[0.3em] mb-2"
-                >
-                  Q · 要哪個帳號?
-                </p>
-                <p className="text-bone text-[13px] sm:text-sm leading-relaxed">
-                  Tier preview <strong className="text-gold">不需要任何
-                  帳號</strong>。 若要測「真實 auth state」(實際 Email + 密碼
-                  flow / Supabase session cookie)再用 /login · 隨便 email + 密碼 註冊
-                  測試帳號(Resend free tier 100/day)。
-                </p>
-              </div>
-            </div>
-            <p className="mt-5 pt-4 border-t border-line/40 font-mono text-mute/70 text-[10px] tracking-[0.25em] leading-relaxed">
-              ▸ Tier preview = 純視覺切換(client-side localStorage)·
-              real auth = 真實 Supabase session(server-side cookie)· 兩個
-              系統獨立 · 您可同時 active · banner 顯示 preview tier · Nav 顯示
-              real auth state。
-            </p>
-          </div>
-        </section>
-
-        {/* ── Round 36 W-D · TIER SWITCHER · founder dev tool ────
-            Tim 14+ canary fire question:「我這個設計者 · 我要怎麼樣可以
-            在各個付費程度裡面 · 隨意切換看各個功能有沒有到位?」 brilliant
-            founder dogfood requirement · ship 4-tier preview switcher。
-            localStorage-based · sticky banner 全 site 顯示 · click 切 +
-            reload · banner click cancel 回真實 session。 Phase 1 MVP
-            client-side visual preview · Phase 2 升 cookie-based 讓 server
-            tier-aware components 也 honor preview tier。 */}
-        <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-12">
-          <AdminTierSwitcher />
-        </section>
-
-        {/* ── R111 W1 · NEW TierFeatureMatrix · 4 tiers 並列 feature
-            comparison per Tim 2026-05-25 critique「切換都沒動作 · 看不到變化」
-            + 「最高階有哪些功能 · 最低階也顯現出來 · 誘惑他們花錢」 ·
-            13 features × 4 tiers grid · 每個 cell ✓ UNLOCKED / 🔒 LOCKED /
-            — N/A · click tier header 立即切換 preview tier + 同 PreviewModeBanner
-            sync via custom storage event · Tim 一頁可比對 4 tier 差別 ·
-            不需 4 個 login account · per agent research Substack/Patreon/
-            GitHub locked-preview pattern。 */}
-        <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-12">
-          <TierFeatureMatrix />
-        </section>
-
-        {/* ── KPI ROW (live numbers · no actions) ──── */}
-        <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-16">
-          <p
-            lang="en"
-            className="font-mono text-gold/70 text-[10px] tracking-[0.35em] mb-4"
-          >
-            / 01 · KPI · LIVE NUMBERS
+        {/* ── 幾個即時數字(只放會讓你動手、或你會想知道的)── */}
+        <section className="mx-auto max-w-4xl w-full px-6 sm:px-10 pb-16">
+          <p className="font-mono text-gold/70 text-[10px] tracking-[0.35em] mb-4">
+            / 即時數字
           </p>
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
+            <KpiCard zh="等候名單" value={waitlistValue} hint={waitlistHint} />
             <KpiCard
-              label="WAITLIST"
-              zh="等候名單"
-              value={waitlistValue}
-              hint={waitlistHint}
-            />
-            <KpiCard
-              label="MATCHES"
-              zh="ingest 過的賽事"
+              zh="收錄的賽事"
               value={ingestedCount}
-              hint={`${finalizedCount} 場已 finalize · ${pendingIngest} 場 pending`}
+              hint={`${finalizedCount} 場已結算 · ${pendingIngest} 場待結算`}
             />
-            <KpiCard
-              label="ENGINE"
-              zh="引擎版本"
-              value="v0.2"
-              hint="Real At-Bat · 待 v0.3 park factor + 隊伍 wOBA"
-            />
+            <KpiCard zh="引擎版本" value="v0.2" hint="逐打席模型" />
           </div>
         </section>
 
-        {/* ── 不裝什麼(analytics 紀律)─────────────── */}
-        <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-16 pt-12 border-t border-line/40">
-          <p className="font-mono text-gold/70 text-[10px] tracking-[0.35em] mb-4">
-            / 不裝什麼 · 數據追蹤紀律
+        {/* ── 不裝追蹤(收合成一段)── */}
+        <section className="mx-auto max-w-4xl w-full px-6 sm:px-10 pb-16 pt-10 border-t border-line/40">
+          <p className="font-mono text-gold/70 text-[10px] tracking-[0.35em] mb-3">
+            / 不裝追蹤
           </p>
-          <h2 className="text-2xl sm:text-3xl text-bone font-light tracking-tight mb-6">
-            還早 · 不裝
-          </h2>
-          <div className="space-y-4 text-mute leading-relaxed">
-            <p>
-              Stage 3 = Plausible Analytics($9/月 · cookieless · 零 PII)。
-              <strong className="text-bone">三條件全部 ✓ 才啟用</strong>:
-            </p>
-            <ul className="space-y-2 text-sm border-l-2 border-mute/30 pl-5 sm:pl-6 list-none">
-              <li>▸ 月活 &gt; 1000(目前 stealth · 還沒)</li>
-              <li>▸ BLACK 月費已上線(目前還沒)</li>
-              <li>▸ 你決定要做產品決策(哪個 feature 留 · 哪個砍)</li>
-            </ul>
-            <p className="text-mute/70 text-sm">
-              <strong className="text-bone">永遠不裝的:</strong> Google Analytics 4 ·
-              Facebook Pixel · Hotjar 熱圖錄影 · LinkedIn Insight Tag · TikTok Pixel。
-              這些違反 <Link href="/privacy" className="text-gold underline-offset-4 hover:underline">/privacy</Link>{" "}
-              承諾 · 永久 blocked(per /manifesto Section IV PRIVACY)。
-            </p>
-          </div>
+          <p className="text-mute/85 text-sm leading-relaxed max-w-2xl">
+            這個站<strong className="text-bone">不裝任何追蹤分析</strong>(Google Analytics、
+            Facebook Pixel、熱圖錄影都不裝)—— 因為我們在{" "}
+            <Link
+              href="/privacy"
+              className="text-gold underline-offset-4 hover:underline"
+            >
+              /privacy
+            </Link>{" "}
+            公開承諾不追蹤訪客,那本身就是品牌的一部分。 要看搜尋表現,用 Google Search
+            Console 就好(它只看搜尋、不追蹤站上的人)。
+          </p>
         </section>
 
         <FounderSignOff>
           <p>
-            這頁是給<strong>你自己</strong>看的 — 不是給訪客看的。但放公開資料夾 OK ·
-            因為 ZONE 27 連後台都公開設計(連同 ADMIN-PLAN.md 一起公開)。
+            這頁是給<strong>你自己</strong>看的,不對外。 上面那個管理台是真的 ——
+            加點數、標付費會員、審文章,全是點按鈕、後端上鎖,只有你能動。 碰錢的動作
+            故意要你親手確認、而且留痕,不是限制,是你的鐵律。
           </p>
           <p>
-            上面那個管理台是<strong>真的</strong> —— 加點數、標付費等級、審文章,
-            全是點按鈕、後端上鎖(只有你能動)。 碰錢的動作故意要你親手按一次確認、
-            而且留痕,不是限制,是你的鐵律。
-          </p>
-          <p>
-            但別讓它長太大。 founder solo 階段,夠用就好。 如果有一天你盯後台數字
-            比盯自己的公開戰績還多 · 那是品牌走偏的信號 —— 這頁存在的部分意義,也是提醒這件事
-            (per /discipline Buffett「track record」)。
+            但別讓它長太大。 一個人做的階段,夠用就好。 哪天你盯這個後台的數字,
+            比盯自己的公開戰績還多 —— 那是品牌走偏的信號。 這頁存在的一部分意義,
+            也是提醒你這件事。
           </p>
         </FounderSignOff>
 
-        {/* ── BACK ─────────────────────────────────── */}
-        <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pb-24 text-center">
-          <div className="flex flex-wrap items-center justify-center gap-6">
-            <Link
-              href="/member"
-              className="font-mono text-mute hover:text-gold text-[10px] tracking-[0.4em] transition-colors"
-            >
-              ← 會員端 preview · /member
-            </Link>
-          </div>
+        {/* ── 回會員端 ── */}
+        <section className="mx-auto max-w-4xl w-full px-6 sm:px-10 pb-24 text-center">
+          <Link
+            href="/member"
+            className="font-mono text-mute hover:text-gold text-[10px] tracking-[0.4em] transition-colors"
+          >
+            ← 回會員端 · /member
+          </Link>
         </section>
       </main>
 
@@ -327,30 +160,19 @@ export default async function AdminPage() {
   );
 }
 
-// ── Sub-components ────────────────────────────────────
-
+// ── 即時數字小卡 ──
 function KpiCard({
-  label,
   zh,
   value,
   hint,
 }: {
-  label: string;
   zh: string;
   value: string | number;
   hint: string;
 }) {
   return (
     <div className="p-4 sm:p-5 border border-gold/30 bg-slate/30">
-      <p
-        lang="en"
-        className="font-mono text-gold/70 text-[10px] tracking-[0.35em] mb-1"
-      >
-        {label}
-      </p>
-      <p className="font-mono text-mute text-[10px] tracking-[0.25em] mb-3">
-        {zh}
-      </p>
+      <p className="font-mono text-mute text-[10px] tracking-[0.25em] mb-3">{zh}</p>
       <p className="font-mono text-bone tabular text-3xl sm:text-4xl font-light leading-none mb-2">
         {value}
       </p>
@@ -360,4 +182,3 @@ function KpiCard({
     </div>
   );
 }
-

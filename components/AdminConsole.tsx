@@ -129,6 +129,7 @@ export default function AdminConsole() {
   // ── ADMIN console ──
   return (
     <div className="space-y-5">
+      <ExpiringCard members={members} />
       <GivePointsCard onDone={reloadMembers} />
       <SetTierCard onDone={reloadMembers} members={members} />
       <MembersCard members={members} onReload={reloadMembers} />
@@ -381,6 +382,52 @@ function MemberUntilCell({ tier, until }: { tier: string; until: string }) {
   );
 }
 
+// ── 該提醒誰續費(快到期 / 已過期 的付費會員 · 平靜資訊、不催繳)──────────
+// 後台研究結論:後台 = 待辦收件匣。 membership.ts 已算好 expiring/expired,但散在整份
+// 會員表裡要用眼睛找金色字 → 這裡把「今天該提醒誰」濾出來放最上面。 沒有人快到期
+// 就整塊隱藏(graceful)。 只給資訊 · 不紅字、不倒數、不催繳(平靜對帳語氣)。
+function ExpiringCard({ members }: { members: AdminMember[] }) {
+  const soon = members
+    .map((m) => ({
+      m,
+      ms: getMembershipStatus({ tier: m.tier, member_until: m.memberUntil }),
+    }))
+    .filter(
+      (x) => x.ms.paid && (x.ms.state === "expiring" || x.ms.state === "expired"),
+    )
+    .sort((a, b) => {
+      const rank = (s: typeof a) => (s.ms.state === "expired" ? 0 : 1);
+      if (rank(a) !== rank(b)) return rank(a) - rank(b);
+      return (a.ms.daysLeft ?? 0) - (b.ms.daysLeft ?? 0);
+    });
+  if (soon.length === 0) return null; // 沒有人快到期 → 整塊不顯示
+
+  return (
+    <Card
+      title={`該提醒續費(${soon.length})`}
+      hint="快到期或已過期的付費會員 —— 你親手提醒一下就好(不自動扣款)。 只是資訊,沒有催繳。"
+    >
+      <div className="space-y-1.5">
+        {soon.map(({ m, ms }) => (
+          <div
+            key={m.email}
+            className="flex items-baseline justify-between gap-3 border-t border-line/30 pt-1.5 first:border-t-0 first:pt-0"
+          >
+            <span className="text-bone/90 text-[13px] break-all min-w-0">
+              {m.email}
+            </span>
+            <span className="shrink-0 font-mono text-gold text-[11px] tabular tracking-[0.1em]">
+              {ms.state === "expired"
+                ? `${formatUntilShort(m.memberUntil)} · 已過`
+                : `剩 ${ms.daysLeft} 天`}
+            </span>
+          </div>
+        ))}
+      </div>
+    </Card>
+  );
+}
+
 // ── 會員列表 ──
 function MembersCard({
   members,
@@ -405,7 +452,7 @@ function MembersCard({
           <table className="w-full text-left">
             <thead>
               <tr className="font-mono text-mute/60 text-[9px] tracking-[0.25em]">
-                <th className="py-1.5 pr-3 font-normal">EMAIL</th>
+                <th className="py-1.5 pr-3 font-normal">信箱</th>
                 <th className="py-1.5 pr-3 font-normal">等級</th>
                 <th className="py-1.5 pr-3 font-normal">到期</th>
                 <th className="py-1.5 font-normal tabular">餘額</th>
@@ -546,7 +593,7 @@ function ModRow({
             <p className="font-mono text-mute/55 text-[10px] tracking-[0.25em]">載入中...</p>
           ) : full === null ? (
             <p className="text-mute/70 text-[12px] leading-relaxed">
-              讀不到全文(可能 migration 0017 還沒套用)· 上方 40 字摘要仍可審。
+              讀不到全文(這功能還沒開通)· 上方摘要仍可審。
             </p>
           ) : (
             <>
@@ -616,7 +663,7 @@ function AuditCard({
       </button>
       {audit.length === 0 ? (
         <p className="font-mono text-mute/55 text-[11px] tracking-[0.2em]">
-          還沒有刪除紀錄(套用 migration 0017 後生效)。
+          還沒有刪除紀錄。
         </p>
       ) : (
         <div className="space-y-2">
