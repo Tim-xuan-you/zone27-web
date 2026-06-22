@@ -61,7 +61,13 @@ Current pending (as of 2026-05-20 DAY 2 collapse):
 
 
 
-## 🚫 SEO / Discoverability — FREEZE UNTIL LAUNCH READY
+## ✅ SEO / Discoverability — UNFROZEN 2026-06-22(品牌網域上線)
+
+> **2026-06-22:** Tim 買下並接上品牌網域 **`zone27.com.tw`** 後明確說「告訴全世界 · SEO GO」→ stealth SEO 凍結**正式解除**。 已 ship(`bc8121f`):`app/sitemap.ts`(27 公開路由)+ `app/robots.ts`(擋 /admin·/api·/auth·/member·/login·/verify)+ `layout.tsx` WebSite/Organization JSON-LD;`metadataBase` 已是 zone27.com.tw(`06c5373`)。 **仍刻意不加:任何使用者追蹤分析(@vercel/analytics / GA4)—— /privacy 的「反追蹤」承諾是品牌差異化,不破。** ⏳ 剩 Tim 動作:Google Search Console 加 `zone27.com.tw` + 驗證(Claude 可給 meta tag 或帶走)。 下方原凍結條文已失效,留作脈絡。
+
+**(以下為原始凍結指令 · 2026-05-19 · 已於 2026-06-22 解除 · 勿據此移除 sitemap/robots)**
+
+## 🚫 SEO / Discoverability — FREEZE UNTIL LAUNCH READY(已解除 · 見上)
 
 **Owner directive (2026-05-19, Tim):**
 
@@ -156,7 +162,11 @@ Current pending (as of 2026-05-20 DAY 2 collapse):
 
 ---
 
-## 🚫 社群帳號 / 上線推廣文 — FREEZE UNTIL TIM SAYS GO
+## 🟡 社群帳號 / 上線推廣文 — 部分解凍 2026-06-22
+
+> **2026-06-22:** Tim 說「寫上線訊息 · GO」→ **草擬上線文案已授權**(Claude 可寫 LINE 軟性上線訊息 + 公開貼文草稿,用 ZONE 27 品牌語氣)。 **仍是 Tim 親自的動作、Claude 不自動執行**:① 註冊任何社群帳號 ② 實際發佈貼文 —— Claude 只交草稿,Tim 自己貼。 `battle9th-fb-writer` 技能仍只服務《決戰 9 局下》遊戲、**不**用來推 ZONE 27。 下方原凍結條文中「帳號註冊 + 實際發佈」仍有效。
+
+## 🚫 社群帳號 / 上線推廣文 — FREEZE UNTIL TIM SAYS GO(草擬已解凍 · 發佈/註冊仍 freeze · 見上)
 
 **Owner directive (2026-05-19, Tim):**
 
