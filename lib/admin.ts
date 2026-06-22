@@ -78,18 +78,31 @@ export async function adminGivePoints(
   }
 }
 
-/** 標記付費等級 · free | black | founder。 */
+/** 標記付費等級 · free | black | founder。 ref = 轉帳末5碼(選填 · 對帳用)。
+ *  留痕版(0033 · 3 參數含末5碼 + 寫 admin_audit)優先 · 未套用 → fall back 舊 2 參數版(無留痕)。 */
 export async function adminSetTier(
   email: string,
-  tier: "free" | "black" | "founder"
+  tier: "free" | "black" | "founder",
+  ref = ""
 ): Promise<ActionResult> {
   try {
     const supabase = createSupabaseBrowserClient();
-    const { error } = await supabase.rpc("admin_set_tier", {
+    // 留痕版(admin_set_tier 3 參數 · 0033)優先
+    const logged = await supabase.rpc("admin_set_tier", {
       p_email: email,
       p_tier: tier,
+      p_ref: ref,
     });
-    return error ? { ok: false, msg: explain(error.message) } : { ok: true };
+    if (!logged.error) return { ok: true };
+    // PGRST202 = schema cache 找不到 3 參數版(0033 未套)→ fall back 舊 2 參數版
+    if ((logged.error as { code?: string }).code === "PGRST202") {
+      const { error } = await supabase.rpc("admin_set_tier", {
+        p_email: email,
+        p_tier: tier,
+      });
+      return error ? { ok: false, msg: explain(error.message) } : { ok: true };
+    }
+    return { ok: false, msg: explain(logged.error.message) };
   } catch {
     return { ok: false, msg: "操作失敗 · 請再試一次。" };
   }

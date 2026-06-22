@@ -311,6 +311,7 @@ function GivePointsCard({ onDone }: { onDone: () => void }) {
 function SetTierCard({ onDone, members }: { onDone: () => void; members: AdminMember[] }) {
   const [email, setEmail] = useState("");
   const [tier, setTier] = useState<"free" | "black" | "founder">("black");
+  const [ref, setRef] = useState("");
   const [busy, setBusy] = useState(false);
   const [msg, setMsg] = useState<{ ok: boolean; text: string } | null>(null);
 
@@ -321,7 +322,7 @@ function SetTierCard({ onDone, members }: { onDone: () => void; members: AdminMe
     }
     setBusy(true);
     setMsg(null);
-    const res = await adminSetTier(email.trim(), tier);
+    const res = await adminSetTier(email.trim(), tier, ref.trim());
     setBusy(false);
     if (res.ok) {
       // 設 BLACK → 順手算到期日顯示給 Tim(可轉告對方「你的 BLACK 有效到 X」)· 鏡 SQL 同公式。
@@ -337,6 +338,7 @@ function SetTierCard({ onDone, members }: { onDone: () => void; members: AdminMe
         text: `${email.trim()} 設為「${TIER_ZH[tier]}」${extra} · 對方下次登入生效`,
       });
       setEmail("");
+      setRef("");
       onDone();
     } else {
       setMsg({ ok: false, text: res.msg });
@@ -344,7 +346,7 @@ function SetTierCard({ onDone, members }: { onDone: () => void; members: AdminMe
   };
 
   return (
-    <Card title="標記付費會員(收到會員費後)" hint="打對方 email、選等級 → 按「設定」。 對方重新登入後就解鎖。">
+    <Card title="標記付費會員(收到會員費後)" hint="打對方 email、選等級、(可順手記轉帳末5碼)→ 按「設定」。 對方重新登入後就解鎖,這筆也會進下方「審核紀錄」對帳。">
       <div className="flex flex-wrap gap-2 items-stretch">
         <Field value={email} onChange={setEmail} placeholder="會員 email" className="flex-1 min-w-[180px]" />
         <select
@@ -355,6 +357,12 @@ function SetTierCard({ onDone, members }: { onDone: () => void; members: AdminMe
           <option value="black">BLACK</option>
           <option value="free">OPEN(取消付費)</option>
         </select>
+        <Field
+          value={ref}
+          onChange={setRef}
+          placeholder="轉帳末5碼(選填)"
+          className="w-36"
+        />
         <ActionBtn onClick={submit} busy={busy} label="設定" />
       </div>
       <ResultMsg msg={msg} />
@@ -651,8 +659,8 @@ function AuditCard({
 }) {
   return (
     <Card
-      title={`審核紀錄(${audit.length})`}
-      hint="你刪了什麼、何時、為什麼 —— 都留痕。 這就是「公開揭露 + 留痕」的審核權(不是秘密上帝視角 · 同你的 disclosure 護城河)。"
+      title={`紀錄(${audit.length})`}
+      hint="你刪了什麼、改了誰的等級、何時、為什麼 —— 都留痕。 這就是「公開揭露 + 留痕」的審核權(不是秘密上帝視角 · 同你的 disclosure 護城河)。"
     >
       <button
         type="button"
@@ -663,30 +671,45 @@ function AuditCard({
       </button>
       {audit.length === 0 ? (
         <p className="font-mono text-mute/55 text-[11px] tracking-[0.2em]">
-          還沒有刪除紀錄。
+          還沒有任何紀錄。
         </p>
       ) : (
         <div className="space-y-2">
-          {audit.map((a, i) => (
-            <div key={i} className="border-t border-line/30 pt-2">
-              <p className="flex items-baseline gap-2 flex-wrap">
-                <span className="font-mono text-loss/75 text-[9px] tracking-[0.2em] px-1 py-0.5 border border-loss/30">
-                  刪除 {KIND_ZH[a.targetKind as AdminContentRow["kind"]] ?? a.targetKind}
-                </span>
-                <span className="font-mono text-mute/55 text-[9px] tracking-[0.15em] tabular">
-                  {a.createdAt.slice(0, 16).replace("T", " ")}
-                </span>
-              </p>
-              <p className="mt-1 text-mute/80 text-[12px] leading-snug break-all">
-                {a.targetSnippet || "（無內容快照）"}
-              </p>
-              {a.reason && (
-                <p className="mt-0.5 font-mono text-mute/55 text-[10px] tracking-[0.1em]">
-                  原因:{a.reason}
+          {audit.map((a, i) => {
+            const isDelete = a.action === "delete";
+            const actionLabel = isDelete
+              ? `刪除 ${KIND_ZH[a.targetKind as AdminContentRow["kind"]] ?? a.targetKind}`
+              : a.action === "set_tier"
+              ? "設等級"
+              : a.action || "動作";
+            return (
+              <div key={i} className="border-t border-line/30 pt-2">
+                <p className="flex items-baseline gap-2 flex-wrap">
+                  <span
+                    className={`font-mono text-[9px] tracking-[0.2em] px-1 py-0.5 border ${
+                      isDelete
+                        ? "text-loss/75 border-loss/30"
+                        : "text-gold/75 border-gold/30"
+                    }`}
+                  >
+                    {actionLabel}
+                  </span>
+                  <span className="font-mono text-mute/55 text-[9px] tracking-[0.15em] tabular">
+                    {a.createdAt.slice(0, 16).replace("T", " ")}
+                  </span>
                 </p>
-              )}
-            </div>
-          ))}
+                <p className="mt-1 text-mute/80 text-[12px] leading-snug break-all">
+                  {a.targetSnippet || "（無內容快照）"}
+                </p>
+                {a.reason && (
+                  <p className="mt-0.5 font-mono text-mute/55 text-[10px] tracking-[0.1em]">
+                    {isDelete ? "原因:" : "末5碼:"}
+                    {a.reason}
+                  </p>
+                )}
+              </div>
+            );
+          })}
         </div>
       )}
     </Card>
