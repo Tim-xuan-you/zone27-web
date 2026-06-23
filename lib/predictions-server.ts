@@ -46,7 +46,14 @@ export async function getMyPredictionsMap(): Promise<UserPredictionsMap> {
       //   首頁戰績條 / /ladder 入場門檻 / /member 校準身分。 棒球只認 cpbl-*/mlb-*。
       //   (mkt-* 無引擎線、本就不在 idMatches → 下游 aggregateIdentity 已忽略;這裡再擋一層 = 防未來
       //    新 consumer 直接 iterate predictionsMap 時誤把群眾盤算進棒球準度。)
-      if (!matchId || matchId.startsWith("fd-") || matchId.startsWith("mkt-")) continue;
+      //   🔴 `~` 後綴 = 玩法押注(大小分 ~bou* 等)· 絕不進棒球「誰贏」戰績/校準(同足球 5 道守門)。
+      if (
+        !matchId ||
+        matchId.startsWith("fd-") ||
+        matchId.startsWith("mkt-") ||
+        matchId.includes("~")
+      )
+        continue;
       const pick =
         row.pick === "home" || row.pick === "away" ? row.pick : null;
       const ts = typeof row.created_at === "string" ? row.created_at : "";
