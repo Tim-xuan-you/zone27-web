@@ -51,7 +51,7 @@ export type TableCall = {
 //    「引擎有模型」badge 整個拿掉(對結果 0 差別 = 對用戶 0 意義)· 只在引擎真的不會算的
 //    盤(角球)留一句白話 engineNote 當誠實註腳(那才是克制的真意)。
 const TABLE: TableCall[] = [
-  // ── 2026-06-21 這一桌(今晚 · 賽前鎖)· Tim/Ron/Lewi 報的注 · 賽後逐筆對帳 ──
+  // ── 2026-06-21 這一桌 · Tim/Ron/Lewi 報的注 · 賽後逐筆對帳(2026-06-23 對帳 · 2 中 2 落空 · 含輸照掛)──
   {
     handle: "Tim",
     league: "美國職棒",
@@ -59,7 +59,8 @@ const TABLE: TableCall[] = [
     when: "6/22 07:20",
     call: "費城人 會贏",
     engineModels: true,
-    result: "pending",
+    resultNote: "費城人 6:2 大都會 · 費城人贏 → 中了",
+    result: "win",
   },
   {
     handle: "Ron",
@@ -68,7 +69,8 @@ const TABLE: TableCall[] = [
     when: "6/22 07:20",
     call: "兩隊總分 不到 7.5 分",
     engineModels: true,
-    result: "pending",
+    resultNote: "兩隊合計 8 分(費城人 6 + 大都會 2)· 超過 7.5 → 沒中",
+    result: "lose",
   },
   {
     handle: "Lewi",
@@ -77,7 +79,8 @@ const TABLE: TableCall[] = [
     when: "6/22 09:00",
     call: "埃及 會贏",
     engineModels: true,
-    result: "pending",
+    resultNote: "埃及 3:1 紐西蘭 · 埃及贏 → 中了",
+    result: "win",
   },
   {
     handle: "Lewi",
@@ -86,7 +89,8 @@ const TABLE: TableCall[] = [
     when: "6/22 03:00",
     call: "兩隊進球 超過 2.5",
     engineModels: true,
-    result: "pending",
+    resultNote: "全場 0:0(伊朗 vs 比利時)· 0 進球、不到 2.5 → 沒中",
+    result: "lose",
   },
   // ── 2026-06-20 起這一桌 ──────────────────────────────
   {
