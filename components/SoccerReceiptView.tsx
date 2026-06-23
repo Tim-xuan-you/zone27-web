@@ -222,7 +222,10 @@ export default function SoccerReceiptView({
               engineLabel={r.favoredLabel}
             />
 
-            {/* 大小分 + 讓分:本人若賽前押過 → 顯示結果 + 命中/落空(各自沒押這手 → 整塊隱藏)*/}
+            {/* 大小分 + 讓分:本人若賽前押過 → 顯示結果 + 命中/落空(各自沒押這手 → 整塊隱藏)。
+                🔴 讓分已永遠停開(2026-06-23 · 賽事卡/詳情頁的下注入口已移除)· 這裡是 settled +
+                hideIfNoPick 的「唯讀歷史結算」:沒押的人(= 往後所有人)整塊隱形,只有早先押過 ~ah05
+                的少數人(Ron)還會看到自己那手的命中/落空 —— 帳本永不刪、不藏。 別把這塊一起刪掉。 */}
             {r.phase === "settled" && (
               <div className="px-5 sm:px-8 pb-6">
                 <OverUnderStrip

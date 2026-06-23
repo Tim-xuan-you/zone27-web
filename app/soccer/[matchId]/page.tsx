@@ -7,7 +7,6 @@ import Avatar from "@/components/Avatar";
 import EngineThreeWayBar from "@/components/EngineThreeWayBar";
 import SoccerMarketLines from "@/components/SoccerMarketLines";
 import OverUnderStrip from "@/components/OverUnderStrip";
-import HandicapStrip from "@/components/HandicapStrip";
 import SoccerBetStrip from "@/components/SoccerBetStrip";
 import CreatorAnalysis from "@/components/CreatorAnalysis";
 import MatchSegment from "@/components/MatchSegment";
@@ -201,15 +200,16 @@ export default async function SoccerMatchPage({ params }: { params: Params }) {
           {/* 進場押注(三向 · 登入才能押 · 押了不可改 · 賽後對帳)*/}
           <SoccerBetStrip matchId={m.id} dateISO={m.dateISO} homeLabel={m.home} awayLabel={m.away} locked={m.locked} />
 
-          {/* 大小分 + 讓分押注(看大/看小 · 主-0.5/客+0.5)· 跟「誰贏」分開記、不污染戰績 */}
+          {/* 大小分押注(看大/看小 2.5)· 跟「誰贏」分開記、不污染戰績。
+              🔴 永遠不開讓分(Tim 2026-06-23 拍板 · 別重加):0.5 讓分 = 「誰贏」的重複,1.5+ 在低比分
+              世界盃又是死注 → 不開。 既有 ~ah05 押注在收據唯讀結算(SoccerReceiptView),DB 永不刪。 */}
           {pred &&
             (() => {
               const mk = deriveSoccerMarkets(pred.xgHome, pred.xgAway, {
                 totalLines: [2.5],
-                handicapLines: [0.5],
+                handicapLines: [],
               });
               const ou = mk.totals[0];
-              const ah = mk.handicaps[0];
               return (
                 <>
                   {ou && (
@@ -218,16 +218,6 @@ export default async function SoccerMatchPage({ params }: { params: Params }) {
                       dateISO={m.dateISO}
                       overPct={ou.overPct}
                       underPct={ou.underPct}
-                    />
-                  )}
-                  {ah && (
-                    <HandicapStrip
-                      matchId={m.id}
-                      dateISO={m.dateISO}
-                      homeLabel={m.home}
-                      awayLabel={m.away}
-                      homePct={ah.homePct}
-                      awayPct={ah.awayPct}
                     />
                   )}
                 </>

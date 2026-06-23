@@ -3,7 +3,6 @@ import Avatar from "@/components/Avatar";
 import SoccerBetStrip from "@/components/SoccerBetStrip";
 import SoccerMarketLines from "@/components/SoccerMarketLines";
 import OverUnderStrip from "@/components/OverUnderStrip";
-import HandicapStrip from "@/components/HandicapStrip";
 import EngineThreeWayBar from "@/components/EngineThreeWayBar";
 import {
   toDisplayPercents,
@@ -80,9 +79,9 @@ export default function SoccerMatchCard({ match }: { match: SoccerMatchPredictio
           locked = 這場有賽前鎖定線(押完給一張可外傳的單場收據連結) */}
       <SoccerBetStrip matchId={id} dateISO={dateISO} homeLabel={home} awayLabel={away} locked={locked} />
 
-      {/* 大小分 + 讓分押注(看大/看小 · 主-0.5/客+0.5)· 引擎已算 · 跟「誰贏」分開記、不污染戰績 */}
+      {/* 大小分押注(看大/看小 2.5)· 引擎已算 · 跟「誰贏」分開記、不污染戰績 */}
       {prediction && (
-        <MarketMount id={id} dateISO={dateISO} home={home} away={away} prediction={prediction} />
+        <MarketMount id={id} dateISO={dateISO} prediction={prediction} />
       )}
 
       {/* 進這場詳情 = 完整引擎(最可能比分 / 玩法視角)+ 討論 / 分析(R228 足球補到 CPBL 同級)*/}
@@ -96,26 +95,27 @@ export default function SoccerMatchCard({ match }: { match: SoccerMatchPredictio
   );
 }
 
-// 玩法押注掛載:從引擎預測算大小分 2.5 + 讓分 0.5 的線 · 傳進可押的 strip(各自獨立、不污染「誰贏」)。
+// 玩法押注掛載:從引擎預測算大小分 2.5 的線 · 傳進可押的 strip(獨立一筆、不污染「誰贏」)。
+//
+// 🔴 永遠不開讓分(Tim 2026-06-23 拍板 · 別重加):0.5 讓分 = 「誰贏」的重複(主 -0.5 = 主隊贏,
+//   跟三向那顆「看好主隊」一模一樣)· 而世界盃多為低比分,1.5+ 讓分又變成沒人押的死注 → 沒有一條
+//   讓分線同時「不重複誰贏」又「真五五波」,所以乾脆不開。 既有的 ~ah05 押注(若有)仍在收據
+//   唯讀結算(SoccerReceiptView · hideIfNoPick),DB 永不刪。 大小分(看大/看小)跟誰贏是真的兩個
+//   問題(可猜對總分卻猜錯贏家)→ 保留。
 function MarketMount({
   id,
   dateISO,
-  home,
-  away,
   prediction,
 }: {
   id: string;
   dateISO: string;
-  home: string;
-  away: string;
   prediction: SoccerPrediction;
 }) {
   const m = deriveSoccerMarkets(prediction.xgHome, prediction.xgAway, {
     totalLines: [2.5],
-    handicapLines: [0.5],
+    handicapLines: [],
   });
   const ou = m.totals[0];
-  const ah = m.handicaps[0];
   return (
     <>
       {ou && (
@@ -124,16 +124,6 @@ function MarketMount({
           dateISO={dateISO}
           overPct={ou.overPct}
           underPct={ou.underPct}
-        />
-      )}
-      {ah && (
-        <HandicapStrip
-          matchId={id}
-          dateISO={dateISO}
-          homeLabel={home}
-          awayLabel={away}
-          homePct={ah.homePct}
-          awayPct={ah.awayPct}
         />
       )}
     </>

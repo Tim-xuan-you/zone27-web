@@ -17,8 +17,9 @@ export default function SoccerMarketLines({
 }: {
   prediction: SoccerPrediction;
 }) {
-  // 大小球 + 讓球都升級成可押的 strip(OverUnderStrip / HandicapStrip · 在卡片下方)·
-  // 這裡只留唯讀的「兩隊進球」引擎讀數 —— 避免同一玩法在卡上出現兩次、且不同線值打架(R257 稽核)。
+  // 大小球升級成可押的 strip(OverUnderStrip · 在卡片下方)· 讓分已永遠停開(2026-06-23:0.5 讓分
+  // = 誰贏的重複、1.5+ 低比分又是死注)· 這裡只留唯讀的「兩隊進球」引擎讀數 —— 避免同一玩法在卡上
+  // 出現兩次、且不同線值打架(R257 稽核)。
   const m = deriveSoccerMarkets(prediction.xgHome, prediction.xgAway);
 
   return (
