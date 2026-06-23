@@ -47,8 +47,8 @@ export default async function AdminPage() {
     : waitlistCount === -1
     ? "後台資料庫暫時連不上 · 稍後再試"
     : waitlistCount === 0
-    ? "還沒有人加入 · 等第一個"
-    : `${waitlistCount} 個 email`;
+    ? "還沒有人留 email · 等第一個"
+    : `${waitlistCount} 人留了 email · 想在你開放付費方案時被通知 · 現在不用動`;
 
   return (
     <div className="flex flex-col flex-1 min-h-screen">
@@ -102,7 +102,10 @@ export default async function AdminPage() {
             / 即時數字
           </p>
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
-            <KpiCard zh="等候名單" value={waitlistValue} hint={waitlistHint} />
+            {/* 「等候名單」改白話「想被通知的人」(2026-06-23 · Tim 看不懂這詞在等什麼)·
+                這是上線前留下的概念:站已免費開放、沒人需要排隊,名單只剩「將來開付費方案時寄信通知」
+                一個用途。 不刪資料(/faq /founders 仍可留 email · 表還在 Supabase)· 只是把標籤講清楚。 */}
+            <KpiCard zh="想被通知的人" value={waitlistValue} hint={waitlistHint} />
             <KpiCard
               zh="收錄的賽事"
               value={ingestedCount}
