@@ -190,11 +190,14 @@ export default async function MemberPage() {
       settledDay: m.finalResult?.ingestedAt ?? null,
     };
   });
+  // 玩法併入同一本帳:把已結算棒球的大小分當「虛擬比賽」一起對帳(同源比賽清單)。
+  // 🔴 headline / sparkline / 回訪 delta 三者用「同一份」prop-inclusive 清單 = 數字一致
+  //    (對齊 /u · 否則大數字含大小分、旁邊 sparkline 不含 → 自打臉砸校準護城河)。
+  const idMatchesAll = [...idMatches, ...baseballPropIdMatches(idGameList)];
   // 個人校準身分:你的紀錄(含輸)+ 對比亂猜 + 同場 你 vs 引擎 + 本月升階閘門。
   const identity = aggregateIdentity(
     predictionsMap,
-    // 玩法併入同一本帳:把已結算棒球的大小分當「虛擬比賽」一起對帳(同源比賽清單)。
-    [...idMatches, ...baseballPropIdMatches(idGameList)],
+    idMatchesAll,
     getCurrentTaipeiMonthKey()
   );
   // 對帳之星(米其林式最高榮譽 · lib/reckoning-star 單一真相)· 達標金星 / 在軌道上給目標 / 其餘不顯。
@@ -202,8 +205,10 @@ export default async function MemberPage() {
   // 一鍵拿取可攜憑證 · 句子走單一真相 credentialHeadline(含卡尺話術)· 達星 / 贏過引擎才給面板。
   const cred = credentialHeadline(identity);
   // 準度歷程(會動的數字 · 回訪鉤)· 按比賽日累計命中率 · sparkline 在校準卡內畫。
-  const accuracySeries = computeAccuracySeries(predictionsMap, idMatches);
+  const accuracySeries = computeAccuracySeries(predictionsMap, idMatchesAll);
   // 回訪卡 delta:上次造訪後新結算的場(首訪 / 0 新 → null)· last_seen 由卡的 client 端寫回。
+  // 回訪 delta 用原 idMatches(需 settledDay · 大小分虛擬場無此欄)· 玩法不計入「你不在時 N 場結算」
+  // 提示 = 刻意(headline/sparkline 一致才是重點 · 稽核員確認可如此)。
   const settlementDelta = computeSettlementDelta(
     predictionsMap,
     idMatches,
