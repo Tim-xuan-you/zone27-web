@@ -102,7 +102,8 @@ export default function MiniMatchCard({
   // 球迷靠縮寫 + 顏色秒認隊(MLB 中文首字毫無辨識度)· per getTeamCrest。
   const homeTeam = getTeamCrest(match.home.name, match.home.en, match.league);
   const awayTeam = getTeamCrest(match.away.name, match.away.en, match.league);
-  // 大小分玩法線(CPBL · 引擎挑公平線)· null = 不該開(非 CPBL / 已結算 / 無公平線)。
+  // 大小分玩法線(棒球 CPBL/MLB · 引擎用各自全季真實得分基準挑公平線)· null = 不該開
+  // (非棒球聯盟 / 延賽 / 無公平線)。
   const bouTotal = deriveBaseballTotal(match);
 
   return (
@@ -262,8 +263,8 @@ export default function MiniMatchCard({
         />
       )}
 
-      {/* 大小分押注(CPBL 未結算 · 引擎用全季真實得分基準挑公平線 · 走 ~bou 隔離不污染「誰贏」)·
-          bouTotal null(非 CPBL / 延賽 / 無公平線)→ 自動不顯。 */}
+      {/* 棒球大小分押注(CPBL/MLB 未結算 · 引擎用各聯盟全季真實得分基準挑公平線 · 走 ~bou 隔離
+          不污染「誰贏」)· bouTotal null(非棒球 / 延賽 / 無公平線)→ 自動不顯。 */}
       {bouTotal && !match.finalResult && (
         <BaseballOverUnderStrip
           matchId={match.id}

@@ -17,10 +17,10 @@
 
 import type { Match } from "@/lib/matches";
 import cpblResults from "@/lib/cpbl-results.json";
+import mlbLocked from "@/lib/mlb-locked.json";
 
-const CPBL_REF_ERA = 4.0; // 參考「聯盟均值先發」ERA(揭露常數 · v0.1)
+const REF_ERA = 4.0; // 參考「聯盟均值先發」ERA(揭露常數 · v0.1 · MLB/CPBL 共用近似)
 const STARTER_WEIGHT = 0.6; // 先發對單場失分的影響權重(~6/9 局 · 其餘牛棚以均值補)
-const FALLBACK_TOTAL = 7.5; // 全季樣本不足(<20 場)時的聯盟基準退路
 const CANDIDATE_LINES = [5.5, 6.5, 7.5, 8.5, 9.5, 10.5, 11.5, 12.5];
 // 引擎只開「最接近五五波」的線真的夠接近時才開(|大% − 50| ≤ 此值)· 否則沒有公平線 → 不開
 // (同「我們只開算得出的」紀律 · 投手戰極端低分場可能無可開的公平總分線)。
@@ -30,32 +30,55 @@ function clamp(x: number, lo: number, hi: number): number {
   return Math.max(lo, Math.min(hi, x));
 }
 
-// 本季「全部官方賽果」的真實平均總分 = 資料驅動的聯盟得分環境(用我們每 3h 自動鏡像的
-// cpbl-results.json · 一軍例行賽 kindCode "A" · 148+ 場無偏差樣本 · 不是 curate 的子集、更不是運彩盤口)。
-// module-level 算一次。
-const LEAGUE_AVG_TOTAL: number = (() => {
+// 每個聯盟的真實平均總分 = 資料驅動的得分環境(用我們自己自動鏡像的賽果,不是運彩盤口)·
+// module-level 各算一次。 ⚠️ v0.1 不建場館係數(MLB 的 Coors 等大球場影響大 → 之後 v0.2 補)·
+// 校準會誠實顯示偏差。
+const CPBL_AVG_TOTAL: number = (() => {
+  // cpbl-results.json · 一軍例行賽 kindCode "A" · 148+ 場無偏差全季樣本(2026 CPBL ≈ 7.2 · 低得分球季)。
   const games = (cpblResults.games ?? []).filter(
     (g) =>
       g.kindCode === "A" &&
       typeof g.homeScore === "number" &&
       typeof g.awayScore === "number",
   );
-  if (games.length < 20) return FALLBACK_TOTAL;
+  if (games.length < 20) return 7.5;
   const sum = games.reduce((s, g) => s + g.homeScore + g.awayScore, 0);
   return sum / games.length;
 })();
+const MLB_AVG_TOTAL: number = (() => {
+  // mlb-locked.json · 已結算 finalScore · 225+ 場(2026 MLB ≈ 9.6 · 高得分)。
+  const preds = (mlbLocked as { predictions?: unknown[] }).predictions ?? [];
+  let sum = 0;
+  let n = 0;
+  for (const p of preds) {
+    const fs = (p as { finalScore?: { home?: unknown; away?: unknown } })
+      .finalScore;
+    if (fs && typeof fs.home === "number" && typeof fs.away === "number") {
+      sum += fs.home + fs.away;
+      n++;
+    }
+  }
+  return n >= 20 ? sum / n : 8.6;
+})();
+
+/** 聯盟得分基準 · null = 引擎不開大小分的聯盟(只棒球 · CPBL/MLB)。 */
+function leagueBaseline(league: string): number | null {
+  if (league === "CPBL") return CPBL_AVG_TOTAL;
+  if (league === "MLB") return MLB_AVG_TOTAL;
+  return null;
+}
 
 function eraOf(s: string): number {
   const n = Number(s);
-  return Number.isFinite(n) && n > 0 ? n : CPBL_REF_ERA;
+  return Number.isFinite(n) && n > 0 ? n : REF_ERA;
 }
 
 /** 單場期望總分(v0.1 · 資料驅動聯盟基準 × 兩隊先發品質)。 */
 export function expectedTotalRuns(match: Match): number {
-  const base = LEAGUE_AVG_TOTAL;
+  const base = leagueBaseline(match.league) ?? 8.0;
   const qualityFactor = clamp(
     (eraOf(match.home.pitcher.era) + eraOf(match.away.pitcher.era)) /
-      (2 * CPBL_REF_ERA),
+      (2 * REF_ERA),
     0.55,
     1.6,
   );
@@ -83,7 +106,7 @@ export type BaseballTotal = {
 /** 引擎挑線:每場選「大機率最接近 50%」的 .5 線(真五五波)。 線只看凍住的先發 ERA + 全季基準 →
  *  賽後一樣算得出同一條線(給賽後對帳用)· 所以這裡不擋 finalResult。 null = 非 CPBL / 延賽 / 無公平線。 */
 export function deriveBaseballTotal(match: Match): BaseballTotal | null {
-  if (match.league !== "CPBL" || match.postponed) return null;
+  if (leagueBaseline(match.league) === null || match.postponed) return null;
   const lambda = expectedTotalRuns(match);
   let best: BaseballTotal | null = null;
   for (const L of CANDIDATE_LINES) {
