@@ -15,7 +15,8 @@
 //   settlement-data)→ 絕不污染「誰贏」永久戰績/校準。 線編進場號 = 凍線,賽後對「當初那條線」結算。
 // ─────────────────────────────────────────────────────
 
-import type { Match } from "@/lib/matches";
+import { getMatchStartIso, type Match } from "@/lib/matches";
+import type { IdentityMatch } from "@/lib/predictions";
 import cpblResults from "@/lib/cpbl-results.json";
 import mlbLocked from "@/lib/mlb-locked.json";
 
@@ -150,4 +151,42 @@ export function bouResultFromScore(
   line: number,
 ): BouSide {
   return homeScore + awayScore > line ? "over" : "under";
+}
+
+// ── 玩法併入同一本帳(Tim 2026-06-23 拍板 · 反轉舊「絕不混進誰贏」)─────────────────
+/**
+ * 把一批比賽裡「已結算棒球」的大小分,做成「虛擬比賽」idMatches(贏家=大小分結果 · 引擎favorite=
+ * 引擎那條線的偏向)· 給 aggregateIdentity / 天梯 當一場「誰贏」般對帳 → 大小分跟「誰贏」算同一本帳、
+ * 同一個天梯。 虛擬場 id = `{id}~bou{線×10}`,跟 BaseballOverUnderStrip 存的用戶押注場號完全對得上。
+ * 線 deterministic(凍 ERA + 全季基準)→ 賽前/賽後算出同一條。 純函式:傳哪些比賽就只處理哪些
+ * (各 idMatches builder 用自己的比賽清單 concat 這個 → 跟它的「誰贏」場同源、一致)。
+ */
+export function baseballPropIdMatches(matches: Match[]): IdentityMatch[] {
+  const out: IdentityMatch[] = [];
+  for (const m of matches) {
+    if (!m.finalResult || (m.league !== "CPBL" && m.league !== "MLB")) continue;
+    const total = m.finalResult.homeScore + m.finalResult.awayScore;
+    const startISO = getMatchStartIso(m);
+    const offered = deriveBaseballTotal(m); // 引擎當下挑的那條線 · 只給它帶 engineFav(alpha 對照)
+    // 🔴 對「每條候選線」各發一筆虛擬比賽 → 用戶凍在場號裡(~bou{線×10})的任何線都對得上,
+    //   完全消除聯盟基準 running-average drift 造成的「對不上 → 卡 pending」orphan(對抗稽核 low)。
+    //   只有「引擎當下那條線」帶 engineFav 進 vs-引擎;其餘線仍正確記勝負,但不進 alpha
+    //   (無從重建當時引擎在那條線的偏向)。 .5 線無平手。
+    for (const line of CANDIDATE_LINES) {
+      out.push({
+        id: bouMarketId(m.id, line),
+        finalWinner: total > line ? "home" : "away", // 看大=home 過 · 看小=away 過
+        engineFav:
+          offered && offered.line === line
+            ? offered.overPct > 50
+              ? "home"
+              : offered.overPct < 50
+                ? "away"
+                : null
+            : null,
+        startISO,
+      });
+    }
+  }
+  return out;
 }

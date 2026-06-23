@@ -107,14 +107,9 @@ export async function getMyPredictionsClient(): Promise<UserPredictionsMap> {
       created_at?: unknown;
     }[]) {
       const matchId = typeof row.match_id === "string" ? row.match_id : null;
-      // 🔴 足球(fd-*)/ 群眾盤(mkt-*)/ 玩法押注(`~` · 大小分 ~bou* 等)走獨立 · 不混進棒球帳本
-      //    (同 predictions-server · 準度分開算)。
-      if (
-        !matchId ||
-        matchId.startsWith("fd-") ||
-        matchId.startsWith("mkt-") ||
-        matchId.includes("~")
-      )
+      // 玩法併入同一本帳(Tim 2026-06-23):大小分(cpbl-*~bou / mlb-*~bou)算進棒球戰績 → 不再擋 `~`。
+      // 仍擋足球(fd-)/群眾盤(mkt-)。
+      if (!matchId || matchId.startsWith("fd-") || matchId.startsWith("mkt-"))
         continue;
       const pick =
         row.pick === "home" || row.pick === "away" ? row.pick : null;

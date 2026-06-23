@@ -46,13 +46,10 @@ export async function getMyPredictionsMap(): Promise<UserPredictionsMap> {
       //   首頁戰績條 / /ladder 入場門檻 / /member 校準身分。 棒球只認 cpbl-*/mlb-*。
       //   (mkt-* 無引擎線、本就不在 idMatches → 下游 aggregateIdentity 已忽略;這裡再擋一層 = 防未來
       //    新 consumer 直接 iterate predictionsMap 時誤把群眾盤算進棒球準度。)
-      //   🔴 `~` 後綴 = 玩法押注(大小分 ~bou* 等)· 絕不進棒球「誰贏」戰績/校準(同足球 5 道守門)。
-      if (
-        !matchId ||
-        matchId.startsWith("fd-") ||
-        matchId.startsWith("mkt-") ||
-        matchId.includes("~")
-      )
+      //   玩法併入同一本帳(Tim 2026-06-23):大小分(cpbl-*~bou / mlb-*~bou)算進棒球戰績 → 不再擋 `~`。
+      //   仍擋足球(fd-)/群眾盤(mkt-)· 各走自己管線。 校準曲線另用帶 confidence 的取數(calibrationPicks),
+      //   不受此影響、仍只算「誰贏」。
+      if (!matchId || matchId.startsWith("fd-") || matchId.startsWith("mkt-"))
         continue;
       const pick =
         row.pick === "home" || row.pick === "away" ? row.pick : null;

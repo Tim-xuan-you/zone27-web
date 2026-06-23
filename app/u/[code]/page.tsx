@@ -10,6 +10,7 @@ import {
   computeAccuracySeries,
 } from "@/lib/predictions";
 import { gradeSoccerPicks, type SoccerPick } from "@/lib/soccer/predictions";
+import { baseballPropIdMatches } from "@/lib/baseball-totals";
 import {
   computeConfidenceCalibration,
   type CalibrationResult,
@@ -81,12 +82,16 @@ export default async function PublicProfilePage({
   // null 蓋掉永久 winner」窄反例(對齊 canonical getMlbFinalizedResults 的 JSON-first)。 公開檔案是最會被外傳的面。
   const mlbLive = await getMlbAsMatches();
   const allWithMlb = [...allMatches, ...mlbLive, ...getMlbLockedMatches()];
-  const idMatches = allWithMlb.map((m) => ({
-    id: m.id,
-    finalWinner: m.finalResult?.winner ?? null,
-    engineFav: getEngineFavorite(m),
-    startISO: getMatchStartIso(m),
-  }));
+  const idMatches = [
+    ...allWithMlb.map((m) => ({
+      id: m.id,
+      finalWinner: m.finalResult?.winner ?? null,
+      engineFav: getEngineFavorite(m),
+      startISO: getMatchStartIso(m),
+    })),
+    // 玩法併入同一本帳:大小分當「虛擬比賽」一起進對帳 + 準度歷程(同源比賽清單)。
+    ...baseballPropIdMatches(allWithMlb),
+  ];
   const currentMonth = getCurrentTaipeiMonthKey();
   const identity = aggregateIdentity(baseball, idMatches, currentMonth);
   // 本月賽季回顧入口:有本月押注才連(避免連到空回顧)· R218。

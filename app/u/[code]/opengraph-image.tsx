@@ -9,6 +9,7 @@ import {
 } from "@/lib/brand";
 import { getProfileByCode, getPredictionsByCode } from "@/lib/profile-server";
 import { aggregateIdentity, type CalibrationIdentity } from "@/lib/predictions";
+import { baseballPropIdMatches } from "@/lib/baseball-totals";
 import { reckoningStar } from "@/lib/reckoning-star";
 import {
   getEngineFavorite,
@@ -62,12 +63,15 @@ export default async function ProfileOgImage({
   const allWithMlb = [...allMatches, ...mlbLive, ...getMlbLockedMatches()];
   const id = aggregateIdentity(
     baseball,
-    allWithMlb.map((m) => ({
-      id: m.id,
-      finalWinner: m.finalResult?.winner ?? null,
-      engineFav: getEngineFavorite(m),
-      startISO: getMatchStartIso(m),
-    })),
+    [
+      ...allWithMlb.map((m) => ({
+        id: m.id,
+        finalWinner: m.finalResult?.winner ?? null,
+        engineFav: getEngineFavorite(m),
+        startISO: getMatchStartIso(m),
+      })),
+      ...baseballPropIdMatches(allWithMlb), // 玩法併入同一本帳:OG 卡數字與 /u 頁面一致
+    ],
     getCurrentTaipeiMonthKey(),
   );
 

@@ -125,13 +125,17 @@ export async function getPredictionsByCode(
       const matchId = typeof row.match_id === "string" ? row.match_id : "";
       const ts = typeof row.created_at === "string" ? row.created_at : "";
       if (!matchId || !ts) continue;
-      if (matchId.includes("~")) continue; // 🔴 玩法押注(大小分等)不進「誰贏」校準/戰績
+      // 玩法併入同一本帳(Tim 2026-06-23 · 反轉舊「絕不混進誰贏」):`~` 玩法押注(大小分 ~bou)
+      // 算進「棒球」戰績(下方 else)· 但「校準曲線」與「足球(另一支管線、尚未合)」仍排除 `~` ——
+      // 曲線不能把不同玩法的機率混在同一條線(數學)· 足球玩法之後另合。
+      const isProp = matchId.includes("~");
       // 賽前宣告的把握(0027 才回 · 1-99 整數)→ 跨運動收進校準曲線(沒值/未套 0027 → 跳過)。
       const conf = row.confidence;
       const validPick =
         row.pick === "home" || row.pick === "draw" || row.pick === "away";
       if (
         validPick &&
+        !isProp && // 🔴 校準曲線只算「誰贏」· 不混玩法機率(數學上不能畫同一條線)
         typeof conf === "number" &&
         Number.isFinite(conf) &&
         conf >= 1 &&
@@ -142,12 +146,12 @@ export async function getPredictionsByCode(
         calibrationPicks.push({ matchId, pick: row.pick as string, confidence: conf, ts });
       }
       if (matchId.startsWith("fd-")) {
-        // 足球三向(含 draw)
-        if (row.pick === "home" || row.pick === "draw" || row.pick === "away") {
+        // 足球三向(含 draw)· 足球玩法(fd-*~)暫不併(另一支管線 · 之後合)
+        if (!isProp && (row.pick === "home" || row.pick === "draw" || row.pick === "away")) {
           soccer.push({ matchId, pick: row.pick, ts });
         }
       } else {
-        // 棒球二向 · 同一場只記最近一筆(已 desc · 故 first-seen = 最新)
+        // 棒球二向(含大小分玩法 cpbl-*~bou / mlb-*~bou = 併入同一本帳)· 同場只記最近一筆。
         const pick =
           row.pick === "home" || row.pick === "away" ? row.pick : null;
         if (pick && !(matchId in baseball)) baseball[matchId] = { pick, ts };

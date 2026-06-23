@@ -31,6 +31,7 @@ import {
 } from "@/lib/matches";
 import { getMlbLockedMatches } from "@/lib/mlb-matches";
 import { fetchLadderRows } from "@/lib/ladder-rows";
+import { baseballPropIdMatches } from "@/lib/baseball-totals";
 
 // 新秀門檻:押滿 10 場「已分勝負」(同 /ladder 第 1 階「押滿 10 場就上榜」)· 不到 10 不上榜。
 const LADDER_MIN_GRADED = 10;
@@ -97,16 +98,15 @@ function str(v: unknown): string {
 // 只收「鎖定過引擎線」的場 → 沒有未鎖定 MLB 的後見之明問題(同 /member 帳本誠信修)。
 // exported:私人聯盟標準(lib/leagues)重用同一份「棒球榜」對帳基準(CPBL+MLB · 零漂移)。
 export function buildIdMatches(): IdentityMatch[] {
-  const out: IdentityMatch[] = [];
-  for (const m of [...getFinalizedMatches(), ...getMlbLockedMatches()]) {
-    out.push({
-      id: m.id,
-      finalWinner: m.finalResult?.winner ?? null,
-      engineFav: getEngineFavorite(m),
-      startISO: getMatchStartIso(m),
-    });
-  }
-  return out;
+  const games = [...getFinalizedMatches(), ...getMlbLockedMatches()];
+  const out: IdentityMatch[] = games.map((m) => ({
+    id: m.id,
+    finalWinner: m.finalResult?.winner ?? null,
+    engineFav: getEngineFavorite(m),
+    startISO: getMatchStartIso(m),
+  }));
+  // 玩法併入同一本帳(Tim 2026-06-23):大小分當「虛擬比賽」一起進對帳 + 天梯(同源比賽清單)。
+  return [...out, ...baseballPropIdMatches(games)];
 }
 
 // 階級(snapshot · 累積成就)· month.beatEngine 另外當「本月還在贏」訊號顯示(不混進階級)。

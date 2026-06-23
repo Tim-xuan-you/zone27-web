@@ -6,6 +6,7 @@ import SeasonRecapView from "@/components/SeasonRecapView";
 import { getProfileByCode, getPredictionsByCode } from "@/lib/profile-server";
 import { aggregateIdentity } from "@/lib/predictions";
 import { gradeSoccerPicks, type SoccerPick } from "@/lib/soccer/predictions";
+import { baseballPropIdMatches } from "@/lib/baseball-totals";
 import {
   getEngineFavorite,
   getMatchStartIso,
@@ -77,12 +78,16 @@ export default async function SeasonRecapPage({
   // 同 /u/[code]:賽果 map(CPBL + MLB live + MLB 永久鎖定 · 永久源放最後蓋過 live)。
   const mlbLive = await getMlbAsMatches();
   const allWithMlb = [...allMatches, ...mlbLive, ...getMlbLockedMatches()];
-  const idMatches = allWithMlb.map((m) => ({
-    id: m.id,
-    finalWinner: m.finalResult?.winner ?? null,
-    engineFav: getEngineFavorite(m),
-    startISO: getMatchStartIso(m),
-  }));
+  const idMatches = [
+    ...allWithMlb.map((m) => ({
+      id: m.id,
+      finalWinner: m.finalResult?.winner ?? null,
+      engineFav: getEngineFavorite(m),
+      startISO: getMatchStartIso(m),
+    })),
+    // 玩法併入同一本帳:大小分當「虛擬比賽」一起進賽季回顧對帳(同源比賽清單)。
+    ...baseballPropIdMatches(allWithMlb),
+  ];
 
   // 按「鎖定台北月」切片 → 餵同一套 derive(本月 = 你掌控的下注那天的月)。
   const mBaseball = filterBaseballByMonth(baseball, period);

@@ -9,6 +9,7 @@ import {
 } from "@/lib/brand";
 import { getProfileByCode, getPredictionsByCode } from "@/lib/profile-server";
 import { aggregateIdentity, type CalibrationIdentity } from "@/lib/predictions";
+import { baseballPropIdMatches } from "@/lib/baseball-totals";
 import {
   getEngineFavorite,
   getMatchStartIso,
@@ -58,12 +59,15 @@ export default async function SeasonOgImage({
   const allWithMlb = [...allMatches, ...mlbLive, ...getMlbLockedMatches()];
   const id = aggregateIdentity(
     mBaseball,
-    allWithMlb.map((m) => ({
-      id: m.id,
-      finalWinner: m.finalResult?.winner ?? null,
-      engineFav: getEngineFavorite(m),
-      startISO: getMatchStartIso(m),
-    })),
+    [
+      ...allWithMlb.map((m) => ({
+        id: m.id,
+        finalWinner: m.finalResult?.winner ?? null,
+        engineFav: getEngineFavorite(m),
+        startISO: getMatchStartIso(m),
+      })),
+      ...baseballPropIdMatches(allWithMlb), // 玩法併入同一本帳:賽季 OG 卡數字與頁面一致
+    ],
     period,
   );
 

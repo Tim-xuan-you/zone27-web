@@ -12,6 +12,7 @@ import {
   readLastSeenFromMeta,
 } from "@/lib/predictions";
 import { getMyPredictionsMap } from "@/lib/predictions-server";
+import { baseballPropIdMatches } from "@/lib/baseball-totals";
 import {
   getMatchPhase,
   getMatchStartIso,
@@ -172,7 +173,8 @@ export default async function MemberPage() {
   // getMlbFinalizedResults 的 JSON-first 政策)。 allWithMlb 不動(下方持倉/可押賽事仍要 live 窗)。
   const mlbLockedMatches = getMlbLockedMatches();
   const lockedMlbIds = new Set(mlbLockedMatches.map((m) => m.id));
-  const idMatches = [...allMatches, ...mlbMatches, ...mlbLockedMatches].map((m) => {
+  const idGameList = [...allMatches, ...mlbMatches, ...mlbLockedMatches];
+  const idMatches = idGameList.map((m) => {
     // 你 vs 引擎只認「賽前真的鎖定過引擎線」的場。 CPBL 永遠有賽前鎖定 winRate;MLB 只有
     // 在 mlb-locked.json 內的才算。 未鎖定的 MLB 已結束場,它的引擎線是「賽後用當下球季
     // 數據即時重算」(賽後還會變)→ 拿來當「賽前引擎看好誰」= 用後見之明灌引擎水(正是
@@ -191,7 +193,8 @@ export default async function MemberPage() {
   // 個人校準身分:你的紀錄(含輸)+ 對比亂猜 + 同場 你 vs 引擎 + 本月升階閘門。
   const identity = aggregateIdentity(
     predictionsMap,
-    idMatches,
+    // 玩法併入同一本帳:把已結算棒球的大小分當「虛擬比賽」一起對帳(同源比賽清單)。
+    [...idMatches, ...baseballPropIdMatches(idGameList)],
     getCurrentTaipeiMonthKey()
   );
   // 對帳之星(米其林式最高榮譽 · lib/reckoning-star 單一真相)· 達標金星 / 在軌道上給目標 / 其餘不顯。
