@@ -8245,6 +8245,35 @@
       "verdict": null
     },
     {
+      "gamePk": 823850,
+      "gameDate": "2026-06-24T16:10:00Z",
+      "scheduleDate": "2026-06-24",
+      "homeId": 146,
+      "homeEn": "Miami Marlins",
+      "homeRecord": "40-39",
+      "awayId": 140,
+      "awayEn": "Texas Rangers",
+      "awayRecord": "38-40",
+      "homePitcher": "Eury Pérez",
+      "awayPitcher": "Jacob deGrom",
+      "homeStats": {
+        "era": "4.60",
+        "k9": "10.34",
+        "bb9": "4.02",
+        "hr9": "1.58"
+      },
+      "awayStats": {
+        "era": "3.59",
+        "k9": "10.67",
+        "bb9": "1.96",
+        "hr9": "1.63"
+      },
+      "engineWinHomePct": 50,
+      "lockedAt": "2026-06-23T22:18:52.718Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
       "gamePk": 824583,
       "gameDate": "2026-06-24T18:10:00Z",
       "scheduleDate": "2026-06-24",
