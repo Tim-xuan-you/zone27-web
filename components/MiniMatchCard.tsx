@@ -1,5 +1,6 @@
 import Link from "next/link";
 import CardBetStrip from "@/components/CardBetStrip";
+import BaseballOverUnderStrip from "@/components/BaseballOverUnderStrip";
 import MarketSplitBar from "@/components/MarketSplitBar";
 import Avatar from "@/components/Avatar";
 import { getTeamCrest } from "@/lib/identity";
@@ -15,6 +16,7 @@ import {
 } from "@/lib/matches";
 import { getEngineConviction } from "@/lib/conviction";
 import { getEngineReasoning } from "@/lib/reasoning";
+import { deriveBaseballTotal, bouResultFromScore } from "@/lib/baseball-totals";
 import type { HeatDisplay } from "@/lib/match-heat";
 
 // ── ZONE 27 · Mini Match Card ────────────────────────────
@@ -100,6 +102,8 @@ export default function MiniMatchCard({
   // 球迷靠縮寫 + 顏色秒認隊(MLB 中文首字毫無辨識度)· per getTeamCrest。
   const homeTeam = getTeamCrest(match.home.name, match.home.en, match.league);
   const awayTeam = getTeamCrest(match.away.name, match.away.en, match.league);
+  // 大小分玩法線(CPBL · 引擎挑公平線)· null = 不該開(非 CPBL / 已結算 / 無公平線)。
+  const bouTotal = deriveBaseballTotal(match);
 
   return (
     <article
@@ -258,6 +262,18 @@ export default function MiniMatchCard({
         />
       )}
 
+      {/* 大小分押注(CPBL 未結算 · 引擎用全季真實得分基準挑公平線 · 走 ~bou 隔離不污染「誰贏」)·
+          bouTotal null(非 CPBL / 延賽 / 無公平線)→ 自動不顯。 */}
+      {bouTotal && !match.finalResult && (
+        <BaseballOverUnderStrip
+          matchId={match.id}
+          dateISO={getMatchStartIso(match)}
+          line={bouTotal.line}
+          overPct={bouTotal.overPct}
+          underPct={bouTotal.underPct}
+        />
+      )}
+
       {/* Final result strip — only when ingested */}
       {match.finalResult && calibration && (
         <div className="mt-2 pt-2 border-t border-gold/20">
@@ -281,6 +297,22 @@ export default function MiniMatchCard({
             enginePctOnWinner={enginePctOnWinner}
           />
         </div>
+      )}
+
+      {/* 大小分賽後對帳(CPBL 已結算 · 本人有押才顯 · hideIfNoPick)· 線從凍住的引擎重算(同賽前)·
+          用終場總分對「那條線」結算命中/落空 · ~bou 隔離不污染「誰贏」。 */}
+      {bouTotal && match.finalResult && (
+        <BaseballOverUnderStrip
+          matchId={match.id}
+          dateISO={getMatchStartIso(match)}
+          line={bouTotal.line}
+          result={bouResultFromScore(
+            match.finalResult.homeScore,
+            match.finalResult.awayScore,
+            bouTotal.line,
+          )}
+          hideIfNoPick
+        />
       )}
 
       <div className="mt-auto pt-2 flex items-baseline justify-end gap-2">
