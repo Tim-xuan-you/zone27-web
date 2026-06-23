@@ -10,6 +10,7 @@ type NavKey =
   | "matches"
   | "soccer"
   | "pulse"
+  | "ladder"
   | "discuss"
   | "lab"
   | "founders"
@@ -67,6 +68,10 @@ const NAV_ITEMS_STATIC: {
   // R230 · 活動脈動 = 社群 / liveness 的心臟(誰賽前鎖了哪一手、引擎對帳了哪場)· 功能層。
   //  純靜態連結 · 不在 render 時 fetch(守 R207「Nav 不 render-fetch」鐵律)。
   { key: "pulse", href: "/pulse", label: "脈動" },
+  // R258 · 天梯(海選排行榜)補進頂 Nav。 之前它不在 Nav 也不在 Footer,只能 Cmd-K/直打網址
+  //  到達 = Tim「首頁完全看不到天梯」的真因。 13 站 IA 研究一致:排行榜 = Nav 一個連結 → 獨立頁
+  //  (Polymarket/Metaculus/Manifold/Substack 全如此),不是首頁 hero。 純靜態連結 · 不 render-fetch。
+  { key: "ladder", href: "/ladder", label: "天梯" },
   // R197 · 拿掉「實驗室 BETA」badge(蒙地卡羅是全世界在用的成熟方法 · 不是 beta)。
   { key: "lab", href: "/lab", label: "實驗室" },
   { key: "about", href: "/about", label: "關於" },

@@ -14,12 +14,14 @@ function getTaipeiTodayChip(): string {
   }).format(new Date());
 }
 
+// R258 · 去重(Tim「上面下面這麼多重複的頁面 · 可以不要重複?」)+ 13 站 IA 研究:
+//  footer 不該是頂 Nav 的弱化複本。 砍掉跟 Nav 重複的兩條 —— 「比賽」(Nav 已有「賽事」· 同
+//  目的地還用不同字)與「登入」(Nav 右上已有常駐按鈕)。 footer 只留 Nav 沒有的次要去處
+//  (今晚這桌 / 公開戰績 / 會員)+ 法律 + 版本 = 跟頂部零重複。
 const PRIMARY_LINKS = [
-  { label: "比賽", href: "/matches" },
   { label: "今晚這桌", href: "/table" },
   { label: "公開戰績", href: "/track-record" },
   { label: "會員", href: "/membership" },
-  { label: "登入", href: "/login" },
 ];
 
 const LEGAL_LINKS = [

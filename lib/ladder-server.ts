@@ -30,6 +30,7 @@ import {
   getCurrentTaipeiMonthKey,
 } from "@/lib/matches";
 import { getMlbLockedMatches } from "@/lib/mlb-matches";
+import { fetchLadderRows } from "@/lib/ladder-rows";
 
 // 新秀門檻:押滿 10 場「已分勝負」(同 /ladder 第 1 階「押滿 10 場就上榜」)· 不到 10 不上榜。
 const LADDER_MIN_GRADED = 10;
@@ -75,8 +76,6 @@ export type LadderBoard = {
   entries: LadderEntry[];
 };
 
-const EMPTY: LadderBoard = { show: false, qualifyingUsers: 0, entries: [] };
-
 let cached: SupabaseClient | null = null;
 function anonClient(): SupabaseClient | null {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
@@ -89,14 +88,6 @@ function anonClient(): SupabaseClient | null {
   }
   return cached;
 }
-
-type RpcRow = {
-  author_code?: unknown;
-  handle?: unknown;
-  match_id?: unknown;
-  pick?: unknown;
-  created_at?: unknown;
-};
 
 function str(v: unknown): string {
   return typeof v === "string" ? v : "";
@@ -184,16 +175,9 @@ function tiersAsOf(
 }
 
 export async function getLadderBoard(): Promise<LadderBoard> {
-  let rows: RpcRow[];
-  try {
-    const supabase = anonClient();
-    if (!supabase) return EMPTY;
-    const { data, error } = await supabase.rpc("get_ladder_entries");
-    if (error || !Array.isArray(data)) return EMPTY;
-    rows = data as RpcRow[];
-  } catch {
-    return EMPTY;
-  }
+  // R258 · 走 lib/ladder-rows 的 React 快取列(同一次 render 與首頁脈動/熱度共用「一次」RPC,
+  //  不重複全表掃 get_ladder_entries)· 任何錯 → [](graceful · 下面 qualified<門檻 自然回空榜)。
+  const rows = await fetchLadderRows();
 
   // 按永久碼分組 · 只認棒球(cpbl-*/mlb-* · 排除 fd- 足球:足球準度永遠分開算,同既有規則)。
   const byUser = new Map<string, { handle: string; map: UserPredictionsMap }>();

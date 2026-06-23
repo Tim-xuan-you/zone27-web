@@ -9,6 +9,7 @@ import Avatar from "@/components/Avatar";
 import EngineThreeWayBar from "@/components/EngineThreeWayBar";
 import HomepagePulseStrip from "@/components/HomepagePulseStrip";
 import HomepageTableStrip from "@/components/HomepageTableStrip";
+import HomepageLadderStrip from "@/components/HomepageLadderStrip";
 import { getNationalCode } from "@/lib/soccer/teams";
 import {
   getTodayAndFutureMatches,
@@ -21,6 +22,7 @@ import {
 import { getMlbAsMatches, getMlbFinalizedResults } from "@/lib/mlb-matches";
 import { getMatchHeat, heatDisplayFor } from "@/lib/match-heat";
 import { getPulseSummary } from "@/lib/pulse";
+import { getLadderBoard } from "@/lib/ladder-server";
 import { getTableCalls } from "@/lib/table-picks";
 import {
   getUpcomingWorldCupMatches,
@@ -82,6 +84,10 @@ export default async function Home() {
 
   // ── 活動脈動精華(會動的前門)· 最近 N 人賽前鎖定 + 最新一手 ────────────────
   const pulseSummary = await getPulseSummary();
+
+  // ── 海選天梯(榜亮了→榜首一行 / 還沒亮→「王座上只有機器」誠實邀請)· 走 fetchLadderRows
+  //    React 快取 → 與上面脈動共用同一次 get_ladder_entries RPC,不重複全表掃。
+  const ladder = await getLadderBoard();
 
   // ── 今晚這桌(誠實收據)· 真人賽前鎖的任意一注 + 賽後對帳成績(含落空)──────────
   const tableSummary = getTableCalls();
@@ -263,6 +269,11 @@ export default async function Home() {
         {/* ── 活動脈動條 · 會動的前門 · 最近 N 人賽前鎖定 → /pulse ──
             不到門檻 / 0 用戶 → 自動隱藏(graceful · 守首頁極簡)。 */}
         <HomepagePulseStrip summary={pulseSummary} />
+
+        {/* ── 海選天梯條 · 榜亮了→榜首一行 / 還沒亮→「王座上只有機器」誠實邀請 → /ladder ──
+            R258 · Tim「首頁看不到天梯」· 不擺空的排名列表(守「不上空榜」)· 13 站 IA 研究一致:
+            榜不放 hero、只放一個入口 → 獨立頁。 瞬時 liveness(脈動)接長期地位(天梯)。 */}
+        <HomepageLadderStrip lit={ladder.show} top={ladder.entries[0]} />
 
         {/* ── 你 vs 引擎 · 回訪鉤子 · 只在登入且押過才出現(否則自動隱藏)── */}
         <YourRecordStrip variant="home" matchResults={matchResults} />
