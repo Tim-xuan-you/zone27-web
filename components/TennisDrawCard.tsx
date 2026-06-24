@@ -69,7 +69,37 @@ export default function TennisDrawCard({ match }: { match: TennisMatch }) {
       </div>
 
       {/* 狀態分流 */}
-      {match.live ? (
+      {match.finalResult ? (
+        // 完場 · 結果 + 引擎對帳(含輸照掛 · 同棒球 / 足球的賽後卡)。 引擎沒開盤的場只攤結果、不評分。
+        <div className="border-t border-line/40 pt-2.5">
+          <div className="flex items-baseline justify-between gap-2">
+            <span className="font-mono text-gold/70 text-[9px] tracking-[0.25em]">完場</span>
+            {match.finalResult.score && (
+              <span className="font-mono text-mute/65 text-[10px] tabular">
+                {match.finalResult.score}
+              </span>
+            )}
+          </div>
+          <p className="mt-1.5 text-bone text-sm font-light tracking-tight">
+            <span className="text-gold">
+              {match.finalResult.winner === "a" ? match.a.zh : match.b.zh}
+            </span>{" "}
+            勝
+          </p>
+          {line && (
+            <p className="mt-1 font-mono text-[9px] tracking-[0.12em]">
+              <span className="text-mute/55">
+                引擎看好 {line.pick === "a" ? match.a.zh : match.b.zh} ·{" "}
+              </span>
+              {line.pick === match.finalResult.winner ? (
+                <span className="text-gold">命中 ✓</span>
+              ) : (
+                <span className="text-loss/85">沒中 ✕</span>
+              )}
+            </p>
+          )}
+        </div>
+      ) : match.live ? (
         <p className="font-mono text-mute/60 text-[10px] tracking-[0.12em] leading-relaxed border-t border-line/40 pt-2.5">
           進行中 · 引擎只做<span className="text-mute">賽前</span>,不追 live。
         </p>
@@ -107,8 +137,8 @@ export default function TennisDrawCard({ match }: { match: TennisMatch }) {
         </p>
       )}
 
-      {/* 賽前鎖定押注(登入才能押 · 押了不可改 · 開賽封盤)· 只有引擎開盤 + 有明確未來開賽時戳的場。 */}
-      {bet && (
+      {/* 賽前鎖定押注(登入才能押 · 押了不可改 · 開賽封盤)· 只有引擎開盤 + 有明確未來開賽時戳 + 還沒完場。 */}
+      {bet && !match.finalResult && (
         <TennisBetStrip
           matchId={match.id}
           startISO={bet}
