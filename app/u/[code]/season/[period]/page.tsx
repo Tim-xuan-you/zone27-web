@@ -117,7 +117,7 @@ export default async function SeasonRecapPage({
 
   // 本月戰功卡 → 挑高光(餵切過月的 picks · 故 trophies 已是本月子集)。 玩法不進戰功卡(同棒球:
   // 玩法虛擬場號配不到 settled card → 自然略過)· 故 trophies 仍餵「誰贏」mSoccer。
-  const trophies = computeTrophies(mBaseball, mSoccer, buildSettledCards());
+  const trophies = computeTrophies(mBaseball, mSoccer, buildSettledCards(), mSoccerProps);
   const highlights = pickHighlights(trophies);
   // 對帳天數(紀律)含玩法那幾天 —— 玩法也是「回來面對帳本」(同一本足球帳)。
   const activeDays = monthActiveDays(mBaseball, [...mSoccer, ...mSoccerProps]);

@@ -19,6 +19,9 @@ import { getTeamCrest } from "@/lib/identity";
 import { getNationalCode } from "@/lib/soccer/teams";
 import { isLatePick, type UserPredictionsMap } from "@/lib/predictions";
 import { isBouMarketId, bouLineFromMarketId } from "@/lib/baseball-totals";
+import { isSoccerPropMarketId } from "@/lib/soccer/props";
+import { OU_LINE, ouResultFromScore, ouSideToPick, isOuMarketId } from "@/lib/soccer/over-under";
+import { AH_LINE, ahResultFromScore } from "@/lib/soccer/handicap";
 import type { SoccerPickRow } from "@/lib/soccer/predictions";
 
 export type SettledCard = {
@@ -138,6 +141,9 @@ export function buildSettledCards(): SettledCard[] {
       startISO: r.kickoffISO,
       dateLabel: taipeiMMDD(r.kickoffISO),
       engineFav: lk.enginePick,
+      // 終場進球 → 給足球大小分/讓分玩法卡賽後算(同棒球得分)。 R262
+      homeScore: r.homeGoals,
+      awayScore: r.awayGoals,
     });
   }
 
@@ -152,6 +158,7 @@ export function computeTrophies(
   baseball: UserPredictionsMap,
   soccer: SoccerPickRow[],
   settled: SettledCard[],
+  soccerProps: SoccerPickRow[] = [],
 ): Trophy[] {
   const byId = new Map(settled.map((c) => [c.id, c]));
   const out: Trophy[] = [];
@@ -228,6 +235,51 @@ export function computeTrophies(
       ts: row.ts,
       hit,
       upset: hit && card.engineFav !== null && row.pick !== card.engineFav,
+    });
+  }
+
+  // ── 足球玩法(大小分 ~ou25 / 讓分 ~ah05)· R262:同棒球大小分 → 一張玩法戰功卡(固定線 2.5 / 0.5)。 ──
+  const seenSoccerProp = new Set<string>();
+  for (const row of soccerProps) {
+    if (seenSoccerProp.has(row.matchId)) continue;
+    seenSoccerProp.add(row.matchId);
+    if (!isSoccerPropMarketId(row.matchId)) continue;
+    if (row.pick !== "home" && row.pick !== "away") continue;
+    const parent = byId.get(row.matchId.split("~")[0]);
+    if (
+      !parent ||
+      typeof parent.homeScore !== "number" ||
+      typeof parent.awayScore !== "number"
+    ) {
+      continue;
+    }
+    const t = Date.parse(row.ts);
+    const k = Date.parse(parent.startISO);
+    if (!Number.isNaN(t) && !Number.isNaN(k) && t >= k) continue; // 先鎖後結 late 剔除
+    const isOu = isOuMarketId(row.matchId);
+    let result: "home" | "away";
+    let pickName: string;
+    let outcomeLabel: string;
+    if (isOu) {
+      result = ouSideToPick(ouResultFromScore(parent.homeScore, parent.awayScore));
+      pickName = `${row.pick === "home" ? "看大" : "看小"} ${OU_LINE}`;
+      outcomeLabel = `收${result === "home" ? "大" : "小"} · 共 ${parent.homeScore + parent.awayScore} 球`;
+    } else {
+      result = ahResultFromScore(parent.homeScore, parent.awayScore);
+      pickName =
+        row.pick === "home" ? `${parent.home} −${AH_LINE}` : `${parent.away} +${AH_LINE}`;
+      outcomeLabel = `${result === "home" ? parent.home : parent.away} 收讓分`;
+    }
+    out.push({
+      card: {
+        ...parent,
+        id: row.matchId,
+        market: { label: isOu ? "大小分" : "讓分", pickName, outcomeLabel },
+      },
+      pick: row.pick,
+      ts: row.ts,
+      hit: row.pick === result,
+      upset: false,
     });
   }
 

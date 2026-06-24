@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import TrophyGrid from "@/components/TrophyGrid";
 import { getMyPredictionsClient } from "@/lib/predictions-market";
-import { getMySoccerPicks } from "@/lib/soccer/predictions";
+import { getMySoccerPicks, getMySoccerPropPicks } from "@/lib/soccer/predictions";
 import { computeTrophies, type SettledCard, type Trophy } from "@/lib/trophies";
 
 // ── ZONE 27 · 戰功卡收藏牆(本人 · /member/collection)──────────────────────
@@ -42,12 +42,13 @@ export default function CollectionWall({
   useEffect(() => {
     let alive = true;
     (async () => {
-      const [bb, sc] = await Promise.all([
-        getMyPredictionsClient(), // 棒球(已排除 fd-*)
-        getMySoccerPicks(), // 足球(fd-*)
+      const [bb, sc, sp] = await Promise.all([
+        getMyPredictionsClient(), // 棒球(含大小分 ~bou)
+        getMySoccerPicks(), // 足球誰贏(fd-*)
+        getMySoccerPropPicks(), // 足球玩法(大小分 ~ou25 / 讓分 ~ah05)· R262
       ]);
       if (!alive) return;
-      setTrophies(computeTrophies(bb, sc, settled));
+      setTrophies(computeTrophies(bb, sc, settled, sp));
       setReady(true);
     })();
     return () => {

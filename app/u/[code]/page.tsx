@@ -140,7 +140,7 @@ export default async function PublicProfilePage({
   );
 
   // 戰功卡:這份帳本所有已結算的 call(含輸 · 連單場收據)· server 端配對(picks 來自 0019 RPC)。
-  const trophies = computeTrophies(baseball, soccer, buildSettledCards());
+  const trophies = computeTrophies(baseball, soccer, buildSettledCards(), soccerProps);
 
   return (
     <div className="flex flex-col flex-1 min-h-screen">
