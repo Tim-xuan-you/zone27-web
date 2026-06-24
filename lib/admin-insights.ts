@@ -13,7 +13,11 @@
 
 import type { LadderRow } from "@/lib/ladder-rows";
 import { taipeiDayOf } from "@/lib/predictions";
-import { getMatchById, getEngineFavorite } from "@/lib/matches";
+import {
+  getMatchById,
+  getFinalizedMatches,
+  getEngineFavorite,
+} from "@/lib/matches";
 import { getMlbLockedMatches } from "@/lib/mlb-matches";
 import { getLockedSoccerById } from "@/lib/soccer/locked";
 
@@ -115,7 +119,8 @@ function buildSettledIndex(): Map<string, Settled> {
     if (w !== "home" && w !== "away") return; // 平手不進對照(同校準)
     idx.set(m.id, { winner: w, engineFav: getEngineFavorite(m) });
   };
-  for (const m of mlbById.values()) addBaseball(m);
+  for (const m of getFinalizedMatches()) addBaseball(m); // 🔴 CPBL 已結算(主力運動 · 別漏)
+  for (const m of mlbById.values()) addBaseball(m); // MLB 永久鎖定已結算
   // 足球:鎖定盤已對帳(outcome + verdict)· enginePick 當引擎看好邊。
   for (const p of getLockedSoccerById().values()) {
     if (p.outcome !== "home" && p.outcome !== "away" && p.outcome !== "draw") continue;

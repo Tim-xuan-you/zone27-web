@@ -82,9 +82,10 @@ function PendingRow({ item }: { item: PendingItem }) {
   const sportTag = item.sport === "soccer" ? "足球" : "棒球";
   // 🔴 MLB 沒有賽前收據(getBaseballPendingReceipt 只認 cpbl-)→ /receipts/[mlb-] 會 404 = 又一個死路。
   //   CPBL + 足球有賽前可外傳收據(走 /receipts);MLB 退到比賽詳情頁(/matches 認 MLB id · 不 404)。
-  const href = item.matchId.startsWith("mlb-")
-    ? `/matches/${item.matchId}`
-    : `/receipts/${item.matchId}`;
+  const isMlb = item.matchId.startsWith("mlb-");
+  const href = isMlb ? `/matches/${item.matchId}` : `/receipts/${item.matchId}`;
+  // 🔴 標籤跟著目的地走:MLB → 比賽詳情(「看賽事」)· CPBL/足球 → 賽前可外傳收據(「收據」)。
+  const cta = isMlb ? "看賽事 →" : "收據 →";
   return (
     <Link
       href={href}
@@ -107,7 +108,7 @@ function PendingRow({ item }: { item: PendingItem }) {
         </p>
       </div>
       <span className="shrink-0 font-mono text-gold/60 group-hover:text-gold text-[10px] tracking-[0.3em] transition-colors">
-        收據 →
+        {cta}
       </span>
     </Link>
   );
