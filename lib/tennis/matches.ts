@@ -43,11 +43,30 @@ export type TennisMatch = {
   note?: string;
   a: TennisDrawPlayer;
   b: TennisDrawPlayer;
+  /** 賽果(Tim 賽後手 curate · 同 CPBL)· 驅動引擎/用戶公開戰績 · 沒設 = 待結算 */
+  finalResult?: TennisFinalResult;
 };
+
+export type TennisFinalResult = {
+  /** 贏的那邊(a / b) */
+  winner: TennisPick;
+  /** 比分字串(選填 · 例 "6-4 7-6") */
+  score?: string;
+  /** 結算時戳 ISO */
+  settledAt?: string;
+};
+
+// 兩向 pick(同 predictions)· 在這裡 re-declare 避免 lib 互相 import 成環(predictions 是 client)。
+export type TennisPick = "a" | "b";
 
 // ⬇️ 真實賽程(從台灣運彩 curate)· 由 lib/tennis/draw-data 注入,保持本檔=純邏輯。
 import { TENNIS_DRAW } from "@/lib/tennis/draw-data";
 export { TENNIS_DRAW };
+
+/** 查一場(運彩 tn- 場次編號)· 詳情頁用。 */
+export function getTennisMatch(id: string): TennisMatch | undefined {
+  return TENNIS_DRAW.find((m) => m.id === id);
+}
 
 /** 這場能不能誠實開盤? 非 live + 兩人都有 rank + 信心都非 low。 */
 export function lineable(m: TennisMatch): boolean {
@@ -101,4 +120,78 @@ export function drawCounts(): { total: number; lined: number } {
   const total = TENNIS_DRAW.length;
   const lined = TENNIS_DRAW.filter(lineable).length;
   return { total, lined };
+}
+
+/** 運彩時間字串 → 台北 ISO(可解析的 "M/D HH:MM" 才回 · 「即將開始 / 現場 / 無時間」→ null)。
+ *  賽前鎖定的時間閘:只有「有明確未來開賽時戳」的場才開放押注(押了不可改 · 先鎖後結)。 */
+export function matchStartISO(m: TennisMatch): string | null {
+  const mm = m.time.match(/(\d{1,2})\/(\d{1,2})\s+(\d{1,2}):(\d{2})/);
+  if (!mm) return null;
+  const [, mo, d, h, mi] = mm;
+  const pad = (s: string) => s.padStart(2, "0");
+  return `2026-${pad(mo)}-${pad(d)}T${pad(h)}:${pad(mi)}:00+08:00`;
+}
+
+/** 這場可不可以「賽前鎖定押注」? 引擎有開盤 + 有明確開賽時戳(client 端再判未開賽)。 */
+export function bettable(m: TennisMatch): string | null {
+  if (!lineable(m)) return null;
+  return matchStartISO(m);
+}
+
+/** 引擎當初看好邊(lineable 場 · 給「你 vs 引擎」對照 + 引擎公開戰績)· id → "a"/"b"。 */
+export function tennisEnginePicks(): Record<string, TennisPick> {
+  const out: Record<string, TennisPick> = {};
+  for (const m of TENNIS_DRAW) {
+    const line = drawLine(m);
+    if (line) out[m.id] = line.pick;
+  }
+  return out;
+}
+
+/** 已結算賽果(Tim curate 的 finalResult)· id → { outcome, startISO }· 給用戶押注對帳。 */
+export function tennisResults(): Record<string, { outcome: TennisPick; startISO: string }> {
+  const out: Record<string, { outcome: TennisPick; startISO: string }> = {};
+  for (const m of TENNIS_DRAW) {
+    if (m.finalResult) {
+      out[m.id] = {
+        outcome: m.finalResult.winner,
+        startISO: matchStartISO(m) ?? m.finalResult.settledAt ?? "",
+      };
+    }
+  }
+  return out;
+}
+
+export type TennisEngineRecord = {
+  /** 已結算且引擎當初有開盤的場 */
+  n: number;
+  hits: number; // PROVED
+  misses: number; // DIVERGED
+  rate: number | null;
+  /** 引擎有開盤、但賽果還沒 curate(待對帳) */
+  pending: number;
+};
+
+/** 引擎公開戰績(含輸 · 賽前開盤 vs 賽後賽果)· 純函式 · 賽果空 → 全 pending(誠實 N=0)。 */
+export function gradeTennisEngine(): TennisEngineRecord {
+  let n = 0;
+  let hits = 0;
+  let pending = 0;
+  for (const m of TENNIS_DRAW) {
+    const line = drawLine(m);
+    if (!line) continue; // 沒開盤的場不進引擎戰績
+    if (!m.finalResult) {
+      pending += 1;
+      continue;
+    }
+    n += 1;
+    if (line.pick === m.finalResult.winner) hits += 1;
+  }
+  return {
+    n,
+    hits,
+    misses: n - hits,
+    rate: n > 0 ? Math.round((hits / n) * 100) : null,
+    pending,
+  };
 }

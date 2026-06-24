@@ -4,9 +4,16 @@ import SportTabs from "@/components/SportTabs";
 import Footer from "@/components/Footer";
 import Avatar from "@/components/Avatar";
 import TennisDrawCard from "@/components/TennisDrawCard";
+import TennisRecordCard from "@/components/TennisRecordCard";
 import { createPageMetadata } from "@/lib/page-og";
 import { blendedRating } from "@/lib/tennis/engine";
-import { drawGroups, drawCounts } from "@/lib/tennis/matches";
+import {
+  drawGroups,
+  drawCounts,
+  gradeTennisEngine,
+  tennisResults,
+  tennisEnginePicks,
+} from "@/lib/tennis/matches";
 import {
   grassContenders,
   initials,
@@ -79,6 +86,10 @@ export default function TennisPage() {
   const { total, lined } = drawCounts();
   const atp = grassContenders("atp");
   const wta = grassContenders("wta");
+  // 公開戰績:引擎(賽前開盤 vs 賽果)+ 用戶對帳所需的賽果 / 引擎看好邊(賽果由 Tim 賽後 curate)。
+  const eng = gradeTennisEngine();
+  const results = tennisResults();
+  const enginePicks = tennisEnginePicks();
 
   return (
     <div className="flex flex-col flex-1 min-h-screen">
@@ -144,6 +155,42 @@ export default function TennisPage() {
             ))}
           </div>
         </section>
+
+        {/* ── 公開戰績:引擎 + 你(含輸 · 賽前鎖定 → 賽後對帳)── */}
+        <section className="mx-auto max-w-6xl w-full px-6 sm:px-10 pb-8">
+          <div className="bg-slate/30 border border-line/60 p-5 sm:p-6">
+            <p className="font-mono text-gold/70 text-[10px] tracking-[0.4em] mb-2">
+              引擎公開戰績 · 含輸
+            </p>
+            {eng.n > 0 ? (
+              <p className="text-bone text-lg sm:text-xl font-light tracking-tight">
+                <span className="text-gold tabular">{eng.rate}%</span> 準 ·{" "}
+                <span className="text-gold tabular">✓{eng.hits}</span>{" "}
+                <span className="text-loss tabular">✕{eng.misses}</span>
+                <span className="text-mute/60 text-sm"> · {eng.n} 場已對帳</span>
+                {eng.pending > 0 && (
+                  <span className="text-mute/50 text-sm"> · {eng.pending} 場待結算</span>
+                )}
+              </p>
+            ) : (
+              <p className="text-mute text-sm leading-relaxed">
+                引擎已對 <span className="text-bone tabular">{eng.pending}</span> 場開盤、賽前鎖死 ·
+                <span className="text-bone"> 賽果建置中</span> —— 賽後逐場對帳,贏的輸的都會誠實掛在這。
+                (網球賽果由我們手動 curate · 同棒球)
+              </p>
+            )}
+            <p className="mt-2 font-mono text-mute/55 text-[9px] tracking-[0.12em] leading-snug">
+              引擎當初看好哪邊、賽後中沒中 · 含輸照算 · 真正的尺是校準不是準度。
+            </p>
+          </div>
+        </section>
+
+        {/* 你的網球戰績(登入且押過才顯示 · client island · graceful) */}
+        <TennisRecordCard
+          results={results}
+          enginePicks={enginePicks}
+          wrapperClass="mx-auto max-w-6xl w-full px-6 sm:px-10 pb-8"
+        />
 
         {/* ── 誰能捧盃 · 草地實力榜(奪冠熱門 · 與上方今日對戰分開)── */}
         <section className="mx-auto max-w-6xl w-full px-6 sm:px-10 pb-8 pt-4 border-t border-line/50">
