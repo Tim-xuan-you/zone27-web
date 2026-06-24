@@ -10,6 +10,7 @@ import Link from "next/link";
 const TABS = [
   { key: "baseball", label: "棒球", href: "/matches" },
   { key: "soccer", label: "足球", href: "/soccer" },
+  { key: "tennis", label: "網球", href: "/tennis" },
 ] as const;
 
 export type SportKey = (typeof TABS)[number]["key"];

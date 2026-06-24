@@ -26,6 +26,7 @@ const ROUTES: Entry[] = [
   { path: "/matches", priority: 0.9, changeFrequency: "daily" },
   { path: "/matches/mlb", priority: 0.8, changeFrequency: "daily" },
   { path: "/soccer", priority: 0.8, changeFrequency: "daily" },
+  { path: "/tennis", priority: 0.8, changeFrequency: "daily" },
   { path: "/table", priority: 0.7, changeFrequency: "daily" },
   { path: "/pulse", priority: 0.7, changeFrequency: "daily" },
   { path: "/ladder", priority: 0.6, changeFrequency: "daily" },
