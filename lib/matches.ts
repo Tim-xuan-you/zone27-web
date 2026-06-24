@@ -89,6 +89,59 @@ function mergePitcherStats(p: PitcherStats): PitcherStats {
 }
 
 const rawMatches: Match[] = [
+  // ── 2026-06-25 · 一軍 ingest(週四)· Tim 截圖 cpbl.com.tw 賽程 + 先發投手成績表 ──
+  //   投手值由官網累計成績表(IP/K/BB/HR)換算 · 標 estimate(自 Tim 截圖手抄)· winRate 手 curate。
+  //   ⚠️ 第二場(165 樂天 vs 中信)暫不開:Tim 只給了 151 的投手成績表(魔神龍 / 魔力藍)· 魔爾曼 / 羅戈
+  //      無投手數據 → 先發是 winRate 一半、半場資料缺到只能掰 = 違反「只開算得出的」· 補投手表再上。
+  //   新莊 · 味全(魔神龍 away)vs 富邦(魔力藍 home)· W-L 味全 38-20-0(.655 全聯盟最強)/ 富邦 31-25-0(.554)。
+  //     味全雙重優勢:better team + 先發 ERA 更低 —— 魔神龍 2026 ERA 0.89 / WHIP 1.21 / K9 5.5 / BB9 2.0
+  //     (8 先發小樣本 + WHIP 高 → 0.89 偏運氣有回歸空間 · 生涯 2024 2.04 / 2025 2.51) vs 富邦魔力藍 2026
+  //     ERA 2.97 / WHIP 1.28 / K9 6.1 / BB9 2.6(穩定中段先發 · 2025 2.98)。 抵銷:富邦主場 + 魔神龍 ERA
+  //     回歸風險 → 味全 clear favored 但不裝神準 · 味全 57 / 富邦 43 · conf 53。
+  {
+    id: "cpbl-260625-01",
+    league: "CPBL",
+    date: "2026 · 06 · 25  ·  星期四",
+    startTime: "18:35",
+    venue: "新莊棒球場",
+    home: {
+      name: "富邦悍將",
+      en: "GUARDIANS",
+      pitcher: {
+        name: "魔力藍",
+        era: "2.97", // estimate · 2026 官網累計成績表(Tim 截圖手抄)· 69.2 IP(12 先發)· 穩定中段(2025 2.98)
+        k9: "6.1", // estimate · 47 K / 69.2 IP × 9
+        whip: "1.28", // estimate · (69 H + 20 BB) / 69.2 IP
+        bb9: "2.6", // estimate · 20 BB / 69.2 IP × 9
+        hr9: "0.26", // estimate · 2 HR / 69.2 IP × 9
+      },
+      recent: ["W", "L", "W", "L", "W"], // placeholder · 富邦 31-25-0(.554)
+      winRate: 43,
+    },
+    away: {
+      name: "味全龍",
+      en: "DRAGONS",
+      pitcher: {
+        name: "魔神龍",
+        era: "0.89", // estimate · 2026 官網累計成績表(Tim 截圖手抄)· 50.1 IP(8 先發)· ERA 極低但 WHIP 1.21 → 有回歸空間(生涯 2024 2.04 / 2025 2.51)
+        k9: "5.5", // estimate · 31 K / 50.1 IP × 9 · 低三振 pitch-to-contact
+        whip: "1.21", // estimate · (50 H + 11 BB) / 50.1 IP · 上壘不少、靠殘壘壓分
+        bb9: "2.0", // estimate · 11 BB / 50.1 IP × 9 · 控球好
+        hr9: "0.18", // estimate · 1 HR / 50.1 IP × 9 · 幾乎不被轟
+      },
+      recent: ["W", "W", "L", "W", "W"], // placeholder · 味全 38-20-0(.655 全聯盟最強)
+      winRate: 57,
+    },
+    topScores: [
+      // 魔神龍殘壘壓分 + 魔力藍穩定 → 中低分;味全隊強 lean,但客場 + ERA 回歸 → 不衝高(格式 home : away = 富邦 : 味全)
+      { score: "2 : 3", probability: 8.5 },
+      { score: "1 : 3", probability: 8.0 },
+      { score: "2 : 4", probability: 7.5 },
+      { score: "3 : 4", probability: 7.0 },
+      { score: "1 : 2", probability: 7.0 },
+    ],
+    aiConfidence: 53,
+  },
   // ── 2026-06-24 · 一軍 ingest(週三)· Tim 截圖 cpbl.com.tw 賽程 + 先發投手成績表 ──
   //   投手值由官網累計成績表(IP/K/BB/HR)換算 · 標 estimate(自 Tim 截圖手抄)· winRate 手 curate
   //   (ERA+控球+主場+隊伍 W-L · 接近五五波就誠實低 conviction)· 天氣不建模(/audit S02)。
@@ -143,6 +196,13 @@ const rawMatches: Match[] = [
       { score: "1 : 2", probability: 7.0 },
     ],
     aiConfidence: 51,
+    finalResult: {
+      homeScore: 7,
+      awayScore: 2,
+      winner: "home", // 樂天 7 : 味全 2 @樂天桃園 · 勝投曾家輝 / 敗投伍鐸 · 引擎當初看好客隊味全(53)→ DIVERGED(誠實掛輸)
+      ingestedAt: "2026-06-24",
+      source: "manual",
+    },
   },
   //   澄清湖 · 富邦(陳品宏 away)vs 台鋼(艾速特 home)· W-L 富邦 30-25-0(.545)/ 台鋼 30-27-1(.527)。
   //     戰績幾乎五五(富邦微高),但先發對位嚴重傾斜台鋼 —— 台鋼艾速特 2026 ERA 1.72 / K9 9.3 / WHIP 0.96 /
@@ -193,6 +253,13 @@ const rawMatches: Match[] = [
       { score: "3 : 2", probability: 7.0 },
     ],
     aiConfidence: 56,
+    finalResult: {
+      homeScore: 1,
+      awayScore: 3,
+      winner: "away", // 富邦 3 : 台鋼 1 @澄清湖 · 勝投陳品宏 / 敗投艾速特 · 引擎當初看好地主台鋼(61)→ DIVERGED(誠實掛輸)
+      ingestedAt: "2026-06-24",
+      source: "manual",
+    },
   },
   // ── 2026-06-23 · 一軍 ingest(週二)· Tim 截圖 cpbl.com.tw 賽程 + 先發投手成績表 ──
   //   投手值由官網累計成績表(IP/K/BB/HR)換算 · 標 estimate(自 Tim 截圖手抄)· winRate 手 curate
