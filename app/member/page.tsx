@@ -30,7 +30,7 @@ import SoccerRecordCard from "@/components/SoccerRecordCard";
 import CalibrationMasterCard from "@/components/CalibrationMasterCard";
 import type { CalibrationResult } from "@/lib/calibration-master";
 import { getSoccerLedgerResults } from "@/lib/soccer/football-data";
-import { getSoccerEnginePicks } from "@/lib/soccer/locked";
+import { getSoccerEnginePicksAll } from "@/lib/soccer/locked";
 import { isPaid, tierLabel } from "@/lib/tier";
 import { effectiveTier } from "@/lib/membership";
 import MembershipStatus from "@/components/MembershipStatus";
@@ -162,7 +162,7 @@ export default async function MemberPage() {
   // 你的足球戰績(含輸 · 跟棒球分開算)· 公開賽後結果(ISR 快取 · 與 /soccer 共用)·
   // 本人 picks 由 SoccerRecordCard client 端讀 · 沒押足球 → 卡自動隱藏(不破會員極簡)。
   const soccerResults = await getSoccerLedgerResults();
-  const soccerEnginePicks = getSoccerEnginePicks();
+  const soccerEnginePicks = getSoccerEnginePicksAll();
   // 一份賽果輸入餵三支(同一真相):校準身分 + 準度歷程 sparkline + 回訪 delta。
   // engineFav 走 getEngineFavorite()(50/50 真銅板局回 null · 不灌引擎水)·
   // settledDay = finalResult.ingestedAt(賽果入帳台北日 · 回訪卡判「你不在時結算的」用)。

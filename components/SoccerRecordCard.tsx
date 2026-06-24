@@ -4,10 +4,12 @@ import { useEffect, useState } from "react";
 import { createSupabaseBrowserClient } from "@/lib/supabase/browser";
 import {
   getMySoccerPicks,
+  getMySoccerPropPicks,
   gradeSoccerPicks,
   type SoccerPick,
   type SoccerRecord,
 } from "@/lib/soccer/predictions";
+import { soccerPropResults } from "@/lib/soccer/props";
 import type { SoccerResult } from "@/lib/soccer/football-data";
 
 // ── ZONE 27 · 你的足球戰績(含輸 · 跟棒球分開算 · 含「你 vs 引擎」同場對照)──────
@@ -45,11 +47,17 @@ export default function SoccerRecordCard({
           data: { user },
         } = await supabase.auth.getUser();
         if (cancelled || !user) return;
-        const picks = await getMySoccerPicks();
+        // 「誰贏」三向 + 玩法(大小分/讓分)兩支讀 → 併同一本足球戰績(玩法虛擬賽果由 soccerPropResults
+        // 從同一份賽果展開 · 引擎玩法看好邊已在 enginePicks 內 · server 端用 getSoccerEnginePicksAll 餵)。
+        const [picks, propPicks] = await Promise.all([
+          getMySoccerPicks(),
+          getMySoccerPropPicks(),
+        ]);
         if (cancelled) return;
-        const map: Record<string, { outcome: SoccerResult["outcome"]; kickoffISO: string }> = {};
+        const map: Record<string, { outcome: SoccerPick; kickoffISO: string }> = {};
         for (const r of results) map[r.matchId] = { outcome: r.outcome, kickoffISO: r.kickoffISO };
-        setRecord(gradeSoccerPicks(picks, map, enginePicks));
+        Object.assign(map, soccerPropResults(results));
+        setRecord(gradeSoccerPicks([...picks, ...propPicks], map, enginePicks));
       } catch {
         /* graceful */
       }
@@ -110,7 +118,7 @@ export default function SoccerRecordCard({
         )}
 
         <p className="mt-2 font-mono text-mute text-[9px] tracking-[0.12em] leading-snug">
-          三向對帳(主勝 / 和 / 客勝)· 賽前鎖死、賽後自動結算 · 跟你的棒球準度分開算。
+          三向(主勝 / 和 / 客勝)+ 玩法(大小分 / 讓分)同一本 · 賽前鎖死、賽後自動結算 · 跟你的棒球準度分開算。
         </p>
       </div>
     </div>

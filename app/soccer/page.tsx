@@ -15,7 +15,7 @@ import {
   getSoccerLedgerResults,
   type SoccerMatchPrediction,
 } from "@/lib/soccer/football-data";
-import { getSoccerEnginePicks } from "@/lib/soccer/locked";
+import { getSoccerEnginePicksAll } from "@/lib/soccer/locked";
 import { getOpenMarkets } from "@/lib/markets";
 
 export const metadata = createPageMetadata({
@@ -62,8 +62,8 @@ export default async function SoccerPage() {
   const total = nonEmpty.reduce((s, g) => s + g.matches.length, 0);
   // 賽後結果(永久鎖定結果 ∪ live 公開 · 永久者勝 = 帳本不縮水)· 給「你的足球戰績」對帳。
   const soccerResults = await getSoccerLedgerResults();
-  // 引擎當初鎖定的看好邊 · 給「你 vs 引擎」同場對照。
-  const enginePicks = getSoccerEnginePicks();
+  // 引擎當初鎖定的看好邊(含玩法 · 給「你 vs 引擎」同場對照 · 玩法已併入同一本足球戰績)。
+  const enginePicks = getSoccerEnginePicksAll();
 
   // R234 · 足球引擎公開戰績摘要(板頂證物條)· 同 SoccerEngineRecord 口徑(verdict proved/diverged)·
   // resolveLockedSoccer 的 live fetch 走 1h ISR 共用快取 → 與下方 SoccerEngineRecord 不重複打 API。

@@ -8,6 +8,8 @@
 // ─────────────────────────────────────────────────────
 
 import { createSupabaseBrowserClient } from "@/lib/supabase/browser";
+import { isOuMarketId } from "./over-under";
+import { isAhMarketId } from "./handicap";
 
 export type SoccerPick = "home" | "draw" | "away";
 
@@ -118,6 +120,44 @@ export async function getMySoccerPicks(): Promise<SoccerPickRow[]> {
       const matchId = typeof row.match_id === "string" ? row.match_id : "";
       // 🔴 隔離:`~` 後綴 = 玩法押注(大小分等)· 絕不進「誰贏」戰績(見 lib/soccer/over-under.ts)。
       if (!matchId.startsWith("fd-") || matchId.includes("~") || !isPick(row.pick))
+        continue;
+      out.push({
+        matchId,
+        pick: row.pick,
+        ts: typeof row.created_at === "string" ? row.created_at : "",
+      });
+    }
+    return out;
+  } catch {
+    return [];
+  }
+}
+
+/**
+ * 我所有的足球「玩法」押注(fd-*~ou25 大小分 / fd-*~ah05 讓分 · 登入)· 給「你的足球戰績」併入對帳。
+ * 跟 getMySoccerPicks(只「誰贏」三向)分開:玩法 pick 存的是 home/away(看大/看小 · 讓分隊側)·
+ * matchId 帶玩法後綴 → 餵 gradeSoccerPicks 時配 soccerPropResults 的虛擬賽果(玩法併入同一本帳)。
+ * 🔴 跟「誰贏」分兩支讀:CollectionWall/ExportLedger/收據蓋章用 getMySoccerPicks(不要玩法)·
+ *    只有「你的足球戰績」對帳要這支。 錯 / anon → 空陣列(graceful)。
+ */
+export async function getMySoccerPropPicks(): Promise<SoccerPickRow[]> {
+  try {
+    const supabase = createSupabaseBrowserClient();
+    const { data, error } = await supabase.rpc("get_my_predictions");
+    if (error || !Array.isArray(data)) return [];
+    const out: SoccerPickRow[] = [];
+    for (const row of data as {
+      match_id?: unknown;
+      pick?: unknown;
+      created_at?: unknown;
+    }[]) {
+      const matchId = typeof row.match_id === "string" ? row.match_id : "";
+      // 足球玩法:fd- 開頭 + 玩法後綴(~ou25 / ~ah05)· pick 只有 home/away(看大/看小 · 讓分隊側)。
+      if (
+        !matchId.startsWith("fd-") ||
+        !(isOuMarketId(matchId) || isAhMarketId(matchId)) ||
+        (row.pick !== "home" && row.pick !== "away")
+      )
         continue;
       out.push({
         matchId,

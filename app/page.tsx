@@ -28,7 +28,7 @@ import {
   getUpcomingWorldCupMatches,
   hasActiveWorldCup,
   getSoccerFinalizedResults,
-  getSoccerEnginePicks,
+  getSoccerEnginePicksAll,
   kickoffTaipei,
   type LockedSoccerPrediction,
 } from "@/lib/soccer/locked";
@@ -96,7 +96,7 @@ export default async function Home() {
   const wcUpcoming = getUpcomingWorldCupMatches(2);
   const wcActive = hasActiveWorldCup();
   const soccerFinalized = getSoccerFinalizedResults();
-  const soccerEnginePicks = getSoccerEnginePicks();
+  const soccerEnginePicks = getSoccerEnginePicksAll();
 
   // 已結算賽事的勝方 · 傳給登入後個人戰績條(client 端評分本人押注 · 靜態資料無隱私問題)。
   const matchResults = [

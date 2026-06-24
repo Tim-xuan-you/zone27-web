@@ -1,6 +1,7 @@
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 import type { UserPredictionsMap } from "@/lib/predictions";
 import type { SoccerPickRow } from "@/lib/soccer/predictions";
+import { isSoccerPropMarketId } from "@/lib/soccer/props";
 import type { MemberTier } from "@/lib/tier";
 import type { CalibrationPick } from "@/lib/calibration-master";
 
@@ -89,6 +90,9 @@ export type CodePredictions = {
   baseball: UserPredictionsMap;
   /** 足球(fd-*)· 三向 home/draw/away · 給 gradeSoccerPicks */
   soccer: SoccerPickRow[];
+  /** 足球玩法(fd-*~ou25 大小分 / fd-*~ah05 讓分)· 只 home/away · 併入「你的足球戰績」同一本帳
+   *  (配 soccerPropResults 虛擬賽果 + getSoccerEnginePicksAll)· 跟「誰贏」分開讀避免污染校準曲線。 */
+  soccerProps: SoccerPickRow[];
   /** 賽前宣告把握的押注(跨運動 · 含 confidence)· 給公開校準曲線(0027 才有值)·
    *  0027 未套用 → RPC 不回 confidence → 此陣列空 → 公開檔不顯示曲線(graceful build-ahead)。 */
   calibrationPicks: CalibrationPick[];
@@ -104,7 +108,12 @@ export type CodePredictions = {
 export async function getPredictionsByCode(
   code: string,
 ): Promise<CodePredictions> {
-  const empty: CodePredictions = { baseball: {}, soccer: [], calibrationPicks: [] };
+  const empty: CodePredictions = {
+    baseball: {},
+    soccer: [],
+    soccerProps: [],
+    calibrationPicks: [],
+  };
   try {
     const supabase = anonClient();
     if (!supabase) return empty;
@@ -114,6 +123,7 @@ export async function getPredictionsByCode(
     if (error || !Array.isArray(data)) return empty;
     const baseball: UserPredictionsMap = {};
     const soccer: SoccerPickRow[] = [];
+    const soccerProps: SoccerPickRow[] = [];
     const calibrationPicks: CalibrationPick[] = [];
     const seenConf = new Set<string>(); // 校準同場只取最近一筆(已 desc → first-seen 最新)
     for (const row of data as {
@@ -146,9 +156,17 @@ export async function getPredictionsByCode(
         calibrationPicks.push({ matchId, pick: row.pick as string, confidence: conf, ts });
       }
       if (matchId.startsWith("fd-")) {
-        // 足球三向(含 draw)· 足球玩法(fd-*~)暫不併(另一支管線 · 之後合)
         if (!isProp && (row.pick === "home" || row.pick === "draw" || row.pick === "away")) {
+          // 足球三向(主勝 / 和 / 客勝)
           soccer.push({ matchId, pick: row.pick, ts });
+        } else if (
+          isSoccerPropMarketId(matchId) &&
+          (row.pick === "home" || row.pick === "away")
+        ) {
+          // 足球玩法(大小分 ~ou25 / 讓分 ~ah05)· 看大=home/看小=away · 讓分隊側 → 併入同一本足球戰績。
+          // 🔴 用精確後綴判定(同 client getMySoccerPropPicks)· 不用泛 includes("~") —— 將來若加新玩法
+          //   後綴(如 ~btts),自看 vs 公開兩邊要靠同一條規則收/不收,否則 n/pending 會對不上(自打臉)。
+          soccerProps.push({ matchId, pick: row.pick, ts });
         }
       } else {
         // 棒球二向(含大小分玩法 cpbl-*~bou / mlb-*~bou = 併入同一本帳)· 同場只記最近一筆。
@@ -157,7 +175,7 @@ export async function getPredictionsByCode(
         if (pick && !(matchId in baseball)) baseball[matchId] = { pick, ts };
       }
     }
-    return { baseball, soccer, calibrationPicks };
+    return { baseball, soccer, soccerProps, calibrationPicks };
   } catch {
     return empty;
   }

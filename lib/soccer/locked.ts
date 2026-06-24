@@ -10,6 +10,7 @@
 import soccerLocked from "@/lib/soccer-locked.json";
 import type { SoccerResult } from "./football-data";
 import type { SoccerPick } from "./predictions";
+import { soccerPropEnginePicks } from "./props";
 
 export type LockedSoccerPrediction = {
   matchId: string;
@@ -143,4 +144,19 @@ export function getSoccerEnginePicks(): Record<string, SoccerPick> {
     if (pick === "home" || pick === "draw" || pick === "away") out[p.matchId] = pick;
   }
   return out;
+}
+
+/**
+ * 「誰贏」+ 玩法(大小分 ~ou25 / 讓分 ~ah05)的引擎看好邊合在一份(玩法併入同一本足球戰績後,
+ * 「你 vs 引擎」對照也要涵蓋玩法那幾手)。 玩法看好邊從鎖定的 λ 即時重建(soccerPropEnginePicks)·
+ * 與卡片顯示的玩法機率同源。 server-only(讀 bundled soccer-locked.json)· 各 SoccerRecord 消費端用此版。
+ */
+export function getSoccerEnginePicksAll(): Record<string, SoccerPick> {
+  const locked = getLockedSoccerPredictions();
+  const out: Record<string, SoccerPick> = {};
+  for (const p of locked) {
+    const pick = p.enginePick;
+    if (pick === "home" || pick === "draw" || pick === "away") out[p.matchId] = pick;
+  }
+  return { ...out, ...soccerPropEnginePicks(locked) };
 }

@@ -14,7 +14,8 @@ import {
 } from "@/lib/matches";
 import { getMlbAsMatches, getMlbLockedMatches } from "@/lib/mlb-matches";
 import { getSoccerLedgerResults } from "@/lib/soccer/football-data";
-import { getSoccerEnginePicks } from "@/lib/soccer/locked";
+import { getSoccerEnginePicksAll } from "@/lib/soccer/locked";
+import { soccerPropResults } from "@/lib/soccer/props";
 import { buildSettledCards, computeTrophies } from "@/lib/trophies";
 import { createPageMetadata } from "@/lib/page-og";
 import { normalizeProfileCode } from "@/lib/profile-code";
@@ -73,7 +74,7 @@ export default async function SeasonRecapPage({
   const profile = await getProfileByCode(code);
   if (!profile) notFound();
 
-  const { baseball, soccer } = await getPredictionsByCode(code);
+  const { baseball, soccer, soccerProps } = await getPredictionsByCode(code);
 
   // 同 /u/[code]:賽果 map(CPBL + MLB live + MLB 永久鎖定 · 永久源放最後蓋過 live)。
   const mlbLive = await getMlbAsMatches();
@@ -92,24 +93,34 @@ export default async function SeasonRecapPage({
   // 按「鎖定台北月」切片 → 餵同一套 derive(本月 = 你掌控的下注那天的月)。
   const mBaseball = filterBaseballByMonth(baseball, period);
   const mSoccer = filterSoccerByMonth(soccer, period);
+  // 足球玩法(大小分/讓分)也切月 → 併入本月足球戰績(同一本帳)。
+  const mSoccerProps = filterSoccerByMonth(soccerProps, period);
   const hasActivity =
-    Object.keys(mBaseball).length > 0 || mSoccer.length > 0;
+    Object.keys(mBaseball).length > 0 ||
+    mSoccer.length > 0 ||
+    mSoccerProps.length > 0;
 
   const identity = aggregateIdentity(mBaseball, idMatches, period);
 
-  // 足球本月戰績(同 /u/[code] 的讀取 · 只是 picks 切過月)。
+  // 足球本月戰績(三向 + 玩法 · 同 /u/[code] 的讀取 · 只是 picks 切過月)。
   const soccerResults = await getSoccerLedgerResults();
-  const soccerEnginePicks = getSoccerEnginePicks();
+  const soccerEnginePicks = getSoccerEnginePicksAll();
   const resultsMap: Record<string, { outcome: SoccerPick; kickoffISO: string }> = {};
   for (const r of soccerResults) {
     resultsMap[r.matchId] = { outcome: r.outcome, kickoffISO: r.kickoffISO };
   }
-  const soccerRecord = gradeSoccerPicks(mSoccer, resultsMap, soccerEnginePicks);
+  const soccerRecord = gradeSoccerPicks(
+    [...mSoccer, ...mSoccerProps],
+    { ...resultsMap, ...soccerPropResults(soccerResults) },
+    soccerEnginePicks,
+  );
 
-  // 本月戰功卡 → 挑高光(餵切過月的 picks · 故 trophies 已是本月子集)。
+  // 本月戰功卡 → 挑高光(餵切過月的 picks · 故 trophies 已是本月子集)。 玩法不進戰功卡(同棒球:
+  // 玩法虛擬場號配不到 settled card → 自然略過)· 故 trophies 仍餵「誰贏」mSoccer。
   const trophies = computeTrophies(mBaseball, mSoccer, buildSettledCards());
   const highlights = pickHighlights(trophies);
-  const activeDays = monthActiveDays(mBaseball, mSoccer);
+  // 對帳天數(紀律)含玩法那幾天 —— 玩法也是「回來面對帳本」(同一本足球帳)。
+  const activeDays = monthActiveDays(mBaseball, [...mSoccer, ...mSoccerProps]);
 
   return (
     <div className="flex flex-col flex-1 min-h-screen">
