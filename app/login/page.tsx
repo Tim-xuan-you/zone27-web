@@ -7,6 +7,11 @@ import Footer from "@/components/Footer";
 import { createSupabaseBrowserClient } from "@/lib/supabase/browser";
 import { SUPPORT_EMAIL } from "@/lib/brand-constants";
 import { sanitizeNext } from "@/lib/sanitize-next";
+import {
+  detectInAppBrowser,
+  externalBrowserUrl,
+  type InAppBrowser,
+} from "@/lib/in-app-browser";
 
 const EMAIL_CACHE_KEY = "zone27_last_login_email";
 const RESEND_COOLDOWN_SEC = 30;
@@ -74,12 +79,21 @@ export default function LoginPage() {
   const [cooldown, setCooldown] = useState(0);
   const cooldownTimerRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const [nextPath, setNextPath] = useState<string | null>(null);
+  // App 內建瀏覽器(LINE/FB/IG)偵測:Google OAuth 在這些 WebView 會被擋(disallowed_useragent)·
+  // email 確認信又常被丟外部瀏覽器開 → PKCE 失效。 偵測到 → 引導去 Safari/Chrome(唯一通的路)。
+  const [inApp, setInApp] = useState<InAppBrowser | null>(null);
+  const [copied, setCopied] = useState(false);
 
   // ── On mount: session probe + email cache + next param ──
   useEffect(() => {
     if (typeof window === "undefined") return;
+    // 內建瀏覽器偵測(同步算值 · setState 移進下方 async 區塊 = 同既有 setEmail/setState 模式,
+    // 避開 react-hooks/set-state-in-effect 的 cascading-render 警告 · 且 banner 只在 mount 後出現
+    // = 不破 SSR/hydration)。 下方錯誤文案 + banner 都靠 inAppNow。
+    const inAppNow = detectInAppBrowser(navigator.userAgent);
     let cancelled = false;
     (async () => {
+      setInApp(inAppNow);
       // Restore last-used email from localStorage(Round 30 Wave 13 ·
       // 重訪不重打)。
       try {
@@ -114,12 +128,16 @@ export default function LoginPage() {
       // Google 一鍵登入(funnel 命門 · 今晚朋友多從 LINE 連結進來)。 用既有 error state(form 內紅字 alert)。
       const rawError = sp.get("error");
       if (rawError) {
+        // 🔴 內建瀏覽器裡別再把人推去 Google(Google 在 WebView 也擋)· 指向唯一通的路:外部瀏覽器。
+        const tail = inAppNow.isInApp
+          ? `用 Safari / Chrome 開這頁再登入 —— 你現在在 ${inAppNow.app} 的內建瀏覽器,Google / Email 登入都需要正式瀏覽器`
+          : "改用下面的 Google 一鍵登入";
         const msg =
           rawError === "exchange_failed"
-            ? "確認連結失效了(常見原因:信在另一個瀏覽器打開)· 用同一支手機重寄一次,或直接用下面的 Google 一鍵登入"
+            ? `確認連結失效了(常見原因:信在另一個瀏覽器打開)· ${tail}`
             : rawError === "missing_code"
-              ? "連結不完整 · 重新點一次確認信,或改用下面的 Google 一鍵登入"
-              : "登入時出了點狀況 · 再試一次,或改用下面的 Google 一鍵登入";
+              ? `連結不完整 · 重新點一次確認信,或${tail}`
+              : `登入時出了點狀況 · 再試一次,或${tail}`;
         setState({ kind: "error", message: msg });
       }
       // Probe existing session(已登入訪客不需重 register)
@@ -370,6 +388,40 @@ export default function LoginPage() {
     }
   }
 
+  // ── 內建瀏覽器逃生:把人帶到系統瀏覽器(唯一能登入的地方)──────────────
+  function copyExternalUrl() {
+    try {
+      const url = externalBrowserUrl(
+        window.location.origin,
+        window.location.pathname,
+      );
+      navigator.clipboard
+        ?.writeText(url)
+        .then(() => {
+          setCopied(true);
+          window.setTimeout(() => setCopied(false), 2500);
+        })
+        .catch(() => {
+          /* clipboard 被擋 → banner 文字已教手動「右上選單開瀏覽器」· graceful */
+        });
+    } catch {
+      /* graceful */
+    }
+  }
+  // LINE 吃 ?openExternalBrowser=1 → navigate 過去 LINE 會用系統瀏覽器開(其餘 App 無此參數,
+  // 故此鈕只給 LINE)。 其餘瀏覽器忽略此參數 = 無害。
+  function openExternalLine() {
+    try {
+      window.location.href = externalBrowserUrl(
+        window.location.origin,
+        window.location.pathname,
+        { lineHint: true },
+      );
+    } catch {
+      /* graceful */
+    }
+  }
+
   return (
     <div className="flex flex-col flex-1 min-h-screen">
       <Nav />
@@ -389,9 +441,56 @@ export default function LoginPage() {
           <p className="mt-6 text-mute text-base leading-relaxed max-w-xl mx-auto">
             押一手就鎖死 · 賽後我們逐場幫你對帳 ——{" "}
             <span className="text-bone">你 vs 引擎的戰績,別人刪不掉</span>。
-            
+
           </p>
         </section>
+
+        {/* ── 內建瀏覽器逃生條 ──────────────────────────────
+            LINE/FB/IG 內建瀏覽器裡:Google 一鍵登入被 Google 擋(disallowed_useragent · 朋友看到的 403)·
+            email 確認信又常被丟外部瀏覽器開 → PKCE 失效 = 兩條路都死。 唯一解 = 去系統瀏覽器(Safari/Chrome)。
+            誠實框架(Pratfall):「是 Google 的安全規定,不是我們擋你」。 只在偵測到內建瀏覽器時出現。 */}
+        {inApp?.isInApp && (
+          <section className="mx-auto max-w-md w-full px-6 sm:px-10 pb-2">
+            <div className="bg-gold/5 border border-gold/60 p-5 sm:p-6">
+              <p className="font-mono text-gold text-[10px] tracking-[0.4em] mb-3">
+                / 用 SAFARI · CHROME 開,才登得進來
+              </p>
+              <p className="text-bone text-sm sm:text-base leading-relaxed mb-2">
+                你現在是在 <span className="text-gold">{inApp.app}</span>{" "}
+                的內建瀏覽器裡開 ZONE 27。
+              </p>
+              <p className="text-mute text-[13px] sm:text-sm leading-relaxed mb-4">
+                Google 為了安全,
+                <span className="text-bone">禁止在 App 內建瀏覽器登入</span>
+                (就是你剛剛看到的那個錯誤)—— 不是我們擋你。 用手機正式的瀏覽器開,一切就正常。
+              </p>
+              <div className="flex flex-col gap-2.5">
+                {inApp.isLine && (
+                  <button
+                    type="button"
+                    onClick={openExternalLine}
+                    className="w-full px-5 py-3 bg-gold text-navy font-mono text-sm tracking-[0.2em] hover:bg-gold-soft transition-colors"
+                  >
+                    → 用外部瀏覽器開啟
+                  </button>
+                )}
+                <button
+                  type="button"
+                  onClick={copyExternalUrl}
+                  aria-live="polite"
+                  className="w-full px-5 py-3 border border-gold/50 text-gold font-mono text-[11px] tracking-[0.25em] hover:bg-gold/10 transition-colors"
+                >
+                  {copied ? "✓ 已複製 · 貼到網址列就行" : "複製網址 · 自己貼到 Safari / Chrome"}
+                </button>
+              </div>
+              <p className="mt-4 font-mono text-mute/70 text-[10px] tracking-[0.2em] leading-relaxed">
+                {inApp.isIOS
+                  ? "▸ 或點這頁右上角的「⋯」/ 分享鈕 → 用預設瀏覽器(Safari)開啟"
+                  : "▸ 或點這頁右上角的選單 → 用瀏覽器(Chrome)開啟"}
+              </p>
+            </div>
+          </section>
+        )}
 
         {/* ── ALREADY LOGGED IN · Round 30 Wave 13 ──────
             Session probe on mount detected existing session · 不重複 ship
@@ -429,6 +528,7 @@ export default function LoginPage() {
               email={state.email}
               cooldown={cooldown}
               onResend={handleResend}
+              isInApp={!!inApp?.isInApp}
             />
           ) : state.kind === "reset_sent" ? (
             <ResetSentState email={state.email} />
@@ -528,15 +628,24 @@ export default function LoginPage() {
               <span className="font-mono text-mute/50 text-[10px] tracking-[0.3em]">或</span>
               <span className="h-px flex-1 bg-line/50" />
             </div>
-            <button
-              type="button"
-              onClick={handleGoogle}
-              disabled={state.kind === "submitting"}
-              className="w-full flex items-center justify-center gap-3 px-6 py-3 border border-line/70 bg-navy/40 text-bone font-mono text-sm tracking-[0.15em] hover:border-gold/40 hover:bg-gold/5 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              <GoogleGlyph />
-              使用 Google 登入
-            </button>
+            {inApp?.isInApp ? (
+              // 內建瀏覽器:Google 會擋(403)· 不給可按的鈕讓人再撞一次牆 · 指回上面的逃生條。
+              <p className="text-center font-mono text-mute/70 text-[11px] tracking-[0.15em] leading-relaxed">
+                Google 一鍵登入要在 <span className="text-bone">Safari / Chrome</span> 才能用
+                <br />
+                ↑ 先用上面的方式開到正式瀏覽器
+              </p>
+            ) : (
+              <button
+                type="button"
+                onClick={handleGoogle}
+                disabled={state.kind === "submitting"}
+                className="w-full flex items-center justify-center gap-3 px-6 py-3 border border-line/70 bg-navy/40 text-bone font-mono text-sm tracking-[0.15em] hover:border-gold/40 hover:bg-gold/5 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                <GoogleGlyph />
+                使用 Google 登入
+              </button>
+            )}
             </>
           )}
         </section>
@@ -608,10 +717,13 @@ function SentState({
   email,
   cooldown,
   onResend,
+  isInApp = false,
 }: {
   email: string;
   cooldown: number;
   onResend: () => void;
+  /** App 內建瀏覽器(LINE 等)→ 確認信會在別的瀏覽器開、PKCE 認不得 · 別再推 Google(也擋) */
+  isInApp?: boolean;
 }) {
   return (
     <div className="bg-gold/5 border border-gold/60 glow-soft p-6 sm:p-8">
@@ -657,11 +769,18 @@ function SentState({
         </button>
       </div>
 
-      {/* R228 · LINE 內建瀏覽器註冊的人,確認信常在外部瀏覽器開 → PKCE 同裝置驗證失效。
-          給一條最穩的逃生路:Google 一鍵登入(不用收信、無跨瀏覽器問題)· 重整本頁即回表單。 */}
-      <p className="font-mono text-gold/75 text-[10px] tracking-[0.2em] leading-relaxed text-center mb-3">
-        ▸ 收不到 / 點了沒反應?最穩改用 Google 一鍵登入(不用收信)· 重新整理這頁就能改用
-      </p>
+      {/* LINE 內建瀏覽器註冊的人,確認信常在外部瀏覽器開 → PKCE 同裝置驗證失效。
+          🔴 內建瀏覽器裡 Google 也被擋(403)→ 不推 Google · 推唯一通的:用 Safari/Chrome 重開。
+          一般瀏覽器才推 Google(不用收信、無跨瀏覽器問題)。 */}
+      {isInApp ? (
+        <p className="font-mono text-gold/75 text-[10px] tracking-[0.2em] leading-relaxed text-center mb-3">
+          ▸ 你在 App 內建瀏覽器裡 —— 確認信會在別的瀏覽器開、認不得。 最穩:用 Safari / Chrome 重新開 zone27.com.tw 再登入
+        </p>
+      ) : (
+        <p className="font-mono text-gold/75 text-[10px] tracking-[0.2em] leading-relaxed text-center mb-3">
+          ▸ 收不到 / 點了沒反應?最穩改用 Google 一鍵登入(不用收信)· 重新整理這頁就能改用
+        </p>
+      )}
 
       <p className="font-mono text-mute/70 text-[10px] tracking-[0.25em] leading-relaxed text-center">
         ▸ 確認連結 1 小時內有效 · 過期就重寄
