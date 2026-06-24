@@ -187,7 +187,8 @@ export async function getLeagueStandings(
   for (const r of rows) {
     const code = str(r.author_code);
     const matchId = str(r.match_id);
-    if (!code || !matchId || matchId.startsWith("fd-")) continue;
+    // R259:只認棒球 cpbl-*/mlb-*(allowlist · 同 /ladder)· 排除 fd- 足球 / mkt- 群眾盤 / tn- 網球。
+    if (!code || !matchId || !(matchId.startsWith("cpbl-") || matchId.startsWith("mlb-"))) continue;
     const pick = r.pick === "home" || r.pick === "away" ? r.pick : null;
     const ts = str(r.created_at);
     if (!pick || !ts) continue;

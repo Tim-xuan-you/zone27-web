@@ -122,6 +122,10 @@ export function drawCounts(): { total: number; lined: number } {
   return { total, lined };
 }
 
+// 運彩時間字串只帶「月/日 時:分」、不帶年 → 賽季年在此定。 換季(2027 溫網等)curate 新賽程時
+// bump 這一個值即可(避免散落的硬編年份在跨年時把開賽時戳算錯、誤判「先鎖後結」late-pick)。
+const TENNIS_SEASON_YEAR = 2026;
+
 /** 運彩時間字串 → 台北 ISO(可解析的 "M/D HH:MM" 才回 · 「即將開始 / 現場 / 無時間」→ null)。
  *  賽前鎖定的時間閘:只有「有明確未來開賽時戳」的場才開放押注(押了不可改 · 先鎖後結)。 */
 export function matchStartISO(m: TennisMatch): string | null {
@@ -129,7 +133,7 @@ export function matchStartISO(m: TennisMatch): string | null {
   if (!mm) return null;
   const [, mo, d, h, mi] = mm;
   const pad = (s: string) => s.padStart(2, "0");
-  return `2026-${pad(mo)}-${pad(d)}T${pad(h)}:${pad(mi)}:00+08:00`;
+  return `${TENNIS_SEASON_YEAR}-${pad(mo)}-${pad(d)}T${pad(h)}:${pad(mi)}:00+08:00`;
 }
 
 /** 這場可不可以「賽前鎖定押注」? 引擎有開盤 + 有明確開賽時戳(client 端再判未開賽)。 */

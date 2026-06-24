@@ -108,8 +108,9 @@ export async function getMyPredictionsClient(): Promise<UserPredictionsMap> {
     }[]) {
       const matchId = typeof row.match_id === "string" ? row.match_id : null;
       // 玩法併入同一本帳(Tim 2026-06-23):大小分(cpbl-*~bou / mlb-*~bou)算進棒球戰績 → 不再擋 `~`。
-      // 仍擋足球(fd-)/群眾盤(mkt-)。
-      if (!matchId || matchId.startsWith("fd-") || matchId.startsWith("mkt-"))
+      // R259:棒球只認 cpbl-*/mlb-*(allowlist · 同 server 版 getMyPredictionsMap)· 足球 fd- / 群眾盤
+      //   mkt- / 網球 tn- 各走自己管線(blocklist 會讓新運動默默灌進棒球 total/pending)。
+      if (!matchId || !(matchId.startsWith("cpbl-") || matchId.startsWith("mlb-")))
         continue;
       const pick =
         row.pick === "home" || row.pick === "away" ? row.pick : null;

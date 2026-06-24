@@ -57,7 +57,9 @@ async function getMyPicksSplit(): Promise<{
         if (row.pick === "home" || row.pick === "draw" || row.pick === "away") {
           soccer.set(id, { pick: row.pick, ts });
         }
-      } else {
+      } else if (id.startsWith("cpbl-") || id.startsWith("mlb-")) {
+        // R259:棒球收件匣只認 cpbl-*/mlb-*(allowlist)· 網球 tn- / 群眾盤 mkt- 不進棒球結算桶
+        // (否則只押網球時 baseball.size>0 會白打一趟 MLB API,且這些 id 在棒球賽果裡本就認不到)。
         // 棒球表只存 home/away(無 draw / skip)
         if (row.pick === "home" || row.pick === "away") {
           baseball.set(id, { pick: row.pick, ts });

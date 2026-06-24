@@ -138,14 +138,17 @@ function PulseList({ events }: { events: PulseEvent[] }) {
               </p>
               <p className="mt-0.5 font-mono text-mute/55 text-[10px] tracking-[0.12em]">
                 {/* 棒球 → /matches/<id>(永遠在的單場頁)· 足球 → /receipts/<id>(三階段都解析得到)·
-                    群眾盤 mkt-* → /markets#m-<id>(那張卡的家 · 沒有 /matches/mkt- 單場頁,直連會 404)。 */}
+                    群眾盤 mkt-* → /markets#m-<id>(那張卡的家)· 網球 tn-* → /tennis/<id>(單場詳情頁)·
+                    沒有 /matches/mkt- 或 /matches/tn- 單場頁,直連 /matches 會 404。 */}
                 <Link
                   href={
                     e.matchId.startsWith("fd-")
                       ? `/receipts/${e.matchId}`
                       : e.matchId.startsWith("mkt-")
                         ? `/markets#m-${e.matchId}`
-                        : `/matches/${e.matchId}`
+                        : e.matchId.startsWith("tn-")
+                          ? `/tennis/${e.matchId}`
+                          : `/matches/${e.matchId}`
                   }
                   className="hover:text-gold transition-colors"
                 >

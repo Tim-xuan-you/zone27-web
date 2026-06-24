@@ -184,7 +184,9 @@ export async function getLadderBoard(): Promise<LadderBoard> {
   for (const r of rows) {
     const code = str(r.author_code);
     const matchId = str(r.match_id);
-    if (!code || !matchId || matchId.startsWith("fd-")) continue;
+    // R259:只認棒球 cpbl-*/mlb-*(allowlist)· 排除足球 fd- / 群眾盤 mkt- / 網球 tn-(各自分開算)。
+    // 舊「擋 fd-」blocklist 會讓 tn-/mkt- 灌進棒球天梯分母 → 改 allowlist 一次堵死。
+    if (!code || !matchId || !(matchId.startsWith("cpbl-") || matchId.startsWith("mlb-"))) continue;
     const pick = r.pick === "home" || r.pick === "away" ? r.pick : null;
     const ts = str(r.created_at);
     if (!pick || !ts) continue;

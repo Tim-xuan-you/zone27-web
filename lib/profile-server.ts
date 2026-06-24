@@ -168,8 +168,10 @@ export async function getPredictionsByCode(
           //   後綴(如 ~btts),自看 vs 公開兩邊要靠同一條規則收/不收,否則 n/pending 會對不上(自打臉)。
           soccerProps.push({ matchId, pick: row.pick, ts });
         }
-      } else {
+      } else if (matchId.startsWith("cpbl-") || matchId.startsWith("mlb-")) {
         // 棒球二向(含大小分玩法 cpbl-*~bou / mlb-*~bou = 併入同一本帳)· 同場只記最近一筆。
+        // R259:用 allowlist(cpbl-/mlb-)而非「else 全收」—— 否則網球 tn- / 群眾盤 mkt- 會落進棒球
+        //   公開帳本,變永遠對不到賽果的幽靈 pending(aggregateIdentity 對認不到的 id 一律 pending++)。
         const pick =
           row.pick === "home" || row.pick === "away" ? row.pick : null;
         if (pick && !(matchId in baseball)) baseball[matchId] = { pick, ts };

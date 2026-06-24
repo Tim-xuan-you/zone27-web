@@ -47,7 +47,10 @@ export default function TennisDrawCard({ match }: { match: TennisMatch }) {
   const bet = bettable(match);
 
   return (
-    <article className="bg-slate/40 border border-line/60 p-4 flex flex-col gap-2.5 transition-colors hover:border-gold/40">
+    <article
+      id={`m-${match.id}`}
+      className="bg-slate/40 border border-line/60 p-4 flex flex-col gap-2.5 transition-colors hover:border-gold/40 scroll-mt-24"
+    >
       {/* 賽事 + 時間(運彩字串) */}
       <div className="flex items-center justify-between gap-2">
         <span className="font-mono text-gold/75 text-[9px] tracking-[0.25em] truncate">

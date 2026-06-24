@@ -42,14 +42,13 @@ export async function getMyPredictionsMap(): Promise<UserPredictionsMap> {
     const map: UserPredictionsMap = {};
     for (const row of data as RpcRow[]) {
       const matchId = typeof row.match_id === "string" ? row.match_id : null;
-      // 🔴 足球(fd-*)+ 群眾盤(mkt-*)走完全獨立、不混進棒球帳本 —— 否則世界盃 / 群眾盤押注會灌爆
-      //   首頁戰績條 / /ladder 入場門檻 / /member 校準身分。 棒球只認 cpbl-*/mlb-*。
-      //   (mkt-* 無引擎線、本就不在 idMatches → 下游 aggregateIdentity 已忽略;這裡再擋一層 = 防未來
-      //    新 consumer 直接 iterate predictionsMap 時誤把群眾盤算進棒球準度。)
-      //   玩法併入同一本帳(Tim 2026-06-23):大小分(cpbl-*~bou / mlb-*~bou)算進棒球戰績 → 不再擋 `~`。
-      //   仍擋足球(fd-)/群眾盤(mkt-)· 各走自己管線。 校準曲線另用帶 confidence 的取數(calibrationPicks),
-      //   不受此影響、仍只算「誰贏」。
-      if (!matchId || matchId.startsWith("fd-") || matchId.startsWith("mkt-"))
+      // 🔴 棒球本帳只認 cpbl-*/mlb-*(allowlist)· 足球 fd- / 群眾盤 mkt- / 網球 tn- 各走自己管線。
+      //   為何用 allowlist 而非「擋 fd-/mkt-」blocklist:aggregateIdentity 對「認不到 id」的押注一律
+      //   total++/pending++(當成永遠待結算的幽靈場),不是忽略 —— blocklist 時任何新運動(R259 網球
+      //   tn-)會默默灌爆 /member 校準身分 + /u 公開帳本 + /ladder 入場門檻。 allowlist = 新運動自動隔離。
+      //   大小分玩法(cpbl-*~bou / mlb-*~bou)前綴仍是 cpbl-/mlb- → 照進棒球同一本帳(Tim 2026-06-23)。
+      //   校準曲線另用帶 confidence 的取數(calibrationPicks)· 不受此影響、仍只算「誰贏」。
+      if (!matchId || !(matchId.startsWith("cpbl-") || matchId.startsWith("mlb-")))
         continue;
       const pick =
         row.pick === "home" || row.pick === "away" ? row.pick : null;
