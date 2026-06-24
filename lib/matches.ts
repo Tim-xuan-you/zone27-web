@@ -89,6 +89,64 @@ function mergePitcherStats(p: PitcherStats): PitcherStats {
 }
 
 const rawMatches: Match[] = [
+  // ── 2026-06-24 · 一軍 ingest(週三)· Tim 截圖 cpbl.com.tw 賽程 + 先發投手成績表 ──
+  //   投手值由官網累計成績表(IP/K/BB/HR)換算 · 標 estimate(自 Tim 截圖手抄)· winRate 手 curate
+  //   (ERA+控球+主場+隊伍 W-L · 接近五五波就誠實低 conviction)· 天氣不建模(/audit S02)。
+  //   🚫 第二場(富邦 vs 台鋼)暫不開:本批 Tim 只給第一場(味全@樂天)先發投手成績表。 台鋼艾速特有歷史
+  //      資料(多年王牌 1.53),但富邦先發 陳品宏 我方零資料(從未 ingest、不在自動 leaderboard)→ 先發是
+  //      winRate 一半,半場資料缺 = 只能掰 → 不開(同「只開算得出的」· 同 6/23 樂天首登板那場不開)。 等 Tim
+  //      補 陳品宏 先發投手成績表(+ 艾速特當下值)再上。
+  //   樂天桃園 · 味全(伍鐸 away)vs 樂天(曾家輝 home)· W-L 味全 38-19-0(.667 全聯盟最強)/ 樂天 20-32-2(.385 後段)。
+  //     隊強差距大偏味全 + 味全打線最猛;但今天先發倒過來幫樂天 —— 樂天曾家輝 2026 ERA 3.06 / K9 6.9 /
+  //     WHIP 1.13 / 被打 .237(會吊人、控球好)明顯優於味全伍鐸 ERA 3.51 / K9 僅 2.8(三振極低、全靠弱接觸、
+  //     .260 被打 → ERA 偏運氣有變異)+ 樂天主場。 隊強 vs 主場+先發兩股力量幾乎抵掉(同 6/18 #170 同對戰、
+  //     同樣 53/47)→ 味全 53 / 樂天 47 · conf 51(味全隊底子+打線略蓋 · 但伍鐸三振崩 + 曾家輝當下更穩 →
+  //     誠實壓到接近銅板)。
+  {
+    id: "cpbl-260624-01",
+    league: "CPBL",
+    date: "2026 · 06 · 24  ·  星期三",
+    startTime: "18:35",
+    venue: "樂天桃園棒球場",
+    home: {
+      name: "樂天桃猿",
+      en: "MONKEYS",
+      pitcher: {
+        name: "曾家輝",
+        era: "3.06", // estimate · 2026 官網累計成績表(Tim 截圖手抄)· 47 IP(9 先發)· 會吊人、控球好
+        k9: "6.9", // estimate · 36 K / 47 IP × 9
+        whip: "1.13", // estimate · 官網每局被上壘率 1.127(42 H + 11 BB / 47 IP)
+        bb9: "2.1", // estimate · 11 BB / 47 IP × 9 · 控球好
+        hr9: "0.38", // estimate · 2 HR / 47 IP × 9
+      },
+      recent: ["L", "L", "W", "L", "L"], // placeholder · 樂天 20-32-2(.385 後段)
+      winRate: 47,
+    },
+    away: {
+      name: "味全龍",
+      en: "DRAGONS",
+      pitcher: {
+        name: "伍鐸",
+        era: "3.51", // estimate · 2026 官網累計成績表(Tim 截圖手抄)· 51.1 IP(8 先發)· 三振極低、全靠弱接觸(.260 被打 · 2025 曾 2.36)
+        k9: "2.8", // estimate · 16 K / 51.1 IP × 9 · 三振極低(高變異)
+        whip: "1.25", // estimate · 官網每局被上壘率 1.246(51 H + 13 BB / 51.1 IP)
+        bb9: "2.3", // estimate · 13 BB / 51.1 IP × 9 · 控球尚可
+        hr9: "0.70", // estimate · 4 HR / 51.1 IP × 9 · 偶被轟
+      },
+      recent: ["W", "W", "L", "W", "W"], // placeholder · 味全 38-19-0(.667 全聯盟最強)
+      winRate: 53,
+    },
+    topScores: [
+      // 曾家輝會吊人 + 伍鐸弱接觸 → 中低分;味全打線最猛但客場、隊強 vs 主場+先發抵消
+      //(格式 home : away = 樂天 : 味全 · 味全微 lean)
+      { score: "2 : 3", probability: 8.5 },
+      { score: "1 : 3", probability: 8.0 },
+      { score: "2 : 4", probability: 7.5 },
+      { score: "3 : 4", probability: 7.0 },
+      { score: "1 : 2", probability: 7.0 },
+    ],
+    aiConfidence: 51,
+  },
   // ── 2026-06-23 · 一軍 ingest(週二)· Tim 截圖 cpbl.com.tw 賽程 + 先發投手成績表 ──
   //   投手值由官網累計成績表(IP/K/BB/HR)換算 · 標 estimate(自 Tim 截圖手抄)· winRate 手 curate
   //   (ERA+控球+主場+隊伍 W-L · 接近五五波就誠實低 conviction)· 天氣不建模(/audit S02)。
@@ -148,6 +206,19 @@ const rawMatches: Match[] = [
       { score: "1 : 4", probability: 7.0 },
     ],
     aiConfidence: 57,
+    // 6/23 賽果(Tim 截圖 cpbl.com.tw · 認隊靠場館+勝敗投不靠 logo):洲際=中信主場 ·
+    // 勝投 伍立辰(中信)· 敗投 阿部雄大(富邦)· 救援 李振昌(中信)· 比分 客:主 = 富邦 3 : 中信 6 →
+    // 中信(主)6 / 富邦(客)3。
+    // 🔴 引擎賽前看好富邦 62%(better team + 阿部雄大壓制)· 結果墊底中信(.346)主場 6-3 翻盤 → DIVERGED ·
+    //    誠實記引擎失手(conf 57 仍翻車 · 單場棒球變異 · 帳本改不了)。
+    finalResult: {
+      homeScore: 6, // 中信(主)
+      awayScore: 3, // 富邦(客)
+      winner: "home", // 中信勝 → 引擎(看好富邦)落空 = DIVERGED
+      ingestedAt: "2026-06-24",
+      innings: 9,
+      source: "manual",
+    },
   },
   {
     id: "cpbl-260623-02",
@@ -192,6 +263,19 @@ const rawMatches: Match[] = [
       { score: "2 : 4", probability: 7.0 },
     ],
     aiConfidence: 57,
+    // 6/23 賽果(Tim 截圖 cpbl.com.tw · 認隊靠場館+勝敗投不靠 logo):澄清湖=台鋼主場 ·
+    // 勝投 江承諺(台鋼)· 敗投 梅賽鎯(味全)· 救援 林詩翔(台鋼)· 比分 客:主 = 味全 1 : 台鋼 2 →
+    // 台鋼(主)2 / 味全(客)1。
+    // 🔴 引擎賽前看好味全 63%(全聯盟最強 + 梅賽鎯王牌)· 結果台鋼主場 2-1 守成 → DIVERGED ·
+    //    誠實記引擎失手(王牌 1.59 仍輸 · 單場棒球變異 · 帳本改不了)。
+    finalResult: {
+      homeScore: 2, // 台鋼(主)
+      awayScore: 1, // 味全(客)
+      winner: "home", // 台鋼勝 → 引擎(看好味全)落空 = DIVERGED
+      ingestedAt: "2026-06-24",
+      innings: 9,
+      source: "manual",
+    },
   },
   // ── 2026-06-21 · 一軍 ingest(週日)· Tim 截圖 cpbl.com.tw 賽程 + 先發投手成績表 ──
   //   投手值由官網累計成績表(IP/K/BB/HR)換算 · 標 estimate(自 Tim 截圖手抄)· winRate 手 curate
