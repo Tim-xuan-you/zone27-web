@@ -18,6 +18,7 @@ import { getSoccerFinalizedResults, getLockedSoccerById } from "@/lib/soccer/loc
 import { getTeamCrest } from "@/lib/identity";
 import { getNationalCode } from "@/lib/soccer/teams";
 import { isLatePick, type UserPredictionsMap } from "@/lib/predictions";
+import { isBouMarketId, bouLineFromMarketId } from "@/lib/baseball-totals";
 import type { SoccerPickRow } from "@/lib/soccer/predictions";
 
 export type SettledCard = {
@@ -40,6 +41,11 @@ export type SettledCard = {
   dateLabel: string;
   /** 引擎當初看好邊 · 給「逆風」徽章 */
   engineFav: "home" | "away" | "draw" | null;
+  /** 終場比分(棒球得分)· 給大小分玩法卡賽後算大/小 · h2h 卡不需要 · R261 */
+  homeScore?: number;
+  awayScore?: number;
+  /** 玩法(大小分)資訊 · 由 computeTrophies 對「使用者那條線」算出後填 · 缺 = 一般「誰贏」卡 */
+  market?: { label: string; pickName: string; outcomeLabel: string };
 };
 
 export type Trophy = {
@@ -109,6 +115,9 @@ export function buildSettledCards(): SettledCard[] {
       startISO,
       dateLabel: taipeiMMDD(startISO),
       engineFav: getEngineFavorite(m),
+      // 終場得分 → 給大小分玩法卡賽後算大/小(同 baseballPropIdMatches 的線結算)。
+      homeScore: m.finalResult?.homeScore,
+      awayScore: m.finalResult?.awayScore,
     });
   }
 
@@ -148,11 +157,48 @@ export function computeTrophies(
   const out: Trophy[] = [];
 
   for (const [matchId, entry] of Object.entries(baseball)) {
+    const pick = entry.pick;
+    if (pick !== "home" && pick !== "away") continue; // 棒球只認 home/away
+
+    // ── 大小分玩法(~bou)· R261:解父場卡 + 凍在場號的線 → 賽後算大/小 → 一張玩法戰功卡。 ──
+    //   父場卡帶終場得分(homeScore/awayScore)· 看大=home / 看小=away(同 bouSideToPick)。
+    if (isBouMarketId(matchId)) {
+      const parent = byId.get(matchId.split("~")[0]);
+      const line = bouLineFromMarketId(matchId);
+      if (
+        !parent ||
+        line === null ||
+        typeof parent.homeScore !== "number" ||
+        typeof parent.awayScore !== "number"
+      ) {
+        continue;
+      }
+      if (isLatePick(entry.ts, parent.startISO)) continue;
+      const total = parent.homeScore + parent.awayScore;
+      const overWon = total > line;
+      const hit = pick === (overWon ? "home" : "away");
+      out.push({
+        card: {
+          ...parent,
+          id: matchId, // 玩法場號 = 唯一 key(父場卡 id 是誰贏場,不能撞)
+          market: {
+            label: "大小分",
+            pickName: `${pick === "home" ? "看大" : "看小"} ${line}`,
+            outcomeLabel: `收${overWon ? "大" : "小"} · 總分 ${total}`,
+          },
+        },
+        pick,
+        ts: entry.ts,
+        hit,
+        upset: false, // 玩法的「逆風」需引擎那條線 · 收件匣已標 · 圖卡先不誤標
+      });
+      continue;
+    }
+
+    // ── 一般「誰贏」(h2h)──
     const card = byId.get(matchId);
     if (!card) continue;
     if (isLatePick(entry.ts, card.startISO)) continue;
-    const pick = entry.pick;
-    if (pick !== "home" && pick !== "away") continue; // 棒球只認 home/away
     const hit = pick === card.result;
     out.push({
       card,

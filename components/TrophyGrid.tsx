@@ -53,18 +53,34 @@ export default function TrophyGrid({
 
 function TrophyCard({ t }: { t: Trophy }) {
   const { card } = t;
-  const pickName =
-    t.pick === "home" ? card.home : t.pick === "away" ? card.away : "和局";
+  const market = card.market;
+  // 玩法(大小分)卡:押的是「看大 8.5」不是某一隊 · 連回父場(無單場收據:MLB→/matches·CPBL→/receipts)。
+  const parentId = card.id.split("~")[0];
+  const pickName = market
+    ? market.pickName
+    : t.pick === "home"
+      ? card.home
+      : t.pick === "away"
+        ? card.away
+        : "和局";
+  const href = market
+    ? parentId.startsWith("mlb-")
+      ? `/matches/${parentId}`
+      : `/receipts/${parentId}`
+    : `/receipts/${card.id}`;
   const verdictColor = t.hit ? "text-gold" : "text-loss/85";
   const verdictBorder = t.hit ? "border-gold/40" : "border-loss/40";
   const lock = fmtLockTaipei(t.ts);
   return (
     <Link
-      href={`/receipts/${card.id}`}
+      href={href}
       className={`block border ${verdictBorder} bg-slate/30 hover:bg-slate/40 transition-colors p-3.5 group`}
     >
       <div className="flex items-center justify-between gap-2 mb-2">
-        <span className="font-mono text-gold/70 text-[9px] tracking-[0.25em]">{card.tag}</span>
+        <span className="font-mono text-gold/70 text-[9px] tracking-[0.25em]">
+          {card.tag}
+          {market && <span className="text-mute/55"> · {market.label}</span>}
+        </span>
         <span className="font-mono text-mute/55 text-[9px] tracking-[0.2em] tabular shrink-0">
           {card.dateLabel}
         </span>
@@ -100,9 +116,16 @@ function TrophyCard({ t }: { t: Trophy }) {
         </span>
       </div>
 
+      {/* 玩法卡多一行賽後結果(收大 · 總分 11)· h2h 卡的結果就是贏家隊、不另列 */}
+      {market && (
+        <p className="mt-1.5 font-mono text-mute/65 text-[9px] tracking-[0.1em] tabular">
+          {market.outcomeLabel}
+        </p>
+      )}
+
       {lock && (
         <p className="mt-2 font-mono text-mute/45 text-[8px] tracking-[0.12em] tabular group-hover:text-gold/70 transition-colors">
-          鎖定於 {lock} · 收據 →
+          鎖定於 {lock} · {market ? "看這場 →" : "收據 →"}
         </p>
       )}
     </Link>

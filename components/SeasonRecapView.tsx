@@ -286,8 +286,21 @@ function HighlightRow({
   kind: "best" | "miss";
 }) {
   const c = t.card;
-  const pickName =
-    t.pick === "home" ? c.home : t.pick === "away" ? c.away : "和局";
+  const market = c.market;
+  // 玩法(大小分)押的是「看大 8.5」· 連回父場(無單場收據:MLB→/matches·CPBL→/receipts)。
+  const parentId = c.id.split("~")[0];
+  const pickName = market
+    ? market.pickName
+    : t.pick === "home"
+      ? c.home
+      : t.pick === "away"
+        ? c.away
+        : "和局";
+  const href = market
+    ? parentId.startsWith("mlb-")
+      ? `/matches/${parentId}`
+      : `/receipts/${parentId}`
+    : `/receipts/${c.id}`;
   const tagLine =
     kind === "best"
       ? t.upset
@@ -297,7 +310,7 @@ function HighlightRow({
 
   return (
     <Link
-      href={`/receipts/${c.id}`}
+      href={href}
       className="flex items-center justify-between gap-3 p-3 sm:p-3.5 border border-line/60 bg-slate/30 hover:border-gold/40 hover:bg-slate/40 transition-colors"
     >
       <span className="min-w-0">
@@ -321,7 +334,8 @@ function HighlightRow({
           {c.home}
         </span>
         <span className="block font-mono text-mute/70 text-[10px] tracking-[0.12em] mt-0.5">
-          你押 <span className="text-bone">{pickName}</span> · {tagLine}
+          你押 <span className="text-bone">{pickName}</span>
+          {market ? ` · ${market.outcomeLabel}` : ""} · {tagLine}
         </span>
       </span>
       <span
