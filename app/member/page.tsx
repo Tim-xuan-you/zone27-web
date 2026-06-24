@@ -40,7 +40,7 @@ import CredentialGrabPanel from "@/components/CredentialGrabPanel";
 import OpenPositionsPanel from "@/components/OpenPositionsPanel";
 import TodayStrip from "@/components/TodayStrip";
 import PushToggle from "@/components/PushToggle";
-import type { OpenPosition } from "@/components/OpenPositionCard";
+import { buildOpenPositions, compactDate } from "@/lib/open-positions";
 import MyCreatorPanel from "@/components/MyCreatorPanel";
 import MyActivityPanel from "@/components/MyActivityPanel";
 import { getMyComments } from "@/lib/creator-activity-server";
@@ -72,18 +72,8 @@ export const metadata: Metadata = {
 // /member 隱藏 — 不對已是會員的人推入會。
 // ─────────────────────────────────────────────────────
 
-// "2026 · 06 · 03 · 星期三" → "06/03"(未結算押注卡只在未來場顯示日期)
-function compactDate(dateStr: string): string {
-  const parts = dateStr.split("·").map((s) => s.trim());
-  return parts.length >= 3 && parts[1] && parts[2]
-    ? `${parts[1]}/${parts[2]}`
-    : "";
-}
-
-// 持倉排序:進行中 → 今晚待開 → 未來(最急的在最上面)
-function phaseRank(phase: OpenPosition["phase"]): number {
-  return phase === "today-live" ? 0 : phase === "today-pregame" ? 1 : 2;
-}
+// compactDate / phaseRank / openPositions 建構已抽到 lib/open-positions.ts(與 /member/collection
+// 共用同一份「你的未結算押注」邏輯 · 單一真相不漂移)· compactDate 仍 import 給下方創作者清單用。
 
 // R241 收納:會員頁「接下來可以押」最多露幾場 · 其餘導回 /matches(會員頁=我的資料+下一步,
 // 不重造賽事看板)。 露的是最快開賽的 6 場 = 最 actionable(upcoming 已按開賽時間排)。
@@ -246,36 +236,7 @@ export default async function MemberPage() {
   // 你的未結算押注(the live middle · soul)· 你押過、還沒結算的場 —— 押下去到
   // 打完之間那段以前 /member 一片空白。 你 vs 引擎 vs 群眾 的張力撐住「我現在
   // 有一手在賭」。 LIVE 場(getMatchPhase today-live)多一道呼吸金線。
-  const openPositions: OpenPosition[] = allWithMlb
-    .map((m): OpenPosition | null => {
-      const entry = predictionsMap[m.id];
-      // table 只存 home/away · 但 map 型別保留舊的 "skip" · skip 不是一手持倉
-      if (!entry || (entry.pick !== "home" && entry.pick !== "away")) return null;
-      const phase = getMatchPhase(m);
-      if (
-        phase !== "today-live" &&
-        phase !== "today-pregame" &&
-        phase !== "future"
-      ) {
-        return null;
-      }
-      return {
-        matchId: m.id,
-        homeName: m.home.name,
-        awayName: m.away.name,
-        startTime: m.startTime,
-        dateLabel: compactDate(m.date),
-        myPick: entry.pick,
-        // 你押的那隊縮寫 + 聯盟 → 密清單掛隊徽顏色(getTeamCrest)
-        myTeamEn: entry.pick === "home" ? m.home.en : m.away.en,
-        league: m.league,
-        engineHomePicked: m.home.winRate >= m.away.winRate,
-        engineConfidence: Math.max(m.home.winRate, m.away.winRate),
-        phase,
-      };
-    })
-    .filter((p): p is OpenPosition => p !== null)
-    .sort((a, b) => phaseRank(a.phase) - phaseRank(b.phase));
+  const openPositions = buildOpenPositions(predictionsMap, allWithMlb);
   const heldIds = new Set(openPositions.map((p) => p.matchId));
 
   // 今晚 + 即將 · 修會員 vs 訪客不對等的 bug(兩層):

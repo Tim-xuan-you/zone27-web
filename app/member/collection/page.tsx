@@ -2,15 +2,25 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
-import CollectionWall from "@/components/CollectionWall";
+import CollectionWall, { type TonightGame } from "@/components/CollectionWall";
+import OpenPositionsPanel from "@/components/OpenPositionsPanel";
+import type { OpenPosition } from "@/components/OpenPositionCard";
 import { getUser } from "@/lib/supabase/server";
 import { buildSettledCards } from "@/lib/trophies";
+import { getMyPredictionsMap } from "@/lib/predictions-server";
+import { buildOpenPositions } from "@/lib/open-positions";
+import { matches as allMatches, getMatchPhase, type Match } from "@/lib/matches";
+import { getMlbAsMatches } from "@/lib/mlb-matches";
 
 // ── ZONE 27 · /member/collection · 個人戰功卡收藏牆 ─────────────────────
 // 會員看自己「所有已結算的 call」的畫廊 —— 一場結算 = 一張刪不掉的戰功卡(含輸照收)。
-// 純讀本人已結算帳本(0 migration)· 1 個真人就成立(收的是自己的眼光,不是別人的榜
-// = 不碰「0 用戶不上空榜」紅線)· server 備齊賽事資訊(buildSettledCards · 0 API)→ client
-// CollectionWall 用 session 端讀本人 picks 配對(不破頁面靜態)。 世界盃今晚第一批結算 → 長卡。
+//
+// 🔴 命門修(2026-06-24 · founder dogfood「永遠空的?」):戰功卡只在「結算後」誕生
+//   (computeTrophies 只收已結算)→ 用戶鎖了一手、比賽還沒打完前,這頁一直空 = 做了動作
+//   卻沒回饋 = 看起來像產品死了。 解:**頁面在鎖定當下就活過來** —— server 端算「你的未結算
+//   押注」(buildOpenPositions · 全真資料)render 在戰功卡上方,結算時自然翻面成永久卡。
+//   全新(0 鎖 0 卡)用戶才看空狀態,而空狀態給「誠實養成期話術 + 今晚真實可押」on-ramp。
+//   0 migration · 1 個真人就成立(收的是自己的眼光,不碰「0 用戶不上空榜」紅線)。
 // ─────────────────────────────────────────────────────
 
 export const metadata: Metadata = {
@@ -22,6 +32,34 @@ export default async function CollectionPage() {
   const user = await getUser();
   // 已結算賽事資訊(永久來源 · 0 API · 含名字/隊徽/引擎看好邊)· 共用 lib/trophies。
   const settled = buildSettledCards();
+
+  // 你的未結算押注(賽前鎖、還沒結算)+ 今晚真實可押(on-ramp)· 只在登入時算。
+  let openPositions: OpenPosition[] = [];
+  let tonight: TonightGame[] = [];
+  if (user) {
+    const predictionsMap = await getMyPredictionsMap();
+    // MLB live 窗(graceful:API 掛了退空 → 退回 CPBL · 不讓頁 500)。
+    let mlbLive: Match[] = [];
+    try {
+      mlbLive = await getMlbAsMatches();
+    } catch {
+      mlbLive = [];
+    }
+    const allWithMlb = [...allMatches, ...mlbLive];
+    openPositions = buildOpenPositions(predictionsMap, allWithMlb);
+    const heldIds = new Set(openPositions.map((p) => p.matchId));
+    // 今晚還沒押、賽前可鎖的場(把唯一能讓這頁不空的動作搬到這頁本身 · 真賽程真入口 · 取前 3)。
+    tonight = allWithMlb
+      .filter((m) => !heldIds.has(m.id) && getMatchPhase(m) === "today-pregame")
+      .slice(0, 3)
+      .map((m) => ({
+        id: m.id,
+        home: m.home.name,
+        away: m.away.name,
+        startTime: m.startTime,
+        league: m.league,
+      }));
+  }
 
   return (
     <div className="flex flex-col flex-1 min-h-screen">
@@ -41,7 +79,15 @@ export default async function CollectionPage() {
         </p>
 
         {user ? (
-          <CollectionWall settled={settled} />
+          <>
+            {/* 你的未結算押注 · 鎖定當下就活著(結算時翻面成下方戰功卡)· 0 鎖時自動隱藏(graceful)。 */}
+            <OpenPositionsPanel positions={openPositions} />
+            <CollectionWall
+              settled={settled}
+              hasPending={openPositions.length > 0}
+              tonight={tonight}
+            />
+          </>
         ) : (
           <div className="border border-line/60 bg-slate/30 p-8 sm:p-10 text-center">
             <p className="text-bone text-base sm:text-lg font-light tracking-tight mb-2">
