@@ -13,12 +13,12 @@ import { createPageMetadata } from "@/lib/page-og";
 // ─────────────────────────────────────────────────────
 
 export const metadata = createPageMetadata({
-  title: "我們用什麼算的 · 兩顆引擎",
+  title: "我們用什麼算的 · 三套引擎",
   description:
-    "別人說「我家 AI 神準」卻不說怎麼算的。 ZONE 27 把方法的名字、怎麼運作、會錯幾成全部寫給你看:棒球用逐打席蒙地卡羅模擬、足球用 Dixon-Coles 雙變量卜瓦松。 最被尊重的標準方法,不是神準 —— 因為沒有神準這種事。",
-  ogTitle: "我們用什麼幫你算誰會贏 · 兩顆引擎攤在桌上",
+    "別人說「我家 AI 神準」卻不說怎麼算的。 ZONE 27 把方法的名字、怎麼運作、會錯幾成全部寫給你看:棒球用逐打席蒙地卡羅模擬、足球用 Dixon-Coles 雙變量卜瓦松、網球用表面校正 Elo。 最被尊重的標準方法,不是神準 —— 因為沒有神準這種事。",
+  ogTitle: "我們用什麼幫你算誰會贏 · 三套引擎攤在桌上",
   ogDescription:
-    "棒球:逐打席蒙地卡羅 · 足球:Dixon-Coles · 最被尊重的標準方法,不是神準 · 每場賽前鎖死、賽後對帳、連沒中的都掛",
+    "棒球:逐打席蒙地卡羅 · 足球:Dixon-Coles · 網球:表面校正 Elo · 最被尊重的標準方法,不是神準 · 每場賽前鎖死、賽後對帳、連沒中的都掛",
   path: "/engines",
   type: "article",
 });
@@ -50,7 +50,7 @@ export default function EnginesPage() {
           </p>
         </section>
 
-        {/* ── 兩顆引擎 ─────────────────────────────── */}
+        {/* ── 三套引擎(一運動一套標準方法)─────────────────────────────── */}
         <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-2 grid gap-5 sm:grid-cols-2">
           <EngineCard
             sport="棒球"
@@ -68,18 +68,31 @@ export default function EnginesPage() {
             ctaHref="/soccer"
             ctaLabel="看足球開盤 →"
           />
+          <EngineCard
+            sport="網球 · 新"
+            name="表面校正 Elo"
+            how="把每位球員的世界排名換算成實力分,加上草地 / 紅土的表面校正,再用標準 Elo 邏輯算出兩人各自的勝率。"
+            why="Elo 是網球分析最通用、最透明的底層方法(FiveThirtyEight、Tennis Abstract 都用這套)。 我們用排名換算當起點,隨真實賽果一場一場磨 —— 溫網開打,賽果正在逐場對帳建置中。"
+            ctaHref="/tennis"
+            ctaLabel="看網球開盤 →"
+          />
         </section>
 
         {/* ── 坦白核心(這頁的靈魂)─────────────────────── */}
         <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 py-10">
           <div className="border-l-2 border-gold/60 pl-5 sm:pl-6 py-1">
             <p className="text-bone text-lg sm:text-xl font-light leading-relaxed">
-              這兩個都不是我們關起門發明的神祕 AI —— 是各自運動裡
+              這三套都不是我們關起門發明的神祕 AI —— 是各自運動裡
               <span className="text-gold">最被尊重、最標準、也最透明</span>的方法。
             </p>
             <p className="mt-4 text-mute leading-relaxed">
               但它們<span className="text-bone">照樣會錯</span>。 連全世界最強的引擎,單場棒球也只到大約{" "}
               <span className="text-bone">5 成 7</span>,足球更低。 任何說自己「神準」的,數學上都在騙你。
+            </p>
+            <p className="mt-4 text-mute leading-relaxed">
+              (網球會<span className="text-bone">看起來準很多</span> —— 那不是我們變天才,是網球
+              <span className="text-bone">本來就好預測</span>(一個人控制每一球、磨平運氣)。 所以網球我們
+              更要看<span className="text-gold">校準</span>,不是準度。)
             </p>
             <p className="mt-4 text-mute leading-relaxed">
               所以我們做一件別人不敢做的事:
