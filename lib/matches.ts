@@ -92,10 +92,7 @@ const rawMatches: Match[] = [
   // ── 2026-06-24 · 一軍 ingest(週三)· Tim 截圖 cpbl.com.tw 賽程 + 先發投手成績表 ──
   //   投手值由官網累計成績表(IP/K/BB/HR)換算 · 標 estimate(自 Tim 截圖手抄)· winRate 手 curate
   //   (ERA+控球+主場+隊伍 W-L · 接近五五波就誠實低 conviction)· 天氣不建模(/audit S02)。
-  //   🚫 第二場(富邦 vs 台鋼)暫不開:本批 Tim 只給第一場(味全@樂天)先發投手成績表。 台鋼艾速特有歷史
-  //      資料(多年王牌 1.53),但富邦先發 陳品宏 我方零資料(從未 ingest、不在自動 leaderboard)→ 先發是
-  //      winRate 一半,半場資料缺 = 只能掰 → 不開(同「只開算得出的」· 同 6/23 樂天首登板那場不開)。 等 Tim
-  //      補 陳品宏 先發投手成績表(+ 艾速特當下值)再上。
+  //   ✅ 兩場齊鎖(Tim 補上第二場 陳品宏/艾速特 先發投手成績表 → 半場資料補齊、同步賽前鎖定)。
   //   樂天桃園 · 味全(伍鐸 away)vs 樂天(曾家輝 home)· W-L 味全 38-19-0(.667 全聯盟最強)/ 樂天 20-32-2(.385 後段)。
   //     隊強差距大偏味全 + 味全打線最猛;但今天先發倒過來幫樂天 —— 樂天曾家輝 2026 ERA 3.06 / K9 6.9 /
   //     WHIP 1.13 / 被打 .237(會吊人、控球好)明顯優於味全伍鐸 ERA 3.51 / K9 僅 2.8(三振極低、全靠弱接觸、
@@ -146,6 +143,56 @@ const rawMatches: Match[] = [
       { score: "1 : 2", probability: 7.0 },
     ],
     aiConfidence: 51,
+  },
+  //   澄清湖 · 富邦(陳品宏 away)vs 台鋼(艾速特 home)· W-L 富邦 30-25-0(.545)/ 台鋼 30-27-1(.527)。
+  //     戰績幾乎五五(富邦微高),但先發對位嚴重傾斜台鋼 —— 台鋼艾速特 2026 ERA 1.72 / K9 9.3 / WHIP 0.96 /
+  //     被打 .187(多年王牌、年年進步 2024 2.77→2025 2.23→2026 1.72)碾壓富邦陳品宏 ERA 5.59 / WHIP 1.55 /
+  //     BB9 3.7 / 被打 .277(0-4、控球野、正挨打)+ 台鋼主場。 投手+主場雙偏台鋼 → 台鋼 61 / 富邦 39 · conf 56
+  //     (清楚偏地主王牌,但兩隊隊底相當 + 陳品宏小樣本可能回穩 + 單場變異 → 不衝更高;且 6/23 才示範 62/63%
+  //      照樣翻車,61% 不是穩贏、是「我們最敢的一手」)。
+  {
+    id: "cpbl-260624-02",
+    league: "CPBL",
+    date: "2026 · 06 · 24  ·  星期三",
+    startTime: "18:35",
+    venue: "澄清湖棒球場",
+    home: {
+      name: "台鋼雄鷹",
+      en: "HAWKS",
+      pitcher: {
+        name: "艾速特",
+        era: "1.72", // estimate · 2026 官網累計成績表(Tim 截圖手抄)· 62.2 IP(11 先發)· 多年王牌(2024 2.77 / 2025 2.23 · 年年進步)
+        k9: "9.3", // estimate · 65 K / 62.2 IP × 9 · 頂級三振
+        whip: "0.96", // estimate · 官網每局被上壘率 0.957(42 H + 18 BB / 62.2 IP)· 頂級
+        bb9: "2.6", // estimate · 18 BB / 62.2 IP × 9
+        hr9: "0.14", // estimate · 1 HR / 62.2 IP × 9 · 幾乎不被轟
+      },
+      recent: ["W", "L", "W", "W", "L"], // placeholder · 台鋼 30-27-1(.527)
+      winRate: 61,
+    },
+    away: {
+      name: "富邦悍將",
+      en: "GUARDIANS",
+      pitcher: {
+        name: "陳品宏",
+        era: "5.59", // estimate · 2026 官網累計成績表(Tim 截圖手抄)· 29 IP(4 先發)· 0-4、控球野、正挨打
+        k9: "6.2", // estimate · 20 K / 29 IP × 9
+        whip: "1.55", // estimate · 官網每局被上壘率 1.551(33 H + 12 BB / 29 IP)· 上壘一堆
+        bb9: "3.7", // estimate · 12 BB / 29 IP × 9 · 控球野
+        hr9: "0.93", // estimate · 3 HR / 29 IP × 9 · 偶被轟
+      },
+      recent: ["L", "W", "L", "L", "W"], // placeholder · 富邦 30-25-0(.545)
+      winRate: 39,
+    },
+    topScores: [
+      // 艾速特碾壓(富邦低分)+ 陳品宏挨打(台鋼得分)→ 台鋼 lean、中低分(格式 home : away = 台鋼 : 富邦)
+      { score: "4 : 2", probability: 8.5 },
+      { score: "3 : 1", probability: 8.0 },
+      { score: "4 : 1", probability: 7.5 },
+      { score: "5 : 2", probability: 7.0 },
+      { score: "3 : 2", probability: 7.0 },
+    ],
+    aiConfidence: 56,
   },
   // ── 2026-06-23 · 一軍 ingest(週二)· Tim 截圖 cpbl.com.tw 賽程 + 先發投手成績表 ──
   //   投手值由官網累計成績表(IP/K/BB/HR)換算 · 標 estimate(自 Tim 截圖手抄)· winRate 手 curate
