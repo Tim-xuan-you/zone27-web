@@ -20,6 +20,23 @@ import { taipeiDayOf, isLatePick } from "@/lib/predictions";
 
 export type SettlementSport = "baseball" | "soccer";
 
+/**
+ * 玩法押注(大小分 / 讓分)的顯示資訊。 缺(undefined)= 一般「誰贏」場 → 用隊名顯示(原行為)。
+ * 設計依據(Polymarket / 運彩 My Bets 研究 · 把「線」烤進選擇字串):一注大小分跟一注「誰贏」
+ * 用同一個列模板並排 —— 只是這一邊的顯示名變成「看大 8.5」而不是隊名。 outcomeName 已結算才有。
+ * href:玩法沒有自己的單場收據(/receipts/{id}~bou 會 404)→ 連回父場(同 sport 的既有可達頁)。
+ */
+export type MarketInfo = {
+  /** 玩法標籤,例:「大小分」「讓分」(顯示在運動標旁) */
+  label: string;
+  /** 你押那一邊的顯示名(線烤進去),例:「看大 8.5」「看小 8.5」「味全龍 −0.5」 */
+  pickName: string;
+  /** 結果顯示名(已結算才有),例:「收大 · 總分 13」 */
+  outcomeName?: string;
+  /** 這一列連到哪(玩法連回父場 · 永遠可達) */
+  href: string;
+};
+
 /** server 收齊的跨運動原始輸入(sport-agnostic)· 餵進 buildInbox 純 grade。 */
 export type RawSettlement = {
   matchId: string;
@@ -30,6 +47,8 @@ export type RawSettlement = {
   away: string;
   /** 你押的那一邊(棒球只有 home/away · 足球三向含 draw) */
   myPick: "home" | "away" | "draw";
+  /** 玩法資訊(大小分 / 讓分)· 缺 = 一般「誰贏」場(用隊名) */
+  market?: MarketInfo;
   /** 你押注的時戳(先鎖後結過濾用) */
   pickTs: string;
   /** 開賽 ISO(先鎖後結過濾 + 跨運動排序鍵) */
@@ -50,11 +69,13 @@ export type SettlementItem = {
   home: string;
   away: string;
   myPick: "home" | "away" | "draw";
-  /** 你押的那一邊顯示名(隊名 or「和局」) */
+  /** 你押的那一邊顯示名(隊名 ·「和局」· 或玩法「看大 8.5」) */
   myPickName: string;
+  /** 玩法資訊(大小分 / 讓分)· 缺 = 一般「誰贏」場 */
+  market?: MarketInfo;
   /** 你這手對不對 */
   youHit: boolean;
-  /** 實際結果顯示名(贏家隊名 or「和局」) */
+  /** 實際結果顯示名(贏家隊名 ·「和局」· 或玩法「收大 · 總分 13」) */
   outcomeName: string;
   /** 引擎當初看好的邊 · null = 沒選邊 */
   engineFav: "home" | "away" | "draw" | null;
@@ -74,8 +95,10 @@ export type PendingItem = {
   sport: SettlementSport;
   home: string;
   away: string;
-  /** 你押的那一邊顯示名(隊名 or「和局」) */
+  /** 你押的那一邊顯示名(隊名 ·「和局」· 或玩法「看大 8.5」) */
   myPickName: string;
+  /** 玩法資訊(大小分 / 讓分)· 缺 = 一般「誰贏」場 */
+  market?: MarketInfo;
   /** 開賽 ISO · 給「尚未開賽 / 進行中」狀態 + 排序(近→遠) */
   startISO: string;
   /** 你跟引擎同邊?(引擎沒選邊 → false) */
@@ -137,7 +160,8 @@ export function buildInbox(
           sport: r.sport,
           home: r.home,
           away: r.away,
-          myPickName: sideName(r.home, r.away, r.myPick),
+          myPickName: r.market ? r.market.pickName : sideName(r.home, r.away, r.myPick),
+          market: r.market,
           startISO: r.startISO,
           withEngine: r.engineFav !== null && r.myPick === r.engineFav,
         });
@@ -156,9 +180,10 @@ export function buildInbox(
       home: r.home,
       away: r.away,
       myPick: r.myPick,
-      myPickName: sideName(r.home, r.away, r.myPick),
+      myPickName: r.market ? r.market.pickName : sideName(r.home, r.away, r.myPick),
+      market: r.market,
       youHit,
-      outcomeName: sideName(r.home, r.away, r.finalWinner),
+      outcomeName: r.market?.outcomeName ?? sideName(r.home, r.away, r.finalWinner),
       engineFav: r.engineFav,
       engineHit,
       beatEngine,

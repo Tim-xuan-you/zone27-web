@@ -46,6 +46,9 @@ export type OpenPosition = {
   /** engine's confidence on its favorite (0-100) */
   engineConfidence: number;
   phase: OpenPositionPhase;
+  /** 玩法(大小分)· 缺 = 一般「誰贏」場(隊名 + 隊徽 + 引擎線);有 = 用 pickName(線烤進去),
+   *  隱藏隊徽 + 引擎勝率線(玩法的引擎大小分線另一條,不混用「誰贏」勝率)。 */
+  market?: { label: string; pickName: string };
 };
 
 export default function OpenPositionCard({
@@ -77,11 +80,16 @@ export default function OpenPositionCard({
     };
   }, [matchId]);
 
+  const isProp = !!position.market;
+  // 玩法用 pickName(看大 8.5)· 一般場用隊名 + 隊徽。
   const myTeam = myPick === "home" ? homeName : awayName;
-  const crest = getTeamCrest(myTeam, position.myTeamEn, position.league);
+  const pickDisplay = position.market ? position.market.pickName : myTeam;
+  const crest = isProp ? null : getTeamCrest(myTeam, position.myTeamEn, position.league);
   const engineTeam = engineHomePicked ? homeName : awayName;
   const withEngine = (myPick === "home") === engineHomePicked;
   const isLive = phase === "today-live";
+  // 玩法沒有 /matches/{id}~bou 單場頁 → 連回父場(剝後綴)· 群眾線仍用玩法場號(props 有自己的 tally)。
+  const href = isProp ? `/matches/${matchId.split("~")[0]}` : `/matches/${matchId}`;
 
   // crowd share on MY side(homePct is home's share of decided picks）
   const crowdOnMyPct =
@@ -95,14 +103,14 @@ export default function OpenPositionCard({
 
   return (
     <Link
-      href={`/matches/${matchId}`}
+      href={href}
       // gold discipline · 金色邊框留給 LIVE(此刻最該被看見的一手)· 其餘安靜
       className={`block bg-slate/40 border transition-colors ${
         isLive
           ? "border-gold/40 hover:border-gold/60"
           : "border-line/60 hover:border-gold/40"
       }`}
-      aria-label={`你的未結算押注 · 你押 ${myTeam} · ${
+      aria-label={`你的未結算押注 · 你押 ${pickDisplay} · ${
         isLive ? "比賽進行中" : "已鎖定"
       }`}
     >
@@ -133,32 +141,41 @@ export default function OpenPositionCard({
           </span>
         </div>
 
-        {/* 你的承諾 · the held stake · 掛隊徽顏色(解「全是字」· 顏色秒認隊) */}
+        {/* 你的承諾 · the held stake · 一般場掛隊徽;玩法把線烤進顯示名(看大 8.5)· 不掛隊徽 */}
         <p className="flex items-center gap-2.5 text-bone text-lg sm:text-xl font-light leading-snug">
-          <Avatar seed={myTeam} glyph={crest?.glyph} color={crest?.color} size={26} />
+          {!isProp && (
+            <Avatar seed={myTeam} glyph={crest?.glyph} color={crest?.color} size={26} />
+          )}
           <span>
-            你押 <span className="text-gold">{myTeam}</span>
+            你押 <span className="text-gold">{pickDisplay}</span>
+            {position.market && (
+              <span className="ml-2 align-middle font-mono text-mute/55 text-[10px] tracking-[0.18em]">
+                {position.market.label}
+              </span>
+            )}
           </span>
         </p>
 
-        {/* 你 vs 引擎 · 同邊被背書 / 對面是張力 */}
-        <p className="mt-1.5 font-mono text-[11px] tracking-[0.1em] leading-relaxed text-mute">
-          {withEngine ? (
-            <>
-              引擎同邊 · 也看好{" "}
-              <span className="text-bone tabular">
-                {engineTeam} {engineConfidence}%
-              </span>
-            </>
-          ) : (
-            <>
-              你站引擎的對面 · 引擎看好{" "}
-              <span className="text-bone tabular">
-                {engineTeam} {engineConfidence}%
-              </span>
-            </>
-          )}
-        </p>
+        {/* 你 vs 引擎 · 同邊被背書 / 對面是張力(玩法的引擎大小分線另一條 · 只在一般場顯示) */}
+        {!isProp && (
+          <p className="mt-1.5 font-mono text-[11px] tracking-[0.1em] leading-relaxed text-mute">
+            {withEngine ? (
+              <>
+                引擎同邊 · 也看好{" "}
+                <span className="text-bone tabular">
+                  {engineTeam} {engineConfidence}%
+                </span>
+              </>
+            ) : (
+              <>
+                你站引擎的對面 · 引擎看好{" "}
+                <span className="text-bone tabular">
+                  {engineTeam} {engineConfidence}%
+                </span>
+              </>
+            )}
+          </p>
+        )}
 
         {/* 你 vs 群眾 · 滿門檻才畫 */}
         {crowdShown && (

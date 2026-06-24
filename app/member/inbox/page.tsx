@@ -32,9 +32,12 @@ const EARLIER_CAP = 6;
 
 function SettlementRow({ item }: { item: SettlementItem }) {
   const sportTag = item.sport === "soccer" ? "足球" : "棒球";
+  // 玩法(大小分/讓分)連回父場:MLB 父場走 /matches(無收據)· CPBL/足球走可外傳收據。
+  const href = item.market?.href ?? `/receipts/${item.matchId}`;
+  const cta = href.startsWith("/receipts") ? "收據 →" : "看賽事 →";
   return (
     <Link
-      href={`/receipts/${item.matchId}`}
+      href={href}
       className="flex items-center justify-between gap-3 border-b border-line/40 py-3.5 hover:border-gold/40 transition-colors group"
     >
       <div className="min-w-0">
@@ -55,6 +58,12 @@ function SettlementRow({ item }: { item: SettlementItem }) {
             不 truncate:長中文隊名會把尾巴「結果 X」吃掉,而贏家在這列沒別的地方露 → 允許折行。 */}
         <p className="mt-1 font-mono text-mute/85 text-[11px] tracking-[0.04em] leading-snug">
           <span className="text-mute/70">{sportTag}</span>
+          {item.market && (
+            <>
+              {" · "}
+              <span className="text-mute/70">{item.market.label}</span>
+            </>
+          )}
           {" · "}
           {item.home} vs {item.away}
           {" · "}
@@ -64,7 +73,7 @@ function SettlementRow({ item }: { item: SettlementItem }) {
         </p>
       </div>
       <span className="shrink-0 font-mono text-gold/60 group-hover:text-gold text-[10px] tracking-[0.3em] transition-colors">
-        收據 →
+        {cta}
       </span>
     </Link>
   );
@@ -83,9 +92,11 @@ function PendingRow({ item }: { item: PendingItem }) {
   // 🔴 MLB 沒有賽前收據(getBaseballPendingReceipt 只認 cpbl-)→ /receipts/[mlb-] 會 404 = 又一個死路。
   //   CPBL + 足球有賽前可外傳收據(走 /receipts);MLB 退到比賽詳情頁(/matches 認 MLB id · 不 404)。
   const isMlb = item.matchId.startsWith("mlb-");
-  const href = isMlb ? `/matches/${item.matchId}` : `/receipts/${item.matchId}`;
-  // 🔴 標籤跟著目的地走:MLB → 比賽詳情(「看賽事」)· CPBL/足球 → 賽前可外傳收據(「收據」)。
-  const cta = isMlb ? "看賽事 →" : "收據 →";
+  // 玩法(大小分/讓分)用 market.href(已解父場 · 同規則)· 一般場照 isMlb 分流。
+  const href =
+    item.market?.href ?? (isMlb ? `/matches/${item.matchId}` : `/receipts/${item.matchId}`);
+  // 🔴 標籤跟著目的地走:/matches → 「看賽事」· /receipts → 「收據」。
+  const cta = href.startsWith("/receipts") ? "收據 →" : "看賽事 →";
   return (
     <Link
       href={href}
@@ -101,6 +112,12 @@ function PendingRow({ item }: { item: PendingItem }) {
         </p>
         <p className="mt-1 font-mono text-mute/85 text-[11px] tracking-[0.04em] leading-snug">
           <span className="text-mute/70">{sportTag}</span>
+          {item.market && (
+            <>
+              {" · "}
+              <span className="text-mute/70">{item.market.label}</span>
+            </>
+          )}
           {" · "}
           {item.home} vs {item.away}
           {" · "}
