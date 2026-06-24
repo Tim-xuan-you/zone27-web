@@ -8384,8 +8384,12 @@
       },
       "engineWinHomePct": 26,
       "lockedAt": "2026-06-22T18:51:08.498Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 8,
+        "away": 6
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-06-24T22:22:47.835Z"
     },
     {
       "gamePk": 824018,
@@ -8794,6 +8798,35 @@
       "verdict": null
     },
     {
+      "gamePk": 824258,
+      "gameDate": "2026-06-25T22:40:00Z",
+      "scheduleDate": "2026-06-25",
+      "homeId": 116,
+      "homeEn": "Detroit Tigers",
+      "homeRecord": "34-45",
+      "awayId": 117,
+      "awayEn": "Houston Astros",
+      "awayRecord": "38-43",
+      "homePitcher": "Troy Melton",
+      "awayPitcher": "Tatsuya Imai",
+      "homeStats": {
+        "era": "2.56",
+        "k9": "5.40",
+        "bb9": "2.56",
+        "hr9": "1.71"
+      },
+      "awayStats": {
+        "era": "6.15",
+        "k9": "10.54",
+        "bb9": "5.27",
+        "hr9": "1.32"
+      },
+      "engineWinHomePct": 56,
+      "lockedAt": "2026-06-24T22:22:46.778Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
       "gamePk": 822717,
       "gameDate": "2026-06-25T22:45:00Z",
       "scheduleDate": "2026-06-25",
@@ -8819,6 +8852,35 @@
       },
       "engineWinHomePct": 43,
       "lockedAt": "2026-06-23T20:13:24.590Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 822797,
+      "gameDate": "2026-06-25T23:07:00Z",
+      "scheduleDate": "2026-06-25",
+      "homeId": 141,
+      "homeEn": "Toronto Blue Jays",
+      "homeRecord": "39-40",
+      "awayId": 140,
+      "awayEn": "Texas Rangers",
+      "awayRecord": "38-42",
+      "homePitcher": "Kevin Gausman",
+      "awayPitcher": "MacKenzie Gore",
+      "homeStats": {
+        "era": "4.04",
+        "k9": "9.00",
+        "bb9": "2.02",
+        "hr9": "1.11"
+      },
+      "awayStats": {
+        "era": "4.07",
+        "k9": "9.86",
+        "bb9": "3.96",
+        "hr9": "0.86"
+      },
+      "engineWinHomePct": 51,
+      "lockedAt": "2026-06-24T22:22:46.778Z",
       "finalScore": null,
       "verdict": null
     },
@@ -8852,6 +8914,35 @@
       "verdict": null
     },
     {
+      "gamePk": 824747,
+      "gameDate": "2026-06-25T23:10:00Z",
+      "scheduleDate": "2026-06-25",
+      "homeId": 111,
+      "homeEn": "Boston Red Sox",
+      "homeRecord": "32-46",
+      "awayId": 147,
+      "awayEn": "New York Yankees",
+      "awayRecord": "47-31",
+      "homePitcher": "Connelly Early",
+      "awayPitcher": "Cam Schlittler",
+      "homeStats": {
+        "era": "3.64",
+        "k9": "8.71",
+        "bb9": "3.42",
+        "hr9": "1.54"
+      },
+      "awayStats": {
+        "era": "1.71",
+        "k9": "10.33",
+        "bb9": "1.71",
+        "hr9": "0.47"
+      },
+      "engineWinHomePct": 37,
+      "lockedAt": "2026-06-24T22:22:46.778Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
       "gamePk": 823042,
       "gameDate": "2026-06-25T23:45:00Z",
       "scheduleDate": "2026-06-25",
@@ -8877,6 +8968,122 @@
       },
       "engineWinHomePct": 66,
       "lockedAt": "2026-06-23T20:13:24.590Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 824255,
+      "gameDate": "2026-06-26T22:40:00Z",
+      "scheduleDate": "2026-06-26",
+      "homeId": 116,
+      "homeEn": "Detroit Tigers",
+      "homeRecord": "34-45",
+      "awayId": 117,
+      "awayEn": "Houston Astros",
+      "awayRecord": "38-43",
+      "homePitcher": "Keider Montero",
+      "awayPitcher": "Spencer Arrighetti",
+      "homeStats": {
+        "era": "3.68",
+        "k9": "5.91",
+        "bb9": "1.90",
+        "hr9": "1.00"
+      },
+      "awayStats": {
+        "era": "3.13",
+        "k9": "8.87",
+        "bb9": "4.17",
+        "hr9": "0.78"
+      },
+      "engineWinHomePct": 45,
+      "lockedAt": "2026-06-24T22:22:46.778Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 822796,
+      "gameDate": "2026-06-26T23:07:00Z",
+      "scheduleDate": "2026-06-26",
+      "homeId": 141,
+      "homeEn": "Toronto Blue Jays",
+      "homeRecord": "39-40",
+      "awayId": 140,
+      "awayEn": "Texas Rangers",
+      "awayRecord": "38-42",
+      "homePitcher": "Patrick Corbin",
+      "awayPitcher": "Nathan Eovaldi",
+      "homeStats": {
+        "era": "4.73",
+        "k9": "6.54",
+        "bb9": "3.20",
+        "hr9": "1.11"
+      },
+      "awayStats": {
+        "era": "4.24",
+        "k9": "8.87",
+        "bb9": "2.12",
+        "hr9": "1.64"
+      },
+      "engineWinHomePct": 51,
+      "lockedAt": "2026-06-24T22:22:46.778Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 824743,
+      "gameDate": "2026-06-26T23:10:00Z",
+      "scheduleDate": "2026-06-26",
+      "homeId": 111,
+      "homeEn": "Boston Red Sox",
+      "homeRecord": "32-46",
+      "awayId": 147,
+      "awayEn": "New York Yankees",
+      "awayRecord": "47-31",
+      "homePitcher": "Payton Tolle",
+      "awayPitcher": "Will Warren",
+      "homeStats": {
+        "era": "3.08",
+        "k9": "8.67",
+        "bb9": "2.52",
+        "hr9": "0.84"
+      },
+      "awayStats": {
+        "era": "3.45",
+        "k9": "9.65",
+        "bb9": "2.99",
+        "hr9": "0.92"
+      },
+      "engineWinHomePct": 54,
+      "lockedAt": "2026-06-24T22:22:46.778Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 823688,
+      "gameDate": "2026-06-27T00:10:00Z",
+      "scheduleDate": "2026-06-26",
+      "homeId": 142,
+      "homeEn": "Minnesota Twins",
+      "homeRecord": "38-43",
+      "awayId": 115,
+      "awayEn": "Colorado Rockies",
+      "awayRecord": "32-49",
+      "homePitcher": "Taj Bradley",
+      "awayPitcher": "Tomoyuki Sugano",
+      "homeStats": {
+        "era": "4.11",
+        "k9": "9.86",
+        "bb9": "3.76",
+        "hr9": "1.41"
+      },
+      "awayStats": {
+        "era": "4.31",
+        "k9": "5.22",
+        "bb9": "2.50",
+        "hr9": "1.59"
+      },
+      "engineWinHomePct": 65,
+      "lockedAt": "2026-06-24T22:22:46.778Z",
       "finalScore": null,
       "verdict": null
     },
