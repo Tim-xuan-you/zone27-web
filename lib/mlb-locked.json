@@ -7893,8 +7893,12 @@
       },
       "engineWinHomePct": 50,
       "lockedAt": "2026-06-21T19:51:40.278Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 2,
+        "away": 3
+      },
+      "verdict": "push",
+      "gradedAt": "2026-06-24T04:06:19.262Z"
     },
     {
       "gamePk": 822963,
@@ -7922,8 +7926,12 @@
       },
       "engineWinHomePct": 69,
       "lockedAt": "2026-06-21T19:51:40.278Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 5,
+        "away": 12
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-06-24T04:06:19.262Z"
     },
     {
       "gamePk": 824262,
@@ -7951,8 +7959,12 @@
       },
       "engineWinHomePct": 56,
       "lockedAt": "2026-06-21T22:18:31.421Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 3,
+        "away": 4
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-06-24T04:06:19.262Z"
     },
     {
       "gamePk": 823849,
@@ -7980,8 +7992,12 @@
       },
       "engineWinHomePct": 53,
       "lockedAt": "2026-06-23T04:03:24.743Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 6,
+        "away": 4
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-06-24T04:06:19.262Z"
     },
     {
       "gamePk": 822718,
@@ -8009,8 +8025,12 @@
       },
       "engineWinHomePct": 29,
       "lockedAt": "2026-06-21T22:18:31.421Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 9,
+        "away": 14
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-06-24T04:06:19.262Z"
     },
     {
       "gamePk": 824501,
@@ -8038,8 +8058,12 @@
       },
       "engineWinHomePct": 50,
       "lockedAt": "2026-06-21T16:49:09.006Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 0,
+        "away": 2
+      },
+      "verdict": "push",
+      "gradedAt": "2026-06-24T04:06:19.262Z"
     },
     {
       "gamePk": 823614,
@@ -8067,8 +8091,12 @@
       },
       "engineWinHomePct": 71,
       "lockedAt": "2026-06-22T05:04:17.877Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 6,
+        "away": 9
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-06-24T04:06:19.262Z"
     },
     {
       "gamePk": 824584,
@@ -8096,8 +8124,12 @@
       },
       "engineWinHomePct": 47,
       "lockedAt": "2026-06-21T16:49:09.006Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 2,
+        "away": 1
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-06-24T04:06:19.262Z"
     },
     {
       "gamePk": 823690,
@@ -8125,8 +8157,12 @@
       },
       "engineWinHomePct": 61,
       "lockedAt": "2026-06-21T19:51:40.278Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 3,
+        "away": 12
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-06-24T04:06:19.262Z"
     },
     {
       "gamePk": 823043,
@@ -8154,8 +8190,12 @@
       },
       "engineWinHomePct": 46,
       "lockedAt": "2026-06-21T19:51:40.278Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 3,
+        "away": 4
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-06-24T04:06:19.262Z"
     },
     {
       "gamePk": 824340,
@@ -8183,8 +8223,12 @@
       },
       "engineWinHomePct": 25,
       "lockedAt": "2026-06-21T19:51:40.278Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 2,
+        "away": 5
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-06-24T04:06:19.262Z"
     },
     {
       "gamePk": 824017,
@@ -8212,8 +8256,12 @@
       },
       "engineWinHomePct": 25,
       "lockedAt": "2026-06-22T22:50:21.793Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 5,
+        "away": 1
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-06-24T04:06:19.262Z"
     },
     {
       "gamePk": 823210,
