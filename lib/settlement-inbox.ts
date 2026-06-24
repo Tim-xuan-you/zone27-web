@@ -68,6 +68,20 @@ export type SettlementItem = {
   isNew: boolean;
 };
 
+/** 在飛的(已鎖、賽前鎖、還沒結算)· 押完當下就看得到「進行中」,不必等結算才有東西。 */
+export type PendingItem = {
+  matchId: string;
+  sport: SettlementSport;
+  home: string;
+  away: string;
+  /** 你押的那一邊顯示名(隊名 or「和局」) */
+  myPickName: string;
+  /** 開賽 ISO · 給「尚未開賽 / 進行中」狀態 + 排序(近→遠) */
+  startISO: string;
+  /** 你跟引擎同邊?(引擎沒選邊 → false) */
+  withEngine: boolean;
+};
+
 export type SettlementInbox = {
   /** 全部已結算(先鎖後結後)· 新到舊 */
   items: SettlementItem[];
@@ -75,6 +89,8 @@ export type SettlementInbox = {
   newCount: number;
   /** 已結算總場數 */
   total: number;
+  /** 已鎖、還沒結算的押注(賽前鎖、非 late · 開賽近→遠)· 讓收件匣在第一手鎖定後就活著 */
+  pending: PendingItem[];
 };
 
 /**
@@ -108,10 +124,26 @@ export function buildInbox(
   lastSeenISO: string | null,
 ): SettlementInbox {
   const items: SettlementItem[] = [];
+  const pending: PendingItem[] = [];
   for (const r of raws) {
-    if (r.finalWinner === null) continue; // 未結算 / 平手不進對照
-    // 先鎖後結:開賽後才押 → 賽後補登,不計入(共用 isLatePick · 跟棒球/足球帳本同一把尺)。
+    // 先鎖後結:開賽後才押 → 賽後補登,不計入(items 與 pending 都剔除 · 跟帳本同一把尺)。
     if (isLatePick(r.pickTs, r.startISO)) continue;
+    if (r.finalWinner === null) {
+      // 未結算 → 在飛的(pending)。 平手:已結算但 finalWinner=null,但 settledRaw 有值 →
+      // settledRaw===null 才是「真的還沒打完」→ 平手不誤入 pending。
+      if (r.settledRaw === null) {
+        pending.push({
+          matchId: r.matchId,
+          sport: r.sport,
+          home: r.home,
+          away: r.away,
+          myPickName: sideName(r.home, r.away, r.myPick),
+          startISO: r.startISO,
+          withEngine: r.engineFav !== null && r.myPick === r.engineFav,
+        });
+      }
+      continue;
+    }
 
     const youHit = r.myPick === r.finalWinner;
     const engineHit = r.engineFav === null ? null : r.engineFav === r.finalWinner;
@@ -143,6 +175,14 @@ export function buildInbox(
     const vb = Number.isNaN(tb) ? -Infinity : tb;
     return vb - va;
   });
+  // 在飛的:開賽近→遠(最快要結算的排最上)· 缺 startISO 沉底。 同 items 用瞬間比(混合 offset 正確)。
+  pending.sort((a, b) => {
+    const ta = Date.parse(a.startISO);
+    const tb = Date.parse(b.startISO);
+    const va = Number.isNaN(ta) ? Infinity : ta;
+    const vb = Number.isNaN(tb) ? Infinity : tb;
+    return va - vb;
+  });
   const newCount = items.reduce((n, i) => n + (i.isNew ? 1 : 0), 0);
-  return { items, newCount, total: items.length };
+  return { items, newCount, total: items.length, pending };
 }

@@ -159,13 +159,13 @@ export async function getMySettlementInbox(): Promise<SettlementInbox | null> {
 
   const { baseball, soccer } = await getMyPicksSplit();
   if (baseball.size === 0 && soccer.size === 0) {
-    return { items: [], newCount: 0, total: 0 };
+    return { items: [], newCount: 0, total: 0, pending: [] };
   }
   try {
     const raws = await gatherRaws(baseball, soccer);
     return buildInbox(raws, lastSeen);
   } catch {
     // 防護網:inbox 頁直接 await 這支、沒有上層 catch · 任何賽果來源意外丟錯都退空狀態,不 500。
-    return { items: [], newCount: 0, total: 0 };
+    return { items: [], newCount: 0, total: 0, pending: [] };
   }
 }
