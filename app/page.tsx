@@ -124,7 +124,7 @@ export default async function Home() {
         allHref: "/soccer",
         allText: "看世界盃全部 →",
         card: <WorldCupRailCard m={wcUpcoming[0]} />,
-        caption: "賽前鎖死、賽後逐場對帳 · 不是盤口 · 連輸的都留著。",
+        caption: "四年一次的世界盃 · 引擎開好盤,挑你看好的一邊。",
       };
     }
     const topUpcoming = featured[0];
@@ -140,7 +140,7 @@ export default async function Home() {
             heat={featuredHeat[topUpcoming.id]}
           />
         ),
-        caption: "賽前鎖死、賽後對帳 · 連輸的也掛,刪不掉。",
+        caption: "引擎自己算的盤,不是盤口 · 點進去押你看好的一邊。",
       };
     }
     const topReceipt = recentReceipts[0];
@@ -200,7 +200,7 @@ export default async function Home() {
               </span>
               <span className="text-gold text-sm">✓{tr.proved}</span>
               <span className="text-loss/85 text-sm">✕{tr.diverged}</span>
-              <span className="text-mute text-[9px] tracking-[0.2em]">連輸的也掛 →</span>
+              <span className="text-mute text-[9px] tracking-[0.2em]">看每一場 →</span>
             </Link>
           )}
 
@@ -262,18 +262,19 @@ export default async function Home() {
           )}
         </section>
 
-        {/* ── 今晚這桌條 · 真人鎖的任意一注 + 賽後誠實對帳(含落空)→ /table ──
-            前門頭條「贏輸都掛」的真人實證 · 空桌 → 自動隱藏(graceful)。 */}
-        <HomepageTableStrip summary={tableSummary} />
-
-        {/* ── 活動脈動條 · 會動的前門 · 最近 N 人賽前鎖定 → /pulse ──
-            不到門檻 / 0 用戶 → 自動隱藏(graceful · 守首頁極簡)。 */}
-        <HomepagePulseStrip summary={pulseSummary} />
-
-        {/* ── 海選天梯條 · 榜亮了→榜首一行 / 還沒亮→「王座上只有機器」誠實邀請 → /ladder ──
-            R258 · Tim「首頁看不到天梯」· 不擺空的排名列表(守「不上空榜」)· 13 站 IA 研究一致:
-            榜不放 hero、只放一個入口 → 獨立頁。 瞬時 liveness(脈動)接長期地位(天梯)。 */}
-        <HomepageLadderStrip lit={ladder.show} top={ladder.entries[0]} />
+        {/* ── 現場 · 真人這邊(桌 / 脈動 / 天梯 三切片)──────────────────────────
+            首頁去雜(2026-06-24 Tim「好多資訊重複、好亂」):三條原本各自滿版、同形同重的金條
+            堆疊 = widget pile。 收進「一個區標 + 收窄 max-w-2xl」的群組 → 大腦讀成同一組;
+            脈動(會動 = 靈魂)留金底為主、桌/天梯降素底為次(元件內已做),建立層級不刪功能。
+            三條各自 graceful 隱藏;天梯永遠 render → 區標永不孤兒(不破 graceful)。 */}
+        <section className="mx-auto max-w-2xl w-full px-6 sm:px-10 pt-6 pb-4">
+          <p className="font-mono text-mute/70 text-[10px] tracking-[0.45em] mb-1 text-center">
+            / 現場 · 真人這邊
+          </p>
+          <HomepageTableStrip summary={tableSummary} />
+          <HomepagePulseStrip summary={pulseSummary} />
+          <HomepageLadderStrip lit={ladder.show} top={ladder.entries[0]} />
+        </section>
 
         {/* ── 你 vs 引擎 · 回訪鉤子 · 只在登入且押過才出現(否則自動隱藏)── */}
         <YourRecordStrip variant="home" matchResults={matchResults} />
@@ -292,7 +293,7 @@ export default async function Home() {
           <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-2.5">
             <PromiseChip>引擎免費</PromiseChip>
             <PromiseChip href="/engines">方法公開</PromiseChip>
-            <PromiseChip href="/track-record">不藏輸的</PromiseChip>
+            <PromiseChip href="/track-record">輸了也在帳上</PromiseChip>
             <PromiseChip>不追蹤你</PromiseChip>
             <PromiseChip>不自動續扣</PromiseChip>
           </div>

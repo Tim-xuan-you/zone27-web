@@ -15,13 +15,13 @@ export default function HomepageTableStrip({ summary }: { summary: TableSummary 
   const { total, settled, win, lose, faces } = summary;
   const faceList = faces.slice(0, 4);
   return (
-    <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pt-2 pb-2">
+    <section className="w-full pt-2 pb-2">
       <Link
         href="/table"
         aria-label={`今晚這桌 · ${total} 注賽前鎖死${
           settled > 0 ? ` · 已對帳 ${settled} 注(${win} 中、${lose} 沒中)· 看這桌` : " · 看這桌"
         }`}
-        className="block border border-gold/30 bg-gold/[0.04] hover:border-gold/50 hover:bg-gold/[0.06] transition-colors px-4 py-3 group"
+        className="block border border-line/50 bg-transparent hover:border-gold/40 hover:bg-gold/[0.04] transition-colors px-4 py-3 group"
       >
         <div className="flex items-center gap-3">
           {faceList.length > 0 && (
@@ -48,10 +48,10 @@ export default function HomepageTableStrip({ summary }: { summary: TableSummary 
             <>
               已對帳 <span className="text-bone/80 tabular">{settled}</span> 注 ·{" "}
               <span className="text-gold/90 tabular">{win} 中</span> ·{" "}
-              <span className="text-loss/85 tabular">{lose} 沒中</span> · 連輸的都留著
+              <span className="text-loss/85 tabular">{lose} 沒中</span>
             </>
           ) : (
-            <>賽後一筆一筆對帳 · 中的、沒中的都留著</>
+            <>賽後一筆一筆對帳</>
           )}
         </p>
       </Link>

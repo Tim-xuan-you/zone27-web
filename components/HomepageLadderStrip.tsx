@@ -27,7 +27,7 @@ export default function HomepageLadderStrip({
     lit && top != null && top.edgeVsEnginePts != null && top.edgeVsEnginePts > 0;
 
   return (
-    <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pt-2 pb-2">
+    <section className="w-full pt-2 pb-2">
       <Link
         href="/ladder"
         aria-label={
@@ -35,7 +35,7 @@ export default function HomepageLadderStrip({
             ? `海選天梯 · 王座暫由 ${top.handle} 守著 · 在 ${top.decided} 場已對帳 · 看完整天梯`
             : "海選天梯正在成形 · 王座上還只有機器 · 還沒有人在夠多場裡贏過引擎 · 看天梯怎麼爬"
         }
-        className="block border border-gold/30 bg-gold/[0.04] hover:border-gold/50 hover:bg-gold/[0.06] transition-colors px-4 py-3 group"
+        className="block border border-line/50 bg-transparent hover:border-gold/40 hover:bg-gold/[0.04] transition-colors px-4 py-3 group"
       >
         <div className="flex items-center gap-3">
           {lit && top ? (

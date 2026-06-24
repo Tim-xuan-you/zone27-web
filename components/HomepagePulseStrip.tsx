@@ -13,7 +13,7 @@ export default function HomepagePulseStrip({ summary }: { summary: PulseSummary 
   if (summary.lockerCount === 0 || !summary.latest) return null;
   const { lockerCount, avatars, latest } = summary;
   return (
-    <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pt-2 pb-2">
+    <section className="w-full pt-2 pb-2">
       <Link
         href="/pulse"
         aria-label={`活動脈動 · ${lockerCount} 人已在牆上賽前鎖定 · 最新 ${latest.handle} 看好 ${latest.teamLabel} · 看完整牆`}
