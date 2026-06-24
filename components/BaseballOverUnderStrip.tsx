@@ -3,7 +3,12 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { createSupabaseBrowserClient } from "@/lib/supabase/browser";
-import { bouMarketId, type BouSide } from "@/lib/baseball-totals";
+import {
+  bouMarketId,
+  bouLineFromMarketId,
+  isBouMarketId,
+  bouResultFromScore,
+} from "@/lib/baseball-totals";
 
 // ── ZONE 27 · 棒球大小分押注條(看大 / 看小 · 引擎挑的公平線)──────────────────────
 // 跟「誰贏」並排的玩法。 看大 = 總分 > 線 · 看小 = 總分 < 線。 引擎用全季真實得分基準 +
@@ -13,12 +18,21 @@ import { bouMarketId, type BouSide } from "@/lib/baseball-totals";
 // 🔴 走 bouMarketId(matchId, line) = `{cpbl-id}~bou{線×10}` → 跟「誰贏」「大小分線值」各自獨立一筆,
 //   被 `~` 隔離守門擋在「誰贏」戰績外(predictions-server/-market/profile-server/pulse/settlement-data)。
 //   線編進場號 = 凍線,賽後對「當初那條線」結算。 over=home / under=away(塞既有 home/away · 0 migration)。
+//
+// 🔴 賽前 vs 賽後是兩種模式:
+//   · 賽前(傳 line)→ 用引擎當下挑的那條線開押注按鈕、查群眾共識 + 本人這手。
+//   · 賽後收據(傳 finalScore · 不傳 line)→ **不重算引擎線**:賽季得分基線會隨賽程位移,賽後重算
+//     deriveBaseballTotal 可能跳到另一條線 → 查不到用戶當初押的場號 →「顯示沒押過的線 / 整條消失」。
+//     改成:讀本人 picks、找這場的 ~bou 那手、用 bouLineFromMarketId 解出**凍在場號裡的線**、再用
+//     終場總分對「那條線」結算(bouResultFromScore)。 永久帳本本來就對每條候選線各記一筆,不受影響;
+//     這支只修「賽後收據顯示」這層。
 // ─────────────────────────────────────────────────────
 
 type State = "loading" | "anon" | "open" | "picked" | "started";
 
-function isBou(v: unknown): v is BouSide {
-  return v === "home" || v === "away"; // home=看大 · away=看小(submit 存的是 home/away)
+// 大小分押注存的是 home(看大)/ away(看小)· 跟「誰贏」一樣塞既有 home/away 欄(0 migration)。
+function isBou(v: unknown): v is "home" | "away" {
+  return v === "home" || v === "away";
 }
 
 export default function BaseballOverUnderStrip({
@@ -27,20 +41,147 @@ export default function BaseballOverUnderStrip({
   line,
   overPct,
   underPct,
-  result = null,
+  finalScore = null,
   hideIfNoPick = false,
 }: {
   matchId: string;
   dateISO: string | null;
-  /** 引擎挑的那條線(7.5 / 8.5 …)· 凍進場號 */
-  line: number;
+  /** 引擎挑的那條線(7.5 / 8.5 …)· 凍進場號 · 賽前押注模式必傳;賽後收據模式不傳(改解凍線)。 */
+  line?: number;
   /** 引擎大/小機率 · 選填(收據 settled 不必再秀) */
   overPct?: number;
   underPct?: number;
-  /** 賽後贏家側 · "over" / "under" · null = 還沒結算 */
-  result?: BouSide | null;
+  /** 賽後終場比分(本人押的那條線 = 解凍出來的 · 不靠引擎重算)· null = 賽前押注模式 */
+  finalScore?: { home: number; away: number } | null;
   /** 收據模式:本人沒押這手 → 整塊隱藏 */
   hideIfNoPick?: boolean;
+}) {
+  const settledMode = finalScore !== null;
+  return settledMode ? (
+    <SettledReceipt
+      matchId={matchId}
+      finalScore={finalScore}
+      hideIfNoPick={hideIfNoPick}
+    />
+  ) : (
+    <PregameStrip
+      matchId={matchId}
+      dateISO={dateISO}
+      line={line ?? 0}
+      overPct={overPct}
+      underPct={underPct}
+    />
+  );
+}
+
+// ── 賽後收據:解出用戶凍在場號裡的線 + 終場總分結算(免賽季基線位移 drift)──────────────
+function SettledReceipt({
+  matchId,
+  finalScore,
+  hideIfNoPick,
+}: {
+  matchId: string;
+  finalScore: { home: number; away: number };
+  hideIfNoPick: boolean;
+}) {
+  const [ready, setReady] = useState(false);
+  const [pick, setPick] = useState<"home" | "away" | null>(null);
+  const [resolvedLine, setResolvedLine] = useState<number | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      try {
+        const supabase = createSupabaseBrowserClient();
+        const { data: userData } = await supabase.auth.getUser();
+        if (!userData?.user) {
+          if (!cancelled) setReady(true);
+          return;
+        }
+        // 讀本人全部 picks,找「這場」的大小分那手(get_my_predictions 已 created_at desc → 取最近一筆)。
+        const { data: mine } = await supabase.rpc("get_my_predictions");
+        if (cancelled) return;
+        if (Array.isArray(mine)) {
+          for (const row of mine as { match_id?: unknown; pick?: unknown }[]) {
+            const id = typeof row.match_id === "string" ? row.match_id : "";
+            if (!isBouMarketId(id)) continue;
+            // 同一場:`{matchId}~bou…` 去後綴 == matchId(基礎場號不含 `~`)。
+            const tilde = id.lastIndexOf("~");
+            if (tilde <= 0 || id.slice(0, tilde) !== matchId) continue;
+            const l = bouLineFromMarketId(id);
+            if (l === null || !isBou(row.pick)) continue;
+            setResolvedLine(l);
+            setPick(row.pick);
+            break; // 一場一注(該線唯一)· 取第一筆(最近)
+          }
+        }
+      } catch {
+        /* graceful */
+      } finally {
+        if (!cancelled) setReady(true);
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [matchId]);
+
+  // 還在抓 / 沒押這手 → 隱藏(收據是本人證物 · 沒押就不顯,避免閃 + 不秀重算的引擎線)。
+  if (!ready || pick === null || resolvedLine === null) {
+    if (hideIfNoPick) return null;
+    if (!ready) {
+      return (
+        <div className="mt-2.5 pt-2.5 border-t border-line/40">
+          <p className="font-mono text-mute/40 text-[10px] tracking-[0.25em]">…</p>
+        </div>
+      );
+    }
+    return null;
+  }
+
+  const result = bouResultFromScore(finalScore.home, finalScore.away, resolvedLine);
+  const resultPick = result === "over" ? "home" : "away";
+  const youHit = pick === resultPick;
+  const sideLabel = (p: "home" | "away") => (p === "home" ? "看大" : "看小");
+
+  return (
+    <div className="mt-2.5 pt-2.5 border-t border-line/40">
+      <div className="flex items-baseline justify-between mb-2">
+        <p className="font-mono text-mute/70 text-[9px] tracking-[0.3em]">
+          / 大小分 {resolvedLine}
+        </p>
+      </div>
+      <div className="flex items-center justify-between gap-3">
+        <p className="font-mono text-[11px] tracking-[0.12em]">
+          <span className="text-mute/70">結果 · </span>
+          <span className="text-gold">{result === "over" ? "大" : "小"} 過</span>
+        </p>
+        <p className="font-mono text-[11px] tracking-[0.12em]">
+          你{sideLabel(pick)} ·{" "}
+          {youHit ? (
+            <span className="text-gold">命中 ✓</span>
+          ) : (
+            <span className="text-loss/85">落空 ✕</span>
+          )}
+        </p>
+      </div>
+    </div>
+  );
+}
+
+// ── 賽前押注(引擎當下那條線 · 看大/看小 · 群眾共識)──────────────────────────────
+function PregameStrip({
+  matchId,
+  dateISO,
+  line,
+  overPct,
+  underPct,
+}: {
+  matchId: string;
+  dateISO: string | null;
+  line: number;
+  overPct?: number;
+  underPct?: number;
 }) {
   const mkt = bouMarketId(matchId, line);
   const [state, setState] = useState<State>("loading");
@@ -134,20 +275,13 @@ export default function BaseballOverUnderStrip({
   const total = overN + underN;
   const SHOW_MIN = 5;
   const overShare = total > 0 ? Math.round((overN / total) * 100) : 0;
-
-  const settled = result === "over" || result === "under";
-  // result "over"=home 過 · "under"=away 過 · pick home=看大 · away=看小
-  const resultPick = result === "over" ? "home" : result === "under" ? "away" : null;
-  const youHit = settled && pick !== null ? pick === resultPick : null;
   const sideLabel = (p: "home" | "away") => (p === "home" ? "看大" : "看小");
-
-  if (hideIfNoPick && pick === null) return null;
 
   return (
     <div className="mt-2.5 pt-2.5 border-t border-line/40">
       <div className="flex items-baseline justify-between mb-2">
         <p className="font-mono text-mute/70 text-[9px] tracking-[0.3em]">
-          / 大小分 {line}{settled ? "" : " · 押一手"}
+          / 大小分 {line} · 押一手
         </p>
         {typeof overPct === "number" && typeof underPct === "number" ? (
           <p className="font-mono text-mute/45 text-[8px] tracking-[0.3em]">
@@ -158,27 +292,8 @@ export default function BaseballOverUnderStrip({
         )}
       </div>
 
-      {state === "loading" && !settled ? (
+      {state === "loading" ? (
         <p className="font-mono text-mute/40 text-[10px] tracking-[0.25em]">…</p>
-      ) : settled ? (
-        <div className="flex items-center justify-between gap-3">
-          <p className="font-mono text-[11px] tracking-[0.12em]">
-            <span className="text-mute/70">結果 · </span>
-            <span className="text-gold">{result === "over" ? "大" : "小"} 過</span>
-          </p>
-          {pick !== null ? (
-            <p className="font-mono text-[11px] tracking-[0.12em]">
-              你{sideLabel(pick)} ·{" "}
-              {youHit ? (
-                <span className="text-gold">命中 ✓</span>
-              ) : (
-                <span className="text-loss/85">落空 ✕</span>
-              )}
-            </p>
-          ) : (
-            <p className="font-mono text-mute/45 text-[10px] tracking-[0.15em]">你沒押這手</p>
-          )}
-        </div>
       ) : state === "picked" && pick ? (
         <div className="flex items-center justify-between gap-3">
           <p className="font-mono text-gold text-[11px] tracking-[0.12em]">
@@ -208,7 +323,7 @@ export default function BaseballOverUnderStrip({
         </div>
       )}
 
-      {!settled && state === "open" && total >= SHOW_MIN && (
+      {state === "open" && total >= SHOW_MIN && (
         <p className="mt-1.5 font-mono text-mute/55 text-[10px] tabular tracking-[0.1em]">
           群眾 大{overShare}% · 小{100 - overShare}%（{total} 人）
         </p>

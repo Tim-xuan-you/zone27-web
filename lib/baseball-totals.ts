@@ -69,6 +69,16 @@ function leagueBaseline(league: string): number | null {
   return null;
 }
 
+/**
+ * 這場「曾經/可能開過大小分」的聯盟嗎(CPBL/MLB 且非延賽)· 賽後收據用來判「該不該找用戶當初那手」。
+ * 🔴 跟 deriveBaseballTotal 不同:這裡**不**管「現在還算不算得出公平線」——賽季基線位移可能讓今天
+ *   重算出 null / 不同線,但用戶當初是有押的。 賽後收據用凍在場號裡的線結算(bouLineFromMarketId),
+ *   不靠 deriveBaseballTotal 重算 → 才不會把用戶的真押注顯示成「沒押過的線 / 整條消失」。
+ */
+export function offersBaseballTotals(match: Match): boolean {
+  return leagueBaseline(match.league) !== null && !match.postponed;
+}
+
 function eraOf(s: string): number {
   const n = Number(s);
   return Number.isFinite(n) && n > 0 ? n : REF_ERA;

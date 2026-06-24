@@ -16,7 +16,7 @@ import {
 } from "@/lib/matches";
 import { getEngineConviction } from "@/lib/conviction";
 import { getEngineReasoning } from "@/lib/reasoning";
-import { deriveBaseballTotal, bouResultFromScore } from "@/lib/baseball-totals";
+import { deriveBaseballTotal, offersBaseballTotals } from "@/lib/baseball-totals";
 import type { HeatDisplay } from "@/lib/match-heat";
 
 // ── ZONE 27 · Mini Match Card ────────────────────────────
@@ -300,18 +300,19 @@ export default function MiniMatchCard({
         </div>
       )}
 
-      {/* 大小分賽後對帳(CPBL 已結算 · 本人有押才顯 · hideIfNoPick)· 線從凍住的引擎重算(同賽前)·
-          用終場總分對「那條線」結算命中/落空 · ~bou 隔離不污染「誰贏」。 */}
-      {bouTotal && match.finalResult && (
+      {/* 大小分賽後對帳(CPBL/MLB 已結算 · 本人有押才顯 · hideIfNoPick)· 🔴 線**不重算**:賽季基線
+          會位移 → deriveBaseballTotal 賽後可能跳到另一條線 →「顯示沒押過的線 / 整條消失」。 改傳終場
+          比分,strip 內讀本人這手、用 bouLineFromMarketId 解出當初凍住的線再對帳。 gate 用
+          offersBaseballTotals(非 bouTotal)→ 即使現在重算不出公平線,用戶當初押的那手照樣顯示。
+          ~bou 隔離不污染「誰贏」。 */}
+      {offersBaseballTotals(match) && match.finalResult && (
         <BaseballOverUnderStrip
           matchId={match.id}
           dateISO={getMatchStartIso(match)}
-          line={bouTotal.line}
-          result={bouResultFromScore(
-            match.finalResult.homeScore,
-            match.finalResult.awayScore,
-            bouTotal.line,
-          )}
+          finalScore={{
+            home: match.finalResult.homeScore,
+            away: match.finalResult.awayScore,
+          }}
           hideIfNoPick
         />
       )}
