@@ -51,6 +51,62 @@ export type TableCall = {
 //    「引擎有模型」badge 整個拿掉(對結果 0 差別 = 對用戶 0 意義)· 只在引擎真的不會算的
 //    盤(角球)留一句白話 engineNote 當誠實註腳(那才是克制的真意)。
 const TABLE: TableCall[] = [
+  // ── 2026-06-25 這一桌 · Tim/Ron/Lewi 賽前鎖的注(待對帳 · 賽後逐筆對帳 · 含輸照掛)──────
+  {
+    handle: "Tim",
+    league: "世界盃",
+    match: "加拿大 vs 瑞士",
+    when: "6/25 03:00",
+    call: "瑞士 會贏",
+    engineModels: true,
+    result: "pending",
+  },
+  {
+    handle: "Ron",
+    league: "世界盃",
+    match: "加拿大 vs 瑞士",
+    when: "6/25 03:00",
+    call: "角球 超過 9.5 個",
+    engineModels: false,
+    engineNote: "角球這種賭法,我們引擎沒在算 —— 還是照樣幫他對帳",
+    result: "pending",
+  },
+  {
+    handle: "Lewi",
+    league: "世界盃",
+    match: "南韓 vs 南非",
+    when: "6/25 09:00",
+    call: "南韓 會贏",
+    engineModels: true,
+    result: "pending",
+  },
+  {
+    handle: "Tim",
+    league: "世界盃",
+    match: "南韓 vs 南非",
+    when: "6/25 09:00",
+    call: "兩隊不會都進球",
+    engineModels: true,
+    result: "pending",
+  },
+  {
+    handle: "Ron",
+    league: "美國職棒",
+    match: "太空人 vs 藍鳥",
+    when: "6/25 07:07",
+    call: "藍鳥 贏 2 分以上",
+    engineModels: true,
+    result: "pending",
+  },
+  {
+    handle: "Lewi",
+    league: "美國職棒",
+    match: "太空人 vs 藍鳥",
+    when: "6/25 07:07",
+    call: "兩隊總分 超過 8.5 分",
+    engineModels: true,
+    result: "pending",
+  },
   // ── 2026-06-21 這一桌 · Tim/Ron/Lewi 報的注 · 賽後逐筆對帳(2026-06-23 對帳 · 2 中 2 落空 · 含輸照掛)──
   {
     handle: "Tim",

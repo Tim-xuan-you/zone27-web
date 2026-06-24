@@ -91,8 +91,11 @@ function mergePitcherStats(p: PitcherStats): PitcherStats {
 const rawMatches: Match[] = [
   // ── 2026-06-25 · 一軍 ingest(週四)· Tim 截圖 cpbl.com.tw 賽程 + 先發投手成績表 ──
   //   投手值由官網累計成績表(IP/K/BB/HR)換算 · 標 estimate(自 Tim 截圖手抄)· winRate 手 curate。
-  //   ⚠️ 第二場(165 樂天 vs 中信)暫不開:Tim 只給了 151 的投手成績表(魔神龍 / 魔力藍)· 魔爾曼 / 羅戈
-  //      無投手數據 → 先發是 winRate 一半、半場資料缺到只能掰 = 違反「只開算得出的」· 補投手表再上。
+  //   ✅ 兩場齊開(Tim 補上第二場 魔爾曼/羅戈 先發投手成績表 → #165 半場資料補齊、同步開盤)。
+  //   洲際 · 樂天(魔爾曼 away)vs 中信(羅戈 home)· W-L 樂天 21-32-2(.396)/ 中信 19-34-2(.358 墊底)· 兩隊都後段。
+  //     先發幾乎五五:魔爾曼 2026 ERA 3.09 / K9 8.1 / WHIP 1.20 / BAA .236 vs 羅戈 2026 ERA 3.13 / K9 7.8 /
+  //     WHIP 1.14 / BAA .226(王牌底:2024 2.16 / 2025 1.84)。 羅戈控壓略勝 + 中信主場 vs 樂天隊強一點點(.396)·
+  //     兩股力量幾乎抵掉 → 中信 52 / 樂天 48 · conf 50(兩支後段隊 + 先發對位極接近 = 誠實壓到近銅板)。
   //   新莊 · 味全(魔神龍 away)vs 富邦(魔力藍 home)· W-L 味全 38-20-0(.655 全聯盟最強)/ 富邦 31-25-0(.554)。
   //     味全雙重優勢:better team + 先發 ERA 更低 —— 魔神龍 2026 ERA 0.89 / WHIP 1.21 / K9 5.5 / BB9 2.0
   //     (8 先發小樣本 + WHIP 高 → 0.89 偏運氣有回歸空間 · 生涯 2024 2.04 / 2025 2.51) vs 富邦魔力藍 2026
@@ -141,6 +144,50 @@ const rawMatches: Match[] = [
       { score: "1 : 2", probability: 7.0 },
     ],
     aiConfidence: 53,
+  },
+  {
+    id: "cpbl-260625-02",
+    league: "CPBL",
+    date: "2026 · 06 · 25  ·  星期四",
+    startTime: "18:35",
+    venue: "臺中洲際棒球場",
+    home: {
+      name: "中信兄弟",
+      en: "BROTHERS",
+      pitcher: {
+        name: "羅戈",
+        era: "3.13", // estimate · 2026 官網累計成績表(Tim 截圖手抄)· 72 IP(12 先發)· 王牌底(2024 2.16 / 2025 1.84)
+        k9: "7.8", // estimate · 62 K / 72 IP × 9
+        whip: "1.14", // estimate · (60 H + 22 BB) / 72 IP · 控壓佳
+        bb9: "2.8", // estimate · 22 BB / 72 IP × 9
+        hr9: "0.38", // estimate · 3 HR / 72 IP × 9
+      },
+      recent: ["L", "W", "L", "L", "W"], // placeholder · 中信 19-34-2(.358 墊底)
+      winRate: 52,
+    },
+    away: {
+      name: "樂天桃猿",
+      en: "MONKEYS",
+      pitcher: {
+        name: "魔爾曼",
+        era: "3.09", // estimate · 2026 官網累計成績表(Tim 截圖手抄)· 70 IP(12 先發)· K9 高、能投
+        k9: "8.1", // estimate · 63 K / 70 IP × 9
+        whip: "1.20", // estimate · (63 H + 21 BB) / 70 IP
+        bb9: "2.7", // estimate · 21 BB / 70 IP × 9
+        hr9: "0.26", // estimate · 2 HR / 70 IP × 9
+      },
+      recent: ["L", "L", "W", "L", "W"], // placeholder · 樂天 21-32-2(.396)
+      winRate: 48,
+    },
+    topScores: [
+      // 先發極接近(魔爾曼 3.09 vs 羅戈 3.13)· 中信主場 + 羅戈控壓略勝 → 微 lean 中信、低中分(格式 home : away = 中信 : 樂天)
+      { score: "3 : 2", probability: 8.0 },
+      { score: "2 : 1", probability: 7.5 },
+      { score: "4 : 3", probability: 7.0 },
+      { score: "2 : 3", probability: 7.0 },
+      { score: "1 : 2", probability: 6.5 },
+    ],
+    aiConfidence: 50,
   },
   // ── 2026-06-24 · 一軍 ingest(週三)· Tim 截圖 cpbl.com.tw 賽程 + 先發投手成績表 ──
   //   投手值由官網累計成績表(IP/K/BB/HR)換算 · 標 estimate(自 Tim 截圖手抄)· winRate 手 curate
