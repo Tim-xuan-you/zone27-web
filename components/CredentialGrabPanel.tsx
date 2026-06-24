@@ -2,11 +2,17 @@
 
 import { useState } from "react";
 
-// ── ZONE 27 · 一鍵拿取可攜憑證(/member · 達到對帳之星 / 已贏過引擎才亮)──────────────
+// ── ZONE 27 · 一鍵拿取戰績徽章 + 嵌入碼(/member · 任何有紀錄的人都能拿)──────────────
 // 把「你的 ZONE 27 準度」變成貼得到處都是的履歷/談判籌碼:徽章圖 + 嵌入碼 + 履歷句 + LinkedIn 深連結 +
 // Email 純文字後備。 🔴 鐵律(米其林「門牌服從指南」):每一種拿取物的點擊一律落回 live /u(會即時重算、
 // 滑落即收回)· 圖/截圖永遠不是憑證,憑證是那本含輸帳本。 數字永遠連著卡尺(句子由 credentialHeadline 出 ·
 // 含「N 場含輸 · vs 57% 引擎」)· 單獨的 X% 不外傳。 0 賭場 · earned 不可買 · 訪客面 0 提 GitHub/開源。
+//
+// 🔴 獲客迴圈核心:每個徽章都帶 /u 回鏈 = 報馬仔偽造不出的 costly signal + 自動把點的人帶回站。
+//   所以只要有真紀錄(record 級含輸帳本)就該拿得到 —— 不再鎖在對帳之星那群極少數人手裡。
+//   但「對帳之星」是賺來的頭銜:沒真的達星(earned=false)就不掛 LinkedIn 認證深連結
+//   (自稱沒賺到的頭銜 = 自打臉砸誠實護城河)· 嵌入碼/履歷句的話術一律走 credentialHeadline,
+//   record 級只講「含輸命中率 X%」不喊「贏過引擎」—— 不灌水。
 // ─────────────────────────────────────────────────────
 
 // 後備網址(SSR / 無 window 時)· 上線自訂網域後改這裡一處即可。
@@ -15,11 +21,15 @@ const CANON_ORIGIN = "https://zone27.com.tw";
 export default function CredentialGrabPanel({
   code,
   sentence,
+  earned = false,
 }: {
   /** 永久碼 · 憑證一律連回 /u/[code] */
   code: string;
   /** credentialHeadline(identity).sentence(不含 verify URL · 這裡用 origin 補上) */
   sentence: string;
+  /** 是否真的拿到對帳之星(≥30 場含輸還贏過引擎 · reckoningStar().earned)· 只有 true 才掛
+      LinkedIn「對帳之星」認證深連結 —— record/beat 級仍可拿所有嵌入碼,只是不自稱沒賺到的頭銜。 */
+  earned?: boolean;
 }) {
   const [copied, setCopied] = useState<string | null>(null);
 
@@ -106,14 +116,18 @@ export default function CredentialGrabPanel({
         ))}
       </div>
 
-      <a
-        href={linkedin}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="mt-4 inline-flex items-center gap-2 px-4 py-2.5 bg-gold text-navy font-mono text-[11px] tracking-[0.2em] hover:bg-gold-soft transition-colors"
-      >
-        加到 LinkedIn 個人檔案 →
-      </a>
+      {/* LinkedIn「對帳之星」認證深連結 · 只有真的達星(earned)才掛 ——
+          沒達星就不自稱這個賺來的頭銜(record/beat 級的嵌入碼/履歷句仍照給,話術不喊星)。 */}
+      {earned && (
+        <a
+          href={linkedin}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-4 inline-flex items-center gap-2 px-4 py-2.5 bg-gold text-navy font-mono text-[11px] tracking-[0.2em] hover:bg-gold-soft transition-colors"
+        >
+          加到 LinkedIn 個人檔案 →
+        </a>
+      )}
     </section>
   );
 }

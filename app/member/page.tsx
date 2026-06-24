@@ -407,18 +407,23 @@ export default async function MemberPage() {
 
         {/* ═══ 區 4 · 拿去給人看 · 把準度丟給懷疑者 ═══
             🔴 整組標頭 gate `identity.decided > 0`:全新會員(0 場)兩張卡都不 render,
-            裸標頭 = 孤兒標頭破 graceful。 star/beat 必 decided≥8>0,故 decided>0 已涵蓋。 */}
+            裸標頭 = 孤兒標頭破 graceful。 徽章/嵌入碼也走同一 gate(任何有紀錄的人都能拿)·
+            LinkedIn 對帳之星認證再往內用 earned 收緊(達星才掛)。 */}
         {identity.decided > 0 && (
           <>
             <SectionLabel>拿去給人看 · 把準度丟給不信你的人</SectionLabel>
             {/* 基本分享卡:公開檔含輸戰績(有紀錄才到這 · 不發空檔案)*/}
             <ProfileShareCard code={authorCode} />
-            {/* 進階憑證(整頁最大、高門檻 star/beat 才亮)· 預設折疊 · 點才展開 */}
-            {(cred.level === "star" || cred.level === "beat") && (
-              <Disclosure summary="進階:做成 bio / 簽名嵌入碼 →">
-                <CredentialGrabPanel code={authorCode} sentence={cred.sentence} />
-              </Disclosure>
-            )}
+            {/* 戰績徽章 + 嵌入碼 · 任何有紀錄的人都能拿(不再只鎖對帳之星那群極少數)·
+                每個徽章帶 /u 回鏈 = 報馬仔偽造不出的 costly signal + 自動把點的人帶回站 = 獲客迴圈。
+                預設折疊省版面(同基本分享卡之後的「進階」位)· LinkedIn 對帳之星認證只有真達星才掛。 */}
+            <Disclosure summary="拿你的戰績徽章 · 貼到 bio / LINE / 論壇 →">
+              <CredentialGrabPanel
+                code={authorCode}
+                sentence={cred.sentence}
+                earned={star.earned}
+              />
+            </Disclosure>
           </>
         )}
 
