@@ -13,15 +13,15 @@ import { useState, useSyncExternalStore } from "react";
 // 走 useSyncExternalStore:server / 水合期一律回 getServerSnapshot("baseball"),
 // 水合完成後 React 才讀 client 端 hash —— 這是官方對「server/client 不同值」的解,
 // 不觸發 hydration mismatch、也不用在 effect 內同步 setState(過 react-hooks/set-state-in-effect)。
-type Sport = "baseball" | "soccer";
+type Sport = "baseball" | "soccer" | "tennis";
 function subscribeHash(onChange: () => void): () => void {
   window.addEventListener("hashchange", onChange);
   return () => window.removeEventListener("hashchange", onChange);
 }
 function getHashSport(): Sport {
-  return typeof window !== "undefined" && window.location.hash === "#soccer"
-    ? "soccer"
-    : "baseball";
+  if (typeof window === "undefined") return "baseball";
+  const h = window.location.hash;
+  return h === "#soccer" ? "soccer" : h === "#tennis" ? "tennis" : "baseball";
 }
 // SSR / 水合的回退 = 預設棒球(無 hash context · 守 canonical 不分歧)。
 function getServerSport(): Sport {
@@ -31,10 +31,13 @@ function getServerSport(): Sport {
 export default function SportToggle({
   baseball,
   soccer,
+  tennis,
   containerClass = "mx-auto max-w-5xl w-full px-6 sm:px-10 pt-4 pb-8",
 }: {
   baseball: React.ReactNode;
   soccer: React.ReactNode;
+  /** 網球(選填)· 有資料才傳 → 三段;沒傳 → 維持兩段(/ladder、/calibration 等不變)。 */
+  tennis?: React.ReactNode;
   /** 外層定位/寬度(預設給寬頁 · 窄頁如 /ladder 傳無 max-w/px 的縮版,避免雙重 padding) */
   containerClass?: string;
 }) {
@@ -43,7 +46,9 @@ export default function SportToggle({
   const hashSport = useSyncExternalStore(subscribeHash, getHashSport, getServerSport);
   // 手動覆寫:任一按鈕點過後,使用者的選擇優先於網址 hash(深連結只決定初始視圖)。
   const [override, setOverride] = useState<Sport | null>(null);
-  const sport = override ?? hashSport;
+  // 沒傳網球時,#tennis 落回棒球(避免空視圖)。
+  const sport =
+    override ?? (hashSport === "tennis" && !tennis ? "baseball" : hashSport);
 
   return (
     <>
@@ -51,7 +56,7 @@ export default function SportToggle({
         <div
           role="tablist"
           aria-label="選擇運動"
-          className="grid grid-cols-2 gap-1 p-1 bg-slate/40 border border-line/70"
+          className={`grid ${tennis ? "grid-cols-3" : "grid-cols-2"} gap-1 p-1 bg-slate/40 border border-line/70`}
         >
           <SegBtn
             active={sport === "baseball"}
@@ -65,12 +70,21 @@ export default function SportToggle({
             label="足球"
             sub="世界盃 6/12–7/20 · 台北時間"
           />
+          {tennis && (
+            <SegBtn
+              active={sport === "tennis"}
+              onClick={() => setOverride("tennis")}
+              label="網球"
+              sub="溫網會外賽 · 草地"
+            />
+          )}
         </div>
       </section>
 
-      {/* 兩 view 都在 DOM(server 直出)· 只切 display · 無 JS 時兩者皆顯示(graceful) */}
+      {/* 各 view 都在 DOM(server 直出)· 只切 display · 無 JS 時皆顯示(graceful) */}
       <div className={sport === "baseball" ? "" : "hidden"}>{baseball}</div>
       <div className={sport === "soccer" ? "" : "hidden"}>{soccer}</div>
+      {tennis && <div className={sport === "tennis" ? "" : "hidden"}>{tennis}</div>}
     </>
   );
 }

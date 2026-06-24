@@ -83,6 +83,11 @@ function ContenderRow({ p, idx }: { p: TennisPlayer; idx: number }) {
 
 export default function TennisPage() {
   const groups = drawGroups();
+  // 結算完的場「收起來」:上方看板只留還沒完場的(可押 / 待開賽擺前面),完場的收進下方「已完場」區。
+  const openGroups = groups
+    .map((g) => ({ ...g, matches: g.matches.filter((m) => !m.finalResult) }))
+    .filter((g) => g.matches.length > 0);
+  const settledMatches = groups.flatMap((g) => g.matches.filter((m) => m.finalResult));
   const { total, lined } = drawCounts();
   const atp = grassContenders("atp");
   const wta = grassContenders("wta");
@@ -136,7 +141,7 @@ export default function TennisPage() {
         {/* ── 真實賽程看板(依賽事分組)── */}
         <section className="mx-auto max-w-6xl w-full px-6 sm:px-10 pb-8">
           <div className="space-y-10">
-            {groups.map((g) => (
+            {openGroups.map((g) => (
               <div key={`${g.tour}|${g.tournament}`}>
                 <div className="flex items-baseline gap-3 mb-4 flex-wrap">
                   <p className="font-mono text-gold/70 text-[10px] tracking-[0.4em]">
@@ -155,6 +160,23 @@ export default function TennisPage() {
             ))}
           </div>
         </section>
+
+        {/* ── 已完場 · 引擎逐場對帳(收起來 · 不擋上面可押的場)── */}
+        {settledMatches.length > 0 && (
+          <section className="mx-auto max-w-6xl w-full px-6 sm:px-10 pb-8">
+            <div className="flex items-baseline gap-3 mb-4 flex-wrap border-t border-line/50 pt-8">
+              <p className="font-mono text-gold/70 text-[10px] tracking-[0.4em]">已完場 · 引擎對帳</p>
+              <span className="font-mono text-mute/50 text-[9px] tracking-[0.2em]">
+                {settledMatches.length} 場 · 中沒中都掛
+              </span>
+            </div>
+            <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+              {settledMatches.map((m) => (
+                <TennisDrawCard key={m.id} match={m} />
+              ))}
+            </div>
+          </section>
+        )}
 
         {/* ── 公開戰績:引擎 + 你(含輸 · 賽前鎖定 → 賽後對帳)── */}
         <section className="mx-auto max-w-6xl w-full px-6 sm:px-10 pb-8">
