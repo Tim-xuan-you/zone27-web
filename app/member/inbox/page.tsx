@@ -27,8 +27,9 @@ export const metadata: Metadata = {
 // 收件匣是本人即時資料(讀 cookie)· 不可靜態快取。
 export const dynamic = "force-dynamic";
 
-// 「更早」只在有新結算時當脈絡墊一小段(不是再貼一次收藏畫廊)· 對齊「收件匣 ≠ 相簿」分工。
-const EARLIER_CAP = 6;
+// 「更早」= 已對過帳的場(你自己的押注 · 有界)· R261 起照列全部(不再 cap 6 趕去收藏),
+// 因為收藏畫廊還沒收玩法卡 → 收件匣就是「逐筆對帳」的完整家。 命中、落空都留。
+const EARLIER_CAP = 60;
 
 function SettlementRow({ item }: { item: SettlementItem }) {
   const sportTag = item.sport === "soccer" ? "足球" : "棒球";
@@ -193,6 +194,7 @@ export default async function InboxPage() {
   const newItems = inbox.items.filter((i) => i.isNew);
   const earlierItems = inbox.items.filter((i) => !i.isNew).slice(0, EARLIER_CAP);
   const newHits = newItems.reduce((n, i) => n + (i.youHit ? 1 : 0), 0);
+  const settledHits = inbox.items.reduce((n, i) => n + (i.youHit ? 1 : 0), 0);
   const pending = inbox.pending;
 
   return (
@@ -249,26 +251,28 @@ export default async function InboxPage() {
             </div>
           )
         ) : newItems.length === 0 ? (
-          // 都對完帳了 —— 純對帳隊列的「收件匣零」狀態。 不再貼一次「已結算」全清單(那是
-          // 收藏畫廊的工作)→ 收件匣只負責「新的、待對帳的」· 對齊「收件匣 ≠ 相簿」分工。
-          <div className="border border-line/60 bg-slate/30 p-8 sm:p-10 text-center">
-            <p className="font-mono text-gold/80 text-[10px] tracking-[0.35em] mb-3">
-              / 都對完帳了
+          // R261:沒有「新」結算,但你押過的場仍逐筆列在這 —— 收件匣就是「中沒中逐筆對帳」的家。
+          //   以前這裡只給個數字 + 趕去收藏;但收藏畫廊還沒收玩法(大小分)卡 → 大小分玩家結算後
+          //   就「兩頭空」(收件匣不列、收藏沒卡)= founder dogfood 看到全空的真兇。 改成照列(含輸照掛)。
+          <section className="mb-8">
+            <div className="flex items-baseline justify-between gap-3 mb-1">
+              <p className="font-mono text-gold/90 text-[11px] tracking-[0.3em]">
+                已對帳 · {inbox.total} 場
+              </p>
+              <p className="font-mono text-mute/80 text-[11px] tracking-[0.04em] tabular">
+                <span className="text-gold">✓{settledHits}</span> 中 ·{" "}
+                <span className="text-loss/85">✕{inbox.total - settledHits}</span> 沒中
+              </p>
+            </div>
+            <div>
+              {inbox.items.map((item) => (
+                <SettlementRow key={item.matchId} item={item} />
+              ))}
+            </div>
+            <p className="mt-3 font-mono text-mute/45 text-[10px] tracking-[0.16em] leading-snug">
+              新的結算會回到最上面 · 也會在每頁右上角亮一個數字提醒你 · 命中、落空都留。
             </p>
-            <p className="text-bone text-base sm:text-lg font-light tracking-tight mb-2">
-              沒有新結算 · 你都對過帳了。
-            </p>
-            <p className="text-mute text-sm leading-relaxed max-w-md mx-auto mb-6">
-              你押過、賽前鎖死的 <span className="text-bone tabular">{inbox.total}</span> 場都已逐筆對完。
-              新的結算會回到這裡 · 也會在每頁右上角亮一個數字提醒你。
-            </p>
-            <Link
-              href="/member/collection"
-              className="inline-block px-6 py-2.5 bg-gold text-navy font-mono text-[10px] tracking-[0.3em] hover:bg-gold-soft transition-colors"
-            >
-              看完整戰功卡收藏 →
-            </Link>
-          </div>
+          </section>
         ) : (
           <>
             {/* 新結算(你不在時才結算的)· 含輸誠實掛總帳(✓ 中 · ✕ 沒中 同權重)*/}

@@ -36,8 +36,12 @@ export default async function CollectionPage() {
   // 你的未結算押注(賽前鎖、還沒結算)+ 今晚真實可押(on-ramp)· 只在登入時算。
   let openPositions: OpenPosition[] = [];
   let tonight: TonightGame[] = [];
+  let hasAnyPicks = false;
   if (user) {
     const predictionsMap = await getMyPredictionsMap();
+    // 押過任何一手(含已結算的大小分)→ 別對他喊「去押第一手」· 玩法卡還沒進收藏畫廊,
+    // 但他的對帳都在收件匣 · 空狀態改成導去收件匣(不是死路 / 不裝新手)。 R261
+    hasAnyPicks = Object.keys(predictionsMap).length > 0;
     // MLB live 窗(graceful:API 掛了退空 → 退回 CPBL · 不讓頁 500)。
     let mlbLive: Match[] = [];
     try {
@@ -85,6 +89,7 @@ export default async function CollectionPage() {
             <CollectionWall
               settled={settled}
               hasPending={openPositions.length > 0}
+              hasAnyPicks={hasAnyPicks}
               tonight={tonight}
             />
           </>

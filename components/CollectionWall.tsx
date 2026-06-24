@@ -25,11 +25,14 @@ export type TonightGame = {
 export default function CollectionWall({
   settled,
   hasPending = false,
+  hasAnyPicks = false,
   tonight = [],
 }: {
   settled: SettledCard[];
   /** 上方「你的未結算押注」區有沒有東西(有 → 軟化空文案:卡正在生,不說「空」)。 */
   hasPending?: boolean;
+  /** 押過任何一手(含已結算的大小分玩法)· 有 → 別喊「去押第一手」· 導去收件匣對帳。 R261 */
+  hasAnyPicks?: boolean;
   /** 今晚還沒押、賽前可鎖的場(把第一個真實動作搬到空頁上 · 0 場 → 退回單純 CTA)。 */
   tonight?: TonightGame[];
 }) {
@@ -73,6 +76,31 @@ export default function CollectionWall({
             上面那幾手已經<span className="text-bone">鎖死、改不了</span> —— 等第一場打完結算,
             就翻成你第一張刪不掉的戰功卡。 含輸照收,因為<span className="text-gold">敢留輸的</span>,別人偽造不了。
           </p>
+        </div>
+      );
+    }
+
+    // ── 押過、但戰功卡頁沒卡(大小分玩法已結算、卡還沒進畫廊)→ 別裝新手喊「去押第一手」·
+    //    導去收件匣(他的逐筆對帳都在那)。 R261 founder dogfood:大小分玩家結算後別兩頭空。 ──
+    if (hasAnyPicks) {
+      return (
+        <div className="mt-6 border border-line/60 bg-slate/30 p-8 sm:p-10 text-center">
+          <p className="font-mono text-gold/80 text-[10px] tracking-[0.35em] mb-3">
+            / 你的對帳都在收件匣
+          </p>
+          <p className="text-bone text-base sm:text-lg font-light tracking-tight mb-2">
+            你押過的場,逐筆都在收件匣對帳。
+          </p>
+          <p className="text-mute text-sm leading-relaxed max-w-md mx-auto mb-6">
+            <span className="text-bone">大小分</span>這類玩法目前先在收件匣逐筆攤(中沒中都掛)——
+            戰功卡<span className="text-gold">圖卡收藏</span>正在補上玩法版,補好就自動長進這面牆。
+          </p>
+          <Link
+            href="/member/inbox"
+            className="inline-block px-6 py-2.5 bg-gold text-navy font-mono text-[10px] tracking-[0.3em] hover:bg-gold-soft transition-colors"
+          >
+            去收件匣逐筆對帳 →
+          </Link>
         </div>
       );
     }
