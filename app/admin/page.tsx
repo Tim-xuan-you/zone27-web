@@ -113,6 +113,20 @@ export default async function AdminPage() {
             />
             <KpiCard zh="引擎版本" value="v0.2" hint="逐打席模型" />
           </div>
+
+          {/* ── 客群洞察入口(第一方 · 0 追蹤)── */}
+          <Link
+            href="/admin/insights"
+            className="mt-4 flex items-baseline justify-between gap-3 border border-gold/30 bg-gold/[0.04] hover:border-gold/50 hover:bg-gold/[0.06] transition-colors px-4 py-3 group"
+          >
+            <span className="min-w-0 text-bone text-sm leading-snug">
+              想知道<span className="text-gold">誰在用、押什麼、會不會回來</span>?
+              <span className="text-mute/70"> 挖你自己的押注帳本 · 0 追蹤、0 像素</span>
+            </span>
+            <span className="shrink-0 font-mono text-gold/80 group-hover:text-gold text-[10px] tracking-[0.25em]">
+              看洞察 →
+            </span>
+          </Link>
         </section>
 
         {/* ── 不裝追蹤(收合成一段)── */}
