@@ -1,9 +1,9 @@
-import Link from "next/link";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import YourRecordStrip from "@/components/YourRecordStrip";
 import SportToggle from "@/components/SportToggle";
 import LadderBoard from "@/components/LadderBoard";
+import LadderClimbCTA from "@/components/LadderClimbCTA";
 import { getFinalizedMatches, getMatchStartIso } from "@/lib/matches";
 import { getMlbFinalizedResults } from "@/lib/mlb-matches";
 import { getLadderBoard } from "@/lib/ladder-server";
@@ -162,34 +162,9 @@ export default async function LadderPage() {
           </p>
         </div>
 
-        {/* ── 王座狀態 + 去押 ──────────────────── */}
-        <div className="mt-10 border-t border-line/40 pt-8">
-          {board.show ? (
-            <>
-              <p className="text-bone text-base leading-relaxed mb-1">
-                榜上有人了 —— 換你擠上去。
-              </p>
-              <p className="text-mute text-sm leading-relaxed mb-6">
-                押滿 10 場、那個月還贏過引擎,你也會出現在上面。 含贏含輸、刪不掉。
-              </p>
-            </>
-          ) : (
-            <>
-              <p className="text-bone text-base leading-relaxed mb-1">
-                現在 · 王座上只有機器。
-              </p>
-              <p className="text-mute text-sm leading-relaxed mb-6">
-                第一個贏過它的人類,還沒出現。 換你了。
-              </p>
-            </>
-          )}
-          <Link
-            href="/matches"
-            className="inline-block px-7 py-3 bg-gold text-navy font-mono text-xs tracking-[0.3em] hover:bg-gold-soft transition-colors"
-          >
-            {board.show ? "去押 · 擠上榜 →" : "去押第一注 →"}
-          </Link>
-        </div>
+        {/* ── 王座狀態 + 去押(認得本人 · client island · 不對有戰績的人喊「第一注」)──────
+            board.show(跨用戶榜亮沒)是 server 真相 → 當 prop 傳;本人押了幾場是 client 端讀。 */}
+        <LadderClimbCTA boardShown={board.show} matchResults={matchResults} />
       </main>
 
       <Footer />
