@@ -8819,6 +8819,35 @@
       "verdict": null
     },
     {
+      "gamePk": 823612,
+      "gameDate": "2026-06-25T23:10:00Z",
+      "scheduleDate": "2026-06-25",
+      "homeId": 121,
+      "homeEn": "New York Mets",
+      "homeRecord": "34-44",
+      "awayId": 112,
+      "awayEn": "Chicago Cubs",
+      "awayRecord": "41-37",
+      "homePitcher": "Freddy Peralta",
+      "awayPitcher": "Matthew Boyd",
+      "homeStats": {
+        "era": "4.83",
+        "k9": "8.72",
+        "bb9": "3.57",
+        "hr9": "1.26"
+      },
+      "awayStats": {
+        "era": "6.00",
+        "k9": "11.63",
+        "bb9": "2.25",
+        "hr9": "0.75"
+      },
+      "engineWinHomePct": 50,
+      "lockedAt": "2026-06-24T17:09:09.871Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
       "gamePk": 823042,
       "gameDate": "2026-06-25T23:45:00Z",
       "scheduleDate": "2026-06-25",
@@ -8844,6 +8873,35 @@
       },
       "engineWinHomePct": 66,
       "lockedAt": "2026-06-23T20:13:24.590Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 823039,
+      "gameDate": "2026-06-27T00:15:00Z",
+      "scheduleDate": "2026-06-26",
+      "homeId": 138,
+      "homeEn": "St. Louis Cardinals",
+      "homeRecord": "42-35",
+      "awayId": 146,
+      "awayEn": "Miami Marlins",
+      "awayRecord": "41-39",
+      "homePitcher": "Dustin May",
+      "awayPitcher": "Max Meyer",
+      "homeStats": {
+        "era": "4.30",
+        "k9": "8.28",
+        "bb9": "2.37",
+        "hr9": "0.75"
+      },
+      "awayStats": {
+        "era": "2.80",
+        "k9": "10.20",
+        "bb9": "3.40",
+        "hr9": "0.80"
+      },
+      "engineWinHomePct": 44,
+      "lockedAt": "2026-06-24T17:09:09.871Z",
       "finalScore": null,
       "verdict": null
     }
