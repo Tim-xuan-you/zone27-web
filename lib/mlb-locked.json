@@ -9107,6 +9107,35 @@
       "verdict": null
     },
     {
+      "gamePk": 824423,
+      "gameDate": "2026-06-26T23:10:00Z",
+      "scheduleDate": "2026-06-26",
+      "homeId": 114,
+      "homeEn": "Cleveland Guardians",
+      "homeRecord": "42-39",
+      "awayId": 136,
+      "awayEn": "Seattle Mariners",
+      "awayRecord": "41-40",
+      "homePitcher": "Joey Cantillo",
+      "awayPitcher": "Luis Castillo",
+      "homeStats": {
+        "era": "4.05",
+        "k9": "8.55",
+        "bb9": "4.16",
+        "hr9": "1.24"
+      },
+      "awayStats": {
+        "era": "5.22",
+        "k9": "8.79",
+        "bb9": "3.18",
+        "hr9": "1.15"
+      },
+      "engineWinHomePct": 58,
+      "lockedAt": "2026-06-25T17:17:47.487Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
       "gamePk": 823688,
       "gameDate": "2026-06-27T00:10:00Z",
       "scheduleDate": "2026-06-26",
@@ -9190,6 +9219,122 @@
       },
       "engineWinHomePct": 61,
       "lockedAt": "2026-06-25T04:06:28.928Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 824745,
+      "gameDate": "2026-06-27T17:10:00Z",
+      "scheduleDate": "2026-06-27",
+      "homeId": 111,
+      "homeEn": "Boston Red Sox",
+      "homeRecord": "32-46",
+      "awayId": 147,
+      "awayEn": "New York Yankees",
+      "awayRecord": "48-31",
+      "homePitcher": "Jake Bennett",
+      "awayPitcher": "Gerrit Cole",
+      "homeStats": {
+        "era": "3.71",
+        "k9": "7.43",
+        "bb9": "1.69",
+        "hr9": "0.34"
+      },
+      "awayStats": {
+        "era": "3.62",
+        "k9": "8.07",
+        "bb9": "2.51",
+        "hr9": "1.39"
+      },
+      "engineWinHomePct": 59,
+      "lockedAt": "2026-06-25T17:17:47.487Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 824581,
+      "gameDate": "2026-06-27T20:10:00Z",
+      "scheduleDate": "2026-06-27",
+      "homeId": 145,
+      "homeEn": "Chicago White Sox",
+      "homeRecord": "41-38",
+      "awayId": 118,
+      "awayEn": "Kansas City Royals",
+      "awayRecord": "34-47",
+      "homePitcher": "Davis Martin",
+      "awayPitcher": "Michael Wacha",
+      "homeStats": {
+        "era": "3.18",
+        "k9": "8.93",
+        "bb9": "2.36",
+        "hr9": "0.62"
+      },
+      "awayStats": {
+        "era": "3.48",
+        "k9": "6.86",
+        "bb9": "2.58",
+        "hr9": "0.89"
+      },
+      "engineWinHomePct": 61,
+      "lockedAt": "2026-06-25T17:17:47.487Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 824421,
+      "gameDate": "2026-06-27T23:10:00Z",
+      "scheduleDate": "2026-06-27",
+      "homeId": 114,
+      "homeEn": "Cleveland Guardians",
+      "homeRecord": "42-39",
+      "awayId": 136,
+      "awayEn": "Seattle Mariners",
+      "awayRecord": "41-40",
+      "homePitcher": "Slade Cecconi",
+      "awayPitcher": "Logan Gilbert",
+      "homeStats": {
+        "era": "4.48",
+        "k9": "7.04",
+        "bb9": "2.88",
+        "hr9": "1.28"
+      },
+      "awayStats": {
+        "era": "3.29",
+        "k9": "9.68",
+        "bb9": "2.13",
+        "hr9": "1.35"
+      },
+      "engineWinHomePct": 44,
+      "lockedAt": "2026-06-25T17:17:47.487Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 823283,
+      "gameDate": "2026-06-28T00:40:00Z",
+      "scheduleDate": "2026-06-27",
+      "homeId": 135,
+      "homeEn": "San Diego Padres",
+      "homeRecord": "42-37",
+      "awayId": 119,
+      "awayEn": "Los Angeles Dodgers",
+      "awayRecord": "52-29",
+      "homePitcher": "Randy Vásquez",
+      "awayPitcher": "Yoshinobu Yamamoto",
+      "homeStats": {
+        "era": "4.17",
+        "k9": "6.84",
+        "bb9": "2.90",
+        "hr9": "1.27"
+      },
+      "awayStats": {
+        "era": "2.65",
+        "k9": "8.44",
+        "bb9": "1.67",
+        "hr9": "0.98"
+      },
+      "engineWinHomePct": 43,
+      "lockedAt": "2026-06-25T17:17:47.487Z",
       "finalScore": null,
       "verdict": null
     }
