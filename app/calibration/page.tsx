@@ -7,7 +7,11 @@ import PatronAsk from "@/components/PatronAsk";
 import SportToggle from "@/components/SportToggle";
 import ReliabilityDiagram from "@/components/ReliabilityDiagram";
 import { getFinalizedMatches } from "@/lib/matches";
-import { computeBaseballBins, type CalibrationBin } from "@/lib/calibration";
+import {
+  computeBaseballBins,
+  summarizeBins,
+  type CalibrationBin,
+} from "@/lib/calibration";
 import {
   computeSoccerBins,
   getSoccerGradedCount,
@@ -67,6 +71,9 @@ export default function CalibrationPublicPage() {
   const finalized = getFinalizedMatches();
   const n = finalized.length;
   const bins = computeBaseballBins(finalized);
+  // R264 · 把「白話判決」一句提到 hero:h1 問「說 X% 時實際贏多少」,用棒球分箱壓出
+  // 一句總結直接回答(同上方「已結算 N 場」badge 都是棒球為主)· 逐桶細節仍在圖下方。
+  const summary = summarizeBins(bins);
   // 氣勢反轉證物(R239)· 從官方賽果自動撈最近一組「同兩隊、隔幾天、贏家換邊」的戲劇反轉,
   // 把上面「沒有神準 / 別跟氣勢」的論點換成一筆真資料。 找不到 → null → 整段不顯示(graceful)。
   const reversal = getLatestMomentumReversal();
@@ -110,6 +117,34 @@ export default function CalibrationPublicPage() {
               <span className="text-gold">一張圖攤開</span>。 命中落空都算、刪不掉。
             </p>
           </div>
+
+          {/* ── 答案先講 ─────────────────────────────────
+              「白話判決」一句提到 hero(原本只藏在圖下方、SportToggle 後)· 直接回答 h1 的問題。
+              decided>0 → 一句話講「喊看好的那邊、實際中幾成」;=0 → graceful 改成「第一場後寫在這」。 */}
+          {summary.decided > 0 ? (
+            <div className="mt-7 max-w-2xl">
+              <p className="font-mono text-gold/70 text-[10px] tracking-[0.4em] mb-2">
+                / 答案先講
+              </p>
+              <p className="text-bone text-lg sm:text-xl leading-relaxed">
+                到目前 · 引擎喊看好的那一邊,{" "}
+                <span className="font-mono tabular text-gold">{summary.decided}</span> 場裡實際中了{" "}
+                <span className="font-mono tabular text-gold">
+                  {Math.round(summary.favoriteHitPct)}%
+                </span>
+                。
+                {summary.decided < 30 && (
+                  <span className="block mt-1.5 text-mute text-base">
+                    還不到 30 場 · 先當暖身,多打幾場這個數字才真的算數。
+                  </span>
+                )}
+              </p>
+            </div>
+          ) : (
+            <p className="mt-7 text-mute text-base leading-relaxed max-w-2xl">
+              第一場結算後 · 這裡就直接用一句話寫出「引擎喊看好的、實際中了幾成」—— 命中落空都算進去。
+            </p>
+          )}
         </section>
 
         <div className="mx-auto w-32 gold-line mb-12" />
@@ -143,6 +178,27 @@ export default function CalibrationPublicPage() {
               所以任何宣稱「<span className="text-loss/90">94% 勝率</span>」「鐵口神準」的,
               <strong className="text-bone">數學上不可能</strong>。
               我們不比別人準 —— 我們敢把這道 5 成 7 的天花板掛出來、還讓你逐場對帳。
+            </p>
+          </div>
+
+          {/* R264 · 從 /how-we-grade「兩把尺」蒸餾一句到前線:純數學、不點名(Tim「別太樹敵」)——
+              戰績越接近全中,通常不是越準,而是評分的尺越鬆。 解釋了為什麼這條校準線要嚴。 */}
+          <div className="mt-8 border border-line/60 bg-slate/30 p-5 sm:p-6 max-w-2xl">
+            <p className="text-bone leading-relaxed">
+              還有一件事跟數學一樣硬:<strong>評分的尺越鬆 · 戰績就越漂亮</strong>。
+            </p>
+            <p className="mt-3 text-mute leading-relaxed">
+              把「看好的隊只要沒輸、連和局都算中」,命中率自然就衝高 —— 但那是尺的功勞,不是準度。
+              我們反過來:看好某隊「贏」、結果和局,一律算{" "}
+              <span className="text-loss/90">落空</span>;真・五五波不算。 尺嚴到自己難看,
+              這條校準線才量得到真的中、而不是被尺放大的中。{" "}
+              <Link
+                href="/how-we-grade"
+                className="text-gold underline-offset-4 hover:underline"
+              >
+                看我們怎麼算贏輸
+              </Link>
+              。
             </p>
           </div>
         </section>

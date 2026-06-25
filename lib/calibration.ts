@@ -18,6 +18,33 @@ export type CalibrationBin = {
   favoriteActualPct: number;
 };
 
+/** 把整組分箱壓成一句白話判決用的數字(/calibration hero「答案先講」)。 */
+export type CalibrationSummary = {
+  /** 引擎明確看好一邊(fav>50)、且已結算非和局的總場數 = 分箱場數加總。 */
+  decided: number;
+  /** 這些場裡、引擎看好邊實際中的整體比例 0-100(場數加權)。 */
+  favoriteHitPct: number;
+};
+
+/**
+ * 把 computeBaseballBins / computeTennisBins / computeSoccerBins 任一輸出
+ * 壓成單一「喊看好的那邊、實際中幾成」總結 · 純函式 · 不挑運動。
+ * 散點圖逐桶細節留在 <ReliabilityDiagram /> · 這個只給最上方一句話用。
+ */
+export function summarizeBins(bins: CalibrationBin[]): CalibrationSummary {
+  let decided = 0;
+  let favWins = 0;
+  for (const b of bins) {
+    decided += b.count;
+    // favoriteActualPct = favWins/count*100 · 還原整數場數避免浮點誤差。
+    favWins += Math.round((b.favoriteActualPct / 100) * b.count);
+  }
+  return {
+    decided,
+    favoriteHitPct: decided > 0 ? (favWins / decided) * 100 : 0,
+  };
+}
+
 /**
  * 棒球(CPBL)校準分箱 · 由 getFinalizedMatches() 餵入(同 /calibration)。
  * 10 寬箱、center 5,15,...,95 · favorite = winRate > 50 的那邊(真・五五波排除)。
