@@ -89,6 +89,59 @@ function mergePitcherStats(p: PitcherStats): PitcherStats {
 }
 
 const rawMatches: Match[] = [
+  // ── 2026-06-26 · 一軍 ingest(週五)· Tim 截圖 cpbl.com.tw 賽程 + 先發投手成績表 ──
+  //   投手值由官網累計成績表(IP/K/BB/HR)換算 · 標 estimate(自 Tim 截圖手抄)· winRate 手 curate。
+  //   新莊 · 樂天(威能帝 away)vs 富邦(鈴木駿輔 home)· W-L 樂天 21-32-2(.396 後段)/ 富邦 31-25-0(.554)。
+  //     拉鋸:富邦隊強(.554 vs .396 · 記錄面 Log5 約 65%)+ 主場,但今天先發倒過來幫樂天 —— 樂天威能帝
+  //     2026 ERA 1.62 / WHIP 0.87 / K9 11.6 / 被打 .203(真王牌 · 2025 2.01 · 15-2 · 170 局 → 低回歸風險)
+  //     明顯壓過富邦鈴木駿輔 ERA 2.42 / WHIP 1.08 / K9 8.7(穩定中段 · 2025 2.51)。 隊強+主場 vs 對方王牌
+  //     兩股力量大幅抵掉 → 富邦 54 / 樂天 46 · conf 51(富邦隊底+主場略蓋,但威能帝把樂天撐到很接近 → 不是
+  //     穩贏、低 conviction;王牌單場能扛弱隊)。 ⚠️ winRate 是分析判斷,Tim 可調。
+  //   ⏳ 第二場(洲際 · 台鋼 坎南 vs 中信 羅戈)待 Tim 補「坎南」先發成績表 → 補齊再開盤(羅戈已有自動資料)。
+  {
+    id: "cpbl-260626-01",
+    league: "CPBL",
+    date: "2026 · 06 · 26  ·  星期五",
+    startTime: "18:35",
+    venue: "新莊棒球場",
+    home: {
+      name: "富邦悍將",
+      en: "GUARDIANS",
+      pitcher: {
+        name: "鈴木駿輔",
+        era: "2.42", // estimate · 2026 官網累計成績表(Tim 截圖手抄)· 52 IP(9 先發)· 穩定中段(2025 2.51)
+        k9: "8.7", // estimate · 50 K / 52 IP × 9
+        whip: "1.08", // estimate · 官網每局被上壘率 1.076(43 H + 13 BB / 52 IP)
+        bb9: "2.3", // estimate · 13 BB / 52 IP × 9
+        hr9: "0.52", // estimate · 3 HR / 52 IP × 9
+      },
+      recent: ["W", "W", "L", "W", "L"], // placeholder · 富邦 31-25-0(.554)
+      winRate: 54,
+    },
+    away: {
+      name: "樂天桃猿",
+      en: "MONKEYS",
+      pitcher: {
+        name: "威能帝",
+        era: "1.62", // estimate · 2026 官網累計成績表(Tim 截圖手抄)· 33.1 IP(6 先發)· 真王牌(2025 2.01 · 15-2 · 170 局)
+        k9: "11.6", // estimate · 43 K / 33.1 IP × 9 · 頂級三振
+        whip: "0.87", // estimate · 官網每局被上壘率 0.870(25 H + 4 BB / 33.1 IP)· 頂級
+        bb9: "1.1", // estimate · 4 BB / 33.1 IP × 9 · 頂級控球
+        hr9: "0.00", // estimate · 0 HR / 33.1 IP · 完全沒被轟
+      },
+      recent: ["L", "L", "W", "L", "L"], // placeholder · 樂天 21-32-2(.396 後段)
+      winRate: 46,
+    },
+    topScores: [
+      // 威能帝壓制(富邦低分)+ 鈴木穩定(樂天也難大量得分)→ 低分;富邦隊強+主場微 lean(格式 home : away = 富邦 : 樂天)
+      { score: "3 : 2", probability: 8.5 },
+      { score: "2 : 1", probability: 8.0 },
+      { score: "3 : 1", probability: 7.5 },
+      { score: "2 : 3", probability: 7.0 },
+      { score: "1 : 2", probability: 7.0 },
+    ],
+    aiConfidence: 51,
+  },
   // ── 2026-06-25 · 一軍 ingest(週四)· Tim 截圖 cpbl.com.tw 賽程 + 先發投手成績表 ──
   //   投手值由官網累計成績表(IP/K/BB/HR)換算 · 標 estimate(自 Tim 截圖手抄)· winRate 手 curate。
   //   ✅ 兩場齊開(Tim 補上第二場 魔爾曼/羅戈 先發投手成績表 → #165 半場資料補齊、同步開盤)。
