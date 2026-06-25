@@ -175,8 +175,9 @@ export const TENNIS_DRAW: TennisMatch[] = [
     a: { zh: "巴索里貝菈", en: "Marina Bassols Ribera", rank: 143, confidence: "high" },
     b: { zh: "王曦雨", en: "Wang Xiyu", rank: 86, confidence: "high" } },
   { id: "tn-2051", tour: "wta", tournament: "溫布頓網球公開賽", surface: "grass", time: "6/25",
-    a: { zh: "J.德裡德姆", en: "?", rank: null, confidence: "low" },
-    b: { zh: "瑪麗亞.卡萊", en: "Maria Lourdes Carle", rank: 148, confidence: "high" } },
+    a: { zh: "J.德裡德姆", en: "Jeline Vandromme", rank: null, confidence: "low" },
+    b: { zh: "瑪麗亞.卡萊", en: "Maria Lourdes Carle", rank: 148, confidence: "high" },
+    finalResult: { winner: "a", score: "6-7 6-4 6-3" } },
 
   // ── WTA · 伊斯特本公開賽(草地)─────────────────────────────
   { id: "tn-2046", tour: "wta", tournament: "伊斯特本公開賽", surface: "grass", time: "6/24 22:50",
