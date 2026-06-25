@@ -239,13 +239,19 @@ export default function TennisPage() {
 
         {/* ── 誰能捧盃 · 草地實力榜(奪冠熱門 · 與上方今日對戰分開)── */}
         <section className="mx-auto max-w-6xl w-full px-6 sm:px-10 pb-8 pt-4 border-t border-line/50">
-          <h2 className="text-2xl sm:text-3xl text-bone font-light tracking-tight mb-2">
-            誰能捧盃 · 草地實力榜
-          </h2>
+          <div className="flex items-baseline gap-x-3 gap-y-1 mb-2 flex-wrap">
+            <h2 className="text-2xl sm:text-3xl text-bone font-light tracking-tight">
+              誰能捧盃 · 草地實力榜
+            </h2>
+            <span className="font-mono text-gold/75 text-[9px] tracking-[0.25em] px-2 py-0.5 border border-gold/30 shrink-0">
+              編輯快照 · 2026-06-24 溫網前
+            </span>
+          </div>
           <p className="text-mute/70 text-[13px] leading-relaxed mb-6 max-w-2xl">
             上面是今天運彩在賣的場;這裡是引擎對<span className="text-bone">奪冠熱門</span>的草地戰力
-            排序 —— 從公開排名 + 近年草地戰績種子化的<span className="text-bone">編輯估計值</span>
-            (不是官方數據,隨真實賽果更新)。 引擎只看實力分:沒看臨場傷停 / 天氣 / 心理。
+            排序 —— 從公開排名 + 近年草地戰績種子化的<span className="text-bone">編輯估計值</span>。
+            這份是<span className="text-bone">人工定版的賽前快照</span>、<span className="text-bone">不會自己跳動</span> ——
+            溫網開打後我們隨賽果手動校正(同我們不留會發霉的舊榜)。 不是官方數據;引擎只看實力分:沒看臨場傷停 / 天氣 / 心理。
           </p>
           <div className="grid gap-8 lg:grid-cols-2">
             <div>
