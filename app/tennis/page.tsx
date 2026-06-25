@@ -132,16 +132,16 @@ export default function TennisPage() {
           </h1>
           <p className="mt-4 text-mute text-sm leading-relaxed max-w-2xl">
             台灣運彩在賣的每一場網球 —— 溫網會外賽、草地熱身賽 —— 我們的引擎用
-            <span className="text-bone">排名換算的實力分</span>逐場開出勝率(表面校正 Elo,
-            跟 FiveThirtyEight、Tennis Abstract 同一套)。 <span className="text-bone">這不是盤口</span>。
+            <span className="text-bone">排名換算的實力分</span>逐場開出勝率。 <span className="text-bone">這不是盤口</span>。
           </p>
 
-          {/* 🔴 誠實框架(本頁第一要務)— 校準不是準度 */}
+          {/* 🔴 誠實框架(本頁第一要務 · 防「看起來準=神準」誤讀)· R263 板上一句帶過 · 細節 → /engines#tennis */}
           <div className="mt-5 border-l-2 border-gold/50 pl-4 text-mute text-[13px] sm:text-sm leading-relaxed max-w-2xl">
             <p>
-              網球會<span className="text-bone">看起來比棒球準</span> —— 那不是我們變天才,是網球
-              <span className="text-bone">本來就好預測</span>(一個人控制每一球、五盤三勝磨平運氣)。
-              我們的考驗是<span className="text-gold">校準</span>:喊 70%,長期就該中 70%。
+              網球<span className="text-bone">看起來準是因為好預測、不是神準</span> —— 真正的尺是<span className="text-gold">校準</span>。{" "}
+              <Link href="/engines#tennis" className="text-gold/80 hover:text-gold underline-offset-4 hover:underline">
+                怎麼算、活校準曲線 →
+              </Link>
             </p>
           </div>
 

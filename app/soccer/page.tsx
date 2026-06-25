@@ -92,7 +92,10 @@ export default async function SoccerPage() {
             我們<span className="text-gold">自己算</span>的勝 / 平 / 負
           </h1>
           <p className="mt-4 text-mute text-sm leading-relaxed max-w-2xl">
-            這不是莊家的盤口 —— 是我們的推演引擎<span className="text-bone">自己算出來</span>的勝 / 平 / 負。 足球三選一,全世界沒人(莊家也是)能算到八九成,<span className="text-bone">敢喊穩贏的都在騙你</span>。 賽前鎖死、賽後逐場對帳、連輸都留。
+            不是莊家的盤口 —— 是我們的引擎<span className="text-bone">自己算出來</span>的勝 / 平 / 負。 <span className="text-bone">敢喊穩贏的都在騙你</span>;我們賽前鎖死、賽後逐場對帳、連輸都留。{" "}
+            <Link href="/engines#soccer" className="text-gold/80 hover:text-gold underline-offset-4 hover:underline">
+              怎麼算、會錯幾成 →
+            </Link>
           </p>
           {/* 傷兵盲點 = 誠實揭露 + costly signal(頁面層講一次 · 不塞每張卡 = 守卡片「不重複盲點清單」紀律)。
               把「引擎沒看傷停」翻成「你的判斷比引擎值錢」的入口:這正是賭徒該下手反向押的地方。 */}
