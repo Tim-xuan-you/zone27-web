@@ -179,7 +179,10 @@ export const TENNIS_DRAW: TennisMatch[] = [
   // ── WTA · 伊斯特本公開賽(草地)─────────────────────────────
   { id: "tn-2046", tour: "wta", tournament: "伊斯特本公開賽", surface: "grass", time: "6/24 22:50",
     a: { zh: "金伯莉.比爾賴", en: "Kimberly Birrell", rank: 73, confidence: "high" },
-    b: { zh: "P.馬琴科", en: "?", rank: null, confidence: "low" } },
+    // 馬琴科原本英文名查不到("?")→ 自動結算靠英文名比對 → 配不到。 Tim 補上 Petra Marcinko +
+    //   官方賽果 → 手動結算(手動永遠優先)。 rank 仍留空:賽前沒誠實開盤,不回頭補假引擎線(不進引擎戰績)。
+    b: { zh: "P.馬琴科", en: "Petra Marcinko", rank: null, confidence: "low" },
+    finalResult: { winner: "b", score: "6-1 6-4" } },
 
   // ── WTA · 巴特洪堡公開賽(草地)─────────────────────────────
   { id: "tn-2136", tour: "wta", tournament: "巴特洪堡公開賽", surface: "grass", time: "6/24 23:00",
