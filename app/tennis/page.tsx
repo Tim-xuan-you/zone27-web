@@ -13,7 +13,7 @@ import {
   gradeTennisEngine,
   tennisResults,
   tennisEnginePicks,
-  bettable,
+  matchStartISO,
 } from "@/lib/tennis/matches";
 import {
   grassContenders,
@@ -85,20 +85,26 @@ function ContenderRow({ p, idx }: { p: TennisPlayer; idx: number }) {
 
 export default function TennisPage() {
   const groups = drawGroups();
-  // 🔴 Tim 鐵律:上方看板只擺「現在真的能下注」的場 —— 不能押又不是結果的卡(沒開賽時戳的殭屍卡 /
-  //   已開賽待對帳)一律不擺(他原話:「不能下注、比賽結束就收掉」)。 已結算 → 收進下方「已完場」區。
-  //   open = 可押(bettable 非 null:還沒結算 + 有開賽時戳)且「還沒開打」(開賽時戳 > 現在)。
-  //   已開賽待結算的場 → 暫時不擺(賽後自動結算 / Tim 手動補,結算完自然出現在「已完場」)。
+  // 🔴 三態看板(Tim:比賽中的卡別消失 · 走地用戶要參考 · 棒球/足球/網球一致)· 對應用戶旅程
+  //   「決定 → 看球 → 對帳」:
+  //     ① 可押(賽前):還沒結算 + 還沒開打 → 上方,能鎖一手。
+  //     ② 進行中(賽事進行中):還沒結算 + 已開打(或沒精確時戳的非結算場)→ 中間,賽前已封盤、
+  //        但卡留著當「直播參考」(球員 + 引擎賽前判讀 + 你鎖的那手)· 比賽進行中正是最投入的時刻,
+  //        這時抽掉卡 = 在高潮把舞台撤了。
+  //     ③ 已完場:結算 → 下方對帳。
   const now = Date.now();
-  const isOpenForBet = (m: (typeof groups)[number]["matches"][number]) => {
-    const b = bettable(m);
-    if (!b) return false; // 沒開賽時戳 / 已結算 → 不能押(殭屍卡不擺)
-    const t = Date.parse(b);
-    return !Number.isNaN(t) && t > now; // 還沒開打才擺看板(已開賽 → 等結算後進「已完場」)
+  type TMatch = (typeof groups)[number]["matches"][number];
+  const inPlay = (m: TMatch) => {
+    if (m.finalResult) return false;
+    const iso = matchStartISO(m);
+    if (!iso) return true; // 沒精確開賽時戳的非結算場 → 當「進行中/待對帳」(不消失 · 走地可參考)
+    const t = Date.parse(iso);
+    return Number.isNaN(t) ? true : t <= now; // 已開打
   };
   const openGroups = groups
-    .map((g) => ({ ...g, matches: g.matches.filter(isOpenForBet) }))
+    .map((g) => ({ ...g, matches: g.matches.filter((m) => !m.finalResult && !inPlay(m)) }))
     .filter((g) => g.matches.length > 0);
+  const liveMatches = groups.flatMap((g) => g.matches.filter(inPlay));
   const settledMatches = groups.flatMap((g) => g.matches.filter((m) => m.finalResult));
   const { total, lined } = drawCounts();
   const atp = grassContenders("atp");
@@ -172,6 +178,23 @@ export default function TennisPage() {
             ))}
           </div>
         </section>
+
+        {/* ── 進行中 · 賽事進行中(賽前已封盤 · 卡留著當直播參考 · 別在最投入時抽掉舞台)── */}
+        {liveMatches.length > 0 && (
+          <section className="mx-auto max-w-6xl w-full px-6 sm:px-10 pb-8">
+            <div className="flex items-baseline gap-3 mb-4 flex-wrap border-t border-line/50 pt-8">
+              <p className="font-mono text-gold/70 text-[10px] tracking-[0.4em]">進行中 · 賽事進行中</p>
+              <span className="font-mono text-mute/50 text-[9px] tracking-[0.2em]">
+                {liveMatches.length} 場 · 賽前已封盤 · 比賽中可參考 · 結算後進「已完場」
+              </span>
+            </div>
+            <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+              {liveMatches.map((m) => (
+                <TennisDrawCard key={m.id} match={m} />
+              ))}
+            </div>
+          </section>
+        )}
 
         {/* ── 已完場 · 引擎逐場對帳(收起來 · 不擋上面可押的場)── */}
         {settledMatches.length > 0 && (
