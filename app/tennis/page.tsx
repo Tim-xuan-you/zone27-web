@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import Avatar from "@/components/Avatar";
 import TennisDrawCard from "@/components/TennisDrawCard";
 import TennisRecordCard from "@/components/TennisRecordCard";
+import TrackRecordStrip from "@/components/TrackRecordStrip";
 import { createPageMetadata } from "@/lib/page-og";
 import { blendedRating } from "@/lib/tennis/engine";
 import {
@@ -213,34 +214,16 @@ export default function TennisPage() {
           </section>
         )}
 
-        {/* ── 公開戰績:引擎 + 你(含輸 · 賽前鎖定 → 賽後對帳)── */}
-        <section className="mx-auto max-w-6xl w-full px-6 sm:px-10 pb-8">
-          <div className="bg-slate/30 border border-line/60 p-5 sm:p-6">
-            <p className="font-mono text-gold/70 text-[10px] tracking-[0.4em] mb-2">
-              引擎公開戰績 · 含輸
-            </p>
-            {eng.n > 0 ? (
-              <p className="text-bone text-lg sm:text-xl font-light tracking-tight">
-                <span className="text-gold tabular">{eng.rate}%</span> 準 ·{" "}
-                <span className="text-gold tabular">✓{eng.hits}</span>{" "}
-                <span className="text-loss tabular">✕{eng.misses}</span>
-                <span className="text-mute/60 text-sm"> · {eng.n} 場已對帳</span>
-                {eng.pending > 0 && (
-                  <span className="text-mute/50 text-sm"> · {eng.pending} 場待結算</span>
-                )}
-              </p>
-            ) : (
-              <p className="text-mute text-sm leading-relaxed">
-                引擎已對 <span className="text-bone tabular">{eng.pending}</span> 場開盤、賽前鎖死 ·
-                <span className="text-bone"> 賽果建置中</span> —— 賽後逐場對帳,贏的輸的都會誠實掛在這。
-                (網球賽果由我們手動 curate · 同棒球)
-              </p>
-            )}
-            <p className="mt-2 font-mono text-mute/55 text-[9px] tracking-[0.12em] leading-snug">
-              引擎當初看好哪邊、賽後中沒中 · 含輸照算 · 真正的尺是校準不是準度。
-            </p>
-          </div>
-        </section>
+        {/* ── 公開戰績:引擎(glance strip → /track-record#tennis · 跟 /matches /soccer 同款同位)──
+            R263 · 板上不再放整段帳本(那段= /track-record 網球頁的 TennisEngineRecord 同一份)·
+            一行 chip 點進 /track-record 看完整逐場 · 全站三本帳一個家、各板一行 chip。 */}
+        <TrackRecordStrip
+          hits={eng.hits}
+          misses={eng.misses}
+          pending={eng.pending}
+          href="/track-record#tennis"
+          caption="網球熱門贏面天生高 · 看起來準是因為好預測,不是神準 —— 真正的尺是校準。"
+        />
 
         {/* 你的網球戰績(登入且押過才顯示 · client island · graceful) */}
         <TennisRecordCard

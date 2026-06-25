@@ -4,7 +4,6 @@ import SportTabs from "@/components/SportTabs";
 import Footer from "@/components/Footer";
 import SoccerMatchCard from "@/components/SoccerMatchCard";
 import SoccerRecordCard from "@/components/SoccerRecordCard";
-import SoccerEngineRecord from "@/components/SoccerEngineRecord";
 import TrackRecordStrip from "@/components/TrackRecordStrip";
 import { createPageMetadata } from "@/lib/page-og";
 import { getResolvedSoccerEngine } from "@/lib/soccer/engine-settle";
@@ -199,8 +198,9 @@ export default async function SoccerPage() {
           wrapperClass="mx-auto max-w-6xl w-full px-6 sm:px-10 pb-8"
         />
 
-        {/* 公開引擎戰績(賽前鎖定 · 賽後對帳 · 含輸照掛 · 三向)· 滿 30 場才報數字 */}
-        <SoccerEngineRecord />
+        {/* R263 · 引擎完整逐場戰績(SoccerEngineRecord)= /track-record#soccer 的同一個元件 ·
+            賽事板不再重複整段帳本(那是「protesting too much」)· 板上只留上方一行 glance 條
+            → /track-record#soccer 看完整。 全站三本帳:一個家(/track-record)· 各板一行 chip。 */}
       </main>
 
       <Footer />
