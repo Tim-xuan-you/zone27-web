@@ -46,16 +46,45 @@ const BASE = "https://www.cpbl.com.tw";
 const UA =
   "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36";
 
-// ── 1. 拿 CSRF token(DOM token + header token 成對 · cookie 選配) ──
-// ⚠️ 2026-06-13 修:cpbl.com.tw 改成「cookieless」防偽 —— GET /schedule 不再回 set-cookie
-//    (實測 set-cookie = null)。 POST 只認 DOM + header 兩個 token,不帶 cookie 也 Success:true
-//    (實測 148 場已打完、最新到當日)。 故 cookie 不再是必要條件:原本 `!cookie` 把整支卡死
-//    = 賽果鏡像從 6/08 起凍結 5 天的真因。 cookie 仍保留(萬一未來又設,順手帶上),但不強制。
+// ── 1. 拿 CSRF token(DOM token + header token + cookie) ──
+// ⚠️ 2026-06-25 修:cpbl.com.tw 又改防偽,把 cookie 加回來了 —— /schedule 現在是「cookie-gated
+//    轉址」:第一次無 cookie 進來 302 轉回自己 + Set-Cookie(__chtcdn / __RequestVerificationToken),
+//    沒帶 cookie 回去就無限轉。 Node 預設 redirect:"follow" **不跨轉址重送 cookie** → 永遠湊不到
+//    cookie → 「redirect count exceeded · fetch failed」整支炸掉 = 賽果鏡像從 6/12 起凍結 12 天、
+//    Action 每天寄失敗信的真因(推翻上一版「cookieless」假設)。
+//    修法:redirect:"manual" 手動跟轉址、跨 hop 累積 cookie jar → 拿到 200 + 兩 token + cookie,
+//    POST 再把 cookie 一起送(getSeason 已會帶)。 實測 200 / Success:true / 170 場已打完。
+async function getWithCookies(startUrl, jar = {}) {
+  let url = startUrl;
+  for (let i = 0; i < 10; i++) {
+    const cookieHdr = Object.entries(jar)
+      .map(([k, v]) => `${k}=${v}`)
+      .join("; ");
+    const res = await fetch(url, {
+      headers: { "User-Agent": UA, ...(cookieHdr ? { Cookie: cookieHdr } : {}) },
+      redirect: "manual",
+    });
+    for (const c of res.headers.getSetCookie?.() ?? []) {
+      const kv = c.split(";")[0];
+      const idx = kv.indexOf("=");
+      if (idx > 0) jar[kv.slice(0, idx).trim()] = kv.slice(idx + 1);
+    }
+    if (res.status >= 300 && res.status < 400) {
+      const loc = res.headers.get("location");
+      if (!loc) throw new Error(`redirect ${res.status} with no Location`);
+      url = loc.startsWith("http") ? loc : new URL(loc, url).href;
+      continue;
+    }
+    return { res, jar };
+  }
+  throw new Error("too many redirects on /schedule (cookie gate not clearing)");
+}
+
 async function getTokens() {
-  const res = await fetch(`${BASE}/schedule`, { headers: { "User-Agent": UA } });
+  const { res, jar } = await getWithCookies(`${BASE}/schedule`);
   if (!res.ok) throw new Error(`GET /schedule → HTTP ${res.status}`);
-  const cookie = (res.headers.getSetCookie?.() ?? [])
-    .map((c) => c.split(";")[0])
+  const cookie = Object.entries(jar)
+    .map(([k, v]) => `${k}=${v}`)
     .join("; ");
   const html = await res.text();
   const dom = html.match(/__RequestVerificationToken"[^>]*value="([^"]+)"/)?.[1];
