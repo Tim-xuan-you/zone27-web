@@ -5,7 +5,9 @@ import Footer from "@/components/Footer";
 import CopyLinkButton from "@/components/CopyLinkButton";
 import PatronAsk from "@/components/PatronAsk";
 import SportToggle from "@/components/SportToggle";
-import { getFinalizedMatches, type Match } from "@/lib/matches";
+import ReliabilityDiagram from "@/components/ReliabilityDiagram";
+import { getFinalizedMatches } from "@/lib/matches";
+import { computeBaseballBins, type CalibrationBin } from "@/lib/calibration";
 import {
   computeSoccerBins,
   getSoccerGradedCount,
@@ -61,51 +63,10 @@ export const metadata: Metadata = {
 // 1 天 ISR 會讓世界盃開踢後標籤最久延遲 24h(說謊)。 1h ISR 收緊到跟 /soccer 一致。
 export const revalidate = 3600;
 
-type Bin = {
-  centerPct: number;
-  count: number;
-  favoriteActualPct: number; // 0-100
-};
-
-// Bin finalized matches by engine probability on favorite(10-wide bins)。
-// Center positions: 5, 15, ..., 95(10-wide bins from 0-10, 10-20, ..., 90-100)。
-function computeBins(finalized: Match[]): Bin[] {
-  const buckets: Map<number, { favoriteWins: number; total: number }> = new Map();
-
-  for (const m of finalized) {
-    if (!m.finalResult) continue;
-    const fr = m.finalResult;
-    const enginePctFav = Math.max(m.home.winRate, m.away.winRate);
-    if (enginePctFav <= 50) continue; // 排除真・五五波(50)· 不讓銅板局假裝有 favorite
-    const binIndex = Math.min(Math.floor(enginePctFav / 10), 9);
-    const centerPct = binIndex * 10 + 5;
-
-    const homeFav = m.home.winRate >= m.away.winRate;
-    const favoriteWon =
-      (homeFav && fr.winner === "home") || (!homeFav && fr.winner === "away");
-
-    if (!buckets.has(centerPct))
-      buckets.set(centerPct, { favoriteWins: 0, total: 0 });
-    const b = buckets.get(centerPct)!;
-    b.total++;
-    if (favoriteWon) b.favoriteWins++;
-  }
-
-  return Array.from(buckets.entries())
-    .map(
-      ([centerPct, { favoriteWins, total }]): Bin => ({
-        centerPct,
-        count: total,
-        favoriteActualPct: (favoriteWins / total) * 100,
-      })
-    )
-    .sort((a, b) => a.centerPct - b.centerPct);
-}
-
 export default function CalibrationPublicPage() {
   const finalized = getFinalizedMatches();
   const n = finalized.length;
-  const bins = computeBins(finalized);
+  const bins = computeBaseballBins(finalized);
   // 氣勢反轉證物(R239)· 從官方賽果自動撈最近一組「同兩隊、隔幾天、贏家換邊」的戲劇反轉,
   // 把上面「沒有神準 / 別跟氣勢」的論點換成一筆真資料。 找不到 → null → 整段不顯示(graceful)。
   const reversal = getLatestMomentumReversal();
@@ -319,7 +280,7 @@ export default function CalibrationPublicPage() {
 // ── Sub-components ─────────────────────────────────────
 
 // 棒球校準 view · 圖 + 低樣本誠實說明(N<30 任何偏移都可能是運氣 · 不算數)。
-function BaseballCalView({ bins, n }: { bins: Bin[]; n: number }) {
+function BaseballCalView({ bins, n }: { bins: CalibrationBin[]; n: number }) {
   return (
     <div>
       <ReliabilityDiagram bins={bins} n={n} engineVersion="v0.2" />
@@ -361,7 +322,7 @@ function SoccerCalView({
   n,
   lockedN,
 }: {
-  bins: Bin[];
+  bins: CalibrationBin[];
   n: number;
   lockedN: number;
 }) {
@@ -396,220 +357,6 @@ function SoccerCalView({
           </p>
         </div>
       ) : null}
-    </div>
-  );
-}
-
-// Inline SVG reliability diagram · same math as /member/calibration
-// (Round 30 W2B agent deepest call)· copied here intentionally instead
-// of import → public page is independently shippable + auditable · 不
-// share local state · 不 share component complexity edge cases。 將來
-// 若 extract 為 shared <ReliabilityDiagram /> component · 同時 refactor
-// /member/calibration 來 import。
-function ReliabilityDiagram({
-  bins,
-  n,
-  engineVersion,
-}: {
-  bins: Bin[];
-  n: number;
-  engineVersion: string;
-}) {
-  // SVG coordinate system: 400x400 with 40px left/bottom margin · 20px top/right
-  const px = (pct: number) => 40 + (pct / 100) * 340;
-  const py = (pct: number) => 360 - (pct / 100) * 340;
-
-  return (
-    <div className="bg-slate/30 border border-line/60 p-5 sm:p-8">
-      <div className="flex items-baseline justify-between mb-4 flex-wrap gap-3">
-        <p className="font-mono text-gold text-[10px] tracking-[0.4em]">
-          / 引擎說的 vs 實際發生
-        </p>
-        <p className="font-mono text-mute/70 text-[10px] tracking-[0.3em] tabular">
-          引擎 {engineVersion} · 已 {n} 場
-        </p>
-      </div>
-      <div className="aspect-square max-w-md mx-auto">
-        <svg
-          viewBox="0 0 400 400"
-          xmlns="http://www.w3.org/2000/svg"
-          className="w-full h-auto"
-          role="img"
-          aria-label={
-            n === 0
-              ? "引擎準度對照圖 · 引擎說的成數對上實際中的成數 · 目前還沒有資料"
-              : `引擎準度對照圖 · 已畫上 ${n} 場 · 引擎說的成數對上實際中的成數`
-          }
-        >
-          {/* Grid */}
-          {[0, 25, 50, 75, 100].map((v) => (
-            <g key={v}>
-              <line
-                x1={px(0)}
-                y1={py(v)}
-                x2={px(100)}
-                y2={py(v)}
-                stroke="rgba(138, 147, 168, 0.12)"
-                strokeWidth="1"
-              />
-              <line
-                x1={px(v)}
-                y1={py(0)}
-                x2={px(v)}
-                y2={py(100)}
-                stroke="rgba(138, 147, 168, 0.12)"
-                strokeWidth="1"
-              />
-            </g>
-          ))}
-          {/* Axes */}
-          <line
-            x1={px(0)}
-            y1={py(0)}
-            x2={px(100)}
-            y2={py(0)}
-            stroke="rgba(138, 147, 168, 0.6)"
-            strokeWidth="1"
-          />
-          <line
-            x1={px(0)}
-            y1={py(0)}
-            x2={px(0)}
-            y2={py(100)}
-            stroke="rgba(138, 147, 168, 0.6)"
-            strokeWidth="1"
-          />
-          {/* 45° perfect calibration line */}
-          <line
-            x1={px(0)}
-            y1={py(0)}
-            x2={px(100)}
-            y2={py(100)}
-            stroke="#D4AF37"
-            strokeWidth="1.5"
-            strokeDasharray="4 4"
-          />
-          {/* Bins */}
-          {n === 0
-            ? [55, 65, 75, 85].map((v) => (
-                <circle
-                  key={v}
-                  cx={px(v)}
-                  cy={py(v)}
-                  r="3"
-                  fill="none"
-                  stroke="rgba(138, 147, 168, 0.45)"
-                  strokeWidth="1"
-                  strokeDasharray="2 2"
-                />
-              ))
-            : bins.map((b) => {
-                const radius = Math.min(3 + b.count * 1.5, 12);
-                return (
-                  <circle
-                    key={b.centerPct}
-                    cx={px(b.centerPct)}
-                    cy={py(b.favoriteActualPct)}
-                    r={radius}
-                    fill="#D4AF37"
-                    fillOpacity={0.85}
-                    stroke="#0F1A2E"
-                    strokeWidth="1"
-                  />
-                );
-              })}
-          {/* Axis tick labels */}
-          {[0, 50, 100].map((v) => (
-            <g key={v}>
-              <text
-                x={px(v)}
-                y={py(0) + 18}
-                fontSize="10"
-                fontFamily="monospace"
-                fill="rgba(138, 147, 168, 0.85)"
-                textAnchor="middle"
-              >
-                {v}%
-              </text>
-              <text
-                x={px(0) - 8}
-                y={py(v) + 3}
-                fontSize="10"
-                fontFamily="monospace"
-                fill="rgba(138, 147, 168, 0.85)"
-                textAnchor="end"
-              >
-                {v}%
-              </text>
-            </g>
-          ))}
-          {/* Axis labels */}
-          <text
-            x={px(50)}
-            y={py(0) + 36}
-            fontSize="9"
-            fontFamily="monospace"
-            fill="rgba(212, 175, 55, 0.85)"
-            textAnchor="middle"
-            letterSpacing="0.18em"
-          >
-            引擎看好幾成
-          </text>
-          <text
-            x={px(0) - 32}
-            y={py(50)}
-            fontSize="9"
-            fontFamily="monospace"
-            fill="rgba(212, 175, 55, 0.85)"
-            textAnchor="middle"
-            letterSpacing="0.18em"
-            transform={`rotate(-90 ${px(0) - 32} ${py(50)})`}
-          >
-            實際中幾成
-          </text>
-        </svg>
-      </div>
-
-      {/* ── 白話判決層(538「Checking Our Work」caption · R222)─────────────────
-          散點圖只有座標軸 + 金點,賭徒(非分析師)讀不出本頁 hero 問的那句
-          「引擎說 70% 的時候、實際贏多少?」。 這層用「一句一桶」的白話直接回答 ——
-          引擎喊幾成看好、那幾場真的中幾成。 把校準護城河從統計層降到情緒層。
-          🔴 誠實:每行掛場數(讀者自己判斷樣本大小)+ 沿用 N<30 caveat · 不下精確結論 ·
-          純白話不出現 Brier / 校準 等術語 · 無紅綠(實際命中率一律金)。 */}
-      {n > 0 && bins.length > 0 && (
-        <div className="mt-5 pt-5 border-t border-line/40">
-          <p className="font-mono text-gold/80 text-[10px] tracking-[0.3em] mb-3">
-            / 白話講 · 喊幾成、真的中幾成
-          </p>
-          <ul className="space-y-1.5">
-            {bins.map((b) => {
-              const low = Math.max(0, b.centerPct - 5);
-              const high = Math.min(100, b.centerPct + 5);
-              return (
-                <li
-                  key={b.centerPct}
-                  className="text-mute text-[13px] sm:text-sm leading-relaxed"
-                >
-                  引擎喊{" "}
-                  <span className="font-mono tabular text-bone">
-                    {low}–{high}%
-                  </span>{" "}
-                  看好的那 <span className="font-mono tabular text-bone">{b.count}</span> 場
-                  —— 真的中了{" "}
-                  <span className="font-mono tabular text-gold">
-                    {Math.round(b.favoriteActualPct)}%
-                  </span>
-                  。
-                </li>
-              );
-            })}
-          </ul>
-          <p className="mt-3 font-mono text-mute/55 text-[9px] tracking-[0.15em] leading-relaxed">
-            ▸ 「喊幾成」越貼近「中幾成」· 引擎就越誠實 —— 這正是上面那條金色斜線的意思。
-            {n < 30 && <> 目前才 {n} 場 · 還看不出穩定名堂,多打幾場才算數。</>}
-          </p>
-        </div>
-      )}
     </div>
   );
 }

@@ -284,16 +284,24 @@ export default async function MatchDetailPage({
             / 引擎為什麼這樣看
           </p>
           <EngineReasoningBlock reasoning={getEngineReasoning(m)} />
-          {/* 信任迴路:每場推理都承認「只到約 5 成 7」· 把這句謙虛綁回 aggregate 證據
-              (= claim + receipt)。 只在未結算場顯示 —— 已結算場下方就是收據本身 = 證據。 */}
-          {!m.finalResult && (
+          {/* 信任迴路:把每場推理綁回方法 + aggregate 證據(= claim + receipt)。
+              「完整方法」連進 /engines#baseball(公式 + 活校準)· 賽事頁不再重講公式 = 乾淨。 */}
+          <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2 font-mono text-[10px] tracking-[0.25em]">
             <Link
-              href="/calibration"
-              className="mt-5 inline-flex items-center gap-1.5 font-mono text-mute/70 hover:text-gold text-[10px] tracking-[0.25em] transition-colors"
+              href="/engines#baseball"
+              className="text-gold/80 hover:text-gold transition-colors"
             >
-              引擎到底準不準?看公開校準 →
+              完整方法 · 三套引擎 →
             </Link>
-          )}
+            {!m.finalResult && (
+              <Link
+                href="/calibration"
+                className="text-mute/70 hover:text-gold transition-colors"
+              >
+                引擎到底準不準?看公開校準 →
+              </Link>
+            )}
+          </div>
         </section>
 
         {/* ── 近期戰績 + 本季對戰(官方賽果 · CPBL 限定 · graceful 隱藏)── */}

@@ -154,16 +154,19 @@ export default async function TennisMatchPage({
               )}
             </p>
 
-            {/* 怎麼算的(攤開 · 不黑箱) */}
+            {/* 怎麼算的(這場的真實拆解 · 攤開 · 不黑箱)· 通用公式砍去 → 連進 /engines#tennis */}
             <div className="mt-5 bg-slate/30 border border-line/60 p-4 text-[13px] leading-relaxed text-mute">
-              <p className="font-mono text-gold/70 text-[10px] tracking-[0.3em] mb-2">怎麼算的</p>
+              <p className="font-mono text-gold/70 text-[10px] tracking-[0.3em] mb-2">這場怎麼算的</p>
               <p>
                 <span className="text-bone">{m.a.zh}</span> 世界排名 #{m.a.rank} → 實力分{" "}
                 <span className="font-mono text-gold tabular">{ra}</span> ·{" "}
                 <span className="text-bone">{m.b.zh}</span> 世界排名 #{m.b.rank} → 實力分{" "}
                 <span className="font-mono text-gold tabular">{rb}</span>。 差{" "}
                 <span className="font-mono text-bone tabular">{Math.abs(ra - rb)}</span> 分,
-                用標準 Elo 邏輯函數換成勝率(每 400 分 ≈ 勝率 10 倍)。 純數學、攤得開、可重算。
+                用標準 Elo 換成勝率。{" "}
+                <Link href="/engines#tennis" className="text-gold underline-offset-4 hover:underline">
+                  完整公式 + 活校準 →
+                </Link>
               </p>
               <p className="mt-2 font-mono text-mute/55 text-[11px] leading-relaxed">
                 ⚠️ 實力分由現時世界排名換算(估計值 · 非官方數據)· 引擎只看排名:沒看臨場傷停 /

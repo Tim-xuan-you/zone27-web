@@ -279,20 +279,22 @@ export default function TennisPage() {
           </div>
         </section>
 
-        {/* ── 引擎方法 / 誠實註腳 ── */}
+        {/* ── 引擎方法(一行 + 連進 /engines)· 誠實註腳 ── */}
         <section className="mx-auto max-w-6xl w-full px-6 sm:px-10 pb-24">
           <div className="bg-slate/30 border border-line/60 p-5 sm:p-6 max-w-2xl">
             <p className="font-mono text-gold/70 text-[10px] tracking-[0.4em] mb-3">引擎怎麼算</p>
             <p className="text-mute text-[13px] sm:text-sm leading-relaxed">
-              每位球員一個由<span className="text-bone">現時世界排名換算</span>的實力分,加上表面校正,
-              再用標準 Elo 邏輯函數算出兩人各自的勝率(每 400 分 ≈ 勝率 10 倍)。 純數學、攤得開、
-              可重算 —— 沒有黑箱。 這是<span className="text-bone">排名換算的估計</span>,不是磨厚的
-              戰績 Elo;隨真實賽果一場一場更新。
+              排名換算的實力分 + 表面校正 + 標準 Elo —— 純數學、攤得開、可重算。{" "}
+              <Link
+                href="/engines#tennis"
+                className="text-gold underline-offset-4 hover:underline"
+              >
+                完整公式 + 活校準曲線在 /engines →
+              </Link>
             </p>
             <p className="mt-3 text-mute/70 text-[12px] leading-relaxed">
               引擎只看排名:<span className="text-mute">沒看傷停、復出、臨場狀態</span> —— 那正是
-              你的判斷比引擎值錢的地方(所以德雷珀、季米特洛夫這種剛復出的,我們不硬開)。
-              我們不接受下注、不顯示盤口、不喊穩贏。 押注 / 收據 / 你 vs 引擎對帳 = 接著補上。
+              你的判斷比引擎值錢的地方(所以剛復出的我們不硬開)。 我們不接受下注、不顯示盤口、不喊穩贏。
             </p>
             <div className="mt-4 flex flex-wrap gap-3">
               <Link

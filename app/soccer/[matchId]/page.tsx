@@ -179,7 +179,10 @@ export default async function SoccerMatchPage({ params }: { params: Params }) {
                     ))}
                   </div>
                   <p className="mt-3 font-mono text-mute/45 text-[9px] tracking-[0.12em] leading-relaxed">
-                    由引擎的雙變量卜瓦松(Dixon-Coles)比分表算 · 跟上面勝 / 平 / 負同源、零落差 · 90 分鐘正規賽。
+                    由引擎的雙變量卜瓦松(Dixon-Coles)比分表算 · 跟上面勝 / 平 / 負同源、零落差 · 90 分鐘正規賽。{" "}
+                    <Link href="/engines#soccer" className="text-gold/70 hover:text-gold underline-offset-2 hover:underline">
+                      公式怎麼來 →
+                    </Link>
                   </p>
                 </div>
               )}
