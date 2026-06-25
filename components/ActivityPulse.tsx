@@ -150,7 +150,9 @@ function PulseList({ events }: { events: PulseEvent[] }) {
                         ? `/markets#m-${e.matchId}`
                         : e.matchId.startsWith("tn-")
                           ? `/tennis/${e.matchId}`
-                          : `/matches/${e.matchId}#say`
+                          : e.matchId.startsWith("bd-")
+                            ? `/badminton/${e.matchId}`
+                            : `/matches/${e.matchId}#say`
                   }
                   className="hover:text-gold transition-colors"
                 >

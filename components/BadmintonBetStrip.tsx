@@ -1,0 +1,284 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import Link from "next/link";
+import { createSupabaseBrowserClient } from "@/lib/supabase/browser";
+import {
+  getMyBadmintonPrediction,
+  getBadmintonTally,
+  submitBadmintonPrediction,
+  setBadmintonConfidence,
+  setBadmintonRationale,
+  crowdPercents,
+  BADMINTON_CROWD_MIN,
+  type BadmintonPick,
+  type BadmintonTally,
+} from "@/lib/badminton/predictions";
+import ConfidencePicker from "@/components/ConfidencePicker";
+import RationalePicker from "@/components/RationalePicker";
+
+// ── ZONE 27 · 羽球兩向押注條(A 勝 / B 勝)──────────────────────────────────────
+// 押了不可改(先鎖後結)· 登入才能押 · 開賽後鎖手。 純精神預測 = 遊戲 · 0 金額。 賽後自動
+// 掛準/不準進你的羽球準度(跟棒球 / 足球 / 網球分開算)。 守暗金:選中上金 · 其餘 mute · 無紅綠。
+// 樂觀 UI:點下即翻「已鎖」· server 確認前只說「鎖定中…」(不假裝刪不掉)。 鏡 TennisBetStrip。
+// ─────────────────────────────────────────────────────
+
+type State = "loading" | "anon" | "open" | "picked" | "started";
+
+function startedAt(startISO: string): boolean {
+  const t = Date.parse(startISO);
+  return !Number.isNaN(t) && t <= Date.now();
+}
+
+export default function BadmintonBetStrip({
+  matchId,
+  startISO,
+  aLabel,
+  bLabel,
+  returnTo = "/badminton",
+}: {
+  matchId: string;
+  startISO: string;
+  aLabel: string;
+  bLabel: string;
+  returnTo?: string;
+}) {
+  const [state, setState] = useState<State>("loading");
+  const [pick, setPick] = useState<BadmintonPick | null>(null);
+  const [tally, setTally] = useState<BadmintonTally | null>(null);
+  const [saving, setSaving] = useState(false);
+  const [kickedOff, setKickedOff] = useState(false);
+  const [pending, setPending] = useState(false);
+  const [errMsg, setErrMsg] = useState<string | null>(null);
+  const [justPicked, setJustPicked] = useState(false);
+
+  // 開賽瞬間自動鎖手(一次性 timer · 不輪詢)· >24h 的場由 choose() 點擊時重驗兜底。
+  useEffect(() => {
+    const t = Date.parse(startISO);
+    if (Number.isNaN(t)) return;
+    const ms = t - Date.now();
+    if (ms > 24 * 3600 * 1000) return;
+    const id = setTimeout(() => setKickedOff(true), Math.max(ms, 0));
+    return () => clearTimeout(id);
+  }, [startISO]);
+
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      const startedNow = startedAt(startISO);
+      getBadmintonTally(matchId).then((t) => {
+        if (!cancelled) setTally(t);
+      });
+      try {
+        const supabase = createSupabaseBrowserClient();
+        const {
+          data: { user },
+        } = await supabase.auth.getUser();
+        if (cancelled) return;
+        if (!user) {
+          setState(startedNow ? "started" : "anon");
+          return;
+        }
+        const mine = await getMyBadmintonPrediction(matchId);
+        if (cancelled) return;
+        if (mine) {
+          setPick(mine);
+          setState("picked");
+        } else {
+          setState(startedNow ? "started" : "open");
+        }
+      } catch {
+        if (!cancelled) setState(startedNow ? "started" : "anon");
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [matchId, startISO]);
+
+  const choose = async (p: BadmintonPick) => {
+    if (saving) return;
+    if (startedAt(startISO)) {
+      setKickedOff(true);
+      setState("started");
+      return;
+    }
+    const prev = state;
+    setErrMsg(null);
+    setPick(p);
+    setState("picked");
+    setPending(true);
+    setSaving(true);
+    const res = await submitBadmintonPrediction(matchId, p);
+    if (res.ok) {
+      setPending(false);
+      setJustPicked(true);
+      getBadmintonTally(matchId).then(setTally);
+    } else if (res.reason === "already_predicted") {
+      const mine = await getMyBadmintonPrediction(matchId);
+      if (mine) setPick(mine);
+      setPending(false);
+      getBadmintonTally(matchId).then(setTally);
+    } else if (res.reason === "not_logged_in") {
+      setPick(null);
+      setPending(false);
+      setState("anon");
+    } else {
+      setPick(null);
+      setPending(false);
+      setState(prev === "picked" ? "open" : prev);
+      setErrMsg("沒鎖成功 · 再試一次");
+    }
+    setSaving(false);
+  };
+
+  const displayState: State =
+    state === "picked"
+      ? "picked"
+      : kickedOff && (state === "open" || state === "anon")
+        ? "started"
+        : state;
+
+  const pickLabel = (p: BadmintonPick) => (p === "a" ? aLabel : bLabel);
+
+  return (
+    <div className="mt-3 pt-2.5 border-t border-line/40">
+      <div role="status" aria-live="polite" className="sr-only">
+        {displayState === "picked" && pick && !pending
+          ? `賽前鎖定 · 你押了 ${pickLabel(pick)} · 刪不掉`
+          : ""}
+      </div>
+      {displayState === "loading" && (
+        <p className="font-mono text-mute/40 text-[9px] tracking-[0.3em]">···</p>
+      )}
+
+      {displayState === "anon" && (
+        <Link
+          href={`/login?next=${encodeURIComponent(`${returnTo}#m-${matchId}`)}`}
+          className="flex items-center justify-between gap-2 border border-gold/40 px-3 py-2.5 min-h-[44px] hover:border-gold/70 hover:bg-gold/5 transition-colors group"
+        >
+          <span className="font-mono text-gold/75 text-[11px] tracking-[0.15em]">
+            ▸ 登入就能押這場(免費 · 押了鎖死、賽後對帳)
+          </span>
+          <span className="font-mono text-gold/80 group-hover:text-gold text-[10px] tracking-[0.25em] shrink-0">
+            登入 →
+          </span>
+        </Link>
+      )}
+
+      {(displayState === "open" || displayState === "started") && (
+        <>
+          <p
+            className={`font-mono text-[10px] tracking-[0.2em] mb-1.5 ${
+              displayState === "started" ? "text-mute/60" : "text-gold/80"
+            }`}
+          >
+            {displayState === "started" ? "已開賽 · 封盤 · 押注賽前才收" : "你押哪邊贏?(押了不可改)"}
+          </p>
+          <div className="flex items-stretch gap-1.5">
+            <BetBtn
+              label={`看好 ${aLabel.slice(0, 6)}`}
+              disabled={displayState === "started" || saving}
+              onClick={() => choose("a")}
+            />
+            <BetBtn
+              label={`看好 ${bLabel.slice(0, 6)}`}
+              disabled={displayState === "started" || saving}
+              onClick={() => choose("b")}
+            />
+          </div>
+          <p className="mt-1.5 font-mono text-mute/55 text-[9px] tracking-[0.12em] leading-snug">
+            以單打勝負對帳 · 退賽 / 中退由賽會判定
+          </p>
+          {errMsg && (
+            <p role="alert" className="mt-1.5 font-mono text-loss/80 text-[9px] tracking-[0.15em]">
+              {errMsg}
+            </p>
+          )}
+        </>
+      )}
+
+      {displayState === "picked" && pick && (
+        <div className="enter-fade-up border border-gold/40 bg-gold/5 px-3 py-2.5">
+          <p className="font-mono text-mute/55 text-[8px] tracking-[0.3em] mb-1">
+            {pending ? "鎖定中…" : "✓ 賽前鎖定 · 刪不掉"}
+          </p>
+          <p className="text-gold text-sm sm:text-base font-light tracking-tight leading-none">
+            你押了 {pickLabel(pick)}
+          </p>
+          {!pending && justPicked && (
+            <>
+              <ConfidencePicker matchId={matchId} submit={setBadmintonConfidence} />
+              <RationalePicker matchId={matchId} submit={setBadmintonRationale} />
+            </>
+          )}
+          {!pending && (
+            <div className="mt-2 flex items-center justify-between gap-2 flex-wrap">
+              <span className="font-mono text-mute/55 text-[9px] tracking-[0.15em]">
+                賽後逐場對帳 · 連輸的都留著
+              </span>
+              <Link
+                href="/member"
+                className="font-mono text-gold/70 hover:text-gold text-[9px] tracking-[0.25em] underline-offset-4 hover:underline transition-colors shrink-0"
+              >
+                進你的帳本 →
+              </Link>
+            </div>
+          )}
+        </div>
+      )}
+
+      <CrowdLine tally={tally} aLabel={aLabel} bLabel={bLabel} state={displayState} />
+    </div>
+  );
+}
+
+function BetBtn({ label, disabled, onClick }: { label: string; disabled: boolean; onClick: () => void }) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      disabled={disabled}
+      className="flex-1 px-2 py-2.5 min-h-[40px] font-mono text-[10px] tracking-[0.1em] border border-gold/40 text-bone hover:border-gold hover:bg-gold/10 transition-colors disabled:opacity-40 disabled:cursor-not-allowed whitespace-nowrap"
+    >
+      {label}
+    </button>
+  );
+}
+
+function CrowdLine({
+  tally,
+  aLabel,
+  bLabel,
+  state,
+}: {
+  tally: BadmintonTally | null;
+  aLabel: string;
+  bLabel: string;
+  state: State;
+}) {
+  if (!tally || tally.total === 0) {
+    if (state === "open") {
+      return (
+        <p className="mt-2 font-mono text-gold/70 text-[9px] tracking-[0.2em]">
+          群眾市場 · 還沒人押這場 · 第一手是你的 ▸
+        </p>
+      );
+    }
+    return null;
+  }
+  if (tally.total < BADMINTON_CROWD_MIN) {
+    return (
+      <p className="mt-2 font-mono text-mute/45 text-[9px] tracking-[0.15em]">
+        {tally.total} 人押了 · 滿 {BADMINTON_CROWD_MIN} 人才畫群眾市場線 —— 不拿幾個人假裝是大盤
+      </p>
+    );
+  }
+  const p = crowdPercents(tally);
+  return (
+    <p className="mt-2 font-mono text-mute/55 text-[9px] tracking-[0.12em] tabular">
+      群眾:{aLabel.slice(0, 5)} {p.a}% · {bLabel.slice(0, 5)} {p.b}%{" "}
+      <span className="text-mute/40">({tally.total} 人)</span>
+    </p>
+  );
+}

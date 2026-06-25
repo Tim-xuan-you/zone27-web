@@ -170,3 +170,127 @@ export function gradeBadmintonEngine(): BadmintonEngineRecord {
     pending,
   };
 }
+
+// ── 賽前鎖定押注 + 你的羽球戰績(純函式 · server-safe 單一真相 · 鏡網球)─────────────
+
+// 運彩時間字串只帶「月/日 時:分」、不帶年 → 賽季年在此定(換季 bump 這一個值)。
+const BADMINTON_SEASON_YEAR = 2026;
+
+/** 運彩時間字串 → 台北 ISO(可解析的 "M/D HH:MM" 才回 · 相對時間 / 進行中 / 無時戳 → null)。
+ *  賽前鎖定的時間閘:只有「有明確未來開賽時戳」的場才開放押注(押了不可改 · 先鎖後結)。 */
+export function matchStartISO(m: BadmintonMatch): string | null {
+  const mm = m.time.match(/(\d{1,2})\/(\d{1,2})\s+(\d{1,2}):(\d{2})/);
+  if (!mm) return null;
+  const [, mo, d, h, mi] = mm;
+  const pad = (s: string) => s.padStart(2, "0");
+  return `${BADMINTON_SEASON_YEAR}-${pad(mo)}-${pad(d)}T${pad(h)}:${pad(mi)}:00+08:00`;
+}
+
+/** 這場可不可以「賽前鎖定押注」? 還沒結算 + 有明確開賽時戳(client 端再判未開賽)。
+ *  🔴 Tim 鐵律(全運動一致):能上架就能押 —— 引擎開不開得出線,不影響可不可押(認不出的場、
+ *  你的判斷比引擎值錢)。 只擋:已結算、無可解析開賽時戳。 */
+export function bettable(m: BadmintonMatch): string | null {
+  if (m.finalResult) return null;
+  return matchStartISO(m);
+}
+
+/** 引擎當初看好邊(lineable 場)· 給「你 vs 引擎」對照 + 引擎公開戰績 · id → "a"/"b"。 */
+export function badmintonEnginePicks(): Record<string, BadmintonPick> {
+  const out: Record<string, BadmintonPick> = {};
+  for (const m of BADMINTON_DRAW) {
+    const line = drawLine(m);
+    if (line) out[m.id] = line.pick;
+  }
+  return out;
+}
+
+/** 已結算賽果(Tim curate 的 finalResult)· id → { outcome, startISO }· 給用戶押注對帳。 */
+export function badmintonResults(): Record<
+  string,
+  { outcome: BadmintonPick; startISO: string }
+> {
+  const out: Record<string, { outcome: BadmintonPick; startISO: string }> = {};
+  for (const m of BADMINTON_DRAW) {
+    if (m.finalResult) {
+      out[m.id] = {
+        outcome: m.finalResult.winner,
+        startISO: matchStartISO(m) ?? m.finalResult.settledAt ?? "",
+      };
+    }
+  }
+  return out;
+}
+
+/** 一筆羽球押注(兩向 a/b · 賽前鎖定時戳)。 */
+export type BadmintonPickRow = { matchId: string; pick: BadmintonPick; ts: string };
+
+export type BadmintonRecord = {
+  /** 已結算場數(先鎖後結 · 不含 pending) */
+  n: number;
+  hits: number;
+  misses: number;
+  rate: number | null;
+  /** 還沒結算 */
+  pending: number;
+  /** 開賽後才押 · 誠實剔除(看得見) */
+  late: number;
+  // ── 你 vs 引擎(同批已結算、且引擎當初有開盤的場)──
+  vsN: number;
+  vsYouHits: number;
+  vsEngineHits: number;
+  vsYouRate: number | null;
+  vsEngineRate: number | null;
+};
+
+/**
+ * 兩向對帳(A 勝 / B 勝)· **先鎖後結**:押注時間 ≥ 開賽 → 不計入(同棒球 / 足球 / 網球)。
+ * 純函式 deterministic。 🔴 含輸:✕ 跟 ✓ 一樣進分母。
+ */
+export function gradeBadmintonPicks(
+  picks: BadmintonPickRow[],
+  results: Record<string, { outcome: BadmintonPick; startISO: string }>,
+  enginePicks: Record<string, BadmintonPick> = {},
+): BadmintonRecord {
+  let n = 0;
+  let hits = 0;
+  let pending = 0;
+  let late = 0;
+  let vsN = 0;
+  let vsYouHits = 0;
+  let vsEngineHits = 0;
+  for (const p of picks) {
+    const r = results[p.matchId];
+    if (!r) {
+      pending += 1;
+      continue;
+    }
+    const t = Date.parse(p.ts);
+    const k = Date.parse(r.startISO);
+    if (!Number.isNaN(t) && !Number.isNaN(k) && t >= k) {
+      late += 1;
+      continue;
+    }
+    n += 1;
+    const youHit = p.pick === r.outcome;
+    if (youHit) hits += 1;
+    const ePick = enginePicks[p.matchId];
+    if (ePick === "a" || ePick === "b") {
+      vsN += 1;
+      if (youHit) vsYouHits += 1;
+      if (ePick === r.outcome) vsEngineHits += 1;
+    }
+  }
+  return {
+    n,
+    hits,
+    misses: n - hits,
+    rate: n > 0 ? Math.round((hits / n) * 100) : null,
+    pending,
+    late,
+    vsN,
+    vsYouHits,
+    vsEngineHits,
+    vsYouRate: vsN > 0 ? Math.round((vsYouHits / vsN) * 100) : null,
+    vsEngineRate: vsN > 0 ? Math.round((vsEngineHits / vsN) * 100) : null,
+  };
+}

@@ -37,6 +37,11 @@ import {
   tennisEnginePicks,
   matchStartISO as tennisMatchStartISO,
 } from "@/lib/tennis/matches";
+import {
+  getBadmintonMatch,
+  badmintonEnginePicks,
+  matchStartISO as badmintonMatchStartISO,
+} from "@/lib/badminton/matches";
 import { createSupabaseServerClient, getUser } from "@/lib/supabase/server";
 import { readLastSeenFromMeta } from "@/lib/predictions";
 import {
@@ -52,14 +57,16 @@ async function getMyPicksSplit(): Promise<{
   baseball: Map<string, ServerPick>;
   soccer: Map<string, ServerPick>;
   tennis: Map<string, ServerPick>;
+  badminton: Map<string, ServerPick>;
 }> {
   const baseball = new Map<string, ServerPick>();
   const soccer = new Map<string, ServerPick>();
   const tennis = new Map<string, ServerPick>();
+  const badminton = new Map<string, ServerPick>();
   try {
     const supabase = await createSupabaseServerClient();
     const { data, error } = await supabase.rpc("get_my_predictions");
-    if (error || !Array.isArray(data)) return { baseball, soccer, tennis };
+    if (error || !Array.isArray(data)) return { baseball, soccer, tennis, badminton };
     for (const row of data as {
       match_id?: unknown;
       pick?: unknown;
@@ -88,12 +95,17 @@ async function getMyPicksSplit(): Promise<{
         if (row.pick === "home" || row.pick === "away") {
           tennis.set(id, { pick: row.pick, ts });
         }
+      } else if (id.startsWith("bd-") && !id.includes("~")) {
+        // 羽球(bd-*)· 兩向 home/away · 賽果走自己的桶(getBadmintonMatch)· 跟棒球分桶。 R264
+        if (row.pick === "home" || row.pick === "away") {
+          badminton.set(id, { pick: row.pick, ts });
+        }
       }
     }
   } catch {
     /* graceful · 收件匣是 nice-to-have · 讀失敗退空 */
   }
-  return { baseball, soccer, tennis };
+  return { baseball, soccer, tennis, badminton };
 }
 
 /** 收齊跨運動原始輸入(賽果 on-read)。 picks 三本都空 → 不打賽果 API,直接回空。 */
@@ -101,6 +113,7 @@ async function gatherRaws(
   baseball: Map<string, ServerPick>,
   soccer: Map<string, ServerPick>,
   tennis: Map<string, ServerPick>,
+  badminton: Map<string, ServerPick>,
 ): Promise<RawSettlement[]> {
   const raws: RawSettlement[] = [];
 
@@ -305,6 +318,37 @@ async function gatherRaws(
     }
   }
 
+  // ── 羽球(bd-*)· 兩向 · 賽果 = Tim 手 curate 的 finalResult(0 API · 同網球)。 R264 ──
+  if (badminton.size > 0) {
+    const bdEng = badmintonEnginePicks();
+    for (const [id, p] of badminton) {
+      const m = getBadmintonMatch(id);
+      if (!m) continue;
+      const fr = m.finalResult;
+      const finalWinner: "home" | "away" | null = fr
+        ? fr.winner === "a"
+          ? "home"
+          : "away"
+        : null;
+      const eng = bdEng[id];
+      const engineFav: "home" | "away" | null =
+        eng === "a" ? "home" : eng === "b" ? "away" : null;
+      const startISO = badmintonMatchStartISO(m) ?? "";
+      raws.push({
+        matchId: id,
+        sport: "badminton",
+        home: m.a.zh,
+        away: m.b.zh,
+        myPick: p.pick,
+        pickTs: p.ts,
+        startISO,
+        finalWinner,
+        engineFav,
+        settledRaw: fr ? fr.settledAt ?? (startISO || null) : null,
+      });
+    }
+  }
+
   return raws;
 }
 
@@ -319,12 +363,17 @@ export async function getMySettlementInbox(): Promise<SettlementInbox | null> {
   const meta = (user.user_metadata ?? null) as Record<string, unknown> | null;
   const lastSeen = readLastSeenFromMeta(meta);
 
-  const { baseball, soccer, tennis } = await getMyPicksSplit();
-  if (baseball.size === 0 && soccer.size === 0 && tennis.size === 0) {
+  const { baseball, soccer, tennis, badminton } = await getMyPicksSplit();
+  if (
+    baseball.size === 0 &&
+    soccer.size === 0 &&
+    tennis.size === 0 &&
+    badminton.size === 0
+  ) {
     return { items: [], newCount: 0, total: 0, pending: [] };
   }
   try {
-    const raws = await gatherRaws(baseball, soccer, tennis);
+    const raws = await gatherRaws(baseball, soccer, tennis, badminton);
     return buildInbox(raws, lastSeen);
   } catch {
     // 防護網:inbox 頁直接 await 這支、沒有上層 catch · 任何賽果來源意外丟錯都退空狀態,不 500。

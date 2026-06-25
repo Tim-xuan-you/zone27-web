@@ -8,6 +8,7 @@ import type { SeasonHighlights } from "@/lib/season-recap";
 import type { CalibrationIdentity } from "@/lib/predictions";
 import type { SoccerRecord } from "@/lib/soccer/predictions";
 import type { TennisRecord } from "@/lib/tennis/matches";
+import type { BadmintonRecord } from "@/lib/badminton/matches";
 import type { PublicProfile } from "@/lib/profile-server";
 import type { Trophy } from "@/lib/trophies";
 
@@ -29,6 +30,8 @@ type Props = {
   soccer: SoccerRecord;
   /** 本月網球戰績(已按月切片的 picks 餵 gradeTennisPicks)· 沒押網球 → 不顯示 */
   tennis?: TennisRecord;
+  /** 本月羽球戰績(同網球 · 按月切片餵 gradeBadmintonPicks)· 沒押羽球 → 不顯示 · R264 */
+  badminton?: BadmintonRecord;
   highlights: SeasonHighlights;
   /** 本月回來對帳的不同台北日數 */
   activeDays: number;
@@ -42,6 +45,7 @@ export default function SeasonRecapView({
   identity: id,
   soccer,
   tennis,
+  badminton,
   highlights,
   activeDays,
   hasActivity,
@@ -56,6 +60,8 @@ export default function SeasonRecapView({
   const hasBaseball = id.total > 0;
   const hasSoccer = soccer.n > 0 || soccer.pending > 0 || soccer.late > 0;
   const hasTennis = !!tennis && (tennis.n > 0 || tennis.pending > 0 || tennis.late > 0);
+  const hasBadminton =
+    !!badminton && (badminton.n > 0 || badminton.pending > 0 || badminton.late > 0);
   const hasDecided = id.accuracy !== null;
   const showEdge =
     id.edgeVsEnginePts !== null && id.engine.decided > 0 && id.decided > 0;
@@ -247,6 +253,40 @@ export default function SeasonRecapView({
               {tennis.late > 0 && (
                 <p className="mt-2 font-mono text-mute/55 text-[10px] tracking-[0.12em] leading-snug">
                   {tennis.late} 場開賽後才押 · 不計入戰績(先鎖後結 · 開賽前押的才算數)
+                </p>
+              )}
+            </section>
+          )}
+
+          {/* ── 本月羽球(兩向 · 含輸 · 跟棒球 / 足球 / 網球分開算)· R264 ─────────── */}
+          {hasBadminton && badminton && (
+            <section className="mt-6 bg-slate/40 border border-gold/30 p-5 sm:p-6">
+              <p className="font-mono text-gold/80 text-[10px] tracking-[0.35em] mb-2">
+                本月羽球 · 含輸命中率
+              </p>
+              {badminton.n > 0 ? (
+                <p className="text-bone text-lg sm:text-xl font-light tracking-tight">
+                  <span className="text-gold tabular">{badminton.rate}%</span> 準 ·{" "}
+                  <span className="text-gold tabular">✓{badminton.hits}</span>{" "}
+                  <span className="text-loss tabular">✕{badminton.misses}</span>
+                  <span className="text-mute/60 text-sm"> · {badminton.n} 場已結算</span>
+                  {badminton.pending > 0 && (
+                    <span className="text-mute/50 text-sm">
+                      {" "}· {badminton.pending} 場待結算
+                    </span>
+                  )}
+                </p>
+              ) : badminton.pending > 0 ? (
+                <p className="text-bone text-base font-light leading-snug">
+                  押了 <span className="text-gold tabular">{badminton.pending}</span> 場 ·
+                  <span className="text-mute/70">
+                    {" "}都還沒結算 —— 賽後自動掛準 / 不準,連輸的也留著
+                  </span>
+                </p>
+              ) : null}
+              {badminton.late > 0 && (
+                <p className="mt-2 font-mono text-mute/55 text-[10px] tracking-[0.12em] leading-snug">
+                  {badminton.late} 場開賽後才押 · 不計入戰績(先鎖後結 · 開賽前押的才算數)
                 </p>
               )}
             </section>

@@ -31,6 +31,7 @@ import { resolveLockedSoccer } from "@/lib/soccer/engine-settle";
 import { getMlbLockedMatches } from "@/lib/mlb-matches";
 import { getMarketById } from "@/lib/markets";
 import { getTennisMatch } from "@/lib/tennis/matches";
+import { getBadmintonMatch } from "@/lib/badminton/matches";
 
 export type PulseEvent =
   | {
@@ -79,6 +80,7 @@ async function getRecentLocks(
     const isSoccer = matchId.startsWith("fd-");
     const isMarket = matchId.startsWith("mkt-"); // 群眾盤(/markets · 引擎沒覆蓋的場)· 三向同足球
     const isTennis = matchId.startsWith("tn-"); // 網球(/tennis · 兩向 a/b 存成 home/away)· R259
+    const isBadminton = matchId.startsWith("bd-"); // 羽球(/badminton · 兩向 a/b 存成 home/away)· R264
     // 棒球兩向(home/away)· 足球 + 群眾盤三向(home/draw/away)· 網球兩向(同棒球)。
     const pick =
       r.pick === "home" || r.pick === "away"
@@ -114,6 +116,13 @@ async function getRecentLocks(
       if (!tm) continue;
       teamLabel = pick === "home" ? tm.a.zh : tm.b.zh;
       matchup = `${tm.a.zh} vs ${tm.b.zh}`;
+    } else if (isBadminton) {
+      // 羽球(R264)· 兩向(a=home / b=away)· 從 curate 賽程解球員名(運彩名一字不改)·
+      // 認不到(舊 / 已撤盤)→ 跳過(graceful · 同網球)。
+      const bm = getBadmintonMatch(matchId);
+      if (!bm) continue;
+      teamLabel = pick === "home" ? bm.a.zh : bm.b.zh;
+      matchup = `${bm.a.zh} vs ${bm.b.zh}`;
     } else {
       const m = getMatchById(matchId) ?? mlbById.get(matchId);
       if (!m) continue; // CPBL + MLB 都認不到(舊資料 / 未鎖定)→ 跳過

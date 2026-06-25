@@ -1,5 +1,7 @@
+import Link from "next/link";
 import Avatar from "@/components/Avatar";
-import { drawLine, type BadmintonMatch } from "@/lib/badminton/matches";
+import BadmintonBetStrip from "@/components/BadmintonBetStrip";
+import { bettable, drawLine, type BadmintonMatch } from "@/lib/badminton/matches";
 
 // ── ZONE 27 · 羽球真實賽程卡(運彩在賣的場 · 兩向 · 名字一字不改)── v0.1 唯讀 ────────────
 // 四種狀態,誠實分流:① 可開盤 → 引擎兩向勝率(favored 上金)② 進行中(live)→「進行中 ·
@@ -46,6 +48,8 @@ export default function BadmintonDrawCard({ match }: { match: BadmintonMatch }) 
   const tie = line ? line.aWin === line.bWin : false;
   const aGold = !tie && line?.pick === "a";
   const bGold = !tie && line?.pick === "b";
+  // 可賽前鎖定押注的場(有明確未來開賽時戳 + 還沒完場)· 🔴 引擎開不開得出線都能押(Tim 鐵律)。
+  const bet = bettable(match);
 
   return (
     <article
@@ -138,6 +142,27 @@ export default function BadmintonDrawCard({ match }: { match: BadmintonMatch }) 
         <p className="font-mono text-mute/80 text-[10px] tracking-[0.1em] leading-relaxed border-t border-line/40 pt-2.5">
           覆蓋建置中 · 這場我們還沒把握誠實開盤。 賭場什麼都敢開,我們只開算得出的。
         </p>
+      )}
+
+      {/* 賽前鎖定押注(登入才能押 · 押了不可改 · 開賽封盤)· 🔴 引擎開不開得出線都能押(Tim 鐵律:
+          能上架就能押)· 認不出的場、你的判斷比引擎值錢。 只要有明確未來開賽時戳 + 還沒完場。 */}
+      {bet && !match.finalResult && (
+        <BadmintonBetStrip
+          matchId={match.id}
+          startISO={bet}
+          aLabel={match.a.zh}
+          bLabel={match.b.zh}
+        />
+      )}
+
+      {/* 進這場完整分析(引擎怎麼算 · 賽前鎖定)· 只有引擎開盤的場連(其餘詳情頁無引擎內容) */}
+      {line && (
+        <Link
+          href={`/badminton/${match.id}`}
+          className="pt-0.5 flex items-baseline justify-end font-mono text-gold/65 hover:text-gold text-[10px] tracking-[0.3em] transition-colors"
+        >
+          完整分析 →
+        </Link>
       )}
     </article>
   );

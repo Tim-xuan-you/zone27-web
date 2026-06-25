@@ -17,6 +17,7 @@ import type {
 } from "@/lib/predictions";
 import type { SoccerRecord } from "@/lib/soccer/predictions";
 import type { TennisRecord } from "@/lib/tennis/matches";
+import type { BadmintonRecord } from "@/lib/badminton/matches";
 import type { PublicProfile } from "@/lib/profile-server";
 import type { Trophy } from "@/lib/trophies";
 
@@ -47,6 +48,7 @@ type Props = {
   soccer: SoccerRecord;
   /** 網球戰績(含輸 · 兩向 · 跟棒球 / 足球分開算)· 沒押網球 → 不顯示 */
   tennis?: TennisRecord;
+  badminton?: BadmintonRecord;
   /** 準度歷程序列(棒球 · computeAccuracySeries)· 場數夠多才畫 sparkline */
   series?: AccuracyPoint[];
   /** 戰功卡(已結算的每一手 · 連單場收據)· 把數字背後的「實物證物」攤給懷疑者看 */
@@ -74,7 +76,7 @@ function standingVerdict(id: CalibrationIdentity): string {
   return `${coin},但還沒贏過引擎。`;
 }
 
-export default function ProfileView({ profile, identity: id, streak, soccer, tennis, series, trophies, calibration, seasonPeriod, seasonLabel, hasSeasonActivity }: Props) {
+export default function ProfileView({ profile, identity: id, streak, soccer, tennis, badminton, series, trophies, calibration, seasonPeriod, seasonLabel, hasSeasonActivity }: Props) {
   // 身分解析(同創作者署名 · 顯示名 or 球迷#碼 + 永久碼 chip + 頭像 seed/glyph)。
   const who = creatorIdentity({
     handle: profile.handle,
@@ -86,6 +88,8 @@ export default function ProfileView({ profile, identity: id, streak, soccer, ten
   // late 也算「有足球」:只有晚押的人 · 區塊若在結算瞬間整個消失 = 比剔除更傷信任。
   const hasSoccer = soccer.n > 0 || soccer.pending > 0 || soccer.late > 0;
   const hasTennis = !!tennis && (tennis.n > 0 || tennis.pending > 0 || tennis.late > 0);
+  const hasBadminton =
+    !!badminton && (badminton.n > 0 || badminton.pending > 0 || badminton.late > 0);
   const hasDecided = id.accuracy !== null;
   const youPct = Math.max(0, Math.min(100, id.accuracy ?? 0));
   const engPct = Math.max(0, Math.min(100, id.engine.accuracy ?? 0));
@@ -139,7 +143,7 @@ export default function ProfileView({ profile, identity: id, streak, soccer, ten
 
       {/* ── 空檔案 · 尊嚴框(profile 存在但還沒結算的場)──────────────
           不寫「沒資料」· 寫「已經開始鎖了」—— 把弱點翻成最強信號(同足球 SoccerPendingFrame)。 */}
-      {!hasBaseball && !hasSoccer && !hasTennis && (
+      {!hasBaseball && !hasSoccer && !hasTennis && !hasBadminton && (
         <section className="mt-9 bg-slate/40 border border-gold/30 p-6 sm:p-8">
           <p className="font-mono text-gold text-[10px] tracking-[0.4em] mb-4">
             這份帳本
@@ -284,6 +288,7 @@ export default function ProfileView({ profile, identity: id, streak, soccer, ten
 
       {/* ── 網球戰績(含輸 · 兩向 · 跟棒球 / 足球分開算)· 沒押網球自動隱藏 ──────── */}
       {hasTennis && tennis && <TennisSection r={tennis} />}
+      {hasBadminton && badminton && <BadmintonSection r={badminton} />}
 
       {/* ── 公開校準曲線(0027 · Metaculus「Checking Our Work」個人公開版)· 報馬仔最不敢攤的 ──
           「TA 說 8 成把握的場、真的中 8 成嗎」逐桶公開含輸 · 沒宣告過把握 / 未套 0027 → view 自回 null。
@@ -528,6 +533,61 @@ function TennisSection({ r }: { r: TennisRecord }) {
 
       <p className="mt-2 font-mono text-mute text-[9px] tracking-[0.12em] leading-snug">
         兩向對帳(誰贏)· 賽前鎖死、賽後對帳 · 跟棒球 / 足球準度分開算。
+      </p>
+    </section>
+  );
+}
+
+// 同 TennisSection 視覺語言(BadmintonRecord 與 TennisRecord 同欄位)· 運動標 = 羽球、兩向。 R264
+function BadmintonSection({ r }: { r: BadmintonRecord }) {
+  const { n, hits, misses, rate, pending, late, vsN, vsYouHits, vsEngineHits } = r;
+  return (
+    <section className="mt-6 bg-slate/40 border border-gold/30 p-5 sm:p-6">
+      <p className="font-mono text-gold/80 text-[10px] tracking-[0.35em] mb-2">
+        羽球 · 含輸命中率
+      </p>
+      {n > 0 ? (
+        <p className="text-bone text-lg sm:text-xl font-light tracking-tight">
+          <span className="text-gold tabular">{rate}%</span> 準 ·{" "}
+          <span className="text-gold tabular">✓{hits}</span>{" "}
+          <span className="text-loss tabular">✕{misses}</span>
+          <span className="text-mute/60 text-sm"> · {n} 場已結算</span>
+          {pending > 0 && (
+            <span className="text-mute/50 text-sm"> · {pending} 場待結算</span>
+          )}
+        </p>
+      ) : pending > 0 ? (
+        <p className="text-bone text-base font-light leading-snug">
+          押了 <span className="text-gold tabular">{pending}</span> 場 ·
+          <span className="text-mute/70"> 都還沒結算 —— 賽後自動掛準 / 不準,連輸的也留著</span>
+        </p>
+      ) : null}
+
+      {late > 0 && (
+        <p className="mt-2 font-mono text-mute/55 text-[10px] tracking-[0.12em] leading-snug">
+          {late} 場開賽後才押 · 不計入戰績(先鎖後結 · 開賽前押的才算數)
+        </p>
+      )}
+
+      {vsN > 0 && (
+        <p className="mt-2.5 pt-2.5 border-t border-line/40 font-mono text-[12px] tracking-[0.04em] text-mute/80">
+          同 <span className="text-bone tabular">{vsN}</span> 場 本人 vs 引擎:
+          <span className="text-bone"> 本人 ✓{vsYouHits}</span> ·
+          <span className="text-bone"> 引擎 ✓{vsEngineHits}</span>
+          <span className="text-mute/55">
+            {" "}
+            ·{" "}
+            {vsYouHits > vsEngineHits
+              ? "本人領先"
+              : vsYouHits < vsEngineHits
+                ? "引擎暫時領先"
+                : "打平"}
+          </span>
+        </p>
+      )}
+
+      <p className="mt-2 font-mono text-mute text-[9px] tracking-[0.12em] leading-snug">
+        兩向對帳(誰贏)· 賽前鎖死、賽後對帳 · 跟棒球 / 足球 / 網球準度分開算。
       </p>
     </section>
   );

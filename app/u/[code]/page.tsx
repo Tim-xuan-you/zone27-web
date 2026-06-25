@@ -31,6 +31,11 @@ import {
   tennisResults,
   tennisEnginePicks,
 } from "@/lib/tennis/matches";
+import {
+  gradeBadmintonPicks,
+  badmintonResults,
+  badmintonEnginePicks,
+} from "@/lib/badminton/matches";
 import { createPageMetadata } from "@/lib/page-og";
 import { normalizeProfileCode } from "@/lib/profile-code";
 import { buildSettledCards, computeTrophies } from "@/lib/trophies";
@@ -79,7 +84,7 @@ export default async function PublicProfilePage({
   const profile = await getProfileByCode(code);
   if (!profile) notFound();
 
-  const { baseball, soccer, tennis, soccerProps, calibrationPicks } =
+  const { baseball, soccer, tennis, badminton, soccerProps, calibrationPicks } =
     await getPredictionsByCode(code);
 
   // 棒球校準身分(CPBL + MLB · fd-* 已在 server 分流排除)。
@@ -109,10 +114,21 @@ export default async function PublicProfilePage({
     pick: (r.pick === "a" ? "home" : "away") as "home" | "away",
     ts: r.ts,
   }));
-  // 本月賽季回顧入口:有本月押注才連(避免連到空回顧)· R218 · 玩法 / 網球也算「有押」。
+  // 羽球戰績(兩向 · 含輸 · 跟其他運動分開算)· R264。
+  const badmintonRecord = gradeBadmintonPicks(
+    badminton,
+    badmintonResults(),
+    badmintonEnginePicks(),
+  );
+  const badmintonHA = badminton.map((r) => ({
+    matchId: r.matchId,
+    pick: (r.pick === "a" ? "home" : "away") as "home" | "away",
+    ts: r.ts,
+  }));
+  // 本月賽季回顧入口:有本月押注才連(避免連到空回顧)· R218 · 玩法 / 網球 / 羽球也算「有押」。
   const hasSeasonActivity = hasMonthActivity(
     baseball,
-    [...soccer, ...soccerProps, ...tennis],
+    [...soccer, ...soccerProps, ...tennis, ...badminton],
     currentMonth,
   );
   const streak = aggregateStreak(baseball, getTodayTaipei());
@@ -153,7 +169,14 @@ export default async function PublicProfilePage({
   );
 
   // 戰功卡:這份帳本所有已結算的 call(含輸 · 連單場收據)· server 端配對(picks 來自 0019 RPC)。
-  const trophies = computeTrophies(baseball, soccer, buildSettledCards(), soccerProps, tennisHA);
+  const trophies = computeTrophies(
+    baseball,
+    soccer,
+    buildSettledCards(),
+    soccerProps,
+    tennisHA,
+    badmintonHA,
+  );
 
   return (
     <div className="flex flex-col flex-1 min-h-screen">
@@ -165,6 +188,7 @@ export default async function PublicProfilePage({
           streak={streak}
           soccer={soccerRecord}
           tennis={tennisRecord}
+          badminton={badmintonRecord}
           series={accuracySeries}
           trophies={trophies}
           calibration={calibrationReport}

@@ -85,7 +85,9 @@ export default function LeagueActivity({
                           ? `/markets#m-${e.matchId}`
                           : e.matchId.startsWith("tn-")
                             ? `/tennis/${e.matchId}`
-                            : `/matches/${e.matchId}`
+                            : e.matchId.startsWith("bd-")
+                              ? `/badminton/${e.matchId}`
+                              : `/matches/${e.matchId}`
                     }
                     className="hover:text-gold transition-colors"
                   >

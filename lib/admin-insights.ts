@@ -26,7 +26,7 @@ export const K_ANON = 5;
 
 const DAY_MS = 24 * 3600 * 1000;
 
-type Sport = "cpbl" | "mlb" | "soccer" | "market" | "tennis";
+type Sport = "cpbl" | "mlb" | "soccer" | "market" | "tennis" | "badminton";
 
 function str(v: unknown): string {
   return typeof v === "string" ? v : "";
@@ -39,6 +39,7 @@ function classify(matchId: string): { sport: Sport; isProp: boolean } {
   if (matchId.startsWith("fd-")) sport = "soccer";
   else if (matchId.startsWith("mkt-")) sport = "market";
   else if (matchId.startsWith("tn-")) sport = "tennis"; // R259:網球獨立分類(別落進 cpbl 的 else)
+  else if (matchId.startsWith("bd-")) sport = "badminton"; // R264:羽球獨立分類(別誤算成 cpbl)
   else if (matchId.startsWith("mlb-")) sport = "mlb";
   else sport = "cpbl";
   return { sport, isProp };
@@ -194,6 +195,7 @@ const SPORT_LABEL: Record<Sport, string> = {
   soccer: "足球",
   market: "群眾盤",
   tennis: "網球",
+  badminton: "羽球",
 };
 
 /**
@@ -314,7 +316,7 @@ export function computeAdminInsights(
         };
 
   // ⑥ 內容供給(運動占比 + 玩法占比 + 最熱的場)
-  const sportCount: Record<Sport, number> = { cpbl: 0, mlb: 0, soccer: 0, market: 0, tennis: 0 };
+  const sportCount: Record<Sport, number> = { cpbl: 0, mlb: 0, soccer: 0, market: 0, tennis: 0, badminton: 0 };
   let whoWins = 0,
     props = 0;
   const matchCount = new Map<string, { count: number; codes: Set<string> }>();
@@ -331,7 +333,7 @@ export function computeAdminInsights(
     mc.codes.add(l.code);
   }
   const totalLocks = locks.length;
-  const bySport = (["cpbl", "mlb", "soccer", "market"] as Sport[])
+  const bySport = (["cpbl", "mlb", "soccer", "market", "tennis", "badminton"] as Sport[])
     .map((sport) => ({
       sport,
       label: SPORT_LABEL[sport],

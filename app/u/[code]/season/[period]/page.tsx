@@ -21,6 +21,11 @@ import {
   tennisResults,
   tennisEnginePicks,
 } from "@/lib/tennis/matches";
+import {
+  gradeBadmintonPicks,
+  badmintonResults,
+  badmintonEnginePicks,
+} from "@/lib/badminton/matches";
 import { buildSettledCards, computeTrophies } from "@/lib/trophies";
 import { createPageMetadata } from "@/lib/page-og";
 import { normalizeProfileCode } from "@/lib/profile-code";
@@ -80,7 +85,7 @@ export default async function SeasonRecapPage({
   const profile = await getProfileByCode(code);
   if (!profile) notFound();
 
-  const { baseball, soccer, tennis, soccerProps } = await getPredictionsByCode(code);
+  const { baseball, soccer, tennis, badminton, soccerProps } = await getPredictionsByCode(code);
 
   // 同 /u/[code]:賽果 map(CPBL + MLB live + MLB 永久鎖定 · 永久源放最後蓋過 live)。
   const mlbLive = await getMlbAsMatches();
@@ -103,11 +108,14 @@ export default async function SeasonRecapPage({
   const mSoccerProps = filterSoccerByMonth(soccerProps, period);
   // 網球也切月 → 本月網球戰績(兩向 · 跟棒球 / 足球分開算)。
   const mTennis = filterTennisByMonth(tennis, period);
+  // 羽球也切月(filterTennisByMonth 是泛型 {ts}[] · 兩向 · 跟其他運動分開算)· R264。
+  const mBadminton = filterTennisByMonth(badminton, period);
   const hasActivity =
     Object.keys(mBaseball).length > 0 ||
     mSoccer.length > 0 ||
     mSoccerProps.length > 0 ||
-    mTennis.length > 0;
+    mTennis.length > 0 ||
+    mBadminton.length > 0;
 
   const identity = aggregateIdentity(mBaseball, idMatches, period);
 
@@ -132,12 +140,35 @@ export default async function SeasonRecapPage({
     pick: (r.pick === "a" ? "home" : "away") as "home" | "away",
     ts: r.ts,
   }));
+  // 本月羽球戰績 + 戰功卡(同網球)· R264。
+  const badmintonRecord = gradeBadmintonPicks(
+    mBadminton,
+    badmintonResults(),
+    badmintonEnginePicks(),
+  );
+  const mBadmintonHA = mBadminton.map((r) => ({
+    matchId: r.matchId,
+    pick: (r.pick === "a" ? "home" : "away") as "home" | "away",
+    ts: r.ts,
+  }));
   // 本月戰功卡 → 挑高光(餵切過月的 picks · 故 trophies 已是本月子集)。 棒球 / 足球玩法不進戰功卡
-  // (虛擬場號配不到 settled card → 自然略過)· 網球誰贏卡會進。
-  const trophies = computeTrophies(mBaseball, mSoccer, buildSettledCards(), mSoccerProps, mTennisHA);
+  // (虛擬場號配不到 settled card → 自然略過)· 網球 / 羽球誰贏卡會進。
+  const trophies = computeTrophies(
+    mBaseball,
+    mSoccer,
+    buildSettledCards(),
+    mSoccerProps,
+    mTennisHA,
+    mBadmintonHA,
+  );
   const highlights = pickHighlights(trophies);
-  // 對帳天數(紀律)含玩法 + 網球那幾天 —— 都是「回來面對帳本」(各自分開算準度,但都算紀律天)。
-  const activeDays = monthActiveDays(mBaseball, [...mSoccer, ...mSoccerProps, ...mTennis]);
+  // 對帳天數(紀律)含玩法 + 網球 + 羽球那幾天 —— 都是「回來面對帳本」(各自分開算準度,但都算紀律天)。
+  const activeDays = monthActiveDays(mBaseball, [
+    ...mSoccer,
+    ...mSoccerProps,
+    ...mTennis,
+    ...mBadminton,
+  ]);
 
   return (
     <div className="flex flex-col flex-1 min-h-screen">
@@ -149,6 +180,7 @@ export default async function SeasonRecapPage({
           identity={identity}
           soccer={soccerRecord}
           tennis={tennisRecord}
+          badminton={badmintonRecord}
           highlights={highlights}
           activeDays={activeDays}
           hasActivity={hasActivity}

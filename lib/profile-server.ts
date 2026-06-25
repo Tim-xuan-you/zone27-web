@@ -5,6 +5,7 @@ import { isSoccerPropMarketId } from "@/lib/soccer/props";
 import type { MemberTier } from "@/lib/tier";
 import type { CalibrationPick } from "@/lib/calibration-master";
 import type { TennisPick } from "@/lib/tennis/matches";
+import type { BadmintonPick } from "@/lib/badminton/matches";
 
 // ── ZONE 27 · 公開 Profile 讀取(server · 無 cookie · 用永久碼)──────────
 // soul-roadmap P0:/u/[code] 公開含輸戰績頁的資料源。 用 stateless anon client 打
@@ -89,6 +90,9 @@ export async function getProfileByCode(
 /** 一筆網球押注(兩向 a/b · 公開檔讀那個碼的人)· 給 gradeTennisPicks / 戰功卡。 */
 export type CodeTennisPick = { matchId: string; pick: TennisPick; ts: string };
 
+/** 一筆羽球押注(兩向 a/b · 公開檔讀那個碼的人)· 給 gradeBadmintonPicks / 戰功卡。 */
+export type CodeBadmintonPick = { matchId: string; pick: BadmintonPick; ts: string };
+
 export type CodePredictions = {
   /** 棒球(cpbl-* / mlb-*)· 只 home/away · 給 aggregateIdentity / aggregateStreak */
   baseball: UserPredictionsMap;
@@ -96,6 +100,8 @@ export type CodePredictions = {
   soccer: SoccerPickRow[];
   /** 網球(tn-*)· 兩向 a/b · 跟棒球 / 足球分開算(gradeTennisPicks)· 存表是 home/away → 這裡轉回 a/b */
   tennis: CodeTennisPick[];
+  /** 羽球(bd-*)· 兩向 a/b · 跟其他運動分開算(gradeBadmintonPicks)· 存表是 home/away → 轉回 a/b */
+  badminton: CodeBadmintonPick[];
   /** 足球玩法(fd-*~ou25 大小分 / fd-*~ah05 讓分)· 只 home/away · 併入「你的足球戰績」同一本帳
    *  (配 soccerPropResults 虛擬賽果 + getSoccerEnginePicksAll)· 跟「誰贏」分開讀避免污染校準曲線。 */
   soccerProps: SoccerPickRow[];
@@ -118,6 +124,7 @@ export async function getPredictionsByCode(
     baseball: {},
     soccer: [],
     tennis: [],
+    badminton: [],
     soccerProps: [],
     calibrationPicks: [],
   };
@@ -132,6 +139,8 @@ export async function getPredictionsByCode(
     const soccer: SoccerPickRow[] = [];
     const tennis: CodeTennisPick[] = [];
     const seenTennis = new Set<string>(); // 網球同場只取最近一筆(已 desc → first-seen 最新)
+    const badminton: CodeBadmintonPick[] = [];
+    const seenBadminton = new Set<string>(); // 羽球同場只取最近一筆(已 desc → first-seen 最新)
     const soccerProps: SoccerPickRow[] = [];
     const calibrationPicks: CalibrationPick[] = [];
     const seenConf = new Set<string>(); // 校準同場只取最近一筆(已 desc → first-seen 最新)
@@ -156,6 +165,7 @@ export async function getPredictionsByCode(
         validPick &&
         !isProp && // 🔴 校準曲線只算「誰贏」· 不混玩法機率(數學上不能畫同一條線)
         !matchId.startsWith("tn-") && // 網球賽果沒進這頁的 calibrationResults → 收進來只會變永遠 pending 的幽靈(/u 校準曲線目前只算棒球 + 足球)
+        !matchId.startsWith("bd-") && // 羽球同理(R264)· 賽果沒進這頁 calibrationResults → 排除避免幽靈 pending
         typeof conf === "number" &&
         Number.isFinite(conf) &&
         conf >= 1 &&
@@ -194,9 +204,18 @@ export async function getPredictionsByCode(
           seenTennis.add(matchId);
           tennis.push({ matchId, pick: p, ts });
         }
+      } else if (matchId.startsWith("bd-") && !isProp) {
+        // 羽球兩向(bd-*)· 跟其他運動分開算(gradeBadmintonPicks)· 存表 home/away → 轉回 a/b
+        // (A=home、B=away · 同 client fromStored)· 同場只取最近一筆(已 desc → first-seen 最新)。 R264
+        const p: BadmintonPick | null =
+          row.pick === "home" ? "a" : row.pick === "away" ? "b" : null;
+        if (p && !seenBadminton.has(matchId)) {
+          seenBadminton.add(matchId);
+          badminton.push({ matchId, pick: p, ts });
+        }
       }
     }
-    return { baseball, soccer, tennis, soccerProps, calibrationPicks };
+    return { baseball, soccer, tennis, badminton, soccerProps, calibrationPicks };
   } catch {
     return empty;
   }

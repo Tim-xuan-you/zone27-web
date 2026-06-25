@@ -29,6 +29,8 @@ import ProfileShareCard from "@/components/ProfileShareCard";
 import SoccerRecordCard from "@/components/SoccerRecordCard";
 import TennisRecordCard from "@/components/TennisRecordCard";
 import { tennisResults, tennisEnginePicks } from "@/lib/tennis/matches";
+import BadmintonRecordCard from "@/components/BadmintonRecordCard";
+import { badmintonResults, badmintonEnginePicks } from "@/lib/badminton/matches";
 import CalibrationMasterCard from "@/components/CalibrationMasterCard";
 import type { CalibrationResult } from "@/lib/calibration-master";
 import { getSoccerLedgerResults } from "@/lib/soccer/football-data";
@@ -369,6 +371,11 @@ export default async function MemberPage() {
         <TennisRecordCard
           results={tennisResults()}
           enginePicks={tennisEnginePicks()}
+          wrapperClass="mt-6"
+        />
+        <BadmintonRecordCard
+          results={badmintonResults()}
+          enginePicks={badmintonEnginePicks()}
           wrapperClass="mt-6"
         />
         <CalibrationMasterCard results={calibrationResults} wrapperClass="mt-6" />

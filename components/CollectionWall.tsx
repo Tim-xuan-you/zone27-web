@@ -6,6 +6,7 @@ import TrophyGrid from "@/components/TrophyGrid";
 import { getMyPredictionsClient } from "@/lib/predictions-market";
 import { getMySoccerPicks, getMySoccerPropPicks } from "@/lib/soccer/predictions";
 import { getMyTennisPicks } from "@/lib/tennis/predictions";
+import { getMyBadmintonPicks } from "@/lib/badminton/predictions";
 import { computeTrophies, type SettledCard, type Trophy } from "@/lib/trophies";
 
 // ── ZONE 27 · 戰功卡收藏牆(本人 · /member/collection)──────────────────────
@@ -43,20 +44,26 @@ export default function CollectionWall({
   useEffect(() => {
     let alive = true;
     (async () => {
-      const [bb, sc, sp, tn] = await Promise.all([
+      const [bb, sc, sp, tn, bd] = await Promise.all([
         getMyPredictionsClient(), // 棒球(含大小分 ~bou)
         getMySoccerPicks(), // 足球誰贏(fd-*)
         getMySoccerPropPicks(), // 足球玩法(大小分 ~ou25 / 讓分 ~ah05)· R262
         getMyTennisPicks(), // 網球誰贏(tn-* · 兩向 a/b)
+        getMyBadmintonPicks(), // 羽球誰贏(bd-* · 兩向 a/b)· R264
       ]);
       if (!alive) return;
-      // 網球 a/b → home/away(A=home、B=away)· 餵同一套 computeTrophies h2h 配對。
+      // 網球 / 羽球 a/b → home/away(A=home、B=away)· 餵同一套 computeTrophies h2h 配對。
       const tnHA = tn.map((r) => ({
         matchId: r.matchId,
         pick: (r.pick === "a" ? "home" : "away") as "home" | "away",
         ts: r.ts,
       }));
-      setTrophies(computeTrophies(bb, sc, settled, sp, tnHA));
+      const bdHA = bd.map((r) => ({
+        matchId: r.matchId,
+        pick: (r.pick === "a" ? "home" : "away") as "home" | "away",
+        ts: r.ts,
+      }));
+      setTrophies(computeTrophies(bb, sc, settled, sp, tnHA, bdHA));
       setReady(true);
     })();
     return () => {
