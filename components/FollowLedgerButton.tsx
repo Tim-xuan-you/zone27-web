@@ -96,7 +96,7 @@ export default function FollowLedgerButton({
       <p className="mt-1.5 font-mono text-mute/45 text-[9px] tracking-[0.12em] leading-relaxed max-w-xs">
         {following
           ? "他賽前鎖手時,會出現在你「只看我追的」脈動裡 · 你追了誰只有你自己看得到、隨時可取消。"
-          : "追的是這份帳本的準度,不是人氣 · 名單私密、不公開。"}
+          : "把這份帳本加進你的觀察名單 —— 他下次賽前鎖手,你第一個看到。 追的是準度,不是人氣 · 名單私密、不公開。"}
       </p>
     </div>
   );
