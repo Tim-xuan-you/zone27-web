@@ -97,7 +97,11 @@ const rawMatches: Match[] = [
   //     明顯壓過富邦鈴木駿輔 ERA 2.42 / WHIP 1.08 / K9 8.7(穩定中段 · 2025 2.51)。 隊強+主場 vs 對方王牌
   //     兩股力量大幅抵掉 → 富邦 54 / 樂天 46 · conf 51(富邦隊底+主場略蓋,但威能帝把樂天撐到很接近 → 不是
   //     穩贏、低 conviction;王牌單場能扛弱隊)。 ⚠️ winRate 是分析判斷,Tim 可調。
-  //   ⏳ 第二場(洲際 · 台鋼 坎南 vs 中信 羅戈)待 Tim 補「坎南」先發成績表 → 補齊再開盤(羅戈已有自動資料)。
+  //   洲際 · 台鋼(坎南 away)vs 中信(羅戈 home)· W-L 台鋼 30-28-1(.517)/ 中信 19-34-2(.358 墊底)。
+  //     台鋼雙重優勢:better team + 坎南今年更猛 —— 坎南 2026 ERA 2.12 / WHIP 1.01 / K9 8.3(2025 1.95 ·
+  //     穩定一流)壓過中信羅戈 2026 ERA 3.13 / WHIP 1.14 / K9 7.8(王牌底 2024 2.16 / 2025 1.84 · 今年回落)。
+  //     只剩中信主場 + 羅戈王牌底反推 → 台鋼 60 / 中信 40 · conf 55(清楚偏台鋼,但羅戈狀況好能壓制 +
+  //     中信主場 + 單場變異 → 不衝更高)。 ⚠️ winRate 是分析判斷,Tim 可調。
   {
     id: "cpbl-260626-01",
     league: "CPBL",
@@ -141,6 +145,50 @@ const rawMatches: Match[] = [
       { score: "1 : 2", probability: 7.0 },
     ],
     aiConfidence: 51,
+  },
+  {
+    id: "cpbl-260626-02",
+    league: "CPBL",
+    date: "2026 · 06 · 26  ·  星期五",
+    startTime: "18:35",
+    venue: "臺中洲際棒球場",
+    home: {
+      name: "中信兄弟",
+      en: "BROTHERS",
+      pitcher: {
+        name: "羅戈",
+        era: "3.13", // estimate · 2026 官網累計成績表(Tim 截圖手抄)· 72 IP(12 先發)· 王牌底(2024 2.16 / 2025 1.84 · 今年回落)
+        k9: "7.8", // estimate · 62 K / 72 IP × 9
+        whip: "1.14", // estimate · 官網每局被上壘率 1.138(60 H + 22 BB / 72 IP)
+        bb9: "2.8", // estimate · 22 BB / 72 IP × 9
+        hr9: "0.38", // estimate · 3 HR / 72 IP × 9
+      },
+      recent: ["L", "W", "L", "L", "W"], // placeholder · 中信 19-34-2(.358 墊底)
+      winRate: 40,
+    },
+    away: {
+      name: "台鋼雄鷹",
+      en: "HAWKS",
+      pitcher: {
+        name: "坎南",
+        era: "2.12", // estimate · 2026 官網累計成績表(Tim 截圖手抄)· 46.2 IP(7 先發)· 穩定一流(2025 1.95)
+        k9: "8.3", // estimate · 43 K / 46.2 IP × 9
+        whip: "1.01", // estimate · 官網每局被上壘率 1.007(40 H + 7 BB / 46.2 IP)· 頂級
+        bb9: "1.4", // estimate · 7 BB / 46.2 IP × 9 · 控球極好
+        hr9: "0.19", // estimate · 1 HR / 46.2 IP × 9 · 幾乎不被轟
+      },
+      recent: ["W", "L", "W", "W", "L"], // placeholder · 台鋼 30-28-1(.517)
+      winRate: 60,
+    },
+    topScores: [
+      // 坎南壓制(中信低分)+ 羅戈今年回落(台鋼得分)→ 台鋼 lean、中低分(格式 home : away = 中信 : 台鋼)
+      { score: "2 : 3", probability: 8.0 },
+      { score: "1 : 3", probability: 7.5 },
+      { score: "2 : 4", probability: 7.5 },
+      { score: "3 : 4", probability: 7.0 },
+      { score: "3 : 2", probability: 6.5 },
+    ],
+    aiConfidence: 55,
   },
   // ── 2026-06-25 · 一軍 ingest(週四)· Tim 截圖 cpbl.com.tw 賽程 + 先發投手成績表 ──
   //   投手值由官網累計成績表(IP/K/BB/HR)換算 · 標 estimate(自 Tim 截圖手抄)· winRate 手 curate。
@@ -197,6 +245,9 @@ const rawMatches: Match[] = [
       { score: "1 : 2", probability: 7.0 },
     ],
     aiConfidence: 53,
+    // 🔴 Tim 6/26 確認:6/25 只有「樂天@中信」一場(洲際 · 延賽)· 此「味全@富邦」未實際舉行 →
+    //   標 postponed 歸檔、不掛「今晚可押」/ 不誤判結算(不刪除以免動到任何既有押注)· 若確定整場不存在再移除。
+    postponed: true,
   },
   {
     id: "cpbl-260625-02",
