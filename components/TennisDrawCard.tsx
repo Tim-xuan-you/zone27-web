@@ -122,7 +122,7 @@ export default function TennisDrawCard({ match }: { match: TennisMatch }) {
             <div className={aGold ? "bg-gold/85" : "bg-bone/25"} style={{ width: `${line.aWin}%` }} />
             <div className={bGold ? "bg-gold/85" : "bg-bone/25"} style={{ width: `${line.bWin}%` }} />
           </div>
-          <p className="mt-2 font-mono text-mute/55 text-[9px] tracking-[0.12em]">
+          <p className="mt-2 font-mono text-mute/80 text-[9px] tracking-[0.12em]">
             {tie ? (
               <>勢均力敵 · 引擎也拿不準 —— <span className="text-bone/80">你的判斷最值錢</span></>
             ) : (
@@ -131,11 +131,11 @@ export default function TennisDrawCard({ match }: { match: TennisMatch }) {
           </p>
         </div>
       ) : match.note ? (
-        <p className="font-mono text-mute/55 text-[10px] tracking-[0.1em] leading-relaxed border-t border-line/40 pt-2.5">
+        <p className="font-mono text-mute/80 text-[10px] tracking-[0.1em] leading-relaxed border-t border-line/40 pt-2.5">
           {match.note}
         </p>
       ) : (
-        <p className="font-mono text-mute/55 text-[10px] tracking-[0.1em] leading-relaxed border-t border-line/40 pt-2.5">
+        <p className="font-mono text-mute/80 text-[10px] tracking-[0.1em] leading-relaxed border-t border-line/40 pt-2.5">
           覆蓋建置中 · 這場我們還沒把握誠實開盤。 賭場什麼都敢開,我們只開算得出的。
         </p>
       )}

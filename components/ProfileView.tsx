@@ -223,7 +223,7 @@ export default function ProfileView({ profile, identity: id, streak, soccer, ten
               {/* 亂猜 50% 基準字 · 落在虛線正下方 */}
               <div className="mt-1.5 flex items-center gap-3">
                 <span className="w-8 shrink-0" aria-hidden />
-                <span className="flex-1 text-center font-mono text-mute/45 text-[9px] tracking-[0.25em]">
+                <span className="flex-1 text-center font-mono text-mute/80 text-[9px] tracking-[0.25em]">
                   亂猜 50%
                 </span>
                 <span className="w-[3.25rem] shrink-0" aria-hidden />
@@ -561,7 +561,7 @@ function ReckoningStar({ id }: { id: CalibrationIdentity }) {
           >
             對帳之星{earned ? "" : onTrack ? " · 進行中" : " · 還沒達成"}
           </p>
-          <p className="font-mono text-mute/55 text-[10px] tracking-[0.2em] mt-0.5">
+          <p className="font-mono text-mute/80 text-[10px] tracking-[0.2em] mt-0.5">
             ZONE 27 認證 · 賺來的、錢買不到
           </p>
         </div>

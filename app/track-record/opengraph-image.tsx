@@ -20,11 +20,9 @@ export const contentType = OG_CONTENT_TYPE;
 export const alt =
   "ZONE 27 · 公開戰績 ledger · PROVED vs DIVERGED 等大列出 · 不藏 miss";
 
-// OG glyph hardening · ImageResponse 的 default system font 不一定
-// 包含 ✓ ✕ unicode · build 時會跑 dynamic font download 然後 fallback
-// 成方塊。對於 OG 卡片這種一次性截圖,改用純文字 PROVED / DIVERGED
-// 標籤(不帶符號)更穩。HeroLiveCard 跟 /track-record page 仍可用
-// ✓ ✕,因為訪客瀏覽器系統字型包含這些 glyphs。
+// 🔴 OG glyph 房規(R223):next/og PNG 絕不用 ✓✕▸★→ 等 symbol glyph(Satori 系統字缺 →
+//   豆腐方塊)。 本卡用純文字 PROVED · 引擎命中 / DIVERGED · 引擎落空 StatBlock,0 字型依賴。
+//   (站上 HTML 頁面仍可用 ✓✕,訪客瀏覽器系統字型有 · 只有 OG PNG 這條限制。)
 
 export default async function TrackRecordOgImage() {
   const finalized = getFinalizedMatches();

@@ -28,14 +28,14 @@ export default function EngineThreeWayBar({
 }) {
   const seg = (side: Side, pct: number) => (
     <div
-      className={`h-full ${goldSide === side ? "bg-gold glow-gold" : "bg-mute/40"}`}
+      className={`h-full ${goldSide === side ? "bg-gold glow-gold" : "bg-mute/55"}`}
       style={{ width: `${pct}%` }}
     />
   );
   return (
     <div
       aria-hidden="true"
-      className={`relative h-2 sm:h-2.5 flex overflow-hidden rounded-full bg-ink/60 ${className}`}
+      className={`relative h-2 sm:h-2.5 flex overflow-hidden rounded-full bg-line/50 ${className}`}
     >
       {seg("home", homePct)}
       {seg("draw", drawPct)}

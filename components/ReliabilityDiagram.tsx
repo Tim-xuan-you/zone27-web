@@ -113,17 +113,23 @@ export default function ReliabilityDiagram({
               ))
             : bins.map((b) => {
                 const radius = Math.min(3 + b.count * 1.5, 12);
+                // 每個金點可聚焦 + 語音/hover 讀出該桶白話判決(details-on-demand · 鍵盤可達)。
+                const low = Math.max(0, b.centerPct - 5);
+                const high = Math.min(100, b.centerPct + 5);
+                const dotLabel = `引擎喊 ${low}–${high}% 看好的那 ${b.count} 場 · 真的中了 ${Math.round(b.favoriteActualPct)}%`;
                 return (
-                  <circle
-                    key={b.centerPct}
-                    cx={px(b.centerPct)}
-                    cy={py(b.favoriteActualPct)}
-                    r={radius}
-                    fill="#D4AF37"
-                    fillOpacity={0.85}
-                    stroke="#0F1A2E"
-                    strokeWidth="1"
-                  />
+                  <g key={b.centerPct} tabIndex={0} role="img" aria-label={dotLabel}>
+                    <title>{dotLabel}</title>
+                    <circle
+                      cx={px(b.centerPct)}
+                      cy={py(b.favoriteActualPct)}
+                      r={radius}
+                      fill="#D4AF37"
+                      fillOpacity={0.85}
+                      stroke="#0F1A2E"
+                      strokeWidth="1"
+                    />
+                  </g>
                 );
               })}
           {/* Axis tick labels */}

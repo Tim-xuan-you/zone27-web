@@ -61,7 +61,7 @@ function grassRating(p: TennisPlayer): number {
 function ContenderRow({ p, idx }: { p: TennisPlayer; idx: number }) {
   return (
     <div className="flex items-center gap-3 py-3 border-b border-line/40 last:border-b-0">
-      <span className="w-5 shrink-0 font-mono text-mute/50 text-[11px] tabular text-right">
+      <span className="w-5 shrink-0 font-mono text-mute/80 text-[11px] tabular text-right">
         {idx + 1}
       </span>
       <Avatar seed={p.id} glyph={initials(p.en)} size={30} />
@@ -78,7 +78,7 @@ function ContenderRow({ p, idx }: { p: TennisPlayer; idx: number }) {
         <span className="block font-mono text-gold text-base tabular leading-none">
           {grassRating(p)}
         </span>
-        <span className="block font-mono text-mute/45 text-[8px] tracking-[0.2em] mt-1">草地戰力</span>
+        <span className="block font-mono text-mute/80 text-[8px] tracking-[0.2em] mt-1">草地戰力</span>
       </span>
     </div>
   );

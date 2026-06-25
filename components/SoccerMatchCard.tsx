@@ -70,7 +70,7 @@ export default function SoccerMatchCard({ match }: { match: SoccerMatchPredictio
       {prediction ? (
         <Prediction home={home} away={away} prediction={prediction} />
       ) : (
-        <p className="font-mono text-mute/60 text-[10px] tracking-[0.15em] leading-relaxed border-t border-line/40 pt-2.5">
+        <p className="font-mono text-mute/80 text-[10px] tracking-[0.15em] leading-relaxed border-t border-line/40 pt-2.5">
           覆蓋建置中 · 這個聯賽的戰績還不夠讓引擎誠實開盤。 賭場什麼都敢開,我們只開算得出的。
         </p>
       )}

@@ -24,8 +24,8 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
         : `我說 ${res.conf}%、實際中 ${res.hit}% · 換你測`
     : "校準練習 · 換你當引擎";
   const description = res
-    ? `有人測了自己判斷比賽有多準:以為 ${res.conf}% 把握、實際中 ${res.hit}%。 沒人是神,連最強引擎也才 5 成 7。 拿打完的比賽藏住比分,換你滑出把握、攤開對照 —— 60 秒、不用登入。`
-    : "拿幾場打完的 CPBL 比賽藏住比分,你滑出把握、再攤開對照那道「沒人是神、5 成 7 是天花板」的牆。 60 秒、不用登入。";
+    ? `有人測了自己判斷比賽有多準:以為 ${res.conf}% 把握、實際中 ${res.hit}%。 沒人是神,連最強引擎也才 5 成 7。 拿打完的比賽藏住比分,換你滑出把握、攤開對照 —— 30 秒、不用登入。`
+    : "拿幾場打完的 CPBL 比賽藏住比分,你滑出把握、再攤開對照那道「沒人是神、5 成 7 是天花板」的牆。 30 秒、不用登入。";
   return {
     title: res ? `校準成績:以為 ${res.conf}% · 實際 ${res.hit}%` : "校準練習 · 換你當引擎",
     description,
@@ -141,7 +141,7 @@ export default async function CalibrationResultPage({ params }: { params: Params
               href="/calibration/test"
               className="inline-flex items-center gap-2 bg-gold text-navy font-mono text-xs tracking-[0.25em] px-7 py-3 hover:bg-gold-soft transition-colors"
             >
-              換你測 · 60 秒 →
+              換你測 · 30 秒 →
             </Link>
             <p className="font-mono text-mute/60 text-[9px] tracking-[0.2em] leading-relaxed">
               不用登入 · 拿打完的比賽撞撞看你自己的那道牆

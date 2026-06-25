@@ -545,7 +545,7 @@ function ResultPanelFooter({
 // 朋友點進去看不到你的答案,是全新一局,得自己撞那道 57% 的牆(= 病毒擴散的真正引擎)。
 function buildShareLine(s: Score): string {
   if (s.decided === 0 || s.avgConf === null || s.youHitPct === null) {
-    return "我剛測了自己判斷比賽有多準 —— 沒有人是神。換你也來測測看(60 秒):";
+    return "我剛測了自己判斷比賽有多準 —— 沒有人是神。換你也來測測看(30 秒):";
   }
   if (s.gap !== null && s.gap > 12) {
     return `我以為自己有 ${s.avgConf}% 把握,實際只中 ${s.youHitPct}% —— 連我都沒那麼準。換你測測你有多準:`;

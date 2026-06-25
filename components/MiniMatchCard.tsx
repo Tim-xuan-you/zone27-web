@@ -368,10 +368,9 @@ function MiniPhaseBadge({
   if (phase === "today-pregame") {
     return (
       <span
-        lang="en"
         className="px-1 py-0.5 text-[7px] tracking-[0.2em] border border-gold text-gold font-mono whitespace-nowrap"
       >
-        PREGAME
+        即將開賽
       </span>
     );
   }
@@ -379,10 +378,9 @@ function MiniPhaseBadge({
   if (phase === "today-live") {
     return (
       <span
-        lang="en"
         className="px-1 py-0.5 text-[7px] tracking-[0.2em] border border-gold text-gold font-mono whitespace-nowrap shimmer"
       >
-        LIVE
+        賽事中
       </span>
     );
   }
@@ -390,10 +388,9 @@ function MiniPhaseBadge({
   if (phase === "future") {
     return (
       <span
-        lang="en"
         className="px-1 py-0.5 text-[7px] tracking-[0.2em] border border-gold/50 text-gold font-mono whitespace-nowrap"
       >
-        PREVIEW
+        尚未開打
       </span>
     );
   }

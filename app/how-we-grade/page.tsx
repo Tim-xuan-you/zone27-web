@@ -10,6 +10,7 @@ import {
   type Match,
 } from "@/lib/matches";
 import { getMlbLockedMatches } from "@/lib/mlb-matches";
+import { getLockedSoccerPredictions } from "@/lib/soccer/locked";
 import { createPageMetadata } from "@/lib/page-og";
 
 export const metadata = createPageMetadata({
@@ -52,6 +53,35 @@ export default function HowWeGradePage() {
     .filter((m) => getCalibration(m) === "diverged" && favPct(m) > 50)
     .sort((a, b) => favPct(b) - favPct(a));
   const miss = diverged[0] ?? null;
+
+  // R263 · 「同一手,兩把尺」· 直擊對手「沒輸就算中」的灌水術:取一場引擎看好某隊「贏」、
+  // 結果踢成和局的場(我們判 ✕ 落空 · 寬鬆評分者會算 ✓)。 沒有就 graceful 整段不顯。
+  const drawMiss =
+    getLockedSoccerPredictions()
+      .filter(
+        (p) =>
+          p.outcome === "draw" &&
+          p.verdict === "diverged" &&
+          p.enginePick !== "draw" &&
+          p.finalScore !== null,
+      )
+      .sort(
+        (a, b) =>
+          Math.max(b.homeWinPct, b.awayWinPct) - Math.max(a.homeWinPct, a.awayWinPct),
+      )[0] ?? null;
+  const dmName = drawMiss
+    ? drawMiss.enginePick === "home"
+      ? drawMiss.home
+      : drawMiss.away
+    : "";
+  const dmPct = drawMiss
+    ? drawMiss.enginePick === "home"
+      ? drawMiss.homeWinPct
+      : drawMiss.awayWinPct
+    : 0;
+  const dmScore = drawMiss?.finalScore
+    ? `${drawMiss.finalScore.home}:${drawMiss.finalScore.away}`
+    : "";
 
   return (
     <div className="flex flex-col flex-1 min-h-screen">
@@ -154,6 +184,48 @@ export default function HowWeGradePage() {
             </div>
           )}
         </section>
+
+        {/* ── 同一手,兩把尺(嚴格 vs 寬鬆評分)· 直擊「沒輸就算中」的灌水術 ──
+            對手戰績幾乎全綠,是因為用寬鬆的尺(看好的隊沒輸=和局也算中)。 同一場,我們的尺
+            把「看好某隊贏、結果和局」算 ✕ 落空。 取真實 draw-miss · 沒有就整段隱藏(graceful)。 */}
+        {drawMiss && (
+          <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-16 border-t border-line/40 pt-12">
+            <p className="font-mono text-gold text-[10px] tracking-[0.45em] mb-6">
+              / 同一手 · 兩把尺
+            </p>
+            <p className="text-mute text-sm leading-relaxed mb-6 max-w-xl">
+              有些站的戰績幾乎整排打勾、看起來神準 —— 因為它用<span className="text-bone">寬鬆的尺</span>:
+              「看好的隊只要沒輸(和局也算),就算中」。 同一場,我們用嚴格的尺。 這場引擎賽前看好{" "}
+              <span className="text-gold">{dmName} {dmPct}%</span> · 結果踢成{" "}
+              <span className="text-bone">{dmScore} 和局</span>:
+            </p>
+            <div className="grid sm:grid-cols-2 gap-4">
+              <div className="border border-line/60 bg-slate/20 p-5">
+                <p className="font-mono text-mute/80 text-[10px] tracking-[0.3em] mb-2">
+                  賣明牌那種尺
+                </p>
+                <p className="text-mute text-sm leading-relaxed">
+                  「看好的隊又沒輸」→ <span className="text-bone">算中 ✓</span>(或含糊帶過)。
+                  戰績表於是幾乎整排綠勾 · 看起來神準。
+                </p>
+              </div>
+              <div className="border border-loss/30 bg-loss/5 p-5">
+                <p className="font-mono text-gold/80 text-[10px] tracking-[0.3em] mb-2">
+                  我們的尺
+                </p>
+                <p className="text-bone text-sm leading-relaxed">
+                  看好某隊「贏」、結果是和局 = 沒中 ·{" "}
+                  <span className="font-mono text-loss/90 text-[13px] tracking-[0.1em]">✕ 落空 · 刪不掉</span>。
+                  和局算我們輸,命中率才不會灌水。
+                </p>
+              </div>
+            </div>
+            <p className="mt-5 text-mute/80 text-[13px] leading-relaxed max-w-xl">
+              接近全中的戰績,不是神準,是尺放鬆了 —— 而且全世界最強的也才 5 成 7。 我們嚴格到自己難看,
+              那正是這份帳本值錢的地方。
+            </p>
+          </section>
+        )}
 
         <FounderSignOff>
           <p>
