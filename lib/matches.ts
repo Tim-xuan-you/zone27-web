@@ -188,6 +188,9 @@ const rawMatches: Match[] = [
       { score: "1 : 2", probability: 6.5 },
     ],
     aiConfidence: 50,
+    // 🔴 2026-06-25 樂天@中信(洲際 · 降雨 70%)→ 延賽(Tim 6/26 截圖確認)· 不掛「今晚可押」·
+    //   賽前鎖好的引擎線保留(擇期重賽時 Tim 再處理 · 同 getMatchPhase 視同已歸檔)。
+    postponed: true,
   },
   // ── 2026-06-24 · 一軍 ingest(週三)· Tim 截圖 cpbl.com.tw 賽程 + 先發投手成績表 ──
   //   投手值由官網累計成績表(IP/K/BB/HR)換算 · 標 estimate(自 Tim 截圖手抄)· winRate 手 curate
