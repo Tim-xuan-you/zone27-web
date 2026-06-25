@@ -36,7 +36,11 @@ import {
 } from "./competitions.mjs";
 
 const BASE = "https://api.football-data.org/v4";
-const REVALIDATE_SECONDS = 3600; // 1h ISR · 遠低於 10/min
+// 結算新鮮度(R275):原本 1h 是當初涵蓋多賽事時的保守值;現在只有 WC + BSA 兩賽
+// (見 competitions.mjs · 且 getRecentSoccerResults 只在「有開踢未對帳場」才打 → 呼叫被 gate),
+// 速率餘裕極大。 1h 快取 = 終場後最久凍「待對帳」一小時 = 對直播押注自打臉(Tim「結束了沒結算」)。
+// → 降到 5 分鐘:終場 ~5 分內就站上即時對帳(football-data 終場後幾分鐘就掛 FINISHED),仍 ~1.6 req/min 遠低於 10/min。
+const REVALIDATE_SECONDS = 300; // 5min ISR · 結算 ≤5min · 仍遠低於 10/min(WC+BSA 兩賽 + gated 呼叫)
 
 export type SoccerCompetition = {
   code: string;
