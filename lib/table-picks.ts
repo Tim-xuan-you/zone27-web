@@ -51,7 +51,18 @@ export type TableCall = {
 //    「引擎有模型」badge 整個拿掉(對結果 0 差別 = 對用戶 0 意義)· 只在引擎真的不會算的
 //    盤(角球)留一句白話 engineNote 當誠實註腳(那才是克制的真意)。
 const TABLE: TableCall[] = [
-  // ── 2026-06-25 這一桌 · Tim/Ron/Lewi 賽前鎖的注(待對帳 · 賽後逐筆對帳 · 含輸照掛)──────
+  // ── 2026-06-26 這一桌 · 最新賽前鎖的注(待對帳)──────
+  {
+    handle: "Lewi",
+    league: "世界盃",
+    match: "德國 vs 厄瓜多",
+    when: "6/26 04:00",
+    call: "厄瓜多 先進球",
+    engineModels: false,
+    engineNote: "誰先進球這種賭法,我們引擎沒在算 —— 還是照樣幫他對帳",
+    result: "pending",
+  },
+  // ── 2026-06-25 這一桌 · Tim/Ron/Lewi 賽前鎖的注(2026-06-26 對帳 · 2 中 4 落空 · 含輸照掛)──────
   {
     handle: "Tim",
     league: "世界盃",
@@ -59,7 +70,8 @@ const TABLE: TableCall[] = [
     when: "6/25 03:00",
     call: "瑞士 會贏",
     engineModels: true,
-    result: "pending",
+    resultNote: "瑞士 2:1 加拿大 · 瑞士贏 → 中了",
+    result: "win",
   },
   {
     handle: "Ron",
@@ -69,7 +81,8 @@ const TABLE: TableCall[] = [
     call: "角球 超過 9.5 個",
     engineModels: false,
     engineNote: "角球這種賭法,我們引擎沒在算 —— 還是照樣幫他對帳",
-    result: "pending",
+    resultNote: "角球 9 顆(加拿大 7 + 瑞士 2)· 不到 9.5 → 沒中",
+    result: "lose",
   },
   {
     handle: "Lewi",
@@ -78,7 +91,8 @@ const TABLE: TableCall[] = [
     when: "6/25 09:00",
     call: "南韓 會贏",
     engineModels: true,
-    result: "pending",
+    resultNote: "南非 1:0 南韓 · 南韓落敗 → 沒中",
+    result: "lose",
   },
   {
     handle: "Tim",
@@ -87,7 +101,8 @@ const TABLE: TableCall[] = [
     when: "6/25 09:00",
     call: "兩隊不會都進球",
     engineModels: true,
-    result: "pending",
+    resultNote: "南非 1:0 南韓 · 只有南非進球(南韓 0)· 兩隊沒都進 → 中了",
+    result: "win",
   },
   {
     handle: "Ron",
@@ -96,7 +111,8 @@ const TABLE: TableCall[] = [
     when: "6/25 07:07",
     call: "藍鳥 贏 2 分以上",
     engineModels: true,
-    result: "pending",
+    resultNote: "太空人 3:1 藍鳥 · 藍鳥落敗 → 沒中",
+    result: "lose",
   },
   {
     handle: "Lewi",
@@ -105,7 +121,8 @@ const TABLE: TableCall[] = [
     when: "6/25 07:07",
     call: "兩隊總分 超過 8.5 分",
     engineModels: true,
-    result: "pending",
+    resultNote: "兩隊合計 4 分(太空人 3 + 藍鳥 1)· 不到 8.5 → 沒中",
+    result: "lose",
   },
   // ── 2026-06-21 這一桌 · Tim/Ron/Lewi 報的注 · 賽後逐筆對帳(2026-06-23 對帳 · 2 中 2 落空 · 含輸照掛)──
   {
