@@ -8355,8 +8355,12 @@
       },
       "engineWinHomePct": 48,
       "lockedAt": "2026-06-22T18:51:08.498Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 3,
+        "away": 4
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-06-25T04:06:29.747Z"
     },
     {
       "gamePk": 824341,
@@ -8417,8 +8421,12 @@
       },
       "engineWinHomePct": 73,
       "lockedAt": "2026-06-22T22:50:21.793Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 7,
+        "away": 6
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-06-25T04:06:29.747Z"
     },
     {
       "gamePk": 823367,
@@ -8446,8 +8454,12 @@
       },
       "engineWinHomePct": 59,
       "lockedAt": "2026-06-22T18:51:08.498Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 11,
+        "away": 1
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-06-25T04:06:29.747Z"
     },
     {
       "gamePk": 822965,
@@ -8475,8 +8487,12 @@
       },
       "engineWinHomePct": 52,
       "lockedAt": "2026-06-22T18:51:08.498Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 5,
+        "away": 3
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-06-25T04:06:29.747Z"
     },
     {
       "gamePk": 824259,
@@ -8504,8 +8520,12 @@
       },
       "engineWinHomePct": 63,
       "lockedAt": "2026-06-22T18:51:08.498Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 2,
+        "away": 4
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-06-25T04:06:29.747Z"
     },
     {
       "gamePk": 822719,
@@ -8533,8 +8553,12 @@
       },
       "engineWinHomePct": 46,
       "lockedAt": "2026-06-22T18:51:08.498Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 4,
+        "away": 5
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-06-25T04:06:29.747Z"
     },
     {
       "gamePk": 822798,
@@ -8562,8 +8586,12 @@
       },
       "engineWinHomePct": 72,
       "lockedAt": "2026-06-22T22:50:21.793Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 1,
+        "away": 3
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-06-25T04:06:29.747Z"
     },
     {
       "gamePk": 823611,
@@ -8591,8 +8619,12 @@
       },
       "engineWinHomePct": 61,
       "lockedAt": "2026-06-22T18:51:08.498Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 5,
+        "away": 10
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-06-25T04:06:29.747Z"
     },
     {
       "gamePk": 824500,
@@ -8620,8 +8652,12 @@
       },
       "engineWinHomePct": 44,
       "lockedAt": "2026-06-22T18:51:08.498Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 5,
+        "away": 6
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-06-25T04:06:29.747Z"
     },
     {
       "gamePk": 823691,
@@ -8649,8 +8685,12 @@
       },
       "engineWinHomePct": 34,
       "lockedAt": "2026-06-22T18:51:08.498Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 3,
+        "away": 4
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-06-25T04:06:29.747Z"
     },
     {
       "gamePk": 823284,
@@ -8678,8 +8718,12 @@
       },
       "engineWinHomePct": 44,
       "lockedAt": "2026-06-23T04:03:24.743Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 5,
+        "away": 2
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-06-25T04:06:29.747Z"
     },
     {
       "gamePk": 823208,
@@ -9113,6 +9157,35 @@
       },
       "engineWinHomePct": 44,
       "lockedAt": "2026-06-24T17:09:09.871Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 823285,
+      "gameDate": "2026-06-27T01:45:00Z",
+      "scheduleDate": "2026-06-26",
+      "homeId": 135,
+      "homeEn": "San Diego Padres",
+      "homeRecord": "42-37",
+      "awayId": 119,
+      "awayEn": "Los Angeles Dodgers",
+      "awayRecord": "52-29",
+      "homePitcher": "Walker Buehler",
+      "awayPitcher": "Roki Sasaki",
+      "homeStats": {
+        "era": "3.96",
+        "k9": "8.05",
+        "bb9": "2.85",
+        "hr9": "0.62"
+      },
+      "awayStats": {
+        "era": "4.76",
+        "k9": "9.26",
+        "bb9": "3.31",
+        "hr9": "1.72"
+      },
+      "engineWinHomePct": 61,
+      "lockedAt": "2026-06-25T04:06:28.928Z",
       "finalScore": null,
       "verdict": null
     }
