@@ -1185,6 +1185,10 @@ const rawMatches: Match[] = [
   {
     id: "cpbl-260614-03",
     league: "CPBL",
+    // 官方 cpbl.com.tw 6/14 確認延賽(#165 樂天 vs 中信 · 洲際 · 降雨機率 90%)· 賽前鎖定線(樂天 52 /
+    //   中信 48)保留待擇期重賽 · postponed = getMatchPhase 視同已歸檔 → 不顯示為待結算、自動結算/官方
+    //   隊名核對正確略過(官網原日無 GameResult=0 → 不假裝有結果 · 不毒害誠實戰績)。
+    postponed: true,
     date: "2026 · 06 · 14  ·  星期日",
     startTime: "17:05",
     venue: "臺中洲際棒球場",
