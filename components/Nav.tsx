@@ -11,6 +11,7 @@ type NavKey =
   | "soccer"
   | "tennis"
   | "badminton"
+  | "mma"
   | "pulse"
   | "ladder"
   | "discuss"
@@ -101,7 +102,10 @@ export default function Nav({ active }: { active?: NavKey }) {
   const isActive = (key: string) =>
     active === key ||
     (key === "matches" &&
-      (active === "soccer" || active === "tennis" || active === "badminton"));
+      (active === "soccer" ||
+        active === "tennis" ||
+        active === "badminton" ||
+        active === "mma"));
 
   return (
     <>

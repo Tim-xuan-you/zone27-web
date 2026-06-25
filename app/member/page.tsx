@@ -31,6 +31,8 @@ import TennisRecordCard from "@/components/TennisRecordCard";
 import { tennisResults, tennisEnginePicks } from "@/lib/tennis/matches";
 import BadmintonRecordCard from "@/components/BadmintonRecordCard";
 import { badmintonResults, badmintonEnginePicks } from "@/lib/badminton/matches";
+import MmaRecordCard from "@/components/MmaRecordCard";
+import { mmaResults, mmaEnginePicks } from "@/lib/mma/matches";
 import CalibrationMasterCard from "@/components/CalibrationMasterCard";
 import type { CalibrationResult } from "@/lib/calibration-master";
 import { getSoccerLedgerResults } from "@/lib/soccer/football-data";
@@ -376,6 +378,11 @@ export default async function MemberPage() {
         <BadmintonRecordCard
           results={badmintonResults()}
           enginePicks={badmintonEnginePicks()}
+          wrapperClass="mt-6"
+        />
+        <MmaRecordCard
+          results={mmaResults()}
+          enginePicks={mmaEnginePicks()}
           wrapperClass="mt-6"
         />
         <CalibrationMasterCard results={calibrationResults} wrapperClass="mt-6" />
