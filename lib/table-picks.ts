@@ -62,6 +62,25 @@ const TABLE: TableCall[] = [
     engineNote: "誰先進球這種賭法,我們引擎沒在算 —— 還是照樣幫他對帳",
     result: "pending",
   },
+  {
+    handle: "Tim",
+    league: "世界盃",
+    match: "瑞典 vs 日本",
+    when: "6/26 07:00",
+    call: "兩隊進球 超過 2.5",
+    engineModels: true,
+    result: "pending",
+  },
+  {
+    handle: "Ron",
+    league: "美國職棒",
+    match: "遊騎兵 vs 藍鳥",
+    when: "6/26 07:07",
+    call: "前 5 局 藍鳥 領先",
+    engineModels: false,
+    engineNote: "前 5 局這種玩法,我們引擎沒在算 —— 還是照樣幫他對帳",
+    result: "pending",
+  },
   // ── 2026-06-25 這一桌 · Tim/Ron/Lewi 賽前鎖的注(2026-06-26 對帳 · 2 中 4 落空 · 含輸照掛)──────
   {
     handle: "Tim",
