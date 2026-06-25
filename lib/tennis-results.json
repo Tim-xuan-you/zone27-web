@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-06-25T12:06:19.116Z",
+  "generatedAt": "2026-06-25T15:33:31.122Z",
   "source": "site.api.espn.com tennis scoreboard (atp+wta singles · official · public · 0 auth)",
-  "count": 870,
+  "count": 922,
   "games": [
     {
       "tour": "atp",
@@ -8566,11 +8566,31 @@
     {
       "tour": "atp",
       "tournament": "Lexus Eastbourne Open",
+      "grouping": "Men's Singles",
+      "date": "2026-06-25",
+      "winnerName": "Jack Draper",
+      "loserName": "Gabriel Diallo",
+      "score": "6-1 6-4",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Lexus Eastbourne Open",
       "grouping": "Women's Singles",
       "date": "2026-06-25",
       "winnerName": "Jelena Ostapenko",
       "loserName": "Zeynep Sonmez",
       "score": "6-3 6-0",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Lexus Eastbourne Open",
+      "grouping": "Women's Singles",
+      "date": "2026-06-25",
+      "winnerName": "Madison Keys",
+      "loserName": "McCartney Kessler",
+      "score": "6-3 6-1",
       "retired": false
     },
     {
@@ -8585,12 +8605,42 @@
     },
     {
       "tour": "atp",
+      "tournament": "Lexus Eastbourne Open",
+      "grouping": "Men's Singles",
+      "date": "2026-06-25",
+      "winnerName": "Zizou Bergs",
+      "loserName": "Jan Choinski",
+      "score": "6-3 6-3",
+      "retired": false
+    },
+    {
+      "tour": "atp",
       "tournament": "Vanda Pharmaceuticals Mallorca Championships",
       "grouping": "Men's Singles",
       "date": "2026-06-25",
       "winnerName": "Ethan Quinn",
       "loserName": "Vit Kopriva",
       "score": "5-7 7-5 6-3",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Vanda Pharmaceuticals Mallorca Championships",
+      "grouping": "Men's Singles",
+      "date": "2026-06-25",
+      "winnerName": "Fabian Marozsan",
+      "loserName": "Miomir Kecmanovic",
+      "score": "6-4 6-3",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Vanda Pharmaceuticals Mallorca Championships",
+      "grouping": "Men's Singles",
+      "date": "2026-06-25",
+      "winnerName": "Nuno Borges",
+      "loserName": "Luciano Darderi",
+      "score": "7-6 6-4",
       "retired": false
     },
     {
@@ -8608,9 +8658,99 @@
       "tournament": "Wimbledon",
       "grouping": "Women's Singles",
       "date": "2026-06-25",
+      "winnerName": "Anastasia Gasanova",
+      "loserName": "Darja Semenistaja",
+      "score": "6-4 6-2",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Wimbledon",
+      "grouping": "Women's Singles",
+      "date": "2026-06-25",
+      "winnerName": "Ashlyn Krueger",
+      "loserName": "Polina Iatcenko",
+      "score": "7-6 6-1",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Wimbledon",
+      "grouping": "Men's Singles",
+      "date": "2026-06-25",
+      "winnerName": "Billy Harris",
+      "loserName": "Zhou Yi",
+      "score": "1-6 7-6 6-2 6-3",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Wimbledon",
+      "grouping": "Women's Singles",
+      "date": "2026-06-25",
+      "winnerName": "Claire Liu",
+      "loserName": "Elena Pridankina",
+      "score": "6-2 4-6 6-1",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Wimbledon",
+      "grouping": "Men's Singles",
+      "date": "2026-06-25",
+      "winnerName": "Dane Sweeny",
+      "loserName": "Tomas Barrios Vera",
+      "score": "4-6 6-4 7-6 0-6 6-2",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Wimbledon",
+      "grouping": "Women's Singles",
+      "date": "2026-06-25",
+      "winnerName": "Iryna Shymanovich",
+      "loserName": "Katherine Sebov",
+      "score": "4-6 6-3 7-6",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Wimbledon",
+      "grouping": "Men's Singles",
+      "date": "2026-06-25",
+      "winnerName": "Jaime Faria",
+      "loserName": "Rei Sakamoto",
+      "score": "7-6 4-6 6-3 6-4",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Wimbledon",
+      "grouping": "Women's Singles",
+      "date": "2026-06-25",
       "winnerName": "Kayla Day",
       "loserName": "Katarzyna Kawa",
       "score": "6-2 7-5",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Wimbledon",
+      "grouping": "Men's Singles",
+      "date": "2026-06-25",
+      "winnerName": "Kyrian Jacquet",
+      "loserName": "Timofey Skatov",
+      "score": "7-6 6-4 6-4",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Wimbledon",
+      "grouping": "Women's Singles",
+      "date": "2026-06-25",
+      "winnerName": "Leolia Jeanjean",
+      "loserName": "Katie Volynets",
+      "score": "6-3 6-4",
       "retired": false
     },
     {
@@ -8628,9 +8768,149 @@
       "tournament": "Wimbledon",
       "grouping": "Women's Singles",
       "date": "2026-06-25",
+      "winnerName": "Mananchaya Sawangkaew",
+      "loserName": "Oceane Dodin",
+      "score": "5-7 7-5 6-1",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Wimbledon",
+      "grouping": "Men's Singles",
+      "date": "2026-06-25",
+      "winnerName": "Max Basing",
+      "loserName": "Remy Bertola",
+      "score": "2-6 6-4 3-6 7-5 6-2",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Wimbledon",
+      "grouping": "Men's Singles",
+      "date": "2026-06-25",
+      "winnerName": "Michael Zheng",
+      "loserName": "Colton Smith",
+      "score": "6-4 4-6 6-2 6-3",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Wimbledon",
+      "grouping": "Men's Singles",
+      "date": "2026-06-25",
+      "winnerName": "Nicolas Mejia",
+      "loserName": "Tristan Schoolkate",
+      "score": "6-4 6-4 6-4",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Wimbledon",
+      "grouping": "Men's Singles",
+      "date": "2026-06-25",
+      "winnerName": "Oliver Tarvet",
+      "loserName": "Stefanos Sakellaridis",
+      "score": "6-4 6-2 7-5",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Wimbledon",
+      "grouping": "Women's Singles",
+      "date": "2026-06-25",
+      "winnerName": "Polina Kudermetova",
+      "loserName": "Alina Charaeva",
+      "score": "4-6 6-4 6-1",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Wimbledon",
+      "grouping": "Men's Singles",
+      "date": "2026-06-25",
+      "winnerName": "Roman Safiullin",
+      "loserName": "Jerome Kym",
+      "score": "4-6 7-6 3-6 7-6 6-4",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Wimbledon",
+      "grouping": "Men's Singles",
+      "date": "2026-06-25",
+      "winnerName": "Shintaro Mochizuki",
+      "loserName": "Clement Tabur",
+      "score": "1-6 7-5 2-6 6-3 6-1",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Wimbledon",
+      "grouping": "Men's Singles",
+      "date": "2026-06-25",
+      "winnerName": "SoonWoo Kwon",
+      "loserName": "Alejandro Moro Canas",
+      "score": "6-4 7-6 6-3",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Wimbledon",
+      "grouping": "Women's Singles",
+      "date": "2026-06-25",
+      "winnerName": "Teodora Kostovic",
+      "loserName": "Zhu Lin",
+      "score": "6-3 6-4",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Wimbledon",
+      "grouping": "Men's Singles",
+      "date": "2026-06-25",
+      "winnerName": "Tristan Boyer",
+      "loserName": "Pablo Llamas Ruiz",
+      "score": "7-5 6-7 7-6 6-3",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Wimbledon",
+      "grouping": "Women's Singles",
+      "date": "2026-06-25",
       "winnerName": "Tyra Caterina Grant",
       "loserName": "Harmony Tan",
       "score": "6-4 7-6",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Wimbledon",
+      "grouping": "Men's Singles",
+      "date": "2026-06-25",
+      "winnerName": "Vilius Gaubas",
+      "loserName": "Dusan Lajovic",
+      "score": "3-6 6-4 3-6 6-3 6-4",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Bad Homburg Open powered by Solarwatt",
+      "grouping": "Women's Singles",
+      "date": "2026-06-25",
+      "winnerName": "Elena-Gabriela Ruse",
+      "loserName": "Emma Navarro",
+      "score": "6-4 6-2",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Bad Homburg Open powered by Solarwatt",
+      "grouping": "Women's Singles",
+      "date": "2026-06-25",
+      "winnerName": "Naomi Osaka",
+      "loserName": "Ekaterina Alexandrova",
+      "score": "6-2 6-2",
       "retired": false
     },
     {
@@ -8646,6 +8926,16 @@
     {
       "tour": "wta",
       "tournament": "Lexus Eastbourne Open",
+      "grouping": "Men's Singles",
+      "date": "2026-06-25",
+      "winnerName": "Jack Draper",
+      "loserName": "Gabriel Diallo",
+      "score": "6-1 6-4",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Lexus Eastbourne Open",
       "grouping": "Women's Singles",
       "date": "2026-06-25",
       "winnerName": "Jelena Ostapenko",
@@ -8656,11 +8946,31 @@
     {
       "tour": "wta",
       "tournament": "Lexus Eastbourne Open",
+      "grouping": "Women's Singles",
+      "date": "2026-06-25",
+      "winnerName": "Madison Keys",
+      "loserName": "McCartney Kessler",
+      "score": "6-3 6-1",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Lexus Eastbourne Open",
       "grouping": "Men's Singles",
       "date": "2026-06-25",
       "winnerName": "Toby Samuel",
       "loserName": "Juan Manuel Cerundolo",
       "score": "6-3 6-4",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Lexus Eastbourne Open",
+      "grouping": "Men's Singles",
+      "date": "2026-06-25",
+      "winnerName": "Zizou Bergs",
+      "loserName": "Jan Choinski",
+      "score": "6-3 6-3",
       "retired": false
     },
     {
@@ -8678,9 +8988,99 @@
       "tournament": "Wimbledon",
       "grouping": "Women's Singles",
       "date": "2026-06-25",
+      "winnerName": "Anastasia Gasanova",
+      "loserName": "Darja Semenistaja",
+      "score": "6-4 6-2",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Wimbledon",
+      "grouping": "Women's Singles",
+      "date": "2026-06-25",
+      "winnerName": "Ashlyn Krueger",
+      "loserName": "Polina Iatcenko",
+      "score": "7-6 6-1",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Wimbledon",
+      "grouping": "Men's Singles",
+      "date": "2026-06-25",
+      "winnerName": "Billy Harris",
+      "loserName": "Zhou Yi",
+      "score": "1-6 7-6 6-2 6-3",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Wimbledon",
+      "grouping": "Women's Singles",
+      "date": "2026-06-25",
+      "winnerName": "Claire Liu",
+      "loserName": "Elena Pridankina",
+      "score": "6-2 4-6 6-1",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Wimbledon",
+      "grouping": "Men's Singles",
+      "date": "2026-06-25",
+      "winnerName": "Dane Sweeny",
+      "loserName": "Tomas Barrios Vera",
+      "score": "4-6 6-4 7-6 0-6 6-2",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Wimbledon",
+      "grouping": "Women's Singles",
+      "date": "2026-06-25",
+      "winnerName": "Iryna Shymanovich",
+      "loserName": "Katherine Sebov",
+      "score": "4-6 6-3 7-6",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Wimbledon",
+      "grouping": "Men's Singles",
+      "date": "2026-06-25",
+      "winnerName": "Jaime Faria",
+      "loserName": "Rei Sakamoto",
+      "score": "7-6 4-6 6-3 6-4",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Wimbledon",
+      "grouping": "Women's Singles",
+      "date": "2026-06-25",
       "winnerName": "Kayla Day",
       "loserName": "Katarzyna Kawa",
       "score": "6-2 7-5",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Wimbledon",
+      "grouping": "Men's Singles",
+      "date": "2026-06-25",
+      "winnerName": "Kyrian Jacquet",
+      "loserName": "Timofey Skatov",
+      "score": "7-6 6-4 6-4",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Wimbledon",
+      "grouping": "Women's Singles",
+      "date": "2026-06-25",
+      "winnerName": "Leolia Jeanjean",
+      "loserName": "Katie Volynets",
+      "score": "6-3 6-4",
       "retired": false
     },
     {
@@ -8698,9 +9098,129 @@
       "tournament": "Wimbledon",
       "grouping": "Women's Singles",
       "date": "2026-06-25",
+      "winnerName": "Mananchaya Sawangkaew",
+      "loserName": "Oceane Dodin",
+      "score": "5-7 7-5 6-1",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Wimbledon",
+      "grouping": "Men's Singles",
+      "date": "2026-06-25",
+      "winnerName": "Max Basing",
+      "loserName": "Remy Bertola",
+      "score": "2-6 6-4 3-6 7-5 6-2",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Wimbledon",
+      "grouping": "Men's Singles",
+      "date": "2026-06-25",
+      "winnerName": "Michael Zheng",
+      "loserName": "Colton Smith",
+      "score": "6-4 4-6 6-2 6-3",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Wimbledon",
+      "grouping": "Men's Singles",
+      "date": "2026-06-25",
+      "winnerName": "Nicolas Mejia",
+      "loserName": "Tristan Schoolkate",
+      "score": "6-4 6-4 6-4",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Wimbledon",
+      "grouping": "Men's Singles",
+      "date": "2026-06-25",
+      "winnerName": "Oliver Tarvet",
+      "loserName": "Stefanos Sakellaridis",
+      "score": "6-4 6-2 7-5",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Wimbledon",
+      "grouping": "Women's Singles",
+      "date": "2026-06-25",
+      "winnerName": "Polina Kudermetova",
+      "loserName": "Alina Charaeva",
+      "score": "4-6 6-4 6-1",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Wimbledon",
+      "grouping": "Men's Singles",
+      "date": "2026-06-25",
+      "winnerName": "Roman Safiullin",
+      "loserName": "Jerome Kym",
+      "score": "4-6 7-6 3-6 7-6 6-4",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Wimbledon",
+      "grouping": "Men's Singles",
+      "date": "2026-06-25",
+      "winnerName": "Shintaro Mochizuki",
+      "loserName": "Clement Tabur",
+      "score": "1-6 7-5 2-6 6-3 6-1",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Wimbledon",
+      "grouping": "Men's Singles",
+      "date": "2026-06-25",
+      "winnerName": "SoonWoo Kwon",
+      "loserName": "Alejandro Moro Canas",
+      "score": "6-4 7-6 6-3",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Wimbledon",
+      "grouping": "Women's Singles",
+      "date": "2026-06-25",
+      "winnerName": "Teodora Kostovic",
+      "loserName": "Zhu Lin",
+      "score": "6-3 6-4",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Wimbledon",
+      "grouping": "Men's Singles",
+      "date": "2026-06-25",
+      "winnerName": "Tristan Boyer",
+      "loserName": "Pablo Llamas Ruiz",
+      "score": "7-5 6-7 7-6 6-3",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Wimbledon",
+      "grouping": "Women's Singles",
+      "date": "2026-06-25",
       "winnerName": "Tyra Caterina Grant",
       "loserName": "Harmony Tan",
       "score": "6-4 7-6",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Wimbledon",
+      "grouping": "Men's Singles",
+      "date": "2026-06-25",
+      "winnerName": "Vilius Gaubas",
+      "loserName": "Dusan Lajovic",
+      "score": "3-6 6-4 3-6 6-3 6-4",
       "retired": false
     }
   ]
