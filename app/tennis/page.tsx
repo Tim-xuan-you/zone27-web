@@ -13,6 +13,7 @@ import {
   gradeTennisEngine,
   tennisResults,
   tennisEnginePicks,
+  bettable,
 } from "@/lib/tennis/matches";
 import {
   grassContenders,
@@ -39,8 +40,9 @@ export const metadata = createPageMetadata({
   path: "/tennis",
 });
 
-// ISR · 1h(純讀 curate 資料 · 無外部 fetch · 與其餘運動看板一致)。
-export const revalidate = 3600;
+// ISR · 10 分鐘(純讀 curate 資料 · 無外部 fetch · 便宜)。 比其餘看板短:這是即時押注板 + 上方
+//   「現在能押」用開賽時戳 vs 現在篩(見 isOpenForBet)→ 短 revalidate 讓「開打就下架」夠即時。
+export const revalidate = 600;
 
 const TIER_LABEL: Record<TennisTier, string> = {
   elite: "頂尖",
@@ -83,9 +85,19 @@ function ContenderRow({ p, idx }: { p: TennisPlayer; idx: number }) {
 
 export default function TennisPage() {
   const groups = drawGroups();
-  // 結算完的場「收起來」:上方看板只留還沒完場的(可押 / 待開賽擺前面),完場的收進下方「已完場」區。
+  // 🔴 Tim 鐵律:上方看板只擺「現在真的能下注」的場 —— 不能押又不是結果的卡(沒開賽時戳的殭屍卡 /
+  //   已開賽待對帳)一律不擺(他原話:「不能下注、比賽結束就收掉」)。 已結算 → 收進下方「已完場」區。
+  //   open = 可押(bettable 非 null:還沒結算 + 有開賽時戳)且「還沒開打」(開賽時戳 > 現在)。
+  //   已開賽待結算的場 → 暫時不擺(賽後自動結算 / Tim 手動補,結算完自然出現在「已完場」)。
+  const now = Date.now();
+  const isOpenForBet = (m: (typeof groups)[number]["matches"][number]) => {
+    const b = bettable(m);
+    if (!b) return false; // 沒開賽時戳 / 已結算 → 不能押(殭屍卡不擺)
+    const t = Date.parse(b);
+    return !Number.isNaN(t) && t > now; // 還沒開打才擺看板(已開賽 → 等結算後進「已完場」)
+  };
   const openGroups = groups
-    .map((g) => ({ ...g, matches: g.matches.filter((m) => !m.finalResult) }))
+    .map((g) => ({ ...g, matches: g.matches.filter(isOpenForBet) }))
     .filter((g) => g.matches.length > 0);
   const settledMatches = groups.flatMap((g) => g.matches.filter((m) => m.finalResult));
   const { total, lined } = drawCounts();
