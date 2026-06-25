@@ -86,13 +86,12 @@ function ContenderRow({ p, idx }: { p: TennisPlayer; idx: number }) {
 
 export default function TennisPage() {
   const groups = drawGroups();
-  // 🔴 三態看板(Tim:比賽中的卡別消失 · 走地用戶要參考 · 棒球/足球/網球一致)· 對應用戶旅程
-  //   「決定 → 看球 → 對帳」:
+  // 🔴 兩態看板(R263 · 跟棒球/足球板一致:板上只擺「還能動作的場」)· 對應旅程「決定 → 看球」:
   //     ① 可押(賽前):還沒結算 + 還沒開打 → 上方,能鎖一手。
   //     ② 進行中(賽事進行中):還沒結算 + 已開打(或沒精確時戳的非結算場)→ 中間,賽前已封盤、
   //        但卡留著當「直播參考」(球員 + 引擎賽前判讀 + 你鎖的那手)· 比賽進行中正是最投入的時刻,
   //        這時抽掉卡 = 在高潮把舞台撤了。
-  //     ③ 已完場:結算 → 下方對帳。
+  //     ③ 已完場 → 不留在板上(= 收據):掉出板,收進下方戰績條 → /track-record#tennis + /tennis/[id] 永久頁。
   const now = Date.now();
   type TMatch = (typeof groups)[number]["matches"][number];
   const inPlay = (m: TMatch) => {
@@ -106,7 +105,6 @@ export default function TennisPage() {
     .map((g) => ({ ...g, matches: g.matches.filter((m) => !m.finalResult && !inPlay(m)) }))
     .filter((g) => g.matches.length > 0);
   const liveMatches = groups.flatMap((g) => g.matches.filter(inPlay));
-  const settledMatches = groups.flatMap((g) => g.matches.filter((m) => m.finalResult));
   const { total, lined } = drawCounts();
   const atp = grassContenders("atp");
   const wta = grassContenders("wta");
@@ -197,22 +195,11 @@ export default function TennisPage() {
           </section>
         )}
 
-        {/* ── 已完場 · 引擎逐場對帳(收起來 · 不擋上面可押的場)── */}
-        {settledMatches.length > 0 && (
-          <section className="mx-auto max-w-6xl w-full px-6 sm:px-10 pb-8">
-            <div className="flex items-baseline gap-3 mb-4 flex-wrap border-t border-line/50 pt-8">
-              <p className="font-mono text-gold/70 text-[10px] tracking-[0.4em]">已完場 · 引擎對帳</p>
-              <span className="font-mono text-mute/50 text-[9px] tracking-[0.2em]">
-                {settledMatches.length} 場 · 中沒中都掛
-              </span>
-            </div>
-            <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-              {settledMatches.map((m) => (
-                <TennisDrawCard key={m.id} match={m} />
-              ))}
-            </div>
-          </section>
-        )}
+        {/* ── 已完場 → 不堆在板上(R263 · 跟棒球/足球一致:板 = 還能押 / 進行中;打完的是收據)──
+            Tim「剩網球沒處理」:棒球板 settled 直接掉出(→ /track-record + permalink)、足球板只列未開賽 ·
+            唯獨網球板原本還堆一整排「已完場」graveyard = 同一個「整本帳本上板」的毛病。 打完的場 =
+            引擎收據 · 一律收進下方一行戰績條 → /track-record#tennis 逐場帳本 + 各場 /tennis/[id] 永久頁。
+            Polymarket:看板擺還能動作的盤、不擺墳場。 */}
 
         {/* ── 公開戰績:引擎(glance strip → /track-record#tennis · 跟 /matches /soccer 同款同位)──
             R263 · 板上不再放整段帳本(那段= /track-record 網球頁的 TennisEngineRecord 同一份)·

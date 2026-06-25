@@ -18,6 +18,8 @@ export default function TennisEngineRecord() {
   if (rec.n === 0 && rec.pending === 0) return null;
 
   // 逐場已對帳(引擎有開盤 + 有賽果)· 出現順序(draw-data 大致按賽事/時間)。
+  // R263 · cap 14→60:這是網球唯一的完整逐場帳本家(賽事板 graveyard 已移除)· 要顯示全部
+  // 已對帳場(同 /track-record 棒球帳本顯示全部 · 不挑好看的)· 60 留足球季成長 headroom。
   const graded = TENNIS_DRAW.flatMap((m) => {
     const line = drawLine(m);
     const fr = m.finalResult;
@@ -32,7 +34,7 @@ export default function TennisEngineRecord() {
         hit: line.pick === fr.winner,
       },
     ];
-  }).slice(0, 14);
+  }).slice(0, 60);
 
   const firm = rec.n >= 30;
   const total = rec.n + rec.pending;
