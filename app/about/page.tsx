@@ -133,6 +133,15 @@ export default function AboutPage() {
               </Link>
               ;輸的紀錄刪不掉。
             </p>
+            {/* R264 · Defector 式「只對你負責」的命題明講出來(原本只隱含在 /privacy 法律細則裡)。
+                🔴 honesty 紅線(R181):不講「不抽傭」(創作者抽 5-10% 會自打臉)· 只講確實成立的四件:
+                沒廣告、沒創投/股東、不抽真錢下注的傭、不賣你的資料 → 錢只來自社群 → 只對會員負責。 */}
+            <p className="mt-3 text-mute text-sm sm:text-base leading-relaxed">
+              沒有創投、沒有股東、沒有廣告主。 養這個站的錢<span className="text-bone">來自會員</span> ——
+              不是廣告、不是投資人、不是賭場抽成,也不是把你的瀏覽資料賣掉。 所以我只需要對
+              <span className="text-bone">一種人</span>負責:出錢撐著它的你 ——
+              不是投資人、不是廣告主,更不是賭場。
+            </p>
             <p className="mt-3 text-mute/80 text-sm leading-relaxed">
               有問題、想回報、或要找我?直接寫信:{" "}
               <a
