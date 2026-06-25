@@ -261,4 +261,27 @@ export const TENNIS_DRAW: TennisMatch[] = [
     note: "安德列斯庫久傷復出 · 排名已掉出榜外、嚴重失真 · 引擎不靠失真排名硬猜 —— 你的判斷值錢。",
     a: { zh: "比安卡.安德列斯庫", en: "Bianca Andreescu", rank: null, confidence: "low" },
     b: { zh: "薩諾維奇", en: "Aliaksandra Sasnovich", rank: 109, confidence: "high" } },
+
+  // ── 2026-06-26 · 草地熱身賽主賽事(認得出、ESPN 鏡像收得到的場才上 · 米其林式克制)──────────
+  //   會外賽 / 挑戰賽不上(ESPN 鏡像收不到 = 永遠補不到官方賽果);認不出排名的對手也不上。
+  //   排名沿用本檔既有 curate(同名同分,賽前一字不改)· 新面孔查現時官方世界排名估種子分。
+  //   賽果走 ESPN 自動結算(英文名 + 賽事別名 eastbourne/mallorca/bad homburg + 開賽日對帳)。
+  // ── WTA · 巴特洪堡公開賽(草地)R2 · 兩位前一輪都晉級的主賽選手 ──
+  { id: "tn-2062", tour: "wta", tournament: "巴特洪堡公開賽", surface: "grass", time: "6/26 19:00",
+    a: { zh: "大坂直美", en: "Naomi Osaka", rank: 15, confidence: "high" },
+    b: { zh: "王欣瑜", en: "Wang Xinyu", rank: 52, confidence: "high" } },
+  // ── WTA · 伊斯特本公開賽(草地)· 奧斯塔佩科(賽會3種子)R2 ──
+  { id: "tn-2003", tour: "wta", tournament: "伊斯特本公開賽", surface: "grass", time: "6/26 18:00",
+    note: "馬莉亞是草地老將(2022 溫網四強)· 引擎只看排名、不懂她的草地專長 → 這場引擎可能低估她,你的判斷值錢。",
+    a: { zh: "奧斯塔佩科", en: "Jelena Ostapenko", rank: 28, confidence: "high" },
+    b: { zh: "T.馬莉亞", en: "Tatjana Maria", rank: 86, confidence: "medium" } },
+  // ── ATP · 馬約卡公開賽(草地)R2 ──
+  { id: "tn-2078", tour: "atp", tournament: "馬約卡公開賽", surface: "grass", time: "6/26 21:00",
+    a: { zh: "伊森.奎因", en: "Ethan Quinn", rank: 63, confidence: "medium" },
+    b: { zh: "努諾.博爾赫斯", en: "Nuno Borges", rank: 53, confidence: "high" } },
+  // ── ATP · 伊斯特本公開賽(草地)· 德雷珀傷退復出排名失真 → 引擎不硬開,照樣可押 ──
+  { id: "tn-2000", tour: "atp", tournament: "伊斯特本公開賽", surface: "grass", time: "6/26 22:40",
+    note: "J.德雷珀剛傷退復出 · 排名嚴重失真 · 引擎不靠失真排名硬猜 —— 這場你的判斷比引擎值錢。",
+    a: { zh: "U.亨伯特", en: "Ugo Humbert", rank: 30, confidence: "high" },
+    b: { zh: "J.德雷珀", en: "Jack Draper", rank: null, confidence: "low" } },
 ];

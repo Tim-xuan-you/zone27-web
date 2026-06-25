@@ -92,17 +92,35 @@ export default function TennisPage() {
   //        但卡留著當「直播參考」(球員 + 引擎賽前判讀 + 你鎖的那手)· 比賽進行中正是最投入的時刻,
   //        這時抽掉卡 = 在高潮把舞台撤了。
   //     ③ 已完場 → 不留在板上(= 收據):掉出板,收進下方戰績條 → /track-record#tennis + /tennis/[id] 永久頁。
+  // Server Component 逐請求讀現在時刻來分板(可押/進行中/掉出)· 刻意不 memo(每次 render 要新鮮時刻)
+  //   → React Compiler 的 purity 規則對 server 端 request-time 讀取是誤報,明確標註豁免。
+  // eslint-disable-next-line react-hooks/purity
   const now = Date.now();
+  // 🔴 「進行中」有上限(R265):一場網球頂多打 ~5 小時,給 12h 寬限吸收延賽/晚開。 開打超過 12h
+  //   還沒結算的場 = 不可能還在打 —— 多半是引擎/ESPN 認不出的場(溫網會外賽 Roehampton / 挑戰賽),
+  //   官方賽果鏡像永遠補不到。 這種場若一直留在「進行中 · 賽事進行中」= 板上對著兩天前打完的球喊「直播中」,
+  //   正好戳破誠實。 超過窗口仍沒結算 → 跟「已完場」一樣掉出板(不假裝直播);要對帳 Tim 賽後手 curate。
+  const IN_PLAY_WINDOW_MS = 12 * 60 * 60 * 1000;
   type TMatch = (typeof groups)[number]["matches"][number];
+  // 還沒開打(有明確未來開賽時戳)→ 可押(賽前)。 沒精確時戳的非結算場不算「賽前」(歸進行中/待對帳)。
+  const isUpcoming = (m: TMatch) => {
+    if (m.finalResult) return false;
+    const iso = matchStartISO(m);
+    if (!iso) return false;
+    const t = Date.parse(iso);
+    return !Number.isNaN(t) && t > now;
+  };
   const inPlay = (m: TMatch) => {
     if (m.finalResult) return false;
     const iso = matchStartISO(m);
     if (!iso) return true; // 沒精確開賽時戳的非結算場 → 當「進行中/待對帳」(不消失 · 走地可參考)
     const t = Date.parse(iso);
-    return Number.isNaN(t) ? true : t <= now; // 已開打
+    if (Number.isNaN(t)) return true;
+    if (t > now) return false; // 還沒開打 → 可押(openGroups)
+    return now - t <= IN_PLAY_WINDOW_MS; // 開打後 12h 內 = 進行中;超過仍沒結算 → 掉出板,不再假裝直播中
   };
   const openGroups = groups
-    .map((g) => ({ ...g, matches: g.matches.filter((m) => !m.finalResult && !inPlay(m)) }))
+    .map((g) => ({ ...g, matches: g.matches.filter(isUpcoming) }))
     .filter((g) => g.matches.length > 0);
   const liveMatches = groups.flatMap((g) => g.matches.filter(inPlay));
   const { total, lined } = drawCounts();
