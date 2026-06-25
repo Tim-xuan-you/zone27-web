@@ -173,19 +173,21 @@ export default async function Home() {
           <p className="font-mono text-gold text-[10px] sm:text-[11px] tracking-[0.4em] mb-6">
             AI 勝率引擎 · 公開準度
           </p>
-          {/* 單一頭條:把最不可造假、對手抄不走的一句當第一屏唯一主標(不再雙標題)。
-              行為類別不指名對手(曬單 / 刪文)。 */}
+          {/* R263 頭條改「先立自己的旗、不先打對手」(Tim:首頁別太刻意樹敵)· 心理學:
+              先給訪客想要的(誰會贏)→ 再給對手抄不走的整本帳(贏輸都刪不掉)。 對手「曬單刪文」
+              的反差留給訪客自己從下方 ✕ 落空感覺,不當第一句開口 = 立旗不樹敵。 */}
           <h1 className="text-3xl sm:text-5xl font-light leading-[1.14] tracking-tight text-bone max-w-2xl mx-auto">
-            別人贏了曬單,輸了刪文。
+            誰會贏?AI 自己算給你看。
             <br />
-            <span className="text-gold">我們贏輸都掛 —— 賽前鎖死,刪不掉。</span>
+            <span className="text-gold">賽前鎖死、賽後對帳 —— 贏的輸的,都刪不掉。</span>
           </h1>
           {/* 招牌金髮絲線(zone27-rule)· 一道品牌記號的呼吸。 */}
           <div className="zone27-rule max-w-[300px] mx-auto mt-7" aria-hidden="true" />
-          {/* 支撐句:57% 誠實王牌 · 一行 mute · 打「喊神準=騙你」角度。 */}
+          {/* 支撐句:57% 誠實王牌 · 一行 mute · R263 改「不喊神準、攤開準度」(不直接指控對手騙你)·
+              57% 本身已隱含「94% 神準不可能」· 不必再點名「在騙你」= 同立旗不樹敵。 */}
           <p className="mt-7 max-w-xl mx-auto text-mute leading-relaxed text-sm sm:text-base">
-            免費讓 AI 跑一萬次告訴你誰會贏。 連全世界最強的 AI,賽前單場也才{" "}
-            <span className="text-bone">5 成 7</span> —— 喊「94% 神準」的,數學上在騙你。
+            免費。 連全世界最強的 AI,賽前單場也只到{" "}
+            <span className="text-bone">5 成 7</span> —— 我們不喊神準,只把準度攤開給你看。
           </p>
           {/* 引擎戰績 · Pratfall「連輸的也掛」· 一行安靜的 proof(不是按鈕)· 永遠不刪。 */}
           {tr.total > 0 && (
