@@ -54,14 +54,42 @@ export type TennisFinalResult = {
   score?: string;
   /** 結算時戳 ISO */
   settledAt?: string;
+  /** 退賽 / walkover 決定(自動結算來自 ESPN retired flag)· 贏家=晉級方 · 顯示誠實標「退賽」 */
+  retired?: boolean;
 };
 
 // 兩向 pick(同 predictions)· 在這裡 re-declare 避免 lib 互相 import 成環(predictions 是 client)。
 export type TennisPick = "a" | "b";
 
 // ⬇️ 真實賽程(從台灣運彩 curate)· 由 lib/tennis/draw-data 注入,保持本檔=純邏輯。
-import { TENNIS_DRAW } from "@/lib/tennis/draw-data";
-export { TENNIS_DRAW };
+import { TENNIS_DRAW as CURATED_DRAW } from "@/lib/tennis/draw-data";
+import { matchTennisResult } from "@/lib/tennis/results";
+
+// 運彩時間字串只帶「月/日 時:分」、不帶年 → 賽季年在此定。 換季(2027 溫網等)curate 新賽程時
+// bump 這一個值即可。 🔴 必須宣告在下方 TENNIS_DRAW augment 之前 —— augment 在 module load 就呼叫
+// matchStartISO(它讀這個值)· const 不 hoist(TDZ)· 放後面會「Cannot access before initialization」。
+const TENNIS_SEASON_YEAR = 2026;
+
+// 🎾 網球賽果自動結算(同 CPBL「鏡像 + on-load 配對 + 手動優先」紀律)──────────────────
+//   沒有手動 finalResult 的場 → 用 ESPN 官方鏡像(lib/tennis-results.json · 英文名 en 比對)補上賽果。
+//   🔴 手動 finalResult 永遠優先(Tim curate 的一字不動)· 對不到一律退手動(維持 pending · 寧缺勿錯)。
+//   display 仍是運彩中文名(zh)· 自動結算只用英文名當對帳 key,不碰顯示。 純函式 · server-safe
+//   (JSON 靜態 import)。 上線前已驗:對「已手動結算的 27 場」自動配對 27/27 同贏家同比分(零分歧)。
+export const TENNIS_DRAW: TennisMatch[] = CURATED_DRAW.map((m) => {
+  if (m.finalResult) return m; // 手動優先
+  // 賽事 + 開賽日一起傳 → 防同兩人在別賽事 / 別年撞名結錯(matchStartISO 不可解析時只靠賽事閘)。
+  const auto = matchTennisResult(m.a.en, m.b.en, m.tournament, matchStartISO(m));
+  return auto
+    ? {
+        ...m,
+        finalResult: {
+          winner: auto.winner,
+          score: auto.score || undefined,
+          retired: auto.retired || undefined,
+        },
+      }
+    : m; // 對不到 → 維持原樣(pending)
+});
 
 /** 查一場(運彩 tn- 場次編號)· 詳情頁用。 */
 export function getTennisMatch(id: string): TennisMatch | undefined {
@@ -122,9 +150,6 @@ export function drawCounts(): { total: number; lined: number } {
   return { total, lined };
 }
 
-// 運彩時間字串只帶「月/日 時:分」、不帶年 → 賽季年在此定。 換季(2027 溫網等)curate 新賽程時
-// bump 這一個值即可(避免散落的硬編年份在跨年時把開賽時戳算錯、誤判「先鎖後結」late-pick)。
-const TENNIS_SEASON_YEAR = 2026;
 
 /** 運彩時間字串 → 台北 ISO(可解析的 "M/D HH:MM" 才回 · 「即將開始 / 現場 / 無時間」→ null)。
  *  賽前鎖定的時間閘:只有「有明確未來開賽時戳」的場才開放押注(押了不可改 · 先鎖後結)。 */

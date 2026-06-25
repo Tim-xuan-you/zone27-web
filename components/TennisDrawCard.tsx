@@ -73,7 +73,10 @@ export default function TennisDrawCard({ match }: { match: TennisMatch }) {
         // 完場 · 結果 + 引擎對帳(含輸照掛 · 同棒球 / 足球的賽後卡)。 引擎沒開盤的場只攤結果、不評分。
         <div className="border-t border-line/40 pt-2.5">
           <div className="flex items-baseline justify-between gap-2">
-            <span className="font-mono text-gold/70 text-[9px] tracking-[0.25em]">完場</span>
+            {/* 退賽 / walkover 誠實標注(贏家=晉級方 · 不假裝是打完的乾淨勝)。 */}
+            <span className="font-mono text-gold/70 text-[9px] tracking-[0.25em]">
+              {match.finalResult.retired ? "完場 · 退賽" : "完場"}
+            </span>
             {match.finalResult.score && (
               <span className="font-mono text-mute/65 text-[10px] tabular">
                 {match.finalResult.score}
