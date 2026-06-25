@@ -10,6 +10,7 @@ type NavKey =
   | "matches"
   | "soccer"
   | "tennis"
+  | "badminton"
   | "pulse"
   | "ladder"
   | "discuss"
@@ -54,7 +55,10 @@ type NavKey =
 // fallback /interact when 0 matches today · per R148 6-constraint scaffold
 // + BLACK-gated brand IP 維持 minimum-violation。
 const NAV_ITEMS_STATIC: {
-  key: Exclude<NavKey, "home" | "founders" | "discuss" | "soccer" | "tennis">;
+  key: Exclude<
+    NavKey,
+    "home" | "founders" | "discuss" | "soccer" | "tennis" | "badminton"
+  >;
   href: string;
   label: string;
   badge?: string;
@@ -96,7 +100,8 @@ export default function Nav({ active }: { active?: NavKey }) {
   //  SportTabs)→ 任一進來都高亮「賽事」那一格(soccer 的 active 映射到 matches)。
   const isActive = (key: string) =>
     active === key ||
-    (key === "matches" && (active === "soccer" || active === "tennis"));
+    (key === "matches" &&
+      (active === "soccer" || active === "tennis" || active === "badminton"));
 
   return (
     <>

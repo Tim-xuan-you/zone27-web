@@ -11,6 +11,7 @@ const TABS = [
   { key: "baseball", label: "棒球", href: "/matches" },
   { key: "soccer", label: "足球", href: "/soccer" },
   { key: "tennis", label: "網球", href: "/tennis" },
+  { key: "badminton", label: "羽球", href: "/badminton" },
 ] as const;
 
 export type SportKey = (typeof TABS)[number]["key"];
