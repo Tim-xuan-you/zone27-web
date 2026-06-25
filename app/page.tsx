@@ -92,8 +92,8 @@ export default async function Home() {
   // ── 今晚這桌(誠實收據)· 真人賽前鎖的任意一注 + 賽後對帳成績(含落空)──────────
   const tableSummary = getTableCalls();
 
-  // ── 世界盃(四年一次的窗)· 引擎已賽前鎖死的場 ──────────────
-  const wcUpcoming = getUpcomingWorldCupMatches(2);
+  // ── 世界盃(四年一次的窗)· 引擎已賽前鎖死的場 ── R263:前門改「活盤」board · 取 3 場當主秀
+  const wcUpcoming = getUpcomingWorldCupMatches(3);
   const wcActive = hasActiveWorldCup();
   const soccerFinalized = getSoccerFinalizedResults();
   const soccerEnginePicks = getSoccerEnginePicksAll();
@@ -108,53 +108,58 @@ export default async function Home() {
     ...(await getMlbFinalizedResults()),
   ];
 
-  // ── 今晚的一手 · 單一主角 ─────────────────────────────────────────
-  // WC 頭條 → 跨聯盟把握度最高 → 休賽日最近判決。 其餘收進「看全部 →」。
+  // ── 今晚 · 引擎開的盤(R263「活盤」前門 · Defector/Polymarket:先給產品本身)──────────
+  // 從「單一主角卡」升成「2–3 場 board」:讓首頁第一眼就是引擎在做它的本事(開盤、挑一邊),
+  // 不是讀文案。 已結算的卡自動翻成 ✓/✕ 收據(MiniMatchCard 內建)。 其餘收進「看全部 →」。
   const showCpblLink = wcActive && cpblUpcoming.length > 0;
   const heroPick: {
     label: string;
     allHref: string;
     allText: string;
-    card: ReactNode;
+    cards: ReactNode[];
     caption: string;
   } | null = (() => {
     if (wcActive && wcUpcoming.length > 0) {
       return {
-        label: "/ 今晚頭條 · 世界盃 · 引擎已賽前鎖死",
+        label: "/ 今晚 · 世界盃 · 引擎已賽前鎖死",
         allHref: "/soccer",
         allText: "看世界盃全部 →",
-        card: <WorldCupRailCard m={wcUpcoming[0]} />,
+        cards: wcUpcoming
+          .slice(0, 3)
+          .map((m) => <WorldCupRailCard key={m.matchId} m={m} />),
         caption: "四年一次的世界盃 · 引擎開好盤,挑你看好的一邊。",
       };
     }
-    const topUpcoming = featured[0];
-    if (topUpcoming) {
+    if (featured.length > 0) {
       return {
-        label: "/ 今晚這場 · 引擎開的盤",
+        label: "/ 今晚 · 引擎開的盤",
         allHref: "/matches",
         allText: `看接下來 ${allUpcoming.length} 場 →`,
-        card: (
-          <MiniMatchCard
-            match={topUpcoming}
-            analysisCount={matchHeat[topUpcoming.id]?.analyses ?? 0}
-            heat={featuredHeat[topUpcoming.id]}
-          />
-        ),
+        cards: featured
+          .slice(0, 3)
+          .map((m) => (
+            <MiniMatchCard
+              key={m.id}
+              match={m}
+              analysisCount={matchHeat[m.id]?.analyses ?? 0}
+              heat={featuredHeat[m.id]}
+            />
+          )),
         caption: "引擎自己算的盤,不是盤口 · 點進去押你看好的一邊。",
       };
     }
-    const topReceipt = recentReceipts[0];
-    if (topReceipt) {
+    if (recentReceipts.length > 0) {
       return {
         label: "/ 引擎最近的判決",
         allHref: "/track-record",
         allText: "看完整戰績 →",
-        card: (
+        cards: recentReceipts.map((m) => (
           <MiniMatchCard
-            match={topReceipt}
-            analysisCount={matchHeat[topReceipt.id]?.analyses ?? 0}
+            key={m.id}
+            match={m}
+            analysisCount={matchHeat[m.id]?.analyses ?? 0}
           />
-        ),
+        )),
         caption: "休賽日 · ✓ 中 / ✕ 沒中 都掛,不藏。",
       };
     }
@@ -228,9 +233,10 @@ export default async function Home() {
           </div>
         </section>
 
-        {/* ── 今晚的一手 · 單一主角卡(取代舊看板 3 卡 + WC rail box + 足球入口卡)──
-            只秀今晚最值得看的「一張」引擎已鎖死的 pick · 其餘收進「看全部 →」。 */}
-        <section className="mx-auto max-w-2xl w-full px-6 sm:px-10 pb-12">
+        {/* ── 今晚 · 引擎開的盤(R263「活盤」board · 取代單卡)──────────────────────
+            首頁第一眼 = 引擎在做它的本事(2–3 場開盤、挑一邊)· 已結算的卡翻成 ✓/✕ 收據 ·
+            其餘收進「看全部 →」。 board 一致只放同一型(引擎開盤)· 不回到 R249 前的 widget 堆。 */}
+        <section className="mx-auto max-w-4xl w-full px-6 sm:px-10 pb-12">
           {heroPick ? (
             <>
               <div className="flex items-baseline justify-between gap-3 mb-4 flex-wrap">
@@ -254,8 +260,18 @@ export default async function Home() {
                   )}
                 </span>
               </div>
-              {heroPick.card}
-              <p className="mt-3 text-mute/80 text-xs sm:text-sm leading-relaxed text-center">
+              <div
+                className={`grid gap-4 ${
+                  heroPick.cards.length >= 3
+                    ? "sm:grid-cols-2 lg:grid-cols-3"
+                    : heroPick.cards.length === 2
+                      ? "sm:grid-cols-2"
+                      : ""
+                }`}
+              >
+                {heroPick.cards}
+              </div>
+              <p className="mt-4 text-mute/80 text-xs sm:text-sm leading-relaxed text-center">
                 {heroPick.caption}
               </p>
             </>
