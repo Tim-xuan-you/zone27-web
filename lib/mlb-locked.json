@@ -8784,8 +8784,12 @@
       },
       "engineWinHomePct": 49,
       "lockedAt": "2026-06-23T20:13:24.590Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 13,
+        "away": 2
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-06-25T20:09:57.724Z"
     },
     {
       "gamePk": 823366,
@@ -8813,8 +8817,12 @@
       },
       "engineWinHomePct": 40,
       "lockedAt": "2026-06-23T20:13:24.590Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 5,
+        "away": 1
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-06-25T20:09:57.724Z"
     },
     {
       "gamePk": 823209,
@@ -9194,6 +9202,35 @@
       "verdict": null
     },
     {
+      "gamePk": 824014,
+      "gameDate": "2026-06-27T01:38:00Z",
+      "scheduleDate": "2026-06-26",
+      "homeId": 108,
+      "homeEn": "Los Angeles Angels",
+      "homeRecord": "34-48",
+      "awayId": 133,
+      "awayEn": "Athletics",
+      "awayRecord": "38-42",
+      "homePitcher": "Walbert Ureña",
+      "awayPitcher": "J.T. Ginn",
+      "homeStats": {
+        "era": "2.41",
+        "k9": "8.55",
+        "bb9": "4.68",
+        "hr9": "0.67"
+      },
+      "awayStats": {
+        "era": "3.16",
+        "k9": "7.95",
+        "bb9": "3.81",
+        "hr9": "0.87"
+      },
+      "engineWinHomePct": 59,
+      "lockedAt": "2026-06-25T20:09:57.168Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
       "gamePk": 823285,
       "gameDate": "2026-06-27T01:45:00Z",
       "scheduleDate": "2026-06-26",
@@ -9335,6 +9372,35 @@
       },
       "engineWinHomePct": 43,
       "lockedAt": "2026-06-25T17:17:47.487Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 824015,
+      "gameDate": "2026-06-28T01:38:00Z",
+      "scheduleDate": "2026-06-27",
+      "homeId": 108,
+      "homeEn": "Los Angeles Angels",
+      "homeRecord": "34-48",
+      "awayId": 133,
+      "awayEn": "Athletics",
+      "awayRecord": "38-42",
+      "homePitcher": "Reid Detmers",
+      "awayPitcher": "Jack Perkins",
+      "homeStats": {
+        "era": "3.93",
+        "k9": "9.96",
+        "bb9": "2.68",
+        "hr9": "0.67"
+      },
+      "awayStats": {
+        "era": "6.26",
+        "k9": "11.15",
+        "bb9": "3.13",
+        "hr9": "1.17"
+      },
+      "engineWinHomePct": 64,
+      "lockedAt": "2026-06-25T20:09:57.168Z",
       "finalScore": null,
       "verdict": null
     }
