@@ -140,7 +140,8 @@ export default function TennisDrawCard({ match }: { match: TennisMatch }) {
         </p>
       )}
 
-      {/* 賽前鎖定押注(登入才能押 · 押了不可改 · 開賽封盤)· 只有引擎開盤 + 有明確未來開賽時戳 + 還沒完場。 */}
+      {/* 賽前鎖定押注(登入才能押 · 押了不可改 · 開賽封盤)· 🔴 引擎開不開得出線都能押(Tim 鐵律:
+          能上架就能押)· 只要有明確未來開賽時戳 + 還沒完場 —— 傷退/失真場照樣讓你押(你的判斷值錢)。 */}
       {bet && !match.finalResult && (
         <TennisBetStrip
           matchId={match.id}

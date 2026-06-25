@@ -171,23 +171,26 @@ export default async function TennisMatchPage({
               </p>
             </div>
 
-            {/* 賽前鎖定押注(有明確未來開賽時戳才開放) */}
-            {bet && (
-              <div className="mt-5">
-                <TennisBetStrip
-                  matchId={m.id}
-                  startISO={bet}
-                  aLabel={m.a.zh}
-                  bLabel={m.b.zh}
-                  returnTo={`/tennis/${m.id}`}
-                />
-              </div>
-            )}
           </section>
         ) : (
           <p className="mt-6 font-mono text-mute/65 text-sm leading-relaxed border-l-2 border-line/60 pl-4">
             {m.note ?? "覆蓋建置中 · 這場我們還沒把握誠實開盤。 賭場什麼都敢開,我們只開算得出的。"}
           </p>
+        )}
+
+        {/* 賽前鎖定押注 · 🔴 引擎開不開得出線都能押(Tim 鐵律:能上架就能押)· 移到狀態判斷之外
+            → 傷退/失真場(無引擎線、走上面「覆蓋建置中」分支)照樣讓玩家點選押注。 已結算 / 無開賽
+            時戳 → bettable 回 null 自動隱藏。 押的是「你看好誰」,引擎沒選邊就沒「你 vs 引擎」對照。 */}
+        {bet && (
+          <div className="mt-6">
+            <TennisBetStrip
+              matchId={m.id}
+              startISO={bet}
+              aLabel={m.a.zh}
+              bLabel={m.b.zh}
+              returnTo={`/tennis/${m.id}`}
+            />
+          </div>
         )}
 
         {/* 校準入口 */}

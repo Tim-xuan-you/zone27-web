@@ -161,9 +161,13 @@ export function matchStartISO(m: TennisMatch): string | null {
   return `${TENNIS_SEASON_YEAR}-${pad(mo)}-${pad(d)}T${pad(h)}:${pad(mi)}:00+08:00`;
 }
 
-/** 這場可不可以「賽前鎖定押注」? 引擎有開盤 + 有明確開賽時戳(client 端再判未開賽)。 */
+/** 這場可不可以「賽前鎖定押注」? 還沒結算 + 有明確開賽時戳(client 端再判未開賽)。
+ *  🔴 Tim 鐵律(全運動一致):能上架的卡就要能押 —— **引擎開不開得出線,不影響可不可押**。
+ *  傷退 / 排名失真 → 引擎誠實不開盤,但玩家照樣能點選押注(這正是「你的判斷比引擎值錢」的場)。
+ *  押的是「你看好誰」,不是跟引擎比;引擎沒選邊 → 那場就沒有「你 vs 引擎」對照,僅此而已。
+ *  只擋:已結算(不能押打完的場)· 沒有可解析開賽時戳(相對時間 / 進行中 → 無賽前鎖定基準)。 */
 export function bettable(m: TennisMatch): string | null {
-  if (!lineable(m)) return null;
+  if (m.finalResult) return null;
   return matchStartISO(m);
 }
 
