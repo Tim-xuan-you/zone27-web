@@ -75,7 +75,7 @@ export default function SoccerMatchCard({ match }: { match: SoccerMatchPredictio
         </p>
       )}
 
-      {/* 三向押注(主勝/和/客勝)· 登入才能押 · 押了不可改 · 賽後逐場對帳(結算建置中)·
+      {/* 三向押注(主勝/和/客勝)· 登入才能押 · 押了不可改 · 賽後逐場 on-read 即時對帳(R229)·
           locked = 這場有賽前鎖定線(押完給一張可外傳的單場收據連結) */}
       <SoccerBetStrip matchId={id} dateISO={dateISO} homeLabel={home} awayLabel={away} locked={locked} />
 

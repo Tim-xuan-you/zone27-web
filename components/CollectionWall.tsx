@@ -105,11 +105,12 @@ export default function CollectionWall({
             / 你的對帳都在收件匣
           </p>
           <p className="text-bone text-base sm:text-lg font-light tracking-tight mb-2">
-            你押過的場,逐筆都在收件匣對帳。
+            你押過的場,還沒有結算成卡。
           </p>
           <p className="text-mute text-sm leading-relaxed max-w-md mx-auto mb-6">
-            <span className="text-bone">大小分</span>這類玩法目前先在收件匣逐筆攤(中沒中都掛)——
-            戰功卡<span className="text-gold">圖卡收藏</span>正在補上玩法版,補好就自動長進這面牆。
+            比賽打完、對帳完成,中沒中都會<span className="text-bone">自動長進這面牆</span> ——
+            <span className="text-gold">大小分</span>這類玩法的卡也一樣收。 在那之前,每一筆的
+            逐場對帳都在收件匣。
           </p>
           <Link
             href="/member/inbox"
