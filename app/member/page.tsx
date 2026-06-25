@@ -27,6 +27,8 @@ import ExportLedgerButton from "@/components/ExportLedgerButton";
 import HonorWall from "@/components/HonorWall";
 import ProfileShareCard from "@/components/ProfileShareCard";
 import SoccerRecordCard from "@/components/SoccerRecordCard";
+import TennisRecordCard from "@/components/TennisRecordCard";
+import { tennisResults, tennisEnginePicks } from "@/lib/tennis/matches";
 import CalibrationMasterCard from "@/components/CalibrationMasterCard";
 import type { CalibrationResult } from "@/lib/calibration-master";
 import { getSoccerLedgerResults } from "@/lib/soccer/football-data";
@@ -358,10 +360,15 @@ export default async function MemberPage() {
             </span>
           </div>
         ) : null}
-        {/* 足球戰績(沒押足球自動隱藏)· 校準大師(沒填把握自動隱藏)· 榮譽牆(里程碑章)*/}
+        {/* 足球戰績(沒押足球自動隱藏)· 網球戰績(沒押網球自動隱藏)· 校準大師(沒填把握自動隱藏)· 榮譽牆 */}
         <SoccerRecordCard
           results={soccerResults}
           enginePicks={soccerEnginePicks}
+          wrapperClass="mt-6"
+        />
+        <TennisRecordCard
+          results={tennisResults()}
+          enginePicks={tennisEnginePicks()}
           wrapperClass="mt-6"
         />
         <CalibrationMasterCard results={calibrationResults} wrapperClass="mt-6" />

@@ -26,6 +26,11 @@ import { getMlbAsMatches, getMlbLockedMatches } from "@/lib/mlb-matches";
 import { getSoccerLedgerResults } from "@/lib/soccer/football-data";
 import { getSoccerEnginePicksAll } from "@/lib/soccer/locked";
 import { soccerPropResults } from "@/lib/soccer/props";
+import {
+  gradeTennisPicks,
+  tennisResults,
+  tennisEnginePicks,
+} from "@/lib/tennis/matches";
 import { createPageMetadata } from "@/lib/page-og";
 import { normalizeProfileCode } from "@/lib/profile-code";
 import { buildSettledCards, computeTrophies } from "@/lib/trophies";
@@ -74,7 +79,7 @@ export default async function PublicProfilePage({
   const profile = await getProfileByCode(code);
   if (!profile) notFound();
 
-  const { baseball, soccer, soccerProps, calibrationPicks } =
+  const { baseball, soccer, tennis, soccerProps, calibrationPicks } =
     await getPredictionsByCode(code);
 
   // 棒球校準身分(CPBL + MLB · fd-* 已在 server 分流排除)。
@@ -96,10 +101,18 @@ export default async function PublicProfilePage({
   ];
   const currentMonth = getCurrentTaipeiMonthKey();
   const identity = aggregateIdentity(baseball, idMatches, currentMonth);
-  // 本月賽季回顧入口:有本月押注才連(避免連到空回顧)· R218 · 玩法也算「有押」(同一本帳)。
+  // 網球戰績(兩向 · 含輸 · 跟棒球 / 足球分開算)· 賽果 + 引擎開盤都是 server-safe 純函式。
+  const tennisRecord = gradeTennisPicks(tennis, tennisResults(), tennisEnginePicks());
+  // 網球 a/b → home/away(A=home/B=away)· 餵 computeTrophies h2h 配對。
+  const tennisHA = tennis.map((r) => ({
+    matchId: r.matchId,
+    pick: (r.pick === "a" ? "home" : "away") as "home" | "away",
+    ts: r.ts,
+  }));
+  // 本月賽季回顧入口:有本月押注才連(避免連到空回顧)· R218 · 玩法 / 網球也算「有押」。
   const hasSeasonActivity = hasMonthActivity(
     baseball,
-    [...soccer, ...soccerProps],
+    [...soccer, ...soccerProps, ...tennis],
     currentMonth,
   );
   const streak = aggregateStreak(baseball, getTodayTaipei());
@@ -140,7 +153,7 @@ export default async function PublicProfilePage({
   );
 
   // 戰功卡:這份帳本所有已結算的 call(含輸 · 連單場收據)· server 端配對(picks 來自 0019 RPC)。
-  const trophies = computeTrophies(baseball, soccer, buildSettledCards(), soccerProps);
+  const trophies = computeTrophies(baseball, soccer, buildSettledCards(), soccerProps, tennisHA);
 
   return (
     <div className="flex flex-col flex-1 min-h-screen">
@@ -151,6 +164,7 @@ export default async function PublicProfilePage({
           identity={identity}
           streak={streak}
           soccer={soccerRecord}
+          tennis={tennisRecord}
           series={accuracySeries}
           trophies={trophies}
           calibration={calibrationReport}

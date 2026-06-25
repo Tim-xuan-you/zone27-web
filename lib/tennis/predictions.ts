@@ -11,6 +11,14 @@ import { createSupabaseBrowserClient } from "@/lib/supabase/browser";
 
 export type TennisPick = "a" | "b";
 
+// 網球戰績算法 + 型別搬到 server-safe 的 lib/tennis/matches(那支不 import browser client →
+// 可進 server component 如 /u 公開檔)· 這裡 re-export 給既有 client 卡(TennisRecordCard)
+// 無痛沿用 —— 一份算法兩處共用,零 drift。
+import { gradeTennisPicks } from "@/lib/tennis/matches";
+import type { TennisPickRow, TennisRecord } from "@/lib/tennis/matches";
+export { gradeTennisPicks };
+export type { TennisPickRow, TennisRecord };
+
 // 兩向存進共用表的 home/away 槽(同棒球)· A=home、B=away。
 function toStored(p: TennisPick): "home" | "away" {
   return p === "a" ? "home" : "away";
@@ -63,8 +71,6 @@ export async function getMyTennisPrediction(matchId: string): Promise<TennisPick
   }
 }
 
-export type TennisPickRow = { matchId: string; pick: TennisPick; ts: string };
-
 /** 我所有的網球押注(tn-* · 兩向 · 登入)· 給「你的網球戰績」對帳。 錯 / anon → 空陣列。 */
 export async function getMyTennisPicks(): Promise<TennisPickRow[]> {
   try {
@@ -88,78 +94,6 @@ export async function getMyTennisPicks(): Promise<TennisPickRow[]> {
   } catch {
     return [];
   }
-}
-
-export type TennisRecord = {
-  /** 已結算場數(先鎖後結 · 不含 pending) */
-  n: number;
-  hits: number;
-  misses: number;
-  rate: number | null;
-  /** 還沒結算 */
-  pending: number;
-  /** 開賽後才押 · 誠實剔除(看得見) */
-  late: number;
-  // ── 你 vs 引擎(同批已結算、且引擎當初有開盤的場)──
-  vsN: number;
-  vsYouHits: number;
-  vsEngineHits: number;
-  vsYouRate: number | null;
-  vsEngineRate: number | null;
-};
-
-/**
- * 兩向對帳(A 勝 / B 勝)· **先鎖後結**:押注時間 ≥ 開賽 → 不計入(同棒球 / 足球)。
- * results:{ [matchId]: { outcome, startISO } }。 enginePicks:matchId → 引擎當初看好邊。
- * 純函式 deterministic。 🔴 含輸:✕ 跟 ✓ 一樣進分母。
- */
-export function gradeTennisPicks(
-  picks: TennisPickRow[],
-  results: Record<string, { outcome: TennisPick; startISO: string }>,
-  enginePicks: Record<string, TennisPick> = {},
-): TennisRecord {
-  let n = 0;
-  let hits = 0;
-  let pending = 0;
-  let late = 0;
-  let vsN = 0;
-  let vsYouHits = 0;
-  let vsEngineHits = 0;
-  for (const p of picks) {
-    const r = results[p.matchId];
-    if (!r) {
-      pending += 1;
-      continue;
-    }
-    const t = Date.parse(p.ts);
-    const k = Date.parse(r.startISO);
-    if (!Number.isNaN(t) && !Number.isNaN(k) && t >= k) {
-      late += 1;
-      continue;
-    }
-    n += 1;
-    const youHit = p.pick === r.outcome;
-    if (youHit) hits += 1;
-    const ePick = enginePicks[p.matchId];
-    if (ePick === "a" || ePick === "b") {
-      vsN += 1;
-      if (youHit) vsYouHits += 1;
-      if (ePick === r.outcome) vsEngineHits += 1;
-    }
-  }
-  return {
-    n,
-    hits,
-    misses: n - hits,
-    rate: n > 0 ? Math.round((hits / n) * 100) : null,
-    pending,
-    late,
-    vsN,
-    vsYouHits,
-    vsEngineHits,
-    vsYouRate: vsN > 0 ? Math.round((vsYouHits / vsN) * 100) : null,
-    vsEngineRate: vsN > 0 ? Math.round((vsEngineHits / vsN) * 100) : null,
-  };
 }
 
 /** 賽前宣告把握(校準 · sport-agnostic RPC)· 一次性 · graceful。 */

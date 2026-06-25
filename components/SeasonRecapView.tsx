@@ -7,6 +7,7 @@ import { monthLabel } from "@/lib/season-recap";
 import type { SeasonHighlights } from "@/lib/season-recap";
 import type { CalibrationIdentity } from "@/lib/predictions";
 import type { SoccerRecord } from "@/lib/soccer/predictions";
+import type { TennisRecord } from "@/lib/tennis/matches";
 import type { PublicProfile } from "@/lib/profile-server";
 import type { Trophy } from "@/lib/trophies";
 
@@ -26,6 +27,8 @@ type Props = {
   identity: CalibrationIdentity;
   /** 本月足球戰績(已按月切片的 picks 餵 gradeSoccerPicks) */
   soccer: SoccerRecord;
+  /** 本月網球戰績(已按月切片的 picks 餵 gradeTennisPicks)· 沒押網球 → 不顯示 */
+  tennis?: TennisRecord;
   highlights: SeasonHighlights;
   /** 本月回來對帳的不同台北日數 */
   activeDays: number;
@@ -38,6 +41,7 @@ export default function SeasonRecapView({
   period,
   identity: id,
   soccer,
+  tennis,
   highlights,
   activeDays,
   hasActivity,
@@ -51,6 +55,7 @@ export default function SeasonRecapView({
 
   const hasBaseball = id.total > 0;
   const hasSoccer = soccer.n > 0 || soccer.pending > 0 || soccer.late > 0;
+  const hasTennis = !!tennis && (tennis.n > 0 || tennis.pending > 0 || tennis.late > 0);
   const hasDecided = id.accuracy !== null;
   const showEdge =
     id.edgeVsEnginePts !== null && id.engine.decided > 0 && id.decided > 0;
@@ -213,6 +218,40 @@ export default function SeasonRecapView({
             </section>
           )}
 
+          {/* ── 本月網球(兩向 · 含輸 · 跟棒球 / 足球分開算)─────────────── */}
+          {hasTennis && tennis && (
+            <section className="mt-6 bg-slate/40 border border-gold/30 p-5 sm:p-6">
+              <p className="font-mono text-gold/80 text-[10px] tracking-[0.35em] mb-2">
+                本月網球 · 含輸命中率
+              </p>
+              {tennis.n > 0 ? (
+                <p className="text-bone text-lg sm:text-xl font-light tracking-tight">
+                  <span className="text-gold tabular">{tennis.rate}%</span> 準 ·{" "}
+                  <span className="text-gold tabular">✓{tennis.hits}</span>{" "}
+                  <span className="text-loss tabular">✕{tennis.misses}</span>
+                  <span className="text-mute/60 text-sm"> · {tennis.n} 場已結算</span>
+                  {tennis.pending > 0 && (
+                    <span className="text-mute/50 text-sm">
+                      {" "}· {tennis.pending} 場待結算
+                    </span>
+                  )}
+                </p>
+              ) : tennis.pending > 0 ? (
+                <p className="text-bone text-base font-light leading-snug">
+                  押了 <span className="text-gold tabular">{tennis.pending}</span> 場 ·
+                  <span className="text-mute/70">
+                    {" "}都還沒結算 —— 賽後自動掛準 / 不準,連輸的也留著
+                  </span>
+                </p>
+              ) : null}
+              {tennis.late > 0 && (
+                <p className="mt-2 font-mono text-mute/55 text-[10px] tracking-[0.12em] leading-snug">
+                  {tennis.late} 場開賽後才押 · 不計入戰績(先鎖後結 · 開賽前押的才算數)
+                </p>
+              )}
+            </section>
+          )}
+
           {/* ── 本月紀律(回來對帳幾天 · 非連勝)──────────────────── */}
           <section className="mt-6 border-l-2 border-gold/50 pl-4 py-1">
             <p className="text-mute/90 text-[13px] sm:text-sm leading-relaxed">
@@ -296,11 +335,14 @@ function HighlightRow({
       : t.pick === "away"
         ? c.away
         : "和局";
+  // 網球沒有單場收據頁(/receipts/tn- 會 404)→ 連到既有 /tennis/[id] 詳情頁(同 TrophyGrid)。
   const href = market
     ? parentId.startsWith("mlb-")
       ? `/matches/${parentId}`
       : `/receipts/${parentId}`
-    : `/receipts/${c.id}`;
+    : c.sport === "tennis"
+      ? `/tennis/${c.id}`
+      : `/receipts/${c.id}`;
   const tagLine =
     kind === "best"
       ? t.upset

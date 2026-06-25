@@ -23,12 +23,13 @@ import { isSoccerPropMarketId } from "@/lib/soccer/props";
 import { OU_LINE, ouResultFromScore, ouSideToPick, isOuMarketId } from "@/lib/soccer/over-under";
 import { AH_LINE, ahResultFromScore } from "@/lib/soccer/handicap";
 import type { SoccerPickRow } from "@/lib/soccer/predictions";
+import { TENNIS_DRAW, drawLine, matchStartISO } from "@/lib/tennis/matches";
 
 export type SettledCard = {
-  /** matchId(cpbl-* / mlb-* / fd-*)· 連到既有 /receipts/[receiptId] */
+  /** matchId(cpbl-* / mlb-* / fd-* / tn-*)· 棒球/足球連 /receipts;網球連 /tennis/[id] */
   id: string;
-  sport: "baseball" | "soccer";
-  /** 聯賽 / 賽事顯示標(CPBL / MLB / 世界盃) */
+  sport: "baseball" | "soccer" | "tennis";
+  /** 聯賽 / 賽事顯示標(CPBL / MLB / 世界盃 / 溫布頓) */
   tag: string;
   home: string;
   away: string;
@@ -147,6 +148,31 @@ export function buildSettledCards(): SettledCard[] {
     });
   }
 
+  // 網球(Tim 賽後手 curate 的 finalResult · 0 API · 兩向 a/b → home/away)。
+  // 選手沒有隊徽系統 → 不給 glyph/color(Avatar 用名字 seed 生幾何頭像)· 無玩法 → 無比分。
+  for (const m of TENNIS_DRAW) {
+    if (!m.finalResult) continue;
+    const result: "home" | "away" = m.finalResult.winner === "a" ? "home" : "away";
+    const startISO = matchStartISO(m) ?? m.finalResult.settledAt ?? "";
+    const line = drawLine(m);
+    const engineFav: "home" | "away" | null = line
+      ? line.pick === "a"
+        ? "home"
+        : "away"
+      : null;
+    out.push({
+      id: m.id,
+      sport: "tennis",
+      tag: m.tournament,
+      home: m.a.zh,
+      away: m.b.zh,
+      result,
+      startISO,
+      dateLabel: taipeiMMDD(startISO),
+      engineFav,
+    });
+  }
+
   return out;
 }
 
@@ -159,6 +185,8 @@ export function computeTrophies(
   soccer: SoccerPickRow[],
   settled: SettledCard[],
   soccerProps: SoccerPickRow[] = [],
+  /** 網球兩向 picks(已轉 home/away · A=home/B=away)· 跟誰贏一樣的 h2h 配對。 */
+  tennis: { matchId: string; pick: "home" | "away"; ts: string }[] = [],
 ): Trophy[] {
   const byId = new Map(settled.map((c) => [c.id, c]));
   const out: Trophy[] = [];
@@ -280,6 +308,26 @@ export function computeTrophies(
       ts: row.ts,
       hit: row.pick === result,
       upset: false,
+    });
+  }
+
+  // ── 網球(兩向 a/b → 已轉 home/away)· 同足球誰贏 h2h 配對 · 含輸照收、先鎖後結、逆風。 ──
+  const seenTennis = new Set<string>();
+  for (const row of tennis) {
+    if (seenTennis.has(row.matchId)) continue;
+    seenTennis.add(row.matchId);
+    const card = byId.get(row.matchId);
+    if (!card) continue;
+    const t = Date.parse(row.ts);
+    const k = Date.parse(card.startISO);
+    if (!Number.isNaN(t) && !Number.isNaN(k) && t >= k) continue; // 先鎖後結 late 剔除
+    const hit = row.pick === card.result;
+    out.push({
+      card,
+      pick: row.pick,
+      ts: row.ts,
+      hit,
+      upset: hit && card.engineFav !== null && row.pick !== card.engineFav,
     });
   }
 

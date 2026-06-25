@@ -32,6 +32,11 @@ import {
 import { isSoccerPropMarketId, soccerPropEnginePicks } from "@/lib/soccer/props";
 import { OU_LINE, isOuMarketId, ouResultFromScore, ouSideToPick } from "@/lib/soccer/over-under";
 import { AH_LINE, ahResultFromScore } from "@/lib/soccer/handicap";
+import {
+  getTennisMatch,
+  tennisEnginePicks,
+  matchStartISO as tennisMatchStartISO,
+} from "@/lib/tennis/matches";
 import { createSupabaseServerClient, getUser } from "@/lib/supabase/server";
 import { readLastSeenFromMeta } from "@/lib/predictions";
 import {
@@ -42,17 +47,19 @@ import {
 
 type ServerPick = { pick: "home" | "away" | "draw"; ts: string };
 
-/** 一趟 RPC → 拆成棒球(home/away)+ 足球(home/draw/away)兩本。 anon / 錯 → 兩本皆空。 */
+/** 一趟 RPC → 拆成棒球(home/away)+ 足球(home/draw/away)+ 網球(home/away)三本。 anon / 錯 → 皆空。 */
 async function getMyPicksSplit(): Promise<{
   baseball: Map<string, ServerPick>;
   soccer: Map<string, ServerPick>;
+  tennis: Map<string, ServerPick>;
 }> {
   const baseball = new Map<string, ServerPick>();
   const soccer = new Map<string, ServerPick>();
+  const tennis = new Map<string, ServerPick>();
   try {
     const supabase = await createSupabaseServerClient();
     const { data, error } = await supabase.rpc("get_my_predictions");
-    if (error || !Array.isArray(data)) return { baseball, soccer };
+    if (error || !Array.isArray(data)) return { baseball, soccer, tennis };
     for (const row of data as {
       match_id?: unknown;
       pick?: unknown;
@@ -75,18 +82,25 @@ async function getMyPicksSplit(): Promise<{
         if (row.pick === "home" || row.pick === "away") {
           baseball.set(id, { pick: row.pick, ts });
         }
+      } else if (id.startsWith("tn-") && !id.includes("~")) {
+        // 網球(tn-*)· 兩向 home/away(存表 A=home/B=away)· 賽果走自己的桶(getTennisMatch)·
+        // 跟棒球分桶 = 只押網球時不白打 MLB API。 玩法後綴 `~` 之後若加再展開(目前無)。
+        if (row.pick === "home" || row.pick === "away") {
+          tennis.set(id, { pick: row.pick, ts });
+        }
       }
     }
   } catch {
     /* graceful · 收件匣是 nice-to-have · 讀失敗退空 */
   }
-  return { baseball, soccer };
+  return { baseball, soccer, tennis };
 }
 
-/** 收齊跨運動原始輸入(賽果 on-read)。 picks 兩本都空 → 不打賽果 API,直接回空。 */
+/** 收齊跨運動原始輸入(賽果 on-read)。 picks 三本都空 → 不打賽果 API,直接回空。 */
 async function gatherRaws(
   baseball: Map<string, ServerPick>,
   soccer: Map<string, ServerPick>,
+  tennis: Map<string, ServerPick>,
 ): Promise<RawSettlement[]> {
   const raws: RawSettlement[] = [];
 
@@ -257,6 +271,40 @@ async function gatherRaws(
     }
   }
 
+  // ── 網球(tn-*)· 兩向 · 賽果 = Tim 手 curate 的 finalResult(0 API · 同 CPBL 靜態)。
+  //   A=home/B=away · 賽果 winner a/b 轉 home/away · 沒平手(網球無和局)→ finalWinner 永不為 draw。 ──
+  if (tennis.size > 0) {
+    const tnEng = tennisEnginePicks(); // id → 引擎當初看好邊(a/b · 給「你 vs 引擎」)
+    for (const [id, p] of tennis) {
+      const m = getTennisMatch(id);
+      if (!m) continue; // 認不到這場(賽程已換季 / 壞 id)→ graceful 略過
+      const fr = m.finalResult;
+      const finalWinner: "home" | "away" | null = fr
+        ? fr.winner === "a"
+          ? "home"
+          : "away"
+        : null;
+      const eng = tnEng[id];
+      const engineFav: "home" | "away" | null =
+        eng === "a" ? "home" : eng === "b" ? "away" : null;
+      const startISO = tennisMatchStartISO(m) ?? "";
+      raws.push({
+        matchId: id,
+        sport: "tennis",
+        home: m.a.zh,
+        away: m.b.zh,
+        myPick: p.pick,
+        pickTs: p.ts,
+        startISO,
+        finalWinner,
+        engineFav,
+        // 結算時刻來源:Tim curate 的 settledAt(選填)· 沒填 → 退用開賽日當「結算≈開賽日」代理
+        // (同 MLB ingestedAt=開賽 instant 的台北日粒度規則 · 讓賽後鈴鐺對網球也亮)。 兩者皆無 → null(不標新)。
+        settledRaw: fr ? fr.settledAt ?? (startISO || null) : null,
+      });
+    }
+  }
+
   return raws;
 }
 
@@ -271,12 +319,12 @@ export async function getMySettlementInbox(): Promise<SettlementInbox | null> {
   const meta = (user.user_metadata ?? null) as Record<string, unknown> | null;
   const lastSeen = readLastSeenFromMeta(meta);
 
-  const { baseball, soccer } = await getMyPicksSplit();
-  if (baseball.size === 0 && soccer.size === 0) {
+  const { baseball, soccer, tennis } = await getMyPicksSplit();
+  if (baseball.size === 0 && soccer.size === 0 && tennis.size === 0) {
     return { items: [], newCount: 0, total: 0, pending: [] };
   }
   try {
-    const raws = await gatherRaws(baseball, soccer);
+    const raws = await gatherRaws(baseball, soccer, tennis);
     return buildInbox(raws, lastSeen);
   } catch {
     // 防護網:inbox 頁直接 await 這支、沒有上層 catch · 任何賽果來源意外丟錯都退空狀態,不 500。

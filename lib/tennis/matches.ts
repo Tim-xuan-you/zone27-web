@@ -199,3 +199,83 @@ export function gradeTennisEngine(): TennisEngineRecord {
     pending,
   };
 }
+
+// ── 你的網球戰績(純函式 · server-safe 單一真相)──────────────────────────────
+// 從 lib/tennis/predictions 搬上來(那支 import 了 browser client → 不能進 server component)。
+// predictions.ts 仍 re-export 給既有 client 卡用 —— 一份算法兩處共用,零 drift。
+// 用在:TennisRecordCard(client · /member + /tennis 本人)+ ProfileView(server · /u 公開檔)。
+
+/** 一筆網球押注(兩向 a/b · 賽前鎖定時戳)。 */
+export type TennisPickRow = { matchId: string; pick: TennisPick; ts: string };
+
+export type TennisRecord = {
+  /** 已結算場數(先鎖後結 · 不含 pending) */
+  n: number;
+  hits: number;
+  misses: number;
+  rate: number | null;
+  /** 還沒結算 */
+  pending: number;
+  /** 開賽後才押 · 誠實剔除(看得見) */
+  late: number;
+  // ── 你 vs 引擎(同批已結算、且引擎當初有開盤的場)──
+  vsN: number;
+  vsYouHits: number;
+  vsEngineHits: number;
+  vsYouRate: number | null;
+  vsEngineRate: number | null;
+};
+
+/**
+ * 兩向對帳(A 勝 / B 勝)· **先鎖後結**:押注時間 ≥ 開賽 → 不計入(同棒球 / 足球)。
+ * results:{ [matchId]: { outcome, startISO } }(= tennisResults())· enginePicks:matchId → 引擎當初看好邊
+ * (= tennisEnginePicks())。 純函式 deterministic。 🔴 含輸:✕ 跟 ✓ 一樣進分母。
+ */
+export function gradeTennisPicks(
+  picks: TennisPickRow[],
+  results: Record<string, { outcome: TennisPick; startISO: string }>,
+  enginePicks: Record<string, TennisPick> = {},
+): TennisRecord {
+  let n = 0;
+  let hits = 0;
+  let pending = 0;
+  let late = 0;
+  let vsN = 0;
+  let vsYouHits = 0;
+  let vsEngineHits = 0;
+  for (const p of picks) {
+    const r = results[p.matchId];
+    if (!r) {
+      pending += 1;
+      continue;
+    }
+    const t = Date.parse(p.ts);
+    const k = Date.parse(r.startISO);
+    if (!Number.isNaN(t) && !Number.isNaN(k) && t >= k) {
+      late += 1;
+      continue;
+    }
+    n += 1;
+    const youHit = p.pick === r.outcome;
+    if (youHit) hits += 1;
+    const ePick = enginePicks[p.matchId];
+    if (ePick === "a" || ePick === "b") {
+      vsN += 1;
+      if (youHit) vsYouHits += 1;
+      if (ePick === r.outcome) vsEngineHits += 1;
+    }
+  }
+  return {
+    n,
+    hits,
+    misses: n - hits,
+    rate: n > 0 ? Math.round((hits / n) * 100) : null,
+    pending,
+    late,
+    vsN,
+    vsYouHits,
+    vsEngineHits,
+    vsYouRate: vsN > 0 ? Math.round((vsYouHits / vsN) * 100) : null,
+    vsEngineRate: vsN > 0 ? Math.round((vsEngineHits / vsN) * 100) : null,
+  };
+}

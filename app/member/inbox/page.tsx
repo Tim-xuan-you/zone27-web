@@ -32,9 +32,13 @@ export const dynamic = "force-dynamic";
 const EARLIER_CAP = 60;
 
 function SettlementRow({ item }: { item: SettlementItem }) {
-  const sportTag = item.sport === "soccer" ? "足球" : "棒球";
+  const sportTag =
+    item.sport === "soccer" ? "足球" : item.sport === "tennis" ? "網球" : "棒球";
   // 玩法(大小分/讓分)連回父場:MLB 父場走 /matches(無收據)· CPBL/足球走可外傳收據。
-  const href = item.market?.href ?? `/receipts/${item.matchId}`;
+  // 網球沒有單場收據頁(/receipts/tn- 會 404)→ 連到既有 /tennis/[id] 詳情頁。
+  const href =
+    item.market?.href ??
+    (item.sport === "tennis" ? `/tennis/${item.matchId}` : `/receipts/${item.matchId}`);
   const cta = href.startsWith("/receipts") ? "收據 →" : "看賽事 →";
   return (
     <Link
@@ -89,13 +93,20 @@ function flightStatus(startISO: string): string {
 
 // 在飛的一手(已鎖、還沒結算)· 連到 /receipts(賽前可外傳收據顯示「賽前鎖定中 / 待對帳」)。
 function PendingRow({ item }: { item: PendingItem }) {
-  const sportTag = item.sport === "soccer" ? "足球" : "棒球";
+  const sportTag =
+    item.sport === "soccer" ? "足球" : item.sport === "tennis" ? "網球" : "棒球";
   // 🔴 MLB 沒有賽前收據(getBaseballPendingReceipt 只認 cpbl-)→ /receipts/[mlb-] 會 404 = 又一個死路。
   //   CPBL + 足球有賽前可外傳收據(走 /receipts);MLB 退到比賽詳情頁(/matches 認 MLB id · 不 404)。
+  //   網球沒有單場收據(/receipts/tn- 會 404)→ 連到既有 /tennis/[id] 詳情頁。
   const isMlb = item.matchId.startsWith("mlb-");
-  // 玩法(大小分/讓分)用 market.href(已解父場 · 同規則)· 一般場照 isMlb 分流。
+  // 玩法(大小分/讓分)用 market.href(已解父場 · 同規則)· 一般場照 isMlb / 網球分流。
   const href =
-    item.market?.href ?? (isMlb ? `/matches/${item.matchId}` : `/receipts/${item.matchId}`);
+    item.market?.href ??
+    (item.sport === "tennis"
+      ? `/tennis/${item.matchId}`
+      : isMlb
+        ? `/matches/${item.matchId}`
+        : `/receipts/${item.matchId}`);
   // 🔴 標籤跟著目的地走:/matches → 「看賽事」· /receipts → 「收據」。
   const cta = href.startsWith("/receipts") ? "收據 →" : "看賽事 →";
   return (

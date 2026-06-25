@@ -63,11 +63,14 @@ function TrophyCard({ t }: { t: Trophy }) {
       : t.pick === "away"
         ? card.away
         : "和局";
+  // 網球沒有單場收據頁(/receipts/tn- 會 404)→ 連到既有的 /tennis/[id] 詳情頁(真目的地)。
   const href = market
     ? parentId.startsWith("mlb-")
       ? `/matches/${parentId}`
       : `/receipts/${parentId}`
-    : `/receipts/${card.id}`;
+    : card.sport === "tennis"
+      ? `/tennis/${card.id}`
+      : `/receipts/${card.id}`;
   const verdictColor = t.hit ? "text-gold" : "text-loss/85";
   const verdictBorder = t.hit ? "border-gold/40" : "border-loss/40";
   const lock = fmtLockTaipei(t.ts);
@@ -125,7 +128,7 @@ function TrophyCard({ t }: { t: Trophy }) {
 
       {lock && (
         <p className="mt-2 font-mono text-mute/45 text-[8px] tracking-[0.12em] tabular group-hover:text-gold/70 transition-colors">
-          鎖定於 {lock} · {market ? "看這場 →" : "收據 →"}
+          鎖定於 {lock} · {market || card.sport === "tennis" ? "看這場 →" : "收據 →"}
         </p>
       )}
     </Link>

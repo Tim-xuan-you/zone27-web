@@ -18,7 +18,7 @@
 
 import { taipeiDayOf, isLatePick } from "@/lib/predictions";
 
-export type SettlementSport = "baseball" | "soccer";
+export type SettlementSport = "baseball" | "soccer" | "tennis";
 
 /**
  * 玩法押注(大小分 / 讓分)的顯示資訊。 缺(undefined)= 一般「誰贏」場 → 用隊名顯示(原行為)。

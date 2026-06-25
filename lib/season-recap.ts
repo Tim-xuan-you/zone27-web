@@ -58,30 +58,39 @@ export function filterSoccerByMonth(
   return rows.filter((r) => taipeiMonthOf(r.ts) === period);
 }
 
-/** 這個月有沒有任何押注(給「要不要顯示本月回顧入口」判斷 · 避免連到空回顧)。 */
+/** 網球(或任何帶 ts 的 picks)切到 period 台北月的子集。 泛型保留原列型別。 */
+export function filterTennisByMonth<T extends { ts: string }>(
+  rows: T[],
+  period: string,
+): T[] {
+  return rows.filter((r) => taipeiMonthOf(r.ts) === period);
+}
+
+/** 這個月有沒有任何押注(給「要不要顯示本月回顧入口」判斷 · 避免連到空回顧)。
+ *  第二個參數只讀 ts → 放寬成 { ts }[],可一次塞足球 + 玩法 + 網球(跨運動都算「有押」)。 */
 export function hasMonthActivity(
   baseball: UserPredictionsMap,
-  soccer: SoccerPickRow[],
+  others: { ts: string }[],
   period: string,
 ): boolean {
   for (const p of Object.values(baseball)) {
     if (taipeiMonthOf(p.ts) === period) return true;
   }
-  return soccer.some((r) => taipeiMonthOf(r.ts) === period);
+  return others.some((r) => taipeiMonthOf(r.ts) === period);
 }
 
 /** 這個月回來對帳的不同台北日數(紀律 · 只算本月已切片的 picks · 含贏含輸)。
- *  傳入「已按月切片」的 picks → 直接數不同台北日。 */
+ *  傳入「已按月切片」的 picks → 直接數不同台北日。 第二個參數放寬成 { ts }[](足球 + 玩法 + 網球)。 */
 export function monthActiveDays(
   baseball: UserPredictionsMap,
-  soccer: SoccerPickRow[],
+  others: { ts: string }[],
 ): number {
   const days = new Set<string>();
   for (const p of Object.values(baseball)) {
     const d = taipeiDayOf(p.ts);
     if (d) days.add(d);
   }
-  for (const r of soccer) {
+  for (const r of others) {
     const d = taipeiDayOf(r.ts);
     if (d) days.add(d);
   }
