@@ -9057,6 +9057,64 @@
       "verdict": null
     },
     {
+      "gamePk": 823363,
+      "gameDate": "2026-06-26T22:40:00Z",
+      "scheduleDate": "2026-06-26",
+      "homeId": 134,
+      "homeEn": "Pittsburgh Pirates",
+      "homeRecord": "41-40",
+      "awayId": 113,
+      "awayEn": "Cincinnati Reds",
+      "awayRecord": "37-42",
+      "homePitcher": "Paul Skenes",
+      "awayPitcher": "Andrew Abbott",
+      "homeStats": {
+        "era": "2.86",
+        "k9": "10.94",
+        "bb9": "1.84",
+        "hr9": "0.92"
+      },
+      "awayStats": {
+        "era": "3.83",
+        "k9": "6.80",
+        "bb9": "4.15",
+        "hr9": "1.28"
+      },
+      "engineWinHomePct": 68,
+      "lockedAt": "2026-06-25T22:24:32.285Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 824824,
+      "gameDate": "2026-06-26T23:05:00Z",
+      "scheduleDate": "2026-06-26",
+      "homeId": 110,
+      "homeEn": "Baltimore Orioles",
+      "homeRecord": "38-44",
+      "awayId": 120,
+      "awayEn": "Washington Nationals",
+      "awayRecord": "41-40",
+      "homePitcher": "Trevor Rogers",
+      "awayPitcher": "Andrew Alvarez",
+      "homeStats": {
+        "era": "5.30",
+        "k9": "6.66",
+        "bb9": "2.96",
+        "hr9": "1.11"
+      },
+      "awayStats": {
+        "era": "3.34",
+        "k9": "10.30",
+        "bb9": "3.34",
+        "hr9": "0.56"
+      },
+      "engineWinHomePct": 36,
+      "lockedAt": "2026-06-25T22:24:32.285Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
       "gamePk": 822796,
       "gameDate": "2026-06-26T23:07:00Z",
       "scheduleDate": "2026-06-26",
@@ -9289,6 +9347,35 @@
       "verdict": null
     },
     {
+      "gamePk": 823364,
+      "gameDate": "2026-06-27T20:05:00Z",
+      "scheduleDate": "2026-06-27",
+      "homeId": 134,
+      "homeEn": "Pittsburgh Pirates",
+      "homeRecord": "41-40",
+      "awayId": 113,
+      "awayEn": "Cincinnati Reds",
+      "awayRecord": "37-42",
+      "homePitcher": "Jared Jones",
+      "awayPitcher": "Chase Burns",
+      "homeStats": {
+        "era": "5.75",
+        "k9": "9.30",
+        "bb9": "3.54",
+        "hr9": "1.77"
+      },
+      "awayStats": {
+        "era": "2.00",
+        "k9": "10.72",
+        "bb9": "3.05",
+        "hr9": "1.05"
+      },
+      "engineWinHomePct": 32,
+      "lockedAt": "2026-06-25T22:24:32.285Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
       "gamePk": 824581,
       "gameDate": "2026-06-27T20:10:00Z",
       "scheduleDate": "2026-06-27",
@@ -9314,6 +9401,35 @@
       },
       "engineWinHomePct": 61,
       "lockedAt": "2026-06-25T17:17:47.487Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 824825,
+      "gameDate": "2026-06-27T23:05:00Z",
+      "scheduleDate": "2026-06-27",
+      "homeId": 110,
+      "homeEn": "Baltimore Orioles",
+      "homeRecord": "38-44",
+      "awayId": 120,
+      "awayEn": "Washington Nationals",
+      "awayRecord": "41-40",
+      "homePitcher": "Brandon Young",
+      "awayPitcher": "Foster Griffin",
+      "homeStats": {
+        "era": "3.07",
+        "k9": "6.55",
+        "bb9": "3.34",
+        "hr9": "0.80"
+      },
+      "awayStats": {
+        "era": "3.15",
+        "k9": "8.77",
+        "bb9": "2.27",
+        "hr9": "1.58"
+      },
+      "engineWinHomePct": 55,
+      "lockedAt": "2026-06-25T22:24:32.285Z",
       "finalScore": null,
       "verdict": null
     },
