@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-06-25T02:20:03.120Z",
+  "generatedAt": "2026-06-25T12:06:19.116Z",
   "source": "site.api.espn.com tennis scoreboard (atp+wta singles · official · public · 0 auth)",
-  "count": 857,
+  "count": 870,
   "games": [
     {
       "tour": "atp",
@@ -8564,6 +8564,76 @@
       "retired": false
     },
     {
+      "tour": "atp",
+      "tournament": "Lexus Eastbourne Open",
+      "grouping": "Women's Singles",
+      "date": "2026-06-25",
+      "winnerName": "Jelena Ostapenko",
+      "loserName": "Zeynep Sonmez",
+      "score": "6-3 6-0",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Lexus Eastbourne Open",
+      "grouping": "Men's Singles",
+      "date": "2026-06-25",
+      "winnerName": "Toby Samuel",
+      "loserName": "Juan Manuel Cerundolo",
+      "score": "6-3 6-4",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Vanda Pharmaceuticals Mallorca Championships",
+      "grouping": "Men's Singles",
+      "date": "2026-06-25",
+      "winnerName": "Ethan Quinn",
+      "loserName": "Vit Kopriva",
+      "score": "5-7 7-5 6-3",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Wimbledon",
+      "grouping": "Women's Singles",
+      "date": "2026-06-25",
+      "winnerName": "Alina Korneeva",
+      "loserName": "Fiona Crawley",
+      "score": "6-2 6-0",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Wimbledon",
+      "grouping": "Women's Singles",
+      "date": "2026-06-25",
+      "winnerName": "Kayla Day",
+      "loserName": "Katarzyna Kawa",
+      "score": "6-2 7-5",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Wimbledon",
+      "grouping": "Men's Singles",
+      "date": "2026-06-25",
+      "winnerName": "Mackenzie McDonald",
+      "loserName": "Christopher O'Connell",
+      "score": "6-3 6-4 6-4",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Wimbledon",
+      "grouping": "Women's Singles",
+      "date": "2026-06-25",
+      "winnerName": "Tyra Caterina Grant",
+      "loserName": "Harmony Tan",
+      "score": "6-4 7-6",
+      "retired": false
+    },
+    {
       "tour": "wta",
       "tournament": "Bad Homburg Open powered by Solarwatt",
       "grouping": "Women's Singles",
@@ -8572,6 +8642,66 @@
       "loserName": "Elina Svitolina",
       "score": "",
       "retired": true
+    },
+    {
+      "tour": "wta",
+      "tournament": "Lexus Eastbourne Open",
+      "grouping": "Women's Singles",
+      "date": "2026-06-25",
+      "winnerName": "Jelena Ostapenko",
+      "loserName": "Zeynep Sonmez",
+      "score": "6-3 6-0",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Lexus Eastbourne Open",
+      "grouping": "Men's Singles",
+      "date": "2026-06-25",
+      "winnerName": "Toby Samuel",
+      "loserName": "Juan Manuel Cerundolo",
+      "score": "6-3 6-4",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Wimbledon",
+      "grouping": "Women's Singles",
+      "date": "2026-06-25",
+      "winnerName": "Alina Korneeva",
+      "loserName": "Fiona Crawley",
+      "score": "6-2 6-0",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Wimbledon",
+      "grouping": "Women's Singles",
+      "date": "2026-06-25",
+      "winnerName": "Kayla Day",
+      "loserName": "Katarzyna Kawa",
+      "score": "6-2 7-5",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Wimbledon",
+      "grouping": "Men's Singles",
+      "date": "2026-06-25",
+      "winnerName": "Mackenzie McDonald",
+      "loserName": "Christopher O'Connell",
+      "score": "6-3 6-4 6-4",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Wimbledon",
+      "grouping": "Women's Singles",
+      "date": "2026-06-25",
+      "winnerName": "Tyra Caterina Grant",
+      "loserName": "Harmony Tan",
+      "score": "6-4 7-6",
+      "retired": false
     }
   ]
 }
