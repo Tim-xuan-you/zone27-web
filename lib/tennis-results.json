@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-06-25T17:34:47.998Z",
+  "generatedAt": "2026-06-25T20:49:41.302Z",
   "source": "site.api.espn.com tennis scoreboard (atp+wta singles · official · public · 0 auth)",
-  "count": 942,
+  "count": 944,
   "games": [
     {
       "tour": "atp",
@@ -8598,6 +8598,16 @@
       "tournament": "Lexus Eastbourne Open",
       "grouping": "Women's Singles",
       "date": "2026-06-25",
+      "winnerName": "Petra Marcinko",
+      "loserName": "Catherine McNally",
+      "score": "6-3 4-6 6-4",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Lexus Eastbourne Open",
+      "grouping": "Women's Singles",
+      "date": "2026-06-25",
       "winnerName": "Tatjana Maria",
       "loserName": "Tereza Valentova",
       "score": "6-3 7-5",
@@ -9061,6 +9071,16 @@
       "winnerName": "Madison Keys",
       "loserName": "McCartney Kessler",
       "score": "6-3 6-1",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Lexus Eastbourne Open",
+      "grouping": "Women's Singles",
+      "date": "2026-06-25",
+      "winnerName": "Petra Marcinko",
+      "loserName": "Catherine McNally",
+      "score": "6-3 4-6 6-4",
       "retired": false
     },
     {
