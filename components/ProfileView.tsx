@@ -539,7 +539,12 @@ function TennisSection({ r }: { r: TennisRecord }) {
 //   錢永遠買不到(付費拿不到這顆星 = 它值錢的原因 · 對齊「準是免費的 · 撐著它是金環」)。
 //   未達標也誠實寫出門檻(製造嚮往、不製造焦慮)· 達標金星 / 未達暗星。 含輸照算(非連勝/PnL)。
 function ReckoningStar({ id }: { id: CalibrationIdentity }) {
-  const earned = reckoningStar(id).earned;
+  // R263 · 加「追星軌道」中間態(onTrack:已贏引擎、樣本 ≥8 未滿 30)· 資料早算好只差沒畫。
+  // 🔴 紅線:暗星非金 · 主詞=「這份帳本」非「這個人厲害」· 只寫「還差 N 場」客觀門檻、
+  //   絕無「快了/就快達成/值得追/潛力股」near-miss 餌 · 進度尺朝固定 30 場填、不替手氣加冕。
+  const star = reckoningStar(id);
+  const earned = star.earned;
+  const onTrack = star.onTrack;
   return (
     <section
       className={`mt-9 border p-5 sm:p-6 ${
@@ -554,7 +559,7 @@ function ReckoningStar({ id }: { id: CalibrationIdentity }) {
               earned ? "text-gold" : "text-mute"
             }`}
           >
-            對帳之星{earned ? "" : " · 還沒達成"}
+            對帳之星{earned ? "" : onTrack ? " · 進行中" : " · 還沒達成"}
           </p>
           <p className="font-mono text-mute/55 text-[10px] tracking-[0.2em] mt-0.5">
             ZONE 27 認證 · 賺來的、錢買不到
@@ -568,6 +573,22 @@ function ReckoningStar({ id }: { id: CalibrationIdentity }) {
           準度<span className="text-gold">贏過那台只敢喊 57% 的誠實引擎</span> · 全站極少人做得到。
           滑落了會被收回 —— 這顆星 · 錢買不到。
         </p>
+      ) : onTrack ? (
+        <>
+          <p className="mt-4 text-mute/90 text-[13px] sm:text-sm leading-relaxed">
+            這份帳本目前<span className="text-bone">準度贏過引擎</span> · 離門檻還差{" "}
+            <span className="font-mono text-bone tabular">{star.toGo}</span> 場含輸對帳。
+            滿 <span className="text-bone">{RECKONING_STAR_MIN} 場</span>還守得住才拿得到 —— 錢買不到、滑落會被收回。
+          </p>
+          <div className="mt-3 h-[3px] bg-line/50 overflow-hidden" aria-hidden="true">
+            <div
+              className="h-full bg-gold/40"
+              style={{
+                width: `${Math.min(100, ((RECKONING_STAR_MIN - star.toGo) / RECKONING_STAR_MIN) * 100)}%`,
+              }}
+            />
+          </div>
+        </>
       ) : (
         <p className="mt-4 text-mute/90 text-[13px] sm:text-sm leading-relaxed">
           要在 <span className="text-bone">≥{RECKONING_STAR_MIN} 場含輸</span>的公開對帳裡、準度
