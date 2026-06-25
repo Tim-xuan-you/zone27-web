@@ -116,7 +116,8 @@ export const TENNIS_DRAW: TennisMatch[] = [
     b: { zh: "D.塞梅尼斯塔賈", en: "Darja Semenistaja", rank: 102, confidence: "high" } },
   { id: "tn-2048", tour: "wta", tournament: "溫布頓網球公開賽", surface: "grass", time: "6/24 22:45",
     a: { zh: "朱琳", en: "Lin Zhu", rank: 141, confidence: "high" },
-    b: { zh: "拉莫托曼加-拉喬納", en: "Tiantsoa Rakotomanga Rajaonah", rank: 153, confidence: "high" } },
+    b: { zh: "拉莫托曼加-拉喬納", en: "Tiantsoa Rakotomanga Rajaonah", rank: 153, confidence: "high" },
+    finalResult: { winner: "a", score: "6-2 6-3" } },
   { id: "tn-2011", tour: "wta", tournament: "溫布頓網球公開賽", surface: "grass", time: "6/24 23:00",
     a: { zh: "露西亞.布隆澤蒂", en: "Lucia Bronzetti", rank: 127, confidence: "high" },
     b: { zh: "J.米庫斯基特", en: "Justina Mikulskyte", rank: 244, confidence: "high" } },
@@ -157,7 +158,8 @@ export const TENNIS_DRAW: TennisMatch[] = [
     finalResult: { winner: "b", score: "6-4 6-2" } },
   { id: "tn-2024", tour: "wta", tournament: "溫布頓網球公開賽", surface: "grass", time: "6/24 23:40",
     a: { zh: "A.查拉耶娃", en: "Anastasia Zakharova", rank: 91, confidence: "medium" },
-    b: { zh: "卡羅琳.維爾納", en: "Caroline Werner", rank: 242, confidence: "medium" } },
+    b: { zh: "卡羅琳.維爾納", en: "Caroline Werner", rank: 242, confidence: "medium" },
+    finalResult: { winner: "a", score: "5-7 6-4 6-0" } },
   { id: "tn-2049", tour: "wta", tournament: "溫布頓網球公開賽", surface: "grass", time: "6/24 23:45",
     a: { zh: "木下晴結", en: "Hayu Kinoshita", rank: 227, confidence: "high" },
     b: { zh: "博爾克瓦澤", en: "Mariam Bolkvadze", rank: 503, confidence: "medium" },
@@ -199,10 +201,12 @@ export const TENNIS_DRAW: TennisMatch[] = [
   // ── ATP · 普羅夫迪夫挑戰賽(紅土)─────────────────────────────
   { id: "tn-2057", tour: "atp", tournament: "普羅夫迪夫挑戰賽", surface: "clay", time: "6/25 15:30",
     a: { zh: "奧伯寧.米利奇", en: "Ognjen Milic", rank: 359, confidence: "medium" },
-    b: { zh: "桑塔馬塔-羅伊格", en: "Andres Santamarta Roig", rank: 712, confidence: "medium" } },
+    b: { zh: "桑塔馬塔-羅伊格", en: "Andres Santamarta Roig", rank: 712, confidence: "medium" },
+    finalResult: { winner: "b", score: "6-0 6-2" } },
   { id: "tn-2060", tour: "atp", tournament: "普羅夫迪夫挑戰賽", surface: "clay", time: "6/25 15:30",
     a: { zh: "托馬索.孔帕紐奇", en: "Tommaso Compagnucci", rank: 398, confidence: "high" },
-    b: { zh: "P.內斯特洛夫", en: "Petr Nesterov", rank: 386, confidence: "high" } },
+    b: { zh: "P.內斯特洛夫", en: "Petr Nesterov", rank: 386, confidence: "high" },
+    finalResult: { winner: "b", score: "6-3 7-6" } },
 
   // ── 2026-06-25 · 下一輪(R2)· 兩位都是上一輪晉級、我們已有資料的球員 → 名字/排名沿用前一輪
   //   (運彩中文名一字不改)· 賽果走 ESPN 自動結算(英文名 + 賽事 + 開賽日對帳)。 ──────────────
@@ -218,7 +222,8 @@ export const TENNIS_DRAW: TennisMatch[] = [
     b: { zh: "維利烏斯.高巴斯", en: "Vilius Gaubas", rank: 105, confidence: "high" } },
   { id: "tn-2027", tour: "atp", tournament: "溫布頓網球公開賽", surface: "grass", time: "6/25 19:10",
     a: { zh: "權純雨", en: "Kwon Soon-woo", rank: 202, confidence: "medium" },
-    b: { zh: "亞歷杭德羅.莫爾-卡納斯", en: "Alejandro Moro Canas", rank: 233, confidence: "high" } },
+    b: { zh: "亞歷杭德羅.莫爾-卡納斯", en: "Alejandro Moro Canas", rank: 233, confidence: "high" },
+    finalResult: { winner: "a", score: "6-4 7-6 6-3" } },
   { id: "tn-2028", tour: "atp", tournament: "溫布頓網球公開賽", surface: "grass", time: "6/25 19:10",
     a: { zh: "基里安.雅凱", en: "Kyrian Jacquet", rank: 146, confidence: "high" },
     b: { zh: "蒂莫菲.史卡托夫", en: "Timofey Skatov", rank: 189, confidence: "medium" } },
@@ -235,13 +240,15 @@ export const TENNIS_DRAW: TennisMatch[] = [
   // ── WTA · 溫布頓網球公開賽(草地)R2 ──
   { id: "tn-2036", tour: "wta", tournament: "溫布頓網球公開賽", surface: "grass", time: "6/25 19:30",
     a: { zh: "朱琳", en: "Lin Zhu", rank: 141, confidence: "high" },
-    b: { zh: "T.科斯托維奇", en: "Teodora Kostovic", rank: 178, confidence: "medium" } },
+    b: { zh: "T.科斯托維奇", en: "Teodora Kostovic", rank: 178, confidence: "medium" },
+    finalResult: { winner: "b", score: "6-3 6-4" } },
   { id: "tn-2037", tour: "wta", tournament: "溫布頓網球公開賽", surface: "grass", time: "6/25 19:30",
     a: { zh: "A.加薩諾娃", en: "Anastasia Gasanova", rank: 210, confidence: "high" },
     b: { zh: "D.塞梅尼斯塔賈", en: "Darja Semenistaja", rank: 102, confidence: "high" } },
   { id: "tn-2047", tour: "wta", tournament: "溫布頓網球公開賽", surface: "grass", time: "6/25 19:30",
     a: { zh: "A.查拉耶娃", en: "Anastasia Zakharova", rank: 91, confidence: "medium" },
-    b: { zh: "P.庫德梅托娃", en: "Polina Kudermetova", rank: 116, confidence: "high" } },
+    b: { zh: "P.庫德梅托娃", en: "Polina Kudermetova", rank: 116, confidence: "high" },
+    finalResult: { winner: "b", score: "4-6 6-4 6-1" } },
   { id: "tn-2029", tour: "wta", tournament: "溫布頓網球公開賽", surface: "grass", time: "6/25 19:30",
     a: { zh: "H.沃特森", en: "Heather Watson", rank: 327, confidence: "high" },
     b: { zh: "M.蒂莫菲耶娃", en: "Maria Timofeeva", rank: 92, confidence: "medium" } },
@@ -284,4 +291,15 @@ export const TENNIS_DRAW: TennisMatch[] = [
     note: "J.德雷珀剛傷退復出 · 排名嚴重失真 · 引擎不靠失真排名硬猜 —— 這場你的判斷比引擎值錢。",
     a: { zh: "U.亨伯特", en: "Ugo Humbert", rank: 30, confidence: "high" },
     b: { zh: "J.德雷珀", en: "Jack Draper", rank: null, confidence: "low" } },
+  // ── WTA · 巴特洪堡公開賽(草地)準決賽 · 穆霍娃(前段)vs 魯塞 —— 研究查實身分(運彩串流名「卡薩特金娜·穆古」
+  //   是亂碼,實為穆霍娃)· 魯塞排名跨源 67-105 → 引擎估中段、confidence medium。 ESPN 收得到 → 自動結算。
+  // 🔴 id 加 -0626:運彩場次號會跨日回收(tn-2006 已被 6/24 溫網會外賽用掉)→ 加日期後綴保唯一(對帳走英文名+賽事+日,不靠 id)。
+  { id: "tn-2006-0626", tour: "wta", tournament: "巴特洪堡公開賽", surface: "grass", time: "6/26 21:00",
+    a: { zh: "卡蘿琳娜.穆霍娃", en: "Karolina Muchova", rank: 11, confidence: "high" },
+    b: { zh: "埃列娜-加布麗艾拉.魯塞", en: "Elena-Gabriela Ruse", rank: 80, confidence: "medium" } },
+  // ── ATP · 普羅夫迪夫挑戰賽(紅土)準決賽 · 研究查實身分+排名(Sofascore 列 6/26 SF)。
+  //   🔴 挑戰賽 ESPN 鏡像收不到 → 賽後自動結算對不到、退手動(同其餘挑戰賽 · Tim 賽後 curate)。
+  { id: "tn-2061-0626", tour: "atp", tournament: "普羅夫迪夫挑戰賽", surface: "clay", time: "6/26 19:10",
+    a: { zh: "蒙特斯-德拉托雷", en: "Inaki Montes-de la Torre", rank: 312, confidence: "medium" },
+    b: { zh: "桑塔馬塔-羅伊格", en: "Andres Santamarta Roig", rank: 871, confidence: "medium" } },
 ];
