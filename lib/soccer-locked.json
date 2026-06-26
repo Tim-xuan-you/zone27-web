@@ -1861,10 +1861,13 @@
       "awayWinPct": 49,
       "enginePick": "away",
       "lockedAt": "2026-06-24T19:42:56.657Z",
-      "finalScore": null,
-      "outcome": null,
-      "verdict": null,
-      "gradedAt": null
+      "finalScore": {
+        "home": 1,
+        "away": 4
+      },
+      "outcome": "away",
+      "verdict": "proved",
+      "gradedAt": "2026-06-26T22:11:07.580Z"
     },
     {
       "matchId": "fd-537396",
@@ -1889,10 +1892,13 @@
       "awayWinPct": 25,
       "enginePick": "home",
       "lockedAt": "2026-06-24T19:42:56.657Z",
-      "finalScore": null,
-      "outcome": null,
-      "verdict": null,
-      "gradedAt": null
+      "finalScore": {
+        "home": 5,
+        "away": 0
+      },
+      "outcome": "home",
+      "verdict": "proved",
+      "gradedAt": "2026-06-26T22:11:07.580Z"
     },
     {
       "matchId": "fd-537373",
@@ -2169,6 +2175,34 @@
       "awayWinPct": 39,
       "enginePick": "away",
       "lockedAt": "2026-06-26T03:27:52.298Z",
+      "finalScore": null,
+      "outcome": null,
+      "verdict": null,
+      "gradedAt": null
+    },
+    {
+      "matchId": "fd-537417",
+      "competitionCode": "WC",
+      "competitionName": "世界盃",
+      "kickoffISO": "2026-06-28T19:00:00Z",
+      "status": "TIMED",
+      "homeSeed": "South Africa",
+      "awaySeed": "Canada",
+      "home": "南非",
+      "away": "加拿大",
+      "ratingHome": 1636,
+      "ratingAway": 1696,
+      "homeAdvantage": 0,
+      "xgHome": 1.165,
+      "xgAway": 1.435,
+      "homeWin": 0.29648141515592263,
+      "draw": 0.2809289872028218,
+      "awayWin": 0.42258959764125603,
+      "homeWinPct": 30,
+      "drawPct": 28,
+      "awayWinPct": 42,
+      "enginePick": "away",
+      "lockedAt": "2026-06-26T22:11:06.721Z",
       "finalScore": null,
       "outcome": null,
       "verdict": null,
