@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-06-26T11:54:34.108Z",
+  "generatedAt": "2026-06-26T15:16:30.053Z",
   "source": "site.api.espn.com tennis scoreboard (atp+wta singles · official · public · 0 auth)",
-  "count": 946,
+  "count": 953,
   "games": [
     {
       "tour": "atp",
@@ -211,6 +211,16 @@
       "winnerName": "Katie Volynets",
       "loserName": "Panna Udvardy",
       "score": "7-5 6-2",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Lexus Nottingham Open",
+      "grouping": "Women's Singles",
+      "date": "2026-06-13",
+      "winnerName": "Kimberly Birrell",
+      "loserName": "Mimi Xu",
+      "score": "6-2 6-3",
       "retired": false
     },
     {
@@ -2489,6 +2499,16 @@
       "grouping": "Women's Singles",
       "date": "2026-06-20",
       "winnerName": "Elsa Jacquemot",
+      "loserName": "Mimi Xu",
+      "score": "5-7 6-2 6-3",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Lexus Eastbourne Open",
+      "grouping": "Women's Singles",
+      "date": "2026-06-20",
+      "winnerName": "Elsa Jacquemot",
       "loserName": "Mingge Xu",
       "score": "5-7 6-2 6-3",
       "retired": false
@@ -2901,6 +2921,16 @@
       "winnerName": "Daria Snigur",
       "loserName": "Sofia Kenin",
       "score": "6-3 6-1",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Lexus Eastbourne Open",
+      "grouping": "Women's Singles",
+      "date": "2026-06-20",
+      "winnerName": "Elsa Jacquemot",
+      "loserName": "Mimi Xu",
+      "score": "5-7 6-2 6-3",
       "retired": false
     },
     {
@@ -9448,9 +9478,49 @@
       "tournament": "Lexus Eastbourne Open",
       "grouping": "Women's Singles",
       "date": "2026-06-26",
+      "winnerName": "Madison Keys",
+      "loserName": "Petra Marcinko",
+      "score": "6-1",
+      "retired": true
+    },
+    {
+      "tour": "atp",
+      "tournament": "Lexus Eastbourne Open",
+      "grouping": "Women's Singles",
+      "date": "2026-06-26",
       "winnerName": "Tatjana Maria",
       "loserName": "Jelena Ostapenko",
       "score": "6-1 1-2",
+      "retired": true
+    },
+    {
+      "tour": "atp",
+      "tournament": "Vanda Pharmaceuticals Mallorca Championships",
+      "grouping": "Men's Singles",
+      "date": "2026-06-26",
+      "winnerName": "Ethan Quinn",
+      "loserName": "Nuno Borges",
+      "score": "6-1 6-2",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Bad Homburg Open powered by Solarwatt",
+      "grouping": "Women's Singles",
+      "date": "2026-06-26",
+      "winnerName": "Naomi Osaka",
+      "loserName": "Wang Xinyu",
+      "score": "6-3 6-3",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Lexus Eastbourne Open",
+      "grouping": "Women's Singles",
+      "date": "2026-06-26",
+      "winnerName": "Madison Keys",
+      "loserName": "Petra Marcinko",
+      "score": "6-1",
       "retired": true
     },
     {
