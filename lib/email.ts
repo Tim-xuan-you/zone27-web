@@ -443,3 +443,232 @@ ${message}
     return { ok: false, error: m };
   }
 }
+
+// ── 結算對帳信(#1 留存槓桿 · Defector 式「直接寄給會員」)─────────────────────
+// 你/朋友押的場打完 → 寄一封「你 vs 引擎 · 來對帳」黑金信,把人拉回來面對自己的帳本。
+// 🔴 紅線(同站內收件匣 lib/settlement-inbox · 含輸照算):命中(✓)跟落空(✕)同權重、同字色
+//   (無紅綠 · ✕ 用骨白不用警示紅 = 落空有尊嚴)· 無 PnL / 無 confetti / 無「你錯過了」·
+//   平靜對帳語氣不是賭場。 這是對帳單,不是行銷信。
+// 🔑 payload 對齊 SettlementItem(lib/settlement-inbox)→ 之後的送出端(token-gated 窄 RPC ·
+//   鏡 push R233 · 不碰 service_role)把 SettlementItem[] map 成 SettlementEmailItem[] 餵這支。
+// 純 render + 送出(無 PII 列舉 · 收件人由呼叫端傳入)· graceful:無金鑰 → ok:false 不丟。
+// glyph 註:email 由收件端字型 render(非 Satori/OG)→ ✓✕ 安全(同既有信主旨的 ✓)。
+// ─────────────────────────────────────────────────────
+
+export type SettlementEmailItem = {
+  /** 對戰顯示(例「樂天 vs 統一」「穆霍娃 vs 魯塞」) */
+  matchLabel: string;
+  /** 運動標(例「棒球」「足球」「網球」「羽球」「UFC」) */
+  sportLabel: string;
+  /** 你賽前看好的那邊顯示名(例「樂天」「看大 8.5」) */
+  myPickName: string;
+  /** 實際結果顯示名(例「統一」「收大 · 總分 13」) */
+  outcomeName: string;
+  /** 你這手中沒中 */
+  youHit: boolean;
+  /** 引擎當初看好的邊顯示名 · null = 引擎沒選邊(50/50 真銅板局) */
+  engineFavName: string | null;
+  /** 逆風:你對、引擎看走眼(贏過機器的那種一手) */
+  beatEngine: boolean;
+};
+
+type SettlementDigestArgs = {
+  to: string;
+  /** 招呼名(顯示名 ·「球迷 #碼」· 或 email 前段) */
+  greeting: string;
+  /** 這批新結算的場(已先鎖後結過濾 · 含輸照收 · 呼叫端排好序) */
+  items: SettlementEmailItem[];
+  /** 「逐筆對帳」連結(通常 https://zone27.com.tw/member/inbox) */
+  inboxUrl: string;
+};
+
+export async function sendSettlementNotification({
+  to,
+  greeting,
+  items,
+  inboxUrl,
+}: SettlementDigestArgs): Promise<EmailResult> {
+  const apiKey = process.env.RESEND_API_KEY;
+  if (!apiKey) {
+    console.warn(
+      `[ZONE27 · SETTLE · SKIP] RESEND_API_KEY not set · settlement email skipped for ${redactEmail(to)}`
+    );
+    return { ok: false, error: "RESEND_API_KEY missing" };
+  }
+  // 沒有任何已結算場 → 不寄空信(防無意義通知 · 同收件匣首訪不發空頭)。
+  if (items.length === 0) {
+    return { ok: false, error: "no_settled_items" };
+  }
+
+  const hits = items.filter((i) => i.youHit).length;
+  const misses = items.length - hits;
+  const n = items.length;
+  const subject = `你押的 ${n} 場結算了 · 來看你 vs 引擎`;
+
+  const html = buildSettlementHtml({ greeting, items, hits, misses, n, inboxUrl });
+  const text = buildSettlementText({ greeting, items, hits, misses, n, inboxUrl });
+
+  try {
+    const response = await fetch(RESEND_ENDPOINT, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        from: FROM_ADDRESS,
+        to: [to],
+        reply_to: REPLY_TO,
+        subject,
+        html,
+        text,
+      }),
+    });
+    if (!response.ok) {
+      // 🔒 R224 房規:不讀/不回 Resend body(4xx body 會回吐收件人 email)· 只記 http。
+      console.error(
+        `[ZONE27 · SETTLE · ERROR] http=${response.status} to=${redactEmail(to)}`
+      );
+      return { ok: false, error: `resend_http_${response.status}` };
+    }
+    const data = (await response.json()) as { id?: string };
+    const id = data.id ?? "unknown";
+    console.log(
+      `[ZONE27 · SETTLE · SENT] to=${redactEmail(to)} n=${n} hits=${hits} id=${id}`
+    );
+    return { ok: true, id };
+  } catch (err) {
+    const message = err instanceof Error ? err.message : String(err);
+    console.error(`[ZONE27 · SETTLE · ERROR] uncaught to=${redactEmail(to)} err=${message}`);
+    return { ok: false, error: message };
+  }
+}
+
+function buildSettlementHtml({
+  greeting,
+  items,
+  hits,
+  misses,
+  n,
+  inboxUrl,
+}: {
+  greeting: string;
+  items: SettlementEmailItem[];
+  hits: number;
+  misses: number;
+  n: number;
+  inboxUrl: string;
+}): string {
+  const mono = `'SF Mono', 'Menlo', 'Consolas', monospace`;
+  const sans = `'Helvetica Neue', 'Helvetica', Arial, sans-serif`;
+  const GOLD = "#D4AF37";
+  const BONE = "#F5F2EA";
+  const MUTE = "#8A93A8";
+
+  // 逐場列:運動標 + 對戰 + 你看好 vs 結果 + ✓中/✕沒中(同字色 · 無紅綠)+ 逆風徽。
+  const rows = items
+    .map((i) => {
+      const verdict = i.youHit
+        ? `<span style="color:${GOLD};">✓ 中</span>`
+        : `<span style="color:${BONE};">✕ 沒中</span>`; // 🔴 落空用骨白不用警示紅 · 同權重
+      const upset = i.beatEngine
+        ? `<span style="color:${GOLD};font-size:11px;"> · 逆風贏過引擎</span>`
+        : "";
+      return `<tr><td style="padding:14px 0;border-bottom:1px solid #1E2A47;">
+<p style="margin:0 0 4px 0;font-family:${mono};color:${MUTE};font-size:10px;letter-spacing:2px;">${escapeHtml(i.sportLabel)}</p>
+<p style="margin:0 0 6px 0;color:${BONE};font-size:15px;">${escapeHtml(i.matchLabel)}</p>
+<p style="margin:0;color:${MUTE};font-size:13px;line-height:1.6;">你看好 <span style="color:${BONE};">${escapeHtml(i.myPickName)}</span> · 結果 <span style="color:${BONE};">${escapeHtml(i.outcomeName)}</span> · ${verdict}${upset}</p>
+</td></tr>`;
+    })
+    .join("");
+
+  return `<!DOCTYPE html>
+<html lang="zh-Hant">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>ZONE 27 · 結算對帳</title></head>
+<body style="margin:0;padding:0;background:#0F1A2E;color:${BONE};font-family:${sans};">
+<table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background:#0F1A2E;">
+<tr><td align="center" style="padding:48px 16px;">
+<table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="max-width:560px;background:#131F38;border:1px solid #1E2A47;">
+<tr><td style="padding:40px 32px;">
+
+<p style="margin:0 0 6px 0;font-family:${mono};color:${GOLD};font-size:11px;letter-spacing:5px;text-transform:uppercase;">ZONE · 27</p>
+<p style="margin:0 0 28px 0;font-family:${mono};color:${MUTE};font-size:10px;letter-spacing:4px;text-transform:uppercase;">結算對帳 · SETTLEMENT</p>
+
+<p style="margin:0;color:${BONE};font-size:14px;">你押的場有結果了 ·</p>
+<p style="margin:6px 0 0 0;font-family:${mono};color:${GOLD};font-size:56px;line-height:1;letter-spacing:-1px;font-weight:300;">${n}<span style="font-size:20px;color:${MUTE};"> 場</span></p>
+<p style="margin:8px 0 0 0;color:${MUTE};font-size:13px;">✓ ${hits} 中 · ✕ ${misses} 沒中 · <span style="color:${BONE};">含贏含輸,刪不掉</span></p>
+
+<hr style="border:0;border-top:1px solid #1E2A47;margin:24px 0;">
+
+<p style="margin:0 0 4px 0;color:${BONE};font-size:15px;">Hi ${escapeHtml(greeting)},</p>
+<p style="margin:0 0 8px 0;color:${MUTE};font-size:13px;line-height:1.7;">這是你賽前鎖死的那幾手、賽後逐筆的對帳 —— 你 vs 引擎,誰看得準。</p>
+
+<table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">${rows}</table>
+
+<!-- CTA -->
+<table role="presentation" cellspacing="0" cellpadding="0" border="0" style="margin:28px 0 4px 0;"><tr>
+<td style="background:${GOLD};"><a href="${inboxUrl}" style="display:inline-block;padding:13px 26px;color:#0F1A2E;font-size:14px;font-weight:600;text-decoration:none;letter-spacing:0.5px;">逐筆對帳 · 看你 vs 引擎 →</a></td>
+</tr></table>
+
+<hr style="border:0;border-top:1px solid #1E2A47;margin:28px 0 20px 0;">
+
+<!-- Defector 式:你養的引擎,只對你負責 -->
+<p style="margin:0 0 14px 0;color:${MUTE};font-size:12px;line-height:1.7;">你養著這顆引擎 —— 沒有廣告主、沒有創投、不抽你的賭注。所以它只對一種人負責:出錢撐著它的你。這是你的對帳單,不是行銷信。</p>
+<p style="margin:0 0 6px 0;font-family:${mono};color:${MUTE};font-size:10px;letter-spacing:3px;text-align:center;">FUNDED BY MEMBERS · NO ADS · NO TRACKERS</p>
+<p style="margin:0;color:${MUTE};font-size:11px;text-align:center;"><a href="https://zone27.com.tw" style="color:${GOLD};text-decoration:none;">zone27.com.tw</a></p>
+<p style="margin:14px 0 0 0;color:${MUTE};font-size:11px;text-align:center;line-height:1.7;">不想收結算信?到 <a href="https://zone27.com.tw/member" style="color:${MUTE};">會員頁</a>關掉提醒 · 或 reply 退訂</p>
+
+</td></tr>
+</table>
+</td></tr>
+</table>
+</body>
+</html>`;
+}
+
+function buildSettlementText({
+  greeting,
+  items,
+  hits,
+  misses,
+  n,
+  inboxUrl,
+}: {
+  greeting: string;
+  items: SettlementEmailItem[];
+  hits: number;
+  misses: number;
+  n: number;
+  inboxUrl: string;
+}): string {
+  const lines = items
+    .map((i) => {
+      const v = i.youHit ? "✓ 中" : "✕ 沒中";
+      const upset = i.beatEngine ? " · 逆風贏過引擎" : "";
+      return `· [${i.sportLabel}] ${i.matchLabel}\n  你看好 ${i.myPickName} · 結果 ${i.outcomeName} · ${v}${upset}`;
+    })
+    .join("\n");
+
+  return `ZONE 27 · 結算對帳
+
+你押的場有結果了 · ${n} 場
+✓ ${hits} 中 · ✕ ${misses} 沒中 · 含贏含輸,刪不掉
+
+Hi ${greeting},
+這是你賽前鎖死的那幾手、賽後逐筆的對帳 —— 你 vs 引擎,誰看得準。
+
+${lines}
+
+逐筆對帳 · 看你 vs 引擎:
+${inboxUrl}
+
+──
+你養著這顆引擎 —— 沒有廣告主、沒有創投、不抽你的賭注。
+所以它只對出錢撐著它的你負責。這是對帳單,不是行銷信。
+
+FUNDED BY MEMBERS · NO ADS · NO TRACKERS
+https://zone27.com.tw
+
+不想收結算信?到 zone27.com.tw/member 關掉提醒 · 或 reply 退訂
+`;
+}
