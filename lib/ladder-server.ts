@@ -27,9 +27,11 @@ import {
   getFinalizedMatches,
   getMatchStartIso,
   getEngineFavorite,
+  getCalibration,
   getCurrentTaipeiMonthKey,
 } from "@/lib/matches";
 import { getMlbLockedMatches } from "@/lib/mlb-matches";
+import { getResolvedSoccerEngine } from "@/lib/soccer/engine-settle";
 import { fetchLadderRows } from "@/lib/ladder-rows";
 import { baseballPropIdMatches } from "@/lib/baseball-totals";
 
@@ -68,6 +70,9 @@ export type LadderEntry = {
   /** 米其林式月度升降:本月階級 vs「上月底」階級。 on-read 從不可竄改的押注+賽果歷史推導 ·
    *  0 migration。 up=升階 · down=掉階 · same=持平 · new=本月新上榜。 */
   move: "up" | "down" | "same" | "new";
+  /** 🔴 R277:這列是「引擎本人」(棒球 / 足球)· 跟用戶同榜競賽、名次隨大家表現上下移動 ·
+   *  但它是「要爬過去的尺」不是對手 —— 不連 /u、不算進 qualifyingUsers、永不拿神諭王座(王座留給人)。 */
+  isEngine?: boolean;
 };
 
 export type LadderBoard = {
@@ -109,17 +114,13 @@ export function buildIdMatches(): IdentityMatch[] {
   return [...out, ...baseballPropIdMatches(games)];
 }
 
-// 階級(snapshot · 累積成就)· month.beatEngine 另外當「本月還在贏」訊號顯示(不混進階級)。
-function tierOf(
-  accuracy: number,
-  beatEngine: boolean,
-  crowdAvgAccuracy: number,
-  decided: number,
-): number {
-  // 神準手 = 贏過機器 + 夠厚樣本(≥LADDER_SHARP_MIN)· 10 場的手氣不算頂(同對帳之星門檻)。
-  if (beatEngine && decided >= LADDER_SHARP_MIN) return 4; // 神準手:夠多場裡真的贏過機器
-  if (accuracy > crowdAvgAccuracy) return 3; // 操盤手:贏過大家的平均
-  if (accuracy > 50) return 2; // 分析師:準度過半
+// 階級(snapshot)· 🔴 R277 Tim 拍板:升降門檻改「勝率 60%」—— 60% 是連我們自己的引擎都還沒
+// 穩穩站上的狠線(棒球引擎現在才 53%),撐在 60% 以上 = 真的贏過機器級。 月度升降以「有沒有跨過
+// 60%」為核心。 🔴 守舊紅線:仍需夠厚樣本(≥LADDER_SHARP_MIN)才上頂階 —— 60% 的「一晚手氣」不算頂。
+function tierOf(accuracy: number, decided: number): number {
+  if (accuracy >= 60 && decided >= LADDER_SHARP_MIN) return 4; // 神準手:≥30 場裡守住 60%(贏過機器級)
+  if (accuracy >= 55) return 3; // 操盤手:逼近 60% 門檻
+  if (accuracy >= 50) return 2; // 分析師:準度過半
   return 1; // 新秀:上榜但還沒過半
 }
 
@@ -155,10 +156,8 @@ function tiersAsOf(
     });
   }
   if (qualified.length === 0) return out;
-  const crowdAvg =
-    qualified.reduce((s, e) => s + e.accuracyPct, 0) / qualified.length;
   for (const e of qualified) {
-    e.tier = tierOf(e.accuracyPct, e.beatEngine, crowdAvg, e.decided);
+    e.tier = tierOf(e.accuracyPct, e.decided);
   }
   qualified.sort(
     (a, b) =>
@@ -226,15 +225,14 @@ export async function getLadderBoard(): Promise<LadderBoard> {
     });
   }
 
-  if (qualified.length < LADDER_MIN_USERS) {
+  // R277:1-2 個合格用戶 → 不上榜(會暴露單一用戶 · 守隱私紅線)。 0 用戶 → 兩台引擎獨佔榜當「尺」
+  //   (冷啟動 · 無人可暴露 · 機器在最上、等第一個爬上來的人)。 ≥3 用戶 → 正常上榜(用戶 + 引擎)。
+  if (qualified.length > 0 && qualified.length < LADDER_MIN_USERS) {
     return { show: false, qualifyingUsers: qualified.length, entries: [] };
   }
 
-  // 大家的平均命中率(給「操盤手 = 贏過大家平均」那階)。
-  const crowdAvg =
-    qualified.reduce((s, e) => s + e.accuracyPct, 0) / qualified.length;
   for (const e of qualified) {
-    e.tier = tierOf(e.accuracyPct, e.beatEngine, crowdAvg, e.decided);
+    e.tier = tierOf(e.accuracyPct, e.decided);
   }
 
   // 排名:贏過引擎的幅度(alpha)優先 · 再樣本厚 · 再命中率 —— 不是裸勝率/連勝/盈虧虛榮榜。
@@ -276,22 +274,87 @@ export async function getLadderBoard(): Promise<LadderBoard> {
   });
   const lastMonthTier = tiersAsOf(byUser, prevMonthMatches, monthKey);
 
-  const entries: LadderEntry[] = top.map((e, i) => {
-    const rank = i + 1;
-    // 神諭(王座 · tier 5)= 全站第一、且在夠厚樣本(≥LADDER_SHARP_MIN)裡真的贏過機器(同對帳之星)。
-    // 沒人達標 → 王座仍只有機器(不硬封王 · 寧可空著也不發給樣本不足的人)。
-    const tier =
-      rank === 1 && e.beatEngine && e.decided >= LADDER_SHARP_MIN ? 5 : e.tier;
-    // 本月升降:上月底沒在榜(prev=undefined)= 新上榜;否則比階級高低。
+  // ── R277 · 兩台引擎本人上榜當「尺」(同 /track-record 口徑)· 0 結算不掛空尺 ──────────────
+  const finalizedBaseball = [...getFinalizedMatches(), ...getMlbLockedMatches()];
+  const bProved = finalizedBaseball.filter((m) => getCalibration(m) === "proved").length;
+  const bDecided =
+    bProved + finalizedBaseball.filter((m) => getCalibration(m) === "diverged").length;
+  let sProved = 0;
+  let sDecided = 0;
+  try {
+    const soccerEng = await getResolvedSoccerEngine();
+    for (const p of soccerEng.predictions) {
+      if (p.verdict === "proved") {
+        sProved += 1;
+        sDecided += 1;
+      } else if (p.verdict === "diverged") {
+        sDecided += 1;
+      }
+    }
+  } catch {
+    /* 足球引擎讀失敗 → 不掛足球尺(graceful) */
+  }
+  const engineRows = [
+    { code: "engine-baseball", handle: "ZONE 27 引擎 · 棒球", proved: bProved, decided: bDecided },
+    { code: "engine-soccer", handle: "ZONE 27 引擎 · 足球", proved: sProved, decided: sDecided },
+  ].filter((g) => g.decided > 0);
+
+  type Ranked = LadderEntry & { _sortEdge: number };
+  // 用戶列(各自階級 + 月度升降 · 神諭王座最後在合併排名後才定)。
+  const userRanked: Ranked[] = top.map((e) => {
     const prev = lastMonthTier.get(e.authorCode);
     const move: LadderEntry["move"] =
-      prev === undefined
-        ? "new"
-        : tier > prev
-          ? "up"
-          : tier < prev
-            ? "down"
-            : "same";
+      prev === undefined ? "new" : e.tier > prev ? "up" : e.tier < prev ? "down" : "same";
+    return {
+      rank: 0,
+      authorCode: e.authorCode,
+      handle: e.handle,
+      tier: e.tier,
+      decided: e.decided,
+      accuracyPct: e.accuracyPct,
+      edgeVsEnginePts: e.edgeVsEnginePts,
+      beatEngine: e.beatEngine,
+      monthBeatEngine: e.monthBeatEngine,
+      supporter: supporterByCode.get(e.authorCode) ?? false,
+      move,
+      isEngine: false,
+      _sortEdge: e._sortEdge,
+    };
+  });
+  // 引擎列:alpha=0(它就是那條線)→ 名次自然落在「贏它的人 / 輸它的人」之間 · 隨大家表現上下移動。
+  const engineRanked: Ranked[] = engineRows.map((g) => {
+    const acc = Math.round((g.proved / g.decided) * 100);
+    return {
+      rank: 0,
+      authorCode: g.code,
+      handle: g.handle,
+      tier: tierOf(acc, g.decided),
+      decided: g.decided,
+      accuracyPct: acc,
+      edgeVsEnginePts: 0,
+      beatEngine: false,
+      monthBeatEngine: false,
+      supporter: false,
+      move: "same",
+      isEngine: true,
+      _sortEdge: 0,
+    };
+  });
+
+  // 合併排名:贏過引擎的幅度(alpha)優先(引擎落在 0 線)· 再樣本厚 · 再命中率 —— 不是裸勝率虛榮榜。
+  const merged = [...userRanked, ...engineRanked].sort(
+    (a, b) =>
+      b._sortEdge - a._sortEdge || b.decided - a.decided || b.accuracyPct - a.accuracyPct,
+  );
+
+  const entries: LadderEntry[] = merged.map((e, i) => {
+    const rank = i + 1;
+    // 神諭王座(tier 5)= 全站第一、是人(非引擎)、且 ≥60% + 夠厚樣本。 🔴 引擎永不拿王座 ——
+    // 王座留給把機器拉下來的人;沒人達標 → 機器或許在最上,但那不叫神諭(王座空著)。
+    const tier =
+      rank === 1 && !e.isEngine && e.accuracyPct >= 60 && e.decided >= LADDER_SHARP_MIN
+        ? 5
+        : e.tier;
     return {
       rank,
       authorCode: e.authorCode,
@@ -302,10 +365,11 @@ export async function getLadderBoard(): Promise<LadderBoard> {
       edgeVsEnginePts: e.edgeVsEnginePts,
       beatEngine: e.beatEngine,
       monthBeatEngine: e.monthBeatEngine,
-      supporter: supporterByCode.get(e.authorCode) ?? false,
-      move,
+      supporter: e.supporter,
+      move: e.move,
+      isEngine: e.isEngine,
     };
   });
 
-  return { show: true, qualifyingUsers: qualified.length, entries };
+  return { show: entries.length > 0, qualifyingUsers: qualified.length, entries };
 }
