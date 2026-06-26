@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-06-25T20:49:41.302Z",
+  "generatedAt": "2026-06-26T11:54:34.108Z",
   "source": "site.api.espn.com tennis scoreboard (atp+wta singles · official · public · 0 auth)",
-  "count": 944,
+  "count": 946,
   "games": [
     {
       "tour": "atp",
@@ -9442,6 +9442,26 @@
       "loserName": "Dusan Lajovic",
       "score": "3-6 6-4 3-6 6-3 6-4",
       "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Lexus Eastbourne Open",
+      "grouping": "Women's Singles",
+      "date": "2026-06-26",
+      "winnerName": "Tatjana Maria",
+      "loserName": "Jelena Ostapenko",
+      "score": "6-1 1-2",
+      "retired": true
+    },
+    {
+      "tour": "wta",
+      "tournament": "Lexus Eastbourne Open",
+      "grouping": "Women's Singles",
+      "date": "2026-06-26",
+      "winnerName": "Tatjana Maria",
+      "loserName": "Jelena Ostapenko",
+      "score": "6-1 1-2",
+      "retired": true
     }
   ]
 }

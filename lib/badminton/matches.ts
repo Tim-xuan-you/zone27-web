@@ -73,6 +73,28 @@ export const LISTED_WS = 8;
 //   誠實標「不硬開」。 女單 8 場目前無一位我們有把握辨識 → 這版先不上(寧缺勿錯)。
 //   🔴 種子排名 = 編輯估計(BWF 公開排名 + 近況)· 不是官方數據 · 隨真實賽果更新(同網球種子分)。
 export const BADMINTON_DRAW: BadmintonMatch[] = [
+  // ── 2026-06-27 美國公開賽 R2(週六清晨台北 · 蘇力揚 / 喬漢 R1 晉級續戰)──
+  //   R2 對手多是我們查不到可靠排名的國際選手 → 誠實不硬開引擎線(照樣可押 · 你的判斷比引擎值錢)。
+  //   女單仍無一位有把握辨識 → 不上(同 R1 · 寧缺勿錯)。
+  {
+    id: "bd-2503",
+    tour: "ms",
+    tournament: "美國公開賽 · 男單",
+    time: "6/27 07:40",
+    note: "蘇力揚是台灣選手,但對手楊燦我們查不到可靠排名 —— 不硬開假盤,照樣可押。",
+    a: { zh: "蘇力揚", en: "Su Li-yang", rank: 65, confidence: "medium" },
+    b: { zh: "楊燦", en: "?", rank: null, confidence: "low" },
+  },
+  {
+    id: "bd-2500",
+    tour: "ms",
+    tournament: "美國公開賽 · 男單",
+    time: "6/27 06:50",
+    note: "兩位都是我們查不到可靠排名的國際選手(喬漢 R1 淘汰周天成)—— 不硬開假盤,照樣可押。",
+    a: { zh: "M.西爾伯曼", en: "?", rank: null, confidence: "low" },
+    b: { zh: "羅納克.喬漢", en: "?", rank: null, confidence: "low" },
+  },
+  // ── 2026-06-26 美國公開賽 R1(已完場 · 賽後對帳 · Tim 截圖比分手 curate)──
   {
     id: "bd-2546",
     tour: "ms",
@@ -80,6 +102,9 @@ export const BADMINTON_DRAW: BadmintonMatch[] = [
     time: "6/26 08:00",
     a: { zh: "基達姆比", en: "Kidambi Srikanth", rank: 20, confidence: "high" },
     b: { zh: "李梓嘉", en: "Lee Zii Jia", rank: 7, confidence: "high" },
+    // 🔴 引擎賽前看好李梓嘉(排名 7 > 20)· 結果基達姆比 2-0 爆冷 → DIVERGED(引擎沒中 · 誠實掛 ·
+    //    羽球誠實天花板 ~63%,本就有 1/3 多翻盤空間 · 含輸照算)。 羽球引擎第一場結算。
+    finalResult: { winner: "a", score: "21-14 21-13", settledAt: "2026-06-27" },
   },
   {
     id: "bd-2541",
@@ -89,6 +114,8 @@ export const BADMINTON_DRAW: BadmintonMatch[] = [
     note: "周天成是世界前段的台灣一哥,但對手是我們認不出、查不到排名的資格賽選手 —— 寧可不開,也不開假盤。",
     a: { zh: "羅納克.喬漢", en: "?", rank: null, confidence: "low" },
     b: { zh: "周天成", en: "Chou Tien-chen", rank: 12, confidence: "high" },
+    // 周天成 0-2 不敵喬漢(引擎未開盤 · 不進引擎戰績,但用戶押注照對帳)。
+    finalResult: { winner: "a", score: "21-17 26-24", settledAt: "2026-06-27" },
   },
   {
     id: "bd-2540",
@@ -98,6 +125,8 @@ export const BADMINTON_DRAW: BadmintonMatch[] = [
     note: "蘇力揚是台灣選手,但對手我們認不出、查不到排名 —— 不硬開假盤。",
     a: { zh: "柳泰斌", en: "?", rank: null, confidence: "low" },
     b: { zh: "蘇力揚", en: "Su Li-yang", rank: 65, confidence: "medium" },
+    // 蘇力揚 2-1 逆轉柳泰斌晉級(引擎未開盤 · 用戶押注照對帳)。
+    finalResult: { winner: "b", score: "15-21 21-9 22-20", settledAt: "2026-06-27" },
   },
 ];
 

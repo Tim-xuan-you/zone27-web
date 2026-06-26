@@ -100,15 +100,32 @@ export default function BadmintonPage() {
           </div>
         </section>
 
-        {/* ── 引擎戰績(誠實 pending · 第一場結算後才長出來)── */}
+        {/* ── 引擎戰績(含輸照掛 · 第一場結算就誠實長出來)── */}
         <section className="mx-auto max-w-6xl w-full px-6 sm:px-10 pb-8">
           <div className="bg-slate/30 border border-line/60 p-5 sm:p-6 max-w-2xl">
             <p className="font-mono text-gold/70 text-[10px] tracking-[0.4em] mb-3">引擎公開戰績</p>
-            <p className="text-mute text-[13px] sm:text-sm leading-relaxed">
-              引擎已賽前開盤 <span className="text-gold tabular">{eng.pending}</span> 場 ——
-              還沒有一場結算。 第一場打完就逐場對帳、<span className="text-bone">命中落空都掛、刪不掉</span>,
-              跟棒球 / 足球 / 網球<span className="text-bone">分開算</span>(各運動各自一本帳)。
-            </p>
+            {eng.n > 0 ? (
+              <p className="text-mute text-[13px] sm:text-sm leading-relaxed">
+                引擎已對帳 <span className="text-gold tabular">{eng.n}</span> 場 ·{" "}
+                <span className="text-gold tabular">✓{eng.hits}</span>{" "}
+                <span className="text-loss/85 tabular">✕{eng.misses}</span>
+                {eng.rate !== null && (
+                  <>
+                    {" "}· <span className="text-bone tabular">{eng.rate}%</span>
+                  </>
+                )}
+                {eng.pending > 0 && <> · 另 {eng.pending} 場待結算</>}。{" "}
+                <span className="text-bone">命中落空都掛、刪不掉</span>,跟棒球 / 足球 / 網球分開算。
+                羽球誠實天花板約 <span className="text-gold tabular">63%</span>、本就有 1/3 多翻盤 ——
+                <span className="text-bone">場數還少、這數字還會跳</span>,累積夠多才看得出校準。
+              </p>
+            ) : (
+              <p className="text-mute text-[13px] sm:text-sm leading-relaxed">
+                引擎已賽前開盤 <span className="text-gold tabular">{eng.pending}</span> 場 ——
+                還沒有一場結算。 第一場打完就逐場對帳、<span className="text-bone">命中落空都掛、刪不掉</span>,
+                跟棒球 / 足球 / 網球<span className="text-bone">分開算</span>(各運動各自一本帳)。
+              </p>
+            )}
           </div>
         </section>
 
