@@ -10,9 +10,14 @@
 // signup still succeeds and the visitor still sees their queue position.
 // This is intentional: confirmation email is bonus, not blocker.
 //
-// Email sender address: `onboarding@resend.dev` (Resend's pre-verified
-// shared domain for free tier). Switches to `tim@zone27.tw` (or similar)
-// after Tim purchases the brand domain (TODO ③).
+// Email sender address: defaults to `onboarding@resend.dev` (Resend's
+// pre-verified shared free-tier domain — ⚠️ only delivers to Tim's OWN
+// inbox, NOT to members). 🔑 To reach MEMBERS, set the `EMAIL_FROM` env var
+// (e.g. `ZONE 27 <noreply@zone27.com.tw>`) AFTER verifying zone27.com.tw as a
+// sending domain in Resend → Domains. One env var flips every email in this
+// file from the sandbox to the real member-deliverable domain — no code deploy,
+// no hunt-and-replace (mirrors REPLY_TO via SUPPORT_EMAIL). Fallback keeps the
+// sandbox so nothing breaks before the domain is verified.
 //
 // Visual design: brand-aligned dark-navy + cold-gold + Geist Mono
 // (fallback to system fonts since email clients don't load web fonts).
@@ -23,7 +28,10 @@ import { SUPPORT_EMAIL, BRAND_NAME } from "@/lib/brand-constants";
 import { redactEmail } from "@/lib/redact-email";
 
 const RESEND_ENDPOINT = "https://api.resend.com/emails";
-const FROM_ADDRESS = `${BRAND_NAME} <onboarding@resend.dev>`;
+// 🔑 一個 env var 翻整批信:設了 EMAIL_FROM(=已在 Resend 驗證的 zone27.com.tw 寄件地址)
+// → 站上所有信都從真網域寄、會員收得到;沒設 → 退回 sandbox(只到 Tim 自己信箱 · 現況不破)。
+const FROM_ADDRESS =
+  process.env.EMAIL_FROM ?? `${BRAND_NAME} <onboarding@resend.dev>`;
 // R162 W2 · Agent M #5 · REPLY_TO now via canonical SUPPORT_EMAIL constant
 // (lib/brand-constants.ts)· brand domain switch flips 1 env var instead of
 // hunt-and-replace across 19+ mailto sites · prep for support@zone27.tw alias。
