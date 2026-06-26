@@ -15,6 +15,8 @@ import {
 import { getMlbLockedMatches } from "@/lib/mlb-matches";
 import SoccerEngineRecord from "@/components/SoccerEngineRecord";
 import TennisEngineRecord from "@/components/TennisEngineRecord";
+import BadmintonEngineRecord from "@/components/BadmintonEngineRecord";
+import { gradeBadmintonEngine } from "@/lib/badminton/matches";
 import AnalystPanel from "@/components/AnalystPanel";
 import SportToggle from "@/components/SportToggle";
 import SoccerPendingFrame from "@/components/SoccerPendingFrame";
@@ -204,6 +206,21 @@ export default function TrackRecordPage() {
     </>
   );
 
+  // ── 羽球明細 view · BWF 排名換算 Elo · 跟棒球足球網球分開計(不混池)· R279 ──
+  //    有引擎活動(已對帳 or 待結算)才顯示該 tab(graceful · 0 活動不露空 tab)。
+  const badmintonEng = gradeBadmintonEngine();
+  const showBadminton = badmintonEng.n > 0 || badmintonEng.pending > 0;
+  const badmintonView = (
+    <>
+      <section className="mx-auto max-w-6xl w-full px-6 sm:px-10 pt-2 pb-1">
+        <p className="font-mono text-gold/70 text-[10px] tracking-[0.35em]">
+          / 羽球 · BWF 排名換算 Elo · 跟棒球足球網球分開計(不混池)
+        </p>
+      </section>
+      <BadmintonEngineRecord />
+    </>
+  );
+
   return (
     <div className="flex flex-col flex-1 min-h-screen">
       <Nav active="matches" />
@@ -214,7 +231,7 @@ export default function TrackRecordPage() {
           <p
             className="font-mono text-gold text-[10px] tracking-[0.45em] mb-4"
           >
-            / 公開戰績 · 棒球 · 足球 · 網球 · 同一套誠實
+            / 公開戰績 · 棒球 · 足球 · 網球{showBadminton ? " · 羽球" : ""} · 同一套誠實
           </p>
           <h1 className="text-4xl sm:text-5xl text-bone font-light tracking-tight max-w-3xl">
             每一場引擎的公開預測 · 賽後實際結果在這
@@ -267,7 +284,12 @@ export default function TrackRecordPage() {
         {/* ── 運動切換(等寬 = 等尊嚴)· 棒球明細 / 足球明細 各占整個舞台 · 預設棒球 ──
             hero 的含輸命中率 + N<30 老實標留在上方永遠可見層(不進 toggle = 不藏誠實);
             這裡切換的只是「分運動明細」。 足球 0 結算 = 上方 PENDING 尊嚴框(不是底部空卡)。 */}
-        <SportToggle baseball={baseballView} soccer={soccerView} tennis={tennisView} />
+        <SportToggle
+          baseball={baseballView}
+          soccer={soccerView}
+          tennis={tennisView}
+          badminton={showBadminton ? badmintonView : undefined}
+        />
 
         {/* ── 怎麼評分 · inline 1 行 ─────────────────── */}
         <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-16 border-t border-line/40 pt-10">

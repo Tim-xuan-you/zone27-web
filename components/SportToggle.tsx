@@ -13,7 +13,7 @@ import { useState, useSyncExternalStore } from "react";
 // 走 useSyncExternalStore:server / 水合期一律回 getServerSnapshot("baseball"),
 // 水合完成後 React 才讀 client 端 hash —— 這是官方對「server/client 不同值」的解,
 // 不觸發 hydration mismatch、也不用在 effect 內同步 setState(過 react-hooks/set-state-in-effect)。
-type Sport = "baseball" | "soccer" | "tennis";
+type Sport = "baseball" | "soccer" | "tennis" | "badminton";
 function subscribeHash(onChange: () => void): () => void {
   window.addEventListener("hashchange", onChange);
   return () => window.removeEventListener("hashchange", onChange);
@@ -21,7 +21,13 @@ function subscribeHash(onChange: () => void): () => void {
 function getHashSport(): Sport {
   if (typeof window === "undefined") return "baseball";
   const h = window.location.hash;
-  return h === "#soccer" ? "soccer" : h === "#tennis" ? "tennis" : "baseball";
+  return h === "#soccer"
+    ? "soccer"
+    : h === "#tennis"
+      ? "tennis"
+      : h === "#badminton"
+        ? "badminton"
+        : "baseball";
 }
 // SSR / 水合的回退 = 預設棒球(無 hash context · 守 canonical 不分歧)。
 function getServerSport(): Sport {
@@ -32,12 +38,15 @@ export default function SportToggle({
   baseball,
   soccer,
   tennis,
+  badminton,
   containerClass = "mx-auto max-w-5xl w-full px-6 sm:px-10 pt-4 pb-8",
 }: {
   baseball: React.ReactNode;
   soccer: React.ReactNode;
-  /** 網球(選填)· 有資料才傳 → 三段;沒傳 → 維持兩段(/ladder、/calibration 等不變)。 */
+  /** 網球(選填)· 有資料才傳 → 多一段;沒傳 → 不顯示該段(/ladder、/calibration 等不變)。 */
   tennis?: React.ReactNode;
+  /** 羽球(選填)· 有資料才傳 → 多一段;沒傳 → 不顯示(graceful · 不露空 tab)。 */
+  badminton?: React.ReactNode;
   /** 外層定位/寬度(預設給寬頁 · 窄頁如 /ladder 傳無 max-w/px 的縮版,避免雙重 padding) */
   containerClass?: string;
 }) {
@@ -46,9 +55,18 @@ export default function SportToggle({
   const hashSport = useSyncExternalStore(subscribeHash, getHashSport, getServerSport);
   // 手動覆寫:任一按鈕點過後,使用者的選擇優先於網址 hash(深連結只決定初始視圖)。
   const [override, setOverride] = useState<Sport | null>(null);
-  // 沒傳網球時,#tennis 落回棒球(避免空視圖)。
+  // 沒傳該運動時,對應 hash 落回棒球(避免空視圖)。
   const sport =
-    override ?? (hashSport === "tennis" && !tennis ? "baseball" : hashSport);
+    override ??
+    ((hashSport === "tennis" && !tennis) ||
+    (hashSport === "badminton" && !badminton)
+      ? "baseball"
+      : hashSport);
+
+  // tab 數 → grid 欄(4 段在手機用 2×2,守 mobile-first ≤ 不爆版;3 段維持一排)。
+  const tabCount = 2 + (tennis ? 1 : 0) + (badminton ? 1 : 0);
+  const gridColsClass =
+    tabCount >= 4 ? "grid-cols-2 sm:grid-cols-4" : tabCount === 3 ? "grid-cols-3" : "grid-cols-2";
 
   return (
     <>
@@ -56,7 +74,7 @@ export default function SportToggle({
         <div
           role="tablist"
           aria-label="選擇運動"
-          className={`grid ${tennis ? "grid-cols-3" : "grid-cols-2"} gap-1 p-1 bg-slate/40 border border-line/70`}
+          className={`grid ${gridColsClass} gap-1 p-1 bg-slate/40 border border-line/70`}
         >
           <SegBtn
             active={sport === "baseball"}
@@ -78,6 +96,14 @@ export default function SportToggle({
               sub="溫網會外賽 · 草地"
             />
           )}
+          {badminton && (
+            <SegBtn
+              active={sport === "badminton"}
+              onClick={() => setOverride("badminton")}
+              label="羽球"
+              sub="美國公開賽 · BWF"
+            />
+          )}
         </div>
       </section>
 
@@ -85,6 +111,7 @@ export default function SportToggle({
       <div className={sport === "baseball" ? "" : "hidden"}>{baseball}</div>
       <div className={sport === "soccer" ? "" : "hidden"}>{soccer}</div>
       {tennis && <div className={sport === "tennis" ? "" : "hidden"}>{tennis}</div>}
+      {badminton && <div className={sport === "badminton" ? "" : "hidden"}>{badminton}</div>}
     </>
   );
 }

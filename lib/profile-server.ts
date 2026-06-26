@@ -173,9 +173,9 @@ export async function getPredictionsByCode(
       if (
         validPick &&
         !isProp && // 🔴 校準曲線只算「誰贏」· 不混玩法機率(數學上不能畫同一條線)
-        !matchId.startsWith("tn-") && // 網球賽果沒進這頁的 calibrationResults → 收進來只會變永遠 pending 的幽靈(/u 校準曲線目前只算棒球 + 足球)
-        !matchId.startsWith("bd-") && // 羽球同理(R264)· 賽果沒進這頁 calibrationResults → 排除避免幽靈 pending
-        !matchId.startsWith("mma-") && // UFC 同理(R277)· 賽果沒進這頁 calibrationResults → 排除避免公開校準掛永遠 pending 幽靈
+        // R279:網球(tn-)/羽球(bd-)/UFC(mma-)賽果已收進 /u + /member 的 calibrationResults
+        //   (a/b→home/away · 見 app/u/[code]/page.tsx + app/member/page.tsx)→ 不再排除,
+        //   設了把握的這三種運動也進公開/個人校準曲線。 原本排除是因賽果沒組到這頁(已補)。
         typeof conf === "number" &&
         Number.isFinite(conf) &&
         conf >= 1 &&

@@ -12,9 +12,12 @@ import {
   getBadmintonMatch,
   drawLine,
   bettable,
+  badmintonResults,
   BADMINTON_DRAW,
   type BadmintonDrawPlayer,
 } from "@/lib/badminton/matches";
+import MatchSegment from "@/components/MatchSegment";
+import { getMatchSegment } from "@/lib/match-segment";
 
 // ── ZONE 27 · /badminton/[matchId] · 單場完整分析(運彩場次)─────────────────────────
 // 一場的完整引擎拆解:兩位球員 + BWF 排名換算實力分 + 勝率怎麼來的 + 賽前鎖定押注。 純展示 +
@@ -84,6 +87,12 @@ export default async function BadmintonMatchPage({
   const bet = bettable(m);
   const ra = m.a.rank != null ? ratingFromRank(m.a.rank) : null;
   const rb = m.b.rank != null ? ratingFromRank(m.b.rank) : null;
+
+  // 誰賽前鎖了這場(per-match segment · 同棒球 / 足球 / 網球)· 賽果有(badmintonResults)→ 賽後逐人對帳 ·
+  // 無 → 賽前鎖定名單(沒人鎖 → 自動隱藏)。 A=home / B=away(同 /u badmintonHA + 天梯)。
+  const segment = await getMatchSegment(m.id);
+  const bRes = badmintonResults()[m.id];
+  const segWinner = bRes ? (bRes.outcome === "a" ? "home" : "away") : null;
 
   return (
     <div className="flex flex-col flex-1 min-h-screen">
@@ -195,6 +204,9 @@ export default async function BadmintonMatchPage({
           </Link>
         </div>
       </main>
+
+      {/* 誰賽前鎖了這場(per-match segment · A=home/B=away)· 沒人鎖 → 自動隱藏 · 每格連 /u 公開校準檔。 */}
+      <MatchSegment lockers={segment} homeName={m.a.zh} awayName={m.b.zh} winner={segWinner} />
 
       <Footer />
     </div>

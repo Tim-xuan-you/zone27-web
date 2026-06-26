@@ -126,6 +126,12 @@ export default function BadmintonPage() {
                 跟棒球 / 足球 / 網球<span className="text-bone">分開算</span>(各運動各自一本帳)。
               </p>
             )}
+            <Link
+              href="/track-record#badminton"
+              className="mt-3 inline-block font-mono text-gold/75 hover:text-gold text-[10px] tracking-[0.2em] underline-offset-4 hover:underline transition-colors"
+            >
+              看完整逐場對帳(跨運動公開帳本)→
+            </Link>
           </div>
         </section>
 

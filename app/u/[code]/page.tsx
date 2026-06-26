@@ -163,8 +163,9 @@ export default async function PublicProfilePage({
   );
 
   // 公開校準曲線(0027 · Metaculus「Checking Our Work」個人公開版):這份帳本「賽前宣告過把握」
-  // 的場 × 賽果 → 信心桶 vs 實際命中率。 跨運動同一份賽果(棒球 finalWinner + 足球 outcome)·
-  // 同 /member CalibrationMasterCard 口徑。 0027 未套用 → calibrationPicks 空 → report 空 → 不顯示。
+  // 的場 × 賽果 → 信心桶 vs 實際命中率。 跨運動同一份賽果(棒球 finalWinner + 足球 outcome +
+  // 網球/羽球/UFC a/b→home/away)· 同 /member CalibrationMasterCard 口徑。 0027 未套用 →
+  // calibrationPicks 空 → report 空 → 不顯示。
   const calibrationResults: Record<string, CalibrationResult> = {};
   for (const m of idMatches) {
     calibrationResults[m.id] = {
@@ -175,6 +176,17 @@ export default async function PublicProfilePage({
   for (const [matchId, r] of Object.entries(resultsMap)) {
     calibrationResults[matchId] = { result: r.outcome, startISO: r.kickoffISO };
   }
+  // 網球 / 羽球 / UFC 賽果(同天梯 buildSyncResults / tennisHA 的 a/b→home/away · A=home/B=away)·
+  // 🔴 MMA 和局(draw)→ "tie" = push(不計分母)。 配合 profile-server 解除 tn-/bd-/mma- 校準排除。
+  for (const [id, r] of Object.entries(tennisResults()))
+    calibrationResults[id] = { result: r.outcome === "a" ? "home" : "away", startISO: r.startISO ?? "" };
+  for (const [id, r] of Object.entries(badmintonResults()))
+    calibrationResults[id] = { result: r.outcome === "a" ? "home" : "away", startISO: r.startISO ?? "" };
+  for (const [id, r] of Object.entries(mmaResults()))
+    calibrationResults[id] = {
+      result: r.outcome === "draw" ? "tie" : r.outcome === "a" ? "home" : "away",
+      startISO: r.startISO ?? "",
+    };
   const calibrationReport = computeConfidenceCalibration(
     calibrationPicks,
     calibrationResults,

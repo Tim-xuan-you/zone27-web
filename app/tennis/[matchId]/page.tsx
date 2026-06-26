@@ -13,10 +13,13 @@ import {
   getTennisMatch,
   drawLine,
   bettable,
+  tennisResults,
   TENNIS_DRAW,
   type TennisDrawPlayer,
 } from "@/lib/tennis/matches";
 import { initials } from "@/lib/tennis/players";
+import MatchSegment from "@/components/MatchSegment";
+import { getMatchSegment } from "@/lib/match-segment";
 
 // ── ZONE 27 · /tennis/[matchId] · 單場完整分析(運彩場次)─────────────────────────
 // 一場的完整引擎拆解:兩位球員 + 排名換算實力分 + 勝率怎麼來的 + 賽前鎖定押注。 純展示 +
@@ -88,6 +91,12 @@ export default async function TennisMatchPage({
   const bet = bettable(m);
   const ra = rating(m.a);
   const rb = rating(m.b);
+
+  // 誰賽前鎖了這場(per-match segment · 同棒球 / 足球)· 賽果有(tennisResults)→ 賽後逐人對帳誰押對 ·
+  // 無 → 賽前鎖定名單(沒人鎖 → MatchSegment 自動隱藏)。 A=home / B=away(同 /u tennisHA + 天梯)。
+  const segment = await getMatchSegment(m.id);
+  const tRes = tennisResults()[m.id];
+  const segWinner = tRes ? (tRes.outcome === "a" ? "home" : "away") : null;
 
   const SURFACE_LABEL: Record<string, string> = { grass: "草地", clay: "紅土", hard: "硬地" };
 
@@ -206,6 +215,9 @@ export default async function TennisMatchPage({
           </Link>
         </div>
       </main>
+
+      {/* 誰賽前鎖了這場(per-match segment · A=home/B=away)· 沒人鎖 → 自動隱藏 · 每格連 /u 公開校準檔。 */}
+      <MatchSegment lockers={segment} homeName={m.a.zh} awayName={m.b.zh} winner={segWinner} />
 
       <Footer />
     </div>

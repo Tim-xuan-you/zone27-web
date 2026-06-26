@@ -233,6 +233,19 @@ export default async function MemberPage() {
   for (const r of soccerResults) {
     calibrationResults[r.matchId] = { result: r.outcome, startISO: r.kickoffISO };
   }
+  // 網球 / 羽球 / UFC 的賽果也餵進校準曲線(同天梯 buildSyncResults 的 a/b→home/away 規則 ·
+  // A=home/B=away)—— 否則設了把握的這三種運動押注會永遠卡「未結算」幽靈(get_my_calibration_picks
+  // 跨運動全收,但賽果原本只組了棒球+足球)· 跟 /u 同步收進來(見 app/u/[code]/page.tsx)。
+  // 🔴 MMA 和局(draw)→ "tie" = push(同棒球平手 · 不計分母,非幽靈 pending)。
+  for (const [id, r] of Object.entries(tennisResults()))
+    calibrationResults[id] = { result: r.outcome === "a" ? "home" : "away", startISO: r.startISO ?? "" };
+  for (const [id, r] of Object.entries(badmintonResults()))
+    calibrationResults[id] = { result: r.outcome === "a" ? "home" : "away", startISO: r.startISO ?? "" };
+  for (const [id, r] of Object.entries(mmaResults()))
+    calibrationResults[id] = {
+      result: r.outcome === "draw" ? "tie" : r.outcome === "a" ? "home" : "away",
+      startISO: r.startISO ?? "",
+    };
 
   // 你的足跡(soul · Tim 2026-06-05 dogfood:回過的留言找不回去)· server-side 撈本人留言 ·
   // 沒回過 → panel 自動隱藏(同其他 graceful 元件)。
