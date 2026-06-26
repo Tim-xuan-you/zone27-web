@@ -58,30 +58,28 @@ export default function LadderBoard({ board }: { board: LadderBoardData }) {
           const apex = e.tier === 5;
           const eng = e.isEngine === true;
           const rowClass = `flex items-center gap-3 p-3 sm:p-3.5 border transition-colors ${
-            eng
-              ? "border-dashed border-gold/45 bg-navy/40"
-              : apex
-                ? "border-gold/70 bg-gold/[0.07] glow-soft hover:border-gold"
-                : "border-line/60 bg-slate/30 hover:border-gold/40 hover:bg-slate/40"
+            apex
+              ? "border-gold/70 bg-gold/[0.07] glow-soft hover:border-gold"
+              : "border-line/60 bg-slate/30 hover:border-gold/40 hover:bg-slate/40"
           }`;
           const inner = (
             <>
               {/* 名次 */}
               <span
                 className={`font-mono tabular text-lg font-light w-7 shrink-0 text-center ${
-                  apex ? "text-gold" : eng ? "text-gold/70" : "text-mute/60"
+                  apex ? "text-gold" : "text-mute/60"
                 }`}
               >
                 {e.rank}
               </span>
 
-              {/* 頭像 · 引擎用方塊「尺」標記(非人臉)· 用戶用幾何頭像(付費亮金環) */}
+              {/* 頭像 · 引擎用方塊「引」標記(一眼認出是機器)· 用戶用幾何頭像(付費亮金環) */}
               {eng ? (
                 <span
                   aria-hidden="true"
-                  className="shrink-0 grid place-items-center w-[30px] h-[30px] border border-gold/40 font-mono text-gold/80 text-[10px]"
+                  className="shrink-0 grid place-items-center w-[30px] h-[30px] border border-gold/40 bg-navy/40 font-mono text-gold/80 text-[10px]"
                 >
-                  尺
+                  引
                 </span>
               ) : (
                 <Avatar
@@ -98,64 +96,43 @@ export default function LadderBoard({ board }: { board: LadderBoardData }) {
                 <span className="flex items-baseline gap-2 flex-wrap">
                   <span
                     className={`text-sm sm:text-base font-light tracking-tight truncate max-w-[10rem] ${
-                      apex || eng ? "text-gold" : "text-bone"
+                      apex ? "text-gold" : "text-bone"
                     }`}
                   >
                     {e.handle}
                   </span>
-                  {eng ? (
-                    <span className="font-mono text-gold/80 text-[9px] tracking-[0.2em] px-1.5 py-0.5 border border-gold/45">
-                      尺 · 爬過它
-                    </span>
-                  ) : (
-                    <span
-                      className={`font-mono text-[9px] tracking-[0.2em] px-1.5 py-0.5 border ${
-                        apex ? "border-gold/60 text-gold" : "border-line/70 text-mute/70"
-                      }`}
-                    >
-                      {TIER_ZH[e.tier] ?? "新秀"}
+                  <span
+                    className={`font-mono text-[9px] tracking-[0.2em] px-1.5 py-0.5 border ${
+                      apex ? "border-gold/60 text-gold" : "border-line/70 text-mute/70"
+                    }`}
+                  >
+                    {TIER_ZH[e.tier] ?? "新秀"}
+                  </span>
+                  {eng && (
+                    <span className="font-mono text-mute/55 text-[8px] tracking-[0.2em] px-1.5 py-0.5 border border-line/60">
+                      引擎
                     </span>
                   )}
                   {!eng && <MoveMark move={e.move} />}
-                  {!eng && e.monthBeatEngine && (
-                    <span className="font-mono text-gold/70 text-[8px] tracking-[0.18em]">
-                      本月仍贏引擎
-                    </span>
-                  )}
                 </span>
                 <span className="block font-mono text-mute/55 text-[9px] tracking-[0.15em] tabular mt-0.5">
-                  命中 {e.accuracyPct}% · {e.decided} 場已對帳
+                  {e.decided} 場已對帳 · 含輸
                 </span>
               </span>
 
-              {/* 領頭數字 = 贏過引擎幾分(alpha)· 引擎本人是「0 線」基準 */}
+              {/* 領頭數字 = 命中率(= 升降門檻 60% 那個數)· 60%+ 上金 */}
               <span className="shrink-0 text-right">
-                {eng ? (
-                  <span className="block font-mono text-gold/70 text-[10px] tracking-[0.15em] leading-none">
-                    基準線
-                  </span>
-                ) : (
-                  <>
-                    <span
-                      className={`block font-mono tabular text-base sm:text-lg font-light leading-none ${
-                        e.edgeVsEnginePts === null
-                          ? "text-mute/50"
-                          : e.edgeVsEnginePts > 0
-                            ? "text-gold"
-                            : e.edgeVsEnginePts < 0
-                              ? "text-loss/80"
-                              : "text-mute"
-                      }`}
-                    >
-                      {e.edgeVsEnginePts === null
-                        ? "—"
-                        : `${e.edgeVsEnginePts > 0 ? "+" : ""}${e.edgeVsEnginePts}`}
-                    </span>
-                    <span className="block font-mono text-mute/45 text-[8px] tracking-[0.2em] mt-0.5">
-                      vs 引擎
-                    </span>
-                  </>
-                )}
+                <span
+                  className={`block font-mono tabular text-base sm:text-lg font-light leading-none ${
+                    e.accuracyPct >= 60 ? "text-gold" : "text-bone/80"
+                  }`}
+                >
+                  {e.accuracyPct}
+                  <span className="text-[10px] opacity-60">%</span>
+                </span>
+                <span className="block font-mono text-mute/45 text-[8px] tracking-[0.2em] mt-0.5">
+                  命中率
+                </span>
               </span>
             </>
           );
@@ -174,10 +151,10 @@ export default function LadderBoard({ board }: { board: LadderBoardData }) {
       </ul>
 
       <p className="font-mono text-mute/50 text-[9px] tracking-[0.15em] leading-relaxed mt-3">
-        ▸ 兩台「ZONE 27 引擎」(棒球 / 足球)就在榜上當<span className="text-gold/70">尺</span> ·
-        名次隨大家表現上下移動 —— 你的工作是爬到它上面。 神準手 / 神諭 = ≥30 場裡守住{" "}
-        <span className="text-gold/70">60%</span>(連我們自己的棒球引擎現在都才 53%、還沒站上)。
-        排名按「贏過引擎幾分」+ 樣本厚度,不是裸勝率;含輸照算、平手不計、開賽後才下的不算。 王座只留給人。
+        ▸ 兩台引擎(<span className="text-gold/70">蒙地卡羅</span> / <span className="text-gold/70">Dixon-Coles</span>)
+        就在榜上、跟你一起排、一起升降 —— 你的工作是爬到它上面。 所有運動的押注<span className="text-bone/70">算一起</span> ·
+        按<span className="text-gold/70">命中率</span>排、守住 <span className="text-gold/70">60%</span> 升、跌破就降(月結)。
+        ≥10 場才上榜、神準手要 ≥30 場(一晚手氣不算);含輸照算、平手不計、開賽後才下的不算。 王座(神諭)只留給人。
       </p>
     </section>
   );

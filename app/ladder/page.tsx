@@ -162,7 +162,8 @@ export default async function LadderPage() {
             (棒球引擎才 53%)。 十場、一晚的手氣不算;<span className="text-gold">每月結算</span>,守不住、階級就掉。
           </p>
           <p className="mt-2 font-mono text-mute/60 text-[11px] leading-relaxed">
-            ▸ 兩台免費引擎(棒球 / 足球)現在就在榜上當「尺」· 名次隨大家上下移動。 你的工作:爬到它上面。
+            ▸ 兩台免費引擎(蒙地卡羅 / Dixon-Coles)現在就跟你一起在榜上排、一起升降 ·
+            所有運動的預測算一起。 你的工作:爬到它上面。
           </p>
         </div>
 
