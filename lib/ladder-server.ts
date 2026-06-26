@@ -310,13 +310,16 @@ export async function getLadderBoard(): Promise<LadderBoard> {
       rank === 1 && !isEngine && e.accuracyPct >= 60 && e.decided >= LADDER_SHARP_MIN
         ? 5
         : e.tier;
+    // 神諭(5)是「本月 rank 1 + ≥60%」的當下加冕,但 lastTier 走 tierOf 最高只到 4(上月底沒有排名脈絡)
+    //  → 直接比會讓「連任的衛冕神諭」每次 render 都誤標「▲ 本月升」。 比較時把當下的 5 夾回 4(對齊 tierOf 尺度)。
+    const moveTier = tier === 5 ? 4 : tier;
     const move: LadderEntry["move"] = isEngine
       ? "same"
       : e.lastTier === null
         ? "new"
-        : tier > e.lastTier
+        : moveTier > e.lastTier
           ? "up"
-          : tier < e.lastTier
+          : moveTier < e.lastTier
             ? "down"
             : "same";
     return {
