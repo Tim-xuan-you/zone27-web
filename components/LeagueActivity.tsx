@@ -75,8 +75,8 @@ export default function LeagueActivity({
                 </p>
                 <p className="mt-0.5 font-mono text-mute/55 text-[10px] tracking-[0.12em]">
                   {/* 棒球 → /matches/<id>· 足球 → /receipts/<id>· 群眾盤 mkt-* → /markets#m-<id>·
-                      網球 tn-* → /tennis/<id>(沒有 /matches/mkt- 或 /matches/tn- 單場頁,直連會 404)·
-                      同 /pulse 路由。 */}
+                      網球 tn-* → /tennis/<id>· 羽球 bd-* → /badminton/<id>· UFC mma-* → /mma#m-<id>
+                      (沒有 /matches/mkt-、/matches/tn- 等單場頁,直連會 404)· 同 /pulse 路由。 */}
                   <Link
                     href={
                       e.matchId.startsWith("fd-")
@@ -87,7 +87,9 @@ export default function LeagueActivity({
                             ? `/tennis/${e.matchId}`
                             : e.matchId.startsWith("bd-")
                               ? `/badminton/${e.matchId}`
-                              : `/matches/${e.matchId}`
+                              : e.matchId.startsWith("mma-")
+                                ? `/mma#m-${e.matchId}`
+                                : `/matches/${e.matchId}`
                     }
                     className="hover:text-gold transition-colors"
                   >

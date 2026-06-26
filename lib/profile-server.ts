@@ -6,6 +6,7 @@ import type { MemberTier } from "@/lib/tier";
 import type { CalibrationPick } from "@/lib/calibration-master";
 import type { TennisPick } from "@/lib/tennis/matches";
 import type { BadmintonPick } from "@/lib/badminton/matches";
+import type { MmaPick } from "@/lib/mma/matches";
 
 // ── ZONE 27 · 公開 Profile 讀取(server · 無 cookie · 用永久碼)──────────
 // soul-roadmap P0:/u/[code] 公開含輸戰績頁的資料源。 用 stateless anon client 打
@@ -93,6 +94,9 @@ export type CodeTennisPick = { matchId: string; pick: TennisPick; ts: string };
 /** 一筆羽球押注(兩向 a/b · 公開檔讀那個碼的人)· 給 gradeBadmintonPicks / 戰功卡。 */
 export type CodeBadmintonPick = { matchId: string; pick: BadmintonPick; ts: string };
 
+/** 一筆 MMA 押注(兩向 a/b · 公開檔讀那個碼的人)· 給 gradeMmaPicks / 戰功卡。 R278 */
+export type CodeMmaPick = { matchId: string; pick: MmaPick; ts: string };
+
 export type CodePredictions = {
   /** 棒球(cpbl-* / mlb-*)· 只 home/away · 給 aggregateIdentity / aggregateStreak */
   baseball: UserPredictionsMap;
@@ -102,6 +106,8 @@ export type CodePredictions = {
   tennis: CodeTennisPick[];
   /** 羽球(bd-*)· 兩向 a/b · 跟其他運動分開算(gradeBadmintonPicks)· 存表是 home/away → 轉回 a/b */
   badminton: CodeBadmintonPick[];
+  /** MMA(mma-*)· 兩向 a/b · 跟其他運動分開算(gradeMmaPicks)· 存表是 home/away → 轉回 a/b · R278 */
+  mma: CodeMmaPick[];
   /** 足球玩法(fd-*~ou25 大小分 / fd-*~ah05 讓分)· 只 home/away · 併入「你的足球戰績」同一本帳
    *  (配 soccerPropResults 虛擬賽果 + getSoccerEnginePicksAll)· 跟「誰贏」分開讀避免污染校準曲線。 */
   soccerProps: SoccerPickRow[];
@@ -125,6 +131,7 @@ export async function getPredictionsByCode(
     soccer: [],
     tennis: [],
     badminton: [],
+    mma: [],
     soccerProps: [],
     calibrationPicks: [],
   };
@@ -141,6 +148,8 @@ export async function getPredictionsByCode(
     const seenTennis = new Set<string>(); // 網球同場只取最近一筆(已 desc → first-seen 最新)
     const badminton: CodeBadmintonPick[] = [];
     const seenBadminton = new Set<string>(); // 羽球同場只取最近一筆(已 desc → first-seen 最新)
+    const mma: CodeMmaPick[] = [];
+    const seenMma = new Set<string>(); // MMA 同場只取最近一筆(已 desc → first-seen 最新)
     const soccerProps: SoccerPickRow[] = [];
     const calibrationPicks: CalibrationPick[] = [];
     const seenConf = new Set<string>(); // 校準同場只取最近一筆(已 desc → first-seen 最新)
@@ -214,9 +223,18 @@ export async function getPredictionsByCode(
           seenBadminton.add(matchId);
           badminton.push({ matchId, pick: p, ts });
         }
+      } else if (matchId.startsWith("mma-") && !isProp) {
+        // MMA 兩向(mma-*)· 跟其他運動分開算(gradeMmaPicks)· 存表 home/away → 轉回 a/b
+        // (A=home、B=away · 同 client fromStored)· 同場只取最近一筆(已 desc → first-seen 最新)。 R278
+        const p: MmaPick | null =
+          row.pick === "home" ? "a" : row.pick === "away" ? "b" : null;
+        if (p && !seenMma.has(matchId)) {
+          seenMma.add(matchId);
+          mma.push({ matchId, pick: p, ts });
+        }
       }
     }
-    return { baseball, soccer, tennis, badminton, soccerProps, calibrationPicks };
+    return { baseball, soccer, tennis, badminton, mma, soccerProps, calibrationPicks };
   } catch {
     return empty;
   }

@@ -29,11 +29,17 @@ import {
   drawLine as bdDrawLine,
   matchStartISO as bdMatchStartISO,
 } from "@/lib/badminton/matches";
+import {
+  MMA_CARD,
+  drawLine as mmaDrawLine,
+  matchStartISO as mmaMatchStartISO,
+} from "@/lib/mma/matches";
 
 export type SettledCard = {
-  /** matchId(cpbl-* / mlb-* / fd-* / tn-* / bd-*)· 棒球/足球連 /receipts;網球連 /tennis/[id]、羽球連 /badminton/[id] */
+  /** matchId(cpbl-* / mlb-* / fd-* / tn-* / bd-* / mma-*)· 棒球/足球連 /receipts;
+   *  網球連 /tennis/[id]、羽球連 /badminton/[id]、MMA 連 /mma#m-[id](無單場詳情頁) */
   id: string;
-  sport: "baseball" | "soccer" | "tennis" | "badminton";
+  sport: "baseball" | "soccer" | "tennis" | "badminton" | "mma";
   /** 聯賽 / 賽事顯示標(CPBL / MLB / 世界盃 / 溫布頓) */
   tag: string;
   home: string;
@@ -203,6 +209,33 @@ export function buildSettledCards(): SettledCard[] {
     });
   }
 
+  // UFC / MMA(R278 · 同網球/羽球:Tim 賽後手 curate finalResult · 0 API · 兩向 a/b → home/away ·
+  // 選手無隊徽 → 不給 glyph/color · 無玩法 → 無比分)。
+  // 🔴 和局(finalResult.draw)= 無贏家 → 不生戰功卡(押注是 push · 不算命中也不算落空 · 不硬判)·
+  //   computeTrophies 配不到這場卡 → 那手自然不成卡(同網球永遠分勝負,MMA 才有此例外)。
+  for (const m of MMA_CARD) {
+    if (!m.finalResult || m.finalResult.draw) continue;
+    const result: "home" | "away" = m.finalResult.winner === "a" ? "home" : "away";
+    const startISO = mmaMatchStartISO(m) ?? m.finalResult.settledAt ?? "";
+    const line = mmaDrawLine(m);
+    const engineFav: "home" | "away" | null = line && line.pick
+      ? line.pick === "a"
+        ? "home"
+        : "away"
+      : null;
+    out.push({
+      id: m.id,
+      sport: "mma",
+      tag: m.event,
+      home: m.a.zh,
+      away: m.b.zh,
+      result,
+      startISO,
+      dateLabel: taipeiMMDD(startISO),
+      engineFav,
+    });
+  }
+
   return out;
 }
 
@@ -219,6 +252,8 @@ export function computeTrophies(
   tennis: { matchId: string; pick: "home" | "away"; ts: string }[] = [],
   /** 羽球兩向 picks(已轉 home/away · A=home/B=away)· 同網球 h2h 配對。 R264 */
   badminton: { matchId: string; pick: "home" | "away"; ts: string }[] = [],
+  /** MMA 兩向 picks(已轉 home/away · A=home/B=away)· 同網球 h2h 配對 · 和局場無卡 → 自然略過。 R278 */
+  mma: { matchId: string; pick: "home" | "away"; ts: string }[] = [],
 ): Trophy[] {
   const byId = new Map(settled.map((c) => [c.id, c]));
   const out: Trophy[] = [];
@@ -368,6 +403,27 @@ export function computeTrophies(
   for (const row of badminton) {
     if (seenBadminton.has(row.matchId)) continue;
     seenBadminton.add(row.matchId);
+    const card = byId.get(row.matchId);
+    if (!card) continue;
+    const t = Date.parse(row.ts);
+    const k = Date.parse(card.startISO);
+    if (!Number.isNaN(t) && !Number.isNaN(k) && t >= k) continue; // 先鎖後結 late 剔除
+    const hit = row.pick === card.result;
+    out.push({
+      card,
+      pick: row.pick,
+      ts: row.ts,
+      hit,
+      upset: hit && card.engineFav !== null && row.pick !== card.engineFav,
+    });
+  }
+
+  // ── MMA(兩向 a/b → 已轉 home/away)· 同網球誰贏 h2h 配對 · 含輸照收、先鎖後結、逆風。 R278 ──
+  //   🔴 和局場 buildSettledCards 不生卡 → byId 配不到 → 押那場的人自然不成卡(push 不算命中/落空)。
+  const seenMma = new Set<string>();
+  for (const row of mma) {
+    if (seenMma.has(row.matchId)) continue;
+    seenMma.add(row.matchId);
     const card = byId.get(row.matchId);
     if (!card) continue;
     const t = Date.parse(row.ts);

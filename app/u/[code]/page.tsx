@@ -36,6 +36,11 @@ import {
   badmintonResults,
   badmintonEnginePicks,
 } from "@/lib/badminton/matches";
+import {
+  gradeMmaPicks,
+  mmaResults,
+  mmaEnginePicks,
+} from "@/lib/mma/matches";
 import { createPageMetadata } from "@/lib/page-og";
 import { normalizeProfileCode } from "@/lib/profile-code";
 import { buildSettledCards, computeTrophies } from "@/lib/trophies";
@@ -84,7 +89,7 @@ export default async function PublicProfilePage({
   const profile = await getProfileByCode(code);
   if (!profile) notFound();
 
-  const { baseball, soccer, tennis, badminton, soccerProps, calibrationPicks } =
+  const { baseball, soccer, tennis, badminton, mma, soccerProps, calibrationPicks } =
     await getPredictionsByCode(code);
 
   // 棒球校準身分(CPBL + MLB · fd-* 已在 server 分流排除)。
@@ -125,10 +130,17 @@ export default async function PublicProfilePage({
     pick: (r.pick === "a" ? "home" : "away") as "home" | "away",
     ts: r.ts,
   }));
-  // 本月賽季回顧入口:有本月押注才連(避免連到空回顧)· R218 · 玩法 / 網球 / 羽球也算「有押」。
+  // MMA 戰績(兩向 · 含輸 · 跟其他運動分開算)· R278。
+  const mmaRecord = gradeMmaPicks(mma, mmaResults(), mmaEnginePicks());
+  const mmaHA = mma.map((r) => ({
+    matchId: r.matchId,
+    pick: (r.pick === "a" ? "home" : "away") as "home" | "away",
+    ts: r.ts,
+  }));
+  // 本月賽季回顧入口:有本月押注才連(避免連到空回顧)· R218 · 玩法 / 網球 / 羽球 / MMA 也算「有押」。
   const hasSeasonActivity = hasMonthActivity(
     baseball,
-    [...soccer, ...soccerProps, ...tennis, ...badminton],
+    [...soccer, ...soccerProps, ...tennis, ...badminton, ...mma],
     currentMonth,
   );
   const streak = aggregateStreak(baseball, getTodayTaipei());
@@ -176,6 +188,7 @@ export default async function PublicProfilePage({
     soccerProps,
     tennisHA,
     badmintonHA,
+    mmaHA,
   );
 
   return (
@@ -189,6 +202,7 @@ export default async function PublicProfilePage({
           soccer={soccerRecord}
           tennis={tennisRecord}
           badminton={badmintonRecord}
+          mma={mmaRecord}
           series={accuracySeries}
           trophies={trophies}
           calibration={calibrationReport}

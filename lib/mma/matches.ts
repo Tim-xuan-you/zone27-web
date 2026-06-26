@@ -170,14 +170,19 @@ export function mmaEnginePicks(): Record<string, MmaPick> {
   return out;
 }
 
-/** 已結算賽果(Tim curate 的 finalResult · 和局排除)· id → { outcome, startISO }· 給用戶押注對帳。 */
-export function mmaResults(): Record<string, { outcome: MmaPick; startISO: string }> {
-  const out: Record<string, { outcome: MmaPick; startISO: string }> = {};
+/** 一場已結算賽果 · outcome = a/b 贏家,或 "draw"(和局 / 無效比賽 = push · 不判勝負)。 */
+export type MmaResult = { outcome: MmaPick | "draw"; startISO: string };
+
+/** 已結算賽果(Tim curate 的 finalResult)· id → { outcome, startISO }· 給用戶押注對帳。
+ *  🔴 和局(fr.draw)也收進來、標 outcome="draw" → gradeMmaPicks 當 push(不計勝負),
+ *  而非排除掉(排除會讓押那場的人永遠卡「待結算」= 對已打完的場顯示謊 · 同棒球平手算 push)。 */
+export function mmaResults(): Record<string, MmaResult> {
+  const out: Record<string, MmaResult> = {};
   for (const m of MMA_CARD) {
     const fr = m.finalResult;
-    if (fr && !fr.draw) {
+    if (fr) {
       out[m.id] = {
-        outcome: fr.winner,
+        outcome: fr.draw ? "draw" : fr.winner,
         startISO: matchStartISO(m) ?? fr.settledAt ?? "",
       };
     }
@@ -227,6 +232,8 @@ export type MmaRecord = {
   misses: number;
   rate: number | null;
   pending: number;
+  /** 和局 / 無效比賽(push · 已結算但不計勝負)· 同棒球平手 = N 平 · 不進 n、不算命中也不算落空。 */
+  push: number;
   late: number;
   vsN: number;
   vsYouHits: number;
@@ -237,16 +244,19 @@ export type MmaRecord = {
 
 /**
  * 兩向對帳(A 勝 / B 勝)· **先鎖後結**:押注時間 ≥ 開賽 → 不計入(同棒球/足球/網球/羽球)。
- * 純函式 deterministic。 🔴 含輸:✕ 跟 ✓ 一樣進分母。 和局(results 不含)→ 該場自然落 pending。
+ * 純函式 deterministic。 🔴 含輸:✕ 跟 ✓ 一樣進分母。
+ * 🔴 和局(outcome="draw")= push:已結算但不判勝負 —— 不進 n、不算命中/落空、不進 你vs引擎,
+ *    但也不留在 pending(對已打完的場顯示「待結算」= 謊 · 同棒球平手算 = N 平 的誠實對帳)。
  */
 export function gradeMmaPicks(
   picks: MmaPickRow[],
-  results: Record<string, { outcome: MmaPick; startISO: string }>,
+  results: Record<string, MmaResult>,
   enginePicks: Record<string, MmaPick> = {},
 ): MmaRecord {
   let n = 0;
   let hits = 0;
   let pending = 0;
+  let push = 0;
   let late = 0;
   let vsN = 0;
   let vsYouHits = 0;
@@ -261,6 +271,11 @@ export function gradeMmaPicks(
     const k = Date.parse(r.startISO);
     if (!Number.isNaN(t) && !Number.isNaN(k) && t >= k) {
       late += 1;
+      continue;
+    }
+    // 和局 / 無效比賽 → push(已結算但不判勝負 · 不污染準度、也不假裝還沒結算)。
+    if (r.outcome === "draw") {
+      push += 1;
       continue;
     }
     n += 1;
@@ -279,6 +294,7 @@ export function gradeMmaPicks(
     misses: n - hits,
     rate: n > 0 ? Math.round((hits / n) * 100) : null,
     pending,
+    push,
     late,
     vsN,
     vsYouHits,

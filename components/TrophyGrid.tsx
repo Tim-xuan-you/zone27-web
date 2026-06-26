@@ -63,7 +63,8 @@ function TrophyCard({ t }: { t: Trophy }) {
       : t.pick === "away"
         ? card.away
         : "和局";
-  // 網球沒有單場收據頁(/receipts/tn- 會 404)→ 連到既有的 /tennis/[id] 詳情頁(真目的地)。
+  // 網球 / 羽球沒有單場收據頁(/receipts/tn-、/receipts/bd- 會 404)→ 連既有 /[sport]/[id] 詳情頁。
+  // MMA 沒有單場詳情頁 → 連回 /mma 看板那張卡(錨點 m-<id> · 同收件匣 / 脈動)。
   const href = market
     ? parentId.startsWith("mlb-")
       ? `/matches/${parentId}`
@@ -72,7 +73,9 @@ function TrophyCard({ t }: { t: Trophy }) {
       ? `/tennis/${card.id}`
       : card.sport === "badminton"
         ? `/badminton/${card.id}`
-        : `/receipts/${card.id}`;
+        : card.sport === "mma"
+          ? `/mma#m-${card.id}`
+          : `/receipts/${card.id}`;
   const verdictColor = t.hit ? "text-gold" : "text-loss/85";
   const verdictBorder = t.hit ? "border-gold/40" : "border-loss/40";
   const lock = fmtLockTaipei(t.ts);
@@ -131,7 +134,10 @@ function TrophyCard({ t }: { t: Trophy }) {
       {lock && (
         <p className="mt-2 font-mono text-mute/45 text-[8px] tracking-[0.12em] tabular group-hover:text-gold/70 transition-colors">
           鎖定於 {lock} ·{" "}
-          {market || card.sport === "tennis" || card.sport === "badminton"
+          {market ||
+          card.sport === "tennis" ||
+          card.sport === "badminton" ||
+          card.sport === "mma"
             ? "看這場 →"
             : "收據 →"}
         </p>

@@ -145,8 +145,11 @@ function buildSyncResults(): Map<string, NormResult> {
     m.set(id, { winner: twoWay(r.outcome), day: taipeiDayOf(r.startISO), startISO: r.startISO || null });
   for (const [id, r] of Object.entries(badmintonResults()))
     m.set(id, { winner: twoWay(r.outcome), day: taipeiDayOf(r.startISO), startISO: r.startISO || null });
+  // 🔴 MMA 和局(outcome="draw")= push:同棒球平手,不計任何一方 → 不進合併天梯結果
+  //   (不算命中也不算落空 · 不影響升降 · 個人戰績卡才顯示「= N 平」)。
   for (const [id, r] of Object.entries(mmaResults()))
-    m.set(id, { winner: twoWay(r.outcome), day: taipeiDayOf(r.startISO), startISO: r.startISO || null });
+    if (r.outcome !== "draw")
+      m.set(id, { winner: twoWay(r.outcome), day: taipeiDayOf(r.startISO), startISO: r.startISO || null });
   return m;
 }
 

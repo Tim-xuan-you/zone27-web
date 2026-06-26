@@ -42,6 +42,11 @@ import {
   badmintonEnginePicks,
   matchStartISO as badmintonMatchStartISO,
 } from "@/lib/badminton/matches";
+import {
+  getMmaFight,
+  mmaEnginePicks,
+  matchStartISO as mmaMatchStartISO,
+} from "@/lib/mma/matches";
 import { createSupabaseServerClient, getUser } from "@/lib/supabase/server";
 import { readLastSeenFromMeta } from "@/lib/predictions";
 import {
@@ -52,21 +57,23 @@ import {
 
 type ServerPick = { pick: "home" | "away" | "draw"; ts: string };
 
-/** 一趟 RPC → 拆成棒球(home/away)+ 足球(home/draw/away)+ 網球(home/away)三本。 anon / 錯 → 皆空。 */
+/** 一趟 RPC → 拆成棒球(home/away)+ 足球(home/draw/away)+ 網球 + 羽球 + MMA(home/away)各本。 anon / 錯 → 皆空。 */
 async function getMyPicksSplit(): Promise<{
   baseball: Map<string, ServerPick>;
   soccer: Map<string, ServerPick>;
   tennis: Map<string, ServerPick>;
   badminton: Map<string, ServerPick>;
+  mma: Map<string, ServerPick>;
 }> {
   const baseball = new Map<string, ServerPick>();
   const soccer = new Map<string, ServerPick>();
   const tennis = new Map<string, ServerPick>();
   const badminton = new Map<string, ServerPick>();
+  const mma = new Map<string, ServerPick>();
   try {
     const supabase = await createSupabaseServerClient();
     const { data, error } = await supabase.rpc("get_my_predictions");
-    if (error || !Array.isArray(data)) return { baseball, soccer, tennis, badminton };
+    if (error || !Array.isArray(data)) return { baseball, soccer, tennis, badminton, mma };
     for (const row of data as {
       match_id?: unknown;
       pick?: unknown;
@@ -100,12 +107,19 @@ async function getMyPicksSplit(): Promise<{
         if (row.pick === "home" || row.pick === "away") {
           badminton.set(id, { pick: row.pick, ts });
         }
+      } else if (id.startsWith("mma-") && !id.includes("~")) {
+        // UFC / MMA(mma-*)· 兩向 home/away · 賽果走自己的桶(getMmaFight)· 跟棒球分桶。 R278
+        // 🔴 和局:押注只能 home/away;真出和局 → 下方 gatherRaws finalWinner=null + settledRaw 有值
+        //   → buildInbox 當「已結算無贏家」吞掉(不誤判一邊贏 · 同棒球/足球平手)。
+        if (row.pick === "home" || row.pick === "away") {
+          mma.set(id, { pick: row.pick, ts });
+        }
       }
     }
   } catch {
     /* graceful · 收件匣是 nice-to-have · 讀失敗退空 */
   }
-  return { baseball, soccer, tennis, badminton };
+  return { baseball, soccer, tennis, badminton, mma };
 }
 
 /** 收齊跨運動原始輸入(賽果 on-read)。 picks 三本都空 → 不打賽果 API,直接回空。 */
@@ -114,6 +128,7 @@ async function gatherRaws(
   soccer: Map<string, ServerPick>,
   tennis: Map<string, ServerPick>,
   badminton: Map<string, ServerPick>,
+  mma: Map<string, ServerPick>,
 ): Promise<RawSettlement[]> {
   const raws: RawSettlement[] = [];
 
@@ -349,6 +364,38 @@ async function gatherRaws(
     }
   }
 
+  // ── UFC / MMA(mma-*)· 兩向 · 賽果 = Tim 賽後手 curate 的 finalResult(0 API · 同網球/羽球)。 R278
+  //   A=home/B=away · 🔴 和局(fr.draw)= 已結算但無贏家 → finalWinner=null + settledRaw 有值 →
+  //   buildInbox 當平手吞掉(不誤判 · 同棒球/足球 tie)· 不像網球/羽球永遠分勝負。 ──
+  if (mma.size > 0) {
+    const mmaEng = mmaEnginePicks(); // id → 引擎當初看好邊(a/b · 給「你 vs 引擎」· 同等級銅板場不列)
+    for (const [id, p] of mma) {
+      const m = getMmaFight(id);
+      if (!m) continue; // 認不到這場(賽程已換 / 壞 id)→ graceful 略過
+      const fr = m.finalResult;
+      // 🔴 和局:fr.draw=true → finalWinner=null(不硬判一邊贏 · 結算層吞)· 未結算 → 同樣 null。
+      const finalWinner: "home" | "away" | null =
+        fr && !fr.draw ? (fr.winner === "a" ? "home" : "away") : null;
+      const eng = mmaEng[id];
+      const engineFav: "home" | "away" | null =
+        eng === "a" ? "home" : eng === "b" ? "away" : null;
+      const startISO = mmaMatchStartISO(m) ?? "";
+      raws.push({
+        matchId: id,
+        sport: "mma",
+        home: m.a.zh,
+        away: m.b.zh,
+        myPick: p.pick,
+        pickTs: p.ts,
+        startISO,
+        finalWinner,
+        // 已結算(含和局)→ settledRaw 有值(和局走這條 → buildInbox 吞;未結算 → null → 在飛的)。
+        settledRaw: fr ? fr.settledAt ?? (startISO || null) : null,
+        engineFav,
+      });
+    }
+  }
+
   return raws;
 }
 
@@ -363,17 +410,18 @@ export async function getMySettlementInbox(): Promise<SettlementInbox | null> {
   const meta = (user.user_metadata ?? null) as Record<string, unknown> | null;
   const lastSeen = readLastSeenFromMeta(meta);
 
-  const { baseball, soccer, tennis, badminton } = await getMyPicksSplit();
+  const { baseball, soccer, tennis, badminton, mma } = await getMyPicksSplit();
   if (
     baseball.size === 0 &&
     soccer.size === 0 &&
     tennis.size === 0 &&
-    badminton.size === 0
+    badminton.size === 0 &&
+    mma.size === 0
   ) {
     return { items: [], newCount: 0, total: 0, pending: [] };
   }
   try {
-    const raws = await gatherRaws(baseball, soccer, tennis, badminton);
+    const raws = await gatherRaws(baseball, soccer, tennis, badminton, mma);
     return buildInbox(raws, lastSeen);
   } catch {
     // 防護網:inbox 頁直接 await 這支、沒有上層 catch · 任何賽果來源意外丟錯都退空狀態,不 500。

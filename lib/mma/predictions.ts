@@ -12,9 +12,9 @@ import { createSupabaseBrowserClient } from "@/lib/supabase/browser";
 export type MmaPick = "a" | "b";
 
 import { gradeMmaPicks } from "@/lib/mma/matches";
-import type { MmaPickRow, MmaRecord } from "@/lib/mma/matches";
+import type { MmaPickRow, MmaRecord, MmaResult } from "@/lib/mma/matches";
 export { gradeMmaPicks };
-export type { MmaPickRow, MmaRecord };
+export type { MmaPickRow, MmaRecord, MmaResult };
 
 function toStored(p: MmaPick): "home" | "away" {
   return p === "a" ? "home" : "away";

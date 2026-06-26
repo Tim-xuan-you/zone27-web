@@ -9,6 +9,7 @@ import type { CalibrationIdentity } from "@/lib/predictions";
 import type { SoccerRecord } from "@/lib/soccer/predictions";
 import type { TennisRecord } from "@/lib/tennis/matches";
 import type { BadmintonRecord } from "@/lib/badminton/matches";
+import type { MmaRecord } from "@/lib/mma/matches";
 import type { PublicProfile } from "@/lib/profile-server";
 import type { Trophy } from "@/lib/trophies";
 
@@ -32,6 +33,8 @@ type Props = {
   tennis?: TennisRecord;
   /** 本月羽球戰績(同網球 · 按月切片餵 gradeBadmintonPicks)· 沒押羽球 → 不顯示 · R264 */
   badminton?: BadmintonRecord;
+  /** 本月 UFC / MMA 戰績(同網球 · 按月切片餵 gradeMmaPicks)· 沒押 → 不顯示 · R278 */
+  mma?: MmaRecord;
   highlights: SeasonHighlights;
   /** 本月回來對帳的不同台北日數 */
   activeDays: number;
@@ -46,6 +49,7 @@ export default function SeasonRecapView({
   soccer,
   tennis,
   badminton,
+  mma,
   highlights,
   activeDays,
   hasActivity,
@@ -62,6 +66,8 @@ export default function SeasonRecapView({
   const hasTennis = !!tennis && (tennis.n > 0 || tennis.pending > 0 || tennis.late > 0);
   const hasBadminton =
     !!badminton && (badminton.n > 0 || badminton.pending > 0 || badminton.late > 0);
+  const hasMma =
+    !!mma && (mma.n > 0 || mma.pending > 0 || mma.late > 0 || mma.push > 0);
   const hasDecided = id.accuracy !== null;
   const showEdge =
     id.edgeVsEnginePts !== null && id.engine.decided > 0 && id.decided > 0;
@@ -292,6 +298,50 @@ export default function SeasonRecapView({
             </section>
           )}
 
+          {/* ── 本月 UFC / MMA(兩向 · 含輸 · 跟棒球 / 足球 / 網球 / 羽球分開算)· R278 ─────────── */}
+          {hasMma && mma && (
+            <section className="mt-6 bg-slate/40 border border-gold/30 p-5 sm:p-6">
+              <p className="font-mono text-gold/80 text-[10px] tracking-[0.35em] mb-2">
+                本月 UFC · 含輸命中率
+              </p>
+              {mma.n > 0 ? (
+                <p className="text-bone text-lg sm:text-xl font-light tracking-tight">
+                  <span className="text-gold tabular">{mma.rate}%</span> 準 ·{" "}
+                  <span className="text-gold tabular">✓{mma.hits}</span>{" "}
+                  <span className="text-loss tabular">✕{mma.misses}</span>
+                  {mma.push > 0 && (
+                    <>
+                      {" "}· <span className="text-mute tabular">={mma.push}</span> 平
+                    </>
+                  )}
+                  <span className="text-mute/60 text-sm"> · {mma.n} 場已結算</span>
+                  {mma.pending > 0 && (
+                    <span className="text-mute/50 text-sm">
+                      {" "}· {mma.pending} 場待結算
+                    </span>
+                  )}
+                </p>
+              ) : mma.pending > 0 ? (
+                <p className="text-bone text-base font-light leading-snug">
+                  押了 <span className="text-gold tabular">{mma.pending}</span> 場 ·
+                  <span className="text-mute/70">
+                    {" "}都還沒結算 —— 賽後自動掛準 / 不準,連輸的也留著
+                  </span>
+                </p>
+              ) : mma.push > 0 ? (
+                <p className="text-bone text-base font-light leading-snug">
+                  押的 <span className="text-mute tabular">{mma.push}</span> 場都和局 ·
+                  <span className="text-mute/70"> 不計勝負(push · 和局退場,不算準也不算輸)</span>
+                </p>
+              ) : null}
+              {mma.late > 0 && (
+                <p className="mt-2 font-mono text-mute/55 text-[10px] tracking-[0.12em] leading-snug">
+                  {mma.late} 場開賽後才押 · 不計入戰績(先鎖後結 · 開賽前押的才算數)
+                </p>
+              )}
+            </section>
+          )}
+
           {/* ── 本月紀律(回來對帳幾天 · 非連勝)──────────────────── */}
           <section className="mt-6 border-l-2 border-gold/50 pl-4 py-1">
             <p className="text-mute/90 text-[13px] sm:text-sm leading-relaxed">
@@ -375,14 +425,19 @@ function HighlightRow({
       : t.pick === "away"
         ? c.away
         : "和局";
-  // 網球沒有單場收據頁(/receipts/tn- 會 404)→ 連到既有 /tennis/[id] 詳情頁(同 TrophyGrid)。
+  // 網球 / 羽球沒有單場收據頁(/receipts/tn-、/receipts/bd- 會 404)→ 連既有 /[sport]/[id] 詳情頁。
+  // MMA 沒有單場詳情頁 → 連回 /mma 看板那張卡(錨點 m-<id>)· 全部對齊 TrophyGrid 的路由(免 404)。
   const href = market
     ? parentId.startsWith("mlb-")
       ? `/matches/${parentId}`
       : `/receipts/${parentId}`
     : c.sport === "tennis"
       ? `/tennis/${c.id}`
-      : `/receipts/${c.id}`;
+      : c.sport === "badminton"
+        ? `/badminton/${c.id}`
+        : c.sport === "mma"
+          ? `/mma#m-${c.id}`
+          : `/receipts/${c.id}`;
   const tagLine =
     kind === "best"
       ? t.upset

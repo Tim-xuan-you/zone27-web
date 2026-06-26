@@ -141,7 +141,8 @@ function PulseList({ events }: { events: PulseEvent[] }) {
                     不是連到某個人的貼文(不造神 · 連 section 不連名)。
                     棒球 → /matches/<id>#say(永久單場頁 · CreatorAnalysis 在 id="say" · 各階段都在)·
                     足球 → /receipts/<id>(三階段都解析得到;⚠️ /soccer/<id> 對已踢完場會 404,故不深連討論)·
-                    群眾盤 mkt-* → /markets#m-<id> · 網球 tn-* → /tennis/<id>(無討論層)。 */}
+                    群眾盤 mkt-* → /markets#m-<id> · 網球 tn-* → /tennis/<id>(無討論層)·
+                    羽球 bd-* → /badminton/<id> · UFC mma-* → /mma#m-<id>(無單場詳情頁 · 連看板那張卡)。 */}
                 <Link
                   href={
                     e.matchId.startsWith("fd-")
@@ -152,7 +153,9 @@ function PulseList({ events }: { events: PulseEvent[] }) {
                           ? `/tennis/${e.matchId}`
                           : e.matchId.startsWith("bd-")
                             ? `/badminton/${e.matchId}`
-                            : `/matches/${e.matchId}#say`
+                            : e.matchId.startsWith("mma-")
+                              ? `/mma#m-${e.matchId}`
+                              : `/matches/${e.matchId}#say`
                   }
                   className="hover:text-gold transition-colors"
                 >

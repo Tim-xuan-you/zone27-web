@@ -6,6 +6,7 @@ import {
   gradeMmaPicks,
   type MmaPick,
   type MmaRecord,
+  type MmaResult,
 } from "@/lib/mma/predictions";
 
 // ── ZONE 27 · 你的 UFC 戰績(client · 含輸 · 跟其他運動分開算)──────────────────────────
@@ -18,7 +19,7 @@ export default function MmaRecordCard({
   enginePicks,
   wrapperClass = "",
 }: {
-  results: Record<string, { outcome: MmaPick; startISO: string }>;
+  results: Record<string, MmaResult>;
   enginePicks: Record<string, MmaPick>;
   wrapperClass?: string;
 }) {
@@ -38,7 +39,7 @@ export default function MmaRecordCard({
   }, [results, enginePicks]);
 
   if (!loaded || !rec) return null;
-  if (rec.n === 0 && rec.pending === 0 && rec.late === 0) return null;
+  if (rec.n === 0 && rec.pending === 0 && rec.late === 0 && rec.push === 0) return null;
 
   return (
     <section className={wrapperClass}>
@@ -51,15 +52,26 @@ export default function MmaRecordCard({
             <span className="text-gold tabular">{rec.rate}%</span> 準 ·{" "}
             <span className="text-gold tabular">✓{rec.hits}</span>{" "}
             <span className="text-loss tabular">✕{rec.misses}</span>
+            {rec.push > 0 && (
+              <>
+                {" "}· <span className="text-mute tabular">={rec.push}</span> 平
+              </>
+            )}
             <span className="text-mute/60 text-sm"> · {rec.n} 場已結算</span>
             {rec.pending > 0 && (
               <span className="text-mute/50 text-sm"> · {rec.pending} 場待結算</span>
             )}
           </p>
-        ) : (
+        ) : rec.pending > 0 ? (
           <p className="text-bone text-base font-light leading-snug">
             押了 <span className="text-gold tabular">{rec.pending}</span> 場 ·
             <span className="text-mute/70"> 都還沒結算 —— 賽後自動掛準 / 不準,連輸的也留著</span>
+          </p>
+        ) : (
+          // 只押到和局場(罕見):已結算但是 push · 不判勝負 · 誠實顯示(不假裝待結算)。
+          <p className="text-bone text-base font-light leading-snug">
+            押的 <span className="text-mute tabular">{rec.push}</span> 場都和局 ·
+            <span className="text-mute/70"> 不計勝負(push · 賽前鎖死,和局退場不算準也不算輸)</span>
           </p>
         )}
 
