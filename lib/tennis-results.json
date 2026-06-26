@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-06-26T17:23:51.236Z",
+  "generatedAt": "2026-06-26T20:22:59.419Z",
   "source": "site.api.espn.com tennis scoreboard (atp+wta singles · official · public · 0 auth)",
-  "count": 956,
+  "count": 959,
   "games": [
     {
       "tour": "atp",
@@ -9498,9 +9498,29 @@
       "tournament": "Lexus Eastbourne Open",
       "grouping": "Men's Singles",
       "date": "2026-06-26",
+      "winnerName": "Ugo Humbert",
+      "loserName": "Jack Draper",
+      "score": "7-5 6-3",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Lexus Eastbourne Open",
+      "grouping": "Men's Singles",
+      "date": "2026-06-26",
       "winnerName": "Zizou Bergs",
       "loserName": "Toby Samuel",
       "score": "4-6 7-6 6-2",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Vanda Pharmaceuticals Mallorca Championships",
+      "grouping": "Men's Singles",
+      "date": "2026-06-26",
+      "winnerName": "Alejandro Davidovich Fokina",
+      "loserName": "Fabian Marozsan",
+      "score": "5-7 6-2 6-4",
       "retired": false
     },
     {
@@ -9552,6 +9572,16 @@
       "loserName": "Jelena Ostapenko",
       "score": "6-1 1-2",
       "retired": true
+    },
+    {
+      "tour": "wta",
+      "tournament": "Lexus Eastbourne Open",
+      "grouping": "Men's Singles",
+      "date": "2026-06-26",
+      "winnerName": "Ugo Humbert",
+      "loserName": "Jack Draper",
+      "score": "7-5 6-3",
+      "retired": false
     },
     {
       "tour": "wta",
