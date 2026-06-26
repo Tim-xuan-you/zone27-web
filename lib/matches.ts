@@ -89,6 +89,108 @@ function mergePitcherStats(p: PitcherStats): PitcherStats {
 }
 
 const rawMatches: Match[] = [
+  // ── 2026-06-27 · 一軍 ingest(週六)· Tim 截圖 cpbl.com.tw 賽程 + 先發投手成績表 ──
+  //   投手值由官網累計成績表(IP/K/BB/HR)換算 · 標 estimate(自 Tim 截圖手抄)· winRate 手 curate。
+  //   洲際 17:05 · 統一(喬登 away)vs 中信(德保拉 home)· W-L 統一 28-28-1(.500)/ 中信 19-34-2(.358 墊底)。
+  //     統一雙重優勢:better record + 喬登壓制級先發 —— 喬登 2026 ERA 1.23 / K9 10.4 / WHIP 0.82 / 被打 .144 /
+  //     0 HR(44 IP·8 先發·頂級;生涯 2024 3.05 → 有些回歸空間但內容極頂)明顯壓過中信德保拉 2026 ERA 2.04 /
+  //     K9 5.2(低三振 pitch-to-contact)/ WHIP 0.86 / BB9 0.9(頂級控球 · 2025 2.75)。 只剩中信主場 + 德保拉
+  //     控球極佳難大量得分壓回 → 統一 60 / 中信 40 · conf 53(統一客場 + 德保拉不好打 + 單場變異 → 清楚偏統一
+  //     但不衝更高)。 ⚠️ winRate 是分析判斷,Tim 可調。(格式 home : away = 中信 : 統一)
+  //   新莊 17:05 · 樂天(陳克羿 away)vs 富邦(李東洛 home)· W-L 樂天 21-32-2(.396 後段)/ 富邦 31-25-0(.554)。
+  //     富邦三重優勢:better team + 主場 + 先發大幅占優 —— 李東洛 2026 ERA 1.63 / 8-1 / WHIP 1.25(55.1 IP 厚樣本 ·
+  //     當下接近王牌)壓過樂天陳克羿 2026 ERA 3.27(僅 11 IP 超小樣本)+ 2025 基準 ERA 3.68 = 中段本土先發。 三股
+  //     優勢疊加 → 富邦 62 / 樂天 38 · conf 55(清楚偏富邦,但守 57% 天花板誠實 + 陳克羿小樣本偶有高 K + 單場
+  //     變異 → 不裝神準)。 ⚠️ Tim 未提供 6/27 新莊先發投手表 → 兩人投手值沿用最近一次官網累計(李東洛 6/21 ·
+  //     陳克羿 6/20)· winRate 是分析判斷,Tim 補表後可再精算 / 調。(格式 home : away = 富邦 : 樂天)
+  {
+    id: "cpbl-260627-01",
+    league: "CPBL",
+    date: "2026 · 06 · 27  ·  星期六",
+    startTime: "17:05",
+    venue: "臺中洲際棒球場",
+    home: {
+      name: "中信兄弟",
+      en: "BROTHERS",
+      pitcher: {
+        name: "德保拉",
+        era: "2.04", // estimate · 2026 官網累計成績表(Tim 截圖手抄)· 39.2 IP(6 先發)· 很穩(2025 2.75)
+        k9: "5.2", // estimate · 23 K / 39.2 IP × 9 · 低三振 pitch-to-contact
+        whip: "0.86", // estimate · 官網每局被上壘率 0.857(30 H + 4 BB / 39.2 IP)· 頂級
+        bb9: "0.9", // estimate · 4 BB / 39.2 IP × 9 · 頂級控球
+        hr9: "0.45", // estimate · 2 HR / 39.2 IP × 9
+      },
+      recent: ["L", "L", "W", "L", "L"], // placeholder · 中信 19-34-2(.358 墊底)
+      winRate: 40,
+    },
+    away: {
+      name: "統一獅",
+      en: "LIONS",
+      pitcher: {
+        name: "喬登",
+        era: "1.23", // estimate · 2026 官網累計成績表(Tim 截圖手抄)· 44 IP(8 先發)· 壓制級(生涯 2024 3.05 → 有回歸空間但內容極頂)
+        k9: "10.4", // estimate · 51 K / 44 IP × 9 · 頂級三振
+        whip: "0.82", // estimate · 官網每局被上壘率 0.818(21 H + 15 BB / 44 IP)· 頂級
+        bb9: "3.1", // estimate · 15 BB / 44 IP × 9 · 控球偏散但被打極低
+        hr9: "0.00", // estimate · 0 HR / 44 IP · 完全沒被轟
+      },
+      recent: ["W", "L", "W", "L", "W"], // placeholder · 統一 28-28-1(.500)
+      winRate: 60,
+    },
+    topScores: [
+      // 喬登壓制(中信低分)+ 德保拉控球極佳(統一也難大量得分)→ 低分、統一 lean(格式 home : away = 中信 : 統一)
+      { score: "2 : 3", probability: 8.0 },
+      { score: "1 : 2", probability: 7.5 },
+      { score: "1 : 3", probability: 7.5 },
+      { score: "2 : 4", probability: 6.5 },
+      { score: "3 : 2", probability: 6.5 },
+    ],
+    aiConfidence: 53,
+  },
+  {
+    id: "cpbl-260627-02",
+    league: "CPBL",
+    date: "2026 · 06 · 27  ·  星期六",
+    startTime: "17:05",
+    venue: "新莊棒球場",
+    home: {
+      name: "富邦悍將",
+      en: "GUARDIANS",
+      pitcher: {
+        name: "李東洛",
+        era: "1.63", // estimate · 沿用 6/21 最近官網累計(Tim 未提供 6/27 投手表)· 55.1 IP(10 先發 · 樣本厚)· 8-1 · 當下接近王牌
+        k9: "5.2", // estimate · 32 K / 55.1 IP × 9
+        whip: "1.25", // estimate · 官網每局被上壘率 1.247(48 H + 21 BB / 55.1 IP)· BB 偏多但抑安打
+        bb9: "3.4", // estimate · 21 BB / 55.1 IP × 9 · 控球偏散
+        hr9: "0.16", // estimate · 1 HR / 55.1 IP × 9 · 極少被轟
+      },
+      recent: ["W", "W", "L", "W", "L"], // placeholder · 富邦 31-25-0(.554)
+      winRate: 62,
+    },
+    away: {
+      name: "樂天桃猿",
+      en: "MONKEYS",
+      pitcher: {
+        name: "陳克羿",
+        era: "3.27", // estimate · 沿用 6/20 最近官網累計(2026 僅 11 IP 超小樣本 · 2025 基準 3.68)· 中段本土先發
+        k9: "10.6", // estimate · 13 K / 11 IP × 9 · 小樣本偏高(2025 全季約 7.4)
+        whip: "1.18", // estimate · 官網每局被上壘率 1.181(9 H + 4 BB / 11 IP)
+        bb9: "3.3", // estimate · 4 BB / 11 IP × 9
+        hr9: "0.00", // estimate · 0 HR / 11 IP(超小樣本 · 生涯約 0.2-0.3 · winRate 已壓不偏袒)
+      },
+      recent: ["L", "W", "L", "L", "L"], // placeholder · 樂天 21-32-2(.396 後段)
+      winRate: 38,
+    },
+    topScores: [
+      // 李東洛壓制(樂天低分)+ 陳克羿中段(富邦得分)→ 富邦 lean、中低分(格式 home : away = 富邦 : 樂天)
+      { score: "3 : 1", probability: 8.0 },
+      { score: "4 : 2", probability: 7.5 },
+      { score: "2 : 1", probability: 7.0 },
+      { score: "3 : 2", probability: 7.0 },
+      { score: "4 : 1", probability: 6.5 },
+    ],
+    aiConfidence: 55,
+  },
   // ── 2026-06-26 · 一軍 ingest(週五)· Tim 截圖 cpbl.com.tw 賽程 + 先發投手成績表 ──
   //   投手值由官網累計成績表(IP/K/BB/HR)換算 · 標 estimate(自 Tim 截圖手抄)· winRate 手 curate。
   //   新莊 · 樂天(威能帝 away)vs 富邦(鈴木駿輔 home)· W-L 樂天 21-32-2(.396 後段)/ 富邦 31-25-0(.554)。

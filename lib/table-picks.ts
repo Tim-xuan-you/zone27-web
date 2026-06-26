@@ -51,7 +51,44 @@ export type TableCall = {
 //    「引擎有模型」badge 整個拿掉(對結果 0 差別 = 對用戶 0 意義)· 只在引擎真的不會算的
 //    盤(角球)留一句白話 engineNote 當誠實註腳(那才是克制的真意)。
 const TABLE: TableCall[] = [
-  // ── 2026-06-26 這一桌 · 最新賽前鎖的注(待對帳)──────
+  // ── 2026-06-27 這一桌 · 最新賽前鎖的注(待對帳)──────
+  {
+    handle: "Tim",
+    league: "世界盃",
+    match: "法國 vs 挪威",
+    when: "6/27 03:00",
+    call: "法國 會贏",
+    engineModels: true,
+    result: "pending",
+  },
+  {
+    handle: "Ron",
+    league: "世界盃",
+    match: "法國 vs 挪威",
+    when: "6/27 03:00",
+    call: "兩隊都會進球",
+    engineModels: true,
+    result: "pending",
+  },
+  {
+    handle: "Lewi",
+    league: "世界盃",
+    match: "西班牙 vs 烏拉圭",
+    when: "6/27 08:00",
+    call: "兩隊都會進球",
+    engineModels: true,
+    result: "pending",
+  },
+  {
+    handle: "Tim",
+    league: "美國職棒",
+    match: "遊騎兵 vs 藍鳥",
+    when: "6/27 07:07",
+    call: "兩隊總分 超過 8.5 分",
+    engineModels: true,
+    result: "pending",
+  },
+  // ── 2026-06-26 這一桌 · 賽前鎖的注(2026-06-27 對帳 · 0 中 3 落空 · 含輸照掛)──────
   {
     handle: "Lewi",
     league: "世界盃",
@@ -60,7 +97,8 @@ const TABLE: TableCall[] = [
     call: "厄瓜多 先進球",
     engineModels: false,
     engineNote: "誰先進球這種賭法,我們引擎沒在算 —— 還是照樣幫他對帳",
-    result: "pending",
+    resultNote: "厄瓜多 2:1 擊敗德國,但第一顆進球是德國薩內(開賽第 2 分鐘)· 德國先進球 → 沒中",
+    result: "lose",
   },
   {
     handle: "Tim",
@@ -69,7 +107,8 @@ const TABLE: TableCall[] = [
     when: "6/26 07:00",
     call: "兩隊進球 超過 2.5",
     engineModels: true,
-    result: "pending",
+    resultNote: "瑞典 1:1 日本 · 全場 2 球、不到 2.5 → 沒中",
+    result: "lose",
   },
   {
     handle: "Ron",
@@ -79,7 +118,8 @@ const TABLE: TableCall[] = [
     call: "前 5 局 藍鳥 領先",
     engineModels: false,
     engineNote: "前 5 局這種玩法,我們引擎沒在算 —— 還是照樣幫他對帳",
-    result: "pending",
+    resultNote: "遊騎兵 6:5 擊敗藍鳥;前 5 局結束時遊騎兵 6:3 領先(不是藍鳥領先)→ 沒中",
+    result: "lose",
   },
   // ── 2026-06-25 這一桌 · Tim/Ron/Lewi 賽前鎖的注(2026-06-26 對帳 · 2 中 4 落空 · 含輸照掛)──────
   {
