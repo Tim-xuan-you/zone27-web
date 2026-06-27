@@ -9941,6 +9941,35 @@
       "verdict": null
     },
     {
+      "gamePk": 822795,
+      "gameDate": "2026-06-28T17:37:00Z",
+      "scheduleDate": "2026-06-28",
+      "homeId": 141,
+      "homeEn": "Toronto Blue Jays",
+      "homeRecord": "39-43",
+      "awayId": 140,
+      "awayEn": "Texas Rangers",
+      "awayRecord": "40-42",
+      "homePitcher": "Shane Bieber",
+      "awayPitcher": "Kumar Rocker",
+      "homeStats": {
+        "era": "9.82",
+        "k9": "4.91",
+        "bb9": "0.00",
+        "hr9": "7.36"
+      },
+      "awayStats": {
+        "era": "4.14",
+        "k9": "7.91",
+        "bb9": "3.65",
+        "hr9": "0.97"
+      },
+      "engineWinHomePct": 25,
+      "lockedAt": "2026-06-27T16:10:38.225Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
       "gamePk": 824422,
       "gameDate": "2026-06-28T17:40:00Z",
       "scheduleDate": "2026-06-28",
@@ -9995,6 +10024,35 @@
       },
       "engineWinHomePct": 80,
       "lockedAt": "2026-06-26T17:03:59.060Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 824256,
+      "gameDate": "2026-06-28T17:40:00Z",
+      "scheduleDate": "2026-06-28",
+      "homeId": 116,
+      "homeEn": "Detroit Tigers",
+      "homeRecord": "35-47",
+      "awayId": 117,
+      "awayEn": "Houston Astros",
+      "awayRecord": "40-44",
+      "homePitcher": "Jack Flaherty",
+      "awayPitcher": "Hunter Brown",
+      "homeStats": {
+        "era": "5.35",
+        "k9": "10.69",
+        "bb9": "4.66",
+        "hr9": "1.10"
+      },
+      "awayStats": {
+        "era": "1.40",
+        "k9": "13.03",
+        "bb9": "5.12",
+        "hr9": "0.47"
+      },
+      "engineWinHomePct": 30,
+      "lockedAt": "2026-06-27T16:10:38.225Z",
       "finalScore": null,
       "verdict": null
     },
