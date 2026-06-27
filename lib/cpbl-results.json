@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-06-25T01:58:43.476Z",
+  "generatedAt": "2026-06-27T17:22:54.377Z",
   "source": "cpbl.com.tw/schedule/getgamedatas (official · public · 0 auth)",
   "year": 2026,
   "kindCode": "A",
-  "count": 170,
+  "count": 173,
   "games": [
     {
       "gameSno": 1,
@@ -2553,6 +2553,51 @@
       "awayScore": 3,
       "result": "away",
       "endedAt": "2026-06-24T21:11:00",
+      "source": "cpbl/schedule"
+    },
+    {
+      "gameSno": 80,
+      "date": "2026-06-26",
+      "kindCode": "A",
+      "year": 2026,
+      "homeName": "富邦悍將",
+      "homeCode": "AEO011",
+      "homeScore": 1,
+      "awayName": "樂天桃猿",
+      "awayCode": "AJL011",
+      "awayScore": 3,
+      "result": "away",
+      "endedAt": "2026-06-26T20:38:00",
+      "source": "cpbl/schedule"
+    },
+    {
+      "gameSno": 152,
+      "date": "2026-06-26",
+      "kindCode": "A",
+      "year": 2026,
+      "homeName": "中信兄弟",
+      "homeCode": "ACN011",
+      "homeScore": 3,
+      "awayName": "台鋼雄鷹",
+      "awayCode": "AKP011",
+      "awayScore": 2,
+      "result": "home",
+      "endedAt": "2026-06-26T21:11:00",
+      "source": "cpbl/schedule"
+    },
+    {
+      "gameSno": 15,
+      "date": "2026-06-27",
+      "kindCode": "A",
+      "year": 2026,
+      "homeName": "富邦悍將",
+      "homeCode": "AEO011",
+      "homeScore": 9,
+      "awayName": "樂天桃猿",
+      "awayCode": "AJL011",
+      "awayScore": 2,
+      "result": "home",
+      "endedAt": "2026-06-27T21:06:00",
       "source": "cpbl/schedule"
     }
   ]

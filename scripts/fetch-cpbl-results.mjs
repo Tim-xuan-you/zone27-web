@@ -90,7 +90,7 @@ async function getTokens() {
   const dom = html.match(/__RequestVerificationToken"[^>]*value="([^"]+)"/)?.[1];
   const hdr = html.match(/RequestVerificationToken:\s*'([^']+)'/)?.[1];
   if (!dom || !hdr) throw new Error("CSRF token scrape failed");
-  return { cookie, dom, hdr };
+  return { cookie, dom, hdr, jar };
 }
 
 // ── 2. POST 整年賽程(含比分) ──
@@ -101,27 +101,52 @@ async function getSeason(t) {
     kindCode: KIND,
     __RequestVerificationToken: t.dom,
   });
-  const headers = {
-    "User-Agent": UA,
-    "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
-    "X-Requested-With": "XMLHttpRequest",
-    Origin: BASE,
-    Referer: `${BASE}/schedule`,
-    RequestVerificationToken: t.hdr,
-  };
-  // cookieless 防偽下 t.cookie = ""(別送空 Cookie 標頭)· 未來若又設 cookie 再帶上。
-  if (t.cookie) headers.Cookie = t.cookie;
-  const res = await fetch(`${BASE}/schedule/getgamedatas`, {
-    method: "POST",
-    headers,
-    body: body.toString(),
-  });
-  if (!res.ok) throw new Error(`POST getgamedatas → HTTP ${res.status}`);
-  const j = await res.json();
-  if (!j.Success) throw new Error("getgamedatas Success=false");
-  const list = JSON.parse(j.GameDatas);
-  if (!Array.isArray(list)) throw new Error("GameDatas not an array");
-  return list;
+  const bodyStr = body.toString();
+  // 🔴 2026-06-28 修(R285):cpbl.com.tw 又把同一套「cookie-gated 轉址」加到 POST /getgamedatas 上
+  //   (R269 只修了 GET /schedule)。 預設 redirect:"follow" 不跨轉址重送 cookie → POST 進來被
+  //   302/308 轉回自己 + Set-Cookie,沒帶 cookie 回去就無限轉 → 「redirect count exceeded · fetch
+  //   failed」每天炸(Action 每 3h 一封失敗信的真因 · 推翻「只 GET 被 gate」假設)。 修法同
+  //   getWithCookies:POST 也手動跟轉址 + 累積 cookie jar 重送(實測帶著 GET 階段的 cookie 多半
+  //   hop 0 就直接 200 · Success:true)。
+  const jar = { ...(t.jar ?? {}) };
+  let url = `${BASE}/schedule/getgamedatas`;
+  for (let i = 0; i < 10; i++) {
+    const cookieHdr = Object.entries(jar)
+      .map(([k, v]) => `${k}=${v}`)
+      .join("; ");
+    const res = await fetch(url, {
+      method: "POST",
+      headers: {
+        "User-Agent": UA,
+        "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+        "X-Requested-With": "XMLHttpRequest",
+        Origin: BASE,
+        Referer: `${BASE}/schedule`,
+        RequestVerificationToken: t.hdr,
+        ...(cookieHdr ? { Cookie: cookieHdr } : {}),
+      },
+      body: bodyStr,
+      redirect: "manual",
+    });
+    for (const c of res.headers.getSetCookie?.() ?? []) {
+      const kv = c.split(";")[0];
+      const idx = kv.indexOf("=");
+      if (idx > 0) jar[kv.slice(0, idx).trim()] = kv.slice(idx + 1);
+    }
+    if (res.status >= 300 && res.status < 400) {
+      const loc = res.headers.get("location");
+      if (!loc) throw new Error(`POST redirect ${res.status} with no Location`);
+      url = loc.startsWith("http") ? loc : new URL(loc, url).href;
+      continue;
+    }
+    if (!res.ok) throw new Error(`POST getgamedatas → HTTP ${res.status}`);
+    const j = await res.json();
+    if (!j.Success) throw new Error("getgamedatas Success=false");
+    const list = JSON.parse(j.GameDatas);
+    if (!Array.isArray(list)) throw new Error("GameDatas not an array");
+    return list;
+  }
+  throw new Error("too many redirects on POST getgamedatas (cookie gate not clearing)");
 }
 
 function isFinishedRecord(g) {
