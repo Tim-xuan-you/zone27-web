@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-06-27T11:15:10.239Z",
+  "generatedAt": "2026-06-27T14:17:15.523Z",
   "source": "site.api.espn.com tennis scoreboard (atp+wta singles · official · public · 0 auth)",
-  "count": 960,
+  "count": 963,
   "games": [
     {
       "tour": "atp",
@@ -2681,6 +2681,16 @@
       "winnerName": "Taylor Fritz",
       "loserName": "Alexander Zverev",
       "score": "6-7 6-4 7-5",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Vanda Pharmaceuticals Mallorca Championships",
+      "grouping": "Men's Singles",
+      "date": "2026-06-20",
+      "winnerName": "Abdullah Shelbayh",
+      "loserName": "Aleksandr Shevchenko",
+      "score": "6-4 6-3",
       "retired": false
     },
     {
@@ -9594,6 +9604,16 @@
       "retired": false
     },
     {
+      "tour": "atp",
+      "tournament": "Lexus Eastbourne Open",
+      "grouping": "Women's Singles",
+      "date": "2026-06-27",
+      "winnerName": "Madison Keys",
+      "loserName": "Tatjana Maria",
+      "score": "7-5 6-4",
+      "retired": false
+    },
+    {
       "tour": "wta",
       "tournament": "Bad Homburg Open powered by Solarwatt",
       "grouping": "Women's Singles",
@@ -9602,6 +9622,16 @@
       "loserName": "Naomi Osaka",
       "score": "6-1 1-0",
       "retired": true
+    },
+    {
+      "tour": "wta",
+      "tournament": "Lexus Eastbourne Open",
+      "grouping": "Women's Singles",
+      "date": "2026-06-27",
+      "winnerName": "Madison Keys",
+      "loserName": "Tatjana Maria",
+      "score": "7-5 6-4",
+      "retired": false
     }
   ]
 }
