@@ -303,4 +303,34 @@ export const TENNIS_DRAW: TennisMatch[] = [
   { id: "tn-2061-0626", tour: "atp", tournament: "普羅夫迪夫挑戰賽", surface: "clay", time: "6/26 19:10",
     a: { zh: "蒙特斯-德拉托雷", en: "Inaki Montes-de la Torre", rank: 312, confidence: "medium" },
     b: { zh: "桑塔馬塔-羅伊格", en: "Andres Santamarta Roig", rank: 871, confidence: "medium" } },
+
+  // ── 2026-06-27 · 草地熱身賽決賽 / 末輪(從台灣運彩 6/27 看板 curate · 名字一字不改)──────────
+  //   🔴 id 一律加 -0627:運彩場次號跨日回收(2003 已被 6/26 伊斯特本、2010 已被 6/25 溫網用掉)→
+  //   全批加日期後綴保唯一(對帳走英文名 + 賽事 + 開賽日,不靠 id · 後綴對 allowlist tn- / auto-settle 無影響)。
+  //   多數球員沿用本檔既有 curate(同名同分,賽前一字不改)· 新面孔查現時官方世界排名估種子分。
+  //   ESPN 自動結算:巴特洪堡 / 伊斯特本 / 馬約卡(別名已建)· 🔴 普羅夫迪夫挑戰賽 ESPN 收不到 → 退手動(Tim curate)。
+  // ── WTA · 巴特洪堡公開賽(草地)決賽 · 大坂直美 vs 穆霍娃 ──
+  { id: "tn-2003-0627", tour: "wta", tournament: "巴特洪堡公開賽", surface: "grass", time: "6/27 17:00",
+    a: { zh: "大坂直美", en: "Naomi Osaka", rank: 15, confidence: "high" },
+    b: { zh: "卡蘿莉娜.穆霍娃", en: "Karolina Muchova", rank: 11, confidence: "high" } },
+  // ── WTA · 伊斯特本公開賽(草地)· 基斯 vs 馬莉亞(草地老將,引擎只看排名可能低估)──
+  { id: "tn-2010-0627", tour: "wta", tournament: "伊斯特本公開賽", surface: "grass", time: "6/27 19:00",
+    note: "馬莉亞是草地老將(2022 溫網四強)· 引擎只看排名、不懂她的草地專長 → 這場引擎可能低估她,你的判斷值錢。",
+    a: { zh: "基斯", en: "Madison Keys", rank: 7, confidence: "high" },
+    b: { zh: "T.馬莉亞", en: "Tatjana Maria", rank: 86, confidence: "medium" } },
+  // ── ATP · 馬約卡公開賽(草地)· 達比多維奇 vs 奎因 ──
+  { id: "tn-2008-0627", tour: "atp", tournament: "馬約卡公開賽", surface: "grass", time: "6/27 21:00",
+    a: { zh: "達比多維奇", en: "Alejandro Davidovich Fokina", rank: 30, confidence: "high" },
+    b: { zh: "伊森.奎因", en: "Ethan Quinn", rank: 63, confidence: "medium" } },
+  // ── ATP · 伊斯特本公開賽(草地)· 亨伯特 vs 伯格斯 ──
+  { id: "tn-2009-0627", tour: "atp", tournament: "伊斯特本公開賽", surface: "grass", time: "6/27 21:30",
+    a: { zh: "U.亨伯特", en: "Ugo Humbert", rank: 30, confidence: "high" },
+    b: { zh: "Z.伯格斯", en: "Zizou Bergs", rank: 50, confidence: "high" } },
+  // ── ATP · 普羅夫迪夫挑戰賽(紅土)· 科普 vs 蒙特斯-德拉托雷 ──
+  //   🔴 桑德羅.科普 = 挑戰賽長尾,查不到可靠排名 → 引擎不硬開假盤(rank null)· 照樣可押。
+  //   挑戰賽 ESPN 鏡像收不到 → 賽後自動結算對不到、退手動(Tim 賽後 curate)。
+  { id: "tn-2004-0627", tour: "atp", tournament: "普羅夫迪夫挑戰賽", surface: "clay", time: "6/27 22:00",
+    note: "桑德羅.科普是挑戰賽長尾,我們查不到可靠排名 · 引擎不硬開假盤 —— 照樣可押,你的判斷比引擎值錢。",
+    a: { zh: "桑德羅.科普", en: "Sandro Kopp", rank: null, confidence: "low" },
+    b: { zh: "蒙特斯-德拉托雷", en: "Inaki Montes-de la Torre", rank: 312, confidence: "medium" } },
 ];
