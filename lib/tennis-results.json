@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-06-26T20:22:59.419Z",
+  "generatedAt": "2026-06-27T11:15:10.239Z",
   "source": "site.api.espn.com tennis scoreboard (atp+wta singles · official · public · 0 auth)",
-  "count": 959,
+  "count": 960,
   "games": [
     {
       "tour": "atp",
@@ -9592,6 +9592,16 @@
       "loserName": "Toby Samuel",
       "score": "4-6 7-6 6-2",
       "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Bad Homburg Open powered by Solarwatt",
+      "grouping": "Women's Singles",
+      "date": "2026-06-27",
+      "winnerName": "Karolina Muchova",
+      "loserName": "Naomi Osaka",
+      "score": "6-1 1-0",
+      "retired": true
     }
   ]
 }
