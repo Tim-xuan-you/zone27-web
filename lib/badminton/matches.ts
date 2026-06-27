@@ -84,6 +84,8 @@ export const BADMINTON_DRAW: BadmintonMatch[] = [
     note: "蘇力揚是台灣選手,但對手楊燦我們查不到可靠排名 —— 不硬開假盤,照樣可押。",
     a: { zh: "蘇力揚", en: "Su Li-yang", rank: 65, confidence: "medium" },
     b: { zh: "楊燦", en: "?", rank: null, confidence: "low" },
+    // 蘇力揚 2-0 擊敗楊燦晉級(引擎未開盤 · 認不出楊燦 · 用戶押注照對帳)。
+    finalResult: { winner: "a", score: "21-19 21-8", settledAt: "2026-06-27" },
   },
   {
     id: "bd-2500",
@@ -93,6 +95,8 @@ export const BADMINTON_DRAW: BadmintonMatch[] = [
     note: "兩位都是我們查不到可靠排名的國際選手(喬漢 R1 淘汰周天成)—— 不硬開假盤,照樣可押。",
     a: { zh: "M.西爾伯曼", en: "?", rank: null, confidence: "low" },
     b: { zh: "羅納克.喬漢", en: "?", rank: null, confidence: "low" },
+    // 喬漢 2-0 擊敗西爾伯曼晉級(引擎未開盤 · 兩位都認不出 · 用戶押注照對帳)。
+    finalResult: { winner: "b", score: "23-21 21-11", settledAt: "2026-06-27" },
   },
   // ── 2026-06-26 美國公開賽 R1(已完場 · 賽後對帳 · Tim 截圖比分手 curate)──
   {

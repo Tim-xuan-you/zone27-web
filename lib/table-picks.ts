@@ -51,7 +51,36 @@ export type TableCall = {
 //    「引擎有模型」badge 整個拿掉(對結果 0 差別 = 對用戶 0 意義)· 只在引擎真的不會算的
 //    盤(角球)留一句白話 engineNote 當誠實註腳(那才是克制的真意)。
 const TABLE: TableCall[] = [
-  // ── 2026-06-27 這一桌 · 最新賽前鎖的注(待對帳)──────
+  // ── 2026-06-28 這一桌 · 最新賽前鎖的注(待對帳)──────
+  {
+    handle: "Ron",
+    league: "世界盃",
+    match: "英格蘭 vs 巴拿馬",
+    when: "6/28 05:00",
+    call: "上半場 英格蘭 不落後(領先或平手)",
+    engineModels: false,
+    engineNote: "上半場單獨怎麼走,我們引擎沒在算(只算整場輸贏)—— 還是照樣幫他對帳",
+    result: "pending",
+  },
+  {
+    handle: "Lewi",
+    league: "世界盃",
+    match: "阿根廷 vs 約旦",
+    when: "6/28 10:00",
+    call: "兩隊不會都進球",
+    engineModels: true,
+    result: "pending",
+  },
+  {
+    handle: "Tim",
+    league: "美國職棒",
+    match: "國民 vs 金鶯",
+    when: "6/28 07:05",
+    call: "國民 會贏",
+    engineModels: true,
+    result: "pending",
+  },
+  // ── 2026-06-27 這一桌 · 賽前鎖的注(2026-06-27 對帳 · 3 中 1 落空 · 含輸照掛)──────
   {
     handle: "Tim",
     league: "世界盃",
@@ -59,7 +88,8 @@ const TABLE: TableCall[] = [
     when: "6/27 03:00",
     call: "法國 會贏",
     engineModels: true,
-    result: "pending",
+    resultNote: "法國 4:1 挪威 · 法國贏 → 中了",
+    result: "win",
   },
   {
     handle: "Ron",
@@ -68,7 +98,8 @@ const TABLE: TableCall[] = [
     when: "6/27 03:00",
     call: "兩隊都會進球",
     engineModels: true,
-    result: "pending",
+    resultNote: "法國 4:1 挪威 · 兩隊都進球(法國 4、挪威 1)→ 中了",
+    result: "win",
   },
   {
     handle: "Lewi",
@@ -77,7 +108,8 @@ const TABLE: TableCall[] = [
     when: "6/27 08:00",
     call: "兩隊都會進球",
     engineModels: true,
-    result: "pending",
+    resultNote: "西班牙 1:0 烏拉圭 · 只有西班牙進球(烏拉圭 0)· 兩隊沒都進 → 沒中",
+    result: "lose",
   },
   {
     handle: "Tim",
@@ -86,7 +118,8 @@ const TABLE: TableCall[] = [
     when: "6/27 07:07",
     call: "兩隊總分 超過 8.5 分",
     engineModels: true,
-    result: "pending",
+    resultNote: "兩隊合計 9 分(遊騎兵 5 + 藍鳥 4)· 超過 8.5 → 中了",
+    result: "win",
   },
   // ── 2026-06-26 這一桌 · 賽前鎖的注(2026-06-27 對帳 · 0 中 3 落空 · 含輸照掛)──────
   {

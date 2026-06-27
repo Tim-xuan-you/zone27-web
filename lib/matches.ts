@@ -146,6 +146,8 @@ const rawMatches: Match[] = [
       { score: "3 : 2", probability: 6.5 },
     ],
     aiConfidence: 53,
+    // 🌧️ 6/27 延賽(降雨 90% · 洲際)· Tim 截圖「延賽」· 不顯示為今晚可押、不等賽果(擇期重賽 Tim 再處理)。
+    postponed: true,
   },
   {
     id: "cpbl-260627-02",
@@ -190,6 +192,13 @@ const rawMatches: Match[] = [
       { score: "2 : 1", probability: 6.0 },
     ],
     aiConfidence: 52,
+    finalResult: {
+      homeScore: 9,
+      awayScore: 2,
+      winner: "home", // 富邦 9 : 樂天 2 @新莊 · 勝投李東洛(富邦)/ 敗投陳克羿(樂天)· 引擎賽前看好主隊富邦(58)→ PROVED(命中)
+      ingestedAt: "2026-06-27",
+      source: "manual",
+    },
   },
   // ── 2026-06-26 · 一軍 ingest(週五)· Tim 截圖 cpbl.com.tw 賽程 + 先發投手成績表 ──
   //   投手值由官網累計成績表(IP/K/BB/HR)換算 · 標 estimate(自 Tim 截圖手抄)· winRate 手 curate。
