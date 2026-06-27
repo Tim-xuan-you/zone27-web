@@ -336,6 +336,28 @@ export default async function MemberPage() {
         </div>
         <MembershipStatus meta={meta} />
 
+        {/* 今日一戰(R281 · 留存命門)· 每天回來的第一個動作:站到機器對面押今天這一題。
+            擺在最上焦點(身分之後、操盤室之前)= 登入第一眼就是「今天可以做什麼」· 賽後自動對帳。 */}
+        <Link
+          href="/today"
+          className="mt-6 flex items-center justify-between gap-3 border border-gold/45 bg-gold/[0.05] p-4 hover:border-gold transition-colors group"
+        >
+          <span className="min-w-0">
+            <span className="block font-mono text-gold/70 text-[10px] tracking-[0.35em] mb-1">
+              今日一戰
+            </span>
+            <span className="block text-bone text-base sm:text-lg font-light leading-snug">
+              你 vs 機器 · 今天這一題
+            </span>
+            <span className="block text-mute/80 text-[12px] leading-relaxed mt-0.5">
+              賽前鎖死 · 隔天見真章 · 含贏含輸一場沒躲
+            </span>
+          </span>
+          <span className="shrink-0 font-mono text-gold/80 group-hover:text-gold text-[10px] tracking-[0.3em] transition-colors">
+            上場 →
+          </span>
+        </Link>
+
         {/* 操盤室 · 個人天梯爬升(R280 · 把 R279 一行抬頭展成整條職涯路)· 把已算好的天梯階級鏡回
             本人 → 登入像「走進我的操盤室、看見整條爬升」而非「讀一個數字」。 🔴 keyed on 校準命中率
             (非 PnL/連勝/粉絲)· 會升會降(可收回 · 卡內「守不住會掉階」明示)· 1 個用戶就成立(本人面

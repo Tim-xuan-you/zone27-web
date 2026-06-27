@@ -23,6 +23,8 @@ type Entry = {
 const ROUTES: Entry[] = [
   // 首頁 + 即時產品面(常變)
   { path: "/", priority: 1.0, changeFrequency: "daily" },
+  // R281 · 今日一戰(你 vs 機器)· 每日對決固定地址 · 公開可看(押要登入)。
+  { path: "/today", priority: 0.9, changeFrequency: "daily" },
   { path: "/matches", priority: 0.9, changeFrequency: "daily" },
   { path: "/matches/mlb", priority: 0.8, changeFrequency: "daily" },
   { path: "/soccer", priority: 0.8, changeFrequency: "daily" },

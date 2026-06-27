@@ -7,6 +7,7 @@ import { getTodayMatches } from "@/lib/matches";
 
 type NavKey =
   | "home"
+  | "today"
   | "matches"
   | "soccer"
   | "tennis"
@@ -64,6 +65,9 @@ const NAV_ITEMS_STATIC: {
   label: string;
   badge?: string;
 }[] = [
+  // R281 · 今日一戰(你 vs 機器)= 每日留存儀式的固定地址 · 排第一(產品主入口,非「無關緊要的頁」)。
+  //  純靜態連結 · 不在 render 時 fetch(守 R207「Nav 不 render-fetch」鐵律)。
+  { key: "today", href: "/today", label: "今日一戰" },
   // R234 · 收掉重複的運動切換 + 修分類學(Tim 截圖抱怨「為什麼有 2 組棒球+足球」)。
   //  原本「棒球」「足球」兩格,與頁內 SportTabs(棒球 | 足球)連到完全相同的 /matches、
   //  /soccer = 同一個切換器出現兩次;而且把「運動」(內容分類)跟「脈動/實驗室/關於」
