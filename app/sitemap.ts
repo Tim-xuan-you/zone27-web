@@ -47,6 +47,7 @@ const ROUTES: Entry[] = [
   { path: "/ethics", priority: 0.6, changeFrequency: "monthly" },
   // 認識 / 入門 / 身分
   { path: "/engines", priority: 0.7, changeFrequency: "monthly" },
+  { path: "/star", priority: 0.7, changeFrequency: "monthly" },
   { path: "/learn", priority: 0.7, changeFrequency: "monthly" },
   { path: "/about", priority: 0.7, changeFrequency: "monthly" },
   { path: "/faq", priority: 0.7, changeFrequency: "monthly" },

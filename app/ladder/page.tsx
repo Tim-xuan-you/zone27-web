@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import YourRecordStrip from "@/components/YourRecordStrip";
@@ -164,6 +165,14 @@ export default async function LadderPage() {
           <p className="mt-2 font-mono text-mute/60 text-[11px] leading-relaxed">
             ▸ 兩台免費引擎(蒙地卡羅 / Dixon-Coles)現在就跟你一起在榜上排、一起升降 ·
             所有運動的預測算一起。 你的工作:爬到它上面。
+          </p>
+          <p className="mt-3">
+            <Link
+              href="/star"
+              className="font-mono text-gold/80 hover:text-gold text-[11px] tracking-[0.2em] underline-offset-4 hover:underline transition-colors"
+            >
+              神準手 / 神諭 帶的就是「對帳之星」· 那是什麼 →
+            </Link>
           </p>
         </div>
 

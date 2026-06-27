@@ -377,6 +377,15 @@ export default async function MemberPage() {
             </span>
           </div>
         ) : null}
+        {/* 對帳之星定義頁的入口(冷啟動:讓還沒達標的會員也認識這個唯一的、買不到的榮譽)。 */}
+        {!star.earned && identity.decided > 0 && (
+          <Link
+            href="/star"
+            className="mt-3 inline-block font-mono text-gold/70 hover:text-gold text-[10px] tracking-[0.2em] underline-offset-4 hover:underline transition-colors"
+          >
+            對帳之星是什麼 · 怎麼贏來、為什麼買不到 →
+          </Link>
+        )}
         {/* 足球戰績(沒押足球自動隱藏)· 網球戰績(沒押網球自動隱藏)· 校準大師(沒填把握自動隱藏)· 榮譽牆 */}
         <SoccerRecordCard
           results={soccerResults}
