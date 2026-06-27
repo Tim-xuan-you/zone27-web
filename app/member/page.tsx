@@ -291,23 +291,20 @@ export default async function MemberPage() {
         {/* ── 你的東西(安靜連結組 · 無卡 · 米其林留白)·「我的公開檔」一條收下整本完整戰績
             (各運動 / 對帳之星 / 校準大師 / 榮譽牆全在 /u/[code])· 不在儀表板重造。 ── */}
         <div className="mt-12 flex flex-col">
+          {/* R282b · 整合「3 個都像我的押注紀錄」(Tim:差異不大?)→ 只留 2 個「真的不同工作」的門:
+              ① 我的對帳本(私下 · 中沒中 + 戰功卡收藏 · 收件匣頁底已連到收藏牆 → 不孤兒)
+              ② 別人眼中的你(公開 · 拿去給人看)· 心理學:同一概念只給一扇門,避免「點哪個都一樣」的選擇癱瘓。 */}
           <QuietLink
             href="/member/inbox"
-            label="結算收件匣"
-            hint="中沒中逐筆對帳"
-            cta="收件匣 →"
-          />
-          <QuietLink
-            href="/member/collection"
-            label="戰功卡收藏"
-            hint="每一手都改不了"
-            cta="看收藏 →"
+            label="我的對帳本"
+            hint="你押過的每一手 · 中沒中 · 戰功卡都在這"
+            cta="對帳 →"
           />
           {identity.decided > 0 && (
             <QuietLink
               href={`/u/${authorCode}`}
-              label="我的公開檔"
-              hint="完整戰績 · 各運動 · 對帳之星"
+              label="別人眼中的你"
+              hint="公開戰績 + 對帳之星 · 拿去給懷疑的人看"
               cta="公開檔 →"
             />
           )}
