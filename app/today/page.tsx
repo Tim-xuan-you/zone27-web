@@ -5,6 +5,7 @@ import Avatar from "@/components/Avatar";
 import CardBetStrip from "@/components/CardBetStrip";
 import DuelRecordStrip from "@/components/DuelRecordStrip";
 import { selectTodayDuel, duelEngineSide } from "@/lib/daily-duel";
+import { getEngineConviction } from "@/lib/conviction";
 import {
   matches as allMatches,
   getFinalizedMatches,
@@ -129,7 +130,7 @@ export default async function TodayPage() {
               {/* 機器已鎖死的一手 · 賽前不翻牌(誠實:機器先攤、改不了)。 */}
               <p className="flex items-center gap-2 font-mono text-gold/85 text-[11px] tracking-[0.1em] leading-relaxed border-t border-gold/15 pt-3">
                 <span aria-hidden="true" className="text-gold/70">▦</span>
-                機器已鎖 <span className="text-gold tabular">{engine.name} {engine.pct}%</span> · 賽前不翻牌
+                機器已鎖 <span className="text-gold tabular">{engine.name} {engine.pct}%</span> · {getEngineConviction(engine.pct).label} · 賽前不翻牌
               </p>
 
               {/* 你的一手:重用既有下注流(未登入→登入餌 · 已押→鎖定卡 · 開打→封盤)· 進共享帳本 + 賽後自動對帳。 */}
