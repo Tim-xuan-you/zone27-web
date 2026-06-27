@@ -73,6 +73,44 @@ export const LISTED_WS = 8;
 //   誠實標「不硬開」。 女單 8 場目前無一位我們有把握辨識 → 這版先不上(寧缺勿錯)。
 //   🔴 種子排名 = 編輯估計(BWF 公開排名 + 近況)· 不是官方數據 · 隨真實賽果更新(同網球種子分)。
 export const BADMINTON_DRAW: BadmintonMatch[] = [
+  // ── 2026-06-28 美國公開賽 R3(週日清晨台北 · Tim 運彩截圖 curate · 照運彩名字原封不動)──
+  //   R3 對手仍多認不出 / 查不到排名 → 誠實不硬開引擎線(照樣可押)· 女單首度上架(同樣不硬開)。
+  {
+    id: "bd-2510",
+    tour: "ms",
+    tournament: "美國公開賽 · 男單",
+    time: "6/28 05:05",
+    note: "基達姆比認得(排名 20),但沖本優大我們查不到可靠排名 —— 不硬開假盤,照樣可押。",
+    a: { zh: "沖本優大", en: "Yudai Okimoto", rank: null, confidence: "low" },
+    b: { zh: "基達姆比", en: "Kidambi Srikanth", rank: 20, confidence: "high" },
+  },
+  {
+    id: "bd-2511",
+    tour: "ms",
+    tournament: "美國公開賽 · 男單",
+    time: "6/28 05:55",
+    note: "蘇力揚是台灣選手,但對手喬漢我們查不到可靠排名 —— 不硬開假盤,照樣可押。",
+    a: { zh: "蘇力揚", en: "Su Li-yang", rank: 65, confidence: "medium" },
+    b: { zh: "羅納克.喬漢", en: "?", rank: null, confidence: "low" },
+  },
+  {
+    id: "bd-2508",
+    tour: "ws",
+    tournament: "美國公開賽 · 女單",
+    time: "6/28 03:25",
+    note: "女單兩位都是我們查不到可靠排名的國際選手 —— 不硬開假盤,照樣可押。",
+    a: { zh: "克里絲托芙森", en: "?", rank: null, confidence: "low" },
+    b: { zh: "德維卡.西哈格", en: "?", rank: null, confidence: "low" },
+  },
+  {
+    id: "bd-2509",
+    tour: "ws",
+    tournament: "美國公開賽 · 女單",
+    time: "6/28 03:30",
+    note: "女單兩位都是我們查不到可靠排名的國際選手 —— 不硬開假盤,照樣可押。",
+    a: { zh: "納爾班托娃", en: "?", rank: null, confidence: "low" },
+    b: { zh: "陳瑞秋", en: "?", rank: null, confidence: "low" },
+  },
   // ── 2026-06-27 美國公開賽 R2(週六清晨台北 · 蘇力揚 / 喬漢 R1 晉級續戰)──
   //   R2 對手多是我們查不到可靠排名的國際選手 → 誠實不硬開引擎線(照樣可押 · 你的判斷比引擎值錢)。
   //   女單仍無一位有把握辨識 → 不上(同 R1 · 寧缺勿錯)。
