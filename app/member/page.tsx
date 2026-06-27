@@ -41,6 +41,7 @@ import { isPaid, tierLabel } from "@/lib/tier";
 import { effectiveTier } from "@/lib/membership";
 import MembershipStatus from "@/components/MembershipStatus";
 import { reckoningStar, credentialHeadline, careerTier, RECKONING_STAR_MIN } from "@/lib/reckoning-star";
+import CareerLadderMini from "@/components/CareerLadderMini";
 import ReckoningStarMark from "@/components/ReckoningStarMark";
 import CredentialGrabPanel from "@/components/CredentialGrabPanel";
 import OpenPositionsPanel from "@/components/OpenPositionsPanel";
@@ -335,28 +336,15 @@ export default async function MemberPage() {
         </div>
         <MembershipStatus meta={meta} />
 
-        {/* 經理人身分抬頭(R279 · Tim「經理人元素」)· 把已算好的天梯階級鏡回本人 → 登入像「走進我的
-            操盤室」而非「打開工具」。 🔴 keyed on 校準命中率(非 PnL/連勝/粉絲)· 會升會降(可收回)·
-            1 個用戶就成立(本人面非空榜)· tier 0 退 graceful 文案。 */}
-        <div className="mt-6 border-l-2 border-gold/60 pl-4 py-1">
-          <p className="font-mono text-gold/70 text-[10px] tracking-[0.35em] mb-1.5">
-            你的操盤室
-          </p>
-          {career.tier > 0 ? (
-            <p className="text-bone text-lg sm:text-xl font-light leading-snug">
-              你現在是{" "}
-              <span className="text-gold text-2xl sm:text-3xl">{career.label}</span>
-              <span className="font-mono text-mute/70 text-sm"> · 第 {career.tier} 階</span>
-            </p>
-          ) : (
-            <p className="text-bone text-lg font-light leading-snug">
-              你的操盤生涯 · <span className="text-mute">還沒上榜</span>
-            </p>
-          )}
-          <p className="mt-1.5 font-mono text-mute/85 text-[11px] tracking-[0.1em] leading-relaxed">
-            {career.nextHint}
-          </p>
-        </div>
+        {/* 操盤室 · 個人天梯爬升(R280 · 把 R279 一行抬頭展成整條職涯路)· 把已算好的天梯階級鏡回
+            本人 → 登入像「走進我的操盤室、看見整條爬升」而非「讀一個數字」。 🔴 keyed on 校準命中率
+            (非 PnL/連勝/粉絲)· 會升會降(可收回 · 卡內「守不住會掉階」明示)· 1 個用戶就成立(本人面
+            非空榜)· tier 0 退 graceful 不攤空牆 · 神諭本人面永遠摸不到(careerTier 最高 4)。 */}
+        <CareerLadderMini
+          career={career}
+          accuracy={identity.accuracy}
+          decided={identity.decided}
+        />
 
         {/* 今天的一手 + 對帳紀律 = 會員每天回來的核心動作(鐵律置頂 · 永不收折)*/}
         <TodayStrip
