@@ -6,7 +6,6 @@ import BadmintonDrawCard from "@/components/BadmintonDrawCard";
 import { createPageMetadata } from "@/lib/page-og";
 import {
   BADMINTON_DRAW,
-  drawCounts,
   gradeBadmintonEngine,
 } from "@/lib/badminton/matches";
 
@@ -33,8 +32,14 @@ export const metadata = createPageMetadata({
 export const revalidate = 3600;
 
 export default function BadmintonPage() {
-  const { shown, lined, listed } = drawCounts();
   const eng = gradeBadmintonEngine();
+  // 🔴 R283(Tim「打完的下架收起來」)· 看板只列「還沒打完」的場 —— 打完的(finalResult)移出看板,
+  //   賽果與引擎對帳留在下方「引擎公開戰績」+ /track-record(同棒球:完場不佔今晚看板 · 含輸照掛在帳本)。
+  const upcoming = BADMINTON_DRAW.filter((m) => !m.finalResult);
+  const groups = [
+    { title: "美國公開賽 · 男單", list: upcoming.filter((m) => m.tour === "ms") },
+    { title: "美國公開賽 · 女單", list: upcoming.filter((m) => m.tour === "ws") },
+  ].filter((g) => g.list.length > 0);
 
   return (
     <div className="flex flex-col flex-1 min-h-screen">
@@ -75,30 +80,41 @@ export default function BadmintonPage() {
 
           {/* 覆蓋率誠實揭露 + 米其林式克制 */}
           <p className="mt-5 font-mono text-mute/60 text-[10px] tracking-[0.15em] leading-relaxed max-w-2xl">
-            美國公開賽這一輪 · 運彩列了 <span className="text-bone tabular">{listed}</span> 場
-            (男單 8 + 女單 8)· 絕大多數是我們認不出、查不到排名的資格賽選手。 我們只把{" "}
-            <span className="text-bone tabular">{shown}</span> 場敢負責的放上桌 ——
-            其中 <span className="text-gold tabular">{lined}</span> 場兩位都認得、開得出引擎線,
-            其餘是台灣選手對上認不出的對手,<span className="text-bone">誠實標「不開假盤」</span>。
-            賭場什麼都敢開,我們只開算得出的。 球員名稱用台灣運彩的。
+            美國公開賽運彩列的場 · 絕大多數是我們認不出、查不到排名的資格賽選手。 我們只把
+            <span className="text-bone">敢負責的</span>放上桌 —— 兩位都認得的開引擎線,
+            認不出對手的<span className="text-bone">誠實標「不開假盤」</span>、照樣可押。
+            打完的場移到下方帳本對帳(不佔看板)。 賭場什麼都敢開,我們只開算得出的。 球員名稱用台灣運彩的。
           </p>
           <div className="mt-6 w-full h-px bg-line/60" />
         </section>
 
-        {/* ── 真實賽程看板 ── */}
-        <section className="mx-auto max-w-6xl w-full px-6 sm:px-10 pb-8">
-          <div className="flex items-baseline gap-3 mb-4 flex-wrap">
-            <p className="font-mono text-gold/70 text-[10px] tracking-[0.4em]">美國公開賽 · 男單</p>
-            <span className="font-mono text-mute/50 text-[9px] tracking-[0.2em]">
-              BWF SUPER 300 · 6/26 · 台北時間
-            </span>
-          </div>
-          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-            {BADMINTON_DRAW.map((m) => (
-              <BadmintonDrawCard key={m.id} match={m} />
-            ))}
-          </div>
-        </section>
+        {/* ── 真實賽程看板(只列還沒打完的 · 男單 / 女單 分組)── */}
+        {groups.length > 0 ? (
+          groups.map((g) => (
+            <section
+              key={g.title}
+              className="mx-auto max-w-6xl w-full px-6 sm:px-10 pb-8"
+            >
+              <div className="flex items-baseline gap-3 mb-4 flex-wrap">
+                <p className="font-mono text-gold/70 text-[10px] tracking-[0.4em]">{g.title}</p>
+                <span className="font-mono text-mute/50 text-[9px] tracking-[0.2em]">
+                  BWF SUPER 300 · 台北時間
+                </span>
+              </div>
+              <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+                {g.list.map((m) => (
+                  <BadmintonDrawCard key={m.id} match={m} />
+                ))}
+              </div>
+            </section>
+          ))
+        ) : (
+          <section className="mx-auto max-w-6xl w-full px-6 sm:px-10 pb-8">
+            <p className="text-mute text-sm leading-relaxed max-w-2xl">
+              這一輪的場都打完了 —— 賽果與引擎對帳都在下方帳本。 下一輪運彩開賣再上架。
+            </p>
+          </section>
+        )}
 
         {/* ── 引擎戰績(含輸照掛 · 第一場結算就誠實長出來)── */}
         <section className="mx-auto max-w-6xl w-full px-6 sm:px-10 pb-8">
