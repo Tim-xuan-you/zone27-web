@@ -40,7 +40,7 @@ import { getSoccerEnginePicksAll } from "@/lib/soccer/locked";
 import { isPaid, tierLabel } from "@/lib/tier";
 import { effectiveTier } from "@/lib/membership";
 import MembershipStatus from "@/components/MembershipStatus";
-import { reckoningStar, credentialHeadline, RECKONING_STAR_MIN } from "@/lib/reckoning-star";
+import { reckoningStar, credentialHeadline, careerTier, RECKONING_STAR_MIN } from "@/lib/reckoning-star";
 import ReckoningStarMark from "@/components/ReckoningStarMark";
 import CredentialGrabPanel from "@/components/CredentialGrabPanel";
 import OpenPositionsPanel from "@/components/OpenPositionsPanel";
@@ -60,8 +60,8 @@ import { createHash } from "crypto";
 import Disclosure from "@/components/Disclosure";
 
 export const metadata: Metadata = {
-  title: "你的儀表板",
-  description: "你的準度 · 你 vs 引擎 · 接下來可以押的賽事。終身免費。",
+  title: "你的操盤室",
+  description: "你的操盤室 · 你現在哪一階 · 你 vs 引擎 · 接下來可以押的賽事。終身免費。",
 };
 
 // ── ZONE 27 · /member · 會員自己的儀表板 ─────────────────
@@ -198,6 +198,8 @@ export default async function MemberPage() {
   );
   // 對帳之星(米其林式最高榮譽 · lib/reckoning-star 單一真相)· 達標金星 / 在軌道上給目標 / 其餘不顯。
   const star = reckoningStar(identity);
+  // 你的操盤室生涯階級(R279 · 經理人抬頭)· 把已算好的天梯階級鏡回本人(同 lib/reckoning-star 單一真相)。
+  const career = careerTier(identity.accuracy, identity.decided);
   // 一鍵拿取可攜憑證 · 句子走單一真相 credentialHeadline(含卡尺話術)· 達星 / 贏過引擎才給面板。
   const cred = credentialHeadline(identity);
   // 準度歷程(會動的數字 · 回訪鉤)· 按比賽日累計命中率 · sparkline 在校準卡內畫。
@@ -332,6 +334,29 @@ export default async function MemberPage() {
           </form>
         </div>
         <MembershipStatus meta={meta} />
+
+        {/* 經理人身分抬頭(R279 · Tim「經理人元素」)· 把已算好的天梯階級鏡回本人 → 登入像「走進我的
+            操盤室」而非「打開工具」。 🔴 keyed on 校準命中率(非 PnL/連勝/粉絲)· 會升會降(可收回)·
+            1 個用戶就成立(本人面非空榜)· tier 0 退 graceful 文案。 */}
+        <div className="mt-6 border-l-2 border-gold/60 pl-4 py-1">
+          <p className="font-mono text-gold/70 text-[10px] tracking-[0.35em] mb-1.5">
+            你的操盤室
+          </p>
+          {career.tier > 0 ? (
+            <p className="text-bone text-lg sm:text-xl font-light leading-snug">
+              你現在是{" "}
+              <span className="text-gold text-2xl sm:text-3xl">{career.label}</span>
+              <span className="font-mono text-mute/70 text-sm"> · 第 {career.tier} 階</span>
+            </p>
+          ) : (
+            <p className="text-bone text-lg font-light leading-snug">
+              你的操盤生涯 · <span className="text-mute">還沒上榜</span>
+            </p>
+          )}
+          <p className="mt-1.5 font-mono text-mute/85 text-[11px] tracking-[0.1em] leading-relaxed">
+            {career.nextHint}
+          </p>
+        </div>
 
         {/* 今天的一手 + 對帳紀律 = 會員每天回來的核心動作(鐵律置頂 · 永不收折)*/}
         <TodayStrip

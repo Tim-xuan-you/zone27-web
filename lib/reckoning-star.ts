@@ -88,3 +88,56 @@ export function credentialHeadline(
     sentence: `ZONE 27 公開戰績 —— 賽前鎖死、含贏含輸、刪不掉的押注帳本。${verify}`,
   };
 }
+
+// ── 生涯階級(本人面「操盤室」抬頭 · 把已算好的天梯階級鏡回給自己看)─────────────────────
+// R279 Tim「經理人元素」:天梯階級(新秀→神準手)早就為公開榜算好,卻從沒鏡回給本人 ——
+// 用戶看不到「我現在是誰、在哪一階、下一步差什麼」。 這支把同一把尺算給本人,讓 /member
+// 從「打開工具」變「走進我的操盤室」。 keyed on 校準命中率(非 PnL/連勝/粉絲)· 會升會降(可收回)。
+// 🔴 門檻 / 名稱必須與 lib/ladder-server tierOf + app/ladder TIERS 同步(50/55/60% × ≥30 場)。
+//   神諭(第 5 階)= 全站第一(需跨用戶 rank · 本人面算不出)→ careerTier 最高到 神準手(4)。
+const CAREER_MIN_GRADED = 10; // 同 ladder-server LADDER_MIN_GRADED · 上榜(新秀)門檻
+
+export type CareerTier = {
+  /** 0 = 還沒上榜(<10 場)· 1 新秀 · 2 分析師 · 3 操盤手 · 4 神準手 */
+  tier: number;
+  /** 階級名(tier 0 = "") */
+  label: string;
+  /** 下一步白話(頂階 → 指向天梯神諭 · 未上榜 → 押滿 10 場) */
+  nextHint: string;
+};
+
+/** 從本人含輸命中率 + 已結算場數推導生涯階級。 純函式 · deterministic · 同天梯口徑。 */
+export function careerTier(accuracy: number | null, decided: number): CareerTier {
+  if (accuracy === null || decided < CAREER_MIN_GRADED) {
+    const toGo = Math.max(1, CAREER_MIN_GRADED - decided);
+    return {
+      tier: 0,
+      label: "",
+      nextHint:
+        decided === 0
+          ? `押滿 ${CAREER_MIN_GRADED} 場已分勝負的賽事,就拿到你的第一個階級「新秀」`
+          : `再 ${toGo} 場已分勝負,就上榜當「新秀」`,
+    };
+  }
+  if (accuracy >= 60 && decided >= RECKONING_STAR_MIN) {
+    return {
+      tier: 4,
+      label: "神準手",
+      nextHint: "頂階了 · 接下來把機器拉下王座 = 神諭(全站第一 · 看天梯)",
+    };
+  }
+  if (accuracy >= 55) {
+    return {
+      tier: 3,
+      label: "操盤手",
+      nextHint:
+        decided < RECKONING_STAR_MIN
+          ? `守住 60% × 還差 ${RECKONING_STAR_MIN - decided} 場 → 神準手`
+          : "命中率守上 60% → 神準手",
+    };
+  }
+  if (accuracy >= 50) {
+    return { tier: 2, label: "分析師", nextHint: "命中率守上 55% → 操盤手" };
+  }
+  return { tier: 1, label: "新秀", nextHint: "命中率過半(50%)→ 分析師" };
+}
