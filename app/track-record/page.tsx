@@ -233,24 +233,29 @@ export default function TrackRecordPage() {
           >
             / 公開戰績 · 棒球 · 足球 · 網球{showBadminton ? " · 羽球" : ""} · 同一套誠實
           </p>
-          <h1 className="text-4xl sm:text-5xl text-bone font-light tracking-tight max-w-3xl">
-            每一場引擎的公開預測 · 賽後實際結果在這
+          <h1 className="text-4xl sm:text-5xl text-bone font-light tracking-tight max-w-3xl leading-tight">
+            敢把每一場猜輸的都留著的機器 —— 你贏得了它嗎?
           </h1>
 
-          {/* 含輸命中率 = hero 主角 · 分母攤出來(報馬仔做不到的事)· 不解釋 */}
+          {/* 🔴 反框架(Tim canary「52% 看了滅火」):金色錨點給「六成出頭」那道天花板,不給 52% ——
+              同一個誠實數字,從「接近硬幣」重讀成「接近人類極限」。 52% / 143 / 301 全字級照在,
+              一個不縮、不刪(Pratfall:敢公開分母,才是報馬仔抄不走的勳章)。 */}
           {decided > 0 ? (
-            <p className="mt-7 text-bone text-xl sm:text-2xl font-light leading-snug max-w-2xl">
-              引擎方向命中{" "}
-              <span className="font-mono text-gold tabular text-3xl sm:text-4xl">
-                {provedPct}%
-              </span>
-              <span className="text-mute text-base sm:text-lg">
-                {" "}—— <span className="font-mono tabular">{decided}</span> 場分出勝負 ·
-                連同沒中的{" "}
-                <span className="font-mono text-loss/85 tabular">{diverged}</span>{" "}
-                場一起算。
-              </span>
-            </p>
+            <>
+              <p className="mt-7 text-bone text-lg sm:text-xl font-light leading-relaxed max-w-2xl">
+                全世界最強的運動模型,長期也才{" "}
+                <span className="text-gold font-light text-2xl sm:text-3xl">六成出頭</span>。{" "}
+                它這 <span className="font-mono tabular">{decided}</span> 場方向命中{" "}
+                <span className="font-mono tabular text-bone">{provedPct}%</span> —— 已經貼近那道天花板;
+                連沒中的{" "}
+                <span className="font-mono tabular text-loss/85">{diverged}</span>{" "}
+                場也一場不刪、跟命中的一起算。
+              </p>
+              <p className="mt-4 text-mute text-sm sm:text-base leading-relaxed max-w-2xl">
+                報明牌的喊得出九成,是因為輸的他刪了。 我們給你看的是
+                <span className="text-bone">分母</span> —— 連輸一起公布的準度,才是真的準度。
+              </p>
+            </>
           ) : (
             <p className="mt-7 text-mute leading-relaxed max-w-2xl">
               帳本等第一筆 PROVED ✓ 或 DIVERGED ✕ · 不補登舊比賽 · 從引擎第一場公開預測的比賽開始記。
@@ -264,6 +269,14 @@ export default function TrackRecordPage() {
               這是方向命中率,不是機率校準 · 滿 30 場才算數。
             </p>
           )}
+
+          {/* 主行動:把訪客從「評審」變「挑戰者」(把人拉進來玩 · 賽前鎖、賽後同一把尺對帳)。 */}
+          <Link
+            href="/matches"
+            className="mt-7 inline-flex items-center gap-2 font-mono text-gold/90 hover:text-gold text-[12px] sm:text-[13px] tracking-[0.18em] border border-gold/40 hover:border-gold/70 hover:bg-gold/10 px-5 py-2.5 transition-colors"
+          >
+            挑一場 · 賽前記下你的看法 · 賽後跟它同尺對帳 →
+          </Link>
 
           <p className="mt-6 font-mono text-mute/85 text-[11px] tracking-[0.25em] leading-relaxed">
             想看引擎準度的完整校準(各聯盟分開)?{" "}
