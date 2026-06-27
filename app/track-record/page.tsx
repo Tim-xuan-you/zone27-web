@@ -121,6 +121,13 @@ export default function TrackRecordPage() {
             · 另 {push} 場 PUSH(平局或 50/50 無 favorite · 不計入命中率分母)
           </p>
         )}
+        {/* N<30 老實標 · 跟著它要標的「命中率」走(R279 從 hero 搬下來,跟數字同一處才不孤兒)。 */}
+        {decided > 0 && eitherLeagueSmall && (
+          <p className="mt-3 font-mono text-loss/80 text-[11px] tracking-[0.2em] leading-relaxed">
+            ⚠ 樣本還小 · 各聯盟單獨都還沒滿 30 場(CPBL {cpblDecided} · MLB {mlbDecided})·
+            這是方向命中率,不是機率校準 · 滿 30 場才算數。
+          </p>
+        )}
       </section>
 
       {/* 引擎最自信的兩場 · 一中一沒中 */}
@@ -228,66 +235,32 @@ export default function TrackRecordPage() {
       <main id="main">
         {/* ── HERO · 先給數字(含分母)· 不寫字解釋「我們多誠實」──────── */}
         <section className="mx-auto max-w-5xl w-full px-6 sm:px-10 pt-20 pb-10">
-          <p
-            className="font-mono text-gold text-[10px] tracking-[0.45em] mb-4"
-          >
-            / 公開戰績 · 棒球 · 足球 · 網球{showBadminton ? " · 羽球" : ""} · 同一套誠實
+          {/* 🔴 R279 Tim canary 第二刀「52% 一定要出現?超亂超雜 · 要連國小生都想玩」→ 極簡:
+              hero 只剩「一個好懂的挑戰 + 一句誠實鉤 + 一個按鈕」。 52%/143/命中率全搬到下方
+              3-cell 帳本(本就在,誠實零損失)· 數字不在 hero 大吼。 國小生一眼懂、想點。 */}
+          <p className="font-mono text-gold text-[10px] tracking-[0.45em] mb-5">
+            / 公開戰績
           </p>
-          <h1 className="text-4xl sm:text-5xl text-bone font-light tracking-tight max-w-3xl leading-tight">
-            敢把每一場猜輸的都留著的機器 —— 你贏得了它嗎?
+          <h1 className="text-4xl sm:text-6xl text-bone font-light tracking-tight max-w-3xl leading-tight">
+            你,贏得了這台機器嗎?
           </h1>
-
-          {/* 🔴 反框架(Tim canary「52% 看了滅火」):金色錨點給「六成出頭」那道天花板,不給 52% ——
-              同一個誠實數字,從「接近硬幣」重讀成「接近人類極限」。 52% / 143 / 301 全字級照在,
-              一個不縮、不刪(Pratfall:敢公開分母,才是報馬仔抄不走的勳章)。 */}
-          {decided > 0 ? (
-            <>
-              <p className="mt-7 text-bone text-lg sm:text-xl font-light leading-relaxed max-w-2xl">
-                全世界最強的運動模型,長期也才{" "}
-                <span className="text-gold font-light text-2xl sm:text-3xl">六成出頭</span>。{" "}
-                它這 <span className="font-mono tabular">{decided}</span> 場方向命中{" "}
-                <span className="font-mono tabular text-bone">{provedPct}%</span> —— 已經貼近那道天花板;
-                連沒中的{" "}
-                <span className="font-mono tabular text-loss/85">{diverged}</span>{" "}
-                場也一場不刪、跟命中的一起算。
-              </p>
-              <p className="mt-4 text-mute text-sm sm:text-base leading-relaxed max-w-2xl">
-                報明牌的喊得出九成,是因為輸的他刪了。 我們給你看的是
-                <span className="text-bone">分母</span> —— 連輸一起公布的準度,才是真的準度。
-              </p>
-            </>
-          ) : (
-            <p className="mt-7 text-mute leading-relaxed max-w-2xl">
-              帳本等第一筆 PROVED ✓ 或 DIVERGED ✕ · 不補登舊比賽 · 從引擎第一場公開預測的比賽開始記。
-            </p>
-          )}
-
-          {/* N<30 老實標 · 任一聯盟單獨還沒滿 30 就掛(合計過30也不假裝樣本夠) */}
-          {decided > 0 && eitherLeagueSmall && (
-            <p className="mt-3 font-mono text-loss/80 text-[11px] tracking-[0.2em] leading-relaxed">
-              ⚠ 樣本還小 · 各聯盟單獨都還沒滿 30 場(CPBL {cpblDecided} · MLB {mlbDecided})·
-              這是方向命中率,不是機率校準 · 滿 30 場才算數。
-            </p>
-          )}
-
-          {/* 主行動:把訪客從「評審」變「挑戰者」(把人拉進來玩 · 賽前鎖、賽後同一把尺對帳)。 */}
-          <Link
-            href="/matches"
-            className="mt-7 inline-flex items-center gap-2 font-mono text-gold/90 hover:text-gold text-[12px] sm:text-[13px] tracking-[0.18em] border border-gold/40 hover:border-gold/70 hover:bg-gold/10 px-5 py-2.5 transition-colors"
-          >
-            挑一場 · 賽前記下你的看法 · 賽後跟它同尺對帳 →
-          </Link>
-
-          <p className="mt-6 font-mono text-mute/85 text-[11px] tracking-[0.25em] leading-relaxed">
-            想看引擎準度的完整校準(各聯盟分開)?{" "}
+          <p className="mt-6 text-mute text-base sm:text-lg leading-relaxed max-w-xl">
+            它把每一場沒中的都留著給你看 —— <span className="text-bone">報明牌的不敢</span>。
+          </p>
+          <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">
+            <Link
+              href="/matches"
+              className="inline-flex items-center gap-2 font-mono text-gold/90 hover:text-gold text-[13px] tracking-[0.18em] border border-gold/40 hover:border-gold/70 hover:bg-gold/10 px-5 py-2.5 transition-colors"
+            >
+              挑一場 · 賽後跟它對帳 →
+            </Link>
             <Link
               href="/calibration"
-              className="text-gold underline-offset-4 hover:underline transition-colors"
+              className="font-mono text-mute/85 hover:text-gold text-[11px] tracking-[0.2em] underline-offset-4 hover:underline transition-colors"
             >
-              /calibration →
+              它到底多準? →
             </Link>
-            {" "}(匿名可進)
-          </p>
+          </div>
         </section>
 
         <div className="mx-auto max-w-5xl w-full px-6 sm:px-10">
