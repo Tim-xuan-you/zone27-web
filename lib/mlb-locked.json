@@ -9407,8 +9407,12 @@
       },
       "engineWinHomePct": 59,
       "lockedAt": "2026-06-25T20:09:57.168Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 3,
+        "away": 9
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-06-27T08:44:01.867Z"
     },
     {
       "gamePk": 823285,
@@ -9436,8 +9440,12 @@
       },
       "engineWinHomePct": 61,
       "lockedAt": "2026-06-25T04:06:28.928Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 7,
+        "away": 1
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-06-27T08:44:01.867Z"
     },
     {
       "gamePk": 824745,
@@ -9585,6 +9593,35 @@
       "verdict": null
     },
     {
+      "gamePk": 823609,
+      "gameDate": "2026-06-27T20:10:00Z",
+      "scheduleDate": "2026-06-27",
+      "homeId": 121,
+      "homeEn": "New York Mets",
+      "homeRecord": "34-48",
+      "awayId": 143,
+      "awayEn": "Philadelphia Phillies",
+      "awayRecord": "46-36",
+      "homePitcher": "Christian Scott",
+      "awayPitcher": "Alan Rangel",
+      "homeStats": {
+        "era": "3.10",
+        "k9": "10.40",
+        "bb9": "4.20",
+        "hr9": "0.89"
+      },
+      "awayStats": {
+        "era": "2.25",
+        "k9": "10.13",
+        "bb9": "0.00",
+        "hr9": "1.13"
+      },
+      "engineWinHomePct": 53,
+      "lockedAt": "2026-06-27T08:44:00.410Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
       "gamePk": 822960,
       "gameDate": "2026-06-27T22:10:00Z",
       "scheduleDate": "2026-06-27",
@@ -9726,6 +9763,35 @@
       },
       "engineWinHomePct": 72,
       "lockedAt": "2026-06-27T03:59:36.668Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 823038,
+      "gameDate": "2026-06-27T23:15:00Z",
+      "scheduleDate": "2026-06-27",
+      "homeId": 138,
+      "homeEn": "St. Louis Cardinals",
+      "homeRecord": "42-37",
+      "awayId": 146,
+      "awayEn": "Miami Marlins",
+      "awayRecord": "43-39",
+      "homePitcher": "Andre Pallante",
+      "awayPitcher": "Ryan Gusto",
+      "homeStats": {
+        "era": "3.59",
+        "k9": "6.97",
+        "bb9": "2.72",
+        "hr9": "0.98"
+      },
+      "awayStats": {
+        "era": "6.00",
+        "k9": "8.00",
+        "bb9": "3.50",
+        "hr9": "1.00"
+      },
+      "engineWinHomePct": 62,
+      "lockedAt": "2026-06-27T08:44:00.410Z",
       "finalScore": null,
       "verdict": null
     },
