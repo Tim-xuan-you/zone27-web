@@ -35,6 +35,9 @@ type Props = {
   startISO?: string | null;
   /** 引擎開盤的主隊勝率 % · 給「引擎 vs 群眾共識線」對照(Polymarket 招牌)· 缺則不顯示對照 */
   engineHomePct?: number;
+  /** 登入餌的回跳目標 · 缺則回該場 /matches/{id}(看板/卡片原行為不變)· 今日一戰傳 "/today" →
+   *  從對決框架點登入的人,登入後回到 /today(帶連續紀錄)而非孤立單場頁。 同 SoccerBetStrip returnTo。 */
+  returnTo?: string;
 };
 
 type Status = "loading" | "logged-out" | "open" | "locked" | "closed";
@@ -45,6 +48,7 @@ export default function CardBetStrip({
   awayName,
   startISO,
   engineHomePct,
+  returnTo,
 }: Props) {
   const [status, setStatus] = useState<Status>("loading");
   const [myPick, setMyPick] = useState<"home" | "away" | null>(null);
@@ -220,7 +224,7 @@ export default function CardBetStrip({
             看開盤免費 · 押一手要登入(免費)· 賽後對帳進你的公開戰績
           </p>
           <Link
-            href={`/login?next=${encodeURIComponent(`/matches/${matchId}`)}`}
+            href={`/login?next=${encodeURIComponent(returnTo ?? `/matches/${matchId}`)}`}
             className="block text-center px-3 py-2.5 min-h-[40px] border border-gold/40 text-gold hover:bg-gold/10 hover:border-gold font-mono text-[10px] tracking-[0.15em] transition-colors"
           >
             免費加入 → 押這場

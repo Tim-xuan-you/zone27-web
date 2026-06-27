@@ -139,6 +139,7 @@ export default async function TodayPage() {
                 awayName={duel.away.name}
                 startISO={getMatchStartIso(duel)}
                 engineHomePct={duel.home.winRate}
+                returnTo="/today"
               />
             </div>
 

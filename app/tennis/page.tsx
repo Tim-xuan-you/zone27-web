@@ -173,27 +173,40 @@ export default function TennisPage() {
           <div className="mt-6 w-full h-px bg-line/60" />
         </section>
 
-        {/* ── 真實賽程看板(依賽事分組)── */}
+        {/* ── 真實賽程看板(依賽事分組)· 無賽前可押場 → graceful 空狀態(同 /badminton /soccer ·
+            別留空白破洞 · 進行中/已完場仍在下方)── */}
         <section className="mx-auto max-w-6xl w-full px-6 sm:px-10 pb-8">
-          <div className="space-y-10">
-            {openGroups.map((g) => (
-              <div key={`${g.tour}|${g.tournament}`}>
-                <div className="flex items-baseline gap-3 mb-4 flex-wrap">
-                  <p className="font-mono text-gold/70 text-[10px] tracking-[0.4em]">
-                    {g.tournament}
-                  </p>
-                  <span className="font-mono text-mute/50 text-[9px] tracking-[0.2em]">
-                    {g.tour.toUpperCase()} · {SURFACE_LABEL[g.surface] ?? g.surface} · {g.matches.length} 場
-                  </span>
+          {openGroups.length > 0 ? (
+            <div className="space-y-10">
+              {openGroups.map((g) => (
+                <div key={`${g.tour}|${g.tournament}`}>
+                  <div className="flex items-baseline gap-3 mb-4 flex-wrap">
+                    <p className="font-mono text-gold/70 text-[10px] tracking-[0.4em]">
+                      {g.tournament}
+                    </p>
+                    <span className="font-mono text-mute/50 text-[9px] tracking-[0.2em]">
+                      {g.tour.toUpperCase()} · {SURFACE_LABEL[g.surface] ?? g.surface} · {g.matches.length} 場
+                    </span>
+                  </div>
+                  <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+                    {g.matches.map((m) => (
+                      <TennisDrawCard key={m.id} match={m} />
+                    ))}
+                  </div>
                 </div>
-                <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-                  {g.matches.map((m) => (
-                    <TennisDrawCard key={m.id} match={m} />
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          ) : (
+            <p className="text-mute text-sm leading-relaxed max-w-2xl">
+              目前沒有可賽前鎖定的場 —— 進行中的在下方,打完的賽果與引擎對帳收進帳本。 下一輪運彩開賣再上架。{" "}
+              <Link
+                href="/track-record#tennis"
+                className="text-gold/80 hover:text-gold underline-offset-4 hover:underline transition-colors"
+              >
+                看網球逐場對帳 →
+              </Link>
+            </p>
+          )}
         </section>
 
         {/* ── 進行中 · 賽事進行中(賽前已封盤 · 卡留著當直播參考 · 別在最投入時抽掉舞台)── */}
