@@ -2247,6 +2247,34 @@
       "outcome": null,
       "verdict": null,
       "gradedAt": null
+    },
+    {
+      "matchId": "fd-537415",
+      "competitionCode": "WC",
+      "competitionName": "世界盃",
+      "kickoffISO": "2026-06-29T20:30:00Z",
+      "status": "TIMED",
+      "homeSeed": "Germany",
+      "awaySeed": "?",
+      "home": "德國",
+      "away": "?",
+      "ratingHome": 1786,
+      "ratingAway": 1700,
+      "homeAdvantage": 0,
+      "xgHome": 1.4935,
+      "xgAway": 1.1065,
+      "homeWin": 0.45122720172356706,
+      "draw": 0.27771044004537526,
+      "awayWin": 0.2710623582310573,
+      "homeWinPct": 45,
+      "drawPct": 28,
+      "awayWinPct": 27,
+      "enginePick": "home",
+      "lockedAt": "2026-06-27T22:00:36.877Z",
+      "finalScore": null,
+      "outcome": null,
+      "verdict": null,
+      "gradedAt": null
     }
   ]
 }
