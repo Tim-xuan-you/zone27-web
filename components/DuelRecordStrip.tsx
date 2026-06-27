@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { createSupabaseBrowserClient } from "@/lib/supabase/browser";
 import { getMyPredictionsClient } from "@/lib/predictions-market";
 import { aggregatePredictionStats, aggregateStreak } from "@/lib/predictions";
@@ -27,11 +28,15 @@ type MatchResult = {
 export default function DuelRecordStrip({
   matchResults,
   todayTaipei,
+  hero = false,
 }: {
   /** 已結算賽事勝方(靜態 · server 傳入)· 前端評分本人押注 · 同 YourRecordStrip */
   matchResults: MatchResult[];
   /** 台北「今天」YYYY-MM-DD(server 算 · 避免 client 時區漂移)· 連續天數的錨 */
   todayTaipei: string;
+  /** hero=true · 沒有今日對決時把這張成績單變主角(全站最特別的東西:刪不掉、含輸、贏過機器)·
+   *  把「沒戰場」的死路翻成「曬戰績」的時刻 + 可外傳。 預設 false = 維持原本低調紀錄條。 */
+  hero?: boolean;
 }) {
   const [data, setData] = useState<{
     proved: number;
@@ -74,6 +79,43 @@ export default function DuelRecordStrip({
   if (!ready || !data || data.total === 0) return null;
 
   const decided = data.proved + data.diverged;
+
+  // ── hero 變體:沒今日對決時的主角 —— 把「19 勝 9 敗 · 一場沒躲」做大、做驕傲、可外傳。
+  //    全站最特別的東西(刪不掉、含輸照掛、贏過機器),別再用 11 級灰字塞在空盒底下。 ──
+  if (hero) {
+    return (
+      <div className="mt-8 border border-gold/45 bg-gold/[0.05] p-5 sm:p-6">
+        <p className="font-mono text-gold/70 text-[10px] tracking-[0.35em] mb-2">
+          今天沒有新戰場 —— 但這張成績單刪不掉
+        </p>
+        {decided > 0 ? (
+          <>
+            <p className="text-bone text-2xl sm:text-3xl font-light leading-tight">
+              你 vs 機器 ·{" "}
+              <span className="text-gold tabular">
+                {data.proved} 勝 {data.diverged} 敗
+              </span>
+            </p>
+            <p className="mt-2 font-mono text-mute/85 text-[12px] tracking-[0.1em] leading-relaxed">
+              {decided} 場含輸對帳 · 一場沒躲
+              {data.streak >= 1 && ` · 連續回來 ${data.streak} 天`} ·
+              全台灣沒有一個老師敢給你看自己輸的單。
+            </p>
+          </>
+        ) : (
+          <p className="text-bone text-xl sm:text-2xl font-light leading-snug">
+            你押了 <span className="text-gold tabular">{data.total}</span> 場 · 等賽後揭曉誰準
+          </p>
+        )}
+        <Link
+          href="/member"
+          className="mt-4 inline-block font-mono text-gold/80 hover:text-gold text-[10px] tracking-[0.25em] underline-offset-4 hover:underline transition-colors"
+        >
+          這張刪不掉的成績單 · 拿去給人看 →
+        </Link>
+      </div>
+    );
+  }
 
   return (
     <div className="mt-6 border-l-2 border-gold/60 pl-4 py-1">

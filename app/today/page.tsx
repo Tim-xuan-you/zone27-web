@@ -162,8 +162,16 @@ export default async function TodayPage() {
           </>
         ) : (
           <>
-            {/* ── 今天沒有可對決的場(休賽 / 都開打了)· 仍把連續紀錄攤給回訪者 ── */}
-            <div className="border border-line/60 bg-slate/30 p-5">
+            {/* ── 今天沒有可對決的場 → 把「你的成績單」變主角(全站最特別 · 刪不掉 · 可外傳)·
+                登入且押過才現(graceful 自隱)· 把死路翻成曬戰績的時刻。 ── */}
+            <DuelRecordStrip
+              matchResults={matchResults}
+              todayTaipei={todayTaipei}
+              hero
+            />
+
+            {/* 沒對決的說明降為次要(成績單之下)· 沒登入/沒戰績的人這張就是頁面主體 */}
+            <div className="mt-6 border border-line/60 bg-slate/30 p-5">
               <p className="text-bone text-base sm:text-lg font-light leading-snug mb-2">
                 今天沒有可對決的場。
               </p>
@@ -186,8 +194,6 @@ export default async function TodayPage() {
                 </Link>
               </div>
             </div>
-
-            <DuelRecordStrip matchResults={matchResults} todayTaipei={todayTaipei} />
           </>
         )}
       </main>
