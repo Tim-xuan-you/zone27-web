@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-06-27T14:17:15.523Z",
+  "generatedAt": "2026-06-27T16:46:38.462Z",
   "source": "site.api.espn.com tennis scoreboard (atp+wta singles · official · public · 0 auth)",
-  "count": 963,
+  "count": 964,
   "games": [
     {
       "tour": "atp",
@@ -9611,6 +9611,16 @@
       "winnerName": "Madison Keys",
       "loserName": "Tatjana Maria",
       "score": "7-5 6-4",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Vanda Pharmaceuticals Mallorca Championships",
+      "grouping": "Men's Singles",
+      "date": "2026-06-27",
+      "winnerName": "Alejandro Davidovich Fokina",
+      "loserName": "Ethan Quinn",
+      "score": "7-6 6-3",
       "retired": false
     },
     {
