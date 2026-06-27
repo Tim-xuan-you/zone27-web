@@ -2219,6 +2219,34 @@
       "outcome": null,
       "verdict": null,
       "gradedAt": null
+    },
+    {
+      "matchId": "fd-537423",
+      "competitionCode": "WC",
+      "competitionName": "世界盃",
+      "kickoffISO": "2026-06-29T17:00:00Z",
+      "status": "TIMED",
+      "homeSeed": "Brazil",
+      "awaySeed": "Japan",
+      "home": "巴西",
+      "away": "日本",
+      "ratingHome": 1790,
+      "ratingAway": 1722,
+      "homeAdvantage": 0,
+      "xgHome": 1.453,
+      "xgAway": 1.147,
+      "homeWin": 0.43136901930910054,
+      "draw": 0.28005848224944957,
+      "awayWin": 0.2885724984414501,
+      "homeWinPct": 43,
+      "drawPct": 28,
+      "awayWinPct": 29,
+      "enginePick": "home",
+      "lockedAt": "2026-06-27T19:16:50.184Z",
+      "finalScore": null,
+      "outcome": null,
+      "verdict": null,
+      "gradedAt": null
     }
   ]
 }
