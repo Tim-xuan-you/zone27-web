@@ -20,6 +20,7 @@ import {
   type Match,
 } from "@/lib/matches";
 import { getMlbAsMatches, getMlbFinalizedResults } from "@/lib/mlb-matches";
+import { selectTodayDuel } from "@/lib/daily-duel";
 import { getMatchHeat, heatDisplayFor } from "@/lib/match-heat";
 import { getPulseSummary } from "@/lib/pulse";
 import { getLadderBoard } from "@/lib/ladder-server";
@@ -65,6 +66,10 @@ export default async function Home() {
     Math.max(b.home.winRate, b.away.winRate) -
     Math.max(a.home.winRate, a.away.winRate);
   const allUpcoming = [...cpblUpcoming, ...mlbUpcoming].sort(byConviction);
+
+  // ── 今日一戰(R281)· Polymarket「先給產品本身」· 首頁主鈕直接落到今天那場「你 vs 機器」──
+  // 有可賽前鎖死的對決 → 主鈕導 /today(留存儀式當前門動作);沒有(休賽/都開打)→ 退回原路由。
+  const duel = selectTodayDuel([...cpblUpcoming, ...mlbAll]);
   const HOMEPAGE_CAP = 3;
   const cpblAnchor = [...cpblUpcoming].sort(byConviction)[0];
   const featured: Match[] = [];
@@ -215,14 +220,24 @@ export default async function Home() {
               (全站最強 0-登入 aha)。 一屏一焦點(主清楚是金鈕)。 */}
           <div className="mt-7 flex items-center justify-center gap-3 flex-wrap">
             <Link
-              href={wcActive ? "/soccer" : allUpcoming.length > 0 ? "/matches" : "/track-record"}
+              href={
+                duel
+                  ? "/today"
+                  : wcActive
+                    ? "/soccer"
+                    : allUpcoming.length > 0
+                      ? "/matches"
+                      : "/track-record"
+              }
               className="inline-flex items-center gap-2 bg-gold text-navy font-mono text-xs sm:text-sm tracking-[0.25em] px-6 py-3 hover:bg-gold-soft transition-colors"
             >
-              {wcActive
-                ? "看世界盃 · 引擎開盤 →"
-                : allUpcoming.length > 0
-                  ? "看今晚誰會贏 →"
-                  : "看引擎最近戰績 →"}
+              {duel
+                ? "今晚就上場 · 你 vs 機器 →"
+                : wcActive
+                  ? "看世界盃 · 引擎開盤 →"
+                  : allUpcoming.length > 0
+                    ? "看今晚誰會贏 →"
+                    : "看引擎最近戰績 →"}
             </Link>
             <Link
               href="/calibration/test"
