@@ -50,15 +50,39 @@ export type BasketballGame = {
   finalResult?: BasketballFinalResult;
 };
 
-// ⬇️ 真實賽程(從台灣運彩 curate)· v0.1 WNBA。 ⏳ Tim 截圖運彩籃球場次 → 補齊整批 + 標準得失分。
+// ⬇️ 真實賽程(從台灣運彩 curate · 2026-06-29 WNBA 4 場 · 運彩截圖:上=客、下=主)。
 export const BASKETBALL_GAMES: BasketballGame[] = [
+  {
+    id: "bk-303",
+    league: "WNBA",
+    tournament: "WNBA",
+    time: "6/29 02:00",
+    away: { zh: "明尼蘇達山貓", en: "Minnesota Lynx", key: "minnesota-lynx" },
+    home: { zh: "達拉斯飛翼", en: "Dallas Wings", key: "dallas-wings" },
+  },
+  {
+    id: "bk-305",
+    league: "WNBA",
+    tournament: "WNBA",
+    time: "6/29 03:00",
+    away: { zh: "波特蘭火焰", en: "Portland Fire", key: "portland-fire" },
+    home: { zh: "華盛頓神秘", en: "Washington Mystics", key: "washington-mystics" },
+  },
+  {
+    id: "bk-306",
+    league: "WNBA",
+    tournament: "WNBA",
+    time: "6/29 04:00",
+    away: { zh: "拉斯維加斯王牌", en: "Las Vegas Aces", key: "las-vegas-aces" },
+    home: { zh: "芝加哥天空", en: "Chicago Sky", key: "chicago-sky" },
+  },
   {
     id: "bk-307",
     league: "WNBA",
     tournament: "WNBA",
     time: "6/29 07:00",
-    home: { zh: "金州瓦爾基里", en: "Golden State Valkyries", key: "golden-state-valkyries" },
     away: { zh: "紐約自由", en: "New York Liberty", key: "new-york-liberty" },
+    home: { zh: "金州瓦爾基里", en: "Golden State Valkyries", key: "golden-state-valkyries" },
   },
 ];
 

@@ -5,9 +5,9 @@
 // 🔴 認不出 / 查不到數據的隊伍 → 不放進來(netRatingOf 回 null = 引擎不硬開、誠實「算不出」)·
 //   同羽球「查不到排名不開盤」。 寧缺勿錯:寧可少開幾場,不亂猜一隊強弱去灌假盤。
 //
-// ⚠️ WNBA 2026 種子(2026 賽季首月真實戰績 + 攻防效率排名換算 · ESPN/官方公開數據)· Tim 之後
-//   截圖標準得失分 → 升級成乾淨的「每場得分−失分」淨值(同 CPBL 投手真值覆蓋估計)。
-//   現只放有公開數據可依的隊;其餘 WNBA 隊 + NBA(休季)等 Tim 餵真實得失分再開。
+// ⚠️ WNBA 2026 種子 = 從**真實賽季戰績(勝率)**換算的淨得分估計(Wikipedia 2026 賽季標準戰績 ·
+//   net ≈ (勝率 − .5) × 36)· 這是「戰績代理」非實際每場得失分 —— Tim 之後截圖標準得失分 → 升級成
+//   乾淨的「每場得分−失分」真值(同 CPBL 投手真值覆蓋估計)。 認不出 / 沒戰績的隊不放 → 引擎不開。
 // ─────────────────────────────────────────────────────
 
 export type BasketballTeamRating = {
@@ -15,17 +15,19 @@ export type BasketballTeamRating = {
   net: number;
 };
 
-// key = 英文隊名 slug(穩定 · 不隨顯示名變)。 net = 2026 賽季首月戰績/效率換算估計。
+// key = 英文隊名 slug(穩定 · 不隨顯示名變)。 net = 2026 賽季戰績(勝率)換算估計 · 隨賽果更新。
 export const TEAM_RATINGS: Record<string, BasketballTeamRating> = {
-  "minnesota-lynx": { net: 7 }, // 7-2 · 聯盟第一防守(失分 79.1)
-  "atlanta-dream": { net: 6 }, // 6-2 · 防守效率第二(100.0 · 失分 79.7)
-  "las-vegas-aces": { net: 4 }, // 6-3 · 客場 6-1
-  "golden-state-valkyries": { net: 3 }, // 6-3 · 防守效率 102.0 · 失分 79.3(第二少)
-  "new-york-liberty": { net: 2 }, // 6-5 · 攻第5/守第6
-  "portland-fire": { net: 1 }, // 6-5
-  "toronto-tempo": { net: 0 }, // 5-4 · 進攻效率 110.2(第四)
-  "indiana-fever": { net: -1 }, // 4-5 · 進攻最強(91.8)但防守倒數第二(89.0)
-  "connecticut-sun": { net: -10 }, // 聯盟最差淨效率(約 −16 · 保守取 −10)
+  "minnesota-lynx": { net: 9 }, // 14-4 .778 · 聯盟最強
+  "las-vegas-aces": { net: 8 }, // 13-5 .722
+  "new-york-liberty": { net: 5 }, // 12-7 .632
+  "golden-state-valkyries": { net: 5 }, // 12-7 .632 · 防守強
+  "atlanta-dream": { net: 5 }, // 12-7 .632
+  "dallas-wings": { net: 4 }, // 11-7 .611
+  "indiana-fever": { net: 3 }, // 11-8 .579
+  "washington-mystics": { net: -1 }, // 8-9 .471
+  "portland-fire": { net: -3 }, // 8-11 .421
+  "chicago-sky": { net: -6 }, // 6-12 .333
+  "connecticut-sun": { net: -10 }, // 4-15 .211 · 聯盟最弱
 };
 
 /** 隊伍淨得分(估計)· 查不到 → null = 引擎不開盤(誠實「算不出」)。 */
