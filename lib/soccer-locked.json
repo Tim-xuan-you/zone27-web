@@ -2321,6 +2321,34 @@
       "outcome": null,
       "verdict": null,
       "gradedAt": null
+    },
+    {
+      "matchId": "fd-537424",
+      "competitionCode": "WC",
+      "competitionName": "世界盃",
+      "kickoffISO": "2026-06-30T17:00:00Z",
+      "status": "TIMED",
+      "homeSeed": "Ivory Coast",
+      "awaySeed": "Norway",
+      "home": "象牙海岸",
+      "away": "挪威",
+      "ratingHome": 1688,
+      "ratingAway": 1735,
+      "homeAdvantage": 0,
+      "xgHome": 1.19425,
+      "xgAway": 1.40575,
+      "homeWin": 0.30949126735041727,
+      "draw": 0.2821141818714063,
+      "awayWin": 0.4083945507781768,
+      "homeWinPct": 31,
+      "drawPct": 28,
+      "awayWinPct": 41,
+      "enginePick": "away",
+      "lockedAt": "2026-06-28T19:15:43.540Z",
+      "finalScore": null,
+      "outcome": null,
+      "verdict": null,
+      "gradedAt": null
     }
   ]
 }
