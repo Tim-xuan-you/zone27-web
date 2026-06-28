@@ -141,6 +141,7 @@ export default async function TodayPage() {
                 startISO={getMatchStartIso(duel)}
                 engineHomePct={duel.home.winRate}
                 returnTo="/today"
+                challenge
               />
             </div>
 

@@ -16,6 +16,7 @@ import { matchHasStarted } from "@/lib/matches";
 import MarketSplitBar from "@/components/MarketSplitBar";
 import ConfidencePicker from "@/components/ConfidencePicker";
 import RationalePicker from "@/components/RationalePicker";
+import ChallengeShareInline from "@/components/ChallengeShareInline";
 
 // ── ZONE 27 · Card Bet Strip ─────────────────────────────
 // 首頁 / 賽事列表市場卡上的一鍵押 + 群眾市場線。
@@ -38,6 +39,12 @@ type Props = {
   /** 登入餌的回跳目標 · 缺則回該場 /matches/{id}(看板/卡片原行為不變)· 今日一戰傳 "/today" →
    *  從對決框架點登入的人,登入後回到 /today(帶連續紀錄)而非孤立單場頁。 同 SoccerBetStrip returnTo。 */
   returnTo?: string;
+  /** 押成功後回呼(server 確認後 · 帶鎖的那一手)· 給「戰帖對決」receiver 鎖手後揭盅對方那手用 ·
+   *  預設無 = 行為完全不變(所有既有用法零影響)。 */
+  onLock?: (pick: "home" | "away") => void;
+  /** 顯示「下戰帖給朋友」inline 分享(只今日一戰傳 true)· 把剛鎖的這手變一張可外傳戰帖 ·
+   *  預設無 = 不顯示(其餘用法零影響)。 */
+  challenge?: boolean;
 };
 
 type Status = "loading" | "logged-out" | "open" | "locked" | "closed";
@@ -49,6 +56,8 @@ export default function CardBetStrip({
   startISO,
   engineHomePct,
   returnTo,
+  onLock,
+  challenge,
 }: Props) {
   const [status, setStatus] = useState<Status>("loading");
   const [myPick, setMyPick] = useState<"home" | "away" | null>(null);
@@ -113,6 +122,7 @@ export default function CardBetStrip({
       setMyPick(res.pick);
       setPending(false); // server 確認 → 才亮「不可改」+ 帳本連結 + 發光
       setJustPicked(true); // 剛押完 → 追問「幾成把握」(校準大師)
+      onLock?.(res.pick); // 戰帖對決:鎖手確認後揭盅對方那手(預設無 onLock = 行為不變)
       const t = await getMatchTally(matchId);
       setTally(t);
     } else if (res.reason === "already_predicted") {
@@ -290,8 +300,11 @@ export default function CardBetStrip({
           {/* 帳本連結 + 賽前可外傳收據(R220)等 server 確認後才出(未存前進去看不到這手)。 */}
           {!pending && (
             <div className="flex flex-col items-center gap-1.5">
-              {/* 押下那一刻 = 最想曬的時候(病毒槓桿)· CPBL 給一張現在就能外傳的賽前收據
-                  (賽前鎖死、改不了)· 非 CPBL 不掛(避免 /receipts 404 死連結)。 */}
+              {/* 押下那一刻 = 最想曬的時候(病毒槓桿)· 今日一戰把這手變一張「戰帖」傳朋友:
+                  他點開看不到你押誰、得先自己盲押、賽後揭盅誰讀得準(散播+留存命門 · 2026-06-28)。
+                  只今日一戰傳 challenge → 其餘看板/單場頁不顯(focus)。 */}
+              {challenge && <ChallengeShareInline matchId={matchId} />}
+              {/* CPBL 另給一張現在就能外傳的賽前收據(賽前鎖死、改不了)· 非 CPBL 不掛(避免 /receipts 404 死連結)。 */}
               {cpbl && (
                 <Link
                   href={`/receipts/${matchId}`}
