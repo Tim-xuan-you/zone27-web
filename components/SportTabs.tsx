@@ -13,6 +13,7 @@ const TABS = [
   { key: "tennis", label: "網球", href: "/tennis" },
   { key: "badminton", label: "羽球", href: "/badminton" },
   { key: "mma", label: "UFC", href: "/mma" },
+  { key: "basketball", label: "籃球", href: "/basketball" },
 ] as const;
 
 export type SportKey = (typeof TABS)[number]["key"];
