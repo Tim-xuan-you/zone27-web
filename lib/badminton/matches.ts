@@ -103,8 +103,10 @@ export const BADMINTON_DRAW: BadmintonMatch[] = [
     tournament: "美國公開賽 · 女單",
     time: "6/28 03:25",
     note: "女單兩位都是我們查不到可靠排名的國際選手 —— 不硬開假盤,照樣可押。",
-    a: { zh: "克里絲托芙森", en: "?", rank: null, confidence: "low" },
+    a: { zh: "克里絲托芙森", en: "Line Christophersen", rank: null, confidence: "low" },
     b: { zh: "德維卡.西哈格", en: "?", rank: null, confidence: "low" },
+    // 克里絲托芙森 2-1 逆轉德維卡晉級(引擎未開盤 · 兩位都查不到排名 · 用戶押注照對帳)。
+    finalResult: { winner: "a", score: "15-21 21-11 21-15", settledAt: "2026-06-28" },
   },
   {
     id: "bd-2509",
@@ -112,8 +114,10 @@ export const BADMINTON_DRAW: BadmintonMatch[] = [
     tournament: "美國公開賽 · 女單",
     time: "6/28 03:30",
     note: "女單兩位都是我們查不到可靠排名的國際選手 —— 不硬開假盤,照樣可押。",
-    a: { zh: "納爾班托娃", en: "?", rank: null, confidence: "low" },
+    a: { zh: "納爾班托娃", en: "Kaloyana Nalbantova", rank: null, confidence: "low" },
     b: { zh: "陳瑞秋", en: "?", rank: null, confidence: "low" },
+    // 納爾班托娃 2-0 擊敗陳瑞秋晉級(引擎未開盤 · 兩位都查不到排名 · 用戶押注照對帳)。
+    finalResult: { winner: "a", score: "21-11 21-13", settledAt: "2026-06-28" },
   },
   // ── 2026-06-27 美國公開賽 R2(週六清晨台北 · 蘇力揚 / 喬漢 R1 晉級續戰)──
   //   R2 對手多是我們查不到可靠排名的國際選手 → 誠實不硬開引擎線(照樣可押 · 你的判斷比引擎值錢)。

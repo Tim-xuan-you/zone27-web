@@ -51,6 +51,36 @@ export type TableCall = {
 //    「引擎有模型」badge 整個拿掉(對結果 0 差別 = 對用戶 0 意義)· 只在引擎真的不會算的
 //    盤(角球)留一句白話 engineNote 當誠實註腳(那才是克制的真意)。
 const TABLE: TableCall[] = [
+  // ── 2026-06-29 這一桌 · 最新賽前鎖的注(待對帳)──────
+  {
+    handle: "Ron",
+    league: "美國職棒",
+    match: "響尾蛇 vs 光芒",
+    when: "6/29 01:40",
+    call: "光芒 會贏",
+    engineModels: true,
+    result: "pending",
+  },
+  {
+    handle: "Lewi",
+    league: "美國女籃",
+    match: "紐約自由 vs 金州瓦爾基里",
+    when: "6/29 07:00",
+    call: "兩隊總分 不到 163.5 分",
+    engineModels: false,
+    engineNote: "美國女籃我們引擎沒在算 —— 還是照樣幫他對帳",
+    result: "pending",
+  },
+  {
+    handle: "Tim",
+    league: "美國職棒",
+    match: "洋基 vs 紅襪",
+    when: "6/29 07:20",
+    call: "前 5 局 兩隊總分 不到 4.5 分",
+    engineModels: false,
+    engineNote: "前 5 局這種玩法,我們引擎沒在算 —— 還是照樣幫他對帳",
+    result: "pending",
+  },
   // ── 2026-06-28 這一桌 · 賽前鎖的注(2026-06-28 對帳 · 2 中 1 落空 · 含輸照掛)──────
   {
     handle: "Ron",

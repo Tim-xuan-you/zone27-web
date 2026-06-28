@@ -39,6 +39,9 @@ export default function MmaPage() {
   const eng = gradeMmaEngine();
   const results = mmaResults();
   const enginePicks = mmaEnginePicks();
+  // 🔴 Tim「結算完的賽事收起來 · 參考棒球」(同羽球 R283)· 看板只列「還沒打完」的場 ——
+  //   打完的(finalResult)移出看板,賽果與引擎對帳留在下方「引擎公開戰績」+ /track-record。
+  const upcoming = MMA_CARD.filter((f) => !f.finalResult);
 
   return (
     <div className="flex flex-col flex-1 min-h-screen">
@@ -84,24 +87,32 @@ export default function MmaPage() {
             (有 <span className="text-gold tabular">{leaned}</span> 場引擎有傾向,其餘是同等級的
             <span className="text-bone">純銅板</span>),剩下認不出的選手<span className="text-bone">誠實標「算不出」</span>。
             🔴 不管引擎開不開得出線,<span className="text-bone">你照樣能押</span> —— 你的判斷比引擎值錢。
-            選手名稱用台灣運彩的。
+            打完的場移到下方帳本對帳(不佔看板)。 選手名稱用台灣運彩的。
           </p>
           <div className="mt-6 w-full h-px bg-line/60" />
         </section>
 
-        {/* ── 真實賽卡看板(主賽事在上)── */}
+        {/* ── 真實賽卡看板(只列還沒打完的 · 主賽事在上)· 打完的下架收進帳本(同棒球/羽球)── */}
         <section className="mx-auto max-w-6xl w-full px-6 sm:px-10 pb-8">
-          <div className="flex items-baseline gap-3 mb-4 flex-wrap">
-            <p className="font-mono text-gold/70 text-[10px] tracking-[0.4em]">UFC 格鬥之夜 · 巴庫</p>
-            <span className="font-mono text-mute/50 text-[9px] tracking-[0.2em]">
-              6/27-6/28 · 台北時間 · 主賽事在最上
-            </span>
-          </div>
-          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-            {MMA_CARD.map((f) => (
-              <MmaDrawCard key={f.id} fight={f} />
-            ))}
-          </div>
+          {upcoming.length > 0 ? (
+            <>
+              <div className="flex items-baseline gap-3 mb-4 flex-wrap">
+                <p className="font-mono text-gold/70 text-[10px] tracking-[0.4em]">UFC 格鬥之夜 · 巴庫</p>
+                <span className="font-mono text-mute/50 text-[9px] tracking-[0.2em]">
+                  6/27-6/28 · 台北時間 · 主賽事在最上
+                </span>
+              </div>
+              <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+                {upcoming.map((f) => (
+                  <MmaDrawCard key={f.id} fight={f} />
+                ))}
+              </div>
+            </>
+          ) : (
+            <p className="text-mute text-sm leading-relaxed max-w-2xl">
+              這張賽卡的場都打完了 —— 賽果與引擎對帳都在下方帳本。 下一場 UFC 開賽再上架。
+            </p>
+          )}
         </section>
 
         {/* ── 你的 UFC 戰績(登入且押過才顯示 · client island · graceful)── */}
@@ -111,15 +122,39 @@ export default function MmaPage() {
           wrapperClass="mx-auto max-w-6xl w-full px-6 sm:px-10 pb-8"
         />
 
-        {/* ── 引擎戰績(誠實 pending · 第一場結算後才長出來)── */}
+        {/* ── 引擎戰績(含輸照掛 · 第一場結算就誠實長出來 · 同羽球兩段式)── */}
         <section className="mx-auto max-w-6xl w-full px-6 sm:px-10 pb-8">
           <div className="bg-slate/30 border border-line/60 p-5 sm:p-6 max-w-2xl">
             <p className="font-mono text-gold/70 text-[10px] tracking-[0.4em] mb-3">引擎公開戰績</p>
-            <p className="text-mute text-[13px] sm:text-sm leading-relaxed">
-              引擎已賽前開盤 <span className="text-gold tabular">{eng.pending}</span> 場有傾向的(同等級的
-              銅板場不進戰績 —— 我們不把「沒選邊」灌成預測)· 還沒有一場結算。 第一場打完就逐場對帳、
-              <span className="text-bone">命中落空都掛、刪不掉</span>,跟其他運動<span className="text-bone">分開算</span>。
-            </p>
+            {eng.n > 0 ? (
+              <p className="text-mute text-[13px] sm:text-sm leading-relaxed">
+                引擎已對帳 <span className="text-gold tabular">{eng.n}</span> 場 ·{" "}
+                <span className="text-gold tabular">✓{eng.hits}</span>{" "}
+                <span className="text-loss/85 tabular">✕{eng.misses}</span>
+                {eng.rate !== null && (
+                  <>
+                    {" "}· <span className="text-bone tabular">{eng.rate}%</span>
+                  </>
+                )}
+                {eng.pending > 0 && <> · 另 {eng.pending} 場待結算</>}。 只算引擎有傾向的場
+                (同等級的銅板場不進戰績 —— 不把「沒選邊」灌成預測)·{" "}
+                <span className="text-bone">命中落空都掛、刪不掉</span>,跟其他運動分開算。
+                MMA 誠實天花板約 <span className="text-gold tabular">63%</span>、每 3 個大熱門就有 1 個翻盤 ——
+                <span className="text-bone">場數還少、這數字還會跳</span>。
+              </p>
+            ) : (
+              <p className="text-mute text-[13px] sm:text-sm leading-relaxed">
+                引擎已賽前開盤 <span className="text-gold tabular">{eng.pending}</span> 場有傾向的(同等級的
+                銅板場不進戰績 —— 我們不把「沒選邊」灌成預測)· 還沒有一場結算。 第一場打完就逐場對帳、
+                <span className="text-bone">命中落空都掛、刪不掉</span>,跟其他運動<span className="text-bone">分開算</span>。
+              </p>
+            )}
+            <Link
+              href="/track-record"
+              className="mt-3 inline-block font-mono text-gold/75 hover:text-gold text-[10px] tracking-[0.2em] underline-offset-4 hover:underline transition-colors"
+            >
+              看完整逐場對帳(跨運動公開帳本)→
+            </Link>
           </div>
         </section>
 
