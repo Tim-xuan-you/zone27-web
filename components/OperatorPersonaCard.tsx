@@ -35,12 +35,27 @@ export default function OperatorPersonaCard({
     line = `順勢逆風各半(跟機器同手 ${pct}%)—— ${subject}看場下手,不盲跟也不為反而反。`;
   }
 
+  // 🔴 樣本不夠(forming)的卡視覺刻意「降溫」(暗 slate 底/line 框/mute 字)· 不穿身分金卡 —
+  //   把校準誠實延伸到 UI 本身:還沒成形的風格不該長得跟驗證過的一樣有把握(同「含輸照掛」一條心理線)。
+  const forming = kind === "forming";
   return (
-    <section className="mt-6 border border-gold/25 bg-gold/[0.04] p-4 sm:p-5">
-      <p className="font-mono text-gold/80 text-[10px] tracking-[0.4em] mb-1.5">
+    <section
+      className={`mt-6 border p-4 sm:p-5 ${
+        forming ? "border-line/45 bg-slate/20" : "border-gold/25 bg-gold/[0.04]"
+      }`}
+    >
+      <p
+        className={`font-mono text-[10px] tracking-[0.4em] mb-1.5 ${
+          forming ? "text-mute/55" : "text-gold/80"
+        }`}
+      >
         操盤風格
       </p>
-      <p className="text-bone text-base sm:text-lg font-light tracking-tight">
+      <p
+        className={`text-base sm:text-lg font-light tracking-tight ${
+          forming ? "text-mute" : "text-bone"
+        }`}
+      >
         {label}
       </p>
       <p className="mt-1.5 text-mute/85 text-[13px] leading-relaxed">{line}</p>
