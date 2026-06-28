@@ -90,10 +90,14 @@ export default function BasketballPage() {
         <section className="mx-auto max-w-6xl w-full px-6 sm:px-10 pb-8">
           {upcoming.length > 0 ? (
             <>
-              <div className="flex items-baseline gap-3 mb-4 flex-wrap">
+              <div className="flex items-baseline gap-3 mb-2 flex-wrap">
                 <p className="font-mono text-gold/70 text-[10px] tracking-[0.4em]">WNBA</p>
                 <span className="font-mono text-mute/50 text-[9px] tracking-[0.2em]">台北時間</span>
               </div>
+              {/* 唯讀訊號(稽核:沒 bet 鈕的卡可能讓習慣押注的人找不到入口)· 誠實講清楚 v0.1 只看開盤。 */}
+              <p className="font-mono text-mute/55 text-[10px] tracking-[0.12em] leading-relaxed mb-4 max-w-2xl">
+                先看引擎自己怎麼開盤 —— v0.1 還沒接押注。 你押一手 + 進你刪不掉的戰績,下一波接上(同羽球當初)。
+              </p>
               <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
                 {upcoming.map((g) => (
                   <GameCard key={g.id} game={g} />
@@ -206,6 +210,10 @@ function GameCard({ game }: { game: BasketballGame }) {
 
       {canLine && line ? (
         <>
+          {/* 🔴 排版 = 客在左、主在右(籃球慣例 · 同上方隊名順序)。 MarketSplitBar 是「位置性」的
+              (homePct = 左半寬、awayPct = 右半寬、goldSide "home"=左/"away"=右)→ 故意把客隊勝率餵左半、
+              主隊勝率餵右半、金色給引擎看好那隊(落在對的那一側)。 ⚠️ 別「修正」成 homePct=homeWin —
+              那會讓金條跟上方隊名左右對不上(稽核假陽性 · 2026-06-28 已肉眼驗 render 正確:金條永遠在被看好那隊那側)。 */}
           <MarketSplitBar
             homePct={line.awayWin}
             awayPct={line.homeWin}
