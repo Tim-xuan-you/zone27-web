@@ -43,6 +43,7 @@ import {
 } from "@/lib/mma/matches";
 import { createPageMetadata } from "@/lib/page-og";
 import { normalizeProfileCode } from "@/lib/profile-code";
+import { computeOperatorPersona } from "@/lib/operator-persona";
 import { buildSettledCards, computeTrophies } from "@/lib/trophies";
 import { hasMonthActivity, monthLabel } from "@/lib/season-recap";
 
@@ -146,6 +147,13 @@ export default async function PublicProfilePage({
   const streak = aggregateStreak(baseball, getTodayTaipei());
   // 準度歷程 sparkline(這份帳本 · 按比賽日累計 · 場數夠多才畫 · 同 /member)。
   const accuracySeries = computeAccuracySeries(baseball, idMatches);
+  // 操盤風格(順勢/逆風/雙面 · 玄學的真材料版)· 用這份帳本的押注 vs 每場機器偏好算 · 0 新查詢。
+  const persona = computeOperatorPersona({
+    picks: baseball,
+    engineFavById: Object.fromEntries(idMatches.map((m) => [m.id, m.engineFav])),
+    streakCurrent: streak.current,
+    streakLongest: streak.longest,
+  });
 
   // 足球戰績(三向 + 玩法 · 含輸 · 含同場 你 vs 引擎)· 公開賽後結果 + 引擎鎖定線(含玩法 · server 讀)。
   const soccerResults = await getSoccerLedgerResults();
@@ -221,6 +229,7 @@ export default async function PublicProfilePage({
           seasonPeriod={currentMonth}
           seasonLabel={monthLabel(currentMonth)}
           hasSeasonActivity={hasSeasonActivity}
+          persona={persona}
         />
       </main>
       <Footer />

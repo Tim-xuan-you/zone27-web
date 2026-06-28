@@ -26,6 +26,8 @@ import { effectiveTier } from "@/lib/membership";
 import MembershipStatus from "@/components/MembershipStatus";
 import { careerTier } from "@/lib/reckoning-star";
 import CareerLadderMini from "@/components/CareerLadderMini";
+import { computeOperatorPersona } from "@/lib/operator-persona";
+import OperatorPersonaCard from "@/components/OperatorPersonaCard";
 import OpenPositionsPanel from "@/components/OpenPositionsPanel";
 import PushToggle from "@/components/PushToggle";
 import { buildOpenPositions, compactDate } from "@/lib/open-positions";
@@ -174,6 +176,13 @@ export default async function MemberPage() {
   // 對帳紀律 streak(連續回來面對帳本的台北日曆日 · 非連勝)· 餵今日一戰盒的一行。
   const todayTaipei = getTodayTaipei();
   const streak = aggregateStreak(predictionsMap, todayTaipei);
+  // 操盤風格(順勢/逆風/雙面 · 玄學的真材料版)· 用你的押注 vs 每場機器偏好算 · 0 新查詢。
+  const persona = computeOperatorPersona({
+    picks: predictionsMap,
+    engineFavById: Object.fromEntries(idMatches.map((m) => [m.id, m.engineFav])),
+    streakCurrent: streak.current,
+    streakLongest: streak.longest,
+  });
   // 本月賽季回顧入口:有本月(棒球)押注才連(避免連到空回顧)。
   const currentMonth = getCurrentTaipeiMonthKey();
   const hasSeasonActivity = hasMonthActivity(predictionsMap, [], currentMonth);
@@ -283,6 +292,10 @@ export default async function MemberPage() {
           accuracy={identity.accuracy}
           decided={identity.decided}
         />
+
+        {/* ── 操盤風格(順勢/逆風/雙面)· 階級是「我多準」(skill)· 這張是「我怎麼押」(style)·
+            玄學的真材料版:給「這超像我」的身分快感但可驗證 · 風格 ≠ 準度(卡內明寫)。 ── */}
+        <OperatorPersonaCard persona={persona} subject="你" />
 
         {/* ── 主角 C · 你現在的一手(未結算押注 + 你不在時結算 N 場 · 都 graceful 自動隱藏)── */}
         <OpenPositionsPanel positions={openPositions} />

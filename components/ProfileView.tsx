@@ -6,6 +6,8 @@ import TrophyGrid from "@/components/TrophyGrid";
 import ReckoningStarMark from "@/components/ReckoningStarMark";
 import CalibrationMasterView from "@/components/CalibrationMasterView";
 import type { CalibrationReport } from "@/lib/calibration-master";
+import OperatorPersonaCard from "@/components/OperatorPersonaCard";
+import type { OperatorPersona } from "@/lib/operator-persona";
 import FollowLedgerButton from "@/components/FollowLedgerButton";
 import { creatorIdentity } from "@/lib/identity";
 import { isPaid, tierLabel } from "@/lib/tier";
@@ -64,6 +66,8 @@ type Props = {
   seasonLabel?: string;
   /** 本月有沒有任何押注(false → 不顯示回顧入口) */
   hasSeasonActivity?: boolean;
+  /** 操盤風格(順勢/逆風/雙面 · 從真實押注算)· 沒傳 / 沒棒球活動 → 不顯示 */
+  persona?: OperatorPersona;
 };
 
 // 一句話總結這份帳本的站位 · 第三人稱(主詞 = 帳本)· 誠實雙向(贏照講、輸也照講)。
@@ -79,7 +83,7 @@ function standingVerdict(id: CalibrationIdentity): string {
   return `${coin},但還沒贏過引擎。`;
 }
 
-export default function ProfileView({ profile, identity: id, streak, soccer, tennis, badminton, mma, series, trophies, calibration, seasonPeriod, seasonLabel, hasSeasonActivity }: Props) {
+export default function ProfileView({ profile, identity: id, streak, soccer, tennis, badminton, mma, series, trophies, calibration, seasonPeriod, seasonLabel, hasSeasonActivity, persona }: Props) {
   // 身分解析(同創作者署名 · 顯示名 or 球迷#碼 + 永久碼 chip + 頭像 seed/glyph)。
   const who = creatorIdentity({
     handle: profile.handle,
@@ -283,6 +287,10 @@ export default function ProfileView({ profile, identity: id, streak, soccer, ten
           )}
         </section>
       )}
+
+      {/* ── 操盤風格(順勢/逆風/雙面 · 從真實押注算)· 星座的真材料版:給「這超像我」的身分快感
+          但可驗證 · 風格 ≠ 準度(卡內明寫)· 只描述過去不預測未來(非玄學)· 有棒球活動才顯。 ── */}
+      {hasBaseball && persona && <OperatorPersonaCard persona={persona} subject="TA" />}
 
       {/* ── 對帳之星(米其林式賺來的稀有星)· on-read 即時算、滑落即收回、錢買不到 ──
           只在有像樣樣本(≥FIRM)才出現 · 達標 = 金星;未達 = 暗星 + 誠實寫出門檻(製造嚮往不製造焦慮)。 */}
