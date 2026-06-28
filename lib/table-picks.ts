@@ -51,7 +51,7 @@ export type TableCall = {
 //    「引擎有模型」badge 整個拿掉(對結果 0 差別 = 對用戶 0 意義)· 只在引擎真的不會算的
 //    盤(角球)留一句白話 engineNote 當誠實註腳(那才是克制的真意)。
 const TABLE: TableCall[] = [
-  // ── 2026-06-28 這一桌 · 最新賽前鎖的注(待對帳)──────
+  // ── 2026-06-28 這一桌 · 賽前鎖的注(2026-06-28 對帳 · 2 中 1 落空 · 含輸照掛)──────
   {
     handle: "Ron",
     league: "世界盃",
@@ -60,7 +60,8 @@ const TABLE: TableCall[] = [
     call: "上半場 英格蘭 不落後(領先或平手)",
     engineModels: false,
     engineNote: "上半場單獨怎麼走,我們引擎沒在算(只算整場輸贏)—— 還是照樣幫他對帳",
-    result: "pending",
+    resultNote: "英格蘭 2:0 巴拿馬 · 上半場 0:0 平手 · 英格蘭沒落後 → 中了",
+    result: "win",
   },
   {
     handle: "Lewi",
@@ -69,7 +70,8 @@ const TABLE: TableCall[] = [
     when: "6/28 10:00",
     call: "兩隊不會都進球",
     engineModels: true,
-    result: "pending",
+    resultNote: "阿根廷 3:1 約旦 · 兩隊都有進球(阿根廷 3、約旦 1)· 不符「兩隊不會都進球」→ 沒中",
+    result: "lose",
   },
   {
     handle: "Tim",
@@ -78,7 +80,8 @@ const TABLE: TableCall[] = [
     when: "6/28 07:05",
     call: "國民 會贏",
     engineModels: true,
-    result: "pending",
+    resultNote: "國民 4:3 金鶯 · 國民贏 → 中了",
+    result: "win",
   },
   // ── 2026-06-27 這一桌 · 賽前鎖的注(2026-06-27 對帳 · 3 中 1 落空 · 含輸照掛)──────
   {

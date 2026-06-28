@@ -83,6 +83,8 @@ export const BADMINTON_DRAW: BadmintonMatch[] = [
     note: "基達姆比認得(排名 20),但沖本優大我們查不到可靠排名 —— 不硬開假盤,照樣可押。",
     a: { zh: "沖本優大", en: "Yudai Okimoto", rank: null, confidence: "low" },
     b: { zh: "基達姆比", en: "Kidambi Srikanth", rank: 20, confidence: "high" },
+    // 基達姆比 2-1 擊敗沖本優大晉級(引擎未開盤 · 沖本優大查不到排名 · 用戶押注照對帳)。
+    finalResult: { winner: "b", score: "22-20 15-21 21-19", settledAt: "2026-06-28" },
   },
   {
     id: "bd-2511",
@@ -91,7 +93,9 @@ export const BADMINTON_DRAW: BadmintonMatch[] = [
     time: "6/28 05:55",
     note: "蘇力揚是台灣選手,但對手喬漢我們查不到可靠排名 —— 不硬開假盤,照樣可押。",
     a: { zh: "蘇力揚", en: "Su Li-yang", rank: 65, confidence: "medium" },
-    b: { zh: "羅納克.喬漢", en: "?", rank: null, confidence: "low" },
+    b: { zh: "羅納克.喬漢", en: "Rounak Chouhan", rank: null, confidence: "low" },
+    // 蘇力揚 2-0 擊敗喬漢晉級(引擎未開盤 · 喬漢查不到排名 · 用戶押注照對帳)。
+    finalResult: { winner: "a", score: "21-17 21-19", settledAt: "2026-06-28" },
   },
   {
     id: "bd-2508",
