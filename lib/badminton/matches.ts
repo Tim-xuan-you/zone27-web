@@ -73,6 +73,28 @@ export const LISTED_WS = 8;
 //   誠實標「不硬開」。 女單 8 場目前無一位我們有把握辨識 → 這版先不上(寧缺勿錯)。
 //   🔴 種子排名 = 編輯估計(BWF 公開排名 + 近況)· 不是官方數據 · 隨真實賽果更新(同網球種子分)。
 export const BADMINTON_DRAW: BadmintonMatch[] = [
+  // ── 2026-06-29 美國公開賽 準決賽(週一清晨台北 · Tim 運彩截圖 curate · 上一輪的勝者對碰)──
+  //   🔴 運彩編號 2500 撞到 6/27 那場(西爾伯曼 vs 喬漢)→ 用日期標籤 ID「bd-2500-0629」避免撞號:
+  //     老 bd-2500 的押注不能被新場賽果污染(同網球撞號鎖賽事+時間 · 運彩編號會跨日重複)。
+  //   男單 基達姆比(20)vs 蘇力揚(65)兩位都認得 → 引擎開得出線(首見蘇力揚有引擎對照);
+  //   女單兩位仍查不到可靠排名 → 不硬開假盤、照樣可押。
+  {
+    id: "bd-2501",
+    tour: "ms",
+    tournament: "美國公開賽 · 男單",
+    time: "6/29 06:20",
+    a: { zh: "基達姆比", en: "Kidambi Srikanth", rank: 20, confidence: "high" },
+    b: { zh: "蘇力揚", en: "Su Li-yang", rank: 65, confidence: "medium" },
+  },
+  {
+    id: "bd-2500-0629",
+    tour: "ws",
+    tournament: "美國公開賽 · 女單",
+    time: "6/29 03:50",
+    note: "女單兩位都是我們查不到可靠排名的國際選手 —— 不硬開假盤,照樣可押。",
+    a: { zh: "克里絲托芙森", en: "Line Christophersen", rank: null, confidence: "low" },
+    b: { zh: "納爾班托娃", en: "Kaloyana Nalbantova", rank: null, confidence: "low" },
+  },
   // ── 2026-06-28 美國公開賽 R3(週日清晨台北 · Tim 運彩截圖 curate · 照運彩名字原封不動)──
   //   R3 對手仍多認不出 / 查不到排名 → 誠實不硬開引擎線(照樣可押)· 女單首度上架(同樣不硬開)。
   {
