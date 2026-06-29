@@ -10,6 +10,7 @@ import type { SoccerRecord } from "@/lib/soccer/predictions";
 import type { TennisRecord } from "@/lib/tennis/matches";
 import type { BadmintonRecord } from "@/lib/badminton/matches";
 import type { MmaRecord } from "@/lib/mma/matches";
+import type { BasketballRecord } from "@/lib/basketball/matches";
 import type { PublicProfile } from "@/lib/profile-server";
 import type { Trophy } from "@/lib/trophies";
 
@@ -35,6 +36,8 @@ type Props = {
   badminton?: BadmintonRecord;
   /** 本月 UFC / MMA 戰績(同網球 · 按月切片餵 gradeMmaPicks)· 沒押 → 不顯示 · R278 */
   mma?: MmaRecord;
+  /** 本月籃球戰績(同網球 · 按月切片餵 gradeBasketballPicks)· 沒押 → 不顯示 · R291 */
+  basketball?: BasketballRecord;
   highlights: SeasonHighlights;
   /** 本月回來對帳的不同台北日數 */
   activeDays: number;
@@ -50,6 +53,7 @@ export default function SeasonRecapView({
   tennis,
   badminton,
   mma,
+  basketball,
   highlights,
   activeDays,
   hasActivity,
@@ -68,6 +72,8 @@ export default function SeasonRecapView({
     !!badminton && (badminton.n > 0 || badminton.pending > 0 || badminton.late > 0);
   const hasMma =
     !!mma && (mma.n > 0 || mma.pending > 0 || mma.late > 0 || mma.push > 0);
+  const hasBasketball =
+    !!basketball && (basketball.n > 0 || basketball.pending > 0 || basketball.late > 0);
   const hasDecided = id.accuracy !== null;
   const showEdge =
     id.edgeVsEnginePts !== null && id.engine.decided > 0 && id.decided > 0;
@@ -342,6 +348,40 @@ export default function SeasonRecapView({
             </section>
           )}
 
+          {/* ── 本月籃球(兩向 · 含輸 · 跟棒球 / 足球 / 網球 / 羽球 / UFC 分開算)· 無和局 · R291 ─────────── */}
+          {hasBasketball && basketball && (
+            <section className="mt-6 bg-slate/40 border border-gold/30 p-5 sm:p-6">
+              <p className="font-mono text-gold/80 text-[10px] tracking-[0.35em] mb-2">
+                本月籃球 · 含輸命中率
+              </p>
+              {basketball.n > 0 ? (
+                <p className="text-bone text-lg sm:text-xl font-light tracking-tight">
+                  <span className="text-gold tabular">{basketball.rate}%</span> 準 ·{" "}
+                  <span className="text-gold tabular">✓{basketball.hits}</span>{" "}
+                  <span className="text-loss tabular">✕{basketball.misses}</span>
+                  <span className="text-mute/60 text-sm"> · {basketball.n} 場已結算</span>
+                  {basketball.pending > 0 && (
+                    <span className="text-mute/50 text-sm">
+                      {" "}· {basketball.pending} 場待結算
+                    </span>
+                  )}
+                </p>
+              ) : basketball.pending > 0 ? (
+                <p className="text-bone text-base font-light leading-snug">
+                  押了 <span className="text-gold tabular">{basketball.pending}</span> 場 ·
+                  <span className="text-mute/70">
+                    {" "}都還沒結算 —— 賽後自動掛準 / 不準,連輸的也留著
+                  </span>
+                </p>
+              ) : null}
+              {basketball.late > 0 && (
+                <p className="mt-2 font-mono text-mute/55 text-[10px] tracking-[0.12em] leading-snug">
+                  {basketball.late} 場開賽後才押 · 不計入戰績(先鎖後結 · 開賽前押的才算數)
+                </p>
+              )}
+            </section>
+          )}
+
           {/* ── 本月紀律(回來對帳幾天 · 非連勝)──────────────────── */}
           <section className="mt-6 border-l-2 border-gold/50 pl-4 py-1">
             <p className="text-mute/90 text-[13px] sm:text-sm leading-relaxed">
@@ -437,7 +477,9 @@ function HighlightRow({
         ? `/badminton/${c.id}`
         : c.sport === "mma"
           ? `/mma#m-${c.id}`
-          : `/receipts/${c.id}`;
+          : c.sport === "basketball"
+            ? `/basketball#b-${c.id}`
+            : `/receipts/${c.id}`;
   const tagLine =
     kind === "best"
       ? t.upset

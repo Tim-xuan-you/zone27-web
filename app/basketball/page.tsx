@@ -3,9 +3,14 @@ import Nav from "@/components/Nav";
 import SportTabs from "@/components/SportTabs";
 import Footer from "@/components/Footer";
 import MarketSplitBar from "@/components/MarketSplitBar";
+import BasketballBetStrip from "@/components/BasketballBetStrip";
+import BasketballRecordCard from "@/components/BasketballRecordCard";
 import { createPageMetadata } from "@/lib/page-og";
 import {
   BASKETBALL_GAMES,
+  basketballEnginePicks,
+  basketballResults,
+  bettable,
   drawCounts,
   drawLine,
   gradeBasketballEngine,
@@ -13,10 +18,10 @@ import {
   type BasketballGame,
 } from "@/lib/basketball/matches";
 
-// ── ZONE 27 · /basketball · 籃球效率引擎逐場開盤(運彩在賣的場 · v0.1)──────────────────
+// ── ZONE 27 · /basketball · 籃球效率引擎逐場開盤 + 賽前鎖定押注(運彩在賣的場 · v0.1)──────────
 // 新運動擴張(承棒球/足球/網球/羽球/UFC)· Tim 2026-06-28 拍板:籃球是「非-Elo 真引擎」的答案
 //(效率模型真比 Elo 準 · 見 lib/basketball/engine)。 v0.1 = WNBA 練兵(NBA 休季,開打前首發)·
-// 純讀不接押注(同羽球當初:押注 + personal 五面下一波接,不留幽靈 pending)。
+// R291 接上押注 + personal 五面(收件匣/戰功卡/u/回顧/脈動 · 鏡 MMA R278)· 🔴 籃球無和局 = 比 MMA 更單純。
 //
 // 🔴 第一要務 = 誠實框架:籃球比棒球好預測(回合多→變異小),但沒有神準 —— 一場照樣翻盤,賣校準。
 //   第二 = 米其林克制:查不到隊伍數據 → 不硬開,誠實標「算不出」· 照樣是真賽事。 名字用運彩的。
@@ -36,6 +41,8 @@ export const revalidate = 3600;
 export default function BasketballPage() {
   const { shown, lined } = drawCounts();
   const eng = gradeBasketballEngine();
+  const results = basketballResults();
+  const enginePicks = basketballEnginePicks();
   const upcoming = BASKETBALL_GAMES.filter((g) => !g.finalResult);
 
   return (
@@ -94,9 +101,9 @@ export default function BasketballPage() {
                 <p className="font-mono text-gold/70 text-[10px] tracking-[0.4em]">WNBA</p>
                 <span className="font-mono text-mute/50 text-[9px] tracking-[0.2em]">台北時間</span>
               </div>
-              {/* 唯讀訊號(稽核:沒 bet 鈕的卡可能讓習慣押注的人找不到入口)· 誠實講清楚 v0.1 只看開盤。 */}
               <p className="font-mono text-mute/55 text-[10px] tracking-[0.12em] leading-relaxed mb-4 max-w-2xl">
-                先看引擎自己怎麼開盤 —— v0.1 還沒接押注。 你押一手 + 進你刪不掉的戰績,下一波接上(同羽球當初)。
+                先看引擎自己怎麼開盤 —— 然後押一手「你看好誰」。 押了賽前鎖死、賽後自動對帳,
+                <span className="text-bone">命中落空都進你刪不掉的戰績</span>(跟其他運動分開算)。
               </p>
               <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
                 {upcoming.map((g) => (
@@ -110,6 +117,13 @@ export default function BasketballPage() {
             </p>
           )}
         </section>
+
+        {/* ── 你的籃球戰績(登入且押過才顯示 · client island · graceful)── */}
+        <BasketballRecordCard
+          results={results}
+          enginePicks={enginePicks}
+          wrapperClass="mx-auto max-w-6xl w-full px-6 sm:px-10 pb-8"
+        />
 
         {/* ── 引擎戰績(含輸照掛 · 第一場結算就誠實長出來 · 同羽球兩段式)── */}
         <section className="mx-auto max-w-6xl w-full px-6 sm:px-10 pb-8">
@@ -177,16 +191,17 @@ export default function BasketballPage() {
   );
 }
 
-// ── 單場卡(讀-only v0.1 · 引擎線或誠實「算不出」)──────────────────────────
+// ── 單場卡(引擎線或誠實「算不出」+ 賽前鎖定押注)──────────────────────────
 function GameCard({ game }: { game: BasketballGame }) {
   const line = drawLine(game);
   const canLine = lineable(game);
   const favName =
     line && line.pick === "home" ? game.home.zh : line ? game.away.zh : null;
   const favPct = line ? Math.max(line.homeWin, line.awayWin) : null;
+  const bet = bettable(game);
 
   return (
-    <div className="border border-line/60 bg-slate/30 p-5">
+    <div id={`b-${game.id}`} className="border border-line/60 bg-slate/30 p-5 scroll-mt-24">
       <div className="flex items-center justify-between gap-2 mb-3">
         <span className="font-mono text-gold/70 text-[9px] tracking-[0.3em] border border-gold/30 px-1.5 py-0.5">
           {game.league}
@@ -226,8 +241,19 @@ function GameCard({ game }: { game: BasketballGame }) {
         </>
       ) : (
         <p className="font-mono text-mute/70 text-[10px] tracking-[0.12em] leading-relaxed border-t border-line/40 pt-3">
-          有一隊我們查不到效率數據 —— 不硬開假盤(誠實「算不出」)。
+          有一隊我們查不到效率數據 —— 不硬開假盤(誠實「算不出」)。 但這場
+          <span className="text-bone">你照樣能押</span>(你的判斷比引擎值錢)。
         </p>
+      )}
+
+      {/* 賽前鎖定押注 · 🔴 引擎開不開得出線都能押(Tim 鐵律:能上架就能押)· 只要還沒完場 + 有開賽時戳。 */}
+      {bet && !game.finalResult && (
+        <BasketballBetStrip
+          gameId={game.id}
+          startISO={bet}
+          homeLabel={game.home.zh}
+          awayLabel={game.away.zh}
+        />
       )}
     </div>
   );

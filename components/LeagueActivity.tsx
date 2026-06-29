@@ -89,7 +89,9 @@ export default function LeagueActivity({
                               ? `/badminton/${e.matchId}`
                               : e.matchId.startsWith("mma-")
                                 ? `/mma#m-${e.matchId}`
-                                : `/matches/${e.matchId}`
+                                : e.matchId.startsWith("bk-")
+                                  ? `/basketball#b-${e.matchId}`
+                                  : `/matches/${e.matchId}`
                     }
                     className="hover:text-gold transition-colors"
                   >

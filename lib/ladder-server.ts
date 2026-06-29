@@ -32,6 +32,7 @@ import { baseballPropIdMatches } from "@/lib/baseball-totals";
 import { tennisResults } from "@/lib/tennis/matches";
 import { badmintonResults } from "@/lib/badminton/matches";
 import { mmaResults } from "@/lib/mma/matches";
+import { basketballResults } from "@/lib/basketball/matches";
 
 // 新秀門檻:押滿 10 場「已分勝負」(同 /ladder 第 1 階「押滿 10 場就上榜」)· 不到 10 不上榜。
 const LADDER_MIN_GRADED = 10;
@@ -150,6 +151,9 @@ function buildSyncResults(): Map<string, NormResult> {
   for (const [id, r] of Object.entries(mmaResults()))
     if (r.outcome !== "draw")
       m.set(id, { winner: twoWay(r.outcome), day: taipeiDayOf(r.startISO), startISO: r.startISO || null });
+  // 🔴 籃球 outcome 本來就是 home/away(無 twoWay 轉換)· 籃球無和局 → 無 draw 過濾。 R291
+  for (const [id, r] of Object.entries(basketballResults()))
+    m.set(id, { winner: r.outcome, day: taipeiDayOf(r.startISO), startISO: r.startISO || null });
   return m;
 }
 

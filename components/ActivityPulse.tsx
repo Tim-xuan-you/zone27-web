@@ -155,7 +155,9 @@ function PulseList({ events }: { events: PulseEvent[] }) {
                             ? `/badminton/${e.matchId}`
                             : e.matchId.startsWith("mma-")
                               ? `/mma#m-${e.matchId}`
-                              : `/matches/${e.matchId}#say`
+                              : e.matchId.startsWith("bk-")
+                                ? `/basketball#b-${e.matchId}`
+                                : `/matches/${e.matchId}#say`
                   }
                   className="hover:text-gold transition-colors"
                 >

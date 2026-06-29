@@ -41,6 +41,11 @@ import {
   mmaResults,
   mmaEnginePicks,
 } from "@/lib/mma/matches";
+import {
+  gradeBasketballPicks,
+  basketballResults,
+  basketballEnginePicks,
+} from "@/lib/basketball/matches";
 import { createPageMetadata } from "@/lib/page-og";
 import { normalizeProfileCode } from "@/lib/profile-code";
 import { computeOperatorPersona } from "@/lib/operator-persona";
@@ -90,7 +95,7 @@ export default async function PublicProfilePage({
   const profile = await getProfileByCode(code);
   if (!profile) notFound();
 
-  const { baseball, soccer, tennis, badminton, mma, soccerProps, calibrationPicks } =
+  const { baseball, soccer, tennis, badminton, mma, basketball, soccerProps, calibrationPicks } =
     await getPredictionsByCode(code);
 
   // 棒球校準身分(CPBL + MLB · fd-* 已在 server 分流排除)。
@@ -138,10 +143,16 @@ export default async function PublicProfilePage({
     pick: (r.pick === "a" ? "home" : "away") as "home" | "away",
     ts: r.ts,
   }));
-  // 本月賽季回顧入口:有本月押注才連(避免連到空回顧)· R218 · 玩法 / 網球 / 羽球 / MMA 也算「有押」。
+  // 籃球戰績(兩向 · 含輸 · 跟其他運動分開算)· 🔴 pick 本來就是 home/away(無轉換 · 直接餵戰功卡)· R291。
+  const basketballRecord = gradeBasketballPicks(
+    basketball,
+    basketballResults(),
+    basketballEnginePicks(),
+  );
+  // 本月賽季回顧入口:有本月押注才連(避免連到空回顧)· R218 · 玩法 / 網球 / 羽球 / MMA / 籃球 也算「有押」。
   const hasSeasonActivity = hasMonthActivity(
     baseball,
-    [...soccer, ...soccerProps, ...tennis, ...badminton, ...mma],
+    [...soccer, ...soccerProps, ...tennis, ...badminton, ...mma, ...basketball],
     currentMonth,
   );
   const streak = aggregateStreak(baseball, getTodayTaipei());
@@ -195,6 +206,9 @@ export default async function PublicProfilePage({
       result: r.outcome === "draw" ? "tie" : r.outcome === "a" ? "home" : "away",
       startISO: r.startISO ?? "",
     };
+  // 籃球賽果 · 🔴 outcome 本來就是 home/away(無轉換 · 籃球無和局 → 無 "tie")。 R291
+  for (const [id, r] of Object.entries(basketballResults()))
+    calibrationResults[id] = { result: r.outcome, startISO: r.startISO ?? "" };
   const calibrationReport = computeConfidenceCalibration(
     calibrationPicks,
     calibrationResults,
@@ -209,6 +223,7 @@ export default async function PublicProfilePage({
     tennisHA,
     badmintonHA,
     mmaHA,
+    basketball, // 🔴 籃球 pick 本來就是 home/away → 直接餵(無 a/b 轉換)· R291
   );
 
   return (
@@ -223,6 +238,7 @@ export default async function PublicProfilePage({
           tennis={tennisRecord}
           badminton={badmintonRecord}
           mma={mmaRecord}
+          basketball={basketballRecord}
           series={accuracySeries}
           trophies={trophies}
           calibration={calibrationReport}

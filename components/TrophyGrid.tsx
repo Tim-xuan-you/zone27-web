@@ -64,7 +64,7 @@ function TrophyCard({ t }: { t: Trophy }) {
         ? card.away
         : "和局";
   // 網球 / 羽球沒有單場收據頁(/receipts/tn-、/receipts/bd- 會 404)→ 連既有 /[sport]/[id] 詳情頁。
-  // MMA 沒有單場詳情頁 → 連回 /mma 看板那張卡(錨點 m-<id> · 同收件匣 / 脈動)。
+  // MMA / 籃球沒有單場詳情頁 → 連回看板那張卡(錨點 m-<id> / b-<id> · 同收件匣 / 脈動)。
   const href = market
     ? parentId.startsWith("mlb-")
       ? `/matches/${parentId}`
@@ -75,7 +75,9 @@ function TrophyCard({ t }: { t: Trophy }) {
         ? `/badminton/${card.id}`
         : card.sport === "mma"
           ? `/mma#m-${card.id}`
-          : `/receipts/${card.id}`;
+          : card.sport === "basketball"
+            ? `/basketball#b-${card.id}`
+            : `/receipts/${card.id}`;
   const verdictColor = t.hit ? "text-gold" : "text-loss/85";
   const verdictBorder = t.hit ? "border-gold/40" : "border-loss/40";
   const lock = fmtLockTaipei(t.ts);
@@ -137,7 +139,8 @@ function TrophyCard({ t }: { t: Trophy }) {
           {market ||
           card.sport === "tennis" ||
           card.sport === "badminton" ||
-          card.sport === "mma"
+          card.sport === "mma" ||
+          card.sport === "basketball"
             ? "看這場 →"
             : "收據 →"}
         </p>

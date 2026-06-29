@@ -41,10 +41,12 @@ function SettlementRow({ item }: { item: SettlementItem }) {
           ? "羽球"
           : item.sport === "mma"
             ? "UFC"
-            : "棒球";
+            : item.sport === "basketball"
+              ? "籃球"
+              : "棒球";
   // 玩法(大小分/讓分)連回父場:MLB 父場走 /matches(無收據)· CPBL/足球走可外傳收據。
   // 網球 / 羽球沒有單場收據頁(/receipts/tn-、/receipts/bd- 會 404)→ 連到既有 /[sport]/[id] 詳情頁。
-  // MMA 沒有單場詳情頁 → 連回 /mma 看板那張卡(錨點 m-<id> · 同群眾盤 /markets#m-)。
+  // MMA / 籃球沒有單場詳情頁 → 連回看板那張卡(錨點 m-<id> / b-<id> · 同群眾盤 /markets#m-)。
   const href =
     item.market?.href ??
     (item.sport === "tennis"
@@ -53,7 +55,9 @@ function SettlementRow({ item }: { item: SettlementItem }) {
         ? `/badminton/${item.matchId}`
         : item.sport === "mma"
           ? `/mma#m-${item.matchId}`
-          : `/receipts/${item.matchId}`);
+          : item.sport === "basketball"
+            ? `/basketball#b-${item.matchId}`
+            : `/receipts/${item.matchId}`);
   const cta = href.startsWith("/receipts") ? "收據 →" : "看賽事 →";
   return (
     <Link
@@ -117,13 +121,15 @@ function PendingRow({ item }: { item: PendingItem }) {
           ? "羽球"
           : item.sport === "mma"
             ? "UFC"
-            : "棒球";
+            : item.sport === "basketball"
+              ? "籃球"
+              : "棒球";
   // 🔴 MLB 沒有賽前收據(getBaseballPendingReceipt 只認 cpbl-)→ /receipts/[mlb-] 會 404 = 又一個死路。
   //   CPBL + 足球有賽前可外傳收據(走 /receipts);MLB 退到比賽詳情頁(/matches 認 MLB id · 不 404)。
   //   網球 / 羽球沒有單場收據(/receipts/tn-、/receipts/bd- 會 404)→ 連到既有 /[sport]/[id] 詳情頁。
-  //   MMA 沒有單場詳情頁 → 連回 /mma 看板那張卡(錨點 m-<id>)。
+  //   MMA / 籃球沒有單場詳情頁 → 連回看板那張卡(錨點 m-<id> / b-<id>)。
   const isMlb = item.matchId.startsWith("mlb-");
-  // 玩法(大小分/讓分)用 market.href(已解父場 · 同規則)· 一般場照 isMlb / 網球 / 羽球 / MMA 分流。
+  // 玩法(大小分/讓分)用 market.href(已解父場 · 同規則)· 一般場照 isMlb / 網球 / 羽球 / MMA / 籃球 分流。
   const href =
     item.market?.href ??
     (item.sport === "tennis"
@@ -132,9 +138,11 @@ function PendingRow({ item }: { item: PendingItem }) {
         ? `/badminton/${item.matchId}`
         : item.sport === "mma"
           ? `/mma#m-${item.matchId}`
-          : isMlb
-            ? `/matches/${item.matchId}`
-            : `/receipts/${item.matchId}`);
+          : item.sport === "basketball"
+            ? `/basketball#b-${item.matchId}`
+            : isMlb
+              ? `/matches/${item.matchId}`
+              : `/receipts/${item.matchId}`);
   // 🔴 標籤跟著目的地走:/matches → 「看賽事」· /receipts → 「收據」。
   const cta = href.startsWith("/receipts") ? "收據 →" : "看賽事 →";
   return (
