@@ -10364,8 +10364,12 @@
       },
       "engineWinHomePct": 38,
       "lockedAt": "2026-06-27T03:59:36.668Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 3,
+        "away": 2
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-06-29T04:41:16.349Z"
     },
     {
       "gamePk": 823281,
@@ -10393,8 +10397,12 @@
       },
       "engineWinHomePct": 62,
       "lockedAt": "2026-06-26T17:03:59.060Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 2,
+        "away": 4
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-06-29T04:41:16.349Z"
     },
     {
       "gamePk": 824744,
@@ -10422,8 +10430,12 @@
       },
       "engineWinHomePct": 50,
       "lockedAt": "2026-06-26T17:03:59.060Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 5,
+        "away": 4
+      },
+      "verdict": "push",
+      "gradedAt": "2026-06-29T04:41:16.349Z"
     },
     {
       "gamePk": 824822,
@@ -10567,6 +10579,35 @@
       },
       "engineWinHomePct": 80,
       "lockedAt": "2026-06-28T22:06:09.028Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 824420,
+      "gameDate": "2026-06-29T23:10:00Z",
+      "scheduleDate": "2026-06-29",
+      "homeId": 114,
+      "homeEn": "Cleveland Guardians",
+      "homeRecord": "44-40",
+      "awayId": 140,
+      "awayEn": "Texas Rangers",
+      "awayRecord": "42-42",
+      "homePitcher": "Parker Messick",
+      "awayPitcher": "Tyler Alexander",
+      "homeStats": {
+        "era": "2.67",
+        "k9": "9.64",
+        "bb9": "2.77",
+        "hr9": "0.86"
+      },
+      "awayStats": {
+        "era": "2.62",
+        "k9": "7.08",
+        "bb9": "2.62",
+        "hr9": "0.52"
+      },
+      "engineWinHomePct": 57,
+      "lockedAt": "2026-06-29T04:41:15.360Z",
       "finalScore": null,
       "verdict": null
     },
@@ -10886,6 +10927,35 @@
       },
       "engineWinHomePct": 50,
       "lockedAt": "2026-06-28T22:06:09.028Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 824907,
+      "gameDate": "2026-06-30T23:15:00Z",
+      "scheduleDate": "2026-06-30",
+      "homeId": 144,
+      "homeEn": "Atlanta Braves",
+      "homeRecord": "49-33",
+      "awayId": 138,
+      "awayEn": "St. Louis Cardinals",
+      "awayRecord": "43-38",
+      "homePitcher": "Martín Pérez",
+      "awayPitcher": "Matthew Liberatore",
+      "homeStats": {
+        "era": "3.00",
+        "k9": "7.50",
+        "bb9": "3.38",
+        "hr9": "0.88"
+      },
+      "awayStats": {
+        "era": "5.56",
+        "k9": "8.11",
+        "bb9": "3.36",
+        "hr9": "1.97"
+      },
+      "engineWinHomePct": 70,
+      "lockedAt": "2026-06-29T04:41:15.360Z",
       "finalScore": null,
       "verdict": null
     },
