@@ -2439,6 +2439,34 @@
       "outcome": null,
       "verdict": null,
       "gradedAt": null
+    },
+    {
+      "matchId": "fd-537422",
+      "competitionCode": "WC",
+      "competitionName": "世界盃",
+      "kickoffISO": "2026-07-01T20:00:00Z",
+      "status": "TIMED",
+      "homeSeed": "Belgium",
+      "awaySeed": "Senegal",
+      "home": "比利時",
+      "away": "塞內加爾",
+      "ratingHome": 1764,
+      "ratingAway": 1708,
+      "homeAdvantage": 0,
+      "xgHome": 1.4260000000000002,
+      "xgAway": 1.174,
+      "homeWin": 0.4182120349495387,
+      "draw": 0.2813239898646646,
+      "awayWin": 0.3004639751857961,
+      "homeWinPct": 42,
+      "drawPct": 28,
+      "awayWinPct": 30,
+      "enginePick": "home",
+      "lockedAt": "2026-06-29T22:07:20.226Z",
+      "finalScore": null,
+      "outcome": null,
+      "verdict": null,
+      "gradedAt": null
     }
   ]
 }
