@@ -61,6 +61,8 @@ export const BASKETBALL_GAMES: BasketballGame[] = [
     time: "6/29 02:00",
     away: { zh: "明尼蘇達山貓", en: "Minnesota Lynx", key: "minnesota-lynx" },
     home: { zh: "達拉斯飛翼", en: "Dallas Wings", key: "dallas-wings" },
+    // 明尼蘇達(客)85:77 達拉斯 → 客勝。 引擎賽前看好明尼蘇達(客 59%)→ 命中。 Tim 截圖 curate。
+    finalResult: { winner: "away", score: "85:77", settledAt: "2026-06-29" },
   },
   {
     id: "bk-305",
@@ -69,6 +71,8 @@ export const BASKETBALL_GAMES: BasketballGame[] = [
     time: "6/29 03:00",
     away: { zh: "波特蘭火焰", en: "Portland Fire", key: "portland-fire" },
     home: { zh: "華盛頓神秘", en: "Washington Mystics", key: "washington-mystics" },
+    // 華盛頓(主)124:123 波特蘭(加時)→ 主勝。 引擎賽前看好華盛頓(主 67%)→ 命中。 Tim 截圖 curate。
+    finalResult: { winner: "home", score: "123:124(加時)", settledAt: "2026-06-29" },
   },
   {
     id: "bk-306",
@@ -77,6 +81,8 @@ export const BASKETBALL_GAMES: BasketballGame[] = [
     time: "6/29 04:00",
     away: { zh: "拉斯維加斯王牌", en: "Las Vegas Aces", key: "las-vegas-aces" },
     home: { zh: "芝加哥天空", en: "Chicago Sky", key: "chicago-sky" },
+    // 拉斯維加斯(客)107:99 芝加哥 → 客勝。 引擎賽前看好拉斯維加斯(客 85% 大熱)→ 命中。 Tim 截圖 curate。
+    finalResult: { winner: "away", score: "107:99", settledAt: "2026-06-29" },
   },
   {
     id: "bk-307",
@@ -85,6 +91,8 @@ export const BASKETBALL_GAMES: BasketballGame[] = [
     time: "6/29 07:00",
     away: { zh: "紐約自由", en: "New York Liberty", key: "new-york-liberty" },
     home: { zh: "金州瓦爾基里", en: "Golden State Valkyries", key: "golden-state-valkyries" },
+    // 金州(主)76:67 紐約 → 主勝。 引擎賽前看好金州(主 59% 均勢)→ 命中。 Tim 截圖 curate。
+    finalResult: { winner: "home", score: "67:76", settledAt: "2026-06-29" },
   },
 ];
 

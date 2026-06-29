@@ -85,6 +85,9 @@ export const BADMINTON_DRAW: BadmintonMatch[] = [
     time: "6/29 06:20",
     a: { zh: "基達姆比", en: "Kidambi Srikanth", rank: 20, confidence: "high" },
     b: { zh: "蘇力揚", en: "Su Li-yang", rank: 65, confidence: "medium" },
+    // 🔴 引擎賽前看好基達姆比(排名 20 > 65)· 結果蘇力揚(台灣)2-1 爆冷晉級決賽 → DIVERGED(引擎沒中 ·
+    //    誠實掛 · 羽球天花板 ~63% 本就 1/3 翻盤空間 · 含輸照算)。 Tim 截圖 curate。
+    finalResult: { winner: "b", score: "21-15 16-21 21-9", settledAt: "2026-06-29" },
   },
   {
     id: "bd-2500-0629",
@@ -94,6 +97,8 @@ export const BADMINTON_DRAW: BadmintonMatch[] = [
     note: "女單兩位都是我們查不到可靠排名的國際選手 —— 不硬開假盤,照樣可押。",
     a: { zh: "克里絲托芙森", en: "Line Christophersen", rank: null, confidence: "low" },
     b: { zh: "納爾班托娃", en: "Kaloyana Nalbantova", rank: null, confidence: "low" },
+    // 克里絲托芙森 2-1 擊敗納爾班托娃晉級決賽(引擎未開盤 · 兩位都查不到排名 · 用戶押注照對帳)。 Tim 截圖 curate。
+    finalResult: { winner: "a", score: "21-16 16-21 21-11", settledAt: "2026-06-29" },
   },
   // ── 2026-06-28 美國公開賽 R3(週日清晨台北 · Tim 運彩截圖 curate · 照運彩名字原封不動)──
   //   R3 對手仍多認不出 / 查不到排名 → 誠實不硬開引擎線(照樣可押)· 女單首度上架(同樣不硬開)。
