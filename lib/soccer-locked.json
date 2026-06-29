@@ -2380,6 +2380,34 @@
       "outcome": null,
       "verdict": null,
       "gradedAt": null
+    },
+    {
+      "matchId": "fd-537425",
+      "competitionCode": "WC",
+      "competitionName": "世界盃",
+      "kickoffISO": "2026-07-01T01:00:00Z",
+      "status": "TIMED",
+      "homeSeed": "Mexico",
+      "awaySeed": "Ecuador",
+      "home": "墨西哥",
+      "away": "厄瓜多",
+      "ratingHome": 1702,
+      "ratingAway": 1714,
+      "homeAdvantage": 35,
+      "xgHome": 1.35175,
+      "xgAway": 1.24825,
+      "homeWin": 0.3824599421346771,
+      "draw": 0.2835497761190038,
+      "awayWin": 0.3339902817463189,
+      "homeWinPct": 38,
+      "drawPct": 28,
+      "awayWinPct": 34,
+      "enginePick": "home",
+      "lockedAt": "2026-06-29T03:38:34.594Z",
+      "finalScore": null,
+      "outcome": null,
+      "verdict": null,
+      "gradedAt": null
     }
   ]
 }
