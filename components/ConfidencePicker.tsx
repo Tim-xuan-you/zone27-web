@@ -69,7 +69,7 @@ export default function ConfidencePicker({
             type="button"
             disabled={saving}
             onClick={() => choose(v)}
-            className="flex-1 min-h-[40px] font-mono text-[10px] tracking-[0.05em] border border-gold/30 text-mute hover:text-gold hover:border-gold/60 hover:bg-gold/5 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+            className="flex-1 min-h-[44px] font-mono text-[10px] tracking-[0.05em] border border-gold/30 text-mute hover:text-gold hover:border-gold/60 hover:bg-gold/5 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
           >
             {v / 10}成
           </button>

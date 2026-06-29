@@ -30,7 +30,8 @@ export type BasketballTeam = {
 export type BasketballFinalResult = {
   /** 贏的那邊(主 / 客) */
   winner: BasketballPick;
-  /** 比分(選填 · 例「88:79」) */
+  /** 比分(選填)· 🔴 一律「客:主」順序(同看板卡 客@主 視覺序 + 運彩截圖客在上)· 例「85:77」=客 85 主 77。
+   *  顯示層目前不渲染此欄(純資料)· winner 才是結算單一真相;此欄只供日後收據顯示 + 人工核對。 */
   score?: string;
   /** 結算時戳 */
   settledAt?: string;
@@ -71,7 +72,7 @@ export const BASKETBALL_GAMES: BasketballGame[] = [
     time: "6/29 03:00",
     away: { zh: "波特蘭火焰", en: "Portland Fire", key: "portland-fire" },
     home: { zh: "華盛頓神秘", en: "Washington Mystics", key: "washington-mystics" },
-    // 華盛頓(主)124:123 波特蘭(加時)→ 主勝。 引擎賽前看好華盛頓(主 67%)→ 命中。 Tim 截圖 curate。
+    // 波特蘭(客)123:124 華盛頓(加時)→ 主勝。 引擎賽前看好華盛頓(主 67%)→ 命中。 score=客:主。 Tim 截圖 curate。
     finalResult: { winner: "home", score: "123:124(加時)", settledAt: "2026-06-29" },
   },
   {
@@ -91,7 +92,7 @@ export const BASKETBALL_GAMES: BasketballGame[] = [
     time: "6/29 07:00",
     away: { zh: "紐約自由", en: "New York Liberty", key: "new-york-liberty" },
     home: { zh: "金州瓦爾基里", en: "Golden State Valkyries", key: "golden-state-valkyries" },
-    // 金州(主)76:67 紐約 → 主勝。 引擎賽前看好金州(主 59% 均勢)→ 命中。 Tim 截圖 curate。
+    // 紐約(客)67:76 金州 → 主勝。 引擎賽前看好金州(主 59% 均勢)→ 命中。 score=客:主。 Tim 截圖 curate。
     finalResult: { winner: "home", score: "67:76", settledAt: "2026-06-29" },
   },
 ];

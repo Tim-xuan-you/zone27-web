@@ -239,7 +239,7 @@ function BetBtn({ label, disabled, onClick }: { label: string; disabled: boolean
       type="button"
       onClick={onClick}
       disabled={disabled}
-      className="flex-1 px-2 py-2.5 min-h-[40px] font-mono text-[10px] tracking-[0.1em] border border-gold/40 text-bone hover:border-gold hover:bg-gold/10 transition-colors disabled:opacity-40 disabled:cursor-not-allowed whitespace-nowrap"
+      className="flex-1 px-2 py-2.5 min-h-[44px] font-mono text-[10px] tracking-[0.1em] border border-gold/40 text-bone hover:border-gold hover:bg-gold/10 transition-colors disabled:opacity-40 disabled:cursor-not-allowed whitespace-nowrap"
     >
       {label}
     </button>

@@ -170,12 +170,12 @@ p, li {
 /* R108 W4 · widow-prevention for 1-line tabular stat captions · per
    Agent 3 UX research · iPhone 13 mini(375px)經常 orphan「LOWER better」
    /「HIGHER better」/「聯盟 elite ~2.00」 最後一字 · FanGraphs publication-
-   grade discipline · 0 deps · gracefully degrades(text-wrap-style: pretty
-   Chrome 130+ Baseline 2025)。 word-break: keep-all 防 CJK 標點 mid-word
-   切斷 per W3C CLREQ。 */
+   grade discipline · 0 deps。 text-wrap: balance 做寡行防護(舊瀏覽器無痛降級)。
+   word-break: keep-all 防 CJK 標點 mid-word 切斷 per W3C CLREQ。
+   🔴 R291 移除無效的 `text-wrap-style: pretty`(任何瀏覽器都沒實作此 property 名 ·
+   正名是 text-wrap: pretty,但與上方 balance 同 property 互斥 → 直接移除死碼)。 */
 .stat-caption {
   text-wrap: balance;
-  text-wrap-style: pretty;
   word-break: keep-all;
 }
 

@@ -127,6 +127,11 @@ async function getMyPicksSplit(): Promise<{
         if (row.pick === "home" || row.pick === "away") {
           basketball.set(id, { pick: row.pick, ts });
         }
+      } else if (process.env.NODE_ENV !== "production" && !id.startsWith("mkt-")) {
+        // 🔴 沒被任何運動 allowlist 認領的 match_id(非 mkt- 群眾盤 = 刻意不進收件匣)→ 靜默掉 =
+        //   使用者看不到的押注(資料品質警報:打錯前綴 / 新運動漏接)。 dev-only 警告讓它可診斷 ——
+        //   🔴 絕不 throw(整支被下方 try/catch 包 · throw 會清空整個收件匣 = 比靜默更糟)· warn-and-skip。
+        console.warn("[settlement] 未分流的押注 id(不屬任何已知運動前綴):", id);
       }
     }
   } catch {
@@ -213,7 +218,14 @@ async function gatherRaws(
       }
       // ── 一般「誰贏」(h2h)──
       const m = byId.get(id);
-      if (!m) continue;
+      if (!m) {
+        // 🔴 押的 mlb-/cpbl- 場對不到賽事(MLB live 窗外 + 未進永久鎖定 = 罕見賽果來源缺口)→
+        //   這手會從收件匣消失(非 pending 非 settled)。 dev-only 警告讓「幽靈失蹤押注」可診斷
+        //   (完整「保留成 pending」需動 buildInbox · 真遇到再補)· 不 throw(同上 · 保 graceful)。
+        if (process.env.NODE_ENV !== "production")
+          console.warn("[settlement] 棒球押注對不到賽事(live 窗外 + 未鎖定):", id);
+        continue;
+      }
       const fr = m.finalResult;
       // 平手(tie)不進對照(同 computeSettlementDelta)· finalWinner=null → buildInbox 略過。
       const finalWinner =

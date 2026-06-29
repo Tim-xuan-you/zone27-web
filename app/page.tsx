@@ -199,8 +199,11 @@ export default async function Home() {
             免費。 連全世界最強的 AI,賽前單場也只到{" "}
             <span className="text-bone">5 成 7</span> —— 我們不喊神準,只把準度攤開給你看。
           </p>
-          {/* 引擎戰績 · Pratfall「連輸的也掛」· 一行安靜的 proof(不是按鈕)· 永遠不刪。 */}
-          {tr.total > 0 && (
+          {/* 引擎戰績 · Pratfall「連輸的也掛」· 一行安靜的 proof(不是按鈕)· 永遠不刪。
+              🔴 R291 audit:tr.total===0(休賽/剛上線)時別讓整個 proof 連結消失 —— 那會讓上方
+              「贏輸都刪不掉」變成沒有出口的空話。 0 場時改顯「每場都對帳」誠實承諾(絕不捏造數字 ·
+              守 Pratfall/disclosure 紅線),連結永遠在。 */}
+          {tr.total > 0 ? (
             <Link
               href="/track-record"
               className="mt-5 inline-flex items-baseline gap-2.5 sm:gap-3 font-mono tabular flex-wrap justify-center hover:opacity-80 transition-opacity"
@@ -213,6 +216,16 @@ export default async function Home() {
               <span className="text-gold text-sm">✓{tr.proved}</span>
               <span className="text-loss/85 text-sm">✕{tr.diverged}</span>
               <span className="text-mute text-[9px] tracking-[0.2em]">看每一場 →</span>
+            </Link>
+          ) : (
+            <Link
+              href="/track-record"
+              className="mt-5 inline-flex items-baseline gap-2.5 font-mono justify-center hover:opacity-80 transition-opacity"
+              aria-label="公開戰績 · 每場賽前鎖死、賽後對帳、贏輸都不刪"
+            >
+              <span className="text-mute text-[10px] tracking-[0.3em]">引擎戰績</span>
+              <span className="text-bone text-sm">每場都對帳 · 贏輸都不刪</span>
+              <span className="text-mute text-[9px] tracking-[0.2em]">看帳本 →</span>
             </Link>
           )}
 

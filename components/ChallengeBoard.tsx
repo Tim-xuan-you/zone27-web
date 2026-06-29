@@ -79,6 +79,20 @@ export default function ChallengeBoard({
       else if (chHit && vwHit) verdictLine = "這場兩個都讀對 · 平分秋色";
       else verdictLine = "這場兩個都讀偏了 · 機器笑而不語";
     }
+    // 🔴 峰終時刻的「回敬」鉤子(散播命門 R288/R291 audit #1)· 賽後對帳是雙方最想嗆/雪恥的一刻,
+    //   原本只有一條灰字連結 = 迴圈在此斷掉(A→B 應戰→B 贏→死路)。 文案吃對帳結果(贏想嗆 / 輸想雪恥 /
+    //   平想加賽),落到今日一戰開一張「換你盲押我」的新戰帖(到那邊鎖一手即自帶分享鈕,把迴圈接回)。
+    //   守紅線:數應戰不數連勝、無紅綠、無煙火、輸的框成「雪恥」而非「曬輸」。
+    const rematchCta =
+      viewerPick == null
+        ? "換你開一張自己的戰帖"
+        : push
+          ? "這場平手 · 再開一張分高下"
+          : vwHit && !chHit
+            ? "你讀贏了 · 換你盲押我"
+            : chHit && !vwHit
+              ? "不服?開一張回敬"
+              : "再開一張 · 分個高下";
     return (
       <div className="mt-5 border border-line/60 bg-slate/30 p-5">
         <p className="font-mono text-mute/60 text-[9px] tracking-[0.3em] mb-3">
@@ -106,16 +120,17 @@ export default function ChallengeBoard({
           </p>
         )}
 
-        <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2 font-mono text-[10px] tracking-[0.2em]">
+        <div className="mt-5 pt-4 border-t border-gold/15 flex flex-col gap-2.5">
+          {/* 回敬:峰終時刻一鍵落今日一戰開新戰帖(到那邊鎖一手即自帶分享鈕 → 把斷掉的迴圈接回)。 */}
           <Link
             href="/today"
-            className="text-gold/85 hover:text-gold underline-offset-4 hover:underline transition-colors"
+            className="inline-flex items-center justify-center gap-2 min-h-[44px] bg-gold/10 border border-gold/45 text-gold hover:bg-gold/15 hover:border-gold font-mono text-[11px] tracking-[0.2em] px-4 py-2.5 transition-colors"
           >
-            換你開一張戰帖 · 今日一戰 →
+            {rematchCta} →
           </Link>
           <Link
             href={`/u/${code}`}
-            className="text-mute hover:text-gold underline-offset-4 hover:underline transition-colors"
+            className="text-center font-mono text-mute hover:text-gold text-[10px] tracking-[0.2em] underline-offset-4 hover:underline transition-colors"
           >
             看 {challengerLabel} 的公開戰績 →
           </Link>

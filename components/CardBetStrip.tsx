@@ -235,7 +235,7 @@ export default function CardBetStrip({
           </p>
           <Link
             href={`/login?next=${encodeURIComponent(returnTo ?? `/matches/${matchId}`)}`}
-            className="block text-center px-3 py-2.5 min-h-[40px] border border-gold/40 text-gold hover:bg-gold/10 hover:border-gold font-mono text-[10px] tracking-[0.15em] transition-colors"
+            className="block text-center px-3 py-2.5 min-h-[44px] border border-gold/40 text-gold hover:bg-gold/10 hover:border-gold font-mono text-[10px] tracking-[0.15em] transition-colors"
           >
             免費加入 → 押這場
           </Link>
@@ -249,7 +249,7 @@ export default function CardBetStrip({
             type="button"
             onClick={() => enterMember("home")}
             disabled={saving}
-            className="px-2 py-2.5 min-h-[40px] border border-gold/40 text-bone hover:border-gold hover:bg-gold/10 font-mono text-[10px] tracking-[0.15em] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            className="px-2 py-2.5 min-h-[44px] border border-gold/40 text-bone hover:border-gold hover:bg-gold/10 font-mono text-[10px] tracking-[0.15em] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
             押 {homeName.slice(0, 4)}
           </button>
@@ -257,7 +257,7 @@ export default function CardBetStrip({
             type="button"
             onClick={() => enterMember("away")}
             disabled={saving}
-            className="px-2 py-2.5 min-h-[40px] border border-gold/40 text-bone hover:border-gold hover:bg-gold/10 font-mono text-[10px] tracking-[0.15em] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            className="px-2 py-2.5 min-h-[44px] border border-gold/40 text-bone hover:border-gold hover:bg-gold/10 font-mono text-[10px] tracking-[0.15em] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
             押 {awayName.slice(0, 4)}
           </button>
