@@ -11642,6 +11642,35 @@
       "verdict": null
     },
     {
+      "gamePk": 824416,
+      "gameDate": "2026-07-02T22:40:00Z",
+      "scheduleDate": "2026-07-02",
+      "homeId": 114,
+      "homeEn": "Cleveland Guardians",
+      "homeRecord": "44-41",
+      "awayId": 145,
+      "awayEn": "Chicago White Sox",
+      "awayRecord": "44-39",
+      "homePitcher": "Slade Cecconi",
+      "awayPitcher": "Davis Martin",
+      "homeStats": {
+        "era": "4.18",
+        "k9": "6.97",
+        "bb9": "2.89",
+        "hr9": "1.20"
+      },
+      "awayStats": {
+        "era": "3.00",
+        "k9": "8.71",
+        "bb9": "2.32",
+        "hr9": "0.58"
+      },
+      "engineWinHomePct": 42,
+      "lockedAt": "2026-06-30T20:06:14.462Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
       "gamePk": 823119,
       "gameDate": "2026-07-03T01:40:00Z",
       "scheduleDate": "2026-07-02",
