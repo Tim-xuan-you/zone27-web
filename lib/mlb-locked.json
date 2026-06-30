@@ -11582,6 +11582,93 @@
       "lockedAt": "2026-06-29T20:06:58.621Z",
       "finalScore": null,
       "verdict": null
+    },
+    {
+      "gamePk": 823442,
+      "gameDate": "2026-07-02T16:35:00Z",
+      "scheduleDate": "2026-07-02",
+      "homeId": 143,
+      "homeEn": "Philadelphia Phillies",
+      "homeRecord": "47-38",
+      "awayId": 134,
+      "awayEn": "Pittsburgh Pirates",
+      "awayRecord": "43-42",
+      "homePitcher": "Alan Rangel",
+      "awayPitcher": "Jared Jones",
+      "homeStats": {
+        "era": "4.50",
+        "k9": "9.75",
+        "bb9": "1.50",
+        "hr9": "0.75"
+      },
+      "awayStats": {
+        "era": "5.76",
+        "k9": "9.00",
+        "bb9": "3.24",
+        "hr9": "1.80"
+      },
+      "engineWinHomePct": 67,
+      "lockedAt": "2026-06-30T17:08:45.610Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 823765,
+      "gameDate": "2026-07-02T18:10:00Z",
+      "scheduleDate": "2026-07-02",
+      "homeId": 158,
+      "homeEn": "Milwaukee Brewers",
+      "homeRecord": "51-31",
+      "awayId": 113,
+      "awayEn": "Cincinnati Reds",
+      "awayRecord": "39-44",
+      "homePitcher": "Jacob Misiorowski",
+      "awayPitcher": "Chase Burns",
+      "homeStats": {
+        "era": "1.45",
+        "k9": "13.27",
+        "bb9": "2.45",
+        "hr9": "0.45"
+      },
+      "awayStats": {
+        "era": "2.36",
+        "k9": "11.00",
+        "bb9": "2.85",
+        "hr9": "1.08"
+      },
+      "engineWinHomePct": 66,
+      "lockedAt": "2026-06-30T17:08:45.610Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 823119,
+      "gameDate": "2026-07-03T01:40:00Z",
+      "scheduleDate": "2026-07-02",
+      "homeId": 136,
+      "homeEn": "Seattle Mariners",
+      "homeRecord": "43-43",
+      "awayId": 108,
+      "awayEn": "Los Angeles Angels",
+      "awayRecord": "36-50",
+      "homePitcher": "Bryce Miller",
+      "awayPitcher": "Walbert Ureña",
+      "homeStats": {
+        "era": "1.97",
+        "k9": "10.64",
+        "bb9": "0.99",
+        "hr9": "1.38"
+      },
+      "awayStats": {
+        "era": "3.14",
+        "k9": "8.67",
+        "bb9": "4.65",
+        "hr9": "0.63"
+      },
+      "engineWinHomePct": 58,
+      "lockedAt": "2026-06-30T17:08:45.610Z",
+      "finalScore": null,
+      "verdict": null
     }
   ]
 }
