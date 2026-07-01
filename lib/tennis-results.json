@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-07-01T20:29:33.170Z",
+  "generatedAt": "2026-07-01T22:52:11.499Z",
   "source": "site.api.espn.com tennis scoreboard (atp+wta singles · official · public · 0 auth)",
-  "count": 1280,
+  "count": 1282,
   "games": [
     {
       "tour": "atp",
@@ -12458,6 +12458,16 @@
       "tournament": "Wimbledon",
       "grouping": "Men's Singles",
       "date": "2026-07-01",
+      "winnerName": "Novak Djokovic",
+      "loserName": "Stefanos Tsitsipas",
+      "score": "6-3 6-4 6-2",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Wimbledon",
+      "grouping": "Men's Singles",
+      "date": "2026-07-01",
       "winnerName": "Roman Safiullin",
       "loserName": "Botic Van De Zandschulp",
       "score": "6-0 4-6 6-3 3-6 7-6",
@@ -12771,6 +12781,16 @@
       "winnerName": "Nikola Bartunkova",
       "loserName": "Katerina Siniakova",
       "score": "6-2 6-4",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Wimbledon",
+      "grouping": "Men's Singles",
+      "date": "2026-07-01",
+      "winnerName": "Novak Djokovic",
+      "loserName": "Stefanos Tsitsipas",
+      "score": "6-3 6-4 6-2",
       "retired": false
     },
     {
