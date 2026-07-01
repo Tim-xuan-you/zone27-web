@@ -11263,6 +11263,35 @@
       "gradedAt": "2026-07-01T10:00:30.044Z"
     },
     {
+      "gamePk": 824818,
+      "gameDate": "2026-07-01T16:35:00Z",
+      "scheduleDate": "2026-07-01",
+      "homeId": 110,
+      "homeEn": "Baltimore Orioles",
+      "homeRecord": "39-48",
+      "awayId": 145,
+      "awayEn": "Chicago White Sox",
+      "awayRecord": "45-39",
+      "homePitcher": "Dean Kremer",
+      "awayPitcher": "Noah Schultz",
+      "homeStats": {
+        "era": "4.09",
+        "k9": "13.09",
+        "bb9": "1.64",
+        "hr9": "3.27"
+      },
+      "awayStats": {
+        "era": "5.82",
+        "k9": "7.68",
+        "bb9": "5.12",
+        "hr9": "0.93"
+      },
+      "engineWinHomePct": 58,
+      "lockedAt": "2026-07-01T14:48:30.838Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
       "gamePk": 824419,
       "gameDate": "2026-07-01T17:10:00Z",
       "scheduleDate": "2026-07-01",
@@ -11723,6 +11752,35 @@
       },
       "engineWinHomePct": 42,
       "lockedAt": "2026-06-30T20:06:14.462Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 822884,
+      "gameDate": "2026-07-03T00:05:00Z",
+      "scheduleDate": "2026-07-02",
+      "homeId": 140,
+      "homeEn": "Texas Rangers",
+      "homeRecord": "44-42",
+      "awayId": 116,
+      "awayEn": "Detroit Tigers",
+      "awayRecord": "37-49",
+      "homePitcher": "Nathan Eovaldi",
+      "awayPitcher": "Framber Valdez",
+      "homeStats": {
+        "era": "3.95",
+        "k9": "9.06",
+        "bb9": "2.06",
+        "hr9": "1.52"
+      },
+      "awayStats": {
+        "era": "4.05",
+        "k9": "7.24",
+        "bb9": "3.20",
+        "hr9": "0.94"
+      },
+      "engineWinHomePct": 55,
+      "lockedAt": "2026-07-01T14:48:30.838Z",
       "finalScore": null,
       "verdict": null
     },
