@@ -11354,8 +11354,12 @@
       },
       "engineWinHomePct": 52,
       "lockedAt": "2026-06-29T20:06:58.621Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 2,
+        "away": 10
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-07-01T22:22:03.989Z"
     },
     {
       "gamePk": 823530,
@@ -11383,8 +11387,12 @@
       },
       "engineWinHomePct": 59,
       "lockedAt": "2026-06-29T20:06:58.621Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 2,
+        "away": 6
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-07-01T22:22:03.989Z"
     },
     {
       "gamePk": 824660,
@@ -11412,8 +11420,12 @@
       },
       "engineWinHomePct": 44,
       "lockedAt": "2026-06-29T20:06:58.621Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 23,
+        "away": 3
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-07-01T22:22:03.989Z"
     },
     {
       "gamePk": 822791,
@@ -11441,8 +11453,12 @@
       },
       "engineWinHomePct": 48,
       "lockedAt": "2026-06-29T20:06:58.621Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 9,
+        "away": 3
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-07-01T22:22:03.989Z"
     },
     {
       "gamePk": 823446,
@@ -11818,6 +11834,35 @@
       },
       "engineWinHomePct": 58,
       "lockedAt": "2026-06-30T17:08:45.610Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 823527,
+      "gameDate": "2026-07-03T23:05:00Z",
+      "scheduleDate": "2026-07-03",
+      "homeId": 147,
+      "homeEn": "New York Yankees",
+      "homeRecord": "48-38",
+      "awayId": 142,
+      "awayEn": "Minnesota Twins",
+      "awayRecord": "41-46",
+      "homePitcher": "Gerrit Cole",
+      "awayPitcher": "Mike Paredes",
+      "homeStats": {
+        "era": "4.06",
+        "k9": "8.12",
+        "bb9": "2.39",
+        "hr9": "1.67"
+      },
+      "awayStats": {
+        "era": "4.26",
+        "k9": "4.62",
+        "bb9": "3.20",
+        "hr9": "1.42"
+      },
+      "engineWinHomePct": 60,
+      "lockedAt": "2026-07-01T22:22:03.606Z",
       "finalScore": null,
       "verdict": null
     },
