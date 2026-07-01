@@ -11812,6 +11812,64 @@
       "lockedAt": "2026-06-30T17:08:45.610Z",
       "finalScore": null,
       "verdict": null
+    },
+    {
+      "gamePk": 824498,
+      "gameDate": "2026-07-03T23:10:00Z",
+      "scheduleDate": "2026-07-03",
+      "homeId": 113,
+      "homeEn": "Cincinnati Reds",
+      "homeRecord": "39-45",
+      "awayId": 110,
+      "awayEn": "Baltimore Orioles",
+      "awayRecord": "39-48",
+      "homePitcher": "Brady Singer",
+      "awayPitcher": "Trevor Rogers",
+      "homeStats": {
+        "era": "5.12",
+        "k9": "7.56",
+        "bb9": "2.91",
+        "hr9": "2.21"
+      },
+      "awayStats": {
+        "era": "4.99",
+        "k9": "6.92",
+        "bb9": "2.72",
+        "hr9": "1.02"
+      },
+      "engineWinHomePct": 48,
+      "lockedAt": "2026-07-01T17:20:32.638Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 824417,
+      "gameDate": "2026-07-03T23:10:00Z",
+      "scheduleDate": "2026-07-03",
+      "homeId": 114,
+      "homeEn": "Cleveland Guardians",
+      "homeRecord": "44-42",
+      "awayId": 145,
+      "awayEn": "Chicago White Sox",
+      "awayRecord": "45-39",
+      "homePitcher": "Gavin Williams",
+      "awayPitcher": "Anthony Kay",
+      "homeStats": {
+        "era": "3.81",
+        "k9": "10.36",
+        "bb9": "3.01",
+        "hr9": "1.33"
+      },
+      "awayStats": {
+        "era": "4.50",
+        "k9": "7.31",
+        "bb9": "3.49",
+        "hr9": "1.24"
+      },
+      "engineWinHomePct": 62,
+      "lockedAt": "2026-07-01T17:20:32.638Z",
+      "finalScore": null,
+      "verdict": null
     }
   ]
 }
