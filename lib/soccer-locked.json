@@ -2625,6 +2625,34 @@
       "outcome": null,
       "verdict": null,
       "gradedAt": null
+    },
+    {
+      "matchId": "fd-537427",
+      "competitionCode": "WC",
+      "competitionName": "世界盃",
+      "kickoffISO": "2026-07-03T22:00:00Z",
+      "status": "TIMED",
+      "homeSeed": "Argentina",
+      "awaySeed": "Cape Verde",
+      "home": "阿根廷",
+      "away": "維德角",
+      "ratingHome": 1875,
+      "ratingAway": 1582,
+      "homeAdvantage": 0,
+      "xgHome": 1.95925,
+      "xgAway": 0.64075,
+      "homeWin": 0.6789745784567096,
+      "draw": 0.21616153885458467,
+      "awayWin": 0.1048638826887057,
+      "homeWinPct": 68,
+      "drawPct": 22,
+      "awayWinPct": 10,
+      "enginePick": "home",
+      "lockedAt": "2026-07-01T22:16:14.025Z",
+      "finalScore": null,
+      "outcome": null,
+      "verdict": null,
+      "gradedAt": null
     }
   ]
 }
