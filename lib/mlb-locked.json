@@ -11783,8 +11783,12 @@
       },
       "engineWinHomePct": 66,
       "lockedAt": "2026-06-30T17:08:45.610Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 2,
+        "away": 7
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-07-02T22:12:09.325Z"
     },
     {
       "gamePk": 824335,
@@ -11812,8 +11816,12 @@
       },
       "engineWinHomePct": 41,
       "lockedAt": "2026-07-02T04:03:28.656Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 14,
+        "away": 4
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-07-02T22:12:09.325Z"
     },
     {
       "gamePk": 824416,
@@ -12251,6 +12259,35 @@
       "verdict": null
     },
     {
+      "gamePk": 823120,
+      "gameDate": "2026-07-04T02:10:00Z",
+      "scheduleDate": "2026-07-03",
+      "homeId": 136,
+      "homeEn": "Seattle Mariners",
+      "homeRecord": "44-43",
+      "awayId": 141,
+      "awayEn": "Toronto Blue Jays",
+      "awayRecord": "41-46",
+      "homePitcher": "Luis Castillo",
+      "awayPitcher": "Dylan Cease",
+      "homeStats": {
+        "era": "4.93",
+        "k9": "8.57",
+        "bb9": "3.05",
+        "hr9": "1.06"
+      },
+      "awayStats": {
+        "era": "3.02",
+        "k9": "13.82",
+        "bb9": "4.32",
+        "hr9": "0.54"
+      },
+      "engineWinHomePct": 33,
+      "lockedAt": "2026-07-02T22:12:08.331Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
       "gamePk": 822716,
       "gameDate": "2026-07-04T15:05:00Z",
       "scheduleDate": "2026-07-04",
@@ -12334,6 +12371,35 @@
       },
       "engineWinHomePct": 53,
       "lockedAt": "2026-07-02T16:54:25.750Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 823118,
+      "gameDate": "2026-07-04T20:10:00Z",
+      "scheduleDate": "2026-07-04",
+      "homeId": 136,
+      "homeEn": "Seattle Mariners",
+      "homeRecord": "44-43",
+      "awayId": 141,
+      "awayEn": "Toronto Blue Jays",
+      "awayRecord": "41-46",
+      "homePitcher": "Logan Gilbert",
+      "awayPitcher": "Shane Bieber",
+      "homeStats": {
+        "era": "3.42",
+        "k9": "9.63",
+        "bb9": "1.98",
+        "hr9": "1.26"
+      },
+      "awayStats": {
+        "era": "6.00",
+        "k9": "6.00",
+        "bb9": "4.00",
+        "hr9": "4.00"
+      },
+      "engineWinHomePct": 80,
+      "lockedAt": "2026-07-02T22:12:08.331Z",
       "finalScore": null,
       "verdict": null
     },
