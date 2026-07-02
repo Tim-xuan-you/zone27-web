@@ -12015,6 +12015,35 @@
       "verdict": null
     },
     {
+      "gamePk": 822714,
+      "gameDate": "2026-07-03T22:45:00Z",
+      "scheduleDate": "2026-07-03",
+      "homeId": 120,
+      "homeEn": "Washington Nationals",
+      "homeRecord": "45-43",
+      "awayId": 134,
+      "awayEn": "Pittsburgh Pirates",
+      "awayRecord": "43-44",
+      "homePitcher": "Foster Griffin",
+      "awayPitcher": "Mitch Keller",
+      "homeStats": {
+        "era": "2.93",
+        "k9": "8.97",
+        "bb9": "2.29",
+        "hr9": "1.46"
+      },
+      "awayStats": {
+        "era": "4.87",
+        "k9": "6.96",
+        "bb9": "3.15",
+        "hr9": "0.86"
+      },
+      "engineWinHomePct": 62,
+      "lockedAt": "2026-07-02T14:16:55.836Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
       "gamePk": 823527,
       "gameDate": "2026-07-03T23:05:00Z",
       "scheduleDate": "2026-07-03",
@@ -12127,6 +12156,35 @@
       },
       "engineWinHomePct": 42,
       "lockedAt": "2026-07-02T04:03:28.656Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 825062,
+      "gameDate": "2026-07-04T01:45:00Z",
+      "scheduleDate": "2026-07-03",
+      "homeId": 109,
+      "homeEn": "Arizona Diamondbacks",
+      "homeRecord": "43-43",
+      "awayId": 158,
+      "awayEn": "Milwaukee Brewers",
+      "awayRecord": "53-31",
+      "homePitcher": "Jose Cabrera",
+      "awayPitcher": "Kyle Harrison",
+      "homeStats": {
+        "era": "3.60",
+        "k9": "6.30",
+        "bb9": "1.80",
+        "hr9": "1.80"
+      },
+      "awayStats": {
+        "era": "2.57",
+        "k9": "11.22",
+        "bb9": "2.22",
+        "hr9": "1.05"
+      },
+      "engineWinHomePct": 36,
+      "lockedAt": "2026-07-02T14:16:55.836Z",
       "finalScore": null,
       "verdict": null
     },
