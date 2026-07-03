@@ -11849,8 +11849,12 @@
       },
       "engineWinHomePct": 42,
       "lockedAt": "2026-06-30T20:06:14.462Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 6,
+        "away": 5
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-07-03T03:49:45.909Z"
     },
     {
       "gamePk": 824906,
@@ -11878,8 +11882,12 @@
       },
       "engineWinHomePct": 80,
       "lockedAt": "2026-07-02T04:03:28.656Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 5,
+        "away": 11
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-07-03T03:49:45.909Z"
     },
     {
       "gamePk": 824093,
@@ -11907,8 +11915,12 @@
       },
       "engineWinHomePct": 47,
       "lockedAt": "2026-07-02T04:03:28.656Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 2,
+        "away": 5
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-07-03T03:49:45.909Z"
     },
     {
       "gamePk": 822884,
@@ -11936,8 +11948,12 @@
       },
       "engineWinHomePct": 55,
       "lockedAt": "2026-07-01T14:48:30.838Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 10,
+        "away": 4
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-07-03T03:49:45.909Z"
     },
     {
       "gamePk": 823119,
@@ -12168,6 +12184,64 @@
       },
       "engineWinHomePct": 42,
       "lockedAt": "2026-07-02T04:03:28.656Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 824173,
+      "gameDate": "2026-07-04T00:15:00Z",
+      "scheduleDate": "2026-07-03",
+      "homeId": 117,
+      "homeEn": "Houston Astros",
+      "homeRecord": "43-46",
+      "awayId": 139,
+      "awayEn": "Tampa Bay Rays",
+      "awayRecord": "51-33",
+      "homePitcher": "Spencer Arrighetti",
+      "awayPitcher": "Nick Martinez",
+      "homeStats": {
+        "era": "4.00",
+        "k9": "9.38",
+        "bb9": "4.63",
+        "hr9": "1.13"
+      },
+      "awayStats": {
+        "era": "2.66",
+        "k9": "5.51",
+        "bb9": "1.62",
+        "hr9": "0.86"
+      },
+      "engineWinHomePct": 55,
+      "lockedAt": "2026-07-03T03:49:44.448Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 824013,
+      "gameDate": "2026-07-04T01:38:00Z",
+      "scheduleDate": "2026-07-03",
+      "homeId": 108,
+      "homeEn": "Los Angeles Angels",
+      "homeRecord": "36-51",
+      "awayId": 111,
+      "awayEn": "Boston Red Sox",
+      "awayRecord": "37-48",
+      "homePitcher": "Reid Detmers",
+      "awayPitcher": "Jake Bennett",
+      "homeStats": {
+        "era": "3.88",
+        "k9": "10.11",
+        "bb9": "2.80",
+        "hr9": "0.72"
+      },
+      "awayStats": {
+        "era": "3.27",
+        "k9": "6.82",
+        "bb9": "1.91",
+        "hr9": "0.55"
+      },
+      "engineWinHomePct": 57,
+      "lockedAt": "2026-07-03T03:49:44.448Z",
       "finalScore": null,
       "verdict": null
     },
@@ -12433,6 +12507,35 @@
       "verdict": null
     },
     {
+      "gamePk": 824171,
+      "gameDate": "2026-07-04T23:10:00Z",
+      "scheduleDate": "2026-07-04",
+      "homeId": 117,
+      "homeEn": "Houston Astros",
+      "homeRecord": "43-46",
+      "awayId": 139,
+      "awayEn": "Tampa Bay Rays",
+      "awayRecord": "51-33",
+      "homePitcher": "Hunter Brown",
+      "awayPitcher": "Drew Rasmussen",
+      "homeStats": {
+        "era": "1.78",
+        "k9": "11.37",
+        "bb9": "4.62",
+        "hr9": "0.71"
+      },
+      "awayStats": {
+        "era": "2.45",
+        "k9": "9.20",
+        "bb9": "1.57",
+        "hr9": "0.88"
+      },
+      "engineWinHomePct": 62,
+      "lockedAt": "2026-07-03T03:49:44.448Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
       "gamePk": 824658,
       "gameDate": "2026-07-05T00:08:00Z",
       "scheduleDate": "2026-07-04",
@@ -12487,6 +12590,64 @@
       },
       "engineWinHomePct": 70,
       "lockedAt": "2026-07-02T16:54:25.750Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 824092,
+      "gameDate": "2026-07-05T00:10:00Z",
+      "scheduleDate": "2026-07-04",
+      "homeId": 118,
+      "homeEn": "Kansas City Royals",
+      "homeRecord": "35-53",
+      "awayId": 143,
+      "awayEn": "Philadelphia Phillies",
+      "awayRecord": "49-39",
+      "homePitcher": "Michael Wacha",
+      "awayPitcher": "Jesús Luzardo",
+      "homeStats": {
+        "era": "3.31",
+        "k9": "6.96",
+        "bb9": "2.48",
+        "hr9": "0.83"
+      },
+      "awayStats": {
+        "era": "3.88",
+        "k9": "10.73",
+        "bb9": "3.05",
+        "hr9": "0.83"
+      },
+      "engineWinHomePct": 49,
+      "lockedAt": "2026-07-03T03:49:44.448Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 824012,
+      "gameDate": "2026-07-05T01:38:00Z",
+      "scheduleDate": "2026-07-04",
+      "homeId": 108,
+      "homeEn": "Los Angeles Angels",
+      "homeRecord": "36-51",
+      "awayId": 111,
+      "awayEn": "Boston Red Sox",
+      "awayRecord": "37-48",
+      "homePitcher": "Sam Aldegheri",
+      "awayPitcher": "Sonny Gray",
+      "homeStats": {
+        "era": "4.85",
+        "k9": "6.07",
+        "bb9": "3.94",
+        "hr9": "1.21"
+      },
+      "awayStats": {
+        "era": "2.69",
+        "k9": "8.07",
+        "bb9": "2.26",
+        "hr9": "0.97"
+      },
+      "engineWinHomePct": 40,
+      "lockedAt": "2026-07-03T03:49:44.448Z",
       "finalScore": null,
       "verdict": null
     },
