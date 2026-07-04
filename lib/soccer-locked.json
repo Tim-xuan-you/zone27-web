@@ -2817,6 +2817,34 @@
       "outcome": null,
       "verdict": null,
       "gradedAt": null
+    },
+    {
+      "matchId": "fd-537379",
+      "competitionCode": "WC",
+      "competitionName": "世界盃",
+      "kickoffISO": "2026-07-06T19:00:00Z",
+      "status": "TIMED",
+      "homeSeed": "Portugal",
+      "awaySeed": "Spain",
+      "home": "葡萄牙",
+      "away": "西班牙",
+      "ratingHome": 1788,
+      "ratingAway": 1876,
+      "homeAdvantage": 0,
+      "xgHome": 1.102,
+      "xgAway": 1.498,
+      "homeWin": 0.26914199108957615,
+      "draw": 0.2774165334385264,
+      "awayWin": 0.45344147547189734,
+      "homeWinPct": 27,
+      "drawPct": 28,
+      "awayWinPct": 45,
+      "enginePick": "away",
+      "lockedAt": "2026-07-04T19:07:15.365Z",
+      "finalScore": null,
+      "outcome": null,
+      "verdict": null,
+      "gradedAt": null
     }
   ]
 }
