@@ -13199,6 +13199,64 @@
       "lockedAt": "2026-07-03T16:39:25.055Z",
       "finalScore": null,
       "verdict": null
+    },
+    {
+      "gamePk": 824089,
+      "gameDate": "2026-07-06T18:10:00Z",
+      "scheduleDate": "2026-07-06",
+      "homeId": 118,
+      "homeEn": "Kansas City Royals",
+      "homeRecord": "35-53",
+      "awayId": 143,
+      "awayEn": "Philadelphia Phillies",
+      "awayRecord": "49-39",
+      "homePitcher": "Noah Cameron",
+      "awayPitcher": "Cristopher Sánchez",
+      "homeStats": {
+        "era": "4.95",
+        "k9": "8.07",
+        "bb9": "2.69",
+        "hr9": "1.08"
+      },
+      "awayStats": {
+        "era": "2.00",
+        "k9": "10.46",
+        "bb9": "1.77",
+        "hr9": "0.62"
+      },
+      "engineWinHomePct": 35,
+      "lockedAt": "2026-07-04T16:08:07.921Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 824900,
+      "gameDate": "2026-07-06T23:15:00Z",
+      "scheduleDate": "2026-07-06",
+      "homeId": 144,
+      "homeEn": "Atlanta Braves",
+      "homeRecord": "51-35",
+      "awayId": 121,
+      "awayEn": "New York Mets",
+      "awayRecord": "36-52",
+      "homePitcher": "Reynaldo López",
+      "awayPitcher": "Freddy Peralta",
+      "homeStats": {
+        "era": "3.31",
+        "k9": "8.01",
+        "bb9": "3.83",
+        "hr9": "1.05"
+      },
+      "awayStats": {
+        "era": "4.81",
+        "k9": "8.69",
+        "bb9": "3.59",
+        "hr9": "1.23"
+      },
+      "engineWinHomePct": 60,
+      "lockedAt": "2026-07-04T16:08:07.921Z",
+      "finalScore": null,
+      "verdict": null
     }
   ]
 }
