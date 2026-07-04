@@ -12047,8 +12047,12 @@
       },
       "engineWinHomePct": 48,
       "lockedAt": "2026-07-02T04:03:28.656Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 1,
+        "away": 17
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-07-04T03:41:14.080Z"
     },
     {
       "gamePk": 822714,
@@ -12076,8 +12080,12 @@
       },
       "engineWinHomePct": 62,
       "lockedAt": "2026-07-02T14:16:55.836Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 9,
+        "away": 5
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-07-04T03:41:14.080Z"
     },
     {
       "gamePk": 823527,
@@ -12105,8 +12113,12 @@
       },
       "engineWinHomePct": 60,
       "lockedAt": "2026-07-01T22:22:03.606Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 5,
+        "away": 2
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-07-04T03:41:14.080Z"
     },
     {
       "gamePk": 824498,
@@ -12134,8 +12146,12 @@
       },
       "engineWinHomePct": 48,
       "lockedAt": "2026-07-01T17:20:32.638Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 0,
+        "away": 3
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-07-04T03:41:14.080Z"
     },
     {
       "gamePk": 824417,
@@ -12192,8 +12208,12 @@
       },
       "engineWinHomePct": 42,
       "lockedAt": "2026-07-02T04:03:28.656Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 5,
+        "away": 3
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-07-04T03:41:14.080Z"
     },
     {
       "gamePk": 824173,
@@ -12221,8 +12241,12 @@
       },
       "engineWinHomePct": 55,
       "lockedAt": "2026-07-03T03:49:44.448Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 1,
+        "away": 3
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-07-04T03:41:14.080Z"
     },
     {
       "gamePk": 824013,
@@ -12627,6 +12651,35 @@
       },
       "engineWinHomePct": 49,
       "lockedAt": "2026-07-03T03:49:44.448Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 824334,
+      "gameDate": "2026-07-05T00:10:00Z",
+      "scheduleDate": "2026-07-04",
+      "homeId": 115,
+      "homeEn": "Colorado Rockies",
+      "homeRecord": "36-53",
+      "awayId": 137,
+      "awayEn": "San Francisco Giants",
+      "awayRecord": "36-51",
+      "homePitcher": "Tomoyuki Sugano",
+      "awayPitcher": "Robbie Ray",
+      "homeStats": {
+        "era": "4.80",
+        "k9": "5.12",
+        "bb9": "2.45",
+        "hr9": "1.71"
+      },
+      "awayStats": {
+        "era": "3.39",
+        "k9": "7.71",
+        "bb9": "4.05",
+        "hr9": "1.32"
+      },
+      "engineWinHomePct": 41,
+      "lockedAt": "2026-07-04T03:41:13.624Z",
       "finalScore": null,
       "verdict": null
     },
