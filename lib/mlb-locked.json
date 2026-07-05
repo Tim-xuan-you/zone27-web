@@ -12509,8 +12509,12 @@
       },
       "engineWinHomePct": 53,
       "lockedAt": "2026-07-02T16:54:25.750Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 0,
+        "away": 3
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-07-05T04:00:40.549Z"
     },
     {
       "gamePk": 823118,
@@ -12538,8 +12542,12 @@
       },
       "engineWinHomePct": 80,
       "lockedAt": "2026-07-02T22:12:08.331Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 11,
+        "away": 0
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-07-05T04:00:40.549Z"
     },
     {
       "gamePk": 824415,
@@ -12567,8 +12575,12 @@
       },
       "engineWinHomePct": 59,
       "lockedAt": "2026-07-02T16:54:25.750Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 1,
+        "away": 3
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-07-05T04:00:40.549Z"
     },
     {
       "gamePk": 824171,
@@ -12596,8 +12608,12 @@
       },
       "engineWinHomePct": 62,
       "lockedAt": "2026-07-03T03:49:44.448Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 10,
+        "away": 8
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-07-05T04:00:40.549Z"
     },
     {
       "gamePk": 824658,
@@ -12654,8 +12670,12 @@
       },
       "engineWinHomePct": 70,
       "lockedAt": "2026-07-02T16:54:25.750Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 14,
+        "away": 3
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-07-05T04:00:40.549Z"
     },
     {
       "gamePk": 824092,
@@ -12683,8 +12703,12 @@
       },
       "engineWinHomePct": 49,
       "lockedAt": "2026-07-03T03:49:44.448Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 1,
+        "away": 6
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-07-05T04:00:40.549Z"
     },
     {
       "gamePk": 824334,
@@ -12712,8 +12736,12 @@
       },
       "engineWinHomePct": 41,
       "lockedAt": "2026-07-04T03:41:13.624Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 4,
+        "away": 6
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-07-05T04:00:40.549Z"
     },
     {
       "gamePk": 824012,
@@ -13093,6 +13121,35 @@
       "verdict": null
     },
     {
+      "gamePk": 824333,
+      "gameDate": "2026-07-05T20:00:00Z",
+      "scheduleDate": "2026-07-05",
+      "homeId": 115,
+      "homeEn": "Colorado Rockies",
+      "homeRecord": "36-54",
+      "awayId": 137,
+      "awayEn": "San Francisco Giants",
+      "awayRecord": "37-51",
+      "homePitcher": "Tanner Gordon",
+      "awayPitcher": "Tyler Mahle",
+      "homeStats": {
+        "era": "6.69",
+        "k9": "8.70",
+        "bb9": "1.79",
+        "hr9": "1.56"
+      },
+      "awayStats": {
+        "era": "5.67",
+        "k9": "8.64",
+        "bb9": "3.92",
+        "hr9": "1.62"
+      },
+      "engineWinHomePct": 50,
+      "lockedAt": "2026-07-05T04:00:39.496Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
       "gamePk": 824980,
       "gameDate": "2026-07-05T20:30:00Z",
       "scheduleDate": "2026-07-05",
@@ -13263,6 +13320,35 @@
       },
       "engineWinHomePct": 60,
       "lockedAt": "2026-07-04T16:08:07.921Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 823036,
+      "gameDate": "2026-07-06T23:45:00Z",
+      "scheduleDate": "2026-07-06",
+      "homeId": 138,
+      "homeEn": "St. Louis Cardinals",
+      "homeRecord": "46-39",
+      "awayId": 158,
+      "awayEn": "Milwaukee Brewers",
+      "awayRecord": "54-32",
+      "homePitcher": "Michael McGreevy",
+      "awayPitcher": "Shane Drohan",
+      "homeStats": {
+        "era": "3.12",
+        "k9": "5.66",
+        "bb9": "2.08",
+        "hr9": "1.23"
+      },
+      "awayStats": {
+        "era": "3.12",
+        "k9": "9.21",
+        "bb9": "2.81",
+        "hr9": "0.78"
+      },
+      "engineWinHomePct": 44,
+      "lockedAt": "2026-07-05T04:00:39.496Z",
       "finalScore": null,
       "verdict": null
     }
