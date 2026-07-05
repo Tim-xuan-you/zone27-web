@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-07-05T11:19:39.471Z",
+  "generatedAt": "2026-07-05T14:20:13.960Z",
   "source": "site.api.espn.com tennis scoreboard (atp+wta singles · official · public · 0 auth)",
-  "count": 1416,
+  "count": 1420,
   "games": [
     {
       "tour": "atp",
@@ -14148,6 +14148,16 @@
       "tournament": "Grand Est Open 88",
       "grouping": "Women's Singles",
       "date": "2026-07-05",
+      "winnerName": "Alicia Herrero Linana",
+      "loserName": "Dune Vaissaud",
+      "score": "5-7 6-1 6-0",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Grand Est Open 88",
+      "grouping": "Women's Singles",
+      "date": "2026-07-05",
       "winnerName": "Amandine Monnot",
       "loserName": "Jasmijn Gimbrere",
       "score": "6-3 7-6",
@@ -14161,6 +14171,36 @@
       "winnerName": "Liv Boulard",
       "loserName": "Polina Kudermetova",
       "score": "7-6 6-4",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Grand Est Open 88",
+      "grouping": "Women's Singles",
+      "date": "2026-07-05",
+      "winnerName": "Lucie Nguyen Tan",
+      "loserName": "Yana Morderger",
+      "score": "6-0 6-2",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Grand Est Open 88",
+      "grouping": "Women's Singles",
+      "date": "2026-07-05",
+      "winnerName": "Maria Sara Popa",
+      "loserName": "Yara Bartashevich",
+      "score": "6-1 7-6",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Grand Est Open 88",
+      "grouping": "Women's Singles",
+      "date": "2026-07-05",
+      "winnerName": "Yelyzaveta Kotliar",
+      "loserName": "Tayisiya Morderger",
+      "score": "3-6 6-3 6-0",
       "retired": false
     }
   ]
