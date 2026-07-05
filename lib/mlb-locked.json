@@ -13315,6 +13315,64 @@
       "verdict": null
     },
     {
+      "gamePk": 822958,
+      "gameDate": "2026-07-06T22:40:00Z",
+      "scheduleDate": "2026-07-06",
+      "homeId": 139,
+      "homeEn": "Tampa Bay Rays",
+      "homeRecord": "52-34",
+      "awayId": 147,
+      "awayEn": "New York Yankees",
+      "awayRecord": "49-39",
+      "homePitcher": "Griffin Jax",
+      "awayPitcher": "Cam Schlittler",
+      "homeStats": {
+        "era": "3.45",
+        "k9": "8.70",
+        "bb9": "3.00",
+        "hr9": "1.65"
+      },
+      "awayStats": {
+        "era": "2.08",
+        "k9": "10.64",
+        "bb9": "1.82",
+        "hr9": "0.87"
+      },
+      "engineWinHomePct": 40,
+      "lockedAt": "2026-07-05T19:26:16.744Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 822712,
+      "gameDate": "2026-07-06T22:45:00Z",
+      "scheduleDate": "2026-07-06",
+      "homeId": 120,
+      "homeEn": "Washington Nationals",
+      "homeRecord": "46-44",
+      "awayId": 117,
+      "awayEn": "Houston Astros",
+      "awayRecord": "44-47",
+      "homePitcher": "Miles Mikolas",
+      "awayPitcher": "Mike Burrows",
+      "homeStats": {
+        "era": "5.44",
+        "k9": "5.02",
+        "bb9": "1.81",
+        "hr9": "1.92"
+      },
+      "awayStats": {
+        "era": "5.58",
+        "k9": "7.17",
+        "bb9": "3.29",
+        "hr9": "1.89"
+      },
+      "engineWinHomePct": 50,
+      "lockedAt": "2026-07-05T19:26:16.744Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
       "gamePk": 824900,
       "gameDate": "2026-07-06T23:15:00Z",
       "scheduleDate": "2026-07-06",
@@ -13369,6 +13427,64 @@
       },
       "engineWinHomePct": 44,
       "lockedAt": "2026-07-05T04:00:39.496Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 822713,
+      "gameDate": "2026-07-07T22:45:00Z",
+      "scheduleDate": "2026-07-07",
+      "homeId": 120,
+      "homeEn": "Washington Nationals",
+      "homeRecord": "46-44",
+      "awayId": 117,
+      "awayEn": "Houston Astros",
+      "awayRecord": "44-47",
+      "homePitcher": "Andrew Alvarez",
+      "awayPitcher": "Tatsuya Imai",
+      "homeStats": {
+        "era": "3.05",
+        "k9": "10.45",
+        "bb9": "3.48",
+        "hr9": "0.44"
+      },
+      "awayStats": {
+        "era": "6.14",
+        "k9": "11.17",
+        "bb9": "5.59",
+        "hr9": "1.49"
+      },
+      "engineWinHomePct": 71,
+      "lockedAt": "2026-07-05T19:26:16.744Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 823687,
+      "gameDate": "2026-07-07T23:40:00Z",
+      "scheduleDate": "2026-07-07",
+      "homeId": 142,
+      "homeEn": "Minnesota Twins",
+      "homeRecord": "43-47",
+      "awayId": 114,
+      "awayEn": "Cleveland Guardians",
+      "awayRecord": "47-43",
+      "homePitcher": "Taj Bradley",
+      "awayPitcher": "Joey Cantillo",
+      "homeStats": {
+        "era": "3.86",
+        "k9": "10.35",
+        "bb9": "3.86",
+        "hr9": "1.22"
+      },
+      "awayStats": {
+        "era": "3.86",
+        "k9": "8.80",
+        "bb9": "4.35",
+        "hr9": "1.19"
+      },
+      "engineWinHomePct": 57,
+      "lockedAt": "2026-07-05T19:26:16.744Z",
       "finalScore": null,
       "verdict": null
     }
