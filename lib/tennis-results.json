@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-07-04T22:39:26.748Z",
+  "generatedAt": "2026-07-05T11:19:39.471Z",
   "source": "site.api.espn.com tennis scoreboard (atp+wta singles · official · public · 0 auth)",
-  "count": 1414,
+  "count": 1416,
   "games": [
     {
       "tour": "atp",
@@ -14141,6 +14141,26 @@
       "winnerName": "Taylor Fritz",
       "loserName": "Lorenzo Sonego",
       "score": "4-6 6-3 6-4 7-6",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Grand Est Open 88",
+      "grouping": "Women's Singles",
+      "date": "2026-07-05",
+      "winnerName": "Amandine Monnot",
+      "loserName": "Jasmijn Gimbrere",
+      "score": "6-3 7-6",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Grand Est Open 88",
+      "grouping": "Women's Singles",
+      "date": "2026-07-05",
+      "winnerName": "Liv Boulard",
+      "loserName": "Polina Kudermetova",
+      "score": "7-6 6-4",
       "retired": false
     }
   ]
