@@ -12616,35 +12616,6 @@
       "gradedAt": "2026-07-05T04:00:40.549Z"
     },
     {
-      "gamePk": 824658,
-      "gameDate": "2026-07-05T00:08:00Z",
-      "scheduleDate": "2026-07-04",
-      "homeId": 112,
-      "homeEn": "Chicago Cubs",
-      "homeRecord": "49-38",
-      "awayId": 138,
-      "awayEn": "St. Louis Cardinals",
-      "awayRecord": "44-39",
-      "homePitcher": "Shota Imanaga",
-      "awayPitcher": "Kyle Leahy",
-      "homeStats": {
-        "era": "4.30",
-        "k9": "8.42",
-        "bb9": "2.11",
-        "hr9": "1.83"
-      },
-      "awayStats": {
-        "era": "4.09",
-        "k9": "7.41",
-        "bb9": "3.43",
-        "hr9": "1.00"
-      },
-      "engineWinHomePct": 50,
-      "lockedAt": "2026-07-02T16:54:25.750Z",
-      "finalScore": null,
-      "verdict": null
-    },
-    {
       "gamePk": 824903,
       "gameDate": "2026-07-05T00:08:00Z",
       "scheduleDate": "2026-07-04",
@@ -12676,6 +12647,39 @@
       },
       "verdict": "proved",
       "gradedAt": "2026-07-05T04:00:40.549Z"
+    },
+    {
+      "gamePk": 824658,
+      "gameDate": "2026-07-05T00:08:00Z",
+      "scheduleDate": "2026-07-04",
+      "homeId": 112,
+      "homeEn": "Chicago Cubs",
+      "homeRecord": "49-38",
+      "awayId": 138,
+      "awayEn": "St. Louis Cardinals",
+      "awayRecord": "44-39",
+      "homePitcher": "Shota Imanaga",
+      "awayPitcher": "Kyle Leahy",
+      "homeStats": {
+        "era": "4.30",
+        "k9": "8.42",
+        "bb9": "2.11",
+        "hr9": "1.83"
+      },
+      "awayStats": {
+        "era": "4.09",
+        "k9": "7.41",
+        "bb9": "3.43",
+        "hr9": "1.00"
+      },
+      "engineWinHomePct": 50,
+      "lockedAt": "2026-07-02T16:54:25.750Z",
+      "finalScore": {
+        "home": 0,
+        "away": 3
+      },
+      "verdict": "push",
+      "gradedAt": "2026-07-05T09:13:53.486Z"
     },
     {
       "gamePk": 824092,
@@ -12769,8 +12773,12 @@
       },
       "engineWinHomePct": 40,
       "lockedAt": "2026-07-03T03:49:44.448Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 1,
+        "away": 8
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-07-05T09:13:53.486Z"
     },
     {
       "gamePk": 824983,
@@ -12798,8 +12806,12 @@
       },
       "engineWinHomePct": 45,
       "lockedAt": "2026-07-02T16:54:25.750Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 2,
+        "away": 7
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-07-05T09:13:53.486Z"
     },
     {
       "gamePk": 825063,
@@ -12827,8 +12839,12 @@
       },
       "engineWinHomePct": 27,
       "lockedAt": "2026-07-02T16:54:25.750Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 4,
+        "away": 3
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-07-05T09:13:53.486Z"
     },
     {
       "gamePk": 823932,
@@ -12856,8 +12872,12 @@
       },
       "engineWinHomePct": 74,
       "lockedAt": "2026-07-02T16:54:25.750Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 3,
+        "away": 0
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-07-05T09:13:53.486Z"
     },
     {
       "gamePk": 824902,
