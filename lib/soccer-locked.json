@@ -2907,6 +2907,34 @@
       "outcome": null,
       "verdict": null,
       "gradedAt": null
+    },
+    {
+      "matchId": "fd-537382",
+      "competitionCode": "WC",
+      "competitionName": "世界盃",
+      "kickoffISO": "2026-07-07T20:00:00Z",
+      "status": "TIMED",
+      "homeSeed": "Switzerland",
+      "awaySeed": "Colombia",
+      "home": "瑞士",
+      "away": "哥倫比亞",
+      "ratingHome": 1762,
+      "ratingAway": 1758,
+      "homeAdvantage": 0,
+      "xgHome": 1.309,
+      "xgAway": 1.2910000000000001,
+      "homeWin": 0.36222209210548567,
+      "draw": 0.2839890535120393,
+      "awayWin": 0.3537888543824748,
+      "homeWinPct": 36,
+      "drawPct": 29,
+      "awayWinPct": 35,
+      "enginePick": "home",
+      "lockedAt": "2026-07-05T21:59:03.091Z",
+      "finalScore": null,
+      "outcome": null,
+      "verdict": null,
+      "gradedAt": null
     }
   ]
 }
