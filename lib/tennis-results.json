@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-07-06T16:05:23.898Z",
+  "generatedAt": "2026-07-06T20:33:50.661Z",
   "source": "site.api.espn.com tennis scoreboard (atp+wta singles · official · public · 0 auth)",
-  "count": 1473,
+  "count": 1483,
   "games": [
     {
       "tour": "atp",
@@ -14448,6 +14448,16 @@
       "tournament": "Nordea Open",
       "grouping": "Women's Singles",
       "date": "2026-07-06",
+      "winnerName": "Kaitlin Quevedo",
+      "loserName": "Tiana Tian Deng",
+      "score": "6-2 6-3",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Nordea Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-06",
       "winnerName": "Leyre Romero Gormaz",
       "loserName": "Darja Semenistaja",
       "score": "6-2 2-6 6-2",
@@ -14506,6 +14516,16 @@
     {
       "tour": "atp",
       "tournament": "Wimbledon",
+      "grouping": "Men's Singles",
+      "date": "2026-07-06",
+      "winnerName": "Arthur Fery",
+      "loserName": "Grigor Dimitrov",
+      "score": "7-5 3-6 4-6 6-4 7-6",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Wimbledon",
       "grouping": "Women's Singles",
       "date": "2026-07-06",
       "winnerName": "Elise Mertens",
@@ -14538,9 +14558,29 @@
       "tournament": "Wimbledon",
       "grouping": "Women's Singles",
       "date": "2026-07-06",
+      "winnerName": "Linda Noskova",
+      "loserName": "Madison Keys",
+      "score": "6-4 7-6",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Wimbledon",
+      "grouping": "Women's Singles",
+      "date": "2026-07-06",
       "winnerName": "Marta Kostyuk",
       "loserName": "Ashlyn Krueger",
       "score": "6-4 6-4",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Wimbledon",
+      "grouping": "Men's Singles",
+      "date": "2026-07-06",
+      "winnerName": "Taylor Fritz",
+      "loserName": "Alexander Bublik",
+      "score": "7-6 6-4 6-4",
       "retired": false
     },
     {
@@ -14588,9 +14628,29 @@
       "tournament": "Grand Est Open 88",
       "grouping": "Women's Singles",
       "date": "2026-07-06",
+      "winnerName": "Caroline Werner",
+      "loserName": "Dominika Salkova",
+      "score": "6-1 7-5",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Grand Est Open 88",
+      "grouping": "Women's Singles",
+      "date": "2026-07-06",
       "winnerName": "Diana Martynov",
       "loserName": "Astrid Lew Yan Foon",
       "score": "6-3 4-6 7-5",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Grand Est Open 88",
+      "grouping": "Women's Singles",
+      "date": "2026-07-06",
+      "winnerName": "Francesca Curmi",
+      "loserName": "Oceane Dodin",
+      "score": "6-4 6-3",
       "retired": false
     },
     {
@@ -14631,6 +14691,16 @@
       "winnerName": "Irene Burillo",
       "loserName": "Noma Noha Akugue",
       "score": "7-5 2-6 6-2",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Nordea Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-06",
+      "winnerName": "Kaitlin Quevedo",
+      "loserName": "Tiana Tian Deng",
+      "score": "6-2 6-3",
       "retired": false
     },
     {
@@ -14696,6 +14766,16 @@
     {
       "tour": "wta",
       "tournament": "Wimbledon",
+      "grouping": "Men's Singles",
+      "date": "2026-07-06",
+      "winnerName": "Arthur Fery",
+      "loserName": "Grigor Dimitrov",
+      "score": "7-5 3-6 4-6 6-4 7-6",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Wimbledon",
       "grouping": "Women's Singles",
       "date": "2026-07-06",
       "winnerName": "Elise Mertens",
@@ -14728,9 +14808,29 @@
       "tournament": "Wimbledon",
       "grouping": "Women's Singles",
       "date": "2026-07-06",
+      "winnerName": "Linda Noskova",
+      "loserName": "Madison Keys",
+      "score": "6-4 7-6",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Wimbledon",
+      "grouping": "Women's Singles",
+      "date": "2026-07-06",
       "winnerName": "Marta Kostyuk",
       "loserName": "Ashlyn Krueger",
       "score": "6-4 6-4",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Wimbledon",
+      "grouping": "Men's Singles",
+      "date": "2026-07-06",
+      "winnerName": "Taylor Fritz",
+      "loserName": "Alexander Bublik",
+      "score": "7-6 6-4 6-4",
       "retired": false
     }
   ]
