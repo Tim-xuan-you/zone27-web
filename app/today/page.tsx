@@ -4,7 +4,10 @@ import Footer from "@/components/Footer";
 import Avatar from "@/components/Avatar";
 import CardBetStrip from "@/components/CardBetStrip";
 import DuelRecordStrip from "@/components/DuelRecordStrip";
+import WatchPoints from "@/components/WatchPoints";
 import { selectTodayDuel, duelEngineSide } from "@/lib/daily-duel";
+import { selectWatchPoints } from "@/lib/watch-points";
+import { getMatchHeat } from "@/lib/match-heat";
 import { getEngineConviction } from "@/lib/conviction";
 import {
   matches as allMatches,
@@ -41,6 +44,15 @@ export default async function TodayPage() {
   const mlbAll = await getMlbAsMatches();
   const duel = selectTodayDuel([...allMatches, ...mlbAll]);
   const engine = duel ? duelEngineSide(duel) : null;
+
+  // 今日看點:對決之外「今天還值得盯哪幾場」(六運動 · 最多 3 場 · 每場一句真材料理由)。
+  // 對決那場排除(它已是主秀)· 熱度 RPC 任何錯 → 空(graceful · 同 match-heat 設計)。
+  const heat = await getMatchHeat();
+  const watchPoints = selectWatchPoints({
+    baseball: [...allMatches, ...mlbAll],
+    heat,
+    excludeId: duel?.id ?? null,
+  });
 
   // 連續紀錄條評分用:已結算棒球勝方(CPBL + MLB)· 同 YourRecordStrip / 首頁口徑。
   const matchResults = [
@@ -148,6 +160,9 @@ export default async function TodayPage() {
             {/* 你連續幾天正面對機器(登入且押過才顯 · 含贏含輸 · 一場沒躲)。 */}
             <DuelRecordStrip matchResults={matchResults} todayTaipei={todayTaipei} />
 
+            {/* 對決之外,今天還值得盯哪幾場(0 場 → 整節自隱)。 */}
+            <WatchPoints points={watchPoints} />
+
             <p className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-2 font-mono text-[10px] tracking-[0.2em]">
               <Link
                 href="/matches"
@@ -197,6 +212,9 @@ export default async function TodayPage() {
                 </Link>
               </div>
             </div>
+
+            {/* 沒有棒球對決 ≠ 今天沒戲:六運動裡還有值得盯的場(0 場 → 整節自隱)。 */}
+            <WatchPoints points={watchPoints} />
           </>
         )}
       </main>
