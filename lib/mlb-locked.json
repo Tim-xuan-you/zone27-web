@@ -14041,6 +14041,35 @@
       "verdict": null
     },
     {
+      "gamePk": 823848,
+      "gameDate": "2026-07-08T22:40:00Z",
+      "scheduleDate": "2026-07-08",
+      "homeId": 146,
+      "homeEn": "Miami Marlins",
+      "homeRecord": "49-42",
+      "awayId": 136,
+      "awayEn": "Seattle Mariners",
+      "awayRecord": "47-44",
+      "homePitcher": "Tyler Phillips",
+      "awayPitcher": "George Kirby",
+      "homeStats": {
+        "era": "3.52",
+        "k9": "6.78",
+        "bb9": "4.17",
+        "hr9": "1.04"
+      },
+      "awayStats": {
+        "era": "3.81",
+        "k9": "7.88",
+        "bb9": "2.08",
+        "hr9": "0.87"
+      },
+      "engineWinHomePct": 52,
+      "lockedAt": "2026-07-07T20:04:37.895Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
       "gamePk": 822710,
       "gameDate": "2026-07-08T22:45:00Z",
       "scheduleDate": "2026-07-08",
@@ -14124,6 +14153,35 @@
       },
       "engineWinHomePct": 58,
       "lockedAt": "2026-07-06T20:06:06.452Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 823032,
+      "gameDate": "2026-07-08T23:45:00Z",
+      "scheduleDate": "2026-07-08",
+      "homeId": 138,
+      "homeEn": "St. Louis Cardinals",
+      "homeRecord": "47-41",
+      "awayId": 158,
+      "awayEn": "Milwaukee Brewers",
+      "awayRecord": "56-33",
+      "homePitcher": "Michael McGreevy",
+      "awayPitcher": "Kyle Harrison",
+      "homeStats": {
+        "era": "3.12",
+        "k9": "5.66",
+        "bb9": "2.08",
+        "hr9": "1.23"
+      },
+      "awayStats": {
+        "era": "2.82",
+        "k9": "11.18",
+        "bb9": "2.26",
+        "hr9": "1.02"
+      },
+      "engineWinHomePct": 41,
+      "lockedAt": "2026-07-07T20:04:37.895Z",
       "finalScore": null,
       "verdict": null
     },
