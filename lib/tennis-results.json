@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-07-07T17:43:56.932Z",
+  "generatedAt": "2026-07-07T20:31:12.601Z",
   "source": "site.api.espn.com tennis scoreboard (atp+wta singles · official · public · 0 auth)",
-  "count": 1512,
+  "count": 1516,
   "games": [
     {
       "tour": "atp",
@@ -14895,6 +14895,16 @@
     },
     {
       "tour": "atp",
+      "tournament": "Nordea Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-07",
+      "winnerName": "Varvara Lepchenko",
+      "loserName": "Lisa Zaar",
+      "score": "6-4 4-6 7-6",
+      "retired": false
+    },
+    {
+      "tour": "atp",
       "tournament": "Wimbledon",
       "grouping": "Men's Singles",
       "date": "2026-07-07",
@@ -14968,6 +14978,16 @@
       "tournament": "Grand Est Open 88",
       "grouping": "Women's Singles",
       "date": "2026-07-07",
+      "winnerName": "Clara Burel",
+      "loserName": "Petra Marcinko",
+      "score": "6-7 6-0 6-2",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Grand Est Open 88",
+      "grouping": "Women's Singles",
+      "date": "2026-07-07",
       "winnerName": "Francesca Jones",
       "loserName": "Alice Rame",
       "score": "6-2 7-5",
@@ -14991,6 +15011,16 @@
       "winnerName": "Leolia Jeanjean",
       "loserName": "Amandine Monnot",
       "score": "6-4 6-3",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Grand Est Open 88",
+      "grouping": "Women's Singles",
+      "date": "2026-07-07",
+      "winnerName": "Lisa Pigato",
+      "loserName": "Angela Fita Boluda",
+      "score": "6-1 1-6 7-6",
       "retired": false
     },
     {
@@ -15081,6 +15111,16 @@
       "winnerName": "Tamara Korpatsch",
       "loserName": "Linea Bajraliu",
       "score": "6-2 6-3",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Nordea Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-07",
+      "winnerName": "Varvara Lepchenko",
+      "loserName": "Lisa Zaar",
+      "score": "6-4 4-6 7-6",
       "retired": false
     },
     {
