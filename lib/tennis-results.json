@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-07-07T15:34:58.102Z",
+  "generatedAt": "2026-07-07T17:43:56.932Z",
   "source": "site.api.espn.com tennis scoreboard (atp+wta singles · official · public · 0 auth)",
-  "count": 1506,
+  "count": 1512,
   "games": [
     {
       "tour": "atp",
@@ -14858,6 +14858,16 @@
       "tournament": "Nordea Open",
       "grouping": "Women's Singles",
       "date": "2026-07-07",
+      "winnerName": "Kajsa Rinaldo Persson",
+      "loserName": "Dalma Galfi",
+      "score": "6-4 7-6",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Nordea Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-07",
       "winnerName": "Lola Radivojevic",
       "loserName": "Mona Barthel",
       "score": "6-4 6-2",
@@ -14886,6 +14896,16 @@
     {
       "tour": "atp",
       "tournament": "Wimbledon",
+      "grouping": "Men's Singles",
+      "date": "2026-07-07",
+      "winnerName": "Alexander Zverev",
+      "loserName": "Jiri Lehecka",
+      "score": "6-4 7-5 3-6 7-6",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Wimbledon",
       "grouping": "Women's Singles",
       "date": "2026-07-07",
       "winnerName": "Coco Gauff",
@@ -14901,6 +14921,16 @@
       "winnerName": "Jannik Sinner",
       "loserName": "Jan-Lennard Struff",
       "score": "7-5 7-6 6-3",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Wimbledon",
+      "grouping": "Women's Singles",
+      "date": "2026-07-07",
+      "winnerName": "Karolina Muchova",
+      "loserName": "Naomi Osaka",
+      "score": "7-6 6-4",
       "retired": false
     },
     {
@@ -15018,6 +15048,16 @@
       "tournament": "Nordea Open",
       "grouping": "Women's Singles",
       "date": "2026-07-07",
+      "winnerName": "Kajsa Rinaldo Persson",
+      "loserName": "Dalma Galfi",
+      "score": "6-4 7-6",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Nordea Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-07",
       "winnerName": "Lola Radivojevic",
       "loserName": "Mona Barthel",
       "score": "6-4 6-2",
@@ -15046,6 +15086,16 @@
     {
       "tour": "wta",
       "tournament": "Wimbledon",
+      "grouping": "Men's Singles",
+      "date": "2026-07-07",
+      "winnerName": "Alexander Zverev",
+      "loserName": "Jiri Lehecka",
+      "score": "6-4 7-5 3-6 7-6",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Wimbledon",
       "grouping": "Women's Singles",
       "date": "2026-07-07",
       "winnerName": "Coco Gauff",
@@ -15061,6 +15111,16 @@
       "winnerName": "Jannik Sinner",
       "loserName": "Jan-Lennard Struff",
       "score": "7-5 7-6 6-3",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Wimbledon",
+      "grouping": "Women's Singles",
+      "date": "2026-07-07",
+      "winnerName": "Karolina Muchova",
+      "loserName": "Naomi Osaka",
+      "score": "7-6 6-4",
       "retired": false
     }
   ]
