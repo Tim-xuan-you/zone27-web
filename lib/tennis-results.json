@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-07-06T20:33:50.661Z",
+  "generatedAt": "2026-07-07T15:34:58.102Z",
   "source": "site.api.espn.com tennis scoreboard (atp+wta singles · official · public · 0 auth)",
-  "count": 1483,
+  "count": 1506,
   "games": [
     {
       "tour": "atp",
@@ -14831,6 +14831,236 @@
       "winnerName": "Taylor Fritz",
       "loserName": "Alexander Bublik",
       "score": "7-6 6-4 6-4",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Nordea Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-07",
+      "winnerName": "Aneta Laboutkova",
+      "loserName": "Grace Bernstein",
+      "score": "6-1 6-1",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Nordea Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-07",
+      "winnerName": "Caijsa Hennemann",
+      "loserName": "June Bjork",
+      "score": "6-2 6-3",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Nordea Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-07",
+      "winnerName": "Lola Radivojevic",
+      "loserName": "Mona Barthel",
+      "score": "6-4 6-2",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Nordea Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-07",
+      "winnerName": "Sinja Kraus",
+      "loserName": "Claire Liu",
+      "score": "7-5 6-0",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Nordea Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-07",
+      "winnerName": "Tamara Korpatsch",
+      "loserName": "Linea Bajraliu",
+      "score": "6-2 6-3",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Wimbledon",
+      "grouping": "Women's Singles",
+      "date": "2026-07-07",
+      "winnerName": "Coco Gauff",
+      "loserName": "Jessica Pegula",
+      "score": "4-6 6-3 6-3",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Wimbledon",
+      "grouping": "Men's Singles",
+      "date": "2026-07-07",
+      "winnerName": "Jannik Sinner",
+      "loserName": "Jan-Lennard Struff",
+      "score": "7-5 7-6 6-3",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Grand Est Open 88",
+      "grouping": "Women's Singles",
+      "date": "2026-07-07",
+      "winnerName": "Alice Tubello",
+      "loserName": "Ren Yufei",
+      "score": "2-6 7-5 6-4",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Grand Est Open 88",
+      "grouping": "Women's Singles",
+      "date": "2026-07-07",
+      "winnerName": "Alicia Herrero Linana",
+      "loserName": "Elina Avanesyan",
+      "score": "6-2 6-4",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Grand Est Open 88",
+      "grouping": "Women's Singles",
+      "date": "2026-07-07",
+      "winnerName": "Aurora Zantedeschi",
+      "loserName": "Elsa Jacquemot",
+      "score": "6-1 6-2",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Grand Est Open 88",
+      "grouping": "Women's Singles",
+      "date": "2026-07-07",
+      "winnerName": "Francesca Jones",
+      "loserName": "Alice Rame",
+      "score": "6-2 7-5",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Grand Est Open 88",
+      "grouping": "Women's Singles",
+      "date": "2026-07-07",
+      "winnerName": "Jeline Vandromme",
+      "loserName": "Diana Martynov",
+      "score": "6-3 6-3",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Grand Est Open 88",
+      "grouping": "Women's Singles",
+      "date": "2026-07-07",
+      "winnerName": "Leolia Jeanjean",
+      "loserName": "Amandine Monnot",
+      "score": "6-4 6-3",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Grand Est Open 88",
+      "grouping": "Women's Singles",
+      "date": "2026-07-07",
+      "winnerName": "Maria Lourdes Carle",
+      "loserName": "Laura Pigossi",
+      "score": "6-2 6-1",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Grand Est Open 88",
+      "grouping": "Women's Singles",
+      "date": "2026-07-07",
+      "winnerName": "Mayar Sherif",
+      "loserName": "Yasmine Kabbaj",
+      "score": "6-4 6-2",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Grand Est Open 88",
+      "grouping": "Women's Singles",
+      "date": "2026-07-07",
+      "winnerName": "Oksana Selekhmeteva",
+      "loserName": "Yelyzaveta Kotliar",
+      "score": "6-4 6-4",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Nordea Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-07",
+      "winnerName": "Aneta Laboutkova",
+      "loserName": "Grace Bernstein",
+      "score": "6-1 6-1",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Nordea Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-07",
+      "winnerName": "Caijsa Hennemann",
+      "loserName": "June Bjork",
+      "score": "6-2 6-3",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Nordea Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-07",
+      "winnerName": "Lola Radivojevic",
+      "loserName": "Mona Barthel",
+      "score": "6-4 6-2",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Nordea Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-07",
+      "winnerName": "Sinja Kraus",
+      "loserName": "Claire Liu",
+      "score": "7-5 6-0",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Nordea Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-07",
+      "winnerName": "Tamara Korpatsch",
+      "loserName": "Linea Bajraliu",
+      "score": "6-2 6-3",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Wimbledon",
+      "grouping": "Women's Singles",
+      "date": "2026-07-07",
+      "winnerName": "Coco Gauff",
+      "loserName": "Jessica Pegula",
+      "score": "4-6 6-3 6-3",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Wimbledon",
+      "grouping": "Men's Singles",
+      "date": "2026-07-07",
+      "winnerName": "Jannik Sinner",
+      "loserName": "Jan-Lennard Struff",
+      "score": "7-5 7-6 6-3",
       "retired": false
     }
   ]
