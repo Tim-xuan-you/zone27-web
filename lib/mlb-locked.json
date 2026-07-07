@@ -13532,8 +13532,12 @@
       },
       "engineWinHomePct": 64,
       "lockedAt": "2026-07-05T22:07:12.155Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 0,
+        "away": 8
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-07-07T09:52:27.441Z"
     },
     {
       "gamePk": 823205,
@@ -13594,8 +13598,12 @@
       },
       "engineWinHomePct": 57,
       "lockedAt": "2026-07-05T22:07:12.155Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 8,
+        "away": 7
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-07-07T09:52:27.441Z"
     },
     {
       "gamePk": 824820,
@@ -13826,6 +13834,35 @@
       },
       "engineWinHomePct": 53,
       "lockedAt": "2026-07-06T04:06:38.885Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 823280,
+      "gameDate": "2026-07-08T01:40:00Z",
+      "scheduleDate": "2026-07-07",
+      "homeId": 135,
+      "homeEn": "San Diego Padres",
+      "homeRecord": "44-46",
+      "awayId": 109,
+      "awayEn": "Arizona Diamondbacks",
+      "awayRecord": "45-45",
+      "homePitcher": "Germán Márquez",
+      "awayPitcher": "Zac Gallen",
+      "homeStats": {
+        "era": "5.79",
+        "k9": "5.51",
+        "bb9": "4.13",
+        "hr9": "2.20"
+      },
+      "awayStats": {
+        "era": "6.36",
+        "k9": "5.48",
+        "bb9": "2.74",
+        "hr9": "1.66"
+      },
+      "engineWinHomePct": 53,
+      "lockedAt": "2026-07-07T09:52:25.782Z",
       "finalScore": null,
       "verdict": null
     },
