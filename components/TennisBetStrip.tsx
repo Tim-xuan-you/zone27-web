@@ -16,6 +16,7 @@ import {
 } from "@/lib/tennis/predictions";
 import ConfidencePicker from "@/components/ConfidencePicker";
 import RationalePicker from "@/components/RationalePicker";
+import ChallengeShareInline from "@/components/ChallengeShareInline";
 
 // ── ZONE 27 · 網球兩向押注條(A 勝 / B 勝)──────────────────────────────────────
 // 押了不可改(先鎖後結)· 登入才能押 · 開賽後鎖手。 純精神預測 = 遊戲 · 0 金額。 賽後自動
@@ -36,12 +37,18 @@ export default function TennisBetStrip({
   aLabel,
   bLabel,
   returnTo = "/tennis",
+  onLock,
+  challenge,
 }: {
   matchId: string;
   startISO: string;
   aLabel: string;
   bLabel: string;
   returnTo?: string;
+  /** 押成功後回呼(server 確認後)· 給戰帖對決 receiver 鎖手後揭盅 · 預設無 = 行為不變(R294) */
+  onLock?: (pick: TennisPick) => void;
+  /** 顯示「下戰帖給朋友」inline 分享(只今日一戰傳 true)· 預設無 = 不顯示(R294) */
+  challenge?: boolean;
 }) {
   const [state, setState] = useState<State>("loading");
   const [pick, setPick] = useState<TennisPick | null>(null);
@@ -113,6 +120,7 @@ export default function TennisBetStrip({
     if (res.ok) {
       setPending(false);
       setJustPicked(true);
+      onLock?.(p); // 戰帖對決:鎖手確認後揭盅對方那手(預設無 onLock = 行為不變)
       getTennisTally(matchId).then(setTally);
     } else if (res.reason === "already_predicted") {
       const mine = await getMyTennisPrediction(matchId);
@@ -211,6 +219,12 @@ export default function TennisBetStrip({
               <ConfidencePicker matchId={matchId} submit={setTennisConfidence} />
               <RationalePicker matchId={matchId} submit={setTennisRationale} />
             </>
+          )}
+          {/* 今日一戰:剛鎖的這手變一張可外傳戰帖(朋友點開先盲押 · 賽後揭盅)· 只 challenge 傳 true 才顯。 */}
+          {!pending && challenge && (
+            <div className="mt-2">
+              <ChallengeShareInline matchId={matchId} />
+            </div>
           )}
           {!pending && (
             <div className="mt-2 flex items-center justify-between gap-2 flex-wrap">

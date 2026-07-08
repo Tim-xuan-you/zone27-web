@@ -380,7 +380,8 @@ export type DisciplineStreak = {
 /**
  * 從本人押注 map(完整歷史)算出「對帳紀律 streak」· 連續性按下注日的台北日曆日。
  *
- * @param predictions 本人 picks(get_my_predictions · 含 ts)
+ * @param predictions 本人 picks(get_my_predictions · 含 ts)· 只讀 ts → 參數型別放寬到
+ *   「任何帶 ts 的 map」(R293:今日一戰跨運動應戰天數 · 六運動押注日同一條連續紀錄)
  * @param todayTaipei getTodayTaipei()(由 caller 傳入 · 維持本函式純粹/可測)
  *
  * current 採標準 streak 語意:押到今天 → active;押到昨天、今天還沒押 → 仍算 active
@@ -388,7 +389,7 @@ export type DisciplineStreak = {
  * 只增不減(斷了也不掉)· 承接「休賽沒押」的情況,不靠羞辱。
  */
 export function aggregateStreak(
-  predictions: UserPredictionsMap,
+  predictions: Record<string, { ts: string }>,
   todayTaipei: string
 ): DisciplineStreak {
   // 你押過注的不同台北日(全期 · ts 不可解析的 pick 略過 · graceful)· 升序日序。
@@ -437,6 +438,46 @@ export function aggregateStreak(
   }
 
   return { current, longest, totalDays, activeToday };
+}
+
+// ── 跨運動對帳(R293 · 今日一戰六運動版的紀錄條)───────────────────────────────
+// 六運動的押注(存表 pick 一律 home/away/draw:a/b 運動已按 A=home/B=away 存)對上
+// 跨運動賽果一本帳(lib/duel-results buildDuelResults · 鏡天梯 buildSyncResults 口徑:
+// 平手/MMA 和局不進結果 = 不算勝負)。 先鎖後結同 gradeRecord(開賽後才下 → 整筆不計)。
+//
+// 🔴 為什麼不放寬 getMyPredictionsClient 的棒球 allowlist:那份 map 餵 /member 校準身分、
+//   /u 公開帳本、天梯門檻 —— 放寬會讓非棒球押注灌成幽靈 pending(R259 教訓)。 跨運動
+//   紀錄條走自己的 reader(getMySportPicksClient)+ 這支自己的對帳,互不污染。
+// ─────────────────────────────────────────────────────
+
+/** 跨運動一場已分勝負的賽果(stored-pick 空間 · draw = 足球真和局)。 */
+export type SportResultRow = {
+  id: string;
+  winner: "home" | "away" | "draw";
+  startISO: string | null;
+};
+
+/**
+ * 跨運動押注對帳:proved/diverged 對「有結果的場」算(pick === winner)· 沒結果(未結算 /
+ * 平手推局不進結果)算 pending 進 total。 先鎖後結:已有結果的場 · 開賽後才下的整筆不計。
+ */
+export function aggregateSportStats(
+  picks: Record<string, { pick: "home" | "away" | "draw"; ts: string }>,
+  results: SportResultRow[],
+): { total: number; proved: number; diverged: number } {
+  const byId = new Map(results.map((r) => [r.id, r]));
+  let total = 0;
+  let proved = 0;
+  let diverged = 0;
+  for (const [id, p] of Object.entries(picks)) {
+    const r = byId.get(id);
+    if (r && isLatePick(p.ts, r.startISO)) continue; // 開賽後補登 · 整筆不計(同 gradeRecord)
+    total++;
+    if (!r) continue; // pending(未結算 / 平手·和局推局不進結果 = 不算勝負)
+    if (p.pick === r.winner) proved++;
+    else diverged++;
+  }
+  return { total, proved, diverged };
 }
 
 // ── 準度時間序列(soul-roadmap R208 #2 · 「會動的數字」= 回訪鉤)──────────────

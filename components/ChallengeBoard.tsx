@@ -3,25 +3,34 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import CardBetStrip from "@/components/CardBetStrip";
-import { getMyPrediction } from "@/lib/predictions-market";
-import type { ChallengePhase } from "@/lib/challenge";
+import SoccerBetStrip from "@/components/SoccerBetStrip";
+import TennisBetStrip from "@/components/TennisBetStrip";
+import BadmintonBetStrip from "@/components/BadmintonBetStrip";
+import MmaBetStrip from "@/components/MmaBetStrip";
+import BasketballBetStrip from "@/components/BasketballBetStrip";
+import { getMyStoredPick } from "@/lib/predictions-market";
+import type { ChallengePhase, StoredPick } from "@/lib/challenge";
+import type { DuelSport } from "@/lib/daily-duel";
 
 // ── ZONE 27 · 戰帖對決盤(receiver · 盲押 → 揭盅 → 賽後對帳)──────────────────
 // 朋友點開戰帖落地的核心島。 三段:
-//   ① 賽前(pregame):對方那手對你封盤(看不到他押誰)· 你先盲押一手(重用 CardBetStrip 下注流)·
+//   ① 賽前(pregame):對方那手對你封盤(看不到他押誰)· 你先盲押一手(重用該運動自己的下注流)·
 //      你鎖手後才揭盅他押誰 = 結構上防跟單(看不到 → 抄不了)+ 強化校準護城河。 留存鉤子:賽後回來看誰讀贏。
 //   ② 已開賽(live):封盤了 · 沒接到就過期 · 指你去今日一戰開自己的戰帖。
 //   ③ 賽後(settled):對帳 —— 他押 X / 你押 Y / 誰讀得準(命中金 · 落空 loss 柔紅 · 平 mute · 無紅綠)。
 //
+// R294 · 六運動版:pick 一律 stored 空間(home/away/draw · a/b 運動 home=A/away=B)· 名字映射
+// server 端已收斂(homeName/awayName)· 下注掛各運動自己的元件 · onLock 把該運動原生 pick 轉回
+// stored 空間。 賽果語意:push = 棒球平手/MMA 和局(不比)· draw = 足球真和局(押和局算命中)。
+//
 // 對方那手是他『公開』的押注(本就掛在 /u/<碼>)→ 傳到 client 無隱私問題;「封盤」是遊戲感
 // (你先押才揭),不是密碼學保證 —— 框架誠實寫「你先押,賽後見真章」,不宣稱看不到。
-// 你自己那手:client 端讀 getMyPrediction(同 CardBetStrip)· 已押 → 直接揭盅。
+// 你自己那手:client 端讀 getMyStoredPick(跨運動同一支 RPC)· 已押 → 直接揭盅。
 // ─────────────────────────────────────────────────────
-
-type Pick = "home" | "away";
 
 export default function ChallengeBoard({
   code,
+  sport,
   matchId,
   homeName,
   awayName,
@@ -29,27 +38,31 @@ export default function ChallengeBoard({
   engineHomePct,
   challengerLabel,
   challengerPick,
-  finalWinner,
+  winner,
   phase,
 }: {
   code: string;
+  sport: DuelSport;
   matchId: string;
+  /** stored-pick 空間名字(a/b 運動:home = A、away = B) */
   homeName: string;
   awayName: string;
   startISO?: string | null;
+  /** 棒球給 CardBetStrip 的主隊勝率(其餘運動的下注元件不吃引擎線) */
   engineHomePct?: number;
   challengerLabel: string;
-  challengerPick: Pick | null;
-  finalWinner: "home" | "away" | "tie" | null;
+  challengerPick: StoredPick | null;
+  /** 賽果(stored 空間)· "push" = 棒球平手 / MMA 和局 · "draw" = 足球真和局 */
+  winner: StoredPick | "push" | null;
   phase: ChallengePhase;
 }) {
-  const [viewerPick, setViewerPick] = useState<Pick | null>(null);
+  const [viewerPick, setViewerPick] = useState<StoredPick | null>(null);
   const [revealed, setRevealed] = useState(false);
 
   useEffect(() => {
     let cancelled = false;
     (async () => {
-      const mine = await getMyPrediction(matchId);
+      const mine = await getMyStoredPick(matchId);
       if (cancelled) return;
       if (mine) {
         setViewerPick(mine);
@@ -61,17 +74,91 @@ export default function ChallengeBoard({
     };
   }, [matchId]);
 
-  const nameOf = (p: Pick | null) =>
-    p === "home" ? homeName : p === "away" ? awayName : "—";
+  const nameOf = (p: StoredPick | null) =>
+    p === "home" ? homeName : p === "away" ? awayName : p === "draw" ? "和局" : "—";
+
+  // 鎖手成功(server 確認)→ 揭盅對方那手(stored 空間)。
+  const lock = (p: StoredPick) => {
+    setViewerPick(p);
+    setRevealed(true);
+  };
+  const returnTo = `/vs/${code}?m=${matchId}`;
+
+  // 你的一手:掛該運動自己的既有下注流(未登入→登入餌〔回跳這張戰帖〕· 已押→鎖定卡 · 開打→封盤)·
+  // onLock 把各運動原生 pick 轉回 stored 空間(a→home / b→away · 足球/籃球本來就是 stored 值)。
+  const betStrip =
+    sport === "baseball" ? (
+      <CardBetStrip
+        matchId={matchId}
+        homeName={homeName}
+        awayName={awayName}
+        startISO={startISO}
+        engineHomePct={engineHomePct}
+        returnTo={returnTo}
+        onLock={lock}
+      />
+    ) : sport === "soccer" ? (
+      <SoccerBetStrip
+        matchId={matchId}
+        dateISO={startISO ?? ""}
+        homeLabel={homeName}
+        awayLabel={awayName}
+        locked
+        returnTo={returnTo}
+        onLock={lock}
+      />
+    ) : sport === "basketball" ? (
+      <BasketballBetStrip
+        gameId={matchId}
+        startISO={startISO ?? ""}
+        homeLabel={homeName}
+        awayLabel={awayName}
+        returnTo={returnTo}
+        onLock={lock}
+      />
+    ) : sport === "tennis" ? (
+      <TennisBetStrip
+        matchId={matchId}
+        startISO={startISO ?? ""}
+        aLabel={homeName}
+        bLabel={awayName}
+        returnTo={returnTo}
+        onLock={(p) => lock(p === "a" ? "home" : "away")}
+      />
+    ) : sport === "badminton" ? (
+      <BadmintonBetStrip
+        matchId={matchId}
+        startISO={startISO ?? ""}
+        aLabel={homeName}
+        bLabel={awayName}
+        returnTo={returnTo}
+        onLock={(p) => lock(p === "a" ? "home" : "away")}
+      />
+    ) : (
+      <MmaBetStrip
+        matchId={matchId}
+        startISO={startISO ?? ""}
+        aLabel={homeName}
+        bLabel={awayName}
+        returnTo={returnTo}
+        onLock={(p) => lock(p === "a" ? "home" : "away")}
+      />
+    );
 
   // ── ③ 賽後 · 對帳(誰讀得準)─────────────────────────────
   if (phase === "settled") {
-    const push = finalWinner === "tie";
-    const chHit = challengerPick != null && !push && challengerPick === finalWinner;
-    const vwHit = viewerPick != null && !push && viewerPick === finalWinner;
+    const push = winner === "push";
+    const chHit = challengerPick != null && !push && challengerPick === winner;
+    const vwHit = viewerPick != null && !push && viewerPick === winner;
     const winnerName =
-      finalWinner === "home" ? homeName : finalWinner === "away" ? awayName : "平局";
-    // 誰讀贏(兩邊都有押、且非平手才比)· 否則不下「誰贏」結論(誠實)。
+      winner === "home"
+        ? homeName
+        : winner === "away"
+          ? awayName
+          : winner === "draw"
+            ? "和局"
+            : "平局";
+    // 誰讀贏(兩邊都有押、且非推局才比)· 否則不下「誰贏」結論(誠實)。
     let verdictLine: string | null = null;
     if (viewerPick != null && challengerPick != null && !push) {
       if (chHit && !vwHit) verdictLine = `${challengerLabel} 這場讀贏你`;
@@ -100,7 +187,7 @@ export default function ChallengeBoard({
         </p>
         <p className="text-bone text-base sm:text-lg font-light leading-snug mb-4">
           結果:<span className="text-gold">{winnerName}</span>
-          {!push && (finalWinner === "home" || finalWinner === "away") ? " 勝" : ""}
+          {winner === "home" || winner === "away" ? " 勝" : ""}
         </p>
 
         <div className="flex flex-col gap-2.5">
@@ -220,20 +307,7 @@ export default function ChallengeBoard({
         </>
       )}
 
-      {/* 你的一手:重用今日一戰下注流(未登入→登入餌〔回跳這張戰帖〕· 已押→鎖定卡 · 開打→封盤)·
-          鎖手成功(server 確認)→ onLock 揭盅對方那手。 */}
-      <CardBetStrip
-        matchId={matchId}
-        homeName={homeName}
-        awayName={awayName}
-        startISO={startISO}
-        engineHomePct={engineHomePct}
-        returnTo={`/vs/${code}?m=${matchId}`}
-        onLock={(pick) => {
-          setViewerPick(pick);
-          setRevealed(true);
-        }}
-      />
+      {betStrip}
     </div>
   );
 }

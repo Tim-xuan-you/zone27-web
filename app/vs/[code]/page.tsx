@@ -5,11 +5,12 @@ import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import Avatar from "@/components/Avatar";
 import ChallengeBoard from "@/components/ChallengeBoard";
-import { resolveChallenge } from "@/lib/challenge";
+import { resolveChallenge, type ChallengeMatchModel } from "@/lib/challenge";
 import { normalizeProfileCode } from "@/lib/profile-code";
 import { creatorIdentity, getTeamCrest } from "@/lib/identity";
 import { getEngineConviction } from "@/lib/conviction";
-import { getEngineFavorite, getMatchStartIso } from "@/lib/matches";
+import { duelStartLabel } from "@/lib/daily-duel";
+import { getTodayTaipei } from "@/lib/matches";
 import { createPageMetadata } from "@/lib/page-og";
 
 // ── ZONE 27 · /vs/[code] · 戰帖對決(散播命門 · 2026-06-28)──────────────────
@@ -17,12 +18,12 @@ import { createPageMetadata } from "@/lib/page-og";
 // 變成「逼對方回手的戰帖」。 這頁 = 朋友點開戰帖落地的地方:看不到對方押誰、先自己盲押一手、
 // 賽後揭盅誰讀得準。 散播(戰帖是天然、不像垃圾訊息的邀請)+ 留存(盲押→揭盅→賽後對帳)一個機制全給。
 //
-// 重用既有骨架:選場/解析 lib/challenge(讀現成公開 RPC · 0 migration)· 下注 CardBetStrip
-// (盲押進共享 predictions 表 · 先鎖後結 · 賽後自動結算)· 身分 creatorIdentity + Avatar。
-// 朋友未登入 → CardBetStrip 登入餌回跳這張戰帖 → /login 已把 Google 一鍵登入擺出來(摩擦歸零)。
+// R294 · 六運動版:選場/解析 lib/challenge(六運動統一 model · 讀現成公開 RPC · 0 migration)·
+// 下注掛各運動自己的元件(ChallengeBoard 內分派)· 身分 creatorIdentity + Avatar。
+// 朋友未登入 → 下注條登入餌回跳這張戰帖 → /login 已把 Google 一鍵登入擺出來(摩擦歸零)。
 //
 // 快取:revalidate 60s(公開分享證物 · 不讀 cookies → ISR-safe · 你自己那手 client 端讀)。
-// GRACEFUL:碼不合法 / 查無 → 404;有碼但沒可應戰的棒球手 → 誠實空狀態(不假裝有戰帖)。
+// GRACEFUL:碼不合法 / 查無 → 404;有碼但沒可應戰的手 → 誠實空狀態(不假裝有戰帖)。
 // ─────────────────────────────────────────────────────
 
 export const revalidate = 60;
@@ -33,6 +34,16 @@ type VsSearch = Promise<{ m?: string | string[] }>;
 function readM(sp: { m?: string | string[] }): string | null {
   const m = sp?.m;
   return typeof m === "string" ? m : null;
+}
+
+/** 對決卡顯示順序(籃球客先 · 其餘 home/a 先)· 同各運動下注鈕順序。 */
+function sidesOf(match: ChallengeMatchModel): {
+  left: { name: string; seed: string; en?: string };
+  right: { name: string; seed: string; en?: string };
+} {
+  const home = { name: match.homeName, seed: match.homeSeed, en: match.homeEn };
+  const away = { name: match.awayName, seed: match.awaySeed, en: match.awayEn };
+  return match.leftIsHome ? { left: home, right: away } : { left: away, right: home };
 }
 
 export async function generateMetadata({
@@ -48,8 +59,9 @@ export async function generateMetadata({
   const res = await resolveChallenge(code, readM(await searchParams));
   if (!res) return { title: "找不到這張戰帖" };
   const name = res.profile.displayName || `球迷 #${res.profile.authorCode}`;
-  const matchup = res.match
-    ? `${res.match.home.name} vs ${res.match.away.name}`
+  const m = res.match;
+  const matchup = m
+    ? `${sidesOf(m).left.name} vs ${sidesOf(m).right.name}`
     : "";
   return createPageMetadata({
     title: `${name} 下了一張戰帖`,
@@ -84,27 +96,14 @@ export default async function VsPage({
     res.profile.tier === "black" || res.profile.tier === "founder";
 
   const { match } = res;
-  const engine = match ? getEngineFavorite(match) : null;
-  const engineName =
-    engine === "home"
-      ? match!.home.name
-      : engine === "away"
-        ? match!.away.name
-        : null;
-  const enginePct =
-    engine === "home"
-      ? match!.home.winRate
-      : engine === "away"
-        ? match!.away.winRate
-        : null;
-  const homeFav = engine === "home";
-  const awayFav = engine === "away";
-  const homeCrest = match
-    ? getTeamCrest(match.home.name, match.home.en, match.league)
-    : null;
-  const awayCrest = match
-    ? getTeamCrest(match.away.name, match.away.en, match.league)
-    : null;
+  const sides = match ? sidesOf(match) : null;
+  const leftFav = !!(match?.engine && sides && match.engine.name === sides.left.name);
+  const rightFav = !!(match?.engine && sides && match.engine.name === sides.right.name);
+  const leftCrest =
+    match && sides ? getTeamCrest(sides.left.name, sides.left.en, match.league) : null;
+  const rightCrest =
+    match && sides ? getTeamCrest(sides.right.name, sides.right.en, match.league) : null;
+  const todayTaipei = getTodayTaipei();
 
   return (
     <div className="flex flex-col flex-1 min-h-screen">
@@ -135,7 +134,7 @@ export default async function VsPage({
           </div>
         </div>
 
-        {match && engineName && enginePct !== null ? (
+        {match && sides ? (
           <>
             <p className="text-mute text-sm sm:text-base leading-relaxed mb-7">
               同一場、賽前各自把話講死、賽後自動對帳。 你點開{" "}
@@ -147,27 +146,31 @@ export default async function VsPage({
             <div className="border border-gold/35 bg-slate/30 p-5">
               <div className="flex items-center justify-between gap-2 mb-4">
                 <span className="font-mono text-gold/70 text-[9px] tracking-[0.3em] border border-gold/30 px-1.5 py-0.5">
-                  {match.league}
+                  {match.sport === "baseball"
+                    ? match.league
+                    : `${match.sportLabel} · ${match.league}`}
                 </span>
                 <span className="font-mono text-mute text-[10px] tracking-[0.2em] tabular shrink-0">
-                  {match.startTime} 開賽
+                  {match.startISO
+                    ? `${duelStartLabel(match.startISO, todayTaipei)} 開賽`
+                    : ""}
                 </span>
               </div>
 
               <div className="flex items-center justify-between gap-3 mb-4">
                 <span className="flex items-center gap-2.5 min-w-0">
                   <Avatar
-                    seed={match.home.name}
-                    glyph={homeCrest?.glyph}
-                    color={homeCrest?.color}
+                    seed={sides.left.seed}
+                    glyph={leftCrest?.glyph}
+                    color={leftCrest?.color}
                     size={30}
                   />
                   <span
                     className={`text-lg sm:text-xl font-light tracking-tight truncate ${
-                      homeFav ? "text-gold" : "text-bone"
+                      leftFav ? "text-gold" : "text-bone"
                     }`}
                   >
-                    {match.home.name}
+                    {sides.left.name}
                   </span>
                 </span>
                 <span className="font-mono text-mute/50 text-xs shrink-0">
@@ -176,44 +179,55 @@ export default async function VsPage({
                 <span className="flex items-center gap-2.5 min-w-0 justify-end">
                   <span
                     className={`text-lg sm:text-xl font-light tracking-tight truncate text-right ${
-                      awayFav ? "text-gold" : "text-bone"
+                      rightFav ? "text-gold" : "text-bone"
                     }`}
                   >
-                    {match.away.name}
+                    {sides.right.name}
                   </span>
                   <Avatar
-                    seed={match.away.name}
-                    glyph={awayCrest?.glyph}
-                    color={awayCrest?.color}
+                    seed={sides.right.seed}
+                    glyph={rightCrest?.glyph}
+                    color={rightCrest?.color}
                     size={30}
                   />
                 </span>
               </div>
 
               {/* 機器已鎖死的一手(公開 · 不是 challenger 那手 · challenger 那手在下方盲押後才揭)。 */}
-              <p className="flex items-center gap-2 font-mono text-gold/85 text-[11px] tracking-[0.1em] leading-relaxed border-t border-gold/15 pt-3">
-                <span aria-hidden="true" className="text-gold/70">
-                  ▦
-                </span>
-                機器已鎖{" "}
-                <span className="text-gold tabular">
-                  {engineName} {enginePct}%
-                </span>{" "}
-                · {getEngineConviction(enginePct).label} · 賽前不翻牌
-              </p>
+              {match.engine && (
+                <p className="flex flex-wrap items-center gap-x-2 gap-y-1 font-mono text-gold/85 text-[11px] tracking-[0.1em] leading-relaxed border-t border-gold/15 pt-3">
+                  <span aria-hidden="true" className="text-gold/70">
+                    ▦
+                  </span>
+                  <span>
+                    機器已鎖{" "}
+                    <span className="text-gold tabular">
+                      {match.engine.name} {match.engine.pct}%
+                    </span>{" "}
+                    · {getEngineConviction(match.engine.pct).label} · 賽前不翻牌
+                  </span>
+                  {match.soccerPcts && (
+                    <span className="text-mute/60 tabular">
+                      主 {match.soccerPcts.homeWin} · 和 {match.soccerPcts.draw} · 客{" "}
+                      {match.soccerPcts.awayWin}
+                    </span>
+                  )}
+                </p>
+              )}
             </div>
 
-            {/* 盲押 → 揭盅 → 賽後對帳(client 島)。 */}
+            {/* 盲押 → 揭盅 → 賽後對帳(client 島 · 內部按運動掛下注元件)。 */}
             <ChallengeBoard
               code={code}
+              sport={match.sport}
               matchId={match.id}
-              homeName={match.home.name}
-              awayName={match.away.name}
-              startISO={getMatchStartIso(match)}
-              engineHomePct={match.home.winRate}
+              homeName={match.homeName}
+              awayName={match.awayName}
+              startISO={match.startISO}
+              engineHomePct={match.engineHomePct ?? undefined}
               challengerLabel={ident.label}
               challengerPick={res.challengerPick}
-              finalWinner={res.finalWinner}
+              winner={match.winner}
               phase={res.phase ?? "pregame"}
             />
 
@@ -233,7 +247,7 @@ export default async function VsPage({
             </p>
           </>
         ) : (
-          // ── 有碼但沒可應戰的棒球手(他還沒押、或都已開賽/結算且資料過舊)· 誠實空狀態 ──
+          // ── 有碼但沒可應戰的手(他還沒押、或都已開賽/結算且資料過舊)· 誠實空狀態 ──
           <div className="border border-line/60 bg-slate/30 p-5">
             <p className="text-bone text-base sm:text-lg font-light leading-snug mb-2">
               這張戰帖現在沒有可應戰的場。

@@ -3,35 +3,35 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { createSupabaseBrowserClient } from "@/lib/supabase/browser";
-import { getMyPredictionsClient } from "@/lib/predictions-market";
-import { aggregatePredictionStats, aggregateStreak } from "@/lib/predictions";
+import { getMySportPicksClient } from "@/lib/predictions-market";
+import {
+  aggregateSportStats,
+  aggregateStreak,
+  type SportResultRow,
+} from "@/lib/predictions";
 
 // ── ZONE 27 · 今日一戰 · 「你連續幾天正面對機器」紀錄條 ────────────────────────────
 // 對決的留存鉤:重點不是今天輸贏,是「你連續幾天,敢正面站到這台機器對面」。 報馬仔只敢曬贏、
 // 輸了刪文;這條數的是「你有種回來面對真相」的連續天數 —— 含贏含輸、一場沒躲。
 //
+// R293 · 跨運動:對決擴成六運動 → 應戰天數也一起跨(押哪個運動都算「今天有站到機器對面」)。
+//   reader 走 getMySportPicksClient(六運動前綴)· 對帳走 aggregateSportStats + 跨運動賽果
+//   一本帳(/api/duel-results · 登入且押過才抓 —— 4,500+ 列塞 HTML 會炸 mobile payload)。
+//   🔴 不碰棒球 allowlist(校準身分那本)。
+//
 // 🔴 紅線:數的是「連續應戰天數」(出席/紀律)不是「連勝」(連勝獎 = 賭場/虛榮紅線)。 連續斷了
 //   只因為你某天沒來,不是因為你輸 —— 輸了照記、連續不斷。 口徑全走既有單一真相
-//   aggregateStreak(連續下注台北日)+ aggregatePredictionStats(含輸命中)· 不另立計分。
+//   aggregateStreak(連續下注台北日)+ aggregateSportStats(含輸命中)· 不另立計分。
 //
 // 為什麼 client island:/today 可被當每日固定地址,理應可 ISR / 快取;server 端讀登入態會把
 // 某人的紀錄快取給所有人。 同 YourRecordStrip 漸進增強:未登入 / 沒押過 → 安靜不顯示(對決卡
 // 自己的登入餌承載冷啟動,不疊第二顆 CTA)。
 // ─────────────────────────────────────────────────────
 
-type MatchResult = {
-  id: string;
-  finalWinner: "home" | "away" | "tie" | null;
-  startISO?: string | null;
-};
-
 export default function DuelRecordStrip({
-  matchResults,
   todayTaipei,
   hero = false,
 }: {
-  /** 已結算賽事勝方(靜態 · server 傳入)· 前端評分本人押注 · 同 YourRecordStrip */
-  matchResults: MatchResult[];
   /** 台北「今天」YYYY-MM-DD(server 算 · 避免 client 時區漂移)· 連續天數的錨 */
   todayTaipei: string;
   /** hero=true · 沒有今日對決時把這張成績單變主角(全站最特別的東西:刪不掉、含輸、贏過機器)·
@@ -54,9 +54,23 @@ export default function DuelRecordStrip({
         const { data: u } = await supabase.auth.getUser();
         if (cancelled) return;
         if (!u.user) return; // 未登入 → 安靜不顯示(對決卡的登入餌承載)
-        const map = await getMyPredictionsClient();
+        const map = await getMySportPicksClient();
         if (cancelled) return;
-        const stats = aggregatePredictionStats(map, matchResults);
+        if (Object.keys(map).length === 0) return; // 沒押過 → 不顯示 · 也不抓賽果(省流量)
+        // 跨運動賽果一本帳走 API(4,500+ 列 · 塞 HTML 會讓每個訪客吞 400KB+)·
+        // 只有走到這裡(登入且押過)才抓 · 抓壞 → 退回只顯示應戰天數(streak 只看下注日)。
+        let results: SportResultRow[] = [];
+        try {
+          const res = await fetch("/api/duel-results");
+          if (res.ok) {
+            const json = (await res.json()) as unknown;
+            if (Array.isArray(json)) results = json as SportResultRow[];
+          }
+        } catch {
+          /* graceful · 賽果抓不到 → 勝敗行自然缺 · 應戰天數照顯 */
+        }
+        if (cancelled) return;
+        const stats = aggregateSportStats(map, results);
         const streak = aggregateStreak(map, todayTaipei);
         setData({
           proved: stats.proved,
@@ -73,7 +87,7 @@ export default function DuelRecordStrip({
     return () => {
       cancelled = true;
     };
-  }, [matchResults, todayTaipei]);
+  }, [todayTaipei]);
 
   // 抓取中 / 未登入 / 沒押過 → 不佔空間
   if (!ready || !data || data.total === 0) return null;

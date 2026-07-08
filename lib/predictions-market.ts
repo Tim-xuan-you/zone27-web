@@ -125,6 +125,67 @@ export async function getMyPredictionsClient(): Promise<UserPredictionsMap> {
   }
 }
 
+// ── 跨運動 reader(R293 · 今日一戰六運動紀錄條)──────────────────────────────
+// 🔴 不動上面的棒球 allowlist(它餵校準身分/公開帳本 · 放寬 = R259 幽靈 pending 陷阱)。
+// 這支是「應戰天數 + 跨運動對帳」自己的 reader:六運動前綴全收 · pick 收 stored 空間
+// 全值(home/away/draw · a/b 運動已按 A=home/B=away 存)· 玩法(~)照收(真押注 =
+// 真應戰日;棒球大小分有虛擬賽果可對帳 · 對不到賽果的自然留在 pending)。
+// ─────────────────────────────────────────────────────
+
+/** stored-pick 空間的跨運動押注 map(matchId → pick + ts)。 */
+export type SportPickMap = Record<
+  string,
+  { pick: "home" | "away" | "draw"; ts: string }
+>;
+
+const SPORT_PREFIXES = ["cpbl-", "mlb-", "fd-", "tn-", "bd-", "mma-", "bk-"];
+
+/** 本人六運動全部押注(logged-in)· 同場取最新(RPC 已 desc → first-seen)· 錯/anon → {}。 */
+export async function getMySportPicksClient(): Promise<SportPickMap> {
+  try {
+    const supabase = createSupabaseBrowserClient();
+    const { data, error } = await supabase.rpc("get_my_predictions");
+    if (error || !Array.isArray(data)) return {};
+    const map: SportPickMap = {};
+    for (const row of data as {
+      match_id?: unknown;
+      pick?: unknown;
+      created_at?: unknown;
+    }[]) {
+      const matchId = typeof row.match_id === "string" ? row.match_id : null;
+      if (!matchId || !SPORT_PREFIXES.some((p) => matchId.startsWith(p)))
+        continue; // 群眾盤 mkt- 等非運動押注不進應戰紀錄
+      const pick =
+        row.pick === "home" || row.pick === "away" || row.pick === "draw"
+          ? row.pick
+          : null;
+      const ts = typeof row.created_at === "string" ? row.created_at : "";
+      if (pick && ts && !(matchId in map)) map[matchId] = { pick, ts };
+    }
+    return map;
+  } catch {
+    return {};
+  }
+}
+
+/** 本人在任一場(跨運動)的 stored-pick(home/away/draw)· 給戰帖對決盤跨運動讀「你那手」。
+ *  同 getMyPrediction 但不丟 draw(足球三向)· null = 沒押 / anon / 錯。 */
+export async function getMyStoredPick(
+  matchId: string
+): Promise<"home" | "away" | "draw" | null> {
+  try {
+    const supabase = createSupabaseBrowserClient();
+    const { data, error } = await supabase.rpc("get_my_prediction", {
+      p_match_id: matchId,
+    });
+    if (error || !Array.isArray(data) || data.length === 0) return null;
+    const pick = (data[0] as { pick?: unknown }).pick;
+    return pick === "home" || pick === "away" || pick === "draw" ? pick : null;
+  } catch {
+    return null;
+  }
+}
+
 export type SubmitResult =
   | { ok: true; pick: "home" | "away" }
   | {

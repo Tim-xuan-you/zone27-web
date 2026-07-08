@@ -228,13 +228,19 @@ function lockedToMatch(p: LockedPrediction): Match | null {
 }
 
 /** 從 mlb-locked.json 重建的「已封存」MLB 場(同步 · 不打 API)· 永久可達。
- *  給詳情頁 fallback + /member 隊名 lookup 補齊用(live 窗掉出去的舊場)。 */
+ *  給詳情頁 fallback + /member 隊名 lookup 補齊用(live 窗掉出去的舊場)。
+ *  模組級 memo(R294 實測 ~120ms/次 · 444 場逐場建 Intl formatter + 比分表):
+ *  mlb-locked.json 是 build 時靜態 import、部署前不會變 → 每個 process 重建一次就夠,
+ *  天梯/脈動/戰帖/今日一戰各 hot path 不再各付一次(且鎖檔隨賽季線性長大)。 */
+let lockedMatchesMemo: Match[] | null = null;
 export function getMlbLockedMatches(): Match[] {
+  if (lockedMatchesMemo) return lockedMatchesMemo;
   const out: Match[] = [];
   for (const p of (mlbLocked.predictions ?? []) as LockedPrediction[]) {
     const m = lockedToMatch(p);
     if (m) out.push(m);
   }
+  lockedMatchesMemo = out;
   return out;
 }
 

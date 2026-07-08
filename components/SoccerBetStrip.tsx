@@ -17,6 +17,7 @@ import {
 } from "@/lib/soccer/predictions";
 import ConfidencePicker from "@/components/ConfidencePicker";
 import RationalePicker from "@/components/RationalePicker";
+import ChallengeShareInline from "@/components/ChallengeShareInline";
 
 // ── ZONE 27 · 足球三向押注條 ──────────────────────────────
 // 主勝 / 和 / 客勝。 押了不可改(先鎖後結)· 登入才能押(R188)· 開賽後鎖手。
@@ -33,6 +34,8 @@ export default function SoccerBetStrip({
   awayLabel,
   locked = false,
   returnTo = "/soccer",
+  onLock,
+  challenge,
 }: {
   matchId: string;
   dateISO: string;
@@ -42,6 +45,10 @@ export default function SoccerBetStrip({
   locked?: boolean;
   /** 未登入「登入就能押」的回跳基底(預設 /soccer · 群眾盤 /markets 傳自己 → 登入後落回原卡) */
   returnTo?: string;
+  /** 押成功後回呼(server 確認後)· 給戰帖對決 receiver 鎖手後揭盅 · 預設無 = 行為不變(R294) */
+  onLock?: (pick: SoccerPick) => void;
+  /** 顯示「下戰帖給朋友」inline 分享(只今日一戰傳 true)· 預設無 = 不顯示(R294) */
+  challenge?: boolean;
 }) {
   const [state, setState] = useState<State>("loading");
   const [pick, setPick] = useState<SoccerPick | null>(null);
@@ -126,6 +133,7 @@ export default function SoccerBetStrip({
     if (res.ok) {
       setPending(false); // server 確認 → 才亮「刪不掉」+ 收據連結
       setJustPicked(true); // 剛押完 → 追問「幾成把握」(校準大師)
+      onLock?.(p); // 戰帖對決:鎖手確認後揭盅對方那手(預設無 onLock = 行為不變)
       getSoccerTally(matchId).then(setTally);
     } else if (res.reason === "already_predicted") {
       // 已存在(冪等)→ 以 server 那筆為準(可能跟樂觀的不同 · 雖 UI 已擋重複)。
@@ -242,6 +250,12 @@ export default function SoccerBetStrip({
           {/* 收據連結 / 帳本連結等 server 確認後才出(收據島讀的是 server 那筆 · 未存前出來會空)。 */}
           {!pending && (
             <>
+              {/* 今日一戰:剛鎖的這手變一張可外傳戰帖(朋友點開先盲押 · 賽後揭盅)· 只 challenge 傳 true 才顯。 */}
+              {challenge && (
+                <div className="mt-2">
+                  <ChallengeShareInline matchId={matchId} />
+                </div>
+              )}
               {/* 押下那一刻 = 最想曬的時候(病毒槓桿)· 有賽前鎖定線的場給一張現在就能外傳的單場
                   收據(賽前鎖死、改不了)。 沒鎖定線的場不掛(避免 /receipts 404 死連結)。 */}
               {locked && (

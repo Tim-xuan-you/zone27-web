@@ -9,7 +9,8 @@ import {
 } from "@/lib/brand";
 import { resolveChallenge } from "@/lib/challenge";
 import { normalizeProfileCode } from "@/lib/profile-code";
-import { getEngineFavorite } from "@/lib/matches";
+import { duelStartLabel } from "@/lib/daily-duel";
+import { getTodayTaipei } from "@/lib/matches";
 
 // ── ZONE 27 · /vs/[code] 動態 OG 卡 = 戰帖(散播命門)──────────────────────
 // 貼到 LINE/FB 的不是裸網址,是一張戰帖卡:是誰下的 + 哪一場 + 機器賽前鎖的線 + 「你敢同場對帳?」。
@@ -40,15 +41,16 @@ export default async function VsOgImage({
   // 沒可應戰的場 → 只秀「誰下了戰帖」的品牌卡(不假裝有對戰)。
   if (!match) return challengerOnlyCard(name);
 
-  const engine = getEngineFavorite(match);
-  const engineName =
-    engine === "home" ? match.home.name : engine === "away" ? match.away.name : null;
-  const enginePct =
-    engine === "home"
-      ? match.home.winRate
-      : engine === "away"
-        ? match.away.winRate
-        : null;
+  // 對決卡顯示順序(籃球客先 · 其餘 home/a 先)· 同 /vs 頁。
+  const leftName = match.leftIsHome ? match.homeName : match.awayName;
+  const rightName = match.leftIsHome ? match.awayName : match.homeName;
+  const leagueLabel =
+    match.sport === "baseball"
+      ? match.league
+      : `${match.sportLabel} · ${match.league}`;
+  const startLabel = match.startISO
+    ? `${duelStartLabel(match.startISO, getTodayTaipei())} 開賽`
+    : "";
 
   return new ImageResponse(
     (
@@ -98,28 +100,29 @@ export default async function VsOgImage({
         {/* MATCHUP */}
         <div style={{ display: "flex", flexDirection: "column", marginTop: 26 }}>
           <span style={{ fontSize: 15, color: boneRgba(0.4), letterSpacing: "0.3em", marginBottom: 10, display: "flex" }}>
-            {match.league} · {match.startTime} 開賽
+            {leagueLabel}
+            {startLabel ? ` · ${startLabel}` : ""}
           </span>
           <div style={{ display: "flex", alignItems: "baseline", flexWrap: "wrap" }}>
             <span style={{ fontSize: 50, color: BRAND.bone, fontWeight: 300, letterSpacing: "-0.02em" }}>
-              {match.home.name}
+              {leftName}
             </span>
             <span style={{ fontSize: 26, color: goldRgba(0.6), letterSpacing: "0.2em", margin: "0 20px", display: "flex" }}>
               vs
             </span>
             <span style={{ fontSize: 50, color: BRAND.bone, fontWeight: 300, letterSpacing: "-0.02em" }}>
-              {match.away.name}
+              {rightName}
             </span>
           </div>
         </div>
 
         {/* 機器線(公開 · 不揭 challenger 那手)*/}
-        {engineName && enginePct !== null && (
+        {match.engine && (
           <div style={{ display: "flex", marginTop: 26 }}>
             <span style={{ fontSize: 22, color: boneRgba(0.6), letterSpacing: "0.06em", display: "flex" }}>
               機器已鎖{" "}
               <span style={{ color: BRAND.gold, marginLeft: 10, marginRight: 10 }}>
-                {engineName} {enginePct}%
+                {match.engine.name} {match.engine.pct}%
               </span>{" "}
               · 賽前不翻牌
             </span>
