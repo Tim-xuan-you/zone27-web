@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-07-08T11:30:42.389Z",
+  "generatedAt": "2026-07-08T15:00:40.053Z",
   "source": "site.api.espn.com tennis scoreboard (atp+wta singles · official · public · 0 auth)",
-  "count": 1525,
+  "count": 1537,
   "games": [
     {
       "tour": "atp",
@@ -15198,6 +15198,26 @@
       "tournament": "Nordea Open",
       "grouping": "Women's Singles",
       "date": "2026-07-08",
+      "winnerName": "Paula Badosa",
+      "loserName": "Emiliana Arango",
+      "score": "6-3 6-2",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Nordea Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-08",
+      "winnerName": "Simona Waltert",
+      "loserName": "Aneta Laboutkova",
+      "score": "6-2 6-0",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Nordea Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-08",
       "winnerName": "Sinja Kraus",
       "loserName": "Caijsa Hennemann",
       "score": "6-2 6-4",
@@ -15208,9 +15228,59 @@
       "tournament": "Nordea Open",
       "grouping": "Women's Singles",
       "date": "2026-07-08",
+      "winnerName": "Varvara Lepchenko",
+      "loserName": "Tamara Korpatsch",
+      "score": "6-1 6-2",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Nordea Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-08",
       "winnerName": "Yulia Putintseva",
       "loserName": "Lola Radivojevic",
       "score": "6-4 7-5",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Wimbledon",
+      "grouping": "Women's Singles",
+      "date": "2026-07-08",
+      "winnerName": "Linda Noskova",
+      "loserName": "Elise Mertens",
+      "score": "6-3 7-5",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Wimbledon",
+      "grouping": "Women's Singles",
+      "date": "2026-07-08",
+      "winnerName": "Marta Kostyuk",
+      "loserName": "Jasmine Paolini",
+      "score": "6-3 6-2",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Grand Est Open 88",
+      "grouping": "Women's Singles",
+      "date": "2026-07-08",
+      "winnerName": "Alice Tubello",
+      "loserName": "Caroline Werner",
+      "score": "6-3 6-3",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Grand Est Open 88",
+      "grouping": "Women's Singles",
+      "date": "2026-07-08",
+      "winnerName": "Anna Blinkova",
+      "loserName": "Maria Lourdes Carle",
+      "score": "6-4 7-6",
       "retired": false
     },
     {
@@ -15238,6 +15308,26 @@
       "tournament": "Nordea Open",
       "grouping": "Women's Singles",
       "date": "2026-07-08",
+      "winnerName": "Paula Badosa",
+      "loserName": "Emiliana Arango",
+      "score": "6-3 6-2",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Nordea Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-08",
+      "winnerName": "Simona Waltert",
+      "loserName": "Aneta Laboutkova",
+      "score": "6-2 6-0",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Nordea Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-08",
       "winnerName": "Sinja Kraus",
       "loserName": "Caijsa Hennemann",
       "score": "6-2 6-4",
@@ -15248,9 +15338,39 @@
       "tournament": "Nordea Open",
       "grouping": "Women's Singles",
       "date": "2026-07-08",
+      "winnerName": "Varvara Lepchenko",
+      "loserName": "Tamara Korpatsch",
+      "score": "6-1 6-2",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Nordea Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-08",
       "winnerName": "Yulia Putintseva",
       "loserName": "Lola Radivojevic",
       "score": "6-4 7-5",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Wimbledon",
+      "grouping": "Women's Singles",
+      "date": "2026-07-08",
+      "winnerName": "Linda Noskova",
+      "loserName": "Elise Mertens",
+      "score": "6-3 7-5",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Wimbledon",
+      "grouping": "Women's Singles",
+      "date": "2026-07-08",
+      "winnerName": "Marta Kostyuk",
+      "loserName": "Jasmine Paolini",
+      "score": "6-3 6-2",
       "retired": false
     }
   ]
