@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-07-08T17:08:48.866Z",
+  "generatedAt": "2026-07-08T20:09:13.060Z",
   "source": "site.api.espn.com tennis scoreboard (atp+wta singles · official · public · 0 auth)",
-  "count": 1549,
+  "count": 1552,
   "games": [
     {
       "tour": "atp",
@@ -15318,9 +15318,29 @@
       "tournament": "Cerity Partners Hall of Fame Open for the Van Alen Cup Presented by the Margaret Fund",
       "grouping": "Women's Singles",
       "date": "2026-07-08",
+      "winnerName": "Katie Volynets",
+      "loserName": "Ariana Arseneault",
+      "score": "3-6 6-1 6-1",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Cerity Partners Hall of Fame Open for the Van Alen Cup Presented by the Margaret Fund",
+      "grouping": "Women's Singles",
+      "date": "2026-07-08",
       "winnerName": "Kayla Cross",
       "loserName": "Sayaka Ishii",
       "score": "6-2 6-3",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Cerity Partners Hall of Fame Open for the Van Alen Cup Presented by the Margaret Fund",
+      "grouping": "Women's Singles",
+      "date": "2026-07-08",
+      "winnerName": "Kylie Collins",
+      "loserName": "Alana Smith",
+      "score": "6-4 6-4",
       "retired": false
     },
     {
@@ -15371,6 +15391,16 @@
       "winnerName": "Francesca Curmi",
       "loserName": "Rebeka Masarova",
       "score": "6-4 6-4",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Grand Est Open 88",
+      "grouping": "Women's Singles",
+      "date": "2026-07-08",
+      "winnerName": "Mayar Sherif",
+      "loserName": "Amandine Hesse",
+      "score": "6-3 7-5",
       "retired": false
     },
     {
