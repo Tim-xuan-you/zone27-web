@@ -14487,6 +14487,35 @@
       "verdict": null
     },
     {
+      "gamePk": 823846,
+      "gameDate": "2026-07-09T22:40:00Z",
+      "scheduleDate": "2026-07-09",
+      "homeId": 146,
+      "homeEn": "Miami Marlins",
+      "homeRecord": "50-42",
+      "awayId": 136,
+      "awayEn": "Seattle Mariners",
+      "awayRecord": "47-45",
+      "homePitcher": "Janson Junk",
+      "awayPitcher": "Bryce Miller",
+      "homeStats": {
+        "era": "4.80",
+        "k9": "6.45",
+        "bb9": "1.95",
+        "hr9": "1.20"
+      },
+      "awayStats": {
+        "era": "1.71",
+        "k9": "10.59",
+        "bb9": "0.85",
+        "hr9": "1.20"
+      },
+      "engineWinHomePct": 33,
+      "lockedAt": "2026-07-08T22:12:13.954Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
       "gamePk": 824494,
       "gameDate": "2026-07-09T23:10:00Z",
       "scheduleDate": "2026-07-09",
