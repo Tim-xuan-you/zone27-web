@@ -2981,6 +2981,34 @@
       "outcome": null,
       "verdict": null,
       "gradedAt": null
+    },
+    {
+      "matchId": "fd-537384",
+      "competitionCode": "WC",
+      "competitionName": "世界盃",
+      "kickoffISO": "2026-07-10T19:00:00Z",
+      "status": "TIMED",
+      "homeSeed": "Spain",
+      "awaySeed": "Belgium",
+      "home": "西班牙",
+      "away": "比利時",
+      "ratingHome": 1876,
+      "ratingAway": 1764,
+      "homeAdvantage": 0,
+      "xgHome": 1.552,
+      "xgAway": 1.048,
+      "homeWin": 0.4801068430084411,
+      "draw": 0.2733823532972841,
+      "awayWin": 0.24651080369427472,
+      "homeWinPct": 48,
+      "drawPct": 27,
+      "awayWinPct": 25,
+      "enginePick": "home",
+      "lockedAt": "2026-07-08T19:20:58.403Z",
+      "finalScore": null,
+      "outcome": null,
+      "verdict": null,
+      "gradedAt": null
     }
   ]
 }
