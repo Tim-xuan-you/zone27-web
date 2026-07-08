@@ -13895,8 +13895,12 @@
       },
       "engineWinHomePct": 53,
       "lockedAt": "2026-07-07T09:52:25.782Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 4,
+        "away": 1
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-07-08T08:37:45.497Z"
     },
     {
       "gamePk": 823929,
@@ -13924,8 +13928,12 @@
       },
       "engineWinHomePct": 72,
       "lockedAt": "2026-07-05T22:07:12.155Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 3,
+        "away": 4
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-07-08T08:37:45.497Z"
     },
     {
       "gamePk": 823202,
@@ -14127,6 +14135,35 @@
       },
       "engineWinHomePct": 55,
       "lockedAt": "2026-07-06T20:06:06.452Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 823605,
+      "gameDate": "2026-07-08T23:10:00Z",
+      "scheduleDate": "2026-07-08",
+      "homeId": 121,
+      "homeEn": "New York Mets",
+      "homeRecord": "38-54",
+      "awayId": 118,
+      "awayEn": "Kansas City Royals",
+      "awayRecord": "38-54",
+      "homePitcher": "Christian Scott",
+      "awayPitcher": "Steven Cruz",
+      "homeStats": {
+        "era": "3.49",
+        "k9": "11.02",
+        "bb9": "4.59",
+        "hr9": "1.29"
+      },
+      "awayStats": {
+        "era": "5.08",
+        "k9": "11.75",
+        "bb9": "5.08",
+        "hr9": "2.54"
+      },
+      "engineWinHomePct": 66,
+      "lockedAt": "2026-07-08T08:37:44.658Z",
       "finalScore": null,
       "verdict": null
     },
