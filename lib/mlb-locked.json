@@ -14516,6 +14516,35 @@
       "verdict": null
     },
     {
+      "gamePk": 823034,
+      "gameDate": "2026-07-09T23:45:00Z",
+      "scheduleDate": "2026-07-09",
+      "homeId": 138,
+      "homeEn": "St. Louis Cardinals",
+      "homeRecord": "47-43",
+      "awayId": 158,
+      "awayEn": "Milwaukee Brewers",
+      "awayRecord": "58-33",
+      "homePitcher": "Andre Pallante",
+      "awayPitcher": "Logan Henderson",
+      "homeStats": {
+        "era": "3.60",
+        "k9": "6.63",
+        "bb9": "2.56",
+        "hr9": "0.85"
+      },
+      "awayStats": {
+        "era": "2.74",
+        "k9": "11.74",
+        "bb9": "2.35",
+        "hr9": "0.78"
+      },
+      "engineWinHomePct": 40,
+      "lockedAt": "2026-07-08T16:43:49.977Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
       "gamePk": 822877,
       "gameDate": "2026-07-10T00:05:00Z",
       "scheduleDate": "2026-07-09",
@@ -14570,6 +14599,35 @@
       },
       "engineWinHomePct": 60,
       "lockedAt": "2026-07-07T17:22:16.814Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 823604,
+      "gameDate": "2026-07-10T23:15:00Z",
+      "scheduleDate": "2026-07-10",
+      "homeId": 121,
+      "homeEn": "New York Mets",
+      "homeRecord": "38-54",
+      "awayId": 111,
+      "awayEn": "Boston Red Sox",
+      "awayRecord": "41-48",
+      "homePitcher": "Nolan McLean",
+      "awayPitcher": "Sonny Gray",
+      "homeStats": {
+        "era": "3.73",
+        "k9": "10.48",
+        "bb9": "3.29",
+        "hr9": "0.89"
+      },
+      "awayStats": {
+        "era": "2.61",
+        "k9": "8.23",
+        "bb9": "2.31",
+        "hr9": "1.00"
+      },
+      "engineWinHomePct": 55,
+      "lockedAt": "2026-07-08T16:43:49.977Z",
       "finalScore": null,
       "verdict": null
     }
