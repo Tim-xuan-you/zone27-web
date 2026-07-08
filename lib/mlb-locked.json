@@ -14603,6 +14603,35 @@
       "verdict": null
     },
     {
+      "gamePk": 824493,
+      "gameDate": "2026-07-10T23:10:00Z",
+      "scheduleDate": "2026-07-10",
+      "homeId": 113,
+      "homeEn": "Cincinnati Reds",
+      "homeRecord": "41-49",
+      "awayId": 112,
+      "awayEn": "Chicago Cubs",
+      "awayRecord": "51-40",
+      "homePitcher": "Hunter Greene",
+      "awayPitcher": "Shota Imanaga",
+      "homeStats": {
+        "era": "21.60",
+        "k9": "18.90",
+        "bb9": "10.80",
+        "hr9": "2.70"
+      },
+      "awayStats": {
+        "era": "4.28",
+        "k9": "8.74",
+        "bb9": "2.27",
+        "hr9": "1.83"
+      },
+      "engineWinHomePct": 25,
+      "lockedAt": "2026-07-08T19:42:19.665Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
       "gamePk": 823604,
       "gameDate": "2026-07-10T23:15:00Z",
       "scheduleDate": "2026-07-10",
