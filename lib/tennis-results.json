@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-07-08T15:00:40.053Z",
+  "generatedAt": "2026-07-08T17:08:48.866Z",
   "source": "site.api.espn.com tennis scoreboard (atp+wta singles · official · public · 0 auth)",
-  "count": 1537,
+  "count": 1549,
   "games": [
     {
       "tour": "atp",
@@ -15188,6 +15188,26 @@
       "tournament": "Nordea Open",
       "grouping": "Women's Singles",
       "date": "2026-07-08",
+      "winnerName": "Irene Burillo",
+      "loserName": "Moyuka Uchijima",
+      "score": "6-4 6-7 7-5",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Nordea Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-08",
+      "winnerName": "Kaitlin Quevedo",
+      "loserName": "Kajsa Rinaldo Persson",
+      "score": "7-6 3-6 6-3",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Nordea Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-08",
       "winnerName": "Leyre Romero Gormaz",
       "loserName": "Miriam Bulgaru",
       "score": "6-3 6-3",
@@ -15246,6 +15266,26 @@
     {
       "tour": "atp",
       "tournament": "Wimbledon",
+      "grouping": "Men's Singles",
+      "date": "2026-07-08",
+      "winnerName": "Alexander Zverev",
+      "loserName": "Taylor Fritz",
+      "score": "6-4 6-4 6-2",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Wimbledon",
+      "grouping": "Men's Singles",
+      "date": "2026-07-08",
+      "winnerName": "Arthur Fery",
+      "loserName": "Flavio Cobolli",
+      "score": "6-4 7-6 6-0",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Wimbledon",
       "grouping": "Women's Singles",
       "date": "2026-07-08",
       "winnerName": "Linda Noskova",
@@ -15260,6 +15300,46 @@
       "date": "2026-07-08",
       "winnerName": "Marta Kostyuk",
       "loserName": "Jasmine Paolini",
+      "score": "6-3 6-2",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Cerity Partners Hall of Fame Open for the Van Alen Cup Presented by the Margaret Fund",
+      "grouping": "Women's Singles",
+      "date": "2026-07-08",
+      "winnerName": "Katherine Sebov",
+      "loserName": "Cadence Brace",
+      "score": "6-2 6-2",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Cerity Partners Hall of Fame Open for the Van Alen Cup Presented by the Margaret Fund",
+      "grouping": "Women's Singles",
+      "date": "2026-07-08",
+      "winnerName": "Kayla Cross",
+      "loserName": "Sayaka Ishii",
+      "score": "6-2 6-3",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Cerity Partners Hall of Fame Open for the Van Alen Cup Presented by the Margaret Fund",
+      "grouping": "Women's Singles",
+      "date": "2026-07-08",
+      "winnerName": "Madison Brengle",
+      "loserName": "Ana Sofia Sanchez",
+      "score": "7-5 6-3",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Cerity Partners Hall of Fame Open for the Van Alen Cup Presented by the Margaret Fund",
+      "grouping": "Women's Singles",
+      "date": "2026-07-08",
+      "winnerName": "Tatjana Maria",
+      "loserName": "Olivia Lincer",
       "score": "6-3 6-2",
       "retired": false
     },
@@ -15298,6 +15378,26 @@
       "tournament": "Nordea Open",
       "grouping": "Women's Singles",
       "date": "2026-07-08",
+      "winnerName": "Irene Burillo",
+      "loserName": "Moyuka Uchijima",
+      "score": "6-4 6-7 7-5",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Nordea Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-08",
+      "winnerName": "Kaitlin Quevedo",
+      "loserName": "Kajsa Rinaldo Persson",
+      "score": "7-6 3-6 6-3",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Nordea Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-08",
       "winnerName": "Leyre Romero Gormaz",
       "loserName": "Miriam Bulgaru",
       "score": "6-3 6-3",
@@ -15351,6 +15451,26 @@
       "winnerName": "Yulia Putintseva",
       "loserName": "Lola Radivojevic",
       "score": "6-4 7-5",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Wimbledon",
+      "grouping": "Men's Singles",
+      "date": "2026-07-08",
+      "winnerName": "Alexander Zverev",
+      "loserName": "Taylor Fritz",
+      "score": "6-4 6-4 6-2",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Wimbledon",
+      "grouping": "Men's Singles",
+      "date": "2026-07-08",
+      "winnerName": "Arthur Fery",
+      "loserName": "Flavio Cobolli",
+      "score": "6-4 7-6 6-0",
       "retired": false
     },
     {
