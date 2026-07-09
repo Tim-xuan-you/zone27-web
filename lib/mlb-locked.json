@@ -14423,8 +14423,12 @@
       },
       "engineWinHomePct": 48,
       "lockedAt": "2026-07-07T17:22:16.814Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 5,
+        "away": 10
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-07-09T22:27:09.371Z"
     },
     {
       "gamePk": 823606,
@@ -14485,8 +14489,12 @@
       },
       "engineWinHomePct": 54,
       "lockedAt": "2026-07-09T15:22:47.999Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 4,
+        "away": 12
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-07-09T22:27:09.371Z"
     },
     {
       "gamePk": 823683,
@@ -14514,8 +14522,12 @@
       },
       "engineWinHomePct": 37,
       "lockedAt": "2026-07-07T17:22:16.814Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 2,
+        "away": 5
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-07-09T22:27:09.371Z"
     },
     {
       "gamePk": 824816,
@@ -14543,8 +14555,12 @@
       },
       "engineWinHomePct": 60,
       "lockedAt": "2026-07-07T17:22:16.814Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 3,
+        "away": 2
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-07-09T22:27:09.371Z"
     },
     {
       "gamePk": 824251,
@@ -14721,6 +14737,35 @@
       "verdict": null
     },
     {
+      "gamePk": 823357,
+      "gameDate": "2026-07-10T22:40:00Z",
+      "scheduleDate": "2026-07-10",
+      "homeId": 134,
+      "homeEn": "Pittsburgh Pirates",
+      "homeRecord": "47-47",
+      "awayId": 158,
+      "awayEn": "Milwaukee Brewers",
+      "awayRecord": "58-34",
+      "homePitcher": "Braxton Ashcraft",
+      "awayPitcher": "Brandon Sproat",
+      "homeStats": {
+        "era": "3.24",
+        "k9": "10.14",
+        "bb9": "2.08",
+        "hr9": "1.00"
+      },
+      "awayStats": {
+        "era": "5.13",
+        "k9": "9.57",
+        "bb9": "4.22",
+        "hr9": "1.59"
+      },
+      "engineWinHomePct": 66,
+      "lockedAt": "2026-07-09T22:27:08.341Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
       "gamePk": 822709,
       "gameDate": "2026-07-10T22:45:00Z",
       "scheduleDate": "2026-07-10",
@@ -14833,6 +14878,35 @@
       },
       "engineWinHomePct": 57,
       "lockedAt": "2026-07-09T19:54:31.198Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 823845,
+      "gameDate": "2026-07-10T23:10:00Z",
+      "scheduleDate": "2026-07-10",
+      "homeId": 146,
+      "homeEn": "Miami Marlins",
+      "homeRecord": "51-42",
+      "awayId": 114,
+      "awayEn": "Cleveland Guardians",
+      "awayRecord": "48-46",
+      "homePitcher": "Sandy Alcantara",
+      "awayPitcher": "Parker Messick",
+      "homeStats": {
+        "era": "4.00",
+        "k9": "6.70",
+        "bb9": "2.40",
+        "hr9": "0.87"
+      },
+      "awayStats": {
+        "era": "2.80",
+        "k9": "9.25",
+        "bb9": "2.72",
+        "hr9": "0.76"
+      },
+      "engineWinHomePct": 43,
+      "lockedAt": "2026-07-09T22:27:08.341Z",
       "finalScore": null,
       "verdict": null
     },
@@ -14953,6 +15027,35 @@
       "verdict": null
     },
     {
+      "gamePk": 823356,
+      "gameDate": "2026-07-11T20:05:00Z",
+      "scheduleDate": "2026-07-11",
+      "homeId": 134,
+      "homeEn": "Pittsburgh Pirates",
+      "homeRecord": "47-47",
+      "awayId": 158,
+      "awayEn": "Milwaukee Brewers",
+      "awayRecord": "58-34",
+      "homePitcher": "Bubba Chandler",
+      "awayPitcher": "Shane Drohan",
+      "homeStats": {
+        "era": "4.82",
+        "k9": "7.93",
+        "bb9": "5.22",
+        "hr9": "1.00"
+      },
+      "awayStats": {
+        "era": "2.97",
+        "k9": "8.62",
+        "bb9": "2.83",
+        "hr9": "0.71"
+      },
+      "engineWinHomePct": 43,
+      "lockedAt": "2026-07-09T22:27:08.341Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
       "gamePk": 822953,
       "gameDate": "2026-07-11T20:10:00Z",
       "scheduleDate": "2026-07-11",
@@ -14978,6 +15081,35 @@
       },
       "engineWinHomePct": 49,
       "lockedAt": "2026-07-09T19:54:31.198Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 823844,
+      "gameDate": "2026-07-11T20:10:00Z",
+      "scheduleDate": "2026-07-11",
+      "homeId": 146,
+      "homeEn": "Miami Marlins",
+      "homeRecord": "51-42",
+      "awayId": 114,
+      "awayEn": "Cleveland Guardians",
+      "awayRecord": "48-46",
+      "homePitcher": "Eury Pérez",
+      "awayPitcher": "Tanner Bibee",
+      "homeStats": {
+        "era": "3.84",
+        "k9": "10.05",
+        "bb9": "3.62",
+        "hr9": "1.47"
+      },
+      "awayStats": {
+        "era": "4.06",
+        "k9": "7.11",
+        "bb9": "2.54",
+        "hr9": "1.69"
+      },
+      "engineWinHomePct": 62,
+      "lockedAt": "2026-07-09T22:27:08.341Z",
       "finalScore": null,
       "verdict": null
     },
