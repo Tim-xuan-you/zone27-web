@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-07-09T10:19:13.096Z",
+  "generatedAt": "2026-07-09T15:46:54.380Z",
   "source": "site.api.espn.com tennis scoreboard (atp+wta singles · official · public · 0 auth)",
-  "count": 1560,
+  "count": 1565,
   "games": [
     {
       "tour": "atp",
@@ -15578,10 +15578,40 @@
       "tournament": "Nordea Open",
       "grouping": "Women's Singles",
       "date": "2026-07-09",
+      "winnerName": "Kaitlin Quevedo",
+      "loserName": "Irene Burillo",
+      "score": "4-6 6-4 6-4",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Nordea Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-09",
       "winnerName": "Simona Waltert",
       "loserName": "Leyre Romero Gormaz",
       "score": "6-2 6-1",
       "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Wimbledon",
+      "grouping": "Women's Singles",
+      "date": "2026-07-09",
+      "winnerName": "Karolina Muchova",
+      "loserName": "Coco Gauff",
+      "score": "6-2 1-6 7-6",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Grand Est Open 88",
+      "grouping": "Women's Singles",
+      "date": "2026-07-09",
+      "winnerName": "Aurora Zantedeschi",
+      "loserName": "Lisa Pigato",
+      "score": "6-2 5-5",
+      "retired": true
     },
     {
       "tour": "wta",
@@ -15598,9 +15628,29 @@
       "tournament": "Nordea Open",
       "grouping": "Women's Singles",
       "date": "2026-07-09",
+      "winnerName": "Kaitlin Quevedo",
+      "loserName": "Irene Burillo",
+      "score": "4-6 6-4 6-4",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Nordea Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-09",
       "winnerName": "Simona Waltert",
       "loserName": "Leyre Romero Gormaz",
       "score": "6-2 6-1",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Wimbledon",
+      "grouping": "Women's Singles",
+      "date": "2026-07-09",
+      "winnerName": "Karolina Muchova",
+      "loserName": "Coco Gauff",
+      "score": "6-2 1-6 7-6",
       "retired": false
     }
   ]
