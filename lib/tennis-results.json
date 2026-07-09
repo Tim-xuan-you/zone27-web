@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-07-08T22:43:37.035Z",
+  "generatedAt": "2026-07-09T10:19:13.096Z",
   "source": "site.api.espn.com tennis scoreboard (atp+wta singles · official · public · 0 auth)",
-  "count": 1557,
+  "count": 1560,
   "games": [
     {
       "tour": "atp",
@@ -15571,6 +15571,36 @@
       "winnerName": "Marta Kostyuk",
       "loserName": "Jasmine Paolini",
       "score": "6-3 6-2",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Nordea Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-09",
+      "winnerName": "Simona Waltert",
+      "loserName": "Leyre Romero Gormaz",
+      "score": "6-2 6-1",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Grand Est Open 88",
+      "grouping": "Women's Singles",
+      "date": "2026-07-09",
+      "winnerName": "Jeline Vandromme",
+      "loserName": "Oksana Selekhmeteva",
+      "score": "6-0 6-1",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Nordea Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-09",
+      "winnerName": "Simona Waltert",
+      "loserName": "Leyre Romero Gormaz",
+      "score": "6-2 6-1",
       "retired": false
     }
   ]
