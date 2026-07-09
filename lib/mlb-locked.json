@@ -14456,6 +14456,35 @@
       "verdict": null
     },
     {
+      "gamePk": 822954,
+      "gameDate": "2026-07-09T17:10:00Z",
+      "scheduleDate": "2026-07-09",
+      "homeId": 139,
+      "homeEn": "Tampa Bay Rays",
+      "homeRecord": "54-36",
+      "awayId": 147,
+      "awayEn": "New York Yankees",
+      "awayRecord": "50-42",
+      "homePitcher": "Drew Rasmussen",
+      "awayPitcher": "Paul Blackburn",
+      "homeStats": {
+        "era": "2.78",
+        "k9": "8.91",
+        "bb9": "1.58",
+        "hr9": "1.02"
+      },
+      "awayStats": {
+        "era": "2.22",
+        "k9": "6.45",
+        "bb9": "3.02",
+        "hr9": "0.60"
+      },
+      "engineWinHomePct": 54,
+      "lockedAt": "2026-07-09T15:22:47.999Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
       "gamePk": 823683,
       "gameDate": "2026-07-09T17:40:00Z",
       "scheduleDate": "2026-07-09",
@@ -14684,6 +14713,64 @@
       },
       "engineWinHomePct": 60,
       "lockedAt": "2026-07-07T17:22:16.814Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 822709,
+      "gameDate": "2026-07-10T22:45:00Z",
+      "scheduleDate": "2026-07-10",
+      "homeId": 120,
+      "homeEn": "Washington Nationals",
+      "homeRecord": "48-46",
+      "awayId": 147,
+      "awayEn": "New York Yankees",
+      "awayRecord": "50-42",
+      "homePitcher": "Zack Littell",
+      "awayPitcher": "Ryan Weathers",
+      "homeStats": {
+        "era": "5.02",
+        "k9": "5.44",
+        "bb9": "2.72",
+        "hr9": "2.30"
+      },
+      "awayStats": {
+        "era": "4.29",
+        "k9": "10.14",
+        "bb9": "2.63",
+        "hr9": "1.56"
+      },
+      "engineWinHomePct": 37,
+      "lockedAt": "2026-07-09T15:22:47.999Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 824817,
+      "gameDate": "2026-07-10T23:05:00Z",
+      "scheduleDate": "2026-07-10",
+      "homeId": 110,
+      "homeEn": "Baltimore Orioles",
+      "homeRecord": "42-51",
+      "awayId": 118,
+      "awayEn": "Kansas City Royals",
+      "awayRecord": "38-55",
+      "homePitcher": "Brandon Young",
+      "awayPitcher": "Luinder Avila",
+      "homeStats": {
+        "era": "3.38",
+        "k9": "7.22",
+        "bb9": "3.49",
+        "hr9": "0.81"
+      },
+      "awayStats": {
+        "era": "5.05",
+        "k9": "8.19",
+        "bb9": "5.40",
+        "hr9": "0.87"
+      },
+      "engineWinHomePct": 59,
+      "lockedAt": "2026-07-09T15:22:47.999Z",
       "finalScore": null,
       "verdict": null
     },
