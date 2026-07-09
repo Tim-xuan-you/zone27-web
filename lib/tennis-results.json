@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-07-09T20:28:40.175Z",
+  "generatedAt": "2026-07-09T22:56:02.916Z",
   "source": "site.api.espn.com tennis scoreboard (atp+wta singles · official · public · 0 auth)",
-  "count": 1583,
+  "count": 1585,
   "games": [
     {
       "tour": "atp",
@@ -15678,6 +15678,16 @@
       "tournament": "Cerity Partners Hall of Fame Open for the Van Alen Cup Presented by the Margaret Fund",
       "grouping": "Women's Singles",
       "date": "2026-07-09",
+      "winnerName": "Elizabeth Mandlik",
+      "loserName": "Reese Brantmeier",
+      "score": "6-3 4-6 6-2",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Cerity Partners Hall of Fame Open for the Van Alen Cup Presented by the Margaret Fund",
+      "grouping": "Women's Singles",
+      "date": "2026-07-09",
       "winnerName": "Greet Minnen",
       "loserName": "Mei Yamaguchi",
       "score": "7-5 6-3",
@@ -15691,6 +15701,16 @@
       "winnerName": "Katie Volynets",
       "loserName": "Kylie Collins",
       "score": "6-3 6-4",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Cerity Partners Hall of Fame Open for the Van Alen Cup Presented by the Margaret Fund",
+      "grouping": "Women's Singles",
+      "date": "2026-07-09",
+      "winnerName": "Lucrezia Stefanini",
+      "loserName": "Anna Rogers",
+      "score": "6-2 6-1",
       "retired": false
     },
     {
