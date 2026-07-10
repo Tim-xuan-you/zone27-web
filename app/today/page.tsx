@@ -2,12 +2,7 @@ import Link from "next/link";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import Avatar from "@/components/Avatar";
-import CardBetStrip from "@/components/CardBetStrip";
-import SoccerBetStrip from "@/components/SoccerBetStrip";
-import TennisBetStrip from "@/components/TennisBetStrip";
-import BadmintonBetStrip from "@/components/BadmintonBetStrip";
-import MmaBetStrip from "@/components/MmaBetStrip";
-import BasketballBetStrip from "@/components/BasketballBetStrip";
+import DuelVoiceBoard, { type DuelVoiceModel } from "@/components/DuelVoiceBoard";
 import DuelRecordStrip from "@/components/DuelRecordStrip";
 import WatchPoints from "@/components/WatchPoints";
 import {
@@ -20,6 +15,7 @@ import {
 import { selectWatchPoints } from "@/lib/watch-points";
 import { getMatchHeat } from "@/lib/match-heat";
 import { getEngineConviction } from "@/lib/conviction";
+import { machineVoice } from "@/lib/machine-voice";
 import { matches as allMatches, getTodayTaipei } from "@/lib/matches";
 import { getMlbAsMatches } from "@/lib/mlb-matches";
 import { getTeamCrest } from "@/lib/identity";
@@ -81,6 +77,55 @@ function duelSides(duel: TodayDuel): {
   }
 }
 
+/** 對決卡 → 鎖定反應島的 serializable model(R295 · enginePick 用各運動 native pick 空間)。 */
+function duelVoiceModel(
+  duel: TodayDuel,
+  engine: { name: string; pct: number },
+): DuelVoiceModel {
+  const base = {
+    matchId: duel.id,
+    startISO: duel.startISO,
+    engineName: engine.name,
+    enginePct: engine.pct,
+  };
+  switch (duel.sport) {
+    case "baseball":
+      return {
+        ...base,
+        sport: duel.sport,
+        homeName: duel.match.home.name,
+        awayName: duel.match.away.name,
+        enginePick: engine.name === duel.match.home.name ? "home" : "away",
+        engineHomePct: duel.match.home.winRate,
+      };
+    case "soccer":
+      return {
+        ...base,
+        sport: duel.sport,
+        homeName: duel.homeName,
+        awayName: duel.awayName,
+        enginePick: duel.pick,
+      };
+    case "basketball":
+      return {
+        ...base,
+        sport: duel.sport,
+        homeName: duel.homeName,
+        awayName: duel.awayName,
+        enginePick: duel.line.pick,
+      };
+    default:
+      // 網球 / 羽球 / 格鬥(a/b 空間 · homeName=A、awayName=B · 同存表規則)
+      return {
+        ...base,
+        sport: duel.sport,
+        homeName: duel.aName,
+        awayName: duel.bName,
+        enginePick: duel.line.pick,
+      };
+  }
+}
+
 export default async function TodayPage() {
   // 今日一戰選題:六運動裡「還能賽前鎖死、機器有偏好」的那一場(棒球當日制 · 其餘接下來 24h)。
   const mlbAll = await getMlbAsMatches();
@@ -103,6 +148,19 @@ export default async function TodayPage() {
   const sides = duel ? duelSides(duel) : null;
   const leftFav = !!(engine && sides && engine.name === sides.left.name);
   const rightFav = !!(engine && sides && engine.name === sides.right.name);
+
+  // 機器賽前開口(R295 機器嘴 · 冷面):seed = 場 + 台北日 → 全站同一句 · 不含任何
+  // 用戶資訊(viewer-independent)= ISR/快取安全零個資。 台詞單一真相 lib/machine-voice。
+  const pregameLine =
+    duel && engine
+      ? machineVoice({
+          kind: "pregame",
+          duelId: duel.id,
+          todayTaipei,
+          engineName: engine.name,
+          pct: engine.pct,
+        })
+      : null;
 
   return (
     <div className="flex flex-col flex-1 min-h-screen">
@@ -184,65 +242,18 @@ export default async function TodayPage() {
                 )}
               </p>
 
-              {/* 你的一手:掛該運動自己的既有下注流(未登入→登入餌 · 已押→鎖定卡 · 開打→封盤)·
-                  全走共享 predictions 表 + 賽後自動對帳(pick 語意各運動自己管 · 不硬轉)。 */}
-              {duel.sport === "baseball" ? (
-                <CardBetStrip
-                  matchId={duel.id}
-                  homeName={duel.match.home.name}
-                  awayName={duel.match.away.name}
-                  startISO={duel.startISO}
-                  engineHomePct={duel.match.home.winRate}
-                  returnTo="/today"
-                  challenge
-                />
-              ) : duel.sport === "soccer" ? (
-                <SoccerBetStrip
-                  matchId={duel.id}
-                  dateISO={duel.startISO}
-                  homeLabel={duel.homeName}
-                  awayLabel={duel.awayName}
-                  locked
-                  returnTo="/today"
-                  challenge
-                />
-              ) : duel.sport === "basketball" ? (
-                <BasketballBetStrip
-                  gameId={duel.id}
-                  startISO={duel.startISO}
-                  homeLabel={duel.homeName}
-                  awayLabel={duel.awayName}
-                  returnTo="/today"
-                  challenge
-                />
-              ) : duel.sport === "tennis" ? (
-                <TennisBetStrip
-                  matchId={duel.id}
-                  startISO={duel.startISO}
-                  aLabel={duel.aName}
-                  bLabel={duel.bName}
-                  returnTo="/today"
-                  challenge
-                />
-              ) : duel.sport === "badminton" ? (
-                <BadmintonBetStrip
-                  matchId={duel.id}
-                  startISO={duel.startISO}
-                  aLabel={duel.aName}
-                  bLabel={duel.bName}
-                  returnTo="/today"
-                  challenge
-                />
-              ) : (
-                <MmaBetStrip
-                  matchId={duel.id}
-                  startISO={duel.startISO}
-                  aLabel={duel.aName}
-                  bLabel={duel.bName}
-                  returnTo="/today"
-                  challenge
-                />
+              {/* 機器開口(R295 機器嘴 · 只對已鎖死的自己那手囂張 · 對未來只承諾對帳)。 */}
+              {pregameLine && (
+                <p className="mt-2.5 font-mono text-bone/75 text-[11px] tracking-[0.05em] leading-relaxed">
+                  「{pregameLine}」
+                </p>
               )}
+
+              {/* 你的一手:掛該運動自己的既有下注流(未登入→登入餌 · 已押→鎖定卡 · 開打→封盤)·
+                  全走共享 predictions 表 + 賽後自動對帳(pick 語意各運動自己管 · 不硬轉)。
+                  R295:六運動 switch 搬進 DuelVoiceBoard 島(onLock 是 function · 過不了
+                  server→client 邊界)—— 鎖下瞬間機器回一句(同邊/站對面)。 */}
+              <DuelVoiceBoard duel={duelVoiceModel(duel, engine)} />
             </div>
 
             {/* 你連續幾天正面對機器(登入且押過才顯 · 含贏含輸 · 一場沒躲 · 六運動同一條)。 */}

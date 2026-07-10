@@ -455,6 +455,9 @@ export type SportResultRow = {
   id: string;
   winner: "home" | "away" | "draw";
   startISO: string | null;
+  /** 機器賽前鎖的那手(stored 空間 · 給機器嘴「你 vs 機器」逐場對照)· 缺 = 機器沒選邊 /
+   *  來源沒帶(graceful:機器嘴退回只講你自己的命中/落空 · 勝敗對帳口徑不受影響)。 */
+  enginePick?: "home" | "away" | "draw";
 };
 
 /**

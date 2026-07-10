@@ -9,6 +9,7 @@ import BadmintonBetStrip from "@/components/BadmintonBetStrip";
 import MmaBetStrip from "@/components/MmaBetStrip";
 import BasketballBetStrip from "@/components/BasketballBetStrip";
 import { getMyStoredPick } from "@/lib/predictions-market";
+import { machineVoice } from "@/lib/machine-voice";
 import type { ChallengePhase, StoredPick } from "@/lib/challenge";
 import type { DuelSport } from "@/lib/daily-duel";
 
@@ -40,6 +41,7 @@ export default function ChallengeBoard({
   challengerPick,
   winner,
   phase,
+  engine,
 }: {
   code: string;
   sport: DuelSport;
@@ -55,6 +57,9 @@ export default function ChallengeBoard({
   /** 賽果(stored 空間)· "push" = 棒球平手 / MMA 和局 · "draw" = 足球真和局 */
   winner: StoredPick | "push" | null;
   phase: ChallengePhase;
+  /** 機器那手(stored 空間 · R295 機器嘴)· 只在 settled 開口(賽前/live 克制不加)·
+   *  預設無 = 行為完全不變(optional-prop 加法模式 · R294 前例)。 */
+  engine?: { name: string; pct: number; pick: StoredPick };
 }) {
   const [viewerPick, setViewerPick] = useState<StoredPick | null>(null);
   const [revealed, setRevealed] = useState(false);
@@ -158,13 +163,29 @@ export default function ChallengeBoard({
           : winner === "draw"
             ? "和局"
             : "平局";
+    // 機器嘴(R295):對「自己那手」開口 —— 兩位人類都偏它中(這次不笑而不語)· 你逆風
+    // 贏它(認帳)· 三個全偏(照單全收)。 其餘情境保持沉默(寧缺不空嗆)· push 不開口。
+    const engineHit = engine != null && !push && engine.pick === winner;
+    let machineLine: string | null = null;
+    if (engine && !push && viewerPick != null) {
+      if (challengerPick != null && !chHit && !vwHit && engineHit)
+        machineLine = machineVoice({ kind: "challengeSettled", matchId, outcome: "machineOnly" });
+      else if (vwHit && !engineHit)
+        machineLine = machineVoice({ kind: "challengeSettled", matchId, outcome: "viewerBeatMachine" });
+      else if (challengerPick != null && !chHit && !vwHit && !engineHit)
+        machineLine = machineVoice({ kind: "challengeSettled", matchId, outcome: "allMissed" });
+    }
     // 誰讀贏(兩邊都有押、且非推局才比)· 否則不下「誰贏」結論(誠實)。
+    // 雙偏時「機器笑而不語」只在機器沒開口時保留(它都要開口了還寫笑而不語 = 自相矛盾)。
     let verdictLine: string | null = null;
     if (viewerPick != null && challengerPick != null && !push) {
       if (chHit && !vwHit) verdictLine = `${challengerLabel} 這場讀贏你`;
       else if (vwHit && !chHit) verdictLine = `你這場讀贏 ${challengerLabel}`;
       else if (chHit && vwHit) verdictLine = "這場兩個都讀對 · 平分秋色";
-      else verdictLine = "這場兩個都讀偏了 · 機器笑而不語";
+      else
+        verdictLine = machineLine
+          ? "這場兩個都讀偏了"
+          : "這場兩個都讀偏了 · 機器笑而不語";
     }
     // 🔴 峰終時刻的「回敬」鉤子(散播命門 R288/R291 audit #1)· 賽後對帳是雙方最想嗆/雪恥的一刻,
     //   原本只有一條灰字連結 = 迴圈在此斷掉(A→B 應戰→B 贏→死路)。 文案吃對帳結果(贏想嗆 / 輸想雪恥 /
@@ -204,6 +225,13 @@ export default function ChallengeBoard({
         {verdictLine && (
           <p className="mt-4 pt-3 border-t border-gold/15 text-bone/90 text-sm font-light leading-relaxed">
             {verdictLine}。
+          </p>
+        )}
+
+        {/* 機器嘴(R295):贏了直接記帳 · 輸了認帳 —— 只在贏時開口 = 賣明牌的行為,這裡不做。 */}
+        {machineLine && (
+          <p className="mt-3 font-mono text-bone/75 text-[11px] tracking-[0.05em] leading-relaxed">
+            <span aria-hidden="true" className="text-gold/60">▦</span> 「{machineLine}」
           </p>
         )}
 

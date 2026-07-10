@@ -229,6 +229,22 @@ export default async function VsPage({
               challengerPick={res.challengerPick}
               winner={match.winner}
               phase={res.phase ?? "pregame"}
+              engine={
+                match.engine
+                  ? {
+                      name: match.engine.name,
+                      pct: match.engine.pct,
+                      // stored 空間反查(R295 機器嘴):engine.name 由 resolveModel 產,
+                      // 一定是 homeName / awayName / 和局 三者之一。
+                      pick:
+                        match.engine.name === match.homeName
+                          ? "home"
+                          : match.engine.name === match.awayName
+                            ? "away"
+                            : "draw",
+                    }
+                  : undefined
+              }
             />
 
             <p className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-2 font-mono text-[10px] tracking-[0.2em]">

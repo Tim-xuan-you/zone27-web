@@ -7,8 +7,11 @@ import { getMySportPicksClient } from "@/lib/predictions-market";
 import {
   aggregateSportStats,
   aggregateStreak,
+  isLatePick,
+  taipeiDayOf,
   type SportResultRow,
 } from "@/lib/predictions";
+import { machineVoice, type DuelH2H } from "@/lib/machine-voice";
 
 // ── ZONE 27 · 今日一戰 · 「你連續幾天正面對機器」紀錄條 ────────────────────────────
 // 對決的留存鉤:重點不是今天輸贏,是「你連續幾天,敢正面站到這台機器對面」。 報馬仔只敢曬贏、
@@ -26,7 +29,23 @@ import {
 // 為什麼 client island:/today 可被當每日固定地址,理應可 ISR / 快取;server 端讀登入態會把
 // 某人的紀錄快取給所有人。 同 YourRecordStrip 漸進增強:未登入 / 沒押過 → 安靜不顯示(對決卡
 // 自己的登入餌承載冷啟動,不疊第二顆 CTA)。
+//
+// R295 · 機器嘴:隔天回來,機器對「你最近一場已結算的單」開一句口(它贏乾嗆 · 你贏認帳 ·
+// 同邊/雙偏各有話 · 缺席 ≥3 天先冷一句)。 台詞單一真相 lib/machine-voice(這裡不造句)·
+// 只在 compact 變體渲染 —— hero = 今天沒對決,「今天的一戰還開著」那批句會說謊(誠實鐵律)。
 // ─────────────────────────────────────────────────────
+
+/** 兩個台北日(YYYY-MM-DD)的日差(to - from)· 不合法回 null(純算術 · 無時區轉換)。 */
+function dayGap(fromYmd: string, toYmd: string): number | null {
+  const p = (s: string) => {
+    const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(s);
+    return m ? Date.UTC(Number(m[1]), Number(m[2]) - 1, Number(m[3])) : NaN;
+  };
+  const a = p(fromYmd);
+  const b = p(toYmd);
+  if (Number.isNaN(a) || Number.isNaN(b)) return null;
+  return Math.round((b - a) / 86_400_000);
+}
 
 export default function DuelRecordStrip({
   todayTaipei,
@@ -44,6 +63,7 @@ export default function DuelRecordStrip({
     total: number;
     streak: number;
   } | null>(null);
+  const [voice, setVoice] = useState<string | null>(null);
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
@@ -72,6 +92,66 @@ export default function DuelRecordStrip({
         if (cancelled) return;
         const stats = aggregateSportStats(map, results);
         const streak = aggregateStreak(map, todayTaipei);
+
+        // ── 機器嘴(R295):缺席 ≥3 天先冷一句(發牌員記得你哪天沒來);否則對「最近一場
+        //    已結算的誰贏押注」開口(玩法 ~ 不進 · 先鎖後結同 aggregate 口徑)。 缺輸入 →
+        //    machineVoice 回 null = 安靜(寧缺不空嗆)。 ──
+        let line: string | null = null;
+        let lastDay: string | null = null;
+        for (const p of Object.values(map)) {
+          const d = taipeiDayOf(p.ts);
+          if (d && (!lastDay || d > lastDay)) lastDay = d;
+        }
+        const gap = lastDay ? dayGap(lastDay, todayTaipei) : null;
+        if (gap !== null && gap >= 3) {
+          line = machineVoice({ kind: "lapsed", days: gap });
+        } else {
+          const byId = new Map(results.map((r) => [r.id, r]));
+          const h2h: DuelH2H = { n: 0, engineHits: 0, userHits: 0 };
+          let latest: { key: number; pick: string; r: SportResultRow } | null = null;
+          for (const [id, p] of Object.entries(map)) {
+            if (id.includes("~")) continue; // 玩法不進機器嘴(嘴只對「誰贏」的對決開口)
+            const r = byId.get(id);
+            if (!r) continue; // 未結算 / 推局
+            if (isLatePick(p.ts, r.startISO)) continue; // 開賽後補登不計(同 aggregate)
+            if (r.enginePick) {
+              h2h.n++;
+              if (r.enginePick === r.winner) h2h.engineHits++;
+              if (p.pick === r.winner) h2h.userHits++;
+            }
+            const key = Date.parse(r.startISO ?? p.ts) || 0;
+            if (!latest || key > latest.key) latest = { key, pick: p.pick, r };
+          }
+          if (latest) {
+            const userHit = latest.pick === latest.r.winner;
+            const eng = latest.r.enginePick;
+            if (eng) {
+              const engineHit = eng === latest.r.winner;
+              line = machineVoice({
+                kind: "settled",
+                matchId: latest.r.id,
+                outcome:
+                  engineHit && !userHit
+                    ? "machineWon"
+                    : userHit && !engineHit
+                      ? "userWon"
+                      : userHit && engineHit
+                        ? "bothHit"
+                        : "bothMissed",
+                h2h,
+              });
+            } else {
+              // 賽果沒帶機器那手(graceful)→ 只講你自己的命中/落空
+              line = machineVoice({
+                kind: "settledSolo",
+                matchId: latest.r.id,
+                hit: userHit,
+              });
+            }
+          }
+        }
+        setVoice(line);
+
         setData({
           proved: stats.proved,
           diverged: stats.diverged,
@@ -152,6 +232,12 @@ export default function DuelRecordStrip({
       ) : (
         <p className="mt-1 font-mono text-mute/85 text-[11px] tracking-[0.1em] leading-relaxed">
           押了 {data.total} 場 · 等賽後揭曉誰準
+        </p>
+      )}
+      {/* 機器嘴(R295):它贏乾嗆 · 你贏認帳 · 一律引你自己帳本上的事實(lib/machine-voice)。 */}
+      {voice && (
+        <p className="mt-2 font-mono text-bone/75 text-[11px] tracking-[0.05em] leading-relaxed">
+          <span aria-hidden="true" className="text-gold/60">▦</span> 「{voice}」
         </p>
       )}
     </div>
