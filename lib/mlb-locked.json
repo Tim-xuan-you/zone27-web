@@ -14753,8 +14753,12 @@
       },
       "engineWinHomePct": 60,
       "lockedAt": "2026-07-07T17:22:16.814Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 1,
+        "away": 3
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-07-10T09:46:00.355Z"
     },
     {
       "gamePk": 823357,
@@ -15043,6 +15047,35 @@
       },
       "engineWinHomePct": 45,
       "lockedAt": "2026-07-10T03:52:36.774Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 823685,
+      "gameDate": "2026-07-11T00:10:00Z",
+      "scheduleDate": "2026-07-10",
+      "homeId": 142,
+      "homeEn": "Minnesota Twins",
+      "homeRecord": "46-48",
+      "awayId": 108,
+      "awayEn": "Los Angeles Angels",
+      "awayRecord": "37-57",
+      "homePitcher": "Zebby Matthews",
+      "awayPitcher": "Grayson Rodriguez",
+      "homeStats": {
+        "era": "4.43",
+        "k9": "7.52",
+        "bb9": "2.36",
+        "hr9": "1.92"
+      },
+      "awayStats": {
+        "era": "8.06",
+        "k9": "8.42",
+        "bb9": "5.26",
+        "hr9": "1.40"
+      },
+      "engineWinHomePct": 64,
+      "lockedAt": "2026-07-10T09:45:59.207Z",
       "finalScore": null,
       "verdict": null
     },
