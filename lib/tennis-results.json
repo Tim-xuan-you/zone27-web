@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-07-10T20:06:01.734Z",
+  "generatedAt": "2026-07-10T22:40:19.860Z",
   "source": "site.api.espn.com tennis scoreboard (atp+wta singles · official · public · 0 auth)",
-  "count": 1601,
+  "count": 1602,
   "games": [
     {
       "tour": "atp",
@@ -15901,6 +15901,16 @@
       "winnerName": "Jannik Sinner",
       "loserName": "Novak Djokovic",
       "score": "6-4 6-4 6-4",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Cerity Partners Hall of Fame Open for the Van Alen Cup Presented by the Margaret Fund",
+      "grouping": "Women's Singles",
+      "date": "2026-07-10",
+      "winnerName": "Greet Minnen",
+      "loserName": "Madison Brengle",
+      "score": "7-5 6-0",
       "retired": false
     },
     {
