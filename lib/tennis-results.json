@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-07-11T10:45:18.637Z",
+  "generatedAt": "2026-07-11T14:10:30.486Z",
   "source": "site.api.espn.com tennis scoreboard (atp+wta singles · official · public · 0 auth)",
-  "count": 1604,
+  "count": 1608,
   "games": [
     {
       "tour": "atp",
@@ -16028,6 +16028,16 @@
       "tournament": "EFG Swiss Open Gstaad",
       "grouping": "Men's Singles",
       "date": "2026-07-11",
+      "winnerName": "Calvin Hemery",
+      "loserName": "Daniel Michalski",
+      "score": "7-6 2-6 6-3",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "EFG Swiss Open Gstaad",
+      "grouping": "Men's Singles",
+      "date": "2026-07-11",
       "winnerName": "Clement Tabur",
       "loserName": "Hendrik Jebens",
       "score": "6-3 6-4",
@@ -16041,6 +16051,36 @@
       "winnerName": "Marc-Andrea Huesler",
       "loserName": "Edas Butvilas",
       "score": "6-4 6-3",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "EFG Swiss Open Gstaad",
+      "grouping": "Men's Singles",
+      "date": "2026-07-11",
+      "winnerName": "Thiago Monteiro",
+      "loserName": "Pierre-Hugues Herbert",
+      "score": "7-6 6-7 7-6",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Nordea Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-11",
+      "winnerName": "Paula Badosa",
+      "loserName": "Simona Waltert",
+      "score": "7-5 7-5",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Nordea Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-11",
+      "winnerName": "Paula Badosa",
+      "loserName": "Simona Waltert",
+      "score": "7-5 7-5",
       "retired": false
     }
   ]
