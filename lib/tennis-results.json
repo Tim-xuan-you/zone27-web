@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-07-11T14:10:30.486Z",
+  "generatedAt": "2026-07-11T16:34:46.146Z",
   "source": "site.api.espn.com tennis scoreboard (atp+wta singles · official · public · 0 auth)",
-  "count": 1608,
+  "count": 1621,
   "games": [
     {
       "tour": "atp",
@@ -16048,6 +16048,26 @@
       "tournament": "EFG Swiss Open Gstaad",
       "grouping": "Men's Singles",
       "date": "2026-07-11",
+      "winnerName": "Dylan Dietrich",
+      "loserName": "Otto Virtanen",
+      "score": "6-4 7-6",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "EFG Swiss Open Gstaad",
+      "grouping": "Men's Singles",
+      "date": "2026-07-11",
+      "winnerName": "Federico Cina",
+      "loserName": "Patrick Zahraj",
+      "score": "7-5 6-3",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "EFG Swiss Open Gstaad",
+      "grouping": "Men's Singles",
+      "date": "2026-07-11",
       "winnerName": "Marc-Andrea Huesler",
       "loserName": "Edas Butvilas",
       "score": "6-4 6-3",
@@ -16065,12 +16085,72 @@
     },
     {
       "tour": "atp",
+      "tournament": "EFG Swiss Open Gstaad",
+      "grouping": "Men's Singles",
+      "date": "2026-07-11",
+      "winnerName": "Timofey Skatov",
+      "loserName": "Anirudh Chandrasekar",
+      "score": "6-2 6-4",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "EFG Swiss Open Gstaad",
+      "grouping": "Men's Singles",
+      "date": "2026-07-11",
+      "winnerName": "Vitaliy Sachko",
+      "loserName": "Manas Dhamne",
+      "score": "6-4 6-1",
+      "retired": false
+    },
+    {
+      "tour": "atp",
       "tournament": "Nordea Open",
       "grouping": "Women's Singles",
       "date": "2026-07-11",
       "winnerName": "Paula Badosa",
       "loserName": "Simona Waltert",
       "score": "7-5 7-5",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Plava Laguna Croatia Open Umag",
+      "grouping": "Men's Singles",
+      "date": "2026-07-11",
+      "winnerName": "Marco Cecchinato",
+      "loserName": "Duje Ajdukovic",
+      "score": "6-3 6-4",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Plava Laguna Croatia Open Umag",
+      "grouping": "Men's Singles",
+      "date": "2026-07-11",
+      "winnerName": "Marko Topo",
+      "loserName": "Pol Martin Tiffon",
+      "score": "6-4",
+      "retired": true
+    },
+    {
+      "tour": "wta",
+      "tournament": "Cerity Partners Hall of Fame Open for the Van Alen Cup Presented by the Margaret Fund",
+      "grouping": "Women's Singles",
+      "date": "2026-07-11",
+      "winnerName": "Tatjana Maria",
+      "loserName": "Mananchaya Sawangkaew",
+      "score": "6-2 6-1",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Grand Est Open 88",
+      "grouping": "Women's Singles",
+      "date": "2026-07-11",
+      "winnerName": "Jeline Vandromme",
+      "loserName": "Aurora Zantedeschi",
+      "score": "6-3 6-4",
       "retired": false
     },
     {
@@ -16081,6 +16161,56 @@
       "winnerName": "Paula Badosa",
       "loserName": "Simona Waltert",
       "score": "7-5 7-5",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Vanda Pharmaceuticals Athens Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-11",
+      "winnerName": "Elena Micic",
+      "loserName": "Makoto Ninomiya",
+      "score": "6-0 6-2",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Vanda Pharmaceuticals Athens Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-11",
+      "winnerName": "Madison Sieg",
+      "loserName": "Artemis Aslanisvili",
+      "score": "6-3 6-0",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Vanda Pharmaceuticals Athens Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-11",
+      "winnerName": "Mina Hodzic",
+      "loserName": "Hao-Ching Chan",
+      "score": "6-3 6-4",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Vanda Pharmaceuticals Athens Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-11",
+      "winnerName": "Miriana Tona",
+      "loserName": "Maria Rentoumi",
+      "score": "6-1 6-1",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Vanda Pharmaceuticals Athens Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-11",
+      "winnerName": "Yasmine Mansouri",
+      "loserName": "Eleni  Tsetsou",
+      "score": "7-5 7-6",
       "retired": false
     }
   ]
