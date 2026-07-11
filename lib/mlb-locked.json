@@ -15455,6 +15455,35 @@
       "verdict": null
     },
     {
+      "gamePk": 823603,
+      "gameDate": "2026-07-11T20:10:00Z",
+      "scheduleDate": "2026-07-11",
+      "homeId": 121,
+      "homeEn": "New York Mets",
+      "homeRecord": "40-55",
+      "awayId": 111,
+      "awayEn": "Boston Red Sox",
+      "awayRecord": "44-48",
+      "homePitcher": "Freddy Peralta",
+      "awayPitcher": "Eduardo Rivera",
+      "homeStats": {
+        "era": "4.68",
+        "k9": "8.82",
+        "bb9": "3.51",
+        "hr9": "1.26"
+      },
+      "awayStats": {
+        "era": "0.00",
+        "k9": "8.10",
+        "bb9": "0.00",
+        "hr9": "0.00"
+      },
+      "engineWinHomePct": 29,
+      "lockedAt": "2026-07-11T15:59:45.147Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
       "gamePk": 824249,
       "gameDate": "2026-07-11T22:10:00Z",
       "scheduleDate": "2026-07-11",
