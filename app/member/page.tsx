@@ -43,8 +43,9 @@ import { getMlbAsMatches, getMlbLockedMatches } from "@/lib/mlb-matches";
 import { createHash } from "crypto";
 
 export const metadata: Metadata = {
-  title: "你的操盤室",
-  description: "你的操盤室 · 今天這一手 · 你現在哪一階。終身免費。",
+  // 頁名 = Nav 按鈕名(「我的帳本」)· 國小生不迷路:點什麼名字,就到什麼名字的頁。
+  title: "我的帳本",
+  description: "我的帳本 · 押了幾手 · 中了幾手 · 今天要做什麼。終身免費。",
 };
 
 // ── ZONE 27 · /member · 會員自己的儀表板 ─────────────────
@@ -86,6 +87,26 @@ function QuietLink({
         {cta}
       </span>
     </Link>
+  );
+}
+
+// 帳本臉的一格大數字(R300 · 押過/中/沒中/還開著 · 含輸照掛不縮小)。
+function LedgerStat({
+  n,
+  label,
+  tone = "bone",
+}: {
+  n: number;
+  label: string;
+  tone?: "bone" | "gold" | "loss";
+}) {
+  const color =
+    tone === "gold" ? "text-gold" : tone === "loss" ? "text-loss/85" : "text-bone";
+  return (
+    <div className="text-center">
+      <p className={`font-mono tabular text-2xl sm:text-3xl font-light ${color}`}>{n}</p>
+      <p className="mt-1 font-mono text-mute/70 text-[10px] tracking-[0.2em]">{label}</p>
+    </div>
   );
 }
 
@@ -260,10 +281,20 @@ export default async function MemberPage() {
         </div>
         <MembershipStatus meta={meta} />
 
-        {/* ── 主角 A · 今天這一手(今日一戰 + 今晚可鎖 + 連續對帳 三合一 · 唯一的「押什麼」)── */}
+        {/* ── R300 四區地圖(Tim「我的帳本點進去亂七八糟不好懂」)────────────────
+            病根:按鈕叫「我的帳本」,進來卻沒有帳本的臉(押幾手/中幾手藏在階梯卡裡),
+            且五種卡片視覺堆疊、區塊間沒有地圖。 解 = 版面手術非刪功能(困惑≠刪除):
+            ① 四個小聲眉標(今天/你的帳/你的階/更多)= 國小生地圖 · 灰小字不搶戲
+            ② 開頭補「帳本臉」四大數字(押過/中/沒中/還開著 · 含輸照掛)
+            ③ 操盤風格卡摺疊(趣味非每日必看 · 點開才展)· 功能一個沒刪,全部原地可達。 */}
+
+        {/* ── / 今天 ── */}
+        <p className="mt-8 mb-2 font-mono text-mute/50 text-[10px] tracking-[0.45em]">
+          / 今天
+        </p>
         <Link
           href="/today"
-          className="mt-6 block border border-gold/45 bg-gold/[0.05] p-4 hover:border-gold transition-colors group"
+          className="block border border-gold/45 bg-gold/[0.05] p-4 hover:border-gold transition-colors group"
         >
           <div className="flex items-center justify-between gap-3">
             <span className="min-w-0">
@@ -286,27 +317,25 @@ export default async function MemberPage() {
           </p>
         </Link>
 
-        {/* ── 主角 B · 你的操盤室(唯一的「我多準/我第幾階」· 含命中率+場數+下一階 · 會升會降)── */}
-        <CareerLadderMini
-          career={career}
-          accuracy={identity.accuracy}
-          decided={identity.decided}
-        />
-
-        {/* ── 操盤風格(順勢/逆風/雙面)· 階級是「我多準」(skill)· 這張是「我怎麼押」(style)·
-            玄學的真材料版:給「這超像我」的身分快感但可驗證 · 風格 ≠ 準度(卡內明寫)。 ── */}
-        <OperatorPersonaCard persona={persona} subject="你" />
-
-        {/* ── 主角 C · 你現在的一手(未結算押注 + 你不在時結算 N 場 · 都 graceful 自動隱藏)── */}
+        {/* ── / 你的帳(帳本的臉:四個大數字 · 含輸照掛)── */}
+        <p className="mt-10 mb-2 font-mono text-mute/50 text-[10px] tracking-[0.45em]">
+          / 你的帳
+        </p>
+        {identity.total > 0 ? (
+          <div className="grid grid-cols-4 gap-2 border border-line/60 bg-slate/30 p-3 sm:p-4">
+            <LedgerStat n={identity.total} label="押過" />
+            <LedgerStat n={identity.proved} label="✓ 中" tone="gold" />
+            <LedgerStat n={identity.diverged} label="✕ 沒中" tone="loss" />
+            <LedgerStat n={identity.pending} label="還開著" />
+          </div>
+        ) : (
+          <p className="border border-dashed border-line/60 bg-slate/20 p-4 text-mute text-sm leading-relaxed">
+            帳本還空著 —— 從上面那一題開始,押下第一手。
+          </p>
+        )}
         <OpenPositionsPanel positions={openPositions} />
         <ReturnedWhileAwayCard delta={settlementDelta} />
-
-        {/* ── 你的東西(安靜連結組 · 無卡 · 米其林留白)·「我的公開檔」一條收下整本完整戰績
-            (各運動 / 對帳之星 / 校準大師 / 榮譽牆全在 /u/[code])· 不在儀表板重造。 ── */}
-        <div className="mt-12 flex flex-col">
-          {/* R282b · 整合「3 個都像我的押注紀錄」(Tim:差異不大?)→ 只留 2 個「真的不同工作」的門:
-              ① 我的對帳本(私下 · 中沒中 + 戰功卡收藏 · 收件匣頁底已連到收藏牆 → 不孤兒)
-              ② 別人眼中的你(公開 · 拿去給人看)· 心理學:同一概念只給一扇門,避免「點哪個都一樣」的選擇癱瘓。 */}
+        <div className="mt-2 flex flex-col">
           <QuietLink
             href="/member/inbox"
             label="我的對帳本"
@@ -317,7 +346,7 @@ export default async function MemberPage() {
             <QuietLink
               href={`/u/${authorCode}`}
               label="別人眼中的你"
-              hint="公開戰績 + 對帳之星 · 拿去給懷疑的人看"
+              hint="公開戰績 · 拿去給懷疑的人看"
               cta="公開檔 →"
             />
           )}
@@ -329,6 +358,37 @@ export default async function MemberPage() {
               cta="看回顧 →"
             />
           )}
+        </div>
+
+        {/* ── / 你的階(我多準 · 第幾階)· 風格卡摺疊:趣味非每日必看 ── */}
+        <p className="mt-10 mb-2 font-mono text-mute/50 text-[10px] tracking-[0.45em]">
+          / 你的階
+        </p>
+        <CareerLadderMini
+          career={career}
+          accuracy={identity.accuracy}
+          decided={identity.decided}
+        />
+        <details className="mt-2 group">
+          <summary className="cursor-pointer list-none flex items-baseline justify-between gap-3 border-b border-line/40 py-3 hover:border-gold/40 transition-colors">
+            <span className="text-mute text-sm">
+              <span className="text-bone">你的操盤風格</span> · 順勢?逆風?看你的手怎麼押
+            </span>
+            <span
+              aria-hidden="true"
+              className="shrink-0 font-mono text-mute/50 text-[10px] group-open:rotate-90 transition-transform"
+            >
+              ▸
+            </span>
+          </summary>
+          <OperatorPersonaCard persona={persona} subject="你" />
+        </details>
+
+        {/* ── / 更多(安靜連結 · 一行一個)── */}
+        <p className="mt-10 mb-2 font-mono text-mute/50 text-[10px] tracking-[0.45em]">
+          / 更多
+        </p>
+        <div className="flex flex-col">
           <QuietLink
             href="/member/leagues"
             label="私人聯盟"
