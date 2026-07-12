@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<title>ZONE 27 戰報 NO.030 · 尼爾森巨人 @ 馬納瓦圖噴射機</title>
+<style>
+  /* ── ZONE 27 戰報 · 門店列印版 · A4 一頁 · v19(海報級主視覺:巨大數字) ── */
+  @page { size: A4; margin: 10mm 12mm; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body { font-family: "Microsoft JhengHei", "Noto Sans TC", "PingFang TC", sans-serif;
+    color: #111; background: #e8e8e8; font-size: 10pt; line-height: 1.46; }
+  .sheet { width: 210mm; min-height: 296mm; margin: 0 auto; background: #fff; padding: 11mm 13mm 8mm; }
+  @media print { body { background: #fff; } .sheet { width: auto; min-height: auto; margin: 0; padding: 0; zoom: 0.86; } }
+
+  .masthead { display: flex; justify-content: space-between; align-items: center;
+    border-bottom: 3.5px solid #0F1A2E; padding-bottom: 5px; margin-bottom: 6px; }
+  .brand { font-size: 19pt; font-weight: 900; letter-spacing: 2px; color: #0F1A2E; }
+  .brand .en { font-size: 8pt; font-weight: 600; letter-spacing: 3px; color: #8A6A1F; display: block; margin-top: 1px; }
+  .sportbox { display: flex; align-items: center; gap: 10px; }
+  .sportbox .name { font-size: 22pt; font-weight: 900; color: #0F1A2E; letter-spacing: 4px; line-height: 1.1; }
+  .sportbox .sub { font-size: 8.5pt; color: #666; letter-spacing: 2px; display: block; margin-top: 1px; }
+  .sportbox .no { text-align: right; font-size: 8.5pt; color: #444; line-height: 1.5; border-left: 1px solid #ccc; padding-left: 10px; }
+  .sportbox .no b { color: #0F1A2E; }
+
+  .match { margin-bottom: 5px; }
+  .match .comp { font-size: 9pt; font-weight: 700; color: #8A6A1F; letter-spacing: 2px; }
+  .match h1 { font-size: 19pt; font-weight: 900; color: #0F1A2E; letter-spacing: 1px; line-height: 1.3; }
+  .match .meta { font-size: 9.5pt; color: #444; margin-top: 2px; }
+
+  .tldr { background: #0F1A2E; color: #E9E4D8; padding: 6px 12px; margin-bottom: 5px; }
+  .tldr .tag { font-size: 8pt; letter-spacing: 3px; color: #D4AF37; font-weight: 700; }
+  .tldr p { font-size: 11pt; font-weight: 700; line-height: 1.5; margin-top: 2px; }
+  .tldr b { color: #D4AF37; }
+
+  .ritual { border: 1.5px dashed #8A6A1F; background: #FDFBF5; padding: 4px 10px;
+    font-size: 9.8pt; font-weight: 700; color: #0F1A2E; margin-bottom: 5px; }
+
+  /* 海報級主視覺:巨大數字(3 秒鉤子 · 黑白影印安全) */
+  .hero0 { display: flex; align-items: center; gap: 14px; border: 2px solid #0F1A2E;
+    padding: 4px 14px; margin-bottom: 4px; background: #FAFAF7; }
+  .hero0 .n { font-size: 38pt; font-weight: 900; color: #0F1A2E; line-height: 1; letter-spacing: 0; }
+  .hero0 .t { font-size: 10.5pt; line-height: 1.5; }
+  .hero0 .t b { color: #8A6A1F; }
+  .hero0 .t .big { font-size: 12pt; font-weight: 900; color: #0F1A2E; display: block; }
+
+  section { margin-bottom: 4px; }
+  h2 { font-size: 11pt; font-weight: 800; color: #0F1A2E; letter-spacing: 1.5px;
+    border-left: 4px solid #8A6A1F; padding-left: 7px; margin-bottom: 3px; }
+
+  .avoid table { width: 100%; border-collapse: collapse; font-size: 9.8pt; }
+  .avoid th, .avoid td { border: 1px solid #ccc; padding: 3px 7px; text-align: left; vertical-align: middle; }
+  .avoid th { background: #EFEBE0; color: #0F1A2E; font-size: 9pt; letter-spacing: 1px; }
+  .avoid td.num { text-align: center; white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .avoid td.mark { text-align: center; color: #333; font-weight: 900; font-size: 12pt; width: 8%; }
+  .avoid tr.dead td { color: #777; background: #f3f3f3; }
+  .avoid tr.dead td.name, .avoid tr.dead td.num { text-decoration: line-through; text-decoration-thickness: 1.5px; text-decoration-color: #444; }
+  .note { font-size: 8.5pt; color: #666; margin-top: 2px; }
+
+  /* 觀望框(這桌沒有值得花腦筋的 —— 017/022 先例) */
+  .nokeep { border: 1.5px solid #0F1A2E; background: #FAFAF7; padding: 6px 11px; font-size: 9.8pt; line-height: 1.55; }
+  .nokeep b { color: #8A6A1F; }
+
+  .facts { counter-reset: fact; }
+  .facts li { list-style: none; padding-left: 17px; position: relative; margin-bottom: 2px; }
+  .facts li::before { content: counter(fact) ""; counter-increment: fact; position: absolute; left: 0;
+    font-weight: 900; color: #8A6A1F; font-size: 10.5pt; }
+
+  .switch { border: 2px solid #0F1A2E; padding: 7px 11px; background: #FAFAF7; }
+  .switch .tag { font-size: 8pt; letter-spacing: 2px; color: #8A6A1F; font-weight: 800; }
+  .switch h3 { font-size: 13pt; font-weight: 900; color: #0F1A2E; margin: 2px 0 3px; letter-spacing: 0.5px; }
+  .switch p.lead { font-size: 9.8pt; margin-bottom: 4px; }
+  .branch { display: flex; gap: 8px; margin: 3px 0; align-items: flex-start; }
+  .branch .k { flex: 0 0 72px; text-align: center; font-weight: 900; font-size: 9.5pt; padding: 2px 0;
+    border: 1.5px solid #0F1A2E; color: #0F1A2E; }
+  .branch.on .k { background: #0F1A2E; color: #E9E4D8; }
+  .branch p { font-size: 9.8pt; flex: 1; }
+
+  .board { border: 2.5px solid #8A6A1F; background: #FAF6EC; padding: 7px 12px; }
+  .board .tag { font-size: 8pt; letter-spacing: 3px; color: #8A6A1F; font-weight: 800; }
+  .board h3 { font-size: 13pt; font-weight: 900; color: #0F1A2E; letter-spacing: 0.5px; margin: 2px 0 3px; }
+  .board p { font-size: 9.8pt; line-height: 1.5; }
+  .board .sign { text-align: right; font-size: 8.5pt; color: #8A6A1F; font-weight: 800; letter-spacing: 2px; margin-top: 3px; }
+
+  .baseline { border-top: 3px solid #0F1A2E; margin-top: 6px; padding-top: 5px;
+    display: flex; justify-content: space-between; gap: 12px; font-size: 8pt; color: #555; line-height: 1.6; }
+  .baseline .right { text-align: right; white-space: nowrap; }
+  .baseline b { color: #0F1A2E; }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <div class="masthead">
+    <div class="brand">ZONE 27 戰報
+      <span class="en">THE PRE-MATCH BRIEF</span>
+    </div>
+    <div class="sportbox">
+      <svg width="52" height="52" viewBox="0 0 40 40" aria-hidden="true">
+        <circle cx="20" cy="20" r="17" fill="none" stroke="#0F1A2E" stroke-width="2.2"/>
+        <path d="M20 3 L20 37 M3 20 L37 20" stroke="#0F1A2E" stroke-width="1.6"/>
+        <path d="M8 6.5 C14 13, 14 27, 8 33.5" fill="none" stroke="#8A6A1F" stroke-width="1.6"/>
+        <path d="M32 6.5 C26 13, 26 27, 32 33.5" fill="none" stroke="#8A6A1F" stroke-width="1.6"/>
+      </svg>
+      <div>
+        <span class="name">籃 球</span>
+        <span class="sub">紐西蘭男子籃球聯賽</span>
+      </div>
+      <div class="no">
+        <b>NO. 030</b><br>2026 · 07 · 13
+      </div>
+    </div>
+  </div>
+
+  <div class="match">
+    <div class="comp">紐西蘭男子籃球聯賽 · 後段班互咬</div>
+    <h1>尼爾森巨人 @ 馬納瓦圖噴射機</h1>
+    <div class="meta">北帕莫斯頓 Fly Palmy 球場 · 明天(7/13)開打 · 確切時間以台灣運彩賽程為準</div>
+    <div class="meta">兩支都在後段班 —— 一個第七、一個在墊底圈,上個月才剛碰過頭</div>
+  </div>
+
+  <div class="tldr">
+    <span class="tag">10 秒看完</span>
+    <p>先講結論:這桌我們<b>一格都圈不下去</b> —— 不是這場不好看,是每張票都太貴。整份報只教你一件事:中場看一個數字,你就知道為什麼。</p>
+  </div>
+
+  <div class="ritual">▸ 下注前的小動作:先在心裡定好你想買的,再往下看 —— 看完還想買,才是真的想買。</div>
+
+  <div class="hero0">
+    <span class="n">13</span>
+    <span class="t"><span class="big">上個月這兩隊才打過 —— 明天被讓分的那隊,贏了 13 分。</span>
+    換到噴射機的主場,會整個反過來嗎?也許會、也許不會 ——
+    連莊家都只敢開 <b>1.5 到 3.5</b> 的小讓分,等於承認:這場他也看不準。</span>
+  </div>
+
+  <section class="avoid">
+    <h2>先提醒 —— 這三種,放下比較好</h2>
+    <table>
+      <tr><th style="width:31%">哪種盤</th><th style="width:11%">賠率</th><th style="width:8%"></th><th>提醒你的理由</th></tr>
+      <tr class="dead"><td class="name">總分單雙</td><td class="num">1.70 / 1.73</td><td class="mark">×</td>
+        <td>猜單雙就是丟銅板,可是賠率連 2 都不給 —— 每押 100 元,還沒開打就先矮人一截。</td></tr>
+      <tr class="dead"><td class="name">勝分差 · 單節和局那類</td><td class="num">10.00 起</td><td class="mark">×</td>
+        <td>看起來會發大財,但它真的發生的次數,比賠率讓你以為的少得多 —— 樂透用零錢玩。</td></tr>
+      <tr class="dead"><td class="name">總分大小 186.5</td><td class="num">1.75 / 1.68</td><td class="mark">×</td>
+        <td>買大要 10 次中快 6 次才不虧,買小也一樣 —— 兩邊都要你比丟銅板準一大截,這桌的價就是貴。</td></tr>
+    </table>
+    <p class="note">提醒是價格判斷,不是輸贏預測 —— 它們照樣可能中,只是這種價長期買下來會吃虧。</p>
+  </section>
+
+  <section>
+    <h2>剩下的 —— 老實講,沒有</h2>
+    <div class="nokeep">
+      讓分和不讓分,是這桌唯一講得出道理的格 —— 可是兩隊的輸贏,常常看<b>外援那天晚上準不準</b>,
+      這種事賽前沒人查得到;賠率又壓在 1.6 幾,沒留呼吸空間。
+      功課做完發現沒好價,<b>把錢留在口袋</b>,也是一種下法。
+    </div>
+  </section>
+
+  <section>
+    <h2>三件你查不到的事</h2>
+    <ul class="facts">
+      <li><b>上個月那場,巨人不是靠手氣贏的。</b>6/17 巨人 92:79,贏在整晚一直搶回自己投丟的球,當家射手蓋特林一個人拿 30 分。這種贏法靠拚勁 —— 但拚勁這種東西,下一場說換就換。</li>
+      <li><b>兩邊名單,跟上個月幾乎是原班人馬。</b>官方和當地媒體到今天都沒有傷兵或換外援的消息 —— 也就是說,上次輸的和上次贏的,大致同一批人再打一次,誰進步了只有開打才知道。</li>
+      <li><b>這種比賽,是「內幕群組」最愛挑的。</b>冷門聯賽你查不到資料,只能信他 —— 本報的做法相反:查得到的印出來,查不到的老實說沒有。今天查到的就是:沒有大新聞。</li>
+    </ul>
+  </section>
+
+  <section class="switch">
+    <span class="tag">開打後的開關 —— 看一個數字就好</span>
+    <h3>上半場打完,兩隊差幾分?</h3>
+    <p class="lead">中場休息的時候,看一眼記分板,兩隊差距幾分 —— 就這一件事,不用懂籃球也會看。</p>
+    <div class="branch on">
+      <span class="k">差不到 10 分</span>
+      <p>兩隊咬在一起 —— 這種比賽到最後一顆球都可能翻盤。賽前就押誰贏的人,其實是在賭運氣。</p>
+    </div>
+    <div class="branch">
+      <span class="k">差 10 分以上</span>
+      <p>有一邊突然打順了 —— 可是賽前,沒有任何人猜得到是哪一邊。猜不到的事,就不要先把錢押下去。</p>
+    </div>
+    <p class="lead" style="margin-top:3px;">這個開關不是教你怎麼押 —— 是讓你親眼看到:這桌是運氣桌,不是功課桌。</p>
+  </section>
+
+  <section class="board">
+    <span class="tag">本期看板</span>
+    <h3>不押,也是一手</h3>
+    <p>評鑑餐廳的人,不會叫你天天上館子。這桌:兩支球隊自己都不知道明天誰會準,票價又一格比一格貴 ——
+    今天的功課就是收好錢包,拿著上面那個開關,舒舒服服看一場亂流球。尺給你了,怎麼下是你的事。</p>
+    <p class="sign">—— ZONE 27 主編</p>
+  </section>
+
+  <div class="baseline">
+    <span>星星是價格評論,不是輸贏預測 · 本報不收博彩業者的廣告與贊助 · 不保證獲利<br>資料:紐西蘭籃球聯賽官方 · 台灣運彩</span>
+    <span class="right"><b>《ZONE 27 戰報》NO. 030</b> · 免費 · 歡迎店家整頁影印<br>zone27.com.tw</span>
+  </div>
+
+</div>
+</body>
+</html>

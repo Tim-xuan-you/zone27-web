@@ -11,10 +11,16 @@ export default function HomepageBriefStrip() {
   const briefs = visibleBriefs();
   if (briefs.length === 0) return null;
   const today = getTodayTaipei();
-  const todays = briefs.filter((b) => b.date === today);
-  const lead = todays[0] ?? briefs[0];
-  const fresh = todays.length > 0;
-  const title = fresh ? "本日戰報" : `最新戰報 · ${briefShortDate(lead)}`;
+  // 帶頭的一期 = 還沒開打裡最新出刊的(明天的場今晚就出 → 它才是最新鮮的一張紙);
+  // 全是舊刊 → 最新一期老實標日期。visibleBriefs 已按期號新到舊,filter 後第一個即是。
+  const upcoming = briefs.filter((b) => b.date >= today);
+  const lead = upcoming[0] ?? briefs[0];
+  const title =
+    lead.date === today
+      ? "本日戰報"
+      : lead.date > today
+        ? `最新戰報 · ${briefShortDate(lead)} 開打`
+        : `最新戰報 · ${briefShortDate(lead)}`;
   return (
     <section className="w-full pt-2 pb-2">
       <Link
@@ -29,8 +35,8 @@ export default function HomepageBriefStrip() {
           <p className="text-bone text-sm leading-snug min-w-0 truncate">
             {title} · <span className="text-gold font-medium">NO.{lead.no}</span>{" "}
             {lead.sport}「{lead.matchup}」
-            {fresh && todays.length > 1 && (
-              <span className="text-mute/70"> +{todays.length - 1} 期</span>
+            {upcoming.length > 1 && (
+              <span className="text-mute/70"> +{upcoming.length - 1} 期</span>
             )}
           </p>
           <span className="ml-auto shrink-0 font-mono text-gold/80 group-hover:text-gold text-[10px] tracking-[0.25em]">

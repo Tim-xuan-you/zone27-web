@@ -55,6 +55,7 @@ export const BRIEFS: BriefIssue[] = [
   { no: "027", date: "2026-07-11", sport: "足球", matchup: "富川1995 @ 金泉尚武" },
   { no: "028", date: "2026-07-11", sport: "足球", matchup: "維拉諾瓦 @ 青年人體育會" },
   { no: "029", date: "2026-07-12", sport: "排球", matchup: "捷克 @ 法國" },
+  { no: "030", date: "2026-07-13", sport: "籃球", matchup: "尼爾森巨人 @ 馬納瓦圖噴射機" },
 ];
 
 /** A4 原版的靜態網址(public/briefs)。 */

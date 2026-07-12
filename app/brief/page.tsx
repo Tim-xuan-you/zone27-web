@@ -32,9 +32,17 @@ export const revalidate = 300;
 export default function BriefPage() {
   const today = getTodayTaipei();
   const briefs = visibleBriefs();
-  const todays = briefs.filter((b) => b.date === today);
-  // 本日無刊 → 最新一期當主打、老實標日期(不喊「本日」)。
-  const featured = todays.length > 0 ? todays : briefs.slice(0, 1);
+  // 主打 = 今天的刊 + 還沒開打的刊(賽前出刊是常態:明天的場今晚就出 → 不能埋進過刊)。
+  // 都沒有 → 最新一期當主打、老實標日期(不喊「本日」)。
+  const upcoming = briefs.filter((b) => b.date >= today);
+  const featured = upcoming.length > 0 ? upcoming : briefs.slice(0, 1);
+  // 標籤誠實:主打裡有未來場 → 「最新出刊」;全是今天 → 「本日戰報」;只剩舊刊 → 「最新一期」。
+  const featuredLabel =
+    upcoming.length === 0
+      ? "/ 最新一期"
+      : featured.some((b) => b.date > today)
+        ? "/ 最新出刊"
+        : "/ 本日戰報";
   const featuredNos = new Set(featured.map((b) => b.no));
   const archive = briefs.filter((b) => !featuredNos.has(b.no));
   // 過刊按日期分組(新到舊)· 摺疊。
@@ -77,7 +85,7 @@ export default function BriefPage() {
         {/* ── 本日刊(或最新一期 · 老實標日期)── */}
         <section className="mx-auto max-w-2xl w-full px-6 sm:px-10 pb-8">
           <p className="font-mono text-gold/70 text-[10px] tracking-[0.4em] mb-3">
-            {todays.length > 0 ? "/ 本日戰報" : "/ 最新一期"}
+            {featuredLabel}
           </p>
           <ul className="list-none pl-0 m-0 space-y-3">
             {featured.map((b) => (
