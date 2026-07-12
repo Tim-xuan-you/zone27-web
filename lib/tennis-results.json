@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-07-12T19:50:49.013Z",
+  "generatedAt": "2026-07-12T22:31:57.425Z",
   "source": "site.api.espn.com tennis scoreboard (atp+wta singles · official · public · 0 auth)",
-  "count": 1696,
+  "count": 1697,
   "games": [
     {
       "tour": "atp",
@@ -16531,6 +16531,16 @@
       "winnerName": "Alessandra Mazzola",
       "loserName": "Francesca Gandolfi",
       "score": "6-3 6-4",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "ATV Bancomat Tennis Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-12",
+      "winnerName": "Elena Malygina",
+      "loserName": "Viola Turini",
+      "score": "7-5 4-6 7-6",
       "retired": false
     },
     {
