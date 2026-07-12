@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<title>ZONE 27 戰報 · 響尾蛇 @ 教士 · 2026-07-07</title>
+<style>
+  /* ── ZONE 27 戰報 · A4 一頁 · 版式 v4(星級評鑑制:評價格,不評預言) ── */
+  @page { size: A4; margin: 10mm 12mm; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body {
+    font-family: "Microsoft JhengHei", "Noto Sans TC", "PingFang TC", sans-serif;
+    color: #111; background: #e8e8e8; font-size: 9.8pt; line-height: 1.44;
+  }
+  .sheet { width: 210mm; min-height: 296mm; margin: 0 auto; background: #fff; padding: 11mm 13mm 8mm; }
+  @media print {
+    body { background: #fff; }
+    .sheet { width: auto; min-height: auto; margin: 0; padding: 0; zoom: 0.92; }
+  }
+
+  .masthead { display: flex; justify-content: space-between; align-items: flex-end;
+    border-bottom: 3.5px solid #0F1A2E; padding-bottom: 6px; }
+  .masthead .brand { font-size: 19pt; font-weight: 900; letter-spacing: 2px; color: #0F1A2E; }
+  .masthead .brand .en { font-size: 8pt; font-weight: 600; letter-spacing: 3px; color: #8A6A1F; display: block; margin-top: 1px; }
+  .masthead .issue { text-align: right; font-size: 8.5pt; color: #444; line-height: 1.5; }
+  .masthead .issue b { color: #0F1A2E; }
+  .tagline { display: flex; justify-content: space-between; font-size: 8.5pt; color: #555;
+    border-bottom: 1px solid #bbb; padding: 3px 1px 4px; margin-bottom: 6px; letter-spacing: 1px; }
+
+  /* 昨日收據一行(v4 固定欄) */
+  .receipts { font-size: 8.5pt; color: #555; background: #F5F3EE; border: 1px solid #d8d2c2;
+    padding: 4px 9px; margin-bottom: 7px; }
+  .receipts b { color: #0F1A2E; }
+
+  .match { margin-bottom: 6px; }
+  .match .comp { font-size: 9pt; font-weight: 700; color: #8A6A1F; letter-spacing: 2px; }
+  .match h1 { font-size: 20pt; font-weight: 900; color: #0F1A2E; letter-spacing: 1px; line-height: 1.25; }
+  .match .meta { font-size: 9pt; color: #444; margin-top: 2px; }
+
+  .tldr { background: #0F1A2E; color: #fff; padding: 6px 10px; margin-bottom: 6px; }
+  .tldr .tag { font-size: 8pt; letter-spacing: 2px; color: #D4AF37; font-weight: 700; }
+  .tldr p { font-size: 10.5pt; font-weight: 700; line-height: 1.5; margin-top: 2px; }
+
+  section { margin-bottom: 5px; }
+  h2 { font-size: 10.5pt; font-weight: 800; color: #0F1A2E; letter-spacing: 1.5px;
+    border-left: 4px solid #8A6A1F; padding-left: 7px; margin-bottom: 3px; }
+  p { margin-bottom: 3px; }
+  .facts li { list-style: none; padding-left: 15px; position: relative; margin-bottom: 2px; }
+  .facts li::before { content: "▪"; position: absolute; left: 2px; color: #8A6A1F; }
+  .small { font-size: 8.5pt; color: #555; }
+
+  .vigbar { display: flex; height: 17px; margin: 5px 0 2px; font-size: 8pt; font-weight: 700; }
+  .vigbar .play { background: #E4DFD2; color: #333; width: 84.9%; display: flex; align-items: center; padding-left: 7px; }
+  .vigbar .house { background: #0F1A2E; color: #D4AF37; width: 15.1%; display: flex; align-items: center; justify-content: center; }
+
+  /* v4 星級表 */
+  .opts table { width: 100%; border-collapse: collapse; font-size: 9.5pt; }
+  .opts th, .opts td { border: 1px solid #ccc; padding: 3px 5px; text-align: left; vertical-align: top; }
+  .opts th { background: #EFEBE0; color: #0F1A2E; font-size: 9pt; }
+  .opts td.num { text-align: center; white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .opts td.star { text-align: center; white-space: nowrap; color: #8A6A1F; font-weight: 900; letter-spacing: 1px; }
+
+  /* 金框:引擎 vs 原稿 + 甜蜜點 */
+  .call { border: 2.5px solid #D4AF37; background: #FBF9F4; padding: 7px 11px; }
+  .call .tag { font-size: 8pt; letter-spacing: 2px; color: #8A6A1F; font-weight: 700; }
+  .call .pick { font-size: 13pt; font-weight: 900; color: #0F1A2E; margin: 2px 0 3px; letter-spacing: 0.5px; }
+  .call .pick .vs { color: #8A6A1F; font-size: 10pt; }
+  .call p { font-size: 9.5pt; line-height: 1.5; }
+  .call .sweet { font-size: 9.5pt; font-weight: 800; color: #0F1A2E; margin-top: 4px; border-top: 1px solid #d8d2c2; padding-top: 3px; }
+
+  .rules { background: #0F1A2E; color: #E9E4D8; padding: 7px 10px; }
+  .rules h2 { color: #fff; border-left-color: #D4AF37; margin-bottom: 3px; }
+  .rules li { list-style: none; padding-left: 14px; position: relative; font-size: 9pt; line-height: 1.55; color: #D9D3C4; margin-bottom: 1px; }
+  .rules li::before { content: "▪"; position: absolute; left: 2px; color: #D4AF37; }
+  .rules .url { color: #D4AF37; font-weight: 700; letter-spacing: 0.5px; }
+
+  footer { display: flex; justify-content: space-between; font-size: 8pt; color: #666;
+    border-top: 1px solid #bbb; margin-top: 7px; padding-top: 4px; letter-spacing: 0.5px; }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <div class="masthead">
+    <div class="brand">ZONE 27 戰報
+      <span class="en">THE PRE-MATCH BRIEF</span>
+    </div>
+    <div class="issue">
+      <b>NO. 006</b><br>
+      2026 · 07 · 07 · 台北<br>
+      本期:MLB 美國職棒
+    </div>
+  </div>
+  <div class="tagline">
+    <span>給運彩玩家的一頁賽前功課</span>
+    <span>不靠直覺 · 只看演算法</span>
+  </div>
+
+  <div class="receipts">
+    <b>昨日收據:</b>金框一手(南韓 +6.5)✓ 中 · 引擎足球兩開兩中 · 方向判讀 2 中 3 錯 1 觀望 —— 全表見 NO.005 對帳版,錯的印一樣大。
+  </div>
+
+  <div class="match">
+    <div class="comp">MLB · 國聯西區同分死敵 · 先發:Pfaadt(防 5.40)vs Buehler(防 4.61)</div>
+    <h1>響尾蛇 @ 教士</h1>
+    <div class="meta">今天 09:40 開賽 · 聖地牙哥 Petco Park · 兩隊戰績同為 44 勝 45 敗 —— 勝差:零</div>
+  </div>
+
+  <div class="tldr">
+    <span class="tag">10 秒看完</span>
+    <p>原稿看響尾蛇的價,我們的引擎重壓<u>教士 64%</u> —— 上次這兩個聲音對台(英格蘭@墨西哥),引擎贏了。今天菜單沒有三星:兩個二星都是「不虧的價」,不是「甜的價」。</p>
+  </div>
+
+  <section>
+    <h2>賽前三個事實</h2>
+    <ul class="facts">
+      <li><b>「被打爆的 Buehler」只是半個事實。</b>他上一場客場 4 局丟 9 分沒錯 —— 但他今年在主場 Petco 防禦率 3.13、客場 6.50,判若兩人。今天,他站的是主場投手丘。</li>
+      <li><b>兩隊各有一張好看的臉。</b>教士剛止 8 連敗、近 10 場 2 勝 8 敗;響尾蛇 Marte 已敲 17 轟 —— 但響尾蛇同時是全聯盟最會打「小分」的球隊(47-37-5)。</li>
+      <li><b>引擎賽前鎖教士 64%。</b>比市場價換算的 62.5% 還高 —— 機器看的是整季底層數據(三振、保送、全壘打率),不是最近十場的情緒。</li>
+    </ul>
+    <p class="small">投手與數據:MLB 官方、ZONE 27 引擎帳本(賽前已鎖)· 近況與小分紀錄:賽前彙整 · 賠率:台灣運彩。</p>
+  </section>
+
+  <section>
+    <h2>盤口解剖 —— 這個盤先抽多少</h2>
+    <p>教士 1.60、響尾蛇 1.90:兩邊機率加總 115.1%。1.60 的白話:<b>每押 10 次要中 6 次多才不虧</b>;1.90 要中 5 次半。多出來的 15.1,照舊先繳:</p>
+    <div class="vigbar">
+      <div class="play">84.9 元 —— 真正拿去對賭的部分</div>
+      <div class="house">15.1 元 先繳</div>
+    </div>
+  </section>
+
+  <section class="opts">
+    <h2>選項的星級 —— 評的是價格,不是預言</h2>
+    <table>
+      <tr><th>選項(台灣運彩)</th><th style="width:9%">賠率</th><th style="width:11%">星級</th><th>本報讀法(白話)</th></tr>
+      <tr><td>不讓分 · 教士</td><td class="num">1.60</td><td class="star">★★☆</td><td>價薄是真的 —— 但引擎給教士 64%,比這價要求的 62.5% 高。數字上「不虧」,只是賺得薄。</td></tr>
+      <tr><td>不讓分 · 響尾蛇</td><td class="num">1.90</td><td class="star">★☆☆</td><td>原稿的最愛:狀態好+價高。但引擎只給響尾蛇 36%,離 1.90 要求的 52.6% 差了 16 個百分點 —— 買它,等於賭引擎錯。</td></tr>
+      <tr><td>大小 8.5 · 小</td><td class="num">1.76</td><td class="star">★★☆</td><td>兩個防禦率 4.6 / 5.4 的投手看起來是大分局 —— 但響尾蛇是全聯盟最會小分的隊,Petco 又是出名的投手球場。逆著直覺,有邏輯。</td></tr>
+    </table>
+    <p class="small">★★★=甜 · ★★=不虧 · ★=為別人賺錢的價。</p>
+  </section>
+
+  <section class="call">
+    <span class="tag">▌本期看板 · 引擎 vs 原稿 · 明天見真章</span>
+    <div class="pick">引擎:教士 64% <span class="vs">←對台→</span> 原稿:響尾蛇的價值論</div>
+    <p>原稿說「教士近況爛,1.60 是名氣價」;引擎說「整季數據算下來,教士就值 64%」—— 一個看情緒,一個看底層。上次他們吵架,引擎對了。誰對,明天的對帳版照印。</p>
+    <p class="sweet">今日甜蜜點:從缺 —— 沒有三星的日子,不出手也是紀律。</p>
+  </section>
+
+  <section class="rules">
+    <h2>本報的規矩(每期照舊)</h2>
+    <ul>
+      <li>星級評的是「這個價合不合理」,不是保證誰贏 —— 錯了照印,昨天的對帳版就是證據。</li>
+      <li>引擎:棒球每天自動開盤、賽前鎖死、賽後自動對帳 —— 這場的 64% 已在開打前 36 小時鎖定,改不了。</li>
+      <li>本報不代操、沒有「穩」這個字、不保證獲利;歷期全紀錄:<span class="url">zone27.com.tw/track-record</span></li>
+    </ul>
+  </section>
+
+  <footer>
+    <span>《ZONE 27 戰報》NO. 006 · 免費 · 歡迎店家整頁影印</span>
+    <span>zone27.com.tw · 明日對帳見</span>
+  </footer>
+
+</div>
+</body>
+</html>

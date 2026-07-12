@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<title>ZONE 27 戰報 · 中日龍 @ 橫濱DeNA · 2026-07-07</title>
+<style>
+  /* ── ZONE 27 戰報 · A4 一頁 · 版式 v9(tldr 零旁白 · 對照表=本報自算) ── */
+  @page { size: A4; margin: 10mm 12mm; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body {
+    font-family: "Microsoft JhengHei", "Noto Sans TC", "PingFang TC", sans-serif;
+    color: #111; background: #e8e8e8; font-size: 10pt; line-height: 1.48;
+  }
+  .sheet { width: 210mm; min-height: 296mm; margin: 0 auto; background: #fff; padding: 11mm 13mm 8mm; }
+  @media print {
+    body { background: #fff; }
+    .sheet { width: auto; min-height: auto; margin: 0; padding: 0; zoom: 0.91; }
+  }
+
+  .masthead { display: flex; justify-content: space-between; align-items: center;
+    border-bottom: 3.5px solid #0F1A2E; padding-bottom: 6px; margin-bottom: 7px; }
+  .masthead .brand { font-size: 19pt; font-weight: 900; letter-spacing: 2px; color: #0F1A2E; }
+  .masthead .brand .en { font-size: 8pt; font-weight: 600; letter-spacing: 3px; color: #8A6A1F; display: block; margin-top: 1px; }
+  .sportbadge { display: flex; align-items: center; gap: 8px; }
+  .sportbadge .s { text-align: right; }
+  .sportbadge .sport { font-size: 15pt; font-weight: 900; color: #0F1A2E; letter-spacing: 3px; line-height: 1.1; }
+  .sportbadge .lg { font-size: 8pt; color: #8A6A1F; font-weight: 700; letter-spacing: 2px; }
+  .sportbadge .no { font-size: 7.5pt; color: #888; letter-spacing: 1px; }
+
+  .match { margin-bottom: 6px; }
+  .match h1 { font-size: 21pt; font-weight: 900; color: #0F1A2E; letter-spacing: 1px; line-height: 1.25; }
+  .match .meta { font-size: 9pt; color: #444; margin-top: 2px; }
+
+  .tldr { background: #0F1A2E; color: #fff; padding: 6px 11px; margin-bottom: 7px; }
+  .tldr .tag { font-size: 8pt; letter-spacing: 2px; color: #D4AF37; font-weight: 700; }
+  .tldr p { font-size: 11pt; font-weight: 700; line-height: 1.55; margin-top: 2px; }
+
+  section { margin-bottom: 6px; }
+  h2 { font-size: 10.5pt; font-weight: 800; color: #0F1A2E; letter-spacing: 1.5px;
+    border-left: 4px solid #8A6A1F; padding-left: 7px; margin-bottom: 4px; }
+  .facts li { list-style: none; padding-left: 15px; position: relative; margin-bottom: 3px; }
+  .facts li::before { content: "▪"; position: absolute; left: 2px; color: #8A6A1F; }
+  .small { font-size: 8.5pt; color: #555; }
+
+  /* v9:本報自算表(只放算出來的數字 · 抄得到的不進來) */
+  .calc table { width: 100%; border-collapse: collapse; font-size: 9.5pt; }
+  .calc th, .calc td { border: 1px solid #ccc; padding: 3.5px 7px; vertical-align: middle; }
+  .calc th { background: #0F1A2E; color: #fff; font-size: 9pt; letter-spacing: 1px; text-align: left; }
+  .calc td.k { background: #EFEBE0; color: #0F1A2E; font-weight: 700; width: 46%; }
+  .calc td.v { font-weight: 900; color: #0F1A2E; font-variant-numeric: tabular-nums; }
+
+  .opts table { width: 100%; border-collapse: collapse; font-size: 9.5pt; }
+  .opts th, .opts td { border: 1px solid #ccc; padding: 4px 6px; text-align: left; vertical-align: top; }
+  .opts th { background: #EFEBE0; color: #0F1A2E; font-size: 9pt; }
+  .opts td.num { text-align: center; white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .opts td.star { text-align: center; white-space: nowrap; color: #8A6A1F; font-weight: 900; letter-spacing: 1px; }
+
+  .contra { background: #F5F3EE; border: 1px solid #d8d2c2; padding: 6px 10px; }
+  .contra li { list-style: none; padding-left: 15px; position: relative; margin-bottom: 2px; font-size: 9.5pt; }
+  .contra li::before { content: "▸"; position: absolute; left: 2px; color: #8A6A1F; }
+
+  .call { border: 2.5px solid #D4AF37; background: #FBF9F4; padding: 7px 12px; }
+  .call .tag { font-size: 8pt; letter-spacing: 2px; color: #8A6A1F; font-weight: 700; }
+  .call .pick { font-size: 13.5pt; font-weight: 900; color: #0F1A2E; margin: 3px 0 3px; letter-spacing: 0.5px; }
+  .call p { font-size: 9.5pt; line-height: 1.55; }
+
+  .creed { font-size: 8.5pt; color: #555; border-top: 1px solid #bbb; margin-top: 5px; padding-top: 4px;
+    letter-spacing: 0.3px; line-height: 1.6; }
+  footer { display: flex; justify-content: space-between; font-size: 8pt; color: #666;
+    padding-top: 3px; letter-spacing: 0.5px; }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <div class="masthead">
+    <div class="brand">ZONE 27 戰報
+      <span class="en">THE PRE-MATCH BRIEF</span>
+    </div>
+    <div class="sportbadge">
+      <svg width="42" height="42" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="21" cy="21" r="18" stroke="#0F1A2E" stroke-width="2.5"/>
+        <path d="M10 6 q6 15 0 30 M32 6 q-6 15 0 30" stroke="#0F1A2E" stroke-width="2" fill="none"/>
+        <path d="M12 10 l3 1.5 M11 15 l3.5 1 M10.5 21 l3.5 .5 M11 27 l3.5 -1 M12 32 l3 -1.5 M30 10 l-3 1.5 M31 15 l-3.5 1 M31.5 21 l-3.5 .5 M31 27 l-3.5 -1 M30 32 l-3 -1.5" stroke="#0F1A2E" stroke-width="1.6"/>
+      </svg>
+      <div class="s">
+        <div class="sport">棒球</div>
+        <div class="lg">NPB 日本職棒</div>
+        <div class="no">NO. 011 · 2026 · 07 · 07</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="match">
+    <h1>中日龍 @ 橫濱 DeNA</h1>
+    <div class="meta">今晚 17:15 開賽(台北) · 橫濱球場 · 央聯第 4(主)迎戰墊底(客) · 先發:石田裕太郎 vs K. Muller(NPB 官方預告)</div>
+  </div>
+
+  <div class="tldr">
+    <span class="tag">10 秒看完</span>
+    <p>墊底的中日,今晚推出的左投<u>兩週前才剛把橫濱這條打線整場關掉</u> —— 而拆掉水錢,市場的真實看法只有 56 比 44 —— 不是帳面價看起來的一面倒。</p>
+  </div>
+
+  <section>
+    <h2>三件你查不到的事</h2>
+    <ul class="facts">
+      <li><b>石田裕太郎的 3 勝 8 敗是「假弱」。</b>防禦率 3.00,78 局投球三振 77 個、只保送 14 個 —— 敗場堆這麼高,是隊友不給分,不是被打爆。只看帳面戰績下注的人,今晚會付學費。</li>
+      <li><b>Muller 對這條打線有「上一集」。</b>6/23 就在對橫濱的比賽裡投 6 局只失 1 分拿下勝投 —— 才過兩週,同一批打者、同一個左投。市場給這樣的投手接近翻倍的價。</li>
+      <li><b>橫濱的底氣一半押在一個升上來三週的新人身上。</b>洋砲 Encarnacion 六月升一軍後 19 個打數敲 9 支安打、前天還連三支關鍵安 —— 火燙是真的,但靠單一新人撐的打線,退燒也快。</li>
+    </ul>
+    <p class="small">先發:NPB 官方預告(npb.jp 可查) · 個人數據:賽前彙整,官方紀錄以 NPB 為準 · 賠率:台灣運彩。</p>
+  </section>
+
+  <section class="calc">
+    <h2>本報算的數字 —— 這裡才有</h2>
+    <table>
+      <tr><th style="width:46%">把賠率翻成人話</th><th>算出來的結果</th></tr>
+      <tr><td class="k">拆掉水錢後,市場的真實看法</td><td class="v">橫濱 56 : 中日 44</td></tr>
+      <tr><td class="k">這一桌的水錢(兩邊機率超出 100% 的部分)</td><td class="v">17.3% —— 還沒下注就先繳</td></tr>
+      <tr><td class="k">1.52 要多準才不虧</td><td class="v">每押 10 次,要中 6 次半</td></tr>
+      <tr><td class="k">1.94 要多準才不虧</td><td class="v">每押 10 次,中 5 次就夠</td></tr>
+    </table>
+  </section>
+
+  <section class="opts">
+    <h2>選項的星級</h2>
+    <table>
+      <tr><th>選項(台灣運彩)</th><th style="width:9%">賠率</th><th style="width:11%">星級</th><th>本報讀法(白話)</th></tr>
+      <tr><td>不讓分 · 橫濱 DeNA</td><td class="num">1.52</td><td class="star">★☆☆</td><td>扛 100 元的險賺 52 —— 而這支打線的火力,一半押在上面第 3 件事那位新人身上。</td></tr>
+      <tr><td>不讓分 · 中日</td><td class="num">1.94</td><td class="star">★★☆</td><td>狗牌裡有真材料:理由就是第 2 件事 —— 用接近翻倍的價,買一個兩週前剛驗證過的劇本。</td></tr>
+      <tr><td>受讓 +1.5 · 中日</td><td class="num">1.43</td><td class="star">★☆☆</td><td>每押 10 次要中 7 次 —— 保護牌的價,買不起保護。</td></tr>
+      <tr><td>前 5 局大小 3.5 · 小</td><td class="num">1.66</td><td class="star">★★☆</td><td>兩個先發都是「不自爆」型 —— 理由就是上面第 1、2 件事。牛棚進場之前,分數難生。</td></tr>
+      <tr><td>總分單雙(單 1.50 / 雙 1.96)</td><td class="num">—</td><td class="star">★☆☆</td><td>丟硬幣,還開出兩邊不對稱的價 —— 這桌抽水最重的角落。</td></tr>
+    </table>
+  </section>
+
+  <section class="contra">
+    <h2>反方的理由 —— 如果你想站主隊,功課也幫你做好了</h2>
+    <ul>
+      <li><b>石田要的從來不多。</b>如果 Encarnacion 的火不是曇花,3 分就夠這種控球型投手帶走比賽。</li>
+      <li><b>「上一集」是雙面刃。</b>職業打線第二次面對同一個左投,調整快得殘忍 —— 上一集的劇本,可能正是今晚的教材。</li>
+      <li><b>主場 + 火燙新砲 + 不自爆的先發</b> —— 這個價是貴,但貴的東西不一定是錯的。</li>
+    </ul>
+  </section>
+
+  <section class="call">
+    <span class="tag">▌本期看板</span>
+    <div class="pick">帳面最爛的隊,拿到了這桌最好的價</div>
+    <p>市場看兩隊的「戰績」開價,本報看今晚的「先發」讀價 —— 而先發的劇本,兩週前才剛演過一次。<b>戰績是過去半季的平均,投手丘是今晚的現場。</b>尺給你了,怎麼下是你的判斷。</p>
+  </section>
+
+  <div class="creed">
+    星級是評論,不是預測,理由永遠跟星星印在一起 · 數據可自行查證(NPB 官網)· 本報不收博彩業者的廣告與贊助、不代操、沒有「穩」這個字、不保證獲利 · zone27.com.tw
+  </div>
+  <footer>
+    <span>《ZONE 27 戰報》NO. 011 · 免費 · 歡迎店家整頁影印</span>
+    <span>zone27.com.tw · 每日出刊</span>
+  </footer>
+
+</div>
+</body>
+</html>

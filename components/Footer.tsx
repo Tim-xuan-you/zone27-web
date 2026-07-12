@@ -19,6 +19,7 @@ function getTaipeiTodayChip(): string {
 //  目的地還用不同字)與「登入」(Nav 右上已有常駐按鈕)。 footer 只留 Nav 沒有的次要去處
 //  (今晚這桌 / 公開戰績 / 會員)+ 法律 + 版本 = 跟頂部零重複。
 const PRIMARY_LINKS = [
+  { label: "戰報", href: "/brief" },
   { label: "今晚這桌", href: "/table" },
   { label: "公開戰績", href: "/track-record" },
   { label: "會員", href: "/membership" },

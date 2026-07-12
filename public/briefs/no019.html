@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<title>ZONE 27 戰報 NO.019 · 波蘭 @ 美國</title>
+<style>
+  /* ── ZONE 27 戰報 · 門店列印版 · A4 一頁 · v14(術語黑名單再擴 · 排球創刊) ── */
+  @page { size: A4; margin: 10mm 12mm; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body { font-family: "Microsoft JhengHei", "Noto Sans TC", "PingFang TC", sans-serif;
+    color: #111; background: #e8e8e8; font-size: 10pt; line-height: 1.5; }
+  .sheet { width: 210mm; min-height: 296mm; margin: 0 auto; background: #fff; padding: 11mm 13mm 8mm; }
+  @media print { body { background: #fff; } .sheet { width: auto; min-height: auto; margin: 0; padding: 0; zoom: 0.875; } }
+
+  .masthead { display: flex; justify-content: space-between; align-items: center;
+    border-bottom: 3.5px solid #0F1A2E; padding-bottom: 6px; margin-bottom: 8px; }
+  .brand { font-size: 19pt; font-weight: 900; letter-spacing: 2px; color: #0F1A2E; }
+  .brand .en { font-size: 8pt; font-weight: 600; letter-spacing: 3px; color: #8A6A1F; display: block; margin-top: 1px; }
+  .sportbox { display: flex; align-items: center; gap: 10px; }
+  .sportbox .name { font-size: 22pt; font-weight: 900; color: #0F1A2E; letter-spacing: 4px; line-height: 1.1; }
+  .sportbox .sub { font-size: 8.5pt; color: #666; letter-spacing: 2px; display: block; margin-top: 1px; }
+  .sportbox .no { text-align: right; font-size: 8.5pt; color: #444; line-height: 1.5; border-left: 1px solid #ccc; padding-left: 10px; }
+  .sportbox .no b { color: #0F1A2E; }
+
+  .match { margin-bottom: 6px; }
+  .match .comp { font-size: 9pt; font-weight: 700; color: #8A6A1F; letter-spacing: 2px; }
+  .match h1 { font-size: 19pt; font-weight: 900; color: #0F1A2E; letter-spacing: 1px; line-height: 1.3; }
+  .match .meta { font-size: 9.5pt; color: #444; margin-top: 2px; }
+
+  .tldr { background: #0F1A2E; color: #E9E4D8; padding: 7px 12px; margin-bottom: 6px; }
+  .tldr .tag { font-size: 8pt; letter-spacing: 3px; color: #D4AF37; font-weight: 700; }
+  .tldr p { font-size: 11.5pt; font-weight: 700; line-height: 1.55; margin-top: 2px; }
+  .tldr b { color: #D4AF37; }
+
+  section { margin-bottom: 6px; }
+  h2 { font-size: 11pt; font-weight: 800; color: #0F1A2E; letter-spacing: 1.5px;
+    border-left: 4px solid #8A6A1F; padding-left: 7px; margin-bottom: 4px; }
+  .facts { counter-reset: fact; }
+  .facts li { list-style: none; padding-left: 17px; position: relative; margin-bottom: 4px; }
+  .facts li::before { content: counter(fact) ""; counter-increment: fact; position: absolute; left: 0;
+    font-weight: 900; color: #8A6A1F; font-size: 10.5pt; }
+
+  /* 主視覺:標價 vs 真心話 雙條圖 */
+  .duo { border: 1.5px solid #0F1A2E; padding: 7px 12px; margin-bottom: 6px; }
+  .duo .row { display: flex; align-items: center; gap: 8px; margin: 3px 0; }
+  .duo .team { width: 8.5em; font-size: 9.5pt; font-weight: 800; color: #0F1A2E; }
+  .duo .track { flex: 1; background: #EFEBE0; }
+  .duo .bar { background: #0F1A2E; color: #F5F2EA; font-size: 8.5pt;
+    padding: 2.5px 8px; letter-spacing: 1px; white-space: nowrap; }
+  .duo .bar.gold { background: #8A6A1F; }
+  .duo .cap { font-size: 8.5pt; color: #555; margin-top: 3px; }
+
+  .calc { background: #F5F3EE; border: 1px solid #d8d2c2; padding: 6px 10px; }
+  .calc table { width: 100%; border-collapse: collapse; font-size: 9.8pt; margin-top: 3px; }
+  .calc td { border: 1px solid #cfc8b6; padding: 3.5px 8px; background: #fff; }
+  .calc td.k { width: 44%; font-weight: 700; color: #0F1A2E; background: #FAF8F2; }
+
+  .menu table { width: 100%; border-collapse: collapse; font-size: 9.8pt; }
+  .menu th, .menu td { border: 1px solid #ccc; padding: 3.5px 7px; text-align: left; vertical-align: middle; }
+  .menu th { background: #EFEBE0; color: #0F1A2E; font-size: 9pt; letter-spacing: 1px; }
+  .menu td.num { text-align: center; white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .menu td.star { text-align: center; white-space: nowrap; color: #8A6A1F; font-weight: 900; font-size: 10.5pt; letter-spacing: 1px; }
+  .menu .skip { font-size: 8.5pt; color: #666; margin-top: 3px; }
+
+  .contra { border: 1px dashed #999; padding: 6px 10px; }
+  .contra li { list-style: none; padding-left: 14px; position: relative; margin-bottom: 3px; font-size: 9.8pt; }
+  .contra li::before { content: "▲"; position: absolute; left: 0; color: #666; font-size: 8pt; top: 2px; }
+
+  .board { border: 2.5px solid #8A6A1F; background: #FAF6EC; padding: 8px 12px; }
+  .board .tag { font-size: 8pt; letter-spacing: 3px; color: #8A6A1F; font-weight: 800; }
+  .board h3 { font-size: 13pt; font-weight: 900; color: #0F1A2E; letter-spacing: 0.5px; margin: 2px 0 4px; }
+  .board p { font-size: 9.8pt; line-height: 1.55; }
+
+  .baseline { border-top: 3px solid #0F1A2E; margin-top: 7px; padding-top: 5px;
+    display: flex; justify-content: space-between; gap: 12px; font-size: 8pt; color: #555; line-height: 1.6; }
+  .baseline .right { text-align: right; white-space: nowrap; }
+  .baseline b { color: #0F1A2E; }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <div class="masthead">
+    <div class="brand">ZONE 27 戰報
+      <span class="en">THE PRE-MATCH BRIEF</span>
+    </div>
+    <div class="sportbox">
+      <svg width="52" height="52" viewBox="0 0 40 40" aria-hidden="true">
+        <circle cx="20" cy="20" r="17" fill="none" stroke="#0F1A2E" stroke-width="2.2"/>
+        <path d="M4 15 Q20 24 36 15" fill="none" stroke="#0F1A2E" stroke-width="1.6"/>
+        <path d="M13 5 Q27 14 32.5 29" fill="none" stroke="#8A6A1F" stroke-width="1.5"/>
+        <path d="M27 5 Q13 14 7.5 29" fill="none" stroke="#0F1A2E" stroke-width="1.6"/>
+      </svg>
+      <div>
+        <span class="name">排 球</span>
+        <span class="sub">世界女排聯賽 VNL</span>
+      </div>
+      <div class="no">
+        <b>NO. 019</b><br>2026 · 07 · 09
+      </div>
+    </div>
+  </div>
+
+  <div class="match">
+    <div class="comp">世界女排聯賽 · 分站循環賽(大阪)</div>
+    <h1>波蘭 @ 美國</h1>
+    <div class="meta">大阪(日本) · 台北 7/9(四)中午 12:00 開賽 · 積分榜:美國 8勝1敗(第 1) · 波蘭 6勝3敗(第 5)</div>
+  </div>
+
+  <div class="tldr">
+    <span class="tag">10 秒看完</span>
+    <p>積分榜第一,對上第五 —— 盤口把美國開成「穩到不行」。本報把帳拆完:<b>真心話沒有標價那麼穩</b>,而且美國這週真正的硬仗,根本不是這場。</p>
+  </div>
+
+  <div class="duo">
+    <div class="row"><span class="team">標價的口氣</span><div class="track"><div class="bar" style="width:86%">美國穩贏 86%</div></div></div>
+    <div class="row"><span class="team">拆水後真心話</span><div class="track"><div class="bar gold" style="width:73%">美國 73%</div></div></div>
+    <div class="cap">兩條的差距,就是這桌先收走的入場費 —— 下面每一格的星星,都是從這裡算出來的。</div>
+  </div>
+
+  <section>
+    <h2>三件你查不到的事</h2>
+    <ul class="facts">
+      <li><b>美國最想省力的,就是這場。</b>昨天下午才三局全收地主小組的泰國,兩天後要打土耳其、接著巴西 —— 那兩場才是硬仗。教練有整批好用的替補,今天讓主力喘口氣的誘因,是整週最高。</li>
+      <li><b>「總得分多贏 12 分」是排球最兇的玩法。</b>翻譯成人話:美國大概要三局全收、每局還得贏 4 分上下。只要掉一局,這張單幾乎當場死亡 —— 而她們偏偏今天最有理由掉一局。</li>
+      <li><b>波蘭不是來陪打的。</b>穩居前段班,而且球風跟美國同一路:高舉高打的力量隊。同型球隊互打,爆冷靠的不是技術差距,是誰的失誤先崩。</li>
+    </ul>
+  </section>
+
+  <section class="calc">
+    <h2>本報算的數字 —— 這裡才有</h2>
+    <table>
+      <tr><td class="k">第一盤 美國讓 2.5 分(1.63)要多準才不虧?</td><td>每押 10 次,要中 6 次多。</td></tr>
+      <tr><td class="k">總得分 美國讓 11.5 分(1.75)要多準?</td><td>每押 10 次,要中將近 6 次。</td></tr>
+      <tr><td class="k">不讓分 波蘭(3.20)要多準?</td><td>每押 10 次,中 3 次多就打平 —— 全單門檻最低的價。</td></tr>
+    </table>
+  </section>
+
+  <section class="menu">
+    <h2>今日的菜單 · 星級評的是「這個價公不公道」</h2>
+    <table>
+      <tr><th style="width:30%">盤口(台灣運彩)</th><th style="width:8%">賠率</th><th style="width:11%">星級</th><th>讀法</th></tr>
+      <tr><td>第一盤 讓分 · 美國 −2.5</td><td class="num">1.63</td><td class="star">★★</td>
+        <td>就算要輪替,開局通常還是主力陣 —— 全單邏輯最順的一格;可惜價把這個邏輯收費收滿了。</td></tr>
+      <tr><td>不讓分 · 波蘭</td><td class="num">3.20</td><td class="star">★★</td>
+        <td>賭的是「失誤先崩在美國那邊」(第 3 件事)加上輪替日 —— 縫不大,但這期沒有更寬的縫。</td></tr>
+      <tr><td>不讓分 · 美國</td><td class="num">1.16</td><td class="star">★</td>
+        <td>押 100 賺 16,爆冷一次要連對六次多才補得回來 —— 「穩」在這裡是最貴的字。</td></tr>
+      <tr><td>總得分 讓分 · 美國 −11.5</td><td class="num">1.75</td><td class="star">★</td>
+        <td>掉一局就死的結構(第 2 件事),疊上全週最高的輪替誘因(第 1 件事)—— 兩個風險綁在同一張單。</td></tr>
+    </table>
+    <p class="skip">正確比數、正確總盤數這類切到很細的玩法,本報不評 —— 切得越細,留給你的越少。</p>
+  </section>
+
+  <section class="contra">
+    <h2>反方的理由 —— 想站對面的人,功課也幫你做了</h2>
+    <ul>
+      <li>挺美國全吃:她們的替補放到別隊都是主力 —— 積分榜第一的底氣,不是靠先發五人撐出來的。</li>
+      <li>挺美國全吃:三局全收的手感是昨天的事,不是上週的回憶。</li>
+      <li>挺美國全吃:「同型互打」也可以反過來讀 —— 美國就是加強版的波蘭,同一套路數,硬體更好。</li>
+    </ul>
+  </section>
+
+  <section class="board">
+    <span class="tag">本期看板</span>
+    <h3>標價喊九成穩,真心話只有七成三</h3>
+    <p>這期沒有三顆星。問題不在美國會不會贏 —— 在每一個價,都把「會贏」收費收到超過它的真實把握,而輪替的變數就站在門口。菜單開得又硬又緊的日子,看完功課、少下一張,也是完整的一手。尺已經給你了,怎麼用是你的判斷。</p>
+  </section>
+
+  <div class="baseline">
+    <span>星級是價格評論,不是輸贏預測 · 本報不收博彩業者的廣告與贊助 · 不保證獲利<br>資料:世界排球總會官方 · 美國排協 · 台灣運彩</span>
+    <span class="right"><b>《ZONE 27 戰報》NO. 019</b> · 免費 · 歡迎店家整頁影印<br>zone27.com.tw</span>
+  </div>
+
+</div>
+</body>
+</html>

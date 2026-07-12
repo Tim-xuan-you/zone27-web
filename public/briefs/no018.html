@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<title>ZONE 27 戰報 NO.018 · 阪神虎 @ 讀賣巨人</title>
+<style>
+  /* ── ZONE 27 戰報 · 門店列印版 · A4 一頁 · v13(運動識別加大 · 樂透盤除名 · 短句化) ── */
+  @page { size: A4; margin: 10mm 12mm; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body { font-family: "Microsoft JhengHei", "Noto Sans TC", "PingFang TC", sans-serif;
+    color: #111; background: #e8e8e8; font-size: 10pt; line-height: 1.5; }
+  .sheet { width: 210mm; min-height: 296mm; margin: 0 auto; background: #fff; padding: 11mm 13mm 8mm; }
+  @media print { body { background: #fff; } .sheet { width: auto; min-height: auto; margin: 0; padding: 0; zoom: 0.865; } }
+
+  /* 報頭 + 放大版運動識別(v13:一眼看出球種) */
+  .masthead { display: flex; justify-content: space-between; align-items: center;
+    border-bottom: 3.5px solid #0F1A2E; padding-bottom: 6px; margin-bottom: 8px; }
+  .brand { font-size: 19pt; font-weight: 900; letter-spacing: 2px; color: #0F1A2E; }
+  .brand .en { font-size: 8pt; font-weight: 600; letter-spacing: 3px; color: #8A6A1F; display: block; margin-top: 1px; }
+  .sportbox { display: flex; align-items: center; gap: 10px; }
+  .sportbox .name { font-size: 22pt; font-weight: 900; color: #0F1A2E; letter-spacing: 4px; line-height: 1.1; }
+  .sportbox .sub { font-size: 8.5pt; color: #666; letter-spacing: 2px; display: block; margin-top: 1px; }
+  .sportbox .no { text-align: right; font-size: 8.5pt; color: #444; line-height: 1.5; border-left: 1px solid #ccc; padding-left: 10px; }
+  .sportbox .no b { color: #0F1A2E; }
+
+  .match { margin-bottom: 6px; }
+  .match .comp { font-size: 9pt; font-weight: 700; color: #8A6A1F; letter-spacing: 2px; }
+  .match h1 { font-size: 19pt; font-weight: 900; color: #0F1A2E; letter-spacing: 1px; line-height: 1.3; }
+  .match .meta { font-size: 9.5pt; color: #444; margin-top: 2px; }
+
+  .tldr { background: #0F1A2E; color: #E9E4D8; padding: 7px 12px; margin-bottom: 6px; }
+  .tldr .tag { font-size: 8pt; letter-spacing: 3px; color: #D4AF37; font-weight: 700; }
+  .tldr p { font-size: 11.5pt; font-weight: 700; line-height: 1.55; margin-top: 2px; }
+  .tldr b { color: #D4AF37; }
+
+  section { margin-bottom: 6px; }
+  h2 { font-size: 11pt; font-weight: 800; color: #0F1A2E; letter-spacing: 1.5px;
+    border-left: 4px solid #8A6A1F; padding-left: 7px; margin-bottom: 4px; }
+  .facts { counter-reset: fact; }
+  .facts li { list-style: none; padding-left: 17px; position: relative; margin-bottom: 4px; }
+  .facts li::before { content: counter(fact) ""; counter-increment: fact; position: absolute; left: 0;
+    font-weight: 900; color: #8A6A1F; font-size: 10.5pt; }
+
+  /* 主視覺:勝差 0 雙條圖(黑白影印也清楚) */
+  .duo { border: 1.5px solid #0F1A2E; padding: 7px 12px; margin-bottom: 6px;
+    display: flex; align-items: center; gap: 14px; }
+  .duo .zero { text-align: center; flex-shrink: 0; }
+  .duo .zero .n { font-size: 30pt; font-weight: 900; color: #8A6A1F; line-height: 1; }
+  .duo .zero .l { font-size: 8pt; letter-spacing: 3px; color: #444; font-weight: 700; }
+  .duo .bars { flex: 1; }
+  .duo .row { display: flex; align-items: center; gap: 8px; margin: 3px 0; }
+  .duo .team { width: 5.5em; font-size: 9.5pt; font-weight: 800; color: #0F1A2E; }
+  .duo .bar { flex: 1; background: #0F1A2E; color: #F5F2EA; font-size: 8.5pt;
+    padding: 2.5px 8px; letter-spacing: 1px; white-space: nowrap; }
+  .duo .cap { font-size: 8.5pt; color: #555; margin-top: 3px; }
+
+  .calc { background: #F5F3EE; border: 1px solid #d8d2c2; padding: 6px 10px; }
+  .calc table { width: 100%; border-collapse: collapse; font-size: 9.8pt; margin-top: 3px; }
+  .calc td { border: 1px solid #cfc8b6; padding: 3.5px 8px; background: #fff; }
+  .calc td.k { width: 44%; font-weight: 700; color: #0F1A2E; background: #FAF8F2; }
+
+  .menu table { width: 100%; border-collapse: collapse; font-size: 9.8pt; }
+  .menu th, .menu td { border: 1px solid #ccc; padding: 3.5px 7px; text-align: left; vertical-align: middle; }
+  .menu th { background: #EFEBE0; color: #0F1A2E; font-size: 9pt; letter-spacing: 1px; }
+  .menu td.num { text-align: center; white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .menu td.star { text-align: center; white-space: nowrap; color: #8A6A1F; font-weight: 900; font-size: 10.5pt; letter-spacing: 1px; }
+  .menu .skip { font-size: 8.5pt; color: #666; margin-top: 3px; }
+
+  .contra { border: 1px dashed #999; padding: 6px 10px; }
+  .contra li { list-style: none; padding-left: 14px; position: relative; margin-bottom: 3px; font-size: 9.8pt; }
+  .contra li::before { content: "▲"; position: absolute; left: 0; color: #666; font-size: 8pt; top: 2px; }
+
+  .board { border: 2.5px solid #8A6A1F; background: #FAF6EC; padding: 8px 12px; }
+  .board .tag { font-size: 8pt; letter-spacing: 3px; color: #8A6A1F; font-weight: 800; }
+  .board h3 { font-size: 13pt; font-weight: 900; color: #0F1A2E; letter-spacing: 0.5px; margin: 2px 0 4px; }
+  .board p { font-size: 9.8pt; line-height: 1.55; }
+
+  .baseline { border-top: 3px solid #0F1A2E; margin-top: 7px; padding-top: 5px;
+    display: flex; justify-content: space-between; gap: 12px; font-size: 8pt; color: #555; line-height: 1.6; }
+  .baseline .right { text-align: right; white-space: nowrap; }
+  .baseline b { color: #0F1A2E; }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <div class="masthead">
+    <div class="brand">ZONE 27 戰報
+      <span class="en">THE PRE-MATCH BRIEF</span>
+    </div>
+    <div class="sportbox">
+      <svg width="52" height="52" viewBox="0 0 40 40" aria-hidden="true">
+        <circle cx="20" cy="20" r="17" fill="none" stroke="#0F1A2E" stroke-width="2.2"/>
+        <path d="M12 6.5 Q19.5 20 12 33.5" fill="none" stroke="#0F1A2E" stroke-width="1.6"/>
+        <path d="M28 6.5 Q20.5 20 28 33.5" fill="none" stroke="#0F1A2E" stroke-width="1.6"/>
+        <path d="M13.2 12 L16.4 13.4 M14.6 20 L17.8 20 M13.2 28 L16.4 26.6" stroke="#8A6A1F" stroke-width="1.4"/>
+        <path d="M26.8 12 L23.6 13.4 M25.4 20 L22.2 20 M26.8 28 L23.6 26.6" stroke="#8A6A1F" stroke-width="1.4"/>
+      </svg>
+      <div>
+        <span class="name">棒 球</span>
+        <span class="sub">日本職棒 NPB</span>
+      </div>
+      <div class="no">
+        <b>NO. 018</b><br>2026 · 07 · 09
+      </div>
+    </div>
+  </div>
+
+  <div class="match">
+    <div class="comp">日本職棒 · 傳統之戰 · 決勝第三戰</div>
+    <h1>阪神虎 @ 讀賣巨人</h1>
+    <div class="meta">東京巨蛋 · 台北 7/9(四)傍晚 17:00 開賽 · 官方預告先發:伊原陵人(阪神) 對 則本昂大(巨人)</div>
+  </div>
+
+  <div class="tldr">
+    <span class="tag">10 秒看完</span>
+    <p>聯盟第一,打聯盟第一。兩隊<b>勝差是零</b>,系列戰又打成平手 —— 今晚贏的那隊,明天早上獨居首位。</p>
+  </div>
+
+  <div class="duo">
+    <div class="zero"><div class="n">0</div><div class="l">勝 差</div></div>
+    <div class="bars">
+      <div class="row"><span class="team">阪神虎</span><span class="bar">40 勝 34 敗 1 和</span></div>
+      <div class="row"><span class="team">讀賣巨人</span><span class="bar">40 勝 34 敗 2 和</span></div>
+      <div class="cap">打了七十幾場,兩隊回到同一條線上 —— 這就是今晚的份量。</div>
+    </div>
+  </div>
+
+  <section>
+    <h2>三件你查不到的事</h2>
+    <ul class="facts">
+      <li><b>巨人的先發,是從死對頭陣營重金挖來的王牌。</b>則本昂大投了樂天十二年,今年一月放棄挑戰美國職棒,自由球員身分轉戰巨人 —— 三年約十三億日圓。冬天砸的錢,就是為了今晚這種場面。</li>
+      <li><b>阪神的先發是個問號。</b>伊原陵人,戴王牌背號 18 的二年級左投,整個六月都在二軍 —— 今晚是久違的一軍登板。回歸首戰通常投不深:阪神牛棚大概率提早上工。</li>
+      <li><b>兩邊牛棚都不是滿油。</b>首戰巨人 4:3 咬贏,次戰阪神 4:1 討回 —— 連打兩晚,雙方該用的都用了。決勝戰,誰的先發吃得深,誰就贏一半。</li>
+    </ul>
+  </section>
+
+  <section class="calc">
+    <h2>本報算的數字 —— 這裡才有</h2>
+    <table>
+      <tr><td class="k">不讓分(阪神 1.55 / 巨人 1.90)拆掉水分</td><td>市場真心話:阪神 55、巨人 45 —— 接近銅板的比賽,標價卻像一面倒。</td></tr>
+      <tr><td class="k">巨人 受讓 +1.5(1.53)要多準才不虧?</td><td>每押 10 次,要中將近 7 次 —— 保險不便宜。</td></tr>
+      <tr><td class="k">1–5 局 巨人(2.20)要多準?</td><td>10 次中 4 次半就打平 —— 全單門檻最低的價。</td></tr>
+    </table>
+  </section>
+
+  <section class="menu">
+    <h2>今晚的菜單 · 星級評的是「這個價公不公道」</h2>
+    <table>
+      <tr><th style="width:28%">盤口(台灣運彩)</th><th style="width:8%">賠率</th><th style="width:11%">星級</th><th>讀法</th></tr>
+      <tr><td>不讓分 · 巨人</td><td class="num">1.90</td><td class="star">★★★</td>
+        <td>市場只把它當四成五(算式在上表),但「問號先發」的不確定性全堆在對面(第 2 件事)—— 這期最公道的價。</td></tr>
+      <tr><td>1–5 局 · 巨人</td><td class="num">2.20</td><td class="star">★★</td>
+        <td>專賭「回歸首戰前段不穩」這一個劇本 —— 門檻最低,劇本沒開,錢就直接沒了。</td></tr>
+      <tr><td>受讓 +1.5 · 巨人</td><td class="num">1.53</td><td class="star">★★</td>
+        <td>超低總分線的比賽,1 分差劇本本來就多 —— 但這個常識,價已經收滿費了。</td></tr>
+      <tr><td>不讓分 · 阪神</td><td class="num">1.55</td><td class="star">★</td>
+        <td>賣的是虎迷的信仰,不是勝率 —— 真心話在上表。</td></tr>
+      <tr><td>總分 大/小 5.5</td><td class="num">1.60 / 1.85</td><td class="star">★</td>
+        <td>這系列的總分線一路貼著地板開 —— 投手戰行家的桌,兩邊價都沒留報酬。</td></tr>
+    </table>
+    <p class="skip">單雙、勝分差這類猜銅板的玩法,本報不評 —— 懂的都懂。</p>
+  </section>
+
+  <section class="contra">
+    <h2>反方的理由 —— 想站對面的人,功課也幫你做了</h2>
+    <ul>
+      <li>挺阪神:能被排進決勝戰先發,代表球團看過伊原在二軍的內容 —— 狀態可能比「問號」好得多。</li>
+      <li>挺阪神:昨晚剛贏球,打線手感是熱的;則本 35 歲、換聯盟第一年,招牌不等於當下狀態。</li>
+      <li>挺阪神:首位之爭的壓力其實在主隊 —— 東京巨蛋的滿場期待,壓垮過不少主場球隊。</li>
+    </ul>
+  </section>
+
+  <section class="board">
+    <span class="tag">本期看板</span>
+    <h3>勝差歸零的晚上,價格卻沒歸零</h3>
+    <p>積分榜說兩隊一模一樣;盤口卻把客隊開成明顯優勢 —— 中間那段差距,是品牌和人氣堆出來的。今晚的功課只有一題:一個問號先發,抵不抵得過一張冬天重金簽來的王牌?尺已經給你了,怎麼用是你的判斷。</p>
+  </section>
+
+  <div class="baseline">
+    <span>星級是價格評論,不是輸贏預測 · 本報不收博彩業者的廣告與贊助 · 不保證獲利<br>資料:NPB 官方 · 日媒報導 · 台灣運彩</span>
+    <span class="right"><b>《ZONE 27 戰報》NO. 018</b> · 免費 · 歡迎店家整頁影印<br>zone27.com.tw</span>
+  </div>
+
+</div>
+</body>
+</html>

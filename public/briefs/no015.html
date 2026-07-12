@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<title>ZONE 27 戰報 NO.015 · 亞歷桑那響尾蛇 @ 聖地牙哥教士</title>
+<style>
+  /* ── ZONE 27 戰報 · 門店列印版 · A4 一頁 · v11 ── */
+  @page { size: A4; margin: 10mm 12mm; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body { font-family: "Microsoft JhengHei", "Noto Sans TC", "PingFang TC", sans-serif;
+    color: #111; background: #e8e8e8; font-size: 10pt; line-height: 1.5; }
+  .sheet { width: 210mm; min-height: 296mm; margin: 0 auto; background: #fff; padding: 11mm 13mm 8mm; }
+  @media print { body { background: #fff; } .sheet { width: auto; min-height: auto; margin: 0; padding: 0; zoom: 0.875; } }
+  .masthead { display: flex; justify-content: space-between; align-items: flex-end;
+    border-bottom: 3.5px solid #0F1A2E; padding-bottom: 6px; margin-bottom: 9px; }
+  .brand { font-size: 19pt; font-weight: 900; letter-spacing: 2px; color: #0F1A2E; }
+  .brand .en { font-size: 8pt; font-weight: 600; letter-spacing: 3px; color: #8A6A1F; display: block; margin-top: 1px; }
+  .sportbox { display: flex; align-items: center; gap: 8px; }
+  .sportbox .name { font-size: 15pt; font-weight: 900; color: #0F1A2E; letter-spacing: 3px; }
+  .sportbox .sub { font-size: 8pt; color: #666; letter-spacing: 2px; display: block; }
+  .sportbox .no { text-align: right; font-size: 8.5pt; color: #444; line-height: 1.5; }
+  .sportbox .no b { color: #0F1A2E; }
+  .match { margin-bottom: 7px; }
+  .match .comp { font-size: 9pt; font-weight: 700; color: #8A6A1F; letter-spacing: 2px; }
+  .match h1 { font-size: 19pt; font-weight: 900; color: #0F1A2E; letter-spacing: 1px; line-height: 1.3; }
+  .match .meta { font-size: 9.5pt; color: #444; margin-top: 2px; }
+  .tldr { background: #0F1A2E; color: #E9E4D8; padding: 7px 12px; margin-bottom: 6px; }
+  .tldr .tag { font-size: 8pt; letter-spacing: 3px; color: #D4AF37; font-weight: 700; }
+  .tldr p { font-size: 11.5pt; font-weight: 700; line-height: 1.55; margin-top: 2px; }
+  .tldr b { color: #D4AF37; }
+  section { margin-bottom: 6px; }
+  h2 { font-size: 11pt; font-weight: 800; color: #0F1A2E; letter-spacing: 1.5px;
+    border-left: 4px solid #8A6A1F; padding-left: 7px; margin-bottom: 4px; }
+  .facts { counter-reset: fact; }
+  .facts li { list-style: none; padding-left: 17px; position: relative; margin-bottom: 4px; }
+  .facts li::before { content: counter(fact) ""; counter-increment: fact; position: absolute; left: 0;
+    font-weight: 900; color: #8A6A1F; font-size: 10.5pt; }
+  .calc { background: #F5F3EE; border: 1px solid #d8d2c2; padding: 7px 10px; }
+  .calc table { width: 100%; border-collapse: collapse; font-size: 9.8pt; margin-top: 3px; }
+  .calc td { border: 1px solid #cfc8b6; padding: 3.5px 8px; background: #fff; }
+  .calc td.k { width: 46%; font-weight: 700; color: #0F1A2E; background: #FAF8F2; }
+  .menu table { width: 100%; border-collapse: collapse; font-size: 9.8pt; }
+  .menu th, .menu td { border: 1px solid #ccc; padding: 3.5px 7px; text-align: left; vertical-align: middle; }
+  .menu th { background: #EFEBE0; color: #0F1A2E; font-size: 9pt; letter-spacing: 1px; }
+  .menu td.num { text-align: center; white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .menu td.star { text-align: center; white-space: nowrap; color: #8A6A1F; font-weight: 900; font-size: 10.5pt; letter-spacing: 1px; }
+  .contra { border: 1px dashed #999; padding: 6px 10px; }
+  .contra li { list-style: none; padding-left: 14px; position: relative; margin-bottom: 3px; font-size: 9.8pt; }
+  .contra li::before { content: "▲"; position: absolute; left: 0; color: #666; font-size: 8pt; top: 2px; }
+  .board { border: 2.5px solid #8A6A1F; background: #FAF6EC; padding: 8px 12px; }
+  .board .tag { font-size: 8pt; letter-spacing: 3px; color: #8A6A1F; font-weight: 800; }
+  .board h3 { font-size: 13pt; font-weight: 900; color: #0F1A2E; letter-spacing: 0.5px; margin: 2px 0 4px; }
+  .board p { font-size: 9.8pt; line-height: 1.55; }
+  .baseline { border-top: 3px solid #0F1A2E; margin-top: 7px; padding-top: 5px;
+    display: flex; justify-content: space-between; gap: 12px; font-size: 8pt; color: #555; line-height: 1.6; }
+  .baseline .right { text-align: right; white-space: nowrap; }
+  .baseline b { color: #0F1A2E; }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <div class="masthead">
+    <div class="brand">ZONE 27 戰報
+      <span class="en">THE PRE-MATCH BRIEF</span>
+    </div>
+    <div class="sportbox">
+      <svg width="34" height="34" viewBox="0 0 40 40" aria-hidden="true">
+        <circle cx="20" cy="20" r="17" fill="none" stroke="#0F1A2E" stroke-width="2"/>
+        <path d="M12 6.5 Q19.5 20 12 33.5" fill="none" stroke="#0F1A2E" stroke-width="1.5"/>
+        <path d="M28 6.5 Q20.5 20 28 33.5" fill="none" stroke="#0F1A2E" stroke-width="1.5"/>
+        <path d="M13.2 12 L16.4 13.4 M14.6 20 L17.8 20 M13.2 28 L16.4 26.6" stroke="#8A6A1F" stroke-width="1.3"/>
+        <path d="M26.8 12 L23.6 13.4 M25.4 20 L22.2 20 M26.8 28 L23.6 26.6" stroke="#8A6A1F" stroke-width="1.3"/>
+      </svg>
+      <div>
+        <span class="name">棒球</span>
+        <span class="sub">MLB 美國職棒</span>
+      </div>
+      <div class="no">
+        <b>NO. 015</b><br>2026 · 07 · 09
+      </div>
+    </div>
+  </div>
+
+  <div class="match">
+    <div class="comp">MLB 例行賽 · 四連戰第三戰</div>
+    <h1>亞歷桑那響尾蛇 @ 聖地牙哥教士</h1>
+    <div class="meta">沛可球場(聖地牙哥) · 台北 7/9(四)上午 10:10 開賽 · 季戰績:響尾蛇 44勝45敗 · 教士 44勝45敗</div>
+  </div>
+
+  <div class="tldr">
+    <span class="tag">10 秒看完</span>
+    <p>教士剛連下兩城,本報引擎給到 <b>68%</b> 重壓 —— 但別讀錯理由:連勝之前他們正輸成一片,引擎看上的是今晚的先發對位,不是氣勢。</p>
+  </div>
+
+  <section>
+    <h2>三件你查不到的事</h2>
+    <ul class="facts">
+      <li><b>兩隊季戰績一模一樣:44 勝 45 敗,對 44 勝 45 敗。</b>今晚盤口開出的所有價差,理論上全部來自「先發」和「主場」—— 跟誰比較強無關,因為積分榜說他們一樣強。</li>
+      <li><b>先發對位的關鍵在「被轟率」。</b>教士 King(防禦率 3.52)每九局只被轟 0.88 支;響尾蛇 Cabrera(4.73)被轟 2.02 支 —— 失投變全壘打的風險差了一倍以上。這一行,就是引擎重壓的全部理由。</li>
+      <li><b>「教士火燙」是錯覺。</b>近十場教士 2 勝 8 敗,昨天 4:1 只是其中一勝;響尾蛇同期 3 勝 7 敗。正確的讀法是「兩隊都冷,教士剛好醒了兩天」—— 散戶看見連勝,積分榜看見冰河。</li>
+    </ul>
+  </section>
+
+  <section class="calc">
+    <h2>本報算的數字 —— 這裡才有</h2>
+    <table>
+      <tr><td class="k">單雙盤(單 1.45 / 雙 1.95)拆掉水分後,市場的真心話</td><td>單 57:雙 43 —— 但 1.45 的定價要求你 10 次中 7 次,比真心話貴了一大截。</td></tr>
+      <tr><td class="k">教士 −1.5(2.05)要多準才不虧?</td><td>每押 10 次,中 5 次就夠 —— 全單門檻最低的一格。</td></tr>
+      <tr><td class="k">1–5 局教士隊得分 大 2.5(1.86)要多準?</td><td>每押 10 次,要中將近 6 次。</td></tr>
+    </table>
+  </section>
+
+  <section class="menu">
+    <h2>今晚的菜單 · 星級評的是「這個價公不公道」</h2>
+    <table>
+      <tr><th style="width:30%">盤口(台灣運彩)</th><th style="width:8%">賠率</th><th style="width:11%">星級</th><th>讀法</th></tr>
+      <tr><td>讓分 −1.5 · 教士</td><td class="num">2.05</td><td class="star">★★★</td>
+        <td>全單門檻最低的價,疊上引擎重壓(看板)與被轟率一倍差(第 2 件事)—— 這期定價最公道的一格。風險同框:教士自己也在冷區(第 3 件事)。</td></tr>
+      <tr><td>1–5 局教士隊得分 · 大 2.5</td><td class="num">1.86</td><td class="star">★★</td>
+        <td>只賭 Cabrera 在場上的時段、避開牛棚 —— 思路聰明;但冷了十場的打線要前五局拿 3 分,不是最近的常態。</td></tr>
+      <tr><td>全場總分 · 單</td><td class="num">1.45</td><td class="star">★</td>
+        <td>市場真心話給它 57(算式在上表),定價卻要你七成準 —— 銅板還要先讓一大截。</td></tr>
+      <tr><td>得分最高單局 · 勝分差</td><td class="num">2.45+</td><td class="star">★</td>
+        <td>哪局爆分是純運氣、切得越碎定價越硬 —— 樂透類,不是功課。</td></tr>
+      <tr><td>第 1 局各玩法</td><td class="num">—</td><td class="star">★</td>
+        <td>三到六個打席的樣本,運氣遠大於實力。</td></tr>
+    </table>
+  </section>
+
+  <section class="contra">
+    <h2>反方的理由 —— 想站對面的人,功課也幫你做了</h2>
+    <ul>
+      <li>挺響尾蛇:積分榜說兩隊一樣強(第 1 件事)—— 68% 也許把主場和昨天的印象算得太重。</li>
+      <li>挺響尾蛇:Cabrera 年輕、樣本小,帳面數字的波動大 —— 他丟出好球的那個版本,隨時可能出現。</li>
+      <li>挺響尾蛇:論近況他們其實比教士熱 —— 冷熱對比,站的是客隊這邊。</li>
+    </ul>
+  </section>
+
+  <section class="board">
+    <span class="tag">本期看板</span>
+    <h3>積分榜說五五波,引擎說一面倒</h3>
+    <p>兩支戰績完全相同的球隊,本報引擎(蒙地卡羅模擬一萬次 · 方法全公開)卻開出 68% 的重壓 —— 分歧全部來自今晚兩位先發的失投風險差。積分榜和投手丘,兩邊必有一邊看錯。尺已經給你了,怎麼用是你的判斷。</p>
+  </section>
+
+  <div class="baseline">
+    <span>星級是價格評論,不是輸贏預測 · 本報不收博彩業者的廣告與贊助 · 不保證獲利<br>資料:MLB 官方 · 美媒賽前報導 · 台灣運彩</span>
+    <span class="right"><b>《ZONE 27 戰報》NO. 015</b> · 免費 · 歡迎店家整頁影印<br>zone27.com.tw</span>
+  </div>
+
+</div>
+</body>
+</html>

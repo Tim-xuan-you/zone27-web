@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<title>ZONE 27 戰報 · 對帳版 · 2026-07-07</title>
+<style>
+  /* ── ZONE 27 戰報 · 對帳版(見真章日)· A4 一頁 ── */
+  @page { size: A4; margin: 10mm 12mm; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body {
+    font-family: "Microsoft JhengHei", "Noto Sans TC", "PingFang TC", sans-serif;
+    color: #111; background: #e8e8e8; font-size: 9.8pt; line-height: 1.44;
+  }
+  .sheet {
+    width: 210mm; min-height: 296mm; margin: 0 auto; background: #fff;
+    padding: 11mm 13mm 8mm;
+  }
+  @media print {
+    body { background: #fff; }
+    .sheet { width: auto; min-height: auto; margin: 0; padding: 0; zoom: 0.92; }
+  }
+
+  .masthead { display: flex; justify-content: space-between; align-items: flex-end;
+    border-bottom: 3.5px solid #0F1A2E; padding-bottom: 6px; }
+  .masthead .brand { font-size: 19pt; font-weight: 900; letter-spacing: 2px; color: #0F1A2E; }
+  .masthead .brand .en { font-size: 8pt; font-weight: 600; letter-spacing: 3px; color: #8A6A1F; display: block; margin-top: 1px; }
+  .masthead .issue { text-align: right; font-size: 8.5pt; color: #444; line-height: 1.5; }
+  .masthead .issue b { color: #0F1A2E; }
+  .tagline { display: flex; justify-content: space-between; font-size: 8.5pt; color: #555;
+    border-bottom: 1px solid #bbb; padding: 3px 1px 4px; margin-bottom: 8px; letter-spacing: 1px; }
+
+  .match { margin-bottom: 6px; }
+  .match .comp { font-size: 9pt; font-weight: 700; color: #8A6A1F; letter-spacing: 2px; }
+  .match h1 { font-size: 20pt; font-weight: 900; color: #0F1A2E; letter-spacing: 1px; line-height: 1.25; }
+  .match .meta { font-size: 9pt; color: #444; margin-top: 2px; }
+
+  .tldr { background: #0F1A2E; color: #fff; padding: 6px 10px; margin-bottom: 6px; }
+  .tldr .tag { font-size: 8pt; letter-spacing: 2px; color: #D4AF37; font-weight: 700; }
+  .tldr p { font-size: 10.5pt; font-weight: 700; line-height: 1.5; margin-top: 2px; }
+
+  section { margin-bottom: 5px; }
+  h2 { font-size: 10.5pt; font-weight: 800; color: #0F1A2E; letter-spacing: 1.5px;
+    border-left: 4px solid #8A6A1F; padding-left: 7px; margin-bottom: 3px; }
+  p { margin-bottom: 3px; }
+  .small { font-size: 8.5pt; color: #555; }
+
+  /* 對帳表 */
+  .ledger table { width: 100%; border-collapse: collapse; font-size: 9pt; }
+  .ledger th, .ledger td { border: 1px solid #ccc; padding: 3px 5px; text-align: left; vertical-align: top; }
+  .ledger th { background: #EFEBE0; color: #0F1A2E; font-size: 8.5pt; }
+  .ledger td.score { white-space: nowrap; font-weight: 800; color: #0F1A2E; font-variant-numeric: tabular-nums; }
+  .ledger td.v { text-align: center; white-space: nowrap; font-weight: 900; width: 52px; }
+  .ledger .hit { color: #0F1A2E; }
+  .ledger .miss { color: #8A2A2A; }
+  .ledger .hold { color: #666; }
+
+  /* 金框:第一手的結果 */
+  .call { border: 2.5px solid #D4AF37; background: #FBF9F4; padding: 7px 11px; }
+  .call .tag { font-size: 8pt; letter-spacing: 2px; color: #8A6A1F; font-weight: 700; }
+  .call .pick { font-size: 14pt; font-weight: 900; color: #0F1A2E; margin: 2px 0 3px; letter-spacing: 0.5px; }
+  .call .pick .ok { color: #8A6A1F; }
+  .call p { font-size: 9.5pt; line-height: 1.5; }
+
+  /* 主編 vs 引擎(誠實亮點) */
+  .duel { background: #0F1A2E; color: #E9E4D8; padding: 7px 11px; }
+  .duel h2 { color: #fff; border-left-color: #D4AF37; margin-bottom: 3px; }
+  .duel p { font-size: 9.5pt; line-height: 1.55; color: #D9D3C4; }
+  .duel b { color: #D4AF37; }
+
+  .rules { border: 1.5px dashed #8A6A1F; padding: 6px 10px; background: #FBF9F4; }
+  .rules li { list-style: none; padding-left: 14px; position: relative; font-size: 9pt; line-height: 1.5; color: #333; margin-bottom: 1px; }
+  .rules li::before { content: "▪"; position: absolute; left: 2px; color: #8A6A1F; }
+  .rules .url { color: #8A6A1F; font-weight: 700; }
+
+  footer { display: flex; justify-content: space-between; font-size: 8pt; color: #666;
+    border-top: 1px solid #bbb; margin-top: 7px; padding-top: 4px; letter-spacing: 0.5px; }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <div class="masthead">
+    <div class="brand">ZONE 27 戰報
+      <span class="en">THE RECEIPTS</span>
+    </div>
+    <div class="issue">
+      <b>NO. 005 · 對帳版</b><br>
+      2026 · 07 · 07 · 台北<br>
+      結算:7/6 全部判讀
+    </div>
+  </div>
+  <div class="tagline">
+    <span>給運彩玩家的一頁賽前功課</span>
+    <span>對了印 · 錯了也印</span>
+  </div>
+
+  <div class="match">
+    <div class="comp">見真章日 · 創刊 24 小時的每一句話,全部攤開</div>
+    <h1>昨晚六場,全開獎</h1>
+    <div class="meta">世界盃男籃資格賽 4 場 + 世界盃足球 16 強 2 場 · 賽果:FIBA / ZONE 27 足球帳本</div>
+  </div>
+
+  <div class="tldr">
+    <span class="tag">10 秒看完</span>
+    <p>金框第一手(南韓受讓 +6.5)—— <u>中,而且南韓 81:79 直接贏了日本</u>。但這頁不是慶功:下面每一格,錯的跟中的印一樣大。敢這樣印的,全台灣只有這一份。</p>
+  </div>
+
+  <section class="ledger">
+    <h2>對帳表 —— 本報當時白紙黑字怎麼說</h2>
+    <table>
+      <tr><th style="width:24%">場次 · 結果</th><th>本報當時說(原句)</th><th style="width:7%">判定</th></tr>
+      <tr>
+        <td class="score">南韓 81:79 日本</td>
+        <td>金框一手「南韓受讓 +6.5(看好):買南韓把比賽咬到最後一分鐘」—— 咬到了,還直接咬贏。附帳:我們說 2.85 倒打是「彩票」—— 這張彩票也開了。</td>
+        <td class="v hit">✓ 中</td>
+      </tr>
+      <tr>
+        <td class="score">澳洲 92:49 菲律賓</td>
+        <td>「小 170.5 是全場邏輯最完整的一個價」—— 兩隊合計 141,離門檻還有 29 分。少了 Brownlee 的菲律賓只拿 49 分。</td>
+        <td class="v hit">✓ 中</td>
+      </tr>
+      <tr>
+        <td class="score">澳洲讓 26.5 · 過盤</td>
+        <td>同一期我們提醒「防澳洲第四節收油門」—— 沒收,贏 43 分輾過讓分線。這個顧慮,錯。</td>
+        <td class="v miss">✗ 錯</td>
+      </tr>
+      <tr>
+        <td class="score">中國 92:74 中華台北</td>
+        <td>「上次只贏 7,線開 7.5 卡刀口」—— 讀法傾向台北受讓有戲。結果中國贏 18,過盤有餘。</td>
+        <td class="v miss">✗ 錯</td>
+      </tr>
+      <tr>
+        <td class="score">紐西蘭 129:75 關島</td>
+        <td>正式立場「觀望:不押就是贏」—— 立場本身守住了(水 16.3%)。但誠實列:文中兩個傾向(線太高、小分)都錯 —— 紐西蘭贏 54、總分 204 大爆。</td>
+        <td class="v hold">— 觀望</td>
+      </tr>
+      <tr>
+        <td class="score">英格蘭 3:2 墨西哥</td>
+        <td>創刊樣張整套基本面劇本(墨西哥不敗 1.45、小 2.5、兩隊進球「否」)—— 三個傾向全錯:零失球神話一場丟 3 球,進球 5 顆。</td>
+        <td class="v miss">✗ 錯</td>
+      </tr>
+    </table>
+    <p class="small">葡萄牙 0:1 西班牙(今晨):本報來不及出刊 —— 但引擎 7/4 已賽前鎖定西班牙 45%,中。紀錄照列。</p>
+  </section>
+
+  <section class="call">
+    <span class="tag">▌第一手掛帳結果 · THE CALL</span>
+    <div class="pick">南韓 受讓 +6.5 @ 1.85 —— <span class="ok">✓ 中</span></div>
+    <p>掛帳的敢印結果,才叫立場。下一手,下期繼續掛 —— 錯的那天,也印這麼大。</p>
+  </section>
+
+  <section class="duel">
+    <h2>本報最想讓你看的一格:主編輸給了自己的機器</h2>
+    <p>英格蘭@墨西哥那期,主編的基本面站墨西哥,引擎賽前鎖英格蘭 45% —— 我們把分歧照印了,說「誰對,隔天見真章」。真章來了:<b>引擎對,主編錯。</b>兩場足球,引擎兩中(英格蘭、西班牙)。哪個明牌站敢印自己被自己的機器打臉?這就是為什麼引擎的每一手都值得你上網看:<b>zone27.com.tw</b></p>
+  </section>
+
+  <section class="rules">
+    <ul>
+      <li>對帳版的規矩:每一句方向性判讀都要見真章 —— 中的印、錯的印、觀望也印;查證不到的賽果標「確認中」,下期補,寧缺勿錯。</li>
+      <li>昨晚合計:方向性判讀 2 中 3 錯 1 觀望 · 引擎 2 中 0 錯 —— 沒有人天天全中,差別是我們印出來。歷期全紀錄:<span class="url">zone27.com.tw/track-record</span></li>
+    </ul>
+  </section>
+
+  <footer>
+    <span>《ZONE 27 戰報》NO. 005 對帳版 · 免費 · 歡迎店家整頁影印</span>
+    <span>zone27.com.tw · 今晚戰報見</span>
+  </footer>
+
+</div>
+</body>
+</html>

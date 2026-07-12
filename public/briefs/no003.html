@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<title>ZONE 27 戰報 · 菲律賓 @ 澳洲 · 2026-07-06</title>
+<style>
+  /* ── ZONE 27 戰報 · 門店列印版 · A4 一頁 · 版式 v2(去重複 · 全白話) ── */
+  @page { size: A4; margin: 10mm 12mm; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body {
+    font-family: "Microsoft JhengHei", "Noto Sans TC", "PingFang TC", sans-serif;
+    color: #111; background: #e8e8e8; font-size: 9.8pt; line-height: 1.44;
+  }
+  .sheet {
+    width: 210mm; min-height: 296mm; margin: 0 auto; background: #fff;
+    padding: 11mm 13mm 8mm;
+  }
+  @media print {
+    body { background: #fff; }
+    .sheet { width: auto; min-height: auto; margin: 0; padding: 0; zoom: 0.92; }
+  }
+
+  /* 報頭 */
+  .masthead { display: flex; justify-content: space-between; align-items: flex-end;
+    border-bottom: 3.5px solid #0F1A2E; padding-bottom: 6px; }
+  .masthead .brand { font-size: 19pt; font-weight: 900; letter-spacing: 2px; color: #0F1A2E; }
+  .masthead .brand .en { font-size: 8pt; font-weight: 600; letter-spacing: 3px; color: #8A6A1F; display: block; margin-top: 1px; }
+  .masthead .issue { text-align: right; font-size: 8.5pt; color: #444; line-height: 1.5; }
+  .masthead .issue b { color: #0F1A2E; }
+  .tagline { display: flex; justify-content: space-between; font-size: 8.5pt; color: #555;
+    border-bottom: 1px solid #bbb; padding: 3px 1px 4px; margin-bottom: 8px; letter-spacing: 1px; }
+
+  /* 對戰標題 */
+  .match { margin-bottom: 6px; }
+  .match .comp { font-size: 9pt; font-weight: 700; color: #8A6A1F; letter-spacing: 2px; }
+  .match h1 { font-size: 20pt; font-weight: 900; color: #0F1A2E; letter-spacing: 1px; line-height: 1.25; }
+  .match .meta { font-size: 9pt; color: #444; margin-top: 2px; }
+
+  /* 10 秒看完 */
+  .tldr { background: #0F1A2E; color: #fff; padding: 6px 10px; margin-bottom: 6px; }
+  .tldr .tag { font-size: 8pt; letter-spacing: 2px; color: #D4AF37; font-weight: 700; }
+  .tldr p { font-size: 10.5pt; font-weight: 700; line-height: 1.5; margin-top: 2px; }
+
+  /* 大字數據列 */
+  .bignums { display: flex; gap: 6px; margin-bottom: 6px; }
+  .bignums .cell { flex: 1; border: 1px solid #d8d2c2; background: #FBF9F4; text-align: center; padding: 4px 2px 3px; }
+  .bignums .n { font-size: 15pt; font-weight: 900; color: #0F1A2E; line-height: 1.1; font-variant-numeric: tabular-nums; }
+  .bignums .l { font-size: 7.5pt; color: #666; letter-spacing: 1px; margin-top: 1px; }
+
+  /* 區塊 */
+  section { margin-bottom: 5px; }
+  h2 { font-size: 10.5pt; font-weight: 800; color: #0F1A2E; letter-spacing: 1.5px;
+    border-left: 4px solid #8A6A1F; padding-left: 7px; margin-bottom: 3px; }
+  p { margin-bottom: 3px; }
+  .facts li { list-style: none; padding-left: 15px; position: relative; margin-bottom: 2px; }
+  .facts li::before { content: "▪"; position: absolute; left: 2px; color: #8A6A1F; }
+  .small { font-size: 8.5pt; color: #555; }
+
+  /* 圖:兩條線 vs 歷史 */
+  .fig { background: #F5F3EE; border: 1px solid #d8d2c2; padding: 6px 9px 7px; }
+  .fig .row { display: flex; align-items: center; gap: 7px; margin-top: 4px; }
+  .fig .lbl { width: 128px; font-size: 8.5pt; color: #333; text-align: right; flex-shrink: 0; }
+  .fig .track { flex: 1; background: #E4DFD2; height: 12px; }
+  .fig .bar { height: 12px; display: block; }
+  .fig .bar.past { background: #8A93A8; }
+  .fig .bar.line { background: #0F1A2E; }
+  .fig .val { font-size: 9.5pt; font-weight: 800; color: #0F1A2E; width: 76px; flex-shrink: 0; font-variant-numeric: tabular-nums; }
+  .fig .gap { height: 5px; }
+  .fig .cap { font-size: 8.5pt; color: #555; margin-top: 5px; }
+
+  /* 抽水條 */
+  .vigbar { display: flex; height: 17px; margin: 5px 0 2px; font-size: 8pt; font-weight: 700; }
+  .vigbar .play { background: #E4DFD2; color: #333; width: 83.7%; display: flex; align-items: center; padding-left: 7px; }
+  .vigbar .house { background: #0F1A2E; color: #D4AF37; width: 16.3%; display: flex; align-items: center; justify-content: center; }
+
+  /* 選項價格表(v2:拿掉打平欄 · 讀法給更寬) */
+  .opts table { width: 100%; border-collapse: collapse; font-size: 9.5pt; }
+  .opts th, .opts td { border: 1px solid #ccc; padding: 3px 5px; text-align: left; vertical-align: top; }
+  .opts th { background: #EFEBE0; color: #0F1A2E; font-size: 9pt; }
+  .opts td.num { text-align: center; white-space: nowrap; font-variant-numeric: tabular-nums; }
+
+  /* 本報的規矩(v2:三框合一) */
+  .rules { background: #0F1A2E; color: #E9E4D8; padding: 7px 10px; }
+  .rules h2 { color: #fff; border-left-color: #D4AF37; margin-bottom: 3px; }
+  .rules li { list-style: none; padding-left: 14px; position: relative; font-size: 9pt; line-height: 1.55; color: #D9D3C4; margin-bottom: 1px; }
+  .rules li::before { content: "▪"; position: absolute; left: 2px; color: #D4AF37; }
+  .rules .url { color: #D4AF37; font-weight: 700; letter-spacing: 0.5px; }
+
+  footer { display: flex; justify-content: space-between; font-size: 8pt; color: #666;
+    border-top: 1px solid #bbb; margin-top: 7px; padding-top: 4px; letter-spacing: 0.5px; }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <div class="masthead">
+    <div class="brand">ZONE 27 戰報
+      <span class="en">THE PRE-MATCH BRIEF</span>
+    </div>
+    <div class="issue">
+      <b>NO. 003</b><br>
+      2026 · 07 · 06 · 台北<br>
+      本期:男籃世界盃資格賽
+    </div>
+  </div>
+  <div class="tagline">
+    <span>給運彩玩家的一頁賽前功課</span>
+    <span>不靠直覺 · 只看演算法</span>
+  </div>
+
+  <div class="match">
+    <div class="comp">2027 世界盃男籃 · 亞太區資格賽 A 組</div>
+    <h1>菲律賓 @ 澳洲</h1>
+    <div class="meta">7/6(一) · 伯斯 · 澳洲 5 戰全勝 vs 菲律賓三連敗 · 菲頭號得分手確定缺陣</div>
+  </div>
+
+  <div class="tldr">
+    <span class="tag">10 秒看完</span>
+    <p>澳洲會贏,市場沒有分歧 —— 所以只看兩條線:讓分線壓在上次分差的正下方,大小門檻卻抬到上次合計之上。散戶會衝的兩個方向,莊家都先把線墊好了等你。</p>
+  </div>
+
+  <section class="fig">
+    <h2>兩條線,同一套心理學</h2>
+    <div class="row">
+      <span class="lbl">上次澳洲贏了</span>
+      <span class="track"><span class="bar past" style="width:90%"></span></span>
+      <span class="val">27 分</span>
+    </div>
+    <div class="row">
+      <span class="lbl">這次讓分線</span>
+      <span class="track"><span class="bar line" style="width:85%"></span></span>
+      <span class="val">24.5~26.5</span>
+    </div>
+    <div class="gap"></div>
+    <div class="row">
+      <span class="lbl">上次兩隊合計</span>
+      <span class="track"><span class="bar past" style="width:88%"></span></span>
+      <span class="val">159 分</span>
+    </div>
+    <div class="row">
+      <span class="lbl">這次大小門檻</span>
+      <span class="track"><span class="bar line" style="width:95%"></span></span>
+      <span class="val">170.5</span>
+    </div>
+    <p class="cap">讓分線貼著歷史開(等散戶湧向澳洲);大小門檻抬過歷史開(等散戶追上一場 124 分的餘溫)—— 想跟風之前,先看見線在哪。</p>
+  </section>
+
+  <section>
+    <h2>賽前三個事實</h2>
+    <ul class="facts">
+      <li><b>菲律賓的一週像地獄。</b>7/3 在奧克蘭跟紐西蘭纏鬥到二度延長,102:106 惜敗;頭號歸化 Brownlee 帶著一身傷只拿 5 分,賽後確定缺陣這場 —— 然後全隊長途飛到伯斯。</li>
+      <li><b>澳洲以逸待勞。</b>5 戰全勝,上一場在主場 124:52 血洗關島,主力養精蓄銳 —— 體能、主場、氣勢,三樣全拿。</li>
+      <li><b>兩條線都貼著同一組歷史數字開。</b>上次交手澳洲 93:66 —— 分差與合計,就是這期所有盤口的參考座標。</li>
+    </ul>
+    <p class="small">賽果與傷兵來源:FIBA 官方、菲律賓籃協(SBP)公告與公開報導 · 賠率:台灣運彩。</p>
+  </section>
+
+  <section>
+    <h2>盤口解剖 —— 1.72 是什麼意思?</h2>
+    <p>這場多數玩法兩邊都開 1.72。白話:<b>每押 10 次,要中將近 6 次才不虧</b> —— 而丟硬幣只會中 5 次。多出來的那快一次,就是莊家先收的過路費:</p>
+    <div class="vigbar">
+      <div class="play">83.7 元 —— 真正拿去對賭的部分</div>
+      <div class="house">16.3 元 先繳</div>
+    </div>
+  </section>
+
+  <section>
+    <h2>大眾會怎麼押 —— 莊家早就算好了</h2>
+    <p>散戶看到「124:52」和「Brownlee 缺陣」,錢會一面倒湧向澳洲讓分和大分。但這些消息早就在線裡了 —— 而且澳洲已確定晉級,第四節大幅領先就可能換板凳練兵:「贏球、但沒贏夠」的劇本隨時上演。反過來也誠實講:板凳上場後防守也會鬆,分數有時反而變多 —— 兩種劇本都存在,這正是莊家敢把線開得這麼滿的原因。</p>
+  </section>
+
+  <section class="opts">
+    <h2>選項的價格 —— 本報不下指令,只把數學算給你看</h2>
+    <table>
+      <tr><th>選項(台灣運彩)</th><th style="width:11%">賠率</th><th>本報讀法(白話)</th></tr>
+      <tr><td>讓分 · 澳洲 −24.5~−26.5</td><td class="num">1.72</td><td>所有利空都已經在價裡 —— 線貼著上次的分差開,還要防第四節練兵收油門。</td></tr>
+      <tr><td>讓分 · 菲律賓受讓</td><td class="num">1.72</td><td>賭的是澳洲「贏不夠狠」—— 但少了頭號得分手,菲律賓連垃圾時間刷分都缺人。</td></tr>
+      <tr><td>大小 170.5 · 小</td><td class="num">1.73</td><td>全場邏輯最完整的一個價:門檻抬在歷史合計之上,菲律賓還少了 Brownlee、多了二度延長的腿。風險在澳洲換板凳後防守放鬆,分反而變多。</td></tr>
+      <tr><td>大小 170.5 · 大</td><td class="num">1.72</td><td>買的是「兩隊每節合砍 43 分」的節奏 —— 他們上次交手,一節平均只砍 40 分不到。</td></tr>
+      <tr><td>上半場 / 第 1 節 · 澳洲</td><td class="num">1.02 / 1.09</td><td>押 100 賺 2 —— 意外一次,要連對五十次才補得回來。</td></tr>
+      <tr><td>單雙</td><td class="num">1.72</td><td>猜總分尾數是單是雙 = 丟硬幣 —— 本報不分析運氣。</td></tr>
+    </table>
+  </section>
+
+  <section class="rules">
+    <h2>本報的規矩(每期照舊)</h2>
+    <ul>
+      <li>引擎:本場沒開線 —— 國家隊資料不足,算不準就不硬算;有開線的場,全數賽前鎖定、賽後對帳。</li>
+      <li>對帳:今天的每一句判讀,下期第一欄印結果 —— 對了印,錯了也印。</li>
+      <li>本報不代操、不喊穩、不保證獲利;所有紀錄公開:<span class="url">zone27.com.tw/track-record</span></li>
+    </ul>
+  </section>
+
+  <footer>
+    <span>《ZONE 27 戰報》NO. 003 · 免費 · 歡迎店家整頁影印</span>
+    <span>zone27.com.tw · 明日戰報見</span>
+  </footer>
+
+</div>
+</body>
+</html>

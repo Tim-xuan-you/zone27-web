@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<title>ZONE 27 戰報 NO.024 · 馬卡拉 @ 理工大學競技</title>
+<style>
+  /* ── ZONE 27 戰報 · 門店列印版 · A4 一頁 · v18 首刊(避雷先行 · 提醒角度 · 今晚的開關)── */
+  @page { size: A4; margin: 10mm 12mm; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body { font-family: "Microsoft JhengHei", "Noto Sans TC", "PingFang TC", sans-serif;
+    color: #111; background: #e8e8e8; font-size: 10pt; line-height: 1.46; }
+  .sheet { width: 210mm; min-height: 296mm; margin: 0 auto; background: #fff; padding: 11mm 13mm 8mm; }
+  @media print { body { background: #fff; } .sheet { width: auto; min-height: auto; margin: 0; padding: 0; zoom: 0.85; } }
+
+  .masthead { display: flex; justify-content: space-between; align-items: center;
+    border-bottom: 3.5px solid #0F1A2E; padding-bottom: 5px; margin-bottom: 6px; }
+  .brand { font-size: 19pt; font-weight: 900; letter-spacing: 2px; color: #0F1A2E; }
+  .brand .en { font-size: 8pt; font-weight: 600; letter-spacing: 3px; color: #8A6A1F; display: block; margin-top: 1px; }
+  .sportbox { display: flex; align-items: center; gap: 10px; }
+  .sportbox .name { font-size: 22pt; font-weight: 900; color: #0F1A2E; letter-spacing: 4px; line-height: 1.1; }
+  .sportbox .sub { font-size: 8.5pt; color: #666; letter-spacing: 2px; display: block; margin-top: 1px; }
+  .sportbox .no { text-align: right; font-size: 8.5pt; color: #444; line-height: 1.5; border-left: 1px solid #ccc; padding-left: 10px; }
+  .sportbox .no b { color: #0F1A2E; }
+
+  .match { margin-bottom: 5px; }
+  .match .comp { font-size: 9pt; font-weight: 700; color: #8A6A1F; letter-spacing: 2px; }
+  .match h1 { font-size: 19pt; font-weight: 900; color: #0F1A2E; letter-spacing: 1px; line-height: 1.3; }
+  .match .meta { font-size: 9.5pt; color: #444; margin-top: 2px; }
+
+  .tldr { background: #0F1A2E; color: #E9E4D8; padding: 6px 12px; margin-bottom: 5px; }
+  .tldr .tag { font-size: 8pt; letter-spacing: 3px; color: #D4AF37; font-weight: 700; }
+  .tldr p { font-size: 11pt; font-weight: 700; line-height: 1.5; margin-top: 2px; }
+  .tldr b { color: #D4AF37; }
+
+  section { margin-bottom: 5px; }
+  h2 { font-size: 11pt; font-weight: 800; color: #0F1A2E; letter-spacing: 1.5px;
+    border-left: 4px solid #8A6A1F; padding-left: 7px; margin-bottom: 3px; }
+
+  .avoid table, .keep table { width: 100%; border-collapse: collapse; font-size: 9.8pt; }
+  .avoid th, .avoid td, .keep th, .keep td { border: 1px solid #ccc; padding: 4px 7px; text-align: left; vertical-align: middle; }
+  .avoid th, .keep th { background: #EFEBE0; color: #0F1A2E; font-size: 9pt; letter-spacing: 1px; }
+  .avoid td.num, .keep td.num { text-align: center; white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .avoid td.mark { text-align: center; color: #333; font-weight: 900; font-size: 12pt; width: 8%; }
+  .avoid tr.dead td { color: #777; background: #f3f3f3; }
+  .avoid tr.dead td.name, .avoid tr.dead td.num { text-decoration: line-through; text-decoration-thickness: 1.5px; text-decoration-color: #444; }
+  .keep td.star { text-align: center; white-space: nowrap; color: #8A6A1F; font-weight: 900; font-size: 10.5pt; width: 9%; }
+  .note { font-size: 8.5pt; color: #666; margin-top: 2px; }
+
+  .facts { counter-reset: fact; }
+  .facts li { list-style: none; padding-left: 17px; position: relative; margin-bottom: 2px; }
+  .facts li::before { content: counter(fact) ""; counter-increment: fact; position: absolute; left: 0;
+    font-weight: 900; color: #8A6A1F; font-size: 10.5pt; }
+
+  .switch { border: 2px solid #0F1A2E; padding: 7px 11px; background: #FAFAF7; }
+  .switch .tag { font-size: 8pt; letter-spacing: 2px; color: #8A6A1F; font-weight: 800; }
+  .switch h3 { font-size: 13pt; font-weight: 900; color: #0F1A2E; margin: 2px 0 3px; letter-spacing: 0.5px; }
+  .switch p.lead { font-size: 9.8pt; margin-bottom: 4px; }
+  .branch { display: flex; gap: 8px; margin: 3px 0; align-items: flex-start; }
+  .branch .k { flex: 0 0 58px; text-align: center; font-weight: 900; font-size: 9.5pt; padding: 2px 0;
+    border: 1.5px solid #0F1A2E; color: #0F1A2E; }
+  .branch.on .k { background: #0F1A2E; color: #E9E4D8; }
+  .branch p { font-size: 9.8pt; flex: 1; }
+
+  .board { border: 2.5px solid #8A6A1F; background: #FAF6EC; padding: 7px 12px; }
+  .board .tag { font-size: 8pt; letter-spacing: 3px; color: #8A6A1F; font-weight: 800; }
+  .board h3 { font-size: 13pt; font-weight: 900; color: #0F1A2E; letter-spacing: 0.5px; margin: 2px 0 3px; }
+  .board p { font-size: 9.8pt; line-height: 1.5; }
+
+  .baseline { border-top: 3px solid #0F1A2E; margin-top: 6px; padding-top: 5px;
+    display: flex; justify-content: space-between; gap: 12px; font-size: 8pt; color: #555; line-height: 1.6; }
+  .baseline .right { text-align: right; white-space: nowrap; }
+  .baseline b { color: #0F1A2E; }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <div class="masthead">
+    <div class="brand">ZONE 27 戰報
+      <span class="en">THE PRE-MATCH BRIEF</span>
+    </div>
+    <div class="sportbox">
+      <svg width="52" height="52" viewBox="0 0 40 40" aria-hidden="true">
+        <circle cx="20" cy="20" r="17" fill="none" stroke="#0F1A2E" stroke-width="2.2"/>
+        <path d="M20 15 L24.76 18.45 L22.94 24.05 L17.06 24.05 L15.24 18.45 Z" fill="none" stroke="#0F1A2E" stroke-width="1.6"/>
+        <path d="M20 15 L20 4 M24.76 18.45 L33 13 M22.94 24.05 L30 32 M17.06 24.05 L10 32 M15.24 18.45 L7 13" stroke="#8A6A1F" stroke-width="1.4"/>
+      </svg>
+      <div>
+        <span class="name">足 球</span>
+        <span class="sub">厄瓜多甲級</span>
+      </div>
+      <div class="no">
+        <b>NO. 024</b><br>2026 · 07 · 11
+      </div>
+    </div>
+  </div>
+
+  <div class="match">
+    <div class="comp">厄瓜多甲級聯賽 · 第 18 輪 · 安巴托同城德比</div>
+    <h1>馬卡拉 @ 理工大學競技</h1>
+    <div class="meta">貝拉維斯塔球場(安巴托 · 兩隊共用)· 台北明早(六)8:15 開踢</div>
+    <div class="meta">兩隊同為 23 分:理工第 7(7 勝 2 和 8 敗)· 馬卡拉第 8(6 勝 5 和 6 敗)</div>
+  </div>
+
+  <div class="tldr">
+    <span class="tag">10 秒看完</span>
+    <p>這場的主客標籤是空的 —— <b>兩隊共用同一座球場</b>,這是同城德比。市場把兩隊開成銅板,開得誠實;真正要提醒的,是三張太貴的票(下表)。開賽半小時,劇本自己會說話(見末欄)。</p>
+  </div>
+
+  <section class="avoid">
+    <h2>先提醒 —— 這三種,放下比較好</h2>
+    <table>
+      <tr><th style="width:31%">哪種盤</th><th style="width:10%">賠率</th><th style="width:8%"></th><th>提醒你的理由</th></tr>
+      <tr class="dead"><td class="name">理工 受讓一球(輸一球內都算贏)</td><td class="num">1.35</td><td class="mark">×</td>
+        <td>每 4 次要中 3 次才不虧 —— 賺頭太薄,爆冷一次,前面賺的全吐回去。</td></tr>
+      <tr class="dead"><td class="name">半場 / 全場:馬卡拉 / 馬卡拉</td><td class="num">3.75</td><td class="mark">×</td>
+        <td>要它先領先、再守滿全場 —— 這是兩件難事疊在一起,價卻只給一件事的錢。</td></tr>
+      <tr class="dead"><td class="name">全場零進球(沒有人進球)</td><td class="num">5.60</td><td class="mark">×</td>
+        <td>九十分鐘一顆球都沒有的比賽,一季也沒幾場 —— 賠率看著高,發生的次數更少。</td></tr>
+    </table>
+    <p class="note">提醒是價格判斷,不是輸贏預測 —— 它們照樣可能中,只是這種價長期買下來會吃虧。</p>
+  </section>
+
+  <section class="keep">
+    <h2>剩下的 —— 才值得花腦筋</h2>
+    <table>
+      <tr><th style="width:31%">哪種盤</th><th style="width:10%">賠率</th><th style="width:9%">星級</th><th>白話講</th></tr>
+      <tr><td>上半場 和局</td><td class="num">1.70</td><td class="star">★★</td>
+        <td>德比開局互相試探,是真的常見 —— 但這個價只能算公道,不是撿到便宜。</td></tr>
+      <tr><td>不讓分:理工大學競技</td><td class="num">2.35</td><td class="star">★★</td>
+        <td>銅板的價,配上最近贏比較多的那一隊(見第 2 件事)—— 至少理由站得直。</td></tr>
+      <tr><td>不讓分:馬卡拉</td><td class="num">2.30</td><td class="star">★</td>
+        <td>市場稍微偏它一點點 —— 但翻開兩隊最近的比賽,看不出它憑什麼比較貴。</td></tr>
+      <tr><td>全場 小 2.5(進 2 球以內)</td><td class="num">1.40</td><td class="star">★</td>
+        <td>悶戰劇本可以想 —— 但跟受讓那格同一個毛病:劇本對,票太貴。</td></tr>
+    </table>
+    <p class="note">單雙這類猜銅板的玩法,本報不評 —— 台灣運彩賠率以現場為準。</p>
+  </section>
+
+  <section>
+    <h2>三件你查不到的事</h2>
+    <ul class="facts">
+      <li><b>「主場」兩個字,這場是空的。</b>單子上一隊掛主、一隊掛客 —— 但兩隊同在安巴托市,平常就共用這座貝拉維斯塔球場。沒有誰出遠門、沒有誰的球迷比較多,把主場優勢從你的計算裡刪掉。</li>
+      <li><b>你看到的「近況」,中間隔了一個月。</b>理工近五場贏四場,馬卡拉兩勝兩敗一和 —— 溫差是真的。但聯賽為了世界盃休兵一個月,上週才恢復:一個月前的勢頭今晚還算不算數,是全場最大的問號。</li>
+      <li><b>兩隊搶的是同一張門票。</b>積分一模一樣、排名貼著,兩隊都卡在搶南美盃資格圈的位置 —— 這不是可有可無的中段班之戰,是同一張票的兩個人面對面。</li>
+    </ul>
+  </section>
+
+  <section class="switch">
+    <span class="tag">今晚的開關 —— 開賽後,只盯這一件事</span>
+    <h3>開場半小時,有沒有人進球</h3>
+    <p class="lead">德比的第一顆球,決定整晚的劇本 —— 而且兩邊都輸不起。</p>
+    <div class="branch on">
+      <span class="k">還是 0:0</span>
+      <p>悶戰劇本成立 —— 上半場和局、小分的「方向」對了。方向對,價還是那個價,別因為對了半小時就加碼。</p>
+    </div>
+    <div class="branch">
+      <span class="k">有人進球</span>
+      <p>落後那邊被迫打開大門對攻 —— 悶戰劇本死,這晚會越踢越開,小分和半場和局一起陪葬。</p>
+    </div>
+    <p class="lead" style="margin-top:4px;">我們不猜開關往哪邊倒 —— 我們只告訴你,決定這一晚的就是這個開關。</p>
+  </section>
+
+  <section class="board">
+    <span class="tag">本期看板</span>
+    <h3>先刪掉「主場」兩個字,再看這一桌</h3>
+    <p>這桌最大的陷阱不是哪一個價,是「主場」這個標籤 —— 它這場是空的。把它刪掉,用積分和近況重新看一遍,你會發現市場開的銅板局其實開得誠實。銅板局裡,長期會贏的人只做一件事:不付貴的票。尺給你了,怎麼下是你的事。</p>
+  </section>
+
+  <div class="baseline">
+    <span>星星是價格評論,不是輸贏預測 · 本報不收博彩業者的廣告與贊助 · 不保證獲利<br>資料:厄瓜多聯賽官方 · 台灣運彩</span>
+    <span class="right"><b>《ZONE 27 戰報》NO. 024</b> · 免費 · 歡迎店家整頁影印<br>zone27.com.tw</span>
+  </div>
+
+</div>
+</body>
+</html>

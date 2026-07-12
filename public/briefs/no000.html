@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<title>ZONE 27 戰報 · 英格蘭 @ 墨西哥 · 2026-07-06</title>
+<style>
+  /* ── ZONE 27 戰報 · 門店列印版 · A4 一頁 ── */
+  @page { size: A4; margin: 10mm 12mm; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body {
+    font-family: "Microsoft JhengHei", "Noto Sans TC", "PingFang TC", sans-serif;
+    color: #111; background: #e8e8e8; font-size: 9.8pt; line-height: 1.44;
+  }
+  .sheet {
+    width: 210mm; min-height: 296mm; margin: 0 auto; background: #fff;
+    padding: 11mm 13mm 8mm;
+  }
+  @media print {
+    body { background: #fff; }
+    .sheet { width: auto; min-height: auto; margin: 0; padding: 0; zoom: 0.92; }
+  }
+
+  /* 報頭 */
+  .masthead { display: flex; justify-content: space-between; align-items: flex-end;
+    border-bottom: 3.5px solid #0F1A2E; padding-bottom: 6px; }
+  .masthead .brand { font-size: 19pt; font-weight: 900; letter-spacing: 2px; color: #0F1A2E; }
+  .masthead .brand .en { font-size: 8pt; font-weight: 600; letter-spacing: 3px; color: #8A6A1F; display: block; margin-top: 1px; }
+  .masthead .issue { text-align: right; font-size: 8.5pt; color: #444; line-height: 1.5; }
+  .masthead .issue b { color: #0F1A2E; }
+  .tagline { display: flex; justify-content: space-between; font-size: 8.5pt; color: #555;
+    border-bottom: 1px solid #bbb; padding: 3px 1px 4px; margin-bottom: 9px; letter-spacing: 1px; }
+
+  /* 對戰標題 */
+  .match { margin-bottom: 6px; }
+  .match .comp { font-size: 9pt; font-weight: 700; color: #8A6A1F; letter-spacing: 2px; }
+  .match h1 { font-size: 20pt; font-weight: 900; color: #0F1A2E; letter-spacing: 1px; line-height: 1.25; }
+  .match .meta { font-size: 9pt; color: #444; margin-top: 2px; }
+
+  /* 區塊 */
+  section { margin-bottom: 6px; }
+  h2 { font-size: 10.5pt; font-weight: 800; color: #0F1A2E; letter-spacing: 1.5px;
+    border-left: 4px solid #8A6A1F; padding-left: 7px; margin-bottom: 4px; }
+  p { margin-bottom: 3px; }
+  .facts li { list-style: none; padding-left: 16px; position: relative; margin-bottom: 3px; }
+  .facts li::before { content: "▪"; position: absolute; left: 2px; color: #8A6A1F; }
+  .small { font-size: 8.5pt; color: #555; }
+
+  /* 盤口解剖 */
+  .vig { background: #F5F3EE; border: 1px solid #d8d2c2; padding: 7px 9px; }
+  .vig table { width: 100%; border-collapse: collapse; font-size: 9.5pt; margin: 4px 0 5px; }
+  .vig th, .vig td { border: 1px solid #cfc8b6; padding: 3px 6px; text-align: center; }
+  .vig th { background: #0F1A2E; color: #fff; font-weight: 700; font-size: 9pt; }
+  .vig .sum { font-weight: 800; color: #8A6A1F; }
+
+  /* 選項價格表 */
+  .opts table { width: 100%; border-collapse: collapse; font-size: 9.5pt; }
+  .opts th, .opts td { border: 1px solid #ccc; padding: 3.5px 6px; text-align: left; vertical-align: top; }
+  .opts th { background: #EFEBE0; color: #0F1A2E; font-size: 9pt; }
+  .opts td.num { text-align: center; white-space: nowrap; font-variant-numeric: tabular-nums; }
+
+  /* 引擎 vs 主編 */
+  .engine { border: 2px solid #0F1A2E; padding: 7px 10px; background: #fff; }
+  .engine .line { font-size: 12pt; font-weight: 800; color: #0F1A2E; margin: 2px 0 3px; letter-spacing: 1px; }
+  .engine .line b { color: #8A6A1F; }
+
+  /* 誠實框 */
+  .honest { background: #0F1A2E; color: #E9E4D8; padding: 8px 11px; }
+  .honest h2 { color: #fff; border-left-color: #D4AF37; margin-bottom: 3px; }
+  .honest p { font-size: 9pt; line-height: 1.55; color: #D9D3C4; }
+  .honest .url { color: #D4AF37; font-weight: 700; letter-spacing: 0.5px; }
+
+  footer { display: flex; justify-content: space-between; font-size: 8pt; color: #666;
+    border-top: 1px solid #bbb; margin-top: 7px; padding-top: 4px; letter-spacing: 0.5px; }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <div class="masthead">
+    <div class="brand">ZONE 27 戰報
+      <span class="en">THE PRE-MATCH BRIEF</span>
+    </div>
+    <div class="issue">
+      <b>創刊樣張 · NO. 000</b><br>
+      2026 · 07 · 06 · 台北<br>
+      本期:世界盃 16 強
+    </div>
+  </div>
+  <div class="tagline">
+    <span>給運彩玩家的一頁賽前功課</span>
+    <span>不靠直覺 · 只看演算法</span>
+  </div>
+
+  <div class="match">
+    <div class="comp">世界盃 2026 · 16 強淘汰賽</div>
+    <h1>英格蘭 @ 墨西哥</h1>
+    <div class="meta">墨西哥城 · 阿茲特克體育場(海拔 2,240 公尺) · 台北時間 7/6(一)08:00 開賽</div>
+  </div>
+
+  <section>
+    <h2>賽前三個事實</h2>
+    <ul class="facts">
+      <li><b>墨西哥:4 戰全勝 · 一球未失。</b>2-0 南非、1-0 南韓、3-0 客勝捷克、2-0 完封厄瓜多 —— 本屆至今沒有任何球隊攻破過這道防線,而這場回到墨西哥城主場。</li>
+      <li><b>英格蘭:3 勝 1 和,贏得辛苦。</b>4-2 克羅埃西亞後連續熄火:0-0 迦納、2-0 巴拿馬,上一場面對實力遠遜的民主剛果只以 2-1 險勝。招牌還在,統治力還沒開機。</li>
+      <li><b>高原是第三個球員。</b>海拔 2,240 公尺,客隊的體能斷崖通常出現在 60 分鐘之後 —— 下半場中段是這場的觀察窗。</li>
+    </ul>
+    <p class="small">賽果來源:ZONE 27 足球帳本(每場賽後自動入帳,可回查)。</p>
+  </section>
+
+  <section class="vig">
+    <h2>盤口解剖 —— 這個盤抽多少水</h2>
+    <table>
+      <tr><th>不讓分</th><th>英格蘭</th><th>和局</th><th>墨西哥</th><th>三邊合計</th></tr>
+      <tr><td>賠率(台灣運彩)</td><td>1.90</td><td>2.65</td><td>2.75</td><td>—</td></tr>
+      <tr><td>隱含機率(1÷賠率)</td><td>52.6%</td><td>37.7%</td><td>36.4%</td><td class="sum">126.7%</td></tr>
+    </table>
+    <p>三邊機率加總超出 100% 的 <b>26.7 個百分點,就是莊家結構上的利潤空間</b>。白話:這是一個水很重的盤。押 1.90 的英格蘭,你需要 52.6% 以上的長期命中率才打平 —— 賠率沒有給你任何犯錯的空間。</p>
+  </section>
+
+  <section>
+    <h2>名氣 vs 事實</h2>
+    <p>英格蘭有全球球迷基數,散戶資金天然湧向它,賠率被名氣壓低 —— 但<b>名氣不會上場踢球</b>。事實面:狀態、防守、主場、海拔,全在墨西哥這邊。這不是說墨西哥一定贏 —— 是說 1.90 這個價,你買到的是招牌,不是勝率。</p>
+  </section>
+
+  <section class="opts">
+    <h2>選項的價格 —— 本報不下指令,只把數學算給你看</h2>
+    <table>
+      <tr><th>選項(台灣運彩)</th><th style="width:9%">賠率</th><th style="width:15%">打平需要命中</th><th>本報讀法</th></tr>
+      <tr><td>不讓分 · 英格蘭</td><td class="num">1.90</td><td class="num">52.6%</td><td>為名氣付溢價 —— 狀態沒開機又踢高原客場,這個價貴。</td></tr>
+      <tr><td>讓分 0:1 · 墨西哥</td><td class="num">1.45</td><td class="num">69.0%</td><td>價低、邏輯最順:買的是「零失球+主場不敗」的劇本;但 69% 的門檻並不便宜。</td></tr>
+      <tr><td>大小 2.5 · 小</td><td class="num">1.50</td><td class="num">66.7%</td><td>莊家把價開這麼低 = 他們自己的模型在說「進球會很少」。</td></tr>
+      <tr><td>兩隊都進球 · 否</td><td class="num">1.58</td><td class="num">63.3%</td><td>同一個焦土劇本的另一種買法 —— 跟上一列別重複押同一個想法。</td></tr>
+      <tr><td>正確比數 / 角球玩法</td><td class="num">4.0+</td><td class="num">—</td><td>隨機性高、水更重 —— 那是樂透,不是分析。</td></tr>
+    </table>
+  </section>
+
+  <section class="engine">
+    <h2>引擎 vs 主編 —— 我們自己都不同調(所以才好看)</h2>
+    <div class="line">ZONE 27 引擎線(7/4 賽前鎖定 · 改不了):墨西哥 27% · 和局 28% · <b>英格蘭 45%</b></div>
+    <p>引擎站英格蘭 —— 跟本報上面的基本面讀法<b>不同邊</b>。引擎看的是兩隊長期實力分(已含主場加成;海拔不在它的模型裡),本報看的是當下狀態與防守事實。誰對?隔天見真章 —— 引擎每一手賽後公開對帳、含輸。連我們自己都難分的場,正是最值得盯的場。</p>
+  </section>
+
+  <section class="honest">
+    <h2>為什麼沒有人真的有八成</h2>
+    <p>這個盤水位 126.7%,押 1.90 要 52.6% 才打平 —— 若真有人長期八成勝率,複利早讓他不必賣牌維生。本報不代操、不喊穩、不保證獲利:<b>我們賣的,是你賽前三小時的功課。</b>本報與引擎的每一個判斷,賽後全數公開對帳(含輸):<span class="url">zone27.com.tw/track-record</span></p>
+  </section>
+
+  <footer>
+    <span>《ZONE 27 戰報》創刊樣張 · 免費 · 歡迎店家整頁影印</span>
+    <span>zone27.com.tw · 明日戰報見</span>
+  </footer>
+
+</div>
+</body>
+</html>

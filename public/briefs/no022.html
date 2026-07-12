@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<title>ZONE 27 戰報 NO.022 · 威靈頓聖徒 @ 懷伊</title>
+<style>
+  /* ── ZONE 27 戰報 · 門店列印版 · A4 一頁 · v16(刪去法主視覺 · CP值/長期會贏角度) ── */
+  @page { size: A4; margin: 10mm 12mm; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body { font-family: "Microsoft JhengHei", "Noto Sans TC", "PingFang TC", sans-serif;
+    color: #111; background: #e8e8e8; font-size: 10pt; line-height: 1.45; }
+  .sheet { width: 210mm; min-height: 296mm; margin: 0 auto; background: #fff; padding: 11mm 13mm 8mm; }
+  @media print { body { background: #fff; } .sheet { width: auto; min-height: auto; margin: 0; padding: 0; zoom: 0.855; } }
+
+  .masthead { display: flex; justify-content: space-between; align-items: center;
+    border-bottom: 3.5px solid #0F1A2E; padding-bottom: 5px; margin-bottom: 6px; }
+  .brand { font-size: 19pt; font-weight: 900; letter-spacing: 2px; color: #0F1A2E; }
+  .brand .en { font-size: 8pt; font-weight: 600; letter-spacing: 3px; color: #8A6A1F; display: block; margin-top: 1px; }
+  .sportbox { display: flex; align-items: center; gap: 10px; }
+  .sportbox .name { font-size: 22pt; font-weight: 900; color: #0F1A2E; letter-spacing: 4px; line-height: 1.1; }
+  .sportbox .sub { font-size: 8.5pt; color: #666; letter-spacing: 2px; display: block; margin-top: 1px; }
+  .sportbox .no { text-align: right; font-size: 8.5pt; color: #444; line-height: 1.5; border-left: 1px solid #ccc; padding-left: 10px; }
+  .sportbox .no b { color: #0F1A2E; }
+
+  .match { margin-bottom: 5px; }
+  .match .comp { font-size: 9pt; font-weight: 700; color: #8A6A1F; letter-spacing: 2px; }
+  .match h1 { font-size: 19pt; font-weight: 900; color: #0F1A2E; letter-spacing: 1px; line-height: 1.3; }
+  .match .meta { font-size: 9.5pt; color: #444; margin-top: 2px; }
+
+  .tldr { background: #0F1A2E; color: #E9E4D8; padding: 6px 12px; margin-bottom: 4px; }
+  .tldr .tag { font-size: 8pt; letter-spacing: 3px; color: #D4AF37; font-weight: 700; }
+  .tldr p { font-size: 11pt; font-weight: 700; line-height: 1.5; margin-top: 2px; }
+  .tldr b { color: #D4AF37; }
+
+  section { margin-bottom: 4px; }
+  h2 { font-size: 11pt; font-weight: 800; color: #0F1A2E; letter-spacing: 1.5px;
+    border-left: 4px solid #8A6A1F; padding-left: 7px; margin-bottom: 3px; }
+  .facts { counter-reset: fact; }
+  .facts li { list-style: none; padding-left: 17px; position: relative; margin-bottom: 2px; }
+  .facts li::before { content: counter(fact) ""; counter-increment: fact; position: absolute; left: 0;
+    font-weight: 900; color: #8A6A1F; font-size: 10.5pt; }
+
+  .calc { background: #F5F3EE; border: 1px solid #d8d2c2; padding: 5px 10px; }
+  .calc table { width: 100%; border-collapse: collapse; font-size: 9.7pt; margin-top: 3px; }
+  .calc td { border: 1px solid #cfc8b6; padding: 3px 7px; background: #fff; }
+  .calc td.k { width: 40%; font-weight: 700; color: #0F1A2E; background: #FAF8F2; }
+
+  .menu table { width: 100%; border-collapse: collapse; font-size: 9.7pt; }
+  .menu th, .menu td { border: 1px solid #ccc; padding: 3px 6px; text-align: left; vertical-align: middle; }
+  .menu th { background: #EFEBE0; color: #0F1A2E; font-size: 9pt; letter-spacing: 1px; }
+  .menu td.num { text-align: center; white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .menu td.star { text-align: center; white-space: nowrap; color: #8A6A1F; font-weight: 900; font-size: 10.5pt; letter-spacing: 1px; }
+  .menu tr.zonehead td { background: #0F1A2E; color: #E9E4D8; font-size: 8.5pt; font-weight: 800;
+    letter-spacing: 2px; padding: 2px 8px; border: 1px solid #0F1A2E; }
+  .menu tr.zonehead.keep td { background: #FAF6EC; color: #8A6A1F; border: 1px solid #ccc; }
+  .menu tr.dead td { color: #8a8a8a; background: #f3f3f3; }
+  .menu tr.dead td.name, .menu tr.dead td.num { text-decoration: line-through; text-decoration-thickness: 1.5px; text-decoration-color: #444; }
+  .menu td.x { text-align: center; color: #333; font-weight: 900; font-size: 12pt; text-decoration: none; }
+  .menu .skip { font-size: 8.5pt; color: #666; margin-top: 2px; }
+
+  .contra { border: 1px dashed #999; padding: 5px 10px; }
+  .contra li { list-style: none; padding-left: 14px; position: relative; margin-bottom: 2px; font-size: 9.7pt; }
+  .contra li::before { content: "▲"; position: absolute; left: 0; color: #666; font-size: 8pt; top: 2px; }
+
+  .board { border: 2.5px solid #8A6A1F; background: #FAF6EC; padding: 7px 12px; }
+  .board .tag { font-size: 8pt; letter-spacing: 3px; color: #8A6A1F; font-weight: 800; }
+  .board h3 { font-size: 13pt; font-weight: 900; color: #0F1A2E; letter-spacing: 0.5px; margin: 2px 0 3px; }
+  .board p { font-size: 9.7pt; line-height: 1.5; }
+
+  .baseline { border-top: 3px solid #0F1A2E; margin-top: 6px; padding-top: 5px;
+    display: flex; justify-content: space-between; gap: 12px; font-size: 8pt; color: #555; line-height: 1.6; }
+  .baseline .right { text-align: right; white-space: nowrap; }
+  .baseline b { color: #0F1A2E; }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <div class="masthead">
+    <div class="brand">ZONE 27 戰報
+      <span class="en">THE PRE-MATCH BRIEF</span>
+    </div>
+    <div class="sportbox">
+      <svg width="52" height="52" viewBox="0 0 40 40" aria-hidden="true">
+        <circle cx="20" cy="20" r="17" fill="none" stroke="#0F1A2E" stroke-width="2.2"/>
+        <path d="M20 3 L20 37 M3 20 L37 20" stroke="#0F1A2E" stroke-width="1.6"/>
+        <path d="M8 6.5 C14 13, 14 27, 8 33.5" fill="none" stroke="#8A6A1F" stroke-width="1.6"/>
+        <path d="M32 6.5 C26 13, 26 27, 32 33.5" fill="none" stroke="#8A6A1F" stroke-width="1.6"/>
+      </svg>
+      <div>
+        <span class="name">籃 球</span>
+        <span class="sub">紐西蘭 NBL</span>
+      </div>
+      <div class="no">
+        <b>NO. 022</b><br>2026 · 07 · 10
+      </div>
+    </div>
+  </div>
+
+  <div class="match">
+    <div class="comp">紐西蘭國家籃球聯賽 · 例行賽</div>
+    <h1>威靈頓聖徒 @ 懷伊</h1>
+    <div class="meta">陶朗加(懷伊主場)· 台北今天(五)下午 2:30 開球</div>
+    <div class="meta">聖徒 11 勝 4 敗(第 4)· 懷伊 6 勝 10 敗(第 6)· 每 100 分交手,聖徒平均多贏 11 分、懷伊倒輸 4 分</div>
+  </div>
+
+  <div class="tldr">
+    <span class="tag">10 秒看完</span>
+    <p>今晚的菜單,本報先幫你劃掉三道 —— 剩下的是公道價,<b>沒有甜價</b>。看點一個:對懷伊,這是提前開打的季後賽;對聖徒,只是連戰的第一站。<b>兩隊心裡想的不是同一場比賽。</b></p>
+  </div>
+
+  <section>
+    <h2>三件你查不到的事</h2>
+    <ul class="facts">
+      <li><b>對懷伊,今晚就是季後賽。</b>季賽剩四場,懷伊最多只能贏到 10 勝 —— 想擠進前六打季後賽,幾乎一場都不能掉。第一關,就是今晚。</li>
+      <li><b>聖徒的腦子裡,裝的是下一場。</b>今晚是 15 天 5 場連戰的開頭,兩天後主場就要碰排名第 3 的公羊 —— 那場才是天梯之戰。而且這兩隊 8 天內要交手兩次,力氣怎麼留,教練自己也在算。</li>
+      <li><b>聖徒作客陶朗加,翻過車。</b>去年五月就在這座城市,懷伊 82 比 78 咬下聖徒;之後兩次交手,聖徒都贏 20 分以上。實力差是真的 —— 但這座客場,去年就出過事。</li>
+    </ul>
+  </section>
+
+  <section class="calc">
+    <h2>本報算的數字 —— 這裡才有</h2>
+    <table>
+      <tr><td class="k">聖徒不讓分(賠 1.16)= 賭聖徒贏就好</td><td>要不虧,10 次得中 8.6 次(86%)。聖徒本季勝率 73% —— 戰績配不上標價。</td></tr>
+      <tr><td class="k">讓分兩檔:聖徒 −7.5 / 懷伊 +9.5</td><td>賠 1.56 要 10 次中 6.4 次;賠 1.63 要中 6.1 次 —— 兩邊門檻都在六成上下。</td></tr>
+      <tr><td class="k">大 / 小 181.5(賠 1.70 / 1.73)</td><td>把價拆開,市場真心話是五五波 —— 但兩邊都要你 10 次中近 6 次。銅板局,賣非銅板的價。</td></tr>
+      <tr><td class="k">兩條讓分線之間的縫</td><td>聖徒剛好贏 8 或 9 分,兩張同時中 —— 縫只有 2 分寬。不是叫你怎麼買,是讓你看懂線開在哪。</td></tr>
+    </table>
+  </section>
+
+  <section class="menu">
+    <h2>今晚的菜單 · 先刪,再挑 —— 星星評的是價格,不是輸贏</h2>
+    <table>
+      <tr><th style="width:31%">怎麼買(台灣運彩)</th><th style="width:10%">賠率</th><th style="width:9%">星級</th><th>白話講</th></tr>
+      <tr class="zonehead"><td colspan="4">本報先劃掉 —— 長期買下去,錢會被慢慢磨光的三道</td></tr>
+      <tr class="dead"><td class="name">聖徒不讓分</td><td class="num">1.16</td><td class="x">×</td>
+        <td>賺頭太薄:錯一次,要連對六場多才補得回來(門檻見上表)。</td></tr>
+      <tr class="dead"><td class="name">第一節 / 上半場 剛好和局</td><td class="num">10.0</td><td class="x">×</td>
+        <td>「剛好打平」發生的次數,撐不起這個賠率。看著香而已。</td></tr>
+      <tr class="dead"><td class="name">勝分差(猜 5 分區間)</td><td class="num">最高 30.0</td><td class="x">×</td>
+        <td>要同時猜對誰贏、又贏幾分 —— 是樂透,不是分析。</td></tr>
+      <tr class="zonehead keep"><td colspan="4">刪完剩下的 —— 能上桌,但都只是公道,不是甜</td></tr>
+      <tr><td>聖徒 讓 7.5 分</td><td class="num">1.56</td><td class="star">★★</td>
+        <td>唯一有討論空間的區間 —— 想買強隊,這格比不讓分老實。</td></tr>
+      <tr><td>懷伊 受讓 9.5 分</td><td class="num">1.63</td><td class="star">★★</td>
+        <td>站另一邊的理由也真:主場、退無可退、去年在這裡翻過聖徒。</td></tr>
+      <tr><td>大 / 小 181.5</td><td class="num">1.70 / 1.73</td><td class="star">★</td>
+        <td>銅板局付非銅板的錢(見上表),長期吃虧。</td></tr>
+    </table>
+    <p class="skip">台灣運彩賠率以現場為準,本報評的是各選項的價格位置。</p>
+  </section>
+
+  <section class="contra">
+    <h2>兩邊各自的地雷,先幫你踩過</h2>
+    <ul>
+      <li><b>買聖徒讓分的地雷:</b>連戰第一場,強隊最容易「贏球不贏分」—— 分差在最後一節縮水。</li>
+      <li><b>買懷伊受讓的地雷:</b>壓力也可能變包袱 —— 差距真被拉開,墊子一節就沒了。</li>
+      <li><b>看風向前:</b>每個比賽日都有縮短制暖場賽先開打 —— 那是表演賽,別當正賽風向。</li>
+    </ul>
+  </section>
+
+  <section class="board">
+    <span class="tag">本期看板</span>
+    <h3>先刪掉會虧的,剩下的才輪得到眼光</h3>
+    <p>這桌沒有三顆星。刪去法刪完,剩下的只是公道 —— 買了不吃大虧,賺頭要靠你自己的判斷。一邊在打自己的季後賽,一邊惦記著天梯硬仗,這個溫差是今晚唯一值得下功夫的地方。長期會贏的人,不是每場找到便宜,是每場先拒絕貴的。尺給你了,怎麼下是你的事。</p>
+  </section>
+
+  <div class="baseline">
+    <span>星星是價格評論,不是輸贏預測 · 本報不收博彩業者的廣告與贊助 · 不保證獲利<br>資料:Sal's NBL 官方 · 台灣運彩</span>
+    <span class="right"><b>《ZONE 27 戰報》NO. 022</b> · 免費 · 歡迎店家整頁影印<br>zone27.com.tw</span>
+  </div>
+
+</div>
+</body>
+</html>

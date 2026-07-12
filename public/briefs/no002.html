@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<title>ZONE 27 戰報 · 關島 @ 紐西蘭 · 2026-07-06</title>
+<style>
+  /* ── ZONE 27 戰報 · 門店列印版 · A4 一頁 ── */
+  @page { size: A4; margin: 10mm 12mm; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body {
+    font-family: "Microsoft JhengHei", "Noto Sans TC", "PingFang TC", sans-serif;
+    color: #111; background: #e8e8e8; font-size: 9.8pt; line-height: 1.44;
+  }
+  .sheet {
+    width: 210mm; min-height: 296mm; margin: 0 auto; background: #fff;
+    padding: 11mm 13mm 8mm;
+  }
+  @media print {
+    body { background: #fff; }
+    .sheet { width: auto; min-height: auto; margin: 0; padding: 0; zoom: 0.92; }
+  }
+
+  /* 報頭 */
+  .masthead { display: flex; justify-content: space-between; align-items: flex-end;
+    border-bottom: 3.5px solid #0F1A2E; padding-bottom: 6px; }
+  .masthead .brand { font-size: 19pt; font-weight: 900; letter-spacing: 2px; color: #0F1A2E; }
+  .masthead .brand .en { font-size: 8pt; font-weight: 600; letter-spacing: 3px; color: #8A6A1F; display: block; margin-top: 1px; }
+  .masthead .issue { text-align: right; font-size: 8.5pt; color: #444; line-height: 1.5; }
+  .masthead .issue b { color: #0F1A2E; }
+  .tagline { display: flex; justify-content: space-between; font-size: 8.5pt; color: #555;
+    border-bottom: 1px solid #bbb; padding: 3px 1px 4px; margin-bottom: 8px; letter-spacing: 1px; }
+
+  /* 對戰標題 */
+  .match { margin-bottom: 6px; }
+  .match .comp { font-size: 9pt; font-weight: 700; color: #8A6A1F; letter-spacing: 2px; }
+  .match h1 { font-size: 20pt; font-weight: 900; color: #0F1A2E; letter-spacing: 1px; line-height: 1.25; }
+  .match .meta { font-size: 9pt; color: #444; margin-top: 2px; }
+
+  /* 10 秒看完 */
+  .tldr { background: #0F1A2E; color: #fff; padding: 6px 10px; margin-bottom: 7px; }
+  .tldr .tag { font-size: 8pt; letter-spacing: 2px; color: #D4AF37; font-weight: 700; }
+  .tldr p { font-size: 10.5pt; font-weight: 700; line-height: 1.5; margin-top: 2px; }
+
+  /* 大字數據列 */
+  .bignums { display: flex; gap: 6px; margin-bottom: 6px; }
+  .bignums .cell { flex: 1; border: 1px solid #d8d2c2; background: #FBF9F4; text-align: center; padding: 4px 2px 3px; }
+  .bignums .n { font-size: 15pt; font-weight: 900; color: #0F1A2E; line-height: 1.1; font-variant-numeric: tabular-nums; }
+  .bignums .l { font-size: 7.5pt; color: #666; letter-spacing: 1px; margin-top: 1px; }
+
+  /* 區塊 */
+  section { margin-bottom: 5px; }
+  h2 { font-size: 10.5pt; font-weight: 800; color: #0F1A2E; letter-spacing: 1.5px;
+    border-left: 4px solid #8A6A1F; padding-left: 7px; margin-bottom: 3px; }
+  p { margin-bottom: 3px; }
+  .facts li { list-style: none; padding-left: 15px; position: relative; margin-bottom: 2px; }
+  .facts li::before { content: "▪"; position: absolute; left: 2px; color: #8A6A1F; }
+  .small { font-size: 8.5pt; color: #555; }
+
+  /* 圖:上次分差 vs 盤口門檻 */
+  .fig { background: #F5F3EE; border: 1px solid #d8d2c2; padding: 6px 9px 7px; }
+  .fig .row { display: flex; align-items: center; gap: 7px; margin-top: 4px; }
+  .fig .lbl { width: 118px; font-size: 8.5pt; color: #333; text-align: right; flex-shrink: 0; }
+  .fig .track { flex: 1; background: #E4DFD2; height: 12px; position: relative; }
+  .fig .bar { height: 12px; }
+  .fig .bar.past { background: #8A93A8; width: 64%; }   /* 32 / 50 */
+  .fig .bar.line { background: #0F1A2E; width: 85%; }   /* 42.5 / 50 */
+  .fig .val { font-size: 9.5pt; font-weight: 800; color: #0F1A2E; width: 58px; flex-shrink: 0; font-variant-numeric: tabular-nums; }
+  .fig .cap { font-size: 8.5pt; color: #555; margin-top: 5px; }
+
+  /* 圖:抽水條(每 100 元) */
+  .vigbar { display: flex; height: 17px; margin: 5px 0 3px; font-size: 8pt; font-weight: 700; }
+  .vigbar .play { background: #E4DFD2; color: #333; width: 83.7%; display: flex; align-items: center; padding-left: 7px; }
+  .vigbar .house { background: #0F1A2E; color: #D4AF37; width: 16.3%; display: flex; align-items: center; justify-content: center; }
+
+  /* 選項價格表 */
+  .opts table { width: 100%; border-collapse: collapse; font-size: 9.5pt; }
+  .opts th, .opts td { border: 1px solid #ccc; padding: 3px 5px; text-align: left; vertical-align: top; }
+  .opts th { background: #EFEBE0; color: #0F1A2E; font-size: 9pt; }
+  .opts td.num { text-align: center; white-space: nowrap; font-variant-numeric: tabular-nums; }
+
+  /* 引擎欄 + 明日對帳 */
+  .engine { border: 2px solid #0F1A2E; padding: 5px 10px; background: #fff; }
+  .tomorrow { border: 1.5px dashed #8A6A1F; padding: 5px 10px; background: #FBF9F4; }
+  .tomorrow b { color: #8A6A1F; }
+
+  /* 誠實框 */
+  .honest { background: #0F1A2E; color: #E9E4D8; padding: 7px 10px; }
+  .honest h2 { color: #fff; border-left-color: #D4AF37; margin-bottom: 3px; }
+  .honest p { font-size: 9pt; line-height: 1.55; color: #D9D3C4; }
+  .honest .url { color: #D4AF37; font-weight: 700; letter-spacing: 0.5px; }
+
+  footer { display: flex; justify-content: space-between; font-size: 8pt; color: #666;
+    border-top: 1px solid #bbb; margin-top: 7px; padding-top: 4px; letter-spacing: 0.5px; }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <div class="masthead">
+    <div class="brand">ZONE 27 戰報
+      <span class="en">THE PRE-MATCH BRIEF</span>
+    </div>
+    <div class="issue">
+      <b>NO. 002</b><br>
+      2026 · 07 · 06 · 台北<br>
+      本期:男籃世界盃資格賽
+    </div>
+  </div>
+  <div class="tagline">
+    <span>給運彩玩家的一頁賽前功課</span>
+    <span>不靠直覺 · 只看演算法</span>
+  </div>
+
+  <div class="match">
+    <div class="comp">2027 世界盃男籃 · 亞太區資格賽 A 組</div>
+    <h1>關島 @ 紐西蘭</h1>
+    <div class="meta">7/6(一) · 紐西蘭主場 · 關島本組 0 勝墊底 · 這場沒有「誰會贏」,只有「贏幾分」</div>
+  </div>
+
+  <div class="tldr">
+    <span class="tag">10 秒看完</span>
+    <p>誰會贏沒有懸念。盤口問的是:紐西蘭能贏超過 42.5 分嗎?上次交手只贏 32 分,三天前又剛打完二度延長。這期結論一句:<u>沒有好價的時候,不押就是贏。</u></p>
+  </div>
+
+  <div class="bignums">
+    <div class="cell"><div class="n">42.5</div><div class="l">這次的讓分線</div></div>
+    <div class="cell"><div class="n">32</div><div class="l">上次實際分差(3/1)</div></div>
+    <div class="cell"><div class="n">58.1%</div><div class="l">1.72 的打平門檻</div></div>
+    <div class="cell"><div class="n">1.01</div><div class="l">第 1 節紐西蘭:押百賺一</div></div>
+  </div>
+
+  <section class="fig">
+    <h2>一張圖看懂這條線有多高</h2>
+    <div class="row">
+      <span class="lbl">上次交手分差(3/1)</span>
+      <span class="track"><span class="bar past"></span></span>
+      <span class="val">32 分</span>
+    </div>
+    <div class="row">
+      <span class="lbl">這次盤口要求</span>
+      <span class="track"><span class="bar line"></span></span>
+      <span class="val">43 分↑</span>
+    </div>
+    <p class="cap">線比上次實際分差<b>還高 11 分</b> —— 等於每節要贏 11 分、40 分鐘不鬆手。</p>
+  </section>
+
+  <section>
+    <h2>賽前三個事實</h2>
+    <ul class="facts">
+      <li><b>實力差是真的。</b>關島 4 戰全敗墊底,首循環 99:67 輸紐西蘭、對澳洲慘敗 72 分 ——「誰會贏」市場沒有分歧。</li>
+      <li><b>紐西蘭的腿是問號。</b>7/3 才跟菲律賓打到二度延長,三天後再上場 —— 主力疲勞的比賽,常見的不是輸,是「贏得沒那麼狠」。</li>
+      <li><b>大勝的天敵是第四節。</b>勝負提早確定,強隊就換板凳練兵、弱隊為榮譽拚到底 ——「贏球但沒贏夠 42.5」是這種盤最常見的結局。</li>
+    </ul>
+    <p class="small">賽果來源:FIBA 官方與公開報導彙整(99:67、二度延長皆有據)· 賠率:台灣運彩。</p>
+  </section>
+
+  <section>
+    <h2>盤口解剖 —— 你的 100 元,先被切走一塊</h2>
+    <p>這場每種玩法(讓分、大小、單雙)兩邊賠率<b>全是 1.72</b>:兩邊機率加總 116.3%,多出的 16.3% 是莊家先收的過路費 ——</p>
+    <div class="vigbar">
+      <div class="play">83.7 元 —— 真正拿去對賭的部分</div>
+      <div class="house">16.3 元 先繳</div>
+    </div>
+    <p class="small">國際標準價約 1.90(打平 52.6%);1.72 要 58.1% —— 水比標準重一截。</p>
+  </section>
+
+  <section class="opts">
+    <h2>選項的價格 —— 本報不下指令,只把數學算給你看</h2>
+    <table>
+      <tr><th>選項(台灣運彩)</th><th style="width:9%">賠率</th><th style="width:14%">打平需要命中</th><th>本報讀法(白話)</th></tr>
+      <tr><td>讓分 -42.5 · 紐西蘭</td><td class="num">1.72</td><td class="num">58.1%</td><td>要贏 43 分以上。上次只贏 32,這次還帶著延長賽疲勞 —— 線開在歷史之上。</td></tr>
+      <tr><td>讓分 +42.5 · 關島</td><td class="num">1.72</td><td class="num">58.1%</td><td>賭的是紐西蘭「贏不夠狠」—— 第四節垃圾時間是這邊唯一的朋友。</td></tr>
+      <tr><td>大小 169.5</td><td class="num">1.72</td><td class="num">58.1%</td><td>合計超過 169.5 算大。關島拖節奏、紐西蘭換二軍 → 分變少 —— 全場唯一能做功課的變數。</td></tr>
+      <tr><td>單雙</td><td class="num">1.72</td><td class="num">58.1%</td><td>丟硬幣還先繳 16.3% —— 本報不分析運氣。</td></tr>
+      <tr><td>第 1 節不讓分 · 紐西蘭</td><td class="num">1.01</td><td class="num">99.0%</td><td>押 100 賺 1 —— 爆一次,要連對一百次補回來。</td></tr>
+    </table>
+  </section>
+
+  <section class="engine">
+    <h2>ZONE 27 引擎 —— 本場沒開線</h2>
+    <p class="small" style="font-size:9.5pt; color:#333;">我們的籃球引擎目前只算資料完整的聯賽,國家隊資格賽資料不足 —— <b>算不準,就不硬算</b>。引擎有開線的場,每一手賽前鎖定、賽後公開對帳(含輸):<b>zone27.com.tw</b></p>
+  </section>
+
+  <section class="tomorrow">
+    <p class="small" style="font-size:9.5pt; color:#333;"><b>明日見真章</b> —— 本報今天的每一句判讀,下期第一欄先對帳:對了印,錯了也印。敢每天攤開對帳的戰報,全台灣只有這一份。</p>
+  </section>
+
+  <section class="honest">
+    <h2>這期的結論:不押,也是一手</h2>
+    <p>功課做完:每個選項都先繳 16.3% 的水,唯一有懸念的「贏幾分」偏偏變數最大 —— <b>把錢留在口袋,你就先贏了那 16.3%</b>。會叫你「今天別下」的分析,只有這裡看得到。不代操、不喊穩、不保證獲利;判讀賽後公開對帳(含輸):<span class="url">zone27.com.tw/track-record</span></p>
+  </section>
+
+  <footer>
+    <span>《ZONE 27 戰報》NO. 002 · 免費 · 歡迎店家整頁影印</span>
+    <span>zone27.com.tw · 明日戰報見</span>
+  </footer>
+
+</div>
+</body>
+</html>

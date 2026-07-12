@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<title>ZONE 27 戰報 NO.023 · 歐力士猛牛 @ 羅德海洋</title>
+<style>
+  /* ── ZONE 27 戰報 · 門店列印版 · A4 一頁 · v17(「本報算的數字」表退役 → 本期一個數字主視覺) ── */
+  @page { size: A4; margin: 10mm 12mm; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body { font-family: "Microsoft JhengHei", "Noto Sans TC", "PingFang TC", sans-serif;
+    color: #111; background: #e8e8e8; font-size: 10pt; line-height: 1.45; }
+  .sheet { width: 210mm; min-height: 296mm; margin: 0 auto; background: #fff; padding: 11mm 13mm 8mm; }
+  @media print { body { background: #fff; } .sheet { width: auto; min-height: auto; margin: 0; padding: 0; zoom: 0.90; } }
+
+  .masthead { display: flex; justify-content: space-between; align-items: center;
+    border-bottom: 3.5px solid #0F1A2E; padding-bottom: 5px; margin-bottom: 6px; }
+  .brand { font-size: 19pt; font-weight: 900; letter-spacing: 2px; color: #0F1A2E; }
+  .brand .en { font-size: 8pt; font-weight: 600; letter-spacing: 3px; color: #8A6A1F; display: block; margin-top: 1px; }
+  .sportbox { display: flex; align-items: center; gap: 10px; }
+  .sportbox .name { font-size: 22pt; font-weight: 900; color: #0F1A2E; letter-spacing: 4px; line-height: 1.1; }
+  .sportbox .sub { font-size: 8.5pt; color: #666; letter-spacing: 2px; display: block; margin-top: 1px; }
+  .sportbox .no { text-align: right; font-size: 8.5pt; color: #444; line-height: 1.5; border-left: 1px solid #ccc; padding-left: 10px; }
+  .sportbox .no b { color: #0F1A2E; }
+
+  .match { margin-bottom: 5px; }
+  .match .comp { font-size: 9pt; font-weight: 700; color: #8A6A1F; letter-spacing: 2px; }
+  .match h1 { font-size: 19pt; font-weight: 900; color: #0F1A2E; letter-spacing: 1px; line-height: 1.3; }
+  .match .meta { font-size: 9.5pt; color: #444; margin-top: 2px; }
+
+  .tldr { background: #0F1A2E; color: #E9E4D8; padding: 6px 12px; margin-bottom: 4px; }
+  .tldr .tag { font-size: 8pt; letter-spacing: 3px; color: #D4AF37; font-weight: 700; }
+  .tldr p { font-size: 11pt; font-weight: 700; line-height: 1.5; margin-top: 2px; }
+  .tldr b { color: #D4AF37; }
+
+  section { margin-bottom: 5px; }
+  h2 { font-size: 11pt; font-weight: 800; color: #0F1A2E; letter-spacing: 1.5px;
+    border-left: 4px solid #8A6A1F; padding-left: 7px; margin-bottom: 3px; }
+  .facts { counter-reset: fact; }
+  .facts li { list-style: none; padding-left: 17px; position: relative; margin-bottom: 2px; }
+  .facts li::before { content: counter(fact) ""; counter-increment: fact; position: absolute; left: 0;
+    font-weight: 900; color: #8A6A1F; font-size: 10.5pt; }
+
+  /* 本期一個數字(v17 · 取代通用算數表):一個自算數字 + 一眼看懂的對比條 */
+  .onenum { border: 2px solid #0F1A2E; padding: 6px 11px; }
+  .onenum .tag { font-size: 8pt; letter-spacing: 2px; color: #8A6A1F; font-weight: 800; }
+  .onenum h3 { font-size: 12.5pt; font-weight: 900; color: #0F1A2E; margin: 2px 0 4px; letter-spacing: 0.5px; }
+  .obar { display: flex; align-items: center; gap: 8px; margin: 4px 0; }
+  .obar .lb { width: 36%; font-size: 9pt; font-weight: 700; color: #0F1A2E; line-height: 1.3; }
+  .obar .track { flex: 1; background: #eee; height: 14px; display: block; }
+  .obar .track .bar { height: 100%; display: block; }
+  .obar .b1 { background: #0F1A2E; width: 64%; }
+  .obar .b2 { background: #B08E2E; width: 55%; }
+  .obar .val { width: 21%; font-size: 9pt; font-weight: 900; color: #0F1A2E; white-space: nowrap; }
+  .onenum .cap { font-size: 9.3pt; color: #333; margin-top: 3px; }
+
+  .menu table { width: 100%; border-collapse: collapse; font-size: 9.7pt; }
+  .menu th, .menu td { border: 1px solid #ccc; padding: 3px 6px; text-align: left; vertical-align: middle; }
+  .menu th { background: #EFEBE0; color: #0F1A2E; font-size: 9pt; letter-spacing: 1px; }
+  .menu td.num { text-align: center; white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .menu td.star { text-align: center; white-space: nowrap; color: #8A6A1F; font-weight: 900; font-size: 10.5pt; letter-spacing: 1px; }
+  .menu .skip { font-size: 8.5pt; color: #666; margin-top: 2px; }
+
+  .contra { border: 1px dashed #999; padding: 5px 10px; }
+  .contra li { list-style: none; padding-left: 14px; position: relative; margin-bottom: 2px; font-size: 9.7pt; }
+  .contra li::before { content: "▲"; position: absolute; left: 0; color: #666; font-size: 8pt; top: 2px; }
+
+  .board { border: 2.5px solid #8A6A1F; background: #FAF6EC; padding: 7px 12px; }
+  .board .tag { font-size: 8pt; letter-spacing: 3px; color: #8A6A1F; font-weight: 800; }
+  .board h3 { font-size: 13pt; font-weight: 900; color: #0F1A2E; letter-spacing: 0.5px; margin: 2px 0 3px; }
+  .board p { font-size: 9.7pt; line-height: 1.5; }
+
+  .baseline { border-top: 3px solid #0F1A2E; margin-top: 6px; padding-top: 5px;
+    display: flex; justify-content: space-between; gap: 12px; font-size: 8pt; color: #555; line-height: 1.6; }
+  .baseline .right { text-align: right; white-space: nowrap; }
+  .baseline b { color: #0F1A2E; }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <div class="masthead">
+    <div class="brand">ZONE 27 戰報
+      <span class="en">THE PRE-MATCH BRIEF</span>
+    </div>
+    <div class="sportbox">
+      <svg width="52" height="52" viewBox="0 0 40 40" aria-hidden="true">
+        <circle cx="20" cy="20" r="17" fill="none" stroke="#0F1A2E" stroke-width="2.2"/>
+        <path d="M9 6.5 C15.5 13, 15.5 27, 9 33.5" fill="none" stroke="#8A6A1F" stroke-width="1.6"/>
+        <path d="M31 6.5 C24.5 13, 24.5 27, 31 33.5" fill="none" stroke="#8A6A1F" stroke-width="1.6"/>
+        <path d="M11 12 L14.6 13.6 M11.6 20 L15.2 20 M11 28 L14.6 26.4" stroke="#0F1A2E" stroke-width="1.2"/>
+        <path d="M29 12 L25.4 13.6 M28.4 20 L24.8 20 M29 28 L25.4 26.4" stroke="#0F1A2E" stroke-width="1.2"/>
+      </svg>
+      <div>
+        <span class="name">棒 球</span>
+        <span class="sub">日本職棒 NPB</span>
+      </div>
+      <div class="no">
+        <b>NO. 023</b><br>2026 · 07 · 10
+      </div>
+    </div>
+  </div>
+
+  <div class="match">
+    <div class="comp">日本職棒 · 太平洋聯盟</div>
+    <h1>歐力士猛牛 @ 羅德海洋</h1>
+    <div class="meta">ZOZO 海洋球場(千葉 · 羅德主場)· 台北今天(五)傍晚 5:00 開打</div>
+    <div class="meta">歐力士 40 勝 37 敗 2 和(第 4)· 羅德 37 勝 36 敗 3 和(第 5)· 先發:田嶋大樹(歐)vs 廣池康志郎(羅)</div>
+  </div>
+
+  <div class="tldr">
+    <span class="tag">10 秒看完</span>
+    <p>今晚全桌最有信心的價,押在「投手戰」三個字上。本報查完兩位先發的官方數據:<b>這個劇本有裂縫</b>。剩下的價都不甜 —— 中間差多少錢,下面一個數字講完。</p>
+  </div>
+
+  <section>
+    <h2>三件你查不到的事</h2>
+    <ul class="facts">
+      <li><b>市場買的是投手戰,登板的是 5.83。</b>歐力士今晚推的田嶋大樹,是 2017 年選秀第一指名的老將 —— 但今年 9 場先發 2 勝 4 敗,防禦率就是標題那個數字:平均每九局丟快六分。小分的低價,是替一場「假設中的投手戰」開的。</li>
+      <li><b>羅德的菜鳥,剋過這支打線。</b>23 歲的廣池康志郎,去年選秀第五指名,今年 5 月拿下生涯先發首勝 —— 對手正是歐力士,那天他投 7 局只失 1 分。本季防禦率 3.30:資歷是菜的,這個對手他打過分數。</li>
+      <li><b>兩隊前天才互換位子。</b>歐力士靠再見安打擊敗榜首軟銀,跟羅德換了位子;羅德同一晚在自家被火腿打 7 比 2。兩隊勝率只差一個百分點出頭 —— 今晚是「誰跌回去」的卡位戰,不是強弱懸殊的送分局。</li>
+    </ul>
+  </section>
+
+  <section class="onenum">
+    <span class="tag">本期一個數字 —— 這裡才有</span>
+    <h3>小分 1.56,你多付了 9 分</h3>
+    <div class="obar">
+      <span class="lb">這個標價要你中</span>
+      <span class="track"><span class="bar b1"></span></span>
+      <span class="val">64%(10 次中 6.4 次)</span>
+    </div>
+    <div class="obar">
+      <span class="lb">拆掉水分,市場真信</span>
+      <span class="track"><span class="bar b2"></span></span>
+      <span class="val">55%</span>
+    </div>
+    <p class="cap">兩條的差距,就是入場費 —— <b>看對比賽、買錯價格,長期照樣虧。</b>這桌錢往哪邊擠,哪邊的價就爛。</p>
+  </section>
+
+  <section class="menu">
+    <h2>今晚的菜單 · 星星評的是價格,不是輸贏</h2>
+    <table>
+      <tr><th style="width:31%">怎麼買(台灣運彩)</th><th style="width:12%">賠率</th><th style="width:9%">星級</th><th>白話講</th></tr>
+      <tr><td>不讓分(直接猜誰贏)</td><td class="num">歐 1.78 / 羅 1.65</td><td class="star">★★</td>
+        <td>拆開價看,市場把這場當五五波 —— 兩邊的理由也都是真的(見上面三件事)。全桌最有討論空間的一格。</td></tr>
+      <tr><td>大 7.5(兩隊合計 8 分以上)</td><td class="num">1.88</td><td class="star">★★</td>
+        <td>唯一還沒把先發現況漲進價裡的一邊 —— 但它有個天敵叫海風(見對面那欄)。</td></tr>
+      <tr><td>小 7.5(合計 7 分以內)</td><td class="num">1.56</td><td class="star">★</td>
+        <td>溢價最重的一格(見一個數字)。就算投手戰真的發生,你也只是用頂價買到它。</td></tr>
+      <tr><td>前 5 局 小 3.5</td><td class="num">1.73</td><td class="star">★</td>
+        <td>同一個投手戰劇本的便宜版 —— 劇本的裂縫一樣在,只是門票打了折。</td></tr>
+      <tr><td>羅德 受讓 1.5 分</td><td class="num">1.35</td><td class="star">★</td>
+        <td>賺頭太薄:錯一次,要連對快三場才補得回來。</td></tr>
+    </table>
+    <p class="skip">單雙、第 1 局和局這類猜銅板的玩法,本報不評 —— 台灣運彩賠率以現場為準。</p>
+  </section>
+
+  <section class="contra">
+    <h2>站對面的人,理由幫你想好了</h2>
+    <ul>
+      <li><b>想買小分的:</b>廣池那邊的數字是真漂亮,還剋過這支打線;而且 ZOZO 的海風一往場內灌,再高的防禦率都會被吹小 —— 上週本報寫過這陣風。官方賽前預報今晚晴時多雲,風怎麼吹,開賽前自己抬頭看。</li>
+      <li><b>想買羅德的:</b>主場,而且對面今晚推上來的,是全桌最容易查到的弱點 —— 這個理由完全成立,只是 1.65 這個價,已經先把它算了一部分進去。</li>
+    </ul>
+  </section>
+
+  <section class="board">
+    <span class="tag">本期看板</span>
+    <h3>市場最有信心的價,蓋在最查得到的裂縫上</h3>
+    <p>這桌的錢往「投手戰」擠,價就往那邊爛 —— 但投手丘上的官方數據,跟劇本對不上。本報不猜終場比數,只把兩位先發的成績單、球場的風、和每個價要求你多準,全部攤在同一張紙上。你付的每一分溢價,都是在替別人的想像買單。尺給你了,怎麼下是你的事。</p>
+  </section>
+
+  <div class="baseline">
+    <span>星星是價格評論,不是輸贏預測 · 本報不收博彩業者的廣告與贊助 · 不保證獲利<br>資料:NPB 官方 · 台灣運彩</span>
+    <span class="right"><b>《ZONE 27 戰報》NO. 023</b> · 免費 · 歡迎店家整頁影印<br>zone27.com.tw</span>
+  </div>
+
+</div>
+</body>
+</html>

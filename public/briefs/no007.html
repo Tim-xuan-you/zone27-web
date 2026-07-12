@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<title>ZONE 27 戰報 · 藍鳥 @ 巨人 · 2026-07-07</title>
+<style>
+  /* ── ZONE 27 戰報 · A4 一頁 · 版式 v5(純評論:星級+可查證數據+引擎介紹 · 零記分板) ── */
+  @page { size: A4; margin: 10mm 12mm; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body {
+    font-family: "Microsoft JhengHei", "Noto Sans TC", "PingFang TC", sans-serif;
+    color: #111; background: #e8e8e8; font-size: 9.8pt; line-height: 1.44;
+  }
+  .sheet { width: 210mm; min-height: 296mm; margin: 0 auto; background: #fff; padding: 11mm 13mm 8mm; }
+  @media print {
+    body { background: #fff; }
+    .sheet { width: auto; min-height: auto; margin: 0; padding: 0; zoom: 0.92; }
+  }
+
+  .masthead { display: flex; justify-content: space-between; align-items: flex-end;
+    border-bottom: 3.5px solid #0F1A2E; padding-bottom: 6px; }
+  .masthead .brand { font-size: 19pt; font-weight: 900; letter-spacing: 2px; color: #0F1A2E; }
+  .masthead .brand .en { font-size: 8pt; font-weight: 600; letter-spacing: 3px; color: #8A6A1F; display: block; margin-top: 1px; }
+  .masthead .issue { text-align: right; font-size: 8.5pt; color: #444; line-height: 1.5; }
+  .masthead .issue b { color: #0F1A2E; }
+  .tagline { display: flex; justify-content: space-between; font-size: 8.5pt; color: #555;
+    border-bottom: 1px solid #bbb; padding: 3px 1px 4px; margin-bottom: 8px; letter-spacing: 1px; }
+
+  .match { margin-bottom: 6px; }
+  .match .comp { font-size: 9pt; font-weight: 700; color: #8A6A1F; letter-spacing: 2px; }
+  .match h1 { font-size: 20pt; font-weight: 900; color: #0F1A2E; letter-spacing: 1px; line-height: 1.25; }
+  .match .meta { font-size: 9pt; color: #444; margin-top: 2px; }
+
+  .tldr { background: #0F1A2E; color: #fff; padding: 6px 10px; margin-bottom: 6px; }
+  .tldr .tag { font-size: 8pt; letter-spacing: 2px; color: #D4AF37; font-weight: 700; }
+  .tldr p { font-size: 10.5pt; font-weight: 700; line-height: 1.5; margin-top: 2px; }
+
+  section { margin-bottom: 5px; }
+  h2 { font-size: 10.5pt; font-weight: 800; color: #0F1A2E; letter-spacing: 1.5px;
+    border-left: 4px solid #8A6A1F; padding-left: 7px; margin-bottom: 3px; }
+  p { margin-bottom: 3px; }
+  .facts li { list-style: none; padding-left: 15px; position: relative; margin-bottom: 2px; }
+  .facts li::before { content: "▪"; position: absolute; left: 2px; color: #8A6A1F; }
+  .small { font-size: 8.5pt; color: #555; }
+
+  .opts table { width: 100%; border-collapse: collapse; font-size: 9.5pt; }
+  .opts th, .opts td { border: 1px solid #ccc; padding: 3px 5px; text-align: left; vertical-align: top; }
+  .opts th { background: #EFEBE0; color: #0F1A2E; font-size: 9pt; }
+  .opts td.num { text-align: center; white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .opts td.star { text-align: center; white-space: nowrap; color: #8A6A1F; font-weight: 900; letter-spacing: 1px; }
+
+  /* 金框:本期看板(觀點) */
+  .call { border: 2.5px solid #D4AF37; background: #FBF9F4; padding: 7px 11px; }
+  .call .tag { font-size: 8pt; letter-spacing: 2px; color: #8A6A1F; font-weight: 700; }
+  .call .pick { font-size: 13pt; font-weight: 900; color: #0F1A2E; margin: 2px 0 3px; letter-spacing: 0.5px; }
+  .call .pick .vs { color: #8A6A1F; font-size: 10pt; }
+  .call p { font-size: 9.5pt; line-height: 1.5; }
+
+  /* 引擎介紹欄 */
+  .engine { border: 2px solid #0F1A2E; padding: 6px 10px; background: #fff; }
+  .engine p { font-size: 9.5pt; color: #333; }
+  .engine b { color: #0F1A2E; }
+
+  .rules { background: #0F1A2E; color: #E9E4D8; padding: 7px 10px; }
+  .rules h2 { color: #fff; border-left-color: #D4AF37; margin-bottom: 3px; }
+  .rules li { list-style: none; padding-left: 14px; position: relative; font-size: 9pt; line-height: 1.55; color: #D9D3C4; margin-bottom: 1px; }
+  .rules li::before { content: "▪"; position: absolute; left: 2px; color: #D4AF37; }
+  .rules .url { color: #D4AF37; font-weight: 700; letter-spacing: 0.5px; }
+
+  footer { display: flex; justify-content: space-between; font-size: 8pt; color: #666;
+    border-top: 1px solid #bbb; margin-top: 7px; padding-top: 4px; letter-spacing: 0.5px; }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <div class="masthead">
+    <div class="brand">ZONE 27 戰報
+      <span class="en">THE PRE-MATCH BRIEF</span>
+    </div>
+    <div class="issue">
+      <b>NO. 007</b><br>
+      2026 · 07 · 07 · 台北<br>
+      本期:MLB 美國職棒
+    </div>
+  </div>
+  <div class="tagline">
+    <span>給運彩玩家的一頁賽前功課</span>
+    <span>不靠直覺 · 只看演算法</span>
+  </div>
+
+  <div class="match">
+    <div class="comp">MLB · 先發:Gausman(防 4.19)vs Roupp(防 4.55) · 藍鳥 42-48 · 巨人 37-52</div>
+    <h1>藍鳥 @ 巨人</h1>
+    <div class="meta">今天 09:45 開賽 · 舊金山 甲骨文球場 —— 前巨人 Gausman 回老家投老東家</div>
+  </div>
+
+  <div class="tldr">
+    <span class="tag">10 秒看完</span>
+    <p>市場開藍鳥 1.72、原稿也站藍鳥 —— 只有我們的引擎反著算:<u>巨人 59%</u>。爛戰績的主隊、被全場看衰,憑什麼?憑三個查得到的數字。這期就看這個分歧。</p>
+  </div>
+
+  <section>
+    <h2>賽前三個事實(都查得到 · MLB 官網)</h2>
+    <ul class="facts">
+      <li><b>巨人 37 勝 52 敗很難看 —— 但今晚先發不難看。</b>Roupp 每 9 局三振 10.0 個、被全壘打率 0.61,是今晚兩位先發裡壓制力最好的數字。爛球隊,不等於爛投手之夜。</li>
+      <li><b>Gausman 回甲骨文,是故事也是變數。</b>他在巨人投過兩季、生涯對老東家防禦率 3.13;控球一流(每 9 局只保送 2.1)—— 但被轟率 1.34 是他的罩門,剛好被壓長打的甲骨文蓋掉一半。</li>
+      <li><b>甲骨文球場 = 全聯盟出名的投手球場。</b>夜間濕冷、外野深 —— 兩個先發都受惠,「投手戰」是這場的預設劇本。這讓所有「大分」的價,都要多想一秒。</li>
+    </ul>
+    <p class="small">數據來源:MLB 官方(mlb.com 可自行查證)· 賠率:台灣運彩。</p>
+  </section>
+
+  <section>
+    <h2>價格的規矩 —— 先算門檻再談感覺</h2>
+    <p>1.72 的白話:<b>每押 10 次要中將近 6 次才不虧</b>;1.43 要中 7 次;1.60 要中 6 次多。下面每一顆星,都是拿這把尺量出來的。</p>
+  </section>
+
+  <section class="opts">
+    <h2>選項的星級 —— 評的是價格,不是預言</h2>
+    <table>
+      <tr><th>選項(台灣運彩)</th><th style="width:9%">賠率</th><th style="width:11%">星級</th><th>本報讀法(白話)</th></tr>
+      <tr><td>不讓分 · 藍鳥</td><td class="num">1.72</td><td class="star">★☆☆</td><td>順著市場走,人多的那邊 —— 但我們引擎反著算(巨人 59%)。買藍鳥,等於同時押引擎錯。</td></tr>
+      <tr><td>受讓 +1.5 · 巨人</td><td class="num">1.43</td><td class="star">★★☆</td><td>原稿嫌它價低;但引擎連「直接贏」都給巨人 59% —— 多 1.5 分緩衝的門檻,比看起來的低。棒球一分差本來就常見。</td></tr>
+      <tr><td>前 5 局不讓分 · 藍鳥</td><td class="num">1.85</td><td class="star">★★☆</td><td>過濾掉牛棚亂流的思路漂亮:Gausman 的控球(9 局只送 2.1 個)對上會保送的 Roupp(4.0)—— 前五局是藍鳥最有理的一段。</td></tr>
+      <tr><td>藍鳥單隊得分 大 3.5</td><td class="num">1.60</td><td class="star">★☆☆</td><td>要中 6 次多才不虧 —— 而 Roupp 的被轟率(0.61)是全場最好的數字,球場又壓打擊。這價買的是打線名氣,不是條件。</td></tr>
+      <tr><td>第 1 局和局 1.50 / 最高單局 8.0</td><td class="num">—</td><td class="star">—</td><td>運氣玩法,本報不評。</td></tr>
+    </table>
+    <p class="small">★★★=甜 · ★★=不虧 · ★=為別人賺錢的價。星級是評論 —— 跟影評的星星一樣,是把理由攤開的意見。</p>
+  </section>
+
+  <section class="call">
+    <span class="tag">▌本期看板 · 引擎與全世界唱反調</span>
+    <div class="pick">引擎:巨人 59% <span class="vs">←對台→</span> 市場與原稿:藍鳥 1.72</div>
+    <p>大眾看的是兩隊戰績表(42-48 對 37-52),引擎看的是今晚站上投手丘的兩個人和這座球場。模擬一萬次,巨人贏的次數比較多 —— 就這樣。數字全部攤開在上面,尺給你了,怎麼下是你的判斷。</p>
+  </section>
+
+  <section class="engine">
+    <h2>這個 59% 怎麼來的</h2>
+    <p>ZONE 27 引擎是我們自建的<b>蒙地卡羅模型</b>:把兩隊整季的底層數據(三振率、保送率、被全壘打率 —— 全部 MLB 官網查得到)丟進模型,把今晚這場比賽<b>模擬一萬次</b>,數巨人贏了幾次:五千九百次。賽前 36 小時就鎖定、改不了。完整方法在網站全文公開:<b>zone27.com.tw/methodology</b></p>
+  </section>
+
+  <section class="rules">
+    <h2>本報的規矩(每期照舊)</h2>
+    <ul>
+      <li>星級評的是「這個價合不合理」—— 是評論,不是預測;理由永遠跟星星印在一起。</li>
+      <li>文中所有球員、球隊數據都可自行查證(MLB 官網)· 引擎方法全公開,不藏。</li>
+      <li>本報不代操、沒有「穩」這個字、不保證獲利。</li>
+    </ul>
+  </section>
+
+  <footer>
+    <span>《ZONE 27 戰報》NO. 007 · 免費 · 歡迎店家整頁影印</span>
+    <span>zone27.com.tw · 每日出刊</span>
+  </footer>
+
+</div>
+</body>
+</html>

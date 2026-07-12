@@ -9,6 +9,7 @@ import Avatar from "@/components/Avatar";
 import EngineThreeWayBar from "@/components/EngineThreeWayBar";
 import HomepagePulseStrip from "@/components/HomepagePulseStrip";
 import HomepageTableStrip from "@/components/HomepageTableStrip";
+import HomepageBriefStrip from "@/components/HomepageBriefStrip";
 import HomepageLadderStrip from "@/components/HomepageLadderStrip";
 import { getNationalCode } from "@/lib/soccer/teams";
 import {
@@ -313,7 +314,13 @@ export default async function Home() {
             堆疊 = widget pile。 收進「一個區標 + 收窄 max-w-2xl」的群組 → 大腦讀成同一組;
             脈動(會動 = 靈魂)留金底為主、桌/天梯降素底為次(元件內已做),建立層級不刪功能。
             三條各自 graceful 隱藏;天梯永遠 render → 區標永不孤兒(不破 graceful)。 */}
-        <section className="mx-auto max-w-2xl w-full px-6 sm:px-10 pt-6 pb-4">
+        {/* ── 本日戰報 · 米其林式賽前評鑑(Tim 2026-07-12「當天的擺首頁 · 過刊摺疊」)──
+            編輯台的今日評鑑排在「現場」群組之上:它是每天最新鮮的一張紙 · 舊刊在 /brief。 */}
+        <section className="mx-auto max-w-2xl w-full px-6 sm:px-10 pt-6">
+          <HomepageBriefStrip />
+        </section>
+
+        <section className="mx-auto max-w-2xl w-full px-6 sm:px-10 pt-2 pb-4">
           <p className="font-mono text-mute/70 text-[10px] tracking-[0.45em] mb-1 text-center">
             / 現場 · 真人這邊
           </p>

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<title>ZONE 27 戰報 NO.029 · 捷克 @ 法國</title>
+<style>
+  /* ── ZONE 27 戰報 · 門店列印版 · A4 一頁 · v19(海報級主視覺:巨大數字) ── */
+  @page { size: A4; margin: 10mm 12mm; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body { font-family: "Microsoft JhengHei", "Noto Sans TC", "PingFang TC", sans-serif;
+    color: #111; background: #e8e8e8; font-size: 10pt; line-height: 1.46; }
+  .sheet { width: 210mm; min-height: 296mm; margin: 0 auto; background: #fff; padding: 11mm 13mm 8mm; }
+  @media print { body { background: #fff; } .sheet { width: auto; min-height: auto; margin: 0; padding: 0; zoom: 0.82; } }
+
+  .masthead { display: flex; justify-content: space-between; align-items: center;
+    border-bottom: 3.5px solid #0F1A2E; padding-bottom: 5px; margin-bottom: 6px; }
+  .brand { font-size: 19pt; font-weight: 900; letter-spacing: 2px; color: #0F1A2E; }
+  .brand .en { font-size: 8pt; font-weight: 600; letter-spacing: 3px; color: #8A6A1F; display: block; margin-top: 1px; }
+  .sportbox { display: flex; align-items: center; gap: 10px; }
+  .sportbox .name { font-size: 22pt; font-weight: 900; color: #0F1A2E; letter-spacing: 4px; line-height: 1.1; }
+  .sportbox .sub { font-size: 8.5pt; color: #666; letter-spacing: 2px; display: block; margin-top: 1px; }
+  .sportbox .no { text-align: right; font-size: 8.5pt; color: #444; line-height: 1.5; border-left: 1px solid #ccc; padding-left: 10px; }
+  .sportbox .no b { color: #0F1A2E; }
+
+  .match { margin-bottom: 5px; }
+  .match .comp { font-size: 9pt; font-weight: 700; color: #8A6A1F; letter-spacing: 2px; }
+  .match h1 { font-size: 19pt; font-weight: 900; color: #0F1A2E; letter-spacing: 1px; line-height: 1.3; }
+  .match .meta { font-size: 9.5pt; color: #444; margin-top: 2px; }
+
+  .tldr { background: #0F1A2E; color: #E9E4D8; padding: 6px 12px; margin-bottom: 5px; }
+  .tldr .tag { font-size: 8pt; letter-spacing: 3px; color: #D4AF37; font-weight: 700; }
+  .tldr p { font-size: 11pt; font-weight: 700; line-height: 1.5; margin-top: 2px; }
+  .tldr b { color: #D4AF37; }
+
+  .ritual { border: 1.5px dashed #8A6A1F; background: #FDFBF5; padding: 4px 10px;
+    font-size: 9.8pt; font-weight: 700; color: #0F1A2E; margin-bottom: 5px; }
+
+  /* 海報級主視覺:巨大數字(3 秒鉤子 · 黑白影印安全) */
+  .hero0 { display: flex; align-items: center; gap: 14px; border: 2px solid #0F1A2E;
+    padding: 4px 14px; margin-bottom: 4px; background: #FAFAF7; }
+  .hero0 .n { font-size: 38pt; font-weight: 900; color: #0F1A2E; line-height: 1; letter-spacing: 0; }
+  .hero0 .t { font-size: 10.5pt; line-height: 1.5; }
+  .hero0 .t b { color: #8A6A1F; }
+  .hero0 .t .big { font-size: 12pt; font-weight: 900; color: #0F1A2E; display: block; }
+
+  section { margin-bottom: 4px; }
+  h2 { font-size: 11pt; font-weight: 800; color: #0F1A2E; letter-spacing: 1.5px;
+    border-left: 4px solid #8A6A1F; padding-left: 7px; margin-bottom: 3px; }
+
+  .avoid table, .keep table { width: 100%; border-collapse: collapse; font-size: 9.8pt; }
+  .avoid th, .avoid td, .keep th, .keep td { border: 1px solid #ccc; padding: 3px 7px; text-align: left; vertical-align: middle; }
+  .avoid th, .keep th { background: #EFEBE0; color: #0F1A2E; font-size: 9pt; letter-spacing: 1px; }
+  .avoid td.num, .keep td.num { text-align: center; white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .avoid td.mark { text-align: center; color: #333; font-weight: 900; font-size: 12pt; width: 8%; }
+  .avoid tr.dead td { color: #777; background: #f3f3f3; }
+  .avoid tr.dead td.name, .avoid tr.dead td.num { text-decoration: line-through; text-decoration-thickness: 1.5px; text-decoration-color: #444; }
+  .keep td.star { text-align: center; white-space: nowrap; color: #8A6A1F; font-weight: 900; font-size: 10.5pt; width: 9%; }
+  .note { font-size: 8.5pt; color: #666; margin-top: 2px; }
+
+  .facts { counter-reset: fact; }
+  .facts li { list-style: none; padding-left: 17px; position: relative; margin-bottom: 2px; }
+  .facts li::before { content: counter(fact) ""; counter-increment: fact; position: absolute; left: 0;
+    font-weight: 900; color: #8A6A1F; font-size: 10.5pt; }
+
+  .switch { border: 2px solid #0F1A2E; padding: 7px 11px; background: #FAFAF7; }
+  .switch .tag { font-size: 8pt; letter-spacing: 2px; color: #8A6A1F; font-weight: 800; }
+  .switch h3 { font-size: 13pt; font-weight: 900; color: #0F1A2E; margin: 2px 0 3px; letter-spacing: 0.5px; }
+  .switch p.lead { font-size: 9.8pt; margin-bottom: 4px; }
+  .branch { display: flex; gap: 8px; margin: 3px 0; align-items: flex-start; }
+  .branch .k { flex: 0 0 58px; text-align: center; font-weight: 900; font-size: 9.5pt; padding: 2px 0;
+    border: 1.5px solid #0F1A2E; color: #0F1A2E; }
+  .branch.on .k { background: #0F1A2E; color: #E9E4D8; }
+  .branch p { font-size: 9.8pt; flex: 1; }
+
+  .board { border: 2.5px solid #8A6A1F; background: #FAF6EC; padding: 7px 12px; }
+  .board .tag { font-size: 8pt; letter-spacing: 3px; color: #8A6A1F; font-weight: 800; }
+  .board h3 { font-size: 13pt; font-weight: 900; color: #0F1A2E; letter-spacing: 0.5px; margin: 2px 0 3px; }
+  .board p { font-size: 9.8pt; line-height: 1.5; }
+  .board .sign { text-align: right; font-size: 8.5pt; color: #8A6A1F; font-weight: 800; letter-spacing: 2px; margin-top: 3px; }
+
+  .baseline { border-top: 3px solid #0F1A2E; margin-top: 6px; padding-top: 5px;
+    display: flex; justify-content: space-between; gap: 12px; font-size: 8pt; color: #555; line-height: 1.6; }
+  .baseline .right { text-align: right; white-space: nowrap; }
+  .baseline b { color: #0F1A2E; }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <div class="masthead">
+    <div class="brand">ZONE 27 戰報
+      <span class="en">THE PRE-MATCH BRIEF</span>
+    </div>
+    <div class="sportbox">
+      <svg width="52" height="52" viewBox="0 0 40 40" aria-hidden="true">
+        <circle cx="20" cy="20" r="17" fill="none" stroke="#0F1A2E" stroke-width="2.2"/>
+        <path d="M4 15 Q20 24 36 15" fill="none" stroke="#0F1A2E" stroke-width="1.6"/>
+        <path d="M13 5 Q27 14 32.5 29" fill="none" stroke="#8A6A1F" stroke-width="1.5"/>
+        <path d="M27 5 Q13 14 7.5 29" fill="none" stroke="#0F1A2E" stroke-width="1.6"/>
+      </svg>
+      <div>
+        <span class="name">排 球</span>
+        <span class="sub">世界女排聯賽 VNL</span>
+      </div>
+      <div class="no">
+        <b>NO. 029</b><br>2026 · 07 · 12
+      </div>
+    </div>
+  </div>
+
+  <div class="match">
+    <div class="comp">世界女排聯賽 VNL · 分組賽最後一天</div>
+    <h1>捷克 @ 法國</h1>
+    <div class="meta">貝爾格勒(塞爾維亞)· 台北今晚 19:00 開打</div>
+    <div class="meta">分組賽收官戰 —— 打完這輪,晉級決賽圈的八隊名單就定案</div>
+  </div>
+
+  <div class="tldr">
+    <span class="tag">10 秒看完</span>
+    <p>上週全世界都看到法國把美國拖進第五局,「法國很黏」的票<b>正熱</b>。熱的那面我們不跟 —— 捷克那道 4.5 分的門檻有多矮,看下面那個數字。</p>
+  </div>
+
+  <div class="ritual">▸ 下注前的小動作:先在心裡定好你想買的,再往下看 —— 看完還想買,才是真的想買。</div>
+
+  <div class="hero0">
+    <span class="n">4.5</span>
+    <span class="t"><span class="big">一整場排球快兩百分,只要求捷克多贏 4.5 分。</span>
+    五局排球兩邊加起來動輒 180 分以上,這道門檻真正跨不過去的晚上,多半只有一種:<b>被拖進第五局</b>。</span>
+  </div>
+
+  <section class="avoid">
+    <h2>先提醒 —— 這三種,放下比較好</h2>
+    <table>
+      <tr><th style="width:31%">哪種盤</th><th style="width:11%">賠率</th><th style="width:8%"></th><th>提醒你的理由</th></tr>
+      <tr class="dead"><td class="name">全場不讓分:捷克</td><td class="num">1.42</td><td class="mark">×</td>
+        <td>押 100 只賺 42 —— 為了這點利潤扛一整晚排球的情緒起伏,長期買下來划不來。</td></tr>
+      <tr class="dead"><td class="name">正確比數的高賠冷門(法國 3:0 賠 6.50、法國 3:2 賠 4.50)</td><td class="num">4.50 起</td><td class="mark">×</td>
+        <td>波膽是全場莊家抽水最厚的一格,厚過讓分盤好幾倍 —— 樂透用零錢玩就好。</td></tr>
+      <tr class="dead"><td class="name">第 1 局的盤(大小 45.5 · 讓 2.5)</td><td class="num">—</td><td class="mark">×</td>
+        <td>各隊第一局都在試探、調輪轉,是全場最像擲銅板的一局;45.5 又剛好卡在 25:21 與 25:20 的正中間 —— 猜這格是猜運氣,不是看球。</td></tr>
+    </table>
+    <p class="note">提醒是價格判斷,不是輸贏預測 —— 它們照樣可能中,只是這種價長期買下來會吃虧。</p>
+  </section>
+
+  <section class="keep">
+    <h2>剩下的 —— 才值得花腦筋</h2>
+    <table>
+      <tr><th style="width:31%">哪種盤</th><th style="width:11%">賠率</th><th style="width:9%">星級</th><th>白話講</th></tr>
+      <tr><td>全場讓分:捷克 −4.5</td><td class="num">1.73</td><td class="star">★★</td>
+        <td>只要不被拖進第五局,這道門檻通常跨得過。對面那張「法國 +4.5」現在最熱 —— 熱票的對面,常常才有好價。</td></tr>
+      <tr><td>正確總盤數:4 盤</td><td class="num">2.20</td><td class="star">★</td>
+        <td>賭的是「有一邊 3:1 收場」—— 主劇本是捷克 3:1(法國有咬下一局的衝勁、難咬三局);萬一法國 3:1 爆冷,這張照樣賠你。賠率破 2 是它的誠意。</td></tr>
+    </table>
+    <p class="note">單、雙是猜銅板,本報不評 —— 台灣運彩賠率以現場為準。</p>
+  </section>
+
+  <section>
+    <h2>三件你查不到的事</h2>
+    <ul class="facts">
+      <li><b>捷克的黑馬爬升,是「借來的大腦」調教出來的。</b>希臘籍教頭阿薩納索普洛斯把這支隊伍練得一板一眼:攔防站位紀律、失誤率壓得比法國低一截。排球是失誤運動 —— 少送分的那隊,常常不用打得比較漂亮就贏了。她們第一週 3:0 掃掉中國那場,就是這樣打出來的。</li>
+      <li><b>「法國很黏」這張標籤,是上週才貼上去的。</b>法國跟美國殺滿五局才 2:3 惜敗,全世界都記住了那一晚 —— 錢因此湧向「法國 +4.5」。可是黏住美國的是那一晚的法國;這支球隊整季自失偏高,對上攔防紀律嚴的隊,單局後段常常自己崩。標籤是熱的,體質是冷的。</li>
+      <li><b>今天是還有東西可搶的收官戰。</b>分組賽最後一天,決賽圈八張門票今晚全部定案 —— 捷克一路留在門票邊緣,這種晚上,強隊通常一分都不會留力。</li>
+    </ul>
+  </section>
+
+  <section class="switch">
+    <span class="tag">今晚的開關 —— 開打後,只盯這一件事</span>
+    <h3>第一局,捷克有沒有拿下</h3>
+    <p class="lead">排球的第一局最亂 —— 但它決定今晚走哪個劇本。</p>
+    <div class="branch on">
+      <span class="k">拿下</span>
+      <p>劇本全速前進:3:0、3:1 都罩在「−4.5」的傘下,「4 盤」那張票的第一步也走完了。</p>
+    </div>
+    <div class="branch">
+      <span class="k">沒拿下</span>
+      <p>先別慌 —— 第一局本來就是全場變異最大的一局。真正的警報在第二局:捷克的攔網要是繼續被打穿,今晚就是「黏」的劇本,持票的人該冒冷汗。</p>
+    </div>
+    <p class="lead" style="margin-top:3px;">我們不猜方向 —— 決定這一晚的,就是這個開關。</p>
+  </section>
+
+  <section class="board">
+    <span class="tag">本期看板</span>
+    <h3>標籤是上週的,價格是今天的</h3>
+    <p>全世界因為一場五局大戰記住了「法國很黏」,今天的價,把那份記憶也算了進去。可是你買的不是上週的法國,是今晚這支。尺給你了,怎麼下是你的事。</p>
+    <p class="sign">—— ZONE 27 主編</p>
+  </section>
+
+  <div class="baseline">
+    <span>星星是價格評論,不是輸贏預測 · 本報不收博彩業者的廣告與贊助 · 不保證獲利<br>資料:國際排球總會(FIVB)· 歐洲媒體賽前報導 · 台灣運彩</span>
+    <span class="right"><b>《ZONE 27 戰報》NO. 029</b> · 免費 · 歡迎店家整頁影印<br>zone27.com.tw</span>
+  </div>
+
+</div>
+</body>
+</html>

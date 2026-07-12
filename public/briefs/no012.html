@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<title>ZONE 27 戰報 · 養樂多 @ 廣島 · 2026-07-07</title>
+<style>
+  /* ── ZONE 27 戰報 · A4 一頁 · 版式 v10(服務腔:數學留下 · 控訴腔處決 · 底欄合一) ── */
+  @page { size: A4; margin: 10mm 12mm; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body {
+    font-family: "Microsoft JhengHei", "Noto Sans TC", "PingFang TC", sans-serif;
+    color: #111; background: #e8e8e8; font-size: 10pt; line-height: 1.48;
+  }
+  .sheet { width: 210mm; min-height: 296mm; margin: 0 auto; background: #fff; padding: 11mm 13mm 8mm; }
+  @media print {
+    body { background: #fff; }
+    .sheet { width: auto; min-height: auto; margin: 0; padding: 0; zoom: 0.91; }
+  }
+
+  .masthead { display: flex; justify-content: space-between; align-items: center;
+    border-bottom: 3.5px solid #0F1A2E; padding-bottom: 6px; margin-bottom: 7px; }
+  .masthead .brand { font-size: 19pt; font-weight: 900; letter-spacing: 2px; color: #0F1A2E; }
+  .masthead .brand .en { font-size: 8pt; font-weight: 600; letter-spacing: 3px; color: #8A6A1F; display: block; margin-top: 1px; }
+  .sportbadge { display: flex; align-items: center; gap: 8px; }
+  .sportbadge .s { text-align: right; }
+  .sportbadge .sport { font-size: 15pt; font-weight: 900; color: #0F1A2E; letter-spacing: 3px; line-height: 1.1; }
+  .sportbadge .lg { font-size: 8pt; color: #8A6A1F; font-weight: 700; letter-spacing: 2px; }
+  .sportbadge .no { font-size: 7.5pt; color: #888; letter-spacing: 1px; }
+
+  .match { margin-bottom: 6px; }
+  .match h1 { font-size: 21pt; font-weight: 900; color: #0F1A2E; letter-spacing: 1px; line-height: 1.25; }
+  .match .meta { font-size: 9pt; color: #444; margin-top: 2px; }
+
+  .tldr { background: #0F1A2E; color: #fff; padding: 6px 11px; margin-bottom: 7px; }
+  .tldr .tag { font-size: 8pt; letter-spacing: 2px; color: #D4AF37; font-weight: 700; }
+  .tldr p { font-size: 11pt; font-weight: 700; line-height: 1.55; margin-top: 2px; }
+
+  section { margin-bottom: 6px; }
+  h2 { font-size: 10.5pt; font-weight: 800; color: #0F1A2E; letter-spacing: 1.5px;
+    border-left: 4px solid #8A6A1F; padding-left: 7px; margin-bottom: 4px; }
+  .facts li { list-style: none; padding-left: 15px; position: relative; margin-bottom: 3px; }
+  .facts li::before { content: "▪"; position: absolute; left: 2px; color: #8A6A1F; }
+  .small { font-size: 8.5pt; color: #555; }
+
+  .calc table { width: 100%; border-collapse: collapse; font-size: 9.5pt; }
+  .calc th, .calc td { border: 1px solid #ccc; padding: 3.5px 7px; vertical-align: middle; }
+  .calc th { background: #0F1A2E; color: #fff; font-size: 9pt; letter-spacing: 1px; text-align: left; }
+  .calc td.k { background: #EFEBE0; color: #0F1A2E; font-weight: 700; width: 46%; }
+  .calc td.v { font-weight: 900; color: #0F1A2E; font-variant-numeric: tabular-nums; }
+
+  .opts table { width: 100%; border-collapse: collapse; font-size: 9.5pt; }
+  .opts th, .opts td { border: 1px solid #ccc; padding: 4px 6px; text-align: left; vertical-align: top; }
+  .opts th { background: #EFEBE0; color: #0F1A2E; font-size: 9pt; }
+  .opts td.num { text-align: center; white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .opts td.star { text-align: center; white-space: nowrap; color: #8A6A1F; font-weight: 900; letter-spacing: 1px; }
+
+  .contra { background: #F5F3EE; border: 1px solid #d8d2c2; padding: 6px 10px; }
+  .contra li { list-style: none; padding-left: 15px; position: relative; margin-bottom: 2px; font-size: 9.5pt; }
+  .contra li::before { content: "▸"; position: absolute; left: 2px; color: #8A6A1F; }
+
+  .call { border: 2.5px solid #D4AF37; background: #FBF9F4; padding: 7px 12px; }
+  .call .tag { font-size: 8pt; letter-spacing: 2px; color: #8A6A1F; font-weight: 700; }
+  .call .pick { font-size: 13.5pt; font-weight: 900; color: #0F1A2E; margin: 3px 0 3px; letter-spacing: 0.5px; }
+  .call p { font-size: 9.5pt; line-height: 1.55; }
+
+  /* v10:底欄合一(信條+品牌一條線 · 網址只出現一次) */
+  .baseline { display: flex; justify-content: space-between; align-items: baseline; gap: 12px;
+    border-top: 2px solid #0F1A2E; margin-top: 6px; padding-top: 4px;
+    font-size: 8pt; color: #666; letter-spacing: 0.4px; }
+  .baseline .left { max-width: 72%; line-height: 1.5; }
+  .baseline .right { text-align: right; white-space: nowrap; font-weight: 700; color: #0F1A2E; }
+
+  footer { display: none; }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <div class="masthead">
+    <div class="brand">ZONE 27 戰報
+      <span class="en">THE PRE-MATCH BRIEF</span>
+    </div>
+    <div class="sportbadge">
+      <svg width="42" height="42" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="21" cy="21" r="18" stroke="#0F1A2E" stroke-width="2.5"/>
+        <path d="M10 6 q6 15 0 30 M32 6 q-6 15 0 30" stroke="#0F1A2E" stroke-width="2" fill="none"/>
+        <path d="M12 10 l3 1.5 M11 15 l3.5 1 M10.5 21 l3.5 .5 M11 27 l3.5 -1 M12 32 l3 -1.5 M30 10 l-3 1.5 M31 15 l-3.5 1 M31.5 21 l-3.5 .5 M31 27 l-3.5 -1 M30 32 l-3 -1.5" stroke="#0F1A2E" stroke-width="1.6"/>
+      </svg>
+      <div class="s">
+        <div class="sport">棒球</div>
+        <div class="lg">NPB 日本職棒</div>
+        <div class="no">NO. 012 · 2026 · 07 · 07</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="match">
+    <h1>養樂多燕子 @ 廣島鯉魚</h1>
+    <div class="meta">今晚 17:00 開賽(台北) · 廣島馬自達球場 · 央聯第 3(客)踢館第 5(主) · 先發:山野太一 vs 岡本駿(NPB 官方預告)</div>
+  </div>
+
+  <div class="tldr">
+    <span class="tag">10 秒看完</span>
+    <p>離首位只剩一步的養樂多,今晚被市場開成劣勢方 —— 而它推出的,是一個台灣沒人聽過、<u>防禦率卻只有 2.08 的左投</u>。東京那頭,並列首位的兩隊正在互咬:今晚贏球,央聯榜明天變天。</p>
+  </div>
+
+  <section>
+    <h2>三件你查不到的事</h2>
+    <ul class="facts">
+      <li><b>養樂多的先發是「名氣還沒追上球季」的隱形王牌。</b>山野太一,27 歲左投,本季 13 場先發 7 勝 2 敗 —— 那個防禦率是央聯數一數二的成績,而他的名字還沒紅出日本。</li>
+      <li><b>今晚有連動戲。</b>東京巨蛋那頭,並列首位的阪神和巨人正面互咬,必有一隊掉血 —— 燕子落後第一集團只剩 1.5 場,今晚贏,就直接貼到車尾。這場「不重要的比賽」,其實牽著整個央聯的榜。</li>
+      <li><b>總分線洩漏了莊家的劇本。</b>日職的大小線平常開 6.5 到 7.5,今晚只開 5.5 —— 一半的理由是那個左投,另一半莊家沒說。那一半,就是留給你自己想的部分。</li>
+    </ul>
+    <p class="small">先發:NPB 官方預告(npb.jp 可查) · 個人數據:日刊體育等日媒賽前報導 · 賠率:台灣運彩。</p>
+  </section>
+
+  <section class="calc">
+    <h2>本報算的數字 —— 這裡才有</h2>
+    <table>
+      <tr><th style="width:46%">把賠率翻成人話</th><th>算出來的結果</th></tr>
+      <tr><td class="k">拆掉水分後,市場的真心話</td><td class="v">廣島 51.5 : 養樂多 48.5 —— 一場銅板局</td></tr>
+      <tr><td class="k">1.66 要多準才不虧</td><td class="v">每押 10 次,要中 6 次</td></tr>
+      <tr><td class="k">1.76 要多準才不虧</td><td class="v">每押 10 次,中 5 次半</td></tr>
+      <tr><td class="k">3.55(前五局和局)要多準才有賺</td><td class="v">每押 10 次,中 3 次就過門檻</td></tr>
+    </table>
+  </section>
+
+  <section class="opts">
+    <h2>選項的星級</h2>
+    <table>
+      <tr><th>選項(台灣運彩)</th><th style="width:9%">賠率</th><th style="width:11%">星級</th><th>本報讀法(白話)</th></tr>
+      <tr><td>不讓分 · 廣島</td><td class="num">1.66</td><td class="star">★☆☆</td><td>市場信它的主場 —— 但這門檻不低,而對面丘上站著全聯盟最被低估的手臂。</td></tr>
+      <tr><td>不讓分 · 養樂多</td><td class="num">1.76</td><td class="star">★★☆</td><td>銅板局裡拿到比銅板好的價 —— 買的是第 1 件事那個球季,加上追榜的動機。</td></tr>
+      <tr><td>大小 5.5 · 小</td><td class="num">1.80</td><td class="star">★★☆</td><td>順著第 3 件事的劇本走,價又比大那邊高 —— 投手戰預期裡比較合理的一側。</td></tr>
+      <tr><td>大小 5.5 · 大</td><td class="num">1.63</td><td class="star">★☆☆</td><td>賭兩個先發同一晚走鐘 —— 在山野的球季裡,這劇本出現得不多。</td></tr>
+      <tr><td>前 5 局不讓分 · 和局</td><td class="num">3.55</td><td class="star">★★☆</td><td>這桌最有趣的價:投手戰預期下,0:0、1:1 走進第六局不稀奇 —— 以小博大的玩法,輸得起的錢才玩。</td></tr>
+      <tr><td>總分單雙(單 1.50 / 雙 1.96)</td><td class="num">—</td><td class="star">★☆☆</td><td>丟硬幣 —— 本報不評運氣。</td></tr>
+    </table>
+  </section>
+
+  <section class="contra">
+    <h2>反方的理由 —— 如果你想站主隊,功課也幫你做好了</h2>
+    <ul>
+      <li><b>市場把第 5 名開成優勢方,一定看到了什麼。</b>通常是主場的分裂數據 —— 馬自達球場的鯉魚,向來跟客場的鯉魚是兩支球隊。</li>
+      <li><b>7 勝 2 敗的球季,遲早有回檔的一晚。</b>均值回歸不挑日子 —— 越漂亮的數字,越接近它的第一次翻車。</li>
+      <li><b>今晚是燕子六連戰客場之旅的第一戰。</b>長征開局的慢熱,是主隊最好的朋友。</li>
+    </ul>
+  </section>
+
+  <section class="call">
+    <span class="tag">▌本期看板</span>
+    <div class="pick">市場信主場,本報信那個 2.08</div>
+    <p>第 5 名在主場被開成優勢方,第 3 名帶著王牌級先發變成狗牌 —— <b>這種錯位,一季沒有幾次。</b>數字攤開在上面,反方的功課也做了 —— 尺給你了,怎麼下是你的判斷。</p>
+  </section>
+
+  <div class="baseline">
+    <span class="left">星級是評論,不是預測 · 本報不收博彩業者的廣告與贊助 · 不保證獲利</span>
+    <span class="right">《ZONE 27 戰報》NO. 012 · 免費 · 歡迎整頁影印 · zone27.com.tw</span>
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<title>ZONE 27 戰報 NO.025 · 塞伊奈約基 @ 瓦薩</title>
+<style>
+  /* ── ZONE 27 戰報 · 門店列印版 · A4 一頁 · v18(避雷先行 · 提醒角度 · 今晚的開關 · 全台灣用語) ── */
+  @page { size: A4; margin: 10mm 12mm; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body { font-family: "Microsoft JhengHei", "Noto Sans TC", "PingFang TC", sans-serif;
+    color: #111; background: #e8e8e8; font-size: 10pt; line-height: 1.46; }
+  .sheet { width: 210mm; min-height: 296mm; margin: 0 auto; background: #fff; padding: 11mm 13mm 8mm; }
+  @media print { body { background: #fff; } .sheet { width: auto; min-height: auto; margin: 0; padding: 0; zoom: 0.90; } }
+
+  .masthead { display: flex; justify-content: space-between; align-items: center;
+    border-bottom: 3.5px solid #0F1A2E; padding-bottom: 5px; margin-bottom: 6px; }
+  .brand { font-size: 19pt; font-weight: 900; letter-spacing: 2px; color: #0F1A2E; }
+  .brand .en { font-size: 8pt; font-weight: 600; letter-spacing: 3px; color: #8A6A1F; display: block; margin-top: 1px; }
+  .sportbox { display: flex; align-items: center; gap: 10px; }
+  .sportbox .name { font-size: 22pt; font-weight: 900; color: #0F1A2E; letter-spacing: 4px; line-height: 1.1; }
+  .sportbox .sub { font-size: 8.5pt; color: #666; letter-spacing: 2px; display: block; margin-top: 1px; }
+  .sportbox .no { text-align: right; font-size: 8.5pt; color: #444; line-height: 1.5; border-left: 1px solid #ccc; padding-left: 10px; }
+  .sportbox .no b { color: #0F1A2E; }
+
+  .match { margin-bottom: 5px; }
+  .match .comp { font-size: 9pt; font-weight: 700; color: #8A6A1F; letter-spacing: 2px; }
+  .match h1 { font-size: 19pt; font-weight: 900; color: #0F1A2E; letter-spacing: 1px; line-height: 1.3; }
+  .match .meta { font-size: 9.5pt; color: #444; margin-top: 2px; }
+
+  .tldr { background: #0F1A2E; color: #E9E4D8; padding: 6px 12px; margin-bottom: 5px; }
+  .tldr .tag { font-size: 8pt; letter-spacing: 3px; color: #D4AF37; font-weight: 700; }
+  .tldr p { font-size: 11pt; font-weight: 700; line-height: 1.5; margin-top: 2px; }
+  .tldr b { color: #D4AF37; }
+
+  section { margin-bottom: 5px; }
+  h2 { font-size: 11pt; font-weight: 800; color: #0F1A2E; letter-spacing: 1.5px;
+    border-left: 4px solid #8A6A1F; padding-left: 7px; margin-bottom: 3px; }
+
+  .avoid table, .keep table { width: 100%; border-collapse: collapse; font-size: 9.8pt; }
+  .avoid th, .avoid td, .keep th, .keep td { border: 1px solid #ccc; padding: 4px 7px; text-align: left; vertical-align: middle; }
+  .avoid th, .keep th { background: #EFEBE0; color: #0F1A2E; font-size: 9pt; letter-spacing: 1px; }
+  .avoid td.num, .keep td.num { text-align: center; white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .avoid td.mark { text-align: center; color: #333; font-weight: 900; font-size: 12pt; width: 8%; }
+  .avoid tr.dead td { color: #777; background: #f3f3f3; }
+  .avoid tr.dead td.name, .avoid tr.dead td.num { text-decoration: line-through; text-decoration-thickness: 1.5px; text-decoration-color: #444; }
+  .keep td.star { text-align: center; white-space: nowrap; color: #8A6A1F; font-weight: 900; font-size: 10.5pt; width: 9%; }
+  .note { font-size: 8.5pt; color: #666; margin-top: 2px; }
+
+  .facts { counter-reset: fact; }
+  .facts li { list-style: none; padding-left: 17px; position: relative; margin-bottom: 2px; }
+  .facts li::before { content: counter(fact) ""; counter-increment: fact; position: absolute; left: 0;
+    font-weight: 900; color: #8A6A1F; font-size: 10.5pt; }
+
+  .switch { border: 2px solid #0F1A2E; padding: 7px 11px; background: #FAFAF7; }
+  .switch .tag { font-size: 8pt; letter-spacing: 2px; color: #8A6A1F; font-weight: 800; }
+  .switch h3 { font-size: 13pt; font-weight: 900; color: #0F1A2E; margin: 2px 0 3px; letter-spacing: 0.5px; }
+  .switch p.lead { font-size: 9.8pt; margin-bottom: 4px; }
+  .branch { display: flex; gap: 8px; margin: 3px 0; align-items: flex-start; }
+  .branch .k { flex: 0 0 66px; text-align: center; font-weight: 900; font-size: 9.5pt; padding: 2px 0;
+    border: 1.5px solid #0F1A2E; color: #0F1A2E; }
+  .branch.on .k { background: #0F1A2E; color: #E9E4D8; }
+  .branch p { font-size: 9.8pt; flex: 1; }
+
+  .board { border: 2.5px solid #8A6A1F; background: #FAF6EC; padding: 7px 12px; }
+  .board .tag { font-size: 8pt; letter-spacing: 3px; color: #8A6A1F; font-weight: 800; }
+  .board h3 { font-size: 13pt; font-weight: 900; color: #0F1A2E; letter-spacing: 0.5px; margin: 2px 0 3px; }
+  .board p { font-size: 9.8pt; line-height: 1.5; }
+
+  .baseline { border-top: 3px solid #0F1A2E; margin-top: 6px; padding-top: 5px;
+    display: flex; justify-content: space-between; gap: 12px; font-size: 8pt; color: #555; line-height: 1.6; }
+  .baseline .right { text-align: right; white-space: nowrap; }
+  .baseline b { color: #0F1A2E; }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <div class="masthead">
+    <div class="brand">ZONE 27 戰報
+      <span class="en">THE PRE-MATCH BRIEF</span>
+    </div>
+    <div class="sportbox">
+      <svg width="52" height="52" viewBox="0 0 40 40" aria-hidden="true">
+        <circle cx="20" cy="20" r="17" fill="none" stroke="#0F1A2E" stroke-width="2.2"/>
+        <path d="M20 15 L24.76 18.45 L22.94 24.05 L17.06 24.05 L15.24 18.45 Z" fill="none" stroke="#0F1A2E" stroke-width="1.6"/>
+        <path d="M20 15 L20 4 M24.76 18.45 L33 13 M22.94 24.05 L30 32 M17.06 24.05 L10 32 M15.24 18.45 L7 13" stroke="#8A6A1F" stroke-width="1.4"/>
+      </svg>
+      <div>
+        <span class="name">足 球</span>
+        <span class="sub">芬蘭超級聯賽</span>
+      </div>
+      <div class="no">
+        <b>NO. 025</b><br>2026 · 07 · 11
+      </div>
+    </div>
+  </div>
+
+  <div class="match">
+    <div class="comp">芬蘭超級聯賽 · 例行賽</div>
+    <h1>塞伊奈約基 @ 瓦薩</h1>
+    <div class="meta">艾麗莎球場(瓦薩主場)· 台北今晚午夜 12 點開踢</div>
+    <div class="meta">瓦薩 24 分第 4(6 勝 6 和 2 敗)· 塞隊 14 分第 10(3 勝 5 和 6 敗)· 都踢了 14 輪</div>
+  </div>
+
+  <div class="tldr">
+    <span class="tag">10 秒看完</span>
+    <p>這桌最貴的價,押在「兩隊都會進球」—— 但主隊的防線,是全聯盟最難踢穿的那種。<b>熱鬧的劇本標了頂價,老實的價反而沒人看</b>(下表)。開踢之後,第一顆球就是開關(見末欄)。</p>
+  </div>
+
+  <section class="avoid">
+    <h2>先提醒 —— 這三種,放下比較好</h2>
+    <table>
+      <tr><th style="width:31%">哪種盤</th><th style="width:10%">賠率</th><th style="width:8%"></th><th>提醒你的理由</th></tr>
+      <tr class="dead"><td class="name">兩隊都進球:是</td><td class="num">1.42</td><td class="mark">×</td>
+        <td>每 10 次要中 7 次才不虧 —— 而對面站著全聯盟最小氣的防線(見第 1 件事)。人氣劇本,頂級標價。</td></tr>
+      <tr class="dead"><td class="name">全場 大 2.5(進 3 球以上)</td><td class="num">1.48</td><td class="mark">×</td>
+        <td>跟上面買的是同一件事,換個名字再賣你一次 —— 一樣貴。</td></tr>
+      <tr class="dead"><td class="name">正確比數 / 半場全場(例:4 比 2)</td><td class="num">最高 64.0</td><td class="mark">×</td>
+        <td>九十分鐘有上百種比數,猜中一種是樂透 —— 樂透就用零錢玩,別當投資。</td></tr>
+    </table>
+    <p class="note">提醒是價格判斷,不是輸贏預測 —— 它們照樣可能中,只是這種價長期買下來會吃虧。</p>
+  </section>
+
+  <section class="keep">
+    <h2>剩下的 —— 才值得花腦筋</h2>
+    <table>
+      <tr><th style="width:31%">哪種盤</th><th style="width:10%">賠率</th><th style="width:9%">星級</th><th>白話講</th></tr>
+      <tr><td>不讓分:瓦薩</td><td class="num">1.85</td><td class="star">★★</td>
+        <td>排頭段的主隊對上後段班,這個價沒被人潮壓爛 —— 全桌邏輯站得最直的一格。</td></tr>
+      <tr><td>上半場 和局</td><td class="num">2.10</td><td class="star">★★</td>
+        <td>主隊丟球少、客隊得分少,上半場悶住有本錢 —— 注意:這格跟「進球秀」劇本互相矛盾,兩個只能信一個。</td></tr>
+    </table>
+    <p class="note">單、雙這類猜銅板的玩法,本報不評 —— 台灣運彩賠率以現場為準。</p>
+  </section>
+
+  <section>
+    <h2>三件你查不到的事</h2>
+    <ul class="facts">
+      <li><b>這桌最有信心的價,撞上全聯盟最緊的防線。</b>瓦薩這季 14 場只被踢進 11 球 —— 平均一場丟不到一球;塞隊一場踢不進 1.3 球。「兩隊都會進球」的劇本,是用上個月交手的印象蓋出來的,不是用這兩個數字。</li>
+      <li><b>兩隊差了 10 分,拼的是兩張不同的門票。</b>芬超例行賽打完,前六名進冠軍組、其他掉到保級那一組 —— 瓦薩在保冠軍組資格,塞隊在躲降級圈。都輸不起,但輸不起的理由不一樣。</li>
+      <li><b>歷史帳其實是客隊的。</b>這對同區老對手從 2007 年交手超過 50 次,塞隊贏的場次幾乎是瓦薩的兩倍 —— 只是「最近」風向全倒:上個月瓦薩才去塞隊家裡 2 比 1 帶走三分。你聽到的「瓦薩壓著打」,是近況,不是歷史。</li>
+    </ul>
+  </section>
+
+  <section class="switch">
+    <span class="tag">今晚的開關 —— 開賽後,只盯這一件事</span>
+    <h3>第一顆球,是誰踢進的</h3>
+    <p class="lead">強弱有差的比賽,劇本通常由主隊先寫 —— 但第一顆球誰進,整桌的價立刻跟著變臉。</p>
+    <div class="branch on">
+      <span class="k">瓦薩先進</span>
+      <p>照著積分差走:主隊控場、客隊追著跑 —— 不讓分那格的劇本成立;進球秀照樣是貴的,別因為進了一球就追。</p>
+    </div>
+    <div class="branch">
+      <span class="k">塞隊先進</span>
+      <p>「主場+近況」的定價當場漏水,主隊被迫壓上、比賽打開 —— 這時進球劇本才真的活過來,但好價已經沒了。</p>
+    </div>
+    <p class="lead" style="margin-top:4px;">我們不猜開關往哪邊倒 —— 我們只告訴你,決定這一晚的就是這個開關。</p>
+  </section>
+
+  <section class="board">
+    <span class="tag">本期看板</span>
+    <h3>熱鬧的價大家搶,老實的價沒人看</h3>
+    <p>大家都想看進球秀,錢就往那邊擠,價自然被買到頂;真正該問的問題 ——「排頭段的主隊,收不收得下後段班」—— 反而開得老老實實。長期會贏的人,買的是被冷落的老實價,不是被搶購的熱鬧價。尺給你了,怎麼下是你的事。</p>
+  </section>
+
+  <div class="baseline">
+    <span>星星是價格評論,不是輸贏預測 · 本報不收博彩業者的廣告與贊助 · 不保證獲利<br>資料:芬蘭超級聯賽官方 · 台灣運彩</span>
+    <span class="right"><b>《ZONE 27 戰報》NO. 025</b> · 免費 · 歡迎店家整頁影印<br>zone27.com.tw</span>
+  </div>
+
+</div>
+</body>
+</html>

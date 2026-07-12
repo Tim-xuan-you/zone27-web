@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<title>ZONE 27 戰報 · 軟銀鷹 @ 歐力士 · 2026-07-07</title>
+<style>
+  /* ── ZONE 27 戰報 · A4 一頁 · 版式 v8(零重複:一個數字一個家 · 獨家欄) ── */
+  @page { size: A4; margin: 10mm 12mm; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body {
+    font-family: "Microsoft JhengHei", "Noto Sans TC", "PingFang TC", sans-serif;
+    color: #111; background: #e8e8e8; font-size: 10pt; line-height: 1.48;
+  }
+  .sheet { width: 210mm; min-height: 296mm; margin: 0 auto; background: #fff; padding: 11mm 13mm 8mm; }
+  @media print {
+    body { background: #fff; }
+    .sheet { width: auto; min-height: auto; margin: 0; padding: 0; zoom: 0.91; }
+  }
+
+  .masthead { display: flex; justify-content: space-between; align-items: center;
+    border-bottom: 3.5px solid #0F1A2E; padding-bottom: 6px; margin-bottom: 7px; }
+  .masthead .brand { font-size: 19pt; font-weight: 900; letter-spacing: 2px; color: #0F1A2E; }
+  .masthead .brand .en { font-size: 8pt; font-weight: 600; letter-spacing: 3px; color: #8A6A1F; display: block; margin-top: 1px; }
+  .sportbadge { display: flex; align-items: center; gap: 8px; }
+  .sportbadge .s { text-align: right; }
+  .sportbadge .sport { font-size: 15pt; font-weight: 900; color: #0F1A2E; letter-spacing: 3px; line-height: 1.1; }
+  .sportbadge .lg { font-size: 8pt; color: #8A6A1F; font-weight: 700; letter-spacing: 2px; }
+  .sportbadge .no { font-size: 7.5pt; color: #888; letter-spacing: 1px; }
+
+  .match { margin-bottom: 6px; }
+  .match h1 { font-size: 21pt; font-weight: 900; color: #0F1A2E; letter-spacing: 1px; line-height: 1.25; }
+  .match .meta { font-size: 9pt; color: #444; margin-top: 2px; }
+
+  .tldr { background: #0F1A2E; color: #fff; padding: 6px 11px; margin-bottom: 7px; }
+  .tldr .tag { font-size: 8pt; letter-spacing: 2px; color: #D4AF37; font-weight: 700; }
+  .tldr p { font-size: 11pt; font-weight: 700; line-height: 1.55; margin-top: 2px; }
+
+  section { margin-bottom: 6px; }
+  h2 { font-size: 10.5pt; font-weight: 800; color: #0F1A2E; letter-spacing: 1.5px;
+    border-left: 4px solid #8A6A1F; padding-left: 7px; margin-bottom: 4px; }
+  .facts li { list-style: none; padding-left: 15px; position: relative; margin-bottom: 3px; }
+  .facts li::before { content: "▪"; position: absolute; left: 2px; color: #8A6A1F; }
+  .small { font-size: 8.5pt; color: #555; }
+
+  .duelstats table { width: 100%; border-collapse: collapse; font-size: 9.5pt; }
+  .duelstats th, .duelstats td { border: 1px solid #ccc; padding: 3.5px 6px; text-align: center; font-variant-numeric: tabular-nums; }
+  .duelstats th { background: #0F1A2E; color: #fff; font-size: 9pt; letter-spacing: 1px; }
+  .duelstats td.k { background: #EFEBE0; color: #0F1A2E; font-weight: 700; text-align: left; }
+  .duelstats td.win { font-weight: 900; color: #0F1A2E; }
+
+  .opts table { width: 100%; border-collapse: collapse; font-size: 9.5pt; }
+  .opts th, .opts td { border: 1px solid #ccc; padding: 4px 6px; text-align: left; vertical-align: top; }
+  .opts th { background: #EFEBE0; color: #0F1A2E; font-size: 9pt; }
+  .opts td.num { text-align: center; white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .opts td.star { text-align: center; white-space: nowrap; color: #8A6A1F; font-weight: 900; letter-spacing: 1px; }
+
+  .contra { background: #F5F3EE; border: 1px solid #d8d2c2; padding: 6px 10px; }
+  .contra li { list-style: none; padding-left: 15px; position: relative; margin-bottom: 2px; font-size: 9.5pt; }
+  .contra li::before { content: "▸"; position: absolute; left: 2px; color: #8A6A1F; }
+
+  .call { border: 2.5px solid #D4AF37; background: #FBF9F4; padding: 7px 12px; }
+  .call .tag { font-size: 8pt; letter-spacing: 2px; color: #8A6A1F; font-weight: 700; }
+  .call .pick { font-size: 13.5pt; font-weight: 900; color: #0F1A2E; margin: 3px 0 3px; letter-spacing: 0.5px; }
+  .call p { font-size: 9.5pt; line-height: 1.55; }
+
+  .creed { font-size: 8.5pt; color: #555; border-top: 1px solid #bbb; margin-top: 5px; padding-top: 4px;
+    letter-spacing: 0.3px; line-height: 1.6; }
+  footer { display: flex; justify-content: space-between; font-size: 8pt; color: #666;
+    padding-top: 3px; letter-spacing: 0.5px; }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <div class="masthead">
+    <div class="brand">ZONE 27 戰報
+      <span class="en">THE PRE-MATCH BRIEF</span>
+    </div>
+    <div class="sportbadge">
+      <svg width="42" height="42" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="21" cy="21" r="18" stroke="#0F1A2E" stroke-width="2.5"/>
+        <path d="M10 6 q6 15 0 30 M32 6 q-6 15 0 30" stroke="#0F1A2E" stroke-width="2" fill="none"/>
+        <path d="M12 10 l3 1.5 M11 15 l3.5 1 M10.5 21 l3.5 .5 M11 27 l3.5 -1 M12 32 l3 -1.5 M30 10 l-3 1.5 M31 15 l-3.5 1 M31.5 21 l-3.5 .5 M31 27 l-3.5 -1 M30 32 l-3 -1.5" stroke="#0F1A2E" stroke-width="1.6"/>
+      </svg>
+      <div class="s">
+        <div class="sport">棒球</div>
+        <div class="lg">NPB 日本職棒</div>
+        <div class="no">NO. 010 · 2026 · 07 · 07</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="match">
+    <h1>福岡軟銀鷹 @ 歐力士猛牛</h1>
+    <div class="meta">今晚 17:00 開賽(台北) · 大阪 京瓷巨蛋 · 洋聯龍頭作客,挑戰想擠回季後賽線的主隊</div>
+  </div>
+
+  <div class="tldr">
+    <span class="tag">10 秒看完</span>
+    <p>誰比較強全市場都知道,價早反映完了 —— 這期的主角不是強弱,是投手丘上兩個有故事的男人:<u>一個 213 公分的大聯盟浪人,對上一個讓全日本吵了一整年的先發</u>。</p>
+  </div>
+
+  <section>
+    <h2>三件你查不到的事</h2>
+    <ul class="facts">
+      <li><b>歐力士今晚的先發,是日職史上最高的人。</b>Sean Jerry,前舊金山巨人後援、大聯盟 93 場出賽,今年渡日,5 月用 7 局無失分拿下日職首勝 —— 出手點比誰都高,打者連視角都是新的。</li>
+      <li><b>軟銀的先發,背著全日本最有名的一場爭議。</b>上澤直之:火腿王牌自費闖美職,一年後沒回老東家、轉投更有錢的軟銀 —— 引爆日職圈的「上澤問題」論戰。他每一場先發,都在替那個決定答辯。</li>
+      <li><b>洋聯有 DH(指定打擊),央聯沒有。</b>投手不用上場打擊,洋聯理論上分更多 —— 但今晚總分線壓得比昨晚央聯世仇戰還敢。莊家算的是:京瓷巨蛋恆溫無風、牆高,歐力士的弱打線靠球場續命。</li>
+    </ul>
+  </section>
+
+  <section class="duelstats">
+    <h2>數字對照 —— 自己看,自己想</h2>
+    <table>
+      <tr><th style="width:34%"></th><th>軟銀鷹(客)</th><th>歐力士(主)</th></tr>
+      <tr><td class="k">洋聯排名</td><td class="win">首位</td><td>第 4(落後 7 場)</td></tr>
+      <tr><td class="k">戰績(至 7/6)</td><td class="win">46 勝 29 敗 1 和</td><td>39 勝 36 敗 2 和</td></tr>
+      <tr><td class="k">勝率</td><td class="win">.613</td><td>.520</td></tr>
+      <tr><td class="k">今晚先發(NPB 官方預告)</td><td>上澤直之(右投)</td><td>S. Jerry(右投 · 洋將)</td></tr>
+    </table>
+    <p class="small">戰績:NPB 官方(npb.jp 可查) · 先發:NPB 官方預告 · 賠率:台灣運彩。</p>
+  </section>
+
+  <section class="opts">
+    <h2>選項的星級</h2>
+    <table>
+      <tr><th>選項(台灣運彩)</th><th style="width:9%">賠率</th><th style="width:11%">星級</th><th>本報讀法(白話)</th></tr>
+      <tr><td>不讓分 · 軟銀</td><td class="num">1.60</td><td class="star">★☆☆</td><td>每押 10 次要中 6 次多 —— 買龍頭打第四名,全市場都排隊買的價,裡面沒有你的份。</td></tr>
+      <tr><td>讓分 -1.5 · 軟銀</td><td class="num">2.10</td><td class="star">★★☆</td><td>這桌唯一過 2 的價 —— 買它的理由只有一個:你相信軟銀打線能把那個大個子打穿。低分環境裡的高風險高報酬。</td></tr>
+      <tr><td>前 5 局不讓分 · 軟銀</td><td class="num">1.80</td><td class="star">★★☆</td><td>全場縮成前五局,換多兩成的賠率 —— 賭上澤的資歷壓過一個對手還不熟的手臂,順便躲開牛棚亂流。最合理的價差交易。</td></tr>
+      <tr><td>大小 6.5 · 小</td><td class="num">1.60</td><td class="star">★☆☆</td><td>劇本大概是對的 —— 但這個價已經把劇本收費收滿。跟著買,你只是在幫莊家對帳。</td></tr>
+      <tr><td>軟銀單隊得分 大 2.5</td><td class="num">1.48</td><td class="star">★☆☆</td><td>押 100 賺 48 的蚊子肉 —— 而對面是個沒幾卷錄影帶可研究的新面孔,變數比價差大。</td></tr>
+    </table>
+  </section>
+
+  <section class="contra">
+    <h2>反方的理由 —— 如果你想站主隊,功課也幫你做好了</h2>
+    <ul>
+      <li><b>Jerry 不是空白卷。</b>對羅德 7 局無失分不是運氣 —— 大聯盟等級的手臂,好的晚上封得住任何打線。</li>
+      <li><b>動機全在主隊這邊。</b>洋聯前三才有季後賽門票 —— 龍頭沒什麼非贏不可,主隊每場都是保衛戰。</li>
+      <li><b>低分環境天然壓縮強弱差。</b>巨蛋投手戰裡,爆冷只要一顆失投 —— 分差越小,排名差距越不值錢。</li>
+    </ul>
+  </section>
+
+  <section class="call">
+    <span class="tag">▌本期看板</span>
+    <div class="pick">莊家算得完球場,算不完兩個有故事的男人</div>
+    <p>這桌每條線都開得聰明 —— 但最大的變數不在線上:出手點全日本最高的浪人,對上替自己答辯的先發。<b>數據算得出環境,算不出人。</b>尺給你了,怎麼下是你的判斷。</p>
+  </section>
+
+  <div class="creed">
+    星級是評論,不是預測,理由永遠跟星星印在一起 · 數據可自行查證(NPB 官網)· 本報不收博彩業者的廣告與贊助、不代操、沒有「穩」這個字、不保證獲利 · zone27.com.tw
+  </div>
+  <footer>
+    <span>《ZONE 27 戰報》NO. 010 · 免費 · 歡迎店家整頁影印</span>
+    <span>zone27.com.tw · 每日出刊</span>
+  </footer>
+
+</div>
+</body>
+</html>

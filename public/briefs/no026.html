@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<title>ZONE 27 戰報 NO.026 · 芝加哥天空 @ 洛杉磯火花</title>
+<style>
+  /* ── ZONE 27 戰報 · 門店列印版 · A4 一頁 · v18(避雷先行 · 提醒角度 · 今晚的開關 · 小學生自然腔) ── */
+  @page { size: A4; margin: 10mm 12mm; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body { font-family: "Microsoft JhengHei", "Noto Sans TC", "PingFang TC", sans-serif;
+    color: #111; background: #e8e8e8; font-size: 10pt; line-height: 1.46; }
+  .sheet { width: 210mm; min-height: 296mm; margin: 0 auto; background: #fff; padding: 11mm 13mm 8mm; }
+  @media print { body { background: #fff; } .sheet { width: auto; min-height: auto; margin: 0; padding: 0; zoom: 0.88; } }
+
+  .masthead { display: flex; justify-content: space-between; align-items: center;
+    border-bottom: 3.5px solid #0F1A2E; padding-bottom: 5px; margin-bottom: 6px; }
+  .brand { font-size: 19pt; font-weight: 900; letter-spacing: 2px; color: #0F1A2E; }
+  .brand .en { font-size: 8pt; font-weight: 600; letter-spacing: 3px; color: #8A6A1F; display: block; margin-top: 1px; }
+  .sportbox { display: flex; align-items: center; gap: 10px; }
+  .sportbox .name { font-size: 22pt; font-weight: 900; color: #0F1A2E; letter-spacing: 4px; line-height: 1.1; }
+  .sportbox .sub { font-size: 8.5pt; color: #666; letter-spacing: 2px; display: block; margin-top: 1px; }
+  .sportbox .no { text-align: right; font-size: 8.5pt; color: #444; line-height: 1.5; border-left: 1px solid #ccc; padding-left: 10px; }
+  .sportbox .no b { color: #0F1A2E; }
+
+  .match { margin-bottom: 5px; }
+  .match .comp { font-size: 9pt; font-weight: 700; color: #8A6A1F; letter-spacing: 2px; }
+  .match h1 { font-size: 19pt; font-weight: 900; color: #0F1A2E; letter-spacing: 1px; line-height: 1.3; }
+  .match .meta { font-size: 9.5pt; color: #444; margin-top: 2px; }
+
+  .tldr { background: #0F1A2E; color: #E9E4D8; padding: 6px 12px; margin-bottom: 5px; }
+  .tldr .tag { font-size: 8pt; letter-spacing: 3px; color: #D4AF37; font-weight: 700; }
+  .tldr p { font-size: 11pt; font-weight: 700; line-height: 1.5; margin-top: 2px; }
+  .tldr b { color: #D4AF37; }
+
+  section { margin-bottom: 5px; }
+  h2 { font-size: 11pt; font-weight: 800; color: #0F1A2E; letter-spacing: 1.5px;
+    border-left: 4px solid #8A6A1F; padding-left: 7px; margin-bottom: 3px; }
+
+  .avoid table, .keep table { width: 100%; border-collapse: collapse; font-size: 9.8pt; }
+  .avoid th, .avoid td, .keep th, .keep td { border: 1px solid #ccc; padding: 4px 7px; text-align: left; vertical-align: middle; }
+  .avoid th, .keep th { background: #EFEBE0; color: #0F1A2E; font-size: 9pt; letter-spacing: 1px; }
+  .avoid td.num, .keep td.num { text-align: center; white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .avoid td.mark { text-align: center; color: #333; font-weight: 900; font-size: 12pt; width: 8%; }
+  .avoid tr.dead td { color: #777; background: #f3f3f3; }
+  .avoid tr.dead td.name, .avoid tr.dead td.num { text-decoration: line-through; text-decoration-thickness: 1.5px; text-decoration-color: #444; }
+  .keep td.star { text-align: center; white-space: nowrap; color: #8A6A1F; font-weight: 900; font-size: 10.5pt; width: 9%; }
+  .note { font-size: 8.5pt; color: #666; margin-top: 2px; }
+
+  .facts { counter-reset: fact; }
+  .facts li { list-style: none; padding-left: 17px; position: relative; margin-bottom: 2px; }
+  .facts li::before { content: counter(fact) ""; counter-increment: fact; position: absolute; left: 0;
+    font-weight: 900; color: #8A6A1F; font-size: 10.5pt; }
+
+  .switch { border: 2px solid #0F1A2E; padding: 7px 11px; background: #FAFAF7; }
+  .switch .tag { font-size: 8pt; letter-spacing: 2px; color: #8A6A1F; font-weight: 800; }
+  .switch h3 { font-size: 13pt; font-weight: 900; color: #0F1A2E; margin: 2px 0 3px; letter-spacing: 0.5px; }
+  .switch p.lead { font-size: 9.8pt; margin-bottom: 4px; }
+  .branch { display: flex; gap: 8px; margin: 3px 0; align-items: flex-start; }
+  .branch .k { flex: 0 0 66px; text-align: center; font-weight: 900; font-size: 9.5pt; padding: 2px 0;
+    border: 1.5px solid #0F1A2E; color: #0F1A2E; }
+  .branch.on .k { background: #0F1A2E; color: #E9E4D8; }
+  .branch p { font-size: 9.8pt; flex: 1; }
+
+  .board { border: 2.5px solid #8A6A1F; background: #FAF6EC; padding: 7px 12px; }
+  .board .tag { font-size: 8pt; letter-spacing: 3px; color: #8A6A1F; font-weight: 800; }
+  .board h3 { font-size: 13pt; font-weight: 900; color: #0F1A2E; letter-spacing: 0.5px; margin: 2px 0 3px; }
+  .board p { font-size: 9.8pt; line-height: 1.5; }
+
+  .baseline { border-top: 3px solid #0F1A2E; margin-top: 6px; padding-top: 5px;
+    display: flex; justify-content: space-between; gap: 12px; font-size: 8pt; color: #555; line-height: 1.6; }
+  .baseline .right { text-align: right; white-space: nowrap; }
+  .baseline b { color: #0F1A2E; }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <div class="masthead">
+    <div class="brand">ZONE 27 戰報
+      <span class="en">THE PRE-MATCH BRIEF</span>
+    </div>
+    <div class="sportbox">
+      <svg width="52" height="52" viewBox="0 0 40 40" aria-hidden="true">
+        <circle cx="20" cy="20" r="17" fill="none" stroke="#0F1A2E" stroke-width="2.2"/>
+        <path d="M20 3 L20 37 M3 20 L37 20" stroke="#0F1A2E" stroke-width="1.6"/>
+        <path d="M8 6.5 C14 13, 14 27, 8 33.5" fill="none" stroke="#8A6A1F" stroke-width="1.6"/>
+        <path d="M32 6.5 C26 13, 26 27, 32 33.5" fill="none" stroke="#8A6A1F" stroke-width="1.6"/>
+      </svg>
+      <div>
+        <span class="name">籃 球</span>
+        <span class="sub">WNBA 美國女籃</span>
+      </div>
+      <div class="no">
+        <b>NO. 026</b><br>2026 · 07 · 11
+      </div>
+    </div>
+  </div>
+
+  <div class="match">
+    <div class="comp">WNBA · 例行賽</div>
+    <h1>芝加哥天空 @ 洛杉磯火花</h1>
+    <div class="meta">Crypto.com 球館(洛杉磯 · 火花主場)· 台北明天上午 10:00 開球</div>
+    <div class="meta">天空 7 勝 14 敗 · 火花 9 勝 11 敗 · 兩隊的王牌今晚都不上場(見下)</div>
+  </div>
+
+  <div class="tldr">
+    <span class="tag">10 秒看完</span>
+    <p>兩邊的王牌全在休息室:天空的報銷了,火花的也上不了。市場還是要主隊讓分 —— 但這場真正的問題不是誰會贏,<b>是缺了這麼多人,分數堆不堆得起來</b>。第一節就有答案(見末欄)。</p>
+  </div>
+
+  <section class="avoid">
+    <h2>先提醒 —— 這三種,放下比較好</h2>
+    <table>
+      <tr><th style="width:31%">哪種盤</th><th style="width:13%">賠率</th><th style="width:8%"></th><th>提醒你的理由</th></tr>
+      <tr class="dead"><td class="name">勝分差(猜 5 分一格)</td><td class="num">3.80 起</td><td class="mark">×</td>
+        <td>最後一分鐘的犯規大戰會讓分差亂跳 —— 要猜中哪一格,跟射飛鏢差不多。</td></tr>
+      <tr class="dead"><td class="name">單節 / 半場 剛好平手</td><td class="num">10.0</td><td class="mark">×</td>
+        <td>籃球隨時都在得分,「剛好平手」一年碰不到幾次 —— 10 倍是糖衣,包的是很少發生的事。</td></tr>
+      <tr class="dead"><td class="name">火花不讓分(直接猜火花贏)</td><td class="num">1.68</td><td class="mark">×</td>
+        <td>跟隔壁「讓 1.5 分」買的幾乎是同一件事,拿的錢卻比較少 —— 籃球很少剛好贏 1 分,最後都在罰球。要買,買隔壁。</td></tr>
+    </table>
+    <p class="note">提醒是價格判斷,不是輸贏預測 —— 它們照樣可能中,只是這種價長期買下來會吃虧。</p>
+  </section>
+
+  <section class="keep">
+    <h2>剩下的 —— 才值得花腦筋</h2>
+    <table>
+      <tr><th style="width:31%">哪種盤</th><th style="width:13%">賠率</th><th style="width:9%">星級</th><th>白話講</th></tr>
+      <tr><td>全場 小 177.5(兩隊加總)</td><td class="num">1.75</td><td class="star">★★</td>
+        <td>價要你 10 次中將近 6 次,算公道 —— 兩邊會得分的人都缺,分數照理難堆。但別當鐵的(見第 3 件事)。</td></tr>
+      <tr><td>火花 讓 1.5 分</td><td class="num">1.76</td><td class="star">★</td>
+        <td>市場還是信主隊會贏 —— 可是它自己的主砲也躺著,在家又輸多贏少(見第 1、2 件事)。理由要你自己補。</td></tr>
+    </table>
+    <p class="note">單、雙是猜銅板,本報不評 —— 台灣運彩賠率以現場為準。</p>
+  </section>
+
+  <section>
+    <h2>三件你查不到的事</h2>
+    <ul class="facts">
+      <li><b>這不是健康的打受傷的,是受傷的打受傷的。</b>天空這邊:主砲 Jackson 膝蓋開刀、整季報銷,Carrington 也缺陣。火花這邊:近十場平均拿 23.9 分的 Plum、禁區的 Brink,兩個都確定不打。誰比較慘,還真說不準。</li>
+      <li><b>主隊在自己家,輸得比贏得多。</b>火花在主場、天空在客場,戰績都是 4 勝 7 敗 —— 半斤八兩。「主場優勢」這四個字,今晚要打折用。</li>
+      <li><b>缺人,不等於投不進球。</b>火花上一場沒有 Plum,全隊照樣轟下 106 分贏球;天空的助攻是東區第一(一場 20.8 次),球還是會動。兩支傷兵球隊都還有辦法得分 —— 這就是小分那格不能閉著眼睛買的原因。</li>
+    </ul>
+  </section>
+
+  <section class="switch">
+    <span class="tag">今晚的開關 —— 開球後,只盯這一件事</span>
+    <h3>第一節打完,兩隊加起來有沒有 44 分</h3>
+    <p class="lead">把總分線平均拆成四節,第一節就是試金石。</p>
+    <div class="branch on">
+      <span class="k">不到 44</span>
+      <p>缺人的比賽,果然快不起來 —— 小分的方向對了。方向對,價還是那個價,別因為對了一節就加碼。</p>
+    </div>
+    <div class="branch">
+      <span class="k">超過 44</span>
+      <p>替補們打出節奏,今晚不是防守戰 —— 小分的想法涼一半,分差也會跟著亂跳,讓分更難抓。</p>
+    </div>
+    <p class="lead" style="margin-top:4px;">我們不猜開關往哪邊倒 —— 我們只告訴你,決定這一晚的就是這個開關。</p>
+  </section>
+
+  <section class="board">
+    <span class="tag">本期看板</span>
+    <h3>別用健康時的印象,買傷兵的比賽</h3>
+    <p>這場兩邊的王牌都不在場上,連市場自己都只敢開小小的讓分。今晚唯一站得住的想法是「大家都缺人」—— 它值多少錢,上面兩張表講完了。要記得的只有一句:你印象中的那兩支球隊,今晚都不會上場。尺給你了,怎麼下是你的事。</p>
+  </section>
+
+  <div class="baseline">
+    <span>星星是價格評論,不是輸贏預測 · 本報不收博彩業者的廣告與贊助 · 不保證獲利<br>資料:WNBA 官方 · 美聯社賽前報 · 台灣運彩</span>
+    <span class="right"><b>《ZONE 27 戰報》NO. 026</b> · 免費 · 歡迎店家整頁影印<br>zone27.com.tw</span>
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<title>ZONE 27 戰報 NO.016 · 科羅拉多落磯 @ 洛杉磯道奇</title>
+<style>
+  /* ── ZONE 27 戰報 · 門店列印版 · A4 一頁 · v11 ── */
+  @page { size: A4; margin: 10mm 12mm; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body { font-family: "Microsoft JhengHei", "Noto Sans TC", "PingFang TC", sans-serif;
+    color: #111; background: #e8e8e8; font-size: 10pt; line-height: 1.5; }
+  .sheet { width: 210mm; min-height: 296mm; margin: 0 auto; background: #fff; padding: 11mm 13mm 8mm; }
+  @media print { body { background: #fff; } .sheet { width: auto; min-height: auto; margin: 0; padding: 0; zoom: 0.875; } }
+
+  /* 報頭 + 運動徽章 */
+  .masthead { display: flex; justify-content: space-between; align-items: flex-end;
+    border-bottom: 3.5px solid #0F1A2E; padding-bottom: 6px; margin-bottom: 9px; }
+  .brand { font-size: 19pt; font-weight: 900; letter-spacing: 2px; color: #0F1A2E; }
+  .brand .en { font-size: 8pt; font-weight: 600; letter-spacing: 3px; color: #8A6A1F; display: block; margin-top: 1px; }
+  .sportbox { display: flex; align-items: center; gap: 8px; }
+  .sportbox .name { font-size: 15pt; font-weight: 900; color: #0F1A2E; letter-spacing: 3px; }
+  .sportbox .sub { font-size: 8pt; color: #666; letter-spacing: 2px; display: block; }
+  .sportbox .no { text-align: right; font-size: 8.5pt; color: #444; line-height: 1.5; }
+  .sportbox .no b { color: #0F1A2E; }
+
+  /* 對戰塊 */
+  .match { margin-bottom: 7px; }
+  .match .comp { font-size: 9pt; font-weight: 700; color: #8A6A1F; letter-spacing: 2px; }
+  .match h1 { font-size: 19pt; font-weight: 900; color: #0F1A2E; letter-spacing: 1px; line-height: 1.3; }
+  .match .meta { font-size: 9.5pt; color: #444; margin-top: 2px; }
+
+  /* 10 秒看完 */
+  .tldr { background: #0F1A2E; color: #E9E4D8; padding: 7px 12px; margin-bottom: 6px; }
+  .tldr .tag { font-size: 8pt; letter-spacing: 3px; color: #D4AF37; font-weight: 700; }
+  .tldr p { font-size: 11.5pt; font-weight: 700; line-height: 1.55; margin-top: 2px; }
+  .tldr b { color: #D4AF37; }
+
+  section { margin-bottom: 6px; }
+  h2 { font-size: 11pt; font-weight: 800; color: #0F1A2E; letter-spacing: 1.5px;
+    border-left: 4px solid #8A6A1F; padding-left: 7px; margin-bottom: 4px; }
+  .facts li { list-style: none; padding-left: 17px; position: relative; margin-bottom: 4px; }
+  .facts li::before { content: counter(fact) ""; counter-increment: fact; position: absolute; left: 0;
+    font-weight: 900; color: #8A6A1F; font-size: 10.5pt; }
+  .facts { counter-reset: fact; }
+  .small { font-size: 8.5pt; color: #555; }
+
+  /* 本報算的數字 */
+  .calc { background: #F5F3EE; border: 1px solid #d8d2c2; padding: 7px 10px; }
+  .calc table { width: 100%; border-collapse: collapse; font-size: 9.8pt; margin-top: 3px; }
+  .calc td { border: 1px solid #cfc8b6; padding: 3.5px 8px; background: #fff; }
+  .calc td.k { width: 46%; font-weight: 700; color: #0F1A2E; background: #FAF8F2; }
+
+  /* 星級表 */
+  .menu table { width: 100%; border-collapse: collapse; font-size: 9.8pt; }
+  .menu th, .menu td { border: 1px solid #ccc; padding: 3.5px 7px; text-align: left; vertical-align: middle; }
+  .menu th { background: #EFEBE0; color: #0F1A2E; font-size: 9pt; letter-spacing: 1px; }
+  .menu td.num { text-align: center; white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .menu td.star { text-align: center; white-space: nowrap; color: #8A6A1F; font-weight: 900; font-size: 10.5pt; letter-spacing: 1px; }
+
+  /* 反方的理由 */
+  .contra { border: 1px dashed #999; padding: 6px 10px; }
+  .contra li { list-style: none; padding-left: 14px; position: relative; margin-bottom: 3px; font-size: 9.8pt; }
+  .contra li::before { content: "▲"; position: absolute; left: 0; color: #666; font-size: 8pt; top: 2px; }
+
+  /* 金框看板 */
+  .board { border: 2.5px solid #8A6A1F; background: #FAF6EC; padding: 8px 12px; }
+  .board .tag { font-size: 8pt; letter-spacing: 3px; color: #8A6A1F; font-weight: 800; }
+  .board h3 { font-size: 13pt; font-weight: 900; color: #0F1A2E; letter-spacing: 0.5px; margin: 2px 0 4px; }
+  .board p { font-size: 9.8pt; line-height: 1.55; }
+
+  /* 底欄 */
+  .baseline { border-top: 3px solid #0F1A2E; margin-top: 7px; padding-top: 5px;
+    display: flex; justify-content: space-between; gap: 12px; font-size: 8pt; color: #555; line-height: 1.6; }
+  .baseline .right { text-align: right; white-space: nowrap; }
+  .baseline b { color: #0F1A2E; }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <div class="masthead">
+    <div class="brand">ZONE 27 戰報
+      <span class="en">THE PRE-MATCH BRIEF</span>
+    </div>
+    <div class="sportbox">
+      <svg width="34" height="34" viewBox="0 0 40 40" aria-hidden="true">
+        <circle cx="20" cy="20" r="17" fill="none" stroke="#0F1A2E" stroke-width="2"/>
+        <path d="M12 6.5 Q19.5 20 12 33.5" fill="none" stroke="#0F1A2E" stroke-width="1.5"/>
+        <path d="M28 6.5 Q20.5 20 28 33.5" fill="none" stroke="#0F1A2E" stroke-width="1.5"/>
+        <path d="M13.2 12 L16.4 13.4 M14.6 20 L17.8 20 M13.2 28 L16.4 26.6" stroke="#8A6A1F" stroke-width="1.3"/>
+        <path d="M26.8 12 L23.6 13.4 M25.4 20 L22.2 20 M26.8 28 L23.6 26.6" stroke="#8A6A1F" stroke-width="1.3"/>
+      </svg>
+      <div>
+        <span class="name">棒球</span>
+        <span class="sub">MLB 美國職棒</span>
+      </div>
+      <div class="no">
+        <b>NO. 016</b><br>2026 · 07 · 09
+      </div>
+    </div>
+  </div>
+
+  <div class="match">
+    <div class="comp">MLB 例行賽 · 三連戰最終戰</div>
+    <h1>科羅拉多落磯 @ 洛杉磯道奇</h1>
+    <div class="meta">道奇球場(洛杉磯) · 台北 7/9(四)上午 10:10 開賽 · 季戰績:落磯 37勝54敗 · 道奇 59勝32敗</div>
+  </div>
+
+  <div class="tldr">
+    <span class="tag">10 秒看完</span>
+    <p>戰績差了 22 場的兩支球隊,本報引擎卻把今晚算成<b>純五五波</b> —— 因為道奇把球交給了隊上最燙手的先發:佐佐木朗希。強隊的招牌和今晚的投手丘,是兩件事。</p>
+  </div>
+
+  <section>
+    <h2>三件你查不到的事</h2>
+    <ul class="facts">
+      <li><b>佐佐木朗希現在是「大起大落型」。</b>本季防禦率 5.40,平均每九局被轟兩發全壘打 —— 但同時每九局也能抓九次三振。翻譯:他一好起來像王牌,一失投就是煙火秀,而你買任何一邊,買的都是這個不確定性。</li>
+      <li><b>市面流傳「落磯派菜鳥初登板」—— 錯。</b>落磯先發是老將 Feltner,本季防禦率 4.27,帳面比佐佐木還乾淨。整套「道奇打爆菜鳥」的劇本,建立在一個不存在的先發上。</li>
+      <li><b>落磯離開丹佛,是另一支球隊。</b>他們的比賽近十場平均一場合計 12 分,聽起來是大分製造機 —— 但那一半是丹佛高原(全聯盟最好打的球場)灌出來的。到了海邊的洛杉磯,同一套打線自動縮水。</li>
+    </ul>
+  </section>
+
+  <section class="calc">
+    <h2>本報算的數字 —— 這裡才有</h2>
+    <table>
+      <tr><td class="k">道奇不讓分 1.23,要多準才不虧?</td><td>每押 10 次,要中超過 8 次。</td></tr>
+      <tr><td class="k">總分大 8.5(1.50)vs 大 9.5(1.78)</td><td>前者 10 次要中 7 次;後者 10 次中 6 次就夠 —— 同一個劇本,後者的定價寬鬆得多。</td></tr>
+      <tr><td class="k">單雙盤(單 1.50 / 雙 1.96),拆掉水分後市場的真心話</td><td>單 57:雙 43 —— 但 1.50 的定價要求你 10 次中 7 次,比真心話貴了一截。</td></tr>
+    </table>
+  </section>
+
+  <section class="menu">
+    <h2>今晚的菜單 · 星級評的是「這個價公不公道」</h2>
+    <table>
+      <tr><th style="width:30%">盤口(台灣運彩)</th><th style="width:8%">賠率</th><th style="width:11%">星級</th><th>讀法</th></tr>
+      <tr><td>不讓分 · 道奇</td><td class="num">1.23</td><td class="star">★</td>
+        <td>引擎算成五五波的比賽(見看板),這個價買到的是隊徽,不是勝率。</td></tr>
+      <tr><td>全場總分 · 大 9.5</td><td class="num">1.78</td><td class="star">★★★</td>
+        <td>兩個會失分的先發(第 1、2 件事),配上全單最寬鬆的門檻 —— 這期定價最公道的一格。</td></tr>
+      <tr><td>全場總分 · 大 8.5</td><td class="num">1.50</td><td class="star">★★</td>
+        <td>劇本跟上面同一個,但便宜半分要多付很多 —— 昨晚這系列才剛開出單場合計 7 分。</td></tr>
+      <tr><td>1–5 局總分 · 大 4.5</td><td class="num">1.60</td><td class="star">★★</td>
+        <td>只賭先發互轟的時段、避開牛棚,思路聰明;定價把聰明收費收掉一半。</td></tr>
+      <tr><td>得分最高單局 · 總分單雙</td><td class="num">1.50+</td><td class="star">★</td>
+        <td>一個是猜哪局爆分的樂透,一個是丟銅板卻要你七成準(算式在上表)—— 數學都不站你這邊。</td></tr>
+    </table>
+  </section>
+
+  <section class="contra">
+    <h2>反方的理由 —— 想站對面的人,功課也幫你做了</h2>
+    <ul>
+      <li>反大分:落磯客場打線縮水(第 3 件事),而且道奇球場是出了名的投手球場 —— 晚場海風會把飛球壓在全壘打牆前。</li>
+      <li>反大分:這個系列首戰兩隊合力灌了 15 分,昨晚立刻掉回 7 分 —— 煙火不是天天放。</li>
+      <li>還是想買 1.23 的人:道奇畢竟是 59 勝的球隊打 37 勝的球隊,連輸同一個墊底對手兩天的劇本,歷史上確實少見 —— 只是這個價,把這份底氣收得一滴不剩。</li>
+    </ul>
+  </section>
+
+  <section class="board">
+    <span class="tag">本期看板</span>
+    <h3>1.23 的一面倒價格,蓋在一場 50:50 的比賽上</h3>
+    <p>市場用全場最低的賠率說「這場沒有懸念」;本報引擎(蒙地卡羅模擬一萬次 · 方法全公開)把整季實力和兩個先發算完,給出的卻是不選邊的銅板局 —— 佐佐木的失投風險,把道奇的紙面優勢整個吃掉了。兩邊必有一邊看錯。尺已經給你了,怎麼用是你的判斷。</p>
+  </section>
+
+  <div class="baseline">
+    <span>星級是價格評論,不是輸贏預測 · 本報不收博彩業者的廣告與贊助 · 不保證獲利<br>資料:MLB 官方 · 美媒賽前報導 · 台灣運彩</span>
+    <span class="right"><b>《ZONE 27 戰報》NO. 016</b> · 免費 · 歡迎店家整頁影印<br>zone27.com.tw</span>
+  </div>
+
+</div>
+</body>
+</html>

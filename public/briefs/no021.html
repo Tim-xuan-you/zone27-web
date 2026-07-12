@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<title>ZONE 27 戰報 NO.021 · 比利時 @ 西班牙</title>
+<style>
+  /* ── ZONE 27 戰報 · 門店列印版 · A4 一頁 · v16(禁定局用語 · CP值/長期會贏角度 · 足球創刊) ── */
+  @page { size: A4; margin: 10mm 12mm; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body { font-family: "Microsoft JhengHei", "Noto Sans TC", "PingFang TC", sans-serif;
+    color: #111; background: #e8e8e8; font-size: 10pt; line-height: 1.48; }
+  .sheet { width: 210mm; min-height: 296mm; margin: 0 auto; background: #fff; padding: 11mm 13mm 8mm; }
+  @media print { body { background: #fff; } .sheet { width: auto; min-height: auto; margin: 0; padding: 0; zoom: 0.845; } }
+
+  .masthead { display: flex; justify-content: space-between; align-items: center;
+    border-bottom: 3.5px solid #0F1A2E; padding-bottom: 5px; margin-bottom: 7px; }
+  .brand { font-size: 19pt; font-weight: 900; letter-spacing: 2px; color: #0F1A2E; }
+  .brand .en { font-size: 8pt; font-weight: 600; letter-spacing: 3px; color: #8A6A1F; display: block; margin-top: 1px; }
+  .sportbox { display: flex; align-items: center; gap: 10px; }
+  .sportbox .name { font-size: 22pt; font-weight: 900; color: #0F1A2E; letter-spacing: 4px; line-height: 1.1; }
+  .sportbox .sub { font-size: 8.5pt; color: #666; letter-spacing: 2px; display: block; margin-top: 1px; }
+  .sportbox .no { text-align: right; font-size: 8.5pt; color: #444; line-height: 1.5; border-left: 1px solid #ccc; padding-left: 10px; }
+  .sportbox .no b { color: #0F1A2E; }
+
+  .match { margin-bottom: 6px; }
+  .match .comp { font-size: 9pt; font-weight: 700; color: #8A6A1F; letter-spacing: 2px; }
+  .match h1 { font-size: 19pt; font-weight: 900; color: #0F1A2E; letter-spacing: 1px; line-height: 1.3; }
+  .match .meta { font-size: 9.5pt; color: #444; margin-top: 2px; }
+
+  .tldr { background: #0F1A2E; color: #E9E4D8; padding: 6px 12px; margin-bottom: 5px; }
+  .tldr .tag { font-size: 8pt; letter-spacing: 3px; color: #D4AF37; font-weight: 700; }
+  .tldr p { font-size: 11.5pt; font-weight: 700; line-height: 1.55; margin-top: 2px; }
+  .tldr b { color: #D4AF37; }
+
+  /* 引擎線(足球獨家 · 賽前鎖死) */
+  .engine { border: 2px solid #0F1A2E; padding: 6px 11px; margin-bottom: 5px; }
+  .engine .tag { font-size: 8pt; letter-spacing: 2px; color: #8A6A1F; font-weight: 800; }
+  .engine .line { font-size: 13pt; font-weight: 900; color: #0F1A2E; margin: 3px 0; letter-spacing: 0.5px; }
+  .engine .line b { color: #8A6A1F; }
+  .engine .note { font-size: 8.5pt; color: #555; }
+
+  section { margin-bottom: 5px; }
+  h2 { font-size: 11pt; font-weight: 800; color: #0F1A2E; letter-spacing: 1.5px;
+    border-left: 4px solid #8A6A1F; padding-left: 7px; margin-bottom: 3px; }
+  .facts { counter-reset: fact; }
+  .facts li { list-style: none; padding-left: 17px; position: relative; margin-bottom: 3px; }
+  .facts li::before { content: counter(fact) ""; counter-increment: fact; position: absolute; left: 0;
+    font-weight: 900; color: #8A6A1F; font-size: 10.5pt; }
+
+  .calc { background: #F5F3EE; border: 1px solid #d8d2c2; padding: 6px 10px; }
+  .calc table { width: 100%; border-collapse: collapse; font-size: 9.8pt; margin-top: 3px; }
+  .calc td { border: 1px solid #cfc8b6; padding: 4px 8px; background: #fff; }
+  .calc td.k { width: 42%; font-weight: 700; color: #0F1A2E; background: #FAF8F2; }
+
+  .menu table { width: 100%; border-collapse: collapse; font-size: 9.8pt; }
+  .menu th, .menu td { border: 1px solid #ccc; padding: 4px 7px; text-align: left; vertical-align: middle; }
+  .menu th { background: #EFEBE0; color: #0F1A2E; font-size: 9pt; letter-spacing: 1px; }
+  .menu td.num { text-align: center; white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .menu td.star { text-align: center; white-space: nowrap; color: #8A6A1F; font-weight: 900; font-size: 10.5pt; letter-spacing: 1px; }
+  .menu .skip { font-size: 8.5pt; color: #666; margin-top: 3px; }
+
+  .contra { border: 1px dashed #999; padding: 6px 10px; }
+  .contra li { list-style: none; padding-left: 14px; position: relative; margin-bottom: 3px; font-size: 9.8pt; }
+  .contra li::before { content: "▲"; position: absolute; left: 0; color: #666; font-size: 8pt; top: 2px; }
+
+  .board { border: 2.5px solid #8A6A1F; background: #FAF6EC; padding: 8px 12px; }
+  .board .tag { font-size: 8pt; letter-spacing: 3px; color: #8A6A1F; font-weight: 800; }
+  .board h3 { font-size: 13pt; font-weight: 900; color: #0F1A2E; letter-spacing: 0.5px; margin: 2px 0 4px; }
+  .board p { font-size: 9.8pt; line-height: 1.55; }
+
+  .baseline { border-top: 3px solid #0F1A2E; margin-top: 7px; padding-top: 5px;
+    display: flex; justify-content: space-between; gap: 12px; font-size: 8pt; color: #555; line-height: 1.6; }
+  .baseline .right { text-align: right; white-space: nowrap; }
+  .baseline b { color: #0F1A2E; }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <div class="masthead">
+    <div class="brand">ZONE 27 戰報
+      <span class="en">THE PRE-MATCH BRIEF</span>
+    </div>
+    <div class="sportbox">
+      <svg width="52" height="52" viewBox="0 0 40 40" aria-hidden="true">
+        <circle cx="20" cy="20" r="17" fill="none" stroke="#0F1A2E" stroke-width="2.2"/>
+        <path d="M20 15 L24.76 18.45 L22.94 24.05 L17.06 24.05 L15.24 18.45 Z" fill="none" stroke="#0F1A2E" stroke-width="1.6"/>
+        <path d="M20 15 L20 4 M24.76 18.45 L33 13 M22.94 24.05 L30 32 M17.06 24.05 L10 32 M15.24 18.45 L7 13" stroke="#8A6A1F" stroke-width="1.4"/>
+      </svg>
+      <div>
+        <span class="name">足 球</span>
+        <span class="sub">世界盃 · 8 強戰</span>
+      </div>
+      <div class="no">
+        <b>NO. 021</b><br>2026 · 07 · 11
+      </div>
+    </div>
+  </div>
+
+  <div class="match">
+    <div class="comp">2026 世界盃 · 八強淘汰賽</div>
+    <h1>比利時 @ 西班牙</h1>
+    <div class="meta">SoFi 體育場(洛杉磯) · 台北 7/11(六)凌晨 03:00 開踢</div>
+  </div>
+
+  <div class="tldr">
+    <span class="tag">10 秒看完</span>
+    <p>大家剛看完比利時連兩場大比分,錢一面倒押「大分」—— 賠率被壓到很爛。但西班牙這屆一球未失。<b>今晚真正划算的,不是押哪邊,是別去買被灌爆的大分。</b></p>
+  </div>
+
+  <div class="engine">
+    <span class="tag">ZONE 27 引擎線 · 7/8 賽前鎖死 · 改不了</span>
+    <div class="line">西班牙 <b>48%</b> · 和局 27% · 比利時 25% · 模型估全場約 <b>2.6 球</b></div>
+    <span class="note">賽前算好、當天公開鎖住 —— 不是賽後才補講。西班牙看好,但只是小勝,不是輾壓。</span>
+  </div>
+
+  <section>
+    <h2>三件你查不到的事</h2>
+    <ul class="facts">
+      <li><b>西班牙這屆,一顆球都沒被攻進。</b>五場全部零失球。但他們贏得很小 —— 淘汰賽兩場都是 1 比 0,還是補時才進的。這是一支把比賽越拖越悶的隊。</li>
+      <li><b>比利時的「大分」是錯覺。</b>他們大勝美國、逆轉塞內加爾,大家就以為他們場場轟。可是那是打開放的對手 —— 碰上西班牙這面牆,空間會被鎖死。</li>
+      <li><b>大眾的錢,決定了盤口。</b>散戶剛看完進球秀,直覺買大分、買兩隊都進 —— 錢湧過去,莊家就把這兩個價越壓越低。跟著人潮走的價,最貴。</li>
+    </ul>
+  </section>
+
+  <section class="calc">
+    <h2>本報算的數字 —— 這裡才有</h2>
+    <table>
+      <tr><td class="k">大 2.5(賠 1.56)= 賭進 3 球以上</td><td>要不虧,10 次得中 6 次多(64%)。但我們模型只給大約一半(見上引擎線)—— 明顯貴。</td></tr>
+      <tr><td class="k">小 2.5(賠 1.88)= 賭進 2 球以內</td><td>10 次中 5 次多(53%)就打平。模型算下來也差不多一半 —— 幾乎剛好公道,不是划算到躺賺。</td></tr>
+      <tr><td class="k">兩隊都進「是」(賠 1.50)= 賭雙方都得分</td><td>10 次要中將近 7 次。模型只給大約一半 —— 跟大分同一種貴。</td></tr>
+    </table>
+  </section>
+
+  <section class="menu">
+    <h2>今日的菜單 · 星星評的是「這個價划不划算」</h2>
+    <table>
+      <tr><th style="width:30%">怎麼買(台灣運彩)</th><th style="width:8%">賠率</th><th style="width:11%">星級</th><th>白話講</th></tr>
+      <tr><td>小 2.5(進 2 球以內)</td><td class="num">1.88</td><td class="star">★★</td>
+        <td>逆著人潮站,價也接近公道 —— 全單最合理的一格。但只是公道,不是划算,別當躺賺。</td></tr>
+      <tr><td>兩隊都進 · 否</td><td class="num">1.85</td><td class="star">★★</td>
+        <td>同一個「悶戰、進球少」的想法,換個買法。跟上面小分別重複押同一件事。</td></tr>
+      <tr><td>上半場 · 和局</td><td class="num">2.10</td><td class="star">★★</td>
+        <td>八強上半場雙方都先求不失誤,0 比 0 進中場很常見。註:我們模型不算半場,這格靠球場常識。</td></tr>
+      <tr><td>大 2.5(進 3 球以上)</td><td class="num">1.56</td><td class="star">★</td>
+        <td>大眾灌爆的價。要 64% 才回本,模型只給一半 —— 長期買這種,錢會慢慢流光。</td></tr>
+      <tr><td>兩隊都進 · 是</td><td class="num">1.50</td><td class="star">★</td>
+        <td>全場人氣最高、也最貴的一格。你付的是人潮,不是勝算。</td></tr>
+    </table>
+    <p class="skip">單雙、正確比數這種猜運氣、切太細的玩法,本報不評 —— 大家心裡有數。</p>
+  </section>
+
+  <section class="contra">
+    <h2>想買大分、看好比利時的人,理由也幫你想好了</h2>
+    <ul>
+      <li>比利時的黃金世代火力是真的 —— 一次反擊、一顆定位球,大分就破了。</li>
+      <li>西班牙贏得太小,代表一個失誤就能改變比數 —— 淘汰賽後段常常突然打開。</li>
+      <li>兩支世界級球隊,悶到 0 比 0 進中場,本來就不是常態。</li>
+    </ul>
+  </section>
+
+  <section class="board">
+    <span class="tag">本期看板</span>
+    <h3>長期會贏的人,不是每場找到躺賺 —— 是每場都拒絕爛價</h3>
+    <p>今晚沒有躺賺的價,但有一個很清楚的爛價:被大眾灌爆的大分 —— 回本門檻遠高過它真正會發生的機率。長期會輸的人一直買這種「大家都在買」的貴價;長期會贏的人看到就跳過。尺給你了,怎麼下是你的事。</p>
+  </section>
+
+  <div class="baseline">
+    <span>星星是價格評論,不是輸贏預測 · 本報不收博彩業者的廣告與贊助 · 不保證獲利<br>資料:世界盃官方 · 國際賽事數據 · 台灣運彩 · ZONE 27 引擎</span>
+    <span class="right"><b>《ZONE 27 戰報》NO. 021</b> · 免費 · 歡迎店家整頁影印<br>zone27.com.tw</span>
+  </div>
+
+</div>
+</body>
+</html>

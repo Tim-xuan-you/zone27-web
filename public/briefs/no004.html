@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<title>ZONE 27 戰報 · 日本 @ 南韓 · 2026-07-06</title>
+<style>
+  /* ── ZONE 27 戰報 · 門店列印版 · A4 一頁 · 版式 v3(加「本報的一手」· 有立場+被對帳) ── */
+  @page { size: A4; margin: 10mm 12mm; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body {
+    font-family: "Microsoft JhengHei", "Noto Sans TC", "PingFang TC", sans-serif;
+    color: #111; background: #e8e8e8; font-size: 9.8pt; line-height: 1.44;
+  }
+  .sheet {
+    width: 210mm; min-height: 296mm; margin: 0 auto; background: #fff;
+    padding: 11mm 13mm 8mm;
+  }
+  @media print {
+    body { background: #fff; }
+    .sheet { width: auto; min-height: auto; margin: 0; padding: 0; zoom: 0.92; }
+  }
+
+  .masthead { display: flex; justify-content: space-between; align-items: flex-end;
+    border-bottom: 3.5px solid #0F1A2E; padding-bottom: 6px; }
+  .masthead .brand { font-size: 19pt; font-weight: 900; letter-spacing: 2px; color: #0F1A2E; }
+  .masthead .brand .en { font-size: 8pt; font-weight: 600; letter-spacing: 3px; color: #8A6A1F; display: block; margin-top: 1px; }
+  .masthead .issue { text-align: right; font-size: 8.5pt; color: #444; line-height: 1.5; }
+  .masthead .issue b { color: #0F1A2E; }
+  .tagline { display: flex; justify-content: space-between; font-size: 8.5pt; color: #555;
+    border-bottom: 1px solid #bbb; padding: 3px 1px 4px; margin-bottom: 8px; letter-spacing: 1px; }
+
+  .match { margin-bottom: 6px; }
+  .match .comp { font-size: 9pt; font-weight: 700; color: #8A6A1F; letter-spacing: 2px; }
+  .match h1 { font-size: 20pt; font-weight: 900; color: #0F1A2E; letter-spacing: 1px; line-height: 1.25; }
+  .match .meta { font-size: 9pt; color: #444; margin-top: 2px; }
+
+  .tldr { background: #0F1A2E; color: #fff; padding: 6px 10px; margin-bottom: 6px; }
+  .tldr .tag { font-size: 8pt; letter-spacing: 2px; color: #D4AF37; font-weight: 700; }
+  .tldr p { font-size: 10.5pt; font-weight: 700; line-height: 1.5; margin-top: 2px; }
+
+  section { margin-bottom: 5px; }
+  h2 { font-size: 10.5pt; font-weight: 800; color: #0F1A2E; letter-spacing: 1.5px;
+    border-left: 4px solid #8A6A1F; padding-left: 7px; margin-bottom: 3px; }
+  p { margin-bottom: 3px; }
+  .facts li { list-style: none; padding-left: 15px; position: relative; margin-bottom: 2px; }
+  .facts li::before { content: "▪"; position: absolute; left: 2px; color: #8A6A1F; }
+  .small { font-size: 8.5pt; color: #555; }
+
+  .fig { background: #F5F3EE; border: 1px solid #d8d2c2; padding: 6px 9px 7px; }
+  .fig .row { display: flex; align-items: center; gap: 7px; margin-top: 4px; }
+  .fig .lbl { width: 128px; font-size: 8.5pt; color: #333; text-align: right; flex-shrink: 0; }
+  .fig .track { flex: 1; background: #E4DFD2; height: 12px; }
+  .fig .bar { height: 12px; display: block; }
+  .fig .bar.past { background: #8A93A8; }
+  .fig .bar.line { background: #0F1A2E; }
+  .fig .val { font-size: 9.5pt; font-weight: 800; color: #0F1A2E; width: 76px; flex-shrink: 0; font-variant-numeric: tabular-nums; }
+  .fig .gap { height: 5px; }
+  .fig .cap { font-size: 8.5pt; color: #555; margin-top: 5px; }
+
+  .vigbar { display: flex; height: 17px; margin: 5px 0 2px; font-size: 8pt; font-weight: 700; }
+  .vigbar .play { background: #E4DFD2; color: #333; width: 82.9%; display: flex; align-items: center; padding-left: 7px; }
+  .vigbar .house { background: #0F1A2E; color: #D4AF37; width: 17.1%; display: flex; align-items: center; justify-content: center; }
+
+  .opts table { width: 100%; border-collapse: collapse; font-size: 9.5pt; }
+  .opts th, .opts td { border: 1px solid #ccc; padding: 3px 5px; text-align: left; vertical-align: top; }
+  .opts th { background: #EFEBE0; color: #0F1A2E; font-size: 9pt; }
+  .opts td.num { text-align: center; white-space: nowrap; font-variant-numeric: tabular-nums; }
+
+  /* v3:本報的一手(全張唯一穿金的框 · 有立場 + 被對帳) */
+  .call { border: 2.5px solid #D4AF37; background: #FBF9F4; padding: 7px 11px; }
+  .call .tag { font-size: 8pt; letter-spacing: 2px; color: #8A6A1F; font-weight: 700; }
+  .call .pick { font-size: 14pt; font-weight: 900; color: #0F1A2E; margin: 2px 0 3px; letter-spacing: 0.5px; }
+  .call .pick .conf { font-size: 9.5pt; font-weight: 800; color: #8A6A1F; letter-spacing: 1px; }
+  .call p { font-size: 9.5pt; line-height: 1.5; }
+  .call .ledger { font-size: 8.5pt; color: #555; margin-top: 4px; border-top: 1px solid #d8d2c2; padding-top: 3px; }
+
+  .rules { background: #0F1A2E; color: #E9E4D8; padding: 7px 10px; }
+  .rules h2 { color: #fff; border-left-color: #D4AF37; margin-bottom: 3px; }
+  .rules li { list-style: none; padding-left: 14px; position: relative; font-size: 9pt; line-height: 1.55; color: #D9D3C4; margin-bottom: 1px; }
+  .rules li::before { content: "▪"; position: absolute; left: 2px; color: #D4AF37; }
+  .rules .url { color: #D4AF37; font-weight: 700; letter-spacing: 0.5px; }
+
+  footer { display: flex; justify-content: space-between; font-size: 8pt; color: #666;
+    border-top: 1px solid #bbb; margin-top: 7px; padding-top: 4px; letter-spacing: 0.5px; }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <div class="masthead">
+    <div class="brand">ZONE 27 戰報
+      <span class="en">THE PRE-MATCH BRIEF</span>
+    </div>
+    <div class="issue">
+      <b>NO. 004</b><br>
+      2026 · 07 · 06 · 台北<br>
+      本期:男籃世界盃資格賽
+    </div>
+  </div>
+  <div class="tagline">
+    <span>給運彩玩家的一頁賽前功課</span>
+    <span>不靠直覺 · 只看演算法</span>
+  </div>
+
+  <div class="match">
+    <div class="comp">2027 世界盃男籃 · 亞太區資格賽 B 組 · 日韓世仇戰</div>
+    <h1>日本 @ 南韓</h1>
+    <div class="meta">7/6(一) · 高陽(南韓主場 · 6,900 席完售) · 一隊已篤定晉級,一隊輸了就到懸崖邊</div>
+  </div>
+
+  <div class="tldr">
+    <span class="tag">10 秒看完</span>
+    <p>世仇戰,但兩隊要的不一樣:日本已篤定晉級,這場可輸;南韓剛輸中華台北,主場再輸就看人臉色。強弱看戰績,拚命看動機 —— <u>本報這期的一手:南韓受讓 +6.5(看好)</u>,細節在金框。</p>
+  </div>
+
+  <section class="fig">
+    <h2>兩條線 vs 上次交手(2 月 · 沖繩)</h2>
+    <div class="row">
+      <span class="lbl">上次日本贏了</span>
+      <span class="track"><span class="bar past" style="width:75%"></span></span>
+      <span class="val">6 分</span>
+    </div>
+    <div class="row">
+      <span class="lbl">這次南韓受讓線</span>
+      <span class="track"><span class="bar line" style="width:81%"></span></span>
+      <span class="val">6.5</span>
+    </div>
+    <div class="gap"></div>
+    <div class="row">
+      <span class="lbl">上次兩隊合計</span>
+      <span class="track"><span class="bar past" style="width:91%"></span></span>
+      <span class="val">150 分</span>
+    </div>
+    <div class="row">
+      <span class="lbl">這次大小門檻</span>
+      <span class="track"><span class="bar line" style="width:97%"></span></span>
+      <span class="val">159.5</span>
+    </div>
+    <p class="cap">受讓線又貼著上次分差開 —— 但注意:上次是在<b>日本主場</b>只贏 6 分,這次換南韓完售主場。</p>
+  </section>
+
+  <section>
+    <h2>賽前三個事實</h2>
+    <ul class="facts">
+      <li><b>動機不對等。</b>日本 4 勝 1 敗、已篤定晉級,這場輸了沒事;南韓 2 勝 3 敗、7/3 才輸中華台北,再輸就看人臉色 —— 完售主場只有一個劇本:死咬。</li>
+      <li><b>世仇的天平正在翻面。</b>2 月那場 78:72 是日本近 30 年首次在大賽贏韓國;上場又讓中國吞下 91 年首次主場輸日 —— 這支日本是歷來最強版本。</li>
+      <li><b>南韓的減分項誠實列。</b>三連敗中、頭號射手(旅美 Lee Hyun-jung)本窗缺陣 —— 靠的是動機和主場,不是狀態。</li>
+    </ul>
+    <p class="small">賽果與名單來源:FIBA 官方、韓媒公開報導 · 完售:高陽小野體育館 6,900 席 · 賠率:台灣運彩。</p>
+  </section>
+
+  <section>
+    <h2>盤口解剖 —— 1.22 是什麼意思?</h2>
+    <p>日本不讓分開 1.22:白話是<b>每押 10 次,要中超過 8 次才不虧</b>。兩邊(1.22 / 2.85)機率加總 117.1%,多出的就是先繳的過路費:</p>
+    <div class="vigbar">
+      <div class="play">82.9 元 —— 真正拿去對賭的部分</div>
+      <div class="house">17.1 元 先繳</div>
+    </div>
+  </section>
+
+  <section class="opts">
+    <h2>選項的價格 —— 數學算給你看,一手挑給你看</h2>
+    <table>
+      <tr><th>選項(台灣運彩)</th><th style="width:11%">賠率</th><th>本報讀法(白話)</th></tr>
+      <tr><td>不讓分 · 日本</td><td class="num">1.22</td><td>買強隊招牌 —— 但已晉級的隊沒有非贏不可的理由。散戶最愛的價,水也最重。</td></tr>
+      <tr><td>不讓分 · 南韓</td><td class="num">2.85</td><td>倒打:買主場+世仇+背水一戰 —— 但要南韓直接贏,門檻高;是彩票不是主餐。</td></tr>
+      <tr><td>讓分 · 南韓 +6.5</td><td class="num">1.85</td><td>不用南韓贏 —— 輸 6 分以內都算對。上次在人家主場也只輸 6 → 本報的一手,見下欄。</td></tr>
+      <tr><td>讓分 · 南韓 +8.5</td><td class="num">1.60</td><td>同劇本多兩分保險,價差 0.25 —— 保險買貴了。</td></tr>
+      <tr><td>大小 159.5 · 小</td><td class="num">1.75</td><td>淘汰邊緣通常防守緊、節奏慢 —— 上次合計才 150。跟受讓同源,別把同一個想法押兩次。</td></tr>
+    </table>
+  </section>
+
+  <section class="call">
+    <span class="tag">▌本報的一手 · THE CALL · 下期頭版對帳</span>
+    <div class="pick">南韓 受讓 +6.5 @ 1.85 <span class="conf">信心:看好(三級中的第二級)</span></div>
+    <p>理由:必勝動機 + 完售的世仇主場 + 上次客場也只輸 6 分 —— 買的是南韓把比賽咬到最後一分鐘。風險攤開:三連敗、少了頭號射手、日本正巔峰 —— 所以是「看好」,不是「重壓」。</p>
+    <p class="ledger">本報第一手正式掛帳的判讀。下期頭版印結果:對了印、錯了也印,累計戰績從這手起算 —— 敢這樣做的,只有這一份。</p>
+  </section>
+
+  <section class="rules">
+    <h2>本報的規矩(每期照舊)</h2>
+    <ul>
+      <li>引擎:本場沒開線 —— 國家隊資料不足,算不準就不硬算;有開線的場,全數賽前鎖定、賽後對帳。</li>
+      <li>對帳:「本報的一手」下期頭版印結果,累計戰績永遠攤開 —— 含輸。</li>
+      <li>本報不代操、沒有「穩」這個字、不保證獲利;所有紀錄公開:<span class="url">zone27.com.tw/track-record</span></li>
+    </ul>
+  </section>
+
+  <footer>
+    <span>《ZONE 27 戰報》NO. 004 · 免費 · 歡迎店家整頁影印</span>
+    <span>zone27.com.tw · 明日戰報見</span>
+  </footer>
+
+</div>
+</body>
+</html>
