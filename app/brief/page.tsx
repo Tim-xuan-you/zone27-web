@@ -106,6 +106,9 @@ export default function BriefPage() {
                   <p className="mt-1.5 text-bone text-lg sm:text-xl font-light tracking-tight">
                     {b.matchup}
                   </p>
+                  {b.hook && (
+                    <p className="mt-1.5 text-gold/90 text-sm leading-snug">「{b.hook}」</p>
+                  )}
                   {b.note && (
                     <p className="mt-0.5 font-mono text-mute/70 text-[10px] tracking-[0.2em]">
                       {b.note}

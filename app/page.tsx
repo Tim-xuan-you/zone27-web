@@ -10,6 +10,7 @@ import EngineThreeWayBar from "@/components/EngineThreeWayBar";
 import HomepagePulseStrip from "@/components/HomepagePulseStrip";
 import HomepageTableStrip from "@/components/HomepageTableStrip";
 import HomepageBriefHero from "@/components/HomepageBriefHero";
+import { visibleBriefs } from "@/lib/briefs";
 import HomepageLadderStrip from "@/components/HomepageLadderStrip";
 import { getNationalCode } from "@/lib/soccer/teams";
 import {
@@ -190,12 +191,18 @@ export default async function Home() {
           </h1>
           {/* 招牌金髮絲線(zone27-rule)· 一道品牌記號的呼吸。 */}
           <div className="zone27-rule max-w-[300px] mx-auto mt-7" aria-hidden="true" />
+          {/* 特色宣示條(Tim「首頁很弱 · 特色呢?」· Polymarket 的厲害感=活的數字非形容詞):
+              期數是登記簿活數 · 其餘是別人抄不動的硬事實(自家引擎 · 賽前鎖死不改 · 免費)。 */}
+          <p className="mt-6 font-mono text-gold/85 text-[11px] sm:text-xs tracking-[0.2em]">
+            已出刊 {visibleBriefs().length} 期 · 引擎開盤六種運動 · 賽前鎖死 · 出刊後一字不改
+          </p>
           {/* 引擎一句話(Tim 拍板版):方法=全世界通用 · 勝率引用世界統計的天花板 ·
-              所以賣的是價格判斷,不是神準。 */}
-          <p className="mt-7 max-w-xl mx-auto text-mute leading-relaxed text-sm sm:text-base">
+              所以賣的是價格判斷,不是神準。 尾句=特色宣示(Defector 腔 · 敢講)。 */}
+          <p className="mt-5 max-w-xl mx-auto text-mute leading-relaxed text-sm sm:text-base">
             我們用的是全世界通用的演算法 —— 這類引擎賽前算單場,全世界統計的天花板大約{" "}
             <span className="text-bone">5 成 7</span>。 所以本報不賣神準,
-            賣的是把每張票的<span className="text-bone">價格</span>看清楚。
+            賣的是把每張票的<span className="text-bone">價格</span>看清楚 ——
+            這種報,<span className="text-bone">別的地方沒有第二份</span>。
           </p>
 
           {/* 頭版:本日 / 最新出刊(最多三張 · 過刊在 /brief)*/}
