@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-07-11T19:51:22.099Z",
+  "generatedAt": "2026-07-12T08:54:04.237Z",
   "source": "site.api.espn.com tennis scoreboard (atp+wta singles · official · public · 0 auth)",
-  "count": 1635,
+  "count": 1637,
   "games": [
     {
       "tour": "atp",
@@ -16351,6 +16351,26 @@
       "winnerName": "Linda Noskova",
       "loserName": "Karolina Muchova",
       "score": "6-2 5-7 6-3",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Unicredit Iasi Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-12",
+      "winnerName": "Georgina Garcia Perez",
+      "loserName": "Andreea Prisacariu",
+      "score": "6-1 6-4",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Unicredit Iasi Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-12",
+      "winnerName": "Leyre Romero Gormaz",
+      "loserName": "Cristiana Nicoleta Todoni",
+      "score": "6-0 6-3",
       "retired": false
     }
   ]
