@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-07-12T16:35:02.952Z",
+  "generatedAt": "2026-07-12T19:50:49.013Z",
   "source": "site.api.espn.com tennis scoreboard (atp+wta singles · official · public · 0 auth)",
-  "count": 1683,
+  "count": 1696,
   "games": [
     {
       "tour": "atp",
@@ -16474,6 +16474,56 @@
       "retired": false
     },
     {
+      "tour": "atp",
+      "tournament": "Plava Laguna Croatia Open Umag",
+      "grouping": "Men's Singles",
+      "date": "2026-07-12",
+      "winnerName": "Federico Agustin Gomez",
+      "loserName": "Andrea Guerrieri",
+      "score": "6-4 6-4",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Plava Laguna Croatia Open Umag",
+      "grouping": "Men's Singles",
+      "date": "2026-07-12",
+      "winnerName": "Juan Carlos Prado Angelo",
+      "loserName": "Nikolas Sanchez Izquierdo",
+      "score": "6-3 7-6",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Plava Laguna Croatia Open Umag",
+      "grouping": "Men's Singles",
+      "date": "2026-07-12",
+      "winnerName": "Marco Cecchinato",
+      "loserName": "Genaro Alberto Olivieri",
+      "score": "6-2 6-4",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Plava Laguna Croatia Open Umag",
+      "grouping": "Men's Singles",
+      "date": "2026-07-12",
+      "winnerName": "Marko Topo",
+      "loserName": "Lukas Neumayer",
+      "score": "7-6 7-5",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Wimbledon",
+      "grouping": "Men's Singles",
+      "date": "2026-07-12",
+      "winnerName": "Jannik Sinner",
+      "loserName": "Alexander Zverev",
+      "score": "6-7 7-6 6-3 6-4",
+      "retired": false
+    },
+    {
       "tour": "wta",
       "tournament": "ATV Bancomat Tennis Open",
       "grouping": "Women's Singles",
@@ -16481,6 +16531,36 @@
       "winnerName": "Alessandra Mazzola",
       "loserName": "Francesca Gandolfi",
       "score": "6-3 6-4",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "ATV Bancomat Tennis Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-12",
+      "winnerName": "Noemi Basiletti",
+      "loserName": "Anastasia Abbagnato",
+      "score": "6-4 6-1",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "ATV Bancomat Tennis Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-12",
+      "winnerName": "Yelyzaveta Kotliar",
+      "loserName": "Amandine Hesse",
+      "score": "6-3 5-7 6-3",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Cerity Partners Hall of Fame Open for the Van Alen Cup Presented by the Margaret Fund",
+      "grouping": "Women's Singles",
+      "date": "2026-07-12",
+      "winnerName": "Tatjana Maria",
+      "loserName": "Katie Volynets",
+      "score": "6-2 6-4",
       "retired": false
     },
     {
@@ -16798,6 +16878,16 @@
       "tournament": "Unicredit Iasi Open",
       "grouping": "Women's Singles",
       "date": "2026-07-12",
+      "winnerName": "Varvara Lepchenko",
+      "loserName": "Maia Ilinca Burcescu",
+      "score": "4-6 6-3 6-3",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Unicredit Iasi Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-12",
       "winnerName": "Zhibek Kulambayeva",
       "loserName": "Lisa Zaar",
       "score": "7-6 6-3",
@@ -16818,6 +16908,16 @@
       "tournament": "Vanda Pharmaceuticals Athens Open",
       "grouping": "Women's Singles",
       "date": "2026-07-12",
+      "winnerName": "Elena Micic",
+      "loserName": "Anastasia Kulikova",
+      "score": "6-3 3-6 6-4",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Vanda Pharmaceuticals Athens Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-12",
       "winnerName": "Lilli Tagger",
       "loserName": "Madison Sieg",
       "score": "6-0 6-3",
@@ -16828,9 +16928,39 @@
       "tournament": "Vanda Pharmaceuticals Athens Open",
       "grouping": "Women's Singles",
       "date": "2026-07-12",
+      "winnerName": "Mina Hodzic",
+      "loserName": "Ekaterina Yashina",
+      "score": "6-1 6-2",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Vanda Pharmaceuticals Athens Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-12",
       "winnerName": "Nao Hibino",
       "loserName": "Miriana Tona",
       "score": "6-4 6-0",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Vanda Pharmaceuticals Athens Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-12",
+      "winnerName": "Viktoria Morvayova",
+      "loserName": "Elina Nepliy",
+      "score": "6-4 6-1",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Wimbledon",
+      "grouping": "Men's Singles",
+      "date": "2026-07-12",
+      "winnerName": "Jannik Sinner",
+      "loserName": "Alexander Zverev",
+      "score": "6-7 7-6 6-3 6-4",
       "retired": false
     }
   ]
