@@ -3039,10 +3039,13 @@
       "awayWinPct": 46,
       "enginePick": "away",
       "lockedAt": "2026-07-09T22:19:35.703Z",
-      "finalScore": null,
-      "outcome": null,
-      "verdict": null,
-      "gradedAt": null
+      "finalScore": {
+        "home": 1,
+        "away": 1
+      },
+      "outcome": "draw",
+      "verdict": "diverged",
+      "gradedAt": "2026-07-12T08:12:39.131Z"
     },
     {
       "matchId": "fd-537386",
@@ -3067,10 +3070,13 @@
       "awayWinPct": 25,
       "enginePick": "home",
       "lockedAt": "2026-07-10T02:46:09.228Z",
-      "finalScore": null,
-      "outcome": null,
-      "verdict": null,
-      "gradedAt": null
+      "finalScore": {
+        "home": 1,
+        "away": 1
+      },
+      "outcome": "draw",
+      "verdict": "diverged",
+      "gradedAt": "2026-07-12T08:12:39.131Z"
     }
   ]
 }
