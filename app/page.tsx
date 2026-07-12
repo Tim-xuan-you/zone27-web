@@ -9,13 +9,12 @@ import Avatar from "@/components/Avatar";
 import EngineThreeWayBar from "@/components/EngineThreeWayBar";
 import HomepagePulseStrip from "@/components/HomepagePulseStrip";
 import HomepageTableStrip from "@/components/HomepageTableStrip";
-import HomepageBriefStrip from "@/components/HomepageBriefStrip";
+import HomepageBriefHero from "@/components/HomepageBriefHero";
 import HomepageLadderStrip from "@/components/HomepageLadderStrip";
 import { getNationalCode } from "@/lib/soccer/teams";
 import {
   getTodayAndFutureMatches,
   getFinalizedMatches,
-  getTrackRecordStats,
   getMatchStartIso,
   getMatchPhase,
   type Match,
@@ -51,7 +50,6 @@ export const revalidate = 600; // ISR · 賽事 lifecycle transitions
 export default async function Home() {
   const cpblUpcoming = getTodayAndFutureMatches(); // 今晚 + 即將 · asc
   const finalized = getFinalizedMatches();
-  const tr = getTrackRecordStats();
 
   // MLB:一次抓 · 同時供「今晚可押」+「個人戰績評分」(避免重複 fetch live API)。
   const mlbAll = await getMlbAsMatches();
@@ -177,87 +175,44 @@ export default async function Home() {
       <Nav active="home" />
 
       <main id="main">
-        {/* ── HERO · 一句頭條(Defector 式單一主標)─────────────── */}
+        {/* ── HERO · 《ZONE 27 戰報》頭版(Tim 2026-07-13「戰報當網站主打」)───────────
+            米其林指南封面:報名 → 一句定位 → 世界統計的誠實天花板(Tim:引擎介紹寫
+            「世界統計過的勝率」即可)→ 本日/最新出刊攤在頭版。 引擎戰績 chip 依 Tim
+            拍板從門面退場(頁面不刪 · /brief 底線與 sitemap 仍可達 —— 保固書收進抽屜)。 */}
         <section className="mx-auto max-w-5xl px-6 sm:px-10 pt-12 sm:pt-16 pb-8 text-center">
-          {/* AI 放上前門(Tim 要)· 但走 honest AI:名分=「AI 勝率引擎」緊接「公開準度」=
-              在被「AI 神準」洗到麻木的市場,唯一敢公開 AI 到底準幾成的那個。 */}
           <p className="font-mono text-gold text-[10px] sm:text-[11px] tracking-[0.4em] mb-6">
-            AI 勝率引擎 · 公開準度
+            《ZONE 27 戰報》· 每日出刊 · 免費
           </p>
-          {/* R263 頭條改「先立自己的旗、不先打對手」(Tim:首頁別太刻意樹敵)· 心理學:
-              先給訪客想要的(誰會贏)→ 再給對手抄不走的整本帳(贏輸都刪不掉)。 對手「曬單刪文」
-              的反差留給訪客自己從下方 ✕ 落空感覺,不當第一句開口 = 立旗不樹敵。 */}
           <h1 className="text-3xl sm:text-5xl font-light leading-[1.14] tracking-tight text-bone max-w-2xl mx-auto">
-            誰會贏?AI 自己算給你看。
+            下注前,先看這份評鑑。
             <br />
-            <span className="text-gold">賽前鎖死、賽後對帳 —— 贏的輸的,都刪不掉。</span>
+            <span className="text-gold">太貴的劃掉 · 值得花腦筋的留下。</span>
           </h1>
           {/* 招牌金髮絲線(zone27-rule)· 一道品牌記號的呼吸。 */}
           <div className="zone27-rule max-w-[300px] mx-auto mt-7" aria-hidden="true" />
-          {/* 支撐句:57% 誠實王牌 · 一行 mute · R263 改「不喊神準、攤開準度」(不直接指控對手騙你)·
-              57% 本身已隱含「94% 神準不可能」· 不必再點名「在騙你」= 同立旗不樹敵。 */}
+          {/* 引擎一句話(Tim 拍板版):方法=全世界通用 · 勝率引用世界統計的天花板 ·
+              所以賣的是價格判斷,不是神準。 */}
           <p className="mt-7 max-w-xl mx-auto text-mute leading-relaxed text-sm sm:text-base">
-            免費。 連全世界最強的 AI,賽前單場也只到{" "}
-            <span className="text-bone">5 成 7</span> —— 我們不喊神準,只把準度攤開給你看。
+            我們用的是全世界通用的演算法 —— 這類引擎賽前算單場,全世界統計的天花板大約{" "}
+            <span className="text-bone">5 成 7</span>。 所以本報不賣神準,
+            賣的是把每張票的<span className="text-bone">價格</span>看清楚。
           </p>
-          {/* 引擎戰績 · Pratfall「連輸的也掛」· 一行安靜的 proof(不是按鈕)· 永遠不刪。
-              🔴 R291 audit:tr.total===0(休賽/剛上線)時別讓整個 proof 連結消失 —— 那會讓上方
-              「贏輸都刪不掉」變成沒有出口的空話。 0 場時改顯「每場都對帳」誠實承諾(絕不捏造數字 ·
-              守 Pratfall/disclosure 紅線),連結永遠在。 */}
-          {tr.total > 0 ? (
-            <Link
-              href="/track-record"
-              className="mt-5 inline-flex items-baseline gap-2.5 sm:gap-3 font-mono tabular flex-wrap justify-center hover:opacity-80 transition-opacity"
-              aria-label={`公開戰績 · ${tr.total} 場已對賬 · 引擎命中 ${tr.proved} · 落空 ${tr.diverged}`}
-            >
-              <span className="text-mute text-[10px] tracking-[0.3em]">引擎戰績</span>
-              <span className="text-bone text-sm">
-                <strong className="text-gold">{tr.total}</strong> 場
-              </span>
-              <span className="text-gold text-sm">✓{tr.proved}</span>
-              <span className="text-loss/85 text-sm">✕{tr.diverged}</span>
-              <span className="text-mute text-[9px] tracking-[0.2em]">看每一場 →</span>
-            </Link>
-          ) : (
-            <Link
-              href="/track-record"
-              className="mt-5 inline-flex items-baseline gap-2.5 font-mono justify-center hover:opacity-80 transition-opacity"
-              aria-label="公開戰績 · 每場賽前鎖死、賽後對帳、贏輸都不刪"
-            >
-              <span className="text-mute text-[10px] tracking-[0.3em]">引擎戰績</span>
-              <span className="text-bone text-sm">每場都對帳 · 贏輸都不刪</span>
-              <span className="text-mute text-[9px] tracking-[0.2em]">看帳本 →</span>
-            </Link>
-          )}
 
-          {/* 兩條路:主金鈕=看開盤(產品 · WC 夜導四年一次主秀)· 次金框=校準練習
-              (全站最強 0-登入 aha)。 一屏一焦點(主清楚是金鈕)。 */}
+          {/* 頭版:本日 / 最新出刊(最多三張 · 過刊在 /brief)*/}
+          <HomepageBriefHero />
+
           <div className="mt-7 flex items-center justify-center gap-3 flex-wrap">
             <Link
-              href={
-                duel
-                  ? "/today"
-                  : wcActive
-                    ? "/soccer"
-                    : allUpcoming.length > 0
-                      ? "/matches"
-                      : "/track-record"
-              }
+              href="/brief"
               className="inline-flex items-center gap-2 bg-gold text-navy font-mono text-xs sm:text-sm tracking-[0.25em] px-6 py-3 hover:bg-gold-soft transition-colors"
             >
-              {duel
-                ? "今晚就上場 · 你 vs 機器 →"
-                : wcActive
-                  ? "看世界盃 · 引擎開盤 →"
-                  : allUpcoming.length > 0
-                    ? "看今晚誰會贏 →"
-                    : "看引擎最近戰績 →"}
+              看戰報 · 全部期數 →
             </Link>
             <Link
-              href="/calibration/test"
+              href={duel ? "/today" : wcActive ? "/soccer" : "/matches"}
               className="inline-flex items-center gap-2 border border-gold/45 text-gold font-mono text-xs sm:text-sm tracking-[0.2em] px-6 py-3 hover:border-gold hover:bg-gold/5 transition-colors"
             >
-              先測你自己多準 · 30 秒 →
+              {duel ? "今日一戰 · 你 vs 機器 →" : "看今晚的開盤 →"}
             </Link>
           </div>
         </section>
@@ -314,13 +269,7 @@ export default async function Home() {
             堆疊 = widget pile。 收進「一個區標 + 收窄 max-w-2xl」的群組 → 大腦讀成同一組;
             脈動(會動 = 靈魂)留金底為主、桌/天梯降素底為次(元件內已做),建立層級不刪功能。
             三條各自 graceful 隱藏;天梯永遠 render → 區標永不孤兒(不破 graceful)。 */}
-        {/* ── 本日戰報 · 米其林式賽前評鑑(Tim 2026-07-12「當天的擺首頁 · 過刊摺疊」)──
-            編輯台的今日評鑑排在「現場」群組之上:它是每天最新鮮的一張紙 · 舊刊在 /brief。 */}
-        <section className="mx-auto max-w-2xl w-full px-6 sm:px-10 pt-6">
-          <HomepageBriefStrip />
-        </section>
-
-        <section className="mx-auto max-w-2xl w-full px-6 sm:px-10 pt-2 pb-4">
+        <section className="mx-auto max-w-2xl w-full px-6 sm:px-10 pt-6 pb-4">
           <p className="font-mono text-mute/70 text-[10px] tracking-[0.45em] mb-1 text-center">
             / 現場 · 真人這邊
           </p>

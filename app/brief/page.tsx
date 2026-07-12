@@ -72,13 +72,11 @@ export default function BriefPage() {
             值得花腦筋的留下</span> —— 像評鑑餐廳,不幫你點菜。 一天一期、賽前出刊、
             <span className="text-bone">出刊後不改一個字</span>。
           </p>
+          {/* 引擎介紹依 Tim 拍板(2026-07-13):寫「世界統計過的勝率」· 不主打自家對帳。 */}
           <p className="mt-3 text-mute text-base leading-relaxed">
-            評論員跟只曬贏的差別,不在文筆 —— 在敢不敢讓你回去對帳。 每一期出刊後,
-            賽果自己會說話;引擎那本帳掛在{" "}
-            <Link href="/track-record" className="text-gold underline-offset-4 hover:underline">
-              公開戰績
-            </Link>
-            ,含輸照掛、刪不掉。
+            我們用的是全世界通用的演算法(蒙地卡羅、Elo 這一類)—— 這類引擎賽前算單場,
+            全世界統計的天花板大約 <span className="text-bone">5 成 7</span>。
+            所以本報不賣神準,賣的是把每張票的<span className="text-bone">價格</span>看清楚。
           </p>
         </section>
 
@@ -181,7 +179,12 @@ export default function BriefPage() {
         <section className="mx-auto max-w-2xl w-full px-6 sm:px-10 pb-16">
           <p className="font-mono text-mute/55 text-[10px] tracking-[0.15em] leading-relaxed border-t border-line/40 pt-4">
             星星是價格評論,不是輸贏預測 · 本報不收博彩業者的廣告與贊助 · 不保證獲利 ·
-            我們不是賭場、不接受下注 —— 尺給你,怎麼下是你的事。
+            我們不是賭場、不接受下注 —— 本報負責把價看清楚,決定永遠在您手上。
+            出刊後賽果自己會說話;引擎的每一場帳一直在{" "}
+            <Link href="/track-record" className="text-mute/70 hover:text-gold underline-offset-4 hover:underline">
+              公開戰績
+            </Link>
+            ,要查的人查得到。
           </p>
         </section>
       </main>
