@@ -1,17 +1,21 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
-import { createPageMetadata } from "@/lib/page-og";
 
-export const metadata = createPageMetadata({
-  title: "Terms of Service — 我們對您的承諾,您對我們的同意",
+// ── ZONE 27 · /terms · 服務條款(國小生版)─────────────────────────────────
+// Tim 2026-07-13「隱私、服務條款也一樣處理 · 看了心煩意亂」(同 /ethics 刀法):
+// 舊 346 行裡的過期章節(「還在準備階段」「BLACK 等候名單」= waitlist 時代)與
+// 內部腔(30 天公告流程、pre-launch meta)全刪 —— 留下真正扛法律責任的九件事,
+// 每句國小生都懂。 法律錨點保留:消保法 §19 猶豫期(我們給 14 天)· 中華民國法律 ·
+// 台北地院管轄 · 18 歲門檻 · 免責聲明。
+// ─────────────────────────────────────────────────────
+
+export const metadata: Metadata = {
+  title: "服務條款 · ZONE 27",
   description:
-    "ZONE 27 服務條款 · pre-launch 階段的真實情境合約 · 不是模板 · AI 是娛樂用途 · 會員 waitlist 不收費不綁定 · 含台灣 14-day 退款主動延伸(消保法 § 19 distance-selling)。",
-  ogTitle: "Terms of Service · 我們對您的承諾 · ZONE 27",
-  ogDescription:
-    "pre-launch 真實情境合約 · 不是模板 · 含台灣 14-day 退款主動延伸 · 消保法 § 19",
-  path: "/terms",
-});
+    "ZONE 27 是運動資訊平台,不是賭場:不收注、不出彩金。預測是資訊不是投資建議,沒有人能保證獲利。付費會員每期 14 天內無條件全額退款、永不自動扣款。適用中華民國法律。",
+};
 
 export default function TermsPage() {
   return (
@@ -19,328 +23,91 @@ export default function TermsPage() {
       <Nav />
 
       <main id="main">
+        <section className="mx-auto max-w-2xl w-full px-6 sm:px-10 pt-16 pb-8">
+          <p className="font-mono text-gold text-[10px] tracking-[0.45em] mb-4">
+            / 服務條款 · 2026 年 7 月更新
+          </p>
+          <h1 className="text-3xl sm:text-4xl text-bone font-light tracking-tight leading-tight">
+            九件事,<span className="text-gold">講清楚</span>。
+          </h1>
+          <div className="zone27-rule max-w-[280px] mt-5 mb-2" aria-hidden="true" />
+        </section>
 
-      {/* ── HERO ─────────────────────────────────── */}
-      <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pt-20 pb-12 text-center">
-        <p className="font-mono text-gold text-[10px] tracking-[0.45em] mb-8">
-          服務條款 · 2026 年 5 月更新
-        </p>
-        <h1 className="text-4xl sm:text-5xl md:text-6xl font-light leading-[1.1] tracking-tight text-bone">
-          我們的<span className="text-gold">承諾</span>。
-          <br />
-          您的<span className="text-gold">同意</span>。
-        </h1>
-        <p className="mt-8 max-w-xl mx-auto text-mute leading-relaxed">
-          不是法務模板。是寫給 ZONE 27 pre-launch 真實情境的服務條款。
-          能用人話寫就絕不用法律術語。
-        </p>
-      </section>
+        <section className="mx-auto max-w-2xl w-full px-6 sm:px-10 pb-12">
+          <ol className="list-none pl-0 m-0 space-y-6 text-mute leading-relaxed text-base [counter-reset:tos]">
+            <li>
+              <strong className="text-bone">這是什麼。</strong>
+              ZONE 27 是運動資訊平台,由創辦人 Tim 以個人名義經營,尚未公司化。
+              我們<strong className="text-bone">不是賭場</strong>:不收注、不出彩金、不撮合對賭。
+            </li>
+            <li>
+              <strong className="text-bone">誰能用。</strong>
+              純看內容,誰都可以;要用會員功能(押注紀錄、發言),要滿 18 歲。
+            </li>
+            <li>
+              <strong className="text-bone">預測只是資訊。</strong>
+              站上所有勝率、模擬、評鑑,都是統計和分析 ——
+              不是投資建議、不是明牌,<strong className="text-bone">沒有人能保證獲利</strong>。
+              你據此下注,盈虧自負。
+            </li>
+            <li>
+              <strong className="text-bone">付費會員怎麼收錢。</strong>
+              你自己手動轉帳,一期一付(BLACK 一期 31 天 · GOLD 一期 365 天)。
+              <strong className="text-bone">永不自動扣款</strong> ——
+              不轉下一期,服務就自然停止,不用按取消、不用填問卷。
+            </li>
+            <li>
+              <strong className="text-bone">退款。</strong>
+              消保法給你 7 天猶豫期,我們給 <strong className="text-gold">14 天</strong>:
+              每期入帳後 14 天內,寄信就全額退、不問原因、不挽留。
+              寄到下面那個信箱,主旨寫「退款」就行。
+            </li>
+            <li>
+              <strong className="text-bone">合理使用。</strong>
+              別攻擊伺服器、別大規模爬站、別冒充別人、別拿本站做違法的事 ——
+              違反就停權。
+            </li>
+            <li>
+              <strong className="text-bone">內容和品牌。</strong>
+              我們的方法全公開,歡迎閱讀、引用、學習;
+              但 ZONE 27 的名稱、Logo 和設計,不能拿去開你自己的站。
+            </li>
+            <li>
+              <strong className="text-bone">我們不負責的事。</strong>
+              預測沒中造成的損失、網站臨時掛掉、主機商(Vercel、Supabase)出事故 ——
+              在法律允許的範圍內,我們不賠。
+            </li>
+            <li>
+              <strong className="text-bone">法律。</strong>
+              本條款適用中華民國法律,爭議由台北地方法院管轄。
+              條款有改,這頁最上面的日期會換 —— 繼續使用就代表同意新版。
+            </li>
+          </ol>
+        </section>
 
-      <div className="mx-auto w-32 gold-line mb-12" />
-
-      {/* ── 01 ABOUT ─────────────────────────────── */}
-      <Section no="01" label="關於本服務" zh="關於本服務">
-        <p>
-          ZONE 27 是一個棒球進階數據與 AI 預測模型的資訊社群平台。
-          目前由創辦人 Tim(Tim-xuan-you)以個人名義經營,尚未公司化。
-        </p>
-        <p>
-          本服務不接受下注、不出彩金、不撮合任何形式的對賭。我們是
-          「資訊與社群平台」,不是博彩公司。完整定位請見{" "}
-          <Link href="/about" className="text-gold underline-offset-4 hover:underline">
-            /about
-          </Link>
-          。
-        </p>
-      </Section>
-
-      {/* ── 02 ELIGIBILITY ──────────────────────── */}
-      <Section no="02" label="使用資格" zh="使用資格">
-        <p>
-          您必須年滿 <strong className="text-bone">18 歲</strong>(中華民國民法成年年齡)才能使用本服務的會員功能。
-          純看內容(讀文章、到實驗室看引擎跑模擬)不受此限。
-        </p>
-      </Section>
-
-      {/* ── 03 PRE-LAUNCH STATUS ────────────────── */}
-      <Section no="03" label="還在準備階段" zh="還在準備階段">
-        <p>
-          本網站目前還沒正式開賣,<strong className="text-bone">還在準備階段</strong>。意思是:
-        </p>
-        <ul className="space-y-3">
-          <li>▸ 功能、文案、定價、UI 隨時可能調整</li>
-          <li>▸ 部分元件標記 <Code>BETA</Code> 是正常狀態</li>
-          <li>▸ 我們可能在不通知的情況下進行重大改版</li>
-          <li>▸ 所有改動都會提前公開公告</li>
-        </ul>
-      </Section>
-
-      {/* ── 04 BLACK WAITLIST ─────────────── */}
-      <Section no="04" label="BLACK 等候名單" zh="BLACK 等候名單 / 訂閱聲明">
-        <p>
-          您加入會員 waitlist 時,請理解以下事項:
-        </p>
-        <ul className="space-y-3">
-          <li>
-            <strong className="text-bone">不收費。</strong>
-            目前 waitlist 完全免費,不收取任何形式的款項或押金。
-          </li>
-          <li>
-            <strong className="text-bone">不綁定。</strong>
-            您留下 email 不構成任何形式的支付承諾或法律義務。
-          </li>
-          <li>
-            <strong className="text-bone">不保證最終加入。</strong>
-            BLACK 會員不限量、沒有編號、沒有名額;Tim 親手 review 後可婉拒不適合的申請。
-            waitlist 只給優先通知權。
-          </li>
-          <li>
-            <strong className="text-bone">可隨時退出。</strong>
-            寄信即可從 waitlist 移除,沒有任何違約金或保留期。
-            您的 row 從{" "}
-            <Code>Supabase</Code> 永久刪除,
-            創辦人本機與雲端無任何備份。
-          </li>
-          <li>
-            <strong className="text-bone">通道歸因標籤。</strong>
-            若您透過某會員的分享連結進入(<Code>?ref=reserve-NNN</Code>),
-            該標籤會存進您的 waitlist row(<Code>source</Code> 欄位)。
-            這是<strong className="text-bone">通道層的彙總</strong>,不是個人追蹤 —
-            完整解釋見{" "}
-            <Link href="/privacy" className="text-gold underline-offset-4 hover:underline">
-              /privacy Section 02
+        <section className="mx-auto max-w-2xl w-full px-6 sm:px-10 pb-20">
+          <p className="font-mono text-mute/55 text-[10px] tracking-[0.15em] leading-relaxed border-t border-line/40 pt-4">
+            有疑問、要退款、要退出:寫信到{" "}
+            <a
+              href="mailto:tatayngiti@gmail.com?subject=ZONE%2027"
+              className="text-mute/70 hover:text-gold underline-offset-4 hover:underline"
+            >
+              tatayngiti@gmail.com
+            </a>
+            {" "}· 也請看{" "}
+            <Link href="/privacy" className="text-mute/70 hover:text-gold underline-offset-4 hover:underline">
+              隱私
+            </Link>
+            {" "}和{" "}
+            <Link href="/ethics" className="text-mute/70 hover:text-gold underline-offset-4 hover:underline">
+              量力而為
             </Link>
             。
-          </li>
-        </ul>
-      </Section>
-
-      {/* R64 W-A · per Agent 3 R61 Ship #4 + Agent 5 R63 gap matrix · explicit
-          REFUND POLICY section per Taiwan 消費者保護法 § 19 distance-selling
-          7-day cooling-off rule。 ZONE 27 exceeds minimum at 14 days · 同
-          /faq + /founders W-B trust block 已宣告 · 此 Section 4B codify in
-          legal-findable location · brand IP「方法公開」 延伸到 refund
-          terms · 不藏。 Section labeled 「4B」 to avoid renumbering 05-09
-          downstream sections · low-risk inline amplification。 */}
-      <Section no="4B" label="退款條款" zh="退款條款 · 消保法 § 19">
-        <p>
-          中華民國消費者保護法 § 19 規定:消費者透過郵購、網購、訪問交易等
-          通訊交易方式所為的商品或服務契約 · 享有自接受商品或服務 <strong className="text-bone">至少
-          7 日</strong> 內無條件解除契約的權利。 ZONE 27 主動延伸到 <strong className="text-gold">14
-          天</strong> · 翻倍法定下限。
-        </p>
-
-        <h3 className="text-bone text-lg mt-6 mb-3">BLACK(NT$ 500 / 31 天)</h3>
-        <ul className="space-y-2">
-          <li>
-            <strong className="text-bone">每期 14 天無條件退款</strong> · 您每 31 天自己
-            轉帳當期 NT$ 500 入帳 + 從您收到該期「本期開通通知信」
-            那天起算 · 14 個自然日內可解除該期契約 · 全額退回 · 不按比例。
-          </li>
-          <li>
-            <strong className="text-bone">退款流程</strong> ·
-            寄信 <Code>tatayngiti@gmail.com</Code> · 主旨 <Code>REFUND · ZONE 27 BLACK</Code>
-            (附上您註冊的 email)· Tim 48 hr 內回覆確認 · 同步原匯款
-            銀行戶頭退回當期 NT$ 500 全額。
-          </li>
-          <li>
-            <strong className="text-bone">不問原因</strong> · 不嘗試挽留 ·
-            不要求填問卷 · 不寄挽留文案 · 我們不裝挽留。
-          </li>
-          <li>
-            <strong className="text-bone">不會自動續扣</strong> · 我們承諾
-            永遠不自動扣款(任何自動扣款服務都不接)·
-            您不主動轉帳下一期 · 服務就自然停止 · 不用按取消鍵 · 不用填退出
-            問卷 · 我們也不會寄催你回來的信。
-          </li>
-          <li>
-            <strong className="text-bone">您退款後仍保留</strong> · 已下載的方法說明文件
-            · 還有所有公開的方法論、稽核、戰績頁內容 ·
-            這些不在退款範圍 · 我們無權收回。
-          </li>
-          <li>
-            <strong className="text-bone">您退款後失去</strong> · 該期 BLACK
-            會員資格(支持者金環 + 會員房間 + Tim 親手回信)· 期中退款後當期
-            會員權限立即停止 · ZONE 27 不會再發您期末電子報 ·
-            要等下一期主動轉帳才能看 BLACK 專屬內容 · 也包含未來 BOTTOM 27
-            的跨站通行權。
-          </li>
-        </ul>
-
-        <p className="mt-6 text-mute/85 text-sm">
-          ▸ 完整 refund 政策同步顯示在 <Link href="/membership" className="text-gold underline-offset-4 hover:underline">/membership Payment Trust block</Link>
-          + <Link href="/faq" className="text-gold underline-offset-4 hover:underline">/faq Q「14 天退款怎麼運作」</Link>
-          + <Link href="/membership/black-card" className="text-gold underline-offset-4 hover:underline">/membership/black-card hero「14-DAY 退款保證」 chip</Link>
-          · 這三個地方寫的都一樣 · 任何修改都會 30 天前先公開公告。
-        </p>
-      </Section>
-
-      {/* ── 05 AI DISCLAIMER ────────────────────── */}
-      <Section no="05" label="AI 預測免責" zh="AI 預測免責">
-        <p>
-          ZONE 27 提供的 AI 模擬、勝率分布、比分預測,本質上為:
-        </p>
-        <ul className="space-y-3">
-          <li>▸ 統計模型輸出(基於萬次模擬採樣)</li>
-          <li>▸ 機率分布,而非確定性結論</li>
-          <li>▸ 娛樂、教育、研究用途</li>
-        </ul>
-        <p className="text-bone">
-          <strong>不構成投資建議、不構成博彩建議、不構成任何形式的財務或法律意見。</strong>
-        </p>
-        <p>
-          您若據此進行任何下注、賭博、投資、商業決策,風險與責任完全由您自行承擔。
-          ZONE 27 對於使用本平台資訊所產生的任何盈虧、損失、刑事責任,概不負責。
-        </p>
-        <p>
-          完整方法論與已知限制請見{" "}
-          <Link href="/methodology" className="text-gold underline-offset-4 hover:underline">
-            /methodology
-          </Link>
-          。
-        </p>
-      </Section>
-
-      {/* ── 06 ACCEPTABLE USE ───────────────────── */}
-      <Section no="06" label="合理使用" zh="合理使用">
-        <p>使用本網站時,您同意:</p>
-        <ul className="space-y-3">
-          <li>▸ 不對伺服器發送惡意請求(DDoS、暴力枚舉、注入攻擊)</li>
-          <li>▸ 不大規模自動抓取我們的內容或頁面資料</li>
-          <li>▸ 不偽造身分或冒充他人加入 waitlist</li>
-          <li>▸ 不利用本網站從事任何違反中華民國法律的行為</li>
-        </ul>
-        <p>
-          違反上述使用,我們會立即終止您的使用權限,並可能保留追究法律責任的權利。
-        </p>
-      </Section>
-
-      {/* ── 07 INTELLECTUAL PROPERTY ────────────── */}
-      <Section no="07" label="智慧財產權" zh="智慧財產權">
-        <p>
-          ZONE 27 品牌名稱、設計、視覺系統、所有文案,皆為 Tim Hsu(Tim-xuan-you)
-          所有,保留全部權利。
-        </p>
-        <p>
-          引擎的<strong className="text-bone">方法完整公開</strong>(見{" "}
-          <Link href="/methodology" className="text-gold underline-offset-4 hover:underline">
-            /methodology
-          </Link>
-          {" + "}
-          <Link href="/audit" className="text-gold underline-offset-4 hover:underline">
-            /audit
-          </Link>
-          )· 任何人都可以閱讀、引用、學習。但<strong className="text-bone">不得</strong>
-          使用 ZONE 27 品牌名稱、Logo、設計系統再開發競品。
-        </p>
-      </Section>
-
-      {/* ── 08 LIABILITY LIMITS ─────────────────── */}
-      <Section no="08" label="責任限制" zh="責任限制">
-        <p>
-          在台灣法律允許範圍內,ZONE 27、創辦人、及未來可能成立的公司實體,
-          對於以下情況概不負責:
-        </p>
-        <ul className="space-y-3">
-          <li>▸ 您因 AI 預測結果產生的任何金錢損失</li>
-          <li>▸ 網站宕機或資料暫時無法取用</li>
-          <li>
-            ▸ 第三方平台(程式部署 · <Code>Vercel</Code> ·{" "}
-            <Code>Supabase</Code>(Tokyo ap-northeast-1))的服務中斷或資料事故
-          </li>
-          <li>▸ 您自身違反本服務條款導致的後果</li>
-        </ul>
-      </Section>
-
-      {/* ── 09 CHANGES + GOVERNING LAW ──────────── */}
-      <Section no="09" label="條款變更與管轄法律" zh="條款變更與管轄法律">
-        <p>
-          本服務條款可能隨產品演進而調整。所有重大變更都會提前公開公告。
-          您繼續使用本網站即視為同意修訂後條款。
-        </p>
-        <p>
-          本服務條款適用<strong className="text-bone">中華民國法律</strong>。
-          任何爭議由台灣台北地方法院作為第一審管轄法院。
-        </p>
-      </Section>
-
-      {/* ── FINAL ───────────────────────────────── */}
-      <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 py-16 text-center border-t border-line/40">
-        <p className="font-mono text-gold text-[10px] tracking-[0.4em] mb-6">
-          條款自 2026 年 5 月 20 日生效
-        </p>
-        <p className="text-mute leading-relaxed max-w-md mx-auto">
-          如有疑問請寫信給{" "}
-          <a
-            href="mailto:tatayngiti@gmail.com?subject=ZONE%2027%20%C2%B7%20terms"
-            className="text-gold underline-offset-4 hover:underline"
-          >
-            tatayngiti@gmail.com
-          </a>
-          。
-        </p>
-        <Link
-          href="/privacy"
-          className="inline-block mt-10 px-8 py-3 border border-gold text-gold text-xs tracking-[0.3em] hover:bg-gold hover:text-navy transition-colors"
-        >
-          閱讀隱私政策 →
-        </Link>
-      </section>
-
+          </p>
+        </section>
       </main>
 
       <Footer />
     </div>
-  );
-}
-
-// ── Sub-component ─────────────────────────────────────
-// R69 W-G · Agent B audit F2 fix · Section accepts optional id prop ·
-// slug derived from `no` ("4B" → "section-4b" · "02B" → "section-02b" ·
-// "01" → "section-01")· enables cross-link anchor jumping(per
-// PreTransferReceipt R68 W-G /terms#section-4b)· brand IP「方法公開」
-// 延伸到 deep-link discoverability。
-function slugFromSectionNo(no: string): string {
-  return `section-${no.toLowerCase().replace(/[^a-z0-9]/g, "-")}`;
-}
-
-function Section({
-  no,
-  label,
-  zh,
-  children,
-}: {
-  no: string;
-  label: string;
-  zh: string;
-  children: React.ReactNode;
-}) {
-  const id = slugFromSectionNo(no);
-  return (
-    <section
-      id={id}
-      className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-14 pt-10 border-t border-line/40 scroll-mt-20"
-    >
-      <div className="flex items-baseline gap-4 mb-2">
-        <span className="font-mono text-gold/70 text-[10px] tracking-[0.35em]">
-          / {no}
-        </span>
-        <span className="font-mono text-mute text-[10px] tracking-[0.35em]">
-          {label}
-        </span>
-      </div>
-      <h2 className="text-3xl text-bone font-light tracking-tight mb-8">{zh}</h2>
-      <div className="space-y-5 text-mute text-base leading-relaxed">
-        {children}
-      </div>
-    </section>
-  );
-}
-
-function Code({ children }: { children: React.ReactNode }) {
-  return (
-    <code className="font-mono text-gold/90 bg-ink/40 px-1.5 py-0.5 text-[0.9em] border border-line/60">
-      {children}
-    </code>
   );
 }
