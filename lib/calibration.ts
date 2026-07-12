@@ -9,6 +9,7 @@
 
 import { type Match } from "@/lib/matches";
 import { TENNIS_DRAW, drawLine } from "@/lib/tennis/matches";
+import mlbLocked from "@/lib/mlb-locked.json";
 
 /** 一個校準箱 · 三運動共用形狀(soccer 的 SoccerCalibrationBin 結構相同)。 */
 export type CalibrationBin = {
@@ -46,32 +47,23 @@ export function summarizeBins(bins: CalibrationBin[]): CalibrationSummary {
 }
 
 /**
- * 棒球(CPBL)校準分箱 · 由 getFinalizedMatches() 餵入(同 /calibration)。
- * 10 寬箱、center 5,15,...,95 · favorite = winRate > 50 的那邊(真・五五波排除)。
- * 含輸照算 · 純函式。
+ * 共用分箱骨架:一筆 = { favPct, favoriteWon } → 10 寬箱(center 5,15,...,95)。
+ * 🔴 真・五五波(favPct ≤ 50)一律不進 —— 不讓銅板局假裝有 favorite(全運動同一把尺;
+ *   舊版網球漏了這道閘,50/50 的線會灌進 55 箱當假 favorite · R296 碼審修)。
+ * 各運動只負責「怎麼取出 favPct / favoriteWon」· 箱寬/門檻/排序永遠只有這一份。
  */
-export function computeBaseballBins(finalized: Match[]): CalibrationBin[] {
+function binFavoriteOutcomes(
+  rows: Iterable<{ favPct: number; favoriteWon: boolean }>,
+): CalibrationBin[] {
   const buckets = new Map<number, { favoriteWins: number; total: number }>();
-
-  for (const m of finalized) {
-    if (!m.finalResult) continue;
-    const fr = m.finalResult;
-    if (fr.winner === "tie") continue; // 和局 = push · 不進分母(同 getCalibration tie→push · 同 computeSoccerBins skip push)
-    const enginePctFav = Math.max(m.home.winRate, m.away.winRate);
-    if (enginePctFav <= 50) continue; // 排除真・五五波(50)· 不讓銅板局假裝有 favorite
-    const binIndex = Math.min(Math.floor(enginePctFav / 10), 9);
-    const centerPct = binIndex * 10 + 5;
-
-    const homeFav = m.home.winRate >= m.away.winRate;
-    const favoriteWon =
-      (homeFav && fr.winner === "home") || (!homeFav && fr.winner === "away");
-
+  for (const r of rows) {
+    if (r.favPct <= 50) continue;
+    const centerPct = Math.min(Math.floor(r.favPct / 10), 9) * 10 + 5;
     if (!buckets.has(centerPct)) buckets.set(centerPct, { favoriteWins: 0, total: 0 });
     const b = buckets.get(centerPct)!;
     b.total++;
-    if (favoriteWon) b.favoriteWins++;
+    if (r.favoriteWon) b.favoriteWins++;
   }
-
   return Array.from(buckets.entries())
     .map(
       ([centerPct, { favoriteWins, total }]): CalibrationBin => ({
@@ -84,35 +76,64 @@ export function computeBaseballBins(finalized: Match[]): CalibrationBin[] {
 }
 
 /**
- * 網球校準分箱 · 兩向(無和局)· 鏡 computeSoccerBins。
- * favorite = drawLine 兩向裡機率較高的一邊 · favoriteWon = 引擎看好邊 = 賽果贏家。
- * 只算「引擎有開盤(drawLine 非 null)且已結算(finalResult)」的場 · 含輸照算。
+ * 棒球(CPBL)校準分箱 · 由 getFinalizedMatches() 餵入(同 /calibration)。
+ * favorite = winRate > 50 的那邊 · 和局 = push 不進分母 · 含輸照算 · 純函式。
+ */
+export function computeBaseballBins(finalized: Match[]): CalibrationBin[] {
+  const rows: { favPct: number; favoriteWon: boolean }[] = [];
+  for (const m of finalized) {
+    const fr = m.finalResult;
+    if (!fr || fr.winner === "tie") continue; // 和局 = push(同 getCalibration tie→push)
+    const homeFav = m.home.winRate >= m.away.winRate;
+    rows.push({
+      favPct: Math.max(m.home.winRate, m.away.winRate),
+      favoriteWon:
+        (homeFav && fr.winner === "home") || (!homeFav && fr.winner === "away"),
+    });
+  }
+  return binFavoriteOutcomes(rows);
+}
+
+/**
+ * MLB 校準分箱 · 同一套骨架,資料源是 lib/mlb-locked.json(Action 賽前鎖 · 賽後 grade)。
+ * verdict 就是「引擎看好邊中沒中」對鎖定值的判定(proved/diverged 進箱 · push/tie/void/null
+ * 不進)—— 直接用它,零重算 = 跟 /track-record 同一份判定零漂移。
+ * 🔴 跟 CPBL 絕不混池(混池會遮掉各聯盟真實校準)· 各畫各的。
+ * module memo:JSON 是 build 時靜態 import、部署前不變 → 每 process 算一次就夠
+ * (/calibration + /engines 每次 ISR 各重掃一輪 ~500+ 筆是純浪費)。
+ */
+let mlbBinsMemo: CalibrationBin[] | null = null;
+export function computeMlbBins(): CalibrationBin[] {
+  if (mlbBinsMemo) return mlbBinsMemo;
+  type MlbPred = { engineWinHomePct?: number; verdict?: string | null };
+  const rows: { favPct: number; favoriteWon: boolean }[] = [];
+  for (const p of (mlbLocked.predictions ?? []) as MlbPred[]) {
+    if (p.verdict !== "proved" && p.verdict !== "diverged") continue;
+    if (typeof p.engineWinHomePct !== "number") continue;
+    rows.push({
+      favPct: Math.max(p.engineWinHomePct, 100 - p.engineWinHomePct),
+      favoriteWon: p.verdict === "proved",
+    });
+  }
+  mlbBinsMemo = binFavoriteOutcomes(rows);
+  return mlbBinsMemo;
+}
+
+/**
+ * 網球校準分箱 · 兩向(無和局)· 同一套骨架。
+ * favorite = drawLine 兩向裡機率較高的一邊 · 只算「引擎有開盤且已結算」的場 · 含輸照算。
  * 賽果空 → 空陣列(誠實 N=0)。 純函式 · server-safe。
  */
 export function computeTennisBins(): CalibrationBin[] {
-  const buckets = new Map<number, { favoriteWins: number; total: number }>();
-
+  const rows: { favPct: number; favoriteWon: boolean }[] = [];
   for (const m of TENNIS_DRAW) {
     const line = drawLine(m);
     const fr = m.finalResult;
     if (!line || !fr) continue; // 沒開盤 / 沒結算 → 略過
-    const favPct = Math.max(line.aWin, line.bWin);
-    const binIndex = Math.min(Math.floor(favPct / 10), 9);
-    const centerPct = binIndex * 10 + 5;
-
-    if (!buckets.has(centerPct)) buckets.set(centerPct, { favoriteWins: 0, total: 0 });
-    const b = buckets.get(centerPct)!;
-    b.total++;
-    if (line.pick === fr.winner) b.favoriteWins++; // 引擎看好邊中了
+    rows.push({
+      favPct: Math.max(line.aWin, line.bWin),
+      favoriteWon: line.pick === fr.winner,
+    });
   }
-
-  return Array.from(buckets.entries())
-    .map(
-      ([centerPct, { favoriteWins, total }]): CalibrationBin => ({
-        centerPct,
-        count: total,
-        favoriteActualPct: (favoriteWins / total) * 100,
-      })
-    )
-    .sort((a, b) => a.centerPct - b.centerPct);
+  return binFavoriteOutcomes(rows);
 }

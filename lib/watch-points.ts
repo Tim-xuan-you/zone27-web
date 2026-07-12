@@ -27,7 +27,11 @@ import {
   bettable as basketballBettable,
   drawLine as basketballDrawLine,
 } from "@/lib/basketball/matches";
-import { getEngineConviction } from "@/lib/conviction";
+import {
+  getEngineConviction,
+  threeWayHeadToHeadPct,
+  threeWaySecondPct,
+} from "@/lib/conviction";
 import type { MatchHeat } from "@/lib/match-heat";
 
 // ── ZONE 27 · 今日看點(推薦今天盯哪場)─────────────────────────────────────────
@@ -151,7 +155,11 @@ function soccerCandidates(nowMs: number): Candidate[] {
     if (!isUpcomingWithinWindow(p.dateISO, nowMs)) continue;
     const pcts = toDisplayPercents(p.prediction);
     const pick = enginePickOf(p.prediction);
-    const pairTotal = pcts.homeWin + pcts.awayWin;
+    // 三向→兩向換算走全站唯一那把尺(lib/conviction threeWayHeadToHeadPct · pick vs 次高)。
+    // 舊版在這裡自己發明「主 vs 客」換算 = 漏掉和局常是次高 → 同一場在看點被捧成重壓、
+    // 在對決卡卻是銅板局(R296 碼審抓的雙尺漂移)。
+    const pickPct =
+      pick === "home" ? pcts.homeWin : pick === "away" ? pcts.awayWin : pcts.draw;
     out.push({
       id: p.id,
       sport: "足球",
@@ -159,10 +167,9 @@ function soccerCandidates(nowMs: number): Candidate[] {
       matchup: `${p.home} vs ${p.away}`,
       startISO: p.dateISO,
       href: `/receipts/${p.id}`,
-      favTwoWayPct:
-        pairTotal > 0
-          ? Math.round((Math.max(pcts.homeWin, pcts.awayWin) / pairTotal) * 100)
-          : 50,
+      favTwoWayPct: Math.round(
+        threeWayHeadToHeadPct(pickPct, threeWaySecondPct(pickPct, pcts)),
+      ),
       favName: pick === "home" ? p.home : pick === "away" ? p.away : "和局",
       line: `主 ${pcts.homeWin} · 和 ${pcts.draw} · 客 ${pcts.awayWin}`,
     });

@@ -51,7 +51,7 @@ export type TableCall = {
 //    「引擎有模型」badge 整個拿掉(對結果 0 差別 = 對用戶 0 意義)· 只在引擎真的不會算的
 //    盤(角球)留一句白話 engineNote 當誠實註腳(那才是克制的真意)。
 const TABLE: TableCall[] = [
-  // ── 2026-06-29 這一桌 · 最新賽前鎖的注(待對帳)──────
+  // ── 2026-06-29 這一桌 · 2026-07-11 對帳(MLB 官方逐局比分 + 站內 WNBA 賽果)· 3 注全中 ──────
   {
     handle: "Ron",
     league: "美國職棒",
@@ -59,7 +59,8 @@ const TABLE: TableCall[] = [
     when: "6/29 01:40",
     call: "光芒 會贏",
     engineModels: true,
-    result: "pending",
+    resultNote: "光芒 5:1 贏響尾蛇 → 中了",
+    result: "win",
   },
   {
     handle: "Lewi",
@@ -69,7 +70,8 @@ const TABLE: TableCall[] = [
     call: "兩隊總分 不到 163.5 分",
     engineModels: false,
     engineNote: "美國女籃我們引擎沒在算 —— 還是照樣幫他對帳",
-    result: "pending",
+    resultNote: "紐約自由 67:76 金州 · 兩隊總分 143 · 不到 163.5 → 中了",
+    result: "win",
   },
   {
     handle: "Tim",
@@ -79,7 +81,8 @@ const TABLE: TableCall[] = [
     call: "前 5 局 兩隊總分 不到 4.5 分",
     engineModels: false,
     engineNote: "前 5 局這種玩法,我們引擎沒在算 —— 還是照樣幫他對帳",
-    result: "pending",
+    resultNote: "前 5 局只有紅襪第 4 局拿 2 分 · 前 5 局總分 2 · 不到 4.5 → 中了",
+    result: "win",
   },
   // ── 2026-06-28 這一桌 · 賽前鎖的注(2026-06-28 對帳 · 2 中 1 落空 · 含輸照掛)──────
   {
@@ -384,7 +387,32 @@ export type TableSummary = {
   lose: number; // 落空幾注(贏輸都掛 · 落空照亮)
   noModel: number; // 「無模型 · 只對帳」幾注(誠實克制的計數)
   faces: string[]; // 不重複的人(給首頁頭像列 · 最多幾顆由 consumer 決定)
+  /** 這桌最新一注是不是「今晚的」(36h 內開打或還沒開打)。 Tim 幾天沒開新桌時,
+   *  首頁條照掛(收據不撤)但不再自稱「今晚」—— 對著 12 天前的注喊今晚 = 在招牌上說謊(R296 防呆)。 */
+  fresh: boolean;
+  /** 最新一注的開打標(例「6/29」)· 不新鮮時給前台老實標日期用 · 空桌/無時間 → null。 */
+  latestWhen: string | null;
 };
+
+// 「M/D HH:MM」(台北 · 不含年 · Tim 從運彩單轉述的原樣格式,刻意不逼他寫 ISO)→ ms。
+// 年用台北當年推;賽前鎖的注頂多是「幾天後」的場 → 推出來比現在晚超過 45 天 = 不可能是
+// 未來的注,一定是去年的注跨了年界 → 退一年。
+// 🔴 門檻要小:舊版用 200 天,1 月看去年 7 月的注(未來 ~170 天)不會被退年 → latestMs
+//   落在未來 → fresh 誤判 → 首頁對半年前的注喊「今晚」= 這功能要防的那句謊(R296 碼審)。
+// 解析不了 → null(誠實:不猜)。
+function whenToMs(
+  when: string | undefined,
+  nowMs: number,
+  taipeiYear: number,
+): number | null {
+  if (!when) return null;
+  const m = /^(\d{1,2})\/(\d{1,2})\s+(\d{1,2}):(\d{2})$/.exec(when.trim());
+  if (!m) return null;
+  // 台北 = UTC+8 固定無夏令 → 直接位移。
+  let ms = Date.UTC(taipeiYear, Number(m[1]) - 1, Number(m[2]), Number(m[3]) - 8, Number(m[4]));
+  if (ms - nowMs > 45 * 86400000) ms = Date.UTC(taipeiYear - 1, Number(m[1]) - 1, Number(m[2]), Number(m[3]) - 8, Number(m[4]));
+  return ms;
+}
 
 /** 取整桌 + 計數(graceful · 空桌也回得了)。 待對帳排前(這桌的「現在進行式」),已對帳排後。 */
 export function getTableCalls(): TableSummary {
@@ -398,6 +426,22 @@ export function getTableCalls(): TableSummary {
   const calls = [...TABLE].sort((a, b) => order[a.result] - order[b.result]);
   const faces: string[] = [];
   for (const c of TABLE) if (!faces.includes(c.handle)) faces.push(c.handle);
+  // 新鮮度:最新一注 36h 內開打(或還沒開打)才叫「今晚」。 呼叫端都是 ISR 頁(/ 600s ·
+  // /table 300s)→ Date.now 安全。 全桌無可解析時間 → 不新鮮(誠實預設)。
+  // 台北當年算一次整桌共用(Intl formatter 是標準庫最貴的建構之一 · 別一列建一顆)。
+  const nowMs = Date.now();
+  const taipeiYear = Number(
+    new Intl.DateTimeFormat("en", { timeZone: "Asia/Taipei", year: "numeric" }).format(nowMs),
+  );
+  let latestMs: number | null = null;
+  let latestWhen: string | null = null;
+  for (const c of TABLE) {
+    const ms = whenToMs(c.when, nowMs, taipeiYear);
+    if (ms !== null && (latestMs === null || ms > latestMs)) {
+      latestMs = ms;
+      latestWhen = (c.when ?? "").split(" ")[0] || null;
+    }
+  }
   return {
     calls,
     total: TABLE.length,
@@ -407,5 +451,7 @@ export function getTableCalls(): TableSummary {
     lose: TABLE.filter((c) => c.result === "lose").length,
     noModel: TABLE.filter((c) => !c.engineModels).length,
     faces,
+    fresh: latestMs !== null && nowMs - latestMs <= 36 * 3600 * 1000,
+    latestWhen,
   };
 }

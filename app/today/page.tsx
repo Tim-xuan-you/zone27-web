@@ -8,13 +8,13 @@ import WatchPoints from "@/components/WatchPoints";
 import {
   selectTodayDuel,
   duelEngineSide,
+  duelConviction,
   duelStartLabel,
   DUEL_SPORT_LABEL,
   type TodayDuel,
 } from "@/lib/daily-duel";
 import { selectWatchPoints } from "@/lib/watch-points";
 import { getMatchHeat } from "@/lib/match-heat";
-import { getEngineConviction } from "@/lib/conviction";
 import { machineVoice } from "@/lib/machine-voice";
 import { matches as allMatches, getTodayTaipei } from "@/lib/matches";
 import { getMlbAsMatches } from "@/lib/mlb-matches";
@@ -151,14 +151,18 @@ export default async function TodayPage() {
 
   // 機器賽前開口(R295 機器嘴 · 冷面):seed = 場 + 台北日 → 全站同一句 · 不含任何
   // 用戶資訊(viewer-independent)= ISR/快取安全零個資。 台詞單一真相 lib/machine-voice。
+  // 信心層走 duelConviction(足球三向尺 · 對決卡 label 同一把)—— 世界盃 48/27/25 的
+  // 明顯偏好別再被兩向尺唸成「銅板局」(R296 修)。
+  const conviction = duel ? duelConviction(duel) : null;
   const pregameLine =
-    duel && engine
+    duel && engine && conviction
       ? machineVoice({
           kind: "pregame",
           duelId: duel.id,
           todayTaipei,
           engineName: engine.name,
           pct: engine.pct,
+          tier: conviction.tier,
         })
       : null;
 
@@ -180,7 +184,7 @@ export default async function TodayPage() {
           你也鎖一手,賽後自動對帳,贏輸都記在你刪不掉的帳本上。
         </p>
 
-        {duel && engine && sides ? (
+        {duel && engine && sides && conviction ? (
           <>
             {/* ── 今日對決卡 ───────────────────────────── */}
             <div className="border border-gold/35 bg-slate/30 p-5">
@@ -233,7 +237,7 @@ export default async function TodayPage() {
               <p className="flex flex-wrap items-center gap-x-2 gap-y-1 font-mono text-gold/85 text-[11px] tracking-[0.1em] leading-relaxed border-t border-gold/15 pt-3">
                 <span aria-hidden="true" className="text-gold/70">▦</span>
                 <span>
-                  機器已鎖 <span className="text-gold tabular">{engine.name} {engine.pct}%</span> · {getEngineConviction(engine.pct).label} · 賽前不翻牌
+                  機器已鎖 <span className="text-gold tabular">{engine.name} {engine.pct}%</span> · {conviction.label} · 賽前不翻牌
                 </span>
                 {duel.sport === "soccer" && (
                   <span className="text-mute/60 tabular">

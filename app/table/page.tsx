@@ -36,7 +36,7 @@ function resultLabel(r: CallResult): { text: string; cls: string } {
 }
 
 export default function TablePage() {
-  const { calls, total, pending, settled, win, lose } = getTableCalls();
+  const { calls, total, pending, settled, win, lose, fresh, latestWhen } = getTableCalls();
 
   return (
     <div className="flex flex-col flex-1 min-h-screen">
@@ -45,8 +45,9 @@ export default function TablePage() {
       <main id="main">
         {/* ── HERO ── */}
         <section className="mx-auto max-w-2xl w-full px-6 sm:px-10 pt-16 pb-8">
+          {/* 最新一注不是 36h 內 → 眉標不喊「今晚」· 老實標最新開打日(收據照掛 · 只是不說謊)。 */}
           <p className="font-mono text-gold text-[10px] tracking-[0.45em] mb-4">
-            / 今晚這桌
+            {fresh ? "/ 今晚這桌" : `/ 這一桌${latestWhen ? ` · 最新 ${latestWhen}` : ""}`}
           </p>
           <h1 className="text-3xl sm:text-4xl text-bone font-light tracking-tight leading-tight">
             這桌<span className="text-gold">押了什麼</span>

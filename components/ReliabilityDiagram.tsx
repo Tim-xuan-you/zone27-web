@@ -30,8 +30,10 @@ export default function ReliabilityDiagram({
   return (
     <div className="bg-slate/30 border border-line/60 p-5 sm:p-8">
       <div className="flex items-baseline justify-between mb-4 flex-wrap gap-3">
+        {/* sportLabel 進可見標頭(R296 · /calibration 棒球 tab 有 CPBL/MLB 兩張圖並排,
+            光靠 aria 分不出哪張是哪個聯盟)。 */}
         <p className="font-mono text-gold text-[10px] tracking-[0.4em]">
-          / 引擎說的 vs 實際發生
+          / 引擎說的 vs 實際發生{sportLabel ? ` · ${sportLabel}` : ""}
         </p>
         <p className="font-mono text-mute/70 text-[10px] tracking-[0.3em] tabular">
           引擎 {engineVersion} · 已 {n} 場

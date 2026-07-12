@@ -154,6 +154,8 @@ type LockedPrediction = {
   awayStats?: { era?: string; k9?: string; bb9?: string; hr9?: string };
   engineWinHomePct?: number;
   finalScore?: { home?: number; away?: number };
+  /** 延賽改期(grade Action R296 sweep 寫入 · YYYY-MM-DD)· 有值且還沒比分 = 標延賽。 */
+  postponedTo?: string;
 };
 
 function lockedSide(
@@ -224,6 +226,9 @@ function lockedToMatch(p: LockedPrediction): Match | null {
     topScores: deriveMlbTopScores(homePct, homeSide.pitcher.era, awaySide.pitcher.era),
     aiConfidence: Math.max(homePct, awayPct),
     finalResult,
+    // 延賽改期且還沒打完 → 標延賽(詳情頁既有 CPBL 延賽 UI:關押注 + ⚠ 此場延賽 · 不再
+    // 永遠掛「等開賽」)。 補打完(有比分)就照常顯示結果。
+    ...(p.postponedTo && !finalResult ? { postponed: true } : {}),
   };
 }
 

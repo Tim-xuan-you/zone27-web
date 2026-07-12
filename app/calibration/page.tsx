@@ -9,6 +9,7 @@ import ReliabilityDiagram from "@/components/ReliabilityDiagram";
 import { getFinalizedMatches } from "@/lib/matches";
 import {
   computeBaseballBins,
+  computeMlbBins,
   summarizeBins,
   type CalibrationBin,
 } from "@/lib/calibration";
@@ -74,6 +75,11 @@ export default function CalibrationPublicPage() {
   // R264 · 把「白話判決」一句提到 hero:h1 問「說 X% 時實際贏多少」,用棒球分箱壓出
   // 一句總結直接回答(同上方「已結算 N 場」badge 都是棒球為主)· 逐桶細節仍在圖下方。
   const summary = summarizeBins(bins);
+  // MLB(R296 · 433 場已 graded 躺在 mlb-locked.json 卻沒上圖 = 全站最大樣本沒兌現
+  // 「見 /calibration」的承諾)· 跟 CPBL 同引擎但絕不混池 —— 棒球 tab 內各畫各的。
+  const mlbBins = computeMlbBins();
+  const mlbSummary = summarizeBins(mlbBins);
+  const mlbN = mlbSummary.decided;
   // 氣勢反轉證物(R239)· 從官方賽果自動撈最近一組「同兩隊、隔幾天、贏家換邊」的戲劇反轉,
   // 把上面「沒有神準 / 別跟氣勢」的論點換成一筆真資料。 找不到 → null → 整段不顯示(graceful)。
   const reversal = getLatestMomentumReversal();
@@ -82,6 +88,18 @@ export default function CalibrationPublicPage() {
   const soccerBins = computeSoccerBins();
   const soccerN = getSoccerGradedCount();
   const soccerLockedN = getLockedSoccerPredictions().length;
+  const soccerSummary = summarizeBins(soccerBins);
+
+  // hero「答案先講」逐聯盟一行(R296 · MLB 433 場上桌後,單講 CPBL 會讓最大樣本繼續隱形)·
+  // 各聯盟分開講、絕不合計成一個 %(混池紅線)· decided=0 的聯盟不佔行。
+  const heroRows = [
+    { league: "中職 CPBL", s: summary },
+    { league: "美職 MLB", s: mlbSummary },
+    { league: "足球", s: soccerSummary },
+  ].filter((r) => r.s.decided > 0);
+  // hero badge 的「已結算」合計(只是計數 · 不是曲線 → 加總不算混池)。 算一次四處用,
+  // 下個聯盟上曲線時只改 heroRows + 這行,badge 不會漏更新(R296 碼審)。
+  const settledTotal = n + mlbN + soccerN;
 
   return (
     <div className="flex flex-col flex-1 min-h-screen">
@@ -96,13 +114,13 @@ export default function CalibrationPublicPage() {
             </p>
             <span
               className={`font-mono text-[9px] tracking-[0.3em] px-1.5 py-0.5 border ${
-                n === 0
+                settledTotal === 0
                   ? "border-gold/60 text-gold shimmer glow-gold"
                   : "border-gold/60 text-gold"
               }`}
-              title={`已結算 ${n} 場 · 賽後逐場登錄`}
+              title={`已結算 ${settledTotal} 場 · 賽後逐場登錄 · 各聯盟分開畫 · 絕不混池`}
             >
-              {n === 0 ? "等第一場結算" : `已結算 ${n} 場`}
+              {settledTotal === 0 ? "等第一場結算" : `已結算 ${settledTotal} 場`}
             </span>
           </div>
           <h1 className="text-4xl sm:text-5xl text-bone font-light tracking-tight max-w-3xl leading-[1.1]">
@@ -119,25 +137,32 @@ export default function CalibrationPublicPage() {
           </div>
 
           {/* ── 答案先講 ─────────────────────────────────
-              「白話判決」一句提到 hero(原本只藏在圖下方、SportToggle 後)· 直接回答 h1 的問題。
-              decided>0 → 一句話講「喊看好的那邊、實際中幾成」;=0 → graceful 改成「第一場後寫在這」。 */}
-          {summary.decided > 0 ? (
+              「白話判決」提到 hero(原本只藏在圖下方、SportToggle 後)· 直接回答 h1 的問題。
+              R296 · 逐聯盟一行(CPBL / MLB / 足球)· 各講各的 % · 絕不合計(混池紅線)。 */}
+          {heroRows.length > 0 ? (
             <div className="mt-7 max-w-2xl">
               <p className="font-mono text-gold/70 text-[10px] tracking-[0.4em] mb-2">
                 / 答案先講
               </p>
-              <p className="text-bone text-lg sm:text-xl leading-relaxed">
-                到目前 · 引擎喊看好的那一邊,{" "}
-                <span className="font-mono tabular text-gold">{summary.decided}</span> 場裡實際中了{" "}
-                <span className="font-mono tabular text-gold">
-                  {Math.round(summary.favoriteHitPct)}%
-                </span>
-                。
-                {summary.decided < 30 && (
-                  <span className="block mt-1.5 text-mute text-base">
-                    還不到 30 場 · 先當暖身,多打幾場這個數字才真的算數。
-                  </span>
-                )}
+              <div className="space-y-2">
+                {heroRows.map(({ league, s }) => (
+                  <p key={league} className="text-bone text-lg sm:text-xl leading-relaxed">
+                    <span className="font-mono text-mute/80 text-sm tracking-[0.1em]">
+                      {league}
+                    </span>{" "}
+                    · 引擎喊看好的那邊,{" "}
+                    <span className="font-mono tabular text-gold">{s.decided}</span> 場裡實際中了{" "}
+                    <span className="font-mono tabular text-gold">
+                      {Math.round(s.favoriteHitPct)}%
+                    </span>
+                    {s.decided < 30 && (
+                      <span className="text-mute text-base"> · 還不到 30 場先當暖身</span>
+                    )}
+                  </p>
+                ))}
+              </div>
+              <p className="mt-2 text-mute text-sm leading-relaxed">
+                各聯盟分開算、不合成一個數字 —— 混在一起會遮掉各自的真實校準。
               </p>
             </div>
           ) : (
@@ -240,7 +265,9 @@ export default function CalibrationPublicPage() {
               各自套 N≥30 門檻 —— 絕不把兩運動混成一條曲線(會遮掉各運動的真實校準)。 */}
           <SportToggle
             containerClass="pt-1 pb-5"
-            baseball={<BaseballCalView bins={bins} n={n} />}
+            baseball={
+              <BaseballCalView bins={bins} n={n} mlbBins={mlbBins} mlbN={mlbN} />
+            }
             soccer={
               <SoccerCalView bins={soccerBins} n={soccerN} lockedN={soccerLockedN} />
             }
@@ -335,38 +362,69 @@ export default function CalibrationPublicPage() {
 
 // ── Sub-components ─────────────────────────────────────
 
-// 棒球校準 view · 圖 + 低樣本誠實說明(N<30 任何偏移都可能是運氣 · 不算數)。
-function BaseballCalView({ bins, n }: { bins: CalibrationBin[]; n: number }) {
+// 棒球校準 view · CPBL 與 MLB 同一套引擎、但各畫各的圖(混池會遮掉各聯盟真實校準 ·
+// MlbEngineRecord 的鐵律「機率校準曲線仍各聯盟分開」在這裡兌現 · R296)。
+function BaseballCalView({
+  bins,
+  n,
+  mlbBins,
+  mlbN,
+}: {
+  bins: CalibrationBin[];
+  n: number;
+  mlbBins: CalibrationBin[];
+  mlbN: number;
+}) {
   return (
-    <div>
-      <ReliabilityDiagram bins={bins} n={n} engineVersion="v0.2" />
-      {n === 0 ? (
-        <div className="mt-6 border border-dashed border-gold/30 bg-slate/30 p-6 sm:p-8 text-center">
-          <p className="font-mono text-gold text-[10px] tracking-[0.4em] mb-3">
-            還沒有資料 · 等第一場結算
-          </p>
-          <p className="text-mute text-sm sm:text-base leading-relaxed max-w-md mx-auto">
-            引擎還沒結算任何一場。 第一個落點 · 統一 vs 富邦(2026-05-21 新莊)。
+    <div className="space-y-8">
+      {/* ── 中職 CPBL(Tim 賽前手 curate 的線)── */}
+      <div>
+        <ReliabilityDiagram bins={bins} n={n} engineVersion="v0.2" sportLabel="中職 CPBL" />
+        {n === 0 ? (
+          <div className="mt-6 border border-dashed border-gold/30 bg-slate/30 p-6 sm:p-8 text-center">
+            <p className="font-mono text-gold text-[10px] tracking-[0.4em] mb-3">
+              還沒有資料 · 等第一場結算
+            </p>
+            <p className="text-mute text-sm sm:text-base leading-relaxed max-w-md mx-auto">
+              引擎還沒結算任何一場。 第一個落點 · 統一 vs 富邦(2026-05-21 新莊)。
+            </p>
+          </div>
+        ) : n < 30 ? (
+          <div className="mt-6 border border-loss/30 bg-loss/5 p-5 sm:p-6">
+            <p className="font-mono text-loss text-[10px] tracking-[0.35em] mb-2">
+              ⚠ 中職資料還太少 · 目前 {n} 場 / 滿 30 場才算數
+            </p>
+            <p className="text-mute text-sm leading-relaxed">
+              場數不到 30 之前,這張圖還看不出名堂 · 任何偏移都可能只是運氣、
+              不是引擎的問題。 完整算法見{" "}
+              <Link
+                href="/methodology"
+                className="text-gold underline-offset-4 hover:underline"
+              >
+                方法說明
+              </Link>
+              。
+            </p>
+          </div>
+        ) : null}
+      </div>
+
+      {/* ── 美職 MLB(Action 賽前自動鎖 · 樣本累積最快 · 全站第一條過 30 場門檻的曲線)── */}
+      {mlbN > 0 && (
+        <div>
+          <ReliabilityDiagram
+            bins={mlbBins}
+            n={mlbN}
+            engineVersion="v0.2"
+            sportLabel="美職 MLB"
+          />
+          <p className="mt-3 text-mute text-sm leading-relaxed">
+            MLB 跟中職<span className="text-bone">同一套引擎</span>(每天自動賽前鎖定、賽後對「當初鎖的那個數字」結算)——
+            但曲線<span className="text-bone">絕不跟中職混在一起畫</span>:混池會遮掉各聯盟自己的真實校準。
+            {mlbN < 30 && <> 目前 {mlbN} 場 · 滿 30 場才算數。</>}
           </p>
         </div>
-      ) : n < 30 ? (
-        <div className="mt-6 border border-loss/30 bg-loss/5 p-5 sm:p-6">
-          <p className="font-mono text-loss text-[10px] tracking-[0.35em] mb-2">
-            ⚠ 棒球資料還太少 · 目前 {n} 場 / 滿 30 場才算數
-          </p>
-          <p className="text-mute text-sm leading-relaxed">
-            場數不到 30 之前,這張圖還看不出名堂 · 任何偏移都可能只是運氣、
-            不是引擎的問題。 完整算法見{" "}
-            <Link
-              href="/methodology"
-              className="text-gold underline-offset-4 hover:underline"
-            >
-              方法說明
-            </Link>
-            。
-          </p>
-        </div>
-      ) : null}
+      )}
     </div>
   );
 }

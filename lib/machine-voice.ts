@@ -1,5 +1,5 @@
 import { seedHash } from "@/lib/identity";
-import { getEngineConviction } from "@/lib/conviction";
+import type { ConvictionTier } from "@/lib/conviction";
 
 // ── ZONE 27 · 冷面機器嘴(Machine Voice)──────────────────────────────────
 // Tim 2026-07-05 拍板「誠實≠沒血色」的兌現:對決迴路(今日一戰/戰帖)有了,但機器贏你之後
@@ -39,6 +39,11 @@ export type MachineVoiceContext =
       todayTaipei: string;
       engineName: string;
       pct: number;
+      /** 信心層 · 🔴 必填(呼叫端用 duelConviction / getSoccerLineConviction 算好傳入)——
+       *  這支只拿到 pct 沒拿到運動別,結構上不可能自己選對尺;做成選填 + 預設兩向尺,
+       *  下一個接賽前嗆的門面照 type 合法漏傳,足球三向線就又被唸成銅板局(R296 碼審)。
+       *  顯示 % 不動、只校口氣。 */
+      tier: ConvictionTier;
     }
   /** 鎖定瞬間反應(client · server 確認後才觸發 · 同邊/站對面) */
   | {
@@ -87,9 +92,8 @@ function h2hClause(h: DuelH2H): string {
 export function machineVoice(ctx: MachineVoiceContext): string | null {
   switch (ctx.kind) {
     case "pregame": {
-      const { engineName: nm, pct } = ctx;
+      const { engineName: nm, pct, tier } = ctx;
       if (!nm || !Number.isFinite(pct)) return null;
-      const tier = getEngineConviction(pct).tier;
       const pool =
         tier === "strong"
           ? [

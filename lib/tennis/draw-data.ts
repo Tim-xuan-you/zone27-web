@@ -64,8 +64,9 @@ export const TENNIS_DRAW: TennisMatch[] = [
     a: { zh: "凱斯勒.麥卡特尼", en: "McCartney Kessler", rank: 62, confidence: "high" },
     b: { zh: "O.奧利尼科娃", en: "Oleksandra Oliynykova", rank: 49, confidence: "high" } },
   { id: "tn-0629-2052", tour: "wta", tournament: "溫布頓網球公開賽", surface: "grass", time: "6/29 21:20",
+    // en 用她巡迴賽登錄名 Mimi Xu(ESPN/WTA 一律這個 · 原寫 Mingge Xu 對不上鏡像 → 賽果永遠配不到)。
     a: { zh: "卡薩金娜", en: "Daria Kasatkina", rank: 68, confidence: "medium" },
-    b: { zh: "徐銘格", en: "Mingge Xu", rank: 248, confidence: "medium" } },
+    b: { zh: "徐銘格", en: "Mimi Xu", rank: 248, confidence: "medium" } },
   { id: "tn-0629-2056", tour: "wta", tournament: "溫布頓網球公開賽", surface: "grass", time: "6/29 21:20",
     a: { zh: "莉莉.塔格", en: "Lilli Tagger", rank: 90, confidence: "high" },
     b: { zh: "L.塔拉魯娃", en: "Lanlana Tararudee", rank: 100, confidence: "medium" } },

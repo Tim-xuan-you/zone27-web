@@ -1,3 +1,4 @@
+import Link from "next/link";
 import mlbLocked from "@/lib/mlb-locked.json";
 
 // ── ZONE 27 · MLB 引擎自動盤戰績(驗證中)──────────────────
@@ -19,7 +20,9 @@ import mlbLocked from "@/lib/mlb-locked.json";
 // 資料賽後由 Action 更新 → commit → Vercel 重佈 · 此頁靜態讀 JSON。
 // ─────────────────────────────────────────────────────
 
-type Verdict = "proved" | "diverged" | "tie" | "push" | null;
+// void = 延賽改期 ≥2 天停審(先發重排 · 賽前鎖的線不描述改期後的比賽 → 退回不計 ·
+// 同運彩「先發投手異動退注」慣例 · grade-mlb-locked.mjs R296)。
+type Verdict = "proved" | "diverged" | "tie" | "push" | "void" | null;
 type Pred = {
   engineWinHomePct: number;
   verdict: Verdict;
@@ -41,6 +44,8 @@ export default function MlbEngineRecord() {
   const noLine = preds.filter(
     (p) => p.verdict === "push" || p.verdict === "tie"
   ).length;
+  // 延賽改期停審(不進任何分母 · 誠實顯示不隱形 —— 否則「鎖死 N 場」跟其他格子兜不攏)。
+  const voided = preds.filter((p) => p.verdict === "void").length;
   const rate =
     decided.length > 0 ? Math.round((proved / decided.length) * 100) : null;
   // 最後更新戳(賽後對帳 gradedAt · 沒有就用最近 lockedAt)· 補 Tim 指出的「沒寫日期」·
@@ -120,9 +125,18 @@ export default function MlbEngineRecord() {
           {firm && rate !== null && (
             <span className="text-gold/80"> 目前總準度 {rate}% ·</span>
           )}
+          {voided > 0 && (
+            <span className="text-mute/75"> {voided} 場延賽改期停審(退回不計)·</span>
+          )}
           {lastUpdated && (
             <span className="text-mute/75"> 最後對帳 {lastUpdated}</span>
-          )}
+          )}{" "}
+          <Link
+            href="/calibration"
+            className="text-gold/70 hover:text-gold underline-offset-4 hover:underline"
+          >
+            說幾成、實際中幾成 · MLB 校準曲線 →
+          </Link>
         </p>
       </div>
     </section>

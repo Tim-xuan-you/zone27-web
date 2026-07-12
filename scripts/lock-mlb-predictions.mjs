@@ -91,6 +91,7 @@ async function main() {
     ? existing
     : { predictions: [] };
   const lockedPks = new Set(store.predictions.map((p) => p.gamePk));
+  const byPk = new Map(store.predictions.map((p) => [p.gamePk, p]));
   const lockedAt = new Date().toISOString();
 
   // 鎖「今天 + 明天(台北)」尚未開打的場次(MLB 美國夜場 = 台北凌晨/上午,
@@ -122,7 +123,15 @@ async function main() {
     const stats = await fetchPitcherStats([...pids], date.slice(0, 4));
 
     for (const g of previews) {
-      if (lockedPks.has(g.gamePk)) continue;
+      // 改期補賽日重開新線(R296):延賽 ≥2 天的場 grade 已把舊線停審(void ·
+      // 六月的線是對「那天那兩位先發」開的)。 補賽日 schedule 帶同一個 gamePk 回來 ——
+      // 沒這段的話會被去重跳過 = 引擎對補賽永久棄權,而 live 面還把停審舊線端出來給人押。
+      // 對「void 且還沒比分」的既有列:用今天的先發原地重開(relockedFrom 留審計軌跡 ·
+      // postponedTo 清掉,否則前台繼續標延賽關押注)。
+      const prior = byPk.get(g.gamePk);
+      const isVoidRelock =
+        prior && prior.verdict === "void" && !prior.finalScore;
+      if (lockedPks.has(g.gamePk) && !isVoidRelock) continue;
       const hpId = g.teams?.home?.probablePitcher?.id;
       const apId = g.teams?.away?.probablePitcher?.id;
       if (!hpId || !apId) continue;
@@ -132,7 +141,7 @@ async function main() {
       const homePct = computeHomePct(hs, as);
       if (homePct === null) continue; // 某投手尚無本季數據(—)→ 不開盤(誠實)
 
-      store.predictions.push({
+      const line = {
         gamePk: g.gamePk,
         gameDate: g.gameDate,
         scheduleDate: date,
@@ -154,7 +163,14 @@ async function main() {
         lockedAt,
         finalScore: null, // grade script 填
         verdict: null, // proved / diverged / tie · grade script 填
-      });
+      };
+      if (isVoidRelock) {
+        const relockedFrom = prior.scheduleDate ?? null;
+        delete prior.postponedTo;
+        Object.assign(prior, line, { relockedFrom });
+      } else {
+        store.predictions.push(line);
+      }
       lockedPks.add(g.gamePk);
       added++;
     }

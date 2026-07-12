@@ -10,8 +10,8 @@
     {
       "name": "zone27-prod",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "start"],
-      "port": 3000
+      "runtimeArgs": ["run", "start", "--", "-p", "3277"],
+      "port": 3277
     }
   ]
 }

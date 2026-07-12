@@ -8,7 +8,7 @@ import ChallengeBoard from "@/components/ChallengeBoard";
 import { resolveChallenge, type ChallengeMatchModel } from "@/lib/challenge";
 import { normalizeProfileCode } from "@/lib/profile-code";
 import { creatorIdentity, getTeamCrest } from "@/lib/identity";
-import { getEngineConviction } from "@/lib/conviction";
+import { getEngineConviction, getSoccerLineConviction } from "@/lib/conviction";
 import { duelStartLabel } from "@/lib/daily-duel";
 import { getTodayTaipei } from "@/lib/matches";
 import { createPageMetadata } from "@/lib/page-og";
@@ -204,7 +204,13 @@ export default async function VsPage({
                     <span className="text-gold tabular">
                       {match.engine.name} {match.engine.pct}%
                     </span>{" "}
-                    · {getEngineConviction(match.engine.pct).label} · 賽前不翻牌
+                    {/* 足球三向線走三向尺(同 /today 對決卡 · R296 碼審修:同一手兩個門面
+                        不准兩種口氣 —— 48/27/25 在這裡也是重壓不是銅板局)。 */}
+                    · {(match.soccerPcts
+                      ? getSoccerLineConviction(match.engine.pct, match.soccerPcts)
+                      : getEngineConviction(match.engine.pct)
+                    ).label}{" "}
+                    · 賽前不翻牌
                   </span>
                   {match.soccerPcts && (
                     <span className="text-mute/60 tabular">

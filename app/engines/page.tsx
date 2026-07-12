@@ -3,7 +3,12 @@ import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import ReliabilityDiagram from "@/components/ReliabilityDiagram";
 import { getFinalizedMatches, getTrackRecordStats } from "@/lib/matches";
-import { computeBaseballBins, computeTennisBins, type CalibrationBin } from "@/lib/calibration";
+import {
+  computeBaseballBins,
+  computeMlbBins,
+  computeTennisBins,
+  type CalibrationBin,
+} from "@/lib/calibration";
 import { computeSoccerBins, getSoccerGradedCount } from "@/lib/soccer/calibration";
 import { getLockedSoccerPredictions } from "@/lib/soccer/locked";
 import { gradeTennisEngine } from "@/lib/tennis/matches";
@@ -44,6 +49,10 @@ export default function EnginesPage() {
   const baseballFinal = getFinalizedMatches();
   const baseballBins = computeBaseballBins(baseballFinal);
   const baseballN = baseballBins.reduce((s, b) => s + b.count, 0);
+  // MLB(R296 · 段標寫著「CPBL / MLB」曲線卻只餵 CPBL = 標示與資料不符 · 補上第二張)·
+  // 同一套引擎、各聯盟各畫各的(混池紅線 · 同 /calibration)。
+  const mlbBins = computeMlbBins();
+  const mlbN = mlbBins.reduce((s, b) => s + b.count, 0);
 
   // 足球(讀打包的賽前鎖定檔 · 同 /calibration 的 computeSoccerBins · 滿格才畫)
   const soccerLocked = getLockedSoccerPredictions();
@@ -182,12 +191,27 @@ export default function EnginesPage() {
           </p>
 
           <EngineCurve
-            sport="棒球"
+            sport="中職 CPBL"
             bins={baseballBins}
             n={baseballN}
             engineVersion="v0.2"
             zeroNote="引擎還沒結算任何一場。 第一個落點 · 統一 vs 富邦(2026-05-21 新莊)。"
           />
+          {/* MLB 第二張曲線(R296)· 同引擎、自動盤、樣本累積最快 —— 但跟中職各畫各的(混池紅線)。
+              走同一個 EngineCurve(標頭 + N<30 警示 + 零狀態全都同款 · 不手排第二種版型)。 */}
+          <div>
+            <EngineCurve
+              sport="美職 MLB"
+              bins={mlbBins}
+              n={mlbN}
+              engineVersion="v0.2"
+              zeroNote="MLB 自動盤還沒結算任何一場 · 曲線從第一場打完開始長。"
+            />
+            <p className="mt-3 text-mute text-[13px] leading-relaxed">
+              MLB 跟中職同一套引擎(每天自動賽前鎖定、賽後對鎖定值結算)——
+              曲線分開畫,混池會遮掉各聯盟自己的真實校準。
+            </p>
+          </div>
           <RecordLine
             proved={tr.proved}
             diverged={tr.diverged}

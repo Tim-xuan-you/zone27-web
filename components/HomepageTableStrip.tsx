@@ -12,13 +12,15 @@ import type { TableSummary } from "@/lib/table-picks";
 // ─────────────────────────────────────────────────────
 export default function HomepageTableStrip({ summary }: { summary: TableSummary }) {
   if (summary.total === 0) return null;
-  const { total, settled, win, lose, faces } = summary;
+  const { total, settled, win, lose, faces, fresh, latestWhen } = summary;
   const faceList = faces.slice(0, 4);
+  // 最新一注不是 36h 內的 → 不自稱「今晚」(對 12 天前的注喊今晚 = 說謊)· 老實標最新日期。
+  const title = fresh ? "今晚這桌" : `這一桌${latestWhen ? ` · 最新 ${latestWhen}` : ""}`;
   return (
     <section className="w-full pt-2 pb-2">
       <Link
         href="/table"
-        aria-label={`今晚這桌 · ${total} 注賽前鎖死${
+        aria-label={`${title} · ${total} 注賽前鎖死${
           settled > 0 ? ` · 已對帳 ${settled} 注(${win} 中、${lose} 沒中)· 看這桌` : " · 看這桌"
         }`}
         className="block border border-line/50 bg-transparent hover:border-gold/40 hover:bg-gold/[0.04] transition-colors px-4 py-3 group"
@@ -37,7 +39,7 @@ export default function HomepageTableStrip({ summary }: { summary: TableSummary 
             </div>
           )}
           <p className="text-bone text-sm leading-snug min-w-0">
-            今晚這桌 · <span className="text-gold font-medium">{total}</span> 注賽前鎖死
+            {title} · <span className="text-gold font-medium">{total}</span> 注賽前鎖死
           </p>
           <span className="ml-auto shrink-0 font-mono text-gold/80 group-hover:text-gold text-[10px] tracking-[0.25em]">
             看這桌 →

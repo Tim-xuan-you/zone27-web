@@ -1,5 +1,10 @@
 import type { Match } from "@/lib/matches";
 import { getMatchPhase, getEngineFavorite, getMatchStartIso } from "@/lib/matches";
+import {
+  getEngineConviction,
+  getSoccerLineConviction,
+  type EngineConviction,
+} from "@/lib/conviction";
 import { getLockedUpcomingPredictions } from "@/lib/soccer/football-data";
 import { toDisplayPercents, enginePickOf } from "@/lib/soccer/engine";
 import {
@@ -324,6 +329,23 @@ export function duelEngineSide(d: TodayDuel): { name: string; pct: number } | nu
         ? { name: d.homeName, pct: d.line.homeWin }
         : { name: d.awayName, pct: d.line.awayWin };
   }
+}
+
+/** 對決那手的信心溫度(對決卡 label + 機器嘴賽前口氣共用 · 同一把尺零漂移)。
+ *  兩向運動 = 既有 getEngineConviction(pick % 就是 favPct);足球三向走三向尺
+ *  (pick vs 次高結果)—— 48/27/25 是明顯偏好不是銅板局,別拿兩向尺唸三向線(R296 修)。 */
+export function duelConviction(d: TodayDuel): EngineConviction {
+  if (d.sport === "soccer") {
+    const pickPct =
+      d.pick === "home"
+        ? d.pcts.homeWin
+        : d.pick === "away"
+          ? d.pcts.awayWin
+          : d.pcts.draw;
+    return getSoccerLineConviction(pickPct, d.pcts);
+  }
+  const engine = duelEngineSide(d);
+  return getEngineConviction(engine ? engine.pct : 50);
 }
 
 const TPE_DATE = new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Taipei" });

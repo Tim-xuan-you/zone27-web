@@ -33,11 +33,15 @@ const GAMES: MirrorGame[] = ((mirror as { games?: MirrorGame[] }).games ?? []).f
 );
 
 // 對帳正規化:去重音 / 標點 / 大小寫(同 fetch script 的 norm · 兩邊一致才配得上)。
+// R296 · 再去世代後綴(Jr./Sr./II–IV):ESPN 鏡像寫「Martin Damm」、運彩/籤表寫
+// 「Martin Damm Jr.」→ 同一人配不上 = 賽果明明在鏡像裡卻永遠 pending(tn-0629-2017 實例)。
+// 兩邊名字都過同一支 norm,所以只改這裡就一致;賽事閘 + 日期窗仍擋同名父子撞場。
 function norm(s: string): string {
   return (s ?? "")
     .normalize("NFD")
     .replace(/[̀-ͯ]/g, "") // 去重音(combining diacritical marks U+0300–U+036F)
     .toLowerCase()
+    .replace(/\b(jr|sr|ii|iii|iv)\b\.?/g, "") // 世代後綴不是名字(只在字界 · 不動 junior 等實字)
     .replace(/[^a-z0-9]/g, "");
 }
 
