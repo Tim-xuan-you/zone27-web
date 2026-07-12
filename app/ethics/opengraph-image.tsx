@@ -1,19 +1,15 @@
 import { ImageResponse } from "next/og";
 import { BRAND, OG_SIZE, OG_CONTENT_TYPE } from "@/lib/brand";
 
-// ── ZONE 27 · /ethics Dynamic OG ─────────────────────────
-// Round 44 W-A · Agent K-discovered OG-card gap fix · R41 W-D shipped
-// /ethics initially 8 binding commitments without OG card(R80 加 #09 →
-// 現 9 binding)· per [[zone27-disclosure-philosophy]] OG cards = private-DM lever。
-//
-// /ethics 是 Stratechery About transplant · 9 binding NOT-DO commitments(R80
-// 加 #09 mandatory-ledger discipline)· 玩運彩+報馬仔 violate 7/9 · ship 等於
-// 商業自殺 · 此 OG card 必須 surface 此 brand-IP differentiation when shared。
+// ── ZONE 27 · /ethics Dynamic OG · 量力而為 ─────────────────────────
+// Tim 2026-07-13 極簡拍板:舊卡(9 條宣言 · 英文行話)全換 —— 分享出去的卡
+// 只講訪客用得到的三句:不是賭場 · 沒人保證獲利 · 停不下來打這幾支電話。
 // ─────────────────────────────────────────────────────
 
 export const size = OG_SIZE;
 export const contentType = OG_CONTENT_TYPE;
-export const alt = "ZONE 27 · Ethics Policy · 9 binding NOT-DO commitments(R80 加 #09 mandatory-ledger discipline · 配對 /integrity rule #12 引擎驗證夠準才開盤 scope + R81 rule #13 永遠不 subscription auto-renewal · scope + discipline + renewal 三軸 close brand IP loop)";
+export const alt =
+  "ZONE 27 · 量力而為 · 我們不是賭場 · 沒有人能保證獲利 · 1925 安心專線 · 1995 生命線 · 1980 張老師";
 
 export default async function EthicsOgImage() {
   return new ImageResponse(
@@ -70,7 +66,7 @@ export default async function EthicsOgImage() {
               display: "flex",
             }}
           >
-            ETHICS POLICY · BINDING
+            量力而為
           </span>
         </div>
 
@@ -79,20 +75,9 @@ export default async function EthicsOgImage() {
           style={{
             display: "flex",
             flexDirection: "column",
-            marginTop: 40,
+            marginTop: 48,
           }}
         >
-          <span
-            style={{
-              fontSize: 16,
-              color: "rgba(212,175,55,0.55)",
-              letterSpacing: "0.4em",
-              marginBottom: 12,
-              display: "flex",
-            }}
-          >
-            9 NOT-DO COMMITMENTS
-          </span>
           <span
             style={{
               fontSize: 88,
@@ -102,22 +87,20 @@ export default async function EthicsOgImage() {
               lineHeight: 1.05,
               textShadow: "0 0 80px rgba(212,175,55,0.3)",
               display: "flex",
-              flexWrap: "wrap",
             }}
           >
-            9 件永遠不做
+            玩得起,才玩。
           </span>
           <span
             style={{
-              fontSize: 22,
+              fontSize: 24,
               color: BRAND.bone,
               fontWeight: 300,
-              letterSpacing: "-0.01em",
-              marginTop: 14,
+              marginTop: 18,
               display: "flex",
             }}
           >
-            ZONE 27 對訂閱者 · 對行業 · 對自己的 binding commitments
+            我們不是賭場 · 不收注 · 沒有人能保證獲利
           </span>
         </div>
 
@@ -128,12 +111,12 @@ export default async function EthicsOgImage() {
             height: 1,
             background:
               "linear-gradient(90deg, transparent, rgba(212,175,55,0.5), transparent)",
-            marginTop: 40,
-            marginBottom: 28,
+            marginTop: 44,
+            marginBottom: 30,
           }}
         />
 
-        {/* 3 TIER ROW · DISPLACEMENT · SUBSCRIBER · BRAND */}
+        {/* 三支免費專線 */}
         <div
           style={{
             display: "flex",
@@ -141,12 +124,12 @@ export default async function EthicsOgImage() {
             gap: 24,
           }}
         >
-          <TierStat n="6" label="DISPLACEMENT" sub="賣明牌的站 違反 6/6" gold />
-          <TierStat n="2" label="SUBSCRIBER PROTECT" sub="0 ads · annual rev publish" />
-          <TierStat n="1" label="BRAND" sub="never become tipster" />
+          <Hotline n="1925" label="安心專線 · 24 小時" gold />
+          <Hotline n="1995" label="生命線" />
+          <Hotline n="1980" label="張老師專線" />
         </div>
 
-        {/* BOTTOM · differentiator */}
+        {/* BOTTOM */}
         <div
           style={{
             position: "absolute",
@@ -162,12 +145,10 @@ export default async function EthicsOgImage() {
             style={{
               fontSize: 16,
               color: "rgba(245,242,234,0.6)",
-              letterSpacing: "0.04em",
               display: "flex",
-              maxWidth: 720,
             }}
           >
-            Paid-pick businesses violate 7/9 of these. Publishing this = business suicide for them.
+            用「輸了也不心痛」的錢 · 未滿 18 歲依法不能買運動彩券
           </span>
           <span
             style={{
@@ -178,7 +159,7 @@ export default async function EthicsOgImage() {
               display: "flex",
             }}
           >
-            /ethics
+            zone27.com.tw
           </span>
         </div>
       </div>
@@ -187,17 +168,7 @@ export default async function EthicsOgImage() {
   );
 }
 
-function TierStat({
-  n,
-  label,
-  sub,
-  gold = false,
-}: {
-  n: string;
-  label: string;
-  sub: string;
-  gold?: boolean;
-}) {
+function Hotline({ n, label, gold = false }: { n: string; label: string; gold?: boolean }) {
   return (
     <div
       style={{
@@ -228,22 +199,12 @@ function TierStat({
       <span
         style={{
           color: "rgba(245,242,234,0.7)",
-          fontSize: 12,
-          letterSpacing: "0.22em",
+          fontSize: 14,
+          letterSpacing: "0.1em",
           display: "flex",
         }}
       >
         {label}
-      </span>
-      <span
-        style={{
-          color: "rgba(245,242,234,0.45)",
-          fontSize: 10,
-          letterSpacing: "0.15em",
-          display: "flex",
-        }}
-      >
-        {sub}
       </span>
     </div>
   );
