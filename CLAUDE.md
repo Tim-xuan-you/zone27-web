@@ -20,7 +20,8 @@ ZONE 27 從「CPBL 量化預測站」pivot 成合法群眾預測平台(R171-R172
 
 ### 💰 賺錢(canonical · 2026-06-03 等級改名 OPEN/BLACK/GOLD · 覆蓋下方所有舊數字)
 
-> ⚠️ 等級名以 memory/project_zone27_tier_naming.md 為準:三層純功能(地位交給天梯)· 已砍光 270/創始編號/早鳥故事 · tier KEY 仍 `founder`(DB 值)· URL /founders 不動 ·「TIM · FOUNDER」創辦人簽名保留(別改成 GOLD)。
+> 🔴🔴 **2026-06-18 R250 GOLD 整層下架(本段最新 · 覆蓋下面 GOLD 那條):現行付費層只有一個 = BLACK(NT$ 500 / 31 天)。 GOLD / NT$ 2,700 / 365 天付費層已收掉 · BLACK 吸收原 GOLD 的 perk = 唯一也是最高。 lib/tier.ts:36 `TIER_NAME` 是單一真相 · DB tier key 仍 `founder`(顯示成 BLACK)。 🔴 別再把 GOLD/2,700/365 天寫進任何訪客面(尤其 /terms /privacy 法律頁 · 曾出過此 bug)。**
+> ⚠️ 等級名以 memory/project_zone27_tier_naming.md 為準:純功能(地位交給天梯)· 已砍光 270/創始編號/早鳥故事 · tier KEY 仍 `founder`(DB 值)· URL /founders 不動 ·「TIM · FOUNDER」創辦人簽名保留(別改成 GOLD)。
 
 - **OPEN**(免費)· 引擎(萬象)永遠免費 · 看免費 · 押注 + 跑引擎要登入免費會員
 - **BLACK**(黑卡)NT$ 500/月(31天)· 創作者抽傭 **10%** · manual ATM · 0 auto-renewal
