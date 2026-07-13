@@ -52,7 +52,8 @@ export default function TermsPage() {
             </li>
             <li>
               <strong className="text-bone">付費會員怎麼收錢。</strong>
-              你自己手動轉帳,一期一付(BLACK 一期 31 天 · GOLD 一期 365 天)。
+              目前唯一的付費方案是<strong className="text-bone">黑卡 BLACK</strong>
+              (NT$ 500 / 一期 31 天)。 你自己手動轉帳、一期一付,
               <strong className="text-bone">永不自動扣款</strong> ——
               不轉下一期,服務就自然停止,不用按取消、不用填問卷。
             </li>
