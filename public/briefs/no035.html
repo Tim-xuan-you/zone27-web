@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<title>ZONE 27 戰報 NO.035 · 聖若昂德雷競技 @ 塞阿拉</title>
+<style>
+  /* ── ZONE 27 戰報 · 門店列印版 · A4 一頁 · v21(去重:論點只在 10 秒看完講一次 · 每塊背不同貨) ── */
+  @page { size: A4; margin: 10mm 12mm; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body { font-family: "Microsoft JhengHei", "Noto Sans TC", "PingFang TC", sans-serif;
+    color: #111; background: #e8e8e8; font-size: 10pt; line-height: 1.46; }
+  .sheet { width: 210mm; min-height: 296mm; margin: 0 auto; background: #fff; padding: 11mm 13mm 8mm; }
+  @media print { body { background: #fff; } .sheet { width: auto; min-height: auto; margin: 0; padding: 0; zoom: 0.84; } }
+
+  .masthead { display: flex; justify-content: space-between; align-items: center;
+    border-bottom: 3.5px solid #0F1A2E; padding-bottom: 5px; margin-bottom: 6px; }
+  .brand { font-size: 19pt; font-weight: 900; letter-spacing: 2px; color: #0F1A2E; }
+  .brand .en { font-size: 8pt; font-weight: 600; letter-spacing: 3px; color: #8A6A1F; display: block; margin-top: 1px; }
+  .sportbox { display: flex; align-items: center; gap: 10px; }
+  .sportbox .name { font-size: 22pt; font-weight: 900; color: #0F1A2E; letter-spacing: 4px; line-height: 1.1; }
+  .sportbox .sub { font-size: 8.5pt; color: #666; letter-spacing: 2px; display: block; margin-top: 1px; }
+  .sportbox .no { text-align: right; font-size: 8.5pt; color: #444; line-height: 1.5; border-left: 1px solid #ccc; padding-left: 10px; }
+  .sportbox .no b { color: #0F1A2E; }
+
+  .match { margin-bottom: 5px; }
+  .match .comp { font-size: 9pt; font-weight: 700; color: #8A6A1F; letter-spacing: 2px; }
+  .match h1 { font-size: 19pt; font-weight: 900; color: #0F1A2E; letter-spacing: 1px; line-height: 1.3; }
+  .match .meta { font-size: 9.5pt; color: #444; margin-top: 2px; }
+
+  .tldr { background: #0F1A2E; color: #E9E4D8; padding: 6px 12px; margin-bottom: 5px; }
+  .tldr .tag { font-size: 8pt; letter-spacing: 3px; color: #D4AF37; font-weight: 700; }
+  .tldr p { font-size: 11pt; font-weight: 700; line-height: 1.5; margin-top: 2px; }
+  .tldr b { color: #D4AF37; }
+
+  .ritual { border: 1.5px dashed #8A6A1F; background: #FDFBF5; padding: 4px 10px;
+    font-size: 9.8pt; font-weight: 700; color: #0F1A2E; margin-bottom: 5px; }
+
+  /* 海報級主視覺:巨大數字(3 秒鉤子 · 黑白影印安全) */
+  .hero0 { display: flex; align-items: center; gap: 14px; border: 2px solid #0F1A2E;
+    padding: 4px 14px; margin-bottom: 4px; background: #FAFAF7; }
+  .hero0 .n { font-size: 38pt; font-weight: 900; color: #0F1A2E; line-height: 1; letter-spacing: 0; }
+  .hero0 .t { font-size: 10.5pt; line-height: 1.5; }
+  .hero0 .t b { color: #8A6A1F; }
+  .hero0 .t .big { font-size: 12pt; font-weight: 900; color: #0F1A2E; display: block; }
+
+  section { margin-bottom: 4px; }
+  h2 { font-size: 11pt; font-weight: 800; color: #0F1A2E; letter-spacing: 1.5px;
+    border-left: 4px solid #8A6A1F; padding-left: 7px; margin-bottom: 3px; }
+
+  .avoid table, .keep table { width: 100%; border-collapse: collapse; font-size: 9.8pt; }
+  .avoid th, .avoid td, .keep th, .keep td { border: 1px solid #ccc; padding: 3px 7px; text-align: left; vertical-align: middle; }
+  .avoid th, .keep th { background: #EFEBE0; color: #0F1A2E; font-size: 9pt; letter-spacing: 1px; }
+  .avoid td.num, .keep td.num { text-align: center; white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .avoid td.mark { text-align: center; color: #333; font-weight: 900; font-size: 12pt; width: 8%; }
+  .avoid tr.dead td { color: #777; background: #f3f3f3; }
+  .avoid tr.dead td.name, .avoid tr.dead td.num { text-decoration: line-through; text-decoration-thickness: 1.5px; text-decoration-color: #444; }
+  .keep td.star { text-align: center; white-space: nowrap; color: #8A6A1F; font-weight: 900; font-size: 10.5pt; width: 9%; }
+  .note { font-size: 8.5pt; color: #666; margin-top: 2px; }
+
+  .facts { counter-reset: fact; }
+  .facts li { list-style: none; padding-left: 17px; position: relative; margin-bottom: 2px; }
+  .facts li::before { content: counter(fact) ""; counter-increment: fact; position: absolute; left: 0;
+    font-weight: 900; color: #8A6A1F; font-size: 10.5pt; }
+
+  .switch { border: 2px solid #0F1A2E; padding: 7px 11px; background: #FAFAF7; }
+  .switch .tag { font-size: 8pt; letter-spacing: 2px; color: #8A6A1F; font-weight: 800; }
+  .switch h3 { font-size: 13pt; font-weight: 900; color: #0F1A2E; margin: 2px 0 3px; letter-spacing: 0.5px; }
+  .switch p.lead { font-size: 9.8pt; margin-bottom: 4px; }
+  .branch { display: flex; gap: 8px; margin: 3px 0; align-items: flex-start; }
+  .branch .k { flex: 0 0 78px; text-align: center; font-weight: 900; font-size: 9.5pt; padding: 2px 0;
+    border: 1.5px solid #0F1A2E; color: #0F1A2E; }
+  .branch.on .k { background: #0F1A2E; color: #E9E4D8; }
+  .branch p { font-size: 9.8pt; flex: 1; }
+
+  .board { border: 2.5px solid #8A6A1F; background: #FAF6EC; padding: 7px 12px; }
+  .board .tag { font-size: 8pt; letter-spacing: 3px; color: #8A6A1F; font-weight: 800; }
+  .board h3 { font-size: 13pt; font-weight: 900; color: #0F1A2E; letter-spacing: 0.5px; margin: 2px 0 3px; }
+  .board p { font-size: 9.8pt; line-height: 1.5; }
+  .board .sign { text-align: right; font-size: 8.5pt; color: #8A6A1F; font-weight: 800; letter-spacing: 2px; margin-top: 3px; }
+
+  .baseline { border-top: 3px solid #0F1A2E; margin-top: 6px; padding-top: 5px;
+    display: flex; justify-content: space-between; gap: 12px; font-size: 8pt; color: #555; line-height: 1.6; }
+  .baseline .right { text-align: right; white-space: nowrap; }
+  .baseline b { color: #0F1A2E; }
+  .verify { font-size: 8.5pt; color: #0F1A2E; font-weight: 700; text-align: center;
+    border: 1.2px dashed #8A6A1F; background: #FDFBF5; padding: 3px 10px; margin-top: 5px; }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <div class="masthead">
+    <div class="brand">ZONE 27 戰報
+      <span class="en">THE PRE-MATCH BRIEF</span>
+    </div>
+    <div class="sportbox">
+      <svg width="52" height="52" viewBox="0 0 40 40" aria-hidden="true">
+        <circle cx="20" cy="20" r="17" fill="none" stroke="#0F1A2E" stroke-width="2.2"/>
+        <path d="M20 15 L24.76 18.45 L22.94 24.05 L17.06 24.05 L15.24 18.45 Z" fill="none" stroke="#0F1A2E" stroke-width="1.6"/>
+        <path d="M20 15 L20 4 M24.76 18.45 L33 13 M22.94 24.05 L30 32 M17.06 24.05 L10 32 M15.24 18.45 L7 13" stroke="#8A6A1F" stroke-width="1.4"/>
+      </svg>
+      <div>
+        <span class="name">足 球</span>
+        <span class="sub">巴西乙級聯賽</span>
+      </div>
+      <div class="no">
+        <b>NO. 035</b><br>2026 · 07 · 14
+      </div>
+    </div>
+  </div>
+
+  <div class="match">
+    <div class="comp">巴西乙級聯賽</div>
+    <h1>聖若昂德雷競技 @ 塞阿拉</h1>
+    <div class="meta">福塔萊薩 Castelão 球場 · 台北 7/14 上午開打(確切時間以運彩賽程為準)</div>
+    <div class="meta">主隊塞阿拉第 17 名 · 客隊競技第 11 名(積分高 5 分)</div>
+  </div>
+
+  <div class="tldr">
+    <span class="tag">10 秒看完</span>
+    <p>主隊手感正差、排名還落在客隊<b>後面</b>,主場卻是全場熱門。 買的是主場和名字,不是今晚的狀態 —— 這種價,我們劃掉。</p>
+  </div>
+
+  <div class="ritual">▸ 下注前的小動作:先在心裡定好你想買的,再往下看 —— 看完還想買,才是真的想買。</div>
+
+  <div class="hero0">
+    <span class="n">4</span>
+    <span class="t"><span class="big">塞阿拉最近 5 場,輸掉了 4 場。</span>
+    上一場還在主場踢完的節奏裡 0:2 輸給戈亞斯 —— 這就是今晚被開成主場贏家 <b>1.70</b> 的那支隊。</span>
+  </div>
+
+  <section class="avoid">
+    <h2>先提醒 —— 這三種,放下比較好</h2>
+    <table>
+      <tr><th style="width:31%">哪種盤</th><th style="width:12%">賠率</th><th style="width:8%"></th><th>提醒你的理由</th></tr>
+      <tr class="dead"><td class="name">塞阿拉 會贏(獨贏)</td><td class="num">1.70</td><td class="mark">×</td>
+        <td>用「贏球熱門」的價,買一支近 5 場輸 4、排名還比對手低的隊 —— 付的是名氣,不是狀態。</td></tr>
+      <tr class="dead"><td class="name">大比分 · 單隊進 3 球以上</td><td class="num">高賠</td><td class="mark">×</td>
+        <td>兩支進球都不順的隊,還賭一隊自己轟 3 球 —— 這是買彩券,不是看球。</td></tr>
+      <tr class="dead"><td class="name">正確比數 · 半場/全場 那類</td><td class="num">數十倍起</td><td class="mark">×</td>
+        <td>看著像頭獎,發生的次數比賠率讓你以為的少得多 —— 樂透用零錢玩。</td></tr>
+    </table>
+    <p class="note">提醒是價格判斷,不是輸贏預測 —— 它們照樣可能中,只是這種價長期買下來會吃虧。</p>
+  </section>
+
+  <section class="keep">
+    <h2>剩下的 —— 才值得花腦筋</h2>
+    <table>
+      <tr><th style="width:31%">哪種盤</th><th style="width:12%">賠率</th><th style="width:9%">星級</th><th>白話講</th></tr>
+      <tr><td>客隊競技 · 受讓 / 不讓分</td><td class="num">現場為準</td><td class="star">★★</td>
+        <td>被當弱隊的這隊,其實排在主隊前面 5 分、近況也比較好 —— 站它那邊,買的是位置和狀態,不是招牌。</td></tr>
+      <tr><td>全場總分 小(進球少)</td><td class="num">現場為準</td><td class="star">★</td>
+        <td>主隊剛 0:2 沒進球、兩邊火力都普通 —— 悶下來的機會不小,線壓得夠低再考慮。</td></tr>
+    </table>
+    <p class="note">客隊確切賠率以現場為準:受讓盤壓到 1.5 以下就是全世界都想到了,1.7 以上才有肉。 單雙猜銅板,本報不評。</p>
+  </section>
+
+  <section>
+    <h2>三件你查不到的事</h2>
+    <ul class="facts">
+      <li><b>「被讓分的客隊」其實排在前面。</b>競技第 11 名、22 分,比塞阿拉(第 17、17 分)高整整 5 分 —— 盤口把排前面的當弱隊,是吃主隊的主場和舊名氣。</li>
+      <li><b>主隊已經踩進降級區。</b>塞阿拉第 17 名,再往下就是掉級 —— 一支往下掉、又急著自救的隊,主場的分量本來就打折。</li>
+      <li><b>滿場主場,對一支下坡的隊是雙面刃。</b>Castelão 是巴西數一數二大的主場,加油聲是真的 —— 但越想在自家人面前止敗,越容易越踢越緊。</li>
+    </ul>
+  </section>
+
+  <section class="switch">
+    <span class="tag">開打後 · 只看這一件事</span>
+    <h3>開賽前半小時,主隊有沒有進球</h3>
+    <p class="lead">連敗又背著降級壓力,開場攻不進最容易越踢越慌 —— 第一顆球出不出得來,決定今晚走哪個劇本。</p>
+    <div class="branch on">
+      <span class="k">沒進球</span>
+      <p>悶戰劇本照走 —— 主隊越急越亂,站客隊那邊跟小球都在這一邊。</p>
+    </div>
+    <div class="branch">
+      <span class="k">主隊先進</span>
+      <p>主場拿到領先會鬆一口氣、踢得更順 —— 站客隊的人得留意,今晚可能不是它的劇本。</p>
+    </div>
+    <p class="lead" style="margin-top:3px;">我們不猜方向 —— 這場的分水嶺,就在這裡。</p>
+  </section>
+
+  <section class="board">
+    <span class="tag">本期看板</span>
+    <h3>名氣是招牌,手感是今晚</h3>
+    <p>賠率有時候買的是一支隊「以前是誰」,不是「現在踢得怎樣」。 招牌可以掛很多年,狀態只算最近這幾場。
+    別用招牌的價,去買今晚的表現。<b>本報負責把價看清楚 —— 決定,永遠在您手上。</b></p>
+    <p class="sign">—— ZONE 27 主編</p>
+  </section>
+
+  <div class="verify">賠率是公開的,你自己也查得到 —— 我們做的,就是幫你把太貴的先劃掉。</div>
+
+  <div class="baseline">
+    <span>星星是價格評論,不是輸贏預測 · 本報不收博彩業者的廣告與贊助 · 不保證獲利<br>資料:巴西足協(CBF)· 巴西媒體賽前報導 · 台灣運彩</span>
+    <span class="right"><b>《ZONE 27 戰報》NO. 035</b> · 免費 · 歡迎店家整頁影印<br>zone27.com.tw</span>
+  </div>
+
+</div>
+</body>
+</html>
