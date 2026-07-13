@@ -181,31 +181,19 @@ export default async function Home() {
             「世界統計過的勝率」即可)→ 本日/最新出刊攤在頭版。 引擎戰績 chip 依 Tim
             拍板從門面退場(頁面不刪 · /brief 底線與 sitemap 仍可達 —— 保固書收進抽屜)。 */}
         <section className="mx-auto max-w-5xl px-6 sm:px-10 pt-12 sm:pt-16 pb-8 text-center">
+          {/* Tim 2026-07-13「首頁超級雜 · 都是字 · 沒人想看 · 門面竟然趕客」→ 砍掉整段
+              引擎說明文 + 特色宣示條(都是字)。 門面 = 一句定位 + 大數字產品磚(SHOW 非 TELL)。
+              期數活數併進 eyebrow(唯一保留的「數字型」credibility · 不再是一行字牆)。 */}
           <p className="font-mono text-gold text-[10px] sm:text-[11px] tracking-[0.4em] mb-6">
-            《ZONE 27 戰報》· 每日出刊 · 免費
+            《ZONE 27 戰報》· 已出刊 {visibleBriefs().length} 期 · 每日免費
           </p>
           <h1 className="text-3xl sm:text-5xl font-light leading-[1.14] tracking-tight text-bone max-w-2xl mx-auto">
             下注前,先看這份評鑑。
             <br />
             <span className="text-gold">太貴的劃掉 · 值得花腦筋的留下。</span>
           </h1>
-          {/* 招牌金髮絲線(zone27-rule)· 一道品牌記號的呼吸。 */}
-          <div className="zone27-rule max-w-[300px] mx-auto mt-7" aria-hidden="true" />
-          {/* 特色宣示條(Tim「首頁很弱 · 特色呢?」· Polymarket 的厲害感=活的數字非形容詞):
-              期數是登記簿活數 · 其餘是別人抄不動的硬事實(自家引擎 · 賽前鎖死不改 · 免費)。 */}
-          <p className="mt-6 font-mono text-gold/85 text-[11px] sm:text-xs tracking-[0.2em]">
-            已出刊 {visibleBriefs().length} 期 · 引擎開盤六種運動 · 賽前鎖死 · 出刊後一字不改
-          </p>
-          {/* 引擎一句話(Tim 拍板版):方法=全世界通用 · 勝率引用世界統計的天花板 ·
-              所以賣的是價格判斷,不是神準。 尾句=特色宣示(Defector 腔 · 敢講)。 */}
-          <p className="mt-5 max-w-xl mx-auto text-mute leading-relaxed text-sm sm:text-base">
-            我們用的是全世界通用的演算法 —— 這類引擎賽前算單場,全世界統計的天花板大約{" "}
-            <span className="text-bone">5 成 7</span>。 所以本報不賣神準,
-            賣的是把每張票的<span className="text-bone">價格</span>看清楚 ——
-            這種報,<span className="text-bone">別的地方沒有第二份</span>。
-          </p>
 
-          {/* 頭版:本日 / 最新出刊(最多三張 · 過刊在 /brief)*/}
+          {/* 頭版:本日 / 最新出刊「大數字」產品磚(最多三張 · 過刊在 /brief)—— 這才是門面 */}
           <HomepageBriefHero />
 
           <div className="mt-7 flex items-center justify-center gap-3 flex-wrap">

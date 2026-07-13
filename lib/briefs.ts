@@ -21,8 +21,12 @@ export type BriefIssue = {
   /** 特殊刊注記(例:賽後對帳版) */
   note?: string;
   /** 頭版一句(該期的鉤子 · 首頁/指南卡上顯示 · 沒填就只秀對戰)· 出刊時從 A4 的
-   *  10 秒看完/大數字句抽一句,≤26 字。 */
+   *  10 秒看完/大數字句抽一句,≤20 字。 */
   hook?: string;
+  /** 頭版海報數字(= 該期 A4 的大數字 · 首頁卡的視覺錨,取代一牆字)· 選填。 */
+  bigNum?: string;
+  /** 大數字單位(分 / % …)· 跟在 bigNum 後面小字。 選填。 */
+  bigNumUnit?: string;
   /** Tim 下架 → 不再示人(檔案不刪) */
   hidden?: boolean;
 };
@@ -58,13 +62,13 @@ export const BRIEFS: BriefIssue[] = [
   { no: "027", date: "2026-07-11", sport: "足球", matchup: "富川1995 @ 金泉尚武" },
   { no: "028", date: "2026-07-11", sport: "足球", matchup: "維拉諾瓦 @ 青年人體育會" },
   { no: "029", date: "2026-07-12", sport: "排球", matchup: "捷克 @ 法國",
-    hook: "門檻只有 4.5 分 —— 怕的只有第五局" },
+    bigNum: "4.5", bigNumUnit: "分", hook: "門檻矮 · 只怕被拖進第五局" },
   { no: "030", date: "2026-07-13", sport: "籃球", matchup: "尼爾森巨人 @ 馬納瓦圖噴射機",
-    hook: "這桌一格都不圈 —— 不押,也是一手" },
+    bigNum: "13", bigNumUnit: "分", hook: "上月贏 13 分 · 這桌卻不值得押" },
   { no: "031", date: "2026-07-13", sport: "棒球", matchup: "洛杉磯天使 @ 明尼蘇達雙城",
-    hook: "我們的機器只給主隊 53% —— 市場卻當它明顯強隊" },
+    bigNum: "53", bigNumUnit: "%", hook: "機器只給主隊 · 市場當它強隊" },
   { no: "032", date: "2026-07-13", sport: "籃球", matchup: "印第安那狂熱 @ 拉斯維加斯王牌",
-    hook: "上週的大勝,兩個招牌都沒上場 —— 別買上週的記憶" },
+    bigNum: "48", bigNumUnit: "分", hook: "招牌回歸 · 別買上週沒他的大勝" },
 ];
 
 /** A4 原版的靜態網址(public/briefs)。 */
