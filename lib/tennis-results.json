@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-07-13T20:02:59.922Z",
+  "generatedAt": "2026-07-13T22:38:21.874Z",
   "source": "site.api.espn.com tennis scoreboard (atp+wta singles · official · public · 0 auth)",
-  "count": 1758,
+  "count": 1760,
   "games": [
     {
       "tour": "atp",
@@ -17088,6 +17088,16 @@
       "tournament": "Plava Laguna Croatia Open Umag",
       "grouping": "Men's Singles",
       "date": "2026-07-13",
+      "winnerName": "Dino Prizmic",
+      "loserName": "Vit Kopriva",
+      "score": "6-1 6-3",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Plava Laguna Croatia Open Umag",
+      "grouping": "Men's Singles",
+      "date": "2026-07-13",
       "winnerName": "Luca Van Assche",
       "loserName": "Dusan Lajovic",
       "score": "2-6 7-5 6-4",
@@ -17511,6 +17521,16 @@
       "winnerName": "Petra Marcinko",
       "loserName": "Nadia Podoroska",
       "score": "6-2 3-6 6-4",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Vanda Pharmaceuticals Athens Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-13",
+      "winnerName": "Alycia Parks",
+      "loserName": "Valentini Grammatikopoulou",
+      "score": "7-6 6-4",
       "retired": false
     },
     {
