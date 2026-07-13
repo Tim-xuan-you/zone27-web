@@ -69,6 +69,8 @@ export const BRIEFS: BriefIssue[] = [
     bigNum: "53", bigNumUnit: "%", hook: "機器只給主隊 · 市場當它強隊" },
   { no: "032", date: "2026-07-13", sport: "籃球", matchup: "印第安那狂熱 @ 拉斯維加斯王牌",
     bigNum: "48", bigNumUnit: "分", hook: "招牌回歸 · 別買上週沒他的大勝" },
+  { no: "033", date: "2026-07-14", sport: "足球", matchup: "隆德里納 @ 米內羅美洲",
+    bigNum: "6", bigNumUnit: "分", hook: "墊底隊拿 6 分 · 主場卻是熱門" },
 ];
 
 /** A4 原版的靜態網址(public/briefs)。 */
