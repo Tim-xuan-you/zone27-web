@@ -3105,6 +3105,34 @@
       "outcome": null,
       "verdict": null,
       "gradedAt": null
+    },
+    {
+      "matchId": "fd-537388",
+      "competitionCode": "WC",
+      "competitionName": "世界盃",
+      "kickoffISO": "2026-07-15T19:00:00Z",
+      "status": "TIMED",
+      "homeSeed": "England",
+      "awaySeed": "Argentina",
+      "home": "英格蘭",
+      "away": "阿根廷",
+      "ratingHome": 1826,
+      "ratingAway": 1875,
+      "homeAdvantage": 0,
+      "xgHome": 1.18975,
+      "xgAway": 1.41025,
+      "homeWin": 0.30747736609397897,
+      "draw": 0.281950403840665,
+      "awayWin": 0.4105722300653564,
+      "homeWinPct": 31,
+      "drawPct": 28,
+      "awayWinPct": 41,
+      "enginePick": "away",
+      "lockedAt": "2026-07-13T19:20:02.370Z",
+      "finalScore": null,
+      "outcome": null,
+      "verdict": null,
+      "gradedAt": null
     }
   ]
 }
