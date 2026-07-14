@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<title>ZONE 27 戰報 NO.036 · 福岡軟銀鷹 @ 日本火腿鬥士</title>
+<style>
+  /* ── ZONE 27 戰報 · 門店列印版 · A4 一頁 · v21(去重:論點只在 10 秒看完講一次 · 每塊背不同貨) ── */
+  @page { size: A4; margin: 10mm 12mm; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body { font-family: "Microsoft JhengHei", "Noto Sans TC", "PingFang TC", sans-serif;
+    color: #111; background: #e8e8e8; font-size: 10pt; line-height: 1.38; }
+  .sheet { width: 210mm; min-height: 296mm; margin: 0 auto; background: #fff; padding: 11mm 13mm 8mm; }
+  @media print { body { background: #fff; } .sheet { width: auto; min-height: auto; margin: 0; padding: 0; zoom: 0.83; } }
+
+  .masthead { display: flex; justify-content: space-between; align-items: center;
+    border-bottom: 3.5px solid #0F1A2E; padding-bottom: 5px; margin-bottom: 6px; }
+  .brand { font-size: 19pt; font-weight: 900; letter-spacing: 2px; color: #0F1A2E; }
+  .brand .en { font-size: 8pt; font-weight: 600; letter-spacing: 3px; color: #8A6A1F; display: block; margin-top: 1px; }
+  .sportbox { display: flex; align-items: center; gap: 10px; }
+  .sportbox .name { font-size: 22pt; font-weight: 900; color: #0F1A2E; letter-spacing: 4px; line-height: 1.1; }
+  .sportbox .sub { font-size: 8.5pt; color: #666; letter-spacing: 2px; display: block; margin-top: 1px; }
+  .sportbox .no { text-align: right; font-size: 8.5pt; color: #444; line-height: 1.5; border-left: 1px solid #ccc; padding-left: 10px; }
+  .sportbox .no b { color: #0F1A2E; }
+
+  .match { margin-bottom: 5px; }
+  .match .comp { font-size: 9pt; font-weight: 700; color: #8A6A1F; letter-spacing: 2px; }
+  .match h1 { font-size: 19pt; font-weight: 900; color: #0F1A2E; letter-spacing: 1px; line-height: 1.3; }
+  .match .meta { font-size: 9.5pt; color: #444; margin-top: 2px; }
+
+  .tldr { background: #0F1A2E; color: #E9E4D8; padding: 5px 12px; margin-bottom: 4px; }
+  .tldr .tag { font-size: 8pt; letter-spacing: 3px; color: #D4AF37; font-weight: 700; }
+  .tldr p { font-size: 11pt; font-weight: 700; line-height: 1.42; margin-top: 2px; }
+  .tldr b { color: #D4AF37; }
+
+  .ritual { border: 1.5px dashed #8A6A1F; background: #FDFBF5; padding: 4px 10px;
+    font-size: 9.8pt; font-weight: 700; color: #0F1A2E; margin-bottom: 5px; }
+
+  /* 海報級主視覺:巨大數字(3 秒鉤子 · 黑白影印安全) */
+  .hero0 { display: flex; align-items: center; gap: 14px; border: 2px solid #0F1A2E;
+    padding: 4px 14px; margin-bottom: 4px; background: #FAFAF7; }
+  .hero0 .n { font-size: 38pt; font-weight: 900; color: #0F1A2E; line-height: 1; letter-spacing: 0; }
+  .hero0 .t { font-size: 10.5pt; line-height: 1.5; }
+  .hero0 .t b { color: #8A6A1F; }
+  .hero0 .t .big { font-size: 12pt; font-weight: 900; color: #0F1A2E; display: block; }
+
+  section { margin-bottom: 3px; }
+  h2 { font-size: 11pt; font-weight: 800; color: #0F1A2E; letter-spacing: 1.5px;
+    border-left: 4px solid #8A6A1F; padding-left: 7px; margin-bottom: 2px; }
+
+  .avoid table, .keep table { width: 100%; border-collapse: collapse; font-size: 9.8pt; }
+  .avoid th, .avoid td, .keep th, .keep td { border: 1px solid #ccc; padding: 2px 7px; text-align: left; vertical-align: middle; }
+  .avoid th, .keep th { background: #EFEBE0; color: #0F1A2E; font-size: 9pt; letter-spacing: 1px; }
+  .avoid td.num, .keep td.num { text-align: center; white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .avoid td.mark { text-align: center; color: #333; font-weight: 900; font-size: 12pt; width: 8%; }
+  .avoid tr.dead td { color: #777; background: #f3f3f3; }
+  .avoid tr.dead td.name, .avoid tr.dead td.num { text-decoration: line-through; text-decoration-thickness: 1.5px; text-decoration-color: #444; }
+  .keep td.star { text-align: center; white-space: nowrap; color: #8A6A1F; font-weight: 900; font-size: 10.5pt; width: 9%; }
+  .note { font-size: 8.5pt; color: #666; margin-top: 2px; }
+
+  .facts { counter-reset: fact; }
+  .facts li { list-style: none; padding-left: 17px; position: relative; margin-bottom: 2px; }
+  .facts li::before { content: counter(fact) ""; counter-increment: fact; position: absolute; left: 0;
+    font-weight: 900; color: #8A6A1F; font-size: 10.5pt; }
+
+  /* 賽中觀察欄 */
+  .switch { border: 2px solid #0F1A2E; padding: 6px 11px; background: #FAFAF7; }
+  .switch .tag { font-size: 8pt; letter-spacing: 2px; color: #8A6A1F; font-weight: 800; }
+  .switch h3 { font-size: 13pt; font-weight: 900; color: #0F1A2E; margin: 1px 0 2px; letter-spacing: 0.5px; }
+  .switch p.lead { font-size: 9.8pt; margin-bottom: 3px; }
+  .branch { display: flex; gap: 8px; margin: 2px 0; align-items: flex-start; }
+  .branch .k { flex: 0 0 84px; text-align: center; font-weight: 900; font-size: 9.5pt; padding: 2px 0;
+    border: 1.5px solid #0F1A2E; color: #0F1A2E; }
+  .branch.on .k { background: #0F1A2E; color: #E9E4D8; }
+  .branch p { font-size: 9.8pt; flex: 1; }
+
+  .board { border: 2.5px solid #8A6A1F; background: #FAF6EC; padding: 6px 12px; }
+  .board .tag { font-size: 8pt; letter-spacing: 3px; color: #8A6A1F; font-weight: 800; }
+  .board h3 { font-size: 13pt; font-weight: 900; color: #0F1A2E; letter-spacing: 0.5px; margin: 1px 0 2px; }
+  .board p { font-size: 9.8pt; line-height: 1.42; }
+  .board .sign { text-align: right; font-size: 8.5pt; color: #8A6A1F; font-weight: 800; letter-spacing: 2px; margin-top: 3px; }
+
+  .baseline { border-top: 3px solid #0F1A2E; margin-top: 6px; padding-top: 5px;
+    display: flex; justify-content: space-between; gap: 12px; font-size: 8pt; color: #555; line-height: 1.6; }
+  .baseline .right { text-align: right; white-space: nowrap; }
+  .baseline b { color: #0F1A2E; }
+  .verify { font-size: 8.5pt; color: #0F1A2E; font-weight: 700; text-align: center;
+    border: 1.2px dashed #8A6A1F; background: #FDFBF5; padding: 3px 10px; margin-top: 5px; }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <div class="masthead">
+    <div class="brand">ZONE 27 戰報
+      <span class="en">THE PRE-MATCH BRIEF</span>
+    </div>
+    <div class="sportbox">
+      <svg width="52" height="52" viewBox="0 0 40 40" aria-hidden="true">
+        <circle cx="20" cy="20" r="17" fill="none" stroke="#0F1A2E" stroke-width="2.2"/>
+        <path d="M9 6.5 C15.5 13, 15.5 27, 9 33.5" fill="none" stroke="#8A6A1F" stroke-width="1.6"/>
+        <path d="M31 6.5 C24.5 13, 24.5 27, 31 33.5" fill="none" stroke="#8A6A1F" stroke-width="1.6"/>
+        <path d="M11 12 L14.6 13.6 M11.6 20 L15.2 20 M11 28 L14.6 26.4" stroke="#0F1A2E" stroke-width="1.2"/>
+        <path d="M29 12 L25.4 13.6 M28.4 20 L24.8 20 M29 28 L25.4 26.4" stroke="#0F1A2E" stroke-width="1.2"/>
+      </svg>
+      <div>
+        <span class="name">棒 球</span>
+        <span class="sub">日本職棒 NPB · 洋聯</span>
+      </div>
+      <div class="no">
+        <b>NO. 036</b><br>2026 · 07 · 14
+      </div>
+    </div>
+  </div>
+
+  <div class="match">
+    <div class="comp">日本職棒 NPB · 太平洋聯盟</div>
+    <h1>福岡軟銀鷹 @ 日本火腿鬥士</h1>
+    <div class="meta">ES CON FIELD 北海道 · 日本 13:00 / 台北 12:00 開打(平日白天場)</div>
+    <div class="meta">主隊火腿 第 3 名(48-38)· 客隊軟銀 龍頭第 1(49-31)· 先發 北山亘基 對 上沢直之</div>
+  </div>
+
+  <div class="tldr">
+    <span class="tag">10 秒看完</span>
+    <p>軟銀整季壓著火腿打、又是聯盟第一;火腿剛被西武灌 <b>1:12</b>、氣勢正低。 這些盤面全知道 —— 所以軟銀「不讓分」只開到 <b>1.62</b>,不是你想的 1.30。 最明顯那邊,便宜早被吃光。</p>
+  </div>
+
+  <div class="ritual">▸ 下注前的小動作:先在心裡定好你想買的,再往下看 —— 看完還想買,才是真的想買。</div>
+
+  <div class="hero0">
+    <span class="n">10</span>
+    <span class="t"><span class="big">軟銀本季對火腿,贏了 10 場、只輸 1 場。</span>
+    兩隊近三次在這座球場的比數 —— <b>4:3、10:7、8:0</b>。 火腿只守住第一場(6/19),接著就被連掀。</span>
+  </div>
+
+  <section class="avoid">
+    <h2>先提醒 —— 這三種,放下比較好</h2>
+    <table>
+      <tr><th style="width:32%">哪種盤</th><th style="width:13%">賠率</th><th style="width:8%"></th><th>提醒你的理由</th></tr>
+      <tr class="dead"><td class="name">總分 · 單 / 雙</td><td class="num">1.50 / 1.96</td><td class="mark">×</td>
+        <td>分數是單是雙,跟丟銅板一樣沒得算 —— 兩邊賠率還開得一高一低,長期買下來就是虧。</td></tr>
+      <tr class="dead"><td class="name">第 1 局 · 前 5 局 和局</td><td class="num">1.45 / 1.80</td><td class="mark">×</td>
+        <td>只看半場或一局的和局,一支陽春全壘打、一次失誤就報銷 —— 容錯是零,賠率又低。</td></tr>
+      <tr class="dead"><td class="name">軟銀 讓分 -1.5(贏 2 分以上)</td><td class="num">1.82</td><td class="mark">×</td>
+        <td>為了多賺那 0.2,去賭軟銀「贏 2 分以上」—— 棒球一分險勝太常見,划不來。</td></tr>
+    </table>
+    <p class="note">提醒是價格判斷,不是輸贏預測 —— 它們照樣可能中,只是這種價長期買下來會吃虧。</p>
+  </section>
+
+  <section class="keep">
+    <h2>剩下的 —— 才值得花腦筋</h2>
+    <table>
+      <tr><th style="width:32%">哪種盤</th><th style="width:13%">賠率</th><th style="width:9%">星級</th><th>白話講</th></tr>
+      <tr><td>軟銀 不讓分(直接贏)</td><td class="num">1.62</td><td class="star">★★</td>
+        <td>帳面最強的一隊,站它是站實力 —— 但今天對面北山也不差、又是主場,這價沒到便宜。</td></tr>
+      <tr><td>軟銀 單隊得分 · 大 3.5</td><td class="num">1.58</td><td class="star">★★</td>
+        <td>近藤、正木手感正燙,火腿中繼又剛被打爆;軟銀自己拿到 4 分不難 —— 但北山把前段壓住時會卡關。</td></tr>
+      <tr><td>全場 總分 · 大 7.5</td><td class="num">1.78</td><td class="star">★</td>
+        <td>那幾場大比分讓人記得這裡容易開轟 —— 可是今天兩隊推的都是防禦率 2 字頭的先發,反而站「小」那邊。</td></tr>
+    </table>
+    <p class="note">賠率以台灣運彩現場為準。 受讓/獨贏壓到 1.5 以下就是全場都想到了,1.7 以上才有肉。 單雙猜銅板,本報不評。</p>
+  </section>
+
+  <section>
+    <h2>三件你查不到的事</h2>
+    <ul class="facts">
+      <li><b>軟銀今天推誰,原稿連提都沒提。</b>是上沢直之(本季 5 勝 3 敗、防禦率 2.58)。 他的英文名有兩種拼法(Uesawa／Uwasawa)—— 旅美待過光芒隊留下的,常被當成兩個人。</li>
+      <li><b>火腿王牌北山,連勝其實已經斷了。</b>6 月一路七連勝、被講成手感火燙 —— 但最近一場(7/7)爆了:三局多掉 8 分、生涯首次被打滿貫砲、自己還失誤兩次被換下場,連勝斷在那天。 這段日文新聞台灣幾乎查不到。</li>
+      <li><b>北山昨天(7/13)剛二度入選明星賽。</b>連兩年;他還偷練了顆新變化球「Mica」—— 打經典賽時跟巨人終結者大勢學的,想在明星賽端出來。 這種日職內幕,有語言的牆擋著。</li>
+    </ul>
+  </section>
+
+  <section class="switch">
+    <span class="tag">開打後 · 只看這一件事</span>
+    <h3>北山有沒有撐完 6 局</h3>
+    <p class="lead">火腿要贏,得靠北山把前段壓住;他一下場,中繼面對的就是全聯盟最兇的軟銀打線。 用球數撐不撐得住,決定今晚的劇本。</p>
+    <div class="branch on">
+      <span class="k">撐完 6 局</span>
+      <p>北山壓住了 —— 比數咬得住,軟銀「大分」那幾格會難產,火腿才有機會。</p>
+    </div>
+    <div class="branch">
+      <span class="k">6 局前下場</span>
+      <p>北山提早退場 —— 火腿中繼直接暴露在近藤、正木這些熱棒前,軟銀大分的劇本這時候才活過來。</p>
+    </div>
+    <p class="lead" style="margin-top:3px;">我們不猜方向 —— 這場的分水嶺,就在這裡。</p>
+  </section>
+
+  <section class="board">
+    <span class="tag">本期看板</span>
+    <h3>一面倒的盤,便宜不在最明顯那格</h3>
+    <p>一隊整季把對手壓著打,盤口早把這件事算進價裡 —— 你最想買的那個「明顯會贏」,價通常已經不甜。 真要找肉,得往人少看的那幾格找,常常還是「今天沒有值得出手的價」。<b>本報負責把價看清楚 —— 決定,永遠在您手上。</b></p>
+    <p class="sign">—— ZONE 27 主編</p>
+  </section>
+
+  <div class="verify">賠率是公開的,你自己也查得到 —— 我們做的,就是幫你把太貴的先劃掉。</div>
+
+  <div class="baseline">
+    <span>星星是價格評論,不是輸贏預測 · 本報不收博彩業者的廣告與贊助 · 不保證獲利<br>資料:日本職棒(NPB)官方 · 日媒賽前報導 · 台灣運彩</span>
+    <span class="right"><b>《ZONE 27 戰報》NO. 036</b> · 免費 · 歡迎店家整頁影印<br>zone27.com.tw</span>
+  </div>
+
+</div>
+</body>
+</html>
