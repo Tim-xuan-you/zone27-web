@@ -66,9 +66,9 @@ export const BRIEFS: BriefIssue[] = [
   { no: "030", date: "2026-07-13", sport: "籃球", matchup: "尼爾森巨人 @ 馬納瓦圖噴射機",
     bigNum: "13", bigNumUnit: "分", hook: "上月贏 13 分 · 這桌卻不值得押" },
   { no: "031", date: "2026-07-13", sport: "棒球", matchup: "洛杉磯天使 @ 明尼蘇達雙城",
-    bigNum: "53", bigNumUnit: "%", hook: "機器只給主隊 · 市場當它強隊" },
+    bigNum: "53", bigNumUnit: "%", hook: "機器只給主隊 · 市場當它強隊", hidden: true },
   { no: "032", date: "2026-07-13", sport: "籃球", matchup: "印第安那狂熱 @ 拉斯維加斯王牌",
-    bigNum: "48", bigNumUnit: "分", hook: "招牌回歸 · 別買上週沒他的大勝" },
+    bigNum: "48", bigNumUnit: "分", hook: "招牌回歸 · 別買上週沒他的大勝", hidden: true },
   { no: "033", date: "2026-07-14", sport: "足球", matchup: "隆德里納 @ 米內羅美洲",
     bigNum: "6", bigNumUnit: "分", hook: "墊底隊拿 6 分 · 主場卻是熱門" },
   { no: "034", date: "2026-07-14", sport: "籃球", matchup: "洛杉磯火花 @ 亞特蘭大美夢",
@@ -77,6 +77,10 @@ export const BRIEFS: BriefIssue[] = [
     bigNum: "4", bigNumUnit: "敗", hook: "主隊近 5 場輸 4 · 主場卻是熱門" },
   { no: "036", date: "2026-07-14", sport: "棒球", matchup: "福岡軟銀鷹 @ 日本火腿鬥士",
     bigNum: "10", bigNumUnit: "勝1敗", hook: "軟銀整季壓著打 · 好價不在最明顯那格" },
+  { no: "037", date: "2026-07-17", sport: "足球", matchup: "溫哥華白浪 @ 芝加哥火焰",
+    bigNum: "13", bigNumUnit: "球", hook: "原稿沒提的主場射手 · 全聯盟進球王" },
+  { no: "038", date: "2026-07-17", sport: "足球", matchup: "堪薩斯城體育 @ 聖路易城",
+    bigNum: "36", bigNumUnit: "失球", hook: "墊底隊丟 36 球 · 便宜的大分早沒了" },
 ];
 
 /** A4 原版的靜態網址(public/briefs)。 */

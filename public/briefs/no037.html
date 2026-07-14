@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<title>ZONE 27 戰報 NO.037 · 溫哥華白浪 @ 芝加哥火焰</title>
+<style>
+  /* ── ZONE 27 戰報 · 門店列印版 · A4 一頁 · v21(去重:論點只在 10 秒看完講一次 · 每塊背不同貨) ── */
+  @page { size: A4; margin: 10mm 12mm; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body { font-family: "Microsoft JhengHei", "Noto Sans TC", "PingFang TC", sans-serif;
+    color: #111; background: #e8e8e8; font-size: 10pt; line-height: 1.4; }
+  .sheet { width: 210mm; min-height: 296mm; margin: 0 auto; background: #fff; padding: 11mm 13mm 8mm; }
+  @media print { body { background: #fff; } .sheet { width: auto; min-height: auto; margin: 0; padding: 0; zoom: 0.86; } }
+
+  .masthead { display: flex; justify-content: space-between; align-items: center;
+    border-bottom: 3.5px solid #0F1A2E; padding-bottom: 5px; margin-bottom: 6px; }
+  .brand { font-size: 19pt; font-weight: 900; letter-spacing: 2px; color: #0F1A2E; }
+  .brand .en { font-size: 8pt; font-weight: 600; letter-spacing: 3px; color: #8A6A1F; display: block; margin-top: 1px; }
+  .sportbox { display: flex; align-items: center; gap: 10px; }
+  .sportbox .name { font-size: 22pt; font-weight: 900; color: #0F1A2E; letter-spacing: 4px; line-height: 1.1; }
+  .sportbox .sub { font-size: 8.5pt; color: #666; letter-spacing: 2px; display: block; margin-top: 1px; }
+  .sportbox .no { text-align: right; font-size: 8.5pt; color: #444; line-height: 1.5; border-left: 1px solid #ccc; padding-left: 10px; }
+  .sportbox .no b { color: #0F1A2E; }
+
+  .match { margin-bottom: 5px; }
+  .match .comp { font-size: 9pt; font-weight: 700; color: #8A6A1F; letter-spacing: 2px; }
+  .match h1 { font-size: 19pt; font-weight: 900; color: #0F1A2E; letter-spacing: 1px; line-height: 1.3; }
+  .match .meta { font-size: 9.5pt; color: #444; margin-top: 2px; }
+
+  .tldr { background: #0F1A2E; color: #E9E4D8; padding: 5px 12px; margin-bottom: 4px; }
+  .tldr .tag { font-size: 8pt; letter-spacing: 3px; color: #D4AF37; font-weight: 700; }
+  .tldr p { font-size: 11pt; font-weight: 700; line-height: 1.42; margin-top: 2px; }
+  .tldr b { color: #D4AF37; }
+
+  .ritual { border: 1.5px dashed #8A6A1F; background: #FDFBF5; padding: 4px 10px;
+    font-size: 9.8pt; font-weight: 700; color: #0F1A2E; margin-bottom: 5px; }
+
+  /* 海報級主視覺:巨大數字(3 秒鉤子 · 黑白影印安全) */
+  .hero0 { display: flex; align-items: center; gap: 14px; border: 2px solid #0F1A2E;
+    padding: 4px 14px; margin-bottom: 4px; background: #FAFAF7; }
+  .hero0 .n { font-size: 38pt; font-weight: 900; color: #0F1A2E; line-height: 1; letter-spacing: 0; }
+  .hero0 .t { font-size: 10.5pt; line-height: 1.45; }
+  .hero0 .t b { color: #8A6A1F; }
+  .hero0 .t .big { font-size: 12pt; font-weight: 900; color: #0F1A2E; display: block; }
+
+  section { margin-bottom: 3px; }
+  h2 { font-size: 11pt; font-weight: 800; color: #0F1A2E; letter-spacing: 1.5px;
+    border-left: 4px solid #8A6A1F; padding-left: 7px; margin-bottom: 2px; }
+
+  .avoid table, .keep table { width: 100%; border-collapse: collapse; font-size: 9.8pt; }
+  .avoid th, .avoid td, .keep th, .keep td { border: 1px solid #ccc; padding: 2px 7px; text-align: left; vertical-align: middle; }
+  .avoid th, .keep th { background: #EFEBE0; color: #0F1A2E; font-size: 9pt; letter-spacing: 1px; }
+  .avoid td.num, .keep td.num { text-align: center; white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .avoid td.mark { text-align: center; color: #333; font-weight: 900; font-size: 12pt; width: 8%; }
+  .avoid tr.dead td { color: #777; background: #f3f3f3; }
+  .avoid tr.dead td.name, .avoid tr.dead td.num { text-decoration: line-through; text-decoration-thickness: 1.5px; text-decoration-color: #444; }
+  .keep td.star { text-align: center; white-space: nowrap; color: #8A6A1F; font-weight: 900; font-size: 10.5pt; width: 9%; }
+  .note { font-size: 8.5pt; color: #666; margin-top: 2px; }
+
+  .facts { counter-reset: fact; }
+  .facts li { list-style: none; padding-left: 17px; position: relative; margin-bottom: 2px; }
+  .facts li::before { content: counter(fact) ""; counter-increment: fact; position: absolute; left: 0;
+    font-weight: 900; color: #8A6A1F; font-size: 10.5pt; }
+
+  /* 賽中觀察欄 */
+  .switch { border: 2px solid #0F1A2E; padding: 6px 11px; background: #FAFAF7; }
+  .switch .tag { font-size: 8pt; letter-spacing: 2px; color: #8A6A1F; font-weight: 800; }
+  .switch h3 { font-size: 13pt; font-weight: 900; color: #0F1A2E; margin: 1px 0 2px; letter-spacing: 0.5px; }
+  .switch p.lead { font-size: 9.8pt; margin-bottom: 3px; }
+  .branch { display: flex; gap: 8px; margin: 2px 0; align-items: flex-start; }
+  .branch .k { flex: 0 0 84px; text-align: center; font-weight: 900; font-size: 9.5pt; padding: 2px 0;
+    border: 1.5px solid #0F1A2E; color: #0F1A2E; }
+  .branch.on .k { background: #0F1A2E; color: #E9E4D8; }
+  .branch p { font-size: 9.8pt; flex: 1; }
+
+  .board { border: 2.5px solid #8A6A1F; background: #FAF6EC; padding: 6px 12px; }
+  .board .tag { font-size: 8pt; letter-spacing: 3px; color: #8A6A1F; font-weight: 800; }
+  .board h3 { font-size: 13pt; font-weight: 900; color: #0F1A2E; letter-spacing: 0.5px; margin: 1px 0 2px; }
+  .board p { font-size: 9.8pt; line-height: 1.42; }
+  .board .sign { text-align: right; font-size: 8.5pt; color: #8A6A1F; font-weight: 800; letter-spacing: 2px; margin-top: 3px; }
+
+  .baseline { border-top: 3px solid #0F1A2E; margin-top: 6px; padding-top: 5px;
+    display: flex; justify-content: space-between; gap: 12px; font-size: 8pt; color: #555; line-height: 1.6; }
+  .baseline .right { text-align: right; white-space: nowrap; }
+  .baseline b { color: #0F1A2E; }
+  .verify { font-size: 8.5pt; color: #0F1A2E; font-weight: 700; text-align: center;
+    border: 1.2px dashed #8A6A1F; background: #FDFBF5; padding: 3px 10px; margin-top: 5px; }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <div class="masthead">
+    <div class="brand">ZONE 27 戰報
+      <span class="en">THE PRE-MATCH BRIEF</span>
+    </div>
+    <div class="sportbox">
+      <svg width="52" height="52" viewBox="0 0 40 40" aria-hidden="true">
+        <circle cx="20" cy="20" r="17" fill="none" stroke="#0F1A2E" stroke-width="2.2"/>
+        <path d="M20 15 L24.76 18.45 L22.94 24.05 L17.06 24.05 L15.24 18.45 Z" fill="none" stroke="#0F1A2E" stroke-width="1.6"/>
+        <path d="M20 15 L20 4 M24.76 18.45 L33 13 M22.94 24.05 L30 32 M17.06 24.05 L10 32 M15.24 18.45 L7 13" stroke="#8A6A1F" stroke-width="1.4"/>
+      </svg>
+      <div>
+        <span class="name">足 球</span>
+        <span class="sub">美國職業足球 MLS</span>
+      </div>
+      <div class="no">
+        <b>NO. 037</b><br>2026 · 07 · 17
+      </div>
+    </div>
+  </div>
+
+  <div class="match">
+    <div class="comp">美國職業足球 MLS · 東西區跨區對決</div>
+    <h1>溫哥華白浪 @ 芝加哥火焰</h1>
+    <div class="meta">Soldier Field 軍人球場 · 芝加哥 7/16 晚 · 台北 7/17(五)08:30 開打</div>
+    <div class="meta">主隊芝加哥 東區第 3(8-2-4·26 分)· 客隊溫哥華 西區第 1(10-2-2·32 分)</div>
+  </div>
+
+  <div class="tldr">
+    <span class="tag">10 秒看完</span>
+    <p>溫哥華整季西區第一、淨勝球 <b>+22</b>,紙面上明顯比芝加哥強,原稿要你買它直接贏(客勝)<b>2.05</b>。 但溫哥華 9 天內飛了大半個北美、這是第 3 場硬仗,對面芝加哥主場又有全聯盟最準的一雙腳。 那個價,不是撿到的便宜 —— 是折了疲勞和主場才勉強給的。</p>
+  </div>
+
+  <div class="ritual">▸ 下注前的小動作:先在心裡定好你想買的,再往下看 —— 看完還想買,才是真的想買。</div>
+
+  <div class="hero0">
+    <span class="n">13</span>
+    <span class="t"><span class="big">芝加哥有全聯盟進球最多的一雙腳 —— Cuypers,13 球。</span>
+    他入選了明星賽、賽季一度連 10 場都有進球。 這麼一號人物,原稿整篇沒提。</span>
+  </div>
+
+  <section class="avoid">
+    <h2>先提醒 —— 這三種,放下比較好</h2>
+    <table>
+      <tr><th style="width:33%">哪種盤</th><th style="width:13%">賠率</th><th style="width:8%"></th><th>提醒你的理由</th></tr>
+      <tr class="dead"><td class="name">兩隊都進球「是」· 大 2.5「大」</td><td class="num">1.36 / 1.42</td><td class="mark">×</td>
+        <td>打穿的機率確實高,但賠率壓到沒肉 —— 只要卡一次門,就要再中三四次才回本。</td></tr>
+      <tr class="dead"><td class="name">猜比數 · 半全場那類</td><td class="num">7.5～22 倍</td><td class="mark">×</td>
+        <td>看著像頭獎,足球進球太隨機,這種盤莊家先扣走一兩成利潤 —— 娛樂可以,長期買一定虧。</td></tr>
+      <tr class="dead"><td class="name">讓分 0:2 溫哥華(贏 2 球以上)</td><td class="num">6.75</td><td class="mark">×</td>
+        <td>要一支飛了大半個北美、九天第 3 場的隊,客場贏兩球以上 —— 賠率好看,發生的機會沒那麼多。</td></tr>
+    </table>
+    <p class="note">提醒是價格判斷,不是輸贏預測 —— 它們照樣可能中,只是這種價長期買下來會吃虧。</p>
+  </section>
+
+  <section class="keep">
+    <h2>剩下的 —— 才值得花腦筋</h2>
+    <table>
+      <tr><th style="width:33%">哪種盤</th><th style="width:13%">賠率</th><th style="width:9%">星級</th><th>白話講</th></tr>
+      <tr><td>溫哥華 不讓分(直接贏)</td><td class="num">2.05</td><td class="star">★★</td>
+        <td>帳面強一截,站它有道理 —— 但疲勞加客場、對面主場又硬,這是公道價,不是躺著贏。</td></tr>
+      <tr><td>全場 總分 · 大 3.5</td><td class="num">2.00</td><td class="star">★★</td>
+        <td>兩邊都能攻、最近防守也都露洞,4 球有機會 —— 但這門檻不低,2.00 算合理不算甜。</td></tr>
+    </table>
+    <p class="note">賠率以台灣運彩現場為準。 受讓/獨贏壓到 1.5 以下,就是全場都想到了。 單雙猜銅板,本報不評。</p>
+  </section>
+
+  <section>
+    <h2>三件你查不到的事</h2>
+    <ul class="facts">
+      <li><b>溫哥華這一週,九天要踢第 3 場。</b>7/8 主場、7/13 飛卡加利打加拿大盃八強,接著再長途飛芝加哥客場 —— 腿的新鮮度,是這場最說不準的一件事,原稿只當「小隱憂」帶過。</li>
+      <li><b>芝加哥的主場是真堡壘。</b>Soldier Field 七個主場 5 勝 1 和 1 負、自己進 16 只失 9。 客勝賠率沒有開得更低,一半是被這座主場撐住的。</li>
+      <li><b>這是聯賽為了世界盃休了快兩個月後的第一場</b>(積分表停在 5 月底)。 原稿說溫哥華「4:2、3:2 連勝手感火燙」—— 那是 5 月的事,而且它 5 月最後 5 場其實是 2 勝 2 和 1 負,不是全勝。</li>
+    </ul>
+  </section>
+
+  <section class="switch">
+    <span class="tag">開打後 · 只看這一件事</span>
+    <h3>第一顆球,是誰的</h3>
+    <p class="lead">溫哥華拖著疲勞客場,最怕開局就落後;芝加哥主場又有全聯盟最準的腳。 第一球花落誰家,大致定調今晚。</p>
+    <div class="branch on">
+      <span class="k">芝加哥先進</span>
+      <p>主場加進球王先馳得點 —— 溫哥華得拖著重腿追分,客勝那票開始逆風。</p>
+    </div>
+    <div class="branch">
+      <span class="k">溫哥華先進</span>
+      <p>強隊本色壓過疲勞 —— 客勝跟大分的劇本走順。</p>
+    </div>
+    <p class="lead" style="margin-top:3px;">我們不猜方向 —— 這場的分水嶺,就在這裡。</p>
+  </section>
+
+  <section class="board">
+    <span class="tag">本期看板</span>
+    <h3>積分表不會告訴你,誰今晚的腿是重的</h3>
+    <p>積分表記的是過去半季的平均,不是今晚站上場的那支隊。 一支再強的隊,連著趕場、舟車勞頓,今晚也可能不是平常的它。 買強隊之前,先問一句:它今晚是不是滿血。<b>本報負責把價看清楚 —— 決定,永遠在您手上。</b></p>
+    <p class="sign">—— ZONE 27 主編</p>
+  </section>
+
+  <div class="verify">賠率是公開的,你自己也查得到 —— 我們做的,就是幫你把太貴的先劃掉。</div>
+
+  <div class="baseline">
+    <span>星星是價格評論,不是輸贏預測 · 本報不收博彩業者的廣告與贊助 · 不保證獲利<br>資料:MLS 官方 · ESPN／FotMob 賽前數據 · 台灣運彩</span>
+    <span class="right"><b>《ZONE 27 戰報》NO. 037</b> · 免費 · 歡迎店家整頁影印<br>zone27.com.tw</span>
+  </div>
+
+</div>
+</body>
+</html>
