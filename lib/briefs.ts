@@ -89,6 +89,10 @@ export const BRIEFS: BriefIssue[] = [
     bigNum: "2.10", bigNumUnit: "防禦率", hook: "墊底隊卻被開成熱門 · 全因今晚這張先發" },
   { no: "042", date: "2026-07-14", sport: "棒球", matchup: "讀賣巨人 @ 養樂多燕子",
     bigNum: "286", bigNumUnit: "天", hook: "王牌傷癒回歸首戰 · 神宮全壘打天堂" },
+  { no: "043", date: "2026-07-14", sport: "棒球", matchup: "阪神虎 @ 中日龍",
+    bigNum: "2", bigNumUnit: "度完封", hook: "龍頭派王牌作客墊底 · 這桌重點在低分" },
+  { no: "044", date: "2026-07-14", sport: "棒球", matchup: "羅德海洋 @ 西武獅",
+    bigNum: "0.99", bigNumUnit: "防禦率", hook: "先發防禦率不到 1 · 一分定生死的悶戰" },
 ];
 
 /** A4 原版的靜態網址(public/briefs)。 */
