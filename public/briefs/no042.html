@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<title>ZONE 27 戰報 NO.042 · 讀賣巨人 @ 養樂多燕子</title>
+<style>
+  /* ── ZONE 27 戰報 · 門店列印版 · A4 一頁 · v21(去重)+ v22 店家專屬欄(讓這張變成「本店的服務」) ── */
+  @page { size: A4; margin: 10mm 12mm; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body { font-family: "Microsoft JhengHei", "Noto Sans TC", "PingFang TC", sans-serif;
+    color: #111; background: #e8e8e8; font-size: 10pt; line-height: 1.38; }
+  .sheet { width: 210mm; min-height: 296mm; margin: 0 auto; background: #fff; padding: 11mm 13mm 8mm; }
+  @media print { body { background: #fff; } .sheet { width: auto; min-height: auto; margin: 0; padding: 0; zoom: 0.81; } }
+
+  .masthead { display: flex; justify-content: space-between; align-items: center;
+    border-bottom: 3.5px solid #0F1A2E; padding-bottom: 5px; margin-bottom: 6px; }
+  .brand { font-size: 19pt; font-weight: 900; letter-spacing: 2px; color: #0F1A2E; }
+  .brand .en { font-size: 8pt; font-weight: 600; letter-spacing: 3px; color: #8A6A1F; display: block; margin-top: 1px; }
+  .sportbox { display: flex; align-items: center; gap: 10px; }
+  .sportbox .name { font-size: 22pt; font-weight: 900; color: #0F1A2E; letter-spacing: 4px; line-height: 1.1; }
+  .sportbox .sub { font-size: 8.5pt; color: #666; letter-spacing: 2px; display: block; margin-top: 1px; }
+  .sportbox .no { text-align: right; font-size: 8.5pt; color: #444; line-height: 1.5; border-left: 1px solid #ccc; padding-left: 10px; }
+  .sportbox .no b { color: #0F1A2E; }
+
+  .match { margin-bottom: 5px; }
+  .match .comp { font-size: 9pt; font-weight: 700; color: #8A6A1F; letter-spacing: 2px; }
+  .match h1 { font-size: 19pt; font-weight: 900; color: #0F1A2E; letter-spacing: 1px; line-height: 1.3; }
+  .match .meta { font-size: 9.5pt; color: #444; margin-top: 2px; }
+
+  .tldr { background: #0F1A2E; color: #E9E4D8; padding: 5px 12px; margin-bottom: 4px; }
+  .tldr .tag { font-size: 8pt; letter-spacing: 3px; color: #D4AF37; font-weight: 700; }
+  .tldr p { font-size: 11pt; font-weight: 700; line-height: 1.42; margin-top: 2px; }
+  .tldr b { color: #D4AF37; }
+
+  .ritual { border: 1.5px dashed #8A6A1F; background: #FDFBF5; padding: 4px 10px;
+    font-size: 9.8pt; font-weight: 700; color: #0F1A2E; margin-bottom: 5px; }
+
+  .hero0 { display: flex; align-items: center; gap: 14px; border: 2px solid #0F1A2E;
+    padding: 4px 14px; margin-bottom: 4px; background: #FAFAF7; }
+  .hero0 .n { font-size: 36pt; font-weight: 900; color: #0F1A2E; line-height: 1; letter-spacing: 0; }
+  .hero0 .t { font-size: 10.5pt; line-height: 1.42; }
+  .hero0 .t b { color: #8A6A1F; }
+  .hero0 .t .big { font-size: 12pt; font-weight: 900; color: #0F1A2E; display: block; }
+
+  section { margin-bottom: 3px; }
+  h2 { font-size: 11pt; font-weight: 800; color: #0F1A2E; letter-spacing: 1.5px;
+    border-left: 4px solid #8A6A1F; padding-left: 7px; margin-bottom: 2px; }
+
+  .avoid table, .keep table { width: 100%; border-collapse: collapse; font-size: 9.8pt; }
+  .avoid th, .avoid td, .keep th, .keep td { border: 1px solid #ccc; padding: 2px 7px; text-align: left; vertical-align: middle; }
+  .avoid th, .keep th { background: #EFEBE0; color: #0F1A2E; font-size: 9pt; letter-spacing: 1px; }
+  .avoid td.num, .keep td.num { text-align: center; white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .avoid td.mark { text-align: center; color: #333; font-weight: 900; font-size: 12pt; width: 8%; }
+  .avoid tr.dead td { color: #777; background: #f3f3f3; }
+  .avoid tr.dead td.name, .avoid tr.dead td.num { text-decoration: line-through; text-decoration-thickness: 1.5px; text-decoration-color: #444; }
+  .keep td.star { text-align: center; white-space: nowrap; color: #8A6A1F; font-weight: 900; font-size: 10.5pt; width: 9%; }
+  .note { font-size: 8.5pt; color: #666; margin-top: 2px; }
+
+  .facts { counter-reset: fact; }
+  .facts li { list-style: none; padding-left: 17px; position: relative; margin-bottom: 2px; }
+  .facts li::before { content: counter(fact) ""; counter-increment: fact; position: absolute; left: 0;
+    font-weight: 900; color: #8A6A1F; font-size: 10.5pt; }
+
+  /* 賽中觀察欄 */
+  .switch { border: 2px solid #0F1A2E; padding: 6px 11px; background: #FAFAF7; }
+  .switch .tag { font-size: 8pt; letter-spacing: 2px; color: #8A6A1F; font-weight: 800; }
+  .switch h3 { font-size: 13pt; font-weight: 900; color: #0F1A2E; margin: 1px 0 2px; letter-spacing: 0.5px; }
+  .switch p.lead { font-size: 9.8pt; margin-bottom: 3px; }
+  .branch { display: flex; gap: 8px; margin: 2px 0; align-items: flex-start; }
+  .branch .k { flex: 0 0 104px; text-align: center; font-weight: 900; font-size: 9.5pt; padding: 2px 0;
+    border: 1.5px solid #0F1A2E; color: #0F1A2E; }
+  .branch.on .k { background: #0F1A2E; color: #E9E4D8; }
+  .branch p { font-size: 9.8pt; flex: 1; }
+
+  .board { border: 2.5px solid #8A6A1F; background: #FAF6EC; padding: 6px 12px; }
+  .board .tag { font-size: 8pt; letter-spacing: 3px; color: #8A6A1F; font-weight: 800; }
+  .board h3 { font-size: 13pt; font-weight: 900; color: #0F1A2E; letter-spacing: 0.5px; margin: 1px 0 2px; }
+  .board p { font-size: 9.8pt; line-height: 1.42; }
+  .board .sign { text-align: right; font-size: 8.5pt; color: #8A6A1F; font-weight: 800; letter-spacing: 2px; margin-top: 3px; }
+
+  .baseline { border-top: 3px solid #0F1A2E; margin-top: 6px; padding-top: 5px;
+    display: flex; justify-content: space-between; gap: 12px; font-size: 8pt; color: #555; line-height: 1.6; }
+  .baseline .right { text-align: right; white-space: nowrap; }
+  .baseline b { color: #0F1A2E; }
+  .verify { font-size: 8.5pt; color: #0F1A2E; font-weight: 700; text-align: center;
+    border: 1.2px dashed #8A6A1F; background: #FDFBF5; padding: 3px 10px; margin-top: 5px; }
+
+  /* 店家專屬欄:讓這張變成「本店的服務」—— 蓋章/寫店名 + 天天回店裡拿(散播的實體通路解) */
+  .shop { display: flex; align-items: stretch; border: 2px solid #0F1A2E; margin-top: 5px; }
+  .shop .info { flex: 1; background: #0F1A2E; color: #E9E4D8; padding: 5px 12px; display: flex; flex-direction: column; justify-content: center; }
+  .shop .info .l { font-size: 9.8pt; font-weight: 700; line-height: 1.35; }
+  .shop .info .l b { color: #D4AF37; }
+  .shop .info .s { font-size: 8.2pt; color: #B7AE97; margin-top: 2px; letter-spacing: 1px; }
+  .shop .stamp { flex: 0 0 150px; padding: 4px; display: flex; }
+  .shop .stamp span { flex: 1; border: 1px dashed #8A6A1F; color: #9A7B2A; font-size: 8pt; letter-spacing: 3px;
+    display: flex; align-items: center; justify-content: center; min-height: 40px; text-align: center; }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <div class="masthead">
+    <div class="brand">ZONE 27 戰報
+      <span class="en">THE PRE-MATCH BRIEF</span>
+    </div>
+    <div class="sportbox">
+      <svg width="52" height="52" viewBox="0 0 40 40" aria-hidden="true">
+        <circle cx="20" cy="20" r="17" fill="none" stroke="#0F1A2E" stroke-width="2.2"/>
+        <path d="M9 6.5 C15.5 13, 15.5 27, 9 33.5" fill="none" stroke="#8A6A1F" stroke-width="1.6"/>
+        <path d="M31 6.5 C24.5 13, 24.5 27, 31 33.5" fill="none" stroke="#8A6A1F" stroke-width="1.6"/>
+        <path d="M11 12 L14.6 13.6 M11.6 20 L15.2 20 M11 28 L14.6 26.4" stroke="#0F1A2E" stroke-width="1.2"/>
+        <path d="M29 12 L25.4 13.6 M28.4 20 L24.8 20 M29 28 L25.4 26.4" stroke="#0F1A2E" stroke-width="1.2"/>
+      </svg>
+      <div>
+        <span class="name">棒 球</span>
+        <span class="sub">日本職棒 NPB · 央聯</span>
+      </div>
+      <div class="no">
+        <b>NO. 042</b><br>2026 · 07 · 14
+      </div>
+    </div>
+  </div>
+
+  <div class="match">
+    <div class="comp">日本職棒 NPB · 中央聯盟</div>
+    <h1>讀賣巨人 @ 養樂多燕子</h1>
+    <div class="meta">明治神宮球場(東京)· 日本 18:00 / 台北 17:00 開打</div>
+    <div class="meta">主隊養樂多(近況 5 連敗)· 客隊讀賣巨人 · 先發 山﨑伊織 對 山野太一(本季 1.91)</div>
+  </div>
+
+  <div class="tldr">
+    <span class="tag">10 秒看完</span>
+    <p>盤面把賭注押在「兩隊先發都不強 + 神宮全壘打天堂」的大分上。 破綻在這:養樂多的山野本季防禦率 <b>1.91</b>、央聯數一數二的左投,一點不弱。 今晚真正的戲,是傷癒回歸的山﨑對上火燙的山野 —— 不是篤定的煙火。</p>
+  </div>
+
+  <div class="ritual">▸ 下注前的小動作:先在心裡定好你想買的,再往下看 —— 看完還想買,才是真的想買。</div>
+
+  <div class="hero0">
+    <span class="n">286</span>
+    <span class="t"><span class="big">山﨑伊織今晚回到一軍投手丘 —— 距他上次先發,286 天。</span>
+    去年 10 月至今,右肩傷了兩次(5 月復歸只投 2 球又退場)。 今晚是他 2026 年第一次面對一軍打者。</span>
+  </div>
+
+  <section class="avoid">
+    <h2>先提醒 —— 這三種,放下比較好</h2>
+    <table>
+      <tr><th style="width:33%">哪種盤</th><th style="width:12%">賠率</th><th style="width:8%"></th><th>提醒你的理由</th></tr>
+      <tr class="dead"><td class="name">讀賣 主勝 · 獨贏</td><td class="num">1.55</td><td class="mark">×</td>
+        <td>讀賣人氣高、對手又正在低潮,盤口壓得很低 —— 但它今天推的是傷癒才回歸的山﨑,贏面沒那麼篤定。</td></tr>
+      <tr class="dead"><td class="name">大 6.5 · 前 5 局大 3.5</td><td class="num">1.73 / 1.71</td><td class="mark">×</td>
+        <td>押它的人賭「兩隊投手都不強」,可是山野本季是頂級左投、強得很 —— 這個前提一半是假的。 兩條又是同一個賭注(前段開火),別疊著押。</td></tr>
+    </table>
+    <p class="note">提醒是價格判斷,不是輸贏預測 —— 它們照樣可能中,只是這種價長期買下來會吃虧。</p>
+  </section>
+
+  <section class="keep">
+    <h2>剩下的 —— 才值得花腦筋</h2>
+    <table>
+      <tr><th style="width:33%">哪種盤</th><th style="width:12%">賠率</th><th style="width:9%">星級</th><th>白話講</th></tr>
+      <tr><td>全場 總分 · 小 6.5</td><td class="num">現場為準</td><td class="star">★</td>
+        <td>大家都往大分擠(全壘打天堂 + 傷癒投手),但對面山野是強投、山﨑復健也才投 7 局零失分 —— 悶下來的機會比熱度講的高。 逆風一注,別重壓。</td></tr>
+      <tr><td>讀賣 單隊得分 · 大 3.5</td><td class="num">1.55</td><td class="star">★</td>
+        <td>真要站進球多,買讀賣單隊得分比全場總分乾淨(只賭打線、不管山﨑守不守得住)—— 但山野不好對付,小注就好。</td></tr>
+    </table>
+    <p class="note">賠率以台灣運彩現場為準。 這期沒有值得重壓的三星價 —— 一個問號投手,盤面卻當定局在賣。 單雙猜銅板,本報不評。</p>
+  </section>
+
+  <section>
+    <h2>三件你查不到的事</h2>
+    <ul class="facts">
+      <li><b>山﨑會被推上來,是因為王牌先倒了。</b>讀賣王牌戸郷 7/7 跑壘拉傷左腿離隊,山﨑正是遞補這個缺口 —— 一個傷兵補另一個傷兵。</li>
+      <li><b>神宮是全聯盟第一的全壘打天堂。</b>全壘打指數約 1.76、第二名橫濱只有 1.25 —— 差距大到不是「比較會開轟」帶得過。 對一個續航還沒經一軍檢驗的投手,這裡特別磨人。</li>
+      <li><b>養樂多此刻也不在狀態上。</b>整個 7 月一勝未得、正陷 5 連敗,打線還少了山田哲人 —— 今晚更像兩個問號對撞。</li>
+    </ul>
+  </section>
+
+  <section class="switch">
+    <span class="tag">開打後 · 只看這一件事</span>
+    <h3>山﨑能不能投過 5 局</h3>
+    <p class="lead">山﨑復健最多投到 94 球,一軍初登板的續航沒人敢保證。 他撐得住、還是早早下場交給牛棚,決定今晚的走向。</p>
+    <div class="branch on">
+      <span class="k">山﨑過 5 局</span>
+      <p>傷癒之身頂住了 —— 讀賣的劇本走順,低比分也還在。</p>
+    </div>
+    <div class="branch">
+      <span class="k">山﨑早退</span>
+      <p>牛棚提早上工 —— 分數容易被打開,大分那批這時候才有戲。</p>
+    </div>
+    <p class="lead" style="margin-top:3px;">我們不猜方向 —— 這場的分水嶺,就在這裡。</p>
+  </section>
+
+  <section class="board">
+    <span class="tag">本期看板</span>
+    <h3>回歸戰,是全場最大的問號</h3>
+    <p>一個傷了四個月、剛回來的先發,連他自己的教練都不知道今天能投幾局。 這種問號最容易被兩種人看走眼:一種當他一定生鏽,一種當他七局零失分就是無敵。 真相是沒人知道 —— 而看不懂的盤,最貴的動作就是重壓。<b>本報負責把價看清楚 —— 決定,永遠在您手上。</b></p>
+    <p class="sign">—— ZONE 27 主編</p>
+  </section>
+
+  <div class="verify">賠率是公開的,你自己也查得到 —— 我們做的,就是幫你把太貴的先劃掉。</div>
+
+  <div class="baseline">
+    <span>星星是價格評論,不是輸贏預測 · 本報不收博彩業者的廣告與贊助 · 不保證獲利<br>資料:日本職棒(NPB)官方 · 日媒賽前報導 · 台灣運彩</span>
+    <span class="right"><b>《ZONE 27 戰報》NO. 042</b> · 每日免費出刊<br>zone27.com.tw</span>
+  </div>
+
+  <div class="shop">
+    <div class="info">
+      <span class="l">這一張,是 <b>本店</b> 每天免費為您備妥的。</span>
+      <span class="s">天天一張新的 · 明天記得再來拿</span>
+    </div>
+    <div class="stamp"><span>本店店章 · 店名</span></div>
+  </div>
+
+</div>
+</body>
+</html>

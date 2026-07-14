@@ -85,6 +85,10 @@ export const BRIEFS: BriefIssue[] = [
     bigNum: "9", bigNumUnit: "球", hook: "得分王進 9 球 · 卻停賽踢不到" },
   { no: "040", date: "2026-07-15", sport: "足球", matchup: "西班牙 @ 法國",
     bigNum: "39", bigNumUnit: "%", hook: "世界盃四強 · 機器看好客隊西班牙" },
+  { no: "041", date: "2026-07-14", sport: "棒球", matchup: "歐力士猛牛 @ 樂天金鷲",
+    bigNum: "2.10", bigNumUnit: "防禦率", hook: "墊底隊卻被開成熱門 · 全因今晚這張先發" },
+  { no: "042", date: "2026-07-14", sport: "棒球", matchup: "讀賣巨人 @ 養樂多燕子",
+    bigNum: "286", bigNumUnit: "天", hook: "王牌傷癒回歸首戰 · 神宮全壘打天堂" },
 ];
 
 /** A4 原版的靜態網址(public/briefs)。 */
