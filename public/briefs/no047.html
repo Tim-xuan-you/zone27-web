@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<title>ZONE 27 戰報 Z27·H196B · 華盛頓神秘 @ 多倫多節奏</title>
+<style>
+  /* ── ZONE 27 戰報 · 門店列印版 · A4 一頁 · v23(電文呼號 + 店家專屬欄 + 去重)· 猜銅板類盤一律不列 ── */
+  @page { size: A4; margin: 10mm 12mm; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body { font-family: "Microsoft JhengHei", "Noto Sans TC", "PingFang TC", sans-serif;
+    color: #111; background: #e8e8e8; font-size: 10pt; line-height: 1.4; }
+  .sheet { width: 210mm; min-height: 296mm; margin: 0 auto; background: #fff; padding: 11mm 13mm 8mm; }
+  @media print { body { background: #fff; } .sheet { width: auto; min-height: auto; margin: 0; padding: 0; zoom: 0.83; } }
+
+  .masthead { display: flex; justify-content: space-between; align-items: center;
+    border-bottom: 3.5px solid #0F1A2E; padding-bottom: 5px; margin-bottom: 6px; }
+  .brand { font-size: 19pt; font-weight: 900; letter-spacing: 2px; color: #0F1A2E; }
+  .brand .en { font-size: 8pt; font-weight: 600; letter-spacing: 3px; color: #8A6A1F; display: block; margin-top: 1px; }
+  .sportbox { display: flex; align-items: center; gap: 10px; }
+  .sportbox .name { font-size: 22pt; font-weight: 900; color: #0F1A2E; letter-spacing: 4px; line-height: 1.1; }
+  .sportbox .sub { font-size: 8.5pt; color: #666; letter-spacing: 2px; display: block; margin-top: 1px; }
+  .sportbox .no { text-align: right; font-size: 8.5pt; color: #444; line-height: 1.5; border-left: 1px solid #ccc; padding-left: 10px; }
+  .sportbox .no b { color: #0F1A2E; font-size: 10pt; letter-spacing: 1px; }
+  .sportbox .no .sig { font-size: 7pt; color: #8A6A1F; letter-spacing: 1.5px; }
+
+  .match { margin-bottom: 5px; }
+  .match .comp { font-size: 9pt; font-weight: 700; color: #8A6A1F; letter-spacing: 2px; }
+  .match h1 { font-size: 19pt; font-weight: 900; color: #0F1A2E; letter-spacing: 1px; line-height: 1.3; }
+  .match .meta { font-size: 9.5pt; color: #444; margin-top: 2px; }
+
+  .tldr { background: #0F1A2E; color: #E9E4D8; padding: 5px 12px; margin-bottom: 4px; }
+  .tldr .tag { font-size: 8pt; letter-spacing: 3px; color: #D4AF37; font-weight: 700; }
+  .tldr p { font-size: 11pt; font-weight: 700; line-height: 1.42; margin-top: 2px; }
+  .tldr b { color: #D4AF37; }
+
+  .ritual { border: 1.5px dashed #8A6A1F; background: #FDFBF5; padding: 4px 10px;
+    font-size: 9.8pt; font-weight: 700; color: #0F1A2E; margin-bottom: 5px; }
+
+  .hero0 { display: flex; align-items: center; gap: 14px; border: 2px solid #0F1A2E;
+    padding: 4px 14px; margin-bottom: 4px; background: #FAFAF7; }
+  .hero0 .n { font-size: 36pt; font-weight: 900; color: #0F1A2E; line-height: 1; letter-spacing: 0; }
+  .hero0 .t { font-size: 10.5pt; line-height: 1.42; }
+  .hero0 .t b { color: #8A6A1F; }
+  .hero0 .t .big { font-size: 12pt; font-weight: 900; color: #0F1A2E; display: block; }
+
+  section { margin-bottom: 3px; }
+  h2 { font-size: 11pt; font-weight: 800; color: #0F1A2E; letter-spacing: 1.5px;
+    border-left: 4px solid #8A6A1F; padding-left: 7px; margin-bottom: 2px; }
+
+  .avoid table, .keep table { width: 100%; border-collapse: collapse; font-size: 9.8pt; }
+  .avoid th, .avoid td, .keep th, .keep td { border: 1px solid #ccc; padding: 2px 7px; text-align: left; vertical-align: middle; }
+  .avoid th, .keep th { background: #EFEBE0; color: #0F1A2E; font-size: 9pt; letter-spacing: 1px; }
+  .avoid td.num, .keep td.num { text-align: center; white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .avoid td.mark { text-align: center; color: #333; font-weight: 900; font-size: 12pt; width: 8%; }
+  .avoid tr.dead td { color: #777; background: #f3f3f3; }
+  .avoid tr.dead td.name, .avoid tr.dead td.num { text-decoration: line-through; text-decoration-thickness: 1.5px; text-decoration-color: #444; }
+  .keep td.star { text-align: center; white-space: nowrap; color: #8A6A1F; font-weight: 900; font-size: 10.5pt; width: 9%; }
+  .note { font-size: 8.5pt; color: #666; margin-top: 2px; }
+
+  .facts { counter-reset: fact; }
+  .facts li { list-style: none; padding-left: 17px; position: relative; margin-bottom: 2px; }
+  .facts li::before { content: counter(fact) ""; counter-increment: fact; position: absolute; left: 0;
+    font-weight: 900; color: #8A6A1F; font-size: 10.5pt; }
+
+  /* 賽中觀察欄 */
+  .switch { border: 2px solid #0F1A2E; padding: 6px 11px; background: #FAFAF7; }
+  .switch .tag { font-size: 8pt; letter-spacing: 2px; color: #8A6A1F; font-weight: 800; }
+  .switch h3 { font-size: 13pt; font-weight: 900; color: #0F1A2E; margin: 1px 0 2px; letter-spacing: 0.5px; }
+  .switch p.lead { font-size: 9.8pt; margin-bottom: 3px; }
+  .branch { display: flex; gap: 8px; margin: 2px 0; align-items: flex-start; }
+  .branch .k { flex: 0 0 112px; text-align: center; font-weight: 900; font-size: 9.5pt; padding: 2px 0;
+    border: 1.5px solid #0F1A2E; color: #0F1A2E; }
+  .branch.on .k { background: #0F1A2E; color: #E9E4D8; }
+  .branch p { font-size: 9.8pt; flex: 1; }
+
+  .board { border: 2.5px solid #8A6A1F; background: #FAF6EC; padding: 6px 12px; }
+  .board .tag { font-size: 8pt; letter-spacing: 3px; color: #8A6A1F; font-weight: 800; }
+  .board h3 { font-size: 13pt; font-weight: 900; color: #0F1A2E; letter-spacing: 0.5px; margin: 1px 0 2px; }
+  .board p { font-size: 9.8pt; line-height: 1.42; }
+  .board .sign { text-align: right; font-size: 8.5pt; color: #8A6A1F; font-weight: 800; letter-spacing: 2px; margin-top: 3px; }
+
+  .baseline { border-top: 3px solid #0F1A2E; margin-top: 6px; padding-top: 5px;
+    display: flex; justify-content: space-between; gap: 12px; font-size: 8pt; color: #555; line-height: 1.6; }
+  .baseline .right { text-align: right; white-space: nowrap; }
+  .baseline b { color: #0F1A2E; }
+  .verify { font-size: 8.5pt; color: #0F1A2E; font-weight: 700; text-align: center;
+    border: 1.2px dashed #8A6A1F; background: #FDFBF5; padding: 3px 10px; margin-top: 5px; }
+
+  /* 店家專屬欄 */
+  .shop { display: flex; align-items: stretch; border: 2px solid #0F1A2E; margin-top: 5px; }
+  .shop .info { flex: 1; background: #0F1A2E; color: #E9E4D8; padding: 5px 12px; display: flex; flex-direction: column; justify-content: center; }
+  .shop .info .l { font-size: 9.8pt; font-weight: 700; line-height: 1.35; }
+  .shop .info .l b { color: #D4AF37; }
+  .shop .info .s { font-size: 8.2pt; color: #B7AE97; margin-top: 2px; letter-spacing: 1px; }
+  .shop .stamp { flex: 0 0 150px; padding: 4px; display: flex; }
+  .shop .stamp span { flex: 1; border: 1px dashed #8A6A1F; color: #9A7B2A; font-size: 8pt; letter-spacing: 3px;
+    display: flex; align-items: center; justify-content: center; min-height: 40px; text-align: center; }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <div class="masthead">
+    <div class="brand">ZONE 27 戰報
+      <span class="en">THE PRE-MATCH BRIEF</span>
+    </div>
+    <div class="sportbox">
+      <svg width="52" height="52" viewBox="0 0 40 40" aria-hidden="true">
+        <circle cx="20" cy="20" r="17" fill="none" stroke="#0F1A2E" stroke-width="2.2"/>
+        <path d="M20 3 L20 37 M3 20 L37 20" stroke="#0F1A2E" stroke-width="1.6"/>
+        <path d="M8 6.5 C14 13, 14 27, 8 33.5" fill="none" stroke="#8A6A1F" stroke-width="1.6"/>
+        <path d="M32 6.5 C26 13, 26 27, 32 33.5" fill="none" stroke="#8A6A1F" stroke-width="1.6"/>
+      </svg>
+      <div>
+        <span class="name">籃 球</span>
+        <span class="sub">WNBA · 美國女子職籃</span>
+      </div>
+      <div class="no">
+        <b>Z27·H196B</b><br><span class="sig">電文編號</span> · 2026·07·15
+      </div>
+    </div>
+  </div>
+
+  <div class="match">
+    <div class="comp">WNBA · 美國女子職籃</div>
+    <h1>華盛頓神秘 @ 多倫多節奏</h1>
+    <div class="meta">多倫多主場 · 台北 7/15(三)清晨 07:00 跳球</div>
+    <div class="meta">主隊多倫多 10-13(新軍元年)· 客隊華盛頓 11-10 · 兩隊風格完全相反</div>
+  </div>
+
+  <div class="tldr">
+    <span class="tag">10 秒看完</span>
+    <p>多倫多剛爆冷贏了紐約自由人、又是新軍元年主場,大家的錢都往它身上堆。 但華盛頓那套慢節奏鐵血防守,本季已經 <b>2 度</b>擊敗多倫多 —— 而且今晚多倫多還缺著人。 熱度全在多倫多,價值可能在對面。</p>
+  </div>
+
+  <div class="ritual">▸ 下注前的小動作:先在心裡定好你想買的,再往下看 —— 看完還想買,才是真的想買。</div>
+
+  <div class="hero0">
+    <span class="n">20.7</span>
+    <span class="t"><span class="big">多倫多場均 20.7 分的頭號得分手,今晚不上。</span>
+    Sykes 六月中足底筋膜炎至今沒打 —— 大家記得那支「猛轟」的多倫多,火力其實已經打了折。</span>
+  </div>
+
+  <section class="avoid">
+    <h2>先提醒 —— 這兩種,放下比較好</h2>
+    <table>
+      <tr><th style="width:36%">哪種盤</th><th style="width:11%">賠率</th><th style="width:8%"></th><th>提醒你的理由</th></tr>
+      <tr class="dead"><td class="name">任何「Sykes 得幾分」的球員盤</td><td class="num">—</td><td class="mark">×</td>
+        <td>他這場根本不打 —— 這種以他得分為標的的盤直接失效,別把錢丟進去。</td></tr>
+      <tr class="dead"><td class="name">衝著「多倫多猛轟」買的高分盤</td><td class="num">低賠</td><td class="mark">×</td>
+        <td>那套火力今晚少了頭號得分手,前提已經打折 —— 追它近期的高得分印象去買大分,買的是舊消息。</td></tr>
+    </table>
+    <p class="note">提醒是價格判斷,不是輸贏預測 —— 它們照樣可能中,只是這種價長期買下來會吃虧。</p>
+  </section>
+
+  <section class="keep">
+    <h2>剩下的 —— 才值得花腦筋</h2>
+    <table>
+      <tr><th style="width:36%">哪種盤</th><th style="width:11%">賠率</th><th style="width:9%">星級</th><th>白話講</th></tr>
+      <tr><td>華盛頓 讓分 / 受讓(客隊)</td><td class="num">現場為準</td><td class="star">★★</td>
+        <td>華盛頓客場鐵血慢防、本季已經贏多倫多兩次,對面又缺兵 —— 站賠率好的客隊,是最貼這桌對位的一注。</td></tr>
+      <tr><td>全場 總分 · 小分</td><td class="num">現場為準</td><td class="star">★</td>
+        <td>華盛頓最擅長把節奏拖慢,多倫多又少了得分主力 —— 想站低分,比追它的高得分印象順盤面。</td></tr>
+    </table>
+    <p class="note">賠率以台灣運彩現場為準。 若多倫多主場讓分被「新軍主場情緒」拉得偏高,那更是站客隊的好時機 —— 情緒不會幫多倫多防守。</p>
+  </section>
+
+  <section>
+    <h2>三件你查不到的事</h2>
+    <ul class="facts">
+      <li><b>「兩場都 1 分」是誤傳。</b>華盛頓本季 2 度贏多倫多,其實是 68:65(3 分)和 86:85(壓哨 1 分)—— 但兩場都咬到最後一節才分勝負,是名副其實的貼身肉搏。</li>
+      <li><b>多倫多是 WNBA 史上第一支加拿大隊。</b>2026 是它的元年,教練 Brondello 還兼著澳洲國家隊 —— 新軍主場的情緒是真的,但情緒不是防守。</li>
+      <li><b>多倫多缺的不只一個。</b>後衛 Kiki Rice(腳踝)也 OUT、Fagbenle(腦震盪)成疑 —— 現在扛進攻的,是上一場砍 30 分的 Mabrey 一個人。</li>
+    </ul>
+  </section>
+
+  <section class="switch">
+    <span class="tag">開打後 · 只看這一件事</span>
+    <h3>第一節打完,是快還是慢</h3>
+    <p class="lead">這桌是華盛頓想拖慢 vs 多倫多想打快的拔河。 第一節的總分,就看出今晚誰主導了節奏。</p>
+    <div class="branch on">
+      <span class="k">第一節悶、分數低</span>
+      <p>華盛頓拖住了 —— 慢節奏、華盛頓、小分那邊站得住。</p>
+    </div>
+    <div class="branch">
+      <span class="k">第一節就開高</span>
+      <p>多倫多把速度打起來了 —— 缺人也還能衝,盤面往多倫多那邊倒。</p>
+    </div>
+    <p class="lead" style="margin-top:3px;">我們不猜方向 —— 這場的分水嶺,就在這裡。</p>
+  </section>
+
+  <section class="board">
+    <span class="tag">本期看板</span>
+    <h3>氣氛很滿,不代表對位贏</h3>
+    <p>新軍元年的主場、剛爆冷的氣勢,會讓一支球隊看起來很強、讓大家的錢往它身上堆。 但一場球的勝負,常常是「誰的打法剋誰」加「今晚誰缺人」—— 這兩件,情緒都幫不上忙。 別讓現場的熱度,幫你決定要買哪邊。<b>本報負責把價看清楚 —— 決定,永遠在您手上。</b></p>
+    <p class="sign">—— ZONE 27 主編</p>
+  </section>
+
+  <div class="verify">賠率是公開的,你自己也查得到 —— 我們做的,就是幫你把太貴的先劃掉。</div>
+
+  <div class="baseline">
+    <span>星星是價格評論,不是輸贏預測 · 本報不收博彩業者的廣告與贊助 · 不保證獲利<br>資料:WNBA 官方 · ESPN 賽前數據 · 台灣運彩</span>
+    <span class="right"><b>《ZONE 27 戰報》Z27·H196B</b> · 每日免費出刊<br>zone27.com.tw</span>
+  </div>
+
+  <div class="shop">
+    <div class="info">
+      <span class="l">這一張,是 <b>本店</b> 每天免費為您備妥的。</span>
+      <span class="s">天天一張新的 · 明天記得再來拿</span>
+    </div>
+    <div class="stamp"><span>本店店章 · 店名</span></div>
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<title>ZONE 27 戰報 Z27·H196A · 尼爾森巨人 @ 塔拉納基山脈</title>
+<style>
+  /* ── ZONE 27 戰報 · 門店列印版 · A4 一頁 · v23(電文呼號 + 店家專屬欄 + 去重)· 猜銅板類盤一律不列 ── */
+  @page { size: A4; margin: 10mm 12mm; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body { font-family: "Microsoft JhengHei", "Noto Sans TC", "PingFang TC", sans-serif;
+    color: #111; background: #e8e8e8; font-size: 10pt; line-height: 1.4; }
+  .sheet { width: 210mm; min-height: 296mm; margin: 0 auto; background: #fff; padding: 11mm 13mm 8mm; }
+  @media print { body { background: #fff; } .sheet { width: auto; min-height: auto; margin: 0; padding: 0; zoom: 0.82; } }
+
+  .masthead { display: flex; justify-content: space-between; align-items: center;
+    border-bottom: 3.5px solid #0F1A2E; padding-bottom: 5px; margin-bottom: 6px; }
+  .brand { font-size: 19pt; font-weight: 900; letter-spacing: 2px; color: #0F1A2E; }
+  .brand .en { font-size: 8pt; font-weight: 600; letter-spacing: 3px; color: #8A6A1F; display: block; margin-top: 1px; }
+  .sportbox { display: flex; align-items: center; gap: 10px; }
+  .sportbox .name { font-size: 22pt; font-weight: 900; color: #0F1A2E; letter-spacing: 4px; line-height: 1.1; }
+  .sportbox .sub { font-size: 8.5pt; color: #666; letter-spacing: 2px; display: block; margin-top: 1px; }
+  .sportbox .no { text-align: right; font-size: 8.5pt; color: #444; line-height: 1.5; border-left: 1px solid #ccc; padding-left: 10px; }
+  .sportbox .no b { color: #0F1A2E; font-size: 10pt; letter-spacing: 1px; }
+  .sportbox .no .sig { font-size: 7pt; color: #8A6A1F; letter-spacing: 1.5px; }
+
+  .match { margin-bottom: 5px; }
+  .match .comp { font-size: 9pt; font-weight: 700; color: #8A6A1F; letter-spacing: 2px; }
+  .match h1 { font-size: 19pt; font-weight: 900; color: #0F1A2E; letter-spacing: 1px; line-height: 1.3; }
+  .match .meta { font-size: 9.5pt; color: #444; margin-top: 2px; }
+
+  .tldr { background: #0F1A2E; color: #E9E4D8; padding: 5px 12px; margin-bottom: 4px; }
+  .tldr .tag { font-size: 8pt; letter-spacing: 3px; color: #D4AF37; font-weight: 700; }
+  .tldr p { font-size: 11pt; font-weight: 700; line-height: 1.42; margin-top: 2px; }
+  .tldr b { color: #D4AF37; }
+
+  .ritual { border: 1.5px dashed #8A6A1F; background: #FDFBF5; padding: 4px 10px;
+    font-size: 9.8pt; font-weight: 700; color: #0F1A2E; margin-bottom: 5px; }
+
+  .hero0 { display: flex; align-items: center; gap: 14px; border: 2px solid #0F1A2E;
+    padding: 4px 14px; margin-bottom: 4px; background: #FAFAF7; }
+  .hero0 .n { font-size: 38pt; font-weight: 900; color: #0F1A2E; line-height: 1; letter-spacing: 0; }
+  .hero0 .t { font-size: 10.5pt; line-height: 1.42; }
+  .hero0 .t b { color: #8A6A1F; }
+  .hero0 .t .big { font-size: 12pt; font-weight: 900; color: #0F1A2E; display: block; }
+
+  section { margin-bottom: 3px; }
+  h2 { font-size: 11pt; font-weight: 800; color: #0F1A2E; letter-spacing: 1.5px;
+    border-left: 4px solid #8A6A1F; padding-left: 7px; margin-bottom: 2px; }
+
+  .avoid table, .keep table { width: 100%; border-collapse: collapse; font-size: 9.8pt; }
+  .avoid th, .avoid td, .keep th, .keep td { border: 1px solid #ccc; padding: 2px 7px; text-align: left; vertical-align: middle; }
+  .avoid th, .keep th { background: #EFEBE0; color: #0F1A2E; font-size: 9pt; letter-spacing: 1px; }
+  .avoid td.num, .keep td.num { text-align: center; white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .avoid td.mark { text-align: center; color: #333; font-weight: 900; font-size: 12pt; width: 8%; }
+  .avoid tr.dead td { color: #777; background: #f3f3f3; }
+  .avoid tr.dead td.name, .avoid tr.dead td.num { text-decoration: line-through; text-decoration-thickness: 1.5px; text-decoration-color: #444; }
+  .keep td.star { text-align: center; white-space: nowrap; color: #8A6A1F; font-weight: 900; font-size: 10.5pt; width: 9%; }
+  .note { font-size: 8.5pt; color: #666; margin-top: 2px; }
+
+  .facts { counter-reset: fact; }
+  .facts li { list-style: none; padding-left: 17px; position: relative; margin-bottom: 2px; }
+  .facts li::before { content: counter(fact) ""; counter-increment: fact; position: absolute; left: 0;
+    font-weight: 900; color: #8A6A1F; font-size: 10.5pt; }
+
+  /* 賽中觀察欄 */
+  .switch { border: 2px solid #0F1A2E; padding: 6px 11px; background: #FAFAF7; }
+  .switch .tag { font-size: 8pt; letter-spacing: 2px; color: #8A6A1F; font-weight: 800; }
+  .switch h3 { font-size: 13pt; font-weight: 900; color: #0F1A2E; margin: 1px 0 2px; letter-spacing: 0.5px; }
+  .switch p.lead { font-size: 9.8pt; margin-bottom: 3px; }
+  .branch { display: flex; gap: 8px; margin: 2px 0; align-items: flex-start; }
+  .branch .k { flex: 0 0 118px; text-align: center; font-weight: 900; font-size: 9.5pt; padding: 2px 0;
+    border: 1.5px solid #0F1A2E; color: #0F1A2E; }
+  .branch.on .k { background: #0F1A2E; color: #E9E4D8; }
+  .branch p { font-size: 9.8pt; flex: 1; }
+
+  .board { border: 2.5px solid #8A6A1F; background: #FAF6EC; padding: 6px 12px; }
+  .board .tag { font-size: 8pt; letter-spacing: 3px; color: #8A6A1F; font-weight: 800; }
+  .board h3 { font-size: 13pt; font-weight: 900; color: #0F1A2E; letter-spacing: 0.5px; margin: 1px 0 2px; }
+  .board p { font-size: 9.8pt; line-height: 1.42; }
+  .board .sign { text-align: right; font-size: 8.5pt; color: #8A6A1F; font-weight: 800; letter-spacing: 2px; margin-top: 3px; }
+
+  .baseline { border-top: 3px solid #0F1A2E; margin-top: 6px; padding-top: 5px;
+    display: flex; justify-content: space-between; gap: 12px; font-size: 8pt; color: #555; line-height: 1.6; }
+  .baseline .right { text-align: right; white-space: nowrap; }
+  .baseline b { color: #0F1A2E; }
+  .verify { font-size: 8.5pt; color: #0F1A2E; font-weight: 700; text-align: center;
+    border: 1.2px dashed #8A6A1F; background: #FDFBF5; padding: 3px 10px; margin-top: 5px; }
+
+  /* 店家專屬欄 */
+  .shop { display: flex; align-items: stretch; border: 2px solid #0F1A2E; margin-top: 5px; }
+  .shop .info { flex: 1; background: #0F1A2E; color: #E9E4D8; padding: 5px 12px; display: flex; flex-direction: column; justify-content: center; }
+  .shop .info .l { font-size: 9.8pt; font-weight: 700; line-height: 1.35; }
+  .shop .info .l b { color: #D4AF37; }
+  .shop .info .s { font-size: 8.2pt; color: #B7AE97; margin-top: 2px; letter-spacing: 1px; }
+  .shop .stamp { flex: 0 0 150px; padding: 4px; display: flex; }
+  .shop .stamp span { flex: 1; border: 1px dashed #8A6A1F; color: #9A7B2A; font-size: 8pt; letter-spacing: 3px;
+    display: flex; align-items: center; justify-content: center; min-height: 40px; text-align: center; }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <div class="masthead">
+    <div class="brand">ZONE 27 戰報
+      <span class="en">THE PRE-MATCH BRIEF</span>
+    </div>
+    <div class="sportbox">
+      <svg width="52" height="52" viewBox="0 0 40 40" aria-hidden="true">
+        <circle cx="20" cy="20" r="17" fill="none" stroke="#0F1A2E" stroke-width="2.2"/>
+        <path d="M20 3 L20 37 M3 20 L37 20" stroke="#0F1A2E" stroke-width="1.6"/>
+        <path d="M8 6.5 C14 13, 14 27, 8 33.5" fill="none" stroke="#8A6A1F" stroke-width="1.6"/>
+        <path d="M32 6.5 C26 13, 26 27, 32 33.5" fill="none" stroke="#8A6A1F" stroke-width="1.6"/>
+      </svg>
+      <div>
+        <span class="name">籃 球</span>
+        <span class="sub">紐西蘭 NBL</span>
+      </div>
+      <div class="no">
+        <b>Z27·H196A</b><br><span class="sig">電文編號</span> · 2026·07·15
+      </div>
+    </div>
+  </div>
+
+  <div class="match">
+    <div class="comp">紐西蘭國家籃球聯賽 · NZ NBL</div>
+    <h1>尼爾森巨人 @ 塔拉納基山脈</h1>
+    <div class="meta">TSB Stadium(新普利茅斯)· 台北 7/15(三)下午開打</div>
+    <div class="meta">主隊山脈 6-11 · 客隊尼爾森 5-12 · 兩隊都在季後賽淘汰邊緣</div>
+  </div>
+
+  <div class="tldr">
+    <span class="tag">10 秒看完</span>
+    <p>兩支季後賽淘汰邊緣的後段班互咬,帳面五五波。 但有一個實在的落差:客隊尼爾森剛打完一場鏖戰、腿是重的,主隊山脈休飽了又坐主場。 這場的價值,在那條累出來的腿,不在帳面。</p>
+  </div>
+
+  <div class="ritual">▸ 下注前的小動作:先在心裡定好你想買的,再往下看 —— 看完還想買,才是真的想買。</div>
+
+  <div class="hero0">
+    <span class="n">50</span>
+    <span class="t"><span class="big">尼爾森上一場,在場上跑了 50 分鐘。</span>
+    一場球本來 40 分鐘 —— 他們打到雙延長、鏖戰到 113:120 才落敗,而且是兩天前的事。 今天拉車來客場,對上休了四天的山脈。</span>
+  </div>
+
+  <section class="avoid">
+    <h2>先提醒 —— 這兩種,放下比較好</h2>
+    <table>
+      <tr><th style="width:34%">哪種盤</th><th style="width:13%">賠率</th><th style="width:8%"></th><th>提醒你的理由</th></tr>
+      <tr class="dead"><td class="name">勝分差 · 主勝 1～5 分</td><td class="num">3.75</td><td class="mark">×</td>
+        <td>硬要它「贏、但只贏 1 到 5 分」—— 範圍卡得太死,命中機率本來就低,高賠是拿來釣人的。</td></tr>
+      <tr class="dead"><td class="name">全場 總分 · 大小 181.5</td><td class="num">1.73 / 1.70</td><td class="mark">×</td>
+        <td>猜總分過不過線,兩邊都只給 1.7 出頭 —— 莊家在這條線上抽走近一成半,長期買下來就是虧。</td></tr>
+    </table>
+    <p class="note">提醒是價格判斷,不是輸贏預測 —— 它們照樣可能中,只是這種價長期買下來會吃虧。</p>
+  </section>
+
+  <section class="keep">
+    <h2>剩下的 —— 才值得花腦筋</h2>
+    <table>
+      <tr><th style="width:34%">哪種盤</th><th style="width:13%">賠率</th><th style="width:9%">星級</th><th>白話講</th></tr>
+      <tr><td>山脈 讓分 -3.5(贏 4 分以上)</td><td class="num">1.96</td><td class="star">★★</td>
+        <td>累的腿最容易在後段掉速。 賭休飽的主隊贏 4 分以上,1.96 幾乎是對半的價 —— 最貼這場「疲勞落差」的一注。</td></tr>
+      <tr><td>山脈 直接贏(不讓分)</td><td class="num">現場為準</td><td class="star">★</td>
+        <td>不放心「贏 4 分」那道門檻,就買它單純贏 —— 一樣站在休息足、坐主場的那邊,只是拿的賠率低一點。</td></tr>
+    </table>
+    <p class="note">賠率以台灣運彩現場為準。 同一天同場地有兩場(台北 14:00 的暖場賽、15:00 的正賽)—— 下注前先認清你買的是哪一場。</p>
+  </section>
+
+  <section>
+    <h2>三件你查不到的事</h2>
+    <ul class="facts">
+      <li><b>尼爾森全隊靠一個人扛。</b>核心後衛 Perrott-Hunt 上一場砍了 38 分 —— 但主力打越久，隔天越沒力，這正是他們今晚的隱憂。</li>
+      <li><b>山脈自己也不是狀態隊。</b>上一場 7/10 客場 90:93 一分惜敗、更早還被墊底球隊打花 —— 它今晚的優勢是「休息」，不是「手感」。</li>
+      <li><b>兩隊都在淘汰邊緣、都輸不起。</b>而輸不起的緊繃,配上累的腿,常常是失誤和亂投的溫床 —— 這種比賽,分數容易忽高忽低。</li>
+    </ul>
+  </section>
+
+  <section class="switch">
+    <span class="tag">開打後 · 只看這一件事</span>
+    <h3>第四節,尼爾森的腿還在不在</h3>
+    <p class="lead">累不累,前三節看不太出來 —— 決勝節才現形:累的隊末節投籃會軟、腳步會慢。</p>
+    <div class="branch on">
+      <span class="k">末節尼爾森掉速</span>
+      <p>疲勞發作 —— 山脈拉開比分、讓分那邊站得住。</p>
+    </div>
+    <div class="branch">
+      <span class="k">末節還咬得住</span>
+      <p>尼爾森撐住了 —— 累的劇本沒發生,讓分要留意收不收得到。</p>
+    </div>
+    <p class="lead" style="margin-top:3px;">我們不猜方向 —— 這場的分水嶺,就在這裡。</p>
+  </section>
+
+  <section class="board">
+    <span class="tag">本期看板</span>
+    <h3>勢均力敵時,行程比實力更會說話</h3>
+    <p>當兩隊實力差不多,一場球的勝負,常常不是誰比較強,而是誰比較累、誰在主場、誰剛拉完車。 帳面戰績告訴你他們「平常」多強,行程表才告訴你他們「今晚」什麼狀態。 五五波的比賽,先看行程。<b>本報負責把價看清楚 —— 決定,永遠在您手上。</b></p>
+    <p class="sign">—— ZONE 27 主編</p>
+  </section>
+
+  <div class="verify">賠率是公開的,你自己也查得到 —— 我們做的,就是幫你把太貴的先劃掉。</div>
+
+  <div class="baseline">
+    <span>星星是價格評論,不是輸贏預測 · 本報不收博彩業者的廣告與贊助 · 不保證獲利<br>資料:紐西蘭 NBL 官方 · 賽前數據站 · 台灣運彩</span>
+    <span class="right"><b>《ZONE 27 戰報》Z27·H196A</b> · 每日免費出刊<br>zone27.com.tw</span>
+  </div>
+
+  <div class="shop">
+    <div class="info">
+      <span class="l">這一張,是 <b>本店</b> 每天免費為您備妥的。</span>
+      <span class="s">天天一張新的 · 明天記得再來拿</span>
+    </div>
+    <div class="stamp"><span>本店店章 · 店名</span></div>
+  </div>
+
+</div>
+</body>
+</html>

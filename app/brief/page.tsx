@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
-import { visibleBriefs, briefHref, briefShortDate, type BriefIssue } from "@/lib/briefs";
+import { visibleBriefs, briefHref, briefShortDate, briefLabel, type BriefIssue } from "@/lib/briefs";
 import { getTodayTaipei } from "@/lib/matches";
 import { createPageMetadata } from "@/lib/page-og";
 
@@ -94,7 +94,7 @@ export default function BriefPage() {
                 >
                   <div className="flex items-baseline gap-3 flex-wrap">
                     <span className="font-mono text-gold text-[10px] tracking-[0.3em]">
-                      NO.{b.no}
+                      {briefLabel(b)}
                     </span>
                     <span className="font-mono text-mute/70 text-[10px] tracking-[0.2em]">
                       {b.sport} · {briefShortDate(b)}
@@ -120,6 +120,9 @@ export default function BriefPage() {
           </ul>
           <p className="mt-2.5 font-mono text-mute/55 text-[10px] tracking-[0.15em] leading-relaxed">
             每期都是門店 A4 原版 —— 線上看的跟店裡印的是同一張紙 · 歡迎整頁影印
+          </p>
+          <p className="mt-1.5 font-mono text-mute/45 text-[10px] tracking-[0.1em] leading-relaxed">
+            電文呼號怎麼讀:<span className="text-gold/60">Z27</span> · 運動(棒/足/籃/排)· 當年第幾天 · 當天第幾張 —— 看得懂的,都是內行。
           </p>
         </section>
 
@@ -156,7 +159,7 @@ export default function BriefPage() {
                             className="flex items-baseline gap-3 px-3 py-1.5 border border-line/50 hover:border-gold/40 hover:bg-gold/[0.04] transition-colors"
                           >
                             <span className="font-mono text-gold/70 text-[10px] tracking-[0.2em] shrink-0">
-                              NO.{b.no}
+                              {briefLabel(b)}
                             </span>
                             <span className="font-mono text-mute/60 text-[10px] tracking-[0.15em] shrink-0">
                               {b.sport}

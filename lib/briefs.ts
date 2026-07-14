@@ -27,6 +27,10 @@ export type BriefIssue = {
   bigNum?: string;
   /** 大數字單位(分 / % …)· 跟在 bigNum 後面小字。 選填。 */
   bigNumUnit?: string;
+  /** 電文呼號(v23 起 · `Z27·[運動][儒略日][當日序]` · 如 Z27·H197A)· 取代訪客面的「NO.序號」門面
+   *  (Tim「按順序編號很爛 · 想要類似摩斯密碼的酷編號」)。 沒填的舊刊 graceful 退回 NO.序號。
+   *  🔴 序號 `no` 仍是檔名/排序的單一真相,呼號只是門面顯示。 */
+  code?: string;
   /** Tim 下架 → 不再示人(檔案不刪) */
   hidden?: boolean;
 };
@@ -95,6 +99,10 @@ export const BRIEFS: BriefIssue[] = [
     bigNum: "0.99", bigNumUnit: "防禦率", hook: "先發防禦率不到 1 · 一分定生死的悶戰" },
   { no: "045", date: "2026-07-15", sport: "足球", matchup: "雷克雅未克體育會 @ 科帕沃古",
     bigNum: "31", bigNumUnit: "失球", hook: "客隊後防漏勺 · 但進球上次都來得晚" },
+  { no: "046", date: "2026-07-15", sport: "籃球", matchup: "尼爾森巨人 @ 塔拉納基山脈",
+    code: "Z27·H196A", bigNum: "50", bigNumUnit: "分鐘", hook: "客隊兩天前打了雙延長 · 腿還沒回來" },
+  { no: "047", date: "2026-07-15", sport: "籃球", matchup: "華盛頓神秘 @ 多倫多節奏",
+    code: "Z27·H196B", bigNum: "20.7", bigNumUnit: "分", hook: "頭號得分手傷停 · 猛轟火力打了折" },
 ];
 
 /** A4 原版的靜態網址(public/briefs)。 */
@@ -111,4 +119,9 @@ export function visibleBriefs(): BriefIssue[] {
 export function briefShortDate(b: BriefIssue): string {
   const m = /^\d{4}-(\d{2})-(\d{2})$/.exec(b.date);
   return m ? `${Number(m[1])}/${Number(m[2])}` : b.date;
+}
+
+/** 訪客面顯示的編號:v23 起有「電文呼號」用呼號,舊刊 graceful 退回「NO.序號」。 */
+export function briefLabel(b: BriefIssue): string {
+  return b.code ?? `NO.${b.no}`;
 }

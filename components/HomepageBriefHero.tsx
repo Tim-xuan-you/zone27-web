@@ -1,4 +1,4 @@
-import { visibleBriefs, briefHref, briefShortDate } from "@/lib/briefs";
+import { visibleBriefs, briefHref, briefShortDate, briefLabel } from "@/lib/briefs";
 import { getTodayTaipei } from "@/lib/matches";
 
 // ── ZONE 27 · 首頁主打:戰報頭版「大數字」卡列 ─────────────────────────────
@@ -24,7 +24,7 @@ export default function HomepageBriefHero() {
             className="flex flex-col border border-gold/40 bg-gold/[0.04] hover:border-gold hover:bg-gold/[0.08] transition-colors px-5 pt-4 pb-4 group"
           >
             <div className="flex items-baseline gap-2 font-mono text-mute/60 text-[10px] tracking-[0.25em]">
-              <span className="text-gold/70">NO.{b.no}</span>
+              <span className="text-gold/70">{briefLabel(b)}</span>
               <span>{b.sport}</span>
               <span className="ml-auto">{b.date === today ? "本日" : briefShortDate(b)}</span>
             </div>
