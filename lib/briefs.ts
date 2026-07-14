@@ -93,6 +93,8 @@ export const BRIEFS: BriefIssue[] = [
     bigNum: "2", bigNumUnit: "度完封", hook: "龍頭派王牌作客墊底 · 這桌重點在低分" },
   { no: "044", date: "2026-07-14", sport: "棒球", matchup: "羅德海洋 @ 西武獅",
     bigNum: "0.99", bigNumUnit: "防禦率", hook: "先發防禦率不到 1 · 一分定生死的悶戰" },
+  { no: "045", date: "2026-07-15", sport: "足球", matchup: "雷克雅未克體育會 @ 科帕沃古",
+    bigNum: "31", bigNumUnit: "失球", hook: "客隊後防漏勺 · 但進球上次都來得晚" },
 ];
 
 /** A4 原版的靜態網址(public/briefs)。 */

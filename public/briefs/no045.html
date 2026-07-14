@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<title>ZONE 27 戰報 NO.045 · 雷克雅未克體育會 @ 科帕沃古</title>
+<style>
+  /* ── ZONE 27 戰報 · 門店列印版 · A4 一頁 · v22(去重 + 店家專屬欄)· 猜銅板類盤一律不列 ── */
+  @page { size: A4; margin: 10mm 12mm; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body { font-family: "Microsoft JhengHei", "Noto Sans TC", "PingFang TC", sans-serif;
+    color: #111; background: #e8e8e8; font-size: 10pt; line-height: 1.4; }
+  .sheet { width: 210mm; min-height: 296mm; margin: 0 auto; background: #fff; padding: 11mm 13mm 8mm; }
+  @media print { body { background: #fff; } .sheet { width: auto; min-height: auto; margin: 0; padding: 0; zoom: 0.81; } }
+
+  .masthead { display: flex; justify-content: space-between; align-items: center;
+    border-bottom: 3.5px solid #0F1A2E; padding-bottom: 5px; margin-bottom: 6px; }
+  .brand { font-size: 19pt; font-weight: 900; letter-spacing: 2px; color: #0F1A2E; }
+  .brand .en { font-size: 8pt; font-weight: 600; letter-spacing: 3px; color: #8A6A1F; display: block; margin-top: 1px; }
+  .sportbox { display: flex; align-items: center; gap: 10px; }
+  .sportbox .name { font-size: 22pt; font-weight: 900; color: #0F1A2E; letter-spacing: 4px; line-height: 1.1; }
+  .sportbox .sub { font-size: 8.5pt; color: #666; letter-spacing: 2px; display: block; margin-top: 1px; }
+  .sportbox .no { text-align: right; font-size: 8.5pt; color: #444; line-height: 1.5; border-left: 1px solid #ccc; padding-left: 10px; }
+  .sportbox .no b { color: #0F1A2E; }
+
+  .match { margin-bottom: 5px; }
+  .match .comp { font-size: 9pt; font-weight: 700; color: #8A6A1F; letter-spacing: 2px; }
+  .match h1 { font-size: 19pt; font-weight: 900; color: #0F1A2E; letter-spacing: 1px; line-height: 1.3; }
+  .match .meta { font-size: 9.5pt; color: #444; margin-top: 2px; }
+
+  .tldr { background: #0F1A2E; color: #E9E4D8; padding: 5px 12px; margin-bottom: 4px; }
+  .tldr .tag { font-size: 8pt; letter-spacing: 3px; color: #D4AF37; font-weight: 700; }
+  .tldr p { font-size: 11pt; font-weight: 700; line-height: 1.42; margin-top: 2px; }
+  .tldr b { color: #D4AF37; }
+
+  .ritual { border: 1.5px dashed #8A6A1F; background: #FDFBF5; padding: 4px 10px;
+    font-size: 9.8pt; font-weight: 700; color: #0F1A2E; margin-bottom: 5px; }
+
+  .hero0 { display: flex; align-items: center; gap: 14px; border: 2px solid #0F1A2E;
+    padding: 4px 14px; margin-bottom: 4px; background: #FAFAF7; }
+  .hero0 .n { font-size: 38pt; font-weight: 900; color: #0F1A2E; line-height: 1; letter-spacing: 0; }
+  .hero0 .t { font-size: 10.5pt; line-height: 1.42; }
+  .hero0 .t b { color: #8A6A1F; }
+  .hero0 .t .big { font-size: 12pt; font-weight: 900; color: #0F1A2E; display: block; }
+
+  section { margin-bottom: 3px; }
+  h2 { font-size: 11pt; font-weight: 800; color: #0F1A2E; letter-spacing: 1.5px;
+    border-left: 4px solid #8A6A1F; padding-left: 7px; margin-bottom: 2px; }
+
+  .avoid table, .keep table { width: 100%; border-collapse: collapse; font-size: 9.8pt; }
+  .avoid th, .avoid td, .keep th, .keep td { border: 1px solid #ccc; padding: 2px 7px; text-align: left; vertical-align: middle; }
+  .avoid th, .keep th { background: #EFEBE0; color: #0F1A2E; font-size: 9pt; letter-spacing: 1px; }
+  .avoid td.num, .keep td.num { text-align: center; white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .avoid td.mark { text-align: center; color: #333; font-weight: 900; font-size: 12pt; width: 8%; }
+  .avoid tr.dead td { color: #777; background: #f3f3f3; }
+  .avoid tr.dead td.name, .avoid tr.dead td.num { text-decoration: line-through; text-decoration-thickness: 1.5px; text-decoration-color: #444; }
+  .keep td.star { text-align: center; white-space: nowrap; color: #8A6A1F; font-weight: 900; font-size: 10.5pt; width: 9%; }
+  .note { font-size: 8.5pt; color: #666; margin-top: 2px; }
+
+  .facts { counter-reset: fact; }
+  .facts li { list-style: none; padding-left: 17px; position: relative; margin-bottom: 2px; }
+  .facts li::before { content: counter(fact) ""; counter-increment: fact; position: absolute; left: 0;
+    font-weight: 900; color: #8A6A1F; font-size: 10.5pt; }
+
+  /* 賽中觀察欄 */
+  .switch { border: 2px solid #0F1A2E; padding: 6px 11px; background: #FAFAF7; }
+  .switch .tag { font-size: 8pt; letter-spacing: 2px; color: #8A6A1F; font-weight: 800; }
+  .switch h3 { font-size: 13pt; font-weight: 900; color: #0F1A2E; margin: 1px 0 2px; letter-spacing: 0.5px; }
+  .switch p.lead { font-size: 9.8pt; margin-bottom: 3px; }
+  .branch { display: flex; gap: 8px; margin: 2px 0; align-items: flex-start; }
+  .branch .k { flex: 0 0 96px; text-align: center; font-weight: 900; font-size: 9.5pt; padding: 2px 0;
+    border: 1.5px solid #0F1A2E; color: #0F1A2E; }
+  .branch.on .k { background: #0F1A2E; color: #E9E4D8; }
+  .branch p { font-size: 9.8pt; flex: 1; }
+
+  .board { border: 2.5px solid #8A6A1F; background: #FAF6EC; padding: 6px 12px; }
+  .board .tag { font-size: 8pt; letter-spacing: 3px; color: #8A6A1F; font-weight: 800; }
+  .board h3 { font-size: 13pt; font-weight: 900; color: #0F1A2E; letter-spacing: 0.5px; margin: 1px 0 2px; }
+  .board p { font-size: 9.8pt; line-height: 1.42; }
+  .board .sign { text-align: right; font-size: 8.5pt; color: #8A6A1F; font-weight: 800; letter-spacing: 2px; margin-top: 3px; }
+
+  .baseline { border-top: 3px solid #0F1A2E; margin-top: 6px; padding-top: 5px;
+    display: flex; justify-content: space-between; gap: 12px; font-size: 8pt; color: #555; line-height: 1.6; }
+  .baseline .right { text-align: right; white-space: nowrap; }
+  .baseline b { color: #0F1A2E; }
+  .verify { font-size: 8.5pt; color: #0F1A2E; font-weight: 700; text-align: center;
+    border: 1.2px dashed #8A6A1F; background: #FDFBF5; padding: 3px 10px; margin-top: 5px; }
+
+  /* 店家專屬欄 */
+  .shop { display: flex; align-items: stretch; border: 2px solid #0F1A2E; margin-top: 5px; }
+  .shop .info { flex: 1; background: #0F1A2E; color: #E9E4D8; padding: 5px 12px; display: flex; flex-direction: column; justify-content: center; }
+  .shop .info .l { font-size: 9.8pt; font-weight: 700; line-height: 1.35; }
+  .shop .info .l b { color: #D4AF37; }
+  .shop .info .s { font-size: 8.2pt; color: #B7AE97; margin-top: 2px; letter-spacing: 1px; }
+  .shop .stamp { flex: 0 0 150px; padding: 4px; display: flex; }
+  .shop .stamp span { flex: 1; border: 1px dashed #8A6A1F; color: #9A7B2A; font-size: 8pt; letter-spacing: 3px;
+    display: flex; align-items: center; justify-content: center; min-height: 40px; text-align: center; }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <div class="masthead">
+    <div class="brand">ZONE 27 戰報
+      <span class="en">THE PRE-MATCH BRIEF</span>
+    </div>
+    <div class="sportbox">
+      <svg width="52" height="52" viewBox="0 0 40 40" aria-hidden="true">
+        <circle cx="20" cy="20" r="17" fill="none" stroke="#0F1A2E" stroke-width="2.2"/>
+        <path d="M20 15 L24.76 18.45 L22.94 24.05 L17.06 24.05 L15.24 18.45 Z" fill="none" stroke="#0F1A2E" stroke-width="1.6"/>
+        <path d="M20 15 L20 4 M24.76 18.45 L33 13 M22.94 24.05 L30 32 M17.06 24.05 L10 32 M15.24 18.45 L7 13" stroke="#8A6A1F" stroke-width="1.4"/>
+      </svg>
+      <div>
+        <span class="name">足 球</span>
+        <span class="sub">冰島 1. deild · 第二級聯賽</span>
+      </div>
+      <div class="no">
+        <b>NO. 045</b><br>2026 · 07 · 15
+      </div>
+    </div>
+  </div>
+
+  <div class="match">
+    <div class="comp">冰島足球 1. deild karla · 第二級聯賽</div>
+    <h1>雷克雅未克體育會 @ 科帕沃古</h1>
+    <div class="meta">科帕沃古主場(冰島)· 台北 7/15(三)凌晨 01:00 開球</div>
+    <div class="meta">主隊 科帕沃古 HK 第 4(7-1-5)· 客隊 雷克雅未克 ÍR 第 9(3-3-7)· 共 12 隊</div>
+  </div>
+
+  <div class="tldr">
+    <span class="tag">10 秒看完</span>
+    <p>兩邊後防都在漏,盤口把總分開得很高、大家都想買大分 —— 這方向不算錯。 但有個細節:這兩隊這季唯一一次交手(ÍR 3:1 贏),上半場是 <b>0:0</b>,四顆球全塞在下半場。 進球會來,但它來得晚 —— 賭「上半場開火」,正好跟唯一的實例反著走。</p>
+  </div>
+
+  <div class="ritual">▸ 下注前的小動作:先在心裡定好你想買的,再往下看 —— 看完還想買,才是真的想買。</div>
+
+  <div class="hero0">
+    <span class="n">31</span>
+    <span class="t"><span class="big">客隊 ÍR,這季 13 場被灌進 31 球。</span>
+    場均失 2.38 顆,是全聯盟數一數二的漏勺後防 —— 這就是總分被開到高得離譜的原因。</span>
+  </div>
+
+  <section class="avoid">
+    <h2>先提醒 —— 這兩種,放下比較好</h2>
+    <table>
+      <tr><th style="width:34%">哪種盤</th><th style="width:11%">賠率</th><th style="width:8%"></th><th>提醒你的理由</th></tr>
+      <tr class="dead"><td class="name">上半場 · 大 1.5</td><td class="num">1.75</td><td class="mark">×</td>
+        <td>這兩隊唯一一次碰頭,上半場 0:0、球全在下半場進 —— 拿「上半場開火」當賣點,跟唯一的實例正好相反。</td></tr>
+      <tr class="dead"><td class="name">科帕沃古 主勝 · 不讓分</td><td class="num">1.55</td><td class="mark">×</td>
+        <td>為了贏 55 塊,去賭一支自己防守也不乾淨、還被這個對手贏過的主隊 —— 只要一次平手爆冷就翻船,價太薄。</td></tr>
+    </table>
+    <p class="note">提醒是價格判斷,不是輸贏預測 —— 它們照樣可能中,只是這種價長期買下來會吃虧。</p>
+  </section>
+
+  <section class="keep">
+    <h2>剩下的 —— 才值得花腦筋</h2>
+    <table>
+      <tr><th style="width:34%">哪種盤</th><th style="width:11%">賠率</th><th style="width:9%">星級</th><th>白話講</th></tr>
+      <tr><td>全場 總分 · 大 3.5</td><td class="num">1.70</td><td class="star">★★</td>
+        <td>兩邊後防都不靠譜,客隊漏得兇、主隊也在漏 —— 追進球比猜勝負安全,是全場方向最正的一注。</td></tr>
+      <tr><td>先送 ÍR 一球(客隊受讓)</td><td class="num">1.80</td><td class="star">★★</td>
+        <td>客隊上次就 3:1 贏過對手,實力沒差到被壓著打;讓它先 1 球,ÍR 贏或踢平都中,主隊只贏 1 球也不算你輸 —— 專治「買強主隊」的甜價。</td></tr>
+    </table>
+    <p class="note">賠率為參考盤口、以台灣運彩現場為準。 主隊獨贏壓到 1.5 出頭就是全場都想到了,線再開高一點才有肉。</p>
+  </section>
+
+  <section>
+    <h2>三件你查不到的事</h2>
+    <ul class="facts">
+      <li><b>科帕沃古其實在拚升級。</b>目前 22 分排第 4,離升級附加賽的門檻(第 3 名)只差 2 分 —— 這場對它是輸不得的一戰,主場壓力反而是雙面刃。</li>
+      <li><b>別把它當「鐵桶碰漏勺」。</b>主隊科帕沃古自己也失了 23 球,兩條防線都在漏 —— 這是互相捅破的劇本,不是強弱懸殊。</li>
+      <li><b>冰島次級聯賽,天氣是隱藏的裁判。</b>沿海強風會搞亂長傳和高空球,常踢出莫名其妙的失誤進球 —— 這是查得到的事,不是什麼內幕。</li>
+    </ul>
+  </section>
+
+  <section class="switch">
+    <span class="tag">開打後 · 只看這一件事</span>
+    <h3>上半場打完,進了幾球</h3>
+    <p class="lead">這兩隊唯一一次交手,上半場悶著沒進球,球都是下半場才進的。 半場的比分,決定今晚是不是又一場「後段爆發」。</p>
+    <div class="branch on">
+      <span class="k">半場 0～1 球</span>
+      <p>照上次的劇本走 —— 大分要靠下半場,別急著在上半場就賭定生死。</p>
+    </div>
+    <div class="branch">
+      <span class="k">半場就 2 球起</span>
+      <p>今晚提早開打 —— 大分那條有底了,上半場就想買的人這次賭對了。</p>
+    </div>
+    <p class="lead" style="margin-top:3px;">我們不猜方向 —— 這場的分水嶺,就在這裡。</p>
+  </section>
+
+  <section class="board">
+    <span class="tag">本期看板</span>
+    <h3>看對方向,還要買對格子</h3>
+    <p>兩隊會不會進球多?很可能會。 但「進球多」跟「上半場就進球」是兩回事 —— 方向對了,買錯了時段或玩法,一樣輸。 下注前,先看你要買的那一格,跟手上的證據對不對得上。<b>本報負責把價看清楚 —— 決定,永遠在您手上。</b></p>
+    <p class="sign">—— ZONE 27 主編</p>
+  </section>
+
+  <div class="verify">賠率是公開的,你自己也查得到 —— 我們做的,就是幫你把太貴的先劃掉。</div>
+
+  <div class="baseline">
+    <span>星星是價格評論,不是輸贏預測 · 本報不收博彩業者的廣告與贊助 · 不保證獲利<br>資料:冰島足協(KSÍ)· 歐洲足球數據站 · 台灣運彩</span>
+    <span class="right"><b>《ZONE 27 戰報》NO. 045</b> · 每日免費出刊<br>zone27.com.tw</span>
+  </div>
+
+  <div class="shop">
+    <div class="info">
+      <span class="l">這一張,是 <b>本店</b> 每天免費為您備妥的。</span>
+      <span class="s">天天一張新的 · 明天記得再來拿</span>
+    </div>
+    <div class="stamp"><span>本店店章 · 店名</span></div>
+  </div>
+
+</div>
+</body>
+</html>
