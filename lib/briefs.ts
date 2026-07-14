@@ -38,8 +38,8 @@ export const BRIEFS: BriefIssue[] = [
   { no: "003", date: "2026-07-06", sport: "籃球", matchup: "菲律賓 @ 澳洲" },
   { no: "004", date: "2026-07-06", sport: "籃球", matchup: "日本 @ 南韓" },
   { no: "005", date: "2026-07-06", sport: "籃球", matchup: "首五期 · 賽後對帳版", note: "對帳版", hidden: true },
-  { no: "006", date: "2026-07-07", sport: "棒球", matchup: "響尾蛇 @ 教士" },
-  { no: "007", date: "2026-07-07", sport: "棒球", matchup: "藍鳥 @ 巨人" },
+  { no: "006", date: "2026-07-07", sport: "棒球", matchup: "響尾蛇 @ 教士", hidden: true },
+  { no: "007", date: "2026-07-07", sport: "棒球", matchup: "藍鳥 @ 巨人", hidden: true },
   { no: "008", date: "2026-07-07", sport: "籃球", matchup: "風暴 @ 火花" },
   { no: "009", date: "2026-07-07", sport: "棒球", matchup: "阪神虎 @ 讀賣巨人" },
   { no: "010", date: "2026-07-07", sport: "棒球", matchup: "軟銀鷹 @ 歐力士" },
@@ -81,6 +81,10 @@ export const BRIEFS: BriefIssue[] = [
     bigNum: "13", bigNumUnit: "球", hook: "原稿沒提的主場射手 · 全聯盟進球王" },
   { no: "038", date: "2026-07-17", sport: "足球", matchup: "堪薩斯城體育 @ 聖路易城",
     bigNum: "36", bigNumUnit: "失球", hook: "墊底隊丟 36 球 · 便宜的大分早沒了" },
+  { no: "039", date: "2026-07-17", sport: "足球", matchup: "多倫多 @ 蒙特婁",
+    bigNum: "9", bigNumUnit: "球", hook: "得分王進 9 球 · 卻停賽踢不到" },
+  { no: "040", date: "2026-07-15", sport: "足球", matchup: "西班牙 @ 法國",
+    bigNum: "39", bigNumUnit: "%", hook: "世界盃四強 · 機器看好客隊西班牙" },
 ];
 
 /** A4 原版的靜態網址(public/briefs)。 */
