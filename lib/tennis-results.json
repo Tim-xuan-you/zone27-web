@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-07-14T19:55:16.794Z",
+  "generatedAt": "2026-07-14T22:39:37.910Z",
   "source": "site.api.espn.com tennis scoreboard (atp+wta singles · official · public · 0 auth)",
-  "count": 1836,
+  "count": 1840,
   "games": [
     {
       "tour": "atp",
@@ -17844,6 +17844,16 @@
       "retired": false
     },
     {
+      "tour": "atp",
+      "tournament": "Plava Laguna Croatia Open Umag",
+      "grouping": "Men's Singles",
+      "date": "2026-07-14",
+      "winnerName": "Titouan Droguet",
+      "loserName": "Alexander Blockx",
+      "score": "3-6 6-2 6-0",
+      "retired": false
+    },
+    {
       "tour": "wta",
       "tournament": "ATV Bancomat Tennis Open",
       "grouping": "Women's Singles",
@@ -18318,8 +18328,28 @@
       "tournament": "Vanda Pharmaceuticals Athens Open",
       "grouping": "Women's Singles",
       "date": "2026-07-14",
+      "winnerName": "Aliaksandra Sasnovich",
+      "loserName": "Anna Blinkova",
+      "score": "3-6 6-2 6-2",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Vanda Pharmaceuticals Athens Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-14",
       "winnerName": "Alina Korneeva",
       "loserName": "Aoi Ito",
+      "score": "6-2 6-1",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Vanda Pharmaceuticals Athens Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-14",
+      "winnerName": "Ann Li",
+      "loserName": "Maria Timofeeva",
       "score": "6-2 6-1",
       "retired": false
     },
@@ -18361,6 +18391,16 @@
       "winnerName": "Miriana Tona",
       "loserName": "Sapfo Sakellaridi",
       "score": "7-6 5-7 6-2",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Vanda Pharmaceuticals Athens Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-14",
+      "winnerName": "Tereza Valentova",
+      "loserName": "Sofia Costoulas",
+      "score": "6-1 6-2",
       "retired": false
     }
   ]
