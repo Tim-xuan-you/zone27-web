@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-07-15T14:26:39.115Z",
+  "generatedAt": "2026-07-15T16:55:11.901Z",
   "source": "site.api.espn.com tennis scoreboard (atp+wta singles · official · public · 0 auth)",
-  "count": 1853,
+  "count": 1867,
   "games": [
     {
       "tour": "atp",
@@ -16588,6 +16588,16 @@
       "tournament": "Enka Open",
       "grouping": "Women's Singles",
       "date": "2026-07-12",
+      "winnerName": "Darya Khamutsianskaya",
+      "loserName": "Saumya Vig",
+      "score": "6-0 6-0",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Enka Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-12",
       "winnerName": "Isabella Shinikova",
       "loserName": "Doga Turkmen",
       "score": "6-0 6-1",
@@ -17209,6 +17219,16 @@
       "grouping": "Women's Singles",
       "date": "2026-07-13",
       "winnerName": "Daria Khomutsianskaya",
+      "loserName": "Zhang Ying",
+      "score": "1-6 6-4 7-5",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Enka Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-13",
+      "winnerName": "Darya Khamutsianskaya",
       "loserName": "Zhang Ying",
       "score": "1-6 6-4 7-5",
       "retired": false
@@ -17968,6 +17988,16 @@
       "tournament": "Enka Open",
       "grouping": "Women's Singles",
       "date": "2026-07-14",
+      "winnerName": "Darya Khamutsianskaya",
+      "loserName": "Priska Nugroho",
+      "score": "6-4 6-1",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Enka Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-14",
       "winnerName": "Gao Xinyu",
       "loserName": "Linda Fruhvirtova",
       "score": "7-6 4-6 6-3",
@@ -18398,9 +18428,29 @@
       "tournament": "EFG Swiss Open Gstaad",
       "grouping": "Men's Singles",
       "date": "2026-07-15",
+      "winnerName": "Arthur Rinderknech",
+      "loserName": "Clement Tabur",
+      "score": "6-7 7-6 7-5",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "EFG Swiss Open Gstaad",
+      "grouping": "Men's Singles",
+      "date": "2026-07-15",
       "winnerName": "Raphael Collignon",
       "loserName": "Lorenzo Sonego",
       "score": "7-6 7-6",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "EFG Swiss Open Gstaad",
+      "grouping": "Men's Singles",
+      "date": "2026-07-15",
+      "winnerName": "Valentin Vacherot",
+      "loserName": "Yannick Hanfmann",
+      "score": "4-6 6-3 6-4",
       "retired": false
     },
     {
@@ -18421,6 +18471,46 @@
       "winnerName": "Nuno Borges",
       "loserName": "Grigor Dimitrov",
       "score": "6-4 6-2",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Nordea Open",
+      "grouping": "Men's Singles",
+      "date": "2026-07-15",
+      "winnerName": "Stefano Travaglia",
+      "loserName": "Mariano Navone",
+      "score": "6-4 6-2",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Plava Laguna Croatia Open Umag",
+      "grouping": "Men's Singles",
+      "date": "2026-07-15",
+      "winnerName": "Damir Dzumhur",
+      "loserName": "Juan Carlos Prado Angelo",
+      "score": "7-6 6-1",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Plava Laguna Croatia Open Umag",
+      "grouping": "Men's Singles",
+      "date": "2026-07-15",
+      "winnerName": "Daniel Merida",
+      "loserName": "Tomas Martin Etcheverry",
+      "score": "7-5 6-4",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Plava Laguna Croatia Open Umag",
+      "grouping": "Men's Singles",
+      "date": "2026-07-15",
+      "winnerName": "Matteo Arnaldi",
+      "loserName": "Federico Agustin Gomez",
+      "score": "6-3 5-7 6-3",
       "retired": false
     },
     {
@@ -18448,6 +18538,16 @@
       "tournament": "Enka Open",
       "grouping": "Women's Singles",
       "date": "2026-07-15",
+      "winnerName": "Aliona Falei",
+      "loserName": "Kristina Penickova",
+      "score": "7-5 3-6 6-3",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Enka Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-15",
       "winnerName": "Hanne Vandewinkel",
       "loserName": "Weronika Falkowska",
       "score": "6-4 3-6 6-4",
@@ -18461,6 +18561,16 @@
       "winnerName": "Harmony Tan",
       "loserName": "Anastasia Gasanova",
       "score": "6-1 6-4",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Enka Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-15",
+      "winnerName": "Lanlana Tararudee",
+      "loserName": "Gabriela Knutson",
+      "score": "4-6 6-4 6-1",
       "retired": false
     },
     {
@@ -18515,6 +18625,16 @@
     },
     {
       "tour": "wta",
+      "tournament": "Nordea Open",
+      "grouping": "Men's Singles",
+      "date": "2026-07-15",
+      "winnerName": "Stefano Travaglia",
+      "loserName": "Mariano Navone",
+      "score": "6-4 6-2",
+      "retired": false
+    },
+    {
+      "tour": "wta",
       "tournament": "Unicredit Iasi Open",
       "grouping": "Women's Singles",
       "date": "2026-07-15",
@@ -18528,9 +18648,29 @@
       "tournament": "Unicredit Iasi Open",
       "grouping": "Women's Singles",
       "date": "2026-07-15",
+      "winnerName": "Tamara Zidansek",
+      "loserName": "Anna Bondar",
+      "score": "7-6 6-7 7-5",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Unicredit Iasi Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-15",
       "winnerName": "Yulia Putintseva",
       "loserName": "Alina Charaeva",
       "score": "6-3 6-3",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Vanda Pharmaceuticals Athens Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-15",
+      "winnerName": "Zheng Qinwen",
+      "loserName": "Elena Micic",
+      "score": "6-4 6-1",
       "retired": false
     }
   ]
