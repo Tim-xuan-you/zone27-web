@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-07-15T19:51:07.560Z",
+  "generatedAt": "2026-07-15T22:40:16.050Z",
   "source": "site.api.espn.com tennis scoreboard (atp+wta singles · official · public · 0 auth)",
-  "count": 1880,
+  "count": 1884,
   "games": [
     {
       "tour": "atp",
@@ -18538,6 +18538,16 @@
       "tournament": "Plava Laguna Croatia Open Umag",
       "grouping": "Men's Singles",
       "date": "2026-07-15",
+      "winnerName": "Alex Molcan",
+      "loserName": "Dino Prizmic",
+      "score": "3-6 7-6 4-0",
+      "retired": true
+    },
+    {
+      "tour": "atp",
+      "tournament": "Plava Laguna Croatia Open Umag",
+      "grouping": "Men's Singles",
+      "date": "2026-07-15",
       "winnerName": "Camilo Ugo Carabelli",
       "loserName": "Pablo Carreno Busta",
       "score": "3-6 7-5 7-5",
@@ -18581,6 +18591,16 @@
       "winnerName": "Roman Andres Burruchaga",
       "loserName": "Flavio Cobolli",
       "score": "6-2 6-4",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Plava Laguna Croatia Open Umag",
+      "grouping": "Men's Singles",
+      "date": "2026-07-15",
+      "winnerName": "Titouan Droguet",
+      "loserName": "Luca Van Assche",
+      "score": "6-1 1-6 7-5",
       "retired": false
     },
     {
@@ -18758,6 +18778,16 @@
       "tournament": "Unicredit Iasi Open",
       "grouping": "Women's Singles",
       "date": "2026-07-15",
+      "winnerName": "Petra Marcinko",
+      "loserName": "Elina Avanesyan",
+      "score": "7-6 7-6",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Unicredit Iasi Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-15",
       "winnerName": "Tamara Zidansek",
       "loserName": "Anna Bondar",
       "score": "7-6 6-7 7-5",
@@ -18771,6 +18801,16 @@
       "winnerName": "Yulia Putintseva",
       "loserName": "Alina Charaeva",
       "score": "6-3 6-3",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Vanda Pharmaceuticals Athens Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-15",
+      "winnerName": "Alycia Parks",
+      "loserName": "Mai Hontama",
+      "score": "6-7 6-2 7-5",
       "retired": false
     },
     {
