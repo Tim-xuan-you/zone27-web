@@ -22,6 +22,7 @@ function getTaipeiTodayChip(): string {
 // /brief 底線小字 + sitemap + 內文連結仍可達(保固書收進抽屜,不是撕掉)。
 const PRIMARY_LINKS = [
   { label: "戰報", href: "/brief" },
+  { label: "給門市", href: "/shops" },
   { label: "今晚這桌", href: "/table" },
   { label: "會員", href: "/membership" },
 ];

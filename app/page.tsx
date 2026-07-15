@@ -210,6 +210,19 @@ export default async function Home() {
               {duel ? "今日一戰 · 你 vs 機器 →" : "看今晚的開盤 →"}
             </Link>
           </div>
+
+          {/* R307 · 「給門市」低調鏈(Tim 問「哪裡放我們很有權威的感覺」)。
+              🔴 刻意【不是】宣示條:Tim 2026-07-13 才親手砍掉首頁字牆「都是字 · 門面竟然趕客」——
+              權威用說的一定假。 一條 10px 灰鏈,對店家是招募(散播=真瓶頸),對賭徒是
+              「原來這網站還有給門市的專區」→ 權威感由他自己推論,不是我們宣稱的。 */}
+          <p className="mt-5">
+            <Link
+              href="/shops"
+              className="font-mono text-mute/55 hover:text-gold text-[10px] tracking-[0.2em] transition-colors"
+            >
+              ▸ 開運彩門市的?這張可以免費印給您的客人 →
+            </Link>
+          </p>
         </section>
 
         {/* ── 今晚 · 引擎開的盤(R263「活盤」board · 取代單卡)──────────────────────

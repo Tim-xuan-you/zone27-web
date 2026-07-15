@@ -107,6 +107,11 @@ export const BRIEFS: BriefIssue[] = [
     code: "Z27·B196A", bigNum: "5", bigNumUnit: "次四壞", hook: "制球王對上剛從二軍回來的洋將" },
   { no: "049", date: "2026-07-15", sport: "棒球", matchup: "讀賣巨人 @ 養樂多燕子",
     code: "Z27·B196B", bigNum: "9", bigNumUnit: "勝", hook: "第 3 名的主隊 · 對第 2 名贏很兇" },
+  // 🔴 排球 VNL 大阪站 = 中立場地(只有日本是地主)→ matchup 用「vs」不用「@」(客@主不成立)。
+  { no: "050", date: "2026-07-15", sport: "排球", matchup: "阿根廷 vs 加拿大",
+    code: "Z27·V196A", bigNum: "8", bigNumUnit: "分", hook: "積分比對手高 · 排名卻更低" },
+  { no: "051", date: "2026-07-15", sport: "排球", matchup: "古巴 vs 比利時",
+    code: "Z27·V196B", bigNum: "89", bigNumUnit: "分", hook: "分數比對手多 · 還是輸了整場" },
 ];
 
 /** A4 原版的靜態網址(public/briefs)。 */

@@ -32,6 +32,8 @@ const ROUTES: Entry[] = [
   { path: "/badminton", priority: 0.8, changeFrequency: "daily" },
   // R297 · 戰報(米其林式賽前評鑑)· 每日出刊 · 過刊摺疊。
   { path: "/brief", priority: 0.8, changeFrequency: "daily" },
+  // R307 · 給運彩門市(通路招募 + 權威規格)· 戰報是主打 → 這頁是它的通路面。
+  { path: "/shops", priority: 0.7, changeFrequency: "weekly" },
   { path: "/table", priority: 0.7, changeFrequency: "daily" },
   { path: "/pulse", priority: 0.7, changeFrequency: "daily" },
   { path: "/ladder", priority: 0.6, changeFrequency: "daily" },
