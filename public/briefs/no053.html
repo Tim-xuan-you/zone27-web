@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<title>ZONE 27 戰報 Z27·B196D · 歐力士猛牛 @ 樂天金鷲</title>
+<style>
+  /* ── ZONE 27 戰報 · 門店列印版 · A4 一頁 · v23(電文呼號 + 店家專屬欄 + 去重)· 猜銅板類盤一律不列 ── */
+  @page { size: A4; margin: 10mm 12mm; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body { font-family: "Microsoft JhengHei", "Noto Sans TC", "PingFang TC", sans-serif;
+    color: #111; background: #e8e8e8; font-size: 10pt; line-height: 1.4; }
+  .sheet { width: 210mm; min-height: 296mm; margin: 0 auto; background: #fff; padding: 11mm 13mm 8mm; }
+  @media print { body { background: #fff; } .sheet { width: auto; min-height: auto; margin: 0; padding: 0; zoom: 0.78; } }
+
+  .masthead { display: flex; justify-content: space-between; align-items: center;
+    border-bottom: 3.5px solid #0F1A2E; padding-bottom: 5px; margin-bottom: 6px; }
+  .brand { font-size: 19pt; font-weight: 900; letter-spacing: 2px; color: #0F1A2E; }
+  .brand .en { font-size: 8pt; font-weight: 600; letter-spacing: 3px; color: #8A6A1F; display: block; margin-top: 1px; }
+  .sportbox { display: flex; align-items: center; gap: 10px; }
+  .sportbox .name { font-size: 22pt; font-weight: 900; color: #0F1A2E; letter-spacing: 4px; line-height: 1.1; }
+  .sportbox .sub { font-size: 8.5pt; color: #666; letter-spacing: 2px; display: block; margin-top: 1px; }
+  .sportbox .no { text-align: right; font-size: 8.5pt; color: #444; line-height: 1.5; border-left: 1px solid #ccc; padding-left: 10px; }
+  .sportbox .no b { color: #0F1A2E; }
+  .sportbox .no .sig { font-size: 7pt; color: #8A6A1F; letter-spacing: 1.5px; }
+
+  .match { margin-bottom: 5px; }
+  .match .comp { font-size: 9pt; font-weight: 700; color: #8A6A1F; letter-spacing: 2px; }
+  .match h1 { font-size: 19pt; font-weight: 900; color: #0F1A2E; letter-spacing: 1px; line-height: 1.3; }
+  .match .meta { font-size: 9.5pt; color: #444; margin-top: 2px; }
+
+  .tldr { background: #0F1A2E; color: #E9E4D8; padding: 5px 12px; margin-bottom: 4px; }
+  .tldr .tag { font-size: 8pt; letter-spacing: 3px; color: #D4AF37; font-weight: 700; }
+  .tldr p { font-size: 11pt; font-weight: 700; line-height: 1.42; margin-top: 2px; }
+  .tldr b { color: #D4AF37; }
+
+  .ritual { border: 1.5px dashed #8A6A1F; background: #FDFBF5; padding: 4px 10px;
+    font-size: 9.8pt; font-weight: 700; color: #0F1A2E; margin-bottom: 5px; }
+
+  .hero0 { display: flex; align-items: center; gap: 14px; border: 2px solid #0F1A2E;
+    padding: 4px 14px; margin-bottom: 4px; background: #FAFAF7; }
+  .hero0 .n { font-size: 36pt; font-weight: 900; color: #0F1A2E; line-height: 1; letter-spacing: 0; }
+  .hero0 .t { font-size: 10.5pt; line-height: 1.42; }
+  .hero0 .t b { color: #8A6A1F; }
+  .hero0 .t .big { font-size: 12pt; font-weight: 900; color: #0F1A2E; display: block; }
+
+  section { margin-bottom: 3px; }
+  h2 { font-size: 11pt; font-weight: 800; color: #0F1A2E; letter-spacing: 1.5px;
+    border-left: 4px solid #8A6A1F; padding-left: 7px; margin-bottom: 2px; }
+
+  .avoid table, .keep table { width: 100%; border-collapse: collapse; font-size: 9.8pt; }
+  .avoid th, .avoid td, .keep th, .keep td { border: 1px solid #ccc; padding: 2px 7px; text-align: left; vertical-align: middle; }
+  .avoid th, .keep th { background: #EFEBE0; color: #0F1A2E; font-size: 9pt; letter-spacing: 1px; }
+  .avoid td.num, .keep td.num { text-align: center; white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .avoid td.mark { text-align: center; color: #333; font-weight: 900; font-size: 12pt; width: 8%; }
+  .avoid tr.dead td { color: #777; background: #f3f3f3; }
+  .avoid tr.dead td.name, .avoid tr.dead td.num { text-decoration: line-through; text-decoration-thickness: 1.5px; text-decoration-color: #444; }
+  .keep td.star { text-align: center; white-space: nowrap; color: #8A6A1F; font-weight: 900; font-size: 10.5pt; width: 9%; }
+  .note { font-size: 8.5pt; color: #666; margin-top: 2px; }
+
+  .facts { counter-reset: fact; }
+  .facts li { list-style: none; padding-left: 17px; position: relative; margin-bottom: 2px; }
+  .facts li::before { content: counter(fact) ""; counter-increment: fact; position: absolute; left: 0;
+    font-weight: 900; color: #8A6A1F; font-size: 10.5pt; }
+
+  /* 賽中觀察欄 */
+  .switch { border: 2px solid #0F1A2E; padding: 6px 11px; background: #FAFAF7; }
+  .switch .tag { font-size: 8pt; letter-spacing: 2px; color: #8A6A1F; font-weight: 800; }
+  .switch h3 { font-size: 13pt; font-weight: 900; color: #0F1A2E; margin: 1px 0 2px; letter-spacing: 0.5px; }
+  .switch p.lead { font-size: 9.8pt; margin-bottom: 3px; }
+  .branch { display: flex; gap: 8px; margin: 2px 0; align-items: flex-start; }
+  .branch .k { flex: 0 0 122px; text-align: center; font-weight: 900; font-size: 9.5pt; padding: 2px 0;
+    border: 1.5px solid #0F1A2E; color: #0F1A2E; }
+  .branch.on .k { background: #0F1A2E; color: #E9E4D8; }
+  .branch p { font-size: 9.8pt; flex: 1; }
+
+  .board { border: 2.5px solid #8A6A1F; background: #FAF6EC; padding: 6px 12px; }
+  .board .tag { font-size: 8pt; letter-spacing: 3px; color: #8A6A1F; font-weight: 800; }
+  .board h3 { font-size: 13pt; font-weight: 900; color: #0F1A2E; letter-spacing: 0.5px; margin: 1px 0 2px; }
+  .board p { font-size: 9.8pt; line-height: 1.42; }
+  .board .sign { text-align: right; font-size: 8.5pt; color: #8A6A1F; font-weight: 800; letter-spacing: 2px; margin-top: 3px; }
+
+  .baseline { border-top: 3px solid #0F1A2E; margin-top: 6px; padding-top: 5px;
+    display: flex; justify-content: space-between; gap: 12px; font-size: 8pt; color: #555; line-height: 1.6; }
+  .baseline .right { text-align: right; white-space: nowrap; }
+  .baseline b { color: #0F1A2E; }
+  .verify { font-size: 8.5pt; color: #0F1A2E; font-weight: 700; text-align: center;
+    border: 1.2px dashed #8A6A1F; background: #FDFBF5; padding: 3px 10px; margin-top: 5px; }
+
+  /* 店家專屬欄 */
+  .shop { display: flex; align-items: stretch; border: 2px solid #0F1A2E; margin-top: 5px; }
+  .shop .info { flex: 1; background: #0F1A2E; color: #E9E4D8; padding: 5px 12px; display: flex; flex-direction: column; justify-content: center; }
+  .shop .info .l { font-size: 9.8pt; font-weight: 700; line-height: 1.35; }
+  .shop .info .l b { color: #D4AF37; }
+  .shop .info .s { font-size: 8.2pt; color: #B7AE97; margin-top: 2px; letter-spacing: 1px; }
+  .shop .stamp { flex: 0 0 150px; padding: 4px; display: flex; }
+  .shop .stamp span { flex: 1; border: 1px dashed #8A6A1F; color: #9A7B2A; font-size: 8pt; letter-spacing: 3px;
+    display: flex; align-items: center; justify-content: center; min-height: 40px; text-align: center; }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <div class="masthead">
+    <div class="brand">ZONE 27 戰報
+      <span class="en">THE PRE-MATCH BRIEF</span>
+    </div>
+    <div class="sportbox">
+      <svg width="52" height="52" viewBox="0 0 40 40" aria-hidden="true">
+        <circle cx="20" cy="20" r="17" fill="none" stroke="#0F1A2E" stroke-width="2.2"/>
+        <path d="M9 6.5 C15.5 13, 15.5 27, 9 33.5" fill="none" stroke="#8A6A1F" stroke-width="1.6"/>
+        <path d="M31 6.5 C24.5 13, 24.5 27, 31 33.5" fill="none" stroke="#8A6A1F" stroke-width="1.6"/>
+        <path d="M11 12 L14.6 13.6 M11.6 20 L15.2 20 M11 28 L14.6 26.4" stroke="#0F1A2E" stroke-width="1.2"/>
+        <path d="M29 12 L25.4 13.6 M28.4 20 L24.8 20 M29 28 L25.4 26.4" stroke="#0F1A2E" stroke-width="1.2"/>
+      </svg>
+      <div>
+        <span class="name">棒 球</span>
+        <span class="sub">日本職棒 NPB · 洋聯</span>
+      </div>
+      <div class="no">
+        <b>Z27·B196D</b><br><span class="sig">電文編號</span> · 2026·07·15
+      </div>
+    </div>
+  </div>
+
+  <div class="match">
+    <div class="comp">日本職棒 NPB · 太平洋聯盟</div>
+    <h1>歐力士猛牛 @ 樂天金鷲</h1>
+    <div class="meta">樂天生命公園宮城(仙台)· 日本 18:00 / 台北 17:00 開打</div>
+    <div class="meta">主隊樂天 洋聯第 6(32-49-1)· 客隊歐力士 洋聯第 4(42-39-2)· 先發 前田健太 對 片山樂生</div>
+  </div>
+
+  <div class="tldr">
+    <span class="tag">10 秒看完</span>
+    <p>盤口把樂天開成 <b>1.68</b> 的熱門,你買的是「前田」,不是「樂天」。 但這兩個不是同一件事 —— 前田本季防禦率 2.97,戰績卻只有 2 勝 3 敗,因為這支墊底的球隊<b>給不了他分數</b>。</p>
+  </div>
+
+  <div class="ritual">▸ 下注前的小動作:先在心裡定好你想買的,再往下看 —— 看完還想買,才是真的想買。</div>
+
+  <div class="hero0">
+    <span class="n">99</span>
+    <span class="t"><span class="big">前田健太的日本職棒生涯,停在 99 勝。</span>
+    今晚贏了就是第 100 勝 —— 那是<b>日本國內</b>的 100 勝(他的日美通算早就 167 勝了,那是另一本帳)。 他休滿 10 天,回的是全聯盟墊底的球隊。</span>
+  </div>
+
+  <section class="avoid">
+    <h2>先提醒 —— 這兩種,放下比較好</h2>
+    <table>
+      <tr><th style="width:33%">哪種盤</th><th style="width:13%">賠率</th><th style="width:8%"></th><th>提醒你的理由</th></tr>
+      <tr class="dead"><td class="name">樂天 不讓分 · 獨贏</td><td class="num">1.68</td><td class="mark">×</td>
+        <td>1.68 要你每 5 次中 3 次。 但這條要收錢,得靠一支勝率不到四成的打線去得分 —— 你買的是投手,付的卻是球隊的價。</td></tr>
+      <tr class="dead"><td class="name">歐力士 單隊 · 大 3.5</td><td class="num">1.50</td><td class="mark">×</td>
+        <td>面對一個休滿 10 天、防禦率 2 字頭的老經驗投手,要客隊拿到 4 分以上,卻只給你 1.50。</td></tr>
+    </table>
+    <p class="note">提醒是價格判斷,不是輸贏預測 —— 它們照樣可能中,只是這種價長期買下來會吃虧。</p>
+  </section>
+
+  <section class="keep">
+    <h2>剩下的 —— 才值得花腦筋</h2>
+    <table>
+      <tr><th style="width:33%">哪種盤</th><th style="width:13%">賠率</th><th style="width:9%">星級</th><th>白話講</th></tr>
+      <tr><td>前 5 局 · 不讓分 · 樂天</td><td class="num">1.85</td><td class="star">★★</td>
+        <td>把範圍縮到前 5 局,就繞開了「墊底球隊得撐完九局」這個條件。 前田休滿 10 天、開局最強;對面推的是整季 13 場全打後援的人 —— 落差最大的就是這一段。</td></tr>
+      <tr><td>前 5 局 · 總分 · 小 3.5</td><td class="num">1.85</td><td class="star">★</td>
+        <td>前田壓得住,片山其實也不差(整季防禦率 3.00)。 但兩隊昨晚全場才合砍 4 分,低分這件事全場都看到了 —— 這條線不甜。</td></tr>
+    </table>
+    <p class="note">賠率以台灣運彩現場為準。 同一個方向有兩格可以站的時候,先看哪一格要求你賭的事比較少。</p>
+  </section>
+
+  <section>
+    <h2>三件你查不到的事</h2>
+    <ul class="facts">
+      <li><b>歐力士在這座球場,今年 0 勝 4 敗 —— 球團史上第一次。</b>排第 4 的隊,在墊底球隊的主場開季就吞四連敗,是這支球團從來沒發生過的事。 岸田護監督說:「我們有想過對策,但打線就是串不起來。」</li>
+      <li><b>今晚是 PL 學園最後兩個現役球員的第一次對決。</b>那所學校的棒球部 2016 年就停止活動,現役職業球員裡只剩前田和歐力士的中川圭太 —— 而中川正是昨晚連兩場開轟、包辦歐力士唯一得分的那個人。</li>
+      <li><b>前田上一場差點投出睽違 12 年的完封。</b>7 月 4 日對火腿投到 9 局 2 出局才被換下 —— 監督上來時他故意往中外野走,想說對方會不會自己回去;沒用,賽後他先道歉:「真的沒能完封,對不起。」</li>
+    </ul>
+  </section>
+
+  <section class="switch">
+    <span class="tag">開打後 · 只看這一件事</span>
+    <h3>中川圭太第一次站上來</h3>
+    <p class="lead">他連兩場開轟,昨晚歐力士唯一的分數就是他打的。 而他是前田在 PL 學園的直系學弟,兩人生涯從沒對過 —— 學長要那第 100 勝,第一關就是他。</p>
+    <div class="branch on">
+      <span class="k">前田把他壓下去</span>
+      <p>前田在自己的節奏上 —— 前 5 局那幾格站得住。</p>
+    </div>
+    <div class="branch">
+      <span class="k">中川又打出去</span>
+      <p>歐力士唯一熱的那根棒子點著了 —— 分數會從這裡開始跑。</p>
+    </div>
+    <p class="lead" style="margin-top:3px;">我們不猜方向 —— 這場的分水嶺,就在這裡。</p>
+  </section>
+
+  <section class="board">
+    <span class="tag">本期看板</span>
+    <h3>要收到錢,總共得有幾件事同時發生?</h3>
+    <p>「某隊贏」跟「某隊的先發投得好」是兩件事,中間隔著一整條打線 —— 投手可以投出全聯盟前段的內容,然後因為隊友不給分而吞敗。 所以每一格都先問一句:要收到錢,總共得有幾件事同時發生?<b>本報負責把價看清楚 —— 決定,永遠在您手上。</b></p>
+    <p class="sign">—— ZONE 27 主編</p>
+  </section>
+
+  <div class="verify">賠率是公開的,你自己也查得到 —— 我們做的,就是幫你把太貴的先劃掉。</div>
+
+  <div class="baseline">
+    <span>星星是價格評論,不是輸贏預測 · 本報不收博彩業者的廣告與贊助 · 不保證獲利<br>資料:日本職棒(NPB)官方 · 日媒賽前報導 · 台灣運彩</span>
+    <span class="right"><b>《ZONE 27 戰報》Z27·B196D</b> · 每日免費出刊<br>zone27.com.tw</span>
+  </div>
+
+  <div class="shop">
+    <div class="info">
+      <span class="l">這一張,是 <b>本店</b> 每天免費為您備妥的。</span>
+      <span class="s">天天一張新的 · 明天記得再來拿</span>
+    </div>
+    <div class="stamp"><span>本店店章 · 店名</span></div>
+  </div>
+
+</div>
+</body>
+</html>

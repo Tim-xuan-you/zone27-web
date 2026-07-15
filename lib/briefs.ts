@@ -112,6 +112,10 @@ export const BRIEFS: BriefIssue[] = [
     code: "Z27·V196A", bigNum: "8", bigNumUnit: "分", hook: "積分比對手高 · 排名卻更低" },
   { no: "051", date: "2026-07-15", sport: "排球", matchup: "古巴 vs 比利時",
     code: "Z27·V196B", bigNum: "89", bigNumUnit: "分", hook: "分數比對手多 · 還是輸了整場" },
+  { no: "052", date: "2026-07-15", sport: "棒球", matchup: "阪神虎 @ 中日龍",
+    code: "Z27·B196C", bigNum: "6", bigNumUnit: "公尺", hook: "圍牆往內搬了 · 墳場印象被拆掉" },
+  { no: "053", date: "2026-07-15", sport: "棒球", matchup: "歐力士猛牛 @ 樂天金鷲",
+    code: "Z27·B196D", bigNum: "99", bigNumUnit: "勝", hook: "差一勝滿百 · 但隊友給不了分" },
 ];
 
 /** A4 原版的靜態網址(public/briefs)。 */
