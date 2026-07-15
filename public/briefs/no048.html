@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<title>ZONE 27 戰報 Z27·B196A · 福岡軟銀鷹 @ 日本火腿鬥士</title>
+<style>
+  /* ── ZONE 27 戰報 · 門店列印版 · A4 一頁 · v23(電文呼號 + 店家專屬欄 + 去重)· 猜銅板類盤一律不列 ── */
+  @page { size: A4; margin: 10mm 12mm; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body { font-family: "Microsoft JhengHei", "Noto Sans TC", "PingFang TC", sans-serif;
+    color: #111; background: #e8e8e8; font-size: 10pt; line-height: 1.4; }
+  .sheet { width: 210mm; min-height: 296mm; margin: 0 auto; background: #fff; padding: 11mm 13mm 8mm; }
+  @media print { body { background: #fff; } .sheet { width: auto; min-height: auto; margin: 0; padding: 0; zoom: 0.80; } }
+
+  .masthead { display: flex; justify-content: space-between; align-items: center;
+    border-bottom: 3.5px solid #0F1A2E; padding-bottom: 5px; margin-bottom: 6px; }
+  .brand { font-size: 19pt; font-weight: 900; letter-spacing: 2px; color: #0F1A2E; }
+  .brand .en { font-size: 8pt; font-weight: 600; letter-spacing: 3px; color: #8A6A1F; display: block; margin-top: 1px; }
+  .sportbox { display: flex; align-items: center; gap: 10px; }
+  .sportbox .name { font-size: 22pt; font-weight: 900; color: #0F1A2E; letter-spacing: 4px; line-height: 1.1; }
+  .sportbox .sub { font-size: 8.5pt; color: #666; letter-spacing: 2px; display: block; margin-top: 1px; }
+  .sportbox .no { text-align: right; font-size: 8.5pt; color: #444; line-height: 1.5; border-left: 1px solid #ccc; padding-left: 10px; }
+  .sportbox .no b { color: #0F1A2E; }
+  .sportbox .no .sig { font-size: 7pt; color: #8A6A1F; letter-spacing: 1.5px; }
+
+  .match { margin-bottom: 5px; }
+  .match .comp { font-size: 9pt; font-weight: 700; color: #8A6A1F; letter-spacing: 2px; }
+  .match h1 { font-size: 19pt; font-weight: 900; color: #0F1A2E; letter-spacing: 1px; line-height: 1.3; }
+  .match .meta { font-size: 9.5pt; color: #444; margin-top: 2px; }
+
+  .tldr { background: #0F1A2E; color: #E9E4D8; padding: 5px 12px; margin-bottom: 4px; }
+  .tldr .tag { font-size: 8pt; letter-spacing: 3px; color: #D4AF37; font-weight: 700; }
+  .tldr p { font-size: 11pt; font-weight: 700; line-height: 1.42; margin-top: 2px; }
+  .tldr b { color: #D4AF37; }
+
+  .ritual { border: 1.5px dashed #8A6A1F; background: #FDFBF5; padding: 4px 10px;
+    font-size: 9.8pt; font-weight: 700; color: #0F1A2E; margin-bottom: 5px; }
+
+  .hero0 { display: flex; align-items: center; gap: 14px; border: 2px solid #0F1A2E;
+    padding: 4px 14px; margin-bottom: 4px; background: #FAFAF7; }
+  .hero0 .n { font-size: 36pt; font-weight: 900; color: #0F1A2E; line-height: 1; letter-spacing: 0; }
+  .hero0 .t { font-size: 10.5pt; line-height: 1.42; }
+  .hero0 .t b { color: #8A6A1F; }
+  .hero0 .t .big { font-size: 12pt; font-weight: 900; color: #0F1A2E; display: block; }
+
+  section { margin-bottom: 3px; }
+  h2 { font-size: 11pt; font-weight: 800; color: #0F1A2E; letter-spacing: 1.5px;
+    border-left: 4px solid #8A6A1F; padding-left: 7px; margin-bottom: 2px; }
+
+  .avoid table, .keep table { width: 100%; border-collapse: collapse; font-size: 9.8pt; }
+  .avoid th, .avoid td, .keep th, .keep td { border: 1px solid #ccc; padding: 2px 7px; text-align: left; vertical-align: middle; }
+  .avoid th, .keep th { background: #EFEBE0; color: #0F1A2E; font-size: 9pt; letter-spacing: 1px; }
+  .avoid td.num, .keep td.num { text-align: center; white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .avoid td.mark { text-align: center; color: #333; font-weight: 900; font-size: 12pt; width: 8%; }
+  .avoid tr.dead td { color: #777; background: #f3f3f3; }
+  .avoid tr.dead td.name, .avoid tr.dead td.num { text-decoration: line-through; text-decoration-thickness: 1.5px; text-decoration-color: #444; }
+  .keep td.star { text-align: center; white-space: nowrap; color: #8A6A1F; font-weight: 900; font-size: 10.5pt; width: 9%; }
+  .note { font-size: 8.5pt; color: #666; margin-top: 2px; }
+
+  .facts { counter-reset: fact; }
+  .facts li { list-style: none; padding-left: 17px; position: relative; margin-bottom: 2px; }
+  .facts li::before { content: counter(fact) ""; counter-increment: fact; position: absolute; left: 0;
+    font-weight: 900; color: #8A6A1F; font-size: 10.5pt; }
+
+  /* 賽中觀察欄 */
+  .switch { border: 2px solid #0F1A2E; padding: 6px 11px; background: #FAFAF7; }
+  .switch .tag { font-size: 8pt; letter-spacing: 2px; color: #8A6A1F; font-weight: 800; }
+  .switch h3 { font-size: 13pt; font-weight: 900; color: #0F1A2E; margin: 1px 0 2px; letter-spacing: 0.5px; }
+  .switch p.lead { font-size: 9.8pt; margin-bottom: 3px; }
+  .branch { display: flex; gap: 8px; margin: 2px 0; align-items: flex-start; }
+  .branch .k { flex: 0 0 108px; text-align: center; font-weight: 900; font-size: 9.5pt; padding: 2px 0;
+    border: 1.5px solid #0F1A2E; color: #0F1A2E; }
+  .branch.on .k { background: #0F1A2E; color: #E9E4D8; }
+  .branch p { font-size: 9.8pt; flex: 1; }
+
+  .board { border: 2.5px solid #8A6A1F; background: #FAF6EC; padding: 6px 12px; }
+  .board .tag { font-size: 8pt; letter-spacing: 3px; color: #8A6A1F; font-weight: 800; }
+  .board h3 { font-size: 13pt; font-weight: 900; color: #0F1A2E; letter-spacing: 0.5px; margin: 1px 0 2px; }
+  .board p { font-size: 9.8pt; line-height: 1.42; }
+  .board .sign { text-align: right; font-size: 8.5pt; color: #8A6A1F; font-weight: 800; letter-spacing: 2px; margin-top: 3px; }
+
+  .baseline { border-top: 3px solid #0F1A2E; margin-top: 6px; padding-top: 5px;
+    display: flex; justify-content: space-between; gap: 12px; font-size: 8pt; color: #555; line-height: 1.6; }
+  .baseline .right { text-align: right; white-space: nowrap; }
+  .baseline b { color: #0F1A2E; }
+  .verify { font-size: 8.5pt; color: #0F1A2E; font-weight: 700; text-align: center;
+    border: 1.2px dashed #8A6A1F; background: #FDFBF5; padding: 3px 10px; margin-top: 5px; }
+
+  /* 店家專屬欄 */
+  .shop { display: flex; align-items: stretch; border: 2px solid #0F1A2E; margin-top: 5px; }
+  .shop .info { flex: 1; background: #0F1A2E; color: #E9E4D8; padding: 5px 12px; display: flex; flex-direction: column; justify-content: center; }
+  .shop .info .l { font-size: 9.8pt; font-weight: 700; line-height: 1.35; }
+  .shop .info .l b { color: #D4AF37; }
+  .shop .info .s { font-size: 8.2pt; color: #B7AE97; margin-top: 2px; letter-spacing: 1px; }
+  .shop .stamp { flex: 0 0 150px; padding: 4px; display: flex; }
+  .shop .stamp span { flex: 1; border: 1px dashed #8A6A1F; color: #9A7B2A; font-size: 8pt; letter-spacing: 3px;
+    display: flex; align-items: center; justify-content: center; min-height: 40px; text-align: center; }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <div class="masthead">
+    <div class="brand">ZONE 27 戰報
+      <span class="en">THE PRE-MATCH BRIEF</span>
+    </div>
+    <div class="sportbox">
+      <svg width="52" height="52" viewBox="0 0 40 40" aria-hidden="true">
+        <circle cx="20" cy="20" r="17" fill="none" stroke="#0F1A2E" stroke-width="2.2"/>
+        <path d="M9 6.5 C15.5 13, 15.5 27, 9 33.5" fill="none" stroke="#8A6A1F" stroke-width="1.6"/>
+        <path d="M31 6.5 C24.5 13, 24.5 27, 31 33.5" fill="none" stroke="#8A6A1F" stroke-width="1.6"/>
+        <path d="M11 12 L14.6 13.6 M11.6 20 L15.2 20 M11 28 L14.6 26.4" stroke="#0F1A2E" stroke-width="1.2"/>
+        <path d="M29 12 L25.4 13.6 M28.4 20 L24.8 20 M29 28 L25.4 26.4" stroke="#0F1A2E" stroke-width="1.2"/>
+      </svg>
+      <div>
+        <span class="name">棒 球</span>
+        <span class="sub">日本職棒 NPB · 洋聯</span>
+      </div>
+      <div class="no">
+        <b>Z27·B196A</b><br><span class="sig">電文編號</span> · 2026·07·15
+      </div>
+    </div>
+  </div>
+
+  <div class="match">
+    <div class="comp">日本職棒 NPB · 太平洋聯盟</div>
+    <h1>福岡軟銀鷹 @ 日本火腿鬥士</h1>
+    <div class="meta">ES CON FIELD 北海道 · 日本 13:00 / 台北 12:00 開打(白天場)</div>
+    <div class="meta">主隊火腿 洋聯第 3(48-39)· 客隊軟銀 龍頭第 1(50-31-1)· 本季對戰 軟銀 11 勝 1 敗 · 先發 加藤貴之 對 卡特·史都華</div>
+  </div>
+
+  <div class="tldr">
+    <span class="tag">10 秒看完</span>
+    <p>今天真正決定分數的,不是誰的球比較快 —— 是誰會白送壘包。 兩個先發的保送率差了將近 <b>8 倍</b>。 免費的壘包,通常就是分數的來源;所以這桌的重點在低分那幾格,不在那個貴得沒肉的熱門價。</p>
+  </div>
+
+  <div class="ritual">▸ 下注前的小動作:先在心裡定好你想買的,再往下看 —— 看完還想買,才是真的想買。</div>
+
+  <div class="hero0">
+    <span class="n">5</span>
+    <span class="t"><span class="big">加藤貴之整季 73 局,只白送過 5 個人上壘。</span>
+    他 2022 年整季只投出 11 次四壞球,改寫塵封 72 年的日職紀錄 —— 日媒叫他「制球王」。 今天他站的,是自己本季主場還沒輸過的球場。</span>
+  </div>
+
+  <section class="avoid">
+    <h2>先提醒 —— 這兩種,放下比較好</h2>
+    <table>
+      <tr><th style="width:33%">哪種盤</th><th style="width:13%">賠率</th><th style="width:8%"></th><th>提醒你的理由</th></tr>
+      <tr class="dead"><td class="name">火腿 不讓分 · 獨贏</td><td class="num">1.53</td><td class="mark">×</td>
+        <td>加藤在這座球場本季還沒輸過,這件事全場都知道 —— 1.53 就是把它算光的價,已經沒有肉。</td></tr>
+      <tr class="dead"><td class="name">全場 和局 / 前 5 局 和局</td><td class="num">3.60 / 4.50</td><td class="mark">×</td>
+        <td>要比賽剛好停在平手才算你贏,條件太苛刻 —— 這種賠率補不回它有多難發生。</td></tr>
+    </table>
+    <p class="note">提醒是價格判斷,不是輸贏預測 —— 它們照樣可能中,只是這種價長期買下來會吃虧。</p>
+  </section>
+
+  <section class="keep">
+    <h2>剩下的 —— 才值得花腦筋</h2>
+    <table>
+      <tr><th style="width:33%">哪種盤</th><th style="width:13%">賠率</th><th style="width:9%">星級</th><th>白話講</th></tr>
+      <tr><td>軟銀 單隊 · 小 3.5</td><td class="num">1.85</td><td class="star">★★</td>
+        <td>對面那個左投幾乎不白送壘包,軟銀要湊到 4 分,得一支一支自己打出來 —— 最貼今天設定的一注。</td></tr>
+      <tr><td>全場 總分 · 小 7.5</td><td class="num">1.80</td><td class="star">★★</td>
+        <td>低分的方向順,但它有一半押在客隊那張先發身上 —— 他站得久不久,就是下面那件事。</td></tr>
+      <tr><td>火腿 讓分 -1.5(贏 2 分以上)</td><td class="num">2.07</td><td class="star">★</td>
+        <td>全桌最有肉的價,但它要的是火腿把對面打爆。 那個人 7 月其實正 3 連勝 —— 買的是他崩掉的劇本,不是他現在的手感。</td></tr>
+    </table>
+    <p class="note">賠率以台灣運彩現場為準。 低分向壓到 1.4 出頭,就是全場都想到了。</p>
+  </section>
+
+  <section>
+    <h2>三件你查不到的事</h2>
+    <ul class="facts">
+      <li><b>軟銀今天推的人,十天前才被送下二軍。</b>史都華 7/3 才先發拿下勝投,隔天就被拉下一軍;日職規定下去要滿 10 天才能再上來 —— 今天是他回來的第一場,距離上次先發已經 12 天。</li>
+      <li><b>他去年整季一球都沒投。</b>2025 年春訓傷了左邊腹部,一軍二軍加起來 0 場登板。 那個 5.17 的防禦率,底下墊的是一整年的空白 —— 而他 7 月的防禦率其實是 1.59。</li>
+      <li><b>他當年拒絕過大聯盟第一輪。</b>2018 年勇士隊第 1 輪指名他,體檢查出手腕疑慮後把簽約金砍掉六成 —— 他直接不簽,轉去讀短期大學,隔年 19 歲就來了日本。</li>
+    </ul>
+  </section>
+
+  <section class="switch">
+    <span class="tag">開打後 · 只看這一件事</span>
+    <h3>史都華撐不撐得過 5 局</h3>
+    <p class="lead">他今年 10 次先發,只有 1 次投滿 6 局又把分數壓住,而且 12 天沒上場了。 他站多久,決定今天的分數從第幾局開始跑。</p>
+    <div class="branch on">
+      <span class="k">撐過 5 局</span>
+      <p>低分的劇本還在戲裡 —— 小分那幾格站得住。</p>
+    </div>
+    <div class="branch">
+      <span class="k">5 局前下場</span>
+      <p>軟銀牛棚要吃掉半場球 —— 分數通常就是從這裡開始跑。</p>
+    </div>
+    <p class="lead" style="margin-top:3px;">我們不猜方向 —— 這場的分水嶺,就在這裡。</p>
+  </section>
+
+  <section class="board">
+    <span class="tag">本期看板</span>
+    <h3>能投多久,常常比投得多好更要緊</h3>
+    <p>大家挑先發都在比誰的防禦率漂亮。 但一場球的分數常常不是先發丟掉的 —— 是他下場之後那幾局丟掉的。 能撐四局的好投手,跟能吃七局的普通投手,對盤面是兩件不同的事。<b>本報負責把價看清楚 —— 決定,永遠在您手上。</b></p>
+    <p class="sign">—— ZONE 27 主編</p>
+  </section>
+
+  <div class="verify">賠率是公開的,你自己也查得到 —— 我們做的,就是幫你把太貴的先劃掉。</div>
+
+  <div class="baseline">
+    <span>星星是價格評論,不是輸贏預測 · 本報不收博彩業者的廣告與贊助 · 不保證獲利<br>資料:日本職棒(NPB)官方 · 日媒賽前報導 · 台灣運彩</span>
+    <span class="right"><b>《ZONE 27 戰報》Z27·B196A</b> · 每日免費出刊<br>zone27.com.tw</span>
+  </div>
+
+  <div class="shop">
+    <div class="info">
+      <span class="l">這一張,是 <b>本店</b> 每天免費為您備妥的。</span>
+      <span class="s">天天一張新的 · 明天記得再來拿</span>
+    </div>
+    <div class="stamp"><span>本店店章 · 店名</span></div>
+  </div>
+
+</div>
+</body>
+</html>

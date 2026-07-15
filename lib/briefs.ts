@@ -103,6 +103,10 @@ export const BRIEFS: BriefIssue[] = [
     code: "Z27·H196A", bigNum: "50", bigNumUnit: "分鐘", hook: "客隊兩天前打了雙延長 · 腿還沒回來" },
   { no: "047", date: "2026-07-15", sport: "籃球", matchup: "華盛頓神秘 @ 多倫多節奏",
     code: "Z27·H196B", bigNum: "20.7", bigNumUnit: "分", hook: "頭號得分手傷停 · 猛轟火力打了折" },
+  { no: "048", date: "2026-07-15", sport: "棒球", matchup: "福岡軟銀鷹 @ 日本火腿鬥士",
+    code: "Z27·B196A", bigNum: "5", bigNumUnit: "次四壞", hook: "制球王對上剛從二軍回來的洋將" },
+  { no: "049", date: "2026-07-15", sport: "棒球", matchup: "讀賣巨人 @ 養樂多燕子",
+    code: "Z27·B196B", bigNum: "9", bigNumUnit: "勝", hook: "第 3 名的主隊 · 對第 2 名贏很兇" },
 ];
 
 /** A4 原版的靜態網址(public/briefs)。 */
