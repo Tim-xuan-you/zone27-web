@@ -16292,6 +16292,35 @@
       },
       "verdict": "proved",
       "gradedAt": "2026-07-15T05:37:27.027Z"
+    },
+    {
+      "gamePk": 822789,
+      "gameDate": "2026-07-17T23:15:00Z",
+      "scheduleDate": "2026-07-17",
+      "homeId": 141,
+      "homeEn": "Toronto Blue Jays",
+      "homeRecord": "45-51",
+      "awayId": 145,
+      "awayEn": "Chicago White Sox",
+      "awayRecord": "50-45",
+      "homePitcher": "Spencer Miles",
+      "awayPitcher": "Anthony Kay",
+      "homeStats": {
+        "era": "2.85",
+        "k9": "8.55",
+        "bb9": "2.85",
+        "hr9": "0.60"
+      },
+      "awayStats": {
+        "era": "4.23",
+        "k9": "7.15",
+        "bb9": "3.53",
+        "hr9": "1.21"
+      },
+      "engineWinHomePct": 66,
+      "lockedAt": "2026-07-15T16:27:19.816Z",
+      "finalScore": null,
+      "verdict": null
     }
   ]
 }
