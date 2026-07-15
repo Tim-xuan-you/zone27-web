@@ -42,6 +42,17 @@ const US: { text: string; href?: string; external?: boolean }[] = [
   { text: "誠實講:全世界最準也才 5 成 7", href: "/calibration" },
 ];
 
+// R307 ·「錢從哪來」= Defector 的核心招式(錢的結構 = 論證本身,不是宣稱)。
+// 原本這四件埋在「誰在做」的第三段、灰色 14px —— 整頁最強的一句話卻是最小的字。
+// 🔴 R181 honesty 紅線:**不准寫「0 抽傭」**(創作者抽 5-10% 會當場自打臉)。
+//    只列確實成立的四件:沒廣告主、沒創投/股東、不抽真錢下注的傭、不賣你的資料。
+const NO_MONEY_FROM: { n: string; k: string }[] = [
+  { n: "0", k: "廣告主" },
+  { n: "0", k: "創投 · 股東" },
+  { n: "0", k: "賭場抽成" },
+  { n: "0", k: "賣掉你的資料" },
+];
+
 export default function AboutPage() {
   return (
     <div className="flex flex-col flex-1 min-h-screen">
@@ -133,15 +144,8 @@ export default function AboutPage() {
               </Link>
               ;輸的紀錄刪不掉。
             </p>
-            {/* R264 · Defector 式「只對你負責」的命題明講出來(原本只隱含在 /privacy 法律細則裡)。
-                🔴 honesty 紅線(R181):不講「不抽傭」(創作者抽 5-10% 會自打臉)· 只講確實成立的四件:
-                沒廣告、沒創投/股東、不抽真錢下注的傭、不賣你的資料 → 錢只來自社群 → 只對會員負責。 */}
-            <p className="mt-3 text-mute text-sm sm:text-base leading-relaxed">
-              沒有創投、沒有股東、沒有廣告主。 養這個站的錢<span className="text-bone">來自會員</span> ——
-              不是廣告、不是投資人、不是賭場抽成,也不是把你的瀏覽資料賣掉。 所以我只需要對
-              <span className="text-bone">一種人</span>負責:出錢撐著它的你 ——
-              不是投資人、不是廣告主,更不是賭場。
-            </p>
+            {/* R307 ·「錢從哪來」原本是這裡的第三段(灰色小字)→ 已升格成自己的一節(見下)。
+                理由:那是整頁最強的一句話,卻用最小的字埋在段落堆裡 = Defector 的招式被浪費掉。 */}
             <p className="mt-3 text-mute/80 text-sm leading-relaxed">
               有問題、想回報、或要找我?直接寫信:{" "}
               <a
@@ -155,10 +159,59 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* ── 簽名 · 8 字 grammar ──── */}
-        <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-14 text-center">
-          <p className="text-2xl sm:text-3xl text-bone font-light tracking-tight">
+        {/* ── 錢從哪來 · 我對誰負責(R307 · Defector 的核心招式)────────────
+            Defector 的 about 之所以有力,是因為「錢從哪來」這個事實【本身就是論證】——
+            不用形容詞。 我們有更強的版本,但原本被埋在上一節的第三段灰色小字裡。
+            四個 0 = SHOW(規格式的 costly signal · 同 /shops 規格表),下面那句才是punch。
+            🔴 不寫「0 抽傭」(見 NO_MONEY_FROM 上方紅線)。 */}
+        <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-14">
+          <p className="font-mono text-gold text-[10px] tracking-[0.4em] mb-6 text-center">
+            / 錢從哪來 · 我對誰負責
+          </p>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-8">
+            {NO_MONEY_FROM.map((m) => (
+              <div
+                key={m.k}
+                className="border border-line/60 bg-slate/20 px-3 py-5 text-center"
+              >
+                <p className="font-mono text-gold text-3xl sm:text-4xl font-light leading-none tabular">
+                  {m.n}
+                </p>
+                <p className="mt-2 text-mute text-xs sm:text-sm leading-snug">{m.k}</p>
+              </div>
+            ))}
+          </div>
+          <p className="text-bone text-base sm:text-lg font-light leading-relaxed text-center max-w-xl mx-auto">
+            養這個站的錢<span className="text-gold">來自會員</span>。
+            所以我只需要對一種人負責 —— <span className="text-gold">出錢撐著它的你</span>。
+          </p>
+          <p className="mt-4 text-mute text-sm sm:text-base leading-relaxed text-center max-w-xl mx-auto">
+            不是投資人、不是廣告主,更不是賭場。 這一條決定了整個站長什麼樣子:靠廣告活的站,
+            最後要賣掉你的注意力;靠賭場活的站,最後要你多下一注。
+            兩個我都不靠 —— 所以我可以老實跟你說「今天沒有值得出手的」。
+          </p>
+        </section>
+
+        {/* ── 說到底 · 8 字 grammar(R307:終於把這句話講完)──────────────
+            🔴 Tim 2026-07-15 canary「這頁感覺寫一半沒完結」= 精準,而且是字面上的。
+            實測全頁區塊:這是【唯一】沒有小標、沒有內文的一節 —— 11 個字用標題級大小印出來,
+            底下什麼都沒有 → 大腦把它讀成「一個標題」然後等內文,結果來的是分隔線。
+            八個字是 /manifesto 的品牌骨幹,被裸著丟在這裡、從來沒有人解釋過它是什麼意思
+            = 一句主張,後面沒有句子。 解 = 不是刪掉它,是【把句子寫完】+ 署名收尾。 */}
+        <section className="mx-auto max-w-3xl w-full px-6 sm:px-10 pb-14">
+          <p className="font-mono text-gold text-[10px] tracking-[0.4em] mb-6 text-center">
+            / 說到底
+          </p>
+          <p className="text-2xl sm:text-3xl text-bone font-light tracking-tight text-center">
             方法公開 <span className="text-gold/50 mx-1.5">·</span> 品味私藏
+          </p>
+          <p className="mt-6 text-mute text-sm sm:text-base leading-relaxed text-center max-w-xl mx-auto">
+            演算法、數據、怎麼算的 —— 全部攤開,你要抄就抄去。 我不靠秘密賺錢。
+            但挑哪一場、怎麼把價講清楚、哪一格該劃掉 —— 那是品味。
+            <span className="text-bone"> 那個抄不走,也是我唯一留著的東西。</span>
+          </p>
+          <p className="mt-7 font-mono text-gold/70 text-[10px] tracking-[0.3em] text-center">
+            —— TIM · ZONE 27
           </p>
         </section>
 
