@@ -4,8 +4,16 @@ import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import { SUPPORT_EMAIL } from "@/lib/brand-constants";
 
+// 🔴🔴 R308 · Tim 拍板「不想要樹敵 · 相關敵人的名字都不要出現」(點名玩運彩)。
+// 舊招牌句「有帳本的玩運彩」有兩個問題,第二個比第一個嚴重:
+//  ① 「玩運彩」字面上就是對手的店名 = 站上指名對手(踩 [[feedback_zone27_no_naming_competitors]])。
+//  ② 更糟:那句的結構是「[對手] + 但我們多了帳本」= **把自己定義成對手的衍生品**,
+//     等於承認對手是本體、我們是加值版 —— 免費幫對手當招牌。 世界級品牌不這樣講
+//     (沒有人說「Apple 是比較好用的 IBM」)。
+// → 改用類別詞「下注」當主詞(讀者的動作,不是任何一家公司的名字),帳本仍是金色主角。
+// 🔴 別改回去。 ⚠️ 區分:**台灣運彩 = 官方彩券商 = 市場/賠率來源,不是敵人**(戰報照引用,別誤殺)。
 export const metadata: Metadata = {
-  title: "關於 · 有帳本的玩運彩",
+  title: "關於 · 有帳本的下注",
   description:
     "收費明牌輸了刪文、黑箱、喊神準。 ZONE 27 引擎免費、輸了照掛、方法全公開、誠實講沒人能準。 一個看 27 年中華職棒的球迷做的,不是博彩公司。",
 };
@@ -65,7 +73,7 @@ export default function AboutPage() {
             / 關於 ZONE 27
           </p>
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-light leading-[1.12] tracking-tight text-bone">
-            有<span className="text-gold">帳本</span>的玩運彩。
+            有<span className="text-gold">帳本</span>的下注。
           </h1>
           <p className="mt-6 max-w-xl mx-auto text-mute text-base sm:text-lg leading-relaxed">
             免費引擎告訴你接下來誰會贏。 押了、贏了、輸了 ——
@@ -84,7 +92,9 @@ export default function AboutPage() {
             {/* 他們 */}
             <div className="border border-line/60 bg-slate/20 p-6 sm:p-7 order-1">
               <p className="font-mono text-mute/70 text-[10px] tracking-[0.3em] mb-5">
-                收費明牌 · LINE 老師 · 莊家
+                {/* 🔴 R308 · 「LINE 老師」點名了 LINE 這個真實品牌 → 改行為類別「群組老師」。
+                    這一欄只描述【行為】(收費、刪文、黑箱、喊神準),永遠不出現任何公司/站名。 */}
+                收費明牌 · 群組老師 · 莊家
               </p>
               <ul className="space-y-3.5">
                 {THEM.map((t) => (
