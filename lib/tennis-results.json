@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-07-16T14:46:31.631Z",
+  "generatedAt": "2026-07-16T16:53:15.473Z",
   "source": "site.api.espn.com tennis scoreboard (atp+wta singles · official · public · 0 auth)",
-  "count": 1898,
+  "count": 1905,
   "games": [
     {
       "tour": "atp",
@@ -18878,9 +18878,39 @@
       "tournament": "Nordea Open",
       "grouping": "Men's Singles",
       "date": "2026-07-16",
+      "winnerName": "Andrey Rublev",
+      "loserName": "Andrea Pellegrino",
+      "score": "7-6 6-7 6-3",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Nordea Open",
+      "grouping": "Men's Singles",
+      "date": "2026-07-16",
       "winnerName": "Thiago Agustin Tirante",
       "loserName": "Nikoloz Basilashvili",
       "score": "7-5 3-6 6-4",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Plava Laguna Croatia Open Umag",
+      "grouping": "Men's Singles",
+      "date": "2026-07-16",
+      "winnerName": "Daniel Merida",
+      "loserName": "Titouan Droguet",
+      "score": "6-1 6-3",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Enka Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-16",
+      "winnerName": "Anastasia Zakharova",
+      "loserName": "Alexandra Shubladze",
+      "score": "7-6 7-6",
       "retired": false
     },
     {
@@ -18890,6 +18920,16 @@
       "date": "2026-07-16",
       "winnerName": "Tatiana Prozorova",
       "loserName": "Darya Khamutsianskaya",
+      "score": "6-4 6-3",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Enka Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-16",
+      "winnerName": "Vendula Valdmannova",
+      "loserName": "Gao Xinyu",
       "score": "6-4 6-3",
       "retired": false
     },
@@ -18958,6 +18998,16 @@
       "tournament": "Nordea Open",
       "grouping": "Men's Singles",
       "date": "2026-07-16",
+      "winnerName": "Andrey Rublev",
+      "loserName": "Andrea Pellegrino",
+      "score": "7-6 6-7 6-3",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Nordea Open",
+      "grouping": "Men's Singles",
+      "date": "2026-07-16",
       "winnerName": "Thiago Agustin Tirante",
       "loserName": "Nikoloz Basilashvili",
       "score": "7-5 3-6 6-4",
@@ -18981,6 +19031,26 @@
       "winnerName": "Oleksandra Oliynykova",
       "loserName": "Elena Pridankina",
       "score": "6-1 6-2",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Vanda Pharmaceuticals Athens Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-16",
+      "winnerName": "Alina Korneeva",
+      "loserName": "Ann Li",
+      "score": "6-2 6-2",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Vanda Pharmaceuticals Athens Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-16",
+      "winnerName": "Tereza Valentova",
+      "loserName": "Aliaksandra Sasnovich",
+      "score": "6-3 6-2",
       "retired": false
     }
   ]
