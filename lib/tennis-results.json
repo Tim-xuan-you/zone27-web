@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-07-16T16:53:15.473Z",
+  "generatedAt": "2026-07-16T19:45:50.464Z",
   "source": "site.api.espn.com tennis scoreboard (atp+wta singles · official · public · 0 auth)",
-  "count": 1905,
+  "count": 1915,
   "games": [
     {
       "tour": "atp",
@@ -18878,9 +18878,29 @@
       "tournament": "Nordea Open",
       "grouping": "Men's Singles",
       "date": "2026-07-16",
+      "winnerName": "Alejandro Tabilo",
+      "loserName": "Lautaro Midon",
+      "score": "6-4 6-7 6-4",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Nordea Open",
+      "grouping": "Men's Singles",
+      "date": "2026-07-16",
       "winnerName": "Andrey Rublev",
       "loserName": "Andrea Pellegrino",
       "score": "7-6 6-7 6-3",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Nordea Open",
+      "grouping": "Men's Singles",
+      "date": "2026-07-16",
+      "winnerName": "Sebastian Baez",
+      "loserName": "Jesper de Jong",
+      "score": "6-4 6-2",
       "retired": false
     },
     {
@@ -18901,6 +18921,26 @@
       "winnerName": "Daniel Merida",
       "loserName": "Titouan Droguet",
       "score": "6-1 6-3",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Plava Laguna Croatia Open Umag",
+      "grouping": "Men's Singles",
+      "date": "2026-07-16",
+      "winnerName": "Roman Andres Burruchaga",
+      "loserName": "Camilo Ugo Carabelli",
+      "score": "6-2 2-6 6-3",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "ATV Bancomat Tennis Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-16",
+      "winnerName": "Martina Trevisan",
+      "loserName": "Aurora Zantedeschi",
+      "score": "6-1 7-6",
       "retired": false
     },
     {
@@ -18998,9 +19038,29 @@
       "tournament": "Nordea Open",
       "grouping": "Men's Singles",
       "date": "2026-07-16",
+      "winnerName": "Alejandro Tabilo",
+      "loserName": "Lautaro Midon",
+      "score": "6-4 6-7 6-4",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Nordea Open",
+      "grouping": "Men's Singles",
+      "date": "2026-07-16",
       "winnerName": "Andrey Rublev",
       "loserName": "Andrea Pellegrino",
       "score": "7-6 6-7 6-3",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Nordea Open",
+      "grouping": "Men's Singles",
+      "date": "2026-07-16",
+      "winnerName": "Sebastian Baez",
+      "loserName": "Jesper de Jong",
+      "score": "6-4 6-2",
       "retired": false
     },
     {
@@ -19035,12 +19095,52 @@
     },
     {
       "tour": "wta",
+      "tournament": "Unicredit Iasi Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-16",
+      "winnerName": "Panna Udvardy",
+      "loserName": "Katarzyna Kawa",
+      "score": "1-6 7-5 6-2",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Unicredit Iasi Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-16",
+      "winnerName": "Paula Badosa",
+      "loserName": "Alevtina Ibragimova",
+      "score": "7-6 1-6 6-4",
+      "retired": false
+    },
+    {
+      "tour": "wta",
       "tournament": "Vanda Pharmaceuticals Athens Open",
       "grouping": "Women's Singles",
       "date": "2026-07-16",
       "winnerName": "Alina Korneeva",
       "loserName": "Ann Li",
       "score": "6-2 6-2",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Vanda Pharmaceuticals Athens Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-16",
+      "winnerName": "Barbora Krejcikova",
+      "loserName": "Carole Monnet",
+      "score": "6-0 6-2",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Vanda Pharmaceuticals Athens Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-16",
+      "winnerName": "Clara Tauson",
+      "loserName": "Miriana Tona",
+      "score": "6-4 6-0",
       "retired": false
     },
     {
