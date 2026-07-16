@@ -16323,6 +16323,35 @@
       "verdict": null
     },
     {
+      "gamePk": 824414,
+      "gameDate": "2026-07-17T23:10:00Z",
+      "scheduleDate": "2026-07-17",
+      "homeId": 114,
+      "homeEn": "Cleveland Guardians",
+      "homeRecord": "51-46",
+      "awayId": 134,
+      "awayEn": "Pittsburgh Pirates",
+      "awayRecord": "50-47",
+      "homePitcher": "Gavin Williams",
+      "awayPitcher": "Jared Jones",
+      "homeStats": {
+        "era": "3.81",
+        "k9": "10.64",
+        "bb9": "2.94",
+        "hr9": "1.35"
+      },
+      "awayStats": {
+        "era": "4.37",
+        "k9": "10.03",
+        "bb9": "2.83",
+        "hr9": "1.29"
+      },
+      "engineWinHomePct": 57,
+      "lockedAt": "2026-07-16T03:14:38.287Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
       "gamePk": 822789,
       "gameDate": "2026-07-17T23:15:00Z",
       "scheduleDate": "2026-07-17",
