@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-07-16T19:45:50.464Z",
+  "generatedAt": "2026-07-16T22:37:47.883Z",
   "source": "site.api.espn.com tennis scoreboard (atp+wta singles · official · public · 0 auth)",
-  "count": 1915,
+  "count": 1920,
   "games": [
     {
       "tour": "atp",
@@ -18918,6 +18918,26 @@
       "tournament": "Plava Laguna Croatia Open Umag",
       "grouping": "Men's Singles",
       "date": "2026-07-16",
+      "winnerName": "Alex Molcan",
+      "loserName": "Alejandro Davidovich Fokina",
+      "score": "3-6 6-1 6-2",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Plava Laguna Croatia Open Umag",
+      "grouping": "Men's Singles",
+      "date": "2026-07-16",
+      "winnerName": "Damir Dzumhur",
+      "loserName": "Matteo Arnaldi",
+      "score": "7-6 6-7 7-6",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Plava Laguna Croatia Open Umag",
+      "grouping": "Men's Singles",
+      "date": "2026-07-16",
       "winnerName": "Daniel Merida",
       "loserName": "Titouan Droguet",
       "score": "6-1 6-3",
@@ -18938,9 +18958,39 @@
       "tournament": "ATV Bancomat Tennis Open",
       "grouping": "Women's Singles",
       "date": "2026-07-16",
+      "winnerName": "Julia Riera",
+      "loserName": "Danka Kovinic",
+      "score": "3-6 7-5 7-5",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "ATV Bancomat Tennis Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-16",
+      "winnerName": "Lucia Bronzetti",
+      "loserName": "Teodora Kostovic",
+      "score": "6-4 6-4",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "ATV Bancomat Tennis Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-16",
       "winnerName": "Martina Trevisan",
       "loserName": "Aurora Zantedeschi",
       "score": "6-1 7-6",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "ATV Bancomat Tennis Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-16",
+      "winnerName": "Nuria Brancaccio",
+      "loserName": "Eva Vedder",
+      "score": "6-1 6-2",
       "retired": false
     },
     {
