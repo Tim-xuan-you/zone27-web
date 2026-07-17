@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-07-16T22:37:47.883Z",
+  "generatedAt": "2026-07-17T11:09:20.663Z",
   "source": "site.api.espn.com tennis scoreboard (atp+wta singles · official · public · 0 auth)",
-  "count": 1920,
+  "count": 1925,
   "games": [
     {
       "tour": "atp",
@@ -19201,6 +19201,56 @@
       "winnerName": "Tereza Valentova",
       "loserName": "Aliaksandra Sasnovich",
       "score": "6-3 6-2",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "EFG Swiss Open Gstaad",
+      "grouping": "Men's Singles",
+      "date": "2026-07-17",
+      "winnerName": "Aleksandr Shevchenko",
+      "loserName": "Dominic Stricker",
+      "score": "7-6 6-2",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "EFG Swiss Open Gstaad",
+      "grouping": "Men's Singles",
+      "date": "2026-07-17",
+      "winnerName": "Raphael Collignon",
+      "loserName": "Valentin Vacherot",
+      "score": "7-6 4-6 7-5",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Nordea Open",
+      "grouping": "Men's Singles",
+      "date": "2026-07-17",
+      "winnerName": "Adolfo Daniel Vallejo",
+      "loserName": "Stefano Travaglia",
+      "score": "7-6 6-2",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Generali Open Ladies Kitzbühel",
+      "grouping": "Women's Singles",
+      "date": "2026-07-17",
+      "winnerName": "Sinja Kraus",
+      "loserName": "Erika Andreeva",
+      "score": "6-4 6-1",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Nordea Open",
+      "grouping": "Men's Singles",
+      "date": "2026-07-17",
+      "winnerName": "Adolfo Daniel Vallejo",
+      "loserName": "Stefano Travaglia",
+      "score": "7-6 6-2",
       "retired": false
     }
   ]
