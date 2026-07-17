@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-07-17T14:15:59.549Z",
+  "generatedAt": "2026-07-17T16:46:55.460Z",
   "source": "site.api.espn.com tennis scoreboard (atp+wta singles · official · public · 0 auth)",
-  "count": 1936,
+  "count": 1946,
   "games": [
     {
       "tour": "atp",
@@ -19218,6 +19218,16 @@
       "tournament": "EFG Swiss Open Gstaad",
       "grouping": "Men's Singles",
       "date": "2026-07-17",
+      "winnerName": "Aleksandr Shevchenko",
+      "loserName": "Quentin Halys",
+      "score": "7-6 6-3",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "EFG Swiss Open Gstaad",
+      "grouping": "Men's Singles",
+      "date": "2026-07-17",
       "winnerName": "Juan Manuel Cerundolo",
       "loserName": "Casper Ruud",
       "score": "3-6 7-5 6-2",
@@ -19268,9 +19278,29 @@
       "tournament": "Nordea Open",
       "grouping": "Men's Singles",
       "date": "2026-07-17",
+      "winnerName": "Andrey Rublev",
+      "loserName": "Sebastian Baez",
+      "score": "6-1 6-2",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Nordea Open",
+      "grouping": "Men's Singles",
+      "date": "2026-07-17",
       "winnerName": "Luciano Darderi",
       "loserName": "Nuno Borges",
       "score": "7-6 6-4",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "ATV Bancomat Tennis Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-17",
+      "winnerName": "Francesca Jones",
+      "loserName": "Noma Noha Akugue",
+      "score": "6-3 6-1",
       "retired": false
     },
     {
@@ -19288,9 +19318,29 @@
       "tournament": "Enka Open",
       "grouping": "Women's Singles",
       "date": "2026-07-17",
+      "winnerName": "Hanne Vandewinkel",
+      "loserName": "Harmony Tan",
+      "score": "6-1 1-0",
+      "retired": true
+    },
+    {
+      "tour": "wta",
+      "tournament": "Enka Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-17",
       "winnerName": "Lanlana Tararudee",
       "loserName": "Vera Zvonareva",
       "score": "6-3 6-2",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Enka Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-17",
+      "winnerName": "Vendula Valdmannova",
+      "loserName": "Aliona Falei",
+      "score": "6-2 6-3",
       "retired": false
     },
     {
@@ -19325,6 +19375,16 @@
     },
     {
       "tour": "wta",
+      "tournament": "Generali Open Ladies Kitzbühel",
+      "grouping": "Women's Singles",
+      "date": "2026-07-17",
+      "winnerName": "Veronika Erjavec",
+      "loserName": "Gina Feistel",
+      "score": "6-2 7-5",
+      "retired": false
+    },
+    {
+      "tour": "wta",
       "tournament": "Nordea Open",
       "grouping": "Men's Singles",
       "date": "2026-07-17",
@@ -19348,6 +19408,16 @@
       "tournament": "Nordea Open",
       "grouping": "Men's Singles",
       "date": "2026-07-17",
+      "winnerName": "Andrey Rublev",
+      "loserName": "Sebastian Baez",
+      "score": "6-1 6-2",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Nordea Open",
+      "grouping": "Men's Singles",
+      "date": "2026-07-17",
       "winnerName": "Luciano Darderi",
       "loserName": "Nuno Borges",
       "score": "7-6 6-4",
@@ -19361,6 +19431,36 @@
       "winnerName": "Mayar Sherif",
       "loserName": "Yulia Putintseva",
       "score": "6-2 3-6 7-6",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Unicredit Iasi Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-17",
+      "winnerName": "Oleksandra Oliynykova",
+      "loserName": "Clara Burel",
+      "score": "6-4 7-5",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Vanda Pharmaceuticals Athens Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-17",
+      "winnerName": "Alina Korneeva",
+      "loserName": "Tereza Valentova",
+      "score": "7-5 6-3",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Vanda Pharmaceuticals Athens Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-17",
+      "winnerName": "Barbora Krejcikova",
+      "loserName": "Zheng Qinwen",
+      "score": "6-4 6-4",
       "retired": false
     }
   ]
