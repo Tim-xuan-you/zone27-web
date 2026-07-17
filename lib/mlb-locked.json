@@ -16319,8 +16319,12 @@
       },
       "engineWinHomePct": 37,
       "lockedAt": "2026-07-15T19:20:15.586Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 1,
+        "away": 4
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-07-17T03:17:44.634Z"
     },
     {
       "gamePk": 824766,
@@ -16551,6 +16555,35 @@
       },
       "engineWinHomePct": 46,
       "lockedAt": "2026-07-15T19:20:15.586Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 824170,
+      "gameDate": "2026-07-18T00:10:00Z",
+      "scheduleDate": "2026-07-17",
+      "homeId": 117,
+      "homeEn": "Houston Astros",
+      "homeRecord": "47-51",
+      "awayId": 110,
+      "awayEn": "Baltimore Orioles",
+      "awayRecord": "46-51",
+      "homePitcher": "Peter Lambert",
+      "awayPitcher": "Dean Kremer",
+      "homeStats": {
+        "era": "3.14",
+        "k9": "8.48",
+        "bb9": "3.45",
+        "hr9": "1.15"
+      },
+      "awayStats": {
+        "era": "4.09",
+        "k9": "9.82",
+        "bb9": "1.64",
+        "hr9": "3.68"
+      },
+      "engineWinHomePct": 70,
+      "lockedAt": "2026-07-17T03:17:44.147Z",
       "finalScore": null,
       "verdict": null
     },
@@ -16841,6 +16874,64 @@
       },
       "engineWinHomePct": 51,
       "lockedAt": "2026-07-16T19:20:54.939Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 824169,
+      "gameDate": "2026-07-18T20:10:00Z",
+      "scheduleDate": "2026-07-18",
+      "homeId": 117,
+      "homeEn": "Houston Astros",
+      "homeRecord": "47-51",
+      "awayId": 110,
+      "awayEn": "Baltimore Orioles",
+      "awayRecord": "46-51",
+      "homePitcher": "Spencer Arrighetti",
+      "awayPitcher": "Trevor Rogers",
+      "homeStats": {
+        "era": "4.50",
+        "k9": "8.89",
+        "bb9": "4.83",
+        "hr9": "1.32"
+      },
+      "awayStats": {
+        "era": "4.48",
+        "k9": "6.87",
+        "bb9": "3.09",
+        "hr9": "1.00"
+      },
+      "engineWinHomePct": 56,
+      "lockedAt": "2026-07-17T03:17:44.147Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 824738,
+      "gameDate": "2026-07-18T20:10:00Z",
+      "scheduleDate": "2026-07-18",
+      "homeId": 111,
+      "homeEn": "Boston Red Sox",
+      "homeRecord": "46-48",
+      "awayId": 139,
+      "awayEn": "Tampa Bay Rays",
+      "awayRecord": "56-38",
+      "homePitcher": "Patrick Sandoval",
+      "awayPitcher": "Ian Seymour",
+      "homeStats": {
+        "era": "2.08",
+        "k9": "10.38",
+        "bb9": "2.08",
+        "hr9": "0.00"
+      },
+      "awayStats": {
+        "era": "4.59",
+        "k9": "10.44",
+        "bb9": "3.34",
+        "hr9": "1.39"
+      },
+      "engineWinHomePct": 72,
+      "lockedAt": "2026-07-17T03:17:44.147Z",
       "finalScore": null,
       "verdict": null
     },
