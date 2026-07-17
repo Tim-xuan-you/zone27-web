@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-07-17T16:46:55.460Z",
+  "generatedAt": "2026-07-17T19:46:56.186Z",
   "source": "site.api.espn.com tennis scoreboard (atp+wta singles · official · public · 0 auth)",
-  "count": 1946,
+  "count": 1952,
   "games": [
     {
       "tour": "atp",
@@ -19255,6 +19255,16 @@
     },
     {
       "tour": "atp",
+      "tournament": "EFG Swiss Open Gstaad",
+      "grouping": "Men's Singles",
+      "date": "2026-07-17",
+      "winnerName": "Stefanos Tsitsipas",
+      "loserName": "Arthur Rinderknech",
+      "score": "6-3 3-6 6-3",
+      "retired": false
+    },
+    {
+      "tour": "atp",
       "tournament": "Nordea Open",
       "grouping": "Men's Singles",
       "date": "2026-07-17",
@@ -19294,6 +19304,16 @@
       "retired": false
     },
     {
+      "tour": "atp",
+      "tournament": "Plava Laguna Croatia Open Umag",
+      "grouping": "Men's Singles",
+      "date": "2026-07-17",
+      "winnerName": "Daniel Merida",
+      "loserName": "Roman Andres Burruchaga",
+      "score": "6-4 6-2",
+      "retired": false
+    },
+    {
       "tour": "wta",
       "tournament": "ATV Bancomat Tennis Open",
       "grouping": "Women's Singles",
@@ -19301,6 +19321,26 @@
       "winnerName": "Francesca Jones",
       "loserName": "Noma Noha Akugue",
       "score": "6-3 6-1",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "ATV Bancomat Tennis Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-17",
+      "winnerName": "Martina Trevisan",
+      "loserName": "Elizara Yaneva",
+      "score": "4-6 6-2 6-2",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "ATV Bancomat Tennis Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-17",
+      "winnerName": "Nuria Brancaccio",
+      "loserName": "Julia Riera",
+      "score": "6-3 1-6 7-6",
       "retired": false
     },
     {
@@ -19445,6 +19485,16 @@
     },
     {
       "tour": "wta",
+      "tournament": "Unicredit Iasi Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-17",
+      "winnerName": "Paula Badosa",
+      "loserName": "Panna Udvardy",
+      "score": "6-4 7-6",
+      "retired": false
+    },
+    {
+      "tour": "wta",
       "tournament": "Vanda Pharmaceuticals Athens Open",
       "grouping": "Women's Singles",
       "date": "2026-07-17",
@@ -19461,6 +19511,16 @@
       "winnerName": "Barbora Krejcikova",
       "loserName": "Zheng Qinwen",
       "score": "6-4 6-4",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Vanda Pharmaceuticals Athens Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-17",
+      "winnerName": "Maria Sakkari",
+      "loserName": "Alycia Parks",
+      "score": "6-4 6-3",
       "retired": false
     }
   ]
