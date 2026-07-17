@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-07-17T19:46:56.186Z",
+  "generatedAt": "2026-07-17T22:31:40.194Z",
   "source": "site.api.espn.com tennis scoreboard (atp+wta singles · official · public · 0 auth)",
-  "count": 1952,
+  "count": 1956,
   "games": [
     {
       "tour": "atp",
@@ -19308,6 +19308,16 @@
       "tournament": "Plava Laguna Croatia Open Umag",
       "grouping": "Men's Singles",
       "date": "2026-07-17",
+      "winnerName": "Damir Dzumhur",
+      "loserName": "Alex Molcan",
+      "score": "3-6 6-4 6-3",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Plava Laguna Croatia Open Umag",
+      "grouping": "Men's Singles",
+      "date": "2026-07-17",
       "winnerName": "Daniel Merida",
       "loserName": "Roman Andres Burruchaga",
       "score": "6-4 6-2",
@@ -19321,6 +19331,16 @@
       "winnerName": "Francesca Jones",
       "loserName": "Noma Noha Akugue",
       "score": "6-3 6-1",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "ATV Bancomat Tennis Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-17",
+      "winnerName": "Lucia Bronzetti",
+      "loserName": "Deborah Chiesa",
+      "score": "2-6 6-3 6-2",
       "retired": false
     },
     {
@@ -19495,6 +19515,16 @@
     },
     {
       "tour": "wta",
+      "tournament": "Unicredit Iasi Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-17",
+      "winnerName": "Tamara Zidansek",
+      "loserName": "Petra Marcinko",
+      "score": "6-3 7-5",
+      "retired": false
+    },
+    {
+      "tour": "wta",
       "tournament": "Vanda Pharmaceuticals Athens Open",
       "grouping": "Women's Singles",
       "date": "2026-07-17",
@@ -19511,6 +19541,16 @@
       "winnerName": "Barbora Krejcikova",
       "loserName": "Zheng Qinwen",
       "score": "6-4 6-4",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Vanda Pharmaceuticals Athens Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-17",
+      "winnerName": "Clara Tauson",
+      "loserName": "Sara Bejlek",
+      "score": "6-2 6-3",
       "retired": false
     },
     {
