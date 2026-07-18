@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-07-18T10:48:51.932Z",
+  "generatedAt": "2026-07-18T14:08:51.061Z",
   "source": "site.api.espn.com tennis scoreboard (atp+wta singles · official · public · 0 auth)",
-  "count": 1959,
+  "count": 1976,
   "games": [
     {
       "tour": "atp",
@@ -19564,6 +19564,156 @@
       "retired": false
     },
     {
+      "tour": "atp",
+      "tournament": "EFG Swiss Open Gstaad",
+      "grouping": "Men's Singles",
+      "date": "2026-07-18",
+      "winnerName": "Raphael Collignon",
+      "loserName": "Juan Manuel Cerundolo",
+      "score": "1-6 7-6 7-5",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "EFG Swiss Open Gstaad",
+      "grouping": "Men's Singles",
+      "date": "2026-07-18",
+      "winnerName": "Stefanos Tsitsipas",
+      "loserName": "Aleksandr Shevchenko",
+      "score": "6-4 3-6 6-3",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Generali Open",
+      "grouping": "Men's Singles",
+      "date": "2026-07-18",
+      "winnerName": "Federico Cina",
+      "loserName": "Daniel Michalski",
+      "score": "6-2 3-6 6-1",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Generali Open",
+      "grouping": "Men's Singles",
+      "date": "2026-07-18",
+      "winnerName": "Laslo Djere",
+      "loserName": "Niklas Waldner",
+      "score": "6-2 6-4",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Generali Open",
+      "grouping": "Men's Singles",
+      "date": "2026-07-18",
+      "winnerName": "Lorenzo Giustino",
+      "loserName": "Nico Hipfl",
+      "score": "6-2 6-4",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Generali Open",
+      "grouping": "Men's Singles",
+      "date": "2026-07-18",
+      "winnerName": "Vitaliy Sachko",
+      "loserName": "Federico Coria",
+      "score": "7-6 6-2",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Millennium Estoril Open",
+      "grouping": "Men's Singles",
+      "date": "2026-07-18",
+      "winnerName": "Clement Tabur",
+      "loserName": "Edas Butvilas",
+      "score": "1-6 7-6 6-4",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Millennium Estoril Open",
+      "grouping": "Men's Singles",
+      "date": "2026-07-18",
+      "winnerName": "Kyrian Jacquet",
+      "loserName": "Goncalo Da Rosa Castro",
+      "score": "6-1 6-2",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Millennium Estoril Open",
+      "grouping": "Men's Singles",
+      "date": "2026-07-18",
+      "winnerName": "Taro Daniel",
+      "loserName": "Juan Carlos Prado Angelo",
+      "score": "6-4 6-2",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Nordea Open",
+      "grouping": "Men's Singles",
+      "date": "2026-07-18",
+      "winnerName": "Luciano Darderi",
+      "loserName": "Adolfo Daniel Vallejo",
+      "score": "6-4 6-7 6-3",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Generali Open Ladies Kitzbühel",
+      "grouping": "Women's Singles",
+      "date": "2026-07-18",
+      "winnerName": "Julia Grabher",
+      "loserName": "Veronika Erjavec",
+      "score": "6-1 6-4",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Generali Open Ladies Kitzbühel",
+      "grouping": "Women's Singles",
+      "date": "2026-07-18",
+      "winnerName": "Sinja Kraus",
+      "loserName": "Marina Bassols Ribera",
+      "score": "3-6 6-4 6-1",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Livesport Prague Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-18",
+      "winnerName": "Carol Young Suh Lee",
+      "loserName": "Kyoka Okamura",
+      "score": "7-5 6-1",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Livesport Prague Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-18",
+      "winnerName": "Dominika Salkova",
+      "loserName": "Denisa Zoldakova",
+      "score": "6-4 6-4",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Livesport Prague Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-18",
+      "winnerName": "Gabriela Knutson",
+      "loserName": "Aoi Ito",
+      "score": "6-4 6-4",
+      "retired": false
+    },
+    {
       "tour": "wta",
       "tournament": "Livesport Prague Open",
       "grouping": "Women's Singles",
@@ -19592,6 +19742,26 @@
       "loserName": "Karman Thandi",
       "score": "6-3",
       "retired": true
+    },
+    {
+      "tour": "wta",
+      "tournament": "Livesport Prague Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-18",
+      "winnerName": "Valentina Ryser",
+      "loserName": "Rebeka Masarova",
+      "score": "4-6 4-3",
+      "retired": true
+    },
+    {
+      "tour": "wta",
+      "tournament": "Nordea Open",
+      "grouping": "Men's Singles",
+      "date": "2026-07-18",
+      "winnerName": "Luciano Darderi",
+      "loserName": "Adolfo Daniel Vallejo",
+      "score": "6-4 6-7 6-3",
+      "retired": false
     }
   ]
 }
