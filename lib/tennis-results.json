@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-07-18T19:50:45.347Z",
+  "generatedAt": "2026-07-18T22:32:10.418Z",
   "source": "site.api.espn.com tennis scoreboard (atp+wta singles · official · public · 0 auth)",
-  "count": 2007,
+  "count": 2009,
   "games": [
     {
       "tour": "atp",
@@ -20018,6 +20018,16 @@
       "tournament": "Palermo Ladies Open",
       "grouping": "Women's Singles",
       "date": "2026-07-18",
+      "winnerName": "Noemi Basiletti",
+      "loserName": "Laura Bohner",
+      "score": "6-2 6-2",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Palermo Ladies Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-18",
       "winnerName": "Raluka Serban",
       "loserName": "Anastasia Bertacchi",
       "score": "5-7 6-4 6-0",
@@ -20061,6 +20071,16 @@
       "winnerName": "Paula Badosa",
       "loserName": "Tamara Zidansek",
       "score": "3-6 7-5 7-6",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Vanda Pharmaceuticals Athens Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-18",
+      "winnerName": "Barbora Krejcikova",
+      "loserName": "Clara Tauson",
+      "score": "6-1 4-6 6-3",
       "retired": false
     },
     {
