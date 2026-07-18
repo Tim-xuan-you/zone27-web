@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-07-18T14:08:51.061Z",
+  "generatedAt": "2026-07-18T16:36:27.084Z",
   "source": "site.api.espn.com tennis scoreboard (atp+wta singles · official · public · 0 auth)",
-  "count": 1976,
+  "count": 1988,
   "games": [
     {
       "tour": "atp",
@@ -19598,6 +19598,26 @@
       "tournament": "Generali Open",
       "grouping": "Men's Singles",
       "date": "2026-07-18",
+      "winnerName": "Jurij Rodionov",
+      "loserName": "Andrey Chepelev",
+      "score": "6-2 6-2",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Generali Open",
+      "grouping": "Men's Singles",
+      "date": "2026-07-18",
+      "winnerName": "Kilian Feldbausch",
+      "loserName": "Gustavo Heide",
+      "score": "6-4 6-2",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Generali Open",
+      "grouping": "Men's Singles",
+      "date": "2026-07-18",
       "winnerName": "Laslo Djere",
       "loserName": "Niklas Waldner",
       "score": "6-2 6-4",
@@ -19628,6 +19648,16 @@
       "tournament": "Millennium Estoril Open",
       "grouping": "Men's Singles",
       "date": "2026-07-18",
+      "winnerName": "Andrea Pellegrino",
+      "loserName": "Joao Silva",
+      "score": "6-3 6-2",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Millennium Estoril Open",
+      "grouping": "Men's Singles",
+      "date": "2026-07-18",
       "winnerName": "Clement Tabur",
       "loserName": "Edas Butvilas",
       "score": "1-6 7-6 6-4",
@@ -19638,9 +19668,39 @@
       "tournament": "Millennium Estoril Open",
       "grouping": "Men's Singles",
       "date": "2026-07-18",
+      "winnerName": "Gonzalo Bueno",
+      "loserName": "Francisco Rocha",
+      "score": "6-4 6-4",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Millennium Estoril Open",
+      "grouping": "Men's Singles",
+      "date": "2026-07-18",
       "winnerName": "Kyrian Jacquet",
       "loserName": "Goncalo Da Rosa Castro",
       "score": "6-1 6-2",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Millennium Estoril Open",
+      "grouping": "Men's Singles",
+      "date": "2026-07-18",
+      "winnerName": "Orlando Luz",
+      "loserName": "Chun-Hsin Tseng",
+      "score": "6-3 3-0",
+      "retired": true
+    },
+    {
+      "tour": "atp",
+      "tournament": "Millennium Estoril Open",
+      "grouping": "Men's Singles",
+      "date": "2026-07-18",
+      "winnerName": "Pedro Martinez",
+      "loserName": "David Jorda Sanchis",
+      "score": "6-0 6-4",
       "retired": false
     },
     {
@@ -19661,6 +19721,16 @@
       "winnerName": "Luciano Darderi",
       "loserName": "Adolfo Daniel Vallejo",
       "score": "6-4 6-7 6-3",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Enka Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-18",
+      "winnerName": "Lanlana Tararudee",
+      "loserName": "Vendula Valdmannova",
+      "score": "6-2 6-0",
       "retired": false
     },
     {
@@ -19738,6 +19808,16 @@
       "tournament": "Livesport Prague Open",
       "grouping": "Women's Singles",
       "date": "2026-07-18",
+      "winnerName": "Mai Hontama",
+      "loserName": "Barbora Palicova",
+      "score": "6-3 6-3",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Livesport Prague Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-18",
       "winnerName": "Priscilla Hon",
       "loserName": "Karman Thandi",
       "score": "6-3",
@@ -19761,6 +19841,46 @@
       "winnerName": "Luciano Darderi",
       "loserName": "Adolfo Daniel Vallejo",
       "score": "6-4 6-7 6-3",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Palermo Ladies Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-18",
+      "winnerName": "Amarissa Toth",
+      "loserName": "Lucija Ciric Bagaric",
+      "score": "",
+      "retired": true
+    },
+    {
+      "tour": "wta",
+      "tournament": "Palermo Ladies Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-18",
+      "winnerName": "Miriana Tona",
+      "loserName": "Dalila Spiteri",
+      "score": "",
+      "retired": true
+    },
+    {
+      "tour": "wta",
+      "tournament": "Palermo Ladies Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-18",
+      "winnerName": "Yelyzaveta Kotliar",
+      "loserName": "Federica Urgesi",
+      "score": "",
+      "retired": true
+    },
+    {
+      "tour": "wta",
+      "tournament": "Unicredit Iasi Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-18",
+      "winnerName": "Mayar Sherif",
+      "loserName": "Oleksandra Oliynykova",
+      "score": "6-3 6-1",
       "retired": false
     }
   ]
