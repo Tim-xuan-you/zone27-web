@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-07-18T16:36:27.084Z",
+  "generatedAt": "2026-07-18T19:50:45.347Z",
   "source": "site.api.espn.com tennis scoreboard (atp+wta singles · official · public · 0 auth)",
-  "count": 1988,
+  "count": 2007,
   "games": [
     {
       "tour": "atp",
@@ -19598,6 +19598,16 @@
       "tournament": "Generali Open",
       "grouping": "Men's Singles",
       "date": "2026-07-18",
+      "winnerName": "Hugo Dellien",
+      "loserName": "Michele Ribecai",
+      "score": "4-6 6-1 6-3",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Generali Open",
+      "grouping": "Men's Singles",
+      "date": "2026-07-18",
       "winnerName": "Jurij Rodionov",
       "loserName": "Andrey Chepelev",
       "score": "6-2 6-2",
@@ -19631,6 +19641,16 @@
       "winnerName": "Lorenzo Giustino",
       "loserName": "Nico Hipfl",
       "score": "6-2 6-4",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Generali Open",
+      "grouping": "Men's Singles",
+      "date": "2026-07-18",
+      "winnerName": "Sandro Kopp",
+      "loserName": "Pierre-Hugues Herbert",
+      "score": "6-4 6-4",
       "retired": false
     },
     {
@@ -19715,12 +19735,72 @@
     },
     {
       "tour": "atp",
+      "tournament": "Millennium Estoril Open",
+      "grouping": "Men's Singles",
+      "date": "2026-07-18",
+      "winnerName": "Timofey Skatov",
+      "loserName": "Joao Domingues",
+      "score": "6-4 6-7 6-4",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Nordea Open",
+      "grouping": "Men's Singles",
+      "date": "2026-07-18",
+      "winnerName": "Andrey Rublev",
+      "loserName": "Alejandro Tabilo",
+      "score": "6-4 4-6 6-4",
+      "retired": false
+    },
+    {
+      "tour": "atp",
       "tournament": "Nordea Open",
       "grouping": "Men's Singles",
       "date": "2026-07-18",
       "winnerName": "Luciano Darderi",
       "loserName": "Adolfo Daniel Vallejo",
       "score": "6-4 6-7 6-3",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Plava Laguna Croatia Open Umag",
+      "grouping": "Men's Singles",
+      "date": "2026-07-18",
+      "winnerName": "Daniel Merida",
+      "loserName": "Damir Dzumhur",
+      "score": "6-2 5-7 6-2",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "ATV Bancomat Tennis Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-18",
+      "winnerName": "Francesca Jones",
+      "loserName": "Martina Trevisan",
+      "score": "2-6 6-1 6-1",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "ATV Bancomat Tennis Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-18",
+      "winnerName": "Lucia Bronzetti",
+      "loserName": "Nuria Brancaccio",
+      "score": "6-4 5-7 6-0",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Enka Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-18",
+      "winnerName": "Hanne Vandewinkel",
+      "loserName": "Anastasia Zakharova",
+      "score": "6-3 6-3",
       "retired": false
     },
     {
@@ -19751,6 +19831,16 @@
       "winnerName": "Sinja Kraus",
       "loserName": "Marina Bassols Ribera",
       "score": "3-6 6-4 6-1",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Livesport Prague Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-18",
+      "winnerName": "Ayla Aksu",
+      "loserName": "Viktoria Morvayova",
+      "score": "6-3 6-3",
       "retired": false
     },
     {
@@ -19828,10 +19918,50 @@
       "tournament": "Livesport Prague Open",
       "grouping": "Women's Singles",
       "date": "2026-07-18",
+      "winnerName": "Rina Saigo",
+      "loserName": "Victoria Bervid",
+      "score": "6-1 6-2",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Livesport Prague Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-18",
+      "winnerName": "Sofia Costoulas",
+      "loserName": "Nao Hibino",
+      "score": "6-7 7-5 6-4",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Livesport Prague Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-18",
       "winnerName": "Valentina Ryser",
       "loserName": "Rebeka Masarova",
       "score": "4-6 4-3",
       "retired": true
+    },
+    {
+      "tour": "wta",
+      "tournament": "Livesport Prague Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-18",
+      "winnerName": "Veronika Podrez",
+      "loserName": "Tereza Krejcova",
+      "score": "3-6 6-2 6-1",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Nordea Open",
+      "grouping": "Men's Singles",
+      "date": "2026-07-18",
+      "winnerName": "Andrey Rublev",
+      "loserName": "Alejandro Tabilo",
+      "score": "6-4 4-6 6-4",
+      "retired": false
     },
     {
       "tour": "wta",
@@ -19858,10 +19988,50 @@
       "tournament": "Palermo Ladies Open",
       "grouping": "Women's Singles",
       "date": "2026-07-18",
+      "winnerName": "Isabella Shinikova",
+      "loserName": "Rasheeda McAdoo",
+      "score": "6-4 6-4",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Palermo Ladies Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-18",
+      "winnerName": "Mina Hodzic",
+      "loserName": "Emily Webley-Smith",
+      "score": "6-2 6-1",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Palermo Ladies Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-18",
       "winnerName": "Miriana Tona",
       "loserName": "Dalila Spiteri",
       "score": "",
       "retired": true
+    },
+    {
+      "tour": "wta",
+      "tournament": "Palermo Ladies Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-18",
+      "winnerName": "Raluka Serban",
+      "loserName": "Anastasia Bertacchi",
+      "score": "5-7 6-4 6-0",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Palermo Ladies Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-18",
+      "winnerName": "Ren Yufei",
+      "loserName": "Carla Giambelli",
+      "score": "5-7 6-4 6-3",
+      "retired": false
     },
     {
       "tour": "wta",
@@ -19881,6 +20051,26 @@
       "winnerName": "Mayar Sherif",
       "loserName": "Oleksandra Oliynykova",
       "score": "6-3 6-1",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Unicredit Iasi Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-18",
+      "winnerName": "Paula Badosa",
+      "loserName": "Tamara Zidansek",
+      "score": "3-6 7-5 7-6",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Vanda Pharmaceuticals Athens Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-18",
+      "winnerName": "Maria Sakkari",
+      "loserName": "Alina Korneeva",
+      "score": "6-1 7-5",
       "retired": false
     }
   ]
