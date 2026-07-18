@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-07-17T22:31:40.194Z",
+  "generatedAt": "2026-07-18T10:48:51.932Z",
   "source": "site.api.espn.com tennis scoreboard (atp+wta singles · official · public · 0 auth)",
-  "count": 1956,
+  "count": 1959,
   "games": [
     {
       "tour": "atp",
@@ -19562,6 +19562,36 @@
       "loserName": "Alycia Parks",
       "score": "6-4 6-3",
       "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Livesport Prague Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-18",
+      "winnerName": "Gao Xinyu",
+      "loserName": "Susan Bandecchi",
+      "score": "7-5 6-3",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Livesport Prague Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-18",
+      "winnerName": "Linda Fruhvirtova",
+      "loserName": "Elena Micic",
+      "score": "6-3 7-5",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Livesport Prague Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-18",
+      "winnerName": "Priscilla Hon",
+      "loserName": "Karman Thandi",
+      "score": "6-3",
+      "retired": true
     }
   ]
 }
