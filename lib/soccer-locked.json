@@ -3225,10 +3225,13 @@
       "awayWinPct": 16,
       "enginePick": "home",
       "lockedAt": "2026-07-16T02:22:38.970Z",
-      "finalScore": null,
-      "outcome": null,
-      "verdict": null,
-      "gradedAt": null
+      "finalScore": {
+        "home": 2,
+        "away": 0
+      },
+      "outcome": "home",
+      "verdict": "proved",
+      "gradedAt": "2026-07-18T02:10:19.860Z"
     },
     {
       "matchId": "fd-554925",
@@ -3253,10 +3256,13 @@
       "awayWinPct": 32,
       "enginePick": "home",
       "lockedAt": "2026-07-16T02:22:38.970Z",
-      "finalScore": null,
-      "outcome": null,
-      "verdict": null,
-      "gradedAt": null
+      "finalScore": {
+        "home": 1,
+        "away": 1
+      },
+      "outcome": "draw",
+      "verdict": "diverged",
+      "gradedAt": "2026-07-18T02:10:19.860Z"
     },
     {
       "matchId": "fd-554927",
@@ -3281,10 +3287,13 @@
       "awayWinPct": 33,
       "enginePick": "home",
       "lockedAt": "2026-07-16T02:22:38.970Z",
-      "finalScore": null,
-      "outcome": null,
-      "verdict": null,
-      "gradedAt": null
+      "finalScore": {
+        "home": 2,
+        "away": 1
+      },
+      "outcome": "home",
+      "verdict": "proved",
+      "gradedAt": "2026-07-18T02:10:19.860Z"
     },
     {
       "matchId": "fd-537389",
