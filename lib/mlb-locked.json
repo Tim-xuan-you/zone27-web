@@ -17591,6 +17591,122 @@
       "lockedAt": "2026-07-17T16:19:22.305Z",
       "finalScore": null,
       "verdict": null
+    },
+    {
+      "gamePk": 824410,
+      "gameDate": "2026-07-20T22:40:00Z",
+      "scheduleDate": "2026-07-20",
+      "homeId": 114,
+      "homeEn": "Cleveland Guardians",
+      "homeRecord": "51-46",
+      "awayId": 142,
+      "awayEn": "Minnesota Twins",
+      "awayRecord": "49-49",
+      "homePitcher": "Tanner Bibee",
+      "awayPitcher": "Joe Ryan",
+      "homeStats": {
+        "era": "3.90",
+        "k9": "6.93",
+        "bb9": "2.71",
+        "hr9": "1.59"
+      },
+      "awayStats": {
+        "era": "2.85",
+        "k9": "10.44",
+        "bb9": "2.04",
+        "hr9": "0.82"
+      },
+      "engineWinHomePct": 38,
+      "lockedAt": "2026-07-18T19:11:56.995Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 823522,
+      "gameDate": "2026-07-20T23:05:00Z",
+      "scheduleDate": "2026-07-20",
+      "homeId": 147,
+      "homeEn": "New York Yankees",
+      "homeRecord": "54-43",
+      "awayId": 134,
+      "awayEn": "Pittsburgh Pirates",
+      "awayRecord": "50-47",
+      "homePitcher": "Will Warren",
+      "awayPitcher": "Braxton Ashcraft",
+      "homeStats": {
+        "era": "4.03",
+        "k9": "8.79",
+        "bb9": "3.02",
+        "hr9": "1.28"
+      },
+      "awayStats": {
+        "era": "3.49",
+        "k9": "10.16",
+        "bb9": "2.14",
+        "hr9": "1.11"
+      },
+      "engineWinHomePct": 48,
+      "lockedAt": "2026-07-18T19:11:56.995Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 823762,
+      "gameDate": "2026-07-20T23:40:00Z",
+      "scheduleDate": "2026-07-20",
+      "homeId": 158,
+      "homeEn": "Milwaukee Brewers",
+      "homeRecord": "60-37",
+      "awayId": 121,
+      "awayEn": "New York Mets",
+      "awayRecord": "41-57",
+      "homePitcher": "Brandon Sproat",
+      "awayPitcher": "Freddy Peralta",
+      "homeStats": {
+        "era": "5.16",
+        "k9": "9.55",
+        "bb9": "4.28",
+        "hr9": "1.65"
+      },
+      "awayStats": {
+        "era": "4.66",
+        "k9": "8.97",
+        "bb9": "3.80",
+        "hr9": "1.29"
+      },
+      "engineWinHomePct": 51,
+      "lockedAt": "2026-07-18T19:11:56.995Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 824006,
+      "gameDate": "2026-07-21T02:10:00Z",
+      "scheduleDate": "2026-07-20",
+      "homeId": 108,
+      "homeEn": "Los Angeles Angels",
+      "homeRecord": "38-60",
+      "awayId": 138,
+      "awayEn": "St. Louis Cardinals",
+      "awayRecord": "51-45",
+      "homePitcher": "José Soriano",
+      "awayPitcher": "Kyle Leahy",
+      "homeStats": {
+        "era": "3.49",
+        "k9": "9.32",
+        "bb9": "4.30",
+        "hr9": "0.97"
+      },
+      "awayStats": {
+        "era": "3.73",
+        "k9": "7.56",
+        "bb9": "3.32",
+        "hr9": "0.91"
+      },
+      "engineWinHomePct": 58,
+      "lockedAt": "2026-07-18T19:11:56.995Z",
+      "finalScore": null,
+      "verdict": null
     }
   ]
 }
