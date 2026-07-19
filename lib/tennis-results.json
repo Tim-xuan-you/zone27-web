@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-07-18T22:32:10.418Z",
+  "generatedAt": "2026-07-19T08:57:20.780Z",
   "source": "site.api.espn.com tennis scoreboard (atp+wta singles · official · public · 0 auth)",
-  "count": 2009,
+  "count": 2010,
   "games": [
     {
       "tour": "atp",
@@ -20092,6 +20092,16 @@
       "loserName": "Alina Korneeva",
       "score": "6-1 7-5",
       "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "MSC Hamburg Ladies Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-19",
+      "winnerName": "Elina Avanesyan",
+      "loserName": "Dalila Jakupovic",
+      "score": "4-2",
+      "retired": true
     }
   ]
 }
