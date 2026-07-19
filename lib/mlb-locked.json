@@ -17740,6 +17740,35 @@
       "verdict": null
     },
     {
+      "gamePk": 822788,
+      "gameDate": "2026-07-20T23:07:00Z",
+      "scheduleDate": "2026-07-20",
+      "homeId": 141,
+      "homeEn": "Toronto Blue Jays",
+      "homeRecord": "46-52",
+      "awayId": 139,
+      "awayEn": "Tampa Bay Rays",
+      "awayRecord": "56-41",
+      "homePitcher": "Dylan Cease",
+      "awayPitcher": "Nick Martinez",
+      "homeStats": {
+        "era": "2.56",
+        "k9": "13.55",
+        "bb9": "4.03",
+        "hr9": "0.46"
+      },
+      "awayStats": {
+        "era": "2.65",
+        "k9": "5.30",
+        "bb9": "1.62",
+        "hr9": "0.94"
+      },
+      "engineWinHomePct": 74,
+      "lockedAt": "2026-07-19T16:01:19.577Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
       "gamePk": 823762,
       "gameDate": "2026-07-20T23:40:00Z",
       "scheduleDate": "2026-07-20",
@@ -17823,6 +17852,122 @@
       },
       "engineWinHomePct": 58,
       "lockedAt": "2026-07-18T19:11:56.995Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 822787,
+      "gameDate": "2026-07-21T23:07:00Z",
+      "scheduleDate": "2026-07-21",
+      "homeId": 141,
+      "homeEn": "Toronto Blue Jays",
+      "homeRecord": "46-52",
+      "awayId": 139,
+      "awayEn": "Tampa Bay Rays",
+      "awayRecord": "56-41",
+      "homePitcher": "Kevin Gausman",
+      "awayPitcher": "Drew Rasmussen",
+      "homeStats": {
+        "era": "4.33",
+        "k9": "9.29",
+        "bb9": "2.56",
+        "hr9": "1.20"
+      },
+      "awayStats": {
+        "era": "3.26",
+        "k9": "8.88",
+        "bb9": "1.54",
+        "hr9": "1.09"
+      },
+      "engineWinHomePct": 50,
+      "lockedAt": "2026-07-19T16:01:19.577Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 823760,
+      "gameDate": "2026-07-21T23:40:00Z",
+      "scheduleDate": "2026-07-21",
+      "homeId": 158,
+      "homeEn": "Milwaukee Brewers",
+      "homeRecord": "61-37",
+      "awayId": 121,
+      "awayEn": "New York Mets",
+      "awayRecord": "41-58",
+      "homePitcher": "Brandon Sproat",
+      "awayPitcher": "Zach Thornton",
+      "homeStats": {
+        "era": "5.16",
+        "k9": "9.55",
+        "bb9": "4.28",
+        "hr9": "1.65"
+      },
+      "awayStats": {
+        "era": "2.60",
+        "k9": "7.79",
+        "bb9": "2.60",
+        "hr9": "0.52"
+      },
+      "engineWinHomePct": 41,
+      "lockedAt": "2026-07-19T16:01:19.577Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 824005,
+      "gameDate": "2026-07-22T01:38:00Z",
+      "scheduleDate": "2026-07-21",
+      "homeId": 108,
+      "homeEn": "Los Angeles Angels",
+      "homeRecord": "38-61",
+      "awayId": 138,
+      "awayEn": "St. Louis Cardinals",
+      "awayRecord": "51-46",
+      "homePitcher": "Walbert Ureña",
+      "awayPitcher": "Matthew Liberatore",
+      "homeStats": {
+        "era": "2.88",
+        "k9": "8.63",
+        "bb9": "5.09",
+        "hr9": "0.55"
+      },
+      "awayStats": {
+        "era": "5.00",
+        "k9": "8.46",
+        "bb9": "3.46",
+        "hr9": "1.63"
+      },
+      "engineWinHomePct": 69,
+      "lockedAt": "2026-07-19T16:01:19.577Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 823114,
+      "gameDate": "2026-07-22T01:40:00Z",
+      "scheduleDate": "2026-07-21",
+      "homeId": 136,
+      "homeEn": "Seattle Mariners",
+      "homeRecord": "49-50",
+      "awayId": 113,
+      "awayEn": "Cincinnati Reds",
+      "awayRecord": "44-53",
+      "homePitcher": "Luis Castillo",
+      "awayPitcher": "Chase Burns",
+      "homeStats": {
+        "era": "4.93",
+        "k9": "8.32",
+        "bb9": "2.87",
+        "hr9": "1.23"
+      },
+      "awayStats": {
+        "era": "2.54",
+        "k9": "10.34",
+        "bb9": "3.24",
+        "hr9": "1.05"
+      },
+      "engineWinHomePct": 39,
+      "lockedAt": "2026-07-19T16:01:19.577Z",
       "finalScore": null,
       "verdict": null
     }
