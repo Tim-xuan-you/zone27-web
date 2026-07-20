@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-07-20T17:09:28.455Z",
+  "generatedAt": "2026-07-20T20:12:05.024Z",
   "source": "site.api.espn.com tennis scoreboard (atp+wta singles · official · public · 0 auth)",
-  "count": 2069,
+  "count": 2075,
   "games": [
     {
       "tour": "atp",
@@ -20478,6 +20478,16 @@
       "tournament": "Generali Open",
       "grouping": "Men's Singles",
       "date": "2026-07-20",
+      "winnerName": "Ignacio Buse",
+      "loserName": "Vit Kopriva",
+      "score": "7-5 6-7 6-1",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Generali Open",
+      "grouping": "Men's Singles",
+      "date": "2026-07-20",
       "winnerName": "Jurij Rodionov",
       "loserName": "Joel Josef Schwaerzler",
       "score": "6-4 6-2",
@@ -20501,6 +20511,16 @@
       "winnerName": "Yannick Hanfmann",
       "loserName": "Lukas Neumayer",
       "score": "7-6 6-4",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Millennium Estoril Open",
+      "grouping": "Men's Singles",
+      "date": "2026-07-20",
+      "winnerName": "Luca Van Assche",
+      "loserName": "Frederico Ferreira Silva",
+      "score": "7-5 6-7 6-1",
       "retired": false
     },
     {
@@ -20608,6 +20628,16 @@
       "tournament": "MSC Hamburg Ladies Open",
       "grouping": "Women's Singles",
       "date": "2026-07-20",
+      "winnerName": "Anna Bondar",
+      "loserName": "Moyuka Uchijima",
+      "score": "7-5 6-4",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "MSC Hamburg Ladies Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-20",
       "winnerName": "Arantxa Rus",
       "loserName": "Chloe Paquet",
       "score": "1-6 6-4 6-4",
@@ -20648,6 +20678,16 @@
       "tournament": "MSC Hamburg Ladies Open",
       "grouping": "Women's Singles",
       "date": "2026-07-20",
+      "winnerName": "Julia Stusek",
+      "loserName": "Nadia Podoroska",
+      "score": "4-6 6-3 6-4",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "MSC Hamburg Ladies Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-20",
       "winnerName": "Maria Lourdes Carle",
       "loserName": "Jessica Pieri",
       "score": "0-6 6-1 6-1",
@@ -20671,6 +20711,26 @@
       "winnerName": "Erika Andreeva",
       "loserName": "Lina Gjorcheska",
       "score": "6-2 6-0",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Palermo Ladies Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-20",
+      "winnerName": "Jennifer Ruggeri",
+      "loserName": "Amarissa Toth",
+      "score": "3-6 6-3 6-4",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Palermo Ladies Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-20",
+      "winnerName": "Lola Radivojevic",
+      "loserName": "Sofya Lansere",
+      "score": "6-1 3-6 6-1",
       "retired": false
     },
     {
