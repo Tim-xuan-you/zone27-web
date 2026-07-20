@@ -17602,8 +17602,12 @@
       },
       "engineWinHomePct": 32,
       "lockedAt": "2026-07-17T16:19:22.305Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 2,
+        "away": 5
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-07-20T03:40:48.030Z"
     },
     {
       "gamePk": 824007,
@@ -17631,8 +17635,12 @@
       },
       "engineWinHomePct": 25,
       "lockedAt": "2026-07-17T16:19:22.305Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 3,
+        "away": 2
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-07-20T03:40:48.030Z"
     },
     {
       "gamePk": 823113,
@@ -17660,8 +17668,12 @@
       },
       "engineWinHomePct": 59,
       "lockedAt": "2026-07-17T16:19:22.305Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 6,
+        "away": 3
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-07-20T03:40:48.030Z"
     },
     {
       "gamePk": 825057,
@@ -17689,8 +17701,12 @@
       },
       "engineWinHomePct": 60,
       "lockedAt": "2026-07-17T16:19:22.305Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 8,
+        "away": 7
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-07-20T03:40:48.030Z"
     },
     {
       "gamePk": 823521,
@@ -17718,8 +17734,12 @@
       },
       "engineWinHomePct": 61,
       "lockedAt": "2026-07-17T16:19:22.305Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 2,
+        "away": 1
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-07-20T03:40:48.030Z"
     },
     {
       "gamePk": 824410,
@@ -18124,6 +18144,35 @@
       },
       "engineWinHomePct": 58,
       "lockedAt": "2026-07-18T19:11:56.995Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 823437,
+      "gameDate": "2026-07-21T22:40:00Z",
+      "scheduleDate": "2026-07-21",
+      "homeId": 143,
+      "homeEn": "Philadelphia Phillies",
+      "homeRecord": "55-45",
+      "awayId": 119,
+      "awayEn": "Los Angeles Dodgers",
+      "awayRecord": "63-37",
+      "homePitcher": "Zack Wheeler",
+      "awayPitcher": "Eric Lauer",
+      "homeStats": {
+        "era": "2.13",
+        "k9": "10.45",
+        "bb9": "2.13",
+        "hr9": "0.97"
+      },
+      "awayStats": {
+        "era": "4.81",
+        "k9": "5.52",
+        "bb9": "3.17",
+        "hr9": "2.11"
+      },
+      "engineWinHomePct": 80,
+      "lockedAt": "2026-07-20T03:40:47.475Z",
       "finalScore": null,
       "verdict": null
     },
