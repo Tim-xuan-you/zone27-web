@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-07-20T14:58:26.822Z",
+  "generatedAt": "2026-07-20T17:09:28.455Z",
   "source": "site.api.espn.com tennis scoreboard (atp+wta singles · official · public · 0 auth)",
-  "count": 2064,
+  "count": 2069,
   "games": [
     {
       "tour": "atp",
@@ -20468,6 +20468,16 @@
       "tournament": "Generali Open",
       "grouping": "Men's Singles",
       "date": "2026-07-20",
+      "winnerName": "Facundo Diaz Acosta",
+      "loserName": "Federico Cina",
+      "score": "4-6 6-3 6-4",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Generali Open",
+      "grouping": "Men's Singles",
+      "date": "2026-07-20",
       "winnerName": "Jurij Rodionov",
       "loserName": "Joel Josef Schwaerzler",
       "score": "6-4 6-2",
@@ -20518,6 +20528,16 @@
       "tournament": "Livesport Prague Open",
       "grouping": "Women's Singles",
       "date": "2026-07-20",
+      "winnerName": "Ayla Aksu",
+      "loserName": "Sofia Costoulas",
+      "score": "2-6 6-3 6-4",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Livesport Prague Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-20",
       "winnerName": "Carol Young Suh Lee",
       "loserName": "Veronika Podrez",
       "score": "6-1 5-7 6-2",
@@ -20531,6 +20551,16 @@
       "winnerName": "Daria Snigur",
       "loserName": "Ella Seidel",
       "score": "7-5 3-6 6-3",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Livesport Prague Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-20",
+      "winnerName": "Dominika Salkova",
+      "loserName": "Antonia Ruzic",
+      "score": "7-6 6-4",
       "retired": false
     },
     {
@@ -20631,6 +20661,26 @@
       "winnerName": "Mona Barthel",
       "loserName": "Eva Vedder",
       "score": "4-6 6-3 6-0",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Palermo Ladies Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-20",
+      "winnerName": "Erika Andreeva",
+      "loserName": "Lina Gjorcheska",
+      "score": "6-2 6-0",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Palermo Ladies Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-20",
+      "winnerName": "Yasmine Kabbaj",
+      "loserName": "Deborah Chiesa",
+      "score": "6-4 6-1",
       "retired": false
     },
     {
