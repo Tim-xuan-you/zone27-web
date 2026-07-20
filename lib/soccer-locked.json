@@ -3353,6 +3353,34 @@
       "outcome": null,
       "verdict": null,
       "gradedAt": null
+    },
+    {
+      "matchId": "fd-554920",
+      "competitionCode": "BSA",
+      "competitionName": "巴西甲",
+      "kickoffISO": "2026-07-21T22:30:00Z",
+      "status": "TIMED",
+      "homeSeed": "Mineiro",
+      "awaySeed": "Bahia",
+      "home": "Mineiro",
+      "away": "Bahia",
+      "ratingHome": 0,
+      "ratingAway": 0,
+      "homeAdvantage": 0,
+      "xgHome": 1.3918019063743396,
+      "xgAway": 1.350607906357618,
+      "homeWin": 0.3718368001699771,
+      "draw": 0.27517794799174106,
+      "awayWin": 0.35298525183828106,
+      "homeWinPct": 37,
+      "drawPct": 28,
+      "awayWinPct": 35,
+      "enginePick": "home",
+      "lockedAt": "2026-07-20T02:42:47.358Z",
+      "finalScore": null,
+      "outcome": null,
+      "verdict": null,
+      "gradedAt": null
     }
   ]
 }
