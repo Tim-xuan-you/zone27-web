@@ -18558,6 +18558,35 @@
       "verdict": null
     },
     {
+      "gamePk": 824327,
+      "gameDate": "2026-07-22T19:10:00Z",
+      "scheduleDate": "2026-07-22",
+      "homeId": 115,
+      "homeEn": "Colorado Rockies",
+      "homeRecord": "40-61",
+      "awayId": 120,
+      "awayEn": "Washington Nationals",
+      "awayRecord": "50-50",
+      "homePitcher": "Gabriel Hughes",
+      "awayPitcher": "Cade Cavalli",
+      "homeStats": {
+        "era": "3.14",
+        "k9": "8.79",
+        "bb9": "3.14",
+        "hr9": "0.00"
+      },
+      "awayStats": {
+        "era": "3.78",
+        "k9": "10.23",
+        "bb9": "2.75",
+        "hr9": "0.77"
+      },
+      "engineWinHomePct": 58,
+      "lockedAt": "2026-07-20T19:49:22.601Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
       "gamePk": 825055,
       "gameDate": "2026-07-22T19:40:00Z",
       "scheduleDate": "2026-07-22",
