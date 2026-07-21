@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-07-20T22:38:54.949Z",
+  "generatedAt": "2026-07-21T03:59:40.008Z",
   "source": "site.api.espn.com tennis scoreboard (atp+wta singles · official · public · 0 auth)",
-  "count": 2079,
+  "count": 2080,
   "games": [
     {
       "tour": "atp",
@@ -20711,6 +20711,16 @@
       "winnerName": "Mona Barthel",
       "loserName": "Eva Vedder",
       "score": "4-6 6-3 6-0",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Palermo Ladies Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-20",
+      "winnerName": "Dalila Spiteri",
+      "loserName": "Alessandra Mazzola",
+      "score": "7-6 6-3",
       "retired": false
     },
     {
