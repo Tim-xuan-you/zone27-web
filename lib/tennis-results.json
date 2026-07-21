@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-07-21T03:59:40.008Z",
+  "generatedAt": "2026-07-21T11:29:22.908Z",
   "source": "site.api.espn.com tennis scoreboard (atp+wta singles · official · public · 0 auth)",
-  "count": 2080,
+  "count": 2088,
   "games": [
     {
       "tour": "atp",
@@ -20802,6 +20802,86 @@
       "loserName": "Paula Badosa",
       "score": "6-4 4-0",
       "retired": true
+    },
+    {
+      "tour": "atp",
+      "tournament": "Generali Open",
+      "grouping": "Men's Singles",
+      "date": "2026-07-21",
+      "winnerName": "Jan-Lennard Struff",
+      "loserName": "Aleksandr Shevchenko",
+      "score": "3-6 7-6 6-4",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Generali Open",
+      "grouping": "Men's Singles",
+      "date": "2026-07-21",
+      "winnerName": "Marco Trungelliti",
+      "loserName": "Juan Manuel Cerundolo",
+      "score": "6-2 6-1",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Livesport Prague Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-21",
+      "winnerName": "Mai Hontama",
+      "loserName": "Diane Parry",
+      "score": "6-4 6-0",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Livesport Prague Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-21",
+      "winnerName": "Maria Timofeeva",
+      "loserName": "Aliaksandra Sasnovich",
+      "score": "6-3 6-4",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Livesport Prague Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-21",
+      "winnerName": "Nikola Bartunkova",
+      "loserName": "Yuan Yue",
+      "score": "3-6 6-4 6-1",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "MSC Hamburg Ladies Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-21",
+      "winnerName": "Leyre Romero Gormaz",
+      "loserName": "Veronika Erjavec",
+      "score": "6-2 6-2",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "MSC Hamburg Ladies Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-21",
+      "winnerName": "Panna Udvardy",
+      "loserName": "Elena Pridankina",
+      "score": "6-4 6-2",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "MSC Hamburg Ladies Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-21",
+      "winnerName": "Sinja Kraus",
+      "loserName": "Darja Semenistaja",
+      "score": "3-6 6-3 6-2",
+      "retired": false
     }
   ]
 }
