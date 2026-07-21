@@ -18960,6 +18960,64 @@
       "lockedAt": "2026-07-20T16:35:47.169Z",
       "finalScore": null,
       "verdict": null
+    },
+    {
+      "gamePk": 824893,
+      "gameDate": "2026-07-23T16:15:00Z",
+      "scheduleDate": "2026-07-23",
+      "homeId": 144,
+      "homeEn": "Atlanta Braves",
+      "homeRecord": "58-41",
+      "awayId": 135,
+      "awayEn": "San Diego Padres",
+      "awayRecord": "49-51",
+      "homePitcher": "Chris Sale",
+      "awayPitcher": "Griffin Canning",
+      "homeStats": {
+        "era": "2.06",
+        "k9": "10.54",
+        "bb9": "2.14",
+        "hr9": "0.69"
+      },
+      "awayStats": {
+        "era": "6.67",
+        "k9": "8.95",
+        "bb9": "4.85",
+        "hr9": "1.37"
+      },
+      "engineWinHomePct": 80,
+      "lockedAt": "2026-07-21T16:26:14.539Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 824406,
+      "gameDate": "2026-07-23T17:10:00Z",
+      "scheduleDate": "2026-07-23",
+      "homeId": 114,
+      "homeEn": "Cleveland Guardians",
+      "homeRecord": "53-48",
+      "awayId": 142,
+      "awayEn": "Minnesota Twins",
+      "awayRecord": "49-52",
+      "homePitcher": "Gavin Williams",
+      "awayPitcher": "Taj Bradley",
+      "homeStats": {
+        "era": "4.00",
+        "k9": "10.94",
+        "bb9": "2.79",
+        "hr9": "1.51"
+      },
+      "awayStats": {
+        "era": "3.85",
+        "k9": "10.37",
+        "bb9": "3.59",
+        "hr9": "1.34"
+      },
+      "engineWinHomePct": 54,
+      "lockedAt": "2026-07-21T16:26:14.539Z",
+      "finalScore": null,
+      "verdict": null
     }
   ]
 }
