@@ -18035,8 +18035,12 @@
       },
       "engineWinHomePct": 67,
       "lockedAt": "2026-07-19T19:13:41.576Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 3,
+        "away": 10
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-07-21T08:37:39.609Z"
     },
     {
       "gamePk": 824654,
@@ -18064,8 +18068,12 @@
       },
       "engineWinHomePct": 35,
       "lockedAt": "2026-07-19T21:58:17.951Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 6,
+        "away": 8
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-07-21T08:37:39.610Z"
     },
     {
       "gamePk": 824328,
@@ -18126,8 +18134,12 @@
       },
       "engineWinHomePct": 60,
       "lockedAt": "2026-07-19T03:26:54.462Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 8,
+        "away": 0
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-07-21T08:37:39.610Z"
     },
     {
       "gamePk": 825058,
@@ -18155,8 +18167,12 @@
       },
       "engineWinHomePct": 53,
       "lockedAt": "2026-07-19T19:13:41.576Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 2,
+        "away": 5
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-07-21T08:37:39.610Z"
     },
     {
       "gamePk": 824006,
@@ -18184,8 +18200,12 @@
       },
       "engineWinHomePct": 58,
       "lockedAt": "2026-07-18T19:11:56.995Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 3,
+        "away": 2
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-07-21T08:37:39.610Z"
     },
     {
       "gamePk": 823437,
@@ -18445,6 +18465,35 @@
       },
       "engineWinHomePct": 50,
       "lockedAt": "2026-07-19T21:58:17.951Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 822871,
+      "gameDate": "2026-07-22T00:05:00Z",
+      "scheduleDate": "2026-07-21",
+      "homeId": 140,
+      "homeEn": "Texas Rangers",
+      "homeRecord": "50-50",
+      "awayId": 145,
+      "awayEn": "Chicago White Sox",
+      "awayRecord": "53-46",
+      "homePitcher": "Kumar Rocker",
+      "awayPitcher": "Noah Schultz",
+      "homeStats": {
+        "era": "4.40",
+        "k9": "8.00",
+        "bb9": "3.40",
+        "hr9": "1.20"
+      },
+      "awayStats": {
+        "era": "5.60",
+        "k9": "7.98",
+        "bb9": "4.92",
+        "hr9": "1.36"
+      },
+      "engineWinHomePct": 60,
+      "lockedAt": "2026-07-21T08:37:38.897Z",
       "finalScore": null,
       "verdict": null
     },
