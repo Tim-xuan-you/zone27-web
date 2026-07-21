@@ -19018,6 +19018,35 @@
       "lockedAt": "2026-07-21T16:26:14.539Z",
       "finalScore": null,
       "verdict": null
+    },
+    {
+      "gamePk": 822785,
+      "gameDate": "2026-07-23T19:07:00Z",
+      "scheduleDate": "2026-07-23",
+      "homeId": 141,
+      "homeEn": "Toronto Blue Jays",
+      "homeRecord": "46-54",
+      "awayId": 139,
+      "awayEn": "Tampa Bay Rays",
+      "awayRecord": "57-42",
+      "homePitcher": "Shane Bieber",
+      "awayPitcher": "Ian Seymour",
+      "homeStats": {
+        "era": "5.70",
+        "k9": "7.23",
+        "bb9": "4.56",
+        "hr9": "2.66"
+      },
+      "awayStats": {
+        "era": "4.79",
+        "k9": "10.51",
+        "bb9": "3.46",
+        "hr9": "1.60"
+      },
+      "engineWinHomePct": 37,
+      "lockedAt": "2026-07-21T22:07:31.878Z",
+      "finalScore": null,
+      "verdict": null
     }
   ]
 }
