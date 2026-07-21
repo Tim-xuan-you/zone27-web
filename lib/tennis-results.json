@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-07-21T17:00:56.402Z",
+  "generatedAt": "2026-07-21T20:06:00.719Z",
   "source": "site.api.espn.com tennis scoreboard (atp+wta singles · official · public · 0 auth)",
-  "count": 2111,
+  "count": 2118,
   "games": [
     {
       "tour": "atp",
@@ -20898,6 +20898,16 @@
       "tournament": "Millennium Estoril Open",
       "grouping": "Men's Singles",
       "date": "2026-07-21",
+      "winnerName": "Jaime Faria",
+      "loserName": "Botic Van De Zandschulp",
+      "score": "6-3 6-4",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Millennium Estoril Open",
+      "grouping": "Men's Singles",
+      "date": "2026-07-21",
       "winnerName": "Kyrian Jacquet",
       "loserName": "Daniel Merida",
       "score": "1-6 6-1 7-5",
@@ -20941,6 +20951,16 @@
       "winnerName": "Timofey Skatov",
       "loserName": "Jesper de Jong",
       "score": "1-6 6-4 6-3",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Livesport Prague Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-21",
+      "winnerName": "Barbora Krejcikova",
+      "loserName": "Linda Fruhvirtova",
+      "score": "6-2 6-4",
       "retired": false
     },
     {
@@ -21078,6 +21098,16 @@
       "tournament": "MSC Hamburg Ladies Open",
       "grouping": "Women's Singles",
       "date": "2026-07-21",
+      "winnerName": "Oleksandra Oliynykova",
+      "loserName": "Nastasja Schunk",
+      "score": "6-2 3-6 7-5",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "MSC Hamburg Ladies Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-21",
       "winnerName": "Panna Udvardy",
       "loserName": "Elena Pridankina",
       "score": "6-4 6-2",
@@ -21111,6 +21141,46 @@
       "winnerName": "Yulia Putintseva",
       "loserName": "Mona Barthel",
       "score": "6-2 7-6",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Palermo Ladies Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-21",
+      "winnerName": "Alice Rame",
+      "loserName": "Anastasia Tikhonova",
+      "score": "6-1 6-2",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Palermo Ladies Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-21",
+      "winnerName": "Francesca Jones",
+      "loserName": "Darya Astakhova",
+      "score": "6-3 6-2",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Palermo Ladies Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-21",
+      "winnerName": "Mina Hodzic",
+      "loserName": "Caroline Werner",
+      "score": "6-4 4-6 6-2",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Palermo Ladies Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-21",
+      "winnerName": "Noemi Basiletti",
+      "loserName": "Raluka Serban",
+      "score": "6-4 6-1",
       "retired": false
     }
   ]
