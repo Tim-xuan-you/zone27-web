@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-07-21T20:06:00.719Z",
+  "generatedAt": "2026-07-21T22:35:45.957Z",
   "source": "site.api.espn.com tennis scoreboard (atp+wta singles · official · public · 0 auth)",
-  "count": 2118,
+  "count": 2122,
   "games": [
     {
       "tour": "atp",
@@ -21148,9 +21148,29 @@
       "tournament": "Palermo Ladies Open",
       "grouping": "Women's Singles",
       "date": "2026-07-21",
+      "winnerName": "Alevtina Ibragimova",
+      "loserName": "Tamara Zidansek",
+      "score": "3-6 6-4 6-3",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Palermo Ladies Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-21",
       "winnerName": "Alice Rame",
       "loserName": "Anastasia Tikhonova",
       "score": "6-1 6-2",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Palermo Ladies Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-21",
+      "winnerName": "Clara Burel",
+      "loserName": "Anastasia Abbagnato",
+      "score": "6-2 6-1",
       "retired": false
     },
     {
@@ -21168,9 +21188,29 @@
       "tournament": "Palermo Ladies Open",
       "grouping": "Women's Singles",
       "date": "2026-07-21",
+      "winnerName": "Lucia Bronzetti",
+      "loserName": "Ilary Pistola",
+      "score": "6-1 6-4",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Palermo Ladies Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-21",
       "winnerName": "Mina Hodzic",
       "loserName": "Caroline Werner",
       "score": "6-4 4-6 6-2",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Palermo Ladies Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-21",
+      "winnerName": "Miriam Bulgaru",
+      "loserName": "Caijsa Hennemann",
+      "score": "3-6 6-1 6-2",
       "retired": false
     },
     {
