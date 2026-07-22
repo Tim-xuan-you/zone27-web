@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-07-22T14:46:43.937Z",
+  "generatedAt": "2026-07-22T17:01:15.973Z",
   "source": "site.api.espn.com tennis scoreboard (atp+wta singles · official · public · 0 auth)",
-  "count": 2136,
+  "count": 2143,
   "games": [
     {
       "tour": "atp",
@@ -21228,6 +21228,26 @@
       "tournament": "Generali Open",
       "grouping": "Men's Singles",
       "date": "2026-07-22",
+      "winnerName": "Alexander Bublik",
+      "loserName": "Facundo Diaz Acosta",
+      "score": "6-3 7-5",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Generali Open",
+      "grouping": "Men's Singles",
+      "date": "2026-07-22",
+      "winnerName": "Alex Molcan",
+      "loserName": "Daniel Altmaier",
+      "score": "6-3 3-6 7-5",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Generali Open",
+      "grouping": "Men's Singles",
+      "date": "2026-07-22",
       "winnerName": "Ignacio Buse",
       "loserName": "Kilian Feldbausch",
       "score": "2-6 6-2 6-2",
@@ -21294,6 +21314,16 @@
       "retired": false
     },
     {
+      "tour": "atp",
+      "tournament": "Millennium Estoril Open",
+      "grouping": "Men's Singles",
+      "date": "2026-07-22",
+      "winnerName": "Roman Andres Burruchaga",
+      "loserName": "Nuno Borges",
+      "score": "6-1 4-6 6-3",
+      "retired": false
+    },
+    {
       "tour": "wta",
       "tournament": "Livesport Prague Open",
       "grouping": "Women's Singles",
@@ -21301,6 +21331,16 @@
       "winnerName": "Daria Snigur",
       "loserName": "Ayla Aksu",
       "score": "6-3 6-2",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Livesport Prague Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-22",
+      "winnerName": "Dominika Salkova",
+      "loserName": "Oceane Dodin",
+      "score": "6-1 6-1",
       "retired": false
     },
     {
@@ -21321,6 +21361,16 @@
       "winnerName": "Tereza Valentova",
       "loserName": "Maya Joint",
       "score": "1-6 6-0 6-3",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "MSC Hamburg Ladies Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-22",
+      "winnerName": "Alina Charaeva",
+      "loserName": "Sinja Kraus",
+      "score": "5-7 7-5 7-5",
       "retired": false
     },
     {
@@ -21362,6 +21412,26 @@
       "loserName": "Katarzyna Kawa",
       "score": "7-5 6-4",
       "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "MSC Hamburg Ladies Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-22",
+      "winnerName": "Tamara Korpatsch",
+      "loserName": "Julia Stusek",
+      "score": "6-0 3-6 6-3",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Palermo Ladies Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-22",
+      "winnerName": "Clara Burel",
+      "loserName": "Federica Urgesi",
+      "score": "",
+      "retired": true
     }
   ]
 }
