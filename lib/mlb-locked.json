@@ -19182,6 +19182,64 @@
       "lockedAt": "2026-07-21T22:07:31.878Z",
       "finalScore": null,
       "verdict": null
+    },
+    {
+      "gamePk": 823759,
+      "gameDate": "2026-07-24T20:10:00Z",
+      "scheduleDate": "2026-07-24",
+      "homeId": 158,
+      "homeEn": "Milwaukee Brewers",
+      "homeRecord": "63-38",
+      "awayId": 115,
+      "awayEn": "Colorado Rockies",
+      "awayRecord": "41-62",
+      "homePitcher": "Shane Drohan",
+      "awayPitcher": "Tomoyuki Sugano",
+      "homeStats": {
+        "era": "3.20",
+        "k9": "9.00",
+        "bb9": "2.49",
+        "hr9": "0.71"
+      },
+      "awayStats": {
+        "era": "4.76",
+        "k9": "5.06",
+        "bb9": "2.28",
+        "hr9": "1.79"
+      },
+      "engineWinHomePct": 75,
+      "lockedAt": "2026-07-22T19:34:36.956Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 823196,
+      "gameDate": "2026-07-25T02:15:00Z",
+      "scheduleDate": "2026-07-24",
+      "homeId": 137,
+      "homeEn": "San Francisco Giants",
+      "homeRecord": "42-59",
+      "awayId": 108,
+      "awayEn": "Los Angeles Angels",
+      "awayRecord": "41-61",
+      "homePitcher": "Logan Webb",
+      "awayPitcher": "Grayson Rodriguez",
+      "homeStats": {
+        "era": "3.87",
+        "k9": "7.15",
+        "bb9": "2.27",
+        "hr9": "0.76"
+      },
+      "awayStats": {
+        "era": "8.23",
+        "k9": "6.94",
+        "bb9": "4.37",
+        "hr9": "1.29"
+      },
+      "engineWinHomePct": 75,
+      "lockedAt": "2026-07-22T19:34:36.956Z",
+      "finalScore": null,
+      "verdict": null
     }
   ]
 }
