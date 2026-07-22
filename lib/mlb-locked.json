@@ -9036,37 +9036,6 @@
       "gradedAt": "2026-06-26T04:13:33.635Z"
     },
     {
-      "gamePk": 823042,
-      "gameDate": "2026-06-25T23:45:00Z",
-      "scheduleDate": "2026-06-25",
-      "homeId": 138,
-      "homeEn": "St. Louis Cardinals",
-      "homeRecord": "42-34",
-      "awayId": 109,
-      "awayEn": "Arizona Diamondbacks",
-      "awayRecord": "39-39",
-      "homePitcher": "Michael McGreevy",
-      "awayPitcher": "Zac Gallen",
-      "homeStats": {
-        "era": "3.35",
-        "k9": "5.72",
-        "bb9": "2.16",
-        "hr9": "1.30"
-      },
-      "awayStats": {
-        "era": "6.10",
-        "k9": "5.87",
-        "bb9": "2.82",
-        "hr9": "1.47"
-      },
-      "engineWinHomePct": 66,
-      "lockedAt": "2026-06-23T20:13:24.590Z",
-      "finalScore": null,
-      "verdict": "void",
-      "postponedTo": "2026-07-23",
-      "gradedAt": "2026-07-12T08:44:41.619Z"
-    },
-    {
       "gamePk": 824255,
       "gameDate": "2026-06-26T22:40:00Z",
       "scheduleDate": "2026-06-26",
@@ -18687,8 +18656,12 @@
       },
       "engineWinHomePct": 61,
       "lockedAt": "2026-07-20T16:35:47.169Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 3,
+        "away": 5
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-07-22T22:08:58.396Z"
     },
     {
       "gamePk": 824083,
@@ -18716,8 +18689,12 @@
       },
       "engineWinHomePct": 45,
       "lockedAt": "2026-07-20T16:35:47.169Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 5,
+        "away": 4
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-07-22T22:08:58.396Z"
     },
     {
       "gamePk": 823761,
@@ -18745,8 +18722,12 @@
       },
       "engineWinHomePct": 54,
       "lockedAt": "2026-07-20T16:35:47.169Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 4,
+        "away": 3
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-07-22T22:08:58.396Z"
     },
     {
       "gamePk": 824327,
@@ -19184,6 +19165,66 @@
       "verdict": null
     },
     {
+      "gamePk": 823042,
+      "gameDate": "2026-07-23T21:15:00Z",
+      "scheduleDate": "2026-07-23",
+      "homeId": 138,
+      "homeEn": "St. Louis Cardinals",
+      "homeRecord": "51-49",
+      "awayId": 109,
+      "awayEn": "Arizona Diamondbacks",
+      "awayRecord": "52-49",
+      "homePitcher": "Michael McGreevy",
+      "awayPitcher": "Brandon Pfaadt",
+      "homeStats": {
+        "era": "2.92",
+        "k9": "5.92",
+        "bb9": "2.00",
+        "hr9": "1.17"
+      },
+      "awayStats": {
+        "era": "4.58",
+        "k9": "6.71",
+        "bb9": "2.75",
+        "hr9": "1.22"
+      },
+      "engineWinHomePct": 59,
+      "lockedAt": "2026-07-22T22:08:57.937Z",
+      "finalScore": null,
+      "verdict": null,
+      "gradedAt": "2026-07-12T08:44:41.619Z",
+      "relockedFrom": "2026-06-25"
+    },
+    {
+      "gamePk": 824247,
+      "gameDate": "2026-07-23T22:40:00Z",
+      "scheduleDate": "2026-07-23",
+      "homeId": 116,
+      "homeEn": "Detroit Tigers",
+      "homeRecord": "47-54",
+      "awayId": 118,
+      "awayEn": "Kansas City Royals",
+      "awayRecord": "43-60",
+      "homePitcher": "Troy Melton",
+      "awayPitcher": "Randy Dobnak",
+      "homeStats": {
+        "era": "1.80",
+        "k9": "8.18",
+        "bb9": "2.45",
+        "hr9": "1.15"
+      },
+      "awayStats": {
+        "era": "1.93",
+        "k9": "4.50",
+        "bb9": "5.14",
+        "hr9": "1.29"
+      },
+      "engineWinHomePct": 63,
+      "lockedAt": "2026-07-22T22:08:57.937Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
       "gamePk": 823759,
       "gameDate": "2026-07-24T20:10:00Z",
       "scheduleDate": "2026-07-24",
@@ -19209,6 +19250,122 @@
       },
       "engineWinHomePct": 75,
       "lockedAt": "2026-07-22T19:34:36.956Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 823434,
+      "gameDate": "2026-07-24T22:45:00Z",
+      "scheduleDate": "2026-07-24",
+      "homeId": 143,
+      "homeEn": "Philadelphia Phillies",
+      "homeRecord": "56-46",
+      "awayId": 147,
+      "awayEn": "New York Yankees",
+      "awayRecord": "56-45",
+      "homePitcher": "Jesús Luzardo",
+      "awayPitcher": "Will Warren",
+      "homeStats": {
+        "era": "3.43",
+        "k9": "11.16",
+        "bb9": "2.89",
+        "hr9": "0.78"
+      },
+      "awayStats": {
+        "era": "4.03",
+        "k9": "8.79",
+        "bb9": "3.02",
+        "hr9": "1.28"
+      },
+      "engineWinHomePct": 64,
+      "lockedAt": "2026-07-22T22:08:57.937Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 823601,
+      "gameDate": "2026-07-24T23:10:00Z",
+      "scheduleDate": "2026-07-24",
+      "homeId": 121,
+      "homeEn": "New York Mets",
+      "homeRecord": "43-60",
+      "awayId": 119,
+      "awayEn": "Los Angeles Dodgers",
+      "awayRecord": "64-38",
+      "homePitcher": "Sean Manaea",
+      "awayPitcher": "Roki Sasaki",
+      "homeStats": {
+        "era": "4.74",
+        "k9": "9.15",
+        "bb9": "2.94",
+        "hr9": "1.36"
+      },
+      "awayStats": {
+        "era": "4.98",
+        "k9": "8.83",
+        "bb9": "3.53",
+        "hr9": "1.97"
+      },
+      "engineWinHomePct": 59,
+      "lockedAt": "2026-07-22T22:08:57.937Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 823680,
+      "gameDate": "2026-07-25T00:10:00Z",
+      "scheduleDate": "2026-07-24",
+      "homeId": 142,
+      "homeEn": "Minnesota Twins",
+      "homeRecord": "49-53",
+      "awayId": 133,
+      "awayEn": "Athletics",
+      "awayRecord": "43-58",
+      "homePitcher": "Zebby Matthews",
+      "awayPitcher": "Jacob Lopez",
+      "homeStats": {
+        "era": "5.40",
+        "k9": "7.46",
+        "bb9": "2.70",
+        "hr9": "1.93"
+      },
+      "awayStats": {
+        "era": "6.64",
+        "k9": "7.39",
+        "bb9": "5.43",
+        "hr9": "1.66"
+      },
+      "engineWinHomePct": 57,
+      "lockedAt": "2026-07-22T22:08:57.937Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 823031,
+      "gameDate": "2026-07-25T00:15:00Z",
+      "scheduleDate": "2026-07-24",
+      "homeId": 138,
+      "homeEn": "St. Louis Cardinals",
+      "homeRecord": "51-49",
+      "awayId": 113,
+      "awayEn": "Cincinnati Reds",
+      "awayRecord": "46-54",
+      "homePitcher": "Dustin May",
+      "awayPitcher": "Rhett Lowder",
+      "homeStats": {
+        "era": "4.78",
+        "k9": "8.72",
+        "bb9": "2.94",
+        "hr9": "0.64"
+      },
+      "awayStats": {
+        "era": "5.75",
+        "k9": "7.63",
+        "bb9": "4.38",
+        "hr9": "1.13"
+      },
+      "engineWinHomePct": 63,
+      "lockedAt": "2026-07-22T22:08:57.937Z",
       "finalScore": null,
       "verdict": null
     },
