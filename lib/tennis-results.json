@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-07-23T20:00:03.197Z",
+  "generatedAt": "2026-07-23T22:38:04.784Z",
   "source": "site.api.espn.com tennis scoreboard (atp+wta singles · official · public · 0 auth)",
-  "count": 2168,
+  "count": 2169,
   "games": [
     {
       "tour": "atp",
@@ -21671,6 +21671,16 @@
       "winnerName": "Francesca Jones",
       "loserName": "Miriam Bulgaru",
       "score": "6-3 6-2",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Palermo Ladies Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-23",
+      "winnerName": "Lucia Bronzetti",
+      "loserName": "Dalila Spiteri",
+      "score": "6-4 6-4",
       "retired": false
     },
     {
