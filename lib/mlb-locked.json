@@ -19159,8 +19159,12 @@
       },
       "engineWinHomePct": 80,
       "lockedAt": "2026-07-21T16:26:14.539Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 6,
+        "away": 5
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-07-23T19:26:37.839Z"
     },
     {
       "gamePk": 824406,
@@ -19397,6 +19401,35 @@
       "verdict": null
     },
     {
+      "gamePk": 822952,
+      "gameDate": "2026-07-24T23:10:00Z",
+      "scheduleDate": "2026-07-24",
+      "homeId": 139,
+      "homeEn": "Tampa Bay Rays",
+      "homeRecord": "59-42",
+      "awayId": 114,
+      "awayEn": "Cleveland Guardians",
+      "awayRecord": "54-49",
+      "homePitcher": "Shane McClanahan",
+      "awayPitcher": "Joey Cantillo",
+      "homeStats": {
+        "era": "3.16",
+        "k9": "8.41",
+        "bb9": "3.07",
+        "hr9": "0.69"
+      },
+      "awayStats": {
+        "era": "3.74",
+        "k9": "9.51",
+        "bb9": "4.42",
+        "hr9": "1.02"
+      },
+      "engineWinHomePct": 56,
+      "lockedAt": "2026-07-23T19:26:37.055Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
       "gamePk": 824573,
       "gameDate": "2026-07-24T23:40:00Z",
       "scheduleDate": "2026-07-24",
@@ -19567,6 +19600,35 @@
       },
       "engineWinHomePct": 73,
       "lockedAt": "2026-07-23T16:39:40.978Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 822948,
+      "gameDate": "2026-07-25T22:10:00Z",
+      "scheduleDate": "2026-07-25",
+      "homeId": 139,
+      "homeEn": "Tampa Bay Rays",
+      "homeRecord": "59-42",
+      "awayId": 114,
+      "awayEn": "Cleveland Guardians",
+      "awayRecord": "54-49",
+      "homePitcher": "Nick Martinez",
+      "awayPitcher": "Tanner Bibee",
+      "homeStats": {
+        "era": "2.59",
+        "k9": "5.01",
+        "bb9": "1.62",
+        "hr9": "0.89"
+      },
+      "awayStats": {
+        "era": "3.86",
+        "k9": "6.96",
+        "bb9": "2.65",
+        "hr9": "1.51"
+      },
+      "engineWinHomePct": 59,
+      "lockedAt": "2026-07-23T19:26:37.055Z",
       "finalScore": null,
       "verdict": null
     },
