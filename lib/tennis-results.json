@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-07-23T14:53:32.579Z",
+  "generatedAt": "2026-07-23T17:03:58.683Z",
   "source": "site.api.espn.com tennis scoreboard (atp+wta singles · official · public · 0 auth)",
-  "count": 2157,
+  "count": 2161,
   "games": [
     {
       "tour": "atp",
@@ -21498,6 +21498,16 @@
       "tournament": "Generali Open",
       "grouping": "Men's Singles",
       "date": "2026-07-23",
+      "winnerName": "Alexander Bublik",
+      "loserName": "Alex Molcan",
+      "score": "6-3 6-2",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Generali Open",
+      "grouping": "Men's Singles",
+      "date": "2026-07-23",
       "winnerName": "Quentin Halys",
       "loserName": "Mariano Navone",
       "score": "7-5 6-3",
@@ -21521,6 +21531,16 @@
       "winnerName": "Yannick Hanfmann",
       "loserName": "Sebastian Baez",
       "score": "6-3 6-1",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Millennium Estoril Open",
+      "grouping": "Men's Singles",
+      "date": "2026-07-23",
+      "winnerName": "Jaime Faria",
+      "loserName": "Gonzalo Bueno",
+      "score": "6-2 6-4",
       "retired": false
     },
     {
@@ -21555,6 +21575,16 @@
     },
     {
       "tour": "wta",
+      "tournament": "Livesport Prague Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-23",
+      "winnerName": "Sara Bejlek",
+      "loserName": "Maria Timofeeva",
+      "score": "6-1 6-1",
+      "retired": false
+    },
+    {
+      "tour": "wta",
       "tournament": "MSC Hamburg Ladies Open",
       "grouping": "Women's Singles",
       "date": "2026-07-23",
@@ -21571,6 +21601,16 @@
       "winnerName": "Oleksandra Oliynykova",
       "loserName": "Leyre Romero Gormaz",
       "score": "7-6 3-6 6-2",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "MSC Hamburg Ladies Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-23",
+      "winnerName": "Paula Badosa",
+      "loserName": "Panna Udvardy",
+      "score": "6-4 6-1",
       "retired": false
     }
   ]
