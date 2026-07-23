@@ -19192,8 +19192,12 @@
       },
       "engineWinHomePct": 54,
       "lockedAt": "2026-07-21T16:26:14.539Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 1,
+        "away": 3
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-07-23T22:08:47.714Z"
     },
     {
       "gamePk": 822785,
@@ -19221,8 +19225,12 @@
       },
       "engineWinHomePct": 37,
       "lockedAt": "2026-07-21T22:07:31.878Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 3,
+        "away": 1
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-07-23T22:08:47.714Z"
     },
     {
       "gamePk": 823042,
@@ -19372,6 +19380,35 @@
       "verdict": null
     },
     {
+      "gamePk": 822707,
+      "gameDate": "2026-07-24T22:45:00Z",
+      "scheduleDate": "2026-07-24",
+      "homeId": 120,
+      "homeEn": "Washington Nationals",
+      "homeRecord": "52-51",
+      "awayId": 109,
+      "awayEn": "Arizona Diamondbacks",
+      "awayRecord": "53-49",
+      "homePitcher": "Zack Littell",
+      "awayPitcher": "Eduardo Rodriguez",
+      "homeStats": {
+        "era": "5.34",
+        "k9": "5.72",
+        "bb9": "2.81",
+        "hr9": "2.34"
+      },
+      "awayStats": {
+        "era": "2.62",
+        "k9": "6.33",
+        "bb9": "3.16",
+        "hr9": "0.93"
+      },
+      "engineWinHomePct": 33,
+      "lockedAt": "2026-07-23T22:08:47.159Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
       "gamePk": 823601,
       "gameDate": "2026-07-24T23:10:00Z",
       "scheduleDate": "2026-07-24",
@@ -19426,6 +19463,35 @@
       },
       "engineWinHomePct": 56,
       "lockedAt": "2026-07-23T19:26:37.055Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 824733,
+      "gameDate": "2026-07-24T23:15:00Z",
+      "scheduleDate": "2026-07-24",
+      "homeId": 111,
+      "homeEn": "Boston Red Sox",
+      "homeRecord": "52-49",
+      "awayId": 141,
+      "awayEn": "Toronto Blue Jays",
+      "awayRecord": "47-56",
+      "homePitcher": "Patrick Sandoval",
+      "awayPitcher": "Trey Yesavage",
+      "homeStats": {
+        "era": "4.82",
+        "k9": "9.64",
+        "bb9": "1.93",
+        "hr9": "0.96"
+      },
+      "awayStats": {
+        "era": "3.78",
+        "k9": "8.67",
+        "bb9": "4.56",
+        "hr9": "0.89"
+      },
+      "engineWinHomePct": 51,
+      "lockedAt": "2026-07-23T22:08:47.159Z",
       "finalScore": null,
       "verdict": null
     },
@@ -19604,6 +19670,93 @@
       "verdict": null
     },
     {
+      "gamePk": 822704,
+      "gameDate": "2026-07-25T20:05:00Z",
+      "scheduleDate": "2026-07-25",
+      "homeId": 120,
+      "homeEn": "Washington Nationals",
+      "homeRecord": "52-51",
+      "awayId": 109,
+      "awayEn": "Arizona Diamondbacks",
+      "awayRecord": "53-49",
+      "homePitcher": "Foster Griffin",
+      "awayPitcher": "Mitch Bratt",
+      "homeStats": {
+        "era": "2.68",
+        "k9": "8.51",
+        "bb9": "2.07",
+        "hr9": "1.30"
+      },
+      "awayStats": {
+        "era": "5.06",
+        "k9": "5.91",
+        "bb9": "5.06",
+        "hr9": "2.53"
+      },
+      "engineWinHomePct": 76,
+      "lockedAt": "2026-07-23T22:08:47.159Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 824734,
+      "gameDate": "2026-07-25T20:10:00Z",
+      "scheduleDate": "2026-07-25",
+      "homeId": 111,
+      "homeEn": "Boston Red Sox",
+      "homeRecord": "52-49",
+      "awayId": 141,
+      "awayEn": "Toronto Blue Jays",
+      "awayRecord": "47-56",
+      "homePitcher": "Sonny Gray",
+      "awayPitcher": "Dylan Cease",
+      "homeStats": {
+        "era": "2.48",
+        "k9": "7.97",
+        "bb9": "2.48",
+        "hr9": "0.97"
+      },
+      "awayStats": {
+        "era": "2.67",
+        "k9": "13.37",
+        "bb9": "3.88",
+        "hr9": "0.60"
+      },
+      "engineWinHomePct": 42,
+      "lockedAt": "2026-07-23T22:08:47.159Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 823841,
+      "gameDate": "2026-07-25T20:10:00Z",
+      "scheduleDate": "2026-07-25",
+      "homeId": 146,
+      "homeEn": "Miami Marlins",
+      "homeRecord": "52-51",
+      "awayId": 135,
+      "awayEn": "San Diego Padres",
+      "awayRecord": "50-53",
+      "homePitcher": "Eury Pérez",
+      "awayPitcher": "JP Sears",
+      "homeStats": {
+        "era": "3.53",
+        "k9": "10.21",
+        "bb9": "3.63",
+        "hr9": "1.28"
+      },
+      "awayStats": {
+        "era": "4.38",
+        "k9": "7.30",
+        "bb9": "2.92",
+        "hr9": "1.82"
+      },
+      "engineWinHomePct": 66,
+      "lockedAt": "2026-07-23T22:08:47.159Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
       "gamePk": 822948,
       "gameDate": "2026-07-25T22:10:00Z",
       "scheduleDate": "2026-07-25",
@@ -19658,6 +19811,35 @@
       },
       "engineWinHomePct": 66,
       "lockedAt": "2026-07-23T16:39:40.978Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 824811,
+      "gameDate": "2026-07-25T23:05:00Z",
+      "scheduleDate": "2026-07-25",
+      "homeId": 110,
+      "homeEn": "Baltimore Orioles",
+      "homeRecord": "50-53",
+      "awayId": 144,
+      "awayEn": "Atlanta Braves",
+      "awayRecord": "60-42",
+      "homePitcher": "Trevor Rogers",
+      "awayPitcher": "Bryce Elder",
+      "homeStats": {
+        "era": "4.28",
+        "k9": "7.17",
+        "bb9": "2.98",
+        "hr9": "0.93"
+      },
+      "awayStats": {
+        "era": "4.06",
+        "k9": "7.45",
+        "bb9": "2.73",
+        "hr9": "1.41"
+      },
+      "engineWinHomePct": 55,
+      "lockedAt": "2026-07-23T22:08:47.159Z",
       "finalScore": null,
       "verdict": null
     },
