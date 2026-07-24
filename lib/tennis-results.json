@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-07-24T14:25:14.698Z",
+  "generatedAt": "2026-07-24T17:11:51.175Z",
   "source": "site.api.espn.com tennis scoreboard (atp+wta singles · official · public · 0 auth)",
-  "count": 2175,
+  "count": 2180,
   "games": [
     {
       "tour": "atp",
@@ -21724,6 +21724,26 @@
       "retired": false
     },
     {
+      "tour": "atp",
+      "tournament": "Millennium Estoril Open",
+      "grouping": "Men's Singles",
+      "date": "2026-07-24",
+      "winnerName": "Luca Van Assche",
+      "loserName": "Andrey Rublev",
+      "score": "3-6 6-3 6-4",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Livesport Prague Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-24",
+      "winnerName": "Barbora Krejcikova",
+      "loserName": "Dominika Salkova",
+      "score": "6-3 6-3",
+      "retired": false
+    },
+    {
       "tour": "wta",
       "tournament": "Livesport Prague Open",
       "grouping": "Women's Singles",
@@ -21731,6 +21751,16 @@
       "winnerName": "Daria Snigur",
       "loserName": "Lanlana Tararudee",
       "score": "6-0 6-3",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Livesport Prague Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-24",
+      "winnerName": "Lilli Tagger",
+      "loserName": "Sara Bejlek",
+      "score": "6-3 6-4",
       "retired": false
     },
     {
@@ -21751,6 +21781,26 @@
       "winnerName": "Anna Bondar",
       "loserName": "Alina Charaeva",
       "score": "6-1 7-6",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "MSC Hamburg Ladies Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-24",
+      "winnerName": "Mayar Sherif",
+      "loserName": "Paula Badosa",
+      "score": "7-6 6-7 6-4",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "MSC Hamburg Ladies Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-24",
+      "winnerName": "Tamara Korpatsch",
+      "loserName": "Anhelina Kalinina",
+      "score": "6-3 1-6 6-1",
       "retired": false
     }
   ]
