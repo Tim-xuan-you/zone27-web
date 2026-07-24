@@ -19258,9 +19258,12 @@
       },
       "engineWinHomePct": 59,
       "lockedAt": "2026-07-22T22:08:57.937Z",
-      "finalScore": null,
-      "verdict": null,
-      "gradedAt": "2026-07-12T08:44:41.619Z",
+      "finalScore": {
+        "home": 6,
+        "away": 10
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-07-24T03:19:36.489Z",
       "relockedFrom": "2026-06-25"
     },
     {
@@ -19289,8 +19292,12 @@
       },
       "engineWinHomePct": 63,
       "lockedAt": "2026-07-22T22:08:57.937Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 4,
+        "away": 3
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-07-24T03:19:36.489Z"
     },
     {
       "gamePk": 823759,
@@ -19347,6 +19354,35 @@
       },
       "engineWinHomePct": 58,
       "lockedAt": "2026-07-23T03:25:47.629Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 824248,
+      "gameDate": "2026-07-24T22:40:00Z",
+      "scheduleDate": "2026-07-24",
+      "homeId": 116,
+      "homeEn": "Detroit Tigers",
+      "homeRecord": "49-54",
+      "awayId": 118,
+      "awayEn": "Kansas City Royals",
+      "awayRecord": "43-61",
+      "homePitcher": "Tarik Skubal",
+      "awayPitcher": "Beck Way",
+      "homeStats": {
+        "era": "2.83",
+        "k9": "10.67",
+        "bb9": "1.20",
+        "hr9": "1.09"
+      },
+      "awayStats": {
+        "era": "3.22",
+        "k9": "8.46",
+        "bb9": "4.03",
+        "hr9": "1.61"
+      },
+      "engineWinHomePct": 63,
+      "lockedAt": "2026-07-24T03:19:36.044Z",
       "finalScore": null,
       "verdict": null
     },
@@ -19637,6 +19673,35 @@
       },
       "engineWinHomePct": 75,
       "lockedAt": "2026-07-22T19:34:36.956Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 824244,
+      "gameDate": "2026-07-25T17:10:00Z",
+      "scheduleDate": "2026-07-25",
+      "homeId": 116,
+      "homeEn": "Detroit Tigers",
+      "homeRecord": "49-54",
+      "awayId": 118,
+      "awayEn": "Kansas City Royals",
+      "awayRecord": "43-61",
+      "homePitcher": "Casey Mize",
+      "awayPitcher": "Michael Wacha",
+      "homeStats": {
+        "era": "2.79",
+        "k9": "9.15",
+        "bb9": "2.12",
+        "hr9": "0.56"
+      },
+      "awayStats": {
+        "era": "3.66",
+        "k9": "7.25",
+        "bb9": "2.59",
+        "hr9": "1.08"
+      },
+      "engineWinHomePct": 64,
+      "lockedAt": "2026-07-24T03:19:36.044Z",
       "finalScore": null,
       "verdict": null
     },
