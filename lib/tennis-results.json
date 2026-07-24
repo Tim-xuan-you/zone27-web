@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-07-24T11:24:37.346Z",
+  "generatedAt": "2026-07-24T14:25:14.698Z",
   "source": "site.api.espn.com tennis scoreboard (atp+wta singles · official · public · 0 auth)",
-  "count": 2171,
+  "count": 2175,
   "games": [
     {
       "tour": "atp",
@@ -21694,6 +21694,36 @@
       "retired": false
     },
     {
+      "tour": "atp",
+      "tournament": "Generali Open",
+      "grouping": "Men's Singles",
+      "date": "2026-07-24",
+      "winnerName": "Alexander Bublik",
+      "loserName": "Tomas Martin Etcheverry",
+      "score": "6-3 6-4",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Generali Open",
+      "grouping": "Men's Singles",
+      "date": "2026-07-24",
+      "winnerName": "Quentin Halys",
+      "loserName": "Yannick Hanfmann",
+      "score": "6-4 7-6",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Millennium Estoril Open",
+      "grouping": "Men's Singles",
+      "date": "2026-07-24",
+      "winnerName": "Hugo Gaston",
+      "loserName": "Tiago Torres",
+      "score": "6-3 6-4",
+      "retired": false
+    },
+    {
       "tour": "wta",
       "tournament": "Livesport Prague Open",
       "grouping": "Women's Singles",
@@ -21701,6 +21731,16 @@
       "winnerName": "Daria Snigur",
       "loserName": "Lanlana Tararudee",
       "score": "6-0 6-3",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Livesport Prague Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-24",
+      "winnerName": "Tereza Valentova",
+      "loserName": "Marie Bouzkova",
+      "score": "2-6 6-4 7-6",
       "retired": false
     },
     {
