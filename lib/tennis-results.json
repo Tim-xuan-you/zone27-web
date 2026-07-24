@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-07-24T17:11:51.175Z",
+  "generatedAt": "2026-07-24T20:02:09.504Z",
   "source": "site.api.espn.com tennis scoreboard (atp+wta singles · official · public · 0 auth)",
-  "count": 2180,
+  "count": 2184,
   "games": [
     {
       "tour": "atp",
@@ -21718,6 +21718,16 @@
       "tournament": "Millennium Estoril Open",
       "grouping": "Men's Singles",
       "date": "2026-07-24",
+      "winnerName": "Alexander Blockx",
+      "loserName": "Roman Andres Burruchaga",
+      "score": "6-4 5-7 6-4",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Millennium Estoril Open",
+      "grouping": "Men's Singles",
+      "date": "2026-07-24",
       "winnerName": "Hugo Gaston",
       "loserName": "Tiago Torres",
       "score": "6-3 6-4",
@@ -21801,6 +21811,36 @@
       "winnerName": "Tamara Korpatsch",
       "loserName": "Anhelina Kalinina",
       "score": "6-3 1-6 6-1",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Palermo Ladies Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-24",
+      "winnerName": "Alevtina Ibragimova",
+      "loserName": "Clara Burel",
+      "score": "3-6 7-6 6-4",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Palermo Ladies Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-24",
+      "winnerName": "Francesca Jones",
+      "loserName": "Jennifer Ruggeri",
+      "score": "4-6 6-3 6-2",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Palermo Ladies Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-24",
+      "winnerName": "Lucia Bronzetti",
+      "loserName": "Yasmine Kabbaj",
+      "score": "6-3 2-6 6-0",
       "retired": false
     }
   ]
