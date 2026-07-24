@@ -3535,10 +3535,13 @@
       "awayWinPct": 27,
       "enginePick": "home",
       "lockedAt": "2026-07-22T02:24:54.179Z",
-      "finalScore": null,
-      "outcome": null,
-      "verdict": null,
-      "gradedAt": null
+      "finalScore": {
+        "home": 0,
+        "away": 0
+      },
+      "outcome": "draw",
+      "verdict": "diverged",
+      "gradedAt": "2026-07-24T02:26:45.854Z"
     },
     {
       "matchId": "fd-554923",
@@ -3563,10 +3566,13 @@
       "awayWinPct": 24,
       "enginePick": "home",
       "lockedAt": "2026-07-22T02:24:54.179Z",
-      "finalScore": null,
-      "outcome": null,
-      "verdict": null,
-      "gradedAt": null
+      "finalScore": {
+        "home": 3,
+        "away": 0
+      },
+      "outcome": "home",
+      "verdict": "proved",
+      "gradedAt": "2026-07-24T02:26:45.854Z"
     },
     {
       "matchId": "fd-554930",
@@ -3619,6 +3625,34 @@
       "awayWinPct": 16,
       "enginePick": "home",
       "lockedAt": "2026-07-23T22:01:46.659Z",
+      "finalScore": null,
+      "outcome": null,
+      "verdict": null,
+      "gradedAt": null
+    },
+    {
+      "matchId": "fd-554939",
+      "competitionCode": "BSA",
+      "competitionName": "巴西甲",
+      "kickoffISO": "2026-07-25T23:30:00Z",
+      "status": "TIMED",
+      "homeSeed": "Vasco da Gama",
+      "awaySeed": "Mirassol",
+      "home": "Vasco da Gama",
+      "away": "Mirassol",
+      "ratingHome": 0,
+      "ratingAway": 0,
+      "homeAdvantage": 0,
+      "xgHome": 1.4231353760732504,
+      "xgAway": 1.2663732877585065,
+      "homeWin": 0.3974299339943022,
+      "draw": 0.2774289620746338,
+      "awayWin": 0.3251411039310639,
+      "homeWinPct": 40,
+      "drawPct": 28,
+      "awayWinPct": 32,
+      "enginePick": "home",
+      "lockedAt": "2026-07-24T02:26:44.591Z",
       "finalScore": null,
       "outcome": null,
       "verdict": null,
