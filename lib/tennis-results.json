@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-07-23T22:38:04.784Z",
+  "generatedAt": "2026-07-24T11:24:37.346Z",
   "source": "site.api.espn.com tennis scoreboard (atp+wta singles · official · public · 0 auth)",
-  "count": 2169,
+  "count": 2171,
   "games": [
     {
       "tour": "atp",
@@ -21691,6 +21691,26 @@
       "winnerName": "Mina Hodzic",
       "loserName": "Noemi Basiletti",
       "score": "6-3 2-6 6-2",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Livesport Prague Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-24",
+      "winnerName": "Daria Snigur",
+      "loserName": "Lanlana Tararudee",
+      "score": "6-0 6-3",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "MSC Hamburg Ladies Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-24",
+      "winnerName": "Anna Bondar",
+      "loserName": "Alina Charaeva",
+      "score": "6-1 7-6",
       "retired": false
     }
   ]
