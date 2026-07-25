@@ -20222,6 +20222,35 @@
       "verdict": null
     },
     {
+      "gamePk": 824730,
+      "gameDate": "2026-07-26T17:35:00Z",
+      "scheduleDate": "2026-07-26",
+      "homeId": 111,
+      "homeEn": "Boston Red Sox",
+      "homeRecord": "53-49",
+      "awayId": 141,
+      "awayEn": "Toronto Blue Jays",
+      "awayRecord": "47-57",
+      "homePitcher": "Ranger Suarez",
+      "awayPitcher": "Kevin Gausman",
+      "homeStats": {
+        "era": "3.15",
+        "k9": "9.56",
+        "bb9": "2.56",
+        "hr9": "0.49"
+      },
+      "awayStats": {
+        "era": "4.51",
+        "k9": "9.10",
+        "bb9": "2.65",
+        "hr9": "1.17"
+      },
+      "engineWinHomePct": 64,
+      "lockedAt": "2026-07-25T19:16:22.955Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
       "gamePk": 823599,
       "gameDate": "2026-07-26T17:40:00Z",
       "scheduleDate": "2026-07-26",
@@ -20421,6 +20450,35 @@
       },
       "engineWinHomePct": 54,
       "lockedAt": "2026-07-24T16:46:25.377Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 823194,
+      "gameDate": "2026-07-26T20:05:00Z",
+      "scheduleDate": "2026-07-26",
+      "homeId": 137,
+      "homeEn": "San Francisco Giants",
+      "homeRecord": "43-60",
+      "awayId": 108,
+      "awayEn": "Los Angeles Angels",
+      "awayRecord": "41-63",
+      "homePitcher": "Carson Whisenhunt",
+      "awayPitcher": "José Soriano",
+      "homeStats": {
+        "era": "3.38",
+        "k9": "5.06",
+        "bb9": "5.06",
+        "hr9": "0.84"
+      },
+      "awayStats": {
+        "era": "3.43",
+        "k9": "9.31",
+        "bb9": "4.12",
+        "hr9": "0.92"
+      },
+      "engineWinHomePct": 46,
+      "lockedAt": "2026-07-25T19:16:22.955Z",
       "finalScore": null,
       "verdict": null
     },
