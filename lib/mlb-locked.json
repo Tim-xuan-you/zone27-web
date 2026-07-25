@@ -20452,6 +20452,64 @@
       "lockedAt": "2026-07-24T16:46:25.377Z",
       "finalScore": null,
       "verdict": null
+    },
+    {
+      "gamePk": 822868,
+      "gameDate": "2026-07-27T18:35:00Z",
+      "scheduleDate": "2026-07-27",
+      "homeId": 140,
+      "homeEn": "Texas Rangers",
+      "homeRecord": "52-51",
+      "awayId": 136,
+      "awayEn": "Seattle Mariners",
+      "awayRecord": "51-53",
+      "homePitcher": "Kumar Rocker",
+      "awayPitcher": "George Kirby",
+      "homeStats": {
+        "era": "4.13",
+        "k9": "8.06",
+        "bb9": "3.38",
+        "hr9": "1.13"
+      },
+      "awayStats": {
+        "era": "3.57",
+        "k9": "8.07",
+        "bb9": "1.94",
+        "hr9": "0.85"
+      },
+      "engineWinHomePct": 50,
+      "lockedAt": "2026-07-25T16:07:52.800Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 824490,
+      "gameDate": "2026-07-27T23:10:00Z",
+      "scheduleDate": "2026-07-27",
+      "homeId": 113,
+      "homeEn": "Cincinnati Reds",
+      "homeRecord": "48-54",
+      "awayId": 114,
+      "awayEn": "Cleveland Guardians",
+      "awayRecord": "54-51",
+      "homePitcher": "Chase Burns",
+      "awayPitcher": "Slade Cecconi",
+      "homeStats": {
+        "era": "2.42",
+        "k9": "10.37",
+        "bb9": "3.26",
+        "hr9": "1.00"
+      },
+      "awayStats": {
+        "era": "4.60",
+        "k9": "7.12",
+        "bb9": "2.95",
+        "hr9": "1.30"
+      },
+      "engineWinHomePct": 71,
+      "lockedAt": "2026-07-25T16:07:52.800Z",
+      "finalScore": null,
+      "verdict": null
     }
   ]
 }
