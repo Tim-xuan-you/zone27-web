@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-07-24T22:42:26.339Z",
+  "generatedAt": "2026-07-25T14:17:59.825Z",
   "source": "site.api.espn.com tennis scoreboard (atp+wta singles · official · public · 0 auth)",
-  "count": 2186,
+  "count": 2188,
   "games": [
     {
       "tour": "atp",
@@ -21861,6 +21861,26 @@
       "winnerName": "Lucia Bronzetti",
       "loserName": "Yasmine Kabbaj",
       "score": "6-3 2-6 6-0",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Generali Open",
+      "grouping": "Men's Singles",
+      "date": "2026-07-25",
+      "winnerName": "Quentin Halys",
+      "loserName": "Alexander Bublik",
+      "score": "6-4 7-6",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Livesport Prague Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-25",
+      "winnerName": "Daria Snigur",
+      "loserName": "Tereza Valentova",
+      "score": "7-6 6-3",
       "retired": false
     }
   ]
