@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-07-25T14:17:59.825Z",
+  "generatedAt": "2026-07-25T16:34:55.786Z",
   "source": "site.api.espn.com tennis scoreboard (atp+wta singles · official · public · 0 auth)",
-  "count": 2188,
+  "count": 2199,
   "games": [
     {
       "tour": "atp",
@@ -21874,6 +21874,56 @@
       "retired": false
     },
     {
+      "tour": "atp",
+      "tournament": "Mubadala DC Open",
+      "grouping": "Men's Singles",
+      "date": "2026-07-25",
+      "winnerName": "Aleksandar Vukic",
+      "loserName": "Aziz Dougaz",
+      "score": "6-3 6-3",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Mubadala DC Open",
+      "grouping": "Men's Singles",
+      "date": "2026-07-25",
+      "winnerName": "Alex Bolt",
+      "loserName": "James McCabe",
+      "score": "7-6 7-6",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Mubadala DC Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-25",
+      "winnerName": "Heather Watson",
+      "loserName": "Kamilla Rakhimova",
+      "score": "7-6 7-6",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Mubadala DC Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-25",
+      "winnerName": "Julieta Pareja",
+      "loserName": "Polina Iatcenko",
+      "score": "6-4 6-2",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Mubadala DC Open",
+      "grouping": "Men's Singles",
+      "date": "2026-07-25",
+      "winnerName": "Martin Damm",
+      "loserName": "Kimmer Coppejans",
+      "score": "6-2 6-0",
+      "retired": false
+    },
+    {
       "tour": "wta",
       "tournament": "Livesport Prague Open",
       "grouping": "Women's Singles",
@@ -21881,6 +21931,66 @@
       "winnerName": "Daria Snigur",
       "loserName": "Tereza Valentova",
       "score": "7-6 6-3",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "MSC Hamburg Ladies Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-25",
+      "winnerName": "Anna Bondar",
+      "loserName": "Elina Avanesyan",
+      "score": "7-6 4-6 7-6",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Mubadala DC Open",
+      "grouping": "Men's Singles",
+      "date": "2026-07-25",
+      "winnerName": "Aleksandar Vukic",
+      "loserName": "Aziz Dougaz",
+      "score": "6-3 6-3",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Mubadala DC Open",
+      "grouping": "Men's Singles",
+      "date": "2026-07-25",
+      "winnerName": "Alex Bolt",
+      "loserName": "James McCabe",
+      "score": "7-6 7-6",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Mubadala DC Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-25",
+      "winnerName": "Heather Watson",
+      "loserName": "Kamilla Rakhimova",
+      "score": "7-6 7-6",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Mubadala DC Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-25",
+      "winnerName": "Julieta Pareja",
+      "loserName": "Polina Iatcenko",
+      "score": "6-4 6-2",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Mubadala DC Open",
+      "grouping": "Men's Singles",
+      "date": "2026-07-25",
+      "winnerName": "Martin Damm",
+      "loserName": "Kimmer Coppejans",
+      "score": "6-2 6-0",
       "retired": false
     }
   ]
