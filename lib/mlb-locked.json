@@ -19754,8 +19754,12 @@
       },
       "engineWinHomePct": 64,
       "lockedAt": "2026-07-24T03:19:36.044Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 2,
+        "away": 3
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-07-25T21:59:49.876Z"
     },
     {
       "gamePk": 823197,
@@ -20305,6 +20309,35 @@
       },
       "engineWinHomePct": 50,
       "lockedAt": "2026-07-24T16:46:25.377Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 824246,
+      "gameDate": "2026-07-26T17:40:00Z",
+      "scheduleDate": "2026-07-26",
+      "homeId": 116,
+      "homeEn": "Detroit Tigers",
+      "homeRecord": "50-55",
+      "awayId": 118,
+      "awayEn": "Kansas City Royals",
+      "awayRecord": "44-62",
+      "homePitcher": "Framber Valdez",
+      "awayPitcher": "Luinder Avila",
+      "homeStats": {
+        "era": "4.57",
+        "k9": "7.31",
+        "bb9": "3.16",
+        "hr9": "0.91"
+      },
+      "awayStats": {
+        "era": "4.86",
+        "k9": "8.14",
+        "bb9": "5.00",
+        "hr9": "0.86"
+      },
+      "engineWinHomePct": 53,
+      "lockedAt": "2026-07-25T21:59:49.287Z",
       "finalScore": null,
       "verdict": null
     },
