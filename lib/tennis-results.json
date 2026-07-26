@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-07-26T04:17:56.815Z",
+  "generatedAt": "2026-07-26T09:01:42.608Z",
   "source": "site.api.espn.com tennis scoreboard (atp+wta singles · official · public · 0 auth)",
-  "count": 2250,
+  "count": 2258,
   "games": [
     {
       "tour": "atp",
@@ -22468,9 +22468,29 @@
       "tournament": "Mifel Tennis Open by Telcel Oppo",
       "grouping": "Men's Singles",
       "date": "2026-07-26",
+      "winnerName": "Aidan Mayo",
+      "loserName": "Evan King",
+      "score": "6-4 6-2",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Mifel Tennis Open by Telcel Oppo",
+      "grouping": "Men's Singles",
+      "date": "2026-07-26",
       "winnerName": "Alan Magadan",
       "loserName": "Garrett Johns",
       "score": "2-6 6-1 6-1",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Mifel Tennis Open by Telcel Oppo",
+      "grouping": "Men's Singles",
+      "date": "2026-07-26",
+      "winnerName": "Alex Hernandez",
+      "loserName": "Nicolas Mejia",
+      "score": "7-5 6-2",
       "retired": false
     },
     {
@@ -22491,6 +22511,66 @@
       "winnerName": "Edward Winter",
       "loserName": "Luis Carlos Alvarez",
       "score": "3-6 6-4 6-2",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Mifel Tennis Open by Telcel Oppo",
+      "grouping": "Men's Singles",
+      "date": "2026-07-26",
+      "winnerName": "Roger Pascual Ferra",
+      "loserName": "Colton Smith",
+      "score": "4-6 6-2 6-4",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Mifel Tennis Open by Telcel Oppo",
+      "grouping": "Men's Singles",
+      "date": "2026-07-26",
+      "winnerName": "SoonWoo Kwon",
+      "loserName": "Alan Fernando Rubio Fierros",
+      "score": "6-3 6-4",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Mifel Tennis Open by Telcel Oppo",
+      "grouping": "Men's Singles",
+      "date": "2026-07-26",
+      "winnerName": "Tristan Boyer",
+      "loserName": "Lorenzo Claverie",
+      "score": "7-6 6-3",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Odlum Brown VanOpen",
+      "grouping": "Women's Singles",
+      "date": "2026-07-26",
+      "winnerName": "Hong Yi Cody Wong",
+      "loserName": "Dasha Plekhanova",
+      "score": "6-2 7-6",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Odlum Brown VanOpen",
+      "grouping": "Women's Singles",
+      "date": "2026-07-26",
+      "winnerName": "Miho Kuramochi",
+      "loserName": "Hiroko Kuwata",
+      "score": "7-6 6-4",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Odlum Brown VanOpen",
+      "grouping": "Women's Singles",
+      "date": "2026-07-26",
+      "winnerName": "Valeria Savinykh",
+      "loserName": "Mia Kupres",
+      "score": "6-4 6-0",
       "retired": false
     },
     {
