@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-07-26T19:53:41.231Z",
+  "generatedAt": "2026-07-26T22:41:00.999Z",
   "source": "site.api.espn.com tennis scoreboard (atp+wta singles · official · public · 0 auth)",
-  "count": 2285,
+  "count": 2290,
   "games": [
     {
       "tour": "atp",
@@ -22588,6 +22588,16 @@
       "tournament": "Mubadala DC Open",
       "grouping": "Women's Singles",
       "date": "2026-07-26",
+      "winnerName": "Daria Kasatkina",
+      "loserName": "Alana Smith",
+      "score": "4-6 6-4 6-0",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Mubadala DC Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-26",
       "winnerName": "Julieta Pareja",
       "loserName": "Heather Watson",
       "score": "6-4 3-6 7-5",
@@ -22631,6 +22641,16 @@
       "winnerName": "Rebecca Sramkova",
       "loserName": "Gabriela Knutson",
       "score": "6-3 6-2",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Mubadala DC Open",
+      "grouping": "Men's Singles",
+      "date": "2026-07-26",
+      "winnerName": "Trevor Svajda",
+      "loserName": "Mackenzie McDonald",
+      "score": "6-4 6-4",
       "retired": false
     },
     {
@@ -22768,6 +22788,16 @@
       "tournament": "Mubadala DC Open",
       "grouping": "Women's Singles",
       "date": "2026-07-26",
+      "winnerName": "Daria Kasatkina",
+      "loserName": "Alana Smith",
+      "score": "4-6 6-4 6-0",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Mubadala DC Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-26",
       "winnerName": "Julieta Pareja",
       "loserName": "Heather Watson",
       "score": "6-4 3-6 7-5",
@@ -22815,6 +22845,16 @@
     },
     {
       "tour": "wta",
+      "tournament": "Mubadala DC Open",
+      "grouping": "Men's Singles",
+      "date": "2026-07-26",
+      "winnerName": "Trevor Svajda",
+      "loserName": "Mackenzie McDonald",
+      "score": "6-4 6-4",
+      "retired": false
+    },
+    {
+      "tour": "wta",
       "tournament": "Odlum Brown VanOpen",
       "grouping": "Women's Singles",
       "date": "2026-07-26",
@@ -22841,6 +22881,16 @@
       "winnerName": "Valeria Savinykh",
       "loserName": "Mia Kupres",
       "score": "6-4 6-0",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Palermo Ladies Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-26",
+      "winnerName": "Francesca Jones",
+      "loserName": "Fiona Ferro",
+      "score": "6-0 4-6 7-6",
       "retired": false
     },
     {
