@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-07-26T09:01:42.608Z",
+  "generatedAt": "2026-07-26T11:08:52.631Z",
   "source": "site.api.espn.com tennis scoreboard (atp+wta singles · official · public · 0 auth)",
-  "count": 2258,
+  "count": 2261,
   "games": [
     {
       "tour": "atp",
@@ -22541,6 +22541,36 @@
       "winnerName": "Tristan Boyer",
       "loserName": "Lorenzo Claverie",
       "score": "7-6 6-3",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Axeria Open 2026 powered by Intaro Sport",
+      "grouping": "Women's Singles",
+      "date": "2026-07-26",
+      "winnerName": "Andreea Prisacariu",
+      "loserName": "Deborah Chiesa",
+      "score": "7-6 6-2",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Axeria Open 2026 powered by Intaro Sport",
+      "grouping": "Women's Singles",
+      "date": "2026-07-26",
+      "winnerName": "Ekaterina Kazionova",
+      "loserName": "Ekaterina Yashina",
+      "score": "6-2 6-2",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Axeria Open 2026 powered by Intaro Sport",
+      "grouping": "Women's Singles",
+      "date": "2026-07-26",
+      "winnerName": "Yelyzaveta Kotliar",
+      "loserName": "Alessandra Mazzola",
+      "score": "5-7 6-2 6-2",
       "retired": false
     },
     {
