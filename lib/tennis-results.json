@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-07-25T22:37:21.688Z",
+  "generatedAt": "2026-07-26T04:17:56.815Z",
   "source": "site.api.espn.com tennis scoreboard (atp+wta singles · official · public · 0 auth)",
-  "count": 2240,
+  "count": 2250,
   "games": [
     {
       "tour": "atp",
@@ -21906,6 +21906,16 @@
     {
       "tour": "atp",
       "tournament": "Mubadala DC Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-25",
+      "winnerName": "Alana Smith",
+      "loserName": "Lea Ma",
+      "score": "6-4 7-6",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Mubadala DC Open",
       "grouping": "Men's Singles",
       "date": "2026-07-25",
       "winnerName": "Aleksandar Vukic",
@@ -22136,6 +22146,16 @@
     {
       "tour": "wta",
       "tournament": "Mubadala DC Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-25",
+      "winnerName": "Alana Smith",
+      "loserName": "Lea Ma",
+      "score": "6-4 7-6",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Mubadala DC Open",
       "grouping": "Men's Singles",
       "date": "2026-07-25",
       "winnerName": "Aleksandar Vukic",
@@ -22318,6 +22338,36 @@
       "tournament": "Odlum Brown VanOpen",
       "grouping": "Women's Singles",
       "date": "2026-07-25",
+      "winnerName": "Avery Alexander",
+      "loserName": "Martina Okalova",
+      "score": "6-4 4-6 7-6",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Odlum Brown VanOpen",
+      "grouping": "Women's Singles",
+      "date": "2026-07-25",
+      "winnerName": "Ellie Schoppe",
+      "loserName": "Ana Grubor",
+      "score": "6-7 7-5 6-2",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Odlum Brown VanOpen",
+      "grouping": "Women's Singles",
+      "date": "2026-07-25",
+      "winnerName": "Emma Si Yu Dong",
+      "loserName": "Ena Shibahara",
+      "score": "6-2 1-6 6-4",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Odlum Brown VanOpen",
+      "grouping": "Women's Singles",
+      "date": "2026-07-25",
       "winnerName": "Katrina Scott",
       "loserName": "Sabastiani Leon",
       "score": "6-1 6-1",
@@ -22388,6 +22438,16 @@
       "tournament": "The Memphis Classic",
       "grouping": "Women's Singles",
       "date": "2026-07-25",
+      "winnerName": "Kennedy Drenser-Hagmann",
+      "loserName": "Bella Payne",
+      "score": "6-2 6-1",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "The Memphis Classic",
+      "grouping": "Women's Singles",
+      "date": "2026-07-25",
       "winnerName": "Mariia Kozyreva",
       "loserName": "Eri Hozumi",
       "score": "6-2 6-4",
@@ -22401,6 +22461,46 @@
       "winnerName": "Sofia Johnson",
       "loserName": "Karman Thandi",
       "score": "6-1 6-2",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Mifel Tennis Open by Telcel Oppo",
+      "grouping": "Men's Singles",
+      "date": "2026-07-26",
+      "winnerName": "Alan Magadan",
+      "loserName": "Garrett Johns",
+      "score": "2-6 6-1 6-1",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Mifel Tennis Open by Telcel Oppo",
+      "grouping": "Men's Singles",
+      "date": "2026-07-26",
+      "winnerName": "Bernard Tomic",
+      "loserName": "Miguel Tobon",
+      "score": "5-7 6-4 7-6",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Mifel Tennis Open by Telcel Oppo",
+      "grouping": "Men's Singles",
+      "date": "2026-07-26",
+      "winnerName": "Edward Winter",
+      "loserName": "Luis Carlos Alvarez",
+      "score": "3-6 6-4 6-2",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "The Memphis Classic",
+      "grouping": "Women's Singles",
+      "date": "2026-07-26",
+      "winnerName": "Ankita Raina",
+      "loserName": "Ekaterina Ovcharenko",
+      "score": "6-2 6-2",
       "retired": false
     }
   ]
