@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-07-26T14:14:48.040Z",
+  "generatedAt": "2026-07-26T16:35:10.993Z",
   "source": "site.api.espn.com tennis scoreboard (atp+wta singles · official · public · 0 auth)",
-  "count": 2268,
+  "count": 2272,
   "games": [
     {
       "tour": "atp",
@@ -22544,6 +22544,26 @@
       "retired": false
     },
     {
+      "tour": "atp",
+      "tournament": "Mubadala DC Open",
+      "grouping": "Men's Singles",
+      "date": "2026-07-26",
+      "winnerName": "Aleksandar Vukic",
+      "loserName": "Alex Bolt",
+      "score": "6-0 6-1",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Mubadala DC Open",
+      "grouping": "Men's Singles",
+      "date": "2026-07-26",
+      "winnerName": "Martin Damm",
+      "loserName": "Abdullah Shelbayh",
+      "score": "4-6 7-5 7-6",
+      "retired": false
+    },
+    {
       "tour": "wta",
       "tournament": "Axeria Open 2026 powered by Intaro Sport",
       "grouping": "Women's Singles",
@@ -22641,6 +22661,26 @@
       "winnerName": "Tamara Korpatsch",
       "loserName": "Anna Bondar",
       "score": "6-3 6-3",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Mubadala DC Open",
+      "grouping": "Men's Singles",
+      "date": "2026-07-26",
+      "winnerName": "Aleksandar Vukic",
+      "loserName": "Alex Bolt",
+      "score": "6-0 6-1",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Mubadala DC Open",
+      "grouping": "Men's Singles",
+      "date": "2026-07-26",
+      "winnerName": "Martin Damm",
+      "loserName": "Abdullah Shelbayh",
+      "score": "4-6 7-5 7-6",
       "retired": false
     },
     {
