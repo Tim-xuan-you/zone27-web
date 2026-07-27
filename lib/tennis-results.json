@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-07-26T22:41:00.999Z",
+  "generatedAt": "2026-07-27T04:26:18.090Z",
   "source": "site.api.espn.com tennis scoreboard (atp+wta singles · official · public · 0 auth)",
-  "count": 2290,
+  "count": 2299,
   "games": [
     {
       "tour": "atp",
@@ -22901,6 +22901,96 @@
       "winnerName": "Ankita Raina",
       "loserName": "Ekaterina Ovcharenko",
       "score": "6-2 6-2",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "The Memphis Classic",
+      "grouping": "Women's Singles",
+      "date": "2026-07-26",
+      "winnerName": "Katherine Sebov",
+      "loserName": "Aran Teixido Garcia",
+      "score": "6-1 7-5",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "The Memphis Classic",
+      "grouping": "Women's Singles",
+      "date": "2026-07-26",
+      "winnerName": "Kristina Liutova",
+      "loserName": "Mariia Kozyreva",
+      "score": "6-3 2-6 7-6",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "The Memphis Classic",
+      "grouping": "Women's Singles",
+      "date": "2026-07-26",
+      "winnerName": "Ma YeXin",
+      "loserName": "Aoi Ito",
+      "score": "7-6 2-6 6-0",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "The Memphis Classic",
+      "grouping": "Women's Singles",
+      "date": "2026-07-26",
+      "winnerName": "Storm Hunter",
+      "loserName": "Sofia Johnson",
+      "score": "5-7 6-1 6-3",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Mifel Tennis Open by Telcel Oppo",
+      "grouping": "Men's Singles",
+      "date": "2026-07-27",
+      "winnerName": "Aidan Mayo",
+      "loserName": "Roger Pascual Ferra",
+      "score": "6-1 6-4",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Mifel Tennis Open by Telcel Oppo",
+      "grouping": "Men's Singles",
+      "date": "2026-07-27",
+      "winnerName": "SoonWoo Kwon",
+      "loserName": "Edward Winter",
+      "score": "7-5 6-2",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Mifel Tennis Open by Telcel Oppo",
+      "grouping": "Men's Singles",
+      "date": "2026-07-27",
+      "winnerName": "Tristan Boyer",
+      "loserName": "Bernard Tomic",
+      "score": "",
+      "retired": true
+    },
+    {
+      "tour": "wta",
+      "tournament": "The Memphis Classic",
+      "grouping": "Women's Singles",
+      "date": "2026-07-27",
+      "winnerName": "Iryna Shymanovich",
+      "loserName": "Ankita Raina",
+      "score": "6-2 6-0",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "The Memphis Classic",
+      "grouping": "Women's Singles",
+      "date": "2026-07-27",
+      "winnerName": "Tatiana Prozorova",
+      "loserName": "Kennedy Drenser-Hagmann",
+      "score": "4-6 6-3 6-1",
       "retired": false
     }
   ]
