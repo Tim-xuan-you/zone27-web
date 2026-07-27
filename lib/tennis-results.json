@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-07-27T15:30:38.010Z",
+  "generatedAt": "2026-07-27T17:21:54.938Z",
   "source": "site.api.espn.com tennis scoreboard (atp+wta singles · official · public · 0 auth)",
-  "count": 2307,
+  "count": 2313,
   "games": [
     {
       "tour": "atp",
@@ -22984,6 +22984,16 @@
       "retired": true
     },
     {
+      "tour": "atp",
+      "tournament": "Mubadala DC Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-27",
+      "winnerName": "Leylah Fernandez",
+      "loserName": "Magda Linette",
+      "score": "6-1 6-4",
+      "retired": false
+    },
+    {
       "tour": "wta",
       "tournament": "Axeria Open 2026 powered by Intaro Sport",
       "grouping": "Women's Singles",
@@ -23001,6 +23011,16 @@
       "winnerName": "Elena Ruxandra Bertea",
       "loserName": "Elena Malygina",
       "score": "6-3 6-3",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Axeria Open 2026 powered by Intaro Sport",
+      "grouping": "Women's Singles",
+      "date": "2026-07-27",
+      "winnerName": "Irene Burillo",
+      "loserName": "Sofya Lansere",
+      "score": "2-6 6-4 6-4",
       "retired": false
     },
     {
@@ -23048,9 +23068,39 @@
       "tournament": "Axeria Open 2026 powered by Intaro Sport",
       "grouping": "Women's Singles",
       "date": "2026-07-27",
+      "winnerName": "Sara Sorribes Tormo",
+      "loserName": "Leyre Romero Gormaz",
+      "score": "3-6 6-3 6-3",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Axeria Open 2026 powered by Intaro Sport",
+      "grouping": "Women's Singles",
+      "date": "2026-07-27",
       "winnerName": "Yelyzaveta Kotliar",
       "loserName": "Andreea Prisacariu",
       "score": "6-4 6-0",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Mubadala DC Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-27",
+      "winnerName": "Leylah Fernandez",
+      "loserName": "Magda Linette",
+      "score": "6-1 6-4",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "The Memphis Classic",
+      "grouping": "Women's Singles",
+      "date": "2026-07-27",
+      "winnerName": "Anastasia Zakharova",
+      "loserName": "Linda Fruhvirtova",
+      "score": "7-6 6-1",
       "retired": false
     },
     {
@@ -23061,6 +23111,16 @@
       "winnerName": "Iryna Shymanovich",
       "loserName": "Ankita Raina",
       "score": "6-2 6-0",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "The Memphis Classic",
+      "grouping": "Women's Singles",
+      "date": "2026-07-27",
+      "winnerName": "Maya Joint",
+      "loserName": "Whitney Osuigwe",
+      "score": "6-4 6-1",
       "retired": false
     },
     {
