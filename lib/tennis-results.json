@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-07-27T10:29:01.420Z",
+  "generatedAt": "2026-07-27T15:30:38.010Z",
   "source": "site.api.espn.com tennis scoreboard (atp+wta singles · official · public · 0 auth)",
-  "count": 2302,
+  "count": 2307,
   "games": [
     {
       "tour": "atp",
@@ -22988,9 +22988,59 @@
       "tournament": "Axeria Open 2026 powered by Intaro Sport",
       "grouping": "Women's Singles",
       "date": "2026-07-27",
+      "winnerName": "Caijsa Hennemann",
+      "loserName": "Mia Pohankova",
+      "score": "6-1 4-6 6-4",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Axeria Open 2026 powered by Intaro Sport",
+      "grouping": "Women's Singles",
+      "date": "2026-07-27",
+      "winnerName": "Elena Ruxandra Bertea",
+      "loserName": "Elena Malygina",
+      "score": "6-3 6-3",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Axeria Open 2026 powered by Intaro Sport",
+      "grouping": "Women's Singles",
+      "date": "2026-07-27",
+      "winnerName": "Kaitlin Quevedo",
+      "loserName": "Irina Fetecau",
+      "score": "6-1 6-3",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Axeria Open 2026 powered by Intaro Sport",
+      "grouping": "Women's Singles",
+      "date": "2026-07-27",
       "winnerName": "Lucija Ciric Bagaric",
       "loserName": "Maria Sara Popa",
       "score": "6-4 6-2",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Axeria Open 2026 powered by Intaro Sport",
+      "grouping": "Women's Singles",
+      "date": "2026-07-27",
+      "winnerName": "Margaux Rouvroy",
+      "loserName": "Ekaterina Kazionova",
+      "score": "6-4 3-6 7-5",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Axeria Open 2026 powered by Intaro Sport",
+      "grouping": "Women's Singles",
+      "date": "2026-07-27",
+      "winnerName": "Miriana Tona",
+      "loserName": "Briana Szabo",
+      "score": "4-6 6-4 6-4",
       "retired": false
     },
     {
