@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-07-27T17:21:54.938Z",
+  "generatedAt": "2026-07-27T20:08:55.624Z",
   "source": "site.api.espn.com tennis scoreboard (atp+wta singles · official · public · 0 auth)",
-  "count": 2313,
+  "count": 2322,
   "games": [
     {
       "tour": "atp",
@@ -22986,11 +22986,61 @@
     {
       "tour": "atp",
       "tournament": "Mubadala DC Open",
+      "grouping": "Men's Singles",
+      "date": "2026-07-27",
+      "winnerName": "Alejandro Tabilo",
+      "loserName": "Tallon Griekspoor",
+      "score": "7-6 4-6 6-4",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Mubadala DC Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-27",
+      "winnerName": "Elisabetta Cocciaretto",
+      "loserName": "Clara Tauson",
+      "score": "4-6 7-6 7-6",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Mubadala DC Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-27",
+      "winnerName": "Emma Navarro",
+      "loserName": "Sofia Kenin",
+      "score": "6-0 7-5",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Mubadala DC Open",
       "grouping": "Women's Singles",
       "date": "2026-07-27",
       "winnerName": "Leylah Fernandez",
       "loserName": "Magda Linette",
       "score": "6-1 6-4",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Mubadala DC Open",
+      "grouping": "Men's Singles",
+      "date": "2026-07-27",
+      "winnerName": "Lorenzo Musetti",
+      "loserName": "Matteo Arnaldi",
+      "score": "6-0 3-1",
+      "retired": true
+    },
+    {
+      "tour": "wta",
+      "tournament": "Axeria Open 2026 powered by Intaro Sport",
+      "grouping": "Women's Singles",
+      "date": "2026-07-27",
+      "winnerName": "Alice Rame",
+      "loserName": "Julie Struplova",
+      "score": "6-2 5-7 6-1",
       "retired": false
     },
     {
@@ -23086,12 +23136,52 @@
     {
       "tour": "wta",
       "tournament": "Mubadala DC Open",
+      "grouping": "Men's Singles",
+      "date": "2026-07-27",
+      "winnerName": "Alejandro Tabilo",
+      "loserName": "Tallon Griekspoor",
+      "score": "7-6 4-6 6-4",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Mubadala DC Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-27",
+      "winnerName": "Elisabetta Cocciaretto",
+      "loserName": "Clara Tauson",
+      "score": "4-6 7-6 7-6",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Mubadala DC Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-27",
+      "winnerName": "Emma Navarro",
+      "loserName": "Sofia Kenin",
+      "score": "6-0 7-5",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Mubadala DC Open",
       "grouping": "Women's Singles",
       "date": "2026-07-27",
       "winnerName": "Leylah Fernandez",
       "loserName": "Magda Linette",
       "score": "6-1 6-4",
       "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Mubadala DC Open",
+      "grouping": "Men's Singles",
+      "date": "2026-07-27",
+      "winnerName": "Lorenzo Musetti",
+      "loserName": "Matteo Arnaldi",
+      "score": "6-0 3-1",
+      "retired": true
     },
     {
       "tour": "wta",
