@@ -3752,10 +3752,13 @@
       "awayWinPct": 23,
       "enginePick": "home",
       "lockedAt": "2026-07-24T22:02:29.996Z",
-      "finalScore": null,
-      "outcome": null,
-      "verdict": null,
-      "gradedAt": null
+      "finalScore": {
+        "home": 0,
+        "away": 0
+      },
+      "outcome": "draw",
+      "verdict": "diverged",
+      "gradedAt": "2026-07-27T02:39:30.007Z"
     },
     {
       "matchId": "fd-554934",
@@ -3780,10 +3783,13 @@
       "awayWinPct": 17,
       "enginePick": "home",
       "lockedAt": "2026-07-24T22:02:29.996Z",
-      "finalScore": null,
-      "outcome": null,
-      "verdict": null,
-      "gradedAt": null
+      "finalScore": {
+        "home": 1,
+        "away": 1
+      },
+      "outcome": "draw",
+      "verdict": "diverged",
+      "gradedAt": "2026-07-27T02:39:30.007Z"
     },
     {
       "matchId": "fd-554935",
@@ -3808,10 +3814,13 @@
       "awayWinPct": 39,
       "enginePick": "away",
       "lockedAt": "2026-07-24T22:02:29.996Z",
-      "finalScore": null,
-      "outcome": null,
-      "verdict": null,
-      "gradedAt": null
+      "finalScore": {
+        "home": 1,
+        "away": 1
+      },
+      "outcome": "draw",
+      "verdict": "diverged",
+      "gradedAt": "2026-07-27T02:39:30.007Z"
     },
     {
       "matchId": "fd-554936",
@@ -3836,10 +3845,13 @@
       "awayWinPct": 14,
       "enginePick": "home",
       "lockedAt": "2026-07-25T02:25:09.285Z",
-      "finalScore": null,
-      "outcome": null,
-      "verdict": null,
-      "gradedAt": null
+      "finalScore": {
+        "home": 1,
+        "away": 2
+      },
+      "outcome": "away",
+      "verdict": "diverged",
+      "gradedAt": "2026-07-27T02:39:30.007Z"
     },
     {
       "matchId": "fd-554937",
@@ -3864,10 +3876,13 @@
       "awayWinPct": 37,
       "enginePick": "away",
       "lockedAt": "2026-07-25T02:25:09.285Z",
-      "finalScore": null,
-      "outcome": null,
-      "verdict": null,
-      "gradedAt": null
+      "finalScore": {
+        "home": 2,
+        "away": 0
+      },
+      "outcome": "home",
+      "verdict": "diverged",
+      "gradedAt": "2026-07-27T02:39:30.007Z"
     }
   ]
 }
