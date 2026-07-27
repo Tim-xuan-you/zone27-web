@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-07-27T04:26:18.090Z",
+  "generatedAt": "2026-07-27T10:29:01.420Z",
   "source": "site.api.espn.com tennis scoreboard (atp+wta singles · official · public · 0 auth)",
-  "count": 2299,
+  "count": 2302,
   "games": [
     {
       "tour": "atp",
@@ -22958,6 +22958,16 @@
       "tournament": "Mifel Tennis Open by Telcel Oppo",
       "grouping": "Men's Singles",
       "date": "2026-07-27",
+      "winnerName": "Alex Hernandez",
+      "loserName": "Alan Magadan",
+      "score": "6-3 7-6",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Mifel Tennis Open by Telcel Oppo",
+      "grouping": "Men's Singles",
+      "date": "2026-07-27",
       "winnerName": "SoonWoo Kwon",
       "loserName": "Edward Winter",
       "score": "7-5 6-2",
@@ -22972,6 +22982,26 @@
       "loserName": "Bernard Tomic",
       "score": "",
       "retired": true
+    },
+    {
+      "tour": "wta",
+      "tournament": "Axeria Open 2026 powered by Intaro Sport",
+      "grouping": "Women's Singles",
+      "date": "2026-07-27",
+      "winnerName": "Lucija Ciric Bagaric",
+      "loserName": "Maria Sara Popa",
+      "score": "6-4 6-2",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Axeria Open 2026 powered by Intaro Sport",
+      "grouping": "Women's Singles",
+      "date": "2026-07-27",
+      "winnerName": "Yelyzaveta Kotliar",
+      "loserName": "Andreea Prisacariu",
+      "score": "6-4 6-0",
+      "retired": false
     },
     {
       "tour": "wta",
