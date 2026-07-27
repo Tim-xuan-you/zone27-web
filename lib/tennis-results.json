@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-07-27T20:08:55.624Z",
+  "generatedAt": "2026-07-27T22:41:46.963Z",
   "source": "site.api.espn.com tennis scoreboard (atp+wta singles · official · public · 0 auth)",
-  "count": 2322,
+  "count": 2324,
   "games": [
     {
       "tour": "atp",
@@ -23034,6 +23034,16 @@
       "retired": true
     },
     {
+      "tour": "atp",
+      "tournament": "Mubadala DC Open",
+      "grouping": "Men's Singles",
+      "date": "2026-07-27",
+      "winnerName": "Taylor Fritz",
+      "loserName": "Zizou Bergs",
+      "score": "6-3 6-4",
+      "retired": false
+    },
+    {
       "tour": "wta",
       "tournament": "Axeria Open 2026 powered by Intaro Sport",
       "grouping": "Women's Singles",
@@ -23182,6 +23192,16 @@
       "loserName": "Matteo Arnaldi",
       "score": "6-0 3-1",
       "retired": true
+    },
+    {
+      "tour": "wta",
+      "tournament": "Mubadala DC Open",
+      "grouping": "Men's Singles",
+      "date": "2026-07-27",
+      "winnerName": "Taylor Fritz",
+      "loserName": "Zizou Bergs",
+      "score": "6-3 6-4",
+      "retired": false
     },
     {
       "tour": "wta",
