@@ -20818,35 +20818,6 @@
       "gradedAt": "2026-07-28T02:56:28.364Z"
     },
     {
-      "gamePk": 824490,
-      "gameDate": "2026-07-27T23:10:00Z",
-      "scheduleDate": "2026-07-27",
-      "homeId": 113,
-      "homeEn": "Cincinnati Reds",
-      "homeRecord": "48-54",
-      "awayId": 114,
-      "awayEn": "Cleveland Guardians",
-      "awayRecord": "54-51",
-      "homePitcher": "Chase Burns",
-      "awayPitcher": "Slade Cecconi",
-      "homeStats": {
-        "era": "2.42",
-        "k9": "10.37",
-        "bb9": "3.26",
-        "hr9": "1.00"
-      },
-      "awayStats": {
-        "era": "4.60",
-        "k9": "7.12",
-        "bb9": "2.95",
-        "hr9": "1.30"
-      },
-      "engineWinHomePct": 71,
-      "lockedAt": "2026-07-25T16:07:52.800Z",
-      "finalScore": null,
-      "verdict": null
-    },
-    {
       "gamePk": 823597,
       "gameDate": "2026-07-27T23:10:00Z",
       "scheduleDate": "2026-07-27",
@@ -20880,6 +20851,35 @@
       "gradedAt": "2026-07-28T02:56:28.364Z"
     },
     {
+      "gamePk": 824490,
+      "gameDate": "2026-07-27T23:10:00Z",
+      "scheduleDate": "2026-07-27",
+      "homeId": 113,
+      "homeEn": "Cincinnati Reds",
+      "homeRecord": "48-54",
+      "awayId": 114,
+      "awayEn": "Cleveland Guardians",
+      "awayRecord": "54-51",
+      "homePitcher": "Chase Burns",
+      "awayPitcher": "Slade Cecconi",
+      "homeStats": {
+        "era": "2.42",
+        "k9": "10.37",
+        "bb9": "3.26",
+        "hr9": "1.00"
+      },
+      "awayStats": {
+        "era": "4.60",
+        "k9": "7.12",
+        "bb9": "2.95",
+        "hr9": "1.30"
+      },
+      "engineWinHomePct": 71,
+      "lockedAt": "2026-07-25T16:07:52.800Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
       "gamePk": 824570,
       "gameDate": "2026-07-27T23:40:00Z",
       "scheduleDate": "2026-07-27",
@@ -20905,8 +20905,12 @@
       },
       "engineWinHomePct": 34,
       "lockedAt": "2026-07-26T19:19:13.579Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 5,
+        "away": 9
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-07-28T05:54:17.947Z"
     },
     {
       "gamePk": 824001,
@@ -20934,8 +20938,12 @@
       },
       "engineWinHomePct": 66,
       "lockedAt": "2026-07-26T19:19:13.579Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 4,
+        "away": 6
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-07-28T05:54:17.947Z"
     },
     {
       "gamePk": 824977,
@@ -20963,8 +20971,12 @@
       },
       "engineWinHomePct": 39,
       "lockedAt": "2026-07-26T16:05:51.862Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 2,
+        "away": 4
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-07-28T05:54:17.947Z"
     },
     {
       "gamePk": 823195,
@@ -20992,8 +21004,12 @@
       },
       "engineWinHomePct": 52,
       "lockedAt": "2026-07-26T19:19:13.579Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 3,
+        "away": 0
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-07-28T05:54:17.947Z"
     },
     {
       "gamePk": 824243,
