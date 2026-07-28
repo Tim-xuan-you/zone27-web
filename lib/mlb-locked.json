@@ -21590,6 +21590,35 @@
       "lockedAt": "2026-07-27T17:02:22.829Z",
       "finalScore": null,
       "verdict": null
+    },
+    {
+      "gamePk": 824568,
+      "gameDate": "2026-07-30T18:10:00Z",
+      "scheduleDate": "2026-07-30",
+      "homeId": 145,
+      "homeEn": "Chicago White Sox",
+      "homeRecord": "55-50",
+      "awayId": 147,
+      "awayEn": "New York Yankees",
+      "awayRecord": "60-46",
+      "homePitcher": "Sean Burke",
+      "awayPitcher": "Ryan Weathers",
+      "homeStats": {
+        "era": "3.19",
+        "k9": "9.89",
+        "bb9": "2.66",
+        "hr9": "0.99"
+      },
+      "awayStats": {
+        "era": "4.25",
+        "k9": "10.17",
+        "bb9": "2.50",
+        "hr9": "1.42"
+      },
+      "engineWinHomePct": 60,
+      "lockedAt": "2026-07-28T16:44:36.247Z",
+      "finalScore": null,
+      "verdict": null
     }
   ]
 }
