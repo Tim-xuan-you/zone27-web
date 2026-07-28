@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-07-28T15:05:06.269Z",
+  "generatedAt": "2026-07-28T17:09:20.466Z",
   "source": "site.api.espn.com tennis scoreboard (atp+wta singles · official · public · 0 auth)",
-  "count": 2359,
+  "count": 2364,
   "games": [
     {
       "tour": "atp",
@@ -23444,6 +23444,26 @@
       "retired": false
     },
     {
+      "tour": "atp",
+      "tournament": "Mubadala DC Open",
+      "grouping": "Men's Singles",
+      "date": "2026-07-28",
+      "winnerName": "Ugo Humbert",
+      "loserName": "Andres Martin",
+      "score": "6-2 7-5",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Mubadala DC Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-28",
+      "winnerName": "Wang Xinyu",
+      "loserName": "Julieta Pareja",
+      "score": "7-6 6-3",
+      "retired": false
+    },
+    {
       "tour": "wta",
       "tournament": "Axeria Open 2026 powered by Intaro Sport",
       "grouping": "Women's Singles",
@@ -23461,6 +23481,16 @@
       "winnerName": "Anastasiia Sobolieva",
       "loserName": "Selena Janicijevic",
       "score": "6-4 6-2",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Axeria Open 2026 powered by Intaro Sport",
+      "grouping": "Women's Singles",
+      "date": "2026-07-28",
+      "winnerName": "Carole Monnet",
+      "loserName": "Miriam Bulgaru",
+      "score": "6-1 6-3",
       "retired": false
     },
     {
@@ -23541,6 +23571,26 @@
       "winnerName": "Terence Atmane",
       "loserName": "Frances Tiafoe",
       "score": "4-6 6-3 6-4",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Mubadala DC Open",
+      "grouping": "Men's Singles",
+      "date": "2026-07-28",
+      "winnerName": "Ugo Humbert",
+      "loserName": "Andres Martin",
+      "score": "6-2 7-5",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Mubadala DC Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-28",
+      "winnerName": "Wang Xinyu",
+      "loserName": "Julieta Pareja",
+      "score": "7-6 6-3",
       "retired": false
     },
     {
