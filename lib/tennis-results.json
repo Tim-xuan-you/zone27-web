@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-07-28T03:51:34.786Z",
+  "generatedAt": "2026-07-28T09:24:11.039Z",
   "source": "site.api.espn.com tennis scoreboard (atp+wta singles · official · public · 0 auth)",
-  "count": 2346,
+  "count": 2350,
   "games": [
     {
       "tour": "atp",
@@ -23408,6 +23408,26 @@
       "tournament": "Mifel Tennis Open by Telcel Oppo",
       "grouping": "Men's Singles",
       "date": "2026-07-28",
+      "winnerName": "Cameron Norrie",
+      "loserName": "Aleksandar Kovacevic",
+      "score": "6-4 6-1",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Mifel Tennis Open by Telcel Oppo",
+      "grouping": "Men's Singles",
+      "date": "2026-07-28",
+      "winnerName": "Chak Lam Coleman Wong",
+      "loserName": "Darwin Blanch",
+      "score": "6-3 6-4",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Mifel Tennis Open by Telcel Oppo",
+      "grouping": "Men's Singles",
+      "date": "2026-07-28",
       "winnerName": "Tristan Boyer",
       "loserName": "Gabriel Diallo",
       "score": "7-5 6-2",
@@ -23441,6 +23461,26 @@
       "winnerName": "Emma Si Yu Dong",
       "loserName": "Valeria Savinykh",
       "score": "6-3 6-2",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Odlum Brown VanOpen",
+      "grouping": "Women's Singles",
+      "date": "2026-07-28",
+      "winnerName": "Hong Yi Cody Wong",
+      "loserName": "Wei Sijia",
+      "score": "5-7 6-3 6-1",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Odlum Brown VanOpen",
+      "grouping": "Women's Singles",
+      "date": "2026-07-28",
+      "winnerName": "Miho Kuramochi",
+      "loserName": "Avery Alexander",
+      "score": "7-5 6-3",
       "retired": false
     },
     {
