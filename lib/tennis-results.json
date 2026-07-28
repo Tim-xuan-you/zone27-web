@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-07-28T09:24:11.039Z",
+  "generatedAt": "2026-07-28T11:44:54.057Z",
   "source": "site.api.espn.com tennis scoreboard (atp+wta singles · official · public · 0 auth)",
-  "count": 2350,
+  "count": 2354,
   "games": [
     {
       "tour": "atp",
@@ -23441,6 +23441,46 @@
       "winnerName": "Terence Atmane",
       "loserName": "Frances Tiafoe",
       "score": "4-6 6-3 6-4",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Axeria Open 2026 powered by Intaro Sport",
+      "grouping": "Women's Singles",
+      "date": "2026-07-28",
+      "winnerName": "Laura Samson",
+      "loserName": "Alesia Breaz",
+      "score": "6-4 6-3",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Axeria Open 2026 powered by Intaro Sport",
+      "grouping": "Women's Singles",
+      "date": "2026-07-28",
+      "winnerName": "Lucia Bronzetti",
+      "loserName": "Miriana Tona",
+      "score": "6-2 6-2",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Axeria Open 2026 powered by Intaro Sport",
+      "grouping": "Women's Singles",
+      "date": "2026-07-28",
+      "winnerName": "Mia Ristic",
+      "loserName": "Darja Semenistaja",
+      "score": "6-2 6-3",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Axeria Open 2026 powered by Intaro Sport",
+      "grouping": "Women's Singles",
+      "date": "2026-07-28",
+      "winnerName": "Yelyzaveta Kotliar",
+      "loserName": "Dalila Spiteri",
+      "score": "5-7 6-3 6-2",
       "retired": false
     },
     {
