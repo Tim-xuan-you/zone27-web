@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-07-28T11:44:54.057Z",
+  "generatedAt": "2026-07-28T15:05:06.269Z",
   "source": "site.api.espn.com tennis scoreboard (atp+wta singles · official · public · 0 auth)",
-  "count": 2354,
+  "count": 2359,
   "games": [
     {
       "tour": "atp",
@@ -23448,6 +23448,36 @@
       "tournament": "Axeria Open 2026 powered by Intaro Sport",
       "grouping": "Women's Singles",
       "date": "2026-07-28",
+      "winnerName": "Alevtina Ibragimova",
+      "loserName": "Maia Ilinca Burcescu",
+      "score": "6-4 3-6 7-5",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Axeria Open 2026 powered by Intaro Sport",
+      "grouping": "Women's Singles",
+      "date": "2026-07-28",
+      "winnerName": "Anastasiia Sobolieva",
+      "loserName": "Selena Janicijevic",
+      "score": "6-4 6-2",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Axeria Open 2026 powered by Intaro Sport",
+      "grouping": "Women's Singles",
+      "date": "2026-07-28",
+      "winnerName": "Francesca Jones",
+      "loserName": "Chloe Paquet",
+      "score": "6-0 1-6 6-0",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Axeria Open 2026 powered by Intaro Sport",
+      "grouping": "Women's Singles",
+      "date": "2026-07-28",
       "winnerName": "Laura Samson",
       "loserName": "Alesia Breaz",
       "score": "6-4 6-3",
@@ -23461,6 +23491,26 @@
       "winnerName": "Lucia Bronzetti",
       "loserName": "Miriana Tona",
       "score": "6-2 6-2",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Axeria Open 2026 powered by Intaro Sport",
+      "grouping": "Women's Singles",
+      "date": "2026-07-28",
+      "winnerName": "Lucija Ciric Bagaric",
+      "loserName": "Rachel Gailis",
+      "score": "6-2 6-1",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Axeria Open 2026 powered by Intaro Sport",
+      "grouping": "Women's Singles",
+      "date": "2026-07-28",
+      "winnerName": "Margaux Rouvroy",
+      "loserName": "Lola Radivojevic",
+      "score": "0-6 6-3 7-6",
       "retired": false
     },
     {
