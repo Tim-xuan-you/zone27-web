@@ -21563,6 +21563,35 @@
       "verdict": null
     },
     {
+      "gamePk": 823022,
+      "gameDate": "2026-07-29T23:45:00Z",
+      "scheduleDate": "2026-07-29",
+      "homeId": 138,
+      "homeEn": "St. Louis Cardinals",
+      "homeRecord": "53-53",
+      "awayId": 112,
+      "awayEn": "Chicago Cubs",
+      "awayRecord": "60-46",
+      "homePitcher": "Dustin May",
+      "awayPitcher": "Matthew Boyd",
+      "homeStats": {
+        "era": "4.59",
+        "k9": "8.91",
+        "bb9": "2.86",
+        "hr9": "0.61"
+      },
+      "awayStats": {
+        "era": "3.81",
+        "k9": "8.39",
+        "bb9": "2.59",
+        "hr9": "0.92"
+      },
+      "engineWinHomePct": 54,
+      "lockedAt": "2026-07-28T22:10:15.803Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
       "gamePk": 824973,
       "gameDate": "2026-07-30T01:40:00Z",
       "scheduleDate": "2026-07-29",
@@ -21592,6 +21621,35 @@
       "verdict": null
     },
     {
+      "gamePk": 823924,
+      "gameDate": "2026-07-30T02:10:00Z",
+      "scheduleDate": "2026-07-29",
+      "homeId": 119,
+      "homeEn": "Los Angeles Dodgers",
+      "homeRecord": "67-39",
+      "awayId": 136,
+      "awayEn": "Seattle Mariners",
+      "awayRecord": "52-55",
+      "homePitcher": "Eric Lauer",
+      "awayPitcher": "Emerson Hancock",
+      "homeStats": {
+        "era": "4.83",
+        "k9": "5.71",
+        "bb9": "3.07",
+        "hr9": "2.20"
+      },
+      "awayStats": {
+        "era": "3.16",
+        "k9": "8.29",
+        "bb9": "2.22",
+        "hr9": "1.11"
+      },
+      "engineWinHomePct": 36,
+      "lockedAt": "2026-07-28T22:10:15.803Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
       "gamePk": 824568,
       "gameDate": "2026-07-30T18:10:00Z",
       "scheduleDate": "2026-07-30",
@@ -21617,6 +21675,64 @@
       },
       "engineWinHomePct": 60,
       "lockedAt": "2026-07-28T16:44:36.247Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 823023,
+      "gameDate": "2026-07-30T18:15:00Z",
+      "scheduleDate": "2026-07-30",
+      "homeId": 138,
+      "homeEn": "St. Louis Cardinals",
+      "homeRecord": "53-53",
+      "awayId": 112,
+      "awayEn": "Chicago Cubs",
+      "awayRecord": "60-46",
+      "homePitcher": "Andre Pallante",
+      "awayPitcher": "Shota Imanaga",
+      "homeStats": {
+        "era": "3.77",
+        "k9": "6.65",
+        "bb9": "2.56",
+        "hr9": "0.80"
+      },
+      "awayStats": {
+        "era": "3.72",
+        "k9": "8.40",
+        "bb9": "2.16",
+        "hr9": "1.64"
+      },
+      "engineWinHomePct": 55,
+      "lockedAt": "2026-07-28T22:10:15.803Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 823921,
+      "gameDate": "2026-07-31T02:10:00Z",
+      "scheduleDate": "2026-07-30",
+      "homeId": 119,
+      "homeEn": "Los Angeles Dodgers",
+      "homeRecord": "67-39",
+      "awayId": 136,
+      "awayEn": "Seattle Mariners",
+      "awayRecord": "52-55",
+      "homePitcher": "Roki Sasaki",
+      "awayPitcher": "Bryce Miller",
+      "homeStats": {
+        "era": "4.71",
+        "k9": "9.03",
+        "bb9": "3.46",
+        "hr9": "1.92"
+      },
+      "awayStats": {
+        "era": "2.75",
+        "k9": "9.31",
+        "bb9": "1.44",
+        "hr9": "1.44"
+      },
+      "engineWinHomePct": 43,
+      "lockedAt": "2026-07-28T22:10:15.803Z",
       "finalScore": null,
       "verdict": null
     }
