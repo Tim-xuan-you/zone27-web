@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-07-28T22:42:08.612Z",
+  "generatedAt": "2026-07-29T03:55:24.001Z",
   "source": "site.api.espn.com tennis scoreboard (atp+wta singles · official · public · 0 auth)",
-  "count": 2389,
+  "count": 2410,
   "games": [
     {
       "tour": "atp",
@@ -23478,6 +23478,16 @@
       "tournament": "Mubadala DC Open",
       "grouping": "Men's Singles",
       "date": "2026-07-28",
+      "winnerName": "Ben Shelton",
+      "loserName": "Martin Damm",
+      "score": "6-4 4-6 6-4",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Mubadala DC Open",
+      "grouping": "Men's Singles",
+      "date": "2026-07-28",
       "winnerName": "Brandon Nakashima",
       "loserName": "Tomas Martin Etcheverry",
       "score": "6-3 6-4",
@@ -23498,9 +23508,29 @@
       "tournament": "Mubadala DC Open",
       "grouping": "Men's Singles",
       "date": "2026-07-28",
+      "winnerName": "Jakub Mensik",
+      "loserName": "Trevor Svajda",
+      "score": "6-2 6-7 6-3",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Mubadala DC Open",
+      "grouping": "Men's Singles",
+      "date": "2026-07-28",
       "winnerName": "Kamil Majchrzak",
       "loserName": "Tommy Paul",
       "score": "7-5 7-6",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Mubadala DC Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-28",
+      "winnerName": "Magdalena Frech",
+      "loserName": "Ann Li",
+      "score": "6-4 6-3",
       "retired": false
     },
     {
@@ -23698,6 +23728,16 @@
       "tournament": "Mubadala DC Open",
       "grouping": "Men's Singles",
       "date": "2026-07-28",
+      "winnerName": "Ben Shelton",
+      "loserName": "Martin Damm",
+      "score": "6-4 4-6 6-4",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Mubadala DC Open",
+      "grouping": "Men's Singles",
+      "date": "2026-07-28",
       "winnerName": "Brandon Nakashima",
       "loserName": "Tomas Martin Etcheverry",
       "score": "6-3 6-4",
@@ -23718,9 +23758,29 @@
       "tournament": "Mubadala DC Open",
       "grouping": "Men's Singles",
       "date": "2026-07-28",
+      "winnerName": "Jakub Mensik",
+      "loserName": "Trevor Svajda",
+      "score": "6-2 6-7 6-3",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Mubadala DC Open",
+      "grouping": "Men's Singles",
+      "date": "2026-07-28",
       "winnerName": "Kamil Majchrzak",
       "loserName": "Tommy Paul",
       "score": "7-5 7-6",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Mubadala DC Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-28",
+      "winnerName": "Magdalena Frech",
+      "loserName": "Ann Li",
+      "score": "6-4 6-3",
       "retired": false
     },
     {
@@ -23778,9 +23838,29 @@
       "tournament": "Odlum Brown VanOpen",
       "grouping": "Women's Singles",
       "date": "2026-07-28",
+      "winnerName": "Emerson Jones",
+      "loserName": "Carol Zhao",
+      "score": "6-3 4-6 6-4",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Odlum Brown VanOpen",
+      "grouping": "Women's Singles",
+      "date": "2026-07-28",
       "winnerName": "Emma Si Yu Dong",
       "loserName": "Valeria Savinykh",
       "score": "6-3 6-2",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Odlum Brown VanOpen",
+      "grouping": "Women's Singles",
+      "date": "2026-07-28",
+      "winnerName": "Hayu Kinoshita",
+      "loserName": "Kyoka Okamura",
+      "score": "6-1 6-4",
       "retired": false
     },
     {
@@ -23818,6 +23898,16 @@
       "tournament": "Odlum Brown VanOpen",
       "grouping": "Women's Singles",
       "date": "2026-07-28",
+      "winnerName": "Mai Hontama",
+      "loserName": "Kayla Day",
+      "score": "6-7 6-3 6-4",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Odlum Brown VanOpen",
+      "grouping": "Women's Singles",
+      "date": "2026-07-28",
       "winnerName": "Mananchaya Sawangkaew",
       "loserName": "En-Shuo Liang",
       "score": "6-2 6-4",
@@ -23838,9 +23928,29 @@
       "tournament": "Odlum Brown VanOpen",
       "grouping": "Women's Singles",
       "date": "2026-07-28",
+      "winnerName": "Moyuka Uchijima",
+      "loserName": "Miho Kuramochi",
+      "score": "6-1 6-4",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Odlum Brown VanOpen",
+      "grouping": "Women's Singles",
+      "date": "2026-07-28",
       "winnerName": "Nao Hibino",
       "loserName": "Teah Chavez",
       "score": "6-1 6-2",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Odlum Brown VanOpen",
+      "grouping": "Women's Singles",
+      "date": "2026-07-28",
+      "winnerName": "Priscilla Hon",
+      "loserName": "Ellie Schoppe",
+      "score": "6-3 6-4",
       "retired": false
     },
     {
@@ -23868,6 +23978,16 @@
       "tournament": "The Memphis Classic",
       "grouping": "Women's Singles",
       "date": "2026-07-28",
+      "winnerName": "Darja Vidmanova",
+      "loserName": "Marina Bassols Ribera",
+      "score": "6-2 3-6 6-4",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "The Memphis Classic",
+      "grouping": "Women's Singles",
+      "date": "2026-07-28",
       "winnerName": "Elvina Kalieva",
       "loserName": "Katherine Sebov",
       "score": "6-1 7-6",
@@ -23888,9 +24008,99 @@
       "tournament": "The Memphis Classic",
       "grouping": "Women's Singles",
       "date": "2026-07-28",
+      "winnerName": "Peyton Stearns",
+      "loserName": "Mary Stoiana",
+      "score": "6-7 6-0 6-4",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "The Memphis Classic",
+      "grouping": "Women's Singles",
+      "date": "2026-07-28",
+      "winnerName": "Sloane Stephens",
+      "loserName": "Yuliia Starodubtseva",
+      "score": "6-4 5-7 6-2",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "The Memphis Classic",
+      "grouping": "Women's Singles",
+      "date": "2026-07-28",
       "winnerName": "Zeynep Sonmez",
       "loserName": "Cadence Brace",
       "score": "6-4 3-6 6-3",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Mifel Tennis Open by Telcel Oppo",
+      "grouping": "Men's Singles",
+      "date": "2026-07-29",
+      "winnerName": "Edward Winter",
+      "loserName": "Moise Kouame",
+      "score": "6-1 6-4",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Mifel Tennis Open by Telcel Oppo",
+      "grouping": "Men's Singles",
+      "date": "2026-07-29",
+      "winnerName": "James Duckworth",
+      "loserName": "Aidan Mayo",
+      "score": "4-6 6-3 6-4",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Mubadala DC Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-29",
+      "winnerName": "Anastasia Potapova",
+      "loserName": "Venus Williams",
+      "score": "6-3 6-3",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Mubadala DC Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-29",
+      "winnerName": "Anastasia Potapova",
+      "loserName": "Venus Williams",
+      "score": "6-3 6-3",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Odlum Brown VanOpen",
+      "grouping": "Women's Singles",
+      "date": "2026-07-29",
+      "winnerName": "Taylah Preston",
+      "loserName": "Haruka Kaji",
+      "score": "6-0 6-2",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "The Memphis Classic",
+      "grouping": "Women's Singles",
+      "date": "2026-07-29",
+      "winnerName": "Ma YeXin",
+      "loserName": "Kimberly Birrell",
+      "score": "7-6 6-4",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "The Memphis Classic",
+      "grouping": "Women's Singles",
+      "date": "2026-07-29",
+      "winnerName": "Renata Zarazua",
+      "loserName": "McCartney Kessler",
+      "score": "6-4 6-1",
       "retired": false
     }
   ]
