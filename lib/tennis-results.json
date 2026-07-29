@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-07-29T14:57:32.325Z",
+  "generatedAt": "2026-07-29T16:57:45.879Z",
   "source": "site.api.espn.com tennis scoreboard (atp+wta singles · official · public · 0 auth)",
-  "count": 2422,
+  "count": 2425,
   "games": [
     {
       "tour": "atp",
@@ -24124,6 +24124,16 @@
       "retired": false
     },
     {
+      "tour": "atp",
+      "tournament": "Mubadala DC Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-29",
+      "winnerName": "Liudmila Samsonova",
+      "loserName": "Wang Xinyu",
+      "score": "6-2 6-2",
+      "retired": false
+    },
+    {
       "tour": "wta",
       "tournament": "Axeria Open 2026 powered by Intaro Sport",
       "grouping": "Women's Singles",
@@ -24155,12 +24165,32 @@
     },
     {
       "tour": "wta",
+      "tournament": "Axeria Open 2026 powered by Intaro Sport",
+      "grouping": "Women's Singles",
+      "date": "2026-07-29",
+      "winnerName": "Sara Sorribes Tormo",
+      "loserName": "Caijsa Hennemann",
+      "score": "6-1 6-3",
+      "retired": false
+    },
+    {
+      "tour": "wta",
       "tournament": "Mubadala DC Open",
       "grouping": "Women's Singles",
       "date": "2026-07-29",
       "winnerName": "Anastasia Potapova",
       "loserName": "Venus Williams",
       "score": "6-3 6-3",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Mubadala DC Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-29",
+      "winnerName": "Liudmila Samsonova",
+      "loserName": "Wang Xinyu",
+      "score": "6-2 6-2",
       "retired": false
     },
     {
