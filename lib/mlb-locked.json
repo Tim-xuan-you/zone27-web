@@ -21872,6 +21872,35 @@
       "verdict": null
     },
     {
+      "gamePk": 823595,
+      "gameDate": "2026-07-30T23:10:00Z",
+      "scheduleDate": "2026-07-30",
+      "homeId": 121,
+      "homeEn": "New York Mets",
+      "homeRecord": "45-62",
+      "awayId": 146,
+      "awayEn": "Miami Marlins",
+      "awayRecord": "54-54",
+      "homePitcher": "Nolan McLean",
+      "awayPitcher": "Eury Pérez",
+      "homeStats": {
+        "era": "3.32",
+        "k9": "10.71",
+        "bb9": "3.24",
+        "hr9": "0.83"
+      },
+      "awayStats": {
+        "era": "3.56",
+        "k9": "9.67",
+        "bb9": "3.47",
+        "hr9": "1.19"
+      },
+      "engineWinHomePct": 59,
+      "lockedAt": "2026-07-29T16:25:14.493Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
       "gamePk": 823921,
       "gameDate": "2026-07-31T02:10:00Z",
       "scheduleDate": "2026-07-30",
@@ -21897,6 +21926,64 @@
       },
       "engineWinHomePct": 43,
       "lockedAt": "2026-07-28T22:10:15.803Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 824486,
+      "gameDate": "2026-07-31T22:10:00Z",
+      "scheduleDate": "2026-07-31",
+      "homeId": 113,
+      "homeEn": "Cincinnati Reds",
+      "homeRecord": "50-56",
+      "awayId": 134,
+      "awayEn": "Pittsburgh Pirates",
+      "awayRecord": "55-53",
+      "homePitcher": "Hunter Greene",
+      "awayPitcher": "Paul Skenes",
+      "homeStats": {
+        "era": "7.06",
+        "k9": "12.05",
+        "bb9": "2.91",
+        "hr9": "1.25"
+      },
+      "awayStats": {
+        "era": "3.65",
+        "k9": "11.11",
+        "bb9": "2.09",
+        "hr9": "0.82"
+      },
+      "engineWinHomePct": 40,
+      "lockedAt": "2026-07-29T16:25:14.493Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 823593,
+      "gameDate": "2026-07-31T23:10:00Z",
+      "scheduleDate": "2026-07-31",
+      "homeId": 121,
+      "homeEn": "New York Mets",
+      "homeRecord": "45-62",
+      "awayId": 146,
+      "awayEn": "Miami Marlins",
+      "awayRecord": "54-54",
+      "homePitcher": "Freddy Peralta",
+      "awayPitcher": "Janson Junk",
+      "homeStats": {
+        "era": "4.99",
+        "k9": "8.95",
+        "bb9": "3.80",
+        "hr9": "1.35"
+      },
+      "awayStats": {
+        "era": "4.89",
+        "k9": "6.96",
+        "bb9": "2.44",
+        "hr9": "1.34"
+      },
+      "engineWinHomePct": 58,
+      "lockedAt": "2026-07-29T16:25:14.493Z",
       "finalScore": null,
       "verdict": null
     }
