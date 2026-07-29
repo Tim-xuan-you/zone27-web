@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-07-29T03:55:24.001Z",
+  "generatedAt": "2026-07-29T09:28:36.898Z",
   "source": "site.api.espn.com tennis scoreboard (atp+wta singles · official · public · 0 auth)",
-  "count": 2410,
+  "count": 2419,
   "games": [
     {
       "tour": "atp",
@@ -24038,6 +24038,36 @@
       "tournament": "Mifel Tennis Open by Telcel Oppo",
       "grouping": "Men's Singles",
       "date": "2026-07-29",
+      "winnerName": "Arthur Gea",
+      "loserName": "SoonWoo Kwon",
+      "score": "6-4 6-7 6-2",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Mifel Tennis Open by Telcel Oppo",
+      "grouping": "Men's Singles",
+      "date": "2026-07-29",
+      "winnerName": "Dalibor Svrcina",
+      "loserName": "Adam Walton",
+      "score": "6-7 7-6 6-3",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Mifel Tennis Open by Telcel Oppo",
+      "grouping": "Men's Singles",
+      "date": "2026-07-29",
+      "winnerName": "Denis Shapovalov",
+      "loserName": "Rinky Hijikata",
+      "score": "2-6 6-3 6-2",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Mifel Tennis Open by Telcel Oppo",
+      "grouping": "Men's Singles",
+      "date": "2026-07-29",
       "winnerName": "Edward Winter",
       "loserName": "Moise Kouame",
       "score": "6-1 6-4",
@@ -24051,6 +24081,36 @@
       "winnerName": "James Duckworth",
       "loserName": "Aidan Mayo",
       "score": "4-6 6-3 6-4",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Mifel Tennis Open by Telcel Oppo",
+      "grouping": "Men's Singles",
+      "date": "2026-07-29",
+      "winnerName": "Jenson Brooksby",
+      "loserName": "Corentin Moutet",
+      "score": "6-4 6-4",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Mifel Tennis Open by Telcel Oppo",
+      "grouping": "Men's Singles",
+      "date": "2026-07-29",
+      "winnerName": "Michael Zheng",
+      "loserName": "Martin Landaluce",
+      "score": "6-4 6-3",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Mifel Tennis Open by Telcel Oppo",
+      "grouping": "Men's Singles",
+      "date": "2026-07-29",
+      "winnerName": "Rodrigo Pacheco Mendez",
+      "loserName": "Sho Shimabukuro",
+      "score": "6-7 7-5 6-2",
       "retired": false
     },
     {
@@ -24071,6 +24131,36 @@
       "winnerName": "Anastasia Potapova",
       "loserName": "Venus Williams",
       "score": "6-3 6-3",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Odlum Brown VanOpen",
+      "grouping": "Women's Singles",
+      "date": "2026-07-29",
+      "winnerName": "Ariana Arseneault",
+      "loserName": "Annabelle Xu",
+      "score": "6-4 7-6",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Odlum Brown VanOpen",
+      "grouping": "Women's Singles",
+      "date": "2026-07-29",
+      "winnerName": "Emma Si Yu Dong",
+      "loserName": "Yeonwoo Ku",
+      "score": "4-6 6-2 7-6",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Odlum Brown VanOpen",
+      "grouping": "Women's Singles",
+      "date": "2026-07-29",
+      "winnerName": "Harriet Dart",
+      "loserName": "Kayla Cross",
+      "score": "6-2 6-1",
       "retired": false
     },
     {
