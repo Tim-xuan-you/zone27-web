@@ -21499,8 +21499,12 @@
       },
       "engineWinHomePct": 35,
       "lockedAt": "2026-07-27T17:02:22.829Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 2,
+        "away": 5
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-07-29T22:04:43.289Z"
     },
     {
       "gamePk": 824242,
@@ -21528,8 +21532,12 @@
       },
       "engineWinHomePct": 67,
       "lockedAt": "2026-07-27T17:02:22.829Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 9,
+        "away": 10
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-07-29T22:04:43.289Z"
     },
     {
       "gamePk": 823596,
@@ -21557,8 +21565,12 @@
       },
       "engineWinHomePct": 54,
       "lockedAt": "2026-07-27T17:02:22.829Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 3,
+        "away": 2
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-07-29T22:04:43.289Z"
     },
     {
       "gamePk": 823192,
@@ -21909,6 +21921,64 @@
       "verdict": null
     },
     {
+      "gamePk": 824488,
+      "gameDate": "2026-07-30T23:10:00Z",
+      "scheduleDate": "2026-07-30",
+      "homeId": 113,
+      "homeEn": "Cincinnati Reds",
+      "homeRecord": "50-56",
+      "awayId": 134,
+      "awayEn": "Pittsburgh Pirates",
+      "awayRecord": "55-54",
+      "homePitcher": "Rhett Lowder",
+      "awayPitcher": "Yohan Ramírez",
+      "homeStats": {
+        "era": "5.61",
+        "k9": "7.60",
+        "bb9": "4.32",
+        "hr9": "1.05"
+      },
+      "awayStats": {
+        "era": "3.21",
+        "k9": "9.96",
+        "bb9": "5.30",
+        "hr9": "0.64"
+      },
+      "engineWinHomePct": 37,
+      "lockedAt": "2026-07-29T22:04:42.592Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 824894,
+      "gameDate": "2026-07-30T23:15:00Z",
+      "scheduleDate": "2026-07-30",
+      "homeId": 144,
+      "homeEn": "Atlanta Braves",
+      "homeRecord": "62-45",
+      "awayId": 120,
+      "awayEn": "Washington Nationals",
+      "awayRecord": "55-54",
+      "homePitcher": "Grant Holmes",
+      "awayPitcher": "Jake Irvin",
+      "homeStats": {
+        "era": "3.79",
+        "k9": "7.67",
+        "bb9": "3.98",
+        "hr9": "1.39"
+      },
+      "awayStats": {
+        "era": "5.23",
+        "k9": "10.10",
+        "bb9": "3.83",
+        "hr9": "1.22"
+      },
+      "engineWinHomePct": 54,
+      "lockedAt": "2026-07-29T22:04:42.592Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
       "gamePk": 823921,
       "gameDate": "2026-07-31T02:10:00Z",
       "scheduleDate": "2026-07-30",
@@ -21963,6 +22033,35 @@
       },
       "engineWinHomePct": 40,
       "lockedAt": "2026-07-29T16:25:14.493Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 822782,
+      "gameDate": "2026-07-31T23:07:00Z",
+      "scheduleDate": "2026-07-31",
+      "homeId": 141,
+      "homeEn": "Toronto Blue Jays",
+      "homeRecord": "50-59",
+      "awayId": 138,
+      "awayEn": "St. Louis Cardinals",
+      "awayRecord": "53-54",
+      "homePitcher": "Dylan Cease",
+      "awayPitcher": "Kyle Leahy",
+      "homeStats": {
+        "era": "2.46",
+        "k9": "13.26",
+        "bb9": "3.81",
+        "hr9": "0.56"
+      },
+      "awayStats": {
+        "era": "3.55",
+        "k9": "7.82",
+        "bb9": "3.02",
+        "hr9": "1.07"
+      },
+      "engineWinHomePct": 72,
+      "lockedAt": "2026-07-29T22:04:42.592Z",
       "finalScore": null,
       "verdict": null
     },
