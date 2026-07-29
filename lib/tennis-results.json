@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-07-29T20:00:55.249Z",
+  "generatedAt": "2026-07-29T22:38:54.974Z",
   "source": "site.api.espn.com tennis scoreboard (atp+wta singles · official · public · 0 auth)",
-  "count": 2434,
+  "count": 2441,
   "games": [
     {
       "tour": "atp",
@@ -24148,6 +24148,16 @@
       "tournament": "Mubadala DC Open",
       "grouping": "Women's Singles",
       "date": "2026-07-29",
+      "winnerName": "Elisabetta Cocciaretto",
+      "loserName": "Emma Navarro",
+      "score": "6-3 4-6 6-3",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Mubadala DC Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-29",
       "winnerName": "Liudmila Samsonova",
       "loserName": "Wang Xinyu",
       "score": "6-2 6-2",
@@ -24161,6 +24171,16 @@
       "winnerName": "Lorenzo Musetti",
       "loserName": "Aleksandar Vukic",
       "score": "6-3 5-7 6-3",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Mubadala DC Open",
+      "grouping": "Men's Singles",
+      "date": "2026-07-29",
+      "winnerName": "Taylor Fritz",
+      "loserName": "Kamil Majchrzak",
+      "score": "6-3 6-4",
       "retired": false
     },
     {
@@ -24238,6 +24258,16 @@
       "tournament": "Mubadala DC Open",
       "grouping": "Women's Singles",
       "date": "2026-07-29",
+      "winnerName": "Elisabetta Cocciaretto",
+      "loserName": "Emma Navarro",
+      "score": "6-3 4-6 6-3",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Mubadala DC Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-29",
       "winnerName": "Liudmila Samsonova",
       "loserName": "Wang Xinyu",
       "score": "6-2 6-2",
@@ -24251,6 +24281,16 @@
       "winnerName": "Lorenzo Musetti",
       "loserName": "Aleksandar Vukic",
       "score": "6-3 5-7 6-3",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Mubadala DC Open",
+      "grouping": "Men's Singles",
+      "date": "2026-07-29",
+      "winnerName": "Taylor Fritz",
+      "loserName": "Kamil Majchrzak",
+      "score": "6-3 6-4",
       "retired": false
     },
     {
@@ -24288,9 +24328,39 @@
       "tournament": "Odlum Brown VanOpen",
       "grouping": "Women's Singles",
       "date": "2026-07-29",
+      "winnerName": "Maddison Inglis",
+      "loserName": "Greet Minnen",
+      "score": "6-1 6-3",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Odlum Brown VanOpen",
+      "grouping": "Women's Singles",
+      "date": "2026-07-29",
+      "winnerName": "Mai Hontama",
+      "loserName": "Lu Jia-Jing",
+      "score": "6-3 6-3",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Odlum Brown VanOpen",
+      "grouping": "Women's Singles",
+      "date": "2026-07-29",
       "winnerName": "Moyuka Uchijima",
       "loserName": "Hayu Kinoshita",
       "score": "2-6 6-4 7-5",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Odlum Brown VanOpen",
+      "grouping": "Women's Singles",
+      "date": "2026-07-29",
+      "winnerName": "Sofia Costoulas",
+      "loserName": "Lizette Cabrera",
+      "score": "6-2 6-2",
       "retired": false
     },
     {
