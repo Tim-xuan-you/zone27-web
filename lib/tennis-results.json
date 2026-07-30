@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-07-30T14:54:31.409Z",
+  "generatedAt": "2026-07-30T17:08:12.150Z",
   "source": "site.api.espn.com tennis scoreboard (atp+wta singles · official · public · 0 auth)",
-  "count": 2467,
+  "count": 2468,
   "games": [
     {
       "tour": "atp",
@@ -24612,6 +24612,16 @@
       "loserName": "Anastasiia Sobolieva",
       "score": "4-2",
       "retired": true
+    },
+    {
+      "tour": "wta",
+      "tournament": "Axeria Open 2026 powered by Intaro Sport",
+      "grouping": "Women's Singles",
+      "date": "2026-07-30",
+      "winnerName": "Lucia Bronzetti",
+      "loserName": "Alevtina Ibragimova",
+      "score": "6-3 6-2",
+      "retired": false
     },
     {
       "tour": "wta",
