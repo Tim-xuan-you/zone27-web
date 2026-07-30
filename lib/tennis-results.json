@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-07-30T03:45:44.109Z",
+  "generatedAt": "2026-07-30T09:18:16.646Z",
   "source": "site.api.espn.com tennis scoreboard (atp+wta singles · official · public · 0 auth)",
-  "count": 2457,
+  "count": 2464,
   "games": [
     {
       "tour": "atp",
@@ -24508,9 +24508,59 @@
       "tournament": "Mifel Tennis Open by Telcel Oppo",
       "grouping": "Men's Singles",
       "date": "2026-07-30",
+      "winnerName": "Arthur Gea",
+      "loserName": "Michael Zheng",
+      "score": "0-6 6-4 6-0",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Mifel Tennis Open by Telcel Oppo",
+      "grouping": "Men's Singles",
+      "date": "2026-07-30",
+      "winnerName": "Bernard Tomic",
+      "loserName": "Karen Khachanov",
+      "score": "6-2 6-4",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Mifel Tennis Open by Telcel Oppo",
+      "grouping": "Men's Singles",
+      "date": "2026-07-30",
+      "winnerName": "Cameron Norrie",
+      "loserName": "James Duckworth",
+      "score": "6-4 6-4",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Mifel Tennis Open by Telcel Oppo",
+      "grouping": "Men's Singles",
+      "date": "2026-07-30",
       "winnerName": "Chak Lam Coleman Wong",
       "loserName": "Jiri Lehecka",
       "score": "1-6 6-3 6-4",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Mifel Tennis Open by Telcel Oppo",
+      "grouping": "Men's Singles",
+      "date": "2026-07-30",
+      "winnerName": "Dalibor Svrcina",
+      "loserName": "Luciano Darderi",
+      "score": "3-0",
+      "retired": true
+    },
+    {
+      "tour": "atp",
+      "tournament": "Mifel Tennis Open by Telcel Oppo",
+      "grouping": "Men's Singles",
+      "date": "2026-07-30",
+      "winnerName": "Denis Shapovalov",
+      "loserName": "Rodrigo Pacheco Mendez",
+      "score": "6-3 6-2",
       "retired": false
     },
     {
@@ -24552,6 +24602,26 @@
       "loserName": "Kei Nishikori",
       "score": "6-3 6-2",
       "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Odlum Brown VanOpen",
+      "grouping": "Women's Singles",
+      "date": "2026-07-30",
+      "winnerName": "Emerson Jones",
+      "loserName": "Madison Brengle",
+      "score": "4-6 6-0 6-2",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Odlum Brown VanOpen",
+      "grouping": "Women's Singles",
+      "date": "2026-07-30",
+      "winnerName": "Harriet Dart",
+      "loserName": "Emma Si Yu Dong",
+      "score": "6-0 3-6 3-0",
+      "retired": true
     },
     {
       "tour": "wta",
