@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-07-30T11:32:41.704Z",
+  "generatedAt": "2026-07-30T14:54:31.409Z",
   "source": "site.api.espn.com tennis scoreboard (atp+wta singles · official · public · 0 auth)",
-  "count": 2465,
+  "count": 2467,
   "games": [
     {
       "tour": "atp",
@@ -24598,10 +24598,30 @@
       "tournament": "Axeria Open 2026 powered by Intaro Sport",
       "grouping": "Women's Singles",
       "date": "2026-07-30",
+      "winnerName": "Francesca Jones",
+      "loserName": "Lucija Ciric Bagaric",
+      "score": "7-5 6-3",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Axeria Open 2026 powered by Intaro Sport",
+      "grouping": "Women's Singles",
+      "date": "2026-07-30",
       "winnerName": "Laura Samson",
       "loserName": "Anastasiia Sobolieva",
       "score": "4-2",
       "retired": true
+    },
+    {
+      "tour": "wta",
+      "tournament": "Axeria Open 2026 powered by Intaro Sport",
+      "grouping": "Women's Singles",
+      "date": "2026-07-30",
+      "winnerName": "Mia Ristic",
+      "loserName": "Yelyzaveta Kotliar",
+      "score": "2-6 6-2 7-6",
+      "retired": false
     },
     {
       "tour": "wta",
