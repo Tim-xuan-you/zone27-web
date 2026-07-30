@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-07-30T17:08:12.150Z",
+  "generatedAt": "2026-07-30T20:05:39.476Z",
   "source": "site.api.espn.com tennis scoreboard (atp+wta singles · official · public · 0 auth)",
-  "count": 2468,
+  "count": 2476,
   "games": [
     {
       "tour": "atp",
@@ -24588,6 +24588,36 @@
       "tournament": "Mubadala DC Open",
       "grouping": "Men's Singles",
       "date": "2026-07-30",
+      "winnerName": "Alex de Minaur",
+      "loserName": "Cruz Hewitt",
+      "score": "6-2 6-3",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Mubadala DC Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-30",
+      "winnerName": "Anna Kalinskaya",
+      "loserName": "Janice Tjen",
+      "score": "1-6 6-3 7-6",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Mubadala DC Open",
+      "grouping": "Men's Singles",
+      "date": "2026-07-30",
+      "winnerName": "Brandon Nakashima",
+      "loserName": "Jakub Mensik",
+      "score": "7-6 3-6 6-4",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Mubadala DC Open",
+      "grouping": "Men's Singles",
+      "date": "2026-07-30",
       "winnerName": "Rafael Jodar",
       "loserName": "Kei Nishikori",
       "score": "6-3 6-2",
@@ -24638,6 +24668,36 @@
       "tournament": "Mubadala DC Open",
       "grouping": "Men's Singles",
       "date": "2026-07-30",
+      "winnerName": "Alex de Minaur",
+      "loserName": "Cruz Hewitt",
+      "score": "6-2 6-3",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Mubadala DC Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-30",
+      "winnerName": "Anna Kalinskaya",
+      "loserName": "Janice Tjen",
+      "score": "1-6 6-3 7-6",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Mubadala DC Open",
+      "grouping": "Men's Singles",
+      "date": "2026-07-30",
+      "winnerName": "Brandon Nakashima",
+      "loserName": "Jakub Mensik",
+      "score": "7-6 3-6 6-4",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Mubadala DC Open",
+      "grouping": "Men's Singles",
+      "date": "2026-07-30",
       "winnerName": "Rafael Jodar",
       "loserName": "Kei Nishikori",
       "score": "6-3 6-2",
@@ -24678,9 +24738,29 @@
       "tournament": "Odlum Brown VanOpen",
       "grouping": "Women's Singles",
       "date": "2026-07-30",
+      "winnerName": "Mai Hontama",
+      "loserName": "Himeno Sakatsume",
+      "score": "6-2 6-2",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Odlum Brown VanOpen",
+      "grouping": "Women's Singles",
+      "date": "2026-07-30",
       "winnerName": "Taylah Preston",
       "loserName": "Priscilla Hon",
       "score": "7-6 6-4",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "The Memphis Classic",
+      "grouping": "Women's Singles",
+      "date": "2026-07-30",
+      "winnerName": "Kristina Liutova",
+      "loserName": "Maya Joint",
+      "score": "3-6 6-3 6-3",
       "retired": false
     }
   ]
