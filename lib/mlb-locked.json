@@ -21899,8 +21899,12 @@
       },
       "engineWinHomePct": 50,
       "lockedAt": "2026-07-30T02:48:17.800Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 4,
+        "away": 3
+      },
+      "verdict": "push",
+      "gradedAt": "2026-07-30T22:10:59.013Z"
     },
     {
       "gamePk": 824568,
@@ -21928,8 +21932,12 @@
       },
       "engineWinHomePct": 60,
       "lockedAt": "2026-07-28T16:44:36.247Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 2,
+        "away": 1
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-07-30T22:10:59.013Z"
     },
     {
       "gamePk": 823023,
@@ -21957,8 +21965,12 @@
       },
       "engineWinHomePct": 55,
       "lockedAt": "2026-07-28T22:10:15.803Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 2,
+        "away": 4
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-07-30T22:10:59.013Z"
     },
     {
       "gamePk": 823595,
@@ -22711,6 +22723,35 @@
       },
       "engineWinHomePct": 42,
       "lockedAt": "2026-07-30T19:41:05.967Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 823920,
+      "gameDate": "2026-08-02T01:10:00Z",
+      "scheduleDate": "2026-08-01",
+      "homeId": 119,
+      "homeEn": "Los Angeles Dodgers",
+      "homeRecord": "68-40",
+      "awayId": 111,
+      "awayEn": "Boston Red Sox",
+      "awayRecord": "56-51",
+      "homePitcher": "Yoshinobu Yamamoto",
+      "awayPitcher": "Payton Tolle",
+      "homeStats": {
+        "era": "2.72",
+        "k9": "8.45",
+        "bb9": "2.01",
+        "hr9": "0.93"
+      },
+      "awayStats": {
+        "era": "3.32",
+        "k9": "9.76",
+        "bb9": "2.56",
+        "hr9": "1.04"
+      },
+      "engineWinHomePct": 54,
+      "lockedAt": "2026-07-30T22:10:58.592Z",
       "finalScore": null,
       "verdict": null
     },
