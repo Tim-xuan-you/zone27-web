@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-07-30T09:18:16.646Z",
+  "generatedAt": "2026-07-30T11:32:41.704Z",
   "source": "site.api.espn.com tennis scoreboard (atp+wta singles · official · public · 0 auth)",
-  "count": 2464,
+  "count": 2465,
   "games": [
     {
       "tour": "atp",
@@ -24592,6 +24592,16 @@
       "loserName": "Kei Nishikori",
       "score": "6-3 6-2",
       "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Axeria Open 2026 powered by Intaro Sport",
+      "grouping": "Women's Singles",
+      "date": "2026-07-30",
+      "winnerName": "Laura Samson",
+      "loserName": "Anastasiia Sobolieva",
+      "score": "4-2",
+      "retired": true
     },
     {
       "tour": "wta",
