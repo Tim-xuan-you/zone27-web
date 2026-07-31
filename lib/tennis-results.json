@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-07-31T20:08:08.700Z",
+  "generatedAt": "2026-07-31T22:42:08.280Z",
   "source": "site.api.espn.com tennis scoreboard (atp+wta singles · official · public · 0 auth)",
-  "count": 2506,
+  "count": 2511,
   "games": [
     {
       "tour": "atp",
@@ -24958,6 +24958,16 @@
       "tournament": "Mubadala DC Open",
       "grouping": "Women's Singles",
       "date": "2026-07-31",
+      "winnerName": "Diana Shnaider",
+      "loserName": "Liudmila Samsonova",
+      "score": "6-3 6-4",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Mubadala DC Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-31",
       "winnerName": "Elina Svitolina",
       "loserName": "Polina Kudermetova",
       "score": "7-6 6-4",
@@ -24971,6 +24981,16 @@
       "winnerName": "Jessica Pegula",
       "loserName": "Anna Kalinskaya",
       "score": "6-3 7-5",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Mubadala DC Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-31",
+      "winnerName": "Naomi Osaka",
+      "loserName": "Elisabetta Cocciaretto",
+      "score": "4-6 6-4 6-3",
       "retired": false
     },
     {
@@ -25028,6 +25048,16 @@
       "tournament": "Mubadala DC Open",
       "grouping": "Women's Singles",
       "date": "2026-07-31",
+      "winnerName": "Diana Shnaider",
+      "loserName": "Liudmila Samsonova",
+      "score": "6-3 6-4",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Mubadala DC Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-31",
       "winnerName": "Elina Svitolina",
       "loserName": "Polina Kudermetova",
       "score": "7-6 6-4",
@@ -25045,12 +25075,32 @@
     },
     {
       "tour": "wta",
+      "tournament": "Mubadala DC Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-31",
+      "winnerName": "Naomi Osaka",
+      "loserName": "Elisabetta Cocciaretto",
+      "score": "4-6 6-4 6-3",
+      "retired": false
+    },
+    {
+      "tour": "wta",
       "tournament": "Odlum Brown VanOpen",
       "grouping": "Women's Singles",
       "date": "2026-07-31",
       "winnerName": "Maddison Inglis",
       "loserName": "Mai Hontama",
       "score": "6-3 6-4",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Odlum Brown VanOpen",
+      "grouping": "Women's Singles",
+      "date": "2026-07-31",
+      "winnerName": "Taylah Preston",
+      "loserName": "Mananchaya Sawangkaew",
+      "score": "5-7 6-3 6-3",
       "retired": false
     },
     {
