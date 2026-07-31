@@ -22097,8 +22097,12 @@
       },
       "engineWinHomePct": 42,
       "lockedAt": "2026-07-30T05:47:09.264Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 4,
+        "away": 5
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-07-31T08:57:07.546Z"
     },
     {
       "gamePk": 823921,
@@ -22126,8 +22130,12 @@
       },
       "engineWinHomePct": 43,
       "lockedAt": "2026-07-28T22:10:15.803Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 6,
+        "away": 2
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-07-31T08:57:07.546Z"
     },
     {
       "gamePk": 824651,
@@ -22449,6 +22457,35 @@
       "verdict": null
     },
     {
+      "gamePk": 823272,
+      "gameDate": "2026-08-01T01:45:00Z",
+      "scheduleDate": "2026-07-31",
+      "homeId": 135,
+      "homeEn": "San Diego Padres",
+      "homeRecord": "55-54",
+      "awayId": 137,
+      "awayEn": "San Francisco Giants",
+      "awayRecord": "47-62",
+      "homePitcher": "Bradgley Rodriguez",
+      "awayPitcher": "Carson Whisenhunt",
+      "homeStats": {
+        "era": "2.33",
+        "k9": "9.13",
+        "bb9": "3.11",
+        "hr9": "0.39"
+      },
+      "awayStats": {
+        "era": "4.60",
+        "k9": "7.47",
+        "bb9": "4.60",
+        "hr9": "1.72"
+      },
+      "engineWinHomePct": 74,
+      "lockedAt": "2026-07-31T08:57:07.041Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
       "gamePk": 823111,
       "gameDate": "2026-08-01T02:10:00Z",
       "scheduleDate": "2026-07-31",
@@ -22474,6 +22511,35 @@
       },
       "engineWinHomePct": 71,
       "lockedAt": "2026-07-30T19:41:05.967Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 823922,
+      "gameDate": "2026-08-01T02:10:00Z",
+      "scheduleDate": "2026-07-31",
+      "homeId": 119,
+      "homeEn": "Los Angeles Dodgers",
+      "homeRecord": "69-40",
+      "awayId": 111,
+      "awayEn": "Boston Red Sox",
+      "awayRecord": "57-51",
+      "homePitcher": "Edgardo Henriquez",
+      "awayPitcher": "Ranger Suarez",
+      "homeStats": {
+        "era": "2.79",
+        "k9": "9.00",
+        "bb9": "4.07",
+        "hr9": "0.21"
+      },
+      "awayStats": {
+        "era": "3.02",
+        "k9": "9.72",
+        "bb9": "2.45",
+        "hr9": "0.47"
+      },
+      "engineWinHomePct": 55,
+      "lockedAt": "2026-07-31T08:57:07.041Z",
       "finalScore": null,
       "verdict": null
     },
