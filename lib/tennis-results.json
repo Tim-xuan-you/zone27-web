@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-07-31T09:32:37.186Z",
+  "generatedAt": "2026-07-31T11:47:57.595Z",
   "source": "site.api.espn.com tennis scoreboard (atp+wta singles · official · public · 0 auth)",
-  "count": 2496,
+  "count": 2498,
   "games": [
     {
       "tour": "atp",
@@ -24951,6 +24951,26 @@
       "winnerName": "Elina Svitolina",
       "loserName": "Polina Kudermetova",
       "score": "7-6 6-4",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Axeria Open 2026 powered by Intaro Sport",
+      "grouping": "Women's Singles",
+      "date": "2026-07-31",
+      "winnerName": "Kaitlin Quevedo",
+      "loserName": "Carole Monnet",
+      "score": "7-6 6-3",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Axeria Open 2026 powered by Intaro Sport",
+      "grouping": "Women's Singles",
+      "date": "2026-07-31",
+      "winnerName": "Laura Samson",
+      "loserName": "Mia Ristic",
+      "score": "7-6 4-6 6-2",
       "retired": false
     },
     {
