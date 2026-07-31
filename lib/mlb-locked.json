@@ -22948,6 +22948,354 @@
       "lockedAt": "2026-07-31T03:30:59.042Z",
       "finalScore": null,
       "verdict": null
+    },
+    {
+      "gamePk": 824807,
+      "gameDate": "2026-08-02T17:35:00Z",
+      "scheduleDate": "2026-08-02",
+      "homeId": 110,
+      "homeEn": "Baltimore Orioles",
+      "homeRecord": "53-56",
+      "awayId": 143,
+      "awayEn": "Philadelphia Phillies",
+      "awayRecord": "57-52",
+      "homePitcher": "Kyle Bradish",
+      "awayPitcher": "Zack Wheeler",
+      "homeStats": {
+        "era": "3.74",
+        "k9": "8.69",
+        "bb9": "3.97",
+        "hr9": "0.92"
+      },
+      "awayStats": {
+        "era": "2.53",
+        "k9": "10.75",
+        "bb9": "2.01",
+        "hr9": "1.14"
+      },
+      "engineWinHomePct": 46,
+      "lockedAt": "2026-07-31T16:48:17.887Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 824891,
+      "gameDate": "2026-08-02T17:35:00Z",
+      "scheduleDate": "2026-08-02",
+      "homeId": 144,
+      "homeEn": "Atlanta Braves",
+      "homeRecord": "64-45",
+      "awayId": 120,
+      "awayEn": "Washington Nationals",
+      "awayRecord": "55-55",
+      "homePitcher": "Martín Pérez",
+      "awayPitcher": "Cade Cavalli",
+      "homeStats": {
+        "era": "3.49",
+        "k9": "6.87",
+        "bb9": "3.69",
+        "hr9": "1.10"
+      },
+      "awayStats": {
+        "era": "3.55",
+        "k9": "10.03",
+        "bb9": "2.78",
+        "hr9": "0.77"
+      },
+      "engineWinHomePct": 46,
+      "lockedAt": "2026-07-31T16:48:17.887Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 822783,
+      "gameDate": "2026-08-02T17:37:00Z",
+      "scheduleDate": "2026-08-02",
+      "homeId": 141,
+      "homeEn": "Toronto Blue Jays",
+      "homeRecord": "50-59",
+      "awayId": 138,
+      "awayEn": "St. Louis Cardinals",
+      "awayRecord": "54-55",
+      "homePitcher": "Max Scherzer",
+      "awayPitcher": "Michael McGreevy",
+      "homeStats": {
+        "era": "9.49",
+        "k9": "6.57",
+        "bb9": "5.11",
+        "hr9": "3.28"
+      },
+      "awayStats": {
+        "era": "3.57",
+        "k9": "5.90",
+        "bb9": "2.25",
+        "hr9": "1.16"
+      },
+      "engineWinHomePct": 25,
+      "lockedAt": "2026-07-31T16:48:17.887Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 824404,
+      "gameDate": "2026-08-02T17:40:00Z",
+      "scheduleDate": "2026-08-02",
+      "homeId": 114,
+      "homeEn": "Cleveland Guardians",
+      "homeRecord": "56-54",
+      "awayId": 109,
+      "awayEn": "Arizona Diamondbacks",
+      "awayRecord": "57-52",
+      "homePitcher": "Gavin Williams",
+      "awayPitcher": "Merrill Kelly",
+      "homeStats": {
+        "era": "3.71",
+        "k9": "11.34",
+        "bb9": "2.57",
+        "hr9": "1.42"
+      },
+      "awayStats": {
+        "era": "4.86",
+        "k9": "5.84",
+        "bb9": "3.46",
+        "hr9": "1.81"
+      },
+      "engineWinHomePct": 72,
+      "lockedAt": "2026-07-31T16:48:17.887Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 824483,
+      "gameDate": "2026-08-02T17:40:00Z",
+      "scheduleDate": "2026-08-02",
+      "homeId": 113,
+      "homeEn": "Cincinnati Reds",
+      "homeRecord": "51-57",
+      "awayId": 134,
+      "awayEn": "Pittsburgh Pirates",
+      "awayRecord": "55-55",
+      "homePitcher": "Chase Burns",
+      "awayPitcher": "Mitch Keller",
+      "homeStats": {
+        "era": "2.40",
+        "k9": "10.22",
+        "bb9": "3.28",
+        "hr9": "1.04"
+      },
+      "awayStats": {
+        "era": "4.83",
+        "k9": "6.89",
+        "bb9": "3.01",
+        "hr9": "1.03"
+      },
+      "engineWinHomePct": 70,
+      "lockedAt": "2026-07-31T16:48:17.887Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 822943,
+      "gameDate": "2026-08-02T17:40:00Z",
+      "scheduleDate": "2026-08-02",
+      "homeId": 139,
+      "homeEn": "Tampa Bay Rays",
+      "homeRecord": "64-44",
+      "awayId": 145,
+      "awayEn": "Chicago White Sox",
+      "awayRecord": "57-51",
+      "homePitcher": "Griffin Jax",
+      "awayPitcher": "Anthony Kay",
+      "homeStats": {
+        "era": "3.74",
+        "k9": "9.55",
+        "bb9": "3.12",
+        "hr9": "1.35"
+      },
+      "awayStats": {
+        "era": "4.25",
+        "k9": "7.55",
+        "bb9": "3.56",
+        "hr9": "1.22"
+      },
+      "engineWinHomePct": 59,
+      "lockedAt": "2026-07-31T16:48:17.887Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 824648,
+      "gameDate": "2026-08-02T18:20:00Z",
+      "scheduleDate": "2026-08-02",
+      "homeId": 112,
+      "homeEn": "Chicago Cubs",
+      "homeRecord": "62-47",
+      "awayId": 147,
+      "awayEn": "New York Yankees",
+      "awayRecord": "61-48",
+      "homePitcher": "Colin Rea",
+      "awayPitcher": "Gerrit Cole",
+      "homeStats": {
+        "era": "4.67",
+        "k9": "6.69",
+        "bb9": "3.22",
+        "hr9": "1.37"
+      },
+      "awayStats": {
+        "era": "3.57",
+        "k9": "9.66",
+        "bb9": "1.85",
+        "hr9": "1.46"
+      },
+      "engineWinHomePct": 44,
+      "lockedAt": "2026-07-31T16:48:17.887Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 824323,
+      "gameDate": "2026-08-02T19:10:00Z",
+      "scheduleDate": "2026-08-02",
+      "homeId": 115,
+      "homeEn": "Colorado Rockies",
+      "homeRecord": "42-67",
+      "awayId": 118,
+      "awayEn": "Kansas City Royals",
+      "awayRecord": "46-64",
+      "homePitcher": "Kyle Freeland",
+      "awayPitcher": "Seth Lugo",
+      "homeStats": {
+        "era": "7.34",
+        "k9": "7.70",
+        "bb9": "1.90",
+        "hr9": "1.90"
+      },
+      "awayStats": {
+        "era": "4.22",
+        "k9": "6.99",
+        "bb9": "2.91",
+        "hr9": "1.09"
+      },
+      "engineWinHomePct": 38,
+      "lockedAt": "2026-07-31T16:48:17.887Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 823996,
+      "gameDate": "2026-08-02T19:15:00Z",
+      "scheduleDate": "2026-08-02",
+      "homeId": 108,
+      "homeEn": "Los Angeles Angels",
+      "homeRecord": "42-67",
+      "awayId": 158,
+      "awayEn": "Milwaukee Brewers",
+      "awayRecord": "67-41",
+      "homePitcher": "Walbert Ureña",
+      "awayPitcher": "Jacob Misiorowski",
+      "homeStats": {
+        "era": "2.70",
+        "k9": "8.49",
+        "bb9": "4.73",
+        "hr9": "0.58"
+      },
+      "awayStats": {
+        "era": "1.58",
+        "k9": "13.88",
+        "bb9": "2.10",
+        "hr9": "0.75"
+      },
+      "engineWinHomePct": 40,
+      "lockedAt": "2026-07-31T16:48:17.887Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 824971,
+      "gameDate": "2026-08-02T20:05:00Z",
+      "scheduleDate": "2026-08-02",
+      "homeId": 133,
+      "homeEn": "Athletics",
+      "homeRecord": "45-64",
+      "awayId": 116,
+      "awayEn": "Detroit Tigers",
+      "awayRecord": "51-58",
+      "homePitcher": "Gage Jump",
+      "awayPitcher": "Keider Montero",
+      "homeStats": {
+        "era": "4.00",
+        "k9": "9.71",
+        "bb9": "3.57",
+        "hr9": "1.00"
+      },
+      "awayStats": {
+        "era": "3.34",
+        "k9": "6.44",
+        "bb9": "1.88",
+        "hr9": "0.90"
+      },
+      "engineWinHomePct": 57,
+      "lockedAt": "2026-07-31T16:48:17.887Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 823107,
+      "gameDate": "2026-08-02T20:10:00Z",
+      "scheduleDate": "2026-08-02",
+      "homeId": 136,
+      "homeEn": "Seattle Mariners",
+      "homeRecord": "53-57",
+      "awayId": 142,
+      "awayEn": "Minnesota Twins",
+      "awayRecord": "55-55",
+      "homePitcher": "George Kirby",
+      "awayPitcher": "Taj Bradley",
+      "homeStats": {
+        "era": "3.98",
+        "k9": "8.03",
+        "bb9": "1.88",
+        "hr9": "1.13"
+      },
+      "awayStats": {
+        "era": "3.65",
+        "k9": "10.37",
+        "bb9": "3.65",
+        "hr9": "1.27"
+      },
+      "engineWinHomePct": 49,
+      "lockedAt": "2026-07-31T16:48:17.887Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 823919,
+      "gameDate": "2026-08-02T23:20:00Z",
+      "scheduleDate": "2026-08-02",
+      "homeId": 119,
+      "homeEn": "Los Angeles Dodgers",
+      "homeRecord": "69-40",
+      "awayId": 111,
+      "awayEn": "Boston Red Sox",
+      "awayRecord": "57-51",
+      "homePitcher": "Emmet Sheehan",
+      "awayPitcher": "Jake Bennett",
+      "homeStats": {
+        "era": "4.95",
+        "k9": "10.10",
+        "bb9": "2.82",
+        "hr9": "1.65"
+      },
+      "awayStats": {
+        "era": "2.74",
+        "k9": "6.30",
+        "bb9": "1.51",
+        "hr9": "0.69"
+      },
+      "engineWinHomePct": 47,
+      "lockedAt": "2026-07-31T16:48:17.887Z",
+      "finalScore": null,
+      "verdict": null
     }
   ]
 }
