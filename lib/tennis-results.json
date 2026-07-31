@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-07-31T11:47:57.595Z",
+  "generatedAt": "2026-07-31T15:08:55.637Z",
   "source": "site.api.espn.com tennis scoreboard (atp+wta singles · official · public · 0 auth)",
-  "count": 2498,
+  "count": 2499,
   "games": [
     {
       "tour": "atp",
@@ -24951,6 +24951,16 @@
       "winnerName": "Elina Svitolina",
       "loserName": "Polina Kudermetova",
       "score": "7-6 6-4",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Axeria Open 2026 powered by Intaro Sport",
+      "grouping": "Women's Singles",
+      "date": "2026-07-31",
+      "winnerName": "Francesca Jones",
+      "loserName": "Alice Rame",
+      "score": "6-1 6-2",
       "retired": false
     },
     {
