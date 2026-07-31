@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-07-30T22:46:10.288Z",
+  "generatedAt": "2026-07-31T04:05:45.766Z",
   "source": "site.api.espn.com tennis scoreboard (atp+wta singles · official · public · 0 auth)",
-  "count": 2483,
+  "count": 2494,
   "games": [
     {
       "tour": "atp",
@@ -24588,6 +24588,16 @@
       "tournament": "Mubadala DC Open",
       "grouping": "Men's Singles",
       "date": "2026-07-30",
+      "winnerName": "Alejandro Tabilo",
+      "loserName": "Terence Atmane",
+      "score": "6-3 7-6",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Mubadala DC Open",
+      "grouping": "Men's Singles",
+      "date": "2026-07-30",
       "winnerName": "Alex de Minaur",
       "loserName": "Cruz Hewitt",
       "score": "6-2 6-3",
@@ -24608,9 +24618,29 @@
       "tournament": "Mubadala DC Open",
       "grouping": "Men's Singles",
       "date": "2026-07-30",
+      "winnerName": "Ben Shelton",
+      "loserName": "Ugo Humbert",
+      "score": "6-7 6-3 6-4",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Mubadala DC Open",
+      "grouping": "Men's Singles",
+      "date": "2026-07-30",
       "winnerName": "Brandon Nakashima",
       "loserName": "Jakub Mensik",
       "score": "7-6 3-6 6-4",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Mubadala DC Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-30",
+      "winnerName": "Diana Shnaider",
+      "loserName": "Anastasia Potapova",
+      "score": "6-1 6-2",
       "retired": false
     },
     {
@@ -24678,6 +24708,16 @@
       "tournament": "Mubadala DC Open",
       "grouping": "Men's Singles",
       "date": "2026-07-30",
+      "winnerName": "Alejandro Tabilo",
+      "loserName": "Terence Atmane",
+      "score": "6-3 7-6",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Mubadala DC Open",
+      "grouping": "Men's Singles",
+      "date": "2026-07-30",
       "winnerName": "Alex de Minaur",
       "loserName": "Cruz Hewitt",
       "score": "6-2 6-3",
@@ -24698,9 +24738,29 @@
       "tournament": "Mubadala DC Open",
       "grouping": "Men's Singles",
       "date": "2026-07-30",
+      "winnerName": "Ben Shelton",
+      "loserName": "Ugo Humbert",
+      "score": "6-7 6-3 6-4",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Mubadala DC Open",
+      "grouping": "Men's Singles",
+      "date": "2026-07-30",
       "winnerName": "Brandon Nakashima",
       "loserName": "Jakub Mensik",
       "score": "7-6 3-6 6-4",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Mubadala DC Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-30",
+      "winnerName": "Diana Shnaider",
+      "loserName": "Anastasia Potapova",
+      "score": "6-1 6-2",
       "retired": false
     },
     {
@@ -24818,6 +24878,16 @@
       "tournament": "The Memphis Classic",
       "grouping": "Women's Singles",
       "date": "2026-07-30",
+      "winnerName": "Darja Vidmanova",
+      "loserName": "Sloane Stephens",
+      "score": "6-2 6-4",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "The Memphis Classic",
+      "grouping": "Women's Singles",
+      "date": "2026-07-30",
       "winnerName": "Kristina Liutova",
       "loserName": "Maya Joint",
       "score": "3-6 6-3 6-3",
@@ -24831,6 +24901,46 @@
       "winnerName": "Peyton Stearns",
       "loserName": "Tatiana Prozorova",
       "score": "6-1 6-2",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Mifel Tennis Open by Telcel Oppo",
+      "grouping": "Men's Singles",
+      "date": "2026-07-31",
+      "winnerName": "Arthur Gea",
+      "loserName": "Francisco Cerundolo",
+      "score": "6-7 6-4 6-0",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Mifel Tennis Open by Telcel Oppo",
+      "grouping": "Men's Singles",
+      "date": "2026-07-31",
+      "winnerName": "Chak Lam Coleman Wong",
+      "loserName": "Jenson Brooksby",
+      "score": "6-1 7-5",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Mubadala DC Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-31",
+      "winnerName": "Elina Svitolina",
+      "loserName": "Polina Kudermetova",
+      "score": "7-6 6-4",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Mubadala DC Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-31",
+      "winnerName": "Elina Svitolina",
+      "loserName": "Polina Kudermetova",
+      "score": "7-6 6-4",
       "retired": false
     }
   ]
