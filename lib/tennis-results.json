@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-07-31T15:08:55.637Z",
+  "generatedAt": "2026-07-31T20:08:08.700Z",
   "source": "site.api.espn.com tennis scoreboard (atp+wta singles · official · public · 0 auth)",
-  "count": 2499,
+  "count": 2506,
   "games": [
     {
       "tour": "atp",
@@ -24946,11 +24946,31 @@
     {
       "tour": "atp",
       "tournament": "Mubadala DC Open",
+      "grouping": "Men's Singles",
+      "date": "2026-07-31",
+      "winnerName": "Brandon Nakashima",
+      "loserName": "Alex de Minaur",
+      "score": "7-6 6-4",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Mubadala DC Open",
       "grouping": "Women's Singles",
       "date": "2026-07-31",
       "winnerName": "Elina Svitolina",
       "loserName": "Polina Kudermetova",
       "score": "7-6 6-4",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Mubadala DC Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-31",
+      "winnerName": "Jessica Pegula",
+      "loserName": "Anna Kalinskaya",
+      "score": "6-3 7-5",
       "retired": false
     },
     {
@@ -24985,12 +25005,62 @@
     },
     {
       "tour": "wta",
+      "tournament": "Axeria Open 2026 powered by Intaro Sport",
+      "grouping": "Women's Singles",
+      "date": "2026-07-31",
+      "winnerName": "Lucia Bronzetti",
+      "loserName": "Sara Sorribes Tormo",
+      "score": "6-3 2-6 7-5",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Mubadala DC Open",
+      "grouping": "Men's Singles",
+      "date": "2026-07-31",
+      "winnerName": "Brandon Nakashima",
+      "loserName": "Alex de Minaur",
+      "score": "7-6 6-4",
+      "retired": false
+    },
+    {
+      "tour": "wta",
       "tournament": "Mubadala DC Open",
       "grouping": "Women's Singles",
       "date": "2026-07-31",
       "winnerName": "Elina Svitolina",
       "loserName": "Polina Kudermetova",
       "score": "7-6 6-4",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Mubadala DC Open",
+      "grouping": "Women's Singles",
+      "date": "2026-07-31",
+      "winnerName": "Jessica Pegula",
+      "loserName": "Anna Kalinskaya",
+      "score": "6-3 7-5",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Odlum Brown VanOpen",
+      "grouping": "Women's Singles",
+      "date": "2026-07-31",
+      "winnerName": "Maddison Inglis",
+      "loserName": "Mai Hontama",
+      "score": "6-3 6-4",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "The Memphis Classic",
+      "grouping": "Women's Singles",
+      "date": "2026-07-31",
+      "winnerName": "Kristina Liutova",
+      "loserName": "Catherine McNally",
+      "score": "6-3 6-4",
       "retired": false
     }
   ]
