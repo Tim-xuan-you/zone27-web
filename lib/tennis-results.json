@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-07-31T04:05:45.766Z",
+  "generatedAt": "2026-07-31T09:32:37.186Z",
   "source": "site.api.espn.com tennis scoreboard (atp+wta singles · official · public · 0 auth)",
-  "count": 2494,
+  "count": 2496,
   "games": [
     {
       "tour": "atp",
@@ -24918,9 +24918,29 @@
       "tournament": "Mifel Tennis Open by Telcel Oppo",
       "grouping": "Men's Singles",
       "date": "2026-07-31",
+      "winnerName": "Cameron Norrie",
+      "loserName": "Bernard Tomic",
+      "score": "6-1 6-0",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Mifel Tennis Open by Telcel Oppo",
+      "grouping": "Men's Singles",
+      "date": "2026-07-31",
       "winnerName": "Chak Lam Coleman Wong",
       "loserName": "Jenson Brooksby",
       "score": "6-1 7-5",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Mifel Tennis Open by Telcel Oppo",
+      "grouping": "Men's Singles",
+      "date": "2026-07-31",
+      "winnerName": "Denis Shapovalov",
+      "loserName": "Dalibor Svrcina",
+      "score": "6-4 6-2",
       "retired": false
     },
     {
