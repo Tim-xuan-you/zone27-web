@@ -21998,8 +21998,12 @@
       },
       "engineWinHomePct": 59,
       "lockedAt": "2026-07-29T16:25:14.493Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 4,
+        "away": 2
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-07-31T03:30:59.556Z"
     },
     {
       "gamePk": 824488,
@@ -22027,8 +22031,12 @@
       },
       "engineWinHomePct": 37,
       "lockedAt": "2026-07-29T22:04:42.592Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 3,
+        "away": 2
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-07-31T03:30:59.556Z"
     },
     {
       "gamePk": 824894,
@@ -22056,8 +22064,12 @@
       },
       "engineWinHomePct": 54,
       "lockedAt": "2026-07-29T22:04:42.592Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 5,
+        "away": 4
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-07-31T03:30:59.556Z"
     },
     {
       "gamePk": 824974,
@@ -22408,6 +22420,35 @@
       "verdict": null
     },
     {
+      "gamePk": 824975,
+      "gameDate": "2026-08-01T01:40:00Z",
+      "scheduleDate": "2026-07-31",
+      "homeId": 133,
+      "homeEn": "Athletics",
+      "homeRecord": "45-63",
+      "awayId": 116,
+      "awayEn": "Detroit Tigers",
+      "awayRecord": "51-58",
+      "homePitcher": "Jeffrey Springs",
+      "awayPitcher": "Casey Mize",
+      "homeStats": {
+        "era": "6.23",
+        "k9": "7.44",
+        "bb9": "3.38",
+        "hr9": "2.34"
+      },
+      "awayStats": {
+        "era": "2.70",
+        "k9": "8.83",
+        "bb9": "1.97",
+        "hr9": "0.52"
+      },
+      "engineWinHomePct": 26,
+      "lockedAt": "2026-07-31T03:30:59.042Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
       "gamePk": 823111,
       "gameDate": "2026-08-01T02:10:00Z",
       "scheduleDate": "2026-07-31",
@@ -22520,6 +22561,35 @@
       },
       "engineWinHomePct": 71,
       "lockedAt": "2026-07-30T19:41:05.967Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 823109,
+      "gameDate": "2026-08-01T20:10:00Z",
+      "scheduleDate": "2026-08-01",
+      "homeId": 136,
+      "homeEn": "Seattle Mariners",
+      "homeRecord": "53-56",
+      "awayId": 142,
+      "awayEn": "Minnesota Twins",
+      "awayRecord": "55-55",
+      "homePitcher": "Logan Gilbert",
+      "awayPitcher": "Connor Prielipp",
+      "homeStats": {
+        "era": "3.44",
+        "k9": "9.53",
+        "bb9": "1.93",
+        "hr9": "1.07"
+      },
+      "awayStats": {
+        "era": "4.73",
+        "k9": "9.46",
+        "bb9": "3.24",
+        "hr9": "1.00"
+      },
+      "engineWinHomePct": 59,
+      "lockedAt": "2026-07-31T03:30:59.042Z",
       "finalScore": null,
       "verdict": null
     },
@@ -22781,6 +22851,35 @@
       },
       "engineWinHomePct": 67,
       "lockedAt": "2026-07-30T16:39:54.823Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 824972,
+      "gameDate": "2026-08-02T01:40:00Z",
+      "scheduleDate": "2026-08-01",
+      "homeId": 133,
+      "homeEn": "Athletics",
+      "homeRecord": "45-63",
+      "awayId": 116,
+      "awayEn": "Detroit Tigers",
+      "awayRecord": "51-58",
+      "homePitcher": "Jack Perkins",
+      "awayPitcher": "Framber Valdez",
+      "homeStats": {
+        "era": "6.45",
+        "k9": "10.54",
+        "bb9": "3.56",
+        "hr9": "1.45"
+      },
+      "awayStats": {
+        "era": "4.53",
+        "k9": "7.31",
+        "bb9": "3.26",
+        "hr9": "0.95"
+      },
+      "engineWinHomePct": 50,
+      "lockedAt": "2026-07-31T03:30:59.042Z",
       "finalScore": null,
       "verdict": null
     }
