@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-08-01T08:56:19.073Z",
+  "generatedAt": "2026-08-01T16:37:17.249Z",
   "source": "site.api.espn.com tennis scoreboard (atp+wta singles · official · public · 0 auth)",
-  "count": 2524,
+  "count": 2529,
   "games": [
     {
       "tour": "atp",
@@ -25224,6 +25224,36 @@
       "retired": false
     },
     {
+      "tour": "atp",
+      "tournament": "National Bank Open presented by Rogers",
+      "grouping": "Men's Singles",
+      "date": "2026-08-01",
+      "winnerName": "Martin Damm",
+      "loserName": "Henrique Rocha",
+      "score": "6-3 7-6",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "National Bank Open presented by Rogers",
+      "grouping": "Men's Singles",
+      "date": "2026-08-01",
+      "winnerName": "Michael Zheng",
+      "loserName": "Kei Nishikori",
+      "score": "6-3 6-1",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Axeria Open 2026 powered by Intaro Sport",
+      "grouping": "Women's Singles",
+      "date": "2026-08-01",
+      "winnerName": "Kaitlin Quevedo",
+      "loserName": "Francesca Jones",
+      "score": "7-6",
+      "retired": true
+    },
+    {
       "tour": "wta",
       "tournament": "Mubadala DC Open",
       "grouping": "Men's Singles",
@@ -25231,6 +25261,26 @@
       "winnerName": "Alejandro Tabilo",
       "loserName": "Ben Shelton",
       "score": "4-6 7-5 6-4",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "National Bank Open presented by Rogers",
+      "grouping": "Men's Singles",
+      "date": "2026-08-01",
+      "winnerName": "Martin Damm",
+      "loserName": "Henrique Rocha",
+      "score": "6-3 7-6",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "National Bank Open presented by Rogers",
+      "grouping": "Men's Singles",
+      "date": "2026-08-01",
+      "winnerName": "Michael Zheng",
+      "loserName": "Kei Nishikori",
+      "score": "6-3 6-1",
       "retired": false
     },
     {
