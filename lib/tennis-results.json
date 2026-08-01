@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-08-01T16:37:17.249Z",
+  "generatedAt": "2026-08-01T19:54:46.066Z",
   "source": "site.api.espn.com tennis scoreboard (atp+wta singles · official · public · 0 auth)",
-  "count": 2529,
+  "count": 2565,
   "games": [
     {
       "tour": "atp",
@@ -25225,6 +25225,126 @@
     },
     {
       "tour": "atp",
+      "tournament": "Mubadala DC Open",
+      "grouping": "Women's Singles",
+      "date": "2026-08-01",
+      "winnerName": "Jessica Pegula",
+      "loserName": "Diana Shnaider",
+      "score": "7-5 6-4",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "National Bank Open presented by Rogers",
+      "grouping": "Men's Singles",
+      "date": "2026-08-01",
+      "winnerName": "Adam Walton",
+      "loserName": "Justin Boulais",
+      "score": "7-5 7-6",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "National Bank Open presented by Rogers",
+      "grouping": "Men's Singles",
+      "date": "2026-08-01",
+      "winnerName": "Aleksandar Vukic",
+      "loserName": "Tomas Barrios Vera",
+      "score": "7-6 6-2",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "National Bank Open presented by Rogers",
+      "grouping": "Men's Singles",
+      "date": "2026-08-01",
+      "winnerName": "Alexei Popyrin",
+      "loserName": "Thanasi Kokkinakis",
+      "score": "6-4 2-3",
+      "retired": true
+    },
+    {
+      "tour": "atp",
+      "tournament": "National Bank Open presented by Rogers",
+      "grouping": "Women's Singles",
+      "date": "2026-08-01",
+      "winnerName": "Alina Korneeva",
+      "loserName": "Mary Stoiana",
+      "score": "2-6 6-4 6-3",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "National Bank Open presented by Rogers",
+      "grouping": "Women's Singles",
+      "date": "2026-08-01",
+      "winnerName": "Aoi Ito",
+      "loserName": "Oksana Selekhmeteva",
+      "score": "6-0 6-7 6-4",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "National Bank Open presented by Rogers",
+      "grouping": "Men's Singles",
+      "date": "2026-08-01",
+      "winnerName": "Jacob Fearnley",
+      "loserName": "Sebastian Ofner",
+      "score": "7-6 6-2",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "National Bank Open presented by Rogers",
+      "grouping": "Men's Singles",
+      "date": "2026-08-01",
+      "winnerName": "Kyrian Jacquet",
+      "loserName": "Aleksandr Shevchenko",
+      "score": "4-6 6-4 6-3",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "National Bank Open presented by Rogers",
+      "grouping": "Women's Singles",
+      "date": "2026-08-01",
+      "winnerName": "Lanlana Tararudee",
+      "loserName": "Zheng Qinwen",
+      "score": "6-3 6-4",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "National Bank Open presented by Rogers",
+      "grouping": "Women's Singles",
+      "date": "2026-08-01",
+      "winnerName": "Leolia Jeanjean",
+      "loserName": "Zhu Lin",
+      "score": "2-6 6-2 6-3",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "National Bank Open presented by Rogers",
+      "grouping": "Women's Singles",
+      "date": "2026-08-01",
+      "winnerName": "Lois Boisson",
+      "loserName": "Emiliana Arango",
+      "score": "6-1 7-6",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "National Bank Open presented by Rogers",
+      "grouping": "Men's Singles",
+      "date": "2026-08-01",
+      "winnerName": "Marcos Giron",
+      "loserName": "Pablo Llamas Ruiz",
+      "score": "2-6 6-3 6-1",
+      "retired": false
+    },
+    {
+      "tour": "atp",
       "tournament": "National Bank Open presented by Rogers",
       "grouping": "Men's Singles",
       "date": "2026-08-01",
@@ -25244,6 +25364,56 @@
       "retired": false
     },
     {
+      "tour": "atp",
+      "tournament": "National Bank Open presented by Rogers",
+      "grouping": "Women's Singles",
+      "date": "2026-08-01",
+      "winnerName": "Moyuka Uchijima",
+      "loserName": "Himeno Sakatsume",
+      "score": "6-2 6-4",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "National Bank Open presented by Rogers",
+      "grouping": "Men's Singles",
+      "date": "2026-08-01",
+      "winnerName": "Nicolas Mejia",
+      "loserName": "Marco Trungelliti",
+      "score": "7-6 3-6 6-1",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "National Bank Open presented by Rogers",
+      "grouping": "Men's Singles",
+      "date": "2026-08-01",
+      "winnerName": "Sho Shimabukuro",
+      "loserName": "Nicolai Budkov Kjaer",
+      "score": "6-3 6-4",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "National Bank Open presented by Rogers",
+      "grouping": "Women's Singles",
+      "date": "2026-08-01",
+      "winnerName": "Tatjana Maria",
+      "loserName": "Isabella Marton",
+      "score": "6-1 6-4",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "National Bank Open presented by Rogers",
+      "grouping": "Women's Singles",
+      "date": "2026-08-01",
+      "winnerName": "Victoria Jimenez Kasintseva",
+      "loserName": "Marina Bassols Ribera",
+      "score": "6-0 2-6 6-3",
+      "retired": false
+    },
+    {
       "tour": "wta",
       "tournament": "Axeria Open 2026 powered by Intaro Sport",
       "grouping": "Women's Singles",
@@ -25255,12 +25425,142 @@
     },
     {
       "tour": "wta",
+      "tournament": "Axeria Open 2026 powered by Intaro Sport",
+      "grouping": "Women's Singles",
+      "date": "2026-08-01",
+      "winnerName": "Laura Samson",
+      "loserName": "Lucia Bronzetti",
+      "score": "7-5 6-4",
+      "retired": false
+    },
+    {
+      "tour": "wta",
       "tournament": "Mubadala DC Open",
       "grouping": "Men's Singles",
       "date": "2026-08-01",
       "winnerName": "Alejandro Tabilo",
       "loserName": "Ben Shelton",
       "score": "4-6 7-5 6-4",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Mubadala DC Open",
+      "grouping": "Women's Singles",
+      "date": "2026-08-01",
+      "winnerName": "Jessica Pegula",
+      "loserName": "Diana Shnaider",
+      "score": "7-5 6-4",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "National Bank Open presented by Rogers",
+      "grouping": "Men's Singles",
+      "date": "2026-08-01",
+      "winnerName": "Adam Walton",
+      "loserName": "Justin Boulais",
+      "score": "7-5 7-6",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "National Bank Open presented by Rogers",
+      "grouping": "Men's Singles",
+      "date": "2026-08-01",
+      "winnerName": "Aleksandar Vukic",
+      "loserName": "Tomas Barrios Vera",
+      "score": "7-6 6-2",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "National Bank Open presented by Rogers",
+      "grouping": "Men's Singles",
+      "date": "2026-08-01",
+      "winnerName": "Alexei Popyrin",
+      "loserName": "Thanasi Kokkinakis",
+      "score": "6-4 2-3",
+      "retired": true
+    },
+    {
+      "tour": "wta",
+      "tournament": "National Bank Open presented by Rogers",
+      "grouping": "Women's Singles",
+      "date": "2026-08-01",
+      "winnerName": "Alina Korneeva",
+      "loserName": "Mary Stoiana",
+      "score": "2-6 6-4 6-3",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "National Bank Open presented by Rogers",
+      "grouping": "Women's Singles",
+      "date": "2026-08-01",
+      "winnerName": "Aoi Ito",
+      "loserName": "Oksana Selekhmeteva",
+      "score": "6-0 6-7 6-4",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "National Bank Open presented by Rogers",
+      "grouping": "Men's Singles",
+      "date": "2026-08-01",
+      "winnerName": "Jacob Fearnley",
+      "loserName": "Sebastian Ofner",
+      "score": "7-6 6-2",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "National Bank Open presented by Rogers",
+      "grouping": "Men's Singles",
+      "date": "2026-08-01",
+      "winnerName": "Kyrian Jacquet",
+      "loserName": "Aleksandr Shevchenko",
+      "score": "4-6 6-4 6-3",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "National Bank Open presented by Rogers",
+      "grouping": "Women's Singles",
+      "date": "2026-08-01",
+      "winnerName": "Lanlana Tararudee",
+      "loserName": "Zheng Qinwen",
+      "score": "6-3 6-4",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "National Bank Open presented by Rogers",
+      "grouping": "Women's Singles",
+      "date": "2026-08-01",
+      "winnerName": "Leolia Jeanjean",
+      "loserName": "Zhu Lin",
+      "score": "2-6 6-2 6-3",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "National Bank Open presented by Rogers",
+      "grouping": "Women's Singles",
+      "date": "2026-08-01",
+      "winnerName": "Lois Boisson",
+      "loserName": "Emiliana Arango",
+      "score": "6-1 7-6",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "National Bank Open presented by Rogers",
+      "grouping": "Men's Singles",
+      "date": "2026-08-01",
+      "winnerName": "Marcos Giron",
+      "loserName": "Pablo Llamas Ruiz",
+      "score": "2-6 6-3 6-1",
       "retired": false
     },
     {
@@ -25285,12 +25585,72 @@
     },
     {
       "tour": "wta",
+      "tournament": "National Bank Open presented by Rogers",
+      "grouping": "Women's Singles",
+      "date": "2026-08-01",
+      "winnerName": "Moyuka Uchijima",
+      "loserName": "Himeno Sakatsume",
+      "score": "6-2 6-4",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "National Bank Open presented by Rogers",
+      "grouping": "Men's Singles",
+      "date": "2026-08-01",
+      "winnerName": "Nicolas Mejia",
+      "loserName": "Marco Trungelliti",
+      "score": "7-6 3-6 6-1",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "National Bank Open presented by Rogers",
+      "grouping": "Men's Singles",
+      "date": "2026-08-01",
+      "winnerName": "Sho Shimabukuro",
+      "loserName": "Nicolai Budkov Kjaer",
+      "score": "6-3 6-4",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "National Bank Open presented by Rogers",
+      "grouping": "Women's Singles",
+      "date": "2026-08-01",
+      "winnerName": "Tatjana Maria",
+      "loserName": "Isabella Marton",
+      "score": "6-1 6-4",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "National Bank Open presented by Rogers",
+      "grouping": "Women's Singles",
+      "date": "2026-08-01",
+      "winnerName": "Victoria Jimenez Kasintseva",
+      "loserName": "Marina Bassols Ribera",
+      "score": "6-0 2-6 6-3",
+      "retired": false
+    },
+    {
+      "tour": "wta",
       "tournament": "The Memphis Classic",
       "grouping": "Women's Singles",
       "date": "2026-08-01",
       "winnerName": "Darja Vidmanova",
       "loserName": "Katie Volynets",
       "score": "6-4 6-7 6-1",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "The Memphis Classic",
+      "grouping": "Women's Singles",
+      "date": "2026-08-01",
+      "winnerName": "Kristina Liutova",
+      "loserName": "Elvina Kalieva",
+      "score": "7-5 6-1",
       "retired": false
     }
   ]
