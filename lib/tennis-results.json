@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-08-01T04:04:48.478Z",
+  "generatedAt": "2026-08-01T08:56:19.073Z",
   "source": "site.api.espn.com tennis scoreboard (atp+wta singles · official · public · 0 auth)",
-  "count": 2522,
+  "count": 2524,
   "games": [
     {
       "tour": "atp",
@@ -25191,6 +25191,26 @@
       "winnerName": "Renata Zarazua",
       "loserName": "Anastasia Zakharova",
       "score": "6-4 6-0",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Mifel Tennis Open by Telcel Oppo",
+      "grouping": "Men's Singles",
+      "date": "2026-08-01",
+      "winnerName": "Arthur Gea",
+      "loserName": "Chak Lam Coleman Wong",
+      "score": "7-6 6-3",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Mifel Tennis Open by Telcel Oppo",
+      "grouping": "Men's Singles",
+      "date": "2026-08-01",
+      "winnerName": "Denis Shapovalov",
+      "loserName": "Cameron Norrie",
+      "score": "6-3 5-7 6-4",
       "retired": false
     },
     {
