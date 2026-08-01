@@ -22427,8 +22427,12 @@
       },
       "engineWinHomePct": 41,
       "lockedAt": "2026-07-30T19:41:05.967Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 3,
+        "away": 1
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-08-01T08:28:13.727Z"
     },
     {
       "gamePk": 823999,
@@ -22456,8 +22460,12 @@
       },
       "engineWinHomePct": 25,
       "lockedAt": "2026-07-30T02:48:17.800Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 2,
+        "away": 6
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-08-01T08:28:13.727Z"
     },
     {
       "gamePk": 824975,
@@ -22485,8 +22493,12 @@
       },
       "engineWinHomePct": 26,
       "lockedAt": "2026-07-31T03:30:59.042Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 1,
+        "away": 13
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-08-01T08:28:13.727Z"
     },
     {
       "gamePk": 823272,
@@ -22514,8 +22526,12 @@
       },
       "engineWinHomePct": 74,
       "lockedAt": "2026-07-31T08:57:07.041Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 7,
+        "away": 0
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-08-01T08:28:13.727Z"
     },
     {
       "gamePk": 823111,
@@ -22543,8 +22559,12 @@
       },
       "engineWinHomePct": 71,
       "lockedAt": "2026-07-30T19:41:05.967Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 3,
+        "away": 5
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-08-01T08:28:13.727Z"
     },
     {
       "gamePk": 823922,
@@ -22572,8 +22592,12 @@
       },
       "engineWinHomePct": 55,
       "lockedAt": "2026-07-31T08:57:07.041Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 4,
+        "away": 9
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-08-01T08:28:13.727Z"
     },
     {
       "gamePk": 822781,
