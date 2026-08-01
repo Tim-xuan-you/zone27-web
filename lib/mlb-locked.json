@@ -22625,8 +22625,12 @@
       },
       "engineWinHomePct": 61,
       "lockedAt": "2026-07-30T16:39:54.823Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 5,
+        "away": 1
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-08-01T22:00:02.038Z"
     },
     {
       "gamePk": 823594,
@@ -23205,6 +23209,35 @@
       },
       "engineWinHomePct": 59,
       "lockedAt": "2026-07-31T16:48:17.887Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 824163,
+      "gameDate": "2026-08-02T18:10:00Z",
+      "scheduleDate": "2026-08-02",
+      "homeId": 117,
+      "homeEn": "Houston Astros",
+      "homeRecord": "56-55",
+      "awayId": 140,
+      "awayEn": "Texas Rangers",
+      "awayRecord": "55-55",
+      "homePitcher": "Peter Lambert",
+      "awayPitcher": "Kumar Rocker",
+      "homeStats": {
+        "era": "3.06",
+        "k9": "8.74",
+        "bb9": "3.41",
+        "hr9": "0.96"
+      },
+      "awayStats": {
+        "era": "4.03",
+        "k9": "8.15",
+        "bb9": "3.33",
+        "hr9": "1.14"
+      },
+      "engineWinHomePct": 60,
+      "lockedAt": "2026-08-01T22:00:01.593Z",
       "finalScore": null,
       "verdict": null
     },
