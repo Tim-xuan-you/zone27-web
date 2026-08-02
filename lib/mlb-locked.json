@@ -23499,6 +23499,35 @@
       "lockedAt": "2026-07-31T16:48:17.887Z",
       "finalScore": null,
       "verdict": null
+    },
+    {
+      "gamePk": 824403,
+      "gameDate": "2026-08-04T22:40:00Z",
+      "scheduleDate": "2026-08-04",
+      "homeId": 114,
+      "homeEn": "Cleveland Guardians",
+      "homeRecord": "56-56",
+      "awayId": 121,
+      "awayEn": "New York Mets",
+      "awayRecord": "47-65",
+      "homePitcher": "Joey Cantillo",
+      "awayPitcher": "Sean Manaea",
+      "homeStats": {
+        "era": "3.88",
+        "k9": "9.82",
+        "bb9": "4.28",
+        "hr9": "1.03"
+      },
+      "awayStats": {
+        "era": "4.42",
+        "k9": "8.64",
+        "bb9": "2.95",
+        "hr9": "1.28"
+      },
+      "engineWinHomePct": 60,
+      "lockedAt": "2026-08-02T16:04:25.047Z",
+      "finalScore": null,
+      "verdict": null
     }
   ]
 }
