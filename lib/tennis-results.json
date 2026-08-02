@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-08-02T16:36:40.993Z",
+  "generatedAt": "2026-08-02T19:53:41.260Z",
   "source": "site.api.espn.com tennis scoreboard (atp+wta singles · official · public · 0 auth)",
-  "count": 2609,
+  "count": 2610,
   "games": [
     {
       "tour": "atp",
@@ -26051,6 +26051,16 @@
       "winnerName": "Shang Juncheng",
       "loserName": "Adolfo Daniel Vallejo",
       "score": "6-3 6-3",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "The Memphis Classic",
+      "grouping": "Women's Singles",
+      "date": "2026-08-02",
+      "winnerName": "Kristina Liutova",
+      "loserName": "Darja Vidmanova",
+      "score": "1-6 6-1 6-3",
       "retired": false
     },
     {
