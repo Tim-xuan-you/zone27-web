@@ -23120,8 +23120,12 @@
       },
       "engineWinHomePct": 46,
       "lockedAt": "2026-07-31T16:48:17.887Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 0,
+        "away": 8
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-08-02T21:59:45.085Z"
     },
     {
       "gamePk": 824891,
@@ -23149,8 +23153,12 @@
       },
       "engineWinHomePct": 46,
       "lockedAt": "2026-07-31T16:48:17.887Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 4,
+        "away": 2
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-08-02T21:59:45.085Z"
     },
     {
       "gamePk": 822783,
@@ -23178,8 +23186,12 @@
       },
       "engineWinHomePct": 25,
       "lockedAt": "2026-07-31T16:48:17.887Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 1,
+        "away": 5
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-08-02T21:59:45.085Z"
     },
     {
       "gamePk": 824404,
@@ -23207,8 +23219,12 @@
       },
       "engineWinHomePct": 72,
       "lockedAt": "2026-07-31T16:48:17.887Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 5,
+        "away": 0
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-08-02T21:59:45.085Z"
     },
     {
       "gamePk": 824483,
@@ -23236,8 +23252,12 @@
       },
       "engineWinHomePct": 70,
       "lockedAt": "2026-07-31T16:48:17.887Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 10,
+        "away": 2
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-08-02T21:59:45.085Z"
     },
     {
       "gamePk": 822943,
@@ -23265,8 +23285,12 @@
       },
       "engineWinHomePct": 59,
       "lockedAt": "2026-07-31T16:48:17.887Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 1,
+        "away": 9
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-08-02T21:59:45.085Z"
     },
     {
       "gamePk": 824163,
@@ -23294,8 +23318,12 @@
       },
       "engineWinHomePct": 60,
       "lockedAt": "2026-08-01T22:00:01.593Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 7,
+        "away": 3
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-08-02T21:59:45.085Z"
     },
     {
       "gamePk": 824648,
@@ -23323,8 +23351,12 @@
       },
       "engineWinHomePct": 44,
       "lockedAt": "2026-07-31T16:48:17.887Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 1,
+        "away": 2
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-08-02T21:59:45.085Z"
     },
     {
       "gamePk": 824323,
@@ -23352,8 +23384,12 @@
       },
       "engineWinHomePct": 38,
       "lockedAt": "2026-07-31T16:48:17.887Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 8,
+        "away": 1
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-08-02T21:59:45.085Z"
     },
     {
       "gamePk": 823996,
@@ -23381,8 +23417,12 @@
       },
       "engineWinHomePct": 40,
       "lockedAt": "2026-07-31T16:48:17.887Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 3,
+        "away": 0
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-08-02T21:59:45.085Z"
     },
     {
       "gamePk": 824971,
@@ -23704,6 +23744,35 @@
       "verdict": null
     },
     {
+      "gamePk": 824484,
+      "gameDate": "2026-08-04T22:40:00Z",
+      "scheduleDate": "2026-08-04",
+      "homeId": 113,
+      "homeEn": "Cincinnati Reds",
+      "homeRecord": "53-58",
+      "awayId": 133,
+      "awayEn": "Athletics",
+      "awayRecord": "45-66",
+      "homePitcher": "Brady Singer",
+      "awayPitcher": "J.T. Ginn",
+      "homeStats": {
+        "era": "4.35",
+        "k9": "7.61",
+        "bb9": "3.01",
+        "hr9": "1.76"
+      },
+      "awayStats": {
+        "era": "3.46",
+        "k9": "8.23",
+        "bb9": "4.03",
+        "hr9": "1.07"
+      },
+      "engineWinHomePct": 45,
+      "lockedAt": "2026-08-02T21:59:44.645Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
       "gamePk": 824084,
       "gameDate": "2026-08-04T23:40:00Z",
       "scheduleDate": "2026-08-04",
@@ -23758,6 +23827,35 @@
       },
       "engineWinHomePct": 62,
       "lockedAt": "2026-08-02T19:18:19.875Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 824645,
+      "gameDate": "2026-08-05T00:05:00Z",
+      "scheduleDate": "2026-08-04",
+      "homeId": 112,
+      "homeEn": "Chicago Cubs",
+      "homeRecord": "63-49",
+      "awayId": 119,
+      "awayEn": "Los Angeles Dodgers",
+      "awayRecord": "69-42",
+      "homePitcher": "Javier Assad",
+      "awayPitcher": "Tarik Skubal",
+      "homeStats": {
+        "era": "3.75",
+        "k9": "6.20",
+        "bb9": "2.33",
+        "hr9": "1.55"
+      },
+      "awayStats": {
+        "era": "2.79",
+        "k9": "10.80",
+        "bb9": "1.30",
+        "hr9": "0.93"
+      },
+      "engineWinHomePct": 37,
+      "lockedAt": "2026-08-02T21:59:44.645Z",
       "finalScore": null,
       "verdict": null
     },
