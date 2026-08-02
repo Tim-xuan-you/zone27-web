@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-08-02T14:13:59.702Z",
+  "generatedAt": "2026-08-02T16:36:40.993Z",
   "source": "site.api.espn.com tennis scoreboard (atp+wta singles · official · public · 0 auth)",
-  "count": 2606,
+  "count": 2609,
   "games": [
     {
       "tour": "atp",
@@ -26014,6 +26014,26 @@
       "retired": false
     },
     {
+      "tour": "atp",
+      "tournament": "National Bank Open presented by Rogers",
+      "grouping": "Men's Singles",
+      "date": "2026-08-02",
+      "winnerName": "Shang Juncheng",
+      "loserName": "Adolfo Daniel Vallejo",
+      "score": "6-3 6-3",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Axeria Open 2026 powered by Intaro Sport",
+      "grouping": "Women's Singles",
+      "date": "2026-08-02",
+      "winnerName": "Laura Samson",
+      "loserName": "Kaitlin Quevedo",
+      "score": "2-6 6-3 6-1",
+      "retired": false
+    },
+    {
       "tour": "wta",
       "tournament": "Mubadala DC Open",
       "grouping": "Men's Singles",
@@ -26021,6 +26041,16 @@
       "winnerName": "Rafael Jodar",
       "loserName": "Alejandro Tabilo",
       "score": "6-7 6-4 6-4",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "National Bank Open presented by Rogers",
+      "grouping": "Men's Singles",
+      "date": "2026-08-02",
+      "winnerName": "Shang Juncheng",
+      "loserName": "Adolfo Daniel Vallejo",
+      "score": "6-3 6-3",
       "retired": false
     },
     {
