@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-08-02T04:16:02.112Z",
+  "generatedAt": "2026-08-02T08:58:29.967Z",
   "source": "site.api.espn.com tennis scoreboard (atp+wta singles · official · public · 0 auth)",
-  "count": 2601,
+  "count": 2602,
   "games": [
     {
       "tour": "atp",
@@ -25991,6 +25991,16 @@
       "winnerName": "Kristina Liutova",
       "loserName": "Elvina Kalieva",
       "score": "7-5 6-1",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Mifel Tennis Open by Telcel Oppo",
+      "grouping": "Men's Singles",
+      "date": "2026-08-02",
+      "winnerName": "Arthur Gea",
+      "loserName": "Denis Shapovalov",
+      "score": "6-3 6-4",
       "retired": false
     },
     {
