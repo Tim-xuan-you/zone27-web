@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-08-02T11:06:36.345Z",
+  "generatedAt": "2026-08-02T14:13:59.702Z",
   "source": "site.api.espn.com tennis scoreboard (atp+wta singles · official · public · 0 auth)",
-  "count": 2605,
+  "count": 2606,
   "games": [
     {
       "tour": "atp",
@@ -26021,6 +26021,16 @@
       "winnerName": "Rafael Jodar",
       "loserName": "Alejandro Tabilo",
       "score": "6-7 6-4 6-4",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Warsaw T-Mobile Polish Open",
+      "grouping": "Women's Singles",
+      "date": "2026-08-02",
+      "winnerName": "Alana Smith",
+      "loserName": "Daria Gorska",
+      "score": "7-6 6-1",
       "retired": false
     },
     {
