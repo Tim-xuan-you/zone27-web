@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-08-01T22:38:33.193Z",
+  "generatedAt": "2026-08-02T04:16:02.112Z",
   "source": "site.api.espn.com tennis scoreboard (atp+wta singles · official · public · 0 auth)",
-  "count": 2588,
+  "count": 2601,
   "games": [
     {
       "tour": "atp",
@@ -25245,6 +25245,16 @@
     },
     {
       "tour": "atp",
+      "tournament": "Mubadala DC Open",
+      "grouping": "Men's Singles",
+      "date": "2026-08-01",
+      "winnerName": "Taylor Fritz",
+      "loserName": "Brandon Nakashima",
+      "score": "6-3 3-6 6-3",
+      "retired": false
+    },
+    {
+      "tour": "atp",
       "tournament": "National Bank Open presented by Rogers",
       "grouping": "Men's Singles",
       "date": "2026-08-01",
@@ -25331,6 +25341,16 @@
       "winnerName": "Duncan Chan",
       "loserName": "Hugo Gaston",
       "score": "2-6 7-5 6-3",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "National Bank Open presented by Rogers",
+      "grouping": "Women's Singles",
+      "date": "2026-08-01",
+      "winnerName": "Emerson Jones",
+      "loserName": "Varvara Lepchenko",
+      "score": "6-7 6-0 6-4",
       "retired": false
     },
     {
@@ -25426,6 +25446,16 @@
     {
       "tour": "atp",
       "tournament": "National Bank Open presented by Rogers",
+      "grouping": "Women's Singles",
+      "date": "2026-08-01",
+      "winnerName": "Maya Joint",
+      "loserName": "Ana Grubor",
+      "score": "3-6 7-5 7-6",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "National Bank Open presented by Rogers",
       "grouping": "Men's Singles",
       "date": "2026-08-01",
       "winnerName": "Michael Zheng",
@@ -25496,6 +25526,16 @@
     {
       "tour": "atp",
       "tournament": "National Bank Open presented by Rogers",
+      "grouping": "Women's Singles",
+      "date": "2026-08-01",
+      "winnerName": "Sloane Stephens",
+      "loserName": "Harriet Dart",
+      "score": "3-6 6-0 6-2",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "National Bank Open presented by Rogers",
       "grouping": "Men's Singles",
       "date": "2026-08-01",
       "winnerName": "Stefanos Tsitsipas",
@@ -25511,6 +25551,16 @@
       "winnerName": "Tatjana Maria",
       "loserName": "Isabella Marton",
       "score": "6-1 6-4",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "National Bank Open presented by Rogers",
+      "grouping": "Men's Singles",
+      "date": "2026-08-01",
+      "winnerName": "Titouan Droguet",
+      "loserName": "Dalibor Svrcina",
+      "score": "4-6 6-3 6-4",
       "retired": false
     },
     {
@@ -25575,6 +25625,16 @@
     },
     {
       "tour": "wta",
+      "tournament": "Mubadala DC Open",
+      "grouping": "Men's Singles",
+      "date": "2026-08-01",
+      "winnerName": "Taylor Fritz",
+      "loserName": "Brandon Nakashima",
+      "score": "6-3 3-6 6-3",
+      "retired": false
+    },
+    {
+      "tour": "wta",
       "tournament": "National Bank Open presented by Rogers",
       "grouping": "Men's Singles",
       "date": "2026-08-01",
@@ -25661,6 +25721,16 @@
       "winnerName": "Duncan Chan",
       "loserName": "Hugo Gaston",
       "score": "2-6 7-5 6-3",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "National Bank Open presented by Rogers",
+      "grouping": "Women's Singles",
+      "date": "2026-08-01",
+      "winnerName": "Emerson Jones",
+      "loserName": "Varvara Lepchenko",
+      "score": "6-7 6-0 6-4",
       "retired": false
     },
     {
@@ -25756,6 +25826,16 @@
     {
       "tour": "wta",
       "tournament": "National Bank Open presented by Rogers",
+      "grouping": "Women's Singles",
+      "date": "2026-08-01",
+      "winnerName": "Maya Joint",
+      "loserName": "Ana Grubor",
+      "score": "3-6 7-5 7-6",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "National Bank Open presented by Rogers",
       "grouping": "Men's Singles",
       "date": "2026-08-01",
       "winnerName": "Michael Zheng",
@@ -25826,6 +25906,16 @@
     {
       "tour": "wta",
       "tournament": "National Bank Open presented by Rogers",
+      "grouping": "Women's Singles",
+      "date": "2026-08-01",
+      "winnerName": "Sloane Stephens",
+      "loserName": "Harriet Dart",
+      "score": "3-6 6-0 6-2",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "National Bank Open presented by Rogers",
       "grouping": "Men's Singles",
       "date": "2026-08-01",
       "winnerName": "Stefanos Tsitsipas",
@@ -25846,11 +25936,31 @@
     {
       "tour": "wta",
       "tournament": "National Bank Open presented by Rogers",
+      "grouping": "Men's Singles",
+      "date": "2026-08-01",
+      "winnerName": "Titouan Droguet",
+      "loserName": "Dalibor Svrcina",
+      "score": "4-6 6-3 6-4",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "National Bank Open presented by Rogers",
       "grouping": "Women's Singles",
       "date": "2026-08-01",
       "winnerName": "Victoria Jimenez Kasintseva",
       "loserName": "Marina Bassols Ribera",
       "score": "6-0 2-6 6-3",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Odlum Brown VanOpen",
+      "grouping": "Women's Singles",
+      "date": "2026-08-01",
+      "winnerName": "Taylah Preston",
+      "loserName": "Maddison Inglis",
+      "score": "7-6 6-3",
       "retired": false
     },
     {
@@ -25881,6 +25991,26 @@
       "winnerName": "Kristina Liutova",
       "loserName": "Elvina Kalieva",
       "score": "7-5 6-1",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Mubadala DC Open",
+      "grouping": "Men's Singles",
+      "date": "2026-08-02",
+      "winnerName": "Rafael Jodar",
+      "loserName": "Alejandro Tabilo",
+      "score": "6-7 6-4 6-4",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Mubadala DC Open",
+      "grouping": "Men's Singles",
+      "date": "2026-08-02",
+      "winnerName": "Rafael Jodar",
+      "loserName": "Alejandro Tabilo",
+      "score": "6-7 6-4 6-4",
       "retired": false
     }
   ]
