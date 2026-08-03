@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-08-03T04:20:04.501Z",
+  "generatedAt": "2026-08-03T15:30:51.419Z",
   "source": "site.api.espn.com tennis scoreboard (atp+wta singles · official · public · 0 auth)",
-  "count": 2626,
+  "count": 2632,
   "games": [
     {
       "tour": "atp",
@@ -26261,6 +26261,66 @@
       "winnerName": "Urszula Radwanska",
       "loserName": "Marcelina Podlinska",
       "score": "6-1 6-3",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Warsaw T-Mobile Polish Open",
+      "grouping": "Women's Singles",
+      "date": "2026-08-03",
+      "winnerName": "Aliona Falei",
+      "loserName": "Urszula Radwanska",
+      "score": "6-3 6-2",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Warsaw T-Mobile Polish Open",
+      "grouping": "Women's Singles",
+      "date": "2026-08-03",
+      "winnerName": "Katarzyna Kawa",
+      "loserName": "Linda Fruhvirtova",
+      "score": "4-6 6-4 7-6",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Warsaw T-Mobile Polish Open",
+      "grouping": "Women's Singles",
+      "date": "2026-08-03",
+      "winnerName": "Noma Noha Akugue",
+      "loserName": "Julia Avdeeva",
+      "score": "6-2 6-3",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Warsaw T-Mobile Polish Open",
+      "grouping": "Women's Singles",
+      "date": "2026-08-03",
+      "winnerName": "Veronika Podrez",
+      "loserName": "Elena Micic",
+      "score": "6-3 7-6",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Warsaw T-Mobile Polish Open",
+      "grouping": "Women's Singles",
+      "date": "2026-08-03",
+      "winnerName": "Weronika Falkowska",
+      "loserName": "Amelia Paszun",
+      "score": "6-0 6-2",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Warsaw T-Mobile Polish Open",
+      "grouping": "Women's Singles",
+      "date": "2026-08-03",
+      "winnerName": "Yuan Yue",
+      "loserName": "Alana Smith",
+      "score": "6-1 6-4",
       "retired": false
     }
   ]
