@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-08-03T15:30:51.419Z",
+  "generatedAt": "2026-08-03T17:28:14.101Z",
   "source": "site.api.espn.com tennis scoreboard (atp+wta singles · official · public · 0 auth)",
-  "count": 2632,
+  "count": 2640,
   "games": [
     {
       "tour": "atp",
@@ -26261,6 +26261,86 @@
       "winnerName": "Urszula Radwanska",
       "loserName": "Marcelina Podlinska",
       "score": "6-1 6-3",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "Mubadala DC Open",
+      "grouping": "Women's Singles",
+      "date": "2026-08-03",
+      "winnerName": "Alexandra Eala",
+      "loserName": "Jessica Pegula",
+      "score": "4-6 6-4 6-0",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "National Bank Open presented by Rogers",
+      "grouping": "Women's Singles",
+      "date": "2026-08-03",
+      "winnerName": "Alina Korneeva",
+      "loserName": "Polina Kudermetova",
+      "score": "6-0 3-0",
+      "retired": true
+    },
+    {
+      "tour": "atp",
+      "tournament": "National Bank Open presented by Rogers",
+      "grouping": "Women's Singles",
+      "date": "2026-08-03",
+      "winnerName": "Anna Bondar",
+      "loserName": "Anhelina Kalinina",
+      "score": "6-4 7-5",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "National Bank Open presented by Rogers",
+      "grouping": "Women's Singles",
+      "date": "2026-08-03",
+      "winnerName": "Karolina Pliskova",
+      "loserName": "Oleksandra Oliynykova",
+      "score": "6-4 6-4",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Mubadala DC Open",
+      "grouping": "Women's Singles",
+      "date": "2026-08-03",
+      "winnerName": "Alexandra Eala",
+      "loserName": "Jessica Pegula",
+      "score": "4-6 6-4 6-0",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "National Bank Open presented by Rogers",
+      "grouping": "Women's Singles",
+      "date": "2026-08-03",
+      "winnerName": "Alina Korneeva",
+      "loserName": "Polina Kudermetova",
+      "score": "6-0 3-0",
+      "retired": true
+    },
+    {
+      "tour": "wta",
+      "tournament": "National Bank Open presented by Rogers",
+      "grouping": "Women's Singles",
+      "date": "2026-08-03",
+      "winnerName": "Anna Bondar",
+      "loserName": "Anhelina Kalinina",
+      "score": "6-4 7-5",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "National Bank Open presented by Rogers",
+      "grouping": "Women's Singles",
+      "date": "2026-08-03",
+      "winnerName": "Karolina Pliskova",
+      "loserName": "Oleksandra Oliynykova",
+      "score": "6-4 6-4",
       "retired": false
     },
     {
