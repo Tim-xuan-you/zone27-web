@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-08-02T22:39:09.661Z",
+  "generatedAt": "2026-08-03T04:20:04.501Z",
   "source": "site.api.espn.com tennis scoreboard (atp+wta singles · official · public · 0 auth)",
-  "count": 2624,
+  "count": 2626,
   "games": [
     {
       "tour": "atp",
@@ -26016,6 +26016,16 @@
     {
       "tour": "atp",
       "tournament": "National Bank Open presented by Rogers",
+      "grouping": "Women's Singles",
+      "date": "2026-08-02",
+      "winnerName": "Camila Osorio",
+      "loserName": "Lucrezia Stefanini",
+      "score": "7-6 6-3",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "National Bank Open presented by Rogers",
       "grouping": "Men's Singles",
       "date": "2026-08-02",
       "winnerName": "Jaume Munar",
@@ -26111,6 +26121,16 @@
       "winnerName": "Rafael Jodar",
       "loserName": "Alejandro Tabilo",
       "score": "6-7 6-4 6-4",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "National Bank Open presented by Rogers",
+      "grouping": "Women's Singles",
+      "date": "2026-08-02",
+      "winnerName": "Camila Osorio",
+      "loserName": "Lucrezia Stefanini",
+      "score": "7-6 6-3",
       "retired": false
     },
     {
