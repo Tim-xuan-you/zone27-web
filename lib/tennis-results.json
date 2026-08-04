@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-08-04T09:29:07.772Z",
+  "generatedAt": "2026-08-04T11:48:38.902Z",
   "source": "site.api.espn.com tennis scoreboard (atp+wta singles · official · public · 0 auth)",
-  "count": 2717,
+  "count": 2720,
   "games": [
     {
       "tour": "atp",
@@ -27171,6 +27171,36 @@
       "winnerName": "Sloane Stephens",
       "loserName": "Solana Sierra",
       "score": "6-3 6-4",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Warsaw T-Mobile Polish Open",
+      "grouping": "Women's Singles",
+      "date": "2026-08-04",
+      "winnerName": "Carol Young Suh Lee",
+      "loserName": "Elsa Jacquemot",
+      "score": "6-4 6-4",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Warsaw T-Mobile Polish Open",
+      "grouping": "Women's Singles",
+      "date": "2026-08-04",
+      "winnerName": "Justina Mikulskyte",
+      "loserName": "Weronika Ewald",
+      "score": "7-6 6-2",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "Warsaw T-Mobile Polish Open",
+      "grouping": "Women's Singles",
+      "date": "2026-08-04",
+      "winnerName": "Susan Bandecchi",
+      "loserName": "Viktoria Hruncakova",
+      "score": "6-4 6-4",
       "retired": false
     }
   ]
