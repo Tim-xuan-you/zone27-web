@@ -23681,8 +23681,12 @@
       },
       "engineWinHomePct": 38,
       "lockedAt": "2026-08-02T19:18:19.875Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 9,
+        "away": 13
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-08-04T08:47:13.841Z"
     },
     {
       "gamePk": 825095,
@@ -23710,8 +23714,12 @@
       },
       "engineWinHomePct": 48,
       "lockedAt": "2026-08-02T19:18:19.875Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 5,
+        "away": 1
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-08-04T08:47:13.841Z"
     },
     {
       "gamePk": 824403,
@@ -23797,6 +23805,93 @@
       },
       "engineWinHomePct": 45,
       "lockedAt": "2026-08-02T21:59:44.645Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 823517,
+      "gameDate": "2026-08-04T23:05:00Z",
+      "scheduleDate": "2026-08-04",
+      "homeId": 147,
+      "homeEn": "New York Yankees",
+      "homeRecord": "63-50",
+      "awayId": 138,
+      "awayEn": "St. Louis Cardinals",
+      "awayRecord": "56-57",
+      "homePitcher": "Ryan Weathers",
+      "awayPitcher": "Hunter Dobbins",
+      "homeStats": {
+        "era": "3.99",
+        "k9": "9.86",
+        "bb9": "2.58",
+        "hr9": "1.33"
+      },
+      "awayStats": {
+        "era": "3.74",
+        "k9": "8.55",
+        "bb9": "2.94",
+        "hr9": "1.07"
+      },
+      "engineWinHomePct": 54,
+      "lockedAt": "2026-08-04T08:47:13.305Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 824731,
+      "gameDate": "2026-08-04T23:10:00Z",
+      "scheduleDate": "2026-08-04",
+      "homeId": 111,
+      "homeEn": "Boston Red Sox",
+      "homeRecord": "60-51",
+      "awayId": 145,
+      "awayEn": "Chicago White Sox",
+      "awayRecord": "59-52",
+      "homePitcher": "Patrick Sandoval",
+      "awayPitcher": "Davis Martin",
+      "homeStats": {
+        "era": "3.32",
+        "k9": "9.47",
+        "bb9": "2.84",
+        "hr9": "1.42"
+      },
+      "awayStats": {
+        "era": "3.62",
+        "k9": "8.15",
+        "bb9": "2.69",
+        "hr9": "0.54"
+      },
+      "engineWinHomePct": 53,
+      "lockedAt": "2026-08-04T08:47:13.305Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 824888,
+      "gameDate": "2026-08-04T23:15:00Z",
+      "scheduleDate": "2026-08-04",
+      "homeId": 144,
+      "homeEn": "Atlanta Braves",
+      "homeRecord": "67-45",
+      "awayId": 146,
+      "awayEn": "Miami Marlins",
+      "awayRecord": "58-55",
+      "homePitcher": "Grant Holmes",
+      "awayPitcher": "Ryan Gusto",
+      "homeStats": {
+        "era": "3.88",
+        "k9": "7.68",
+        "bb9": "3.97",
+        "hr9": "1.59"
+      },
+      "awayStats": {
+        "era": "5.31",
+        "k9": "7.85",
+        "bb9": "3.00",
+        "hr9": "0.92"
+      },
+      "engineWinHomePct": 55,
+      "lockedAt": "2026-08-04T08:47:13.305Z",
       "finalScore": null,
       "verdict": null
     },
@@ -23975,6 +24070,35 @@
       "verdict": null
     },
     {
+      "gamePk": 825054,
+      "gameDate": "2026-08-05T01:40:00Z",
+      "scheduleDate": "2026-08-04",
+      "homeId": 109,
+      "homeEn": "Arizona Diamondbacks",
+      "homeRecord": "60-53",
+      "awayId": 135,
+      "awayEn": "San Diego Padres",
+      "awayRecord": "58-55",
+      "homePitcher": "Eduardo Rodriguez",
+      "awayPitcher": "Randy Vásquez",
+      "homeStats": {
+        "era": "2.48",
+        "k9": "6.06",
+        "bb9": "3.10",
+        "hr9": "0.90"
+      },
+      "awayStats": {
+        "era": "4.45",
+        "k9": "6.06",
+        "bb9": "2.84",
+        "hr9": "1.33"
+      },
+      "engineWinHomePct": 64,
+      "lockedAt": "2026-08-04T08:47:13.305Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
       "gamePk": 824158,
       "gameDate": "2026-08-05T18:10:00Z",
       "scheduleDate": "2026-08-05",
@@ -24145,6 +24269,64 @@
       },
       "engineWinHomePct": 43,
       "lockedAt": "2026-08-03T17:12:22.926Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 823516,
+      "gameDate": "2026-08-05T23:05:00Z",
+      "scheduleDate": "2026-08-05",
+      "homeId": 147,
+      "homeEn": "New York Yankees",
+      "homeRecord": "63-50",
+      "awayId": 138,
+      "awayEn": "St. Louis Cardinals",
+      "awayRecord": "56-57",
+      "homePitcher": "Will Warren",
+      "awayPitcher": "Andre Pallante",
+      "homeStats": {
+        "era": "4.14",
+        "k9": "9.03",
+        "bb9": "2.98",
+        "hr9": "1.24"
+      },
+      "awayStats": {
+        "era": "3.72",
+        "k9": "6.52",
+        "bb9": "2.58",
+        "hr9": "0.76"
+      },
+      "engineWinHomePct": 54,
+      "lockedAt": "2026-08-04T08:47:13.305Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 824728,
+      "gameDate": "2026-08-05T23:10:00Z",
+      "scheduleDate": "2026-08-05",
+      "homeId": 111,
+      "homeEn": "Boston Red Sox",
+      "homeRecord": "60-51",
+      "awayId": 145,
+      "awayEn": "Chicago White Sox",
+      "awayRecord": "59-52",
+      "homePitcher": "Sonny Gray",
+      "awayPitcher": "Sean Burke",
+      "homeStats": {
+        "era": "2.93",
+        "k9": "7.76",
+        "bb9": "2.38",
+        "hr9": "0.95"
+      },
+      "awayStats": {
+        "era": "3.04",
+        "k9": "10.13",
+        "bb9": "2.68",
+        "hr9": "0.94"
+      },
+      "engineWinHomePct": 50,
+      "lockedAt": "2026-08-04T08:47:13.305Z",
       "finalScore": null,
       "verdict": null
     },
