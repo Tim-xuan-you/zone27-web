@@ -24476,6 +24476,35 @@
       "verdict": null
     },
     {
+      "gamePk": 824401,
+      "gameDate": "2026-08-06T17:10:00Z",
+      "scheduleDate": "2026-08-06",
+      "homeId": 114,
+      "homeEn": "Cleveland Guardians",
+      "homeRecord": "57-56",
+      "awayId": 121,
+      "awayEn": "New York Mets",
+      "awayRecord": "47-66",
+      "homePitcher": "Foster Griffin",
+      "awayPitcher": "Nolan McLean",
+      "homeStats": {
+        "era": "3.06",
+        "k9": "8.07",
+        "bb9": "2.09",
+        "hr9": "1.32"
+      },
+      "awayStats": {
+        "era": "3.29",
+        "k9": "10.60",
+        "bb9": "3.22",
+        "hr9": "0.93"
+      },
+      "engineWinHomePct": 48,
+      "lockedAt": "2026-08-04T22:17:17.103Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
       "gamePk": 823754,
       "gameDate": "2026-08-06T18:10:00Z",
       "scheduleDate": "2026-08-06",
