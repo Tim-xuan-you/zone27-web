@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-08-04T03:54:08.765Z",
+  "generatedAt": "2026-08-04T09:29:07.772Z",
   "source": "site.api.espn.com tennis scoreboard (atp+wta singles · official · public · 0 auth)",
-  "count": 2713,
+  "count": 2717,
   "games": [
     {
       "tour": "atp",
@@ -26986,6 +26986,16 @@
     {
       "tour": "atp",
       "tournament": "National Bank Open presented by Rogers",
+      "grouping": "Men's Singles",
+      "date": "2026-08-04",
+      "winnerName": "Cameron Norrie",
+      "loserName": "Camilo Ugo Carabelli",
+      "score": "7-6 6-4",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "National Bank Open presented by Rogers",
       "grouping": "Women's Singles",
       "date": "2026-08-04",
       "winnerName": "Catherine McNally",
@@ -27021,6 +27031,16 @@
       "winnerName": "Daria Kasatkina",
       "loserName": "Wang Xinyu",
       "score": "1-6 7-6 7-5",
+      "retired": false
+    },
+    {
+      "tour": "atp",
+      "tournament": "National Bank Open presented by Rogers",
+      "grouping": "Men's Singles",
+      "date": "2026-08-04",
+      "winnerName": "Gael Monfils",
+      "loserName": "Kamil Majchrzak",
+      "score": "6-4 6-4",
       "retired": false
     },
     {
@@ -27066,6 +27086,16 @@
     {
       "tour": "wta",
       "tournament": "National Bank Open presented by Rogers",
+      "grouping": "Men's Singles",
+      "date": "2026-08-04",
+      "winnerName": "Cameron Norrie",
+      "loserName": "Camilo Ugo Carabelli",
+      "score": "7-6 6-4",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "National Bank Open presented by Rogers",
       "grouping": "Women's Singles",
       "date": "2026-08-04",
       "winnerName": "Catherine McNally",
@@ -27101,6 +27131,16 @@
       "winnerName": "Daria Kasatkina",
       "loserName": "Wang Xinyu",
       "score": "1-6 7-6 7-5",
+      "retired": false
+    },
+    {
+      "tour": "wta",
+      "tournament": "National Bank Open presented by Rogers",
+      "grouping": "Men's Singles",
+      "date": "2026-08-04",
+      "winnerName": "Gael Monfils",
+      "loserName": "Kamil Majchrzak",
+      "score": "6-4 6-4",
       "retired": false
     },
     {
