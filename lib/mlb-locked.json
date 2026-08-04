@@ -24387,6 +24387,151 @@
       "lockedAt": "2026-08-03T17:12:22.926Z",
       "finalScore": null,
       "verdict": null
+    },
+    {
+      "gamePk": 823754,
+      "gameDate": "2026-08-06T18:10:00Z",
+      "scheduleDate": "2026-08-06",
+      "homeId": 158,
+      "homeEn": "Milwaukee Brewers",
+      "homeRecord": "69-43",
+      "awayId": 134,
+      "awayEn": "Pittsburgh Pirates",
+      "awayRecord": "57-57",
+      "homePitcher": "Shane Drohan",
+      "awayPitcher": "Braxton Ashcraft",
+      "homeStats": {
+        "era": "3.48",
+        "k9": "9.10",
+        "bb9": "2.45",
+        "hr9": "0.72"
+      },
+      "awayStats": {
+        "era": "3.96",
+        "k9": "9.90",
+        "bb9": "2.19",
+        "hr9": "1.20"
+      },
+      "engineWinHomePct": 57,
+      "lockedAt": "2026-08-04T16:56:44.427Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 823105,
+      "gameDate": "2026-08-06T20:10:00Z",
+      "scheduleDate": "2026-08-06",
+      "homeId": 136,
+      "homeEn": "Seattle Mariners",
+      "homeRecord": "55-58",
+      "awayId": 116,
+      "awayEn": "Detroit Tigers",
+      "awayRecord": "54-58",
+      "homePitcher": "Bryce Miller",
+      "awayPitcher": "Framber Valdez",
+      "homeStats": {
+        "era": "2.80",
+        "k9": "9.00",
+        "bb9": "1.58",
+        "hr9": "1.46"
+      },
+      "awayStats": {
+        "era": "4.41",
+        "k9": "7.33",
+        "bb9": "3.22",
+        "hr9": "0.90"
+      },
+      "engineWinHomePct": 60,
+      "lockedAt": "2026-08-04T16:56:44.427Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 824729,
+      "gameDate": "2026-08-06T23:10:00Z",
+      "scheduleDate": "2026-08-06",
+      "homeId": 111,
+      "homeEn": "Boston Red Sox",
+      "homeRecord": "60-51",
+      "awayId": 145,
+      "awayEn": "Chicago White Sox",
+      "awayRecord": "59-52",
+      "homePitcher": "Ranger Suarez",
+      "awayPitcher": "Luis Castillo",
+      "homeStats": {
+        "era": "3.15",
+        "k9": "9.45",
+        "bb9": "2.52",
+        "hr9": "0.45"
+      },
+      "awayStats": {
+        "era": "5.06",
+        "k9": "7.77",
+        "bb9": "2.89",
+        "hr9": "1.44"
+      },
+      "engineWinHomePct": 71,
+      "lockedAt": "2026-08-04T16:56:44.427Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 824080,
+      "gameDate": "2026-08-06T23:40:00Z",
+      "scheduleDate": "2026-08-06",
+      "homeId": 118,
+      "homeEn": "Kansas City Royals",
+      "homeRecord": "46-67",
+      "awayId": 142,
+      "awayEn": "Minnesota Twins",
+      "awayRecord": "56-57",
+      "homePitcher": "Michael Wacha",
+      "awayPitcher": "Bailey Ober",
+      "homeStats": {
+        "era": "3.51",
+        "k9": "7.22",
+        "bb9": "2.47",
+        "hr9": "1.04"
+      },
+      "awayStats": {
+        "era": "4.45",
+        "k9": "6.52",
+        "bb9": "2.48",
+        "hr9": "1.45"
+      },
+      "engineWinHomePct": 62,
+      "lockedAt": "2026-08-04T16:56:44.427Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 825053,
+      "gameDate": "2026-08-07T01:40:00Z",
+      "scheduleDate": "2026-08-06",
+      "homeId": 109,
+      "homeEn": "Arizona Diamondbacks",
+      "homeRecord": "60-53",
+      "awayId": 135,
+      "awayEn": "San Diego Padres",
+      "awayRecord": "58-55",
+      "homePitcher": "Kohl Drake",
+      "awayPitcher": "Walker Buehler",
+      "homeStats": {
+        "era": "4.85",
+        "k9": "8.31",
+        "bb9": "3.46",
+        "hr9": "2.08"
+      },
+      "awayStats": {
+        "era": "5.18",
+        "k9": "7.94",
+        "bb9": "3.80",
+        "hr9": "1.21"
+      },
+      "engineWinHomePct": 51,
+      "lockedAt": "2026-08-04T16:56:44.427Z",
+      "finalScore": null,
+      "verdict": null
     }
   ]
 }
