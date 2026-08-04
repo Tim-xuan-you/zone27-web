@@ -24273,6 +24273,35 @@
       "verdict": null
     },
     {
+      "gamePk": 824482,
+      "gameDate": "2026-08-05T22:40:00Z",
+      "scheduleDate": "2026-08-05",
+      "homeId": 113,
+      "homeEn": "Cincinnati Reds",
+      "homeRecord": "53-58",
+      "awayId": 133,
+      "awayEn": "Athletics",
+      "awayRecord": "45-67",
+      "homePitcher": "Rhett Lowder",
+      "awayPitcher": "Jacob Lopez",
+      "homeStats": {
+        "era": "5.42",
+        "k9": "7.59",
+        "bb9": "4.01",
+        "hr9": "1.08"
+      },
+      "awayStats": {
+        "era": "5.79",
+        "k9": "7.84",
+        "bb9": "5.40",
+        "hr9": "1.54"
+      },
+      "engineWinHomePct": 58,
+      "lockedAt": "2026-08-04T19:43:46.925Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
       "gamePk": 823516,
       "gameDate": "2026-08-05T23:05:00Z",
       "scheduleDate": "2026-08-05",
@@ -24385,6 +24414,64 @@
       },
       "engineWinHomePct": 71,
       "lockedAt": "2026-08-03T17:12:22.926Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 823753,
+      "gameDate": "2026-08-05T23:40:00Z",
+      "scheduleDate": "2026-08-05",
+      "homeId": 158,
+      "homeEn": "Milwaukee Brewers",
+      "homeRecord": "69-43",
+      "awayId": 134,
+      "awayEn": "Pittsburgh Pirates",
+      "awayRecord": "57-57",
+      "homePitcher": "Kyle Harrison",
+      "awayPitcher": "Paul Skenes",
+      "homeStats": {
+        "era": "3.01",
+        "k9": "10.86",
+        "bb9": "2.15",
+        "hr9": "1.08"
+      },
+      "awayStats": {
+        "era": "3.90",
+        "k9": "11.26",
+        "bb9": "2.31",
+        "hr9": "0.94"
+      },
+      "engineWinHomePct": 56,
+      "lockedAt": "2026-08-04T19:43:46.925Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 824481,
+      "gameDate": "2026-08-06T16:40:00Z",
+      "scheduleDate": "2026-08-06",
+      "homeId": 113,
+      "homeEn": "Cincinnati Reds",
+      "homeRecord": "53-58",
+      "awayId": 133,
+      "awayEn": "Athletics",
+      "awayRecord": "45-67",
+      "homePitcher": "Hunter Greene",
+      "awayPitcher": "Mason Barnett",
+      "homeStats": {
+        "era": "6.83",
+        "k9": "10.73",
+        "bb9": "2.93",
+        "hr9": "1.30"
+      },
+      "awayStats": {
+        "era": "4.85",
+        "k9": "8.80",
+        "bb9": "4.25",
+        "hr9": "1.52"
+      },
+      "engineWinHomePct": 51,
+      "lockedAt": "2026-08-04T19:43:46.925Z",
       "finalScore": null,
       "verdict": null
     },
