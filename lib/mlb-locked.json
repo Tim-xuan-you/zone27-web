@@ -24145,8 +24145,12 @@
       },
       "engineWinHomePct": 40,
       "lockedAt": "2026-08-03T17:12:22.926Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 4,
+        "away": 5
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-08-05T22:15:39.318Z"
     },
     {
       "gamePk": 824646,
@@ -24174,8 +24178,12 @@
       },
       "engineWinHomePct": 65,
       "lockedAt": "2026-08-04T03:15:02.660Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 7,
+        "away": 6
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-08-05T22:15:39.318Z"
     },
     {
       "gamePk": 824322,
@@ -24203,8 +24211,12 @@
       },
       "engineWinHomePct": 43,
       "lockedAt": "2026-08-03T17:12:22.926Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 0,
+        "away": 4
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-08-05T22:15:39.318Z"
     },
     {
       "gamePk": 824806,
@@ -24526,6 +24538,35 @@
       "verdict": null
     },
     {
+      "gamePk": 824804,
+      "gameDate": "2026-08-06T16:35:00Z",
+      "scheduleDate": "2026-08-06",
+      "homeId": 110,
+      "homeEn": "Baltimore Orioles",
+      "homeRecord": "55-58",
+      "awayId": 108,
+      "awayEn": "Los Angeles Angels",
+      "awayRecord": "43-70",
+      "homePitcher": "Brandon Young",
+      "awayPitcher": "Ryan Johnson",
+      "homeStats": {
+        "era": "3.31",
+        "k9": "7.40",
+        "bb9": "3.14",
+        "hr9": "0.96"
+      },
+      "awayStats": {
+        "era": "7.63",
+        "k9": "7.24",
+        "bb9": "3.91",
+        "hr9": "2.35"
+      },
+      "engineWinHomePct": 80,
+      "lockedAt": "2026-08-05T22:15:38.732Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
       "gamePk": 824481,
       "gameDate": "2026-08-06T16:40:00Z",
       "scheduleDate": "2026-08-06",
@@ -24669,6 +24710,35 @@
       },
       "engineWinHomePct": 60,
       "lockedAt": "2026-08-04T16:56:44.427Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 823430,
+      "gameDate": "2026-08-06T22:05:00Z",
+      "scheduleDate": "2026-08-06",
+      "homeId": 143,
+      "homeEn": "Philadelphia Phillies",
+      "homeRecord": "61-53",
+      "awayId": 120,
+      "awayEn": "Washington Nationals",
+      "awayRecord": "55-60",
+      "homePitcher": "Cristopher Sánchez",
+      "awayPitcher": "Miles Mikolas",
+      "homeStats": {
+        "era": "2.61",
+        "k9": "10.45",
+        "bb9": "2.05",
+        "hr9": "0.75"
+      },
+      "awayStats": {
+        "era": "5.67",
+        "k9": "4.58",
+        "bb9": "1.83",
+        "hr9": "2.17"
+      },
+      "engineWinHomePct": 80,
+      "lockedAt": "2026-08-05T22:15:38.732Z",
       "finalScore": null,
       "verdict": null
     },
