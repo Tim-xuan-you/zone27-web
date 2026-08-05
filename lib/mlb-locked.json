@@ -23747,8 +23747,12 @@
       },
       "engineWinHomePct": 60,
       "lockedAt": "2026-08-02T16:04:25.047Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 2,
+        "away": 6
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-08-05T02:55:57.584Z"
     },
     {
       "gamePk": 823432,
@@ -23776,8 +23780,12 @@
       },
       "engineWinHomePct": 78,
       "lockedAt": "2026-08-02T19:18:19.875Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 5,
+        "away": 0
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-08-05T02:55:57.585Z"
     },
     {
       "gamePk": 824484,
@@ -23805,8 +23813,12 @@
       },
       "engineWinHomePct": 45,
       "lockedAt": "2026-08-02T21:59:44.645Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 5,
+        "away": 4
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-08-05T02:55:57.585Z"
     },
     {
       "gamePk": 823517,
@@ -23834,8 +23846,12 @@
       },
       "engineWinHomePct": 54,
       "lockedAt": "2026-08-04T08:47:13.305Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 2,
+        "away": 0
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-08-05T02:55:57.585Z"
     },
     {
       "gamePk": 824731,
@@ -23863,8 +23879,12 @@
       },
       "engineWinHomePct": 53,
       "lockedAt": "2026-08-04T08:47:13.305Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 14,
+        "away": 2
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-08-05T02:55:57.585Z"
     },
     {
       "gamePk": 824888,
@@ -23892,8 +23912,12 @@
       },
       "engineWinHomePct": 55,
       "lockedAt": "2026-08-04T08:47:13.305Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 4,
+        "away": 2
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-08-05T02:55:57.585Z"
     },
     {
       "gamePk": 824084,
@@ -23921,8 +23945,12 @@
       },
       "engineWinHomePct": 57,
       "lockedAt": "2026-08-02T19:18:19.875Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 8,
+        "away": 2
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-08-05T02:55:57.585Z"
     },
     {
       "gamePk": 823756,
@@ -23950,8 +23978,12 @@
       },
       "engineWinHomePct": 62,
       "lockedAt": "2026-08-02T19:18:19.875Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 4,
+        "away": 2
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-08-05T02:55:57.585Z"
     },
     {
       "gamePk": 824645,
@@ -23979,8 +24011,12 @@
       },
       "engineWinHomePct": 37,
       "lockedAt": "2026-08-02T21:59:44.645Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 5,
+        "away": 1
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-08-05T02:55:57.585Z"
     },
     {
       "gamePk": 822865,
@@ -24037,8 +24073,12 @@
       },
       "engineWinHomePct": 51,
       "lockedAt": "2026-08-02T19:18:19.875Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 7,
+        "away": 2
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-08-05T02:55:57.585Z"
     },
     {
       "gamePk": 824321,
@@ -24447,6 +24487,64 @@
       "verdict": null
     },
     {
+      "gamePk": 825052,
+      "gameDate": "2026-08-06T01:40:00Z",
+      "scheduleDate": "2026-08-05",
+      "homeId": 109,
+      "homeEn": "Arizona Diamondbacks",
+      "homeRecord": "60-53",
+      "awayId": 135,
+      "awayEn": "San Diego Padres",
+      "awayRecord": "58-55",
+      "homePitcher": "Mitch Bratt",
+      "awayPitcher": "Casey Mize",
+      "homeStats": {
+        "era": "5.23",
+        "k9": "5.23",
+        "bb9": "6.53",
+        "hr9": "1.74"
+      },
+      "awayStats": {
+        "era": "2.70",
+        "k9": "8.83",
+        "bb9": "1.97",
+        "hr9": "0.52"
+      },
+      "engineWinHomePct": 29,
+      "lockedAt": "2026-08-05T02:55:56.931Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 823106,
+      "gameDate": "2026-08-06T01:40:00Z",
+      "scheduleDate": "2026-08-05",
+      "homeId": 136,
+      "homeEn": "Seattle Mariners",
+      "homeRecord": "55-58",
+      "awayId": 116,
+      "awayEn": "Detroit Tigers",
+      "awayRecord": "54-58",
+      "homePitcher": "Bryan Woo",
+      "awayPitcher": "Drew Anderson",
+      "homeStats": {
+        "era": "4.56",
+        "k9": "9.12",
+        "bb9": "1.94",
+        "hr9": "0.97"
+      },
+      "awayStats": {
+        "era": "4.24",
+        "k9": "11.03",
+        "bb9": "3.39",
+        "hr9": "1.27"
+      },
+      "engineWinHomePct": 51,
+      "lockedAt": "2026-08-05T02:55:56.931Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
       "gamePk": 824481,
       "gameDate": "2026-08-06T16:40:00Z",
       "scheduleDate": "2026-08-06",
@@ -24588,6 +24686,35 @@
       },
       "engineWinHomePct": 71,
       "lockedAt": "2026-08-04T16:56:44.427Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 824885,
+      "gameDate": "2026-08-06T23:15:00Z",
+      "scheduleDate": "2026-08-06",
+      "homeId": 144,
+      "homeEn": "Atlanta Braves",
+      "homeRecord": "68-45",
+      "awayId": 146,
+      "awayEn": "Miami Marlins",
+      "awayRecord": "58-56",
+      "homePitcher": "Martín Pérez",
+      "awayPitcher": "Janson Junk",
+      "homeStats": {
+        "era": "3.24",
+        "k9": "6.93",
+        "bb9": "3.61",
+        "hr9": "1.02"
+      },
+      "awayStats": {
+        "era": "4.58",
+        "k9": "6.98",
+        "bb9": "2.52",
+        "hr9": "1.26"
+      },
+      "engineWinHomePct": 61,
+      "lockedAt": "2026-08-05T02:55:56.931Z",
       "finalScore": null,
       "verdict": null
     },
