@@ -24789,6 +24789,35 @@
       "verdict": null
     },
     {
+      "gamePk": 823024,
+      "gameDate": "2026-08-08T00:15:00Z",
+      "scheduleDate": "2026-08-07",
+      "homeId": 138,
+      "homeEn": "St. Louis Cardinals",
+      "homeRecord": "56-58",
+      "awayId": 115,
+      "awayEn": "Colorado Rockies",
+      "awayRecord": "45-69",
+      "homePitcher": "Kyle Leahy",
+      "awayPitcher": "Ryan Feltner",
+      "homeStats": {
+        "era": "3.44",
+        "k9": "7.63",
+        "bb9": "2.93",
+        "hr9": "1.01"
+      },
+      "awayStats": {
+        "era": "5.75",
+        "k9": "6.69",
+        "bb9": "3.52",
+        "hr9": "2.00"
+      },
+      "engineWinHomePct": 71,
+      "lockedAt": "2026-08-05T19:42:55.095Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
       "gamePk": 823266,
       "gameDate": "2026-08-08T01:40:00Z",
       "scheduleDate": "2026-08-07",
