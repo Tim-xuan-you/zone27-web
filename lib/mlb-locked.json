@@ -7354,37 +7354,6 @@
       "gradedAt": "2026-06-21T22:18:31.823Z"
     },
     {
-      "gamePk": 824664,
-      "gameDate": "2026-06-21T18:20:00Z",
-      "scheduleDate": "2026-06-21",
-      "homeId": 112,
-      "homeEn": "Chicago Cubs",
-      "homeRecord": "39-36",
-      "awayId": 141,
-      "awayEn": "Toronto Blue Jays",
-      "awayRecord": "37-38",
-      "homePitcher": "Shota Imanaga",
-      "awayPitcher": "Dylan Cease",
-      "homeStats": {
-        "era": "4.26",
-        "k9": "8.72",
-        "bb9": "2.28",
-        "hr9": "1.77"
-      },
-      "awayStats": {
-        "era": "2.71",
-        "k9": "13.56",
-        "bb9": "3.82",
-        "hr9": "0.62"
-      },
-      "engineWinHomePct": 31,
-      "lockedAt": "2026-06-19T19:55:37.672Z",
-      "finalScore": null,
-      "verdict": "void",
-      "postponedTo": "2026-08-06",
-      "gradedAt": "2026-07-12T08:44:40.903Z"
-    },
-    {
       "gamePk": 824343,
       "gameDate": "2026-06-21T19:10:00Z",
       "scheduleDate": "2026-06-21",
@@ -24644,6 +24613,37 @@
       "verdict": null
     },
     {
+      "gamePk": 824664,
+      "gameDate": "2026-08-06T18:20:00Z",
+      "scheduleDate": "2026-08-06",
+      "homeId": 112,
+      "homeEn": "Chicago Cubs",
+      "homeRecord": "65-49",
+      "awayId": 141,
+      "awayEn": "Toronto Blue Jays",
+      "awayRecord": "53-61",
+      "homePitcher": "David Peterson",
+      "awayPitcher": "Dylan Cease",
+      "homeStats": {
+        "era": "5.52",
+        "k9": "7.57",
+        "bb9": "3.56",
+        "hr9": "0.98"
+      },
+      "awayStats": {
+        "era": "2.41",
+        "k9": "13.12",
+        "bb9": "3.85",
+        "hr9": "0.53"
+      },
+      "engineWinHomePct": 28,
+      "lockedAt": "2026-08-05T16:45:05.186Z",
+      "finalScore": null,
+      "verdict": null,
+      "gradedAt": "2026-07-12T08:44:40.903Z",
+      "relockedFrom": "2026-06-21"
+    },
+    {
       "gamePk": 823105,
       "gameDate": "2026-08-06T20:10:00Z",
       "scheduleDate": "2026-08-06",
@@ -24785,6 +24785,35 @@
       },
       "engineWinHomePct": 51,
       "lockedAt": "2026-08-04T16:56:44.427Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 823266,
+      "gameDate": "2026-08-08T01:40:00Z",
+      "scheduleDate": "2026-08-07",
+      "homeId": 135,
+      "homeEn": "San Diego Padres",
+      "homeRecord": "59-55",
+      "awayId": 117,
+      "awayEn": "Houston Astros",
+      "awayRecord": "59-56",
+      "homePitcher": "Robbie Ray",
+      "awayPitcher": "Ronel Blanco",
+      "homeStats": {
+        "era": "3.08",
+        "k9": "7.85",
+        "bb9": "4.18",
+        "hr9": "1.10"
+      },
+      "awayStats": {
+        "era": "7.36",
+        "k9": "9.82",
+        "bb9": "4.91",
+        "hr9": "3.07"
+      },
+      "engineWinHomePct": 79,
+      "lockedAt": "2026-08-05T16:45:05.186Z",
       "finalScore": null,
       "verdict": null
     }
