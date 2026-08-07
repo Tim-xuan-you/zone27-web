@@ -25816,6 +25816,35 @@
       "verdict": null
     },
     {
+      "gamePk": 824078,
+      "gameDate": "2026-08-09T18:10:00Z",
+      "scheduleDate": "2026-08-09",
+      "homeId": 118,
+      "homeEn": "Kansas City Royals",
+      "homeRecord": "48-68",
+      "awayId": 112,
+      "awayEn": "Chicago Cubs",
+      "awayRecord": "67-49",
+      "homePitcher": "Randy Dobnak",
+      "awayPitcher": "Matthew Boyd",
+      "homeStats": {
+        "era": "1.16",
+        "k9": "4.35",
+        "bb9": "3.77",
+        "hr9": "0.58"
+      },
+      "awayStats": {
+        "era": "3.59",
+        "k9": "7.80",
+        "bb9": "2.48",
+        "hr9": "0.99"
+      },
+      "engineWinHomePct": 59,
+      "lockedAt": "2026-08-07T21:44:34.531Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
       "gamePk": 823020,
       "gameDate": "2026-08-09T18:15:00Z",
       "scheduleDate": "2026-08-09",
