@@ -4153,6 +4153,34 @@
       "outcome": null,
       "verdict": null,
       "gradedAt": null
+    },
+    {
+      "matchId": "fd-554951",
+      "competitionCode": "BSA",
+      "competitionName": "巴西甲",
+      "kickoffISO": "2026-08-09T00:00:00Z",
+      "status": "TIMED",
+      "homeSeed": "Botafogo",
+      "awaySeed": "Fluminense",
+      "home": "Botafogo",
+      "away": "Fluminense",
+      "ratingHome": 0,
+      "ratingAway": 0,
+      "homeAdvantage": 0,
+      "xgHome": 1.7680968303624125,
+      "xgAway": 1.656689584726977,
+      "homeWin": 0.40281788951853675,
+      "draw": 0.24046858616049516,
+      "awayWin": 0.3567135243209679,
+      "homeWinPct": 40,
+      "drawPct": 24,
+      "awayWinPct": 36,
+      "enginePick": "home",
+      "lockedAt": "2026-08-07T02:33:55.853Z",
+      "finalScore": null,
+      "outcome": null,
+      "verdict": null,
+      "gradedAt": null
     }
   ]
 }
