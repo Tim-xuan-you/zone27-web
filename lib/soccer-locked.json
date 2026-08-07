@@ -4181,6 +4181,34 @@
       "outcome": null,
       "verdict": null,
       "gradedAt": null
+    },
+    {
+      "matchId": "fd-554954",
+      "competitionCode": "BSA",
+      "competitionName": "巴西甲",
+      "kickoffISO": "2026-08-09T14:00:00Z",
+      "status": "TIMED",
+      "homeSeed": "Cruzeiro",
+      "awaySeed": "Mirassol",
+      "home": "Cruzeiro",
+      "away": "Mirassol",
+      "ratingHome": 0,
+      "ratingAway": 0,
+      "homeAdvantage": 0,
+      "xgHome": 1.5308435621839924,
+      "xgAway": 1.213290907452751,
+      "homeWin": 0.43674618566087325,
+      "draw": 0.2711957024375529,
+      "awayWin": 0.29205811190157355,
+      "homeWinPct": 44,
+      "drawPct": 27,
+      "awayWinPct": 29,
+      "enginePick": "home",
+      "lockedAt": "2026-08-07T15:53:12.543Z",
+      "finalScore": null,
+      "outcome": null,
+      "verdict": null,
+      "gradedAt": null
     }
   ]
 }
