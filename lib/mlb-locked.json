@@ -24806,8 +24806,12 @@
       },
       "engineWinHomePct": 80,
       "lockedAt": "2026-08-05T22:15:38.732Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 7,
+        "away": 3
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-08-07T04:58:16.857Z"
     },
     {
       "gamePk": 824729,
@@ -24835,8 +24839,12 @@
       },
       "engineWinHomePct": 71,
       "lockedAt": "2026-08-04T16:56:44.427Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 12,
+        "away": 11
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-08-07T04:58:16.857Z"
     },
     {
       "gamePk": 824885,
@@ -24864,8 +24872,12 @@
       },
       "engineWinHomePct": 61,
       "lockedAt": "2026-08-05T02:55:56.931Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 11,
+        "away": 3
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-08-07T04:58:16.857Z"
     },
     {
       "gamePk": 824080,
@@ -24893,8 +24905,12 @@
       },
       "engineWinHomePct": 62,
       "lockedAt": "2026-08-04T16:56:44.427Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 3,
+        "away": 4
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-08-07T04:58:16.857Z"
     },
     {
       "gamePk": 825053,
@@ -24922,8 +24938,12 @@
       },
       "engineWinHomePct": 51,
       "lockedAt": "2026-08-04T16:56:44.427Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 1,
+        "away": 5
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-08-07T04:58:16.857Z"
     },
     {
       "gamePk": 823349,
@@ -25100,6 +25120,35 @@
       "verdict": null
     },
     {
+      "gamePk": 823750,
+      "gameDate": "2026-08-07T23:40:00Z",
+      "scheduleDate": "2026-08-07",
+      "homeId": 158,
+      "homeEn": "Milwaukee Brewers",
+      "homeRecord": "72-43",
+      "awayId": 142,
+      "awayEn": "Minnesota Twins",
+      "awayRecord": "57-59",
+      "homePitcher": "Shane Drohan",
+      "awayPitcher": "Zebby Matthews",
+      "homeStats": {
+        "era": "3.48",
+        "k9": "9.10",
+        "bb9": "2.45",
+        "hr9": "0.72"
+      },
+      "awayStats": {
+        "era": "5.22",
+        "k9": "7.67",
+        "bb9": "2.89",
+        "hr9": "1.78"
+      },
+      "engineWinHomePct": 70,
+      "lockedAt": "2026-08-07T04:58:16.253Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
       "gamePk": 823024,
       "gameDate": "2026-08-08T00:15:00Z",
       "scheduleDate": "2026-08-07",
@@ -25183,6 +25232,35 @@
       },
       "engineWinHomePct": 79,
       "lockedAt": "2026-08-05T16:45:05.186Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 825051,
+      "gameDate": "2026-08-08T01:40:00Z",
+      "scheduleDate": "2026-08-07",
+      "homeId": 109,
+      "homeEn": "Arizona Diamondbacks",
+      "homeRecord": "61-55",
+      "awayId": 119,
+      "awayEn": "Los Angeles Dodgers",
+      "awayRecord": "69-46",
+      "homePitcher": "Merrill Kelly",
+      "awayPitcher": "Roki Sasaki",
+      "homeStats": {
+        "era": "5.04",
+        "k9": "5.98",
+        "bb9": "3.62",
+        "hr9": "1.81"
+      },
+      "awayStats": {
+        "era": "4.64",
+        "k9": "9.18",
+        "bb9": "3.55",
+        "hr9": "1.82"
+      },
+      "engineWinHomePct": 46,
+      "lockedAt": "2026-08-07T04:58:16.253Z",
       "finalScore": null,
       "verdict": null
     },
@@ -25502,6 +25580,64 @@
       },
       "engineWinHomePct": 45,
       "lockedAt": "2026-08-07T00:06:51.950Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 823267,
+      "gameDate": "2026-08-08T23:15:00Z",
+      "scheduleDate": "2026-08-08",
+      "homeId": 135,
+      "homeEn": "San Diego Padres",
+      "homeRecord": "60-56",
+      "awayId": 117,
+      "awayEn": "Houston Astros",
+      "awayRecord": "59-57",
+      "homePitcher": "Michael King",
+      "awayPitcher": "Peter Lambert",
+      "homeStats": {
+        "era": "3.45",
+        "k9": "7.87",
+        "bb9": "3.73",
+        "hr9": "0.97"
+      },
+      "awayStats": {
+        "era": "3.06",
+        "k9": "8.94",
+        "bb9": "3.40",
+        "hr9": "0.91"
+      },
+      "engineWinHomePct": 50,
+      "lockedAt": "2026-08-07T04:58:16.253Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 825049,
+      "gameDate": "2026-08-09T00:10:00Z",
+      "scheduleDate": "2026-08-08",
+      "homeId": 109,
+      "homeEn": "Arizona Diamondbacks",
+      "homeRecord": "61-55",
+      "awayId": 119,
+      "awayEn": "Los Angeles Dodgers",
+      "awayRecord": "69-46",
+      "homePitcher": "Brandon Pfaadt",
+      "awayPitcher": "Yoshinobu Yamamoto",
+      "homeStats": {
+        "era": "3.66",
+        "k9": "5.95",
+        "bb9": "2.52",
+        "hr9": "0.92"
+      },
+      "awayStats": {
+        "era": "2.76",
+        "k9": "8.15",
+        "bb9": "1.95",
+        "hr9": "1.01"
+      },
+      "engineWinHomePct": 47,
+      "lockedAt": "2026-08-07T04:58:16.253Z",
       "finalScore": null,
       "verdict": null
     },
