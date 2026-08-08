@@ -25058,8 +25058,12 @@
       },
       "engineWinHomePct": 69,
       "lockedAt": "2026-08-07T00:06:51.950Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 13,
+        "away": 1
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-08-08T01:59:52.534Z"
     },
     {
       "gamePk": 823836,
@@ -25493,6 +25497,35 @@
       },
       "engineWinHomePct": 45,
       "lockedAt": "2026-08-07T00:06:51.950Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 824079,
+      "gameDate": "2026-08-08T23:10:00Z",
+      "scheduleDate": "2026-08-08",
+      "homeId": 118,
+      "homeEn": "Kansas City Royals",
+      "homeRecord": "48-68",
+      "awayId": 112,
+      "awayEn": "Chicago Cubs",
+      "awayRecord": "67-49",
+      "homePitcher": "Seth Lugo",
+      "awayPitcher": "Clay Holmes",
+      "homeStats": {
+        "era": "4.41",
+        "k9": "6.92",
+        "bb9": "3.15",
+        "hr9": "1.05"
+      },
+      "awayStats": {
+        "era": "2.39",
+        "k9": "7.69",
+        "bb9": "3.08",
+        "hr9": "0.51"
+      },
+      "engineWinHomePct": 41,
+      "lockedAt": "2026-08-08T01:59:51.897Z",
       "finalScore": null,
       "verdict": null
     },
