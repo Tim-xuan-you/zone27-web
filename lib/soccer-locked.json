@@ -4321,6 +4321,34 @@
       "outcome": null,
       "verdict": null,
       "gradedAt": null
+    },
+    {
+      "matchId": "fd-554955",
+      "competitionCode": "BSA",
+      "competitionName": "巴西甲",
+      "kickoffISO": "2026-08-09T22:30:00Z",
+      "status": "TIMED",
+      "homeSeed": "Flamengo",
+      "awaySeed": "Vitória",
+      "home": "Flamengo",
+      "away": "Vitória",
+      "ratingHome": 0,
+      "ratingAway": 0,
+      "homeAdvantage": 0,
+      "xgHome": 2.2257081138282047,
+      "xgAway": 0.7865134194040767,
+      "homeWin": 0.6941807191819256,
+      "draw": 0.19502150566544293,
+      "awayWin": 0.1107977751526316,
+      "homeWinPct": 69,
+      "drawPct": 20,
+      "awayWinPct": 11,
+      "enginePick": "home",
+      "lockedAt": "2026-08-08T01:19:38.817Z",
+      "finalScore": null,
+      "outcome": null,
+      "verdict": null,
+      "gradedAt": null
     }
   ]
 }
