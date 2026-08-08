@@ -25806,6 +25806,35 @@
       "verdict": null
     },
     {
+      "gamePk": 823425,
+      "gameDate": "2026-08-09T17:35:00Z",
+      "scheduleDate": "2026-08-09",
+      "homeId": 143,
+      "homeEn": "Philadelphia Phillies",
+      "homeRecord": "62-55",
+      "awayId": 141,
+      "awayEn": "Toronto Blue Jays",
+      "awayRecord": "55-62",
+      "homePitcher": "Jesús Luzardo",
+      "awayPitcher": "Shane Bieber",
+      "homeStats": {
+        "era": "3.36",
+        "k9": "10.80",
+        "bb9": "2.83",
+        "hr9": "0.79"
+      },
+      "awayStats": {
+        "era": "5.11",
+        "k9": "6.81",
+        "bb9": "4.86",
+        "hr9": "1.70"
+      },
+      "engineWinHomePct": 74,
+      "lockedAt": "2026-08-08T21:35:34.364Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
       "gamePk": 823835,
       "gameDate": "2026-08-09T17:40:00Z",
       "scheduleDate": "2026-08-09",
