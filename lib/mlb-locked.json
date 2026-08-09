@@ -25606,35 +25606,6 @@
       "gradedAt": "2026-08-09T02:07:13.840Z"
     },
     {
-      "gamePk": 823021,
-      "gameDate": "2026-08-08T23:15:00Z",
-      "scheduleDate": "2026-08-08",
-      "homeId": 138,
-      "homeEn": "St. Louis Cardinals",
-      "homeRecord": "57-58",
-      "awayId": 115,
-      "awayEn": "Colorado Rockies",
-      "awayRecord": "45-70",
-      "homePitcher": "Matthew Liberatore",
-      "awayPitcher": "Kyle Freeland",
-      "homeStats": {
-        "era": "4.97",
-        "k9": "8.86",
-        "bb9": "3.40",
-        "hr9": "1.57"
-      },
-      "awayStats": {
-        "era": "6.81",
-        "k9": "7.73",
-        "bb9": "1.91",
-        "hr9": "1.74"
-      },
-      "engineWinHomePct": 65,
-      "lockedAt": "2026-08-07T00:06:51.950Z",
-      "finalScore": null,
-      "verdict": null
-    },
-    {
       "gamePk": 822864,
       "gameDate": "2026-08-08T23:15:00Z",
       "scheduleDate": "2026-08-08",
@@ -25666,35 +25637,6 @@
       },
       "verdict": "proved",
       "gradedAt": "2026-08-09T02:07:13.840Z"
-    },
-    {
-      "gamePk": 824565,
-      "gameDate": "2026-08-08T23:15:00Z",
-      "scheduleDate": "2026-08-08",
-      "homeId": 145,
-      "homeEn": "Chicago White Sox",
-      "homeRecord": "59-54",
-      "awayId": 114,
-      "awayEn": "Cleveland Guardians",
-      "awayRecord": "57-59",
-      "homePitcher": "Anthony Kay",
-      "awayPitcher": "Gavin Williams",
-      "homeStats": {
-        "era": "4.01",
-        "k9": "7.36",
-        "bb9": "3.44",
-        "hr9": "1.15"
-      },
-      "awayStats": {
-        "era": "3.56",
-        "k9": "11.53",
-        "bb9": "2.53",
-        "hr9": "1.36"
-      },
-      "engineWinHomePct": 45,
-      "lockedAt": "2026-08-07T00:06:51.950Z",
-      "finalScore": null,
-      "verdict": null
     },
     {
       "gamePk": 823267,
@@ -25730,6 +25672,72 @@
       "gradedAt": "2026-08-09T02:07:13.840Z"
     },
     {
+      "gamePk": 823021,
+      "gameDate": "2026-08-08T23:15:00Z",
+      "scheduleDate": "2026-08-08",
+      "homeId": 138,
+      "homeEn": "St. Louis Cardinals",
+      "homeRecord": "57-58",
+      "awayId": 115,
+      "awayEn": "Colorado Rockies",
+      "awayRecord": "45-70",
+      "homePitcher": "Matthew Liberatore",
+      "awayPitcher": "Kyle Freeland",
+      "homeStats": {
+        "era": "4.97",
+        "k9": "8.86",
+        "bb9": "3.40",
+        "hr9": "1.57"
+      },
+      "awayStats": {
+        "era": "6.81",
+        "k9": "7.73",
+        "bb9": "1.91",
+        "hr9": "1.74"
+      },
+      "engineWinHomePct": 65,
+      "lockedAt": "2026-08-07T00:06:51.950Z",
+      "finalScore": {
+        "home": 6,
+        "away": 8
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-08-09T04:21:32.450Z"
+    },
+    {
+      "gamePk": 824565,
+      "gameDate": "2026-08-08T23:15:00Z",
+      "scheduleDate": "2026-08-08",
+      "homeId": 145,
+      "homeEn": "Chicago White Sox",
+      "homeRecord": "59-54",
+      "awayId": 114,
+      "awayEn": "Cleveland Guardians",
+      "awayRecord": "57-59",
+      "homePitcher": "Anthony Kay",
+      "awayPitcher": "Gavin Williams",
+      "homeStats": {
+        "era": "4.01",
+        "k9": "7.36",
+        "bb9": "3.44",
+        "hr9": "1.15"
+      },
+      "awayStats": {
+        "era": "3.56",
+        "k9": "11.53",
+        "bb9": "2.53",
+        "hr9": "1.36"
+      },
+      "engineWinHomePct": 45,
+      "lockedAt": "2026-08-07T00:06:51.950Z",
+      "finalScore": {
+        "home": 6,
+        "away": 3
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-08-09T04:21:32.450Z"
+    },
+    {
       "gamePk": 825049,
       "gameDate": "2026-08-09T00:10:00Z",
       "scheduleDate": "2026-08-08",
@@ -25755,8 +25763,12 @@
       },
       "engineWinHomePct": 47,
       "lockedAt": "2026-08-07T04:58:16.253Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 1,
+        "away": 2
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-08-09T04:21:32.450Z"
     },
     {
       "gamePk": 823102,
