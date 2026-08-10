@@ -4310,10 +4310,13 @@
       "awayWinPct": 26,
       "enginePick": "home",
       "lockedAt": "2026-08-07T21:35:44.020Z",
-      "finalScore": null,
-      "outcome": null,
-      "verdict": null,
-      "gradedAt": null
+      "finalScore": {
+        "home": 0,
+        "away": 2
+      },
+      "outcome": "away",
+      "verdict": "diverged",
+      "gradedAt": "2026-08-10T01:26:56.766Z"
     },
     {
       "matchId": "fd-554959",
@@ -4338,10 +4341,13 @@
       "awayWinPct": 43,
       "enginePick": "away",
       "lockedAt": "2026-08-07T21:35:44.020Z",
-      "finalScore": null,
-      "outcome": null,
-      "verdict": null,
-      "gradedAt": null
+      "finalScore": {
+        "home": 0,
+        "away": 2
+      },
+      "outcome": "away",
+      "verdict": "proved",
+      "gradedAt": "2026-08-10T01:26:56.766Z"
     },
     {
       "matchId": "fd-554955",
@@ -4366,10 +4372,13 @@
       "awayWinPct": 11,
       "enginePick": "home",
       "lockedAt": "2026-08-08T01:19:38.817Z",
-      "finalScore": null,
-      "outcome": null,
-      "verdict": null,
-      "gradedAt": null
+      "finalScore": {
+        "home": 2,
+        "away": 0
+      },
+      "outcome": "home",
+      "verdict": "proved",
+      "gradedAt": "2026-08-10T01:26:56.766Z"
     }
   ]
 }
