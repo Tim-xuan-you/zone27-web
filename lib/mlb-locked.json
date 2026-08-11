@@ -26423,37 +26423,12 @@
       },
       "engineWinHomePct": 57,
       "lockedAt": "2026-08-09T18:49:24.967Z",
-      "finalScore": null,
-      "verdict": null
-    },
-    {
-      "gamePk": 824969,
-      "gameDate": "2026-08-11T01:40:00Z",
-      "scheduleDate": "2026-08-10",
-      "homeId": 133,
-      "homeEn": "Athletics",
-      "homeRecord": "47-71",
-      "awayId": 139,
-      "awayEn": "Tampa Bay Rays",
-      "awayRecord": "70-46",
-      "homePitcher": "Jacob Lopez",
-      "awayPitcher": "Freddy Peralta",
-      "homeStats": {
-        "era": "5.64",
-        "k9": "8.40",
-        "bb9": "5.16",
-        "hr9": "1.56"
+      "finalScore": {
+        "home": 1,
+        "away": 4
       },
-      "awayStats": {
-        "era": "5.37",
-        "k9": "8.90",
-        "bb9": "3.76",
-        "hr9": "1.46"
-      },
-      "engineWinHomePct": 51,
-      "lockedAt": "2026-08-09T21:37:51.829Z",
-      "finalScore": null,
-      "verdict": null
+      "verdict": "diverged",
+      "gradedAt": "2026-08-11T07:16:23.907Z"
     },
     {
       "gamePk": 825048,
@@ -26522,6 +26497,39 @@
       "gradedAt": "2026-08-11T04:23:51.164Z"
     },
     {
+      "gamePk": 824969,
+      "gameDate": "2026-08-11T01:40:00Z",
+      "scheduleDate": "2026-08-10",
+      "homeId": 133,
+      "homeEn": "Athletics",
+      "homeRecord": "47-71",
+      "awayId": 139,
+      "awayEn": "Tampa Bay Rays",
+      "awayRecord": "70-46",
+      "homePitcher": "Jacob Lopez",
+      "awayPitcher": "Freddy Peralta",
+      "homeStats": {
+        "era": "5.64",
+        "k9": "8.40",
+        "bb9": "5.16",
+        "hr9": "1.56"
+      },
+      "awayStats": {
+        "era": "5.37",
+        "k9": "8.90",
+        "bb9": "3.76",
+        "hr9": "1.46"
+      },
+      "engineWinHomePct": 51,
+      "lockedAt": "2026-08-09T21:37:51.829Z",
+      "finalScore": {
+        "home": 6,
+        "away": 10
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-08-11T07:16:23.907Z"
+    },
+    {
       "gamePk": 823189,
       "gameDate": "2026-08-11T01:45:00Z",
       "scheduleDate": "2026-08-10",
@@ -26547,8 +26555,12 @@
       },
       "engineWinHomePct": 55,
       "lockedAt": "2026-08-09T21:37:51.829Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 3,
+        "away": 6
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-08-11T07:16:23.907Z"
     },
     {
       "gamePk": 823918,
@@ -26576,8 +26588,12 @@
       },
       "engineWinHomePct": 65,
       "lockedAt": "2026-08-09T18:49:24.967Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 6,
+        "away": 5
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-08-11T07:16:23.907Z"
     },
     {
       "gamePk": 824240,
@@ -26895,6 +26911,35 @@
       },
       "engineWinHomePct": 37,
       "lockedAt": "2026-08-10T02:11:52.114Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 824970,
+      "gameDate": "2026-08-12T01:40:00Z",
+      "scheduleDate": "2026-08-11",
+      "homeId": 133,
+      "homeEn": "Athletics",
+      "homeRecord": "47-72",
+      "awayId": 139,
+      "awayEn": "Tampa Bay Rays",
+      "awayRecord": "72-46",
+      "homePitcher": "Mason Barnett",
+      "awayPitcher": "Nick Martinez",
+      "homeStats": {
+        "era": "5.56",
+        "k9": "9.53",
+        "bb9": "4.50",
+        "hr9": "2.12"
+      },
+      "awayStats": {
+        "era": "2.65",
+        "k9": "5.09",
+        "bb9": "1.40",
+        "hr9": "1.05"
+      },
+      "engineWinHomePct": 45,
+      "lockedAt": "2026-08-11T07:16:23.189Z",
       "finalScore": null,
       "verdict": null
     },
