@@ -27348,6 +27348,35 @@
       "lockedAt": "2026-08-11T16:03:27.118Z",
       "finalScore": null,
       "verdict": null
+    },
+    {
+      "gamePk": 822696,
+      "gameDate": "2026-08-13T20:05:00Z",
+      "scheduleDate": "2026-08-13",
+      "homeId": 120,
+      "homeEn": "Washington Nationals",
+      "homeRecord": "59-61",
+      "awayId": 112,
+      "awayEn": "Chicago Cubs",
+      "awayRecord": "69-50",
+      "homePitcher": "Cade Cavalli",
+      "awayPitcher": "Kevin Gausman",
+      "homeStats": {
+        "era": "3.57",
+        "k9": "9.86",
+        "bb9": "2.73",
+        "hr9": "1.05"
+      },
+      "awayStats": {
+        "era": "4.29",
+        "k9": "8.78",
+        "bb9": "2.48",
+        "hr9": "1.07"
+      },
+      "engineWinHomePct": 59,
+      "lockedAt": "2026-08-11T21:54:17.332Z",
+      "finalScore": null,
+      "verdict": null
     }
   ]
 }
