@@ -27232,6 +27232,122 @@
       "lockedAt": "2026-08-10T16:03:13.308Z",
       "finalScore": null,
       "verdict": null
+    },
+    {
+      "gamePk": 824238,
+      "gameDate": "2026-08-13T17:10:00Z",
+      "scheduleDate": "2026-08-13",
+      "homeId": 116,
+      "homeEn": "Detroit Tigers",
+      "homeRecord": "58-60",
+      "awayId": 114,
+      "awayEn": "Cleveland Guardians",
+      "awayRecord": "58-61",
+      "homePitcher": "Keider Montero",
+      "awayPitcher": "Parker Messick",
+      "homeStats": {
+        "era": "3.38",
+        "k9": "6.33",
+        "bb9": "2.06",
+        "hr9": "0.96"
+      },
+      "awayStats": {
+        "era": "2.57",
+        "k9": "8.96",
+        "bb9": "2.50",
+        "hr9": "0.86"
+      },
+      "engineWinHomePct": 45,
+      "lockedAt": "2026-08-11T16:03:27.118Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 823829,
+      "gameDate": "2026-08-13T17:10:00Z",
+      "scheduleDate": "2026-08-13",
+      "homeId": 146,
+      "homeEn": "Miami Marlins",
+      "homeRecord": "60-59",
+      "awayId": 134,
+      "awayEn": "Pittsburgh Pirates",
+      "awayRecord": "58-62",
+      "homePitcher": "Tyler Phillips",
+      "awayPitcher": "Braxton Ashcraft",
+      "homeStats": {
+        "era": "3.47",
+        "k9": "6.75",
+        "bb9": "3.76",
+        "hr9": "1.16"
+      },
+      "awayStats": {
+        "era": "4.08",
+        "k9": "9.86",
+        "bb9": "2.18",
+        "hr9": "1.29"
+      },
+      "engineWinHomePct": 51,
+      "lockedAt": "2026-08-11T16:03:27.118Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 823508,
+      "gameDate": "2026-08-13T17:35:00Z",
+      "scheduleDate": "2026-08-13",
+      "homeId": 147,
+      "homeEn": "New York Yankees",
+      "homeRecord": "66-52",
+      "awayId": 136,
+      "awayEn": "Seattle Mariners",
+      "awayRecord": "56-63",
+      "homePitcher": "Max Fried",
+      "awayPitcher": "Logan Gilbert",
+      "homeStats": {
+        "era": "2.88",
+        "k9": "8.30",
+        "bb9": "2.77",
+        "hr9": "0.11"
+      },
+      "awayStats": {
+        "era": "3.42",
+        "k9": "9.37",
+        "bb9": "2.07",
+        "hr9": "1.23"
+      },
+      "engineWinHomePct": 61,
+      "lockedAt": "2026-08-11T16:03:27.118Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 822776,
+      "gameDate": "2026-08-13T19:07:00Z",
+      "scheduleDate": "2026-08-13",
+      "homeId": 141,
+      "homeEn": "Toronto Blue Jays",
+      "homeRecord": "57-63",
+      "awayId": 111,
+      "awayEn": "Boston Red Sox",
+      "awayRecord": "64-54",
+      "homePitcher": "Max Scherzer",
+      "awayPitcher": "Payton Tolle",
+      "homeStats": {
+        "era": "7.25",
+        "k9": "6.75",
+        "bb9": "3.75",
+        "hr9": "2.75"
+      },
+      "awayStats": {
+        "era": "3.20",
+        "k9": "10.43",
+        "bb9": "2.44",
+        "hr9": "1.09"
+      },
+      "engineWinHomePct": 25,
+      "lockedAt": "2026-08-11T16:03:27.118Z",
+      "finalScore": null,
+      "verdict": null
     }
   ]
 }
