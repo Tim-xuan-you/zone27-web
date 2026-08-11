@@ -26291,8 +26291,12 @@
       },
       "engineWinHomePct": 29,
       "lockedAt": "2026-08-09T18:49:24.967Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 2,
+        "away": 1
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-08-11T02:06:24.614Z"
     },
     {
       "gamePk": 824887,
@@ -26784,6 +26788,35 @@
       },
       "engineWinHomePct": 43,
       "lockedAt": "2026-08-09T18:49:24.967Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 823997,
+      "gameDate": "2026-08-12T01:38:00Z",
+      "scheduleDate": "2026-08-11",
+      "homeId": 108,
+      "homeEn": "Los Angeles Angels",
+      "homeRecord": "45-73",
+      "awayId": 140,
+      "awayEn": "Texas Rangers",
+      "awayRecord": "59-59",
+      "homePitcher": "Ryan Johnson",
+      "awayPitcher": "Cody Bradford",
+      "homeStats": {
+        "era": "7.11",
+        "k9": "6.75",
+        "bb9": "4.44",
+        "hr9": "2.31"
+      },
+      "awayStats": {
+        "era": "0.00",
+        "k9": "10.38",
+        "bb9": "4.15",
+        "hr9": "0.00"
+      },
+      "engineWinHomePct": 25,
+      "lockedAt": "2026-08-11T02:06:24.182Z",
       "finalScore": null,
       "verdict": null
     },
