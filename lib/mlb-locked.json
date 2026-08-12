@@ -27574,6 +27574,35 @@
       "lockedAt": "2026-08-11T21:54:17.332Z",
       "finalScore": null,
       "verdict": null
+    },
+    {
+      "gamePk": 823669,
+      "gameDate": "2026-08-13T23:30:00Z",
+      "scheduleDate": "2026-08-13",
+      "homeId": 142,
+      "homeEn": "Minnesota Twins",
+      "homeRecord": "59-62",
+      "awayId": 143,
+      "awayEn": "Philadelphia Phillies",
+      "awayRecord": "64-57",
+      "homePitcher": "Taj Bradley",
+      "awayPitcher": "Aaron Nola",
+      "homeStats": {
+        "era": "3.76",
+        "k9": "10.12",
+        "bb9": "3.76",
+        "hr9": "1.16"
+      },
+      "awayStats": {
+        "era": "5.47",
+        "k9": "9.29",
+        "bb9": "3.10",
+        "hr9": "2.09"
+      },
+      "engineWinHomePct": 68,
+      "lockedAt": "2026-08-12T16:02:20.690Z",
+      "finalScore": null,
+      "verdict": null
     }
   ]
 }
