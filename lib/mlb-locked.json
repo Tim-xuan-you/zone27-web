@@ -26819,8 +26819,12 @@
       },
       "engineWinHomePct": 68,
       "lockedAt": "2026-08-09T18:49:24.967Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 4,
+        "away": 5
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-08-12T04:51:47.526Z"
     },
     {
       "gamePk": 823019,
@@ -26881,8 +26885,12 @@
       },
       "engineWinHomePct": 25,
       "lockedAt": "2026-08-11T02:06:24.182Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 3,
+        "away": 2
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-08-12T04:51:47.527Z"
     },
     {
       "gamePk": 825046,
@@ -26910,8 +26918,12 @@
       },
       "engineWinHomePct": 63,
       "lockedAt": "2026-08-09T21:37:51.829Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 2,
+        "away": 3
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-08-12T04:51:47.527Z"
     },
     {
       "gamePk": 823264,
@@ -26939,8 +26951,12 @@
       },
       "engineWinHomePct": 37,
       "lockedAt": "2026-08-10T02:11:52.114Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 11,
+        "away": 2
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-08-12T04:51:47.527Z"
     },
     {
       "gamePk": 824970,
@@ -26968,8 +26984,12 @@
       },
       "engineWinHomePct": 45,
       "lockedAt": "2026-08-11T07:16:23.189Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 4,
+        "away": 12
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-08-12T04:51:47.527Z"
     },
     {
       "gamePk": 823917,
@@ -27059,6 +27079,35 @@
       "verdict": null
     },
     {
+      "gamePk": 824967,
+      "gameDate": "2026-08-12T19:05:00Z",
+      "scheduleDate": "2026-08-12",
+      "homeId": 133,
+      "homeEn": "Athletics",
+      "homeRecord": "47-73",
+      "awayId": 139,
+      "awayEn": "Tampa Bay Rays",
+      "awayRecord": "73-46",
+      "homePitcher": "Jack Perkins",
+      "awayPitcher": "Drew Rasmussen",
+      "homeStats": {
+        "era": "7.04",
+        "k9": "10.80",
+        "bb9": "3.64",
+        "hr9": "1.76"
+      },
+      "awayStats": {
+        "era": "2.75",
+        "k9": "9.41",
+        "bb9": "1.59",
+        "hr9": "0.87"
+      },
+      "engineWinHomePct": 34,
+      "lockedAt": "2026-08-12T04:51:47.054Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
       "gamePk": 825047,
       "gameDate": "2026-08-12T19:40:00Z",
       "scheduleDate": "2026-08-12",
@@ -27142,6 +27191,35 @@
       },
       "engineWinHomePct": 52,
       "lockedAt": "2026-08-10T16:03:13.308Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 823833,
+      "gameDate": "2026-08-12T22:40:00Z",
+      "scheduleDate": "2026-08-12",
+      "homeId": 146,
+      "homeEn": "Miami Marlins",
+      "homeRecord": "61-59",
+      "awayId": 134,
+      "awayEn": "Pittsburgh Pirates",
+      "awayRecord": "58-63",
+      "homePitcher": "Janson Junk",
+      "awayPitcher": "Carmen Mlodzinski",
+      "homeStats": {
+        "era": "4.63",
+        "k9": "6.83",
+        "bb9": "2.53",
+        "hr9": "1.32"
+      },
+      "awayStats": {
+        "era": "3.51",
+        "k9": "7.12",
+        "bb9": "2.96",
+        "hr9": "0.74"
+      },
+      "engineWinHomePct": 45,
+      "lockedAt": "2026-08-12T04:51:47.054Z",
       "finalScore": null,
       "verdict": null
     },
