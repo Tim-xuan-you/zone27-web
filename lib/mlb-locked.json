@@ -27603,6 +27603,64 @@
       "lockedAt": "2026-08-12T16:02:20.690Z",
       "finalScore": null,
       "verdict": null
+    },
+    {
+      "gamePk": 824399,
+      "gameDate": "2026-08-14T23:10:00Z",
+      "scheduleDate": "2026-08-14",
+      "homeId": 114,
+      "homeEn": "Cleveland Guardians",
+      "homeRecord": "58-62",
+      "awayId": 135,
+      "awayEn": "San Diego Padres",
+      "awayRecord": "64-57",
+      "homePitcher": "Gavin Williams",
+      "awayPitcher": "Michael King",
+      "homeStats": {
+        "era": "3.55",
+        "k9": "11.51",
+        "bb9": "2.55",
+        "hr9": "1.37"
+      },
+      "awayStats": {
+        "era": "3.37",
+        "k9": "7.92",
+        "bb9": "3.63",
+        "hr9": "0.99"
+      },
+      "engineWinHomePct": 58,
+      "lockedAt": "2026-08-12T19:08:23.228Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 823185,
+      "gameDate": "2026-08-15T02:15:00Z",
+      "scheduleDate": "2026-08-14",
+      "homeId": 137,
+      "homeEn": "San Francisco Giants",
+      "homeRecord": "50-70",
+      "awayId": 115,
+      "awayEn": "Colorado Rockies",
+      "awayRecord": "47-73",
+      "homePitcher": "Landen Roupp",
+      "awayPitcher": "Kyle Freeland",
+      "homeStats": {
+        "era": "4.22",
+        "k9": "8.95",
+        "bb9": "4.15",
+        "hr9": "0.65"
+      },
+      "awayStats": {
+        "era": "6.63",
+        "k9": "7.67",
+        "bb9": "2.08",
+        "hr9": "1.68"
+      },
+      "engineWinHomePct": 72,
+      "lockedAt": "2026-08-12T19:08:23.228Z",
+      "finalScore": null,
+      "verdict": null
     }
   ]
 }
