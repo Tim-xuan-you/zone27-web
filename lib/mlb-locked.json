@@ -27446,8 +27446,12 @@
       },
       "engineWinHomePct": 47,
       "lockedAt": "2026-08-12T02:24:09.000Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 5,
+        "away": 2
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-08-13T07:41:57.925Z"
     },
     {
       "gamePk": 824238,
