@@ -27479,8 +27479,12 @@
       },
       "engineWinHomePct": 45,
       "lockedAt": "2026-08-11T16:03:27.118Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 3,
+        "away": 0
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-08-13T21:52:00.819Z"
     },
     {
       "gamePk": 823829,
@@ -27508,8 +27512,12 @@
       },
       "engineWinHomePct": 51,
       "lockedAt": "2026-08-11T16:03:27.118Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 1,
+        "away": 13
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-08-13T21:52:00.819Z"
     },
     {
       "gamePk": 823508,
@@ -27537,8 +27545,12 @@
       },
       "engineWinHomePct": 61,
       "lockedAt": "2026-08-11T16:03:27.118Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 0,
+        "away": 1
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-08-13T21:52:00.819Z"
     },
     {
       "gamePk": 824561,
@@ -27566,8 +27578,12 @@
       },
       "engineWinHomePct": 58,
       "lockedAt": "2026-08-12T02:24:09.000Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 8,
+        "away": 9
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-08-13T21:52:00.819Z"
     },
     {
       "gamePk": 822776,
@@ -27595,8 +27611,12 @@
       },
       "engineWinHomePct": 25,
       "lockedAt": "2026-08-11T16:03:27.118Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 0,
+        "away": 7
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-08-13T21:52:00.819Z"
     },
     {
       "gamePk": 822696,
@@ -27715,6 +27735,35 @@
       "verdict": null
     },
     {
+      "gamePk": 824643,
+      "gameDate": "2026-08-14T18:20:00Z",
+      "scheduleDate": "2026-08-14",
+      "homeId": 112,
+      "homeEn": "Chicago Cubs",
+      "homeRecord": "71-50",
+      "awayId": 138,
+      "awayEn": "St. Louis Cardinals",
+      "awayRecord": "61-60",
+      "homePitcher": "Clay Holmes",
+      "awayPitcher": "Matthew Liberatore",
+      "homeStats": {
+        "era": "2.86",
+        "k9": "7.31",
+        "bb9": "3.18",
+        "hr9": "0.64"
+      },
+      "awayStats": {
+        "era": "5.15",
+        "k9": "8.71",
+        "bb9": "3.40",
+        "hr9": "1.58"
+      },
+      "engineWinHomePct": 66,
+      "lockedAt": "2026-08-13T21:52:00.197Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
       "gamePk": 824479,
       "gameDate": "2026-08-14T22:10:00Z",
       "scheduleDate": "2026-08-14",
@@ -27798,6 +27847,35 @@
       },
       "engineWinHomePct": 58,
       "lockedAt": "2026-08-12T19:08:23.228Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 823591,
+      "gameDate": "2026-08-14T23:10:00Z",
+      "scheduleDate": "2026-08-14",
+      "homeId": 121,
+      "homeEn": "New York Mets",
+      "homeRecord": "53-69",
+      "awayId": 120,
+      "awayEn": "Washington Nationals",
+      "awayRecord": "59-63",
+      "homePitcher": "Robert Stock",
+      "awayPitcher": "Andrew Alvarez",
+      "homeStats": {
+        "era": "10.13",
+        "k9": "9.00",
+        "bb9": "5.63",
+        "hr9": "1.13"
+      },
+      "awayStats": {
+        "era": "3.76",
+        "k9": "8.44",
+        "bb9": "4.15",
+        "hr9": "0.26"
+      },
+      "engineWinHomePct": 25,
+      "lockedAt": "2026-08-13T21:52:00.197Z",
       "finalScore": null,
       "verdict": null
     },
@@ -27914,6 +27992,35 @@
       },
       "engineWinHomePct": 72,
       "lockedAt": "2026-08-12T19:08:23.228Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 824644,
+      "gameDate": "2026-08-15T18:20:00Z",
+      "scheduleDate": "2026-08-15",
+      "homeId": 112,
+      "homeEn": "Chicago Cubs",
+      "homeRecord": "71-50",
+      "awayId": 138,
+      "awayEn": "St. Louis Cardinals",
+      "awayRecord": "61-60",
+      "homePitcher": "Matthew Boyd",
+      "awayPitcher": "Michael McGreevy",
+      "homeStats": {
+        "era": "3.50",
+        "k9": "7.46",
+        "bb9": "2.60",
+        "hr9": "1.02"
+      },
+      "awayStats": {
+        "era": "3.64",
+        "k9": "6.07",
+        "bb9": "2.29",
+        "hr9": "1.21"
+      },
+      "engineWinHomePct": 58,
+      "lockedAt": "2026-08-13T21:52:00.197Z",
       "finalScore": null,
       "verdict": null
     },
