@@ -4463,6 +4463,34 @@
       "outcome": null,
       "verdict": null,
       "gradedAt": null
+    },
+    {
+      "matchId": "fd-554962",
+      "competitionCode": "BSA",
+      "competitionName": "巴西甲",
+      "kickoffISO": "2026-08-16T14:00:00Z",
+      "status": "TIMED",
+      "homeSeed": "Chapecoense",
+      "awaySeed": "Bahia",
+      "home": "Chapecoense",
+      "away": "Bahia",
+      "ratingHome": 0,
+      "ratingAway": 0,
+      "homeAdvantage": 0,
+      "xgHome": 1.0581631452804545,
+      "xgAway": 1.8428775273233613,
+      "homeWin": 0.2068922055639881,
+      "draw": 0.24440717514155233,
+      "awayWin": 0.5487006192944598,
+      "homeWinPct": 21,
+      "drawPct": 24,
+      "awayWinPct": 55,
+      "enginePick": "away",
+      "lockedAt": "2026-08-14T15:47:53.169Z",
+      "finalScore": null,
+      "outcome": null,
+      "verdict": null,
+      "gradedAt": null
     }
   ]
 }
