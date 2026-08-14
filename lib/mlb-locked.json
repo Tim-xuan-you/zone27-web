@@ -27644,8 +27644,12 @@
       },
       "engineWinHomePct": 59,
       "lockedAt": "2026-08-11T21:54:17.332Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 7,
+        "away": 0
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-08-14T02:24:03.712Z"
     },
     {
       "gamePk": 823669,
@@ -27822,6 +27826,35 @@
       "verdict": null
     },
     {
+      "gamePk": 824237,
+      "gameDate": "2026-08-14T22:40:00Z",
+      "scheduleDate": "2026-08-14",
+      "homeId": 116,
+      "homeEn": "Detroit Tigers",
+      "homeRecord": "60-61",
+      "awayId": 145,
+      "awayEn": "Chicago White Sox",
+      "awayRecord": "62-58",
+      "homePitcher": "Jackson Jobe",
+      "awayPitcher": "Sean Newcomb",
+      "homeStats": {
+        "era": "0.00",
+        "k9": "7.20",
+        "bb9": "1.80",
+        "hr9": "0.00"
+      },
+      "awayStats": {
+        "era": "2.66",
+        "k9": "8.39",
+        "bb9": "3.22",
+        "hr9": "0.28"
+      },
+      "engineWinHomePct": 64,
+      "lockedAt": "2026-08-14T02:24:03.127Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
       "gamePk": 824399,
       "gameDate": "2026-08-14T23:10:00Z",
       "scheduleDate": "2026-08-14",
@@ -27934,6 +27967,35 @@
       },
       "engineWinHomePct": 60,
       "lockedAt": "2026-08-13T19:08:44.544Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 823993,
+      "gameDate": "2026-08-15T01:38:00Z",
+      "scheduleDate": "2026-08-14",
+      "homeId": 108,
+      "homeEn": "Los Angeles Angels",
+      "homeRecord": "47-74",
+      "awayId": 118,
+      "awayEn": "Kansas City Royals",
+      "awayRecord": "49-73",
+      "homePitcher": "Grayson Rodriguez",
+      "awayPitcher": "Seth Lugo",
+      "homeStats": {
+        "era": "7.20",
+        "k9": "8.18",
+        "bb9": "4.25",
+        "hr9": "1.47"
+      },
+      "awayStats": {
+        "era": "4.41",
+        "k9": "6.95",
+        "bb9": "3.07",
+        "hr9": "1.07"
+      },
+      "engineWinHomePct": 43,
+      "lockedAt": "2026-08-14T02:24:03.127Z",
       "finalScore": null,
       "verdict": null
     },
@@ -28195,6 +28257,35 @@
       },
       "engineWinHomePct": 46,
       "lockedAt": "2026-08-13T19:08:44.544Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 823990,
+      "gameDate": "2026-08-16T01:38:00Z",
+      "scheduleDate": "2026-08-15",
+      "homeId": 108,
+      "homeEn": "Los Angeles Angels",
+      "homeRecord": "47-74",
+      "awayId": 118,
+      "awayEn": "Kansas City Royals",
+      "awayRecord": "49-73",
+      "homePitcher": "Reid Detmers",
+      "awayPitcher": "Randy Dobnak",
+      "homeStats": {
+        "era": "4.00",
+        "k9": "10.40",
+        "bb9": "2.87",
+        "hr9": "1.13"
+      },
+      "awayStats": {
+        "era": "2.00",
+        "k9": "4.75",
+        "bb9": "3.50",
+        "hr9": "0.50"
+      },
+      "engineWinHomePct": 54,
+      "lockedAt": "2026-08-14T02:24:03.127Z",
       "finalScore": null,
       "verdict": null
     }
