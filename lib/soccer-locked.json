@@ -4435,6 +4435,34 @@
       "outcome": null,
       "verdict": null,
       "gradedAt": null
+    },
+    {
+      "matchId": "fd-554967",
+      "competitionCode": "BSA",
+      "competitionName": "巴西甲",
+      "kickoffISO": "2026-08-16T00:00:00Z",
+      "status": "TIMED",
+      "homeSeed": "São Paulo",
+      "awaySeed": "Coritiba",
+      "home": "São Paulo",
+      "away": "Coritiba",
+      "ratingHome": 0,
+      "ratingAway": 0,
+      "homeAdvantage": 0,
+      "xgHome": 1.4636192690910084,
+      "xgAway": 1.1056478090809854,
+      "homeWin": 0.443579888858319,
+      "draw": 0.2805069200200788,
+      "awayWin": 0.2759131911216014,
+      "homeWinPct": 44,
+      "drawPct": 28,
+      "awayWinPct": 28,
+      "enginePick": "home",
+      "lockedAt": "2026-08-14T01:42:06.214Z",
+      "finalScore": null,
+      "outcome": null,
+      "verdict": null,
+      "gradedAt": null
     }
   ]
 }
