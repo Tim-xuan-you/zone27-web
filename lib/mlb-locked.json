@@ -27817,35 +27817,6 @@
       "gradedAt": "2026-08-15T01:35:22.991Z"
     },
     {
-      "gamePk": 823346,
-      "gameDate": "2026-08-14T22:40:00Z",
-      "scheduleDate": "2026-08-14",
-      "homeId": 134,
-      "homeEn": "Pittsburgh Pirates",
-      "homeRecord": "58-64",
-      "awayId": 111,
-      "awayEn": "Boston Red Sox",
-      "awayRecord": "64-56",
-      "homePitcher": "Bubba Chandler",
-      "awayPitcher": "Jake Bennett",
-      "homeStats": {
-        "era": "4.26",
-        "k9": "7.97",
-        "bb9": "4.80",
-        "hr9": "0.77"
-      },
-      "awayStats": {
-        "era": "3.17",
-        "k9": "6.46",
-        "bb9": "1.88",
-        "hr9": "0.59"
-      },
-      "engineWinHomePct": 52,
-      "lockedAt": "2026-08-13T19:08:44.544Z",
-      "finalScore": null,
-      "verdict": null
-    },
-    {
       "gamePk": 824237,
       "gameDate": "2026-08-14T22:40:00Z",
       "scheduleDate": "2026-08-14",
@@ -27879,6 +27850,39 @@
       "gradedAt": "2026-08-15T01:35:22.991Z"
     },
     {
+      "gamePk": 823346,
+      "gameDate": "2026-08-14T22:40:00Z",
+      "scheduleDate": "2026-08-14",
+      "homeId": 134,
+      "homeEn": "Pittsburgh Pirates",
+      "homeRecord": "58-64",
+      "awayId": 111,
+      "awayEn": "Boston Red Sox",
+      "awayRecord": "64-56",
+      "homePitcher": "Bubba Chandler",
+      "awayPitcher": "Jake Bennett",
+      "homeStats": {
+        "era": "4.26",
+        "k9": "7.97",
+        "bb9": "4.80",
+        "hr9": "0.77"
+      },
+      "awayStats": {
+        "era": "3.17",
+        "k9": "6.46",
+        "bb9": "1.88",
+        "hr9": "0.59"
+      },
+      "engineWinHomePct": 52,
+      "lockedAt": "2026-08-13T19:08:44.544Z",
+      "finalScore": {
+        "home": 8,
+        "away": 4
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-08-15T03:44:17.067Z"
+    },
+    {
       "gamePk": 824399,
       "gameDate": "2026-08-14T23:10:00Z",
       "scheduleDate": "2026-08-14",
@@ -27904,8 +27908,12 @@
       },
       "engineWinHomePct": 58,
       "lockedAt": "2026-08-12T19:08:23.228Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 5,
+        "away": 7
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-08-15T03:44:17.067Z"
     },
     {
       "gamePk": 823591,
@@ -27933,8 +27941,12 @@
       },
       "engineWinHomePct": 25,
       "lockedAt": "2026-08-13T21:52:00.197Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 4,
+        "away": 1
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-08-15T03:44:17.067Z"
     },
     {
       "gamePk": 822777,
@@ -27962,8 +27974,12 @@
       },
       "engineWinHomePct": 36,
       "lockedAt": "2026-08-13T19:08:44.544Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 3,
+        "away": 1
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-08-15T03:44:17.067Z"
     },
     {
       "gamePk": 824159,
@@ -27991,8 +28007,12 @@
       },
       "engineWinHomePct": 60,
       "lockedAt": "2026-08-13T19:08:44.544Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 10,
+        "away": 7
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-08-15T03:44:17.067Z"
     },
     {
       "gamePk": 823993,
@@ -28140,6 +28160,35 @@
       "verdict": null
     },
     {
+      "gamePk": 822775,
+      "gameDate": "2026-08-15T19:07:00Z",
+      "scheduleDate": "2026-08-15",
+      "homeId": 141,
+      "homeEn": "Toronto Blue Jays",
+      "homeRecord": "60-64",
+      "awayId": 147,
+      "awayEn": "New York Yankees",
+      "awayRecord": "68-54",
+      "homePitcher": "Braydon Fisher",
+      "awayPitcher": "Cam Schlittler",
+      "homeStats": {
+        "era": "3.54",
+        "k9": "8.41",
+        "bb9": "4.87",
+        "hr9": "0.89"
+      },
+      "awayStats": {
+        "era": "2.21",
+        "k9": "11.17",
+        "bb9": "1.90",
+        "hr9": "0.86"
+      },
+      "engineWinHomePct": 43,
+      "lockedAt": "2026-08-15T03:44:16.503Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
       "gamePk": 823184,
       "gameDate": "2026-08-15T20:05:00Z",
       "scheduleDate": "2026-08-15",
@@ -28165,6 +28214,35 @@
       },
       "engineWinHomePct": 73,
       "lockedAt": "2026-08-13T16:02:18.428Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 823588,
+      "gameDate": "2026-08-15T20:10:00Z",
+      "scheduleDate": "2026-08-15",
+      "homeId": 121,
+      "homeEn": "New York Mets",
+      "homeRecord": "54-69",
+      "awayId": 120,
+      "awayEn": "Washington Nationals",
+      "awayRecord": "60-64",
+      "homePitcher": "Sean Manaea",
+      "awayPitcher": "Brad Lord",
+      "homeStats": {
+        "era": "4.13",
+        "k9": "9.11",
+        "bb9": "3.01",
+        "hr9": "1.20"
+      },
+      "awayStats": {
+        "era": "3.79",
+        "k9": "8.17",
+        "bb9": "3.06",
+        "hr9": "1.02"
+      },
+      "engineWinHomePct": 53,
+      "lockedAt": "2026-08-15T03:44:16.503Z",
       "finalScore": null,
       "verdict": null
     },
