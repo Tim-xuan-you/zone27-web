@@ -27809,8 +27809,12 @@
       },
       "engineWinHomePct": 64,
       "lockedAt": "2026-08-13T19:08:44.544Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 1,
+        "away": 0
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-08-15T01:35:22.991Z"
     },
     {
       "gamePk": 823346,
@@ -27867,8 +27871,12 @@
       },
       "engineWinHomePct": 64,
       "lockedAt": "2026-08-14T02:24:03.127Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 5,
+        "away": 9
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-08-15T01:35:22.991Z"
     },
     {
       "gamePk": 824399,
@@ -28393,6 +28401,35 @@
       "verdict": null
     },
     {
+      "gamePk": 824966,
+      "gameDate": "2026-08-16T01:40:00Z",
+      "scheduleDate": "2026-08-15",
+      "homeId": 133,
+      "homeEn": "Athletics",
+      "homeRecord": "47-74",
+      "awayId": 140,
+      "awayEn": "Texas Rangers",
+      "awayRecord": "60-62",
+      "homePitcher": "J.T. Ginn",
+      "awayPitcher": "MacKenzie Gore",
+      "homeStats": {
+        "era": "3.41",
+        "k9": "7.94",
+        "bb9": "3.93",
+        "hr9": "0.96"
+      },
+      "awayStats": {
+        "era": "4.43",
+        "k9": "10.01",
+        "bb9": "3.29",
+        "hr9": "1.14"
+      },
+      "engineWinHomePct": 55,
+      "lockedAt": "2026-08-15T01:35:22.482Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
       "gamePk": 822940,
       "gameDate": "2026-08-16T16:15:00Z",
       "scheduleDate": "2026-08-16",
@@ -28708,6 +28745,35 @@
       },
       "engineWinHomePct": 65,
       "lockedAt": "2026-08-14T19:01:03.576Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 824965,
+      "gameDate": "2026-08-16T20:05:00Z",
+      "scheduleDate": "2026-08-16",
+      "homeId": 133,
+      "homeEn": "Athletics",
+      "homeRecord": "47-74",
+      "awayId": 140,
+      "awayEn": "Texas Rangers",
+      "awayRecord": "60-62",
+      "homePitcher": "Jacob Lopez",
+      "awayPitcher": "Cody Bradford",
+      "homeStats": {
+        "era": "5.38",
+        "k9": "8.23",
+        "bb9": "4.83",
+        "hr9": "1.54"
+      },
+      "awayStats": {
+        "era": "2.38",
+        "k9": "4.76",
+        "bb9": "2.38",
+        "hr9": "0.00"
+      },
+      "engineWinHomePct": 40,
+      "lockedAt": "2026-08-15T01:35:22.482Z",
       "finalScore": null,
       "verdict": null
     },
