@@ -4403,10 +4403,13 @@
       "awayWinPct": 46,
       "enginePick": "away",
       "lockedAt": "2026-08-13T21:41:02.453Z",
-      "finalScore": null,
-      "outcome": null,
-      "verdict": null,
-      "gradedAt": null
+      "finalScore": {
+        "home": 3,
+        "away": 2
+      },
+      "outcome": "home",
+      "verdict": "diverged",
+      "gradedAt": "2026-08-16T01:07:02.472Z"
     },
     {
       "matchId": "fd-554960",
@@ -4431,10 +4434,13 @@
       "awayWinPct": 24,
       "enginePick": "home",
       "lockedAt": "2026-08-13T21:41:02.453Z",
-      "finalScore": null,
-      "outcome": null,
-      "verdict": null,
-      "gradedAt": null
+      "finalScore": {
+        "home": 1,
+        "away": 1
+      },
+      "outcome": "draw",
+      "verdict": "diverged",
+      "gradedAt": "2026-08-16T01:07:02.472Z"
     },
     {
       "matchId": "fd-554967",
@@ -4627,6 +4633,34 @@
       "awayWinPct": 25,
       "enginePick": "home",
       "lockedAt": "2026-08-15T06:32:20.703Z",
+      "finalScore": null,
+      "outcome": null,
+      "verdict": null,
+      "gradedAt": null
+    },
+    {
+      "matchId": "fd-554965",
+      "competitionCode": "BSA",
+      "competitionName": "巴西甲",
+      "kickoffISO": "2026-08-17T23:00:00Z",
+      "status": "TIMED",
+      "homeSeed": "Internacional",
+      "awaySeed": "Clube do Remo",
+      "home": "Internacional",
+      "away": "Clube do Remo",
+      "ratingHome": 0,
+      "ratingAway": 0,
+      "homeAdvantage": 0,
+      "xgHome": 1.528534669675649,
+      "xgAway": 1.0963548165848047,
+      "homeWin": 0.46268235628648596,
+      "draw": 0.274689501310995,
+      "awayWin": 0.2626281424025186,
+      "homeWinPct": 46,
+      "drawPct": 28,
+      "awayWinPct": 26,
+      "enginePick": "home",
+      "lockedAt": "2026-08-16T01:07:00.930Z",
       "finalScore": null,
       "outcome": null,
       "verdict": null,
