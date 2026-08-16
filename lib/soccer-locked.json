@@ -4465,10 +4465,13 @@
       "awayWinPct": 28,
       "enginePick": "home",
       "lockedAt": "2026-08-14T01:42:06.214Z",
-      "finalScore": null,
-      "outcome": null,
-      "verdict": null,
-      "gradedAt": null
+      "finalScore": {
+        "home": 1,
+        "away": 1
+      },
+      "outcome": "draw",
+      "verdict": "diverged",
+      "gradedAt": "2026-08-16T03:44:29.332Z"
     },
     {
       "matchId": "fd-554962",
