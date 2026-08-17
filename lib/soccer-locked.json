@@ -4527,10 +4527,13 @@
       "awayWinPct": 27,
       "enginePick": "home",
       "lockedAt": "2026-08-15T06:32:20.703Z",
-      "finalScore": null,
-      "outcome": null,
-      "verdict": null,
-      "gradedAt": null
+      "finalScore": {
+        "home": 3,
+        "away": 0
+      },
+      "outcome": "home",
+      "verdict": "proved",
+      "gradedAt": "2026-08-17T01:04:44.835Z"
     },
     {
       "matchId": "fd-554968",
@@ -4555,10 +4558,13 @@
       "awayWinPct": 33,
       "enginePick": "home",
       "lockedAt": "2026-08-15T06:32:20.703Z",
-      "finalScore": null,
-      "outcome": null,
-      "verdict": null,
-      "gradedAt": null
+      "finalScore": {
+        "home": 0,
+        "away": 3
+      },
+      "outcome": "away",
+      "verdict": "diverged",
+      "gradedAt": "2026-08-17T01:04:44.835Z"
     },
     {
       "matchId": "fd-554966",
@@ -4583,10 +4589,13 @@
       "awayWinPct": 56,
       "enginePick": "away",
       "lockedAt": "2026-08-15T06:32:20.703Z",
-      "finalScore": null,
-      "outcome": null,
-      "verdict": null,
-      "gradedAt": null
+      "finalScore": {
+        "home": 1,
+        "away": 5
+      },
+      "outcome": "away",
+      "verdict": "proved",
+      "gradedAt": "2026-08-17T01:04:44.835Z"
     },
     {
       "matchId": "fd-554969",
@@ -4611,10 +4620,13 @@
       "awayWinPct": 44,
       "enginePick": "away",
       "lockedAt": "2026-08-15T06:32:20.703Z",
-      "finalScore": null,
-      "outcome": null,
-      "verdict": null,
-      "gradedAt": null
+      "finalScore": {
+        "home": 1,
+        "away": 0
+      },
+      "outcome": "home",
+      "verdict": "diverged",
+      "gradedAt": "2026-08-17T01:04:44.835Z"
     },
     {
       "matchId": "fd-554963",
@@ -4639,10 +4651,13 @@
       "awayWinPct": 25,
       "enginePick": "home",
       "lockedAt": "2026-08-15T06:32:20.703Z",
-      "finalScore": null,
-      "outcome": null,
-      "verdict": null,
-      "gradedAt": null
+      "finalScore": {
+        "home": 1,
+        "away": 2
+      },
+      "outcome": "away",
+      "verdict": "diverged",
+      "gradedAt": "2026-08-17T01:04:44.835Z"
     },
     {
       "matchId": "fd-554965",
