@@ -29477,6 +29477,35 @@
       "verdict": null
     },
     {
+      "gamePk": 822938,
+      "gameDate": "2026-08-18T22:40:00Z",
+      "scheduleDate": "2026-08-18",
+      "homeId": 139,
+      "homeEn": "Tampa Bay Rays",
+      "homeRecord": "74-49",
+      "awayId": 141,
+      "awayEn": "Toronto Blue Jays",
+      "awayRecord": "61-65",
+      "homePitcher": "Nick Martinez",
+      "awayPitcher": "José Soriano",
+      "homeStats": {
+        "era": "2.74",
+        "k9": "5.09",
+        "bb9": "1.30",
+        "hr9": "1.04"
+      },
+      "awayStats": {
+        "era": "3.16",
+        "k9": "9.02",
+        "bb9": "4.17",
+        "hr9": "0.88"
+      },
+      "engineWinHomePct": 47,
+      "lockedAt": "2026-08-17T21:30:10.298Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
       "gamePk": 824723,
       "gameDate": "2026-08-18T23:10:00Z",
       "scheduleDate": "2026-08-18",
@@ -29502,6 +29531,35 @@
       },
       "engineWinHomePct": 76,
       "lockedAt": "2026-08-16T18:35:40.455Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 823586,
+      "gameDate": "2026-08-18T23:10:00Z",
+      "scheduleDate": "2026-08-18",
+      "homeId": 121,
+      "homeEn": "New York Mets",
+      "homeRecord": "56-69",
+      "awayId": 135,
+      "awayEn": "San Diego Padres",
+      "awayRecord": "67-58",
+      "homePitcher": "Zac Thornton",
+      "awayPitcher": "Robbie Ray",
+      "homeStats": {
+        "era": "2.78",
+        "k9": "5.76",
+        "bb9": "2.58",
+        "hr9": "0.79"
+      },
+      "awayStats": {
+        "era": "3.28",
+        "k9": "7.72",
+        "bb9": "4.44",
+        "hr9": "1.16"
+      },
+      "engineWinHomePct": 54,
+      "lockedAt": "2026-08-17T21:30:10.298Z",
       "finalScore": null,
       "verdict": null
     },
@@ -29680,6 +29738,35 @@
       "verdict": null
     },
     {
+      "gamePk": 823587,
+      "gameDate": "2026-08-19T17:10:00Z",
+      "scheduleDate": "2026-08-19",
+      "homeId": 121,
+      "homeEn": "New York Mets",
+      "homeRecord": "56-69",
+      "awayId": 135,
+      "awayEn": "San Diego Padres",
+      "awayRecord": "67-58",
+      "homePitcher": "Robert Stock",
+      "awayPitcher": "Michael King",
+      "homeStats": {
+        "era": "6.57",
+        "k9": "9.49",
+        "bb9": "5.84",
+        "hr9": "0.73"
+      },
+      "awayStats": {
+        "era": "3.41",
+        "k9": "7.84",
+        "bb9": "3.54",
+        "hr9": "1.07"
+      },
+      "engineWinHomePct": 47,
+      "lockedAt": "2026-08-17T21:30:10.298Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
       "gamePk": 823664,
       "gameDate": "2026-08-19T17:40:00Z",
       "scheduleDate": "2026-08-19",
@@ -29821,6 +29908,35 @@
       },
       "engineWinHomePct": 71,
       "lockedAt": "2026-08-17T18:47:10.188Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 822937,
+      "gameDate": "2026-08-19T22:40:00Z",
+      "scheduleDate": "2026-08-19",
+      "homeId": 139,
+      "homeEn": "Tampa Bay Rays",
+      "homeRecord": "74-49",
+      "awayId": 141,
+      "awayEn": "Toronto Blue Jays",
+      "awayRecord": "61-65",
+      "homePitcher": "Drew Rasmussen",
+      "awayPitcher": "Max Scherzer",
+      "homeStats": {
+        "era": "2.78",
+        "k9": "9.26",
+        "bb9": "1.60",
+        "hr9": "0.84"
+      },
+      "awayStats": {
+        "era": "6.59",
+        "k9": "6.80",
+        "bb9": "3.73",
+        "hr9": "2.41"
+      },
+      "engineWinHomePct": 80,
+      "lockedAt": "2026-08-17T21:30:10.298Z",
       "finalScore": null,
       "verdict": null
     },
