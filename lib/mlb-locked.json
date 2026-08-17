@@ -29129,6 +29129,35 @@
       "verdict": null
     },
     {
+      "gamePk": 824478,
+      "gameDate": "2026-08-17T22:40:00Z",
+      "scheduleDate": "2026-08-17",
+      "homeId": 113,
+      "homeEn": "Cincinnati Reds",
+      "homeRecord": "59-64",
+      "awayId": 138,
+      "awayEn": "St. Louis Cardinals",
+      "awayRecord": "63-61",
+      "homePitcher": "Rhett Lowder",
+      "awayPitcher": "Andre Pallante",
+      "homeStats": {
+        "era": "5.15",
+        "k9": "7.35",
+        "bb9": "3.82",
+        "hr9": "1.14"
+      },
+      "awayStats": {
+        "era": "3.46",
+        "k9": "6.37",
+        "bb9": "2.77",
+        "hr9": "0.69"
+      },
+      "engineWinHomePct": 47,
+      "lockedAt": "2026-08-17T15:30:01.886Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
       "gamePk": 823343,
       "gameDate": "2026-08-17T23:05:00Z",
       "scheduleDate": "2026-08-17",
@@ -29183,6 +29212,35 @@
       },
       "engineWinHomePct": 66,
       "lockedAt": "2026-08-16T18:35:40.455Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 824725,
+      "gameDate": "2026-08-17T23:10:00Z",
+      "scheduleDate": "2026-08-17",
+      "homeId": 111,
+      "homeEn": "Boston Red Sox",
+      "homeRecord": "66-58",
+      "awayId": 109,
+      "awayEn": "Arizona Diamondbacks",
+      "awayRecord": "66-59",
+      "homePitcher": "Alec Gamboa",
+      "awayPitcher": "Mitch Bratt",
+      "homeStats": {
+        "era": "1.59",
+        "k9": "6.35",
+        "bb9": "2.65",
+        "hr9": "0.53"
+      },
+      "awayStats": {
+        "era": "3.74",
+        "k9": "6.68",
+        "bb9": "5.08",
+        "hr9": "1.34"
+      },
+      "engineWinHomePct": 67,
+      "lockedAt": "2026-08-17T15:30:01.886Z",
       "finalScore": null,
       "verdict": null
     },
@@ -29357,6 +29415,35 @@
       },
       "engineWinHomePct": 67,
       "lockedAt": "2026-08-16T21:25:16.395Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 824475,
+      "gameDate": "2026-08-18T22:40:00Z",
+      "scheduleDate": "2026-08-18",
+      "homeId": 113,
+      "homeEn": "Cincinnati Reds",
+      "homeRecord": "59-64",
+      "awayId": 138,
+      "awayEn": "St. Louis Cardinals",
+      "awayRecord": "63-61",
+      "homePitcher": "Andrew Abbott",
+      "awayPitcher": "Kyle Leahy",
+      "homeStats": {
+        "era": "4.13",
+        "k9": "6.90",
+        "bb9": "4.33",
+        "hr9": "1.15"
+      },
+      "awayStats": {
+        "era": "3.38",
+        "k9": "8.05",
+        "bb9": "2.68",
+        "hr9": "0.92"
+      },
+      "engineWinHomePct": 47,
+      "lockedAt": "2026-08-17T15:30:01.886Z",
       "finalScore": null,
       "verdict": null
     },
