@@ -4682,10 +4682,13 @@
       "awayWinPct": 26,
       "enginePick": "home",
       "lockedAt": "2026-08-16T01:07:00.930Z",
-      "finalScore": null,
-      "outcome": null,
-      "verdict": null,
-      "gradedAt": null
+      "finalScore": {
+        "home": 1,
+        "away": 1
+      },
+      "outcome": "draw",
+      "verdict": "diverged",
+      "gradedAt": "2026-08-18T01:02:38.340Z"
     }
   ]
 }
