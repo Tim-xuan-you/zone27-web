@@ -29917,6 +29917,35 @@
       "verdict": null
     },
     {
+      "gamePk": 824640,
+      "gameDate": "2026-08-19T18:20:00Z",
+      "scheduleDate": "2026-08-19",
+      "homeId": 112,
+      "homeEn": "Chicago Cubs",
+      "homeRecord": "74-53",
+      "awayId": 145,
+      "awayEn": "Chicago White Sox",
+      "awayRecord": "65-60",
+      "homePitcher": "Clay Holmes",
+      "awayPitcher": "Sean Newcomb",
+      "homeStats": {
+        "era": "2.56",
+        "k9": "6.96",
+        "bb9": "2.98",
+        "hr9": "0.57"
+      },
+      "awayStats": {
+        "era": "2.51",
+        "k9": "8.47",
+        "bb9": "3.31",
+        "hr9": "0.26"
+      },
+      "engineWinHomePct": 49,
+      "lockedAt": "2026-08-19T06:52:49.894Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
       "gamePk": 824722,
       "gameDate": "2026-08-19T20:10:00Z",
       "scheduleDate": "2026-08-19",
