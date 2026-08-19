@@ -29855,8 +29855,12 @@
       },
       "engineWinHomePct": 76,
       "lockedAt": "2026-08-17T18:47:10.188Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 4,
+        "away": 3
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-08-19T21:30:00.754Z"
     },
     {
       "gamePk": 823587,
@@ -29884,8 +29888,12 @@
       },
       "engineWinHomePct": 47,
       "lockedAt": "2026-08-17T21:30:10.298Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 4,
+        "away": 2
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-08-19T21:30:00.755Z"
     },
     {
       "gamePk": 823664,
@@ -29913,8 +29921,12 @@
       },
       "engineWinHomePct": 40,
       "lockedAt": "2026-08-17T18:47:10.188Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 6,
+        "away": 4
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-08-19T21:30:00.755Z"
     },
     {
       "gamePk": 824640,
@@ -29942,8 +29954,12 @@
       },
       "engineWinHomePct": 49,
       "lockedAt": "2026-08-19T06:52:49.894Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 0,
+        "away": 3
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-08-19T21:30:00.755Z"
     },
     {
       "gamePk": 824722,
@@ -30323,6 +30339,35 @@
       "verdict": null
     },
     {
+      "gamePk": 824074,
+      "gameDate": "2026-08-20T18:10:00Z",
+      "scheduleDate": "2026-08-20",
+      "homeId": 118,
+      "homeEn": "Kansas City Royals",
+      "homeRecord": "53-74",
+      "awayId": 133,
+      "awayEn": "Athletics",
+      "awayRecord": "49-77",
+      "homePitcher": "Randy Dobnak",
+      "awayPitcher": "Gage Jump",
+      "homeStats": {
+        "era": "1.73",
+        "k9": "5.40",
+        "bb9": "3.46",
+        "hr9": "0.43"
+      },
+      "awayStats": {
+        "era": "4.50",
+        "k9": "9.81",
+        "bb9": "4.27",
+        "hr9": "0.92"
+      },
+      "engineWinHomePct": 59,
+      "lockedAt": "2026-08-19T21:30:00.156Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
       "gamePk": 824802,
       "gameDate": "2026-08-20T22:35:00Z",
       "scheduleDate": "2026-08-20",
@@ -30377,6 +30422,35 @@
       },
       "engineWinHomePct": 75,
       "lockedAt": "2026-08-18T18:45:47.109Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 825045,
+      "gameDate": "2026-08-22T01:40:00Z",
+      "scheduleDate": "2026-08-21",
+      "homeId": 109,
+      "homeEn": "Arizona Diamondbacks",
+      "homeRecord": "66-61",
+      "awayId": 113,
+      "awayEn": "Cincinnati Reds",
+      "awayRecord": "60-66",
+      "homePitcher": "Eduardo Rodriguez",
+      "awayPitcher": "Nick Lodolo",
+      "homeStats": {
+        "era": "2.71",
+        "k9": "6.39",
+        "bb9": "2.83",
+        "hr9": "0.84"
+      },
+      "awayStats": {
+        "era": "4.52",
+        "k9": "7.16",
+        "bb9": "3.64",
+        "hr9": "1.51"
+      },
+      "engineWinHomePct": 64,
+      "lockedAt": "2026-08-19T21:30:00.156Z",
       "finalScore": null,
       "verdict": null
     }
