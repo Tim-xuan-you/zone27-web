@@ -29987,8 +29987,12 @@
       },
       "engineWinHomePct": 61,
       "lockedAt": "2026-08-17T18:47:10.188Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 6,
+        "away": 7
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-08-20T01:36:19.548Z"
     },
     {
       "gamePk": 823424,
@@ -30016,8 +30020,12 @@
       },
       "engineWinHomePct": 45,
       "lockedAt": "2026-08-17T18:47:10.188Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 4,
+        "away": 1
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-08-20T01:36:19.548Z"
     },
     {
       "gamePk": 824801,
@@ -30103,8 +30111,12 @@
       },
       "engineWinHomePct": 80,
       "lockedAt": "2026-08-17T21:30:10.298Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 7,
+        "away": 6
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-08-20T01:36:19.548Z"
     },
     {
       "gamePk": 823748,
@@ -30397,6 +30409,35 @@
       "verdict": null
     },
     {
+      "gamePk": 822861,
+      "gameDate": "2026-08-21T00:05:00Z",
+      "scheduleDate": "2026-08-20",
+      "homeId": 140,
+      "homeEn": "Texas Rangers",
+      "homeRecord": "62-64",
+      "awayId": 120,
+      "awayEn": "Washington Nationals",
+      "awayRecord": "60-67",
+      "homePitcher": "Jacob deGrom",
+      "awayPitcher": "Andrew Alvarez",
+      "homeStats": {
+        "era": "3.95",
+        "k9": "10.96",
+        "bb9": "2.31",
+        "hr9": "1.27"
+      },
+      "awayStats": {
+        "era": "3.72",
+        "k9": "8.28",
+        "bb9": "3.96",
+        "hr9": "0.36"
+      },
+      "engineWinHomePct": 53,
+      "lockedAt": "2026-08-20T01:36:19.130Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
       "gamePk": 824153,
       "gameDate": "2026-08-21T00:10:00Z",
       "scheduleDate": "2026-08-20",
@@ -30426,6 +30467,64 @@
       "verdict": null
     },
     {
+      "gamePk": 823746,
+      "gameDate": "2026-08-21T20:10:00Z",
+      "scheduleDate": "2026-08-21",
+      "homeId": 158,
+      "homeEn": "Milwaukee Brewers",
+      "homeRecord": "78-48",
+      "awayId": 144,
+      "awayEn": "Atlanta Braves",
+      "awayRecord": "74-53",
+      "homePitcher": "Jacob Misiorowski",
+      "awayPitcher": "Chris Sale",
+      "homeStats": {
+        "era": "1.75",
+        "k9": "13.60",
+        "bb9": "2.01",
+        "hr9": "0.84"
+      },
+      "awayStats": {
+        "era": "2.16",
+        "k9": "11.16",
+        "bb9": "1.95",
+        "hr9": "0.56"
+      },
+      "engineWinHomePct": 59,
+      "lockedAt": "2026-08-20T01:36:19.130Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 824317,
+      "gameDate": "2026-08-22T00:40:00Z",
+      "scheduleDate": "2026-08-21",
+      "homeId": 115,
+      "homeEn": "Colorado Rockies",
+      "homeRecord": "50-76",
+      "awayId": 114,
+      "awayEn": "Cleveland Guardians",
+      "awayRecord": "61-66",
+      "homePitcher": "Tanner Gordon",
+      "awayPitcher": "Joey Cantillo",
+      "homeStats": {
+        "era": "5.55",
+        "k9": "7.82",
+        "bb9": "1.64",
+        "hr9": "1.89"
+      },
+      "awayStats": {
+        "era": "3.80",
+        "k9": "9.95",
+        "bb9": "4.23",
+        "hr9": "1.07"
+      },
+      "engineWinHomePct": 38,
+      "lockedAt": "2026-08-20T01:36:19.130Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
       "gamePk": 825045,
       "gameDate": "2026-08-22T01:40:00Z",
       "scheduleDate": "2026-08-21",
@@ -30451,6 +30550,35 @@
       },
       "engineWinHomePct": 64,
       "lockedAt": "2026-08-19T21:30:00.156Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 823911,
+      "gameDate": "2026-08-22T02:10:00Z",
+      "scheduleDate": "2026-08-21",
+      "homeId": 119,
+      "homeEn": "Los Angeles Dodgers",
+      "homeRecord": "76-51",
+      "awayId": 134,
+      "awayEn": "Pittsburgh Pirates",
+      "awayRecord": "63-66",
+      "homePitcher": "Yoshinobu Yamamoto",
+      "awayPitcher": "Bubba Chandler",
+      "homeStats": {
+        "era": "2.60",
+        "k9": "8.42",
+        "bb9": "2.11",
+        "hr9": "0.93"
+      },
+      "awayStats": {
+        "era": "4.23",
+        "k9": "8.01",
+        "bb9": "4.75",
+        "hr9": "0.74"
+      },
+      "engineWinHomePct": 60,
+      "lockedAt": "2026-08-20T01:36:19.130Z",
       "finalScore": null,
       "verdict": null
     }
