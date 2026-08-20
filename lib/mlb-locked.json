@@ -30251,8 +30251,12 @@
       },
       "engineWinHomePct": 49,
       "lockedAt": "2026-08-18T18:45:47.109Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 9,
+        "away": 10
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-08-20T21:32:42.930Z"
     },
     {
       "gamePk": 824395,
@@ -30280,8 +30284,12 @@
       },
       "engineWinHomePct": 57,
       "lockedAt": "2026-08-18T18:45:47.109Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 5,
+        "away": 2
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-08-20T21:32:42.930Z"
     },
     {
       "gamePk": 822934,
@@ -30309,8 +30317,12 @@
       },
       "engineWinHomePct": 68,
       "lockedAt": "2026-08-18T18:45:47.109Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 1,
+        "away": 5
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-08-20T21:32:42.930Z"
     },
     {
       "gamePk": 823747,
@@ -30338,8 +30350,12 @@
       },
       "engineWinHomePct": 50,
       "lockedAt": "2026-08-18T18:45:47.109Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 7,
+        "away": 4
+      },
+      "verdict": "push",
+      "gradedAt": "2026-08-20T21:32:42.930Z"
     },
     {
       "gamePk": 824589,
@@ -30367,8 +30383,12 @@
       },
       "engineWinHomePct": 55,
       "lockedAt": "2026-08-19T18:41:33.539Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 0,
+        "away": 2
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-08-20T21:32:42.930Z"
     },
     {
       "gamePk": 824074,
@@ -30396,8 +30416,12 @@
       },
       "engineWinHomePct": 59,
       "lockedAt": "2026-08-19T21:30:00.156Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 6,
+        "away": 2
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-08-20T21:32:42.930Z"
     },
     {
       "gamePk": 824802,
@@ -30541,6 +30565,35 @@
       },
       "engineWinHomePct": 57,
       "lockedAt": "2026-08-20T18:48:03.861Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 824800,
+      "gameDate": "2026-08-21T23:15:00Z",
+      "scheduleDate": "2026-08-21",
+      "homeId": 110,
+      "homeEn": "Baltimore Orioles",
+      "homeRecord": "61-66",
+      "awayId": 139,
+      "awayEn": "Tampa Bay Rays",
+      "awayRecord": "76-51",
+      "homePitcher": "Trevor Rogers",
+      "awayPitcher": "Freddy Peralta",
+      "homeStats": {
+        "era": "4.15",
+        "k9": "7.73",
+        "bb9": "2.51",
+        "hr9": "0.93"
+      },
+      "awayStats": {
+        "era": "5.27",
+        "k9": "8.65",
+        "bb9": "3.73",
+        "hr9": "1.41"
+      },
+      "engineWinHomePct": 60,
+      "lockedAt": "2026-08-20T21:32:42.543Z",
       "finalScore": null,
       "verdict": null
     },
@@ -30715,6 +30768,64 @@
       },
       "engineWinHomePct": 61,
       "lockedAt": "2026-08-20T18:48:03.861Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 823509,
+      "gameDate": "2026-08-22T17:35:00Z",
+      "scheduleDate": "2026-08-22",
+      "homeId": 147,
+      "homeEn": "New York Yankees",
+      "homeRecord": "71-55",
+      "awayId": 141,
+      "awayEn": "Toronto Blue Jays",
+      "awayRecord": "63-66",
+      "homePitcher": "Ryan Weathers",
+      "awayPitcher": "Dylan Cease",
+      "homeStats": {
+        "era": "3.56",
+        "k9": "9.40",
+        "bb9": "2.55",
+        "hr9": "1.21"
+      },
+      "awayStats": {
+        "era": "2.42",
+        "k9": "13.14",
+        "bb9": "3.86",
+        "hr9": "0.59"
+      },
+      "engineWinHomePct": 38,
+      "lockedAt": "2026-08-20T21:32:42.543Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 824798,
+      "gameDate": "2026-08-22T23:05:00Z",
+      "scheduleDate": "2026-08-22",
+      "homeId": 110,
+      "homeEn": "Baltimore Orioles",
+      "homeRecord": "61-66",
+      "awayId": 139,
+      "awayEn": "Tampa Bay Rays",
+      "awayRecord": "76-51",
+      "homePitcher": "Brandon Young",
+      "awayPitcher": "Shane McClanahan",
+      "homeStats": {
+        "era": "3.52",
+        "k9": "7.34",
+        "bb9": "3.21",
+        "hr9": "1.15"
+      },
+      "awayStats": {
+        "era": "3.25",
+        "k9": "8.27",
+        "bb9": "3.08",
+        "hr9": "0.70"
+      },
+      "engineWinHomePct": 48,
+      "lockedAt": "2026-08-20T21:32:42.543Z",
       "finalScore": null,
       "verdict": null
     },
