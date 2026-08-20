@@ -4689,6 +4689,34 @@
       "outcome": "draw",
       "verdict": "diverged",
       "gradedAt": "2026-08-18T01:02:38.340Z"
+    },
+    {
+      "matchId": "fd-554975",
+      "competitionCode": "BSA",
+      "competitionName": "巴西甲",
+      "kickoffISO": "2026-08-22T19:00:00Z",
+      "status": "TIMED",
+      "homeSeed": "Fluminense",
+      "awaySeed": "Clube do Remo",
+      "home": "Fluminense",
+      "away": "Clube do Remo",
+      "ratingHome": 0,
+      "ratingAway": 0,
+      "homeAdvantage": 0,
+      "xgHome": 1.9855050865624972,
+      "xgAway": 1.0761435575367804,
+      "homeWin": 0.5765025986942311,
+      "draw": 0.23084482197207934,
+      "awayWin": 0.19265257933368943,
+      "homeWinPct": 58,
+      "drawPct": 23,
+      "awayWinPct": 19,
+      "enginePick": "home",
+      "lockedAt": "2026-08-20T21:24:08.089Z",
+      "finalScore": null,
+      "outcome": null,
+      "verdict": null,
+      "gradedAt": null
     }
   ]
 }
