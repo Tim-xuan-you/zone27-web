@@ -30053,37 +30053,12 @@
       },
       "engineWinHomePct": 36,
       "lockedAt": "2026-08-17T18:47:10.188Z",
-      "finalScore": null,
-      "verdict": null
-    },
-    {
-      "gamePk": 824476,
-      "gameDate": "2026-08-19T22:40:00Z",
-      "scheduleDate": "2026-08-19",
-      "homeId": 113,
-      "homeEn": "Cincinnati Reds",
-      "homeRecord": "59-64",
-      "awayId": 138,
-      "awayEn": "St. Louis Cardinals",
-      "awayRecord": "63-61",
-      "homePitcher": "Chase Burns",
-      "awayPitcher": "Matthew Liberatore",
-      "homeStats": {
-        "era": "2.47",
-        "k9": "10.37",
-        "bb9": "3.16",
-        "hr9": "0.89"
+      "finalScore": {
+        "home": 3,
+        "away": 5
       },
-      "awayStats": {
-        "era": "5.07",
-        "k9": "8.77",
-        "bb9": "3.33",
-        "hr9": "1.51"
-      },
-      "engineWinHomePct": 71,
-      "lockedAt": "2026-08-17T18:47:10.188Z",
-      "finalScore": null,
-      "verdict": null
+      "verdict": "proved",
+      "gradedAt": "2026-08-20T03:50:55.321Z"
     },
     {
       "gamePk": 822937,
@@ -30119,6 +30094,39 @@
       "gradedAt": "2026-08-20T01:36:19.548Z"
     },
     {
+      "gamePk": 824476,
+      "gameDate": "2026-08-19T22:40:00Z",
+      "scheduleDate": "2026-08-19",
+      "homeId": 113,
+      "homeEn": "Cincinnati Reds",
+      "homeRecord": "59-64",
+      "awayId": 138,
+      "awayEn": "St. Louis Cardinals",
+      "awayRecord": "63-61",
+      "homePitcher": "Chase Burns",
+      "awayPitcher": "Matthew Liberatore",
+      "homeStats": {
+        "era": "2.47",
+        "k9": "10.37",
+        "bb9": "3.16",
+        "hr9": "0.89"
+      },
+      "awayStats": {
+        "era": "5.07",
+        "k9": "8.77",
+        "bb9": "3.33",
+        "hr9": "1.51"
+      },
+      "engineWinHomePct": 71,
+      "lockedAt": "2026-08-17T18:47:10.188Z",
+      "finalScore": {
+        "home": 5,
+        "away": 4
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-08-20T03:50:55.321Z"
+    },
+    {
       "gamePk": 823748,
       "gameDate": "2026-08-19T23:40:00Z",
       "scheduleDate": "2026-08-19",
@@ -30144,8 +30152,12 @@
       },
       "engineWinHomePct": 52,
       "lockedAt": "2026-08-17T18:47:10.188Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 5,
+        "away": 7
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-08-20T03:50:55.321Z"
     },
     {
       "gamePk": 822860,
@@ -30173,8 +30185,12 @@
       },
       "engineWinHomePct": 45,
       "lockedAt": "2026-08-19T03:50:36.454Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 0,
+        "away": 6
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-08-20T03:50:55.321Z"
     },
     {
       "gamePk": 824318,
