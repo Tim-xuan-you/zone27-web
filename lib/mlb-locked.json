@@ -31188,6 +31188,238 @@
       "lockedAt": "2026-08-20T18:48:03.861Z",
       "finalScore": null,
       "verdict": null
+    },
+    {
+      "gamePk": 824799,
+      "gameDate": "2026-08-23T17:35:00Z",
+      "scheduleDate": "2026-08-23",
+      "homeId": 110,
+      "homeEn": "Baltimore Orioles",
+      "homeRecord": "61-67",
+      "awayId": 139,
+      "awayEn": "Tampa Bay Rays",
+      "awayRecord": "76-51",
+      "homePitcher": "Shane Baz",
+      "awayPitcher": "Nick Martinez",
+      "homeStats": {
+        "era": "4.02",
+        "k9": "8.16",
+        "bb9": "3.03",
+        "hr9": "0.68"
+      },
+      "awayStats": {
+        "era": "3.05",
+        "k9": "5.27",
+        "bb9": "1.40",
+        "hr9": "1.08"
+      },
+      "engineWinHomePct": 58,
+      "lockedAt": "2026-08-21T18:43:50.139Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 823507,
+      "gameDate": "2026-08-23T17:35:00Z",
+      "scheduleDate": "2026-08-23",
+      "homeId": 147,
+      "homeEn": "New York Yankees",
+      "homeRecord": "72-55",
+      "awayId": 141,
+      "awayEn": "Toronto Blue Jays",
+      "awayRecord": "63-66",
+      "homePitcher": "Carlos Rodón",
+      "awayPitcher": "José Soriano",
+      "homeStats": {
+        "era": "3.22",
+        "k9": "10.01",
+        "bb9": "5.01",
+        "hr9": "0.72"
+      },
+      "awayStats": {
+        "era": "3.23",
+        "k9": "8.78",
+        "bb9": "4.00",
+        "hr9": "0.84"
+      },
+      "engineWinHomePct": 57,
+      "lockedAt": "2026-08-21T18:43:50.139Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 823827,
+      "gameDate": "2026-08-23T17:40:00Z",
+      "scheduleDate": "2026-08-23",
+      "homeId": 146,
+      "homeEn": "Miami Marlins",
+      "homeRecord": "64-64",
+      "awayId": 120,
+      "awayEn": "Washington Nationals",
+      "awayRecord": "61-68",
+      "homePitcher": "Janson Junk",
+      "awayPitcher": "Jackson Kent",
+      "homeStats": {
+        "era": "4.37",
+        "k9": "6.41",
+        "bb9": "2.53",
+        "hr9": "1.17"
+      },
+      "awayStats": {
+        "era": "9.39",
+        "k9": "10.57",
+        "bb9": "9.39",
+        "hr9": "1.17"
+      },
+      "engineWinHomePct": 66,
+      "lockedAt": "2026-08-21T18:43:50.139Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 824071,
+      "gameDate": "2026-08-23T18:10:00Z",
+      "scheduleDate": "2026-08-23",
+      "homeId": 118,
+      "homeEn": "Kansas City Royals",
+      "homeRecord": "55-74",
+      "awayId": 116,
+      "awayEn": "Detroit Tigers",
+      "awayRecord": "61-66",
+      "homePitcher": "Daniel Lynch IV",
+      "awayPitcher": "Framber Valdez",
+      "homeStats": {
+        "era": "2.83",
+        "k9": "6.83",
+        "bb9": "2.67",
+        "hr9": "0.67"
+      },
+      "awayStats": {
+        "era": "4.35",
+        "k9": "7.20",
+        "bb9": "3.50",
+        "hr9": "0.84"
+      },
+      "engineWinHomePct": 60,
+      "lockedAt": "2026-08-21T18:43:50.139Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 824315,
+      "gameDate": "2026-08-23T19:10:00Z",
+      "scheduleDate": "2026-08-23",
+      "homeId": 115,
+      "homeEn": "Colorado Rockies",
+      "homeRecord": "50-77",
+      "awayId": 114,
+      "awayEn": "Cleveland Guardians",
+      "awayRecord": "62-66",
+      "homePitcher": "Tomoyuki Sugano",
+      "awayPitcher": "Foster Griffin",
+      "homeStats": {
+        "era": "4.70",
+        "k9": "5.23",
+        "bb9": "2.05",
+        "hr9": "1.97"
+      },
+      "awayStats": {
+        "era": "3.18",
+        "k9": "8.17",
+        "bb9": "2.18",
+        "hr9": "1.43"
+      },
+      "engineWinHomePct": 39,
+      "lockedAt": "2026-08-21T18:43:50.139Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 823099,
+      "gameDate": "2026-08-23T20:10:00Z",
+      "scheduleDate": "2026-08-23",
+      "homeId": 136,
+      "homeEn": "Seattle Mariners",
+      "homeRecord": "60-68",
+      "awayId": 112,
+      "awayEn": "Chicago Cubs",
+      "awayRecord": "74-54",
+      "homePitcher": "Bryce Miller",
+      "awayPitcher": "Shota Imanaga",
+      "homeStats": {
+        "era": "3.71",
+        "k9": "8.73",
+        "bb9": "1.81",
+        "hr9": "1.51"
+      },
+      "awayStats": {
+        "era": "3.77",
+        "k9": "8.79",
+        "bb9": "2.01",
+        "hr9": "1.82"
+      },
+      "engineWinHomePct": 56,
+      "lockedAt": "2026-08-21T18:43:50.139Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 823258,
+      "gameDate": "2026-08-23T20:10:00Z",
+      "scheduleDate": "2026-08-23",
+      "homeId": 135,
+      "homeEn": "San Diego Padres",
+      "homeRecord": "68-60",
+      "awayId": 142,
+      "awayEn": "Minnesota Twins",
+      "awayRecord": "63-65",
+      "homePitcher": "Walker Buehler",
+      "awayPitcher": "Bailey Ober",
+      "homeStats": {
+        "era": "4.79",
+        "k9": "7.78",
+        "bb9": "3.66",
+        "hr9": "1.05"
+      },
+      "awayStats": {
+        "era": "4.62",
+        "k9": "6.18",
+        "bb9": "2.26",
+        "hr9": "1.48"
+      },
+      "engineWinHomePct": 59,
+      "lockedAt": "2026-08-21T18:43:50.139Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 825043,
+      "gameDate": "2026-08-23T20:15:00Z",
+      "scheduleDate": "2026-08-23",
+      "homeId": 109,
+      "homeEn": "Arizona Diamondbacks",
+      "homeRecord": "67-61",
+      "awayId": 113,
+      "awayEn": "Cincinnati Reds",
+      "awayRecord": "61-67",
+      "homePitcher": "Mitch Bratt",
+      "awayPitcher": "Andrew Abbott",
+      "homeStats": {
+        "era": "4.17",
+        "k9": "6.14",
+        "bb9": "5.40",
+        "hr9": "1.23"
+      },
+      "awayStats": {
+        "era": "4.07",
+        "k9": "6.98",
+        "bb9": "4.26",
+        "hr9": "1.16"
+      },
+      "engineWinHomePct": 52,
+      "lockedAt": "2026-08-21T18:43:50.139Z",
+      "finalScore": null,
+      "verdict": null
     }
   ]
 }
