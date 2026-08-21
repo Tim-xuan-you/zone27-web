@@ -30552,6 +30552,35 @@
       "verdict": null
     },
     {
+      "gamePk": 823510,
+      "gameDate": "2026-08-21T23:05:00Z",
+      "scheduleDate": "2026-08-21",
+      "homeId": 147,
+      "homeEn": "New York Yankees",
+      "homeRecord": "72-55",
+      "awayId": 141,
+      "awayEn": "Toronto Blue Jays",
+      "awayRecord": "63-66",
+      "homePitcher": "Cam Schlittler",
+      "awayPitcher": "Mason Fluharty",
+      "homeStats": {
+        "era": "2.19",
+        "k9": "11.19",
+        "bb9": "2.01",
+        "hr9": "0.83"
+      },
+      "awayStats": {
+        "era": "3.71",
+        "k9": "9.88",
+        "bb9": "3.53",
+        "hr9": "1.06"
+      },
+      "engineWinHomePct": 64,
+      "lockedAt": "2026-08-21T15:38:28.159Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
       "gamePk": 824721,
       "gameDate": "2026-08-21T23:10:00Z",
       "scheduleDate": "2026-08-21",
