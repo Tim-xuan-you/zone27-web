@@ -30929,6 +30929,35 @@
       "verdict": null
     },
     {
+      "gamePk": 823743,
+      "gameDate": "2026-08-22T18:10:00Z",
+      "scheduleDate": "2026-08-22",
+      "homeId": 158,
+      "homeEn": "Milwaukee Brewers",
+      "homeRecord": "79-49",
+      "awayId": 144,
+      "awayEn": "Atlanta Braves",
+      "awayRecord": "75-53",
+      "homePitcher": "Logan Henderson",
+      "awayPitcher": "Martín Pérez",
+      "homeStats": {
+        "era": "2.70",
+        "k9": "10.66",
+        "bb9": "1.71",
+        "hr9": "1.42"
+      },
+      "awayStats": {
+        "era": "3.15",
+        "k9": "6.71",
+        "bb9": "3.64",
+        "hr9": "0.89"
+      },
+      "engineWinHomePct": 61,
+      "lockedAt": "2026-08-21T21:29:15.618Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
       "gamePk": 823831,
       "gameDate": "2026-08-22T20:10:00Z",
       "scheduleDate": "2026-08-22",
@@ -31418,6 +31447,35 @@
       },
       "engineWinHomePct": 52,
       "lockedAt": "2026-08-21T18:43:50.139Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 823745,
+      "gameDate": "2026-08-23T23:10:00Z",
+      "scheduleDate": "2026-08-23",
+      "homeId": 158,
+      "homeEn": "Milwaukee Brewers",
+      "homeRecord": "79-49",
+      "awayId": 144,
+      "awayEn": "Atlanta Braves",
+      "awayRecord": "75-53",
+      "homePitcher": "Shane Drohan",
+      "awayPitcher": "Tyler Mahle",
+      "homeStats": {
+        "era": "3.86",
+        "k9": "8.88",
+        "bb9": "2.96",
+        "hr9": "0.81"
+      },
+      "awayStats": {
+        "era": "4.53",
+        "k9": "8.58",
+        "bb9": "3.18",
+        "hr9": "1.27"
+      },
+      "engineWinHomePct": 60,
+      "lockedAt": "2026-08-21T21:29:15.618Z",
       "finalScore": null,
       "verdict": null
     }
