@@ -30569,6 +30569,35 @@
       "verdict": null
     },
     {
+      "gamePk": 823830,
+      "gameDate": "2026-08-21T23:10:00Z",
+      "scheduleDate": "2026-08-21",
+      "homeId": 146,
+      "homeEn": "Miami Marlins",
+      "homeRecord": "64-64",
+      "awayId": 120,
+      "awayEn": "Washington Nationals",
+      "awayRecord": "61-67",
+      "homePitcher": "Ryan Gusto",
+      "awayPitcher": "Brad Lord",
+      "homeStats": {
+        "era": "4.70",
+        "k9": "8.22",
+        "bb9": "2.35",
+        "hr9": "1.34"
+      },
+      "awayStats": {
+        "era": "4.04",
+        "k9": "8.23",
+        "bb9": "3.61",
+        "hr9": "1.01"
+      },
+      "engineWinHomePct": 49,
+      "lockedAt": "2026-08-21T01:41:22.699Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
       "gamePk": 824800,
       "gameDate": "2026-08-21T23:15:00Z",
       "scheduleDate": "2026-08-21",
@@ -30652,6 +30681,64 @@
       },
       "engineWinHomePct": 45,
       "lockedAt": "2026-08-20T18:48:03.861Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 824152,
+      "gameDate": "2026-08-22T00:10:00Z",
+      "scheduleDate": "2026-08-21",
+      "homeId": 117,
+      "homeEn": "Houston Astros",
+      "homeRecord": "64-63",
+      "awayId": 133,
+      "awayEn": "Athletics",
+      "awayRecord": "49-79",
+      "homePitcher": "Hayden Wesneski",
+      "awayPitcher": "J.T. Ginn",
+      "homeStats": {
+        "era": "5.16",
+        "k9": "7.15",
+        "bb9": "2.78",
+        "hr9": "0.79"
+      },
+      "awayStats": {
+        "era": "3.53",
+        "k9": "8.06",
+        "bb9": "3.75",
+        "hr9": "0.99"
+      },
+      "engineWinHomePct": 47,
+      "lockedAt": "2026-08-21T01:41:22.699Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 822857,
+      "gameDate": "2026-08-22T00:15:00Z",
+      "scheduleDate": "2026-08-21",
+      "homeId": 140,
+      "homeEn": "Texas Rangers",
+      "homeRecord": "62-65",
+      "awayId": 108,
+      "awayEn": "Los Angeles Angels",
+      "awayRecord": "50-77",
+      "homePitcher": "MacKenzie Gore",
+      "awayPitcher": "Reid Detmers",
+      "homeStats": {
+        "era": "4.45",
+        "k9": "9.92",
+        "bb9": "3.29",
+        "hr9": "1.16"
+      },
+      "awayStats": {
+        "era": "3.78",
+        "k9": "10.51",
+        "bb9": "2.71",
+        "hr9": "1.07"
+      },
+      "engineWinHomePct": 50,
+      "lockedAt": "2026-08-21T01:41:22.699Z",
       "finalScore": null,
       "verdict": null
     },
@@ -30801,6 +30888,35 @@
       "verdict": null
     },
     {
+      "gamePk": 823831,
+      "gameDate": "2026-08-22T20:10:00Z",
+      "scheduleDate": "2026-08-22",
+      "homeId": 146,
+      "homeEn": "Miami Marlins",
+      "homeRecord": "64-64",
+      "awayId": 120,
+      "awayEn": "Washington Nationals",
+      "awayRecord": "61-67",
+      "homePitcher": "Eury Pérez",
+      "awayPitcher": "Jake Irvin",
+      "homeStats": {
+        "era": "3.23",
+        "k9": "9.76",
+        "bb9": "3.60",
+        "hr9": "0.95"
+      },
+      "awayStats": {
+        "era": "5.80",
+        "k9": "9.08",
+        "bb9": "3.91",
+        "hr9": "1.51"
+      },
+      "engineWinHomePct": 69,
+      "lockedAt": "2026-08-21T01:41:22.699Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
       "gamePk": 824798,
       "gameDate": "2026-08-22T23:05:00Z",
       "scheduleDate": "2026-08-22",
@@ -30826,6 +30942,35 @@
       },
       "engineWinHomePct": 48,
       "lockedAt": "2026-08-20T21:32:42.543Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 824151,
+      "gameDate": "2026-08-22T23:10:00Z",
+      "scheduleDate": "2026-08-22",
+      "homeId": 117,
+      "homeEn": "Houston Astros",
+      "homeRecord": "64-63",
+      "awayId": 133,
+      "awayEn": "Athletics",
+      "awayRecord": "49-79",
+      "homePitcher": "Hunter Brown",
+      "awayPitcher": "Jacob Lopez",
+      "homeStats": {
+        "era": "3.67",
+        "k9": "9.44",
+        "bb9": "5.24",
+        "hr9": "1.18"
+      },
+      "awayStats": {
+        "era": "5.22",
+        "k9": "8.28",
+        "bb9": "4.70",
+        "hr9": "1.53"
+      },
+      "engineWinHomePct": 65,
+      "lockedAt": "2026-08-21T01:41:22.699Z",
       "finalScore": null,
       "verdict": null
     },
