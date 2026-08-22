@@ -30977,8 +30977,12 @@
       },
       "engineWinHomePct": 38,
       "lockedAt": "2026-08-20T21:32:42.543Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 3,
+        "away": 4
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-08-22T21:26:35.669Z"
     },
     {
       "gamePk": 823743,
@@ -31006,8 +31010,12 @@
       },
       "engineWinHomePct": 61,
       "lockedAt": "2026-08-21T21:29:15.618Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 4,
+        "away": 1
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-08-22T21:26:35.669Z"
     },
     {
       "gamePk": 823831,
