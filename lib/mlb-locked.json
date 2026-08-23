@@ -31043,8 +31043,12 @@
       },
       "engineWinHomePct": 69,
       "lockedAt": "2026-08-21T01:41:22.699Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 4,
+        "away": 2
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-08-23T01:44:20.422Z"
     },
     {
       "gamePk": 824798,
@@ -31072,8 +31076,12 @@
       },
       "engineWinHomePct": 48,
       "lockedAt": "2026-08-20T21:32:42.543Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 3,
+        "away": 2
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-08-23T01:44:20.422Z"
     },
     {
       "gamePk": 822858,
@@ -31101,8 +31109,12 @@
       },
       "engineWinHomePct": 76,
       "lockedAt": "2026-08-22T01:34:50.034Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 0,
+        "away": 3
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-08-23T01:44:20.422Z"
     },
     {
       "gamePk": 824151,
@@ -31188,8 +31200,12 @@
       },
       "engineWinHomePct": 50,
       "lockedAt": "2026-08-20T18:48:03.861Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 3,
+        "away": 1
+      },
+      "verdict": "push",
+      "gradedAt": "2026-08-23T01:44:20.422Z"
     },
     {
       "gamePk": 823910,
@@ -31424,6 +31440,35 @@
       "verdict": null
     },
     {
+      "gamePk": 823421,
+      "gameDate": "2026-08-23T17:35:00Z",
+      "scheduleDate": "2026-08-23",
+      "homeId": 143,
+      "homeEn": "Philadelphia Phillies",
+      "homeRecord": "72-58",
+      "awayId": 138,
+      "awayEn": "St. Louis Cardinals",
+      "awayRecord": "66-65",
+      "homePitcher": "Cristopher Sánchez",
+      "awayPitcher": "Kyle Leahy",
+      "homeStats": {
+        "era": "2.51",
+        "k9": "10.41",
+        "bb9": "2.12",
+        "hr9": "0.72"
+      },
+      "awayStats": {
+        "era": "3.24",
+        "k9": "8.17",
+        "bb9": "2.57",
+        "hr9": "0.88"
+      },
+      "engineWinHomePct": 62,
+      "lockedAt": "2026-08-23T01:44:20.012Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
       "gamePk": 823827,
       "gameDate": "2026-08-23T17:40:00Z",
       "scheduleDate": "2026-08-23",
@@ -31507,6 +31552,35 @@
       },
       "engineWinHomePct": 39,
       "lockedAt": "2026-08-21T18:43:50.139Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 824720,
+      "gameDate": "2026-08-23T19:15:00Z",
+      "scheduleDate": "2026-08-23",
+      "homeId": 111,
+      "homeEn": "Boston Red Sox",
+      "homeRecord": "69-59",
+      "awayId": 137,
+      "awayEn": "San Francisco Giants",
+      "awayRecord": "52-76",
+      "homePitcher": "Jake Bennett",
+      "awayPitcher": "Matt Wilkinson",
+      "homeStats": {
+        "era": "3.46",
+        "k9": "6.81",
+        "bb9": "1.90",
+        "hr9": "0.67"
+      },
+      "awayStats": {
+        "era": "0.00",
+        "k9": "0.00",
+        "bb9": "0.00",
+        "hr9": "0.00"
+      },
+      "engineWinHomePct": 50,
+      "lockedAt": "2026-08-23T01:44:20.012Z",
       "finalScore": null,
       "verdict": null
     },
