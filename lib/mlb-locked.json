@@ -31142,8 +31142,12 @@
       },
       "engineWinHomePct": 65,
       "lockedAt": "2026-08-21T01:41:22.699Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 3,
+        "away": 4
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-08-23T03:54:06.041Z"
     },
     {
       "gamePk": 824560,
@@ -31171,8 +31175,12 @@
       },
       "engineWinHomePct": 38,
       "lockedAt": "2026-08-22T01:34:50.034Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 5,
+        "away": 10
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-08-23T03:54:06.041Z"
     },
     {
       "gamePk": 824073,
@@ -31233,8 +31241,12 @@
       },
       "engineWinHomePct": 66,
       "lockedAt": "2026-08-20T18:48:03.861Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 4,
+        "away": 3
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-08-23T03:54:06.041Z"
     },
     {
       "gamePk": 823100,
@@ -31262,8 +31274,12 @@
       },
       "engineWinHomePct": 61,
       "lockedAt": "2026-08-20T18:48:03.861Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 5,
+        "away": 4
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-08-23T03:54:06.041Z"
     },
     {
       "gamePk": 824718,
@@ -31291,8 +31307,12 @@
       },
       "engineWinHomePct": 57,
       "lockedAt": "2026-08-20T18:48:03.861Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 3,
+        "away": 2
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-08-23T03:54:06.041Z"
     },
     {
       "gamePk": 824316,
@@ -31320,8 +31340,12 @@
       },
       "engineWinHomePct": 50,
       "lockedAt": "2026-08-20T18:48:03.861Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 3,
+        "away": 4
+      },
+      "verdict": "push",
+      "gradedAt": "2026-08-23T03:54:06.041Z"
     },
     {
       "gamePk": 825044,
@@ -31349,8 +31373,12 @@
       },
       "engineWinHomePct": 69,
       "lockedAt": "2026-08-22T01:34:50.034Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 5,
+        "away": 11
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-08-23T03:54:06.041Z"
     },
     {
       "gamePk": 823261,
@@ -31378,8 +31406,12 @@
       },
       "engineWinHomePct": 71,
       "lockedAt": "2026-08-20T18:48:03.861Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 7,
+        "away": 5
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-08-23T03:54:06.041Z"
     },
     {
       "gamePk": 824799,
@@ -31527,6 +31559,93 @@
       "verdict": null
     },
     {
+      "gamePk": 824150,
+      "gameDate": "2026-08-23T18:10:00Z",
+      "scheduleDate": "2026-08-23",
+      "homeId": 117,
+      "homeEn": "Houston Astros",
+      "homeRecord": "65-65",
+      "awayId": 133,
+      "awayEn": "Athletics",
+      "awayRecord": "50-80",
+      "homePitcher": "Cristian Javier",
+      "awayPitcher": "Brady Basso",
+      "homeStats": {
+        "era": "6.44",
+        "k9": "7.43",
+        "bb9": "4.21",
+        "hr9": "1.73"
+      },
+      "awayStats": {
+        "era": "3.91",
+        "k9": "7.43",
+        "bb9": "1.17",
+        "hr9": "0.78"
+      },
+      "engineWinHomePct": 38,
+      "lockedAt": "2026-08-23T03:54:05.449Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 824558,
+      "gameDate": "2026-08-23T18:10:00Z",
+      "scheduleDate": "2026-08-23",
+      "homeId": 145,
+      "homeEn": "Chicago White Sox",
+      "homeRecord": "67-62",
+      "awayId": 121,
+      "awayEn": "New York Mets",
+      "awayRecord": "59-71",
+      "homePitcher": "Sean Newcomb",
+      "awayPitcher": "Nolan McLean",
+      "homeStats": {
+        "era": "2.44",
+        "k9": "8.23",
+        "bb9": "3.47",
+        "hr9": "0.26"
+      },
+      "awayStats": {
+        "era": "3.34",
+        "k9": "10.22",
+        "bb9": "3.41",
+        "hr9": "0.95"
+      },
+      "engineWinHomePct": 58,
+      "lockedAt": "2026-08-23T03:54:05.449Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 822856,
+      "gameDate": "2026-08-23T18:35:00Z",
+      "scheduleDate": "2026-08-23",
+      "homeId": 140,
+      "homeEn": "Texas Rangers",
+      "homeRecord": "64-66",
+      "awayId": 108,
+      "awayEn": "Los Angeles Angels",
+      "awayRecord": "52-78",
+      "homePitcher": "Cal Quantrill",
+      "awayPitcher": "Yusei Kikuchi",
+      "homeStats": {
+        "era": "3.13",
+        "k9": "6.26",
+        "bb9": "2.55",
+        "hr9": "1.04"
+      },
+      "awayStats": {
+        "era": "5.81",
+        "k9": "9.58",
+        "bb9": "4.06",
+        "hr9": "0.87"
+      },
+      "engineWinHomePct": 57,
+      "lockedAt": "2026-08-23T03:54:05.449Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
       "gamePk": 824315,
       "gameDate": "2026-08-23T19:10:00Z",
       "scheduleDate": "2026-08-23",
@@ -31639,6 +31758,35 @@
       },
       "engineWinHomePct": 59,
       "lockedAt": "2026-08-21T18:43:50.139Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 823909,
+      "gameDate": "2026-08-23T20:10:00Z",
+      "scheduleDate": "2026-08-23",
+      "homeId": 119,
+      "homeEn": "Los Angeles Dodgers",
+      "homeRecord": "79-51",
+      "awayId": 134,
+      "awayEn": "Pittsburgh Pirates",
+      "awayRecord": "63-68",
+      "homePitcher": "Blake Snell",
+      "awayPitcher": "Lake Bachar",
+      "homeStats": {
+        "era": "3.60",
+        "k9": "12.00",
+        "bb9": "3.60",
+        "hr9": "0.00"
+      },
+      "awayStats": {
+        "era": "3.75",
+        "k9": "9.43",
+        "bb9": "3.49",
+        "hr9": "1.55"
+      },
+      "engineWinHomePct": 69,
+      "lockedAt": "2026-08-23T03:54:05.449Z",
       "finalScore": null,
       "verdict": null
     },
