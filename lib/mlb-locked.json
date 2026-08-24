@@ -31579,35 +31579,6 @@
       "gradedAt": "2026-08-23T21:26:42.346Z"
     },
     {
-      "gamePk": 824150,
-      "gameDate": "2026-08-23T18:10:00Z",
-      "scheduleDate": "2026-08-23",
-      "homeId": 117,
-      "homeEn": "Houston Astros",
-      "homeRecord": "65-65",
-      "awayId": 133,
-      "awayEn": "Athletics",
-      "awayRecord": "50-80",
-      "homePitcher": "Cristian Javier",
-      "awayPitcher": "Brady Basso",
-      "homeStats": {
-        "era": "6.44",
-        "k9": "7.43",
-        "bb9": "4.21",
-        "hr9": "1.73"
-      },
-      "awayStats": {
-        "era": "3.91",
-        "k9": "7.43",
-        "bb9": "1.17",
-        "hr9": "0.78"
-      },
-      "engineWinHomePct": 38,
-      "lockedAt": "2026-08-23T03:54:05.449Z",
-      "finalScore": null,
-      "verdict": null
-    },
-    {
       "gamePk": 824558,
       "gameDate": "2026-08-23T18:10:00Z",
       "scheduleDate": "2026-08-23",
@@ -31639,6 +31610,39 @@
       },
       "verdict": "proved",
       "gradedAt": "2026-08-23T21:26:42.346Z"
+    },
+    {
+      "gamePk": 824150,
+      "gameDate": "2026-08-23T18:10:00Z",
+      "scheduleDate": "2026-08-23",
+      "homeId": 117,
+      "homeEn": "Houston Astros",
+      "homeRecord": "65-65",
+      "awayId": 133,
+      "awayEn": "Athletics",
+      "awayRecord": "50-80",
+      "homePitcher": "Cristian Javier",
+      "awayPitcher": "Brady Basso",
+      "homeStats": {
+        "era": "6.44",
+        "k9": "7.43",
+        "bb9": "4.21",
+        "hr9": "1.73"
+      },
+      "awayStats": {
+        "era": "3.91",
+        "k9": "7.43",
+        "bb9": "1.17",
+        "hr9": "0.78"
+      },
+      "engineWinHomePct": 38,
+      "lockedAt": "2026-08-23T03:54:05.449Z",
+      "finalScore": {
+        "home": 6,
+        "away": 7
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-08-24T01:41:57.157Z"
     },
     {
       "gamePk": 822856,
@@ -31699,8 +31703,12 @@
       },
       "engineWinHomePct": 39,
       "lockedAt": "2026-08-21T18:43:50.139Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 2,
+        "away": 7
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-08-24T01:41:57.157Z"
     },
     {
       "gamePk": 824720,
@@ -31728,8 +31736,12 @@
       },
       "engineWinHomePct": 50,
       "lockedAt": "2026-08-23T01:44:20.012Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 5,
+        "away": 4
+      },
+      "verdict": "push",
+      "gradedAt": "2026-08-24T01:41:57.157Z"
     },
     {
       "gamePk": 823099,
@@ -31757,8 +31769,12 @@
       },
       "engineWinHomePct": 56,
       "lockedAt": "2026-08-21T18:43:50.139Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 2,
+        "away": 19
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-08-24T01:41:57.157Z"
     },
     {
       "gamePk": 823258,
@@ -31786,8 +31802,12 @@
       },
       "engineWinHomePct": 59,
       "lockedAt": "2026-08-21T18:43:50.139Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 8,
+        "away": 1
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-08-24T01:41:57.157Z"
     },
     {
       "gamePk": 823909,
@@ -31815,8 +31835,12 @@
       },
       "engineWinHomePct": 69,
       "lockedAt": "2026-08-23T03:54:05.449Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 4,
+        "away": 0
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-08-24T01:41:57.157Z"
     },
     {
       "gamePk": 825043,
@@ -31844,8 +31868,12 @@
       },
       "engineWinHomePct": 52,
       "lockedAt": "2026-08-21T18:43:50.139Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 5,
+        "away": 3
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-08-24T01:41:57.157Z"
     },
     {
       "gamePk": 823745,
@@ -32167,6 +32195,35 @@
       "verdict": null
     },
     {
+      "gamePk": 823505,
+      "gameDate": "2026-08-25T23:05:00Z",
+      "scheduleDate": "2026-08-25",
+      "homeId": 147,
+      "homeEn": "New York Yankees",
+      "homeRecord": "74-56",
+      "awayId": 117,
+      "awayEn": "Houston Astros",
+      "awayRecord": "65-66",
+      "homePitcher": "Will Warren",
+      "awayPitcher": "Ethan Pecko",
+      "homeStats": {
+        "era": "4.43",
+        "k9": "9.00",
+        "bb9": "3.17",
+        "hr9": "1.40"
+      },
+      "awayStats": {
+        "era": "4.91",
+        "k9": "9.82",
+        "bb9": "7.36",
+        "hr9": "0.00"
+      },
+      "engineWinHomePct": 46,
+      "lockedAt": "2026-08-24T01:41:56.654Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
       "gamePk": 822773,
       "gameDate": "2026-08-25T23:07:00Z",
       "scheduleDate": "2026-08-25",
@@ -32221,6 +32278,35 @@
       },
       "engineWinHomePct": 44,
       "lockedAt": "2026-08-23T21:26:41.842Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 824881,
+      "gameDate": "2026-08-25T23:15:00Z",
+      "scheduleDate": "2026-08-25",
+      "homeId": 144,
+      "homeEn": "Atlanta Braves",
+      "homeRecord": "75-55",
+      "awayId": 119,
+      "awayEn": "Los Angeles Dodgers",
+      "awayRecord": "80-51",
+      "homePitcher": "Bryce Elder",
+      "awayPitcher": "Tyler Glasnow",
+      "homeStats": {
+        "era": "3.92",
+        "k9": "7.39",
+        "bb9": "3.01",
+        "hr9": "1.44"
+      },
+      "awayStats": {
+        "era": "2.72",
+        "k9": "11.12",
+        "bb9": "2.95",
+        "hr9": "1.13"
+      },
+      "engineWinHomePct": 40,
+      "lockedAt": "2026-08-24T01:41:56.654Z",
       "finalScore": null,
       "verdict": null
     },
