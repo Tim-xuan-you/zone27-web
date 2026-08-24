@@ -31996,6 +31996,35 @@
       "verdict": null
     },
     {
+      "gamePk": 824557,
+      "gameDate": "2026-08-24T23:40:00Z",
+      "scheduleDate": "2026-08-24",
+      "homeId": 145,
+      "homeEn": "Chicago White Sox",
+      "homeRecord": "68-62",
+      "awayId": 140,
+      "awayEn": "Texas Rangers",
+      "awayRecord": "65-66",
+      "homePitcher": "José Urquidy",
+      "awayPitcher": "Kumar Rocker",
+      "homeStats": {
+        "era": "5.06",
+        "k9": "9.56",
+        "bb9": "1.13",
+        "hr9": "1.13"
+      },
+      "awayStats": {
+        "era": "4.46",
+        "k9": "8.11",
+        "bb9": "3.57",
+        "hr9": "1.26"
+      },
+      "engineWinHomePct": 55,
+      "lockedAt": "2026-08-24T15:44:16.974Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
       "gamePk": 823992,
       "gameDate": "2026-08-25T01:38:00Z",
       "scheduleDate": "2026-08-24",
