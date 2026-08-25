@@ -31934,8 +31934,12 @@
       },
       "engineWinHomePct": 45,
       "lockedAt": "2026-08-23T18:36:39.457Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 1,
+        "away": 4
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-08-25T01:37:11.159Z"
     },
     {
       "gamePk": 823828,
@@ -32659,6 +32663,35 @@
       },
       "engineWinHomePct": 38,
       "lockedAt": "2026-08-24T18:48:54.094Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 823096,
+      "gameDate": "2026-08-26T20:10:00Z",
+      "scheduleDate": "2026-08-26",
+      "homeId": 136,
+      "homeEn": "Seattle Mariners",
+      "homeRecord": "62-69",
+      "awayId": 143,
+      "awayEn": "Philadelphia Phillies",
+      "awayRecord": "73-58",
+      "homePitcher": "Bryan Woo",
+      "awayPitcher": "Jesús Luzardo",
+      "homeStats": {
+        "era": "4.10",
+        "k9": "8.91",
+        "bb9": "1.89",
+        "hr9": "0.98"
+      },
+      "awayStats": {
+        "era": "3.35",
+        "k9": "11.19",
+        "bb9": "2.71",
+        "hr9": "0.81"
+      },
+      "engineWinHomePct": 45,
+      "lockedAt": "2026-08-25T01:37:10.744Z",
       "finalScore": null,
       "verdict": null
     },
