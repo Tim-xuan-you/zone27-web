@@ -32960,6 +32960,35 @@
       "verdict": null
     },
     {
+      "gamePk": 822771,
+      "gameDate": "2026-08-27T23:07:00Z",
+      "scheduleDate": "2026-08-27",
+      "homeId": 141,
+      "homeEn": "Toronto Blue Jays",
+      "homeRecord": "64-68",
+      "awayId": 118,
+      "awayEn": "Kansas City Royals",
+      "awayRecord": "58-74",
+      "homePitcher": "Spencer Arrighetti",
+      "awayPitcher": "Noah Cameron",
+      "homeStats": {
+        "era": "4.73",
+        "k9": "8.97",
+        "bb9": "5.12",
+        "hr9": "1.28"
+      },
+      "awayStats": {
+        "era": "4.02",
+        "k9": "8.04",
+        "bb9": "2.89",
+        "hr9": "0.88"
+      },
+      "engineWinHomePct": 51,
+      "lockedAt": "2026-08-25T21:33:21.944Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
       "gamePk": 823581,
       "gameDate": "2026-08-27T23:10:00Z",
       "scheduleDate": "2026-08-27",
