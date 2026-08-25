@@ -32900,6 +32900,122 @@
       "lockedAt": "2026-08-24T18:48:54.094Z",
       "finalScore": null,
       "verdict": null
+    },
+    {
+      "gamePk": 822694,
+      "gameDate": "2026-08-27T17:05:00Z",
+      "scheduleDate": "2026-08-27",
+      "homeId": 120,
+      "homeEn": "Washington Nationals",
+      "homeRecord": "62-71",
+      "awayId": 115,
+      "awayEn": "Colorado Rockies",
+      "awayRecord": "50-81",
+      "homePitcher": "Jake Irvin",
+      "awayPitcher": "Gabriel Hughes",
+      "homeStats": {
+        "era": "5.82",
+        "k9": "8.84",
+        "bb9": "3.84",
+        "hr9": "1.63"
+      },
+      "awayStats": {
+        "era": "6.54",
+        "k9": "7.38",
+        "bb9": "3.16",
+        "hr9": "0.84"
+      },
+      "engineWinHomePct": 55,
+      "lockedAt": "2026-08-25T18:46:32.059Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 823503,
+      "gameDate": "2026-08-27T23:05:00Z",
+      "scheduleDate": "2026-08-27",
+      "homeId": 147,
+      "homeEn": "New York Yankees",
+      "homeRecord": "74-56",
+      "awayId": 117,
+      "awayEn": "Houston Astros",
+      "awayRecord": "65-66",
+      "homePitcher": "Gerrit Cole",
+      "awayPitcher": "Hayden Wesneski",
+      "homeStats": {
+        "era": "3.11",
+        "k9": "9.71",
+        "bb9": "1.94",
+        "hr9": "1.17"
+      },
+      "awayStats": {
+        "era": "4.23",
+        "k9": "7.16",
+        "bb9": "3.25",
+        "hr9": "0.65"
+      },
+      "engineWinHomePct": 60,
+      "lockedAt": "2026-08-25T18:46:32.059Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 823581,
+      "gameDate": "2026-08-27T23:10:00Z",
+      "scheduleDate": "2026-08-27",
+      "homeId": 121,
+      "homeEn": "New York Mets",
+      "homeRecord": "59-72",
+      "awayId": 158,
+      "awayEn": "Milwaukee Brewers",
+      "awayRecord": "81-50",
+      "homePitcher": "Sean Manaea",
+      "awayPitcher": "Jacob Misiorowski",
+      "homeStats": {
+        "era": "4.31",
+        "k9": "9.00",
+        "bb9": "3.00",
+        "hr9": "1.46"
+      },
+      "awayStats": {
+        "era": "1.68",
+        "k9": "13.41",
+        "bb9": "2.05",
+        "hr9": "0.81"
+      },
+      "engineWinHomePct": 31,
+      "lockedAt": "2026-08-25T18:46:32.059Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 824879,
+      "gameDate": "2026-08-27T23:15:00Z",
+      "scheduleDate": "2026-08-27",
+      "homeId": 144,
+      "homeEn": "Atlanta Braves",
+      "homeRecord": "76-55",
+      "awayId": 119,
+      "awayEn": "Los Angeles Dodgers",
+      "awayRecord": "80-51",
+      "homePitcher": "Chris Sale",
+      "awayPitcher": "Yoshinobu Yamamoto",
+      "homeStats": {
+        "era": "2.20",
+        "k9": "11.07",
+        "bb9": "1.87",
+        "hr9": "0.53"
+      },
+      "awayStats": {
+        "era": "2.61",
+        "k9": "8.60",
+        "bb9": "2.08",
+        "hr9": "0.89"
+      },
+      "engineWinHomePct": 63,
+      "lockedAt": "2026-08-25T18:46:32.059Z",
+      "finalScore": null,
+      "verdict": null
     }
   ]
 }
