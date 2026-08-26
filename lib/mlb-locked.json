@@ -32462,8 +32462,12 @@
       },
       "engineWinHomePct": 57,
       "lockedAt": "2026-08-23T18:36:39.457Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 6,
+        "away": 8
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-08-26T06:57:39.024Z"
     },
     {
       "gamePk": 824962,
@@ -32491,8 +32495,12 @@
       },
       "engineWinHomePct": 51,
       "lockedAt": "2026-08-23T18:36:39.457Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 4,
+        "away": 2
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-08-26T06:57:39.024Z"
     },
     {
       "gamePk": 825042,
@@ -32520,8 +32528,12 @@
       },
       "engineWinHomePct": 47,
       "lockedAt": "2026-08-23T21:26:41.842Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 5,
+        "away": 4
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-08-26T06:57:39.024Z"
     },
     {
       "gamePk": 823259,
@@ -32549,8 +32561,12 @@
       },
       "engineWinHomePct": 49,
       "lockedAt": "2026-08-23T21:26:41.842Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 0,
+        "away": 1
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-08-26T06:57:39.024Z"
     },
     {
       "gamePk": 823098,
@@ -32578,8 +32594,12 @@
       },
       "engineWinHomePct": 59,
       "lockedAt": "2026-08-23T21:26:41.842Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 4,
+        "away": 1
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-08-26T06:57:39.024Z"
     },
     {
       "gamePk": 823181,
@@ -32607,8 +32627,12 @@
       },
       "engineWinHomePct": 57,
       "lockedAt": "2026-08-24T18:48:54.094Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 3,
+        "away": 1
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-08-26T06:57:39.024Z"
     },
     {
       "gamePk": 824234,
@@ -32752,6 +32776,35 @@
       },
       "engineWinHomePct": 45,
       "lockedAt": "2026-08-25T01:37:10.744Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 823255,
+      "gameDate": "2026-08-26T20:10:00Z",
+      "scheduleDate": "2026-08-26",
+      "homeId": 135,
+      "homeEn": "San Diego Padres",
+      "homeRecord": "71-62",
+      "awayId": 134,
+      "awayEn": "Pittsburgh Pirates",
+      "awayRecord": "65-69",
+      "homePitcher": "Randy Vásquez",
+      "awayPitcher": "Bubba Chandler",
+      "homeStats": {
+        "era": "4.19",
+        "k9": "5.64",
+        "bb9": "2.44",
+        "hr9": "1.14"
+      },
+      "awayStats": {
+        "era": "4.38",
+        "k9": "8.19",
+        "bb9": "4.74",
+        "hr9": "0.79"
+      },
+      "engineWinHomePct": 48,
+      "lockedAt": "2026-08-26T06:57:38.389Z",
       "finalScore": null,
       "verdict": null
     },
