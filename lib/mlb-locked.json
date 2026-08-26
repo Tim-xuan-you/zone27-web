@@ -33184,6 +33184,35 @@
       "lockedAt": "2026-08-25T18:46:32.059Z",
       "finalScore": null,
       "verdict": null
+    },
+    {
+      "gamePk": 824638,
+      "gameDate": "2026-08-28T18:20:00Z",
+      "scheduleDate": "2026-08-28",
+      "homeId": 112,
+      "homeEn": "Chicago Cubs",
+      "homeRecord": "76-57",
+      "awayId": 113,
+      "awayEn": "Cincinnati Reds",
+      "awayRecord": "62-71",
+      "homePitcher": "David Peterson",
+      "awayPitcher": "Rhett Lowder",
+      "homeStats": {
+        "era": "5.17",
+        "k9": "7.83",
+        "bb9": "3.73",
+        "hr9": "0.91"
+      },
+      "awayStats": {
+        "era": "5.13",
+        "k9": "6.98",
+        "bb9": "3.62",
+        "hr9": "1.26"
+      },
+      "engineWinHomePct": 58,
+      "lockedAt": "2026-08-26T16:22:07.654Z",
+      "finalScore": null,
+      "verdict": null
     }
   ]
 }
