@@ -32231,8 +32231,12 @@
       },
       "engineWinHomePct": 47,
       "lockedAt": "2026-08-23T18:36:39.457Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 4,
+        "away": 1
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-08-26T01:41:50.397Z"
     },
     {
       "gamePk": 822693,
@@ -32260,8 +32264,12 @@
       },
       "engineWinHomePct": 75,
       "lockedAt": "2026-08-23T18:36:39.457Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 1,
+        "away": 3
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-08-26T01:41:50.398Z"
     },
     {
       "gamePk": 823505,
@@ -32869,6 +32877,35 @@
       },
       "engineWinHomePct": 58,
       "lockedAt": "2026-08-24T18:48:54.094Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 823015,
+      "gameDate": "2026-08-26T23:45:00Z",
+      "scheduleDate": "2026-08-26",
+      "homeId": 138,
+      "homeEn": "St. Louis Cardinals",
+      "homeRecord": "66-66",
+      "awayId": 110,
+      "awayEn": "Baltimore Orioles",
+      "awayRecord": "63-68",
+      "homePitcher": "Michael McGreevy",
+      "awayPitcher": "Kyle Bradish",
+      "homeStats": {
+        "era": "3.54",
+        "k9": "6.23",
+        "bb9": "2.36",
+        "hr9": "1.18"
+      },
+      "awayStats": {
+        "era": "3.70",
+        "k9": "8.37",
+        "bb9": "3.89",
+        "hr9": "0.97"
+      },
+      "engineWinHomePct": 49,
+      "lockedAt": "2026-08-26T01:41:49.739Z",
       "finalScore": null,
       "verdict": null
     },
