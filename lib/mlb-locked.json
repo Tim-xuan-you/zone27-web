@@ -32660,8 +32660,12 @@
       },
       "engineWinHomePct": 70,
       "lockedAt": "2026-08-24T18:48:54.094Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 0,
+        "away": 3
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-08-26T19:52:50.027Z"
     },
     {
       "gamePk": 825039,
@@ -33211,6 +33215,64 @@
       },
       "engineWinHomePct": 58,
       "lockedAt": "2026-08-26T16:22:07.654Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 823744,
+      "gameDate": "2026-08-28T23:40:00Z",
+      "scheduleDate": "2026-08-28",
+      "homeId": 158,
+      "homeEn": "Milwaukee Brewers",
+      "homeRecord": "81-51",
+      "awayId": 140,
+      "awayEn": "Texas Rangers",
+      "awayRecord": "66-67",
+      "homePitcher": "Logan Henderson",
+      "awayPitcher": "Cody Bradford",
+      "homeStats": {
+        "era": "2.60",
+        "k9": "10.25",
+        "bb9": "1.82",
+        "hr9": "1.30"
+      },
+      "awayStats": {
+        "era": "3.05",
+        "k9": "5.66",
+        "bb9": "1.74",
+        "hr9": "0.44"
+      },
+      "engineWinHomePct": 60,
+      "lockedAt": "2026-08-26T19:52:49.382Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 823985,
+      "gameDate": "2026-08-29T01:38:00Z",
+      "scheduleDate": "2026-08-28",
+      "homeId": 108,
+      "homeEn": "Los Angeles Angels",
+      "homeRecord": "52-81",
+      "awayId": 143,
+      "awayEn": "Philadelphia Phillies",
+      "awayRecord": "73-60",
+      "homePitcher": "Reid Detmers",
+      "awayPitcher": "Andrew Painter",
+      "homeStats": {
+        "era": "3.62",
+        "k9": "10.39",
+        "bb9": "2.66",
+        "hr9": "1.03"
+      },
+      "awayStats": {
+        "era": "6.04",
+        "k9": "7.70",
+        "bb9": "3.31",
+        "hr9": "1.66"
+      },
+      "engineWinHomePct": 73,
+      "lockedAt": "2026-08-26T19:52:49.382Z",
       "finalScore": null,
       "verdict": null
     }
