@@ -32297,8 +32297,12 @@
       },
       "engineWinHomePct": 46,
       "lockedAt": "2026-08-24T01:41:56.654Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 7,
+        "away": 9
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-08-26T03:56:33.099Z"
     },
     {
       "gamePk": 822773,
@@ -32326,8 +32330,12 @@
       },
       "engineWinHomePct": 34,
       "lockedAt": "2026-08-23T21:26:41.842Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 3,
+        "away": 5
+      },
+      "verdict": "proved",
+      "gradedAt": "2026-08-26T03:56:33.099Z"
     },
     {
       "gamePk": 823585,
@@ -32355,8 +32363,12 @@
       },
       "engineWinHomePct": 44,
       "lockedAt": "2026-08-23T21:26:41.842Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 3,
+        "away": 2
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-08-26T03:56:33.099Z"
     },
     {
       "gamePk": 824881,
@@ -32384,8 +32396,12 @@
       },
       "engineWinHomePct": 40,
       "lockedAt": "2026-08-24T01:41:56.654Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 4,
+        "away": 3
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-08-26T03:56:33.099Z"
     },
     {
       "gamePk": 824556,
@@ -32413,8 +32429,12 @@
       },
       "engineWinHomePct": 46,
       "lockedAt": "2026-08-23T21:26:41.842Z",
-      "finalScore": null,
-      "verdict": null
+      "finalScore": {
+        "home": 11,
+        "away": 7
+      },
+      "verdict": "diverged",
+      "gradedAt": "2026-08-26T03:56:33.099Z"
     },
     {
       "gamePk": 823989,
@@ -32761,6 +32781,35 @@
       },
       "engineWinHomePct": 46,
       "lockedAt": "2026-08-24T18:48:54.094Z",
+      "finalScore": null,
+      "verdict": null
+    },
+    {
+      "gamePk": 822692,
+      "gameDate": "2026-08-26T22:45:00Z",
+      "scheduleDate": "2026-08-26",
+      "homeId": 120,
+      "homeEn": "Washington Nationals",
+      "homeRecord": "62-72",
+      "awayId": 115,
+      "awayEn": "Colorado Rockies",
+      "awayRecord": "51-81",
+      "homePitcher": "Matt Waldron",
+      "awayPitcher": "Tanner Gordon",
+      "homeStats": {
+        "era": "7.54",
+        "k9": "7.54",
+        "bb9": "2.43",
+        "hr9": "1.70"
+      },
+      "awayStats": {
+        "era": "5.75",
+        "k9": "7.51",
+        "bb9": "1.76",
+        "hr9": "1.88"
+      },
+      "engineWinHomePct": 48,
+      "lockedAt": "2026-08-26T03:56:32.621Z",
       "finalScore": null,
       "verdict": null
     },
