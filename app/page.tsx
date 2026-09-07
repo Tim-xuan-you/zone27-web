@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Decider from "@/components/Decider";
 
 export default function Home() {
@@ -12,7 +13,8 @@ export default function Home() {
           ZONE 27
         </div>
         <nav style={{ display: "flex", gap: 16, fontSize: 12.5, color: "var(--muted)" }}>
-          <span>失敗案例庫</span><span>校準紀錄</span><span>分潤政策</span>
+          <span>失敗案例庫</span><span>校準紀錄</span>
+          <Link href="/how-we-choose" style={{ color: "inherit", textDecoration: "none" }}>分潤政策</Link>
         </nav>
       </div>
 
@@ -38,7 +40,7 @@ export default function Home() {
           目前為建置階段，商品與數據為示範資料。
         </p>
         <p style={{ margin: "8px 0 0" }}>
-          本站透過購買連結取得分潤，這不影響推薦排序。
+          本站透過購買連結取得分潤，這不影響推薦排序 —— <Link href="/how-we-choose" style={{ color: "var(--muted)" }}>規則寫在這裡</Link>。
         </p>
       </footer>
     </main>
