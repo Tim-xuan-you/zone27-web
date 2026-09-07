@@ -185,10 +185,14 @@ export default function Decider() {
                               </div>
                             )}
                           </div>
-                          <p style={S.reports}>
-                            {p.reports.total} 位飼主回報中，{p.reports.palatability} 位反映適口性差、
-                            {p.reports.looseStool} 位反映軟便。
-                          </p>
+                        {/* 沒有回報就不要顯示 —— 「0 位飼主回報中，0 位反映…」
+                            看起來像壞掉，而且它其實是在講「我們還沒查」，
+                            不如老實講那句。 */}
+                        <p style={S.reports}>
+                          {p.reports.total > 0
+                            ? `${p.reports.total} 位飼主回報中，${p.reports.palatability} 位反映適口性差、${p.reports.looseStool} 位反映軟便。`
+                            : "這款我們還沒整理飼主回報。有買過的話，歡迎把心得傳 LINE 給我們。"}
+                        </p>
                         </div>
                       )}
                     </article>
