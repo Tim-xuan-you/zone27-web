@@ -114,8 +114,9 @@ function score(p: Product, situation: Situation): number {
   // 有過敏疑慮時，單一蛋白源的價值最高 —— 它讓飼主下次能排查出兇手
   if (p.spec.singleSource) s += situation.avoid.length > 0 ? 30 : 12;
 
-  // 碳水低於建議上限，每低 1% 加分，但設上限避免極端配方獨大
-  s += Math.min(10, Math.max(0, 25 - p.spec.carb));
+  // 碳水越低越好。台灣市售乾糧多在 25–50%，所以拿 45 當基準往下算，
+  // 上限 12 分避免極端高蛋白配方光靠這一項就輾壓其他所有考量。
+  s += Math.min(12, Math.max(0, (45 - p.spec.carb) / 2));
 
   // Omega-3
   s += Math.min(12, p.spec.omega3 * 8);
