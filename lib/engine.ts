@@ -289,16 +289,24 @@ export function storesOf(p: Product): Store[] {
     byUrl.set(m.affiliateUrl, [...(byUrl.get(m.affiliateUrl) ?? []), m]);
   }
 
+  /*
+   * 省幅的基準要跨賣場算，不能只在同一個區塊裡比。
+   *
+   * 賣家設定方式不一致：有人把 6磅/22磅 放同一個商品頁（同網址），
+   * 有人拆成兩個商品（不同網址）。後者如果只在區塊內比，
+   * 每個區塊都只有一個規格 → 永遠算不出省幅。
+   */
+  const allKg = p.price.merchants
+    .map((m) => pricePerKg(unitOf(p, m), m.amount))
+    .filter((k): k is number => k !== null);
+  const base = allKg.length > 1 ? Math.max(...allKg) : null;
+
   return [...byUrl.values()].map((ms) => {
     const withKg = ms.map((m) => ({
       m,
       unit: unitOf(p, m),
       perKg: pricePerKg(unitOf(p, m), m.amount),
     }));
-
-    // 有算得出每公斤的話，用最貴的當基準算省幅
-    const kgs = withKg.map((x) => x.perKg).filter((k): k is number => k !== null);
-    const base = kgs.length > 1 ? Math.max(...kgs) : null;
 
     return {
       id: ms[0].id,
