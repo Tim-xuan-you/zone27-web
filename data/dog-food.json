@@ -3,255 +3,26 @@
     "category": "dog-food",
     "note": "由 data/dog-food.csv 產生，不要直接改這個檔。改 CSV 之後跑 npm run data:import。",
     "generatedAt": "2026-09-07",
-    "count": 8,
+    "count": 5,
     "pricePolicy": "人工複查，不爬蟲。checkedAt 誠實顯示於前端。"
   },
   "products": [
     {
-      "id": "df-001",
+      "id": "df-01",
       "species": "dog",
-      "brand": "示範品牌 A",
-      "name": "低敏羊肉無穀",
+      "brand": "ACANA 愛肯拿",
+      "name": "單一蛋白低敏無穀 美膚羊肉+蘋果",
       "spec": {
-        "protein": 28,
-        "fat": 16,
-        "carb": 21,
-        "omega3": 0.9,
-        "phosphorus": 0.9,
+        "protein": 31,
+        "fat": 17,
+        "carb": 25,
+        "omega3": 1,
+        "phosphorus": 1.1,
         "proteinSources": [
           "lamb"
         ],
         "singleSource": true,
         "grainFree": true,
-        "lifeStage": [
-          "adult"
-        ],
-        "bodySize": [
-          "small",
-          "medium"
-        ],
-        "prescription": false
-      },
-      "reports": {
-        "total": 210,
-        "palatability": 14,
-        "looseStool": 9
-      },
-      "price": {
-        "unit": "1.5kg",
-        "checkedAt": "2026-09-05",
-        "merchants": [
-          {
-            "id": "sp-official",
-            "label": "官方旗艦館",
-            "amount": 1280,
-            "note": "15 天鑑賞 · 24h 出貨",
-            "affiliateUrl": "https://shopee.tw/PLACEHOLDER-001-A",
-            "commission": 2.1,
-            "anchor": "safe"
-          },
-          {
-            "id": "sp-top",
-            "label": "高評價大賣家",
-            "amount": 1145,
-            "note": "4,200 則好評 · 現貨",
-            "affiliateUrl": "https://shopee.tw/PLACEHOLDER-001-B",
-            "commission": 2.1,
-            "anchor": "value"
-          }
-        ]
-      },
-      "dealbreaker": "你的狗曾對羊肉起疹 — 單一蛋白源沒有備援"
-    },
-    {
-      "id": "df-002",
-      "species": "dog",
-      "brand": "示範品牌 B",
-      "name": "鮭魚低敏配方",
-      "spec": {
-        "protein": 26,
-        "fat": 15,
-        "carb": 24,
-        "omega3": 1.4,
-        "phosphorus": 1,
-        "proteinSources": [
-          "salmon",
-          "whitefish"
-        ],
-        "singleSource": false,
-        "grainFree": true,
-        "lifeStage": [
-          "adult",
-          "senior"
-        ],
-        "bodySize": [
-          "small",
-          "medium",
-          "large"
-        ],
-        "prescription": false
-      },
-      "reports": {
-        "total": 142,
-        "palatability": 31,
-        "looseStool": 8
-      },
-      "price": {
-        "unit": "1.5kg",
-        "checkedAt": "2026-09-05",
-        "merchants": [
-          {
-            "id": "sp-official",
-            "label": "官方旗艦館",
-            "amount": 980,
-            "note": "15 天鑑賞",
-            "affiliateUrl": "https://shopee.tw/PLACEHOLDER-002-A",
-            "commission": 3.4,
-            "anchor": "safe"
-          },
-          {
-            "id": "sp-top",
-            "label": "高評價大賣家",
-            "amount": 899,
-            "note": "1,800 則好評",
-            "affiliateUrl": "https://shopee.tw/PLACEHOLDER-002-B",
-            "commission": 3.4,
-            "anchor": "value"
-          }
-        ]
-      },
-      "dealbreaker": "你的狗挑食 — 142 位回報者中有 31 位反映適口性差"
-    },
-    {
-      "id": "df-003",
-      "species": "dog",
-      "brand": "示範品牌 C",
-      "name": "高蛋白雞肉配方",
-      "spec": {
-        "protein": 32,
-        "fat": 18,
-        "carb": 18,
-        "omega3": 0.6,
-        "phosphorus": 1.2,
-        "proteinSources": [
-          "chicken",
-          "turkey"
-        ],
-        "singleSource": false,
-        "grainFree": true,
-        "lifeStage": [
-          "adult"
-        ],
-        "bodySize": [
-          "medium",
-          "large"
-        ],
-        "prescription": false
-      },
-      "reports": {
-        "total": 480,
-        "palatability": 21,
-        "looseStool": 30
-      },
-      "price": {
-        "unit": "1.5kg",
-        "checkedAt": "2026-09-05",
-        "merchants": [
-          {
-            "id": "sp-official",
-            "label": "官方旗艦館",
-            "amount": 1450,
-            "note": "15 天鑑賞",
-            "affiliateUrl": "https://shopee.tw/PLACEHOLDER-003-A",
-            "commission": 8.5,
-            "anchor": "safe"
-          },
-          {
-            "id": "sp-top",
-            "label": "高評價大賣家",
-            "amount": 1380,
-            "note": "9,100 則好評",
-            "affiliateUrl": "https://shopee.tw/PLACEHOLDER-003-B",
-            "commission": 8.5,
-            "anchor": "value"
-          }
-        ]
-      },
-      "dealbreaker": "你的狗對雞肉過敏 — 主蛋白源就是雞"
-    },
-    {
-      "id": "df-004",
-      "species": "dog",
-      "brand": "示範品牌 D",
-      "name": "鴨肉單一蛋白",
-      "spec": {
-        "protein": 27,
-        "fat": 14,
-        "carb": 23,
-        "omega3": 0.7,
-        "phosphorus": 0.85,
-        "proteinSources": [
-          "duck"
-        ],
-        "singleSource": true,
-        "grainFree": true,
-        "lifeStage": [
-          "adult",
-          "senior"
-        ],
-        "bodySize": [
-          "small",
-          "medium"
-        ],
-        "prescription": false
-      },
-      "reports": {
-        "total": 96,
-        "palatability": 12,
-        "looseStool": 5
-      },
-      "price": {
-        "unit": "1.5kg",
-        "checkedAt": "2026-09-05",
-        "merchants": [
-          {
-            "id": "sp-official",
-            "label": "官方旗艦館",
-            "amount": 1520,
-            "note": "15 天鑑賞",
-            "affiliateUrl": "https://shopee.tw/PLACEHOLDER-004-A",
-            "commission": 4,
-            "anchor": "safe"
-          },
-          {
-            "id": "sp-top",
-            "label": "高評價大賣家",
-            "amount": 1430,
-            "note": "760 則好評",
-            "affiliateUrl": "https://shopee.tw/PLACEHOLDER-004-B",
-            "commission": 4,
-            "anchor": "value"
-          }
-        ]
-      },
-      "dealbreaker": "預算吃緊 — 同級單一蛋白源裡它偏貴"
-    },
-    {
-      "id": "df-005",
-      "species": "dog",
-      "brand": "示範品牌 E",
-      "name": "經濟型雞肉主食",
-      "spec": {
-        "protein": 22,
-        "fat": 12,
-        "carb": 34,
-        "omega3": 0.3,
-        "phosphorus": 1.3,
-        "proteinSources": [
-          "chicken"
-        ],
-        "singleSource": true,
-        "grainFree": false,
         "lifeStage": [
           "all"
         ],
@@ -263,138 +34,40 @@
         "prescription": false
       },
       "reports": {
-        "total": 620,
-        "palatability": 40,
-        "looseStool": 88
-      },
-      "price": {
-        "unit": "3kg",
-        "checkedAt": "2026-09-05",
-        "merchants": [
-          {
-            "id": "sp-official",
-            "label": "高評價大賣家",
-            "amount": 620,
-            "note": "12,000 則好評",
-            "affiliateUrl": "https://shopee.tw/PLACEHOLDER-005-B",
-            "commission": 5.2,
-            "anchor": "safe"
-          }
-        ]
-      },
-      "dealbreaker": "碳水 34% 偏高 — 需要控制體重的狗不適合"
-    },
-    {
-      "id": "df-006",
-      "species": "dog",
-      "brand": "示範品牌 F",
-      "name": "腎臟處方配方",
-      "spec": {
-        "protein": 18,
-        "fat": 15,
-        "carb": 28,
-        "omega3": 1.1,
-        "phosphorus": 0.35,
-        "proteinSources": [
-          "pork",
-          "whitefish"
-        ],
-        "singleSource": false,
-        "grainFree": false,
-        "lifeStage": [
-          "adult",
-          "senior"
-        ],
-        "bodySize": [
-          "small",
-          "medium",
-          "large"
-        ],
-        "prescription": true
-      },
-      "reports": {
-        "total": 55,
-        "palatability": 18,
-        "looseStool": 4
+        "total": 0,
+        "palatability": 0,
+        "looseStool": 0
       },
       "price": {
         "unit": "2kg",
-        "checkedAt": "2026-09-05",
+        "checkedAt": "2026-09-08",
         "merchants": [
           {
             "id": "sp-official",
-            "label": "官方旗艦館",
-            "amount": 1890,
-            "note": "需獸醫指示",
-            "affiliateUrl": "https://shopee.tw/PLACEHOLDER-006-A",
-            "commission": 3,
+            "label": "獅子王寵物（蝦皮優選）",
+            "amount": 1200,
+            "note": "2kg · 隔日到貨 · 正品保障 · 超商限兩包",
+            "affiliateUrl": "https://s.shopee.tw/3B7ESUSXfM?share_channel_code=6",
+            "commission": 9,
             "anchor": "safe"
           }
         ]
       },
-      "dealbreaker": "沒有獸醫診斷 — 處方飼料不該自行購買"
+      "dealbreaker": "你的狗曾對羊肉起疹 — 全配方只有羊，沒有第二種蛋白源可以退"
     },
     {
-      "id": "df-007",
+      "id": "df-02",
       "species": "dog",
-      "brand": "示範品牌 G",
-      "name": "幼犬成長配方",
+      "brand": "Natural Balance",
+      "name": "低敏無穀馬鈴薯鴨肉 成犬",
       "spec": {
-        "protein": 30,
-        "fat": 20,
-        "carb": 26,
-        "omega3": 1,
-        "phosphorus": 1.1,
+        "protein": 24,
+        "fat": 10,
+        "carb": 45,
+        "omega3": 0,
+        "phosphorus": 0.6,
         "proteinSources": [
-          "chicken",
-          "salmon"
-        ],
-        "singleSource": false,
-        "grainFree": false,
-        "lifeStage": [
-          "puppy"
-        ],
-        "bodySize": [
-          "medium",
-          "large"
-        ],
-        "prescription": false
-      },
-      "reports": {
-        "total": 310,
-        "palatability": 16,
-        "looseStool": 22
-      },
-      "price": {
-        "unit": "2kg",
-        "checkedAt": "2026-09-05",
-        "merchants": [
-          {
-            "id": "sp-official",
-            "label": "官方旗艦館",
-            "amount": 1180,
-            "note": "15 天鑑賞",
-            "affiliateUrl": "https://shopee.tw/PLACEHOLDER-007-A",
-            "commission": 4.5,
-            "anchor": "safe"
-          }
-        ]
-      },
-      "dealbreaker": "成犬吃 — 幼犬配方熱量過高會胖"
-    },
-    {
-      "id": "df-008",
-      "species": "dog",
-      "brand": "示範品牌 H",
-      "name": "鹿肉無穀低敏",
-      "spec": {
-        "protein": 29,
-        "fat": 15,
-        "carb": 19,
-        "omega3": 1.2,
-        "phosphorus": 0.95,
-        "proteinSources": [
-          "venison"
+          "duck"
         ],
         "singleSource": true,
         "grainFree": true,
@@ -403,32 +76,175 @@
         ],
         "bodySize": [
           "small",
-          "medium"
+          "medium",
+          "large"
         ],
         "prescription": false
       },
       "reports": {
-        "total": 8,
-        "palatability": 1,
+        "total": 0,
+        "palatability": 0,
         "looseStool": 0
       },
       "price": {
-        "unit": "1.5kg",
-        "checkedAt": "2026-08-20",
+        "unit": "4.5磅",
+        "checkedAt": "2026-09-08",
         "merchants": [
           {
             "id": "sp-official",
-            "label": "官方旗艦館",
-            "amount": 1650,
-            "note": "長期缺貨",
-            "affiliateUrl": "https://shopee.tw/PLACEHOLDER-008-A",
-            "commission": 6,
+            "label": "毛家人寵物用品",
+            "amount": 1050,
+            "note": "小顆粒 · 2~3工作日出貨 · 蝦皮安心退 · 12磅裝每公斤便宜 21%",
+            "affiliateUrl": "https://s.shopee.tw/40gLTGbv3Y?share_channel_code=6",
+            "commission": 11,
             "anchor": "safe"
           }
         ]
       },
-      "dealbreaker": "你需要穩定供貨 — 這款斷貨頻繁",
-      "discontinued": true
+      "dealbreaker": "你的狗要控制體重 — 碳水約 45%，以馬鈴薯為主要碳水來源"
+    },
+    {
+      "id": "df-03",
+      "species": "dog",
+      "brand": "FirstMate 第一饗宴",
+      "name": "無穀低敏 野生海魚全犬",
+      "spec": {
+        "protein": 25,
+        "fat": 12,
+        "carb": 42,
+        "omega3": 0,
+        "phosphorus": 0.9,
+        "proteinSources": [
+          "whitefish"
+        ],
+        "singleSource": true,
+        "grainFree": true,
+        "lifeStage": [
+          "all"
+        ],
+        "bodySize": [
+          "small",
+          "medium",
+          "large"
+        ],
+        "prescription": false
+      },
+      "reports": {
+        "total": 0,
+        "palatability": 0,
+        "looseStool": 0
+      },
+      "price": {
+        "unit": "1.8kg",
+        "checkedAt": "2026-09-08",
+        "merchants": [
+          {
+            "id": "sp-official",
+            "label": "蝦皮直營（官方直營）",
+            "amount": 748,
+            "note": "野生海魚小顆粒 · 當日到 · 15天鑑賞",
+            "affiliateUrl": "https://s.shopee.tw/80CUGQ3z8S?share_channel_code=6",
+            "commission": 3.5,
+            "anchor": "safe"
+          }
+        ]
+      },
+      "dealbreaker": "你的狗對雞肉極度敏感 — 蛋白源是單一海魚，但油脂用的是雞脂肪"
+    },
+    {
+      "id": "df-04",
+      "species": "dog",
+      "brand": "Go! Solutions",
+      "name": "低致敏鮭魚無穀全犬",
+      "spec": {
+        "protein": 24,
+        "fat": 10,
+        "carb": 45,
+        "omega3": 0.7,
+        "phosphorus": 1,
+        "proteinSources": [
+          "salmon"
+        ],
+        "singleSource": true,
+        "grainFree": true,
+        "lifeStage": [
+          "all"
+        ],
+        "bodySize": [
+          "small",
+          "medium",
+          "large"
+        ],
+        "prescription": false
+      },
+      "reports": {
+        "total": 0,
+        "palatability": 0,
+        "looseStool": 0
+      },
+      "price": {
+        "unit": "6磅",
+        "checkedAt": "2026-09-08",
+        "merchants": [
+          {
+            "id": "sp-official",
+            "label": "毛家人寵物用品",
+            "amount": 1600,
+            "note": "低致敏鮭魚 · 2~3工作日出貨 · 22磅裝每公斤便宜 29%",
+            "affiliateUrl": "https://s.shopee.tw/4qFSVsX0T4?share_channel_code=6",
+            "commission": 11,
+            "anchor": "safe"
+          }
+        ]
+      },
+      "dealbreaker": "你的狗要控制體重 — 用木薯粉與豆類當碳水，碳水約 45%"
+    },
+    {
+      "id": "df-06",
+      "species": "dog",
+      "brand": "Nutram 紐頓",
+      "name": "T27 無穀全能 火雞+雞肉 小顆粒",
+      "spec": {
+        "protein": 30,
+        "fat": 17,
+        "carb": 40,
+        "omega3": 0,
+        "phosphorus": 1,
+        "proteinSources": [
+          "chicken",
+          "turkey"
+        ],
+        "singleSource": false,
+        "grainFree": true,
+        "lifeStage": [
+          "all"
+        ],
+        "bodySize": [
+          "small"
+        ],
+        "prescription": false
+      },
+      "reports": {
+        "total": 0,
+        "palatability": 0,
+        "looseStool": 0
+      },
+      "price": {
+        "unit": "2kg",
+        "checkedAt": "2026-09-08",
+        "merchants": [
+          {
+            "id": "sp-official",
+            "label": "毛家人寵物用品",
+            "amount": 1399,
+            "note": "火雞+雞肉小顆粒 · 2~3工作日出貨 · 5.4kg裝每公斤便宜 29%",
+            "affiliateUrl": "https://s.shopee.tw/8fSB6QSYX5?share_channel_code=6",
+            "commission": 11,
+            "anchor": "safe"
+          }
+        ]
+      },
+      "dealbreaker": "你的狗對雞肉過敏 — 品名的「火雞」容易誤會，成分表第一項是去骨雞肉，還有雞肉粉"
     }
   ]
 }

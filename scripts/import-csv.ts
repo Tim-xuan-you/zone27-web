@@ -186,6 +186,33 @@ const products = rows.map((row, i) => {
   };
 });
 
+/*
+ * 連結重複檢查。
+ *
+ * 蝦皮很多賣場是「一頁多口味」—— 鹿肉/火雞/鮭魚共用一個商品頁。
+ * 分享的時候如果沒有先選好規格，兩款不同蛋白源的商品會拿到同一條連結。
+ *
+ * 後果是這個站最不能犯的錯：鮭魚過敏的人點「鹿肉」，被送到鮭魚頁面。
+ * 而且它不會有任何症狀 —— 連結能開、頁面正常、驗證全過。
+ */
+const urlOwners = new Map<string, string[]>();
+for (const p of products) {
+  for (const m of p.price.merchants) {
+    const list = urlOwners.get(m!.affiliateUrl) ?? [];
+    list.push(`${p.id}（${p.spec.proteinSources.join("+")}）`);
+    urlOwners.set(m!.affiliateUrl, list);
+  }
+}
+for (const [url, owners] of urlOwners) {
+  if (owners.length > 1) {
+    errors.push(
+      `連結重複：${owners.join(" 和 ")} 用了同一條網址\n` +
+      `    ${url}\n` +
+      `    → 回商品頁「先選好規格」再分享，兩款要各產一條`
+    );
+  }
+}
+
 /* 跨列的合理性檢查 —— 單列看不出來的問題 */
 products.forEach((p, i) => {
   const line = i + 2;
