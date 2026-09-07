@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
-    "engine:smoke": "tsx scripts/engine-smoke.ts"
+    "engine:smoke": "tsx scripts/engine-smoke.ts",
+    "parse:smoke": "tsx scripts/parse-smoke.ts"
   },
   "dependencies": {
     "@supabase/ssr": "^0.10.3",
