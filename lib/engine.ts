@@ -339,3 +339,37 @@ export function storesOf(p: Product): Store[] {
     };
   });
 }
+
+/* ------------------------------------------------------------------ */
+/* 這包吃得完嗎                                                        */
+/*                                                                    */
+/* 大包每公斤便宜，但不是對每隻狗都好 —— 開封後的乾飼料油脂會氧化，   */
+/* 放太久狗會越來越不愛吃，而飼主通常會誤以為是「這牌子不好」。       */
+/*                                                                    */
+/* 所以在「省 X%」旁邊一定要有這個。同樣一個大包，既講便宜多少，      */
+/* 也講會不會放到壞 —— 這是決策工具跟推銷的分界線。                   */
+/* ------------------------------------------------------------------ */
+
+/** 成犬乾飼料的日食量粗估：體重的 2%。幼犬更多，高齡更少，這裡取中間值。 */
+const DAILY_RATIO = 0.02;
+
+/** 開封後建議用完的天數。超過就開始有氧化與適口性下降的問題。 */
+export const FRESH_DAYS = 45;
+
+export interface Duration {
+  days: number;
+  /** 超過建議期限，前端要提醒 */
+  tooLong: boolean;
+}
+
+/**
+ * 這包大概能吃幾天。體重不知道就回 null —— 猜一個數字比不講更糟。
+ */
+export function bagDuration(unit: string, weightKg: number | undefined): Duration | null {
+  if (!weightKg || weightKg <= 0) return null;
+  const kg = kgOf(unit);
+  if (!kg) return null;
+
+  const days = Math.round(kg / (weightKg * DAILY_RATIO));
+  return { days, tooLong: days > FRESH_DAYS };
+}

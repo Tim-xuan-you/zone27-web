@@ -114,3 +114,14 @@ export function descriptionOf(p: PageKind, kept: number, cut: number): string {
       return `${p.breed.zh}對${p.allergen.zh}過敏該吃什麼？刪掉 ${cut} 款，剩下 ${kept} 款，附排除理由與購買時機建議。`;
   }
 }
+
+
+/**
+ * 各體型的典型成犬體重。長尾頁沒有使用者輸入的體重，
+ * 用品種推一個代表值來估「這包吃得完嗎」——標示為概估，不假裝精確。
+ */
+export const TYPICAL_KG: Record<"small" | "medium" | "large", number> = {
+  small: 5,
+  medium: 12,
+  large: 30,
+};

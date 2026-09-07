@@ -6,7 +6,7 @@ import { S } from "@/components/styles";
 import { adjudicate } from "@/lib/engine";
 import { catalog, constraintsFor } from "@/lib/catalog";
 import {
-  ALLERGENS, BREEDS, allPaths, descriptionOf, resolve, titleOf,
+  ALLERGENS, BREEDS, TYPICAL_KG, allPaths, descriptionOf, resolve, titleOf,
   type PageKind,
 } from "@/lib/slugs";
 import type { Situation } from "@/lib/types";
@@ -155,7 +155,12 @@ export default async function Page({ params }: { params: Promise<{ slug: string[
         </p>
       )}
 
-      <VerdictView verdict={verdict} chips={chipsOf(p)} />
+      {/* 長尾頁沒有使用者輸入的體重，用品種體型推一個典型值估可吃天數 */}
+      <VerdictView
+        verdict={verdict}
+        chips={chipsOf(p)}
+        dogKg={p.kind === "allergen" ? undefined : TYPICAL_KG[p.breed.size]}
+      />
 
       <p style={S.lbl}>相關的</p>
       <div style={S.relRow}>

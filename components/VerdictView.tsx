@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { anchorOf, auditCommission, pricePerKg, sharedListings, storesOf, unitOf } from "@/lib/engine";
+import { FRESH_DAYS, anchorOf, auditCommission, bagDuration, pricePerKg, sharedListings, storesOf, unitOf } from "@/lib/engine";
 import { priceStat, timingAdvice } from "@/lib/history";
 import type { Verdict } from "@/lib/types";
 import { S } from "./styles";
@@ -14,9 +14,12 @@ import { S } from "./styles";
 export default function VerdictView({
   verdict,
   chips,
+  dogKg,
 }: {
   verdict: Verdict;
   chips: { label: string; kind: "info" | "avoid" }[];
+  /** 用來估「這包吃得完嗎」。沒有就不顯示 —— 猜一個數字比不講更糟。 */
+  dogKg?: number;
 }) {
   const audit = auditCommission(verdict);
   // 哪些連結被多款商品共用 —— 蝦皮一頁多口味，使用者點進去要自己選
@@ -123,7 +126,21 @@ export default function VerdictView({
                             <tbody>
                               {store.options.map((o) => (
                                 <tr key={o.id}>
-                                  <td style={S.optUnit} className="mono">{o.unit}</td>
+                                  <td style={S.optUnit} className="mono">
+                                    {o.unit}
+                                    {(() => {
+                                      const d = bagDuration(o.unit, dogKg);
+                                      if (!d) return null;
+                                      return (
+                                        <span style={{
+                                          ...S.dur,
+                                          color: d.tooLong ? "var(--cut)" : "var(--faint)",
+                                        }}>
+                                          約 {d.days} 天{d.tooLong ? " ⚠" : ""}
+                                        </span>
+                                      );
+                                    })()}
+                                  </td>
                                   <td style={S.optAmt} className="mono">${o.amount}</td>
                                   <td style={S.optKg} className="mono">
                                     {o.perKg !== null ? `$${o.perKg}/kg` : ""}
@@ -161,6 +178,14 @@ export default function VerdictView({
                               ))}
                             </tbody>
                           </table>
+                          {/* 有規格會放太久就解釋一次 —— 不然使用者看到 ⚠ 不知道是什麼意思 */}
+                          {store.options.some((o) => bagDuration(o.unit, dogKg)?.tooLong) && (
+                            <p style={S.freshWarn}>
+                              ⚠️ 標記的規格，你的狗要吃超過 {FRESH_DAYS} 天才吃得完。
+                              開封後的乾飼料油脂會氧化，放久了狗會越來越不愛吃 ——
+                              很多人以為是「這牌子不好」，其實是放太久。<b>大包便宜，但不一定適合你的狗。</b>
+                            </p>
+                          )}
                           {/* 只顯示入門包的備註 —— 那一欄放賣家層級的資訊（出貨、鑑賞期）。
                               每個規格各自的備註串起來會變成一長串雜訊。 */}
                           {store.options[0]?.note && (

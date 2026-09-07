@@ -53,10 +53,13 @@ export const S: Record<string, CSSProperties> = {
   storeName: { fontSize: 13.5, fontWeight: 700 },
   optTable: { width: "100%", borderCollapse: "collapse", fontSize: 13 },
   optUnit: { padding: "4px 0", color: "var(--muted)", whiteSpace: "nowrap" },
+  // 可吃天數 —— 貼在規格底下，因為它跟「這包多大」是同一件事的兩面
+  dur: { display: "block", fontSize: 10.5, fontWeight: 500, marginTop: 1 },
   optAmt: { padding: "4px 0", textAlign: "right", fontWeight: 600, whiteSpace: "nowrap" },
   optKg: { padding: "4px 0 4px 14px", color: "var(--accent)", fontWeight: 600, whiteSpace: "nowrap" },
   optSave: { padding: "4px 0 4px 14px", color: "var(--keep)", fontSize: 12, whiteSpace: "nowrap", textAlign: "right" },
   btnSmall: { border: "1px solid var(--accent)", background: "transparent", color: "var(--accent)", borderRadius: 4, padding: "3px 10px", fontSize: 12, fontWeight: 700, textDecoration: "none", whiteSpace: "nowrap" },
+  freshWarn: { background: "var(--warn-soft)", color: "var(--warn)", borderRadius: 5, padding: "9px 11px", fontSize: 12, lineHeight: 1.65, margin: "10px 0 0" },
   storeNote: { margin: "10px 0 0", fontSize: 12, color: "var(--muted)", lineHeight: 1.6 },
   variantWarn: { background: "var(--warn-soft)", color: "var(--warn)", border: "1px solid var(--warn)", borderRadius: 6, padding: "10px 12px", fontSize: 12.5, lineHeight: 1.6, marginTop: 12 },
   reports: { fontSize: 12, color: "var(--faint)", marginTop: 12, paddingTop: 11, borderTop: "1px dashed var(--line)" },

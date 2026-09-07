@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { parse } from "@/lib/parse";
-import { adjudicate, anchorOf, auditCommission, pricePerKg, sharedListings, storesOf, unitOf } from "@/lib/engine";
+import { adjudicate, FRESH_DAYS, anchorOf, auditCommission, bagDuration, pricePerKg, sharedListings, storesOf, unitOf } from "@/lib/engine";
 import { catalog, constraintsFor } from "@/lib/catalog";
 import { priceStat, timingAdvice } from "@/lib/history";
 import type { Verdict } from "@/lib/types";
@@ -26,6 +26,8 @@ export default function Decider() {
   const [empty, setEmpty] = useState(false);
   const [open, setOpen] = useState<string | null>(null);
   const [showAudit, setShowAudit] = useState(false);
+  // 使用者講了體重才估「這包吃得完嗎」
+  const [dogKg, setDogKg] = useState<number | undefined>(undefined);
 
   function run(input: string) {
     const src = input.trim() || EXAMPLES[0];
@@ -41,6 +43,7 @@ export default function Decider() {
     setEmpty(false);
     parsed.situation.constraints = constraintsFor(parsed.situation);
     setChips(parsed.chips.map((c) => ({ label: c.label, kind: c.kind })));
+    setDogKg(parsed.situation.weightKg);
     setVerdict(adjudicate(catalog, parsed.situation));
     setShowAudit(false);
     setOpen(null);
@@ -199,7 +202,21 @@ export default function Decider() {
                                 <tbody>
                                   {store.options.map((o) => (
                                     <tr key={o.id}>
-                                      <td style={S.optUnit} className="mono">{o.unit}</td>
+                                      <td style={S.optUnit} className="mono">
+                                        {o.unit}
+                                        {(() => {
+                                          const dur = bagDuration(o.unit, dogKg);
+                                          if (!dur) return null;
+                                          return (
+                                            <span style={{
+                                              ...S.dur,
+                                              color: dur.tooLong ? "var(--cut)" : "var(--faint)",
+                                            }}>
+                                              約 {dur.days} 天{dur.tooLong ? " ⚠" : ""}
+                                            </span>
+                                          );
+                                        })()}
+                                      </td>
                                       <td style={S.optAmt} className="mono">${o.amount}</td>
                                       <td style={S.optKg} className="mono">
                                         {o.perKg !== null ? `$${o.perKg}/kg` : ""}
@@ -237,6 +254,14 @@ export default function Decider() {
                                   ))}
                                 </tbody>
                               </table>
+                              {/* 有規格會放太久就解釋一次 —— 不然使用者看到 ⚠ 不知道是什麼意思 */}
+                              {store.options.some((o) => bagDuration(o.unit, dogKg)?.tooLong) && (
+                                <p style={S.freshWarn}>
+                                  ⚠️ 標記的規格，你的狗要吃超過 {FRESH_DAYS} 天才吃得完。
+                                  開封後的乾飼料油脂會氧化，放久了狗會越來越不愛吃 ——
+                                  很多人以為是「這牌子不好」，其實是放太久。<b>大包便宜，但不一定適合你的狗。</b>
+                                </p>
+                              )}
                               {/* 只顯示入門包的備註 —— 那一欄放賣家層級的資訊（出貨、鑑賞期）。
                               每個規格各自的備註串起來會變成一長串雜訊。 */}
                           {store.options[0]?.note && (
