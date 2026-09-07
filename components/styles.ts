@@ -1,71 +1,207 @@
 import type { CSSProperties } from "react";
 
 /**
- * 共用樣式。決策器（client）和程序化決策頁（server）共用同一套，
- * 兩邊長得一樣是刻意的 —— 使用者從搜尋結果進來看到的，
- * 要跟他自己輸入得到的是同一個東西。
+ * 共用樣式。決策器（client）和程序化決策頁（server）共用同一套 ——
+ * 使用者從搜尋進來看到的，要跟他自己輸入得到的是同一個東西。
+ *
+ * 設計紀律（這些是規則，不是偏好）：
+ *
+ * 1. 手機優先。九成使用者在手機上，桌機是附加。
+ *    卡片一律直向堆疊，不用會在窄螢幕擠爆的多欄 flex。
+ *
+ * 2. 字級只有五階。「什麼都差一點點」等於沒有層次。
+ *
+ * 3. 間距只用 4 的倍數。間距亂掉是「還沒做完」最明顯的徵兆。
+ *
+ * 4. 顏色只有三種用途：內容、語意（好／壞／注意）、強調。
+ *    不為了好看而上色。
  */
-export const S: Record<string, CSSProperties> = {
-  lbl: { fontFamily: "var(--font-mono), monospace", fontSize: 10.5, fontWeight: 600, letterSpacing: ".14em", color: "var(--faint)", margin: "34px 0 10px", textTransform: "uppercase" },
-  parsed: { display: "flex", flexWrap: "wrap", gap: 7 },
-  cons: { background: "var(--accent-soft)", color: "var(--accent)", borderRadius: 4, padding: "5px 11px", fontSize: 12.5, fontWeight: 600 },
-  consNeg: { background: "var(--cut-soft)", color: "var(--cut)", borderRadius: 4, padding: "5px 11px", fontSize: 12.5, fontWeight: 600 },
 
-  cascade: { background: "var(--surface)", border: "1px solid var(--line)", borderRadius: 8, boxShadow: "var(--sh)", padding: "24px 24px 20px" },
-  cascTop: { display: "flex", alignItems: "baseline", gap: 12, marginBottom: 16 },
-  bignum: { fontSize: 46, fontWeight: 600, lineHeight: 1, letterSpacing: "-.03em" },
-  cascCap: { fontSize: 13.5, color: "var(--muted)" },
-  cutRow: { display: "grid", gridTemplateColumns: "auto 1fr auto", gap: 12, alignItems: "baseline", padding: "9px 0", borderTop: "1px dashed var(--line)" },
-  cutN: { fontWeight: 600, color: "var(--cut)", fontSize: 14, whiteSpace: "nowrap" },
-  cutWhy: { fontSize: 14, color: "var(--muted)", textDecoration: "line-through", textDecorationColor: "var(--cut)" },
-  cutTag: { fontSize: 10.5, fontWeight: 600, background: "var(--cut-soft)", color: "var(--cut)", padding: "2px 7px", borderRadius: 3, whiteSpace: "nowrap" },
-  keepRow: { display: "flex", alignItems: "baseline", gap: 12, borderTop: "2px solid var(--ink)", marginTop: 12, paddingTop: 14 },
+const T = { xl: 22, lg: 16, md: 14, sm: 12.5, xs: 11 };
+const G = { xs: 4, sm: 8, md: 12, lg: 16, xl: 24, xxl: 32 };
+
+export const S: Record<string, CSSProperties> = {
+  /* ---------- 區段標題 ---------- */
+  lbl: {
+    fontFamily: "var(--font-mono), monospace",
+    fontSize: T.xs, fontWeight: 600, letterSpacing: ".14em",
+    textTransform: "uppercase", color: "var(--faint)",
+    margin: `${G.xxl}px 0 ${G.md}px`,
+  },
+
+  /* ---------- 條件 chip ---------- */
+  parsed: { display: "flex", flexWrap: "wrap", gap: G.sm },
+  cons: {
+    background: "var(--accent-soft)", color: "var(--accent)",
+    borderRadius: 4, padding: "5px 10px", fontSize: T.sm, fontWeight: 600,
+  },
+  consNeg: {
+    background: "var(--cut-soft)", color: "var(--cut)",
+    borderRadius: 4, padding: "5px 10px", fontSize: T.sm, fontWeight: 600,
+  },
+
+  /* ---------- 裁決過程 ---------- */
+  cascade: {
+    background: "var(--surface)", border: "1px solid var(--line)",
+    borderRadius: 10, boxShadow: "var(--sh)", padding: G.xl,
+  },
+  cascTop: { display: "flex", alignItems: "baseline", gap: G.md, marginBottom: G.lg },
+  bignum: { fontSize: 40, fontWeight: 600, lineHeight: 1, letterSpacing: "-.03em" },
+  cascCap: { fontSize: T.md, color: "var(--muted)" },
+  cutRow: {
+    display: "flex", flexWrap: "wrap", alignItems: "baseline",
+    gap: `${G.xs}px ${G.md}px`, padding: `${G.sm}px 0`,
+    borderTop: "1px dashed var(--line)",
+  },
+  cutN: { fontWeight: 600, color: "var(--cut)", fontSize: T.md, whiteSpace: "nowrap" },
+  cutWhy: {
+    flex: 1, minWidth: "8em", fontSize: T.md, color: "var(--muted)",
+    textDecoration: "line-through", textDecorationColor: "var(--cut)",
+  },
+  cutTag: {
+    fontSize: T.xs, fontWeight: 600, background: "var(--cut-soft)",
+    color: "var(--cut)", padding: "2px 7px", borderRadius: 3, whiteSpace: "nowrap",
+  },
+  keepRow: {
+    display: "flex", alignItems: "baseline", gap: G.md,
+    borderTop: "2px solid var(--ink)", marginTop: G.md, paddingTop: G.lg,
+  },
   keepN: { fontSize: 26, fontWeight: 600, color: "var(--keep)" },
 
-  card: { background: "var(--surface)", border: "1px solid var(--line)", borderRadius: 8, boxShadow: "var(--sh)", overflow: "hidden" },
+  /* ---------- 商品卡 ----------
+     手機直向堆疊：徽章 → 品牌 → 品名 → 價格 → 規格。
+     原本用三欄 flex，窄螢幕會把品名擠成四行還撞到價格。 */
+  card: {
+    background: "var(--surface)", border: "1px solid var(--line)",
+    borderRadius: 10, boxShadow: "var(--sh)", overflow: "hidden",
+  },
   cardPick: { borderColor: "var(--keep)", borderWidth: 1.5 },
-  cardH: { display: "flex", alignItems: "flex-start", gap: 14, padding: "16px 18px", width: "100%", textAlign: "left", background: "none", border: 0, color: "inherit" },
-  thumb: { width: 46, height: 46, borderRadius: 5, background: "var(--sunken)", flex: "none", display: "grid", placeItems: "center", fontSize: 21 },
-  cardR1: { display: "flex", alignItems: "center", gap: 8, flexWrap: "wrap", marginBottom: 3 },
-  pname: { fontWeight: 700, fontSize: 15.5 },
-  badgeBest: { fontSize: 10, fontWeight: 600, letterSpacing: ".09em", padding: "2.5px 7px", borderRadius: 3, background: "var(--keep-soft)", color: "var(--keep)" },
-  specs: { display: "flex", flexWrap: "wrap", gap: "4px 14px", fontSize: 12.5, color: "var(--muted)" },
-  k: { color: "var(--faint)" },
-  cardR: { display: "flex", flexDirection: "column", alignItems: "flex-end", gap: 2, flex: "none" },
-  price: { fontWeight: 600, fontSize: 17 },
-  // 每公斤單價 —— 不同規格唯一能比的數字，所以給它比查價日期更高的視覺權重
-  perKg: { fontSize: 12, fontWeight: 600, color: "var(--accent)" },
-  checked: { fontSize: 10.5, color: "var(--faint)" },
-  deal: { display: "flex", gap: 9, alignItems: "flex-start", background: "var(--cut-soft)", color: "var(--cut)", padding: "9px 18px", fontSize: 12.5, fontWeight: 600, lineHeight: 1.5 },
+  cardH: {
+    display: "block", width: "100%", textAlign: "left",
+    padding: `${G.lg}px ${G.lg}px ${G.md}px`,
+    background: "none", border: 0, color: "inherit", cursor: "pointer",
+  },
+  rankRow: { display: "flex", alignItems: "center", gap: G.sm, marginBottom: G.sm },
+  rank: {
+    fontFamily: "var(--font-mono), monospace",
+    fontSize: T.xs, fontWeight: 600, color: "var(--faint)", minWidth: "1.6em",
+  },
+  badgeBest: {
+    fontSize: T.xs, fontWeight: 700, letterSpacing: ".08em",
+    padding: "3px 8px", borderRadius: 3,
+    background: "var(--keep-soft)", color: "var(--keep)",
+  },
+  brand: { display: "block", fontSize: T.sm, color: "var(--muted)", marginBottom: 2 },
+  pname: {
+    display: "block", fontSize: T.lg, fontWeight: 700,
+    lineHeight: 1.4, textWrap: "balance", margin: 0,
+  },
+  priceRow: {
+    display: "flex", alignItems: "baseline", flexWrap: "wrap",
+    gap: `${G.xs}px ${G.md}px`, marginTop: G.md,
+  },
+  price: { fontSize: 20, fontWeight: 700, letterSpacing: "-.02em" },
+  perKg: { fontSize: T.md, fontWeight: 600, color: "var(--accent)" },
+  checked: { fontSize: T.xs, color: "var(--faint)" },
+  specRow: { display: "flex", flexWrap: "wrap", gap: 6, marginTop: G.md },
+  spec: {
+    fontSize: T.sm, color: "var(--muted)",
+    background: "var(--sunken)", borderRadius: 4, padding: "3px 8px",
+  },
+  specGood: {
+    fontSize: T.sm, fontWeight: 600, color: "var(--keep)",
+    background: "var(--keep-soft)", borderRadius: 4, padding: "3px 8px",
+  },
 
-  anch: { display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12, border: "1px solid var(--line)", borderRadius: 6, padding: "12px 14px", background: "var(--surface)" },
-  anchK: { display: "block", fontSize: 10, fontWeight: 600, letterSpacing: ".12em", color: "var(--faint)" },
-  anchV: { display: "block", fontSize: 13.5, fontWeight: 600 },
-  anchN: { display: "block", fontSize: 12, color: "var(--muted)" },
-  btn: { border: "1px solid var(--accent)", background: "var(--accent)", color: "var(--accent-ink)", borderRadius: 5, padding: "8px 14px", fontSize: 13, fontWeight: 700, cursor: "pointer", whiteSpace: "nowrap", textDecoration: "none" },
-  btnGhost: { border: "1px solid var(--accent)", background: "transparent", color: "var(--accent)", borderRadius: 5, padding: "8px 14px", fontSize: 13, fontWeight: 700, cursor: "pointer", whiteSpace: "nowrap", textDecoration: "none" },
+  /* ---------- 紅線 ---------- */
+  deal: {
+    display: "flex", gap: G.sm, alignItems: "flex-start",
+    background: "var(--cut-soft)", color: "var(--cut)",
+    padding: `${G.md}px ${G.lg}px`, fontSize: T.sm, fontWeight: 600, lineHeight: 1.6,
+  },
 
-  emptyBox: { background: "var(--warn-soft)", border: "1px solid var(--warn)", borderRadius: 8, padding: "16px 18px", margin: "16px 0" },
-  landing: { background: "var(--surface)", border: "1px solid var(--line)", borderRadius: 8, boxShadow: "var(--sh)", padding: "22px 24px", display: "flex", gap: 18, alignItems: "center", flexWrap: "wrap", justifyContent: "space-between" },
-  // 一頁多口味的警告 —— 風險真正發生的地方是「點進去之後」，所以貼著按鈕放
-  store: { border: "1px solid var(--line)", borderRadius: 6, padding: "12px 14px", background: "var(--surface)" },
-  storeHead: { display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12, marginBottom: 10 },
-  storeName: { fontSize: 13.5, fontWeight: 700 },
-  optTable: { width: "100%", borderCollapse: "collapse", fontSize: 13 },
-  optUnit: { padding: "4px 0", color: "var(--muted)", whiteSpace: "nowrap" },
-  // 可吃天數 —— 貼在規格底下，因為它跟「這包多大」是同一件事的兩面
-  dur: { display: "block", fontSize: 10.5, fontWeight: 500, marginTop: 1 },
-  optAmt: { padding: "4px 0", textAlign: "right", fontWeight: 600, whiteSpace: "nowrap" },
-  optKg: { padding: "4px 0 4px 14px", color: "var(--accent)", fontWeight: 600, whiteSpace: "nowrap" },
-  optSave: { padding: "4px 0 4px 14px", color: "var(--keep)", fontSize: 12, whiteSpace: "nowrap", textAlign: "right" },
-  btnSmall: { border: "1px solid var(--accent)", background: "transparent", color: "var(--accent)", borderRadius: 4, padding: "3px 10px", fontSize: 12, fontWeight: 700, textDecoration: "none", whiteSpace: "nowrap" },
-  freshWarn: { background: "var(--warn-soft)", color: "var(--warn)", borderRadius: 5, padding: "9px 11px", fontSize: 12, lineHeight: 1.65, margin: "10px 0 0" },
-  storeNote: { margin: "10px 0 0", fontSize: 12, color: "var(--muted)", lineHeight: 1.6 },
-  variantWarn: { background: "var(--warn-soft)", color: "var(--warn)", border: "1px solid var(--warn)", borderRadius: 6, padding: "10px 12px", fontSize: 12.5, lineHeight: 1.6, marginTop: 12 },
-  reports: { fontSize: 12, color: "var(--faint)", marginTop: 12, paddingTop: 11, borderTop: "1px dashed var(--line)" },
-  why: { margin: "0 0 14px", fontSize: 13.5, color: "var(--muted)" },
-  drawer: { borderTop: "1px solid var(--line)", padding: 18, background: "var(--raise)" },
+  /* ---------- 展開區 ---------- */
+  drawer: {
+    borderTop: "1px solid var(--line)", padding: G.lg, background: "var(--raise)",
+    display: "flex", flexDirection: "column", gap: G.md,
+  },
+  why: { margin: 0, fontSize: T.md, color: "var(--muted)", lineHeight: 1.7 },
 
-  relRow: { display: "flex", flexWrap: "wrap", gap: 8 },
-  relLink: { border: "1px solid var(--line)", background: "var(--surface)", color: "var(--muted)", borderRadius: 99, padding: "6px 14px", fontSize: 13, textDecoration: "none" },
+  /* ---------- 賣場 ---------- */
+  store: {
+    border: "1px solid var(--line)", borderRadius: 8,
+    padding: `${G.md}px ${G.lg}px ${G.lg}px`, background: "var(--surface)",
+  },
+  storeHead: {
+    display: "flex", alignItems: "center", justifyContent: "space-between",
+    gap: G.md, marginBottom: G.sm, flexWrap: "wrap",
+  },
+  storeName: { fontSize: T.md, fontWeight: 700 },
+
+  /* 規格表。每一格都要有左右間距 —— 價格跟每公斤黏在一起就是漏了這個。 */
+  optTable: { width: "100%", borderCollapse: "collapse", fontSize: T.sm },
+  optUnit: {
+    padding: `${G.sm}px ${G.md}px ${G.sm}px 0`, color: "var(--ink)",
+    fontWeight: 600, whiteSpace: "nowrap",
+    borderTop: "1px solid var(--line)", verticalAlign: "top",
+  },
+  dur: { display: "block", fontSize: T.xs, fontWeight: 400, marginTop: 2 },
+  optAmt: {
+    padding: `${G.sm}px ${G.md}px`, textAlign: "right", fontWeight: 600,
+    whiteSpace: "nowrap", borderTop: "1px solid var(--line)", verticalAlign: "top",
+  },
+  optKg: {
+    padding: `${G.sm}px ${G.md}px`, color: "var(--accent)", fontWeight: 600,
+    whiteSpace: "nowrap", borderTop: "1px solid var(--line)", verticalAlign: "top",
+  },
+  optSave: {
+    padding: `${G.sm}px 0`, fontSize: T.xs, whiteSpace: "nowrap",
+    textAlign: "right", borderTop: "1px solid var(--line)", verticalAlign: "top",
+  },
+  storeNote: { margin: `${G.md}px 0 0`, fontSize: T.sm, color: "var(--muted)", lineHeight: 1.6 },
+
+  /* ---------- 按鈕 ---------- */
+  btn: {
+    border: "1px solid var(--accent)", background: "var(--accent)",
+    color: "var(--accent-ink)", borderRadius: 6, padding: "8px 16px",
+    fontSize: T.md, fontWeight: 700, cursor: "pointer",
+    whiteSpace: "nowrap", textDecoration: "none",
+  },
+  btnSmall: {
+    border: "1px solid var(--accent)", background: "transparent",
+    color: "var(--accent)", borderRadius: 5, padding: "4px 12px",
+    fontSize: T.sm, fontWeight: 700, textDecoration: "none", whiteSpace: "nowrap",
+  },
+
+  /* ---------- 提示區塊 ---------- */
+  freshWarn: {
+    background: "var(--warn-soft)", color: "var(--warn)", borderRadius: 6,
+    padding: G.md, fontSize: T.sm, lineHeight: 1.7, margin: `${G.md}px 0 0`,
+  },
+  variantWarn: {
+    background: "var(--warn-soft)", color: "var(--warn)",
+    border: "1px solid var(--warn)", borderRadius: 6,
+    padding: G.md, fontSize: T.sm, lineHeight: 1.7, margin: 0,
+  },
+  reports: { margin: 0, fontSize: T.sm, color: "var(--faint)", lineHeight: 1.7 },
+  emptyBox: {
+    background: "var(--warn-soft)", border: "1px solid var(--warn)",
+    borderRadius: 8, padding: G.lg, margin: `${G.lg}px 0`,
+  },
+
+  /* ---------- 收單 ---------- */
+  landing: {
+    background: "var(--surface)", border: "1px solid var(--line)",
+    borderRadius: 10, boxShadow: "var(--sh)", padding: G.xl,
+    display: "flex", gap: G.lg, alignItems: "center",
+    flexWrap: "wrap", justifyContent: "space-between",
+  },
+
+  /* ---------- 相關連結 ---------- */
+  relRow: { display: "flex", flexWrap: "wrap", gap: G.sm },
+  relLink: {
+    border: "1px solid var(--line)", background: "var(--surface)",
+    color: "var(--muted)", borderRadius: 99, padding: "6px 14px",
+    fontSize: T.sm, textDecoration: "none",
+  },
 };

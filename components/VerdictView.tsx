@@ -68,7 +68,7 @@ export default function VerdictView({
         <>
           <p style={S.lbl}>剩下這幾款</p>
           <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-            {verdict.survivors.map((p) => {
+            {verdict.survivors.map((p, i) => {
               const isPick = p.id === verdict.pick?.id;
               const safe = anchorOf(p, "safe");
               // 卡片標題顯示「入門規格」的價格與每公斤，細節在展開後的賣場表
@@ -77,26 +77,29 @@ export default function VerdictView({
               return (
                 <article key={p.id} style={{ ...S.card, ...(isPick ? S.cardPick : {}) }}>
                   <div style={S.cardH}>
-                    <span style={S.thumb}>{isPick ? "🥇" : "🐾"}</span>
-                    <span style={{ flex: 1, minWidth: 0 }}>
-                      <span style={S.cardR1}>
-                        <h3 style={{ ...S.pname, margin: 0 }}>{p.brand}｜{p.name}</h3>
-                        {isPick && <span style={S.badgeBest} className="mono">唯一推薦</span>}
+                    <div style={S.rankRow}>
+                      <span style={S.rank} className="mono">
+                        {String(i + 1).padStart(2, "0")}
                       </span>
-                      <span style={S.specs}>
-                        <span><span style={S.k}>粗蛋白</span> {p.spec.protein}%</span>
-                        <span><span style={S.k}>碳水</span> {p.spec.carb}%</span>
-                        <span><span style={S.k}>Omega-3</span> {p.spec.omega3}%</span>
-                        {p.spec.singleSource && <span style={{ color: "var(--keep)" }}>單一蛋白源</span>}
-                      </span>
-                    </span>
-                    <span style={S.cardR}>
+                      {isPick && <span style={S.badgeBest} className="mono">唯一推薦</span>}
+                    </div>
+                    <span style={S.brand}>{p.brand}</span>
+                    <h3 style={S.pname}>{p.name}</h3>
+                    <div style={S.priceRow}>
                       <span style={S.price} className="mono">${safe.amount}</span>
                       {safeKg !== null && (
                         <span style={S.perKg} className="mono">${safeKg}/kg</span>
                       )}
-                      <span style={S.checked} className="mono">{unitOf(p, safe)} · {p.price.checkedAt} 查得</span>
-                    </span>
+                      <span style={S.checked} className="mono">
+                        {unitOf(p, safe)} · {p.price.checkedAt} 查得
+                      </span>
+                    </div>
+                    <div style={S.specRow}>
+                      <span style={S.spec}>粗蛋白 {p.spec.protein}%</span>
+                      <span style={S.spec}>碳水 {p.spec.carb}%</span>
+                      {p.spec.omega3 > 0 && <span style={S.spec}>Omega-3 {p.spec.omega3}%</span>}
+                      {p.spec.singleSource && <span style={S.specGood}>單一蛋白源</span>}
+                    </div>
                   </div>
 
                   <div style={S.deal}>
