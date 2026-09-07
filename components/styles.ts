@@ -33,6 +33,8 @@ export const S: Record<string, CSSProperties> = {
   k: { color: "var(--faint)" },
   cardR: { display: "flex", flexDirection: "column", alignItems: "flex-end", gap: 2, flex: "none" },
   price: { fontWeight: 600, fontSize: 17 },
+  // 每公斤單價 —— 不同規格唯一能比的數字，所以給它比查價日期更高的視覺權重
+  perKg: { fontSize: 12, fontWeight: 600, color: "var(--accent)" },
   checked: { fontSize: 10.5, color: "var(--faint)" },
   deal: { display: "flex", gap: 9, alignItems: "flex-start", background: "var(--cut-soft)", color: "var(--cut)", padding: "9px 18px", fontSize: 12.5, fontWeight: 600, lineHeight: 1.5 },
 

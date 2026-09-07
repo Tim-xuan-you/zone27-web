@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { parse } from "@/lib/parse";
-import { adjudicate, anchorOf, auditCommission } from "@/lib/engine";
+import { adjudicate, anchorOf, auditCommission, pricePerKg } from "@/lib/engine";
 import { catalog, constraintsFor } from "@/lib/catalog";
 import type { Verdict } from "@/lib/types";
 
@@ -129,6 +129,7 @@ export default function Decider() {
                   const isPick = p.id === verdict.pick?.id;
                   const safe = anchorOf(p, "safe");
                   const value = anchorOf(p, "value");
+                  const perKg = pricePerKg(p.price.unit, value.amount);
                   return (
                     <article key={p.id} style={{ ...S.card, ...(isPick ? S.cardPick : {}) }}>
                       <button style={S.cardH} onClick={() => setOpen(open === p.id ? null : p.id)}>
@@ -147,7 +148,10 @@ export default function Decider() {
                         </span>
                         <span style={S.cardR}>
                           <span style={S.price} className="mono">${value.amount}</span>
-                          <span style={S.checked} className="mono">{p.price.checkedAt} 查得</span>
+                          {perKg !== null && (
+                            <span style={S.perKg} className="mono">${perKg}/kg</span>
+                          )}
+                          <span style={S.checked} className="mono">{p.price.unit} · {p.price.checkedAt} 查得</span>
                         </span>
                       </button>
 

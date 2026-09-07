@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { anchorOf, auditCommission } from "@/lib/engine";
+import { anchorOf, auditCommission, pricePerKg } from "@/lib/engine";
 import { priceStat, timingAdvice } from "@/lib/history";
 import type { Verdict } from "@/lib/types";
 import { S } from "./styles";
@@ -67,6 +67,8 @@ export default function VerdictView({
               const isPick = p.id === verdict.pick?.id;
               const safe = anchorOf(p, "safe");
               const value = anchorOf(p, "value");
+              // 蝦皮規格單位很亂（2kg / 4.5磅 / 24磅），換算成每公斤才比得了
+              const perKg = pricePerKg(p.price.unit, value.amount);
               return (
                 <article key={p.id} style={{ ...S.card, ...(isPick ? S.cardPick : {}) }}>
                   <div style={S.cardH}>
@@ -85,7 +87,10 @@ export default function VerdictView({
                     </span>
                     <span style={S.cardR}>
                       <span style={S.price} className="mono">${value.amount}</span>
-                      <span style={S.checked} className="mono">{p.price.checkedAt} 查得</span>
+                      {perKg !== null && (
+                        <span style={S.perKg} className="mono">${perKg}/kg</span>
+                      )}
+                      <span style={S.checked} className="mono">{p.price.unit} · {p.price.checkedAt} 查得</span>
                     </span>
                   </div>
 

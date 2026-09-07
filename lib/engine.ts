@@ -198,3 +198,34 @@ export function auditCommission(verdict: Verdict): CommissionAudit | null {
     pickIsHighest: comparable ? pickRate === highest : null,
   };
 }
+
+/* ------------------------------------------------------------------ */
+/* 每公斤單價                                                          */
+/*                                                                    */
+/* 蝦皮的規格單位很亂 —— 2kg、4.5磅、3.5kg、24磅混在一起，            */
+/* 使用者根本沒辦法比。這是決策工具該做、而商品頁不會做的事。          */
+/* ------------------------------------------------------------------ */
+
+/** 從 unit 字串抓出公斤數。認得 kg / 公斤 / 磅 / lb / g。抓不到回 null。 */
+export function kgOf(unit: string): number | null {
+  const s = unit.replace(/\s/g, "");
+
+  // 先抓磅 —— 「4.5磅(約2kg)」這種寫法要以磅為準，括號裡是給人看的
+  const lb = s.match(/(\d+(?:\.\d+)?)\s*(?:磅|lbs?|LB)/i);
+  if (lb) return +(parseFloat(lb[1]) * 0.45359237).toFixed(3);
+
+  const kg = s.match(/(\d+(?:\.\d+)?)\s*(?:kg|KG|公斤|Kg)/);
+  if (kg) return parseFloat(kg[1]);
+
+  const g = s.match(/(\d+(?:\.\d+)?)\s*(?:g|G|公克|克)(?![a-zA-Z])/);
+  if (g) return parseFloat(g[1]) / 1000;
+
+  return null;
+}
+
+/** 每公斤多少錢。算不出來回 null，前端就不顯示 —— 寧可不講也不要講錯。 */
+export function pricePerKg(unit: string, amount: number): number | null {
+  const kg = kgOf(unit);
+  if (!kg || kg <= 0) return null;
+  return Math.round(amount / kg);
+}
