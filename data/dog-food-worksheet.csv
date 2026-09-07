@@ -1,4 +1,4 @@
-id,brand,name,protein,fat,carb,omega3,phosphorus,proteinSources,singleSource,grainFree,prescription,lifeStage,bodySize,reportsTotal,reportsPalatability,reportsLooseStool,unit,checkedAt,dealbreaker,discontinued,m1Label,m1Amount,m1Note,m1Url,m1Commission,m2Label,m2Amount,m2Note,m2Url,m2Commission
+﻿id,brand,name,protein,fat,carb,omega3,phosphorus,proteinSources,singleSource,grainFree,prescription,lifeStage,bodySize,reportsTotal,reportsPalatability,reportsLooseStool,unit,checkedAt,dealbreaker,discontinued,m1Label,m1Amount,m1Note,m1Url,m1Commission,m2Label,m2Amount,m2Note,m2Url,m2Commission
 df-01,,← 羊肉單一蛋白,,,,,,lamb,Y,,,adult,small|medium,,,,,,,N,,,,,,,,,,
 df-02,,← 鴨肉單一蛋白,,,,,,duck,Y,,,adult,small|medium,,,,,,,N,,,,,,,,,,
 df-03,,← 白魚單一蛋白,,,,,,whitefish,Y,,,adult,small|medium|large,,,,,,,N,,,,,,,,,,

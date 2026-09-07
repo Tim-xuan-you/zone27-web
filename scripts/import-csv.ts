@@ -31,6 +31,23 @@ function fail(line: number, col: string, msg: string) {
 
 /** 逗號分隔，支援雙引號包住的欄位（描述裡有逗號時會用到）。 */
 function parseCsv(text: string): Row[] {
+  /*
+   * 編碼防呆。
+   *
+   * Excel 在 Windows 上存 CSV 預設會用 Big5，讀進來變成一堆 �。
+   * 如果不擋，中文會全部變亂碼寫進網站 —— 而且是靜靜地壞掉，
+   * 因為數字欄位都還是對的，驗證全過。
+   */
+  if (text.includes("�")) {
+    console.error("\n✗ 這個檔案不是 UTF-8，中文會變亂碼。\n");
+    console.error("  如果你是用 Excel 編輯的：");
+    console.error("    另存新檔 → 檔案類型選「CSV UTF-8 (逗號分隔)」");
+    console.error("    不要選只寫「CSV (逗號分隔)」的那個\n");
+    console.error("  更省事的做法：改用 Google Sheet 編輯，");
+    console.error("  下載時選「逗號分隔值檔案 (.csv)」，編碼不會出問題。\n");
+    process.exit(1);
+  }
+
   const lines = text.replace(/^﻿/, "").split(/\r?\n/).filter((l) => l.trim());
   if (lines.length < 2) throw new Error("CSV 至少要有標題列和一列資料");
 
