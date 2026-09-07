@@ -1,0 +1,71 @@
+@import "tailwindcss";
+
+/*
+  ZONE 27 設計系統
+  主張：長得像儀器，不要像商店。
+  商店的視覺語言（大圖、促銷紅字、倒數計時）會觸發防衛心理；
+  儀器的視覺語言（數據、對照、灰階＋單一強調色）觸發的是信任。
+*/
+
+:root {
+  --ground:#F4F5F3; --surface:#FFFFFF; --sunken:#EAECE8; --raise:#FCFCFB;
+  --ink:#16191A; --muted:#565E60; --faint:#8A9294;
+  --accent:#1F4E6B; --accent-ink:#FFFFFF; --accent-soft:#E3EDF3;
+  --keep:#2F6B4A; --keep-soft:#E4EFE8;
+  --cut:#9E4630;  --cut-soft:#F5E7E2;
+  --warn:#8A6220; --warn-soft:#F6EEDF;
+  --line:#DCDFDA; --rule:#C4C9C3;
+  --sh:0 1px 2px rgba(22,25,26,.05),0 10px 28px -16px rgba(22,25,26,.22);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --ground:#101312; --surface:#181C1C; --sunken:#1E2323; --raise:#212726;
+    --ink:#E9EDEB; --muted:#9AA3A2; --faint:#6E7877;
+    --accent:#63AFD4; --accent-ink:#0B1418; --accent-soft:#14303D;
+    --keep:#63C193; --keep-soft:#13301F;
+    --cut:#D9866A; --cut-soft:#33190F;
+    --warn:#D9AE62; --warn-soft:#33280F;
+    --line:#2A3130; --rule:#3A4241;
+    --sh:0 1px 2px rgba(0,0,0,.45),0 10px 28px -16px rgba(0,0,0,.7);
+  }
+}
+
+:root[data-theme="dark"] {
+  --ground:#101312; --surface:#181C1C; --sunken:#1E2323; --raise:#212726;
+  --ink:#E9EDEB; --muted:#9AA3A2; --faint:#6E7877;
+  --accent:#63AFD4; --accent-ink:#0B1418; --accent-soft:#14303D;
+  --keep:#63C193; --keep-soft:#13301F;
+  --cut:#D9866A; --cut-soft:#33190F;
+  --warn:#D9AE62; --warn-soft:#33280F;
+  --line:#2A3130; --rule:#3A4241;
+  --sh:0 1px 2px rgba(0,0,0,.45),0 10px 28px -16px rgba(0,0,0,.7);
+}
+
+* { box-sizing: border-box; }
+
+html { color-scheme: light dark; }
+
+body {
+  margin: 0;
+  background: var(--ground);
+  color: var(--ink);
+  font-family: "Noto Sans TC", -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang TC", "Microsoft JhengHei", sans-serif;
+  font-size: 15px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+.mono {
+  font-family: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  font-variant-numeric: tabular-nums;
+}
+
+button { font-family: inherit; }
+button:focus-visible,
+textarea:focus-visible,
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
