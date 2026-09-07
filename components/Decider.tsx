@@ -43,6 +43,13 @@ export default function Decider() {
     setVerdict(adjudicate(catalog, parsed.situation));
     setShowAudit(false);
     setOpen(null);
+    // 結果在摺線下方時，不捲過去會看起來像沒反應
+    requestAnimationFrame(() => {
+      document.getElementById("verdict")?.scrollIntoView({
+        behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+        block: "start",
+      });
+    });
   }
 
   const audit = verdict ? auditCommission(verdict) : null;
@@ -56,7 +63,13 @@ export default function Decider() {
           value={text}
           onChange={(e) => setText(e.target.value)}
           onKeyDown={(e) => {
-            if (e.key === "Enter" && (e.metaKey || e.ctrlKey)) run(text);
+            // Enter 直接送出，Shift+Enter 才換行。
+            // 原本設計成 Ctrl+Enter 是工程師的習慣 —— 一般人打完字就是按 Enter，
+            // 按了沒反應會以為網站壞掉。
+            if (e.key === "Enter" && !e.shiftKey) {
+              e.preventDefault();
+              run(text);
+            }
           }}
           placeholder="例如：我家柴犬 5 歲，最近一直抓癢，換過兩種飼料都沒改善…"
           rows={3}
@@ -71,7 +84,7 @@ export default function Decider() {
           </button>
         ))}
       </div>
-      <p style={S.hint}>講得亂一點沒關係。「牠最近一直舔腳」這種也可以。</p>
+      <p style={S.hint}>講得亂一點沒關係。「牠最近一直舔腳」這種也可以。打完按 Enter 就行。</p>
 
       {empty && (
         <div style={S.emptyBox}>
@@ -84,7 +97,7 @@ export default function Decider() {
       )}
 
       {verdict && (
-        <div style={S.stage}>
+        <div id="verdict" style={S.stage}>
           <p style={S.lbl}>我們聽到的是</p>
           <div style={S.parsed}>
             {chips.map((c, i) => (

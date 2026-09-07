@@ -57,7 +57,7 @@ export default function Index() {
         fontSize: 12, color: "var(--faint)", lineHeight: 1.7,
       }}>
         <p style={{ margin: 0 }}>
-          目前為建置階段，商品與數據為示範資料。本站透過購買連結取得分潤，這不影響推薦排序。
+          價格為人工複查，每張卡片都標了查價日期。點進賣場請以當下標價為準。本站透過購買連結取得分潤，這不影響推薦排序。
         </p>
       </footer>
     </main>
