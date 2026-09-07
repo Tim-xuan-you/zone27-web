@@ -3,7 +3,7 @@
     "category": "dog-food",
     "note": "由 data/dog-food.csv 產生，不要直接改這個檔。改 CSV 之後跑 npm run data:import。",
     "generatedAt": "2026-09-07",
-    "count": 5,
+    "count": 6,
     "pricePolicy": "人工複查，不爬蟲。checkedAt 誠實顯示於前端。"
   },
   "products": [
@@ -45,11 +45,22 @@
           {
             "id": "sp-official",
             "label": "獅子王寵物（蝦皮優選）",
+            "unit": "2kg",
             "amount": 1200,
             "note": "2kg · 隔日到貨 · 正品保障 · 超商限兩包",
             "affiliateUrl": "https://s.shopee.tw/3B7ESUSXfM?share_channel_code=6",
             "commission": 9,
             "anchor": "safe"
+          },
+          {
+            "id": "sp-top",
+            "label": "獅子王寵物（蝦皮優選）",
+            "unit": "11.4kg",
+            "amount": 4380,
+            "note": "11.4kg 大包 · 每公斤便宜 36% · 限宅配",
+            "affiliateUrl": "https://s.shopee.tw/3B7ESUSXfM?share_channel_code=6",
+            "commission": 9,
+            "anchor": "value"
           }
         ]
       },
@@ -93,11 +104,22 @@
           {
             "id": "sp-official",
             "label": "毛家人寵物用品",
+            "unit": "4.5磅",
             "amount": 1050,
             "note": "小顆粒 · 2~3工作日出貨 · 蝦皮安心退 · 12磅裝每公斤便宜 21%",
             "affiliateUrl": "https://s.shopee.tw/40gLTGbv3Y?share_channel_code=6",
             "commission": 11,
             "anchor": "safe"
+          },
+          {
+            "id": "sp-top",
+            "label": "毛家人寵物用品",
+            "unit": "24磅",
+            "amount": 3450,
+            "note": "24磅原顆粒 · 每公斤便宜 38% · 開封後要密封防潮",
+            "affiliateUrl": "https://s.shopee.tw/40gLTGbv3Y?share_channel_code=6",
+            "commission": 11,
+            "anchor": "value"
           }
         ]
       },
@@ -141,11 +163,22 @@
           {
             "id": "sp-official",
             "label": "蝦皮直營（官方直營）",
+            "unit": "1.8kg",
             "amount": 748,
             "note": "野生海魚小顆粒 · 當日到 · 15天鑑賞",
             "affiliateUrl": "https://s.shopee.tw/80CUGQ3z8S?share_channel_code=6",
             "commission": 3.5,
             "anchor": "safe"
+          },
+          {
+            "id": "sp-top",
+            "label": "蝦皮直營（官方直營）",
+            "unit": "5.44kg",
+            "amount": 2051,
+            "note": "5.44kg 大包 · 每公斤便宜 9%",
+            "affiliateUrl": "https://s.shopee.tw/80CUGQ3z8S?share_channel_code=6",
+            "commission": 3.5,
+            "anchor": "value"
           }
         ]
       },
@@ -189,15 +222,85 @@
           {
             "id": "sp-official",
             "label": "毛家人寵物用品",
+            "unit": "6磅",
             "amount": 1600,
             "note": "低致敏鮭魚 · 2~3工作日出貨 · 22磅裝每公斤便宜 29%",
             "affiliateUrl": "https://s.shopee.tw/4qFSVsX0T4?share_channel_code=6",
             "commission": 11,
             "anchor": "safe"
+          },
+          {
+            "id": "sp-top",
+            "label": "毛家人寵物用品",
+            "unit": "22磅",
+            "amount": 4190,
+            "note": "22磅大包 · 每公斤便宜 29%",
+            "affiliateUrl": "https://s.shopee.tw/4qFSVsX0T4?share_channel_code=6",
+            "commission": 11,
+            "anchor": "value"
           }
         ]
       },
       "dealbreaker": "你的狗要控制體重 — 用木薯粉與豆類當碳水，碳水約 45%"
+    },
+    {
+      "id": "df-05",
+      "species": "dog",
+      "brand": "Go! Solutions",
+      "name": "低致敏鹿肉無穀全犬",
+      "spec": {
+        "protein": 24,
+        "fat": 10,
+        "carb": 45,
+        "omega3": 0.7,
+        "phosphorus": 1,
+        "proteinSources": [
+          "venison"
+        ],
+        "singleSource": true,
+        "grainFree": true,
+        "lifeStage": [
+          "all"
+        ],
+        "bodySize": [
+          "small",
+          "medium",
+          "large"
+        ],
+        "prescription": false
+      },
+      "reports": {
+        "total": 0,
+        "palatability": 0,
+        "looseStool": 0
+      },
+      "price": {
+        "unit": "3.5磅",
+        "checkedAt": "2026-09-08",
+        "merchants": [
+          {
+            "id": "sp-official",
+            "label": "毛家人寵物用品",
+            "unit": "3.5磅",
+            "amount": 1440,
+            "note": "低致敏鹿肉 · 2~3工作日出貨 · 22磅裝每公斤便宜 29%",
+            "affiliateUrl": "https://s.shopee.tw/4qFSVsX0T4?share_channel_code=6",
+            "commission": 11,
+            "anchor": "safe"
+          },
+          {
+            "id": "sp-top",
+            "label": "毛家人寵物用品",
+            "unit": "22磅",
+            "amount": 6430,
+            "note": "22磅大包 · 每公斤便宜 29%",
+            "affiliateUrl": "https://s.shopee.tw/4qFSVsX0T4?share_channel_code=6",
+            "commission": 11,
+            "anchor": "value"
+          }
+        ]
+      },
+      "dealbreaker": "你只是想換換口味 — 每公斤 907 元是這裡最貴的一款，鹿肉留給雞羊魚都過敏、真的沒別的選擇的狗"
     },
     {
       "id": "df-06",
@@ -236,11 +339,22 @@
           {
             "id": "sp-official",
             "label": "毛家人寵物用品",
+            "unit": "2kg",
             "amount": 1399,
             "note": "火雞+雞肉小顆粒 · 2~3工作日出貨 · 5.4kg裝每公斤便宜 29%",
             "affiliateUrl": "https://s.shopee.tw/8fSB6QSYX5?share_channel_code=6",
             "commission": 11,
             "anchor": "safe"
+          },
+          {
+            "id": "sp-top",
+            "label": "毛家人寵物用品",
+            "unit": "5.4kg",
+            "amount": 2699,
+            "note": "5.4kg 大包 · 每公斤便宜 29%",
+            "affiliateUrl": "https://s.shopee.tw/8fSB6QSYX5?share_channel_code=6",
+            "commission": 11,
+            "anchor": "value"
           }
         ]
       },

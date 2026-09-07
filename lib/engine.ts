@@ -1,5 +1,5 @@
 import type {
-  Constraint, Cut, Product, Situation, Verdict,
+  Constraint, Cut, Merchant, Product, Situation, Verdict,
 } from "./types";
 
 /**
@@ -228,4 +228,30 @@ export function pricePerKg(unit: string, amount: number): number | null {
   const kg = kgOf(unit);
   if (!kg || kg <= 0) return null;
   return Math.round(amount / kg);
+}
+
+
+/* ------------------------------------------------------------------ */
+/* 同一商品頁多口味                                                     */
+/*                                                                    */
+/* 蝦皮的分享連結指向整個商品頁，不是特定規格 —— 賣家把鹿肉/火雞/鮭魚   */
+/* 放同一頁，連結就一定一樣，這無法避免。                               */
+/*                                                                    */
+/* 所以不擋，改成在使用者要點的那一刻警告他自己選對規格。               */
+/* ------------------------------------------------------------------ */
+
+/** 這批商品裡，哪些網址被多款共用。 */
+export function sharedListings(pool: Product[]): Set<string> {
+  const count = new Map<string, number>();
+  for (const p of pool) {
+    for (const u of new Set(p.price.merchants.map((m) => m.affiliateUrl))) {
+      count.set(u, (count.get(u) ?? 0) + 1);
+    }
+  }
+  return new Set([...count].filter(([, n]) => n > 1).map(([u]) => u));
+}
+
+/** 某個通路實際賣的規格。大包裝會覆寫。 */
+export function unitOf(p: Product, m: Merchant): string {
+  return m.unit ?? p.price.unit;
 }

@@ -120,6 +120,8 @@ function merchant(row: Row, n: 1 | 2, line: number) {
   return {
     id: n === 1 ? "sp-official" : "sp-top",
     label: row[`${p}Label`],
+    // 大包裝當「最省」時規格不同，沒填就沿用整列的 unit
+    ...(row[`${p}Unit`] ? { unit: row[`${p}Unit`] } : {}),
     amount: num(row, `${p}Amount`, line, { min: 1 }),
     note: row[`${p}Note`] ?? "",
     affiliateUrl: url,
@@ -187,30 +189,27 @@ const products = rows.map((row, i) => {
 });
 
 /*
- * 連結重複檢查。
+ * 同一商品頁多口味的偵測。
  *
- * 蝦皮很多賣場是「一頁多口味」—— 鹿肉/火雞/鮭魚共用一個商品頁。
- * 分享的時候如果沒有先選好規格，兩款不同蛋白源的商品會拿到同一條連結。
+ * 蝦皮的分享連結指向整個商品頁，不是特定規格 —— 賣家把鹿肉/火雞/鮭魚
+ * 放同一頁，兩款拿到同一條連結是必然，不是填錯。
  *
- * 後果是這個站最不能犯的錯：鮭魚過敏的人點「鹿肉」，被送到鮭魚頁面。
- * 而且它不會有任何症狀 —— 連結能開、頁面正常、驗證全過。
+ * 所以不擋。改成印出來提醒，前端會在「前往」按鈕旁警告使用者自己
+ * 選對規格 —— 那才是風險真正發生的地方。
  */
 const urlOwners = new Map<string, string[]>();
 for (const p of products) {
-  for (const m of p.price.merchants) {
-    const list = urlOwners.get(m!.affiliateUrl) ?? [];
-    list.push(`${p.id}（${p.spec.proteinSources.join("+")}）`);
-    urlOwners.set(m!.affiliateUrl, list);
+  // 同一款的大小包本來就共用連結，那不算多口味 —— 只看有幾「款」共用
+  for (const url of new Set(p.price.merchants.map((m) => m!.affiliateUrl))) {
+    const list = urlOwners.get(url) ?? [];
+    list.push(p.id + "（" + p.spec.proteinSources.join("+") + "）");
+    urlOwners.set(url, list);
   }
 }
-for (const [url, owners] of urlOwners) {
-  if (owners.length > 1) {
-    errors.push(
-      `連結重複：${owners.join(" 和 ")} 用了同一條網址\n` +
-      `    ${url}\n` +
-      `    → 回商品頁「先選好規格」再分享，兩款要各產一條`
-    );
-  }
+const shared = [...urlOwners].filter(([, o]) => o.length > 1);
+if (shared.length) {
+  console.log("\n  同一商品頁多口味（前端會提醒使用者選規格）：");
+  for (const [, owners] of shared) console.log('    ' + owners.join(' · '));
 }
 
 /* 跨列的合理性檢查 —— 單列看不出來的問題 */

@@ -47,6 +47,8 @@ export const S: Record<string, CSSProperties> = {
 
   emptyBox: { background: "var(--warn-soft)", border: "1px solid var(--warn)", borderRadius: 8, padding: "16px 18px", margin: "16px 0" },
   landing: { background: "var(--surface)", border: "1px solid var(--line)", borderRadius: 8, boxShadow: "var(--sh)", padding: "22px 24px", display: "flex", gap: 18, alignItems: "center", flexWrap: "wrap", justifyContent: "space-between" },
+  // 一頁多口味的警告 —— 風險真正發生的地方是「點進去之後」，所以貼著按鈕放
+  variantWarn: { background: "var(--warn-soft)", color: "var(--warn)", border: "1px solid var(--warn)", borderRadius: 6, padding: "10px 12px", fontSize: 12.5, lineHeight: 1.6, marginTop: 12 },
   reports: { fontSize: 12, color: "var(--faint)", marginTop: 12, paddingTop: 11, borderTop: "1px dashed var(--line)" },
   why: { margin: "0 0 14px", fontSize: 13.5, color: "var(--muted)" },
   drawer: { borderTop: "1px solid var(--line)", padding: 18, background: "var(--raise)" },

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { parse } from "@/lib/parse";
-import { adjudicate, anchorOf, auditCommission, pricePerKg } from "@/lib/engine";
+import { adjudicate, anchorOf, auditCommission, pricePerKg, sharedListings, unitOf } from "@/lib/engine";
 import { catalog, constraintsFor } from "@/lib/catalog";
 import type { Verdict } from "@/lib/types";
 
@@ -46,6 +46,7 @@ export default function Decider() {
   }
 
   const audit = verdict ? auditCommission(verdict) : null;
+  const shared = verdict ? sharedListings(verdict.survivors) : new Set<string>();
 
   return (
     <>
@@ -129,7 +130,9 @@ export default function Decider() {
                   const isPick = p.id === verdict.pick?.id;
                   const safe = anchorOf(p, "safe");
                   const value = anchorOf(p, "value");
-                  const perKg = pricePerKg(p.price.unit, value.amount);
+                  const safeKg = pricePerKg(unitOf(p, safe), safe.amount);
+                  const valueKg = pricePerKg(unitOf(p, value), value.amount);
+                  const multi = shared.has(safe.affiliateUrl);
                   return (
                     <article key={p.id} style={{ ...S.card, ...(isPick ? S.cardPick : {}) }}>
                       <button style={S.cardH} onClick={() => setOpen(open === p.id ? null : p.id)}>
@@ -147,11 +150,11 @@ export default function Decider() {
                           </span>
                         </span>
                         <span style={S.cardR}>
-                          <span style={S.price} className="mono">${value.amount}</span>
-                          {perKg !== null && (
-                            <span style={S.perKg} className="mono">${perKg}/kg</span>
+                          <span style={S.price} className="mono">${safe.amount}</span>
+                          {safeKg !== null && (
+                            <span style={S.perKg} className="mono">${safeKg}/kg</span>
                           )}
-                          <span style={S.checked} className="mono">{p.price.unit} · {p.price.checkedAt} 查得</span>
+                          <span style={S.checked} className="mono">{unitOf(p, safe)} · {p.price.checkedAt} 查得</span>
                         </span>
                       </button>
 
@@ -170,21 +173,35 @@ export default function Decider() {
                               <span>
                                 <span style={S.anchK} className="mono">最穩</span>
                                 <span style={S.anchV}>{safe.label}</span>
-                                <span style={S.anchN}>${safe.amount} · {safe.note}</span>
+                                <span style={S.anchN}>
+                                  ${safe.amount}{safeKg !== null && ` · ${safeKg}/kg`} · {safe.note}
+                                </span>
                               </span>
                               <a style={S.btn} href={`/go/${safe.id}/${p.id}`} rel="nofollow sponsored">前往</a>
                             </div>
                             {value.id !== safe.id && (
                               <div style={S.anch}>
                                 <span>
-                                  <span style={S.anchK} className="mono">最省</span>
-                                  <span style={S.anchV}>{value.label}</span>
-                                  <span style={S.anchN}>${value.amount} · 省 ${safe.amount - value.amount} · {value.note}</span>
+                                  <span style={S.anchK} className="mono">每公斤最省</span>
+                                  <span style={S.anchV}>
+                                    {unitOf(p, value)} 大包裝
+                                    {safeKg !== null && valueKg !== null &&
+                                      ` · 每公斤省 ${Math.round((1 - valueKg / safeKg) * 100)}%`}
+                                  </span>
+                                  <span style={S.anchN}>
+                                    ${value.amount}{valueKg !== null && ` · ${valueKg}/kg`} · {value.note}
+                                  </span>
                                 </span>
                                 <a style={S.btnGhost} href={`/go/${value.id}/${p.id}`} rel="nofollow sponsored">前往</a>
                               </div>
                             )}
                           </div>
+                        {multi && (
+                          <p style={S.variantWarn}>
+                            ⚠️ 這個賣場一頁多口味。點進去請自己把規格選成
+                            <b>「{p.name}」</b>—— 預設可能不是這個。
+                          </p>
+                        )}
                         {/* 沒有回報就不要顯示 —— 「0 位飼主回報中，0 位反映…」
                             看起來像壞掉，而且它其實是在講「我們還沒查」，
                             不如老實講那句。 */}

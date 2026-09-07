@@ -62,6 +62,11 @@ export interface Merchant {
   commission: number;
   /** 錨點角色：安心 / 省錢 */
   anchor: "safe" | "value";
+  /**
+   * 這個通路賣的規格。沒填就沿用 price.unit。
+   * 大包裝當「最省」時規格不同（4.5磅 vs 24磅），每公斤要各算各的。
+   */
+  unit?: string;
 }
 
 export interface Price {
