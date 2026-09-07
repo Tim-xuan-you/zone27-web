@@ -202,4 +202,39 @@ const json = {
 
 writeFileSync(OUT, JSON.stringify(json, null, 2) + "\n", "utf8");
 console.log(`\n✓ ${products.length} 款寫入 data/dog-food.json`);
-console.log(`  記得跑 npm run build 確認頁面生得出來\n`);
+
+/* ---------------------------------------------------------------- */
+/* 價格快照 —— 每次匯入追加一筆                                       */
+/*                                                                    */
+/* 價格史是唯一抄不走的護城河（別人一週能複製規格庫，但複製不了三年份   */
+/* 的波動），而且晚一天開始就永遠少一天。所以在只有 8 筆示範資料、      */
+/* 一個使用者都沒有的現在就先記。                                      */
+/* ---------------------------------------------------------------- */
+
+const HIST = resolve("data/price-history.json");
+const hist = JSON.parse(readFileSync(HIST, "utf8"));
+const today = new Date().toISOString().slice(0, 10);
+
+const snapshot = {
+  d: today,
+  p: Object.fromEntries(
+    products.map((p) => [p.id, Math.min(...p.price.merchants.map((m) => m!.amount))])
+  ),
+};
+
+const idx = hist.snapshots.findIndex((s: { d: string }) => s.d === today);
+if (idx >= 0) {
+  hist.snapshots[idx] = snapshot;      // 同一天重跑就覆蓋，不要留兩筆
+  console.log(`  價格快照 ${today} 已更新（共 ${hist.snapshots.length} 天）`);
+} else {
+  hist.snapshots.push(snapshot);
+  console.log(`  價格快照 ${today} 已追加（共 ${hist.snapshots.length} 天）`);
+}
+
+hist.snapshots.sort((a: { d: string }, b: { d: string }) => a.d.localeCompare(b.d));
+writeFileSync(HIST, JSON.stringify(hist, null, 2) + "\n", "utf8");
+
+if (hist.snapshots.length < 7) {
+  console.log(`  （滿 7 天之後，網站才會開始顯示「現在該不該買」）`);
+}
+console.log(`\n  記得跑 npm run build 確認頁面生得出來\n`);

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { anchorOf, auditCommission } from "@/lib/engine";
+import { priceStat, timingAdvice } from "@/lib/history";
 import type { Verdict } from "@/lib/types";
 import { S } from "./styles";
 
@@ -118,6 +119,33 @@ export default function VerdictView({
                           <a style={S.btnGhost} href={`/go/${value.id}/${p.id}`} rel="nofollow sponsored">前往</a>
                         </div>
                       )}
+                      {(() => {
+                        /* 第三錨點：現在該不該買。
+                           紀錄不滿 7 天就不顯示 —— 樣本太小的「史低」是誤導，
+                           而誤導比沒有資訊糟糕得多。 */
+                        const stat = priceStat(p.id, value.amount);
+                        if (!stat) return null;
+                        const advice = timingAdvice(stat, value.amount);
+                        return (
+                          <div style={{
+                            ...S.anch,
+                            borderColor: advice.wait ? "var(--warn)" : "var(--keep)",
+                            background: advice.wait ? "var(--warn-soft)" : "var(--keep-soft)",
+                          }}>
+                            <span>
+                              <span style={{ ...S.anchK, color: advice.wait ? "var(--warn)" : "var(--keep)" }} className="mono">
+                                最佳時機
+                              </span>
+                              <span style={S.anchV}>
+                                {advice.wait ? "現在不是好時機 — 建議等" : "現在買不吃虧"}
+                              </span>
+                              <span style={{ ...S.anchN, color: advice.wait ? "var(--warn)" : "var(--muted)" }}>
+                                {advice.verdict}
+                              </span>
+                            </span>
+                          </div>
+                        );
+                      })()}
                     </div>
                     <p style={S.reports}>
                       {p.reports.total} 位飼主回報中，{p.reports.palatability} 位反映適口性差、
