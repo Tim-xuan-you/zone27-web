@@ -1,0 +1,9 @@
+﻿id,brand,name,protein,fat,carb,omega3,phosphorus,proteinSources,singleSource,grainFree,prescription,lifeStage,bodySize,reportsTotal,reportsPalatability,reportsLooseStool,unit,checkedAt,dealbreaker,discontinued,m1Label,m1Unit,m1Amount,m1Note,m1Url,m1Commission,m2Label,m2Unit,m2Amount,m2Note,m2Url,m2Commission,m3Label,m3Unit,m3Amount,m3Note,m3Url,m3Commission,m4Label,m4Unit,m4Amount,m4Note,m4Url,m4Commission
+df-07,Orijen 渴望,鮮雞無穀幼犬,38,18,18,,1.1,chicken|turkey|whitefish,N,Y,N,puppy,small|medium|large,,,,,2026-09-08,你的狗對雞肉過敏 — 主蛋白源是鮮雞，還有火雞,N,TODO-賣家名,TODO-規格,,TODO-備註,TODO-貼連結,TODO-佣金%,,,,,,,,,,,,,,,,,,
+df-08,SOLUTION 耐吉斯,E1 活力羊肉餐 無穀幼犬,,,,,,lamb,Y,Y,N,puppy,small|medium|large,,,,,2026-09-08,你的狗曾對羊肉起疹 — 全配方只有羊，幼犬期換糧要更小心,N,TODO-賣家名,TODO-規格,,TODO-備註,TODO-貼連結,TODO-佣金%,,,,,,,,,,,,,,,,,,
+df-09,Real Power 瑞威,幼犬1號 草原羊肉 亮毛溫和,,,,,,lamb,,N,N,puppy,small|medium,,,,,2026-09-08,你要的是無穀配方 — 這款含蓬萊米與燕麥，是有穀配方,N,TODO-賣家名,TODO-規格,,TODO-備註,TODO-貼連結,TODO-佣金%,,,,,,,,,,,,,,,,,,
+df-10,Orijen 渴望,六種魚無穀 小型成犬,40,15,19,,1.1,whitefish|salmon,N,Y,N,adult,small,,,,,2026-09-08,你的狗腸胃敏感 — 粗蛋白 40% 是這裡最高的，換糧要分七天慢慢換,N,TODO-賣家名,TODO-規格,,TODO-備註,TODO-貼連結,TODO-佣金%,,,,,,,,,,,,,,,,,,
+df-11,Taste of the Wild,海陸饗宴 荒野鴨肉火雞,32,,,,,duck|turkey|chicken,N,Y,N,all,small|medium|large,,,,,2026-09-08,你的狗對雞肉過敏 — 品名只寫鴨肉火雞，但成分表裡有脫水雞肉和雞脂肪,N,TODO-賣家名,TODO-規格,,TODO-備註,TODO-貼連結,TODO-佣金%,,,,,,,,,,,,,,,,,,
+df-12,Blackwood 柏萊富,極鮮無穀 低敏挑嘴 鮭魚+豌豆,,,,,,salmon,,Y,N,all,small|medium|large,,,,,2026-09-08,你的狗對魚類過敏 — 主蛋白源是鮭魚,N,TODO-賣家名,TODO-規格,,TODO-備註,TODO-貼連結,TODO-佣金%,,,,,,,,,,,,,,,,,,
+df-13,TOMA-PRO 優格,高齡犬 鮭魚配方,,,,,,salmon,,,N,senior,small|medium|large,,,,,2026-09-08,你的狗還年輕 — 高齡配方熱量偏低，成長期或活動量大的狗會吃不飽,N,TODO-賣家名,TODO-規格,,TODO-備註,TODO-貼連結,TODO-佣金%,,,,,,,,,,,,,,,,,,
+df-14,TODO-平價品牌,TODO-品項名,,,,,,,,,N,all,small|medium|large,,,,,2026-09-08,TODO-寫一句「不要買，如果⋯」,N,TODO-賣家名,TODO-規格,,TODO-備註,TODO-貼連結,TODO-佣金%,,,,,,,,,,,,,,,,,,
