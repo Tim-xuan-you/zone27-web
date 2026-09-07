@@ -43,24 +43,14 @@
         "checkedAt": "2026-09-08",
         "merchants": [
           {
-            "id": "sp-official",
+            "id": "m1",
             "label": "獅子王寵物（蝦皮優選）",
             "unit": "2kg",
             "amount": 1200,
-            "note": "2kg · 隔日到貨 · 正品保障 · 超商限兩包",
+            "note": "隔日到貨 · 正品保障 · 超商限兩包 · 同賣場有 6kg 與 11.4kg，每公斤更便宜",
             "affiliateUrl": "https://s.shopee.tw/3B7ESUSXfM?share_channel_code=6",
             "commission": 9,
             "anchor": "safe"
-          },
-          {
-            "id": "sp-top",
-            "label": "獅子王寵物（蝦皮優選）",
-            "unit": "11.4kg",
-            "amount": 4380,
-            "note": "11.4kg 大包 · 每公斤便宜 36% · 限宅配",
-            "affiliateUrl": "https://s.shopee.tw/3B7ESUSXfM?share_channel_code=6",
-            "commission": 9,
-            "anchor": "value"
           }
         ]
       },
@@ -102,24 +92,14 @@
         "checkedAt": "2026-09-08",
         "merchants": [
           {
-            "id": "sp-official",
+            "id": "m1",
             "label": "毛家人寵物用品",
             "unit": "4.5磅",
             "amount": 1050,
-            "note": "小顆粒 · 2~3工作日出貨 · 蝦皮安心退 · 12磅裝每公斤便宜 21%",
+            "note": "小顆粒 · 2~3工作日出貨 · 蝦皮安心退 · 同賣場有 12磅與 24磅，每公斤更便宜",
             "affiliateUrl": "https://s.shopee.tw/40gLTGbv3Y?share_channel_code=6",
             "commission": 11,
             "anchor": "safe"
-          },
-          {
-            "id": "sp-top",
-            "label": "毛家人寵物用品",
-            "unit": "24磅",
-            "amount": 3450,
-            "note": "24磅原顆粒 · 每公斤便宜 38% · 開封後要密封防潮",
-            "affiliateUrl": "https://s.shopee.tw/40gLTGbv3Y?share_channel_code=6",
-            "commission": 11,
-            "anchor": "value"
           }
         ]
       },
@@ -161,22 +141,42 @@
         "checkedAt": "2026-09-08",
         "merchants": [
           {
-            "id": "sp-official",
+            "id": "m1",
             "label": "蝦皮直營（官方直營）",
             "unit": "1.8kg",
             "amount": 748,
-            "note": "野生海魚小顆粒 · 當日到 · 15天鑑賞",
+            "note": "小顆粒 · 當日到 · 15天鑑賞",
             "affiliateUrl": "https://s.shopee.tw/80CUGQ3z8S?share_channel_code=6",
             "commission": 3.5,
             "anchor": "safe"
           },
           {
-            "id": "sp-top",
+            "id": "m2",
+            "label": "蝦皮直營（官方直營）",
+            "unit": "2.3kg",
+            "amount": 967,
+            "note": "選規格要看清，同賣場另有羊肉配方",
+            "affiliateUrl": "https://s.shopee.tw/9AOReYUTFr?share_channel_code=6",
+            "commission": 3.5,
+            "anchor": "value"
+          },
+          {
+            "id": "m3",
             "label": "蝦皮直營（官方直營）",
             "unit": "5.44kg",
             "amount": 2051,
-            "note": "5.44kg 大包 · 每公斤便宜 9%",
-            "affiliateUrl": "https://s.shopee.tw/80CUGQ3z8S?share_channel_code=6",
+            "note": "小顆粒",
+            "affiliateUrl": "https://s.shopee.tw/9zxYe4srBV?share_channel_code=6",
+            "commission": 3.5,
+            "anchor": "value"
+          },
+          {
+            "id": "m4",
+            "label": "蝦皮直營（官方直營）",
+            "unit": "6.6kg",
+            "amount": 2317,
+            "note": "每公斤最便宜的規格",
+            "affiliateUrl": "https://s.shopee.tw/112jvWftHl?share_channel_code=6",
             "commission": 3.5,
             "anchor": "value"
           }
@@ -220,22 +220,22 @@
         "checkedAt": "2026-09-08",
         "merchants": [
           {
-            "id": "sp-official",
+            "id": "m1",
             "label": "毛家人寵物用品",
             "unit": "6磅",
             "amount": 1600,
-            "note": "低致敏鮭魚 · 2~3工作日出貨 · 22磅裝每公斤便宜 29%",
+            "note": "2~3工作日出貨 · 同賣場另有鹿肉與火雞口味，選規格要看清",
             "affiliateUrl": "https://s.shopee.tw/4qFSVsX0T4?share_channel_code=6",
             "commission": 11,
             "anchor": "safe"
           },
           {
-            "id": "sp-top",
+            "id": "m2",
             "label": "毛家人寵物用品",
             "unit": "22磅",
             "amount": 4190,
-            "note": "22磅大包 · 每公斤便宜 29%",
-            "affiliateUrl": "https://s.shopee.tw/4qFSVsX0T4?share_channel_code=6",
+            "note": "大包裝 · 開封後要密封防潮",
+            "affiliateUrl": "https://s.shopee.tw/3g3V7j61zs?share_channel_code=6",
             "commission": 11,
             "anchor": "value"
           }
@@ -279,24 +279,14 @@
         "checkedAt": "2026-09-08",
         "merchants": [
           {
-            "id": "sp-official",
+            "id": "m1",
             "label": "毛家人寵物用品",
             "unit": "3.5磅",
             "amount": 1440,
-            "note": "低致敏鹿肉 · 2~3工作日出貨 · 22磅裝每公斤便宜 29%",
+            "note": "2~3工作日出貨 · 同賣場另有鮭魚與火雞口味 · 另有 22磅裝每公斤便宜 29%",
             "affiliateUrl": "https://s.shopee.tw/4qFSVsX0T4?share_channel_code=6",
             "commission": 11,
             "anchor": "safe"
-          },
-          {
-            "id": "sp-top",
-            "label": "毛家人寵物用品",
-            "unit": "22磅",
-            "amount": 6430,
-            "note": "22磅大包 · 每公斤便宜 29%",
-            "affiliateUrl": "https://s.shopee.tw/4qFSVsX0T4?share_channel_code=6",
-            "commission": 11,
-            "anchor": "value"
           }
         ]
       },
@@ -337,24 +327,14 @@
         "checkedAt": "2026-09-08",
         "merchants": [
           {
-            "id": "sp-official",
+            "id": "m1",
             "label": "毛家人寵物用品",
             "unit": "2kg",
             "amount": 1399,
-            "note": "火雞+雞肉小顆粒 · 2~3工作日出貨 · 5.4kg裝每公斤便宜 29%",
+            "note": "2~3工作日出貨 · 同賣場有 5.4kg，每公斤便宜 29%",
             "affiliateUrl": "https://s.shopee.tw/8fSB6QSYX5?share_channel_code=6",
             "commission": 11,
             "anchor": "safe"
-          },
-          {
-            "id": "sp-top",
-            "label": "毛家人寵物用品",
-            "unit": "5.4kg",
-            "amount": 2699,
-            "note": "5.4kg 大包 · 每公斤便宜 29%",
-            "affiliateUrl": "https://s.shopee.tw/8fSB6QSYX5?share_channel_code=6",
-            "commission": 11,
-            "anchor": "value"
           }
         ]
       },

@@ -107,7 +107,7 @@ function list(row: Row, key: string, line: number, allowed: string[]): string[] 
   return items;
 }
 
-function merchant(row: Row, n: 1 | 2, line: number) {
+function merchant(row: Row, n: number, line: number) {
   const p = `m${n}`;
   if (!row[`${p}Label`]) return null;
 
@@ -118,7 +118,7 @@ function merchant(row: Row, n: 1 | 2, line: number) {
   }
 
   return {
-    id: n === 1 ? "sp-official" : "sp-top",
+    id: "m" + n,
     label: row[`${p}Label`],
     // 大包裝當「最省」時規格不同，沒填就沿用整列的 unit
     ...(row[`${p}Unit`] ? { unit: row[`${p}Unit`] } : {}),
@@ -126,7 +126,7 @@ function merchant(row: Row, n: 1 | 2, line: number) {
     note: row[`${p}Note`] ?? "",
     affiliateUrl: url,
     commission: num(row, `${p}Commission`, line, { min: 0, max: 101 }),
-    anchor: n === 1 ? "safe" : "value",
+    anchor: (n === 1 ? "safe" : "value") as "safe" | "value",
   };
 }
 
@@ -156,7 +156,8 @@ const products = rows.map((row, i) => {
     fail(line, "checkedAt", `「${row.checkedAt}」格式要像 2026-09-05`);
   }
 
-  const merchants = [merchant(row, 1, line), merchant(row, 2, line)].filter(Boolean);
+  // m1..m4。規則上一款一個規格就好，但賣家把尺寸拆成獨立商品時會用到。
+  const merchants = [1, 2, 3, 4].map((n) => merchant(row, n, line)).filter(Boolean);
   if (merchants.length === 0) fail(line, "m1Label", "至少要有一個通路");
 
   return {

@@ -268,7 +268,10 @@ export interface StoreOption {
   unit: string;
   amount: number;
   perKg: number | null;
-  /** 相對於同賣場最貴規格，每公斤省幾 % */
+  /**
+   * 相對於這款最貴的那個規格，每公斤差幾 %。
+   * 正數＝比較省，負數＝反而更貴（大包不一定划算，這才是要講的）。
+   */
   savingPct: number | null;
   note: string;
 }
@@ -299,7 +302,12 @@ export function storesOf(p: Product): Store[] {
   const allKg = p.price.merchants
     .map((m) => pricePerKg(unitOf(p, m), m.amount))
     .filter((k): k is number => k !== null);
-  const base = allKg.length > 1 ? Math.max(...allKg) : null;
+  // 用「入門包」當基準，不是用最貴的 —— 使用者是拿最小包去比大包划不划算
+  const entry = p.price.merchants
+    .map((m) => ({ kg: kgOf(unitOf(p, m)), per: pricePerKg(unitOf(p, m), m.amount) }))
+    .filter((x) => x.kg !== null && x.per !== null)
+    .sort((a, b) => a.kg! - b.kg!)[0];
+  const base = allKg.length > 1 && entry ? entry.per! : null;
 
   return [...byUrl.values()].map((ms) => {
     const withKg = ms.map((m) => ({
@@ -320,7 +328,7 @@ export function storesOf(p: Product): Store[] {
           amount: x.m.amount,
           perKg: x.perKg,
           savingPct:
-            base !== null && x.perKg !== null && x.perKg < base
+            base !== null && x.perKg !== null && x.perKg !== base
               ? Math.round((1 - x.perKg / base) * 100)
               : null,
           note: x.m.note,

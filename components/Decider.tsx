@@ -200,9 +200,27 @@ export default function Decider() {
                                       <td style={S.optKg} className="mono">
                                         {o.perKg !== null ? `$${o.perKg}/kg` : ""}
                                       </td>
-                                      <td style={S.optSave} className="mono">
-                                        {o.savingPct !== null ? `每公斤省 ${o.savingPct}%` : ""}
-                                      </td>
+                                      <td
+                                    style={{
+                                      ...S.optSave,
+                                      color:
+                                        o.savingPct === null || Math.abs(o.savingPct) < 3
+                                          ? "var(--faint)"
+                                          : o.savingPct > 0
+                                          ? "var(--keep)"
+                                          : "var(--cut)",
+                                    }}
+                                    className="mono"
+                                  >
+                                    {/* 差三個百分點以內就是「差不多」。
+                                        「反而貴 1%」太瑣碎，而「差不多」直接告訴使用者
+                                        不用為了這包多花錢。 */}
+                                    {o.savingPct === null || Math.abs(o.savingPct) < 3
+                                      ? o.savingPct === null ? "" : "每公斤差不多"
+                                      : o.savingPct > 0
+                                      ? `每公斤省 ${o.savingPct}%`
+                                      : `每公斤反而貴 ${-o.savingPct}%`}
+                                  </td>
                                     </tr>
                                   ))}
                                 </tbody>
