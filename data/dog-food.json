@@ -47,10 +47,30 @@
             "label": "獅子王寵物（蝦皮優選）",
             "unit": "2kg",
             "amount": 1200,
-            "note": "隔日到貨 · 正品保障 · 超商限兩包 · 同賣場有 6kg 與 11.4kg，每公斤更便宜",
+            "note": "隔日到貨 · 正品保障 · 超商限兩包",
             "affiliateUrl": "https://s.shopee.tw/3B7ESUSXfM?share_channel_code=6",
             "commission": 9,
             "anchor": "safe"
+          },
+          {
+            "id": "m2",
+            "label": "獅子王寵物（蝦皮優選）",
+            "unit": "6kg",
+            "amount": 2640,
+            "note": "超商限一包",
+            "affiliateUrl": "https://s.shopee.tw/3B7ESUSXfM?share_channel_code=6",
+            "commission": 9,
+            "anchor": "value"
+          },
+          {
+            "id": "m3",
+            "label": "獅子王寵物（蝦皮優選）",
+            "unit": "11.4kg",
+            "amount": 4380,
+            "note": "限宅配 · 開封後要密封防潮",
+            "affiliateUrl": "https://s.shopee.tw/3B7ESUSXfM?share_channel_code=6",
+            "commission": 9,
+            "anchor": "value"
           }
         ]
       },
@@ -96,10 +116,20 @@
             "label": "毛家人寵物用品",
             "unit": "4.5磅",
             "amount": 1050,
-            "note": "小顆粒 · 2~3工作日出貨 · 蝦皮安心退 · 同賣場有 12磅與 24磅，每公斤更便宜",
+            "note": "小顆粒 · 2~3工作日出貨 · 蝦皮安心退",
             "affiliateUrl": "https://s.shopee.tw/40gLTGbv3Y?share_channel_code=6",
             "commission": 11,
             "anchor": "safe"
+          },
+          {
+            "id": "m2",
+            "label": "毛家人寵物用品",
+            "unit": "24磅",
+            "amount": 3450,
+            "note": "原顆粒 · 開封後要密封防潮",
+            "affiliateUrl": "https://s.shopee.tw/40gLTGbv3Y?share_channel_code=6",
+            "commission": 11,
+            "anchor": "value"
           }
         ]
       },
@@ -145,7 +175,7 @@
             "label": "蝦皮直營（官方直營）",
             "unit": "1.8kg",
             "amount": 748,
-            "note": "小顆粒 · 當日到 · 15天鑑賞",
+            "note": "小顆粒 · 當日到 · 15天鑑賞 · 各規格是獨立商品，2.3kg 那個賣場另有羊肉配方",
             "affiliateUrl": "https://s.shopee.tw/80CUGQ3z8S?share_channel_code=6",
             "commission": 3.5,
             "anchor": "safe"
@@ -155,7 +185,7 @@
             "label": "蝦皮直營（官方直營）",
             "unit": "2.3kg",
             "amount": 967,
-            "note": "選規格要看清，同賣場另有羊肉配方",
+            "note": "",
             "affiliateUrl": "https://s.shopee.tw/9AOReYUTFr?share_channel_code=6",
             "commission": 3.5,
             "anchor": "value"
@@ -165,7 +195,7 @@
             "label": "蝦皮直營（官方直營）",
             "unit": "5.44kg",
             "amount": 2051,
-            "note": "小顆粒",
+            "note": "",
             "affiliateUrl": "https://s.shopee.tw/9zxYe4srBV?share_channel_code=6",
             "commission": 3.5,
             "anchor": "value"
@@ -175,7 +205,7 @@
             "label": "蝦皮直營（官方直營）",
             "unit": "6.6kg",
             "amount": 2317,
-            "note": "每公斤最便宜的規格",
+            "note": "",
             "affiliateUrl": "https://s.shopee.tw/112jvWftHl?share_channel_code=6",
             "commission": 3.5,
             "anchor": "value"
@@ -224,7 +254,7 @@
             "label": "毛家人寵物用品",
             "unit": "6磅",
             "amount": 1600,
-            "note": "2~3工作日出貨 · 同賣場另有鹿肉與火雞口味，選規格要看清",
+            "note": "2~3工作日出貨 · 同賣場另有鹿肉與火雞口味",
             "affiliateUrl": "https://s.shopee.tw/4qFSVsX0T4?share_channel_code=6",
             "commission": 11,
             "anchor": "safe"
@@ -234,7 +264,7 @@
             "label": "毛家人寵物用品",
             "unit": "22磅",
             "amount": 4190,
-            "note": "大包裝 · 開封後要密封防潮",
+            "note": "大包裝專頁 · 同樣三種口味，選規格要看清",
             "affiliateUrl": "https://s.shopee.tw/3g3V7j61zs?share_channel_code=6",
             "commission": 11,
             "anchor": "value"
@@ -283,10 +313,20 @@
             "label": "毛家人寵物用品",
             "unit": "3.5磅",
             "amount": 1440,
-            "note": "2~3工作日出貨 · 同賣場另有鮭魚與火雞口味 · 另有 22磅裝每公斤便宜 29%",
+            "note": "2~3工作日出貨 · 同賣場另有鮭魚與火雞口味",
             "affiliateUrl": "https://s.shopee.tw/4qFSVsX0T4?share_channel_code=6",
             "commission": 11,
             "anchor": "safe"
+          },
+          {
+            "id": "m2",
+            "label": "毛家人寵物用品",
+            "unit": "22磅",
+            "amount": 6430,
+            "note": "大包裝專頁 · 同樣三種口味，選規格要看清",
+            "affiliateUrl": "https://s.shopee.tw/3g3V7j61zs?share_channel_code=6",
+            "commission": 11,
+            "anchor": "value"
           }
         ]
       },
@@ -331,10 +371,20 @@
             "label": "毛家人寵物用品",
             "unit": "2kg",
             "amount": 1399,
-            "note": "2~3工作日出貨 · 同賣場有 5.4kg，每公斤便宜 29%",
+            "note": "小顆粒 · 2~3工作日出貨",
             "affiliateUrl": "https://s.shopee.tw/8fSB6QSYX5?share_channel_code=6",
             "commission": 11,
             "anchor": "safe"
+          },
+          {
+            "id": "m2",
+            "label": "毛家人寵物用品",
+            "unit": "5.4kg",
+            "amount": 2699,
+            "note": "小顆粒 · 開封後要密封防潮",
+            "affiliateUrl": "https://s.shopee.tw/8fSB6QSYX5?share_channel_code=6",
+            "commission": 11,
+            "anchor": "value"
           }
         ]
       },

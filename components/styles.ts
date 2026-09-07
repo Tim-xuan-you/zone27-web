@@ -56,6 +56,7 @@ export const S: Record<string, CSSProperties> = {
   optAmt: { padding: "4px 0", textAlign: "right", fontWeight: 600, whiteSpace: "nowrap" },
   optKg: { padding: "4px 0 4px 14px", color: "var(--accent)", fontWeight: 600, whiteSpace: "nowrap" },
   optSave: { padding: "4px 0 4px 14px", color: "var(--keep)", fontSize: 12, whiteSpace: "nowrap", textAlign: "right" },
+  btnSmall: { border: "1px solid var(--accent)", background: "transparent", color: "var(--accent)", borderRadius: 4, padding: "3px 10px", fontSize: 12, fontWeight: 700, textDecoration: "none", whiteSpace: "nowrap" },
   storeNote: { margin: "10px 0 0", fontSize: 12, color: "var(--muted)", lineHeight: 1.6 },
   variantWarn: { background: "var(--warn-soft)", color: "var(--warn)", border: "1px solid var(--warn)", borderRadius: 6, padding: "10px 12px", fontSize: 12.5, lineHeight: 1.6, marginTop: 12 },
   reports: { fontSize: 12, color: "var(--faint)", marginTop: 12, paddingTop: 11, borderTop: "1px dashed var(--line)" },

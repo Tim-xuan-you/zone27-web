@@ -265,74 +265,77 @@ export function unitOf(p: Product, m: Merchant): string {
 /* ------------------------------------------------------------------ */
 
 export interface StoreOption {
+  /** 走 /go/ 用的通路 id */
+  id: string;
   unit: string;
   amount: number;
   perKg: number | null;
   /**
-   * 相對於這款最貴的那個規格，每公斤差幾 %。
+   * 相對於這款最小包，每公斤差幾 %。
    * 正數＝比較省，負數＝反而更貴（大包不一定划算，這才是要講的）。
    */
   savingPct: number | null;
   note: string;
+  affiliateUrl: string;
 }
 
 export interface Store {
-  /** 走 /go/ 用的通路 id */
-  id: string;
   label: string;
-  affiliateUrl: string;
   commission: number;
   options: StoreOption[];
+  /**
+   * 所有規格共用一條連結（賣家放同一個商品頁）→ 標題放一個按鈕就好。
+   * 各自獨立（賣家把尺寸拆成不同商品）→ 每一行各給一個按鈕。
+   */
+  singleUrl: string | null;
 }
 
-/** 把一款商品的通路按「同一個連結」歸成賣場。 */
+/**
+ * 把一款商品的通路按「賣家」歸組。
+ *
+ * 賣家設定方式不一致：有人把 2kg/6kg/11.4kg 放同一個商品頁，
+ * 有人把每個尺寸拆成獨立商品。畫面要兩種都長得對 ——
+ * 同一家就一個標題，連結相同就一個按鈕，不同就每行一個。
+ */
 export function storesOf(p: Product): Store[] {
-  const byUrl = new Map<string, Merchant[]>();
+  // 省幅基準用「最小包」—— 使用者是拿入門包去比大包划不划算
+  const sized = p.price.merchants
+    .map((m) => ({ m, kg: kgOf(unitOf(p, m)), per: pricePerKg(unitOf(p, m), m.amount) }))
+    .filter((x) => x.kg !== null && x.per !== null)
+    .sort((a, b) => a.kg! - b.kg!);
+  const base = sized.length > 1 ? sized[0].per! : null;
+
+  const byLabel = new Map<string, Merchant[]>();
   for (const m of p.price.merchants) {
-    byUrl.set(m.affiliateUrl, [...(byUrl.get(m.affiliateUrl) ?? []), m]);
+    byLabel.set(m.label, [...(byLabel.get(m.label) ?? []), m]);
   }
 
-  /*
-   * 省幅的基準要跨賣場算，不能只在同一個區塊裡比。
-   *
-   * 賣家設定方式不一致：有人把 6磅/22磅 放同一個商品頁（同網址），
-   * 有人拆成兩個商品（不同網址）。後者如果只在區塊內比，
-   * 每個區塊都只有一個規格 → 永遠算不出省幅。
-   */
-  const allKg = p.price.merchants
-    .map((m) => pricePerKg(unitOf(p, m), m.amount))
-    .filter((k): k is number => k !== null);
-  // 用「入門包」當基準，不是用最貴的 —— 使用者是拿最小包去比大包划不划算
-  const entry = p.price.merchants
-    .map((m) => ({ kg: kgOf(unitOf(p, m)), per: pricePerKg(unitOf(p, m), m.amount) }))
-    .filter((x) => x.kg !== null && x.per !== null)
-    .sort((a, b) => a.kg! - b.kg!)[0];
-  const base = allKg.length > 1 && entry ? entry.per! : null;
-
-  return [...byUrl.values()].map((ms) => {
-    const withKg = ms.map((m) => ({
-      m,
-      unit: unitOf(p, m),
-      perKg: pricePerKg(unitOf(p, m), m.amount),
-    }));
+  return [...byLabel].map(([label, ms]) => {
+    const urls = new Set(ms.map((m) => m.affiliateUrl));
+    const options = ms
+      .map((m) => {
+        const unit = unitOf(p, m);
+        const perKg = pricePerKg(unit, m.amount);
+        return {
+          id: m.id,
+          unit,
+          amount: m.amount,
+          perKg,
+          savingPct:
+            base !== null && perKg !== null && perKg !== base
+              ? Math.round((1 - perKg / base) * 100)
+              : null,
+          note: m.note,
+          affiliateUrl: m.affiliateUrl,
+        };
+      })
+      .sort((a, b) => a.amount - b.amount);
 
     return {
-      id: ms[0].id,
-      label: ms[0].label,
-      affiliateUrl: ms[0].affiliateUrl,
+      label,
       commission: Math.max(...ms.map((m) => m.commission)),
-      options: withKg
-        .sort((a, b) => a.m.amount - b.m.amount)
-        .map((x) => ({
-          unit: x.unit,
-          amount: x.m.amount,
-          perKg: x.perKg,
-          savingPct:
-            base !== null && x.perKg !== null && x.perKg !== base
-              ? Math.round((1 - x.perKg / base) * 100)
-              : null,
-          note: x.m.note,
-        })),
+      options,
+      singleUrl: urls.size === 1 ? [...urls][0] : null,
     };
   });
 }

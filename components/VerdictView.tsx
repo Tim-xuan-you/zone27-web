@@ -106,19 +106,23 @@ export default function VerdictView({
                       <p style={S.why}><b>為什麼是這款：</b>{verdict.pickReason}</p>
                     )}
                       {storesOf(p).map((store) => (
-                        <div key={store.affiliateUrl} style={S.store}>
+                        <div key={store.label} style={S.store}>
                           <div style={S.storeHead}>
                             <span style={S.storeName}>{store.label}</span>
-                            <a
-                              style={S.btn}
-                              href={`/go/${store.id}/${p.id}`}
-                              rel="nofollow sponsored"
-                            >前往賣場</a>
+                            {/* 所有規格同一個商品頁 → 標題一個按鈕就好；
+                                賣家把尺寸拆成獨立商品 → 每一行各自一個按鈕 */}
+                            {store.singleUrl && (
+                              <a
+                                style={S.btn}
+                                href={`/go/${store.options[0].id}/${p.id}`}
+                                rel="nofollow sponsored"
+                              >前往賣場</a>
+                            )}
                           </div>
                           <table style={S.optTable}>
                             <tbody>
                               {store.options.map((o) => (
-                                <tr key={o.unit}>
+                                <tr key={o.id}>
                                   <td style={S.optUnit} className="mono">{o.unit}</td>
                                   <td style={S.optAmt} className="mono">${o.amount}</td>
                                   <td style={S.optKg} className="mono">
@@ -136,19 +140,29 @@ export default function VerdictView({
                                     }}
                                     className="mono"
                                   >
-                                    {/* 差三個百分點以內就是「差不多」。
-                                        「反而貴 1%」太瑣碎，而「差不多」直接告訴使用者
-                                        不用為了這包多花錢。 */}
+                                    {/* 差三個百分點以內就是「差不多」——「反而貴 1%」太瑣碎，
+                                        「差不多」直接告訴使用者不用為了這包多花錢 */}
                                     {o.savingPct === null || Math.abs(o.savingPct) < 3
                                       ? o.savingPct === null ? "" : "每公斤差不多"
                                       : o.savingPct > 0
                                       ? `每公斤省 ${o.savingPct}%`
                                       : `每公斤反而貴 ${-o.savingPct}%`}
                                   </td>
+                                  {!store.singleUrl && (
+                                    <td style={{ textAlign: "right", paddingLeft: 12 }}>
+                                      <a
+                                        style={S.btnSmall}
+                                        href={`/go/${o.id}/${p.id}`}
+                                        rel="nofollow sponsored"
+                                      >前往</a>
+                                    </td>
+                                  )}
                                 </tr>
                               ))}
                             </tbody>
                           </table>
+                          {/* 只顯示入門包的備註 —— 那一欄放賣家層級的資訊（出貨、鑑賞期）。
+                              每個規格各自的備註串起來會變成一長串雜訊。 */}
                           {store.options[0]?.note && (
                             <p style={S.storeNote}>{store.options[0].note}</p>
                           )}
