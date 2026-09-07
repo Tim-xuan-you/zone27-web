@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { anchorOf, auditCommission, pricePerKg, sharedListings, unitOf } from "@/lib/engine";
+import { anchorOf, auditCommission, pricePerKg, sharedListings, storesOf, unitOf } from "@/lib/engine";
 import { priceStat, timingAdvice } from "@/lib/history";
 import type { Verdict } from "@/lib/types";
 import { S } from "./styles";
@@ -68,10 +68,8 @@ export default function VerdictView({
             {verdict.survivors.map((p) => {
               const isPick = p.id === verdict.pick?.id;
               const safe = anchorOf(p, "safe");
-              const value = anchorOf(p, "value");
-              // 蝦皮規格單位很亂（2kg / 4.5磅 / 24磅），換算成每公斤才比得了
+              // 卡片標題顯示「入門規格」的價格與每公斤，細節在展開後的賣場表
               const safeKg = pricePerKg(unitOf(p, safe), safe.amount);
-              const valueKg = pricePerKg(unitOf(p, value), value.amount);
               const multi = shared.has(safe.affiliateUrl);
               return (
                 <article key={p.id} style={{ ...S.card, ...(isPick ? S.cardPick : {}) }}>
@@ -107,64 +105,63 @@ export default function VerdictView({
                     {isPick && verdict.pickReason && (
                       <p style={S.why}><b>為什麼是這款：</b>{verdict.pickReason}</p>
                     )}
-                    <div style={{ display: "flex", flexDirection: "column", gap: 9 }}>
-                      <div style={S.anch}>
-                        <span>
-                          <span style={S.anchK} className="mono">最穩</span>
-                          <span style={S.anchV}>{safe.label}</span>
-                          <span style={S.anchN}>
-                            ${safe.amount}{safeKg !== null && ` · ${safeKg}/kg`} · {safe.note}
-                          </span>
-                        </span>
-                        <a style={S.btn} href={`/go/${safe.id}/${p.id}`} rel="nofollow sponsored">前往</a>
-                      </div>
-                      {value.id !== safe.id && (
-                        <div style={S.anch}>
-                          <span>
-                            <span style={S.anchK} className="mono">每公斤最省</span>
-                            <span style={S.anchV}>
-                              {unitOf(p, value)} 大包裝
-                              {safeKg !== null && valueKg !== null &&
-                                ` · 每公斤省 ${Math.round((1 - valueKg / safeKg) * 100)}%`}
-                            </span>
-                            <span style={S.anchN}>
-                              ${value.amount}{valueKg !== null && ` · ${valueKg}/kg`} · {value.note}
-                            </span>
-                          </span>
-                          <a style={S.btnGhost} href={`/go/${value.id}/${p.id}`} rel="nofollow sponsored">前往</a>
-                        </div>
-                      )}
-                      {(() => {
-                        /* 第三錨點：現在該不該買。
-                           紀錄不滿 7 天就不顯示 —— 樣本太小的「史低」是誤導，
-                           而誤導比沒有資訊糟糕得多。 */
-                        const stat = priceStat(p.id, value.amount);
-                        if (!stat) return null;
-                        const advice = timingAdvice(stat, value.amount);
-                        return (
-                          <div style={{
-                            ...S.anch,
-                            borderColor: advice.wait ? "var(--warn)" : "var(--keep)",
-                            background: advice.wait ? "var(--warn-soft)" : "var(--keep-soft)",
-                          }}>
-                            <span>
-                              <span style={{ ...S.anchK, color: advice.wait ? "var(--warn)" : "var(--keep)" }} className="mono">
-                                最佳時機
-                              </span>
-                              <span style={S.anchV}>
-                                {advice.wait ? "現在不是好時機 — 建議等" : "現在買不吃虧"}
-                              </span>
-                              <span style={{ ...S.anchN, color: advice.wait ? "var(--warn)" : "var(--muted)" }}>
-                                {advice.verdict}
-                              </span>
-                            </span>
+                      {storesOf(p).map((store) => (
+                        <div key={store.affiliateUrl} style={S.store}>
+                          <div style={S.storeHead}>
+                            <span style={S.storeName}>{store.label}</span>
+                            <a
+                              style={S.btn}
+                              href={`/go/${store.id}/${p.id}`}
+                              rel="nofollow sponsored"
+                            >前往賣場</a>
                           </div>
-                        );
-                      })()}
-                    </div>
-                    {/* 沒有回報就不要顯示 —— 「0 位飼主回報中，0 位反映…」
-                        看起來像壞掉，而且它其實是在講「我們還沒查」，
-                        不如老實講那句。 */}
+                          <table style={S.optTable}>
+                            <tbody>
+                              {store.options.map((o) => (
+                                <tr key={o.unit}>
+                                  <td style={S.optUnit} className="mono">{o.unit}</td>
+                                  <td style={S.optAmt} className="mono">${o.amount}</td>
+                                  <td style={S.optKg} className="mono">
+                                    {o.perKg !== null ? `$${o.perKg}/kg` : ""}
+                                  </td>
+                                  <td style={S.optSave} className="mono">
+                                    {o.savingPct !== null ? `每公斤省 ${o.savingPct}%` : ""}
+                                  </td>
+                                </tr>
+                              ))}
+                            </tbody>
+                          </table>
+                          {store.options[0]?.note && (
+                            <p style={S.storeNote}>{store.options[0].note}</p>
+                          )}
+                        </div>
+                      ))}
+
+                    {(() => {
+                      /* 現在該不該買。紀錄不滿 7 天就不顯示 ——
+                         樣本太小的「史低」是誤導，而誤導比沒有資訊糟糕得多。 */
+                      const stat = priceStat(p.id, safe.amount);
+                      if (!stat) return null;
+                      const advice = timingAdvice(stat, safe.amount);
+                      return (
+                        <div style={{
+                          ...S.store,
+                          marginTop: 9,
+                          borderColor: advice.wait ? "var(--warn)" : "var(--keep)",
+                          background: advice.wait ? "var(--warn-soft)" : "var(--keep-soft)",
+                        }}>
+                          <span style={{ ...S.anchK, color: advice.wait ? "var(--warn)" : "var(--keep)" }} className="mono">
+                            最佳時機
+                          </span>
+                          <span style={S.anchV}>
+                            {advice.wait ? "現在不是好時機 — 建議等" : "現在買不吃虧"}
+                          </span>
+                          <span style={{ ...S.anchN, color: advice.wait ? "var(--warn)" : "var(--muted)" }}>
+                            {advice.verdict}
+                          </span>
+                        </div>
+                      );
+                    })()}
                     {multi && (
                       <p style={S.variantWarn}>
                         ⚠️ 這個賣場一頁多口味。點進去請自己把規格選成

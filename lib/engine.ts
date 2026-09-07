@@ -255,3 +255,68 @@ export function sharedListings(pool: Product[]): Set<string> {
 export function unitOf(p: Product, m: Merchant): string {
   return m.unit ?? p.price.unit;
 }
+
+/* ------------------------------------------------------------------ */
+/* 賣場分組                                                            */
+/*                                                                    */
+/* 蝦皮一個商品頁裝多個規格（2kg / 6kg / 11.4kg），連結是同一條。      */
+/* 所以畫面不該擺兩個「前往」按鈕假裝是兩個賣場 —— 事實是一個賣場、   */
+/* 多個規格、進去自己選。畫面就該長成事實的樣子。                      */
+/* ------------------------------------------------------------------ */
+
+export interface StoreOption {
+  unit: string;
+  amount: number;
+  perKg: number | null;
+  /** 相對於同賣場最貴規格，每公斤省幾 % */
+  savingPct: number | null;
+  note: string;
+}
+
+export interface Store {
+  /** 走 /go/ 用的通路 id */
+  id: string;
+  label: string;
+  affiliateUrl: string;
+  commission: number;
+  options: StoreOption[];
+}
+
+/** 把一款商品的通路按「同一個連結」歸成賣場。 */
+export function storesOf(p: Product): Store[] {
+  const byUrl = new Map<string, Merchant[]>();
+  for (const m of p.price.merchants) {
+    byUrl.set(m.affiliateUrl, [...(byUrl.get(m.affiliateUrl) ?? []), m]);
+  }
+
+  return [...byUrl.values()].map((ms) => {
+    const withKg = ms.map((m) => ({
+      m,
+      unit: unitOf(p, m),
+      perKg: pricePerKg(unitOf(p, m), m.amount),
+    }));
+
+    // 有算得出每公斤的話，用最貴的當基準算省幅
+    const kgs = withKg.map((x) => x.perKg).filter((k): k is number => k !== null);
+    const base = kgs.length > 1 ? Math.max(...kgs) : null;
+
+    return {
+      id: ms[0].id,
+      label: ms[0].label,
+      affiliateUrl: ms[0].affiliateUrl,
+      commission: Math.max(...ms.map((m) => m.commission)),
+      options: withKg
+        .sort((a, b) => a.m.amount - b.m.amount)
+        .map((x) => ({
+          unit: x.unit,
+          amount: x.m.amount,
+          perKg: x.perKg,
+          savingPct:
+            base !== null && x.perKg !== null && x.perKg < base
+              ? Math.round((1 - x.perKg / base) * 100)
+              : null,
+          note: x.m.note,
+        })),
+    };
+  });
+}

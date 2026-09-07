@@ -2,8 +2,9 @@
 
 import { useState } from "react";
 import { parse } from "@/lib/parse";
-import { adjudicate, anchorOf, auditCommission, pricePerKg, sharedListings, unitOf } from "@/lib/engine";
+import { adjudicate, anchorOf, auditCommission, pricePerKg, sharedListings, storesOf, unitOf } from "@/lib/engine";
 import { catalog, constraintsFor } from "@/lib/catalog";
+import { priceStat, timingAdvice } from "@/lib/history";
 import type { Verdict } from "@/lib/types";
 
 /**
@@ -142,9 +143,8 @@ export default function Decider() {
                 {verdict.survivors.map((p) => {
                   const isPick = p.id === verdict.pick?.id;
                   const safe = anchorOf(p, "safe");
-                  const value = anchorOf(p, "value");
+                  // 卡片標題顯示「入門規格」的價格與每公斤，細節在展開後的賣場表
                   const safeKg = pricePerKg(unitOf(p, safe), safe.amount);
-                  const valueKg = pricePerKg(unitOf(p, value), value.amount);
                   const multi = shared.has(safe.affiliateUrl);
                   return (
                     <article key={p.id} style={{ ...S.card, ...(isPick ? S.cardPick : {}) }}>
@@ -181,34 +181,37 @@ export default function Decider() {
                           {isPick && verdict.pickReason && (
                             <p style={S.why}><b>為什麼是這款：</b>{verdict.pickReason}</p>
                           )}
-                          <div style={{ display: "flex", flexDirection: "column", gap: 9 }}>
-                            <div style={S.anch}>
-                              <span>
-                                <span style={S.anchK} className="mono">最穩</span>
-                                <span style={S.anchV}>{safe.label}</span>
-                                <span style={S.anchN}>
-                                  ${safe.amount}{safeKg !== null && ` · ${safeKg}/kg`} · {safe.note}
-                                </span>
-                              </span>
-                              <a style={S.btn} href={`/go/${safe.id}/${p.id}`} rel="nofollow sponsored">前往</a>
-                            </div>
-                            {value.id !== safe.id && (
-                              <div style={S.anch}>
-                                <span>
-                                  <span style={S.anchK} className="mono">每公斤最省</span>
-                                  <span style={S.anchV}>
-                                    {unitOf(p, value)} 大包裝
-                                    {safeKg !== null && valueKg !== null &&
-                                      ` · 每公斤省 ${Math.round((1 - valueKg / safeKg) * 100)}%`}
-                                  </span>
-                                  <span style={S.anchN}>
-                                    ${value.amount}{valueKg !== null && ` · ${valueKg}/kg`} · {value.note}
-                                  </span>
-                                </span>
-                                <a style={S.btnGhost} href={`/go/${value.id}/${p.id}`} rel="nofollow sponsored">前往</a>
+                          {storesOf(p).map((store) => (
+                            <div key={store.affiliateUrl} style={S.store}>
+                              <div style={S.storeHead}>
+                                <span style={S.storeName}>{store.label}</span>
+                                <a
+                                  style={S.btn}
+                                  href={`/go/${store.id}/${p.id}`}
+                                  rel="nofollow sponsored"
+                                >前往賣場</a>
                               </div>
-                            )}
-                          </div>
+                              <table style={S.optTable}>
+                                <tbody>
+                                  {store.options.map((o) => (
+                                    <tr key={o.unit}>
+                                      <td style={S.optUnit} className="mono">{o.unit}</td>
+                                      <td style={S.optAmt} className="mono">${o.amount}</td>
+                                      <td style={S.optKg} className="mono">
+                                        {o.perKg !== null ? `$${o.perKg}/kg` : ""}
+                                      </td>
+                                      <td style={S.optSave} className="mono">
+                                        {o.savingPct !== null ? `每公斤省 ${o.savingPct}%` : ""}
+                                      </td>
+                                    </tr>
+                                  ))}
+                                </tbody>
+                              </table>
+                              {store.options[0]?.note && (
+                                <p style={S.storeNote}>{store.options[0].note}</p>
+                              )}
+                            </div>
+                          ))}
                         {multi && (
                           <p style={S.variantWarn}>
                             ⚠️ 這個賣場一頁多口味。點進去請自己把規格選成
