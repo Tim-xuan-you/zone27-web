@@ -184,24 +184,20 @@ export const S: Record<string, CSSProperties> = {
   },
   storeName: { fontSize: T.md, fontWeight: 700 },
 
-  /* 規格表。每格都要有左右間距 —— 價格跟每公斤黏在一起就是漏了這個。 */
-  optTable: { width: "100%", borderCollapse: "collapse", fontSize: T.sm },
-  optUnit: {
-    padding: `${G.md}px ${G.lg}px ${G.md}px 0`, fontWeight: 600,
-    whiteSpace: "nowrap", borderTop: "1px solid var(--line)", verticalAlign: "top",
+  /* 規格列。
+     原本用 4 欄表格，375px 上「每公斤省 X%」會被切到螢幕外 ——
+     改成兩行的彈性列：第一行是規格與價格，第二行是天數與省幅。 */
+  optList: { display: "flex", flexDirection: "column" },
+  optRow: { padding: `${G.md}px 0`, borderTop: "1px solid var(--line)" },
+  optMain: {
+    display: "flex", alignItems: "baseline", gap: G.md, flexWrap: "wrap",
   },
-  dur: { display: "block", fontSize: T.xs, fontWeight: 400, marginTop: 3 },
-  optAmt: {
-    padding: `${G.md}px ${G.lg}px`, textAlign: "right", fontWeight: 600,
-    whiteSpace: "nowrap", borderTop: "1px solid var(--line)", verticalAlign: "top",
-  },
-  optKg: {
-    padding: `${G.md}px ${G.lg}px`, color: "var(--accent)", fontWeight: 500,
-    whiteSpace: "nowrap", borderTop: "1px solid var(--line)", verticalAlign: "top",
-  },
-  optSave: {
-    padding: `${G.md}px 0`, fontSize: T.xs, whiteSpace: "nowrap",
-    textAlign: "right", borderTop: "1px solid var(--line)", verticalAlign: "top",
+  optUnit: { fontSize: T.md, fontWeight: 600, minWidth: "4.5em" },
+  optAmt: { fontSize: T.md, fontWeight: 600, marginLeft: "auto" },
+  optKg: { fontSize: T.sm, color: "var(--accent)", fontWeight: 500, minWidth: "5.5em", textAlign: "right" },
+  optMeta: {
+    display: "flex", alignItems: "center", gap: G.md, flexWrap: "wrap",
+    marginTop: G.xs, fontSize: T.xs, lineHeight: 1.7,
   },
   storeNote: {
     margin: `${G.lg}px 0 0`, fontSize: T.sm, color: "var(--muted)", lineHeight: 1.8,

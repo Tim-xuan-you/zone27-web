@@ -202,62 +202,49 @@ export default function Decider() {
                                   >前往賣場</a>
                                 )}
                               </div>
-                              <table style={S.optTable}>
-                                <tbody>
-                                  {store.options.map((o) => (
-                                    <tr key={o.id}>
-                                      <td style={S.optUnit} className="mono">
-                                        {o.unit}
-                                        {(() => {
-                                          const dur = bagDuration(o.unit, dogKg);
-                                          if (!dur) return null;
-                                          return (
-                                            <span style={{
-                                              ...S.dur,
-                                              color: dur.tooLong ? "var(--cut)" : "var(--faint)",
-                                            }}>
+                              <div style={S.optList}>
+                                {store.options.map((o) => {
+                                  const dur = bagDuration(o.unit, dogKg);
+                                  const save =
+                                    o.savingPct === null || Math.abs(o.savingPct) < 3
+                                      ? o.savingPct === null ? null : { text: "每公斤差不多", tone: "faint" as const }
+                                      : o.savingPct > 0
+                                      ? { text: `每公斤省 ${o.savingPct}%`, tone: "keep" as const }
+                                      : { text: `每公斤反而貴 ${-o.savingPct}%`, tone: "cut" as const };
+                                  return (
+                                    <div key={o.id} style={S.optRow}>
+                                      <div style={S.optMain}>
+                                        <span style={S.optUnit} className="mono">{o.unit}</span>
+                                        <span style={S.optAmt} className="mono">${o.amount}</span>
+                                        {o.perKg !== null && (
+                                          <span style={S.optKg} className="mono">${o.perKg}/kg</span>
+                                        )}
+                                      </div>
+                                      {(dur || save || !store.singleUrl) && (
+                                        <div style={S.optMeta}>
+                                          {dur && (
+                                            <span style={{ color: dur.tooLong ? "var(--cut)" : "var(--faint)" }}>
                                               約 {dur.days} 天{dur.tooLong ? " ⚠" : ""}
                                             </span>
-                                          );
-                                        })()}
-                                      </td>
-                                      <td style={S.optAmt} className="mono">${o.amount}</td>
-                                      <td style={S.optKg} className="mono">
-                                        {o.perKg !== null ? `$${o.perKg}/kg` : ""}
-                                      </td>
-                                      <td
-                                        style={{
-                                          ...S.optSave,
-                                          color:
-                                            o.savingPct === null || Math.abs(o.savingPct) < 3
-                                              ? "var(--faint)"
-                                              : o.savingPct > 0
-                                              ? "var(--keep)"
-                                              : "var(--cut)",
-                                        }}
-                                        className="mono"
-                                      >
-                                        {/* 差三個百分點以內就是「差不多」——「反而貴 1%」太瑣碎，
-                                            「差不多」直接告訴使用者不用為了這包多花錢 */}
-                                        {o.savingPct === null || Math.abs(o.savingPct) < 3
-                                          ? o.savingPct === null ? "" : "每公斤差不多"
-                                          : o.savingPct > 0
-                                          ? `每公斤省 ${o.savingPct}%`
-                                          : `每公斤反而貴 ${-o.savingPct}%`}
-                                      </td>
-                                      {!store.singleUrl && (
-                                        <td style={{ textAlign: "right", paddingLeft: 12 }}>
-                                          <a
-                                            style={S.btnSmall}
-                                            href={`/go/${o.id}/${p.id}`}
-                                            rel="nofollow sponsored"
-                                          >前往</a>
-                                        </td>
+                                          )}
+                                          {save && (
+                                            <span style={{ color: `var(--${save.tone === "faint" ? "faint" : save.tone})` }}>
+                                              {save.text}
+                                            </span>
+                                          )}
+                                          {!store.singleUrl && (
+                                            <a
+                                              style={{ ...S.btnSmall, marginLeft: "auto" }}
+                                              href={`/go/${o.id}/${p.id}`}
+                                              rel="nofollow sponsored"
+                                            >前往</a>
+                                          )}
+                                        </div>
                                       )}
-                                    </tr>
-                                  ))}
-                                </tbody>
-                              </table>
+                                    </div>
+                                  );
+                                })}
+                              </div>
                               {/* 有規格會放太久就解釋一次 —— 不然使用者看到 ⚠ 不知道是什麼意思 */}
                               {store.options.some((o) => bagDuration(o.unit, dogKg)?.tooLong) && (
                                 <p style={S.freshWarn}>
