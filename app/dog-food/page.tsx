@@ -33,6 +33,20 @@ export default function Index() {
         講得出狀況的話，<Link href="/" style={{ color: "var(--accent)" }}>直接用講的更快</Link>。
       </p>
 
+      <p style={S.lbl}>先看這個</p>
+      <Link href="/dog-food/hidden-chicken" style={{
+        display: "block", background: "var(--surface)", border: "1px solid var(--line)",
+        borderRadius: 14, boxShadow: "var(--sh)", padding: "20px 22px",
+        textDecoration: "none", color: "inherit",
+      }}>
+        <h2 style={{ fontFamily: "var(--font-serif), serif", fontSize: 20, margin: "0 0 8px", lineHeight: 1.5 }}>
+          寫著低敏，成分表裡有雞
+        </h2>
+        <p style={{ margin: 0, fontSize: 15, color: "var(--muted)", lineHeight: 1.85 }}>
+          換了三種「低敏」飼料狗還是抓，很多時候是那三包裡面都有雞。逐筆核對，附來源與查核日期。
+        </p>
+      </Link>
+
       <p style={S.lbl}>按過敏原</p>
       <div style={S.relRow}>
         {ALLERGENS.map((a) => (

@@ -1,0 +1,85 @@
+{
+  "_meta": {
+    "note": "成分表逐筆人工核對。每一筆都要有可點的來源與查核日期 —— 這一頁指名道姓，寫錯就是我們的責任。",
+    "checkedAt": "2026-09-09",
+    "method": "以品牌官網優先；官網沒有完整成分表時，取台灣或北美通路的商品頁，並把連結一起放上來讓讀者自己核對。"
+  },
+  "cases": [
+    {
+      "id": "hc-01",
+      "brand": "Nutram 紐頓",
+      "name": "T27 無穀全能",
+      "shelfNames": ["T27 無穀低敏 迷你犬 火雞", "T27 無穀迷你犬（火雞）", "T27 火雞+雞肉 挑嘴犬小顆粒"],
+      "impression": "名字掛「火雞」，還掛「低敏」。",
+      "found": [
+        "成分表第 1 項：去骨雞肉",
+        "第 2 項：去骨火雞",
+        "第 3 項：雞肉粉",
+        "油脂用雞脂肪，另有天然雞肉香料"
+      ],
+      "verdict": "雞排在火雞前面。這是雞肉配方，不是火雞配方。",
+      "why": "同一款在不同賣場寫法不一樣 —— 有的老實寫「火雞+雞肉」，有的只寫「火雞」。你在哪一家看到，決定你會不會踩到。",
+      "sources": [
+        { "label": "LoveCat 愛貓園 商品頁（台灣）", "url": "https://www.lovecat.com.tw/products/nutram-%E7%B4%90%E9%A0%93%E7%84%A1%E6%A6%96%E5%85%A8%E8%83%BD%E7%B3%BB%E5%88%97-t27%E8%BF%B7%E4%BD%A0%E7%8A%AC%E7%81%AB%E9%9B%9E%E9%9B%9E%E8%82%89" },
+        { "label": "HKTVmall 商品頁（標示為「雞+火雞」）", "url": "https://www.hktvmall.com/p/H0218001_S_NT-T27-5K" }
+      ],
+      "checkedAt": "2026-09-09"
+    },
+    {
+      "id": "hc-02",
+      "brand": "Taste of the Wild 荒野饗宴",
+      "name": "濕地烤野禽 全犬",
+      "shelfNames": ["荒野鴨肉", "烤野禽（鴨肉）", "Wetlands"],
+      "impression": "台灣通路多半直接叫它「鴨肉」。",
+      "found": [
+        "成分表第 1 項：鴨肉",
+        "第 2 項：鴨肉粉",
+        "第 3 項：雞肉粉",
+        "油脂用雞脂肪，配方裡另有火雞與鵪鶉"
+      ],
+      "verdict": "鴨排第一沒錯，但第三項就是雞。這是多種禽肉的配方，不是鴨肉單一蛋白。",
+      "why": "「鴨肉」在這裡是口味名稱，不是成分清單。想排查過敏原的人買它，等於一次餵四種禽肉，測不出東西。",
+      "sources": [
+        { "label": "Petco 商品頁（含完整成分表）", "url": "https://www.petco.com/product/taste-of-the-wild-wetlands-grain-free-dry-dog-food-with-roasted-duck" },
+        { "label": "Pet Food Express 商品頁", "url": "https://www.petfood.express/products/taste-of-the-wild-grain-free-wetlands-canine-recipe-w-roasted-fowl-dry-dog-food.html" }
+      ],
+      "checkedAt": "2026-09-09"
+    },
+    {
+      "id": "hc-03",
+      "brand": "BLUE BAY 倍力",
+      "name": "S30 低敏護膚（鮭魚+甜薯）",
+      "shelfNames": ["S30 低敏護膚配方 鮭魚+甜薯"],
+      "impression": "名字有「低敏」、有「鮭魚」，看起來就是給皮膚不好的狗吃的魚配方。",
+      "found": [
+        "成分表第 1 項：智利鮭魚",
+        "緊接著：台灣鮮雞肉及澳洲脫水雞肉",
+        "油脂那一行裡有鮮雞油"
+      ],
+      "verdict": "第二個蛋白源就是雞。「低敏」指的不是「不含雞」。",
+      "why": "倍力沒有藏 —— 官網成分表就這樣寫。問題出在商品名叫「鮭魚+甜薯」，多數人看到這五個字就結帳了。",
+      "sources": [
+        { "label": "倍力官網 商品頁（成分表）", "url": "https://www.bluebaypetfood.com/products/dog-dryfood-s30-salmon-1500" }
+      ],
+      "checkedAt": "2026-09-09"
+    },
+    {
+      "id": "hc-04",
+      "brand": "FirstMate 第一饗宴",
+      "name": "無穀低敏 野生海魚全犬",
+      "shelfNames": ["無穀低敏 野生海魚"],
+      "impression": "單一蛋白、海魚，是很多人給雞肉過敏犬的第一選擇。",
+      "found": [
+        "蛋白源確實只有海魚粉（鯡魚、鯷魚、沙丁魚）",
+        "但油脂那一行是雞脂肪"
+      ],
+      "verdict": "蛋白源乾淨，油脂不是。",
+      "why": "品牌自己的說法是：他們的雞脂肪以離心分離，不含雞蛋白，所以對雞過敏的狗不會有反應。我們沒有能力驗證這件事，把它原樣放在這裡讓你自己判斷。如果你的狗對雞的反應很劇烈，這一行值得納入考慮。",
+      "ours": true,
+      "sources": [
+        { "label": "FirstMate 官網 Pacific Ocean Fish Original（成分表）", "url": "https://firstmate.com/product/pacific-ocean-fish-meal-original-formula/" }
+      ],
+      "checkedAt": "2026-09-09"
+    }
+  ]
+}

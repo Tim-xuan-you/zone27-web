@@ -93,6 +93,11 @@ export default async function Page({ params }: { params: Promise<{ slug: string[
     }
   }
 
+  /* 排雞肉的頁面把成分表那一頁接上 —— 這批人正好就是會踩到「火雞其實是雞」的人 */
+  if (p.kind !== "breed" && p.allergen.protein === "chicken") {
+    related.unshift({ href: "/dog-food/hidden-chicken", label: "寫著低敏卻含雞的那幾款" });
+  }
+
   /* 結構化資料。AI 引用時最愛這種有明確前提的形態。 */
   const jsonLd = {
     "@context": "https://schema.org",
