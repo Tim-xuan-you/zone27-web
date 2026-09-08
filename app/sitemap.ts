@@ -14,6 +14,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: BASE, lastModified: now, changeFrequency: "daily", priority: 1 },
     { url: `${BASE}/dog-food`, lastModified: now, changeFrequency: "weekly", priority: 0.9 },
     { url: `${BASE}/how-we-choose`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${BASE}/ask`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
     // 這一頁是自己讀成分表寫出來的，抄不走 —— 權重給到跟索引頁一樣
     { url: `${BASE}/dog-food/hidden-chicken`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
     ...allPaths().map((slug) => ({
