@@ -14,6 +14,7 @@
  */
 import { readFileSync, writeFileSync, existsSync } from "node:fs";
 import { resolve } from "node:path";
+import { todayTW } from "../lib/date";
 
 const SRC = resolve("data/dog-food.csv");
 const OUT = resolve("data/dog-food.json");
@@ -241,7 +242,7 @@ const json = {
   _meta: {
     category: "dog-food",
     note: "由 data/dog-food.csv 產生，不要直接改這個檔。改 CSV 之後跑 npm run data:import。",
-    generatedAt: new Date().toISOString().slice(0, 10),
+    generatedAt: todayTW(),
     count: products.length,
     pricePolicy: "人工複查，不爬蟲。checkedAt 誠實顯示於前端。",
   },
@@ -261,7 +262,7 @@ console.log(`\n✓ ${products.length} 款寫入 data/dog-food.json`);
 
 const HIST = resolve("data/price-history.json");
 const hist = JSON.parse(readFileSync(HIST, "utf8"));
-const today = new Date().toISOString().slice(0, 10);
+const today = todayTW();
 
 const snapshot = {
   d: today,

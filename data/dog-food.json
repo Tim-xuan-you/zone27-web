@@ -2,7 +2,7 @@
   "_meta": {
     "category": "dog-food",
     "note": "由 data/dog-food.csv 產生，不要直接改這個檔。改 CSV 之後跑 npm run data:import。",
-    "generatedAt": "2026-09-08",
+    "generatedAt": "2026-09-09",
     "count": 6,
     "pricePolicy": "人工複查，不爬蟲。checkedAt 誠實顯示於前端。"
   },
@@ -48,7 +48,7 @@
             "unit": "2kg",
             "amount": 1200,
             "note": "隔日到貨 · 正品保障 · 超商限兩包",
-            "affiliateUrl": "https://s.shopee.tw/3B7ESUSXfM?share_channel_code=6",
+            "affiliateUrl": "https://s.shopee.tw/3qMvFBhWng",
             "commission": 9,
             "anchor": "safe"
           },
@@ -58,7 +58,7 @@
             "unit": "6kg",
             "amount": 2640,
             "note": "超商限一包",
-            "affiliateUrl": "https://s.shopee.tw/3B7ESUSXfM?share_channel_code=6",
+            "affiliateUrl": "https://s.shopee.tw/3qMvFBhWng",
             "commission": 9,
             "anchor": "value"
           },
@@ -68,7 +68,7 @@
             "unit": "11.4kg",
             "amount": 4380,
             "note": "限宅配 · 開封後要密封防潮",
-            "affiliateUrl": "https://s.shopee.tw/3B7ESUSXfM?share_channel_code=6",
+            "affiliateUrl": "https://s.shopee.tw/3qMvFBhWng",
             "commission": 9,
             "anchor": "value"
           }

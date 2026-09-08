@@ -5,6 +5,7 @@ import { parse } from "@/lib/parse";
 import { adjudicate } from "@/lib/engine";
 import { catalog, constraintsFor } from "@/lib/catalog";
 import type { Verdict } from "@/lib/types";
+import { CONTACT } from "@/lib/contact";
 import Result from "./Result";
 import { S } from "./styles";
 
@@ -87,10 +88,22 @@ export default function Decider() {
       {empty && (
         <div style={S.emptyBox}>
           <p style={{ margin: 0, fontWeight: 700 }}>這句話我們讀不出條件</p>
-          <p style={{ margin: "8px 0 0", color: "var(--muted)", fontSize: 15 }}>
+          <p style={{ margin: "8px 0 0", color: "var(--muted)", fontSize: 15, lineHeight: 1.85 }}>
             試著講品種、年齡，還有你觀察到的狀況 —— 例如「柴犬五歲，一直抓癢」。
-            或直接把毛孩的情形傳 LINE 給我們，真人看。
           </p>
+          {CONTACT.email && (
+            <p style={{ margin: "10px 0 0", fontSize: 14, lineHeight: 1.85 }}>
+              <a
+                href={`mailto:${CONTACT.email}?subject=${encodeURIComponent("裁決器讀不懂這句")}&body=${encodeURIComponent(text)}`}
+                style={{ color: "var(--accent)", fontWeight: 600 }}
+              >
+                把這句寄給我們 →
+              </a>
+              <span style={{ color: "var(--faint)" }}>
+                　讀不懂是我們的問題。你寄來，我們就把這種講法加進去。
+              </span>
+            </p>
+          )}
         </div>
       )}
 

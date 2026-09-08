@@ -11,7 +11,8 @@
     "engine:smoke": "tsx scripts/engine-smoke.ts",
     "parse:smoke": "tsx scripts/parse-smoke.ts",
     "data:import": "tsx scripts/import-csv.ts",
-    "links:check": "tsx scripts/check-links.ts"
+    "links:check": "tsx scripts/check-links.ts",
+    "data:paste": "tsx scripts/paste.ts"
   },
   "dependencies": {
     "@supabase/ssr": "^0.10.3",

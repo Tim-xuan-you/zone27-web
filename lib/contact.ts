@@ -8,10 +8,19 @@
  * 不要把網址散在各個元件裡，那種東西改一次會漏三個地方。
  */
 export const CONTACT = {
-  /** LINE 官方帳號網址，例如 https://lin.ee/xxxxxx */
+  /**
+   * LINE 刻意留空。
+   *
+   * 我們不是賣家 —— 出貨、缺貨、正品、退換、發票，我們看不到對方的訂單，
+   * 也看不到賣場的庫存，接進來只會變成一個沒有權限的客服。
+   * 而沒人回的 LINE 比沒有 LINE 更傷信任。
+   */
   line: "",
-  /** 收信信箱 */
-  email: "",
+  /**
+   * 這不是客服信箱，是勘誤信箱：資料寫錯、連結壞了、價格不對。
+   * 那是整站唯一真的只有我們能修的事。
+   */
+  email: "tatayngiti@gmail.com",
 };
 
 export const hasContact = Boolean(CONTACT.line || CONTACT.email);

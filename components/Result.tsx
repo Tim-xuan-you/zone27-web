@@ -105,19 +105,20 @@ export default function Result({
         </>
       )}
 
-      {/* 原本這裡承諾「我們的人會看」，按鈕卻是回首頁 —— 空頭支票加死路。
-          跨類目之後更不可能每一題都答得出來，所以承諾改成做得到的那一種：
-          我們答成分、規格、時機，不答醫療。界線寫在 /ask。 */}
-      <p style={S.lbl}>還是選不出來</p>
+      {/* 這裡曾經是「把狀況傳給我們，我們的人會看」——
+          一個一人網站守不住的承諾，而且按鈕還是回首頁。
+          改成告訴他下一步自己怎麼走：換個講法、或者去問真正答得了的人。
+          零人力，而且比一個三天才回的訊息管道有用。 */}
+      <p style={S.lbl}>都不合適？</p>
       <div style={S.landing}>
         <div>
-          <h2 style={{ margin: "0 0 6px", fontSize: 18 }}>那就直接問我們</h2>
+          <h2 style={{ margin: "0 0 6px", fontSize: 18 }}>換個講法再跑一次</h2>
           <p style={{ margin: 0, fontSize: 15, color: "var(--muted)", lineHeight: 1.8 }}>
-            成分裡到底有沒有那個東西、兩款差在哪、你的狗該買哪個規格 —— 這幾類我們答得出來，
-            而且會告訴你是根據什麼講的。<b style={{ color: "var(--ink)" }}>牠生病了要看醫生，那個我們不會答。</b>
+            多講一點通常就不一樣了 —— 體重、現在吃什麼、症狀多久了。
+            出貨和庫存要問賣場，牠不舒服要看醫生，<Link href="/ask" style={{ color: "var(--accent)" }}>哪個問題該問誰</Link>寫在這裡。
           </p>
         </div>
-        <Link style={S.btn} href="/ask">問我們</Link>
+        <Link style={S.btn} href="/">回裁決器</Link>
       </div>
     </>
   );

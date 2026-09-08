@@ -1,6 +1,7 @@
 import type {
   Constraint, Cut, Merchant, Product, Situation, Verdict,
 } from "./types";
+import { daysBetween, todayTW } from "./date";
 
 /**
  * 排除引擎。
@@ -564,11 +565,11 @@ export interface Freshness {
   note: string | null;
 }
 
-export function freshness(checkedAt: string, today = new Date()): Freshness {
-  const t = Date.parse(checkedAt + "T00:00:00Z");
-  if (Number.isNaN(t)) return { days: 9999, level: "stale", note: "沒有查價日期" };
+export function freshness(checkedAt: string, today = todayTW()): Freshness {
+  const raw = daysBetween(checkedAt, today);
+  if (Number.isNaN(raw)) return { days: 9999, level: "stale", note: "沒有查價日期" };
 
-  const days = Math.max(0, Math.round((today.getTime() - t) / 86400000));
+  const days = Math.max(0, raw);
   if (days <= PRICE_FRESH_DAYS) return { days, level: "fresh", note: null };
   if (days <= PRICE_STALE_DAYS) {
     return { days, level: "aging", note: `這個價格是 ${days} 天前查的，點進去以賣場標價為準。` };
@@ -601,7 +602,7 @@ export interface MaintenanceRow {
  * 排序：死掉的 > 過期的 > 快過期的 > 新的。
  * 這一頁存在的意義只有一個 —— 不用一個一個找。
  */
-export function maintenanceRows(pool: Product[], today = new Date()): MaintenanceRow[] {
+export function maintenanceRows(pool: Product[], today = todayTW()): MaintenanceRow[] {
   const rows: MaintenanceRow[] = [];
 
   for (const p of pool) {
