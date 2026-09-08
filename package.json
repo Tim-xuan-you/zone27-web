@@ -13,7 +13,8 @@
     "data:import": "tsx scripts/import-csv.ts",
     "links:check": "tsx scripts/check-links.ts",
     "data:paste": "tsx scripts/paste.ts",
-    "data:gaps": "tsx scripts/gap-check.ts"
+    "data:gaps": "tsx scripts/gap-check.ts",
+    "data:preview": "tsx scripts/preview.ts"
   },
   "dependencies": {
     "@supabase/ssr": "^0.10.3",

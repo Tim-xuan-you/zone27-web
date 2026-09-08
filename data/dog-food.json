@@ -3,7 +3,7 @@
     "category": "dog-food",
     "note": "由 data/dog-food.csv 產生，不要直接改這個檔。改 CSV 之後跑 npm run data:import。",
     "generatedAt": "2026-09-09",
-    "count": 6,
+    "count": 10,
     "pricePolicy": "人工複查，不爬蟲。checkedAt 誠實顯示於前端。"
   },
   "products": [
@@ -391,6 +391,170 @@
         ]
       },
       "dealbreaker": "你的狗對雞肉過敏 — 品名的「火雞」容易誤會，成分表第一項是去骨雞肉，還有雞肉粉"
+    },
+    {
+      "id": "df-07",
+      "species": "dog",
+      "brand": "Pedigree 寶路",
+      "name": "成犬 牛肉及蔬菜",
+      "spec": {
+        "protein": 18,
+        "fat": 9,
+        "carb": 48,
+        "omega3": 0,
+        "phosphorus": 1.2,
+        "proteinSources": [
+          "poultry"
+        ],
+        "singleSource": false,
+        "grainFree": false,
+        "lifeStage": [
+          "adult"
+        ],
+        "bodySize": [
+          "small",
+          "medium",
+          "large"
+        ],
+        "prescription": false
+      },
+      "reports": {
+        "total": 0,
+        "palatability": 0,
+        "looseStool": 0
+      },
+      "price": {
+        "unit": "10kg",
+        "checkedAt": "2026-09-09",
+        "merchants": []
+      },
+      "dealbreaker": "你正在排查過敏原 — 成分只寫「禽肉及其副產品」，沒有指明是哪一種鳥，你沒辦法從標示上排除雞肉",
+      "knownIssues": "第一項是穀類（玉米、小麥），蛋白質來源包含大豆製品。粗蛋白 18% 是這裡最低的一款。",
+      "referenceOnly": true
+    },
+    {
+      "id": "df-08",
+      "species": "dog",
+      "brand": "Taste of the Wild 荒野饗宴",
+      "name": "濕地烤野禽 成犬",
+      "spec": {
+        "protein": 32,
+        "fat": 18,
+        "carb": 28,
+        "omega3": 0.3,
+        "phosphorus": 1.1,
+        "proteinSources": [
+          "duck",
+          "chicken",
+          "turkey"
+        ],
+        "singleSource": false,
+        "grainFree": true,
+        "lifeStage": [
+          "adult"
+        ],
+        "bodySize": [
+          "small",
+          "medium",
+          "large"
+        ],
+        "prescription": false
+      },
+      "reports": {
+        "total": 0,
+        "palatability": 0,
+        "looseStool": 0
+      },
+      "price": {
+        "unit": "12.7kg",
+        "checkedAt": "2026-09-09",
+        "merchants": []
+      },
+      "dealbreaker": "你的狗對雞肉過敏 — 台灣通路多半叫它「鴨肉」，但成分表第三項是雞肉粉，油脂也是雞脂肪",
+      "knownIssues": "一次餵到鴨、雞、火雞、鵪鶉四種禽肉。想用它排查過敏原的話測不出東西。",
+      "referenceOnly": true
+    },
+    {
+      "id": "df-09",
+      "species": "dog",
+      "brand": "ORIJEN 渴望",
+      "name": "幼犬",
+      "spec": {
+        "protein": 38,
+        "fat": 20,
+        "carb": 16,
+        "omega3": 0.8,
+        "phosphorus": 1.2,
+        "proteinSources": [
+          "chicken",
+          "turkey",
+          "whitefish"
+        ],
+        "singleSource": false,
+        "grainFree": true,
+        "lifeStage": [
+          "puppy"
+        ],
+        "bodySize": [
+          "small",
+          "medium",
+          "large"
+        ],
+        "prescription": false
+      },
+      "reports": {
+        "total": 0,
+        "palatability": 0,
+        "looseStool": 0
+      },
+      "price": {
+        "unit": "10.6kg",
+        "checkedAt": "2026-09-09",
+        "merchants": []
+      },
+      "dealbreaker": "你的狗已經成年 — 這是幼犬配方，蛋白 38%、脂肪 20%，成犬長期吃容易過重",
+      "knownIssues": "雞、火雞、比目魚、鯖魚、蛋都有，蛋白質來源很雜 —— 對排查過敏原的幼犬不適合。",
+      "referenceOnly": true
+    },
+    {
+      "id": "df-10",
+      "species": "dog",
+      "brand": "ORIJEN 渴望",
+      "name": "大型幼犬",
+      "spec": {
+        "protein": 38,
+        "fat": 16,
+        "carb": 20,
+        "omega3": 0.8,
+        "phosphorus": 1.1,
+        "proteinSources": [
+          "chicken",
+          "turkey",
+          "whitefish"
+        ],
+        "singleSource": false,
+        "grainFree": true,
+        "lifeStage": [
+          "puppy"
+        ],
+        "bodySize": [
+          "large"
+        ],
+        "prescription": false
+      },
+      "reports": {
+        "total": 0,
+        "palatability": 0,
+        "looseStool": 0
+      },
+      "price": {
+        "unit": "11.4kg",
+        "checkedAt": "2026-09-09",
+        "merchants": []
+      },
+      "dealbreaker": "你的狗不是大型幼犬 — 這款把脂肪壓到 16% 是為了控制大型犬的生長速度，小型犬吃反而熱量不夠",
+      "knownIssues": "大型幼犬長太快會傷關節，所以這類配方刻意降脂肪、控鈣磷。小型犬不需要這樣。",
+      "referenceOnly": true
     }
   ]
 }

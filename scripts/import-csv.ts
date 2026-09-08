@@ -19,7 +19,7 @@ import { todayTW } from "../lib/date";
 const SRC = resolve("data/dog-food.csv");
 const OUT = resolve("data/dog-food.json");
 
-const PROTEINS = ["chicken", "beef", "lamb", "salmon", "whitefish", "duck", "turkey", "pork", "venison", "insect"];
+const PROTEINS = ["chicken", "beef", "lamb", "salmon", "whitefish", "duck", "turkey", "pork", "venison", "insect", "poultry"];
 const STAGES = ["puppy", "adult", "senior", "all"];
 const SIZES = ["small", "medium", "large"];
 
@@ -162,7 +162,9 @@ const products = rows.map((row, i) => {
 
   // m1..m4。規則上一款一個規格就好，但賣家把尺寸拆成獨立商品時會用到。
   const merchants = [1, 2, 3, 4].map((n) => merchant(row, n, line)).filter(Boolean);
-  if (merchants.length === 0) fail(line, "m1Label", "至少要有一個通路");
+  const isRef = yn(row, "referenceOnly", line);
+  // 對照款的工作是被刪掉，本來就不需要購買連結
+  if (merchants.length === 0 && !isRef) fail(line, "m1Label", "至少要有一個通路（對照款請把 referenceOnly 填 1）");
 
   return {
     id: row.id,
@@ -191,6 +193,7 @@ const products = rows.map((row, i) => {
     dealbreaker: row.dealbreaker,
     ...(row.knownIssues ? { knownIssues: row.knownIssues } : {}),
     ...(yn(row, "discontinued", line) ? { discontinued: true } : {}),
+    ...(isRef ? { referenceOnly: true } : {}),
   };
 });
 
@@ -267,7 +270,9 @@ const today = todayTW();
 const snapshot = {
   d: today,
   p: Object.fromEntries(
-    products.map((p) => [p.id, Math.min(...p.price.merchants.map((m) => m!.amount))])
+    products
+      .filter((p) => p.price.merchants.length > 0)
+      .map((p) => [p.id, Math.min(...p.price.merchants.map((m) => m!.amount))])
   ),
 };
 

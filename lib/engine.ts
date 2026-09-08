@@ -1,5 +1,5 @@
 import type {
-  Constraint, Cut, Merchant, Product, Situation, Verdict,
+  Constraint, Cut, Merchant, Product, ProteinSource, Situation, Verdict,
 } from "./types";
 import { daysBetween, todayTW } from "./date";
 
@@ -19,8 +19,14 @@ import { daysBetween, todayTW } from "./date";
 /** 單一約束的判定。回傳 true 代表「通過」，false 代表「被這條刪掉」。 */
 function passes(p: Product, c: Constraint): boolean {
   switch (c.kind) {
-    case "excludeProtein":
-      return !p.spec.proteinSources.includes(c.value);
+    case "excludeProtein": {
+      if (p.spec.proteinSources.includes(c.value)) return false;
+      // 「禽肉副產品」沒指明是哪一種鳥 —— 要避雞、火雞、鴨的人，
+      // 這種標示等於無法排除，只能當成有。
+      const birds: ProteinSource[] = ["chicken", "turkey", "duck"];
+      if (birds.includes(c.value) && p.spec.proteinSources.includes("poultry")) return false;
+      return true;
+    }
     case "minProtein":
       return p.spec.protein >= c.value;
     case "maxCarb":
@@ -66,6 +72,11 @@ export function buyable(p: Product): boolean {
   return p.price.merchants.some((m) => !m.dead);
 }
 
+/** 能不能真的推出去。對照款永遠不行 —— 它的工作是被刪掉。 */
+export function recommendable(p: Product): boolean {
+  return !p.referenceOnly && !p.discontinued && buyable(p);
+}
+
 export function anchorOf(p: Product, role: "safe" | "value") {
   const live = liveMerchants(p);
   return live.find((m) => m.anchor === role) ?? live[0];
@@ -80,7 +91,7 @@ export function adjudicate(pool: Product[], situation: Situation): Verdict {
   // 買不到的東西不該進裁決 —— 推薦一個點進去是 404 的連結，
   // 比少推薦一款糟糕得多。這一刀在計數之前先砍，
   // 使用者不需要知道我們有幾款連結壞掉。
-  pool = pool.filter((p) => buyable(p) && !p.discontinued);
+  pool = pool.filter((p) => !p.discontinued && (p.referenceOnly || buyable(p)));
 
   const startCount = pool.length;
   const cuts: Cut[] = [];
@@ -104,6 +115,24 @@ export function adjudicate(pool: Product[], situation: Situation): Verdict {
       });
     }
     alive = kept;
+  }
+
+  /*
+   * 最後一刀：對照款。
+   *
+   * 它們多半在前面就被砍掉了（那正是放它們進來的目的）。
+   * 撐到這裡的，代表以這一頁的條件來看它其實合格 —— 那就更該說實話：
+   * 合格但我們沒有查證過的購買通路，所以不推。
+   */
+  const refs = alive.filter((p) => p.referenceOnly || !buyable(p));
+  if (refs.length > 0) {
+    cuts.push({
+      count: refs.length,
+      why: "沒有我們查證過的購買通路",
+      tag: "通路",
+      ids: refs.map((p) => p.id),
+    });
+    alive = alive.filter((p) => !refs.includes(p));
   }
 
   const { pick, reason } = choose(alive, situation);
@@ -178,6 +207,7 @@ function explain(pick: Product, alive: Product[], situation: Situation): string 
 }
 
 const PROTEIN_ZH: Record<string, string> = {
+  poultry: "未指明的禽肉",
   chicken: "雞肉", beef: "牛肉", lamb: "羊肉", salmon: "鮭魚",
   whitefish: "白魚", duck: "鴨肉", turkey: "火雞", pork: "豬肉",
   venison: "鹿肉", insect: "昆蟲蛋白",

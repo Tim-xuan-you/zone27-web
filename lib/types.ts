@@ -10,7 +10,15 @@
 /** 蛋白質來源。過敏排除的主要依據。 */
 export type ProteinSource =
   | "chicken" | "beef" | "lamb" | "salmon" | "whitefish"
-  | "duck" | "turkey" | "pork" | "venison" | "insect";
+  | "duck" | "turkey" | "pork" | "venison" | "insect"
+  /**
+   * 成分表只寫「禽肉」「家禽肉類及副產品」，沒有指明是哪一種鳥。
+   *
+   * 這在平價糧非常常見，而且對排查過敏原的人是致命的 ——
+   * 你不可能從標示上排除雞肉，因為它根本沒說。
+   * 所以只要使用者要避開任何一種禽類，含這個的一律排除。
+   */
+  | "poultry";
 
 export type LifeStage = "puppy" | "adult" | "senior" | "all";
 export type BodySize = "small" | "medium" | "large";
@@ -106,6 +114,19 @@ export interface Product {
   knownIssues?: string;
   /** 停產或長期缺貨 → 引擎直接排除 */
   discontinued?: boolean;
+  /**
+   * 對照款：放進來是為了讓「刪掉」這件事有東西可刪，不是為了推薦。
+   *
+   * 這個站的說服力來自排除過程。但如果選品全是同一種好東西，
+   * 任何規則都刪不到人，那張「怎麼刪的」就是一張空表 ——
+   * 使用者什麼也沒學到。
+   *
+   * 所以主流雞肉配方、平價高碳水糧、大型犬專用這些「會被刪掉的」
+   * 必須在池子裡。它們多半在前面幾刀就被砍掉；萬一撐到最後，
+   * 引擎會用最後一刀把它砍掉，理由是「目前沒有我們查證過的購買通路」——
+   * 那是實話，而且等通路查好了，這個旗標拿掉它就變成正常商品。
+   */
+  referenceOnly?: boolean;
 }
 
 /* ------------------------------------------------------------------ */

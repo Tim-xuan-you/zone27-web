@@ -212,6 +212,7 @@ function cnNum(s: string): number {
 }
 
 const ZH: Record<string, string> = {
+  poultry: "未指明的禽肉",
   chicken: "雞肉", beef: "牛肉", lamb: "羊肉", salmon: "鮭魚",
   whitefish: "白魚", duck: "鴨肉", turkey: "火雞", pork: "豬肉",
   venison: "鹿肉", insect: "昆蟲蛋白",

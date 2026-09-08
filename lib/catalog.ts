@@ -25,7 +25,9 @@ export function constraintsFor(s: Situation): Constraint[] {
     cs.push({
       kind: "excludeProtein",
       value: protein,
-      label: `主蛋白源含${zh(protein)}`,
+      label: ["chicken", "turkey", "duck"].includes(protein)
+        ? `含${zh(protein)}，或只寫「禽肉」沒指明是哪一種`
+        : `主蛋白源含${zh(protein)}`,
       tag: "你標記的過敏原",
     });
   }
@@ -87,6 +89,7 @@ export function constraintsFor(s: Situation): Constraint[] {
 }
 
 const ZH: Record<string, string> = {
+  poultry: "未指明的禽肉",
   chicken: "雞肉", beef: "牛肉", lamb: "羊肉", salmon: "鮭魚",
   whitefish: "白魚", duck: "鴨肉", turkey: "火雞", pork: "豬肉",
   venison: "鹿肉", insect: "昆蟲蛋白",
