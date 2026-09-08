@@ -91,3 +91,208 @@ export const TIER_WEIGHT: Record<Impact["tier"], number> = {
   會被看到: 1,
   目前沒機會: 2,
 };
+
+/* ------------------------------------------------------------------ */
+/* 該補什麼                                                            */
+/*                                                                    */
+/* 維護台原本只講「要修什麼」，那是守。但一個人的時間有限，           */
+/* 更該知道的是「下一款該進什麼」—— 那是攻。                          */
+/*                                                                    */
+/* 這件事其實算得出來：把全站每一種組合跑一遍，看哪幾頁只剩兩三款。   */
+/* 那些頁面有人搜、有排名，卻給不出像樣的選擇 —— 流量進來了，        */
+/* 我們卻沒東西可以推。那就是最該補貨的位置。                          */
+/* ------------------------------------------------------------------ */
+
+export interface Gap {
+  slug: string[];
+  title: string;
+  survivors: number;
+  /** 越小越急 */
+  severity: 0 | 1 | 2;
+}
+
+/** 結果太少的頁面。survivors 少於這個數就算薄。 */
+export const THIN = 3;
+
+export function gaps(pool: Product[] = catalog): Gap[] {
+  const out: Gap[] = [];
+
+  for (const slug of allPaths()) {
+    const p = resolve(slug);
+    if (!p) continue;
+
+    const situation = situationOf(p);
+    situation.constraints = constraintsFor(situation);
+    const v = adjudicate(pool, situation);
+    if (v.survivors.length >= THIN) continue;
+
+    const zh =
+      p.kind === "breed" ? p.breed.zh
+      : p.kind === "allergen" ? `不含${p.allergen.zh}`
+      : `${p.breed.zh}・避${p.allergen.zh}`;
+
+    out.push({
+      slug,
+      title: zh,
+      survivors: v.survivors.length,
+      severity: v.survivors.length === 0 ? 0 : v.survivors.length === 1 ? 1 : 2,
+    });
+  }
+
+  return out.sort((a, b) => a.severity - b.severity || a.title.localeCompare(b.title));
+}
+
+/**
+ * 哪個過敏原最缺貨。
+ *
+ * 「柴犬・避鮭魚」跟「貴賓・避鮭魚」薄，是同一個原因 ——
+ * 避鮭魚的選擇本來就少。所以要往上收斂到過敏原層級，
+ * 才知道該去補哪一種蛋白源的飼料，而不是一頁一頁看。
+ */
+export function gapsByAllergen(pool: Product[] = catalog): { zh: string; thin: number; worst: number }[] {
+  const acc = new Map<string, { thin: number; worst: number }>();
+
+  for (const g of gaps(pool)) {
+    const m = g.title.match(/避(.+)$/) ?? g.title.match(/^不含(.+)$/);
+    if (!m) continue;
+    const key = m[1];
+    const cur = acc.get(key) ?? { thin: 0, worst: 99 };
+    acc.set(key, { thin: cur.thin + 1, worst: Math.min(cur.worst, g.survivors) });
+  }
+
+  return [...acc].map(([zh, v]) => ({ zh, ...v })).sort((a, b) => b.thin - a.thin);
+}
+
+/* ------------------------------------------------------------------ */
+/* 刪太少                                                              */
+/*                                                                    */
+/* 這個站的說服力來自「我們刪掉了什麼」。六款進去刪一款，剩五款 ——   */
+/* 那個刪除過程看起來就像在演，因為它確實沒做什麼事。                 */
+/*                                                                    */
+/* 原因是選品全部同一種：低敏、單一蛋白、無穀。它們互相之間沒有       */
+/* 對比，所以任何條件都刪不掉東西。                                    */
+/*                                                                    */
+/* 也就是說，下一批該補的**不是更多「好的」，是會被刪掉的那些** ——   */
+/* 主流雞肉配方、高碳水平價糧、幼犬糧、高齡腎臟配方。                 */
+/* 沒有被刪掉的東西，「刪掉」這件事就不值錢。                          */
+/* ------------------------------------------------------------------ */
+
+export interface WeakPage {
+  slug: string[];
+  title: string;
+  start: number;
+  survivors: number;
+  /** 留下來的比例。越高代表這一頁的排除幾乎沒作用 */
+  keepRate: number;
+}
+
+/** 留超過這個比例，就算「這一頁沒刪到什麼」。 */
+export const WEAK_KEEP_RATE = 0.7;
+
+export function weakPages(pool: Product[] = catalog): WeakPage[] {
+  const out: WeakPage[] = [];
+
+  for (const slug of allPaths()) {
+    const p = resolve(slug);
+    if (!p) continue;
+
+    const situation = situationOf(p);
+    situation.constraints = constraintsFor(situation);
+    const v = adjudicate(pool, situation);
+    if (v.startCount === 0) continue;
+
+    const keepRate = v.survivors.length / v.startCount;
+    if (keepRate < WEAK_KEEP_RATE) continue;
+
+    const zh =
+      p.kind === "breed" ? p.breed.zh
+      : p.kind === "allergen" ? `不含${p.allergen.zh}`
+      : `${p.breed.zh}・避${p.allergen.zh}`;
+
+    out.push({ slug, title: zh, start: v.startCount, survivors: v.survivors.length, keepRate });
+  }
+
+  return out.sort((a, b) => b.keepRate - a.keepRate);
+}
+
+/** 全站平均刪掉幾成 —— 一個數字看出裁決器有沒有在做事。 */
+export function overallCutRate(pool: Product[] = catalog): { pages: number; avgKeep: number } {
+  let sum = 0, n = 0;
+  for (const slug of allPaths()) {
+    const p = resolve(slug);
+    if (!p) continue;
+    const situation = situationOf(p);
+    situation.constraints = constraintsFor(situation);
+    const v = adjudicate(pool, situation);
+    if (v.startCount === 0) continue;
+    sum += v.survivors.length / v.startCount;
+    n++;
+  }
+  return { pages: n, avgKeep: n ? sum / n : 0 };
+}
+
+/* ------------------------------------------------------------------ */
+/* 規則稽核                                                            */
+/*                                                                    */
+/* 一條從來沒刪掉任何東西的規則，等於不存在 —— 而使用者看到的          */
+/* 「怎麼刪的」就會是一張空表。                                        */
+/*                                                                    */
+/* 這張稽核表回答的是：每一條規則，在現有選品裡刪得掉幾款？           */
+/* 全部是 0 的那幾條，代表**選品缺了那條規則本來要擋的東西**。         */
+/* 那就是下一批該補的方向 —— 不是更多「好的」，是會被刪掉的那些。     */
+/* ------------------------------------------------------------------ */
+
+export interface RuleRow {
+  rule: string;
+  /** 這條規則在現有選品裡刪得掉幾款 */
+  catches: number;
+  /** 補什麼進來這條規則才有作用 */
+  need: string;
+}
+
+export function ruleAudit(pool: Product[] = catalog): RuleRow[] {
+  const n = (f: (p: Product) => boolean) => pool.filter(f).length;
+
+  return [
+    {
+      rule: "主蛋白源含雞肉",
+      catches: n((p) => p.spec.proteinSources.includes("chicken")),
+      need: "主流雞肉配方（低敏族群最常誤買的那種）",
+    },
+    {
+      rule: "不是單一蛋白源",
+      catches: n((p) => !p.spec.singleSource),
+      need: "多種肉混合的綜合配方",
+    },
+    {
+      rule: "不適用幼犬",
+      catches: n((p) => !p.spec.lifeStage.some((s) => s === "all" || s === "puppy")),
+      need: "成犬專用配方（現在幾乎都標 all，幼犬那一刀砍不到東西）",
+    },
+    {
+      rule: "不適用高齡犬",
+      catches: n((p) => !p.spec.lifeStage.some((s) => s === "all" || s === "senior")),
+      need: "幼犬專用或成犬專用配方",
+    },
+    {
+      rule: "體型不符（小型犬）",
+      catches: n((p) => !p.spec.bodySize.includes("small")),
+      need: "大型犬專用配方（顆粒大、熱量密度不同）",
+    },
+    {
+      rule: "粗蛋白低於 22%",
+      catches: n((p) => p.spec.protein < 22),
+      need: "平價高碳水糧（超市那種）",
+    },
+    {
+      rule: "碳水高於 48%",
+      catches: n((p) => p.spec.carb > 48),
+      need: "平價高碳水糧",
+    },
+    {
+      rule: "含穀物",
+      catches: n((p) => !p.spec.grainFree),
+      need: "含穀配方（無穀不等於比較好，這一刀本來就該有兩邊）",
+    },
+  ].sort((a, b) => a.catches - b.catches);
+}

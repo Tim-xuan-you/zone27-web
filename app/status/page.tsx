@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { catalog } from "@/lib/catalog";
 import { buyable, maintenanceRows, PRICE_FRESH_DAYS, PRICE_STALE_DAYS } from "@/lib/engine";
-import { impactMap, TIER_WEIGHT, type Impact } from "@/lib/impact";
+import { impactMap, overallCutRate, ruleAudit, TIER_WEIGHT, type Impact } from "@/lib/impact";
 
 /**
  * 維護台。給 Tim 一個人看的，不給讀者、不給搜尋引擎。
@@ -62,6 +62,9 @@ export default function Page() {
   const unbuyable = catalog.filter((p) => !buyable(p) || p.discontinued);
   const noIssues = catalog.filter((p) => !p.knownIssues?.trim());
   const oldest = Math.max(0, ...rows.map((r) => r.days));
+  const cut = overallCutRate();
+  const audit = ruleAudit();
+  const dead = audit.filter((r) => r.catches === 0);
 
   return (
     <main style={{ maxWidth: 940, margin: "0 auto", padding: "0 20px 120px" }}>
@@ -150,6 +153,60 @@ export default function Page() {
           「目前沒機會」不是說它不好，是說以現在的規則，沒有任何一個組合會推到它。
           等它有機會被推薦，它自己就會跳到上面那一段。
         </p>
+      </div>
+
+      {/* ── 這一段回答的是「下一款該進什麼」，不是「要修什麼」 ── */}
+      <H>裁決器有沒有在做事</H>
+      <div style={{
+        ...box,
+        borderColor: cut.avgKeep > 0.7 ? "var(--warn)" : "var(--line)",
+        background: cut.avgKeep > 0.7 ? "var(--warn-soft)" : "var(--surface)",
+      }}>
+        <p style={{ margin: 0, fontSize: 17, fontWeight: 700 }}>
+          全站 {cut.pages} 頁，平均只刪掉 {Math.round((1 - cut.avgKeep) * 100)}%
+        </p>
+        <p style={{ margin: "10px 0 0", fontSize: 15, lineHeight: 1.9 }}>
+          這個站的說服力來自「我們刪掉了什麼」。
+          {cut.avgKeep > 0.7 ? (
+            <>
+              {" "}現在幾乎沒刪到東西 —— 品種頁是 {catalog.length} 進 {catalog.length} 留，
+              那個刪除過程看起來就像在演。
+            </>
+          ) : (
+            <>{" "}目前的排除幅度是合理的。</>
+          )}
+        </p>
+        <p style={{ margin: "10px 0 0", fontSize: 15, color: "var(--muted)", lineHeight: 1.9 }}>
+          原因是選品全部同一種：低敏、單一蛋白、無穀、全齡。它們之間沒有對比，
+          所以任何規則都刪不掉東西。<b style={{ color: "var(--ink)" }}>
+          下一批該補的不是更多「好的」，是會被刪掉的那些。</b>
+        </p>
+      </div>
+
+      <H>每條規則刪得掉幾款</H>
+      <div style={box}>
+        {audit.map((r) => (
+          <div key={r.rule} style={{
+            ...line,
+            borderTop: "1px solid var(--line)",
+            color: r.catches === 0 ? "var(--cut)" : "inherit",
+          }}>
+            <span className="mono" style={{ minWidth: 48, fontWeight: 700 }}>{r.catches} 款</span>
+            <span style={{ flex: 1, minWidth: 160 }}>{r.rule}</span>
+            {r.catches === 0 && (
+              <span style={{ fontSize: 13, color: "var(--muted)", flexBasis: "100%" }}>
+                要補：{r.need}
+              </span>
+            )}
+          </div>
+        ))}
+        {dead.length > 0 && (
+          <p style={{ margin: "14px 0 0", fontSize: 14, color: "var(--muted)", lineHeight: 1.85 }}>
+            <b style={{ color: "var(--cut)" }}>{dead.length} 條規則目前是空的</b> ——
+            不是規則寫錯，是選品裡缺了它本來要擋的東西。
+            補進去之後，那一刀才會出現在使用者看到的「怎麼刪的」裡面。
+          </p>
+        )}
       </div>
 
       <H>整款買不到的</H>
