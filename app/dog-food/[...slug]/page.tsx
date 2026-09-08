@@ -121,7 +121,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string[
     p.kind === "allergen" ? [] : [p.breed.zh, ...p.breed.alias];
 
   return (
-    <main style={{ maxWidth: 760, margin: "0 auto", padding: "0 18px 90px" }}>
+    <main style={{ maxWidth: 720, margin: "0 auto", padding: "0 20px 120px" }}>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -129,7 +129,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string[
 
       <div style={{
         display: "flex", alignItems: "center", justifyContent: "space-between",
-        gap: 14, padding: "22px 0 16px", borderBottom: "1px solid var(--line)", marginBottom: 26,
+        gap: 14, padding: "28px 0 20px", borderBottom: "1px solid var(--line)", marginBottom: 40,
       }}>
         <Link href="/" style={{ display: "flex", alignItems: "center", gap: 9, fontWeight: 900, fontSize: 16, color: "inherit", textDecoration: "none" }}>
           <span style={{ width: 9, height: 9, borderRadius: 2, background: "var(--accent)" }} />
@@ -141,12 +141,11 @@ export default async function Page({ params }: { params: Promise<{ slug: string[
       </div>
 
       <h1 style={{
-        fontSize: "clamp(23px,4.6vw,32px)", fontWeight: 900, lineHeight: 1.3,
-        letterSpacing: "-.02em", margin: "0 0 10px", textWrap: "balance",
+        fontSize: "clamp(26px,5vw,36px)", lineHeight: 1.45, margin: "0 0 16px",
       }}>
         {title}
       </h1>
-      <p style={{ color: "var(--muted)", fontSize: 15.5, margin: "0 0 6px", maxWidth: "54ch" }}>
+      <p style={{ color: "var(--muted)", fontSize: 17, lineHeight: 1.9, margin: "0 0 8px", maxWidth: "42ch" }}>
         {description}
       </p>
       {aliases.length > 1 && (
@@ -170,8 +169,8 @@ export default async function Page({ params }: { params: Promise<{ slug: string[
       </div>
 
       <footer style={{
-        marginTop: 50, paddingTop: 20, borderTop: "1px solid var(--line)",
-        fontSize: 12, color: "var(--faint)", lineHeight: 1.7,
+        marginTop: 72, paddingTop: 28, borderTop: "1px solid var(--line)",
+        fontSize: 13, color: "var(--faint)", lineHeight: 1.9,
       }}>
         <p style={{ margin: 0 }}>
           這一頁預設成犬。你的狗如果是幼犬、高齡或有其他狀況，

@@ -1,45 +1,94 @@
 @import "tailwindcss";
 
 /*
-  ZONE 27 設計系統
-  主張：長得像儀器，不要像商店。
-  商店的視覺語言（大圖、促銷紅字、倒數計時）會觸發防衛心理；
-  儀器的視覺語言（數據、對照、灰階＋單一強調色）觸發的是信任。
+  ZONE 27 設計系統 · v2
+
+  第一版走「儀表板」美學：暗底、高密度、全灰階。
+  邏輯是從商業模式推的（我們不是商店，是工具），但那推錯了對象。
+
+  真正的使用者是擔心狗一直抓癢的飼主 —— 多半是媽媽、是把狗當家人的人。
+  他們要的不是冷靜的儀表板，是「這裡有人懂，而且在乎」。
+
+  所以 v2 走「專業但溫暖」：
+    · 淺色為主（多數人在白天用手機看，不是深夜開著暗色主題）
+    · 暖調中性色，不用純灰 —— 純灰讀起來像沒調過
+    · 襯線標題：同時給到權威感與人味
+    · 主色是帶綠的深青，健康、可信，不是科技藍
+    · 留白慷慨。密度換成層次
+
+  參考座標：Wirecutter 的嚴謹排版、Ritual 的柔和科學感。
 */
 
 :root {
-  --ground:#F4F5F3; --surface:#FFFFFF; --sunken:#EAECE8; --raise:#FCFCFB;
-  --ink:#16191A; --muted:#565E60; --faint:#8A9294;
-  --accent:#1F4E6B; --accent-ink:#FFFFFF; --accent-soft:#E3EDF3;
-  --keep:#2F6B4A; --keep-soft:#E4EFE8;
-  --cut:#9E4630;  --cut-soft:#F5E7E2;
-  --warn:#8A6220; --warn-soft:#F6EEDF;
-  --line:#DCDFDA; --rule:#C4C9C3;
-  --sh:0 1px 2px rgba(22,25,26,.05),0 10px 28px -16px rgba(22,25,26,.22);
+  /* 暖調中性 —— 底色帶一點點黃，比純白柔和 */
+  --ground:   #FBFAF7;
+  --surface:  #FFFFFF;
+  --sunken:   #F4F2ED;
+  --raise:    #FDFCFA;
+
+  --ink:      #1C1A17;
+  --muted:    #5E5850;
+  --faint:    #8F8880;
+
+  /* 主色：帶綠的深青。健康、可信，不是科技藍 */
+  --accent:      #1F6F5C;
+  --accent-ink:  #FFFFFF;
+  --accent-soft: #E4F0EC;
+
+  --keep:      #1F6F5C;
+  --keep-soft: #E4F0EC;
+  --cut:       #A83E2B;
+  --cut-soft:  #FAEAE5;
+  --warn:      #8A5A15;
+  --warn-soft: #FBF0DC;
+
+  --line: #E7E3DC;
+  --rule: #D5CFC5;
+
+  --sh: 0 1px 2px rgba(28,26,23,.04), 0 8px 24px -14px rgba(28,26,23,.16);
+  --sh-lift: 0 2px 4px rgba(28,26,23,.05), 0 14px 32px -16px rgba(28,26,23,.2);
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --ground:#101312; --surface:#181C1C; --sunken:#1E2323; --raise:#212726;
-    --ink:#E9EDEB; --muted:#9AA3A2; --faint:#6E7877;
-    --accent:#63AFD4; --accent-ink:#0B1418; --accent-soft:#14303D;
-    --keep:#63C193; --keep-soft:#13301F;
-    --cut:#D9866A; --cut-soft:#33190F;
-    --warn:#D9AE62; --warn-soft:#33280F;
-    --line:#2A3130; --rule:#3A4241;
-    --sh:0 1px 2px rgba(0,0,0,.45),0 10px 28px -16px rgba(0,0,0,.7);
+    --ground:   #16150F;
+    --surface:  #1E1D16;
+    --sunken:   #24231B;
+    --raise:    #26251D;
+
+    --ink:      #F0EDE4;
+    --muted:    #A8A196;
+    --faint:    #7B756B;
+
+    --accent:      #6FC0A6;
+    --accent-ink:  #10201B;
+    --accent-soft: #16332B;
+
+    --keep:      #6FC0A6;
+    --keep-soft: #16332B;
+    --cut:       #E08B72;
+    --cut-soft:  #35190F;
+    --warn:      #D6A758;
+    --warn-soft: #33270F;
+
+    --line: #322F26;
+    --rule: #464236;
+
+    --sh: 0 1px 2px rgba(0,0,0,.4), 0 8px 24px -14px rgba(0,0,0,.6);
+    --sh-lift: 0 2px 4px rgba(0,0,0,.5), 0 14px 32px -16px rgba(0,0,0,.7);
   }
 }
 
 :root[data-theme="dark"] {
-  --ground:#101312; --surface:#181C1C; --sunken:#1E2323; --raise:#212726;
-  --ink:#E9EDEB; --muted:#9AA3A2; --faint:#6E7877;
-  --accent:#63AFD4; --accent-ink:#0B1418; --accent-soft:#14303D;
-  --keep:#63C193; --keep-soft:#13301F;
-  --cut:#D9866A; --cut-soft:#33190F;
-  --warn:#D9AE62; --warn-soft:#33280F;
-  --line:#2A3130; --rule:#3A4241;
-  --sh:0 1px 2px rgba(0,0,0,.45),0 10px 28px -16px rgba(0,0,0,.7);
+  --ground:#16150F; --surface:#1E1D16; --sunken:#24231B; --raise:#26251D;
+  --ink:#F0EDE4; --muted:#A8A196; --faint:#7B756B;
+  --accent:#6FC0A6; --accent-ink:#10201B; --accent-soft:#16332B;
+  --keep:#6FC0A6; --keep-soft:#16332B;
+  --cut:#E08B72; --cut-soft:#35190F;
+  --warn:#D6A758; --warn-soft:#33270F;
+  --line:#322F26; --rule:#464236;
+  --sh: 0 1px 2px rgba(0,0,0,.4), 0 8px 24px -14px rgba(0,0,0,.6);
+  --sh-lift: 0 2px 4px rgba(0,0,0,.5), 0 14px 32px -16px rgba(0,0,0,.7);
 }
 
 * { box-sizing: border-box; }
@@ -50,21 +99,41 @@ body {
   margin: 0;
   background: var(--ground);
   color: var(--ink);
-  font-family: "Noto Sans TC", -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang TC", "Microsoft JhengHei", sans-serif;
-  font-size: 15px;
-  line-height: 1.7;
+  font-family: var(--font-sans), "Noto Sans TC", -apple-system, BlinkMacSystemFont,
+               "Segoe UI", "PingFang TC", "Microsoft JhengHei", sans-serif;
+  font-size: 16px;
+  line-height: 1.8;
   -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* 標題用襯線。同時給到權威感與人味 —— 純無襯線讀起來太像後台。 */
+h1, h2, h3, .serif {
+  font-family: var(--font-serif), "Noto Serif TC", Georgia, "Times New Roman", serif;
+  font-weight: 700;
+  letter-spacing: -.01em;
+  text-wrap: balance;
 }
 
 .mono {
-  font-family: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  font-family: var(--font-mono), ui-monospace, "SF Mono", Menlo, monospace;
   font-variant-numeric: tabular-nums;
 }
 
 button { font-family: inherit; }
+
+a { color: var(--accent); }
+
 button:focus-visible,
 textarea:focus-visible,
-a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+
+/* 寬內容自己捲，頁面本體永遠不橫向捲動 */
+.scroll-x { overflow-x: auto; -webkit-overflow-scrolling: touch; }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }

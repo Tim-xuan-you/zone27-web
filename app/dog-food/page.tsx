@@ -12,10 +12,10 @@ export const metadata: Metadata = {
 
 export default function Index() {
   return (
-    <main style={{ maxWidth: 760, margin: "0 auto", padding: "0 18px 90px" }}>
+    <main style={{ maxWidth: 720, margin: "0 auto", padding: "0 20px 120px" }}>
       <div style={{
         display: "flex", alignItems: "center", justifyContent: "space-between",
-        gap: 14, padding: "22px 0 16px", borderBottom: "1px solid var(--line)", marginBottom: 26,
+        gap: 14, padding: "28px 0 20px", borderBottom: "1px solid var(--line)", marginBottom: 40,
       }}>
         <Link href="/" style={{ display: "flex", alignItems: "center", gap: 9, fontWeight: 900, fontSize: 16, color: "inherit", textDecoration: "none" }}>
           <span style={{ width: 9, height: 9, borderRadius: 2, background: "var(--accent)" }} />
@@ -24,12 +24,11 @@ export default function Index() {
       </div>
 
       <h1 style={{
-        fontSize: "clamp(25px,5vw,34px)", fontWeight: 900, lineHeight: 1.25,
-        letterSpacing: "-.02em", margin: "0 0 10px",
+        fontSize: "clamp(28px,6vw,40px)", lineHeight: 1.45, margin: "0 0 16px",
       }}>
         狗飼料怎麼選
       </h1>
-      <p style={{ color: "var(--muted)", fontSize: 15.5, margin: "0 0 8px", maxWidth: "52ch" }}>
+      <p style={{ color: "var(--muted)", fontSize: 17, lineHeight: 1.9, margin: "0 0 8px", maxWidth: "42ch" }}>
         挑品種或過敏原進去，我們把不適合的刪掉再給你看。
         講得出狀況的話，<Link href="/" style={{ color: "var(--accent)" }}>直接用講的更快</Link>。
       </p>
@@ -53,8 +52,8 @@ export default function Index() {
       </div>
 
       <footer style={{
-        marginTop: 50, paddingTop: 20, borderTop: "1px solid var(--line)",
-        fontSize: 12, color: "var(--faint)", lineHeight: 1.7,
+        marginTop: 72, paddingTop: 28, borderTop: "1px solid var(--line)",
+        fontSize: 13, color: "var(--faint)", lineHeight: 1.9,
       }}>
         <p style={{ margin: 0 }}>
           價格為人工複查，每張卡片都標了查價日期。點進賣場請以當下標價為準。本站透過購買連結取得分潤，這不影響推薦排序。

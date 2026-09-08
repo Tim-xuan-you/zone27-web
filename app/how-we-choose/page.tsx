@@ -24,10 +24,10 @@ export default function Page() {
   const s = stats();
 
   return (
-    <main style={{ maxWidth: 680, margin: "0 auto", padding: "0 18px 90px" }}>
+    <main style={{ maxWidth: 660, margin: "0 auto", padding: "0 20px 120px" }}>
       <div style={{
         display: "flex", alignItems: "center", gap: 9,
-        padding: "22px 0 16px", borderBottom: "1px solid var(--line)", marginBottom: 30,
+        padding: "28px 0 20px", borderBottom: "1px solid var(--line)", marginBottom: 40,
       }}>
         <Link href="/" style={{ display: "flex", alignItems: "center", gap: 9, fontWeight: 900, fontSize: 16, color: "inherit", textDecoration: "none" }}>
           <span style={{ width: 9, height: 9, borderRadius: 2, background: "var(--accent)" }} />
@@ -35,7 +35,7 @@ export default function Page() {
         </Link>
       </div>
 
-      <h1 style={{ fontSize: "clamp(25px,5vw,32px)", fontWeight: 900, lineHeight: 1.25, letterSpacing: "-.02em", margin: "0 0 14px" }}>
+      <h1 style={{ fontSize: "clamp(26px,5vw,36px)", lineHeight: 1.45, margin: "0 0 18px" }}>
         我們怎麼挑，錢從哪裡來
       </h1>
       <p style={{ color: "var(--muted)", fontSize: 16, margin: "0 0 34px" }}>

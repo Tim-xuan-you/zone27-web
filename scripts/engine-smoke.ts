@@ -4,7 +4,7 @@
  * 這不是單元測試，是「把裁決過程印出來給人看」——
  * 因為這個引擎的產出本身就是要給人讀的，數字加不加得起來一眼就知道。
  */
-import { adjudicate, anchorOf, auditCommission, cheapest } from "../lib/engine";
+import { adjudicate, anchorOf, auditCommission, cheapest, commissionLine } from "../lib/engine";
 import { catalog, constraintsFor } from "../lib/catalog";
 import type { Situation } from "../lib/types";
 
@@ -55,11 +55,7 @@ for (const { title, situation } of scenarios) {
     for (const r of audit.rows) {
       console.log(`  ${r.isPick ? "→" : " "} ${r.label.padEnd(24, "　")} ${r.commission}%`);
     }
-    console.log(
-      audit.pickIsHighest === null
-        ? "  只有一個佣金級距，無從比較"
-        : `  推薦的是最高佣金嗎？ ${audit.pickIsHighest ? "✗ 是（要檢查演算法）" : "✓ 不是"}`
-    );
+    console.log("  " + commissionLine(audit).text);
   } else {
     console.log("\n  ⚠ 全被刪光 —— 需要放寬條件或走 LINE 降落傘");
   }

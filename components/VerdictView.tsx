@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { FRESH_DAYS, anchorOf, auditCommission, bagDuration, pricePerKg, sharedListings, storesOf, unitOf } from "@/lib/engine";
+import { FRESH_DAYS, anchorOf, auditCommission, commissionLine, bagDuration, pricePerKg, sharedListings, storesOf, unitOf } from "@/lib/engine";
 import { priceStat, timingAdvice } from "@/lib/history";
 import type { Verdict } from "@/lib/types";
 import { S } from "./styles";
@@ -67,7 +67,7 @@ export default function VerdictView({
       ) : (
         <>
           <p style={S.lbl}>剩下這幾款</p>
-          <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+          <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
             {verdict.survivors.map((p, i) => {
               const isPick = p.id === verdict.pick?.id;
               const safe = anchorOf(p, "safe");
@@ -239,20 +239,48 @@ export default function VerdictView({
             })}
           </div>
 
-          {audit && (
-            <div style={{ ...S.emptyBox, background: "var(--keep-soft)", borderColor: "var(--keep)" }}>
-              <p style={{ margin: "0 0 6px", fontSize: 12.5, color: "var(--keep)", fontWeight: 700 }}>
-                ✓ 排序沒看佣金
-              </p>
-              <p style={{ margin: 0, fontSize: 13.5 }}>
-                我們只看四件事：有沒有踩到過敏原、營養組成在不在建議區間、是不是單一蛋白源、
-                其他飼主回報好不好吃。
-                {audit.pickIsHighest === false && (
-                  <> 本次佣金最高的是 {audit.highest}%，<b>我們推的這款是 {audit.pickRate}%</b>。</>
-                )}
-              </p>
-            </div>
-          )}
+          {audit && (() => {
+            const line = commissionLine(audit);
+            return (
+              <div style={{
+                ...S.emptyBox,
+                background: line.tone === "warn" ? "var(--warn-soft)" : "var(--keep-soft)",
+                borderColor: line.tone === "warn" ? "var(--warn)" : "var(--keep)",
+              }}>
+                <p style={{
+                  margin: "0 0 12px", fontSize: 13.5, fontWeight: 600,
+                  color: line.tone === "warn" ? "var(--warn)" : "var(--keep)",
+                }}>
+                  排序沒看佣金
+                </p>
+                <p style={{ margin: "0 0 16px", fontSize: 14, lineHeight: 1.9 }}>
+                  我們只看四件事：有沒有踩到過敏原、營養組成在不在建議區間、
+                  是不是單一蛋白源、其他飼主回報好不好吃。
+                </p>
+                <table style={S.auditTable}>
+                  <tbody>
+                    {audit.rows.map((r, k) => (
+                      <tr key={k}>
+                        <td style={S.auditName}>
+                          {r.label}
+                          {r.isPick && (
+                            <b style={{ color: "var(--keep)", whiteSpace: "nowrap" }}> · 我們推薦</b>
+                          )}
+                        </td>
+                        <td style={S.auditRate} className="mono">{r.commission}%</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+                <p style={{
+                  margin: "16px 0 0", fontSize: 14, lineHeight: 1.9,
+                  color: line.tone === "warn" ? "var(--warn)" : "var(--ink)",
+                }}>
+                  {line.text}
+                </p>
+              </div>
+            );
+          })()}
         </>
       )}
 

@@ -169,13 +169,19 @@ export function zhProtein(k: string): string {
 export interface CommissionAudit {
   rows: { label: string; commission: number; isPick: boolean }[];
   highest: number;
+  lowest: number;
   pickRate: number;
   /**
-   * 推薦的那款是不是佣金最高的。
-   * 只剩一款時沒有比較基礎 —— 它同時是最高也是最低，
-   * 這時回 null，前端要顯示「本次只有一款符合，無從比較」而不是紅字警告。
+   * 推薦的那款在佣金排序裡的位置（0 = 最低）。
+   * 用來產生一句「在任何情況下都是真的」的說明。
+   *
+   * 這一段是整個站最不能寫錯的地方：品牌建立在「我們對佣金誠實」上，
+   * 如果這句話本身有一次是假的，全站的可信度一起歸零。
    */
-  pickIsHighest: boolean | null;
+  rank: number;
+  total: number;
+  /** 佣金全部一樣就沒有比較基礎 */
+  comparable: boolean;
 }
 
 export function auditCommission(verdict: Verdict): CommissionAudit | null {
@@ -187,15 +193,48 @@ export function auditCommission(verdict: Verdict): CommissionAudit | null {
     isPick: p.id === verdict.pick!.id,
   }));
 
-  const highest = Math.max(...rows.map((r) => r.commission));
+  const rates = rows.map((r) => r.commission);
+  const highest = Math.max(...rates);
+  const lowest = Math.min(...rates);
   const pickRate = rows.find((r) => r.isPick)!.commission;
-  const comparable = rows.length > 1 && new Set(rows.map((r) => r.commission)).size > 1;
+  const comparable = new Set(rates).size > 1;
 
   return {
     rows,
     highest,
+    lowest,
     pickRate,
-    pickIsHighest: comparable ? pickRate === highest : null,
+    rank: rates.filter((r) => r < pickRate).length,
+    total: rows.length,
+    comparable,
+  };
+}
+
+/**
+ * 一句在任何情況下都成立的佣金說明。
+ *
+ * 之前寫死「賺最少的那個」，但推薦的那款只是「不是最高」，
+ * 不見得是最低 —— 那句話在多數情況下是假的。
+ */
+export function commissionLine(a: CommissionAudit): { text: string; tone: "keep" | "warn" | "muted" } {
+  if (!a.comparable) {
+    return { text: `本次留下的款式佣金都是 ${a.pickRate}%，沒有比較基礎。`, tone: "muted" };
+  }
+  if (a.pickRate === a.highest) {
+    return {
+      text: `⚠️ 本次推薦的剛好是佣金最高的 ${a.pickRate}%。演算法沒有讀佣金，但這種情況我們會另外複查。`,
+      tone: "warn",
+    };
+  }
+  if (a.pickRate === a.lowest) {
+    return {
+      text: `本次佣金從 ${a.lowest}% 到 ${a.highest}%，我們推的這款是 ${a.pickRate}% —— 賺最少的那個。`,
+      tone: "keep",
+    };
+  }
+  return {
+    text: `本次佣金從 ${a.lowest}% 到 ${a.highest}%。我們推的這款是 ${a.pickRate}%，不是最高的那個（最高 ${a.highest}%）。`,
+    tone: "keep",
   };
 }
 
