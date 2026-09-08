@@ -21,6 +21,10 @@ import { S } from "./styles";
  * 幾乎沒有網站這樣做，而且他們的顧慮是對的 —— 在最需要信任的那一刻
  * 把錢推到台前，反而是在提醒對方「這個人有動機」。
  * 改成講規則（程式碼讀不到佣金欄位）與行為（我們放棄了什麼）。
+ *
+ * v2.1 調換順序。原本先放「怎麼刪的」再放答案 —— 在 375px 的螢幕上，
+ * 使用者落地看到的是一個很高的刪除過程，答案被推到第一屏外面。
+ * 不想動腦的人不會滑。答案先給，過程放後面當佐證。
  */
 
 export default function Result({
@@ -48,37 +52,19 @@ export default function Result({
         ))}
       </div>
 
-      <p style={S.lbl}>怎麼刪的</p>
-      <div style={S.cascade}>
-        <div style={S.cascTop}>
-          <span style={S.bignum} className="mono">{verdict.startCount}</span>
-          <span style={S.cascCap}>款進入裁決</span>
-        </div>
-        {verdict.cuts.map((c, i) => (
-          <div key={i} style={S.cutRow}>
-            <span style={S.cutN} className="mono">− {c.count}</span>
-            <span style={S.cutWhy}>{c.why}</span>
-            <span style={S.cutTag} className="mono">{c.tag}</span>
-          </div>
-        ))}
-        <div style={S.keepRow}>
-          <span style={S.keepN} className="mono">{verdict.survivors.length}</span>
-          <span style={{ fontWeight: 700 }}>
-            {verdict.survivors.length > 0 ? "款留下" : "款符合 —— 條件太嚴格"}
-          </span>
-        </div>
-      </div>
-
       {verdict.survivors.length === 0 ? (
-        <div style={S.emptyBox}>
-          <p style={{ margin: 0, fontWeight: 700 }}>目前沒有一款同時滿足這些條件</p>
-          <p style={{ margin: "8px 0 0", color: "var(--muted)", fontSize: 15 }}>
-            這不是壞消息 —— 硬推一款不適合的才是。放寬其中一項，或把狀況傳 LINE 給我們。
-          </p>
-        </div>
+        <>
+          <Cascade verdict={verdict} />
+          <div style={S.emptyBox}>
+            <p style={{ margin: 0, fontWeight: 700 }}>目前沒有一款同時滿足這些條件</p>
+            <p style={{ margin: "8px 0 0", color: "var(--muted)", fontSize: 15 }}>
+              這不是壞消息 —— 硬推一款不適合的才是。放寬其中一項，或把狀況傳 LINE 給我們。
+            </p>
+          </div>
+        </>
       ) : (
         <>
-          {/* ── 一個答案 ── */}
+          {/* ── 一個答案，最上面 ── */}
           {verdict.pick && (
             <>
               <p style={S.lbl}>買這個</p>
@@ -86,7 +72,7 @@ export default function Result({
             </>
           )}
 
-          {/* ── 其他的，收起來 ── */}
+          {/* ── 備選收成一行 ── */}
           {others.length > 0 && (
             <details style={S.more}>
               <summary style={S.moreSummary}>
@@ -100,6 +86,10 @@ export default function Result({
               </div>
             </details>
           )}
+
+          {/* ── 過程放後面：想知道憑什麼的人才會看到這裡 ── */}
+          <p style={S.lbl}>為什麼是這款</p>
+          <Cascade verdict={verdict} />
         </>
       )}
 
@@ -114,6 +104,34 @@ export default function Result({
         <Link style={S.btn} href="/">回裁決器</Link>
       </div>
     </>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/* 刪除過程                                                            */
+/* ------------------------------------------------------------------ */
+
+function Cascade({ verdict }: { verdict: Verdict }) {
+  return (
+    <div style={S.cascade}>
+      <div style={S.cascTop}>
+        <span style={S.bignum} className="mono">{verdict.startCount}</span>
+        <span style={S.cascCap}>款進入裁決</span>
+      </div>
+      {verdict.cuts.map((c, i) => (
+        <div key={i} style={S.cutRow}>
+          <span style={S.cutN} className="mono">− {c.count}</span>
+          <span style={S.cutWhy}>{c.why}</span>
+          <span style={S.cutTag} className="mono">{c.tag}</span>
+        </div>
+      ))}
+      <div style={S.keepRow}>
+        <span style={S.keepN} className="mono">{verdict.survivors.length}</span>
+        <span style={{ fontWeight: 700 }}>
+          {verdict.survivors.length > 0 ? "款留下" : "款符合 —— 條件太嚴格"}
+        </span>
+      </div>
+    </div>
   );
 }
 

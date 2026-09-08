@@ -28,7 +28,7 @@ export const S: Record<string, CSSProperties> = {
     fontFamily: "var(--font-mono), monospace",
     fontSize: T.xs, fontWeight: 600, letterSpacing: ".16em",
     textTransform: "uppercase", color: "var(--faint)",
-    margin: `${G.huge}px 0 ${G.lg}px`,
+    margin: `${G.xxl}px 0 ${G.md}px`,
   },
 
   /* ---------- 輸入區（只有裁決器用，但放一起才不會分岔） ---------- */
@@ -70,17 +70,17 @@ export const S: Record<string, CSSProperties> = {
   /* ---------- 裁決過程 ---------- */
   cascade: {
     background: "var(--surface)", border: "1px solid var(--line)",
-    borderRadius: 14, boxShadow: "var(--sh)", padding: `${G.xl}px ${G.xl}px ${G.lg}px`,
+    borderRadius: 14, boxShadow: "var(--sh)", padding: `${G.lg}px ${G.lg}px ${G.md}px`,
   },
-  cascTop: { display: "flex", alignItems: "baseline", gap: G.md, marginBottom: G.lg },
+  cascTop: { display: "flex", alignItems: "baseline", gap: G.sm, marginBottom: G.md },
   bignum: {
     fontFamily: "var(--font-serif), serif",
-    fontSize: 44, fontWeight: 700, lineHeight: 1, letterSpacing: "-.03em",
+    fontSize: 30, fontWeight: 700, lineHeight: 1, letterSpacing: "-.03em",
   },
   cascCap: { fontSize: T.md, color: "var(--muted)" },
   cutRow: {
     display: "flex", flexWrap: "wrap", alignItems: "baseline",
-    gap: `${G.xs}px ${G.md}px`, padding: `${G.md}px 0`,
+    gap: `${G.xs}px ${G.md}px`, padding: `${G.sm}px 0`,
     borderTop: "1px solid var(--line)",
   },
   cutN: { fontWeight: 600, color: "var(--cut)", fontSize: T.md, whiteSpace: "nowrap", minWidth: "2.6em" },
@@ -95,11 +95,11 @@ export const S: Record<string, CSSProperties> = {
   },
   keepRow: {
     display: "flex", alignItems: "baseline", gap: G.md,
-    borderTop: "2px solid var(--ink)", marginTop: G.lg, paddingTop: G.lg,
+    borderTop: "2px solid var(--ink)", marginTop: G.md, paddingTop: G.md,
   },
   keepN: {
     fontFamily: "var(--font-serif), serif",
-    fontSize: 30, fontWeight: 700, color: "var(--keep)",
+    fontSize: 22, fontWeight: 700, color: "var(--keep)",
   },
 
   /* ---------- 主答案 ----------
