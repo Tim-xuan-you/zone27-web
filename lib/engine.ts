@@ -412,3 +412,107 @@ export function bagDuration(unit: string, weightKg: number | undefined): Duratio
   const days = Math.round(kg / (weightKg * DAILY_RATIO));
   return { days, tooLong: days > FRESH_DAYS };
 }
+
+/* ------------------------------------------------------------------ */
+/* 換了之後會怎樣                                                      */
+/*                                                                    */
+/* 這一段是整個站最晚才想通的東西。                                    */
+/*                                                                    */
+/* 飼主真正的問題從來不是「買哪一包」，是「我換了會怎樣、多久知道      */
+/* 有沒有用、沒用怎麼辦」。我們給了答案卻沒給後續，等於把人送到        */
+/* 結帳頁就不管了 —— 而他兩個禮拜沒看到改善就會換牌子，然後永遠       */
+/* 不會知道其實只是還沒到時間。                                       */
+/*                                                                    */
+/* 附帶的結果是：講清楚週期，才有理由講包裝大小。皮膚問題的排除        */
+/* 飲食法要跑滿 8 週，2kg 的包裝十天就沒了 —— 那不是省錢，是根本      */
+/* 測不出東西。這個推論會讓客單價上去，所以更要把算式攤開來：         */
+/* 我們同時也會叫人「不要買那個超大包」，因為開封超過 FRESH_DAYS      */
+/* 會氧化。兩個方向都講，才不是話術。                                  */
+/* ------------------------------------------------------------------ */
+
+export interface Trial {
+  /** 要跑多久才看得出來（天） */
+  needDays: number;
+  /** 給人看的說法，例如「6 到 8 週」 */
+  needLabel: string;
+  /** 為什麼是這個長度 */
+  needWhy: string;
+  /** 卡片上那包能撐幾天；沒有體重就是 null */
+  anchorDays: number | null;
+  /** 更適合跑完週期的規格（同一款、任何賣家），沒有更好的就是 null */
+  better: { id: string; unit: string; amount: number; days: number; savingPct: number | null } | null;
+  /** 週期比保鮮上限長，一包裝不下，要分兩次買 */
+  needsTwoBags: boolean;
+}
+
+/** 症狀決定週期。皮膚要等毛髮長，腸胃幾天就知道。 */
+export function trialLength(symptoms: string[] | undefined): { days: number; label: string; why: string } {
+  const has = (k: string) => (symptoms ?? []).some((s) => s.includes(k));
+
+  if (has("腸胃")) {
+    return {
+      days: 14,
+      label: "1 到 2 週",
+      why: "腸胃的反應快。換完糧穩定下來之後，一兩個禮拜就看得出便便有沒有變好。",
+    };
+  }
+  if (has("皮膚") || has("毛髮") || has("淚痕")) {
+    return {
+      days: 56,
+      label: "6 到 8 週",
+      why: "皮膚跟毛要跟著生長週期走，急不來。獸醫做排除飲食法一般也是抓 8 週 —— 兩個禮拜沒改善很正常，不代表這款沒用。",
+    };
+  }
+  return {
+    days: 42,
+    label: "至少 6 週",
+    why: "換糧的效果不會在幾天內出現。給牠一個完整的週期，你的判斷才有意義。",
+  };
+}
+
+/**
+ * 這包夠不夠你跑完週期。
+ *
+ * 挑「最接近目標天數、又不超過保鮮上限」的規格。
+ * 刻意不看佣金 —— 跟 score() 一樣，這裡讀不到那個欄位。
+ */
+export function trialPlan(
+  p: Product,
+  dogKg: number | undefined,
+  symptoms: string[] | undefined,
+): Trial {
+  const need = trialLength(symptoms);
+  const anchor = anchorOf(p, "safe");
+  const anchorDur = bagDuration(unitOf(p, anchor), dogKg);
+
+  const base: Trial = {
+    needDays: need.days,
+    needLabel: need.label,
+    needWhy: need.why,
+    anchorDays: anchorDur?.days ?? null,
+    better: null,
+    needsTwoBags: need.days > FRESH_DAYS,
+  };
+  if (!dogKg || !anchorDur) return base;
+
+  // 一包最多只能撐到保鮮上限，超過就是叫人吃壞掉的飼料
+  const target = Math.min(need.days, FRESH_DAYS);
+
+  let best: Trial["better"] = null;
+  let bestGap = Math.abs(anchorDur.days - target);
+
+  for (const store of storesOf(p)) {
+    for (const o of store.options) {
+      const d = bagDuration(o.unit, dogKg);
+      if (!d || d.days > FRESH_DAYS) continue;
+      const gap = Math.abs(d.days - target);
+      // 差距要明顯縮小才值得叫人改買別的規格
+      if (gap < bestGap - 3) {
+        bestGap = gap;
+        best = { id: o.id, unit: o.unit, amount: o.amount, days: d.days, savingPct: o.savingPct };
+      }
+    }
+  }
+
+  return { ...base, better: best };
+}

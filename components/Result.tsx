@@ -1,6 +1,6 @@
 import Link from "next/link";
 import {
-  anchorOf, bagDuration, pricePerKg, sharedListings, storesOf, unitOf, FRESH_DAYS,
+  anchorOf, bagDuration, pricePerKg, sharedListings, storesOf, trialPlan, unitOf, FRESH_DAYS,
 } from "@/lib/engine";
 import { priceStat, timingAdvice } from "@/lib/history";
 import type { Product, Verdict } from "@/lib/types";
@@ -31,11 +31,14 @@ export default function Result({
   verdict,
   chips,
   dogKg,
+  symptoms,
   chipsLabel = "條件",
 }: {
   verdict: Verdict;
   chips: { label: string; kind: "info" | "avoid" }[];
   dogKg?: number;
+  /** 決定試糧要跑多久 —— 皮膚 8 週、腸胃 2 週 */
+  symptoms?: string[];
   chipsLabel?: string;
 }) {
   const shared = sharedListings(verdict.survivors);
@@ -69,6 +72,14 @@ export default function Result({
             <>
               <p style={S.lbl}>買這個</p>
               <Answer p={verdict.pick} verdict={verdict} dogKg={dogKg} multi={shared} />
+            </>
+          )}
+
+          {/* ── 換了之後會怎樣。給了答案不給後續，等於把人送到結帳頁就不管 ── */}
+          {verdict.pick && (
+            <>
+              <p style={S.lbl}>換了之後會怎樣</p>
+              <Trial p={verdict.pick} dogKg={dogKg} symptoms={symptoms} />
             </>
           )}
 
@@ -208,6 +219,115 @@ function Answer({
     </article>
   );
 }
+
+/* ------------------------------------------------------------------ */
+/* 換了之後會怎樣                                                      */
+/* ------------------------------------------------------------------ */
+
+function Trial({ p, dogKg, symptoms }: { p: Product; dogKg?: number; symptoms?: string[] }) {
+  const t = trialPlan(p, dogKg, symptoms);
+
+  return (
+    <div style={tBox}>
+      <Step n={1} title="前 7 到 10 天慢慢換">
+        第 1–3 天新的加四分之一，第 4–6 天一半，第 7–10 天四分之三，之後才全換。
+        整包直接換掉幾乎一定軟便 —— 那是換糧造成的，不是牠對這款過敏。
+      </Step>
+
+      <Step n={2} title={`多久看得出來：${t.needLabel}`}>
+        {t.needWhy}
+      </Step>
+
+      {t.anchorDays !== null && (
+        <Step n={3} title={`這包大約吃 ${t.anchorDays} 天`}>
+          {t.needsTwoBags ? (
+            <>
+              週期要 {t.needDays} 天，但一包開封放超過 {FRESH_DAYS} 天油脂會氧化，
+              所以這個長度本來就要分兩次買。重點是<b>不要買太小的</b> ——
+              還沒看出結果就斷糧，你會以為是這款沒用。
+            </>
+          ) : (
+            <>週期要 {t.needDays} 天。這包的長度剛好夠你判斷。</>
+          )}
+          {t.better && (
+            <span style={tBetter}>
+              同一款有 <b>{t.better.unit}</b> 的，你的狗大約吃 {t.better.days} 天
+              {t.better.savingPct !== null && t.better.savingPct >= 3
+                ? `，每公斤還省 ${t.better.savingPct}%`
+                : ""}
+              。展開下面的「其他規格與價格」可以看到。
+            </span>
+          )}
+        </Step>
+      )}
+
+      <Step n={t.anchorDays !== null ? 4 : 3} title="這段期間不要給零食">
+        一根雞肉零食就毀了整個測試。潔牙骨、人的食物、公園裡別人給的，都算。
+        要測就測乾淨的，不然跑完八週你還是不知道答案。
+      </Step>
+
+      <Step n={t.anchorDays !== null ? 5 : 4} title="什麼情況要停" last>
+        連續軟便超過三天、抓得比以前更兇、開始吐。
+        這時候該看醫生，不是再換下一款飼料。
+      </Step>
+
+      <p style={tNote}>
+        我們不是獸醫。上面是一般的換糧做法，不是診斷 ——
+        牠一直不舒服，帶去看醫生比換飼料重要。
+      </p>
+    </div>
+  );
+}
+
+function Step({
+  n, title, children, last,
+}: { n: number; title: string; children: React.ReactNode; last?: boolean }) {
+  return (
+    <div style={{ ...tStep, ...(last ? { borderBottom: 0, paddingBottom: 0 } : null) }}>
+      <span style={tNum} className="mono">{n}</span>
+      <div>
+        <p style={tTitle}>{title}</p>
+        <p style={tBody}>{children}</p>
+      </div>
+    </div>
+  );
+}
+
+const tBox: React.CSSProperties = {
+  background: "var(--surface)", border: "1px solid var(--line)",
+  borderRadius: 14, boxShadow: "var(--sh)", padding: "22px 22px 18px",
+};
+
+const tStep: React.CSSProperties = {
+  display: "flex", gap: 14, alignItems: "flex-start",
+  paddingBottom: 16, marginBottom: 16, borderBottom: "1px solid var(--line)",
+};
+
+const tNum: React.CSSProperties = {
+  flexShrink: 0, width: 24, height: 24, borderRadius: 999,
+  background: "var(--accent-soft)", color: "var(--accent)",
+  fontSize: 12.5, fontWeight: 700,
+  display: "flex", alignItems: "center", justifyContent: "center",
+  marginTop: 2,
+};
+
+const tTitle: React.CSSProperties = {
+  margin: "0 0 5px", fontSize: 15.5, fontWeight: 700, lineHeight: 1.6,
+};
+
+const tBody: React.CSSProperties = {
+  margin: 0, fontSize: 14.5, color: "var(--muted)", lineHeight: 1.9,
+};
+
+const tBetter: React.CSSProperties = {
+  display: "block", marginTop: 8, fontSize: 14.5,
+  color: "var(--keep)", lineHeight: 1.9,
+};
+
+const tNote: React.CSSProperties = {
+  margin: "18px 0 0", paddingTop: 14, borderTop: "1px solid var(--line)",
+  fontSize: 12.5, color: "var(--faint)", lineHeight: 1.85,
+};
 
 /* ------------------------------------------------------------------ */
 /* 備選                                                                */

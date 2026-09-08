@@ -27,6 +27,7 @@ export default function Decider() {
   const [verdict, setVerdict] = useState<Verdict | null>(null);
   const [empty, setEmpty] = useState(false);
   const [dogKg, setDogKg] = useState<number | undefined>(undefined);
+  const [symptoms, setSymptoms] = useState<string[]>([]);
 
   function run(input: string) {
     const src = input.trim() || EXAMPLES[0];
@@ -43,6 +44,7 @@ export default function Decider() {
     parsed.situation.constraints = constraintsFor(parsed.situation);
     setChips(parsed.chips.map((c) => ({ label: c.label, kind: c.kind })));
     setDogKg(parsed.situation.weightKg);
+    setSymptoms(parsed.situation.symptoms);
     setVerdict(adjudicate(catalog, parsed.situation));
     requestAnimationFrame(() => {
       document.getElementById("verdict")?.scrollIntoView({
@@ -94,7 +96,13 @@ export default function Decider() {
 
       {verdict && (
         <div id="verdict" style={S.stage}>
-          <Result verdict={verdict} chips={chips} dogKg={dogKg} chipsLabel="我們聽到的是" />
+          <Result
+            verdict={verdict}
+            chips={chips}
+            dogKg={dogKg}
+            symptoms={symptoms}
+            chipsLabel="我們聽到的是"
+          />
         </div>
       )}
     </>

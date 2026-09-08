@@ -164,6 +164,8 @@ export default async function Page({ params }: { params: Promise<{ slug: string[
         verdict={verdict}
         chips={chipsOf(p)}
         dogKg={p.kind === "allergen" ? undefined : TYPICAL_KG[p.breed.size]}
+        // 會搜「避雞肉」的人就是在做排除飲食法 —— 那是皮膚的時程，不是腸胃的
+        symptoms={p.kind === "breed" ? undefined : ["皮膚搔癢"]}
       />
 
       <p style={S.lbl}>相關的</p>
