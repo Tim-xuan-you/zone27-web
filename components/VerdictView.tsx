@@ -215,11 +215,18 @@ export default function VerdictView({
                         <b>「{p.name}」</b>—— 預設可能不是這個。
                       </p>
                     )}
-                    <p style={S.reports}>
-                      {p.reports.total > 0
-                        ? `${p.reports.total} 位飼主回報中，${p.reports.palatability} 位反映適口性差、${p.reports.looseStool} 位反映軟便。`
-                        : "這款我們還沒整理飼主回報。有買過的話，歡迎把心得傳 LINE 給我們。"}
-                    </p>
+                    {p.knownIssues ? (
+                      <p style={S.reports}>
+                        <b style={{ color: "var(--muted)" }}>飼主常提到：</b>{p.knownIssues}
+                        <span style={{ display: "block", marginTop: 4, fontSize: 11.5 }}>
+                          整理自公開評價與討論區，不是系統性統計。
+                        </span>
+                      </p>
+                    ) : (
+                      <p style={S.reports}>
+                        這款我們還沒整理飼主回報。有買過的話，歡迎把心得傳 LINE 給我們。
+                      </p>
+                    )}
                   </div>
                 </article>
               );

@@ -86,6 +86,14 @@ export interface Product {
   price: Price;
   /** 這款的絕對紅線。卡片上最醒目的那一行。 */
   dealbreaker: string;
+  /**
+   * 飼主常提到的狀況，整理自公開評價與討論區。
+   *
+   * 這比「142 位中有 31 位反映適口性差」誠實 —— 那種數字我們拿不到，
+   * 硬編就是說謊。質性描述查得到、標得出來源、而且更有用：
+   * 「顆粒偏大，小型犬可能不好咬」比一個百分比實用得多。
+   */
+  knownIssues?: string;
   /** 停產或長期缺貨 → 引擎直接排除 */
   discontinued?: boolean;
 }

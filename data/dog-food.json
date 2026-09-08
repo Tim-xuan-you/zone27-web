@@ -2,7 +2,7 @@
   "_meta": {
     "category": "dog-food",
     "note": "由 data/dog-food.csv 產生，不要直接改這個檔。改 CSV 之後跑 npm run data:import。",
-    "generatedAt": "2026-09-07",
+    "generatedAt": "2026-09-08",
     "count": 6,
     "pricePolicy": "人工複查，不爬蟲。checkedAt 誠實顯示於前端。"
   },
@@ -74,7 +74,8 @@
           }
         ]
       },
-      "dealbreaker": "你的狗曾對羊肉起疹 — 全配方只有羊，沒有第二種蛋白源可以退"
+      "dealbreaker": "你的狗曾對羊肉起疹 — 全配方只有羊，沒有第二種蛋白源可以退",
+      "knownIssues": "換糧期比較容易軟便（纖維偏高），建議分 7–10 天慢慢換。也有飼主說狗不愛羊肉味"
     },
     {
       "id": "df-02",
@@ -133,7 +134,8 @@
           }
         ]
       },
-      "dealbreaker": "你的狗要控制體重 — 碳水約 45%，以馬鈴薯為主要碳水來源"
+      "dealbreaker": "你的狗要控制體重 — 碳水約 45%，以馬鈴薯為主要碳水來源",
+      "knownIssues": "顆粒比多數品牌大，小型犬可能不好咬 —— 我們列的是小顆粒版本"
     },
     {
       "id": "df-03",

@@ -185,6 +185,7 @@ const products = rows.map((row, i) => {
     },
     price: { unit: row.unit, checkedAt: row.checkedAt, merchants },
     dealbreaker: row.dealbreaker,
+    ...(row.knownIssues ? { knownIssues: row.knownIssues } : {}),
     ...(yn(row, "discontinued", line) ? { discontinued: true } : {}),
   };
 });
