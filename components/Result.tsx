@@ -1,6 +1,7 @@
 import Link from "next/link";
 import {
-  anchorOf, bagDuration, pricePerKg, sharedListings, storesOf, trialPlan, unitOf, FRESH_DAYS,
+  anchorOf, bagDuration, freshness, pricePerKg, sharedListings, storesOf, trialPlan, unitOf,
+  FRESH_DAYS,
 } from "@/lib/engine";
 import { priceStat, timingAdvice } from "@/lib/history";
 import type { Product, Verdict } from "@/lib/types";
@@ -173,6 +174,10 @@ function Answer({
           </span>
         </div>
 
+        {freshness(p.price.checkedAt).note && (
+          <p style={S.freshNote}>{freshness(p.price.checkedAt).note}</p>
+        )}
+
         {verdict.pickReason && (
           <p style={S.answerWhy}>{verdict.pickReason}</p>
         )}
@@ -198,8 +203,8 @@ function Answer({
       </div>
 
       <div style={S.deal}>
-        <span>✕</span>
-        <span><b>不要買，如果：</b>{p.dealbreaker}</span>
+        <p style={S.dealHead}>✕　這款什麼時候不要買</p>
+        <p style={S.dealBody}>{p.dealbreaker}</p>
       </div>
 
       {multi.has(safe.affiliateUrl) && (
@@ -367,8 +372,8 @@ function Alt({ p, dogKg, multi }: { p: Product; dogKg?: number; multi: Set<strin
       </div>
 
       <div style={S.deal}>
-        <span>✕</span>
-        <span><b>不要買，如果：</b>{p.dealbreaker}</span>
+        <p style={S.dealHead}>✕　這款什麼時候不要買</p>
+        <p style={S.dealBody}>{p.dealbreaker}</p>
       </div>
 
       {multi.has(safe.affiliateUrl) && (

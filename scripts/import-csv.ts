@@ -127,6 +127,9 @@ function merchant(row: Row, n: number, line: number) {
     affiliateUrl: url,
     commission: num(row, `${p}Commission`, line, { min: 0, max: 101 }),
     anchor: (n === 1 ? "safe" : "value") as "safe" | "value",
+    // 連結死掉不是刪掉那一列 —— 刪掉就沒有紀錄，下次又會重新收一次同一家。
+    // 標記起來，引擎跳過，資料還在。
+    ...(/^(1|true|yes|y|是|死)$/i.test((row[`${p}Dead`] ?? "").trim()) ? { dead: true } : {}),
   };
 }
 

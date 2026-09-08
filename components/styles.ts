@@ -204,11 +204,21 @@ export const S: Record<string, CSSProperties> = {
   },
 
   /* ---------- 紅線 ---------- */
+  /* 原本寫成「✕ 不要買，如果：你的狗曾對羊肉起疹」——
+     那是英文的 Don't buy if... 直翻，中文不這樣講條件句。
+     Tim 的原話是「完全看不懂」。改成標題在上、條件在下的兩行。 */
   deal: {
-    display: "flex", gap: G.md, alignItems: "flex-start",
     background: "var(--cut-soft)", color: "var(--cut)",
     padding: `${G.lg}px ${G.xl}px`,
-    fontSize: T.sm, lineHeight: 1.8,
+  },
+  dealHead: {
+    margin: 0, fontSize: T.sm, fontWeight: 700, letterSpacing: ".02em",
+  },
+  dealBody: {
+    margin: `${G.xs}px 0 0`, fontSize: T.sm, lineHeight: 1.85,
+  },
+  freshNote: {
+    margin: `${G.sm}px 0 0`, fontSize: T.xs, color: "var(--faint)", lineHeight: 1.75,
   },
 
   /* ---------- 展開區 ---------- */

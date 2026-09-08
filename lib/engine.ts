@@ -47,8 +47,27 @@ export function cheapest(p: Product): number {
 }
 
 /** 指定錨點角色的通路。找不到就退回第一個。 */
+/**
+ * 還能買的賣場。
+ *
+ * 連結會爛掉 —— 賣家下架、關店、分潤連結過期。這是這門生意的常態，
+ * 不是例外。所以「死掉的賣場」是資料模型的一部分，不是靠人記得去刪。
+ */
+export function liveMerchants(p: Product): Merchant[] {
+  const live = p.price.merchants.filter((m) => !m.dead);
+  // 全死了就回原陣列，讓上層自己判斷要不要整款拿掉；
+  // 這裡回空陣列會讓一堆 [0] 變成 undefined，反而更難查。
+  return live.length > 0 ? live : p.price.merchants;
+}
+
+/** 這款還有沒有地方買 */
+export function buyable(p: Product): boolean {
+  return p.price.merchants.some((m) => !m.dead);
+}
+
 export function anchorOf(p: Product, role: "safe" | "value") {
-  return p.price.merchants.find((m) => m.anchor === role) ?? p.price.merchants[0];
+  const live = liveMerchants(p);
+  return live.find((m) => m.anchor === role) ?? live[0];
 }
 
 /**
@@ -57,6 +76,11 @@ export function anchorOf(p: Product, role: "safe" | "value") {
  * 所以呼叫端要把最重要、最切身的規則放前面（通常是過敏原）。
  */
 export function adjudicate(pool: Product[], situation: Situation): Verdict {
+  // 買不到的東西不該進裁決 —— 推薦一個點進去是 404 的連結，
+  // 比少推薦一款糟糕得多。這一刀在計數之前先砍，
+  // 使用者不需要知道我們有幾款連結壞掉。
+  pool = pool.filter((p) => buyable(p) && !p.discontinued);
+
   const startCount = pool.length;
   const cuts: Cut[] = [];
   let alive = pool;
@@ -338,14 +362,14 @@ export interface Store {
  */
 export function storesOf(p: Product): Store[] {
   // 省幅基準用「最小包」—— 使用者是拿入門包去比大包划不划算
-  const sized = p.price.merchants
+  const sized = liveMerchants(p)
     .map((m) => ({ m, kg: kgOf(unitOf(p, m)), per: pricePerKg(unitOf(p, m), m.amount) }))
     .filter((x) => x.kg !== null && x.per !== null)
     .sort((a, b) => a.kg! - b.kg!);
   const base = sized.length > 1 ? sized[0].per! : null;
 
   const byLabel = new Map<string, Merchant[]>();
-  for (const m of p.price.merchants) {
+  for (const m of liveMerchants(p)) {
     byLabel.set(m.label, [...(byLabel.get(m.label) ?? []), m]);
   }
 
@@ -515,4 +539,90 @@ export function trialPlan(
   }
 
   return { ...base, better: best };
+}
+
+/* ------------------------------------------------------------------ */
+/* 資料會過期                                                          */
+/*                                                                    */
+/* 我們不爬電商，所以每個價格都是人工查的 —— 也就是說，每個價格從被    */
+/* 寫下來那一刻就開始腐爛。商品會下架、賣家會關店、分潤連結會過期。    */
+/*                                                                    */
+/* 六款的時候靠記性就好。一百款、三百條連結的時候，靠記性等於沒有制度。 */
+/* 所以把「幾天沒複查」變成引擎讀得到的數字，讓它自己降級、自己排出    */
+/* 待辦清單 —— 人只要打開一頁，照著上面做。                            */
+/* ------------------------------------------------------------------ */
+
+/** 超過這個天數，價格不再拿出來當承諾，只當參考。 */
+export const PRICE_FRESH_DAYS = 30;
+/** 超過這個天數，這筆資料視為過期，畫面要明講、排序要往後。 */
+export const PRICE_STALE_DAYS = 75;
+
+export interface Freshness {
+  days: number;
+  level: "fresh" | "aging" | "stale";
+  /** 給人看的一句話，沒過期就是 null */
+  note: string | null;
+}
+
+export function freshness(checkedAt: string, today = new Date()): Freshness {
+  const t = Date.parse(checkedAt + "T00:00:00Z");
+  if (Number.isNaN(t)) return { days: 9999, level: "stale", note: "沒有查價日期" };
+
+  const days = Math.max(0, Math.round((today.getTime() - t) / 86400000));
+  if (days <= PRICE_FRESH_DAYS) return { days, level: "fresh", note: null };
+  if (days <= PRICE_STALE_DAYS) {
+    return { days, level: "aging", note: `這個價格是 ${days} 天前查的，點進去以賣場標價為準。` };
+  }
+  return {
+    days,
+    level: "stale",
+    note: `這個價格已經 ${days} 天沒複查了 —— 我們把它當參考，不當承諾。`,
+  };
+}
+
+/** 一筆待辦：哪一款、哪一家、幾天沒查、連結在哪 */
+export interface MaintenanceRow {
+  productId: string;
+  brand: string;
+  name: string;
+  merchantId: string;
+  label: string;
+  unit: string;
+  amount: number;
+  affiliateUrl: string;
+  checkedAt: string;
+  days: number;
+  level: Freshness["level"] | "dead";
+}
+
+/**
+ * 全站的維護待辦，最該處理的排最前面。
+ *
+ * 排序：死掉的 > 過期的 > 快過期的 > 新的。
+ * 這一頁存在的意義只有一個 —— 不用一個一個找。
+ */
+export function maintenanceRows(pool: Product[], today = new Date()): MaintenanceRow[] {
+  const rows: MaintenanceRow[] = [];
+
+  for (const p of pool) {
+    for (const m of p.price.merchants) {
+      const f = freshness(p.price.checkedAt, today);
+      rows.push({
+        productId: p.id,
+        brand: p.brand,
+        name: p.name,
+        merchantId: m.id,
+        label: m.label,
+        unit: unitOf(p, m),
+        amount: m.amount,
+        affiliateUrl: m.affiliateUrl,
+        checkedAt: p.price.checkedAt,
+        days: f.days,
+        level: m.dead ? "dead" : f.level,
+      });
+    }
+  }
+
+  const rank = { dead: 0, stale: 1, aging: 2, fresh: 3 } as const;
+  return rows.sort((a, b) => rank[a.level] - rank[b.level] || b.days - a.days);
 }

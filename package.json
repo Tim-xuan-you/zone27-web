@@ -10,7 +10,8 @@
     "typecheck": "tsc --noEmit",
     "engine:smoke": "tsx scripts/engine-smoke.ts",
     "parse:smoke": "tsx scripts/parse-smoke.ts",
-    "data:import": "tsx scripts/import-csv.ts"
+    "data:import": "tsx scripts/import-csv.ts",
+    "links:check": "tsx scripts/check-links.ts"
   },
   "dependencies": {
     "@supabase/ssr": "^0.10.3",

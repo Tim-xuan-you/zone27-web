@@ -94,7 +94,7 @@ export default function Page() {
         <li><b>會叫你先別買。</b>價格在高點的時候我們會這樣講，即使你當下買我們才有錢。</li>
       </ul>
 
-      <H>每一款都有一句「不要買，如果⋯」</H>
+      <H>每一款都寫了「什麼時候不要買」</H>
       <p style={{ fontSize: 15.5, margin: "0 0 10px" }}>
         目前 <b>{s.withDealbreaker}</b> / {s.count} 款寫了。沒寫的不會上架 —— 這是系統擋下的，不是我們自律。
       </p>
