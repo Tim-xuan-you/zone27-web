@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import VerdictView from "@/components/VerdictView";
+import Result from "@/components/Result";
 import { S } from "@/components/styles";
 import { adjudicate } from "@/lib/engine";
 import { catalog, constraintsFor } from "@/lib/catalog";
@@ -155,7 +155,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string[
       )}
 
       {/* 長尾頁沒有使用者輸入的體重，用品種體型推一個典型值估可吃天數 */}
-      <VerdictView
+      <Result
         verdict={verdict}
         chips={chipsOf(p)}
         dogKg={p.kind === "allergen" ? undefined : TYPICAL_KG[p.breed.size]}

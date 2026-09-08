@@ -102,7 +102,52 @@ export const S: Record<string, CSSProperties> = {
     fontSize: 30, fontWeight: 700, color: "var(--keep)",
   },
 
-  /* ---------- 商品卡 ---------- */
+  /* ---------- 主答案 ----------
+     整個結果頁只有這一塊是「答案」，其餘都是備援。
+     所以它有粗邊框、最大的字，而且獨佔一個區塊 ——
+     使用者問「我該買哪個」，就該只看到一個。 */
+  answer: {
+    background: "var(--surface)",
+    border: "2px solid var(--keep)",
+    borderRadius: 16, boxShadow: "var(--sh-lift)", overflow: "hidden",
+  },
+  answerBody: { padding: G.xl },
+  answerName: {
+    display: "block", fontFamily: "var(--font-serif), serif",
+    fontSize: 24, fontWeight: 700, lineHeight: 1.4, margin: `0 0 ${G.lg}px`,
+  },
+  answerWhy: {
+    margin: `${G.lg}px 0 0`, fontSize: T.md, lineHeight: 1.9, color: "var(--muted)",
+  },
+  buyRow: { display: "flex", flexDirection: "column", gap: G.sm, marginTop: G.xl },
+  btnBuy: {
+    display: "block", textAlign: "center", border: 0,
+    background: "var(--accent)", color: "var(--accent-ink)",
+    borderRadius: 999, padding: "16px 24px",
+    fontSize: T.lg, fontWeight: 700, textDecoration: "none",
+  },
+  buyNote: { fontSize: T.xs, color: "var(--faint)", textAlign: "center", lineHeight: 1.7 },
+
+  /* ---------- 展開區（原生 details，不用 JS，SSG 也能用） ---------- */
+  detailBlock: { borderTop: "1px solid var(--line)" },
+  detailSummary: {
+    padding: `${G.lg}px ${G.xl}px`, fontSize: T.sm,
+    color: "var(--muted)", cursor: "pointer",
+  },
+  more: { marginTop: G.xl },
+  moreSummary: {
+    display: "flex", alignItems: "center", justifyContent: "space-between",
+    gap: G.md, padding: `${G.lg}px ${G.xl}px`,
+    background: "var(--surface)", border: "1px solid var(--line)",
+    borderRadius: 12, fontSize: T.md, cursor: "pointer",
+  },
+  moreHint: {
+    fontSize: T.xs, color: "var(--accent)",
+    border: "1px solid var(--line)", borderRadius: 999, padding: "4px 14px",
+  },
+  moreBody: { display: "flex", flexDirection: "column", gap: G.lg, marginTop: G.lg },
+
+  /* ---------- 商品卡（備選用） ---------- */
   card: {
     background: "var(--surface)", border: "1px solid var(--line)",
     borderRadius: 14, boxShadow: "var(--sh)", overflow: "hidden",

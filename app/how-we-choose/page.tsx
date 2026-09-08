@@ -11,11 +11,8 @@ export const metadata: Metadata = {
 
 /** 揭露頁自己算，讓數字永遠跟實際資料一致 —— 寫死的數字遲早會過期變成謊話。 */
 function stats() {
-  const rates = catalog.flatMap((p) => p.price.merchants.map((m) => m.commission));
   return {
     count: catalog.length,
-    min: Math.min(...rates),
-    max: Math.max(...rates),
     withDealbreaker: catalog.filter((p) => p.dealbreaker?.trim()).length,
   };
 }
@@ -46,7 +43,7 @@ export default function Page() {
       <H>排序只看四件事</H>
       <ol style={{ paddingLeft: 20, margin: "0 0 10px", fontSize: 15.5 }}>
         <li style={{ marginBottom: 6 }}>有沒有踩到你標記的過敏原</li>
-        <li style={{ marginBottom: 6 }}>營養組成在不在建議區間（粗蛋白 ≥ 26%、碳水 &lt; 25%）</li>
+        <li style={{ marginBottom: 6 }}>營養組成在不在建議區間（粗蛋白 ≥ 22%、碳水 &lt; 48%）</li>
         <li style={{ marginBottom: 6 }}>是不是單一蛋白源 —— 這讓你下次排查過敏原容易得多</li>
         <li>其他飼主回報好不好吃、會不會軟便</li>
       </ol>
@@ -56,16 +53,19 @@ export default function Page() {
         <code style={code}>commission</code>。
       </Box>
 
-      <H>目前的佣金範圍</H>
+      <H>為什麼我們不公布每一款抽多少</H>
       <p style={{ fontSize: 15.5, margin: "0 0 14px" }}>
-        資料庫裡 <b>{s.count}</b> 款商品，佣金落在 <b>{s.min}%</b> 到 <b>{s.max}%</b> 之間。
-        每一次裁決結束，網站都會自己跑一次稽核，把留下來那幾款的佣金列給你看，
-        並且標出我們推薦的是不是最高的那個。
+        因為那沒有幫到你，只會讓你在挑東西的時候去想我們賺多少 ——
+        該想的是你的狗。而且費率會變，寫死的數字遲早過期變成錯的。
       </p>
       <p style={{ fontSize: 15.5, margin: "0 0 10px", color: "var(--muted)" }}>
-        我們不會把佣金數字印在每張商品卡上。那會逼你在挑東西的時候去想我們賺多少 ——
-        該想的是你的狗。但你想查的時候，它永遠在那裡。
+        更有用的保證是上面那一條：<b style={{ color: "var(--ink)" }}>程式碼讀不到佣金欄位</b>。
+        那是結構性的，不是我們的自我宣告。
       </p>
+      <Box tone="keep">
+        <b>但你想知道的話，問我們。</b>任何一款你想知道我們抽多少，
+        寫信或傳 LINE 問，我們會直接告訴你。這不是機密，只是不該擺在你挑東西的畫面上。
+      </Box>
 
       <H>我們主動放棄的錢</H>
       <ul style={{ paddingLeft: 20, margin: "0 0 10px", fontSize: 15.5 }}>
