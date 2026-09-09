@@ -123,7 +123,7 @@ export default function Page() {
           <div style={{ ...box, borderColor: "var(--warn)", background: "var(--warn-soft)" }}>
             <p style={{ margin: 0, fontSize: 15.5, lineHeight: 1.95 }}>
               我們收的款裡，<b>豆類最多的是那幾款無穀高價糧</b>
-              （{gfPulses.map((p) => p.brand).slice(0, 3).join("、")}⋯），
+              （{[...new Set(gfPulses.map((p) => p.brand))].slice(0, 3).join("、")}⋯），
               而 <b>{grainyNoPulses[0].brand}</b> 那款含穀的平價糧，成分表裡反而一顆豆都沒有。
             </p>
             <p style={{ margin: "12px 0 0", fontSize: 15.5, color: "var(--muted)", lineHeight: 1.95 }}>
