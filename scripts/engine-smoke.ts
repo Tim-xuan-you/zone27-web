@@ -4,7 +4,7 @@
  * 這不是單元測試，是「把裁決過程印出來給人看」——
  * 因為這個引擎的產出本身就是要給人讀的，數字加不加得起來一眼就知道。
  */
-import { adjudicate, anchorOf, auditCommission, cheapest, commissionLine } from "../lib/engine";
+import { adjudicate, anchorOf, cheapest } from "../lib/engine";
 import { catalog, constraintsFor } from "../lib/catalog";
 import type { Situation } from "../lib/types";
 
@@ -50,12 +50,6 @@ for (const { title, situation } of scenarios) {
     console.log(`  最穩：${safe.label} $${safe.amount}　最省：${value.label} $${value.amount}`);
     console.log(`  紅線：${v.pick.dealbreaker}`);
 
-    const audit = auditCommission(v)!;
-    console.log(`\n  ── 佣金稽核（排序演算法讀不到這一段）──`);
-    for (const r of audit.rows) {
-      console.log(`  ${r.isPick ? "→" : " "} ${r.label.padEnd(24, "　")} ${r.commission}%`);
-    }
-    console.log("  " + commissionLine(audit).text);
   } else {
     console.log("\n  ⚠ 全被刪光 —— 需要放寬條件或走 LINE 降落傘");
   }

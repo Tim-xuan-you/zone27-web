@@ -33,14 +33,17 @@ const CSV = resolve(ROOT, "data/dog-food.csv");
 const TEMPLATE = `# 一行一個賣場。第一行 = 卡片上主要的那個賣場。
 #
 # 欄位順序不拘，用 tab、兩個以上空白、或 | 分開都可以：
-#   商品編號   賣場名稱   規格   價格   分潤連結   佣金%
+#   商品編號   賣場名稱   規格   價格   分潤連結   【備註】
+#
+# 佣金不用填 —— 我們不記那個數字（費率天天在跳，存下來隔天就是錯的）。
+# 貼上來的行帶著 9% 也沒關係，程式會自己忽略。
 #
 # 同一個商品的第二行開始，商品編號可以不用再寫。
 # 井字號開頭的行會被忽略，可以拿來寫筆記。
 #
 # 例：
-# df-01  獅子王寵物（蝦皮優選）  2kg    1200  https://s.shopee.tw/xxxx  9%
-#        獅子王寵物（蝦皮優選）  6kg    2640  https://s.shopee.tw/xxxx  9%
+# df-01  獅子王寵物（蝦皮優選）  2kg    1200  https://s.shopee.tw/xxxx  【超商限兩包】
+#        獅子王寵物（蝦皮優選）  6kg    2640  https://s.shopee.tw/xxxx  【超商限一包】
 `;
 
 /* ---------------------------------------------------------------- */
@@ -77,7 +80,6 @@ interface Row {
   unit: string;
   amount: number;
   url: string;
-  commission: number;
   /** 蝦皮的規格名本來就寫成【超商限兩包】，直接沿用那個寫法當備註 */
   note: string;
   line: number;
@@ -98,7 +100,7 @@ function parseLine(raw: string, line: number, carryId: string): Row | { error: s
   if (parts.length < 3) return { error: "欄位太少，至少要有賣場、規格、價格、連結" };
 
   let productId = "", label = "", unit = "", url = "", note = "";
-  let amount: number | null = null, commission: number | null = null;
+  let amount: number | null = null;
   const rest: string[] = [];
 
   for (const p of parts) {
@@ -108,15 +110,18 @@ function parseLine(raw: string, line: number, carryId: string): Row | { error: s
     if (!productId && RE_ID.test(p)) { productId = p.toLowerCase(); continue; }
     if (!url && RE_URL.test(p)) { url = p; continue; }
     if (!unit && RE_UNIT.test(p)) { unit = p.replace(/\s+/g, ""); continue; }
-    if (commission === null && RE_PCT.test(p)) { commission = parseFloat(p); continue; }
+    // 佣金我們不記了（費率天天在跳，存下來隔天就是錯的），
+    // 但貼上來的行常常帶著它 —— 認出來丟掉，不要混進賣場名稱
+    if (RE_PCT.test(p)) continue;
     if (amount === null && RE_MONEY.test(p)) { amount = Number(p.replace(/[$,]/g, "")); continue; }
     rest.push(p);
   }
 
   // 佣金沒寫 % 的時候：剩下的數字裡挑一個小的當佣金
-  if (commission === null) {
+  // 沒寫 % 的裸數字多半也是佣金，一併丟掉
+  {
     const i = rest.findIndex((r) => /^\d+(\.\d+)?$/.test(r) && Number(r) <= 30);
-    if (i >= 0) { commission = Number(rest[i]); rest.splice(i, 1); }
+    if (i >= 0) rest.splice(i, 1);
   }
   label = rest.join(" ").trim();
 
@@ -126,9 +131,8 @@ function parseLine(raw: string, line: number, carryId: string): Row | { error: s
   if (!unit) return { error: "找不到規格（像 2kg、4.5磅）" };
   if (amount === null) return { error: "找不到價格" };
   if (!label) return { error: "找不到賣場名稱" };
-  if (commission === null) return { error: "找不到佣金（寫 9 或 9% 都可以）" };
 
-  return { productId, label, unit, amount, url, commission, note, line };
+  return { productId, label, unit, amount, url, note, line };
 }
 
 /* ---------------------------------------------------------------- */
@@ -214,7 +218,6 @@ async function main() {
       r[col(`m${n}Unit`)] = m ? m.unit : "";
       r[col(`m${n}Amount`)] = m ? String(m.amount) : "";
       r[col(`m${n}Url`)] = m ? m.url : "";
-      r[col(`m${n}Commission`)] = m ? String(m.commission) : "";
       r[col(`m${n}Dead`)] = "";
       // 貼上那一行有寫【】才覆蓋備註；沒寫就保留原本的人工備註
       if (m && m.note) r[col(`m${n}Note`)] = m.note;

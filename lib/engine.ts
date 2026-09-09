@@ -340,80 +340,6 @@ export function zhProtein(k: string): string {
 /* ------------------------------------------------------------------ */
 /* 佣金稽核 —— 只給揭露頁用，排序永遠碰不到                              */
 /* ------------------------------------------------------------------ */
-
-export interface CommissionAudit {
-  rows: { label: string; commission: number; isPick: boolean }[];
-  highest: number;
-  lowest: number;
-  pickRate: number;
-  /**
-   * 推薦的那款在佣金排序裡的位置（0 = 最低）。
-   * 用來產生一句「在任何情況下都是真的」的說明。
-   *
-   * 這一段是整個站最不能寫錯的地方：品牌建立在「我們對佣金誠實」上，
-   * 如果這句話本身有一次是假的，全站的可信度一起歸零。
-   */
-  rank: number;
-  total: number;
-  /** 佣金全部一樣就沒有比較基礎 */
-  comparable: boolean;
-}
-
-export function auditCommission(verdict: Verdict): CommissionAudit | null {
-  if (!verdict.pick) return null;
-
-  const rows = verdict.survivors.map((p) => ({
-    label: `${p.brand}｜${p.name}`,
-    commission: Math.max(...p.price.merchants.map((m) => m.commission)),
-    isPick: p.id === verdict.pick!.id,
-  }));
-
-  const rates = rows.map((r) => r.commission);
-  const highest = Math.max(...rates);
-  const lowest = Math.min(...rates);
-  const pickRate = rows.find((r) => r.isPick)!.commission;
-  const comparable = new Set(rates).size > 1;
-
-  return {
-    rows,
-    highest,
-    lowest,
-    pickRate,
-    rank: rates.filter((r) => r < pickRate).length,
-    total: rows.length,
-    comparable,
-  };
-}
-
-/**
- * 一句在任何情況下都成立的佣金說明。
- *
- * 之前寫死「賺最少的那個」，但推薦的那款只是「不是最高」，
- * 不見得是最低 —— 那句話在多數情況下是假的。
- */
-export function commissionLine(a: CommissionAudit): { text: string; tone: "keep" | "warn" | "muted" } {
-  if (!a.comparable) {
-    return { text: `本次留下的款式佣金都是 ${a.pickRate}%，沒有比較基礎。`, tone: "muted" };
-  }
-  if (a.pickRate === a.highest) {
-    return {
-      text: `⚠️ 本次推薦的剛好是佣金最高的 ${a.pickRate}%。演算法沒有讀佣金，但這種情況我們會另外複查。`,
-      tone: "warn",
-    };
-  }
-  if (a.pickRate === a.lowest) {
-    return {
-      text: `本次佣金從 ${a.lowest}% 到 ${a.highest}%，我們推的這款是 ${a.pickRate}% —— 賺最少的那個。`,
-      tone: "keep",
-    };
-  }
-  return {
-    text: `本次佣金從 ${a.lowest}% 到 ${a.highest}%。我們推的這款是 ${a.pickRate}%，不是最高的那個（最高 ${a.highest}%）。`,
-    tone: "keep",
-  };
-}
-
-/* ------------------------------------------------------------------ */
 /* 每公斤單價                                                          */
 /*                                                                    */
 /* 蝦皮的規格單位很亂 —— 2kg、4.5磅、3.5kg、24磅混在一起，            */
@@ -495,7 +421,6 @@ export interface StoreOption {
 
 export interface Store {
   label: string;
-  commission: number;
   options: StoreOption[];
   /**
    * 所有規格共用一條連結（賣家放同一個商品頁）→ 標題放一個按鈕就好。
@@ -547,7 +472,6 @@ export function storesOf(p: Product): Store[] {
 
     return {
       label,
-      commission: Math.max(...ms.map((m) => m.commission)),
       options,
       singleUrl: urls.size === 1 ? [...urls][0] : null,
     };

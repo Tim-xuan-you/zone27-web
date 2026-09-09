@@ -126,7 +126,6 @@ function merchant(row: Row, n: number, line: number) {
     amount: num(row, `${p}Amount`, line, { min: 1 }),
     note: row[`${p}Note`] ?? "",
     affiliateUrl: url,
-    commission: num(row, `${p}Commission`, line, { min: 0, max: 101 }),
     anchor: (n === 1 ? "safe" : "value") as "safe" | "value",
     // 連結死掉不是刪掉那一列 —— 刪掉就沒有紀錄，下次又會重新收一次同一家。
     // 標記起來，引擎跳過，資料還在。

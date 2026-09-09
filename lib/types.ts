@@ -85,8 +85,6 @@ export interface Merchant {
   note: string;
   /** 分潤連結。永遠不直接吐給前端，走 /go/ 端點。 */
   affiliateUrl: string;
-  /** 佣金 %。只用於揭露頁與稽核，排序演算法禁止讀取。 */
-  commission: number;
   /** 錨點角色：安心 / 省錢 */
   anchor: "safe" | "value";
   /**
