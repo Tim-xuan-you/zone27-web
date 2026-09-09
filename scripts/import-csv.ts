@@ -170,6 +170,10 @@ const products = rows.map((row, i) => {
   if (merchants.length > 0 && isAwait) {
     fail(line, "awaitingLink", "已經有通路了，把 awaitingLink 清空");
   }
+  // 沒有台灣上架頁的證據，就不准進採購清單 —— 這條擋的是「讓人白跑一趟」
+  if (isAwait && !row.twSource) {
+    fail(line, "twSource", "要放進待補清單，必須先指出一個台灣通路實際上架這個 SKU 的頁面網址");
+  }
 
   return {
     id: row.id,
@@ -202,6 +206,7 @@ const products = rows.map((row, i) => {
     ...(isRef ? { referenceOnly: true } : {}),
     ...(isAwait ? { awaitingLink: true } : {}),
     ...(row.searchAs ? { searchAs: row.searchAs } : {}),
+    ...(row.twSource ? { twSource: row.twSource } : {}),
   };
 });
 

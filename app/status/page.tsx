@@ -249,6 +249,17 @@ export default function Page() {
               </div>
 
               <div style={{ marginTop: 14, paddingTop: 14, borderTop: "1px solid var(--line)" }}>
+                {p.twSource && (
+                  <Line k="先確認它存在">
+                    <a href={p.twSource} target="_blank" rel="noopener nofollow"
+                       style={{ color: "var(--accent)" }}>
+                      台灣通路的上架頁 ↗
+                    </a>
+                    <span style={{ display: "block", fontSize: 12.5, color: "var(--faint)", marginTop: 4 }}>
+                      先點這個。頁面打得開、有價格，才值得去蝦皮找
+                    </span>
+                  </Line>
+                )}
                 <Line k="去蝦皮搜這個">
                   <span className="mono" style={{ fontSize: 14 }}>{p.searchAs ?? `${p.brand} ${p.name}`}</span>
                 </Line>
