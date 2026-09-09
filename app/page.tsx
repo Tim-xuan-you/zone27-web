@@ -20,6 +20,7 @@ export default function Home() {
             等於在人家還沒開始問問題的時候先講錢。 */}
         <nav style={{ display: "flex", flexWrap: "wrap", justifyContent: "flex-end", gap: "6px 16px", fontSize: 12.5, color: "var(--muted)" }}>
           <Link href="/dog-food/hidden-chicken" style={navLink}>成分表裡有雞</Link>
+          <Link href="/dog-food/how-much" style={navLink}>一天吃多少</Link>
           <Link href="/dog-food" style={navLink}>全部飼料</Link>
           <Link href="/how-we-choose" style={navLink}>我們怎麼挑</Link>
           <Link href="/ask" style={navLink}>問我們</Link>

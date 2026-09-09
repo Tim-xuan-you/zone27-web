@@ -322,6 +322,8 @@ function Trial({ p, dogKg, symptoms }: { p: Product; dogKg?: number; symptoms?: 
       </Step>
 
       <p style={tNote}>
+        <Link href="/dog-food/how-much" style={{ color: "var(--accent)" }}>想自己算一天幾克、一個月多少錢 →</Link>
+        <br />
         我們不是獸醫。上面是一般的換糧做法，不是診斷 ——
         牠一直不舒服，帶去看醫生比換飼料重要。
       </p>

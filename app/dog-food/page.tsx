@@ -47,6 +47,20 @@ export default function Index() {
         </p>
       </Link>
 
+      <Link href="/dog-food/how-much" style={{
+        display: "block", marginTop: 14,
+        background: "var(--surface)", border: "1px solid var(--line)",
+        borderRadius: 14, boxShadow: "var(--sh)", padding: "20px 22px",
+        textDecoration: "none", color: "inherit",
+      }}>
+        <h2 style={{ fontFamily: "var(--font-serif), serif", fontSize: 20, margin: "0 0 8px", lineHeight: 1.5 }}>
+          狗一天要吃多少飼料
+        </h2>
+        <p style={{ margin: 0, fontSize: 15, color: "var(--muted)", lineHeight: 1.85 }}>
+          用獸醫的能量公式算一天幾克、這包吃幾天、一個月多少錢。算式全部寫出來，你可以自己驗。
+        </p>
+      </Link>
+
       <p style={S.lbl}>按過敏原</p>
       <div style={S.relRow}>
         {ALLERGENS.map((a) => (

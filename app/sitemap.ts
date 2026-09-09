@@ -17,6 +17,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE}/ask`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
     // 這一頁是自己讀成分表寫出來的，抄不走 —— 權重給到跟索引頁一樣
     { url: `${BASE}/dog-food/hidden-chicken`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
+    // 「狗一天吃多少」是有購買意圖的資訊型查詢，權重給高
+    { url: `${BASE}/dog-food/how-much`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
     ...allPaths().map((slug) => ({
       url: `${BASE}/dog-food/${slug.join("/")}`,
       lastModified: now,

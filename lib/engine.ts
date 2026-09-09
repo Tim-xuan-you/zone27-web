@@ -564,8 +564,50 @@ export function storesOf(p: Product): Store[] {
 /* 也講會不會放到壞 —— 這是決策工具跟推銷的分界線。                   */
 /* ------------------------------------------------------------------ */
 
-/** 成犬乾飼料的日食量粗估：體重的 2%。幼犬更多，高齡更少，這裡取中間值。 */
-const DAILY_RATIO = 0.02;
+/* ------------------------------------------------------------------ */
+/* 一天要吃多少                                                        */
+/*                                                                    */
+/* 原本用「體重 × 2%」。那是網路上流傳的粗估，好記，但高估滿多的 ——   */
+/* 一隻 10 公斤的成犬照 2% 算是 200 克，用獸醫的能量公式算大約 165 克。 */
+/*                                                                    */
+/* 改用標準的 RER / MER：                                              */
+/*   RER（靜止能量需求）= 70 × 體重^0.75                               */
+/*   MER（維持能量需求）= RER × 生命階段係數                           */
+/*                                                                    */
+/* 再用乾飼料的熱量密度換成克數。台灣市售乾糧多在 3,300–4,200 kcal/kg，*/
+/* 我們取 3,800 當中間值 —— 所以這是估算，不是餵食指示。               */
+/* 包裝背面的餵食表比我們準，因為那是照那一包的實際熱量算的。         */
+/* ------------------------------------------------------------------ */
+
+/** 乾飼料熱量密度的中間值（kcal/kg）。多數台灣市售乾糧落在 3,300–4,200。 */
+export const KCAL_PER_KG = 3800;
+
+/** 生命階段係數。數字取自一般獸醫營養學教材的區間中間值。 */
+export const MER_FACTORS = {
+  puppyYoung: { factor: 3.0, zh: "幼犬 · 4 個月以下" },
+  puppy:      { factor: 2.0, zh: "幼犬 · 4 個月到 1 歲" },
+  adultFixed: { factor: 1.6, zh: "成犬 · 已結紮" },
+  adultWhole: { factor: 1.8, zh: "成犬 · 未結紮" },
+  senior:     { factor: 1.4, zh: "高齡或不太活動" },
+  slimming:   { factor: 1.0, zh: "需要減重" },
+} as const;
+
+export type Stage = keyof typeof MER_FACTORS;
+
+/** 靜止能量需求（大卡／天） */
+export function rer(weightKg: number): number {
+  return 70 * Math.pow(weightKg, 0.75);
+}
+
+/** 維持能量需求（大卡／天） */
+export function mer(weightKg: number, stage: Stage = "adultFixed"): number {
+  return rer(weightKg) * MER_FACTORS[stage].factor;
+}
+
+/** 一天大約幾克乾飼料 */
+export function dailyGrams(weightKg: number, stage: Stage = "adultFixed"): number {
+  return Math.round((mer(weightKg, stage) / KCAL_PER_KG) * 1000);
+}
 
 /** 開封後建議用完的天數。超過就開始有氧化與適口性下降的問題。 */
 export const FRESH_DAYS = 45;
@@ -584,7 +626,9 @@ export function bagDuration(unit: string, weightKg: number | undefined): Duratio
   const kg = kgOf(unit);
   if (!kg) return null;
 
-  const days = Math.round(kg / (weightKg * DAILY_RATIO));
+  const perDay = dailyGrams(weightKg) / 1000;   // 公斤／天
+  if (perDay <= 0) return null;
+  const days = Math.round(kg / perDay);
   return { days, tooLong: days > FRESH_DAYS };
 }
 
