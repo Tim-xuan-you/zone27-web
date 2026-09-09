@@ -277,6 +277,23 @@ function score(p: Product, situation: Situation): number {
     s += situation.avoid.length > 0 ? 30 : skin || gut ? 20 : 12;
   }
 
+  /*
+   * 專用配方 vs 全齡配方。
+   *
+   * 使用者說「五個月的幼犬」，我們卻推一款標「全齡」的 —— 技術上沒錯
+   * （全齡本來就涵蓋幼犬），但一款專門為那個階段設計的，鈣磷比、
+   * 熱量密度、顆粒大小都是照那個階段調的。同分的時候該讓專用的勝出。
+   *
+   * 權重刻意壓在過敏原之下：有過敏疑慮時單一蛋白源拿 30 分，
+   * 這裡只拿 15 —— 排除過敏原永遠比階段吻合重要。
+   */
+  const stage = stageForAge(situation.ageYears);
+  const wantStage =
+    stage === "puppyYoung" || stage === "puppy" ? "puppy"
+    : stage === "senior" ? "senior"
+    : null;
+  if (wantStage && p.spec.lifeStage.includes(wantStage)) s += 15;
+
   // 皮膚與毛髮：omega-3 是有依據的方向，加權放大一點
   if (skin) s += Math.min(10, p.spec.omega3 * 6);
 
@@ -317,6 +334,13 @@ function explain(pick: Product, alive: Product[], situation: Situation): string 
     bits.push(others === 1
       ? `${alive.length} 款裡只有它是單一蛋白源`
       : "單一蛋白源，下次要排查過敏原比較容易");
+  }
+  {
+    const st = stageForAge(situation.ageYears);
+    const want = st === "puppyYoung" || st === "puppy" ? "puppy" : st === "senior" ? "senior" : null;
+    if (want && pick.spec.lifeStage.includes(want)) {
+      bits.push(want === "puppy" ? "幼犬專用配方，不是全齡通用的" : "高齡專用配方，不是全齡通用的");
+    }
   }
   if (situation.avoid.length > 0) {
     bits.push(`避開${situation.avoid.map(zhProtein).join("、")}`);
