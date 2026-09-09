@@ -1,4 +1,5 @@
 import type { ProteinSource } from "./types";
+import type { Situation } from "./types";
 
 /**
  * 程序化決策頁的網址字典。
@@ -125,3 +126,28 @@ export const TYPICAL_KG: Record<"small" | "medium" | "large", number> = {
   medium: 12,
   large: 30,
 };
+
+
+/* ------------------------------------------------------------------ */
+/* 頁面 → 情境                                                        */
+/*                                                                    */
+/* 只能有這一份。                                                      */
+/*                                                                    */
+/* 原本長尾頁和 impact.ts 各抄了一份，兩份都漏了 bodySize ——          */
+/* 於是同一個問題在首頁裁決器和長尾頁會跑出不一樣的結果。             */
+/* 樣式那邊踩過同樣的坑（Decider 有自己的 S 物件），一次就夠了。      */
+/* ------------------------------------------------------------------ */
+
+export function situationOf(p: PageKind): Situation {
+  const breed = p.kind === "allergen" ? undefined : p.breed;
+  const allergen = p.kind === "breed" ? undefined : p.allergen;
+  return {
+    species: "dog",
+    breed: breed?.zh,
+    bodySize: breed?.size,
+    ageYears: 3,               // 頁面預設成犬；使用者要細分就回裁決器
+    avoid: allergen ? [allergen.protein] : [],
+    symptoms: [],
+    constraints: [],
+  };
+}

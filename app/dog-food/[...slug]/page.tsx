@@ -6,7 +6,7 @@ import { S } from "@/components/styles";
 import { adjudicate } from "@/lib/engine";
 import { catalog, constraintsFor } from "@/lib/catalog";
 import {
-  ALLERGENS, BREEDS, TYPICAL_KG, allPaths, descriptionOf, resolve, titleOf,
+  ALLERGENS, BREEDS, TYPICAL_KG, allPaths, descriptionOf, resolve, situationOf, titleOf,
   type PageKind,
 } from "@/lib/slugs";
 import type { Situation } from "@/lib/types";
@@ -15,20 +15,6 @@ export const dynamicParams = false;
 
 export function generateStaticParams() {
   return allPaths().map((slug) => ({ slug }));
-}
-
-/** 把頁面類型翻成引擎吃的情境。 */
-function situationOf(p: PageKind): Situation {
-  const breed = p.kind === "allergen" ? undefined : p.breed;
-  const allergen = p.kind === "breed" ? undefined : p.allergen;
-  return {
-    species: "dog",
-    breed: breed?.zh,
-    ageYears: 3,               // 頁面預設成犬；使用者要細分就回裁決器
-    avoid: allergen ? [allergen.protein] : [],
-    symptoms: [],
-    constraints: [],
-  };
 }
 
 function chipsOf(p: PageKind): { label: string; kind: "info" | "avoid" }[] {

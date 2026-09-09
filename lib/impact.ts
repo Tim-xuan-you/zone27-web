@@ -1,6 +1,6 @@
 import { adjudicate, passes } from "./engine";
 import { catalog, constraintsFor } from "./catalog";
-import { allPaths, resolve, type PageKind } from "./slugs";
+import { allPaths, resolve, situationOf } from "./slugs";
 import type { Product, Situation } from "./types";
 
 /**
@@ -22,19 +22,6 @@ import type { Product, Situation } from "./types";
  * 這個數字讓「今天要處理什麼」從一份清單變成一份**排序過的**清單。
  * 一百款裡真正天天要顧的，通常不到三十款。
  */
-
-function situationOf(p: PageKind): Situation {
-  const breed = p.kind === "allergen" ? undefined : p.breed;
-  const allergen = p.kind === "breed" ? undefined : p.allergen;
-  return {
-    species: "dog",
-    breed: breed?.zh,
-    ageYears: 3,
-    avoid: allergen ? [allergen.protein] : [],
-    symptoms: [],
-    constraints: [],
-  };
-}
 
 export interface Impact {
   /** 當過幾次「買這個」 */
