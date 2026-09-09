@@ -23,7 +23,6 @@
  */
 
 import { existsSync, readFileSync, writeFileSync } from "node:fs";
-import { execFileSync } from "node:child_process";
 import { resolve } from "node:path";
 import { todayTW } from "../lib/date";
 
@@ -79,6 +78,8 @@ interface Row {
   amount: number;
   url: string;
   commission: number;
+  /** 蝦皮的規格名本來就寫成【超商限兩包】，直接沿用那個寫法當備註 */
+  note: string;
   line: number;
 }
 
@@ -96,11 +97,14 @@ function parseLine(raw: string, line: number, carryId: string): Row | { error: s
   const parts = splitLine(raw);
   if (parts.length < 3) return { error: "欄位太少，至少要有賣場、規格、價格、連結" };
 
-  let productId = "", label = "", unit = "", url = "";
+  let productId = "", label = "", unit = "", url = "", note = "";
   let amount: number | null = null, commission: number | null = null;
   const rest: string[] = [];
 
   for (const p of parts) {
+    // 【超商限兩包】這種直接當備註，不要混進賣場名稱
+    const bracket = p.match(/^【(.+)】$/);
+    if (bracket) { note = note ? note + " · " + bracket[1] : bracket[1]; continue; }
     if (!productId && RE_ID.test(p)) { productId = p.toLowerCase(); continue; }
     if (!url && RE_URL.test(p)) { url = p; continue; }
     if (!unit && RE_UNIT.test(p)) { unit = p.replace(/\s+/g, ""); continue; }
@@ -124,12 +128,12 @@ function parseLine(raw: string, line: number, carryId: string): Row | { error: s
   if (!label) return { error: "找不到賣場名稱" };
   if (commission === null) return { error: "找不到佣金（寫 9 或 9% 都可以）" };
 
-  return { productId, label, unit, amount, url, commission, line };
+  return { productId, label, unit, amount, url, commission, note, line };
 }
 
 /* ---------------------------------------------------------------- */
 
-function main() {
+async function main() {
   if (!existsSync(PASTE)) {
     writeFileSync(PASTE, TEMPLATE, "utf8");
     console.log(`\n幫你建好了 data/paste.txt，裡面有格式說明。`);
@@ -212,9 +216,15 @@ function main() {
       r[col(`m${n}Url`)] = m ? m.url : "";
       r[col(`m${n}Commission`)] = m ? String(m.commission) : "";
       r[col(`m${n}Dead`)] = "";
+      // 貼上那一行有寫【】才覆蓋備註；沒寫就保留原本的人工備註
+      if (m && m.note) r[col(`m${n}Note`)] = m.note;
+      else if (!m) r[col(`m${n}Note`)] = "";
       // note 不動 —— 那是人寫的（隔日到貨、超商限兩包），程式不該蓋掉
     }
     if (checkedCol >= 0) r[checkedCol] = today;
+    // 連結來了，就不再是「等連結」的狀態
+    const awaitCol = head.indexOf("awaitingLink");
+    if (awaitCol >= 0) r[awaitCol] = "";
     touched.push(`${id}（${list.length} 家）`);
   }
 
@@ -233,8 +243,13 @@ function main() {
 
   /* ---- 直接接著跑匯入，少一個步驟 ---- */
   console.log(`接著跑匯入 ——\n`);
-  const npx = process.platform === "win32" ? "npx.cmd" : "npx";
-  execFileSync(npx, ["tsx", "scripts/import-csv.ts"], { cwd: ROOT, stdio: "inherit" });
+  // 原本 spawn npx，Windows 上 npx.cmd 叫不起來（ENOENT），
+  // 而 shell:true 會噴 Node 的棄用警告。匯入腳本本來就是 top-level 執行，
+  // 直接 import 進來跑最乾淨。
+  await import("./import-csv");
 }
 
-main();
+main().catch((e) => {
+  console.error(e);
+  process.exit(1);
+});

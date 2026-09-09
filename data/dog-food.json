@@ -2,7 +2,7 @@
   "_meta": {
     "category": "dog-food",
     "note": "由 data/dog-food.csv 產生，不要直接改這個檔。改 CSV 之後跑 npm run data:import。",
-    "generatedAt": "2026-09-09",
+    "generatedAt": "2026-09-10",
     "count": 12,
     "pricePolicy": "人工複查，不爬蟲。checkedAt 誠實顯示於前端。"
   },
@@ -604,12 +604,42 @@
       },
       "price": {
         "unit": "2kg",
-        "checkedAt": "2026-09-09",
-        "merchants": []
+        "checkedAt": "2026-09-10",
+        "merchants": [
+          {
+            "id": "m1",
+            "label": "獅子王寵物（蝦皮優選）",
+            "unit": "2kg",
+            "amount": 1250,
+            "note": "隔日到貨 · 正品保障 · 超商限兩包",
+            "affiliateUrl": "https://s.shopee.tw/6AktDKv9U3",
+            "commission": 9,
+            "anchor": "safe"
+          },
+          {
+            "id": "m2",
+            "label": "獅子王寵物（蝦皮優選）",
+            "unit": "6kg",
+            "amount": 2820,
+            "note": "超商限一包",
+            "affiliateUrl": "https://s.shopee.tw/6AktDKv9U3",
+            "commission": 9,
+            "anchor": "value"
+          },
+          {
+            "id": "m3",
+            "label": "獅子王寵物（蝦皮優選）",
+            "unit": "11.4kg",
+            "amount": 4830,
+            "note": "限宅配 · 開封後要密封防潮",
+            "affiliateUrl": "https://s.shopee.tw/6AktDKv9U3",
+            "commission": 9,
+            "anchor": "value"
+          }
+        ]
       },
       "dealbreaker": "你想避開豆類 — 成分表第 5 項是鷹嘴豆、第 7 項是扁豆",
       "knownIssues": "跟我們收的另一款鴨肉（Natural Balance 馬鈴薯鴨肉）差在碳水來源：這款用鷹嘴豆和扁豆，那款用馬鈴薯。想避開豆類的話選那款。",
-      "awaitingLink": true,
       "searchAs": "ACANA 愛肯拿 單一蛋白 鴨肉 巴特利梨"
     },
     {
