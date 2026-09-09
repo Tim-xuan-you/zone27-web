@@ -33,6 +33,9 @@ export function passes(p: Product, c: Constraint): boolean {
     case "maxCarb":
       return p.spec.carb <= c.value;
     case "maxPhosphorus":
+      // 0 代表我們查不到，不是「不含磷」。查不到就不算通過 ——
+      // 對「獸醫說要控磷」這種問題，不確定要往安全的方向倒。
+      if (!p.spec.phosphorus) return false;
       return p.spec.phosphorus <= c.value;
     case "lifeStage":
       return p.spec.lifeStage.includes(c.value) || p.spec.lifeStage.includes("all");

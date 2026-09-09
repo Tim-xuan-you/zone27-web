@@ -3,7 +3,7 @@
     "category": "dog-food",
     "note": "由 data/dog-food.csv 產生，不要直接改這個檔。改 CSV 之後跑 npm run data:import。",
     "generatedAt": "2026-09-10",
-    "count": 12,
+    "count": 14,
     "pricePolicy": "人工複查，不爬蟲。checkedAt 誠實顯示於前端。"
   },
   "products": [
@@ -711,6 +711,95 @@
       "dealbreaker": "你的狗需要控制體重或磷 — 粗蛋白 38%、脂肪 18%、磷 1.3%，都是這裡最高的",
       "knownIssues": "全魚配方、完全不含禽肉，對雞肉過敏的狗很好用。但它是六種魚不是一種，要拿來排查過敏原的話變因還是多。碳水是我們用 NFE 推估的，纖維與灰分取 Orijen 系列的典型值。",
       "searchAs": "歐睿健 Orijen 六種鮮魚犬 無穀"
+    },
+    {
+      "id": "df-13",
+      "species": "dog",
+      "brand": "ORIJEN 歐睿健（原渴望）",
+      "name": "高齡犬 野牧鮮雞配方",
+      "spec": {
+        "protein": 38,
+        "fat": 15,
+        "carb": 19,
+        "omega3": 0.8,
+        "phosphorus": 0.9,
+        "proteinSources": [
+          "chicken",
+          "turkey",
+          "salmon",
+          "whitefish"
+        ],
+        "singleSource": false,
+        "pulses": "high",
+        "grainFree": true,
+        "lifeStage": [
+          "senior"
+        ],
+        "bodySize": [
+          "small",
+          "medium",
+          "large"
+        ],
+        "prescription": false
+      },
+      "reports": {
+        "total": 0,
+        "palatability": 0,
+        "looseStool": 0
+      },
+      "price": {
+        "unit": "2kg",
+        "checkedAt": "2026-09-10",
+        "merchants": []
+      },
+      "dealbreaker": "你的狗對雞肉過敏 — 成分表第一項就是雞肉，還有火雞、雞肝、脫水雞肉",
+      "knownIssues": "磷 0.9% 是我們目錄裡最低的，但仍然遠高於腎臟處方飼料的 0.2–0.5% —— 獸醫說要控磷的話，這款不算數。台灣的品名是「高齡犬 野牧鮮雞配方」，不是「老犬」。",
+      "awaitingLink": true,
+      "searchAs": "歐睿健 Orijen 高齡犬 野牧鮮雞",
+      "twSource": "https://shop.petpark.com.tw/dryfood/dryfood-age-senior-dog"
+    },
+    {
+      "id": "df-14",
+      "species": "dog",
+      "brand": "Hill's 希爾思",
+      "name": "成犬 7 歲以上 高齡活力 雞肉特調食譜",
+      "spec": {
+        "protein": 22.1,
+        "fat": 14.2,
+        "carb": 46,
+        "omega3": 0,
+        "phosphorus": 0,
+        "proteinSources": [
+          "chicken"
+        ],
+        "singleSource": false,
+        "pulses": "high",
+        "grainFree": false,
+        "lifeStage": [
+          "senior"
+        ],
+        "bodySize": [
+          "small",
+          "medium",
+          "large"
+        ],
+        "prescription": false
+      },
+      "reports": {
+        "total": 0,
+        "palatability": 0,
+        "looseStool": 0
+      },
+      "price": {
+        "unit": "1.58kg",
+        "checkedAt": "2026-09-10",
+        "merchants": []
+      },
+      "dealbreaker": "你的狗對雞肉過敏 — 成分表第一項是雞肉，還有雞肝香料",
+      "knownIssues": "這款是含穀配方（糙米、碎珍珠大麥、全穀粒玉米），但成分表第 6、7 項是黃豌豆和豌豆蛋白 —— 含穀不代表豆類就少。動物性蛋白除了雞肉還有蛋製品，想排查過敏原的話變因不只一個。磷官網沒公布，我們查不到就留白，不猜一個數字填上去。",
+      "awaitingLink": true,
+      "searchAs": "希爾思 Hills 成犬 7歲 高齡活力 雞肉",
+      "twSource": "https://www.hills.com.tw/dog-food/sd-canine-adult-7-plus-senior-vitality-dry"
     }
   ]
 }

@@ -185,7 +185,8 @@ const products = rows.map((row, i) => {
       fat: num(row, "fat", line, { min: 0, max: 100 }),
       carb: num(row, "carb", line, { min: 0, max: 100 }),
       omega3: num(row, "omega3", line, { min: 0, max: 20 }),
-      phosphorus: num(row, "phosphorus", line, { min: 0, max: 10 }),
+      // 0 = 查不到。允許留白，但引擎會把它當成「不通過磷上限」。
+      phosphorus: row.phosphorus ? num(row, "phosphorus", line, { min: 0, max: 10 }) : 0,
       proteinSources: list(row, "proteinSources", line, PROTEINS),
       singleSource: yn(row, "singleSource", line),
       ...(row.pulses ? { pulses: row.pulses as "high" | "none" | "unknown" } : {}),
