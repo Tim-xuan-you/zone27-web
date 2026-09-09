@@ -59,7 +59,9 @@ export default function Page() {
 
   const core = catalog.filter((p) => impact.get(p.id)?.tier === "主力");
   const idle = catalog.filter((p) => impact.get(p.id)?.tier === "目前沒機會");
-  const unbuyable = catalog.filter((p) => !buyable(p) || p.discontinued);
+  const waiting = catalog.filter((p) => p.awaitingLink);
+  // 對照款是故意不賣的，不算「買不到」的問題
+  const unbuyable = catalog.filter((p) => !p.referenceOnly && !p.awaitingLink && (!buyable(p) || p.discontinued));
   const noIssues = catalog.filter((p) => !p.knownIssues?.trim());
   const oldest = Math.max(0, ...rows.map((r) => r.days));
   const cut = overallCutRate();
@@ -209,6 +211,46 @@ export default function Page() {
         )}
       </div>
 
+      {/* ── 採購清單。連結以外的東西都做完了，這一段是唯一需要 Tim 動手的 ── */}
+      <H>等你補連結的（{waiting.length} 款）</H>
+      {waiting.length === 0 ? (
+        <p style={ok}>沒有。選好的都上架了。</p>
+      ) : (
+        <>
+          <p style={{ margin: "0 0 14px", fontSize: 15, color: "var(--muted)", lineHeight: 1.9 }}>
+            規格、成分、文案都寫好了，<b style={{ color: "var(--ink)" }}>只差分潤連結</b>。
+            照下面的關鍵字去蝦皮找賣家，產生連結時把 Sub_id 填上，
+            再把那一行貼進 <code style={code}>data/paste.txt</code>，跑 <code style={code}>npm run data:paste</code>。
+          </p>
+          {waiting.map((p) => (
+            <div key={p.id} style={box}>
+              <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", gap: 12, flexWrap: "wrap" }}>
+                <div>
+                  <span style={{ fontSize: 12.5, color: "var(--muted)", display: "block" }}>{p.brand}</span>
+                  <b style={{ fontSize: 16.5 }}>{p.name}</b>
+                </div>
+                <span className="mono" style={{ fontSize: 13, color: "var(--faint)" }}>{p.id}</span>
+              </div>
+
+              <div style={{ marginTop: 14, paddingTop: 14, borderTop: "1px solid var(--line)" }}>
+                <Line k="去蝦皮搜這個">
+                  <span className="mono" style={{ fontSize: 14 }}>{p.brand} {p.name}</span>
+                </Line>
+                <Line k="產生連結時填">
+                  <span className="mono" style={{ fontSize: 14 }}>
+                    Sub_id 1 = {p.id}　Sub_id 2 = dogfood
+                  </span>
+                </Line>
+                <Line k="挑賣家的優先順序">
+                  官方直營 / 品牌旗艦 &gt; 蝦皮優選 &gt; 一般賣家 —— 官方店的連結活得久很多
+                </Line>
+                <Line k="一款留幾家">一到兩家就好。賣場數量直接等於維護成本</Line>
+              </div>
+            </div>
+          ))}
+        </>
+      )}
+
       <H>整款買不到的</H>
       {unbuyable.length === 0
         ? <p style={ok}>沒有。每一款都至少還有一家能買。</p>
@@ -257,6 +299,15 @@ export default function Page() {
         <Link href="/" style={{ color: "var(--accent)", fontWeight: 700 }}>← 回裁決器</Link>
       </p>
     </main>
+  );
+}
+
+function Line({ k, children }: { k: string; children: React.ReactNode }) {
+  return (
+    <div style={{ display: "flex", gap: 12, flexWrap: "wrap", padding: "5px 0", fontSize: 14, lineHeight: 1.8 }}>
+      <span style={{ color: "var(--faint)", minWidth: "9em", fontSize: 13 }}>{k}</span>
+      <span style={{ flex: 1, minWidth: 200 }}>{children}</span>
+    </div>
   );
 }
 

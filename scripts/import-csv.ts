@@ -163,8 +163,14 @@ const products = rows.map((row, i) => {
   // m1..m4。規則上一款一個規格就好，但賣家把尺寸拆成獨立商品時會用到。
   const merchants = [1, 2, 3, 4].map((n) => merchant(row, n, line)).filter(Boolean);
   const isRef = yn(row, "referenceOnly", line);
-  // 對照款的工作是被刪掉，本來就不需要購買連結
-  if (merchants.length === 0 && !isRef) fail(line, "m1Label", "至少要有一個通路（對照款請把 referenceOnly 填 1）");
+  const isAwait = yn(row, "awaitingLink", line);
+  // 對照款的工作是被刪掉；待補連結的是還沒拿到連結。兩種都可以沒有通路。
+  if (merchants.length === 0 && !isRef && !isAwait) {
+    fail(line, "m1Label", "至少要有一個通路（對照款填 referenceOnly=1，等連結的填 awaitingLink=1）");
+  }
+  if (merchants.length > 0 && isAwait) {
+    fail(line, "awaitingLink", "已經有通路了，把 awaitingLink 清空");
+  }
 
   return {
     id: row.id,
@@ -195,6 +201,7 @@ const products = rows.map((row, i) => {
     ...(row.knownIssues ? { knownIssues: row.knownIssues } : {}),
     ...(yn(row, "discontinued", line) ? { discontinued: true } : {}),
     ...(isRef ? { referenceOnly: true } : {}),
+    ...(isAwait ? { awaitingLink: true } : {}),
   };
 });
 

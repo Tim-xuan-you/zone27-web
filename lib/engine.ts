@@ -74,7 +74,7 @@ export function buyable(p: Product): boolean {
 
 /** 能不能真的推出去。對照款永遠不行 —— 它的工作是被刪掉。 */
 export function recommendable(p: Product): boolean {
-  return !p.referenceOnly && !p.discontinued && buyable(p);
+  return !p.referenceOnly && !p.awaitingLink && !p.discontinued && buyable(p);
 }
 
 export function anchorOf(p: Product, role: "safe" | "value") {
@@ -160,7 +160,7 @@ export function adjudicate(pool: Product[], situation: Situation): Verdict {
   // 買不到的東西不該進裁決 —— 推薦一個點進去是 404 的連結，
   // 比少推薦一款糟糕得多。這一刀在計數之前先砍，
   // 使用者不需要知道我們有幾款連結壞掉。
-  pool = pool.filter((p) => !p.discontinued && (p.referenceOnly || buyable(p)));
+  pool = pool.filter((p) => !p.discontinued && (p.referenceOnly || p.awaitingLink || buyable(p)));
 
   const startCount = pool.length;
   const cuts: Cut[] = [];
@@ -193,7 +193,7 @@ export function adjudicate(pool: Product[], situation: Situation): Verdict {
    * 撐到這裡的，代表以這一頁的條件來看它其實合格 —— 那就更該說實話：
    * 合格但我們沒有查證過的購買通路，所以不推。
    */
-  const refs = alive.filter((p) => p.referenceOnly || !buyable(p));
+  const refs = alive.filter((p) => p.referenceOnly || p.awaitingLink || !buyable(p));
   if (refs.length > 0) {
     cuts.push({
       count: refs.length,
