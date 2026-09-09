@@ -811,11 +811,20 @@
       "price": {
         "unit": "1.58kg",
         "checkedAt": "2026-09-10",
-        "merchants": []
+        "merchants": [
+          {
+            "id": "m1",
+            "label": "白喵小舖",
+            "unit": "1.58kg",
+            "amount": 749,
+            "note": "較長備貨 2~3 工作日 · 賣場有折價券可折抵",
+            "affiliateUrl": "https://s.shopee.tw/4qFVkMrBuD",
+            "anchor": "safe"
+          }
+        ]
       },
       "dealbreaker": "你的狗對雞肉過敏 — 成分表第一項是雞肉，還有雞肝香料",
       "knownIssues": "這款是含穀配方（糙米、碎珍珠大麥、全穀粒玉米），但成分表第 6、7 項是黃豌豆和豌豆蛋白 —— 含穀不代表豆類就少。動物性蛋白除了雞肉還有蛋製品，想排查過敏原的話變因不只一個。磷官網沒公布，我們查不到就留白，不猜一個數字填上去。",
-      "awaitingLink": true,
       "searchAs": "希爾思 Hills 成犬 7歲 高齡活力 雞肉",
       "twSource": "https://www.hills.com.tw/dog-food/sd-canine-adult-7-plus-senior-vitality-dry"
     }
