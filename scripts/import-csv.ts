@@ -108,6 +108,19 @@ function list(row: Row, key: string, line: number, allowed: string[]): string[] 
   return items;
 }
 
+/** 規格字串換算成公斤。跟 lib/engine 的 kgOf 同一套規則，這裡只需要數字。 */
+function kgOfUnit(unit: string): number | null {
+  const m = unit.match(/([\d.]+)\s*(kg|公斤|g|公克|磅|lb|lbs|oz)/i);
+  if (!m) return null;
+  const n = parseFloat(m[1]);
+  const u = m[2].toLowerCase();
+  if (u === "kg" || u === "公斤") return n;
+  if (u === "g" || u === "公克") return n / 1000;
+  if (u === "磅" || u === "lb" || u === "lbs") return n * 0.4536;
+  if (u === "oz") return n * 0.02835;
+  return null;
+}
+
 function merchant(row: Row, n: number, line: number) {
   const p = `m${n}`;
   if (!row[`${p}Label`]) return null;
@@ -179,6 +192,32 @@ const products = rows.map((row, i) => {
     if (!label) continue;
     if (/送|贈|加贈|買一送/.test(blob)) {
       fail(line, `m${n}Unit`, "這個賣場搭贈品（出現「送」或「贈」）。價格裡包著別的東西，每公斤就算不準了 —— 換一家乾淨定價的");
+    }
+  }
+
+  /* 每公斤價格離譜 = 規格或價格打錯。
+     大包比小包便宜是正常的，但正常的量販折扣落在一到四成 ——
+     便宜超過六成，多半是公斤數少打一位數或多打一位數。 */
+  {
+    const sized: { unit: string; per: number }[] = [];
+    for (let n = 1; n <= 4; n++) {
+      const label = row[`m${n}Label`];
+      if (!label) continue;
+      const unit = row[`m${n}Unit`] || row.unit || "";
+      const amount = Number(row[`m${n}Amount`] ?? 0);
+      const kg = kgOfUnit(unit);
+      if (!kg || !amount) continue;
+      sized.push({ unit, per: amount / kg });
+    }
+    if (sized.length > 1) {
+      const hi = Math.max(...sized.map((x) => x.per));
+      for (const x of sized) {
+        if (x.per < hi * 0.4) {
+          fail(line, "mNAmount",
+            `「${x.unit}」換算下來每公斤 ${Math.round(x.per)} 元，比同一款最貴的規格便宜超過六成 —— ` +
+            `正常的量販折扣是一到四成。多半是公斤數或價格打錯（例如 1.8kg 打成 18kg），先回去對一次`);
+        }
+      }
     }
   }
 

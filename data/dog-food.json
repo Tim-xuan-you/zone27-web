@@ -863,11 +863,20 @@
       "price": {
         "unit": "1.8kg",
         "checkedAt": "2026-09-10",
-        "merchants": []
+        "merchants": [
+          {
+            "id": "m1",
+            "label": "圓肚精靈家族（蝦皮優選）",
+            "unit": "4.5kg",
+            "amount": 2890,
+            "note": "免運無限次 · 14:00 前下單隔日到",
+            "affiliateUrl": "https://s.shopee.tw/gPwnps778",
+            "anchor": "safe"
+          }
+        ]
       },
       "dealbreaker": "你的狗不是小型犬 — 這是小型犬專用配方，顆粒和熱量密度都是照小型犬調的",
       "knownIssues": "小型犬專用的意義在顆粒大小和熱量密度，不是配方比較高級。中大型犬吃它不會怎樣，只是沒必要 —— 同樣的錢買全齡款可以買比較大包。",
-      "awaitingLink": true,
       "searchAs": "歐睿健 Orijen 小型成犬 11種鮮雞魚",
       "twSource": "https://petpetgo.com/category/dryfood_Orijen_DOG"
     }
