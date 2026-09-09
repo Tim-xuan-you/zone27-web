@@ -63,6 +63,19 @@ export default function Page() {
   const core = catalog.filter((p) => impact.get(p.id)?.tier === "主力");
   const idle = catalog.filter((p) => impact.get(p.id)?.tier === "目前沒機會");
   const waiting = catalog.filter((p) => p.awaitingLink);
+
+  /* 同一個品牌我們已經在哪幾家買過。
+     回去同一家找，通常比重新搜一次快 —— 那家有整條產品線的機率很高。
+     賣家越集中，維護成本也越低。 */
+  const sellersOfBrand = (brand: string) => {
+    const key = brand.split(/[（(]/)[0].trim();
+    const found = new Set<string>();
+    for (const p of catalog) {
+      if (!p.brand.startsWith(key)) continue;
+      for (const m of p.price.merchants) if (!m.dead) found.add(m.label);
+    }
+    return [...found];
+  };
   // 對照款是故意不賣的，不算「買不到」的問題
   const unbuyable = catalog.filter((p) => !p.referenceOnly && !p.awaitingLink && (!buyable(p) || p.discontinued));
   const noIssues = catalog.filter((p) => !p.knownIssues?.trim());
@@ -247,6 +260,14 @@ export default function Page() {
                     蝦皮這個欄位只收英數字，連字號會被擋 —— 所以是 {shopeeSubId(p.id)} 不是 {p.id}
                   </span>
                 </Line>
+                {sellersOfBrand(p.brand).length > 0 && (
+                  <Line k="這個牌子買過的家">
+                    <b>{sellersOfBrand(p.brand).join("、")}</b>
+                    <span style={{ display: "block", fontSize: 12.5, color: "var(--faint)", marginTop: 4 }}>
+                      回這幾家找通常最快 —— 有整條產品線的機率很高，而且賣家越集中維護越省
+                    </span>
+                  </Line>
+                )}
                 <Line k="挑賣家的優先順序">
                   官方直營 / 品牌旗艦 &gt; 蝦皮優選 &gt; 一般賣家 —— 官方店的連結活得久很多
                 </Line>

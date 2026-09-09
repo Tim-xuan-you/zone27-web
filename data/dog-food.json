@@ -474,8 +474,8 @@
     {
       "id": "df-09",
       "species": "dog",
-      "brand": "ORIJEN 渴望",
-      "name": "幼犬",
+      "brand": "ORIJEN 歐睿健（原渴望）",
+      "name": "無穀幼犬 牧野鮮雞",
       "spec": {
         "protein": 38,
         "fat": 20,
@@ -513,12 +513,12 @@
       "dealbreaker": "你的狗已經成年 — 這是幼犬配方，蛋白 38%、脂肪 20%，成犬長期吃容易過重",
       "knownIssues": "雞、火雞、比目魚、鯖魚、蛋都有，蛋白質來源很雜 —— 對排查過敏原的幼犬不適合。",
       "awaitingLink": true,
-      "searchAs": "渴望 ORIJEN 幼犬 狗飼料"
+      "searchAs": "歐睿健 Orijen 無穀幼犬 牧野鮮雞"
     },
     {
       "id": "df-10",
       "species": "dog",
-      "brand": "ORIJEN 渴望",
+      "brand": "ORIJEN 歐睿健（原渴望）",
       "name": "大型幼犬",
       "spec": {
         "protein": 38,
@@ -628,8 +628,8 @@
     {
       "id": "df-12",
       "species": "dog",
-      "brand": "ORIJEN 渴望",
-      "name": "無穀六種魚 成犬",
+      "brand": "ORIJEN 歐睿健（原渴望）",
+      "name": "無穀六種鮮魚犬 成犬",
       "spec": {
         "protein": 38,
         "fat": 18,
@@ -692,13 +692,13 @@
       },
       "dealbreaker": "你的狗需要控制體重或磷 — 粗蛋白 38%、脂肪 18%、磷 1.3%，都是這裡最高的",
       "knownIssues": "全魚配方、完全不含禽肉，對雞肉過敏的狗很好用。但它是六種魚不是一種，要拿來排查過敏原的話變因還是多。碳水是我們用 NFE 推估的，纖維與灰分取 Orijen 系列的典型值。",
-      "searchAs": "渴望 ORIJEN 無穀 六種魚 成犬 狗"
+      "searchAs": "歐睿健 Orijen 六種鮮魚犬 無穀"
     },
     {
       "id": "df-13",
       "species": "dog",
-      "brand": "ORIJEN 渴望",
-      "name": "高齡犬",
+      "brand": "ORIJEN 歐睿健（原渴望）",
+      "name": "無穀老犬",
       "spec": {
         "protein": 38,
         "fat": 15,
@@ -737,7 +737,7 @@
       "dealbreaker": "你的狗對雞肉過敏 — 成分表第一項就是雞肉，還有火雞、雞肝、脫水雞肉",
       "knownIssues": "磷 0.9% 是我們目錄裡最低的，但那仍然遠高於腎臟處方飼料的 0.2–0.5%。獸醫說要控磷的話，這款不算數。台灣通路多半寫「老犬」不寫「高齡」。",
       "awaitingLink": true,
-      "searchAs": "渴望 ORIJEN 高齡 老犬 狗飼料"
+      "searchAs": "歐睿健 Orijen 老犬 無穀"
     }
   ]
 }
