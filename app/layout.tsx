@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     template: "%s · ZONE 27",
   },
   description:
-    "你把狗的狀況講完，我們先幫你刪掉不適合的，剩下的才給你看。排序不看佣金，方法公開。",
+    "你把狗的狀況講完，我們先幫你刪掉不適合的，剩下的才給你看。每一款都寫清楚什麼時候不要買。",
   openGraph: { type: "website", locale: "zh_TW", siteName: "ZONE 27" },
   robots: { index: true, follow: true },
 };

@@ -107,9 +107,9 @@ export function titleOf(p: PageKind): string {
 export function descriptionOf(p: PageKind, kept: number, cut: number): string {
   switch (p.kind) {
     case "breed":
-      return `我們從資料庫裡刪掉 ${cut} 款不適合${p.breed.zh}的飼料，剩下 ${kept} 款，並寫清楚每一款的排除理由。排序不看佣金。`;
+      return `我們從資料庫裡刪掉 ${cut} 款不適合${p.breed.zh}的飼料，剩下 ${kept} 款，並寫清楚每一款的排除理由，以及什麼時候不要買。`;
     case "allergen":
-      return `避開${p.allergen.zh}的狗飼料。刪掉 ${cut} 款含${p.allergen.zh}或營養不達標的，剩下 ${kept} 款。每款都標了「不要買，如果⋯」。`;
+      return `避開${p.allergen.zh}的狗飼料。刪掉 ${cut} 款含${p.allergen.zh}或營養不達標的，剩下 ${kept} 款。每款都寫清楚什麼時候不要買。`;
     case "both":
       return `${p.breed.zh}對${p.allergen.zh}過敏該吃什麼？刪掉 ${cut} 款，剩下 ${kept} 款，附排除理由與購買時機建議。`;
   }

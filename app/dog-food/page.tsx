@@ -6,7 +6,7 @@ import { ALLERGENS, BREEDS } from "@/lib/slugs";
 export const metadata: Metadata = {
   title: "狗飼料怎麼選",
   description:
-    "依品種和過敏原，我們先幫你刪掉不適合的，剩下的才給你看。每一款都寫了「不要買，如果⋯」，排序不看佣金。",
+    "依品種和過敏原，我們先幫你刪掉不適合的，剩下的才給你看。每一款都寫清楚什麼時候不要買。",
   alternates: { canonical: "/dog-food" },
 };
 
