@@ -67,6 +67,36 @@ export const S: Record<string, CSSProperties> = {
     borderRadius: 999, padding: "6px 14px", fontSize: T.sm, fontWeight: 500,
   },
 
+  /* ---------- 不回答 ----------
+     刻意做得比商品卡更大、更空。這是整頁最重要的一句話。 */
+  stopBox: {
+    background: "var(--surface)", border: "2px solid var(--cut)",
+    borderRadius: 14, boxShadow: "var(--sh)",
+    padding: `${G.xl}px ${G.xl}px ${G.lg}px`,
+  },
+  stopMark: {
+    margin: 0, color: "var(--cut)", fontSize: T.lg, fontWeight: 700, lineHeight: 1,
+  },
+  stopTitle: {
+    fontFamily: "var(--font-serif), serif",
+    fontSize: 22, lineHeight: 1.5, margin: `${G.sm}px 0 ${G.md}px`,
+  },
+  stopBody: { margin: 0, fontSize: T.md, lineHeight: 1.95 },
+  stopNext: {
+    margin: `${G.md}px 0 0`, fontSize: T.md, lineHeight: 1.95, color: "var(--muted)",
+  },
+  stopActions: {
+    display: "flex", flexWrap: "wrap", gap: G.sm, marginTop: G.lg,
+    paddingTop: G.lg, borderTop: "1px solid var(--line)",
+  },
+
+  /* 有商品可推，但有前提要先講 */
+  noticeBar: {
+    background: "var(--warn-soft)", border: "1px solid var(--warn)",
+    borderRadius: 10, padding: `${G.md}px ${G.lg}px`,
+    fontSize: T.sm, lineHeight: 1.85, margin: `0 0 ${G.lg}px`,
+  },
+
   /* ---------- 裁決過程 ---------- */
   cascade: {
     background: "var(--surface)", border: "1px solid var(--line)",

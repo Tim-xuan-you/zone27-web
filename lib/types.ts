@@ -180,6 +180,24 @@ export interface Cut {
   ids: string[];
 }
 
+/**
+ * 硬停止：這一題我們不該賣你東西。
+ *
+ * 跟「條件太嚴格，沒有一款符合」不一樣 —— 那是選品不夠，
+ * 這是**我們不該回答**。物種不對、或獸醫已經給了醫療條件而我們手上
+ * 沒有一款符合，硬推一個就是拿別人的動物去換佣金。
+ *
+ * stop 一設，畫面上就不出現任何商品卡片。不是收起來，是不顯示。
+ */
+export interface Stop {
+  kind: "species" | "renal";
+  title: string;
+  /** 為什麼我們不回答，要講得出根據 */
+  body: string;
+  /** 那他現在該做什麼 */
+  next: string;
+}
+
 export interface Verdict {
   /** 進入裁決的總數 */
   startCount: number;
@@ -190,4 +208,8 @@ export interface Verdict {
   pick: Product | null;
   /** 為什麼是它 —— 一句話，給人看的 */
   pickReason: string;
+  /** 有值就代表這一題我們不回答，畫面上不出現商品 */
+  stop?: Stop;
+  /** 有商品可推，但有一句話一定要先講（例如腎臟要跟著獸醫走） */
+  notice?: string;
 }

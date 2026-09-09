@@ -1,5 +1,5 @@
 import type {
-  Constraint, Cut, Merchant, Product, ProteinSource, Situation, Verdict,
+  Constraint, Cut, Merchant, Product, ProteinSource, Situation, Stop, Verdict,
 } from "./types";
 import { daysBetween, todayTW } from "./date";
 
@@ -87,7 +87,64 @@ export function anchorOf(p: Product, role: "safe" | "value") {
  * 約束按傳入順序套用 —— 順序會直接變成畫面上「怎麼刪的」那一段，
  * 所以呼叫端要把最重要、最切身的規則放前面（通常是過敏原）。
  */
+/**
+ * 貓不能吃狗飼料。
+ *
+ * 這不是保守，是生理事實：貓沒辦法自己合成足夠的牛磺酸，
+ * 狗飼料裡的含量對貓不夠，長期缺乏會造成擴張性心肌病與視網膜退化。
+ *
+ * 所以物種不符不是「刪掉幾款」，是整題不回答 ——
+ * 一個導購站把狗飼料推給貓主人，那不是資料不足，那是造成傷害。
+ */
+const SPECIES_ZH = { dog: "狗", cat: "貓" } as const;
+
+function speciesStop(want: Situation["species"]): Stop {
+  return {
+    kind: "species",
+    title: `我們現在只有${SPECIES_ZH[want === "cat" ? "dog" : "cat"]}飼料`,
+    body:
+      want === "cat"
+        ? "而且千萬不要拿狗飼料餵貓。貓沒辦法自己合成足夠的牛磺酸，狗飼料裡的量對貓不夠 —— 長期缺牛磺酸會傷心臟和視力。這不是我們保守，是貓跟狗的營養需求本來就不一樣。"
+        : "狗跟貓的需求不一樣，我們不會把貓飼料推給狗。",
+    next: `${SPECIES_ZH[want]}的部分我們還在做。在那之前這一題我們幫不上你，抱歉。`,
+  };
+}
+
+/**
+ * 腎臟：獸醫已經給了條件，而我們手上沒有一款符合。
+ *
+ * 市售腎臟處方飼料的磷大多在 0.2–0.5%（乾物基），早期腎病一般建議
+ * 不超過 0.6%；一般成犬糧本來就是 1–2%。我們現在收的十款都在 1.1–1.2%。
+ *
+ * 這種情況硬推最接近的那一款，是最糟的選擇 —— 它一樣不符合，
+ * 而飼主會以為問題解決了。
+ */
+function renalStop(): Stop {
+  return {
+    kind: "renal",
+    title: "腎指數的飼料要跟著獸醫走，不是我們該賣的",
+    body:
+      "市售腎臟處方飼料的磷大多在 0.2–0.5%，早期腎病一般建議不超過 0.6%。" +
+      "我們手上這幾款的磷都在 1.1–1.2% —— 一般成犬糧本來就是 1–2%，" +
+      "沒有一款符合你獸醫說的控磷。",
+    next: "處方飼料要獸醫開，我們不賣也不推。把獸醫給的磷上限問清楚，照那個數字挑。",
+  };
+}
+
+const RENAL_NOTICE =
+  "腎臟的飲食要跟著獸醫的指示走。下面是符合磷上限的選項，但獸醫給的數字才算。";
+
 export function adjudicate(pool: Product[], situation: Situation): Verdict {
+  // 物種不符 → 整題不回答。這一刀在所有事情之前。
+  const sameSpecies = pool.filter((p) => p.species === situation.species);
+  if (sameSpecies.length === 0) {
+    return {
+      startCount: 0, cuts: [], survivors: [], pick: null, pickReason: "",
+      stop: speciesStop(situation.species),
+    };
+  }
+  pool = sameSpecies;
+
   // 買不到的東西不該進裁決 —— 推薦一個點進去是 404 的連結，
   // 比少推薦一款糟糕得多。這一刀在計數之前先砍，
   // 使用者不需要知道我們有幾款連結壞掉。
@@ -135,9 +192,17 @@ export function adjudicate(pool: Product[], situation: Situation): Verdict {
     alive = alive.filter((p) => !refs.includes(p));
   }
 
+  const renal = situation.symptoms.some((s) => s.includes("腎"));
+  if (renal && alive.length === 0) {
+    return { startCount, cuts, survivors: [], pick: null, pickReason: "", stop: renalStop() };
+  }
+
   const { pick, reason } = choose(alive, situation);
 
-  return { startCount, cuts, survivors: alive, pick, pickReason: reason };
+  return {
+    startCount, cuts, survivors: alive, pick, pickReason: reason,
+    ...(renal ? { notice: RENAL_NOTICE } : {}),
+  };
 }
 
 /**

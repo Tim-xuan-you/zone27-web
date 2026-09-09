@@ -70,6 +70,26 @@ export function constraintsFor(s: Situation): Constraint[] {
     tag: "營養門檻",
   });
 
+  /*
+   * 控磷。
+   *
+   * 這一條原本漏掉了 —— 使用者打「獸醫說要控磷」，畫面上出現「腎臟」的
+   * chip，看起來我們聽懂了，但完全沒有任何規則在跑。
+   * 那比沒聽懂糟糕得多：他以為我們考慮過了。
+   *
+   * 門檻取 0.6%（乾物基）。市售腎臟處方飼料多在 0.2–0.5%，
+   * 早期腎病一般建議不超過 0.6%，一般成犬糧本來就是 1–2%。
+   * 這不是診斷 —— 獸醫給的數字才算，畫面上會這樣寫。
+   */
+  if (s.symptoms.some((x) => x.includes("腎"))) {
+    cs.push({
+      kind: "maxPhosphorus",
+      value: 0.6,
+      label: "磷高於 0.6%",
+      tag: "獸醫指示",
+    });
+  }
+
   if (s.budgetMonthly !== undefined) {
     cs.push({
       kind: "maxMonthly",

@@ -56,7 +56,9 @@ export default function Result({
         ))}
       </div>
 
-      {verdict.survivors.length === 0 ? (
+      {verdict.stop ? (
+        <StopBox stop={verdict.stop} />
+      ) : verdict.survivors.length === 0 ? (
         <>
           <Cascade verdict={verdict} />
           <div style={S.emptyBox}>
@@ -68,6 +70,10 @@ export default function Result({
         </>
       ) : (
         <>
+          {verdict.notice && (
+            <p style={S.noticeBar}>{verdict.notice}</p>
+          )}
+
           {/* ── 一個答案，最上面 ── */}
           {verdict.pick && (
             <>
@@ -121,6 +127,31 @@ export default function Result({
         <Link style={S.btn} href="/">回裁決器</Link>
       </div>
     </>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/* 不回答                                                              */
+/*                                                                    */
+/* 這一塊出現的時候，畫面上不會有任何商品。                            */
+/*                                                                    */
+/* 一個導購站主動說「這題我不該賣你東西」，看起來像放棄一筆生意，     */
+/* 但那正是整個站唯一真正值錢的東西。願意在這裡收手的人，             */
+/* 講其他話才有人信。                                                  */
+/* ------------------------------------------------------------------ */
+
+function StopBox({ stop }: { stop: NonNullable<Verdict["stop"]> }) {
+  return (
+    <div style={S.stopBox}>
+      <p style={S.stopMark}>✕</p>
+      <h2 style={S.stopTitle}>{stop.title}</h2>
+      <p style={S.stopBody}>{stop.body}</p>
+      <p style={S.stopNext}>{stop.next}</p>
+      <div style={S.stopActions}>
+        <Link style={S.btnSmall} href="/dog-food">看我們有的狗飼料</Link>
+        <Link style={S.btnSmall} href="/ask">哪個問題該問誰</Link>
+      </div>
+    </div>
   );
 }
 
