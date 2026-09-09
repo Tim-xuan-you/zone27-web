@@ -823,3 +823,25 @@ export function maintenanceRows(pool: Product[], today = todayTW()): Maintenance
   const rank = { dead: 0, stale: 1, aging: 2, fresh: 3 } as const;
   return rows.sort((a, b) => rank[a.level] - rank[b.level] || b.days - a.days);
 }
+
+
+/* ------------------------------------------------------------------ */
+/* 蝦皮 Sub id                                                         */
+/*                                                                    */
+/* 蝦皮的辨識參數欄位只收 A-Z 與 0-9，最多 50 字 —— **連字號會被擋**。 */
+/* 我們的商品編號是 df-11 這種格式，直接貼過去會跳錯誤。               */
+/*                                                                    */
+/* 所以轉換規則寫成函式，不要靠人記得手動改：                          */
+/*   df-11 → DF11                                                      */
+/*                                                                    */
+/* 用大寫是因為蝦皮的提示寫「A-Z, 0-9」—— 小寫可能也行，              */
+/* 但沒必要為了好看去賭一個會讓人卡住的欄位。                          */
+/* ------------------------------------------------------------------ */
+
+/** 商品編號 → 蝦皮 Sub id。只留英數字並轉大寫。 */
+export function shopeeSubId(productId: string): string {
+  return productId.replace(/[^A-Za-z0-9]/g, "").toUpperCase().slice(0, 50);
+}
+
+/** 類目 Sub id，固定第二格。未來做出國、銀髮才分得開。 */
+export const CATEGORY_SUB_ID = "dogfood";

@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { catalog } from "@/lib/catalog";
-import { buyable, maintenanceRows, PRICE_FRESH_DAYS, PRICE_STALE_DAYS } from "@/lib/engine";
+import {
+  buyable, maintenanceRows, shopeeSubId, CATEGORY_SUB_ID,
+  PRICE_FRESH_DAYS, PRICE_STALE_DAYS,
+} from "@/lib/engine";
 import { impactMap, overallCutRate, ruleAudit, TIER_WEIGHT, type Impact } from "@/lib/impact";
 
 /**
@@ -238,7 +241,10 @@ export default function Page() {
                 </Line>
                 <Line k="產生連結時填">
                   <span className="mono" style={{ fontSize: 14 }}>
-                    Sub_id 1 = {p.id}　Sub_id 2 = dogfood
+                    Sub id 1 = <b>{shopeeSubId(p.id)}</b>　Sub id 2 = <b>{CATEGORY_SUB_ID}</b>
+                  </span>
+                  <span style={{ display: "block", fontSize: 12.5, color: "var(--faint)", marginTop: 4 }}>
+                    蝦皮這個欄位只收英數字，連字號會被擋 —— 所以是 {shopeeSubId(p.id)} 不是 {p.id}
                   </span>
                 </Line>
                 <Line k="挑賣家的優先順序">
