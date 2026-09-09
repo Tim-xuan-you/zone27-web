@@ -154,6 +154,26 @@ export default async function Page({ params }: { params: Promise<{ slug: string[
         symptoms={p.kind === "breed" ? undefined : ["皮膚搔癢"]}
       />
 
+      {p.kind === "both" && !verdict.cuts.some((c) => c.tag === "體型不符") && verdict.survivors.length > 0 && (
+        <>
+          <p style={S.lbl}>品種在這一題有沒有影響</p>
+          <div style={{
+            background: "var(--sunken)", border: "1px solid var(--line)",
+            borderRadius: 14, padding: "18px 22px",
+          }}>
+            <p style={{ margin: 0, fontSize: 15.5, lineHeight: 1.95 }}>
+              老實說：<b>沒有。</b>{p.breed.zh}這個條件沒有刪掉任何一款 ——
+              以「避{p.allergen.zh}」來說，{p.breed.zh}跟其他品種的選擇是一樣的。
+            </p>
+            <p style={{ margin: "12px 0 0", fontSize: 15, color: "var(--muted)", lineHeight: 1.9 }}>
+              品種真正會影響的是<b>吃多少</b>和<b>該買哪個包裝</b>，那個下面算給你看。
+              只有體型專用配方（小型犬專用、大型犬專用）才會因為品種被刪掉，
+              而符合你這次條件的款裡剛好沒有。
+            </p>
+          </div>
+        </>
+      )}
+
       {/* 只屬於這個品種的數字。程序化頁面如果只差一個品種名，
           那在 Google 眼中就是 doorway page —— 每一頁至少要帶一組
           自己算出來、別頁沒有的真實資訊。 */}

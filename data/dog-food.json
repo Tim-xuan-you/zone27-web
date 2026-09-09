@@ -3,7 +3,7 @@
     "category": "dog-food",
     "note": "由 data/dog-food.csv 產生，不要直接改這個檔。改 CSV 之後跑 npm run data:import。",
     "generatedAt": "2026-09-10",
-    "count": 14,
+    "count": 15,
     "pricePolicy": "人工複查，不爬蟲。checkedAt 誠實顯示於前端。"
   },
   "products": [
@@ -827,6 +827,49 @@
       "knownIssues": "這款是含穀配方（糙米、碎珍珠大麥、全穀粒玉米），但成分表第 6、7 項是黃豌豆和豌豆蛋白 —— 含穀不代表豆類就少。動物性蛋白除了雞肉還有蛋製品，想排查過敏原的話變因不只一個。磷官網沒公布，我們查不到就留白，不猜一個數字填上去。",
       "searchAs": "希爾思 Hills 成犬 7歲 高齡活力 雞肉",
       "twSource": "https://www.hills.com.tw/dog-food/sd-canine-adult-7-plus-senior-vitality-dry"
+    },
+    {
+      "id": "df-15",
+      "species": "dog",
+      "brand": "ORIJEN 歐睿健（原渴望）",
+      "name": "小型成犬 11 種鮮雞魚",
+      "spec": {
+        "protein": 38,
+        "fat": 18,
+        "carb": 20,
+        "omega3": 1,
+        "phosphorus": 1,
+        "proteinSources": [
+          "chicken",
+          "turkey",
+          "whitefish"
+        ],
+        "singleSource": false,
+        "pulses": "high",
+        "grainFree": true,
+        "lifeStage": [
+          "adult"
+        ],
+        "bodySize": [
+          "small"
+        ],
+        "prescription": false
+      },
+      "reports": {
+        "total": 0,
+        "palatability": 0,
+        "looseStool": 0
+      },
+      "price": {
+        "unit": "1.8kg",
+        "checkedAt": "2026-09-10",
+        "merchants": []
+      },
+      "dealbreaker": "你的狗不是小型犬 — 這是小型犬專用配方，顆粒和熱量密度都是照小型犬調的",
+      "knownIssues": "小型犬專用的意義在顆粒大小和熱量密度，不是配方比較高級。中大型犬吃它不會怎樣，只是沒必要 —— 同樣的錢買全齡款可以買比較大包。",
+      "awaitingLink": true,
+      "searchAs": "歐睿健 Orijen 小型成犬 11種鮮雞魚",
+      "twSource": "https://petpetgo.com/category/dryfood_Orijen_DOG"
     }
   ]
 }
