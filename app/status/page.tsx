@@ -279,6 +279,18 @@ export default function Page() {
                     </span>
                   </Line>
                 )}
+                <Line k="標題要對得上">
+                  賣場<b>標題</b>裡的商品，要跟我們寫的是同一款
+                  <span style={{ display: "block", fontSize: 12.5, color: "var(--faint)", marginTop: 4 }}>
+                    只有內文和圖片對不算 —— 蝦皮上標題才是契約描述，退換爭議照標題走
+                  </span>
+                </Line>
+                <Line k="不能有這些字">
+                  <b>送、贈、買一送</b>
+                  <span style={{ display: "block", fontSize: 12.5, color: "var(--faint)", marginTop: 4 }}>
+                    價格裡包著贈品，我們的「每公斤省 X%」就算不準了
+                  </span>
+                </Line>
                 <Line k="挑賣家的優先順序">
                   官方直營 / 品牌旗艦 &gt; 蝦皮優選 &gt; 一般賣家 —— 官方店的連結活得久很多
                 </Line>
