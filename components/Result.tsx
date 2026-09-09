@@ -56,6 +56,15 @@ export default function Result({
         ))}
       </div>
 
+      {/* 讀到了但幫不上的，講出來。靜靜吞掉會讓人以為我們考慮過了。 */}
+      {verdict.unusedSignals && verdict.unusedSignals.length > 0 && (
+        <ul style={S.unusedList}>
+          {verdict.unusedSignals.map((t, i) => (
+            <li key={i} style={S.unusedItem}>{t}</li>
+          ))}
+        </ul>
+      )}
+
       {verdict.stop ? (
         <StopBox stop={verdict.stop} />
       ) : verdict.survivors.length === 0 ? (

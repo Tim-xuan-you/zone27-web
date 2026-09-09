@@ -10,6 +10,8 @@ const CASES = [
   "我家柴犬 5 歲，最近一直抓癢，換過兩種雞肉飼料都沒改善",
   "米克斯 10 歲，腎指數偏高，獸醫說要控磷",
   "拉不拉多，吃了雞肉就會癢，也不能吃羊",
+  "貴賓 3 歲，很挑食，一直有淚痕",
+  "柯基快 8 歲了，有點胖，最近一直軟便",
 ];
 
 let fail = 0;
@@ -33,9 +35,11 @@ for (const text of CASES) {
     console.error(`  ❌ 嚴重：貓的問題推了 ${v.pick.species} 的商品`);
     fail++;
   }
-  // 鐵律：控磷的問題，推出來的東西磷一定要達標
-  if (r.situation.symptoms.some((s) => s.includes("腎")) && v.pick && v.pick.spec.phosphorus > 0.6) {
-    console.error(`  ❌ 嚴重：控磷卻推了磷 ${v.pick.spec.phosphorus}% 的商品`);
+  // 鐵律：腎臟的問題一律不推商品。
+  // 我們的磷是從公開資料整理的估值，不是廠商保證值 ——
+  // 拿估出來的邊界值回答腎臟問題，是拿別人的狗去冒險。
+  if (r.situation.symptoms.some((s) => s.includes("腎")) && v.pick) {
+    console.error(`  ❌ 嚴重：腎臟問題卻推了 ${v.pick.brand}（磷 ${v.pick.spec.phosphorus}%）`);
     fail++;
   }
 }

@@ -1,4 +1,4 @@
-import { adjudicate } from "./engine";
+import { adjudicate, passes } from "./engine";
 import { catalog, constraintsFor } from "./catalog";
 import { allPaths, resolve, type PageKind } from "./slugs";
 import type { Product, Situation } from "./types";
@@ -250,49 +250,46 @@ export interface RuleRow {
   need: string;
 }
 
+/**
+ * 每條規則在現有選品裡刪得掉幾款。
+ *
+ * 舊版是一張手寫的陣列 —— 結果它列了「體型不符」這條，
+ * 而裁決器當時根本沒有實作那條規則。**一張會說謊的稽核表比沒有更糟。**
+ *
+ * 現在改成從 constraintsFor() 產生：先組一個會觸發所有規則的情境
+ * （小型成犬、避雞、腎臟、有預算），拿到真正的規則清單，再一條一條
+ * 去數它刪得掉幾款。規則沒實作，這張表就不會有那一行。
+ */
 export function ruleAudit(pool: Product[] = catalog): RuleRow[] {
-  const n = (f: (p: Product) => boolean) => pool.filter(f).length;
+  const probe: Situation = {
+    species: "dog",
+    breed: "柴犬",
+    bodySize: "small",
+    ageYears: 3,
+    avoid: ["chicken"],
+    symptoms: ["腎臟"],
+    budgetMonthly: 3000,
+    constraints: [],
+  };
+  probe.constraints = constraintsFor(probe);
 
-  return [
-    {
-      rule: "主蛋白源含雞肉",
-      catches: n((p) => p.spec.proteinSources.includes("chicken")),
-      need: "主流雞肉配方（低敏族群最常誤買的那種）",
-    },
-    {
-      rule: "不是單一蛋白源",
-      catches: n((p) => !p.spec.singleSource),
-      need: "多種肉混合的綜合配方",
-    },
-    {
-      rule: "不適用幼犬",
-      catches: n((p) => !p.spec.lifeStage.some((s) => s === "all" || s === "puppy")),
-      need: "成犬專用配方（現在幾乎都標 all，幼犬那一刀砍不到東西）",
-    },
-    {
-      rule: "不適用高齡犬",
-      catches: n((p) => !p.spec.lifeStage.some((s) => s === "all" || s === "senior")),
-      need: "幼犬專用或成犬專用配方",
-    },
-    {
-      rule: "體型不符（小型犬）",
-      catches: n((p) => !p.spec.bodySize.includes("small")),
-      need: "大型犬專用配方（顆粒大、熱量密度不同）",
-    },
-    {
-      rule: "粗蛋白低於 22%",
-      catches: n((p) => p.spec.protein < 22),
-      need: "平價高碳水糧（超市那種）",
-    },
-    {
-      rule: "碳水高於 48%",
-      catches: n((p) => p.spec.carb > 48),
-      need: "平價高碳水糧",
-    },
-    {
-      rule: "含穀物",
-      catches: n((p) => !p.spec.grainFree),
-      need: "含穀配方（無穀不等於比較好，這一刀本來就該有兩邊）",
-    },
-  ].sort((a, b) => a.catches - b.catches);
+  return probe.constraints
+    .map((c) => ({
+      rule: c.label,
+      catches: pool.filter((p) => !passes(p, c)).length,
+      need: NEED[c.kind] ?? "補一款會被這條規則擋下來的商品",
+    }))
+    .sort((a, b) => a.catches - b.catches);
 }
+
+/** 某條規則刪不到任何東西時，要補什麼進來它才有作用 */
+const NEED: Record<string, string> = {
+  excludeProtein: "主流雞肉配方（低敏族群最常誤買的那種）",
+  lifeStage: "成犬專用或幼犬專用配方（現在多數標 all，這一刀砍不到東西）",
+  bodySize: "大型犬專用配方（顆粒大、熱量密度不同）",
+  minProtein: "平價高碳水糧（超市那種）",
+  maxCarb: "平價高碳水糧，碳水要真的超過 48%",
+  maxPhosphorus: "低磷配方 —— 目前十款都是 1.1–1.2%，控磷的人一款都選不到",
+  maxMonthly: "更貴的款，不然預算這一刀永遠砍不到",
+  inStock: "（這條是保險絲，平常本來就該是 0）",
+};

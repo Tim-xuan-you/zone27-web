@@ -154,6 +154,14 @@ export interface Situation {
   species: Species;
   /** 顯示用，例如「柴犬」 */
   breed?: string;
+  /**
+   * 品種推出來的體型。
+   *
+   * parse() 本來就算出來了，但一直沒放進 situation —— 算完就丟掉，
+   * 所以「大型犬專用配方」那條規則對裁決器完全沒有作用，
+   * 只有長尾頁走得到。跟物種那個 bug 是同一類：畫面說讀到了，程式沒用。
+   */
+  bodySize?: BodySize;
   ageYears?: number;
   weightKg?: number;
   /** 已經標記為過敏或想避開的蛋白源 */
@@ -212,4 +220,12 @@ export interface Verdict {
   stop?: Stop;
   /** 有商品可推，但有一句話一定要先講（例如腎臟要跟著獸醫走） */
   notice?: string;
+  /**
+   * 讀到了、但我們手上沒有資料可以據此判斷的訊號。
+   *
+   * 這一欄的存在是為了不再犯同一個錯：畫面上跳出一個 chip，
+   * 使用者以為我們考慮過了，實際上程式碼裡沒有任何一行用到它。
+   * 用不到就要講出來，不要靜靜吞掉。
+   */
+  unusedSignals?: string[];
 }

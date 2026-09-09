@@ -70,6 +70,15 @@ export function constraintsFor(s: Situation): Constraint[] {
     tag: "營養門檻",
   });
 
+  if (s.bodySize) {
+    cs.push({
+      kind: "bodySize",
+      value: s.bodySize,
+      label: `不適用${sizeZh(s.bodySize)}`,
+      tag: "體型不符",
+    });
+  }
+
   /*
    * 控磷。
    *
@@ -120,3 +129,8 @@ const STAGE_ZH: Record<string, string> = {
   puppy: "幼犬", adult: "成犬", senior: "高齡犬",
 };
 const stageZh = (k: string) => STAGE_ZH[k] ?? k;
+
+const SIZE_ZH: Record<string, string> = {
+  small: "小型犬", medium: "中型犬", large: "大型犬",
+};
+const sizeZh = (k: string) => SIZE_ZH[k] ?? k;

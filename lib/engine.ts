@@ -17,7 +17,7 @@ import { daysBetween, todayTW } from "./date";
  */
 
 /** 單一約束的判定。回傳 true 代表「通過」，false 代表「被這條刪掉」。 */
-function passes(p: Product, c: Constraint): boolean {
+export function passes(p: Product, c: Constraint): boolean {
   switch (c.kind) {
     case "excludeProtein": {
       if (p.spec.proteinSources.includes(c.value)) return false;
@@ -119,20 +119,32 @@ function speciesStop(want: Situation["species"]): Stop {
  * 這種情況硬推最接近的那一款，是最糟的選擇 —— 它一樣不符合，
  * 而飼主會以為問題解決了。
  */
-function renalStop(): Stop {
+function renalStop(pool: Product[]): Stop {
+  const low = Math.min(...pool.map((p) => p.spec.phosphorus).filter((n) => n > 0));
   return {
     kind: "renal",
     title: "腎指數的飼料要跟著獸醫走，不是我們該賣的",
     body:
-      "市售腎臟處方飼料的磷大多在 0.2–0.5%，早期腎病一般建議不超過 0.6%。" +
-      "我們手上這幾款的磷都在 1.1–1.2% —— 一般成犬糧本來就是 1–2%，" +
-      "沒有一款符合你獸醫說的控磷。",
-    next: "處方飼料要獸醫開，我們不賣也不推。把獸醫給的磷上限問清楚，照那個數字挑。",
+      `市售腎臟處方飼料的磷大多在 0.2–0.5%，早期腎病一般建議不超過 0.6%。` +
+      `我們手上磷最低的一款是 ${low}% —— 剛好壓在上限，而且那個數字是我們從` +
+      `公開資料整理的，不是廠商的保證值。拿它去對付腎指數，風險我們擔不起。`,
+    next: "處方飼料要獸醫開，我們不賣也不推。把獸醫給你的磷上限問清楚，照那個數字挑。",
   };
 }
 
-const RENAL_NOTICE =
-  "腎臟的飲食要跟著獸醫的指示走。下面是符合磷上限的選項，但獸醫給的數字才算。";
+/*
+ * 讀得懂、但我們沒有資料可以據此判斷的症狀。
+ *
+ * 挑食要有飼主回報的適口性資料才判斷得了，而我們的 reports 目前全是 0；
+ * 淚痕與口腔沒有站得住腳的飲食規則。與其讓 chip 靜靜掛在那裡讓人
+ * 以為我們考慮過了，不如直接講我們幫不上這一項。
+ */
+const NO_DATA_FOR: Record<string, string> = {
+  適口性: "挑不挑食我們判斷不了 —— 要有夠多飼主回報才算數，我們現在沒有",
+  淚痕: "淚痕跟飼料的關係沒有可靠的定論，我們不會拿它當理由",
+  口腔: "潔牙效果我們沒有資料，不假裝有",
+};
+
 
 export function adjudicate(pool: Product[], situation: Situation): Verdict {
   // 物種不符 → 整題不回答。這一刀在所有事情之前。
@@ -192,16 +204,29 @@ export function adjudicate(pool: Product[], situation: Situation): Verdict {
     alive = alive.filter((p) => !refs.includes(p));
   }
 
+  /*
+   * 腎臟一律停，不是「剛好沒東西可推才停」。
+   *
+   * 原本寫成 survivors === 0 才停，結果有一款的磷剛好是 0.6 ——
+   * 正好卡在門檻上，於是控磷的飼主會被推薦它。那正是要防的事：
+   * 我們的磷是從公開資料整理的估值，不是廠商保證值，
+   * 拿一個估出來的邊界值去回答腎臟問題，是拿別人的狗去冒險。
+   */
   const renal = situation.symptoms.some((s) => s.includes("腎"));
-  if (renal && alive.length === 0) {
-    return { startCount, cuts, survivors: [], pick: null, pickReason: "", stop: renalStop() };
+  if (renal) {
+    return { startCount, cuts, survivors: [], pick: null, pickReason: "", stop: renalStop(pool) };
   }
 
   const { pick, reason } = choose(alive, situation);
 
+  const unusedSignals = situation.symptoms
+    .map((x) => Object.keys(NO_DATA_FOR).find((k) => x.includes(k)))
+    .filter((k): k is string => Boolean(k))
+    .map((k) => NO_DATA_FOR[k]);
+
   return {
     startCount, cuts, survivors: alive, pick, pickReason: reason,
-    ...(renal ? { notice: RENAL_NOTICE } : {}),
+    ...(unusedSignals.length ? { unusedSignals } : {}),
   };
 }
 
@@ -227,11 +252,41 @@ function choose(alive: Product[], situation: Situation): { pick: Product | null;
   return { pick, reason: explain(pick, alive, situation) };
 }
 
+/** 症狀正規化後的字串，用 includes 比對比較耐得住新增詞彙 */
+const has = (s: Situation, k: string) => s.symptoms.some((x) => x.includes(k));
+
 function score(p: Product, situation: Situation): number {
   let s = 0;
 
-  // 有過敏疑慮時，單一蛋白源的價值最高 —— 它讓飼主下次能排查出兇手
-  if (p.spec.singleSource) s += situation.avoid.length > 0 ? 30 : 12;
+  /*
+   * 症狀本來完全沒有進評分函式 —— 使用者打「一直抓癢」「有點胖」「軟便」，
+   * 畫面上跳出 chip，但排序跟沒講一模一樣。跟物種那個 bug 是同一類。
+   *
+   * 加分幅度刻意保守：這幾條是方向性的判斷，不是診斷。
+   * 真正該擋的東西用排除規則擋（過敏原、年齡、體型、磷），
+   * 這裡只負責在都合格的候選之間排個先後。
+   */
+  const skin = has(situation, "皮膚") || has(situation, "毛髮");
+  const gut = has(situation, "腸胃");
+  const weight = has(situation, "體重");
+
+  // 有過敏疑慮時，單一蛋白源的價值最高 —— 它讓飼主下次能排查出兇手。
+  // 皮膚症狀就算還沒點名過敏原，走的也是同一套排除飲食邏輯。
+  if (p.spec.singleSource) {
+    s += situation.avoid.length > 0 ? 30 : skin || gut ? 20 : 12;
+  }
+
+  // 皮膚與毛髮：omega-3 是有依據的方向，加權放大一點
+  if (skin) s += Math.min(10, p.spec.omega3 * 6);
+
+  // 軟便：脂肪偏高是常見原因之一。超過 18% 開始扣。
+  if (gut) s -= Math.max(0, p.spec.fat - 18) * 1.5;
+
+  // 體重控制：碳水與脂肪都要看
+  if (weight) {
+    s -= Math.max(0, p.spec.carb - 35) * 0.6;
+    s -= Math.max(0, p.spec.fat - 15) * 1.2;
+  }
 
   // 碳水越低越好。台灣市售乾糧多在 25–50%，所以拿 45 當基準往下算，
   // 上限 12 分避免極端高蛋白配方光靠這一項就輾壓其他所有考量。

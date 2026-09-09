@@ -138,3 +138,11 @@ a:focus-visible {
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }
+
+/* 「讀到了但幫不上」那幾行的破折號前綴 */
+ul[style*="list-style: none"] > li::before {
+  content: "—";
+  position: absolute;
+  left: 0;
+  color: var(--faint);
+}

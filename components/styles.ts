@@ -67,6 +67,15 @@ export const S: Record<string, CSSProperties> = {
     borderRadius: 999, padding: "6px 14px", fontSize: T.sm, fontWeight: 500,
   },
 
+  /* 讀到但用不到的訊號。低調，但一定要看得見。 */
+  unusedList: {
+    listStyle: "none", margin: `${G.md}px 0 0`, padding: 0,
+  },
+  unusedItem: {
+    fontSize: T.xs, color: "var(--faint)", lineHeight: 1.85,
+    paddingLeft: G.lg, position: "relative",
+  },
+
   /* ---------- 不回答 ----------
      刻意做得比商品卡更大、更空。這是整頁最重要的一句話。 */
   stopBox: {
