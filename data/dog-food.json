@@ -506,13 +506,31 @@
         "looseStool": 0
       },
       "price": {
-        "unit": "10.6kg",
-        "checkedAt": "2026-09-09",
-        "merchants": []
+        "unit": "6kg",
+        "checkedAt": "2026-09-10",
+        "merchants": [
+          {
+            "id": "m1",
+            "label": "H&R安室家（蝦皮商城）",
+            "unit": "6kg",
+            "amount": 3599,
+            "note": "蝦皮商城 · 15 天鑑賞期 · 宅配滿 $490 免運",
+            "affiliateUrl": "https://s.shopee.tw/5VVCT8YtWP",
+            "anchor": "safe"
+          },
+          {
+            "id": "m2",
+            "label": "H&R安室家（蝦皮商城）",
+            "unit": "11.4kg",
+            "amount": 6250,
+            "note": "限宅配 · 開封後要密封防潮",
+            "affiliateUrl": "https://s.shopee.tw/5VVCT8YtWP",
+            "anchor": "value"
+          }
+        ]
       },
       "dealbreaker": "你的狗已經成年 — 這是幼犬配方，蛋白 38%、脂肪 20%，成犬長期吃容易過重",
       "knownIssues": "雞、火雞、比目魚、鯖魚、蛋都有，蛋白質來源很雜 —— 對排查過敏原的幼犬不適合。",
-      "awaitingLink": true,
       "searchAs": "歐睿健 Orijen 無穀幼犬 牧野鮮雞"
     },
     {

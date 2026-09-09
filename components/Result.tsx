@@ -1,7 +1,7 @@
 import Link from "next/link";
 import {
   anchorOf, bagDuration, freshness, pricePerKg, sharedListings, storesOf, trialPlan, unitOf,
-  FRESH_DAYS,
+  FRESH_DAYS, type Stage,
 } from "@/lib/engine";
 import { priceStat, timingAdvice } from "@/lib/history";
 import type { Product, Verdict } from "@/lib/types";
@@ -33,6 +33,7 @@ export default function Result({
   chips,
   dogKg,
   symptoms,
+  stage,
   chipsLabel = "條件",
 }: {
   verdict: Verdict;
@@ -40,6 +41,8 @@ export default function Result({
   dogKg?: number;
   /** 決定試糧要跑多久 —— 皮膚 8 週、腸胃 2 週 */
   symptoms?: string[];
+  /** 生命階段。幼犬的食量接近同體重成犬的兩倍，不帶會高估這包能吃幾天。 */
+  stage?: Stage;
   chipsLabel?: string;
 }) {
   const shared = sharedListings(verdict.survivors);
@@ -87,7 +90,7 @@ export default function Result({
           {verdict.pick && (
             <>
               <p style={S.lbl}>買這個</p>
-              <Answer p={verdict.pick} verdict={verdict} dogKg={dogKg} multi={shared} />
+              <Answer p={verdict.pick} verdict={verdict} dogKg={dogKg} stage={stage} multi={shared} />
             </>
           )}
 
@@ -95,7 +98,7 @@ export default function Result({
           {verdict.pick && (
             <>
               <p style={S.lbl}>換了之後會怎樣</p>
-              <Trial p={verdict.pick} dogKg={dogKg} symptoms={symptoms} />
+              <Trial p={verdict.pick} dogKg={dogKg} symptoms={symptoms} stage={stage} />
             </>
           )}
 
@@ -108,7 +111,7 @@ export default function Result({
               </summary>
               <div style={S.moreBody}>
                 {others.map((p) => (
-                  <Alt key={p.id} p={p} dogKg={dogKg} multi={shared} />
+                  <Alt key={p.id} p={p} dogKg={dogKg} stage={stage} multi={shared} />
                 ))}
               </div>
             </details>
@@ -197,9 +200,9 @@ function Cascade({ verdict }: { verdict: Verdict }) {
 /* ------------------------------------------------------------------ */
 
 function Answer({
-  p, verdict, dogKg, multi,
+  p, verdict, dogKg, stage, multi,
 }: {
-  p: Product; verdict: Verdict; dogKg?: number; multi: Set<string>;
+  p: Product; verdict: Verdict; dogKg?: number; stage?: Stage; multi: Set<string>;
 }) {
   const safe = anchorOf(p, "safe");
   const perKg = pricePerKg(unitOf(p, safe), safe.amount);
@@ -262,7 +265,7 @@ function Answer({
       <details style={S.detailBlock}>
         <summary style={S.detailSummary}>其他規格與價格</summary>
         <div style={{ padding: `0 ${24}px ${24}px` }}>
-          <Stores p={p} dogKg={dogKg} />
+          <Stores p={p} dogKg={dogKg} stage={stage} />
           {p.knownIssues && <Issues text={p.knownIssues} />}
         </div>
       </details>
@@ -274,8 +277,10 @@ function Answer({
 /* 換了之後會怎樣                                                      */
 /* ------------------------------------------------------------------ */
 
-function Trial({ p, dogKg, symptoms }: { p: Product; dogKg?: number; symptoms?: string[] }) {
-  const t = trialPlan(p, dogKg, symptoms);
+function Trial({
+  p, dogKg, symptoms, stage,
+}: { p: Product; dogKg?: number; symptoms?: string[]; stage?: Stage }) {
+  const t = trialPlan(p, dogKg, symptoms, stage);
 
   return (
     <div style={tBox}>
@@ -387,7 +392,7 @@ const tNote: React.CSSProperties = {
 /* 備選                                                                */
 /* ------------------------------------------------------------------ */
 
-function Alt({ p, dogKg, multi }: { p: Product; dogKg?: number; multi: Set<string> }) {
+function Alt({ p, dogKg, stage, multi }: { p: Product; dogKg?: number; stage?: Stage; multi: Set<string> }) {
   const safe = anchorOf(p, "safe");
   const perKg = pricePerKg(unitOf(p, safe), safe.amount);
   const stores = storesOf(p);
@@ -434,7 +439,7 @@ function Alt({ p, dogKg, multi }: { p: Product; dogKg?: number; multi: Set<strin
       <details style={S.detailBlock}>
         <summary style={S.detailSummary}>其他規格與價格</summary>
         <div style={{ padding: `0 ${24}px ${24}px` }}>
-          <Stores p={p} dogKg={dogKg} />
+          <Stores p={p} dogKg={dogKg} stage={stage} />
           {p.knownIssues && <Issues text={p.knownIssues} />}
         </div>
       </details>
@@ -446,7 +451,7 @@ function Alt({ p, dogKg, multi }: { p: Product; dogKg?: number; multi: Set<strin
 /* 共用零件                                                            */
 /* ------------------------------------------------------------------ */
 
-function Stores({ p, dogKg }: { p: Product; dogKg?: number }) {
+function Stores({ p, dogKg, stage }: { p: Product; dogKg?: number; stage?: Stage }) {
   return (
     <>
       {storesOf(p).map((store) => (
@@ -464,7 +469,7 @@ function Stores({ p, dogKg }: { p: Product; dogKg?: number }) {
 
           <div style={S.optList}>
             {store.options.map((o) => {
-              const dur = bagDuration(o.unit, dogKg);
+              const dur = bagDuration(o.unit, dogKg, stage);
               const save =
                 o.savingPct === null || Math.abs(o.savingPct) < 3
                   ? o.savingPct === null ? null : { text: "每公斤差不多", tone: "faint" as const }
@@ -504,7 +509,7 @@ function Stores({ p, dogKg }: { p: Product; dogKg?: number }) {
             })}
           </div>
 
-          {store.options.some((o) => bagDuration(o.unit, dogKg)?.tooLong) && (
+          {store.options.some((o) => bagDuration(o.unit, dogKg, stage)?.tooLong) && (
             <p style={S.freshWarn}>
               ⚠️ 標記的規格，你的狗要吃超過 {FRESH_DAYS} 天才吃得完。開封後的乾飼料油脂會氧化，
               放久了狗會越來越不愛吃 —— 很多人以為是「這牌子不好」，其實是放太久。

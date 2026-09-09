@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { parse } from "@/lib/parse";
-import { adjudicate } from "@/lib/engine";
+import { adjudicate, stageForAge, type Stage } from "@/lib/engine";
 import { catalog, constraintsFor } from "@/lib/catalog";
 import type { Verdict } from "@/lib/types";
 import { CONTACT } from "@/lib/contact";
@@ -36,6 +36,7 @@ export default function Decider() {
   const [empty, setEmpty] = useState(false);
   const [dogKg, setDogKg] = useState<number | undefined>(undefined);
   const [symptoms, setSymptoms] = useState<string[]>([]);
+  const [stage, setStage] = useState<Stage>("adultFixed");
 
   function run(input: string) {
     const src = input.trim() || EXAMPLES[0];
@@ -53,6 +54,7 @@ export default function Decider() {
     setChips(parsed.chips.map((c) => ({ label: c.label, kind: c.kind })));
     setDogKg(parsed.situation.weightKg);
     setSymptoms(parsed.situation.symptoms);
+    setStage(stageForAge(parsed.situation.ageYears));
     setVerdict(adjudicate(catalog, parsed.situation));
     requestAnimationFrame(() => {
       document.getElementById("verdict")?.scrollIntoView({
@@ -125,6 +127,7 @@ export default function Decider() {
             chips={chips}
             dogKg={dogKg}
             symptoms={symptoms}
+            stage={stage}
             chipsLabel="我們聽到的是"
           />
         </div>

@@ -529,6 +529,15 @@ export function mer(weightKg: number, stage: Stage = "adultFixed"): number {
   return rer(weightKg) * MER_FACTORS[stage].factor;
 }
 
+/** 年齡 → 生命階段係數。頁面預設成犬，使用者講了年齡就照他講的。 */
+export function stageForAge(ageYears: number | undefined): Stage {
+  if (ageYears === undefined) return "adultFixed";
+  if (ageYears < 0.34) return "puppyYoung";   // 約 4 個月以下
+  if (ageYears < 1) return "puppy";
+  if (ageYears >= 8) return "senior";
+  return "adultFixed";
+}
+
 /** 一天大約幾克乾飼料 */
 export function dailyGrams(weightKg: number, stage: Stage = "adultFixed"): number {
   return Math.round((mer(weightKg, stage) / KCAL_PER_KG) * 1000);
@@ -546,12 +555,16 @@ export interface Duration {
 /**
  * 這包大概能吃幾天。體重不知道就回 null —— 猜一個數字比不講更糟。
  */
-export function bagDuration(unit: string, weightKg: number | undefined): Duration | null {
+export function bagDuration(
+  unit: string,
+  weightKg: number | undefined,
+  stage: Stage = "adultFixed",
+): Duration | null {
   if (!weightKg || weightKg <= 0) return null;
   const kg = kgOf(unit);
   if (!kg) return null;
 
-  const perDay = dailyGrams(weightKg) / 1000;   // 公斤／天
+  const perDay = dailyGrams(weightKg, stage) / 1000;   // 公斤／天
   if (perDay <= 0) return null;
   const days = Math.round(kg / perDay);
   return { days, tooLong: days > FRESH_DAYS };
@@ -626,10 +639,11 @@ export function trialPlan(
   p: Product,
   dogKg: number | undefined,
   symptoms: string[] | undefined,
+  stage: Stage = "adultFixed",
 ): Trial {
   const need = trialLength(symptoms);
   const anchor = anchorOf(p, "safe");
-  const anchorDur = bagDuration(unitOf(p, anchor), dogKg);
+  const anchorDur = bagDuration(unitOf(p, anchor), dogKg, stage);
 
   const base: Trial = {
     needDays: need.days,
@@ -649,7 +663,7 @@ export function trialPlan(
 
   for (const store of storesOf(p)) {
     for (const o of store.options) {
-      const d = bagDuration(o.unit, dogKg);
+      const d = bagDuration(o.unit, dogKg, stage);
       if (!d || d.days > FRESH_DAYS) continue;
       const gap = Math.abs(d.days - target);
       // 差距要明顯縮小才值得叫人改買別的規格
