@@ -146,6 +146,14 @@ export default function Page() {
             {c.why}
           </p>
 
+          {"note" in c && c.note && (
+            <p style={{
+              margin: "0 0 16px", fontSize: 14, lineHeight: 1.9,
+              background: "var(--warn-soft)", border: "1px solid var(--warn)",
+              borderRadius: 8, padding: "12px 14px",
+            }}>{c.note}</p>
+          )}
+
           <div style={{ borderTop: "1px solid var(--line)", paddingTop: 12 }}>
             <p style={{ margin: "0 0 6px", fontSize: 12, color: "var(--faint)" }}>
               查核 {c.checkedAt} · 你可以自己點進去對
