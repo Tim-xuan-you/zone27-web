@@ -540,9 +540,10 @@ function Stores({ p, dogKg }: { p: Product; dogKg?: number }) {
 function Issues({ text }: { text: string }) {
   return (
     <p style={{ ...S.reports, marginTop: 16 }}>
-      <b style={{ color: "var(--muted)" }}>飼主常提到：</b>{text}
+      <b style={{ color: "var(--muted)" }}>先知道這件事：</b>{text}
       <span style={{ display: "block", marginTop: 4, fontSize: 12 }}>
-        整理自公開評價與討論區，不是系統性統計。
+        這一欄寫的是查得到、對得上的事實 —— 不是飼主評價統計。
+        台灣網路上這幾款的評價幾乎都是分潤文，我們不拿那種東西充數。
       </span>
     </p>
   );

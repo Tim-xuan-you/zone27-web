@@ -216,7 +216,7 @@ export default function Page() {
             <li key={p.id}>{p.brand}｜{p.name} —— {p.discontinued ? "已標記停產" : "所有賣場都失效"}</li>
           ))}</ul>}
 
-      <H>還沒寫飼主回報的</H>
+      <H>還沒寫「先知道這件事」的</H>
       {noIssues.length === 0
         ? <p style={ok}>都寫了。</p>
         : <ul style={ul}>{noIssues.map((p) => <li key={p.id}>{p.brand}｜{p.name}</li>)}</ul>}

@@ -631,7 +631,9 @@ export function trialLength(symptoms: string[] | undefined): { days: number; lab
       why: "腸胃的反應快。換完糧穩定下來之後，一兩個禮拜就看得出便便有沒有變好。",
     };
   }
-  if (has("皮膚") || has("毛髮") || has("淚痕")) {
+  // 淚痕刻意不在這裡。我們在畫面上已經說了「淚痕沒有可靠定論，
+  // 不會拿它當理由」—— 那就不能回頭拿它去決定週期。自打嘴巴比不做更糟。
+  if (has("皮膚") || has("毛髮")) {
     return {
       days: 56,
       label: "6 到 8 週",
