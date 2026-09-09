@@ -192,6 +192,7 @@ export default function Page() {
       <p style={S.lbl}>相關的</p>
       <div style={S.relRow}>
         <Link href="/dog-food/no-chicken" style={S.relLink}>所有不含雞肉的飼料</Link>
+        <Link href="/dog-food/grain-free" style={S.relLink}>無穀好不好</Link>
         <Link href="/dog-food" style={S.relLink}>全部狗飼料</Link>
         <Link href="/how-we-choose" style={S.relLink}>我們怎麼挑</Link>
       </div>

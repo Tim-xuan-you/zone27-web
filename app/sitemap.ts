@@ -19,6 +19,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE}/dog-food/hidden-chicken`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
     // 「狗一天吃多少」是有購買意圖的資訊型查詢，權重給高
     { url: `${BASE}/dog-food/how-much`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
+    { url: `${BASE}/dog-food/grain-free`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
     ...allPaths().map((slug) => ({
       url: `${BASE}/dog-food/${slug.join("/")}`,
       lastModified: now,

@@ -179,6 +179,7 @@ const products = rows.map((row, i) => {
       phosphorus: num(row, "phosphorus", line, { min: 0, max: 10 }),
       proteinSources: list(row, "proteinSources", line, PROTEINS),
       singleSource: yn(row, "singleSource", line),
+      ...(row.pulses ? { pulses: row.pulses as "high" | "none" | "unknown" } : {}),
       grainFree: yn(row, "grainFree", line),
       lifeStage: list(row, "lifeStage", line, STAGES),
       bodySize: list(row, "bodySize", line, SIZES),

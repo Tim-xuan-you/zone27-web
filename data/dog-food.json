@@ -22,6 +22,7 @@
           "lamb"
         ],
         "singleSource": true,
+        "pulses": "high",
         "grainFree": true,
         "lifeStage": [
           "all"
@@ -92,6 +93,7 @@
           "duck"
         ],
         "singleSource": true,
+        "pulses": "unknown",
         "grainFree": true,
         "lifeStage": [
           "adult"
@@ -152,6 +154,7 @@
           "whitefish"
         ],
         "singleSource": true,
+        "pulses": "none",
         "grainFree": true,
         "lifeStage": [
           "all"
@@ -232,6 +235,7 @@
           "salmon"
         ],
         "singleSource": true,
+        "pulses": "high",
         "grainFree": true,
         "lifeStage": [
           "all"
@@ -292,6 +296,7 @@
           "venison"
         ],
         "singleSource": true,
+        "pulses": "high",
         "grainFree": true,
         "lifeStage": [
           "all"
@@ -353,6 +358,7 @@
           "turkey"
         ],
         "singleSource": false,
+        "pulses": "high",
         "grainFree": true,
         "lifeStage": [
           "all"
@@ -411,6 +417,7 @@
           "poultry"
         ],
         "singleSource": false,
+        "pulses": "none",
         "grainFree": false,
         "lifeStage": [
           "adult"
@@ -453,6 +460,7 @@
           "turkey"
         ],
         "singleSource": false,
+        "pulses": "high",
         "grainFree": true,
         "lifeStage": [
           "adult"
@@ -495,6 +503,7 @@
           "whitefish"
         ],
         "singleSource": false,
+        "pulses": "high",
         "grainFree": true,
         "lifeStage": [
           "puppy"
@@ -537,6 +546,7 @@
           "whitefish"
         ],
         "singleSource": false,
+        "pulses": "unknown",
         "grainFree": true,
         "lifeStage": [
           "puppy"
