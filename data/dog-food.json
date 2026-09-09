@@ -658,12 +658,39 @@
       },
       "price": {
         "unit": "2kg",
-        "checkedAt": "2026-09-09",
-        "merchants": []
+        "checkedAt": "2026-09-10",
+        "merchants": [
+          {
+            "id": "m1",
+            "label": "圓肚精靈家族（蝦皮優選）",
+            "unit": "1kg",
+            "amount": 890,
+            "note": "免運無限次 · 適合先試吃",
+            "affiliateUrl": "https://s.shopee.tw/4fw5SDB0Kl",
+            "anchor": "safe"
+          },
+          {
+            "id": "m2",
+            "label": "圓肚精靈家族（蝦皮優選）",
+            "unit": "2kg",
+            "amount": 1490,
+            "note": "免運無限次",
+            "affiliateUrl": "https://s.shopee.tw/4fw5SDB0Kl",
+            "anchor": "value"
+          },
+          {
+            "id": "m3",
+            "label": "圓肚精靈家族（蝦皮優選）",
+            "unit": "6kg",
+            "amount": 3290,
+            "note": "免運無限次 · 14:00 前下單隔日到",
+            "affiliateUrl": "https://s.shopee.tw/4fw5SDB0Kl",
+            "anchor": "value"
+          }
+        ]
       },
       "dealbreaker": "你的狗需要控制體重或磷 — 粗蛋白 38%、脂肪 18%、磷 1.3%，都是這裡最高的",
       "knownIssues": "全魚配方、完全不含禽肉，對雞肉過敏的狗很好用。但它是六種魚不是一種，要拿來排查過敏原的話變因還是多。碳水是我們用 NFE 推估的，纖維與灰分取 Orijen 系列的典型值。",
-      "awaitingLink": true,
       "searchAs": "渴望 ORIJEN 無穀 六種魚 成犬 狗"
     }
   ]
