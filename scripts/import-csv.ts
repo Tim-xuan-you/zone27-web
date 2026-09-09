@@ -161,6 +161,27 @@ const products = rows.map((row, i) => {
 
   // m1..m4。規則上一款一個規格就好，但賣家把尺寸拆成獨立商品時會用到。
   const merchants = [1, 2, 3, 4].map((n) => merchant(row, n, line)).filter(Boolean);
+  /*
+   * 搭贈品的賣場擋下來。
+   *
+   * 遇過一次：ORIJEN 高齡犬 6kg 在某家賣 $6,500，規格寫「送 6 包舒潔」，
+   * 而另一家台灣通路同樣 6kg 是 $3,570。
+   *
+   * 問題不只是貴 —— 是那個價格裡包著跟飼料無關的東西，
+   * 拿它去算「每公斤多少」「大包省幾 %」，我們自己的數字就在說謊。
+   * 讀者看不出來，所以這種賣場不能收。
+   */
+  for (let n = 1; n <= 4; n++) {
+    const label = row[`m${n}Label`] ?? "";
+    const unit = row[`m${n}Unit`] ?? "";
+    const note = row[`m${n}Note`] ?? "";
+    const blob = label + unit + note;
+    if (!label) continue;
+    if (/送|贈|加贈|買一送/.test(blob)) {
+      fail(line, `m${n}Unit`, "這個賣場搭贈品（出現「送」或「贈」）。價格裡包著別的東西，每公斤就算不準了 —— 換一家乾淨定價的");
+    }
+  }
+
   const isRef = yn(row, "referenceOnly", line);
   const isAwait = yn(row, "awaitingLink", line);
   // 對照款的工作是被刪掉；待補連結的是還沒拿到連結。兩種都可以沒有通路。
