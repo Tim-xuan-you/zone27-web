@@ -86,7 +86,17 @@ export function parse(text: string): ParseResult {
   const t = text.replace(/\s+/g, "");
   const chips: ParseResult["chips"] = [];
 
-  const species: "dog" | "cat" = /貓|喵|貓咪/.test(t) ? "cat" : "dog";
+  /*
+   * 物種。預設狗 —— 目前只有狗飼料。
+   *
+   * 只有明確講到貓才標 chip：狗是預設值，每次都掛一個「物種 · 狗」是噪音；
+   * 但講了貓一定要顯示出來，因為接下來我們會整題不回答，
+   * 使用者必須看得到我們是因為讀到「貓」才停的。
+   */
+  const species: "dog" | "cat" = /貓|喵/.test(t) ? "cat" : "dog";
+  if (species === "cat") {
+    chips.push({ label: "物種 · 貓", kind: "info", source: "貓" });
+  }
 
   /* 品種 —— 長的先比，「迷你雪納瑞」不要被「雪納瑞」搶走 */
   let breed: string | undefined;
