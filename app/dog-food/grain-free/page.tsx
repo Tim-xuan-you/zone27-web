@@ -35,6 +35,7 @@ export default function Page() {
   const gfNoPulses = gf.filter((p) => p.spec.pulses === "none");
   const grainy = catalog.filter((p) => !p.spec.grainFree);
   const grainyNoPulses = grainy.filter((p) => p.spec.pulses === "none");
+  const grainyPulses = grainy.filter((p) => p.spec.pulses === "high");
   const gfChicken = gf.filter((p) =>
     p.spec.proteinSources.some((s) => s === "chicken" || s === "poultry"),
   );
@@ -122,13 +123,24 @@ export default function Page() {
           <p style={S.lbl}>最反直覺的一件事</p>
           <div style={{ ...box, borderColor: "var(--warn)", background: "var(--warn-soft)" }}>
             <p style={{ margin: 0, fontSize: 15.5, lineHeight: 1.95 }}>
-              我們收的款裡，<b>豆類最多的是那幾款無穀高價糧</b>
-              （{[...new Set(gfPulses.map((p) => p.brand))].slice(0, 3).join("、")}⋯），
-              而 <b>{grainyNoPulses[0].brand}</b> 那款含穀的平價糧，成分表裡反而一顆豆都沒有。
+              我們收的款裡，<b>豆類最多的反而是那幾款無穀高價糧</b>
+              （{[...new Set(gfPulses.map((p) => p.brand))].slice(0, 3).join("、")}⋯）。
             </p>
+            {grainyPulses.length > 0 && (
+              <p style={{ margin: "12px 0 0", fontSize: 15.5, lineHeight: 1.95 }}>
+                而我們收的<b>兩款含穀糧剛好落在兩個極端</b>：
+                <b>{grainyNoPulses[0].brand}</b> 成分表裡一顆豆都沒有，
+                <b>{grainyPulses[0].brand}</b> 的黃豌豆和豌豆蛋白卻排在第六、第七項。
+                <br />
+                <b style={{ color: "var(--cut)" }}>
+                  也就是說：有沒有穀物，跟豆類多不多，根本是兩件獨立的事。
+                </b>
+              </p>
+            )}
             <p style={{ margin: "12px 0 0", fontSize: 15.5, color: "var(--muted)", lineHeight: 1.95 }}>
-              原因很單純：把穀物拿掉之後，碳水總要有東西來補。
+              無穀那邊的原因很單純：把穀物拿掉之後，碳水總要有東西來補，
               補進去的通常就是馬鈴薯、木薯或豆類。
+              含穀那邊則是各家配方自己的選擇 —— 包裝正面完全看不出來。
             </p>
           </div>
         </>
