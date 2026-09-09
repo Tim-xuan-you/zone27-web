@@ -228,6 +228,7 @@ export default function Page() {
       <div style={S.relRow}>
         <Link href="/dog-food/hidden-chicken" style={S.relLink}>寫著低敏，成分表裡有雞</Link>
         <Link href="/dog-food/how-much" style={S.relLink}>一天要吃多少</Link>
+        <Link href="/dog-food/elimination-diet" style={S.relLink}>排除飲食法</Link>
         <Link href="/dog-food" style={S.relLink}>全部狗飼料</Link>
       </div>
 

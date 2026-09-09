@@ -322,6 +322,8 @@ function Trial({ p, dogKg, symptoms }: { p: Product; dogKg?: number; symptoms?: 
       </Step>
 
       <p style={tNote}>
+        <Link href="/dog-food/elimination-diet" style={{ color: "var(--accent)" }}>完整的排除飲食法流程（含最多人跳過的回測）→</Link>
+        <br />
         <Link href="/dog-food/how-much" style={{ color: "var(--accent)" }}>想自己算一天幾克、一個月多少錢 →</Link>
         <br />
         我們不是獸醫。上面是一般的換糧做法，不是診斷 ——

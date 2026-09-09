@@ -75,6 +75,20 @@ export default function Index() {
         </p>
       </Link>
 
+      <Link href="/dog-food/elimination-diet" style={{
+        display: "block", marginTop: 14,
+        background: "var(--surface)", border: "1px solid var(--line)",
+        borderRadius: 14, boxShadow: "var(--sh)", padding: "20px 22px",
+        textDecoration: "none", color: "inherit",
+      }}>
+        <h2 style={{ fontFamily: "var(--font-serif), serif", fontSize: 20, margin: "0 0 8px", lineHeight: 1.5 }}>
+          排除飲食法：怎麼真的找出牠對什麼過敏
+        </h2>
+        <p style={{ margin: 0, fontSize: 15, color: "var(--muted)", lineHeight: 1.85 }}>
+          一直抓癢的狗裡只有約 18% 是食物造成的。要確認得跑滿八週，而且最後要回測。
+        </p>
+      </Link>
+
       <p style={S.lbl}>按過敏原</p>
       <div style={S.relRow}>
         {ALLERGENS.map((a) => (

@@ -20,6 +20,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // 「狗一天吃多少」是有購買意圖的資訊型查詢，權重給高
     { url: `${BASE}/dog-food/how-much`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
     { url: `${BASE}/dog-food/grain-free`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
+    { url: `${BASE}/dog-food/elimination-diet`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
     ...allPaths().map((slug) => ({
       url: `${BASE}/dog-food/${slug.join("/")}`,
       lastModified: now,
