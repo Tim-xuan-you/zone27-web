@@ -574,15 +574,15 @@
       "id": "df-11",
       "species": "dog",
       "brand": "ACANA 愛肯拿",
-      "name": "單一蛋白低敏無穀 豬肉+南瓜",
+      "name": "單一蛋白低敏無穀 美膚鴨肉+巴特利梨",
       "spec": {
         "protein": 31,
         "fat": 17,
         "carb": 27,
-        "omega3": 0.4,
+        "omega3": 0.8,
         "phosphorus": 1.2,
         "proteinSources": [
-          "pork"
+          "duck"
         ],
         "singleSource": true,
         "pulses": "high",
@@ -608,14 +608,15 @@
         "merchants": []
       },
       "dealbreaker": "你想避開豆類 — 成分表第 5 項是鷹嘴豆、第 7 項是扁豆",
-      "knownIssues": "豬肉在台灣是相對少見的蛋白源，多數狗沒吃過 —— 排除飲食法要找「牠沒見過的肉」的時候，這一款的價值就在這裡。",
-      "awaitingLink": true
+      "knownIssues": "跟我們收的另一款鴨肉（Natural Balance 馬鈴薯鴨肉）差在碳水來源：這款用鷹嘴豆和扁豆，那款用馬鈴薯。想避開豆類的話選那款。",
+      "awaitingLink": true,
+      "searchAs": "ACANA 愛肯拿 單一蛋白 鴨肉 巴特利梨"
     },
     {
       "id": "df-12",
       "species": "dog",
       "brand": "ORIJEN 渴望",
-      "name": "六種魚 全犬",
+      "name": "無穀六種魚 成犬",
       "spec": {
         "protein": 38,
         "fat": 18,
@@ -650,7 +651,8 @@
       },
       "dealbreaker": "你的狗需要控制體重或磷 — 粗蛋白 38%、脂肪 18%、磷 1.3%，都是這裡最高的",
       "knownIssues": "全魚配方、完全不含禽肉，對雞肉過敏的狗很好用。但它是六種魚不是一種，要拿來排查過敏原的話變因還是多。碳水是我們用 NFE 推估的，纖維與灰分取 Orijen 系列的典型值。",
-      "awaitingLink": true
+      "awaitingLink": true,
+      "searchAs": "渴望 ORIJEN 無穀 六種魚 成犬 狗"
     }
   ]
 }

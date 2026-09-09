@@ -202,6 +202,7 @@ const products = rows.map((row, i) => {
     ...(yn(row, "discontinued", line) ? { discontinued: true } : {}),
     ...(isRef ? { referenceOnly: true } : {}),
     ...(isAwait ? { awaitingLink: true } : {}),
+    ...(row.searchAs ? { searchAs: row.searchAs } : {}),
   };
 });
 

@@ -234,7 +234,7 @@ export default function Page() {
 
               <div style={{ marginTop: 14, paddingTop: 14, borderTop: "1px solid var(--line)" }}>
                 <Line k="去蝦皮搜這個">
-                  <span className="mono" style={{ fontSize: 14 }}>{p.brand} {p.name}</span>
+                  <span className="mono" style={{ fontSize: 14 }}>{p.searchAs ?? `${p.brand} ${p.name}`}</span>
                 </Line>
                 <Line k="產生連結時填">
                   <span className="mono" style={{ fontSize: 14 }}>
