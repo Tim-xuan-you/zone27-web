@@ -15,7 +15,8 @@
     "data:paste": "tsx scripts/paste.ts",
     "data:gaps": "tsx scripts/gap-check.ts",
     "data:preview": "tsx scripts/preview.ts",
-    "species:check": "tsx scripts/species-check.ts"
+    "species:check": "tsx scripts/species-check.ts",
+    "data:dup": "tsx scripts/dup-check.ts"
   },
   "dependencies": {
     "@supabase/ssr": "^0.10.3",

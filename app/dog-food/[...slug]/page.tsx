@@ -3,10 +3,10 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import Result from "@/components/Result";
 import { S } from "@/components/styles";
-import { adjudicate } from "@/lib/engine";
+import { adjudicate, anchorOf, bagDuration, dailyGrams, pricePerKg, unitOf } from "@/lib/engine";
 import { catalog, constraintsFor } from "@/lib/catalog";
 import {
-  ALLERGENS, BREEDS, TYPICAL_KG, allPaths, descriptionOf, resolve, situationOf, titleOf,
+  ALLERGENS, BREEDS, allPaths, descriptionOf, resolve, situationOf, titleOf,
   type PageKind,
 } from "@/lib/slugs";
 import type { Situation } from "@/lib/types";
@@ -149,10 +149,46 @@ export default async function Page({ params }: { params: Promise<{ slug: string[
       <Result
         verdict={verdict}
         chips={chipsOf(p)}
-        dogKg={p.kind === "allergen" ? undefined : TYPICAL_KG[p.breed.size]}
+        dogKg={p.kind === "allergen" ? undefined : p.breed.kg}
         // 會搜「避雞肉」的人就是在做排除飲食法 —— 那是皮膚的時程，不是腸胃的
         symptoms={p.kind === "breed" ? undefined : ["皮膚搔癢"]}
       />
+
+      {/* 只屬於這個品種的數字。程序化頁面如果只差一個品種名，
+          那在 Google 眼中就是 doorway page —— 每一頁至少要帶一組
+          自己算出來、別頁沒有的真實資訊。 */}
+      {p.kind !== "allergen" && verdict.pick && (() => {
+        const kg = p.breed.kg;
+        const g = dailyGrams(kg);
+        const anchor = anchorOf(verdict.pick, "safe");
+        const per = pricePerKg(unitOf(verdict.pick, anchor), anchor.amount);
+        const monthly = per !== null ? Math.round((g * 30 / 1000) * per) : null;
+        const dur = bagDuration(unitOf(verdict.pick, anchor), kg);
+        return (
+          <>
+            <p style={S.lbl}>{p.breed.zh}大概要吃多少</p>
+            <div style={{
+              background: "var(--surface)", border: "1px solid var(--line)",
+              borderRadius: 14, boxShadow: "var(--sh)", padding: "20px 22px",
+            }}>
+              <p style={{ margin: "0 0 12px", fontSize: 15.5, lineHeight: 1.95 }}>
+                成年{p.breed.zh}的典型體重大約 <b>{kg} 公斤</b>，
+                照獸醫的能量公式算，一天大約吃 <b>{g} 克</b>乾飼料。
+              </p>
+              <p style={{ margin: "0 0 12px", fontSize: 15.5, lineHeight: 1.95 }}>
+                以上面推薦的 <b>{verdict.pick.brand}</b>（{unitOf(verdict.pick, anchor)}）來算：
+                {dur && <>這包大約吃 <b>{dur.days} 天</b>{dur.tooLong && "（超過 45 天，建議買小一點的）"}，</>}
+                {monthly !== null && <>一個月大約 <b>${monthly.toLocaleString()}</b>。</>}
+              </p>
+              <p style={{ margin: 0, fontSize: 14, color: "var(--muted)", lineHeight: 1.9 }}>
+                體重是典型值，不是標準 —— 真正該看的是體態。
+                想用你家的實際體重算，
+                <Link href="/dog-food/how-much" style={{ color: "var(--accent)" }}>這裡可以自己輸入</Link>。
+              </p>
+            </div>
+          </>
+        );
+      })()}
 
       <p style={S.lbl}>相關的</p>
       <div style={S.relRow}>

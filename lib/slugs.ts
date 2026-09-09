@@ -17,32 +17,46 @@ export interface BreedEntry {
   /** 同一品種的其他寫法，出現在頁面內文幫助命中搜尋 */
   alias: string[];
   size: "small" | "medium" | "large";
+  /**
+   * 典型成犬體重（公斤）。
+   *
+   * 加這一欄是為了讓每個品種頁至少帶一組**只屬於它自己的真實數字** ——
+   * 一天幾克、這包吃幾天、一個月多少錢。
+   *
+   * 原本只用 small/medium/large 三個桶，結果馬爾濟斯、博美、約克夏
+   * 三頁的內容一模一樣，那在 Google 眼中就是 doorway page。
+   *
+   * 數字取各犬種普遍公布的體重範圍中間值，台灣常見的體型為準
+   * （貴賓、臘腸、雪納瑞多為迷你型）。標成「典型」不是「應該」——
+   * 真正的依據是體態。
+   */
+  kg: number;
 }
 
 export const BREEDS: BreedEntry[] = [
-  { slug: "shiba-inu",   zh: "柴犬",     alias: ["柴柴"],           size: "medium" },
-  { slug: "corgi",       zh: "柯基",     alias: ["威爾斯柯基"],     size: "medium" },
-  { slug: "poodle",      zh: "貴賓",     alias: ["紅貴賓", "泰迪"], size: "small"  },
-  { slug: "maltese",     zh: "馬爾濟斯", alias: ["瑪爾濟斯"],       size: "small"  },
-  { slug: "pomeranian",  zh: "博美",     alias: [],                 size: "small"  },
-  { slug: "chihuahua",   zh: "吉娃娃",   alias: [],                 size: "small"  },
-  { slug: "schnauzer",   zh: "雪納瑞",   alias: ["迷你雪納瑞"],     size: "small"  },
-  { slug: "dachshund",   zh: "臘腸",     alias: ["臘腸狗"],         size: "small"  },
-  { slug: "bichon",      zh: "比熊",     alias: [],                 size: "small"  },
-  { slug: "shih-tzu",    zh: "西施",     alias: [],                 size: "small"  },
-  { slug: "yorkshire",   zh: "約克夏",   alias: [],                 size: "small"  },
-  { slug: "pug",         zh: "巴哥",     alias: ["八哥"],           size: "small"  },
-  { slug: "beagle",      zh: "米格魯",   alias: [],                 size: "medium" },
-  { slug: "french-bulldog", zh: "法鬥",  alias: ["法國鬥牛犬"],     size: "medium" },
-  { slug: "border-collie",  zh: "邊境牧羊犬", alias: ["邊牧"],      size: "medium" },
-  { slug: "cocker",      zh: "可卡",     alias: ["可卡犬"],         size: "medium" },
-  { slug: "mixed",       zh: "米克斯",   alias: ["混種", "浪浪"],   size: "medium" },
-  { slug: "golden",      zh: "黃金獵犬", alias: ["黃金"],           size: "large"  },
-  { slug: "labrador",    zh: "拉布拉多", alias: ["拉不拉多", "拉拉"], size: "large" },
-  { slug: "husky",       zh: "哈士奇",   alias: [],                 size: "large"  },
-  { slug: "akita",       zh: "秋田",     alias: ["秋田犬"],         size: "large"  },
-  { slug: "german-shepherd", zh: "德國牧羊犬", alias: ["狼犬"],     size: "large"  },
-  { slug: "doberman",    zh: "杜賓",     alias: [],                 size: "large"  },
+  { slug: "shiba-inu",   zh: "柴犬",     alias: ["柴柴"],           size: "medium", kg: 10 },
+  { slug: "corgi",       zh: "柯基",     alias: ["威爾斯柯基"],     size: "medium", kg: 12 },
+  { slug: "poodle",      zh: "貴賓",     alias: ["紅貴賓", "泰迪"], size: "small",  kg: 5 },
+  { slug: "maltese",     zh: "馬爾濟斯", alias: ["瑪爾濟斯"],       size: "small",  kg: 3 },
+  { slug: "pomeranian",  zh: "博美",     alias: [],                 size: "small",  kg: 3 },
+  { slug: "chihuahua",   zh: "吉娃娃",   alias: [],                 size: "small",  kg: 2.5 },
+  { slug: "schnauzer",   zh: "雪納瑞",   alias: ["迷你雪納瑞"],     size: "small",  kg: 7 },
+  { slug: "dachshund",   zh: "臘腸",     alias: ["臘腸狗"],         size: "small",  kg: 5 },
+  { slug: "bichon",      zh: "比熊",     alias: [],                 size: "small",  kg: 6 },
+  { slug: "shih-tzu",    zh: "西施",     alias: [],                 size: "small",  kg: 6 },
+  { slug: "yorkshire",   zh: "約克夏",   alias: [],                 size: "small",  kg: 3 },
+  { slug: "pug",         zh: "巴哥",     alias: ["八哥"],           size: "small",  kg: 7 },
+  { slug: "beagle",      zh: "米格魯",   alias: [],                 size: "medium", kg: 11 },
+  { slug: "french-bulldog", zh: "法鬥",  alias: ["法國鬥牛犬"],     size: "medium", kg: 11 },
+  { slug: "border-collie",  zh: "邊境牧羊犬", alias: ["邊牧"],      size: "medium", kg: 17 },
+  { slug: "cocker",      zh: "可卡",     alias: ["可卡犬"],         size: "medium", kg: 13 },
+  { slug: "mixed",       zh: "米克斯",   alias: ["混種", "浪浪"],   size: "medium", kg: 12 },
+  { slug: "golden",      zh: "黃金獵犬", alias: ["黃金"],           size: "large",  kg: 30 },
+  { slug: "labrador",    zh: "拉布拉多", alias: ["拉不拉多", "拉拉"], size: "large", kg: 30 },
+  { slug: "husky",       zh: "哈士奇",   alias: [],                 size: "large",  kg: 22 },
+  { slug: "akita",       zh: "秋田",     alias: ["秋田犬"],         size: "large",  kg: 38 },
+  { slug: "german-shepherd", zh: "德國牧羊犬", alias: ["狼犬"],     size: "large",  kg: 32 },
+  { slug: "doberman",    zh: "杜賓",     alias: [],                 size: "large",  kg: 36 },
 ];
 
 export interface AllergenEntry {
@@ -145,6 +159,7 @@ export function situationOf(p: PageKind): Situation {
     species: "dog",
     breed: breed?.zh,
     bodySize: breed?.size,
+    weightKg: breed?.kg,
     ageYears: 3,               // 頁面預設成犬；使用者要細分就回裁決器
     avoid: allergen ? [allergen.protein] : [],
     symptoms: [],
