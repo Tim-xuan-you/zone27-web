@@ -867,11 +867,20 @@
           {
             "id": "m1",
             "label": "圓肚精靈家族（蝦皮優選）",
+            "unit": "1.8kg",
+            "amount": 1380,
+            "note": "免運無限次 · 14:00 前下單隔日到",
+            "affiliateUrl": "https://s.shopee.tw/gPwnps778",
+            "anchor": "safe"
+          },
+          {
+            "id": "m2",
+            "label": "圓肚精靈家族（蝦皮優選）",
             "unit": "4.5kg",
             "amount": 2890,
             "note": "免運無限次 · 14:00 前下單隔日到",
             "affiliateUrl": "https://s.shopee.tw/gPwnps778",
-            "anchor": "safe"
+            "anchor": "value"
           }
         ]
       },
