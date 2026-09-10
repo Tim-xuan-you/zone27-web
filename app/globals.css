@@ -113,6 +113,17 @@ h1, h2, h3, .serif {
   font-weight: 700;
   letter-spacing: -.01em;
   text-wrap: balance;
+  /* 中文標題只在標點和空白處換行，「火雞」不會被拆成「火／雞」。
+     整段太長、中間沒有標點的時候，overflow-wrap 才出來強制斷，不會撐破版面。 */
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+
+/* 卡片上的短句，跟標題同一個規則：不要讓「的。」自己掉到下一行 */
+.keep {
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+  text-wrap: pretty;
 }
 
 .mono {

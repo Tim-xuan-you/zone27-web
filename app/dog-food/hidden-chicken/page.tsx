@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { S } from "@/components/styles";
 import data from "@/data/hidden-chicken.json";
+import SiteHeader from "@/components/SiteHeader";
 
 /**
  * 「標榜低敏但含雞肉」。
@@ -64,18 +65,7 @@ export default function Page() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faq) }}
       />
 
-      <div style={{
-        display: "flex", alignItems: "center", justifyContent: "space-between",
-        gap: 14, padding: "28px 0 20px", borderBottom: "1px solid var(--line)", marginBottom: 40,
-      }}>
-        <Link href="/" style={{ display: "flex", alignItems: "center", gap: 9, fontWeight: 900, fontSize: 16, color: "inherit", textDecoration: "none" }}>
-          <span style={{ width: 9, height: 9, borderRadius: 2, background: "var(--accent)" }} />
-          ZONE 27
-        </Link>
-        <Link href="/dog-food" style={{ fontSize: 12.5, color: "var(--muted)", textDecoration: "none" }}>
-          全部狗飼料
-        </Link>
-      </div>
+      <SiteHeader current="dog-food" />
 
       <h1 style={{ fontSize: "clamp(27px,5.4vw,38px)", lineHeight: 1.42, margin: "0 0 18px" }}>
         寫著低敏，成分表裡有雞

@@ -1,4 +1,4 @@
-import type { ProteinSource, Situation } from "./types";
+import type { ProteinSource, Situation, Species } from "./types";
 
 /**
  * 人話 → 結構化條件。純規則，不呼叫任何 API。
@@ -36,18 +36,39 @@ const BREEDS: Record<string, "small" | "medium" | "large"> = {
   米克斯: "medium", 混種: "medium", 浪浪: "medium",
 };
 
-/** 蛋白源的所有講法。飼主不會寫「chicken」。 */
-const PROTEINS: Record<string, ProteinSource> = {
-  雞: "chicken", 雞肉: "chicken", 雞胸: "chicken", 去骨雞: "chicken",
-  牛: "beef", 牛肉: "beef",
-  羊: "lamb", 羊肉: "lamb", 小羊: "lamb",
-  鮭魚: "salmon", 鮭: "salmon",
-  魚: "whitefish", 白魚: "whitefish", 海魚: "whitefish", 鱈魚: "whitefish",
-  鴨: "duck", 鴨肉: "duck",
-  火雞: "turkey",
-  豬: "pork", 豬肉: "pork",
-  鹿: "venison", 鹿肉: "venison",
-  昆蟲: "insect", 黑水虻: "insect",
+/**
+ * 貓的品種與台灣人的叫法。
+ *
+ * 「橘貓」「賓士貓」「三花」嚴格說是毛色不是品種，但台灣飼主就是這樣講的，
+ * 讀得出來才知道是在講貓。
+ */
+const CAT_BREEDS = [
+  "英國短毛貓", "英國短毛", "英短", "美國短毛貓", "美國短毛", "美短",
+  "布偶貓", "布偶", "緬因貓", "緬因", "波斯貓", "波斯", "暹羅貓", "暹羅",
+  "曼赤肯", "短腿貓", "蘇格蘭摺耳貓", "蘇格蘭摺耳", "摺耳貓", "摺耳",
+  "俄羅斯藍貓", "俄藍", "金吉拉", "異國短毛貓", "異國短毛", "加菲貓", "加菲",
+  "挪威森林貓", "米克斯貓", "橘貓", "虎斑貓", "虎斑", "賓士貓", "三花貓", "三花",
+  "浪貓", "黑貓", "白貓",
+];
+
+/**
+ * 蛋白源的所有講法。飼主不會寫「chicken」。
+ *
+ * 「魚」單獨出現是指所有魚：說「對魚過敏」的人，不會希望我們留一款鮭魚給他。
+ */
+const PROTEINS: Record<string, ProteinSource[]> = {
+  雞: ["chicken"], 雞肉: ["chicken"], 雞胸: ["chicken"], 去骨雞: ["chicken"],
+  牛: ["beef"], 牛肉: ["beef"],
+  羊: ["lamb"], 羊肉: ["lamb"], 小羊: ["lamb"],
+  鮭魚: ["salmon"], 鮭: ["salmon"],
+  白魚: ["whitefish"], 海魚: ["whitefish"], 鱈魚: ["whitefish"],
+  鮪魚: ["fish"], 沙丁魚: ["fish"], 鯖魚: ["fish"], 鯡魚: ["fish"],
+  魚: ["salmon", "whitefish", "fish"], 魚肉: ["salmon", "whitefish", "fish"],
+  鴨: ["duck"], 鴨肉: ["duck"],
+  火雞: ["turkey"],
+  豬: ["pork"], 豬肉: ["pork"],
+  鹿: ["venison"], 鹿肉: ["venison"],
+  昆蟲: ["insect"], 黑水虻: ["insect"],
 };
 
 /** 症狀 → 正規化標籤。左邊是飼主真的會打的字。 */
@@ -58,12 +79,17 @@ const SYMPTOMS: Record<string, string> = {
   舔腳: "皮膚搔癢", 啃腳: "皮膚搔癢", 咬腳: "皮膚搔癢", 一直舔: "皮膚搔癢",
   紅疹: "皮膚問題", 起疹: "皮膚問題", 皮膚: "皮膚問題", 濕疹: "皮膚問題",
   紅紅的: "皮膚問題", 長痘: "皮膚問題", 脫屑: "皮膚問題", 皮屑: "皮膚問題",
+  下巴粉刺: "皮膚問題", 黑下巴: "皮膚問題",
 
   /* 毛 */
   掉毛: "毛髮問題", 脫毛: "毛髮問題", 毛沒光澤: "毛髮問題", 毛很乾: "毛髮問題",
   毛變少: "毛髮問題", 毛掉很多: "毛髮問題", 毛毛躁躁: "毛髮問題",
+  舔禿: "毛髮問題", 舔到禿: "毛髮問題",
 
   淚痕: "淚痕", 眼淚很多: "淚痕",
+
+  /* 毛球 —— 貓的日常，要跟「吐」分開，不然每隻吐毛球的貓都被當成腸胃問題 */
+  吐毛球: "毛球", 吐毛: "毛球", 毛球: "毛球", 化毛: "毛球",
 
   /* 腸胃 —— 台灣人多半講便便不講腹瀉 */
   軟便: "腸胃問題", 拉肚子: "腸胃問題", 腹瀉: "腸胃問題", 大便很軟: "腸胃問題",
@@ -81,6 +107,14 @@ const SYMPTOMS: Record<string, string> = {
   過胖: "體重", 體重過重: "體重", 要控制體重: "體重", 瘦不下來: "體重",
 
   腎: "腎臟", 腎指數: "腎臟", 控磷: "腎臟",
+
+  /* 泌尿道 —— 貓最常見的急症入口，一定要讀得出來 */
+  頻尿: "泌尿道", 血尿: "泌尿道", 尿血: "泌尿道", 尿不出來: "泌尿道",
+  尿不太出來: "泌尿道", 尿很少: "泌尿道", 一直跑砂盆: "泌尿道", 一直蹲砂盆: "泌尿道",
+  泌尿: "泌尿道", 膀胱: "泌尿道", 結石: "泌尿道", 尿道: "泌尿道",
+
+  糖尿: "糖尿病", 血糖: "糖尿病",
+
   口臭: "口腔", 牙結石: "口腔", 牙齒黃: "口腔",
 };
 
@@ -97,43 +131,89 @@ export interface ParseResult {
   situation: Situation;
   /** 解析到的每一項，給前端做成可編輯的 chip */
   chips: { label: string; kind: "info" | "avoid"; source: string }[];
-  /** 完全沒讀到東西 —— 前端要引導或走 LINE 降落傘 */
+  /** 完全沒讀到東西 —— 前端要引導或走降落傘 */
   empty: boolean;
+  /** 物種是從這句話讀出來的（true），還是用呼叫端給的預設（false） */
+  speciesFromText: boolean;
 }
 
-export function parse(text: string): ParseResult {
+/**
+ * 從這句話判斷是狗還是貓。讀不出來回 undefined，交給畫面上的選擇。
+ *
+ * 兩個都講到的時候（「家裡有狗也有貓，貓一直吐」），看哪一個被提到比較多次，
+ * 一樣多才看誰先出現。不完美，但這種句子很少，而且畫面上的切換鈕隨時可以改。
+ */
+export function detectSpecies(t: string): Species | undefined {
+  const catWords = ["貓", "喵", "主子", "砂盆", ...CAT_BREEDS];
+  // 米克斯貓也叫米克斯，不能拿來判斷是狗
+  const dogWords = ["狗", "犬", "汪", ...Object.keys(BREEDS).filter((b) => b !== "米克斯" && b !== "混種")];
+  const cat = hits(t, catWords);
+  const dog = hits(t, dogWords);
+  if (cat.count === 0 && dog.count === 0) return undefined;
+  if (cat.count !== dog.count) return cat.count > dog.count ? "cat" : "dog";
+  return cat.first < dog.first ? "cat" : "dog";
+}
+
+/** 這些詞在句子裡出現幾次、最早在哪。長的先比，比到的字蓋掉，「英短」不會又被「貓」多算一次。 */
+function hits(t: string, words: string[]): { count: number; first: number } {
+  let work = t, count = 0, first = Infinity;
+  for (const w of [...words].sort((a, z) => z.length - a.length)) {
+    let idx = work.indexOf(w);
+    while (idx !== -1) {
+      count++;
+      first = Math.min(first, idx);
+      work = work.slice(0, idx) + "＿".repeat(w.length) + work.slice(idx + w.length);
+      idx = work.indexOf(w);
+    }
+  }
+  return { count, first };
+}
+
+export function parse(text: string, fallback: Species = "dog"): ParseResult {
   const t = text.replace(/\s+/g, "");
   const chips: ParseResult["chips"] = [];
 
   /*
-   * 物種。預設狗 —— 目前只有狗飼料。
+   * 物種。
    *
-   * 只有明確講到貓才標 chip：狗是預設值，每次都掛一個「物種 · 狗」是噪音；
-   * 但講了貓一定要顯示出來，因為接下來我們會整題不回答，
-   * 使用者必須看得到我們是因為讀到「貓」才停的。
+   * 句子裡讀得出來就照句子；讀不出來用畫面上選的那一個（預設狗）。
+   * 從句子讀出來的才掛 chip —— 使用者自己選的，再掛一次是噪音。
    */
-  const species: "dog" | "cat" = /貓|喵/.test(t) ? "cat" : "dog";
-  if (species === "cat") {
-    chips.push({ label: "物種 · 貓", kind: "info", source: "貓" });
-  }
+  const said = detectSpecies(t);
+  const species: Species = said ?? fallback;
 
   /* 品種 —— 長的先比，「迷你雪納瑞」不要被「雪納瑞」搶走 */
   let breed: string | undefined;
   let bodySize: "small" | "medium" | "large" | undefined;
-  for (const b of Object.keys(BREEDS).sort((a, z) => z.length - a.length)) {
-    if (t.includes(b)) {
-      breed = b;
-      bodySize = BREEDS[b];
-      chips.push({ label: `品種 · ${b}`, kind: "info", source: b });
-      break;
+  if (species === "cat") {
+    for (const b of [...CAT_BREEDS].sort((a, z) => z.length - a.length)) {
+      if (t.includes(b)) {
+        breed = b;
+        chips.push({ label: `品種 · ${b}`, kind: "info", source: b });
+        break;
+      }
+    }
+  } else {
+    for (const b of Object.keys(BREEDS).sort((a, z) => z.length - a.length)) {
+      if (t.includes(b)) {
+        breed = b;
+        bodySize = BREEDS[b];
+        chips.push({ label: `品種 · ${b}`, kind: "info", source: b });
+        break;
+      }
     }
   }
 
+  // 講了品種就知道是什麼動物，不用再掛一顆「物種」。沒講品種才掛，讓他看得到我們是怎麼判斷的。
+  if (said && !breed) {
+    chips.unshift({ label: `物種 · ${species === "cat" ? "貓" : "狗"}`, kind: "info", source: said });
+  }
+
   /* 年齡 */
-  const ageYears = parseAge(t);
+  const ageYears = parseAge(t, species);
   if (ageYears !== undefined) {
     chips.push({
-      label: ageYears < 1 ? `年齡 · 幼犬` : `年齡 · ${ageYears} 歲`,
+      label: ageYears < 1 ? `年齡 · ${species === "cat" ? "幼貓" : "幼犬"}` : `年齡 · ${ageYears} 歲`,
       kind: "info",
       source: "年齡",
     });
@@ -144,19 +224,27 @@ export function parse(text: string): ParseResult {
   const weightKg = wm ? parseFloat(wm[1]) : undefined;
   if (weightKg) chips.push({ label: `體重 · ${weightKg}kg`, kind: "info", source: "體重" });
 
-  /* 症狀 */
+  /*
+   * 症狀。長的詞先比，比到的字就蓋掉：
+   * 「牙結石」不能讓「結石」再比一次（那會變成泌尿道，整題停掉），
+   * 「吐毛球」裡的「吐」也不算腸胃問題。
+   */
   const symptoms: string[] = [];
-  for (const [k, v] of Object.entries(SYMPTOMS)) {
-    if (t.includes(k) && !symptoms.includes(v)) {
+  let work = t;
+  for (const k of Object.keys(SYMPTOMS).sort((a, z) => z.length - a.length)) {
+    if (!work.includes(k)) continue;
+    const v = SYMPTOMS[k];
+    if (!symptoms.includes(v)) {
       symptoms.push(v);
       chips.push({ label: v, kind: "info", source: k });
     }
+    work = work.split(k).join("＿".repeat(k.length));
   }
 
   /* 要避開的蛋白源 —— 兩種訊號 */
   const avoid = detectAvoid(t, symptoms.length > 0);
-  for (const a of avoid) {
-    chips.push({ label: `排除 · ${zhProtein(a)}`, kind: "avoid", source: "過敏" });
+  for (const label of avoidLabels(avoid)) {
+    chips.push({ label: `排除 · ${label}`, kind: "avoid", source: "過敏" });
   }
 
   /* 預算 */
@@ -169,6 +257,7 @@ export function parse(text: string): ParseResult {
     situation: { species, breed, bodySize, ageYears, weightKg, avoid, symptoms, budgetMonthly, constraints: [] },
     chips,
     empty: chips.length === 0,
+    speciesFromText: said !== undefined,
   };
 }
 
@@ -179,6 +268,8 @@ export function parse(text: string): ParseResult {
  * 間接訊號：「換過兩種雞肉飼料都沒改善」+ 有皮膚症狀
  *           → 這是台灣飼主最常見的講法，而且它其實是很強的線索：
  *             他已經自己做過一輪排除法了。
+ *
+ * 長的詞先比，比到的字就蓋掉，「鮭魚」才不會又被當成「魚」。
  */
 function detectAvoid(t: string, hasSymptom: boolean): ProteinSource[] {
   const found = new Set<ProteinSource>();
@@ -187,24 +278,33 @@ function detectAvoid(t: string, hasSymptom: boolean): ProteinSource[] {
   const explicit = /過敏|不能吃|不吃|會癢|忌口|avoid/;
   const triedAndFailed = /換過|試過|吃過|都沒(改善|用|效)|沒有改善|還是(一樣|會)/;
 
+  let work = t;
   for (const k of keys) {
-    const idx = t.indexOf(k);
-    if (idx === -1) continue;
+    let idx = work.indexOf(k);
+    while (idx !== -1) {
+      // 只看該蛋白源前後 12 字，避免整句話裡任一個「過敏」都算到頭上
+      const around = t.slice(Math.max(0, idx - 12), idx + k.length + 12);
 
-    // 只看該蛋白源前後 12 字，避免整句話裡任一個「過敏」都算到頭上
-    const around = t.slice(Math.max(0, idx - 12), idx + k.length + 12);
-
-    if (explicit.test(around)) {
-      found.add(PROTEINS[k]);
-    } else if (hasSymptom && triedAndFailed.test(t)) {
-      // 有症狀 + 講了「換過都沒改善」→ 他提到的那個蛋白源就是嫌疑犯
-      found.add(PROTEINS[k]);
+      if (explicit.test(around) || (hasSymptom && triedAndFailed.test(t))) {
+        // 有症狀 + 講了「換過都沒改善」→ 他提到的那個蛋白源就是嫌疑犯
+        for (const p of PROTEINS[k]) found.add(p);
+      }
+      work = work.slice(0, idx) + "＿".repeat(k.length) + work.slice(idx + k.length);
+      idx = work.indexOf(k);
     }
   }
   return [...found];
 }
 
-function parseAge(t: string): number | undefined {
+/** chip 上的字。三種魚都在就只講「魚」，不要冒出「白魚」「其他魚類」。 */
+function avoidLabels(avoid: ProteinSource[]): string[] {
+  const fish: ProteinSource[] = ["salmon", "whitefish", "fish"];
+  const allFish = fish.every((f) => avoid.includes(f));
+  const out = avoid.filter((a) => !(allFish && fish.includes(a))).map(zhProtein);
+  return allFish ? ["魚", ...out] : out;
+}
+
+function parseAge(t: string, species: Species): number | undefined {
   // 月齡優先 —— 「4 個月」是幼犬，不能當成 4 歲
   const mo = t.match(/(\d+)\s*個?月(?!.*歲)/) ?? t.match(/([零一兩二三四五六七八九十]+)\s*個月/);
   if (mo) {
@@ -216,8 +316,9 @@ function parseAge(t: string): number | undefined {
     const n = /\d/.test(yr[1]) ? parseInt(yr[1], 10) : cnNum(yr[1]);
     if (n) return n;
   }
-  if (/幼犬|幼貓|小狗|奶狗|奶貓/.test(t)) return 0.5;
-  if (/老狗|老貓|高齡|年紀大/.test(t)) return 10;
+  if (/幼犬|幼貓|小狗|奶狗|奶貓|小貓/.test(t)) return 0.5;
+  // 「老貓」要落在貓的高齡線（11 歲）之後，不然會被當成成貓
+  if (/老狗|老貓|高齡|年紀大/.test(t)) return species === "cat" ? 12 : 10;
   return undefined;
 }
 
@@ -241,9 +342,9 @@ function cnNum(s: string): number {
 }
 
 const ZH: Record<string, string> = {
-  poultry: "未指明的禽肉",
+  poultry: "未指明的禽肉", animal: "未指明的動物蛋白",
   chicken: "雞肉", beef: "牛肉", lamb: "羊肉", salmon: "鮭魚",
-  whitefish: "白魚", duck: "鴨肉", turkey: "火雞", pork: "豬肉",
+  whitefish: "白魚", fish: "魚", duck: "鴨肉", turkey: "火雞", pork: "豬肉",
   venison: "鹿肉", insect: "昆蟲蛋白",
 };
 function zhProtein(k: string) { return ZH[k] ?? k; }

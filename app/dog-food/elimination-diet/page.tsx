@@ -2,8 +2,12 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { S } from "@/components/styles";
 import Remind from "@/components/Remind";
-import { catalog } from "@/lib/catalog";
+import { catalogOf } from "@/lib/catalog";
+
+// 這一頁講的是狗，統計只數狗飼料
+const catalog = catalogOf("dog");
 import { recommendable } from "@/lib/engine";
+import SiteHeader from "@/components/SiteHeader";
 
 /**
  * 排除飲食法。
@@ -101,18 +105,7 @@ export default function Page() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(howto) }}
       />
 
-      <div style={{
-        display: "flex", alignItems: "center", justifyContent: "space-between",
-        gap: 14, padding: "28px 0 20px", borderBottom: "1px solid var(--line)", marginBottom: 40,
-      }}>
-        <Link href="/" style={{ display: "flex", alignItems: "center", gap: 9, fontWeight: 900, fontSize: 16, color: "inherit", textDecoration: "none" }}>
-          <span style={{ width: 9, height: 9, borderRadius: 2, background: "var(--accent)" }} />
-          ZONE 27
-        </Link>
-        <Link href="/dog-food" style={{ fontSize: 12.5, color: "var(--muted)", textDecoration: "none" }}>
-          全部狗飼料
-        </Link>
-      </div>
+      <SiteHeader current="dog-food" />
 
       <h1 style={{ fontSize: "clamp(25px,5vw,34px)", lineHeight: 1.45, margin: "0 0 18px" }}>
         排除飲食法：怎麼真的找出牠對什麼過敏

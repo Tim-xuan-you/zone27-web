@@ -42,7 +42,7 @@ export default function Result({
   dogKg?: number;
   /** 決定試糧要跑多久 —— 皮膚 8 週、腸胃 2 週 */
   symptoms?: string[];
-  /** 生命階段。幼犬的食量接近同體重成犬的兩倍，不帶會高估這包能吃幾天。 */
+  /** 生命階段。幼犬幼貓的食量接近同體重成年的兩倍，不帶會高估這包能吃幾天。 */
   stage?: Stage;
   chipsLabel?: string;
 }) {
@@ -128,6 +128,8 @@ export default function Result({
           一個一人網站守不住的承諾，而且按鈕還是回首頁。
           改成告訴他下一步自己怎麼走：換個講法、或者去問真正答得了的人。
           零人力，而且比一個三天才回的訊息管道有用。 */}
+      {/* 停下來的時候（還在上架、要先看醫生）這一塊不對題：我們根本沒給選項，談不上合不合適 */}
+      {!verdict.stop && (<>
       <p style={S.lbl}>都不合適？</p>
       <div style={S.landing}>
         <div>
@@ -139,6 +141,7 @@ export default function Result({
         </div>
         <Link style={S.btn} href="/">回裁決器</Link>
       </div>
+      </>)}
     </>
   );
 }
@@ -154,14 +157,16 @@ export default function Result({
 /* ------------------------------------------------------------------ */
 
 function StopBox({ stop }: { stop: NonNullable<Verdict["stop"]> }) {
+  // 「還在上架」不是拒絕，是還沒準備好。不打叉，也不用警告色。
+  const soon = stop.kind === "soon";
   return (
-    <div style={S.stopBox}>
-      <p style={S.stopMark}>✕</p>
+    <div style={soon ? { ...S.stopBox, borderColor: "var(--line)", background: "var(--surface)" } : S.stopBox}>
+      {!soon && <p style={S.stopMark}>✕</p>}
       <h2 style={S.stopTitle}>{stop.title}</h2>
       <p style={S.stopBody}>{stop.body}</p>
       <p style={S.stopNext}>{stop.next}</p>
       <div style={S.stopActions}>
-        <Link style={S.btnSmall} href="/dog-food">看我們有的狗飼料</Link>
+        {stop.link && <Link style={S.btnSmall} href={stop.link.href}>{stop.link.label}</Link>}
         <Link style={S.btnSmall} href="/ask">哪個問題該問誰</Link>
       </div>
     </div>
@@ -282,6 +287,8 @@ function Trial({
   p, dogKg, symptoms, stage,
 }: { p: Product; dogKg?: number; symptoms?: string[]; stage?: Stage }) {
   const t = trialPlan(p, dogKg, symptoms, stage);
+  const cat = p.species === "cat";
+  const animal = cat ? "貓" : "狗";
 
   return (
     <div style={tBox}>
@@ -307,7 +314,7 @@ function Trial({
           )}
           {t.better && (
             <span style={tBetter}>
-              同一款有 <b>{t.better.unit}</b> 的，你的狗大約吃 {t.better.days} 天
+              同一款有 <b>{t.better.unit}</b> 的，你的{animal}大約吃 {t.better.days} 天
               {t.better.savingPct !== null && t.better.savingPct >= 3
                 ? `，每公斤還省 ${t.better.savingPct}%`
                 : ""}
@@ -318,13 +325,20 @@ function Trial({
       )}
 
       <Step n={t.anchorDays !== null ? 4 : 3} title="這段期間不要給零食">
-        一根雞肉零食就毀了整個測試。潔牙骨、人的食物、公園裡別人給的，都算。
+        一根雞肉零食就毀了整個測試。{cat ? "肉泥、凍乾、逗貓用的小零食、人的食物" : "潔牙骨、人的食物、公園裡別人給的"}，都算。
         要測就測乾淨的，不然跑完八週你還是不知道答案。
       </Step>
 
       <Step n={t.anchorDays !== null ? 5 : 4} title="什麼情況要停" last>
         連續軟便超過三天、抓得比以前更兇、開始吐。
         這時候該看醫生，不是再換下一款飼料。
+        {cat && (
+          <>
+            <br />
+            <b>貓還有一條：完全不吃超過一天，就先換回原本的。</b>
+            貓不吃東西撐不久，餓個兩三天可能傷到肝，這不是比耐心的時候。
+          </>
+        )}
       </Step>
 
       <Remind plan="trial" p={p} kg={dogKg} symptoms={symptoms} stage={stage} />
@@ -472,7 +486,7 @@ function Stores({ p, dogKg, stage }: { p: Product; dogKg?: number; stage?: Stage
 
           <div style={S.optList}>
             {store.options.map((o) => {
-              const dur = bagDuration(o.unit, dogKg, stage);
+              const dur = bagDuration(o.unit, dogKg, stage, p.species, p.spec.kcal);
               const save =
                 o.savingPct === null || Math.abs(o.savingPct) < 3
                   ? o.savingPct === null ? null : { text: "每公斤差不多", tone: "faint" as const }
@@ -512,10 +526,10 @@ function Stores({ p, dogKg, stage }: { p: Product; dogKg?: number; stage?: Stage
             })}
           </div>
 
-          {store.options.some((o) => bagDuration(o.unit, dogKg, stage)?.tooLong) && (
+          {store.options.some((o) => bagDuration(o.unit, dogKg, stage, p.species, p.spec.kcal)?.tooLong) && (
             <p style={S.freshWarn}>
-              ⚠️ 標記的規格，你的狗要吃超過 {FRESH_DAYS} 天才吃得完。開封後的乾飼料油脂會氧化，
-              放久了狗會越來越不愛吃，很多人以為是這牌子不好，其實只是放太久了。
+              ⚠️ 標記的規格，你的{p.species === "cat" ? "貓" : "狗"}要吃超過 {FRESH_DAYS} 天才吃得完。開封後的乾飼料油脂會氧化，
+              放久了會越來越不愛吃，很多人以為是這牌子不好，其實只是放太久了。
             </p>
           )}
 

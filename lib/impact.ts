@@ -1,5 +1,8 @@
 import { adjudicate, passes } from "./engine";
-import { catalog, constraintsFor } from "./catalog";
+import { catalogOf, constraintsFor } from "./catalog";
+
+// 影響力分析跑的是狗飼料的長尾頁。貓的長尾頁開張之後再另外算。
+const catalog = catalogOf("dog");
 import { allPaths, resolve, situationOf } from "./slugs";
 import type { Product, Situation } from "./types";
 
@@ -264,7 +267,10 @@ export function ruleAudit(pool: Product[] = catalog): RuleRow[] {
     .map((c) => ({
       rule: c.label,
       catches: pool.filter((p) => !passes(p, c)).length,
-      need: NEED[c.kind] ?? "補一款會被這條規則擋下來的商品",
+      need:
+        c.kind === "excludeProtein" && c.value === "animal"
+          ? "（這條擋的是只寫「動物蛋白」的款，狗飼料目前沒有標得這麼模糊的，0 是正常的）"
+          : NEED[c.kind] ?? "補一款會被這條規則擋下來的商品",
     }))
     .sort((a, b) => a.catches - b.catches);
 }

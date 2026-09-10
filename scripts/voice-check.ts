@@ -17,9 +17,9 @@ const ROOT = resolve(import.meta.dirname, "..");
 const TARGETS = [
   "app", "components",
   "lib/engine.ts", "lib/catalog.ts", "lib/slugs.ts", "lib/impact.ts",
-  "lib/og.tsx", "lib/og-longtail.tsx", "lib/reminder.ts",
+  "lib/og.tsx", "lib/og-longtail.tsx", "lib/reminder.ts", "lib/categories.ts", "lib/parse.ts",
 ];
-const DATA = ["data/dog-food.json", "data/hidden-chicken.json"];
+const DATA = ["data/dog-food.json", "data/hidden-chicken.json", "data/cat-food.json", "data/cat-hidden-chicken.json"];
 
 /* ---- 規則 ---- */
 const RULES: { name: string; re: RegExp; fix: string; hard: boolean }[] = [

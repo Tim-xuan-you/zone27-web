@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { catalog } from "@/lib/catalog";
+import { catalog, catalogOf, constraintsFor, liveCount } from "@/lib/catalog";
+import { CATEGORIES, MIN_LIVE, categoryOfId } from "@/lib/categories";
 import {
-  buyable, maintenanceRows, shopeeSubId, CATEGORY_SUB_ID,
+  adjudicate, buyable, maintenanceRows, shopeeSubId, CATEGORY_SUB_ID,
   PRICE_FRESH_DAYS, PRICE_STALE_DAYS,
 } from "@/lib/engine";
+import { allPaths, resolve, situationOf } from "@/lib/slugs";
+import type { Product, Species } from "@/lib/types";
 import { impactMap, overallCutRate, ruleAudit, TIER_WEIGHT, type Impact } from "@/lib/impact";
 
 /**
@@ -34,6 +37,37 @@ const LEVEL = {
   fresh: { bg: "var(--keep-soft)", fg: "var(--keep)", zh: "新的" },
 } as const;
 
+/**
+ * 還在等連結的款，假設全部補齊之後，各自會在幾頁長尾頁被推薦。
+ *
+ * 等連結的清單一長，從哪一款開始補就很重要：
+ * 有的補了會出現在二十幾頁，有的補了一頁都輪不到。先補前者。
+ */
+function pickCounts(sp: Species): Map<string, number> {
+  const opened: Product[] = catalogOf(sp).map((p) =>
+    p.awaitingLink
+      ? {
+          ...p,
+          awaitingLink: false,
+          price: {
+            ...p.price,
+            merchants: [{ id: "m1", label: "（模擬）", amount: 1, note: "", affiliateUrl: "https://example.com", anchor: "safe" as const }],
+          },
+        }
+      : p,
+  );
+  const count = new Map<string, number>();
+  for (const slug of allPaths(sp)) {
+    const page = resolve(slug, sp);
+    if (!page) continue;
+    const st = situationOf(page, sp);
+    st.constraints = constraintsFor(st);
+    const v = adjudicate(opened, st);
+    if (v.pick) count.set(v.pick.id, (count.get(v.pick.id) ?? 0) + 1);
+  }
+  return count;
+}
+
 const TIER = {
   主力: { bg: "var(--accent-soft)", fg: "var(--accent)" },
   會被看到: { bg: "var(--sunken)", fg: "var(--muted)" },
@@ -60,9 +94,21 @@ export default function Page() {
     (a, b) => TIER_WEIGHT[a[1][0].impact.tier] - TIER_WEIGHT[b[1][0].impact.tier],
   );
 
-  const core = catalog.filter((p) => impact.get(p.id)?.tier === "主力");
-  const idle = catalog.filter((p) => impact.get(p.id)?.tier === "目前沒機會");
+  // 影響力分析跑的是狗飼料的長尾頁，這幾個數字只數狗
+  const dogPool = catalogOf("dog");
+  const core = dogPool.filter((p) => impact.get(p.id)?.tier === "主力");
+  const idle = dogPool.filter((p) => impact.get(p.id)?.tier === "目前沒機會");
   const waiting = catalog.filter((p) => p.awaitingLink);
+  const picks = new Map<string, number>([...pickCounts("dog"), ...pickCounts("cat")]);
+  const waitingBy = CATEGORIES
+    .map((c) => ({
+      cat: c,
+      items: waiting
+        .filter((p) => p.species === c.species)
+        .sort((a, b) => (picks.get(b.id) ?? 0) - (picks.get(a.id) ?? 0)),
+      ready: liveCount(c.species),
+    }))
+    .filter((g) => g.items.length > 0);
 
   /* 同一個品牌我們已經在哪幾家買過。
      回去同一家找，通常比重新搜一次快 —— 那家有整條產品線的機率很高。
@@ -159,7 +205,7 @@ export default function Page() {
         </p>
         <div style={{ display: "flex", flexWrap: "wrap", gap: 10 }}>
           <Chip {...TIER["主力"]}>主力 {core.length} 款 · 要顧</Chip>
-          <Chip {...TIER["會被看到"]}>會被看到 {catalog.length - core.length - idle.length} 款</Chip>
+          <Chip {...TIER["會被看到"]}>會被看到 {dogPool.length - core.length - idle.length} 款</Chip>
           <Chip {...TIER["目前沒機會"]}>目前沒機會 {idle.length} 款 · 先放著</Chip>
         </div>
         {idle.length > 0 && (
@@ -187,7 +233,7 @@ export default function Page() {
           這個站的說服力來自「我們刪掉了什麼」。
           {cut.avgKeep > 0.7 ? (
             <>
-              {" "}現在幾乎沒刪到東西，品種頁是 {catalog.length} 進 {catalog.length} 留，
+              {" "}現在幾乎沒刪到東西，品種頁是 {dogPool.length} 進 {dogPool.length} 留，
               那個刪除過程看起來就像在演。
             </>
           ) : (
@@ -238,14 +284,32 @@ export default function Page() {
             照下面的關鍵字去蝦皮找賣家，產生連結時把 Sub_id 填上，
             再把那一行貼進 <code style={code}>data/paste.txt</code>，跑 <code style={code}>npm run data:paste</code>。
           </p>
-          {waiting.map((p) => (
+          {waitingBy.map((g) => (
+            <div key={g.cat.slug} style={{ marginBottom: 28 }}>
+              <p style={{ margin: "0 0 12px", fontSize: 17, fontWeight: 700 }}>
+                {g.cat.zh}：{g.items.length} 款
+                {g.ready < MIN_LIVE && (
+                  <span style={{ fontSize: 14.5, fontWeight: 600, color: "var(--accent)", marginLeft: 10 }}>
+                    再補 {MIN_LIVE - g.ready} 款就開張
+                  </span>
+                )}
+              </p>
+              {g.ready < MIN_LIVE && (
+                <p style={{ margin: "0 0 14px", fontSize: 14.5, color: "var(--muted)", lineHeight: 1.9 }}>
+                  能推薦的款數到 {MIN_LIVE}，{g.cat.zh}的裁決器、長尾頁、分享卡會在下一次部署自己打開。
+                  清單已經照「補了之後會被推薦幾頁」排好，從最上面開始補最划算。
+                </p>
+              )}
+          {g.items.map((p) => (
             <div key={p.id} style={box}>
               <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", gap: 12, flexWrap: "wrap" }}>
                 <div>
                   <span style={{ fontSize: 12.5, color: "var(--muted)", display: "block" }}>{p.brand}</span>
                   <b style={{ fontSize: 16.5 }}>{p.name}</b>
                 </div>
-                <span className="mono" style={{ fontSize: 13, color: "var(--faint)" }}>{p.id}</span>
+                <span className="mono" style={{ fontSize: 13, color: "var(--faint)" }}>
+                  {p.id}{picks.get(p.id) ? ` · 補了會被推薦 ${picks.get(p.id)} 頁` : ""}
+                </span>
               </div>
 
               <div style={{ marginTop: 14, paddingTop: 14, borderTop: "1px solid var(--line)" }}>
@@ -265,7 +329,7 @@ export default function Page() {
                 </Line>
                 <Line k="產生連結時填">
                   <span className="mono" style={{ fontSize: 14 }}>
-                    Sub id 1 = <b>{shopeeSubId(p.id)}</b>　Sub id 2 = <b>{CATEGORY_SUB_ID}</b>
+                    Sub id 1 = <b>{shopeeSubId(p.id)}</b>　Sub id 2 = <b>{categoryOfId(p.id)?.subId ?? CATEGORY_SUB_ID}</b>
                   </span>
                   <span style={{ display: "block", fontSize: 12.5, color: "var(--faint)", marginTop: 4 }}>
                     蝦皮這個欄位只收英數字，連字號會被擋，所以是 {shopeeSubId(p.id)} 不是 {p.id}
@@ -296,6 +360,8 @@ export default function Page() {
                 </Line>
                 <Line k="一款留幾家">一到兩家就好。賣場數量直接等於維護成本</Line>
               </div>
+            </div>
+          ))}
             </div>
           ))}
         </>

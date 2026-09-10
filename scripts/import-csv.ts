@@ -1,33 +1,37 @@
 /**
- * CSV → dog-food.json
+ * CSV → JSON，每個類目一份（dog-food.csv → dog-food.json、cat-food.csv → cat-food.json）
  *
  * 為什麼要這個：真正的瓶頸不是程式，是那 200 款商品資料。
  * 而建資料的人（員工）不該去手改 JSON —— 少一個逗號整個站就掛。
  *
  * 流程：
  *   1. 員工在 Google Sheet 填資料（欄位照 data/_template.csv）
- *   2. 下載成 CSV，存成 data/dog-food.csv
+ *   2. 下載成 CSV，存成 data/dog-food.csv 或 data/cat-food.csv
  *   3. npm run data:import
- *   4. 有錯它會用中文告訴你第幾列哪一欄不對，而且一列都不會寫進去
+ *   4. 有錯它會用中文告訴你哪一份、第幾列、哪一欄不對，而且一列都不會寫進去
  *
  * 驗證是刻意嚴格的。寫錯一款飼料的過敏原，賠掉的是這個站唯一的資產。
  */
 import { readFileSync, writeFileSync, existsSync } from "node:fs";
 import { resolve } from "node:path";
 import { todayTW } from "../lib/date";
+import { CATEGORIES, type Category } from "../lib/categories";
 
-const SRC = resolve("data/dog-food.csv");
-const OUT = resolve("data/dog-food.json");
-
-const PROTEINS = ["chicken", "beef", "lamb", "salmon", "whitefish", "duck", "turkey", "pork", "venison", "insect", "poultry"];
-const STAGES = ["puppy", "adult", "senior", "all"];
+const PROTEINS = [
+  "chicken", "beef", "lamb", "salmon", "whitefish", "fish", "duck", "turkey",
+  "pork", "venison", "insect", "poultry", "animal",
+];
+// kitten 是給填貓資料的人好認的寫法，程式裡一律存成 puppy（幼年期）
+const STAGES = ["puppy", "kitten", "adult", "senior", "all"];
 const SIZES = ["small", "medium", "large"];
+const PULSES = ["high", "low", "none", "unknown"];
 
 type Row = Record<string, string>;
-const errors: string[] = [];
+let errors: string[] = [];
+let where = "";
 
 function fail(line: number, col: string, msg: string) {
-  errors.push(`第 ${line} 列 · ${col}：${msg}`);
+  errors.push(`${where} 第 ${line} 列 · ${col}：${msg}`);
 }
 
 /** 逗號分隔，支援雙引號包住的欄位（描述裡有逗號時會用到）。 */
@@ -40,7 +44,7 @@ function parseCsv(text: string): Row[] {
    * 因為數字欄位都還是對的，驗證全過。
    */
   if (text.includes("�")) {
-    console.error("\n✗ 這個檔案不是 UTF-8，中文會變亂碼。\n");
+    console.error(`\n✗ ${where} 不是 UTF-8，中文會變亂碼。\n`);
     console.error("  如果你是用 Excel 編輯的：");
     console.error("    另存新檔 → 檔案類型選「CSV UTF-8 (逗號分隔)」");
     console.error("    不要選只寫「CSV (逗號分隔)」的那個\n");
@@ -50,7 +54,7 @@ function parseCsv(text: string): Row[] {
   }
 
   const lines = text.replace(/^﻿/, "").split(/\r?\n/).filter((l) => l.trim());
-  if (lines.length < 2) throw new Error("CSV 至少要有標題列和一列資料");
+  if (lines.length < 2) throw new Error(`${where} 至少要有標題列和一列資料`);
 
   const head = splitLine(lines[0]);
   return lines.slice(1).map((l) => {
@@ -128,7 +132,7 @@ function merchant(row: Row, n: number, line: number) {
   const url = row[`${p}Url`] ?? "";
   if (!/^https?:\/\//.test(url)) fail(line, `${p}Url`, "不是有效的網址（要用 http:// 或 https:// 開頭）");
   if (url.includes("PLACEHOLDER")) {
-    console.warn(`  ⚠ 第 ${line} 列 ${p}Url 還是佔位連結，上線前要換成真的分潤連結`);
+    console.warn(`  ⚠ ${where} 第 ${line} 列 ${p}Url 還是佔位連結，上線前要換成真的分潤連結`);
   }
 
   return {
@@ -148,165 +152,196 @@ function merchant(row: Row, n: number, line: number) {
 
 /* ---------------------------------------------------------------- */
 
-if (!existsSync(SRC)) {
-  console.error(`\n找不到 ${SRC}`);
-  console.error(`\n請把 Google Sheet 下載成 CSV，存成 data/dog-food.csv`);
-  console.error(`欄位格式看 data/_template.csv\n`);
-  process.exit(1);
-}
+function readCategory(cat: Category) {
+  const SRC = resolve(cat.csv);
+  const rows = parseCsv(readFileSync(SRC, "utf8"));
+  const seen = new Set<string>();
 
-const rows = parseCsv(readFileSync(SRC, "utf8"));
-const seen = new Set<string>();
+  const products = rows.map((row, i) => {
+    const line = i + 2; // 標題列算第 1 列
 
-const products = rows.map((row, i) => {
-  const line = i + 2; // 標題列算第 1 列
-
-  if (!row.id) fail(line, "id", "沒填");
-  if (seen.has(row.id)) fail(line, "id", `「${row.id}」重複了`);
-  seen.add(row.id);
-
-  if (!row.dealbreaker) {
-    fail(line, "dealbreaker", "沒填 —— 每一款都必須有一句「不要買，如果⋯」，這是產品的核心");
-  }
-  if (!/^\d{4}-\d{2}-\d{2}$/.test(row.checkedAt ?? "")) {
-    fail(line, "checkedAt", `「${row.checkedAt}」格式要像 2026-09-05`);
-  }
-
-  // m1..m4。規則上一款一個規格就好，但賣家把尺寸拆成獨立商品時會用到。
-  const merchants = [1, 2, 3, 4].map((n) => merchant(row, n, line)).filter(Boolean);
-  /*
-   * 搭贈品的賣場擋下來。
-   *
-   * 遇過一次：ORIJEN 高齡犬 6kg 在某家賣 $6,500，規格寫「送 6 包舒潔」，
-   * 而另一家台灣通路同樣 6kg 是 $3,570。
-   *
-   * 問題不只是貴 —— 是那個價格裡包著跟飼料無關的東西，
-   * 拿它去算「每公斤多少」「大包省幾 %」，我們自己的數字就在說謊。
-   * 讀者看不出來，所以這種賣場不能收。
-   */
-  for (let n = 1; n <= 4; n++) {
-    const label = row[`m${n}Label`] ?? "";
-    const unit = row[`m${n}Unit`] ?? "";
-    const note = row[`m${n}Note`] ?? "";
-    const blob = label + unit + note;
-    if (!label) continue;
-    if (/送|贈|加贈|買一送/.test(blob)) {
-      fail(line, `m${n}Unit`, "這個賣場搭贈品（出現「送」或「贈」）。價格裡包著別的東西，每公斤就算不準了 —— 換一家乾淨定價的");
+    if (!row.id) fail(line, "id", "沒填");
+    if (seen.has(row.id)) fail(line, "id", `「${row.id}」重複了`);
+    seen.add(row.id);
+    // 編號前綴決定這款屬於哪個類目，paste 也靠它找檔案。放錯檔案要擋下來。
+    if (row.id && !row.id.startsWith(cat.idPrefix + "-")) {
+      fail(line, "id", `「${row.id}」要用 ${cat.idPrefix}- 開頭，這份是${cat.zh}`);
     }
-  }
 
-  /* 每公斤價格離譜 = 規格或價格打錯。
-     大包比小包便宜是正常的，但正常的量販折扣落在一到四成 ——
-     便宜超過六成，多半是公斤數少打一位數或多打一位數。 */
-  {
-    const sized: { unit: string; per: number }[] = [];
+    if (!row.dealbreaker) {
+      fail(line, "dealbreaker", "沒填 —— 每一款都必須有一句「不要買，如果⋯」，這是產品的核心");
+    }
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(row.checkedAt ?? "")) {
+      fail(line, "checkedAt", `「${row.checkedAt}」格式要像 2026-09-05`);
+    }
+    if (row.pulses && !PULSES.includes(row.pulses)) {
+      fail(line, "pulses", `「${row.pulses}」看不懂，可用：${PULSES.join(" / ")}`);
+    }
+
+    // m1..m4。規則上一款一個規格就好，但賣家把尺寸拆成獨立商品時會用到。
+    const merchants = [1, 2, 3, 4].map((n) => merchant(row, n, line)).filter(Boolean);
+    /*
+     * 搭贈品的賣場擋下來。
+     *
+     * 遇過一次：ORIJEN 高齡犬 6kg 在某家賣 $6,500，規格寫「送 6 包舒潔」，
+     * 而另一家台灣通路同樣 6kg 是 $3,570。
+     *
+     * 問題不只是貴 —— 是那個價格裡包著跟飼料無關的東西，
+     * 拿它去算「每公斤多少」「大包省幾 %」，我們自己的數字就在說謊。
+     * 讀者看不出來，所以這種賣場不能收。
+     */
     for (let n = 1; n <= 4; n++) {
-      const label = row[`m${n}Label`];
+      const label = row[`m${n}Label`] ?? "";
+      const unit = row[`m${n}Unit`] ?? "";
+      const note = row[`m${n}Note`] ?? "";
+      const blob = label + unit + note;
       if (!label) continue;
-      const unit = row[`m${n}Unit`] || row.unit || "";
-      const amount = Number(row[`m${n}Amount`] ?? 0);
-      const kg = kgOfUnit(unit);
-      if (!kg || !amount) continue;
-      sized.push({ unit, per: amount / kg });
+      if (/送|贈|加贈|買一送/.test(blob)) {
+        fail(line, `m${n}Unit`, "這個賣場搭贈品（出現「送」或「贈」）。價格裡包著別的東西，每公斤就算不準了 —— 換一家乾淨定價的");
+      }
     }
-    if (sized.length > 1) {
-      const hi = Math.max(...sized.map((x) => x.per));
-      for (const x of sized) {
-        if (x.per < hi * 0.4) {
-          fail(line, "mNAmount",
-            `「${x.unit}」換算下來每公斤 ${Math.round(x.per)} 元，比同一款最貴的規格便宜超過六成 —— ` +
-            `正常的量販折扣是一到四成。多半是公斤數或價格打錯（例如 1.8kg 打成 18kg），先回去對一次`);
+
+    /* 每公斤價格離譜 = 規格或價格打錯。
+       大包比小包便宜是正常的，但正常的量販折扣落在一到四成 ——
+       便宜超過六成，多半是公斤數少打一位數或多打一位數。 */
+    {
+      const sized: { unit: string; per: number }[] = [];
+      for (let n = 1; n <= 4; n++) {
+        const label = row[`m${n}Label`];
+        if (!label) continue;
+        const unit = row[`m${n}Unit`] || row.unit || "";
+        const amount = Number(row[`m${n}Amount`] ?? 0);
+        const kg = kgOfUnit(unit);
+        if (!kg || !amount) continue;
+        sized.push({ unit, per: amount / kg });
+      }
+      if (sized.length > 1) {
+        const hi = Math.max(...sized.map((x) => x.per));
+        for (const x of sized) {
+          if (x.per < hi * 0.4) {
+            fail(line, "mNAmount",
+              `「${x.unit}」換算下來每公斤 ${Math.round(x.per)} 元，比同一款最貴的規格便宜超過六成 —— ` +
+              `正常的量販折扣是一到四成。多半是公斤數或價格打錯（例如 1.8kg 打成 18kg），先回去對一次`);
+          }
         }
       }
     }
+
+    const isRef = yn(row, "referenceOnly", line);
+    const isAwait = yn(row, "awaitingLink", line);
+    // 對照款的工作是被刪掉；待補連結的是還沒拿到連結。兩種都可以沒有通路。
+    if (merchants.length === 0 && !isRef && !isAwait) {
+      fail(line, "m1Label", "至少要有一個通路（對照款填 referenceOnly=1，等連結的填 awaitingLink=1）");
+    }
+    if (merchants.length > 0 && isAwait) {
+      fail(line, "awaitingLink", "已經有通路了，把 awaitingLink 清空");
+    }
+    // 沒有台灣上架頁的證據，就不准進採購清單 —— 這條擋的是「讓人白跑一趟」
+    if (isAwait && !row.twSource) {
+      fail(line, "twSource", "要放進待補清單，必須先指出一個台灣通路實際上架這個 SKU 的頁面網址");
+    }
+
+    const stages = list(row, "lifeStage", line, STAGES).map((s) => (s === "kitten" ? "puppy" : s));
+
+    return {
+      id: row.id,
+      species: cat.species,
+      brand: row.brand,
+      name: row.name,
+      spec: {
+        protein: num(row, "protein", line, { min: 0, max: 100 }),
+        fat: num(row, "fat", line, { min: 0, max: 100 }),
+        carb: num(row, "carb", line, { min: 0, max: 100 }),
+        omega3: num(row, "omega3", line, { min: 0, max: 20 }),
+        // 0 = 查不到。允許留白，但引擎會把它當成「不通過磷上限」。
+        phosphorus: row.phosphorus ? num(row, "phosphorus", line, { min: 0, max: 10 }) : 0,
+        proteinSources: list(row, "proteinSources", line, PROTEINS),
+        singleSource: yn(row, "singleSource", line),
+        ...(row.pulses ? { pulses: row.pulses as "high" | "low" | "none" | "unknown" } : {}),
+        grainFree: yn(row, "grainFree", line),
+        lifeStage: stages,
+        bodySize: list(row, "bodySize", line, SIZES),
+        prescription: yn(row, "prescription", line),
+        // 熱量有公布才填。沒填的就用引擎的中間值估，不假裝知道。
+        ...(row.kcal ? { kcal: num(row, "kcal", line, { min: 2500, max: 5500 }) } : {}),
+      },
+      reports: {
+        total: num(row, "reportsTotal", line, { min: 0 }),
+        palatability: num(row, "reportsPalatability", line, { min: 0 }),
+        looseStool: num(row, "reportsLooseStool", line, { min: 0 }),
+      },
+      price: { unit: row.unit, checkedAt: row.checkedAt, merchants },
+      dealbreaker: row.dealbreaker,
+      ...(row.knownIssues ? { knownIssues: row.knownIssues } : {}),
+      ...(yn(row, "discontinued", line) ? { discontinued: true } : {}),
+      ...(isRef ? { referenceOnly: true } : {}),
+      ...(isAwait ? { awaitingLink: true } : {}),
+      ...(row.searchAs ? { searchAs: row.searchAs } : {}),
+      ...(row.twSource ? { twSource: row.twSource } : {}),
+    };
+  });
+
+  /*
+   * 同一商品頁多口味的偵測。
+   *
+   * 蝦皮的分享連結指向整個商品頁，不是特定規格 —— 賣家把鹿肉/火雞/鮭魚
+   * 放同一頁，兩款拿到同一條連結是必然，不是填錯。
+   *
+   * 所以不擋。改成印出來提醒，前端會在「前往」按鈕旁警告使用者自己
+   * 選對規格 —— 那才是風險真正發生的地方。
+   */
+  const urlOwners = new Map<string, string[]>();
+  for (const p of products) {
+    // 同一款的大小包本來就共用連結，那不算多口味 —— 只看有幾「款」共用
+    for (const url of new Set(p.price.merchants.map((m) => m!.affiliateUrl))) {
+      const owners = urlOwners.get(url) ?? [];
+      owners.push(p.id + "（" + p.spec.proteinSources.join("+") + "）");
+      urlOwners.set(url, owners);
+    }
+  }
+  const shared = [...urlOwners].filter(([, o]) => o.length > 1);
+  if (shared.length) {
+    console.log(`\n  ${cat.zh}：同一商品頁多口味（前端會提醒使用者選規格）：`);
+    for (const [, owners] of shared) console.log("    " + owners.join(" · "));
   }
 
-  const isRef = yn(row, "referenceOnly", line);
-  const isAwait = yn(row, "awaitingLink", line);
-  // 對照款的工作是被刪掉；待補連結的是還沒拿到連結。兩種都可以沒有通路。
-  if (merchants.length === 0 && !isRef && !isAwait) {
-    fail(line, "m1Label", "至少要有一個通路（對照款填 referenceOnly=1，等連結的填 awaitingLink=1）");
-  }
-  if (merchants.length > 0 && isAwait) {
-    fail(line, "awaitingLink", "已經有通路了，把 awaitingLink 清空");
-  }
-  // 沒有台灣上架頁的證據，就不准進採購清單 —— 這條擋的是「讓人白跑一趟」
-  if (isAwait && !row.twSource) {
-    fail(line, "twSource", "要放進待補清單，必須先指出一個台灣通路實際上架這個 SKU 的頁面網址");
-  }
+  /* 跨列的合理性檢查 —— 單列看不出來的問題 */
+  products.forEach((p, i) => {
+    const line = i + 2;
+    if (p.spec.singleSource && p.spec.proteinSources.length > 1) {
+      fail(line, "singleSource", `標了單一蛋白源，但 proteinSources 填了 ${p.spec.proteinSources.length} 種`);
+    }
+    if (p.reports.palatability > p.reports.total || p.reports.looseStool > p.reports.total) {
+      fail(line, "reports", "回報人數比總回報數還多");
+    }
+    const sum = p.spec.protein + p.spec.fat + p.spec.carb;
+    if (sum > 100) fail(line, "protein/fat/carb", `加起來 ${sum}% 超過 100%`);
+  });
 
-  return {
-    id: row.id,
-    species: "dog",
-    brand: row.brand,
-    name: row.name,
-    spec: {
-      protein: num(row, "protein", line, { min: 0, max: 100 }),
-      fat: num(row, "fat", line, { min: 0, max: 100 }),
-      carb: num(row, "carb", line, { min: 0, max: 100 }),
-      omega3: num(row, "omega3", line, { min: 0, max: 20 }),
-      // 0 = 查不到。允許留白，但引擎會把它當成「不通過磷上限」。
-      phosphorus: row.phosphorus ? num(row, "phosphorus", line, { min: 0, max: 10 }) : 0,
-      proteinSources: list(row, "proteinSources", line, PROTEINS),
-      singleSource: yn(row, "singleSource", line),
-      ...(row.pulses ? { pulses: row.pulses as "high" | "none" | "unknown" } : {}),
-      grainFree: yn(row, "grainFree", line),
-      lifeStage: list(row, "lifeStage", line, STAGES),
-      bodySize: list(row, "bodySize", line, SIZES),
-      prescription: yn(row, "prescription", line),
-    },
-    reports: {
-      total: num(row, "reportsTotal", line, { min: 0 }),
-      palatability: num(row, "reportsPalatability", line, { min: 0 }),
-      looseStool: num(row, "reportsLooseStool", line, { min: 0 }),
-    },
-    price: { unit: row.unit, checkedAt: row.checkedAt, merchants },
-    dealbreaker: row.dealbreaker,
-    ...(row.knownIssues ? { knownIssues: row.knownIssues } : {}),
-    ...(yn(row, "discontinued", line) ? { discontinued: true } : {}),
-    ...(isRef ? { referenceOnly: true } : {}),
-    ...(isAwait ? { awaitingLink: true } : {}),
-    ...(row.searchAs ? { searchAs: row.searchAs } : {}),
-    ...(row.twSource ? { twSource: row.twSource } : {}),
-  };
-});
-
-/*
- * 同一商品頁多口味的偵測。
- *
- * 蝦皮的分享連結指向整個商品頁，不是特定規格 —— 賣家把鹿肉/火雞/鮭魚
- * 放同一頁，兩款拿到同一條連結是必然，不是填錯。
- *
- * 所以不擋。改成印出來提醒，前端會在「前往」按鈕旁警告使用者自己
- * 選對規格 —— 那才是風險真正發生的地方。
- */
-const urlOwners = new Map<string, string[]>();
-for (const p of products) {
-  // 同一款的大小包本來就共用連結，那不算多口味 —— 只看有幾「款」共用
-  for (const url of new Set(p.price.merchants.map((m) => m!.affiliateUrl))) {
-    const list = urlOwners.get(url) ?? [];
-    list.push(p.id + "（" + p.spec.proteinSources.join("+") + "）");
-    urlOwners.set(url, list);
-  }
+  return products;
 }
-const shared = [...urlOwners].filter(([, o]) => o.length > 1);
-if (shared.length) {
-  console.log("\n  同一商品頁多口味（前端會提醒使用者選規格）：");
-  for (const [, owners] of shared) console.log('    ' + owners.join(' · '));
-}
 
-/* 跨列的合理性檢查 —— 單列看不出來的問題 */
-products.forEach((p, i) => {
-  const line = i + 2;
-  if (p.spec.singleSource && p.spec.proteinSources.length > 1) {
-    fail(line, "singleSource", `標了單一蛋白源，但 proteinSources 填了 ${p.spec.proteinSources.length} 種`);
+/* ---------------------------------------------------------------- */
+/* 先把每一份都驗完，全部沒問題才寫。一份有錯，哪一份都不動。          */
+/* ---------------------------------------------------------------- */
+
+errors = [];
+const results: { cat: Category; products: ReturnType<typeof readCategory> }[] = [];
+
+for (const cat of CATEGORIES) {
+  if (!existsSync(resolve(cat.csv))) {
+    // 狗飼料一定要有；其他類目還沒開始做就跳過
+    if (cat.slug === "dog-food") {
+      console.error(`\n找不到 ${cat.csv}`);
+      console.error(`\n請把 Google Sheet 下載成 CSV，存成 ${cat.csv}`);
+      console.error(`欄位格式看 data/_template.csv\n`);
+      process.exit(1);
+    }
+    continue;
   }
-  if (p.reports.palatability > p.reports.total || p.reports.looseStool > p.reports.total) {
-    fail(line, "reports", "回報人數比總回報數還多");
-  }
-  const sum = p.spec.protein + p.spec.fat + p.spec.carb;
-  if (sum > 100) fail(line, "protein/fat/carb", `加起來 ${sum}% 超過 100%`);
-});
+  where = cat.csv;
+  results.push({ cat, products: readCategory(cat) });
+}
 
 if (errors.length) {
   console.error(`\n✗ 有 ${errors.length} 個問題，一列都沒有寫入：\n`);
@@ -315,19 +350,20 @@ if (errors.length) {
   process.exit(1);
 }
 
-const json = {
-  _meta: {
-    category: "dog-food",
-    note: "由 data/dog-food.csv 產生，不要直接改這個檔。改 CSV 之後跑 npm run data:import。",
-    generatedAt: todayTW(),
-    count: products.length,
-    pricePolicy: "人工複查，不爬蟲。checkedAt 誠實顯示於前端。",
-  },
-  products,
-};
-
-writeFileSync(OUT, JSON.stringify(json, null, 2) + "\n", "utf8");
-console.log(`\n✓ ${products.length} 款寫入 data/dog-food.json`);
+for (const { cat, products } of results) {
+  const json = {
+    _meta: {
+      category: cat.slug,
+      note: `由 ${cat.csv} 產生，不要直接改這個檔。改 CSV 之後跑 npm run data:import。`,
+      generatedAt: todayTW(),
+      count: products.length,
+      pricePolicy: "人工複查，不爬蟲。checkedAt 誠實顯示於前端。",
+    },
+    products,
+  };
+  writeFileSync(resolve(cat.json), JSON.stringify(json, null, 2) + "\n", "utf8");
+  console.log(`\n✓ ${cat.zh} ${products.length} 款寫入 ${cat.json}`);
+}
 
 /* ---------------------------------------------------------------- */
 /* 價格快照 —— 每次匯入追加一筆                                       */
@@ -335,27 +371,28 @@ console.log(`\n✓ ${products.length} 款寫入 data/dog-food.json`);
 /* 價格史是唯一抄不走的護城河（別人一週能複製規格庫，但複製不了三年份   */
 /* 的波動），而且晚一天開始就永遠少一天。所以在只有 8 筆示範資料、      */
 /* 一個使用者都沒有的現在就先記。                                      */
+/*                                                                    */
+/* 所有類目共用一份，用商品編號區分。同一天重跑只蓋掉這次有匯入的款，  */
+/* 別的類目那天的價格不能被洗掉。                                      */
 /* ---------------------------------------------------------------- */
 
 const HIST = resolve("data/price-history.json");
 const hist = JSON.parse(readFileSync(HIST, "utf8"));
 const today = todayTW();
 
-const snapshot = {
-  d: today,
-  p: Object.fromEntries(
-    products
-      .filter((p) => p.price.merchants.length > 0)
-      .map((p) => [p.id, Math.min(...p.price.merchants.map((m) => m!.amount))])
-  ),
-};
+const fresh: Record<string, number> = Object.fromEntries(
+  results
+    .flatMap((r) => r.products)
+    .filter((p) => p.price.merchants.length > 0)
+    .map((p) => [p.id, Math.min(...p.price.merchants.map((m) => m!.amount))])
+);
 
 const idx = hist.snapshots.findIndex((s: { d: string }) => s.d === today);
 if (idx >= 0) {
-  hist.snapshots[idx] = snapshot;      // 同一天重跑就覆蓋，不要留兩筆
+  hist.snapshots[idx] = { d: today, p: { ...hist.snapshots[idx].p, ...fresh } };
   console.log(`  價格快照 ${today} 已更新（共 ${hist.snapshots.length} 天）`);
 } else {
-  hist.snapshots.push(snapshot);
+  hist.snapshots.push({ d: today, p: fresh });
   console.log(`  價格快照 ${today} 已追加（共 ${hist.snapshots.length} 天）`);
 }
 

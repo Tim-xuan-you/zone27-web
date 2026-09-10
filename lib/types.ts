@@ -18,8 +18,27 @@ export type ProteinSource =
    * 你不可能從標示上排除雞肉，因為它根本沒說。
    * 所以只要使用者要避開任何一種禽類，含這個的一律排除。
    */
-  | "poultry";
+  | "poultry"
+  /**
+   * 鮭魚、白魚以外的魚：沙丁魚、鯖魚、鯡魚、鮪魚這些。
+   *
+   * 貓飼料裡的魚種類比狗飼料多很多，全塞進 whitefish 會讓「白魚」
+   * 這個字變成謊話。使用者說「對魚過敏」時，三種魚一起排除。
+   */
+  | "fish"
+  /**
+   * 成分表只寫「水解動物蛋白」「動物性蛋白」，連是哪一類動物都沒說。
+   *
+   * 比 poultry 更糟：poultry 至少知道是鳥，這個什麼都可能。
+   * 所以使用者要避開任何一種肉，含這個的一律排除。
+   */
+  | "animal";
 
+/**
+ * 生命階段。puppy 在程式裡代表「幼年期」，狗是幼犬、貓是幼貓。
+ * 名字不改是因為狗飼料的資料和網址早就用了這個字，改了只會多一堆遷移。
+ * 畫面上的中文一律照物種換。
+ */
 export type LifeStage = "puppy" | "adult" | "senior" | "all";
 export type BodySize = "small" | "medium" | "large";
 export type Species = "dog" | "cat";
@@ -55,14 +74,23 @@ export interface Spec {
    * 這一欄才回答得了，而且台灣沒有人在標。
    *
    * high    = 成分表前段就出現豆類
+   * low     = 有豆類（含黃豆粉），但排在油脂後面、份量不大
    * none    = 成分表裡沒有豆類（或品牌明確標示不含）
    * unknown = 還沒查。空著也不假裝。
    */
-  pulses?: "high" | "none" | "unknown";
+  pulses?: "high" | "low" | "none" | "unknown";
   lifeStage: LifeStage[];
   bodySize: BodySize[];
   /** 處方飼料需獸醫指示，引擎必須另外標記 */
   prescription: boolean;
+  /**
+   * 代謝能（大卡／公斤），包裝或官網有公布才填。
+   *
+   * 一天吃幾克是用熱量換算的。沒有這個數字只能拿 3,800 當中間值，
+   * 但貓飼料從 3,400 到 4,400 都有，差到兩成多：
+   * 同一隻 4 公斤的貓，一包 1.8 公斤可能吃 26 天，也可能吃 33 天。
+   */
+  kcal?: number;
 }
 
 /** 使用者回報。護城河 L2：這些數字爬不到，只能累積。 */
@@ -193,7 +221,8 @@ export interface Product {
  * label 是給人看的（會出現在裁決過程），tag 是那條規則的來源。
  */
 export type Constraint =
-  | { kind: "excludeProtein"; value: ProteinSource; label: string; tag: string }
+  /** also：同一刀要一起刪的其他來源，例如「魚」= fish + salmon + whitefish */
+  | { kind: "excludeProtein"; value: ProteinSource; also?: ProteinSource[]; label: string; tag: string }
   | { kind: "minProtein"; value: number; label: string; tag: string }
   | { kind: "maxCarb"; value: number; label: string; tag: string }
   | { kind: "maxPhosphorus"; value: number; label: string; tag: string }
@@ -253,7 +282,16 @@ export interface Cut {
  * stop 一設，畫面上就不出現任何商品卡片。不是收起來，是不顯示。
  */
 export interface Stop {
-  kind: "species" | "renal";
+  /**
+   * species  = 這個物種我們沒有飼料
+   * soon     = 這個類目還在上架，成分表讀完了、購買連結還沒補齊
+   * renal    = 腎臟，要跟著獸醫走
+   * urinary  = 泌尿道，公貓尿不出來是急診
+   * diabetes = 糖尿病，飲食跟用藥綁在一起
+   */
+  kind: "species" | "soon" | "renal" | "urinary" | "diabetes";
+  /** 有值就在畫面上多一顆按鈕，例如「先看我們查到的 15 款」 */
+  link?: { href: string; label: string };
   title: string;
   /** 為什麼我們不回答，要講得出根據 */
   body: string;

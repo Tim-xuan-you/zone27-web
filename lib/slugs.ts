@@ -1,5 +1,4 @@
-import type { ProteinSource } from "./types";
-import type { Situation } from "./types";
+import type { ProteinSource, Situation, Species } from "./types";
 
 /**
  * 程序化決策頁的網址字典。
@@ -9,6 +8,9 @@ import type { Situation } from "./types";
  *
  * 網址用英文 slug（穩定、不會被百分比編碼弄髒），
  * 頁面內容全中文（那才是 Google 和 AI 讀的東西）。
+ *
+ * 狗跟貓各一套。網址前綴不同（/dog-food、/cat-food），
+ * 所以 no-chicken 這種 slug 可以兩邊都有，不會撞。
  */
 
 export interface BreedEntry {
@@ -16,9 +18,10 @@ export interface BreedEntry {
   zh: string;
   /** 同一品種的其他寫法，出現在頁面內文幫助命中搜尋 */
   alias: string[];
-  size: "small" | "medium" | "large";
+  /** 只有狗有。貓的體型差距小，市面上也幾乎沒有體型專用的貓糧 */
+  size?: "small" | "medium" | "large";
   /**
-   * 典型成犬體重（公斤）。
+   * 典型成年體重（公斤）。
    *
    * 加這一欄是為了讓每個品種頁至少帶一組**只屬於它自己的真實數字** ——
    * 一天幾克、這包吃幾天、一個月多少錢。
@@ -26,7 +29,7 @@ export interface BreedEntry {
    * 原本只用 small/medium/large 三個桶，結果馬爾濟斯、博美、約克夏
    * 三頁的內容一模一樣，那在 Google 眼中就是 doorway page。
    *
-   * 數字取各犬種普遍公布的體重範圍中間值，台灣常見的體型為準
+   * 數字取各品種普遍公布的體重範圍中間值，台灣常見的體型為準
    * （貴賓、臘腸、雪納瑞多為迷你型）。標成「典型」不是「應該」——
    * 真正的依據是體態。
    */
@@ -59,10 +62,31 @@ export const BREEDS: BreedEntry[] = [
   { slug: "doberman",    zh: "杜賓",     alias: [],                 size: "large",  kg: 36 },
 ];
 
+/**
+ * 貓的品種。體重取各品種普遍公布範圍的中間值，公母平均。
+ * 米克斯放第一個：台灣的貓大多是米克斯，那一頁的量最大。
+ */
+export const CAT_BREEDS: BreedEntry[] = [
+  { slug: "mixed",              zh: "米克斯貓",     alias: ["米克斯", "浪貓", "橘貓", "虎斑", "賓士貓", "三花"], kg: 4.5 },
+  { slug: "british-shorthair",  zh: "英國短毛貓",   alias: ["英短"],               kg: 5.5 },
+  { slug: "american-shorthair", zh: "美國短毛貓",   alias: ["美短"],               kg: 5 },
+  { slug: "ragdoll",            zh: "布偶貓",       alias: ["布偶"],               kg: 6 },
+  { slug: "maine-coon",         zh: "緬因貓",       alias: ["緬因"],               kg: 7 },
+  { slug: "persian",            zh: "波斯貓",       alias: ["金吉拉"],             kg: 4.5 },
+  { slug: "exotic-shorthair",   zh: "異國短毛貓",   alias: ["加菲貓", "加菲"],     kg: 5 },
+  { slug: "siamese",            zh: "暹羅貓",       alias: ["暹羅"],               kg: 4 },
+  { slug: "scottish-fold",      zh: "蘇格蘭摺耳貓", alias: ["摺耳貓", "摺耳"],     kg: 4.5 },
+  { slug: "munchkin",           zh: "曼赤肯",       alias: ["短腿貓"],             kg: 3.5 },
+  { slug: "russian-blue",       zh: "俄羅斯藍貓",   alias: ["俄藍"],               kg: 4.5 },
+  { slug: "norwegian-forest",   zh: "挪威森林貓",   alias: [],                     kg: 6 },
+];
+
 export interface AllergenEntry {
   /** 網址用 no-chicken 這種形式，語意直接 */
   slug: string;
   protein: ProteinSource;
+  /** 同一頁要一起避開的，例如「魚」= fish + salmon + whitefish */
+  also?: ProteinSource[];
   zh: string;
 }
 
@@ -74,8 +98,23 @@ export const ALLERGENS: AllergenEntry[] = [
   { slug: "no-duck",    protein: "duck",    zh: "鴨肉" },
 ];
 
-export const breedBySlug = (s: string) => BREEDS.find((b) => b.slug === s);
-export const allergenBySlug = (s: string) => ALLERGENS.find((a) => a.slug === s);
+/**
+ * 貓的過敏原頁。只做刪得到東西的：
+ * 我們收的貓飼料沒有牛肉跟羊肉，「不含牛肉的貓飼料」會是一頁全部留下的空話。
+ */
+export const CAT_ALLERGENS: AllergenEntry[] = [
+  { slug: "no-chicken", protein: "chicken", zh: "雞肉" },
+  { slug: "no-fish",    protein: "fish", also: ["salmon", "whitefish"], zh: "魚" },
+];
+
+const BREEDS_OF: Record<Species, BreedEntry[]> = { dog: BREEDS, cat: CAT_BREEDS };
+const ALLERGENS_OF: Record<Species, AllergenEntry[]> = { dog: ALLERGENS, cat: CAT_ALLERGENS };
+
+export const breedsOf = (sp: Species) => BREEDS_OF[sp];
+export const allergensOf = (sp: Species) => ALLERGENS_OF[sp];
+
+export const breedBySlug = (s: string, sp: Species = "dog") => BREEDS_OF[sp].find((b) => b.slug === s);
+export const allergenBySlug = (s: string, sp: Species = "dog") => ALLERGENS_OF[sp].find((a) => a.slug === s);
 
 /* ------------------------------------------------------------------ */
 
@@ -85,46 +124,48 @@ export type PageKind =
   | { kind: "both";    breed: BreedEntry; allergen: AllergenEntry };
 
 /** 把網址片段解析成頁面類型。不合法的組合回 null → 404。 */
-export function resolve(slug: string[]): PageKind | null {
+export function resolve(slug: string[], sp: Species = "dog"): PageKind | null {
   if (slug.length === 1) {
-    const b = breedBySlug(slug[0]);
+    const b = breedBySlug(slug[0], sp);
     if (b) return { kind: "breed", breed: b };
-    const a = allergenBySlug(slug[0]);
+    const a = allergenBySlug(slug[0], sp);
     if (a) return { kind: "allergen", allergen: a };
     return null;
   }
   if (slug.length === 2) {
-    const b = breedBySlug(slug[0]);
-    const a = allergenBySlug(slug[1]);
+    const b = breedBySlug(slug[0], sp);
+    const a = allergenBySlug(slug[1], sp);
     if (b && a) return { kind: "both", breed: b, allergen: a };
   }
   return null;
 }
 
-/** 所有要靜態生成的路徑。目前 23 + 5 + 115 = 143 頁。 */
-export function allPaths(): string[][] {
+/** 所有要靜態生成的路徑。狗 23 + 5 + 115 = 143 頁，貓 12 + 2 + 24 = 38 頁。 */
+export function allPaths(sp: Species = "dog"): string[][] {
   const out: string[][] = [];
-  for (const b of BREEDS) out.push([b.slug]);
-  for (const a of ALLERGENS) out.push([a.slug]);
-  for (const b of BREEDS) for (const a of ALLERGENS) out.push([b.slug, a.slug]);
+  for (const b of BREEDS_OF[sp]) out.push([b.slug]);
+  for (const a of ALLERGENS_OF[sp]) out.push([a.slug]);
+  for (const b of BREEDS_OF[sp]) for (const a of ALLERGENS_OF[sp]) out.push([b.slug, a.slug]);
   return out;
 }
 
+const ANIMAL: Record<Species, string> = { dog: "狗", cat: "貓" };
+
 /** 頁面標題。寫成使用者真的會打進 Google 的樣子。 */
-export function titleOf(p: PageKind): string {
+export function titleOf(p: PageKind, sp: Species = "dog"): string {
   switch (p.kind) {
     case "breed":    return `${p.breed.zh}飼料怎麼選`;
-    case "allergen": return `不含${p.allergen.zh}的狗飼料`;
+    case "allergen": return `不含${p.allergen.zh}的${ANIMAL[sp]}飼料`;
     case "both":     return `${p.breed.zh}${p.allergen.zh}過敏，飼料怎麼選`;
   }
 }
 
-export function descriptionOf(p: PageKind, kept: number, cut: number): string {
+export function descriptionOf(p: PageKind, kept: number, cut: number, sp: Species = "dog"): string {
   switch (p.kind) {
     case "breed":
       return `我們從資料庫裡刪掉 ${cut} 款不適合${p.breed.zh}的飼料，剩下 ${kept} 款，並寫清楚每一款的排除理由，以及什麼時候不要買。`;
     case "allergen":
-      return `避開${p.allergen.zh}的狗飼料。刪掉 ${cut} 款含${p.allergen.zh}或營養不達標的，剩下 ${kept} 款。每款都寫清楚什麼時候不要買。`;
+      return `避開${p.allergen.zh}的${ANIMAL[sp]}飼料。刪掉 ${cut} 款含${p.allergen.zh}或營養不達標的，剩下 ${kept} 款。每款都寫清楚什麼時候不要買。`;
     case "both":
       return `${p.breed.zh}對${p.allergen.zh}過敏該吃什麼？刪掉 ${cut} 款，剩下 ${kept} 款，附排除理由與購買時機建議。`;
   }
@@ -152,16 +193,16 @@ export const TYPICAL_KG: Record<"small" | "medium" | "large", number> = {
 /* 樣式那邊踩過同樣的坑（Decider 有自己的 S 物件），一次就夠了。      */
 /* ------------------------------------------------------------------ */
 
-export function situationOf(p: PageKind): Situation {
+export function situationOf(p: PageKind, sp: Species = "dog"): Situation {
   const breed = p.kind === "allergen" ? undefined : p.breed;
   const allergen = p.kind === "breed" ? undefined : p.allergen;
   return {
-    species: "dog",
+    species: sp,
     breed: breed?.zh,
     bodySize: breed?.size,
     weightKg: breed?.kg,
-    ageYears: 3,               // 頁面預設成犬；使用者要細分就回裁決器
-    avoid: allergen ? [allergen.protein] : [],
+    ageYears: 3,               // 頁面預設成年；使用者要細分就回裁決器
+    avoid: allergen ? [allergen.protein, ...(allergen.also ?? [])] : [],
     symptoms: [],
     constraints: [],
   };

@@ -1,7 +1,8 @@
 import type {
-  Constraint, Cut, Merchant, Product, ProteinSource, Situation, Stop, Verdict,
+  Constraint, Cut, Merchant, Product, ProteinSource, Situation, Species, Stop, Verdict,
 } from "./types";
 import { daysBetween, todayTW } from "./date";
+import { categoryOf, MIN_LIVE } from "./categories";
 
 /**
  * 排除引擎。
@@ -21,11 +22,12 @@ import { daysBetween, todayTW } from "./date";
 export function passes(p: Product, c: Constraint): boolean {
   switch (c.kind) {
     case "excludeProtein": {
-      if (p.spec.proteinSources.includes(c.value)) return false;
+      const avoid = [c.value, ...(c.also ?? [])];
+      if (avoid.some((v) => p.spec.proteinSources.includes(v))) return false;
       // 「禽肉副產品」沒指明是哪一種鳥 —— 要避雞、火雞、鴨的人，
       // 這種標示等於無法排除，只能當成有。
       const birds: ProteinSource[] = ["chicken", "turkey", "duck"];
-      if (birds.includes(c.value) && p.spec.proteinSources.includes("poultry")) return false;
+      if (avoid.some((v) => birds.includes(v)) && p.spec.proteinSources.includes("poultry")) return false;
       return true;
     }
     case "minProtein":
@@ -136,6 +138,54 @@ function renalStop(pool: Product[]): Stop {
   };
 }
 
+/**
+ * 這個類目還在上架：成分表讀完了，購買連結還沒補齊。
+ *
+ * 可以推薦的款數不到 MIN_LIVE，任何條件一刪就見底。
+ * 硬跑一次裁決，使用者看到的會是「都不合適」—— 那不是實話，
+ * 實話是我們還沒準備好。講清楚還差什麼，並且讓他看得到已經讀完的那些。
+ */
+function soonStop(species: Species, checked: number): Stop {
+  const c = categoryOf(species);
+  return {
+    kind: "soon",
+    title: `${c.zh}還在上架`,
+    body:
+      `成分表我們已經一款一款讀完 ${checked} 款了，購買連結還在補。` +
+      `連結沒補齊之前我們不推薦：推一款你點進去買不到、或不確定是不是同一款的東西，比不推更糟。`,
+    next: "讀完的那幾款先整理在下面這頁，哪些名字寫鮭魚、鴨肉，成分表裡卻有雞，都標出來了。",
+    link: { href: `/${c.slug}`, label: `先看我們讀過的 ${checked} 款 →` },
+  };
+}
+
+/**
+ * 泌尿道。
+ *
+ * 貓最常見的急症之一：公貓尿道塞住，一兩天內就可能危及生命。
+ * 飲食上也不是我們能判斷的 —— 結石種類不同，處方飼料調整的方向是相反的。
+ */
+function urinaryStop(species: Species): Stop {
+  return {
+    kind: "urinary",
+    title: "泌尿道的問題，先看醫生再挑飼料",
+    body:
+      species === "cat"
+        ? "一直跑砂盆、尿很少、尿裡有血，可能是膀胱發炎或結石。公貓如果一直蹲卻尿不出來，可能是尿道塞住了，那是急診，拖一兩天就可能有生命危險。泌尿道處方飼料要看結石的種類，種類不同，飲食調整的方向是相反的，這個我們判斷不了。"
+        : "尿很頻繁、尿裡有血、尿不太出來，可能是膀胱發炎或結石。泌尿道處方飼料要看結石的種類，種類不同，飲食調整的方向是相反的，這個我們判斷不了。",
+    next: "先帶去給獸醫看，尿不出來的話今天就去，不要等明天。處方飼料照醫生開的買。",
+  };
+}
+
+/** 糖尿病：飼料一換，胰島素的劑量可能也要跟著改。 */
+function diabetesStop(): Stop {
+  return {
+    kind: "diabetes",
+    title: "糖尿病的飲食，要跟著獸醫的用藥一起調",
+    body: "飲食跟打針的劑量是綁在一起的。飼料一換，血糖跟著變，胰島素的量可能也要改，自己換糧有低血糖的風險。",
+    next: "換飼料之前先問獸醫，換了之後也照醫生說的時間回診量血糖。",
+  };
+}
+
 /*
  * 讀得懂、但我們沒有資料可以據此判斷的症狀。
  *
@@ -147,6 +197,7 @@ const NO_DATA_FOR: Record<string, string> = {
   適口性: "挑不挑食我們判斷不了，要有夠多飼主回報才算數，我們現在還沒有",
   淚痕: "淚痕跟飼料的關係沒有可靠的定論，我們不會拿它當理由",
   口腔: "潔牙效果我們沒有資料，不假裝有",
+  毛球: "化毛配方靠的是纖維，我們手上沒有能拿來比較的纖維資料，不假裝有。一個月吐毛球超過一兩次，建議給獸醫看看",
 };
 
 
@@ -220,6 +271,23 @@ export function adjudicate(pool: Product[], situation: Situation): Verdict {
   if (renal) {
     return { startCount, cuts, survivors: [], pick: null, pickReason: "", stop: renalStop(pool) };
   }
+  // 泌尿道、糖尿病：跟腎臟一樣，飲食跟治療綁在一起，我們不回答
+  if (situation.symptoms.some((s) => s.includes("泌尿"))) {
+    return { startCount, cuts, survivors: [], pick: null, pickReason: "", stop: urinaryStop(situation.species) };
+  }
+  if (situation.symptoms.some((s) => s.includes("糖尿"))) {
+    return { startCount, cuts, survivors: [], pick: null, pickReason: "", stop: diabetesStop() };
+  }
+
+  // 類目還沒開張。放在醫療停止之後：「還在上架」不能蓋掉「先去看醫生」。
+  const ready = pool.filter(recommendable).length;
+  if (ready < MIN_LIVE) {
+    return {
+      startCount, cuts, survivors: [], pick: null, pickReason: "",
+      // 對照款也是一款一款讀過的，數字要跟類目頁、切換鈕下面那一行一致
+      stop: soonStop(situation.species, pool.length),
+    };
+  }
 
   const { pick, reason } = choose(alive, situation);
 
@@ -290,7 +358,7 @@ function score(p: Product, situation: Situation): number {
    * 權重刻意壓在過敏原之下：有過敏疑慮時單一蛋白源拿 30 分，
    * 這裡只拿 15 —— 排除過敏原永遠比階段吻合重要。
    */
-  const stage = stageForAge(situation.ageYears);
+  const stage = stageForAge(situation.ageYears, situation.species);
   const wantStage =
     stage === "puppyYoung" || stage === "puppy" ? "puppy"
     : stage === "senior" ? "senior"
@@ -303,10 +371,19 @@ function score(p: Product, situation: Situation): number {
   // 軟便：脂肪偏高是常見原因之一。超過 18% 開始扣。
   if (gut) s -= Math.max(0, p.spec.fat - 18) * 1.5;
 
-  // 體重控制：碳水與脂肪都要看
+  /*
+   * 體重控制：碳水與脂肪都要看。
+   *
+   * 貓扣得比狗重。市售貓乾糧的碳水從 18% 到 40%，差距大到該決定排序。
+   * 原本照狗的權重算，12 歲的胖貓會被推碳水最高的那款，
+   * 只因為它是「高齡專用」—— 階段加的 15 分蓋過了減重該扣的分。
+   * 有公布熱量的，每公斤熱量越高也越扣：同樣一碗，吃進去的就是比較多。
+   */
   if (weight) {
-    s -= Math.max(0, p.spec.carb - 35) * 0.6;
+    const cat = p.species === "cat";
+    s -= Math.max(0, p.spec.carb - (cat ? 25 : 35)) * (cat ? 1.2 : 0.6);
     s -= Math.max(0, p.spec.fat - 15) * 1.2;
+    if (p.spec.kcal) s -= Math.max(0, p.spec.kcal - 3600) / 100;
   }
 
   // 碳水越低越好。台灣市售乾糧多在 25–50%，所以拿 45 當基準往下算，
@@ -339,14 +416,15 @@ function explain(pick: Product, alive: Product[], situation: Situation): string 
       : "單一蛋白源，下次要排查過敏原比較容易");
   }
   {
-    const st = stageForAge(situation.ageYears);
+    const st = stageForAge(situation.ageYears, situation.species);
     const want = st === "puppyYoung" || st === "puppy" ? "puppy" : st === "senior" ? "senior" : null;
     if (want && pick.spec.lifeStage.includes(want)) {
-      bits.push(want === "puppy" ? "幼犬專用配方，不是全齡通用的" : "高齡專用配方，不是全齡通用的");
+      const young = pick.species === "cat" ? "幼貓" : "幼犬";
+      bits.push(want === "puppy" ? `${young}專用配方，不是全齡通用的` : "高齡專用配方，不是全齡通用的");
     }
   }
   if (situation.avoid.length > 0) {
-    bits.push(`避開${situation.avoid.map(zhProtein).join("、")}`);
+    bits.push(`避開${avoidZh(situation.avoid)}`);
   }
   if (pick.spec.carb <= 25) {
     bits.push(`碳水 ${pick.spec.carb}% 在建議範圍`);
@@ -355,11 +433,19 @@ function explain(pick: Product, alive: Product[], situation: Situation): string 
 }
 
 const PROTEIN_ZH: Record<string, string> = {
-  poultry: "未指明的禽肉",
+  poultry: "未指明的禽肉", animal: "未指明的動物蛋白",
   chicken: "雞肉", beef: "牛肉", lamb: "羊肉", salmon: "鮭魚",
-  whitefish: "白魚", duck: "鴨肉", turkey: "火雞", pork: "豬肉",
+  whitefish: "白魚", fish: "魚", duck: "鴨肉", turkey: "火雞", pork: "豬肉",
   venison: "鹿肉", insect: "昆蟲蛋白",
 };
+
+/** 「避開鮭魚、白魚、魚」這種話沒人會講。三種魚都在就合成一個「魚」。 */
+export function avoidZh(avoid: ProteinSource[]): string {
+  const fish: ProteinSource[] = ["salmon", "whitefish", "fish"];
+  const allFish = fish.every((f) => avoid.includes(f));
+  const rest = avoid.filter((a) => !(allFish && fish.includes(a))).map(zhProtein);
+  return (allFish ? ["魚", ...rest] : rest).join("、");
+}
 
 export function zhProtein(k: string): string {
   return PROTEIN_ZH[k] ?? k;
@@ -534,7 +620,12 @@ export function storesOf(p: Product): Store[] {
 /** 乾飼料熱量密度的中間值（kcal/kg）。多數台灣市售乾糧落在 3,300–4,200。 */
 export const KCAL_PER_KG = 3800;
 
-/** 生命階段係數。數字取自一般獸醫營養學教材的區間中間值。 */
+/**
+ * 生命階段係數。數字取自一般獸醫營養學教材的區間中間值。
+ *
+ * 狗跟貓的 RER 公式一樣，係數差很多：結紮成犬 1.6，結紮成貓只有 1.2。
+ * 拿狗的係數算貓，一天會多餵三成，一年下來就是一隻胖貓。
+ */
 export const MER_FACTORS = {
   puppyYoung: { factor: 3.0, zh: "幼犬 · 4 個月以下" },
   puppy:      { factor: 2.0, zh: "幼犬 · 4 個月到 1 歲" },
@@ -546,28 +637,48 @@ export const MER_FACTORS = {
 
 export type Stage = keyof typeof MER_FACTORS;
 
+/** 貓的係數。WSAVA 的建議：幼貓 2.5、結紮成貓 1.2、未結紮 1.4、要減重 0.8。 */
+export const CAT_MER_FACTORS: Record<Stage, { factor: number; zh: string }> = {
+  puppyYoung: { factor: 2.5, zh: "幼貓 · 4 個月以下" },
+  puppy:      { factor: 2.5, zh: "幼貓 · 4 個月到 1 歲" },
+  adultFixed: { factor: 1.2, zh: "成貓 · 已結紮" },
+  adultWhole: { factor: 1.4, zh: "成貓 · 未結紮" },
+  senior:     { factor: 1.1, zh: "高齡或不太活動" },
+  slimming:   { factor: 0.8, zh: "需要減重" },
+};
+
+export function factorsOf(species: Species = "dog"): Record<Stage, { factor: number; zh: string }> {
+  return species === "cat" ? CAT_MER_FACTORS : MER_FACTORS;
+}
+
 /** 靜止能量需求（大卡／天） */
 export function rer(weightKg: number): number {
   return 70 * Math.pow(weightKg, 0.75);
 }
 
 /** 維持能量需求（大卡／天） */
-export function mer(weightKg: number, stage: Stage = "adultFixed"): number {
-  return rer(weightKg) * MER_FACTORS[stage].factor;
+export function mer(weightKg: number, stage: Stage = "adultFixed", species: Species = "dog"): number {
+  return rer(weightKg) * factorsOf(species)[stage].factor;
 }
 
 /** 年齡 → 生命階段係數。頁面預設成犬，使用者講了年齡就照他講的。 */
-export function stageForAge(ageYears: number | undefined): Stage {
+export function stageForAge(ageYears: number | undefined, species: Species = "dog"): Stage {
   if (ageYears === undefined) return "adultFixed";
   if (ageYears < 0.34) return "puppyYoung";   // 約 4 個月以下
   if (ageYears < 1) return "puppy";
-  if (ageYears >= 8) return "senior";
+  // 狗 8 歲、貓 11 歲算高齡（跟 catalog 的 SENIOR_AGE 同一組數字）
+  if (ageYears >= (species === "cat" ? 11 : 8)) return "senior";
   return "adultFixed";
 }
 
 /** 一天大約幾克乾飼料 */
-export function dailyGrams(weightKg: number, stage: Stage = "adultFixed"): number {
-  return Math.round((mer(weightKg, stage) / KCAL_PER_KG) * 1000);
+export function dailyGrams(
+  weightKg: number,
+  stage: Stage = "adultFixed",
+  species: Species = "dog",
+  kcalPerKg: number = KCAL_PER_KG,
+): number {
+  return Math.round((mer(weightKg, stage, species) / kcalPerKg) * 1000);
 }
 
 /** 開封後建議用完的天數。超過就開始有氧化與適口性下降的問題。 */
@@ -586,12 +697,15 @@ export function bagDuration(
   unit: string,
   weightKg: number | undefined,
   stage: Stage = "adultFixed",
+  species: Species = "dog",
+  kcalPerKg?: number,
 ): Duration | null {
   if (!weightKg || weightKg <= 0) return null;
   const kg = kgOf(unit);
   if (!kg) return null;
 
-  const perDay = dailyGrams(weightKg, stage) / 1000;   // 公斤／天
+  // 有公布熱量的就用那一包自己的，沒有才用中間值
+  const perDay = dailyGrams(weightKg, stage, species, kcalPerKg) / 1000;   // 公斤／天
   if (perDay <= 0) return null;
   const days = Math.round(kg / perDay);
   return { days, tooLong: days > FRESH_DAYS };
@@ -694,7 +808,7 @@ export function trialPlan(
 ): Trial {
   const need = trialLength(symptoms);
   const anchor = anchorOf(p, "safe");
-  const anchorDur = anchor ? bagDuration(unitOf(p, anchor), dogKg, stage) : null;
+  const anchorDur = anchor ? bagDuration(unitOf(p, anchor), dogKg, stage, p.species, p.spec.kcal) : null;
 
   const base: Trial = {
     needDays: need.days,
@@ -717,7 +831,7 @@ export function trialPlan(
 
   for (const store of storesOf(p)) {
     for (const o of store.options) {
-      const d = bagDuration(o.unit, dogKg, stage);
+      const d = bagDuration(o.unit, dogKg, stage, p.species, p.spec.kcal);
       if (!d || d.days > FRESH_DAYS) continue;
       const gap = Math.abs(d.days - target);
       // 差距要明顯縮小才值得叫人改買別的規格

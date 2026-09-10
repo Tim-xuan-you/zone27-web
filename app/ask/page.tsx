@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { CONTACT } from "@/lib/contact";
+import SiteHeader from "@/components/SiteHeader";
 
 /**
  * 這個問題該問誰。
@@ -24,18 +25,7 @@ export const metadata: Metadata = {
 export default function Page() {
   return (
     <main style={{ maxWidth: 660, margin: "0 auto", padding: "0 20px 120px" }}>
-      <div style={{
-        display: "flex", alignItems: "center", justifyContent: "space-between",
-        gap: 14, padding: "28px 0 20px", borderBottom: "1px solid var(--line)", marginBottom: 40,
-      }}>
-        <Link href="/" style={{ display: "flex", alignItems: "center", gap: 9, fontWeight: 900, fontSize: 16, color: "inherit", textDecoration: "none" }}>
-          <span style={{ width: 9, height: 9, borderRadius: 2, background: "var(--accent)" }} />
-          ZONE 27
-        </Link>
-        <Link href="/dog-food" style={{ fontSize: 12.5, color: "var(--muted)", textDecoration: "none" }}>
-          全部狗飼料
-        </Link>
-      </div>
+      <SiteHeader current="ask" />
 
       <h1 style={{ fontSize: "clamp(26px,5vw,36px)", lineHeight: 1.45, margin: "0 0 18px" }}>
         這個問題該問誰

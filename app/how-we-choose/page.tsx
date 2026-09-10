@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { catalog } from "@/lib/catalog";
+import { catalog, catalogOf } from "@/lib/catalog";
+import SiteHeader from "@/components/SiteHeader";
 
 export const metadata: Metadata = {
   title: "我們怎麼挑，錢從哪裡來",
@@ -13,6 +14,8 @@ export const metadata: Metadata = {
 function stats() {
   return {
     count: catalog.length,
+    dogs: catalogOf("dog").length,
+    cats: catalogOf("cat").length,
     withDealbreaker: catalog.filter((p) => p.dealbreaker?.trim()).length,
   };
 }
@@ -22,15 +25,7 @@ export default function Page() {
 
   return (
     <main style={{ maxWidth: 660, margin: "0 auto", padding: "0 20px 120px" }}>
-      <div style={{
-        display: "flex", alignItems: "center", gap: 9,
-        padding: "28px 0 20px", borderBottom: "1px solid var(--line)", marginBottom: 40,
-      }}>
-        <Link href="/" style={{ display: "flex", alignItems: "center", gap: 9, fontWeight: 900, fontSize: 16, color: "inherit", textDecoration: "none" }}>
-          <span style={{ width: 9, height: 9, borderRadius: 2, background: "var(--accent)" }} />
-          ZONE 27
-        </Link>
-      </div>
+      <SiteHeader current="how-we-choose" />
 
       <h1 style={{ fontSize: "clamp(26px,5vw,36px)", lineHeight: 1.45, margin: "0 0 18px" }}>
         我們怎麼挑，錢從哪裡來
@@ -56,7 +51,7 @@ export default function Page() {
       <H>為什麼我們不公布每一款抽多少</H>
       <p style={{ fontSize: 15.5, margin: "0 0 14px" }}>
         第一個理由：那沒有幫到你，只會讓你在挑東西的時候去想我們賺多少。
-        你該想的是你的狗啦。
+        你該想的是你家那隻啦。
       </p>
       <p style={{ fontSize: 15.5, margin: "0 0 14px" }}>
         第二個理由更實際：<b>那個數字天天在跳。</b>
@@ -77,17 +72,17 @@ export default function Page() {
       <H>為什麼我們會叫你買大一點的包裝</H>
       <p style={{ fontSize: 15.5, margin: "0 0 14px" }}>
         因為<b>試糧要跑滿週期才有意義</b>。皮膚問題的排除飲食法一般抓 8 週，
-        2 公斤的包裝，一隻 10 公斤的狗吃 10 天就沒了。在還沒看出結果之前斷糧，
+        2 公斤的包裝，一隻 10 公斤的狗大約 12 天就吃完了。在還沒看出結果之前斷糧，
         你會以為是這款沒用，然後再換下一款，永遠得不到答案。
       </p>
       <p style={{ fontSize: 15.5, margin: "0 0 14px", color: "var(--muted)" }}>
         這個建議會讓我們賺比較多，我們知道。所以把算式攤開來：
-        天數是用<b style={{ color: "var(--ink)" }}>體重 × 2%</b> 估的日食量算出來的，
-        你可以自己驗。
+        天數是用<b style={{ color: "var(--ink)" }}>獸醫的能量公式</b>算的，狗跟貓的係數不一樣，
+        算式寫在<Link href="/dog-food/how-much" style={{ color: "var(--accent)" }}>狗</Link>和<Link href="/cat-food/how-much" style={{ color: "var(--accent)" }}>貓</Link>的「一天吃多少」那兩頁，你可以自己驗。
       </p>
       <Box tone="warn">
         <b>同一條規則也會叫你不要買超大包。</b>
-        開封後放超過 45 天，乾飼料的油脂會氧化，狗會越來越不愛吃，
+        開封後放超過 45 天，乾飼料的油脂會氧化，牠會越來越不愛吃，
         很多人以為是這牌子不好，其實只是放太久了。所以我們推薦的規格
         <b>不會超過 45 天</b>，就算更大包每公斤更便宜、我們抽更多。
         兩個方向都講，這才不是話術。
@@ -124,7 +119,7 @@ export default function Page() {
       </p>
 
       <Box tone="warn">
-        <b>資料還在長。</b>目前收了 {s.count} 款，規格取自品牌與代理商公開資料，
+        <b>資料還在長。</b>目前收了 {s.count} 款（狗飼料 {s.dogs}、貓飼料 {s.cats}），規格取自品牌與代理商公開資料，
         價格是人工複查、每張卡片都標了日期。有些資料我們還查不到，
         查不到就留白，不會寫湊數的數字。
       </Box>

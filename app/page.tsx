@@ -1,7 +1,10 @@
 import Link from "next/link";
 import Decider from "@/components/Decider";
-
-const navLink = { color: "inherit", textDecoration: "none" } as const;
+import SiteHeader from "@/components/SiteHeader";
+import { S } from "@/components/styles";
+import { CATEGORIES } from "@/lib/categories";
+import { catalogOf, isLive, liveCount } from "@/lib/catalog";
+import { allergensOf, breedsOf } from "@/lib/slugs";
 
 const ENTITY = {
   "@context": "https://schema.org",
@@ -11,7 +14,7 @@ const ENTITY = {
       "@id": "https://zone27.com.tw/#org",
       name: "ZONE 27",
       url: "https://zone27.com.tw",
-      description: "台灣的狗飼料決策工具。先刪掉不適合的，並寫清楚每一款什麼時候不要買。",
+      description: "台灣的狗飼料、貓飼料決策工具。先刪掉不適合的，並寫清楚每一款什麼時候不要買。",
       logo: "https://zone27.com.tw/opengraph-image",
     },
     {
@@ -25,42 +28,30 @@ const ENTITY = {
   ],
 };
 
+/**
+ * 首頁。
+ *
+ * 版面的順序照一個人進來時腦子裡的順序排：
+ *   1. 我家的狗／貓怎麼了 → 輸入框就在第一屏，不用先選類目
+ *   2. 還沒想好要問什麼 → 往下看有哪些類目、每個類目現在的狀態
+ *   3. 想先確認這個站可不可信 → 我們自己讀成分表的那兩篇
+ *
+ * 類目卡片上的數字全部從資料算，不寫死。
+ * 「貓飼料 上架中」會在連結補齊、重新 build 的那一刻自己變成「N 款可以買」。
+ */
 export default function Home() {
   return (
-    <main style={{ maxWidth: 720, margin: "0 auto", padding: "0 20px 120px" }}>
+    <main style={{ maxWidth: 760, margin: "0 auto", padding: "0 20px 120px" }}>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(ENTITY) }}
       />
-      <div style={{
-        display: "flex", alignItems: "center", justifyContent: "space-between",
-        gap: 14, padding: "28px 0 20px", borderBottom: "1px solid var(--line)", marginBottom: 40,
-      }}>
-        <div style={{ display: "flex", alignItems: "center", gap: 9, fontWeight: 900, fontSize: 16 }}>
-          <span style={{ width: 9, height: 9, borderRadius: 2, background: "var(--accent)" }} />
-          ZONE 27
-        </div>
-        {/* 這裡原本掛著「失敗案例庫」「校準紀錄」兩個沒做的頁 ——
-            看起來像連結、點了沒反應，比沒有還糟。
-            「分潤政策」也拿掉了：把「分潤」兩個字放在全站導覽列，
-            等於在人家還沒開始問問題的時候先講錢。 */}
-        <nav style={{ display: "flex", flexWrap: "wrap", justifyContent: "flex-end", gap: "6px 16px", fontSize: 12.5, color: "var(--muted)" }}>
-          <Link href="/dog-food/hidden-chicken" style={navLink}>成分表裡有雞</Link>
-          <Link href="/dog-food/how-much" style={navLink}>一天吃多少</Link>
-          <Link href="/dog-food/grain-free" style={navLink}>無穀好不好</Link>
-          <Link href="/dog-food/elimination-diet" style={navLink}>排除飲食法</Link>
-          <Link href="/dog-food" style={navLink}>全部飼料</Link>
-          <Link href="/how-we-choose" style={navLink}>我們怎麼挑</Link>
-          <Link href="/ask" style={navLink}>問我們</Link>
-        </nav>
-      </div>
+      <SiteHeader />
 
-      <h1 style={{
-        fontSize: "clamp(28px,6vw,40px)", lineHeight: 1.45, margin: "0 0 16px",
-      }}>
-        你的狗怎麼了？<br />用講的就好
+      <h1 style={{ fontSize: "clamp(28px,6vw,40px)", lineHeight: 1.45, margin: "0 0 16px" }}>
+        你家的毛孩怎麼了？<br />用講的就好
       </h1>
-      <p style={{ color: "var(--muted)", fontSize: 17, lineHeight: 1.9, margin: "0 0 32px", maxWidth: "40ch" }}>
+      <p style={{ color: "var(--muted)", fontSize: 17, lineHeight: 1.9, margin: "0 0 28px", maxWidth: "40ch" }}>
         光是低敏飼料，市面上就上百款。你把狀況講完，我們先幫你
         <span style={{ color: "var(--cut)", fontWeight: 700 }}>刪掉</span>
         不適合的，剩下的才給你看。
@@ -68,25 +59,60 @@ export default function Home() {
 
       <Decider />
 
-      <Link href="/dog-food/hidden-chicken" style={{
-        display: "block", marginTop: 56,
-        background: "var(--surface)", border: "1px solid var(--line)",
-        borderRadius: 14, boxShadow: "var(--sh)", padding: "20px 22px",
-        textDecoration: "none", color: "inherit",
-      }}>
-        <p style={{
-          margin: "0 0 8px", fontFamily: "var(--font-mono), monospace",
-          fontSize: 12, fontWeight: 600, letterSpacing: ".14em",
-          textTransform: "uppercase", color: "var(--faint)",
-        }}>我們自己讀成分表</p>
-        <h2 style={{ fontFamily: "var(--font-serif), serif", fontSize: 20, margin: "0 0 8px", lineHeight: 1.5 }}>
-          寫著低敏，成分表裡有雞
-        </h2>
-        <p style={{ margin: 0, fontSize: 15, color: "var(--muted)", lineHeight: 1.85 }}>
-          換了三種「低敏」飼料狗還是抓，很多時候是那三包裡面都有雞。
-          四款逐筆核對，附來源連結，也包含我們自己在推的那一款。
-        </p>
-      </Link>
+      <p style={{ ...S.lbl, marginTop: 56 }}>或是從類目進去</p>
+      <div style={grid}>
+        {CATEGORIES.map((c) => {
+          const live = isLive(c.species);
+          const ready = liveCount(c.species);
+          const read = catalogOf(c.species).length;
+          return (
+            <Link key={c.slug} href={`/${c.slug}`} style={catCard}>
+              <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", gap: 10 }}>
+                <h2 style={{ margin: 0, fontSize: 22 }}>{c.zh}</h2>
+                <span style={live ? liveTag : soonTag}>
+                  {live ? `${ready} 款可以買` : "上架中"}
+                </span>
+              </div>
+              <p className="keep" style={{ margin: "10px 0 12px", fontSize: 15, color: "var(--muted)", lineHeight: 1.85 }}>
+                {c.pitch}
+              </p>
+              <p style={{ margin: 0, fontSize: 13, color: "var(--faint)", lineHeight: 1.8 }}>
+                {live
+                  ? `${breedsOf(c.species).length} 個品種 · ${allergensOf(c.species).length} 種過敏原 · 讀過 ${read} 款成分表`
+                  : `${read} 款成分表讀完了，購買連結補齊就開放推薦`}
+              </p>
+            </Link>
+          );
+        })}
+      </div>
+
+      <p style={S.lbl}>我們自己讀成分表</p>
+      <div style={grid}>
+        <Link href="/dog-food/hidden-chicken" style={feature}>
+          <span style={kicker}>狗飼料</span>
+          <h2 style={featureTitle}>寫著低敏，成分表裡有雞</h2>
+          <p style={featureBody}>
+            換了三種「低敏」飼料狗還是抓，很多時候是那三包裡面都有雞。
+            逐筆核對，附來源連結，也包含我們自己在推的那一款。
+          </p>
+        </Link>
+        <Link href="/cat-food/hidden-chicken" style={feature}>
+          <span style={kicker}>貓飼料</span>
+          <h2 style={featureTitle}>寫著鮭魚、鴨肉、火雞，成分表裡有雞</h2>
+          <p style={featureBody}>
+            貓飼料的名字幾乎都是口味。我們讀了台灣代理商的中文標示，
+            有一款叫鴨肉的，雞加起來比鴨還多。
+          </p>
+        </Link>
+      </div>
+
+      <p style={S.lbl}>先算一下</p>
+      <div style={S.relRow}>
+        <Link href="/dog-food/how-much" style={S.relLink}>狗一天吃多少</Link>
+        <Link href="/cat-food/how-much" style={S.relLink}>貓一天吃多少</Link>
+        <Link href="/dog-food/grain-free" style={S.relLink}>無穀好不好</Link>
+        <Link href="/dog-food/elimination-diet" style={S.relLink}>排除飲食法</Link>
+      </div>
 
       <footer style={{
         marginTop: 72, paddingTop: 28, borderTop: "1px solid var(--line)",
@@ -102,3 +128,33 @@ export default function Home() {
     </main>
   );
 }
+
+const grid: React.CSSProperties = {
+  display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: 14,
+};
+const catCard: React.CSSProperties = {
+  display: "block", background: "var(--surface)", border: "1px solid var(--line)",
+  borderRadius: 16, boxShadow: "var(--sh)", padding: "22px 22px 20px",
+  textDecoration: "none", color: "inherit",
+};
+const liveTag: React.CSSProperties = {
+  fontSize: 12.5, fontWeight: 700, color: "var(--keep)", whiteSpace: "nowrap",
+};
+const soonTag: React.CSSProperties = {
+  fontSize: 12.5, fontWeight: 700, color: "var(--faint)", whiteSpace: "nowrap",
+};
+const feature: React.CSSProperties = {
+  display: "block", background: "var(--surface)", border: "1px solid var(--line)",
+  borderRadius: 14, boxShadow: "var(--sh)", padding: "20px 22px",
+  textDecoration: "none", color: "inherit",
+};
+const kicker: React.CSSProperties = {
+  fontFamily: "var(--font-mono), monospace", fontSize: 12, fontWeight: 600,
+  letterSpacing: ".14em", color: "var(--faint)",
+};
+const featureTitle: React.CSSProperties = {
+  fontFamily: "var(--font-serif), serif", fontSize: 19, margin: "6px 0 8px", lineHeight: 1.5,
+};
+const featureBody: React.CSSProperties = {
+  margin: 0, fontSize: 14.5, color: "var(--muted)", lineHeight: 1.85,
+};

@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { dailyGrams, mer, FRESH_DAYS, KCAL_PER_KG, MER_FACTORS, type Stage } from "@/lib/engine";
+import { dailyGrams, factorsOf, mer, FRESH_DAYS, KCAL_PER_KG, type Stage } from "@/lib/engine";
+import type { Species } from "@/lib/types";
 import { S } from "./styles";
 
 /**
@@ -17,22 +18,31 @@ import { S } from "./styles";
 
 const STAGES: Stage[] = ["puppyYoung", "puppy", "adultFixed", "adultWhole", "senior", "slimming"];
 
-export default function Calc() {
-  const [kg, setKg] = useState("10");
+/** 預設值挑台灣最常見的情況：10 公斤的狗配 6kg 包，4 公斤的貓配 1.8kg 包 */
+const DEFAULTS: Record<Species, { kg: string; bag: string; price: string }> = {
+  dog: { kg: "10", bag: "6", price: "2640" },
+  cat: { kg: "4", bag: "1.8", price: "1059" },
+};
+
+export default function Calc({ species = "dog" }: { species?: Species }) {
+  const d = DEFAULTS[species];
+  const FACTORS = factorsOf(species);
+  const animal = species === "cat" ? "貓" : "狗";
+  const [kg, setKg] = useState(d.kg);
   const [stage, setStage] = useState<Stage>("adultFixed");
-  const [bag, setBag] = useState("6");
-  const [price, setPrice] = useState("2640");
+  const [bag, setBag] = useState(d.bag);
+  const [price, setPrice] = useState(d.price);
 
   const w = Number(kg);
   const bagKg = Number(bag);
   const p = Number(price);
   const ok = w > 0 && w < 120;
 
-  const grams = ok ? dailyGrams(w, stage) : 0;
-  const kcal = ok ? Math.round(mer(w, stage)) : 0;
+  const grams = ok ? dailyGrams(w, stage, species) : 0;
+  const kcal = ok ? Math.round(mer(w, stage, species)) : 0;
   // 熱量密度有區間，克數就該是區間 —— 給一個精確到個位數的假象比較不誠實
-  const low = ok ? Math.round((mer(w, stage) / 4200) * 1000) : 0;
-  const high = ok ? Math.round((mer(w, stage) / 3300) * 1000) : 0;
+  const low = ok ? Math.round((mer(w, stage, species) / 4200) * 1000) : 0;
+  const high = ok ? Math.round((mer(w, stage, species) / 3300) * 1000) : 0;
 
   const days = ok && bagKg > 0 ? Math.round((bagKg * 1000) / grams) : null;
   const tooLong = days !== null && days > FRESH_DAYS;
@@ -51,7 +61,7 @@ export default function Calc() {
           <select style={{ ...input, paddingRight: 8 }} value={stage}
                   onChange={(e) => setStage(e.target.value as Stage)}>
             {STAGES.map((k) => (
-              <option key={k} value={k}>{MER_FACTORS[k].zh}</option>
+              <option key={k} value={k}>{FACTORS[k].zh}</option>
             ))}
           </select>
         </Field>
@@ -87,7 +97,7 @@ export default function Calc() {
                 <Row label="這包吃得完嗎" value={`大約 ${days} 天`} tone={tooLong ? "cut" : "keep"} />
                 {tooLong && (
                   <p style={{ ...sub, color: "var(--cut)" }}>
-                    超過 {FRESH_DAYS} 天。開封後的乾飼料油脂會氧化，放久了狗會越來越不愛吃，
+                    超過 {FRESH_DAYS} 天。開封後的乾飼料油脂會氧化，放久了{animal}會越來越不愛吃，
                     很多人以為是這牌子不好，其實只是放太久了。這個體重建議買小一點的包裝。
                   </p>
                 )}
@@ -104,6 +114,7 @@ export default function Calc() {
             從上面看得出腰身、摸得到肋骨但不明顯，那個體重就是對的。
             照著數字餵卻越來越胖或越來越瘦，相信你的眼睛，不要相信這個計算機。
             要減重請先問獸醫，那不是少餵一點就好的事。
+            {species === "cat" && " 貓尤其要慢：一個禮拜掉超過體重的 2% 就太快了，會傷肝。"}
           </p>
         </>
       )}

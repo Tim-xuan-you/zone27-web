@@ -75,7 +75,7 @@ export function trialEvents(
   if (kg && bagDays && bagUnit && bagId) {
     // 前幾天提醒，留時間到貨；小包本來就吃得快，提早量跟著縮
     const lead = Math.min(5, Math.max(1, Math.floor(bagDays / 3)));
-    const g = Math.round(dailyGrams(kg, stage));
+    const g = Math.round(dailyGrams(kg, stage, p.species, p.spec.kcal));
     const lines = [
       `照 ${kg} 公斤、一天大約 ${g} 克估的，${bagUnit} 那包再 ${lead} 天左右會吃完。網購到貨要幾天，現在下單剛好接得上。`,
     ];
@@ -83,7 +83,7 @@ export function trialEvents(
       lines.push("試吃還沒跑完喔。中途斷糧或臨時換別款，前面的天數就白費了。");
     }
     lines.push(`同一包在這裡：${SITE}/go/${bagId}/${p.id}`);
-    lines.push(`吃得比預期快或慢都正常，每一款的熱量不一樣，以包裝背面的餵食表為準。狗的體重變了，回 ${SITE} 重新算一次。`);
+    lines.push(`吃得比預期快或慢都正常，每一款的熱量不一樣，以包裝背面的餵食表為準。牠的體重變了，回 ${SITE} 重新算一次。`);
     out.push({
       day: Math.max(1, bagDays - lead),
       key: "reorder",

@@ -1,16 +1,72 @@
-import raw from "@/data/dog-food.json";
-import type { Constraint, Product, Situation } from "./types";
+import dog from "@/data/dog-food.json";
+import cat from "@/data/cat-food.json";
+import type { Constraint, Product, ProteinSource, Situation, Species } from "./types";
+import { recommendable } from "./engine";
+import { MIN_LIVE } from "./categories";
 
 /**
  * 目錄。資料在 repo 裡的 JSON，建置時直接讀 —— 沒有執行期依賴，
  * 所以 generateStaticParams 可以把幾千個決策頁全部靜態生成。
  * 這是「Google 抓得到」的關鍵，不能改成執行期 fetch。
+ *
+ * catalog 是全部類目加在一起。引擎第一刀就按物種分開，所以丟整包進去是安全的；
+ * 但「無穀頁說我們收了幾款」這種統計，一定要用 catalogOf 拿單一物種，
+ * 不然貓的數字會混進狗的頁面。
  */
-export const catalog = raw.products as unknown as Product[];
+export const catalog = [
+  ...(dog.products as unknown as Product[]),
+  ...(cat.products as unknown as Product[]),
+];
+
+export function catalogOf(species: Species): Product[] {
+  return catalog.filter((p) => p.species === species);
+}
 
 export function byId(id: string): Product | undefined {
   return catalog.find((p) => p.id === id);
 }
+
+/** 這個物種能推薦的有幾款 */
+export function liveCount(species: Species): number {
+  return catalogOf(species).filter(recommendable).length;
+}
+
+/** 類目開張了沒。沒開張的類目，裁決器誠實講還在上架，長尾頁也先不產生。 */
+export function isLive(species: Species): boolean {
+  return liveCount(species) >= MIN_LIVE;
+}
+
+/* ------------------------------------------------------------------ */
+/* 物種不同，門檻就不同                                                */
+/* ------------------------------------------------------------------ */
+
+/**
+ * 高齡從幾歲算。
+ *
+ * 狗 8 歲，貓 11 歲。貓的「7 歲以上」配方很多，但那是給熟齡成貓的，
+ * 美國貓科醫師協會（AAFP）把 11 歲以上才叫高齡。7 到 10 歲的貓吃一般成貓糧沒問題，
+ * 不能因為 8 歲就把成貓糧全部刪掉。
+ */
+export const SENIOR_AGE: Record<Species, number> = { dog: 8, cat: 11 };
+
+/**
+ * 粗蛋白下限。只擋明顯不合格的，挑好貨是評分的事。
+ *
+ * 貓是肉食動物，需要的蛋白質比狗高很多。AAFCO 成貓的最低標準是乾物 26%，
+ * 我們拿同一個數字比對包裝上的原物基數值，等於比官方標準再嚴一點點。
+ */
+const MIN_PROTEIN: Record<Species, number> = { dog: 22, cat: 26 };
+
+/**
+ * 碳水上限。
+ *
+ * 貓在營養學上沒有碳水的最低需求（NRC 2006），市售乾糧卻從 18% 到 40% 都有。
+ * 40% 是我們自己訂的線，不是官方標準；畫面上講「我們擋」，不講「專家說」。
+ */
+const MAX_CARB: Record<Species, number> = { dog: 48, cat: 40 };
+
+const BIRDS: ProteinSource[] = ["chicken", "turkey", "duck"];
+const FISH: ProteinSource[] = ["salmon", "whitefish", "fish"];
 
 /**
  * 把使用者情境翻譯成排除規則，並排好順序。
@@ -20,12 +76,42 @@ export function byId(id: string): Product | undefined {
  */
 export function constraintsFor(s: Situation): Constraint[] {
   const cs: Constraint[] = [];
+  const sp = s.species;
+
+  /*
+   * 標示沒寫是哪種動物的，先刪。
+   *
+   * 「水解動物蛋白」可能是任何一種肉，對要避開某種肉的人等於沒標。
+   * 單獨一刀、單獨一句理由 —— 混在「含雞肉」那一刀裡，
+   * 使用者會以為那款有雞，其實是我們根本不知道它有什麼。
+   */
+  if (s.avoid.length > 0) {
+    cs.push({
+      kind: "excludeProtein",
+      value: "animal",
+      label: "肉的來源沒寫清楚，只寫「動物蛋白」",
+      tag: "你標記的過敏原",
+    });
+  }
+
+  // 三種魚都要避，就合成一刀「含魚」。拆成三刀，畫面上會出現「含白魚」「含其他魚類」這種沒人會講的話。
+  const avoidFish = FISH.every((f) => s.avoid.includes(f));
+  if (avoidFish) {
+    cs.push({
+      kind: "excludeProtein",
+      value: "fish",
+      also: ["salmon", "whitefish"],
+      label: "含魚（鮭魚、鱈魚、沙丁魚、鮪魚這些都算）",
+      tag: "你標記的過敏原",
+    });
+  }
 
   for (const protein of s.avoid) {
+    if (avoidFish && FISH.includes(protein)) continue;
     cs.push({
       kind: "excludeProtein",
       value: protein,
-      label: ["chicken", "turkey", "duck"].includes(protein)
+      label: BIRDS.includes(protein)
         ? `含${zh(protein)}，或只寫「禽肉」沒指明是哪一種`
         : `主蛋白源含${zh(protein)}`,
       tag: "你標記的過敏原",
@@ -33,11 +119,11 @@ export function constraintsFor(s: Situation): Constraint[] {
   }
 
   if (s.ageYears !== undefined) {
-    const stage = s.ageYears < 1 ? "puppy" : s.ageYears >= 8 ? "senior" : "adult";
+    const stage = s.ageYears < 1 ? "puppy" : s.ageYears >= SENIOR_AGE[sp] ? "senior" : "adult";
     cs.push({
       kind: "lifeStage",
       value: stage,
-      label: `不適用${stageZh(stage)}`,
+      label: `不適用${stageZh(stage, sp)}`,
       tag: "年齡不符",
     });
   }
@@ -49,28 +135,32 @@ export function constraintsFor(s: Situation): Constraint[] {
    * Natural Balance 和 Go! 的低敏系列都是粗蛋白 24%、碳水約 45%，
    * 兩款都會被刷掉，而它們正是低敏族群最常買的東西。
    *
-   * 台灣市售乾糧的實際分佈：
+   * 台灣市售狗乾糧的實際分佈：
    *   粗蛋白 22–38%（高蛋白無穀配方才到 30% 以上）
    *   碳水   25–50%（號稱無穀但用馬鈴薯/木薯的，碳水一樣高）
+   * 貓乾糧：
+   *   粗蛋白 29–42%
+   *   碳水   18–40%
    *
    * 所以門檻只用來擋「明顯不合格」的，不是拿來挑好貨。
    * 挑好貨是評分函式的事（碳水越低加越多分），排除只擋離譜的。
    */
   cs.push({
     kind: "minProtein",
-    value: 22,
-    label: "粗蛋白低於 22%",
+    value: MIN_PROTEIN[sp],
+    label: `粗蛋白低於 ${MIN_PROTEIN[sp]}%`,
     tag: "營養門檻",
   });
 
   cs.push({
     kind: "maxCarb",
-    value: 48,
-    label: "碳水高於 48%",
+    value: MAX_CARB[sp],
+    label: `碳水高於 ${MAX_CARB[sp]}%`,
     tag: "營養門檻",
   });
 
-  if (s.bodySize) {
+  // 體型只對狗有意義。貓的體重差距小，市面上也幾乎沒有體型專用的貓糧。
+  if (sp === "dog" && s.bodySize) {
     cs.push({
       kind: "bodySize",
       value: s.bodySize,
@@ -118,17 +208,18 @@ export function constraintsFor(s: Situation): Constraint[] {
 }
 
 const ZH: Record<string, string> = {
-  poultry: "未指明的禽肉",
+  poultry: "未指明的禽肉", animal: "未指明的動物蛋白",
   chicken: "雞肉", beef: "牛肉", lamb: "羊肉", salmon: "鮭魚",
-  whitefish: "白魚", duck: "鴨肉", turkey: "火雞", pork: "豬肉",
+  whitefish: "白魚", fish: "魚", duck: "鴨肉", turkey: "火雞", pork: "豬肉",
   venison: "鹿肉", insect: "昆蟲蛋白",
 };
 const zh = (k: string) => ZH[k] ?? k;
 
-const STAGE_ZH: Record<string, string> = {
-  puppy: "幼犬", adult: "成犬", senior: "高齡犬",
+const STAGE_ZH: Record<Species, Record<string, string>> = {
+  dog: { puppy: "幼犬", adult: "成犬", senior: "高齡犬" },
+  cat: { puppy: "幼貓", adult: "成貓", senior: "高齡貓" },
 };
-const stageZh = (k: string) => STAGE_ZH[k] ?? k;
+export const stageZh = (k: string, sp: Species = "dog") => STAGE_ZH[sp][k] ?? k;
 
 const SIZE_ZH: Record<string, string> = {
   small: "小型犬", medium: "中型犬", large: "大型犬",

@@ -17,7 +17,8 @@
  *   1. 把資料貼進 data/paste.txt
  *   2. npm run data:paste
  *
- * 它會改 data/dog-food.csv 的 m1～m4 欄位、把查價日期更新成今天，
+ * 它會改對應 CSV 的 m1～m4 欄位（df- 開頭寫進 dog-food.csv、cf- 開頭寫進 cat-food.csv），
+ * 把查價日期更新成今天，
  * 然後自動跑一次匯入。商品本身的規格（蛋白質、成分那些）不歸它管 ——
  * 那是另外一件事，我來查。
  */
@@ -25,10 +26,10 @@
 import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { todayTW } from "../lib/date";
+import { categoryOfId } from "../lib/categories";
 
 const ROOT = resolve(import.meta.dirname, "..");
 const PASTE = resolve(ROOT, "data/paste.txt");
-const CSV = resolve(ROOT, "data/dog-food.csv");
 
 const TEMPLATE = `# 一行一個賣場。第一行 = 卡片上主要的那個賣場。
 #
@@ -85,7 +86,8 @@ interface Row {
   line: number;
 }
 
-const RE_ID = /^(df-\d+)$/i;
+// df- 狗飼料、cf- 貓飼料。新類目的前綴加在 lib/categories，這裡跟著改
+const RE_ID = /^((?:df|cf)-\d+)$/i;
 const RE_URL = /^https?:\/\/\S+$/i;
 const RE_UNIT = /^\d+(?:\.\d+)?\s*(?:kg|g|公斤|公克|磅|lb|lbs|oz)$/i;
 const RE_PCT = /^\d+(?:\.\d+)?\s*%$/;
@@ -126,7 +128,7 @@ function parseLine(raw: string, line: number, carryId: string): Row | { error: s
   label = rest.join(" ").trim();
 
   if (!productId) productId = carryId;
-  if (!productId) return { error: "找不到商品編號（像 df-01），而且上一行也沒有可以沿用的" };
+  if (!productId) return { error: "找不到商品編號（像 df-01 或 cf-01），而且上一行也沒有可以沿用的" };
   if (!url) return { error: "找不到分潤連結（要 http 開頭）" };
   if (!unit) return { error: "找不到規格（像 2kg、4.5磅）" };
   if (amount === null) return { error: "找不到價格" };
@@ -192,59 +194,70 @@ async function main() {
     }
   }
 
-  /* ---- 寫回 CSV ---- */
-  let csv = readFileSync(CSV, "utf8");
-  const hadBom = csv.charCodeAt(0) === 0xfeff;
-  if (hadBom) csv = csv.slice(1);
-
-  const table = parseCsv(csv);
-  const head = table[0];
-  const idCol = head.indexOf("id");
-  if (idCol < 0) { console.error("\ndata/dog-food.csv 找不到 id 欄位\n"); process.exit(1); }
-
-  const col = (name: string) => {
-    const i = head.indexOf(name);
-    if (i < 0) { console.error(`\ndata/dog-food.csv 缺少欄位 ${name}\n`); process.exit(1); }
-    return i;
-  };
-
+  /* ---- 寫回 CSV：編號前綴決定是哪一份（df- 狗、cf- 貓） ---- */
   const today = todayTW();
-  const checkedCol = head.indexOf("checkedAt");
   const touched: string[] = [];
   const missing: string[] = [];
 
+  const byFile = new Map<string, [string, Row[]][]>();
   for (const [id, list] of byProduct) {
-    const r = table.find((row, i) => i > 0 && row[idCol] === id);
-    if (!r) { missing.push(id); continue; }
+    const cat = categoryOfId(id);
+    if (!cat) { missing.push(id); continue; }
+    byFile.set(cat.csv, [...(byFile.get(cat.csv) ?? []), [id, list]]);
+  }
 
-    for (let n = 1; n <= 4; n++) {
-      const m = list[n - 1];
-      r[col(`m${n}Label`)] = m ? m.label : "";
-      r[col(`m${n}Unit`)] = m ? m.unit : "";
-      r[col(`m${n}Amount`)] = m ? String(m.amount) : "";
-      r[col(`m${n}Url`)] = m ? m.url : "";
-      r[col(`m${n}Dead`)] = "";
-      // 貼上那一行有寫【】才覆蓋備註；沒寫就保留原本的人工備註
-      if (m && m.note) r[col(`m${n}Note`)] = m.note;
-      else if (!m) r[col(`m${n}Note`)] = "";
-      // note 不動 —— 那是人寫的（隔日到貨、超商限兩包），程式不該蓋掉
-    }
-    if (checkedCol >= 0) r[checkedCol] = today;
-    // 連結來了，就不再是「等連結」的狀態
+  // 先全部改在記憶體裡，確定每一筆都找得到才寫檔
+  const outputs: [string, string][] = [];
+  for (const [file, entries] of byFile) {
+    const path = resolve(ROOT, file);
+    let csv = readFileSync(path, "utf8");
+    if (csv.charCodeAt(0) === 0xfeff) csv = csv.slice(1);
+
+    const table = parseCsv(csv);
+    const head = table[0];
+    const idCol = head.indexOf("id");
+    if (idCol < 0) { console.error(`\n${file} 找不到 id 欄位\n`); process.exit(1); }
+
+    const col = (name: string) => {
+      const i = head.indexOf(name);
+      if (i < 0) { console.error(`\n${file} 缺少欄位 ${name}\n`); process.exit(1); }
+      return i;
+    };
+    const checkedCol = head.indexOf("checkedAt");
     const awaitCol = head.indexOf("awaitingLink");
-    if (awaitCol >= 0) r[awaitCol] = "";
-    touched.push(`${id}（${list.length} 家）`);
+
+    for (const [id, list] of entries) {
+      const r = table.find((row, i) => i > 0 && row[idCol] === id);
+      if (!r) { missing.push(id); continue; }
+
+      for (let n = 1; n <= 4; n++) {
+        const m = list[n - 1];
+        r[col(`m${n}Label`)] = m ? m.label : "";
+        r[col(`m${n}Unit`)] = m ? m.unit : "";
+        r[col(`m${n}Amount`)] = m ? String(m.amount) : "";
+        r[col(`m${n}Url`)] = m ? m.url : "";
+        r[col(`m${n}Dead`)] = "";
+        // 貼上那一行有寫【】才覆蓋備註；沒寫就保留原本的人工備註
+        if (m && m.note) r[col(`m${n}Note`)] = m.note;
+        else if (!m) r[col(`m${n}Note`)] = "";
+      }
+      if (checkedCol >= 0) r[checkedCol] = today;
+      // 連結來了，就不再是「等連結」的狀態
+      if (awaitCol >= 0) r[awaitCol] = "";
+      touched.push(`${id}（${list.length} 家）`);
+    }
+    outputs.push([path, table.map((r) => r.map(escape).join(",")).join("\r\n") + "\r\n"]);
   }
 
   if (missing.length) {
-    console.error(`\n這幾個商品編號在 data/dog-food.csv 裡找不到：${missing.join("、")}`);
+    console.error(`\n這幾個商品編號找不到：${missing.join("、")}`);
+    console.error(`df- 開頭的在 data/dog-food.csv，cf- 開頭的在 data/cat-food.csv。`);
     console.error(`商品本身要先建立（規格、成分、不要買的條件那些），才能掛賣場。`);
     console.error(`沒有動到任何檔案。\n`);
     process.exit(1);
   }
 
-  const out = table.map((r) => r.map(escape).join(",")).join("\r\n") + "\r\n";
-  writeFileSync(CSV, "﻿" + out, "utf8");
+  for (const [path, out] of outputs) writeFileSync(path, "\uFEFF" + out, "utf8");
 
   console.log(`\n更新了 ${touched.length} 款：${touched.join("、")}`);
   console.log(`查價日期一併改成 ${today}\n`);

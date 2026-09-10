@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { S } from "@/components/styles";
 import { ALLERGENS, BREEDS } from "@/lib/slugs";
+import SiteHeader from "@/components/SiteHeader";
+import Decider from "@/components/Decider";
 
 export const metadata: Metadata = {
   title: "狗飼料怎麼選",
@@ -13,25 +15,19 @@ export const metadata: Metadata = {
 export default function Index() {
   return (
     <main style={{ maxWidth: 720, margin: "0 auto", padding: "0 20px 120px" }}>
-      <div style={{
-        display: "flex", alignItems: "center", justifyContent: "space-between",
-        gap: 14, padding: "28px 0 20px", borderBottom: "1px solid var(--line)", marginBottom: 40,
-      }}>
-        <Link href="/" style={{ display: "flex", alignItems: "center", gap: 9, fontWeight: 900, fontSize: 16, color: "inherit", textDecoration: "none" }}>
-          <span style={{ width: 9, height: 9, borderRadius: 2, background: "var(--accent)" }} />
-          ZONE 27
-        </Link>
-      </div>
+      <SiteHeader current="dog-food" />
 
       <h1 style={{
         fontSize: "clamp(28px,6vw,40px)", lineHeight: 1.45, margin: "0 0 16px",
       }}>
         狗飼料怎麼選
       </h1>
-      <p style={{ color: "var(--muted)", fontSize: 17, lineHeight: 1.9, margin: "0 0 8px", maxWidth: "42ch" }}>
-        挑品種或過敏原進去，我們把不適合的刪掉再給你看。
-        講得出狀況的話，<Link href="/" style={{ color: "var(--accent)" }}>直接用講的更快</Link>。
+      <p style={{ color: "var(--muted)", fontSize: 17, lineHeight: 1.9, margin: "0 0 28px", maxWidth: "42ch" }}>
+        把你家狗的狀況講一句，我們先把不適合的刪掉，剩下的才給你看。
+        不知道怎麼講的話，下面也可以直接挑品種或過敏原。
       </p>
+
+      <Decider defaultSpecies="dog" />
 
       <p style={S.lbl}>先看這個</p>
       <Link href="/dog-food/hidden-chicken" style={{
