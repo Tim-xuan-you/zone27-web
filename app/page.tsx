@@ -84,7 +84,7 @@ export default function Home() {
         </h2>
         <p style={{ margin: 0, fontSize: 15, color: "var(--muted)", lineHeight: 1.85 }}>
           換了三種「低敏」飼料狗還是抓，很多時候是那三包裡面都有雞。
-          四款逐筆核對，附來源連結 —— 包含我們自己在推的那一款。
+          四款逐筆核對，附來源連結，也包含我們自己在推的那一款。
         </p>
       </Link>
 
@@ -96,7 +96,7 @@ export default function Home() {
           價格為人工複查，每張卡片都標了查價日期。點進賣場請以當下標價為準。
         </p>
         <p style={{ margin: "8px 0 0" }}>
-          本站透過購買連結取得分潤，這不影響推薦排序 —— <Link href="/how-we-choose" style={{ color: "var(--muted)" }}>規則寫在這裡</Link>。
+          本站透過購買連結取得分潤，這不影響推薦排序，<Link href="/how-we-choose" style={{ color: "var(--muted)" }}>規則寫在這裡</Link>。
         </p>
       </footer>
     </main>

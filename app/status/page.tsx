@@ -113,7 +113,7 @@ export default function Page() {
         <>
           <p style={{ color: "var(--muted)", fontSize: 15.5, lineHeight: 1.9, margin: "0 0 24px", maxWidth: "48ch" }}>
             <b style={{ color: "var(--ink)" }}>{todo.length} 條</b>要處理，
-            已經按賣場分好組 —— 同一家一次開一個分頁查完，不要來回跳。
+            已經按賣場分好組了，同一家一次開一個分頁查完，不用來回跳。
             下面「先放著」那一段今天可以完全不看。
           </p>
 
@@ -154,7 +154,7 @@ export default function Page() {
       <H>可以不管的</H>
       <div style={box}>
         <p style={{ margin: "0 0 12px", fontSize: 15.5, lineHeight: 1.9 }}>
-          裁決器一次只給一個答案。所以商品一多，<b>多數款根本不會出現在任何人的畫面上</b> ——
+          裁決器一次只給一個答案。所以商品一多，<b>多數款根本不會出現在任何人的畫面上</b>，
           那些款的價格複不複查，沒有人會知道，也沒有人會受影響。
         </p>
         <div style={{ display: "flex", flexWrap: "wrap", gap: 10 }}>
@@ -168,7 +168,7 @@ export default function Page() {
           </ul>
         )}
         <p style={{ margin: "14px 0 0", fontSize: 14, color: "var(--muted)", lineHeight: 1.85 }}>
-          「目前沒機會」不是說它不好，是說以現在的規則，沒有任何一個組合會推到它。
+          「目前沒機會」跟它好不好無關，意思是以現在的規則，沒有任何一個組合會推到它。
           等它有機會被推薦，它自己就會跳到上面那一段。
         </p>
       </div>
@@ -187,7 +187,7 @@ export default function Page() {
           這個站的說服力來自「我們刪掉了什麼」。
           {cut.avgKeep > 0.7 ? (
             <>
-              {" "}現在幾乎沒刪到東西 —— 品種頁是 {catalog.length} 進 {catalog.length} 留，
+              {" "}現在幾乎沒刪到東西，品種頁是 {catalog.length} 進 {catalog.length} 留，
               那個刪除過程看起來就像在演。
             </>
           ) : (
@@ -197,7 +197,7 @@ export default function Page() {
         <p style={{ margin: "10px 0 0", fontSize: 15, color: "var(--muted)", lineHeight: 1.9 }}>
           原因是選品全部同一種：低敏、單一蛋白、無穀、全齡。它們之間沒有對比，
           所以任何規則都刪不掉東西。<b style={{ color: "var(--ink)" }}>
-          下一批該補的不是更多「好的」，是會被刪掉的那些。</b>
+          下一批該補的，反而是會被刪掉的那種。</b>
         </p>
       </div>
 
@@ -220,8 +220,8 @@ export default function Page() {
         ))}
         {dead.length > 0 && (
           <p style={{ margin: "14px 0 0", fontSize: 14, color: "var(--muted)", lineHeight: 1.85 }}>
-            <b style={{ color: "var(--cut)" }}>{dead.length} 條規則目前是空的</b> ——
-            不是規則寫錯，是選品裡缺了它本來要擋的東西。
+            <b style={{ color: "var(--cut)" }}>{dead.length} 條規則目前是空的</b>，
+            規則沒寫錯，只是選品裡還沒有它要擋的東西。
             補進去之後，那一刀才會出現在使用者看到的「怎麼刪的」裡面。
           </p>
         )}
@@ -268,21 +268,21 @@ export default function Page() {
                     Sub id 1 = <b>{shopeeSubId(p.id)}</b>　Sub id 2 = <b>{CATEGORY_SUB_ID}</b>
                   </span>
                   <span style={{ display: "block", fontSize: 12.5, color: "var(--faint)", marginTop: 4 }}>
-                    蝦皮這個欄位只收英數字，連字號會被擋 —— 所以是 {shopeeSubId(p.id)} 不是 {p.id}
+                    蝦皮這個欄位只收英數字，連字號會被擋，所以是 {shopeeSubId(p.id)} 不是 {p.id}
                   </span>
                 </Line>
                 {sellersOfBrand(p.brand).length > 0 && (
                   <Line k="這個牌子買過的家">
                     <b>{sellersOfBrand(p.brand).join("、")}</b>
                     <span style={{ display: "block", fontSize: 12.5, color: "var(--faint)", marginTop: 4 }}>
-                      回這幾家找通常最快 —— 有整條產品線的機率很高，而且賣家越集中維護越省
+                      回這幾家找通常最快，有整條產品線的機率很高，而且賣家越集中維護越省
                     </span>
                   </Line>
                 )}
                 <Line k="標題要對得上">
                   賣場<b>標題</b>裡的商品，要跟我們寫的是同一款
                   <span style={{ display: "block", fontSize: 12.5, color: "var(--faint)", marginTop: 4 }}>
-                    只有內文和圖片對不算 —— 蝦皮上標題才是契約描述，退換爭議照標題走
+                    只有內文和圖片對不算喔，蝦皮上標題才是契約描述，退換爭議照標題走
                   </span>
                 </Line>
                 <Line k="不能有這些字">
@@ -292,7 +292,7 @@ export default function Page() {
                   </span>
                 </Line>
                 <Line k="挑賣家的優先順序">
-                  官方直營 / 品牌旗艦 &gt; 蝦皮優選 &gt; 一般賣家 —— 官方店的連結活得久很多
+                  官方直營 / 品牌旗艦 &gt; 蝦皮優選 &gt; 一般賣家，官方店的連結活得久很多
                 </Line>
                 <Line k="一款留幾家">一到兩家就好。賣場數量直接等於維護成本</Line>
               </div>
@@ -305,7 +305,7 @@ export default function Page() {
       {unbuyable.length === 0
         ? <p style={ok}>沒有。每一款都至少還有一家能買。</p>
         : <ul style={ul}>{unbuyable.map((p) => (
-            <li key={p.id}>{p.brand}｜{p.name} —— {p.discontinued ? "已標記停產" : "所有賣場都失效"}</li>
+            <li key={p.id}>{p.brand}｜{p.name}：{p.discontinued ? "已標記停產" : "所有賣場都失效"}</li>
           ))}</ul>}
 
       <H>還沒寫「先知道這件事」的</H>

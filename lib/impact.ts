@@ -276,7 +276,7 @@ const NEED: Record<string, string> = {
   bodySize: "大型犬專用配方（顆粒大、熱量密度不同）",
   minProtein: "平價高碳水糧（超市那種）",
   maxCarb: "平價高碳水糧，碳水要真的超過 48%",
-  maxPhosphorus: "低磷配方 —— 目前十款都是 1.1–1.2%，控磷的人一款都選不到",
+  maxPhosphorus: "磷在 0.6% 以下的低磷配方（標示不清的會被當成不合格）",
   maxMonthly: "更貴的款，不然預算這一刀永遠砍不到",
   inStock: "（這條是保險絲，平常本來就該是 0）",
 };

@@ -42,7 +42,7 @@ export default function Page() {
         name: "「體重乘以 2%」這個算法準嗎？",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "好記，但偏高。10 公斤的狗照 2% 算是 200 克，用能量公式算大約 165 克 —— 差了兩成，長期會胖。體重越大差越多，因為代謝率不是跟體重成正比，是跟體重的 0.75 次方成正比。",
+          text: "好記，但偏高。10 公斤的狗照 2% 算是 200 克，用能量公式算大約 165 克，差了兩成，長期會胖。體重越大差越多，因為代謝率跟的是體重的 0.75 次方。",
         },
       },
       {
@@ -97,8 +97,8 @@ export default function Page() {
         </div>
         <p style={{ margin: "14px 0 0", fontSize: 14.5, color: "var(--muted)", lineHeight: 1.9 }}>
           RER 是靜止能量需求，MER 是維持能量需求。
-          代謝率不是跟體重成正比，是跟體重的 0.75 次方成正比 ——
-          所以體重翻倍，食量不會翻倍。
+          代謝率跟的是體重的 0.75 次方，
+          所以體重翻倍，食量不會跟著翻倍。
         </p>
       </div>
 
@@ -126,7 +126,7 @@ export default function Page() {
       <div style={box}>
         <p style={{ margin: 0, fontSize: 15.5, lineHeight: 1.95 }}>
           那個算法好記，但<b>偏高</b>。10 公斤的狗照 2% 算是 200 克，
-          用能量公式算大約 165 克 —— <b>差了兩成，長期會胖</b>。
+          用能量公式算大約 165 克，<b>差了兩成，長期會胖</b>。
         </p>
         <p style={{ margin: "12px 0 0", fontSize: 15.5, color: "var(--muted)", lineHeight: 1.95 }}>
           而且體重越大差越多，因為代謝率跟體重不是線性關係。
@@ -138,8 +138,8 @@ export default function Page() {
       <div style={{ ...box, borderColor: "var(--warn)", background: "var(--warn-soft)" }}>
         <p style={{ margin: 0, fontSize: 15.5, lineHeight: 1.95 }}>
           <b>這包你的狗要吃超過 {FRESH_DAYS} 天，就不要買。</b>
-          乾飼料開封後油脂會氧化，放久了狗會越來越不愛吃 ——
-          很多人以為是「這牌子不好」，其實是放太久。
+          乾飼料開封後油脂會氧化，放久了狗會越來越不愛吃，
+          很多人以為是這牌子不好，其實只是放太久了。
         </p>
         <p style={{ margin: "12px 0 0", fontSize: 15.5, color: "var(--muted)", lineHeight: 1.95 }}>
           大包每公斤比較便宜是真的，但便宜的前提是吃得完。

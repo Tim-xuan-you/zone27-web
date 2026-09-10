@@ -18,7 +18,8 @@
     "species:check": "tsx scripts/species-check.ts",
     "data:dup": "tsx scripts/dup-check.ts",
     "data:stage": "tsx scripts/stage-check.ts",
-    "seo:indexnow": "tsx scripts/indexnow.ts"
+    "seo:indexnow": "tsx scripts/indexnow.ts",
+    "voice:check": "tsx scripts/voice-check.ts"
   },
   "dependencies": {
     "@supabase/ssr": "^0.10.3",

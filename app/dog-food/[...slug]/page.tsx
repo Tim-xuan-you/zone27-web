@@ -166,7 +166,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string[
             borderRadius: 14, padding: "18px 22px",
           }}>
             <p style={{ margin: 0, fontSize: 15.5, lineHeight: 1.95 }}>
-              老實說：<b>沒有。</b>{p.breed.zh}這個條件沒有刪掉任何一款 ——
+              說真的，<b>沒有。</b>{p.breed.zh}這個條件沒有刪掉任何一款，
               以「避{p.allergen.zh}」來說，{p.breed.zh}跟其他品種的選擇是一樣的。
             </p>
             <p style={{ margin: "12px 0 0", fontSize: 15, color: "var(--muted)", lineHeight: 1.9 }}>
@@ -205,7 +205,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string[
                 {monthly !== null && <>一個月大約 <b>${monthly.toLocaleString()}</b>。</>}
               </p>
               <p style={{ margin: 0, fontSize: 14, color: "var(--muted)", lineHeight: 1.9 }}>
-                體重是典型值，不是標準 —— 真正該看的是體態。
+                體重是典型值，不是標準，真正該看的是體態。
                 想用你家的實際體重算，
                 <Link href="/dog-food/how-much" style={{ color: "var(--accent)" }}>這裡可以自己輸入</Link>。
               </p>

@@ -76,7 +76,7 @@ export default function Result({
           <div style={S.emptyBox}>
             <p style={{ margin: 0, fontWeight: 700 }}>目前沒有一款同時滿足這些條件</p>
             <p style={{ margin: "8px 0 0", color: "var(--muted)", fontSize: 15 }}>
-              這不是壞消息 —— 硬推一款不適合的才是。放寬其中一項，或把狀況傳 LINE 給我們。
+              這其實不是壞消息啦，硬推一款不適合的才是。可以放寬其中一個條件再試試看。
             </p>
           </div>
         </>
@@ -132,7 +132,7 @@ export default function Result({
         <div>
           <h2 style={{ margin: "0 0 6px", fontSize: 18 }}>換個講法再跑一次</h2>
           <p style={{ margin: 0, fontSize: 15, color: "var(--muted)", lineHeight: 1.8 }}>
-            多講一點通常就不一樣了 —— 體重、現在吃什麼、症狀多久了。
+            多講一點通常就不一樣了，像是體重、現在吃什麼、症狀多久了。
             出貨和庫存要問賣場，牠不舒服要看醫生，<Link href="/ask" style={{ color: "var(--accent)" }}>哪個問題該問誰</Link>寫在這裡。
           </p>
         </div>
@@ -188,7 +188,7 @@ function Cascade({ verdict }: { verdict: Verdict }) {
       <div style={S.keepRow}>
         <span style={S.keepN} className="mono">{verdict.survivors.length}</span>
         <span style={{ fontWeight: 700 }}>
-          {verdict.survivors.length > 0 ? "款留下" : "款符合 —— 條件太嚴格"}
+          {verdict.survivors.length > 0 ? "款留下" : "款符合，條件太嚴格了"}
         </span>
       </div>
     </div>
@@ -258,7 +258,7 @@ function Answer({
       {multi.has(safe.affiliateUrl) && (
         <p style={{ ...S.variantWarn, borderRadius: 0 }}>
           ⚠️ 這個賣場一頁多口味。點進去請自己把規格選成
-          <b>「{p.name}」</b>—— 預設可能不是這個。
+          <b>「{p.name}」</b>，預設的不一定是這個喔。
         </p>
       )}
 
@@ -286,7 +286,7 @@ function Trial({
     <div style={tBox}>
       <Step n={1} title="前 7 到 10 天慢慢換">
         第 1–3 天新的加四分之一，第 4–6 天一半，第 7–10 天四分之三，之後才全換。
-        整包直接換掉幾乎一定軟便 —— 那是換糧造成的，不是牠對這款過敏。
+        整包直接換掉幾乎一定會軟便。那是換糧造成的，不是牠對這款過敏。
       </Step>
 
       <Step n={2} title={`多久看得出來：${t.needLabel}`}>
@@ -298,7 +298,7 @@ function Trial({
           {t.needsTwoBags ? (
             <>
               週期要 {t.needDays} 天，但一包開封放超過 {FRESH_DAYS} 天油脂會氧化，
-              所以這個長度本來就要分兩次買。重點是<b>不要買太小的</b> ——
+              所以這個長度本來就要分兩次買。重點是<b>不要買太小的</b>，
               還沒看出結果就斷糧，你會以為是這款沒用。
             </>
           ) : (
@@ -331,8 +331,8 @@ function Trial({
         <br />
         <Link href="/dog-food/how-much" style={{ color: "var(--accent)" }}>想自己算一天幾克、一個月多少錢 →</Link>
         <br />
-        我們不是獸醫。上面是一般的換糧做法，不是診斷 ——
-        牠一直不舒服，帶去看醫生比換飼料重要。
+        我們不是獸醫，上面是一般的換糧做法，不是診斷。
+        牠一直不舒服的話，帶去看醫生比換飼料重要。
       </p>
     </div>
   );
@@ -512,7 +512,7 @@ function Stores({ p, dogKg, stage }: { p: Product; dogKg?: number; stage?: Stage
           {store.options.some((o) => bagDuration(o.unit, dogKg, stage)?.tooLong) && (
             <p style={S.freshWarn}>
               ⚠️ 標記的規格，你的狗要吃超過 {FRESH_DAYS} 天才吃得完。開封後的乾飼料油脂會氧化，
-              放久了狗會越來越不愛吃 —— 很多人以為是「這牌子不好」，其實是放太久。
+              放久了狗會越來越不愛吃，很多人以為是這牌子不好，其實只是放太久了。
             </p>
           )}
 
@@ -534,7 +534,7 @@ function Stores({ p, dogKg, stage }: { p: Product; dogKg?: number; stage?: Stage
             background: advice.wait ? "var(--warn-soft)" : "var(--keep-soft)",
           }}>
             <p style={{ margin: 0, fontWeight: 700, fontSize: 15 }}>
-              {advice.wait ? "現在不是好時機 — 建議等" : "現在買不吃虧"}
+              {advice.wait ? "現在不是好時機，建議先等等" : "現在買不吃虧"}
             </p>
             <p style={{ margin: "4px 0 0", fontSize: 13.5, color: "var(--muted)" }}>
               {advice.verdict}
@@ -551,7 +551,7 @@ function Issues({ text }: { text: string }) {
     <p style={{ ...S.reports, marginTop: 16 }}>
       <b style={{ color: "var(--muted)" }}>先知道這件事：</b>{text}
       <span style={{ display: "block", marginTop: 4, fontSize: 12 }}>
-        這一欄寫的是查得到、對得上的事實 —— 不是飼主評價統計。
+        這一欄寫的是查得到、對得上的事實，不是飼主評價的統計。
         台灣網路上這幾款的評價幾乎都是分潤文，我們不拿那種東西充數。
       </span>
     </p>

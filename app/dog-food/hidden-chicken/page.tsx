@@ -20,7 +20,7 @@ const CASES = data.cases;
 export const metadata: Metadata = {
   title: "寫著低敏，成分表裡有雞",
   description:
-    "台灣架上幾款主打低敏或單一口味的狗飼料，成分表其實有雞。逐筆核對，附成分表位置、來源連結與查核日期 —— 包含我們自己推薦的那一款。",
+    "台灣架上幾款主打低敏或單一口味的狗飼料，成分表其實有雞。逐筆核對，附成分表位置、來源連結與查核日期，也包含我們自己推薦的那一款。",
   alternates: { canonical: "/dog-food/hidden-chicken" },
   openGraph: { title: "寫著低敏，成分表裡有雞", type: "article" },
 };
@@ -35,7 +35,7 @@ export default function Page() {
         name: "飼料名字寫火雞或鴨肉，就代表沒有雞肉嗎？",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "不代表。商品名上的肉是口味標籤，不是成分清單。台灣通路的品名還常常跟原廠不一樣 —— 同一款有的寫「火雞+雞肉」，有的只寫「火雞」。要確認只有一個方法：看成分表前五項，再看油脂和香料那兩行。",
+          text: "不代表。商品名上的肉是口味標籤，不是成分清單。台灣通路的品名還常常跟原廠不一樣，同一款有的寫「火雞+雞肉」，有的只寫「火雞」。要確認只有一個方法：看成分表前五項，再看油脂和香料那兩行。",
         },
       },
       {
@@ -81,7 +81,7 @@ export default function Page() {
         寫著低敏，成分表裡有雞
       </h1>
       <p style={{ color: "var(--muted)", fontSize: 17, lineHeight: 1.9, margin: "0 0 10px", maxWidth: "42ch" }}>
-        換了三種「低敏」飼料，狗還是抓 —— 很多時候不是飼料沒用，是那三包裡面都有雞。
+        換了三種「低敏」飼料，狗還是抓...很多時候是那三包裡面都有雞。
       </p>
       <p style={{ color: "var(--faint)", fontSize: 13, margin: "0 0 8px" }}>
         {CASES.length} 款逐筆核對 · 最後查核 {data._meta.checkedAt}
@@ -92,7 +92,7 @@ export default function Page() {
       <div style={box}>
         <p style={{ margin: 0, fontSize: 15.5, lineHeight: 1.9 }}>
           <b>商品名上的那塊肉是口味，不是成分清單。</b>
-          原廠的配方名跟台灣通路掛的品名常常對不上 —— 同一款飼料，有的賣場老實寫「火雞+雞肉」，
+          原廠的配方名跟台灣通路掛的品名常常對不上。同一款飼料，有的賣場老實寫「火雞+雞肉」，
           有的就只留「火雞」兩個字。你在哪一家看到，決定你會不會踩到。
         </p>
         <p style={{ margin: "12px 0 0", fontSize: 15.5, lineHeight: 1.9, color: "var(--muted)" }}>
@@ -178,7 +178,7 @@ export default function Page() {
       <div style={box}>
         <p style={{ margin: 0, fontSize: 15.5, lineHeight: 1.9 }}>
           含雞肉本身不是缺點。上面幾款有的品質很好，一隻不對雞過敏的狗吃了完全沒問題。
-          <b>我們在講的是名字跟內容物對不上這件事</b> —— 只有當你正在排查過敏原、
+          <b>我們在講的是名字跟內容物對不上這件事</b>。只有當你正在排查過敏原、
           或已經確定你的狗對雞有反應的時候，這才是問題。
         </p>
         <p style={{ margin: "12px 0 0", fontSize: 15.5, lineHeight: 1.9, color: "var(--muted)" }}>

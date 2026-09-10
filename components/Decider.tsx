@@ -102,7 +102,7 @@ export default function Decider() {
         <div style={S.emptyBox}>
           <p style={{ margin: 0, fontWeight: 700 }}>這句話我們讀不出條件</p>
           <p style={{ margin: "8px 0 0", color: "var(--muted)", fontSize: 15, lineHeight: 1.85 }}>
-            試著講品種、年齡，還有你觀察到的狀況 —— 例如「柴犬五歲，一直抓癢」。
+            試著講品種、年齡，還有你觀察到的狀況，像是「柴犬五歲，一直抓癢」這樣就可以了。
           </p>
           {CONTACT.email && (
             <p style={{ margin: "10px 0 0", fontSize: 14, lineHeight: 1.85 }}>
