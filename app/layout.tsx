@@ -25,6 +25,7 @@ const mono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/" },
   metadataBase: new URL("https://zone27.com.tw"),
   title: {
     default: "ZONE 27 · 幫你刪掉不適合的",
