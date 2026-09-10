@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Remind from "./Remind";
 import {
   anchorOf, bagDuration, freshness, pricePerKg, sharedListings, storesOf, trialPlan, unitOf,
   FRESH_DAYS, type Stage,
@@ -325,6 +326,8 @@ function Trial({
         連續軟便超過三天、抓得比以前更兇、開始吐。
         這時候該看醫生，不是再換下一款飼料。
       </Step>
+
+      <Remind plan="trial" p={p} kg={dogKg} symptoms={symptoms} stage={stage} />
 
       <p style={tNote}>
         <Link href="/dog-food/elimination-diet" style={{ color: "var(--accent)" }}>完整的排除飲食法流程（含最多人跳過的回測）→</Link>

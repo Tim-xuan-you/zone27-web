@@ -79,7 +79,7 @@ export default function Decider() {
               run(text);
             }
           }}
-          placeholder="例如：我家柴犬 5 歲，最近一直抓癢，換過兩種飼料都沒改善…"
+          placeholder="例如：我家柴犬 5 歲，最近一直抓癢，換過兩種飼料都沒改善..."
           rows={3}
         />
         <button style={S.go} onClick={() => run(text)}>裁決</button>
@@ -88,7 +88,7 @@ export default function Decider() {
       <div style={S.chipRow}>
         {EXAMPLES.map((e) => (
           <button key={e} style={S.example} onClick={() => run(e)}>
-            {e.slice(0, 12)}…
+            {e.slice(0, 12)}...
           </button>
         ))}
       </div>

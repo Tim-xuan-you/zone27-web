@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { S } from "@/components/styles";
+import Remind from "@/components/Remind";
 import { catalog } from "@/lib/catalog";
 import { recommendable } from "@/lib/engine";
 
@@ -216,6 +217,9 @@ export default function Page() {
         <li style={li}><b>時間不夠。</b>兩三個禮拜沒改善就放棄換下一款，永遠跑不完一輪。</li>
         <li><b>沒有回測。</b>看起來有效就繼續吃，結果幾個月後又抓，只好從頭猜。</li>
       </ol>
+
+      {/* 三個原因裡，時間不夠和沒回測都是「忘了」，那就交給手機記 */}
+      <Remind plan="elim" />
 
       {/* ── 單一蛋白源在這裡的角色 ── */}
       <p style={S.lbl}>「單一蛋白源」在這裡的角色</p>

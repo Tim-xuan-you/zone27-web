@@ -19,3 +19,17 @@ export function daysBetween(from: string, to: string): number {
   if (Number.isNaN(a) || Number.isNaN(b)) return NaN;
   return Math.round((b - a) / 86400000);
 }
+
+/** YYYY-MM-DD 往後推 n 天 */
+export function addDays(ymd: string, n: number): string {
+  const t = Date.parse(ymd + "T00:00:00Z") + n * 86400000;
+  return new Date(t).toISOString().slice(0, 10);
+}
+
+const WEEKDAY = "日一二三四五六";
+
+/** 給人看的日期：9/27（日） */
+export function fmtShort(ymd: string): string {
+  const d = new Date(ymd + "T00:00:00Z");
+  return `${d.getUTCMonth() + 1}/${d.getUTCDate()}（${WEEKDAY[d.getUTCDay()]}）`;
+}

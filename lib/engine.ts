@@ -627,32 +627,56 @@ export interface Trial {
   better: { id: string; unit: string; amount: number; days: number; savingPct: number | null } | null;
   /** 週期比保鮮上限長，一包裝不下，要分兩次買 */
   needsTwoBags: boolean;
+  /** 看的是哪一種變化 */
+  kind: TrialKind;
+  /** 卡片上那一包的通路 id 和規格（走 /go/ 用） */
+  anchorId: string | null;
+  anchorUnit: string | null;
 }
 
 /** 症狀決定週期。皮膚要等毛髮長，腸胃幾天就知道。 */
-export function trialLength(symptoms: string[] | undefined): { days: number; label: string; why: string } {
-  const has = (k: string) => (symptoms ?? []).some((s) => s.includes(k));
+/** 試吃週期看的是哪一種變化。提醒要在哪幾天跳出來，就是看這個。 */
+export type TrialKind = "gut" | "skin" | "both" | "general";
 
+export function trialLength(
+  symptoms: string[] | undefined,
+): { days: number; label: string; why: string; kind: TrialKind } {
+  const has = (k: string) => (symptoms ?? []).some((s) => s.includes(k));
+  const skin = has("皮膚") || has("毛髮");
+
+  // 抓癢又軟便的狗，以前會被判成腸胃的兩週 —— 但皮膚兩週根本看不出來，
+  // 飼主會在第十四天下錯結論。兩個都有就取長的，並且把兩個時間點都講清楚。
+  if (skin && has("腸胃")) {
+    return {
+      days: 56,
+      label: "便便 1 到 2 週，皮膚 6 到 8 週",
+      why: "兩個一起的話，便便一兩個禮拜就看得出來，皮膚要等滿八週。便便好了先不要急著下結論，兩週還在抓也很正常喔。",
+      kind: "both",
+    };
+  }
   if (has("腸胃")) {
     return {
       days: 14,
       label: "1 到 2 週",
       why: "腸胃的反應快。換完糧穩定下來之後，一兩個禮拜就看得出便便有沒有變好。",
+      kind: "gut",
     };
   }
   // 淚痕刻意不在這裡。我們在畫面上已經說了「淚痕沒有可靠定論，
   // 不會拿它當理由」—— 那就不能回頭拿它去決定週期。自打嘴巴比不做更糟。
-  if (has("皮膚") || has("毛髮")) {
+  if (skin) {
     return {
       days: 56,
       label: "6 到 8 週",
       why: "皮膚跟毛要跟著生長週期走，急不來。獸醫做排除飲食法一般也是抓 8 週，兩個禮拜沒改善很正常，不代表這款沒用喔。",
+      kind: "skin",
     };
   }
   return {
     days: 42,
     label: "至少 6 週",
     why: "換糧的效果不會在幾天內出現。給牠一個完整的週期，你的判斷才有意義。",
+    kind: "general",
   };
 }
 
@@ -670,7 +694,7 @@ export function trialPlan(
 ): Trial {
   const need = trialLength(symptoms);
   const anchor = anchorOf(p, "safe");
-  const anchorDur = bagDuration(unitOf(p, anchor), dogKg, stage);
+  const anchorDur = anchor ? bagDuration(unitOf(p, anchor), dogKg, stage) : null;
 
   const base: Trial = {
     needDays: need.days,
@@ -679,6 +703,9 @@ export function trialPlan(
     anchorDays: anchorDur?.days ?? null,
     better: null,
     needsTwoBags: need.days > FRESH_DAYS,
+    kind: need.kind,
+    anchorId: anchor?.id ?? null,
+    anchorUnit: anchor ? unitOf(p, anchor) : null,
   };
   if (!dogKg || !anchorDur) return base;
 

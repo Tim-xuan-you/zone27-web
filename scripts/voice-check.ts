@@ -17,7 +17,7 @@ const ROOT = resolve(import.meta.dirname, "..");
 const TARGETS = [
   "app", "components",
   "lib/engine.ts", "lib/catalog.ts", "lib/slugs.ts", "lib/impact.ts",
-  "lib/og.tsx", "lib/og-longtail.tsx",
+  "lib/og.tsx", "lib/og-longtail.tsx", "lib/reminder.ts",
 ];
 const DATA = ["data/dog-food.json", "data/hidden-chicken.json"];
 
@@ -54,8 +54,8 @@ const RULES: { name: string; re: RegExp; fix: string; hard: boolean }[] = [
   { name: "可能是對岸義的「項目」", hard: false,
     re: /項目/g,
     fix: "指 project 的話台灣說「專案」" },
-  { name: "全形刪節號", hard: false,
-    re: /……/g,
+  { name: "全形刪節號", hard: true,
+    re: /…/g,
     fix: "改半形 ..." },
 ];
 
