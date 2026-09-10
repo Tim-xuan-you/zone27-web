@@ -47,7 +47,11 @@ export async function generateMetadata(
     title,
     description,
     alternates: { canonical: `/dog-food/${slug.join("/")}` },
-    openGraph: { title, description, type: "article" },
+    openGraph: {
+      title, description, type: "article",
+      // catch-all 路由底下不能放 opengraph-image 檔，所以圖由 /og/dog-food/... 靜態產生
+      images: [{ url: `/og/dog-food/${slug.join("/")}`, width: 1200, height: 630 }],
+    },
   };
 }
 

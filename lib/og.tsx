@@ -24,7 +24,16 @@ const GROUND = "#FBFAF7";
 const ACCENT = "#1F6F5C";
 const CUT = "#A4432F";
 
+const fontCache = new Map<string, Promise<ArrayBuffer | null>>();
+
 async function loadFont(text: string): Promise<ArrayBuffer | null> {
+  // 同一份字集只抓一次 —— 143 個長尾頁共用，不要打 143 次 Google Fonts
+  const key = [...new Set(text)].sort().join("");
+  if (!fontCache.has(key)) fontCache.set(key, fetchFont(key));
+  return fontCache.get(key)!;
+}
+
+async function fetchFont(text: string): Promise<ArrayBuffer | null> {
   try {
     const url =
       "https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@700&text=" +
@@ -45,6 +54,7 @@ export async function ogCard({
   headline,
   sub,
   tone = "accent",
+  fontText,
 }: {
   /** 最上面那一小行，例如「我們自己讀成分表」 */
   kicker: string;
@@ -54,9 +64,14 @@ export async function ogCard({
   sub: string;
   /** 大字裡強調色：accent 綠、cut 紅 */
   tone?: "accent" | "cut";
+  /**
+   * 抓字型用的字集。長尾頁傳一份涵蓋所有品種與過敏原的字集，
+   * 這樣 143 張圖共用同一次下載。不傳就只抓這張圖用到的字。
+   */
+  fontText?: string;
 }) {
   const all = kicker + headline + sub + "ZONE 27zone27.com.tw";
-  const font = await loadFont(all);
+  const font = await loadFont(fontText ? fontText + all : all);
 
   // 抓不到字型：退回英文版，至少不要讓建置失敗
   if (!font) {
@@ -76,6 +91,13 @@ export async function ogCard({
 
   const hl = tone === "cut" ? CUT : ACCENT;
 
+  const lines = headline.includes("，")
+    ? [headline.slice(0, headline.indexOf("，") + 1), headline.slice(headline.indexOf("，") + 1)]
+    : [headline];
+  const longest = Math.max(...lines.map((l) => l.length));
+  // 可用寬度約 1050px；中文字大約一字一個字級寬
+  const fontSize = Math.min(96, Math.floor(1040 / Math.max(longest, 1)));
+
   return new ImageResponse(
     (
       <div
@@ -92,10 +114,10 @@ export async function ogCard({
         </div>
 
         <div style={{
-          display: "flex", fontSize: headline.length > 16 ? 76 : 92,
-          color: hl, lineHeight: 1.25, maxWidth: 1050,
+          display: "flex", flexDirection: "column",
+          fontSize, color: hl, lineHeight: 1.25, maxWidth: 1060,
         }}>
-          {headline}
+          {lines.map((l, i) => <div key={i} style={{ display: "flex" }}>{l}</div>)}
         </div>
 
         <div style={{
