@@ -71,11 +71,33 @@ export default function Page() {
     ],
   };
 
+  const howto = {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    name: "排除飲食法：確認狗是不是食物過敏",
+    description: "以單一新蛋白源飼料跑滿約八週，期間完全不給其他食物，最後以原飼料回測確認。",
+    totalTime: "P10W",
+    step: [
+      { "@type": "HowToStep", position: 1, name: "選一款牠沒吃過的蛋白源",
+        text: "重點不是低敏兩個字，是狗的免疫系統沒見過的肉。或由獸醫開立水解蛋白處方飼料。" },
+      { "@type": "HowToStep", position: 2, name: "跑滿八週，期間完全乾淨",
+        text: "只吃選定的那一款。零食、潔牙骨、人的食物、有調味的藥錠都不能給。" },
+      { "@type": "HowToStep", position: 3, name: "八週後評估",
+        text: "有明顯改善進入回測；完全沒改善多半不是食物問題，請找皮膚科獸醫。" },
+      { "@type": "HowToStep", position: 4, name: "回測：把原本的飼料餵回去",
+        text: "症狀回來才確認是食物過敏；症狀沒回來代表先前的改善另有原因。" },
+    ],
+  };
+
   return (
     <main style={{ maxWidth: 700, margin: "0 auto", padding: "0 20px 120px" }}>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faq) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(howto) }}
       />
 
       <div style={{

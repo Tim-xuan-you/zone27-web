@@ -3,9 +3,35 @@ import Decider from "@/components/Decider";
 
 const navLink = { color: "inherit", textDecoration: "none" } as const;
 
+const ENTITY = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://zone27.com.tw/#org",
+      name: "ZONE 27",
+      url: "https://zone27.com.tw",
+      description: "台灣的狗飼料決策工具。先刪掉不適合的，並寫清楚每一款什麼時候不要買。",
+      logo: "https://zone27.com.tw/opengraph-image",
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://zone27.com.tw/#site",
+      name: "ZONE 27",
+      url: "https://zone27.com.tw",
+      inLanguage: "zh-TW",
+      publisher: { "@id": "https://zone27.com.tw/#org" },
+    },
+  ],
+};
+
 export default function Home() {
   return (
     <main style={{ maxWidth: 720, margin: "0 auto", padding: "0 20px 120px" }}>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(ENTITY) }}
+      />
       <div style={{
         display: "flex", alignItems: "center", justifyContent: "space-between",
         gap: 14, padding: "28px 0 20px", borderBottom: "1px solid var(--line)", marginBottom: 40,
