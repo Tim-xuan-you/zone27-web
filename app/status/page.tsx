@@ -7,7 +7,7 @@ import {
   PRICE_FRESH_DAYS, PRICE_STALE_DAYS,
 } from "@/lib/engine";
 import { allPaths, resolve, situationOf } from "@/lib/slugs";
-import type { Product, Species } from "@/lib/types";
+import type { Product, ProteinSource, Situation, Species } from "@/lib/types";
 import { impactMap, overallCutRate, ruleAudit, TIER_WEIGHT, type Impact } from "@/lib/impact";
 
 /**
@@ -38,10 +38,14 @@ const LEVEL = {
 } as const;
 
 /**
- * 還在等連結的款，假設全部補齊之後，各自會在幾頁長尾頁被推薦。
+ * 還在等連結的款，假設全部補齊之後，各自會被推薦幾次。
  *
  * 等連結的清單一長，從哪一款開始補就很重要：
- * 有的補了會出現在二十幾頁，有的補了一頁都輪不到。先補前者。
+ * 有的補了會出現在二十幾頁，有的補了一次都輪不到。先補前者。
+ *
+ * 只算長尾頁不夠：長尾頁全是「3 歲成年」，幼貓、老貓、胖貓永遠算不到，
+ * 幼貓專用、高齡專用的那幾款就會永遠排最後。所以再加一組裁決器裡常見的情況：
+ * 三種過敏原 × 三個年紀 × 四種症狀。
  */
 function pickCounts(sp: Species): Map<string, number> {
   const opened: Product[] = catalogOf(sp).map((p) =>
@@ -64,6 +68,17 @@ function pickCounts(sp: Species): Map<string, number> {
     st.constraints = constraintsFor(st);
     const v = adjudicate(opened, st);
     if (v.pick) count.set(v.pick.id, (count.get(v.pick.id) ?? 0) + 1);
+  }
+  const fish: ProteinSource[] = ["salmon", "whitefish", "fish"];
+  for (const avoid of [[], ["chicken"], fish] as ProteinSource[][]) {
+    for (const ageYears of sp === "cat" ? [0.5, 3, 12] : [0.5, 3, 10]) {
+      for (const symptoms of [[], ["體重"], ["腸胃問題"], ["皮膚搔癢"]]) {
+        const st: Situation = { species: sp, ageYears, weightKg: sp === "cat" ? 4 : 12, avoid, symptoms, constraints: [] };
+        st.constraints = constraintsFor(st);
+        const v = adjudicate(opened, st);
+        if (v.pick) count.set(v.pick.id, (count.get(v.pick.id) ?? 0) + 1);
+      }
+    }
   }
   return count;
 }
@@ -308,7 +323,7 @@ export default function Page() {
                   <b style={{ fontSize: 16.5 }}>{p.name}</b>
                 </div>
                 <span className="mono" style={{ fontSize: 13, color: "var(--faint)" }}>
-                  {p.id}{picks.get(p.id) ? ` · 補了會被推薦 ${picks.get(p.id)} 頁` : ""}
+                  {p.id}{picks.get(p.id) ? ` · 補了會被推薦 ${picks.get(p.id)} 次` : " · 目前的情況都輪不到它"}
                 </span>
               </div>
 
