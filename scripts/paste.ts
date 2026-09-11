@@ -244,7 +244,9 @@ async function main() {
       if (checkedCol >= 0) r[checkedCol] = today;
       // 連結來了，就不再是「等連結」的狀態
       if (awaitCol >= 0) r[awaitCol] = "";
-      touched.push(`${id}（${list.length} 家）`);
+      // 一家賣場常常有好幾個規格，「家」跟「規格」分開數才不會誤會
+      const stores = new Set(list.map((m) => m.label)).size;
+      touched.push(`${id}（${stores} 家、${list.length} 個規格）`);
     }
     outputs.push([path, table.map((r) => r.map(escape).join(",")).join("\r\n") + "\r\n"]);
   }

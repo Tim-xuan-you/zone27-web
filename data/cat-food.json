@@ -176,6 +176,24 @@
             "note": "免運無限次 · 14:00 前下單隔日到",
             "affiliateUrl": "https://s.shopee.tw/Ln9I4cla3",
             "anchor": "value"
+          },
+          {
+            "id": "m3",
+            "label": "免睏寵物樂園（蝦皮優選）",
+            "unit": "1.8kg",
+            "amount": 799,
+            "note": "一頁多款 · 免運無限次",
+            "affiliateUrl": "https://s.shopee.tw/3VkAy44Jdc",
+            "anchor": "value"
+          },
+          {
+            "id": "m4",
+            "label": "免睏寵物樂園（蝦皮優選）",
+            "unit": "4.54kg",
+            "amount": 1599,
+            "note": "一頁多款 · 免運無限次",
+            "affiliateUrl": "https://s.shopee.tw/9zxej2kW43",
+            "anchor": "value"
           }
         ]
       },
