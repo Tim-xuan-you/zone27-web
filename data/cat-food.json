@@ -96,11 +96,29 @@
       "price": {
         "unit": "4.54kg",
         "checkedAt": "2026-09-11",
-        "merchants": []
+        "merchants": [
+          {
+            "id": "m1",
+            "label": "小BU的米其林指南（蝦皮優選）",
+            "unit": "1.8kg",
+            "amount": 695,
+            "note": "免運無限次 · 14:00 前下單隔日到",
+            "affiliateUrl": "https://s.shopee.tw/AAH4vLjsj4",
+            "anchor": "safe"
+          },
+          {
+            "id": "m2",
+            "label": "小BU的米其林指南（蝦皮優選）",
+            "unit": "4.54kg",
+            "amount": 1544,
+            "note": "免運無限次 · 14:00 前下單隔日到",
+            "affiliateUrl": "https://s.shopee.tw/AAH4vLjsj4",
+            "anchor": "value"
+          }
+        ]
       },
       "dealbreaker": "你的貓對魚過敏。整包的肉只有海魚一種。",
       "knownIssues": "粗蛋白 42% 是這裡最高的。第二項是馬鈴薯，不含豆類跟穀物。油脂一樣用雞脂肪，要做嚴格的排除飲食先問過獸醫。",
-      "awaitingLink": true,
       "searchAs": "第一饗宴 FirstMate 無穀低敏 海魚藍莓 全貓",
       "twSource": "https://petpetgo.com/product/38301"
     },
