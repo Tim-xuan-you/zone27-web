@@ -158,11 +158,29 @@
       "price": {
         "unit": "4.54kg",
         "checkedAt": "2026-09-11",
-        "merchants": []
+        "merchants": [
+          {
+            "id": "m1",
+            "label": "小BU的米其林指南（蝦皮優選）",
+            "unit": "1.8kg",
+            "amount": 799,
+            "note": "免運無限次 · 14:00 前下單隔日到",
+            "affiliateUrl": "https://s.shopee.tw/Ln9I4cla3",
+            "anchor": "safe"
+          },
+          {
+            "id": "m2",
+            "label": "小BU的米其林指南（蝦皮優選）",
+            "unit": "4.54kg",
+            "amount": 1599,
+            "note": "免運無限次 · 14:00 前下單隔日到",
+            "affiliateUrl": "https://s.shopee.tw/Ln9I4cla3",
+            "anchor": "value"
+          }
+        ]
       },
       "dealbreaker": "你的貓對雞肉過敏。這款的肉就只有雞。",
       "knownIssues": "肉只有雞肉粉一種，第二項是馬鈴薯，不含豆類跟穀物。沒有雞肉過敏的貓，這是成分最單純的選擇之一。",
-      "awaitingLink": true,
       "searchAs": "第一饗宴 FirstMate 無穀低敏 雞肉藍莓 全貓",
       "twSource": "https://petpetgo.com/product/38300"
     },
