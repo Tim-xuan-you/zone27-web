@@ -296,11 +296,20 @@
       "price": {
         "unit": "1.8kg",
         "checkedAt": "2026-09-11",
-        "merchants": []
+        "merchants": [
+          {
+            "id": "m1",
+            "label": "晴空小舖sky（蝦皮優選）",
+            "unit": "1.8kg",
+            "amount": 1690,
+            "note": "一頁多款 · 免運無限次 · 14:00 前下單隔日到",
+            "affiliateUrl": "https://s.shopee.tw/112q2f3pnv",
+            "anchor": "safe"
+          }
+        ]
       },
       "dealbreaker": "你的貓已經超過一歲。這是幼貓專用的，熱量 4,120 大卡，成貓吃容易胖。",
       "knownIssues": "雞、火雞、鮭魚、鯡魚、鯖魚都有，還有蛋。幼貓如果已經有過敏的樣子，這款就不適合。",
-      "awaitingLink": true,
       "searchAs": "歐睿健 Orijen 鮮雞無穀幼貓",
       "twSource": "https://petpetgo.com/product/38037"
     },

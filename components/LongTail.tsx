@@ -31,6 +31,13 @@ function chipsOf(p: PageKind, sp: Species): { label: string; kind: "info" | "avo
   return out;
 }
 
+/** 「不適合」跟「還沒有購買連結」分開數，描述裡才不會把後者算成我們刪掉的 */
+function tally(cuts: { count: number; tag: string }[]) {
+  const pending = cuts.filter((c) => c.tag === "通路").reduce((s, c) => s + c.count, 0);
+  const cut = cuts.reduce((s, c) => s + c.count, 0) - pending;
+  return { cut, pending };
+}
+
 function run(p: PageKind, sp: Species) {
   const situation = situationOf(p, sp);
   situation.constraints = constraintsFor(situation);
@@ -43,9 +50,9 @@ export function longTailMetadata(sp: Species, slug: string[]): Metadata {
   const cat = categoryOf(sp);
 
   const v = run(p, sp);
-  const cut = v.cuts.reduce((s, c) => s + c.count, 0);
+  const { cut, pending } = tally(v.cuts);
   const title = titleOf(p, sp);
-  const description = descriptionOf(p, v.survivors.length, cut, sp);
+  const description = descriptionOf(p, v.survivors.length, cut, sp, pending);
 
   return {
     title,
@@ -67,9 +74,9 @@ export default function LongTail({ sp, slug }: { sp: Species; slug: string[] }) 
   const ALLERGENS = allergensOf(sp);
 
   const verdict = run(p, sp);
-  const cut = verdict.cuts.reduce((s, c) => s + c.count, 0);
+  const { cut, pending } = tally(verdict.cuts);
   const title = titleOf(p, sp);
-  const description = descriptionOf(p, verdict.survivors.length, cut, sp);
+  const description = descriptionOf(p, verdict.survivors.length, cut, sp, pending);
 
   /* 相關頁 —— 站內互連是多類目平台唯一拿得到的權重資產 */
   const related: { href: string; label: string }[] = [];

@@ -160,14 +160,24 @@ export function titleOf(p: PageKind, sp: Species = "dog"): string {
   }
 }
 
-export function descriptionOf(p: PageKind, kept: number, cut: number, sp: Species = "dog"): string {
+/**
+ * 頁面描述。
+ *
+ * cut 只算「不適合」刪掉的；還沒有購買連結的另外用 pending 講。
+ * 以前兩種加在一起，貓飼料剛開張時就會變成「刪掉 12 款不適合米克斯貓的飼料」，
+ * 實際上真正不適合的只有 2 款，另外 10 款只是連結還沒補。那是在誇大我們刪了什麼。
+ */
+export function descriptionOf(
+  p: PageKind, kept: number, cut: number, sp: Species = "dog", pending = 0,
+): string {
+  const tail = pending > 0 ? `另外 ${pending} 款還沒有查證過的購買通路，先不推薦。` : "";
   switch (p.kind) {
     case "breed":
-      return `我們從資料庫裡刪掉 ${cut} 款不適合${p.breed.zh}的飼料，剩下 ${kept} 款，並寫清楚每一款的排除理由，以及什麼時候不要買。`;
+      return `我們從資料庫裡刪掉 ${cut} 款不適合${p.breed.zh}的飼料，剩下 ${kept} 款，並寫清楚每一款的排除理由，以及什麼時候不要買。${tail}`;
     case "allergen":
-      return `避開${p.allergen.zh}的${ANIMAL[sp]}飼料。刪掉 ${cut} 款含${p.allergen.zh}或營養不達標的，剩下 ${kept} 款。每款都寫清楚什麼時候不要買。`;
+      return `避開${p.allergen.zh}的${ANIMAL[sp]}飼料。刪掉 ${cut} 款含${p.allergen.zh}或營養不達標的，剩下 ${kept} 款。每款都寫清楚什麼時候不要買。${tail}`;
     case "both":
-      return `${p.breed.zh}對${p.allergen.zh}過敏該吃什麼？刪掉 ${cut} 款，剩下 ${kept} 款，附排除理由與購買時機建議。`;
+      return `${p.breed.zh}對${p.allergen.zh}過敏該吃什麼？刪掉 ${cut} 款，剩下 ${kept} 款，附排除理由與購買時機建議。${tail}`;
   }
 }
 
