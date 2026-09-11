@@ -261,7 +261,7 @@ function Answer({
         <p style={S.dealBody}>{p.dealbreaker}</p>
       </div>
 
-      {multi.has(safe.affiliateUrl) && (
+      {manyInOne(safe, multi) && (
         <p style={{ ...S.variantWarn, borderRadius: 0 }}>
           ⚠️ 這個賣場一頁多口味。點進去請自己把規格選成
           <b>「{p.name}」</b>，預設的不一定是這個喔。
@@ -447,7 +447,7 @@ function Alt({ p, dogKg, stage, multi }: { p: Product; dogKg?: number; stage?: S
         <p style={S.dealBody}>{p.dealbreaker}</p>
       </div>
 
-      {multi.has(safe.affiliateUrl) && (
+      {manyInOne(safe, multi) && (
         <p style={{ ...S.variantWarn, borderRadius: 0 }}>
           ⚠️ 一頁多口味，點進去請選成<b>「{p.name}」</b>
         </p>
@@ -561,6 +561,17 @@ function Stores({ p, dogKg, stage }: { p: Product; dogKg?: number; stage?: Stage
       })()}
     </>
   );
+}
+
+/**
+ * 這個賣場一頁賣很多款，要提醒讀者自己選規格。
+ *
+ * 兩種情況：我們有兩款共用同一條連結（程式自己看得出來），
+ * 或是賣家把整個系列放在同一頁（只有我們知道，寫在備註裡的「一頁多款」）。
+ * 第二種以前不會跳警告，讀者點進去，預設選到的可能是幼貓配方。
+ */
+function manyInOne(m: { affiliateUrl: string; note: string }, multi: Set<string>): boolean {
+  return multi.has(m.affiliateUrl) || /一頁多款/.test(m.note);
 }
 
 function Issues({ text }: { text: string }) {

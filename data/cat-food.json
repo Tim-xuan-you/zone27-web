@@ -523,11 +523,29 @@
       "price": {
         "unit": "1.5kg",
         "checkedAt": "2026-09-11",
-        "merchants": []
+        "merchants": [
+          {
+            "id": "m1",
+            "label": "貓狗六一六",
+            "unit": "1.58kg",
+            "amount": 655,
+            "note": "全系列一頁多款 · 免運無限次 · 14:00 前下單隔日到",
+            "affiliateUrl": "https://s.shopee.tw/9fKoLMPnec",
+            "anchor": "safe"
+          },
+          {
+            "id": "m2",
+            "label": "貓狗六一六",
+            "unit": "3.17kg",
+            "amount": 1230,
+            "note": "全系列一頁多款 · 免運無限次 · 14:00 前下單隔日到",
+            "affiliateUrl": "https://s.shopee.tw/9fKoLMPnec",
+            "anchor": "value"
+          }
+        ]
       },
       "dealbreaker": "你的貓要控制體重，或對雞肉過敏。碳水換算下來大約 40%，是這裡最高的，第一項是雞肉。",
       "knownIssues": "7 歲以上的成貓都能吃，不用等到很老。前幾項是雞肉、全穀粒小麥、釀造米、玉米蛋白粉。希爾思官網公布的是乾物基，我們用水分 8% 換算。",
-      "awaitingLink": true,
       "searchAs": "希爾思 Hills 成貓 7歲以上 雞肉特調食譜",
       "twSource": "https://petpetgo.com/product/41393"
     },
