@@ -90,10 +90,15 @@ const TIER = {
 } as const;
 
 export default function Page() {
-  const impact = impactMap();
+  // 狗跟貓各算各的：貓的連結一補上，維護台就要讀得到它的影響力，不然整頁會掛
+  const impact = new Map<string, Impact>([
+    ...impactMap(catalogOf("dog"), "dog"),
+    ...impactMap(catalogOf("cat"), "cat"),
+  ]);
+  const NONE: Impact = { picks: 0, appears: 0, totalPages: 0, tier: "目前沒機會" };
   const rows = maintenanceRows(catalog).map((r) => ({
     ...r,
-    impact: impact.get(r.productId) as Impact,
+    impact: impact.get(r.productId) ?? NONE,
   }));
 
   /* 要做的 vs 可以放著。判準是「有沒有人看得到」加上「資料還新不新」。 */

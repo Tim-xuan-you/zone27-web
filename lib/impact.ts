@@ -4,7 +4,7 @@ import { catalogOf, constraintsFor } from "./catalog";
 // 影響力分析跑的是狗飼料的長尾頁。貓的長尾頁開張之後再另外算。
 const catalog = catalogOf("dog");
 import { allPaths, resolve, situationOf } from "./slugs";
-import type { Product, Situation } from "./types";
+import type { Product, Situation, Species } from "./types";
 
 /**
  * 哪幾款其實在撐這個網站。
@@ -42,16 +42,16 @@ export interface Impact {
  * 149 個組合 × 幾款商品，是純記憶體運算，建置時跑一次就好 ——
  * 不值得為它建快取，那只會多一個會過期的東西。
  */
-export function impactMap(pool: Product[] = catalog): Map<string, Impact> {
-  const paths = allPaths();
+export function impactMap(pool: Product[] = catalog, sp: Species = "dog"): Map<string, Impact> {
+  const paths = allPaths(sp);
   const picks = new Map<string, number>();
   const appears = new Map<string, number>();
 
   for (const slug of paths) {
-    const p = resolve(slug);
+    const p = resolve(slug, sp);
     if (!p) continue;
 
-    const situation = situationOf(p);
+    const situation = situationOf(p, sp);
     situation.constraints = constraintsFor(situation);
     const v = adjudicate(pool, situation);
 

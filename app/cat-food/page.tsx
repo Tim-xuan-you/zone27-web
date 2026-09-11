@@ -96,7 +96,7 @@ export default function Page() {
         數字照台灣代理商的中文標示，官網只給乾物基的，我們換算成同一個基準。
         碳水是用 100 減掉其他成分推算的，推估的地方每一款都有寫。
       </p>
-      {candidates.map((p) => <Row key={p.id} p={p} />)}
+      {candidates.map((p) => <Row key={p.id} p={p} live={live} />)}
 
       {refs.length > 0 && (
         <>
@@ -105,7 +105,7 @@ export default function Page() {
             這幾款放進來是為了讓「刪掉」有東西可刪，我們不會推薦。
             它們的共同點是名字跟內容對不上，或是肉的來源沒寫清楚。
           </p>
-          {refs.map((p) => <Row key={p.id} p={p} />)}
+          {refs.map((p) => <Row key={p.id} p={p} live={live} />)}
         </>
       )}
 
@@ -139,7 +139,7 @@ export default function Page() {
   );
 }
 
-function Row({ p }: { p: Product }) {
+function Row({ p, live }: { p: Product; live: boolean }) {
   const meats = [...new Set(p.spec.proteinSources.map((k) => MEAT[k] ?? k))].join("、");
   const ok = recommendable(p);
   return (
@@ -169,7 +169,10 @@ function Row({ p }: { p: Product }) {
 
       <div style={foot}>
         <span style={{ color: ok ? "var(--keep)" : "var(--faint)" }}>
-          {ok ? "可以買了，用上面的裁決器問" : p.referenceOnly ? "對照款，不推薦" : "購買連結補齊中"}
+          {ok
+            // 還沒開張的時候裁決器會回「還在上架」，這裡不能叫人去問它
+            ? live ? "可以買了，用上面的裁決器問" : "連結補好了，開張後就會推薦"
+            : p.referenceOnly ? "對照款，不推薦" : "購買連結補齊中"}
         </span>
         {p.twSource && (
           <a href={p.twSource} target="_blank" rel="noopener nofollow" style={{ color: "var(--accent)" }}>

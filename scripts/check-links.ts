@@ -22,15 +22,15 @@
  *   npm run links:check
  *
  * 結果會寫到 data/link-health.json，並且在畫面上直接印出
- * 「哪幾條要處理」。要把一條標成死的，去 data/dog-food.csv 那一列的
+ * 「哪幾條要處理」。要把一條標成死的，去對應的 CSV（df- 在 dog-food.csv、cf- 在 cat-food.csv）那一列的
  * mN_dead 欄位填 1，再跑 npm run data:import。
  */
 
-import { readFileSync, writeFileSync } from "node:fs";
+import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
+import { CATEGORIES } from "../lib/categories";
 
 const ROOT = resolve(import.meta.dirname, "..");
-const SRC = resolve(ROOT, "data/dog-food.json");
 const OUT = resolve(ROOT, "data/link-health.json");
 
 /** 每條之間停多久（毫秒）。慢一點沒關係，這不是趕時間的事。 */
@@ -109,12 +109,15 @@ async function check(url: string): Promise<Pick<Row, "status" | "finalUrl" | "ve
 }
 
 async function main() {
-  const { products } = JSON.parse(readFileSync(SRC, "utf8")) as {
-    products: {
-      id: string; brand: string; name: string;
-      price: { merchants: { id: string; label: string; affiliateUrl: string; dead?: boolean }[] };
-    }[];
+  // 每個類目的 JSON 都要查，貓的連結壞了一樣要知道
+  type P = {
+    id: string; brand: string; name: string;
+    price: { merchants: { id: string; label: string; affiliateUrl: string; dead?: boolean }[] };
   };
+  const products: P[] = CATEGORIES
+    .map((c) => resolve(ROOT, c.json))
+    .filter((path) => existsSync(path))
+    .flatMap((path) => (JSON.parse(readFileSync(path, "utf8")) as { products: P[] }).products);
 
   const targets = products.flatMap((p) =>
     p.price.merchants
@@ -160,7 +163,7 @@ async function main() {
       console.log(`    ${b.url}`);
     }
     console.log(
-      "\n確認真的下架了，就去 data/dog-food.csv 把那一列的 mN_dead 填 1，" +
+      "\n確認真的下架了，就去對應的 CSV（df- 在 dog-food.csv、cf- 在 cat-food.csv）把那一列的 mN_dead 填 1，" +
         "再跑 npm run data:import。引擎會自動跳過，不用改程式。",
     );
   }

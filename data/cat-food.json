@@ -43,11 +43,20 @@
       "price": {
         "unit": "1.8kg",
         "checkedAt": "2026-09-11",
-        "merchants": []
+        "merchants": [
+          {
+            "id": "m1",
+            "label": "小BU的米其林指南（蝦皮優選）",
+            "unit": "1.8kg",
+            "amount": 803,
+            "note": "免運無限次 · 14:00 前下單隔日到",
+            "affiliateUrl": "https://s.shopee.tw/3LQkll4wyb",
+            "anchor": "safe"
+          }
+        ]
       },
       "dealbreaker": "你的貓對鴨肉過敏。整包只有鴨一種肉，沒有別的可以撐。",
       "knownIssues": "成分表很短：肉只有鴨肉粉一種，第二項是馬鈴薯，不含豆類跟穀物。油脂用的是雞脂肪，脂肪幾乎不含蛋白質，多數對雞過敏的貓沒問題，但要做嚴格的排除飲食，先問過獸醫。熱量 3,430 大卡是這裡最低的，同樣的熱量要吃多一點。",
-      "awaitingLink": true,
       "searchAs": "第一饗宴 FirstMate 無穀低敏 鴨肉藍莓 全貓",
       "twSource": "https://petpetgo.com/product/35347"
     },
