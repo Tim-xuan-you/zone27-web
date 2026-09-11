@@ -514,11 +514,20 @@
       "price": {
         "unit": "1.81kg",
         "checkedAt": "2026-09-11",
-        "merchants": []
+        "merchants": [
+          {
+            "id": "m1",
+            "label": "飼食事寵物選品",
+            "unit": "2kg",
+            "amount": 805,
+            "note": "免運無限次 · 14:00 前下單隔日到",
+            "affiliateUrl": "https://s.shopee.tw/70K3DKfJqJ",
+            "anchor": "safe"
+          }
+        ]
       },
       "dealbreaker": "你的貓對雞肉過敏，或你想找無穀的。第一項是雞肉，第二項是全穀粒小麥。",
       "knownIssues": "動物性的肉只有雞，但還有黃豆粉，排查過敏原時變因不只一個。希爾思官網公布的是乾物基的數字，我們用水分 8% 換算成跟其他款一樣的基準。",
-      "awaitingLink": true,
       "searchAs": "希爾思 Hills 成貓 雞肉特調食譜",
       "twSource": "https://petpetgo.com/product/41468"
     },
