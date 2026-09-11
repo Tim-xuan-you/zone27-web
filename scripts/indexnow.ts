@@ -12,22 +12,19 @@
  * Google 沒有這種即時通道，只能等；Bing 有，就該用。
  */
 import { INDEXNOW_KEY } from "../lib/indexnow";
-import { allPaths } from "../lib/slugs";
+import sitemap from "../app/sitemap";
 
 const HOST = "zone27.com.tw";
 const BASE = `https://${HOST}`;
 
-const STATIC = [
-  "/", "/dog-food", "/how-we-choose", "/ask",
-  "/dog-food/hidden-chicken", "/dog-food/grain-free",
-  "/dog-food/elimination-diet", "/dog-food/how-much",
-];
+// 網址清單直接跟 sitemap 拿，只有一份。以前這裡手寫一份，開了貓飼料之後就漏了貓的頁面
+const ALL = sitemap().map((e) => new URL(e.url).pathname);
 
 async function main() {
   const only = process.argv.slice(2).filter((a) => a.startsWith("/"));
   const paths = only.length
     ? only
-    : [...STATIC, ...allPaths().map((s) => "/dog-food/" + s.join("/"))];
+    : ALL;
   const urlList = paths.map((p) => BASE + p);
 
   // 先確認金鑰檔在線上 —— 沒有的話 Bing 會拒絕，白送一趟
