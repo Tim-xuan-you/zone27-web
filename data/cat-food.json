@@ -203,11 +203,38 @@
       "price": {
         "unit": "1kg",
         "checkedAt": "2026-09-11",
-        "merchants": []
+        "merchants": [
+          {
+            "id": "m1",
+            "label": "圓肚精靈家族（蝦皮優選）",
+            "unit": "1kg",
+            "amount": 970,
+            "note": "免運無限次 · 14:00 前下單隔日到",
+            "affiliateUrl": "https://s.shopee.tw/8KpQmehHEz",
+            "anchor": "safe"
+          },
+          {
+            "id": "m2",
+            "label": "圓肚精靈家族（蝦皮優選）",
+            "unit": "1.8kg",
+            "amount": 1690,
+            "note": "免運無限次 · 14:00 前下單隔日到",
+            "affiliateUrl": "https://s.shopee.tw/8KpQmehHEz",
+            "anchor": "value"
+          },
+          {
+            "id": "m3",
+            "label": "圓肚精靈家族（蝦皮優選）",
+            "unit": "5.4kg",
+            "amount": 3660,
+            "note": "免運無限次 · 14:00 前下單隔日到",
+            "affiliateUrl": "https://s.shopee.tw/8KpQmehHEz",
+            "anchor": "value"
+          }
+        ]
       },
       "dealbreaker": "你的貓對魚過敏，或要控制體重。整包都是魚，熱量 4,070 大卡，一碗的熱量比多數款高。",
       "knownIssues": "沙丁魚、鱈魚、鯖魚、比目魚、鯡魚都有，完全不含禽肉，對雞過敏的貓很好用。不過好幾種魚混在一起，拿來排查過敏原的話變因還是多。扁豆、豌豆、鷹嘴豆排在魚的後面，豆類不少。Omega-3 2.1% 是這裡最高的一群。",
-      "awaitingLink": true,
       "searchAs": "歐睿健 Orijen 六種鮮魚 貓 無穀",
       "twSource": "https://petpetgo.com/product/9080"
     },
