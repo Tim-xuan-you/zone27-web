@@ -278,7 +278,7 @@
       "id": "cf-05",
       "species": "cat",
       "brand": "ORIJEN 歐睿健（原渴望）",
-      "name": "成幼貓 野牧鮮雞配方",
+      "name": "鮮雞愛貓無穀配方（成幼貓 野牧鮮雞）",
       "spec": {
         "protein": 40,
         "fat": 20,
@@ -317,7 +317,7 @@
       "dealbreaker": "你的貓對雞、火雞或魚過敏。這款三種都有，還有蛋。",
       "knownIssues": "成貓幼貓都能吃。肉的種類很多，營養給得很足，但排查過敏原用不上。扁豆、豌豆、鷹嘴豆排在肉的後面，豆類不少。台灣代理商標示沒寫熱量，吃幾天是用中間值估的。",
       "awaitingLink": true,
-      "searchAs": "歐睿健 Orijen 成幼貓 野牧鮮雞",
+      "searchAs": "歐睿健 Orijen 鮮雞愛貓 無穀",
       "twSource": "https://petpetgo.com/product/9079"
     },
     {
@@ -427,7 +427,7 @@
       "id": "cf-08",
       "species": "cat",
       "brand": "ACANA 愛肯拿",
-      "name": "豐盛漁獲貓 野生鮭魚&鱈魚+虹鱒魚",
+      "name": "豐盛漁獲貓 低GI配方（野生鮭魚＋鱈魚＋虹鱒魚）",
       "spec": {
         "protein": 34,
         "fat": 16,
@@ -466,14 +466,14 @@
       "dealbreaker": "你的貓對魚過敏，或你特別要找無穀的。這款的肉全是魚，而且成分表第四項是完整燕麥，燕麥是穀物。",
       "knownIssues": "有些通路把它標成無穀，但成分表裡有燕麥，我們照成分表算。不含禽肉。磷 1.4% 是這裡偏高的。",
       "awaitingLink": true,
-      "searchAs": "ACANA 愛肯拿 豐盛漁獲貓 野生鮭魚 鱈魚",
+      "searchAs": "ACANA 愛肯拿 豐盛漁獲 低GI 貓",
       "twSource": "https://petpetgo.com/product/29596"
     },
     {
       "id": "cf-09",
       "species": "cat",
       "brand": "Nutram 紐頓",
-      "name": "T22 無穀貓 火雞",
+      "name": "T22 無穀全能 火雞＋雞肉 挑嘴全齡貓",
       "spec": {
         "protein": 36,
         "fat": 19,
@@ -508,10 +508,10 @@
         "checkedAt": "2026-09-11",
         "merchants": []
       },
-      "dealbreaker": "你的貓對雞肉過敏。名字寫火雞，但成分表第一項是去骨雞肉，第三項是雞肉粉。",
+      "dealbreaker": "你的貓對雞肉過敏。品名把火雞寫在前面，有的賣場甚至只寫火雞，但成分表第一項是去骨雞肉，第三項是雞肉粉。",
       "knownIssues": "肉只有雞、火雞跟蛋，不含魚，對魚過敏的貓可以看看。扁豆、豌豆、鷹嘴豆排在前段。紐頓沒有公布灰分，碳水是用灰分 8% 推估的。",
       "awaitingLink": true,
-      "searchAs": "紐頓 Nutram T22 無穀貓 火雞",
+      "searchAs": "紐頓 Nutram T22 無穀 火雞 雞肉 挑嘴全齡貓",
       "twSource": "https://petpetgo.com/product/25686"
     },
     {

@@ -24,7 +24,7 @@ const TITLE = "寫著鮭魚、鴨肉、火雞，成分表裡有雞";
 export const metadata: Metadata = {
   title: TITLE,
   description:
-    "台灣架上幾款貓飼料，名字寫的是鴨肉、火雞、鮭魚，成分表的第一、二項卻是雞。逐筆核對台灣代理商的中文標示，附來源連結與查核日期。",
+    "台灣架上幾款貓飼料，名字寫的是鴨肉、火雞、鮭魚，成分表前四項就有雞。逐筆核對台灣代理商的中文標示，附來源連結與查核日期。",
   alternates: { canonical: "/cat-food/hidden-chicken" },
   openGraph: { title: TITLE, type: "article" },
 };
@@ -39,7 +39,7 @@ export default function Page() {
         name: "貓飼料寫鮭魚口味或鴨肉口味，就代表沒有雞肉嗎？",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "不代表。貓飼料的名字大多是口味，不是成分清單。我們讀過的 ACANA 草原盛宴貓（鴨肉）、紐頓 T22 無穀貓（火雞）、冠能成貓鮮鮭室內化毛，成分表前四項都有雞。要確認只有一個方法：看成分表前五項，再看油脂和香料那兩行。",
+          text: "不代表。貓飼料的名字大多是口味，不是成分清單。我們讀過的 ACANA 草原盛宴貓（鴨肉）、紐頓 T22 無穀貓（品名把火雞放前面）、冠能成貓鮮鮭室內化毛，成分表前四項都有雞。要確認只有一個方法：看成分表前五項，再看油脂和香料那兩行。",
         },
       },
       {
@@ -113,6 +113,11 @@ export default function Page() {
           <h2 style={{ fontFamily: "var(--font-serif), serif", fontSize: 21, lineHeight: 1.45, margin: "2px 0 12px" }}>
             {c.name}
           </h2>
+          {c.shelfNames.length > 1 && (
+            <p style={{ margin: "0 0 4px", fontSize: 14.5, color: "var(--muted)" }}>
+              架上常見的寫法：{c.shelfNames.join("、")}
+            </p>
+          )}
           <p style={{ margin: "0 0 16px", fontSize: 14.5, color: "var(--muted)" }}>{c.impression}</p>
 
           <p style={found}>成分表寫的是</p>
