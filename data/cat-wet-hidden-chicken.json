@@ -1,9 +1,10 @@
 {
   "_meta": {
-    "note": "罐頭的成分表逐筆人工核對。每一筆都要有可點的來源與查核日期。這一頁指名道姓，寫錯就是我們的責任。",
+    "note": "罐頭的成分表逐筆人工核對。每一筆都要記下來源與查核日期（來源只留在這份檔案，網站上不連出去）。這一頁指名道姓，寫錯就是我們的責任。",
     "checkedAt": "2026-09-12",
-    "method": "取台灣通路商品頁或品牌台灣官網上的中文標示，連結一起放上來讓讀者自己核對。成分的排序照標示原文。",
-    "tally": "我們讀的 12 款罐頭裡，名字沒寫雞的有 8 款；其中 5 款成分表前三項就有雞，4 款第一項就是雞湯。"
+    "method": "取台灣通路商品頁或品牌台灣官網上的中文標示。成分的排序照標示原文。",
+    "tally": "我們讀的 12 款罐頭裡，名字沒寫雞的有 8 款；其中 5 款成分表前三項就有雞，4 款第一項就是雞湯。",
+    "links": "來源網址只留在這份檔案給我們自己核對。網站上不顯示、不連出去：讀者點出去在別家買，Tim 一毛都拿不到（2026-09-12 起的規矩）。要讓讀者自己核對，給的是我們自己的購買連結（productId 對到有連結的商品才會出現）。"
   },
   "cases": [
     {
@@ -21,10 +22,17 @@
       "verdict": "鮭魚跟鮪魚排在雞湯和雞肉後面。",
       "why": "湯底是雞湯、墊底的是雞肉，魚是口味。對雞過敏的貓換到這一包，等於沒換。",
       "sources": [
-        { "label": "Wellness 台灣官網 商品頁", "url": "https://www.wellnesspetfood.com.tw/natural-cat-food/healthy-indulgencer-morsels-salmon-tuna/" },
-        { "label": "petpetgo 商品頁（台灣通路）", "url": "https://petpetgo.com/product/32690" }
+        {
+          "label": "品牌台灣官網的標示",
+          "url": "https://www.wellnesspetfood.com.tw/natural-cat-food/healthy-indulgencer-morsels-salmon-tuna/"
+        },
+        {
+          "label": "台灣通路的商品頁",
+          "url": "https://petpetgo.com/product/32690"
+        }
       ],
-      "checkedAt": "2026-09-12"
+      "checkedAt": "2026-09-12",
+      "productId": "cw-05"
     },
     {
       "id": "hcw-02",
@@ -40,9 +48,13 @@
       "verdict": "鮭魚排第四，前面是雞湯和豬肝。",
       "why": "雞和豬都在前段。對雞過敏的貓不行，對豬過敏的也不行。",
       "sources": [
-        { "label": "petpetgo 商品頁（台灣代理商中文標示）", "url": "https://petpetgo.com/product/39541" }
+        {
+          "label": "台灣代理商的中文標示",
+          "url": "https://petpetgo.com/product/39541"
+        }
       ],
-      "checkedAt": "2026-09-12"
+      "checkedAt": "2026-09-12",
+      "productId": "cw-06"
     },
     {
       "id": "hcw-03",
@@ -58,9 +70,13 @@
       "verdict": "鮭魚排第二沒錯，但第一項是雞湯，後面還有火雞跟豬。",
       "why": "「敏感胃腸與皮膚」講的是消化，不是低過敏原。幼貓第一次查過敏，很容易以為這罐是安全的。",
       "sources": [
-        { "label": "petpetgo 商品頁（台灣代理商中文標示）", "url": "https://petpetgo.com/product/39544" }
+        {
+          "label": "台灣代理商的中文標示",
+          "url": "https://petpetgo.com/product/39544"
+        }
       ],
-      "checkedAt": "2026-09-12"
+      "checkedAt": "2026-09-12",
+      "productId": "cw-07"
     },
     {
       "id": "hcw-04",
@@ -76,9 +92,13 @@
       "verdict": "鴨排第一，雞排第二、第三。",
       "why": "「低敏」是品牌的說法，不是檢驗結果。同一系列的草飼牛、放牧鹿、山野鵪鶉，第二項也都是雞肉。要找沒有雞的，這一整個系列都不行。",
       "sources": [
-        { "label": "mao.com.tw 商品頁（同系列七種口味的成分都有列）", "url": "https://www.mao.com.tw/products/%E6%B1%AA%E5%96%B5%E6%98%9F%E7%90%83-%E8%B2%93%E7%94%A8-fantastic-98-%E9%AE%AE%E8%82%89%E7%84%A1%E8%86%A0%E4%B8%BB%E9%A3%9F%E7%BD%90%EF%BD%9C80g" }
+        {
+          "label": "台灣通路的商品頁（同系列七種口味都看了）",
+          "url": "https://www.mao.com.tw/products/%E6%B1%AA%E5%96%B5%E6%98%9F%E7%90%83-%E8%B2%93%E7%94%A8-fantastic-98-%E9%AE%AE%E8%82%89%E7%84%A1%E8%86%A0%E4%B8%BB%E9%A3%9F%E7%BD%90%EF%BD%9C80g"
+        }
       ],
-      "checkedAt": "2026-09-12"
+      "checkedAt": "2026-09-12",
+      "productId": "cw-02"
     },
     {
       "id": "hcw-05",
@@ -94,9 +114,13 @@
       "verdict": "鴨排第三，前面是雞湯跟雞肉。",
       "why": "這是副食罐，本來就不該當正餐。拿來給對雞過敏的貓當點心，一樣會踩到。",
       "sources": [
-        { "label": "petpetgo 商品頁（台灣通路中文標示）", "url": "https://petpetgo.com/product/41533" }
+        {
+          "label": "台灣通路的中文標示",
+          "url": "https://petpetgo.com/product/41533"
+        }
       ],
-      "checkedAt": "2026-09-12"
+      "checkedAt": "2026-09-12",
+      "productId": "cw-11"
     }
   ],
   "clean": [
@@ -104,19 +128,22 @@
       "brand": "Weruva 唯美味",
       "name": "夏威夷盛宴 鯖魚＋南瓜",
       "found": "肉只有鯖魚，接著是水、南瓜、馬鈴薯澱粉",
-      "url": "https://www.lovecat.com.tw/products/weruva%E5%94%AF%E7%BE%8E%E5%91%B3%E4%B8%BB%E9%A3%9F%E8%B2%93%E7%BD%90-%E5%A4%8F%E5%A8%81%E5%A4%B7%E7%9B%9B%E5%AE%B485g"
+      "url": "https://www.lovecat.com.tw/products/weruva%E5%94%AF%E7%BE%8E%E5%91%B3%E4%B8%BB%E9%A3%9F%E8%B2%93%E7%BD%90-%E5%A4%8F%E5%A8%81%E5%A4%B7%E7%9B%9B%E5%AE%B485g",
+      "productId": "cw-10"
     },
     {
       "brand": "ZiwiPeak 巔峰",
       "name": "鮮肉貓主食罐 羊肉",
       "found": "肉只有羊（羊肉、肺、腎、肝、肚、心），另外有綠唇貝",
-      "url": "https://www.sofydog.com/tw/SofyDOG/product-detail/BR-ZIWICCANALLOB85G/"
+      "url": "https://www.sofydog.com/tw/SofyDOG/product-detail/BR-ZIWICCANALLOB85G/",
+      "productId": "cw-09"
     },
     {
       "brand": "貪貪",
       "name": "功夫湯罐 蛤蜊鮮魚湯（副食罐）",
       "found": "魚湯、鮪魚、鱸魚、蛤蜊，湯底是魚湯",
-      "url": "https://petpetgo.com/product/41536"
+      "url": "https://petpetgo.com/product/41536",
+      "productId": "cw-12"
     }
   ]
 }

@@ -3,7 +3,7 @@ import Link from "next/link";
 import Decider from "@/components/Decider";
 import SiteHeader from "@/components/SiteHeader";
 import { S } from "@/components/styles";
-import { catalogOf, isLive, liveCount } from "@/lib/catalog";
+import { catalogOf, isLive, liveCount, shopLink } from "@/lib/catalog";
 import { MIN_LIVE } from "@/lib/categories";
 import { cansOf, canWord, mer, recommendable } from "@/lib/engine";
 import type { Product, ProteinSource } from "@/lib/types";
@@ -23,7 +23,7 @@ const TITLE = "貓主食罐怎麼選";
 export const metadata: Metadata = {
   title: TITLE,
   description:
-    "我們一款一款讀過台灣架上的貓罐頭標示：哪些是副食罐不能當正餐，哪些名字寫鮭魚、鴨肉，第一項卻是雞湯。每一款都寫清楚什麼時候不要買，一天要吃幾罐，附來源連結。",
+    "我們一款一款讀過台灣架上的貓罐頭標示：哪些是副食罐不能當正餐，哪些名字寫鮭魚、鴨肉，第一項卻是雞湯。每一款都寫清楚什麼時候不要買，一天要吃幾罐。",
   alternates: { canonical: "/cat-wet-food" },
   openGraph: { title: TITLE, type: "website" },
 };
@@ -100,7 +100,7 @@ export default function Page() {
         <Link href="/cat-wet-food/hidden-chicken" style={feature}>
           <h2 style={featureTitle}>寫著鮭魚、鴨肉的罐頭，很多是雞湯煮的</h2>
           <p style={featureBody}>
-            名字沒寫雞的 8 款，5 款成分表前三項就有雞。逐筆核對，附來源連結。
+            名字沒寫雞的 8 款，5 款成分表前三項就有雞。逐筆核對，附查核日期。
           </p>
         </Link>
         <Link href="/cat-wet-food/how-much" style={feature}>
@@ -135,7 +135,7 @@ export default function Page() {
         fontSize: 13, color: "var(--faint)", lineHeight: 1.9,
       }}>
         <p style={{ margin: 0 }}>
-          標示資料取自台灣通路商品頁與品牌台灣官網，每一款都附了來源。
+          標示資料取自台灣通路與品牌台灣官網的中文標示。
           配方會改版，以你手上那一罐的標示為準。本站透過購買連結取得分潤，這不影響推薦排序。
         </p>
       </footer>
@@ -190,9 +190,10 @@ function Row({ p, live }: { p: Product; live: boolean }) {
             ? live ? "可以買了，用上面的裁決器問" : "連結補好了，開張後就會推薦"
             : p.referenceOnly ? "對照款，不推薦當正餐" : "購買連結補齊中"}
         </span>
-        {p.twSource && (
-          <a href={p.twSource} target="_blank" rel="noopener nofollow" style={{ color: "var(--accent)" }}>
-            我們查的台灣通路頁 ↗
+        {/* 只放我們自己的購買連結。以前這裡連去別家通路，讀者在那裡買我們拿不到 */}
+        {shopLink(p.id) && (
+          <a href={shopLink(p.id)!} rel="nofollow sponsored" style={{ color: "var(--accent)", fontWeight: 600 }}>
+            去賣場看 →
           </a>
         )}
       </div>

@@ -1,8 +1,9 @@
 {
   "_meta": {
-    "note": "成分表逐筆人工核對。每一筆都要有可點的來源與查核日期。這一頁指名道姓，寫錯就是我們的責任。",
+    "note": "成分表逐筆人工核對。每一筆都要記下來源與查核日期（來源只留在這份檔案，網站上不連出去）。這一頁指名道姓，寫錯就是我們的責任。",
     "checkedAt": "2026-09-11",
-    "method": "取台灣通路商品頁上的代理商中文標示，連結一起放上來讓讀者自己核對。成分的排序照標示原文。"
+    "method": "取台灣通路商品頁上的代理商中文標示。成分的排序照標示原文。",
+    "links": "來源網址只留在這份檔案給我們自己核對。網站上不顯示、不連出去：讀者點出去在別家買，Tim 一毛都拿不到（2026-09-12 起的規矩）。要讓讀者自己核對，給的是我們自己的購買連結（productId 對到有連結的商品才會出現）。"
   },
   "cases": [
     {
@@ -23,11 +24,12 @@
       "why": "這是雞、鴨、火雞、魚的綜合配方，「鴨肉」是口味名。對雞過敏的貓買它，吃進去的雞比鴨還多。",
       "sources": [
         {
-          "label": "petpetgo 商品頁（台灣代理商中文標示）",
+          "label": "台灣代理商的中文標示",
           "url": "https://petpetgo.com/product/31096"
         }
       ],
-      "checkedAt": "2026-09-11"
+      "checkedAt": "2026-09-11",
+      "productId": "cf-07"
     },
     {
       "id": "hcc-02",
@@ -48,19 +50,20 @@
       "why": "多數賣場的品名老實寫了「火雞+雞肉」，只是順序跟成分表相反；少數只寫「火雞」的，在那一家看到就會踩到。狗飼料那一頁的紐頓 T27 也是同一種情況：你在哪一家看到，決定你會不會踩到。",
       "sources": [
         {
-          "label": "petpetgo 商品頁（台灣代理商中文標示）",
+          "label": "台灣代理商的中文標示",
           "url": "https://petpetgo.com/product/25686"
         },
         {
-          "label": "博客來 商品頁（品名只寫「火雞」）",
+          "label": "一家台灣通路的品名只寫「火雞」",
           "url": "https://www.books.com.tw/products/N013454564"
         },
         {
-          "label": "HAPET 好寵 商品頁（品名寫「火雞+雞肉」）",
+          "label": "另一家台灣通路的品名寫「火雞+雞肉」",
           "url": "https://www.hapet.com.tw/products/nutram-t22-cat-food"
         }
       ],
-      "checkedAt": "2026-09-11"
+      "checkedAt": "2026-09-11",
+      "productId": "cf-09"
     },
     {
       "id": "hcc-03",
@@ -81,11 +84,12 @@
       "note": "新舊包裝正在交替，我們看的是新包裝的標示。舊包裝的成分順序幾乎一樣，第四項一樣是雞肉蓉。",
       "sources": [
         {
-          "label": "petpetgo 商品頁（新舊包裝的中文標示都有）",
+          "label": "台灣代理商的中文標示（新舊包裝都看了）",
           "url": "https://petpetgo.com/product/41778"
         }
       ],
-      "checkedAt": "2026-09-11"
+      "checkedAt": "2026-09-11",
+      "productId": "cf-14"
     }
   ],
   "alsoMismatched": [
@@ -103,11 +107,12 @@
       "verdict": "成分表裡找不到一塊鮪魚肉，鮪魚是香料。",
       "sources": [
         {
-          "label": "寶娜拉寵物小舖 商品頁",
+          "label": "台灣通路的商品頁",
           "url": "https://www.bownala.com.tw/products/%E5%81%89%E5%98%89-%E8%B2%93%E9%A3%BC%E6%96%99-11kg-12kg-%E5%B0%8F%E5%8C%85%E8%A3%9D-%E5%A4%9A%E7%A8%AE%E5%8F%A3%E5%91%B3-%E5%AF%B5%E7%89%A9-%E8%B2%93%E4%B8%BB%E9%A3%9F-%E8%B2%93%E4%B9%BE%E7%B3%A7-whiskas"
         }
       ],
-      "checkedAt": "2026-09-11"
+      "checkedAt": "2026-09-11",
+      "productId": "cf-15"
     },
     {
       "id": "hcc-05",
@@ -123,11 +128,12 @@
       "verdict": "至少五種動物來源：雞、火雞、豬、魚、蛋。",
       "sources": [
         {
-          "label": "petpetgo 商品頁（台灣代理商中文標示）",
+          "label": "台灣代理商的中文標示",
           "url": "https://petpetgo.com/product/41835"
         }
       ],
-      "checkedAt": "2026-09-11"
+      "checkedAt": "2026-09-11",
+      "productId": "cf-13"
     }
   ],
   "grainLabel": [
@@ -135,7 +141,8 @@
       "brand": "ACANA 愛肯拿",
       "name": "豐盛漁獲貓、田園收穫貓",
       "found": "兩款的成分表第 4 項都是完整燕麥",
-      "url": "https://petpetgo.com/product/29596"
+      "url": "https://petpetgo.com/product/29596",
+      "productId": "cf-08"
     },
     {
       "brand": "Nutram 紐頓",

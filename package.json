@@ -19,7 +19,9 @@
     "data:dup": "tsx scripts/dup-check.ts",
     "data:stage": "tsx scripts/stage-check.ts",
     "seo:indexnow": "tsx scripts/indexnow.ts",
-    "voice:check": "tsx scripts/voice-check.ts"
+    "voice:check": "tsx scripts/voice-check.ts",
+    "postbuild": "tsx scripts/outbound-check.ts",
+    "outbound:check": "tsx scripts/outbound-check.ts"
   },
   "dependencies": {
     "@supabase/ssr": "^0.10.3",

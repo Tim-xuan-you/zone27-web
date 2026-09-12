@@ -3,7 +3,7 @@ import Link from "next/link";
 import Decider from "@/components/Decider";
 import SiteHeader from "@/components/SiteHeader";
 import { S } from "@/components/styles";
-import { catalogOf, isLive, liveCount } from "@/lib/catalog";
+import { catalogOf, isLive, liveCount, shopLink } from "@/lib/catalog";
 import { MIN_LIVE } from "@/lib/categories";
 import { recommendable } from "@/lib/engine";
 import { CAT_ALLERGENS, CAT_BREEDS } from "@/lib/slugs";
@@ -13,7 +13,7 @@ import type { Product, ProteinSource } from "@/lib/types";
  * 貓飼料類目頁。
  *
  * 還沒開張的時候（能推薦的不到 MIN_LIVE 款），這一頁的主角是「我們讀過的那幾款」：
- * 每一款的成分重點、什麼時候不要買、台灣通路的來源連結，全部攤開。
+ * 每一款的成分重點、什麼時候不要買，全部攤開。來源不放網址（連出去是別家的店）。
  * 購買連結還沒補齊，但查證的工作已經做完了，那本身就有用 ——
  * 搜「ACANA 貓 鴨肉 有雞嗎」的人，在這裡就找得到答案。
  *
@@ -23,7 +23,7 @@ import type { Product, ProteinSource } from "@/lib/types";
 export const metadata: Metadata = {
   title: "貓飼料怎麼選",
   description:
-    "我們一款一款讀過台灣架上的貓飼料成分表：哪些名字寫鮭魚、鴨肉，成分表裡卻有雞；哪些被標成無穀，其實有燕麥。每一款都寫清楚什麼時候不要買，附來源連結。",
+    "我們一款一款讀過台灣架上的貓飼料成分表：哪些名字寫鮭魚、鴨肉，成分表裡卻有雞；哪些被標成無穀，其實有燕麥。每一款都寫清楚什麼時候不要買。",
   alternates: { canonical: "/cat-food" },
 };
 
@@ -81,7 +81,7 @@ export default function Page() {
         <h2 style={featureTitle}>寫著鮭魚、鴨肉、火雞，成分表裡有雞</h2>
         <p style={featureBody}>
           一隻對雞過敏的貓換了三包「鮭魚口味」，很可能三包都有雞。
-          逐筆核對台灣代理商的中文標示，附來源連結。
+          逐筆核對台灣代理商的中文標示，附查核日期。
         </p>
       </Link>
       <Link href="/cat-food/how-much" style={{ ...feature, marginTop: 14 }}>
@@ -131,7 +131,7 @@ export default function Page() {
         fontSize: 13, color: "var(--faint)", lineHeight: 1.9,
       }}>
         <p style={{ margin: 0 }}>
-          成分資料取自台灣通路商品頁上的代理商中文標示與品牌官網，每一款都附了來源。
+          成分資料取自台灣代理商的中文標示與品牌官網。
           配方會改版，以你手上那一包的包裝標示為準。本站透過購買連結取得分潤，這不影響推薦排序。
         </p>
       </footer>
@@ -174,9 +174,10 @@ function Row({ p, live }: { p: Product; live: boolean }) {
             ? live ? "可以買了，用上面的裁決器問" : "連結補好了，開張後就會推薦"
             : p.referenceOnly ? "對照款，不推薦" : "購買連結補齊中"}
         </span>
-        {p.twSource && (
-          <a href={p.twSource} target="_blank" rel="noopener nofollow" style={{ color: "var(--accent)" }}>
-            我們查的台灣通路頁 ↗
+        {/* 只放我們自己的購買連結。以前這裡連去別家通路，讀者在那裡買我們拿不到 */}
+        {shopLink(p.id) && (
+          <a href={shopLink(p.id)!} rel="nofollow sponsored" style={{ color: "var(--accent)", fontWeight: 600 }}>
+            去賣場看 →
           </a>
         )}
       </div>

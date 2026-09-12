@@ -3,7 +3,8 @@ import Link from "next/link";
 import SiteHeader from "@/components/SiteHeader";
 import { S } from "@/components/styles";
 import data from "@/data/cat-wet-hidden-chicken.json";
-import { claimReport } from "@/lib/contact";
+import Checked from "@/components/Checked";
+import { shopLink } from "@/lib/catalog";
 
 /**
  * 罐頭版的「名字寫別的肉，成分表裡有雞」。
@@ -11,7 +12,7 @@ import { claimReport } from "@/lib/contact";
  * 罐頭跟乾糧不一樣的地方是湯。罐頭要有湯汁，雞湯是最常見的湯底，
  * 所以一罐寫著鮭魚的罐頭，第一項是雞湯並不奇怪 —— 只是包裝正面看不出來。
  *
- * 紀律跟乾糧那兩頁一樣：每一筆掛可點的來源與查核日期，
+ * 紀律跟乾糧那兩頁一樣：每一筆記下來源與查核日期（不放別家網址），
  * 講清楚「含雞不是缺點，名字跟內容對不上才是」，
  * 而且也列出名字跟內容對得上的，讓讀者知道乾淨的標示長什麼樣子。
  */
@@ -25,7 +26,7 @@ const TITLE = "寫著鮭魚、鴨肉的貓罐頭，很多是雞湯煮的";
 export const metadata: Metadata = {
   title: TITLE,
   description:
-    `${data._meta.tally}逐筆核對台灣通路與品牌官網的中文標示，附來源連結與查核日期。`,
+    `${data._meta.tally}逐筆核對台灣通路與品牌官網的中文標示，附查核日期。`,
   alternates: { canonical: PATH },
   openGraph: { title: TITLE, type: "article" },
 };
@@ -126,7 +127,11 @@ export default function Page() {
           <p style={{ margin: "0 0 10px", fontSize: 16, fontWeight: 700, lineHeight: 1.75 }}>{c.verdict}</p>
           <p style={{ margin: "0 0 16px", fontSize: 14.5, color: "var(--muted)", lineHeight: 1.9 }}>{c.why}</p>
 
-          <Sources checkedAt={c.checkedAt} sources={c.sources} item={`${c.id} ${c.brand} ${c.name}`} />
+          <Checked
+            checkedAt={c.checkedAt} sources={c.sources}
+            productId={(c as { productId?: string }).productId}
+            path={PATH} item={`${c.id} ${c.brand} ${c.name}`}
+          />
         </article>
       ))}
 
@@ -136,14 +141,20 @@ export default function Page() {
           不是每一罐都這樣。這三款寫什麼肉，裡面就是什麼肉：
         </p>
         <ul style={{ margin: "0 0 12px", paddingLeft: 18, fontSize: 15, lineHeight: 1.95 }}>
-          {CLEAN.map((g) => (
-            <li key={g.name}>
-              <b>{g.brand} {g.name}</b>：{g.found}
-              <a href={g.url} target="_blank" rel="noopener nofollow" style={{ color: "var(--accent)", fontSize: 13, marginLeft: 6 }}>
-                成分表 ↗
-              </a>
-            </li>
-          ))}
+          {CLEAN.map((g) => {
+            // 只連我們自己的購買連結；還沒有連結的就不放
+            const buy = shopLink((g as { productId?: string }).productId);
+            return (
+              <li key={g.name}>
+                <b>{g.brand} {g.name}</b>：{g.found}
+                {buy && (
+                  <a href={buy} rel="nofollow sponsored" style={{ color: "var(--accent)", fontSize: 13, marginLeft: 6 }}>
+                    去賣場看成分表 →
+                  </a>
+                )}
+              </li>
+            );
+          })}
         </ul>
         <p style={{ margin: 0, fontSize: 14.5, lineHeight: 1.9, color: "var(--muted)" }}>
           最後那一款是副食罐，當點心可以，不能當正餐。
@@ -186,39 +197,11 @@ export default function Page() {
         fontSize: 13, color: "var(--faint)", lineHeight: 1.9,
       }}>
         <p style={{ margin: 0 }}>
-          成分資料取自台灣通路商品頁與品牌台灣官網的中文標示，每一筆都附了連結與查核日期。
+          成分資料取自台灣通路與品牌台灣官網的中文標示，每一筆都寫了查核日期。
           配方會改版，以你手上那一罐的標示為準。
         </p>
       </footer>
     </main>
-  );
-}
-
-function Sources({ checkedAt, sources, item }: { checkedAt: string; sources: { label: string; url: string }[]; item: string }) {
-  const report = claimReport(PATH, item);
-  return (
-    <div style={{ borderTop: "1px solid var(--line)", paddingTop: 12 }}>
-      <p style={{ margin: "0 0 6px", fontSize: 12, color: "var(--faint)" }}>
-        查核 {checkedAt} · 你可以自己點進去對
-      </p>
-      {sources.map((s) => (
-        <a
-          key={s.url}
-          href={s.url}
-          target="_blank"
-          rel="noopener nofollow"
-          style={{ display: "block", fontSize: 13, color: "var(--accent)", lineHeight: 1.9 }}
-        >
-          {s.label} ↗
-        </a>
-      ))}
-      {report && (
-        <a
-          href={report}
-          style={{ display: "inline-block", marginTop: 6, fontSize: 12.5, color: "var(--faint)", textDecoration: "underline", textUnderlineOffset: 3 }}
-        >這一筆寫錯了？跟我們說</a>
-      )}
-    </div>
   );
 }
 

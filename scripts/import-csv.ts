@@ -288,7 +288,8 @@ function readCategory(cat: Category) {
       ...(isRef ? { referenceOnly: true } : {}),
       ...(isAwait ? { awaitingLink: true } : {}),
       ...(row.searchAs ? { searchAs: row.searchAs } : {}),
-      ...(row.twSource ? { twSource: row.twSource } : {}),
+      // twSource 只留在 CSV：那是我們確認台灣買得到的證據，是別家通路的網址。
+      // 寫進 JSON 就會被打包進網頁，哪天有人把它顯示出來就是在幫別家導流（2026-09-12 Tim）
     };
   });
 

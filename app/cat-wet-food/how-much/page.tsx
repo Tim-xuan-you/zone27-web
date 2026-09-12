@@ -117,7 +117,7 @@ export default function Page() {
         </tbody>
       </table>
       <p style={{ margin: "12px 0 0", fontSize: 13.5, color: "var(--muted)", lineHeight: 1.9 }}>
-        皇家 A30+11W 官網沒寫熱量，不在表上。每一款的標示和來源在
+        皇家 A30+11W 官網沒寫熱量，不在表上。每一款的標示在
         <Link href="/cat-wet-food" style={{ color: "var(--accent)" }}>貓主食罐</Link>那一頁。
       </p>
 

@@ -73,7 +73,7 @@ export default function Home() {
           <h2 style={featureTitle}>寫著低敏，成分表裡有雞</h2>
           <p style={featureBody}>
             換了三種「低敏」飼料狗還是抓，很多時候是那三包裡面都有雞。
-            逐筆核對，附來源連結，也包含我們自己在推的那一款。
+            逐筆核對，附查核日期，也包含我們自己在推的那一款。
           </p>
         </Link>
         <Link href="/cat-food/hidden-chicken" style={feature}>

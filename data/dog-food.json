@@ -773,8 +773,7 @@
       },
       "dealbreaker": "你的狗對雞肉過敏。成分表第一項就是雞肉，還有火雞、雞肝、脫水雞肉。",
       "knownIssues": "磷 0.9% 是我們目錄裡最低的，但還是遠高於腎臟處方飼料的 0.2–0.5%，獸醫說要控磷的話這款不算數喔。台灣的品名寫「高齡犬 野牧鮮雞配方」，不是「老犬」。",
-      "searchAs": "歐睿健 Orijen 高齡犬 野牧鮮雞",
-      "twSource": "https://shop.petpark.com.tw/dryfood/dryfood-age-senior-dog"
+      "searchAs": "歐睿健 Orijen 高齡犬 野牧鮮雞"
     },
     {
       "id": "df-14",
@@ -825,8 +824,7 @@
       },
       "dealbreaker": "你的狗對雞肉過敏。成分表第一項是雞肉，還有雞肝香料。",
       "knownIssues": "這款是含穀的（糙米、碎珍珠大麥、全穀粒玉米），但成分表第 6、7 項是黃豌豆和豌豆蛋白，含穀不代表豆類就少。動物性蛋白除了雞肉還有蛋，想排查過敏原的話變因不只一個。磷官網沒公布，我們查不到就留白，不會猜一個數字填上去。",
-      "searchAs": "希爾思 Hills 成犬 7歲 高齡活力 雞肉",
-      "twSource": "https://www.hills.com.tw/dog-food/sd-canine-adult-7-plus-senior-vitality-dry"
+      "searchAs": "希爾思 Hills 成犬 7歲 高齡活力 雞肉"
     },
     {
       "id": "df-15",
@@ -886,8 +884,7 @@
       },
       "dealbreaker": "你的狗不是小型犬。這是小型犬專用配方，顆粒大小和熱量密度都照小型犬調的。",
       "knownIssues": "小型犬專用差在顆粒大小和熱量密度，不是配方比較高級。中大型犬吃也不會怎樣，只是沒必要，同樣的錢買全齡款可以買比較大包。",
-      "searchAs": "歐睿健 Orijen 小型成犬 11種鮮雞魚",
-      "twSource": "https://petpetgo.com/category/dryfood_Orijen_DOG"
+      "searchAs": "歐睿健 Orijen 小型成犬 11種鮮雞魚"
     }
   ]
 }

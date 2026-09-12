@@ -3,7 +3,7 @@ import Link from "next/link";
 import { S } from "@/components/styles";
 import data from "@/data/hidden-chicken.json";
 import SiteHeader from "@/components/SiteHeader";
-import { claimReport } from "@/lib/contact";
+import Checked from "@/components/Checked";
 
 /**
  * 「標榜低敏但含雞肉」。
@@ -13,7 +13,8 @@ import { claimReport } from "@/lib/contact";
  * 因為沒有人願意做這種苦工。
  *
  * 兩條紀律：
- * 1. 每一筆都掛可點的來源與查核日期。指名道姓寫錯就是我們的責任。
+ * 1. 每一筆都記下來源與查核日期。指名道姓寫錯就是我們的責任。
+ *    來源不放網址：連出去是別家的店，讀者在那裡買我們拿不到。想核對的，給我們自己的購買連結。
  * 2. 我們自己推薦的那款也要寫進來（hc-04）。少了它，這一頁就只是打對手。
  */
 
@@ -22,7 +23,7 @@ const CASES = data.cases;
 export const metadata: Metadata = {
   title: "寫著低敏，成分表裡有雞",
   description:
-    "台灣架上幾款主打低敏或單一口味的狗飼料，成分表其實有雞。逐筆核對，附成分表位置、來源連結與查核日期，也包含我們自己推薦的那一款。",
+    "台灣架上幾款主打低敏或單一口味的狗飼料，成分表其實有雞。逐筆核對，附成分表位置與查核日期，也包含我們自己推薦的那一款。",
   alternates: { canonical: "/dog-food/hidden-chicken" },
   openGraph: { title: "寫著低敏，成分表裡有雞", type: "article" },
 };
@@ -145,28 +146,13 @@ export default function Page() {
             }}>{c.note}</p>
           )}
 
-          <div style={{ borderTop: "1px solid var(--line)", paddingTop: 12 }}>
-            <p style={{ margin: "0 0 6px", fontSize: 12, color: "var(--faint)" }}>
-              查核 {c.checkedAt} · 你可以自己點進去對
-            </p>
-            {c.sources.map((s) => (
-              <a
-                key={s.url}
-                href={s.url}
-                target="_blank"
-                rel="noopener nofollow"
-                style={{ display: "block", fontSize: 13, color: "var(--accent)", lineHeight: 1.9 }}
-              >
-                {s.label} ↗
-              </a>
-            ))}
-            {claimReport("/dog-food/hidden-chicken", `${c.id} ${c.brand} ${c.name}`) && (
-              <a
-                href={claimReport("/dog-food/hidden-chicken", `${c.id} ${c.brand} ${c.name}`)!}
-                style={{ display: "inline-block", marginTop: 6, fontSize: 12.5, color: "var(--faint)", textDecoration: "underline", textUnderlineOffset: 3 }}
-              >這一筆寫錯了？跟我們說</a>
-            )}
-          </div>
+          <Checked
+            checkedAt={c.checkedAt}
+            sources={c.sources}
+            productId={(c as { productId?: string }).productId}
+            path="/dog-food/hidden-chicken"
+            item={`${c.id} ${c.brand} ${c.name}`}
+          />
         </article>
       ))}
 
@@ -208,7 +194,7 @@ export default function Page() {
         fontSize: 13, color: "var(--faint)", lineHeight: 1.9,
       }}>
         <p style={{ margin: 0 }}>
-          成分資料取自品牌官網與通路商品頁，每一筆都附了連結與查核日期。
+          成分資料取自品牌官網與通路商品頁，每一筆都寫了查核日期。
           配方會改版，以你手上那一包的包裝標示為準。
         </p>
       </footer>

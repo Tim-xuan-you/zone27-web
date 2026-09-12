@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import SiteHeader from "@/components/SiteHeader";
 import { S } from "@/components/styles";
-import { byId } from "@/lib/catalog";
+import { byId, shopLink } from "@/lib/catalog";
 import { mer } from "@/lib/engine";
 
 /**
@@ -116,15 +116,16 @@ export default function Page() {
         </thead>
         <tbody>
           {ROWS.map((r) => {
-            const p = byId(r.id);
+            // 名字只連我們自己的購買連結，還沒有連結的就只是文字
+            const buy = shopLink(r.id);
             return (
               <tr key={r.id} style={{ borderTop: "1px solid var(--line)" }}>
                 <td style={td}>
                   <span style={{ display: "block", fontSize: 12, fontWeight: 700, color: r.side ? "var(--cut)" : "var(--keep)" }}>
                     {r.side ? "副食罐" : "主食罐"}
                   </span>
-                  {p?.twSource
-                    ? <a href={p.twSource} target="_blank" rel="noopener nofollow" style={{ color: "inherit" }}>{r.label} ↗</a>
+                  {buy
+                    ? <a href={buy} rel="nofollow sponsored" style={{ color: "inherit" }}>{r.label} →</a>
                     : r.label}
                 </td>
                 <td style={{ ...td, textAlign: "right", fontWeight: 700, whiteSpace: "nowrap" }} className="mono">{r.ca}</td>
@@ -135,7 +136,7 @@ export default function Page() {
         </tbody>
       </table>
       <p style={{ margin: "12px 0 0", fontSize: 13.5, color: "var(--muted)", lineHeight: 1.9 }}>
-        數字照包裝標示，點名字可以看我們查的那一頁。「沒添加」是指成分表裡沒有牛磺酸這一項，
+        數字照包裝標示。「沒添加」是指成分表裡沒有牛磺酸這一項，
         魚跟肉本身還是有一點，只是沒有特別補。
       </p>
 

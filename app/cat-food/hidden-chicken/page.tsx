@@ -3,7 +3,8 @@ import Link from "next/link";
 import SiteHeader from "@/components/SiteHeader";
 import { S } from "@/components/styles";
 import data from "@/data/cat-hidden-chicken.json";
-import { claimReport } from "@/lib/contact";
+import Checked from "@/components/Checked";
+import { shopLink } from "@/lib/catalog";
 
 /**
  * 貓飼料版的「名字寫別的肉，成分表裡有雞」。
@@ -12,7 +13,7 @@ import { claimReport } from "@/lib/contact";
  * 而雞是最便宜、最常見的肉。一隻對雞過敏的貓，飼主換了三包「鮭魚口味」，
  * 很可能三包都有雞。
  *
- * 紀律跟狗那一頁一樣：每一筆掛可點的來源與查核日期，
+ * 紀律跟狗那一頁一樣：每一筆記下來源與查核日期（不放別家網址），
  * 而且講清楚「含雞不是缺點，名字跟內容對不上才是」。
  */
 
@@ -25,7 +26,7 @@ const TITLE = "寫著鮭魚、鴨肉、火雞，成分表裡有雞";
 export const metadata: Metadata = {
   title: TITLE,
   description:
-    "台灣架上幾款貓飼料，名字寫的是鴨肉、火雞、鮭魚，成分表前四項就有雞。逐筆核對台灣代理商的中文標示，附來源連結與查核日期。",
+    "台灣架上幾款貓飼料，名字寫的是鴨肉、火雞、鮭魚，成分表前四項就有雞。逐筆核對台灣代理商的中文標示，附查核日期。",
   alternates: { canonical: "/cat-food/hidden-chicken" },
   openGraph: { title: TITLE, type: "article" },
 };
@@ -137,7 +138,11 @@ export default function Page() {
             }}>{c.note}</p>
           )}
 
-          <Sources checkedAt={c.checkedAt} sources={c.sources} item={`${c.id} ${c.brand} ${c.name}`} />
+          <Checked
+            checkedAt={c.checkedAt} sources={c.sources}
+            productId={(c as { productId?: string }).productId}
+            path="/cat-food/hidden-chicken" item={`${c.id} ${c.brand} ${c.name}`}
+          />
         </article>
       ))}
 
@@ -153,7 +158,11 @@ export default function Page() {
             {c.found.map((f, i) => <li key={i}>{f}</li>)}
           </ul>
           <p style={{ margin: "0 0 14px", fontSize: 16, fontWeight: 700, lineHeight: 1.75 }}>{c.verdict}</p>
-          <Sources checkedAt={c.checkedAt} sources={c.sources} item={`${c.id} ${c.brand} ${c.name}`} />
+          <Checked
+            checkedAt={c.checkedAt} sources={c.sources}
+            productId={(c as { productId?: string }).productId}
+            path="/cat-food/hidden-chicken" item={`${c.id} ${c.brand} ${c.name}`}
+          />
         </article>
       ))}
 
@@ -163,14 +172,20 @@ export default function Page() {
           我們查資料的時候，發現有幾款被通路歸在「無穀」分類，成分表裡卻有穀物：
         </p>
         <ul style={{ margin: "0 0 12px", paddingLeft: 18, fontSize: 15, lineHeight: 1.95 }}>
-          {GRAIN.map((g) => (
-            <li key={g.name}>
-              <b>{g.brand} {g.name}</b>：{g.found}
-              <a href={g.url} target="_blank" rel="noopener nofollow" style={{ color: "var(--accent)", fontSize: 13, marginLeft: 6 }}>
-                成分表 ↗
-              </a>
-            </li>
-          ))}
+          {GRAIN.map((g) => {
+            // 只連我們自己的購買連結；沒有就不放
+            const buy = shopLink((g as { productId?: string }).productId);
+            return (
+              <li key={g.name}>
+                <b>{g.brand} {g.name}</b>：{g.found}
+                {buy && (
+                  <a href={buy} rel="nofollow sponsored" style={{ color: "var(--accent)", fontSize: 13, marginLeft: 6 }}>
+                    去賣場看成分表 →
+                  </a>
+                )}
+              </li>
+            );
+          })}
         </ul>
         <p style={{ margin: 0, fontSize: 14.5, lineHeight: 1.9, color: "var(--muted)" }}>
           含穀本身不是問題，貓對穀物過敏的比例很低。問題是篩選標籤不可靠，要找無穀的話，看成分表比看分類準。
@@ -212,39 +227,11 @@ export default function Page() {
         fontSize: 13, color: "var(--faint)", lineHeight: 1.9,
       }}>
         <p style={{ margin: 0 }}>
-          成分資料取自台灣通路商品頁上的代理商中文標示，每一筆都附了連結與查核日期。
+          成分資料取自台灣代理商的中文標示，每一筆都寫了查核日期。
           配方會改版，以你手上那一包的包裝標示為準。
         </p>
       </footer>
     </main>
-  );
-}
-
-function Sources({ checkedAt, sources, item }: { checkedAt: string; sources: { label: string; url: string }[]; item: string }) {
-  const report = claimReport("/cat-food/hidden-chicken", item);
-  return (
-    <div style={{ borderTop: "1px solid var(--line)", paddingTop: 12 }}>
-      <p style={{ margin: "0 0 6px", fontSize: 12, color: "var(--faint)" }}>
-        查核 {checkedAt} · 你可以自己點進去對
-      </p>
-      {sources.map((s) => (
-        <a
-          key={s.url}
-          href={s.url}
-          target="_blank"
-          rel="noopener nofollow"
-          style={{ display: "block", fontSize: 13, color: "var(--accent)", lineHeight: 1.9 }}
-        >
-          {s.label} ↗
-        </a>
-      ))}
-      {report && (
-        <a
-          href={report}
-          style={{ display: "inline-block", marginTop: 6, fontSize: 12.5, color: "var(--faint)", textDecoration: "underline", textUnderlineOffset: 3 }}
-        >這一筆寫錯了？跟我們說</a>
-      )}
-    </div>
   );
 }
 

@@ -2,7 +2,7 @@ import dog from "@/data/dog-food.json";
 import cat from "@/data/cat-food.json";
 import catWet from "@/data/cat-wet-food.json";
 import type { Constraint, Form, Product, ProteinSource, Situation, Species } from "./types";
-import { formOf, mer, recommendable, stageForAge } from "./engine";
+import { anchorOf, formOf, mer, recommendable, stageForAge } from "./engine";
 import { MIN_LIVE } from "./categories";
 
 /**
@@ -27,6 +27,20 @@ export function catalogOf(species: Species, form: Form = "dry"): Product[] {
 
 export function byId(id: string): Product | undefined {
   return catalog.find((p) => p.id === id);
+}
+
+/**
+ * 內文提到某一款的時候，唯一可以放的連結：我們自己的購買連結（走 /go/）。
+ *
+ * 沒有購買連結的就不放連結。連去別家的網站，讀者在那裡買，我們一毛都拿不到。
+ * 對照款（referenceOnly）也不給：那幾款我們在文章裡講的是「不要買」。
+ */
+export function shopLink(productId?: string): string | null {
+  if (!productId) return null;
+  const p = byId(productId);
+  if (!p || !recommendable(p)) return null;
+  const m = anchorOf(p, "safe");
+  return m ? `/go/${m.id}/${p.id}` : null;
 }
 
 /** 這個類目能推薦的有幾款 */

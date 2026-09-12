@@ -68,7 +68,7 @@ export default function Page() {
         fontSize: 13, color: "var(--faint)", lineHeight: 1.9,
       }}>
         <p style={{ margin: 0 }}>
-          成分資料取自台灣通路商品頁與品牌台灣官網，每一款都附了來源。
+          成分資料取自台灣代理商的中文標示與品牌台灣官網。
           本站透過購買連結取得分潤，這不影響推薦排序，<Link href="/how-we-choose" style={{ color: "var(--muted)" }}>規則寫在這裡</Link>。
         </p>
       </footer>
