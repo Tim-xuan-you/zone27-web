@@ -9,6 +9,7 @@ import {
 import { allPaths, resolve, situationOf } from "@/lib/slugs";
 import type { Form, Product, ProteinSource, Situation, Species } from "@/lib/types";
 import { impactMap, overallCutRate, ruleAudit, TIER_WEIGHT, type Impact } from "@/lib/impact";
+import health from "@/data/link-health.json";
 
 /**
  * 維護台。給 Tim 一個人看的，不給讀者、不給搜尋引擎。
@@ -216,6 +217,9 @@ export default function Page() {
           ))}
         </>
       )}
+
+      {/* ── 所有分潤連結：Tim 自己點開檢查、對蝦皮後台說「無效」的是哪一條 ── */}
+      <AllLinks />
 
       {/* ── 這一段是重點：告訴他什麼可以不做 ── */}
       <H>可以不管的</H>
@@ -425,6 +429,74 @@ export default function Page() {
         <Link href="/" style={{ color: "var(--accent)", fontWeight: 700 }}>← 回裁決器</Link>
       </p>
     </main>
+  );
+}
+
+/**
+ * 所有分潤連結，照賣場分組。
+ *
+ * 蝦皮分潤後台說某個商品「無效」的時候，後台只給商品名和價錢；
+ * 點進去才看得到賣場名稱。所以這張表用賣場分組：拿賣場名稱來對最快。
+ *
+ * 蝦皮的商品頁不讓程式看（回 403），我們也不繞過，所以「無效、賣完」只能靠人點開看。
+ * 這張表就是讓 Tim 在手機上一條一條點的。
+ */
+function AllLinks() {
+  type HealthRow = { url: string; item: string | null; verdict: string };
+  const byUrl = new Map((health.rows as HealthRow[]).map((r) => [r.url, r]));
+  const all = catalog.flatMap((p) =>
+    p.price.merchants.map((m) => ({ p, m, h: byUrl.get(m.affiliateUrl) })),
+  );
+  const stores = new Map<string, typeof all>();
+  for (const x of all) stores.set(x.m.label, [...(stores.get(x.m.label) ?? []), x]);
+  const groups = [...stores].sort((a, b) => a[0].localeCompare(b[0], "zh-Hant"));
+  const urls = new Set(all.map((x) => x.m.affiliateUrl)).size;
+
+  return (
+    <>
+      <H>所有分潤連結（{urls} 條，{groups.length} 家賣場）</H>
+      <div id="links" style={{ ...box, borderColor: "var(--warn)", background: "var(--warn-soft)" }}>
+        <p style={{ margin: "0 0 8px", fontSize: 16, fontWeight: 700 }}>蝦皮後台說某個商品「無效」的時候</p>
+        <ol style={{ ...ul, fontSize: 14.5 }}>
+          <li>在蝦皮 App 點進那個無效商品，看<b>賣場名稱</b>。</li>
+          <li>在下面找同一個賣場。找不到，就是網站沒用到它，不用管。</li>
+          <li>找到了，點那一條的「點開看」。打不開、顯示無效或賣完，就跟 Claude 說「這一條無效」，
+            或直接貼另一家的新連結。舊的會標成失效，網站馬上不推那一家。</li>
+        </ol>
+        <p style={{ margin: "10px 0 0", fontSize: 13.5, color: "var(--muted)", lineHeight: 1.85 }}>
+          自己點開檢查沒關係。要自己買的話不要從這裡下單，多數分潤計畫不算自己買的，還可能被當成異常。
+          連結健檢最後一次跑是 {health.checkedAt}：每一條都有轉到商品頁，但商品還在不在、有沒有分潤，蝦皮不讓程式看，要自己點。
+        </p>
+      </div>
+      {groups.map(([label, items]) => (
+        <div key={label} style={box}>
+          <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", gap: 12, marginBottom: 8, flexWrap: "wrap" }}>
+            <h3 style={{ margin: 0, fontSize: 16.5 }}>{label}</h3>
+            <span style={{ fontSize: 13, color: "var(--faint)" }}>{new Set(items.map((x) => x.m.affiliateUrl)).size} 條</span>
+          </div>
+          {items.map(({ p, m, h }) => (
+            <div key={p.id + m.id} style={{ ...line, borderTop: "1px solid var(--line)" }}>
+              <div style={{ flex: 1, minWidth: 190 }}>
+                <span style={{ display: "block", fontSize: 12.5, color: "var(--muted)" }}>{p.id} · {p.brand}</span>
+                {p.name}
+                <span className="mono" style={{ display: "block", fontSize: 12, color: "var(--faint)" }}>
+                  {m.unit ?? p.price.unit} · ${m.amount} · 查價 {p.price.checkedAt}
+                  {h?.item ? ` · 蝦皮商品 ${h.item}` : ""}
+                </span>
+                {m.sharedPage && (
+                  <span style={{ display: "block", fontSize: 12.5, color: "var(--cut)" }}>跟另一款在同一個商品頁，讀者要自己選規格</span>
+                )}
+                {m.dead && <span style={{ display: "block", fontSize: 12.5, color: "var(--cut)" }}>已標失效，網站不會推</span>}
+              </div>
+              <a href={m.affiliateUrl} target="_blank" rel="noopener nofollow"
+                 style={{ color: "var(--accent)", fontSize: 14, fontWeight: 600, whiteSpace: "nowrap" }}>
+                點開看 ↗
+              </a>
+            </div>
+          ))}
+        </div>
+      ))}
+    </>
   );
 }
 

@@ -652,7 +652,8 @@ function whereOf(store: { label: string; options: { unit: string; amount: number
  * 或是賣家把整個系列放在同一頁（只有我們知道，寫在備註裡的「一頁多款」）。
  * 第二種以前不會跳警告，讀者點進去，預設選到的可能是幼貓配方。
  */
-function manyInOne(m: { affiliateUrl: string; note: string }, multi: Set<string>): boolean {
+function manyInOne(m: { affiliateUrl: string; note: string; sharedPage?: boolean }, multi: Set<string>): boolean {
+  if (m.sharedPage) return true;
   return multi.has(m.affiliateUrl) || /一頁多款/.test(m.note);
 }
 

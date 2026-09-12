@@ -50,7 +50,8 @@
             "amount": 1200,
             "note": "隔日到貨 · 正品保障 · 超商限兩包",
             "affiliateUrl": "https://s.shopee.tw/3qMvFBhWng",
-            "anchor": "safe"
+            "anchor": "safe",
+            "sharedPage": true
           },
           {
             "id": "m2",
@@ -59,7 +60,8 @@
             "amount": 2640,
             "note": "超商限一包",
             "affiliateUrl": "https://s.shopee.tw/3qMvFBhWng",
-            "anchor": "value"
+            "anchor": "value",
+            "sharedPage": true
           },
           {
             "id": "m3",
@@ -68,7 +70,8 @@
             "amount": 4380,
             "note": "限宅配 · 開封後要密封防潮",
             "affiliateUrl": "https://s.shopee.tw/3qMvFBhWng",
-            "anchor": "value"
+            "anchor": "value",
+            "sharedPage": true
           }
         ]
       },
@@ -254,7 +257,8 @@
             "amount": 1600,
             "note": "2~3工作日出貨 · 同賣場另有鹿肉與火雞口味",
             "affiliateUrl": "https://s.shopee.tw/4qFSVsX0T4?share_channel_code=6",
-            "anchor": "safe"
+            "anchor": "safe",
+            "sharedPage": true
           },
           {
             "id": "m2",
@@ -263,7 +267,8 @@
             "amount": 4190,
             "note": "大包裝專頁 · 同樣三種口味，選規格要看清",
             "affiliateUrl": "https://s.shopee.tw/3g3V7j61zs?share_channel_code=6",
-            "anchor": "value"
+            "anchor": "value",
+            "sharedPage": true
           }
         ]
       },
@@ -313,7 +318,8 @@
             "amount": 1440,
             "note": "2~3工作日出貨 · 同賣場另有鮭魚與火雞口味",
             "affiliateUrl": "https://s.shopee.tw/4qFSVsX0T4?share_channel_code=6",
-            "anchor": "safe"
+            "anchor": "safe",
+            "sharedPage": true
           },
           {
             "id": "m2",
@@ -322,7 +328,8 @@
             "amount": 6430,
             "note": "大包裝專頁 · 同樣三種口味，選規格要看清",
             "affiliateUrl": "https://s.shopee.tw/3g3V7j61zs?share_channel_code=6",
-            "anchor": "value"
+            "anchor": "value",
+            "sharedPage": true
           }
         ]
       },
@@ -617,7 +624,8 @@
             "amount": 1250,
             "note": "隔日到貨 · 正品保障 · 超商限兩包",
             "affiliateUrl": "https://s.shopee.tw/6AktDKv9U3",
-            "anchor": "safe"
+            "anchor": "safe",
+            "sharedPage": true
           },
           {
             "id": "m2",
@@ -626,7 +634,8 @@
             "amount": 2820,
             "note": "超商限一包",
             "affiliateUrl": "https://s.shopee.tw/6AktDKv9U3",
-            "anchor": "value"
+            "anchor": "value",
+            "sharedPage": true
           },
           {
             "id": "m3",
@@ -635,7 +644,8 @@
             "amount": 4830,
             "note": "限宅配 · 開封後要密封防潮",
             "affiliateUrl": "https://s.shopee.tw/6AktDKv9U3",
-            "anchor": "value"
+            "anchor": "value",
+            "sharedPage": true
           }
         ]
       },

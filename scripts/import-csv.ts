@@ -428,6 +428,45 @@ if (errors.length) {
   process.exit(1);
 }
 
+/*
+ * 共用同一個蝦皮商品頁的連結。
+ *
+ * 短網址每產生一次就不一樣，所以「兩款用同一條網址」這種檢查抓不到它們。
+ * 連結健檢記下了每條短網址轉到哪個商品，兩款商品落在同一頁，就標 sharedPage。
+ * 沒跑過健檢就跳過，不影響匯入。
+ */
+{
+  const HEALTH = resolve("data/link-health.json");
+  if (existsSync(HEALTH)) {
+    const health = JSON.parse(readFileSync(HEALTH, "utf8")) as { rows: { url: string; item: string | null }[] };
+    const itemOfUrl = new Map(health.rows.filter((r) => r.item).map((r) => [r.url, r.item as string]));
+    const owners = new Map<string, Set<string>>();
+    for (const { products } of results) {
+      for (const p of products) {
+        for (const m of p.price.merchants) {
+          const item = itemOfUrl.get(m!.affiliateUrl);
+          if (item) owners.set(item, new Set([...(owners.get(item) ?? []), p.id]));
+        }
+      }
+    }
+    const shared: string[] = [];
+    for (const { products } of results) {
+      for (const p of products) {
+        for (const m of p.price.merchants) {
+          const item = itemOfUrl.get(m!.affiliateUrl);
+          if (item && (owners.get(item)?.size ?? 0) > 1) {
+            (m as { sharedPage?: boolean }).sharedPage = true;
+            shared.push(`${p.id} ${m!.label}`);
+          }
+        }
+      }
+    }
+    if (shared.length) {
+      console.log(`\n  共用同一個蝦皮商品頁（購買按鈕旁會提醒讀者選對規格）：\n    ${[...new Set(shared)].join("\n    ")}`);
+    }
+  }
+}
+
 for (const { cat, products } of results) {
   const json = {
     _meta: {

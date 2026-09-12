@@ -24,6 +24,19 @@
  * 結果會寫到 data/link-health.json，並且在畫面上直接印出
  * 「哪幾條要處理」。要把一條標成死的，去對應的 CSV（df- 在 dog-food.csv、cf- 在 cat-food.csv）那一列的
  * mN_dead 欄位填 1，再跑 npm run data:import。
+ *
+ * ------------------------------------------------------------------
+ * 它看得到什麼、看不到什麼（2026-09-12 實測）
+ * ------------------------------------------------------------------
+ *
+ * 蝦皮的短網址會先轉到 shopee.tw/opaanlp/賣場編號/商品編號，這一步看得到，
+ * 所以我們知道每一條連結指向哪一個商品。
+ * 但商品頁本身對程式一律回 403（蝦皮擋機器人）。
+ * 我們不繞過它：換成假裝瀏覽器、讀頁面內容，就是在爬蝦皮，會賠掉分潤帳號。
+ *
+ * 所以這支只抓得到「連結整條壞掉」（轉不到商品、被丟回首頁）。
+ * 「商品還在但分潤無效」「賣完」這種，只有蝦皮分潤後台和讀者回報知道。
+ * 維護台的「所有分潤連結」那一段，就是給 Tim 自己點開看的。
  */
 
 import { existsSync, readFileSync, writeFileSync } from "node:fs";
@@ -45,7 +58,10 @@ interface Row {
   label: string;
   url: string;
   status: number | null;
+  /** 最後落在哪個網址。只留路徑，不留後面那串追蹤參數 */
   finalUrl: string | null;
+  /** 蝦皮的「賣場編號/商品編號」。拿來比對分潤後台說無效的是不是這一條 */
+  item: string | null;
   verdict: "ok" | "redirected-home" | "not-found" | "unreachable";
   note: string;
 }
@@ -71,7 +87,18 @@ function landedOnHome(finalUrl: string): boolean {
   }
 }
 
-async function check(url: string): Promise<Pick<Row, "status" | "finalUrl" | "verdict" | "note">> {
+/** 從落點網址抓出「賣場編號/商品編號」。兩種寫法都認：/opaanlp/1/2、/product/1/2、-i.1.2 */
+function itemOf(finalUrl: string): string | null {
+  const m = finalUrl.match(/\/(?:opaanlp|product)\/(\d+)\/(\d+)/) ?? finalUrl.match(/-i\.(\d+)\.(\d+)/);
+  return m ? `${m[1]}/${m[2]}` : null;
+}
+
+/** 追蹤參數（credential_token 那些）不存，只留到路徑 */
+function bare(u: string): string {
+  try { const x = new URL(u); return x.origin + x.pathname; } catch { return u; }
+}
+
+async function check(url: string): Promise<Pick<Row, "status" | "finalUrl" | "item" | "verdict" | "note">> {
   const ctrl = new AbortController();
   const timer = setTimeout(() => ctrl.abort(), TIMEOUT_MS);
   try {
@@ -80,29 +107,37 @@ async function check(url: string): Promise<Pick<Row, "status" | "finalUrl" | "ve
       signal: ctrl.signal,
       headers: {
         // 老實表明身分。不假裝成瀏覽器 —— 我們沒有要躲任何人。
-        "user-agent": "zone27-linkcheck/1.0 (+https://zone27.com.tw; 自家連結健檢)",
+        // 只能用英數字：HTTP 標頭放中文，fetch 會直接丟錯，每一條都變成「連不上」。
+        // 以前這裡寫了「自家連結健檢」，結果這支檢查從來沒有真的檢查到任何一條（2026-09-12 才發現）。
+        "user-agent": "zone27-linkcheck/1.0 (+https://zone27.com.tw; checking our own affiliate links)",
       },
     });
-    const finalUrl = res.url || url;
+    const finalUrl = bare(res.url || url);
+    const item = itemOf(res.url || url);
 
     if (res.status === 404 || res.status === 410) {
-      return { status: res.status, finalUrl, verdict: "not-found", note: "商品頁不存在了" };
+      return { status: res.status, finalUrl, item, verdict: "not-found", note: "商品頁不存在了" };
     }
-    if (res.ok && landedOnHome(finalUrl)) {
+    if (landedOnHome(finalUrl)) {
       return {
         status: res.status,
         finalUrl,
+        item,
         verdict: "redirected-home",
         note: "被丟到首頁或搜尋頁 —— 通常代表商品已下架",
       };
     }
-    if (!res.ok) {
-      return { status: res.status, finalUrl, verdict: "unreachable", note: `回應 ${res.status}` };
+    // 有轉到商品頁，但蝦皮對程式回 403。連結本身是通的，商品頁內容我們不看（見檔頭）
+    if (item && res.status === 403) {
+      return { status: res.status, finalUrl, item, verdict: "ok", note: "有轉到商品頁（蝦皮不讓程式看內容，要自己點開確認）" };
     }
-    return { status: res.status, finalUrl, verdict: "ok", note: "" };
+    if (!res.ok) {
+      return { status: res.status, finalUrl, item, verdict: "unreachable", note: `回應 ${res.status}` };
+    }
+    return { status: res.status, finalUrl, item, verdict: "ok", note: "" };
   } catch (e) {
     const msg = e instanceof Error ? e.message : String(e);
-    return { status: null, finalUrl: null, verdict: "unreachable", note: msg.slice(0, 120) };
+    return { status: null, finalUrl: null, item: null, verdict: "unreachable", note: msg.slice(0, 120) };
   } finally {
     clearTimeout(timer);
   }
@@ -132,15 +167,19 @@ async function main() {
   console.log(`預估 ${Math.ceil((targets.length * DELAY_MS) / 1000 / 60)} 分鐘。\n`);
 
   const rows: Row[] = [];
+  // 同一條連結（同一頁的大小包）只問一次，對蝦皮客氣一點
+  const seen = new Map<string, Awaited<ReturnType<typeof check>>>();
   for (let i = 0; i < targets.length; i++) {
     const t = targets[i];
-    const r = await check(t.url);
+    const cached = seen.get(t.url);
+    const r = cached ?? (await check(t.url));
+    seen.set(t.url, r);
     rows.push({ ...t, ...r });
 
     const mark = r.verdict === "ok" ? "  ok" : "  ⚠ ";
     console.log(`${mark} [${i + 1}/${targets.length}] ${t.brand}｜${t.label}${r.verdict === "ok" ? "" : ` —— ${r.note}`}`);
 
-    if (i < targets.length - 1) await sleep(DELAY_MS);
+    if (!cached && i < targets.length - 1) await sleep(DELAY_MS);
   }
 
   const bad = rows.filter((r) => r.verdict !== "ok");

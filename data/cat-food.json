@@ -316,7 +316,8 @@
             "amount": 1391,
             "note": "一頁多款 · 免運無限次 · 14:00 前下單隔日到",
             "affiliateUrl": "https://s.shopee.tw/6fhEIJRtnm",
-            "anchor": "safe"
+            "anchor": "safe",
+            "sharedPage": true
           }
         ]
       },
@@ -371,7 +372,8 @@
             "amount": 1690,
             "note": "一頁多款 · 免運無限次 · 14:00 前下單隔日到",
             "affiliateUrl": "https://s.shopee.tw/112q2f3pnv",
-            "anchor": "safe"
+            "anchor": "safe",
+            "sharedPage": true
           }
         ]
       },
