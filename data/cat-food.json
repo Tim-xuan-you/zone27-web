@@ -469,12 +469,30 @@
       },
       "price": {
         "unit": "1.8kg",
-        "checkedAt": "2026-09-11",
-        "merchants": []
+        "checkedAt": "2026-09-12",
+        "merchants": [
+          {
+            "id": "m1",
+            "label": "獅子王寵物（蝦皮優選）",
+            "unit": "1.8kg",
+            "amount": 1100,
+            "note": "一頁多款 · 超商取貨有數量限制 · 免運無限次 · 14:00 前下單隔日到",
+            "affiliateUrl": "https://s.shopee.tw/LnAlCPp8u",
+            "anchor": "safe"
+          },
+          {
+            "id": "m2",
+            "label": "獅子王寵物（蝦皮優選）",
+            "unit": "4.5kg",
+            "amount": 2420,
+            "note": "一頁多款 · 超商取貨有數量限制 · 免運無限次 · 14:00 前下單隔日到",
+            "affiliateUrl": "https://s.shopee.tw/LnAlCPp8u",
+            "anchor": "value"
+          }
+        ]
       },
       "dealbreaker": "你的貓對魚過敏，或你特別要找無穀的。這款的肉全是魚，而且成分表第四項是完整燕麥，燕麥是穀物。",
       "knownIssues": "有些通路把它標成無穀，但成分表裡有燕麥，我們照成分表算。不含禽肉。磷 1.4% 是這裡偏高的。",
-      "awaitingLink": true,
       "searchAs": "ACANA 愛肯拿 豐盛漁獲 低GI 貓",
       "twSource": "https://petpetgo.com/product/29596"
     },
