@@ -2,7 +2,7 @@
   "_meta": {
     "category": "cat-food",
     "note": "由 data/cat-food.csv 產生，不要直接改這個檔。改 CSV 之後跑 npm run data:import。",
-    "generatedAt": "2026-09-11",
+    "generatedAt": "2026-09-12",
     "count": 15,
     "pricePolicy": "人工複查，不爬蟲。checkedAt 誠實顯示於前端。"
   },
@@ -311,12 +311,21 @@
       },
       "price": {
         "unit": "1kg",
-        "checkedAt": "2026-09-11",
-        "merchants": []
+        "checkedAt": "2026-09-12",
+        "merchants": [
+          {
+            "id": "m1",
+            "label": "晴空小舖sky（蝦皮優選）",
+            "unit": "1.8kg",
+            "amount": 1391,
+            "note": "一頁多款 · 免運無限次 · 14:00 前下單隔日到",
+            "affiliateUrl": "https://s.shopee.tw/6fhEIJRtnm",
+            "anchor": "safe"
+          }
+        ]
       },
       "dealbreaker": "你的貓對雞、火雞或魚過敏。這款三種都有，還有蛋。",
       "knownIssues": "成貓幼貓都能吃。肉的種類很多，營養給得很足，但排查過敏原用不上。扁豆、豌豆、鷹嘴豆排在肉的後面，豆類不少。台灣代理商標示沒寫熱量，吃幾天是用中間值估的。",
-      "awaitingLink": true,
       "searchAs": "歐睿健 Orijen 鮮雞愛貓 無穀",
       "twSource": "https://petpetgo.com/product/9079"
     },
