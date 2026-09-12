@@ -493,9 +493,16 @@ function Alt({ p, dogKg, stage, multi }: { p: Product; dogKg?: number; stage?: S
 /* ------------------------------------------------------------------ */
 
 function Stores({ p, dogKg, stage }: { p: Product; dogKg?: number; stage?: Stage }) {
+  const stores = storesOf(p);
+  // 「吃不完」的警告整款講一次就好。一家一次的話，五家賣場就是同一段話重複五遍
+  const anyTooLong = stores.some((s) =>
+    s.options.some((o) => bagDuration(o.unit, dogKg, stage, p.species, p.spec.kcal, formOf(p))?.tooLong),
+  );
   return (
     <>
-      {storesOf(p).map((store) => (
+      {stores.map((store) => {
+        const notes = splitNotes(store.options.map((o) => o.note));
+        return (
         <div key={store.label} style={S.store}>
           <div style={S.storeHead}>
             <span style={S.storeName}>{store.label}</span>
@@ -509,7 +516,7 @@ function Stores({ p, dogKg, stage }: { p: Product; dogKg?: number; stage?: Stage
           </div>
 
           <div style={S.optList}>
-            {store.options.map((o) => {
+            {store.options.map((o, i) => {
               const dur = bagDuration(o.unit, dogKg, stage, p.species, p.spec.kcal, formOf(p));
               // 罐頭講「每罐」：同一款罐子一樣大，每罐省幾 % 就是每公斤省幾 %
               const per = formOf(p) === "wet" ? "每罐" : "每公斤";
@@ -529,8 +536,10 @@ function Stores({ p, dogKg, stage }: { p: Product; dogKg?: number; stage?: Stage
                       <span style={S.optKg} className="mono">{up}</span>
                     )}
                   </div>
-                  {(dur || save || !store.singleUrl || o.checkedAt !== p.price.checkedAt) && (
+                  {(dur || save || !store.singleUrl || o.checkedAt !== p.price.checkedAt || notes.own[i]) && (
                     <div style={S.optMeta}>
+                      {/* 只屬於這個規格的備註：「超取限 3 包」「限宅配」「送肉泥和抓板」 */}
+                      {notes.own[i] && <span style={{ color: "var(--muted)", flexBasis: "100%" }}>{notes.own[i]}</span>}
                       {/* 備援的價格可能比較舊，照實標日期，讀者點進去以賣場為準 */}
                       {o.checkedAt !== p.price.checkedAt && (
                         <span style={{ color: "var(--faint)" }}>{o.checkedAt.slice(5).replace("-", "/")} 查的價</span>
@@ -557,19 +566,19 @@ function Stores({ p, dogKg, stage }: { p: Product; dogKg?: number; stage?: Stage
             })}
           </div>
 
-          {store.options.some((o) => bagDuration(o.unit, dogKg, stage, p.species, p.spec.kcal, formOf(p))?.tooLong) && (
-            <p style={S.freshWarn}>
-              ⚠️ 標記的規格，你的{p.species === "cat" ? "貓" : "狗"}要吃超過 {FRESH_DAYS} 天才吃得完。開封後的乾飼料油脂會氧化，
-              放久了會越來越不愛吃，很多人以為是這牌子不好，其實只是放太久了。
-            </p>
-          )}
-
-          {store.options[0]?.note && (
-            <p style={S.storeNote}>{store.options[0].note}</p>
-          )}
+          {/* 每個規格都有的備註放這裡，只屬於某個規格的放在那一行底下 */}
+          {notes.common && <p style={S.storeNote}>{notes.common}</p>}
           <ReportLine p={p} where={whereOf(store, store.options[0]?.checkedAt ?? p.price.checkedAt)} short />
         </div>
-      ))}
+        );
+      })}
+
+      {anyTooLong && (
+        <p style={S.freshWarn}>
+          ⚠️ 標記的規格，你的{p.species === "cat" ? "貓" : "狗"}要吃超過 {FRESH_DAYS} 天才吃得完。開封後的乾飼料油脂會氧化，
+          放久了會越來越不愛吃，很多人以為是這牌子不好，其實只是放太久了。
+        </p>
+      )}
 
       {(() => {
         const safe = anchorOf(p, "safe");
@@ -623,6 +632,22 @@ function SpecChips({ p }: { p: Product }) {
       {p.spec.singleSource && <span style={S.specGood}>單一蛋白源</span>}
     </div>
   );
+}
+
+/**
+ * 同一家賣場各規格的備註，拆成「每個規格都有的」跟「只屬於這個規格的」。
+ *
+ * 備註是一條一條貼進來的：「全系列一頁多款 · 免運無限次 · 超取限 3 包」。
+ * 以前賣場底下只秀第一個規格的備註，1.13kg 的「超取限 3 包」看起來像整家都這樣，
+ * 兩包組的「送肉泥和抓板」則完全沒出現。
+ */
+function splitNotes(list: string[]): { common: string; own: string[] } {
+  const parts = list.map((n) => n.split("·").map((x) => x.trim()).filter(Boolean));
+  const common = parts[0]?.filter((x) => parts.every((p) => p.includes(x))) ?? [];
+  return {
+    common: common.join(" · "),
+    own: parts.map((p) => p.filter((x) => !common.includes(x)).join(" · ")),
+  };
 }
 
 /**
