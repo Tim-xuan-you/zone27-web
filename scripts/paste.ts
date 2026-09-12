@@ -145,11 +145,8 @@ function parseLine(raw: string, line: number, carryId: string): Row | { error: s
   if (!unit) return { error: "找不到規格（像 2kg、4.5磅）" };
   if (amount === null) return { error: "找不到價格" };
   if (!label) return { error: "找不到賣場名稱" };
-  // 搭贈品的賣場在這裡就擋掉，不要等匯入才報錯 ——
-  // 價格裡包著贈品，每公斤就算不準，而那是我們整個站的說服力來源
-  if (/送|贈|買一送/.test(label + unit + note)) {
-    return { error: "這家搭贈品（出現「送」或「贈」）。價格裡包著別的東西，每公斤算不準 —— 換一家乾淨定價的" };
-  }
+  // 送贈品的不擋（2026-09-13 Tim：更便宜又送東西，更該收）。
+  // 贈品把每公斤灌高的，匯入時會提醒，見 import-csv.ts
 
   return { productId, label, unit, amount, url, note, line };
 }

@@ -551,6 +551,10 @@ export function kgOf(unit: string): number | null {
   const cans = cansOf(s);
   if (cans) return (cans.g * cans.n) / 1000;
 
+  // 兩包組：「5.4kg×2」是兩包加起來
+  const packs = s.match(/^(\d+(?:\.\d+)?)(?:kg|KG|公斤|Kg)[×xX*](\d+)/);
+  if (packs) return parseFloat(packs[1]) * parseInt(packs[2], 10);
+
   const kg = s.match(/(\d+(?:\.\d+)?)\s*(?:kg|KG|公斤|Kg)/);
   if (kg) return parseFloat(kg[1]);
 
@@ -885,8 +889,10 @@ export function bagDuration(
   const perDay = dailyGrams(weightKg, stage, species, kcalPerKg) / 1000;   // 公斤／天
   if (perDay <= 0) return null;
   const days = form === "wet" ? Math.floor(kg / perDay) : Math.round(kg / perDay);
-  // 保鮮期限是開封的乾飼料才有的問題。罐頭沒開放得很久，開了就是一天內吃完
-  return { days, tooLong: form === "dry" && days > FRESH_DAYS };
+  // 保鮮期限是開封的乾飼料才有的問題。罐頭沒開放得很久，開了就是一天內吃完。
+  // 兩包組看的是「一包」開了之後吃多久：兩包是分開開的
+  const bags = form === "dry" ? parseInt(unit.replace(/\s/g, "").match(/(?:kg|KG|公斤|Kg)[×xX*](\d+)/)?.[1] ?? "1", 10) : 1;
+  return { days, tooLong: form === "dry" && days / bags > FRESH_DAYS };
 }
 
 /* ------------------------------------------------------------------ */

@@ -540,20 +540,130 @@
       },
       "price": {
         "unit": "2kg",
-        "checkedAt": "2026-09-12",
+        "checkedAt": "2026-09-13",
         "merchants": [
           {
             "id": "m1",
+            "label": "毛孩寵物鋪",
+            "unit": "1.13kg",
+            "amount": 580,
+            "note": "全系列一頁多款 · 免運無限次",
+            "affiliateUrl": "https://s.shopee.tw/2gB5rBDOd2",
+            "anchor": "safe",
+            "checkedAt": "2026-09-13"
+          },
+          {
+            "id": "m2",
+            "label": "毛孩寵物鋪",
+            "unit": "2kg",
+            "amount": 950,
+            "note": "全系列一頁多款 · 免運無限次",
+            "affiliateUrl": "https://s.shopee.tw/2gB5rBDOd2",
+            "anchor": "value",
+            "checkedAt": "2026-09-13"
+          },
+          {
+            "id": "m3",
+            "label": "毛孩寵物鋪",
+            "unit": "5.4kg",
+            "amount": 2099,
+            "note": "全系列一頁多款 · 免運無限次",
+            "affiliateUrl": "https://s.shopee.tw/2gB5rBDOd2",
+            "anchor": "value",
+            "checkedAt": "2026-09-13"
+          },
+          {
+            "id": "m4",
+            "label": "萬信富寵物用品店（蝦皮商城）",
+            "unit": "1.13kg",
+            "amount": 680,
+            "note": "全系列一頁多款 · 免運無限次",
+            "affiliateUrl": "https://s.shopee.tw/2gB5r4o2wV",
+            "anchor": "value",
+            "checkedAt": "2026-09-13"
+          },
+          {
+            "id": "m5",
+            "label": "萬信富寵物用品店（蝦皮商城）",
+            "unit": "2kg",
+            "amount": 1104,
+            "note": "全系列一頁多款 · 免運無限次",
+            "affiliateUrl": "https://s.shopee.tw/2gB5r4o2wV",
+            "anchor": "value",
+            "checkedAt": "2026-09-13"
+          },
+          {
+            "id": "m6",
+            "label": "萬信富寵物用品店（蝦皮商城）",
+            "unit": "5.4kg",
+            "amount": 2580,
+            "note": "全系列一頁多款 · 免運無限次 · 超取限 1 包",
+            "affiliateUrl": "https://s.shopee.tw/2gB5r4o2wV",
+            "anchor": "value",
+            "checkedAt": "2026-09-13"
+          },
+          {
+            "id": "m7",
+            "label": "白喵小舖",
+            "unit": "1.13kg",
+            "amount": 555,
+            "note": "全系列一頁多款 · 免運無限次 · 滿 999 送 vita 罐頭 · 超取限 3 包",
+            "affiliateUrl": "https://s.shopee.tw/9AOZarKkQJ",
+            "anchor": "value",
+            "checkedAt": "2026-09-13"
+          },
+          {
+            "id": "m8",
+            "label": "白喵小舖",
+            "unit": "2kg",
+            "amount": 975,
+            "note": "全系列一頁多款 · 免運無限次 · 滿 999 送 vita 罐頭 · 超取限 2 包",
+            "affiliateUrl": "https://s.shopee.tw/9AOZarKkQJ",
+            "anchor": "value",
+            "checkedAt": "2026-09-13"
+          },
+          {
+            "id": "m9",
+            "label": "白喵小舖",
+            "unit": "5.4kg",
+            "amount": 2040,
+            "note": "全系列一頁多款 · 免運無限次 · 滿 999 送 vita 罐頭 · 限宅配",
+            "affiliateUrl": "https://s.shopee.tw/9AOZarKkQJ",
+            "anchor": "value",
+            "checkedAt": "2026-09-13"
+          },
+          {
+            "id": "m10",
+            "label": "貴貴嚴選",
+            "unit": "5.4kg",
+            "amount": 1999,
+            "note": "一頁多款 · 免運無限次 · 超取、店到店限一包",
+            "affiliateUrl": "https://s.shopee.tw/3qN3FK8xGF",
+            "anchor": "value",
+            "checkedAt": "2026-09-13"
+          },
+          {
+            "id": "m11",
+            "label": "貴貴嚴選",
+            "unit": "5.4kg×2",
+            "amount": 3900,
+            "note": "一頁多款 · 兩包組更便宜 · 送肉泥和抓板 · 限宅配",
+            "affiliateUrl": "https://s.shopee.tw/3qN3FK8xGF",
+            "anchor": "value",
+            "checkedAt": "2026-09-13"
+          },
+          {
+            "id": "m12",
             "label": "H&R安室家（蝦皮商城）",
             "unit": "1.13kg",
             "amount": 1250,
             "note": "蝦皮商城 · 15 天鑑賞期 · 免運無限次",
             "affiliateUrl": "https://s.shopee.tw/6fhEJHh3NA",
-            "anchor": "safe",
+            "anchor": "value",
             "checkedAt": "2026-09-12"
           },
           {
-            "id": "m2",
+            "id": "m13",
             "label": "H&R安室家（蝦皮商城）",
             "unit": "2kg",
             "amount": 1699,
@@ -563,7 +673,7 @@
             "checkedAt": "2026-09-12"
           },
           {
-            "id": "m3",
+            "id": "m14",
             "label": "H&R安室家（蝦皮商城）",
             "unit": "5.4kg",
             "amount": 3650,

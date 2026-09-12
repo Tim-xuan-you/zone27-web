@@ -191,8 +191,11 @@ export interface Merchant {
   checkedAt?: string;
 }
 
-/** 每家賣場最多幾條。Tim 給過的連結不刪，所以要留得夠；真的滿了，paste 會擋下來說 */
-export const MAX_MERCHANTS = 8;
+/**
+ * 一款最多幾條（一個規格算一條）。Tim 給過的連結不刪，所以要留得夠；真的滿了，paste 會擋下來說。
+ * 8 條不夠：一家賣場常常有三個規格，三家新的加一家舊的就 12 條了（2026-09-13 紐頓 T22）。
+ */
+export const MAX_MERCHANTS = 16;
 
 export interface Price {
   unit: string;

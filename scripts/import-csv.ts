@@ -124,6 +124,9 @@ function kgOfUnit(unit: string): number | null {
   // 罐頭整箱「80g×24」要乘起來，不然一箱會被當成 80 克，每公斤價格差 24 倍
   const cans = unit.replace(/\s/g, "").match(/^([\d.]+)(?:g|公克|克)[×xX*](\d+)/i);
   if (cans) return (parseFloat(cans[1]) * parseInt(cans[2], 10)) / 1000;
+  // 兩包組「5.4kg×2」一樣要乘
+  const packs = unit.replace(/\s/g, "").match(/^([\d.]+)(?:kg|公斤)[×xX*](\d+)/i);
+  if (packs) return parseFloat(packs[1]) * parseInt(packs[2], 10);
   const m = unit.match(/([\d.]+)\s*(kg|公斤|g|公克|磅|lb|lbs|oz)/i);
   if (!m) return null;
   const n = parseFloat(m[1]);
@@ -190,34 +193,53 @@ function readCategory(cat: Category) {
       fail(line, "pulses", `「${row.pulses}」看不懂，可用：${PULSES.join(" / ")}`);
     }
 
-    // m1..m8。Tim 給過的連結不刪（2026-09-13），新的在前、舊的往後當備援，所以要留得夠多格。
+    // m1..m16。Tim 給過的連結不刪（2026-09-13），新的在前、舊的往後當備援，所以要留得夠多格。
     const merchants = SLOTS.map((n) => merchant(row, n, line)).filter(Boolean);
+
     /*
-     * 搭贈品的賣場擋下來。
+     * 送贈品的賣場：看每公斤，不看有沒有「送」。
      *
-     * 遇過一次：ORIJEN 高齡犬 6kg 在某家賣 $6,500，規格寫「送 6 包舒潔」，
-     * 而另一家台灣通路同樣 6kg 是 $3,570。
+     * 以前看到「送」「贈」一律擋。起因是 ORIJEN 高齡犬 6kg 在某家賣 $6,500，
+     * 規格寫「送 6 包舒潔」，另一家同樣 6kg 只要 $3,570：贈品把價錢灌高了。
      *
-     * 問題不只是貴 —— 是那個價格裡包著跟飼料無關的東西，
-     * 拿它去算「每公斤多少」「大包省幾 %」，我們自己的數字就在說謊。
-     * 讀者看不出來，所以這種賣場不能收。
+     * 2026-09-13 Tim 糾正：紐頓 T22 有一家兩包組更便宜，還送肉泥和抓板。
+     * 「他不只送東西，還更便宜耶！不能死板板看到送東西就不要！」他是對的。
+     * 真正要擋的是「贈品把每公斤灌高」，不是「有贈品」。
+     *
+     * 所以改成：有贈品的規格，每公斤比同一款最便宜的那一條貴兩成以上，才提醒一聲。
+     * 不擋 —— 畫面上本來就會顯示「每公斤反而貴 X%」，讀者看得到。
+     * 更便宜又送東西的，備註照實寫送什麼，那是讀者該知道的好處。
      */
-    for (const n of SLOTS) {
-      const label = row[`m${n}Label`] ?? "";
-      const unit = row[`m${n}Unit`] ?? "";
-      const note = row[`m${n}Note`] ?? "";
-      const blob = label + unit + note;
-      if (!label) continue;
-      if (/送|贈|加贈|買一送/.test(blob)) {
-        fail(line, `m${n}Unit`, "這個賣場搭贈品（出現「送」或「贈」）。價格裡包著別的東西，每公斤就算不準了 —— 換一家乾淨定價的");
+    {
+      const all: { n: number; unit: string; kg: number; per: number; gift: boolean }[] = [];
+      for (const n of SLOTS) {
+        const label = row[`m${n}Label`] ?? "";
+        if (!label || /^(1|true|yes|y|是|死)$/i.test((row[`m${n}Dead`] ?? "").trim())) continue;
+        const unit = row[`m${n}Unit`] || row.unit || "";
+        const kg = kgOfUnit(unit);
+        const amount = Number(row[`m${n}Amount`] ?? 0);
+        if (!kg || !amount) continue;
+        all.push({ n, unit, kg, per: amount / kg, gift: /送|贈/.test(label + unit + (row[`m${n}Note`] ?? "")) });
+      }
+      // 跟「同樣大小」的比。小包本來就比大包貴，拿 1.13kg 去比兩包組的每公斤，一定會誤報
+      for (const x of all.filter((x) => x.gift)) {
+        const low = Math.min(...all.filter((y) => Math.abs(y.kg - x.kg) / x.kg < 0.05).map((y) => y.per));
+        if (x.per <= low * 1.2) continue;
+        console.warn(
+          `  ⚠ ${where} 第 ${line} 列 m${x.n}（${x.unit}）有贈品，每公斤 ${Math.round(x.per)} 元，` +
+          `比同樣大小最便宜的貴 ${Math.round((x.per / low - 1) * 100)}%。價錢可能被贈品灌高了，確認一下值不值得留。`,
+        );
       }
     }
 
     /* 每公斤價格離譜 = 規格或價格打錯。
        大包比小包便宜是正常的，但正常的量販折扣落在一到四成 ——
-       便宜超過六成，多半是公斤數少打一位數或多打一位數。 */
+       便宜超過六成，多半是公斤數少打一位數或多打一位數。
+
+       只跟「同一家」的其他規格比。以前是跟整款最貴的那一條比，
+       一家賣很貴的商城（1.13kg $1,250）會讓別家正常的價錢看起來像打錯。 */
     {
-      const sized: { unit: string; per: number }[] = [];
+      const byStore = new Map<string, { unit: string; per: number }[]>();
       for (const n of SLOTS) {
         const label = row[`m${n}Label`];
         if (!label) continue;
@@ -225,9 +247,10 @@ function readCategory(cat: Category) {
         const amount = Number(row[`m${n}Amount`] ?? 0);
         const kg = kgOfUnit(unit);
         if (!kg || !amount) continue;
-        sized.push({ unit, per: amount / kg });
+        byStore.set(label, [...(byStore.get(label) ?? []), { unit, per: amount / kg }]);
       }
-      if (sized.length > 1) {
+      for (const sized of byStore.values()) {
+        if (sized.length < 2) continue;
         const hi = Math.max(...sized.map((x) => x.per));
         for (const x of sized) {
           if (x.per < hi * 0.4) {
