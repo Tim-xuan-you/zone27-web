@@ -10,6 +10,7 @@ import { allPaths, resolve, situationOf } from "@/lib/slugs";
 import type { Form, Product, ProteinSource, Situation, Species } from "@/lib/types";
 import { impactMap, overallCutRate, ruleAudit, TIER_WEIGHT, type Impact } from "@/lib/impact";
 import health from "@/data/link-health.json";
+import storeReg from "@/data/stores.json";
 
 /**
  * 維護台。給 Tim 一個人看的，不給讀者、不給搜尋引擎。
@@ -456,11 +457,44 @@ function AllLinks() {
   const stores = new Map<string, typeof all>();
   for (const x of all) stores.set(x.m.label, [...(stores.get(x.m.label) ?? []), x]);
   const groups = [...stores].sort((a, b) => a[0].localeCompare(b[0], "zh-Hant"));
+
+  // 賣場名稱核對：從連結健檢拿到蝦皮賣場編號，再對 data/stores.json 看 Tim 核對過沒有
+  const reg = storeReg.stores as Record<string, { name: string; confirmed: boolean }>;
+  const shopOfLabel = new Map<string, string>();
+  for (const x of all) {
+    const shop = x.h?.item?.split("/")[0];
+    if (shop && !shopOfLabel.has(x.m.label)) shopOfLabel.set(x.m.label, shop);
+  }
+  const unchecked = groups
+    .map(([label, items]) => ({ label, shop: shopOfLabel.get(label), items }))
+    .filter((g) => !g.shop || !reg[g.shop]?.confirmed);
   const urls = new Set(all.map((x) => x.m.affiliateUrl)).size;
 
   return (
     <>
       <H>所有分潤連結（{urls} 條，{groups.length} 家賣場）</H>
+      {unchecked.length > 0 && (
+        <div style={{ ...box, borderColor: "var(--cut)", background: "var(--cut-soft)" }}>
+          <p style={{ margin: "0 0 8px", fontSize: 16, fontWeight: 700 }}>
+            這 {unchecked.length} 家的名字還沒跟你核對
+          </p>
+          <p style={{ margin: "0 0 10px", fontSize: 14, lineHeight: 1.85 }}>
+            這些名字是 Claude 從截圖讀的，可能讀錯字（「萬倍富」曾經被寫成「萬信富」）。
+            讀者會拿這個名字去蝦皮搜，錯一個字就找不到。點下面那家的「點開看」，對一下賣場名稱，
+            跟 Claude 說「都對」或哪一家要改。
+          </p>
+          <ul style={{ ...ul, fontSize: 14.5 }}>
+            {unchecked.map((g) => (
+              <li key={g.label}>
+                <b>{g.label}</b>
+                <span style={{ color: "var(--faint)", fontSize: 12.5 }}>
+                  {g.shop ? `　蝦皮賣場 ${g.shop}` : "　還沒跑連結健檢"}　·　{[...new Set(g.items.map((x) => x.p.id))].join("、")}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
       <div id="links" style={{ ...box, borderColor: "var(--warn)", background: "var(--warn-soft)" }}>
         <p style={{ margin: "0 0 8px", fontSize: 16, fontWeight: 700 }}>蝦皮後台說某個商品「無效」的時候</p>
         <ol style={{ ...ul, fontSize: 14.5 }}>
@@ -481,7 +515,12 @@ function AllLinks() {
       {groups.map(([label, items]) => (
         <div key={label} style={box}>
           <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", gap: 12, marginBottom: 8, flexWrap: "wrap" }}>
-            <h3 style={{ margin: 0, fontSize: 16.5 }}>{label}</h3>
+            <h3 style={{ margin: 0, fontSize: 16.5 }}>
+              {label}
+              {unchecked.some((g) => g.label === label) && (
+                <span style={{ marginLeft: 8, fontSize: 12.5, fontWeight: 600, color: "var(--cut)" }}>名字待核對</span>
+              )}
+            </h3>
             <span style={{ fontSize: 13, color: "var(--faint)" }}>{new Set(items.map((x) => x.m.affiliateUrl)).size} 條</span>
           </div>
           {items.map(({ p, m, h }) => (

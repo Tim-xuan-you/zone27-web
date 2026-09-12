@@ -450,6 +450,42 @@ for (const cat of CATEGORIES) {
   results.push({ cat, products: readCategory(cat) });
 }
 
+/*
+ * 賣場名稱：同一家蝦皮賣場只能有一個名字，而且要跟 data/stores.json 登記的一樣。
+ *
+ * 2026-09-13 我從截圖把「萬倍富」讀成「萬信富」，Tim 照著我寫的回傳，錯字就上線了。
+ * 讀者會拿這個名字去蝦皮搜，名字錯了就是找不到。
+ *
+ * 賣場編號是連結健檢查到的（短網址轉到哪個賣場），所以新賣場要先跑 npm run links:check。
+ * 登記過的名字不一樣 → 擋下來；沒登記過的 → 提醒要請 Tim 核對名字。
+ */
+{
+  const HEALTH = resolve("data/link-health.json");
+  const STORES = resolve("data/stores.json");
+  if (existsSync(HEALTH) && existsSync(STORES)) {
+    const health = JSON.parse(readFileSync(HEALTH, "utf8")) as { rows: { url: string; item: string | null }[] };
+    const shopOfUrl = new Map(health.rows.filter((r) => r.item).map((r) => [r.url, (r.item as string).split("/")[0]]));
+    const reg = (JSON.parse(readFileSync(STORES, "utf8")) as { stores: Record<string, { name: string; confirmed: boolean }> }).stores;
+    const fresh = new Set<string>();
+    for (const { cat, products } of results) {
+      for (const p of products) {
+        for (const m of p.price.merchants) {
+          const shop = shopOfUrl.get(m!.affiliateUrl);
+          if (!shop) continue;
+          const s = reg[shop];
+          if (s && s.name !== m!.label) {
+            errors.push(`${cat.csv} · ${p.id}：蝦皮賣場 ${shop} 登記的名字是「${s.name}」，這裡寫成「${m!.label}」。同一家只能有一個名字`);
+          }
+          if (!s) fresh.add(`${m!.label}（蝦皮賣場 ${shop}）`);
+        }
+      }
+    }
+    if (fresh.size) {
+      console.warn(`\n  新賣場，名字還沒登記。請 Tim 在蝦皮 App 看一眼賣場名稱，對了再加進 data/stores.json：\n    ${[...fresh].join("\n    ")}`);
+    }
+  }
+}
+
 if (errors.length) {
   console.error(`\n✗ 有 ${errors.length} 個問題，一列都沒有寫入：\n`);
   errors.forEach((e) => console.error("  " + e));
