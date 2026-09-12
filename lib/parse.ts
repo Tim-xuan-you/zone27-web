@@ -1,4 +1,4 @@
-import type { ProteinSource, Situation, Species } from "./types";
+import type { Form, ProteinSource, Situation, Species } from "./types";
 
 /**
  * 人話 → 結構化條件。純規則，不呼叫任何 API。
@@ -135,6 +135,26 @@ export interface ParseResult {
   empty: boolean;
   /** 物種是從這句話讀出來的（true），還是用呼叫端給的預設（false） */
   speciesFromText: boolean;
+  /** 乾糧／罐頭是從這句話讀出來的 */
+  formFromText: boolean;
+}
+
+/*
+ * 乾糧還是罐頭。
+ *
+ * 「肉泥」刻意不收：台灣講肉泥多半是指啾嚕那種條狀零食，不是正餐。
+ * 「飼料」也不收：「換過兩種雞肉飼料」講的是過去吃什麼，不是現在要找什麼。
+ */
+const WET_WORDS = ["主食罐", "副食罐", "罐頭", "罐罐", "濕食", "濕糧", "餐包"];
+const DRY_WORDS = ["乾糧", "乾飼料", "乾乾"];
+
+/** 句子裡講了罐頭就是罐頭，講了乾糧就是乾糧；兩個都講（乾濕混餵）就交給畫面上的選擇 */
+export function detectForm(t: string): Form | undefined {
+  const wet = WET_WORDS.some((w) => t.includes(w));
+  const dry = DRY_WORDS.some((w) => t.includes(w));
+  if (wet && !dry) return "wet";
+  if (dry && !wet) return "dry";
+  return undefined;
 }
 
 /**
@@ -169,7 +189,7 @@ function hits(t: string, words: string[]): { count: number; first: number } {
   return { count, first };
 }
 
-export function parse(text: string, fallback: Species = "dog"): ParseResult {
+export function parse(text: string, fallback: Species = "dog", fallbackForm: Form = "dry"): ParseResult {
   const t = text.replace(/\s+/g, "");
   const chips: ParseResult["chips"] = [];
 
@@ -207,6 +227,13 @@ export function parse(text: string, fallback: Species = "dog"): ParseResult {
   // 講了品種就知道是什麼動物，不用再掛一顆「物種」。沒講品種才掛，讓他看得到我們是怎麼判斷的。
   if (said && !breed) {
     chips.unshift({ label: `物種 · ${species === "cat" ? "貓" : "狗"}`, kind: "info", source: said });
+  }
+
+  /* 乾糧還是罐頭。一樣是句子裡讀得出來才掛 chip */
+  const formSaid = detectForm(t);
+  const form: Form = formSaid ?? fallbackForm;
+  if (formSaid) {
+    chips.push({ label: `要找 · ${formSaid === "wet" ? "罐頭" : "乾糧"}`, kind: "info", source: formSaid });
   }
 
   /* 年齡 */
@@ -254,10 +281,12 @@ export function parse(text: string, fallback: Species = "dog"): ParseResult {
   }
 
   return {
-    situation: { species, breed, bodySize, ageYears, weightKg, avoid, symptoms, budgetMonthly, constraints: [] },
+    situation: { species, form, breed, bodySize, ageYears, weightKg, avoid, symptoms, budgetMonthly, constraints: [] },
     chips,
-    empty: chips.length === 0,
+    // 只講了「罐頭」兩個字，沒有任何條件可以用，一樣當作讀不出東西
+    empty: chips.filter((c) => c.source !== "wet" && c.source !== "dry").length === 0,
     speciesFromText: said !== undefined,
+    formFromText: formSaid !== undefined,
   };
 }
 

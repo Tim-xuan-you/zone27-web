@@ -19,7 +19,18 @@ const TARGETS = [
   "lib/engine.ts", "lib/catalog.ts", "lib/slugs.ts", "lib/impact.ts",
   "lib/og.tsx", "lib/og-longtail.tsx", "lib/reminder.ts", "lib/categories.ts", "lib/parse.ts",
 ];
-const DATA = ["data/dog-food.json", "data/hidden-chicken.json", "data/cat-food.json", "data/cat-hidden-chicken.json"];
+const DATA = [
+  "data/dog-food.json", "data/hidden-chicken.json",
+  "data/cat-food.json", "data/cat-hidden-chicken.json",
+  "data/cat-wet-food.json", "data/cat-wet-hidden-chicken.json",
+];
+
+/**
+ * 品牌自己取的商品名。那是專有名詞，不是我們寫的文案，照抄才找得到。
+ * 例如 Wellness 的「全方位 鮮肉主食餐包」會撞到「行銷空話」那條。
+ * 只收整段商品名，不收單一個詞，免得變成後門。
+ */
+const PROPER = ["全方位 鮮肉主食餐包"];
 
 /* ---- 規則 ---- */
 const RULES: { name: string; re: RegExp; fix: string; hard: boolean }[] = [
@@ -82,6 +93,7 @@ const hits: Hit[] = [];
 let bangs = 0;
 
 function scan(file: string, text: string) {
+  for (const p of PROPER) text = text.split(p).join("　".repeat(p.length));
   text.split("\n").forEach((ln, i) => {
     // 只看含中文的行，那才是文案
     if (!/[一-鿿]/.test(ln)) return;

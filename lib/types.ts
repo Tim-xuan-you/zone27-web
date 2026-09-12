@@ -43,6 +43,15 @@ export type LifeStage = "puppy" | "adult" | "senior" | "all";
 export type BodySize = "small" | "medium" | "large";
 export type Species = "dog" | "cat";
 
+/**
+ * 乾糧還是罐頭。
+ *
+ * 同一隻貓可以吃乾糧也可以吃罐頭，所以「類目」不等於「物種」。
+ * 引擎第一刀按物種分，第二刀按這個分：問罐頭的人，不會拿到一包乾糧。
+ * 沒填就是乾糧，狗飼料、貓飼料的資料不用改。
+ */
+export type Form = "dry" | "wet";
+
 /** 商品規格。這一層是引擎判斷的依據，全部要可比較。 */
 export interface Spec {
   /** 粗蛋白 % */
@@ -89,8 +98,42 @@ export interface Spec {
    * 一天吃幾克是用熱量換算的。沒有這個數字只能拿 3,800 當中間值，
    * 但貓飼料從 3,400 到 4,400 都有，差到兩成多：
    * 同一隻 4 公斤的貓，一包 1.8 公斤可能吃 26 天，也可能吃 33 天。
+   *
+   * 罐頭一樣是每公斤（連水一起算），所以數字只有乾糧的四分之一上下。
    */
   kcal?: number;
+
+  /* ---------------- 下面這幾欄只有罐頭有 ---------------- */
+
+  /**
+   * 主食罐（true）還是副食罐（false）。
+   *
+   * 副食罐是點心：鈣、牛磺酸、維生素沒有補齊，當正餐長期吃會出事。
+   * 台灣很多人把「看得到肉絲」的湯罐當一餐，那多半是副食。
+   * 這是罐頭類目的第一刀。
+   */
+  complete?: boolean;
+  /** 水分 %，包裝上的數字 */
+  moisture?: number;
+  /**
+   * 包裝上印的原始數字（原物基，連水一起算）。
+   *
+   * 罐頭的 protein、fat、carb、phosphorus、omega3 存的是扣掉水分之後的乾物基，
+   * 不同水分的罐頭才比得起來。但畫面上要給讀者看的是罐子背面那個數字，
+   * 他翻過來對得上，才會信我們。
+   */
+  asFed?: { protein: number; fat: number; fiber?: number; ash?: number; phosphorus?: number; carb?: number };
+  /**
+   * 碳水怎麼來的。
+   *
+   * published = 品牌自己公布
+   * computed  = 用 100 減掉其他成分算的（包裝上蛋白、脂肪、纖維、灰分、水分都有）
+   * unknown   = 包裝沒寫灰分，算不出來
+   *
+   * 罐頭的營養標示多半是保證值（蛋白質「最少」、水分「最多」），
+   * 缺一個灰分硬去減，扣掉水分之後誤差會放大好幾倍。算不準的就不算。
+   */
+  carbBasis?: "published" | "computed" | "unknown";
 }
 
 /** 使用者回報。護城河 L2：這些數字爬不到，只能累積。 */
@@ -142,6 +185,8 @@ export interface Price {
 export interface Product {
   id: string;
   species: Species;
+  /** 沒填就是乾糧 */
+  form?: Form;
   brand: string;
   name: string;
   spec: Spec;
@@ -231,11 +276,19 @@ export type Constraint =
   | { kind: "singleSourceOnly"; label: string; tag: string }
   | { kind: "grainFreeOnly"; label: string; tag: string }
   | { kind: "inStock"; label: string; tag: string }
-  | { kind: "maxMonthly"; value: number; label: string; tag: string };
+  /** 罐頭：副食罐刪掉 */
+  | { kind: "completeOnly"; label: string; tag: string }
+  /**
+   * 預算。kcalPerDay 有值就是罐頭：一天要吃掉幾罐才算得出一個月多少錢，
+   * 拿一罐的價錢去跟月預算比，每一款都會過。
+   */
+  | { kind: "maxMonthly"; value: number; kcalPerDay?: number; label: string; tag: string };
 
 /** 使用者的情境。自然語言入口會翻譯成這個。 */
 export interface Situation {
   species: Species;
+  /** 問的是乾糧還是罐頭。沒填就是乾糧 */
+  form?: Form;
   /** 顯示用，例如「柴犬」 */
   breed?: string;
   /**

@@ -1,5 +1,5 @@
 import type {
-  Constraint, Cut, Merchant, Product, ProteinSource, Situation, Species, Stop, Verdict,
+  Constraint, Cut, Form, Merchant, Product, ProteinSource, Situation, Species, Stop, Verdict,
 } from "./types";
 import { daysBetween, todayTW } from "./date";
 import { categoryOf, MIN_LIVE } from "./categories";
@@ -17,6 +17,9 @@ import { categoryOf, MIN_LIVE } from "./categories";
  *   2. 每一款被刪掉，都必須歸因到「一條」規則，而且是第一條擋下它的。
  *      這樣裁決過程的數字才會加得起來，使用者才信。
  */
+
+/** 乾糧還是罐頭。資料沒填就是乾糧 */
+export const formOf = (p: Product): Form => p.form ?? "dry";
 
 /** 單一約束的判定。回傳 true 代表「通過」，false 代表「被這條刪掉」。 */
 export function passes(p: Product, c: Constraint): boolean {
@@ -49,7 +52,15 @@ export function passes(p: Product, c: Constraint): boolean {
       return p.spec.grainFree;
     case "inStock":
       return !p.discontinued;
+    case "completeOnly":
+      // 沒寫的（乾糧）一律當主食。罐頭沒標主食還是副食的，匯入時就擋下來了
+      return p.spec.complete !== false;
     case "maxMonthly":
+      if (c.kcalPerDay && formOf(p) === "wet") {
+        // 熱量或價格缺一個就算不出來，算不出來不刪：不知道的事不拿來當刪掉的理由
+        const m = wetMonthly(p, c.kcalPerDay);
+        return m === null || m <= c.value;
+      }
       return cheapest(p) <= c.value;
   }
 }
@@ -117,6 +128,23 @@ function speciesStop(want: Situation["species"]): Stop {
 }
 
 /**
+ * 這個物種有，但這種形態還沒收。例如問狗罐頭。
+ *
+ * 不能拿乾糧去回答罐頭的問題：水分、熱量、一天吃多少全都不一樣。
+ * 講清楚還沒收，給他一條路去看我們有的。
+ */
+function formStop(species: Species): Stop {
+  const c = categoryOf(species, "dry");
+  return {
+    kind: "species",
+    title: `${c.animal}罐頭我們還沒收`,
+    body: "罐頭跟乾糧要看的東西不一樣：水分、是主食還是副食、一天要吃幾罐。沒有一款一款讀過之前，我們不回答。",
+    next: `想先看乾飼料的話，我們讀過的${c.zh}在下面這頁。`,
+    link: { href: `/${c.slug}`, label: `看${c.zh} →` },
+  };
+}
+
+/**
  * 腎臟：獸醫已經給了條件，而我們手上沒有一款符合。
  *
  * 市售腎臟處方飼料的磷大多在 0.2–0.5%（乾物基），早期腎病一般建議
@@ -145,15 +173,15 @@ function renalStop(pool: Product[]): Stop {
  * 硬跑一次裁決，使用者看到的會是「都不合適」—— 那不是實話，
  * 實話是我們還沒準備好。講清楚還差什麼，並且讓他看得到已經讀完的那些。
  */
-function soonStop(species: Species, checked: number): Stop {
-  const c = categoryOf(species);
+function soonStop(species: Species, form: Form, checked: number): Stop {
+  const c = categoryOf(species, form);
   return {
     kind: "soon",
     title: `${c.zh}還在上架`,
     body:
       `成分表我們已經一款一款讀完 ${checked} 款了，購買連結還在補。` +
       `連結沒補齊之前我們不推薦：推一款你點進去買不到、或不確定是不是同一款的東西，比不推更糟。`,
-    next: "讀完的那幾款先整理在下面這頁，哪些名字寫鮭魚、鴨肉，成分表裡卻有雞，都標出來了。",
+    next: c.soonNote,
     link: { href: `/${c.slug}`, label: `先看我們讀過的 ${checked} 款 →` },
   };
 }
@@ -210,7 +238,16 @@ export function adjudicate(pool: Product[], situation: Situation): Verdict {
       stop: speciesStop(situation.species),
     };
   }
-  pool = sameSpecies;
+  // 第二刀：乾糧還是罐頭。問罐頭的人不會拿到一包乾糧
+  const form = situation.form ?? "dry";
+  const sameForm = sameSpecies.filter((p) => formOf(p) === form);
+  if (sameForm.length === 0) {
+    return {
+      startCount: 0, cuts: [], survivors: [], pick: null, pickReason: "",
+      stop: formStop(situation.species),
+    };
+  }
+  pool = sameForm;
 
   // 買不到的東西不該進裁決 —— 推薦一個點進去是 404 的連結，
   // 比少推薦一款糟糕得多。這一刀在計數之前先砍，
@@ -285,7 +322,7 @@ export function adjudicate(pool: Product[], situation: Situation): Verdict {
     return {
       startCount, cuts, survivors: [], pick: null, pickReason: "",
       // 對照款也是一款一款讀過的，數字要跟類目頁、切換鈕下面那一行一致
-      stop: soonStop(situation.species, pool.length),
+      stop: soonStop(situation.species, form, pool.length),
     };
   }
 
@@ -329,6 +366,7 @@ const has = (s: Situation, k: string) => s.symptoms.some((x) => x.includes(k));
 
 function score(p: Product, situation: Situation): number {
   let s = 0;
+  const wet = formOf(p) === "wet";
 
   /*
    * 症狀本來完全沒有進評分函式 —— 使用者打「一直抓癢」「有點胖」「軟便」，
@@ -369,7 +407,8 @@ function score(p: Product, situation: Situation): number {
   if (skin) s += Math.min(10, p.spec.omega3 * 6);
 
   // 軟便：脂肪偏高是常見原因之一。超過 18% 開始扣。
-  if (gut) s -= Math.max(0, p.spec.fat - 18) * 1.5;
+  // 罐頭的脂肪是扣掉水分之後算的，數字本來就高，而且標示多半只寫「最少」，不拿來扣
+  if (gut && !wet) s -= Math.max(0, p.spec.fat - 18) * 1.5;
 
   /*
    * 體重控制：碳水與脂肪都要看。
@@ -379,7 +418,14 @@ function score(p: Product, situation: Situation): number {
    * 只因為它是「高齡專用」—— 階段加的 15 分蓋過了減重該扣的分。
    * 有公布熱量的，每公斤熱量越高也越扣：同樣一碗，吃進去的就是比較多。
    */
-  if (weight) {
+  if (weight && wet) {
+    /*
+     * 罐頭看的是每 100 克幾大卡。
+     * 同樣一碗，熱量低的吃進去比較少，水分又多，比較有飽足感。
+     * 超過 90 大卡開始扣：台灣的主食罐多在 70 到 150 之間。
+     */
+    if (p.spec.kcal) s -= Math.max(0, p.spec.kcal / 10 - 90) * 0.4;
+  } else if (weight) {
     const cat = p.species === "cat";
     s -= Math.max(0, p.spec.carb - (cat ? 25 : 35)) * (cat ? 1.2 : 0.6);
     s -= Math.max(0, p.spec.fat - 15) * 1.2;
@@ -388,7 +434,20 @@ function score(p: Product, situation: Situation): number {
 
   // 碳水越低越好。台灣市售乾糧多在 25–50%，所以拿 45 當基準往下算，
   // 上限 12 分避免極端高蛋白配方光靠這一項就輾壓其他所有考量。
-  s += Math.min(12, Math.max(0, (45 - p.spec.carb) / 2));
+  // 罐頭不算：一半以上的罐頭碳水算不準（見 Spec.carbBasis），拿它排序等於獎勵資料寫得全的品牌
+  if (!wet) s += Math.min(12, Math.max(0, (45 - p.spec.carb) / 2));
+
+  /*
+   * 罐頭一天要吃兩到四罐，價差會放大成一個月幾千塊。
+   *
+   * 乾糧不看價錢，因為一包吃一個月，差距讀者自己看得出來；
+   * 罐頭一罐 60 跟一罐 185 看起來都不貴，全吃罐頭一個月可以差到八千。
+   * 這個差距該影響排序。一天超過 120 元開始扣，最多扣 10 分，蓋不過過敏原那 30 分。
+   */
+  if (wet) {
+    const monthly = wetMonthly(p, mer(situation.weightKg ?? 4, stage, p.species));
+    if (monthly !== null) s -= Math.min(10, Math.max(0, (monthly / 30 - 120) / 20));
+  }
 
   // Omega-3
   s += Math.min(12, p.spec.omega3 * 8);
@@ -426,9 +485,23 @@ function explain(pick: Product, alive: Product[], situation: Situation): string 
   if (situation.avoid.length > 0) {
     bits.push(`避開${avoidZh(situation.avoid)}`);
   }
-  if (pick.spec.carb <= 25) {
+  if (formOf(pick) === "dry" && pick.spec.carb <= 25) {
     bits.push(`碳水 ${pick.spec.carb}% 在建議範圍`);
   }
+  // 要減重的貓吃罐頭，最該知道的是熱量密度：同樣一碗，吃進去的差很多
+  if (formOf(pick) === "wet" && has(situation, "體重") && pick.spec.kcal) {
+    if (alive.every((p) => !p.spec.kcal || pick.spec.kcal! <= p.spec.kcal)) {
+      bits.push(`每 100 克 ${Math.round(pick.spec.kcal / 10)} 大卡，熱量在留下的幾款裡最低`);
+    }
+  }
+  if (formOf(pick) === "wet" && alive.length > 1) {
+    const kcal = mer(situation.weightKg ?? 4, stageForAge(situation.ageYears, situation.species), situation.species);
+    const cost = (p: Product) => wetMonthly(p, kcal) ?? Infinity;
+    if (cost(pick) < Infinity && alive.every((p) => cost(pick) <= cost(p))) {
+      bits.push("全吃罐頭的話，一個月的花費在留下的幾款裡最低");
+    }
+  }
+  if (bits.length === 0) return "";
   return bits.join("、") + "。";
 }
 
@@ -468,6 +541,10 @@ export function kgOf(unit: string): number | null {
   const lb = s.match(/(\d+(?:\.\d+)?)\s*(?:磅|lbs?|LB)/i);
   if (lb) return +(parseFloat(lb[1]) * 0.45359237).toFixed(3);
 
+  // 罐頭整箱：「80g×24」是 24 罐加起來，不是 80 克
+  const cans = cansOf(s);
+  if (cans) return (cans.g * cans.n) / 1000;
+
   const kg = s.match(/(\d+(?:\.\d+)?)\s*(?:kg|KG|公斤|Kg)/);
   if (kg) return parseFloat(kg[1]);
 
@@ -475,6 +552,19 @@ export function kgOf(unit: string): number | null {
   if (g) return parseFloat(g[1]) / 1000;
 
   return null;
+}
+
+/**
+ * 罐頭規格：「80g×24」→ { g: 80, n: 24 }，「85g」→ { g: 85, n: 1 }。
+ *
+ * 蝦皮的罐頭常常一頁賣單罐、6 入、24 入，規格一律寫成「一罐幾克×幾罐」，
+ * 每罐多少錢、一箱吃幾天才算得出來。不是這個寫法就回 null。
+ */
+export function cansOf(unit: string): { g: number; n: number } | null {
+  const s = unit.replace(/\s/g, "");
+  const m = s.match(/^(\d+(?:\.\d+)?)(?:g|G|克|公克)(?:[×xX*](\d+)(?:入|罐|包)?)?$/);
+  if (!m) return null;
+  return { g: parseFloat(m[1]), n: m[2] ? parseInt(m[2], 10) : 1 };
 }
 
 /** 每公斤多少錢。算不出來回 null，前端就不顯示 —— 寧可不講也不要講錯。 */
@@ -503,6 +593,81 @@ export function sharedListings(pool: Product[]): Set<string> {
     }
   }
   return new Set([...count].filter(([, n]) => n > 1).map(([u]) => u));
+}
+
+/** 軟包裝的餐包講「包」，其他講「罐」。一包講成一罐，讀者去買的時候會對不上 */
+export const canWord = (p: { name: string }): string => (/餐包|濕糧/.test(p.name) ? "包" : "罐");
+
+/**
+ * 價格旁邊那一小段：乾糧講每公斤，罐頭講每罐。
+ *
+ * 罐頭沒有人在比「每公斤」，大家講的是「一罐多少」。
+ * 同一款的罐子大小一樣，每罐省幾 % 就等於每公斤省幾 %，算法不用改，只是說法換掉。
+ */
+export function unitPrice(p: Product, unit: string, amount: number): string | null {
+  if (formOf(p) === "wet") {
+    const c = cansOf(unit);
+    // 單罐的話價錢就是一罐的價錢，再寫一次「$55/罐」只是重複
+    if (!c || c.n === 1) return null;
+    return `$${Math.round(amount / c.n)}/${canWord(p)}`;
+  }
+  const per = pricePerKg(unit, amount);
+  return per === null ? null : `$${per}/kg`;
+}
+
+/**
+ * 罐頭：全吃罐頭的話，一個月多少錢。
+ *
+ * 用每一大卡多少錢去算，同一款不同規格（單罐、24 入）取最便宜的那個。
+ * 熱量或價格缺一個就回 null。
+ */
+export function wetMonthly(p: Product, kcalPerDay: number): number | null {
+  if (!p.spec.kcal) return null;
+  let best: number | null = null;
+  for (const m of p.price.merchants.filter((x) => !x.dead)) {
+    const kg = kgOf(unitOf(p, m));
+    if (!kg) continue;
+    const monthly = (m.amount / (kg * p.spec.kcal)) * kcalPerDay * 30;
+    if (best === null || monthly < best) best = monthly;
+  }
+  return best === null ? null : Math.round(best);
+}
+
+export interface CanPlan {
+  /** 一罐幾大卡 */
+  kcalPerCan: number;
+  /** 全吃罐頭，一天幾罐（小數一位） */
+  perDay: number;
+  /** 這個規格全吃罐頭能吃幾天。單罐就是 null */
+  days: number | null;
+  /** 一罐多少錢 */
+  perCan: number | null;
+  /** 全吃罐頭一個月多少錢 */
+  monthly: number | null;
+}
+
+/**
+ * 罐頭的「這包吃幾天」。
+ *
+ * 乾糧那一套（開封 45 天會氧化）對罐頭不成立：沒開的罐頭放得很久，
+ * 開了的要冰、一天內吃完。罐頭真正要算的是一天幾罐、一個月多少錢。
+ */
+export function canPlan(
+  p: Product, unit: string, amount: number | null, weightKg: number, stage: Stage = "adultFixed",
+): CanPlan | null {
+  const c = cansOf(unit);
+  if (!c || !p.spec.kcal) return null;
+  const kcalPerCan = (c.g / 1000) * p.spec.kcal;
+  if (kcalPerCan <= 0) return null;
+  const perDay = mer(weightKg, stage, p.species) / kcalPerCan;
+  const perCan = amount ? amount / c.n : null;
+  return {
+    kcalPerCan: Math.round(kcalPerCan),
+    perDay: Math.round(perDay * 10) / 10,
+    days: c.n > 1 ? Math.floor(c.n / perDay) : null,
+    perCan: perCan !== null ? Math.round(perCan) : null,
+    monthly: perCan !== null ? Math.round(perDay * 30 * perCan) : null,
+  };
 }
 
 /** 某個通路實際賣的規格。大包裝會覆寫。 */
@@ -699,16 +864,20 @@ export function bagDuration(
   stage: Stage = "adultFixed",
   species: Species = "dog",
   kcalPerKg?: number,
+  form: Form = "dry",
 ): Duration | null {
   if (!weightKg || weightKg <= 0) return null;
   const kg = kgOf(unit);
   if (!kg) return null;
+  // 罐頭的熱量是乾糧的四分之一上下，拿乾糧的中間值去算會差四倍。沒公布就不算
+  if (form === "wet" && !kcalPerKg) return null;
 
   // 有公布熱量的就用那一包自己的，沒有才用中間值
   const perDay = dailyGrams(weightKg, stage, species, kcalPerKg) / 1000;   // 公斤／天
   if (perDay <= 0) return null;
-  const days = Math.round(kg / perDay);
-  return { days, tooLong: days > FRESH_DAYS };
+  const days = form === "wet" ? Math.floor(kg / perDay) : Math.round(kg / perDay);
+  // 保鮮期限是開封的乾飼料才有的問題。罐頭沒開放得很久，開了就是一天內吃完
+  return { days, tooLong: form === "dry" && days > FRESH_DAYS };
 }
 
 /* ------------------------------------------------------------------ */
@@ -808,7 +977,7 @@ export function trialPlan(
 ): Trial {
   const need = trialLength(symptoms);
   const anchor = anchorOf(p, "safe");
-  const anchorDur = anchor ? bagDuration(unitOf(p, anchor), dogKg, stage, p.species, p.spec.kcal) : null;
+  const anchorDur = anchor ? bagDuration(unitOf(p, anchor), dogKg, stage, p.species, p.spec.kcal, formOf(p)) : null;
 
   const base: Trial = {
     needDays: need.days,
@@ -821,6 +990,8 @@ export function trialPlan(
     anchorId: anchor?.id ?? null,
     anchorUnit: anchor ? unitOf(p, anchor) : null,
   };
+  // 罐頭不用分兩次買，也不用挑「剛好吃完」的規格：沒開的罐頭放得住
+  if (formOf(p) === "wet") return { ...base, needsTwoBags: false };
   if (!dogKg || !anchorDur) return base;
 
   // 一包最多只能撐到保鮮上限，超過就是叫人吃壞掉的飼料
@@ -831,7 +1002,7 @@ export function trialPlan(
 
   for (const store of storesOf(p)) {
     for (const o of store.options) {
-      const d = bagDuration(o.unit, dogKg, stage, p.species, p.spec.kcal);
+      const d = bagDuration(o.unit, dogKg, stage, p.species, p.spec.kcal, formOf(p));
       if (!d || d.days > FRESH_DAYS) continue;
       const gap = Math.abs(d.days - target);
       // 差距要明顯縮小才值得叫人改買別的規格

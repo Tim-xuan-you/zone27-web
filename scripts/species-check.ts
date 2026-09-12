@@ -7,7 +7,7 @@
  * 所以先假裝它開張了，把考驗提前。
  */
 import { parse } from "../lib/parse";
-import { adjudicate } from "../lib/engine";
+import { adjudicate, formOf } from "../lib/engine";
 import { catalog, constraintsFor } from "../lib/catalog";
 import type { Product } from "../lib/types";
 
@@ -24,6 +24,13 @@ const CASES = [
   "貴賓 3 歲，很挑食，一直有淚痕",
   "柯基快 8 歲了，有點胖，最近一直軟便",
   "狗狗有膀胱結石",
+  // 罐頭：問罐頭的不能拿到乾糧，副食罐永遠不能被推
+  "英短 3 歲，對雞肉過敏，想找主食罐",
+  "12 歲老貓，腎指數偏高，想改吃罐頭",
+  "公貓一直跑砂盆，尿很少，想換罐頭",
+  "3 個月大的小貓，想吃主食罐",
+  "副食罐可以給貓當正餐嗎",
+  "柴犬 5 歲，想吃罐頭",
 ];
 
 /** 假設等連結的全部補好了。只在這支檢查裡用，不會寫回任何地方。 */
@@ -55,7 +62,7 @@ for (const [label, pool] of [["現在的資料", catalog], ["假設連結都補�
     const v = adjudicate(pool as Product[], r.situation);
 
     console.log(`\n「${text}」`);
-    console.log(`  物種 ${r.situation.species}｜症狀 ${r.situation.symptoms.join("、") || "（無）"}`);
+    console.log(`  物種 ${r.situation.species}｜${r.situation.form === "wet" ? "罐頭" : "乾糧"}｜症狀 ${r.situation.symptoms.join("、") || "（無）"}`);
     if (v.stop) {
       console.log(`  ⛔ 不回答（${v.stop.kind}）：${v.stop.title}`);
     } else {
@@ -71,6 +78,21 @@ for (const [label, pool] of [["現在的資料", catalog], ["假設連結都補�
       console.error(`  ❌ 嚴重：留下來的名單裡混了別的物種`);
       fail++;
     }
+    // 鐵律三：乾糧跟罐頭不能混。問罐頭的拿到一包乾糧，一天要吃幾克、多少錢全部會算錯
+    const want = r.situation.form ?? "dry";
+    if (v.pick && formOf(v.pick) !== want) {
+      console.error(`  ❌ 嚴重：問的是${want === "wet" ? "罐頭" : "乾糧"}，推了${formOf(v.pick) === "wet" ? "罐頭" : "乾糧"}`);
+      fail++;
+    }
+    if (v.survivors.some((p) => formOf(p) !== want)) {
+      console.error(`  ❌ 嚴重：留下來的名單裡混了乾糧和罐頭`);
+      fail++;
+    }
+    // 鐵律四：副食罐不能被推薦、也不能留在名單上。它不能當正餐
+    if (v.survivors.some((p) => p.spec.complete === false)) {
+      console.error(`  ❌ 嚴重：副食罐留在推薦名單上`);
+      fail++;
+    }
     // 鐵律二：腎臟、泌尿道、糖尿病一律不推商品。
     // 飲食跟治療綁在一起，我們的數字是從公開資料整理的，不是廠商保證值。
     if (r.situation.symptoms.some((s) => MEDICAL.some((m) => s.includes(m))) && v.pick) {
@@ -80,5 +102,5 @@ for (const [label, pool] of [["現在的資料", catalog], ["假設連結都補�
   }
 }
 
-console.log(`\n———\n${fail === 0 ? "✓ 兩條鐵律都沒有被違反（現在的資料、連結補齊後，兩種情況都檢查了）" : `❌ ${fail} 項違反`}`);
+console.log(`\n———\n${fail === 0 ? "✓ 四條鐵律都沒有被違反（物種、醫療、乾糧罐頭不混、副食罐不推；現在的資料和連結補齊後都檢查了）" : `❌ ${fail} 項違反`}`);
 process.exit(fail === 0 ? 0 : 1);

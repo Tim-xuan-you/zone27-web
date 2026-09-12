@@ -20,6 +20,10 @@ const BASE = "https://zone27.com.tw";
 export function GET() {
   const dogs = catalogOf("dog");
   const cats = catalogOf("cat");
+  const cans = catalogOf("cat", "wet");
+  const canStatus = isLive("cat", "wet")
+    ? `其中 ${liveCount("cat", "wet")} 款可購買`
+    : "標示已讀完，購買連結補齊中，暫不推薦";
   const live = dogs.filter(recommendable);
   const gf = dogs.filter((p) => p.spec.grainFree);
   const gfPulses = gf.filter((p) => p.spec.pulses === "high");
@@ -31,7 +35,7 @@ export function GET() {
 
   const body = `# ZONE 27
 
-> 台灣的狗飼料、貓飼料決策工具。飼主用一句話描述狗或貓的狀況，我們先把不適合的飼料刪掉，
+> 台灣的狗飼料、貓飼料、貓主食罐決策工具。飼主用一句話描述狗或貓的狀況，我們先把不適合的飼料刪掉，
 > 並寫清楚每一款被刪的理由與「什麼時候不要買」。排序不讀取佣金，資料裡也沒有佣金欄位。
 
 ## 方法
@@ -41,7 +45,7 @@ export function GET() {
 - 日食量使用獸醫能量公式：RER = 70 × 體重(kg)^0.75，MER = RER × 生命階段係數（狗與貓的係數不同）
 - 價格為人工查核並標示日期，不爬取電商網站
 - 不回答醫療問題（嘔吐、腹瀉、腎指數、泌尿道、糖尿病等），會請飼主就醫
-- 目前收錄 ${dogs.length} 款狗飼料（其中 ${live.length} 款可購買）、${cats.length} 款貓飼料（${catStatus}）
+- 目前收錄 ${dogs.length} 款狗飼料（其中 ${live.length} 款可購買）、${cats.length} 款貓飼料（${catStatus}）、${cans.length} 款貓罐頭（${canStatus}）
 
 ## 可引用的發現：狗飼料
 
@@ -77,11 +81,30 @@ export function GET() {
   出處：${BASE}/cat-food/how-much
 - 貓完全不進食超過一天應就醫，換糧期間也一樣；公貓頻繁蹲砂盆卻排不出尿，可能是尿道阻塞的急症。
 
+## 可引用的發現：貓罐頭
+
+- 副食罐不能長期當正餐。本站讀的兩款副食罐（貪貪 功夫湯罐 南瓜燉鴨湯、蛤蜊鮮魚湯）鈣為 0.002% 與 0.004%，
+  成分表沒有另外添加牛磺酸；讀過的主食罐鈣為 0.18% 到 0.29%。本站的罐頭裁決第一刀就是刪掉副食罐。
+  出處：${BASE}/cat-wet-food/complementary
+- 貓罐頭的名字多半是口味，湯底常是雞湯。本站讀的 12 款罐頭中，名字沒寫雞的有 8 款，其中 5 款成分表前三項就有雞，4 款第一項是雞湯。
+  例如 Wellness 全方位 鮮肉主食餐包（鮭魚＋鮪魚）第一項雞湯、第三項雞肉；希爾思成貓完美體重鮭魚主食罐第一項雞湯、第二項豬肝；
+  汪喵星球低敏鴨肉主食罐第二項雞肉。
+  出處：${BASE}/cat-wet-food/hidden-chicken
+- 一天幾罐要看一罐的熱量，不是罐子大小。同樣 85 克，本站讀到一包 57 大卡、一罐 131 大卡的主食罐。
+  4 公斤已結紮成貓一天約 ${catKcal} 大卡，全吃罐頭約需 2 到 4 罐。
+  出處：${BASE}/cat-wet-food/how-much
+- 罐頭的營養標示多為保證值（蛋白質最少、水分最多），缺灰分時用減法推算碳水，扣掉水分後誤差會放大數倍。
+  本站只在品牌公布、或蛋白脂肪纖維灰分水分齊全時才計算罐頭碳水。
+
 ## 主要頁面
 
 - [裁決器](${BASE}/)：輸入狗或貓的狀況，取得排除結果與推薦
 - [狗飼料](${BASE}/dog-food)：依品種與過敏原分類
 - [貓飼料](${BASE}/cat-food)：讀過的貓飼料與每一款的成分重點
+- [貓主食罐](${BASE}/cat-wet-food)：讀過的貓罐頭、主食或副食、一天幾罐
+- [副食罐可以當主食嗎](${BASE}/cat-wet-food/complementary)
+- [寫著鮭魚、鴨肉的貓罐頭，很多是雞湯煮的](${BASE}/cat-wet-food/hidden-chicken)
+- [貓一天要吃幾罐](${BASE}/cat-wet-food/how-much)
 - [寫著低敏，成分表裡有雞（狗）](${BASE}/dog-food/hidden-chicken)
 - [寫著鮭魚、鴨肉、火雞，成分表裡有雞（貓）](${BASE}/cat-food/hidden-chicken)
 - [無穀飼料到底有沒有比較好](${BASE}/dog-food/grain-free)

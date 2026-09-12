@@ -26,7 +26,7 @@
 import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { todayTW } from "../lib/date";
-import { categoryOfId } from "../lib/categories";
+import { CATEGORIES, categoryOfId } from "../lib/categories";
 
 const ROOT = resolve(import.meta.dirname, "..");
 const PASTE = resolve(ROOT, "data/paste.txt");
@@ -86,11 +86,16 @@ interface Row {
   line: number;
 }
 
-// df- 狗飼料、cf- 貓飼料。新類目的前綴加在 lib/categories，這裡跟著改
-const RE_ID = /^((?:df|cf)-\d+)$/i;
+// df- 狗飼料、cf- 貓飼料、cw- 貓主食罐。前綴從 lib/categories 讀，加類目不用改這裡
+const RE_ID = new RegExp(`^((?:${CATEGORIES.map((c) => c.idPrefix).join("|")})-\\d+)$`, "i");
 const RE_URL = /^https?:\/\/\S+$/i;
-const RE_UNIT = /^\d+(?:\.\d+)?\s*(?:kg|g|公斤|公克|磅|lb|lbs|oz)$/i;
+// 罐頭整箱寫成「80g×24」「85g x 12入」，後面那段可有可無
+const RE_UNIT = /^\d+(?:\.\d+)?\s*(?:kg|g|公斤|公克|克|磅|lb|lbs|oz)(?:\s*[×xX*]\s*\d+\s*(?:入|罐|包)?)?$/i;
 const RE_PCT = /^\d+(?:\.\d+)?\s*%$/;
+
+/** 「85g x 12入」→「85g×12」。寫法統一，網站才算得出每罐多少錢、一箱吃幾天 */
+const normUnit = (s: string) =>
+  s.replace(/\s+/g, "").replace(/[xX*]/g, "×").replace(/(×\d+)(?:入|罐|包)$/, "$1");
 const RE_MONEY = /^\$?\d[\d,]*$/;
 
 function splitLine(raw: string): string[] {
@@ -111,7 +116,7 @@ function parseLine(raw: string, line: number, carryId: string): Row | { error: s
     if (bracket) { note = note ? note + " · " + bracket[1] : bracket[1]; continue; }
     if (!productId && RE_ID.test(p)) { productId = p.toLowerCase(); continue; }
     if (!url && RE_URL.test(p)) { url = p; continue; }
-    if (!unit && RE_UNIT.test(p)) { unit = p.replace(/\s+/g, ""); continue; }
+    if (!unit && RE_UNIT.test(p)) { unit = normUnit(p); continue; }
     // 佣金我們不記了（費率天天在跳，存下來隔天就是錯的），
     // 但貼上來的行常常帶著它 —— 認出來丟掉，不要混進賣場名稱
     if (RE_PCT.test(p)) continue;
@@ -194,7 +199,7 @@ async function main() {
     }
   }
 
-  /* ---- 寫回 CSV：編號前綴決定是哪一份（df- 狗、cf- 貓） ---- */
+  /* ---- 寫回 CSV：編號前綴決定是哪一份（df- 狗、cf- 貓、cw- 貓罐頭） ---- */
   const today = todayTW();
   const touched: string[] = [];
   const missing: string[] = [];
@@ -253,7 +258,7 @@ async function main() {
 
   if (missing.length) {
     console.error(`\n這幾個商品編號找不到：${missing.join("、")}`);
-    console.error(`df- 開頭的在 data/dog-food.csv，cf- 開頭的在 data/cat-food.csv。`);
+    console.error(CATEGORIES.map((c) => `${c.idPrefix}- 開頭的在 ${c.csv}`).join("，") + "。");
     console.error(`商品本身要先建立（規格、成分、不要買的條件那些），才能掛賣場。`);
     console.error(`沒有動到任何檔案。\n`);
     process.exit(1);

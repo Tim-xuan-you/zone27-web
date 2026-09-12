@@ -3,11 +3,11 @@ import Link from "next/link";
 import { catalog, catalogOf, constraintsFor, liveCount } from "@/lib/catalog";
 import { CATEGORIES, MIN_LIVE, categoryOfId } from "@/lib/categories";
 import {
-  adjudicate, buyable, maintenanceRows, shopeeSubId, CATEGORY_SUB_ID,
+  adjudicate, buyable, formOf, maintenanceRows, shopeeSubId, CATEGORY_SUB_ID,
   PRICE_FRESH_DAYS, PRICE_STALE_DAYS,
 } from "@/lib/engine";
 import { allPaths, resolve, situationOf } from "@/lib/slugs";
-import type { Product, ProteinSource, Situation, Species } from "@/lib/types";
+import type { Form, Product, ProteinSource, Situation, Species } from "@/lib/types";
 import { impactMap, overallCutRate, ruleAudit, TIER_WEIGHT, type Impact } from "@/lib/impact";
 
 /**
@@ -47,8 +47,8 @@ const LEVEL = {
  * 幼貓專用、高齡專用的那幾款就會永遠排最後。所以再加一組裁決器裡常見的情況：
  * 三種過敏原 × 三個年紀 × 四種症狀。
  */
-function pickCounts(sp: Species): Map<string, number> {
-  const opened: Product[] = catalogOf(sp).map((p) =>
+function pickCounts(sp: Species, form: Form = "dry"): Map<string, number> {
+  const opened: Product[] = catalogOf(sp, form).map((p) =>
     p.awaitingLink
       ? {
           ...p,
@@ -61,7 +61,8 @@ function pickCounts(sp: Species): Map<string, number> {
       : p,
   );
   const count = new Map<string, number>();
-  for (const slug of allPaths(sp)) {
+  // 長尾頁只有乾糧有。罐頭只跑下面那組常見情況
+  for (const slug of form === "dry" ? allPaths(sp) : []) {
     const page = resolve(slug, sp);
     if (!page) continue;
     const st = situationOf(page, sp);
@@ -73,7 +74,7 @@ function pickCounts(sp: Species): Map<string, number> {
   for (const avoid of [[], ["chicken"], fish] as ProteinSource[][]) {
     for (const ageYears of sp === "cat" ? [0.5, 3, 12] : [0.5, 3, 10]) {
       for (const symptoms of [[], ["體重"], ["腸胃問題"], ["皮膚搔癢"]]) {
-        const st: Situation = { species: sp, ageYears, weightKg: sp === "cat" ? 4 : 12, avoid, symptoms, constraints: [] };
+        const st: Situation = { species: sp, form, ageYears, weightKg: sp === "cat" ? 4 : 12, avoid, symptoms, constraints: [] };
         st.constraints = constraintsFor(st);
         const v = adjudicate(opened, st);
         if (v.pick) count.set(v.pick.id, (count.get(v.pick.id) ?? 0) + 1);
@@ -119,14 +120,14 @@ export default function Page() {
   const core = dogPool.filter((p) => impact.get(p.id)?.tier === "主力");
   const idle = dogPool.filter((p) => impact.get(p.id)?.tier === "目前沒機會");
   const waiting = catalog.filter((p) => p.awaitingLink);
-  const picks = new Map<string, number>([...pickCounts("dog"), ...pickCounts("cat")]);
+  const picks = new Map<string, number>(CATEGORIES.flatMap((c) => [...pickCounts(c.species, c.form)]));
   const waitingBy = CATEGORIES
     .map((c) => ({
       cat: c,
       items: waiting
-        .filter((p) => p.species === c.species)
+        .filter((p) => p.species === c.species && formOf(p) === c.form)
         .sort((a, b) => (picks.get(b.id) ?? 0) - (picks.get(a.id) ?? 0)),
-      ready: liveCount(c.species),
+      ready: liveCount(c.species, c.form),
     }))
     .filter((g) => g.items.length > 0);
 

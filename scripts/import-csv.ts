@@ -1,5 +1,8 @@
 /**
- * CSV → JSON，每個類目一份（dog-food.csv → dog-food.json、cat-food.csv → cat-food.json）
+ * CSV → JSON，每個類目一份（dog-food.csv → dog-food.json、cat-food.csv → cat-food.json、cat-wet-food.csv → cat-wet-food.json）
+ *
+ * 罐頭那一份的營養欄位填「罐子背面印的數字」（原物基），另外多填水分、纖維、灰分、主食還是副食。
+ * 換算成乾物基是這支程式的事，不要叫人自己算 —— 手算一定會有一款算錯。
  *
  * 為什麼要這個：真正的瓶頸不是程式，是那 200 款商品資料。
  * 而建資料的人（員工）不該去手改 JSON —— 少一個逗號整個站就掛。
@@ -114,6 +117,9 @@ function list(row: Row, key: string, line: number, allowed: string[]): string[] 
 
 /** 規格字串換算成公斤。跟 lib/engine 的 kgOf 同一套規則，這裡只需要數字。 */
 function kgOfUnit(unit: string): number | null {
+  // 罐頭整箱「80g×24」要乘起來，不然一箱會被當成 80 克，每公斤價格差 24 倍
+  const cans = unit.replace(/\s/g, "").match(/^([\d.]+)(?:g|公克|克)[×xX*](\d+)/i);
+  if (cans) return (parseFloat(cans[1]) * parseInt(cans[2], 10)) / 1000;
   const m = unit.match(/([\d.]+)\s*(kg|公斤|g|公克|磅|lb|lbs|oz)/i);
   if (!m) return null;
   const n = parseFloat(m[1]);
@@ -242,19 +248,23 @@ function readCategory(cat: Category) {
     }
 
     const stages = list(row, "lifeStage", line, STAGES).map((s) => (s === "kitten" ? "puppy" : s));
+    const wet = cat.form === "wet";
 
     return {
       id: row.id,
       species: cat.species,
+      ...(wet ? { form: "wet" as const } : {}),
       brand: row.brand,
       name: row.name,
       spec: {
-        protein: num(row, "protein", line, { min: 0, max: 100 }),
-        fat: num(row, "fat", line, { min: 0, max: 100 }),
-        carb: num(row, "carb", line, { min: 0, max: 100 }),
-        omega3: num(row, "omega3", line, { min: 0, max: 20 }),
-        // 0 = 查不到。允許留白，但引擎會把它當成「不通過磷上限」。
-        phosphorus: row.phosphorus ? num(row, "phosphorus", line, { min: 0, max: 10 }) : 0,
+        ...(wet ? wetNutrition(row, line) : {
+          protein: num(row, "protein", line, { min: 0, max: 100 }),
+          fat: num(row, "fat", line, { min: 0, max: 100 }),
+          carb: num(row, "carb", line, { min: 0, max: 100 }),
+          omega3: num(row, "omega3", line, { min: 0, max: 20 }),
+          // 0 = 查不到。允許留白，但引擎會把它當成「不通過磷上限」。
+          phosphorus: row.phosphorus ? num(row, "phosphorus", line, { min: 0, max: 10 }) : 0,
+        }),
         proteinSources: list(row, "proteinSources", line, PROTEINS),
         singleSource: yn(row, "singleSource", line),
         ...(row.pulses ? { pulses: row.pulses as "high" | "low" | "none" | "unknown" } : {}),
@@ -263,7 +273,8 @@ function readCategory(cat: Category) {
         bodySize: list(row, "bodySize", line, SIZES),
         prescription: yn(row, "prescription", line),
         // 熱量有公布才填。沒填的就用引擎的中間值估，不假裝知道。
-        ...(row.kcal ? { kcal: num(row, "kcal", line, { min: 2500, max: 5500 }) } : {}),
+        // 罐頭是連水一起算的每公斤熱量，範圍差很多：乾糧 2,500–5,500，罐頭 400–2,000
+        ...(row.kcal ? { kcal: num(row, "kcal", line, wet ? { min: 400, max: 2000 } : { min: 2500, max: 5500 }) } : {}),
       },
       reports: {
         total: num(row, "reportsTotal", line, { min: 0 }),
@@ -315,10 +326,76 @@ function readCategory(cat: Category) {
       fail(line, "reports", "回報人數比總回報數還多");
     }
     const sum = p.spec.protein + p.spec.fat + p.spec.carb;
-    if (sum > 100) fail(line, "protein/fat/carb", `加起來 ${sum}% 超過 100%`);
+    if (sum > 100.5) fail(line, "protein/fat/carb", `加起來 ${sum}% 超過 100%`);
   });
 
   return products;
+}
+
+/* ---------------------------------------------------------------- */
+/* 罐頭的營養欄位                                                     */
+/*                                                                    */
+/* CSV 填罐子背面的數字，這裡換成乾物基（扣掉水分）存進 spec，          */
+/* 原始數字另外存在 asFed，畫面上給讀者對照。                          */
+/*                                                                    */
+/* 碳水三種來源分開記（見 lib/types 的 carbBasis）：                    */
+/*   品牌有公布 → 用品牌的                                             */
+/*   蛋白、脂肪、纖維、灰分、水分都有 → 用減法算                        */
+/*   缺灰分 → 不算。罐頭扣掉八成水分之後，1% 的誤差會變成 5%。           */
+/* ---------------------------------------------------------------- */
+
+function wetNutrition(row: Row, line: number) {
+  const c = (row.complete ?? "").toUpperCase();
+  if (!["Y", "N", "1", "0", "TRUE", "FALSE"].includes(c)) {
+    fail(line, "complete", "罐頭一定要填：主食罐填 Y，副食罐填 N。這是罐頭類目的第一刀，不能空著");
+  }
+  const complete = c === "Y" || c === "1" || c === "TRUE";
+
+  const moisture = num(row, "moisture", line, { min: 50, max: 92 });
+  const protein = num(row, "protein", line, { min: 0, max: 40 });
+  const fat = num(row, "fat", line, { min: 0, max: 30 });
+  const fiber = row.fiber ? num(row, "fiber", line, { min: 0, max: 10 }) : undefined;
+  const ash = row.ash ? num(row, "ash", line, { min: 0, max: 10 }) : undefined;
+  const phosphorus = row.phosphorus ? num(row, "phosphorus", line, { min: 0, max: 3 }) : undefined;
+  const omega3 = row.omega3 ? num(row, "omega3", line, { min: 0, max: 5 }) : 0;
+
+  if (protein + fat + moisture > 100) {
+    fail(line, "protein/fat/moisture", `蛋白 + 脂肪 + 水分加起來 ${protein + fat + moisture}%，超過 100%`);
+  }
+
+  const dry = 100 - moisture;
+  const dm = (x: number) => Math.round((x / dry) * 1000) / 10;
+
+  let carb = 0;
+  let carbAsFed: number | undefined;
+  let carbBasis: "published" | "computed" | "unknown" = "unknown";
+  if (row.carb) {
+    carbAsFed = num(row, "carb", line, { min: 0, max: 30 });
+    carb = dm(carbAsFed);
+    carbBasis = "published";
+  } else if (fiber !== undefined && ash !== undefined) {
+    carb = dm(Math.max(0, 100 - protein - fat - fiber - ash - moisture));
+    carbBasis = "computed";
+  }
+
+  return {
+    protein: dm(protein),
+    fat: dm(fat),
+    carb,
+    omega3: dm(omega3),
+    // 0 = 查不到，跟乾糧同一個規矩
+    phosphorus: phosphorus !== undefined ? dm(phosphorus) : 0,
+    complete,
+    moisture,
+    asFed: {
+      protein, fat,
+      ...(fiber !== undefined ? { fiber } : {}),
+      ...(ash !== undefined ? { ash } : {}),
+      ...(phosphorus !== undefined ? { phosphorus } : {}),
+      ...(carbAsFed !== undefined ? { carb: carbAsFed } : {}),
+    },
+    carbBasis,
+  };
 }
 
 /* ---------------------------------------------------------------- */

@@ -26,15 +26,21 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     { url: BASE, lastModified: now, changeFrequency: "daily", priority: 1 },
     { url: `${BASE}/dog-food`, lastModified: now, changeFrequency: "weekly", priority: 0.9 },
+    { url: `${BASE}/cat`, lastModified: now, changeFrequency: "weekly", priority: 0.8 },
     { url: `${BASE}/cat-food`, lastModified: now, changeFrequency: "weekly", priority: 0.9 },
+    { url: `${BASE}/cat-wet-food`, lastModified: now, changeFrequency: "weekly", priority: 0.9 },
     { url: `${BASE}/how-we-choose`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
     { url: `${BASE}/ask`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
     // 這幾頁是自己讀成分表寫出來的，抄不走 —— 權重給到跟索引頁一樣
     { url: `${BASE}/dog-food/hidden-chicken`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
     { url: `${BASE}/cat-food/hidden-chicken`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
+    { url: `${BASE}/cat-wet-food/hidden-chicken`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
+    // 「副食罐可以當主食嗎」是台灣貓奴很常搜的問題
+    { url: `${BASE}/cat-wet-food/complementary`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
     // 「一天吃多少」是有購買意圖的資訊型查詢，權重給高
     { url: `${BASE}/dog-food/how-much`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
     { url: `${BASE}/cat-food/how-much`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
+    { url: `${BASE}/cat-wet-food/how-much`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
     { url: `${BASE}/dog-food/grain-free`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
     { url: `${BASE}/dog-food/elimination-diet`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
     ...longtail("dog-food", allPaths("dog")),

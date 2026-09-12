@@ -1,9 +1,11 @@
 import Link from "next/link";
 import Remind from "./Remind";
 import {
-  anchorOf, bagDuration, freshness, pricePerKg, sharedListings, storesOf, trialPlan, unitOf,
+  anchorOf, bagDuration, canPlan, canWord, cansOf, formOf, freshness, mer, sharedListings, storesOf, trialPlan,
+  unitOf, unitPrice, wetMonthly,
   FRESH_DAYS, type Stage,
 } from "@/lib/engine";
+import { categoryOf } from "@/lib/categories";
 import { priceStat, timingAdvice } from "@/lib/history";
 import type { Product, Verdict } from "@/lib/types";
 import { linkReport } from "@/lib/contact";
@@ -212,7 +214,7 @@ function Answer({
   p: Product; verdict: Verdict; dogKg?: number; stage?: Stage; multi: Set<string>;
 }) {
   const safe = anchorOf(p, "safe");
-  const perKg = pricePerKg(unitOf(p, safe), safe.amount);
+  const up = unitPrice(p, unitOf(p, safe), safe.amount);
   const stores = storesOf(p);
   const main = stores[0];
 
@@ -225,7 +227,7 @@ function Answer({
         <div style={S.priceRow}>
           <span style={S.price} className="mono">${safe.amount}</span>
           <span style={S.perKg} className="mono">
-            {unitOf(p, safe)}{perKg !== null && ` · $${perKg}/kg`}
+            {unitOf(p, safe)}{up && ` · ${up}`}
           </span>
         </div>
 
@@ -237,11 +239,7 @@ function Answer({
           <p style={S.answerWhy}>{verdict.pickReason}</p>
         )}
 
-        <div style={S.specRow}>
-          <span style={S.spec}>粗蛋白 {p.spec.protein}%</span>
-          <span style={S.spec}>碳水 {p.spec.carb}%</span>
-          {p.spec.singleSource && <span style={S.specGood}>單一蛋白源</span>}
-        </div>
+        <SpecChips p={p} />
 
         {main && (
           <div style={S.buyRow}>
@@ -291,19 +289,40 @@ function Trial({
   const t = trialPlan(p, dogKg, symptoms, stage);
   const cat = p.species === "cat";
   const animal = cat ? "貓" : "狗";
+  const wet = formOf(p) === "wet";
+  const anchor = anchorOf(p, "safe");
+  // 罐頭沒講體重就用 4 公斤算，而且標題上講出來。不講體重就什麼都不算，讀者連一天幾罐都不知道
+  const cp = wet && anchor ? canPlan(p, unitOf(p, anchor), anchor.amount, dogKg ?? 4, stage) : null;
+  // 一個月的錢照最省的規格算（通常是整箱），跟裁決器的預算那一刀用同一個函式
+  const monthly = wet ? wetMonthly(p, mer(dogKg ?? 4, stage, p.species)) : null;
+  const hasStep3 = wet ? cp !== null : t.anchorDays !== null;
+  const howMuch = `/${categoryOf(p.species, formOf(p)).slug}/how-much`;
 
   return (
     <div style={tBox}>
       <Step n={1} title="前 7 到 10 天慢慢換">
         第 1–3 天新的加四分之一，第 4–6 天一半，第 7–10 天四分之三，之後才全換。
-        整包直接換掉幾乎一定會軟便。那是換糧造成的，不是牠對這款過敏。
+        一次全換掉幾乎一定會軟便。那是換糧造成的，不是牠對這款過敏。
       </Step>
 
       <Step n={2} title={`多久看得出來：${t.needLabel}`}>
         {t.needWhy}
       </Step>
 
-      {t.anchorDays !== null && (
+      {wet && cp && (
+        <Step n={3} title={`${dogKg ? "" : "照 4 公斤的貓算，"}全吃罐頭一天大約 ${cp.perDay} ${canWord(p)}`}>
+          一{canWord(p)} {cp.kcalPerCan} 大卡。乾濕混餵的話，一天的熱量先扣掉罐頭這一份，剩下的才給乾糧。
+          {monthly !== null && <> 照最省的規格算，全吃罐頭一個月大約 <b>${monthly.toLocaleString()}</b>。</>}
+          <span style={tBetter}>
+            要跑完 {t.needLabel}，大約要 {Math.ceil(cp.perDay * t.needDays)} {canWord(p)}。整箱買通常比較省，沒開的放得住。
+          </span>
+          <span style={{ ...tBetter, color: "var(--muted)" }}>
+            開了沒吃完的蓋起來冰冷藏，一天內吃完。冰過的先回溫再給，很多貓不吃冷的。
+          </span>
+        </Step>
+      )}
+
+      {!wet && t.anchorDays !== null && (
         <Step n={3} title={`這包大約吃 ${t.anchorDays} 天`}>
           {t.needsTwoBags ? (
             <>
@@ -326,12 +345,12 @@ function Trial({
         </Step>
       )}
 
-      <Step n={t.anchorDays !== null ? 4 : 3} title="這段期間不要給零食">
+      <Step n={hasStep3 ? 4 : 3} title="這段期間不要給零食">
         一根雞肉零食就毀了整個測試。{cat ? "肉泥、凍乾、逗貓用的小零食、人的食物" : "潔牙骨、人的食物、公園裡別人給的"}，都算。
         要測就測乾淨的，不然跑完八週你還是不知道答案。
       </Step>
 
-      <Step n={t.anchorDays !== null ? 5 : 4} title="什麼情況要停" last>
+      <Step n={hasStep3 ? 5 : 4} title="什麼情況要停" last>
         連續軟便超過三天、抓得比以前更兇、開始吐。
         這時候該看醫生，不是再換下一款飼料。
         {cat && (
@@ -346,9 +365,15 @@ function Trial({
       <Remind plan="trial" p={p} kg={dogKg} symptoms={symptoms} stage={stage} />
 
       <p style={tNote}>
-        <Link href="/dog-food/elimination-diet" style={{ color: "var(--accent)" }}>完整的排除飲食法流程（含最多人跳過的回測）→</Link>
-        <br />
-        <Link href="/dog-food/how-much" style={{ color: "var(--accent)" }}>想自己算一天幾克、一個月多少錢 →</Link>
+        {!cat && (
+          <>
+            <Link href="/dog-food/elimination-diet" style={{ color: "var(--accent)" }}>完整的排除飲食法流程（含最多人跳過的回測）→</Link>
+            <br />
+          </>
+        )}
+        <Link href={howMuch} style={{ color: "var(--accent)" }}>
+          {wet ? "想自己算一天幾罐、一個月多少錢 →" : "想自己算一天幾克、一個月多少錢 →"}
+        </Link>
         <br />
         我們不是獸醫，上面是一般的換糧做法，不是診斷。
         牠一直不舒服的話，帶去看醫生比換飼料重要。
@@ -413,7 +438,7 @@ const tNote: React.CSSProperties = {
 
 function Alt({ p, dogKg, stage, multi }: { p: Product; dogKg?: number; stage?: Stage; multi: Set<string> }) {
   const safe = anchorOf(p, "safe");
-  const perKg = pricePerKg(unitOf(p, safe), safe.amount);
+  const up = unitPrice(p, unitOf(p, safe), safe.amount);
   const stores = storesOf(p);
   const main = stores[0];
 
@@ -425,14 +450,10 @@ function Alt({ p, dogKg, stage, multi }: { p: Product; dogKg?: number; stage?: S
         <div style={S.priceRow}>
           <span style={{ ...S.price, fontSize: 22 }} className="mono">${safe.amount}</span>
           <span style={S.perKg} className="mono">
-            {unitOf(p, safe)}{perKg !== null && ` · $${perKg}/kg`}
+            {unitOf(p, safe)}{up && ` · ${up}`}
           </span>
         </div>
-        <div style={S.specRow}>
-          <span style={S.spec}>粗蛋白 {p.spec.protein}%</span>
-          <span style={S.spec}>碳水 {p.spec.carb}%</span>
-          {p.spec.singleSource && <span style={S.specGood}>單一蛋白源</span>}
-        </div>
+        <SpecChips p={p} />
         {main && (
           <div style={{ ...S.buyRow, marginTop: 20 }}>
             <a
@@ -489,20 +510,23 @@ function Stores({ p, dogKg, stage }: { p: Product; dogKg?: number; stage?: Stage
 
           <div style={S.optList}>
             {store.options.map((o) => {
-              const dur = bagDuration(o.unit, dogKg, stage, p.species, p.spec.kcal);
+              const dur = bagDuration(o.unit, dogKg, stage, p.species, p.spec.kcal, formOf(p));
+              // 罐頭講「每罐」：同一款罐子一樣大，每罐省幾 % 就是每公斤省幾 %
+              const per = formOf(p) === "wet" ? "每罐" : "每公斤";
               const save =
                 o.savingPct === null || Math.abs(o.savingPct) < 3
-                  ? o.savingPct === null ? null : { text: "每公斤差不多", tone: "faint" as const }
+                  ? o.savingPct === null ? null : { text: `${per}差不多`, tone: "faint" as const }
                   : o.savingPct > 0
-                  ? { text: `每公斤省 ${o.savingPct}%`, tone: "keep" as const }
-                  : { text: `每公斤反而貴 ${-o.savingPct}%`, tone: "cut" as const };
+                  ? { text: `${per}省 ${o.savingPct}%`, tone: "keep" as const }
+                  : { text: `${per}反而貴 ${-o.savingPct}%`, tone: "cut" as const };
+              const up = unitPrice(p, o.unit, o.amount);
               return (
                 <div key={o.id} style={S.optRow}>
                   <div style={S.optMain}>
                     <span style={S.optUnit} className="mono">{o.unit}</span>
                     <span style={S.optAmt} className="mono">${o.amount}</span>
-                    {o.perKg !== null && (
-                      <span style={S.optKg} className="mono">${o.perKg}/kg</span>
+                    {up && (
+                      <span style={S.optKg} className="mono">{up}</span>
                     )}
                   </div>
                   {(dur || save || !store.singleUrl) && (
@@ -529,7 +553,7 @@ function Stores({ p, dogKg, stage }: { p: Product; dogKg?: number; stage?: Stage
             })}
           </div>
 
-          {store.options.some((o) => bagDuration(o.unit, dogKg, stage, p.species, p.spec.kcal)?.tooLong) && (
+          {store.options.some((o) => bagDuration(o.unit, dogKg, stage, p.species, p.spec.kcal, formOf(p))?.tooLong) && (
             <p style={S.freshWarn}>
               ⚠️ 標記的規格，你的{p.species === "cat" ? "貓" : "狗"}要吃超過 {FRESH_DAYS} 天才吃得完。開封後的乾飼料油脂會氧化，
               放久了會越來越不愛吃，很多人以為是這牌子不好，其實只是放太久了。
@@ -564,6 +588,36 @@ function Stores({ p, dogKg, stage }: { p: Product; dogKg?: number; stage?: Stage
         );
       })()}
     </>
+  );
+}
+
+/**
+ * 卡片上那一排小字。
+ *
+ * 乾糧：粗蛋白、碳水，照包裝。
+ * 罐頭：蛋白質照罐子背面印的（讀者翻過來對得上），再加一罐幾大卡。
+ * 罐頭的碳水多半算不準，這裡不放；水分比較有用，全吃罐頭的貓喝水比較少也沒關係。
+ */
+function SpecChips({ p }: { p: Product }) {
+  if (formOf(p) === "wet") {
+    const can = anchorOf(p, "safe");
+    const c = cansOf(can ? unitOf(p, can) : p.price.unit);
+    const perCan = p.spec.kcal && c ? Math.round((c.g / 1000) * p.spec.kcal) : null;
+    return (
+      <div style={S.specRow}>
+        <span style={S.spec}>蛋白質 {p.spec.asFed?.protein ?? p.spec.protein}%</span>
+        {p.spec.moisture !== undefined && <span style={S.spec}>水分 {p.spec.moisture}%</span>}
+        {perCan !== null && <span style={S.spec}>一{canWord(p)} {perCan} 大卡</span>}
+        {p.spec.singleSource && <span style={S.specGood}>單一蛋白源</span>}
+      </div>
+    );
+  }
+  return (
+    <div style={S.specRow}>
+      <span style={S.spec}>粗蛋白 {p.spec.protein}%</span>
+      <span style={S.spec}>碳水 {p.spec.carb}%</span>
+      {p.spec.singleSource && <span style={S.specGood}>單一蛋白源</span>}
+    </div>
   );
 }
 

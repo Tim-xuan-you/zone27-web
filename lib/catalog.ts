@@ -1,7 +1,8 @@
 import dog from "@/data/dog-food.json";
 import cat from "@/data/cat-food.json";
-import type { Constraint, Product, ProteinSource, Situation, Species } from "./types";
-import { recommendable } from "./engine";
+import catWet from "@/data/cat-wet-food.json";
+import type { Constraint, Form, Product, ProteinSource, Situation, Species } from "./types";
+import { formOf, mer, recommendable, stageForAge } from "./engine";
 import { MIN_LIVE } from "./categories";
 
 /**
@@ -9,31 +10,33 @@ import { MIN_LIVE } from "./categories";
  * 所以 generateStaticParams 可以把幾千個決策頁全部靜態生成。
  * 這是「Google 抓得到」的關鍵，不能改成執行期 fetch。
  *
- * catalog 是全部類目加在一起。引擎第一刀就按物種分開，所以丟整包進去是安全的；
- * 但「無穀頁說我們收了幾款」這種統計，一定要用 catalogOf 拿單一物種，
- * 不然貓的數字會混進狗的頁面。
+ * catalog 是全部類目加在一起。引擎第一刀按物種、第二刀按乾糧或罐頭分開，所以丟整包進去是安全的；
+ * 但「無穀頁說我們收了幾款」這種統計，一定要用 catalogOf 拿單一類目，
+ * 不然貓的數字會混進狗的頁面，罐頭的數字會混進乾糧的頁面。
  */
 export const catalog = [
   ...(dog.products as unknown as Product[]),
   ...(cat.products as unknown as Product[]),
+  ...(catWet.products as unknown as Product[]),
 ];
 
-export function catalogOf(species: Species): Product[] {
-  return catalog.filter((p) => p.species === species);
+/** 單一類目。form 沒給就是乾糧，舊的呼叫不用改 */
+export function catalogOf(species: Species, form: Form = "dry"): Product[] {
+  return catalog.filter((p) => p.species === species && formOf(p) === form);
 }
 
 export function byId(id: string): Product | undefined {
   return catalog.find((p) => p.id === id);
 }
 
-/** 這個物種能推薦的有幾款 */
-export function liveCount(species: Species): number {
-  return catalogOf(species).filter(recommendable).length;
+/** 這個類目能推薦的有幾款 */
+export function liveCount(species: Species, form: Form = "dry"): number {
+  return catalogOf(species, form).filter(recommendable).length;
 }
 
 /** 類目開張了沒。沒開張的類目，裁決器誠實講還在上架，長尾頁也先不產生。 */
-export function isLive(species: Species): boolean {
-  return liveCount(species) >= MIN_LIVE;
+export function isLive(species: Species, form: Form = "dry"): boolean {
+  return liveCount(species, form) >= MIN_LIVE;
 }
 
 /* ------------------------------------------------------------------ */
@@ -77,6 +80,21 @@ const FISH: ProteinSource[] = ["salmon", "whitefish", "fish"];
 export function constraintsFor(s: Situation): Constraint[] {
   const cs: Constraint[] = [];
   const sp = s.species;
+  const wet = s.form === "wet";
+
+  /*
+   * 罐頭的第一刀：副食罐。
+   *
+   * 放在過敏原前面，因為它跟這隻貓的狀況無關，是這一罐能不能當飯吃。
+   * 副食罐再好吃、肉再多，鈣和牛磺酸沒補齊，當正餐吃久了就是營養不良。
+   */
+  if (wet) {
+    cs.push({
+      kind: "completeOnly",
+      label: "副食罐，只能當點心，不能當正餐",
+      tag: "主食／副食",
+    });
+  }
 
   /*
    * 標示沒寫是哪種動物的，先刪。
@@ -89,7 +107,7 @@ export function constraintsFor(s: Situation): Constraint[] {
     cs.push({
       kind: "excludeProtein",
       value: "animal",
-      label: "肉的來源沒寫清楚，只寫「動物蛋白」",
+      label: "肉的來源沒寫清楚，只寫「動物蛋白」或「肉類」",
       tag: "你標記的過敏原",
     });
   }
@@ -145,19 +163,28 @@ export function constraintsFor(s: Situation): Constraint[] {
    * 所以門檻只用來擋「明顯不合格」的，不是拿來挑好貨。
    * 挑好貨是評分函式的事（碳水越低加越多分），排除只擋離譜的。
    */
-  cs.push({
-    kind: "minProtein",
-    value: MIN_PROTEIN[sp],
-    label: `粗蛋白低於 ${MIN_PROTEIN[sp]}%`,
-    tag: "營養門檻",
-  });
+  /*
+   * 罐頭不跑這兩刀。
+   *
+   * 標「主食」的罐頭本來就要符合完整營養的標準，蛋白質不會低到要擋。
+   * 碳水更麻煩：罐頭的標示多半是保證值，缺一個灰分就算不準，
+   * 扣掉八成的水分之後誤差會放大好幾倍。拿算不準的數字去刪東西，比不刪更糟。
+   */
+  if (!wet) {
+    cs.push({
+      kind: "minProtein",
+      value: MIN_PROTEIN[sp],
+      label: `粗蛋白低於 ${MIN_PROTEIN[sp]}%`,
+      tag: "營養門檻",
+    });
 
-  cs.push({
-    kind: "maxCarb",
-    value: MAX_CARB[sp],
-    label: `碳水高於 ${MAX_CARB[sp]}%`,
-    tag: "營養門檻",
-  });
+    cs.push({
+      kind: "maxCarb",
+      value: MAX_CARB[sp],
+      label: `碳水高於 ${MAX_CARB[sp]}%`,
+      tag: "營養門檻",
+    });
+  }
 
   // 體型只對狗有意義。貓的體重差距小，市面上也幾乎沒有體型專用的貓糧。
   if (sp === "dog" && s.bodySize) {
@@ -190,12 +217,24 @@ export function constraintsFor(s: Situation): Constraint[] {
   }
 
   if (s.budgetMonthly !== undefined) {
-    cs.push({
-      kind: "maxMonthly",
-      value: s.budgetMonthly,
-      label: `超出每月 ${s.budgetMonthly} 元預算`,
-      tag: "預算",
-    });
+    if (wet) {
+      // 罐頭要先知道一天吃幾罐。沒講體重就用 4 公斤，而且把這個假設寫在理由裡
+      const kg = s.weightKg ?? 4;
+      cs.push({
+        kind: "maxMonthly",
+        value: s.budgetMonthly,
+        kcalPerDay: mer(kg, stageForAge(s.ageYears, sp), sp),
+        label: `全吃罐頭一個月超過 ${s.budgetMonthly} 元${s.weightKg ? "" : "（照 4 公斤的貓算）"}`,
+        tag: "預算",
+      });
+    } else {
+      cs.push({
+        kind: "maxMonthly",
+        value: s.budgetMonthly,
+        label: `超出每月 ${s.budgetMonthly} 元預算`,
+        tag: "預算",
+      });
+    }
   }
 
   cs.push({

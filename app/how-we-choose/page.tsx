@@ -16,6 +16,7 @@ function stats() {
     count: catalog.length,
     dogs: catalogOf("dog").length,
     cats: catalogOf("cat").length,
+    cans: catalogOf("cat", "wet").length,
     withDealbreaker: catalog.filter((p) => p.dealbreaker?.trim()).length,
   };
 }
@@ -119,7 +120,7 @@ export default function Page() {
       </p>
 
       <Box tone="warn">
-        <b>資料還在長。</b>目前收了 {s.count} 款（狗飼料 {s.dogs}、貓飼料 {s.cats}），規格取自品牌與代理商公開資料，
+        <b>資料還在長。</b>目前收了 {s.count} 款（狗飼料 {s.dogs}、貓飼料 {s.cats}、貓罐頭 {s.cans}），規格取自品牌與代理商公開資料，
         價格是人工複查、每張卡片都標了日期。有些資料我們還查不到，
         查不到就留白，不會寫湊數的數字。
       </Box>
