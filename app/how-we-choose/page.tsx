@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import SiteHeader from "@/components/SiteHeader";
-import { CONTACT } from "@/lib/contact";
 
 /**
  * 我們怎麼挑。
@@ -43,11 +42,6 @@ export default function Page() {
       </Point>
       <Point n={4} title="價格是人工查的" last>
         每個價格旁邊都有查價日期，點進賣場以當下的標價為準。
-        {CONTACT.email && (
-          <>
-            {" "}看到寫錯的，<a href={`mailto:${CONTACT.email}`} style={{ color: "var(--accent)" }}>寄信跟我們說</a>。
-          </>
-        )}
       </Point>
 
       {/* 利益關係的那一句在每頁最底下（components/PageReport.tsx），這裡不再講第二次 */}
