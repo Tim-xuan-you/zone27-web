@@ -728,12 +728,21 @@
       },
       "price": {
         "unit": "2kg",
-        "checkedAt": "2026-09-11",
-        "merchants": []
+        "checkedAt": "2026-09-12",
+        "merchants": [
+          {
+            "id": "m1",
+            "label": "晴空小舖sky（蝦皮優選）",
+            "unit": "2kg",
+            "amount": 898,
+            "note": "一頁多款 · 免運無限次 · 14:00 前下單隔日到",
+            "affiliateUrl": "https://s.shopee.tw/40gT8lhNBb",
+            "anchor": "safe"
+          }
+        ]
       },
       "dealbreaker": "你正在排查過敏原。肉只寫「脫水禽肉蛋白」和「水解動物蛋白」，沒說是哪種動物，你沒辦法從標示排除任何一種肉。",
       "knownIssues": "前兩項是玉米和小麥，碳水算下來大約 39%。皇家官網沒有公布磷，我們查不到就留白。",
-      "awaitingLink": true,
       "searchAs": "皇家 Royal Canin 老貓 11+ A30+11",
       "twSource": "https://petpetgo.com/product/40576"
     },
