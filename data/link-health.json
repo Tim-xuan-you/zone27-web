@@ -1,6 +1,6 @@
 {
   "checkedAt": "2026-09-12",
-  "total": 50,
+  "total": 52,
   "bad": 0,
   "rows": [
     {
@@ -333,11 +333,37 @@
       "brand": "Hill's 希爾思",
       "name": "成犬 7 歲以上 高齡活力 雞肉特調食譜",
       "merchantId": "m1",
-      "label": "白喵小舖",
-      "url": "https://s.shopee.tw/4qFVkMrBuD",
+      "label": "貓狗六一六",
+      "url": "https://s.shopee.tw/70K4uXyubR",
       "status": 403,
-      "finalUrl": "https://shopee.tw/opaanlp/341536288/18788739694",
-      "item": "341536288/18788739694",
+      "finalUrl": "https://shopee.tw/opaanlp/7293322/40127863548",
+      "item": "7293322/40127863548",
+      "verdict": "ok",
+      "note": "有轉到商品頁（蝦皮不讓程式看內容，要自己點開確認）"
+    },
+    {
+      "productId": "df-14",
+      "brand": "Hill's 希爾思",
+      "name": "成犬 7 歲以上 高齡活力 雞肉特調食譜",
+      "merchantId": "m2",
+      "label": "寵物星樂園（高雄千坪門市）",
+      "url": "https://s.shopee.tw/3LQmXoCs2h",
+      "status": 403,
+      "finalUrl": "https://shopee.tw/opaanlp/350065704/27543986869",
+      "item": "350065704/27543986869",
+      "verdict": "ok",
+      "note": "有轉到商品頁（蝦皮不讓程式看內容，要自己點開確認）"
+    },
+    {
+      "productId": "df-14",
+      "brand": "Hill's 希爾思",
+      "name": "成犬 7 歲以上 高齡活力 雞肉特調食譜",
+      "merchantId": "m3",
+      "label": "寵物事務所",
+      "url": "https://s.shopee.tw/7AdV6qyHGS",
+      "status": 403,
+      "finalUrl": "https://shopee.tw/opaanlp/152311117/56561575490",
+      "item": "152311117/56561575490",
       "verdict": "ok",
       "note": "有轉到商品頁（蝦皮不讓程式看內容，要自己點開確認）"
     },

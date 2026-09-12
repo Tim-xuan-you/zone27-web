@@ -819,16 +819,34 @@
       },
       "price": {
         "unit": "1.58kg",
-        "checkedAt": "2026-09-10",
+        "checkedAt": "2026-09-12",
         "merchants": [
           {
             "id": "m1",
-            "label": "白喵小舖",
-            "unit": "1.58kg",
-            "amount": 749,
-            "note": "較長備貨 2~3 工作日 · 賣場有折價券可折抵",
-            "affiliateUrl": "https://s.shopee.tw/4qFVkMrBuD",
+            "label": "貓狗六一六",
+            "unit": "3.5磅",
+            "amount": 675,
+            "note": "全系列一頁多款 · 免運無限次 · 賣場有折價券可折抵",
+            "affiliateUrl": "https://s.shopee.tw/70K4uXyubR",
             "anchor": "safe"
+          },
+          {
+            "id": "m2",
+            "label": "寵物星樂園（高雄千坪門市）",
+            "unit": "3.5磅",
+            "amount": 675,
+            "note": "全系列一頁多款 · 免運無限次 · 賣場有折價券可折抵",
+            "affiliateUrl": "https://s.shopee.tw/3LQmXoCs2h",
+            "anchor": "value"
+          },
+          {
+            "id": "m3",
+            "label": "寵物事務所",
+            "unit": "3.5磅",
+            "amount": 675,
+            "note": "全系列一頁多款 · 免運無限次",
+            "affiliateUrl": "https://s.shopee.tw/7AdV6qyHGS",
+            "anchor": "value"
           }
         ]
       },
