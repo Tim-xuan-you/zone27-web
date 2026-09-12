@@ -264,7 +264,7 @@ function Answer({
       {manyInOne(safe, multi) && (
         <p style={{ ...S.variantWarn, borderRadius: 0 }}>
           ⚠️ 這個賣場一頁多口味。點進去請自己把規格選成
-          <b>「{p.name}」</b>，預設的不一定是這個喔。
+          <b>「{variantOf(safe) ?? p.name}」</b>，預設的不一定是這個喔。
         </p>
       )}
 
@@ -473,7 +473,7 @@ function Alt({ p, dogKg, stage, multi }: { p: Product; dogKg?: number; stage?: S
 
       {manyInOne(safe, multi) && (
         <p style={{ ...S.variantWarn, borderRadius: 0 }}>
-          ⚠️ 一頁多口味，點進去請選成<b>「{p.name}」</b>
+          ⚠️ 一頁多口味，點進去請選成<b>「{variantOf(safe) ?? p.name}」</b>
         </p>
       )}
 
@@ -681,6 +681,16 @@ function whereOf(store: { label: string; options: { unit: string; amount: number
  * 或是賣家把整個系列放在同一頁（只有我們知道，寫在備註裡的「一頁多款」）。
  * 第二種以前不會跳警告，讀者點進去，預設選到的可能是幼貓配方。
  */
+/**
+ * 賣場上那個規格實際叫什麼（Tim 貼連結時截圖上的那一串），備註裡寫成「規格選「…」」。
+ *
+ * 讀者點進一頁多款的賣場，看到的是「T22無穀貓火雞,2KG」這種字，不是我們的商品名。
+ * 直接告訴他要點哪一個，比給他看商品圖還準：圖一樣的包裝，重量、口味還是要自己選。
+ */
+function variantOf(m: { note: string }): string | null {
+  return m.note.match(/規格選「([^」]+)」/)?.[1] ?? null;
+}
+
 function manyInOne(m: { affiliateUrl: string; note: string; sharedPage?: boolean }, multi: Set<string>): boolean {
   if (m.sharedPage) return true;
   return multi.has(m.affiliateUrl) || /一頁多款/.test(m.note);
