@@ -109,17 +109,6 @@ export default function Home() {
         <Link href="/dog-food/elimination-diet" style={S.relLink}>排除飲食法</Link>
       </div>
 
-      <footer style={{
-        marginTop: 72, paddingTop: 28, borderTop: "1px solid var(--line)",
-        fontSize: 13, color: "var(--faint)", lineHeight: 1.9,
-      }}>
-        <p style={{ margin: 0 }}>
-          價格為人工複查，每張卡片都標了查價日期。點進賣場請以當下標價為準。
-        </p>
-        <p style={{ margin: "8px 0 0" }}>
-          本站透過購買連結取得分潤，這不影響推薦排序，<Link href="/how-we-choose" style={{ color: "var(--muted)" }}>規則寫在這裡</Link>。
-        </p>
-      </footer>
     </main>
   );
 }

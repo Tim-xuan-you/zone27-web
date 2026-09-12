@@ -108,7 +108,7 @@ export default function Index() {
         fontSize: 13, color: "var(--faint)", lineHeight: 1.9,
       }}>
         <p style={{ margin: 0 }}>
-          價格為人工複查，每張卡片都標了查價日期。點進賣場請以當下標價為準。本站透過購買連結取得分潤，這不影響推薦排序。
+          價格是人工查的，點進賣場以當下的標價為準。
         </p>
       </footer>
     </main>

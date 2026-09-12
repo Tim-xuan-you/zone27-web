@@ -25,6 +25,8 @@ export default function PageReport() {
         <a href={href} style={link}>寄信跟我們說</a>
         ，信裡會自動帶上這一頁。收到會改，也會標上新的查核日期。
         <span style={addr}>{CONTACT.email}</span>
+        {/* 利益關係全站只講這一句（2026-09-13 Tim：一直講分潤，讀者只會覺得你在賺錢） */}
+        <span style={{ display: "block", marginTop: 8 }}>購買連結是聯盟行銷連結，透過連結下單，你付的價格一樣。</span>
       </p>
     </div>
   );

@@ -36,7 +36,7 @@ export function GET() {
   const body = `# ZONE 27
 
 > 台灣的狗飼料、貓飼料、貓主食罐決策工具。飼主用一句話描述狗或貓的狀況，我們先把不適合的飼料刪掉，
-> 並寫清楚每一款被刪的理由與「什麼時候不要買」。排序不讀取佣金，資料裡也沒有佣金欄位。
+> 並寫清楚每一款被刪的理由與「什麼時候不要買」。
 
 ## 方法
 
@@ -111,7 +111,7 @@ export function GET() {
 - [排除飲食法](${BASE}/dog-food/elimination-diet)
 - [狗一天要吃多少飼料](${BASE}/dog-food/how-much)
 - [貓一天要吃多少飼料](${BASE}/cat-food/how-much)
-- [我們怎麼挑，錢從哪裡來](${BASE}/how-we-choose)
+- [我們怎麼挑](${BASE}/how-we-choose)
 - [這個問題該問誰](${BASE}/ask)
 
 ## 長尾頁
@@ -125,8 +125,7 @@ export function GET() {
 
 ## 利益揭露
 
-本站透過購買連結取得分潤，讀者支付的價格不變。排序演算法的資料中沒有佣金欄位。
-詳見 ${BASE}/how-we-choose
+網站上的購買連結是聯盟行銷連結，讀者支付的價格不變。
 `;
 
   return new Response(body, {

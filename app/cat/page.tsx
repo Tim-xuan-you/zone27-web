@@ -63,15 +63,6 @@ export default function Page() {
         <Link href="/cat-wet-food/how-much" style={S.relLink}>貓一天吃幾罐</Link>
       </div>
 
-      <footer style={{
-        marginTop: 72, paddingTop: 28, borderTop: "1px solid var(--line)",
-        fontSize: 13, color: "var(--faint)", lineHeight: 1.9,
-      }}>
-        <p style={{ margin: 0 }}>
-          成分資料取自台灣代理商的中文標示與品牌台灣官網。
-          本站透過購買連結取得分潤，這不影響推薦排序，<Link href="/how-we-choose" style={{ color: "var(--muted)" }}>規則寫在這裡</Link>。
-        </p>
-      </footer>
     </main>
   );
 }

@@ -238,7 +238,7 @@ export default function LongTail({ sp, slug }: { sp: Species; slug: string[] }) 
           <Link href="/" style={{ color: "var(--muted)" }}>回裁決器</Link>用講的比較快。
         </p>
         <p style={{ margin: "8px 0 0" }}>
-          價格為人工複查，每張卡片都標了查價日期。點進賣場請以當下標價為準。本站透過購買連結取得分潤，這不影響推薦排序。
+          價格是人工查的，點進賣場以當下的標價為準。
         </p>
       </footer>
     </main>
