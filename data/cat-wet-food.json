@@ -2,7 +2,7 @@
   "_meta": {
     "category": "cat-wet-food",
     "note": "由 data/cat-wet-food.csv 產生，不要直接改這個檔。改 CSV 之後跑 npm run data:import。",
-    "generatedAt": "2026-09-12",
+    "generatedAt": "2026-09-13",
     "count": 12,
     "pricePolicy": "人工複查，不爬蟲。checkedAt 誠實顯示於前端。"
   },

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Remind from "./Remind";
 import {
-  anchorOf, bagDuration, canPlan, canWord, cansOf, formOf, freshness, mer, sharedListings, storesOf, trialPlan,
+  anchorOf, bagDuration, canPlan, canWord, cansOf, checkedOf, formOf, freshness, mer, sharedListings, storesOf, trialPlan,
   unitOf, unitPrice, wetMonthly,
   FRESH_DAYS, type Stage,
 } from "@/lib/engine";
@@ -231,8 +231,8 @@ function Answer({
           </span>
         </div>
 
-        {freshness(p.price.checkedAt).note && (
-          <p style={S.freshNote}>{freshness(p.price.checkedAt).note}</p>
+        {freshness(checkedOf(p, safe)).note && (
+          <p style={S.freshNote}>{freshness(checkedOf(p, safe)).note}</p>
         )}
 
         {verdict.pickReason && (
@@ -253,7 +253,7 @@ function Answer({
             <span style={S.buyNote}>{main.options[0].note || main.label}</span>
           </div>
         )}
-        {main && <ReportLine p={p} where={whereOf(main, p.price.checkedAt)} />}
+        {main && <ReportLine p={p} where={whereOf(main, checkedOf(p, safe))} />}
       </div>
 
       <div style={S.deal}>
@@ -463,7 +463,7 @@ function Alt({ p, dogKg, stage, multi }: { p: Product; dogKg?: number; stage?: S
             >去{main.label.replace(/（.*/, "")}買</a>
           </div>
         )}
-        {main && <ReportLine p={p} where={whereOf(main, p.price.checkedAt)} />}
+        {main && <ReportLine p={p} where={whereOf(main, checkedOf(p, safe))} />}
       </div>
 
       <div style={S.deal}>
@@ -529,8 +529,12 @@ function Stores({ p, dogKg, stage }: { p: Product; dogKg?: number; stage?: Stage
                       <span style={S.optKg} className="mono">{up}</span>
                     )}
                   </div>
-                  {(dur || save || !store.singleUrl) && (
+                  {(dur || save || !store.singleUrl || o.checkedAt !== p.price.checkedAt) && (
                     <div style={S.optMeta}>
+                      {/* 備援的價格可能比較舊，照實標日期，讀者點進去以賣場為準 */}
+                      {o.checkedAt !== p.price.checkedAt && (
+                        <span style={{ color: "var(--faint)" }}>{o.checkedAt.slice(5).replace("-", "/")} 查的價</span>
+                      )}
                       {dur && (
                         <span style={{ color: dur.tooLong ? "var(--cut)" : "var(--faint)" }}>
                           約 {dur.days} 天{dur.tooLong ? " ⚠" : ""}
@@ -563,7 +567,7 @@ function Stores({ p, dogKg, stage }: { p: Product; dogKg?: number; stage?: Stage
           {store.options[0]?.note && (
             <p style={S.storeNote}>{store.options[0].note}</p>
           )}
-          <ReportLine p={p} where={whereOf(store, p.price.checkedAt)} short />
+          <ReportLine p={p} where={whereOf(store, store.options[0]?.checkedAt ?? p.price.checkedAt)} short />
         </div>
       ))}
 

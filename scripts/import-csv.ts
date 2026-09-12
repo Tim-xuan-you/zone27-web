@@ -19,6 +19,10 @@ import { readFileSync, writeFileSync, existsSync } from "node:fs";
 import { resolve } from "node:path";
 import { todayTW } from "../lib/date";
 import { CATEGORIES, type Category } from "../lib/categories";
+import { MAX_MERCHANTS } from "../lib/types";
+
+/** 1～MAX_MERCHANTS */
+const SLOTS = Array.from({ length: MAX_MERCHANTS }, (_, i) => i + 1);
 
 const PROTEINS = [
   "chicken", "beef", "lamb", "salmon", "whitefish", "fish", "duck", "turkey",
@@ -153,6 +157,8 @@ function merchant(row: Row, n: number, line: number) {
     // 連結死掉不是刪掉那一列 —— 刪掉就沒有紀錄，下次又會重新收一次同一家。
     // 標記起來，引擎跳過，資料還在。
     ...(/^(1|true|yes|y|是|死)$/i.test((row[`${p}Dead`] ?? "").trim()) ? { dead: true } : {}),
+    // 這一家自己的查價日期。備援的價格可能比整款的日期舊，要分開記
+    ...(/^\d{4}-\d{2}-\d{2}$/.test(row[`${p}Checked`] ?? "") ? { checkedAt: row[`${p}Checked`] } : {}),
   };
 }
 
@@ -184,8 +190,8 @@ function readCategory(cat: Category) {
       fail(line, "pulses", `「${row.pulses}」看不懂，可用：${PULSES.join(" / ")}`);
     }
 
-    // m1..m4。規則上一款一個規格就好，但賣家把尺寸拆成獨立商品時會用到。
-    const merchants = [1, 2, 3, 4].map((n) => merchant(row, n, line)).filter(Boolean);
+    // m1..m8。Tim 給過的連結不刪（2026-09-13），新的在前、舊的往後當備援，所以要留得夠多格。
+    const merchants = SLOTS.map((n) => merchant(row, n, line)).filter(Boolean);
     /*
      * 搭贈品的賣場擋下來。
      *
@@ -196,7 +202,7 @@ function readCategory(cat: Category) {
      * 拿它去算「每公斤多少」「大包省幾 %」，我們自己的數字就在說謊。
      * 讀者看不出來，所以這種賣場不能收。
      */
-    for (let n = 1; n <= 4; n++) {
+    for (const n of SLOTS) {
       const label = row[`m${n}Label`] ?? "";
       const unit = row[`m${n}Unit`] ?? "";
       const note = row[`m${n}Note`] ?? "";
@@ -212,7 +218,7 @@ function readCategory(cat: Category) {
        便宜超過六成，多半是公斤數少打一位數或多打一位數。 */
     {
       const sized: { unit: string; per: number }[] = [];
-      for (let n = 1; n <= 4; n++) {
+      for (const n of SLOTS) {
         const label = row[`m${n}Label`];
         if (!label) continue;
         const unit = row[`m${n}Unit`] || row.unit || "";
@@ -500,8 +506,9 @@ const today = todayTW();
 const fresh: Record<string, number> = Object.fromEntries(
   results
     .flatMap((r) => r.products)
-    .filter((p) => p.price.merchants.length > 0)
-    .map((p) => [p.id, Math.min(...p.price.merchants.map((m) => m!.amount))])
+    // 標失效的那一家不算：讀者買不到的價格，不能拿來當「最低價」
+    .filter((p) => p.price.merchants.some((m) => !m!.dead))
+    .map((p) => [p.id, Math.min(...p.price.merchants.filter((m) => !m!.dead).map((m) => m!.amount))])
 );
 
 const idx = hist.snapshots.findIndex((s: { d: string }) => s.d === today);

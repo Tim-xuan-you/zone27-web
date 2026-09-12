@@ -67,7 +67,13 @@ export function passes(p: Product, c: Constraint): boolean {
 
 /** 最低價通路的售價。 */
 export function cheapest(p: Product): number {
-  return Math.min(...p.price.merchants.map((m) => m.amount));
+  // 標失效的那一家不算，讀者買不到
+  return Math.min(...liveMerchants(p).map((m) => m.amount));
+}
+
+/** 這一家哪天查的價：有自己的日期就用自己的，沒有就沿用整款的 */
+export function checkedOf(p: Product, m?: Merchant): string {
+  return m?.checkedAt ?? p.price.checkedAt;
 }
 
 /** 指定錨點角色的通路。找不到就退回第一個。 */
@@ -696,6 +702,8 @@ export interface StoreOption {
   savingPct: number | null;
   note: string;
   affiliateUrl: string;
+  /** 這一家哪天查的價 */
+  checkedAt: string;
 }
 
 export interface Store {
@@ -745,6 +753,7 @@ export function storesOf(p: Product): Store[] {
               : null,
           note: m.note,
           affiliateUrl: m.affiliateUrl,
+          checkedAt: checkedOf(p, m),
         };
       })
       .sort((a, b) => a.amount - b.amount);
@@ -1081,7 +1090,7 @@ export function maintenanceRows(pool: Product[], today = todayTW()): Maintenance
 
   for (const p of pool) {
     for (const m of p.price.merchants) {
-      const f = freshness(p.price.checkedAt, today);
+      const f = freshness(checkedOf(p, m), today);
       rows.push({
         productId: p.id,
         brand: p.brand,
@@ -1091,7 +1100,7 @@ export function maintenanceRows(pool: Product[], today = todayTW()): Maintenance
         unit: unitOf(p, m),
         amount: m.amount,
         affiliateUrl: m.affiliateUrl,
-        checkedAt: p.price.checkedAt,
+        checkedAt: checkedOf(p, m),
         days: f.days,
         level: m.dead ? "dead" : f.level,
       });

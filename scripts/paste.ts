@@ -17,7 +17,8 @@
  *   1. 把資料貼進 data/paste.txt
  *   2. npm run data:paste
  *
- * 它會改對應 CSV 的 m1～m4 欄位（df- 開頭寫進 dog-food.csv、cf- 開頭寫進 cat-food.csv），
+ * 它會改對應 CSV 的 m1～m8 欄位（df- 狗、cf- 貓、cw- 貓罐頭，前綴決定哪一份），
+ * 新貼的放前面，原本的往後當備援，**Tim 給過的連結永遠不刪**（2026-09-13），
  * 把查價日期更新成今天，
  * 然後自動跑一次匯入。商品本身的規格（蛋白質、成分那些）不歸它管 ——
  * 那是另外一件事，我來查。
@@ -27,6 +28,9 @@ import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { todayTW } from "../lib/date";
 import { CATEGORIES, categoryOfId } from "../lib/categories";
+import { MAX_MERCHANTS } from "../lib/types";
+
+const SLOTS = Array.from({ length: MAX_MERCHANTS }, (_, i) => i + 1);
 
 const ROOT = resolve(import.meta.dirname, "..");
 const PASTE = resolve(ROOT, "data/paste.txt");
@@ -41,6 +45,9 @@ const TEMPLATE = `# 一行一個賣場。第一行 = 卡片上主要的那個賣
 #
 # 同一個商品的第二行開始，商品編號可以不用再寫。
 # 井字號開頭的行會被忽略，可以拿來寫筆記。
+#
+# 給過的連結永遠不刪：新貼的放最前面，原本的自動往後排當備援。
+# 備註裡寫【備援】→ 放最後面；寫【失效】→ 讀者看不到，資料留著；寫【恢復】→ 失效的放回來。
 #
 # 例：
 # df-01  獅子王寵物（蝦皮優選）  2kg    1200  https://s.shopee.tw/xxxx  【超商限兩包】
@@ -187,17 +194,9 @@ async function main() {
     return;
   }
 
-  /* ---- 依商品分組，超過四家就擋下來 ---- */
+  /* ---- 依商品分組 ---- */
   const byProduct = new Map<string, Row[]>();
   for (const r of rows) byProduct.set(r.productId, [...(byProduct.get(r.productId) ?? []), r]);
-
-  for (const [id, list] of byProduct) {
-    if (list.length > 4) {
-      console.error(`\n${id} 有 ${list.length} 家賣場，欄位只到 m4。`);
-      console.error(`而且賣場越多維護成本越高 —— 建議一款留一到兩家就好。\n`);
-      process.exit(1);
-    }
-  }
 
   /* ---- 寫回 CSV：編號前綴決定是哪一份（df- 狗、cf- 貓、cw- 貓罐頭） ---- */
   const today = todayTW();
@@ -235,23 +234,77 @@ async function main() {
       const r = table.find((row, i) => i > 0 && row[idCol] === id);
       if (!r) { missing.push(id); continue; }
 
-      for (let n = 1; n <= 4; n++) {
-        const m = list[n - 1];
-        r[col(`m${n}Label`)] = m ? m.label : "";
-        r[col(`m${n}Unit`)] = m ? m.unit : "";
-        r[col(`m${n}Amount`)] = m ? String(m.amount) : "";
-        r[col(`m${n}Url`)] = m ? m.url : "";
-        r[col(`m${n}Dead`)] = "";
-        // 貼上那一行有寫【】才覆蓋備註；沒寫就保留原本的人工備註
-        if (m && m.note) r[col(`m${n}Note`)] = m.note;
-        else if (!m) r[col(`m${n}Note`)] = "";
+      /*
+       * Tim 給過的連結一律不刪（2026-09-13 Tim：「再爛至少都要在網站上當成備援」）。
+       *
+       * 以前這裡是整排蓋掉：貼三家新的，原本那一家就消失了（白喵小舖就是這樣不見的）。
+       * 現在是合併：
+       *   新貼的放最前面（照貼的順序，第一行是卡片上主要的那一家）
+       *   原本就有、這次沒貼到的，照原本的順序往後排，當備援
+       *   備註寫【備援】的，放最後面
+       *   備註寫【失效】的，標成失效：讀者看不到，資料留著，之後可以【恢復】
+       * 同一條連結＋同一個規格算同一筆，貼到就更新價格和日期，不會重複。
+       */
+      type Slot = { label: string; unit: string; amount: string; note: string; url: string; dead: string; checked: string };
+      const read = (n: number): Slot => ({
+        label: r[col(`m${n}Label`)] ?? "", unit: r[col(`m${n}Unit`)] ?? "", amount: r[col(`m${n}Amount`)] ?? "",
+        note: r[col(`m${n}Note`)] ?? "", url: r[col(`m${n}Url`)] ?? "", dead: r[col(`m${n}Dead`)] ?? "",
+        checked: r[col(`m${n}Checked`)] ?? "",
+      });
+      const existing = SLOTS.map(read).filter((s) => s.label);
+      const same = (s: Slot, m: Row) => s.url.split("?")[0] === m.url.split("?")[0] && s.unit === m.unit;
+
+      const front: Slot[] = [], back: Slot[] = [];
+      let revived = 0, killed = 0;
+      for (const m of list) {
+        const flags = m.note;
+        const backup = /備援/.test(flags), dead = /失效/.test(flags), revive = /恢復/.test(flags);
+        // 標記字不要留在給讀者看的備註裡
+        const note = flags.split("·").map((x) => x.replace(/備援|失效|恢復/g, "").trim()).filter(Boolean).join(" · ");
+        const old = existing.find((s) => same(s, m));
+        const slot: Slot = {
+          label: m.label, unit: m.unit, amount: String(m.amount), url: m.url,
+          // 這次沒寫備註就保留原本的人工備註
+          note: note || old?.note || "",
+          dead: dead ? "1" : revive ? "" : old?.dead ?? "",
+          checked: today,
+        };
+        if (dead) killed++;
+        if (revive) revived++;
+        if (dead && old) { Object.assign(old, slot); continue; }   // 標失效的留在原本的位置
+        (backup ? back : front).push(slot);
       }
+      const keep = existing.filter((s) => !list.some((m) => same(s, m)) || (s.dead === "1" && list.some((m) => same(s, m) && /失效/.test(m.note))));
+      const merged = [...front, ...keep, ...back];
+
+      if (merged.length > SLOTS.length) {
+        console.error(`\n${id} 合併之後有 ${merged.length} 條，欄位只到 m${SLOTS.length}。`);
+        console.error(`規矩是 Tim 給過的連結不刪，所以這一次先不動任何檔案。`);
+        console.error(`要嘛把 lib/types.ts 的 MAX_MERCHANTS 加大、CSV 補欄位，要嘛請 Tim 決定哪一條可以真的拿掉。\n`);
+        process.exit(1);
+      }
+
+      SLOTS.forEach((n, i) => {
+        const s = merged[i];
+        r[col(`m${n}Label`)] = s?.label ?? "";
+        r[col(`m${n}Unit`)] = s?.unit ?? "";
+        r[col(`m${n}Amount`)] = s?.amount ?? "";
+        r[col(`m${n}Note`)] = s?.note ?? "";
+        r[col(`m${n}Url`)] = s?.url ?? "";
+        r[col(`m${n}Dead`)] = s?.dead ?? "";
+        r[col(`m${n}Checked`)] = s?.checked ?? "";
+      });
       if (checkedCol >= 0) r[checkedCol] = today;
       // 連結來了，就不再是「等連結」的狀態
       if (awaitCol >= 0) r[awaitCol] = "";
       // 一家賣場常常有好幾個規格，「家」跟「規格」分開數才不會誤會
-      const stores = new Set(list.map((m) => m.label)).size;
-      touched.push(`${id}（${stores} 家、${list.length} 個規格）`);
+      const live = merged.filter((s) => s.dead !== "1");
+      const stores = new Set(live.map((s) => s.label)).size;
+      touched.push(
+        `${id}（${stores} 家、${live.length} 條能買` +
+        `${keep.some((s) => s.dead !== "1") ? `，原本的 ${keep.filter((s) => s.dead !== "1").length} 條留著當備援` : ""}` +
+        `${killed ? `，${killed} 條標失效` : ""}${revived ? `，${revived} 條恢復` : ""}）`,
+      );
     }
     outputs.push([path, table.map((r) => r.map(escape).join(",")).join("\r\n") + "\r\n"]);
   }

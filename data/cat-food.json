@@ -2,7 +2,7 @@
   "_meta": {
     "category": "cat-food",
     "note": "由 data/cat-food.csv 產生，不要直接改這個檔。改 CSV 之後跑 npm run data:import。",
-    "generatedAt": "2026-09-12",
+    "generatedAt": "2026-09-13",
     "count": 15,
     "pricePolicy": "人工複查，不爬蟲。checkedAt 誠實顯示於前端。"
   },
@@ -51,7 +51,8 @@
             "amount": 803,
             "note": "免運無限次 · 14:00 前下單隔日到",
             "affiliateUrl": "https://s.shopee.tw/3LQkll4wyb",
-            "anchor": "safe"
+            "anchor": "safe",
+            "checkedAt": "2026-09-11"
           }
         ]
       },
@@ -103,7 +104,8 @@
             "amount": 695,
             "note": "免運無限次 · 14:00 前下單隔日到",
             "affiliateUrl": "https://s.shopee.tw/AAH4vLjsj4",
-            "anchor": "safe"
+            "anchor": "safe",
+            "checkedAt": "2026-09-11"
           },
           {
             "id": "m2",
@@ -112,7 +114,8 @@
             "amount": 1544,
             "note": "免運無限次 · 14:00 前下單隔日到",
             "affiliateUrl": "https://s.shopee.tw/AAH4vLjsj4",
-            "anchor": "value"
+            "anchor": "value",
+            "checkedAt": "2026-09-11"
           }
         ]
       },
@@ -164,7 +167,8 @@
             "amount": 799,
             "note": "免運無限次 · 14:00 前下單隔日到",
             "affiliateUrl": "https://s.shopee.tw/Ln9I4cla3",
-            "anchor": "safe"
+            "anchor": "safe",
+            "checkedAt": "2026-09-11"
           },
           {
             "id": "m2",
@@ -173,7 +177,8 @@
             "amount": 1599,
             "note": "免運無限次 · 14:00 前下單隔日到",
             "affiliateUrl": "https://s.shopee.tw/Ln9I4cla3",
-            "anchor": "value"
+            "anchor": "value",
+            "checkedAt": "2026-09-11"
           },
           {
             "id": "m3",
@@ -182,7 +187,8 @@
             "amount": 799,
             "note": "一頁多款 · 免運無限次",
             "affiliateUrl": "https://s.shopee.tw/3VkAy44Jdc",
-            "anchor": "value"
+            "anchor": "value",
+            "checkedAt": "2026-09-11"
           },
           {
             "id": "m4",
@@ -191,7 +197,8 @@
             "amount": 1599,
             "note": "一頁多款 · 免運無限次",
             "affiliateUrl": "https://s.shopee.tw/9zxej2kW43",
-            "anchor": "value"
+            "anchor": "value",
+            "checkedAt": "2026-09-11"
           }
         ]
       },
@@ -244,7 +251,8 @@
             "amount": 970,
             "note": "免運無限次 · 14:00 前下單隔日到",
             "affiliateUrl": "https://s.shopee.tw/8KpQmehHEz",
-            "anchor": "safe"
+            "anchor": "safe",
+            "checkedAt": "2026-09-11"
           },
           {
             "id": "m2",
@@ -253,7 +261,8 @@
             "amount": 1690,
             "note": "免運無限次 · 14:00 前下單隔日到",
             "affiliateUrl": "https://s.shopee.tw/8KpQmehHEz",
-            "anchor": "value"
+            "anchor": "value",
+            "checkedAt": "2026-09-11"
           },
           {
             "id": "m3",
@@ -262,7 +271,8 @@
             "amount": 3660,
             "note": "免運無限次 · 14:00 前下單隔日到",
             "affiliateUrl": "https://s.shopee.tw/8KpQmehHEz",
-            "anchor": "value"
+            "anchor": "value",
+            "checkedAt": "2026-09-11"
           }
         ]
       },
@@ -317,6 +327,7 @@
             "note": "一頁多款 · 免運無限次 · 14:00 前下單隔日到",
             "affiliateUrl": "https://s.shopee.tw/6fhEIJRtnm",
             "anchor": "safe",
+            "checkedAt": "2026-09-12",
             "sharedPage": true
           }
         ]
@@ -373,6 +384,7 @@
             "note": "一頁多款 · 免運無限次 · 14:00 前下單隔日到",
             "affiliateUrl": "https://s.shopee.tw/112q2f3pnv",
             "anchor": "safe",
+            "checkedAt": "2026-09-11",
             "sharedPage": true
           }
         ]
@@ -473,7 +485,8 @@
             "amount": 1100,
             "note": "一頁多款 · 超商取貨有數量限制 · 免運無限次 · 14:00 前下單隔日到",
             "affiliateUrl": "https://s.shopee.tw/LnAlCPp8u",
-            "anchor": "safe"
+            "anchor": "safe",
+            "checkedAt": "2026-09-12"
           },
           {
             "id": "m2",
@@ -482,7 +495,8 @@
             "amount": 2420,
             "note": "一頁多款 · 超商取貨有數量限制 · 免運無限次 · 14:00 前下單隔日到",
             "affiliateUrl": "https://s.shopee.tw/LnAlCPp8u",
-            "anchor": "value"
+            "anchor": "value",
+            "checkedAt": "2026-09-12"
           }
         ]
       },
@@ -535,7 +549,8 @@
             "amount": 1250,
             "note": "蝦皮商城 · 15 天鑑賞期 · 免運無限次",
             "affiliateUrl": "https://s.shopee.tw/6fhEJHh3NA",
-            "anchor": "safe"
+            "anchor": "safe",
+            "checkedAt": "2026-09-12"
           },
           {
             "id": "m2",
@@ -544,7 +559,8 @@
             "amount": 1699,
             "note": "蝦皮商城 · 15 天鑑賞期 · 免運無限次",
             "affiliateUrl": "https://s.shopee.tw/6fhEJHh3NA",
-            "anchor": "value"
+            "anchor": "value",
+            "checkedAt": "2026-09-12"
           },
           {
             "id": "m3",
@@ -553,7 +569,8 @@
             "amount": 3650,
             "note": "蝦皮商城 · 15 天鑑賞期 · 免運無限次",
             "affiliateUrl": "https://s.shopee.tw/6fhEJHh3NA",
-            "anchor": "value"
+            "anchor": "value",
+            "checkedAt": "2026-09-12"
           }
         ]
       },
@@ -605,7 +622,8 @@
             "amount": 805,
             "note": "免運無限次 · 14:00 前下單隔日到",
             "affiliateUrl": "https://s.shopee.tw/70K3DKfJqJ",
-            "anchor": "safe"
+            "anchor": "safe",
+            "checkedAt": "2026-09-11"
           }
         ]
       },
@@ -658,7 +676,8 @@
             "amount": 655,
             "note": "全系列一頁多款 · 免運無限次 · 14:00 前下單隔日到",
             "affiliateUrl": "https://s.shopee.tw/9fKoLMPnec",
-            "anchor": "safe"
+            "anchor": "safe",
+            "checkedAt": "2026-09-11"
           },
           {
             "id": "m2",
@@ -667,7 +686,8 @@
             "amount": 1230,
             "note": "全系列一頁多款 · 免運無限次 · 14:00 前下單隔日到",
             "affiliateUrl": "https://s.shopee.tw/9fKoLMPnec",
-            "anchor": "value"
+            "anchor": "value",
+            "checkedAt": "2026-09-11"
           },
           {
             "id": "m3",
@@ -676,7 +696,8 @@
             "amount": 2950,
             "note": "全系列一頁多款 · 免運無限次 · 適合多貓家庭",
             "affiliateUrl": "https://s.shopee.tw/9V1O93QQzZ",
-            "anchor": "value"
+            "anchor": "value",
+            "checkedAt": "2026-09-11"
           }
         ]
       },
@@ -728,7 +749,8 @@
             "amount": 898,
             "note": "一頁多款 · 免運無限次 · 14:00 前下單隔日到",
             "affiliateUrl": "https://s.shopee.tw/40gT8lhNBb",
-            "anchor": "safe"
+            "anchor": "safe",
+            "checkedAt": "2026-09-12"
           }
         ]
       },

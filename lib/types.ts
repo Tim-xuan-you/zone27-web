@@ -182,7 +182,17 @@ export interface Merchant {
    * 例：歐睿健「鮮雞愛貓」和「鮮雞幼貓」在同一家是同一頁，名字只差一個字。
    */
   sharedPage?: boolean;
+  /**
+   * 這一家哪天查的價。沒填就沿用整款的 price.checkedAt。
+   *
+   * Tim 給過的連結一律不刪（2026-09-13），新的放前面、舊的留下來當備援。
+   * 備援的價格可能是好幾週前查的，不能跟著整款一起標成「今天查的」。
+   */
+  checkedAt?: string;
 }
+
+/** 每家賣場最多幾條。Tim 給過的連結不刪，所以要留得夠；真的滿了，paste 會擋下來說 */
+export const MAX_MERCHANTS = 8;
 
 export interface Price {
   unit: string;

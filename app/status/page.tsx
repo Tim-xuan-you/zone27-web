@@ -441,6 +441,12 @@ export default function Page() {
  * 蝦皮的商品頁不讓程式看（回 403），我們也不繞過，所以「無效、賣完」只能靠人點開看。
  * 這張表就是讓 Tim 在手機上一條一條點的。
  */
+/** 這一條在這一款裡的角色：第一條還能買的是主要，其他是備援 */
+function roleOf(p: Product, m: Product["price"]["merchants"][number]): "主要" | "備援" {
+  const first = p.price.merchants.find((x) => !x.dead);
+  return first && first.affiliateUrl === m.affiliateUrl && (first.unit ?? "") === (m.unit ?? "") ? "主要" : "備援";
+}
+
 function AllLinks() {
   type HealthRow = { url: string; item: string | null; verdict: string };
   const byUrl = new Map((health.rows as HealthRow[]).map((r) => [r.url, r]));
@@ -463,6 +469,10 @@ function AllLinks() {
           <li>找到了，點那一條的「點開看」。打不開、顯示無效或賣完，就跟 Claude 說「這一條無效」，
             或直接貼另一家的新連結。舊的會標成失效，網站馬上不推那一家。</li>
         </ol>
+        <p style={{ margin: "10px 0 0", fontSize: 14, lineHeight: 1.85 }}>
+          <b>你給過的連結永遠不刪。</b>新給的放最前面，原本的自動往後當備援；主要那一條壞了，備援自己頂上。
+          只有確定無效的會標「失效」：讀者看不到，這裡還留著，哪天恢復了一句話就能放回去。
+        </p>
         <p style={{ margin: "10px 0 0", fontSize: 13.5, color: "var(--muted)", lineHeight: 1.85 }}>
           自己點開檢查沒關係。要自己買的話不要從這裡下單，多數分潤計畫不算自己買的，還可能被當成異常。
           連結健檢最後一次跑是 {health.checkedAt}：每一條都有轉到商品頁，但商品還在不在、有沒有分潤，蝦皮不讓程式看，要自己點。
@@ -477,16 +487,21 @@ function AllLinks() {
           {items.map(({ p, m, h }) => (
             <div key={p.id + m.id} style={{ ...line, borderTop: "1px solid var(--line)" }}>
               <div style={{ flex: 1, minWidth: 190 }}>
-                <span style={{ display: "block", fontSize: 12.5, color: "var(--muted)" }}>{p.id} · {p.brand}</span>
+                <span style={{ display: "block", fontSize: 12.5, color: "var(--muted)" }}>
+                  {p.id} · {p.brand}
+                  {/* 主要＝卡片上那個按鈕；備援＝收在「其他規格與價格」裡，主要的壞了就自動頂上 */}
+                  <b style={{ marginLeft: 8, color: m.dead ? "var(--cut)" : roleOf(p, m) === "主要" ? "var(--keep)" : "var(--muted)" }}>
+                    {m.dead ? "失效（讀者看不到）" : roleOf(p, m)}
+                  </b>
+                </span>
                 {p.name}
                 <span className="mono" style={{ display: "block", fontSize: 12, color: "var(--faint)" }}>
-                  {m.unit ?? p.price.unit} · ${m.amount} · 查價 {p.price.checkedAt}
+                  {m.unit ?? p.price.unit} · ${m.amount} · 查價 {m.checkedAt ?? p.price.checkedAt}
                   {h?.item ? ` · 蝦皮商品 ${h.item}` : ""}
                 </span>
                 {m.sharedPage && (
                   <span style={{ display: "block", fontSize: 12.5, color: "var(--cut)" }}>跟另一款在同一個商品頁，讀者要自己選規格</span>
                 )}
-                {m.dead && <span style={{ display: "block", fontSize: 12.5, color: "var(--cut)" }}>已標失效，網站不會推</span>}
               </div>
               <a href={m.affiliateUrl} target="_blank" rel="noopener nofollow"
                  style={{ color: "var(--accent)", fontSize: 14, fontWeight: 600, whiteSpace: "nowrap" }}>
