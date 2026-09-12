@@ -2,20 +2,21 @@
   "_meta": {
     "note": "蝦皮賣場編號 → 網站上用的賣場名稱。同一家賣場只能有一個名字；名字要 Tim 核對過才算數（confirmed）。",
     "why": "2026-09-13 我從截圖把「萬倍富」讀成「萬信富」，Tim 還照著我寫的回傳，錯字就上線了。截圖讀出來的名字一律先當成沒核對。",
-    "howTo": "新賣場跑完 npm run links:check 會有賣場編號，匯入時沒登記的會提醒；請 Tim 在蝦皮 App 看一眼賣場名稱，對了就把 confirmed 改成 true。"
+    "howTo": "新賣場跑完 npm run links:check 會有賣場編號，匯入時沒登記的會提醒；請 Tim 在蝦皮 App 看一眼賣場名稱，對了就把 confirmed 改成 true。",
+    "confirmedAt": "2026-09-13：Tim 核對過全部 17 家（10 家截圖讀的回覆「都對」）"
   },
   "stores": {
     "742205": {
       "name": "晴空小舖sky（蝦皮優選）",
-      "confirmed": false
+      "confirmed": true
     },
     "1799256": {
       "name": "H&R安室家（蝦皮商城）",
-      "confirmed": false
+      "confirmed": true
     },
     "4000820": {
       "name": "飼食事寵物選品",
-      "confirmed": false
+      "confirmed": true
     },
     "7293322": {
       "name": "貓狗六一六",
@@ -27,11 +28,11 @@
     },
     "11121228": {
       "name": "獅子王寵物（蝦皮優選）",
-      "confirmed": false
+      "confirmed": true
     },
     "50662979": {
       "name": "蝦皮直營（官方直營）",
-      "confirmed": false
+      "confirmed": true
     },
     "152311117": {
       "name": "寵物事務所",
@@ -39,7 +40,7 @@
     },
     "230717106": {
       "name": "小BU的米其林指南（蝦皮優選）",
-      "confirmed": false
+      "confirmed": true
     },
     "242503241": {
       "name": "貴貴嚴選",
@@ -47,11 +48,11 @@
     },
     "250476251": {
       "name": "免睏寵物樂園（蝦皮優選）",
-      "confirmed": false
+      "confirmed": true
     },
     "327771748": {
       "name": "毛貓寵（蝦皮商城）",
-      "confirmed": false
+      "confirmed": true
     },
     "341536288": {
       "name": "白喵小舖",
@@ -63,11 +64,11 @@
     },
     "397211381": {
       "name": "毛家人寵物用品",
-      "confirmed": false
+      "confirmed": true
     },
     "562930829": {
       "name": "圓肚精靈家族（蝦皮優選）",
-      "confirmed": false
+      "confirmed": true
     },
     "1447238100": {
       "name": "毛孩寵物鋪",
