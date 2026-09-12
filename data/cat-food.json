@@ -532,12 +532,39 @@
       },
       "price": {
         "unit": "2kg",
-        "checkedAt": "2026-09-11",
-        "merchants": []
+        "checkedAt": "2026-09-12",
+        "merchants": [
+          {
+            "id": "m1",
+            "label": "H&R安室家（蝦皮商城）",
+            "unit": "1.13kg",
+            "amount": 1250,
+            "note": "蝦皮商城 · 15 天鑑賞期 · 免運無限次",
+            "affiliateUrl": "https://s.shopee.tw/6fhEJHh3NA",
+            "anchor": "safe"
+          },
+          {
+            "id": "m2",
+            "label": "H&R安室家（蝦皮商城）",
+            "unit": "2kg",
+            "amount": 1699,
+            "note": "蝦皮商城 · 15 天鑑賞期 · 免運無限次",
+            "affiliateUrl": "https://s.shopee.tw/6fhEJHh3NA",
+            "anchor": "value"
+          },
+          {
+            "id": "m3",
+            "label": "H&R安室家（蝦皮商城）",
+            "unit": "5.4kg",
+            "amount": 3650,
+            "note": "蝦皮商城 · 15 天鑑賞期 · 免運無限次",
+            "affiliateUrl": "https://s.shopee.tw/6fhEJHh3NA",
+            "anchor": "value"
+          }
+        ]
       },
       "dealbreaker": "你的貓對雞肉過敏。品名把火雞寫在前面，有的賣場甚至只寫火雞，但成分表第一項是去骨雞肉，第三項是雞肉粉。",
       "knownIssues": "肉只有雞、火雞跟蛋，不含魚，對魚過敏的貓可以看看。扁豆、豌豆、鷹嘴豆排在前段。紐頓沒有公布灰分，碳水是用灰分 8% 推估的。",
-      "awaitingLink": true,
       "searchAs": "紐頓 Nutram T22 無穀 火雞 雞肉 挑嘴全齡貓",
       "twSource": "https://petpetgo.com/product/25686"
     },
