@@ -12,7 +12,7 @@ import { CONTACT } from "@/lib/contact";
  *
  * 他是對的。拚命證明自己沒有動機，反而一直在提醒讀者「這個人有動機」。
  * 讀者點進來，想知道的只有兩件事：你們憑什麼刪、資料可不可靠。
- * 所以這一頁只講這兩件事，利益關係照規矩揭露一句，放在最後，不加粗、不解釋。
+ * 所以這一頁只講這兩件事。利益關係照規矩揭露一句，全站統一放在每頁最底下，不加粗、不解釋。
  *
  * 結構上的保證（排序讀不到佣金、連欄位都沒有）還是真的，寫在 lib/engine.ts 的註解裡，給我們自己看。
  */
@@ -50,11 +50,8 @@ export default function Page() {
         )}
       </Point>
 
-      <p style={{ margin: "40px 0 0", fontSize: 13, color: "var(--faint)", lineHeight: 1.9 }}>
-        網站上的購買連結是聯盟行銷連結，透過連結下單，你付的價格一樣。
-      </p>
-
-      <p style={{ marginTop: 28 }}>
+      {/* 利益關係的那一句在每頁最底下（components/PageReport.tsx），這裡不再講第二次 */}
+      <p style={{ marginTop: 36 }}>
         <Link href="/" style={{ color: "var(--accent)", fontWeight: 700 }}>← 回裁決器</Link>
       </p>
     </main>
