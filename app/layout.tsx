@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Noto_Sans_TC, Noto_Serif_TC, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
+import PageReport from "@/components/PageReport";
 
 const sans = Noto_Sans_TC({
   subsets: ["latin"],
@@ -32,7 +33,7 @@ export const metadata: Metadata = {
     template: "%s · ZONE 27",
   },
   description:
-    "你把狗的狀況講完，我們先幫你刪掉不適合的，剩下的才給你看。每一款都寫清楚什麼時候不要買。",
+    "你把狗或貓的狀況講完，我們先幫你刪掉不適合的，剩下的才給你看。每一款都寫清楚什麼時候不要買。",
   openGraph: { type: "website", locale: "zh_TW", siteName: "ZONE 27" },
   robots: { index: true, follow: true },
 };
@@ -43,7 +44,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       lang="zh-Hant-TW"
       className={`${sans.variable} ${serif.variable} ${mono.variable}`}
     >
-      <body>{children}</body>
+      <body>
+        {children}
+        <PageReport />
+      </body>
     </html>
   );
 }

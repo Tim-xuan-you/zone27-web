@@ -3,6 +3,7 @@ import Link from "next/link";
 import { S } from "@/components/styles";
 import data from "@/data/hidden-chicken.json";
 import SiteHeader from "@/components/SiteHeader";
+import { claimReport } from "@/lib/contact";
 
 /**
  * 「標榜低敏但含雞肉」。
@@ -159,6 +160,12 @@ export default function Page() {
                 {s.label} ↗
               </a>
             ))}
+            {claimReport("/dog-food/hidden-chicken", `${c.id} ${c.brand} ${c.name}`) && (
+              <a
+                href={claimReport("/dog-food/hidden-chicken", `${c.id} ${c.brand} ${c.name}`)!}
+                style={{ display: "inline-block", marginTop: 6, fontSize: 12.5, color: "var(--faint)", textDecoration: "underline", textUnderlineOffset: 3 }}
+              >這一筆寫錯了？跟我們說</a>
+            )}
           </div>
         </article>
       ))}

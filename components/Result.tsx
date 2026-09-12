@@ -6,6 +6,7 @@ import {
 } from "@/lib/engine";
 import { priceStat, timingAdvice } from "@/lib/history";
 import type { Product, Verdict } from "@/lib/types";
+import { linkReport } from "@/lib/contact";
 import { S } from "./styles";
 
 /**
@@ -254,6 +255,7 @@ function Answer({
             <span style={S.buyNote}>{main.options[0].note || main.label}</span>
           </div>
         )}
+        {main && <ReportLine p={p} where={whereOf(main, p.price.checkedAt)} />}
       </div>
 
       <div style={S.deal}>
@@ -440,6 +442,7 @@ function Alt({ p, dogKg, stage, multi }: { p: Product; dogKg?: number; stage?: S
             >去{main.label.replace(/（.*/, "")}買</a>
           </div>
         )}
+        {main && <ReportLine p={p} where={whereOf(main, p.price.checkedAt)} />}
       </div>
 
       <div style={S.deal}>
@@ -536,6 +539,7 @@ function Stores({ p, dogKg, stage }: { p: Product; dogKg?: number; stage?: Stage
           {store.options[0]?.note && (
             <p style={S.storeNote}>{store.options[0].note}</p>
           )}
+          <ReportLine p={p} where={whereOf(store, p.price.checkedAt)} short />
         </div>
       ))}
 
@@ -561,6 +565,30 @@ function Stores({ p, dogKg, stage }: { p: Product; dogKg?: number; stage?: Stage
       })()}
     </>
   );
+}
+
+/**
+ * 「連結有問題？」那一行。
+ *
+ * 放在讀者發現問題的那個位置：他點進賣場發現賣完、跳到別的商品、價格差很多，
+ * 回到這一頁的時候，按鈕就在剛剛那顆購買按鈕底下。信件內容自動帶好是哪一款、哪一家、哪個規格。
+ */
+function ReportLine({ p, where, short }: { p: Product; where: string; short?: boolean }) {
+  const href = linkReport(p, where);
+  if (!href) return null;
+  return (
+    <p style={{ margin: short ? "8px 0 0" : "10px 0 0", fontSize: 12.5, color: "var(--faint)" }}>
+      <a href={href} style={{ color: "var(--faint)", textDecoration: "underline", textUnderlineOffset: 3 }}>
+        {short ? "這家有問題？跟我們說" : "點進去發現賣完、或規格對不上？跟我們說"}
+      </a>
+    </p>
+  );
+}
+
+/** 信裡「賣場」那一行：哪一家、哪幾個規格、多少錢、哪天查的價 */
+function whereOf(store: { label: string; options: { unit: string; amount: number }[] }, checkedAt: string): string {
+  const opts = store.options.map((o) => `${o.unit} $${o.amount}`).join("、");
+  return `${store.label}｜${opts}（查價 ${checkedAt}）`;
 }
 
 /**

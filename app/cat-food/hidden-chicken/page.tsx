@@ -3,6 +3,7 @@ import Link from "next/link";
 import SiteHeader from "@/components/SiteHeader";
 import { S } from "@/components/styles";
 import data from "@/data/cat-hidden-chicken.json";
+import { claimReport } from "@/lib/contact";
 
 /**
  * 貓飼料版的「名字寫別的肉，成分表裡有雞」。
@@ -136,7 +137,7 @@ export default function Page() {
             }}>{c.note}</p>
           )}
 
-          <Sources checkedAt={c.checkedAt} sources={c.sources} />
+          <Sources checkedAt={c.checkedAt} sources={c.sources} item={`${c.id} ${c.brand} ${c.name}`} />
         </article>
       ))}
 
@@ -152,7 +153,7 @@ export default function Page() {
             {c.found.map((f, i) => <li key={i}>{f}</li>)}
           </ul>
           <p style={{ margin: "0 0 14px", fontSize: 16, fontWeight: 700, lineHeight: 1.75 }}>{c.verdict}</p>
-          <Sources checkedAt={c.checkedAt} sources={c.sources} />
+          <Sources checkedAt={c.checkedAt} sources={c.sources} item={`${c.id} ${c.brand} ${c.name}`} />
         </article>
       ))}
 
@@ -219,7 +220,8 @@ export default function Page() {
   );
 }
 
-function Sources({ checkedAt, sources }: { checkedAt: string; sources: { label: string; url: string }[] }) {
+function Sources({ checkedAt, sources, item }: { checkedAt: string; sources: { label: string; url: string }[]; item: string }) {
+  const report = claimReport("/cat-food/hidden-chicken", item);
   return (
     <div style={{ borderTop: "1px solid var(--line)", paddingTop: 12 }}>
       <p style={{ margin: "0 0 6px", fontSize: 12, color: "var(--faint)" }}>
@@ -236,6 +238,12 @@ function Sources({ checkedAt, sources }: { checkedAt: string; sources: { label: 
           {s.label} ↗
         </a>
       ))}
+      {report && (
+        <a
+          href={report}
+          style={{ display: "inline-block", marginTop: 6, fontSize: 12.5, color: "var(--faint)", textDecoration: "underline", textUnderlineOffset: 3 }}
+        >這一筆寫錯了？跟我們說</a>
+      )}
     </div>
   );
 }
