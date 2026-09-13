@@ -129,10 +129,20 @@ const cheapestIn = (ms: Merchant[]): Merchant => ms.reduce((best, m) => (m.amoun
 function sizeGroups(p: Product): Merchant[][] {
   const live = liveMerchants(p);
   const groups: { kg: number; packs: number; ms: Merchant[] }[] = [];
+  /*
+   * 罐頭照「一罐幾克、幾罐」分，不看總重：80g×24（1.92 公斤）跟 165g×12（1.98 公斤）
+   * 總重只差 3%，但一個是 24 小罐、一個是 12 大罐，是兩種東西。
+   * 乾糧的 packs 是幾包組；罐頭拿「一罐幾克」當 kg、「幾罐」當 packs，比法一樣
+   */
+  const sizeOf = (m: Merchant) => {
+    const unit = unitOf(p, m);
+    const can = formOf(p) === "wet" ? cansOf(unit) : null;
+    return can ? { kg: can.g / 1000, packs: can.n, total: (can.g * can.n) / 1000 } : { kg: kgOf(unit), packs: packsOf(unit), total: kgOf(unit) };
+  };
   const items = live
-    .map((m, i) => ({ m, i, kg: kgOf(unitOf(p, m)), packs: packsOf(unitOf(p, m)) }))
-    .filter((x): x is { m: Merchant; i: number; kg: number; packs: number } => x.kg !== null)
-    .sort((a, b) => a.kg - b.kg || a.i - b.i);
+    .map((m, i) => ({ m, i, ...sizeOf(m) }))
+    .filter((x): x is { m: Merchant; i: number; kg: number; packs: number; total: number } => x.kg !== null && x.total !== null)
+    .sort((a, b) => a.total - b.total || a.i - b.i);
   for (const x of items) {
     const g = groups.find((g) => g.packs === x.packs && sameSize(g.kg, x.kg));
     if (g) g.ms.push(x.m);

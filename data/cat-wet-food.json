@@ -110,12 +110,52 @@
       },
       "price": {
         "unit": "80g",
-        "checkedAt": "2026-09-12",
-        "merchants": []
+        "checkedAt": "2026-09-13",
+        "merchants": [
+          {
+            "id": "m1",
+            "label": "汪喵星球官方商城",
+            "unit": "80g",
+            "amount": 46,
+            "note": "規格選「低敏鴨肉 80g」 · 一頁多款 · 店到店滿 199 免運",
+            "affiliateUrl": "https://s.shopee.tw/9fKqzBwdkA",
+            "anchor": "safe",
+            "checkedAt": "2026-09-13"
+          },
+          {
+            "id": "m2",
+            "label": "汪喵星球官方商城",
+            "unit": "80g×24",
+            "amount": 1100,
+            "note": "規格選「低敏鴨肉一箱 80g*24罐」 · 一頁多款 · 店到店滿 199 免運",
+            "affiliateUrl": "https://s.shopee.tw/9peHBUw0PD",
+            "anchor": "value",
+            "checkedAt": "2026-09-13"
+          },
+          {
+            "id": "m3",
+            "label": "汪喵星球官方商城",
+            "unit": "165g",
+            "amount": 79,
+            "note": "規格選「低敏鴨肉 165g」 · 一頁多款 · 店到店滿 199 免運",
+            "affiliateUrl": "https://s.shopee.tw/9fKqzBwdkA",
+            "anchor": "value",
+            "checkedAt": "2026-09-13"
+          },
+          {
+            "id": "m4",
+            "label": "汪喵星球官方商城",
+            "unit": "165g×12",
+            "amount": 948,
+            "note": "規格選「低敏鴨肉一箱 165g*12罐」 · 一頁多款 · 店到店滿 199 免運",
+            "affiliateUrl": "https://s.shopee.tw/9peHBUw0PD",
+            "anchor": "value",
+            "checkedAt": "2026-09-13"
+          }
+        ]
       },
       "dealbreaker": "你的貓對雞過敏。名字寫低敏鴨肉，成分表第二項就是雞肉，第三項是雞心肝。",
       "knownIssues": "「低敏」是品牌的說法。除了鴨和雞，還有雞蛋黃、蜆、魚油。同一系列七種口味我們都看了，每一種的前兩項都有雞（雞肉或雞心肝）。小麥草是小麥的嫩葉，不是穀粒。碳水 1% 是品牌公布的。標示沒寫適用年齡，我們先當成貓用。",
-      "awaitingLink": true,
       "searchAs": "汪喵星球 98% 鮮肉無膠主食罐 低敏鴨肉 80g"
     },
     {
