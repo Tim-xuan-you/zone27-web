@@ -523,7 +523,7 @@
         "pulses": "high",
         "grainFree": true,
         "lifeStage": [
-          "adult"
+          "all"
         ],
         "bodySize": [
           "small",

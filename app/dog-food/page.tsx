@@ -4,6 +4,8 @@ import { S } from "@/components/styles";
 import { ALLERGENS, BREEDS } from "@/lib/slugs";
 import SiteHeader from "@/components/SiteHeader";
 import Decider from "@/components/Decider";
+import ProductIndex from "@/components/ProductIndex";
+import { catalogOf } from "@/lib/catalog";
 
 export const metadata: Metadata = {
   title: "狗飼料怎麼選",
@@ -84,6 +86,8 @@ export default function Index() {
           一直抓癢的狗裡只有約 18% 是食物造成的。要確認得跑滿八週，而且最後要回測。
         </p>
       </Link>
+
+      <ProductIndex products={catalogOf("dog")} />
 
       <p style={S.lbl}>按過敏原</p>
       <div style={S.relRow}>

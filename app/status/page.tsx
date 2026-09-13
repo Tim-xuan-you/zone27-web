@@ -11,6 +11,7 @@ import type { Form, Product, ProteinSource, Situation, Species } from "@/lib/typ
 import { impactMap, overallCutRate, ruleAudit, TIER_WEIGHT, type Impact } from "@/lib/impact";
 import health from "@/data/link-health.json";
 import storeReg from "@/data/stores.json";
+import { productHref } from "@/lib/labels";
 
 /**
  * 維護台。給 Tim 一個人看的，不給讀者、不給搜尋引擎。
@@ -527,7 +528,7 @@ function AllLinks() {
             <div key={p.id + m.id} style={{ ...line, borderTop: "1px solid var(--line)" }}>
               <div style={{ flex: 1, minWidth: 190 }}>
                 <span style={{ display: "block", fontSize: 12.5, color: "var(--muted)" }}>
-                  {p.id} · {p.brand}
+                  <Link href={productHref(p)} style={{ color: "inherit" }}>{p.id}</Link> · {p.brand}
                   {/* 主要＝卡片上那個按鈕；備援＝收在「其他規格與價格」裡，主要的壞了就自動頂上 */}
                   <b style={{ marginLeft: 8, color: m.dead ? "var(--cut)" : roleOf(p, m) === "主要" ? "var(--keep)" : "var(--muted)" }}>
                     {m.dead ? "失效（讀者看不到）" : roleOf(p, m)}

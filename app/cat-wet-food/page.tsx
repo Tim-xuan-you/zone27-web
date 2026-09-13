@@ -4,6 +4,7 @@ import Decider from "@/components/Decider";
 import SiteHeader from "@/components/SiteHeader";
 import { S } from "@/components/styles";
 import { catalogOf, isLive, liveCount, shopLink } from "@/lib/catalog";
+import { productHref } from "@/lib/labels";
 import { MIN_LIVE } from "@/lib/categories";
 import { cansOf, canWord, mer, recommendable } from "@/lib/engine";
 import type { Product, ProteinSource } from "@/lib/types";
@@ -157,7 +158,9 @@ function Row({ p, live }: { p: Product; live: boolean }) {
   return (
     <article style={row}>
       <span style={S.brand}>{p.brand}</span>
-      <h3 style={{ fontSize: 17.5, lineHeight: 1.5, margin: "2px 0 10px" }}>{p.name}</h3>
+      <h3 style={{ fontSize: 17.5, lineHeight: 1.5, margin: "2px 0 10px" }}>
+        <Link href={productHref(p)} style={{ color: "inherit", textDecoration: "none" }}>{p.name}</Link>
+      </h3>
 
       <div style={tags}>
         <span style={side ? { ...tag, ...tagWarn } : { ...tag, ...tagGood }}>{side ? "副食罐" : "主食罐"}</span>

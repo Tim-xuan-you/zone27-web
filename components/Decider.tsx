@@ -1,11 +1,14 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { parse } from "@/lib/parse";
-import { adjudicate, stageForAge, type Stage } from "@/lib/engine";
+import { adjudicate, formOf, stageForAge, type Stage } from "@/lib/engine";
+import { mentionedProducts } from "@/lib/mentions";
+import { productHref } from "@/lib/labels";
 import { catalog, catalogOf, constraintsFor, isLive } from "@/lib/catalog";
 import { CATEGORIES, categoriesOf, categoryOf, type CategorySlug } from "@/lib/categories";
-import type { Form, Species, Verdict } from "@/lib/types";
+import type { Form, Product, Species, Verdict } from "@/lib/types";
 import { CONTACT } from "@/lib/contact";
 import Result from "./Result";
 import { S } from "./styles";
@@ -79,6 +82,8 @@ export default function Decider({
   const [dogKg, setDogKg] = useState<number | undefined>(undefined);
   const [symptoms, setSymptoms] = useState<string[]>([]);
   const [stage, setStage] = useState<Stage>("adultFixed");
+  // 句子裡提到的商品（「我家吃紐頓 T22」），連同它照這句話的條件會不會被刪
+  const [mentions, setMentions] = useState<Mention[]>([]);
 
   const cat = categoryOf(species, form);
   const forms = categoriesOf(species);
@@ -91,11 +96,15 @@ export default function Decider({
     const src = input.trim() || EXAMPLES[slug][0];
     setText(src);
     const parsed = parse(src, sp, f);
+    const found = mentionedProducts(src, parsed.speciesFromText ? parsed.situation.species : undefined);
 
     if (parsed.empty) {
-      setEmpty(true);
+      // 只打了品名、沒講狀況：直接給那一款，不要回「讀不出條件」
+      setEmpty(found.length === 0);
       setVerdict(null);
       setChips([]);
+      setMentions(found.map((p) => ({ p, text: "講一下牠的狀況（年紀、過敏、症狀），我們會告訴你這款適不適合。", tone: "faint" })));
+      if (found.length) scrollTo("mentions");
       return;
     }
     const s = parsed.situation;
@@ -111,9 +120,15 @@ export default function Decider({
     setDogKg(s.weightKg);
     setSymptoms(s.symptoms);
     setStage(stageForAge(s.ageYears, s.species));
-    setVerdict(adjudicate(catalog, s));
+    const v = adjudicate(catalog, s);
+    setVerdict(v);
+    setMentions(found.map((p) => judge(p, v, s.species, s.form ?? "dry")));
+    scrollTo(found.length ? "mentions" : "verdict");
+  }
+
+  function scrollTo(id: string) {
     requestAnimationFrame(() => {
-      document.getElementById("verdict")?.scrollIntoView({
+      document.getElementById(id)?.scrollIntoView({
         behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
         block: "start",
       });
@@ -217,6 +232,24 @@ export default function Decider({
         )}
       </p>
 
+      {mentions.length > 0 && (
+        <div id="mentions" style={{ marginTop: 28 }}>
+          <p style={S.lbl}>你提到的</p>
+          <div style={{ display: "grid", gap: 10 }}>
+            {mentions.map((m) => (
+              <Link key={m.p.id} href={productHref(m.p)} style={mentionRow}>
+                <span style={{ fontSize: 12.5, color: "var(--muted)" }}>{m.p.brand}</span>
+                <span style={{ display: "block", fontSize: 16, fontWeight: 700, lineHeight: 1.5 }}>{m.p.name}</span>
+                <span style={{ display: "block", marginTop: 4, fontSize: 14, lineHeight: 1.7, color: `var(--${m.tone})`, fontWeight: m.tone === "faint" ? 400 : 700 }}>
+                  {m.text}
+                </span>
+                <span style={{ display: "block", marginTop: 4, fontSize: 13, color: "var(--accent)" }}>看這一款 →</span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      )}
+
       {empty && (
         <div style={S.emptyBox}>
           <p style={{ margin: 0, fontWeight: 700 }}>這句話我們讀不出條件</p>
@@ -255,6 +288,29 @@ export default function Decider({
     </>
   );
 }
+
+type Mention = { p: Product; text: string; tone: "keep" | "cut" | "faint" };
+
+/**
+ * 提到的那一款，照這句話的條件會怎樣。
+ * 刪掉的講是哪一刀刪的；留下來的講有沒有被推薦。這比給一張商品卡有用：他要的是「我家這包行不行」。
+ */
+function judge(p: Product, v: Verdict, species: Species, form: Form): Mention {
+  if (p.species !== species || formOf(p) !== form) {
+    return { p, text: `這款是${categoryOf(p.species, formOf(p)).zh}，跟上面問的不是同一類。`, tone: "faint" };
+  }
+  if (v.stop) return { p, text: "這一題我們先不推薦商品，原因寫在下面。", tone: "faint" };
+  if (v.pick?.id === p.id) return { p, text: "照你講的條件，這款就是我們推薦的那一款。", tone: "keep" };
+  if (v.survivors.some((x) => x.id === p.id)) return { p, text: "照你講的條件，這款沒問題，在下面「還有幾款」裡。", tone: "keep" };
+  const cut = v.cuts.find((c) => c.ids.includes(p.id));
+  if (cut && cut.tag !== "通路") return { p, text: `照你講的條件，這款會被刪：${cut.why}。`, tone: "cut" };
+  return { p, text: p.referenceOnly ? "這款我們不推薦，放進來是為了比較。" : "這款的購買連結還在補。", tone: "faint" };
+}
+
+const mentionRow: React.CSSProperties = {
+  display: "block", background: "var(--surface)", border: "1px solid var(--line)",
+  borderRadius: 14, boxShadow: "var(--sh)", padding: "14px 18px", textDecoration: "none", color: "inherit",
+};
 
 const seg: React.CSSProperties = {
   display: "inline-flex", gap: 4, padding: 4,

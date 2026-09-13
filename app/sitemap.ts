@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
-import { isLive } from "@/lib/catalog";
+import { catalog, isLive } from "@/lib/catalog";
+import { productHref } from "@/lib/labels";
 import { allPaths } from "@/lib/slugs";
 
 const BASE = "https://zone27.com.tw";
@@ -43,6 +44,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE}/cat-wet-food/how-much`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
     { url: `${BASE}/dog-food/grain-free`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
     { url: `${BASE}/dog-food/elimination-diet`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
+    // 每一款的商品頁：搜品名的人（「紐頓 T22 有雞嗎」）意圖最明確
+    ...catalog.map((p) => ({
+      url: `${BASE}${productHref(p)}`, lastModified: now, changeFrequency: "weekly" as const, priority: 0.7,
+    })),
     ...longtail("dog-food", allPaths("dog")),
     ...(isLive("cat") ? longtail("cat-food", allPaths("cat")) : []),
   ];

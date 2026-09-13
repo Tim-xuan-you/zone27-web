@@ -9,6 +9,7 @@ import { categoryOf } from "@/lib/categories";
 import { priceStat, timingAdvice } from "@/lib/history";
 import type { Product, Verdict } from "@/lib/types";
 import { linkReport } from "@/lib/contact";
+import { productHref } from "@/lib/labels";
 import { S } from "./styles";
 
 /**
@@ -222,7 +223,9 @@ function Answer({
     <article style={S.answer}>
       <div style={S.answerBody}>
         <span style={S.brand}>{p.brand}</span>
-        <h2 style={S.answerName}>{p.name}</h2>
+        <h2 style={S.answerName}>
+          <Link href={productHref(p)} style={nameLink}>{p.name}</Link>
+        </h2>
 
         <div style={S.priceRow}>
           <span style={S.price} className="mono">${safe.amount}</span>
@@ -446,7 +449,9 @@ function Alt({ p, dogKg, stage, multi }: { p: Product; dogKg?: number; stage?: S
     <article style={S.card}>
       <div style={S.cardH}>
         <span style={S.brand}>{p.brand}</span>
-        <h3 style={S.pname}>{p.name}</h3>
+        <h3 style={S.pname}>
+          <Link href={productHref(p)} style={nameLink}>{p.name}</Link>
+        </h3>
         <div style={S.priceRow}>
           <span style={{ ...S.price, fontSize: 22 }} className="mono">${safe.amount}</span>
           <span style={S.perKg} className="mono">
@@ -487,6 +492,67 @@ function Alt({ p, dogKg, stage, multi }: { p: Product; dogKg?: number; stage?: S
     </article>
   );
 }
+
+/* ------------------------------------------------------------------ */
+/* 商品頁的卡片                                                        */
+/*                                                                    */
+/* 跟備選卡同一套零件（價格、購買按鈕、什麼時候不要買、各家規格），    */
+/* 只差在品名放在頁面的 H1，這裡不再寫一次；各家規格直接攤開不收起來， */
+/* 讀者點進商品頁就是來看這些的。                                      */
+/* ------------------------------------------------------------------ */
+
+export function ProductCard({ p }: { p: Product }) {
+  const safe = anchorOf(p, "safe");
+  const up = unitPrice(p, unitOf(p, safe), safe.amount);
+  const main = storesOf(p)[0];
+  const multi = sharedListings([p]);
+
+  return (
+    <article style={S.card}>
+      <div style={S.cardH}>
+        <div style={S.priceRow}>
+          <span style={{ ...S.price, fontSize: 26 }} className="mono">${safe.amount}</span>
+          <span style={S.perKg} className="mono">
+            {unitOf(p, safe)}{up && ` · ${up}`}
+          </span>
+        </div>
+        {freshness(checkedOf(p, safe)).note && (
+          <p style={S.freshNote}>{freshness(checkedOf(p, safe)).note}</p>
+        )}
+        <SpecChips p={p} />
+        {main && (
+          <div style={{ ...S.buyRow, marginTop: 20 }}>
+            <a style={S.btnBuy} href={`/go/${main.options[0].id}/${p.id}`} rel="nofollow sponsored">
+              去{main.label.replace(/（.*/, "")}買
+            </a>
+            <span style={S.buyNote}>{variantOf(main.options[0]) ? "" : main.options[0].note || main.label}</span>
+          </div>
+        )}
+        {main && <ReportLine p={p} where={whereOf(main, checkedOf(p, safe))} />}
+      </div>
+
+      <div style={S.deal}>
+        <p style={S.dealHead}>✕　這款什麼時候不要買</p>
+        <p style={S.dealBody}>{p.dealbreaker}</p>
+      </div>
+
+      {manyInOne(safe, multi) && (
+        <p style={{ ...S.variantWarn, borderRadius: 0 }}>
+          ⚠️ 這個賣場一頁多口味。點進去請自己把規格選成
+          <b>「{variantOf(safe) ?? p.name}」</b>，預設的不一定是這個喔。
+        </p>
+      )}
+
+      <div style={{ padding: `8px ${24}px ${24}px` }}>
+        <p style={{ ...S.lbl, margin: "8px 0 4px" }}>每一家的規格與價格</p>
+        <Stores p={p} />
+        {p.knownIssues && <Issues text={p.knownIssues} />}
+      </div>
+    </article>
+  );
+}
+
+const nameLink: React.CSSProperties = { color: "inherit", textDecoration: "none" };
 
 /* ------------------------------------------------------------------ */
 /* 共用零件                                                            */
