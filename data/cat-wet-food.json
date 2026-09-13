@@ -579,12 +579,22 @@
         "merchants": [
           {
             "id": "m1",
+            "label": "毛孩寵物鋪",
+            "unit": "85g",
+            "amount": 41,
+            "note": "規格選「老貓11+歲濕糧A30+11W 85G」 · 一頁多款 · 店到店滿 199 免運",
+            "affiliateUrl": "https://s.shopee.tw/2Vrgr1Khy5",
+            "anchor": "safe",
+            "checkedAt": "2026-09-13"
+          },
+          {
+            "id": "m2",
             "label": "萬倍富寵物用品店（蝦皮商城）",
             "unit": "85g",
             "amount": 48,
             "note": "規格選「11歲老貓主食餐包 A30+11W」 · 一頁多款 · 店到店滿 199 免運",
             "affiliateUrl": "https://s.shopee.tw/1gIZrUNsey",
-            "anchor": "safe",
+            "anchor": "value",
             "checkedAt": "2026-09-13"
           }
         ]
