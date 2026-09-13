@@ -532,16 +532,46 @@
         "merchants": [
           {
             "id": "m1",
-            "label": "米腸家寵物用品",
-            "unit": "185g",
-            "amount": 172,
-            "note": "規格選「羊肉185g」 · 一頁多款 · 店到店滿 199 免運",
-            "affiliateUrl": "https://s.shopee.tw/AUtxzsGPoA",
+            "label": "ZIWI滋益巔峰 台灣官方旗艦店（蝦皮商城）",
+            "unit": "185g×3",
+            "amount": 552,
+            "note": "規格選「羊肉」 · 一頁多款 · 店到店滿 199 免運",
+            "affiliateUrl": "https://s.shopee.tw/AKaXnZH399",
             "anchor": "safe",
             "checkedAt": "2026-09-13"
           },
           {
             "id": "m2",
+            "label": "ZIWI滋益巔峰 台灣官方旗艦店（蝦皮商城）",
+            "unit": "185g×12",
+            "amount": 2760,
+            "note": "規格選「羊肉185g12件組」 · 一頁多款 · 店到店滿 199 免運",
+            "affiliateUrl": "https://s.shopee.tw/9V1Qo2KDq0",
+            "anchor": "value",
+            "checkedAt": "2026-09-13"
+          },
+          {
+            "id": "m3",
+            "label": "ZIWI滋益巔峰 台灣官方旗艦店（蝦皮商城）",
+            "unit": "85g×6",
+            "amount": 822,
+            "note": "規格選「羊肉」 · 一頁多款 · 店到店滿 199 免運",
+            "affiliateUrl": "https://s.shopee.tw/9Ki0bjKrAz",
+            "anchor": "value",
+            "checkedAt": "2026-09-13"
+          },
+          {
+            "id": "m4",
+            "label": "米腸家寵物用品",
+            "unit": "185g",
+            "amount": 172,
+            "note": "規格選「羊肉185g」 · 一頁多款 · 店到店滿 199 免運",
+            "affiliateUrl": "https://s.shopee.tw/AUtxzsGPoA",
+            "anchor": "value",
+            "checkedAt": "2026-09-13"
+          },
+          {
+            "id": "m5",
             "label": "Petizen寵物公民旗艦店（蝦皮商城）",
             "unit": "85g",
             "amount": 159,
@@ -551,7 +581,7 @@
             "checkedAt": "2026-09-13"
           },
           {
-            "id": "m3",
+            "id": "m6",
             "label": "Petizen寵物公民旗艦店（蝦皮商城）",
             "unit": "185g",
             "amount": 205,

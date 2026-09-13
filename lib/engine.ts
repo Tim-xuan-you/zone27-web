@@ -192,6 +192,34 @@ export function sizeFloor(p: Product, m: Merchant): number | null {
 }
 
 /**
+ * 整組拆開算，一罐（一包）比單買同樣大小的還貴多少。
+ *
+ * 大多數時候整箱比較便宜，但不一定：巔峰羊肉 185g 十二件組 $2,760，一罐 $230，
+ * 同一家三入一罐 $184，別家單買一罐 $172。只拿最小包比，會寫「每克省 34%」，
+ * 讀者看了以為十二件最划算。
+ * 沒有單買的、或整組沒有比較貴（差 3% 以內算一樣），回 null。
+ */
+export function overSingle(p: Product, unit: string, amount: number): { each: number; single: number; word: string } | null {
+  const wet = formOf(p) === "wet";
+  const can = wet ? cansOf(unit) : null;
+  const n = wet ? can?.n ?? 1 : packsOf(unit);
+  if (n <= 1) return null;
+  // 一罐（一包）幾公斤
+  const one = wet ? (can ? can.g / 1000 : 0) : (kgOf(unit) ?? 0) / n;
+  if (!one) return null;
+  const singles = sizesOf(p).filter((r) => {
+    const c = wet ? cansOf(r.unit) : null;
+    const rn = wet ? c?.n ?? 1 : packsOf(r.unit);
+    const rk = wet ? (c ? c.g / 1000 : 0) : kgOf(r.unit) ?? 0;
+    return rn === 1 && rk > 0 && sameSize(rk, one);
+  });
+  if (singles.length === 0) return null;
+  const single = Math.min(...singles.map((r) => r.best.amount));
+  const each = Math.round(amount / n);
+  return each > single * 1.03 ? { each, single, word: wet ? canWord(p) : "包" } : null;
+}
+
+/**
  * 跑一次裁決。
  * 約束按傳入順序套用 —— 順序會直接變成畫面上「怎麼刪的」那一段，
  * 所以呼叫端要把最重要、最切身的規則放前面（通常是過敏原）。

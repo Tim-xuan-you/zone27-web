@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Remind from "./Remind";
 import {
-  anchorOf, bagDuration, canPlan, canWord, cansOf, checkedOf, formOf, freshness, mer, packsOf, sharedListings, sizesOf,
+  anchorOf, bagDuration, canPlan, canWord, cansOf, checkedOf, formOf, freshness, mer, overSingle, packsOf, sharedListings, sizesOf,
   storesOf, trialPlan, unitOf, unitPrice, wetMonthly,
   FRESH_DAYS, type Stage,
 } from "@/lib/engine";
@@ -588,9 +588,12 @@ function Stores({ p, dogKg, stage }: { p: Product; dogKg?: number; stage?: Stage
               // 罐頭講「每罐」：同樣大小的罐子，每罐省幾 % 就是每公斤省幾 %。罐子大小不一樣就講「每克」
               const per = formOf(p) !== "wet" ? "每公斤" : cansOf(o.unit)?.g === baseG ? "每罐" : "每克";
               // 同一包別家比較便宜，就只講這個。旁邊明明有一家便宜 $581，還寫「每公斤省 3%」是誤導
+              const over = overSingle(p, o.unit, o.amount);
               const save =
                 o.overFloor > 0
                   ? { text: `同一包別家便宜 $${o.overFloor}`, tone: "cut" as const }
+                  : over
+                  ? { text: `一${over.word} $${over.each}，比單買一${over.word}貴 $${over.each - over.single}`, tone: "cut" as const }
                   : o.savingPct === null || Math.abs(o.savingPct) < 3
                   ? o.savingPct === null ? null : { text: `${per}差不多`, tone: "faint" as const }
                   : o.savingPct > 0
@@ -829,6 +832,15 @@ function SizeTable({ p, weightKg, stage, said }: { p: Product; weightKg?: number
   // 罐頭：同樣大小的罐子比「每罐」；85g 跟 185g 比，一罐本來就差一倍，要比「每克」
   const g0 = wet ? cansOf(rows[0].unit)?.g : undefined;
   const perOf = (unit: string) => (!wet ? "每公斤" : cansOf(unit)?.g === g0 ? "每罐" : "每克");
+  // 罐頭沒開放得住，沒有「吃不完」的問題：最划算就是每克最便宜的那一行
+  let cheapestWet: number | null = null;
+  if (wet) {
+    for (let i = 0; i < rows.length; i++) {
+      const pk = rows[i].perKg;
+      if (pk !== null && (cheapestWet === null || pk < (rows[cheapestWet].perKg ?? Infinity))) cheapestWet = i;
+    }
+  }
+  const sameCan = wet && rows.every((r) => cansOf(r.unit)?.g === g0);
   return (
     <div>
       <p style={{ ...S.lbl, margin: "22px 0 4px" }}>{oneStore ? "每一種大小" : "每一種大小，最便宜的一家"}</p>
@@ -838,17 +850,25 @@ function SizeTable({ p, weightKg, stage, said }: { p: Product; weightKg?: number
         const up = unitPrice(p, r.unit, r.best.amount);
         const notes = ownNotes(r.best.note);
         const variant = variantOf(r.best);
-        const save = r.savingPct !== null && Math.abs(r.savingPct) >= 3 ? r.savingPct : null;
+        // 整組比單買還貴，就只講這個。旁邊再寫「每克省 34%」，讀者只會記得綠色那句
+        const over = overSingle(p, r.unit, r.best.amount);
+        const save = !over && r.savingPct !== null && Math.abs(r.savingPct) >= 3 ? r.savingPct : null;
         return (
           <a key={r.best.id} href={`/go/${r.best.id}/${p.id}`} rel="nofollow sponsored" style={szRow}>
             <span className="mono" style={szUnit}>{r.unit}</span>
             <span className="mono" style={szAmt}>${r.best.amount.toLocaleString()}</span>
             <span aria-hidden style={szChev}>›</span>
             <span style={szStore}>{oneStore ? notes : `${r.best.label}${notes ? ` · ${notes}` : ""}`}</span>
-            <span className="mono" style={szPer}>{up}</span>
-            {(best === i || d || save !== null || variant) && (
+            <span className="mono" style={over ? { ...szPer, color: "var(--cut)" } : szPer}>{up}</span>
+            {(best === i || cheapestWet === i || over || d || save !== null || variant) && (
               <span style={szMeta}>
                 {best === i && <b style={{ color: "var(--accent)" }}>{who}買這包最划算</b>}
+                {cheapestWet === i && <b style={{ color: "var(--accent)" }}>{sameCan ? "每罐最便宜" : "每克最便宜"}</b>}
+                {over && (
+                  <span style={{ color: "var(--cut)" }}>
+                    一{over.word} ${over.each}，比單買一{over.word}貴 ${over.each - over.single}
+                  </span>
+                )}
                 {save !== null && (
                   <span style={{ color: save > 0 ? "var(--keep)" : "var(--cut)" }}>
                     {save > 0 ? `${perOf(r.unit)}省 ${save}%` : `${perOf(r.unit)}反而貴 ${-save}%`}
