@@ -250,7 +250,7 @@ function Answer({
         {safe && (
           <div style={S.buyRow}>
             <a style={S.btnBuy} href={`/go/${safe.id}/${p.id}`} rel="nofollow sponsored">
-              {buyLabel(safe)}
+              {buyLabel(safe, false, p)}
             </a>
             <span style={S.buyNote}>{buyNote(safe)}</span>
           </div>
@@ -522,7 +522,7 @@ export function ProductCard({ p }: { p: Product }) {
         {safe && (
           <div style={{ ...S.buyRow, marginTop: 20 }}>
             <a style={S.btnBuy} href={`/go/${safe.id}/${p.id}`} rel="nofollow sponsored">
-              {buyLabel(safe)}
+              {buyLabel(safe, false, p)}
             </a>
             <span style={S.buyNote}>{buyNote(safe)}</span>
           </div>
@@ -560,6 +560,7 @@ const nameLink: React.CSSProperties = { color: "inherit", textDecoration: "none"
 
 function Stores({ p, dogKg, stage }: { p: Product; dogKg?: number; stage?: Stage }) {
   const stores = storesOf(p);
+  const baseG = formOf(p) === "wet" ? cansOf(sizesOf(p)[0]?.unit ?? "")?.g : undefined;
   // 「吃不完」的警告整款講一次就好。一家一次的話，五家賣場就是同一段話重複五遍
   const anyTooLong = stores.some((s) =>
     s.options.some((o) => bagDuration(o.unit, dogKg, stage, p.species, p.spec.kcal, formOf(p))?.tooLong),
@@ -584,8 +585,8 @@ function Stores({ p, dogKg, stage }: { p: Product; dogKg?: number; stage?: Stage
           <div style={S.optList}>
             {store.options.map((o, i) => {
               const dur = bagDuration(o.unit, dogKg, stage, p.species, p.spec.kcal, formOf(p));
-              // 罐頭講「每罐」：同一款罐子一樣大，每罐省幾 % 就是每公斤省幾 %
-              const per = formOf(p) === "wet" ? "每罐" : "每公斤";
+              // 罐頭講「每罐」：同樣大小的罐子，每罐省幾 % 就是每公斤省幾 %。罐子大小不一樣就講「每克」
+              const per = formOf(p) !== "wet" ? "每公斤" : cansOf(o.unit)?.g === baseG ? "每罐" : "每克";
               // 同一包別家比較便宜，就只講這個。旁邊明明有一家便宜 $581，還寫「每公斤省 3%」是誤導
               const save =
                 o.overFloor > 0
@@ -757,10 +758,12 @@ function whereOf(store: { label: string; options: { unit: string; amount: number
  * 還沒決定就不想按。改成「去蝦皮看這一包」：平台大家都熟，
  * 「看」比「買」容易按下去，決定是到了蝦皮才做的。賣家名字移到按鈕下面。
  */
-function buyLabel(m: Pick<Merchant, "label" | "affiliateUrl">, short?: boolean): string {
+function buyLabel(m: Pick<Merchant, "label" | "affiliateUrl">, short?: boolean, p?: Product): string {
   const where = platformOf(m.affiliateUrl);
   if (!where) return `去${m.label.replace(/（.*/, "")}看`;
-  return short ? `去${where}看` : `去${where}看這一包`;
+  // 罐頭講「這一罐」，餐包講「這一包」
+  const unit = p && formOf(p) === "wet" ? canWord(p) : "包";
+  return short ? `去${where}看` : `去${where}看這一${unit}`;
 }
 
 /** 按鈕下面那一小行：哪一家，再加一兩句備註（規格名稱另外有提醒，不重複） */
@@ -823,7 +826,9 @@ function SizeTable({ p, weightKg, stage, said }: { p: Product; weightKg?: number
   const best = fresh.length > 1 ? fresh.reduce((a, b) => (b.per! <= a.per! ? b : a)).i : null;
   // 裁決器裡的體重是讀者講的，講「你家的」；長尾頁是品種的一般體重、貓沒講是 4 公斤，講「一隻」
   const who = said && weightKg ? `你家的${cat ? "貓" : "狗"}` : `一隻${cat ? "貓" : "狗"}`;
-  const per = wet ? "每罐" : "每公斤";
+  // 罐頭：同樣大小的罐子比「每罐」；85g 跟 185g 比，一罐本來就差一倍，要比「每克」
+  const g0 = wet ? cansOf(rows[0].unit)?.g : undefined;
+  const perOf = (unit: string) => (!wet ? "每公斤" : cansOf(unit)?.g === g0 ? "每罐" : "每克");
   return (
     <div>
       <p style={{ ...S.lbl, margin: "22px 0 4px" }}>{oneStore ? "每一種大小" : "每一種大小，最便宜的一家"}</p>
@@ -846,7 +851,7 @@ function SizeTable({ p, weightKg, stage, said }: { p: Product; weightKg?: number
                 {best === i && <b style={{ color: "var(--accent)" }}>{who}買這包最划算</b>}
                 {save !== null && (
                   <span style={{ color: save > 0 ? "var(--keep)" : "var(--cut)" }}>
-                    {save > 0 ? `${per}省 ${save}%` : `${per}反而貴 ${-save}%`}
+                    {save > 0 ? `${perOf(r.unit)}省 ${save}%` : `${perOf(r.unit)}反而貴 ${-save}%`}
                   </span>
                 )}
                 {d && (

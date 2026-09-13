@@ -488,12 +488,32 @@
       },
       "price": {
         "unit": "85g",
-        "checkedAt": "2026-09-12",
-        "merchants": []
+        "checkedAt": "2026-09-13",
+        "merchants": [
+          {
+            "id": "m1",
+            "label": "Petizen寵物公民旗艦店（蝦皮商城）",
+            "unit": "85g",
+            "amount": 159,
+            "note": "規格選「羊肉,85g」 · 一頁多款 · 新客首購組，標題寫含試吃包 · 店到店滿 199 免運",
+            "affiliateUrl": "https://s.shopee.tw/70K5llKVbT",
+            "anchor": "safe",
+            "checkedAt": "2026-09-13"
+          },
+          {
+            "id": "m2",
+            "label": "Petizen寵物公民旗艦店（蝦皮商城）",
+            "unit": "185g",
+            "amount": 205,
+            "note": "規格選「羊肉,185g」 · 一頁多款 · 新客首購組，標題寫含試吃包 · 店到店滿 199 免運",
+            "affiliateUrl": "https://s.shopee.tw/70K5llKVbT",
+            "anchor": "value",
+            "checkedAt": "2026-09-13"
+          }
+        ]
       },
       "dealbreaker": "你的貓對羊肉過敏，或是預算抓得很緊。整罐的肉只有羊，一罐的價錢差不多是一般主食罐的三倍。",
       "knownIssues": "肉只有羊：羊肉、羊肺、羊腎、羊肝、羊肚、羊心。另外有紐西蘭綠唇貝，那是貝類。第六項是鷹嘴豆。標示沒寫適用年齡，我們先當成貓用。",
-      "awaitingLink": true,
       "searchAs": "ZiwiPeak 巔峰 鮮肉貓主食罐 羊肉 85g"
     },
     {
