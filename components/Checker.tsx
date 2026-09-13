@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import type { CheckItem, CheckStatus } from "@/lib/check";
+import { STAMP, STAMP_LINE } from "@/lib/chicken";
 import { CONTACT } from "@/lib/contact";
 import { CatIcon, DogIcon } from "./Icons";
 import Share from "./Share";
@@ -14,21 +15,9 @@ import Share from "./Share";
  * 瀏覽器這邊只負責篩選、還有打開朋友傳來的那一款（/check#cf-07）。
  */
 
-const BADGE: Record<CheckStatus, { zh: string; fg: string; bg: string }> = {
-  hidden: { zh: "藏雞", fg: "var(--cut)", bg: "var(--cut-soft)" },
-  chicken: { zh: "有雞", fg: "var(--muted)", bg: "var(--sunken)" },
-  fat: { zh: "有雞油", fg: "var(--warn)", bg: "var(--warn-soft)" },
-  unsure: { zh: "沒寫清楚", fg: "var(--warn)", bg: "var(--warn-soft)" },
-  clean: { zh: "沒有雞", fg: "var(--keep)", bg: "var(--keep-soft)" },
-};
-
-const LINE: Record<CheckStatus, string> = {
-  hidden: "名字沒寫雞，成分表裡有雞。對雞過敏的，這包等於沒換。",
-  chicken: "名字就寫了有雞。",
-  fat: "肉沒有雞，但油脂用的是雞脂肪。一般對雞過敏多半是對雞肉的蛋白質，非常敏感的還是避開。",
-  unsure: "成分表只寫「禽肉」或「動物蛋白」，沒講是哪一種。對雞過敏的不要賭。",
-  clean: "成分表裡找不到雞。",
-};
+// 標章的字、顏色、那一句話，全站共用一份（lib/chicken.ts）
+const BADGE = STAMP;
+const LINE = STAMP_LINE;
 
 export default function Checker({ items }: { items: CheckItem[] }) {
   const [q, setQ] = useState("");

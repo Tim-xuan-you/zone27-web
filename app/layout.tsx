@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Noto_Sans_TC, Noto_Serif_TC, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 import PageReport from "@/components/PageReport";
+import { Analytics } from "@vercel/analytics/next";
 
 const sans = Noto_Sans_TC({
   subsets: ["latin"],
@@ -47,6 +48,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         {children}
         <PageReport />
+        {/*
+          流量統計（Vercel Web Analytics）：沒有 cookie，不記個人資料，只算有幾個人看了哪一頁、從哪裡來。
+          Tim 在 Vercel 後台打開 Analytics 之後才會開始記。沒打開時這一行什麼都不做。
+          要知道 Threads、臉書社團帶了多少人進來，靠的就是這個（2026-09-13）
+        */}
+        <Analytics />
       </body>
     </html>
   );

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Decider from "@/components/Decider";
 import SiteHeader from "@/components/SiteHeader";
+import Stamp from "@/components/Stamp";
 import CheckCard from "@/components/CheckCard";
 import { S } from "@/components/styles";
 import { catalogOf, isLive, liveCount, shopLink } from "@/lib/catalog";
@@ -165,6 +166,7 @@ function Row({ p, live }: { p: Product; live: boolean }) {
       </h3>
 
       <div style={tags}>
+        <Stamp p={p} />
         <span style={side ? { ...tag, ...tagWarn } : { ...tag, ...tagGood }}>{side ? "副食罐" : "主食罐"}</span>
         <span style={tag}>{stageLabel(p)}</span>
         <span style={tag}>{p.spec.grainFree ? "無穀" : "含穀"}</span>

@@ -23,6 +23,10 @@ const MUTED = "#6B655C";
 const GROUND = "#FBFAF7";
 const ACCENT = "#1F6F5C";
 const CUT = "#A4432F";
+const WARN = "#9A6A12";
+// 分享卡上的章（圖片裡不能用 CSS 變數，照網站淺色主題的顏色寫死）
+const STAMP_INK = { cut: CUT, warn: WARN, keep: ACCENT, muted: MUTED } as const;
+const STAMP_BG = { cut: "#F6E4DF", warn: "#F7EEDB", keep: "#E1EEE9", muted: "#EFECE6" } as const;
 
 const fontCache = new Map<string, Promise<ArrayBuffer | null>>();
 
@@ -55,6 +59,7 @@ export async function ogCard({
   sub,
   tone = "accent",
   fontText,
+  stamp,
 }: {
   /** 最上面那一小行，例如「我們自己讀成分表」 */
   kicker: string;
@@ -69,8 +74,10 @@ export async function ogCard({
    * 這樣 143 張圖共用同一次下載。不傳就只抓這張圖用到的字。
    */
   fontText?: string;
+  /** 右上角蓋的章：「藏雞」「沒有雞」。跟網站上的標章同一個樣子，分享出去一眼認得 */
+  stamp?: { zh: string; tone: "cut" | "warn" | "keep" | "muted" };
 }) {
-  const all = kicker + headline + sub + "ZONE 27zone27.com.tw";
+  const all = kicker + headline + sub + (stamp?.zh ?? "") + "ZONE 27zone27.com.tw";
   const font = await loadFont(fontText ? fontText + all : all);
 
   // 抓不到字型：退回英文版，至少不要讓建置失敗
@@ -111,6 +118,15 @@ export async function ogCard({
           <div style={{ width: 22, height: 22, borderRadius: 5, background: ACCENT }} />
           <div style={{ fontSize: 34, color: INK, letterSpacing: 1 }}>ZONE 27</div>
           <div style={{ fontSize: 28, color: MUTED, marginLeft: 20 }}>{kicker}</div>
+          {stamp && (
+            <div style={{
+              display: "flex", marginLeft: "auto", fontSize: 44, color: STAMP_INK[stamp.tone],
+              background: STAMP_BG[stamp.tone], border: `5px solid ${STAMP_INK[stamp.tone]}`,
+              borderRadius: 14, padding: "6px 22px", transform: "rotate(-4deg)", letterSpacing: 4,
+            }}>
+              {stamp.zh}
+            </div>
+          )}
         </div>
 
         <div style={{

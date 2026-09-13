@@ -5,6 +5,8 @@ import SiteHeader from "./SiteHeader";
 import { ProductCard } from "./Result";
 import Share from "./Share";
 import CheckCard from "./CheckCard";
+import Stamp from "./Stamp";
+import { STAMP, STAMP_LINE } from "@/lib/chicken";
 import { S } from "./styles";
 import { byId, catalogOf } from "@/lib/catalog";
 import { categoryOf } from "@/lib/categories";
@@ -54,11 +56,17 @@ export function productMetadata(id: string): Metadata {
   if (!p) return {};
   const title = `${p.brand} ${p.name}`;
   const facts = [meatsOf(p) && `肉：${meatsOf(p)}`, p.spec.grainFree ? "無穀" : "含穀", stageOf(p)].filter(Boolean).join("、");
+  // 搜尋結果和分享預覽的第一句先講有沒有雞：這是全站的招牌
+  const chick = p.chicken ? `${STAMP[p.chicken.status].zh}。` : "";
   return {
     title,
-    description: `${facts}。什麼時候不要買：${p.dealbreaker}`.slice(0, 150),
+    description: `${chick}${facts}。什麼時候不要買：${p.dealbreaker}`.slice(0, 150),
     alternates: { canonical: productHref(p) },
-    openGraph: { title, type: "article" },
+    openGraph: {
+      title, type: "article",
+      // 每一款自己的分享卡：右上角蓋「藏雞／沒有雞」的章（app/og/p/[id]）
+      images: [{ url: `/og/p/${p.id}`, width: 1200, height: 630 }],
+    },
   };
 }
 
@@ -99,6 +107,26 @@ export default function ProductPage({ id, species, form = "dry" }: { id: string;
         {perCan !== null && <span style={tag}>一{canWord(p)} {perCan} 大卡</span>}
         {formOf(p) === "dry" && p.spec.kcal && <span style={tag}>{p.spec.kcal.toLocaleString()} 大卡／公斤</span>}
       </div>
+
+      {/* 全站的招牌：這一包有沒有雞、第幾項。跟查藏雞頁同一個標章、同一句話 */}
+      {p.chicken && (
+        <div style={chickBox}>
+          <Stamp p={p} size="lg" />
+          <div style={{ minWidth: 0 }}>
+            <p style={{ margin: 0, fontSize: 15.5, fontWeight: 700, lineHeight: 1.7, color: STAMP[p.chicken.status].fg === "var(--muted)" ? "var(--ink)" : STAMP[p.chicken.status].fg }}>
+              {STAMP_LINE[p.chicken.status]}
+            </p>
+            {p.chicken.found && p.chicken.found.length > 0 && (
+              <ul style={{ margin: "6px 0 0", paddingLeft: 20, fontSize: 14.5, lineHeight: 1.8 }}>
+                {p.chicken.found.map((f, i) => <li key={i}>{f}</li>)}
+              </ul>
+            )}
+            <Link href="/check" style={{ display: "inline-block", marginTop: 8, fontSize: 14, fontWeight: 600, color: "var(--accent)" }}>
+              查其他那包有沒有雞 →
+            </Link>
+          </div>
+        </div>
+      )}
 
       {ok ? (
         <div style={{ marginTop: 18 }}>
@@ -187,4 +215,9 @@ const mismatchBox: React.CSSProperties = {
 const otherRow: React.CSSProperties = {
   display: "block", background: "var(--surface)", border: "1px solid var(--line)",
   borderRadius: 12, padding: "12px 16px", textDecoration: "none", color: "inherit",
+};
+
+const chickBox: React.CSSProperties = {
+  display: "flex", gap: 16, alignItems: "flex-start", marginTop: 16, padding: "16px 18px",
+  background: "var(--surface)", border: "1px solid var(--line)", borderRadius: 14,
 };

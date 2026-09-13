@@ -13,6 +13,7 @@ import { fitFor, platformOf, productHref } from "@/lib/labels";
 import { readerNotes } from "@/lib/notes";
 import { S } from "./styles";
 import Share from "./Share";
+import Stamp from "./Stamp";
 
 /**
  * 裁決結果。
@@ -235,7 +236,10 @@ function Answer({
   return (
     <article style={S.answer}>
       <div style={S.answerBody}>
-        <span style={S.brand}>{p.brand}</span>
+        <div style={brandRow}>
+          <span style={S.brand}>{p.brand}</span>
+          <Stamp p={p} />
+        </div>
         <h2 style={S.answerName}>
           <Link href={productHref(p)} style={nameLink}>{p.name}</Link>
         </h2>
@@ -316,7 +320,9 @@ function SecondPick({ alt }: { alt: NonNullable<Verdict["alt"]> }) {
       <span style={secondHead}>{alt.kind === "cheaper" ? "想省一點" : "不看價錢的話"}</span>
       <div style={{ minWidth: 0 }}>
         <Link href={productHref(p)} style={{ ...nameLink, display: "block", fontSize: 16, fontWeight: 700, lineHeight: 1.5 }}>
-          <span style={{ display: "block", fontSize: 12.5, fontWeight: 500, color: "var(--muted)" }}>{p.brand}</span>
+          <span style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 12.5, fontWeight: 500, color: "var(--muted)" }}>
+            {p.brand}<Stamp p={p} />
+          </span>
           {p.name}
         </Link>
         <p style={{ margin: "6px 0 0", fontSize: 14, lineHeight: 1.75 }}>{alt.line}</p>
@@ -507,7 +513,10 @@ function Alt({ p, dogKg, stage, multi, said }: { p: Product; dogKg?: number; sta
   return (
     <article style={S.card}>
       <div style={S.cardH}>
-        <span style={S.brand}>{p.brand}</span>
+        <div style={brandRow}>
+          <span style={S.brand}>{p.brand}</span>
+          <Stamp p={p} />
+        </div>
         <h3 style={S.pname}>
           <Link href={productHref(p)} style={nameLink}>{p.name}</Link>
         </h3>
@@ -627,6 +636,8 @@ export function ProductCard({ p }: { p: Product }) {
 }
 
 const nameLink: React.CSSProperties = { color: "inherit", textDecoration: "none" };
+/** 品牌那一行：左邊品牌、右邊「藏雞／沒有雞」標章 */
+const brandRow: React.CSSProperties = { display: "flex", alignItems: "center", justifyContent: "space-between", gap: 10 };
 
 /* ------------------------------------------------------------------ */
 /* 共用零件                                                            */

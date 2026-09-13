@@ -204,6 +204,23 @@ export interface Price {
   merchants: Merchant[];
 }
 
+/**
+ * 有沒有雞。
+ *   hidden：名字沒寫雞，成分表裡有雞（全站的招牌發現）
+ *   chicken：名字就寫了雞
+ *   fat：肉沒有雞，油脂用雞脂肪
+ *   unsure：只寫「禽肉」「動物蛋白」，沒講哪一種
+ *   clean：成分表裡找不到雞
+ */
+export type ChickenStatus = "hidden" | "chicken" | "fat" | "unsure" | "clean";
+export interface ChickenCheck {
+  status: ChickenStatus;
+  /** 逐項核對過的：「第 2 項：雞肉」這種 */
+  found?: string[];
+  /** 核對時寫的結論 */
+  verdict?: string;
+}
+
 export interface Product {
   id: string;
   species: Species;
@@ -265,6 +282,12 @@ export interface Product {
    * 例：「2026-09-13 Tim 在蝦皮找不到」
    */
   huntNote?: string;
+  /**
+   * 有沒有雞：匯入時從肉的來源和三份核對檔算好寫進來（lib/chicken.ts）。
+   * 全站的「藏雞／沒有雞」標章、查藏雞頁、商品頁、分享卡都讀這一欄，說法才會一致。
+   * 核對檔的來源網址不寫進來（那是別家通路）。
+   */
+  chicken?: ChickenCheck;
   /**
    * 一個台灣通路實際上架這個 SKU 的頁面網址。
    *

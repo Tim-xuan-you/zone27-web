@@ -39,7 +39,11 @@ export default function SiteHeader({ current }: { current?: Current }) {
       <div style={bar}>
         <Link href="/" style={logo}>
           <span style={dot} />
-          ZONE 27
+          {/* 一句話講完這個站在做什麼：朋友問「那是什麼網站」，講這句就好（2026-09-13） */}
+          <span style={{ display: "flex", flexDirection: "column", lineHeight: 1.25 }}>
+            <span>ZONE 27</span>
+            <span style={tagline}>名字不算數，成分表才算數</span>
+          </span>
         </Link>
         <nav aria-label="主選單" style={nav}>
           {items.map((it) => (
@@ -84,7 +88,8 @@ const logo: React.CSSProperties = {
   display: "flex", alignItems: "center", gap: 9, fontWeight: 900, fontSize: 16,
   color: "inherit", textDecoration: "none", whiteSpace: "nowrap",
 };
-const dot: React.CSSProperties = { width: 9, height: 9, borderRadius: 2, background: "var(--accent)" };
+const dot: React.CSSProperties = { width: 9, height: 9, borderRadius: 2, background: "var(--accent)", alignSelf: "flex-start", marginTop: 6 };
+const tagline: React.CSSProperties = { fontSize: 11.5, fontWeight: 600, color: "var(--muted)", letterSpacing: ".02em" };
 const nav: React.CSSProperties = {
   display: "flex", flexWrap: "wrap", justifyContent: "flex-end", gap: "6px 18px",
   fontSize: 14, color: "var(--muted)",

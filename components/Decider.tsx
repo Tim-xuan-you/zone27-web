@@ -11,6 +11,7 @@ import { CATEGORIES, categoriesOf, categoryOf, type CategorySlug } from "@/lib/c
 import type { Form, Product, Species, Verdict } from "@/lib/types";
 import { CONTACT } from "@/lib/contact";
 import Result from "./Result";
+import Stamp from "./Stamp";
 import { BagIcon, CanIcon, CatIcon, DogIcon } from "./Icons";
 import { S } from "./styles";
 
@@ -409,7 +410,9 @@ export default function Decider({
           <div style={{ display: "grid", gap: 10 }}>
             {mentions.map((m) => (
               <Link key={m.p.id} href={productHref(m.p)} style={mentionRow}>
-                <span style={{ fontSize: 12.5, color: "var(--muted)" }}>{m.p.brand}</span>
+                <span style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 12.5, color: "var(--muted)" }}>
+                  {m.p.brand}<Stamp p={m.p} />
+                </span>
                 <span style={{ display: "block", fontSize: 16, fontWeight: 700, lineHeight: 1.5 }}>{m.p.name}</span>
                 <span style={{ display: "block", marginTop: 4, fontSize: 14, lineHeight: 1.7, color: `var(--${m.tone})`, fontWeight: m.tone === "faint" ? 400 : 700 }}>
                   {m.text}

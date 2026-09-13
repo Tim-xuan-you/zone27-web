@@ -19,7 +19,29 @@ import { readFileSync, writeFileSync, existsSync } from "node:fs";
 import { resolve } from "node:path";
 import { todayTW } from "../lib/date";
 import { CATEGORIES, type Category } from "../lib/categories";
-import { MAX_MERCHANTS } from "../lib/types";
+import { MAX_MERCHANTS, type ChickenCheck, type ProteinSource } from "../lib/types";
+import { chickenStatusOf } from "../lib/chicken";
+
+/*
+ * 有沒有雞：三份逐項核對檔（藏雞那幾篇用的）照商品編號找，
+ * 只拿「找到什麼」「結論」寫進商品資料。來源網址不寫進 JSON，那是別家通路。
+ */
+type HcCase = { productId?: string; found?: string[] | string; verdict?: string; why?: string };
+const CHICKEN_CASES = new Map<string, HcCase>();
+for (const f of ["data/hidden-chicken.json", "data/cat-hidden-chicken.json", "data/cat-wet-hidden-chicken.json"]) {
+  if (!existsSync(resolve(f))) continue;
+  const j = JSON.parse(readFileSync(resolve(f), "utf8"));
+  for (const c of [...(j.cases ?? []), ...(j.alsoMismatched ?? []), ...(j.clean ?? [])] as HcCase[]) {
+    if (c.productId) CHICKEN_CASES.set(c.productId, c);
+  }
+}
+function chickenFor(id: string, name: string, sources: ProteinSource[]): { chicken: ChickenCheck } {
+  const c = CHICKEN_CASES.get(id);
+  const found = c?.found ? (Array.isArray(c.found) ? c.found : [c.found]) : undefined;
+  const verdict = [c?.verdict, c?.why].filter(Boolean).join(" ") || undefined;
+  const status = chickenStatusOf(name, sources, [verdict, ...(found ?? [])].join(" "));
+  return { chicken: { status, ...(found ? { found } : {}), ...(verdict ? { verdict } : {}) } };
+}
 
 /** 1～MAX_MERCHANTS */
 const SLOTS = Array.from({ length: MAX_MERCHANTS }, (_, i) => i + 1);
@@ -318,6 +340,7 @@ function readCategory(cat: Category) {
       ...(isAwait ? { awaitingLink: true } : {}),
       ...(row.searchAs ? { searchAs: row.searchAs } : {}),
       ...(row.huntNote ? { huntNote: row.huntNote } : {}),
+      ...chickenFor(row.id, row.name, list(row, "proteinSources", line, PROTEINS) as ProteinSource[]),
       // twSource 只留在 CSV：那是我們確認台灣買得到的證據，是別家通路的網址。
       // 寫進 JSON 就會被打包進網頁，哪天有人把它顯示出來就是在幫別家導流（2026-09-12 Tim）
     };

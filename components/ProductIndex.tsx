@@ -2,6 +2,7 @@ import Link from "next/link";
 import { S } from "./styles";
 import { cheapest, recommendable } from "@/lib/engine";
 import { meatsOf, productHref, stageOf } from "@/lib/labels";
+import Stamp from "./Stamp";
 import type { Product } from "@/lib/types";
 
 /**
@@ -23,7 +24,9 @@ export default function ProductIndex({ products, title }: { products: Product[];
           return (
             <Link key={p.id} href={productHref(p)} style={row}>
               <div style={{ flex: 1, minWidth: 0 }}>
-                <span style={{ fontSize: 12.5, color: "var(--muted)" }}>{p.brand}</span>
+                <span style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 12.5, color: "var(--muted)" }}>
+                  {p.brand}<Stamp p={p} />
+                </span>
                 <span style={{ display: "block", fontSize: 15.5, fontWeight: 700, lineHeight: 1.5 }}>{p.name}</span>
                 <span style={{ display: "block", fontSize: 13, color: "var(--faint)", marginTop: 2 }}>
                   {stageOf(p)}{meatsOf(p) ? ` · 肉：${meatsOf(p)}` : ""}
