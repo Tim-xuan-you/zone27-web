@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import SiteHeader from "./SiteHeader";
 import { ProductCard } from "./Result";
 import Share from "./Share";
+import CheckCard from "./CheckCard";
 import { S } from "./styles";
 import { byId, catalogOf } from "@/lib/catalog";
 import { categoryOf } from "@/lib/categories";
@@ -137,6 +138,10 @@ export default function ProductPage({ id, species, form = "dry" }: { id: string;
           </p>
         </div>
         <Link style={S.btn} href={`/${cat.slug}`}>去{cat.zh}</Link>
+      </div>
+
+      <div style={{ marginTop: 32 }}>
+        <CheckCard />
       </div>
 
       {others.length > 0 && (

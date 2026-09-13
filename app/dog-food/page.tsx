@@ -3,6 +3,7 @@ import Link from "next/link";
 import { S } from "@/components/styles";
 import { ALLERGENS, BREEDS } from "@/lib/slugs";
 import SiteHeader from "@/components/SiteHeader";
+import CheckCard from "@/components/CheckCard";
 import Decider from "@/components/Decider";
 import ProductIndex from "@/components/ProductIndex";
 import { catalogOf } from "@/lib/catalog";
@@ -32,6 +33,7 @@ export default function Index() {
       <Decider defaultSpecies="dog" />
 
       <p style={S.lbl}>先看這個</p>
+      <CheckCard style={{ marginBottom: 14 }} />
       <Link href="/dog-food/hidden-chicken" style={{
         display: "block", background: "var(--surface)", border: "1px solid var(--line)",
         borderRadius: 14, boxShadow: "var(--sh)", padding: "20px 22px",

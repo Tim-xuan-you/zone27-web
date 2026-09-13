@@ -4,6 +4,9 @@ import Decider from "@/components/Decider";
 import SiteHeader from "@/components/SiteHeader";
 import { S } from "@/components/styles";
 import { ANIMALS, categoriesOf } from "@/lib/categories";
+import { checkItems, checkStats } from "@/lib/check";
+
+const CHECK = checkStats(checkItems());
 
 const ENTITY = {
   "@context": "https://schema.org",
@@ -57,6 +60,17 @@ export default function Home() {
       </p>
 
       <Decider />
+
+      {/* 全站最有辨識度的東西，放在裁決器下面第一個：打名字，查你家那包有沒有藏雞 */}
+      <Link href="/check" style={checkCard}>
+        <span style={{ ...kicker, color: "var(--cut)" }}>查成分</span>
+        <h2 style={{ ...featureTitle, fontSize: 22 }}>你家那包，有沒有藏雞？</h2>
+        <p style={featureBody}>
+          名字沒寫雞的 {CHECK.unnamed} 款，有 <b style={{ color: "var(--cut)" }}>{CHECK.hidden} 款</b>成分表裡有雞。
+          打名字就查得到你家那一包，有雞的直接給你不含雞的。
+        </p>
+        <span style={{ display: "inline-block", marginTop: 10, fontWeight: 700, color: "var(--accent)" }}>打名字查 →</span>
+      </Link>
 
       <p style={{ ...S.lbl, marginTop: 56 }}>或是從類目進去</p>
       {ANIMALS.map((a) => (
@@ -113,6 +127,11 @@ export default function Home() {
   );
 }
 
+const checkCard: React.CSSProperties = {
+  display: "block", marginTop: 40, background: "var(--surface)", border: "1px solid var(--line)",
+  borderLeft: "4px solid var(--cut)", borderRadius: 14, boxShadow: "var(--sh)", padding: "20px 22px",
+  textDecoration: "none", color: "inherit",
+};
 const grid: React.CSSProperties = {
   display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: 14,
 };

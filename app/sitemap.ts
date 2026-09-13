@@ -32,6 +32,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE}/cat-wet-food`, lastModified: now, changeFrequency: "weekly", priority: 0.9 },
     { url: `${BASE}/how-we-choose`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
     { url: `${BASE}/ask`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
+    // 「你家那包有沒有藏雞」：全站最有辨識度的工具，讀過的每一款都在這一頁
+    { url: `${BASE}/check`, lastModified: now, changeFrequency: "weekly", priority: 0.95 },
     // 這幾頁是自己讀成分表寫出來的，抄不走 —— 權重給到跟索引頁一樣
     { url: `${BASE}/dog-food/hidden-chicken`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
     { url: `${BASE}/cat-food/hidden-chicken`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },

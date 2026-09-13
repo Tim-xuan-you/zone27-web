@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Decider from "@/components/Decider";
 import SiteHeader from "@/components/SiteHeader";
+import CheckCard from "@/components/CheckCard";
 import { S } from "@/components/styles";
 import { catalogOf, isLive, liveCount, shopLink } from "@/lib/catalog";
 import { productHref } from "@/lib/labels";
@@ -78,6 +79,7 @@ export default function Page() {
       )}
 
       <p style={S.lbl}>先看這個</p>
+      <CheckCard style={{ marginBottom: 14 }} />
       <Link href="/cat-food/hidden-chicken" style={feature}>
         <h2 style={featureTitle}>寫著鮭魚、鴨肉、火雞，成分表裡有雞</h2>
         <p style={featureBody}>

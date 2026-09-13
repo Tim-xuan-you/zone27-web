@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Decider from "@/components/Decider";
 import SiteHeader from "@/components/SiteHeader";
+import CheckCard from "@/components/CheckCard";
 import { S } from "@/components/styles";
 import { catalogOf, isLive, liveCount, shopLink } from "@/lib/catalog";
 import { productHref } from "@/lib/labels";
@@ -90,7 +91,8 @@ export default function Page() {
         </div>
       )}
 
-      <p style={S.lbl}>先看這三篇</p>
+      <p style={S.lbl}>先看這個</p>
+      <CheckCard style={{ marginBottom: 14 }} />
       <div style={{ display: "grid", gap: 14 }}>
         <Link href="/cat-wet-food/complementary" style={feature}>
           <h2 style={featureTitle}>副食罐可以當主食嗎</h2>
