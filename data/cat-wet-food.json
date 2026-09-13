@@ -562,12 +562,32 @@
       },
       "price": {
         "unit": "85g",
-        "checkedAt": "2026-09-12",
-        "merchants": []
+        "checkedAt": "2026-09-13",
+        "merchants": [
+          {
+            "id": "m1",
+            "label": "Lazy Cat 悠懶貓（蝦皮商城）",
+            "unit": "85g",
+            "amount": 60,
+            "note": "規格選「夏威夷盛宴85g」 · 一頁多款 · 店到店滿 199 免運",
+            "affiliateUrl": "https://s.shopee.tw/4fwB0sH8l0",
+            "anchor": "safe",
+            "checkedAt": "2026-09-13"
+          },
+          {
+            "id": "m2",
+            "label": "Lazy Cat 悠懶貓（蝦皮商城）",
+            "unit": "85g×24",
+            "amount": 1430,
+            "note": "規格選「夏威夷盛宴85g-24入」 · 一頁多款 · 店到店滿 199 免運",
+            "affiliateUrl": "https://s.shopee.tw/4qFbDBGVQ3",
+            "anchor": "value",
+            "checkedAt": "2026-09-13"
+          }
+        ]
       },
       "dealbreaker": "你的貓對魚過敏。整罐的肉只有鯖魚。",
       "knownIssues": "脂肪只有 1.5%，熱量偏低，4 公斤的貓全吃這款一天要快四罐。還有南瓜、馬鈴薯澱粉、葵花籽油。熱量每 100 克 72.94 大卡，是台灣販售頁上標的。",
-      "awaitingLink": true,
       "searchAs": "Weruva 唯美味 夏威夷盛宴 85g"
     },
     {

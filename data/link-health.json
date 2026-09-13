@@ -1,6 +1,6 @@
 {
   "checkedAt": "2026-09-13",
-  "total": 66,
+  "total": 68,
   "bad": 0,
   "rows": [
     {
@@ -858,6 +858,32 @@
       "status": 403,
       "finalUrl": "https://shopee.tw/opaanlp/175445387/50209300208",
       "item": "175445387/50209300208",
+      "verdict": "ok",
+      "note": "有轉到商品頁（蝦皮不讓程式看內容，要自己點開確認）"
+    },
+    {
+      "productId": "cw-10",
+      "brand": "Weruva 唯美味",
+      "name": "夏威夷盛宴 鯖魚＋南瓜 主食罐",
+      "merchantId": "m1",
+      "label": "Lazy Cat 悠懶貓（蝦皮商城）",
+      "url": "https://s.shopee.tw/4fwB0sH8l0",
+      "status": 403,
+      "finalUrl": "https://shopee.tw/opaanlp/270668052/8453763553",
+      "item": "270668052/8453763553",
+      "verdict": "ok",
+      "note": "有轉到商品頁（蝦皮不讓程式看內容，要自己點開確認）"
+    },
+    {
+      "productId": "cw-10",
+      "brand": "Weruva 唯美味",
+      "name": "夏威夷盛宴 鯖魚＋南瓜 主食罐",
+      "merchantId": "m2",
+      "label": "Lazy Cat 悠懶貓（蝦皮商城）",
+      "url": "https://s.shopee.tw/4qFbDBGVQ3",
+      "status": 403,
+      "finalUrl": "https://shopee.tw/opaanlp/270668052/13800987430",
+      "item": "270668052/13800987430",
       "verdict": "ok",
       "note": "有轉到商品頁（蝦皮不讓程式看內容，要自己點開確認）"
     }
