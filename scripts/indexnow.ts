@@ -31,7 +31,15 @@ async function main() {
   const keyUrl = `${BASE}/${INDEXNOW_KEY}.txt`;
   const keyRes = await fetch(keyUrl);
   const keyBody = (await keyRes.text()).trim();
-  if (!keyRes.ok || keyBody !== INDEXNOW_KEY) {
+  /*
+   * Vercel 的防火牆有時候會對這台電腦發出的程式請求丟「確認你是人」（403 + x-vercel-mitigated）。
+   * 2026-09-13 一個下午輪詢太多次就被擋了，但讀者用瀏覽器看完全正常。
+   * 那不代表金鑰檔不在：Bing 是從它自己的伺服器來抓。這種情況照送，其他的 403、404 才停
+   */
+  const challenged = keyRes.status === 403 && keyRes.headers.get("x-vercel-mitigated") !== null;
+  if (challenged) {
+    console.warn(`\n這台電腦被 Vercel 防火牆要求驗證（${keyUrl} → 403 challenge），略過金鑰檢查，照樣通知。`);
+  } else if (!keyRes.ok || keyBody !== INDEXNOW_KEY) {
     console.error(`\n金鑰檔還沒上線（${keyUrl} → ${keyRes.status}）。等部署完成再跑。\n`);
     process.exit(1);
   }
