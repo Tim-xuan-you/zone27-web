@@ -263,12 +263,22 @@
         "merchants": [
           {
             "id": "m1",
+            "label": "免睏寵物樂園（蝦皮優選）",
+            "unit": "85g×10",
+            "amount": 790,
+            "note": "規格選「【罐頭】雞肉 85g」 · 最少買 10 罐，不同口味可以混搭 · 一頁多款 · 店到店滿 199 免運",
+            "affiliateUrl": "https://s.shopee.tw/6VNpPQmkXF",
+            "anchor": "safe",
+            "checkedAt": "2026-09-13"
+          },
+          {
+            "id": "m2",
             "label": "罐罐富翁（蝦皮優選）",
             "unit": "85g",
             "amount": 83,
             "note": "規格選「【罐頭】雞肉 85g」 · 一頁多款 · 店到店滿 199 免運",
             "affiliateUrl": "https://s.shopee.tw/6L4PD7nNsC",
-            "anchor": "safe",
+            "anchor": "value",
             "checkedAt": "2026-09-13"
           }
         ]

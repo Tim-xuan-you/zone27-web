@@ -944,7 +944,8 @@ function SizeTable({ p, weightKg, stage, said }: { p: Product; weightKg?: number
     if (r.perKg === null || overSingle(p, r.unit, r.best.amount)) { show.push(false); continue; }
     const peers = rows.slice(0, i).filter((x, j) => show[j] && x.perKg !== null && (!wet || cansOf(x.unit)?.g === cansOf(r.unit)?.g));
     const floor = peers.length ? Math.min(...peers.map((x) => x.perKg!)) : null;
-    show.push(floor === null || r.perKg <= floor * 0.95);
+    // 用四捨五入後的 % 判斷，跟畫面上寫的「省 5%」同一個數字。不然便宜 4.8% 會被收進「差不多」，點開卻寫省 5%
+    show.push(floor === null || Math.round((1 - r.perKg / floor) * 100) >= 5);
   }
   const hidden = rows.map((r, i) => ({ r, i })).filter((x) => !show[x.i]);
   // 收完只剩最小包：那一行就是上面的主價錢，再列一次是重複。表頭也不用了，只留「還有幾種」
