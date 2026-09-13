@@ -10,6 +10,7 @@ import { priceStat, timingAdvice } from "@/lib/history";
 import type { Merchant, Product, Verdict } from "@/lib/types";
 import { linkReport } from "@/lib/contact";
 import { fitFor, platformOf, productHref } from "@/lib/labels";
+import { readerNotes } from "@/lib/notes";
 import { S } from "./styles";
 
 /**
@@ -606,7 +607,7 @@ function Stores({ p, dogKg, stage }: { p: Product; dogKg?: number; stage?: Stage
                   </div>
                   {(dur || save || !store.singleUrl || o.checkedAt !== p.price.checkedAt || notes.own[i]) && (
                     <div style={S.optMeta}>
-                      {/* 只屬於這個規格的備註：「超取限 3 包」「限宅配」「送肉泥和抓板」 */}
+                      {/* 只屬於這個規格的備註：「超取限 3 包」「限宅配」「小顆粒」 */}
                       {notes.own[i] && <span style={{ color: "var(--muted)", flexBasis: "100%" }}>{notes.own[i]}</span>}
                       {/* 備援的價格可能比較舊，照實標日期，讀者點進去以賣場為準 */}
                       {o.checkedAt !== p.price.checkedAt && (
@@ -705,12 +706,12 @@ function SpecChips({ p }: { p: Product }) {
 /**
  * 同一家賣場各規格的備註，拆成「每個規格都有的」跟「只屬於這個規格的」。
  *
- * 備註是一條一條貼進來的：「全系列一頁多款 · 免運無限次 · 超取限 3 包」。
- * 以前賣場底下只秀第一個規格的備註，1.13kg 的「超取限 3 包」看起來像整家都這樣，
- * 兩包組的「送肉泥和抓板」則完全沒出現。
+ * 備註是一條一條貼進來的：「規格選「…」 · 小顆粒 · 超取限 3 包」。
+ * 以前賣場底下只秀第一個規格的備註，1.13kg 的「超取限 3 包」看起來像整家都這樣。
+ * 活動、贈品、免運這些會過期的，先在 readerNotes 拿掉（見 lib/notes.ts）。
  */
 function splitNotes(list: string[]): { common: string; own: string[] } {
-  const parts = list.map((n) => n.split("·").map((x) => x.trim()).filter(Boolean));
+  const parts = list.map((n) => readerNotes(n, { keepVariant: true }));
   const common = parts[0]?.filter((x) => parts.every((p) => p.includes(x))) ?? [];
   return {
     common: common.join(" · "),
@@ -773,12 +774,19 @@ function buyNote(m: Pick<Merchant, "label" | "note">): string {
  * 家裡兩三隻的人要的是「那我可不可以買」
  */
 function tooLongText(days: number, packs: number, cat: boolean): string | null {
+  // 會不會放太久看的是「一包」開了之後吃多久：兩包組是一包一包開的
   const perPack = Math.round(days / packs);
   if (perPack <= FRESH_DAYS) return null;
   const n = Math.ceil(perPack / FRESH_DAYS);
   const who = cat ? "貓" : "狗";
-  const head = packs > 1 ? `一隻${who}一包要吃 ${perPack} 天` : `一隻${who}要吃 ${perPack} 天`;
+  // 天數寫整組的。以前兩包組寫「一隻貓一包要吃 87 天」，跟單包一樣的數字，看起來像買兩包也只吃一樣久
+  const head = packs > 1 ? `${packsZh(packs)}一隻${who}要吃 ${days} 天` : `一隻${who}要吃 ${days} 天`;
   return n <= 4 ? `${head}，${["", "", "兩", "三", "四"][n]}隻一起吃剛好` : `${head}，吃不完`;
+}
+
+/** 「兩包」「三包」，再多就寫數字 */
+function packsZh(n: number): string {
+  return ({ 2: "兩包", 3: "三包", 4: "四包" } as Record<number, string>)[n] ?? `${n} 包`;
 }
 
 /** 某一家賣場的整組規格（寫回報信用的）。找不到就只放這一條 */
@@ -786,11 +794,9 @@ function storeOf(p: Product, m: Merchant): { label: string; options: { unit: str
   return storesOf(p).find((s) => s.label === m.label) ?? { label: m.label, options: [{ unit: unitOf(p, m), amount: m.amount }] };
 }
 
-/** 這一條自己的備註，去掉規格名稱、「一頁多款」這種讀者用不到的 */
+/** 這一條自己的備註，只留讀者用得到、不會過期的（規格名稱另外有地方寫） */
 function ownNotes(note: string): string {
-  return note.split("·").map((x) => x.trim())
-    .filter((x) => x && !x.startsWith("規格選") && !x.includes("一頁多款"))
-    .slice(0, 2).join(" · ");
+  return readerNotes(note).slice(0, 2).join(" · ");
 }
 
 /**
@@ -845,7 +851,7 @@ function SizeTable({ p, weightKg, stage, said }: { p: Product; weightKg?: number
                 )}
                 {d && (
                   <span style={{ color: d.tooLong ? "var(--cut)" : "var(--faint)" }}>
-                    {tooLongText(d.days, packs, cat) ?? (packs > 1 ? `一包約 ${Math.round(d.days / packs)} 天` : `約 ${d.days} 天`)}
+                    {tooLongText(d.days, packs, cat) ?? (packs > 1 ? `${packsZh(packs)}約 ${d.days} 天` : `約 ${d.days} 天`)}
                   </span>
                 )}
                 {variant && <span style={{ color: "var(--faint)", flexBasis: "100%" }}>點進去選「{variant}」</span>}

@@ -20,8 +20,9 @@
     "data:stage": "tsx scripts/stage-check.ts",
     "seo:indexnow": "tsx scripts/indexnow.ts",
     "voice:check": "tsx scripts/voice-check.ts",
-    "postbuild": "tsx scripts/outbound-check.ts",
-    "outbound:check": "tsx scripts/outbound-check.ts"
+    "postbuild": "tsx scripts/outbound-check.ts && tsx scripts/promo-check.ts",
+    "outbound:check": "tsx scripts/outbound-check.ts",
+    "promo:check": "tsx scripts/promo-check.ts"
   },
   "dependencies": {
     "@supabase/ssr": "^0.10.3",
