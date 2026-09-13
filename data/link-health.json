@@ -1,6 +1,6 @@
 {
   "checkedAt": "2026-09-13",
-  "total": 78,
+  "total": 79,
   "bad": 0,
   "rows": [
     {
@@ -892,6 +892,19 @@
       "brand": "Hill's 希爾思",
       "name": "幼貓 敏感胃腸與皮膚 鮭魚 主食罐",
       "merchantId": "m1",
+      "label": "貓狗六一六",
+      "url": "https://s.shopee.tw/6L4P8ekGZ7",
+      "status": 403,
+      "finalUrl": "https://shopee.tw/opaanlp/7293322/53754322564",
+      "item": "7293322/53754322564",
+      "verdict": "ok",
+      "note": "有轉到商品頁（蝦皮不讓程式看內容，要自己點開確認）"
+    },
+    {
+      "productId": "cw-07",
+      "brand": "Hill's 希爾思",
+      "name": "幼貓 敏感胃腸與皮膚 鮭魚 主食罐",
+      "merchantId": "m2",
       "label": "毛大二寵物店（蝦皮優選）",
       "url": "https://s.shopee.tw/9Ki0iAYqTf",
       "status": 403,
@@ -904,7 +917,7 @@
       "productId": "cw-07",
       "brand": "Hill's 希爾思",
       "name": "幼貓 敏感胃腸與皮膚 鮭魚 主食罐",
-      "merchantId": "m2",
+      "merchantId": "m3",
       "label": "毛掌櫃寵物選品店（蝦皮優選）",
       "url": "https://s.shopee.tw/6VNpKxjdE8",
       "status": 403,

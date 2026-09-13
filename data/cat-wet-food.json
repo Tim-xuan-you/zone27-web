@@ -427,16 +427,26 @@
         "merchants": [
           {
             "id": "m1",
-            "label": "毛大二寵物店（蝦皮優選）",
-            "unit": "79g",
-            "amount": 70,
-            "note": "規格選「608562(幼貓)腸胃皮膚鮭魚79g」 · 一頁多款 · 店到店滿 199 免運",
-            "affiliateUrl": "https://s.shopee.tw/9Ki0iAYqTf",
+            "label": "貓狗六一六",
+            "unit": "79g×6",
+            "amount": 324,
+            "note": "規格選「幼貓敏感胃腸和皮膚-鮭魚燴蔬菜79g」 · 最少買 6 罐，不同口味可以混搭 · 一頁多款 · 店到店滿 199 免運",
+            "affiliateUrl": "https://s.shopee.tw/6L4P8ekGZ7",
             "anchor": "safe",
             "checkedAt": "2026-09-13"
           },
           {
             "id": "m2",
+            "label": "毛大二寵物店（蝦皮優選）",
+            "unit": "79g",
+            "amount": 70,
+            "note": "規格選「608562(幼貓)腸胃皮膚鮭魚79g」 · 一頁多款 · 店到店滿 199 免運",
+            "affiliateUrl": "https://s.shopee.tw/9Ki0iAYqTf",
+            "anchor": "value",
+            "checkedAt": "2026-09-13"
+          },
+          {
+            "id": "m3",
             "label": "毛掌櫃寵物選品店（蝦皮優選）",
             "unit": "79g",
             "amount": 70,
