@@ -585,11 +585,18 @@ export function ProductCard({ p }: { p: Product }) {
         </p>
       )}
 
-      <div style={{ padding: `8px ${24}px ${24}px` }}>
-        <p style={{ ...S.lbl, margin: "8px 0 4px" }}>{count > 1 ? `全部 ${count} 家的價格` : "各規格的價格"}</p>
-        <Stores p={p} />
-        {p.knownIssues && <Issues text={p.knownIssues} />}
-      </div>
+      {/* 要買哪一包，上面「每一種大小」已經比好了。每一家的明細收起來，想對的人自己點開 */}
+      <details style={S.detailBlock}>
+        <summary style={S.detailSummary}>{count > 1 ? `全部 ${count} 家的價格` : "各規格的價格"}</summary>
+        <div style={{ padding: `0 ${24}px ${24}px` }}>
+          <Stores p={p} />
+        </div>
+      </details>
+      {p.knownIssues && (
+        <div style={{ padding: `0 ${24}px ${24}px` }}>
+          <Issues text={p.knownIssues} />
+        </div>
+      )}
     </article>
   );
 }
@@ -874,59 +881,57 @@ function SizeTable({ p, weightKg, stage, said }: { p: Product; weightKg?: number
   // 罐頭：同樣大小的罐子比「每罐」；85g 跟 185g 比，一罐本來就差一倍，要比「每克」
   const g0 = wet ? cansOf(rows[0].unit)?.g : undefined;
   const perOf = (unit: string) => (!wet ? "每公斤" : cansOf(unit)?.g === g0 ? "每罐" : "每克");
-  // 罐頭沒開放得住，沒有「吃不完」的問題：最划算就是每克最便宜的那一行
+  // 罐頭沒開放得住，沒有「吃不完」的問題：最划算就是每克最便宜的那一行。
+  // 只比小罐便宜一點點（5% 以內）的不標，不然整箱一罐便宜 4 毛也會被標成最划算
   let cheapestWet: number | null = null;
   if (wet) {
     for (let i = 0; i < rows.length; i++) {
       const pk = rows[i].perKg;
       if (pk !== null && (cheapestWet === null || pk < (rows[cheapestWet].perKg ?? Infinity))) cheapestWet = i;
     }
+    const base = rows[0].perKg;
+    if (cheapestWet !== null && (!base || cheapestWet === 0 || rows[cheapestWet].perKg! > base * 0.95)) cheapestWet = null;
   }
   const sameCan = wet && rows.every((r) => cansOf(r.unit)?.g === g0);
+
+  /*
+   * 哪幾行直接給讀者看。
+   *
+   * 2026-09-13 Tim：「買多沒有比較便宜的，是不是收起來？全部列出來只會資訊爆炸，
+   * 他有時間想看，自己會去點。」對。唯美味的 24 入一罐便宜 4 毛、巔峰的十二件組反而比較貴，
+   * 這種列在外面只是讓人多看一行、多想一下。
+   *
+   * 直接列的：最小包（卡片上那一包）、「買這包最划算」或「每克最便宜」的那一行、
+   * 還有比前面同類便宜 5% 以上的（罐頭只跟同樣大小的罐子比，85g 跟 185g 是兩種東西）。
+   * 其他的收進最下面一行，點開才看得到。整組比單買還貴的一律收起來。
+   */
+  const show: boolean[] = [];
+  for (let i = 0; i < rows.length; i++) {
+    const r = rows[i];
+    if (i === 0 || i === best || i === cheapestWet) { show.push(true); continue; }
+    if (r.perKg === null || overSingle(p, r.unit, r.best.amount)) { show.push(false); continue; }
+    const peers = rows.slice(0, i).filter((x, j) => show[j] && x.perKg !== null && (!wet || cansOf(x.unit)?.g === cansOf(r.unit)?.g));
+    const floor = peers.length ? Math.min(...peers.map((x) => x.perKg!)) : null;
+    show.push(floor === null || r.perKg <= floor * 0.95);
+  }
+  const hidden = rows.map((r, i) => ({ r, i })).filter((x) => !show[x.i]);
+  // 收完只剩最小包：那一行就是上面的主價錢，再列一次是重複。表頭也不用了，只留「還有幾種」
+  const onlyBase = show.filter(Boolean).length === 1;
+
   return (
     <div>
-      <p style={{ ...S.lbl, margin: "22px 0 4px" }}>{oneStore ? "每一種大小" : "每一種大小，最便宜的一家"}</p>
-      {rows.map((r, i) => {
-        const d = days[i];
-        const packs = packsOf(r.unit);
-        const up = unitPrice(p, r.unit, r.best.amount);
-        const notes = ownNotes(r.best.note);
-        const variant = variantOf(r.best);
-        // 整組比單買還貴，就只講這個。旁邊再寫「每克省 34%」，讀者只會記得綠色那句
-        const over = overSingle(p, r.unit, r.best.amount);
-        const save = !over && r.savingPct !== null && Math.abs(r.savingPct) >= 3 ? r.savingPct : null;
-        return (
-          <a key={r.best.id} href={`/go/${r.best.id}/${p.id}`} rel="nofollow sponsored" style={szRow}>
-            <span className="mono" style={szUnit}>{r.unit}</span>
-            <span className="mono" style={szAmt}>${r.best.amount.toLocaleString()}</span>
-            <span aria-hidden style={szChev}>›</span>
-            <span style={szStore}>{oneStore ? notes : `${r.best.label}${notes ? ` · ${notes}` : ""}`}</span>
-            <span className="mono" style={over ? { ...szPer, color: "var(--cut)" } : szPer}>{up}</span>
-            {(best === i || cheapestWet === i || over || d || save !== null || variant) && (
-              <span style={szMeta}>
-                {best === i && <b style={{ color: "var(--accent)" }}>{who}買這包最划算</b>}
-                {cheapestWet === i && <b style={{ color: "var(--accent)" }}>{sameCan ? "每罐最便宜" : "每克最便宜"}</b>}
-                {over && (
-                  <span style={{ color: "var(--cut)" }}>
-                    一{over.word} ${over.each}，比單買一{over.word}貴 ${over.each - over.single}
-                  </span>
-                )}
-                {save !== null && (
-                  <span style={{ color: save > 0 ? "var(--keep)" : "var(--cut)" }}>
-                    {save > 0 ? `${perOf(r.unit)}省 ${save}%` : `${perOf(r.unit)}反而貴 ${-save}%`}
-                  </span>
-                )}
-                {d && (
-                  <span style={{ color: d.tooLong ? "var(--cut)" : "var(--faint)" }}>
-                    {tooLongText(d.days, packs, cat) ?? (packs > 1 ? `${packsZh(packs)}約 ${d.days} 天` : `約 ${d.days} 天`)}
-                  </span>
-                )}
-                {variant && <span style={{ color: "var(--faint)", flexBasis: "100%" }}>點進去選「{variant}」</span>}
-              </span>
-            )}
-          </a>
-        );
-      })}
+      {!onlyBase && (
+        <>
+          <p style={{ ...S.lbl, margin: "22px 0 4px" }}>{oneStore ? "每一種大小" : "每一種大小，最便宜的一家"}</p>
+          {rows.map((r, i) => (show[i] ? row(r, i) : null))}
+        </>
+      )}
+      {hidden.length > 0 && (
+        <details style={onlyBase ? { ...szMoreBox, marginTop: 18 } : szMoreBox}>
+          <summary style={szMore}>還有 {hidden.length} 種包裝，價錢差不多或更貴</summary>
+          {hidden.map((x) => row(x.r, x.i))}
+        </details>
+      )}
       {(!wet || cat) && (
         <p style={szFoot}>
           {!wet && (
@@ -942,7 +947,54 @@ function SizeTable({ p, weightKg, stage, said }: { p: Product; weightKg?: number
       )}
     </div>
   );
+
+  function row(r: (typeof rows)[number], i: number) {
+    const d = days[i];
+    const packs = packsOf(r.unit);
+    const up = unitPrice(p, r.unit, r.best.amount);
+    const notes = ownNotes(r.best.note);
+    const variant = variantOf(r.best);
+    // 整組比單買還貴，就只講這個。旁邊再寫「每克省 34%」，讀者只會記得綠色那句
+    const over = overSingle(p, r.unit, r.best.amount);
+    const save = !over && r.savingPct !== null && Math.abs(r.savingPct) >= 3 ? r.savingPct : null;
+    return (
+      <a key={r.best.id} href={`/go/${r.best.id}/${p.id}`} rel="nofollow sponsored" style={szRow}>
+        <span className="mono" style={szUnit}>{r.unit}</span>
+        <span className="mono" style={szAmt}>${r.best.amount.toLocaleString()}</span>
+        <span aria-hidden style={szChev}>›</span>
+        <span style={szStore}>{oneStore ? notes : `${r.best.label}${notes ? ` · ${notes}` : ""}`}</span>
+        <span className="mono" style={over ? { ...szPer, color: "var(--cut)" } : szPer}>{up}</span>
+        {(best === i || cheapestWet === i || over || d || save !== null || variant) && (
+          <span style={szMeta}>
+            {best === i && <b style={{ color: "var(--accent)" }}>{who}買這包最划算</b>}
+            {cheapestWet === i && <b style={{ color: "var(--accent)" }}>{sameCan ? "每罐最便宜" : "每克最便宜"}</b>}
+            {over && (
+              <span style={{ color: "var(--cut)" }}>
+                一{over.word} ${over.each}，比單買一{over.word}貴 ${over.each - over.single}
+              </span>
+            )}
+            {save !== null && (
+              <span style={{ color: save > 0 ? "var(--keep)" : "var(--cut)" }}>
+                {save > 0 ? `${perOf(r.unit)}省 ${save}%` : `${perOf(r.unit)}反而貴 ${-save}%`}
+              </span>
+            )}
+            {d && (
+              <span style={{ color: d.tooLong ? "var(--cut)" : "var(--faint)" }}>
+                {tooLongText(d.days, packs, cat) ?? (packs > 1 ? `${packsZh(packs)}約 ${d.days} 天` : `約 ${d.days} 天`)}
+              </span>
+            )}
+            {variant && <span style={{ color: "var(--faint)", flexBasis: "100%" }}>點進去選「{variant}」</span>}
+          </span>
+        )}
+      </a>
+    );
+  }
 }
+
+const szMoreBox: React.CSSProperties = { borderTop: "1px solid var(--line)" };
+const szMore: React.CSSProperties = {
+  cursor: "pointer", padding: "12px 0", fontSize: 13.5, color: "var(--muted)", listStylePosition: "inside",
+};
 
 const szRow: React.CSSProperties = {
   display: "grid", gridTemplateColumns: "1fr auto 16px", columnGap: 10, rowGap: 2, alignItems: "baseline",

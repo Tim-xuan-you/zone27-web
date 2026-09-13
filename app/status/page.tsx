@@ -129,7 +129,8 @@ export default function Page() {
       cat: c,
       items: waiting
         .filter((p) => p.species === c.species && formOf(p) === c.form)
-        .sort((a, b) => (picks.get(b.id) ?? 0) - (picks.get(a.id) ?? 0)),
+        // 找過找不到的排最後，其他照「補了會被推薦幾次」排
+        .sort((a, b) => Number(Boolean(a.huntNote)) - Number(Boolean(b.huntNote)) || (picks.get(b.id) ?? 0) - (picks.get(a.id) ?? 0)),
       ready: liveCount(c.species, c.form),
     }))
     .filter((g) => g.items.length > 0);
@@ -340,6 +341,14 @@ export default function Page() {
               </div>
 
               <div style={{ marginTop: 14, paddingTop: 14, borderTop: "1px solid var(--line)" }}>
+                {p.huntNote && (
+                  <Line k="找過">
+                    <b style={{ color: "var(--cut)" }}>{p.huntNote}</b>
+                    <span style={{ display: "block", fontSize: 12.5, color: "var(--faint)", marginTop: 4 }}>
+                      先補別款。之後看到有賣場上架再回來補
+                    </span>
+                  </Line>
+                )}
                 <Line k="去蝦皮搜這個">
                   <span className="mono" style={{ fontSize: 14 }}>{p.searchAs ?? `${p.brand} ${p.name}`}</span>
                 </Line>
