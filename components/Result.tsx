@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Remind from "./Remind";
 import {
-  anchorOf, bagDuration, canPlan, canWord, cansOf, checkedOf, formOf, freshness, mer, overSingle, packsOf, sharedListings, sizesOf,
+  anchorOf, assumedCatKgByStage, bagDuration, canPlan, canWord, cansOf, checkedOf, formOf, freshness, mer, overSingle, packsOf, sharedListings, sizesOf,
   storesOf, trialPlan, unitOf, unitPrice, wetMonthly,
   FRESH_DAYS, type Stage,
 } from "@/lib/engine";
@@ -354,9 +354,11 @@ function Trial({
   const wet = formOf(p) === "wet";
   const anchor = anchorOf(p, "safe");
   // 罐頭沒講體重就用 4 公斤算，而且標題上講出來。不講體重就什麼都不算，讀者連一天幾罐都不知道
-  const cp = wet && anchor ? canPlan(p, unitOf(p, anchor), anchor.amount, dogKg ?? 4, stage) : null;
+  // 沒講體重：成貓照 4 公斤、幼貓照 2 公斤算，標題上講出來
+  const catKg = dogKg ?? assumedCatKgByStage(stage);
+  const cp = wet && anchor ? canPlan(p, unitOf(p, anchor), anchor.amount, catKg, stage) : null;
   // 一個月的錢照最省的規格算（通常是整箱），跟裁決器的預算那一刀用同一個函式
-  const monthly = wet ? wetMonthly(p, mer(dogKg ?? 4, stage, p.species)) : null;
+  const monthly = wet ? wetMonthly(p, mer(catKg, stage, p.species)) : null;
   const hasStep3 = wet ? cp !== null : t.anchorDays !== null;
   const howMuch = `/${categoryOf(p.species, formOf(p)).slug}/how-much`;
 
@@ -372,7 +374,7 @@ function Trial({
       </Step>
 
       {wet && cp && (
-        <Step n={3} title={`${dogKg ? "" : "照 4 公斤的貓算，"}全吃罐頭一天大約 ${cp.perDay} ${canWord(p)}`}>
+        <Step n={3} title={`${dogKg ? "" : `照 ${catKg} 公斤的${catKg === 2 ? "幼貓" : "貓"}算，`}全吃罐頭一天大約 ${cp.perDay} ${canWord(p)}`}>
           一{canWord(p)} {cp.kcalPerCan} 大卡。乾濕混餵的話，一天的熱量先扣掉罐頭這一份，剩下的才給乾糧。
           {monthly !== null && <> 照最省的規格算，全吃罐頭一個月大約 <b>${monthly.toLocaleString()}</b>。</>}
           <span style={tBetter}>
@@ -902,7 +904,7 @@ function SizeTable({ p, weightKg, stage, said }: { p: Product; weightKg?: number
   const oneStore = new Set(rows.map((r) => r.best.label)).size === 1 && storesOf(p).length === 1;
   const wet = formOf(p) === "wet";
   const cat = p.species === "cat";
-  const kg = weightKg ?? (cat ? 4 : undefined);
+  const kg = weightKg ?? (cat ? assumedCatKgByStage(stage) : undefined);
   const days = rows.map((r) => (wet ? null : bagDuration(r.unit, kg, stage, p.species, p.spec.kcal, "dry")));
   const fresh = rows.map((r, i) => ({ per: r.perKg, i, d: days[i] })).filter((x) => x.d && !x.d.tooLong && x.per);
   const best = fresh.length > 1 ? fresh.reduce((a, b) => (b.per! <= a.per! ? b : a)).i : null;
@@ -966,7 +968,7 @@ function SizeTable({ p, weightKg, stage, said }: { p: Product; weightKg?: number
         <p style={szFoot}>
           {!wet && (
             <>
-              {kg ? `天數照${said && weightKg ? `你講的 ${weightKg} 公斤` : `一隻 ${kg} 公斤的${cat ? "成貓" : "狗"}`}算。` : ""}
+              {kg ? `天數照${said && weightKg ? `你講的 ${weightKg} 公斤` : `一隻 ${kg} 公斤的${cat ? (kg === 2 ? "幼貓" : "成貓") : "狗"}`}算。` : ""}
               開封超過 {FRESH_DAYS} 天，油脂會氧化、變得不好吃。大包比較便宜，吃得完再買。
               {!kg && said && "在上面講牠幾公斤（像「柴犬 10 公斤」），就幫你算每一包吃幾天。"}
             </>

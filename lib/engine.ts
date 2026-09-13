@@ -486,7 +486,7 @@ export function adjudicate(pool: Product[], situation: Situation): Verdict {
 function altPick(alive: Product[], pick: Product, situation: Situation): Verdict["alt"] {
   if (alive.length < 2) return undefined;
   const wet = formOf(pick) === "wet";
-  const kcal = mer(situation.weightKg ?? 4, stageForAge(situation.ageYears, situation.species), situation.species);
+  const kcal = mer(situation.weightKg ?? assumedCatKg(situation.ageYears), stageForAge(situation.ageYears, situation.species), situation.species);
   const cost = (p: Product): number | null => {
     if (wet) return wetMonthly(p, kcal);
     const m = anchorOf(p, "safe");
@@ -676,7 +676,7 @@ function score(p: Product, situation: Situation): number {
    * 這個差距該影響排序。一天超過 120 元開始扣，最多扣 10 分，蓋不過過敏原那 30 分。
    */
   if (wet) {
-    const monthly = wetMonthly(p, mer(situation.weightKg ?? 4, stage, p.species));
+    const monthly = wetMonthly(p, mer(situation.weightKg ?? assumedCatKg(situation.ageYears), stage, p.species));
     if (monthly !== null) s -= Math.min(10, Math.max(0, (monthly / 30 - 120) / 20));
   }
 
@@ -741,10 +741,14 @@ function explain(pick: Product, alive: Product[], situation: Situation): string 
       bits.push(`每 100 克 ${Math.round(pick.spec.kcal / 10)} 大卡，熱量在留下的幾款裡最低`);
     }
   }
-  if (formOf(pick) === "wet" && alive.length > 1) {
-    const kcal = mer(situation.weightKg ?? 4, stageForAge(situation.ageYears, situation.species), situation.species);
+  if (formOf(pick) === "wet") {
+    const kcal = mer(situation.weightKg ?? assumedCatKg(situation.ageYears), stageForAge(situation.ageYears, situation.species), situation.species);
     const cost = (p: Product) => wetMonthly(p, kcal) ?? Infinity;
-    if (cost(pick) < Infinity && alive.every((p) => cost(pick) <= cost(p))) {
+    const mine = cost(pick);
+    // 講了預算：直接講一個月多少、在不在預算裡。以前只剩一款的時候理由是空的
+    if (situation.budgetMonthly && mine < Infinity && mine <= situation.budgetMonthly) {
+      bits.push(`全吃罐頭一個月大約 $${mine.toLocaleString()}，在你講的 $${situation.budgetMonthly.toLocaleString()} 以內`);
+    } else if (alive.length > 1 && mine < Infinity && alive.every((p) => mine <= cost(p))) {
       bits.push("全吃罐頭的話，一個月的花費在留下的幾款裡最低");
     }
   }
@@ -1070,6 +1074,21 @@ export const CAT_MER_FACTORS: Record<Stage, { factor: number; zh: string }> = {
 
 export function factorsOf(species: Species = "dog"): Record<Stage, { factor: number; zh: string }> {
   return species === "cat" ? CAT_MER_FACTORS : MER_FACTORS;
+}
+
+/**
+ * 沒講體重時，貓照幾公斤算：成貓 4 公斤，幼貓 2 公斤。
+ *
+ * 幼貓的熱量倍數本來就是成貓的兩倍，以前體重也照成貓的 4 公斤算，
+ * 「全吃罐頭一個月多少錢」會被高估七成（2026-09-13 貓主食罐開張前測出來的）。
+ */
+export function assumedCatKg(ageYears: number | undefined): number {
+  return ageYears !== undefined && ageYears < 1 ? 2 : 4;
+}
+
+/** 同上，手上只有生命階段的時候用 */
+export function assumedCatKgByStage(stage: Stage | undefined): number {
+  return stage === "puppy" || stage === "puppyYoung" ? 2 : 4;
 }
 
 /** 靜止能量需求（大卡／天） */

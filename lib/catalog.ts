@@ -2,7 +2,7 @@ import dog from "@/data/dog-food.json";
 import cat from "@/data/cat-food.json";
 import catWet from "@/data/cat-wet-food.json";
 import type { Constraint, Form, Product, ProteinSource, Situation, Species } from "./types";
-import { anchorOf, formOf, mer, recommendable, stageForAge } from "./engine";
+import { anchorOf, assumedCatKg, formOf, mer, recommendable, stageForAge } from "./engine";
 import { MIN_LIVE } from "./categories";
 
 /**
@@ -237,12 +237,12 @@ export function constraintsFor(s: Situation): Constraint[] {
   if (s.budgetMonthly !== undefined) {
     if (wet) {
       // 罐頭要先知道一天吃幾罐。沒講體重就用 4 公斤，而且把這個假設寫在理由裡
-      const kg = s.weightKg ?? 4;
+      const kg = s.weightKg ?? assumedCatKg(s.ageYears);
       cs.push({
         kind: "maxMonthly",
         value: s.budgetMonthly,
         kcalPerDay: mer(kg, stageForAge(s.ageYears, sp), sp),
-        label: `全吃罐頭一個月超過 ${s.budgetMonthly} 元${s.weightKg ? "" : "（照 4 公斤的貓算）"}`,
+        label: `全吃罐頭一個月超過 ${s.budgetMonthly} 元${s.weightKg ? "" : `（照 ${kg} 公斤的${kg === 2 ? "幼貓" : "貓"}算）`}`,
         tag: "預算",
       });
     } else {

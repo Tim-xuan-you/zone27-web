@@ -120,6 +120,8 @@ const COMMON: Record<CategorySlug, { label: string; phrase: string }[]> = {
   ],
   "cat-wet-food": [
     { label: "對雞過敏的成貓", phrase: "成貓，對雞肉過敏" },
+    { label: "幼貓", phrase: "幼貓" },
+    { label: "老貓", phrase: "老貓" },
     { label: "有點胖", phrase: "成貓，有點胖" },
     { label: "想省錢", phrase: "成貓，想省錢" },
   ],
