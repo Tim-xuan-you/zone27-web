@@ -335,10 +335,15 @@ export function adjudicate(pool: Product[], situation: Situation): Verdict {
   const { pick, reason } = choose(alive, situation);
 
   // 貓不愛喝水：乾糧怎麼挑都補不了水，罐頭可以。這一句一定要講
-  const notice =
-    situation.species === "cat" && (situation.form ?? "dry") === "dry" && has(situation, "喝水")
-      ? "不愛喝水的貓，可以把一部分換成主食罐：罐頭七八成是水，吃罐頭就是在喝水。貓的類目頁上面可以切換到主食罐。"
-      : undefined;
+  const notices: string[] = [];
+  if (situation.species === "cat" && form === "dry" && has(situation, "喝水")) {
+    notices.push("不愛喝水的貓，可以把一部分換成主食罐：罐頭七八成是水，吃罐頭就是在喝水。貓的類目頁上面可以切換到主食罐。");
+  }
+  // 講了胖，最有用的一句話不在哪一包，在餵多少。乾糧大多沒公布熱量，換包裝的效果有限
+  if (form === "dry" && has(situation, "體重")) {
+    notices.push("要減重，餵多少比換哪一包重要。先照包裝上建議量的下限餵，兩週量一次體重，沒有變輕就再少一成。");
+  }
+  const notice = notices.length > 0 ? notices.join(" ") : undefined;
 
   const unusedSignals = situation.symptoms
     .map((x) => Object.keys(NO_DATA_FOR).find((k) => x.includes(k)))

@@ -228,6 +228,17 @@ export function parse(text: string, fallback: Species = "dog", fallbackForm: For
         break;
       }
     }
+    // 米克斯沒有品種可以查體型，很多人直接講「小型犬」「大隻的」
+    if (!bodySize) {
+      const size = /小型犬|小型的|體型小|小隻/.test(t) ? "small"
+        : /中型犬|中型的|體型中等/.test(t) ? "medium"
+        : /大型犬|大型的|體型大|大隻/.test(t) ? "large"
+        : undefined;
+      if (size) {
+        bodySize = size;
+        chips.push({ label: `體型 · ${({ small: "小型犬", medium: "中型犬", large: "大型犬" } as const)[size]}`, kind: "info", source: "體型" });
+      }
+    }
   }
 
   // 講了品種就知道是什麼動物，不用再掛一顆「物種」。沒講品種才掛，讓他看得到我們是怎麼判斷的。

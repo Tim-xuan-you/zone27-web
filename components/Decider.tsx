@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { parse } from "@/lib/parse";
-import { adjudicate, formOf, stageForAge, type Stage } from "@/lib/engine";
+import { adjudicate, anchorOf, formOf, pricePerKg, stageForAge, unitOf, type Stage } from "@/lib/engine";
 import { mentionedProducts } from "@/lib/mentions";
 import { productHref } from "@/lib/labels";
 import { catalog, catalogOf, constraintsFor, isLive } from "@/lib/catalog";
@@ -92,6 +92,59 @@ const PICKS: Record<CategorySlug, Pick[]> = {
     { label: "有點胖", phrase: "有點胖" }, { label: "想省錢", phrase: "想省錢" },
   ],
 };
+
+/*
+ * 還沒問之前，先把常見情況的答案攤開。
+ *
+ * 很多人不知道要講什麼。看到「對雞過敏的成犬 → 這一包，每公斤 600 元」，
+ * 馬上知道這個網站在做什麼，而且常常剛好就是他家的狀況。
+ * 答案是引擎照那句話當場算的，點下去就是那句話的完整裁決，跟打字、點按鈕走同一條路。
+ * 同一款已經出現過就不再列：好幾行都是同一包，看起來就像在推銷那一包。
+ */
+const COMMON: Record<CategorySlug, { label: string; phrase: string }[]> = {
+  "dog-food": [
+    { label: "對雞過敏的成犬", phrase: "成犬，對雞肉過敏" },
+    { label: "小型犬", phrase: "成犬，小型犬" },
+    { label: "幼犬", phrase: "幼犬" },
+    { label: "老狗", phrase: "老狗" },
+    { label: "老狗，預算有限", phrase: "老狗，想省錢" },
+    { label: "想省錢", phrase: "成犬，想省錢" },
+  ],
+  "cat-food": [
+    { label: "對雞過敏的成貓", phrase: "成貓，對雞肉過敏" },
+    { label: "對魚過敏的成貓", phrase: "成貓，對魚過敏" },
+    { label: "幼貓", phrase: "幼貓" },
+    { label: "老貓", phrase: "老貓" },
+    { label: "想省錢", phrase: "成貓，想省錢" },
+  ],
+  "cat-wet-food": [
+    { label: "對雞過敏的成貓", phrase: "成貓，對雞肉過敏" },
+    { label: "有點胖", phrase: "成貓，有點胖" },
+    { label: "想省錢", phrase: "成貓，想省錢" },
+  ],
+};
+
+type Answer = { label: string; phrase: string; p: Product; per: number | null };
+const answerCache = new Map<CategorySlug, Answer[]>();
+function answersFor(slug: CategorySlug): Answer[] {
+  const hit = answerCache.get(slug);
+  if (hit) return hit;
+  const c = CATEGORIES.find((x) => x.slug === slug)!;
+  const seen = new Set<string>();
+  const out: Answer[] = [];
+  for (const row of COMMON[slug]) {
+    const s = parse(row.phrase, c.species, c.form).situation;
+    s.constraints = constraintsFor(s);
+    const v = adjudicate(catalog, s);
+    // 還在上架、或這一句剛好停下來（醫療、沒貨），就不列
+    if (!v.pick || v.stop || seen.has(v.pick.id)) continue;
+    seen.add(v.pick.id);
+    const m = anchorOf(v.pick, "safe");
+    out.push({ ...row, p: v.pick, per: m && c.form === "dry" ? pricePerKg(unitOf(v.pick, m), m.amount) : null });
+  }
+  answerCache.set(slug, out);
+  return out;
+}
 
 /** 把一段字從句子裡拿掉，順便收拾多出來的逗號 */
 function without(text: string, phrase: string): string {
@@ -301,6 +354,30 @@ export default function Decider({
         )}
       </p>
 
+      {!verdict && mentions.length === 0 && !empty && answersFor(cat.slug).length > 0 && (
+        <div style={{ marginTop: 28 }}>
+          <p style={S.lbl}>常見的情況，答案先算好了</p>
+          <div style={{ display: "grid", gap: 10 }}>
+            {answersFor(cat.slug).map((a) => (
+              <button key={a.phrase} type="button" onClick={() => run(a.phrase)} style={answerRow}>
+                <span style={{ flex: 1, minWidth: 0 }}>
+                  <span style={{ display: "block", fontSize: 13.5, fontWeight: 700, color: "var(--accent)" }}>{a.label}</span>
+                  <span style={{ display: "block", fontSize: 15.5, fontWeight: 700, lineHeight: 1.55, marginTop: 2 }}>
+                    <span style={{ fontSize: 13, fontWeight: 500, color: "var(--muted)" }}>{a.p.brand} </span>
+                    {a.p.name}
+                  </span>
+                </span>
+                {a.per && (
+                  <span className="mono" style={{ fontSize: 13.5, fontWeight: 700, color: "var(--keep)", whiteSpace: "nowrap" }}>
+                    ${a.per}/kg
+                  </span>
+                )}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+
       {mentions.length > 0 && (
         <div id="mentions" style={{ marginTop: 28 }}>
           <p style={S.lbl}>你提到的</p>
@@ -380,6 +457,12 @@ const pickWrap: React.CSSProperties = { marginTop: 14 };
 const pickHead: React.CSSProperties = { display: "block", fontSize: 13, color: "var(--muted)", marginBottom: 8 };
 const pickOn: React.CSSProperties = {
   background: "var(--accent-soft)", borderColor: "var(--accent)", color: "var(--accent)", fontWeight: 700,
+};
+
+const answerRow: React.CSSProperties = {
+  display: "flex", alignItems: "center", gap: 12, width: "100%", textAlign: "left",
+  background: "var(--surface)", border: "1px solid var(--line)", borderRadius: 12,
+  padding: "12px 16px", font: "inherit", color: "inherit", cursor: "pointer",
 };
 
 const mentionRow: React.CSSProperties = {
