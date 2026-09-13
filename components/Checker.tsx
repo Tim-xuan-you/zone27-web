@@ -38,7 +38,7 @@ export default function Checker({ items }: { items: CheckItem[] }) {
 
   const byName = useMemo(() => {
     const tokens = q.toLowerCase().split(/[\s,，、]+/).filter(Boolean);
-    return items.filter((x) => tokens.every((t) => `${x.brand} ${x.name}`.toLowerCase().includes(t)));
+    return items.filter((x) => tokens.every((t) => `${x.brand} ${x.name} ${x.alias ?? ""}`.toLowerCase().includes(t)));
   }, [items, q]);
   const shown = byName.filter((x) => (sp === "all" || x.species === sp) && (only === "all" || x.status === only));
 
@@ -56,7 +56,7 @@ export default function Checker({ items }: { items: CheckItem[] }) {
           type="search"
           value={q}
           onChange={(e) => setQ(e.target.value)}
-          placeholder="打品牌或名字，像「ACANA 鴨」「汪喵」"
+          placeholder="打品牌或名字，像「皇家 室內」「希寶」"
           aria-label="搜尋飼料"
           style={input}
         />
@@ -162,7 +162,8 @@ function Row({ x }: { x: CheckItem }) {
           {x.status === "clean" && x.buyId ? (
             <a href={`/go/${x.buyId}/${x.id}`} rel="nofollow sponsored" style={buy}>去蝦皮看</a>
           ) : null}
-          <Link href={x.href} style={{ fontSize: 14, color: "var(--accent)", fontWeight: 600 }}>看這一款的完整說明 →</Link>
+          {/* 只讀了成分表的那幾款沒有商品頁 */}
+          {x.href && <Link href={x.href} style={{ fontSize: 14, color: "var(--accent)", fontWeight: 600 }}>看這一款的完整說明 →</Link>}
           <Share
             path={`/check#${x.id}`}
             text={`${x.brand} ${x.name}：${BADGE[x.status].zh}。${LINE[x.status]}`}

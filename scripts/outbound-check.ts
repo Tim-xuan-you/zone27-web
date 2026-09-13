@@ -50,7 +50,8 @@ function forbiddenHosts(): Set<string> {
         if (!/shopee\.tw/.test(m[0])) add(m[0]);
       }
     }
-    if (f.includes("hidden-chicken") && f.endsWith(".json")) {
+    // check-extra.json：查藏雞頁只讀成分表的那幾款，refs 是研究來源（官網、別家通路）
+    if ((f.includes("hidden-chicken") || f === "check-extra.json") && f.endsWith(".json")) {
       for (const m of text.matchAll(/"url":\s*"([^"]+)"/g)) add(m[1]);
     }
   }

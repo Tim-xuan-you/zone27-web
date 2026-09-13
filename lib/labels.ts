@@ -16,7 +16,12 @@ const MEAT: Record<ProteinSource, string> = {
 
 /** 「雞、火雞」 */
 export function meatsOf(p: Product): string {
-  return [...new Set(p.spec.proteinSources.map((k) => MEAT[k] ?? k))].join("、");
+  return meatsFrom(p.spec.proteinSources);
+}
+
+/** 查藏雞頁只讀了成分表的那些款，沒有完整的商品資料，直接給肉的清單 */
+export function meatsFrom(sources: ProteinSource[]): string {
+  return [...new Set(sources.map((k) => MEAT[k] ?? k))].join("、");
 }
 
 /** 「成犬」「幼貓專用」「7 歲以上成貓」 */

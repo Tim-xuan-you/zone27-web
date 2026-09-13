@@ -1,0 +1,279 @@
+{
+  "_meta": {
+    "note": "查藏雞頁（/check）用的：只讀了成分表、還沒有完整商品資料的那幾款。不進裁決器、沒有商品頁、沒有購買連結。",
+    "why": "2026-09-13：Threads 第一篇請大家「留言丟名字」，大家丟的會是自己家在吃的（皇家、希寶、耐吉斯、優格…），不是我們讀過能買的那 42 款。先把最常見的讀起來，留言才回得出來；有雞的，底下直接給我們讀過、不含雞、能買的。",
+    "method": "成分照台灣代理商的中文標示或品牌台灣官網，排序照原文。每一款的來源記在 refs，只給我們自己核對，網站上不顯示、不連出去。指名道姓的，寫錯就是我們的責任：只收看得到完整成分表的，只有搜尋摘要的不收（紐頓 T28、貓侍這次就沒收）。",
+    "proteins": "跟商品資料的 proteinSources 同一套寫法。有雞、有雞油、沒寫清楚、沒有雞，由 lib/chicken.ts 的 chickenStatusOf 從 proteins 和 found 算，不手寫。",
+    "promote": "Tim 給了分潤連結，就把它補成完整商品（CSV），這裡那一筆刪掉，避免同一款出現兩次。",
+    "checkedAt": "2026-09-13"
+  },
+  "items": [
+    {
+      "id": "ck-01",
+      "species": "cat",
+      "form": "dry",
+      "brand": "Royal Canin 法國皇家",
+      "name": "室內成貓 IN27",
+      "alias": "皇家 室內貓 IN27",
+      "proteins": ["poultry", "animal"],
+      "found": [
+        "第 1～3 項：小麥、米、植物分離蛋白",
+        "第 4 項：脫水家禽蛋白",
+        "第 6 項：動物脂肪",
+        "第 7 項：水解動物蛋白"
+      ],
+      "verdict": "肉只寫「家禽」和「動物」，沒講是哪一種，家禽可能是雞、火雞或鴨。另外，排在最前面的三項是小麥、米和植物蛋白，第一個動物來源排第 4。",
+      "refs": [{ "label": "Royal Canin 台灣官網 IN27", "url": "https://www.royalcanin.com/tw/cats/products/retail-products/indoor-27-2529" }]
+    },
+    {
+      "id": "ck-02",
+      "species": "cat",
+      "form": "dry",
+      "brand": "Royal Canin 法國皇家",
+      "name": "幼貓 K36",
+      "alias": "皇家 幼貓 K36",
+      "stage": ["puppy"],
+      "proteins": ["poultry", "animal", "fish"],
+      "found": [
+        "第 1 項：脫水禽肉蛋白",
+        "第 4 項：動物脂肪",
+        "第 6 項：水解動物蛋白（家禽、魚肉）"
+      ],
+      "verdict": "排第一的是「禽肉」，沒講是哪一種禽。對雞過敏的幼貓，這包沒辦法排除。",
+      "refs": [{ "label": "Royal Canin 台灣官網 K36", "url": "https://www.royalcanin.com/tw/cats/products/retail-products/kitten-36-2522" }]
+    },
+    {
+      "id": "ck-03",
+      "species": "cat",
+      "form": "dry",
+      "brand": "Royal Canin 法國皇家",
+      "name": "絕育成貓 S37",
+      "alias": "皇家 絕育 S37",
+      "proteins": ["poultry", "animal"],
+      "found": [
+        "第 1 項：脫水禽肉蛋白",
+        "第 5 項：動物脂肪",
+        "第 6 項：水解動物蛋白"
+      ],
+      "verdict": "肉只寫「禽肉」和「動物」，看不出來有沒有雞。",
+      "refs": [{ "label": "Royal Canin 台灣官網 S37", "url": "https://royalcanin.com/tw/cats/products/retail-products/sterilised-37" }]
+    },
+    {
+      "id": "ck-04",
+      "species": "dog",
+      "form": "dry",
+      "brand": "Royal Canin 法國皇家",
+      "name": "柴犬成犬 S26",
+      "alias": "皇家 柴犬 S26",
+      "proteins": ["poultry", "animal"],
+      "found": [
+        "第 1～2 項：玉米、米",
+        "第 3 項：脫水禽肉蛋白",
+        "第 6 項：動物脂肪",
+        "第 8 項：水解動物蛋白"
+      ],
+      "verdict": "肉只寫「禽肉」和「動物」，沒講是哪一種。懷疑對雞過敏的，這包沒辦法排除。",
+      "refs": [{ "label": "Royal Canin 台灣官網 S26", "url": "https://www.royalcanin.com/tw/dogs/products/retail-products/shiba-inu-adult-2104" }]
+    },
+    {
+      "id": "ck-05",
+      "species": "cat",
+      "form": "dry",
+      "brand": "Nutram 紐頓",
+      "name": "T24 無穀全能 鮭魚＋鱒魚 挑嘴全齡貓",
+      "alias": "紐頓 T24 鮭魚 鱒魚",
+      "proteins": ["fish", "salmon"],
+      "found": [
+        "第 1 項：去骨鱒魚",
+        "第 2、3 項：鮭魚粉、鯡魚粉",
+        "油脂：菜籽油、鮭魚油",
+        "香料寫的是「天然素食香料」"
+      ],
+      "verdict": "肉全部是魚，油脂用菜籽油。同一個牌子的 T22 是以雞為主，T24 沒有雞。",
+      "refs": [{ "label": "台灣通路的代理商中文標示", "url": "https://www.unpet.com.tw/products/nutram%E7%B4%90%E9%A0%93t24" }]
+    },
+    {
+      "id": "ck-06",
+      "species": "cat",
+      "form": "dry",
+      "brand": "Farmina 法米納",
+      "name": "N&D 南瓜無穀 鴨肉哈密瓜 挑嘴全齡貓",
+      "alias": "法米納 ND N&D 南瓜 鴨肉",
+      "proteins": ["duck", "fish"],
+      "found": [
+        "第 1 項：去骨鴨肉（30%）",
+        "第 2 項：脫水鴨肉（28%）",
+        "第 4 項：雞脂肪",
+        "後面還有乾燥雞蛋、鯡魚"
+      ],
+      "verdict": "肉是鴨和鯡魚，沒有雞肉。但第 4 項的油脂是雞脂肪。",
+      "refs": [{ "label": "台灣通路的代理商中文標示", "url": "https://shop.petpark.com.tw/20616496" }]
+    },
+    {
+      "id": "ck-07",
+      "species": "cat",
+      "form": "dry",
+      "brand": "Mobby 莫比",
+      "name": "愛貓無穀配方 鱒魚＋馬鈴薯",
+      "alias": "莫比 鱒魚 馬鈴薯",
+      "proteins": ["fish", "salmon"],
+      "found": [
+        "第 1 項：鱒魚",
+        "第 2 項：海魚茸",
+        "第 8 項：煙燻鮭魚",
+        "油脂：菜籽油",
+        "香料只寫「天然香料」，沒寫來源"
+      ],
+      "verdict": "肉全部是魚，油脂用菜籽油。",
+      "refs": [{ "label": "台灣通路的代理商中文標示", "url": "https://hocom.tw/h/ProductDetail?key=6129189082&productId=11740" }]
+    },
+    {
+      "id": "ck-08",
+      "species": "cat",
+      "form": "dry",
+      "brand": "SOLUTION 耐吉斯",
+      "name": "超級無穀 居家成貓慢活配方",
+      "alias": "耐吉斯 超級無穀 慢活 火雞",
+      "proteins": ["turkey"],
+      "found": [
+        "第 1、2 項：火雞肉粉、火雞鮮肉",
+        "第 6 項：雞油"
+      ],
+      "verdict": "肉是火雞，沒有雞肉。油脂用的是雞油，排第 6。",
+      "refs": [{ "label": "耐吉斯官網", "url": "https://www.hrspetfood.com/grain_free/detail/8" }]
+    },
+    {
+      "id": "ck-09",
+      "species": "cat",
+      "form": "dry",
+      "brand": "SOLUTION 耐吉斯",
+      "name": "超級無穀 全齡貓化毛配方",
+      "alias": "耐吉斯 超級無穀 化毛 火雞",
+      "proteins": ["turkey"],
+      "found": [
+        "第 1、2 項：火雞肉粉、火雞鮮肉",
+        "第 5 項：雞油"
+      ],
+      "verdict": "肉是火雞，沒有雞肉。油脂用的是雞油，排第 5。",
+      "refs": [{ "label": "耐吉斯官網", "url": "https://www.hrspetfood.com/grain_free/detail/7" }]
+    },
+    {
+      "id": "ck-10",
+      "species": "dog",
+      "form": "dry",
+      "brand": "SOLUTION 耐吉斯",
+      "name": "超級無穀 成犬羊肉配方",
+      "alias": "耐吉斯 超級無穀 羊肉",
+      "proteins": ["lamb"],
+      "found": [
+        "第 1 項：羊肉粉",
+        "第 5 項：雞油",
+        "第 7 項：羊鮮肉"
+      ],
+      "verdict": "肉只有羊，沒有雞肉。油脂用的是雞油，排在羊鮮肉前面。",
+      "refs": [{ "label": "耐吉斯官網", "url": "https://www.hrspetfood.com/grain_free/detail/2" }]
+    },
+    {
+      "id": "ck-11",
+      "species": "cat",
+      "form": "dry",
+      "brand": "Instinct 原點",
+      "name": "鮭魚無穀全貓配方",
+      "alias": "原點 鮭魚 無穀",
+      "proteins": ["salmon", "whitefish", "fish"],
+      "found": [
+        "第 1 項：鮭魚",
+        "第 2、3 項：油鯡魚粉、白魚粉（鱈魚、比目魚、石斑魚）",
+        "油脂：菜籽油"
+      ],
+      "verdict": "肉全部是魚。同一個牌子的「鴨肉無穀全貓」第 3 項就是雞肉粉，鮭魚這一款沒有。",
+      "refs": [{ "label": "Instinct 原點台灣官網", "url": "https://www.instinct.tw/%E8%B2%93%E5%92%AA%E9%A3%BC%E6%96%99" }]
+    },
+    {
+      "id": "ck-12",
+      "species": "cat",
+      "form": "dry",
+      "brand": "Instinct 原點",
+      "name": "鴨肉無穀全貓配方",
+      "alias": "原點 鴨肉 無穀",
+      "proteins": ["duck", "turkey", "chicken", "whitefish", "fish"],
+      "found": [
+        "第 1 項：鴨肉",
+        "第 2 項：火雞肉粉",
+        "第 3 項：雞肉粉",
+        "第 4 項：雞脂肪"
+      ],
+      "verdict": "鴨排第一，接下來是火雞肉粉、雞肉粉、雞脂肪，後面還有白魚粉、鯡魚粉。名字只寫鴨，其實是鴨、火雞、雞、魚的綜合配方。",
+      "refs": [{ "label": "Instinct 原點台灣官網（這一頁很多款，鴨肉那一段）", "url": "https://www.instinct.tw/%E8%B2%93%E5%92%AA%E9%A3%BC%E6%96%99" }],
+      "refNote": "另外用搜尋摘要交叉比對過一次，第 3 項雞肉粉、第 4 項雞脂肪的位置一致（那份摘要多寫了凍乾雞肉、雞肝，可能是舊版，以官網為準）"
+    },
+    {
+      "id": "ck-13",
+      "species": "cat",
+      "form": "dry",
+      "brand": "Instinct 原點",
+      "name": "火雞肉低敏成貓配方",
+      "alias": "原點 火雞 低敏",
+      "proteins": ["turkey"],
+      "found": [
+        "第 1 項：火雞肉粉",
+        "第 3 項：火雞肉",
+        "油脂：菜籽油、椰子油"
+      ],
+      "verdict": "肉只有火雞，油脂用菜籽油和椰子油。",
+      "refs": [{ "label": "Instinct 原點台灣官網", "url": "https://www.instinct.tw/%E8%B2%93%E5%92%AA%E9%A3%BC%E6%96%99" }]
+    },
+    {
+      "id": "ck-14",
+      "species": "dog",
+      "form": "dry",
+      "brand": "Blackwood 柏萊富",
+      "name": "功能性全齡 護膚亮毛配方（羊肉＋糙米）",
+      "alias": "柏萊富 羊肉 糙米 護膚",
+      "proteins": ["lamb", "salmon"],
+      "found": [
+        "第 1 項：濃縮羊肉",
+        "第 4 項：濃縮鮭魚",
+        "油脂：菜籽油"
+      ],
+      "verdict": "肉是羊和鮭魚，油脂用菜籽油。同牌子另一款「特調全齡犬配方」名字寫的是羊肉＋糙米＋雞肉，那一款有雞，別拿錯。",
+      "refs": [{ "label": "柏萊富台灣官網", "url": "https://blackwood.tw/products/view/dog_sensitive_lamb" }]
+    },
+    {
+      "id": "ck-15",
+      "species": "dog",
+      "form": "dry",
+      "brand": "TOMA-PRO 優格",
+      "name": "經典系列 成犬 羊肉＋米 毛髮柔亮配方（小顆粒）",
+      "alias": "優格 羊肉 米",
+      "proteins": ["lamb", "chicken", "salmon"],
+      "found": [
+        "第 1 項：乾燥羊肉",
+        "第 2 項：乾燥雞肉",
+        "第 7 項：雞脂",
+        "後面還有乾燥鮭魚、乾燥雞蛋"
+      ],
+      "verdict": "羊肉排第一，第 2 項就是雞肉，油脂也是雞脂。名字只寫羊肉，其實是羊加雞。",
+      "refs": [{ "label": "台灣通路的代理商中文標示", "url": "https://www.unpet.com.tw/products/%E5%84%AA%E6%A0%BC%E7%B6%93%E5%85%B8%E7%B3%BB%E5%88%97-%E6%88%90%E7%8A%AC%E7%BE%8A%E8%82%89%E7%B1%B3%E6%AF%9B%E9%AB%AE%E6%9F%94%E4%BA%AE%E9%85%8D%E6%96%B9%E5%B0%8F%E9%A1%86%E7%B2%92" }]
+    },
+    {
+      "id": "ck-16",
+      "species": "cat",
+      "form": "wet",
+      "brand": "Sheba 希寶",
+      "name": "鮮饌包 鮪魚＋鮭魚 70g",
+      "alias": "希寶 Sheba 鮮饌包 鮪魚 鮭魚",
+      "proteins": ["chicken", "fish", "beef", "salmon"],
+      "found": [
+        "第 1 項：水",
+        "第 2 項：雞肉",
+        "第 3 項：鮪魚",
+        "第 4 項：牛肝",
+        "第 5 項：鮭魚",
+        "第 6 項：雞副產品"
+      ],
+      "verdict": "扣掉水，第一個肉就是雞，排在鮪魚前面，後面還有牛肝和雞副產品。名字只寫鮪魚和鮭魚。",
+      "refs": [{ "label": "台灣通路的中文標示（泰國製）", "url": "https://www.lovecat.com.tw/products/sheba%E9%AE%AE%E9%A5%8C%E5%8C%85-%E9%AE%AA%E9%AD%9A%E9%AE%AD%E9%AD%9A70g" }]
+    }
+  ]
+}
