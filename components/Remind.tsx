@@ -15,6 +15,11 @@ import { eliminationEvents, googleCalUrl, trialEvents } from "@/lib/reminder";
  * 日期要在使用者的手機上算。這個元件也會出現在 build 時就產生好的
  * 長尾頁裡，如果在伺服器上算，日期會停在 build 的那一天。
  * 所以第一次畫面先顯示「第 N 天」，掛上去之後才換成真正的日期。
+ *
+ * 開始日期讓讀者自己選（2026-09-13 Tim 提的）。多數人是看完才下單，
+ * 飼料隔天、甚至三天後才到，從「今天」算，每一個提醒都早了幾天。
+ * 以前叫他「到行事曆裡把日期拖一下」，那是把我們該做的事丟給他。
+ * 前後 30 天內都可以選：/api/cal 也只收這個範圍，太遠的一律當今天。
  */
 
 type Props =
@@ -22,8 +27,13 @@ type Props =
   | { plan: "elim" };
 
 export default function Remind(props: Props) {
+  const [today, setToday] = useState<string | null>(null);
   const [start, setStart] = useState<string | null>(null);
-  useEffect(() => setStart(todayTW()), []);
+  useEffect(() => {
+    const t = todayTW();
+    setToday(t);
+    setStart(t);
+  }, []);
 
   const events =
     props.plan === "elim"
@@ -47,19 +57,36 @@ export default function Remind(props: Props) {
   const n = events.length;
   const intro =
     props.plan === "elim"
-      ? "八週很長，最常失敗的就是撐不到最後，或是忘了回測。把關鍵的日子先排進行事曆，到時候手機會跳出來，告訴你那天該看什麼。"
+      ? "八週很長，最常失敗的就是撐不到最後，或是忘了回測。關鍵的日子排進行事曆，到時候手機會跳出來。"
       : "換糧最常卡在兩件事：試到一半斷糧，還有忘了哪天該回頭看結果。這些日子交給手機記就好。";
 
   return (
     <div style={box}>
       <p style={head}>讓手機幫你記</p>
-      <p style={sub}>
-        {intro}
-        <br />
-        不用留 email，也不用加 LINE，我們這邊什麼都不存。
-      </p>
+      <p style={sub}>{intro}不用註冊，也不用留資料。</p>
 
-      <div style={{ marginTop: 14 }}>
+      {start && today && (
+        <label style={pickRow}>
+          <span style={pickLabel}>{props.plan === "elim" ? "哪天開始？" : "哪天開始換？"}</span>
+          <input
+            type="date"
+            value={start}
+            min={addDays(today, -30)}
+            max={addDays(today, 30)}
+            // 手機的日期選單按「清除」會給空字串，那時候就回到今天
+            onChange={(e) => setStart(e.target.value || today)}
+            style={dateInput}
+          />
+          {start !== today && (
+            <button type="button" onClick={() => setStart(today)} style={resetBtn}>改回今天</button>
+          )}
+        </label>
+      )}
+      {props.plan === "trial" && (
+        <p style={hint}>飼料還沒到的話，選到貨那天。</p>
+      )}
+
+      <div style={{ marginTop: 10 }}>
         {events.map((ev, i) => (
           <div key={ev.key} style={{ ...row, ...(i === n - 1 ? { borderBottom: 0 } : null) }}>
             <span className="mono" style={date}>
@@ -83,12 +110,6 @@ export default function Remind(props: Props) {
           {n > 1 ? `iPhone 行事曆：${n} 個一次加` : "加到 iPhone 行事曆"}
         </a>
       )}
-
-      <p style={foot}>
-        {props.plan === "elim"
-          ? "從今天開始算。還沒開始的話，等開始那天再回來按一次就好。"
-          : "從今天開封算。哪天開始不一樣的話，在行事曆裡把日期拖一下就好。"}
-      </p>
     </div>
   );
 }
@@ -101,6 +122,20 @@ const head: React.CSSProperties = { margin: "0 0 6px", fontSize: 16, fontWeight:
 const sub: React.CSSProperties = {
   margin: 0, fontSize: 14, color: "var(--muted)", lineHeight: 1.9,
 };
+const pickRow: React.CSSProperties = {
+  display: "flex", flexWrap: "wrap", alignItems: "center", gap: "8px 12px", marginTop: 14,
+};
+const pickLabel: React.CSSProperties = { fontSize: 14.5, fontWeight: 700 };
+const dateInput: React.CSSProperties = {
+  font: "inherit", fontSize: 15, color: "var(--ink)", background: "var(--surface)",
+  border: "1px solid var(--line)", borderRadius: 10, padding: "7px 12px",
+  colorScheme: "light dark",
+};
+const resetBtn: React.CSSProperties = {
+  font: "inherit", fontSize: 13, color: "var(--accent)", background: "transparent",
+  border: 0, padding: 0, cursor: "pointer", textDecoration: "underline", textUnderlineOffset: 3,
+};
+const hint: React.CSSProperties = { margin: "6px 0 0", fontSize: 12.5, color: "var(--faint)" };
 const row: React.CSSProperties = {
   display: "flex", flexWrap: "wrap", alignItems: "center", gap: "6px 12px",
   padding: "11px 0", borderBottom: "1px dashed var(--line)",
@@ -116,7 +151,4 @@ const pill: React.CSSProperties = {
 };
 const pillStrong: React.CSSProperties = {
   ...pill, display: "inline-block", marginTop: 14, padding: "9px 18px", fontSize: 14,
-};
-const foot: React.CSSProperties = {
-  margin: "12px 0 0", fontSize: 12.5, color: "var(--faint)", lineHeight: 1.8,
 };
