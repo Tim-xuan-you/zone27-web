@@ -671,7 +671,7 @@ function Stores({ p, dogKg, stage }: { p: Product; dogKg?: number; stage?: Stage
             {store.options.map((o, i) => {
               const dur = bagDuration(o.unit, dogKg, stage, p.species, p.spec.kcal, formOf(p));
               // 罐頭講「每罐」：同樣大小的罐子，每罐省幾 % 就是每公斤省幾 %。罐子大小不一樣就講「每克」
-              const per = formOf(p) !== "wet" ? "每公斤" : cansOf(o.unit)?.g === baseG ? "每罐" : "每克";
+              const per = formOf(p) !== "wet" ? "每公斤" : cansOf(o.unit)?.g === baseG ? `每${canWord(p)}` : "每克";
               // 同一包別家比較便宜，就只講這個。旁邊明明有一家便宜 $581，還寫「每公斤省 3%」是誤導
               const over = overSingle(p, o.unit, o.amount);
               const save =
@@ -923,7 +923,8 @@ function SizeTable({ p, weightKg, stage, said }: { p: Product; weightKg?: number
   const who = said && weightKg ? `你家的${cat ? "貓" : "狗"}` : `一隻${cat ? "貓" : "狗"}`;
   // 罐頭：同樣大小的罐子比「每罐」；85g 跟 185g 比，一罐本來就差一倍，要比「每克」
   const g0 = wet ? cansOf(rows[0].unit)?.g : undefined;
-  const perOf = (unit: string) => (!wet ? "每公斤" : cansOf(unit)?.g === g0 ? "每罐" : "每克");
+  // 餐包講「每包」（canWord）
+  const perOf = (unit: string) => (!wet ? "每公斤" : cansOf(unit)?.g === g0 ? `每${canWord(p)}` : "每克");
   // 罐頭沒開放得住，沒有「吃不完」的問題：最划算就是每克最便宜的那一行。
   // 只比小罐便宜一點點（5% 以內）的不標，不然整箱一罐便宜 4 毛也會被標成最划算
   let cheapestWet: number | null = null;
@@ -986,7 +987,12 @@ function SizeTable({ p, weightKg, stage, said }: { p: Product; weightKg?: number
             </>
           )}
           {/* 養貓的人最怕的是買了牠不吃。先講怎麼把這個風險降到最小，比講省多少更讓人敢按 */}
-          {cat && (wet ? "貓換口味常常不肯吃，第一次先買一罐，確定牠肯吃再買整箱。" : "貓換口味常常不肯吃，第一次先買最小包。")}
+          {/* 最小的也要一次買 6 罐（賣家有最低購買量）就不能叫人「先買一罐」 */}
+          {cat && (wet
+            ? (cansOf(rows[0].unit)?.n ?? 1) === 1
+              ? `貓換口味常常不肯吃，第一次先買一${canWord(p)}，確定牠肯吃再買整箱。`
+              : `貓換口味常常不肯吃，第一次先買最少的那一組，確定牠肯吃再買整箱。`
+            : "貓換口味常常不肯吃，第一次先買最小包。")}
         </p>
       )}
     </div>
@@ -1011,7 +1017,7 @@ function SizeTable({ p, weightKg, stage, said }: { p: Product; weightKg?: number
         {(best === i || cheapestWet === i || over || d || save !== null || variant) && (
           <span style={szMeta}>
             {best === i && <b style={{ color: "var(--accent)" }}>{who}買這包最划算</b>}
-            {cheapestWet === i && <b style={{ color: "var(--accent)" }}>{sameCan ? "每罐最便宜" : "每克最便宜"}</b>}
+            {cheapestWet === i && <b style={{ color: "var(--accent)" }}>{sameCan ? `每${canWord(p)}最便宜` : "每克最便宜"}</b>}
             {over && (
               <span style={{ color: "var(--cut)" }}>
                 一{over.word} ${over.each}，比單買一{over.word}貴 ${over.each - over.single}
