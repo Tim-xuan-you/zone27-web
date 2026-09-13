@@ -1,13 +1,13 @@
 import Link from "next/link";
 import Remind from "./Remind";
 import {
-  anchorOf, bagDuration, canPlan, canWord, cansOf, checkedOf, formOf, freshness, mer, sharedListings, storesOf, trialPlan,
-  unitOf, unitPrice, wetMonthly,
+  anchorOf, bagDuration, canPlan, canWord, cansOf, checkedOf, formOf, freshness, mer, packsOf, sharedListings, sizesOf,
+  storesOf, trialPlan, unitOf, unitPrice, wetMonthly,
   FRESH_DAYS, type Stage,
 } from "@/lib/engine";
 import { categoryOf } from "@/lib/categories";
 import { priceStat, timingAdvice } from "@/lib/history";
-import type { Product, Verdict } from "@/lib/types";
+import type { Merchant, Product, Verdict } from "@/lib/types";
 import { linkReport } from "@/lib/contact";
 import { fitFor, platformOf, productHref } from "@/lib/labels";
 import { S } from "./styles";
@@ -40,6 +40,7 @@ export default function Result({
   symptoms,
   stage,
   chipsLabel = "條件",
+  fromDecider = false,
 }: {
   verdict: Verdict;
   chips: { label: string; kind: "info" | "avoid" }[];
@@ -49,6 +50,8 @@ export default function Result({
   /** 生命階段。幼犬幼貓的食量接近同體重成年的兩倍，不帶會高估這包能吃幾天。 */
   stage?: Stage;
   chipsLabel?: string;
+  /** 裁決器來的：體重是讀者自己講的，上面也有輸入框可以補講。長尾頁的體重是品種的一般值 */
+  fromDecider?: boolean;
 }) {
   const shared = sharedListings(verdict.survivors);
   const others = verdict.survivors.filter((p) => p.id !== verdict.pick?.id);
@@ -95,7 +98,7 @@ export default function Result({
           {verdict.pick && (
             <>
               <p style={S.lbl}>買這個</p>
-              <Answer p={verdict.pick} verdict={verdict} dogKg={dogKg} stage={stage} multi={shared} />
+              <Answer p={verdict.pick} verdict={verdict} dogKg={dogKg} stage={stage} multi={shared} said={fromDecider} />
             </>
           )}
 
@@ -116,7 +119,7 @@ export default function Result({
               </summary>
               <div style={S.moreBody}>
                 {others.map((p) => (
-                  <Alt key={p.id} p={p} dogKg={dogKg} stage={stage} multi={shared} />
+                  <Alt key={p.id} p={p} dogKg={dogKg} stage={stage} multi={shared} said={fromDecider} />
                 ))}
               </div>
             </details>
@@ -210,14 +213,13 @@ function Cascade({ verdict }: { verdict: Verdict }) {
 /* ------------------------------------------------------------------ */
 
 function Answer({
-  p, verdict, dogKg, stage, multi,
+  p, verdict, dogKg, stage, multi, said,
 }: {
-  p: Product; verdict: Verdict; dogKg?: number; stage?: Stage; multi: Set<string>;
+  p: Product; verdict: Verdict; dogKg?: number; stage?: Stage; multi: Set<string>; said?: boolean;
 }) {
   const safe = anchorOf(p, "safe");
   const up = unitPrice(p, unitOf(p, safe), safe.amount);
   const stores = storesOf(p);
-  const main = stores[0];
 
   return (
     <article style={S.answer}>
@@ -244,19 +246,16 @@ function Answer({
 
         <SpecChips p={p} />
 
-        {main && (
+        {safe && (
           <div style={S.buyRow}>
-            <a
-              style={S.btnBuy}
-              href={`/go/${main.options[0].id}/${p.id}`}
-              rel="nofollow sponsored"
-            >
-              {buyLabel(main)}
+            <a style={S.btnBuy} href={`/go/${safe.id}/${p.id}`} rel="nofollow sponsored">
+              {buyLabel(safe)}
             </a>
-            <span style={S.buyNote}>{buyNote(main)}</span>
+            <span style={S.buyNote}>{buyNote(safe)}</span>
           </div>
         )}
-        {main && <ReportLine p={p} where={whereOf(main, checkedOf(p, safe))} />}
+        {safe && <ReportLine p={p} where={whereOf(storeOf(p, safe), checkedOf(p, safe))} />}
+        <SizeTable p={p} weightKg={dogKg} stage={stage} said={said} />
       </div>
 
       <div style={S.deal}>
@@ -272,7 +271,7 @@ function Answer({
       )}
 
       <details style={S.detailBlock}>
-        <summary style={S.detailSummary}>其他規格與價格</summary>
+        <summary style={S.detailSummary}>{stores.length > 1 ? `全部 ${stores.length} 家的價格` : "各規格的價格"}</summary>
         <div style={{ padding: `0 ${24}px ${24}px` }}>
           <Stores p={p} dogKg={dogKg} stage={stage} />
           {p.knownIssues && <Issues text={p.knownIssues} />}
@@ -342,7 +341,7 @@ function Trial({
               {t.better.savingPct !== null && t.better.savingPct >= 3
                 ? `，每公斤還省 ${t.better.savingPct}%`
                 : ""}
-              。展開下面的「其他規格與價格」可以看到。
+              。上面「每一種大小，最便宜的一家」有列。
             </span>
           )}
         </Step>
@@ -439,11 +438,9 @@ const tNote: React.CSSProperties = {
 /* 備選                                                                */
 /* ------------------------------------------------------------------ */
 
-function Alt({ p, dogKg, stage, multi }: { p: Product; dogKg?: number; stage?: Stage; multi: Set<string> }) {
+function Alt({ p, dogKg, stage, multi, said }: { p: Product; dogKg?: number; stage?: Stage; multi: Set<string>; said?: boolean }) {
   const safe = anchorOf(p, "safe");
   const up = unitPrice(p, unitOf(p, safe), safe.amount);
-  const stores = storesOf(p);
-  const main = stores[0];
 
   return (
     <article style={S.card}>
@@ -460,16 +457,14 @@ function Alt({ p, dogKg, stage, multi }: { p: Product; dogKg?: number; stage?: S
         </div>
         <SpecChips p={p} />
         <FitLine p={p} />
-        {main && (
+        {safe && (
           <div style={{ ...S.buyRow, marginTop: 20 }}>
-            <a
-              style={S.btnSmall}
-              href={`/go/${main.options[0].id}/${p.id}`}
-              rel="nofollow sponsored"
-            >{buyLabel(main, true)}</a>
+            <a style={S.btnSmall} href={`/go/${safe.id}/${p.id}`} rel="nofollow sponsored">
+              {buyLabel(safe, true)}
+            </a>
           </div>
         )}
-        {main && <ReportLine p={p} where={whereOf(main, checkedOf(p, safe))} />}
+        {safe && <ReportLine p={p} where={whereOf(storeOf(p, safe), checkedOf(p, safe))} />}
       </div>
 
       <div style={S.deal}>
@@ -486,6 +481,7 @@ function Alt({ p, dogKg, stage, multi }: { p: Product; dogKg?: number; stage?: S
       <details style={S.detailBlock}>
         <summary style={S.detailSummary}>其他規格與價格</summary>
         <div style={{ padding: `0 ${24}px ${24}px` }}>
+          <SizeTable p={p} weightKg={dogKg} stage={stage} said={said} />
           <Stores p={p} dogKg={dogKg} stage={stage} />
           {p.knownIssues && <Issues text={p.knownIssues} />}
         </div>
@@ -505,7 +501,7 @@ function Alt({ p, dogKg, stage, multi }: { p: Product; dogKg?: number; stage?: S
 export function ProductCard({ p }: { p: Product }) {
   const safe = anchorOf(p, "safe");
   const up = unitPrice(p, unitOf(p, safe), safe.amount);
-  const main = storesOf(p)[0];
+  const count = storesOf(p).length;
   const multi = sharedListings([p]);
 
   return (
@@ -522,15 +518,16 @@ export function ProductCard({ p }: { p: Product }) {
         )}
         <SpecChips p={p} />
         <FitLine p={p} />
-        {main && (
+        {safe && (
           <div style={{ ...S.buyRow, marginTop: 20 }}>
-            <a style={S.btnBuy} href={`/go/${main.options[0].id}/${p.id}`} rel="nofollow sponsored">
-              {buyLabel(main)}
+            <a style={S.btnBuy} href={`/go/${safe.id}/${p.id}`} rel="nofollow sponsored">
+              {buyLabel(safe)}
             </a>
-            <span style={S.buyNote}>{buyNote(main)}</span>
+            <span style={S.buyNote}>{buyNote(safe)}</span>
           </div>
         )}
-        {main && <ReportLine p={p} where={whereOf(main, checkedOf(p, safe))} />}
+        {safe && <ReportLine p={p} where={whereOf(storeOf(p, safe), checkedOf(p, safe))} />}
+        <SizeTable p={p} />
       </div>
 
       <div style={S.deal}>
@@ -546,7 +543,7 @@ export function ProductCard({ p }: { p: Product }) {
       )}
 
       <div style={{ padding: `8px ${24}px ${24}px` }}>
-        <p style={{ ...S.lbl, margin: "8px 0 4px" }}>每一家的規格與價格</p>
+        <p style={{ ...S.lbl, margin: "8px 0 4px" }}>{count > 1 ? `全部 ${count} 家的價格` : "各規格的價格"}</p>
         <Stores p={p} />
         {p.knownIssues && <Issues text={p.knownIssues} />}
       </div>
@@ -588,8 +585,11 @@ function Stores({ p, dogKg, stage }: { p: Product; dogKg?: number; stage?: Stage
               const dur = bagDuration(o.unit, dogKg, stage, p.species, p.spec.kcal, formOf(p));
               // 罐頭講「每罐」：同一款罐子一樣大，每罐省幾 % 就是每公斤省幾 %
               const per = formOf(p) === "wet" ? "每罐" : "每公斤";
+              // 同一包別家比較便宜，就只講這個。旁邊明明有一家便宜 $581，還寫「每公斤省 3%」是誤導
               const save =
-                o.savingPct === null || Math.abs(o.savingPct) < 3
+                o.overFloor > 0
+                  ? { text: `同一包別家便宜 $${o.overFloor}`, tone: "cut" as const }
+                  : o.savingPct === null || Math.abs(o.savingPct) < 3
                   ? o.savingPct === null ? null : { text: `${per}差不多`, tone: "faint" as const }
                   : o.savingPct > 0
                   ? { text: `${per}省 ${o.savingPct}%`, tone: "keep" as const }
@@ -756,17 +756,130 @@ function whereOf(store: { label: string; options: { unit: string; amount: number
  * 還沒決定就不想按。改成「去蝦皮看這一包」：平台大家都熟，
  * 「看」比「買」容易按下去，決定是到了蝦皮才做的。賣家名字移到按鈕下面。
  */
-function buyLabel(store: { label: string; options: { affiliateUrl: string }[] }, short?: boolean): string {
-  const where = platformOf(store.options[0]?.affiliateUrl ?? "");
-  if (!where) return `去${store.label.replace(/（.*/, "")}看`;
+function buyLabel(m: Pick<Merchant, "label" | "affiliateUrl">, short?: boolean): string {
+  const where = platformOf(m.affiliateUrl);
+  if (!where) return `去${m.label.replace(/（.*/, "")}看`;
   return short ? `去${where}看` : `去${where}看這一包`;
 }
 
 /** 按鈕下面那一小行：哪一家，再加一兩句備註（規格名稱另外有提醒，不重複） */
-function buyNote(store: { label: string; options: { note: string }[] }): string {
-  const notes = (store.options[0]?.note ?? "").split("·").map((x) => x.trim()).filter((x) => x && !x.startsWith("規格選"));
-  return [`在${store.label}`, ...notes.slice(0, 2)].join(" · ");
+function buyNote(m: Pick<Merchant, "label" | "note">): string {
+  const notes = ownNotes(m.note);
+  return notes ? `在${m.label} · ${notes}` : `在${m.label}`;
 }
+
+/**
+ * 吃不完的那一包，直接講幾隻一起吃剛好。「吃不完」只講了不要買，
+ * 家裡兩三隻的人要的是「那我可不可以買」
+ */
+function tooLongText(days: number, packs: number, cat: boolean): string | null {
+  const perPack = Math.round(days / packs);
+  if (perPack <= FRESH_DAYS) return null;
+  const n = Math.ceil(perPack / FRESH_DAYS);
+  const who = cat ? "貓" : "狗";
+  const head = packs > 1 ? `一隻${who}一包要吃 ${perPack} 天` : `一隻${who}要吃 ${perPack} 天`;
+  return n <= 4 ? `${head}，${["", "", "兩", "三", "四"][n]}隻一起吃剛好` : `${head}，吃不完`;
+}
+
+/** 某一家賣場的整組規格（寫回報信用的）。找不到就只放這一條 */
+function storeOf(p: Product, m: Merchant): { label: string; options: { unit: string; amount: number }[] } {
+  return storesOf(p).find((s) => s.label === m.label) ?? { label: m.label, options: [{ unit: unitOf(p, m), amount: m.amount }] };
+}
+
+/** 這一條自己的備註，去掉規格名稱、「一頁多款」這種讀者用不到的 */
+function ownNotes(note: string): string {
+  return note.split("·").map((x) => x.trim())
+    .filter((x) => x && !x.startsWith("規格選") && !x.includes("一頁多款"))
+    .slice(0, 2).join(" · ");
+}
+
+/**
+ * 每一種大小，最便宜的一家。
+ *
+ * 以前是照賣場排：五家賣場、每家三個規格，讀者要自己對 1.13kg 哪家便宜、5.4kg 哪家便宜。
+ * 讀者真正要決定的只有「買多大包」，哪一家我們先比好（2026-09-13 Tim：「直覺好選擇，不必動腦」）。
+ * 每一行就是一顆按鈕。
+ *
+ * 知道體重就算每包吃幾天；貓沒講體重照一隻 4 公斤的成貓算，並且講出來。
+ * 狗從 3 公斤到 40 公斤都有，猜不了，就不算。
+ * 在吃得完的那幾包裡，標出每公斤最便宜的那一包：再大包更便宜，但開封放太久會不新鮮。
+ */
+function SizeTable({ p, weightKg, stage, said }: { p: Product; weightKg?: number; stage?: Stage; said?: boolean }) {
+  const rows = sizesOf(p);
+  if (rows.length < 2) return null;
+  // 只有一家在賣：表頭不講「最便宜的一家」，每一行也不用再寫一次店名
+  const oneStore = new Set(rows.map((r) => r.best.label)).size === 1 && storesOf(p).length === 1;
+  const wet = formOf(p) === "wet";
+  const cat = p.species === "cat";
+  const kg = weightKg ?? (cat ? 4 : undefined);
+  const days = rows.map((r) => (wet ? null : bagDuration(r.unit, kg, stage, p.species, p.spec.kcal, "dry")));
+  const fresh = rows.map((r, i) => ({ per: r.perKg, i, d: days[i] })).filter((x) => x.d && !x.d.tooLong && x.per);
+  const best = fresh.length > 1 ? fresh.reduce((a, b) => (b.per! <= a.per! ? b : a)).i : null;
+  // 裁決器裡的體重是讀者講的，講「你家的」；長尾頁是品種的一般體重、貓沒講是 4 公斤，講「一隻」
+  const who = said && weightKg ? `你家的${cat ? "貓" : "狗"}` : `一隻${cat ? "貓" : "狗"}`;
+  const per = wet ? "每罐" : "每公斤";
+  return (
+    <div>
+      <p style={{ ...S.lbl, margin: "22px 0 4px" }}>{oneStore ? "每一種大小" : "每一種大小，最便宜的一家"}</p>
+      {rows.map((r, i) => {
+        const d = days[i];
+        const packs = packsOf(r.unit);
+        const up = unitPrice(p, r.unit, r.best.amount);
+        const notes = ownNotes(r.best.note);
+        const variant = variantOf(r.best);
+        const save = r.savingPct !== null && Math.abs(r.savingPct) >= 3 ? r.savingPct : null;
+        return (
+          <a key={r.best.id} href={`/go/${r.best.id}/${p.id}`} rel="nofollow sponsored" style={szRow}>
+            <span className="mono" style={szUnit}>{r.unit}</span>
+            <span className="mono" style={szAmt}>${r.best.amount.toLocaleString()}</span>
+            <span aria-hidden style={szChev}>›</span>
+            <span style={szStore}>{oneStore ? notes : `${r.best.label}${notes ? ` · ${notes}` : ""}`}</span>
+            <span className="mono" style={szPer}>{up}</span>
+            {(best === i || d || save !== null || variant) && (
+              <span style={szMeta}>
+                {best === i && <b style={{ color: "var(--accent)" }}>{who}買這包最划算</b>}
+                {save !== null && (
+                  <span style={{ color: save > 0 ? "var(--keep)" : "var(--cut)" }}>
+                    {save > 0 ? `${per}省 ${save}%` : `${per}反而貴 ${-save}%`}
+                  </span>
+                )}
+                {d && (
+                  <span style={{ color: d.tooLong ? "var(--cut)" : "var(--faint)" }}>
+                    {tooLongText(d.days, packs, cat) ?? (packs > 1 ? `一包約 ${Math.round(d.days / packs)} 天` : `約 ${d.days} 天`)}
+                  </span>
+                )}
+                {variant && <span style={{ color: "var(--faint)", flexBasis: "100%" }}>點進去選「{variant}」</span>}
+              </span>
+            )}
+          </a>
+        );
+      })}
+      {!wet && (
+        <p style={szFoot}>
+          {kg ? `天數照${said && weightKg ? `你講的 ${weightKg} 公斤` : `一隻 ${kg} 公斤的${cat ? "成貓" : "狗"}`}算。` : ""}
+          開封超過 {FRESH_DAYS} 天，油脂會氧化、變得不好吃。大包比較便宜，吃得完再買。
+          {!kg && said && "在上面講牠幾公斤（像「柴犬 10 公斤」），就幫你算每一包吃幾天。"}
+        </p>
+      )}
+    </div>
+  );
+}
+
+const szRow: React.CSSProperties = {
+  display: "grid", gridTemplateColumns: "1fr auto 16px", columnGap: 10, rowGap: 2, alignItems: "baseline",
+  padding: "12px 0", borderTop: "1px solid var(--line)", textDecoration: "none", color: "inherit",
+};
+const szUnit: React.CSSProperties = { fontSize: 16, fontWeight: 700 };
+const szAmt: React.CSSProperties = { fontSize: 16, fontWeight: 700, textAlign: "right" };
+const szChev: React.CSSProperties = {
+  gridRow: "1 / span 2", gridColumn: 3, alignSelf: "center", color: "var(--accent)", fontSize: 22, lineHeight: 1,
+};
+const szStore: React.CSSProperties = { fontSize: 13, color: "var(--muted)", lineHeight: 1.6, minWidth: 0 };
+const szPer: React.CSSProperties = { fontSize: 12.5, color: "var(--keep)", textAlign: "right" };
+const szMeta: React.CSSProperties = {
+  gridColumn: "1 / span 2", display: "flex", flexWrap: "wrap", gap: "2px 10px", fontSize: 12.5, marginTop: 4, lineHeight: 1.6,
+};
+const szFoot: React.CSSProperties = { margin: "10px 0 0", fontSize: 12.5, color: "var(--faint)", lineHeight: 1.7 };
 
 /** 「適合：想避開雞肉、要排查過敏原（肉只有羊一種）」 */
 function FitLine({ p }: { p: Product }) {

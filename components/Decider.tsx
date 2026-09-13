@@ -428,6 +428,7 @@ export default function Decider({
             symptoms={symptoms}
             stage={stage}
             chipsLabel="我們聽到的是"
+            fromDecider
           />
         </div>
       )}

@@ -102,7 +102,79 @@ export function recommendable(p: Product): boolean {
 
 export function anchorOf(p: Product, role: "safe" | "value") {
   const live = liveMerchants(p);
-  return live.find((m) => m.anchor === role) ?? live[0];
+  const a = live.find((m) => m.anchor === role) ?? live[0];
+  if (role !== "safe" || !a) return a;
+  /*
+   * 卡片上那一包（第一次買的那個大小）同時有好幾家在賣，就給最便宜的那一家。
+   * 以前固定給第一家：T22 小包第一家 $580，白喵同一包 $555，按鈕卻帶人去貴的那家。
+   * 同價照原本的順序。
+   */
+  const g = sizeGroups(p).find((ms) => ms.includes(a));
+  return g ? cheapestIn(g) : a;
+}
+
+/** 兩個重量算不算同一包：3.5 磅（1.59 公斤）跟 1.58kg 是同一包，只是寫法不同 */
+function sameSize(a: number, b: number): boolean {
+  return Math.abs(a - b) / Math.max(a, b) < 0.03;
+}
+
+/** 幾包組：「5.4kg×2」是 2。兩包組跟一大包不能混在一起比，兩包是分開開的 */
+export function packsOf(unit: string): number {
+  return parseInt(unit.replace(/\s/g, "").match(/(?:kg|KG|Kg|公斤|磅|lb)[×xX*](\d+)/)?.[1] ?? "1", 10);
+}
+
+const cheapestIn = (ms: Merchant[]): Merchant => ms.reduce((best, m) => (m.amount < best.amount ? m : best));
+
+/** 還能買的賣場照包裝大小分組，小包在前；每一組照 Tim 貼的順序（新的在前） */
+function sizeGroups(p: Product): Merchant[][] {
+  const live = liveMerchants(p);
+  const groups: { kg: number; packs: number; ms: Merchant[] }[] = [];
+  const items = live
+    .map((m, i) => ({ m, i, kg: kgOf(unitOf(p, m)), packs: packsOf(unitOf(p, m)) }))
+    .filter((x): x is { m: Merchant; i: number; kg: number; packs: number } => x.kg !== null)
+    .sort((a, b) => a.kg - b.kg || a.i - b.i);
+  for (const x of items) {
+    const g = groups.find((g) => g.packs === x.packs && sameSize(g.kg, x.kg));
+    if (g) g.ms.push(x.m);
+    else groups.push({ kg: x.kg, packs: x.packs, ms: [x.m] });
+  }
+  return groups.map((g) => g.ms.sort((a, b) => live.indexOf(a) - live.indexOf(b)));
+}
+
+export interface SizeRow {
+  /** 最便宜那一家寫的規格（同一包，有人寫 3.5 磅、有人寫 1.58kg） */
+  unit: string;
+  best: Merchant;
+  perKg: number | null;
+  /** 跟最小包那一行比，每公斤差幾 %（正數＝比較省） */
+  savingPct: number | null;
+  /** 同一個大小還有幾家 */
+  others: number;
+}
+
+/**
+ * 每一種大小，最便宜的是哪一家。
+ *
+ * 讀者真正要做的決定只有一個：買多大包。哪一家最便宜是我們該先比好的，
+ * 不該叫他把五家賣場、十幾個規格自己對一遍（2026-09-13 Tim：「要直覺好選擇，不必動腦」）。
+ */
+export function sizesOf(p: Product): SizeRow[] {
+  const rows: SizeRow[] = sizeGroups(p).map((ms) => {
+    const best = cheapestIn(ms);
+    const unit = unitOf(p, best);
+    return { unit, best, perKg: pricePerKg(unit, best.amount), savingPct: null, others: ms.length - 1 };
+  });
+  const base = rows[0]?.perKg;
+  for (const r of rows.slice(1)) {
+    if (base && r.perKg) r.savingPct = Math.round((1 - r.perKg / base) * 100);
+  }
+  return rows;
+}
+
+/** 同一個大小裡最便宜的價錢。拿來講「同一包，別家便宜多少」 */
+export function sizeFloor(p: Product, m: Merchant): number | null {
+  const g = sizeGroups(p).find((ms) => ms.includes(m));
+  return g ? cheapestIn(g).amount : null;
 }
 
 /**
@@ -757,10 +829,12 @@ export interface StoreOption {
   amount: number;
   perKg: number | null;
   /**
-   * 相對於這款最小包，每公斤差幾 %。
-   * 正數＝比較省，負數＝反而更貴（大包不一定划算，這才是要講的）。
+   * 相對於這款最小包（最便宜那一家），每公斤差幾 %。
+   * 正數＝比較省，負數＝反而更貴（大包不一定划算，這才是要講的）。最小包自己是 null。
    */
   savingPct: number | null;
+  /** 同一個大小，這一家比最便宜的那一家貴多少錢。它就是最便宜的話是 0 */
+  overFloor: number;
   note: string;
   affiliateUrl: string;
   /** 這一家哪天查的價 */
@@ -785,12 +859,11 @@ export interface Store {
  * 同一家就一個標題，連結相同就一個按鈕，不同就每行一個。
  */
 export function storesOf(p: Product): Store[] {
-  // 省幅基準用「最小包」—— 使用者是拿入門包去比大包划不划算
-  const sized = liveMerchants(p)
-    .map((m) => ({ m, kg: kgOf(unitOf(p, m)), per: pricePerKg(unitOf(p, m), m.amount) }))
-    .filter((x) => x.kg !== null && x.per !== null)
-    .sort((a, b) => a.kg! - b.kg!);
-  const base = sized.length > 1 ? sized[0].per! : null;
+  // 省幅基準用「最小包裡最便宜的那一家」—— 使用者是拿入門包去比大包划不划算。
+  // 同一個大小的別家不跟它比每公斤，改講「同一包別家便宜多少」，那才是讀者看得懂的差別
+  const groups = sizeGroups(p);
+  const small = groups.length > 1 ? cheapestIn(groups[0]) : null;
+  const base = small ? pricePerKg(unitOf(p, small), small.amount) : null;
 
   const byLabel = new Map<string, Merchant[]>();
   for (const m of liveMerchants(p)) {
@@ -809,9 +882,10 @@ export function storesOf(p: Product): Store[] {
           amount: m.amount,
           perKg,
           savingPct:
-            base !== null && perKg !== null && perKg !== base
+            base !== null && perKg !== null && !groups[0].includes(m)
               ? Math.round((1 - perKg / base) * 100)
               : null,
+          overFloor: m.amount - (sizeFloor(p, m) ?? m.amount),
           note: m.note,
           affiliateUrl: m.affiliateUrl,
           checkedAt: checkedOf(p, m),
