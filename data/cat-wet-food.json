@@ -575,12 +575,22 @@
       },
       "price": {
         "unit": "85g",
-        "checkedAt": "2026-09-12",
-        "merchants": []
+        "checkedAt": "2026-09-13",
+        "merchants": [
+          {
+            "id": "m1",
+            "label": "萬倍富寵物用品店（蝦皮商城）",
+            "unit": "85g",
+            "amount": 48,
+            "note": "規格選「11歲老貓主食餐包 A30+11W」 · 一頁多款 · 店到店滿 199 免運",
+            "affiliateUrl": "https://s.shopee.tw/1gIZrUNsey",
+            "anchor": "safe",
+            "checkedAt": "2026-09-13"
+          }
+        ]
       },
       "dealbreaker": "你的貓有任何一種肉過敏。成分只寫「肉及其相關產品」，沒寫是哪一種動物，沒辦法排除。",
       "knownIssues": "成分照皇家台灣官網，只寫到類別：肉及其相關產品、穀類、植物蛋白萃取。熱量官網沒寫，一天要幾包我們先不算。這款是軟包裝的餐包，不是罐頭。",
-      "awaitingLink": true,
       "searchAs": "皇家 A30+11W 老貓主食濕糧 85g",
       "chicken": {
         "status": "unsure"

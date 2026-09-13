@@ -1,6 +1,6 @@
 {
   "checkedAt": "2026-09-13",
-  "total": 81,
+  "total": 82,
   "bad": 0,
   "rows": [
     {
@@ -949,6 +949,19 @@
       "status": 403,
       "finalUrl": "https://shopee.tw/opaanlp/299265127/25011490790",
       "item": "299265127/25011490790",
+      "verdict": "ok",
+      "note": "有轉到商品頁（蝦皮不讓程式看內容，要自己點開確認）"
+    },
+    {
+      "productId": "cw-08",
+      "brand": "Royal Canin 皇家",
+      "name": "11 歲以上老貓 主食濕糧 A30+11W",
+      "merchantId": "m1",
+      "label": "萬倍富寵物用品店（蝦皮商城）",
+      "url": "https://s.shopee.tw/1gIZrUNsey",
+      "status": 403,
+      "finalUrl": "https://shopee.tw/opaanlp/8730825/50216406780",
+      "item": "8730825/50216406780",
       "verdict": "ok",
       "note": "有轉到商品頁（蝦皮不讓程式看內容，要自己點開確認）"
     },
