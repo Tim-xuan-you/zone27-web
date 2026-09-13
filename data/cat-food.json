@@ -850,17 +850,17 @@
       },
       "price": {
         "unit": "2kg",
-        "checkedAt": "2026-09-12",
+        "checkedAt": "2026-09-13",
         "merchants": [
           {
             "id": "m1",
             "label": "晴空小舖sky（蝦皮優選）",
             "unit": "2kg",
             "amount": 898,
-            "note": "一頁多款 · 免運無限次 · 14:00 前下單隔日到",
+            "note": "規格選「A30+11老貓 2KG」 · 一頁多款 · 免運無限次 · 14:00 前下單隔日到",
             "affiliateUrl": "https://s.shopee.tw/40gT8lhNBb",
             "anchor": "safe",
-            "checkedAt": "2026-09-12"
+            "checkedAt": "2026-09-13"
           }
         ]
       },
