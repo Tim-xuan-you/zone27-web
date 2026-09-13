@@ -423,14 +423,23 @@
       },
       "price": {
         "unit": "79g",
-        "checkedAt": "2026-09-12",
-        "merchants": []
+        "checkedAt": "2026-09-13",
+        "merchants": [
+          {
+            "id": "m1",
+            "label": "毛掌櫃寵物選品店（蝦皮優選）",
+            "unit": "79g",
+            "amount": 70,
+            "note": "規格選「608562(幼貓)腸胃皮膚鮭魚79g」 · 一頁多款 · 店到店滿 199 免運",
+            "affiliateUrl": "https://s.shopee.tw/6VNpKxjdE8",
+            "anchor": "safe",
+            "checkedAt": "2026-09-13"
+          }
+        ]
       },
       "dealbreaker": "你的貓對雞過敏。名字寫鮭魚，第一項是雞湯，後面還有火雞、豬肝、雞脂肪。名字裡的「敏感」講的是腸胃，不是低過敏。",
       "knownIssues": "幼貓專用。含米澱粉、米，還有蛋黃和魚油。一罐只有 54 大卡，水分 86.5% 是這裡最高的，通常會搭幼貓乾糧一起餵。包裝沒寫灰分，碳水算不出來。",
-      "awaitingLink": true,
-      "searchAs": "希爾思 幼貓 敏感胃腸與皮膚 鮭魚 主食罐 79g",
-      "huntNote": "2026-09-13 Tim 在蝦皮找不到。幼貓先吃唯美味、Instinct 原點，兩款都標全齡"
+      "searchAs": "希爾思 幼貓 敏感胃腸與皮膚 鮭魚 主食罐 79g"
     },
     {
       "id": "cw-08",
