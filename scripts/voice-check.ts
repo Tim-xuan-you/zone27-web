@@ -111,6 +111,17 @@ for (const t of TARGETS) {
 }
 for (const d of DATA) scan(d, readFileSync(join(ROOT, d), "utf8"));
 
+// Threads 貼文也過同一套規則：直接複製貼出去的字，比網站上的更容易被一眼看出是 AI 寫的。
+// 手冊（marketing/THREADS-PLAYBOOK.md）不掃，裡面會舉禁用句型當例子
+const POSTS = join(ROOT, "marketing", "threads");
+try {
+  for (const n of readdirSync(POSTS)) {
+    if (n.endsWith(".md")) scan(`marketing/threads/${n}`, readFileSync(join(POSTS, n), "utf8"));
+  }
+} catch {
+  // 還沒有貼文資料夾就跳過
+}
+
 /* ---- 報告 ---- */
 const hard = hits.filter((h) => h.hard);
 const soft = hits.filter((h) => !h.hard);
