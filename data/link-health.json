@@ -1,6 +1,6 @@
 {
   "checkedAt": "2026-09-13",
-  "total": 72,
+  "total": 73,
   "bad": 0,
   "rows": [
     {
@@ -892,6 +892,19 @@
       "brand": "ZiwiPeak 巔峰",
       "name": "鮮肉貓主食罐 羊肉",
       "merchantId": "m1",
+      "label": "米腸家寵物用品",
+      "url": "https://s.shopee.tw/AUtxzsGPoA",
+      "status": 403,
+      "finalUrl": "https://shopee.tw/opaanlp/751627804/18601004675",
+      "item": "751627804/18601004675",
+      "verdict": "ok",
+      "note": "有轉到商品頁（蝦皮不讓程式看內容，要自己點開確認）"
+    },
+    {
+      "productId": "cw-09",
+      "brand": "ZiwiPeak 巔峰",
+      "name": "鮮肉貓主食罐 羊肉",
+      "merchantId": "m2",
       "label": "Petizen寵物公民旗艦店（蝦皮商城）",
       "url": "https://s.shopee.tw/70K5llKVbT",
       "status": 403,
@@ -904,7 +917,7 @@
       "productId": "cw-09",
       "brand": "ZiwiPeak 巔峰",
       "name": "鮮肉貓主食罐 羊肉",
-      "merchantId": "m2",
+      "merchantId": "m3",
       "label": "Petizen寵物公民旗艦店（蝦皮商城）",
       "url": "https://s.shopee.tw/70K5llKVbT",
       "status": 403,

@@ -105,11 +105,15 @@ export function anchorOf(p: Product, role: "safe" | "value") {
   const a = live.find((m) => m.anchor === role) ?? live[0];
   if (role !== "safe" || !a) return a;
   /*
-   * 卡片上那一包（第一次買的那個大小）同時有好幾家在賣，就給最便宜的那一家。
-   * 以前固定給第一家：T22 小包第一家 $580，白喵同一包 $555，按鈕卻帶人去貴的那家。
+   * 卡片上那一包：最小包裡最便宜的那一家。
+   *
+   * 第一次買先買小包：貓挑嘴、狗換糧都要試，價錢也最好入手。大包在「每一種大小」那張表。
+   * 以前給的是第一家，有兩個問題：
+   *   T22 小包第一家 $580，白喵同一包 $555，按鈕卻帶人去貴的那家
+   *   Tim 新貼的連結會排到第一，巔峰羊肉新貼一家只賣 185g 的，卡片就從 85g 變成 185g
    * 同價照原本的順序。
    */
-  const g = sizeGroups(p).find((ms) => ms.includes(a));
+  const g = sizeGroups(p)[0];
   return g ? cheapestIn(g) : a;
 }
 

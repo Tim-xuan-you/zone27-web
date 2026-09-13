@@ -532,16 +532,26 @@
         "merchants": [
           {
             "id": "m1",
-            "label": "Petizen寵物公民旗艦店（蝦皮商城）",
-            "unit": "85g",
-            "amount": 159,
-            "note": "規格選「羊肉,85g」 · 一頁多款 · 新客首購組，標題寫含試吃包 · 店到店滿 199 免運",
-            "affiliateUrl": "https://s.shopee.tw/70K5llKVbT",
+            "label": "米腸家寵物用品",
+            "unit": "185g",
+            "amount": 172,
+            "note": "規格選「羊肉185g」 · 一頁多款 · 店到店滿 199 免運",
+            "affiliateUrl": "https://s.shopee.tw/AUtxzsGPoA",
             "anchor": "safe",
             "checkedAt": "2026-09-13"
           },
           {
             "id": "m2",
+            "label": "Petizen寵物公民旗艦店（蝦皮商城）",
+            "unit": "85g",
+            "amount": 159,
+            "note": "規格選「羊肉,85g」 · 一頁多款 · 新客首購組，標題寫含試吃包 · 店到店滿 199 免運",
+            "affiliateUrl": "https://s.shopee.tw/70K5llKVbT",
+            "anchor": "value",
+            "checkedAt": "2026-09-13"
+          },
+          {
+            "id": "m3",
             "label": "Petizen寵物公民旗艦店（蝦皮商城）",
             "unit": "185g",
             "amount": 205,
