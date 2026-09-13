@@ -230,6 +230,10 @@ export function constraintsFor(s: Situation): Constraint[] {
     });
   }
 
+  if (s.grainFree) {
+    cs.push({ kind: "grainFreeOnly", label: "含穀物（你要無穀）", tag: "你的條件" });
+  }
+
   if (s.budgetMonthly !== undefined) {
     if (wet) {
       // 罐頭要先知道一天吃幾罐。沒講體重就用 4 公斤，而且把這個假設寫在理由裡

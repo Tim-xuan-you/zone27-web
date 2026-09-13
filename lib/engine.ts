@@ -334,6 +334,12 @@ export function adjudicate(pool: Product[], situation: Situation): Verdict {
 
   const { pick, reason } = choose(alive, situation);
 
+  // 貓不愛喝水：乾糧怎麼挑都補不了水，罐頭可以。這一句一定要講
+  const notice =
+    situation.species === "cat" && (situation.form ?? "dry") === "dry" && has(situation, "喝水")
+      ? "不愛喝水的貓，可以把一部分換成主食罐：罐頭七八成是水，吃罐頭就是在喝水。貓的類目頁上面可以切換到主食罐。"
+      : undefined;
+
   const unusedSignals = situation.symptoms
     .map((x) => Object.keys(NO_DATA_FOR).find((k) => x.includes(k)))
     .filter((k): k is string => Boolean(k))
@@ -341,6 +347,7 @@ export function adjudicate(pool: Product[], situation: Situation): Verdict {
 
   return {
     startCount, cuts, survivors: alive, pick, pickReason: reason,
+    ...(notice ? { notice } : {}),
     ...(unusedSignals.length ? { unusedSignals } : {}),
   };
 }
@@ -388,8 +395,35 @@ function score(p: Product, situation: Situation): number {
 
   // 有過敏疑慮時，單一蛋白源的價值最高 —— 它讓飼主下次能排查出兇手。
   // 皮膚症狀就算還沒點名過敏原，走的也是同一套排除飲食邏輯。
-  if (p.spec.singleSource) {
-    s += situation.avoid.length > 0 ? 30 : skin || gut ? 20 : 12;
+  //
+  // 沒有過敏、皮膚、腸胃的狗，單一蛋白不加分（2026-09-13）。
+  // 以前預設也加 12 分，結果 268 種情況裡 ACANA 羊肉當了 213 次主答案：
+  // 講柴犬、講太胖、講挑食，全部推同一包。一隻沒有過敏的狗不需要單一蛋白，
+  // 讀者看到怎麼問都一樣，只會覺得這個東西根本沒在聽。
+  const allergic = situation.avoid.length > 0 || has(situation, "過敏");
+  if (p.spec.singleSource && (allergic || skin || gut)) {
+    s += allergic ? 30 : 20;
+  }
+
+  // 沒講年紀就當成成犬、成貓：幼犬專用、高齡專用的不能跳出來當答案。
+  // 以前單一蛋白的加分剛好把這個問題蓋住了，拿掉之後「柴犬」會被推一包幼犬飼料
+  if (situation.ageYears === undefined && !p.spec.lifeStage.some((k) => k === "adult" || k === "all")) s -= 40;
+
+  // 小型犬專用、大型犬專用的，體型對得上就加分：顆粒大小、熱量密度是照那個體型調的
+  if (situation.bodySize && p.spec.bodySize.length === 1 && p.spec.bodySize[0] === situation.bodySize) s += 10;
+
+  /*
+   * 價錢：同樣合格的，每公斤便宜的排前面一點。
+   * 用的是卡片上那一包（通常是最小包）的每公斤，那才是多數人第一次會買的。
+   * 平常最多差 8 分，蓋不過過敏原；講了「便宜」「省錢」就是他自己說價錢優先，放大到 40 分。
+   */
+  {
+    const m = anchorOf(p, "safe");
+    const per = m ? pricePerKg(unitOf(p, m), m.amount) : null;
+    if (per) {
+      const cheap = Math.max(0, Math.min(1, (900 - per) / 500));   // 每公斤 400 元以下拿滿分，900 以上拿 0
+      s += cheap * (situation.preferCheap ? 40 : 8);
+    }
   }
 
   /*
@@ -409,8 +443,10 @@ function score(p: Product, situation: Situation): number {
     : null;
   if (wantStage && p.spec.lifeStage.includes(wantStage)) s += 15;
 
-  // 皮膚與毛髮：omega-3 是有依據的方向，加權放大一點
-  if (skin) s += Math.min(10, p.spec.omega3 * 6);
+  // 皮膚與毛髮：omega-3 是有依據的方向，加權放大一點。
+  // 0 代表包裝沒公布，不是真的沒有（鮭魚、海魚配方怎麼可能沒有），當成中間值 0.5 算，不罰也不獎
+  const o3 = p.spec.omega3 > 0 ? p.spec.omega3 : 0.5;
+  if (skin) s += Math.min(10, o3 * 6);
 
   // 軟便：脂肪偏高是常見原因之一。超過 18% 開始扣。
   // 罐頭的脂肪是扣掉水分之後算的，數字本來就高，而且標示多半只寫「最少」，不拿來扣
@@ -455,8 +491,8 @@ function score(p: Product, situation: Situation): number {
     if (monthly !== null) s -= Math.min(10, Math.max(0, (monthly / 30 - 120) / 20));
   }
 
-  // Omega-3
-  s += Math.min(12, p.spec.omega3 * 8);
+  // Omega-3（沒公布的當中間值，見上面）
+  s += Math.min(12, o3 * 8);
 
   // 適口性：用回報比例扣分。樣本太少的不扣（避免 3 人回報就定生死）
   if (p.reports.total >= 30) {
@@ -474,11 +510,22 @@ function score(p: Product, situation: Situation): number {
 function explain(pick: Product, alive: Product[], situation: Situation): string {
   const bits: string[] = [];
 
-  if (pick.spec.singleSource) {
+  // 單一蛋白源只有在過敏、皮膚、腸胃的時候才是理由。沒有這些狀況還講它，讀者會以為我們沒在聽
+  const relevant = situation.avoid.length > 0 || has(situation, "過敏") || has(situation, "皮膚") || has(situation, "毛髮") || has(situation, "腸胃");
+  if (pick.spec.singleSource && relevant) {
     const others = alive.filter((p) => p.spec.singleSource).length;
     bits.push(others === 1
       ? `${alive.length} 款裡只有它是單一蛋白源`
       : "單一蛋白源，下次要排查過敏原比較容易");
+  }
+  if (situation.bodySize && pick.spec.bodySize.length === 1 && pick.spec.bodySize[0] === situation.bodySize) {
+    bits.push(`${({ small: "小型犬", medium: "中型犬", large: "大型犬" } as const)[situation.bodySize]}專用配方`);
+  }
+  if (situation.preferCheap) {
+    const perOf = (p: Product) => { const m = anchorOf(p, "safe"); return m ? pricePerKg(unitOf(p, m), m.amount) : null; };
+    const per = perOf(pick);
+    const lowest = alive.every((p) => { const x = perOf(p); return x === null || per === null || per <= x; });
+    if (per) bits.push(lowest && alive.length > 1 ? `留下的幾款裡每公斤最便宜（${per} 元）` : `每公斤 ${per} 元`);
   }
   {
     const st = stageForAge(situation.ageYears, situation.species);
@@ -493,6 +540,11 @@ function explain(pick: Product, alive: Product[], situation: Situation): string 
   }
   if (formOf(pick) === "dry" && pick.spec.carb <= 25) {
     bits.push(`碳水 ${pick.spec.carb}% 在建議範圍`);
+  }
+  // 講了胖，答案卻完全不提體重，讀者會以為那個按鈕沒作用
+  if (formOf(pick) === "dry" && has(situation, "體重")) {
+    const lower = alive.filter((p) => p.spec.fat > pick.spec.fat).length;
+    if (lower >= alive.length / 2) bits.push(`脂肪 ${pick.spec.fat}%，比留下的多數款低`);
   }
   // 要減重的貓吃罐頭，最該知道的是熱量密度：同樣一碗，吃進去的差很多
   if (formOf(pick) === "wet" && has(situation, "體重") && pick.spec.kcal) {

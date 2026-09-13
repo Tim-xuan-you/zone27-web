@@ -79,7 +79,7 @@ const SYMPTOMS: Record<string, string> = {
   舔腳: "皮膚搔癢", 啃腳: "皮膚搔癢", 咬腳: "皮膚搔癢", 一直舔: "皮膚搔癢",
   紅疹: "皮膚問題", 起疹: "皮膚問題", 皮膚: "皮膚問題", 濕疹: "皮膚問題",
   紅紅的: "皮膚問題", 長痘: "皮膚問題", 脫屑: "皮膚問題", 皮屑: "皮膚問題",
-  下巴粉刺: "皮膚問題", 黑下巴: "皮膚問題",
+  下巴粉刺: "皮膚問題", 黑下巴: "皮膚問題", 下巴黑: "皮膚問題", 下巴髒: "皮膚問題", 粉刺: "皮膚問題",
 
   /* 毛 */
   掉毛: "毛髮問題", 脫毛: "毛髮問題", 毛沒光澤: "毛髮問題", 毛很乾: "毛髮問題",
@@ -95,6 +95,9 @@ const SYMPTOMS: Record<string, string> = {
   軟便: "腸胃問題", 拉肚子: "腸胃問題", 腹瀉: "腸胃問題", 大便很軟: "腸胃問題",
   便便很軟: "腸胃問題", 大便不成形: "腸胃問題", 便便不成形: "腸胃問題",
   拉稀: "腸胃問題", 大便有點軟: "腸胃問題",
+  // 2026-09-13 實測讀不出來的講法
+  腸胃不好: "腸胃問題", 腸胃敏感: "腸胃問題", 腸胃弱: "腸胃問題", 消化不好: "腸胃問題",
+  便便很臭: "腸胃問題", 大便很臭: "腸胃問題", 便便臭: "腸胃問題", 大便臭: "腸胃問題",
   脹氣: "腸胃問題", 放屁: "腸胃問題", 嘔吐: "腸胃問題", 吐: "腸胃問題",
 
   /* 適口性 */
@@ -116,6 +119,9 @@ const SYMPTOMS: Record<string, string> = {
   糖尿: "糖尿病", 血糖: "糖尿病",
 
   口臭: "口腔", 牙結石: "口腔", 牙齒黃: "口腔",
+
+  /* 貓不愛喝水：飼料挑不出答案，但罐頭可以補水，要講 */
+  不喝水: "喝水少", 很少喝水: "喝水少", 喝水很少: "喝水少", 不愛喝水: "喝水少", 喝很少水: "喝水少",
 };
 
 const CN_NUM: Record<string, number> = {
@@ -240,7 +246,7 @@ export function parse(text: string, fallback: Species = "dog", fallbackForm: For
   const ageYears = parseAge(t, species);
   if (ageYears !== undefined) {
     chips.push({
-      label: ageYears < 1 ? `年齡 · ${species === "cat" ? "幼貓" : "幼犬"}` : `年齡 · ${ageYears} 歲`,
+      label: `年齡 · ${ageLabel(t, ageYears, species)}`,
       kind: "info",
       source: "年齡",
     });
@@ -274,6 +280,23 @@ export function parse(text: string, fallback: Species = "dog", fallbackForm: For
     chips.push({ label: `排除 · ${label}`, kind: "avoid", source: "過敏" });
   }
 
+  /*
+   * 只講「過敏」「低敏」，沒講對什麼過敏。
+   * 以前這種句子讀不出任何東西；其實他要的很清楚：單一蛋白、好排查的。
+   */
+  if (avoid.length === 0 && /過敏|低敏/.test(t) && !/沒有?過敏|不會過敏|沒什麼過敏/.test(t) && !symptoms.includes("過敏體質")) {
+    symptoms.push("過敏體質");
+    chips.push({ label: "過敏體質", kind: "info", source: "過敏" });
+  }
+
+  /* 無穀：講了就當成條件 */
+  const grainFree = /無穀/.test(t) || undefined;
+  if (grainFree) chips.push({ label: "要無穀", kind: "info", source: "無穀" });
+
+  /* 想省錢：同樣合格的，每公斤便宜的排前面 */
+  const preferCheap = /便宜|平價|省錢|CP\s*值|cp\s*值|划算|預算有限|不要太貴/.test(t) || undefined;
+  if (preferCheap) chips.push({ label: "想省錢", kind: "info", source: "省錢" });
+
   /* 預算 */
   const budgetMonthly = parseBudget(t);
   if (budgetMonthly) {
@@ -281,7 +304,7 @@ export function parse(text: string, fallback: Species = "dog", fallbackForm: For
   }
 
   return {
-    situation: { species, form, breed, bodySize, ageYears, weightKg, avoid, symptoms, budgetMonthly, constraints: [] },
+    situation: { species, form, breed, bodySize, ageYears, weightKg, avoid, symptoms, budgetMonthly, grainFree, preferCheap, constraints: [] },
     chips,
     // 只講了「罐頭」兩個字，沒有任何條件可以用，一樣當作讀不出東西
     empty: chips.filter((c) => c.source !== "wet" && c.source !== "dry").length === 0,
@@ -305,6 +328,8 @@ function detectAvoid(t: string, hasSymptom: boolean): ProteinSource[] {
   const keys = Object.keys(PROTEINS).sort((a, z) => z.length - a.length);
 
   const explicit = /過敏|不能吃|不吃|會癢|忌口|avoid/;
+  // 「不要有雞肉的」「不含雞」「避開牛」「沒有魚的」：直接接在肉的前面才算
+  const refuse = /(不要有?|不含|避開|避免|沒有|去掉|無)$/;
   const triedAndFailed = /換過|試過|吃過|都沒(改善|用|效)|沒有改善|還是(一樣|會)/;
 
   let work = t;
@@ -314,7 +339,9 @@ function detectAvoid(t: string, hasSymptom: boolean): ProteinSource[] {
       // 只看該蛋白源前後 12 字，避免整句話裡任一個「過敏」都算到頭上
       const around = t.slice(Math.max(0, idx - 12), idx + k.length + 12);
 
-      if (explicit.test(around) || (hasSymptom && triedAndFailed.test(t))) {
+      const negated = /沒有?過敏|不會過敏|沒什麼過敏/.test(around);
+      const before = t.slice(Math.max(0, idx - 3), idx);
+      if ((explicit.test(around) && !negated) || refuse.test(before) || (hasSymptom && triedAndFailed.test(t))) {
         // 有症狀 + 講了「換過都沒改善」→ 他提到的那個蛋白源就是嫌疑犯
         for (const p of PROTEINS[k]) found.add(p);
       }
@@ -347,8 +374,22 @@ function parseAge(t: string, species: Species): number | undefined {
   }
   if (/幼犬|幼貓|小狗|奶狗|奶貓|小貓/.test(t)) return 0.5;
   // 「老貓」要落在貓的高齡線（11 歲）之後，不然會被當成成貓
-  if (/老狗|老貓|高齡|年紀大/.test(t)) return species === "cat" ? 12 : 10;
+  if (/老狗|老貓|老犬|高齡|年紀大/.test(t)) return species === "cat" ? 12 : 10;
+  // 點「成犬」「成貓」的按鈕，或打「成年了」：當成 3 歲。幼犬專用、高齡專用的會被刪，chip 也看得到他講了
+  if (/成犬|成貓|成年/.test(t)) return 3;
   return undefined;
+}
+
+/**
+ * chip 上的年齡怎麼寫。
+ * 有講數字就照數字；只講「老狗」「成貓」就照他講的字寫，不自己編一個「10 歲」出來
+ */
+function ageLabel(t: string, years: number, species: Species): string {
+  const cat = species === "cat";
+  if (years < 1) return cat ? "幼貓" : "幼犬";
+  if (/(\d+|[零一兩二三四五六七八九十]+)\s*歲/.test(t)) return `${years} 歲`;
+  if (years >= 7) return cat ? "老貓" : "老犬";
+  return cat ? "成貓" : "成犬";
 }
 
 function parseBudget(t: string): number | undefined {

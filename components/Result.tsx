@@ -9,7 +9,7 @@ import { categoryOf } from "@/lib/categories";
 import { priceStat, timingAdvice } from "@/lib/history";
 import type { Product, Verdict } from "@/lib/types";
 import { linkReport } from "@/lib/contact";
-import { productHref } from "@/lib/labels";
+import { fitFor, platformOf, productHref } from "@/lib/labels";
 import { S } from "./styles";
 
 /**
@@ -251,9 +251,9 @@ function Answer({
               href={`/go/${main.options[0].id}/${p.id}`}
               rel="nofollow sponsored"
             >
-              去{main.label.replace(/（.*/, "")}買
+              {buyLabel(main)}
             </a>
-            <span style={S.buyNote}>{main.options[0].note || main.label}</span>
+            <span style={S.buyNote}>{buyNote(main)}</span>
           </div>
         )}
         {main && <ReportLine p={p} where={whereOf(main, checkedOf(p, safe))} />}
@@ -459,13 +459,14 @@ function Alt({ p, dogKg, stage, multi }: { p: Product; dogKg?: number; stage?: S
           </span>
         </div>
         <SpecChips p={p} />
+        <FitLine p={p} />
         {main && (
           <div style={{ ...S.buyRow, marginTop: 20 }}>
             <a
               style={S.btnSmall}
               href={`/go/${main.options[0].id}/${p.id}`}
               rel="nofollow sponsored"
-            >去{main.label.replace(/（.*/, "")}買</a>
+            >{buyLabel(main, true)}</a>
           </div>
         )}
         {main && <ReportLine p={p} where={whereOf(main, checkedOf(p, safe))} />}
@@ -520,12 +521,13 @@ export function ProductCard({ p }: { p: Product }) {
           <p style={S.freshNote}>{freshness(checkedOf(p, safe)).note}</p>
         )}
         <SpecChips p={p} />
+        <FitLine p={p} />
         {main && (
           <div style={{ ...S.buyRow, marginTop: 20 }}>
             <a style={S.btnBuy} href={`/go/${main.options[0].id}/${p.id}`} rel="nofollow sponsored">
-              去{main.label.replace(/（.*/, "")}買
+              {buyLabel(main)}
             </a>
-            <span style={S.buyNote}>{variantOf(main.options[0]) ? "" : main.options[0].note || main.label}</span>
+            <span style={S.buyNote}>{buyNote(main)}</span>
           </div>
         )}
         {main && <ReportLine p={p} where={whereOf(main, checkedOf(p, safe))} />}
@@ -747,6 +749,36 @@ function whereOf(store: { label: string; options: { unit: string; amount: number
  * 或是賣家把整個系列放在同一頁（只有我們知道，寫在備註裡的「一頁多款」）。
  * 第二種以前不會跳警告，讀者點進去，預設選到的可能是幼貓配方。
  */
+/**
+ * 購買按鈕上的字。
+ *
+ * 以前是「去貓狗六一六買」：讀者不認識賣家，而且「買」這個字的門檻高，
+ * 還沒決定就不想按。改成「去蝦皮看這一包」：平台大家都熟，
+ * 「看」比「買」容易按下去，決定是到了蝦皮才做的。賣家名字移到按鈕下面。
+ */
+function buyLabel(store: { label: string; options: { affiliateUrl: string }[] }, short?: boolean): string {
+  const where = platformOf(store.options[0]?.affiliateUrl ?? "");
+  if (!where) return `去${store.label.replace(/（.*/, "")}看`;
+  return short ? `去${where}看` : `去${where}看這一包`;
+}
+
+/** 按鈕下面那一小行：哪一家，再加一兩句備註（規格名稱另外有提醒，不重複） */
+function buyNote(store: { label: string; options: { note: string }[] }): string {
+  const notes = (store.options[0]?.note ?? "").split("·").map((x) => x.trim()).filter((x) => x && !x.startsWith("規格選"));
+  return [`在${store.label}`, ...notes.slice(0, 2)].join(" · ");
+}
+
+/** 「適合：想避開雞肉、要排查過敏原（肉只有羊一種）」 */
+function FitLine({ p }: { p: Product }) {
+  const fit = fitFor(p);
+  if (fit.length === 0) return null;
+  return (
+    <p style={{ margin: "10px 0 0", fontSize: 14, lineHeight: 1.8, color: "var(--keep)" }}>
+      <b>適合：</b>{fit.join("、")}
+    </p>
+  );
+}
+
 /**
  * 賣場上那個規格實際叫什麼（Tim 貼連結時截圖上的那一串），備註裡寫成「規格選「…」」。
  *

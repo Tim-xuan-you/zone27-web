@@ -332,6 +332,10 @@ export interface Situation {
   /** 使用者自己講的症狀，原文保留 */
   symptoms: string[];
   budgetMonthly?: number;
+  /** 句子裡講了「無穀」 */
+  grainFree?: boolean;
+  /** 句子裡講了「便宜」「省錢」「CP 值」：同樣合格的，每公斤便宜的排前面 */
+  preferCheap?: boolean;
   constraints: Constraint[];
 }
 

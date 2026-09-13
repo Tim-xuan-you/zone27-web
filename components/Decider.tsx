@@ -52,6 +52,52 @@ const EXAMPLES: Record<CategorySlug, string[]> = {
   ],
 };
 
+/*
+ * 點一下就好的條件。
+ *
+ * 2026-09-13 Tim：「裁決器有夠爛，常常搜不到東西。」實測 43 句台灣飼主真的會打的話，
+ * 7 句讀不出來（「不要有雞肉的」「過敏」「腸胃不好」…）。詞彙可以一直補，但補不完；
+ * 更根本的是：要人先想一句話再打出來，本身就是門檻。
+ *
+ * 所以最常見的條件做成按鈕，點一下就重算，不用打字。
+ * 按鈕做的事就是把那幾個字加進句子裡，跟打字走同一條路，不會有兩套邏輯。
+ * 年紀那一排只能選一個。
+ */
+type Pick = { label: string; phrase: string; group?: "age" };
+const AGE: Record<Species, Pick[]> = {
+  dog: [
+    { label: "幼犬", phrase: "幼犬", group: "age" },
+    { label: "成犬", phrase: "成犬", group: "age" },
+    { label: "老犬", phrase: "老狗", group: "age" },
+  ],
+  cat: [
+    { label: "幼貓", phrase: "幼貓", group: "age" },
+    { label: "成貓", phrase: "成貓", group: "age" },
+    { label: "老貓", phrase: "老貓", group: "age" },
+  ],
+};
+const PICKS: Record<CategorySlug, Pick[]> = {
+  "dog-food": [
+    { label: "對雞過敏", phrase: "對雞肉過敏" }, { label: "一直抓癢", phrase: "一直抓癢" },
+    { label: "軟便", phrase: "軟便" }, { label: "有點胖", phrase: "有點胖" }, { label: "挑食", phrase: "挑食" },
+    { label: "要無穀", phrase: "無穀" }, { label: "想省錢", phrase: "想省錢" },
+  ],
+  "cat-food": [
+    { label: "對雞過敏", phrase: "對雞肉過敏" }, { label: "對魚過敏", phrase: "對魚過敏" },
+    { label: "一直抓", phrase: "一直抓" }, { label: "軟便", phrase: "軟便" }, { label: "有點胖", phrase: "有點胖" },
+    { label: "不愛喝水", phrase: "不愛喝水" }, { label: "想省錢", phrase: "想省錢" },
+  ],
+  "cat-wet-food": [
+    { label: "對雞過敏", phrase: "對雞肉過敏" }, { label: "對魚過敏", phrase: "對魚過敏" },
+    { label: "有點胖", phrase: "有點胖" }, { label: "想省錢", phrase: "想省錢" },
+  ],
+};
+
+/** 把一段字從句子裡拿掉，順便收拾多出來的逗號 */
+function without(text: string, phrase: string): string {
+  return text.split(phrase).join("").replace(/[，,、\s]*[，,、][，,、\s]*/g, "，").replace(/^[，,、\s]+|[，,、\s]+$/g, "");
+}
+
 const PLACEHOLDER: Record<CategorySlug, string> = {
   "dog-food": "例如：我家柴犬 5 歲，最近一直抓癢，換過兩種飼料都沒改善...",
   "cat-food": "例如：英短 3 歲，一直抓下巴，換過兩種雞肉的都沒改善...",
@@ -89,7 +135,18 @@ export default function Decider({
   const forms = categoriesOf(species);
   const status = STATUS[cat.slug];
 
-  function run(input: string, sp: Species = species, fm: Form = form) {
+  /** 點條件按鈕：把那幾個字加進句子（或拿掉），馬上重算，不捲動畫面，讓他可以連點好幾個 */
+  function toggle(pk: Pick) {
+    let t = text;
+    const on = t.includes(pk.phrase);
+    if (pk.group === "age") for (const a of AGE[species]) t = without(t, a.phrase);
+    t = on ? without(t, pk.phrase) : [t.trim(), pk.phrase].filter(Boolean).join("，");
+    setText(t);
+    if (t.trim()) run(t, species, form, false);
+    else { setVerdict(null); setChips([]); setMentions([]); setEmpty(false); }
+  }
+
+  function run(input: string, sp: Species = species, fm: Form = form, scroll = true) {
     // 這個動物沒有這種形態（狗現在沒有罐頭），就回到乾糧
     const f = categoriesOf(sp).some((c) => c.form === fm) ? fm : "dry";
     const slug = categoryOf(sp, f).slug;
@@ -104,7 +161,7 @@ export default function Decider({
       setVerdict(null);
       setChips([]);
       setMentions(found.map((p) => ({ p, text: "講一下牠的狀況（年紀、過敏、症狀），我們會告訴你這款適不適合。", tone: "faint" })));
-      if (found.length) scrollTo("mentions");
+      if (found.length && scroll) scrollTo("mentions");
       return;
     }
     const s = parsed.situation;
@@ -123,7 +180,7 @@ export default function Decider({
     const v = adjudicate(catalog, s);
     setVerdict(v);
     setMentions(found.map((p) => judge(p, v, s.species, s.form ?? "dry")));
-    scrollTo(found.length ? "mentions" : "verdict");
+    if (scroll) scrollTo(found.length ? "mentions" : "verdict");
   }
 
   function scrollTo(id: string) {
@@ -213,15 +270,27 @@ export default function Decider({
         <button style={S.go} onClick={() => run(text)}>裁決</button>
       </div>
 
-      <div style={S.chipRow}>
-        {EXAMPLES[cat.slug].map((e) => (
-          <button key={e} style={S.example} onClick={() => run(e)}>
-            {e.slice(0, 12)}...
-          </button>
-        ))}
+      <div style={pickWrap}>
+        <span style={pickHead}>點一下就好，可以多選</span>
+        <div style={S.chipRow}>
+          {[...AGE[species], ...PICKS[cat.slug]].map((pk) => {
+            const on = text.includes(pk.phrase);
+            return (
+              <button
+                key={pk.label}
+                type="button"
+                aria-pressed={on}
+                onClick={() => toggle(pk)}
+                style={on ? { ...S.example, ...pickOn } : S.example}
+              >
+                {on ? "✓ " : ""}{pk.label}
+              </button>
+            );
+          })}
+        </div>
       </div>
       <p style={S.hint}>
-        講得亂一點沒關係。「牠最近一直舔腳」這種也可以。打完按 Enter 就行。
+        也可以用講的，像「柴犬 5 歲，一直舔腳」，或直接打品名「紐頓 T22」。打完按 Enter。
         {soonHint && !status.live && (
           <>
             <br />
@@ -306,6 +375,12 @@ function judge(p: Product, v: Verdict, species: Species, form: Form): Mention {
   if (cut && cut.tag !== "通路") return { p, text: `照你講的條件，這款會被刪：${cut.why}。`, tone: "cut" };
   return { p, text: p.referenceOnly ? "這款我們不推薦，放進來是為了比較。" : "這款的購買連結還在補。", tone: "faint" };
 }
+
+const pickWrap: React.CSSProperties = { marginTop: 14 };
+const pickHead: React.CSSProperties = { display: "block", fontSize: 13, color: "var(--muted)", marginBottom: 8 };
+const pickOn: React.CSSProperties = {
+  background: "var(--accent-soft)", borderColor: "var(--accent)", color: "var(--accent)", fontWeight: 700,
+};
 
 const mentionRow: React.CSSProperties = {
   display: "block", background: "var(--surface)", border: "1px solid var(--line)",
