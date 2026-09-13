@@ -348,7 +348,8 @@ export default function Page() {
                     Sub id 1 = <b>{shopeeSubId(p.id)}</b>　Sub id 2 = <b>{categoryOfId(p.id)?.subId ?? CATEGORY_SUB_ID}</b>
                   </span>
                   <span style={{ display: "block", fontSize: 12.5, color: "var(--faint)", marginTop: 4 }}>
-                    蝦皮這個欄位只收英數字，連字號會被擋，所以是 {shopeeSubId(p.id)} 不是 {p.id}
+                    蝦皮這個欄位只收英數字，連字號會被擋，所以是 {shopeeSubId(p.id)} 不是 {p.id}。Sub id 3 以後不用填。
+                    同一款找到好幾家，每一家都填一樣的
                   </span>
                 </Line>
                 {sellersOfBrand(p.brand).length > 0 && (
@@ -359,22 +360,30 @@ export default function Page() {
                     </span>
                   </Line>
                 )}
-                <Line k="標題要對得上">
-                  賣場<b>標題</b>裡的商品，要跟我們寫的是同一款
+                <Line k="要對得上">
+                  賣場<b>標題</b>或<b>規格選項</b>裡，要有我們寫的這一款
                   <span style={{ display: "block", fontSize: 12.5, color: "var(--faint)", marginTop: 4 }}>
-                    只有內文和圖片對不算喔，蝦皮上標題才是契約描述，退換爭議照標題走
+                    一頁多款的賣場可以，網站會提醒讀者點進去選哪一個。只有內文和圖片對得上的不算，退換爭議照標題和規格走
                   </span>
                 </Line>
-                <Line k="不能有這些字">
-                  <b>送、贈、買一送</b>
+                <Line k="有送東西的">
+                  <b>可以收</b>，看同一個大小有沒有比別家便宜
                   <span style={{ display: "block", fontSize: 12.5, color: "var(--faint)", marginTop: 4 }}>
-                    價格裡包著贈品，我們的「每公斤省 X%」就算不準了
+                    便宜又送東西就收。只有贈品讓價錢比別家貴，才不要
                   </span>
                 </Line>
-                <Line k="挑賣家的優先順序">
-                  官方直營 / 品牌旗艦 &gt; 蝦皮優選 &gt; 一般賣家，官方店的連結活得久很多
+                <Line k="一款找幾家">
+                  多找幾家沒關係，同一包網站會自動給最便宜的那家
+                  <span style={{ display: "block", fontSize: 12.5, color: "var(--faint)", marginTop: 4 }}>
+                    其他家留著當備援，最便宜的賣完了，讀者還有地方買。一款最多 16 條
+                  </span>
                 </Line>
-                <Line k="一款留幾家">一到兩家就好。賣場數量直接等於維護成本</Line>
+                <Line k="截圖要拍到">
+                  規格的完整名稱、價錢、運費（免運、限宅配、超取限幾包）
+                  <span style={{ display: "block", fontSize: 12.5, color: "var(--faint)", marginTop: 4 }}>
+                    罐頭要看清楚是一罐還是一箱幾罐。規格名稱會原封不動寫給讀者看，點進去才選得對
+                  </span>
+                </Line>
               </div>
             </div>
           ))}
