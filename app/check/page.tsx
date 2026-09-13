@@ -15,6 +15,30 @@ import { checkItems, checkStats } from "@/lib/check";
 const items = checkItems();
 const st = checkStats(items);
 
+/*
+ * 給搜尋引擎、AI 搜尋讀的問答：「XX 有雞嗎？」
+ * 有人在 Bing、ChatGPT 問某一包有沒有雞，答案直接是這一頁的這一款
+ */
+const ANSWER = {
+  hidden: "有。名字沒寫雞，但成分表裡有雞。",
+  chicken: "有，名字就寫了。",
+  fat: "肉沒有雞，但油脂用的是雞脂肪。",
+  unsure: "說不準：成分表只寫「禽肉」或「動物蛋白」，沒講是哪一種。",
+  clean: "沒有，成分表裡找不到雞。",
+} as const;
+const FAQ = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: items.map((x) => ({
+    "@type": "Question",
+    name: `${x.brand} ${x.name} 有雞嗎？`,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: `${ANSWER[x.status]}成分表裡的肉：${x.meats}。${x.found ? x.found.join("；") + "。" : ""}`,
+    },
+  })),
+};
+
 export const metadata: Metadata = {
   title: "你家那包飼料有沒有藏雞",
   description:
@@ -26,6 +50,7 @@ export const metadata: Metadata = {
 export default function Page() {
   return (
     <main style={{ maxWidth: 720, margin: "0 auto", padding: "0 20px 120px" }}>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(FAQ) }} />
       <SiteHeader />
 
       <h1 style={{ fontSize: "clamp(28px,6vw,40px)", lineHeight: 1.45, margin: "0 0 16px" }}>

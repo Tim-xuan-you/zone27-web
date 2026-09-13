@@ -33,6 +33,8 @@ const LINE: Record<CheckStatus, string> = {
 export default function Checker({ items }: { items: CheckItem[] }) {
   const [q, setQ] = useState("");
   const [sp, setSp] = useState<"all" | "dog" | "cat">("all");
+  // 對雞過敏的人最想知道的是「那到底哪些能吃」：一鍵只看沒有雞的
+  const [only, setOnly] = useState<"all" | "hidden" | "clean">("all");
 
   // 朋友傳來 /check#cf-07：打開那一款、捲過去
   useEffect(() => {
@@ -45,14 +47,11 @@ export default function Checker({ items }: { items: CheckItem[] }) {
     }
   }, []);
 
-  const shown = useMemo(() => {
+  const byName = useMemo(() => {
     const tokens = q.toLowerCase().split(/[\s,，、]+/).filter(Boolean);
-    return items.filter((x) => {
-      if (sp !== "all" && x.species !== sp) return false;
-      const hay = `${x.brand} ${x.name}`.toLowerCase();
-      return tokens.every((t) => hay.includes(t));
-    });
-  }, [items, q, sp]);
+    return items.filter((x) => tokens.every((t) => `${x.brand} ${x.name}`.toLowerCase().includes(t)));
+  }, [items, q]);
+  const shown = byName.filter((x) => (sp === "all" || x.species === sp) && (only === "all" || x.status === only));
 
   // 同一類裡，藏雞的排最前面：這一頁要講的就是這件事。名字就寫了雞的最沒意外，放最後
   const ORDER: CheckStatus[] = ["hidden", "fat", "unsure", "clean", "chicken"];
@@ -72,15 +71,23 @@ export default function Checker({ items }: { items: CheckItem[] }) {
           aria-label="搜尋飼料"
           style={input}
         />
-        <div style={{ display: "flex", gap: 8, marginTop: 10, flexWrap: "wrap" }}>
-          {([["all", "全部"], ["dog", "狗"], ["cat", "貓"]] as const).map(([k, zh]) => (
-            <button key={k} type="button" onClick={() => setSp(k)} aria-pressed={sp === k} style={sp === k ? { ...chip, ...chipOn } : chip}>
-              {k === "dog" && <DogIcon size={15} />}
-              {k === "cat" && <CatIcon size={15} />}
-              {zh}
-            </button>
-          ))}
-        </div>
+      </div>
+      {/* 按鈕不跟著搜尋框黏在上面：手機上黏住的區塊太高，會擋住清單 */}
+      <div style={{ display: "flex", gap: 8, marginTop: 4, flexWrap: "wrap" }}>
+        {([["all", "全部"], ["dog", "狗"], ["cat", "貓"]] as const).map(([k, zh]) => (
+          <button key={k} type="button" onClick={() => setSp(k)} aria-pressed={sp === k} style={sp === k ? { ...chip, ...chipOn } : chip}>
+            {k === "dog" && <DogIcon size={15} />}
+            {k === "cat" && <CatIcon size={15} />}
+            {zh}
+          </button>
+        ))}
+        <span style={{ width: 1, background: "var(--line)", margin: "4px 2px" }} aria-hidden />
+        {/* 點一下只看那一種，再點一次回到全部 */}
+        {([["hidden", "只看藏雞的"], ["clean", "只看沒有雞的"]] as const).map(([k, zh]) => (
+          <button key={k} type="button" onClick={() => setOnly(only === k ? "all" : k)} aria-pressed={only === k} style={only === k ? { ...chip, ...chipOn } : chip}>
+            {only === k ? "✓ " : ""}{zh}
+          </button>
+        ))}
       </div>
 
       {groups.map((g) => g.list.length > 0 && (
@@ -92,7 +99,15 @@ export default function Checker({ items }: { items: CheckItem[] }) {
         </section>
       ))}
 
-      {shown.length === 0 && (
+      {/* 名字對得到，只是被上面的篩選藏起來了：不能講成「還沒讀過」 */}
+      {shown.length === 0 && byName.length > 0 && (
+        <div style={emptyBox}>
+          <p style={{ margin: 0, fontWeight: 700 }}>有這一款，只是被上面的篩選藏起來了</p>
+          <button type="button" onClick={() => { setSp("all"); setOnly("all"); }} style={{ ...chip, marginTop: 12 }}>清掉篩選</button>
+        </div>
+      )}
+
+      {byName.length === 0 && (
         <div style={emptyBox}>
           <p style={{ margin: 0, fontWeight: 700 }}>這一包我們還沒讀過</p>
           <p style={{ margin: "8px 0 0", fontSize: 15, color: "var(--muted)", lineHeight: 1.85 }}>
