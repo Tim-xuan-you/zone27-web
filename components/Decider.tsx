@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { parse } from "@/lib/parse";
 import { adjudicate, anchorOf, formOf, pricePerKg, stageForAge, unitOf, type Stage } from "@/lib/engine";
@@ -184,6 +184,25 @@ export default function Decider({
   const [stage, setStage] = useState<Stage>("adultFixed");
   // 句子裡提到的商品（「我家吃紐頓 T22」），連同它照這句話的條件會不會被刪
   const [mentions, setMentions] = useState<Mention[]>([]);
+  // 跑出這個答案的那一句話（分享用）。輸入框之後被改掉，分享出去的還是這一句
+  const [asked, setAsked] = useState<{ text: string; sp: Species; fm: Form } | null>(null);
+
+  /*
+   * 朋友傳來的連結：/?q=柴犬 5 歲，對雞肉過敏&sp=dog&fm=dry
+   * 打開就直接跑同一句話，看到的是同一個答案。
+   * 只有讀者自己按「傳給朋友」的時候，句子才會進網址；打字的時候不會。
+   */
+  useEffect(() => {
+    const q = new URLSearchParams(window.location.search);
+    const t = q.get("q")?.trim().slice(0, 200);
+    if (!t) return;
+    const sp: Species = q.get("sp") === "cat" ? "cat" : q.get("sp") === "dog" ? "dog" : species;
+    const fm: Form = q.get("fm") === "wet" ? "wet" : "dry";
+    setSpecies(sp);
+    run(t, sp, fm);
+    // 只在第一次載入時跑一次
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const cat = categoryOf(species, form);
   const forms = categoriesOf(species);
@@ -233,6 +252,7 @@ export default function Decider({
     setStage(stageForAge(s.ageYears, s.species));
     const v = adjudicate(catalog, s);
     setVerdict(v);
+    setAsked({ text: src, sp: s.species, fm: sf });
     setMentions(found.map((p) => judge(p, v, s.species, s.form ?? "dry")));
     if (scroll) scrollTo(found.length ? "mentions" : "verdict");
   }
@@ -432,6 +452,10 @@ export default function Decider({
             stage={stage}
             chipsLabel="我們聽到的是"
             fromDecider
+            share={asked && verdict.pick ? {
+              path: `/?q=${encodeURIComponent(asked.text)}&sp=${asked.sp}&fm=${asked.fm}`,
+              text: `我查了「${asked.text}」，ZONE 27 的答案是 ${verdict.pick.brand} ${verdict.pick.name}。為什麼是它、哪一家最便宜都寫了：`,
+            } : undefined}
           />
         </div>
       )}

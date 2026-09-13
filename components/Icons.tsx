@@ -76,6 +76,17 @@ export function CanIcon(p: P) {
   );
 }
 
+/** 分享：箭頭從盒子裡出來（跟手機分享鈕長得一樣，大家認得） */
+export function ShareIcon(p: P) {
+  return (
+    <Svg {...p}>
+      <path d="M12 3.5v11" />
+      <path d="M8 7.2 12 3.5l4 3.7" />
+      <path d="M7.5 10.5H6c-.8 0-1.5.7-1.5 1.5v7c0 .8.7 1.5 1.5 1.5h12c.8 0 1.5-.7 1.5-1.5v-7c0-.8-.7-1.5-1.5-1.5h-1.5" />
+    </Svg>
+  );
+}
+
 /** 類目用哪一個：罐頭看形態，乾糧看動物 */
 export function CategoryIcon({ species, form, size }: { species: "dog" | "cat"; form: "dry" | "wet"; size?: number }) {
   if (form === "wet") return <CanIcon size={size} />;

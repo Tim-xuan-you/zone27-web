@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import SiteHeader from "./SiteHeader";
 import { ProductCard } from "./Result";
+import Share from "./Share";
 import { S } from "./styles";
 import { byId, catalogOf } from "@/lib/catalog";
 import { categoryOf } from "@/lib/categories";
@@ -101,6 +102,9 @@ export default function ProductPage({ id, species, form = "dry" }: { id: string;
       {ok ? (
         <div style={{ marginTop: 18 }}>
           <ProductCard p={p} />
+          <div style={{ marginTop: 14 }}>
+            <Share path={productHref(p)} text={`${p.brand} ${p.name}：什麼時候不要買、哪一家最便宜，這一頁都寫了。`} label="分享這一款" />
+          </div>
         </div>
       ) : (
         <div style={statusBox}>

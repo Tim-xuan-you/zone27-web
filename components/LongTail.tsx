@@ -161,6 +161,7 @@ export default function LongTail({ sp, slug }: { sp: Species; slug: string[] }) 
         dogKg={p.kind === "allergen" ? undefined : p.breed.kg}
         // 會搜「避雞肉」的人就是在做排除飲食法 —— 那是皮膚的時程，不是腸胃的
         symptoms={p.kind === "breed" ? undefined : ["皮膚搔癢"]}
+        share={verdict.pick ? { path: `${base}/${slug.join("/")}`, text: `${title}：ZONE 27 的答案是 ${verdict.pick.brand} ${verdict.pick.name}。` } : undefined}
       />
 
       {p.kind === "both" && !verdict.cuts.some((c) => c.tag === "體型不符") && verdict.survivors.length > 0 && (

@@ -12,6 +12,7 @@ import { linkReport } from "@/lib/contact";
 import { fitFor, platformOf, productHref } from "@/lib/labels";
 import { readerNotes } from "@/lib/notes";
 import { S } from "./styles";
+import Share from "./Share";
 
 /**
  * 裁決結果。
@@ -42,6 +43,7 @@ export default function Result({
   stage,
   chipsLabel = "條件",
   fromDecider = false,
+  share,
 }: {
   verdict: Verdict;
   chips: { label: string; kind: "info" | "avoid" }[];
@@ -53,6 +55,8 @@ export default function Result({
   chipsLabel?: string;
   /** 裁決器來的：體重是讀者自己講的，上面也有輸入框可以補講。長尾頁的體重是品種的一般值 */
   fromDecider?: boolean;
+  /** 分享出去的網址和一句話。裁決器給「/?q=…」，長尾頁給自己的網址 */
+  share?: { path: string; text: string };
 }) {
   const shared = sharedListings(verdict.survivors);
   const others = verdict.survivors.filter((p) => p.id !== verdict.pick?.id);
@@ -101,6 +105,11 @@ export default function Result({
               <p style={S.lbl}>買這個</p>
               <Answer p={verdict.pick} verdict={verdict} dogKg={dogKg} stage={stage} multi={shared} said={fromDecider} />
               {verdict.alt && <SecondPick alt={verdict.alt} />}
+              {share && (
+                <div style={{ marginTop: 14 }}>
+                  <Share path={share.path} text={share.text} label="把這個答案傳給朋友" />
+                </div>
+              )}
             </>
           )}
 
@@ -258,6 +267,7 @@ function Answer({
         )}
         {safe && <ReportLine p={p} where={whereOf(storeOf(p, safe), checkedOf(p, safe))} />}
         <SizeTable p={p} weightKg={dogKg} stage={stage} said={said} />
+        <Timing p={p} />
       </div>
 
       <div style={S.deal}>
@@ -272,13 +282,20 @@ function Answer({
         </p>
       )}
 
-      <details style={S.detailBlock}>
-        <summary style={S.detailSummary}>{stores.length > 1 ? `全部 ${stores.length} 家的價格` : "各規格的價格"}</summary>
-        <div style={{ padding: `0 ${24}px ${24}px` }}>
-          <Stores p={p} dogKg={dogKg} stage={stage} />
-          {p.knownIssues && <Issues text={p.knownIssues} />}
-        </div>
-      </details>
+      {/*
+        只有一家賣的時候，每一家的明細就是上面那張表再列一次。
+        同樣的數字出現兩次，讀者會以為兩個不一樣，回頭去對，反而更亂（2026-09-13 Tim）。
+        所以只有一家就不放明細，只剩「先知道這件事」。
+      */}
+      {(stores.length > 1 || p.knownIssues) && (
+        <details style={S.detailBlock}>
+          <summary style={S.detailSummary}>{stores.length > 1 ? `全部 ${stores.length} 家的價格` : "先知道這件事"}</summary>
+          <div style={{ padding: `0 ${24}px ${24}px` }}>
+            {stores.length > 1 && <Stores p={p} dogKg={dogKg} stage={stage} />}
+            {p.knownIssues && <Issues text={p.knownIssues} bare={stores.length === 1} />}
+          </div>
+        </details>
+      )}
     </article>
   );
 }
@@ -525,7 +542,9 @@ function Alt({ p, dogKg, stage, multi, said }: { p: Product; dogKg?: number; sta
         <summary style={S.detailSummary}>其他規格與價格</summary>
         <div style={{ padding: `0 ${24}px ${24}px` }}>
           <SizeTable p={p} weightKg={dogKg} stage={stage} said={said} />
-          <Stores p={p} dogKg={dogKg} stage={stage} />
+          <Timing p={p} />
+          {/* 只有一家的話，明細就是上面那張表再列一次 */}
+          {storesOf(p).length > 1 && <Stores p={p} dogKg={dogKg} stage={stage} />}
           {p.knownIssues && <Issues text={p.knownIssues} />}
         </div>
       </details>
@@ -571,6 +590,7 @@ export function ProductCard({ p }: { p: Product }) {
         )}
         {safe && <ReportLine p={p} where={whereOf(storeOf(p, safe), checkedOf(p, safe))} />}
         <SizeTable p={p} />
+        <Timing p={p} />
       </div>
 
       <div style={S.deal}>
@@ -585,13 +605,16 @@ export function ProductCard({ p }: { p: Product }) {
         </p>
       )}
 
-      {/* 要買哪一包，上面「每一種大小」已經比好了。每一家的明細收起來，想對的人自己點開 */}
-      <details style={S.detailBlock}>
-        <summary style={S.detailSummary}>{count > 1 ? `全部 ${count} 家的價格` : "各規格的價格"}</summary>
-        <div style={{ padding: `0 ${24}px ${24}px` }}>
-          <Stores p={p} />
-        </div>
-      </details>
+      {/* 要買哪一包，上面「每一種大小」已經比好了。好幾家賣的，每一家的明細收起來，想對的人自己點開；
+          只有一家的，明細就是上面那張表，不再列一次 */}
+      {count > 1 && (
+        <details style={S.detailBlock}>
+          <summary style={S.detailSummary}>全部 {count} 家的價格</summary>
+          <div style={{ padding: `0 ${24}px ${24}px` }}>
+            <Stores p={p} />
+          </div>
+        </details>
+      )}
       {p.knownIssues && (
         <div style={{ padding: `0 ${24}px ${24}px` }}>
           <Issues text={p.knownIssues} />
@@ -702,27 +725,34 @@ function Stores({ p, dogKg, stage }: { p: Product; dogKg?: number; stage?: Stage
         </p>
       )}
 
-      {(() => {
-        const safe = anchorOf(p, "safe");
-        const stat = priceStat(p.id, safe.amount);
-        if (!stat) return null;
-        const advice = timingAdvice(stat, safe.amount);
-        return (
-          <div style={{
-            ...S.store, marginTop: 12,
-            borderColor: advice.wait ? "var(--warn)" : "var(--keep)",
-            background: advice.wait ? "var(--warn-soft)" : "var(--keep-soft)",
-          }}>
-            <p style={{ margin: 0, fontWeight: 700, fontSize: 15 }}>
-              {advice.wait ? "現在不是好時機，建議先等等" : "現在買不吃虧"}
-            </p>
-            <p style={{ margin: "4px 0 0", fontSize: 13.5, color: "var(--muted)" }}>
-              {advice.verdict}
-            </p>
-          </div>
-        );
-      })()}
     </>
+  );
+}
+
+/**
+ * 現在買划不划算：價格紀錄夠多才會出現。
+ *
+ * 以前放在「各規格的價格」裡面。那一塊只有一家賣的時候整個拿掉了（跟上面的表重複），
+ * 所以搬出來，放在購買按鈕附近，跟價錢放在一起。
+ */
+function Timing({ p }: { p: Product }) {
+  const safe = anchorOf(p, "safe");
+  const stat = safe ? priceStat(p.id, safe.amount) : null;
+  if (!safe || !stat) return null;
+  const advice = timingAdvice(stat, safe.amount);
+  return (
+    <div style={{
+      ...S.store, marginTop: 16,
+      borderColor: advice.wait ? "var(--warn)" : "var(--keep)",
+      background: advice.wait ? "var(--warn-soft)" : "var(--keep-soft)",
+    }}>
+      <p style={{ margin: 0, fontWeight: 700, fontSize: 15 }}>
+        {advice.wait ? "現在不是好時機，建議先等等" : "現在買不吃虧"}
+      </p>
+      <p style={{ margin: "4px 0 0", fontSize: 13.5, color: "var(--muted)" }}>
+        {advice.verdict}
+      </p>
+    </div>
   );
 }
 
@@ -1038,10 +1068,11 @@ function manyInOne(m: { affiliateUrl: string; note: string; sharedPage?: boolean
   return multi.has(m.affiliateUrl) || /一頁多款/.test(m.note);
 }
 
-function Issues({ text }: { text: string }) {
+/** bare：外面的標題已經寫了「先知道這件事」，裡面就不再寫一次 */
+function Issues({ text, bare }: { text: string; bare?: boolean }) {
   return (
-    <p style={{ ...S.reports, marginTop: 16 }}>
-      <b style={{ color: "var(--muted)" }}>先知道這件事：</b>{text}
+    <p style={{ ...S.reports, marginTop: bare ? 0 : 16 }}>
+      {!bare && <b style={{ color: "var(--muted)" }}>先知道這件事：</b>}{text}
     </p>
   );
 }
