@@ -447,6 +447,7 @@ export function adjudicate(pool: Product[], situation: Situation): Verdict {
   }
 
   const { pick, reason } = choose(alive, situation);
+  const alt = pick ? altPick(alive, pick, situation) : undefined;
 
   // 貓不愛喝水：乾糧怎麼挑都補不了水，罐頭可以。這一句一定要講
   const notices: string[] = [];
@@ -468,7 +469,76 @@ export function adjudicate(pool: Product[], situation: Situation): Verdict {
     startCount, cuts, survivors: alive, pick, pickReason: reason,
     ...(notice ? { notice } : {}),
     ...(unusedSignals.length ? { unusedSignals } : {}),
+    ...(alt ? { alt } : {}),
   };
+}
+
+/**
+ * 第二個選擇。
+ *
+ * 只給一個答案最乾脆，但有個副作用：只有一個選項的時候，人比較會「再想想」就關掉；
+ * 旁邊多一個可以比的，反而比較敢決定（行銷研究叫 single-option aversion，Mochon 2013）。
+ * 所以答案下面多放一款，而且要是讀者真的會考慮的那一種：
+ *   答案不是最便宜的 → 「想省一點」：留下來的裡面，比答案便宜兩成以上、最便宜的那款
+ *   講了想省錢（答案已經往便宜的倒）→ 「不看價錢的話」：不算價錢時分數最高的那款
+ * 乾糧比每公斤；罐頭比全吃一個月的錢，罐頭熱量差很多，每公斤便宜不代表吃起來便宜。
+ */
+function altPick(alive: Product[], pick: Product, situation: Situation): Verdict["alt"] {
+  if (alive.length < 2) return undefined;
+  const wet = formOf(pick) === "wet";
+  const kcal = mer(situation.weightKg ?? 4, stageForAge(situation.ageYears, situation.species), situation.species);
+  const cost = (p: Product): number | null => {
+    if (wet) return wetMonthly(p, kcal);
+    const m = anchorOf(p, "safe");
+    return m ? pricePerKg(unitOf(p, m), m.amount) : null;
+  };
+  const unit = wet ? "全吃罐頭一個月大約" : "每公斤";
+  const mine = cost(pick);
+
+  if (situation.preferCheap) {
+    const plain = { ...situation, preferCheap: false };
+    const better = choose(alive, plain).pick;
+    if (!better || better.id === pick.id) return undefined;
+    const c = cost(better);
+    const why = explain(better, alive, plain);
+    const more = mine && c && c > mine ? `，比上面多 ${Math.round((c / mine - 1) * 100)}%` : "";
+    return { p: better, kind: "better", line: `${c ? `${unit} $${c.toLocaleString()}${more}。` : ""}${why}` };
+  }
+
+  if (!mine) return undefined;
+  const cheaper = alive
+    .filter((p) => p.id !== pick.id)
+    .map((p) => ({ p, c: cost(p) }))
+    .filter((x): x is { p: Product; c: number } => x.c !== null && x.c <= mine * 0.8)
+    .sort((a, b) => a.c - b.c)[0];
+  if (!cheaper) return undefined;
+  const pct = Math.round((1 - cheaper.c / mine) * 100);
+  const lose = tradeoff(cheaper.p, pick, situation);
+  return {
+    p: cheaper.p, kind: "cheaper",
+    line: `${unit} $${cheaper.c.toLocaleString()}，比上面便宜 ${pct}%。一樣符合你講的條件${lose ? `，差在${lose}` : ""}。`,
+  };
+}
+
+/**
+ * 便宜的那款差在哪。只講上面那款被選中的理由裡、這款沒有的：
+ * 專用配方、單一蛋白、碳水。講不出差別就不講，不硬湊。
+ */
+function tradeoff(a: Product, pick: Product, situation: Situation): string {
+  const bits: string[] = [];
+  const st = stageForAge(situation.ageYears, situation.species);
+  const want = st === "puppyYoung" || st === "puppy" ? "puppy" : st === "senior" ? "senior" : null;
+  if (want && pick.spec.lifeStage.includes(want) && !a.spec.lifeStage.includes(want)) {
+    bits.push(want === "puppy" ? `不是${a.species === "cat" ? "幼貓" : "幼犬"}專用` : "不是高齡專用");
+  }
+  const size = situation.bodySize;
+  if (size && pick.spec.bodySize.length === 1 && pick.spec.bodySize[0] === size && !(a.spec.bodySize.length === 1 && a.spec.bodySize[0] === size)) {
+    bits.push(`不是${({ small: "小型犬", medium: "中型犬", large: "大型犬" } as const)[size]}專用`);
+  }
+  const allergic = situation.avoid.length > 0 || has(situation, "過敏") || has(situation, "皮膚") || has(situation, "腸胃");
+  if (allergic && pick.spec.singleSource && !a.spec.singleSource) bits.push("不是單一蛋白源");
+  if (formOf(a) === "dry" && a.spec.carb - pick.spec.carb >= 8) bits.push(`碳水比較高（${a.spec.carb}%）`);
+  return bits.slice(0, 2).join("、");
 }
 
 /**

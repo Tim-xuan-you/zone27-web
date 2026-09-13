@@ -100,6 +100,7 @@ export default function Result({
             <>
               <p style={S.lbl}>買這個</p>
               <Answer p={verdict.pick} verdict={verdict} dogKg={dogKg} stage={stage} multi={shared} said={fromDecider} />
+              {verdict.alt && <SecondPick alt={verdict.alt} />}
             </>
           )}
 
@@ -281,6 +282,47 @@ function Answer({
     </article>
   );
 }
+
+/* ------------------------------------------------------------------ */
+/* 第二個選擇                                                          */
+/*                                                                    */
+/* 只給一個答案，人比較會「再想想」就走掉；多一個能比的，反而敢決定。   */
+/* 這一張小卡只放一款：想省一點的，或是不看價錢的話我們會選的。        */
+/* 跟主答案一樣兩面都講：便宜多少、差在哪、什麼時候不要買。            */
+/* ------------------------------------------------------------------ */
+
+function SecondPick({ alt }: { alt: NonNullable<Verdict["alt"]> }) {
+  const p = alt.p;
+  const safe = anchorOf(p, "safe");
+  return (
+    <div style={second}>
+      <span style={secondHead}>{alt.kind === "cheaper" ? "想省一點" : "不看價錢的話"}</span>
+      <div style={{ minWidth: 0 }}>
+        <Link href={productHref(p)} style={{ ...nameLink, display: "block", fontSize: 16, fontWeight: 700, lineHeight: 1.5 }}>
+          <span style={{ display: "block", fontSize: 12.5, fontWeight: 500, color: "var(--muted)" }}>{p.brand}</span>
+          {p.name}
+        </Link>
+        <p style={{ margin: "6px 0 0", fontSize: 14, lineHeight: 1.75 }}>{alt.line}</p>
+        <p style={{ margin: "6px 0 0", fontSize: 13.5, lineHeight: 1.75, color: "var(--cut)" }}>
+          ✕ 什麼時候不要買：{p.dealbreaker}
+        </p>
+      </div>
+      {safe && (
+        <a style={{ ...S.btnSmall, justifySelf: "start" }} href={`/go/${safe.id}/${p.id}`} rel="nofollow sponsored">
+          {buyLabel(safe, true)}
+        </a>
+      )}
+    </div>
+  );
+}
+
+const second: React.CSSProperties = {
+  display: "grid", gridTemplateColumns: "1fr", gap: 10, marginTop: 14,
+  background: "var(--surface)", border: "1px solid var(--line)", borderRadius: 16, padding: "16px 18px",
+};
+const secondHead: React.CSSProperties = {
+  gridColumn: "1 / -1", fontSize: 13, fontWeight: 700, color: "var(--accent)", letterSpacing: ".04em",
+};
 
 /* ------------------------------------------------------------------ */
 /* 換了之後會怎樣                                                      */
@@ -885,11 +927,17 @@ function SizeTable({ p, weightKg, stage, said }: { p: Product; weightKg?: number
           </a>
         );
       })}
-      {!wet && (
+      {(!wet || cat) && (
         <p style={szFoot}>
-          {kg ? `天數照${said && weightKg ? `你講的 ${weightKg} 公斤` : `一隻 ${kg} 公斤的${cat ? "成貓" : "狗"}`}算。` : ""}
-          開封超過 {FRESH_DAYS} 天，油脂會氧化、變得不好吃。大包比較便宜，吃得完再買。
-          {!kg && said && "在上面講牠幾公斤（像「柴犬 10 公斤」），就幫你算每一包吃幾天。"}
+          {!wet && (
+            <>
+              {kg ? `天數照${said && weightKg ? `你講的 ${weightKg} 公斤` : `一隻 ${kg} 公斤的${cat ? "成貓" : "狗"}`}算。` : ""}
+              開封超過 {FRESH_DAYS} 天，油脂會氧化、變得不好吃。大包比較便宜，吃得完再買。
+              {!kg && said && "在上面講牠幾公斤（像「柴犬 10 公斤」），就幫你算每一包吃幾天。"}
+            </>
+          )}
+          {/* 養貓的人最怕的是買了牠不吃。先講怎麼把這個風險降到最小，比講省多少更讓人敢按 */}
+          {cat && (wet ? "貓換口味常常不肯吃，第一次先買一罐，確定牠肯吃再買整箱。" : "貓換口味常常不肯吃，第一次先買最小包。")}
         </p>
       )}
     </div>

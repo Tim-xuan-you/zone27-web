@@ -11,6 +11,7 @@ import { CATEGORIES, categoriesOf, categoryOf, type CategorySlug } from "@/lib/c
 import type { Form, Product, Species, Verdict } from "@/lib/types";
 import { CONTACT } from "@/lib/contact";
 import Result from "./Result";
+import { BagIcon, CanIcon, CatIcon, DogIcon } from "./Icons";
 import { S } from "./styles";
 
 /**
@@ -275,6 +276,7 @@ export default function Decider({
                 onClick={() => pick(sp)}
                 style={on ? { ...segBtn, ...segOn } : segBtn}
               >
+                {sp === "dog" ? <DogIcon size={18} /> : <CatIcon size={18} />}
                 {sp === "dog" ? "狗" : "貓"}
                 {soon && <span style={soonTag}>上架中</span>}
               </button>
@@ -294,6 +296,7 @@ export default function Decider({
                   onClick={() => pickForm(c.form)}
                   style={on ? { ...segBtn, ...segSmall, ...segOn } : { ...segBtn, ...segSmall }}
                 >
+                  {c.form === "wet" ? <CanIcon size={16} /> : <BagIcon size={16} />}
                   {c.short}
                   {!STATUS[c.slug].live && <span style={soonTag}>上架中</span>}
                 </button>

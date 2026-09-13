@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Category } from "@/lib/categories";
 import { catalogOf, isLive, liveCount } from "@/lib/catalog";
 import { allergensOf, breedsOf } from "@/lib/slugs";
+import { CategoryIcon } from "./Icons";
 
 /**
  * 類目卡。首頁、動物頁（/cat）共用。
@@ -18,8 +19,11 @@ export default function CategoryCards({ cats, short }: { cats: Category[]; short
         const read = catalogOf(c.species, c.form).length;
         return (
           <Link key={c.slug} href={`/${c.slug}`} style={card}>
-            <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", gap: 10 }}>
-              <h2 style={{ margin: 0, fontSize: 22 }}>{short ? c.short : c.zh}</h2>
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 10 }}>
+              <h2 style={{ margin: 0, fontSize: 22, display: "flex", alignItems: "center", gap: 10 }}>
+                <span style={iconDot}><CategoryIcon species={c.species} form={c.form} size={20} /></span>
+                {short ? c.short : c.zh}
+              </h2>
               <span style={live ? liveTag : soonTag}>
                 {live ? `${ready} 款可以買` : "上架中"}
               </span>
@@ -48,6 +52,10 @@ const card: React.CSSProperties = {
   display: "block", background: "var(--surface)", border: "1px solid var(--line)",
   borderRadius: 16, boxShadow: "var(--sh)", padding: "22px 22px 20px",
   textDecoration: "none", color: "inherit",
+};
+const iconDot: React.CSSProperties = {
+  display: "inline-grid", placeItems: "center", width: 36, height: 36, borderRadius: 999,
+  background: "var(--accent-soft)", color: "var(--accent)", flex: "none",
 };
 const liveTag: React.CSSProperties = {
   fontSize: 12.5, fontWeight: 700, color: "var(--keep)", whiteSpace: "nowrap",

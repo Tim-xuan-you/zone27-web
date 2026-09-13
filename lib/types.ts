@@ -404,4 +404,10 @@ export interface Verdict {
    * 用不到就要講出來，不要靜靜吞掉。
    */
   unusedSignals?: string[];
+  /**
+   * 第二個選擇，放在答案下面。一樣是這些條件下留下來的，不會是被刪掉的。
+   *   cheaper：答案不是最便宜的，給一款便宜兩成以上的（想省一點）
+   *   better：讀者講了想省錢，給不看價錢時我們會選的那款（不看價錢的話）
+   */
+  alt?: { p: Product; kind: "cheaper" | "better"; line: string };
 }
