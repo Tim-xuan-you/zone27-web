@@ -13,6 +13,7 @@ import health from "@/data/link-health.json";
 import storeReg from "@/data/stores.json";
 import checkExtra from "@/data/check-extra.json";
 import HuntPicks from "@/components/HuntPicks";
+import huntData from "@/data/hunt-candidates.json";
 import { productHref } from "@/lib/labels";
 
 /**
@@ -140,6 +141,11 @@ export default function Page() {
   /* 同一個品牌我們已經在哪幾家買過。
      回去同一家找，通常比重新搜一次快 —— 那家有整條產品線的機率很高。
      賣家越集中，維護成本也越低。 */
+  /* 這個品牌我們沒在任何一家買過的時候，退而求其次：給幾家一定產得出連結的賣場，讓他進去搜看看 */
+  const fallbackShops = Object.entries((storeReg as { stores: Record<string, { name: string; confirmed: boolean }> }).stores)
+    .filter(([, v]) => v.confirmed)
+    .slice(-6)
+    .map(([shop, v]) => ({ label: v.name, shop }));
   const sellersOfBrand = (brand: string) => {
     const key = brand.split(/[（(]/)[0].trim();
     const found = new Set<string>();
@@ -148,6 +154,12 @@ export default function Page() {
       for (const m of p.price.merchants) if (!m.dead) found.add(m.label);
     }
     return [...found];
+  };
+  /* 候選名單裡沒被上面任何一段列到的，補一段收尾，不然我查好的賣場會沒有地方顯示 */
+  const huntTargets = (huntData.targets as { id: string; label: string; why: string }[]);
+  const shopsFor = (brand: string) => {
+    const mine = sellersOfBrand(brand).map((label) => ({ label, shop: shopIds.get(label) })).filter((x) => x.shop);
+    return mine.length > 0 ? mine : fallbackShops;
   };
   // 對照款是故意不賣的，不算「買不到」的問題
   const shopIds = shopIdsByLabel();
@@ -322,13 +334,41 @@ export default function Page() {
           <li><b>要同一家店才算。</b>讀者點我們的連結進去，跑去別家買，那筆沒有我們的事。所以連結要指到他最可能直接下單的那一家。</li>
           <li><b>七天內結帳都算，而且不限那一件商品。</b>同一家店裡他順手買的貓砂、罐頭一樣算。東西齊全的賣場因此比便宜五塊的賣場值錢。</li>
           <li><b>七天內他點到別人的連結，就變成別人的。</b>所以頁面要讓人看完就走、直接買，不要逼他再去比價。</li>
-          <li><b>不是每一家都產得出連結。</b>賣場要有參加分潤計畫才行，價格便宜的小賣場常常沒有。最快的驗法是在分潤後台搜商品，那裡出現的才產得出來；比價站看不到這件事。試過產不出來的，跟我講一聲，我記進候選名單，不會再叫你試第二次。</li>
+          <li><b>產不出連結是整家的事，不是那件商品的事。</b>賣場要有參加分潤計畫，跟商城、優選、一般賣家都無關（皇家官方旗艦館也產不出來）。試過不行的那家，我整家記進封存名單，之後查哪一款都不會再出現。最快的驗法是在分潤後台搜商品，那裡列得出來的才產得出連結。</li>
           <li><b>費率不用挑。</b>蝦皮的費率隨商品、活動、賣家加碼和創作者分級在變，以商品頁當下顯示的為準，我們也不寫在讀者看得到的地方。能控制的只有「他會不會買」。</li>
         </ul>
         <p style={{ margin: "12px 0 0", fontSize: 13, color: "var(--faint)", lineHeight: 1.85 }}>
           依蝦皮幫助中心「分潤計畫用戶如何賺取分潤金」與聯盟計畫約定條款（2026-09-18 查）。條款另有規定：禁止機器人與自動抓取、禁止自購，違反可立即終止，所以我們不自動操作你的帳號。
         </p>
       </div>
+
+      {(() => {
+        const shown = new Set([...thin.map((p) => p.id), ...noChicken.map((x) => x.planId), ...waiting.map((p) => p.id)]);
+        const rest = huntTargets.filter((t) => !shown.has(t.id));
+        if (rest.length === 0) return null;
+        return (
+          <>
+            <H>我查好賣場、等你產連結的（{rest.length} 款）</H>
+            {rest.map((t) => (
+              <div key={t.id} style={box}>
+                <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", gap: 12, flexWrap: "wrap" }}>
+                  <b style={{ fontSize: 16.5 }}>{t.label}</b>
+                  <span className="mono" style={{ fontSize: 13, color: "var(--faint)" }}>{t.id}</span>
+                </div>
+                <p style={{ margin: "6px 0 0", fontSize: 14, color: "var(--muted)", lineHeight: 1.85 }}>{t.why}</p>
+                <div style={{ marginTop: 10, paddingTop: 10, borderTop: "1px solid var(--line)" }}>
+                  <Line k="產生連結時填">
+                    <span className="mono" style={{ fontSize: 14 }}>
+                      Sub id 1 = <b>{shopeeSubId(t.id)}</b>　Sub id 2 = <b>{categoryOfId(t.id)?.subId ?? CATEGORY_SUB_ID}</b>
+                    </span>
+                  </Line>
+                  <HuntPicks id={t.id} />
+                </div>
+              </div>
+            ))}
+          </>
+        );
+      })()}
 
       {thin.length > 0 && (
         <>
@@ -354,7 +394,7 @@ export default function Page() {
                     Sub id 1 = <b>{shopeeSubId(p.id)}</b>　Sub id 2 = <b>{categoryOfId(p.id)?.subId ?? CATEGORY_SUB_ID}</b>
                   </span>
                 </Line>
-                <HuntLinks keyword={huntKeyword(p)} shops={sellersOfBrand(p.brand).map((label) => ({ label, shop: shopIds.get(label) }))} />
+                <HuntLinks keyword={huntKeyword(p)} shops={shopsFor(p.brand)} />
                 <HuntPicks id={p.id} />
               </div>
             </div>
@@ -389,7 +429,7 @@ export default function Page() {
                     Sub id 1 = <b>{shopeeSubId(x.planId)}</b>　Sub id 2 = <b>{categoryOfId(x.planId)?.subId ?? CATEGORY_SUB_ID}</b>
                   </span>
                 </Line>
-                <HuntLinks keyword={x.hunt} shops={sellersOfBrand(x.brand).map((label) => ({ label, shop: shopIds.get(label) }))} />
+                <HuntLinks keyword={x.hunt} shops={shopsFor(x.brand)} />
                 <HuntPicks id={x.planId} />
               </div>
             </div>
@@ -446,7 +486,7 @@ export default function Page() {
                 )}
                 <Line k="去蝦皮搜這個">
                   <span className="mono" style={{ fontSize: 14 }}>{huntKeyword(p)}</span>
-                  <HuntLinks keyword={huntKeyword(p)} shops={sellersOfBrand(p.brand).map((label) => ({ label, shop: shopIds.get(label) }))} />
+                  <HuntLinks keyword={huntKeyword(p)} shops={shopsFor(p.brand)} />
                   <HuntPicks id={p.id} />
                 </Line>
                 <Line k="產生連結時填">
