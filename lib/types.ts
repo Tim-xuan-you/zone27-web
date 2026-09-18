@@ -50,7 +50,7 @@ export type Species = "dog" | "cat";
  * 引擎第一刀按物種分，第二刀按這個分：問罐頭的人，不會拿到一包乾糧。
  * 沒填就是乾糧，狗飼料、貓飼料的資料不用改。
  */
-export type Form = "dry" | "wet";
+export type Form = "dry" | "wet" | "litter";
 
 /** 商品規格。這一層是引擎判斷的依據，全部要可比較。 */
 export interface Spec {

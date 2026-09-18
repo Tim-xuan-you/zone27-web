@@ -1,3 +1,4 @@
+import type { Form } from "@/lib/types";
 /**
  * 全站只有四個圖示：狗、貓、乾糧、罐頭。
  *
@@ -88,7 +89,21 @@ export function ShareIcon(p: P) {
 }
 
 /** 類目用哪一個：罐頭看形態，乾糧看動物 */
-export function CategoryIcon({ species, form, size }: { species: "dog" | "cat"; form: "dry" | "wet"; size?: number }) {
+export function CategoryIcon({ species, form, size }: { species: "dog" | "cat"; form: Form; size?: number }) {
+  if (form === "litter") return <LitterIcon size={size} />;
   if (form === "wet") return <CanIcon size={size} />;
   return species === "cat" ? <CatIcon size={size} /> : <DogIcon size={size} />;
+}
+
+/** 貓砂：一個貓砂盆，裡面幾顆砂。跟其他圖示一樣，線條、不填色 */
+export function LitterIcon({ size = 18 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+      <path d="M3.5 9h17l-1.6 9.2a1.5 1.5 0 0 1-1.5 1.3H6.6a1.5 1.5 0 0 1-1.5-1.3Z" />
+      <path d="M2.5 9 4 6.2A1.5 1.5 0 0 1 5.3 5.5h13.4A1.5 1.5 0 0 1 20 6.2L21.5 9" />
+      <circle cx="9" cy="13.5" r=".9" />
+      <circle cx="13" cy="15.8" r=".9" />
+      <circle cx="15.5" cy="12.4" r=".9" />
+    </svg>
+  );
 }

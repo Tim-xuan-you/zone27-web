@@ -22,7 +22,8 @@
     "voice:check": "tsx scripts/voice-check.ts",
     "postbuild": "tsx scripts/outbound-check.ts && tsx scripts/promo-check.ts",
     "outbound:check": "tsx scripts/outbound-check.ts",
-    "promo:check": "tsx scripts/promo-check.ts"
+    "promo:check": "tsx scripts/promo-check.ts",
+    "litter:import": "tsx scripts/import-litter.ts"
   },
   "dependencies": {
     "@supabase/ssr": "^0.10.3",

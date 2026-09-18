@@ -7,7 +7,7 @@ import { adjudicate, anchorOf, formOf, pricePerKg, stageForAge, unitOf, type Sta
 import { mentionedProducts } from "@/lib/mentions";
 import { productHref } from "@/lib/labels";
 import { catalog, catalogOf, constraintsFor, isLive } from "@/lib/catalog";
-import { CATEGORIES, categoriesOf, categoryOf, type CategorySlug } from "@/lib/categories";
+import { CATEGORIES, categoriesOf, categoryOf, type CategorySlug, FoodSlug } from "@/lib/categories";
 import type { Form, Product, Species, Verdict } from "@/lib/types";
 import { CONTACT } from "@/lib/contact";
 import Result from "./Result";
@@ -36,7 +36,7 @@ import { S } from "./styles";
  * 引擎又沒有讀物種，點下去會推一款狗飼料給貓主人。
  * 自己在首頁掛一個會出錯的示範，是最貴的那種錯。
  */
-const EXAMPLES: Record<CategorySlug, string[]> = {
+const EXAMPLES: Record<FoodSlug, string[]> = {
   "dog-food": [
     "我家柴犬 5 歲，最近一直抓癢，換過兩種雞肉飼料都沒改善",
     "柯基快 8 歲了，有點胖，最近一直軟便",
@@ -78,7 +78,7 @@ const AGE: Record<Species, Pick[]> = {
     { label: "老貓", phrase: "老貓", group: "age" },
   ],
 };
-const PICKS: Record<CategorySlug, Pick[]> = {
+const PICKS: Record<FoodSlug, Pick[]> = {
   "dog-food": [
     { label: "對雞過敏", phrase: "對雞肉過敏" }, { label: "一直抓癢", phrase: "一直抓癢" },
     { label: "軟便", phrase: "軟便" }, { label: "有點胖", phrase: "有點胖" }, { label: "挑食", phrase: "挑食" },
@@ -103,7 +103,7 @@ const PICKS: Record<CategorySlug, Pick[]> = {
  * 答案是引擎照那句話當場算的，點下去就是那句話的完整裁決，跟打字、點按鈕走同一條路。
  * 同一款已經出現過就不再列：好幾行都是同一包，看起來就像在推銷那一包。
  */
-const COMMON: Record<CategorySlug, { label: string; phrase: string }[]> = {
+const COMMON: Record<FoodSlug, { label: string; phrase: string }[]> = {
   "dog-food": [
     { label: "對雞過敏的成犬", phrase: "成犬，對雞肉過敏" },
     { label: "小型犬", phrase: "成犬，小型犬" },
@@ -128,6 +128,11 @@ const COMMON: Record<CategorySlug, { label: string; phrase: string }[]> = {
   ],
 };
 
+/* 裁決器只服務吃的那三個類目。貓砂走自己的規則（沖不沖得下去、一個月多少錢），
+   不會渲染這個元件；萬一被指到，就當貓乾糧處理，不要讓型別到處擴散 */
+const foodCategoriesOf = (sp: Species) => categoriesOf(sp).filter((c) => c.form !== "litter");
+const foodSlug = (s: CategorySlug): FoodSlug => (s === "cat-litter" ? "cat-food" : s);
+
 type Answer = { label: string; phrase: string; p: Product; per: number | null };
 const answerCache = new Map<CategorySlug, Answer[]>();
 function answersFor(slug: CategorySlug): Answer[] {
@@ -136,7 +141,7 @@ function answersFor(slug: CategorySlug): Answer[] {
   const c = CATEGORIES.find((x) => x.slug === slug)!;
   const seen = new Set<string>();
   const out: Answer[] = [];
-  for (const row of COMMON[slug]) {
+  for (const row of COMMON[foodSlug(slug)]) {
     const s = parse(row.phrase, c.species, c.form).situation;
     s.constraints = constraintsFor(s);
     const v = adjudicate(catalog, s);
@@ -155,7 +160,7 @@ function without(text: string, phrase: string): string {
   return text.split(phrase).join("").replace(/[，,、\s]*[，,、][，,、\s]*/g, "，").replace(/^[，,、\s]+|[，,、\s]+$/g, "");
 }
 
-const PLACEHOLDER: Record<CategorySlug, string> = {
+const PLACEHOLDER: Record<FoodSlug, string> = {
   "dog-food": "例如：我家柴犬 5 歲，最近一直抓癢，換過兩種飼料都沒改善...",
   "cat-food": "例如：英短 3 歲，一直抓下巴，換過兩種雞肉的都沒改善...",
   "cat-wet-food": "例如：英短 3 歲，對雞肉過敏，想找不含雞的主食罐...",
@@ -164,7 +169,7 @@ const PLACEHOLDER: Record<CategorySlug, string> = {
 /** 還在上架的類目：切換鈕旁邊標「上架中」，下面講讀完幾款 */
 const STATUS = Object.fromEntries(
   CATEGORIES.map((c) => [c.slug, { live: isLive(c.species, c.form), read: catalogOf(c.species, c.form).length }]),
-) as Record<CategorySlug, { live: boolean; read: number }>;
+) as Record<FoodSlug, { live: boolean; read: number }>;
 
 export default function Decider({
   defaultSpecies = "dog",
@@ -208,8 +213,8 @@ export default function Decider({
   }, []);
 
   const cat = categoryOf(species, form);
-  const forms = categoriesOf(species);
-  const status = STATUS[cat.slug];
+  const forms = foodCategoriesOf(species);
+  const status = STATUS[foodSlug(cat.slug)];
 
   /** 點條件按鈕：把那幾個字加進句子（或拿掉），馬上重算，不捲動畫面，讓他可以連點好幾個 */
   function toggle(pk: Pick) {
@@ -224,9 +229,9 @@ export default function Decider({
 
   function run(input: string, sp: Species = species, fm: Form = form, scroll = true) {
     // 這個動物沒有這種形態（狗現在沒有罐頭），就回到乾糧
-    const f = categoriesOf(sp).some((c) => c.form === fm) ? fm : "dry";
+    const f = foodCategoriesOf(sp).some((c) => c.form === fm) ? fm : "dry";
     const slug = categoryOf(sp, f).slug;
-    const src = input.trim() || EXAMPLES[slug][0];
+    const src = input.trim() || EXAMPLES[foodSlug(slug)][0];
     setText(src);
     const parsed = parse(src, sp, f);
     const found = mentionedProducts(src, parsed.speciesFromText ? parsed.situation.species : undefined);
@@ -272,7 +277,7 @@ export default function Decider({
   function pick(sp: Species) {
     setSpecies(sp);
     // 換動物的時候，如果新的動物沒有目前這種形態，就回到乾糧
-    const f = categoriesOf(sp).some((c) => c.form === form) ? form : "dry";
+    const f = foodCategoriesOf(sp).some((c) => c.form === form) ? form : "dry";
     setForm(f);
     // 已經有結果的話，用同一句話換物種再跑一次，不用重打
     if (verdict && text.trim()) run(text, sp, f);
@@ -290,7 +295,7 @@ export default function Decider({
           {(["dog", "cat"] as const).map((sp) => {
             const on = species === sp;
             // 這個動物所有類目都還沒開張，才標「上架中」
-            const soon = categoriesOf(sp).every((c) => !STATUS[c.slug].live);
+            const soon = foodCategoriesOf(sp).every((c) => !STATUS[foodSlug(c.slug)].live);
             return (
               <button
                 key={sp}
@@ -321,7 +326,7 @@ export default function Decider({
                 >
                   {c.form === "wet" ? <CanIcon size={16} /> : <BagIcon size={16} />}
                   {c.short}
-                  {!STATUS[c.slug].live && <span style={soonTag}>上架中</span>}
+                  {!STATUS[foodSlug(c.slug)].live && <span style={soonTag}>上架中</span>}
                 </button>
               );
             })}
@@ -342,7 +347,7 @@ export default function Decider({
               run(text);
             }
           }}
-          placeholder={PLACEHOLDER[cat.slug]}
+          placeholder={PLACEHOLDER[foodSlug(cat.slug)]}
           rows={3}
           aria-label={species === "cat" ? "描述你家的貓" : "描述你家的狗"}
         />
@@ -352,7 +357,7 @@ export default function Decider({
       <div style={pickWrap}>
         <span style={pickHead}>點一下就好，可以多選</span>
         <div style={S.chipRow}>
-          {[...AGE[species], ...PICKS[cat.slug]].map((pk) => {
+          {[...AGE[species], ...PICKS[foodSlug(cat.slug)]].map((pk) => {
             const on = text.includes(pk.phrase);
             return (
               <button

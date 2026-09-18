@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { litters } from "@/lib/litter";
 import { catalog, isLive } from "@/lib/catalog";
 import { productHref } from "@/lib/labels";
 import { allPaths } from "@/lib/slugs";
@@ -30,6 +31,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE}/cat`, lastModified: now, changeFrequency: "weekly", priority: 0.8 },
     { url: `${BASE}/cat-food`, lastModified: now, changeFrequency: "weekly", priority: 0.9 },
     { url: `${BASE}/cat-wet-food`, lastModified: now, changeFrequency: "weekly", priority: 0.9 },
+    { url: `${BASE}/cat-litter`, lastModified: now, changeFrequency: "weekly", priority: 0.9 },
+    // 貓砂的招牌頁：照材質判能不能沖馬桶，跟 /check 同一個位置
+    { url: `${BASE}/cat-litter/flush`, lastModified: now, changeFrequency: "weekly", priority: 0.95 },
+    ...litters.map((p) => ({
+      url: `${BASE}/cat-litter/p/${p.id}`, lastModified: now, changeFrequency: "weekly" as const, priority: 0.7,
+    })),
     { url: `${BASE}/how-we-choose`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
     { url: `${BASE}/ask`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
     // 「你家那包有沒有藏雞」：全站最有辨識度的工具，讀過的每一款都在這一頁

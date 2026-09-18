@@ -108,7 +108,7 @@ export function checkItems(): CheckItem[] {
       ...(p.chicken?.verdict ? { verdict: p.chicken.verdict } : {}),
       href: productHref(p),
       ...(buy ? { buyId: buy.id } : {}),
-      ...(status !== "clean" ? { alts: altsFor({ id: p.id, species: p.species, brand: p.brand, form: formOf(p), stage: p.spec.lifeStage }) } : {}),
+      ...(status !== "clean" ? { alts: altsFor({ id: p.id, species: p.species, brand: p.brand, form: formOf(p) === "wet" ? "wet" : "dry", stage: p.spec.lifeStage }) } : {}),
     };
   });
   return [...sold, ...readOnly()];

@@ -12,7 +12,13 @@ import type { Form, Species } from "./types";
  * 類目會一直加，導覽列不能跟著一直變長。
  */
 
-export type CategorySlug = "dog-food" | "cat-food" | "cat-wet-food";
+export type CategorySlug = "dog-food" | "cat-food" | "cat-wet-food" | "cat-litter";
+
+/**
+ * 吃的那三個類目。貓砂不是吃的，裁決器那一套（過敏原、年紀、體型）對它沒有意義，
+ * 所以凡是「每個類目一份設定」的地方，用這個型別，貓砂就不會被要求填一份空的。
+ */
+export type FoodSlug = Exclude<CategorySlug, "cat-litter">;
 
 export interface Category {
   slug: CategorySlug;
@@ -78,6 +84,20 @@ export const CATEGORIES: Category[] = [
     json: "data/cat-wet-food.json",
     pitch: "先分主食罐跟副食罐，再看第一項是不是雞湯。魚口味的罐頭，很多是用雞湯煮的。",
     soonNote: "讀完的那幾款先整理在下面這頁，哪些是副食罐、哪些名字寫魚卻用雞湯煮，都標出來了。",
+  },
+  {
+    slug: "cat-litter",
+    species: "cat",
+    form: "litter",
+    zh: "貓砂",
+    short: "貓砂",
+    animal: "貓",
+    idPrefix: "cl",
+    subId: "catlitter",
+    csv: "data/cat-litter.csv",
+    json: "data/cat-litter.json",
+    pitch: "「可沖馬桶」這四個字，有的沖了會塞。先看材質，再算一個月多少錢。",
+    soonNote: "讀完的先整理在下面這頁，哪些真的能沖、哪些沖了會卡管線，都標出來了。",
   },
 ];
 

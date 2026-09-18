@@ -1,0 +1,170 @@
+import type { Metadata } from "next";
+import Link from "next/link";
+import { notFound } from "next/navigation";
+import SiteHeader from "@/components/SiteHeader";
+import Share from "@/components/Share";
+import { CONTACT } from "@/lib/contact";
+import {
+  litters, litterById, MATERIAL_ZH, FLUSH, FLUSH_LINE, flushGap,
+  anchorLitter, liveOf, monthlyCost, unitPriceOf,
+} from "@/lib/litter";
+
+export function generateStaticParams() {
+  return litters.map((p) => ({ id: p.id }));
+}
+
+export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
+  const { id } = await params;
+  const p = litterById(id);
+  if (!p) return {};
+  const f = FLUSH[p.spec.flushable];
+  return {
+    title: `${p.brand} ${p.name}`,
+    description: `${f.zh}。${MATERIAL_ZH[p.spec.material]}，${FLUSH_LINE[p.spec.flushable]}`,
+    alternates: { canonical: `/cat-litter/p/${p.id}` },
+  };
+}
+
+export default async function Page({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
+  const p = litterById(id);
+  if (!p) notFound();
+
+  const f = FLUSH[p.spec.flushable];
+  const gap = flushGap(p);
+  const m = anchorLitter(p);
+  const live = liveOf(p);
+  const per = m ? unitPriceOf(p, m) : null;
+  const month = m ? monthlyCost(p, m) : null;
+  const dustZh = p.spec.dust ? { low: "少", medium: "中等", high: "多" }[p.spec.dust] : null;
+  const grainZh = p.spec.grain ? { fine: "細", medium: "中", coarse: "粗" }[p.spec.grain] : null;
+
+  return (
+    <main style={{ maxWidth: 720, margin: "0 auto", padding: "0 20px 120px" }}>
+      <SiteHeader current="cat-litter" />
+
+      <p style={{ margin: "0 0 4px", fontSize: 13, color: "var(--muted)" }}>{p.brand}</p>
+      <h1 style={{ fontSize: "clamp(24px,5vw,34px)", lineHeight: 1.45, margin: "0 0 14px" }}>{p.name}</h1>
+
+      <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginBottom: 18 }}>
+        <span style={{ fontSize: 13, fontWeight: 800, color: f.fg, background: f.bg, borderRadius: 8, padding: "5px 12px" }}>{f.zh}</span>
+        <span style={tag}>{MATERIAL_ZH[p.spec.material]}</span>
+        <span style={tag}>{p.spec.clumping ? "會結團" : "不結團"}</span>
+        {dustZh && <span style={tag}>粉塵{dustZh}</span>}
+        {p.spec.scented && <span style={tag}>有香味</span>}
+      </div>
+
+      <div style={box}>
+        <p style={{ margin: 0, fontWeight: 700, color: f.fg }}>{FLUSH_LINE[p.spec.flushable]}</p>
+        {gap && <p style={{ margin: "10px 0 0", fontSize: 14.5, color: "var(--cut)", fontWeight: 700 }}>{gap}</p>}
+        <Link href="/cat-litter/flush" style={{ display: "inline-block", marginTop: 12, fontSize: 14, color: "var(--accent)", fontWeight: 600 }}>
+          看其他款能不能沖 →
+        </Link>
+      </div>
+
+      {m ? (
+        <section style={{ marginTop: 26 }}>
+          <p style={{ margin: "0 0 6px", fontSize: 28, fontWeight: 800 }}>
+            ${m.amount.toLocaleString()}
+            <span style={{ fontSize: 14, color: "var(--muted)", fontWeight: 500, marginLeft: 10 }}>
+              {p.price.unit}{per ? ` · $${per.n}/${per.unit}` : ""}
+            </span>
+          </p>
+          {month && (
+            <p style={{ margin: "0 0 14px", fontSize: 15, color: "var(--muted)", lineHeight: 1.85 }}>
+              一隻貓一個月大約 {month.packs} 包，<b style={{ color: "var(--ink)" }}>${month.cost.toLocaleString()}</b>。
+              用量是照材質推估的，每隻貓差很多，拿來比不同款就好。
+            </p>
+          )}
+          <a href={`/go/${m.id}/${p.id}`} rel="nofollow sponsored" style={buy}>去蝦皮看這一包</a>
+          <p style={{ margin: "10px 0 0", fontSize: 13, color: "var(--faint)" }}>
+            在 {m.label}
+            {m.note ? ` · ${m.note}` : ""}
+          </p>
+          {live.length > 1 && (
+            <div style={{ marginTop: 18 }}>
+              <p style={lbl}>全部 {new Set(live.map((x) => x.label)).size} 家的價格</p>
+              {live.map((x) => (
+                <a key={x.id} href={`/go/${x.id}/${p.id}`} rel="nofollow sponsored" style={storeRow}>
+                  <span>{x.label}<span style={{ display: "block", fontSize: 12.5, color: "var(--muted)" }}>{x.unit}{x.note ? ` · ${x.note}` : ""}</span></span>
+                  <span className="mono" style={{ whiteSpace: "nowrap" }}>${x.amount.toLocaleString()} ›</span>
+                </a>
+              ))}
+            </div>
+          )}
+        </section>
+      ) : (
+        <div style={{ ...box, marginTop: 26 }}>
+          <p style={{ margin: 0, fontWeight: 700 }}>這一款還沒有購買連結</p>
+          <p style={{ margin: "8px 0 0", fontSize: 14.5, color: "var(--muted)", lineHeight: 1.85 }}>
+            我們只放自己的購買連結，還沒補到的就不放。資料還是照樣讀給你看。
+          </p>
+        </div>
+      )}
+
+      <section style={{ marginTop: 30 }}>
+        <p style={lbl}>這一款是什麼</p>
+        <div style={{ border: "1px solid var(--line)", borderRadius: 14, background: "var(--surface)", padding: "6px 18px 14px" }}>
+          <Row k="材質">{MATERIAL_ZH[p.spec.material]}</Row>
+          <Row k="結團">{p.spec.clumping ? "會結團，可以只鏟結塊" : "不結團，要整盆換或用雙層砂盆"}</Row>
+          <Row k="沖馬桶">{f.zh}{p.spec.flushClaim === "yes" ? "（包裝寫可以沖）" : ""}</Row>
+          {dustZh && <Row k="粉塵">{dustZh}（品牌與評比的說法）</Row>}
+          {grainZh && <Row k="顆粒">{grainZh}</Row>}
+          {p.spec.deodorizer && <Row k="怎麼除臭">{p.spec.deodorizer}</Row>}
+          {p.spec.tracking && <Row k="落砂">{{ low: "少", medium: "中等", high: "多" }[p.spec.tracking]}</Row>}
+          {p.price.unit && <Row k="一包">{p.price.unit}</Row>}
+        </div>
+        {p.note && (
+          <p style={{ margin: "14px 0 0", fontSize: 14.5, color: "var(--muted)", lineHeight: 1.9 }}>
+            <b style={{ color: "var(--ink)" }}>先知道這件事：</b>{p.note}
+          </p>
+        )}
+      </section>
+
+      <div style={{ marginTop: 26, display: "flex", gap: 14, flexWrap: "wrap", alignItems: "center" }}>
+        <Share path={`/cat-litter/p/${p.id}`} text={`${p.brand} ${p.name}：${f.zh}`} label="分享這一款" />
+        <Link href="/cat-litter" style={{ fontSize: 14, color: "var(--accent)", fontWeight: 600 }}>看全部貓砂 →</Link>
+      </div>
+
+      {CONTACT.email && (
+        <p style={{ marginTop: 26, fontSize: 13, color: "var(--faint)", lineHeight: 1.9 }}>
+          資料寫錯了？
+          <a
+            href={`mailto:${CONTACT.email}?subject=${encodeURIComponent(`貓砂資料回報：${p.brand} ${p.name}`)}`}
+            style={{ color: "var(--accent)", marginLeft: 6 }}
+          >
+            跟我們說
+          </a>
+          。材質與包裝會改版，以你手上那一包為準。
+        </p>
+      )}
+    </main>
+  );
+}
+
+function Row({ k, children }: { k: string; children: React.ReactNode }) {
+  return (
+    <div style={{ display: "flex", gap: 14, padding: "11px 0", borderBottom: "1px solid var(--line)", fontSize: 15, lineHeight: 1.7 }}>
+      <span style={{ color: "var(--faint)", minWidth: "5.5em", fontSize: 13.5 }}>{k}</span>
+      <span style={{ flex: 1 }}>{children}</span>
+    </div>
+  );
+}
+
+const tag: React.CSSProperties = {
+  fontSize: 12.5, color: "var(--muted)", background: "var(--sunken)", borderRadius: 8, padding: "5px 10px",
+};
+const box: React.CSSProperties = {
+  background: "var(--surface)", border: "1px solid var(--line)", borderRadius: 14, padding: "18px 20px",
+};
+const lbl: React.CSSProperties = {
+  margin: "0 0 10px", fontSize: 13, fontWeight: 700, color: "var(--muted)", letterSpacing: ".06em",
+};
+const buy: React.CSSProperties = {
+  display: "inline-block", padding: "13px 28px", borderRadius: 999, background: "var(--accent)",
+  color: "var(--accent-ink)", fontWeight: 700, fontSize: 16, textDecoration: "none",
+};
+const storeRow: React.CSSProperties = {
+  display: "flex", justifyContent: "space-between", alignItems: "center", gap: 12,
+  padding: "12px 0", borderTop: "1px solid var(--line)", textDecoration: "none", color: "inherit", fontSize: 14.5,
+};

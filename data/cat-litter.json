@@ -1,0 +1,315 @@
+{
+  "products": [
+    {
+      "id": "cl-01",
+      "brand": "臭味滾 Odout",
+      "name": "豆腐砂",
+      "checkedAt": "2026-09-18",
+      "note": "評比裡凝結與除臭都排前段",
+      "searchAs": "臭味滾 Odout 豆腐砂 7L",
+      "spec": {
+        "material": "tofu",
+        "clumping": true,
+        "flushable": "limited",
+        "flushClaim": "yes",
+        "dust": "low",
+        "grain": "medium",
+        "deodorizer": "植物纖維",
+        "packUnit": "L",
+        "packSize": 7,
+        "tracking": "low"
+      },
+      "price": {
+        "unit": "7L",
+        "checkedAt": "2026-09-18",
+        "merchants": []
+      }
+    },
+    {
+      "id": "cl-02",
+      "brand": "艾可 ECO",
+      "name": "豆腐貓砂",
+      "checkedAt": "2026-09-18",
+      "note": "凝結力好，但同一份評比裡除臭只拿兩顆星",
+      "searchAs": "艾可 ECO 豆腐貓砂 7L",
+      "spec": {
+        "material": "tofu",
+        "clumping": true,
+        "flushable": "limited",
+        "flushClaim": "yes",
+        "dust": "low",
+        "grain": "medium",
+        "deodorizer": "植物纖維",
+        "packUnit": "L",
+        "packSize": 7,
+        "tracking": "low"
+      },
+      "price": {
+        "unit": "7L",
+        "checkedAt": "2026-09-18",
+        "merchants": []
+      }
+    },
+    {
+      "id": "cl-03",
+      "brand": "防御工事 Hururu",
+      "name": "天然除臭礦型豆腐砂",
+      "checkedAt": "2026-09-18",
+      "note": "顆粒做成礦砂的樣子，想從礦砂換過來的人接受度高",
+      "searchAs": "防御工事 礦型豆腐砂",
+      "spec": {
+        "material": "tofu",
+        "clumping": true,
+        "flushable": "limited",
+        "flushClaim": "yes",
+        "dust": "low",
+        "grain": "fine",
+        "deodorizer": "植物纖維",
+        "tracking": "low"
+      },
+      "price": {
+        "unit": "",
+        "checkedAt": "2026-09-18",
+        "merchants": []
+      }
+    },
+    {
+      "id": "cl-04",
+      "brand": "屋哩 Wuli",
+      "name": "雙生稻殼豆腐砂",
+      "checkedAt": "2026-09-18",
+      "note": "稻殼加豆腐，兩種都是植物性，所以可以沖",
+      "searchAs": "屋哩 雙生稻殼豆腐砂",
+      "spec": {
+        "material": "mixed-plant",
+        "clumping": true,
+        "flushable": "limited",
+        "flushClaim": "yes",
+        "dust": "low",
+        "grain": "medium",
+        "deodorizer": "稻殼＋豆腐",
+        "tracking": "low"
+      },
+      "price": {
+        "unit": "",
+        "checkedAt": "2026-09-18",
+        "merchants": []
+      }
+    },
+    {
+      "id": "cl-05",
+      "brand": "Honeycare",
+      "name": "吸水釋香魔法豆腐砂",
+      "checkedAt": "2026-09-18",
+      "note": "主打釋香。貓對香精的接受度差很多，先買小包試",
+      "searchAs": "Honeycare 吸水釋香魔法豆腐砂",
+      "spec": {
+        "material": "mixed-plant",
+        "clumping": true,
+        "flushable": "limited",
+        "flushClaim": "yes",
+        "dust": "medium",
+        "scented": true,
+        "grain": "medium",
+        "deodorizer": "香氛",
+        "tracking": "low"
+      },
+      "price": {
+        "unit": "",
+        "checkedAt": "2026-09-18",
+        "merchants": []
+      }
+    },
+    {
+      "id": "cl-06",
+      "brand": "pidan",
+      "name": "除臭混合貓砂",
+      "checkedAt": "2026-09-18",
+      "note": "名字一樣叫混合砂，但裡面有礦砂，不能沖馬桶",
+      "searchAs": "pidan 除臭混合貓砂 5.2kg",
+      "spec": {
+        "material": "mixed-mineral",
+        "clumping": true,
+        "flushable": "no",
+        "flushClaim": "no",
+        "dust": "low",
+        "grain": "fine",
+        "deodorizer": "礦砂＋豆腐",
+        "packUnit": "kg",
+        "packSize": 5.2,
+        "tracking": "medium"
+      },
+      "price": {
+        "unit": "5.2kg",
+        "checkedAt": "2026-09-18",
+        "merchants": []
+      }
+    },
+    {
+      "id": "cl-07",
+      "brand": "Ever Clean 藍鑽",
+      "name": "紫標強效清香凝結貓砂",
+      "checkedAt": "2026-09-18",
+      "searchAs": "藍鑽 紫標 凝結貓砂",
+      "spec": {
+        "material": "mineral",
+        "clumping": true,
+        "flushable": "no",
+        "flushClaim": "no",
+        "dust": "medium",
+        "scented": true,
+        "grain": "fine",
+        "deodorizer": "活性碳",
+        "tracking": "medium"
+      },
+      "price": {
+        "unit": "",
+        "checkedAt": "2026-09-18",
+        "merchants": []
+      }
+    },
+    {
+      "id": "cl-08",
+      "brand": "Sanicat",
+      "name": "強力凝結礦砂",
+      "checkedAt": "2026-09-18",
+      "note": "礦砂裡粉塵評價較好的一款",
+      "searchAs": "Sanicat 強力凝結礦砂",
+      "spec": {
+        "material": "mineral",
+        "clumping": true,
+        "flushable": "no",
+        "flushClaim": "no",
+        "dust": "low",
+        "grain": "fine",
+        "tracking": "medium"
+      },
+      "price": {
+        "unit": "",
+        "checkedAt": "2026-09-18",
+        "merchants": []
+      }
+    },
+    {
+      "id": "cl-09",
+      "brand": "Arm & Hammer 鐵鎚牌",
+      "name": "礦砂",
+      "checkedAt": "2026-09-18",
+      "note": "好市多常見，除臭評價高但粉塵多",
+      "searchAs": "鐵鎚牌 礦砂 好市多",
+      "spec": {
+        "material": "mineral",
+        "clumping": true,
+        "flushable": "no",
+        "flushClaim": "no",
+        "dust": "high",
+        "scented": true,
+        "grain": "fine",
+        "deodorizer": "小蘇打",
+        "tracking": "high"
+      },
+      "price": {
+        "unit": "",
+        "checkedAt": "2026-09-18",
+        "merchants": []
+      }
+    },
+    {
+      "id": "cl-10",
+      "brand": "Scoop Away",
+      "name": "礦砂",
+      "checkedAt": "2026-09-18",
+      "note": "好市多常見，凝結力好但粉塵多",
+      "searchAs": "Scoop Away 礦砂 好市多",
+      "spec": {
+        "material": "mineral",
+        "clumping": true,
+        "flushable": "no",
+        "flushClaim": "no",
+        "dust": "high",
+        "grain": "fine",
+        "tracking": "high"
+      },
+      "price": {
+        "unit": "",
+        "checkedAt": "2026-09-18",
+        "merchants": []
+      }
+    },
+    {
+      "id": "cl-11",
+      "brand": "BOXCAT 貓家",
+      "name": "環保松木砂",
+      "checkedAt": "2026-09-18",
+      "note": "崩解型，遇水散成木屑，要用雙層砂盆",
+      "searchAs": "BOXCAT 貓家 松木砂 7kg",
+      "spec": {
+        "material": "wood",
+        "clumping": false,
+        "flushable": "no",
+        "flushClaim": "no",
+        "dust": "low",
+        "grain": "coarse",
+        "deodorizer": "木質",
+        "packUnit": "kg",
+        "packSize": 7,
+        "tracking": "low"
+      },
+      "price": {
+        "unit": "7kg",
+        "checkedAt": "2026-09-18",
+        "merchants": []
+      }
+    },
+    {
+      "id": "cl-12",
+      "brand": "Unicharm 嬌聯",
+      "name": "消臭抗菌沸石砂",
+      "checkedAt": "2026-09-18",
+      "note": "雙層砂盆系統用的上層砂，不凝結",
+      "searchAs": "嬌聯 消臭抗菌沸石砂",
+      "spec": {
+        "material": "zeolite",
+        "clumping": false,
+        "flushable": "no",
+        "flushClaim": "no",
+        "dust": "low",
+        "grain": "coarse",
+        "deodorizer": "沸石",
+        "packUnit": "L",
+        "packSize": 2,
+        "tracking": "low"
+      },
+      "price": {
+        "unit": "2L",
+        "checkedAt": "2026-09-18",
+        "merchants": []
+      }
+    },
+    {
+      "id": "cl-13",
+      "brand": "汪喵星球",
+      "name": "益生菌消臭豆腐砂",
+      "checkedAt": "2026-09-18",
+      "note": "米粒型，表面加壓，粉塵比條型少",
+      "searchAs": "汪喵星球 益生菌消臭豆腐砂",
+      "spec": {
+        "material": "tofu",
+        "clumping": true,
+        "flushable": "limited",
+        "flushClaim": "yes",
+        "dust": "low",
+        "grain": "medium",
+        "deodorizer": "益生菌",
+        "packUnit": "kg",
+        "packSize": 2.7,
+        "tracking": "low"
+      },
+      "price": {
+        "unit": "2.7kg",
+        "checkedAt": "2026-09-18",
+        "merchants": []
+      }
+    }
+  ]
+}
