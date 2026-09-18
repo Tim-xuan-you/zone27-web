@@ -25,13 +25,13 @@ const HUNT = new Map((huntData.targets as Target[]).map((t) => [t.id, t]));
 export default function HuntPicks({ id }: { id: string }) {
   const t = HUNT.get(id);
   if (!t) return null;
-  const sorted = [...t.candidates].sort(
-    (a, b) => Number(Boolean(b.known)) - Number(Boolean(a.known)) || (a.price ?? 1e9) - (b.price ?? 1e9),
-  );
+  // 照價格排，便宜的在前面。2026-09-18 Tim：「你都給我商城耶，一般賣家跟優選通常更便宜。」
+  // 「用過」只是旁邊的提示，不是排序依據：產不產得出連結跟商城無關，跟賣場有沒有參加分潤才有關
+  const sorted = [...t.candidates].sort((a, b) => (a.price ?? 1e9) - (b.price ?? 1e9));
   return (
     <div style={{ marginTop: 12, paddingTop: 10, borderTop: "1px dashed var(--line)" }}>
       <p style={{ margin: "0 0 2px", fontSize: 13, color: "var(--faint)", lineHeight: 1.8 }}>
-        我查到的（{huntData._meta.checkedAt}）。價格會變、庫存看不到，開進去確認再產生連結
+        我查到的（{huntData._meta.checkedAt}），便宜的排前面。從第一家開始試，產不出連結就下一家，跟我說是哪一家
       </p>
       {t.note && (
         <p style={{ margin: "6px 0 0", fontSize: 13.5, color: "var(--warn)", lineHeight: 1.8 }}>{t.note}</p>
@@ -54,7 +54,7 @@ export default function HuntPicks({ id }: { id: string }) {
       ))}
       {t.failed && t.failed.length > 0 && (
         <p style={{ margin: "10px 0 0", fontSize: 12.5, color: "var(--faint)", lineHeight: 1.85 }}>
-          試過產不出連結的（不用再試）：{t.failed.map((f) => f.shop).join("、")}
+          試過的：{t.failed.map((f) => `${f.shop}（${f.reason}）`).join("、")}
         </p>
       )}
     </div>

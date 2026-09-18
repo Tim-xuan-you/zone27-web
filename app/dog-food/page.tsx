@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import CheapestCard from "@/components/CheapestCard";
 import Link from "next/link";
 import { S } from "@/components/styles";
 import { ALLERGENS, BREEDS } from "@/lib/slugs";
@@ -88,6 +89,8 @@ export default function Index() {
           一直抓癢的狗裡只有約 18% 是食物造成的。要確認得跑滿八週，而且最後要回測。
         </p>
       </Link>
+
+      <CheapestCard species="dog" form="dry" />
 
       <ProductIndex products={catalogOf("dog")} />
 

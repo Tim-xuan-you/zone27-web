@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import CheapestCard from "@/components/CheapestCard";
 import Link from "next/link";
 import Decider from "@/components/Decider";
 import SiteHeader from "@/components/SiteHeader";
@@ -114,6 +115,8 @@ export default function Page() {
           </p>
         </Link>
       </div>
+
+      {live && <CheapestCard species="cat" form="wet" />}
 
       <p style={S.lbl}>我們讀過的 {candidates.length} 款主食罐</p>
       <p style={{ margin: "0 0 16px", fontSize: 14.5, color: "var(--muted)", lineHeight: 1.9 }}>

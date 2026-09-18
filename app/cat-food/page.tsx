@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import CheapestCard from "@/components/CheapestCard";
 import Link from "next/link";
 import Decider from "@/components/Decider";
 import SiteHeader from "@/components/SiteHeader";
@@ -94,6 +95,8 @@ export default function Page() {
           結紮的貓照狗的算法會多餵三成。一天幾克、這包吃幾天、一個月多少錢，算式全部寫出來。
         </p>
       </Link>
+
+      {live && <CheapestCard species="cat" form="dry" />}
 
       <p style={S.lbl}>我們讀過的 {all.length} 款</p>
       <p style={{ margin: "0 0 16px", fontSize: 14.5, color: "var(--muted)", lineHeight: 1.9 }}>
