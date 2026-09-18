@@ -1,6 +1,6 @@
 {
   "checkedAt": "2026-09-18",
-  "total": 103,
+  "total": 105,
   "bad": 0,
   "rows": [
     {
@@ -1291,10 +1291,36 @@
       "note": ""
     },
     {
+      "productId": "cl-06",
+      "brand": "pidan",
+      "name": "混合貓砂 經典版",
+      "merchantId": "m1",
+      "label": "免睏寵物樂園（蝦皮優選）",
+      "url": "https://s.shopee.tw/1gIiEPzDwM",
+      "status": 200,
+      "finalUrl": "https://shopee.tw/opaanlp/250476251/46314328781",
+      "item": "250476251/46314328781",
+      "verdict": "ok",
+      "note": ""
+    },
+    {
       "productId": "cl-07",
       "brand": "Ever Clean 藍鑽",
       "name": "藍標 4倍淨味貓砂（無香）",
       "merchantId": "m1",
+      "label": "蝦皮直營（官方直營）",
+      "url": "https://s.shopee.tw/AKagYBra4s",
+      "status": 200,
+      "finalUrl": "https://shopee.tw/opaanlp/50662979/46561606654",
+      "item": "50662979/46561606654",
+      "verdict": "ok",
+      "note": ""
+    },
+    {
+      "productId": "cl-07",
+      "brand": "Ever Clean 藍鑽",
+      "name": "藍標 4倍淨味貓砂（無香）",
+      "merchantId": "m2",
       "label": "蝦皮直營（官方直營）",
       "url": "https://s.shopee.tw/60RhNwssSr",
       "status": 200,

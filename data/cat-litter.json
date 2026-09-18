@@ -134,10 +134,10 @@
     {
       "id": "cl-06",
       "brand": "pidan",
-      "name": "除臭混合貓砂",
-      "checkedAt": "2026-09-18",
-      "note": "名字一樣叫混合砂，但裡面有礦砂，不能沖馬桶",
-      "searchAs": "pidan 除臭混合貓砂 5.2kg",
+      "name": "混合貓砂 經典版",
+      "checkedAt": "2026-09-19",
+      "note": "豆腐加膨潤土的混合砂。同一個賣場頁還有「純木薯砂」，那款全是植物、適量可沖；這款有礦砂，不能沖。名字很像，買的時候看清楚",
+      "searchAs": "pidan 混合貓砂 經典版 2.4kg",
       "spec": {
         "material": "mixed-mineral",
         "clumping": true,
@@ -147,13 +147,24 @@
         "grain": "fine",
         "deodorizer": "礦砂＋豆腐",
         "packUnit": "kg",
-        "packSize": 5.2,
+        "packSize": 2.4,
         "tracking": "medium"
       },
       "price": {
-        "unit": "5.2kg",
-        "checkedAt": "2026-09-18",
-        "merchants": []
+        "unit": "2.4kg",
+        "checkedAt": "2026-09-19",
+        "merchants": [
+          {
+            "id": "m1",
+            "label": "免睏寵物樂園（蝦皮優選）",
+            "unit": "2.4kg×8",
+            "amount": 960,
+            "note": "規格選「經典版 2.4kg」 · 最少買 8 包，不同規格可以混搭 · 同一頁還有別的牌子和純木薯砂，別選錯",
+            "affiliateUrl": "https://s.shopee.tw/1gIiEPzDwM",
+            "anchor": "safe",
+            "checkedAt": "2026-09-19"
+          }
+        ]
       }
     },
     {
