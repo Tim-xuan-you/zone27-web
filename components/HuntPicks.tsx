@@ -1,5 +1,5 @@
 import huntData from "@/data/hunt-candidates.json";
-import blocked from "@/data/no-affiliate-shops.json";
+import blocked from "@/data/no-affiliate.json";
 import storeReg from "@/data/stores.json";
 
 /**
@@ -9,9 +9,11 @@ import storeReg from "@/data/stores.json";
  * 同一天他回報：「這兩家無法。」再補一句：「假如我說（汎美力）無法，
  * 代表這家店，他裡頭賣的任何商品都無法。」
  *
- * 所以「產不出連結」是賣場層級的事：
- *   - data/no-affiliate-shops.json：試過不行的，整家封存，之後查哪一款都不再列出來
- *   - data/stores.json：成功產過連結的，任何商品都可以再用，旁邊標「用過」
+ * 2026-09-19 他自己去驗證後更正：「我剛去查了之前的小BU，其他商品可以耶，
+ * 代表是看商品，這商品賣家有開分潤就有。」所以是**商品層級**：
+ *   - data/no-affiliate.json：記「哪一款 × 哪一家」產不出來，只藏那一個組合
+ *   - 同一家在別款照樣列出來，不會白白封掉還能用的賣場
+ *   - data/stores.json：成功產過連結的，旁邊標「用過」，那只是機率高一點，不保證每一款都開
  *   - 排序照價格，便宜的在前面。商城、優選、一般賣家都一樣看待
  *
  * 資料來自比價站讀到的蝦皮上架快照（data/hunt-candidates.json），
@@ -24,11 +26,13 @@ type Target = { id: string; label: string; why: string; note?: string; candidate
 
 const HUNT = new Map((huntData.targets as Target[]).map((t) => [t.id, t]));
 
-const BLOCKED_IDS = new Set((blocked.shops as { shopId?: string }[]).map((s) => s.shopId).filter(Boolean) as string[]);
-const BLOCKED_NAMES = new Set((blocked.shops as { name: string }[]).map((s) => s.name));
+type Pair = { productId: string; shop: string; shopId?: string; note?: string };
+const PAIRS = blocked.pairs as Pair[];
 const KNOWN_IDS = new Set(Object.keys((storeReg as { stores: Record<string, unknown> }).stores));
 
-const isBlocked = (c: Candidate) => (c.shopId && BLOCKED_IDS.has(c.shopId)) || BLOCKED_NAMES.has(c.shop);
+/** 這一款在這一家試過產不出來？（同一家在別款不受影響） */
+const failedFor = (id: string, c: Candidate): Pair | undefined =>
+  PAIRS.find((x) => x.productId === id && ((c.shopId && x.shopId === c.shopId) || x.shop === c.shop));
 
 export default function HuntPicks({ id }: { id: string }) {
   const t = HUNT.get(id);
@@ -36,23 +40,23 @@ export default function HuntPicks({ id }: { id: string }) {
   // 整家不行的直接不列（Tim 說過那家的任何商品都產不出連結）
   // 售完的排最後（補貨了還是要回去找，所以不刪掉）
   const open = t.candidates
-    .filter((c) => !isBlocked(c))
+    .filter((c) => !failedFor(id, c))
     .sort((a, b) => Number(Boolean(a.soldOut)) - Number(Boolean(b.soldOut)) || (a.price ?? 1e9) - (b.price ?? 1e9));
   const gone = [
-    ...t.candidates.filter(isBlocked).map((c) => `${c.shop}（整家產不出連結）`),
+    ...PAIRS.filter((x) => x.productId === id).map((x) => `${x.shop}（${x.note ?? "這一款產不出連結"}）`),
     ...(t.failed ?? []).map((f) => `${f.shop}（${f.reason}）`),
   ];
   return (
     <div style={{ marginTop: 12, paddingTop: 10, borderTop: "1px dashed var(--line)" }}>
       <p style={{ margin: "0 0 2px", fontSize: 13, color: "var(--faint)", lineHeight: 1.8 }}>
-        我查到的（{huntData._meta.checkedAt}），便宜的排前面。產不出連結的話跟我說是哪一家，我整家封存
+        我查到的（{huntData._meta.checkedAt}），便宜的排前面。產不出連結的話跟我說是哪一家，我只擋這一款的那一家
       </p>
       {t.note && (
         <p style={{ margin: "6px 0 0", fontSize: 13.5, color: "var(--warn)", lineHeight: 1.8 }}>{t.note}</p>
       )}
       {open.length === 0 && (
         <p style={{ margin: "8px 0 0", fontSize: 13.5, color: "var(--muted)", lineHeight: 1.8 }}>
-          還沒有可以試的賣場。用上面「在（我們用過的賣場）裡找」那幾顆按鈕碰碰運氣，那些家一定產得出連結。
+          查到的都試過了。用上面「在（我們用過的賣場）裡找」那幾顆按鈕再碰碰運氣：同一家不同商品，開沒開分潤不一樣。
         </p>
       )}
       {open.map((c) => (
