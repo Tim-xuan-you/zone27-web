@@ -1274,6 +1274,36 @@
             "affiliateUrl": "https://s.shopee.tw/AAHG7u95fd",
             "anchor": "value",
             "checkedAt": "2026-09-18"
+          },
+          {
+            "id": "m4",
+            "label": "毛貓寵（蝦皮商城）",
+            "unit": "1.5kg",
+            "amount": 653,
+            "note": "規格選「1.5KG」 · 超取限 3 包 · 一頁三種大小",
+            "affiliateUrl": "https://s.shopee.tw/1LfrdyxKw0",
+            "anchor": "value",
+            "checkedAt": "2026-09-18"
+          },
+          {
+            "id": "m5",
+            "label": "毛貓寵（蝦皮商城）",
+            "unit": "3kg",
+            "amount": 1113,
+            "note": "規格選「3KG」 · 超取限 1 包 · 一頁三種大小",
+            "affiliateUrl": "https://s.shopee.tw/1LfrdyxKw0",
+            "anchor": "value",
+            "checkedAt": "2026-09-18"
+          },
+          {
+            "id": "m6",
+            "label": "毛貓寵（蝦皮商城）",
+            "unit": "6.5kg",
+            "amount": 2124,
+            "note": "規格選「6.5KG」 · 只能宅配 · 一頁三種大小",
+            "affiliateUrl": "https://s.shopee.tw/1LfrdyxKw0",
+            "anchor": "value",
+            "checkedAt": "2026-09-18"
           }
         ]
       },

@@ -50,49 +50,6 @@
       ]
     },
     {
-      "id": "cf-19",
-      "label": "Mobby 莫比 鱒魚＋馬鈴薯（找備援）",
-      "why": "已經有新威（1.5kg $471），但只有一家。多一家，賣完才有地方接",
-      "candidates": [
-        {
-          "shop": "PRO噗洛寵物生活館",
-          "shopId": "18921685",
-          "price": 468,
-          "unit": "1.5kg",
-          "url": "https://shopee.tw/product/18921685/1268122489"
-        },
-        {
-          "shop": "毛貓寵（蝦皮商城）",
-          "shopId": "327771748",
-          "known": true,
-          "price": 653,
-          "unit": "1.5kg（超取限 3 包）",
-          "url": "https://shopee.tw/product/327771748/22434552966"
-        },
-        {
-          "shop": "毛小孩超取王",
-          "shopId": "4115037",
-          "price": 882,
-          "unit": "3kg",
-          "url": "https://shopee.tw/product/4115037/526861470"
-        },
-        {
-          "shop": "GOD寵物",
-          "shopId": "64198015",
-          "price": 980,
-          "unit": "3kg",
-          "url": "https://shopee.tw/product/64198015/1110169939"
-        }
-      ],
-      "failed": [
-        {
-          "shop": "肥貓粉絲團（蝦皮商城）",
-          "reason": "產得出連結，但目前售完",
-          "at": "2026-09-18"
-        }
-      ]
-    },
-    {
       "id": "cf-17",
       "label": "Instinct 原點 鮭魚無穀全貓配方",
       "why": "查藏雞頁「沒有雞」的一款。同牌子的鴨肉第 3 項就是雞肉粉",
