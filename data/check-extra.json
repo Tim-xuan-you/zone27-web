@@ -77,24 +77,6 @@
       "refs": [{ "label": "Royal Canin 台灣官網 S26", "url": "https://www.royalcanin.com/tw/dogs/products/retail-products/shiba-inu-adult-2104" }]
     },
     {
-      "id": "ck-05",
-      "planId": "cf-16",
-      "species": "cat",
-      "form": "dry",
-      "brand": "Nutram 紐頓",
-      "name": "T24 無穀全能 鮭魚＋鱒魚 挑嘴全齡貓",
-      "alias": "紐頓 T24 鮭魚 鱒魚",
-      "proteins": ["fish", "salmon"],
-      "found": [
-        "第 1 項：去骨鱒魚",
-        "第 2、3 項：鮭魚粉、鯡魚粉",
-        "油脂：菜籽油、鮭魚油",
-        "香料寫的是「天然素食香料」"
-      ],
-      "verdict": "肉全部是魚，油脂用菜籽油。同一個牌子的 T22 是以雞為主，T24 沒有雞。",
-      "refs": [{ "label": "台灣通路的代理商中文標示", "url": "https://www.unpet.com.tw/products/nutram%E7%B4%90%E9%A0%93t24" }]
-    },
-    {
       "id": "ck-06",
       "species": "cat",
       "form": "dry",

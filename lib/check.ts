@@ -63,8 +63,16 @@ function ageFor(species: "dog" | "cat", stage?: string[]): number | undefined {
   return undefined;
 }
 
-/** 同一類、完全不含雞、能買的，照「對雞過敏」跑一次裁決，答案排第一，其他照每公斤排 */
-function altsFor(p: Pick<Product, "id" | "species"> & { form: "dry" | "wet"; stage?: string[] }): CheckItem["alts"] {
+/**
+ * 同一類、完全不含雞、能買的替代款。
+ *
+ * 排序：同一個牌子的排最前面，再來是裁決器的答案，其他照每公斤。
+ *
+ * 2026-09-18：紐頓 T22 有雞，同一個牌子的 T24 沒有。對正在餵 T22 的人來說，
+ * 換 T24 是阻力最小的一步 —— 一樣的牌子、一樣的顆粒大小、貓通常肯吃，
+ * 雖然它每公斤比第一饗宴貴。照價錢排的話 T24 會被擠出前三名，那一換就斷了。
+ */
+function altsFor(p: Pick<Product, "id" | "species" | "brand"> & { form: "dry" | "wet"; stage?: string[] }): CheckItem["alts"] {
   const form = p.form;
   const ageYears = ageFor(p.species, p.stage);
   const s = {
@@ -76,9 +84,14 @@ function altsFor(p: Pick<Product, "id" | "species"> & { form: "dry" | "wet"; sta
   // 類目還沒開張（罐頭）裁決器不回答，就直接拿同一類能買的
   const pool = v.stop ? catalogOf(p.species, form) : v.survivors;
   const clean = pool.filter((x) => x.id !== p.id && recommendable(x) && statusOf(x) === "clean");
+  const brandKey = p.brand.split(/[（(\s]/)[0];
+  const sameBrand = clean.filter((x) => brandKey && x.brand.startsWith(brandKey));
   const first = v.pick && clean.some((x) => x.id === v.pick!.id) ? [v.pick] : [];
-  const rest = clean.filter((x) => x.id !== v.pick?.id).sort((a, b) => (perKgOf(a) ?? 1e9) - (perKgOf(b) ?? 1e9));
-  return [...first, ...rest].slice(0, 3).map((x) => ({
+  const rest = clean
+    .filter((x) => x.id !== v.pick?.id && !sameBrand.some((s) => s.id === x.id))
+    .sort((a, b) => (perKgOf(a) ?? 1e9) - (perKgOf(b) ?? 1e9));
+  const ordered = [...sameBrand, ...first.filter((x) => !sameBrand.some((s) => s.id === x.id)), ...rest];
+  return ordered.slice(0, 3).map((x) => ({
     id: x.id, brand: x.brand, name: x.name, href: productHref(x), per: form === "dry" ? perKgOf(x) : null,
   }));
 }
@@ -95,7 +108,7 @@ export function checkItems(): CheckItem[] {
       ...(p.chicken?.verdict ? { verdict: p.chicken.verdict } : {}),
       href: productHref(p),
       ...(buy ? { buyId: buy.id } : {}),
-      ...(status !== "clean" ? { alts: altsFor({ id: p.id, species: p.species, form: formOf(p), stage: p.spec.lifeStage }) } : {}),
+      ...(status !== "clean" ? { alts: altsFor({ id: p.id, species: p.species, brand: p.brand, form: formOf(p), stage: p.spec.lifeStage }) } : {}),
     };
   });
   return [...sold, ...readOnly()];

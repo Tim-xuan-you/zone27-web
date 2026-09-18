@@ -2,8 +2,8 @@
   "_meta": {
     "category": "cat-food",
     "note": "由 data/cat-food.csv 產生，不要直接改這個檔。改 CSV 之後跑 npm run data:import。",
-    "generatedAt": "2026-09-13",
-    "count": 15,
+    "generatedAt": "2026-09-18",
+    "count": 16,
     "pricePolicy": "人工複查，不爬蟲。checkedAt 誠實顯示於前端。"
   },
   "products": [
@@ -1082,6 +1082,83 @@
           "鮪魚只出現在「香料（含鮪魚香料）」裡"
         ],
         "verdict": "成分表裡找不到一塊鮪魚肉，鮪魚是香料。"
+      }
+    },
+    {
+      "id": "cf-16",
+      "species": "cat",
+      "brand": "Nutram 紐頓",
+      "name": "T24 無穀全能 鮭魚＋鱒魚 挑嘴全齡貓",
+      "spec": {
+        "protein": 36,
+        "fat": 17,
+        "carb": 23,
+        "omega3": 1.2,
+        "phosphorus": 0.9,
+        "proteinSources": [
+          "fish",
+          "salmon"
+        ],
+        "singleSource": false,
+        "pulses": "high",
+        "grainFree": true,
+        "lifeStage": [
+          "all"
+        ],
+        "bodySize": [
+          "small",
+          "medium",
+          "large"
+        ],
+        "prescription": false,
+        "kcal": 3740
+      },
+      "reports": {
+        "total": 0,
+        "palatability": 0,
+        "looseStool": 0
+      },
+      "price": {
+        "unit": "1.13kg",
+        "checkedAt": "2026-09-18",
+        "merchants": [
+          {
+            "id": "m1",
+            "label": "貓日常 Cat's Daily（蝦皮商城）",
+            "unit": "1.13kg",
+            "amount": 799,
+            "note": "規格選「1.13Kg」 · 一頁三種大小",
+            "affiliateUrl": "https://s.shopee.tw/5VVQYP5GVU",
+            "anchor": "safe",
+            "checkedAt": "2026-09-18"
+          },
+          {
+            "id": "m2",
+            "label": "貓日常 Cat's Daily（蝦皮商城）",
+            "unit": "2kg",
+            "amount": 1299,
+            "note": "規格選「2kg」 · 一頁三種大小",
+            "affiliateUrl": "https://s.shopee.tw/5VVQYP5GVU",
+            "anchor": "value",
+            "checkedAt": "2026-09-18"
+          },
+          {
+            "id": "m3",
+            "label": "貓日常 Cat's Daily（蝦皮商城）",
+            "unit": "5.4kg",
+            "amount": 2899,
+            "note": "規格選「5.4Kg」 · 只能貨運或店到家 · 一頁三種大小",
+            "affiliateUrl": "https://s.shopee.tw/5VVQYP5GVU",
+            "anchor": "value",
+            "checkedAt": "2026-09-18"
+          }
+        ]
+      },
+      "dealbreaker": "你的貓對魚過敏。整包的肉只有鱒魚、鮭魚和鯡魚，沒有第二種蛋白質可以退。",
+      "knownIssues": "肉全部是魚，油脂用菜籽油和鮭魚油，香料寫的是天然素食香料，成分表裡找不到雞。豌豆、扁豆、鷹嘴豆排在第 4 到 6 項。紐頓沒有公布灰分，碳水是用灰分 8% 推估的。",
+      "searchAs": "紐頓 Nutram T24 無穀 鮭魚 鱒魚 挑嘴全齡貓",
+      "chicken": {
+        "status": "clean"
       }
     }
   ]
