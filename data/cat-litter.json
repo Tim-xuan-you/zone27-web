@@ -3,9 +3,9 @@
     {
       "id": "cl-01",
       "brand": "臭味滾 Odout",
-      "name": "豆腐砂",
-      "checkedAt": "2026-09-18",
-      "note": "評比裡凝結與除臭都排前段",
+      "name": "極細豆腐貓砂 1.5mm",
+      "checkedAt": "2026-09-19",
+      "note": "極細 1.5mm，顆粒接近礦砂，從礦砂換過來的貓比較容易接受。一包 7L 約 2.8 公斤",
       "searchAs": "臭味滾 Odout 豆腐砂 7L",
       "spec": {
         "material": "tofu",
@@ -13,7 +13,7 @@
         "flushable": "limited",
         "flushClaim": "yes",
         "dust": "low",
-        "grain": "medium",
+        "grain": "fine",
         "deodorizer": "植物纖維",
         "packUnit": "L",
         "packSize": 7,
@@ -21,8 +21,19 @@
       },
       "price": {
         "unit": "7L",
-        "checkedAt": "2026-09-18",
-        "merchants": []
+        "checkedAt": "2026-09-19",
+        "merchants": [
+          {
+            "id": "m1",
+            "label": "寵物執行長（蝦皮商城）",
+            "unit": "7L",
+            "amount": 223,
+            "note": "規格選「臭味滾-1.5mm極細豆腐貓砂7L」",
+            "affiliateUrl": "https://s.shopee.tw/LnKcYDaOm",
+            "anchor": "safe",
+            "checkedAt": "2026-09-19"
+          }
+        ]
       }
     },
     {

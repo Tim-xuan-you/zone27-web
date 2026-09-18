@@ -1,6 +1,6 @@
 {
   "checkedAt": "2026-09-18",
-  "total": 101,
+  "total": 102,
   "bad": 0,
   "rows": [
     {
@@ -1274,6 +1274,19 @@
       "status": 200,
       "finalUrl": "https://shopee.tw/opaanlp/270668052/13800987430",
       "item": "270668052/13800987430",
+      "verdict": "ok",
+      "note": ""
+    },
+    {
+      "productId": "cl-01",
+      "brand": "臭味滾 Odout",
+      "name": "極細豆腐貓砂 1.5mm",
+      "merchantId": "m1",
+      "label": "寵物執行長（蝦皮商城）",
+      "url": "https://s.shopee.tw/LnKcYDaOm",
+      "status": 200,
+      "finalUrl": "https://shopee.tw/opaanlp/3347166/28715842535",
+      "item": "3347166/28715842535",
       "verdict": "ok",
       "note": ""
     },
