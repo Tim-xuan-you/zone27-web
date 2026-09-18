@@ -1,6 +1,6 @@
 {
   "checkedAt": "2026-09-18",
-  "total": 99,
+  "total": 100,
   "bad": 0,
   "rows": [
     {
@@ -1274,6 +1274,19 @@
       "status": 200,
       "finalUrl": "https://shopee.tw/opaanlp/270668052/13800987430",
       "item": "270668052/13800987430",
+      "verdict": "ok",
+      "note": ""
+    },
+    {
+      "productId": "cl-13",
+      "brand": "汪喵星球",
+      "name": "益生菌消臭豆腐砂",
+      "merchantId": "m1",
+      "label": "汪喵星球官方商城",
+      "url": "https://s.shopee.tw/4fwJjbm8Wn",
+      "status": 200,
+      "finalUrl": "https://shopee.tw/opaanlp/329265193/13405243289",
+      "item": "329265193/13405243289",
       "verdict": "ok",
       "note": ""
     },

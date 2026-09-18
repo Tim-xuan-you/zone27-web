@@ -308,7 +308,18 @@
       "price": {
         "unit": "2.7kg",
         "checkedAt": "2026-09-18",
-        "merchants": []
+        "merchants": [
+          {
+            "id": "m1",
+            "label": "汪喵星球官方商城",
+            "unit": "2.7kg×2",
+            "amount": 399,
+            "note": "規格選「米粒型砂體驗組（米粒型砂2包）」 · 一頁五種規格，別選錯",
+            "affiliateUrl": "https://s.shopee.tw/4fwJjbm8Wn",
+            "anchor": "safe",
+            "checkedAt": "2026-09-18"
+          }
+        ]
       }
     },
     {

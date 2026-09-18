@@ -34,35 +34,6 @@
       ]
     },
     {
-      "id": "cl-13",
-      "label": "汪喵星球 益生菌消臭豆腐砂（貓砂第一批）",
-      "why": "米粒型豆腐砂，粉塵少，汪喵我們已經在賣罐頭",
-      "candidates": [
-        {
-          "shop": "艾爾發寵物 Alphapetstw",
-          "shopId": "45324029",
-          "price": 245,
-          "unit": "2.7kg 單包",
-          "url": "https://shopee.tw/product/45324029/27680110915"
-        },
-        {
-          "shop": "螢宇五金工具行",
-          "shopId": "15350609",
-          "price": 249,
-          "unit": "米粒型 7L 單包",
-          "url": "https://shopee.tw/product/15350609/20384924580"
-        },
-        {
-          "shop": "汪喵星球官方商城",
-          "shopId": "329265193",
-          "known": true,
-          "price": 399,
-          "unit": "體驗組（花草條＋條型各一包）",
-          "url": "https://shopee.tw/product/329265193/13405243289"
-        }
-      ]
-    },
-    {
       "id": "cl-06",
       "label": "pidan 除臭混合貓砂（貓砂第一批）",
       "why": "名字跟純木薯砂很像但不能沖馬桶，是這個類目最好用的對照組",
