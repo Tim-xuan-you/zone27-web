@@ -18,7 +18,7 @@ import storeReg from "@/data/stores.json";
  * 不是爬蝦皮，也沒有用他的帳號。價格會變、庫存看不到，開進去要自己確認。
  */
 
-type Candidate = { shop: string; shopId?: string; known?: boolean; price: number | null; unit: string; url: string };
+type Candidate = { shop: string; shopId?: string; known?: boolean; soldOut?: string; price: number | null; unit: string; url: string };
 type Failed = { shop: string; reason: string; at: string };
 type Target = { id: string; label: string; why: string; note?: string; candidates: Candidate[]; failed?: Failed[] };
 
@@ -34,7 +34,10 @@ export default function HuntPicks({ id }: { id: string }) {
   const t = HUNT.get(id);
   if (!t) return null;
   // 整家不行的直接不列（Tim 說過那家的任何商品都產不出連結）
-  const open = t.candidates.filter((c) => !isBlocked(c)).sort((a, b) => (a.price ?? 1e9) - (b.price ?? 1e9));
+  // 售完的排最後（補貨了還是要回去找，所以不刪掉）
+  const open = t.candidates
+    .filter((c) => !isBlocked(c))
+    .sort((a, b) => Number(Boolean(a.soldOut)) - Number(Boolean(b.soldOut)) || (a.price ?? 1e9) - (b.price ?? 1e9));
   const gone = [
     ...t.candidates.filter(isBlocked).map((c) => `${c.shop}（整家產不出連結）`),
     ...(t.failed ?? []).map((f) => `${f.shop}（${f.reason}）`),
@@ -61,7 +64,9 @@ export default function HuntPicks({ id }: { id: string }) {
                 用過，產得出連結
               </span>
             )}
-            <span style={{ display: "block", fontSize: 12.5, color: "var(--muted)" }}>{c.unit}</span>
+            <span style={{ display: "block", fontSize: 12.5, color: "var(--muted)" }}>
+              {c.unit}{c.soldOut ? " · 上次看是售完的，先確認有沒有補貨" : ""}
+            </span>
           </span>
           <span className="mono" style={{ fontSize: 13.5, whiteSpace: "nowrap" }}>
             {c.price === null ? "看頁面" : "$" + c.price.toLocaleString()} ›
