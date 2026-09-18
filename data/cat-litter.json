@@ -159,24 +159,37 @@
     {
       "id": "cl-07",
       "brand": "Ever Clean 藍鑽",
-      "name": "紫標強效清香凝結貓砂",
-      "checkedAt": "2026-09-18",
-      "searchAs": "藍鑽 紫標 凝結貓砂",
+      "name": "藍標 4倍淨味貓砂（無香）",
+      "checkedAt": "2026-09-19",
+      "note": "天然膨潤土，沒有加香料，用活性碳吸附異味不是用香味蓋掉。品牌宣稱 99% 極低塵。8.5 公斤大約是 10 公升",
+      "searchAs": "藍鑽 藍標 4倍淨味 無香 8.5kg",
       "spec": {
         "material": "mineral",
         "clumping": true,
         "flushable": "no",
         "flushClaim": "no",
-        "dust": "medium",
-        "scented": true,
+        "dust": "low",
         "grain": "fine",
-        "deodorizer": "活性碳",
+        "deodorizer": "活性碳（Carbon+）",
+        "packUnit": "kg",
+        "packSize": 8.5,
         "tracking": "medium"
       },
       "price": {
-        "unit": "",
-        "checkedAt": "2026-09-18",
-        "merchants": []
+        "unit": "8.5kg",
+        "checkedAt": "2026-09-19",
+        "merchants": [
+          {
+            "id": "m1",
+            "label": "蝦皮直營（官方直營）",
+            "unit": "8.5kg",
+            "amount": 828,
+            "note": "規格選「(藍標)4倍淨味貓砂(無香) 8.5kg」 · 一頁多款：藍標／綠標／紅標／紫標",
+            "affiliateUrl": "https://s.shopee.tw/60RhNwssSr",
+            "anchor": "safe",
+            "checkedAt": "2026-09-19"
+          }
+        ]
       }
     },
     {

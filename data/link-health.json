@@ -1,6 +1,6 @@
 {
   "checkedAt": "2026-09-18",
-  "total": 102,
+  "total": 103,
   "bad": 0,
   "rows": [
     {
@@ -1287,6 +1287,19 @@
       "status": 200,
       "finalUrl": "https://shopee.tw/opaanlp/3347166/28715842535",
       "item": "3347166/28715842535",
+      "verdict": "ok",
+      "note": ""
+    },
+    {
+      "productId": "cl-07",
+      "brand": "Ever Clean 藍鑽",
+      "name": "藍標 4倍淨味貓砂（無香）",
+      "merchantId": "m1",
+      "label": "蝦皮直營（官方直營）",
+      "url": "https://s.shopee.tw/60RhNwssSr",
+      "status": 200,
+      "finalUrl": "https://shopee.tw/opaanlp/50662979/46561606654",
+      "item": "50662979/46561606654",
       "verdict": "ok",
       "note": ""
     },
