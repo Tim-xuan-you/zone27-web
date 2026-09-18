@@ -85,12 +85,29 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
           {live.length > 1 && (
             <div style={{ marginTop: 18 }}>
               <p style={lbl}>全部 {new Set(live.map((x) => x.label)).size} 家的價格</p>
-              {live.map((x) => (
-                <a key={x.id} href={`/go/${x.id}/${p.id}`} rel="nofollow sponsored" style={storeRow}>
-                  <span>{x.label}<span style={{ display: "block", fontSize: 12.5, color: "var(--muted)" }}>{x.unit}{x.note ? ` · ${x.note}` : ""}</span></span>
-                  <span className="mono" style={{ whiteSpace: "nowrap" }}>${x.amount.toLocaleString()} ›</span>
-                </a>
-              ))}
+              {live.map((x) => {
+                /* 光寫標價會誤導：一包 7L $249 看起來比兩包 $399 便宜，換算成一個月其實貴一百多 */
+                const xPer = unitPriceOf(p, x);
+                const xMonth = monthlyCost(p, x);
+                const more = xMonth && month ? xMonth.cost - month.cost : 0;
+                return (
+                  <a key={x.id} href={`/go/${x.id}/${p.id}`} rel="nofollow sponsored" style={storeRow}>
+                    <span style={{ minWidth: 0 }}>
+                      {x.label}
+                      <span style={{ display: "block", fontSize: 12.5, color: "var(--muted)" }}>{x.unit}{x.note ? ` · ${x.note}` : ""}</span>
+                      {more > 0 && (
+                        <span style={{ display: "block", fontSize: 12.5, color: "var(--cut)", marginTop: 2 }}>
+                          一個月多 ${more.toLocaleString()}
+                        </span>
+                      )}
+                    </span>
+                    <span className="mono" style={{ whiteSpace: "nowrap", textAlign: "right" }}>
+                      ${x.amount.toLocaleString()}
+                      {xPer && <span style={{ display: "block", fontSize: 12, color: "var(--faint)" }}>${xPer.n}/{xPer.unit}</span>}
+                    </span>
+                  </a>
+                );
+              })}
             </div>
           )}
         </section>

@@ -1,6 +1,6 @@
 {
   "checkedAt": "2026-09-18",
-  "total": 100,
+  "total": 101,
   "bad": 0,
   "rows": [
     {
@@ -1287,6 +1287,19 @@
       "status": 200,
       "finalUrl": "https://shopee.tw/opaanlp/329265193/13405243289",
       "item": "329265193/13405243289",
+      "verdict": "ok",
+      "note": ""
+    },
+    {
+      "productId": "cl-13",
+      "brand": "汪喵星球",
+      "name": "益生菌消臭豆腐砂",
+      "merchantId": "m2",
+      "label": "螢宇五金工具行",
+      "url": "https://s.shopee.tw/qjbBF9ooZ",
+      "status": 200,
+      "finalUrl": "https://shopee.tw/opaanlp/15350609/20384924580",
+      "item": "15350609/20384924580",
       "verdict": "ok",
       "note": ""
     },

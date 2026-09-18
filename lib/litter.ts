@@ -166,9 +166,21 @@ export function unitPriceOf(p: LitterProduct, m: Merchant): { n: number; unit: s
 export const liveOf = (p: LitterProduct): Merchant[] => p.price.merchants.filter((m) => !m.dead);
 export const buyableLitter = (p: LitterProduct): boolean => liveOf(p).length > 0;
 
-/** 卡片上那一家：最便宜的（同一個類目裡包裝大小差很多，所以比每公升／每公斤） */
+/**
+ * 卡片上那一家。
+ *
+ * 不能照標價挑。貓砂的包裝差太多：一包 7L $249、兩包 5.4kg $399，
+ * 標價便宜的那個其實每公斤貴兩成。而且有的賣場最低要買 8 包。
+ *
+ * 所以照「一個月要花多少」挑 —— 那是讀者真正付出去的錢，
+ * 也是公升跟公斤唯一能放在一起比的方式。算不出月花費的（規格看不懂），才退回比標價。
+ */
 export function anchorLitter(p: LitterProduct): Merchant | undefined {
   const live = liveOf(p);
   if (live.length === 0) return undefined;
-  return live.reduce((best, m) => (m.amount < best.amount ? m : best));
+  return live.reduce((best, m) => {
+    const a = monthlyCost(p, m)?.cost, b = monthlyCost(p, best)?.cost;
+    if (a !== undefined && b !== undefined) return a < b ? m : best;
+    return m.amount < best.amount ? m : best;
+  });
 }

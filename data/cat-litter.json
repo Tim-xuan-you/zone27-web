@@ -290,7 +290,7 @@
       "id": "cl-13",
       "brand": "汪喵星球",
       "name": "益生菌消臭豆腐砂",
-      "checkedAt": "2026-09-18",
+      "checkedAt": "2026-09-19",
       "note": "米粒型，表面加壓，粉塵比條型少",
       "searchAs": "汪喵星球 益生菌消臭豆腐砂",
       "spec": {
@@ -307,7 +307,7 @@
       },
       "price": {
         "unit": "2.7kg",
-        "checkedAt": "2026-09-18",
+        "checkedAt": "2026-09-19",
         "merchants": [
           {
             "id": "m1",
@@ -318,6 +318,16 @@
             "affiliateUrl": "https://s.shopee.tw/4fwJjbm8Wn",
             "anchor": "safe",
             "checkedAt": "2026-09-18"
+          },
+          {
+            "id": "m2",
+            "label": "螢宇五金工具行",
+            "unit": "7L",
+            "amount": 249,
+            "note": "規格選「原味米粒型7L/包」 · 單包",
+            "affiliateUrl": "https://s.shopee.tw/qjbBF9ooZ",
+            "anchor": "value",
+            "checkedAt": "2026-09-19"
           }
         ]
       }

@@ -97,7 +97,8 @@ interface Row {
 const RE_ID = new RegExp(`^((?:${CATEGORIES.map((c) => c.idPrefix).join("|")})-\\d+)$`, "i");
 const RE_URL = /^https?:\/\/\S+$/i;
 // 罐頭整箱寫成「80g×24」「85g x 12入」，後面那段可有可無
-const RE_UNIT = /^\d+(?:\.\d+)?\s*(?:kg|g|公斤|公克|克|磅|lb|lbs|oz)(?:\s*[×xX*]\s*\d+\s*(?:入|罐|包)?)?$/i;
+// 貓砂論公升（7L、13L），所以 L 也要認得（2026-09-19）
+const RE_UNIT = /^\d+(?:\.\d+)?\s*(?:kg|g|公斤|公克|克|磅|lb|lbs|oz|L|公升)(?:\s*[×xX*]\s*\d+\s*(?:入|罐|包)?)?$/i;
 const RE_PCT = /^\d+(?:\.\d+)?\s*%$/;
 
 /** 「85g x 12入」→「85g×12」。寫法統一，網站才算得出每罐多少錢、一箱吃幾天 */
