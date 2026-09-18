@@ -1124,16 +1124,46 @@
         "merchants": [
           {
             "id": "m1",
-            "label": "貓日常 Cat's Daily（蝦皮商城）",
+            "label": "萬倍富寵物用品店（蝦皮商城）",
             "unit": "1.13kg",
-            "amount": 799,
-            "note": "規格選「1.13Kg」 · 一頁三種大小",
-            "affiliateUrl": "https://s.shopee.tw/5VVQYP5GVU",
+            "amount": 680,
+            "note": "規格選「T24無穀貓鮭魚,1.13KG」 · 同一頁還有 T22，別選錯",
+            "affiliateUrl": "https://s.shopee.tw/5LC0M65tqT",
             "anchor": "safe",
             "checkedAt": "2026-09-18"
           },
           {
             "id": "m2",
+            "label": "萬倍富寵物用品店（蝦皮商城）",
+            "unit": "2kg",
+            "amount": 1104,
+            "note": "規格選「T24無穀貓鮭魚,2KG」 · 同一頁還有 T22，別選錯",
+            "affiliateUrl": "https://s.shopee.tw/5LC0M65tqT",
+            "anchor": "value",
+            "checkedAt": "2026-09-18"
+          },
+          {
+            "id": "m3",
+            "label": "萬倍富寵物用品店（蝦皮商城）",
+            "unit": "5.4kg",
+            "amount": 2580,
+            "note": "規格選「T24無穀貓鮭魚,5.4KG」 · 超取限一包 · 同一頁還有 T22，別選錯",
+            "affiliateUrl": "https://s.shopee.tw/5LC0M65tqT",
+            "anchor": "value",
+            "checkedAt": "2026-09-18"
+          },
+          {
+            "id": "m4",
+            "label": "貓日常 Cat's Daily（蝦皮商城）",
+            "unit": "1.13kg",
+            "amount": 799,
+            "note": "規格選「1.13Kg」 · 一頁三種大小",
+            "affiliateUrl": "https://s.shopee.tw/5VVQYP5GVU",
+            "anchor": "value",
+            "checkedAt": "2026-09-18"
+          },
+          {
+            "id": "m5",
             "label": "貓日常 Cat's Daily（蝦皮商城）",
             "unit": "2kg",
             "amount": 1299,
@@ -1143,7 +1173,7 @@
             "checkedAt": "2026-09-18"
           },
           {
-            "id": "m3",
+            "id": "m6",
             "label": "貓日常 Cat's Daily（蝦皮商城）",
             "unit": "5.4kg",
             "amount": 2899,
