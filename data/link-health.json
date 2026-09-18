@@ -1,6 +1,6 @@
 {
   "checkedAt": "2026-09-18",
-  "total": 94,
+  "total": 95,
   "bad": 0,
   "rows": [
     {
@@ -827,6 +827,19 @@
       "brand": "Royal Canin 法國皇家",
       "name": "老貓 11+ 歲齡 A30+11",
       "merchantId": "m1",
+      "label": "肥貓粉絲團（蝦皮商城）",
+      "url": "https://s.shopee.tw/5q8GzXt69l",
+      "status": 200,
+      "finalUrl": "https://shopee.tw/opaanlp/869025867/21151568984",
+      "item": "869025867/21151568984",
+      "verdict": "ok",
+      "note": ""
+    },
+    {
+      "productId": "cf-12",
+      "brand": "Royal Canin 法國皇家",
+      "name": "老貓 11+ 歲齡 A30+11",
+      "merchantId": "m2",
       "label": "晴空小舖sky（蝦皮優選）",
       "url": "https://s.shopee.tw/40gT8lhNBb",
       "status": 200,

@@ -900,16 +900,26 @@
       },
       "price": {
         "unit": "2kg",
-        "checkedAt": "2026-09-13",
+        "checkedAt": "2026-09-18",
         "merchants": [
           {
             "id": "m1",
+            "label": "肥貓粉絲團（蝦皮商城）",
+            "unit": "2kg",
+            "amount": 1068,
+            "note": "規格選「A30+11 11+歲老貓 2kg」",
+            "affiliateUrl": "https://s.shopee.tw/5q8GzXt69l",
+            "anchor": "safe",
+            "checkedAt": "2026-09-18"
+          },
+          {
+            "id": "m2",
             "label": "晴空小舖sky（蝦皮優選）",
             "unit": "2kg",
             "amount": 898,
             "note": "規格選「A30+11老貓 2KG」 · 一頁多款 · 免運無限次 · 14:00 前下單隔日到",
             "affiliateUrl": "https://s.shopee.tw/40gT8lhNBb",
-            "anchor": "safe",
+            "anchor": "value",
             "checkedAt": "2026-09-13"
           }
         ]
