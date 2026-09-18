@@ -13,6 +13,7 @@ import litter from "../data/cat-litter.json";
 
 export type LitterMaterial =
   | "tofu"           // 豆腐砂（黃豆渣、豌豆纖維）
+  | "cassava"        // 木薯砂（樹薯澱粉，也是植物纖維）
   | "mixed-plant"    // 混合砂，但成分都是植物（稻殼＋豆腐這種）
   | "mixed-mineral"  // 混合砂，裡面有礦砂
   | "mineral"        // 礦砂（膨潤土）
@@ -23,6 +24,7 @@ export type LitterMaterial =
 
 export const MATERIAL_ZH: Record<LitterMaterial, string> = {
   tofu: "豆腐砂",
+  cassava: "木薯砂",
   "mixed-plant": "混合砂（全植物）",
   "mixed-mineral": "混合砂（含礦砂）",
   mineral: "礦砂",
@@ -111,6 +113,7 @@ export function flushGap(p: LitterProduct): string | null {
 /** 一隻貓一個月大約用掉多少（公升或公斤），照材質。來源：台灣通路與品牌的建議用量整理 */
 const MONTHLY_USE: Record<LitterMaterial, { kg?: number; L?: number }> = {
   tofu: { L: 18, kg: 7 },
+  cassava: { L: 18, kg: 7 },
   "mixed-plant": { L: 18, kg: 7 },
   "mixed-mineral": { L: 14, kg: 8 },
   mineral: { kg: 9, L: 10 },

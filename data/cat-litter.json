@@ -310,6 +310,31 @@
         "checkedAt": "2026-09-18",
         "merchants": []
       }
+    },
+    {
+      "id": "cl-14",
+      "brand": "pidan",
+      "name": "純木薯貓砂",
+      "checkedAt": "2026-09-18",
+      "note": "跟 pidan 的混合貓砂不是同一款：這款全是木薯，混合砂裡面有膨潤土。能不能沖馬桶就差在這裡",
+      "searchAs": "pidan 純木薯砂 1.25kg",
+      "spec": {
+        "material": "cassava",
+        "clumping": true,
+        "flushable": "limited",
+        "flushClaim": "yes",
+        "dust": "low",
+        "grain": "fine",
+        "deodorizer": "木薯纖維",
+        "packUnit": "kg",
+        "packSize": 1.25,
+        "tracking": "low"
+      },
+      "price": {
+        "unit": "1.25kg",
+        "checkedAt": "2026-09-18",
+        "merchants": []
+      }
     }
   ]
 }

@@ -14,7 +14,7 @@ import { MAX_MERCHANTS } from "../lib/types";
 import type { Merchant } from "../lib/types";
 /* 材質清單在這裡自己列一份：lib/litter.ts 會讀 data/cat-litter.json，
    而那個檔正是這支腳本產生的，互相讀會變成先有雞還是先有蛋 */
-const MATERIALS = ["tofu", "mixed-plant", "mixed-mineral", "mineral", "wood", "paper", "zeolite", "crystal"] as const;
+const MATERIALS = ["tofu", "cassava", "mixed-plant", "mixed-mineral", "mineral", "wood", "paper", "zeolite", "crystal"] as const;
 type LitterMaterial = (typeof MATERIALS)[number];
 
 const ROOT = resolve(import.meta.dirname, "..");

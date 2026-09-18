@@ -21,6 +21,7 @@ export const metadata: Metadata = {
 /** 材質怎麼判，一次講清楚，不要每一款重複講 */
 const WHY: Record<LitterMaterial, string> = {
   tofu: "黃豆渣、豌豆纖維做的，遇水會散開，所以一次一小坨沖得掉。",
+  cassava: "木薯（樹薯）澱粉做的，遇水會散開，量少沖得掉。",
   "mixed-plant": "稻殼加豆腐這種，兩種都是植物纖維，遇水一樣會散開。",
   "mixed-mineral": "裡面摻了礦砂。礦砂不溶於水，整團卡住的就是它。",
   mineral: "膨潤土遇水是結成一團，而且不溶於水。",
