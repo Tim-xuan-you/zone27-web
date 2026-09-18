@@ -123,21 +123,43 @@ const MONTHLY_USE: Record<LitterMaterial, { kg?: number; L?: number }> = {
   crystal: { L: 8, kg: 3 },
 };
 
-/** 一隻貓一個月大概要幾包、多少錢。算不出來回 null，前端就不顯示 */
-export function monthlyCost(p: LitterProduct, m: Merchant): { packs: number; cost: number } | null {
-  const { packUnit, packSize, material } = p.spec;
-  if (!packUnit || !packSize) return null;
-  const need = MONTHLY_USE[material][packUnit];
-  if (!need) return null;
-  const packs = need / packSize;
-  return { packs: Math.round(packs * 10) / 10, cost: Math.round(m.amount * packs) };
+/**
+ * 這一條連結實際買到多少：「1.25kg×8」是 10 公斤，不是 1.25 公斤。
+ *
+ * 蝦皮很多貓砂賣場設最低購買量（8 包、6 包），我們照整組登記。
+ * 不把「×8」算進去的話，每公斤會算成八倍貴，一個月多少錢也跟著錯。
+ */
+export function sizeOf(p: LitterProduct, m: Merchant): { total: number; unit: "kg" | "L"; packs: number } | null {
+  const raw = (m.unit || p.price.unit || "").replace(/\s/g, "");
+  const hit = raw.match(/^(\d+(?:\.\d+)?)(kg|KG|Kg|L|l|公斤|公升)(?:[×xX*](\d+))?/);
+  if (hit) {
+    const size = parseFloat(hit[1]);
+    const unit: "kg" | "L" = /kg|公斤/i.test(hit[2]) ? "kg" : "L";
+    const packs = hit[3] ? parseInt(hit[3], 10) : 1;
+    return { total: size * packs, unit, packs };
+  }
+  const { packUnit, packSize } = p.spec;
+  return packUnit && packSize ? { total: packSize, unit: packUnit, packs: 1 } : null;
 }
 
-/** 一公升或一公斤多少錢 */
+/** 一隻貓一個月大概要用多少、多少錢。算不出來回 null，前端就不顯示 */
+export function monthlyCost(p: LitterProduct, m: Merchant): { use: number; unit: string; cost: number } | null {
+  const s = sizeOf(p, m);
+  if (!s) return null;
+  const need = MONTHLY_USE[p.spec.material][s.unit];
+  if (!need) return null;
+  return {
+    use: need,
+    unit: s.unit === "kg" ? "公斤" : "公升",
+    cost: Math.round((m.amount / s.total) * need),
+  };
+}
+
+/** 一公升或一公斤多少錢（整組的話先除以總量） */
 export function unitPriceOf(p: LitterProduct, m: Merchant): { n: number; unit: string } | null {
-  const { packUnit, packSize } = p.spec;
-  if (!packUnit || !packSize) return null;
-  return { n: Math.round(m.amount / packSize), unit: packUnit === "kg" ? "公斤" : "公升" };
+  const s = sizeOf(p, m);
+  if (!s) return null;
+  return { n: Math.round(m.amount / s.total), unit: s.unit === "kg" ? "公斤" : "公升" };
 }
 
 /** 還買得到的賣場 */

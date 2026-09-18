@@ -67,12 +67,13 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
           <p style={{ margin: "0 0 6px", fontSize: 28, fontWeight: 800 }}>
             ${m.amount.toLocaleString()}
             <span style={{ fontSize: 14, color: "var(--muted)", fontWeight: 500, marginLeft: 10 }}>
-              {p.price.unit}{per ? ` · $${per.n}/${per.unit}` : ""}
+              {/* 整組賣的要寫整組（1.25kg×8），不然 $792 配 1.25kg 會看成一包的價 */}
+              {m.unit || p.price.unit}{per ? ` · ${per.n}/${per.unit}` : ""}
             </span>
           </p>
           {month && (
             <p style={{ margin: "0 0 14px", fontSize: 15, color: "var(--muted)", lineHeight: 1.85 }}>
-              一隻貓一個月大約 {month.packs} 包，<b style={{ color: "var(--ink)" }}>${month.cost.toLocaleString()}</b>。
+              一隻貓一個月大約用 {month.use} {month.unit}，<b style={{ color: "var(--ink)" }}>${month.cost.toLocaleString()}</b>。
               用量是照材質推估的，每隻貓差很多，拿來比不同款就好。
             </p>
           )}

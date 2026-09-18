@@ -459,7 +459,8 @@ function wetNutrition(row: Row, line: number) {
 errors = [];
 const results: { cat: Category; products: ReturnType<typeof readCategory> }[] = [];
 
-for (const cat of CATEGORIES) {
+// 貓砂的欄位跟飼料完全不同，走 scripts/import-litter.ts
+for (const cat of CATEGORIES.filter((c) => c.form !== "litter")) {
   if (!existsSync(resolve(cat.csv))) {
     // 狗飼料一定要有；其他類目還沒開始做就跳過
     if (cat.slug === "dog-food") {

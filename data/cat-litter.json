@@ -333,7 +333,18 @@
       "price": {
         "unit": "1.25kg",
         "checkedAt": "2026-09-18",
-        "merchants": []
+        "merchants": [
+          {
+            "id": "m1",
+            "label": "免睏寵物樂園（蝦皮優選）",
+            "unit": "1.25kg×8",
+            "amount": 792,
+            "note": "規格選「純木薯砂 1.25kg」 · 最少買 8 包，不同規格可以混搭 · 同一頁還有混合砂，別選錯",
+            "affiliateUrl": "https://s.shopee.tw/60RhJlsrw4",
+            "anchor": "safe",
+            "checkedAt": "2026-09-18"
+          }
+        ]
       }
     }
   ]

@@ -325,6 +325,8 @@ async function main() {
   // 而 shell:true 會噴 Node 的棄用警告。匯入腳本本來就是 top-level 執行，
   // 直接 import 進來跑最乾淨。
   await import("./import-csv");
+  // 貼的是貓砂的話，那一份要用貓砂的匯入（欄位不一樣）
+  if (outputs.some(([path]) => path.includes("cat-litter"))) await import("./import-litter");
 }
 
 main().catch((e) => {
