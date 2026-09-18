@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Category } from "@/lib/categories";
 import { catalogOf, isLive, liveCount } from "@/lib/catalog";
 import { allergensOf, breedsOf } from "@/lib/slugs";
+import { litters } from "@/lib/litter";
 import { CategoryIcon } from "./Icons";
 
 /**
@@ -16,7 +17,9 @@ export default function CategoryCards({ cats, short }: { cats: Category[]; short
       {cats.map((c) => {
         const live = isLive(c.species, c.form);
         const ready = liveCount(c.species, c.form);
-        const read = catalogOf(c.species, c.form).length;
+        // 貓砂讀的是材質不是成分表，款數也在另一份資料裡
+        const litter = c.form === "litter";
+        const read = litter ? litters.length : catalogOf(c.species, c.form).length;
         return (
           <Link key={c.slug} href={`/${c.slug}`} style={card}>
             <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 10 }}>
@@ -32,7 +35,9 @@ export default function CategoryCards({ cats, short }: { cats: Category[]; short
               {c.pitch}
             </p>
             <p style={{ margin: 0, fontSize: 13, color: "var(--faint)", lineHeight: 1.8 }}>
-              {!live
+              {litter
+                ? `讀過 ${read} 款：材質、能不能沖馬桶、一個月多少錢`
+                : !live
                 ? `${read} 款成分表讀完了，購買連結補齊就開放推薦`
                 : c.form === "dry"
                 ? `${breedsOf(c.species).length} 個品種 · ${allergensOf(c.species).length} 種過敏原 · 讀過 ${read} 款成分表`
