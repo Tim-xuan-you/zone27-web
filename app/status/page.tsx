@@ -151,7 +151,7 @@ export default function Page() {
   // 對照款是故意不賣的，不算「買不到」的問題
   const shopIds = shopIdsByLabel();
   /* 查藏雞頁「沒有雞」但沒有連結的那幾款：補了連結就能推薦給對雞過敏的人 */
-  type ExtraItem = { id: string; planId?: string; brand: string; name: string; alias?: string };
+  type ExtraItem = { id: string; planId?: string; brand: string; name: string; alias?: string; huntNote?: string };
   const noChicken = (checkExtra.items as ExtraItem[])
     .filter((x) => x.planId)
     .map((x) => ({ ...x, planId: x.planId as string, hunt: huntFrom(x.brand, x.name) }));
@@ -315,6 +315,19 @@ export default function Page() {
       </div>
 
       {/* ── 採購清單。連結以外的東西都做完了，這一段是唯一需要 Tim 動手的 ── */}
+      <H>分潤怎麼算（選賣場的時候用得到）</H>
+      <div style={box}>
+        <ul style={ul}>
+          <li><b>要同一家店才算。</b>讀者點我們的連結進去，跑去別家買，那筆沒有我們的事。所以連結要指到他最可能直接下單的那一家。</li>
+          <li><b>七天內結帳都算，而且不限那一件商品。</b>同一家店裡他順手買的貓砂、罐頭一樣算。東西齊全的賣場因此比便宜五塊的賣場值錢。</li>
+          <li><b>七天內他點到別人的連結，就變成別人的。</b>所以頁面要讓人看完就走、直接買，不要逼他再去比價。</li>
+          <li><b>費率不用挑。</b>蝦皮的費率隨商品、活動、賣家加碼和創作者分級在變，以商品頁當下顯示的為準，我們也不寫在讀者看得到的地方。能控制的只有「他會不會買」。</li>
+        </ul>
+        <p style={{ margin: "12px 0 0", fontSize: 13, color: "var(--faint)", lineHeight: 1.85 }}>
+          依蝦皮幫助中心「分潤計畫用戶如何賺取分潤金」與聯盟計畫約定條款（2026-09-18 查）。條款另有規定：禁止機器人與自動抓取、禁止自購，違反可立即終止，所以我們不自動操作你的帳號。
+        </p>
+      </div>
+
       {thin.length > 0 && (
         <>
           <H>只剩一家在賣（{thin.length} 款）</H>
@@ -363,6 +376,11 @@ export default function Page() {
                 <span className="mono" style={{ fontSize: 13, color: "var(--faint)" }}>{x.id} → {x.planId}</span>
               </div>
               <div style={{ marginTop: 12, paddingTop: 12, borderTop: "1px solid var(--line)" }}>
+                {x.huntNote && (
+                  <Line k="找過">
+                    <b style={{ color: "var(--cut)" }}>{x.huntNote}</b>
+                  </Line>
+                )}
                 <Line k="產生連結時填">
                   <span className="mono" style={{ fontSize: 14 }}>
                     Sub id 1 = <b>{shopeeSubId(x.planId)}</b>　Sub id 2 = <b>{categoryOfId(x.planId)?.subId ?? CATEGORY_SUB_ID}</b>
