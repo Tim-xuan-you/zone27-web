@@ -12,6 +12,7 @@ import { impactMap, overallCutRate, ruleAudit, TIER_WEIGHT, type Impact } from "
 import health from "@/data/link-health.json";
 import storeReg from "@/data/stores.json";
 import checkExtra from "@/data/check-extra.json";
+import HuntPicks from "@/components/HuntPicks";
 import { productHref } from "@/lib/labels";
 
 /**
@@ -353,6 +354,7 @@ export default function Page() {
                   </span>
                 </Line>
                 <HuntLinks keyword={huntKeyword(p)} shops={sellersOfBrand(p.brand).map((label) => ({ label, shop: shopIds.get(label) }))} />
+                <HuntPicks id={p.id} />
               </div>
             </div>
           ))}
@@ -387,6 +389,7 @@ export default function Page() {
                   </span>
                 </Line>
                 <HuntLinks keyword={x.hunt} shops={sellersOfBrand(x.brand).map((label) => ({ label, shop: shopIds.get(label) }))} />
+                <HuntPicks id={x.planId} />
               </div>
             </div>
           ))}
@@ -443,6 +446,7 @@ export default function Page() {
                 <Line k="去蝦皮搜這個">
                   <span className="mono" style={{ fontSize: 14 }}>{huntKeyword(p)}</span>
                   <HuntLinks keyword={huntKeyword(p)} shops={sellersOfBrand(p.brand).map((label) => ({ label, shop: shopIds.get(label) }))} />
+                  <HuntPicks id={p.id} />
                 </Line>
                 <Line k="產生連結時填">
                   <span className="mono" style={{ fontSize: 14 }}>
