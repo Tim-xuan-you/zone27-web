@@ -11,6 +11,7 @@ import type { Form, Product, ProteinSource, Situation, Species } from "@/lib/typ
 import { impactMap, overallCutRate, ruleAudit, TIER_WEIGHT, type Impact } from "@/lib/impact";
 import health from "@/data/link-health.json";
 import storeReg from "@/data/stores.json";
+import checkExtra from "@/data/check-extra.json";
 import { productHref } from "@/lib/labels";
 
 /**
@@ -148,6 +149,18 @@ export default function Page() {
     return [...found];
   };
   // 對照款是故意不賣的，不算「買不到」的問題
+  const shopIds = shopIdsByLabel();
+  /* 查藏雞頁「沒有雞」但沒有連結的那幾款：補了連結就能推薦給對雞過敏的人 */
+  type ExtraItem = { id: string; planId?: string; brand: string; name: string; alias?: string };
+  const noChicken = (checkExtra.items as ExtraItem[])
+    .filter((x) => x.planId)
+    .map((x) => ({ ...x, planId: x.planId as string, hunt: huntFrom(x.brand, x.name) }));
+  // 只剩一家在賣的：那一家賣完，這一款就從網站上消失
+  const thinAll = catalog
+    .filter((p) => buyable(p) && !p.referenceOnly && new Set(p.price.merchants.filter((m) => !m.dead).map((m) => m.label)).size === 1)
+    .sort((a, b) => (picks.get(b.id) ?? 0) - (picks.get(a.id) ?? 0));
+  // 全部列出來就變成一面牆。只列真的會被推薦到的，最多 8 款，其他的等它被推到再說
+  const thin = thinAll.filter((p) => (picks.get(p.id) ?? 0) > 0).slice(0, 8);
   const unbuyable = catalog.filter((p) => !p.referenceOnly && !p.awaitingLink && (!buyable(p) || p.discontinued));
   const noIssues = catalog.filter((p) => !p.knownIssues?.trim());
   const oldest = Math.max(0, ...rows.map((r) => r.days));
@@ -302,6 +315,66 @@ export default function Page() {
       </div>
 
       {/* ── 採購清單。連結以外的東西都做完了，這一段是唯一需要 Tim 動手的 ── */}
+      {thin.length > 0 && (
+        <>
+          <H>只剩一家在賣（{thin.length} 款）</H>
+          <p style={{ margin: "0 0 14px", fontSize: 14.5, color: "var(--muted)", lineHeight: 1.9 }}>
+            那一家賣完，這一款在網站上就沒地方買。補第二家最快的方法，是回同一個品牌我們買過的賣場找。{thinAll.length > thin.length ? ` 另外還有 ${thinAll.length - thin.length} 款也只有一家，但目前的情況推不到它們，先不用管。` : ""}
+          </p>
+          {thin.map((p) => (
+            <div key={p.id} style={box}>
+              <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", gap: 12, flexWrap: "wrap" }}>
+                <div>
+                  <span style={{ fontSize: 12.5, color: "var(--muted)", display: "block" }}>{p.brand}</span>
+                  <b style={{ fontSize: 16.5 }}>{p.name}</b>
+                </div>
+                <span className="mono" style={{ fontSize: 13, color: "var(--faint)" }}>
+                  {p.id}{picks.get(p.id) ? ` · 被推薦 ${picks.get(p.id)} 次` : ""}
+                </span>
+              </div>
+              <div style={{ marginTop: 12, paddingTop: 12, borderTop: "1px solid var(--line)" }}>
+                <Line k="現在這一家">{[...new Set(p.price.merchants.filter((m) => !m.dead).map((m) => m.label))].join("、")}</Line>
+                <Line k="產生連結時填">
+                  <span className="mono" style={{ fontSize: 14 }}>
+                    Sub id 1 = <b>{shopeeSubId(p.id)}</b>　Sub id 2 = <b>{categoryOfId(p.id)?.subId ?? CATEGORY_SUB_ID}</b>
+                  </span>
+                </Line>
+                <HuntLinks keyword={huntKeyword(p)} shops={sellersOfBrand(p.brand).map((label) => ({ label, shop: shopIds.get(label) }))} />
+              </div>
+            </div>
+          ))}
+        </>
+      )}
+
+      {noChicken.length > 0 && (
+        <>
+          <H>查藏雞頁沒有雞、但我們沒連結（{noChicken.length} 款）</H>
+          <p style={{ margin: "0 0 14px", fontSize: 14.5, color: "var(--muted)", lineHeight: 1.9 }}>
+            這幾款我們讀過成分表、確定沒有雞，但沒有連結，所以只能看不能買。
+            對雞過敏的人最想買的就是這幾包。連結一到就補成完整商品，裁決器也會開始推。
+          </p>
+          {noChicken.map((x) => (
+            <div key={x.id} style={box}>
+              <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", gap: 12, flexWrap: "wrap" }}>
+                <div>
+                  <span style={{ fontSize: 12.5, color: "var(--muted)", display: "block" }}>{x.brand}</span>
+                  <b style={{ fontSize: 16.5 }}>{x.name}</b>
+                </div>
+                <span className="mono" style={{ fontSize: 13, color: "var(--faint)" }}>{x.id} → {x.planId}</span>
+              </div>
+              <div style={{ marginTop: 12, paddingTop: 12, borderTop: "1px solid var(--line)" }}>
+                <Line k="產生連結時填">
+                  <span className="mono" style={{ fontSize: 14 }}>
+                    Sub id 1 = <b>{shopeeSubId(x.planId)}</b>　Sub id 2 = <b>{categoryOfId(x.planId)?.subId ?? CATEGORY_SUB_ID}</b>
+                  </span>
+                </Line>
+                <HuntLinks keyword={x.hunt} shops={sellersOfBrand(x.brand).map((label) => ({ label, shop: shopIds.get(label) }))} />
+              </div>
+            </div>
+          ))}
+        </>
+      )}
+
       <H>等你補連結的（{waiting.length} 款）</H>
       {waiting.length === 0 ? (
         <p style={ok}>沒有。選好的都上架了。</p>
@@ -350,7 +423,8 @@ export default function Page() {
                   </Line>
                 )}
                 <Line k="去蝦皮搜這個">
-                  <span className="mono" style={{ fontSize: 14 }}>{p.searchAs ?? `${p.brand} ${p.name}`}</span>
+                  <span className="mono" style={{ fontSize: 14 }}>{huntKeyword(p)}</span>
+                  <HuntLinks keyword={huntKeyword(p)} shops={sellersOfBrand(p.brand).map((label) => ({ label, shop: shopIds.get(label) }))} />
                 </Line>
                 <Line k="產生連結時填">
                   <span className="mono" style={{ fontSize: 14 }}>
@@ -616,3 +690,92 @@ const code: React.CSSProperties = {
   fontFamily: "var(--font-mono), monospace", fontSize: "0.9em",
   background: "var(--sunken)", padding: "1px 5px", borderRadius: 3,
 };
+
+/* ------------------------------------------------------------------ */
+/* 找賣場：把「我要去哪一家找」變成一次點擊                              */
+/*                                                                    */
+/* 2026-09-18 Tim：「時間都浪費在，我去選哪一個店家有賣此商品。」        */
+/*                                                                    */
+/* 蝦皮的商品頁對程式回 403，我們不爬、也不用 Tim 的帳號自動點（那是他  */
+/* 唯一的收入來源，被判定異常就沒了）。能幫的是把「開哪一頁」先排好：   */
+/* 全站搜一次，再加上我們已經買過這個品牌的那幾家（有整條產品線的機率   */
+/* 最高）。Tim 只要開、挑、產生連結。                                   */
+/*                                                                    */
+/* 這些是蝦皮的「搜尋頁」，不是商品頁，也不是給讀者看的：/status 不對外、*/
+/* 不進搜尋引擎。讀者頁面一律只連分潤連結，那條規矩沒有變。             */
+/* ------------------------------------------------------------------ */
+
+/** 賣場名稱 → 蝦皮賣場編號（從連結健檢的 shopId/itemId 拿） */
+function shopIdsByLabel(): Map<string, string> {
+  type HealthRow = { url: string; item: string | null };
+  const byUrl = new Map((health.rows as HealthRow[]).map((r) => [r.url, r]));
+  const out = new Map<string, string>();
+  for (const p of catalog) {
+    for (const m of p.price.merchants) {
+      const shop = byUrl.get(m.affiliateUrl)?.item?.split("/")[0];
+      if (shop && !out.has(m.label)) out.set(m.label, shop);
+    }
+  }
+  return out;
+}
+
+function HuntLinks({ keyword, shops }: { keyword: string; shops: { label: string; shop?: string }[] }) {
+  const kw = encodeURIComponent(keyword);
+  const inShops = shops.filter((s) => s.shop).slice(0, 4);
+  return (
+    <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginTop: 8 }}>
+      <a href={`https://shopee.tw/search?keyword=${kw}`} target="_blank" rel="noopener noreferrer" style={huntBtn}>
+        蝦皮全站搜「{keyword}」
+      </a>
+      {inShops.map((s) => (
+        <a
+          key={s.label}
+          href={`https://shopee.tw/shop/${s.shop}/search?keyword=${kw}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          style={huntBtnSoft}
+        >
+          在 {s.label} 裡找
+        </a>
+      ))}
+    </div>
+  );
+}
+
+const huntBtn: React.CSSProperties = {
+  display: "inline-block", padding: "8px 16px", borderRadius: 999, fontSize: 13.5, fontWeight: 700,
+  background: "var(--accent)", color: "var(--accent-ink)", textDecoration: "none",
+};
+const huntBtnSoft: React.CSSProperties = {
+  display: "inline-block", padding: "8px 16px", borderRadius: 999, fontSize: 13.5, fontWeight: 600,
+  background: "var(--surface)", border: "1px solid var(--line)", color: "var(--ink)", textDecoration: "none",
+};
+
+/**
+ * 蝦皮搜尋用的字。
+ *
+ * 關鍵字長反而搜不到：蝦皮是逐詞比對，整串完整品名幾乎沒有賣場會照著打。
+ * 所以只留兩段：品牌的中文，加上最好認的那一段（型號優先，其次口味）。
+ * 「紐頓 T24」「皇家 A30+11」「愛肯拿 美膚羊肉」這種，搜得到的機率最高。
+ */
+function huntFrom(brand: string, name: string, searchAs?: string): string {
+  const CJK = /[一-鿿]+/;
+  // 品牌只取中文那一段：Hill's 希爾思 → 希爾思，ORIJEN 歐睿健（原渴望）→ 歐睿健
+  const zh = brand.match(CJK)?.[0] ?? brand.split(/\s+/)[0];
+  const model = name.match(/[A-Z]{1,3}\d{2,3}(?:\+\d+W?)?/)?.[0];
+  // 口味那一段：跳過英文字和品牌本身，有肉的那一段優先，再把「全貓配方」這種尾巴切掉
+  const MEAT = /(羊|鴨|鮭|鱒|鯖|鮪|鱈|雞|牛|鹿|魚|豬|鵪鶉)/;
+  const tokens = (searchAs ?? name)
+    .split(/[\s+＋（()]/)
+    .map((t) => t.trim())
+    .filter((t) => CJK.test(t) && !zh.includes(t) && !t.includes(zh));
+  const flavor = (tokens.find((t) => MEAT.test(t)) ?? tokens[0])
+    ?.replace(/(全貓|全犬|成貓|成犬|幼貓|幼犬|老貓|高齡|挑嘴|配方|專用).*$/, "")
+    .slice(0, 6);
+  const tail = model ?? flavor ?? "";
+  return `${zh} ${tail}`.trim();
+}
+
+function huntKeyword(p: Product): string {
+  return huntFrom(p.brand, p.name, p.searchAs);
+}

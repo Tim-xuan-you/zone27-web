@@ -5,6 +5,7 @@
     "method": "成分照台灣代理商的中文標示或品牌台灣官網，排序照原文。每一款的來源記在 refs，只給我們自己核對，網站上不顯示、不連出去。指名道姓的，寫錯就是我們的責任：只收看得到完整成分表的，只有搜尋摘要的不收（紐頓 T28、貓侍這次就沒收）。",
     "proteins": "跟商品資料的 proteinSources 同一套寫法。有雞、有雞油、沒寫清楚、沒有雞，由 lib/chicken.ts 的 chickenStatusOf 從 proteins 和 found 算，不手寫。",
     "promote": "Tim 給了分潤連結，就把它補成完整商品（CSV），這裡那一筆刪掉，避免同一款出現兩次。",
+    "planId": "沒有雞、值得補連結的那幾款，先把未來的商品編號排好，Tim 產生連結時 Sub id 才填得下去（維護台會顯示）。",
     "checkedAt": "2026-09-13"
   },
   "items": [
@@ -77,6 +78,7 @@
     },
     {
       "id": "ck-05",
+      "planId": "cf-16",
       "species": "cat",
       "form": "dry",
       "brand": "Nutram 紐頓",
@@ -111,6 +113,7 @@
     },
     {
       "id": "ck-07",
+      "planId": "cf-19",
       "species": "cat",
       "form": "dry",
       "brand": "Mobby 莫比",
@@ -175,6 +178,7 @@
     },
     {
       "id": "ck-11",
+      "planId": "cf-17",
       "species": "cat",
       "form": "dry",
       "brand": "Instinct 原點",
@@ -209,6 +213,7 @@
     },
     {
       "id": "ck-13",
+      "planId": "cf-18",
       "species": "cat",
       "form": "dry",
       "brand": "Instinct 原點",
@@ -225,6 +230,7 @@
     },
     {
       "id": "ck-14",
+      "planId": "df-16",
       "species": "dog",
       "form": "dry",
       "brand": "Blackwood 柏萊富",
