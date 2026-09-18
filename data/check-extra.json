@@ -94,25 +94,6 @@
       "refs": [{ "label": "台灣通路的代理商中文標示", "url": "https://shop.petpark.com.tw/20616496" }]
     },
     {
-      "id": "ck-07",
-      "planId": "cf-19",
-      "species": "cat",
-      "form": "dry",
-      "brand": "Mobby 莫比",
-      "name": "愛貓無穀配方 鱒魚＋馬鈴薯",
-      "alias": "莫比 鱒魚 馬鈴薯",
-      "proteins": ["fish", "salmon"],
-      "found": [
-        "第 1 項：鱒魚",
-        "第 2 項：海魚茸",
-        "第 8 項：煙燻鮭魚",
-        "油脂：菜籽油",
-        "香料只寫「天然香料」，沒寫來源"
-      ],
-      "verdict": "肉全部是魚，油脂用菜籽油。",
-      "refs": [{ "label": "台灣通路的代理商中文標示", "url": "https://hocom.tw/h/ProductDetail?key=6129189082&productId=11740" }]
-    },
-    {
       "id": "ck-08",
       "species": "cat",
       "form": "dry",

@@ -10,27 +10,32 @@
   },
   "targets": [
     {
-      "id": "cf-19",
-      "label": "Mobby 莫比 愛貓無穀配方 鱒魚＋馬鈴薯",
-      "why": "查藏雞頁「沒有雞」的一款，價格帶比原點低很多",
-      "candidates": [
-        { "shop": "毛貓寵（蝦皮商城）", "shopId": "327771748", "known": true, "price": 653, "unit": "1.5kg（超取限 3 包）", "url": "https://shopee.tw/product/327771748/22434552966" },
-        { "shop": "肥貓粉絲團（蝦皮商城）", "shopId": "869025867", "known": true, "price": 779, "unit": "1.5kg", "url": "https://shopee.tw/product/869025867/27941107981" },
-        { "shop": "新威寵物百貨商城", "shopId": "90002566", "price": 471, "unit": "1.5kg", "url": "https://shopee.tw/product/90002566/1506371651" }
-      ],
-      "failed": [
-        { "shop": "71小舖 寵物館", "reason": "產不出連結，賣場沒參加分潤", "at": "2026-09-18" },
-        { "shop": "汎美力寵物生活百貨", "reason": "產不出連結，賣場沒參加分潤", "at": "2026-09-18" }
-      ]
-    },
-    {
       "id": "cf-12",
       "label": "Royal Canin 皇家 老貓 A30+11（備援）",
       "why": "現在只有一家在賣，而且只剩 2 包。賣完老貓乾糧就沒地方買",
       "candidates": [
-        { "shop": "肥貓粉絲團（蝦皮商城）", "shopId": "869025867", "known": true, "price": 1080, "unit": "2kg", "url": "https://shopee.tw/product/869025867/21151568984" },
-        { "shop": "Royal Canin 法國皇家官方旗艦館（蝦皮商城）", "shopId": "1525532445", "price": 1080, "unit": "2kg", "url": "https://shopee.tw/product/1525532445/46804619641" },
-        { "shop": "汎美力寵物生活百貨", "shopId": "379863203", "price": 975, "unit": "2kg", "url": "https://shopee.tw/product/379863203/50857271537" }
+        {
+          "shop": "肥貓粉絲團（蝦皮商城）",
+          "shopId": "869025867",
+          "known": true,
+          "price": 1080,
+          "unit": "2kg",
+          "url": "https://shopee.tw/product/869025867/21151568984"
+        },
+        {
+          "shop": "Royal Canin 法國皇家官方旗艦館（蝦皮商城）",
+          "shopId": "1525532445",
+          "price": 1080,
+          "unit": "2kg",
+          "url": "https://shopee.tw/product/1525532445/46804619641"
+        },
+        {
+          "shop": "汎美力寵物生活百貨",
+          "shopId": "379863203",
+          "price": 975,
+          "unit": "2kg",
+          "url": "https://shopee.tw/product/379863203/50857271537"
+        }
       ]
     },
     {
@@ -39,12 +44,30 @@
       "why": "查藏雞頁「沒有雞」的一款。同牌子的鴨肉第 3 項就是雞肉粉",
       "note": "比價站上有賣的都不是我們用過的賣場，Tim 試過的三家也都產不出連結。先放著，等哪天在分潤後台搜得到再補。",
       "candidates": [
-        { "shop": "Instinct 原點旗艦店（官方直營）", "shopId": "234961811", "price": 4590, "unit": "10磅", "url": "https://shopee.tw/product/234961811/12860610874" }
+        {
+          "shop": "Instinct 原點旗艦店（官方直營）",
+          "shopId": "234961811",
+          "price": 4590,
+          "unit": "10磅",
+          "url": "https://shopee.tw/product/234961811/12860610874"
+        }
       ],
       "failed": [
-        { "shop": "美狗貓原點皇極/第一饗宴/黑鷹/卡格專賣店", "reason": "產不出連結，賣場沒參加分潤", "at": "2026-09-18" },
-        { "shop": "東東中永和最便宜寵物食品用品店", "reason": "產不出連結，賣場沒參加分潤", "at": "2026-09-18" },
-        { "shop": "rose30611", "reason": "產不出連結，賣場沒參加分潤", "at": "2026-09-18" }
+        {
+          "shop": "美狗貓原點皇極/第一饗宴/黑鷹/卡格專賣店",
+          "reason": "產不出連結，賣場沒參加分潤",
+          "at": "2026-09-18"
+        },
+        {
+          "shop": "東東中永和最便宜寵物食品用品店",
+          "reason": "產不出連結，賣場沒參加分潤",
+          "at": "2026-09-18"
+        },
+        {
+          "shop": "rose30611",
+          "reason": "產不出連結，賣場沒參加分潤",
+          "at": "2026-09-18"
+        }
       ]
     },
     {

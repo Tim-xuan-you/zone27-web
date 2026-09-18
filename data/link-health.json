@@ -1,6 +1,6 @@
 {
   "checkedAt": "2026-09-18",
-  "total": 91,
+  "total": 94,
   "bad": 0,
   "rows": [
     {
@@ -910,6 +910,45 @@
       "status": 200,
       "finalUrl": "https://shopee.tw/opaanlp/145808869/3933074077",
       "item": "145808869/3933074077",
+      "verdict": "ok",
+      "note": ""
+    },
+    {
+      "productId": "cf-19",
+      "brand": "Mobby 莫比",
+      "name": "愛貓無穀配方 鱒魚＋馬鈴薯",
+      "merchantId": "m1",
+      "label": "新威寵物百貨商城",
+      "url": "https://s.shopee.tw/AAHG7u95fd",
+      "status": 200,
+      "finalUrl": "https://shopee.tw/opaanlp/90002566/1506371651",
+      "item": "90002566/1506371651",
+      "verdict": "ok",
+      "note": ""
+    },
+    {
+      "productId": "cf-19",
+      "brand": "Mobby 莫比",
+      "name": "愛貓無穀配方 鱒魚＋馬鈴薯",
+      "merchantId": "m2",
+      "label": "新威寵物百貨商城",
+      "url": "https://s.shopee.tw/AAHG7u95fd",
+      "status": 200,
+      "finalUrl": "https://shopee.tw/opaanlp/90002566/1506371651",
+      "item": "90002566/1506371651",
+      "verdict": "ok",
+      "note": ""
+    },
+    {
+      "productId": "cf-19",
+      "brand": "Mobby 莫比",
+      "name": "愛貓無穀配方 鱒魚＋馬鈴薯",
+      "merchantId": "m3",
+      "label": "新威寵物百貨商城",
+      "url": "https://s.shopee.tw/AAHG7u95fd",
+      "status": 200,
+      "finalUrl": "https://shopee.tw/opaanlp/90002566/1506371651",
+      "item": "90002566/1506371651",
       "verdict": "ok",
       "note": ""
     },
