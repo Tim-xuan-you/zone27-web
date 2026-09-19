@@ -68,6 +68,16 @@
             "affiliateUrl": "https://s.shopee.tw/8fSTtqgg8S?share_channel_code=6",
             "anchor": "safe",
             "checkedAt": "2026-09-19"
+          },
+          {
+            "id": "m2",
+            "label": "貓日常 Cat's Daily（蝦皮商城）",
+            "unit": "7L",
+            "amount": 179,
+            "note": "單包賣場，規格選「原味」",
+            "affiliateUrl": "https://s.shopee.tw/905KISfPSY?share_channel_code=6",
+            "anchor": "value",
+            "checkedAt": "2026-09-19"
           }
         ]
       }

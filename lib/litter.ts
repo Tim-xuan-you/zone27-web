@@ -1,4 +1,5 @@
 import type { Merchant, Price } from "./types";
+import { dedupeMerchants } from "./engine";
 import litter from "../data/cat-litter.json";
 
 /**
@@ -163,7 +164,8 @@ export function unitPriceOf(p: LitterProduct, m: Merchant): { n: number; unit: s
 }
 
 /** 還買得到的賣場 */
-export const liveOf = (p: LitterProduct): Merchant[] => p.price.merchants.filter((m) => !m.dead);
+export const liveOf = (p: LitterProduct): Merchant[] =>
+  dedupeMerchants(p.price.merchants.filter((m) => !m.dead));
 export const buyableLitter = (p: LitterProduct): boolean => liveOf(p).length > 0;
 
 /**
@@ -178,19 +180,17 @@ export const buyableLitter = (p: LitterProduct): boolean => liveOf(p).length > 0
 export function anchorLitter(p: LitterProduct): Merchant | undefined {
   const live = liveOf(p);
   if (live.length === 0) return undefined;
-  const cheapest = live.reduce((a, b) => (a.amount <= b.amount ? a : b));
-  /* 同一家店常常一包 $250、十包 $1,900。十包每公斤最便宜，
-     但沒人會為了省每公斤幾塊錢，第一次就搬二十五公斤回家。
-     所以主按鈕只在「不超過最便宜那個三倍」的範圍裡挑，
-     更划算的整箱價照樣列在下面，而且會把一個月省多少算出來。 */
-  const reach = live.filter((m) => m.amount <= cheapest.amount * BULK_CAP);
-  const pool = reach.length > 0 ? reach : live;
-  return pool.reduce((best, m) => {
+  /* 一度改成「不超過最便宜那個三倍」，想避免叫人第一次就搬二十五公斤回家。
+     結果是錯的：艾可在一家店六包 $768（一個月 $329），另一家單包 $179（一個月 $460），
+     六包被那條規則擋掉之後，整站就變成用 $460 幫艾可排名，
+     還會排到比較貴的混合砂後面 —— 多了一個便宜的小包裝，反而讓這款看起來變貴。
+
+     所以回到最單純的那條：一個月最便宜的就是它。
+     整箱的價錢會嚇到人是真的，解法是把買法全部列在按鈕下面、
+     每一種都標「一個月多多少」，不是偷偷換一個比較貴的答案。 */
+  return live.reduce((best, m) => {
     const a = monthlyCost(p, m)?.cost, b = monthlyCost(p, best)?.cost;
     if (a !== undefined && b !== undefined) return a < b ? m : best;
     return m.amount < best.amount ? m : best;
   });
 }
-
-/** 主按鈕最多可以是最便宜那個選項的幾倍 */
-export const BULK_CAP = 3;

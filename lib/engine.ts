@@ -87,7 +87,26 @@ export function liveMerchants(p: Product): Merchant[] {
   const live = p.price.merchants.filter((m) => !m.dead);
   // 全死了就回原陣列，讓上層自己判斷要不要整款拿掉；
   // 這裡回空陣列會讓一堆 [0] 變成 undefined，反而更難查。
-  return live.length > 0 ? live : p.price.merchants;
+  return dedupeMerchants(live.length > 0 ? live : p.price.merchants);
+}
+
+/**
+ * 同一家、同規格、同價錢的連結，畫面上只出現一次。
+ *
+ * 連結永遠不刪：同一款同一家常常會有第二條、第三條（換賣場頁、重產連結）。
+ * 那幾條留在資料裡當備援是對的，但讀者看到「蝦皮直營 $828」連著出現兩次
+ * 只會以為網站壞了。留最前面那一條 —— 資料的順序就是新的在前。
+ *
+ * 只比對家、規格、價錢，所以不會影響任何算價：被拿掉的那幾條跟留下的一模一樣。
+ */
+export function dedupeMerchants(ms: Merchant[]): Merchant[] {
+  const seen = new Set<string>();
+  return ms.filter((m) => {
+    const key = `${m.label}|${m.unit ?? ""}|${m.amount}`;
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
 }
 
 /** 這款還有沒有地方買 */
