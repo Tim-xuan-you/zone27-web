@@ -13,6 +13,60 @@
   },
   "targets": [
     {
+      "id": "cl-08",
+      "label": "Sanicat 強力凝結礦砂（貓砂第二批）",
+      "why": "礦砂裡粉塵評價比較好的一款",
+      "note": "比價站在蝦皮查不到這個牌子，可能沒進台灣蝦皮。先放著，礦砂已經有藍鑽撐著。",
+      "candidates": []
+    },
+    {
+      "id": "cl-05",
+      "label": "Honeycare 吸水釋香魔法豆腐砂（貓砂第二批）",
+      "why": "有香味的代表款，用來對照「不要香味」那個條件",
+      "note": "比價站只查到蝦皮直營一家 2.75kg $279，而且已下架。等它回來再說。",
+      "candidates": [
+        {
+          "shop": "蝦皮直營（官方直營）",
+          "shopId": "50662979",
+          "known": true,
+          "soldOut": "2026-09-19 查：已下架",
+          "price": 279,
+          "unit": "2.75kg",
+          "url": "https://shopee.tw/product/50662979/48113930645"
+        }
+      ]
+    },
+    {
+      "id": "cl-02",
+      "label": "艾可 ECO 豆腐貓砂（貓砂第二批）",
+      "why": "豆腐砂裡最便宜的一款，一包 7L 一百多。最便宜那家就是你產過臭味滾的寵物執行長",
+      "candidates": [
+        {
+          "shop": "寵物執行長（蝦皮商城）",
+          "shopId": "3347166",
+          "known": true,
+          "price": 128,
+          "unit": "條狀 7L 原味",
+          "url": "https://shopee.tw/product/3347166/1150606904"
+        },
+        {
+          "shop": "TNA 悠遊寵物 官方旗艦店",
+          "shopId": "325742451",
+          "price": 129,
+          "unit": "7L 原味",
+          "url": "https://shopee.tw/product/325742451/3195203710"
+        },
+        {
+          "shop": "貓日常 Cat's Daily（蝦皮商城）",
+          "shopId": "145808869",
+          "known": true,
+          "price": 179,
+          "unit": "7L 單包",
+          "url": "https://shopee.tw/product/145808869/2772032128"
+        }
+      ]
+    },
+    {
       "id": "cl-04",
       "label": "屋哩 Wuli 雙生稻殼豆腐砂（貓砂第二批）",
       "why": "稻殼加豆腐，全植物所以可以沖，跟 pidan 混合砂剛好對照",
