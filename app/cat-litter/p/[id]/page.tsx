@@ -68,7 +68,7 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
             ${m.amount.toLocaleString()}
             <span style={{ fontSize: 14, color: "var(--muted)", fontWeight: 500, marginLeft: 10 }}>
               {/* 整組賣的要寫整組（1.25kg×8），不然 $792 配 1.25kg 會看成一包的價 */}
-              {m.unit || p.price.unit}{per ? ` · ${per.n}/${per.unit}` : ""}
+              {m.unit || p.price.unit}{per ? ` · $${per.n}/${per.unit}` : ""}
             </span>
           </p>
           {month && (

@@ -19,7 +19,19 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
-  const live = litters.filter(buyableLitter).length;
+  /*
+   * 2026-09-19 手機走一次發現的：14 款混在一起，有 9 款點進去是「還沒有連結」。
+   * 讀者一路滑過去一直碰壁，會以為這站沒東西。
+   * 所以能買的排前面、照一個月多少錢由便宜排到貴（貓砂是消耗品，月花費就是他的決策軸），
+   * 只有資料的收進下面點開才看得到 —— 資料還在，只是不擋路。
+   */
+  const cost = (p: (typeof litters)[number]) => {
+    const m = anchorLitter(p);
+    return m ? monthlyCost(p, m)?.cost ?? Infinity : Infinity;
+  };
+  const buyable = litters.filter(buyableLitter).sort((a, b) => cost(a) - cost(b));
+  const dataOnly = litters.filter((p) => !buyableLitter(p));
+  const live = buyable.length;
   const flushOk = litters.filter((p) => p.spec.flushable === "limited").length;
   const gap = litters.filter((p) => p.spec.flushClaim === "yes" && p.spec.flushable === "no").length;
 
@@ -45,13 +57,13 @@ export default function Page() {
         </p>
       </Link>
 
-      <p style={lbl}>我們讀過的 {litters.length} 款</p>
+      <p style={lbl}>可以買的 {buyable.length} 款，便宜的排前面</p>
       <p style={{ margin: "0 0 16px", fontSize: 14.5, color: "var(--muted)", lineHeight: 1.9 }}>
         材質照包裝與品牌官網。能不能沖馬桶是我們照材質判的，不是照文案抄的。
         {live === 0 && " 購買連結還在補，補好了每一款下面就會出現。"}
       </p>
 
-      {litters.map((p) => {
+      {buyable.map((p) => {
         const f = FLUSH[p.spec.flushable];
         const m = anchorLitter(p);
         const per = m ? unitPriceOf(p, m) : null;
@@ -92,6 +104,33 @@ export default function Page() {
         );
       })}
 
+      {dataOnly.length > 0 && (
+        <details style={moreBox}>
+          <summary style={moreSummary}>
+            另外 {dataOnly.length} 款只讀了資料，還沒有購買連結
+          </summary>
+          <p style={{ margin: "10px 0 4px", fontSize: 13.5, color: "var(--muted)", lineHeight: 1.85 }}>
+            材質、能不能沖馬桶都查得到，只是我們還沒有這幾款的購買連結，所以不放連結。
+          </p>
+          {dataOnly.map((p) => {
+            const f = FLUSH[p.spec.flushable];
+            return (
+              <Link key={p.id} href={`/cat-litter/p/${p.id}`} style={row}>
+                <span style={{ minWidth: 0 }}>
+                  <span style={{ display: "block", fontSize: 12.5, color: "var(--muted)" }}>{p.brand}</span>
+                  <span style={{ display: "block", fontWeight: 700, lineHeight: 1.5 }}>{p.name}</span>
+                  <span style={{ display: "flex", gap: 8, flexWrap: "wrap", alignItems: "center", marginTop: 6 }}>
+                    <span style={{ fontSize: 12, color: f.fg, background: f.bg, borderRadius: 6, padding: "2px 8px" }}>{f.zh}</span>
+                    <span style={{ fontSize: 12.5, color: "var(--muted)" }}>{MATERIAL_ZH[p.spec.material]}</span>
+                  </span>
+                </span>
+                <span aria-hidden style={{ color: "var(--faint)" }}>›</span>
+              </Link>
+            );
+          })}
+        </details>
+      )}
+
       <div style={{ marginTop: 30 }}>
         <Share path="/cat-litter" text="貓砂的「可沖馬桶」有的沖了會塞，這裡照材質一款一款判：" label="把這頁傳給朋友" />
       </div>
@@ -117,6 +156,10 @@ const featureTitle: React.CSSProperties = {
   fontFamily: "var(--font-serif), serif", fontSize: 20, margin: "0 0 8px", lineHeight: 1.5,
 };
 const featureBody: React.CSSProperties = { margin: 0, fontSize: 15, color: "var(--muted)", lineHeight: 1.85 };
+const moreBox: React.CSSProperties = {
+  marginTop: 22, background: "var(--sunken)", border: "1px solid var(--line)", borderRadius: 14, padding: "14px 18px",
+};
+const moreSummary: React.CSSProperties = { cursor: "pointer", fontSize: 14.5, fontWeight: 700, color: "var(--muted)" };
 const row: React.CSSProperties = {
   display: "flex", justifyContent: "space-between", alignItems: "center", gap: 12,
   padding: "14px 0", borderBottom: "1px solid var(--line)", textDecoration: "none", color: "inherit",
