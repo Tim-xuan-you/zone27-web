@@ -52,19 +52,19 @@ export default function CheapestCard({ species, form }: { species: Species; form
               <span style={{ minWidth: 0 }}>
                 <span style={{ display: "block", fontSize: 12.5, color: "var(--muted)" }}>{p.brand}</span>
                 <span style={{ display: "block", fontWeight: 700, lineHeight: 1.5 }}>{p.name}</span>
-                <span style={{ fontSize: 12, color: st.fg, background: st.bg, borderRadius: 6, padding: "2px 7px", display: "inline-block", marginTop: 5 }}>
+                <span style={{ fontSize: 12.5, color: st.fg, background: st.bg, borderRadius: 8, padding: "2px 7px", display: "inline-block", marginTop: 5 }}>
                   {st.zh}
                 </span>
               </span>
               <span className="mono" style={{ whiteSpace: "nowrap", fontSize: 14 }}>
                 <b>${per.n.toLocaleString()}</b>
-                <span style={{ color: "var(--faint)", fontSize: 12 }}>／{per.label.replace("每", "")}</span>
+                <span style={{ color: "var(--faint)", fontSize: 12.5 }}>／{per.label.replace("每", "")}</span>
                 <span aria-hidden style={{ color: "var(--faint)", marginLeft: 8 }}>›</span>
               </span>
             </Link>
           );
         })}
-        <p style={{ margin: "12px 0 0", fontSize: 13, color: "var(--faint)", lineHeight: 1.85 }}>
+        <p style={{ margin: "12px 0 0", fontSize: 12.5, color: "var(--faint)", lineHeight: 1.85 }}>
           便宜不代表適合你家那隻。點進去先看「這款什麼時候不要買」，再決定。
         </p>
       </div>
@@ -73,7 +73,7 @@ export default function CheapestCard({ species, form }: { species: Species; form
 }
 
 const lbl: React.CSSProperties = {
-  margin: "0 0 10px", fontSize: 13, fontWeight: 700, color: "var(--muted)", letterSpacing: ".06em",
+  margin: "0 0 10px", fontSize: 12.5, fontWeight: 700, color: "var(--muted)", letterSpacing: ".06em",
 };
 const box: React.CSSProperties = {
   background: "var(--surface)", border: "1px solid var(--line)", borderRadius: 14, padding: "6px 18px 16px",

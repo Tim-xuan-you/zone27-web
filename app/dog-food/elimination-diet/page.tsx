@@ -118,7 +118,7 @@ export default function Page() {
       <div style={{ ...box, borderColor: "var(--cut)", borderWidth: 2 }}>
         <p style={{
           margin: 0, fontFamily: "var(--font-serif), serif",
-          fontSize: 24, lineHeight: 1.55, fontWeight: 700,
+          fontSize: 22, lineHeight: 1.55, fontWeight: 700,
         }}>
           一直抓癢的狗裡，<br />
           只有大約 <span style={{ color: "var(--cut)" }}>18%</span> 是食物造成的。
@@ -225,7 +225,7 @@ export default function Page() {
           單一蛋白源讓<b>這次的結果可以用在下一次</b>。這就是為什麼我們的排序
           把它放得那麼重，因為它讓你學得到東西，跟高不高級沒關係。
         </p>
-        <p style={{ margin: "12px 0 0", fontSize: 14.5, color: "var(--muted)", lineHeight: 1.9 }}>
+        <p style={{ margin: "12px 0 0", fontSize: 14, color: "var(--muted)", lineHeight: 1.9 }}>
           我們目前能買到的 {live.length} 款裡，有 <b>{single.length} 款</b>是單一蛋白源。
           <Link href="/dog-food/hidden-chicken" style={{ color: "var(--accent)" }}>
             但商品名寫單一口味不代表成分表只有一種肉
@@ -261,8 +261,8 @@ export default function Page() {
       <p style={S.lbl}>要開始的話</p>
       <div style={S.landing}>
         <div>
-          <h2 style={{ margin: "0 0 6px", fontSize: 18 }}>講一句牠的狀況，我們刪給你看</h2>
-          <p style={{ margin: 0, fontSize: 15, color: "var(--muted)", lineHeight: 1.8 }}>
+          <h2 style={{ margin: "0 0 6px", fontSize: 20 }}>講一句牠的狀況，我們刪給你看</h2>
+          <p style={{ margin: 0, fontSize: 15.5, color: "var(--muted)", lineHeight: 1.8 }}>
             例如「柴犬五歲，一直抓癢，換過兩種雞肉飼料都沒改善」。
             我們會順便算哪個規格夠你跑完八週。
           </p>
@@ -280,7 +280,7 @@ export default function Page() {
 
       <footer style={{
         marginTop: 72, paddingTop: 28, borderTop: "1px solid var(--line)",
-        fontSize: 13, color: "var(--faint)", lineHeight: 1.9,
+        fontSize: 12.5, color: "var(--faint)", lineHeight: 1.9,
       }}>
         <p style={{ margin: 0 }}>
           這一頁整理自獸醫皮膚科與營養學的公開資料，是流程說明，不是診斷。
@@ -310,16 +310,16 @@ function Step({
             flexShrink: 0, width: 26, height: 26, borderRadius: 999,
             background: accent ? "var(--accent)" : "var(--accent-soft)",
             color: accent ? "var(--accent-ink)" : "var(--accent)",
-            fontSize: 13, fontWeight: 700,
+            fontSize: 12.5, fontWeight: 700,
             display: "flex", alignItems: "center", justifyContent: "center",
             marginTop: 2,
           }}
         >{n}</span>
         <div>
-          <p style={{ margin: "0 0 6px", fontSize: 16.5, fontWeight: 700, lineHeight: 1.6 }}>
+          <p style={{ margin: "0 0 6px", fontSize: 17, fontWeight: 700, lineHeight: 1.6 }}>
             {title}
           </p>
-          <p style={{ margin: 0, fontSize: 15, color: "var(--muted)", lineHeight: 1.95 }}>
+          <p style={{ margin: 0, fontSize: 15.5, color: "var(--muted)", lineHeight: 1.95 }}>
             {children}
           </p>
         </div>
@@ -335,7 +335,7 @@ function Box({ tone, children }: { tone: "keep" | "warn"; children: React.ReactN
   return (
     <div style={{
       ...c, border: "1px solid", borderRadius: 8,
-      padding: "14px 16px", fontSize: 14.5, lineHeight: 1.9, margin: "14px 0 0",
+      padding: "14px 16px", fontSize: 14, lineHeight: 1.9, margin: "14px 0 0",
     }}>{children}</div>
   );
 }

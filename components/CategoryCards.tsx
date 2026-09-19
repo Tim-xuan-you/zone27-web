@@ -33,10 +33,10 @@ export default function CategoryCards({ cats, short }: { cats: Category[]; short
                 {live ? `${ready} 款可以買` : "上架中"}
               </span>
             </div>
-            <p className="keep" style={{ margin: "10px 0 12px", fontSize: 15, color: "var(--muted)", lineHeight: 1.85 }}>
+            <p className="keep" style={{ margin: "10px 0 12px", fontSize: 15.5, color: "var(--muted)", lineHeight: 1.85 }}>
               {c.pitch}
             </p>
-            <p style={{ margin: 0, fontSize: 13, color: "var(--faint)", lineHeight: 1.8 }}>
+            <p style={{ margin: 0, fontSize: 12.5, color: "var(--faint)", lineHeight: 1.8 }}>
               {treat
                 ? `讀過 ${read} 款：一天可以給幾條、能不能當主食`
                 : litter
@@ -59,7 +59,7 @@ const grid: React.CSSProperties = {
 };
 const card: React.CSSProperties = {
   display: "block", background: "var(--surface)", border: "1px solid var(--line)",
-  borderRadius: 16, boxShadow: "var(--sh)", padding: "22px 22px 20px",
+  borderRadius: 14, boxShadow: "var(--sh)", padding: "22px 22px 20px",
   textDecoration: "none", color: "inherit",
 };
 const iconDot: React.CSSProperties = {

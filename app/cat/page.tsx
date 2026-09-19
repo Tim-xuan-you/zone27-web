@@ -77,12 +77,12 @@ const feature: React.CSSProperties = {
   textDecoration: "none", color: "inherit",
 };
 const kicker: React.CSSProperties = {
-  fontFamily: "var(--font-mono), monospace", fontSize: 12, fontWeight: 600,
+  fontFamily: "var(--font-mono), monospace", fontSize: 12.5, fontWeight: 600,
   letterSpacing: ".14em", color: "var(--faint)",
 };
 const featureTitle: React.CSSProperties = {
-  fontFamily: "var(--font-serif), serif", fontSize: 18.5, margin: "6px 0 8px", lineHeight: 1.5,
+  fontFamily: "var(--font-serif), serif", fontSize: 20, margin: "6px 0 8px", lineHeight: 1.5,
 };
 const featureBody: React.CSSProperties = {
-  margin: 0, fontSize: 14.5, color: "var(--muted)", lineHeight: 1.85,
+  margin: 0, fontSize: 14, color: "var(--muted)", lineHeight: 1.85,
 };

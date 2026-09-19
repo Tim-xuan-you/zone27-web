@@ -54,28 +54,28 @@ export default function HuntPicks({ id }: { id: string }) {
   ];
   return (
     <div style={{ marginTop: 12, paddingTop: 10, borderTop: "1px dashed var(--line)" }}>
-      <p style={{ margin: "0 0 2px", fontSize: 13, color: "var(--faint)", lineHeight: 1.8 }}>
+      <p style={{ margin: "0 0 2px", fontSize: 12.5, color: "var(--faint)", lineHeight: 1.8 }}>
         我查到的（{huntData._meta.checkedAt}），便宜的排前面。產不出連結的話跟我說是哪一家，我只擋這一款的那一家
       </p>
       {open.length > 0 && allMall && (
-        <p style={{ margin: "6px 0 0", fontSize: 13, color: "var(--warn)", lineHeight: 1.8 }}>
+        <p style={{ margin: "6px 0 0", fontSize: 12.5, color: "var(--warn)", lineHeight: 1.8 }}>
           這一款我只查到商城。商城通常貴一截，如果是這個牌子只在官方賣就沒辦法，不然再撈一次一般賣家
         </p>
       )}
       {t.note && (
-        <p style={{ margin: "6px 0 0", fontSize: 13.5, color: "var(--warn)", lineHeight: 1.8 }}>{t.note}</p>
+        <p style={{ margin: "6px 0 0", fontSize: 14, color: "var(--warn)", lineHeight: 1.8 }}>{t.note}</p>
       )}
       {open.length === 0 && (
-        <p style={{ margin: "8px 0 0", fontSize: 13.5, color: "var(--muted)", lineHeight: 1.8 }}>
+        <p style={{ margin: "8px 0 0", fontSize: 14, color: "var(--muted)", lineHeight: 1.8 }}>
           查到的都試過了。用上面「在（我們用過的賣場）裡找」那幾顆按鈕再碰碰運氣：同一家不同商品，開沒開分潤不一樣。
         </p>
       )}
       {open.map((c) => (
         <a key={c.url} href={c.url} target="_blank" rel="noopener noreferrer" style={row}>
           <span style={{ minWidth: 0 }}>
-            <b style={{ fontSize: 14.5 }}>{c.shop}</b>
+            <b style={{ fontSize: 14 }}>{c.shop}</b>
             {(c.known || (c.shopId && KNOWN_IDS.has(c.shopId))) && (
-              <span style={{ fontSize: 11.5, color: "var(--keep)", background: "var(--keep-soft)", borderRadius: 6, padding: "2px 7px", marginLeft: 8 }}>
+              <span style={{ fontSize: 12.5, color: "var(--keep)", background: "var(--keep-soft)", borderRadius: 8, padding: "2px 7px", marginLeft: 8 }}>
                 用過，產得出連結
               </span>
             )}
@@ -86,7 +86,7 @@ export default function HuntPicks({ id }: { id: string }) {
               {c.unit}{c.soldOut ? " · 上次看是售完的，先確認有沒有補貨" : ""}
             </span>
           </span>
-          <span className="mono" style={{ fontSize: 13.5, whiteSpace: "nowrap" }}>
+          <span className="mono" style={{ fontSize: 14, whiteSpace: "nowrap" }}>
             {c.price === null ? "看頁面" : "$" + c.price.toLocaleString()} ›
           </span>
         </a>
@@ -101,7 +101,7 @@ export default function HuntPicks({ id }: { id: string }) {
 }
 
 const chip: React.CSSProperties = {
-  fontSize: 11.5, borderRadius: 6, padding: "2px 7px", marginLeft: 8, whiteSpace: "nowrap",
+  fontSize: 12.5, borderRadius: 8, padding: "2px 7px", marginLeft: 8, whiteSpace: "nowrap",
 };
 const CH_STYLE: Record<Channel, React.CSSProperties> = {
   mall: { color: "var(--muted)", background: "var(--sunken)" },

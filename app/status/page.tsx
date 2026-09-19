@@ -208,7 +208,7 @@ export default function Page() {
         display: "flex", alignItems: "center", justifyContent: "space-between",
         gap: 14, padding: "28px 0 20px", borderBottom: "1px solid var(--line)", marginBottom: 36,
       }}>
-        <Link href="/" style={{ display: "flex", alignItems: "center", gap: 9, fontWeight: 900, fontSize: 16, color: "inherit", textDecoration: "none" }}>
+        <Link href="/" style={{ display: "flex", alignItems: "center", gap: 9, fontWeight: 900, fontSize: 17, color: "inherit", textDecoration: "none" }}>
           <span style={{ width: 9, height: 9, borderRadius: 2, background: "var(--accent)" }} />
           ZONE 27
         </Link>
@@ -222,7 +222,7 @@ export default function Page() {
       {todo.length === 0 ? (
         <div style={{ ...box, borderColor: "var(--keep)", background: "var(--keep-soft)" }}>
           <p style={{ margin: 0, fontSize: 17, fontWeight: 700 }}>今天沒事，可以關掉了</p>
-          <p style={{ margin: "8px 0 0", fontSize: 15, color: "var(--muted)", lineHeight: 1.85 }}>
+          <p style={{ margin: "8px 0 0", fontSize: 15.5, color: "var(--muted)", lineHeight: 1.85 }}>
             {catalog.length} 款、{rows.length} 條連結全部在期限內，最舊的一筆 {oldest} 天。
             另外 {idle.length} 款目前不會被推薦到，不用管。
           </p>
@@ -242,7 +242,7 @@ export default function Page() {
                 gap: 12, marginBottom: 14, flexWrap: "wrap",
               }}>
                 <h2 style={{ margin: 0, fontSize: 17, fontWeight: 700 }}>{label}</h2>
-                <span style={{ fontSize: 13, color: "var(--faint)" }}>{items.length} 條</span>
+                <span style={{ fontSize: 12.5, color: "var(--faint)" }}>{items.length} 條</span>
               </div>
               {items.map((r) => (
                 <div key={r.merchantId + r.productId} style={line}>
@@ -250,7 +250,7 @@ export default function Page() {
                     <span style={{ display: "block", fontSize: 12.5, color: "var(--muted)" }}>{r.brand}</span>
                     {r.name}
                   </div>
-                  <span className="mono" style={{ fontSize: 13, whiteSpace: "nowrap" }}>
+                  <span className="mono" style={{ fontSize: 12.5, whiteSpace: "nowrap" }}>
                     {r.unit} · ${r.amount}
                   </span>
                   <Chip {...LEVEL[r.level]}>{LEVEL[r.level].zh} {r.days} 天</Chip>
@@ -258,7 +258,7 @@ export default function Page() {
                     {r.impact.tier}{r.impact.picks > 0 ? ` · 主答案 ${r.impact.picks} 頁` : ""}
                   </Chip>
                   <a href={r.affiliateUrl} target="_blank" rel="noopener nofollow"
-                     style={{ color: "var(--accent)", fontSize: 13.5, whiteSpace: "nowrap" }}>
+                     style={{ color: "var(--accent)", fontSize: 14, whiteSpace: "nowrap" }}>
                     開連結 ↗
                   </a>
                 </div>
@@ -304,7 +304,7 @@ export default function Page() {
         <p style={{ margin: 0, fontSize: 17, fontWeight: 700 }}>
           全站 {cut.pages} 頁，平均只刪掉 {Math.round((1 - cut.avgKeep) * 100)}%
         </p>
-        <p style={{ margin: "10px 0 0", fontSize: 15, lineHeight: 1.9 }}>
+        <p style={{ margin: "10px 0 0", fontSize: 15.5, lineHeight: 1.9 }}>
           這個站的說服力來自「我們刪掉了什麼」。
           {cut.avgKeep > 0.7 ? (
             <>
@@ -315,7 +315,7 @@ export default function Page() {
             <>{" "}目前的排除幅度是合理的。</>
           )}
         </p>
-        <p style={{ margin: "10px 0 0", fontSize: 15, color: "var(--muted)", lineHeight: 1.9 }}>
+        <p style={{ margin: "10px 0 0", fontSize: 15.5, color: "var(--muted)", lineHeight: 1.9 }}>
           原因是選品全部同一種：低敏、單一蛋白、無穀、全齡。它們之間沒有對比，
           所以任何規則都刪不掉東西。<b style={{ color: "var(--ink)" }}>
           下一批該補的，反而是會被刪掉的那種。</b>
@@ -333,7 +333,7 @@ export default function Page() {
             <span className="mono" style={{ minWidth: 48, fontWeight: 700 }}>{r.catches} 款</span>
             <span style={{ flex: 1, minWidth: 160 }}>{r.rule}</span>
             {r.catches === 0 && (
-              <span style={{ fontSize: 13, color: "var(--muted)", flexBasis: "100%" }}>
+              <span style={{ fontSize: 12.5, color: "var(--muted)", flexBasis: "100%" }}>
                 要補：{r.need}
               </span>
             )}
@@ -358,7 +358,7 @@ export default function Page() {
           <li><b>產不出連結是「那一款」的事，不是整家的事。</b>賣家可以只幫部分商品開分潤（2026-09-19 驗證：小BU 其他商品產得出來，只有 pidan 那一款不行）。跟商城、優選、官方旗艦館也無關，皇家官方旗艦館一樣產不出來。所以我只擋「那一款 × 那一家」，同一家在別款照樣列。最快的驗法是在分潤後台搜商品，列得出來的才產得出連結。</li>
           <li><b>費率不用挑。</b>蝦皮的費率隨商品、活動、賣家加碼和創作者分級在變，以商品頁當下顯示的為準，我們也不寫在讀者看得到的地方。能控制的只有「他會不會買」。</li>
         </ul>
-        <p style={{ margin: "12px 0 0", fontSize: 13, color: "var(--faint)", lineHeight: 1.85 }}>
+        <p style={{ margin: "12px 0 0", fontSize: 12.5, color: "var(--faint)", lineHeight: 1.85 }}>
           依蝦皮幫助中心「分潤計畫用戶如何賺取分潤金」與聯盟計畫約定條款（2026-09-18 查）。條款另有規定：禁止機器人與自動抓取、禁止自購，違反可立即終止，所以我們不自動操作你的帳號。
         </p>
       </div>
@@ -373,8 +373,8 @@ export default function Page() {
             {rest.map((t) => (
               <div key={t.id} style={box}>
                 <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", gap: 12, flexWrap: "wrap" }}>
-                  <b style={{ fontSize: 16.5 }}>{t.label}</b>
-                  <span className="mono" style={{ fontSize: 13, color: "var(--faint)" }}>{t.id}</span>
+                  <b style={{ fontSize: 17 }}>{t.label}</b>
+                  <span className="mono" style={{ fontSize: 12.5, color: "var(--faint)" }}>{t.id}</span>
                 </div>
                 <p style={{ margin: "6px 0 0", fontSize: 14, color: "var(--muted)", lineHeight: 1.85 }}>{t.why}</p>
                 <div style={{ marginTop: 10, paddingTop: 10, borderTop: "1px solid var(--line)" }}>
@@ -394,7 +394,7 @@ export default function Page() {
       {thin.length > 0 && (
         <>
           <H>只剩一家在賣（{thin.length} 款）</H>
-          <p style={{ margin: "0 0 14px", fontSize: 14.5, color: "var(--muted)", lineHeight: 1.9 }}>
+          <p style={{ margin: "0 0 14px", fontSize: 14, color: "var(--muted)", lineHeight: 1.9 }}>
             那一家賣完，這一款在網站上就沒地方買。補第二家最快的方法，是回同一個品牌我們買過的賣場找。{thinAll.length > thin.length ? ` 另外還有 ${thinAll.length - thin.length} 款也只有一家，但目前的情況推不到它們，先不用管。` : ""}
           </p>
           {thin.map((p) => (
@@ -402,9 +402,9 @@ export default function Page() {
               <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", gap: 12, flexWrap: "wrap" }}>
                 <div>
                   <span style={{ fontSize: 12.5, color: "var(--muted)", display: "block" }}>{p.brand}</span>
-                  <b style={{ fontSize: 16.5 }}>{p.name}</b>
+                  <b style={{ fontSize: 17 }}>{p.name}</b>
                 </div>
-                <span className="mono" style={{ fontSize: 13, color: "var(--faint)" }}>
+                <span className="mono" style={{ fontSize: 12.5, color: "var(--faint)" }}>
                   {p.id}{picks.get(p.id) ? ` · 被推薦 ${picks.get(p.id)} 次` : ""}
                 </span>
               </div>
@@ -426,7 +426,7 @@ export default function Page() {
       {noChicken.length > 0 && (
         <>
           <H>查藏雞頁沒有雞、但我們沒連結（{noChicken.length} 款）</H>
-          <p style={{ margin: "0 0 14px", fontSize: 14.5, color: "var(--muted)", lineHeight: 1.9 }}>
+          <p style={{ margin: "0 0 14px", fontSize: 14, color: "var(--muted)", lineHeight: 1.9 }}>
             這幾款我們讀過成分表、確定沒有雞，但沒有連結，所以只能看不能買。
             對雞過敏的人最想買的就是這幾包。連結一到就補成完整商品，裁決器也會開始推。
           </p>
@@ -435,9 +435,9 @@ export default function Page() {
               <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", gap: 12, flexWrap: "wrap" }}>
                 <div>
                   <span style={{ fontSize: 12.5, color: "var(--muted)", display: "block" }}>{x.brand}</span>
-                  <b style={{ fontSize: 16.5 }}>{x.name}</b>
+                  <b style={{ fontSize: 17 }}>{x.name}</b>
                 </div>
-                <span className="mono" style={{ fontSize: 13, color: "var(--faint)" }}>{x.id} → {x.planId}</span>
+                <span className="mono" style={{ fontSize: 12.5, color: "var(--faint)" }}>{x.id} → {x.planId}</span>
               </div>
               <div style={{ marginTop: 12, paddingTop: 12, borderTop: "1px solid var(--line)" }}>
                 {x.huntNote && (
@@ -463,7 +463,7 @@ export default function Page() {
         <p style={ok}>沒有。選好的都上架了。</p>
       ) : (
         <>
-          <p style={{ margin: "0 0 14px", fontSize: 15, color: "var(--muted)", lineHeight: 1.9 }}>
+          <p style={{ margin: "0 0 14px", fontSize: 15.5, color: "var(--muted)", lineHeight: 1.9 }}>
             規格、成分、文案都寫好了，<b style={{ color: "var(--ink)" }}>只差分潤連結</b>。
             照下面的關鍵字去蝦皮找賣家，產生連結時把 Sub_id 填上，
             再把那一行貼進 <code style={code}>data/paste.txt</code>，跑 <code style={code}>npm run data:paste</code>。
@@ -473,13 +473,13 @@ export default function Page() {
               <p style={{ margin: "0 0 12px", fontSize: 17, fontWeight: 700 }}>
                 {g.cat.zh}：{g.items.length} 款
                 {g.ready < MIN_LIVE && (
-                  <span style={{ fontSize: 14.5, fontWeight: 600, color: "var(--accent)", marginLeft: 10 }}>
+                  <span style={{ fontSize: 14, fontWeight: 600, color: "var(--accent)", marginLeft: 10 }}>
                     再補 {MIN_LIVE - g.ready} 款就開張
                   </span>
                 )}
               </p>
               {g.ready < MIN_LIVE && (
-                <p style={{ margin: "0 0 14px", fontSize: 14.5, color: "var(--muted)", lineHeight: 1.9 }}>
+                <p style={{ margin: "0 0 14px", fontSize: 14, color: "var(--muted)", lineHeight: 1.9 }}>
                   能推薦的款數到 {MIN_LIVE}，{g.cat.zh}的裁決器、長尾頁、分享卡會在下一次部署自己打開。
                   清單已經照「補了之後會被推薦幾頁」排好，從最上面開始補最划算。
                 </p>
@@ -489,9 +489,9 @@ export default function Page() {
               <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", gap: 12, flexWrap: "wrap" }}>
                 <div>
                   <span style={{ fontSize: 12.5, color: "var(--muted)", display: "block" }}>{p.brand}</span>
-                  <b style={{ fontSize: 16.5 }}>{p.name}</b>
+                  <b style={{ fontSize: 17 }}>{p.name}</b>
                 </div>
-                <span className="mono" style={{ fontSize: 13, color: "var(--faint)" }}>
+                <span className="mono" style={{ fontSize: 12.5, color: "var(--faint)" }}>
                   {p.id}{picks.get(p.id) ? ` · 補了會被推薦 ${picks.get(p.id)} 次` : " · 目前的情況都輪不到它"}
                 </span>
               </div>
@@ -560,13 +560,13 @@ export default function Page() {
       )}
 
       <H>貓砂、零食還沒有連結的（{nonFoodGaps.reduce((n, g) => n + g.items.length, 0)} 款）</H>
-      <p style={{ margin: "0 0 14px", fontSize: 14.5, color: "var(--muted)", lineHeight: 1.9 }}>
+      <p style={{ margin: "0 0 14px", fontSize: 14, color: "var(--muted)", lineHeight: 1.9 }}>
         這兩個類目不走飼料那套引擎，所以沒有「補了會被推薦幾次」可以排。
         順序就是資料的順序，從上面補下來就好。
       </p>
       {nonFoodGaps.map((g) => (
         <div key={g.zh} style={{ marginBottom: 10 }}>
-          <p style={{ margin: "0 0 8px", fontSize: 13, fontWeight: 700, color: "var(--muted)" }}>
+          <p style={{ margin: "0 0 8px", fontSize: 12.5, fontWeight: 700, color: "var(--muted)" }}>
             {g.zh}（{g.items.length} 款）
           </p>
           {g.items.length === 0 ? (
@@ -577,9 +577,9 @@ export default function Page() {
                 <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", gap: 12, flexWrap: "wrap" }}>
                   <div>
                     <span style={{ fontSize: 12.5, color: "var(--muted)", display: "block" }}>{p.brand}</span>
-                    <b style={{ fontSize: 16.5 }}>{p.name}</b>
+                    <b style={{ fontSize: 17 }}>{p.name}</b>
                   </div>
-                  <span className="mono" style={{ fontSize: 13, color: "var(--faint)" }}>{p.id}</span>
+                  <span className="mono" style={{ fontSize: 12.5, color: "var(--faint)" }}>{p.id}</span>
                 </div>
                 <div style={{ marginTop: 14, paddingTop: 14, borderTop: "1px solid var(--line)" }}>
                   <Line k="去蝦皮搜這個">
@@ -600,7 +600,7 @@ export default function Page() {
       ))}
 
       <H>只連到商城的（{mallOnly.length} 款）</H>
-      <p style={{ margin: "0 0 14px", fontSize: 14.5, color: "var(--muted)", lineHeight: 1.9 }}>
+      <p style={{ margin: "0 0 14px", fontSize: 14, color: "var(--muted)", lineHeight: 1.9 }}>
         商城有保障，但同一包常常貴一截。臭味滾 7L 商城 $223，一般賣家 $100。
         這幾款現在只連得到商城，只看價錢的讀者等於沒有選擇。
         補一家一般賣家或優選上去，網站會自動把兩種都列給讀者，便宜的排前面。
@@ -612,9 +612,9 @@ export default function Page() {
               <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", gap: 12, flexWrap: "wrap" }}>
                 <div>
                   <span style={{ fontSize: 12.5, color: "var(--muted)", display: "block" }}>{p.brand}</span>
-                  <b style={{ fontSize: 16.5 }}>{p.name}</b>
+                  <b style={{ fontSize: 17 }}>{p.name}</b>
                 </div>
-                <span className="mono" style={{ fontSize: 13, color: "var(--faint)" }}>{p.id}</span>
+                <span className="mono" style={{ fontSize: 12.5, color: "var(--faint)" }}>{p.id}</span>
               </div>
               <div style={{ marginTop: 14, paddingTop: 14, borderTop: "1px solid var(--line)" }}>
                 <Line k="現在連到">
@@ -648,11 +648,11 @@ export default function Page() {
 
       <H>先放著的（{later.length} 條）</H>
       <details>
-        <summary style={{ cursor: "pointer", fontSize: 14.5, color: "var(--muted)", padding: "6px 0" }}>
+        <summary style={{ cursor: "pointer", fontSize: 14, color: "var(--muted)", padding: "6px 0" }}>
           展開看全部
         </summary>
         <div style={{ overflowX: "auto", marginTop: 12 }}>
-          <table style={{ width: "100%", minWidth: 620, borderCollapse: "collapse", fontSize: 13.5 }}>
+          <table style={{ width: "100%", minWidth: 620, borderCollapse: "collapse", fontSize: 14 }}>
             <tbody>
               {later.map((r) => (
                 <tr key={r.merchantId + r.productId} style={{ borderTop: "1px solid var(--line)" }}>
@@ -727,7 +727,7 @@ function AllLinks() {
       <H>所有分潤連結（{urls} 條，{groups.length} 家賣場）</H>
       {unchecked.length > 0 && (
         <div style={{ ...box, borderColor: "var(--cut)", background: "var(--cut-soft)" }}>
-          <p style={{ margin: "0 0 8px", fontSize: 16, fontWeight: 700 }}>
+          <p style={{ margin: "0 0 8px", fontSize: 17, fontWeight: 700 }}>
             這 {unchecked.length} 家的名字還沒跟你核對
           </p>
           <p style={{ margin: "0 0 10px", fontSize: 14, lineHeight: 1.85 }}>
@@ -735,7 +735,7 @@ function AllLinks() {
             讀者會拿這個名字去蝦皮搜，錯一個字就找不到。點下面那家的「點開看」，對一下賣場名稱，
             跟 Claude 說「都對」或哪一家要改。
           </p>
-          <ul style={{ ...ul, fontSize: 14.5 }}>
+          <ul style={{ ...ul, fontSize: 14 }}>
             {unchecked.map((g) => (
               <li key={g.label}>
                 <b>{g.label}</b>
@@ -748,8 +748,8 @@ function AllLinks() {
         </div>
       )}
       <div id="links" style={{ ...box, borderColor: "var(--warn)", background: "var(--warn-soft)" }}>
-        <p style={{ margin: "0 0 8px", fontSize: 16, fontWeight: 700 }}>蝦皮後台說某個商品「無效」的時候</p>
-        <ol style={{ ...ul, fontSize: 14.5 }}>
+        <p style={{ margin: "0 0 8px", fontSize: 17, fontWeight: 700 }}>蝦皮後台說某個商品「無效」的時候</p>
+        <ol style={{ ...ul, fontSize: 14 }}>
           <li>在蝦皮 App 點進那個無效商品，看<b>賣場名稱</b>。</li>
           <li>在下面找同一個賣場。找不到，就是網站沒用到它，不用管。</li>
           <li>找到了，點那一條的「點開看」。打不開、顯示無效或賣完，就跟 Claude 說「這一條無效」，
@@ -759,7 +759,7 @@ function AllLinks() {
           <b>你給過的連結永遠不刪。</b>新給的放最前面，原本的自動往後當備援；主要那一條壞了，備援自己頂上。
           只有確定無效的會標「失效」：讀者看不到，這裡還留著，哪天恢復了一句話就能放回去。
         </p>
-        <p style={{ margin: "10px 0 0", fontSize: 13.5, color: "var(--muted)", lineHeight: 1.85 }}>
+        <p style={{ margin: "10px 0 0", fontSize: 14, color: "var(--muted)", lineHeight: 1.85 }}>
           自己點開檢查沒關係。要自己買的話不要從這裡下單，多數分潤計畫不算自己買的，還可能被當成異常。
           連結健檢最後一次跑是 {health.checkedAt}：每一條都有轉到商品頁，但商品還在不在、有沒有分潤，蝦皮不讓程式看，要自己點。
         </p>
@@ -767,13 +767,13 @@ function AllLinks() {
       {groups.map(([label, items]) => (
         <div key={label} style={box}>
           <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", gap: 12, marginBottom: 8, flexWrap: "wrap" }}>
-            <h3 style={{ margin: 0, fontSize: 16.5 }}>
+            <h3 style={{ margin: 0, fontSize: 17 }}>
               {label}
               {unchecked.some((g) => g.label === label) && (
                 <span style={{ marginLeft: 8, fontSize: 12.5, fontWeight: 600, color: "var(--cut)" }}>名字待核對</span>
               )}
             </h3>
-            <span style={{ fontSize: 13, color: "var(--faint)" }}>{new Set(items.map((x) => x.m.affiliateUrl)).size} 條</span>
+            <span style={{ fontSize: 12.5, color: "var(--faint)" }}>{new Set(items.map((x) => x.m.affiliateUrl)).size} 條</span>
           </div>
           {items.map(({ p, m, h }) => (
             <div key={p.id + m.id} style={{ ...line, borderTop: "1px solid var(--line)" }}>
@@ -786,7 +786,7 @@ function AllLinks() {
                   </b>
                 </span>
                 {p.name}
-                <span className="mono" style={{ display: "block", fontSize: 12, color: "var(--faint)" }}>
+                <span className="mono" style={{ display: "block", fontSize: 12.5, color: "var(--faint)" }}>
                   {m.unit ?? p.price.unit} · ${m.amount} · 查價 {m.checkedAt ?? p.price.checkedAt}
                   {h?.item ? ` · 蝦皮商品 ${h.item}` : ""}
                 </span>
@@ -809,7 +809,7 @@ function AllLinks() {
 function Line({ k, children }: { k: string; children: React.ReactNode }) {
   return (
     <div style={{ display: "flex", gap: 12, flexWrap: "wrap", padding: "5px 0", fontSize: 14, lineHeight: 1.8 }}>
-      <span style={{ color: "var(--faint)", minWidth: "9em", fontSize: 13 }}>{k}</span>
+      <span style={{ color: "var(--faint)", minWidth: "9em", fontSize: 12.5 }}>{k}</span>
       <span style={{ flex: 1, minWidth: 200 }}>{children}</span>
     </div>
   );
@@ -840,11 +840,11 @@ const box: React.CSSProperties = {
 };
 const line: React.CSSProperties = {
   display: "flex", flexWrap: "wrap", gap: 10, alignItems: "center",
-  padding: "12px 0", borderTop: "1px solid var(--line)", fontSize: 14.5, lineHeight: 1.6,
+  padding: "12px 0", borderTop: "1px solid var(--line)", fontSize: 14, lineHeight: 1.6,
 };
 const td: React.CSSProperties = { padding: "10px 12px 10px 0", verticalAlign: "top" };
-const ul: React.CSSProperties = { paddingLeft: 20, margin: 0, fontSize: 15, lineHeight: 1.95 };
-const ok: React.CSSProperties = { margin: 0, fontSize: 15, color: "var(--keep)" };
+const ul: React.CSSProperties = { paddingLeft: 20, margin: 0, fontSize: 15.5, lineHeight: 1.95 };
+const ok: React.CSSProperties = { margin: 0, fontSize: 15.5, color: "var(--keep)" };
 const code: React.CSSProperties = {
   fontFamily: "var(--font-mono), monospace", fontSize: "0.9em",
   background: "var(--sunken)", padding: "1px 5px", borderRadius: 3,
@@ -902,11 +902,11 @@ function HuntLinks({ keyword, shops }: { keyword: string; shops: { label: string
 }
 
 const huntBtn: React.CSSProperties = {
-  display: "inline-block", padding: "8px 16px", borderRadius: 999, fontSize: 13.5, fontWeight: 700,
+  display: "inline-block", padding: "8px 16px", borderRadius: 999, fontSize: 14, fontWeight: 700,
   background: "var(--accent)", color: "var(--accent-ink)", textDecoration: "none",
 };
 const huntBtnSoft: React.CSSProperties = {
-  display: "inline-block", padding: "8px 16px", borderRadius: 999, fontSize: 13.5, fontWeight: 600,
+  display: "inline-block", padding: "8px 16px", borderRadius: 999, fontSize: 14, fontWeight: 600,
   background: "var(--surface)", border: "1px solid var(--line)", color: "var(--ink)", textDecoration: "none",
 };
 

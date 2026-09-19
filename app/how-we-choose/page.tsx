@@ -57,11 +57,11 @@ function Point({ n, title, children, last }: { n: number; title: string; childre
     <div style={{ display: "flex", gap: 14, padding: "0 0 22px", marginBottom: 22, borderBottom: last ? 0 : "1px solid var(--line)" }}>
       <span className="mono" style={{
         flexShrink: 0, width: 26, height: 26, borderRadius: 999, marginTop: 2,
-        background: "var(--accent-soft)", color: "var(--accent)", fontSize: 13, fontWeight: 700,
+        background: "var(--accent-soft)", color: "var(--accent)", fontSize: 12.5, fontWeight: 700,
         display: "flex", alignItems: "center", justifyContent: "center",
       }}>{n}</span>
       <div>
-        <h2 style={{ margin: "0 0 6px", fontSize: 18 }}>{title}</h2>
+        <h2 style={{ margin: "0 0 6px", fontSize: 20 }}>{title}</h2>
         <p style={{ margin: 0, fontSize: 15.5, color: "var(--muted)", lineHeight: 1.9 }}>{children}</p>
       </div>
     </div>

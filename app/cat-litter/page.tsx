@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import SiteHeader from "@/components/SiteHeader";
+import { S } from "@/components/styles";
 import Share from "@/components/Share";
 import LitterPicker, { type LitterRow } from "@/components/LitterPicker";
 import { litters, MATERIAL_ZH, FLUSH, buyableLitter, anchorLitter, unitPriceOf, monthlyCost } from "@/lib/litter";
@@ -51,7 +52,7 @@ export default function Page() {
   const gap = litters.filter((p) => p.spec.flushClaim === "yes" && p.spec.flushable === "no").length;
 
   return (
-    <main style={{ maxWidth: 720, margin: "0 auto", padding: "0 20px 120px" }}>
+    <main style={S.page}>
       <SiteHeader current="cat-litter" />
 
       <h1 style={{ fontSize: "clamp(28px,6vw,40px)", lineHeight: 1.45, margin: "0 0 16px" }}>
@@ -78,7 +79,7 @@ export default function Page() {
         <Share path="/cat-litter" text="貓砂的「可沖馬桶」有的沖了會塞，這裡照材質一款一款判：" label="把這頁傳給朋友" />
       </div>
 
-      <footer style={{ marginTop: 60, paddingTop: 24, borderTop: "1px solid var(--line)", fontSize: 13, color: "var(--faint)", lineHeight: 1.9 }}>
+      <footer style={S.foot}>
         <p style={{ margin: 0 }}>
           一個月多少錢是照一隻貓推估的，每隻貓的用量差很多，當成比較用的基準就好。
           配方與包裝會改版，以你手上那一包為準。
@@ -88,9 +89,6 @@ export default function Page() {
   );
 }
 
-const lbl: React.CSSProperties = {
-  margin: "34px 0 10px", fontSize: 13, fontWeight: 700, color: "var(--muted)", letterSpacing: ".06em",
-};
 const feature: React.CSSProperties = {
   display: "block", background: "var(--surface)", border: "1px solid var(--line)",
   borderRadius: 14, boxShadow: "var(--sh)", padding: "20px 22px", textDecoration: "none", color: "inherit",
@@ -98,12 +96,8 @@ const feature: React.CSSProperties = {
 const featureTitle: React.CSSProperties = {
   fontFamily: "var(--font-serif), serif", fontSize: 20, margin: "0 0 8px", lineHeight: 1.5,
 };
-const featureBody: React.CSSProperties = { margin: 0, fontSize: 15, color: "var(--muted)", lineHeight: 1.85 };
+const featureBody: React.CSSProperties = { margin: 0, fontSize: 15.5, color: "var(--muted)", lineHeight: 1.85 };
 const moreBox: React.CSSProperties = {
   marginTop: 22, background: "var(--sunken)", border: "1px solid var(--line)", borderRadius: 14, padding: "14px 18px",
 };
-const moreSummary: React.CSSProperties = { cursor: "pointer", fontSize: 14.5, fontWeight: 700, color: "var(--muted)" };
-const row: React.CSSProperties = {
-  display: "flex", justifyContent: "space-between", alignItems: "center", gap: 12,
-  padding: "14px 0", borderBottom: "1px solid var(--line)", textDecoration: "none", color: "inherit",
-};
+const moreSummary: React.CSSProperties = { cursor: "pointer", fontSize: 14, fontWeight: 700, color: "var(--muted)" };

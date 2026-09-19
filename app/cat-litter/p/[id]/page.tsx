@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import SiteHeader from "@/components/SiteHeader";
+import { S } from "@/components/styles";
 import Share from "@/components/Share";
 import { CONTACT } from "@/lib/contact";
 import { CHANNEL_NOTE, channelOf } from "@/lib/channel";
@@ -41,23 +42,23 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
   const grainZh = p.spec.grain ? { fine: "細", medium: "中", coarse: "粗" }[p.spec.grain] : null;
 
   return (
-    <main style={{ maxWidth: 720, margin: "0 auto", padding: "0 20px 120px" }}>
+    <main style={S.page}>
       <SiteHeader current="cat-litter" />
 
-      <p style={{ margin: "0 0 4px", fontSize: 13, color: "var(--muted)" }}>{p.brand}</p>
+      <p style={{ margin: "0 0 4px", fontSize: 12.5, color: "var(--muted)" }}>{p.brand}</p>
       <h1 style={{ fontSize: "clamp(24px,5vw,34px)", lineHeight: 1.45, margin: "0 0 14px" }}>{p.name}</h1>
 
       <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginBottom: 18 }}>
-        <span style={{ fontSize: 13, fontWeight: 800, color: f.fg, background: f.bg, borderRadius: 8, padding: "5px 12px" }}>{f.zh}</span>
-        <span style={tag}>{MATERIAL_ZH[p.spec.material]}</span>
-        <span style={tag}>{p.spec.clumping ? "會結團" : "不結團"}</span>
-        {dustZh && <span style={tag}>粉塵{dustZh}</span>}
-        {p.spec.scented && <span style={tag}>有香味</span>}
+        <span style={{ fontSize: 12.5, fontWeight: 800, color: f.fg, background: f.bg, borderRadius: 8, padding: "5px 12px" }}>{f.zh}</span>
+        <span style={S.tag}>{MATERIAL_ZH[p.spec.material]}</span>
+        <span style={S.tag}>{p.spec.clumping ? "會結團" : "不結團"}</span>
+        {dustZh && <span style={S.tag}>粉塵{dustZh}</span>}
+        {p.spec.scented && <span style={S.tag}>有香味</span>}
       </div>
 
-      <div style={box}>
+      <div style={S.box}>
         <p style={{ margin: 0, fontWeight: 700, color: f.fg }}>{FLUSH_LINE[p.spec.flushable]}</p>
-        {gap && <p style={{ margin: "10px 0 0", fontSize: 14.5, color: "var(--cut)", fontWeight: 700 }}>{gap}</p>}
+        {gap && <p style={{ margin: "10px 0 0", fontSize: 14, color: "var(--cut)", fontWeight: 700 }}>{gap}</p>}
         <Link href="/cat-litter/flush" style={{ display: "inline-block", marginTop: 12, fontSize: 14, color: "var(--accent)", fontWeight: 600 }}>
           看其他款能不能沖 →
         </Link>
@@ -73,20 +74,20 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
             </span>
           </p>
           {month && (
-            <p style={{ margin: "0 0 14px", fontSize: 15, color: "var(--muted)", lineHeight: 1.85 }}>
+            <p style={{ margin: "0 0 14px", fontSize: 15.5, color: "var(--muted)", lineHeight: 1.85 }}>
               一隻貓一個月大約用 {month.use} {month.unit}，<b style={{ color: "var(--ink)" }}>${month.cost.toLocaleString()}</b>。
               用量是照材質推估的，每隻貓差很多，拿來比不同款就好。
             </p>
           )}
-          <a href={`/go/${m.id}/${p.id}`} rel="nofollow sponsored" style={buy}>去蝦皮看這一包</a>
-          <p style={{ margin: "10px 0 0", fontSize: 13, color: "var(--faint)" }}>
+          <a href={`/go/${m.id}/${p.id}`} rel="nofollow sponsored" style={S.buy}>去蝦皮看這一包</a>
+          <p style={{ margin: "10px 0 0", fontSize: 12.5, color: "var(--faint)" }}>
             在 {m.label}
             {m.note ? ` · ${m.note}` : ""}
           </p>
           {live.length > 1 && (
             <div style={{ marginTop: 18 }}>
               {/* 同一家店的整箱價也是一列。只有一家的時候寫「幾家」很怪 */}
-              <p style={lbl}>
+              <p style={S.lbl}>
                 {new Set(live.map((x) => x.label)).size > 1
                   ? `全部 ${new Set(live.map((x) => x.label)).size} 家的價格`
                   : "這一家的幾種買法"}
@@ -97,7 +98,7 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
                 const xMonth = monthlyCost(p, x);
                 const more = xMonth && month ? xMonth.cost - month.cost : 0;
                 return (
-                  <a key={x.id} href={`/go/${x.id}/${p.id}`} rel="nofollow sponsored" style={storeRow}>
+                  <a key={x.id} href={`/go/${x.id}/${p.id}`} rel="nofollow sponsored" style={S.storeRow}>
                     <span style={{ minWidth: 0 }}>
                       {x.label}
                       <span style={{ display: "block", fontSize: 12.5, color: "var(--muted)" }}>{x.unit}{x.note ? ` · ${x.note}` : ""}</span>
@@ -115,7 +116,7 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
                     </span>
                     <span className="mono" style={{ whiteSpace: "nowrap", textAlign: "right" }}>
                       ${x.amount.toLocaleString()}
-                      {xPer && <span style={{ display: "block", fontSize: 12, color: "var(--faint)" }}>${xPer.n}/{xPer.unit}</span>}
+                      {xPer && <span style={{ display: "block", fontSize: 12.5, color: "var(--faint)" }}>${xPer.n}/{xPer.unit}</span>}
                     </span>
                   </a>
                 );
@@ -130,16 +131,16 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
           )}
         </section>
       ) : (
-        <div style={{ ...box, marginTop: 26 }}>
+        <div style={{ ...S.box, marginTop: 26 }}>
           <p style={{ margin: 0, fontWeight: 700 }}>這一款還沒有購買連結</p>
-          <p style={{ margin: "8px 0 0", fontSize: 14.5, color: "var(--muted)", lineHeight: 1.85 }}>
+          <p style={{ margin: "8px 0 0", fontSize: 14, color: "var(--muted)", lineHeight: 1.85 }}>
             我們只放自己的購買連結，還沒補到的就不放。資料還是照樣讀給你看。
           </p>
         </div>
       )}
 
       <section style={{ marginTop: 30 }}>
-        <p style={lbl}>這一款是什麼</p>
+        <p style={S.lbl}>這一款是什麼</p>
         <div style={{ border: "1px solid var(--line)", borderRadius: 14, background: "var(--surface)", padding: "6px 18px 14px" }}>
           <Row k="材質">{MATERIAL_ZH[p.spec.material]}</Row>
           <Row k="結團">{p.spec.clumping ? "會結團，可以只鏟結塊" : "不結團，要整盆換或用雙層砂盆"}</Row>
@@ -151,7 +152,7 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
           {p.price.unit && <Row k="一包">{p.price.unit}</Row>}
         </div>
         {p.note && (
-          <p style={{ margin: "14px 0 0", fontSize: 14.5, color: "var(--muted)", lineHeight: 1.9 }}>
+          <p style={{ margin: "14px 0 0", fontSize: 14, color: "var(--muted)", lineHeight: 1.9 }}>
             <b style={{ color: "var(--ink)" }}>先知道這件事：</b>{p.note}
           </p>
         )}
@@ -163,7 +164,7 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
       </div>
 
       {CONTACT.email && (
-        <p style={{ marginTop: 26, fontSize: 13, color: "var(--faint)", lineHeight: 1.9 }}>
+        <p style={{ marginTop: 26, fontSize: 12.5, color: "var(--faint)", lineHeight: 1.9 }}>
           資料寫錯了？
           <a
             href={`mailto:${CONTACT.email}?subject=${encodeURIComponent(`貓砂資料回報：${p.brand} ${p.name}`)}`}
@@ -180,27 +181,10 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
 
 function Row({ k, children }: { k: string; children: React.ReactNode }) {
   return (
-    <div style={{ display: "flex", gap: 14, padding: "11px 0", borderBottom: "1px solid var(--line)", fontSize: 15, lineHeight: 1.7 }}>
-      <span style={{ color: "var(--faint)", minWidth: "5.5em", fontSize: 13.5 }}>{k}</span>
+    <div style={{ display: "flex", gap: 14, padding: "11px 0", borderBottom: "1px solid var(--line)", fontSize: 15.5, lineHeight: 1.7 }}>
+      <span style={{ color: "var(--faint)", minWidth: "5.5em", fontSize: 14 }}>{k}</span>
       <span style={{ flex: 1 }}>{children}</span>
     </div>
   );
 }
 
-const tag: React.CSSProperties = {
-  fontSize: 12.5, color: "var(--muted)", background: "var(--sunken)", borderRadius: 8, padding: "5px 10px",
-};
-const box: React.CSSProperties = {
-  background: "var(--surface)", border: "1px solid var(--line)", borderRadius: 14, padding: "18px 20px",
-};
-const lbl: React.CSSProperties = {
-  margin: "0 0 10px", fontSize: 13, fontWeight: 700, color: "var(--muted)", letterSpacing: ".06em",
-};
-const buy: React.CSSProperties = {
-  display: "inline-block", padding: "13px 28px", borderRadius: 999, background: "var(--accent)",
-  color: "var(--accent-ink)", fontWeight: 700, fontSize: 16, textDecoration: "none",
-};
-const storeRow: React.CSSProperties = {
-  display: "flex", justifyContent: "space-between", alignItems: "center", gap: 12,
-  padding: "12px 0", borderTop: "1px solid var(--line)", textDecoration: "none", color: "inherit", fontSize: 14.5,
-};

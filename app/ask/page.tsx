@@ -69,7 +69,7 @@ export default function Page() {
 
       <div style={{
         marginTop: 40, paddingTop: 24, borderTop: "1px solid var(--line)",
-        fontSize: 14.5, color: "var(--muted)", lineHeight: 1.9,
+        fontSize: 14, color: "var(--muted)", lineHeight: 1.9,
       }}>
         <p style={{ margin: "0 0 10px" }}>
           <b style={{ color: "var(--ink)" }}>我們沒有客服。</b>
@@ -112,7 +112,7 @@ function Row({
     }}>
       <p style={{ margin: "0 0 12px", fontSize: 15.5, lineHeight: 1.8 }}>{q}</p>
       <p style={{ margin: "0 0 8px", fontSize: 17, fontWeight: 700, color: c }}>→ {who}</p>
-      <p style={{ margin: 0, fontSize: 14.5, color: "var(--muted)", lineHeight: 1.9 }}>{why}</p>
+      <p style={{ margin: 0, fontSize: 14, color: "var(--muted)", lineHeight: 1.9 }}>{why}</p>
 
       {actions && (
         <div style={{ display: "flex", flexWrap: "wrap", gap: 10, marginTop: 14 }}>

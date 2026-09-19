@@ -25,10 +25,10 @@ const card: React.CSSProperties = {
   borderRadius: 14, boxShadow: "var(--sh)", padding: "18px 22px", textDecoration: "none", color: "inherit",
 };
 const kicker: React.CSSProperties = {
-  display: "block", fontFamily: "var(--font-mono), monospace", fontSize: 12, fontWeight: 600, letterSpacing: ".14em", color: "var(--cut)",
+  display: "block", fontFamily: "var(--font-mono), monospace", fontSize: 12.5, fontWeight: 600, letterSpacing: ".14em", color: "var(--cut)",
 };
 const title: React.CSSProperties = {
   display: "block", fontFamily: "var(--font-serif), serif", fontSize: 20, fontWeight: 700, margin: "6px 0 6px", lineHeight: 1.5,
 };
-const body: React.CSSProperties = { display: "block", fontSize: 15, color: "var(--muted)", lineHeight: 1.85 };
+const body: React.CSSProperties = { display: "block", fontSize: 15.5, color: "var(--muted)", lineHeight: 1.85 };
 const more: React.CSSProperties = { display: "inline-block", marginTop: 8, fontWeight: 700, color: "var(--accent)" };

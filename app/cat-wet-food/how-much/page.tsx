@@ -94,16 +94,16 @@ export default function Page() {
       <CanCalc />
 
       <p style={S.lbl}>我們讀過的主食罐，一罐幾大卡</p>
-      <p style={{ margin: "0 0 12px", fontSize: 14.5, color: "var(--muted)", lineHeight: 1.9 }}>
+      <p style={{ margin: "0 0 12px", fontSize: 14, color: "var(--muted)", lineHeight: 1.9 }}>
         右邊是一隻 {EX_KG} 公斤、已結紮的成貓全吃這一款，一天要幾罐。熱量照包裝或品牌公布的數字。
       </p>
       {/* 手機上三欄會擠出畫面，所以規格和熱量收進左邊那一格，右邊只放答案 */}
-      <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 14.5 }}>
+      <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 14 }}>
         <tbody>
           {TABLE.map(({ p, kcal }) => (
             <tr key={p.id} style={{ borderTop: "1px solid var(--line)" }}>
               <td style={td}>
-                <span style={{ display: "block", fontSize: 12, color: "var(--faint)" }}>{p.brand}</span>
+                <span style={{ display: "block", fontSize: 12.5, color: "var(--faint)" }}>{p.brand}</span>
                 {p.name}
                 <span style={{ display: "block", fontSize: 12.5, color: "var(--muted)" }} className="mono">
                   {p.price.unit} · 一{canWord(p)} {kcal} 大卡
@@ -116,7 +116,7 @@ export default function Page() {
           ))}
         </tbody>
       </table>
-      <p style={{ margin: "12px 0 0", fontSize: 13.5, color: "var(--muted)", lineHeight: 1.9 }}>
+      <p style={{ margin: "12px 0 0", fontSize: 14, color: "var(--muted)", lineHeight: 1.9 }}>
         皇家 A30+11W 官網沒寫熱量，不在表上。每一款的標示在
         <Link href="/cat-wet-food" style={{ color: "var(--accent)" }}>貓主食罐</Link>那一頁。
       </p>
@@ -128,7 +128,7 @@ export default function Page() {
           MER = RER × 生命階段係數<br />
           一天幾罐 = MER ÷ 一罐的熱量
         </div>
-        <p style={{ margin: "14px 0 0", fontSize: 14.5, color: "var(--muted)", lineHeight: 1.9 }}>
+        <p style={{ margin: "14px 0 0", fontSize: 14, color: "var(--muted)", lineHeight: 1.9 }}>
           跟<Link href="/cat-food/how-much" style={{ color: "var(--accent)" }}>乾糧的計算機</Link>是同一條公式、同一組係數，
           已結紮的成貓乘 1.2。罐頭的熱量是連水一起算的，所以一罐 80 克只有乾糧 20 多克的熱量。
         </p>
@@ -162,8 +162,8 @@ export default function Page() {
       <p style={S.lbl}>那要買哪一款</p>
       <div style={S.landing}>
         <div>
-          <h2 style={{ margin: "0 0 6px", fontSize: 18 }}>把貓的狀況講一句，我們刪給你看</h2>
-          <p style={{ margin: 0, fontSize: 15, color: "var(--muted)", lineHeight: 1.8 }}>
+          <h2 style={{ margin: "0 0 6px", fontSize: 20 }}>把貓的狀況講一句，我們刪給你看</h2>
+          <p style={{ margin: 0, fontSize: 15.5, color: "var(--muted)", lineHeight: 1.8 }}>
             講了每月預算，我們會用同一個算式，把全吃罐頭會超過預算的先刪掉。
           </p>
         </div>
@@ -179,7 +179,7 @@ export default function Page() {
 
       <footer style={{
         marginTop: 72, paddingTop: 28, borderTop: "1px solid var(--line)",
-        fontSize: 13, color: "var(--faint)", lineHeight: 1.9,
+        fontSize: 12.5, color: "var(--faint)", lineHeight: 1.9,
       }}>
         <p style={{ margin: 0 }}>
           這一頁的算式跟商品卡上的「一天大約幾罐」是同一個函式，不會給你兩種答案。
@@ -196,7 +196,7 @@ const box: React.CSSProperties = {
 };
 const formula: React.CSSProperties = {
   background: "var(--sunken)", border: "1px solid var(--line)",
-  borderRadius: 10, padding: "16px 18px",
+  borderRadius: 8, padding: "16px 18px",
   fontSize: 14, lineHeight: 2.1,
 };
 const td: React.CSSProperties = { padding: "11px 10px 11px 0", lineHeight: 1.6 };

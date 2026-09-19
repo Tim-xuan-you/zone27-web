@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import SiteHeader from "@/components/SiteHeader";
+import { S } from "@/components/styles";
 import Share from "@/components/Share";
 import {
   treats, FORM_ZH, buyableTreat, anchorTreat, dailyLimit, packDays, pureeSpread,
@@ -49,7 +50,7 @@ export default function Page() {
   const hidden = treats.filter(hiddenChicken);
 
   return (
-    <main style={{ maxWidth: 720, margin: "0 auto", padding: "0 20px 120px" }}>
+    <main style={S.page}>
       <SiteHeader current="cat-treat" />
 
       <h1 style={{ fontSize: "clamp(28px,6vw,40px)", lineHeight: 1.45, margin: "0 0 16px" }}>
@@ -68,9 +69,9 @@ export default function Page() {
       </p>
 
       {SPREAD && (
-        <div style={{ ...box, borderColor: "var(--warn)", background: "var(--warn-soft)" }}>
-          <p style={{ margin: 0, fontWeight: 700, fontSize: 16 }}>寫著「綜合營養」的那一款，熱量快兩倍</p>
-          <p style={{ margin: "8px 0 0", fontSize: 14.5, lineHeight: 1.9 }}>
+        <div style={{ ...S.box, borderColor: "var(--warn)", background: "var(--warn-soft)" }}>
+          <p style={{ margin: 0, fontWeight: 700, fontSize: 17 }}>寫著「綜合營養」的那一款，熱量快兩倍</p>
+          <p style={{ margin: "8px 0 0", fontSize: 14, lineHeight: 1.9 }}>
             同一個牌子的肉泥，一般口味一條 {SPREAD.plain.spec.kcalPer} 大卡，
             綜合營養配方一條 {SPREAD.complete.spec.kcalPer} 大卡。
             差別在後者加了礦物質、維生素和牛磺酸，可以當正餐吃。
@@ -82,23 +83,23 @@ export default function Page() {
         </div>
       )}
 
-      <div style={{ ...box, marginTop: 14 }}>
-        <p style={{ margin: 0, fontWeight: 700, fontSize: 16 }}>怎麼算的</p>
-        <ol style={{ margin: "10px 0 0", paddingLeft: 20, fontSize: 14.5, color: "var(--muted)", lineHeight: 1.95 }}>
+      <div style={{ ...S.box, marginTop: 14 }}>
+        <p style={{ margin: 0, fontWeight: 700, fontSize: 17 }}>怎麼算的</p>
+        <ol style={{ margin: "10px 0 0", paddingLeft: 20, fontSize: 14, color: "var(--muted)", lineHeight: 1.95 }}>
           <li>一天要幾大卡：照體重算，結紮的成貓用 1.2 倍基礎代謝，{DEFAULT_CAT_KG} 公斤是 {DAY} 大卡</li>
           <li>零食上限 = 一天熱量的一成，也就是 {CAP} 大卡</li>
           <li>有寫「一條幾大卡」的換算成幾條，除不盡往下算；只寫每 100 克的（凍乾）換算成幾公克</li>
           <li>兩個都沒寫的，我們就說沒公布，不編一個數字給你</li>
         </ol>
-        <p style={{ margin: "12px 0 0", fontSize: 13, color: "var(--faint)", lineHeight: 1.85 }}>
+        <p style={{ margin: "12px 0 0", fontSize: 12.5, color: "var(--faint)", lineHeight: 1.85 }}>
           下面每一款都照 {DEFAULT_CAT_KG} 公斤的成貓算。你家的貓比較重就照比例加。
         </p>
       </div>
 
       {DRIED && DRIED_LIMIT && (
-        <div style={{ ...box, marginTop: 14 }}>
-          <p style={{ margin: 0, fontWeight: 700, fontSize: 16 }}>凍乾能給的量比你想的少很多</p>
-          <p style={{ margin: "8px 0 0", fontSize: 14.5, color: "var(--muted)", lineHeight: 1.9 }}>
+        <div style={{ ...S.box, marginTop: 14 }}>
+          <p style={{ margin: 0, fontWeight: 700, fontSize: 17 }}>凍乾能給的量比你想的少很多</p>
+          <p style={{ margin: "8px 0 0", fontSize: 14, color: "var(--muted)", lineHeight: 1.9 }}>
             凍乾把水抽掉了，水分只剩 {DRIED.spec.moisture}%，每 100 公克 {DRIED.spec.kcalPer100g} 大卡。
             同樣 {CAP} 大卡的額度，換算下來一天只有 {DRIED_LIMIT.grams} 公克。
             抓一把就超過了。這種零食要秤，不要用抓的。
@@ -107,9 +108,9 @@ export default function Page() {
       )}
 
       {hidden.length > 0 && (
-        <div style={{ ...box, marginTop: 14, borderColor: "var(--cut)", background: "var(--cut-soft)" }}>
-          <p style={{ margin: 0, fontWeight: 700, fontSize: 16 }}>名字寫魚，裡面有雞</p>
-          <p style={{ margin: "8px 0 0", fontSize: 14.5, lineHeight: 1.9 }}>
+        <div style={{ ...S.box, marginTop: 14, borderColor: "var(--cut)", background: "var(--cut-soft)" }}>
+          <p style={{ margin: 0, fontWeight: 700, fontSize: 17 }}>名字寫魚，裡面有雞</p>
+          <p style={{ margin: "8px 0 0", fontSize: 14, lineHeight: 1.9 }}>
             {hidden.map((p) => `${p.brand} ${p.name}`).join("、")}。
             對雞過敏的貓，零食也要看成分，不是只有飼料要看。
           </p>
@@ -119,20 +120,20 @@ export default function Page() {
         </div>
       )}
 
-      <p style={lbl}>我們讀過的 {treats.length} 款</p>
+      <p style={S.lbl}>我們讀過的 {treats.length} 款</p>
       {list.map((p) => {
         const m = anchorTreat(p);
         const limit = dailyLimit(p);
         const days = packDays(p);
         return (
-          <Link key={p.id} href={`/cat-treat/p/${p.id}`} style={row}>
+          <Link key={p.id} href={`/cat-treat/p/${p.id}`} style={S.listRow}>
             <span style={{ minWidth: 0 }}>
               <span style={{ display: "block", fontSize: 12.5, color: "var(--muted)" }}>{p.brand}</span>
               <span style={{ display: "block", fontWeight: 700, lineHeight: 1.5 }}>{p.name}</span>
               <span style={{ display: "flex", gap: 8, flexWrap: "wrap", alignItems: "center", marginTop: 6 }}>
                 <span style={{ fontSize: 12.5, color: "var(--muted)" }}>{FORM_ZH[p.spec.form]}</span>
                 {p.spec.completeFood && (
-                  <span style={{ fontSize: 12, color: "var(--keep)", background: "var(--keep-soft)", borderRadius: 6, padding: "2px 8px" }}>
+                  <span style={{ fontSize: 12.5, color: "var(--keep)", background: "var(--keep-soft)", borderRadius: 8, padding: "2px 8px" }}>
                     綜合營養食
                   </span>
                 )}
@@ -142,11 +143,11 @@ export default function Page() {
                 {!m && <span style={{ fontSize: 12.5, color: "var(--faint)" }}>還沒有連結</span>}
               </span>
             </span>
-            <span className="mono" style={{ whiteSpace: "nowrap", fontSize: 13.5, textAlign: "right" }}>
+            <span className="mono" style={{ whiteSpace: "nowrap", fontSize: 14, textAlign: "right" }}>
               {limit ? (
                 <>
                   <b>一天 {limit.label}</b>
-                  {days !== null && <span style={{ display: "block", color: "var(--faint)", fontSize: 12 }}>一包約 {days} 天</span>}
+                  {days !== null && <span style={{ display: "block", color: "var(--faint)", fontSize: 12.5 }}>一包約 {days} 天</span>}
                 </>
               ) : (
                 <span style={{ color: "var(--faint)", fontSize: 12.5 }}>沒公布熱量</span>
@@ -161,7 +162,7 @@ export default function Page() {
         <Share path="/cat-treat" text="貓零食一天可以給幾條，我們照熱量算出來了：" label="把這頁傳給朋友" />
       </div>
 
-      <footer style={{ marginTop: 60, paddingTop: 24, borderTop: "1px solid var(--line)", fontSize: 13, color: "var(--faint)", lineHeight: 1.9 }}>
+      <footer style={S.foot}>
         <p style={{ margin: 0 }}>
           熱量照包裝與品牌官網。一成是獸醫營養學的通則，不是法規。
           貓在減重、有慢性病，或一天吃的正餐本來就不夠，請照獸醫的指示。
@@ -171,13 +172,3 @@ export default function Page() {
   );
 }
 
-const lbl: React.CSSProperties = {
-  margin: "34px 0 10px", fontSize: 13, fontWeight: 700, color: "var(--muted)", letterSpacing: ".06em",
-};
-const box: React.CSSProperties = {
-  background: "var(--surface)", border: "1px solid var(--line)", borderRadius: 14, padding: "18px 20px",
-};
-const row: React.CSSProperties = {
-  display: "flex", justifyContent: "space-between", alignItems: "center", gap: 12,
-  padding: "14px 0", borderBottom: "1px solid var(--line)", textDecoration: "none", color: "inherit",
-};

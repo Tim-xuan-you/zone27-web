@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import SiteHeader from "@/components/SiteHeader";
+import { S } from "@/components/styles";
 import Share from "@/components/Share";
 import { litters, MATERIAL_ZH, FLUSH, FLUSH_LINE, flushGap, type LitterMaterial } from "@/lib/litter";
 
@@ -38,7 +39,7 @@ export default function Page() {
   const softGaps = litters.filter((p) => p.spec.flushClaim === "yes" && p.spec.flushable === "limited");
 
   return (
-    <main style={{ maxWidth: 720, margin: "0 auto", padding: "0 20px 120px" }}>
+    <main style={S.page}>
       <SiteHeader current="cat-litter" />
 
       <h1 style={{ fontSize: "clamp(28px,6vw,40px)", lineHeight: 1.45, margin: "0 0 16px" }}>
@@ -61,24 +62,24 @@ export default function Page() {
         return (
           <section key={f} style={{ marginBottom: 34 }}>
             <p style={{ margin: "0 0 4px" }}>
-              <span style={{ fontSize: 13.5, fontWeight: 800, color: s.fg, background: s.bg, borderRadius: 8, padding: "5px 12px" }}>
+              <span style={{ fontSize: 14, fontWeight: 800, color: s.fg, background: s.bg, borderRadius: 8, padding: "5px 12px" }}>
                 {s.zh}（{list.length} 款）
               </span>
             </p>
-            <p style={{ margin: "10px 0 12px", fontSize: 14.5, color: "var(--muted)", lineHeight: 1.85 }}>{FLUSH_LINE[f]}</p>
+            <p style={{ margin: "10px 0 12px", fontSize: 14, color: "var(--muted)", lineHeight: 1.85 }}>{FLUSH_LINE[f]}</p>
             <div style={{ border: "1px solid var(--line)", borderRadius: 14, background: "var(--surface)", padding: "4px 18px 8px" }}>
               {list.map((p) => {
                 const gap = flushGap(p);
                 return (
-                  <Link key={p.id} href={`/cat-litter/p/${p.id}`} style={row}>
+                  <Link key={p.id} href={`/cat-litter/p/${p.id}`} style={S.listRow}>
                     <span style={{ minWidth: 0 }}>
                       <span style={{ fontSize: 12.5, color: "var(--muted)" }}>{p.brand}</span>
                       <span style={{ display: "block", fontWeight: 700, lineHeight: 1.5 }}>{p.name}</span>
-                      <span style={{ display: "block", fontSize: 13, color: "var(--muted)", marginTop: 4, lineHeight: 1.75 }}>
+                      <span style={{ display: "block", fontSize: 12.5, color: "var(--muted)", marginTop: 4, lineHeight: 1.75 }}>
                         {MATERIAL_ZH[p.spec.material]}：{WHY[p.spec.material]}
                       </span>
                       {gap && (
-                        <span style={{ display: "block", fontSize: 13, color: "var(--cut)", marginTop: 4, fontWeight: 700 }}>
+                        <span style={{ display: "block", fontSize: 12.5, color: "var(--cut)", marginTop: 4, fontWeight: 700 }}>
                           {gap}
                         </span>
                       )}
@@ -100,7 +101,7 @@ export default function Page() {
         />
       </div>
 
-      <p style={{ marginTop: 28, fontSize: 13, color: "var(--faint)", lineHeight: 1.9 }}>
+      <p style={{ marginTop: 28, fontSize: 12.5, color: "var(--faint)", lineHeight: 1.9 }}>
         材質照包裝與品牌官網。這一頁講的是「沖下去會不會卡」，不是在講哪一款比較好用。
         我們只讀了這 {litters.length} 款，沒列出來的不代表可以沖。
       </p>
@@ -108,7 +109,3 @@ export default function Page() {
   );
 }
 
-const row: React.CSSProperties = {
-  display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: 12,
-  padding: "14px 0", borderBottom: "1px solid var(--line)", textDecoration: "none", color: "inherit",
-};

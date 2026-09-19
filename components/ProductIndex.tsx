@@ -28,11 +28,11 @@ export default function ProductIndex({ products, title }: { products: Product[];
                   {p.brand}<Stamp p={p} />
                 </span>
                 <span style={{ display: "block", fontSize: 15.5, fontWeight: 700, lineHeight: 1.5 }}>{p.name}</span>
-                <span style={{ display: "block", fontSize: 13, color: "var(--faint)", marginTop: 2 }}>
+                <span style={{ display: "block", fontSize: 12.5, color: "var(--faint)", marginTop: 2 }}>
                   {stageOf(p)}{meatsOf(p) ? ` · 肉：${meatsOf(p)}` : ""}
                 </span>
               </div>
-              <span className="mono" style={{ fontSize: 13.5, whiteSpace: "nowrap", color: ok ? "var(--keep)" : "var(--faint)", fontWeight: ok ? 700 : 500 }}>
+              <span className="mono" style={{ fontSize: 14, whiteSpace: "nowrap", color: ok ? "var(--keep)" : "var(--faint)", fontWeight: ok ? 700 : 500 }}>
                 {ok ? `$${cheapest(p).toLocaleString()} 起` : p.referenceOnly ? "對照款" : "補連結中"}
               </span>
             </Link>
@@ -46,5 +46,5 @@ export default function ProductIndex({ products, title }: { products: Product[];
 const row: React.CSSProperties = {
   display: "flex", alignItems: "center", gap: 12,
   background: "var(--surface)", border: "1px solid var(--line)",
-  borderRadius: 12, padding: "12px 16px", textDecoration: "none", color: "inherit",
+  borderRadius: 14, padding: "12px 16px", textDecoration: "none", color: "inherit",
 };

@@ -70,11 +70,11 @@ export default function Page() {
 
       {!live && (
         <div style={soonBox}>
-          <p style={{ margin: "0 0 6px", fontWeight: 700, fontSize: 16 }}>還在上架</p>
-          <p style={{ margin: "0 0 8px", fontSize: 15, lineHeight: 1.9 }}>
+          <p style={{ margin: "0 0 6px", fontWeight: 700, fontSize: 17 }}>還在上架</p>
+          <p style={{ margin: "0 0 8px", fontSize: 15.5, lineHeight: 1.9 }}>
             {all.length} 款的成分表我們一款一款讀完了。購買連結補好 {ready} 款，補到 {MIN_LIVE} 款就開放推薦。
           </p>
-          <p style={{ margin: 0, fontSize: 14.5, color: "var(--muted)", lineHeight: 1.9 }}>
+          <p style={{ margin: 0, fontSize: 14, color: "var(--muted)", lineHeight: 1.9 }}>
             在那之前裁決器先不推薦。推一款你點進去買不到的東西，比不推更糟。讀到的東西先攤開在下面。
           </p>
         </div>
@@ -99,7 +99,7 @@ export default function Page() {
       {live && <CheapestCard species="cat" form="dry" />}
 
       <p style={S.lbl}>我們讀過的 {all.length} 款</p>
-      <p style={{ margin: "0 0 16px", fontSize: 14.5, color: "var(--muted)", lineHeight: 1.9 }}>
+      <p style={{ margin: "0 0 16px", fontSize: 14, color: "var(--muted)", lineHeight: 1.9 }}>
         數字照台灣代理商的中文標示，官網只給乾物基的，我們換算成同一個基準。
         碳水是用 100 減掉其他成分推算的，推估的地方每一款都有寫。
       </p>
@@ -108,7 +108,7 @@ export default function Page() {
       {refs.length > 0 && (
         <>
           <p style={S.lbl}>對照款</p>
-          <p style={{ margin: "0 0 16px", fontSize: 14.5, color: "var(--muted)", lineHeight: 1.9 }}>
+          <p style={{ margin: "0 0 16px", fontSize: 14, color: "var(--muted)", lineHeight: 1.9 }}>
             這幾款放進來是為了讓「刪掉」有東西可刪，我們不會推薦。
             它們的共同點是名字跟內容對不上，或是肉的來源沒寫清楚。
           </p>
@@ -135,7 +135,7 @@ export default function Page() {
 
       <footer style={{
         marginTop: 72, paddingTop: 28, borderTop: "1px solid var(--line)",
-        fontSize: 13, color: "var(--faint)", lineHeight: 1.9,
+        fontSize: 12.5, color: "var(--faint)", lineHeight: 1.9,
       }}>
         <p style={{ margin: 0 }}>
           成分資料取自台灣代理商的中文標示與品牌官網。
@@ -152,7 +152,7 @@ function Row({ p, live }: { p: Product; live: boolean }) {
   return (
     <article style={row}>
       <span style={S.brand}>{p.brand}</span>
-      <h3 style={{ fontSize: 17.5, lineHeight: 1.5, margin: "2px 0 10px" }}>
+      <h3 style={{ fontSize: 17, lineHeight: 1.5, margin: "2px 0 10px" }}>
         <Link href={productHref(p)} style={{ color: "inherit", textDecoration: "none" }}>{p.name}</Link>
       </h3>
 
@@ -164,15 +164,15 @@ function Row({ p, live }: { p: Product; live: boolean }) {
         {p.spec.kcal && <span style={tag}>{p.spec.kcal.toLocaleString()} 大卡／公斤</span>}
       </div>
 
-      <p style={{ margin: "0 0 8px", fontSize: 14.5, lineHeight: 1.85 }}>
+      <p style={{ margin: "0 0 8px", fontSize: 14, lineHeight: 1.85 }}>
         <span className="mono">粗蛋白 {p.spec.protein}%　碳水 {p.spec.carb}%</span>
         <span style={{ color: "var(--muted)" }}>　肉：{meats}</span>
       </p>
-      <p style={{ margin: "0 0 10px", fontSize: 14.5, lineHeight: 1.85 }}>
+      <p style={{ margin: "0 0 10px", fontSize: 14, lineHeight: 1.85 }}>
         <b style={{ color: "var(--cut)" }}>什麼時候不要買：</b>{p.dealbreaker}
       </p>
       {p.knownIssues && (
-        <p style={{ margin: "0 0 10px", fontSize: 13.5, color: "var(--muted)", lineHeight: 1.85 }}>
+        <p style={{ margin: "0 0 10px", fontSize: 14, color: "var(--muted)", lineHeight: 1.85 }}>
           {p.knownIssues}
         </p>
       )}
@@ -208,7 +208,7 @@ const featureTitle: React.CSSProperties = {
   fontFamily: "var(--font-serif), serif", fontSize: 20, margin: "0 0 8px", lineHeight: 1.5,
 };
 const featureBody: React.CSSProperties = {
-  margin: 0, fontSize: 15, color: "var(--muted)", lineHeight: 1.85,
+  margin: 0, fontSize: 15.5, color: "var(--muted)", lineHeight: 1.85,
 };
 const row: React.CSSProperties = {
   background: "var(--surface)", border: "1px solid var(--line)",
@@ -224,5 +224,5 @@ const tagGood: React.CSSProperties = {
 };
 const foot: React.CSSProperties = {
   display: "flex", flexWrap: "wrap", justifyContent: "space-between", gap: "4px 12px",
-  borderTop: "1px solid var(--line)", paddingTop: 10, fontSize: 13,
+  borderTop: "1px solid var(--line)", paddingTop: 10, fontSize: 12.5,
 };

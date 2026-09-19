@@ -43,7 +43,7 @@ export default function Index() {
         <h2 style={{ fontFamily: "var(--font-serif), serif", fontSize: 20, margin: "0 0 8px", lineHeight: 1.5 }}>
           寫著低敏，成分表裡有雞
         </h2>
-        <p style={{ margin: 0, fontSize: 15, color: "var(--muted)", lineHeight: 1.85 }}>
+        <p style={{ margin: 0, fontSize: 15.5, color: "var(--muted)", lineHeight: 1.85 }}>
           換了三種「低敏」飼料狗還是抓，很多時候是那三包裡面都有雞。逐筆核對，附查核日期。
         </p>
       </Link>
@@ -57,7 +57,7 @@ export default function Index() {
         <h2 style={{ fontFamily: "var(--font-serif), serif", fontSize: 20, margin: "0 0 8px", lineHeight: 1.5 }}>
           狗一天要吃多少飼料
         </h2>
-        <p style={{ margin: 0, fontSize: 15, color: "var(--muted)", lineHeight: 1.85 }}>
+        <p style={{ margin: 0, fontSize: 15.5, color: "var(--muted)", lineHeight: 1.85 }}>
           用獸醫的能量公式算一天幾克、這包吃幾天、一個月多少錢。算式全部寫出來，你可以自己驗。
         </p>
       </Link>
@@ -71,7 +71,7 @@ export default function Index() {
         <h2 style={{ fontFamily: "var(--font-serif), serif", fontSize: 20, margin: "0 0 8px", lineHeight: 1.5 }}>
           無穀飼料到底有沒有比較好
         </h2>
-        <p style={{ margin: 0, fontSize: 15, color: "var(--muted)", lineHeight: 1.85 }}>
+        <p style={{ margin: 0, fontSize: 15.5, color: "var(--muted)", lineHeight: 1.85 }}>
           「無穀」不等於無雞、不等於低碳水、也不等於豆類少。用我們自己十款的成分表對照。
         </p>
       </Link>
@@ -85,7 +85,7 @@ export default function Index() {
         <h2 style={{ fontFamily: "var(--font-serif), serif", fontSize: 20, margin: "0 0 8px", lineHeight: 1.5 }}>
           排除飲食法：怎麼真的找出牠對什麼過敏
         </h2>
-        <p style={{ margin: 0, fontSize: 15, color: "var(--muted)", lineHeight: 1.85 }}>
+        <p style={{ margin: 0, fontSize: 15.5, color: "var(--muted)", lineHeight: 1.85 }}>
           一直抓癢的狗裡只有約 18% 是食物造成的。要確認得跑滿八週，而且最後要回測。
         </p>
       </Link>
@@ -114,7 +114,7 @@ export default function Index() {
 
       <footer style={{
         marginTop: 72, paddingTop: 28, borderTop: "1px solid var(--line)",
-        fontSize: 13, color: "var(--faint)", lineHeight: 1.9,
+        fontSize: 12.5, color: "var(--faint)", lineHeight: 1.9,
       }}>
         <p style={{ margin: 0 }}>
           價格是人工查的，點進賣場以當下的標價為準。

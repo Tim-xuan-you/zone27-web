@@ -26,5 +26,5 @@ const base: React.CSSProperties = {
   display: "inline-block", flex: "none", fontWeight: 900, letterSpacing: ".08em", whiteSpace: "nowrap",
   border: "2px solid", borderRadius: 8, transform: "rotate(-3deg)", lineHeight: 1.3,
 };
-const sm: React.CSSProperties = { fontSize: 13, padding: "2px 8px" };
-const lg: React.CSSProperties = { fontSize: 20, padding: "5px 14px", borderWidth: 3, borderRadius: 10 };
+const sm: React.CSSProperties = { fontSize: 12.5, padding: "2px 8px" };
+const lg: React.CSSProperties = { fontSize: 20, padding: "5px 14px", borderWidth: 3, borderRadius: 8 };

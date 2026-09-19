@@ -175,7 +175,7 @@ export default function LongTail({ sp, slug }: { sp: Species; slug: string[] }) 
               說真的，<b>沒有。</b>{p.breed.zh}這個條件沒有刪掉任何一款，
               以「避{p.allergen.zh}」來說，{p.breed.zh}跟其他品種的選擇是一樣的。
             </p>
-            <p style={{ margin: "12px 0 0", fontSize: 15, color: "var(--muted)", lineHeight: 1.9 }}>
+            <p style={{ margin: "12px 0 0", fontSize: 15.5, color: "var(--muted)", lineHeight: 1.9 }}>
               品種真正會影響的是<b>吃多少</b>和<b>該買哪個包裝</b>，那個下面算給你看。
               {sp === "dog"
                 ? "只有體型專用配方（小型犬專用、大型犬專用）才會因為品種被刪掉，而符合你這次條件的款裡剛好沒有。"
@@ -232,7 +232,7 @@ export default function LongTail({ sp, slug }: { sp: Species; slug: string[] }) 
 
       <footer style={{
         marginTop: 72, paddingTop: 28, borderTop: "1px solid var(--line)",
-        fontSize: 13, color: "var(--faint)", lineHeight: 1.9,
+        fontSize: 12.5, color: "var(--faint)", lineHeight: 1.9,
       }}>
         <p style={{ margin: 0 }}>
           這一頁預設{ADULT[sp]}。你的{ANIMAL[sp]}如果是{sp === "cat" ? "幼貓" : "幼犬"}、高齡或有其他狀況，

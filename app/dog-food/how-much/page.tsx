@@ -85,7 +85,7 @@ export default function Page() {
           MER = RER × 生命階段係數<br />
           一天克數 = MER ÷ 熱量密度
         </div>
-        <p style={{ margin: "14px 0 0", fontSize: 14.5, color: "var(--muted)", lineHeight: 1.9 }}>
+        <p style={{ margin: "14px 0 0", fontSize: 14, color: "var(--muted)", lineHeight: 1.9 }}>
           RER 是靜止能量需求，MER 是維持能量需求。
           代謝率跟的是體重的 0.75 次方，
           所以體重翻倍，食量不會跟著翻倍。
@@ -94,7 +94,7 @@ export default function Page() {
 
       <p style={S.lbl}>係數</p>
       <div style={{ overflowX: "auto" }}>
-        <table style={{ width: "100%", minWidth: 320, borderCollapse: "collapse", fontSize: 15 }}>
+        <table style={{ width: "100%", minWidth: 320, borderCollapse: "collapse", fontSize: 15.5 }}>
           <tbody>
             {(Object.keys(MER_FACTORS) as (keyof typeof MER_FACTORS)[]).map((k) => (
               <tr key={k} style={{ borderTop: "1px solid var(--line)" }}>
@@ -107,7 +107,7 @@ export default function Page() {
           </tbody>
         </table>
       </div>
-      <p style={{ margin: "14px 0 0", fontSize: 14.5, color: "var(--muted)", lineHeight: 1.9 }}>
+      <p style={{ margin: "14px 0 0", fontSize: 14, color: "var(--muted)", lineHeight: 1.9 }}>
         這幾個數字取自一般獸醫營養學教材的區間中間值。工作犬、活動量特別大的狗會更高，
         真的要精準就問你的獸醫。
       </p>
@@ -149,8 +149,8 @@ export default function Page() {
       <p style={S.lbl}>那要買哪一款</p>
       <div style={S.landing}>
         <div>
-          <h2 style={{ margin: "0 0 6px", fontSize: 18 }}>把狗的狀況講一句，我們刪給你看</h2>
-          <p style={{ margin: 0, fontSize: 15, color: "var(--muted)", lineHeight: 1.8 }}>
+          <h2 style={{ margin: "0 0 6px", fontSize: 20 }}>把狗的狀況講一句，我們刪給你看</h2>
+          <p style={{ margin: 0, fontSize: 15.5, color: "var(--muted)", lineHeight: 1.8 }}>
             我們會用剛剛同一個算式，告訴你哪個規格吃得完。
           </p>
         </div>
@@ -166,7 +166,7 @@ export default function Page() {
 
       <footer style={{
         marginTop: 72, paddingTop: 28, borderTop: "1px solid var(--line)",
-        fontSize: 13, color: "var(--faint)", lineHeight: 1.9,
+        fontSize: 12.5, color: "var(--faint)", lineHeight: 1.9,
       }}>
         <p style={{ margin: 0 }}>
           這一頁的算式跟商品頁上的「這包大約吃 N 天」是同一個函式，不會給你兩種答案。
@@ -184,6 +184,6 @@ const box: React.CSSProperties = {
 
 const formula: React.CSSProperties = {
   background: "var(--sunken)", border: "1px solid var(--line)",
-  borderRadius: 10, padding: "16px 18px",
+  borderRadius: 8, padding: "16px 18px",
   fontSize: 14, lineHeight: 2.1,
 };

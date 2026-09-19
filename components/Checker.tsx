@@ -99,7 +99,7 @@ export default function Checker({ items }: { items: CheckItem[] }) {
       {byName.length === 0 && (
         <div style={emptyBox}>
           <p style={{ margin: 0, fontWeight: 700 }}>這一包我們還沒讀過</p>
-          <p style={{ margin: "8px 0 0", fontSize: 15, color: "var(--muted)", lineHeight: 1.85 }}>
+          <p style={{ margin: "8px 0 0", fontSize: 15.5, color: "var(--muted)", lineHeight: 1.85 }}>
             把名字寄給我們，我們去讀成分表，讀完放上來。越多人問的越先讀。
           </p>
           {CONTACT.email && (
@@ -143,14 +143,14 @@ function Row({ x }: { x: CheckItem }) {
 
         {x.status !== "clean" && x.alts && x.alts.length > 0 && (
           <div style={{ marginTop: 14 }}>
-            <p style={{ margin: "0 0 6px", fontSize: 13.5, fontWeight: 700, color: "var(--keep)" }}>完全不含雞、我們讀過的：</p>
+            <p style={{ margin: "0 0 6px", fontSize: 14, fontWeight: 700, color: "var(--keep)" }}>完全不含雞、我們讀過的：</p>
             {x.alts.map((a) => (
               <Link key={a.id} href={a.href} style={altRow}>
                 <span style={{ minWidth: 0 }}>
                   <span style={{ fontSize: 12.5, color: "var(--muted)" }}>{a.brand} </span>
                   <span style={{ fontWeight: 700 }}>{a.name}</span>
                 </span>
-                <span className="mono" style={{ fontSize: 13, color: "var(--keep)", whiteSpace: "nowrap" }}>
+                <span className="mono" style={{ fontSize: 12.5, color: "var(--keep)", whiteSpace: "nowrap" }}>
                   {a.per ? `$${a.per}/kg` : ""} ›
                 </span>
               </Link>
@@ -179,7 +179,7 @@ const searchBox: React.CSSProperties = {
   position: "sticky", top: 0, zIndex: 2, background: "var(--ground)", padding: "12px 0 6px",
 };
 const input: React.CSSProperties = {
-  width: "100%", boxSizing: "border-box", font: "inherit", fontSize: 16, padding: "14px 16px",
+  width: "100%", boxSizing: "border-box", font: "inherit", fontSize: 17, padding: "14px 16px",
   borderRadius: 14, border: "1px solid var(--line)", background: "var(--surface)", color: "var(--ink)",
 };
 const chip: React.CSSProperties = {
@@ -187,15 +187,15 @@ const chip: React.CSSProperties = {
   padding: "6px 14px", borderRadius: 999, border: "1px solid var(--line)", background: "var(--surface)", color: "var(--muted)",
 };
 const chipOn: React.CSSProperties = { borderColor: "var(--accent)", color: "var(--accent)", background: "var(--accent-soft)", fontWeight: 700 };
-const groupHead: React.CSSProperties = { margin: "0 0 10px", fontSize: 13, fontWeight: 700, color: "var(--muted)", letterSpacing: ".06em" };
+const groupHead: React.CSSProperties = { margin: "0 0 10px", fontSize: 12.5, fontWeight: 700, color: "var(--muted)", letterSpacing: ".06em" };
 const row: React.CSSProperties = { background: "var(--surface)", border: "1px solid var(--line)", borderRadius: 14 };
 const summary: React.CSSProperties = {
   display: "flex", alignItems: "center", gap: 12, padding: "12px 16px", cursor: "pointer", listStyle: "none",
 };
 const badge: React.CSSProperties = {
-  flex: "none", minWidth: 64, textAlign: "center", fontSize: 13, fontWeight: 800, padding: "5px 8px", borderRadius: 8,
+  flex: "none", minWidth: 64, textAlign: "center", fontSize: 12.5, fontWeight: 800, padding: "5px 8px", borderRadius: 8,
 };
-const body: React.CSSProperties = { padding: "4px 16px 16px", borderTop: "1px solid var(--line)", paddingTop: 14, fontSize: 15, lineHeight: 1.8 };
+const body: React.CSSProperties = { padding: "4px 16px 16px", borderTop: "1px solid var(--line)", paddingTop: 14, fontSize: 15.5, lineHeight: 1.8 };
 const meatLine: React.CSSProperties = { margin: "8px 0 0", fontSize: 14, color: "var(--muted)", lineHeight: 1.8 };
 const foundList: React.CSSProperties = { margin: "8px 0 0", paddingLeft: 20, fontSize: 14, lineHeight: 1.8 };
 const altRow: React.CSSProperties = {

@@ -78,7 +78,7 @@ export default function Page() {
       <p style={{ color: "var(--muted)", fontSize: 17, lineHeight: 1.9, margin: "0 0 10px", maxWidth: "42ch" }}>
         貓一直抓下巴、抓脖子，換了三包「鮭魚口味」還是一樣...很可能那三包都有雞。
       </p>
-      <p style={{ color: "var(--faint)", fontSize: 13, margin: "0 0 8px" }}>
+      <p style={{ color: "var(--faint)", fontSize: 12.5, margin: "0 0 8px" }}>
         {CASES.length + ALSO.length} 款逐筆核對 · 最後查核 {data._meta.checkedAt}
       </p>
 
@@ -112,23 +112,23 @@ export default function Page() {
       {CASES.map((c) => (
         <article key={c.id} style={card}>
           <span style={S.brand}>{c.brand}</span>
-          <h2 style={{ fontFamily: "var(--font-serif), serif", fontSize: 21, lineHeight: 1.45, margin: "2px 0 12px" }}>
+          <h2 style={{ fontFamily: "var(--font-serif), serif", fontSize: 20, lineHeight: 1.45, margin: "2px 0 12px" }}>
             {c.name}
           </h2>
           {c.shelfNames.length > 1 && (
-            <p style={{ margin: "0 0 4px", fontSize: 14.5, color: "var(--muted)" }}>
+            <p style={{ margin: "0 0 4px", fontSize: 14, color: "var(--muted)" }}>
               架上常見的寫法：{c.shelfNames.join("、")}
             </p>
           )}
-          <p style={{ margin: "0 0 16px", fontSize: 14.5, color: "var(--muted)" }}>{c.impression}</p>
+          <p style={{ margin: "0 0 16px", fontSize: 14, color: "var(--muted)" }}>{c.impression}</p>
 
           <p style={found}>成分表寫的是</p>
-          <ul style={{ margin: "0 0 16px", paddingLeft: 18, fontSize: 15, lineHeight: 1.9 }}>
+          <ul style={{ margin: "0 0 16px", paddingLeft: 18, fontSize: 15.5, lineHeight: 1.9 }}>
             {c.found.map((f, i) => <li key={i}>{f}</li>)}
           </ul>
 
-          <p style={{ margin: "0 0 10px", fontSize: 16, fontWeight: 700, lineHeight: 1.75 }}>{c.verdict}</p>
-          <p style={{ margin: "0 0 16px", fontSize: 14.5, color: "var(--muted)", lineHeight: 1.9 }}>{c.why}</p>
+          <p style={{ margin: "0 0 10px", fontSize: 17, fontWeight: 700, lineHeight: 1.75 }}>{c.verdict}</p>
+          <p style={{ margin: "0 0 16px", fontSize: 14, color: "var(--muted)", lineHeight: 1.9 }}>{c.why}</p>
 
           {"note" in c && c.note && (
             <p style={{
@@ -150,14 +150,14 @@ export default function Page() {
       {ALSO.map((c) => (
         <article key={c.id} style={card}>
           <span style={S.brand}>{c.brand}</span>
-          <h2 style={{ fontFamily: "var(--font-serif), serif", fontSize: 19, lineHeight: 1.45, margin: "2px 0 10px" }}>
+          <h2 style={{ fontFamily: "var(--font-serif), serif", fontSize: 20, lineHeight: 1.45, margin: "2px 0 10px" }}>
             {c.name}
           </h2>
-          <p style={{ margin: "0 0 12px", fontSize: 14.5, color: "var(--muted)" }}>{c.impression}</p>
-          <ul style={{ margin: "0 0 12px", paddingLeft: 18, fontSize: 15, lineHeight: 1.9 }}>
+          <p style={{ margin: "0 0 12px", fontSize: 14, color: "var(--muted)" }}>{c.impression}</p>
+          <ul style={{ margin: "0 0 12px", paddingLeft: 18, fontSize: 15.5, lineHeight: 1.9 }}>
             {c.found.map((f, i) => <li key={i}>{f}</li>)}
           </ul>
-          <p style={{ margin: "0 0 14px", fontSize: 16, fontWeight: 700, lineHeight: 1.75 }}>{c.verdict}</p>
+          <p style={{ margin: "0 0 14px", fontSize: 17, fontWeight: 700, lineHeight: 1.75 }}>{c.verdict}</p>
           <Checked
             checkedAt={c.checkedAt} sources={c.sources}
             productId={(c as { productId?: string }).productId}
@@ -171,7 +171,7 @@ export default function Page() {
         <p style={{ margin: "0 0 12px", fontSize: 15.5, lineHeight: 1.9 }}>
           我們查資料的時候，發現有幾款被通路歸在「無穀」分類，成分表裡卻有穀物：
         </p>
-        <ul style={{ margin: "0 0 12px", paddingLeft: 18, fontSize: 15, lineHeight: 1.95 }}>
+        <ul style={{ margin: "0 0 12px", paddingLeft: 18, fontSize: 15.5, lineHeight: 1.95 }}>
           {GRAIN.map((g) => {
             // 只連我們自己的購買連結；沒有就不放
             const buy = shopLink((g as { productId?: string }).productId);
@@ -179,7 +179,7 @@ export default function Page() {
               <li key={g.name}>
                 <b>{g.brand} {g.name}</b>：{g.found}
                 {buy && (
-                  <a href={buy} rel="nofollow sponsored" style={{ color: "var(--accent)", fontSize: 13, marginLeft: 6 }}>
+                  <a href={buy} rel="nofollow sponsored" style={{ color: "var(--accent)", fontSize: 12.5, marginLeft: 6 }}>
                     去賣場看成分表 →
                   </a>
                 )}
@@ -187,7 +187,7 @@ export default function Page() {
             );
           })}
         </ul>
-        <p style={{ margin: 0, fontSize: 14.5, lineHeight: 1.9, color: "var(--muted)" }}>
+        <p style={{ margin: 0, fontSize: 14, lineHeight: 1.9, color: "var(--muted)" }}>
           含穀本身不是問題，貓對穀物過敏的比例很低。問題是篩選標籤不可靠，要找無穀的話，看成分表比看分類準。
         </p>
       </div>
@@ -206,8 +206,8 @@ export default function Page() {
       <p style={S.lbl}>那要買什麼</p>
       <div style={S.landing}>
         <div>
-          <h2 style={{ margin: "0 0 6px", fontSize: 18 }}>把貓的狀況講一句，我們刪給你看</h2>
-          <p style={{ margin: 0, fontSize: 15, color: "var(--muted)", lineHeight: 1.8 }}>
+          <h2 style={{ margin: "0 0 6px", fontSize: 20 }}>把貓的狀況講一句，我們刪給你看</h2>
+          <p style={{ margin: 0, fontSize: 15.5, color: "var(--muted)", lineHeight: 1.8 }}>
             例如「英短三歲，一直抓下巴，換過兩種鮭魚口味都沒改善」。
           </p>
         </div>
@@ -224,7 +224,7 @@ export default function Page() {
 
       <footer style={{
         marginTop: 72, paddingTop: 28, borderTop: "1px solid var(--line)",
-        fontSize: 13, color: "var(--faint)", lineHeight: 1.9,
+        fontSize: 12.5, color: "var(--faint)", lineHeight: 1.9,
       }}>
         <p style={{ margin: 0 }}>
           成分資料取自台灣代理商的中文標示，每一筆都寫了查核日期。
@@ -248,6 +248,6 @@ const card: React.CSSProperties = {
 
 const found: React.CSSProperties = {
   fontFamily: "var(--font-mono), monospace",
-  fontSize: 12, fontWeight: 600, letterSpacing: ".12em",
+  fontSize: 12.5, fontWeight: 600, letterSpacing: ".12em",
   textTransform: "uppercase", color: "var(--faint)", margin: "0 0 8px",
 };

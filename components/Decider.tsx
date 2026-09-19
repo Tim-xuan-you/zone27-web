@@ -394,14 +394,14 @@ export default function Decider({
             {answersFor(cat.slug).map((a) => (
               <button key={a.phrase} type="button" onClick={() => run(a.phrase)} style={answerRow}>
                 <span style={{ flex: 1, minWidth: 0 }}>
-                  <span style={{ display: "block", fontSize: 13.5, fontWeight: 700, color: "var(--accent)" }}>{a.label}</span>
+                  <span style={{ display: "block", fontSize: 14, fontWeight: 700, color: "var(--accent)" }}>{a.label}</span>
                   <span style={{ display: "block", fontSize: 15.5, fontWeight: 700, lineHeight: 1.55, marginTop: 2 }}>
-                    <span style={{ fontSize: 13, fontWeight: 500, color: "var(--muted)" }}>{a.p.brand} </span>
+                    <span style={{ fontSize: 12.5, fontWeight: 500, color: "var(--muted)" }}>{a.p.brand} </span>
                     {a.p.name}
                   </span>
                 </span>
                 {a.per && (
-                  <span className="mono" style={{ fontSize: 13.5, fontWeight: 700, color: "var(--keep)", whiteSpace: "nowrap" }}>
+                  <span className="mono" style={{ fontSize: 14, fontWeight: 700, color: "var(--keep)", whiteSpace: "nowrap" }}>
                     ${a.per}/kg
                   </span>
                 )}
@@ -420,11 +420,11 @@ export default function Decider({
                 <span style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 12.5, color: "var(--muted)" }}>
                   {m.p.brand}<Stamp p={m.p} />
                 </span>
-                <span style={{ display: "block", fontSize: 16, fontWeight: 700, lineHeight: 1.5 }}>{m.p.name}</span>
+                <span style={{ display: "block", fontSize: 17, fontWeight: 700, lineHeight: 1.5 }}>{m.p.name}</span>
                 <span style={{ display: "block", marginTop: 4, fontSize: 14, lineHeight: 1.7, color: `var(--${m.tone})`, fontWeight: m.tone === "faint" ? 400 : 700 }}>
                   {m.text}
                 </span>
-                <span style={{ display: "block", marginTop: 4, fontSize: 13, color: "var(--accent)" }}>看這一款 →</span>
+                <span style={{ display: "block", marginTop: 4, fontSize: 12.5, color: "var(--accent)" }}>看這一款 →</span>
               </Link>
             ))}
           </div>
@@ -434,7 +434,7 @@ export default function Decider({
       {empty && (
         <div style={S.emptyBox}>
           <p style={{ margin: 0, fontWeight: 700 }}>這句話我們讀不出條件</p>
-          <p style={{ margin: "8px 0 0", color: "var(--muted)", fontSize: 15, lineHeight: 1.85 }}>
+          <p style={{ margin: "8px 0 0", color: "var(--muted)", fontSize: 15.5, lineHeight: 1.85 }}>
             試著講品種、年齡，還有你觀察到的狀況，
             像是「{species === "cat" ? "英短三歲，一直抓下巴" : "柴犬五歲，一直抓癢"}」這樣就可以了。
           </p>
@@ -494,14 +494,14 @@ function judge(p: Product, v: Verdict, species: Species, form: Form): Mention {
 }
 
 const pickWrap: React.CSSProperties = { marginTop: 14 };
-const pickHead: React.CSSProperties = { display: "block", fontSize: 13, color: "var(--muted)", marginBottom: 8 };
+const pickHead: React.CSSProperties = { display: "block", fontSize: 12.5, color: "var(--muted)", marginBottom: 8 };
 const pickOn: React.CSSProperties = {
   background: "var(--accent-soft)", borderColor: "var(--accent)", color: "var(--accent)", fontWeight: 700,
 };
 
 const answerRow: React.CSSProperties = {
   display: "flex", alignItems: "center", gap: 12, width: "100%", textAlign: "left",
-  background: "var(--surface)", border: "1px solid var(--line)", borderRadius: 12,
+  background: "var(--surface)", border: "1px solid var(--line)", borderRadius: 14,
   padding: "12px 16px", font: "inherit", color: "inherit", cursor: "pointer",
 };
 
@@ -516,7 +516,7 @@ const seg: React.CSSProperties = {
 };
 const segBtn: React.CSSProperties = {
   border: 0, background: "transparent", color: "var(--muted)", cursor: "pointer",
-  font: "inherit", fontSize: 15, fontWeight: 600, padding: "7px 20px", borderRadius: 999,
+  font: "inherit", fontSize: 15.5, fontWeight: 600, padding: "7px 20px", borderRadius: 999,
   display: "inline-flex", alignItems: "center", gap: 6,
 };
 const segSmall: React.CSSProperties = { fontSize: 14, padding: "6px 14px" };
@@ -524,5 +524,5 @@ const segOn: React.CSSProperties = {
   background: "var(--surface)", color: "var(--ink)", boxShadow: "var(--sh)",
 };
 const soonTag: React.CSSProperties = {
-  fontSize: 11, fontWeight: 600, color: "var(--faint)",
+  fontSize: 12.5, fontWeight: 600, color: "var(--faint)",
 };

@@ -83,11 +83,11 @@ export default function Page() {
 
       {!live && (
         <div style={soonBox}>
-          <p style={{ margin: "0 0 6px", fontWeight: 700, fontSize: 16 }}>還在上架</p>
-          <p style={{ margin: "0 0 8px", fontSize: 15, lineHeight: 1.9 }}>
+          <p style={{ margin: "0 0 6px", fontWeight: 700, fontSize: 17 }}>還在上架</p>
+          <p style={{ margin: "0 0 8px", fontSize: 15.5, lineHeight: 1.9 }}>
             {all.length} 款的標示我們一款一款讀完了。購買連結補好 {ready} 款，補到 {MIN_LIVE} 款就開放推薦。
           </p>
-          <p style={{ margin: 0, fontSize: 14.5, color: "var(--muted)", lineHeight: 1.9 }}>
+          <p style={{ margin: 0, fontSize: 14, color: "var(--muted)", lineHeight: 1.9 }}>
             在那之前裁決器先不推薦。推一款你點進去買不到的東西，比不推更糟。讀到的東西先攤開在下面。
           </p>
         </div>
@@ -119,7 +119,7 @@ export default function Page() {
       {live && <CheapestCard species="cat" form="wet" />}
 
       <p style={S.lbl}>我們讀過的 {candidates.length} 款主食罐</p>
-      <p style={{ margin: "0 0 16px", fontSize: 14.5, color: "var(--muted)", lineHeight: 1.9 }}>
+      <p style={{ margin: "0 0 16px", fontSize: 14, color: "var(--muted)", lineHeight: 1.9 }}>
         數字照罐子背面的標示，你翻過來對得上。罐頭的水分從七成多到將近九成，
         包裝上的蛋白質看起來都很低，扣掉水分之後才比得起來，所以兩個數字都列。
         碳水只有品牌自己公布、或是蛋白、脂肪、纖維、灰分、水分都寫齊的，我們才算。
@@ -129,7 +129,7 @@ export default function Page() {
       {refs.length > 0 && (
         <>
           <p style={S.lbl}>對照款：副食罐</p>
-          <p style={{ margin: "0 0 16px", fontSize: 14.5, color: "var(--muted)", lineHeight: 1.9 }}>
+          <p style={{ margin: "0 0 16px", fontSize: 14, color: "var(--muted)", lineHeight: 1.9 }}>
             這兩款放進來，是為了讓裁決器的第一刀有東西可刪，也讓你看看副食罐的標示長什麼樣子。
             我們不會推薦它們當正餐。
           </p>
@@ -139,7 +139,7 @@ export default function Page() {
 
       <footer style={{
         marginTop: 72, paddingTop: 28, borderTop: "1px solid var(--line)",
-        fontSize: 13, color: "var(--faint)", lineHeight: 1.9,
+        fontSize: 12.5, color: "var(--faint)", lineHeight: 1.9,
       }}>
         <p style={{ margin: 0 }}>
           標示資料取自台灣通路與品牌台灣官網的中文標示。
@@ -164,7 +164,7 @@ function Row({ p, live }: { p: Product; live: boolean }) {
   return (
     <article style={row}>
       <span style={S.brand}>{p.brand}</span>
-      <h3 style={{ fontSize: 17.5, lineHeight: 1.5, margin: "2px 0 10px" }}>
+      <h3 style={{ fontSize: 17, lineHeight: 1.5, margin: "2px 0 10px" }}>
         <Link href={productHref(p)} style={{ color: "inherit", textDecoration: "none" }}>{p.name}</Link>
       </h3>
 
@@ -178,18 +178,18 @@ function Row({ p, live }: { p: Product; live: boolean }) {
         <span style={tag}>{p.price.unit}</span>
       </div>
 
-      <p style={{ margin: "0 0 4px", fontSize: 14.5, lineHeight: 1.85 }}>
+      <p style={{ margin: "0 0 4px", fontSize: 14, lineHeight: 1.85 }}>
         <span className="mono">蛋白質 {af?.protein ?? p.spec.protein}%　水分 {p.spec.moisture}%</span>
         <span style={{ color: "var(--muted)" }}>　扣掉水分，蛋白質是 {p.spec.protein}%</span>
       </p>
       <p style={{ margin: "0 0 8px", fontSize: 14, lineHeight: 1.85, color: "var(--muted)" }}>
         {carb}　肉：{meats}
       </p>
-      <p style={{ margin: "0 0 10px", fontSize: 14.5, lineHeight: 1.85 }}>
+      <p style={{ margin: "0 0 10px", fontSize: 14, lineHeight: 1.85 }}>
         <b style={{ color: "var(--cut)" }}>什麼時候不要買：</b>{p.dealbreaker}
       </p>
       {p.knownIssues && (
-        <p style={{ margin: "0 0 10px", fontSize: 13.5, color: "var(--muted)", lineHeight: 1.85 }}>
+        <p style={{ margin: "0 0 10px", fontSize: 14, color: "var(--muted)", lineHeight: 1.85 }}>
           {p.knownIssues}
         </p>
       )}
@@ -224,7 +224,7 @@ const featureTitle: React.CSSProperties = {
   fontFamily: "var(--font-serif), serif", fontSize: 20, margin: "0 0 8px", lineHeight: 1.5,
 };
 const featureBody: React.CSSProperties = {
-  margin: 0, fontSize: 15, color: "var(--muted)", lineHeight: 1.85,
+  margin: 0, fontSize: 15.5, color: "var(--muted)", lineHeight: 1.85,
 };
 const row: React.CSSProperties = {
   background: "var(--surface)", border: "1px solid var(--line)",
@@ -243,5 +243,5 @@ const tagWarn: React.CSSProperties = {
 };
 const foot: React.CSSProperties = {
   display: "flex", flexWrap: "wrap", justifyContent: "space-between", gap: "4px 12px",
-  borderTop: "1px solid var(--line)", paddingTop: 10, fontSize: 13,
+  borderTop: "1px solid var(--line)", paddingTop: 10, fontSize: 12.5,
 };

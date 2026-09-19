@@ -117,7 +117,7 @@ export default function ProductPage({ id, species, form = "dry" }: { id: string;
               {STAMP_LINE[p.chicken.status]}
             </p>
             {p.chicken.found && p.chicken.found.length > 0 && (
-              <ul style={{ margin: "6px 0 0", paddingLeft: 20, fontSize: 14.5, lineHeight: 1.8 }}>
+              <ul style={{ margin: "6px 0 0", paddingLeft: 20, fontSize: 14, lineHeight: 1.8 }}>
                 {p.chicken.found.map((f, i) => <li key={i}>{f}</li>)}
               </ul>
             )}
@@ -137,14 +137,14 @@ export default function ProductPage({ id, species, form = "dry" }: { id: string;
         </div>
       ) : (
         <div style={statusBox}>
-          <p style={{ margin: "0 0 10px", fontSize: 15, fontWeight: 700, color: "var(--muted)" }}>
+          <p style={{ margin: "0 0 10px", fontSize: 15.5, fontWeight: 700, color: "var(--muted)" }}>
             {p.referenceOnly ? "這一款我們不推薦，放進來是為了比較" : "購買連結還在補"}
           </p>
           <p style={{ margin: "0 0 10px", fontSize: 15.5, lineHeight: 1.85 }}>
             <b style={{ color: "var(--cut)" }}>什麼時候不要買：</b>{p.dealbreaker}
           </p>
           {p.knownIssues && (
-            <p style={{ margin: 0, fontSize: 14.5, color: "var(--muted)", lineHeight: 1.85 }}>{p.knownIssues}</p>
+            <p style={{ margin: 0, fontSize: 14, color: "var(--muted)", lineHeight: 1.85 }}>{p.knownIssues}</p>
           )}
         </div>
       )}
@@ -152,16 +152,16 @@ export default function ProductPage({ id, species, form = "dry" }: { id: string;
       {mismatch && (
         <Link href={mismatch.path} style={mismatchBox}>
           <span style={{ fontSize: 12.5, fontWeight: 700, color: "var(--cut)" }}>名字跟成分表對不上</span>
-          <span style={{ display: "block", marginTop: 4, fontSize: 15, lineHeight: 1.8 }}>{mismatch.verdict}</span>
-          <span style={{ display: "block", marginTop: 4, fontSize: 13.5, color: "var(--accent)" }}>看逐筆核對 →</span>
+          <span style={{ display: "block", marginTop: 4, fontSize: 15.5, lineHeight: 1.8 }}>{mismatch.verdict}</span>
+          <span style={{ display: "block", marginTop: 4, fontSize: 14, color: "var(--accent)" }}>看逐筆核對 →</span>
         </Link>
       )}
 
       <p style={S.lbl}>適不適合你家的{animal}</p>
       <div style={S.landing}>
         <div>
-          <h2 style={{ margin: "0 0 6px", fontSize: 18 }}>把牠的狀況講一句，我們刪給你看</h2>
-          <p style={{ margin: 0, fontSize: 15, color: "var(--muted)", lineHeight: 1.8 }}>
+          <h2 style={{ margin: "0 0 6px", fontSize: 20 }}>把牠的狀況講一句，我們刪給你看</h2>
+          <p style={{ margin: 0, fontSize: 15.5, color: "var(--muted)", lineHeight: 1.8 }}>
             過敏、年紀、胖瘦都算進去，這一款會不會被刪，一眼就知道。
           </p>
         </div>
@@ -180,7 +180,7 @@ export default function ProductPage({ id, species, form = "dry" }: { id: string;
               <Link key={x.id} href={productHref(x)} style={otherRow}>
                 <span style={{ fontSize: 12.5, color: "var(--muted)" }}>{x.brand}</span>
                 <span style={{ display: "block", fontSize: 15.5, fontWeight: 700, lineHeight: 1.5 }}>{x.name}</span>
-                <span style={{ display: "block", fontSize: 13, color: "var(--faint)", marginTop: 2 }}>
+                <span style={{ display: "block", fontSize: 12.5, color: "var(--faint)", marginTop: 2 }}>
                   {stageOf(x)}{meatsOf(x) ? ` · 肉：${meatsOf(x)}` : ""}
                 </span>
               </Link>
@@ -199,7 +199,7 @@ function sameStage(a: Product, b: Product): boolean {
 
 const tags: React.CSSProperties = { display: "flex", flexWrap: "wrap", gap: 6 };
 const tag: React.CSSProperties = {
-  fontSize: 13, padding: "4px 11px", borderRadius: 999,
+  fontSize: 12.5, padding: "4px 11px", borderRadius: 999,
   background: "var(--sunken)", border: "1px solid var(--line)", color: "var(--muted)",
 };
 const good: React.CSSProperties = { background: "var(--keep-soft)", borderColor: "var(--keep)", color: "var(--keep)" };
@@ -214,7 +214,7 @@ const mismatchBox: React.CSSProperties = {
 };
 const otherRow: React.CSSProperties = {
   display: "block", background: "var(--surface)", border: "1px solid var(--line)",
-  borderRadius: 12, padding: "12px 16px", textDecoration: "none", color: "inherit",
+  borderRadius: 14, padding: "12px 16px", textDecoration: "none", color: "inherit",
 };
 
 const chickBox: React.CSSProperties = {

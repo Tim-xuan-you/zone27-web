@@ -123,7 +123,7 @@ function Field({ label, children }: { label: string; children: React.ReactNode }
 function Row({ label, value, big }: { label: string; value: string; big?: boolean }) {
   return (
     <div style={row}>
-      <span style={{ fontSize: 14.5, color: "var(--muted)" }}>{label}</span>
+      <span style={{ fontSize: 14, color: "var(--muted)" }}>{label}</span>
       <span className="mono" style={{ fontSize: big ? 26 : 19, fontWeight: 700 }}>{value}</span>
     </div>
   );
@@ -138,13 +138,13 @@ const fieldLabel: React.CSSProperties = {
 const fieldRow: React.CSSProperties = {
   display: "flex", alignItems: "center", gap: 6,
   background: "var(--surface)", border: "1px solid var(--line)",
-  borderRadius: 10, padding: "10px 14px",
+  borderRadius: 8, padding: "10px 14px",
 };
 const input: React.CSSProperties = {
   flex: 1, minWidth: 0, border: 0, background: "transparent",
-  color: "var(--ink)", font: "inherit", fontSize: 16, outline: "none",
+  color: "var(--ink)", font: "inherit", fontSize: 17, outline: "none",
 };
-const unit: React.CSSProperties = { fontSize: 13.5, color: "var(--muted)", whiteSpace: "nowrap" };
+const unit: React.CSSProperties = { fontSize: 14, color: "var(--muted)", whiteSpace: "nowrap" };
 const mixRow: React.CSSProperties = { display: "flex", flexWrap: "wrap", gap: 8, marginTop: 14 };
 const mixBtn: React.CSSProperties = {
   font: "inherit", fontSize: 14, padding: "7px 14px", borderRadius: 999, cursor: "pointer",
@@ -162,8 +162,8 @@ const row: React.CSSProperties = {
   gap: 12, padding: "10px 0", flexWrap: "wrap",
 };
 const sub: React.CSSProperties = {
-  margin: "0 0 6px", fontSize: 13.5, color: "var(--muted)", lineHeight: 1.9,
+  margin: "0 0 6px", fontSize: 14, color: "var(--muted)", lineHeight: 1.9,
 };
 const caveat: React.CSSProperties = {
-  marginTop: 16, fontSize: 13.5, color: "var(--muted)", lineHeight: 1.95,
+  marginTop: 16, fontSize: 14, color: "var(--muted)", lineHeight: 1.95,
 };

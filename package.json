@@ -24,7 +24,8 @@
     "outbound:check": "tsx scripts/outbound-check.ts",
     "promo:check": "tsx scripts/promo-check.ts",
     "litter:import": "tsx scripts/import-litter.ts",
-    "treat:import": "tsx scripts/import-treat.ts"
+    "treat:import": "tsx scripts/import-treat.ts",
+    "ui:check": "tsx scripts/ui-check.ts"
   },
   "dependencies": {
     "@supabase/ssr": "^0.10.3",

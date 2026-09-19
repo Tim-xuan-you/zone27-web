@@ -38,9 +38,9 @@ const wrap: React.CSSProperties = {
 };
 const line: React.CSSProperties = {
   margin: 0, paddingTop: 16, borderTop: "1px dashed var(--line)",
-  fontSize: 13, color: "var(--faint)", lineHeight: 1.9,
+  fontSize: 12.5, color: "var(--faint)", lineHeight: 1.9,
 };
 const link: React.CSSProperties = { color: "var(--muted)", fontWeight: 600 };
 const addr: React.CSSProperties = {
-  display: "block", fontFamily: "var(--font-mono), monospace", fontSize: 12, marginTop: 2,
+  display: "block", fontFamily: "var(--font-mono), monospace", fontSize: 12.5, marginTop: 2,
 };

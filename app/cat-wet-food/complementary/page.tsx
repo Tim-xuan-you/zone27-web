@@ -85,7 +85,7 @@ export default function Page() {
       <h1 style={{ fontSize: "clamp(27px,5.4vw,38px)", lineHeight: 1.42, margin: "0 0 18px" }}>
         {TITLE}
       </h1>
-      <p style={{ fontSize: 19, lineHeight: 1.8, margin: "0 0 10px", fontWeight: 700 }}>
+      <p style={{ fontSize: 20, lineHeight: 1.8, margin: "0 0 10px", fontWeight: 700 }}>
         偶爾一餐沒關係。天天當正餐，不行。
       </p>
       <p style={{ color: "var(--muted)", fontSize: 17, lineHeight: 1.9, margin: "0 0 8px", maxWidth: "42ch" }}>
@@ -106,7 +106,7 @@ export default function Page() {
 
       <p style={S.lbl}>我們讀到的數字</p>
       {/* 手機上四欄會擠出畫面：主食副食收進名字那一格，右邊只放兩個數字 */}
-      <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 14.5 }}>
+      <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 14 }}>
         <thead>
           <tr style={{ color: "var(--faint)", fontSize: 12.5, textAlign: "left" }}>
             <th style={th}>罐頭</th>
@@ -121,7 +121,7 @@ export default function Page() {
             return (
               <tr key={r.id} style={{ borderTop: "1px solid var(--line)" }}>
                 <td style={td}>
-                  <span style={{ display: "block", fontSize: 12, fontWeight: 700, color: r.side ? "var(--cut)" : "var(--keep)" }}>
+                  <span style={{ display: "block", fontSize: 12.5, fontWeight: 700, color: r.side ? "var(--cut)" : "var(--keep)" }}>
                     {r.side ? "副食罐" : "主食罐"}
                   </span>
                   {buy
@@ -135,7 +135,7 @@ export default function Page() {
           })}
         </tbody>
       </table>
-      <p style={{ margin: "12px 0 0", fontSize: 13.5, color: "var(--muted)", lineHeight: 1.9 }}>
+      <p style={{ margin: "12px 0 0", fontSize: 14, color: "var(--muted)", lineHeight: 1.9 }}>
         數字照包裝標示。「沒添加」是指成分表裡沒有牛磺酸這一項，
         魚跟肉本身還是有一點，只是沒有特別補。
       </p>
@@ -167,7 +167,7 @@ export default function Page() {
           份量抓<b>一天熱量的一成</b>。一隻 4 公斤、已結紮的成貓一天大約 {DAY} 大卡，點心額度大約 {TREAT} 大卡。
           {SIDE_KCAL && <>一罐 80 克的湯罐大約 {SIDE_KCAL} 大卡，<b>分兩天給剛好</b>。</>}
         </p>
-        <p style={{ margin: "12px 0 0", fontSize: 14.5, lineHeight: 1.9, color: "var(--muted)" }}>
+        <p style={{ margin: "12px 0 0", fontSize: 14, lineHeight: 1.9, color: "var(--muted)" }}>
           給了副食罐，正餐就要跟著少一點。很多貓變胖是這樣來的：正餐照舊，點心另外加。
         </p>
       </div>
@@ -175,8 +175,8 @@ export default function Page() {
       <p style={S.lbl}>那主食罐要買哪一款</p>
       <div style={S.landing}>
         <div>
-          <h2 style={{ margin: "0 0 6px", fontSize: 18 }}>把貓的狀況講一句，我們刪給你看</h2>
-          <p style={{ margin: 0, fontSize: 15, color: "var(--muted)", lineHeight: 1.8 }}>
+          <h2 style={{ margin: "0 0 6px", fontSize: 20 }}>把貓的狀況講一句，我們刪給你看</h2>
+          <p style={{ margin: 0, fontSize: 15.5, color: "var(--muted)", lineHeight: 1.8 }}>
             裁決器第一刀就是把副食罐刪掉，剩下的才照你家貓的狀況挑。
           </p>
         </div>
@@ -192,7 +192,7 @@ export default function Page() {
 
       <footer style={{
         marginTop: 72, paddingTop: 28, borderTop: "1px solid var(--line)",
-        fontSize: 13, color: "var(--faint)", lineHeight: 1.9,
+        fontSize: 12.5, color: "var(--faint)", lineHeight: 1.9,
       }}>
         <p style={{ margin: 0 }}>
           我們不是獸醫。上面講的是一般的餵食原則，不是診斷。

@@ -78,13 +78,13 @@ export default function Page() {
       <p style={{ color: "var(--muted)", fontSize: 17, lineHeight: 1.9, margin: "0 0 10px", maxWidth: "42ch" }}>
         乾糧換掉雞了，罐頭也挑了鮭魚口味，貓還是在抓...先把罐頭翻到背面看第一項。
       </p>
-      <p style={{ color: "var(--faint)", fontSize: 13, margin: "0 0 8px" }}>
+      <p style={{ color: "var(--faint)", fontSize: 12.5, margin: "0 0 8px" }}>
         {CASES.length} 款逐筆核對 · 最後查核 {data._meta.checkedAt}
       </p>
 
       <p style={S.lbl}>我們讀到的</p>
       <div style={box}>
-        <p style={{ margin: 0, fontSize: 16.5, lineHeight: 1.9, fontWeight: 700 }}>
+        <p style={{ margin: 0, fontSize: 17, lineHeight: 1.9, fontWeight: 700 }}>
           {data._meta.tally}
         </p>
         <p style={{ margin: "12px 0 0", fontSize: 15.5, lineHeight: 1.9, color: "var(--muted)" }}>
@@ -114,18 +114,18 @@ export default function Page() {
       {CASES.map((c) => (
         <article key={c.id} style={card}>
           <span style={S.brand}>{c.brand}</span>
-          <h2 style={{ fontFamily: "var(--font-serif), serif", fontSize: 21, lineHeight: 1.45, margin: "2px 0 12px" }}>
+          <h2 style={{ fontFamily: "var(--font-serif), serif", fontSize: 20, lineHeight: 1.45, margin: "2px 0 12px" }}>
             {c.name}
           </h2>
-          <p style={{ margin: "0 0 16px", fontSize: 14.5, color: "var(--muted)" }}>{c.impression}</p>
+          <p style={{ margin: "0 0 16px", fontSize: 14, color: "var(--muted)" }}>{c.impression}</p>
 
           <p style={found}>成分表寫的是</p>
-          <ul style={{ margin: "0 0 16px", paddingLeft: 18, fontSize: 15, lineHeight: 1.9 }}>
+          <ul style={{ margin: "0 0 16px", paddingLeft: 18, fontSize: 15.5, lineHeight: 1.9 }}>
             {c.found.map((f, i) => <li key={i}>{f}</li>)}
           </ul>
 
-          <p style={{ margin: "0 0 10px", fontSize: 16, fontWeight: 700, lineHeight: 1.75 }}>{c.verdict}</p>
-          <p style={{ margin: "0 0 16px", fontSize: 14.5, color: "var(--muted)", lineHeight: 1.9 }}>{c.why}</p>
+          <p style={{ margin: "0 0 10px", fontSize: 17, fontWeight: 700, lineHeight: 1.75 }}>{c.verdict}</p>
+          <p style={{ margin: "0 0 16px", fontSize: 14, color: "var(--muted)", lineHeight: 1.9 }}>{c.why}</p>
 
           <Checked
             checkedAt={c.checkedAt} sources={c.sources}
@@ -140,7 +140,7 @@ export default function Page() {
         <p style={{ margin: "0 0 12px", fontSize: 15.5, lineHeight: 1.9 }}>
           不是每一罐都這樣。這三款寫什麼肉，裡面就是什麼肉：
         </p>
-        <ul style={{ margin: "0 0 12px", paddingLeft: 18, fontSize: 15, lineHeight: 1.95 }}>
+        <ul style={{ margin: "0 0 12px", paddingLeft: 18, fontSize: 15.5, lineHeight: 1.95 }}>
           {CLEAN.map((g) => {
             // 只連我們自己的購買連結；還沒有連結的就不放
             const buy = shopLink((g as { productId?: string }).productId);
@@ -148,7 +148,7 @@ export default function Page() {
               <li key={g.name}>
                 <b>{g.brand} {g.name}</b>：{g.found}
                 {buy && (
-                  <a href={buy} rel="nofollow sponsored" style={{ color: "var(--accent)", fontSize: 13, marginLeft: 6 }}>
+                  <a href={buy} rel="nofollow sponsored" style={{ color: "var(--accent)", fontSize: 12.5, marginLeft: 6 }}>
                     去賣場看成分表 →
                   </a>
                 )}
@@ -156,7 +156,7 @@ export default function Page() {
             );
           })}
         </ul>
-        <p style={{ margin: 0, fontSize: 14.5, lineHeight: 1.9, color: "var(--muted)" }}>
+        <p style={{ margin: 0, fontSize: 14, lineHeight: 1.9, color: "var(--muted)" }}>
           最後那一款是副食罐，當點心可以，不能當正餐。
           <Link href="/cat-wet-food/complementary" style={{ color: "var(--accent)" }}>副食罐為什麼不能當正餐 →</Link>
         </p>
@@ -176,8 +176,8 @@ export default function Page() {
       <p style={S.lbl}>那要買什麼</p>
       <div style={S.landing}>
         <div>
-          <h2 style={{ margin: "0 0 6px", fontSize: 18 }}>把貓的狀況講一句，我們刪給你看</h2>
-          <p style={{ margin: 0, fontSize: 15, color: "var(--muted)", lineHeight: 1.8 }}>
+          <h2 style={{ margin: "0 0 6px", fontSize: 20 }}>把貓的狀況講一句，我們刪給你看</h2>
+          <p style={{ margin: 0, fontSize: 15.5, color: "var(--muted)", lineHeight: 1.8 }}>
             例如「英短三歲，對雞肉過敏，想找主食罐」。
           </p>
         </div>
@@ -194,7 +194,7 @@ export default function Page() {
 
       <footer style={{
         marginTop: 72, paddingTop: 28, borderTop: "1px solid var(--line)",
-        fontSize: 13, color: "var(--faint)", lineHeight: 1.9,
+        fontSize: 12.5, color: "var(--faint)", lineHeight: 1.9,
       }}>
         <p style={{ margin: 0 }}>
           成分資料取自台灣通路與品牌台灣官網的中文標示，每一筆都寫了查核日期。
@@ -218,6 +218,6 @@ const card: React.CSSProperties = {
 
 const found: React.CSSProperties = {
   fontFamily: "var(--font-mono), monospace",
-  fontSize: 12, fontWeight: 600, letterSpacing: ".12em",
+  fontSize: 12.5, fontWeight: 600, letterSpacing: ".12em",
   textTransform: "uppercase", color: "var(--faint)", margin: "0 0 8px",
 };

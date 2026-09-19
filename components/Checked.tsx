@@ -37,7 +37,7 @@ export default function Checked({
         <a
           href={buy}
           rel="nofollow sponsored"
-          style={{ display: "inline-block", marginTop: 6, fontSize: 13.5, fontWeight: 600, color: "var(--accent)" }}
+          style={{ display: "inline-block", marginTop: 6, fontSize: 14, fontWeight: 600, color: "var(--accent)" }}
         >
           去賣場看這一款的成分表 →
         </a>

@@ -89,7 +89,7 @@ export default function Result({
           <Cascade verdict={verdict} />
           <div style={S.emptyBox}>
             <p style={{ margin: 0, fontWeight: 700 }}>目前沒有一款同時滿足這些條件</p>
-            <p style={{ margin: "8px 0 0", color: "var(--muted)", fontSize: 15 }}>
+            <p style={{ margin: "8px 0 0", color: "var(--muted)", fontSize: 15.5 }}>
               這其實不是壞消息啦，硬推一款不適合的才是。可以放寬其中一個條件再試試看。
             </p>
           </div>
@@ -152,8 +152,8 @@ export default function Result({
       <p style={S.lbl}>都不合適？</p>
       <div style={S.landing}>
         <div>
-          <h2 style={{ margin: "0 0 6px", fontSize: 18 }}>換個講法再跑一次</h2>
-          <p style={{ margin: 0, fontSize: 15, color: "var(--muted)", lineHeight: 1.8 }}>
+          <h2 style={{ margin: "0 0 6px", fontSize: 20 }}>換個講法再跑一次</h2>
+          <p style={{ margin: 0, fontSize: 15.5, color: "var(--muted)", lineHeight: 1.8 }}>
             多講一點通常就不一樣了，像是體重、現在吃什麼、症狀多久了。
             出貨和庫存要問賣場，牠不舒服要看醫生，<Link href="/ask" style={{ color: "var(--accent)" }}>哪個問題該問誰</Link>寫在這裡。
           </p>
@@ -319,14 +319,14 @@ function SecondPick({ alt }: { alt: NonNullable<Verdict["alt"]> }) {
     <div style={second}>
       <span style={secondHead}>{alt.kind === "cheaper" ? "想省一點" : "不看價錢的話"}</span>
       <div style={{ minWidth: 0 }}>
-        <Link href={productHref(p)} style={{ ...nameLink, display: "block", fontSize: 16, fontWeight: 700, lineHeight: 1.5 }}>
+        <Link href={productHref(p)} style={{ ...nameLink, display: "block", fontSize: 17, fontWeight: 700, lineHeight: 1.5 }}>
           <span style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 12.5, fontWeight: 500, color: "var(--muted)" }}>
             {p.brand}<Stamp p={p} />
           </span>
           {p.name}
         </Link>
         <p style={{ margin: "6px 0 0", fontSize: 14, lineHeight: 1.75 }}>{alt.line}</p>
-        <p style={{ margin: "6px 0 0", fontSize: 13.5, lineHeight: 1.75, color: "var(--cut)" }}>
+        <p style={{ margin: "6px 0 0", fontSize: 14, lineHeight: 1.75, color: "var(--cut)" }}>
           ✕ 什麼時候不要買：{p.dealbreaker}
         </p>
       </div>
@@ -341,10 +341,10 @@ function SecondPick({ alt }: { alt: NonNullable<Verdict["alt"]> }) {
 
 const second: React.CSSProperties = {
   display: "grid", gridTemplateColumns: "1fr", gap: 10, marginTop: 14,
-  background: "var(--surface)", border: "1px solid var(--line)", borderRadius: 16, padding: "16px 18px",
+  background: "var(--surface)", border: "1px solid var(--line)", borderRadius: 14, padding: "16px 18px",
 };
 const secondHead: React.CSSProperties = {
-  gridColumn: "1 / -1", fontSize: 13, fontWeight: 700, color: "var(--accent)", letterSpacing: ".04em",
+  gridColumn: "1 / -1", fontSize: 12.5, fontWeight: 700, color: "var(--accent)", letterSpacing: ".04em",
 };
 
 /* ------------------------------------------------------------------ */
@@ -489,11 +489,11 @@ const tTitle: React.CSSProperties = {
 };
 
 const tBody: React.CSSProperties = {
-  margin: 0, fontSize: 14.5, color: "var(--muted)", lineHeight: 1.9,
+  margin: 0, fontSize: 14, color: "var(--muted)", lineHeight: 1.9,
 };
 
 const tBetter: React.CSSProperties = {
-  display: "block", marginTop: 8, fontSize: 14.5,
+  display: "block", marginTop: 8, fontSize: 14,
   color: "var(--keep)", lineHeight: 1.9,
 };
 
@@ -759,10 +759,10 @@ function Timing({ p }: { p: Product }) {
       borderColor: advice.wait ? "var(--warn)" : "var(--keep)",
       background: advice.wait ? "var(--warn-soft)" : "var(--keep-soft)",
     }}>
-      <p style={{ margin: 0, fontWeight: 700, fontSize: 15 }}>
+      <p style={{ margin: 0, fontWeight: 700, fontSize: 15.5 }}>
         {advice.wait ? "現在不是好時機，建議先等等" : "現在買不吃虧"}
       </p>
-      <p style={{ margin: "4px 0 0", fontSize: 13.5, color: "var(--muted)" }}>
+      <p style={{ margin: "4px 0 0", fontSize: 14, color: "var(--muted)" }}>
         {advice.verdict}
       </p>
     </div>
@@ -1043,19 +1043,19 @@ function SizeTable({ p, weightKg, stage, said }: { p: Product; weightKg?: number
 
 const szMoreBox: React.CSSProperties = { borderTop: "1px solid var(--line)" };
 const szMore: React.CSSProperties = {
-  cursor: "pointer", padding: "12px 0", fontSize: 13.5, color: "var(--muted)", listStylePosition: "inside",
+  cursor: "pointer", padding: "12px 0", fontSize: 14, color: "var(--muted)", listStylePosition: "inside",
 };
 
 const szRow: React.CSSProperties = {
   display: "grid", gridTemplateColumns: "1fr auto 16px", columnGap: 10, rowGap: 2, alignItems: "baseline",
   padding: "12px 0", borderTop: "1px solid var(--line)", textDecoration: "none", color: "inherit",
 };
-const szUnit: React.CSSProperties = { fontSize: 16, fontWeight: 700 };
-const szAmt: React.CSSProperties = { fontSize: 16, fontWeight: 700, textAlign: "right" };
+const szUnit: React.CSSProperties = { fontSize: 17, fontWeight: 700 };
+const szAmt: React.CSSProperties = { fontSize: 17, fontWeight: 700, textAlign: "right" };
 const szChev: React.CSSProperties = {
   gridRow: "1 / span 2", gridColumn: 3, alignSelf: "center", color: "var(--accent)", fontSize: 22, lineHeight: 1,
 };
-const szStore: React.CSSProperties = { fontSize: 13, color: "var(--muted)", lineHeight: 1.6, minWidth: 0 };
+const szStore: React.CSSProperties = { fontSize: 12.5, color: "var(--muted)", lineHeight: 1.6, minWidth: 0 };
 const szPer: React.CSSProperties = { fontSize: 12.5, color: "var(--keep)", textAlign: "right" };
 const szMeta: React.CSSProperties = {
   gridColumn: "1 / span 2", display: "flex", flexWrap: "wrap", gap: "2px 10px", fontSize: 12.5, marginTop: 4, lineHeight: 1.6,

@@ -75,7 +75,7 @@ export default function Page() {
       <p style={{ color: "var(--muted)", fontSize: 17, lineHeight: 1.9, margin: "0 0 10px", maxWidth: "42ch" }}>
         換了三種「低敏」飼料，狗還是抓...很多時候是那三包裡面都有雞。
       </p>
-      <p style={{ color: "var(--faint)", fontSize: 13, margin: "0 0 8px" }}>
+      <p style={{ color: "var(--faint)", fontSize: 12.5, margin: "0 0 8px" }}>
         {CASES.length} 款逐筆核對 · 最後查核 {data._meta.checkedAt}
       </p>
 
@@ -113,28 +113,28 @@ export default function Page() {
           {"ours" in c && c.ours && <p style={oursTag}>這款我們自己在推</p>}
 
           <span style={S.brand}>{c.brand}</span>
-          <h2 style={{ fontFamily: "var(--font-serif), serif", fontSize: 21, lineHeight: 1.45, margin: "2px 0 12px" }}>
+          <h2 style={{ fontFamily: "var(--font-serif), serif", fontSize: 20, lineHeight: 1.45, margin: "2px 0 12px" }}>
             {c.name}
           </h2>
 
-          <p style={{ margin: "0 0 4px", fontSize: 14.5, color: "var(--muted)" }}>
+          <p style={{ margin: "0 0 4px", fontSize: 14, color: "var(--muted)" }}>
             架上常見的寫法：{c.shelfNames.join("、")}
           </p>
-          <p style={{ margin: "0 0 16px", fontSize: 14.5, color: "var(--muted)" }}>
+          <p style={{ margin: "0 0 16px", fontSize: 14, color: "var(--muted)" }}>
             {c.impression}
           </p>
 
           <p style={found}>成分表寫的是</p>
-          <ul style={{ margin: "0 0 16px", paddingLeft: 18, fontSize: 15, lineHeight: 1.9 }}>
+          <ul style={{ margin: "0 0 16px", paddingLeft: 18, fontSize: 15.5, lineHeight: 1.9 }}>
             {c.found.map((f, i) => (
               <li key={i}>{f}</li>
             ))}
           </ul>
 
-          <p style={{ margin: "0 0 10px", fontSize: 16, fontWeight: 700, lineHeight: 1.75 }}>
+          <p style={{ margin: "0 0 10px", fontSize: 17, fontWeight: 700, lineHeight: 1.75 }}>
             {c.verdict}
           </p>
-          <p style={{ margin: "0 0 16px", fontSize: 14.5, color: "var(--muted)", lineHeight: 1.9 }}>
+          <p style={{ margin: "0 0 16px", fontSize: 14, color: "var(--muted)", lineHeight: 1.9 }}>
             {c.why}
           </p>
 
@@ -172,8 +172,8 @@ export default function Page() {
       <p style={S.lbl}>那要買什麼</p>
       <div style={S.landing}>
         <div>
-          <h2 style={{ margin: "0 0 6px", fontSize: 18 }}>把狗的狀況講一句，我們刪給你看</h2>
-          <p style={{ margin: 0, fontSize: 15, color: "var(--muted)", lineHeight: 1.8 }}>
+          <h2 style={{ margin: "0 0 6px", fontSize: 20 }}>把狗的狀況講一句，我們刪給你看</h2>
+          <p style={{ margin: 0, fontSize: 15.5, color: "var(--muted)", lineHeight: 1.8 }}>
             例如「柴犬五歲，一直抓癢，換過兩種雞肉飼料都沒改善」。
           </p>
         </div>
@@ -191,7 +191,7 @@ export default function Page() {
 
       <footer style={{
         marginTop: 72, paddingTop: 28, borderTop: "1px solid var(--line)",
-        fontSize: 13, color: "var(--faint)", lineHeight: 1.9,
+        fontSize: 12.5, color: "var(--faint)", lineHeight: 1.9,
       }}>
         <p style={{ margin: 0 }}>
           成分資料取自品牌官網與通路商品頁，每一筆都寫了查核日期。
@@ -225,6 +225,6 @@ const oursTag: React.CSSProperties = {
 
 const found: React.CSSProperties = {
   fontFamily: "var(--font-mono), monospace",
-  fontSize: 12, fontWeight: 600, letterSpacing: ".12em",
+  fontSize: 12.5, fontWeight: 600, letterSpacing: ".12em",
   textTransform: "uppercase", color: "var(--faint)", margin: "0 0 8px",
 };

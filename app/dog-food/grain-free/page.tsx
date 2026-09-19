@@ -93,7 +93,7 @@ export default function Page() {
         短答案：<b style={{ color: "var(--ink)" }}>「無穀」是行銷詞，不是健康保證。</b>
         它沒有回答任何一個你真正在意的問題。
       </p>
-      <p style={{ color: "var(--faint)", fontSize: 13, margin: "0 0 8px" }}>
+      <p style={{ color: "var(--faint)", fontSize: 12.5, margin: "0 0 8px" }}>
         用我們自己收的 {total} 款成分表對照 · 其中 {total - unchecked.length} 款查過豆類含量
       </p>
 
@@ -104,7 +104,7 @@ export default function Page() {
         <Stat n={gfChicken.length} d={gf.length} label="無穀，但含雞肉或只寫「禽肉」" tone="cut" />
         <Stat n={gfHighCarb.length} d={gf.length} label="無穀，但碳水仍在 40% 以上" tone="cut" />
         <Stat n={gfPulses.length} d={gf.length} label="無穀，而且豆類排在成分表前段" tone="cut" last />
-        <p style={{ margin: "16px 0 0", fontSize: 15, lineHeight: 1.95 }}>
+        <p style={{ margin: "16px 0 0", fontSize: 15.5, lineHeight: 1.95 }}>
           換句話說：<b>無穀不等於無雞、不等於低碳水、也不等於豆類少。</b>
           這三件事才是你真正在意的，而包裝正面那兩個字一件都沒回答。
         </p>
@@ -221,8 +221,8 @@ export default function Page() {
       <p style={S.lbl}>那要買什麼</p>
       <div style={S.landing}>
         <div>
-          <h2 style={{ margin: "0 0 6px", fontSize: 18 }}>把狗的狀況講一句，我們刪給你看</h2>
-          <p style={{ margin: 0, fontSize: 15, color: "var(--muted)", lineHeight: 1.8 }}>
+          <h2 style={{ margin: "0 0 6px", fontSize: 20 }}>把狗的狀況講一句，我們刪給你看</h2>
+          <p style={{ margin: 0, fontSize: 15.5, color: "var(--muted)", lineHeight: 1.8 }}>
             我們不會因為一款是無穀就加分，那個欄位在排序裡不佔任何權重。
           </p>
         </div>
@@ -239,7 +239,7 @@ export default function Page() {
 
       <footer style={{
         marginTop: 72, paddingTop: 28, borderTop: "1px solid var(--line)",
-        fontSize: 13, color: "var(--faint)", lineHeight: 1.9,
+        fontSize: 12.5, color: "var(--faint)", lineHeight: 1.9,
       }}>
         <p style={{ margin: 0 }}>
           這一頁的比例是從我們自己的商品資料算出來的，商品增加數字就會跟著變，
@@ -268,7 +268,7 @@ function Stat({
           color: tone ? "var(--cut)" : "var(--ink)",
         }}
       >{n} / {d}</span>
-      <span style={{ fontSize: 15, lineHeight: 1.7 }}>{label}</span>
+      <span style={{ fontSize: 15.5, lineHeight: 1.7 }}>{label}</span>
     </div>
   );
 }
@@ -280,7 +280,7 @@ function Box({ tone, children }: { tone: "keep" | "warn"; children: React.ReactN
   return (
     <div style={{
       ...c, border: "1px solid", borderRadius: 8,
-      padding: "14px 16px", fontSize: 14.5, lineHeight: 1.85, margin: "14px 0 0",
+      padding: "14px 16px", fontSize: 14, lineHeight: 1.85, margin: "14px 0 0",
     }}>{children}</div>
   );
 }

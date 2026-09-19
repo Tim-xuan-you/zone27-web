@@ -19,10 +19,69 @@ import type { CSSProperties } from "react";
  * 4. 顏色只有三種用途：內容、語意（好／壞／注意）、強調。
  */
 
-const T = { xxl: 26, xl: 20, lg: 17, md: 15, sm: 13.5, xs: 12 };
-const G = { xs: 4, sm: 8, md: 12, lg: 16, xl: 24, xxl: 32, huge: 48 };
+/**
+ * 字級、間距、圓角。**一定要 export。**
+ *
+ * 這三行以前是檔案私有的，結果新做的頁面（貓砂、貓零食）各自在檔尾
+ * 重寫一份 box / lbl / row，數字全靠手抄。全站就長出 14、14.5、15、15.5
+ * 四種內文字級，圓角六種。單看每一頁都整齊，放在一起就是四套系統。
+ *
+ * 拿不到的東西沒有人會用。所以規則很簡單：**新頁面不自己定數字，只從這裡拿。**
+ * npm run ui:check 會把沒照做的地方列出來。
+ */
+export const T = { h1: 28, h2: 22, xxl: 26, xl: 20, lg: 17, md: 15.5, sm: 14, xs: 12.5 };
+export const G = { xs: 4, sm: 8, md: 12, lg: 16, xl: 24, xxl: 32, huge: 48 };
+/** 圓角只有三階：小標籤、卡片、藥丸。中間值不要再發明了 */
+export const R = { sm: 8, md: 14, pill: 999 };
 
 export const S: Record<string, CSSProperties> = {
+  /* ---------- 版面骨架：每一頁最外層都長一樣 ---------- */
+  page: { maxWidth: 720, margin: "0 auto", padding: "0 20px 120px" },
+  /** 比較寬的版型（有表格、有卡片牆的頁） */
+  pageWide: { maxWidth: 760, margin: "0 auto", padding: "0 20px 120px" },
+
+  /* ---------- 方塊：整站只有這一種 ---------- */
+  box: {
+    background: "var(--surface)", border: "1px solid var(--line)",
+    borderRadius: R.md, padding: `${G.lg + 2}px ${G.xl - 4}px`,
+  },
+
+  /* ---------- 小標籤（材質、型態那種） ---------- */
+  tag: {
+    fontSize: T.xs, color: "var(--muted)", background: "var(--sunken)",
+    borderRadius: R.sm, padding: "5px 10px", whiteSpace: "nowrap",
+  },
+
+  /* ---------- 主按鈕：去賣場的那一顆 ---------- */
+  buy: {
+    display: "inline-block", padding: "13px 28px", borderRadius: R.pill,
+    background: "var(--accent)", color: "var(--accent-ink)",
+    fontWeight: 700, fontSize: 16, textDecoration: "none",
+  },
+
+  /* ---------- 清單列：左邊內容、右邊數字 ---------- */
+  listRow: {
+    display: "flex", justifyContent: "space-between", alignItems: "center", gap: G.md,
+    padding: `${G.md + 2}px 0`, borderBottom: "1px solid var(--line)",
+    textDecoration: "none", color: "inherit",
+  },
+  /** 同一款的別家賣場，線在上面，跟清單列區分開 */
+  storeRow: {
+    display: "flex", justifyContent: "space-between", alignItems: "center", gap: G.md,
+    padding: `${G.md}px 0`, borderTop: "1px solid var(--line)",
+    textDecoration: "none", color: "inherit", fontSize: T.sm + 1,
+  },
+
+  /* ---------- 大數字（價格） ---------- */
+  priceBig: { margin: `0 0 ${G.sm - 2}px`, fontSize: 28, fontWeight: 800 },
+  priceUnit: { fontSize: T.sm + 0.5, color: "var(--muted)", fontWeight: 500, marginLeft: 10 },
+
+  /* ---------- 註腳 ---------- */
+  foot: {
+    marginTop: G.huge + 12, paddingTop: G.xl, borderTop: "1px solid var(--line)",
+    fontSize: T.sm, color: "var(--faint)", lineHeight: 1.9,
+  },
+
   /* ---------- 區段標題 ---------- */
   lbl: {
     fontFamily: "var(--font-mono), monospace",

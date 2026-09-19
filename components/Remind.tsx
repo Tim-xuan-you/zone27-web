@@ -118,21 +118,21 @@ const box: React.CSSProperties = {
   marginTop: 20, background: "var(--sunken)", border: "1px solid var(--line)",
   borderRadius: 14, padding: "18px 20px",
 };
-const head: React.CSSProperties = { margin: "0 0 6px", fontSize: 16, fontWeight: 700 };
+const head: React.CSSProperties = { margin: "0 0 6px", fontSize: 17, fontWeight: 700 };
 const sub: React.CSSProperties = {
   margin: 0, fontSize: 14, color: "var(--muted)", lineHeight: 1.9,
 };
 const pickRow: React.CSSProperties = {
   display: "flex", flexWrap: "wrap", alignItems: "center", gap: "8px 12px", marginTop: 14,
 };
-const pickLabel: React.CSSProperties = { fontSize: 14.5, fontWeight: 700 };
+const pickLabel: React.CSSProperties = { fontSize: 14, fontWeight: 700 };
 const dateInput: React.CSSProperties = {
-  font: "inherit", fontSize: 15, color: "var(--ink)", background: "var(--surface)",
-  border: "1px solid var(--line)", borderRadius: 10, padding: "7px 12px",
+  font: "inherit", fontSize: 15.5, color: "var(--ink)", background: "var(--surface)",
+  border: "1px solid var(--line)", borderRadius: 8, padding: "7px 12px",
   colorScheme: "light dark",
 };
 const resetBtn: React.CSSProperties = {
-  font: "inherit", fontSize: 13, color: "var(--accent)", background: "transparent",
+  font: "inherit", fontSize: 12.5, color: "var(--accent)", background: "transparent",
   border: 0, padding: 0, cursor: "pointer", textDecoration: "underline", textUnderlineOffset: 3,
 };
 const hint: React.CSSProperties = { margin: "6px 0 0", fontSize: 12.5, color: "var(--faint)" };
@@ -143,10 +143,10 @@ const row: React.CSSProperties = {
 const date: React.CSSProperties = {
   fontSize: 14, fontWeight: 700, color: "var(--accent)", minWidth: 76,
 };
-const title: React.CSSProperties = { flex: "1 1 180px", fontSize: 14.5, lineHeight: 1.7 };
+const title: React.CSSProperties = { flex: "1 1 180px", fontSize: 14, lineHeight: 1.7 };
 const pill: React.CSSProperties = {
   border: "1px solid var(--line)", background: "var(--surface)", color: "var(--ink)",
-  borderRadius: 999, padding: "6px 14px", fontSize: 13, fontWeight: 600,
+  borderRadius: 999, padding: "6px 14px", fontSize: 12.5, fontWeight: 600,
   textDecoration: "none", whiteSpace: "nowrap",
 };
 const pillStrong: React.CSSProperties = {

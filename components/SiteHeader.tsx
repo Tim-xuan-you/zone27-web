@@ -85,11 +85,11 @@ const bar: React.CSSProperties = {
   gap: "10px 14px", padding: "28px 0 20px", borderBottom: "1px solid var(--line)",
 };
 const logo: React.CSSProperties = {
-  display: "flex", alignItems: "center", gap: 9, fontWeight: 900, fontSize: 16,
+  display: "flex", alignItems: "center", gap: 9, fontWeight: 900, fontSize: 17,
   color: "inherit", textDecoration: "none", whiteSpace: "nowrap",
 };
 const dot: React.CSSProperties = { width: 9, height: 9, borderRadius: 2, background: "var(--accent)", alignSelf: "flex-start", marginTop: 6 };
-const tagline: React.CSSProperties = { fontSize: 11.5, fontWeight: 600, color: "var(--muted)", letterSpacing: ".02em" };
+const tagline: React.CSSProperties = { fontSize: 12.5, fontWeight: 600, color: "var(--muted)", letterSpacing: ".02em" };
 const nav: React.CSSProperties = {
   display: "flex", flexWrap: "wrap", justifyContent: "flex-end", gap: "6px 18px",
   fontSize: 14, color: "var(--muted)",
@@ -100,7 +100,7 @@ const subBar: React.CSSProperties = {
   display: "flex", flexWrap: "wrap", gap: 8, padding: "12px 0 0",
 };
 const pill: React.CSSProperties = {
-  fontSize: 13.5, padding: "5px 14px", borderRadius: 999, textDecoration: "none", whiteSpace: "nowrap",
+  fontSize: 14, padding: "5px 14px", borderRadius: 999, textDecoration: "none", whiteSpace: "nowrap",
   color: "var(--muted)", background: "var(--sunken)", border: "1px solid var(--line)",
 };
 const pillOn: React.CSSProperties = {

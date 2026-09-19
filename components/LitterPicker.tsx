@@ -51,7 +51,7 @@ export default function LitterPicker({ rows }: { rows: LitterRow[] }) {
   return (
     <section style={{ marginTop: 30 }}>
       <p style={lbl}>你家的情況</p>
-      <p style={{ margin: "-4px 0 12px", fontSize: 14.5, color: "var(--muted)", lineHeight: 1.85 }}>
+      <p style={{ margin: "-4px 0 12px", fontSize: 14, color: "var(--muted)", lineHeight: 1.85 }}>
         點一下就好，可以多選。不符合的我們刪掉，順便告訴你為什麼刪。
       </p>
       <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginBottom: 14 }}>
@@ -72,7 +72,7 @@ export default function LitterPicker({ rows }: { rows: LitterRow[] }) {
       </div>
 
       {active.length > 0 && (
-        <p style={{ margin: "0 0 14px", fontSize: 14.5, color: "var(--muted)", lineHeight: 1.9 }}>
+        <p style={{ margin: "0 0 14px", fontSize: 14, color: "var(--muted)", lineHeight: 1.9 }}>
           刪掉 {cut.length} 款，剩下 <b style={{ color: "var(--ink)" }}>{kept.filter((r) => r.buyable).length} 款可以買</b>。
           {kept.length === 0 && " 條件放寬一點吧，這幾個條件湊在一起，我們讀過的都不符合。"}
         </p>
@@ -84,17 +84,17 @@ export default function LitterPicker({ rows }: { rows: LitterRow[] }) {
             <span style={{ display: "block", fontSize: 12.5, color: "var(--muted)" }}>{r.brand}</span>
             <span style={{ display: "block", fontWeight: 700, lineHeight: 1.5 }}>{r.name}</span>
             <span style={{ display: "flex", gap: 8, flexWrap: "wrap", alignItems: "center", marginTop: 6 }}>
-              <span style={{ fontSize: 12, color: r.flushFg, background: r.flushBg, borderRadius: 6, padding: "2px 8px" }}>{r.flushZh}</span>
+              <span style={{ fontSize: 12.5, color: r.flushFg, background: r.flushBg, borderRadius: 8, padding: "2px 8px" }}>{r.flushZh}</span>
               <span style={{ fontSize: 12.5, color: "var(--muted)" }}>{r.materialZh}</span>
               {r.dust && <span style={{ fontSize: 12.5, color: "var(--muted)" }}>粉塵{{ low: "少", medium: "中", high: "多" }[r.dust]}</span>}
               {!r.clumping && <span style={{ fontSize: 12.5, color: "var(--muted)" }}>不結團</span>}
             </span>
           </span>
-          <span className="mono" style={{ whiteSpace: "nowrap", fontSize: 13.5, textAlign: "right" }}>
+          <span className="mono" style={{ whiteSpace: "nowrap", fontSize: 14, textAlign: "right" }}>
             {r.monthly !== null ? (
               <>
                 <b>${r.monthly.toLocaleString()}</b>
-                <span style={{ color: "var(--faint)", fontSize: 12 }}>／月</span>
+                <span style={{ color: "var(--faint)", fontSize: 12.5 }}>／月</span>
               </>
             ) : (
               <span style={{ color: "var(--faint)", fontSize: 12.5 }}>還沒有連結</span>
@@ -109,7 +109,7 @@ export default function LitterPicker({ rows }: { rows: LitterRow[] }) {
           <summary style={cutSummary}>
             還有 {kept.filter((r) => !r.buyable).length} 款符合，但我們還沒有購買連結
           </summary>
-          <p style={{ margin: "10px 0 0", fontSize: 13.5, color: "var(--muted)", lineHeight: 1.85 }}>
+          <p style={{ margin: "10px 0 0", fontSize: 14, color: "var(--muted)", lineHeight: 1.85 }}>
             材質、能不能沖馬桶都查得到，只是還沒補到連結，所以不放。
           </p>
           {kept.filter((r) => !r.buyable).map((r) => (
@@ -118,7 +118,7 @@ export default function LitterPicker({ rows }: { rows: LitterRow[] }) {
                 <span style={{ display: "block", fontSize: 12.5, color: "var(--muted)" }}>{r.brand}</span>
                 <span style={{ display: "block", fontWeight: 700, lineHeight: 1.5 }}>{r.name}</span>
                 <span style={{ display: "flex", gap: 8, flexWrap: "wrap", alignItems: "center", marginTop: 6 }}>
-                  <span style={{ fontSize: 12, color: r.flushFg, background: r.flushBg, borderRadius: 6, padding: "2px 8px" }}>{r.flushZh}</span>
+                  <span style={{ fontSize: 12.5, color: r.flushFg, background: r.flushBg, borderRadius: 8, padding: "2px 8px" }}>{r.flushZh}</span>
                   <span style={{ fontSize: 12.5, color: "var(--muted)" }}>{r.materialZh}</span>
                 </span>
               </span>
@@ -132,7 +132,7 @@ export default function LitterPicker({ rows }: { rows: LitterRow[] }) {
         <details style={cutBox}>
           <summary style={cutSummary}>被刪掉的 {cut.length} 款，還有為什麼</summary>
           {cut.map(({ row: r, why }) => (
-            <p key={r.id} style={{ margin: "10px 0 0", fontSize: 13.5, lineHeight: 1.8 }}>
+            <p key={r.id} style={{ margin: "10px 0 0", fontSize: 14, lineHeight: 1.8 }}>
               <b>{r.brand} {r.name}</b>
               <span style={{ display: "block", color: "var(--cut)" }}>{why}</span>
             </p>
@@ -144,7 +144,7 @@ export default function LitterPicker({ rows }: { rows: LitterRow[] }) {
 }
 
 const lbl: React.CSSProperties = {
-  margin: "0 0 10px", fontSize: 13, fontWeight: 700, color: "var(--muted)", letterSpacing: ".06em",
+  margin: "0 0 10px", fontSize: 12.5, fontWeight: 700, color: "var(--muted)", letterSpacing: ".06em",
 };
 const chip: React.CSSProperties = {
   display: "inline-flex", alignItems: "center", gap: 6, cursor: "pointer", font: "inherit", fontSize: 14,
