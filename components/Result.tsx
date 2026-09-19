@@ -199,6 +199,7 @@ function StopBox({ stop }: { stop: NonNullable<Verdict["stop"]> }) {
 function Cascade({ verdict }: { verdict: Verdict }) {
   return (
     <div style={S.cascade}>
+      <CutBar verdict={verdict} />
       <div style={S.cascTop}>
         <span style={S.bignum} className="mono">{verdict.startCount}</span>
         <span style={S.cascCap}>款進入裁決</span>
@@ -219,6 +220,49 @@ function Cascade({ verdict }: { verdict: Verdict }) {
     </div>
   );
 }
+
+/**
+ * 把那一刀畫出來。
+ *
+ * 這是整個網站最有說服力的一秒：本來十五款，因為你講的那句話，十二款被刪掉了。
+ * 以前這裡只有三行數字，要讀完才有感覺；一排格子是一眼就有感覺。
+ *
+ * 一款一格。被刪掉的照刪的順序由深到淺，留下來的是實心的綠。
+ *
+ * 這裡不用商品照片。包裝一年改好幾次版，我們放的圖跟賣場當下的圖對不上，
+ * 讀者在要按購買的那一秒會開始懷疑，那是最貴的一種懷疑。
+ * 格子畫的是我們自己的資料，不會過期，也不會跟任何賣場打架。
+ */
+function CutBar({ verdict }: { verdict: Verdict }) {
+  const cells: { key: string; bg: string; op: number }[] = [];
+  verdict.cuts.forEach((c, i) => {
+    // 前幾刀通常刪最多，由深到淺讓人看得出是分好幾次刪的
+    const op = Math.max(0.3, 0.85 - Math.min(i, 4) * 0.13);
+    for (let n = 0; n < c.count; n++) cells.push({ key: `c${i}-${n}`, bg: "var(--cut)", op });
+  });
+  for (let n = 0; n < verdict.survivors.length; n++) {
+    cells.push({ key: `k${n}`, bg: "var(--keep)", op: 1 });
+  }
+  // 刪掉的加留下的對不上總數時（同一款被兩個理由刪到），補上中性格，數字才會跟文字一致
+  for (let n = cells.length; n < verdict.startCount; n++) {
+    cells.push({ key: `p${n}`, bg: "var(--line)", op: 1 });
+  }
+  if (cells.length === 0) return null;
+  return (
+    <div aria-hidden style={cutBarWrap}>
+      {cells.slice(0, verdict.startCount).map((c) => (
+        <span key={c.key} style={{ ...cutCell, background: c.bg, opacity: c.op }} />
+      ))}
+    </div>
+  );
+}
+
+const cutBarWrap: React.CSSProperties = {
+  display: "flex", flexWrap: "wrap", gap: 3, marginBottom: 14,
+};
+const cutCell: React.CSSProperties = {
+  width: 11, height: 11, borderRadius: 2, flex: "none",
+};
 
 /* ------------------------------------------------------------------ */
 /* 主答案                                                              */
@@ -791,13 +835,73 @@ function SpecChips({ p }: { p: Product }) {
     );
   }
   return (
-    <div style={S.specRow}>
-      <span style={S.spec}>粗蛋白 {p.spec.protein}%</span>
-      <span style={S.spec}>碳水 {p.spec.carb}%</span>
-      {p.spec.singleSource && <span style={S.specGood}>單一蛋白源</span>}
+    <>
+      <div style={S.specRow}>
+        <span style={S.spec}>粗蛋白 {p.spec.protein}%</span>
+        <span style={S.spec}>碳水 {p.spec.carb}%</span>
+        {p.spec.singleSource && <span style={S.specGood}>單一蛋白源</span>}
+      </div>
+      <MacroBar p={p} />
+    </>
+  );
+}
+
+/**
+ * 一包飼料裡面是什麼，畫成一條。
+ *
+ * 「粗蛋白 31%、碳水 25%」是兩個要自己在腦袋裡相減的數字。
+ * 畫成一條之後，兩款放在一起滑過去，哪一款肉多、哪一款澱粉多，不用讀就看得出來。
+ *
+ * 顏色只分不同段，不帶褒貶。碳水高不高要看物種跟上限，那是裁決的事，
+ * 不是一條色塊可以判的；這裡只負責把包裝上的數字畫出來。
+ *
+ * 這也是我們不放商品照的補償：照片一年改好幾次版，跟賣場對不上讀者反而不敢買。
+ * 這條是自己的資料畫的，永遠不會過期。
+ */
+function MacroBar({ p }: { p: Product }) {
+  const { protein, fat, carb } = p.spec;
+  if (!protein || !carb) return null;
+  const parts = [
+    { zh: "蛋白", n: protein, bg: "var(--keep)" },
+    { zh: "脂肪", n: fat ?? 0, bg: "var(--accent)" },
+    { zh: "碳水", n: carb, bg: "var(--muted)" },
+  ].filter((x) => x.n > 0);
+  const sum = parts.reduce((a, b) => a + b.n, 0);
+  if (sum <= 0 || sum > 100) return null;
+  const rest = Math.max(0, 100 - sum);
+  return (
+    <div style={{ marginTop: 10 }}>
+      <div style={macroTrack}>
+        {parts.map((x) => (
+          <span key={x.zh} style={{ width: `${x.n}%`, background: x.bg, height: "100%" }} />
+        ))}
+        {rest > 0 && <span style={{ width: `${rest}%`, background: "var(--line)", height: "100%" }} />}
+      </div>
+      <div style={macroLegend}>
+        {parts.map((x) => (
+          <span key={x.zh} style={{ display: "inline-flex", alignItems: "center", gap: 5 }}>
+            <span style={{ width: 7, height: 7, borderRadius: 2, background: x.bg }} />
+            {x.zh} {x.n}%
+          </span>
+        ))}
+        {rest > 0 && (
+          <span style={{ display: "inline-flex", alignItems: "center", gap: 5 }}>
+            <span style={{ width: 7, height: 7, borderRadius: 2, background: "var(--line)" }} />
+            纖維、灰分、水分 {Math.round(rest)}%
+          </span>
+        )}
+      </div>
     </div>
   );
 }
+
+const macroTrack: React.CSSProperties = {
+  display: "flex", height: 7, borderRadius: 999, overflow: "hidden", background: "var(--sunken)",
+};
+const macroLegend: React.CSSProperties = {
+  display: "flex", flexWrap: "wrap", gap: "4px 12px", marginTop: 7,
+  fontSize: 12.5, color: "var(--faint)",
+};
 
 /**
  * 同一家賣場各規格的備註，拆成「每個規格都有的」跟「只屬於這個規格的」。
