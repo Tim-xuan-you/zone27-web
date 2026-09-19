@@ -1,8 +1,9 @@
 import dog from "@/data/dog-food.json";
 import { litters } from "./litter";
+import { treats } from "./treat";
 import cat from "@/data/cat-food.json";
 import catWet from "@/data/cat-wet-food.json";
-import type { Constraint, Form, Product, ProteinSource, Situation, Species } from "./types";
+import type { Constraint, Form, Merchant, Price, Product, ProteinSource, Situation, Species } from "./types";
 import { anchorOf, assumedCatKg, formOf, mer, recommendable, stageForAge } from "./engine";
 import { MIN_LIVE } from "./categories";
 
@@ -31,6 +32,19 @@ export function byId(id: string): Product | undefined {
 }
 
 /**
+ * 跳轉端點要用的查法：飼料、貓砂、零食的 id 都要查得到。
+ *
+ * byId 只認飼料，因為它回傳的是 Product（有成分表、有過敏原）。
+ * 貓砂跟零食的規格完全不是那一套，但賣場那一段是共用的，
+ * 所以這裡只取共用的部分。少了這支，/go/m1/cl-05 會找不到商品，
+ * 讀者按了購買會被丟回首頁 —— 賣場拿不到點擊，我們拿不到分潤。
+ */
+export function merchantFor(sku: string, merchantId: string): Merchant | undefined {
+  const all: { id: string; price: Price }[] = [...catalog, ...litters, ...treats];
+  return all.find((p) => p.id === sku)?.price.merchants.find((m) => m.id === merchantId);
+}
+
+/**
  * 內文提到某一款的時候，唯一可以放的連結：我們自己的購買連結（走 /go/）。
  *
  * 沒有購買連結的就不放連結。連去別家的網站，讀者在那裡買，我們一毛都拿不到。
@@ -48,6 +62,7 @@ export function shopLink(productId?: string): string | null {
 export function liveCount(species: Species, form: Form = "dry"): number {
   // 貓砂不在飼料的 catalog 裡（規格完全不同，見 lib/litter.ts），要另外數
   if (form === "litter") return litters.filter((p) => p.price.merchants.some((m) => !m.dead)).length;
+  if (form === "treat") return treats.filter((p) => p.price.merchants.some((m) => !m.dead)).length;
   return catalogOf(species, form).filter(recommendable).length;
 }
 

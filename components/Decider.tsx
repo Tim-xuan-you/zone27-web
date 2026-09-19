@@ -128,10 +128,12 @@ const COMMON: Record<FoodSlug, { label: string; phrase: string }[]> = {
   ],
 };
 
-/* 裁決器只服務吃的那三個類目。貓砂走自己的規則（沖不沖得下去、一個月多少錢），
-   不會渲染這個元件；萬一被指到，就當貓乾糧處理，不要讓型別到處擴散 */
-const foodCategoriesOf = (sp: Species) => categoriesOf(sp).filter((c) => c.form !== "litter");
-const foodSlug = (s: CategorySlug): FoodSlug => (s === "cat-litter" ? "cat-food" : s);
+/* 裁決器只服務吃正餐的那三個類目。貓砂看的是沖不沖得下去、一個月多少錢；
+   貓零食看的是一天可以給幾條。兩個都有自己的規則，不會渲染這個元件；
+   萬一被指到，就當貓乾糧處理，不要讓型別到處擴散 */
+const NOT_FOOD: Form[] = ["litter", "treat"];
+const foodCategoriesOf = (sp: Species) => categoriesOf(sp).filter((c) => !NOT_FOOD.includes(c.form));
+const foodSlug = (s: CategorySlug): FoodSlug => (s === "cat-litter" || s === "cat-treat" ? "cat-food" : s);
 
 type Answer = { label: string; phrase: string; p: Product; per: number | null };
 const answerCache = new Map<CategorySlug, Answer[]>();

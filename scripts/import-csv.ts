@@ -19,7 +19,7 @@ import { readFileSync, writeFileSync, existsSync } from "node:fs";
 import { resolve } from "node:path";
 import { todayTW } from "../lib/date";
 import { CATEGORIES, type Category } from "../lib/categories";
-import { MAX_MERCHANTS, type ChickenCheck, type ProteinSource } from "../lib/types";
+import { MAX_MERCHANTS, type ChickenCheck, type Form, type ProteinSource } from "../lib/types";
 import { chickenStatusOf } from "../lib/chicken";
 
 /*
@@ -459,8 +459,9 @@ function wetNutrition(row: Row, line: number) {
 errors = [];
 const results: { cat: Category; products: ReturnType<typeof readCategory> }[] = [];
 
-// 貓砂的欄位跟飼料完全不同，走 scripts/import-litter.ts
-for (const cat of CATEGORIES.filter((c) => c.form !== "litter")) {
+// 貓砂、貓零食的欄位跟飼料完全不同，各自走 scripts/import-litter.ts、scripts/import-treat.ts
+const OWN_IMPORTER: Form[] = ["litter", "treat"];
+for (const cat of CATEGORIES.filter((c) => !OWN_IMPORTER.includes(c.form))) {
   if (!existsSync(resolve(cat.csv))) {
     // 狗飼料一定要有；其他類目還沒開始做就跳過
     if (cat.slug === "dog-food") {

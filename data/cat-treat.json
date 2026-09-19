@@ -1,0 +1,259 @@
+{
+  "products": [
+    {
+      "id": "ct-01",
+      "brand": "CIAO 啾嚕",
+      "name": "啾嚕肉泥 雞肉",
+      "checkedAt": "2026-09-19",
+      "note": "水分 91%：一條 14 公克裡面只有大約 1.3 公克是乾物。這是零食不是主食",
+      "searchAs": "CIAO 啾嚕肉泥 雞肉 14g",
+      "spec": {
+        "form": "puree",
+        "kcalPer": 7,
+        "unitZh": "條",
+        "piecesPerPack": 4,
+        "packG": 56,
+        "moisture": 91,
+        "protein": 7,
+        "proteins": [
+          "chicken"
+        ],
+        "additives": "糖類（寡糖）、植物油、増稠多糖類、調味料、紅麴色素、綠茶萃取物",
+        "completeFood": false
+      },
+      "price": {
+        "unit": "56g",
+        "checkedAt": "2026-09-19",
+        "merchants": []
+      }
+    },
+    {
+      "id": "ct-02",
+      "brand": "CIAO 啾嚕",
+      "name": "啾嚕肉泥 鮪魚＋干貝",
+      "checkedAt": "2026-09-19",
+      "note": "水分 91%。成分表後段有兩種增稠劑和紅麴色素",
+      "searchAs": "CIAO 啾嚕肉泥 鮪魚 干貝",
+      "spec": {
+        "form": "puree",
+        "kcalPer": 7,
+        "unitZh": "條",
+        "piecesPerPack": 4,
+        "packG": 56,
+        "moisture": 91,
+        "protein": 7,
+        "proteins": [
+          "fish"
+        ],
+        "additives": "糖類（寡糖）、增稠劑（修飾澱粉）、植物油、多醣類增稠劑、調味料、紅麴色素、綠茶萃取物",
+        "completeFood": false
+      },
+      "price": {
+        "unit": "56g",
+        "checkedAt": "2026-09-19",
+        "merchants": []
+      }
+    },
+    {
+      "id": "ct-03",
+      "brand": "CIAO 啾嚕",
+      "name": "啾嚕肉泥 綜合營養配方 雞肉",
+      "checkedAt": "2026-09-19",
+      "note": "這款是綜合營養食，加了礦物質、維生素和牛磺酸，可以當主食。代價是一條 13 大卡，快兩倍",
+      "searchAs": "CIAO 啾嚕肉泥 綜合營養 雞肉 SC-148",
+      "spec": {
+        "form": "puree",
+        "kcalPer": 13,
+        "unitZh": "條",
+        "piecesPerPack": 4,
+        "packG": 56,
+        "moisture": 85,
+        "protein": 7,
+        "proteins": [
+          "chicken"
+        ],
+        "additives": "糖類（寡糖）、植物油、増稠多糖類、調味料、紅麴色素、綠茶萃取物",
+        "completeFood": true
+      },
+      "price": {
+        "unit": "56g",
+        "checkedAt": "2026-09-19",
+        "merchants": []
+      }
+    },
+    {
+      "id": "ct-04",
+      "brand": "汪喵星球",
+      "name": "太空小零嘴 長盈虱目魚",
+      "checkedAt": "2026-09-19",
+      "note": "蛋白質 89%，幾乎全是魚。凍乾很輕，一天四五克就到零食上限了",
+      "searchAs": "汪喵星球 太空小零嘴 虱目魚 凍乾",
+      "spec": {
+        "form": "freezeDried",
+        "kcalPer100g": 391,
+        "unitZh": "公克",
+        "packG": 50,
+        "moisture": 2.5,
+        "protein": 89.3,
+        "proteins": [
+          "fish"
+        ],
+        "completeFood": false
+      },
+      "price": {
+        "unit": "50g",
+        "checkedAt": "2026-09-19",
+        "merchants": []
+      }
+    },
+    {
+      "id": "ct-05",
+      "brand": "汪喵星球",
+      "name": "太空小零嘴 爆蛋柳葉魚",
+      "checkedAt": "2026-09-19",
+      "note": "脂肪 20.7%，是這一系列裡最高的，熱量也最高",
+      "searchAs": "汪喵星球 爆蛋柳葉魚 凍乾",
+      "spec": {
+        "form": "freezeDried",
+        "kcalPer100g": 469,
+        "unitZh": "公克",
+        "packG": 40,
+        "moisture": 2.5,
+        "protein": 70.7,
+        "proteins": [
+          "fish"
+        ],
+        "completeFood": false
+      },
+      "price": {
+        "unit": "40g",
+        "checkedAt": "2026-09-19",
+        "merchants": []
+      }
+    },
+    {
+      "id": "ct-06",
+      "brand": "汪喵星球",
+      "name": "太空小零嘴 柳葉魚雞鬆",
+      "checkedAt": "2026-09-19",
+      "note": "名字寫柳葉魚，但裡面有雞鬆。對雞過敏的貓要避開",
+      "searchAs": "汪喵星球 柳葉魚雞鬆 凍乾",
+      "spec": {
+        "form": "freezeDried",
+        "kcalPer100g": 416,
+        "unitZh": "公克",
+        "packG": 50,
+        "moisture": 2.5,
+        "protein": 84.2,
+        "proteins": [
+          "fish",
+          "chicken"
+        ],
+        "completeFood": false
+      },
+      "price": {
+        "unit": "50g",
+        "checkedAt": "2026-09-19",
+        "merchants": []
+      }
+    },
+    {
+      "id": "ct-07",
+      "brand": "汪喵星球",
+      "name": "太空小零嘴 日本大干貝",
+      "checkedAt": "2026-09-19",
+      "note": "脂肪 3.6%，這一系列裡最低。在減重的貓可以從這款開始",
+      "searchAs": "汪喵星球 日本大干貝 凍乾",
+      "spec": {
+        "form": "freezeDried",
+        "kcalPer100g": 351,
+        "unitZh": "公克",
+        "packG": 25,
+        "moisture": 2.5,
+        "protein": 80.3,
+        "proteins": [
+          "fish"
+        ],
+        "completeFood": false
+      },
+      "price": {
+        "unit": "25g",
+        "checkedAt": "2026-09-19",
+        "merchants": []
+      }
+    },
+    {
+      "id": "ct-08",
+      "brand": "汪喵星球",
+      "name": "太空小零嘴 澎湖丁香魚",
+      "checkedAt": "2026-09-19",
+      "searchAs": "汪喵星球 澎湖丁香魚 凍乾",
+      "spec": {
+        "form": "freezeDried",
+        "kcalPer100g": 356,
+        "unitZh": "公克",
+        "packG": 30,
+        "moisture": 2.5,
+        "protein": 77.7,
+        "proteins": [
+          "fish"
+        ],
+        "completeFood": false
+      },
+      "price": {
+        "unit": "30g",
+        "checkedAt": "2026-09-19",
+        "merchants": []
+      }
+    },
+    {
+      "id": "ct-09",
+      "brand": "汪喵星球",
+      "name": "太空小零嘴 阿根廷天使紅蝦",
+      "checkedAt": "2026-09-19",
+      "note": "脂肪只有 1.3%，蛋白質 85%",
+      "searchAs": "汪喵星球 天使紅蝦 凍乾",
+      "spec": {
+        "form": "freezeDried",
+        "kcalPer100g": 364,
+        "unitZh": "公克",
+        "packG": 23,
+        "moisture": 2.5,
+        "protein": 85.4,
+        "proteins": [
+          "fish"
+        ],
+        "completeFood": false
+      },
+      "price": {
+        "unit": "23g",
+        "checkedAt": "2026-09-19",
+        "merchants": []
+      }
+    },
+    {
+      "id": "ct-10",
+      "brand": "汪喵星球",
+      "name": "太空小零嘴 虱目魚菲力",
+      "checkedAt": "2026-09-19",
+      "searchAs": "汪喵星球 虱目魚菲力 凍乾",
+      "spec": {
+        "form": "freezeDried",
+        "kcalPer100g": 391,
+        "unitZh": "公克",
+        "packG": 50,
+        "moisture": 2.5,
+        "protein": 89.3,
+        "proteins": [
+          "fish"
+        ],
+        "completeFood": false
+      },
+      "price": {
+        "unit": "50g",
+        "checkedAt": "2026-09-19",
+        "merchants": []
+      }
+    }
+  ]
+}

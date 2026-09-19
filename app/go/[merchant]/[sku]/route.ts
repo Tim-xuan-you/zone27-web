@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { byId } from "@/lib/catalog";
+import { merchantFor } from "@/lib/catalog";
 
 /**
  * 分潤跳轉端點。頁面上不直接掛聯盟連結，一律走這裡。
@@ -16,8 +16,7 @@ export async function GET(
 ) {
   const { merchant, sku } = await ctx.params;
 
-  const product = byId(sku);
-  const target = product?.price.merchants.find((m) => m.id === merchant);
+  const target = merchantFor(sku, merchant);
 
   if (!target) {
     // 找不到就回首頁，不要把使用者丟在錯誤頁

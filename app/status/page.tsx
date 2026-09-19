@@ -12,6 +12,8 @@ import { impactMap, overallCutRate, ruleAudit, TIER_WEIGHT, type Impact } from "
 import health from "@/data/link-health.json";
 import storeReg from "@/data/stores.json";
 import checkExtra from "@/data/check-extra.json";
+import { litters } from "@/lib/litter";
+import { treats } from "@/lib/treat";
 import HuntPicks from "@/components/HuntPicks";
 import huntData from "@/data/hunt-candidates.json";
 import { productHref } from "@/lib/labels";
@@ -146,6 +148,11 @@ export default function Page() {
     .filter(([, v]) => v.confirmed)
     .slice(-6)
     .map(([shop, v]) => ({ label: v.name, shop }));
+  /* 貓砂、零食不在飼料的 catalog 裡，維護台原本看不到這兩個類目缺什麼 */
+  const nonFoodGaps = [
+    { zh: "貓砂", items: litters.filter((p) => !p.price.merchants.some((m) => !m.dead)) },
+    { zh: "貓零食", items: treats.filter((p) => !p.price.merchants.some((m) => !m.dead)) },
+  ];
   const sellersOfBrand = (brand: string) => {
     const key = brand.split(/[（(]/)[0].trim();
     const found = new Set<string>();
@@ -537,6 +544,45 @@ export default function Page() {
           ))}
         </>
       )}
+
+      <H>貓砂、零食還沒有連結的（{nonFoodGaps.reduce((n, g) => n + g.items.length, 0)} 款）</H>
+      <p style={{ margin: "0 0 14px", fontSize: 14.5, color: "var(--muted)", lineHeight: 1.9 }}>
+        這兩個類目不走飼料那套引擎，所以沒有「補了會被推薦幾次」可以排。
+        順序就是資料的順序，從上面補下來就好。
+      </p>
+      {nonFoodGaps.map((g) => (
+        <div key={g.zh} style={{ marginBottom: 10 }}>
+          <p style={{ margin: "0 0 8px", fontSize: 13, fontWeight: 700, color: "var(--muted)" }}>
+            {g.zh}（{g.items.length} 款）
+          </p>
+          {g.items.length === 0 ? (
+            <p style={ok}>都補齊了。</p>
+          ) : (
+            g.items.map((p) => (
+              <div key={p.id} style={box}>
+                <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", gap: 12, flexWrap: "wrap" }}>
+                  <div>
+                    <span style={{ fontSize: 12.5, color: "var(--muted)", display: "block" }}>{p.brand}</span>
+                    <b style={{ fontSize: 16.5 }}>{p.name}</b>
+                  </div>
+                  <span className="mono" style={{ fontSize: 13, color: "var(--faint)" }}>{p.id}</span>
+                </div>
+                <div style={{ marginTop: 14, paddingTop: 14, borderTop: "1px solid var(--line)" }}>
+                  <Line k="去蝦皮搜這個">
+                    <span className="mono" style={{ fontSize: 14 }}>{huntFrom(p.brand, p.name, p.searchAs)}</span>
+                    <HuntLinks keyword={huntFrom(p.brand, p.name, p.searchAs)} shops={shopsFor(p.brand)} />
+                  </Line>
+                  <Line k="產生連結時填">
+                    <span className="mono" style={{ fontSize: 14 }}>
+                      Sub id 1 = <b>{shopeeSubId(p.id)}</b>　Sub id 2 = <b>{categoryOfId(p.id)?.subId ?? CATEGORY_SUB_ID}</b>
+                    </span>
+                  </Line>
+                </div>
+              </div>
+            ))
+          )}
+        </div>
+      ))}
 
       <H>整款買不到的</H>
       {unbuyable.length === 0

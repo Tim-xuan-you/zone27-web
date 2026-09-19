@@ -90,9 +90,22 @@ export function ShareIcon(p: P) {
 
 /** 類目用哪一個：罐頭看形態，乾糧看動物 */
 export function CategoryIcon({ species, form, size }: { species: "dog" | "cat"; form: Form; size?: number }) {
+  if (form === "treat") return <TreatIcon size={size} />;
   if (form === "litter") return <LitterIcon size={size} />;
   if (form === "wet") return <CanIcon size={size} />;
   return species === "cat" ? <CatIcon size={size} /> : <DogIcon size={size} />;
+}
+
+/** 零食：一條肉泥的包裝，斜放。線條、不填色 */
+export function TreatIcon({ size = 18 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+      <path d="M7.5 3.6h9a1.5 1.5 0 0 1 1.5 1.5v13.8a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 6 18.9V5.1a1.5 1.5 0 0 1 1.5-1.5Z" />
+      <path d="M6 7.2h12" />
+      <path d="M9.4 11h5.2" />
+      <path d="M9.4 14.4h5.2" />
+    </svg>
+  );
 }
 
 /** 貓砂：一個貓砂盆，裡面幾顆砂。跟其他圖示一樣，線條、不填色 */
