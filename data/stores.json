@@ -14,6 +14,14 @@
       "name": "H&R安室家（蝦皮商城）",
       "confirmed": true
     },
+    "2482492": {
+      "name": "李小貓之家寵物概念生活館（蝦皮商城）",
+      "confirmed": false
+    },
+    "3347166": {
+      "name": "寵物執行長（蝦皮商城）",
+      "confirmed": false
+    },
     "4000820": {
       "name": "飼食事寵物選品",
       "confirmed": true
@@ -30,8 +38,28 @@
       "name": "獅子王寵物（蝦皮優選）",
       "confirmed": true
     },
+    "15350609": {
+      "name": "螢宇五金工具行",
+      "confirmed": false
+    },
+    "27658670": {
+      "name": "國際貓家貓奴網（蝦皮商城）",
+      "confirmed": false
+    },
     "50662979": {
       "name": "蝦皮直營（官方直營）",
+      "confirmed": true
+    },
+    "90002566": {
+      "name": "新威寵物百貨商城",
+      "confirmed": false
+    },
+    "126775507": {
+      "name": "喵喵玩國寵物用品",
+      "confirmed": false
+    },
+    "145808869": {
+      "name": "貓日常 Cat's Daily（蝦皮商城）",
       "confirmed": true
     },
     "152311117": {
@@ -42,9 +70,17 @@
       "name": "Petizen寵物公民旗艦店（蝦皮商城）",
       "confirmed": true
     },
+    "227619564": {
+      "name": "毛家庄寵物（蝦皮商城）",
+      "confirmed": false
+    },
     "230717106": {
       "name": "小BU的米其林指南（蝦皮優選）",
       "confirmed": true
+    },
+    "235100978": {
+      "name": "毛怪部落寵物用品",
+      "confirmed": false
     },
     "242503241": {
       "name": "貴貴嚴選",
@@ -98,6 +134,10 @@
       "name": "米腸家寵物用品",
       "confirmed": true
     },
+    "869025867": {
+      "name": "肥貓粉絲團（蝦皮商城）",
+      "confirmed": true
+    },
     "1447238100": {
       "name": "毛孩寵物鋪",
       "confirmed": true
@@ -105,26 +145,6 @@
     "1582969589": {
       "name": "ZIWI滋益巔峰 台灣官方旗艦店（蝦皮商城）",
       "confirmed": true
-    },
-    "145808869": {
-      "name": "貓日常 Cat's Daily（蝦皮商城）",
-      "confirmed": true
-    },
-    "869025867": {
-      "name": "肥貓粉絲團（蝦皮商城）",
-      "confirmed": true
-    },
-    "90002566": {
-      "name": "新威寵物百貨商城",
-      "confirmed": false
-    },
-    "15350609": {
-      "name": "螢宇五金工具行",
-      "confirmed": false
-    },
-    "3347166": {
-      "name": "寵物執行長（蝦皮商城）",
-      "confirmed": false
     }
   }
 }

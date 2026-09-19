@@ -571,6 +571,7 @@ export default function Page() {
                   <Line k="去蝦皮搜這個">
                     <span className="mono" style={{ fontSize: 14 }}>{huntFrom(p.brand, p.name, p.searchAs)}</span>
                     <HuntLinks keyword={huntFrom(p.brand, p.name, p.searchAs)} shops={shopsFor(p.brand)} />
+                    <HuntPicks id={p.id} />
                   </Line>
                   <Line k="產生連結時填">
                     <span className="mono" style={{ fontSize: 14 }}>
