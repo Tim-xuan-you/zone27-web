@@ -178,9 +178,19 @@ export const buyableLitter = (p: LitterProduct): boolean => liveOf(p).length > 0
 export function anchorLitter(p: LitterProduct): Merchant | undefined {
   const live = liveOf(p);
   if (live.length === 0) return undefined;
-  return live.reduce((best, m) => {
+  const cheapest = live.reduce((a, b) => (a.amount <= b.amount ? a : b));
+  /* 同一家店常常一包 $250、十包 $1,900。十包每公斤最便宜，
+     但沒人會為了省每公斤幾塊錢，第一次就搬二十五公斤回家。
+     所以主按鈕只在「不超過最便宜那個三倍」的範圍裡挑，
+     更划算的整箱價照樣列在下面，而且會把一個月省多少算出來。 */
+  const reach = live.filter((m) => m.amount <= cheapest.amount * BULK_CAP);
+  const pool = reach.length > 0 ? reach : live;
+  return pool.reduce((best, m) => {
     const a = monthlyCost(p, m)?.cost, b = monthlyCost(p, best)?.cost;
     if (a !== undefined && b !== undefined) return a < b ? m : best;
     return m.amount < best.amount ? m : best;
   });
 }
+
+/** 主按鈕最多可以是最便宜那個選項的幾倍 */
+export const BULK_CAP = 3;

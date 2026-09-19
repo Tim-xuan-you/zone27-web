@@ -84,8 +84,13 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
           </p>
           {live.length > 1 && (
             <div style={{ marginTop: 18 }}>
-              <p style={lbl}>全部 {new Set(live.map((x) => x.label)).size} 家的價格</p>
-              {live.map((x) => {
+              {/* 同一家店的整箱價也是一列。只有一家的時候寫「幾家」很怪 */}
+              <p style={lbl}>
+                {new Set(live.map((x) => x.label)).size > 1
+                  ? `全部 ${new Set(live.map((x) => x.label)).size} 家的價格`
+                  : "這一家的幾種買法"}
+              </p>
+              {[...live].sort((a, b) => a.amount - b.amount).map((x) => {
                 /* 光寫標價會誤導：一包 7L $249 看起來比兩包 $399 便宜，換算成一個月其實貴一百多 */
                 const xPer = unitPriceOf(p, x);
                 const xMonth = monthlyCost(p, x);
@@ -98,6 +103,12 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
                       {more > 0 && (
                         <span style={{ display: "block", fontSize: 12.5, color: "var(--cut)", marginTop: 2 }}>
                           一個月多 ${more.toLocaleString()}
+                        </span>
+                      )}
+                      {/* 整箱買比較便宜的，要把省下來的算出來，不然沒人看得出差在哪 */}
+                      {more < 0 && (
+                        <span style={{ display: "block", fontSize: 12.5, color: "var(--keep)", marginTop: 2 }}>
+                          一個月省 ${Math.abs(more).toLocaleString()}
                         </span>
                       )}
                     </span>

@@ -64,10 +64,10 @@
     {
       "id": "cl-03",
       "brand": "防御工事 Hururu",
-      "name": "天然除臭礦型豆腐砂",
-      "checkedAt": "2026-09-18",
+      "name": "99%無痛換砂 活性碳礦型豆腐砂 清新原豆",
+      "checkedAt": "2026-09-19",
       "note": "顆粒做成礦砂的樣子，想從礦砂換過來的人接受度高",
-      "searchAs": "防御工事 礦型豆腐砂",
+      "searchAs": "防御工事 Hururu 活性碳礦型豆腐砂 清新原豆",
       "spec": {
         "material": "tofu",
         "clumping": true,
@@ -75,13 +75,56 @@
         "flushClaim": "yes",
         "dust": "low",
         "grain": "fine",
-        "deodorizer": "植物纖維",
+        "deodorizer": "活性碳",
+        "packUnit": "kg",
+        "packSize": 2.5,
         "tracking": "low"
       },
       "price": {
-        "unit": "",
-        "checkedAt": "2026-09-18",
-        "merchants": []
+        "unit": "2.5kg",
+        "checkedAt": "2026-09-19",
+        "merchants": [
+          {
+            "id": "m1",
+            "label": "防御工事 T-FENCE（蝦皮商城）",
+            "unit": "2.5kg",
+            "amount": 250,
+            "note": "",
+            "affiliateUrl": "https://s.shopee.tw/4Vcuvgis4J?share_channel_code=6",
+            "anchor": "safe",
+            "checkedAt": "2026-09-19"
+          },
+          {
+            "id": "m2",
+            "label": "防御工事 T-FENCE（蝦皮商城）",
+            "unit": "2.5kg×3",
+            "amount": 660,
+            "note": "最少買 3 包",
+            "affiliateUrl": "https://s.shopee.tw/4Vcuvgis4J?share_channel_code=6",
+            "anchor": "value",
+            "checkedAt": "2026-09-19"
+          },
+          {
+            "id": "m3",
+            "label": "防御工事 T-FENCE（蝦皮商城）",
+            "unit": "2.5kg×5",
+            "amount": 1000,
+            "note": "最少買 5 包",
+            "affiliateUrl": "https://s.shopee.tw/4fwL7ziEjM?share_channel_code=6",
+            "anchor": "value",
+            "checkedAt": "2026-09-19"
+          },
+          {
+            "id": "m4",
+            "label": "防御工事 T-FENCE（蝦皮商城）",
+            "unit": "2.5kg×10",
+            "amount": 1900,
+            "note": "最少買 10 包",
+            "affiliateUrl": "https://s.shopee.tw/4fwL7ziEjM?share_channel_code=6",
+            "anchor": "value",
+            "checkedAt": "2026-09-19"
+          }
+        ]
       }
     },
     {

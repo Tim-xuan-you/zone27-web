@@ -94,20 +94,30 @@
           "url": "https://shopee.tw/product/1407397/4442903841"
         },
         {
-          "shop": "防御工事 官方（蝦皮商城）",
+          "shop": "防御工事 T-FENCE（蝦皮商城）",
           "shopId": "9057706",
           "price": 220,
           "unit": "2.5kg×3 包組（可超取）",
-          "url": "https://shopee.tw/product/9057706/2296032673"
+          "url": "https://shopee.tw/product/9057706/2296032673",
+          "known": true
         },
         {
-          "shop": "防御工事 官方（蝦皮商城）",
+          "shop": "防御工事 T-FENCE（蝦皮商城）",
           "shopId": "9057706",
           "price": 190,
           "unit": "2.5kg×10 包組（限宅配）",
-          "url": "https://shopee.tw/product/9057706/2296044257"
+          "url": "https://shopee.tw/product/9057706/2296044257",
+          "known": true
         }
-      ]
+      ],
+      "failed": [
+        {
+          "shop": "寵物好事達",
+          "reason": "這個商品產不出分潤連結",
+          "at": "2026-09-19"
+        }
+      ],
+      "note": "連結已經補上了：防御工事 T-FENCE 一包到十包四種買法都在。"
     },
     {
       "id": "cl-11",
