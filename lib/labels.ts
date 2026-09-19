@@ -77,3 +77,14 @@ export function platformOf(url: string): string | null {
 export function productHref(p: Pick<Product, "id" | "species" | "form">): string {
   return `/${categoryOf(p.species, formOf(p as Product)).slug}/p/${p.id}`;
 }
+
+/**
+ * 備註裡那一句「規格選『…』」，挑出來給畫面放大講。
+ *
+ * 貓砂、零食的連結幾乎每一條都是一頁十幾種規格的賣場。
+ * 備註縮在按鈕下面的小字裡，讀者點進去就照預設的那個買，買錯了會怪我們。
+ * 飼料那邊早就有一塊黃底提醒，這兩個類目也要有。
+ */
+export function variantOf(note?: string): string | null {
+  return note?.match(/規格選「(.+?)」/)?.[1] ?? null;
+}

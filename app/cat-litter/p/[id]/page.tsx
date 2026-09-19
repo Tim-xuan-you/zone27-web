@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import SiteHeader from "@/components/SiteHeader";
+import { variantOf } from "@/lib/labels";
 import { S } from "@/components/styles";
 import Share from "@/components/Share";
 import { CONTACT } from "@/lib/contact";
@@ -84,6 +85,15 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
             在 {m.label}
             {m.note ? ` · ${m.note}` : ""}
           </p>
+          {variantOf(m.note) && (
+            <p style={{
+              margin: "14px 0 0", background: "var(--warn-soft)", color: "var(--warn)",
+              borderRadius: 8, padding: "12px 14px", fontSize: 14, lineHeight: 1.85,
+            }}>
+              這個賣場一頁很多規格。點進去請自己選成
+              <b>「{variantOf(m.note)}」</b>，預設的不一定是這一個。
+            </p>
+          )}
           {live.length > 1 && (
             <div style={{ marginTop: 18 }}>
               {/* 同一家店的整箱價也是一列。只有一家的時候寫「幾家」很怪 */}

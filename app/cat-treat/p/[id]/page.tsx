@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import SiteHeader from "@/components/SiteHeader";
+
 import { S } from "@/components/styles";
 import Share from "@/components/Share";
 import { CONTACT } from "@/lib/contact";
@@ -9,7 +10,7 @@ import {
   treats, treatById, FORM_ZH, anchorTreat, liveOf, dailyLimit, packDays,
   treatKcalCap, dailyKcal, hiddenChicken, monthlyAtCap, DEFAULT_CAT_KG,
 } from "@/lib/treat";
-import { meatsFrom } from "@/lib/labels";
+import { meatsFrom, variantOf } from "@/lib/labels";
 
 export function generateStaticParams() {
   return treats.map((p) => ({ id: p.id }));
@@ -109,6 +110,15 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
           <p style={{ margin: "10px 0 0", fontSize: 12.5, color: "var(--faint)" }}>
             在 {m.label}{m.note ? ` · ${m.note}` : ""}
           </p>
+          {variantOf(m.note) && (
+            <p style={{
+              margin: "14px 0 0", background: "var(--warn-soft)", color: "var(--warn)",
+              borderRadius: 8, padding: "12px 14px", fontSize: 14, lineHeight: 1.85,
+            }}>
+              這個賣場一頁很多規格。點進去請自己選成
+              <b>「{variantOf(m.note)}」</b>，預設的不一定是這一個。
+            </p>
+          )}
           {live.length > 1 && (
             <div style={{ marginTop: 18 }}>
               <p style={S.lbl}>全部 {new Set(live.map((x) => x.label)).size} 家的價格</p>
