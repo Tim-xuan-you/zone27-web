@@ -266,7 +266,18 @@
       "price": {
         "unit": "30g",
         "checkedAt": "2026-09-19",
-        "merchants": []
+        "merchants": [
+          {
+            "id": "m1",
+            "label": "毛孩寵物鋪",
+            "unit": "30g",
+            "amount": 240,
+            "note": "一頁多口味，規格選「【海味】澎湖丁香魚30g」",
+            "affiliateUrl": "https://s.shopee.tw/2BF0MDwXRu?share_channel_code=6",
+            "anchor": "safe",
+            "checkedAt": "2026-09-19"
+          }
+        ]
       }
     },
     {
