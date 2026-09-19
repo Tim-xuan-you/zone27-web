@@ -39,10 +39,10 @@
     {
       "id": "cl-02",
       "brand": "艾可 ECO",
-      "name": "豆腐貓砂",
-      "checkedAt": "2026-09-18",
+      "name": "條狀豆腐砂 原味",
+      "checkedAt": "2026-09-19",
       "note": "凝結力好，但同一份評比裡除臭只拿兩顆星",
-      "searchAs": "艾可 ECO 豆腐貓砂 7L",
+      "searchAs": "艾可 Eco Clean 條狀豆腐砂 7L 原味",
       "spec": {
         "material": "tofu",
         "clumping": true,
@@ -57,8 +57,19 @@
       },
       "price": {
         "unit": "7L",
-        "checkedAt": "2026-09-18",
-        "merchants": []
+        "checkedAt": "2026-09-19",
+        "merchants": [
+          {
+            "id": "m1",
+            "label": "寵物執行長（蝦皮商城）",
+            "unit": "7L×6",
+            "amount": 768,
+            "note": "最少買 6 包，不同口味可以混搭",
+            "affiliateUrl": "https://s.shopee.tw/8fSTtqgg8S?share_channel_code=6",
+            "anchor": "safe",
+            "checkedAt": "2026-09-19"
+          }
+        ]
       }
     },
     {
