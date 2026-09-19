@@ -111,7 +111,7 @@
             "unit": "2.5kg",
             "amount": 250,
             "note": "",
-            "affiliateUrl": "https://s.shopee.tw/4Vcuvgis4J?share_channel_code=6",
+            "affiliateUrl": "https://s.shopee.tw/20va3pMga2?share_channel_code=6",
             "anchor": "safe",
             "checkedAt": "2026-09-19"
           },
@@ -121,7 +121,7 @@
             "unit": "2.5kg×3",
             "amount": 660,
             "note": "最少買 3 包",
-            "affiliateUrl": "https://s.shopee.tw/4Vcuvgis4J?share_channel_code=6",
+            "affiliateUrl": "https://s.shopee.tw/20va3pMga2?share_channel_code=6",
             "anchor": "value",
             "checkedAt": "2026-09-19"
           },
@@ -131,12 +131,52 @@
             "unit": "2.5kg×5",
             "amount": 1000,
             "note": "最少買 5 包",
-            "affiliateUrl": "https://s.shopee.tw/4fwL7ziEjM?share_channel_code=6",
+            "affiliateUrl": "https://s.shopee.tw/2VrqekKmZ7?share_channel_code=6",
             "anchor": "value",
             "checkedAt": "2026-09-19"
           },
           {
             "id": "m4",
+            "label": "防御工事 T-FENCE（蝦皮商城）",
+            "unit": "2.5kg×10",
+            "amount": 1900,
+            "note": "最少買 10 包",
+            "affiliateUrl": "https://s.shopee.tw/2VrqekKmZ7?share_channel_code=6",
+            "anchor": "value",
+            "checkedAt": "2026-09-19"
+          },
+          {
+            "id": "m5",
+            "label": "防御工事 T-FENCE（蝦皮商城）",
+            "unit": "2.5kg",
+            "amount": 250,
+            "note": "",
+            "affiliateUrl": "https://s.shopee.tw/4Vcuvgis4J?share_channel_code=6",
+            "anchor": "value",
+            "checkedAt": "2026-09-19"
+          },
+          {
+            "id": "m6",
+            "label": "防御工事 T-FENCE（蝦皮商城）",
+            "unit": "2.5kg×3",
+            "amount": 660,
+            "note": "最少買 3 包",
+            "affiliateUrl": "https://s.shopee.tw/4Vcuvgis4J?share_channel_code=6",
+            "anchor": "value",
+            "checkedAt": "2026-09-19"
+          },
+          {
+            "id": "m7",
+            "label": "防御工事 T-FENCE（蝦皮商城）",
+            "unit": "2.5kg×5",
+            "amount": 1000,
+            "note": "最少買 5 包",
+            "affiliateUrl": "https://s.shopee.tw/4fwL7ziEjM?share_channel_code=6",
+            "anchor": "value",
+            "checkedAt": "2026-09-19"
+          },
+          {
+            "id": "m8",
             "label": "防御工事 T-FENCE（蝦皮商城）",
             "unit": "2.5kg×10",
             "amount": 1900,

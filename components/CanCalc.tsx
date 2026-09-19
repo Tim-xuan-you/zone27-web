@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { CAT_MER_FACTORS, KCAL_PER_KG, mer, type Stage } from "@/lib/engine";
+import { factorsOf, KCAL_PER_KG, mer, type Stage } from "@/lib/engine";
+import type { Species } from "@/lib/types";
 import { S } from "./styles";
 
 /**
@@ -12,6 +13,9 @@ import { S } from "./styles";
  *
  * 罐頭多一個選項：全吃罐頭、一半一半、一天一罐。
  * 台灣大部分的貓是乾濕混餵，只算全吃罐頭的答案，對多數人沒有用。
+ *
+ * 2026-09-19 加上狗。狗的數字比貓嚇人很多：一隻 15 公斤的狗全吃罐頭，
+ * 一天四到六罐，一個月是四位數。這一題沒有人算給狗主人看過。
  */
 
 const STAGES: Stage[] = ["puppyYoung", "puppy", "adultFixed", "adultWhole", "senior", "slimming"];
@@ -23,19 +27,26 @@ const MIX: { key: Mix; zh: string }[] = [
   { key: "one", zh: "一天一罐，其他吃乾糧" },
 ];
 
-export default function CanCalc() {
-  const [kg, setKg] = useState("4");
+/** 預設值照台灣最常見的那一種：貓是 4 公斤吃 80 克罐，狗是 12 公斤吃 165 克罐 */
+const DEFAULTS: Record<Species, { kg: string; kcal: string; price: string; max: number }> = {
+  cat: { kg: "4", kcal: "90", price: "50", max: 15 },
+  dog: { kg: "12", kcal: "180", price: "70", max: 70 },
+};
+
+export default function CanCalc({ species = "cat" }: { species?: Species }) {
+  const d = DEFAULTS[species];
+  const [kg, setKg] = useState(d.kg);
   const [stage, setStage] = useState<Stage>("adultFixed");
-  const [kcal, setKcal] = useState("90");
-  const [price, setPrice] = useState("50");
+  const [kcal, setKcal] = useState(d.kcal);
+  const [price, setPrice] = useState(d.price);
   const [mix, setMix] = useState<Mix>("all");
 
   const w = Number(kg);
   const k = Number(kcal);
   const p = Number(price);
-  const ok = w > 0 && w < 15 && k > 0;
+  const ok = w > 0 && w < d.max && k > 0;
 
-  const day = ok ? mer(w, stage, "cat") : 0;
+  const day = ok ? mer(w, stage, species) : 0;
   // 罐頭這一份的熱量
   const canKcal = mix === "all" ? day : mix === "half" ? day / 2 : Math.min(k, day);
   const cans = ok ? canKcal / k : 0;
@@ -53,7 +64,7 @@ export default function CanCalc() {
 
         <Field label="階段">
           <select style={{ ...input, paddingRight: 8 }} value={stage} onChange={(e) => setStage(e.target.value as Stage)}>
-            {STAGES.map((s) => <option key={s} value={s}>{CAT_MER_FACTORS[s].zh}</option>)}
+            {STAGES.map((x) => <option key={x} value={x}>{factorsOf(species)[x].zh}</option>)}
           </select>
         </Field>
 
@@ -103,7 +114,9 @@ export default function CanCalc() {
           <p style={caveat}>
             這是估算，不是餵食指示。真正該看的是<b>體態</b>：
             從上面看得出腰身、摸得到肋骨但不明顯，那個體重就是對的。
-            貓減重要慢，一個禮拜掉超過體重的 2% 就太快了，會傷肝，要減重先問獸醫。
+            {species === "cat"
+              ? "貓減重要慢，一個禮拜掉超過體重的 2% 就太快了，會傷肝，要減重先問獸醫。"
+              : "狗減重一個禮拜掉體重的 1% 到 2% 是合理的範圍，再快就要問獸醫。"}
           </p>
         </>
       )}

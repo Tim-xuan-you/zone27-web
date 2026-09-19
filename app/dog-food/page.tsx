@@ -62,6 +62,20 @@ export default function Index() {
         </p>
       </Link>
 
+      <Link href="/dog-food/cans" style={{
+        display: "block", marginTop: 14,
+        background: "var(--surface)", border: "1px solid var(--line)",
+        borderRadius: 14, boxShadow: "var(--sh)", padding: "20px 22px",
+        textDecoration: "none", color: "inherit",
+      }}>
+        <h2 style={{ fontFamily: "var(--font-serif), serif", fontSize: 20, margin: "0 0 8px", lineHeight: 1.5 }}>
+          狗吃主食罐，一天要幾罐
+        </h2>
+        <p style={{ margin: 0, fontSize: 15.5, color: "var(--muted)", lineHeight: 1.85 }}>
+          貓一天兩三罐，狗的熱量是三倍。罐子上寫「主食罐」不代表能當正餐，先看有沒有「完全」兩個字。
+        </p>
+      </Link>
+
       <Link href="/dog-food/grain-free" style={{
         display: "block", marginTop: 14,
         background: "var(--surface)", border: "1px solid var(--line)",
