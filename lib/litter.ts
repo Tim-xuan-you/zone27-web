@@ -88,7 +88,7 @@ export const FLUSH: Record<Flushable, { zh: string; fg: string; bg: string }> = 
 
 export const FLUSH_LINE: Record<Flushable, string> = {
   limited:
-    "植物纖維做的，遇水會散開。一次一小坨、沖之前先讓它泡開，老公寓、化糞池、香港式舊管線就不要冒險。整盆倒下去一定塞。",
+    "植物纖維做的，遇水會散開。一次一小坨、沖之前先讓它泡開。老公寓、化糞池、管徑小的就不要冒險，整盆倒下去一定塞。",
   no: "遇水不會散開，沖下去就是在管線裡堆積。這一款只能包起來丟垃圾。",
 };
 
