@@ -142,6 +142,27 @@ export function anchorTreat(p: TreatProduct): Merchant | undefined {
   return live.reduce((best, m) => (m.amount < best.amount ? m : best));
 }
 
+/**
+ * 天天給到上限，一個月多少錢。
+ *
+ * 這是這個類目真正會讓人停下來的那個數字。
+ * CIAO 一條 $11，一天可以給 3 條 —— 聽起來很便宜，
+ * 乘上三十天是一千塊，比很多人家的貓一個月的飼料錢還高。
+ *
+ * 講清楚是「天天給到上限」的價，不是建議。多數人不會天天給滿。
+ */
+export function monthlyAtCap(p: TreatProduct, m: Merchant, kg: number = DEFAULT_CAT_KG): number | null {
+  const limit = dailyLimit(p, kg);
+  if (!limit) return null;
+  if (limit.pieces && limit.pieces >= 1 && p.spec.piecesPerPack) {
+    return Math.round(limit.pieces * (m.amount / p.spec.piecesPerPack) * 30);
+  }
+  if (limit.grams && p.spec.packG) {
+    return Math.round(limit.grams * (m.amount / p.spec.packG) * 30);
+  }
+  return null;
+}
+
 /** 名字寫魚、成分有雞的那種（跟飼料的藏雞同一件事） */
 export function hiddenChicken(p: TreatProduct): boolean {
   return p.spec.proteins.includes("chicken") && !/(?<!火)雞/.test(p.name);

@@ -7,7 +7,7 @@ import Share from "@/components/Share";
 import { CONTACT } from "@/lib/contact";
 import {
   treats, treatById, FORM_ZH, anchorTreat, liveOf, dailyLimit, packDays,
-  treatKcalCap, dailyKcal, hiddenChicken, DEFAULT_CAT_KG,
+  treatKcalCap, dailyKcal, hiddenChicken, monthlyAtCap, DEFAULT_CAT_KG,
 } from "@/lib/treat";
 import { meatsFrom } from "@/lib/labels";
 
@@ -40,6 +40,7 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
   const days = packDays(p);
   const cap = treatKcalCap(DEFAULT_CAT_KG);
   const perPiece = m && p.spec.piecesPerPack ? Math.round((m.amount / p.spec.piecesPerPack) * 10) / 10 : null;
+  const cap30 = m ? monthlyAtCap(p, m) : null;
 
   return (
     <main style={S.page}>
@@ -98,6 +99,12 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
               {m.unit || p.price.unit}{perPiece ? ` · $${perPiece}/${p.spec.unitZh ?? "條"}` : ""}
             </span>
           </p>
+          {cap30 !== null && (
+            <p style={{ margin: "0 0 14px", fontSize: 15.5, color: "var(--muted)", lineHeight: 1.85 }}>
+              天天給到上限的話，一個月 <b style={{ color: "var(--ink)" }}>${cap30.toLocaleString()}</b>。
+              多數人不會天天給滿，這是上限的價，拿來比不同款用的。
+            </p>
+          )}
           <a href={`/go/${m.id}/${p.id}`} rel="nofollow sponsored" style={S.buy}>去蝦皮看這一包</a>
           <p style={{ margin: "10px 0 0", fontSize: 12.5, color: "var(--faint)" }}>
             在 {m.label}{m.note ? ` · ${m.note}` : ""}

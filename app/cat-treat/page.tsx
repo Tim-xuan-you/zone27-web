@@ -5,7 +5,7 @@ import { S } from "@/components/styles";
 import Share from "@/components/Share";
 import {
   treats, FORM_ZH, buyableTreat, anchorTreat, dailyLimit, packDays, pureeSpread,
-  treatKcalCap, dailyKcal, hiddenChicken, DEFAULT_CAT_KG,
+  treatKcalCap, dailyKcal, hiddenChicken, monthlyAtCap, DEFAULT_CAT_KG,
 } from "@/lib/treat";
 
 /**
@@ -125,6 +125,7 @@ export default function Page() {
         const m = anchorTreat(p);
         const limit = dailyLimit(p);
         const days = packDays(p);
+        const cap30 = m ? monthlyAtCap(p, m) : null;
         return (
           <Link key={p.id} href={`/cat-treat/p/${p.id}`} style={S.listRow}>
             <span style={{ minWidth: 0 }}>
@@ -148,6 +149,7 @@ export default function Page() {
                 <>
                   <b>一天 {limit.label}</b>
                   {days !== null && <span style={{ display: "block", color: "var(--faint)", fontSize: 12.5 }}>一包約 {days} 天</span>}
+                  {cap30 !== null && <span style={{ display: "block", color: "var(--faint)", fontSize: 12.5 }}>給滿一個月 ${cap30.toLocaleString()}</span>}
                 </>
               ) : (
                 <span style={{ color: "var(--faint)", fontSize: 12.5 }}>沒公布熱量</span>

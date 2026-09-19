@@ -24,7 +24,18 @@
       "price": {
         "unit": "56g",
         "checkedAt": "2026-09-19",
-        "merchants": []
+        "merchants": [
+          {
+            "id": "m1",
+            "label": "萬倍富寵物用品店（蝦皮商城）",
+            "unit": "14g×4",
+            "amount": 45,
+            "note": "一頁多口味，規格選「肉泥(雞肉) 14g*4」",
+            "affiliateUrl": "https://s.shopee.tw/8fSU1MVBTh?share_channel_code=6",
+            "anchor": "safe",
+            "checkedAt": "2026-09-19"
+          }
+        ]
       }
     },
     {
