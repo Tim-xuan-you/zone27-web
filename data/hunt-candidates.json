@@ -372,13 +372,13 @@
           "url": "https://shopee.tw/product/145808869/5031994821"
         }
       ],
-      "note": "連結補上了：萬倍富 $45。"
+      "note": "連結補齊了：萬倍富 $45、貓日常 $49。"
     },
     {
       "id": "ct-04",
       "label": "汪喵星球 太空小零嘴 長盈虱目魚（貓零食）",
       "why": "凍乾這一段的代表款，蛋白質 89%",
-      "note": "2026-09-19 Tim 回報：有一家產得出分潤，但商品售完，連結還沒拿到。補貨了要回去拿。是哪一家還要跟 Tim 確認。前面那四家（小貓亂亂買、petroyal、小橙花、毛家庄）都失敗。",
+      "note": "毛孩寵物鋪產得出分潤，只是虱目魚這個口味售完。汪喵在那家有開，所以不是全滅，補貨了回去拿就好。",
       "candidates": [
         {
           "shop": "毛孩寵物鋪",
@@ -387,7 +387,8 @@
           "channel": "seller",
           "price": 90,
           "unit": "山味／海味一頁 · 我們在這家產過連結",
-          "url": "https://shopee.tw/product/1447238100/29574128530"
+          "url": "https://shopee.tw/product/1447238100/29574128530",
+          "soldOut": "2026-09-19：分潤產得出來，但這個口味售完"
         },
         {
           "shop": "小貓亂亂買 BuyBuyCat",
@@ -436,6 +437,15 @@
           "price": 250,
           "unit": "30g · 海味那幾款同一頁",
           "url": "https://shopee.tw/product/2482492/5597541702"
+        },
+        {
+          "shop": "汪喵星球官方商城",
+          "shopId": "329265193",
+          "known": true,
+          "channel": "mall",
+          "price": null,
+          "unit": "整條產品線都在。貓砂那款就是在這家產的",
+          "url": "https://shopee.tw/shop/329265193/search?keyword=%E5%A4%AA%E7%A9%BA%E5%B0%8F%E9%9B%B6%E5%98%B4"
         }
       ]
     },
@@ -501,6 +511,15 @@
           "price": 180,
           "unit": "50g · 整條產品線一頁",
           "url": "https://shopee.tw/product/126775507/12838394378"
+        },
+        {
+          "shop": "汪喵星球官方商城",
+          "shopId": "329265193",
+          "known": true,
+          "channel": "mall",
+          "price": null,
+          "unit": "整條產品線都在。貓砂那款就是在這家產的",
+          "url": "https://shopee.tw/shop/329265193/search?keyword=%E5%A4%AA%E7%A9%BA%E5%B0%8F%E9%9B%B6%E5%98%B4"
         }
       ]
     },
@@ -566,6 +585,15 @@
           "price": 250,
           "unit": "30g · 海味那幾款同一頁",
           "url": "https://shopee.tw/product/2482492/5597541702"
+        },
+        {
+          "shop": "汪喵星球官方商城",
+          "shopId": "329265193",
+          "known": true,
+          "channel": "mall",
+          "price": null,
+          "unit": "整條產品線都在。貓砂那款就是在這家產的",
+          "url": "https://shopee.tw/shop/329265193/search?keyword=%E5%A4%AA%E7%A9%BA%E5%B0%8F%E9%9B%B6%E5%98%B4"
         }
       ]
     },
@@ -573,7 +601,7 @@
       "id": "ct-08",
       "label": "汪喵星球 太空小零嘴 澎湖丁香魚（貓零食）",
       "why": "跟爆蛋柳葉魚同一個賣場頁",
-      "note": "汪喵星球這一系列，ct-04 一次試了四家全滅，分潤可能鎖在官方商城。先試毛孩寵物鋪，再去汪喵星球官方商城。",
+      "note": "五家都失敗了，但毛孩寵物鋪還沒試過 —— 汪喵在那家產得出分潤（ct-04 驗證過），先去那家看這個口味有沒有貨。",
       "candidates": [
         {
           "shop": "毛孩寵物鋪",
@@ -631,6 +659,15 @@
           "price": 180,
           "unit": "50g · 整條產品線一頁",
           "url": "https://shopee.tw/product/126775507/12838394378"
+        },
+        {
+          "shop": "汪喵星球官方商城",
+          "shopId": "329265193",
+          "known": true,
+          "channel": "mall",
+          "price": null,
+          "unit": "整條產品線都在。貓砂那款就是在這家產的",
+          "url": "https://shopee.tw/shop/329265193/search?keyword=%E5%A4%AA%E7%A9%BA%E5%B0%8F%E9%9B%B6%E5%98%B4"
         }
       ]
     },

@@ -123,12 +123,22 @@
         "merchants": [
           {
             "id": "m1",
+            "label": "貓日常 Cat's Daily（蝦皮商城）",
+            "unit": "14g×4",
+            "amount": 49,
+            "note": "一頁多口味，規格選「雞肉+綜合營養 SC-148」",
+            "affiliateUrl": "https://s.shopee.tw/BTvxVmHb1?share_channel_code=6",
+            "anchor": "safe",
+            "checkedAt": "2026-09-19"
+          },
+          {
+            "id": "m2",
             "label": "萬倍富寵物用品店（蝦皮商城）",
             "unit": "14g×4",
             "amount": 45,
             "note": "一頁多口味，規格選綜合營養那一項（SC-148）",
             "affiliateUrl": "https://s.shopee.tw/1AVlCmuvy?share_channel_code=6",
-            "anchor": "safe",
+            "anchor": "value",
             "checkedAt": "2026-09-19"
           }
         ]

@@ -47,6 +47,30 @@ for (const src of [dogFood, catFood, catWet, litterData, treatData]) {
 const brandKey = (brand: string) => brand.split(/[（(s]/)[0].trim();
 
 /**
+ * 這個牌子在這一家「產得出來」過幾款。
+ *
+ * 2026-09-19：汪喵的太空小零嘴一路試到第九家，Tim 問是不是全滅。
+ * 不是 —— 毛孩寵物鋪產得出分潤，只是那個口味剛好售完；
+ * 汪喵星球官方商城更早就在貓砂那款產過。
+ *
+ * 失敗要記，成功更要記。已經證明會開的那幾家要排在最前面，
+ * 不然每一款都從頭試一次。
+ */
+function brandWorks(c: Candidate, id: string): number {
+  const brand = BRAND.get(id);
+  if (!brand) return 0;
+  const key = brandKey(brand);
+  let n = 0;
+  for (const src of [dogFood, catFood, catWet, litterData, treatData]) {
+    for (const p of src.products as { id: string; brand: string; price: { merchants: { label: string; dead?: boolean }[] } }[]) {
+      if (p.id === id || brandKey(p.brand) !== key) continue;
+      if (p.price.merchants.some((m) => !m.dead && m.label === c.shop)) n++;
+    }
+  }
+  return n;
+}
+
+/**
  * 這個牌子在這一家已經失敗過幾款。
  *
  * 2026-09-19：汪喵星球的太空小零嘴一次試了四家全滅。
@@ -77,7 +101,13 @@ export default function HuntPicks({ id }: { id: string }) {
   // 售完的排最後（補貨了還是要回去找，所以不刪掉）
   const open = t.candidates
     .filter((c) => !failedFor(id, c))
-    .sort((a, b) => Number(Boolean(a.soldOut)) - Number(Boolean(b.soldOut)) || (a.price ?? 1e9) - (b.price ?? 1e9));
+    .sort(
+      (a, b) =>
+        // 已經證明這個牌子會開的排最前面，再來才是售完的往後、便宜的往前
+        brandWorks(b, id) - brandWorks(a, id) ||
+        Number(Boolean(a.soldOut)) - Number(Boolean(b.soldOut)) ||
+        (a.price ?? 1e9) - (b.price ?? 1e9),
+    );
   // 一整排都是商城代表我查得不夠廣：商城通常比一般賣家貴一截
   const allMall = open.length > 0 && open.every((c) => (c.channel ?? channelOf(c.shop)) === "mall");
   const gone = [
@@ -114,6 +144,11 @@ export default function HuntPicks({ id }: { id: string }) {
             <span style={{ ...chip, ...CH_STYLE[c.channel ?? channelOf(c.shop)] }}>
               {CHANNEL_ZH[c.channel ?? channelOf(c.shop)]}
             </span>
+            {brandWorks(c, id) > 0 && (
+              <span style={{ ...chip, color: "var(--keep)", background: "var(--keep-soft)" }}>
+                這個牌子在這家產出過 {brandWorks(c, id)} 款
+              </span>
+            )}
             {brandFails(c, id) > 0 && (
               <span style={{ ...chip, color: "var(--warn)", background: "var(--warn-soft)" }}>
                 這個牌子在這家失敗過 {brandFails(c, id)} 款
