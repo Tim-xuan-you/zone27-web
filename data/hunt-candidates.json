@@ -35,6 +35,13 @@
           "url": "https://shopee.tw/product/50662979/48113930645",
           "channel": "mall"
         }
+      ],
+      "failed": [
+        {
+          "shop": "蝦皮直營（官方直營）",
+          "reason": "這個商品產不出分潤連結",
+          "at": "2026-09-19"
+        }
       ]
     },
     {
@@ -88,15 +95,16 @@
       "id": "cl-04",
       "label": "屋哩 Wuli 雙生稻殼豆腐砂（貓砂第二批）",
       "why": "稻殼加豆腐，全植物所以可以沖，跟 pidan 混合砂剛好對照",
-      "note": "蝦皮上只查到一家，而且是整組賣的。找不到更便宜的就先放著。",
+      "note": "連結已經補上了：Tails Life，一箱 6 包 $1,199。不過比價站上同樣的 7L 六入組在別的通路是 $799，蝦皮這邊目前只查得到這一家。看到更便宜的蝦皮賣場再換。",
       "candidates": [
         {
-          "shop": "Tails Life 毛孩食舖",
+          "shop": "Tails Life 寵物生活旗艦館（蝦皮優選）",
           "shopId": "971157768",
           "price": 1199,
           "unit": "整組（頁面沒寫幾包）",
           "url": "https://shopee.tw/product/971157768/43334155543",
-          "channel": "seller"
+          "channel": "preferred",
+          "known": true
         }
       ]
     },

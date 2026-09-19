@@ -23,8 +23,22 @@ export const CHANNEL_ZH: Record<Channel, string> = {
   seller: "一般賣家",
 };
 
+/**
+ * 先看我們自己加在後面的那個括號，再看整串名字。
+ *
+ * 一開始寫成「名字裡有旗艦就是商城」，結果 Tails Life 寵物生活旗艦館
+ * 掛的是蝦皮優選的標章，被判成商城。「旗艦館」「旗艦店」是賣場自己取的名字，
+ * 跟蝦皮給的標章是兩回事。括號才是我們登記時照標章抄的，以它為準。
+ */
 export function channelOf(label: string): Channel {
-  if (/商城|直營|旗艦/.test(label)) return "mall";
+  const tag = label.match(/[（(]([^）)]*)[）)]\s*$/)?.[1];
+  if (tag) {
+    if (/優選/.test(tag)) return "preferred";
+    if (/商城|直營/.test(tag)) return "mall";
+    return "seller";
+  }
+  // 還沒補括號的舊資料：名字裡直接寫商城的才算，旗艦不算
+  if (/商城|直營/.test(label)) return "mall";
   if (/優選/.test(label)) return "preferred";
   return "seller";
 }

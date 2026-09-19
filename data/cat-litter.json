@@ -152,9 +152,9 @@
       "id": "cl-04",
       "brand": "屋哩 Wuli",
       "name": "雙生稻殼豆腐砂",
-      "checkedAt": "2026-09-18",
+      "checkedAt": "2026-09-19",
       "note": "稻殼加豆腐，兩種都是植物性，所以可以沖",
-      "searchAs": "屋哩 雙生稻殼豆腐砂",
+      "searchAs": "屋哩 Wuli 雙生稻豆腐砂 7L",
       "spec": {
         "material": "mixed-plant",
         "clumping": true,
@@ -163,12 +163,25 @@
         "dust": "low",
         "grain": "medium",
         "deodorizer": "稻殼＋豆腐",
+        "packUnit": "L",
+        "packSize": 7,
         "tracking": "low"
       },
       "price": {
-        "unit": "",
-        "checkedAt": "2026-09-18",
-        "merchants": []
+        "unit": "7L",
+        "checkedAt": "2026-09-19",
+        "merchants": [
+          {
+            "id": "m1",
+            "label": "Tails Life 寵物生活旗艦館（蝦皮優選）",
+            "unit": "7L×6",
+            "amount": 1199,
+            "note": "一箱 6 包，一次只能買一箱",
+            "affiliateUrl": "https://s.shopee.tw/4qFlQKcCJe?share_channel_code=6",
+            "anchor": "safe",
+            "checkedAt": "2026-09-19"
+          }
+        ]
       }
     },
     {
