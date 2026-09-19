@@ -1,6 +1,11 @@
 import huntData from "@/data/hunt-candidates.json";
 import blocked from "@/data/no-affiliate.json";
 import storeReg from "@/data/stores.json";
+import dogFood from "@/data/dog-food.json";
+import catFood from "@/data/cat-food.json";
+import catWet from "@/data/cat-wet-food.json";
+import litterData from "@/data/cat-litter.json";
+import treatData from "@/data/cat-treat.json";
 import { CHANNEL_ZH, channelOf, type Channel } from "@/lib/channel";
 
 /**
@@ -33,6 +38,33 @@ const HUNT = new Map((huntData.targets as Target[]).map((t) => [t.id, t]));
 type Pair = { productId: string; shop: string; shopId?: string; note?: string };
 const PAIRS = blocked.pairs as Pair[];
 const KNOWN_IDS = new Set(Object.keys((storeReg as { stores: Record<string, unknown> }).stores));
+
+/* 商品編號 → 牌子。用來看「同一個牌子在這一家是不是已經失敗過好幾款」 */
+const BRAND = new Map<string, string>();
+for (const src of [dogFood, catFood, catWet, litterData, treatData]) {
+  for (const p of src.products as { id: string; brand: string }[]) BRAND.set(p.id, p.brand);
+}
+const brandKey = (brand: string) => brand.split(/[（(s]/)[0].trim();
+
+/**
+ * 這個牌子在這一家已經失敗過幾款。
+ *
+ * 2026-09-19：汪喵星球的太空小零嘴一次試了四家全滅。
+ * 那一系列有七款，如果每一款都要重試四家，就是二十八次白工。
+ * 分潤是賣家對「商品」開的，但同一個牌子在同一家店通常是整條線一起開或一起不開，
+ * 所以這個數字是很強的線索 —— 不擋，只提醒。
+ */
+function brandFails(c: Candidate, id: string): number {
+  const brand = BRAND.get(id);
+  if (!brand) return 0;
+  const key = brandKey(brand);
+  return PAIRS.filter(
+    (x) =>
+      x.productId !== id &&
+      ((c.shopId && x.shopId === c.shopId) || x.shop === c.shop) &&
+      brandKey(BRAND.get(x.productId) ?? "") === key,
+  ).length;
+}
 
 /** 這一款在這一家試過產不出來？（同一家在別款不受影響） */
 const failedFor = (id: string, c: Candidate): Pair | undefined =>
@@ -82,6 +114,11 @@ export default function HuntPicks({ id }: { id: string }) {
             <span style={{ ...chip, ...CH_STYLE[c.channel ?? channelOf(c.shop)] }}>
               {CHANNEL_ZH[c.channel ?? channelOf(c.shop)]}
             </span>
+            {brandFails(c, id) > 0 && (
+              <span style={{ ...chip, color: "var(--warn)", background: "var(--warn-soft)" }}>
+                這個牌子在這家失敗過 {brandFails(c, id)} 款
+              </span>
+            )}
             <span style={{ display: "block", fontSize: 12.5, color: "var(--muted)" }}>
               {c.unit}{c.soldOut ? " · 上次看是售完的，先確認有沒有補貨" : ""}
             </span>

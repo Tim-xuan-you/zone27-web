@@ -75,12 +75,22 @@
         "merchants": [
           {
             "id": "m1",
+            "label": "貓日常 Cat's Daily（蝦皮商城）",
+            "unit": "14g×4",
+            "amount": 49,
+            "note": "一頁多口味，規格選「鮪魚+干貝 SC-77」",
+            "affiliateUrl": "https://s.shopee.tw/2Vrqgw12kC?share_channel_code=6",
+            "anchor": "safe",
+            "checkedAt": "2026-09-19"
+          },
+          {
+            "id": "m2",
             "label": "萬倍富寵物用品店（蝦皮商城）",
             "unit": "14g×4",
             "amount": 45,
             "note": "一頁多口味，規格選「肉泥(鮪魚+干貝) 14g*4」",
             "affiliateUrl": "https://s.shopee.tw/2gBGtF0PPD?share_channel_code=6",
-            "anchor": "safe",
+            "anchor": "value",
             "checkedAt": "2026-09-19"
           }
         ]
