@@ -27,6 +27,26 @@ const SPREAD = pureeSpread();
 const PUREE = SPREAD ? dailyLimit(SPREAD.plain) : null;
 const PUREE_PACK = SPREAD ? SPREAD.plain.spec.piecesPerPack : undefined;
 
+/**
+ * 對雞過敏的人，同一個牌子要整排看過。
+ *
+ * 2026-09-19 Tim 在賣場頁看到一整排雞肉，問是不是藏雞。不是 —— CIAO 的口味名稱
+ * 都把雞肉寫在括號裡，沒有藏。但「鮭魚＋雞肉」「雞肉＋日本蟹肉」這種名字，
+ * 一排十幾個規格掃過去，人只會看到前面那兩個字。
+ *
+ * 藏雞是成分表的問題，這是**視線**的問題，一樣會害到過敏的貓。所以這一塊要講。
+ */
+const BY_BRAND = new Map<string, { total: number; chicken: number }>();
+for (const p of treats) {
+  const b = BY_BRAND.get(p.brand) ?? { total: 0, chicken: 0 };
+  b.total++;
+  if (p.spec.proteins.includes("chicken")) b.chicken++;
+  BY_BRAND.set(p.brand, b);
+}
+const CHICKEN_BRAND = [...BY_BRAND]
+  .filter(([, v]) => v.chicken >= 2)
+  .sort((a, b) => b[1].chicken - a[1].chicken)[0];
+
 /* 凍乾：水分只有 2.5%，同樣的熱量換算成公克會小到嚇人 */
 const DRIED = treats.find((p) => p.spec.form === "freezeDried" && p.spec.kcalPer100g);
 const DRIED_LIMIT = DRIED ? dailyLimit(DRIED) : null;
@@ -104,6 +124,26 @@ export default function Page() {
             同樣 {CAP} 大卡的額度，換算下來一天只有 {DRIED_LIMIT.grams} 公克。
             抓一把就超過了。這種零食要秤，不要用抓的。
           </p>
+        </div>
+      )}
+
+      {CHICKEN_BRAND && (
+        <div style={{ ...S.box, marginTop: 14, borderColor: "var(--cut)", background: "var(--cut-soft)" }}>
+          <p style={{ margin: 0, fontWeight: 700, fontSize: 17 }}>
+            對雞過敏的話，{CHICKEN_BRAND[0]} 這一排要整排看過
+          </p>
+          <p style={{ margin: "8px 0 0", fontSize: 14, lineHeight: 1.9 }}>
+            我們讀過 {CHICKEN_BRAND[0]} 的 {CHICKEN_BRAND[1].total} 款，
+            其中 <b>{CHICKEN_BRAND[1].chicken} 款有雞</b>。
+            賣場一頁十幾種規格，名字寫「鮭魚＋雞肉」「雞肉＋日本蟹肉」的，括號裡一樣有雞。
+          </p>
+          <p style={{ margin: "8px 0 0", fontSize: 14, lineHeight: 1.9 }}>
+            這個牌子有把雞寫出來。但一排掃過去，人只會看到前面那兩個字。
+            買之前把括號看完。
+          </p>
+          <Link href="/check" style={{ display: "inline-block", marginTop: 10, fontSize: 14, color: "var(--accent)", fontWeight: 600 }}>
+            查飼料有沒有藏雞 →
+          </Link>
         </div>
       )}
 
