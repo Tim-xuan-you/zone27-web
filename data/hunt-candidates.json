@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "note": "我幫 Tim 先查好的候選賣場：哪幾家有賣、開價多少、商品頁在哪。維護台會把它們變成可以點的按鈕。",
+    "note": "我幫 Tim 先查好的候選賣場：哪幾家有賣、開價多少、商品頁在哪。維護台會把它們變成可以點的按鈕。比價站的價格排序（?sort=lp）撈的，每一款都要有商城以外的選擇 —— 商城通常貴一截。",
     "why": "2026-09-18 Tim：「時間都浪費在我去選哪一家店有賣，您可以順便給我連結嗎？」可以。所以這一份存在。",
     "method": "資料來自比價站（BigGo）讀到的蝦皮上架資料，不是爬蝦皮，也不用 Tim 的帳號。價格是比價站當下的快照，可能已經變了，庫存和規格也看不到，所以一定要 Tim 點開確認再產生分潤連結。",
     "order": "2026-09-18 Tim：「你都給我商城耶！一般賣家跟優選通常更便宜。」對，之前我照「我們用過的優先」排，名冊本來就偏商城，等於把便宜的壓下去。改成一律照價格排，便宜的在最前面。「用過」只是旁邊一個提示，不是排序依據。讀者是價格取向的，我們連到最便宜又產得出連結的那一家，才是照顧到他。",
@@ -32,37 +32,47 @@
           "soldOut": "2026-09-19 查：已下架",
           "price": 279,
           "unit": "2.75kg",
-          "url": "https://shopee.tw/product/50662979/48113930645"
+          "url": "https://shopee.tw/product/50662979/48113930645",
+          "channel": "mall"
         }
       ]
     },
     {
       "id": "cl-02",
       "label": "艾可 ECO 豆腐貓砂（貓砂第二批）",
-      "why": "豆腐砂裡最便宜的一款，一包 7L 一百多。最便宜那家就是你產過臭味滾的寵物執行長",
+      "why": "兩條連結都是商城，一般賣家單包 $119 更便宜而且沒有最低購買量",
       "candidates": [
         {
-          "shop": "寵物執行長（蝦皮商城）",
-          "shopId": "3347166",
-          "known": true,
-          "price": 128,
-          "unit": "條狀 7L 原味",
-          "url": "https://shopee.tw/product/3347166/1150606904"
+          "shop": "毛孩超市",
+          "shopId": "726349238",
+          "channel": "seller",
+          "price": 119,
+          "unit": "7L 條狀／極細／破碎型一頁",
+          "url": "https://shopee.tw/product/726349238/54511767246"
         },
         {
-          "shop": "TNA 悠遊寵物 官方旗艦店",
-          "shopId": "325742451",
-          "price": 129,
-          "unit": "7L 原味",
-          "url": "https://shopee.tw/product/325742451/3195203710"
+          "shop": "寵物の達人",
+          "shopId": "1445444858",
+          "channel": "seller",
+          "price": 119,
+          "unit": "7L 條狀 多口味",
+          "url": "https://shopee.tw/product/1445444858/29640105645"
         },
         {
-          "shop": "貓日常 Cat's Daily（蝦皮商城）",
-          "shopId": "145808869",
-          "known": true,
-          "price": 179,
-          "unit": "7L 單包",
-          "url": "https://shopee.tw/product/145808869/2772032128"
+          "shop": "愛喵樂寵物",
+          "shopId": "219836385",
+          "channel": "seller",
+          "price": 119,
+          "unit": "7L 條狀 多口味",
+          "url": "https://shopee.tw/product/219836385/4431081780"
+        },
+        {
+          "shop": "貓貓龍寵物",
+          "shopId": "368996320",
+          "channel": "seller",
+          "price": 119,
+          "unit": "7L 極細條狀",
+          "url": "https://shopee.tw/product/368996320/17948905023"
         }
       ],
       "failed": [
@@ -72,7 +82,7 @@
           "at": "2026-09-19"
         }
       ],
-      "note": "連結已經補上了：寵物執行長，最少買 6 包。"
+      "note": "已經連上兩家商城了。這幾家一般賣家單包 $119，比商城單包 $179 便宜。"
     },
     {
       "id": "cl-04",
@@ -85,7 +95,8 @@
           "shopId": "971157768",
           "price": 1199,
           "unit": "整組（頁面沒寫幾包）",
-          "url": "https://shopee.tw/product/971157768/43334155543"
+          "url": "https://shopee.tw/product/971157768/43334155543",
+          "channel": "seller"
         }
       ]
     },
@@ -99,7 +110,8 @@
           "shopId": "1407397",
           "price": 250,
           "unit": "6L（礦型／細條型）",
-          "url": "https://shopee.tw/product/1407397/4442903841"
+          "url": "https://shopee.tw/product/1407397/4442903841",
+          "channel": "mall"
         },
         {
           "shop": "防御工事 T-FENCE（蝦皮商城）",
@@ -107,7 +119,8 @@
           "price": 220,
           "unit": "2.5kg×3 包組（可超取）",
           "url": "https://shopee.tw/product/9057706/2296032673",
-          "known": true
+          "known": true,
+          "channel": "mall"
         },
         {
           "shop": "防御工事 T-FENCE（蝦皮商城）",
@@ -115,7 +128,8 @@
           "price": 190,
           "unit": "2.5kg×10 包組（限宅配）",
           "url": "https://shopee.tw/product/9057706/2296044257",
-          "known": true
+          "known": true,
+          "channel": "mall"
         }
       ],
       "failed": [
@@ -125,7 +139,7 @@
           "at": "2026-09-19"
         }
       ],
-      "note": "連結已經補上了：防御工事 T-FENCE 一包到十包四種買法都在。"
+      "note": "連結已經補上了。這個牌子在蝦皮只有自己的官方商城在賣，查不到一般賣家，不是漏掉。"
     },
     {
       "id": "cl-11",
@@ -145,14 +159,16 @@
           "price": 756,
           "unit": "2kg",
           "url": "https://shopee.tw/product/712620377/40957857643",
-          "soldOut": "2026-09-18 查：有這一款，但售完"
+          "soldOut": "2026-09-18 查：有這一款，但售完",
+          "channel": "seller"
         },
         {
           "shop": "汎美力寵物生活百貨",
           "shopId": "379863203",
           "price": 975,
           "unit": "2kg",
-          "url": "https://shopee.tw/product/379863203/50857271537"
+          "url": "https://shopee.tw/product/379863203/50857271537",
+          "channel": "seller"
         },
         {
           "shop": "肥貓粉絲團（蝦皮商城）",
@@ -160,14 +176,16 @@
           "known": true,
           "price": 1080,
           "unit": "2kg",
-          "url": "https://shopee.tw/product/869025867/21151568984"
+          "url": "https://shopee.tw/product/869025867/21151568984",
+          "channel": "mall"
         },
         {
           "shop": "Royal Canin 法國皇家官方旗艦館（蝦皮商城）",
           "shopId": "1525532445",
           "price": 1080,
           "unit": "2kg",
-          "url": "https://shopee.tw/product/1525532445/46804619641"
+          "url": "https://shopee.tw/product/1525532445/46804619641",
+          "channel": "mall"
         }
       ]
     },
@@ -182,7 +200,8 @@
           "shopId": "234961811",
           "price": 4590,
           "unit": "10磅",
-          "url": "https://shopee.tw/product/234961811/12860610874"
+          "url": "https://shopee.tw/product/234961811/12860610874",
+          "channel": "mall"
         }
       ],
       "failed": []
@@ -200,30 +219,50 @@
       "why": "整個類目的招牌算式用的就是這一款：一條 7 大卡，3 條到頂",
       "candidates": [
         {
-          "shop": "貓日常 Cat's Daily（蝦皮商城）",
-          "shopId": "145808869",
+          "shop": "Jolly Pet Taiwan",
+          "shopId": "98558052",
+          "channel": "seller",
+          "price": 30,
+          "unit": "14g×4 · 多口味一頁，要選到我們寫的那一款",
+          "url": "https://shopee.tw/product/98558052/42874649847"
+        },
+        {
+          "shop": "毛孩福利倉庫",
+          "shopId": "1737674599",
+          "channel": "seller",
+          "price": 35,
+          "unit": "14g×4 · 多口味一頁",
+          "url": "https://shopee.tw/product/1737674599/51714101377"
+        },
+        {
+          "shop": "晴空小舖sky（蝦皮優選）",
+          "shopId": "742205",
           "known": true,
-          "price": 49,
-          "unit": "14g×4 · 一頁很多口味，要在規格裡選到我們寫的那一款",
-          "url": "https://shopee.tw/product/145808869/5031994821"
+          "channel": "preferred",
+          "price": 36,
+          "unit": "14g×4 · 我們在這家產過連結",
+          "url": "https://shopee.tw/product/742205/29483988089"
         },
         {
           "shop": "萬倍富寵物用品店（蝦皮商城）",
           "shopId": "8730825",
           "known": true,
+          "channel": "mall",
           "price": 45,
-          "unit": "14g×4 · 比價站抓到的是鮪魚那一版，其他口味看規格有沒有",
+          "unit": "14g×4 · 比價站抓到的是鮪魚那一版",
           "url": "https://shopee.tw/product/8730825/1722945594"
         },
         {
-          "shop": "新威寵物百貨商城",
-          "shopId": "90002566",
-          "known": false,
-          "price": 54,
-          "unit": "14g×4 · 整個系列一頁。賣場名字還沒核對過",
-          "url": "https://shopee.tw/product/90002566/1867063639"
+          "shop": "貓日常 Cat's Daily（蝦皮商城）",
+          "shopId": "145808869",
+          "known": true,
+          "channel": "mall",
+          "price": 49,
+          "unit": "14g×4 · 多口味一頁",
+          "url": "https://shopee.tw/product/145808869/5031994821"
         }
-      ]
+      ],
+      "note": null
     },
     {
       "id": "ct-02",
@@ -231,30 +270,50 @@
       "why": "跟雞肉那款同規格，價錢通常一樣",
       "candidates": [
         {
-          "shop": "貓日常 Cat's Daily（蝦皮商城）",
-          "shopId": "145808869",
+          "shop": "Jolly Pet Taiwan",
+          "shopId": "98558052",
+          "channel": "seller",
+          "price": 30,
+          "unit": "14g×4 · 多口味一頁，要選到我們寫的那一款",
+          "url": "https://shopee.tw/product/98558052/42874649847"
+        },
+        {
+          "shop": "毛孩福利倉庫",
+          "shopId": "1737674599",
+          "channel": "seller",
+          "price": 35,
+          "unit": "14g×4 · 多口味一頁",
+          "url": "https://shopee.tw/product/1737674599/51714101377"
+        },
+        {
+          "shop": "晴空小舖sky（蝦皮優選）",
+          "shopId": "742205",
           "known": true,
-          "price": 49,
-          "unit": "14g×4 · 一頁很多口味，要在規格裡選到我們寫的那一款",
-          "url": "https://shopee.tw/product/145808869/5031994821"
+          "channel": "preferred",
+          "price": 36,
+          "unit": "14g×4 · 我們在這家產過連結",
+          "url": "https://shopee.tw/product/742205/29483988089"
         },
         {
           "shop": "萬倍富寵物用品店（蝦皮商城）",
           "shopId": "8730825",
           "known": true,
+          "channel": "mall",
           "price": 45,
-          "unit": "14g×4 · 比價站抓到的是鮪魚那一版，其他口味看規格有沒有",
+          "unit": "14g×4 · 比價站抓到的是鮪魚那一版",
           "url": "https://shopee.tw/product/8730825/1722945594"
         },
         {
-          "shop": "新威寵物百貨商城",
-          "shopId": "90002566",
-          "known": false,
-          "price": 54,
-          "unit": "14g×4 · 整個系列一頁。賣場名字還沒核對過",
-          "url": "https://shopee.tw/product/90002566/1867063639"
+          "shop": "貓日常 Cat's Daily（蝦皮商城）",
+          "shopId": "145808869",
+          "known": true,
+          "channel": "mall",
+          "price": 49,
+          "unit": "14g×4 · 多口味一頁",
+          "url": "https://shopee.tw/product/145808869/5031994821"
         }
-      ]
+      ],
+      "note": null
     },
     {
       "id": "ct-03",
@@ -262,52 +321,97 @@
       "why": "一條 13 大卡，是「看起來比較營養、額度反而用更快」的對照組",
       "candidates": [
         {
-          "shop": "貓日常 Cat's Daily（蝦皮商城）",
-          "shopId": "145808869",
+          "shop": "Jolly Pet Taiwan",
+          "shopId": "98558052",
+          "channel": "seller",
+          "price": 30,
+          "unit": "14g×4 · 多口味一頁，要選到我們寫的那一款",
+          "url": "https://shopee.tw/product/98558052/42874649847"
+        },
+        {
+          "shop": "毛孩福利倉庫",
+          "shopId": "1737674599",
+          "channel": "seller",
+          "price": 35,
+          "unit": "14g×4 · 多口味一頁",
+          "url": "https://shopee.tw/product/1737674599/51714101377"
+        },
+        {
+          "shop": "晴空小舖sky（蝦皮優選）",
+          "shopId": "742205",
           "known": true,
-          "price": 49,
-          "unit": "14g×4 · 一頁很多口味，要在規格裡選到我們寫的那一款",
-          "url": "https://shopee.tw/product/145808869/5031994821"
+          "channel": "preferred",
+          "price": 36,
+          "unit": "14g×4 · 我們在這家產過連結",
+          "url": "https://shopee.tw/product/742205/29483988089"
         },
         {
           "shop": "萬倍富寵物用品店（蝦皮商城）",
           "shopId": "8730825",
           "known": true,
+          "channel": "mall",
           "price": 45,
-          "unit": "14g×4 · 比價站抓到的是鮪魚那一版，其他口味看規格有沒有",
+          "unit": "14g×4 · 比價站抓到的是鮪魚那一版",
           "url": "https://shopee.tw/product/8730825/1722945594"
         },
         {
-          "shop": "新威寵物百貨商城",
-          "shopId": "90002566",
-          "known": false,
-          "price": 54,
-          "unit": "14g×4 · 整個系列一頁。賣場名字還沒核對過",
-          "url": "https://shopee.tw/product/90002566/1867063639"
+          "shop": "貓日常 Cat's Daily（蝦皮商城）",
+          "shopId": "145808869",
+          "known": true,
+          "channel": "mall",
+          "price": 49,
+          "unit": "14g×4 · 多口味一頁",
+          "url": "https://shopee.tw/product/145808869/5031994821"
         }
-      ]
+      ],
+      "note": null
     },
     {
       "id": "ct-04",
       "label": "汪喵星球 太空小零嘴 長盈虱目魚（貓零食）",
       "why": "凍乾這一段的代表款，蛋白質 89%",
-      "note": "汪喵星球官方商城我們已經在貓砂那一款產過連結，整條產品線都在那裡，先從那家找最快。上面這幾家是備案。",
+      "note": "汪喵星球官方商城我們已經在貓砂那一款產過連結，整條線都在那裡。但官方價最高，先試上面便宜的幾家。",
       "candidates": [
+        {
+          "shop": "毛孩寵物鋪",
+          "shopId": "1447238100",
+          "known": true,
+          "channel": "seller",
+          "price": 90,
+          "unit": "山味／海味一頁 · 我們在這家產過連結",
+          "url": "https://shopee.tw/product/1447238100/29574128530"
+        },
+        {
+          "shop": "小貓亂亂買 BuyBuyCat",
+          "shopId": "5369807",
+          "channel": "seller",
+          "price": 109,
+          "unit": "整條產品線一頁",
+          "url": "https://shopee.tw/product/5369807/19408193702"
+        },
+        {
+          "shop": "petroyal 喵汪星球",
+          "shopId": "2124705",
+          "channel": "seller",
+          "price": 109,
+          "unit": "整條產品線一頁",
+          "url": "https://shopee.tw/product/2124705/26269802225"
+        },
+        {
+          "shop": "小橙花寵物",
+          "shopId": "74752805",
+          "channel": "seller",
+          "price": 109,
+          "unit": "整條產品線一頁",
+          "url": "https://shopee.tw/product/74752805/18108195813"
+        },
         {
           "shop": "毛家庄寵物（蝦皮商城）",
           "shopId": "227619564",
-          "known": false,
+          "channel": "mall",
           "price": 180,
-          "unit": "50g · 山味海味全系列同一頁。賣場名字還沒核對過",
+          "unit": "50g · 山味海味全系列同一頁",
           "url": "https://shopee.tw/product/227619564/4943217592"
-        },
-        {
-          "shop": "喵喵玩國寵物用品",
-          "shopId": "126775507",
-          "known": false,
-          "price": 180,
-          "unit": "50g · 也是整條產品線一頁。賣場名字還沒核對過",
-          "url": "https://shopee.tw/product/126775507/12838394378"
         }
       ]
     },
@@ -315,31 +419,56 @@
       "id": "ct-05",
       "label": "汪喵星球 太空小零嘴 爆蛋柳葉魚（貓零食）",
       "why": "這一系列熱量最高的，一天只能給 5 公克",
-      "note": "汪喵星球官方商城我們已經在貓砂那一款產過連結，整條產品線都在那裡，先從那家找最快。上面這幾家是備案。",
+      "note": "汪喵星球官方商城我們已經在貓砂那一款產過連結，整條線都在那裡。但官方價最高，先試上面便宜的幾家。",
       "candidates": [
         {
-          "shop": "李小貓之家寵物概念生活館（蝦皮商城）",
-          "shopId": "2482492",
-          "known": false,
-          "price": 250,
-          "unit": "30g · 爆蛋柳葉魚 40g 跟澎湖丁香魚 30g 同一頁。賣場名字還沒核對過",
-          "url": "https://shopee.tw/product/2482492/5597541702"
+          "shop": "毛孩寵物鋪",
+          "shopId": "1447238100",
+          "known": true,
+          "channel": "seller",
+          "price": 90,
+          "unit": "山味／海味一頁 · 我們在這家產過連結",
+          "url": "https://shopee.tw/product/1447238100/29574128530"
+        },
+        {
+          "shop": "小貓亂亂買 BuyBuyCat",
+          "shopId": "5369807",
+          "channel": "seller",
+          "price": 109,
+          "unit": "整條產品線一頁",
+          "url": "https://shopee.tw/product/5369807/19408193702"
+        },
+        {
+          "shop": "petroyal 喵汪星球",
+          "shopId": "2124705",
+          "channel": "seller",
+          "price": 109,
+          "unit": "整條產品線一頁",
+          "url": "https://shopee.tw/product/2124705/26269802225"
+        },
+        {
+          "shop": "小橙花寵物",
+          "shopId": "74752805",
+          "channel": "seller",
+          "price": 109,
+          "unit": "整條產品線一頁",
+          "url": "https://shopee.tw/product/74752805/18108195813"
         },
         {
           "shop": "毛家庄寵物（蝦皮商城）",
           "shopId": "227619564",
-          "known": false,
+          "channel": "mall",
           "price": 180,
-          "unit": "50g · 山味海味全系列同一頁。賣場名字還沒核對過",
+          "unit": "50g · 山味海味全系列同一頁",
           "url": "https://shopee.tw/product/227619564/4943217592"
         },
         {
-          "shop": "喵喵玩國寵物用品",
-          "shopId": "126775507",
-          "known": false,
-          "price": 180,
-          "unit": "50g · 也是整條產品線一頁。賣場名字還沒核對過",
-          "url": "https://shopee.tw/product/126775507/12838394378"
+          "shop": "李小貓之家寵物概念生活館（蝦皮商城）",
+          "shopId": "2482492",
+          "channel": "mall",
+          "price": 250,
+          "unit": "30g · 爆蛋柳葉魚 40g 跟澎湖丁香魚 30g 同一頁",
+          "url": "https://shopee.tw/product/2482492/5597541702"
         }
       ]
     },
@@ -347,23 +476,48 @@
       "id": "ct-07",
       "label": "汪喵星球 太空小零嘴 日本大干貝（貓零食）",
       "why": "脂肪 3.6% 最低，在減重的貓從這款開始",
-      "note": "汪喵星球官方商城我們已經在貓砂那一款產過連結，整條產品線都在那裡，先從那家找最快。上面這幾家是備案。",
+      "note": "汪喵星球官方商城我們已經在貓砂那一款產過連結，整條線都在那裡。但官方價最高，先試上面便宜的幾家。",
       "candidates": [
+        {
+          "shop": "毛孩寵物鋪",
+          "shopId": "1447238100",
+          "known": true,
+          "channel": "seller",
+          "price": 90,
+          "unit": "山味／海味一頁 · 我們在這家產過連結",
+          "url": "https://shopee.tw/product/1447238100/29574128530"
+        },
+        {
+          "shop": "小貓亂亂買 BuyBuyCat",
+          "shopId": "5369807",
+          "channel": "seller",
+          "price": 109,
+          "unit": "整條產品線一頁",
+          "url": "https://shopee.tw/product/5369807/19408193702"
+        },
+        {
+          "shop": "petroyal 喵汪星球",
+          "shopId": "2124705",
+          "channel": "seller",
+          "price": 109,
+          "unit": "整條產品線一頁",
+          "url": "https://shopee.tw/product/2124705/26269802225"
+        },
+        {
+          "shop": "小橙花寵物",
+          "shopId": "74752805",
+          "channel": "seller",
+          "price": 109,
+          "unit": "整條產品線一頁",
+          "url": "https://shopee.tw/product/74752805/18108195813"
+        },
         {
           "shop": "毛家庄寵物（蝦皮商城）",
           "shopId": "227619564",
-          "known": false,
+          "channel": "mall",
           "price": 180,
-          "unit": "50g · 山味海味全系列同一頁。賣場名字還沒核對過",
+          "unit": "50g · 山味海味全系列同一頁",
           "url": "https://shopee.tw/product/227619564/4943217592"
-        },
-        {
-          "shop": "喵喵玩國寵物用品",
-          "shopId": "126775507",
-          "known": false,
-          "price": 180,
-          "unit": "50g · 也是整條產品線一頁。賣場名字還沒核對過",
-          "url": "https://shopee.tw/product/126775507/12838394378"
         }
       ]
     },
@@ -371,31 +525,105 @@
       "id": "ct-08",
       "label": "汪喵星球 太空小零嘴 澎湖丁香魚（貓零食）",
       "why": "跟爆蛋柳葉魚同一個賣場頁",
-      "note": "汪喵星球官方商城我們已經在貓砂那一款產過連結，整條產品線都在那裡，先從那家找最快。上面這幾家是備案。",
+      "note": "汪喵星球官方商城我們已經在貓砂那一款產過連結，整條線都在那裡。但官方價最高，先試上面便宜的幾家。",
       "candidates": [
         {
-          "shop": "李小貓之家寵物概念生活館（蝦皮商城）",
-          "shopId": "2482492",
-          "known": false,
-          "price": 250,
-          "unit": "30g · 爆蛋柳葉魚 40g 跟澎湖丁香魚 30g 同一頁。賣場名字還沒核對過",
-          "url": "https://shopee.tw/product/2482492/5597541702"
+          "shop": "毛孩寵物鋪",
+          "shopId": "1447238100",
+          "known": true,
+          "channel": "seller",
+          "price": 90,
+          "unit": "山味／海味一頁 · 我們在這家產過連結",
+          "url": "https://shopee.tw/product/1447238100/29574128530"
+        },
+        {
+          "shop": "小貓亂亂買 BuyBuyCat",
+          "shopId": "5369807",
+          "channel": "seller",
+          "price": 109,
+          "unit": "整條產品線一頁",
+          "url": "https://shopee.tw/product/5369807/19408193702"
+        },
+        {
+          "shop": "petroyal 喵汪星球",
+          "shopId": "2124705",
+          "channel": "seller",
+          "price": 109,
+          "unit": "整條產品線一頁",
+          "url": "https://shopee.tw/product/2124705/26269802225"
+        },
+        {
+          "shop": "小橙花寵物",
+          "shopId": "74752805",
+          "channel": "seller",
+          "price": 109,
+          "unit": "整條產品線一頁",
+          "url": "https://shopee.tw/product/74752805/18108195813"
         },
         {
           "shop": "毛家庄寵物（蝦皮商城）",
           "shopId": "227619564",
-          "known": false,
+          "channel": "mall",
           "price": 180,
-          "unit": "50g · 山味海味全系列同一頁。賣場名字還沒核對過",
+          "unit": "50g · 山味海味全系列同一頁",
           "url": "https://shopee.tw/product/227619564/4943217592"
         },
         {
-          "shop": "喵喵玩國寵物用品",
-          "shopId": "126775507",
-          "known": false,
-          "price": 180,
-          "unit": "50g · 也是整條產品線一頁。賣場名字還沒核對過",
-          "url": "https://shopee.tw/product/126775507/12838394378"
+          "shop": "李小貓之家寵物概念生活館（蝦皮商城）",
+          "shopId": "2482492",
+          "channel": "mall",
+          "price": 250,
+          "unit": "30g · 爆蛋柳葉魚 40g 跟澎湖丁香魚 30g 同一頁",
+          "url": "https://shopee.tw/product/2482492/5597541702"
+        }
+      ]
+    },
+    {
+      "id": "cl-01",
+      "label": "臭味滾 Odout 極細豆腐貓砂 1.5mm（貓砂）",
+      "why": "現在只連到商城 $223，一般賣家同一包 $100",
+      "note": "這一款現在只有商城的連結，一個月算下來 $573。一般賣家同一包 $100，補上去可以砍一半。",
+      "candidates": [
+        {
+          "shop": "zozomao",
+          "shopId": "6329900",
+          "channel": "seller",
+          "price": 100,
+          "unit": "7L 單包入",
+          "url": "https://shopee.tw/product/6329900/7295820605"
+        },
+        {
+          "shop": "Engle 恩格爾寵物用品店",
+          "shopId": "8945548",
+          "channel": "seller",
+          "price": 100,
+          "unit": "7L 原味",
+          "url": "https://shopee.tw/product/8945548/15616387264"
+        },
+        {
+          "shop": "萌寵星球PETPLANET",
+          "shopId": "27770716",
+          "channel": "seller",
+          "price": 100,
+          "unit": "7L 2.8kg 附除臭粒",
+          "url": "https://shopee.tw/product/27770716/25166760418"
+        },
+        {
+          "shop": "奴才日誌寵物用品小店",
+          "shopId": "2200114",
+          "channel": "seller",
+          "price": 100,
+          "unit": "7L 一頁多款",
+          "url": "https://shopee.tw/product/2200114/24235508950"
+        },
+        {
+          "shop": "寵物執行長（蝦皮商城）",
+          "shopId": "3347166",
+          "known": true,
+          "channel": "mall",
+          "price": 223,
+          "unit": "7L · 已經連上了",
+          "url": "https://shopee.tw/product/3347166/1150606904"
         }
       ]
     }

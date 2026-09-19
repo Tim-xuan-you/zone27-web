@@ -12,6 +12,7 @@ import { impactMap, overallCutRate, ruleAudit, TIER_WEIGHT, type Impact } from "
 import health from "@/data/link-health.json";
 import storeReg from "@/data/stores.json";
 import checkExtra from "@/data/check-extra.json";
+import { isMall } from "@/lib/channel";
 import { litters } from "@/lib/litter";
 import { treats } from "@/lib/treat";
 import HuntPicks from "@/components/HuntPicks";
@@ -148,6 +149,19 @@ export default function Page() {
     .filter(([, v]) => v.confirmed)
     .slice(-6)
     .map(([shop, v]) => ({ label: v.name, shop }));
+  /* 只連到商城的。
+     2026-09-19 Tim：「您永遠給我的都是商城耶，蝦皮優選及一般商家您查不到嗎？」
+     他是對的：同一包臭味滾 7L，商城 $223、一般賣家 $100。
+     連結沒錯，但只有貴的那一種，只看價錢的讀者就被放生了。 */
+  const everything = [
+    ...catalog.map((p) => ({ id: p.id, brand: p.brand, name: p.name, searchAs: p.searchAs, ms: p.price.merchants })),
+    ...litters.map((p) => ({ id: p.id, brand: p.brand, name: p.name, searchAs: p.searchAs, ms: p.price.merchants })),
+    ...treats.map((p) => ({ id: p.id, brand: p.brand, name: p.name, searchAs: p.searchAs, ms: p.price.merchants })),
+  ];
+  const mallOnly = everything
+    .map((x) => ({ ...x, live: x.ms.filter((m) => !m.dead) }))
+    .filter((x) => x.live.length > 0 && x.live.every((m) => isMall(m.label)));
+
   /* 貓砂、零食不在飼料的 catalog 裡，維護台原本看不到這兩個類目缺什麼 */
   const nonFoodGaps = [
     { zh: "貓砂", items: litters.filter((p) => !p.price.merchants.some((m) => !m.dead)) },
@@ -584,6 +598,41 @@ export default function Page() {
           )}
         </div>
       ))}
+
+      <H>只連到商城的（{mallOnly.length} 款）</H>
+      <p style={{ margin: "0 0 14px", fontSize: 14.5, color: "var(--muted)", lineHeight: 1.9 }}>
+        商城有保障，但同一包常常貴一截。臭味滾 7L 商城 $223，一般賣家 $100。
+        這幾款現在只連得到商城，只看價錢的讀者等於沒有選擇。
+        補一家一般賣家或優選上去，網站會自動把兩種都列給讀者，便宜的排前面。
+      </p>
+      {mallOnly.length === 0
+        ? <p style={ok}>沒有。每一款都至少有一家商城以外的賣場。</p>
+        : mallOnly.map((p) => (
+            <div key={p.id} style={box}>
+              <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", gap: 12, flexWrap: "wrap" }}>
+                <div>
+                  <span style={{ fontSize: 12.5, color: "var(--muted)", display: "block" }}>{p.brand}</span>
+                  <b style={{ fontSize: 16.5 }}>{p.name}</b>
+                </div>
+                <span className="mono" style={{ fontSize: 13, color: "var(--faint)" }}>{p.id}</span>
+              </div>
+              <div style={{ marginTop: 14, paddingTop: 14, borderTop: "1px solid var(--line)" }}>
+                <Line k="現在連到">
+                  {[...new Set(p.live.map((m) => m.label))].join("、")}
+                </Line>
+                <Line k="去蝦皮搜這個">
+                  <span className="mono" style={{ fontSize: 14 }}>{huntFrom(p.brand, p.name, p.searchAs)}</span>
+                  <HuntLinks keyword={huntFrom(p.brand, p.name, p.searchAs)} shops={[]} />
+                  <HuntPicks id={p.id} />
+                </Line>
+                <Line k="產生連結時填">
+                  <span className="mono" style={{ fontSize: 14 }}>
+                    Sub id 1 = <b>{shopeeSubId(p.id)}</b>　Sub id 2 = <b>{categoryOfId(p.id)?.subId ?? CATEGORY_SUB_ID}</b>
+                  </span>
+                </Line>
+              </div>
+            </div>
+          ))}
 
       <H>整款買不到的</H>
       {unbuyable.length === 0

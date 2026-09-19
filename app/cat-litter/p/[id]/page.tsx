@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import SiteHeader from "@/components/SiteHeader";
 import Share from "@/components/Share";
 import { CONTACT } from "@/lib/contact";
+import { CHANNEL_NOTE, channelOf } from "@/lib/channel";
 import {
   litters, litterById, MATERIAL_ZH, FLUSH, FLUSH_LINE, flushGap,
   anchorLitter, liveOf, monthlyCost, unitPriceOf,
@@ -119,6 +120,12 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
                   </a>
                 );
               })}
+              {/* 同一款同時有商城和商城以外的，差別要講一句，不然只看到價差 */}
+              {new Set(live.map((x) => channelOf(x.label))).size > 1 && (
+                <p style={{ margin: "12px 0 0", fontSize: 12.5, color: "var(--faint)", lineHeight: 1.85 }}>
+                  {CHANNEL_NOTE}
+                </p>
+              )}
             </div>
           )}
         </section>

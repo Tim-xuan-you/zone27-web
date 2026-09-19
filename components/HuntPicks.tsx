@@ -1,6 +1,7 @@
 import huntData from "@/data/hunt-candidates.json";
 import blocked from "@/data/no-affiliate.json";
 import storeReg from "@/data/stores.json";
+import { CHANNEL_ZH, channelOf, type Channel } from "@/lib/channel";
 
 /**
  * 我先查好的候選賣場。只在維護台出現，讀者頁面看不到。
@@ -20,7 +21,10 @@ import storeReg from "@/data/stores.json";
  * 不是爬蝦皮，也沒有用他的帳號。價格會變、庫存看不到，開進去要自己確認。
  */
 
-type Candidate = { shop: string; shopId?: string; known?: boolean; soldOut?: string; price: number | null; unit: string; url: string };
+type Candidate = {
+  shop: string; shopId?: string; known?: boolean; soldOut?: string;
+  price: number | null; unit: string; url: string; channel?: Channel;
+};
 type Failed = { shop: string; reason: string; at: string };
 type Target = { id: string; label: string; why: string; note?: string; candidates: Candidate[]; failed?: Failed[] };
 
@@ -42,6 +46,8 @@ export default function HuntPicks({ id }: { id: string }) {
   const open = t.candidates
     .filter((c) => !failedFor(id, c))
     .sort((a, b) => Number(Boolean(a.soldOut)) - Number(Boolean(b.soldOut)) || (a.price ?? 1e9) - (b.price ?? 1e9));
+  // 一整排都是商城代表我查得不夠廣：商城通常比一般賣家貴一截
+  const allMall = open.length > 0 && open.every((c) => (c.channel ?? channelOf(c.shop)) === "mall");
   const gone = [
     ...PAIRS.filter((x) => x.productId === id).map((x) => `${x.shop}（${x.note ?? "這一款產不出連結"}）`),
     ...(t.failed ?? []).map((f) => `${f.shop}（${f.reason}）`),
@@ -51,6 +57,11 @@ export default function HuntPicks({ id }: { id: string }) {
       <p style={{ margin: "0 0 2px", fontSize: 13, color: "var(--faint)", lineHeight: 1.8 }}>
         我查到的（{huntData._meta.checkedAt}），便宜的排前面。產不出連結的話跟我說是哪一家，我只擋這一款的那一家
       </p>
+      {open.length > 0 && allMall && (
+        <p style={{ margin: "6px 0 0", fontSize: 13, color: "var(--warn)", lineHeight: 1.8 }}>
+          這一款我只查到商城。商城通常貴一截，如果是這個牌子只在官方賣就沒辦法，不然再撈一次一般賣家
+        </p>
+      )}
       {t.note && (
         <p style={{ margin: "6px 0 0", fontSize: 13.5, color: "var(--warn)", lineHeight: 1.8 }}>{t.note}</p>
       )}
@@ -68,6 +79,9 @@ export default function HuntPicks({ id }: { id: string }) {
                 用過，產得出連結
               </span>
             )}
+            <span style={{ ...chip, ...CH_STYLE[c.channel ?? channelOf(c.shop)] }}>
+              {CHANNEL_ZH[c.channel ?? channelOf(c.shop)]}
+            </span>
             <span style={{ display: "block", fontSize: 12.5, color: "var(--muted)" }}>
               {c.unit}{c.soldOut ? " · 上次看是售完的，先確認有沒有補貨" : ""}
             </span>
@@ -85,6 +99,15 @@ export default function HuntPicks({ id }: { id: string }) {
     </div>
   );
 }
+
+const chip: React.CSSProperties = {
+  fontSize: 11.5, borderRadius: 6, padding: "2px 7px", marginLeft: 8, whiteSpace: "nowrap",
+};
+const CH_STYLE: Record<Channel, React.CSSProperties> = {
+  mall: { color: "var(--muted)", background: "var(--sunken)" },
+  preferred: { color: "var(--accent)", background: "var(--accent-soft)" },
+  seller: { color: "var(--keep)", background: "var(--keep-soft)" },
+};
 
 const row: React.CSSProperties = {
   display: "flex", justifyContent: "space-between", alignItems: "center", gap: 10,

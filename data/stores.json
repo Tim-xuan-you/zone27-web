@@ -18,6 +18,14 @@
       "name": "H&R安室家（蝦皮商城）",
       "confirmed": true
     },
+    "2124705": {
+      "name": "petroyal 喵汪星球",
+      "confirmed": false
+    },
+    "2200114": {
+      "name": "奴才日誌寵物用品小店",
+      "confirmed": false
+    },
     "2482492": {
       "name": "李小貓之家寵物概念生活館（蝦皮商城）",
       "confirmed": false
@@ -30,6 +38,14 @@
       "name": "飼食事寵物選品",
       "confirmed": true
     },
+    "5369807": {
+      "name": "小貓亂亂買 BuyBuyCat",
+      "confirmed": false
+    },
+    "6329900": {
+      "name": "zozomao",
+      "confirmed": false
+    },
     "7293322": {
       "name": "貓狗六一六",
       "confirmed": true
@@ -37,6 +53,10 @@
     "8730825": {
       "name": "萬倍富寵物用品店（蝦皮商城）",
       "confirmed": true
+    },
+    "8945548": {
+      "name": "Engle 恩格爾寵物用品店",
+      "confirmed": false
     },
     "9057706": {
       "name": "防御工事 T-FENCE（蝦皮商城）",
@@ -54,12 +74,24 @@
       "name": "國際貓家貓奴網（蝦皮商城）",
       "confirmed": false
     },
+    "27770716": {
+      "name": "萌寵星球PETPLANET",
+      "confirmed": false
+    },
     "50662979": {
       "name": "蝦皮直營（官方直營）",
       "confirmed": true
     },
+    "74752805": {
+      "name": "小橙花寵物",
+      "confirmed": false
+    },
     "90002566": {
       "name": "新威寵物百貨商城",
+      "confirmed": false
+    },
+    "98558052": {
+      "name": "Jolly Pet Taiwan",
       "confirmed": false
     },
     "126775507": {
@@ -77,6 +109,10 @@
     "175445387": {
       "name": "Petizen寵物公民旗艦店（蝦皮商城）",
       "confirmed": true
+    },
+    "219836385": {
+      "name": "愛喵樂寵物",
+      "confirmed": false
     },
     "227619564": {
       "name": "毛家庄寵物（蝦皮商城）",
@@ -126,6 +162,10 @@
       "name": "寵物星樂園（高雄千坪門市）",
       "confirmed": true
     },
+    "368996320": {
+      "name": "貓貓龍寵物",
+      "confirmed": false
+    },
     "397211381": {
       "name": "毛家人寵物用品",
       "confirmed": true
@@ -138,6 +178,10 @@
       "name": "罐罐富翁（蝦皮優選）",
       "confirmed": true
     },
+    "726349238": {
+      "name": "毛孩超市",
+      "confirmed": false
+    },
     "751627804": {
       "name": "米腸家寵物用品",
       "confirmed": true
@@ -146,6 +190,10 @@
       "name": "肥貓粉絲團（蝦皮商城）",
       "confirmed": true
     },
+    "1445444858": {
+      "name": "寵物の達人",
+      "confirmed": false
+    },
     "1447238100": {
       "name": "毛孩寵物鋪",
       "confirmed": true
@@ -153,6 +201,10 @@
     "1582969589": {
       "name": "ZIWI滋益巔峰 台灣官方旗艦店（蝦皮商城）",
       "confirmed": true
+    },
+    "1737674599": {
+      "name": "毛孩福利倉庫",
+      "confirmed": false
     }
   }
 }
