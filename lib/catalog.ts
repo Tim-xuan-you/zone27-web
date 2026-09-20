@@ -1,6 +1,6 @@
 import dog from "@/data/dog-food.json";
 import { litters } from "./litter";
-import { treats } from "./treat";
+import { treatsOf } from "./treat";
 import cat from "@/data/cat-food.json";
 import catWet from "@/data/cat-wet-food.json";
 import type { Constraint, Form, Merchant, Price, Product, ProteinSource, Situation, Species } from "./types";
@@ -40,7 +40,7 @@ export function byId(id: string): Product | undefined {
  * 讀者按了購買會被丟回首頁 —— 賣場拿不到點擊，我們拿不到分潤。
  */
 export function merchantFor(sku: string, merchantId: string): Merchant | undefined {
-  const all: { id: string; price: Price }[] = [...catalog, ...litters, ...treats];
+  const all: { id: string; price: Price }[] = [...catalog, ...litters, ...treatsOf("cat"), ...treatsOf("dog")];
   return all.find((p) => p.id === sku)?.price.merchants.find((m) => m.id === merchantId);
 }
 
@@ -62,7 +62,7 @@ export function shopLink(productId?: string): string | null {
 export function liveCount(species: Species, form: Form = "dry"): number {
   // 貓砂不在飼料的 catalog 裡（規格完全不同，見 lib/litter.ts），要另外數
   if (form === "litter") return litters.filter((p) => p.price.merchants.some((m) => !m.dead)).length;
-  if (form === "treat") return treats.filter((p) => p.price.merchants.some((m) => !m.dead)).length;
+  if (form === "treat") return treatsOf(species).filter((p) => p.price.merchants.some((m) => !m.dead)).length;
   return catalogOf(species, form).filter(recommendable).length;
 }
 

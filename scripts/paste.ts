@@ -328,7 +328,7 @@ async function main() {
   await import("./import-csv");
   // 貼的是貓砂的話，那一份要用貓砂的匯入（欄位不一樣）
   if (outputs.some(([path]) => path.includes("cat-litter"))) await import("./import-litter");
-  if (outputs.some(([path]) => path.includes("cat-treat"))) await import("./import-treat");
+  if (outputs.some(([path]) => path.includes("treat"))) await import("./import-treat");
 }
 
 main().catch((e) => {

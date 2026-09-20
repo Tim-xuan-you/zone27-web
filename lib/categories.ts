@@ -12,13 +12,13 @@ import type { Form, Species } from "./types";
  * 類目會一直加，導覽列不能跟著一直變長。
  */
 
-export type CategorySlug = "dog-food" | "cat-food" | "cat-wet-food" | "cat-litter" | "cat-treat";
+export type CategorySlug = "dog-food" | "dog-treat" | "cat-food" | "cat-wet-food" | "cat-litter" | "cat-treat";
 
 /**
  * 吃的那三個類目。貓砂不是吃的，裁決器那一套（過敏原、年紀、體型）對它沒有意義，
  * 所以凡是「每個類目一份設定」的地方，用這個型別，貓砂就不會被要求填一份空的。
  */
-export type FoodSlug = Exclude<CategorySlug, "cat-litter" | "cat-treat">;
+export type FoodSlug = Exclude<CategorySlug, "cat-litter" | "cat-treat" | "dog-treat">;
 
 export interface Category {
   slug: CategorySlug;
@@ -56,6 +56,20 @@ export const CATEGORIES: Category[] = [
     json: "data/dog-food.json",
     pitch: "過敏、軟便、變胖、幼犬老犬，先刪掉不適合的。",
     soonNote: "讀完的那幾款先整理在下面這頁，每一款什麼時候不要買都寫了。",
+  },
+  {
+    slug: "dog-treat",
+    species: "dog",
+    form: "treat",
+    zh: "狗零食",
+    short: "零食",
+    animal: "狗",
+    idPrefix: "dt",
+    subId: "dogtreat",
+    csv: "data/dog-treat.csv",
+    json: "data/dog-treat.json",
+    pitch: "一支潔牙骨，就把一天的零食額度吃光。品牌自己算給你看過，只是你沒注意。",
+    soonNote: "讀完的那幾款先整理在下面這頁，每一支幾大卡都寫了。",
   },
   {
     slug: "cat-food",

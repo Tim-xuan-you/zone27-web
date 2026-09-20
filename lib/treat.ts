@@ -1,6 +1,7 @@
-import type { Merchant, Price, ProteinSource } from "./types";
+import type { Merchant, Price, ProteinSource, Species } from "./types";
 import { dedupeMerchants, mer } from "./engine";
 import treat from "../data/cat-treat.json";
+import dogTreat from "../data/dog-treat.json";
 
 /**
  * 貓零食。
@@ -14,13 +15,14 @@ import treat from "../data/cat-treat.json";
  * 很多人一天給五六條，還在問貓為什麼胖。這就是這個類目存在的理由。
  */
 
-export type TreatForm = "puree" | "freezeDried" | "stick" | "biscuit";
+export type TreatForm = "puree" | "freezeDried" | "stick" | "biscuit" | "dental";
 
 export const FORM_ZH: Record<TreatForm, string> = {
   puree: "肉泥",
   freezeDried: "凍乾",
   stick: "肉條",
   biscuit: "餅乾",
+  dental: "潔牙骨",
 };
 
 export interface TreatSpec {
@@ -43,11 +45,18 @@ export interface TreatSpec {
   additives?: string;
   /** 綜合營養食／完整均衡，可以當主食 */
   completeFood: boolean;
+  /** 品牌自己標的適用體重（公斤）。潔牙骨一定會標，肉泥不一定 */
+  forKgFrom?: number;
+  forKgTo?: number;
+  /** 品牌自己寫的一天幾支 */
+  brandPerDay?: number;
 }
 
 export interface TreatProduct {
   id: string;
+  species: Species;
   brand: string;
+  brand2?: string;
   name: string;
   spec: TreatSpec;
   note?: string;
@@ -56,18 +65,32 @@ export interface TreatProduct {
   price: Price;
 }
 
-export const treats = treat.products as unknown as TreatProduct[];
+/**
+ * 貓零食跟狗零食共用同一套算法（10% 規則），所以放同一個陣列，用 species 分。
+ * 分開寫兩份 lib 只會讓兩邊的公式慢慢走鐘。
+ */
+export const treats = [
+  ...(treat.products as unknown as TreatProduct[]),
+  ...(dogTreat.products as unknown as TreatProduct[]),
+];
+export const treatsOf = (species: Species): TreatProduct[] => treats.filter((p) => p.species === species);
 export const treatById = (id: string): TreatProduct | undefined => treats.find((p) => p.id === id);
 
 /* ------------------------------------------------------------------ */
 /* 一天可以給幾條                                                       */
 /* ------------------------------------------------------------------ */
 
-/** 預設的貓：4 公斤、已結紮的成貓。沒講體重就照這個算，而且畫面上要講出來 */
-export const DEFAULT_CAT_KG = 4;
+/**
+ * 沒講體重就照這個算，而且畫面上一定要講出來。
+ * 貓 4 公斤（台灣米克斯的中位），狗 12 公斤（中型米克斯）。
+ */
+export const DEFAULT_KG: Record<Species, number> = { cat: 4, dog: 12 };
+/** 舊名字，貓那幾頁還在用 */
+export const DEFAULT_CAT_KG = DEFAULT_KG.cat;
 
 /** 一天總共可以吃幾大卡 */
-export const dailyKcal = (kg: number): number => Math.round(mer(kg, "adultFixed", "cat"));
+export const dailyKcal = (kg: number, species: Species = "cat"): number =>
+  Math.round(mer(kg, "adultFixed", species));
 
 /**
  * 零食一天的上限：總熱量的 10%。
@@ -75,7 +98,8 @@ export const dailyKcal = (kg: number): number => Math.round(mer(kg, "adultFixed"
  * 這是獸醫營養學的通則（10% rule）：零食超過一成，主食的營養比例就被稀釋了。
  * 我們把它寫死成 10%，不讓讀者調 —— 可以調的數字就不是建議，是藉口。
  */
-export const treatKcalCap = (kg: number): number => Math.round(dailyKcal(kg) * 0.1);
+export const treatKcalCap = (kg: number, species: Species = "cat"): number =>
+  Math.round(dailyKcal(kg, species) * 0.1);
 
 export interface DailyLimit {
   /** 幾條、幾顆。整數 —— 沒有人會撕四成條肉泥給貓 */
@@ -96,8 +120,8 @@ export interface DailyLimit {
  * 但沒有人會撕零點四條肉泥，寫 3.4 只會讓人四捨五入成 4 條，反而超標。
  * 不到一條的就說不到一條，不要寫 0。
  */
-export function dailyLimit(p: TreatProduct, kg: number = DEFAULT_CAT_KG): DailyLimit | null {
-  const cap = treatKcalCap(kg);
+export function dailyLimit(p: TreatProduct, kg: number = DEFAULT_KG[p.species]): DailyLimit | null {
+  const cap = treatKcalCap(kg, p.species);
   const { kcalPer, kcalPer100g, unitZh } = p.spec;
   if (kcalPer) {
     const u = unitZh ?? "條";
@@ -113,7 +137,7 @@ export function dailyLimit(p: TreatProduct, kg: number = DEFAULT_CAT_KG): DailyL
 }
 
 /** 一包可以給幾天。照上面那個上限算，不照小數，講出來的數字要跟畫面一致 */
-export function packDays(p: TreatProduct, kg: number = DEFAULT_CAT_KG): number | null {
+export function packDays(p: TreatProduct, kg: number = DEFAULT_KG[p.species]): number | null {
   const limit = dailyLimit(p, kg);
   if (!limit) return null;
   if (limit.pieces && limit.pieces >= 1 && p.spec.piecesPerPack) {
@@ -125,8 +149,9 @@ export function packDays(p: TreatProduct, kg: number = DEFAULT_CAT_KG): number |
 
 /** 一般肉泥跟綜合營養配方的落差：同一個牌子，後者一條的熱量快兩倍 */
 export function pureeSpread(): { plain: TreatProduct; complete: TreatProduct } | null {
-  const plain = treats.find((p) => p.spec.form === "puree" && !p.spec.completeFood && p.spec.kcalPer);
-  const complete = treats.find((p) => p.spec.form === "puree" && p.spec.completeFood && p.spec.kcalPer);
+  const cats = treatsOf("cat");
+  const plain = cats.find((p) => p.spec.form === "puree" && !p.spec.completeFood && p.spec.kcalPer);
+  const complete = cats.find((p) => p.spec.form === "puree" && p.spec.completeFood && p.spec.kcalPer);
   return plain && complete ? { plain, complete } : null;
 }
 
@@ -151,7 +176,7 @@ export function anchorTreat(p: TreatProduct): Merchant | undefined {
  *
  * 講清楚是「天天給到上限」的價，不是建議。多數人不會天天給滿。
  */
-export function monthlyAtCap(p: TreatProduct, m: Merchant, kg: number = DEFAULT_CAT_KG): number | null {
+export function monthlyAtCap(p: TreatProduct, m: Merchant, kg: number = DEFAULT_KG[p.species]): number | null {
   const limit = dailyLimit(p, kg);
   if (!limit) return null;
   if (limit.pieces && limit.pieces >= 1 && p.spec.piecesPerPack) {
@@ -166,4 +191,35 @@ export function monthlyAtCap(p: TreatProduct, m: Merchant, kg: number = DEFAULT_
 /** 名字寫魚、成分有雞的那種（跟飼料的藏雞同一件事） */
 export function hiddenChicken(p: TreatProduct): boolean {
   return p.spec.proteins.includes("chicken") && !/(?<!火)雞/.test(p.name);
+}
+
+/* ------------------------------------------------------------------ */
+/* 狗零食問的是另一個問題                                               */
+/*                                                                    */
+/* 貓零食問「一天可以給幾條」，因為肉泥一條七大卡，給得完。             */
+/* 狗的潔牙骨不一樣：品牌自己就寫「一天一支」，一支八十八大卡，         */
+/* 問題不是能給幾支，是那一支已經佔掉多少。                             */
+/* ------------------------------------------------------------------ */
+
+/**
+ * 一支佔一天零食額度的百分之幾。
+ *
+ * 超過 100 就代表光那一支就吃完整天的額度，還超出去。
+ * Greenies 自己在包裝上寫「每餵一支，把正餐扣掉 88 大卡」，
+ * 所以品牌是知道的。知道的人只有品牌跟我們。
+ */
+export function budgetShare(p: TreatProduct, kg: number): number | null {
+  const kcal = p.spec.kcalPer;
+  if (!kcal) return null;
+  const cap = treatKcalCap(kg, p.species);
+  if (cap <= 0) return null;
+  return Math.round((kcal / cap) * 100);
+}
+
+/** 照品牌自己標的體重下限算 —— 那是最輕、額度最小的那隻狗，也是最容易超標的 */
+export function shareAtLowEnd(p: TreatProduct): { kg: number; share: number } | null {
+  const kg = p.spec.forKgFrom;
+  if (!kg) return null;
+  const share = budgetShare(p, kg);
+  return share === null ? null : { kg, share };
 }

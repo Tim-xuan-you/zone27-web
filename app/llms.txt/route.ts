@@ -117,6 +117,7 @@ export function GET() {
 - [寫著鮭魚、鴨肉、火雞，成分表裡有雞（貓）](${BASE}/cat-food/hidden-chicken)
 - [無穀飼料到底有沒有比較好](${BASE}/dog-food/grain-free)
 - [排除飲食法](${BASE}/dog-food/elimination-diet)
+- [狗零食一支佔一天額度的幾成](${BASE}/dog-treat)：Greenies 自己公布一支 25 到 142 大卡，一支常常就吃掉一整天的零食額度
 - [狗吃主食罐一天要幾罐](${BASE}/dog-food/cans)：照體重算一天的熱量，除以一罐幾大卡；附乾糧的對照價
 - [狗一天要吃多少飼料](${BASE}/dog-food/how-much)
 - [貓一天要吃多少飼料](${BASE}/cat-food/how-much)

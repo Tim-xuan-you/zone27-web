@@ -12,7 +12,8 @@ import { impactMap, overallCutRate, ruleAudit, TIER_WEIGHT, type Impact } from "
 import health from "@/data/link-health.json";
 import storeReg from "@/data/stores.json";
 import checkExtra from "@/data/check-extra.json";
-import { isMall } from "@/lib/channel";
+import { CHANNEL_ZH, isMall } from "@/lib/channel";
+import { channelStats } from "@/lib/channel-stats";
 import { litters } from "@/lib/litter";
 import { treats } from "@/lib/treat";
 import HuntPicks from "@/components/HuntPicks";
@@ -598,6 +599,24 @@ export default function Page() {
           )}
         </div>
       ))}
+
+      <H>哪一種賣場產得出連結</H>
+      <p style={{ margin: "0 0 14px", fontSize: 14, color: "var(--muted)", lineHeight: 1.9 }}>
+        一般賣家常常便宜一半，但三家裡只有一家開得出分潤。所以一般賣家要一次多給幾家，
+        商城跟優選留著保底。這個表自己從資料算，補一次連結、記一次失敗就會更新。
+      </p>
+      <div style={{ ...box, marginBottom: 24 }}>
+        {channelStats().map((s2) => (
+          <Line key={s2.channel} k={CHANNEL_ZH[s2.channel]}>
+            <span className="mono">
+              產出 {s2.ok}　失敗 {s2.fail}　
+              <b style={{ color: (s2.rate ?? 0) >= 60 ? "var(--keep)" : "var(--cut)" }}>
+                {s2.rate === null ? "還沒試過" : `成功率 ${s2.rate}%`}
+              </b>
+            </span>
+          </Line>
+        ))}
+      </div>
 
       <H>只連到商城的（{mallOnly.length} 款）</H>
       <p style={{ margin: "0 0 14px", fontSize: 14, color: "var(--muted)", lineHeight: 1.9 }}>

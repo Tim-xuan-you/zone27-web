@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 import { litters } from "@/lib/litter";
-import { treats } from "@/lib/treat";
+import { treatsOf } from "@/lib/treat";
 import { catalog, isLive } from "@/lib/catalog";
 import { productHref } from "@/lib/labels";
 import { allPaths } from "@/lib/slugs";
@@ -39,8 +39,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: `${BASE}/cat-litter/p/${p.id}`, lastModified: now, changeFrequency: "weekly" as const, priority: 0.7,
     })),
     { url: `${BASE}/cat-treat`, lastModified: now, changeFrequency: "weekly", priority: 0.9 },
-    ...treats.map((p) => ({
+    ...treatsOf("cat").map((p) => ({
       url: `${BASE}/cat-treat/p/${p.id}`, lastModified: now, changeFrequency: "weekly" as const, priority: 0.7,
+    })),
+    { url: `${BASE}/dog-treat`, lastModified: now, changeFrequency: "weekly", priority: 0.9 },
+    ...treatsOf("dog").map((p) => ({
+      url: `${BASE}/dog-treat/p/${p.id}`, lastModified: now, changeFrequency: "weekly" as const, priority: 0.7,
     })),
     { url: `${BASE}/how-we-choose`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
     { url: `${BASE}/ask`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },

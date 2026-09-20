@@ -13,15 +13,18 @@ import { MAX_MERCHANTS } from "../lib/types";
 import type { Merchant } from "../lib/types";
 
 /* 在這裡自己列一份，不從 lib/treat.ts 讀：那支會讀這支產生的 JSON */
-const FORMS = ["puree", "freezeDried", "stick", "biscuit"] as const;
+const FORMS = ["puree", "freezeDried", "stick", "biscuit", "dental"] as const;
 const PROTEINS = [
   "chicken", "beef", "lamb", "salmon", "whitefish", "fish", "duck", "turkey",
   "pork", "venison", "insect", "poultry", "animal",
 ];
 
 const ROOT = resolve(import.meta.dirname, "..");
-const CSV = resolve(ROOT, "data/cat-treat.csv");
-const JSON_OUT = resolve(ROOT, "data/cat-treat.json");
+/* 貓零食、狗零食同一套欄位、同一套算法，所以同一支匯入 */
+const FILES = [
+  { species: "cat", csv: "data/cat-treat.csv", json: "data/cat-treat.json", zh: "貓零食" },
+  { species: "dog", csv: "data/dog-treat.csv", json: "data/dog-treat.json", zh: "狗零食" },
+];
 
 function parseCsv(text: string): Record<string, string>[] {
   if (text.charCodeAt(0) === 0xfeff) text = text.slice(1);
@@ -44,7 +47,9 @@ function parseCsv(text: string): Record<string, string>[] {
 }
 
 const errors: string[] = [];
-const rows = parseCsv(readFileSync(CSV, "utf8"));
+
+for (const file of FILES) {
+const rows = parseCsv(readFileSync(resolve(ROOT, file.csv), "utf8"));
 
 const products = rows.map((r, i) => {
   const line = i + 2;
@@ -87,6 +92,7 @@ const products = rows.map((r, i) => {
 
   return {
     id: need("id"),
+    species: r.species || file.species,
     brand: need("brand"),
     name: need("name"),
     checkedAt: r.checkedAt,
@@ -104,6 +110,9 @@ const products = rows.map((r, i) => {
       proteins,
       ...(r.additives ? { additives: r.additives } : {}),
       completeFood: r.completeFood === "1",
+      ...(num("forKgFrom") ? { forKgFrom: num("forKgFrom") } : {}),
+      ...(num("forKgTo") ? { forKgTo: num("forKgTo") } : {}),
+      ...(num("brandPerDay") ? { brandPerDay: num("brandPerDay") } : {}),
     },
     price: {
       unit: r.packG ? `${r.packG}g` : "",
@@ -114,11 +123,12 @@ const products = rows.map((r, i) => {
 });
 
 if (errors.length) {
-  console.error(`\n貓零食資料有問題，沒有寫入：\n`);
+  console.error(`\n${file.zh}資料有問題，沒有寫入：\n`);
   console.error(errors.join("\n"));
   process.exit(1);
 }
 
-writeFileSync(JSON_OUT, JSON.stringify({ products }, null, 2) + "\n", "utf8");
+writeFileSync(resolve(ROOT, file.json), JSON.stringify({ products }, null, 2) + "\n", "utf8");
 const live = products.filter((p) => p.price.merchants.some((m) => !m.dead)).length;
-console.log(`\n✓ 貓零食 ${products.length} 款寫入 data/cat-treat.json（${live} 款有連結）\n`);
+console.log(`✓ ${file.zh} ${products.length} 款寫入 ${file.json}（${live} 款有連結）`);
+}

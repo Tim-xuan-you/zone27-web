@@ -2,6 +2,7 @@
   "products": [
     {
       "id": "ct-01",
+      "species": "cat",
       "brand": "CIAO 啾嚕",
       "name": "啾嚕肉泥 雞肉",
       "checkedAt": "2026-09-19",
@@ -50,6 +51,7 @@
     },
     {
       "id": "ct-02",
+      "species": "cat",
       "brand": "CIAO 啾嚕",
       "name": "啾嚕肉泥 鮪魚＋干貝",
       "checkedAt": "2026-09-19",
@@ -98,6 +100,7 @@
     },
     {
       "id": "ct-03",
+      "species": "cat",
       "brand": "CIAO 啾嚕",
       "name": "啾嚕肉泥 綜合營養配方 雞肉",
       "checkedAt": "2026-09-19",
@@ -146,6 +149,7 @@
     },
     {
       "id": "ct-04",
+      "species": "cat",
       "brand": "汪喵星球",
       "name": "太空小零嘴 長盈虱目魚",
       "checkedAt": "2026-09-19",
@@ -171,6 +175,7 @@
     },
     {
       "id": "ct-05",
+      "species": "cat",
       "brand": "汪喵星球",
       "name": "太空小零嘴 爆蛋柳葉魚",
       "checkedAt": "2026-09-19",
@@ -196,6 +201,7 @@
     },
     {
       "id": "ct-06",
+      "species": "cat",
       "brand": "汪喵星球",
       "name": "太空小零嘴 柳葉魚雞鬆",
       "checkedAt": "2026-09-19",
@@ -222,6 +228,7 @@
     },
     {
       "id": "ct-07",
+      "species": "cat",
       "brand": "汪喵星球",
       "name": "太空小零嘴 日本大干貝",
       "checkedAt": "2026-09-19",
@@ -247,6 +254,7 @@
     },
     {
       "id": "ct-08",
+      "species": "cat",
       "brand": "汪喵星球",
       "name": "太空小零嘴 澎湖丁香魚",
       "checkedAt": "2026-09-19",
@@ -282,6 +290,7 @@
     },
     {
       "id": "ct-09",
+      "species": "cat",
       "brand": "汪喵星球",
       "name": "太空小零嘴 阿根廷天使紅蝦",
       "checkedAt": "2026-09-19",
@@ -307,6 +316,7 @@
     },
     {
       "id": "ct-10",
+      "species": "cat",
       "brand": "汪喵星球",
       "name": "太空小零嘴 虱目魚菲力",
       "checkedAt": "2026-09-19",

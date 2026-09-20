@@ -4,7 +4,7 @@ import SiteHeader from "@/components/SiteHeader";
 import { S } from "@/components/styles";
 import Share from "@/components/Share";
 import {
-  treats, FORM_ZH, buyableTreat, anchorTreat, dailyLimit, packDays, pureeSpread,
+  treatsOf, FORM_ZH, buyableTreat, anchorTreat, dailyLimit, packDays, pureeSpread,
   treatKcalCap, dailyKcal, hiddenChicken, monthlyAtCap, DEFAULT_CAT_KG,
 } from "@/lib/treat";
 
@@ -37,7 +37,7 @@ const PUREE_PACK = SPREAD ? SPREAD.plain.spec.piecesPerPack : undefined;
  * 藏雞是成分表的問題，這是**視線**的問題，一樣會害到過敏的貓。所以這一塊要講。
  */
 const BY_BRAND = new Map<string, { total: number; chicken: number }>();
-for (const p of treats) {
+for (const p of treatsOf("cat")) {
   const b = BY_BRAND.get(p.brand) ?? { total: 0, chicken: 0 };
   b.total++;
   if (p.spec.proteins.includes("chicken")) b.chicken++;
@@ -48,7 +48,7 @@ const CHICKEN_BRAND = [...BY_BRAND]
   .sort((a, b) => b[1].chicken - a[1].chicken)[0];
 
 /* 凍乾：水分只有 2.5%，同樣的熱量換算成公克會小到嚇人 */
-const DRIED = treats.find((p) => p.spec.form === "freezeDried" && p.spec.kcalPer100g);
+const DRIED = treatsOf("cat").find((p) => p.spec.form === "freezeDried" && p.spec.kcalPer100g);
 const DRIED_LIMIT = DRIED ? dailyLimit(DRIED) : null;
 
 export const metadata: Metadata = {
@@ -59,15 +59,15 @@ export const metadata: Metadata = {
       ? `一般肉泥一條 ${SPREAD.plain.spec.kcalPer} 大卡，${PUREE.label}就滿了；寫著綜合營養的一條 ${SPREAD.complete.spec.kcalPer} 大卡。`
       : "") +
     (DRIED && DRIED_LIMIT ? `凍乾一天只能給 ${DRIED_LIMIT.grams} 公克。` : "") +
-    `我們讀過的 ${treats.length} 款都算好了。`,
+    `我們讀過的 ${treatsOf("cat").length} 款都算好了。`,
   alternates: { canonical: "/cat-treat" },
 };
 
 export default function Page() {
-  const buyable = treats.filter(buyableTreat);
-  const dataOnly = treats.filter((p) => !buyableTreat(p));
+  const buyable = treatsOf("cat").filter(buyableTreat);
+  const dataOnly = treatsOf("cat").filter((p) => !buyableTreat(p));
   const list = [...buyable, ...dataOnly];
-  const hidden = treats.filter(hiddenChicken);
+  const hidden = treatsOf("cat").filter(hiddenChicken);
 
   return (
     <main style={S.page}>
@@ -160,7 +160,7 @@ export default function Page() {
         </div>
       )}
 
-      <p style={S.lbl}>我們讀過的 {treats.length} 款</p>
+      <p style={S.lbl}>我們讀過的 {treatsOf("cat").length} 款</p>
       {list.map((p) => {
         const m = anchorTreat(p);
         const limit = dailyLimit(p);

@@ -2,31 +2,33 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import SiteHeader from "@/components/SiteHeader";
-
 import { S } from "@/components/styles";
 import Share from "@/components/Share";
 import { CONTACT } from "@/lib/contact";
 import {
-  treatsOf, treatById, FORM_ZH, anchorTreat, liveOf, dailyLimit, packDays,
-  treatKcalCap, dailyKcal, hiddenChicken, monthlyAtCap, DEFAULT_CAT_KG,
+  treatsOf, treatById, FORM_ZH, anchorTreat, liveOf, packDays, monthlyAtCap,
+  treatKcalCap, dailyKcal, budgetShare, DEFAULT_KG,
 } from "@/lib/treat";
 import { meatsFrom, variantOf } from "@/lib/labels";
 
+/** 畫面上要跑的幾個體重。涵蓋台灣最常見的小中大型犬 */
+const SAMPLE_KG = [5, 8, 12, 20, 30];
+
 export function generateStaticParams() {
-  return treatsOf("cat").map((p) => ({ id: p.id }));
+  return treatsOf("dog").map((p) => ({ id: p.id }));
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
   const { id } = await params;
   const p = treatById(id);
   if (!p) return {};
-  const limit = dailyLimit(p);
+  const share = budgetShare(p, DEFAULT_KG.dog);
   return {
     title: `${p.brand} ${p.name}`,
-    description: limit
-      ? `一隻 ${DEFAULT_CAT_KG} 公斤的成貓，當零食給一天最多 ${limit.label}。${FORM_ZH[p.spec.form]}，${p.spec.completeFood ? "綜合營養食" : "零食，不能當主食"}。`
-      : `${FORM_ZH[p.spec.form]}。包裝沒公布熱量，一天可以給幾條算不出來。`,
-    alternates: { canonical: `/cat-treat/p/${p.id}` },
+    description: share
+      ? `一支 ${p.spec.kcalPer} 大卡。一隻 ${DEFAULT_KG.dog} 公斤結紮的成犬，這一支佔一天零食額度的 ${share}%。`
+      : `${FORM_ZH[p.spec.form]}。包裝沒公布熱量，佔多少額度算不出來。`,
+    alternates: { canonical: `/dog-treat/p/${p.id}` },
   };
 }
 
@@ -37,15 +39,18 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
 
   const m = anchorTreat(p);
   const live = liveOf(p);
-  const limit = dailyLimit(p);
   const days = packDays(p);
-  const cap = treatKcalCap(DEFAULT_CAT_KG);
-  const perPiece = m && p.spec.piecesPerPack ? Math.round((m.amount / p.spec.piecesPerPack) * 10) / 10 : null;
   const cap30 = m ? monthlyAtCap(p, m) : null;
+  const share = budgetShare(p, DEFAULT_KG.dog);
+  const perPiece = m && p.spec.piecesPerPack ? Math.round((m.amount / p.spec.piecesPerPack) * 10) / 10 : null;
+  /* 品牌標的體重範圍以內才列，超出去的數字沒有意義 */
+  const rows = SAMPLE_KG.filter(
+    (kg) => (!p.spec.forKgFrom || kg >= p.spec.forKgFrom) && (!p.spec.forKgTo || kg <= p.spec.forKgTo),
+  );
 
   return (
     <main style={S.page}>
-      <SiteHeader current="cat-treat" />
+      <SiteHeader current="dog-treat" />
 
       <p style={{ margin: "0 0 4px", fontSize: 12.5, color: "var(--muted)" }}>{p.brand}</p>
       <h1 style={{ fontSize: "clamp(24px,5vw,34px)", lineHeight: 1.45, margin: "0 0 14px" }}>{p.name}</h1>
@@ -53,29 +58,26 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
       <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginBottom: 18 }}>
         <span style={S.tag}>{FORM_ZH[p.spec.form]}</span>
         <span style={S.tag}>肉：{meatsFrom(p.spec.proteins)}</span>
-        {p.spec.completeFood ? (
-          <span style={{ ...S.tag, color: "var(--keep)", background: "var(--keep-soft)" }}>綜合營養食</span>
-        ) : (
-          <span style={{ ...S.tag, color: "var(--warn)", background: "var(--warn-soft)" }}>零食，不能當主食</span>
-        )}
+        {p.spec.forKgFrom && <span style={S.tag}>品牌標 {p.spec.forKgFrom} 到 {p.spec.forKgTo} 公斤</span>}
+        <span style={{ ...S.tag, color: "var(--warn)", background: "var(--warn-soft)" }}>零食，不能當主食</span>
       </div>
 
       <div style={S.box}>
-        {limit ? (
+        {share !== null ? (
           <>
             <p style={{ margin: 0, fontSize: 22, fontWeight: 800 }}>
-              一天最多 {limit.label}
+              一支 {p.spec.kcalPer} 大卡
             </p>
             <p style={{ margin: "8px 0 0", fontSize: 14, color: "var(--muted)", lineHeight: 1.9 }}>
-              照一隻 {DEFAULT_CAT_KG} 公斤的成貓算：一天 {dailyKcal(DEFAULT_CAT_KG)} 大卡，零食上限 {cap} 大卡，是一成。
-              {p.spec.kcalPer && <>這一款一{p.spec.unitZh ?? "條"} {p.spec.kcalPer} 大卡。</>}
-              {p.spec.kcalPer100g && <>這一款每 100 公克 {p.spec.kcalPer100g} 大卡。</>}
+              一隻 {DEFAULT_KG.dog} 公斤結紮的成犬一天 {dailyKcal(DEFAULT_KG.dog, "dog")} 大卡，
+              零食上限 {treatKcalCap(DEFAULT_KG.dog, "dog")} 大卡，是一成。
+              這一支就佔 <b style={{ color: share > 100 ? "var(--cut)" : "var(--ink)" }}>{share}%</b>。
               {days !== null && <> 一包大約可以給 {days} 天。</>}
             </p>
-            {p.spec.completeFood && (
+            {p.spec.brandPerDay && (
               <p style={{ margin: "10px 0 0", fontSize: 14, color: "var(--muted)", lineHeight: 1.9, paddingTop: 10, borderTop: "1px solid var(--line)" }}>
-                這一款是綜合營養食，當正餐餵就不受這個上限，照正餐的份量算。
-                上面的數字是「加在正餐之外」的算法。
+                品牌自己寫一天 {p.spec.brandPerDay} 支，而且要把正餐扣掉 {p.spec.kcalPer} 大卡。
+                扣了就沒問題，沒扣就是多出來的。
               </p>
             )}
           </>
@@ -83,27 +85,46 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
           <>
             <p style={{ margin: 0, fontWeight: 700 }}>包裝沒公布熱量</p>
             <p style={{ margin: "8px 0 0", fontSize: 14, color: "var(--muted)", lineHeight: 1.9 }}>
-              所以「一天可以給幾條」算不出來。我們不編一個數字給你。
+              所以佔掉多少額度算不出來。我們不編一個數字給你。
             </p>
           </>
         )}
-        <Link href="/cat-treat" style={{ display: "inline-block", marginTop: 12, fontSize: 14, color: "var(--accent)", fontWeight: 600 }}>
-          看其他款一天可以給幾條 →
-        </Link>
       </div>
+
+      {rows.length > 0 && share !== null && (
+        <section style={{ marginTop: 26 }}>
+          <p style={S.lbl}>你家的狗幾公斤</p>
+          <div style={{ border: "1px solid var(--line)", borderRadius: 14, background: "var(--surface)", padding: "6px 18px 14px" }}>
+            {rows.map((kg) => {
+              const s = budgetShare(p, kg)!;
+              return (
+                <div key={kg} style={{ display: "flex", gap: 14, padding: "11px 0", borderBottom: "1px solid var(--line)", fontSize: 15.5, lineHeight: 1.7 }}>
+                  <span style={{ color: "var(--faint)", minWidth: "6.5em", fontSize: 14 }}>{kg} 公斤</span>
+                  <span style={{ flex: 1 }}>
+                    一天零食上限 {treatKcalCap(kg, "dog")} 大卡，這一支佔{" "}
+                    <b style={{ color: s > 100 ? "var(--cut)" : "var(--ink)" }}>{s}%</b>
+                  </span>
+                </div>
+              );
+            })}
+          </div>
+          <p style={{ margin: "12px 0 0", fontSize: 12.5, color: "var(--faint)", lineHeight: 1.85 }}>
+            只列品牌自己標的適用體重以內。超出去的數字沒有意義。
+          </p>
+        </section>
+      )}
 
       {m ? (
         <section style={{ marginTop: 26 }}>
-          <p style={{ margin: "0 0 6px", fontSize: 28, fontWeight: 800 }}>
+          <p style={S.priceBig}>
             ${m.amount.toLocaleString()}
-            <span style={{ fontSize: 14, color: "var(--muted)", fontWeight: 500, marginLeft: 10 }}>
-              {m.unit || p.price.unit}{perPiece ? ` · $${perPiece}/${p.spec.unitZh ?? "條"}` : ""}
+            <span style={S.priceUnit}>
+              {m.unit || p.price.unit}{perPiece ? ` · $${perPiece}/${p.spec.unitZh ?? "支"}` : ""}
             </span>
           </p>
           {cap30 !== null && (
             <p style={{ margin: "0 0 14px", fontSize: 15.5, color: "var(--muted)", lineHeight: 1.85 }}>
               天天給到上限的話，一個月 <b style={{ color: "var(--ink)" }}>${cap30.toLocaleString()}</b>。
-              多數人不會天天給滿，這是上限的價，拿來比不同款用的。
             </p>
           )}
           <a href={`/go/${m.id}/${p.id}`} rel="nofollow sponsored" style={S.buy}>去蝦皮看這一包</a>
@@ -140,29 +161,16 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
         </div>
       )}
 
-      {hiddenChicken(p) && (
-        <div style={{ ...S.box, marginTop: 20, borderColor: "var(--cut)", background: "var(--cut-soft)" }}>
-          <p style={{ margin: 0, fontWeight: 700, color: "var(--cut)" }}>名字沒寫雞，裡面有雞</p>
-          <p style={{ margin: "8px 0 0", fontSize: 14, lineHeight: 1.9 }}>
-            對雞過敏的貓，零食也要看成分。
-          </p>
-          <Link href="/check" style={{ display: "inline-block", marginTop: 8, fontSize: 14, color: "var(--accent)", fontWeight: 600 }}>
-            查飼料有沒有藏雞 →
-          </Link>
-        </div>
-      )}
-
       <section style={{ marginTop: 30 }}>
         <p style={S.lbl}>這一款是什麼</p>
         <div style={{ border: "1px solid var(--line)", borderRadius: 14, background: "var(--surface)", padding: "6px 18px 14px" }}>
           <Row k="型態">{FORM_ZH[p.spec.form]}</Row>
-          {p.spec.kcalPer && <Row k={`一${p.spec.unitZh ?? "條"}幾大卡`}>{p.spec.kcalPer} 大卡</Row>}
-          {p.spec.kcalPer100g && <Row k="每 100 克">{p.spec.kcalPer100g} 大卡</Row>}
-          {p.spec.protein !== undefined && <Row k="粗蛋白">{p.spec.protein}%</Row>}
-          {p.spec.moisture !== undefined && <Row k="水分">{p.spec.moisture}%</Row>}
-          {p.spec.packG && <Row k="一包">{p.spec.packG} 公克{p.spec.piecesPerPack ? `（${p.spec.piecesPerPack} ${p.spec.unitZh ?? "條"}）` : ""}</Row>}
-          <Row k="能當主食嗎">{p.spec.completeFood ? "可以，這款是綜合營養食" : "不行，這是零食"}</Row>
-          {p.spec.additives && <Row k="添加物">{p.spec.additives}</Row>}
+          {p.spec.kcalPer && <Row k={`一${p.spec.unitZh ?? "支"}幾大卡`}>{p.spec.kcalPer} 大卡</Row>}
+          {p.spec.forKgFrom && <Row k="品牌標的體重">{p.spec.forKgFrom} 到 {p.spec.forKgTo} 公斤</Row>}
+          {p.spec.brandPerDay && <Row k="品牌建議">一天 {p.spec.brandPerDay} 支</Row>}
+          {p.spec.packG && <Row k="一包">{p.spec.packG} 公克{p.spec.piecesPerPack ? `（${p.spec.piecesPerPack} ${p.spec.unitZh ?? "支"}）` : ""}</Row>}
+          <Row k="能當主食嗎">不行，這是零食</Row>
+          {p.spec.additives && <Row k="成分">{p.spec.additives}</Row>}
         </div>
         {p.note && (
           <p style={{ margin: "14px 0 0", fontSize: 14, color: "var(--muted)", lineHeight: 1.9 }}>
@@ -173,18 +181,18 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
 
       <div style={{ marginTop: 26, display: "flex", gap: 14, flexWrap: "wrap", alignItems: "center" }}>
         <Share
-          path={`/cat-treat/p/${p.id}`}
-          text={limit ? `${p.brand} ${p.name}：當零食給，一天最多 ${limit.label}` : `${p.brand} ${p.name}`}
+          path={`/dog-treat/p/${p.id}`}
+          text={share !== null ? `${p.brand} ${p.name}：一支就佔一隻 ${DEFAULT_KG.dog} 公斤的狗一天零食額度的 ${share}%` : `${p.brand} ${p.name}`}
           label="分享這一款"
         />
-        <Link href="/cat-treat" style={{ fontSize: 14, color: "var(--accent)", fontWeight: 600 }}>看全部零食 →</Link>
+        <Link href="/dog-treat" style={{ fontSize: 14, color: "var(--accent)", fontWeight: 600 }}>看全部狗零食 →</Link>
       </div>
 
       {CONTACT.email && (
         <p style={{ marginTop: 26, fontSize: 12.5, color: "var(--faint)", lineHeight: 1.9 }}>
           資料寫錯了？
           <a
-            href={`mailto:${CONTACT.email}?subject=${encodeURIComponent(`貓零食資料回報：${p.brand} ${p.name}`)}`}
+            href={`mailto:${CONTACT.email}?subject=${encodeURIComponent(`狗零食資料回報：${p.brand} ${p.name}`)}`}
             style={{ color: "var(--accent)", marginLeft: 6 }}
           >
             跟我們說
@@ -204,4 +212,3 @@ function Row({ k, children }: { k: string; children: React.ReactNode }) {
     </div>
   );
 }
-

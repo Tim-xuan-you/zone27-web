@@ -133,7 +133,8 @@ const COMMON: Record<FoodSlug, { label: string; phrase: string }[]> = {
    萬一被指到，就當貓乾糧處理，不要讓型別到處擴散 */
 const NOT_FOOD: Form[] = ["litter", "treat"];
 const foodCategoriesOf = (sp: Species) => categoriesOf(sp).filter((c) => !NOT_FOOD.includes(c.form));
-const foodSlug = (s: CategorySlug): FoodSlug => (s === "cat-litter" || s === "cat-treat" ? "cat-food" : s);
+const foodSlug = (s: CategorySlug): FoodSlug =>
+  s === "cat-litter" || s === "cat-treat" ? "cat-food" : s === "dog-treat" ? "dog-food" : s;
 
 type Answer = { label: string; phrase: string; p: Product; per: number | null };
 const answerCache = new Map<CategorySlug, Answer[]>();
