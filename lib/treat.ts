@@ -55,6 +55,16 @@ export interface TreatSpec {
 export interface TreatProduct {
   id: string;
   species: Species;
+  /**
+   * 這一款另一個物種也能吃。
+   *
+   * 汪喵的太空小零嘴包裝上就寫「犬貓適用」，賣場標題也是「犬貓冷凍乾燥原肉小零嘴」。
+   * 同一包東西，貓一天能給 6 公克，12 公斤的狗能給 19 公克 —— 答案不一樣，
+   * 所以兩邊都要有自己的頁面，不是把讀者丟到另一個類目去自己換算。
+   *
+   * 商品編號共用（連結是同一條），算式各自照自己的物種跑。
+   */
+  alsoFor?: Species;
   brand: string;
   brand2?: string;
   name: string;
@@ -73,7 +83,8 @@ export const treats = [
   ...(treat.products as unknown as TreatProduct[]),
   ...(dogTreat.products as unknown as TreatProduct[]),
 ];
-export const treatsOf = (species: Species): TreatProduct[] => treats.filter((p) => p.species === species);
+export const treatsOf = (species: Species): TreatProduct[] =>
+  treats.filter((p) => p.species === species || p.alsoFor === species);
 export const treatById = (id: string): TreatProduct | undefined => treats.find((p) => p.id === id);
 
 /* ------------------------------------------------------------------ */
@@ -120,8 +131,12 @@ export interface DailyLimit {
  * 但沒有人會撕零點四條肉泥，寫 3.4 只會讓人四捨五入成 4 條，反而超標。
  * 不到一條的就說不到一條，不要寫 0。
  */
-export function dailyLimit(p: TreatProduct, kg: number = DEFAULT_KG[p.species]): DailyLimit | null {
-  const cap = treatKcalCap(kg, p.species);
+export function dailyLimit(
+  p: TreatProduct,
+  kg: number = DEFAULT_KG[p.species],
+  sp: Species = p.species,
+): DailyLimit | null {
+  const cap = treatKcalCap(kg, sp);
   const { kcalPer, kcalPer100g, unitZh } = p.spec;
   if (kcalPer) {
     const u = unitZh ?? "條";
@@ -137,8 +152,8 @@ export function dailyLimit(p: TreatProduct, kg: number = DEFAULT_KG[p.species]):
 }
 
 /** 一包可以給幾天。照上面那個上限算，不照小數，講出來的數字要跟畫面一致 */
-export function packDays(p: TreatProduct, kg: number = DEFAULT_KG[p.species]): number | null {
-  const limit = dailyLimit(p, kg);
+export function packDays(p: TreatProduct, kg: number = DEFAULT_KG[p.species], sp: Species = p.species): number | null {
+  const limit = dailyLimit(p, kg, sp);
   if (!limit) return null;
   if (limit.pieces && limit.pieces >= 1 && p.spec.piecesPerPack) {
     return Math.max(1, Math.round(p.spec.piecesPerPack / limit.pieces));
@@ -176,8 +191,13 @@ export function anchorTreat(p: TreatProduct): Merchant | undefined {
  *
  * 講清楚是「天天給到上限」的價，不是建議。多數人不會天天給滿。
  */
-export function monthlyAtCap(p: TreatProduct, m: Merchant, kg: number = DEFAULT_KG[p.species]): number | null {
-  const limit = dailyLimit(p, kg);
+export function monthlyAtCap(
+  p: TreatProduct,
+  m: Merchant,
+  kg: number = DEFAULT_KG[p.species],
+  sp: Species = p.species,
+): number | null {
+  const limit = dailyLimit(p, kg, sp);
   if (!limit) return null;
   if (limit.pieces && limit.pieces >= 1 && p.spec.piecesPerPack) {
     return Math.round(limit.pieces * (m.amount / p.spec.piecesPerPack) * 30);
@@ -208,10 +228,10 @@ export function hiddenChicken(p: TreatProduct): boolean {
  * Greenies 自己在包裝上寫「每餵一支，把正餐扣掉 88 大卡」，
  * 所以品牌是知道的。知道的人只有品牌跟我們。
  */
-export function budgetShare(p: TreatProduct, kg: number): number | null {
+export function budgetShare(p: TreatProduct, kg: number, sp: Species = p.species): number | null {
   const kcal = p.spec.kcalPer;
   if (!kcal) return null;
-  const cap = treatKcalCap(kg, p.species);
+  const cap = treatKcalCap(kg, sp);
   if (cap <= 0) return null;
   return Math.round((kcal / cap) * 100);
 }

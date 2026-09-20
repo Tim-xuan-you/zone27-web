@@ -150,6 +150,7 @@
     {
       "id": "ct-04",
       "species": "cat",
+      "alsoFor": "dog",
       "brand": "汪喵星球",
       "name": "太空小零嘴 長盈虱目魚",
       "checkedAt": "2026-09-19",
@@ -176,6 +177,7 @@
     {
       "id": "ct-05",
       "species": "cat",
+      "alsoFor": "dog",
       "brand": "汪喵星球",
       "name": "太空小零嘴 爆蛋柳葉魚",
       "checkedAt": "2026-09-20",
@@ -223,6 +225,7 @@
     {
       "id": "ct-06",
       "species": "cat",
+      "alsoFor": "dog",
       "brand": "汪喵星球",
       "name": "太空小零嘴 柳葉魚雞鬆",
       "checkedAt": "2026-09-20",
@@ -261,6 +264,7 @@
     {
       "id": "ct-07",
       "species": "cat",
+      "alsoFor": "dog",
       "brand": "汪喵星球",
       "name": "太空小零嘴 日本大干貝",
       "checkedAt": "2026-09-20",
@@ -309,6 +313,7 @@
     {
       "id": "ct-08",
       "species": "cat",
+      "alsoFor": "dog",
       "brand": "汪喵星球",
       "name": "太空小零嘴 澎湖丁香魚",
       "checkedAt": "2026-09-20",
@@ -355,6 +360,7 @@
     {
       "id": "ct-09",
       "species": "cat",
+      "alsoFor": "dog",
       "brand": "汪喵星球",
       "name": "太空小零嘴 阿根廷天使紅蝦",
       "checkedAt": "2026-09-20",
@@ -392,6 +398,7 @@
     {
       "id": "ct-10",
       "species": "cat",
+      "alsoFor": "dog",
       "brand": "汪喵星球",
       "name": "太空小零嘴 虱目魚菲力",
       "checkedAt": "2026-09-20",

@@ -94,6 +94,7 @@ const products = rows.map((r, i) => {
   return {
     id: need("id"),
     species: r.species || file.species,
+    ...(r.alsoFor ? { alsoFor: r.alsoFor } : {}),
     brand: need("brand"),
     name: need("name"),
     checkedAt: r.checkedAt,

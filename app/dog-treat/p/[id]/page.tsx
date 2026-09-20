@@ -7,7 +7,7 @@ import Share from "@/components/Share";
 import { CONTACT } from "@/lib/contact";
 import {
   treatsOf, treatById, FORM_ZH, anchorTreat, liveOf, packDays, monthlyAtCap,
-  treatKcalCap, dailyKcal, budgetShare, DEFAULT_KG,
+  treatKcalCap, dailyKcal, budgetShare, dailyLimit, DEFAULT_KG,
 } from "@/lib/treat";
 import { meatsFrom, variantOf } from "@/lib/labels";
 
@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
   const { id } = await params;
   const p = treatById(id);
   if (!p) return {};
-  const share = budgetShare(p, DEFAULT_KG.dog);
+  const share = budgetShare(p, DEFAULT_KG.dog, "dog");
   return {
     title: `${p.brand} ${p.name}`,
     description: share
@@ -39,9 +39,10 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
 
   const m = anchorTreat(p);
   const live = liveOf(p);
-  const days = packDays(p);
-  const cap30 = m ? monthlyAtCap(p, m) : null;
-  const share = budgetShare(p, DEFAULT_KG.dog);
+  const days = packDays(p, DEFAULT_KG.dog, "dog");
+  const limit = dailyLimit(p, DEFAULT_KG.dog, "dog");
+  const cap30 = m ? monthlyAtCap(p, m, DEFAULT_KG.dog, "dog") : null;
+  const share = budgetShare(p, DEFAULT_KG.dog, "dog");
   const perPiece = m && p.spec.piecesPerPack ? Math.round((m.amount / p.spec.piecesPerPack) * 10) / 10 : null;
   /* 品牌標的體重範圍以內才列，超出去的數字沒有意義 */
   const rows = SAMPLE_KG.filter(
@@ -81,6 +82,22 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
               </p>
             )}
           </>
+        ) : limit ? (
+          <>
+            <p style={{ margin: 0, fontSize: 22, fontWeight: 800 }}>一天最多 {limit.label}</p>
+            <p style={{ margin: "8px 0 0", fontSize: 14, color: "var(--muted)", lineHeight: 1.9 }}>
+              一隻 {DEFAULT_KG.dog} 公斤結紮的成犬一天 {dailyKcal(DEFAULT_KG.dog, "dog")} 大卡，
+              零食上限 {treatKcalCap(DEFAULT_KG.dog, "dog")} 大卡，是一成。
+              這一款每 100 公克 {p.spec.kcalPer100g} 大卡。
+              {days !== null && <> 一包大約可以給 {days} 天。</>}
+            </p>
+            {p.alsoFor === "dog" && (
+              <p style={{ margin: "10px 0 0", fontSize: 14, color: "var(--muted)", lineHeight: 1.9, paddingTop: 10, borderTop: "1px solid var(--line)" }}>
+                這一款包裝上寫犬貓適用。貓那邊的額度小很多，
+                同一包東西四公斤的貓一天只能給 6 公克。
+              </p>
+            )}
+          </>
         ) : (
           <>
             <p style={{ margin: 0, fontWeight: 700 }}>包裝沒公布熱量</p>
@@ -96,7 +113,7 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
           <p style={S.lbl}>你家的狗幾公斤</p>
           <div style={{ border: "1px solid var(--line)", borderRadius: 14, background: "var(--surface)", padding: "6px 18px 14px" }}>
             {rows.map((kg) => {
-              const s = budgetShare(p, kg)!;
+              const s = budgetShare(p, kg, "dog")!;
               return (
                 <div key={kg} style={{ display: "flex", gap: 14, padding: "11px 0", borderBottom: "1px solid var(--line)", fontSize: 15.5, lineHeight: 1.7 }}>
                   <span style={{ color: "var(--faint)", minWidth: "6.5em", fontSize: 14 }}>{kg} 公斤</span>

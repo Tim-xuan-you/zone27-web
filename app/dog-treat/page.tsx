@@ -5,7 +5,7 @@ import Share from "@/components/Share";
 import { S } from "@/components/styles";
 import {
   treatsOf, FORM_ZH, buyableTreat, anchorTreat, dailyKcal, treatKcalCap,
-  budgetShare, shareAtLowEnd, monthlyAtCap, DEFAULT_KG,
+  budgetShare, shareAtLowEnd, monthlyAtCap, dailyLimit, DEFAULT_KG,
 } from "@/lib/treat";
 
 /**
@@ -27,6 +27,8 @@ const CAP = treatKcalCap(KG, "dog");
 
 /* 照品牌自己標的體重下限算，最輕的那隻狗額度最小，也最容易超標 */
 const LOW_END = DOGS.map((p) => ({ p, low: shareAtLowEnd(p) })).filter((x) => x.low !== null);
+/* 犬貓通用的那幾款（汪喵凍乾）：同一包東西，狗的額度比貓大三倍，答案完全不同 */
+const SHARED = DOGS.filter((p) => p.alsoFor === "dog");
 const OVER = LOW_END.filter((x) => (x.low?.share ?? 0) > 100).length;
 
 export const metadata: Metadata = {
@@ -131,11 +133,23 @@ export default function Page() {
         </Link>
       </div>
 
+      {SHARED.length > 0 && (
+        <div style={{ ...S.box, marginTop: 14 }}>
+          <p style={{ margin: 0, fontWeight: 700, fontSize: 17 }}>下面有 {SHARED.length} 款是犬貓通用的</p>
+          <p style={{ margin: "10px 0 0", fontSize: 14, color: "var(--muted)", lineHeight: 1.9 }}>
+            包裝上就寫犬貓適用，所以貓零食那邊也有同一款。
+            但答案不一樣：同一包凍乾，四公斤的貓一天只能給 6 公克，
+            {KG} 公斤的狗可以給三倍。這一頁的數字全部照狗算。
+          </p>
+        </div>
+      )}
+
       <p style={S.lbl}>我們讀過的 {DOGS.length} 款</p>
       {list.map((p) => {
         const m = anchorTreat(p);
-        const share = budgetShare(p, KG);
-        const cap30 = m ? monthlyAtCap(p, m) : null;
+        const share = budgetShare(p, KG, "dog");
+        const limit = dailyLimit(p, KG, "dog");
+        const cap30 = m ? monthlyAtCap(p, m, KG, "dog") : null;
         return (
           <Link key={p.id} href={`/dog-treat/p/${p.id}`} style={S.listRow}>
             <span style={{ minWidth: 0 }}>
@@ -151,6 +165,12 @@ export default function Page() {
               {share !== null ? (
                 <>
                   <b style={{ color: share > 100 ? "var(--cut)" : "var(--ink)" }}>佔 {share}%</b>
+                  <span style={{ display: "block", color: "var(--faint)", fontSize: 12.5 }}>{KG} 公斤的狗</span>
+                  {cap30 !== null && <span style={{ display: "block", color: "var(--faint)", fontSize: 12.5 }}>給滿一個月 ${cap30.toLocaleString()}</span>}
+                </>
+              ) : limit ? (
+                <>
+                  <b>一天 {limit.label}</b>
                   <span style={{ display: "block", color: "var(--faint)", fontSize: 12.5 }}>{KG} 公斤的狗</span>
                   {cap30 !== null && <span style={{ display: "block", color: "var(--faint)", fontSize: 12.5 }}>給滿一個月 ${cap30.toLocaleString()}</span>}
                 </>
