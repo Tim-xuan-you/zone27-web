@@ -159,6 +159,20 @@ export default function Page() {
     ...litters.map((p) => ({ id: p.id, brand: p.brand, name: p.name, searchAs: p.searchAs, ms: p.price.merchants })),
     ...treats.map((p) => ({ id: p.id, brand: p.brand, name: p.name, searchAs: p.searchAs, ms: p.price.merchants })),
   ];
+  /**
+   * 這一款補好連結了沒。
+   *
+   * 2026-09-20 Tim：「處理完的是不是就可以關掉？不然後台越來越雜。」
+   * 他是對的，而且原因很蠢：「等你產連結的」那一段只排除了
+   * 已經在別區出現過的，沒有排除**已經有連結的**。
+   * 貓砂四款、零食七款補好之後還躺在那裡，看起來像沒做。
+   *
+   * 待辦清單要自己會消失，不然它就不是待辦清單，是壁紙。
+   */
+  const linked = new Set(
+    everything.filter((x) => x.ms.some((m) => !m.dead)).map((x) => x.id),
+  );
+
   const mallOnly = everything
     .map((x) => ({ ...x, live: x.ms.filter((m) => !m.dead) }))
     .filter((x) => x.live.length > 0 && x.live.every((m) => isMall(m.label)));
@@ -220,6 +234,28 @@ export default function Page() {
         今天要處理什麼
       </h1>
 
+      {/* 這一頁越長，越沒有人會捲到底。開頭先把「還剩幾件」列出來，點了直接跳。
+          數字全部從資料算，補一條連結就自己少一個。 */}
+      <div style={{ ...box, marginBottom: 24 }}>
+        <p style={{ margin: "0 0 10px", fontSize: 14, fontWeight: 700, color: "var(--muted)" }}>還沒做完的</p>
+        {[
+          { n: waiting.length, zh: "等你補連結", href: "#gap-food" },
+          { n: nonFoodGaps.reduce((a, g) => a + g.items.length, 0), zh: "貓砂、零食沒連結", href: "#gap-other" },
+          { n: mallOnly.length, zh: "只連到商城，缺便宜的", href: "#mall-only" },
+          { n: todo.length, zh: "連結要重查", href: "#stale" },
+        ]
+          .filter((x) => x.n > 0)
+          .map((x) => (
+            <a key={x.zh} href={x.href} style={jump}>
+              <span>{x.zh}</span>
+              <span className="mono" style={{ fontWeight: 700 }}>{x.n} 款 ›</span>
+            </a>
+          ))}
+        <p style={{ margin: "12px 0 0", fontSize: 12.5, color: "var(--faint)", lineHeight: 1.85 }}>
+          補好一條，這裡就自己少一個。剩下的段落是查資料用的，今天不用看。
+        </p>
+      </div>
+
       {todo.length === 0 ? (
         <div style={{ ...box, borderColor: "var(--keep)", background: "var(--keep-soft)" }}>
           <p style={{ margin: 0, fontSize: 17, fontWeight: 700 }}>今天沒事，可以關掉了</p>
@@ -230,7 +266,7 @@ export default function Page() {
         </div>
       ) : (
         <>
-          <p style={{ color: "var(--muted)", fontSize: 15.5, lineHeight: 1.9, margin: "0 0 24px", maxWidth: "48ch" }}>
+          <p id="stale" style={{ color: "var(--muted)", fontSize: 15.5, lineHeight: 1.9, margin: "0 0 24px", maxWidth: "48ch" }}>
             <b style={{ color: "var(--ink)" }}>{todo.length} 條</b>要處理，
             已經按賣場分好組了，同一家一次開一個分頁查完，不用來回跳。
             下面「先放著」那一段今天可以完全不看。
@@ -366,11 +402,24 @@ export default function Page() {
 
       {(() => {
         const shown = new Set([...thin.map((p) => p.id), ...noChicken.map((x) => x.planId), ...waiting.map((p) => p.id)]);
-        const rest = huntTargets.filter((t) => !shown.has(t.id));
-        if (rest.length === 0) return null;
+        // 補好連結的自己消失，不用手動清單
+        const rest = huntTargets.filter((t) => !shown.has(t.id) && !linked.has(t.id));
+        const done = huntTargets.filter((t) => linked.has(t.id));
+        if (rest.length === 0 && done.length === 0) return null;
         return (
           <>
             <H>我查好賣場、等你產連結的（{rest.length} 款）</H>
+            {done.length > 0 && (
+              <details style={{ ...box, marginBottom: 14 }}>
+                <summary style={{ cursor: "pointer", fontSize: 14, color: "var(--keep)", fontWeight: 700 }}>
+                  已經補好的 {done.length} 款（收起來了，要看再點）
+                </summary>
+                <p style={{ margin: "10px 0 0", fontSize: 12.5, color: "var(--faint)", lineHeight: 1.9 }}>
+                  {done.map((t) => t.label).join("、")}
+                </p>
+              </details>
+            )}
+            {rest.length === 0 && <p style={ok}>我查好的都補完了。要我再查一批就說一聲。</p>}
             {rest.map((t) => (
               <div key={t.id} style={box}>
                 <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", gap: 12, flexWrap: "wrap" }}>
@@ -459,7 +508,7 @@ export default function Page() {
         </>
       )}
 
-      <H>等你補連結的（{waiting.length} 款）</H>
+      <H id="gap-food">等你補連結的（{waiting.length} 款）</H>
       {waiting.length === 0 ? (
         <p style={ok}>沒有。選好的都上架了。</p>
       ) : (
@@ -560,7 +609,7 @@ export default function Page() {
         </>
       )}
 
-      <H>貓砂、零食還沒有連結的（{nonFoodGaps.reduce((n, g) => n + g.items.length, 0)} 款）</H>
+      <H id="gap-other">貓砂、零食還沒有連結的（{nonFoodGaps.reduce((n, g) => n + g.items.length, 0)} 款）</H>
       <p style={{ margin: "0 0 14px", fontSize: 14, color: "var(--muted)", lineHeight: 1.9 }}>
         這兩個類目不走飼料那套引擎，所以沒有「補了會被推薦幾次」可以排。
         順序就是資料的順序，從上面補下來就好。
@@ -618,7 +667,7 @@ export default function Page() {
         ))}
       </div>
 
-      <H>只連到商城的（{mallOnly.length} 款）</H>
+      <H id="mall-only">只連到商城的（{mallOnly.length} 款）</H>
       <p style={{ margin: "0 0 14px", fontSize: 14, color: "var(--muted)", lineHeight: 1.9 }}>
         商城有保障，但同一包常常貴一截。臭味滾 7L 商城 $223，一般賣家 $100。
         這幾款現在只連得到商城，只看價錢的讀者等於沒有選擇。
@@ -834,6 +883,12 @@ function Line({ k, children }: { k: string; children: React.ReactNode }) {
   );
 }
 
+const jump: React.CSSProperties = {
+  display: "flex", justifyContent: "space-between", alignItems: "center", gap: 12,
+  padding: "10px 0", borderTop: "1px solid var(--line)",
+  textDecoration: "none", color: "inherit", fontSize: 15.5,
+};
+
 function Chip({ bg, fg, children }: { bg: string; fg: string; children: React.ReactNode }) {
   return (
     <span style={{
@@ -844,9 +899,9 @@ function Chip({ bg, fg, children }: { bg: string; fg: string; children: React.Re
   );
 }
 
-function H({ children }: { children: React.ReactNode }) {
+function H({ children, id }: { children: React.ReactNode; id?: string }) {
   return (
-    <h2 style={{
+    <h2 id={id} style={{
       fontSize: 17, fontWeight: 700, margin: "40px 0 14px",
       paddingTop: 20, borderTop: "1px solid var(--line)",
     }}>{children}</h2>
