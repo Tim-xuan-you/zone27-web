@@ -178,7 +178,7 @@
       "species": "cat",
       "brand": "汪喵星球",
       "name": "太空小零嘴 爆蛋柳葉魚",
-      "checkedAt": "2026-09-19",
+      "checkedAt": "2026-09-20",
       "note": "脂肪 20.7%，是這一系列裡最高的，熱量也最高",
       "searchAs": "汪喵星球 爆蛋柳葉魚 凍乾",
       "spec": {
@@ -195,8 +195,19 @@
       },
       "price": {
         "unit": "40g",
-        "checkedAt": "2026-09-19",
-        "merchants": []
+        "checkedAt": "2026-09-20",
+        "merchants": [
+          {
+            "id": "m1",
+            "label": "汪喵星球官方商城",
+            "unit": "40g",
+            "amount": 260,
+            "note": "一頁多口味，規格選「爆蛋柳葉魚 40g」",
+            "affiliateUrl": "https://s.shopee.tw/3VkOxnXpZM?share_channel_code=6",
+            "anchor": "safe",
+            "checkedAt": "2026-09-20"
+          }
+        ]
       }
     },
     {
@@ -204,7 +215,7 @@
       "species": "cat",
       "brand": "汪喵星球",
       "name": "太空小零嘴 柳葉魚雞鬆",
-      "checkedAt": "2026-09-19",
+      "checkedAt": "2026-09-20",
       "note": "名字寫柳葉魚，但裡面有雞鬆。對雞過敏的貓要避開",
       "searchAs": "汪喵星球 柳葉魚雞鬆 凍乾",
       "spec": {
@@ -222,8 +233,19 @@
       },
       "price": {
         "unit": "50g",
-        "checkedAt": "2026-09-19",
-        "merchants": []
+        "checkedAt": "2026-09-20",
+        "merchants": [
+          {
+            "id": "m1",
+            "label": "汪喵星球官方商城",
+            "unit": "50g",
+            "amount": 210,
+            "note": "一頁多口味，規格選「柳葉魚雞鬆 50g」",
+            "affiliateUrl": "https://s.shopee.tw/3VkOxnXpZM?share_channel_code=6",
+            "anchor": "safe",
+            "checkedAt": "2026-09-20"
+          }
+        ]
       }
     },
     {
@@ -293,7 +315,7 @@
       "species": "cat",
       "brand": "汪喵星球",
       "name": "太空小零嘴 阿根廷天使紅蝦",
-      "checkedAt": "2026-09-19",
+      "checkedAt": "2026-09-20",
       "note": "脂肪只有 1.3%，蛋白質 85%",
       "searchAs": "汪喵星球 天使紅蝦 凍乾",
       "spec": {
@@ -310,8 +332,19 @@
       },
       "price": {
         "unit": "23g",
-        "checkedAt": "2026-09-19",
-        "merchants": []
+        "checkedAt": "2026-09-20",
+        "merchants": [
+          {
+            "id": "m1",
+            "label": "汪喵星球官方商城",
+            "unit": "23g",
+            "amount": 350,
+            "note": "一頁多口味，規格選「阿根廷天使紅蝦 23g」",
+            "affiliateUrl": "https://s.shopee.tw/3VkOxnXpZM?share_channel_code=6",
+            "anchor": "safe",
+            "checkedAt": "2026-09-20"
+          }
+        ]
       }
     },
     {
@@ -319,7 +352,7 @@
       "species": "cat",
       "brand": "汪喵星球",
       "name": "太空小零嘴 虱目魚菲力",
-      "checkedAt": "2026-09-19",
+      "checkedAt": "2026-09-20",
       "searchAs": "汪喵星球 虱目魚菲力 凍乾",
       "spec": {
         "form": "freezeDried",
@@ -335,8 +368,19 @@
       },
       "price": {
         "unit": "50g",
-        "checkedAt": "2026-09-19",
-        "merchants": []
+        "checkedAt": "2026-09-20",
+        "merchants": [
+          {
+            "id": "m1",
+            "label": "汪喵星球官方商城",
+            "unit": "50g",
+            "amount": 300,
+            "note": "一頁多口味，規格選「虱目魚菲力 50g」",
+            "affiliateUrl": "https://s.shopee.tw/3VkOxnXpZM?share_channel_code=6",
+            "anchor": "safe",
+            "checkedAt": "2026-09-20"
+          }
+        ]
       }
     }
   ]
