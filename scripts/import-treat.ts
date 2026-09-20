@@ -130,6 +130,6 @@ if (errors.length) {
 }
 
 writeFileSync(resolve(ROOT, file.json), JSON.stringify({ products }, null, 2) + "\n", "utf8");
-const live = products.filter((p) => p.price.merchants.some((m) => !m.dead)).length;
+const live = products.filter((p) => p.price.merchants.some((m) => !m.dead && !m.soldOut)).length;
 console.log(`✓ ${file.zh} ${products.length} 款寫入 ${file.json}（${live} 款有連結）`);
 }

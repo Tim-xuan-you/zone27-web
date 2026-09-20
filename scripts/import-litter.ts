@@ -109,5 +109,5 @@ if (errors.length) {
 }
 
 writeFileSync(JSON_OUT, JSON.stringify({ products }, null, 2) + "\n", "utf8");
-const live = products.filter((p) => p.price.merchants.some((m) => !m.dead)).length;
+const live = products.filter((p) => p.price.merchants.some((m) => !m.dead && !m.soldOut)).length;
 console.log(`\n✓ 貓砂 ${products.length} 款寫入 data/cat-litter.json（${live} 款有連結）\n`);
