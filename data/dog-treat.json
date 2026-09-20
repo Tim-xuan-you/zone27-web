@@ -29,12 +29,22 @@
         "merchants": [
           {
             "id": "m1",
+            "label": "Cesar西莎 官方旗艦店（蝦皮商城）",
+            "unit": "85g",
+            "amount": 159,
+            "note": "一頁多規格，規格選「2-7kg犬專用」",
+            "affiliateUrl": "https://s.shopee.tw/80CoRGZ93Q?share_channel_code=6",
+            "anchor": "safe",
+            "checkedAt": "2026-09-20"
+          },
+          {
+            "id": "m2",
             "label": "蝦皮直營（官方直營）",
             "unit": "85g",
             "amount": 159,
             "note": "規格選「2-7公斤犬專用」，價錢是頁面顯示的 $159，要再確認",
             "affiliateUrl": "https://s.shopee.tw/2VrrrzAEbq?share_channel_code=6",
-            "anchor": "safe",
+            "anchor": "value",
             "soldOut": true,
             "checkedAt": "2026-09-20"
           }
@@ -70,12 +80,22 @@
         "merchants": [
           {
             "id": "m1",
+            "label": "Cesar西莎 官方旗艦店（蝦皮商城）",
+            "unit": "85g",
+            "amount": 159,
+            "note": "一頁多規格，規格選「7-11kg專用」",
+            "affiliateUrl": "https://s.shopee.tw/80CoRGZ93Q?share_channel_code=6",
+            "anchor": "safe",
+            "checkedAt": "2026-09-20"
+          },
+          {
+            "id": "m2",
             "label": "蝦皮直營（官方直營）",
             "unit": "85g",
             "amount": 159,
             "note": "一頁多規格，規格選「7-11公斤犬專用」",
             "affiliateUrl": "https://s.shopee.tw/2VrrrzAEbq?share_channel_code=6",
-            "anchor": "safe",
+            "anchor": "value",
             "checkedAt": "2026-09-20"
           }
         ]
