@@ -263,7 +263,7 @@
       "species": "cat",
       "brand": "汪喵星球",
       "name": "太空小零嘴 日本大干貝",
-      "checkedAt": "2026-09-19",
+      "checkedAt": "2026-09-20",
       "note": "脂肪 3.6%，這一系列裡最低。在減重的貓可以從這款開始",
       "searchAs": "汪喵星球 日本大干貝 凍乾",
       "spec": {
@@ -280,8 +280,19 @@
       },
       "price": {
         "unit": "25g",
-        "checkedAt": "2026-09-19",
-        "merchants": []
+        "checkedAt": "2026-09-20",
+        "merchants": [
+          {
+            "id": "m1",
+            "label": "汪喵星球官方商城",
+            "unit": "25g",
+            "amount": 380,
+            "note": "一頁多口味，規格選「日本大干貝 25g」",
+            "affiliateUrl": "https://s.shopee.tw/4qFmbltV2c?share_channel_code=6",
+            "anchor": "safe",
+            "checkedAt": "2026-09-20"
+          }
+        ]
       }
     },
     {
@@ -289,7 +300,7 @@
       "species": "cat",
       "brand": "汪喵星球",
       "name": "太空小零嘴 澎湖丁香魚",
-      "checkedAt": "2026-09-19",
+      "checkedAt": "2026-09-20",
       "searchAs": "汪喵星球 澎湖丁香魚 凍乾",
       "spec": {
         "form": "freezeDried",
@@ -305,7 +316,7 @@
       },
       "price": {
         "unit": "30g",
-        "checkedAt": "2026-09-19",
+        "checkedAt": "2026-09-20",
         "merchants": [
           {
             "id": "m1",
@@ -316,6 +327,16 @@
             "affiliateUrl": "https://s.shopee.tw/2BF0MDwXRu?share_channel_code=6",
             "anchor": "safe",
             "checkedAt": "2026-09-19"
+          },
+          {
+            "id": "m2",
+            "label": "汪喵星球官方商城",
+            "unit": "30g",
+            "amount": 260,
+            "note": "一頁多口味，規格選「澎湖丁香魚 30g」】【",
+            "affiliateUrl": "https://s.shopee.tw/4qFmbltV2c?share_channel_code=6",
+            "anchor": "value",
+            "checkedAt": "2026-09-20"
           }
         ]
       }
