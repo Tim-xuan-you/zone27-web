@@ -73,6 +73,7 @@ const products = rows.map((r, i) => {
       affiliateUrl: r[`m${n}Url`] || "",
       anchor: merchants.length === 0 ? "safe" : "value",
       ...(r[`m${n}Dead`] === "1" ? { dead: true } : {}),
+      ...(r[`m${n}Dead`] === "sold" ? { soldOut: true } : {}),
       ...(r[`m${n}Checked`] ? { checkedAt: r[`m${n}Checked`] } : {}),
     } as Merchant);
   }

@@ -165,7 +165,7 @@ export function unitPriceOf(p: LitterProduct, m: Merchant): { n: number; unit: s
 
 /** 還買得到的賣場 */
 export const liveOf = (p: LitterProduct): Merchant[] =>
-  dedupeMerchants(p.price.merchants.filter((m) => !m.dead));
+  dedupeMerchants(p.price.merchants.filter((m) => !m.dead && !m.soldOut));
 export const buyableLitter = (p: LitterProduct): boolean => liveOf(p).length > 0;
 
 /**

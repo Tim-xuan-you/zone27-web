@@ -170,17 +170,22 @@ export default function Page() {
    * 待辦清單要自己會消失，不然它就不是待辦清單，是壁紙。
    */
   const linked = new Set(
-    everything.filter((x) => x.ms.some((m) => !m.dead)).map((x) => x.id),
+    everything.filter((x) => x.ms.some((m) => !m.dead && !m.soldOut)).map((x) => x.id),
   );
 
+  /* 有連結但東西賣完了。連結是好的，補貨就能開，所以要有人提醒回去看 */
+  const soldOut = everything
+    .map((x) => ({ ...x, sold: x.ms.filter((m) => m.soldOut) }))
+    .filter((x) => x.sold.length > 0);
+
   const mallOnly = everything
-    .map((x) => ({ ...x, live: x.ms.filter((m) => !m.dead) }))
+    .map((x) => ({ ...x, live: x.ms.filter((m) => !m.dead && !m.soldOut) }))
     .filter((x) => x.live.length > 0 && x.live.every((m) => isMall(m.label)));
 
   /* 貓砂、零食不在飼料的 catalog 裡，維護台原本看不到這兩個類目缺什麼 */
   const nonFoodGaps = [
-    { zh: "貓砂", items: litters.filter((p) => !p.price.merchants.some((m) => !m.dead)) },
-    { zh: "貓零食", items: treats.filter((p) => !p.price.merchants.some((m) => !m.dead)) },
+    { zh: "貓砂", items: litters.filter((p) => !p.price.merchants.some((m) => !m.dead && !m.soldOut)) },
+    { zh: "貓零食", items: treats.filter((p) => !p.price.merchants.some((m) => !m.dead && !m.soldOut)) },
   ];
   const sellersOfBrand = (brand: string) => {
     const key = brand.split(/[（(]/)[0].trim();
@@ -241,6 +246,7 @@ export default function Page() {
         {[
           { n: waiting.length, zh: "等你補連結", href: "#gap-food" },
           { n: nonFoodGaps.reduce((a, g) => a + g.items.length, 0), zh: "貓砂、零食沒連結", href: "#gap-other" },
+          { n: soldOut.length, zh: "有連結但賣完了", href: "#sold-out" },
           { n: mallOnly.length, zh: "只連到商城，缺便宜的", href: "#mall-only" },
           { n: todo.length, zh: "連結要重查", href: "#stale" },
         ]
@@ -666,6 +672,43 @@ export default function Page() {
           </Line>
         ))}
       </div>
+
+      <H id="sold-out">有連結但賣完了（{soldOut.length} 款）</H>
+      <p style={{ margin: "0 0 14px", fontSize: 14, color: "var(--muted)", lineHeight: 1.9 }}>
+        連結是好的，東西賣完而已，補貨就能開。讀者看不到這幾條，資料留著。
+        回去看到有貨，用 data:paste 貼一次、備註寫【補貨】就回來。
+      </p>
+      {soldOut.length === 0
+        ? <p style={ok}>沒有。</p>
+        : soldOut.map((p) => (
+            <div key={p.id} style={box}>
+              <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", gap: 12, flexWrap: "wrap" }}>
+                <div>
+                  <span style={{ fontSize: 12.5, color: "var(--muted)", display: "block" }}>{p.brand}</span>
+                  <b style={{ fontSize: 17 }}>{p.name}</b>
+                </div>
+                <span className="mono" style={{ fontSize: 12.5, color: "var(--faint)" }}>{p.id}</span>
+              </div>
+              {p.sold.map((m) => (
+                <div key={m.id} style={{ marginTop: 10, paddingTop: 10, borderTop: "1px solid var(--line)" }}>
+                  <Line k={m.label}>
+                    <span className="mono">{m.unit} ${m.amount}</span>
+                    {m.note && (
+                      <span style={{ display: "block", fontSize: 12.5, color: "var(--faint)", marginTop: 4 }}>{m.note}</span>
+                    )}
+                    <a
+                      href={m.affiliateUrl}
+                      target="_blank"
+                      rel="noopener nofollow"
+                      style={{ display: "inline-block", marginTop: 6, color: "var(--accent)", fontSize: 14 }}
+                    >
+                      開連結看補貨了沒 ↗
+                    </a>
+                  </Line>
+                </div>
+              ))}
+            </div>
+          ))}
 
       <H id="mall-only">只連到商城的（{mallOnly.length} 款）</H>
       <p style={{ margin: "0 0 14px", fontSize: 14, color: "var(--muted)", lineHeight: 1.9 }}>

@@ -84,7 +84,7 @@ export function checkedOf(p: Product, m?: Merchant): string {
  * 不是例外。所以「死掉的賣場」是資料模型的一部分，不是靠人記得去刪。
  */
 export function liveMerchants(p: Product): Merchant[] {
-  const live = p.price.merchants.filter((m) => !m.dead);
+  const live = p.price.merchants.filter((m) => !m.dead && !m.soldOut);
   // 全死了就回原陣列，讓上層自己判斷要不要整款拿掉；
   // 這裡回空陣列會讓一堆 [0] 變成 undefined，反而更難查。
   return dedupeMerchants(live.length > 0 ? live : p.price.merchants);

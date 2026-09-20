@@ -157,7 +157,7 @@ export function pureeSpread(): { plain: TreatProduct; complete: TreatProduct } |
 
 /** 還買得到的賣場 */
 export const liveOf = (p: TreatProduct): Merchant[] =>
-  dedupeMerchants(p.price.merchants.filter((m) => !m.dead));
+  dedupeMerchants(p.price.merchants.filter((m) => !m.dead && !m.soldOut));
 export const buyableTreat = (p: TreatProduct): boolean => liveOf(p).length > 0;
 
 /** 卡片上那一家：最便宜的 */

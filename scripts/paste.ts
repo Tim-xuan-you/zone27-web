@@ -48,6 +48,7 @@ const TEMPLATE = `# 一行一個賣場。第一行 = 卡片上主要的那個賣
 #
 # 給過的連結永遠不刪：新貼的放最前面，原本的自動往後排當備援。
 # 備註裡寫【備援】→ 放最後面；寫【失效】→ 讀者看不到，資料留著；寫【恢復】→ 失效的放回來。
+# 寫【售完】→ 讀者看不到，但那是缺貨不是連結壞掉，補貨了寫【補貨】就回來。
 #
 # 例：
 # df-01  獅子王寵物（蝦皮優選）  2kg    1200  https://s.shopee.tw/xxxx  【超商限兩包】
@@ -257,19 +258,29 @@ async function main() {
       for (const m of list) {
         const flags = m.note;
         const backup = /備援/.test(flags), dead = /失效/.test(flags), revive = /恢復/.test(flags);
+        /* 售完跟失效是兩回事：失效是連結不能用了，售完是東西賣完、補貨就回來。
+           以前沒有這個標記，缺貨的連結只能丟掉，補貨之後 Tim 要重產一次。 */
+        const sold = /售完/.test(flags), restock = /補貨/.test(flags);
         // 標記字不要留在給讀者看的備註裡
-        const note = flags.split("·").map((x) => x.replace(/備援|失效|恢復/g, "").trim()).filter(Boolean).join(" · ");
+        const note = flags
+          .split("·")
+          .map((x) => x.replace(/備援|失效|恢復|售完|補貨/g, "").replace(/[【】]/g, "").trim())
+          .filter(Boolean)
+          .join(" · ");
         const old = existing.find((s) => same(s, m));
         const slot: Slot = {
           label: m.label, unit: m.unit, amount: String(m.amount), url: m.url,
           // 這次沒寫備註就保留原本的人工備註
           note: note || old?.note || "",
-          dead: dead ? "1" : revive ? "" : old?.dead ?? "",
+          dead: dead ? "1" : sold ? "sold" : revive || restock ? "" : old?.dead ?? "",
           checked: today,
         };
         if (dead) killed++;
-        if (revive) revived++;
-        if (dead && old) { Object.assign(old, slot); continue; }   // 標失效的留在原本的位置
+        if (revive || restock) revived++;
+        // 標失效或售完的留在原本的位置，不要往前擠掉還買得到的那幾家
+        if ((dead || sold) && old) { Object.assign(old, slot); continue; }
+        // 沒有舊紀錄的售完連結放最後面，不要擠掉還買得到的那幾家
+        if (sold) { back.push(slot); continue; }
         (backup ? back : front).push(slot);
       }
       const keep = existing.filter((s) => !list.some((m) => same(s, m)) || (s.dead === "1" && list.some((m) => same(s, m) && /失效/.test(m.note))));

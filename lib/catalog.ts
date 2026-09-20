@@ -41,7 +41,9 @@ export function byId(id: string): Product | undefined {
  */
 export function merchantFor(sku: string, merchantId: string): Merchant | undefined {
   const all: { id: string; price: Price }[] = [...catalog, ...litters, ...treatsOf("cat"), ...treatsOf("dog")];
-  return all.find((p) => p.id === sku)?.price.merchants.find((m) => m.id === merchantId);
+  const m = all.find((p) => p.id === sku)?.price.merchants.find((x) => x.id === merchantId);
+  // 售完的不送人過去，點進去看到缺貨比沒有連結更糟
+  return m && !m.soldOut ? m : undefined;
 }
 
 /**

@@ -284,12 +284,23 @@
         "merchants": [
           {
             "id": "m1",
+            "label": "毛孩寵物鋪",
+            "unit": "20g",
+            "amount": 380,
+            "note": "規格選「日本大干貝 20g」，注意是 20g 不是官方商城的 25g",
+            "affiliateUrl": "https://s.shopee.tw/4fwMPSu8Nb?share_channel_code=6",
+            "anchor": "safe",
+            "soldOut": true,
+            "checkedAt": "2026-09-20"
+          },
+          {
+            "id": "m2",
             "label": "汪喵星球官方商城",
             "unit": "25g",
             "amount": 380,
             "note": "一頁多口味，規格選「日本大干貝 25g」",
             "affiliateUrl": "https://s.shopee.tw/4qFmbltV2c?share_channel_code=6",
-            "anchor": "safe",
+            "anchor": "value",
             "checkedAt": "2026-09-20"
           }
         ]
