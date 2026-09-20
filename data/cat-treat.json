@@ -199,12 +199,22 @@
         "merchants": [
           {
             "id": "m1",
+            "label": "毛孩寵物鋪",
+            "unit": "40g",
+            "amount": 240,
+            "note": "一頁多口味，規格選「【海味】爆蛋柳葉魚40g」",
+            "affiliateUrl": "https://s.shopee.tw/3LQylUYSuL?share_channel_code=6",
+            "anchor": "safe",
+            "checkedAt": "2026-09-20"
+          },
+          {
+            "id": "m2",
             "label": "汪喵星球官方商城",
             "unit": "40g",
             "amount": 260,
             "note": "一頁多口味，規格選「爆蛋柳葉魚 40g」",
             "affiliateUrl": "https://s.shopee.tw/3VkOxnXpZM?share_channel_code=6",
-            "anchor": "safe",
+            "anchor": "value",
             "checkedAt": "2026-09-20"
           }
         ]

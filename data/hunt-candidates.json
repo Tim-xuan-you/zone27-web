@@ -742,6 +742,202 @@
           "url": "https://shopee.tw/product/3347166/1150606904"
         }
       ]
+    },
+    {
+      "id": "dt-01",
+      "label": "Greenies 健綠 潔牙骨 迷你犬（狗零食）",
+      "why": "一支 25 大卡，2 公斤的狗一天額度只有 19 大卡，一支就 132%",
+      "note": "這幾家的賣場頁都是多規格，一頁涵蓋迷你、小型、中型、大型。跟汪喵那一頁一樣，產一條連結四款共用，規格各自標清楚就好。蝦皮直營是你在藍標那邊產過的店，成功率最高；Cesar 官方旗艦店跟健綠同集團。",
+      "candidates": [
+        {
+          "shop": "LieBaoの舖 2號店",
+          "shopId": "258925607",
+          "channel": "seller",
+          "price": 70,
+          "unit": "3oz 袋裝 · 一般賣家裡最便宜",
+          "url": "https://shopee.tw/product/258925607/20512584137"
+        },
+        {
+          "shop": "喜花貓",
+          "shopId": "563414496",
+          "channel": "seller",
+          "price": 88,
+          "unit": "3oz · 迷你犬 2-7kg／小型犬 7-11kg 同一頁",
+          "url": "https://shopee.tw/product/563414496/18279783057"
+        },
+        {
+          "shop": "蝦皮直營（官方直營）",
+          "shopId": "50662979",
+          "known": true,
+          "channel": "mall",
+          "price": 159,
+          "unit": "85g 罐裝任選 · 藍標就是在這家產的",
+          "url": "https://shopee.tw/product/50662979/42961988776"
+        },
+        {
+          "shop": "Cesar西莎 官方旗艦店（蝦皮商城）",
+          "shopId": "217228489",
+          "channel": "mall",
+          "price": 159,
+          "unit": "3oz 多規格 · 健綠跟西莎同集團，這家是官方旗艦",
+          "url": "https://shopee.tw/product/217228489/25310752285"
+        },
+        {
+          "shop": "米瑞拉 寵物用品專賣店",
+          "shopId": "397992294",
+          "channel": "seller",
+          "price": 139,
+          "unit": "3oz 原味",
+          "url": "https://shopee.tw/product/397992294/45114188977"
+        }
+      ]
+    },
+    {
+      "id": "dt-02",
+      "label": "Greenies 健綠 潔牙骨 小型犬（狗零食）",
+      "why": "一支 52 大卡，7 公斤的狗一支就 108%",
+      "note": "這幾家的賣場頁都是多規格，一頁涵蓋迷你、小型、中型、大型。跟汪喵那一頁一樣，產一條連結四款共用，規格各自標清楚就好。蝦皮直營是你在藍標那邊產過的店，成功率最高；Cesar 官方旗艦店跟健綠同集團。",
+      "candidates": [
+        {
+          "shop": "LieBaoの舖 2號店",
+          "shopId": "258925607",
+          "channel": "seller",
+          "price": 70,
+          "unit": "3oz 袋裝 · 一般賣家裡最便宜",
+          "url": "https://shopee.tw/product/258925607/20512584137"
+        },
+        {
+          "shop": "喜花貓",
+          "shopId": "563414496",
+          "channel": "seller",
+          "price": 88,
+          "unit": "3oz · 迷你犬 2-7kg／小型犬 7-11kg 同一頁",
+          "url": "https://shopee.tw/product/563414496/18279783057"
+        },
+        {
+          "shop": "蝦皮直營（官方直營）",
+          "shopId": "50662979",
+          "known": true,
+          "channel": "mall",
+          "price": 159,
+          "unit": "85g 罐裝任選 · 藍標就是在這家產的",
+          "url": "https://shopee.tw/product/50662979/42961988776"
+        },
+        {
+          "shop": "Cesar西莎 官方旗艦店（蝦皮商城）",
+          "shopId": "217228489",
+          "channel": "mall",
+          "price": 159,
+          "unit": "3oz 多規格 · 健綠跟西莎同集團，這家是官方旗艦",
+          "url": "https://shopee.tw/product/217228489/25310752285"
+        },
+        {
+          "shop": "米瑞拉 寵物用品專賣店",
+          "shopId": "397992294",
+          "channel": "seller",
+          "price": 139,
+          "unit": "3oz 原味",
+          "url": "https://shopee.tw/product/397992294/45114188977"
+        }
+      ]
+    },
+    {
+      "id": "dt-03",
+      "label": "Greenies 健綠 潔牙骨 中型犬（狗零食）",
+      "why": "一支 88 大卡，最多人買的尺寸，11 公斤的狗一支 129%",
+      "note": "這幾家的賣場頁都是多規格，一頁涵蓋迷你、小型、中型、大型。跟汪喵那一頁一樣，產一條連結四款共用，規格各自標清楚就好。蝦皮直營是你在藍標那邊產過的店，成功率最高；Cesar 官方旗艦店跟健綠同集團。",
+      "candidates": [
+        {
+          "shop": "LieBaoの舖 2號店",
+          "shopId": "258925607",
+          "channel": "seller",
+          "price": 70,
+          "unit": "3oz 袋裝 · 一般賣家裡最便宜",
+          "url": "https://shopee.tw/product/258925607/20512584137"
+        },
+        {
+          "shop": "喜花貓",
+          "shopId": "563414496",
+          "channel": "seller",
+          "price": 88,
+          "unit": "3oz · 迷你犬 2-7kg／小型犬 7-11kg 同一頁",
+          "url": "https://shopee.tw/product/563414496/18279783057"
+        },
+        {
+          "shop": "蝦皮直營（官方直營）",
+          "shopId": "50662979",
+          "known": true,
+          "channel": "mall",
+          "price": 159,
+          "unit": "85g 罐裝任選 · 藍標就是在這家產的",
+          "url": "https://shopee.tw/product/50662979/42961988776"
+        },
+        {
+          "shop": "Cesar西莎 官方旗艦店（蝦皮商城）",
+          "shopId": "217228489",
+          "channel": "mall",
+          "price": 159,
+          "unit": "3oz 多規格 · 健綠跟西莎同集團，這家是官方旗艦",
+          "url": "https://shopee.tw/product/217228489/25310752285"
+        },
+        {
+          "shop": "米瑞拉 寵物用品專賣店",
+          "shopId": "397992294",
+          "channel": "seller",
+          "price": 139,
+          "unit": "3oz 原味",
+          "url": "https://shopee.tw/product/397992294/45114188977"
+        }
+      ]
+    },
+    {
+      "id": "dt-04",
+      "label": "Greenies 健綠 潔牙骨 大型犬（狗零食）",
+      "why": "一支 142 大卡，大型犬額度大，反而是四款裡最不容易超標的",
+      "note": "這幾家的賣場頁都是多規格，一頁涵蓋迷你、小型、中型、大型。跟汪喵那一頁一樣，產一條連結四款共用，規格各自標清楚就好。蝦皮直營是你在藍標那邊產過的店，成功率最高；Cesar 官方旗艦店跟健綠同集團。",
+      "candidates": [
+        {
+          "shop": "LieBaoの舖 2號店",
+          "shopId": "258925607",
+          "channel": "seller",
+          "price": 70,
+          "unit": "3oz 袋裝 · 一般賣家裡最便宜",
+          "url": "https://shopee.tw/product/258925607/20512584137"
+        },
+        {
+          "shop": "喜花貓",
+          "shopId": "563414496",
+          "channel": "seller",
+          "price": 88,
+          "unit": "3oz · 迷你犬 2-7kg／小型犬 7-11kg 同一頁",
+          "url": "https://shopee.tw/product/563414496/18279783057"
+        },
+        {
+          "shop": "蝦皮直營（官方直營）",
+          "shopId": "50662979",
+          "known": true,
+          "channel": "mall",
+          "price": 159,
+          "unit": "85g 罐裝任選 · 藍標就是在這家產的",
+          "url": "https://shopee.tw/product/50662979/42961988776"
+        },
+        {
+          "shop": "Cesar西莎 官方旗艦店（蝦皮商城）",
+          "shopId": "217228489",
+          "channel": "mall",
+          "price": 159,
+          "unit": "3oz 多規格 · 健綠跟西莎同集團，這家是官方旗艦",
+          "url": "https://shopee.tw/product/217228489/25310752285"
+        },
+        {
+          "shop": "米瑞拉 寵物用品專賣店",
+          "shopId": "397992294",
+          "channel": "seller",
+          "price": 139,
+          "unit": "3oz 原味",
+          "url": "https://shopee.tw/product/397992294/45114188977"
+        }
+      ]
     }
   ]
 }
