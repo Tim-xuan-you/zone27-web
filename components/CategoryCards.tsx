@@ -38,7 +38,9 @@ export default function CategoryCards({ cats, short }: { cats: Category[]; short
             </p>
             <p style={{ margin: 0, fontSize: 12.5, color: "var(--faint)", lineHeight: 1.8 }}>
               {treat
-                ? `讀過 ${read} 款：一支幾大卡、佔一天額度的幾成`
+                ? (c.species === "dog"
+                    ? `讀過 ${read} 款：一支幾大卡、佔一天額度的幾成`
+                    : `讀過 ${read} 款：一天可以給幾條、能不能當主食`)
                 : litter
                 ? `讀過 ${read} 款：材質、能不能沖馬桶、一個月多少錢`
                 : !live

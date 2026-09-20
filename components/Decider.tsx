@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { parse } from "@/lib/parse";
 import { adjudicate, anchorOf, formOf, pricePerKg, stageForAge, unitOf, type Stage } from "@/lib/engine";
-import { mentionedProducts } from "@/lib/mentions";
+import { mentionedProducts, mentionedOthers, type OtherHit } from "@/lib/mentions";
 import { productHref } from "@/lib/labels";
 import { catalog, catalogOf, constraintsFor, isLive } from "@/lib/catalog";
 import { CATEGORIES, categoriesOf, categoryOf, type CategorySlug, FoodSlug } from "@/lib/categories";
@@ -190,6 +190,8 @@ export default function Decider({
   const [chips, setChips] = useState<{ label: string; kind: "info" | "avoid" }[]>([]);
   const [verdict, setVerdict] = useState<Verdict | null>(null);
   const [empty, setEmpty] = useState(false);
+  /* 貓砂、零食那幾個類目不走裁決，但名字一定要搜得到（2026-09-20） */
+  const [others, setOthers] = useState<OtherHit[]>([]);
   const [dogKg, setDogKg] = useState<number | undefined>(undefined);
   const [symptoms, setSymptoms] = useState<string[]>([]);
   const [stage, setStage] = useState<Stage>("adultFixed");
@@ -238,14 +240,17 @@ export default function Decider({
     setText(src);
     const parsed = parse(src, sp, f);
     const found = mentionedProducts(src, parsed.speciesFromText ? parsed.situation.species : undefined);
+    const other = mentionedOthers(src, parsed.speciesFromText ? parsed.situation.species : undefined);
+    setOthers(other);
 
     if (parsed.empty) {
       // 只打了品名、沒講狀況：直接給那一款，不要回「讀不出條件」
-      setEmpty(found.length === 0);
+      // 打的是貓砂或零食的名字，那不是「讀不出條件」，是我們有這一款
+      setEmpty(found.length === 0 && other.length === 0);
       setVerdict(null);
       setChips([]);
       setMentions(found.map((p) => ({ p, text: "講一下牠的狀況（年紀、過敏、症狀），我們會告訴你這款適不適合。", tone: "faint" })));
-      if (found.length && scroll) scrollTo("mentions");
+      if ((found.length || other.length) && scroll) scrollTo(found.length ? "mentions" : "others");
       return;
     }
     const s = parsed.situation;
@@ -265,7 +270,7 @@ export default function Decider({
     setVerdict(v);
     setAsked({ text: src, sp: s.species, fm: sf });
     setMentions(found.map((p) => judge(p, v, s.species, s.form ?? "dry")));
-    if (scroll) scrollTo(found.length ? "mentions" : "verdict");
+    if (scroll) scrollTo(found.length ? "mentions" : other.length ? "others" : "verdict");
   }
 
   function scrollTo(id: string) {
@@ -432,6 +437,32 @@ export default function Decider({
         </div>
       )}
 
+      {others.length > 0 && (
+        <div id="others" style={{ ...S.emptyBox, background: "var(--surface)", borderColor: "var(--line)" }}>
+          <p style={{ margin: 0, fontWeight: 700 }}>
+            這{others.length > 1 ? "幾" : ""}款我們讀過，不過它{others.length > 1 ? "們" : ""}不走裁決器
+          </p>
+          <p style={{ margin: "8px 0 0", color: "var(--muted)", fontSize: 15.5, lineHeight: 1.85 }}>
+            裁決器是給正餐用的（過敏原、年紀、體型）。
+            {others[0].kindZh === "貓砂"
+              ? "貓砂看的是材質、能不能沖馬桶、一個月多少錢。"
+              : "零食看的是一天可以給多少、佔掉多少額度。"}
+            那幾件事在它自己的頁面上。
+          </p>
+          <div style={{ marginTop: 12 }}>
+            {others.map((o) => (
+              <a key={o.id} href={o.href} style={otherRow}>
+                <span style={{ minWidth: 0 }}>
+                  <span style={{ display: "block", fontSize: 12.5, color: "var(--muted)" }}>{o.brand} · {o.kindZh}</span>
+                  <span style={{ fontWeight: 700 }}>{o.name}</span>
+                </span>
+                <span aria-hidden style={{ color: "var(--accent)", fontWeight: 700 }}>看這一款 ›</span>
+              </a>
+            ))}
+          </div>
+        </div>
+      )}
+
       {empty && (
         <div style={S.emptyBox}>
           <p style={{ margin: 0, fontWeight: 700 }}>這句話我們讀不出條件</p>
@@ -493,6 +524,12 @@ function judge(p: Product, v: Verdict, species: Species, form: Form): Mention {
   if (cut && cut.tag !== "通路") return { p, text: `照你講的條件，這款會被刪：${cut.why}。`, tone: "cut" };
   return { p, text: p.referenceOnly ? "這款我們不推薦，放進來是為了比較。" : "這款的購買連結還在補。", tone: "faint" };
 }
+
+const otherRow: React.CSSProperties = {
+  display: "flex", justifyContent: "space-between", alignItems: "center", gap: 12,
+  padding: "12px 0", borderTop: "1px solid var(--line)",
+  textDecoration: "none", color: "inherit", fontSize: 15.5,
+};
 
 const pickWrap: React.CSSProperties = { marginTop: 14 };
 const pickHead: React.CSSProperties = { display: "block", fontSize: 12.5, color: "var(--muted)", marginBottom: 8 };
