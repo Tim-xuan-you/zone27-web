@@ -1,0 +1,93 @@
+import type { Metadata } from "next";
+import Link from "next/link";
+import CategoryCards from "@/components/CategoryCards";
+import Decider from "@/components/Decider";
+import SiteHeader from "@/components/SiteHeader";
+import { S } from "@/components/styles";
+import { categoriesOf } from "@/lib/categories";
+
+/**
+ * 狗的動物頁。
+ *
+ * 這一頁欠很久了。lib/categories 的 animalHref 寫得很清楚：
+ * 一個動物有兩個以上的類目，導覽列就連到 /狗、/貓 這一層。
+ * 狗零食上線的那天，導覽列的「狗」就自動變成連到 /dog ——
+ * 但這一頁沒建，所以全站每一頁的第一個連結都是 404。
+ *
+ * 教訓記在這裡：animalHref 會自己改變，頁面不會自己長出來。
+ * 以後任何一個動物新增第二個類目，先建這一頁再上線。
+ */
+
+export const metadata: Metadata = {
+  title: "狗飼料、狗零食怎麼選",
+  description:
+    "講一句你家狗的狀況，我們先刪掉不適合的。每一款的成分表都讀過，名字寫鴨肉、火雞、鮭魚但成分表裡有雞的都標出來了。零食照熱量算一天可以給幾支。",
+  alternates: { canonical: "/dog" },
+};
+
+export default function Page() {
+  return (
+    <main style={{ maxWidth: 760, margin: "0 auto", padding: "0 20px 120px" }}>
+      <SiteHeader current="dog" />
+
+      <h1 style={{ fontSize: "clamp(28px,6vw,40px)", lineHeight: 1.45, margin: "0 0 16px" }}>
+        你家的狗，現在在吃什麼？
+      </h1>
+      <p style={{ color: "var(--muted)", fontSize: 17, lineHeight: 1.9, margin: "0 0 28px", maxWidth: "40ch" }}>
+        講一句牠的狀況，我們先把不適合的刪掉，剩下的才給你看。
+        零食在下面，那個要算額度。
+      </p>
+
+      <Decider defaultSpecies="dog" />
+
+      <p style={{ ...S.lbl, marginTop: 56 }}>狗的類目</p>
+      <CategoryCards cats={categoriesOf("dog")} />
+
+      <p style={S.lbl}>我們自己讀成分表</p>
+      <div style={grid}>
+        <Link href="/dog-food/hidden-chicken" style={feature}>
+          <span style={kicker}>飼料</span>
+          <h2 style={featureTitle}>主打低敏、單一口味，成分表裡還是有雞</h2>
+          <p style={featureBody}>4 款逐筆核對，包含我們自己在推的那一款。</p>
+        </Link>
+        <Link href="/dog-food/elimination-diet" style={feature}>
+          <span style={kicker}>飼料</span>
+          <h2 style={featureTitle}>一直抓、一直舔腳，要怎麼排查</h2>
+          <p style={featureBody}>換糧之前先搞清楚要排除什麼，不然換十款也是白換。</p>
+        </Link>
+        <Link href="/dog-treat" style={feature}>
+          <span style={kicker}>零食</span>
+          <h2 style={featureTitle}>一支潔牙骨佔掉一天多少額度</h2>
+          <p style={featureBody}>品牌照體重標的那一支，有 4 款一支就超過一整天。</p>
+        </Link>
+      </div>
+
+      <p style={S.lbl}>先算一下</p>
+      <div style={S.relRow}>
+        <Link href="/dog-food/how-much" style={S.relLink}>狗一天吃多少飼料</Link>
+        <Link href="/dog-food/cans" style={S.relLink}>狗吃主食罐一天要幾罐</Link>
+        <Link href="/dog-food/grain-free" style={S.relLink}>無穀飼料要不要買</Link>
+      </div>
+
+    </main>
+  );
+}
+
+const grid: React.CSSProperties = {
+  display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 14,
+};
+const feature: React.CSSProperties = {
+  display: "block", background: "var(--surface)", border: "1px solid var(--line)",
+  borderRadius: 14, boxShadow: "var(--sh)", padding: "20px 22px",
+  textDecoration: "none", color: "inherit",
+};
+const kicker: React.CSSProperties = {
+  fontFamily: "var(--font-mono), monospace", fontSize: 12.5, fontWeight: 600,
+  letterSpacing: ".14em", color: "var(--faint)",
+};
+const featureTitle: React.CSSProperties = {
+  fontFamily: "var(--font-serif), serif", fontSize: 20, margin: "6px 0 8px", lineHeight: 1.5,
+};
+const featureBody: React.CSSProperties = {
+  margin: 0, fontSize: 14, color: "var(--muted)", lineHeight: 1.85,
+};
