@@ -47,6 +47,29 @@ for (const src of [dogFood, catFood, catWet, litterData, treatData]) {
 const brandKey = (brand: string) => brand.split(/[（(s]/)[0].trim();
 
 /**
+ * 這一家到目前為止的戰績：產出過幾款、失敗過幾款。
+ *
+ * 2026-09-20：健綠四款在三家一般賣家全滅，十二次白工。
+ * 那三家在按下去之前，畫面上只有價格，沒有任何「這家到底開不開得出來」的線索。
+ *
+ * 現在每一家旁邊直接寫戰績。便宜但 0 成 4 敗，跟貴但 11 成 1 敗，
+ * 是完全不同的兩件事，值不值得試由他判斷，不要我替他排序。
+ */
+function shopRecord(c: Candidate): { ok: number; fail: number } {
+  const pairs = new Set<string>();
+  for (const src of [dogFood, catFood, catWet, litterData, treatData]) {
+    for (const p of src.products as { id: string; price: { merchants: { label: string; dead?: boolean; soldOut?: boolean }[] } }[]) {
+      for (const m of p.price.merchants) {
+        if (m.dead || m.soldOut || m.label !== c.shop) continue;
+        pairs.add(p.id);
+      }
+    }
+  }
+  const fail = PAIRS.filter((x) => (c.shopId && x.shopId === c.shopId) || x.shop === c.shop).length;
+  return { ok: pairs.size, fail };
+}
+
+/**
  * 這個牌子在這一家「產得出來」過幾款。
  *
  * 2026-09-19：汪喵的太空小零嘴一路試到第九家，Tim 問是不是全滅。
@@ -149,6 +172,16 @@ export default function HuntPicks({ id }: { id: string }) {
                 這個牌子在這家產出過 {brandWorks(c, id)} 款
               </span>
             )}
+            {(() => {
+              const r = shopRecord(c);
+              if (r.ok + r.fail === 0) return null;
+              const good = r.ok > r.fail;
+              return (
+                <span style={{ ...chip, color: good ? "var(--muted)" : "var(--cut)", background: good ? "var(--sunken)" : "var(--cut-soft)" }}>
+                  這家 {r.ok} 成 {r.fail} 敗
+                </span>
+              );
+            })()}
             {brandFails(c, id) > 0 && (
               <span style={{ ...chip, color: "var(--warn)", background: "var(--warn-soft)" }}>
                 這個牌子在這家失敗過 {brandFails(c, id)} 款
