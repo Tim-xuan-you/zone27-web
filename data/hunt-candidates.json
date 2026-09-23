@@ -969,6 +969,602 @@
           "url": "https://shopee.tw/product/28405076/8870081343"
         }
       ]
+    },
+    {
+      "id": "dw-01",
+      "label": "怪獸部落 犬1肉主食罐 鴨肉（狗主食罐）",
+      "why": "狗主食罐裡唯一整張成分表沒有雞的，補了會被推薦最多次",
+      "note": "怪獸部落有「貓族」「犬族」兩條線，一定要選犬用的，名字裡有「犬」「狗罐」。這幾家都是一頁多口味，規格選「1種肉 鴨肉」。我們登記的是 82g，165g 的也可以，產了告訴我是哪個大小。目前只找到一般賣家，比價站上沒有商城賣犬用鴨肉。",
+      "candidates": [
+        {
+          "shop": "寵物批發哥",
+          "shopId": "6133707",
+          "channel": "seller",
+          "price": 45,
+          "unit": "犬罐一頁多口味，選「1種肉 鴨肉」82g",
+          "url": "https://shopee.tw/product/6133707/42318695717"
+        },
+        {
+          "shop": "★達達寵物生活館★",
+          "shopId": "6977800",
+          "channel": "seller",
+          "price": 45,
+          "unit": "犬用 1種肉、2種肉、82g／165g 一頁，選「1種肉 鴨肉 82克」",
+          "url": "https://shopee.tw/product/6977800/23101654217"
+        },
+        {
+          "shop": "汪喵食堂寵物百貨",
+          "shopId": "11610684",
+          "channel": "seller",
+          "price": 46,
+          "unit": "犬用 1種肉、2種肉、82g／165g 一頁，選「1種肉 鴨肉 82克」",
+          "url": "https://shopee.tw/product/11610684/21672717777"
+        },
+        {
+          "shop": "RBB 寵物生活館",
+          "shopId": "20186300",
+          "channel": "seller",
+          "price": 53,
+          "unit": "犬罐頭 1&2 種肉一頁，選「鴨肉」",
+          "url": "https://shopee.tw/product/20186300/18970210826"
+        },
+        {
+          "shop": "貓狗罐罐屋",
+          "shopId": "1149044588",
+          "channel": "seller",
+          "price": 70,
+          "unit": "165g 犬用清燉鴨肉，單一規格（大罐）",
+          "url": "https://shopee.tw/product/1149044588/29288223916"
+        },
+        {
+          "shop": "橘貓Miso寵物用品",
+          "shopId": "569241620",
+          "channel": "seller",
+          "price": 76,
+          "unit": "單罐 鴨肉 165g 狗罐頭（大罐）",
+          "url": "https://shopee.tw/product/569241620/12453968765"
+        }
+      ],
+      "checkedAt": "2026-09-24"
+    },
+    {
+      "id": "dw-02",
+      "label": "怪獸部落 犬2肉主食罐 羊雞肉（狗主食罐）",
+      "why": "",
+      "note": "只找到兩家，都是犬用一頁多口味，規格選「2種肉 羊肉雞肉 165克」。",
+      "candidates": [
+        {
+          "shop": "★達達寵物生活館★",
+          "shopId": "6977800",
+          "channel": "seller",
+          "price": 86,
+          "unit": "選「2種肉 羊肉雞肉 165克」",
+          "url": "https://shopee.tw/product/6977800/23101654217"
+        },
+        {
+          "shop": "汪喵食堂寵物百貨",
+          "shopId": "11610684",
+          "channel": "seller",
+          "price": 86,
+          "unit": "選「2種肉 羊肉雞肉 165克」",
+          "url": "https://shopee.tw/product/11610684/21672717777"
+        }
+      ],
+      "checkedAt": "2026-09-24"
+    },
+    {
+      "id": "dw-03",
+      "label": "怪獸部落 犬2肉主食罐 鱉肉鱉蛋（狗主食罐）",
+      "why": "名字寫鱉肉、第一項是雞，是狗罐藏雞頁的主角",
+      "note": "康是美那家是商城，但賣的是 82g×6 罐一組，產了告訴我，我照 82g×6 登記。",
+      "candidates": [
+        {
+          "shop": "★達達寵物生活館★",
+          "shopId": "6977800",
+          "channel": "seller",
+          "price": 86,
+          "unit": "選「2種肉 鱉肉鱉蛋 165克」",
+          "url": "https://shopee.tw/product/6977800/23101654217"
+        },
+        {
+          "shop": "汪喵食堂寵物百貨",
+          "shopId": "11610684",
+          "channel": "seller",
+          "price": 86,
+          "unit": "選「2種肉 鱉肉鱉蛋 165克」",
+          "url": "https://shopee.tw/product/11610684/21672717777"
+        },
+        {
+          "shop": "康是美Cosmed",
+          "shopId": "33206500",
+          "channel": "mall",
+          "price": 336,
+          "unit": "2種肉 鱉肉鱉蛋 82g×6 罐一組",
+          "url": "https://shopee.tw/product/33206500/24273187802"
+        }
+      ],
+      "checkedAt": "2026-09-24"
+    },
+    {
+      "id": "dw-04",
+      "label": "狗狗說 犬用主食罐 紫罐 鮮雞燉羊＋山藥（狗主食罐）",
+      "why": "",
+      "note": "注意：有些賣場的紫罐寫「純鮮燉羊×山藥」，可能是新配方，成分表跟我們讀的「鮮雞燉羊」不一定一樣。下面這幾家的規格都寫「(紫)鮮雞燉羊+山藥」。點進去如果只剩「純鮮燉羊」，先不要產，跟我說，我重讀成分表。",
+      "candidates": [
+        {
+          "shop": "貓貓龍寵物",
+          "shopId": "368996320",
+          "known": true,
+          "channel": "seller",
+          "price": 65,
+          "unit": "一頁多口味，選「(紫)鮮雞燉羊+山藥」165g",
+          "url": "https://shopee.tw/product/368996320/22516503898"
+        },
+        {
+          "shop": "旺狗寵物生活館",
+          "shopId": "815694114",
+          "channel": "seller",
+          "price": 65,
+          "unit": "一頁多口味，選「(紫)鮮雞燉羊+山藥」165g",
+          "url": "https://shopee.tw/product/815694114/22616494401"
+        },
+        {
+          "shop": "liondog1280-二館",
+          "shopId": "24832077",
+          "channel": "seller",
+          "price": 65,
+          "unit": "一頁多口味，選「(紫)鮮雞燉羊+山藥」165g",
+          "url": "https://shopee.tw/product/24832077/19970547751"
+        },
+        {
+          "shop": "二兩寵物生活館",
+          "shopId": "59897574",
+          "channel": "seller",
+          "price": 65,
+          "unit": "一頁多口味，選「(紫)鮮雞燉羊+山藥」165g",
+          "url": "https://shopee.tw/product/59897574/21170547585"
+        }
+      ],
+      "checkedAt": "2026-09-24"
+    },
+    {
+      "id": "dw-05",
+      "label": "狗狗說 犬用主食罐 藍罐 四種鮮魚＋鷹嘴豆（狗主食罐）",
+      "why": "名字寫四種鮮魚，成分表有雞肝雞油雞心",
+      "note": "前兩家的規格直接寫「四種鮮魚×鷹嘴豆」。貓貓龍那一頁是紫罐那一頁，同一頁應該也有藍罐，點進去確認。",
+      "candidates": [
+        {
+          "shop": "PAW&TAIL",
+          "shopId": "7370459",
+          "channel": "seller",
+          "price": 64,
+          "unit": "選「四種鮮魚×鷹嘴豆」165g",
+          "url": "https://shopee.tw/product/7370459/22533073553"
+        },
+        {
+          "shop": "毛起來寵",
+          "shopId": "1523312933",
+          "channel": "seller",
+          "price": 65,
+          "unit": "選「四種鮮魚×鷹嘴豆」165g",
+          "url": "https://shopee.tw/product/1523312933/29235618741"
+        },
+        {
+          "shop": "貓貓龍寵物",
+          "shopId": "368996320",
+          "known": true,
+          "channel": "seller",
+          "price": 65,
+          "unit": "跟紫罐同一頁，要確認有沒有藍罐「四種鮮魚」",
+          "url": "https://shopee.tw/product/368996320/22516503898"
+        }
+      ],
+      "checkedAt": "2026-09-24"
+    },
+    {
+      "id": "dw-06",
+      "label": "陪心寵糧 SUPER小白主食罐 雞魚＋野莓（狗主食罐）",
+      "why": "",
+      "note": "肉球雜貨舖那一頁只有這一個口味。幸運貓是商城，一頁多口味，選「雞魚 野莓」。",
+      "candidates": [
+        {
+          "shop": "肉球雜貨舖",
+          "shopId": "32014803",
+          "channel": "seller",
+          "price": 46,
+          "unit": "【雞魚X野莓】80g，單一口味",
+          "url": "https://shopee.tw/product/32014803/9746521225"
+        },
+        {
+          "shop": "【幸運貓】寵物用品商城",
+          "shopId": "98068625",
+          "channel": "mall",
+          "price": 55,
+          "unit": "狗罐 80g 一頁多口味，選「雞魚 野莓」",
+          "url": "https://shopee.tw/product/98068625/17771566659"
+        }
+      ],
+      "checkedAt": "2026-09-24"
+    },
+    {
+      "id": "dw-07",
+      "label": "陪心寵糧 SUPER小白主食罐 雞鵪鶉＋黑木耳（狗主食罐）",
+      "why": "",
+      "note": "貓狗派對商店賣的是 24 罐一箱，產了告訴我，我照 80g×24 登記。",
+      "candidates": [
+        {
+          "shop": "肉球雜貨舖",
+          "shopId": "32014803",
+          "channel": "seller",
+          "price": 46,
+          "unit": "【雞鵪鶉X黑木耳】80g，單一口味",
+          "url": "https://shopee.tw/product/32014803/8946522660"
+        },
+        {
+          "shop": "【幸運貓】寵物用品商城",
+          "shopId": "98068625",
+          "channel": "mall",
+          "price": 55,
+          "unit": "狗罐 80g 一頁多口味，選「雞鵪鶉 黑木耳」",
+          "url": "https://shopee.tw/product/98068625/17771566659"
+        },
+        {
+          "shop": "貓狗派對商店",
+          "shopId": "1655658654",
+          "channel": "seller",
+          "price": 1008,
+          "unit": "80g×24 罐一箱，選「雞鵪鶉黑木耳*24」",
+          "url": "https://shopee.tw/product/1655658654/48964536907"
+        }
+      ],
+      "checkedAt": "2026-09-24"
+    },
+    {
+      "id": "dw-08",
+      "label": "汪喵星球 犬用 Fantastic 95% 鮮肉主食罐 鹿肉（狗主食罐）",
+      "why": "名字寫鹿肉、第 2 到 5 項是雞",
+      "note": "毛孩寵物鋪跟汪喵星球官方商城你之前都產得出汪喵的連結，先試這兩家。",
+      "candidates": [
+        {
+          "shop": "熊熊寵物用品生活館",
+          "shopId": "3629645",
+          "channel": "seller",
+          "price": 40,
+          "unit": "80g／165g 一頁，選「鹿肉 80g」",
+          "url": "https://shopee.tw/product/3629645/1409206645"
+        },
+        {
+          "shop": "毛孩寵物鋪-汪喵食衣住行",
+          "shopId": "1447238100",
+          "known": true,
+          "channel": "seller",
+          "price": 45,
+          "unit": "汪喵犬用三個系列一頁，選「95%鮮肉罐 鹿肉 80G」",
+          "url": "https://shopee.tw/product/1447238100/29974136550"
+        },
+        {
+          "shop": "汪喵星球官方商城",
+          "shopId": "329265193",
+          "known": true,
+          "channel": "mall",
+          "price": 46,
+          "unit": "犬用 Fantastic 95% 單罐，選「放牧鹿肉 80g」",
+          "url": "https://shopee.tw/product/329265193/6063571507"
+        },
+        {
+          "shop": "圓肚肚~毛孩樂園",
+          "shopId": "26916285",
+          "channel": "seller",
+          "price": 48,
+          "unit": "單罐 80g，選「放牧鹿肉」",
+          "url": "https://shopee.tw/product/26916285/22914353554"
+        }
+      ],
+      "checkedAt": "2026-09-24"
+    },
+    {
+      "id": "dw-09",
+      "label": "汪喵星球 熟齡犬銀養主食罐 燉羊肉（狗主食罐）",
+      "why": "名字寫燉羊肉、第一項是雞",
+      "note": "官方商城只找到熟齡犬的六罐綜合組和整箱，沒有單罐頁；單罐的有毛孩寵物鋪（你產得出來）和 WANG 寵物精品館（商城）。",
+      "candidates": [
+        {
+          "shop": "貓狗罐罐屋",
+          "shopId": "1149044588",
+          "channel": "seller",
+          "price": 45,
+          "unit": "熟齡犬銀養 滋補燉羊肉 80g，單一規格",
+          "url": "https://shopee.tw/product/1149044588/57310311968"
+        },
+        {
+          "shop": "毛孩寵物鋪-汪喵食衣住行",
+          "shopId": "1447238100",
+          "known": true,
+          "channel": "seller",
+          "price": 45,
+          "unit": "汪喵犬用三個系列一頁，選「熟齡銀養罐 燉羊肉 80G」",
+          "url": "https://shopee.tw/product/1447238100/29974136550"
+        },
+        {
+          "shop": "WANG寵物精品館",
+          "shopId": "5087546",
+          "channel": "mall",
+          "price": 46,
+          "unit": "單罐，選「熟齡犬銀養罐 滋補羊肉 小罐80g」",
+          "url": "https://shopee.tw/product/5087546/21779854995"
+        }
+      ],
+      "checkedAt": "2026-09-24"
+    },
+    {
+      "id": "dw-10",
+      "label": "汪喵星球 幼母犬營養主食罐 雞肉（狗主食罐）",
+      "why": "幼犬新手頁會用到",
+      "note": "我們登記的是 165g。官方商城那一頁有 80g 跟 165g，選 165g；80g 的也可以，產了告訴我大小。",
+      "candidates": [
+        {
+          "shop": "毛孩寵物鋪-汪喵食衣住行",
+          "shopId": "1447238100",
+          "known": true,
+          "channel": "seller",
+          "price": 45,
+          "unit": "汪喵犬用三個系列一頁，選「幼母犬營養罐 雞肉」",
+          "url": "https://shopee.tw/product/1447238100/29974136550"
+        },
+        {
+          "shop": "汪喵星球官方商城",
+          "shopId": "329265193",
+          "known": true,
+          "channel": "mall",
+          "price": 48,
+          "unit": "幼犬營養罐 單罐 80g&165g，選「鮮嫩雞肉 165g」",
+          "url": "https://shopee.tw/product/329265193/7863578571"
+        },
+        {
+          "shop": "♡罐罐星球♡",
+          "shopId": "125429143",
+          "channel": "seller",
+          "price": 48,
+          "unit": "幼母犬營養罐，選「犬用鮮嫩雞肉」，看有沒有 165g",
+          "url": "https://shopee.tw/product/125429143/47256351982"
+        },
+        {
+          "shop": "沛茲寵物用品館",
+          "shopId": "98314277",
+          "channel": "seller",
+          "price": 48,
+          "unit": "幼母犬營養罐，選「犬用鮮嫩雞肉」，看有沒有 165g",
+          "url": "https://shopee.tw/product/98314277/52855964933"
+        }
+      ],
+      "checkedAt": "2026-09-24"
+    },
+    {
+      "id": "dw-11",
+      "label": "唯美味 WERUVA 狗狗主食罐 吮掌回味雞胸肉（狗主食罐）",
+      "why": "",
+      "note": "蝦皮直營跟悠懶貓你之前都產得出連結。唯美味也有貓罐，一定要選「狗狗主食罐 156g」。",
+      "candidates": [
+        {
+          "shop": "Pamago帕瑪毛孩購物",
+          "shopId": "1120336282",
+          "channel": "seller",
+          "price": 72,
+          "unit": "狗狗主食罐一頁，選「吮回味雞胸肉 156g」",
+          "url": "https://shopee.tw/product/1120336282/25936186616"
+        },
+        {
+          "shop": "寵物迷 Petmily",
+          "shopId": "9271076",
+          "channel": "mall",
+          "price": 79,
+          "unit": "狗狗主食罐 156g 一頁，選「吮掌回味雞胸肉」",
+          "url": "https://shopee.tw/product/9271076/28806003857"
+        },
+        {
+          "shop": "蝦皮直營 _ 生活超市",
+          "shopId": "50662979",
+          "known": true,
+          "channel": "mall",
+          "price": 89,
+          "unit": "犬主食罐 156g，選「回味雞胸肉」",
+          "url": "https://shopee.tw/product/50662979/43781101481"
+        },
+        {
+          "shop": "Lazy Cat 悠懶貓",
+          "shopId": "270668052",
+          "known": true,
+          "channel": "mall",
+          "price": 89,
+          "unit": "狗狗主食罐 156g 一頁，選「吮掌回味雞胸肉」",
+          "url": "https://shopee.tw/product/270668052/3880830800"
+        }
+      ],
+      "checkedAt": "2026-09-24"
+    },
+    {
+      "id": "dw-12",
+      "label": "西莎 自然素材餐盒 健康野菜放牧雞（狗主食罐）",
+      "why": "蛋白質最低、包裝自己標 5 公斤的狗一天 5⅓ 盒的那一款",
+      "note": "西莎的「蒸鮮包」「犬用餐盒」是別的產品，要選「自然素材」的「健康野菜放牧雞」。蝦皮直營跟 Cesar 西莎官方旗艦店你都產得出連結。旗艦店賣的是 28 盒一組。",
+      "candidates": [
+        {
+          "shop": "Hello~kiki",
+          "shopId": "2675393",
+          "channel": "seller",
+          "price": 30,
+          "unit": "自然素材 85g 一頁，選「健康野菜放牧雞」",
+          "url": "https://shopee.tw/product/2675393/17195358065"
+        },
+        {
+          "shop": "蝦皮直營 _ 生活超市",
+          "shopId": "50662979",
+          "known": true,
+          "channel": "mall",
+          "price": 34,
+          "unit": "自然素材 85g 口味任選，選「健康野菜放牧雞」",
+          "url": "https://shopee.tw/product/50662979/48950002539"
+        },
+        {
+          "shop": "Cesar西莎 官方旗艦店",
+          "shopId": "217228489",
+          "known": true,
+          "channel": "mall",
+          "price": 899,
+          "unit": "自然素材 85g×28 盒，選「健康野菜放牧雞」",
+          "url": "https://shopee.tw/product/217228489/23106039030"
+        }
+      ],
+      "checkedAt": "2026-09-24"
+    },
+    {
+      "id": "cw-01",
+      "label": "喵皇奴 貓咪經典主食罐 雞肉＋鵪鶉（貓主食罐）",
+      "why": "",
+      "note": "喵皇奴有很多系列（虻貓機能、毛研、鮮萃），要選「經典主食罐」的「雞肉＋鵪鶉」。官方商城那一頁只有這個口味。",
+      "candidates": [
+        {
+          "shop": "我的歐巴狗",
+          "shopId": "101184747",
+          "channel": "seller",
+          "price": 59,
+          "unit": "一頁多口味，選「雞肉＋鵪鶉 80g 罐頭」",
+          "url": "https://shopee.tw/product/101184747/48514648206"
+        },
+        {
+          "shop": "喵皇奴｜Meow Servant",
+          "shopId": "368486123",
+          "channel": "mall",
+          "price": 60,
+          "unit": "經典主食罐 80g 鵪鶉+雞肉，單一口味",
+          "url": "https://shopee.tw/product/368486123/13926737089"
+        }
+      ],
+      "checkedAt": "2026-09-24"
+    },
+    {
+      "id": "cw-03",
+      "label": "厚肉肉 營養主食橘罐 鮮燉雞拼火雞肉（貓主食罐）",
+      "why": "",
+      "note": "比價站上只找到這一家單罐。",
+      "candidates": [
+        {
+          "shop": "橘貓Miso寵物用品",
+          "shopId": "569241620",
+          "channel": "seller",
+          "price": 48,
+          "unit": "T.N.A. 厚肉肉營養主食罐 80g，選「鮮燉雞拼火雞肉」",
+          "url": "https://shopee.tw/product/569241620/10567518743"
+        }
+      ],
+      "checkedAt": "2026-09-24"
+    },
+    {
+      "id": "cw-05",
+      "label": "Wellness 全方位 鮮肉主食餐包 厚切肉塊 鮭魚＋鮪魚（貓主食罐）",
+      "why": "名字寫鮭魚鮪魚、第一項是雞湯，貓罐藏雞頁的第一筆",
+      "note": "Wellness 的餐包有「厚切肉塊」「彈牙肉條」「多汁碎肉」好幾種，要選「厚切肉塊 鮭魚＋鮪魚」，不是肉條的鮪魚＋鮮蝦。蝦皮直營你產得出來。",
+      "candidates": [
+        {
+          "shop": "蕎逸官方站",
+          "shopId": "757695607",
+          "channel": "seller",
+          "price": 53,
+          "unit": "選「[厚切肉塊]鮭魚+鮪魚」85g",
+          "url": "https://shopee.tw/product/757695607/23516144726"
+        },
+        {
+          "shop": "蕎逸寵物",
+          "shopId": "36595891",
+          "channel": "seller",
+          "price": 53,
+          "unit": "選「餐包-鮭魚+鮪魚(厚切肉塊)85g」",
+          "url": "https://shopee.tw/product/36595891/5735057308"
+        },
+        {
+          "shop": "哈罐罐",
+          "shopId": "16208712",
+          "channel": "seller",
+          "price": 55,
+          "unit": "選「肉塊鮭魚+鮪魚」85g",
+          "url": "https://shopee.tw/product/16208712/7577182335"
+        },
+        {
+          "shop": "蝦皮直營 _ 生活超市",
+          "shopId": "50662979",
+          "known": true,
+          "channel": "mall",
+          "price": 57,
+          "unit": "口味任選，選「厚切肉塊_鮭+鮪」85g",
+          "url": "https://shopee.tw/product/50662979/42080595017"
+        }
+      ],
+      "checkedAt": "2026-09-24"
+    },
+    {
+      "id": "cw-06",
+      "label": "Hill's 希爾思 成貓 完美體重 鮭魚 主食罐（貓主食罐）",
+      "why": "",
+      "note": "要選「成貓 完美體重 鮭魚燴蔬菜」82g，不是香烤雞肉那一款。",
+      "candidates": [
+        {
+          "shop": "町町寵物網",
+          "shopId": "287254495",
+          "channel": "seller",
+          "price": 56,
+          "unit": "成貓 完美體重 鮭魚燴蔬菜，單罐",
+          "url": "https://shopee.tw/product/287254495/51713319624"
+        },
+        {
+          "shop": "茶太郎寵物網",
+          "shopId": "1025157313",
+          "channel": "seller",
+          "price": 59,
+          "unit": "成貓 完美體重 鮭魚燴蔬菜 82g，單罐",
+          "url": "https://shopee.tw/product/1025157313/51517818856"
+        },
+        {
+          "shop": "酷狗寵物網",
+          "shopId": "4147419",
+          "channel": "mall",
+          "price": 59,
+          "unit": "成貓 完美體重 鮭魚燴蔬菜 82g，單罐",
+          "url": "https://shopee.tw/product/4147419/54967811085"
+        },
+        {
+          "shop": "寵物王國(104pet)",
+          "shopId": "2567191",
+          "channel": "seller",
+          "price": 68,
+          "unit": "成貓 完美體重 鮭魚燴蔬菜 82g，單罐",
+          "url": "https://shopee.tw/product/2567191/53962774603"
+        }
+      ],
+      "checkedAt": "2026-09-24"
+    },
+    {
+      "id": "cl-09",
+      "label": "Arm & Hammer 鐵鎚牌 礦砂（貓砂）",
+      "why": "",
+      "note": "2026-09-24 查過：這是好市多的貨，蝦皮上都是代購、分裝重新包的，沒有原廠或正常賣場。不值得花時間，礦砂已經有藍鑽。",
+      "candidates": [],
+      "checkedAt": "2026-09-24"
+    },
+    {
+      "id": "cl-10",
+      "label": "Scoop Away 礦砂（貓砂）",
+      "why": "",
+      "note": "2026-09-24 查過：好市多的貨，蝦皮上都是代購拆箱單包賣（4.76kg），一單限一包。可以產，但不優先，礦砂已經有藍鑽。",
+      "candidates": [],
+      "checkedAt": "2026-09-24"
+    },
+    {
+      "id": "cl-12",
+      "label": "Unicharm 嬌聯 消臭抗菌沸石砂（貓砂）",
+      "why": "",
+      "note": "2026-09-24 查過：比價站上蝦皮幾乎沒人賣，只有一筆 $1 的佔位商品。先放著當資料款。",
+      "candidates": [],
+      "checkedAt": "2026-09-24"
     }
   ]
 }

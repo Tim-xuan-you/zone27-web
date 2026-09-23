@@ -31,7 +31,8 @@ type Candidate = {
   price: number | null; unit: string; url: string; channel?: Channel;
 };
 type Failed = { shop: string; reason: string; at: string };
-type Target = { id: string; label: string; why: string; note?: string; candidates: Candidate[]; failed?: Failed[] };
+/* checkedAt：這一款是哪一天查的。沒寫就用整份檔案的日期（2026-09-24 起每一款各記各的） */
+type Target = { id: string; label: string; why: string; note?: string; checkedAt?: string; candidates: Candidate[]; failed?: Failed[] };
 
 const HUNT = new Map((huntData.targets as Target[]).map((t) => [t.id, t]));
 
@@ -140,7 +141,7 @@ export default function HuntPicks({ id }: { id: string }) {
   return (
     <div style={{ marginTop: 12, paddingTop: 10, borderTop: "1px dashed var(--line)" }}>
       <p style={{ margin: "0 0 2px", fontSize: 12.5, color: "var(--faint)", lineHeight: 1.8 }}>
-        我查到的（{huntData._meta.checkedAt}），便宜的排前面。產不出連結的話跟我說是哪一家，我只擋這一款的那一家
+        我查到的（{t.checkedAt ?? huntData._meta.checkedAt}），便宜的排前面。產不出連結的話跟我說是哪一家，我只擋這一款的那一家
       </p>
       {open.length > 0 && allMall && (
         <p style={{ margin: "6px 0 0", fontSize: 12.5, color: "var(--warn)", lineHeight: 1.8 }}>
