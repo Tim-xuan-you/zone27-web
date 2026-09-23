@@ -39,10 +39,13 @@ export default function SiteHeader({ current }: { current?: Current }) {
       <div style={bar}>
         <Link href="/" style={logo}>
           <span style={dot} />
-          {/* 一句話講完這個站在做什麼：朋友問「那是什麼網站」，講這句就好（2026-09-13） */}
+          {/* 一句話講完這個站在做什麼：朋友問「那是什麼網站」，講這句就好（2026-09-13）
+              2026-09-23 從「成分表才算數」改成「背面才算數」。這個站不會只做吃的：
+              貓砂看材質、零食看熱量，以後家電看規格表、保養品看全成分，全都印在包裝背面。
+              IG／Threads 的自介用同一句，站跟帳號講的是同一件事 */}
           <span style={{ display: "flex", flexDirection: "column", lineHeight: 1.25 }}>
             <span>ZONE 27</span>
-            <span style={tagline}>名字不算數，成分表才算數</span>
+            <span style={tagline}>名字不算數，背面才算數</span>
           </span>
         </Link>
         <nav aria-label="主選單" style={nav}>
