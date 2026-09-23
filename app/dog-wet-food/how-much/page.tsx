@@ -75,8 +75,8 @@ export default function Page() {
         狗一天要吃幾罐
       </h1>
       <p style={{ color: "var(--muted)", fontSize: 17, lineHeight: 1.9, margin: "0 0 18px", maxWidth: "42ch" }}>
-        貓一天兩三罐，很多人就以為狗也差不多。罐子沒有變大，狗變大了。
-        一隻 {KG} 公斤的狗一天要 <b style={{ color: "var(--ink)" }}>{DAY} 大卡</b>，是四公斤成貓的三倍。
+        一罐看起來像一餐，其實差很遠。
+        一隻 {KG} 公斤的狗一天要 <b style={{ color: "var(--ink)" }}>{DAY} 大卡</b>，罐頭大部分是水，一罐給不了多少熱量。
       </p>
 
       <div style={S.box}>
@@ -164,7 +164,6 @@ export default function Page() {
         <Link href="/dog-wet-food/hidden-chicken" style={S.relLink}>名字寫鹿肉的，第一二項是雞</Link>
         <Link href="/dog-wet-food/protein" style={S.relLink}>罐子上的蛋白質差三倍，大部分是水</Link>
         <Link href="/dog-food/how-much" style={S.relLink}>狗一天吃多少乾糧</Link>
-        <Link href="/cat-wet-food/how-much" style={S.relLink}>貓一天吃幾罐</Link>
       </div>
 
       <footer style={S.foot}>

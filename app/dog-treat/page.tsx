@@ -135,11 +135,8 @@ export default function Page() {
 
       {SHARED.length > 0 && (
         <div style={{ ...S.box, marginTop: 14 }}>
-          <p style={{ margin: 0, fontWeight: 700, fontSize: 17 }}>下面有 {SHARED.length} 款是犬貓通用的</p>
-          <p style={{ margin: "10px 0 0", fontSize: 14, color: "var(--muted)", lineHeight: 1.9 }}>
-            包裝上就寫犬貓適用，所以貓零食那邊也有同一款。
-            但答案不一樣：同一包凍乾，四公斤的貓一天只能給 6 公克，
-            {KG} 公斤的狗可以給三倍。這一頁的數字全部照狗算。
+          <p style={{ margin: 0, fontSize: 14, color: "var(--muted)", lineHeight: 1.9 }}>
+            下面有 {SHARED.length} 款凍乾，包裝寫犬貓適用。這一頁的數字全部照狗算。
           </p>
         </div>
       )}

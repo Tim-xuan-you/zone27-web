@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import CategoryCards from "@/components/CategoryCards";
 import Decider from "@/components/Decider";
+import ReadList from "@/components/ReadList";
 import SiteHeader from "@/components/SiteHeader";
 import { S } from "@/components/styles";
 import { categoriesOf } from "@/lib/categories";
@@ -39,29 +40,17 @@ export default function Page() {
         第一次養貓？先買哪幾樣，直接給你答案 →
       </Link>
 
-      <Decider defaultSpecies="cat" />
+      <Decider lockSpecies defaultSpecies="cat" />
 
       <p style={{ ...S.lbl, marginTop: 56 }}>貓的類目</p>
       <CategoryCards cats={categoriesOf("cat")} />
 
       <p style={S.lbl}>我們自己讀成分表</p>
-      <div style={grid}>
-        <Link href="/cat-food/hidden-chicken" style={feature}>
-          <span style={kicker}>乾糧</span>
-          <h2 style={featureTitle}>寫著鮭魚、鴨肉、火雞，成分表裡有雞</h2>
-          <p style={featureBody}>有一款叫鴨肉的，雞加起來比鴨還多。</p>
-        </Link>
-        <Link href="/cat-wet-food/hidden-chicken" style={feature}>
-          <span style={kicker}>主食罐</span>
-          <h2 style={featureTitle}>寫著鮭魚、鴨肉的罐頭，很多是雞湯煮的</h2>
-          <p style={featureBody}>名字沒寫雞的 8 款罐頭，5 款前三項就有雞。</p>
-        </Link>
-        <Link href="/cat-wet-food/complementary" style={feature}>
-          <span style={kicker}>主食罐</span>
-          <h2 style={featureTitle}>副食罐可以當主食嗎</h2>
-          <p style={featureBody}>偶爾一餐沒關係，天天當正餐不行。怎麼分辨寫在這裡。</p>
-        </Link>
-      </div>
+      <ReadList items={[
+        { href: "/cat-food/hidden-chicken", kicker: "乾糧", title: "寫著鮭魚、鴨肉、火雞，成分表裡有雞", line: "有一款叫鴨肉的，雞加起來比鴨還多" },
+        { href: "/cat-wet-food/hidden-chicken", kicker: "主食罐", title: "寫著鮭魚、鴨肉的罐頭，很多是雞湯煮的", line: "名字沒寫雞的 8 款，5 款前三項就有雞" },
+        { href: "/cat-wet-food/complementary", kicker: "主食罐", title: "副食罐可以當主食嗎", line: "偶爾一餐沒關係，天天當正餐不行" },
+      ]} />
 
       <p style={S.lbl}>先算一下</p>
       <div style={S.relRow}>
@@ -72,22 +61,3 @@ export default function Page() {
     </main>
   );
 }
-
-const grid: React.CSSProperties = {
-  display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 14,
-};
-const feature: React.CSSProperties = {
-  display: "block", background: "var(--surface)", border: "1px solid var(--line)",
-  borderRadius: 14, boxShadow: "var(--sh)", padding: "20px 22px",
-  textDecoration: "none", color: "inherit",
-};
-const kicker: React.CSSProperties = {
-  fontFamily: "var(--font-mono), monospace", fontSize: 12.5, fontWeight: 600,
-  letterSpacing: ".14em", color: "var(--faint)",
-};
-const featureTitle: React.CSSProperties = {
-  fontFamily: "var(--font-serif), serif", fontSize: 20, margin: "6px 0 8px", lineHeight: 1.5,
-};
-const featureBody: React.CSSProperties = {
-  margin: 0, fontSize: 14, color: "var(--muted)", lineHeight: 1.85,
-};

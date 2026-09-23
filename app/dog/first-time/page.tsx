@@ -188,7 +188,7 @@ export default function Page() {
         )}
         {CANS.length > 0 && (
           <li>
-            <b>以為一罐罐頭就是一餐。</b>狗罐頭跟貓罐頭差不多大，但狗吃得多很多。
+            <b>以為一罐罐頭就是一餐。</b>一罐看起來像一餐，其實差很遠。
             一隻 12 公斤的成犬全吃罐頭，一天要 {Math.min(...CANS).toFixed(1)} 到 {Math.max(...CANS).toFixed(1)} 罐。
             <Link href="/dog-wet-food/how-much" style={link}>一天要幾罐 →</Link>
           </li>

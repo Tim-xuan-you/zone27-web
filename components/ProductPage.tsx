@@ -121,7 +121,7 @@ export default function ProductPage({ id, species, form = "dry" }: { id: string;
                 {p.chicken.found.map((f, i) => <li key={i}>{f}</li>)}
               </ul>
             )}
-            <Link href="/check" style={{ display: "inline-block", marginTop: 8, fontSize: 14, fontWeight: 600, color: "var(--accent)" }}>
+            <Link href={`/check?sp=${p.species}`} style={{ display: "inline-block", marginTop: 8, fontSize: 14, fontWeight: 600, color: "var(--accent)" }}>
               查其他那包有沒有雞 →
             </Link>
           </div>
@@ -169,7 +169,7 @@ export default function ProductPage({ id, species, form = "dry" }: { id: string;
       </div>
 
       <div style={{ marginTop: 32 }}>
-        <CheckCard />
+        <CheckCard species={p.species} />
       </div>
 
       {others.length > 0 && (

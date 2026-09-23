@@ -3,15 +3,15 @@ import CheapestCard from "@/components/CheapestCard";
 import Link from "next/link";
 import Decider from "@/components/Decider";
 import SiteHeader from "@/components/SiteHeader";
-import Stamp from "@/components/Stamp";
+import ProductIndex from "@/components/ProductIndex";
 import CheckCard from "@/components/CheckCard";
+import ReadList from "@/components/ReadList";
 import { S } from "@/components/styles";
-import { catalogOf, isLive, liveCount, shopLink } from "@/lib/catalog";
-import { productHref, stageOf } from "@/lib/labels";
+import { catalogOf, isLive, liveCount } from "@/lib/catalog";
 import { MIN_LIVE } from "@/lib/categories";
-import { cansOf, canWord, mer, recommendable } from "@/lib/engine";
+import { cansOf, mer } from "@/lib/engine";
 import { NAME_HAS_CHICKEN } from "@/lib/chicken";
-import type { Product, ProteinSource } from "@/lib/types";
+import type { Product } from "@/lib/types";
 
 /**
  * 狗主食罐類目頁。
@@ -45,12 +45,6 @@ export const metadata: Metadata = {
   openGraph: { title: TITLE, type: "website" },
 };
 
-const MEAT: Record<ProteinSource, string> = {
-  chicken: "雞", turkey: "火雞", duck: "鴨", salmon: "鮭魚",
-  whitefish: "魚", fish: "魚", beef: "牛", lamb: "羊", pork: "豬", venison: "鹿", insect: "昆蟲",
-  poultry: "禽肉（沒寫哪種）", animal: "沒寫來源的肉或蛋白",
-};
-
 /** 一罐幾大卡。規格或熱量缺一個就是 null */
 function kcalPerCan(p: Product): number | null {
   const c = cansOf(p.price.unit);
@@ -62,12 +56,10 @@ export default function Page() {
   const live = isLive("dog", "wet");
   const ready = liveCount("dog", "wet");
   const candidates = all.filter((p) => !p.referenceOnly);
-  const refs = all.filter((p) => p.referenceOnly);
 
   // 名字沒寫雞的有幾款、其中幾款成分表裡有雞。這是這一頁的招牌數字，一定要用算的
   const noChickenName = all.filter((p) => !NAME_HAS_CHICKEN.test(p.name));
   const hidden = noChickenName.filter((p) => p.chicken?.status === "hidden");
-  const clean = all.filter((p) => p.chicken?.status === "clean");
 
   // 蛋白質（照罐子上的標示）差多少
   const proteins = all.map((p) => p.spec.asFed?.protein ?? p.spec.protein);
@@ -92,11 +84,11 @@ export default function Page() {
         {TITLE}
       </h1>
       <p style={{ color: "var(--muted)", fontSize: 17, lineHeight: 1.9, margin: "0 0 28px", maxWidth: "42ch" }}>
-        狗罐頭沒有貓罐頭那麼多副食罐，我們讀的這 {all.length} 款全部自稱主食。
+        我們讀的這 {all.length} 款狗罐頭，全部自稱主食罐。
         坑在別的地方：名字寫鹿肉、鱉肉的，成分表前兩項常常是雞。
       </p>
 
-      <Decider defaultSpecies="dog" defaultForm="wet" soonHint={false} />
+      <Decider lockSpecies defaultSpecies="dog" defaultForm="wet" soonHint={false} />
 
       {!live && (
         <div style={soonBox}>
@@ -111,46 +103,17 @@ export default function Page() {
       )}
 
       <p style={S.lbl}>先看這個</p>
-      <CheckCard style={{ marginBottom: 14 }} />
-      <div style={{ display: "grid", gap: 14 }}>
-        <Link href="/dog-wet-food/hidden-chicken" style={feature}>
-          <h2 style={featureTitle}>名字寫鹿肉、鱉肉的狗罐頭，第一二項是雞</h2>
-          <p style={featureBody}>
-            名字沒寫雞的 {noChickenName.length} 款裡，{hidden.length} 款成分表裡有雞。
-            真的整張成分表都沒有雞的，只有 {clean.length} 款。逐筆核對，附查核日期。
-          </p>
-        </Link>
-        <Link href="/dog-wet-food/how-much" style={feature}>
-          <h2 style={featureTitle}>狗一天要吃幾罐、一個月多少錢</h2>
-          <p style={featureBody}>
-            一隻 12 公斤結紮的成犬全吃罐頭，一天要 {lo} 到 {hi} 罐。
-            有一款品牌自己標了餵食量，5 公斤的狗一天 5 又 1/3 盒。
-          </p>
-        </Link>
-        <Link href="/dog-wet-food/protein" style={feature}>
-          <h2 style={featureTitle}>罐子上的蛋白質差三倍，大部分是水</h2>
-          <p style={featureBody}>
-            罐子上的蛋白質從 {pLo}% 到 {pHi}%。扣掉水分之後差距小很多，排名還整個翻過來。
-          </p>
-        </Link>
-      </div>
+      <CheckCard species="dog" style={{ marginBottom: 14 }} />
+      <ReadList items={[
+        { href: "/dog-wet-food/hidden-chicken", title: "名字寫鹿肉、鱉肉的狗罐頭，第一二項是雞", line: <>名字沒寫雞的 {noChickenName.length} 款，{hidden.length} 款成分表裡有雞</> },
+        { href: "/dog-wet-food/how-much", title: "狗一天要吃幾罐、一個月多少錢", line: <>12 公斤結紮的成犬全吃罐頭，一天 {lo} 到 {hi} 罐</> },
+        { href: "/dog-wet-food/protein", title: "罐子上的蛋白質差三倍，大部分是水", line: <>罐子上寫 {pLo}% 到 {pHi}%，扣掉水分排名整個翻過來</> },
+      ]} />
 
       {live && <CheapestCard species="dog" form="wet" />}
 
-      <p style={S.lbl}>我們讀過的 {candidates.length} 款狗主食罐</p>
-      <p style={{ margin: "0 0 16px", fontSize: 14, color: "var(--muted)", lineHeight: 1.9 }}>
-        數字照罐子背面的標示，你翻過來對得上。罐頭的水分從七成多到將近九成，
-        包裝上的蛋白質看起來都很低，扣掉水分之後才比得起來，所以兩個數字都列。
-        碳水只有品牌自己公布、或是蛋白、脂肪、纖維、灰分、水分都寫齊的，我們才算。
-      </p>
-      {candidates.map((p) => <Row key={p.id} p={p} live={live} />)}
+      <ProductIndex products={all} />
 
-      {refs.length > 0 && (
-        <>
-          <p style={S.lbl}>對照款</p>
-          {refs.map((p) => <Row key={p.id} p={p} live={live} />)}
-        </>
-      )}
 
       <footer style={{
         marginTop: 72, paddingTop: 28, borderTop: "1px solid var(--line)",
@@ -165,97 +128,8 @@ export default function Page() {
   );
 }
 
-function Row({ p, live }: { p: Product; live: boolean }) {
-  const meats = [...new Set(p.spec.proteinSources.map((k) => MEAT[k] ?? k))].join("、");
-  const ok = recommendable(p);
-  const kc = kcalPerCan(p);
-  const af = p.spec.asFed;
-  const carb =
-    p.spec.carbBasis === "published" ? `碳水 ${af?.carb}%（品牌公布），扣掉水分是 ${p.spec.carb}%`
-    : p.spec.carbBasis === "computed" ? `碳水扣掉水分約 ${p.spec.carb}%（用減法算的）`
-    : "碳水：包裝沒寫灰分，算不出來";
-
-  return (
-    <article style={row}>
-      <span style={S.brand}>{p.brand}</span>
-      <h3 style={{ fontSize: 17, lineHeight: 1.5, margin: "2px 0 10px" }}>
-        <Link href={productHref(p)} style={{ color: "inherit", textDecoration: "none" }}>{p.name}</Link>
-      </h3>
-
-      <div style={tags}>
-        <Stamp p={p} />
-        <span style={tag}>{stageOf(p)}</span>
-        <span style={tag}>{p.spec.grainFree ? "無穀" : "含穀"}</span>
-        {p.spec.singleSource && <span style={{ ...tag, ...tagGood }}>單一蛋白</span>}
-        {kc !== null
-          ? <span style={tag}>一{canWord(p)} {kc} 大卡</span>
-          : <span style={{ ...tag, ...tagWarn }}>沒公布熱量</span>}
-        <span style={tag}>{p.price.unit}</span>
-      </div>
-
-      <p style={{ margin: "0 0 4px", fontSize: 14, lineHeight: 1.85 }}>
-        <span className="mono">蛋白質 {af?.protein ?? p.spec.protein}%　水分 {p.spec.moisture}%</span>
-        <span style={{ color: "var(--muted)" }}>　扣掉水分，蛋白質是 {p.spec.protein}%</span>
-      </p>
-      <p style={{ margin: "0 0 8px", fontSize: 14, lineHeight: 1.85, color: "var(--muted)" }}>
-        {carb}　肉：{meats}
-      </p>
-      <p style={{ margin: "0 0 10px", fontSize: 14, lineHeight: 1.85 }}>
-        <b style={{ color: "var(--cut)" }}>什麼時候不要買：</b>{p.dealbreaker}
-      </p>
-      {p.knownIssues && (
-        <p style={{ margin: "0 0 10px", fontSize: 14, color: "var(--muted)", lineHeight: 1.85 }}>
-          {p.knownIssues}
-        </p>
-      )}
-
-      <div style={foot}>
-        <span style={{ color: ok ? "var(--keep)" : "var(--faint)" }}>
-          {ok
-            ? live ? "可以買了，用上面的裁決器問" : "連結補好了，開張後就會推薦"
-            : p.referenceOnly ? "對照款，不推薦當正餐" : "購買連結補齊中"}
-        </span>
-        {shopLink(p.id) && (
-          <a href={shopLink(p.id)!} rel="nofollow sponsored" style={{ color: "var(--accent)", fontWeight: 600 }}>
-            去賣場看 →
-          </a>
-        )}
-      </div>
-    </article>
-  );
-}
 
 const soonBox: React.CSSProperties = {
   marginTop: 28, background: "var(--sunken)", border: "1px solid var(--line)",
   borderRadius: 14, padding: "18px 22px",
-};
-const feature: React.CSSProperties = {
-  display: "block", background: "var(--surface)", border: "1px solid var(--line)",
-  borderRadius: 14, boxShadow: "var(--sh)", padding: "20px 22px",
-  textDecoration: "none", color: "inherit",
-};
-const featureTitle: React.CSSProperties = {
-  fontFamily: "var(--font-serif), serif", fontSize: 20, margin: "0 0 8px", lineHeight: 1.5,
-};
-const featureBody: React.CSSProperties = {
-  margin: 0, fontSize: 15.5, color: "var(--muted)", lineHeight: 1.85,
-};
-const row: React.CSSProperties = {
-  background: "var(--surface)", border: "1px solid var(--line)",
-  borderRadius: 14, padding: "18px 20px 14px", marginBottom: 12,
-};
-const tags: React.CSSProperties = { display: "flex", flexWrap: "wrap", gap: 6, marginBottom: 10 };
-const tag: React.CSSProperties = {
-  fontSize: 12.5, padding: "3px 10px", borderRadius: 999,
-  background: "var(--sunken)", border: "1px solid var(--line)", color: "var(--muted)",
-};
-const tagGood: React.CSSProperties = {
-  background: "var(--keep-soft)", borderColor: "var(--keep)", color: "var(--keep)",
-};
-const tagWarn: React.CSSProperties = {
-  background: "var(--warn-soft)", borderColor: "var(--warn)", color: "var(--ink)",
-};
-const foot: React.CSSProperties = {
-  display: "flex", flexWrap: "wrap", justifyContent: "space-between", gap: "4px 12px",
-  borderTop: "1px solid var(--line)", paddingTop: 10, fontSize: 12.5,
 };

@@ -200,7 +200,6 @@ export default function Page() {
         <Link href="/dog-wet-food/how-much" style={S.relLink}>狗一天要吃幾罐</Link>
         <Link href="/dog-food/elimination-diet" style={S.relLink}>排除飲食怎麼做</Link>
         <Link href="/dog-food/hidden-chicken" style={S.relLink}>乾糧版：主打低敏，成分表裡還是有雞</Link>
-        <Link href="/cat-wet-food/hidden-chicken" style={S.relLink}>貓罐頭版：寫著鮭魚、鴨肉的，很多是雞湯煮的</Link>
       </div>
 
       <footer style={{

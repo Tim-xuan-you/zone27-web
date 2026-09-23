@@ -213,9 +213,16 @@ export default function Decider({
   defaultSpecies = "dog",
   defaultForm = "dry",
   soonHint = true,
+  lockSpecies = false,
 }: {
   defaultSpecies?: Species;
   defaultForm?: Form;
+  /**
+   * 狗、貓各自的頁面上，不出現「狗／貓」切換鈕（2026-09-24）。
+   * 讀者點了「狗」就是養狗的，再擺一顆「貓」只是多一個不相干的選擇。
+   * 真的兩種都養的人，最上面的導覽列一樣切得過去。首頁不鎖。
+   */
+  lockSpecies?: boolean;
   /** 頁面自己已經講了「還在上架」的話就關掉，同一句話不要講兩次 */
   soonHint?: boolean;
 }) {
@@ -387,9 +394,28 @@ export default function Decider({
     if (verdict && text.trim()) run(text, species, f, true, "chip");
   }
 
+  const answerButton = (a: Answer, i: number) => (
+    <button key={a.phrase} type="button" onClick={() => run(a.phrase, species, form, true, "answer")}
+      style={{ ...answerRow, borderTop: i ? "1px solid var(--line)" : 0 }}>
+      <span style={{ flex: 1, minWidth: 0 }}>
+        <span style={{ display: "block", fontSize: 14, fontWeight: 700, color: "var(--accent)" }}>{a.label}</span>
+        <span style={{ display: "block", fontSize: 15.5, fontWeight: 700, lineHeight: 1.55, marginTop: 2 }}>
+          <span style={{ fontSize: 12.5, fontWeight: 500, color: "var(--muted)" }}>{a.p.brand} </span>
+          {a.p.name}
+        </span>
+      </span>
+      {a.per && (
+        <span className="mono" style={{ fontSize: 14, fontWeight: 700, color: "var(--keep)", whiteSpace: "nowrap" }}>
+          ${a.per}/kg
+        </span>
+      )}
+    </button>
+  );
+
   return (
     <>
       <div style={{ display: "flex", flexWrap: "wrap", gap: 8, alignItems: "center", marginBottom: 10 }}>
+        {!lockSpecies && (
         <div role="radiogroup" aria-label="狗還是貓" style={seg}>
           {(["dog", "cat"] as const).map((sp) => {
             const on = species === sp;
@@ -410,6 +436,7 @@ export default function Decider({
             );
           })}
         </div>
+        )}
 
         {forms.length > 1 && (
           <div role="radiogroup" aria-label="乾糧還是罐頭" style={{ ...seg, padding: 3 }}>
@@ -483,24 +510,14 @@ export default function Decider({
       {!verdict && mentions.length === 0 && !empty && answersFor(cat.slug).length > 0 && (
         <div style={{ marginTop: 28 }}>
           <p style={S.lbl}>常見的情況，答案先算好了</p>
-          <div style={{ display: "grid", gap: 10 }}>
-            {answersFor(cat.slug).map((a) => (
-              <button key={a.phrase} type="button" onClick={() => run(a.phrase, species, form, true, "answer")} style={answerRow}>
-                <span style={{ flex: 1, minWidth: 0 }}>
-                  <span style={{ display: "block", fontSize: 14, fontWeight: 700, color: "var(--accent)" }}>{a.label}</span>
-                  <span style={{ display: "block", fontSize: 15.5, fontWeight: 700, lineHeight: 1.55, marginTop: 2 }}>
-                    <span style={{ fontSize: 12.5, fontWeight: 500, color: "var(--muted)" }}>{a.p.brand} </span>
-                    {a.p.name}
-                  </span>
-                </span>
-                {a.per && (
-                  <span className="mono" style={{ fontSize: 14, fontWeight: 700, color: "var(--keep)", whiteSpace: "nowrap" }}>
-                    ${a.per}/kg
-                  </span>
-                )}
-              </button>
-            ))}
-          </div>
+          {/* 2026-09-24 頁面太長：先列 3 個，其他收起來。上面的按鈕已經是最快的路，這裡是給還沒想好的人看例子 */}
+          <div style={answerWrap}>{answersFor(cat.slug).slice(0, 3).map(answerButton)}</div>
+          {answersFor(cat.slug).length > 3 && (
+            <details style={{ marginTop: 10 }}>
+              <summary style={answerMore}>還有 {answersFor(cat.slug).length - 3} 種情況</summary>
+              <div style={{ ...answerWrap, marginTop: 10 }}>{answersFor(cat.slug).slice(3).map(answerButton)}</div>
+            </details>
+          )}
         </div>
       )}
 
@@ -644,10 +661,16 @@ const pickOn: React.CSSProperties = {
   background: "var(--accent-soft)", borderColor: "var(--accent)", color: "var(--accent)", fontWeight: 700,
 };
 
+const answerWrap: React.CSSProperties = {
+  background: "var(--surface)", border: "1px solid var(--line)", borderRadius: 14, overflow: "hidden",
+};
 const answerRow: React.CSSProperties = {
   display: "flex", alignItems: "center", gap: 12, width: "100%", textAlign: "left",
-  background: "var(--surface)", border: "1px solid var(--line)", borderRadius: 14,
+  background: "none", border: 0,
   padding: "12px 16px", font: "inherit", color: "inherit", cursor: "pointer",
+};
+const answerMore: React.CSSProperties = {
+  cursor: "pointer", fontSize: 14, fontWeight: 700, color: "var(--muted)", padding: "4px 2px",
 };
 
 const mentionRow: React.CSSProperties = {

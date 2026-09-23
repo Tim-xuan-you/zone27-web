@@ -218,7 +218,6 @@ export default function Page() {
       <div style={S.relRow}>
         <Link href="/cat-food" style={S.relLink}>我們讀過的貓飼料</Link>
         <Link href="/cat-food/how-much" style={S.relLink}>貓一天吃多少</Link>
-        <Link href="/dog-food/hidden-chicken" style={S.relLink}>狗飼料版：寫著低敏，成分表裡有雞</Link>
         <Link href="/how-we-choose" style={S.relLink}>我們怎麼挑</Link>
       </div>
 

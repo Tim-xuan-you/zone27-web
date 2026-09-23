@@ -179,7 +179,6 @@ export default function Page() {
       <div style={S.relRow}>
         <Link href="/dog-wet-food/hidden-chicken" style={S.relLink}>名字寫鹿肉的，第一二項是雞</Link>
         <Link href="/dog-wet-food/how-much" style={S.relLink}>狗一天要吃幾罐</Link>
-        <Link href="/cat-wet-food/complementary" style={S.relLink}>貓罐頭：副食罐可以當主食嗎</Link>
       </div>
 
       <footer style={S.foot}>

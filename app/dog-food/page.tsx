@@ -5,6 +5,7 @@ import { S } from "@/components/styles";
 import { ALLERGENS, BREEDS } from "@/lib/slugs";
 import SiteHeader from "@/components/SiteHeader";
 import CheckCard from "@/components/CheckCard";
+import ReadList from "@/components/ReadList";
 import Decider from "@/components/Decider";
 import ProductIndex from "@/components/ProductIndex";
 import { catalogOf } from "@/lib/catalog";
@@ -31,78 +32,17 @@ export default function Index() {
         不知道怎麼講的話，下面也可以直接挑品種或過敏原。
       </p>
 
-      <Decider defaultSpecies="dog" />
+      <Decider lockSpecies defaultSpecies="dog" />
 
       <p style={S.lbl}>先看這個</p>
-      <CheckCard style={{ marginBottom: 14 }} />
-      <Link href="/dog-food/hidden-chicken" style={{
-        display: "block", background: "var(--surface)", border: "1px solid var(--line)",
-        borderRadius: 14, boxShadow: "var(--sh)", padding: "20px 22px",
-        textDecoration: "none", color: "inherit",
-      }}>
-        <h2 style={{ fontFamily: "var(--font-serif), serif", fontSize: 20, margin: "0 0 8px", lineHeight: 1.5 }}>
-          寫著低敏，成分表裡有雞
-        </h2>
-        <p style={{ margin: 0, fontSize: 15.5, color: "var(--muted)", lineHeight: 1.85 }}>
-          換了三種「低敏」飼料狗還是抓，很多時候是那三包裡面都有雞。逐筆核對，附查核日期。
-        </p>
-      </Link>
-
-      <Link href="/dog-food/how-much" style={{
-        display: "block", marginTop: 14,
-        background: "var(--surface)", border: "1px solid var(--line)",
-        borderRadius: 14, boxShadow: "var(--sh)", padding: "20px 22px",
-        textDecoration: "none", color: "inherit",
-      }}>
-        <h2 style={{ fontFamily: "var(--font-serif), serif", fontSize: 20, margin: "0 0 8px", lineHeight: 1.5 }}>
-          狗一天要吃多少飼料
-        </h2>
-        <p style={{ margin: 0, fontSize: 15.5, color: "var(--muted)", lineHeight: 1.85 }}>
-          用獸醫的能量公式算一天幾克、這包吃幾天、一個月多少錢。算式全部寫出來，你可以自己驗。
-        </p>
-      </Link>
-
-      <Link href="/dog-food/cans" style={{
-        display: "block", marginTop: 14,
-        background: "var(--surface)", border: "1px solid var(--line)",
-        borderRadius: 14, boxShadow: "var(--sh)", padding: "20px 22px",
-        textDecoration: "none", color: "inherit",
-      }}>
-        <h2 style={{ fontFamily: "var(--font-serif), serif", fontSize: 20, margin: "0 0 8px", lineHeight: 1.5 }}>
-          狗吃主食罐，一天要幾罐
-        </h2>
-        <p style={{ margin: 0, fontSize: 15.5, color: "var(--muted)", lineHeight: 1.85 }}>
-          貓一天兩三罐，狗的熱量是三倍。罐子上寫「主食罐」不代表能當正餐，先看有沒有「完全」兩個字。
-        </p>
-      </Link>
-
-      <Link href="/dog-food/grain-free" style={{
-        display: "block", marginTop: 14,
-        background: "var(--surface)", border: "1px solid var(--line)",
-        borderRadius: 14, boxShadow: "var(--sh)", padding: "20px 22px",
-        textDecoration: "none", color: "inherit",
-      }}>
-        <h2 style={{ fontFamily: "var(--font-serif), serif", fontSize: 20, margin: "0 0 8px", lineHeight: 1.5 }}>
-          無穀飼料到底有沒有比較好
-        </h2>
-        <p style={{ margin: 0, fontSize: 15.5, color: "var(--muted)", lineHeight: 1.85 }}>
-          「無穀」不等於無雞、不等於低碳水、也不等於豆類少。用我們自己十款的成分表對照。
-        </p>
-      </Link>
-
-      <Link href="/dog-food/elimination-diet" style={{
-        display: "block", marginTop: 14,
-        background: "var(--surface)", border: "1px solid var(--line)",
-        borderRadius: 14, boxShadow: "var(--sh)", padding: "20px 22px",
-        textDecoration: "none", color: "inherit",
-      }}>
-        <h2 style={{ fontFamily: "var(--font-serif), serif", fontSize: 20, margin: "0 0 8px", lineHeight: 1.5 }}>
-          排除飲食法：怎麼真的找出牠對什麼過敏
-        </h2>
-        <p style={{ margin: 0, fontSize: 15.5, color: "var(--muted)", lineHeight: 1.85 }}>
-          一直抓癢的狗裡只有約 18% 是食物造成的。要確認得跑滿八週，而且最後要回測。
-        </p>
-      </Link>
+      <CheckCard species="dog" style={{ marginBottom: 14 }} />
+      <ReadList items={[
+        { href: "/dog-food/hidden-chicken", title: "寫著低敏，成分表裡有雞", line: "換了三種低敏飼料還在抓，可能三包都有雞" },
+        { href: "/dog-food/how-much", title: "狗一天要吃多少飼料", line: "一天幾克、這包吃幾天、一個月多少錢" },
+        { href: "/dog-food/cans", title: "狗吃主食罐，一天要幾罐", line: "一罐看起來像一餐，其實要好幾罐" },
+        { href: "/dog-food/grain-free", title: "無穀飼料到底有沒有比較好", line: "無穀不等於沒有雞，也不等於碳水比較低" },
+        { href: "/dog-food/elimination-diet", title: "排除飲食法：找出牠對什麼過敏", line: "要跑滿八週，最後還要回測" },
+      ]} />
 
       <CheapestCard species="dog" form="dry" />
 
@@ -117,14 +57,15 @@ export default function Index() {
         ))}
       </div>
 
-      <p style={S.lbl}>按品種</p>
-      <div style={S.relRow}>
-        {BREEDS.map((b) => (
-          <Link key={b.slug} href={`/dog-food/${b.slug}`} style={S.relLink}>
-            {b.zh}
-          </Link>
-        ))}
-      </div>
+      {/* 品種有二十幾個，攤開佔掉快一個畫面。收起來，摘要先列前三個讓人知道裡面有什麼（2026-09-24） */}
+      <details style={{ marginTop: 28 }}>
+        <summary style={breedSummary}>按品種找：{BREEDS.slice(0, 3).map((b) => b.zh).join("、")}等 {BREEDS.length} 種</summary>
+        <div style={{ ...S.relRow, marginTop: 12 }}>
+          {BREEDS.map((b) => (
+            <Link key={b.slug} href={`/dog-food/${b.slug}`} style={S.relLink}>{b.zh}</Link>
+          ))}
+        </div>
+      </details>
 
       <footer style={{
         marginTop: 72, paddingTop: 28, borderTop: "1px solid var(--line)",
@@ -137,3 +78,7 @@ export default function Index() {
     </main>
   );
 }
+
+const breedSummary: React.CSSProperties = {
+  cursor: "pointer", fontSize: 15.5, fontWeight: 700, color: "var(--muted)",
+};

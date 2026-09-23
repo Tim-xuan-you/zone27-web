@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import CategoryCards from "@/components/CategoryCards";
 import Decider from "@/components/Decider";
+import ReadList from "@/components/ReadList";
 import SiteHeader from "@/components/SiteHeader";
 import { S } from "@/components/styles";
 import { categoriesOf } from "@/lib/categories";
@@ -48,34 +49,18 @@ export default function Page() {
         第一次養狗？先買哪幾樣，直接給你答案 →
       </Link>
 
-      <Decider defaultSpecies="dog" />
+      <Decider lockSpecies defaultSpecies="dog" />
 
       <p style={{ ...S.lbl, marginTop: 56 }}>狗的類目</p>
       <CategoryCards cats={categoriesOf("dog")} />
 
       <p style={S.lbl}>我們自己讀成分表</p>
-      <div style={grid}>
-        <Link href="/dog-food/hidden-chicken" style={feature}>
-          <span style={kicker}>飼料</span>
-          <h2 style={featureTitle}>主打低敏、單一口味，成分表裡還是有雞</h2>
-          <p style={featureBody}>4 款逐筆核對，包含我們自己在推的那一款。</p>
-        </Link>
-        <Link href="/dog-wet-food/hidden-chicken" style={feature}>
-          <span style={kicker}>主食罐</span>
-          <h2 style={featureTitle}>名字寫鹿肉、鱉肉的狗罐頭，第一二項是雞</h2>
-          <p style={featureBody}>名字沒寫雞的 {CANS_UNNAMED.length} 款，{CANS_HIDDEN.length} 款成分表裡有雞。</p>
-        </Link>
-        <Link href="/dog-food/elimination-diet" style={feature}>
-          <span style={kicker}>飼料</span>
-          <h2 style={featureTitle}>一直抓、一直舔腳，要怎麼排查</h2>
-          <p style={featureBody}>換糧之前先搞清楚要排除什麼，不然換十款也是白換。</p>
-        </Link>
-        <Link href="/dog-treat" style={feature}>
-          <span style={kicker}>零食</span>
-          <h2 style={featureTitle}>一支潔牙骨佔掉一天多少額度</h2>
-          <p style={featureBody}>品牌照體重標的那一支，有 4 款一支就超過一整天。</p>
-        </Link>
-      </div>
+      <ReadList items={[
+        { href: "/dog-food/hidden-chicken", kicker: "飼料", title: "主打低敏、單一口味，成分表裡還是有雞", line: "逐筆核對，包含我們自己在推的那一款" },
+        { href: "/dog-wet-food/hidden-chicken", kicker: "主食罐", title: "名字寫鹿肉、鱉肉的狗罐頭，第一二項是雞", line: <>名字沒寫雞的 {CANS_UNNAMED.length} 款，{CANS_HIDDEN.length} 款成分表裡有雞</> },
+        { href: "/dog-food/elimination-diet", kicker: "飼料", title: "一直抓、一直舔腳，要怎麼排查", line: "換糧之前先搞清楚要排除什麼" },
+        { href: "/dog-treat", kicker: "零食", title: "一支潔牙骨佔掉一天多少額度", line: "有 4 款一支就超過一整天" },
+      ]} />
 
       <p style={S.lbl}>先算一下</p>
       <div style={S.relRow}>
@@ -87,22 +72,3 @@ export default function Page() {
     </main>
   );
 }
-
-const grid: React.CSSProperties = {
-  display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 14,
-};
-const feature: React.CSSProperties = {
-  display: "block", background: "var(--surface)", border: "1px solid var(--line)",
-  borderRadius: 14, boxShadow: "var(--sh)", padding: "20px 22px",
-  textDecoration: "none", color: "inherit",
-};
-const kicker: React.CSSProperties = {
-  fontFamily: "var(--font-mono), monospace", fontSize: 12.5, fontWeight: 600,
-  letterSpacing: ".14em", color: "var(--faint)",
-};
-const featureTitle: React.CSSProperties = {
-  fontFamily: "var(--font-serif), serif", fontSize: 20, margin: "6px 0 8px", lineHeight: 1.5,
-};
-const featureBody: React.CSSProperties = {
-  margin: 0, fontSize: 14, color: "var(--muted)", lineHeight: 1.85,
-};

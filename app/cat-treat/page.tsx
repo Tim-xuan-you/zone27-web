@@ -141,7 +141,7 @@ export default function Page() {
             這個牌子有把雞寫出來。但一排掃過去，人只會看到前面那兩個字。
             買之前把括號看完。
           </p>
-          <Link href="/check" style={{ display: "inline-block", marginTop: 10, fontSize: 14, color: "var(--accent)", fontWeight: 600 }}>
+          <Link href="/check?sp=cat" style={{ display: "inline-block", marginTop: 10, fontSize: 14, color: "var(--accent)", fontWeight: 600 }}>
             查飼料有沒有藏雞 →
           </Link>
         </div>
@@ -154,7 +154,7 @@ export default function Page() {
             {hidden.map((p) => `${p.brand} ${p.name}`).join("、")}。
             對雞過敏的貓，零食也要看成分，不是只有飼料要看。
           </p>
-          <Link href="/check" style={{ display: "inline-block", marginTop: 10, fontSize: 14, color: "var(--accent)", fontWeight: 600 }}>
+          <Link href="/check?sp=cat" style={{ display: "inline-block", marginTop: 10, fontSize: 14, color: "var(--accent)", fontWeight: 600 }}>
             查飼料有沒有藏雞 →
           </Link>
         </div>

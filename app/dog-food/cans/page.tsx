@@ -70,9 +70,9 @@ export default function Page() {
         狗吃主食罐<br />一天要幾罐
       </h1>
       <p style={{ color: "var(--muted)", fontSize: 17, lineHeight: 1.9, margin: "0 0 18px", maxWidth: "42ch" }}>
-        貓罐頭一天兩三罐，很多人就直覺以為狗也差不多。
+        一罐看起來像一餐，其實差很遠。
         一隻 {KG} 公斤的狗一天要 <b style={{ color: "var(--ink)" }}>{DAY} 大卡</b>，
-        是四公斤成貓的三倍。我們讀過的狗罐頭，水分從 {WATER_LO}% 到 {WATER_HI}%，所以要的罐數會比你想的多很多。
+        我們讀過的狗罐頭，水分從 {WATER_LO}% 到 {WATER_HI}%，所以要的罐數會比你想的多很多。
       </p>
 
       <div style={S.box}>

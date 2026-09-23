@@ -25,6 +25,12 @@ export default function Checker({ items }: { items: CheckItem[] }) {
   // 對雞過敏的人最想知道的是「那到底哪些能吃」：一鍵只看沒有雞的
   const [only, setOnly] = useState<"all" | "hidden" | "clean">("all");
 
+  // 從狗的頁面點進來是 /check?sp=dog：養狗的人不用先看到一堆貓的（2026-09-24）
+  useEffect(() => {
+    const want = new URLSearchParams(window.location.search).get("sp");
+    if (want === "dog" || want === "cat") setSp(want);
+  }, []);
+
   // 朋友傳來 /check#cf-07：打開那一款、捲過去
   useEffect(() => {
     const id = decodeURIComponent(window.location.hash.slice(1));

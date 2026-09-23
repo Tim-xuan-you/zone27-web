@@ -146,7 +146,7 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
           <p style={{ margin: "8px 0 0", fontSize: 14, lineHeight: 1.9 }}>
             對雞過敏的貓，零食也要看成分。
           </p>
-          <Link href="/check" style={{ display: "inline-block", marginTop: 8, fontSize: 14, color: "var(--accent)", fontWeight: 600 }}>
+          <Link href="/check?sp=cat" style={{ display: "inline-block", marginTop: 8, fontSize: 14, color: "var(--accent)", fontWeight: 600 }}>
             查飼料有沒有藏雞 →
           </Link>
         </div>

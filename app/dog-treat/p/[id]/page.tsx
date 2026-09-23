@@ -93,8 +93,7 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
             </p>
             {p.alsoFor === "dog" && (
               <p style={{ margin: "10px 0 0", fontSize: 14, color: "var(--muted)", lineHeight: 1.9, paddingTop: 10, borderTop: "1px solid var(--line)" }}>
-                這一款包裝上寫犬貓適用。貓那邊的額度小很多，
-                同一包東西四公斤的貓一天只能給 6 公克。
+                這一款包裝上寫犬貓適用，上面的數字照狗算。
               </p>
             )}
           </>

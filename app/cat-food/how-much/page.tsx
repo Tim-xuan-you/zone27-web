@@ -83,7 +83,7 @@ export default function Page() {
 
       <Calc species="cat" />
 
-      <p style={S.lbl}>貓跟狗差在哪</p>
+      <p style={S.lbl}>網路上的算式，很多是照狗算的</p>
       <div style={box}>
         <p style={{ margin: 0, fontSize: 15.5, lineHeight: 1.95 }}>
           算式一樣，<b>係數差很多</b>。已結紮的成犬乘 1.6，已結紮的成貓只乘 1.2。
@@ -177,7 +177,6 @@ export default function Page() {
       <div style={S.relRow}>
         <Link href="/cat-food/hidden-chicken" style={S.relLink}>寫著鮭魚、鴨肉、火雞，成分表裡有雞</Link>
         <Link href="/cat-food" style={S.relLink}>我們讀過的貓飼料</Link>
-        <Link href="/dog-food/how-much" style={S.relLink}>狗一天吃多少</Link>
       </div>
 
       <footer style={{
