@@ -160,7 +160,9 @@ const nextConfig: NextConfig = {
               "style-src 'self' 'unsafe-inline'",
               "img-src 'self' data: https://midfield.mlbstatic.com https://img.mlbstatic.com https://stats.cpbl.com.tw",
               "font-src 'self' data:",
-              "connect-src 'self' https://*.supabase.co",
+              // 2026-09-24：裁決器把大家問了什麼送進 Google 試算表（lib/asks.ts）。
+              // Apps Script 收完會轉址到 googleusercontent，兩個都要放行，不然瀏覽器會把送出擋掉。
+              "connect-src 'self' https://*.supabase.co https://script.google.com https://script.googleusercontent.com",
               "frame-ancestors 'none'",
               "base-uri 'self'",
               "form-action 'self'",

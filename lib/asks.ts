@@ -17,7 +17,7 @@
  * 讀資料要另一把鑰匙（ASKS_KEY），那把只在 Tim 的電腦上。
  */
 
-export const ASKS_URL = "";
+export const ASKS_URL = "https://script.google.com/macros/s/AKfycbzQmfdnFOlS7UbgWZkbvz0xCVexs4O6GvMKtK5WtrEFd0Jd51vxPwb8b16-YaMvrlfrYw/exec";
 
 export interface Ask {
   page: string;
