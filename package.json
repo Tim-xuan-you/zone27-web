@@ -27,7 +27,8 @@
     "treat:import": "tsx scripts/import-treat.ts",
     "ui:check": "tsx scripts/ui-check.ts",
     "spec:check": "tsx scripts/spec-check.ts",
-    "route:check": "tsx scripts/route-check.ts"
+    "route:check": "tsx scripts/route-check.ts",
+    "asks:report": "tsx scripts/asks-report.ts"
   },
   "dependencies": {
     "@supabase/ssr": "^0.10.3",

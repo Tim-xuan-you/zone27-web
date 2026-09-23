@@ -8,8 +8,9 @@ import { mentionedProducts, mentionedOthers, type OtherHit } from "@/lib/mention
 import { productHref } from "@/lib/labels";
 import { catalog, catalogOf, constraintsFor, isLive } from "@/lib/catalog";
 import { CATEGORIES, categoriesOf, categoryOf, type CategorySlug, FoodSlug } from "@/lib/categories";
-import type { Form, Product, Species, Verdict } from "@/lib/types";
+import type { Form, Product, Situation, Species, Verdict } from "@/lib/types";
 import { CONTACT } from "@/lib/contact";
+import { ASKS_URL, SESSION, logAsk, type Ask } from "@/lib/asks";
 import Result from "./Result";
 import Stamp from "./Stamp";
 import { BagIcon, CanIcon, CatIcon, DogIcon } from "./Icons";
@@ -173,6 +174,24 @@ function answersFor(slug: CategorySlug): Answer[] {
   return out;
 }
 
+/**
+ * 沒講年紀的時候，年紀會不會改變答案。
+ * 三個年紀各跑一次引擎，推薦的那一款不一樣才回 true。引擎在瀏覽器裡跑，多算三次不花錢。
+ */
+function ageChangesAnswer(src: string, s: Situation, form: Form, v: Verdict): boolean {
+  if (!v.pick || v.stop) return false;
+  const said = s.ageYears !== undefined || AGE[s.species].some((a) => src.includes(a.phrase));
+  if (said) return false;
+  const picks = new Set(
+    AGE[s.species].map((a) => {
+      const s2 = parse(`${src}，${a.phrase}`, s.species, form).situation;
+      s2.constraints = constraintsFor(s2);
+      return adjudicate(catalog, s2).pick?.id ?? "";
+    }),
+  );
+  return picks.size > 1;
+}
+
 /** 把一段字從句子裡拿掉，順便收拾多出來的逗號 */
 function without(text: string, phrase: string): string {
   return text.split(phrase).join("").replace(/[，,、\s]*[，,、][，,、\s]*/g, "，").replace(/^[，,、\s]+|[，,、\s]+$/g, "");
@@ -228,6 +247,15 @@ export default function Decider({
    * 點了一定讀得懂。所以按鈕變成門面，打字框收到一行字後面，要打品名或講更多的人再打開。
    */
   const [typing, setTyping] = useState(false);
+  /*
+   * 反問，但只問會改變答案的那一題（2026-09-24）。
+   *
+   * Tim：「他問完第一個問題，我們有沒有需要反問他？然後給他更精確的產品答案？」
+   * 要，但每多問一題就會少一批人看到答案。所以只在「問了答案會換」的時候才問：
+   * 讀者沒點年紀，就在背後把幼年、成年、老年各算一次，三個答案一樣就不問，不一樣才問。
+   * 年紀以外的（過敏、胖瘦）沒點就是沒有，不算缺資料，不問。
+   */
+  const [askAge, setAskAge] = useState(false);
 
   /*
    * 朋友傳來的連結：/?q=柴犬 5 歲，對雞肉過敏&sp=dog&fm=dry
@@ -243,7 +271,7 @@ export default function Decider({
     setSpecies(sp);
     // 朋友傳來的是一整句話，按鈕不一定亮得起來，把那句話攤開給他看
     setTyping(true);
-    run(t, sp, fm);
+    run(t, sp, fm, true, "link");
     // 只在第一次載入時跑一次
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -259,11 +287,11 @@ export default function Decider({
     if (pk.group === "age") for (const a of AGE[species]) t = without(t, a.phrase);
     t = on ? without(t, pk.phrase) : [t.trim(), pk.phrase].filter(Boolean).join("，");
     setText(t);
-    if (t.trim()) run(t, species, form, false);
-    else { setVerdict(null); setChips([]); setMentions([]); setEmpty(false); }
+    if (t.trim()) run(t, species, form, false, "chip");
+    else { setVerdict(null); setChips([]); setMentions([]); setEmpty(false); setAskAge(false); }
   }
 
-  function run(input: string, sp: Species = species, fm: Form = form, scroll = true) {
+  function run(input: string, sp: Species = species, fm: Form = form, scroll = true, how: Ask["src"] = "type") {
     // 這個動物沒有這種形態（狗現在沒有罐頭），就回到乾糧
     const f = foodCategoriesOf(sp).some((c) => c.form === fm) ? fm : "dry";
     const slug = categoryOf(sp, f).slug;
@@ -279,6 +307,8 @@ export default function Decider({
       // 打的是貓砂或零食的名字，那不是「讀不出條件」，是我們有這一款
       setEmpty(found.length === 0 && other.length === 0);
       setVerdict(null);
+      setAskAge(false);
+      record(src, sp, f, how, found.length === 0 && other.length === 0, "", found.map((p) => p.id).concat(other.map((o) => o.id)));
       setChips([]);
       setMentions(found.map((p) => ({ p, text: "再點一下上面的年紀和狀況，我們會告訴你這款適不適合。", tone: "faint" })));
       if ((found.length || other.length) && scroll) scrollTo(found.length ? "mentions" : "others");
@@ -299,9 +329,24 @@ export default function Decider({
     setStage(stageForAge(s.ageYears, s.species));
     const v = adjudicate(catalog, s);
     setVerdict(v);
+    setAskAge(ageChangesAnswer(src, s, sf, v));
+    record(src, s.species, sf, how, false, v.pick?.id ?? (v.stop ? "停" : ""), found.map((p) => p.id));
     setAsked({ text: src, sp: s.species, fm: sf });
     setMentions(found.map((p) => judge(p, v, s.species, s.form ?? "dry")));
     if (scroll) scrollTo(found.length ? "mentions" : other.length ? "others" : "verdict");
+  }
+
+  /** 記一筆給試算表：點了哪些按鈕、自己打了什麼，分開記 */
+  function record(src: string, sp: Species, fm: Form, how: Ask["src"], isEmpty: boolean, top: string, ids: string[]) {
+    if (!ASKS_URL) return;
+    const slug = foodSlug(categoryOf(sp, fm).slug);
+    const buttons = [...AGE[sp], ...PICKS[slug]].filter((pk) => src.includes(pk.phrase));
+    const typed = buttons.reduce((t, pk) => without(t, pk.phrase), src);
+    logAsk({
+      page: window.location.pathname, sp, fm,
+      picks: buttons.map((pk) => pk.label).join("、"),
+      text: how === "type" && EXAMPLES[slug].includes(src) ? "（沒打字，跑了範例句）" : typed.slice(0, 200), empty: isEmpty, top, mentions: ids.join("、"), src: how, sid: SESSION,
+    });
   }
 
   function scrollTo(id: string) {
@@ -334,12 +379,12 @@ export default function Decider({
     const f = foodCategoriesOf(sp).some((c) => c.form === form) ? form : "dry";
     setForm(f);
     // 已經有結果的話，用同一句話換物種再跑一次，不用重打
-    if (verdict && text.trim()) run(text, sp, f);
+    if (verdict && text.trim()) run(text, sp, f, true, "chip");
   }
 
   function pickForm(f: Form) {
     setForm(f);
-    if (verdict && text.trim()) run(text, species, f);
+    if (verdict && text.trim()) run(text, species, f, true, "chip");
   }
 
   return (
@@ -424,6 +469,11 @@ export default function Decider({
           想用打的，或直接打品名查 →
         </button>
       )}
+      {ASKS_URL && (
+        <p style={{ ...S.hint, color: "var(--faint)", fontSize: 12.5 }}>
+          你點的、打的會匿名記下來，用來把答案改得更準，不記任何個人資料。
+        </p>
+      )}
       {soonHint && !status.live && (
         <p style={{ ...S.hint, color: "var(--faint)" }}>
           {cat.zh}還在上架：{status.read} 款的成分表讀完了，購買連結還在補。
@@ -435,7 +485,7 @@ export default function Decider({
           <p style={S.lbl}>常見的情況，答案先算好了</p>
           <div style={{ display: "grid", gap: 10 }}>
             {answersFor(cat.slug).map((a) => (
-              <button key={a.phrase} type="button" onClick={() => run(a.phrase)} style={answerRow}>
+              <button key={a.phrase} type="button" onClick={() => run(a.phrase, species, form, true, "answer")} style={answerRow}>
                 <span style={{ flex: 1, minWidth: 0 }}>
                   <span style={{ display: "block", fontSize: 14, fontWeight: 700, color: "var(--accent)" }}>{a.label}</span>
                   <span style={{ display: "block", fontSize: 15.5, fontWeight: 700, lineHeight: 1.55, marginTop: 2 }}>
@@ -525,6 +575,17 @@ export default function Decider({
 
       {verdict && (
         <div id="verdict" style={S.stage}>
+          {askAge && (
+            <div style={askBox}>
+              <p style={{ margin: 0, fontWeight: 700, fontSize: 17 }}>
+                {species === "cat" ? "貓" : "狗"}多大了？答案會不一樣
+              </p>
+              <p style={{ margin: "4px 0 12px", fontSize: 14, color: "var(--muted)", lineHeight: 1.7 }}>
+                年紀不同，我們推的那一包會換。點一下就好，下面的答案會跟著變。
+              </p>
+              <div style={S.chipRow}>{AGE[species].map(pickButton)}</div>
+            </div>
+          )}
           <Result
             verdict={verdict}
             chips={chips}
@@ -569,6 +630,10 @@ const otherRow: React.CSSProperties = {
 };
 
 const pickWrap: React.CSSProperties = { marginTop: 14 };
+/* 反問框：放在答案最上面，跟答案同一個框裡，看得出是在問這個答案 */
+const askBox: React.CSSProperties = {
+  background: "var(--accent-soft)", borderRadius: 14, padding: "16px 18px", marginBottom: 20,
+};
 /* 打字框收起來時那一行：看得出可以點，但不搶按鈕的位置 */
 const typeLink: React.CSSProperties = {
   display: "inline-block", marginTop: 14, padding: "6px 0", background: "none", border: 0,
