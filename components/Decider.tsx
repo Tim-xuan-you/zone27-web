@@ -265,7 +265,8 @@ export default function Decider({
   const [askAge, setAskAge] = useState(false);
 
   /*
-   * 朋友傳來的連結：/?q=柴犬 5 歲，對雞肉過敏&sp=dog&fm=dry
+   * 朋友傳來的連結：/dog-food?q=柴犬 5 歲，對雞肉過敏&sp=dog&fm=dry
+   * （2026-09-24 以前是 /?q=…，首頁拿掉裁決器之後，middleware 會把舊連結轉到對的類目頁）
    * 打開就直接跑同一句話，看到的是同一個答案。
    * 只有讀者自己按「傳給朋友」的時候，句子才會進網址；打字的時候不會。
    */
@@ -414,7 +415,7 @@ export default function Decider({
 
   return (
     <>
-      <div style={{ display: "flex", flexWrap: "wrap", gap: 8, alignItems: "center", marginBottom: 10 }}>
+      <div id="decider" style={{ display: "flex", flexWrap: "wrap", gap: 8, alignItems: "center", marginBottom: 10, scrollMarginTop: 16 }}>
         {!lockSpecies && (
         <div role="radiogroup" aria-label="狗還是貓" style={seg}>
           {(["dog", "cat"] as const).map((sp) => {
@@ -611,8 +612,9 @@ export default function Decider({
             stage={stage}
             chipsLabel="我們聽到的是"
             fromDecider
+            backHref="#decider"
             share={asked && verdict.pick ? {
-              path: `/?q=${encodeURIComponent(asked.text)}&sp=${asked.sp}&fm=${asked.fm}`,
+              path: `/${categoryOf(asked.sp, asked.fm).slug}?q=${encodeURIComponent(asked.text)}&sp=${asked.sp}&fm=${asked.fm}`,
               text: `我查了「${asked.text}」，ZONE 27 的答案是 ${verdict.pick.brand} ${verdict.pick.name}。為什麼是它、哪一家最便宜都寫了：`,
             } : undefined}
           />

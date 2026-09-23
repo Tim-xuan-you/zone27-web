@@ -23,8 +23,25 @@ const GONE = new Set([
   "u", "verify", "vs",
 ]);
 
+/**
+ * 舊的分享連結：/?q=…&sp=dog&fm=dry。
+ *
+ * 2026-09-24 首頁改成先選狗或貓，裁決器搬到各類目頁。以前讀者按「傳給朋友」產生的連結
+ * 都是 /?q=…，朋友點開會看到一個沒有答案的首頁。這裡把它轉到對的類目頁，句子原封不動帶過去。
+ */
+const FOOD_SLUG = { dog: { dry: "dog-food", wet: "dog-wet-food" }, cat: { dry: "cat-food", wet: "cat-wet-food" } } as const;
+
 export function middleware(req: NextRequest) {
-  const first = req.nextUrl.pathname.split("/")[1];
+  const url = req.nextUrl;
+  if (url.pathname === "/" && url.searchParams.get("q")) {
+    const sp = url.searchParams.get("sp") === "cat" ? "cat" : "dog";
+    const fm = url.searchParams.get("fm") === "wet" ? "wet" : "dry";
+    const to = url.clone();
+    to.pathname = "/" + FOOD_SLUG[sp][fm];
+    return NextResponse.redirect(to, 308);
+  }
+
+  const first = url.pathname.split("/")[1];
 
   if (GONE.has(first)) {
     return new NextResponse(

@@ -154,7 +154,7 @@ export default function Page() {
             我們會用剛剛同一個算式，告訴你哪個規格吃得完。
           </p>
         </div>
-        <Link style={S.btn} href="/">去裁決器</Link>
+        <Link style={S.btn} href="/dog-food">去裁決器</Link>
       </div>
 
       <p style={S.lbl}>相關的</p>

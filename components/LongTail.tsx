@@ -161,6 +161,7 @@ export default function LongTail({ sp, slug }: { sp: Species; slug: string[] }) 
         dogKg={p.kind === "allergen" ? undefined : p.breed.kg}
         // 會搜「避雞肉」的人就是在做排除飲食法 —— 那是皮膚的時程，不是腸胃的
         symptoms={p.kind === "breed" ? undefined : ["皮膚搔癢"]}
+        backHref={base}
         share={verdict.pick ? { path: `${base}/${slug.join("/")}`, text: `${title}：ZONE 27 的答案是 ${verdict.pick.brand} ${verdict.pick.name}。` } : undefined}
       />
 
@@ -236,7 +237,7 @@ export default function LongTail({ sp, slug }: { sp: Species; slug: string[] }) 
       }}>
         <p style={{ margin: 0 }}>
           這一頁預設{ADULT[sp]}。你的{ANIMAL[sp]}如果是{sp === "cat" ? "幼貓" : "幼犬"}、高齡或有其他狀況，
-          <Link href="/" style={{ color: "var(--muted)" }}>回裁決器</Link>點一下比較快。
+          <Link href={base} style={{ color: "var(--muted)" }}>回裁決器</Link>點一下比較快。
         </p>
         <p style={{ margin: "8px 0 0" }}>
           價格是人工查的，點進賣場以當下的標價為準。

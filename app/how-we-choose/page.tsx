@@ -46,7 +46,7 @@ export default function Page() {
 
       {/* 利益關係的那一句在每頁最底下（components/PageReport.tsx），這裡不再講第二次 */}
       <p style={{ marginTop: 36 }}>
-        <Link href="/" style={{ color: "var(--accent)", fontWeight: 700 }}>← 回裁決器</Link>
+        <Link href="/" style={{ color: "var(--accent)", fontWeight: 700 }}>← 回首頁</Link>
       </p>
     </main>
   );

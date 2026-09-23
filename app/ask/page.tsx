@@ -85,7 +85,7 @@ export default function Page() {
       </div>
 
       <p style={{ marginTop: 36 }}>
-        <Link href="/" style={{ color: "var(--accent)", fontWeight: 700 }}>← 回裁決器</Link>
+        <Link href="/" style={{ color: "var(--accent)", fontWeight: 700 }}>← 回首頁</Link>
       </p>
     </main>
   );

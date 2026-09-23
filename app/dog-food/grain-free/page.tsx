@@ -226,7 +226,7 @@ export default function Page() {
             我們不會因為一款是無穀就加分，那個欄位在排序裡不佔任何權重。
           </p>
         </div>
-        <Link style={S.btn} href="/">去裁決器</Link>
+        <Link style={S.btn} href="/dog-food">去裁決器</Link>
       </div>
 
       <p style={S.lbl}>相關的</p>

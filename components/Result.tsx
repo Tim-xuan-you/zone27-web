@@ -46,6 +46,7 @@ export default function Result({
   chipsLabel = "條件",
   fromDecider = false,
   share,
+  backHref = "/",
 }: {
   verdict: Verdict;
   chips: { label: string; kind: "info" | "avoid" }[];
@@ -57,8 +58,10 @@ export default function Result({
   chipsLabel?: string;
   /** 裁決器來的：體重是讀者自己講的，上面也有輸入框可以補講。長尾頁的體重是品種的一般值 */
   fromDecider?: boolean;
-  /** 分享出去的網址和一句話。裁決器給「/?q=…」，長尾頁給自己的網址 */
+  /** 分享出去的網址和一句話。裁決器給「/dog-food?q=…」這種，長尾頁給自己的網址 */
   share?: { path: string; text: string };
+  /** 「回裁決器」要去哪。首頁已經沒有裁決器了（2026-09-24），裁決器裡是捲回上面，長尾頁是回那個類目 */
+  backHref?: string;
 }) {
   const shared = sharedListings(verdict.survivors);
   const others = verdict.survivors.filter((p) => p.id !== verdict.pick?.id);
@@ -115,12 +118,18 @@ export default function Result({
             </>
           )}
 
-          {/* ── 換了之後會怎樣。給了答案不給後續，等於把人送到結帳頁就不管 ── */}
+          {/* ── 換了之後會怎樣。給了答案不給後續，等於把人送到結帳頁就不管 ──
+              2026-09-24 收成一行：攤開要 1,200px，而且是買完才用得到的。還在決定買哪包的人，這一段只是擋在「為什麼是這款」前面 */}
           {verdict.pick && (
-            <>
-              <p style={S.lbl}>換了之後會怎樣</p>
-              <Trial p={verdict.pick} dogKg={dogKg} symptoms={symptoms} stage={stage} />
-            </>
+            <details style={S.more}>
+              <summary style={S.moreSummary}>
+                <span>買了之後怎麼換：慢慢換、多久看得出來、這包吃幾天</span>
+                <span style={S.moreHint}>展開</span>
+              </summary>
+              <div style={S.moreBody}>
+                <Trial p={verdict.pick} dogKg={dogKg} symptoms={symptoms} stage={stage} />
+              </div>
+            </details>
           )}
 
           {/* ── 備選收成一行 ── */}
@@ -159,7 +168,7 @@ export default function Result({
             出貨和庫存要問賣場，牠不舒服要看醫生，<Link href="/ask" style={{ color: "var(--accent)" }}>哪個問題該問誰</Link>寫在這裡。
           </p>
         </div>
-        <Link style={S.btn} href="/">回裁決器</Link>
+        <Link style={S.btn} href={backHref}>回裁決器</Link>
       </div>
       </>)}
     </>

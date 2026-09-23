@@ -121,9 +121,15 @@ export default function ProductPage({ id, species, form = "dry" }: { id: string;
                 {p.chicken.found.map((f, i) => <li key={i}>{f}</li>)}
               </ul>
             )}
-            <Link href={`/check?sp=${p.species}`} style={{ display: "inline-block", marginTop: 8, fontSize: 14, fontWeight: 600, color: "var(--accent)" }}>
-              查其他那包有沒有雞 →
-            </Link>
+            {/* 名字跟成分表對不上的，說明直接放在這個框裡。
+                以前另外排一個紅框、再加一張查成分卡，同一件事在一頁講三次（2026-09-24） */}
+            {mismatch && (
+              <p style={{ margin: "8px 0 0", fontSize: 14, color: "var(--muted)", lineHeight: 1.8 }}>{mismatch.verdict}</p>
+            )}
+            <span style={{ display: "flex", flexWrap: "wrap", gap: "4px 16px", marginTop: 8, fontSize: 14, fontWeight: 600 }}>
+              {mismatch && <Link href={mismatch.path} style={{ color: "var(--accent)" }}>看逐筆核對 →</Link>}
+              <Link href={`/check?sp=${p.species}`} style={{ color: "var(--accent)" }}>查你家那包有沒有雞 →</Link>
+            </span>
           </div>
         </div>
       )}
@@ -149,7 +155,7 @@ export default function ProductPage({ id, species, form = "dry" }: { id: string;
         </div>
       )}
 
-      {mismatch && (
+      {mismatch && !p.chicken && (
         <Link href={mismatch.path} style={mismatchBox}>
           <span style={{ fontSize: 12.5, fontWeight: 700, color: "var(--cut)" }}>名字跟成分表對不上</span>
           <span style={{ display: "block", marginTop: 4, fontSize: 15.5, lineHeight: 1.8 }}>{mismatch.verdict}</span>
@@ -168,16 +174,19 @@ export default function ProductPage({ id, species, form = "dry" }: { id: string;
         <Link style={S.btn} href={`/${cat.slug}`}>去{cat.zh}</Link>
       </div>
 
-      <div style={{ marginTop: 32 }}>
-        <CheckCard species={p.species} />
-      </div>
+      {/* 上面的雞框已經有「查你家那包」，這裡就不用再一張 */}
+      {!p.chicken && (
+        <div style={{ marginTop: 32 }}>
+          <CheckCard species={p.species} />
+        </div>
+      )}
 
       {others.length > 0 && (
         <>
           <p style={S.lbl}>{ok ? "同一類的其他款" : "同一類可以買的"}</p>
-          <div style={{ display: "grid", gap: 10 }}>
-            {others.map((x) => (
-              <Link key={x.id} href={productHref(x)} style={otherRow}>
+          <div style={otherWrap}>
+            {others.map((x, i) => (
+              <Link key={x.id} href={productHref(x)} style={{ ...otherRow, borderTop: i ? "1px solid var(--line)" : 0 }}>
                 <span style={{ fontSize: 12.5, color: "var(--muted)" }}>{x.brand}</span>
                 <span style={{ display: "block", fontSize: 15.5, fontWeight: 700, lineHeight: 1.5 }}>{x.name}</span>
                 <span style={{ display: "block", fontSize: 12.5, color: "var(--faint)", marginTop: 2 }}>
@@ -212,9 +221,11 @@ const mismatchBox: React.CSSProperties = {
   display: "block", marginTop: 14, background: "var(--cut-soft)", border: "1px solid var(--cut)",
   borderRadius: 14, padding: "14px 18px", textDecoration: "none", color: "inherit",
 };
+const otherWrap: React.CSSProperties = {
+  background: "var(--surface)", border: "1px solid var(--line)", borderRadius: 14, overflow: "hidden",
+};
 const otherRow: React.CSSProperties = {
-  display: "block", background: "var(--surface)", border: "1px solid var(--line)",
-  borderRadius: 14, padding: "12px 16px", textDecoration: "none", color: "inherit",
+  display: "block", padding: "12px 16px", textDecoration: "none", color: "inherit",
 };
 
 const chickBox: React.CSSProperties = {

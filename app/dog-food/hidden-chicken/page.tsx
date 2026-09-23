@@ -177,7 +177,7 @@ export default function Page() {
             像是點「成犬」再點「對雞過敏」，不用打字。
           </p>
         </div>
-        <Link style={S.btn} href="/">去裁決器</Link>
+        <Link style={S.btn} href="/dog-food">去裁決器</Link>
       </div>
 
       <p style={S.lbl}>相關的</p>

@@ -267,7 +267,7 @@ export default function Page() {
             我們會順便算哪個規格夠你跑完八週。
           </p>
         </div>
-        <Link style={S.btn} href="/">去裁決器</Link>
+        <Link style={S.btn} href="/dog-food">去裁決器</Link>
       </div>
 
       <p style={S.lbl}>相關的</p>

@@ -118,6 +118,12 @@ function brandFails(c: Candidate, id: string): number {
 const failedFor = (id: string, c: Candidate): Pair | undefined =>
   PAIRS.find((x) => x.productId === id && ((c.shopId && x.shopId === c.shopId) || x.shop === c.shop));
 
+/** 這一款還有幾家可以試（試過產不出來的不算）。維護台用來決定要不要另外給搜尋按鈕 */
+export function openPicks(id: string): number {
+  const t = HUNT.get(id);
+  return t ? t.candidates.filter((c) => !failedFor(id, c)).length : 0;
+}
+
 export default function HuntPicks({ id }: { id: string }) {
   const t = HUNT.get(id);
   if (!t) return null;
@@ -138,10 +144,53 @@ export default function HuntPicks({ id }: { id: string }) {
     ...PAIRS.filter((x) => x.productId === id).map((x) => `${x.shop}（${x.note ?? "這一款產不出連結"}）`),
     ...(t.failed ?? []).map((f) => `${f.shop}（${f.reason}）`),
   ];
+  // 一家一列。最值得先試的排前面，只攤開 3 家，其他收起來（2026-09-24：一張卡片 6 家太長）
+  const pick = (c: Candidate) => (
+    <a key={c.url} href={c.url} target="_blank" rel="noopener noreferrer" style={row}>
+      <span style={{ minWidth: 0 }}>
+        <b style={{ fontSize: 14 }}>{c.shop}</b>
+        {(c.known || (c.shopId && KNOWN_IDS.has(c.shopId))) && (
+          <span style={{ fontSize: 12.5, color: "var(--keep)", background: "var(--keep-soft)", borderRadius: 8, padding: "2px 7px", marginLeft: 8 }}>
+            用過，產得出連結
+          </span>
+        )}
+        <span style={{ ...chip, ...CH_STYLE[c.channel ?? channelOf(c.shop)] }}>
+          {CHANNEL_ZH[c.channel ?? channelOf(c.shop)]}
+        </span>
+        {brandWorks(c, id) > 0 && (
+          <span style={{ ...chip, color: "var(--keep)", background: "var(--keep-soft)" }}>
+            這個牌子在這家產出過 {brandWorks(c, id)} 款
+          </span>
+        )}
+        {(() => {
+          const r = shopRecord(c);
+          if (r.ok + r.fail === 0) return null;
+          const good = r.ok > r.fail;
+          return (
+            <span style={{ ...chip, color: good ? "var(--muted)" : "var(--cut)", background: good ? "var(--sunken)" : "var(--cut-soft)" }}>
+              這家 {r.ok} 成 {r.fail} 敗
+            </span>
+          );
+        })()}
+        {brandFails(c, id) > 0 && (
+          <span style={{ ...chip, color: "var(--warn)", background: "var(--warn-soft)" }}>
+            這個牌子在這家失敗過 {brandFails(c, id)} 款
+          </span>
+        )}
+        <span style={{ display: "block", fontSize: 12.5, color: "var(--muted)" }}>
+          {c.unit}{c.soldOut ? " · 上次看是售完的，先確認有沒有補貨" : ""}
+        </span>
+      </span>
+      <span className="mono" style={{ fontSize: 14, whiteSpace: "nowrap" }}>
+        {c.price === null ? "看頁面" : "$" + c.price.toLocaleString()} ›
+      </span>
+    </a>
+  );
   return (
-    <div style={{ marginTop: 12, paddingTop: 10, borderTop: "1px dashed var(--line)" }}>
+    <div style={{ marginTop: 10 }}>
+      {/* 「便宜的排前面、產不出來跟我說」寫在維護台最上面的規矩裡一次就好，這裡只留日期（2026-09-24 Tim：後台重複太多） */}
       <p style={{ margin: "0 0 2px", fontSize: 12.5, color: "var(--faint)", lineHeight: 1.8 }}>
-        我查到的（{t.checkedAt ?? huntData._meta.checkedAt}），便宜的排前面。產不出連結的話跟我說是哪一家，我只擋這一款的那一家
+        我查到的賣場 · {t.checkedAt ?? huntData._meta.checkedAt}
       </p>
       {open.length > 0 && allMall && (
         <p style={{ margin: "6px 0 0", fontSize: 12.5, color: "var(--warn)", lineHeight: 1.8 }}>
@@ -153,50 +202,16 @@ export default function HuntPicks({ id }: { id: string }) {
       )}
       {open.length === 0 && (
         <p style={{ margin: "8px 0 0", fontSize: 14, color: "var(--muted)", lineHeight: 1.8 }}>
-          查到的都試過了。用上面「在（我們用過的賣場）裡找」那幾顆按鈕再碰碰運氣：同一家不同商品，開沒開分潤不一樣。
+          查到的都試過了。用下面的按鈕再找找看：同一家不同商品，開沒開分潤不一樣。
         </p>
       )}
-      {open.map((c) => (
-        <a key={c.url} href={c.url} target="_blank" rel="noopener noreferrer" style={row}>
-          <span style={{ minWidth: 0 }}>
-            <b style={{ fontSize: 14 }}>{c.shop}</b>
-            {(c.known || (c.shopId && KNOWN_IDS.has(c.shopId))) && (
-              <span style={{ fontSize: 12.5, color: "var(--keep)", background: "var(--keep-soft)", borderRadius: 8, padding: "2px 7px", marginLeft: 8 }}>
-                用過，產得出連結
-              </span>
-            )}
-            <span style={{ ...chip, ...CH_STYLE[c.channel ?? channelOf(c.shop)] }}>
-              {CHANNEL_ZH[c.channel ?? channelOf(c.shop)]}
-            </span>
-            {brandWorks(c, id) > 0 && (
-              <span style={{ ...chip, color: "var(--keep)", background: "var(--keep-soft)" }}>
-                這個牌子在這家產出過 {brandWorks(c, id)} 款
-              </span>
-            )}
-            {(() => {
-              const r = shopRecord(c);
-              if (r.ok + r.fail === 0) return null;
-              const good = r.ok > r.fail;
-              return (
-                <span style={{ ...chip, color: good ? "var(--muted)" : "var(--cut)", background: good ? "var(--sunken)" : "var(--cut-soft)" }}>
-                  這家 {r.ok} 成 {r.fail} 敗
-                </span>
-              );
-            })()}
-            {brandFails(c, id) > 0 && (
-              <span style={{ ...chip, color: "var(--warn)", background: "var(--warn-soft)" }}>
-                這個牌子在這家失敗過 {brandFails(c, id)} 款
-              </span>
-            )}
-            <span style={{ display: "block", fontSize: 12.5, color: "var(--muted)" }}>
-              {c.unit}{c.soldOut ? " · 上次看是售完的，先確認有沒有補貨" : ""}
-            </span>
-          </span>
-          <span className="mono" style={{ fontSize: 14, whiteSpace: "nowrap" }}>
-            {c.price === null ? "看頁面" : "$" + c.price.toLocaleString()} ›
-          </span>
-        </a>
-      ))}
+      {open.slice(0, 3).map(pick)}
+      {open.length > 3 && (
+        <details>
+          <summary style={{ cursor: "pointer", fontSize: 12.5, color: "var(--muted)", padding: "8px 0 0" }}>再看 {open.length - 3} 家</summary>
+          {open.slice(3).map(pick)}
+        </details>
+      )}
       {gone.length > 0 && (
         <p style={{ margin: "10px 0 0", fontSize: 12.5, color: "var(--faint)", lineHeight: 1.85 }}>
           試過的：{gone.join("、")}

@@ -3,7 +3,7 @@ import Link from "next/link";
 import { catalog, catalogOf, constraintsFor, liveCount } from "@/lib/catalog";
 import { CATEGORIES, MIN_LIVE, categoryOfId } from "@/lib/categories";
 import {
-  adjudicate, buyable, formOf, maintenanceRows, shopeeSubId, CATEGORY_SUB_ID,
+  adjudicate, buyable, maintenanceRows, shopeeSubId, CATEGORY_SUB_ID,
   PRICE_FRESH_DAYS, PRICE_STALE_DAYS,
 } from "@/lib/engine";
 import { allPaths, resolve, situationOf } from "@/lib/slugs";
@@ -16,21 +16,28 @@ import { CHANNEL_ZH, isMall } from "@/lib/channel";
 import { channelStats } from "@/lib/channel-stats";
 import { litters } from "@/lib/litter";
 import { treats } from "@/lib/treat";
-import HuntPicks from "@/components/HuntPicks";
+import HuntPicks, { openPicks } from "@/components/HuntPicks";
 import huntData from "@/data/hunt-candidates.json";
 import { productHref } from "@/lib/labels";
 
 /**
  * 維護台。給 Tim 一個人看的，不給讀者、不給搜尋引擎。
  *
- * v2 的重點是**排序**，不是清單。
+ * v3（2026-09-24）Tim：「我們的後台也太雜！太長了吧！有些重複的東西，是不是不用寫那麼多次？
+ * 至少第一眼不要厭惡吧！不然連想使用都不可能呀！」
  *
- * 一份 300 條的待辦跟沒有待辦一樣 —— 打開就想關掉。
- * 所以先用 impactMap() 算出哪幾款其實在撐這個站，
- * 再把「今天非做不可」跟「先放著沒關係」分開，
- * 而且按賣場分組（同一家一次開一個分頁查完，不要來回跳）。
+ * 改之前量過：桌機 52,700px，大約 62 個畫面。
+ *   - 「要對得上、有送東西的、一款找幾家、截圖要拍到」這四條規矩，在 16 張卡片裡各寫一次
+ *   - 同一款貓砂出現在「我查好賣場」跟「貓砂零食沒連結」兩段；「只剩一家」跟「只有商城」也重疊
+ *   - 開頭寫「還沒做完的 47 款」，下一行又寫「今天沒事，可以關掉了」，自己打架
  *
- * 目標：每次打開只做最上面那一段，剩下的可以安心關掉。
+ * 現在的規矩：
+ *   1. 打開只看到「今天做這幾件」，而且一款只出現一次，在它最該被做的那一段
+ *   2. 每張卡片只放跟那一款有關的東西（名字、為什麼先做、Sub id、我查好的賣場）
+ *      大家都一樣的規矩寫一次，收在最上面
+ *   3. 一次只攤開最值得做的 6 款，其他收起來。清單越長，越沒有人想開始
+ *   4. 查資料用的（所有連結、分潤規則、裁決器健康）全部收進最下面的抽屜，平常不用打開
+ *   5. 數字全部從資料算，補一條連結就自己少一件，做完的自己消失
  */
 
 export const metadata: Metadata = {
@@ -46,6 +53,9 @@ const LEVEL = {
   aging: { bg: "var(--sunken)", fg: "var(--muted)", zh: "快過期" },
   fresh: { bg: "var(--keep-soft)", fg: "var(--keep)", zh: "新的" },
 } as const;
+
+/** 一次攤開幾款。其他的收起來，做完上面的自己會補上來 */
+const SHOW = 6;
 
 /**
  * 還在等連結的款，假設全部補齊之後，各自會被推薦幾次。
@@ -100,6 +110,21 @@ const TIER = {
   目前沒機會: { bg: "transparent", fg: "var(--faint)" },
 } as const;
 
+type Merchant = Product["price"]["merchants"][number];
+type Item = { id: string; brand: string; name: string; searchAs?: string; ms: Merchant[] };
+
+/** 一件要 Tim 動手產連結的事。一款只會有一件 */
+type Task = {
+  id: string;
+  brand: string;
+  name: string;
+  why?: React.ReactNode;
+  huntNote?: string;
+  keyword: string;
+  shops: { label: string; shop?: string }[];
+  rank: number;
+};
+
 export default function Page() {
   // 狗跟貓各算各的：貓的連結一補上，維護台就要讀得到它的影響力，不然整頁會掛
   const impact = new Map<string, Impact>([
@@ -112,16 +137,16 @@ export default function Page() {
     impact: impact.get(r.productId) ?? NONE,
   }));
 
-  /* 要做的 vs 可以放著。判準是「有沒有人看得到」加上「資料還新不新」。 */
-  const todo = rows.filter(
+  /* 要重查的 vs 可以放著。判準是「有沒有人看得到」加上「資料還新不新」。 */
+  const stale = rows.filter(
     (r) => r.level === "dead" || (r.impact.tier !== "目前沒機會" && r.level !== "fresh"),
   );
-  const later = rows.filter((r) => !todo.includes(r));
+  const later = rows.filter((r) => !stale.includes(r));
 
-  /* 同一家賣場一次查完 —— 來回跳分頁才是真正花時間的地方 */
-  const byStore = new Map<string, typeof todo>();
-  for (const r of todo) byStore.set(r.label, [...(byStore.get(r.label) ?? []), r]);
-  const groups = [...byStore].sort(
+  /* 同一家賣場一次查完：來回跳分頁才是真正花時間的地方 */
+  const byStore = new Map<string, typeof stale>();
+  for (const r of stale) byStore.set(r.label, [...(byStore.get(r.label) ?? []), r]);
+  const staleGroups = [...byStore].sort(
     (a, b) => TIER_WEIGHT[a[1][0].impact.tier] - TIER_WEIGHT[b[1][0].impact.tier],
   );
 
@@ -129,104 +154,149 @@ export default function Page() {
   const dogPool = catalogOf("dog");
   const core = dogPool.filter((p) => impact.get(p.id)?.tier === "主力");
   const idle = dogPool.filter((p) => impact.get(p.id)?.tier === "目前沒機會");
-  const waiting = catalog.filter((p) => p.awaitingLink);
   const picks = new Map<string, number>(CATEGORIES.flatMap((c) => [...pickCounts(c.species, c.form)]));
-  const waitingBy = CATEGORIES
-    .map((c) => ({
-      cat: c,
-      items: waiting
-        .filter((p) => p.species === c.species && formOf(p) === c.form)
-        // 找過找不到的排最後，其他照「補了會被推薦幾次」排
-        .sort((a, b) => Number(Boolean(a.huntNote)) - Number(Boolean(b.huntNote)) || (picks.get(b.id) ?? 0) - (picks.get(a.id) ?? 0)),
-      ready: liveCount(c.species, c.form),
-    }))
-    .filter((g) => g.items.length > 0);
 
-  /* 同一個品牌我們已經在哪幾家買過。
-     回去同一家找，通常比重新搜一次快 —— 那家有整條產品線的機率很高。
-     賣家越集中，維護成本也越低。 */
-  /* 這個品牌我們沒在任何一家買過的時候，退而求其次：給幾家一定產得出連結的賣場，讓他進去搜看看 */
+  const everything: Item[] = [
+    ...catalog.map((p) => ({ id: p.id, brand: p.brand, name: p.name, searchAs: p.searchAs, ms: p.price.merchants })),
+    ...litters.map((p) => ({ id: p.id, brand: p.brand, name: p.name, searchAs: p.searchAs, ms: p.price.merchants as Merchant[] })),
+    ...treats.map((p) => ({ id: p.id, brand: p.brand, name: p.name, searchAs: p.searchAs, ms: p.price.merchants as Merchant[] })),
+  ];
+  const byId = new Map(everything.map((x) => [x.id, x]));
+  const live = (x: Item) => x.ms.filter((m) => !m.dead && !m.soldOut);
+
+  /* 同一個品牌我們已經在哪幾家買過。回去同一家找，通常比重新搜一次快 */
+  const shopIds = shopIdsByLabel();
   const fallbackShops = Object.entries((storeReg as { stores: Record<string, { name: string; confirmed: boolean }> }).stores)
     .filter(([, v]) => v.confirmed)
     .slice(-6)
     .map(([shop, v]) => ({ label: v.name, shop }));
-  /* 只連到商城的。
-     2026-09-19 Tim：「您永遠給我的都是商城耶，蝦皮優選及一般商家您查不到嗎？」
-     他是對的：同一包臭味滾 7L，商城 $223、一般賣家 $100。
-     連結沒錯，但只有貴的那一種，只看價錢的讀者就被放生了。 */
-  const everything = [
-    ...catalog.map((p) => ({ id: p.id, brand: p.brand, name: p.name, searchAs: p.searchAs, ms: p.price.merchants })),
-    ...litters.map((p) => ({ id: p.id, brand: p.brand, name: p.name, searchAs: p.searchAs, ms: p.price.merchants })),
-    ...treats.map((p) => ({ id: p.id, brand: p.brand, name: p.name, searchAs: p.searchAs, ms: p.price.merchants })),
-  ];
-  /**
-   * 這一款補好連結了沒。
-   *
-   * 2026-09-20 Tim：「處理完的是不是就可以關掉？不然後台越來越雜。」
-   * 他是對的，而且原因很蠢：「等你產連結的」那一段只排除了
-   * 已經在別區出現過的，沒有排除**已經有連結的**。
-   * 貓砂四款、零食七款補好之後還躺在那裡，看起來像沒做。
-   *
-   * 待辦清單要自己會消失，不然它就不是待辦清單，是壁紙。
-   */
-  const linked = new Set(
-    everything.filter((x) => x.ms.some((m) => !m.dead && !m.soldOut)).map((x) => x.id),
-  );
-
-  /* 有連結但東西賣完了。連結是好的，補貨就能開，所以要有人提醒回去看 */
-  const soldOut = everything
-    .map((x) => ({ ...x, sold: x.ms.filter((m) => m.soldOut) }))
-    .filter((x) => x.sold.length > 0);
-
-  const mallOnly = everything
-    .map((x) => ({ ...x, live: x.ms.filter((m) => !m.dead && !m.soldOut) }))
-    .filter((x) => x.live.length > 0 && x.live.every((m) => isMall(m.label)));
-
-  /* 貓砂、零食不在飼料的 catalog 裡，維護台原本看不到這兩個類目缺什麼 */
-  const nonFoodGaps = [
-    { zh: "貓砂", items: litters.filter((p) => !p.price.merchants.some((m) => !m.dead && !m.soldOut)) },
-    { zh: "貓零食", items: treats.filter((p) => !p.price.merchants.some((m) => !m.dead && !m.soldOut)) },
-  ];
-  const sellersOfBrand = (brand: string) => {
+  const shopsFor = (brand: string) => {
     const key = brand.split(/[（(]/)[0].trim();
     const found = new Set<string>();
     for (const p of catalog) {
       if (!p.brand.startsWith(key)) continue;
       for (const m of p.price.merchants) if (!m.dead) found.add(m.label);
     }
-    return [...found];
-  };
-  /* 候選名單裡沒被上面任何一段列到的，補一段收尾，不然我查好的賣場會沒有地方顯示 */
-  const huntTargets = (huntData.targets as { id: string; label: string; why: string }[]);
-  const shopsFor = (brand: string) => {
-    const mine = sellersOfBrand(brand).map((label) => ({ label, shop: shopIds.get(label) })).filter((x) => x.shop);
+    const mine = [...found].map((label) => ({ label, shop: shopIds.get(label) })).filter((x) => x.shop);
     return mine.length > 0 ? mine : fallbackShops;
   };
-  // 對照款是故意不賣的，不算「買不到」的問題
-  const shopIds = shopIdsByLabel();
-  /* 查藏雞頁「沒有雞」但沒有連結的那幾款：補了連結就能推薦給對雞過敏的人 */
-  type ExtraItem = { id: string; planId?: string; brand: string; name: string; alias?: string; huntNote?: string };
-  const noChicken = (checkExtra.items as ExtraItem[])
-    .filter((x) => x.planId)
-    .map((x) => ({ ...x, planId: x.planId as string, hunt: huntFrom(x.brand, x.name) }));
-  // 只剩一家在賣的：那一家賣完，這一款就從網站上消失
-  const thinAll = catalog
-    .filter((p) => buyable(p) && !p.referenceOnly && new Set(p.price.merchants.filter((m) => !m.dead).map((m) => m.label)).size === 1)
-    .sort((a, b) => (picks.get(b.id) ?? 0) - (picks.get(a.id) ?? 0));
-  // 全部列出來就變成一面牆。只列真的會被推薦到的，最多 8 款，其他的等它被推到再說
-  const thin = thinAll.filter((p) => (picks.get(p.id) ?? 0) > 0).slice(0, 8);
+
+  /* ── 1. 等你產連結的：四個來源併成一張清單，一款只出現一次 ── */
+  // 只有飼料、罐頭有「補到 5 款才開張」這件事；貓砂、零食不走這套
+  const opening = new Map(CATEGORIES.filter((c) => c.form === "dry" || c.form === "wet").map((c) => [c.slug, MIN_LIVE - liveCount(c.species, c.form)]));
+  const tasks = new Map<string, Task>();
+  const add = (t: Omit<Task, "rank"> & { value?: number }) => {
+    if (tasks.has(t.id)) return;
+    const c = categoryOfId(t.id);
+    const need = c ? opening.get(c.slug) ?? 0 : 0;
+    const rank =
+      (t.huntNote ? -1000 : 0) +            // 找過找不到的排最後
+      (openPicks(t.id) > 0 ? 200 : 0) +     // 我已經查好賣場的，開了就能做
+      (need > 0 ? 100 : 0) +                // 補了就能讓一個類目開張
+      (t.value ?? 0);
+    tasks.set(t.id, { ...t, rank });
+  };
+  // 飼料、罐頭：補了會被推薦幾次
+  for (const p of catalog.filter((p) => p.awaitingLink)) {
+    const c = categoryOfId(p.id);
+    const need = c ? opening.get(c.slug) ?? 0 : 0;
+    const n = picks.get(p.id) ?? 0;
+    add({
+      id: p.id, brand: p.brand, name: p.name, huntNote: p.huntNote, value: n,
+      keyword: huntKeyword(p), shops: shopsFor(p.brand),
+      why: need > 0
+        ? <>{c?.zh}再補 {need} 款就開張{n > 0 ? `，這款補了會被推薦 ${n} 次` : ""}</>
+        : n > 0 ? `補了會被推薦 ${n} 次` : "目前的情況都輪不到它，不急",
+    });
+  }
+  // 查藏雞頁寫了沒有雞、但我們沒連結的
+  type ExtraItem = { id: string; planId?: string; brand: string; name: string; huntNote?: string };
+  for (const x of (checkExtra.items as ExtraItem[]).filter((x) => x.planId)) {
+    add({
+      id: x.planId as string, brand: x.brand, name: x.name, huntNote: x.huntNote, value: 5,
+      keyword: huntFrom(x.brand, x.name), shops: shopsFor(x.brand),
+      why: "查藏雞頁寫了沒有雞。對雞過敏的人最想買的就是這種",
+    });
+  }
+  // 貓砂、零食：不走裁決器，沒有推薦次數，照資料順序。只剩賣完的那幾款放在「看補貨」那一段
+  for (const p of [...litters, ...treats]) {
+    const x = byId.get(p.id)!;
+    if (live(x).length > 0 || x.ms.some((m) => m.soldOut)) continue;
+    add({ id: p.id, brand: p.brand, name: p.name, keyword: huntFrom(p.brand, p.name, p.searchAs), shops: shopsFor(p.brand) });
+  }
+  // 我查好賣場、但上面都沒列到的
+  for (const t of huntData.targets as { id: string; label: string; why: string }[]) {
+    const x = byId.get(t.id);
+    if (x && (live(x).length > 0 || x.ms.some((m) => m.soldOut))) continue;
+    add({
+      id: t.id, brand: x?.brand ?? "", name: x?.name ?? t.label, why: t.why,
+      keyword: x ? huntFrom(x.brand, x.name, x.searchAs) : t.label, shops: x ? shopsFor(x.brand) : [],
+    });
+  }
+  const make = [...tasks.values()].sort((a, b) => b.rank - a.rank);
+
+  /* ── 2. 有連結但賣完了：連結是好的，補貨就能開 ── */
+  const soldOut = everything
+    .map((x) => ({ ...x, sold: x.ms.filter((m) => m.soldOut) }))
+    .filter((x) => x.sold.length > 0 && live(x).length === 0);
+
+  /* ── 3. 賣場名字還沒跟 Tim 核對的 ── */
+  const links = linkIndex();
+
+  /* ── 4. 有空再做：只剩一家、只有商城。同一款兩種都中，併成一張 ── */
+  const backup = new Map<string, { x: Item; reasons: string[]; n: number }>();
+  const addBackup = (x: Item, reason: string) => {
+    const b = backup.get(x.id) ?? { x, reasons: [], n: picks.get(x.id) ?? 0 };
+    b.reasons.push(reason);
+    backup.set(x.id, b);
+  };
+  for (const p of catalog.filter((p) => buyable(p) && !p.referenceOnly && (picks.get(p.id) ?? 0) > 0)) {
+    const shops = new Set(p.price.merchants.filter((m) => !m.dead).map((m) => m.label));
+    if (shops.size === 1) addBackup(byId.get(p.id)!, `只剩一家：${[...shops][0]}`);
+  }
+  for (const x of everything) {
+    const l = live(x);
+    if (l.length > 0 && l.every((m) => isMall(m.label))) addBackup(x, `只有商城：${[...new Set(l.map((m) => m.label))].join("、")}`);
+  }
+  const backupList = [...backup.values()].sort((a, b) => b.n - a.n);
+
   const unbuyable = catalog.filter((p) => !p.referenceOnly && !p.awaitingLink && (!buyable(p) || p.discontinued));
   const noIssues = catalog.filter((p) => !p.knownIssues?.trim());
   const oldest = Math.max(0, ...rows.map((r) => r.days));
   const cut = overallCutRate();
   const audit = ruleAudit();
-  const dead = audit.filter((r) => r.catches === 0);
+  const deadRules = audit.filter((r) => r.catches === 0);
+
+  const todo = [
+    { n: make.length, zh: "等你產連結", href: "#make" },
+    { n: stale.length, zh: "連結要重查", href: "#stale" },
+    { n: soldOut.length, zh: "賣完了，看補貨了沒", href: "#sold-out" },
+    { n: links.unchecked.length, zh: "賣場名字要核對", href: "#names", unit: "家" },
+  ].filter((x) => x.n > 0);
+
+  const card = (t: Task) => (
+    <div key={t.id} style={box}>
+      <div style={head}>
+        <div style={{ minWidth: 0 }}>
+          <span style={catTag}>{categoryOfId(t.id)?.zh ?? "其他"}</span>
+          {t.brand && <span style={{ fontSize: 12.5, color: "var(--muted)" }}>{t.brand}</span>}
+          <b style={{ display: "block", fontSize: 17, lineHeight: 1.5, marginTop: 2 }}>{t.name}</b>
+        </div>
+        <span className="mono" style={{ fontSize: 12.5, color: "var(--faint)" }}>{t.id}</span>
+      </div>
+      {t.why && <p style={why}>{t.why}</p>}
+      {t.huntNote && <p style={{ ...why, color: "var(--cut)", fontWeight: 700 }}>找過：{t.huntNote}</p>}
+      <SubIds id={t.id} />
+      <HuntPicks id={t.id} />
+      {openPicks(t.id) === 0 && <HuntLinks keyword={t.keyword} shops={t.shops} />}
+    </div>
+  );
 
   return (
-    <main style={{ maxWidth: 940, margin: "0 auto", padding: "0 20px 120px" }}>
+    <main style={{ maxWidth: 820, margin: "0 auto", padding: "0 20px 120px" }}>
       <div style={{
         display: "flex", alignItems: "center", justifyContent: "space-between",
-        gap: 14, padding: "28px 0 20px", borderBottom: "1px solid var(--line)", marginBottom: 36,
+        gap: 14, padding: "28px 0 20px", borderBottom: "1px solid var(--line)", marginBottom: 32,
       }}>
         <Link href="/" style={{ display: "flex", alignItems: "center", gap: 9, fontWeight: 900, fontSize: 17, color: "inherit", textDecoration: "none" }}>
           <span style={{ width: 9, height: 9, borderRadius: 2, background: "var(--accent)" }} />
@@ -235,56 +305,76 @@ export default function Page() {
         <span style={{ fontSize: 12.5, color: "var(--faint)" }}>維護台 · 不對外</span>
       </div>
 
-      <h1 style={{ fontSize: "clamp(24px,5vw,32px)", lineHeight: 1.4, margin: "0 0 12px" }}>
-        今天要處理什麼
+      <h1 style={{ fontSize: "clamp(24px,5vw,28px)", lineHeight: 1.4, margin: "0 0 20px" }}>
+        {todo.length === 0 ? "今天沒事，可以關掉了" : "今天要處理什麼"}
       </h1>
 
-      {/* 這一頁越長，越沒有人會捲到底。開頭先把「還剩幾件」列出來，點了直接跳。
-          數字全部從資料算，補一條連結就自己少一個。 */}
-      <div style={{ ...box, marginBottom: 24 }}>
-        <p style={{ margin: "0 0 10px", fontSize: 14, fontWeight: 700, color: "var(--muted)" }}>還沒做完的</p>
-        {[
-          { n: waiting.length, zh: "等你補連結", href: "#gap-food" },
-          { n: nonFoodGaps.reduce((a, g) => a + g.items.length, 0), zh: "貓砂、零食沒連結", href: "#gap-other" },
-          { n: soldOut.length, zh: "有連結但賣完了", href: "#sold-out" },
-          { n: mallOnly.length, zh: "只連到商城，缺便宜的", href: "#mall-only" },
-          { n: todo.length, zh: "連結要重查", href: "#stale" },
-        ]
-          .filter((x) => x.n > 0)
-          .map((x) => (
-            <a key={x.zh} href={x.href} style={jump}>
+      {/* 第一眼：還剩幾件，點了直接跳。做完一件就自己少一件 */}
+      {todo.length > 0 ? (
+        <div style={{ ...box, padding: "6px 22px" }}>
+          {todo.map((x, i) => (
+            <a key={x.zh} href={x.href} style={{ ...jump, borderTop: i ? "1px solid var(--line)" : 0 }}>
               <span>{x.zh}</span>
-              <span className="mono" style={{ fontWeight: 700 }}>{x.n} 款 ›</span>
+              <span className="mono" style={{ fontWeight: 700 }}>{x.n} {x.unit ?? "款"} ›</span>
             </a>
           ))}
-        <p style={{ margin: "12px 0 0", fontSize: 12.5, color: "var(--faint)", lineHeight: 1.85 }}>
-          補好一條，這裡就自己少一個。剩下的段落是查資料用的，今天不用看。
-        </p>
-      </div>
-
-      {todo.length === 0 ? (
-        <div style={{ ...box, borderColor: "var(--keep)", background: "var(--keep-soft)" }}>
-          <p style={{ margin: 0, fontSize: 17, fontWeight: 700 }}>今天沒事，可以關掉了</p>
-          <p style={{ margin: "8px 0 0", fontSize: 15.5, color: "var(--muted)", lineHeight: 1.85 }}>
-            {catalog.length} 款、{rows.length} 條連結全部在期限內，最舊的一筆 {oldest} 天。
-            另外 {idle.length} 款目前不會被推薦到，不用管。
-          </p>
         </div>
       ) : (
-        <>
-          <p id="stale" style={{ color: "var(--muted)", fontSize: 15.5, lineHeight: 1.9, margin: "0 0 24px", maxWidth: "48ch" }}>
-            <b style={{ color: "var(--ink)" }}>{todo.length} 條</b>要處理，
-            已經按賣場分好組了，同一家一次開一個分頁查完，不用來回跳。
-            下面「先放著」那一段今天可以完全不看。
-          </p>
+        <p style={{ ...why, fontSize: 15.5 }}>
+          {catalog.length} 款、{rows.length} 條連結都在期限內，最舊的一筆 {oldest} 天。
+        </p>
+      )}
 
-          {groups.map(([label, items]) => (
+      {/* 每一款都一樣的規矩，寫一次就好 */}
+      <details style={rules}>
+        <summary style={rulesSum}>找連結的規矩（忘了再點開）</summary>
+        <div style={{ marginTop: 10 }}>
+          <Line k="Sub id">
+            每張卡片上都寫好了，照抄。蝦皮只收英數字，所以是 DF13 不是 df-13。Sub id 3 以後不用填。同一款找到好幾家，每一家都填一樣的
+          </Line>
+          <Line k="要對得上">
+            賣場<b>標題</b>或<b>規格選項</b>裡，要有卡片上的這一款。一頁多款可以，網站會提醒讀者選哪一個。只有內文和圖片對得上的不算
+          </Line>
+          <Line k="有送東西的">
+            <b>可以收</b>，看同一個大小有沒有比別家便宜。只有贈品讓價錢比別家貴，才不要
+          </Line>
+          <Line k="一款找幾家">
+            多找幾家沒關係，網站自動給最便宜的那家，其他留著當備援。一款最多 16 條
+          </Line>
+          <Line k="截圖要拍到">
+            規格的完整名稱、價錢、運費（免運、限宅配、超取限幾包）。罐頭看清楚是一罐還是一箱幾罐
+          </Line>
+          <Line k="我查好的賣場">
+            便宜的排前面。產不出連結就跟我說是哪一家，我只擋這一款的那一家，同一家別款照樣列
+          </Line>
+          <Line k="做完之後">
+            連結和截圖貼給 Claude。補好的會從這一頁自己消失
+          </Line>
+        </div>
+      </details>
+
+      {make.length > 0 && (
+        <>
+          <H id="make" n={make.length}>等你產連結的</H>
+          <p style={lead}>照順序做就好：我查好賣場的、補了能讓類目開張的、會被推薦最多次的排前面。</p>
+          {make.slice(0, SHOW).map(card)}
+          {make.length > SHOW && (
+            <details style={more}>
+              <summary style={moreSum}>還有 {make.length - SHOW} 款，做完上面的再打開</summary>
+              <div style={{ marginTop: 14 }}>{make.slice(SHOW).map(card)}</div>
+            </details>
+          )}
+        </>
+      )}
+
+      {stale.length > 0 && (
+        <>
+          <H id="stale" n={stale.length} unit="條">連結要重查</H>
+          <p style={lead}>已經按賣場分好組，同一家一次開一個分頁查完。</p>
+          {staleGroups.map(([label, items]) => (
             <div key={label} style={box}>
-              <div style={{
-                display: "flex", alignItems: "baseline", justifyContent: "space-between",
-                gap: 12, marginBottom: 14, flexWrap: "wrap",
-              }}>
-                <h2 style={{ margin: 0, fontSize: 17, fontWeight: 700 }}>{label}</h2>
+              <div style={head}>
+                <b style={{ fontSize: 17 }}>{label}</b>
                 <span style={{ fontSize: 12.5, color: "var(--faint)" }}>{items.length} 條</span>
               </div>
               {items.map((r) => (
@@ -293,17 +383,9 @@ export default function Page() {
                     <span style={{ display: "block", fontSize: 12.5, color: "var(--muted)" }}>{r.brand}</span>
                     {r.name}
                   </div>
-                  <span className="mono" style={{ fontSize: 12.5, whiteSpace: "nowrap" }}>
-                    {r.unit} · ${r.amount}
-                  </span>
+                  <span className="mono" style={{ fontSize: 12.5, whiteSpace: "nowrap" }}>{r.unit} · ${r.amount}</span>
                   <Chip {...LEVEL[r.level]}>{LEVEL[r.level].zh} {r.days} 天</Chip>
-                  <Chip {...TIER[r.impact.tier]}>
-                    {r.impact.tier}{r.impact.picks > 0 ? ` · 主答案 ${r.impact.picks} 頁` : ""}
-                  </Chip>
-                  <a href={r.affiliateUrl} target="_blank" rel="noopener nofollow"
-                     style={{ color: "var(--accent)", fontSize: 14, whiteSpace: "nowrap" }}>
-                    開連結 ↗
-                  </a>
+                  <a href={r.affiliateUrl} target="_blank" rel="noopener nofollow" style={openLink}>開連結 ↗</a>
                 </div>
               ))}
             </div>
@@ -311,458 +393,209 @@ export default function Page() {
         </>
       )}
 
-      {/* ── 所有分潤連結：Tim 自己點開檢查、對蝦皮後台說「無效」的是哪一條 ── */}
-      <AllLinks />
+      {soldOut.length > 0 && (
+        <>
+          <H id="sold-out" n={soldOut.length}>賣完了，看補貨了沒</H>
+          <p style={lead}>連結是好的，讀者暫時看不到。看到有貨跟我說一聲，就放回去。</p>
+          <div style={{ ...box, padding: "6px 22px" }}>
+            {soldOut.flatMap((p) => p.sold.map((m) => ({ p, m }))).map(({ p, m }, i) => (
+              <div key={p.id + m.id} style={{ ...line, borderTop: i ? "1px solid var(--line)" : 0 }}>
+                <div style={{ flex: 1, minWidth: 180 }}>
+                  <span style={{ display: "block", fontSize: 12.5, color: "var(--muted)" }}>{p.brand} · {m.label}</span>
+                  {p.name}
+                </div>
+                <span className="mono" style={{ fontSize: 12.5, whiteSpace: "nowrap" }}>{m.unit} · ${m.amount}</span>
+                <a href={m.affiliateUrl} target="_blank" rel="noopener nofollow" style={openLink}>開連結 ↗</a>
+              </div>
+            ))}
+          </div>
+        </>
+      )}
 
-      {/* ── 這一段是重點：告訴他什麼可以不做 ── */}
-      <H>可以不管的</H>
-      <div style={box}>
-        <p style={{ margin: "0 0 12px", fontSize: 15.5, lineHeight: 1.9 }}>
-          裁決器一次只給一個答案。所以商品一多，<b>多數款根本不會出現在任何人的畫面上</b>，
-          那些款的價格複不複查，沒有人會知道，也沒有人會受影響。
-        </p>
-        <div style={{ display: "flex", flexWrap: "wrap", gap: 10 }}>
-          <Chip {...TIER["主力"]}>主力 {core.length} 款 · 要顧</Chip>
-          <Chip {...TIER["會被看到"]}>會被看到 {dogPool.length - core.length - idle.length} 款</Chip>
-          <Chip {...TIER["目前沒機會"]}>目前沒機會 {idle.length} 款 · 先放著</Chip>
+      {links.unchecked.length > 0 && (
+        <>
+          <H id="names" n={links.unchecked.length} unit="家">賣場名字要核對</H>
+          <p style={lead}>
+            這些名字是我從截圖讀的，可能讀錯字（萬倍富曾經被寫成萬信富）。讀者會拿這個名字去蝦皮搜，錯一個字就找不到。
+            點開對一下賣場名稱，跟我說「都對」或哪一家要改。
+          </p>
+          <div style={{ ...box, padding: "6px 22px" }}>
+            {links.unchecked.map((g, i) => (
+              <div key={g.label} style={{ ...line, borderTop: i ? "1px solid var(--line)" : 0 }}>
+                <div style={{ flex: 1, minWidth: 180 }}>
+                  <b>{g.label}</b>
+                  <span style={{ display: "block", fontSize: 12.5, color: "var(--faint)" }}>
+                    {g.shop ? `蝦皮賣場 ${g.shop}` : "還沒跑連結健檢"} · {[...new Set(g.items.map((x) => x.p.id))].join("、")}
+                  </span>
+                </div>
+                <a href={g.items[0].m.affiliateUrl} target="_blank" rel="noopener nofollow" style={openLink}>點開看 ↗</a>
+              </div>
+            ))}
+          </div>
+        </>
+      )}
+
+      {backupList.length > 0 && (
+        <details style={{ ...more, marginTop: 40 }}>
+          <summary style={moreSum}>有空再做：補第二家、補便宜的一家（{backupList.length} 款）</summary>
+          <p style={{ ...lead, marginTop: 12 }}>
+            現在買得到，不急。只剩一家的，那一家賣完就沒地方買；只有商城的，同一包常常貴一截（臭味滾 7L 商城 $223，一般賣家 $100）。
+            被推薦越多次的排越前面。
+          </p>
+          {backupList.map(({ x, reasons, n }) => (
+            <div key={x.id} style={box}>
+              <div style={head}>
+                <div style={{ minWidth: 0 }}>
+                  <span style={catTag}>{categoryOfId(x.id)?.zh ?? "其他"}</span>
+                  <span style={{ fontSize: 12.5, color: "var(--muted)" }}>{x.brand}</span>
+                  <b style={{ display: "block", fontSize: 17, lineHeight: 1.5, marginTop: 2 }}>{x.name}</b>
+                </div>
+                <span className="mono" style={{ fontSize: 12.5, color: "var(--faint)" }}>{x.id}{n ? ` · 被推薦 ${n} 次` : ""}</span>
+              </div>
+              <p style={why}>{reasons.join("　")}</p>
+              <SubIds id={x.id} />
+              <HuntPicks id={x.id} />
+              {openPicks(x.id) === 0 && <HuntLinks keyword={huntFrom(x.brand, x.name, x.searchAs)} shops={shopsFor(x.brand)} />}
+            </div>
+          ))}
+        </details>
+      )}
+
+      {/* ── 以下是查資料用的，平常不用打開 ── */}
+      <p style={{ ...lead, margin: "56px 0 10px", fontSize: 12.5, fontWeight: 700, color: "var(--faint)" }}>
+        查資料用的，平常不用打開
+      </p>
+
+      <Drawer title="所有分潤連結" count={`${links.urls} 條 · ${links.groups.length} 家`}>
+        <div style={{ ...box, borderColor: "var(--warn)", background: "var(--warn-soft)" }}>
+          <p style={{ margin: "0 0 8px", fontSize: 15.5, fontWeight: 700 }}>蝦皮後台說某個商品「無效」的時候</p>
+          <ol style={{ ...ul, fontSize: 14 }}>
+            <li>在蝦皮 App 點進那個無效商品，看<b>賣場名稱</b>。</li>
+            <li>在下面找同一個賣場。找不到，就是網站沒用到它，不用管。</li>
+            <li>找到了，點那一條的「點開看」。打不開、顯示無效或賣完，就跟我說「這一條無效」，或直接貼另一家的新連結。</li>
+          </ol>
+          <p style={{ margin: "10px 0 0", fontSize: 14, lineHeight: 1.85 }}>
+            <b>你給過的連結永遠不刪。</b>新的放最前面，原本的往後當備援；主要那一條壞了，備援自己頂上。
+            確定無效的才標「失效」：讀者看不到，這裡還留著。
+          </p>
+          <p style={{ margin: "10px 0 0", fontSize: 14, color: "var(--muted)", lineHeight: 1.85 }}>
+            自己點開檢查沒關係，但不要從這裡下單，多數分潤計畫不算自己買的。
+            連結健檢最後一次跑是 {health.checkedAt}，商品還在不在要自己點。
+          </p>
         </div>
-        {idle.length > 0 && (
-          <ul style={{ ...ul, marginTop: 14, color: "var(--faint)" }}>
-            {idle.map((p) => <li key={p.id}>{p.brand}｜{p.name}</li>)}
-          </ul>
-        )}
-        <p style={{ margin: "14px 0 0", fontSize: 14, color: "var(--muted)", lineHeight: 1.85 }}>
-          「目前沒機會」跟它好不好無關，意思是以現在的規則，沒有任何一個組合會推到它。
-          等它有機會被推薦，它自己就會跳到上面那一段。
-        </p>
-      </div>
-
-      {/* ── 這一段回答的是「下一款該進什麼」，不是「要修什麼」 ── */}
-      <H>裁決器有沒有在做事</H>
-      <div style={{
-        ...box,
-        borderColor: cut.avgKeep > 0.7 ? "var(--warn)" : "var(--line)",
-        background: cut.avgKeep > 0.7 ? "var(--warn-soft)" : "var(--surface)",
-      }}>
-        <p style={{ margin: 0, fontSize: 17, fontWeight: 700 }}>
-          全站 {cut.pages} 頁，平均只刪掉 {Math.round((1 - cut.avgKeep) * 100)}%
-        </p>
-        <p style={{ margin: "10px 0 0", fontSize: 15.5, lineHeight: 1.9 }}>
-          這個站的說服力來自「我們刪掉了什麼」。
-          {cut.avgKeep > 0.7 ? (
-            <>
-              {" "}現在幾乎沒刪到東西，品種頁是 {dogPool.length} 進 {dogPool.length} 留，
-              那個刪除過程看起來就像在演。
-            </>
-          ) : (
-            <>{" "}目前的排除幅度是合理的。</>
-          )}
-        </p>
-        <p style={{ margin: "10px 0 0", fontSize: 15.5, color: "var(--muted)", lineHeight: 1.9 }}>
-          原因是選品全部同一種：低敏、單一蛋白、無穀、全齡。它們之間沒有對比，
-          所以任何規則都刪不掉東西。<b style={{ color: "var(--ink)" }}>
-          下一批該補的，反而是會被刪掉的那種。</b>
-        </p>
-      </div>
-
-      <H>每條規則刪得掉幾款</H>
-      <div style={box}>
-        {audit.map((r) => (
-          <div key={r.rule} style={{
-            ...line,
-            borderTop: "1px solid var(--line)",
-            color: r.catches === 0 ? "var(--cut)" : "inherit",
-          }}>
-            <span className="mono" style={{ minWidth: 48, fontWeight: 700 }}>{r.catches} 款</span>
-            <span style={{ flex: 1, minWidth: 160 }}>{r.rule}</span>
-            {r.catches === 0 && (
-              <span style={{ fontSize: 12.5, color: "var(--muted)", flexBasis: "100%" }}>
-                要補：{r.need}
-              </span>
-            )}
+        {links.groups.map(([label, items]) => (
+          <div key={label} style={box}>
+            <div style={head}>
+              <b style={{ fontSize: 17 }}>
+                {label}
+                {links.unchecked.some((g) => g.label === label) && (
+                  <span style={{ marginLeft: 8, fontSize: 12.5, fontWeight: 600, color: "var(--cut)" }}>名字待核對</span>
+                )}
+              </b>
+              <span style={{ fontSize: 12.5, color: "var(--faint)" }}>{new Set(items.map((x) => x.m.affiliateUrl)).size} 條</span>
+            </div>
+            {items.map(({ p, m, h }) => (
+              <div key={p.id + m.id} style={line}>
+                <div style={{ flex: 1, minWidth: 190 }}>
+                  <span style={{ display: "block", fontSize: 12.5, color: "var(--muted)" }}>
+                    <Link href={productHref(p)} style={{ color: "inherit" }}>{p.id}</Link> · {p.brand}
+                    {/* 主要＝卡片上那個按鈕；備援＝收在「其他規格與價格」裡，主要的壞了就自動頂上 */}
+                    <b style={{ marginLeft: 8, color: m.dead ? "var(--cut)" : roleOf(p, m) === "主要" ? "var(--keep)" : "var(--muted)" }}>
+                      {m.dead ? "失效（讀者看不到）" : roleOf(p, m)}
+                    </b>
+                  </span>
+                  {p.name}
+                  <span className="mono" style={{ display: "block", fontSize: 12.5, color: "var(--faint)" }}>
+                    {m.unit ?? p.price.unit} · ${m.amount} · 查價 {m.checkedAt ?? p.price.checkedAt}
+                    {h?.item ? ` · 蝦皮商品 ${h.item}` : ""}
+                  </span>
+                  {m.sharedPage && (
+                    <span style={{ display: "block", fontSize: 12.5, color: "var(--cut)" }}>跟另一款在同一個商品頁，讀者要自己選規格</span>
+                  )}
+                </div>
+                <a href={m.affiliateUrl} target="_blank" rel="noopener nofollow" style={openLink}>點開看 ↗</a>
+              </div>
+            ))}
           </div>
         ))}
-        {dead.length > 0 && (
-          <p style={{ margin: "14px 0 0", fontSize: 14, color: "var(--muted)", lineHeight: 1.85 }}>
-            <b style={{ color: "var(--cut)" }}>{dead.length} 條規則目前是空的</b>，
-            規則沒寫錯，只是選品裡還沒有它要擋的東西。
-            補進去之後，那一刀才會出現在使用者看到的「怎麼刪的」裡面。
-          </p>
-        )}
-      </div>
+      </Drawer>
 
-      {/* ── 採購清單。連結以外的東西都做完了，這一段是唯一需要 Tim 動手的 ── */}
-      <H>分潤怎麼算（選賣場的時候用得到）</H>
-      <div style={box}>
+      <Drawer title="分潤怎麼算" count="選賣場時用得到">
         <ul style={ul}>
           <li><b>要同一家店才算。</b>讀者點我們的連結進去，跑去別家買，那筆沒有我們的事。所以連結要指到他最可能直接下單的那一家。</li>
           <li><b>七天內結帳都算，而且不限那一件商品。</b>同一家店裡他順手買的貓砂、罐頭一樣算。東西齊全的賣場因此比便宜五塊的賣場值錢。</li>
           <li><b>七天內他點到別人的連結，就變成別人的。</b>所以頁面要讓人看完就走、直接買，不要逼他再去比價。</li>
-          <li><b>產不出連結是「那一款」的事，不是整家的事。</b>賣家可以只幫部分商品開分潤（2026-09-19 驗證：小BU 其他商品產得出來，只有 pidan 那一款不行）。跟商城、優選、官方旗艦館也無關，皇家官方旗艦館一樣產不出來。所以我只擋「那一款 × 那一家」，同一家在別款照樣列。最快的驗法是在分潤後台搜商品，列得出來的才產得出連結。</li>
-          <li><b>費率不用挑。</b>蝦皮的費率隨商品、活動、賣家加碼和創作者分級在變，以商品頁當下顯示的為準，我們也不寫在讀者看得到的地方。能控制的只有「他會不會買」。</li>
+          <li><b>產不出連結是「那一款」的事，不是整家的事。</b>賣家可以只幫部分商品開分潤。所以我只擋「那一款 × 那一家」，同一家在別款照樣列。</li>
+          <li><b>費率不用挑。</b>蝦皮的費率一直在變，以商品頁當下顯示的為準。能控制的只有「他會不會買」。</li>
         </ul>
         <p style={{ margin: "12px 0 0", fontSize: 12.5, color: "var(--faint)", lineHeight: 1.85 }}>
-          依蝦皮幫助中心「分潤計畫用戶如何賺取分潤金」與聯盟計畫約定條款（2026-09-18 查）。條款另有規定：禁止機器人與自動抓取、禁止自購，違反可立即終止，所以我們不自動操作你的帳號。
+          依蝦皮幫助中心與聯盟計畫約定條款（2026-09-18 查）。條款禁止機器人與自動抓取、禁止自購，違反可立即終止，所以我們不自動操作你的帳號。
         </p>
-      </div>
+      </Drawer>
 
-      {(() => {
-        const shown = new Set([...thin.map((p) => p.id), ...noChicken.map((x) => x.planId), ...waiting.map((p) => p.id)]);
-        // 補好連結的自己消失，不用手動清單
-        const rest = huntTargets.filter((t) => !shown.has(t.id) && !linked.has(t.id));
-        const done = huntTargets.filter((t) => linked.has(t.id));
-        if (rest.length === 0 && done.length === 0) return null;
-        return (
-          <>
-            <H>我查好賣場、等你產連結的（{rest.length} 款）</H>
-            {done.length > 0 && (
-              <details style={{ ...box, marginBottom: 14 }}>
-                <summary style={{ cursor: "pointer", fontSize: 14, color: "var(--keep)", fontWeight: 700 }}>
-                  已經補好的 {done.length} 款（收起來了，要看再點）
-                </summary>
-                <p style={{ margin: "10px 0 0", fontSize: 12.5, color: "var(--faint)", lineHeight: 1.9 }}>
-                  {done.map((t) => t.label).join("、")}
-                </p>
-              </details>
-            )}
-            {rest.length === 0 && <p style={ok}>我查好的都補完了。要我再查一批就說一聲。</p>}
-            {rest.map((t) => (
-              <div key={t.id} style={box}>
-                <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", gap: 12, flexWrap: "wrap" }}>
-                  <b style={{ fontSize: 17 }}>{t.label}</b>
-                  <span className="mono" style={{ fontSize: 12.5, color: "var(--faint)" }}>{t.id}</span>
-                </div>
-                <p style={{ margin: "6px 0 0", fontSize: 14, color: "var(--muted)", lineHeight: 1.85 }}>{t.why}</p>
-                <div style={{ marginTop: 10, paddingTop: 10, borderTop: "1px solid var(--line)" }}>
-                  <Line k="產生連結時填">
-                    <span className="mono" style={{ fontSize: 14 }}>
-                      Sub id 1 = <b>{shopeeSubId(t.id)}</b>　Sub id 2 = <b>{categoryOfId(t.id)?.subId ?? CATEGORY_SUB_ID}</b>
-                    </span>
-                  </Line>
-                  <HuntPicks id={t.id} />
-                </div>
-              </div>
-            ))}
-          </>
-        );
-      })()}
-
-      {thin.length > 0 && (
-        <>
-          <H>只剩一家在賣（{thin.length} 款）</H>
-          <p style={{ margin: "0 0 14px", fontSize: 14, color: "var(--muted)", lineHeight: 1.9 }}>
-            那一家賣完，這一款在網站上就沒地方買。補第二家最快的方法，是回同一個品牌我們買過的賣場找。{thinAll.length > thin.length ? ` 另外還有 ${thinAll.length - thin.length} 款也只有一家，但目前的情況推不到它們，先不用管。` : ""}
-          </p>
-          {thin.map((p) => (
-            <div key={p.id} style={box}>
-              <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", gap: 12, flexWrap: "wrap" }}>
-                <div>
-                  <span style={{ fontSize: 12.5, color: "var(--muted)", display: "block" }}>{p.brand}</span>
-                  <b style={{ fontSize: 17 }}>{p.name}</b>
-                </div>
-                <span className="mono" style={{ fontSize: 12.5, color: "var(--faint)" }}>
-                  {p.id}{picks.get(p.id) ? ` · 被推薦 ${picks.get(p.id)} 次` : ""}
-                </span>
-              </div>
-              <div style={{ marginTop: 12, paddingTop: 12, borderTop: "1px solid var(--line)" }}>
-                <Line k="現在這一家">{[...new Set(p.price.merchants.filter((m) => !m.dead).map((m) => m.label))].join("、")}</Line>
-                <Line k="產生連結時填">
-                  <span className="mono" style={{ fontSize: 14 }}>
-                    Sub id 1 = <b>{shopeeSubId(p.id)}</b>　Sub id 2 = <b>{categoryOfId(p.id)?.subId ?? CATEGORY_SUB_ID}</b>
-                  </span>
-                </Line>
-                <HuntLinks keyword={huntKeyword(p)} shops={shopsFor(p.brand)} />
-                <HuntPicks id={p.id} />
-              </div>
-            </div>
-          ))}
-        </>
-      )}
-
-      {noChicken.length > 0 && (
-        <>
-          <H>查藏雞頁沒有雞、但我們沒連結（{noChicken.length} 款）</H>
-          <p style={{ margin: "0 0 14px", fontSize: 14, color: "var(--muted)", lineHeight: 1.9 }}>
-            這幾款我們讀過成分表、確定沒有雞，但沒有連結，所以只能看不能買。
-            對雞過敏的人最想買的就是這幾包。連結一到就補成完整商品，裁決器也會開始推。
-          </p>
-          {noChicken.map((x) => (
-            <div key={x.id} style={box}>
-              <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", gap: 12, flexWrap: "wrap" }}>
-                <div>
-                  <span style={{ fontSize: 12.5, color: "var(--muted)", display: "block" }}>{x.brand}</span>
-                  <b style={{ fontSize: 17 }}>{x.name}</b>
-                </div>
-                <span className="mono" style={{ fontSize: 12.5, color: "var(--faint)" }}>{x.id} → {x.planId}</span>
-              </div>
-              <div style={{ marginTop: 12, paddingTop: 12, borderTop: "1px solid var(--line)" }}>
-                {x.huntNote && (
-                  <Line k="找過">
-                    <b style={{ color: "var(--cut)" }}>{x.huntNote}</b>
-                  </Line>
-                )}
-                <Line k="產生連結時填">
-                  <span className="mono" style={{ fontSize: 14 }}>
-                    Sub id 1 = <b>{shopeeSubId(x.planId)}</b>　Sub id 2 = <b>{categoryOfId(x.planId)?.subId ?? CATEGORY_SUB_ID}</b>
-                  </span>
-                </Line>
-                <HuntLinks keyword={x.hunt} shops={shopsFor(x.brand)} />
-                <HuntPicks id={x.planId} />
-              </div>
-            </div>
-          ))}
-        </>
-      )}
-
-      <H id="gap-food">等你補連結的（{waiting.length} 款）</H>
-      {waiting.length === 0 ? (
-        <p style={ok}>沒有。選好的都上架了。</p>
-      ) : (
-        <>
-          <p style={{ margin: "0 0 14px", fontSize: 15.5, color: "var(--muted)", lineHeight: 1.9 }}>
-            規格、成分、文案都寫好了，<b style={{ color: "var(--ink)" }}>只差分潤連結</b>。
-            照下面的關鍵字去蝦皮找賣家，產生連結時把 Sub_id 填上，
-            再把那一行貼進 <code style={code}>data/paste.txt</code>，跑 <code style={code}>npm run data:paste</code>。
-          </p>
-          {waitingBy.map((g) => (
-            <div key={g.cat.slug} style={{ marginBottom: 28 }}>
-              <p style={{ margin: "0 0 12px", fontSize: 17, fontWeight: 700 }}>
-                {g.cat.zh}：{g.items.length} 款
-                {g.ready < MIN_LIVE && (
-                  <span style={{ fontSize: 14, fontWeight: 600, color: "var(--accent)", marginLeft: 10 }}>
-                    再補 {MIN_LIVE - g.ready} 款就開張
-                  </span>
-                )}
-              </p>
-              {g.ready < MIN_LIVE && (
-                <p style={{ margin: "0 0 14px", fontSize: 14, color: "var(--muted)", lineHeight: 1.9 }}>
-                  能推薦的款數到 {MIN_LIVE}，{g.cat.zh}的裁決器、長尾頁、分享卡會在下一次部署自己打開。
-                  清單已經照「補了之後會被推薦幾頁」排好，從最上面開始補最划算。
-                </p>
-              )}
-          {g.items.map((p) => (
-            <div key={p.id} style={box}>
-              <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", gap: 12, flexWrap: "wrap" }}>
-                <div>
-                  <span style={{ fontSize: 12.5, color: "var(--muted)", display: "block" }}>{p.brand}</span>
-                  <b style={{ fontSize: 17 }}>{p.name}</b>
-                </div>
-                <span className="mono" style={{ fontSize: 12.5, color: "var(--faint)" }}>
-                  {p.id}{picks.get(p.id) ? ` · 補了會被推薦 ${picks.get(p.id)} 次` : " · 目前的情況都輪不到它"}
-                </span>
-              </div>
-
-              <div style={{ marginTop: 14, paddingTop: 14, borderTop: "1px solid var(--line)" }}>
-                {p.huntNote && (
-                  <Line k="找過">
-                    <b style={{ color: "var(--cut)" }}>{p.huntNote}</b>
-                    <span style={{ display: "block", fontSize: 12.5, color: "var(--faint)", marginTop: 4 }}>
-                      先補別款。之後看到有賣場上架再回來補
-                    </span>
-                  </Line>
-                )}
-                <Line k="去蝦皮搜這個">
-                  <span className="mono" style={{ fontSize: 14 }}>{huntKeyword(p)}</span>
-                  <HuntLinks keyword={huntKeyword(p)} shops={shopsFor(p.brand)} />
-                  <HuntPicks id={p.id} />
-                </Line>
-                <Line k="產生連結時填">
-                  <span className="mono" style={{ fontSize: 14 }}>
-                    Sub id 1 = <b>{shopeeSubId(p.id)}</b>　Sub id 2 = <b>{categoryOfId(p.id)?.subId ?? CATEGORY_SUB_ID}</b>
-                  </span>
-                  <span style={{ display: "block", fontSize: 12.5, color: "var(--faint)", marginTop: 4 }}>
-                    蝦皮這個欄位只收英數字，連字號會被擋，所以是 {shopeeSubId(p.id)} 不是 {p.id}。Sub id 3 以後不用填。
-                    同一款找到好幾家，每一家都填一樣的
-                  </span>
-                </Line>
-                {sellersOfBrand(p.brand).length > 0 && (
-                  <Line k="這個牌子買過的家">
-                    <b>{sellersOfBrand(p.brand).join("、")}</b>
-                    <span style={{ display: "block", fontSize: 12.5, color: "var(--faint)", marginTop: 4 }}>
-                      回這幾家找通常最快，有整條產品線的機率很高，而且賣家越集中維護越省
-                    </span>
-                  </Line>
-                )}
-                <Line k="要對得上">
-                  賣場<b>標題</b>或<b>規格選項</b>裡，要有我們寫的這一款
-                  <span style={{ display: "block", fontSize: 12.5, color: "var(--faint)", marginTop: 4 }}>
-                    一頁多款的賣場可以，網站會提醒讀者點進去選哪一個。只有內文和圖片對得上的不算，退換爭議照標題和規格走
-                  </span>
-                </Line>
-                <Line k="有送東西的">
-                  <b>可以收</b>，看同一個大小有沒有比別家便宜
-                  <span style={{ display: "block", fontSize: 12.5, color: "var(--faint)", marginTop: 4 }}>
-                    便宜又送東西就收。只有贈品讓價錢比別家貴，才不要
-                  </span>
-                </Line>
-                <Line k="一款找幾家">
-                  多找幾家沒關係，同一包網站會自動給最便宜的那家
-                  <span style={{ display: "block", fontSize: 12.5, color: "var(--faint)", marginTop: 4 }}>
-                    其他家留著當備援，最便宜的賣完了，讀者還有地方買。一款最多 16 條
-                  </span>
-                </Line>
-                <Line k="截圖要拍到">
-                  規格的完整名稱、價錢、運費（免運、限宅配、超取限幾包）
-                  <span style={{ display: "block", fontSize: 12.5, color: "var(--faint)", marginTop: 4 }}>
-                    罐頭要看清楚是一罐還是一箱幾罐。規格名稱會原封不動寫給讀者看，點進去才選得對
-                  </span>
-                </Line>
-              </div>
-            </div>
-          ))}
-            </div>
-          ))}
-        </>
-      )}
-
-      <H id="gap-other">貓砂、零食還沒有連結的（{nonFoodGaps.reduce((n, g) => n + g.items.length, 0)} 款）</H>
-      <p style={{ margin: "0 0 14px", fontSize: 14, color: "var(--muted)", lineHeight: 1.9 }}>
-        這兩個類目不走飼料那套引擎，所以沒有「補了會被推薦幾次」可以排。
-        順序就是資料的順序，從上面補下來就好。
-      </p>
-      {nonFoodGaps.map((g) => (
-        <div key={g.zh} style={{ marginBottom: 10 }}>
-          <p style={{ margin: "0 0 8px", fontSize: 12.5, fontWeight: 700, color: "var(--muted)" }}>
-            {g.zh}（{g.items.length} 款）
-          </p>
-          {g.items.length === 0 ? (
-            <p style={ok}>都補齊了。</p>
-          ) : (
-            g.items.map((p) => (
-              <div key={p.id} style={box}>
-                <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", gap: 12, flexWrap: "wrap" }}>
-                  <div>
-                    <span style={{ fontSize: 12.5, color: "var(--muted)", display: "block" }}>{p.brand}</span>
-                    <b style={{ fontSize: 17 }}>{p.name}</b>
-                  </div>
-                  <span className="mono" style={{ fontSize: 12.5, color: "var(--faint)" }}>{p.id}</span>
-                </div>
-                <div style={{ marginTop: 14, paddingTop: 14, borderTop: "1px solid var(--line)" }}>
-                  <Line k="去蝦皮搜這個">
-                    <span className="mono" style={{ fontSize: 14 }}>{huntFrom(p.brand, p.name, p.searchAs)}</span>
-                    <HuntLinks keyword={huntFrom(p.brand, p.name, p.searchAs)} shops={shopsFor(p.brand)} />
-                    <HuntPicks id={p.id} />
-                  </Line>
-                  <Line k="產生連結時填">
-                    <span className="mono" style={{ fontSize: 14 }}>
-                      Sub id 1 = <b>{shopeeSubId(p.id)}</b>　Sub id 2 = <b>{categoryOfId(p.id)?.subId ?? CATEGORY_SUB_ID}</b>
-                    </span>
-                  </Line>
-                </div>
-              </div>
-            ))
-          )}
-        </div>
-      ))}
-
-      <H>哪一種賣場產得出連結</H>
-      <p style={{ margin: "0 0 14px", fontSize: 14, color: "var(--muted)", lineHeight: 1.9 }}>
-        一般賣家常常便宜一半，但三家裡只有一家開得出分潤。所以一般賣家要一次多給幾家，
-        商城跟優選留著保底。這個表自己從資料算，補一次連結、記一次失敗就會更新。
-      </p>
-      <div style={{ ...box, marginBottom: 24 }}>
+      <Drawer title="哪一種賣場產得出連結" count="成功率">
+        <p style={{ ...lead, marginTop: 0 }}>
+          一般賣家常常便宜一半，但不一定開得出分潤。所以一般賣家要一次多給幾家，商城跟優選留著保底。
+        </p>
         {channelStats().map((s2) => (
           <Line key={s2.channel} k={CHANNEL_ZH[s2.channel]}>
             <span className="mono">
-              產出 {s2.ok}　失敗 {s2.fail}　
+              產出 {s2.ok}　失敗 {s2.fail}
               <b style={{ color: (s2.rate ?? 0) >= 60 ? "var(--keep)" : "var(--cut)" }}>
                 {s2.rate === null ? "還沒試過" : `成功率 ${s2.rate}%`}
               </b>
             </span>
           </Line>
         ))}
-      </div>
+      </Drawer>
 
-      <H id="sold-out">有連結但賣完了（{soldOut.length} 款）</H>
-      <p style={{ margin: "0 0 14px", fontSize: 14, color: "var(--muted)", lineHeight: 1.9 }}>
-        連結是好的，東西賣完而已，補貨就能開。讀者看不到這幾條，資料留著。
-        回去看到有貨，用 data:paste 貼一次、備註寫【補貨】就回來。
-      </p>
-      {soldOut.length === 0
-        ? <p style={ok}>沒有。</p>
-        : soldOut.map((p) => (
-            <div key={p.id} style={box}>
-              <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", gap: 12, flexWrap: "wrap" }}>
-                <div>
-                  <span style={{ fontSize: 12.5, color: "var(--muted)", display: "block" }}>{p.brand}</span>
-                  <b style={{ fontSize: 17 }}>{p.name}</b>
-                </div>
-                <span className="mono" style={{ fontSize: 12.5, color: "var(--faint)" }}>{p.id}</span>
-              </div>
-              {p.sold.map((m) => (
-                <div key={m.id} style={{ marginTop: 10, paddingTop: 10, borderTop: "1px solid var(--line)" }}>
-                  <Line k={m.label}>
-                    <span className="mono">{m.unit} ${m.amount}</span>
-                    {m.note && (
-                      <span style={{ display: "block", fontSize: 12.5, color: "var(--faint)", marginTop: 4 }}>{m.note}</span>
-                    )}
-                    <a
-                      href={m.affiliateUrl}
-                      target="_blank"
-                      rel="noopener nofollow"
-                      style={{ display: "inline-block", marginTop: 6, color: "var(--accent)", fontSize: 14 }}
-                    >
-                      開連結看補貨了沒 ↗
-                    </a>
-                  </Line>
-                </div>
-              ))}
-            </div>
-          ))}
+      <Drawer title="裁決器有沒有在做事" count={`平均刪掉 ${Math.round((1 - cut.avgKeep) * 100)}%`}>
+        <p style={{ margin: 0, fontSize: 15.5, lineHeight: 1.9 }}>
+          全站 {cut.pages} 頁，平均刪掉 {Math.round((1 - cut.avgKeep) * 100)}%。這個站的說服力來自「我們刪掉了什麼」。
+          {cut.avgKeep > 0.7
+            ? ` 現在幾乎沒刪到東西，品種頁是 ${dogPool.length} 進 ${dogPool.length} 留。下一批該補的，是會被刪掉的那種。`
+            : " 目前的排除幅度是合理的。"}
+        </p>
+        <p style={{ margin: "18px 0 6px", fontSize: 14, fontWeight: 700, color: "var(--muted)" }}>每條規則刪得掉幾款</p>
+        {audit.map((r) => (
+          <div key={r.rule} style={{ ...line, color: r.catches === 0 ? "var(--cut)" : "inherit" }}>
+            <span className="mono" style={{ minWidth: 48, fontWeight: 700 }}>{r.catches} 款</span>
+            <span style={{ flex: 1, minWidth: 160 }}>{r.rule}</span>
+            {r.catches === 0 && (
+              <span style={{ fontSize: 12.5, color: "var(--muted)", flexBasis: "100%" }}>要補：{r.need}</span>
+            )}
+          </div>
+        ))}
+        {deadRules.length > 0 && (
+          <p style={{ margin: "12px 0 0", fontSize: 14, color: "var(--muted)", lineHeight: 1.85 }}>
+            {deadRules.length} 條規則目前是空的：規則沒寫錯，只是選品裡還沒有它要擋的東西。
+          </p>
+        )}
+        <p style={{ margin: "18px 0 6px", fontSize: 14, fontWeight: 700, color: "var(--muted)" }}>哪幾款其實沒人看得到（狗飼料）</p>
+        <div style={{ display: "flex", flexWrap: "wrap", gap: 10 }}>
+          <Chip {...TIER["主力"]}>主力 {core.length} 款 · 要顧</Chip>
+          <Chip {...TIER["會被看到"]}>會被看到 {dogPool.length - core.length - idle.length} 款</Chip>
+          <Chip {...TIER["目前沒機會"]}>目前沒機會 {idle.length} 款 · 先放著</Chip>
+        </div>
+        {idle.length > 0 && (
+          <p style={{ margin: "10px 0 0", fontSize: 14, color: "var(--faint)", lineHeight: 1.85 }}>
+            {idle.map((p) => `${p.brand}｜${p.name}`).join("、")}。以現在的規則，沒有任何一個組合會推到它們，跟好不好無關。
+          </p>
+        )}
+      </Drawer>
 
-      <H id="mall-only">只連到商城的（{mallOnly.length} 款）</H>
-      <p style={{ margin: "0 0 14px", fontSize: 14, color: "var(--muted)", lineHeight: 1.9 }}>
-        商城有保障，但同一包常常貴一截。臭味滾 7L 商城 $223，一般賣家 $100。
-        這幾款現在只連得到商城，只看價錢的讀者等於沒有選擇。
-        補一家一般賣家或優選上去，網站會自動把兩種都列給讀者，便宜的排前面。
-      </p>
-      {mallOnly.length === 0
-        ? <p style={ok}>沒有。每一款都至少有一家商城以外的賣場。</p>
-        : mallOnly.map((p) => (
-            <div key={p.id} style={box}>
-              <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", gap: 12, flexWrap: "wrap" }}>
-                <div>
-                  <span style={{ fontSize: 12.5, color: "var(--muted)", display: "block" }}>{p.brand}</span>
-                  <b style={{ fontSize: 17 }}>{p.name}</b>
-                </div>
-                <span className="mono" style={{ fontSize: 12.5, color: "var(--faint)" }}>{p.id}</span>
-              </div>
-              <div style={{ marginTop: 14, paddingTop: 14, borderTop: "1px solid var(--line)" }}>
-                <Line k="現在連到">
-                  {[...new Set(p.live.map((m) => m.label))].join("、")}
-                </Line>
-                <Line k="去蝦皮搜這個">
-                  <span className="mono" style={{ fontSize: 14 }}>{huntFrom(p.brand, p.name, p.searchAs)}</span>
-                  <HuntLinks keyword={huntFrom(p.brand, p.name, p.searchAs)} shops={[]} />
-                  <HuntPicks id={p.id} />
-                </Line>
-                <Line k="產生連結時填">
-                  <span className="mono" style={{ fontSize: 14 }}>
-                    Sub id 1 = <b>{shopeeSubId(p.id)}</b>　Sub id 2 = <b>{categoryOfId(p.id)?.subId ?? CATEGORY_SUB_ID}</b>
-                  </span>
-                </Line>
-              </div>
-            </div>
-          ))}
+      <Drawer title="我這邊還沒做完的" count={`${unbuyable.length + noIssues.length} 款`}>
+        <p style={{ ...lead, marginTop: 0 }}>這一段是 Claude 的功課，你不用動手。</p>
+        <Line k="整款買不到">
+          {unbuyable.length === 0 ? "沒有" : unbuyable.map((p) => `${p.brand}｜${p.name}（${p.discontinued ? "停產" : "所有賣場都失效"}）`).join("、")}
+        </Line>
+        <Line k="還沒寫缺點">
+          {noIssues.length === 0 ? "都寫了" : noIssues.map((p) => `${p.brand}｜${p.name}`).join("、")}
+        </Line>
+      </Drawer>
 
-      <H>整款買不到的</H>
-      {unbuyable.length === 0
-        ? <p style={ok}>沒有。每一款都至少還有一家能買。</p>
-        : <ul style={ul}>{unbuyable.map((p) => (
-            <li key={p.id}>{p.brand}｜{p.name}：{p.discontinued ? "已標記停產" : "所有賣場都失效"}</li>
-          ))}</ul>}
-
-      <H>還沒寫「先知道這件事」的</H>
-      {noIssues.length === 0
-        ? <p style={ok}>都寫了。</p>
-        : <ul style={ul}>{noIssues.map((p) => <li key={p.id}>{p.brand}｜{p.name}</li>)}</ul>}
-
-      <H>先放著的（{later.length} 條）</H>
-      <details>
-        <summary style={{ cursor: "pointer", fontSize: 14, color: "var(--muted)", padding: "6px 0" }}>
-          展開看全部
-        </summary>
-        <div style={{ overflowX: "auto", marginTop: 12 }}>
+      <Drawer title="先放著的連結" count={`${later.length} 條`}>
+        <div style={{ overflowX: "auto" }}>
           <table style={{ width: "100%", minWidth: 620, borderCollapse: "collapse", fontSize: 14 }}>
             <tbody>
               {later.map((r) => (
@@ -777,50 +610,44 @@ export default function Page() {
             </tbody>
           </table>
         </div>
-      </details>
+      </Drawer>
 
-      <H>規則</H>
-      <ul style={ul}>
-        <li>{PRICE_FRESH_DAYS} 天內查過 = 新的，價格照常顯示。</li>
-        <li>超過 {PRICE_FRESH_DAYS} 天 = 快過期，卡片上多一行「這個價格是 N 天前查的」。</li>
-        <li>超過 {PRICE_STALE_DAYS} 天 = 過期，明講我們把它當參考不當承諾。</li>
-        <li>賣場標成 <code style={code}>mNDead=1</code>，引擎完全跳過；全部賣場都死，整款不進裁決。</li>
-        <li>連結健檢在自己電腦上跑：<code style={code}>npm run links:check</code>。</li>
-        <li>新增商品用貼的：把行貼進 <code style={code}>data/paste.txt</code>，跑 <code style={code}>npm run data:paste</code>。</li>
-      </ul>
+      <Drawer title="價格多久算過期" count={`${PRICE_FRESH_DAYS} / ${PRICE_STALE_DAYS} 天`}>
+        <ul style={ul}>
+          <li>{PRICE_FRESH_DAYS} 天內查過 = 新的，價格照常顯示。</li>
+          <li>超過 {PRICE_FRESH_DAYS} 天 = 快過期，卡片上多一行「這個價格是 N 天前查的」。</li>
+          <li>超過 {PRICE_STALE_DAYS} 天 = 過期，明講我們把它當參考不當承諾。</li>
+          <li>賣場標成失效，引擎完全跳過；全部賣場都失效，整款不進裁決。</li>
+        </ul>
+      </Drawer>
 
       <p style={{ marginTop: 40 }}>
-        <Link href="/" style={{ color: "var(--accent)", fontWeight: 700 }}>← 回裁決器</Link>
+        <Link href="/" style={{ color: "var(--accent)", fontWeight: 700 }}>← 回網站</Link>
       </p>
     </main>
   );
 }
 
-/**
- * 所有分潤連結，照賣場分組。
- *
- * 蝦皮分潤後台說某個商品「無效」的時候，後台只給商品名和價錢；
- * 點進去才看得到賣場名稱。所以這張表用賣場分組：拿賣場名稱來對最快。
- *
- * 蝦皮的商品頁不讓程式看（回 403），我們也不繞過，所以「無效、賣完」只能靠人點開看。
- * 這張表就是讓 Tim 在手機上一條一條點的。
- */
 /** 這一條在這一款裡的角色：第一條還能買的是主要，其他是備援 */
-function roleOf(p: Product, m: Product["price"]["merchants"][number]): "主要" | "備援" {
+function roleOf(p: Product, m: Merchant): "主要" | "備援" {
   const first = p.price.merchants.find((x) => !x.dead);
   return first && first.affiliateUrl === m.affiliateUrl && (first.unit ?? "") === (m.unit ?? "") ? "主要" : "備援";
 }
 
-function AllLinks() {
+/**
+ * 所有分潤連結，照賣場分組；順便找出名字還沒跟 Tim 核對的賣場。
+ *
+ * 蝦皮分潤後台說某個商品「無效」的時候，後台只給商品名和價錢，點進去才看得到賣場名稱。
+ * 所以用賣場分組：拿賣場名稱來對最快。
+ * 蝦皮的商品頁不讓程式看（回 403），我們也不繞過，所以「無效、賣完」只能靠人點開看。
+ */
+function linkIndex() {
   type HealthRow = { url: string; item: string | null; verdict: string };
   const byUrl = new Map((health.rows as HealthRow[]).map((r) => [r.url, r]));
-  const all = catalog.flatMap((p) =>
-    p.price.merchants.map((m) => ({ p, m, h: byUrl.get(m.affiliateUrl) })),
-  );
+  const all = catalog.flatMap((p) => p.price.merchants.map((m) => ({ p, m, h: byUrl.get(m.affiliateUrl) })));
   const stores = new Map<string, typeof all>();
   for (const x of all) stores.set(x.m.label, [...(stores.get(x.m.label) ?? []), x]);
   const groups = [...stores].sort((a, b) => a[0].localeCompare(b[0], "zh-Hant"));
-
   // 賣場名稱核對：從連結健檢拿到蝦皮賣場編號，再對 data/stores.json 看 Tim 核對過沒有
   const reg = storeReg.stores as Record<string, { name: string; confirmed: boolean }>;
   const shopOfLabel = new Map<string, string>();
@@ -831,106 +658,26 @@ function AllLinks() {
   const unchecked = groups
     .map(([label, items]) => ({ label, shop: shopOfLabel.get(label), items }))
     .filter((g) => !g.shop || !reg[g.shop]?.confirmed);
-  const urls = new Set(all.map((x) => x.m.affiliateUrl)).size;
+  return { groups, unchecked, urls: new Set(all.map((x) => x.m.affiliateUrl)).size };
+}
 
+function SubIds({ id }: { id: string }) {
   return (
-    <>
-      <H>所有分潤連結（{urls} 條，{groups.length} 家賣場）</H>
-      {unchecked.length > 0 && (
-        <div style={{ ...box, borderColor: "var(--cut)", background: "var(--cut-soft)" }}>
-          <p style={{ margin: "0 0 8px", fontSize: 17, fontWeight: 700 }}>
-            這 {unchecked.length} 家的名字還沒跟你核對
-          </p>
-          <p style={{ margin: "0 0 10px", fontSize: 14, lineHeight: 1.85 }}>
-            這些名字是 Claude 從截圖讀的，可能讀錯字（「萬倍富」曾經被寫成「萬信富」）。
-            讀者會拿這個名字去蝦皮搜，錯一個字就找不到。點下面那家的「點開看」，對一下賣場名稱，
-            跟 Claude 說「都對」或哪一家要改。
-          </p>
-          <ul style={{ ...ul, fontSize: 14 }}>
-            {unchecked.map((g) => (
-              <li key={g.label}>
-                <b>{g.label}</b>
-                <span style={{ color: "var(--faint)", fontSize: 12.5 }}>
-                  {g.shop ? `　蝦皮賣場 ${g.shop}` : "　還沒跑連結健檢"}　·　{[...new Set(g.items.map((x) => x.p.id))].join("、")}
-                </span>
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
-      <div id="links" style={{ ...box, borderColor: "var(--warn)", background: "var(--warn-soft)" }}>
-        <p style={{ margin: "0 0 8px", fontSize: 17, fontWeight: 700 }}>蝦皮後台說某個商品「無效」的時候</p>
-        <ol style={{ ...ul, fontSize: 14 }}>
-          <li>在蝦皮 App 點進那個無效商品，看<b>賣場名稱</b>。</li>
-          <li>在下面找同一個賣場。找不到，就是網站沒用到它，不用管。</li>
-          <li>找到了，點那一條的「點開看」。打不開、顯示無效或賣完，就跟 Claude 說「這一條無效」，
-            或直接貼另一家的新連結。舊的會標成失效，網站馬上不推那一家。</li>
-        </ol>
-        <p style={{ margin: "10px 0 0", fontSize: 14, lineHeight: 1.85 }}>
-          <b>你給過的連結永遠不刪。</b>新給的放最前面，原本的自動往後當備援；主要那一條壞了，備援自己頂上。
-          只有確定無效的會標「失效」：讀者看不到，這裡還留著，哪天恢復了一句話就能放回去。
-        </p>
-        <p style={{ margin: "10px 0 0", fontSize: 14, color: "var(--muted)", lineHeight: 1.85 }}>
-          自己點開檢查沒關係。要自己買的話不要從這裡下單，多數分潤計畫不算自己買的，還可能被當成異常。
-          連結健檢最後一次跑是 {health.checkedAt}：每一條都有轉到商品頁，但商品還在不在、有沒有分潤，蝦皮不讓程式看，要自己點。
-        </p>
-      </div>
-      {groups.map(([label, items]) => (
-        <div key={label} style={box}>
-          <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", gap: 12, marginBottom: 8, flexWrap: "wrap" }}>
-            <h3 style={{ margin: 0, fontSize: 17 }}>
-              {label}
-              {unchecked.some((g) => g.label === label) && (
-                <span style={{ marginLeft: 8, fontSize: 12.5, fontWeight: 600, color: "var(--cut)" }}>名字待核對</span>
-              )}
-            </h3>
-            <span style={{ fontSize: 12.5, color: "var(--faint)" }}>{new Set(items.map((x) => x.m.affiliateUrl)).size} 條</span>
-          </div>
-          {items.map(({ p, m, h }) => (
-            <div key={p.id + m.id} style={{ ...line, borderTop: "1px solid var(--line)" }}>
-              <div style={{ flex: 1, minWidth: 190 }}>
-                <span style={{ display: "block", fontSize: 12.5, color: "var(--muted)" }}>
-                  <Link href={productHref(p)} style={{ color: "inherit" }}>{p.id}</Link> · {p.brand}
-                  {/* 主要＝卡片上那個按鈕；備援＝收在「其他規格與價格」裡，主要的壞了就自動頂上 */}
-                  <b style={{ marginLeft: 8, color: m.dead ? "var(--cut)" : roleOf(p, m) === "主要" ? "var(--keep)" : "var(--muted)" }}>
-                    {m.dead ? "失效（讀者看不到）" : roleOf(p, m)}
-                  </b>
-                </span>
-                {p.name}
-                <span className="mono" style={{ display: "block", fontSize: 12.5, color: "var(--faint)" }}>
-                  {m.unit ?? p.price.unit} · ${m.amount} · 查價 {m.checkedAt ?? p.price.checkedAt}
-                  {h?.item ? ` · 蝦皮商品 ${h.item}` : ""}
-                </span>
-                {m.sharedPage && (
-                  <span style={{ display: "block", fontSize: 12.5, color: "var(--cut)" }}>跟另一款在同一個商品頁，讀者要自己選規格</span>
-                )}
-              </div>
-              <a href={m.affiliateUrl} target="_blank" rel="noopener nofollow"
-                 style={{ color: "var(--accent)", fontSize: 14, fontWeight: 600, whiteSpace: "nowrap" }}>
-                點開看 ↗
-              </a>
-            </div>
-          ))}
-        </div>
-      ))}
-    </>
+    <p className="mono" style={{ margin: "10px 0 0", fontSize: 14 }}>
+      <span style={{ color: "var(--faint)", fontSize: 12.5 }}>Sub id 1 </span><b>{shopeeSubId(id)}</b>
+      <span style={{ color: "var(--faint)", fontSize: 12.5, marginLeft: 16 }}>Sub id 2 </span><b>{categoryOfId(id)?.subId ?? CATEGORY_SUB_ID}</b>
+    </p>
   );
 }
 
 function Line({ k, children }: { k: string; children: React.ReactNode }) {
   return (
-    <div style={{ display: "flex", gap: 12, flexWrap: "wrap", padding: "5px 0", fontSize: 14, lineHeight: 1.8 }}>
-      <span style={{ color: "var(--faint)", minWidth: "9em", fontSize: 12.5 }}>{k}</span>
+    <div style={{ display: "flex", gap: 12, flexWrap: "wrap", padding: "6px 0", fontSize: 14, lineHeight: 1.8 }}>
+      <span style={{ color: "var(--faint)", minWidth: "7em", fontSize: 12.5 }}>{k}</span>
       <span style={{ flex: 1, minWidth: 200 }}>{children}</span>
     </div>
   );
 }
-
-const jump: React.CSSProperties = {
-  display: "flex", justifyContent: "space-between", alignItems: "center", gap: 12,
-  padding: "10px 0", borderTop: "1px solid var(--line)",
-  textDecoration: "none", color: "inherit", fontSize: 15.5,
-};
 
 function Chip({ bg, fg, children }: { bg: string; fg: string; children: React.ReactNode }) {
   return (
@@ -942,30 +689,66 @@ function Chip({ bg, fg, children }: { bg: string; fg: string; children: React.Re
   );
 }
 
-function H({ children, id }: { children: React.ReactNode; id?: string }) {
+function H({ children, id, n, unit = "款" }: { children: React.ReactNode; id?: string; n?: number; unit?: string }) {
   return (
     <h2 id={id} style={{
-      fontSize: 17, fontWeight: 700, margin: "40px 0 14px",
-      paddingTop: 20, borderTop: "1px solid var(--line)",
-    }}>{children}</h2>
+      display: "flex", alignItems: "baseline", justifyContent: "space-between", gap: 12,
+      fontSize: 20, fontWeight: 700, margin: "44px 0 8px", scrollMarginTop: 16,
+    }}>
+      <span>{children}</span>
+      {n !== undefined && <span className="mono" style={{ fontSize: 14, color: "var(--faint)" }}>{n} {unit}</span>}
+    </h2>
+  );
+}
+
+/** 查資料用的抽屜：一行標題、右邊一個數字，點開才有內容 */
+function Drawer({ title, count, children }: { title: string; count: string; children: React.ReactNode }) {
+  return (
+    <details style={{ borderTop: "1px solid var(--line)" }}>
+      <summary style={drawerSum}>
+        <span style={{ flex: 1 }}>{title}</span>
+        <span className="mono" style={{ fontSize: 12.5, color: "var(--faint)", fontWeight: 500 }}>{count}</span>
+      </summary>
+      <div style={{ padding: "4px 0 24px" }}>{children}</div>
+    </details>
   );
 }
 
 const box: React.CSSProperties = {
   background: "var(--surface)", border: "1px solid var(--line)",
-  borderRadius: 14, boxShadow: "var(--sh)", padding: "20px 22px", marginBottom: 14,
+  borderRadius: 14, padding: "18px 22px", marginBottom: 12,
+};
+const head: React.CSSProperties = {
+  display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 12,
+};
+const catTag: React.CSSProperties = {
+  fontSize: 12.5, fontWeight: 700, color: "var(--accent)", marginRight: 8,
+};
+const why: React.CSSProperties = { margin: "6px 0 0", fontSize: 14, color: "var(--muted)", lineHeight: 1.8 };
+const lead: React.CSSProperties = { margin: "0 0 14px", fontSize: 14, color: "var(--muted)", lineHeight: 1.85 };
+const jump: React.CSSProperties = {
+  display: "flex", justifyContent: "space-between", alignItems: "center", gap: 12,
+  padding: "12px 0", textDecoration: "none", color: "inherit", fontSize: 15.5,
+};
+const rules: React.CSSProperties = {
+  marginTop: 14, background: "var(--sunken)", border: "1px solid var(--line)", borderRadius: 14, padding: "12px 22px",
+};
+const rulesSum: React.CSSProperties = { cursor: "pointer", fontSize: 14, fontWeight: 700, color: "var(--muted)" };
+const more: React.CSSProperties = { marginTop: 4 };
+const moreSum: React.CSSProperties = {
+  cursor: "pointer", fontSize: 15.5, fontWeight: 700, color: "var(--muted)", padding: "10px 0",
+};
+const drawerSum: React.CSSProperties = {
+  display: "flex", alignItems: "baseline", gap: 12, cursor: "pointer",
+  padding: "16px 0", fontSize: 15.5, fontWeight: 700,
 };
 const line: React.CSSProperties = {
   display: "flex", flexWrap: "wrap", gap: 10, alignItems: "center",
   padding: "12px 0", borderTop: "1px solid var(--line)", fontSize: 14, lineHeight: 1.6,
 };
+const openLink: React.CSSProperties = { color: "var(--accent)", fontSize: 14, fontWeight: 600, whiteSpace: "nowrap" };
 const td: React.CSSProperties = { padding: "10px 12px 10px 0", verticalAlign: "top" };
 const ul: React.CSSProperties = { paddingLeft: 20, margin: 0, fontSize: 15.5, lineHeight: 1.95 };
-const ok: React.CSSProperties = { margin: 0, fontSize: 15.5, color: "var(--keep)" };
-const code: React.CSSProperties = {
-  fontFamily: "var(--font-mono), monospace", fontSize: "0.9em",
-  background: "var(--sunken)", padding: "1px 5px", borderRadius: 3,
-};
 
 /* ------------------------------------------------------------------ */
 /* 找賣場：把「我要去哪一家找」變成一次點擊                              */
@@ -979,6 +762,7 @@ const code: React.CSSProperties = {
 /*                                                                    */
 /* 這些是蝦皮的「搜尋頁」，不是商品頁，也不是給讀者看的：/status 不對外、*/
 /* 不進搜尋引擎。讀者頁面一律只連分潤連結，那條規矩沒有變。             */
+/* 2026-09-24 起：我已經查好賣場的款，就不再給搜尋按鈕（兩套一起列太吵）。 */
 /* ------------------------------------------------------------------ */
 
 /** 賣場名稱 → 蝦皮賣場編號（從連結健檢的 shopId/itemId 拿） */
@@ -997,11 +781,11 @@ function shopIdsByLabel(): Map<string, string> {
 
 function HuntLinks({ keyword, shops }: { keyword: string; shops: { label: string; shop?: string }[] }) {
   const kw = encodeURIComponent(keyword);
-  const inShops = shops.filter((s) => s.shop).slice(0, 4);
+  const inShops = shops.filter((s) => s.shop).slice(0, 3);
   return (
-    <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginTop: 8 }}>
+    <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginTop: 12 }}>
       <a href={`https://shopee.tw/search?keyword=${kw}`} target="_blank" rel="noopener noreferrer" style={huntBtn}>
-        蝦皮全站搜「{keyword}」
+        蝦皮搜「{keyword}」
       </a>
       {inShops.map((s) => (
         <a
