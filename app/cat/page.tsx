@@ -34,6 +34,11 @@ export default function Page() {
         貓砂跟零食在下面。
       </p>
 
+      {/* 第一次養的人不知道要點什麼，給他一條直接的路（2026-09-24） */}
+      <Link href="/cat/first-time" style={{ display: "inline-block", margin: "0 0 20px", fontSize: 15.5, fontWeight: 700, color: "var(--accent)" }}>
+        第一次養貓？先買哪幾樣，直接給你答案 →
+      </Link>
+
       <Decider defaultSpecies="cat" />
 
       <p style={{ ...S.lbl, marginTop: 56 }}>貓的類目</p>

@@ -59,11 +59,15 @@ export default function Home() {
       <h1 style={{ fontSize: "clamp(28px,6vw,40px)", lineHeight: 1.45, margin: "0 0 16px" }}>
         你家的毛孩怎麼了？<br />點幾下就好
       </h1>
-      <p style={{ color: "var(--muted)", fontSize: 17, lineHeight: 1.9, margin: "0 0 28px", maxWidth: "40ch" }}>
+      <p style={{ color: "var(--muted)", fontSize: 17, lineHeight: 1.9, margin: "0 0 12px", maxWidth: "40ch" }}>
         光是低敏飼料，市面上就上百款。點一下年紀和狀況，我們先幫你
         <span style={{ color: "var(--cut)", fontWeight: 700 }}>刪掉</span>
         不適合的，剩下的才給你看。
       </p>
+      {/* 第一次養的人不知道要點什麼，給他一條直接的路（2026-09-24） */}
+      <Link href="/cat/first-time" style={{ display: "inline-block", margin: "0 0 20px", fontSize: 15.5, fontWeight: 700, color: "var(--accent)" }}>
+        第一次養貓？先買哪幾樣，直接給你答案 →
+      </Link>
 
       <Decider />
 
