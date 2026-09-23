@@ -1,0 +1,740 @@
+{
+  "_meta": {
+    "category": "dog-wet-food",
+    "note": "由 data/dog-wet-food.csv 產生，不要直接改這個檔。改 CSV 之後跑 npm run data:import。",
+    "generatedAt": "2026-09-23",
+    "count": 12,
+    "pricePolicy": "人工複查，不爬蟲。checkedAt 誠實顯示於前端。"
+  },
+  "products": [
+    {
+      "id": "dw-01",
+      "species": "dog",
+      "form": "wet",
+      "brand": "怪獸部落",
+      "name": "犬1肉主食罐 鴨肉",
+      "spec": {
+        "protein": 57,
+        "fat": 28.9,
+        "carb": 7,
+        "omega3": 0.4,
+        "phosphorus": 1.2,
+        "complete": true,
+        "moisture": 71.6,
+        "asFed": {
+          "protein": 16.2,
+          "fat": 8.2,
+          "fiber": 0.3,
+          "ash": 2,
+          "phosphorus": 0.34,
+          "carb": 2
+        },
+        "carbBasis": "published",
+        "proteinSources": [
+          "duck"
+        ],
+        "singleSource": true,
+        "pulses": "none",
+        "grainFree": true,
+        "lifeStage": [
+          "puppy",
+          "adult"
+        ],
+        "bodySize": [
+          "small",
+          "medium",
+          "large"
+        ],
+        "prescription": false,
+        "kcal": 1320
+      },
+      "reports": {
+        "total": 0,
+        "palatability": 0,
+        "looseStool": 0
+      },
+      "price": {
+        "unit": "82g",
+        "checkedAt": "2026-09-20",
+        "merchants": []
+      },
+      "dealbreaker": "你的狗對鴨過敏。整罐的肉就是鴨肉和鴨肝，沒有第三種。",
+      "knownIssues": "成分表的肉只有鴨肉、鴨肝兩項，是我們讀過的狗主食罐裡唯一一款整張成分表都找不到雞的。標示 AAFCO 成幼犬。",
+      "awaitingLink": true,
+      "searchAs": "怪獸部落 犬1肉主食罐 鴨肉 82g",
+      "chicken": {
+        "status": "clean",
+        "found": [
+          "肉只有鴨肉、鴨肝兩項，整張成分表找不到雞"
+        ]
+      }
+    },
+    {
+      "id": "dw-02",
+      "species": "dog",
+      "form": "wet",
+      "brand": "怪獸部落",
+      "name": "犬2肉主食罐 羊雞肉",
+      "spec": {
+        "protein": 55.1,
+        "fat": 31,
+        "carb": 7,
+        "omega3": 0.3,
+        "phosphorus": 1.5,
+        "complete": true,
+        "moisture": 71.3,
+        "asFed": {
+          "protein": 15.8,
+          "fat": 8.9,
+          "fiber": 0.3,
+          "ash": 2,
+          "phosphorus": 0.44,
+          "carb": 2
+        },
+        "carbBasis": "published",
+        "proteinSources": [
+          "lamb",
+          "chicken"
+        ],
+        "singleSource": false,
+        "pulses": "none",
+        "grainFree": true,
+        "lifeStage": [
+          "puppy",
+          "adult"
+        ],
+        "bodySize": [
+          "small",
+          "medium",
+          "large"
+        ],
+        "prescription": false,
+        "kcal": 1360
+      },
+      "reports": {
+        "total": 0,
+        "palatability": 0,
+        "looseStool": 0
+      },
+      "price": {
+        "unit": "165g",
+        "checkedAt": "2026-09-20",
+        "merchants": []
+      },
+      "dealbreaker": "你的狗對雞過敏。雞腿肉、雞胸肉、雞心肝三項，名字上就寫了。",
+      "knownIssues": "名字誠實，雞寫在標題上。第一項是澳洲草飼羊肉，接著才是雞。標示 AAFCO 成幼犬。",
+      "awaitingLink": true,
+      "searchAs": "怪獸部落 犬2肉主食罐 羊雞肉 165g",
+      "chicken": {
+        "status": "chicken"
+      }
+    },
+    {
+      "id": "dw-03",
+      "species": "dog",
+      "form": "wet",
+      "brand": "怪獸部落",
+      "name": "犬2肉主食罐 鱉肉鱉蛋",
+      "spec": {
+        "protein": 57,
+        "fat": 28.1,
+        "carb": 7.4,
+        "omega3": 0.4,
+        "phosphorus": 1.2,
+        "complete": true,
+        "moisture": 73,
+        "asFed": {
+          "protein": 15.4,
+          "fat": 7.6,
+          "fiber": 0.3,
+          "ash": 2,
+          "phosphorus": 0.32,
+          "carb": 2
+        },
+        "carbBasis": "published",
+        "proteinSources": [
+          "chicken",
+          "fish"
+        ],
+        "singleSource": false,
+        "pulses": "none",
+        "grainFree": true,
+        "lifeStage": [
+          "puppy",
+          "adult"
+        ],
+        "bodySize": [
+          "small",
+          "medium",
+          "large"
+        ],
+        "prescription": false,
+        "kcal": 1240
+      },
+      "reports": {
+        "total": 0,
+        "palatability": 0,
+        "looseStool": 0
+      },
+      "price": {
+        "unit": "165g",
+        "checkedAt": "2026-09-20",
+        "merchants": []
+      },
+      "dealbreaker": "你的狗對雞過敏。名字寫鱉肉鱉蛋，成分表第一項是雞肉，後面還有雞心肝。",
+      "knownIssues": "鱉是狗很少吃到的肉，常被拿來換口味或做排除飲食，但這一罐第一項是雞肉，鱉排第二。另外還有鯉魚。鱉肉、鱉蛋、鯉魚我們沒有另外開分類，要避開這幾種請直接看成分表。標示 AAFCO 成幼犬。",
+      "awaitingLink": true,
+      "searchAs": "怪獸部落 犬2肉主食罐 鱉肉鱉蛋 165g",
+      "chicken": {
+        "status": "hidden",
+        "found": [
+          "第 1 項：雞肉",
+          "第 2 項：鱉肉",
+          "第 3 項：鱉蛋",
+          "第 4 項：鯉魚",
+          "第 5 項：雞心肝"
+        ],
+        "verdict": "第一項是雞肉，鱉排第二。另外還有鯉魚。 鱉肉不是隨手會買的口味，會特地挑它，通常是想避開常見的肉。結果成分表第一項就是雞。"
+      }
+    },
+    {
+      "id": "dw-04",
+      "species": "dog",
+      "form": "wet",
+      "brand": "狗狗說",
+      "name": "犬用主食罐 紫罐 鮮雞燉羊＋山藥",
+      "spec": {
+        "protein": 47.7,
+        "fat": 34.9,
+        "carb": 11.9,
+        "omega3": 0,
+        "phosphorus": 1,
+        "complete": true,
+        "moisture": 76.5,
+        "asFed": {
+          "protein": 11.2,
+          "fat": 8.2,
+          "fiber": 0.1,
+          "ash": 1.2,
+          "phosphorus": 0.24
+        },
+        "carbBasis": "computed",
+        "proteinSources": [
+          "chicken",
+          "lamb"
+        ],
+        "singleSource": false,
+        "pulses": "none",
+        "grainFree": true,
+        "lifeStage": [
+          "adult"
+        ],
+        "bodySize": [
+          "small",
+          "medium",
+          "large"
+        ],
+        "prescription": false
+      },
+      "reports": {
+        "total": 0,
+        "palatability": 0,
+        "looseStool": 0
+      },
+      "price": {
+        "unit": "165g",
+        "checkedAt": "2026-09-20",
+        "merchants": []
+      },
+      "dealbreaker": "你的狗對雞過敏。第一項是新鮮雞肉，第二項是熬煮雞湯，後面還有雞肝、雞油、雞心。",
+      "knownIssues": "品牌沒有公布代謝能，所以這一款一天要幾罐我們算不出來，那一欄是空的。碳水是我們用減法算的，不是品牌公布的。成分裡有蒟蒻粉。標示沒寫適用年齡，我們先當成成犬。",
+      "awaitingLink": true,
+      "searchAs": "狗狗說 犬用主食罐 紫罐 鮮雞燉羊 山藥 165g",
+      "chicken": {
+        "status": "chicken"
+      }
+    },
+    {
+      "id": "dw-05",
+      "species": "dog",
+      "form": "wet",
+      "brand": "狗狗說",
+      "name": "犬用主食罐 藍罐 四種鮮魚＋鷹嘴豆",
+      "spec": {
+        "protein": 56.5,
+        "fat": 19.4,
+        "carb": 14.8,
+        "omega3": 0,
+        "phosphorus": 0.7,
+        "complete": true,
+        "moisture": 76.3,
+        "asFed": {
+          "protein": 13.4,
+          "fat": 4.6,
+          "fiber": 0.1,
+          "ash": 2.1,
+          "phosphorus": 0.17
+        },
+        "carbBasis": "computed",
+        "proteinSources": [
+          "fish",
+          "chicken"
+        ],
+        "singleSource": false,
+        "pulses": "high",
+        "grainFree": true,
+        "lifeStage": [
+          "adult"
+        ],
+        "bodySize": [
+          "small",
+          "medium",
+          "large"
+        ],
+        "prescription": false
+      },
+      "reports": {
+        "total": 0,
+        "palatability": 0,
+        "looseStool": 0
+      },
+      "price": {
+        "unit": "165g",
+        "checkedAt": "2026-09-20",
+        "merchants": []
+      },
+      "dealbreaker": "你的狗對雞過敏。名字寫四種鮮魚，成分表裡有雞肝、雞油、雞心三項。",
+      "knownIssues": "四種魚是鮪魚、鬼頭刀魚、旗魚、鰹魚，排在最前面沒錯。但雞肝、雞油、雞心也都在成分表裡，名字上一個字都沒提。鷹嘴豆是豆類。品牌沒有公布代謝能。標示沒寫適用年齡，我們先當成成犬。",
+      "awaitingLink": true,
+      "searchAs": "狗狗說 犬用主食罐 藍罐 四種鮮魚 鷹嘴豆 165g",
+      "chicken": {
+        "status": "hidden",
+        "found": [
+          "第 1 到 4 項：鮪魚、鬼頭刀魚、旗魚、鰹魚",
+          "第 5 項：熬煮魚湯",
+          "第 6 項：鷹嘴豆",
+          "第 7 項：雞肝",
+          "第 8 項：雞油",
+          "第 9 項：雞心"
+        ],
+        "verdict": "魚確實排在最前面，但雞肝、雞油、雞心三項都在。 這一款是四款裡最接近「還算誠實」的：魚真的是主角。但雞肝跟雞心一樣是雞，排在第七、第九也還是雞。"
+      }
+    },
+    {
+      "id": "dw-06",
+      "species": "dog",
+      "form": "wet",
+      "brand": "陪心寵糧",
+      "name": "SUPER小白主食罐 雞魚＋野莓",
+      "spec": {
+        "protein": 61.1,
+        "fat": 22.2,
+        "carb": 2.8,
+        "omega3": 0,
+        "phosphorus": 1.1,
+        "complete": true,
+        "moisture": 82,
+        "asFed": {
+          "protein": 11,
+          "fat": 4,
+          "fiber": 0.5,
+          "ash": 2,
+          "phosphorus": 0.19
+        },
+        "carbBasis": "computed",
+        "proteinSources": [
+          "chicken",
+          "fish"
+        ],
+        "singleSource": false,
+        "pulses": "none",
+        "grainFree": true,
+        "lifeStage": [
+          "all"
+        ],
+        "bodySize": [
+          "small",
+          "medium",
+          "large"
+        ],
+        "prescription": false,
+        "kcal": 1000
+      },
+      "reports": {
+        "total": 0,
+        "palatability": 0,
+        "looseStool": 0
+      },
+      "price": {
+        "unit": "80g",
+        "checkedAt": "2026-09-20",
+        "merchants": []
+      },
+      "dealbreaker": "你的狗對雞過敏。第一項是雞肉，後面還有雞肝、雞油、雞心。",
+      "knownIssues": "標的是最低值和最高值，不是實測：蛋白質 11% 是最少、水分 82% 是最多。魚的部分是白身鮪魚。成分裡有寒天與蒟蒻。",
+      "awaitingLink": true,
+      "searchAs": "陪心寵糧 SUPER小白主食罐 雞魚 野莓 80g",
+      "chicken": {
+        "status": "chicken"
+      }
+    },
+    {
+      "id": "dw-07",
+      "species": "dog",
+      "form": "wet",
+      "brand": "陪心寵糧",
+      "name": "SUPER小白主食罐 雞鵪鶉＋黑木耳",
+      "spec": {
+        "protein": 57.1,
+        "fat": 22.9,
+        "carb": 5.7,
+        "omega3": 0,
+        "phosphorus": 1.1,
+        "complete": true,
+        "moisture": 82.5,
+        "asFed": {
+          "protein": 10,
+          "fat": 4,
+          "fiber": 0.5,
+          "ash": 2,
+          "phosphorus": 0.2
+        },
+        "carbBasis": "computed",
+        "proteinSources": [
+          "chicken"
+        ],
+        "singleSource": false,
+        "pulses": "none",
+        "grainFree": true,
+        "lifeStage": [
+          "all"
+        ],
+        "bodySize": [
+          "small",
+          "medium",
+          "large"
+        ],
+        "prescription": false,
+        "kcal": 1000
+      },
+      "reports": {
+        "total": 0,
+        "palatability": 0,
+        "looseStool": 0
+      },
+      "price": {
+        "unit": "80g",
+        "checkedAt": "2026-09-20",
+        "merchants": []
+      },
+      "dealbreaker": "你的狗對雞過敏。第一項是雞肉，後面還有雞肝、雞心、雞油。",
+      "knownIssues": "除了雞還有鵪鶉肉和鵪鶉蛋，鵪鶉我們沒有另外開分類，要避開禽類的請直接看成分表。標的是最低值和最高值，不是實測。成分裡有寒天與蒟蒻。",
+      "awaitingLink": true,
+      "searchAs": "陪心寵糧 SUPER小白主食罐 雞鵪鶉 黑木耳 80g",
+      "chicken": {
+        "status": "chicken"
+      }
+    },
+    {
+      "id": "dw-08",
+      "species": "dog",
+      "form": "wet",
+      "brand": "汪喵星球",
+      "name": "犬用 Fantastic 95% 鮮肉主食罐 鹿肉",
+      "spec": {
+        "protein": 54.7,
+        "fat": 31.5,
+        "carb": 6.9,
+        "omega3": 0.4,
+        "phosphorus": 1.2,
+        "complete": true,
+        "moisture": 71.1,
+        "asFed": {
+          "protein": 15.8,
+          "fat": 9.1,
+          "fiber": 0.5,
+          "ash": 2,
+          "phosphorus": 0.35,
+          "carb": 2
+        },
+        "carbBasis": "published",
+        "proteinSources": [
+          "venison",
+          "chicken"
+        ],
+        "singleSource": false,
+        "pulses": "none",
+        "grainFree": true,
+        "lifeStage": [
+          "puppy",
+          "adult"
+        ],
+        "bodySize": [
+          "small",
+          "medium",
+          "large"
+        ],
+        "prescription": false,
+        "kcal": 1380
+      },
+      "reports": {
+        "total": 0,
+        "palatability": 0,
+        "looseStool": 0
+      },
+      "price": {
+        "unit": "80g",
+        "checkedAt": "2026-09-20",
+        "merchants": []
+      },
+      "dealbreaker": "你的狗對雞過敏。名字寫鹿肉，成分表第二項就是雞肉，後面還有雞心肝、雞軟骨、雞蛋黃。",
+      "knownIssues": "紐西蘭放牧草飼鹿肉排第一，這是真的。但第二項開始是雞肉、雞心肝、雞軟骨、雞蛋黃，四項都是雞。鹿肉是稀有蛋白，要拿來排查過敏原的話這一罐不行。標示 AAFCO／NRC 成幼犬。",
+      "awaitingLink": true,
+      "searchAs": "汪喵星球 犬用 Fantastic 95% 鮮肉主食罐 鹿肉 80g",
+      "chicken": {
+        "status": "hidden",
+        "found": [
+          "第 1 項：紐西蘭放牧草飼鹿肉",
+          "第 2 項：雞肉",
+          "第 3 項：雞心肝",
+          "第 4 項：雞軟骨",
+          "第 5 項：雞蛋黃"
+        ],
+        "verdict": "鹿肉確實排第一，但第二項到第五項全部是雞。 鹿肉是狗很少吃到的肉，常被拿來做排除飲食。連著四項雞下去，這一罐做不了這件事。"
+      }
+    },
+    {
+      "id": "dw-09",
+      "species": "dog",
+      "form": "wet",
+      "brand": "汪喵星球",
+      "name": "熟齡犬銀養主食罐 燉羊肉",
+      "spec": {
+        "protein": 57,
+        "fat": 28.5,
+        "carb": 7.2,
+        "omega3": 0.7,
+        "phosphorus": 1.3,
+        "complete": true,
+        "moisture": 72.3,
+        "asFed": {
+          "protein": 15.8,
+          "fat": 7.9,
+          "fiber": 5,
+          "ash": 2,
+          "phosphorus": 0.35,
+          "carb": 2
+        },
+        "carbBasis": "published",
+        "proteinSources": [
+          "chicken",
+          "lamb"
+        ],
+        "singleSource": false,
+        "pulses": "none",
+        "grainFree": true,
+        "lifeStage": [
+          "senior"
+        ],
+        "bodySize": [
+          "small",
+          "medium",
+          "large"
+        ],
+        "prescription": false,
+        "kcal": 1280
+      },
+      "reports": {
+        "total": 0,
+        "palatability": 0,
+        "looseStool": 0
+      },
+      "price": {
+        "unit": "80g",
+        "checkedAt": "2026-09-20",
+        "merchants": []
+      },
+      "dealbreaker": "你的狗對雞過敏。名字寫燉羊肉，成分表第一項是雞肉及雞肝，羊肉排第二。",
+      "knownIssues": "名字是燉羊肉，第一項卻是雞肉及雞肝。另外有鵪鶉蛋。品牌標的纖維是 5%，跟同系列其他口味的 0.5% 差了十倍，我們照品牌公布的數字登記，但這個數字看起來不對，不要拿它來比較。標示是熟齡犬（5 到 7 歲以上）。",
+      "awaitingLink": true,
+      "searchAs": "汪喵星球 熟齡犬銀養主食罐 燉羊肉 80g",
+      "chicken": {
+        "status": "hidden",
+        "found": [
+          "第 1 項：雞肉及雞肝",
+          "第 2 項：羊肉",
+          "第 3 項：鵪鶉蛋"
+        ],
+        "verdict": "第一項就是雞，羊肉排第二。 名字寫羊、第一項是雞。要避開雞的話，換到這一罐等於沒換。"
+      }
+    },
+    {
+      "id": "dw-10",
+      "species": "dog",
+      "form": "wet",
+      "brand": "汪喵星球",
+      "name": "幼母犬營養主食罐 雞肉",
+      "spec": {
+        "protein": 57.1,
+        "fat": 28.6,
+        "carb": 7.1,
+        "omega3": 0.7,
+        "phosphorus": 1.2,
+        "complete": true,
+        "moisture": 72,
+        "asFed": {
+          "protein": 16,
+          "fat": 8,
+          "fiber": 0.5,
+          "ash": 2,
+          "phosphorus": 0.35,
+          "carb": 2
+        },
+        "carbBasis": "published",
+        "proteinSources": [
+          "chicken"
+        ],
+        "singleSource": true,
+        "pulses": "none",
+        "grainFree": true,
+        "lifeStage": [
+          "puppy"
+        ],
+        "bodySize": [
+          "small",
+          "medium",
+          "large"
+        ],
+        "prescription": false,
+        "kcal": 1290
+      },
+      "reports": {
+        "total": 0,
+        "palatability": 0,
+        "looseStool": 0
+      },
+      "price": {
+        "unit": "165g",
+        "checkedAt": "2026-09-20",
+        "merchants": []
+      },
+      "dealbreaker": "你的狗對雞過敏。整罐的肉就是雞肉、雞肝、雞蛋黃。",
+      "knownIssues": "肉的部分只有雞，名字也寫了雞。這一款標的是幼犬跟懷孕哺乳的母犬，成犬吃的話熱量偏高。",
+      "awaitingLink": true,
+      "searchAs": "汪喵星球 幼母犬營養主食罐 雞肉 165g",
+      "chicken": {
+        "status": "chicken"
+      }
+    },
+    {
+      "id": "dw-11",
+      "species": "dog",
+      "form": "wet",
+      "brand": "唯美味 WERUVA",
+      "name": "狗狗主食罐 吮掌回味雞胸肉",
+      "spec": {
+        "protein": 66.7,
+        "fat": 9.3,
+        "carb": 12.7,
+        "omega3": 0,
+        "phosphorus": 0,
+        "complete": true,
+        "moisture": 85,
+        "asFed": {
+          "protein": 10,
+          "fat": 1.4,
+          "fiber": 0.5,
+          "ash": 1.2
+        },
+        "carbBasis": "computed",
+        "proteinSources": [
+          "chicken"
+        ],
+        "singleSource": true,
+        "pulses": "none",
+        "grainFree": true,
+        "lifeStage": [
+          "adult"
+        ],
+        "bodySize": [
+          "small",
+          "medium",
+          "large"
+        ],
+        "prescription": false
+      },
+      "reports": {
+        "total": 0,
+        "palatability": 0,
+        "looseStool": 0
+      },
+      "price": {
+        "unit": "156g",
+        "checkedAt": "2026-09-20",
+        "merchants": []
+      },
+      "dealbreaker": "你的狗對雞過敏。第一項是去骨去皮雞胸肉，第二項是雞湯。",
+      "knownIssues": "脂肪最少 1.4%，是我們讀過的狗主食罐裡最低的；水分最多 85%。成分第三項是葵花籽油、第四項是馬鈴薯澱粉。品牌沒有公布代謝能。碳水是我們用減法算的。",
+      "awaitingLink": true,
+      "searchAs": "唯美味 WERUVA 狗狗主食罐 吮掌回味雞胸肉 156g",
+      "chicken": {
+        "status": "chicken"
+      }
+    },
+    {
+      "id": "dw-12",
+      "species": "dog",
+      "form": "wet",
+      "brand": "西莎",
+      "name": "自然素材餐盒 健康野菜放牧雞",
+      "spec": {
+        "protein": 45.5,
+        "fat": 27.3,
+        "carb": 0,
+        "omega3": 0,
+        "phosphorus": 0,
+        "complete": true,
+        "moisture": 89,
+        "asFed": {
+          "protein": 5,
+          "fat": 3,
+          "fiber": 1
+        },
+        "carbBasis": "unknown",
+        "proteinSources": [
+          "chicken",
+          "lamb"
+        ],
+        "singleSource": false,
+        "pulses": "none",
+        "grainFree": true,
+        "lifeStage": [
+          "adult"
+        ],
+        "bodySize": [
+          "small",
+          "medium",
+          "large"
+        ],
+        "prescription": false
+      },
+      "reports": {
+        "total": 0,
+        "palatability": 0,
+        "looseStool": 0
+      },
+      "price": {
+        "unit": "85g",
+        "checkedAt": "2026-09-20",
+        "merchants": []
+      },
+      "dealbreaker": "你的狗對雞過敏。肉的部分寫的是「肉類及其副產品（雞，羊）」。",
+      "knownIssues": "成分表第一項是水。肉寫的是「肉類及其副產品（雞，羊）」，沒有寫是哪個部位。蛋白質不低於 5%，是我們讀過的狗主食罐裡最低的；最高的那一款是 16.2%。包裝上標「100% 營養完整均衡」，也標了餵食量：5 公斤的狗一天 5 又 1/3 盒。品牌沒有公布灰分，所以碳水我們算不出來，也沒有公布代謝能。",
+      "awaitingLink": true,
+      "searchAs": "西莎 自然素材 健康野菜放牧雞 85g",
+      "chicken": {
+        "status": "chicken"
+      }
+    }
+  ]
+}

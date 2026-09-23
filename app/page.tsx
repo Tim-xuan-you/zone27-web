@@ -5,6 +5,12 @@ import SiteHeader from "@/components/SiteHeader";
 import { S } from "@/components/styles";
 import { ANIMALS, categoriesOf } from "@/lib/categories";
 import { checkItems, checkStats } from "@/lib/check";
+import { catalogOf } from "@/lib/catalog";
+import { NAME_HAS_CHICKEN } from "@/lib/chicken";
+
+/** 狗主食罐：名字沒寫雞的幾款、其中幾款有雞。首頁那張卡片的數字，照資料算 */
+const DOG_CANS_UNNAMED = catalogOf("dog", "wet").filter((p) => !NAME_HAS_CHICKEN.test(p.name));
+const DOG_CANS_HIDDEN = DOG_CANS_UNNAMED.filter((p) => p.chicken?.status === "hidden");
 
 const CHECK = checkStats(checkItems());
 
@@ -90,6 +96,14 @@ export default function Home() {
             逐筆核對，附查核日期，也包含我們自己在推的那一款。
           </p>
         </Link>
+        <Link href="/dog-wet-food/hidden-chicken" style={feature}>
+          <span style={kicker}>狗主食罐</span>
+          <h2 style={featureTitle}>名字寫鹿肉、鱉肉的狗罐頭，第一二項是雞</h2>
+          <p style={featureBody}>
+            名字沒寫雞的 {DOG_CANS_UNNAMED.length} 款，{DOG_CANS_HIDDEN.length} 款成分表裡有雞。
+            獸醫叫你換稀有蛋白做排查，換到這幾罐等於沒換。
+          </p>
+        </Link>
         <Link href="/cat-food/hidden-chicken" style={feature}>
           <span style={kicker}>貓飼料</span>
           <h2 style={featureTitle}>寫著鮭魚、鴨肉、火雞，成分表裡有雞</h2>
@@ -118,6 +132,7 @@ export default function Home() {
       <div style={S.relRow}>
         <Link href="/dog-food/how-much" style={S.relLink}>狗一天吃多少</Link>
         <Link href="/cat-food/how-much" style={S.relLink}>貓一天吃多少</Link>
+        <Link href="/dog-wet-food/how-much" style={S.relLink}>狗一天吃幾罐</Link>
         <Link href="/cat-wet-food/how-much" style={S.relLink}>貓一天吃幾罐</Link>
         <Link href="/dog-food/grain-free" style={S.relLink}>無穀好不好</Link>
         <Link href="/dog-food/elimination-diet" style={S.relLink}>排除飲食法</Link>

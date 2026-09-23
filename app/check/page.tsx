@@ -42,7 +42,7 @@ const FAQ = {
 export const metadata: Metadata = {
   title: "你家那包飼料有沒有藏雞",
   description:
-    `我們一款一款讀過 ${st.total} 款狗飼料、貓飼料、貓罐頭的成分表。名字沒寫雞的 ${st.unnamed} 款裡，` +
+    `我們一款一款讀過 ${st.total} 款狗飼料、狗罐頭、貓飼料、貓罐頭的成分表。名字沒寫雞的 ${st.unnamed} 款裡，` +
     `${st.hidden} 款成分表裡有雞，${st.unsure} 款只寫「禽肉」「動物蛋白」。打名字就查得到你家那一包。`,
   alternates: { canonical: "/check" },
 };

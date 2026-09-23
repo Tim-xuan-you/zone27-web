@@ -12,16 +12,29 @@ import { anchorOf, unitOf, pricePerKg, recommendable, mer, KCAL_PER_KG } from "@
  *
  * 這一頁不是類目，是一題。
  *
- * 2026-09-19 想收「狗主食罐」當第六個類目，查下去發現做不了：
- * 台灣的狗罐頭品牌幾乎都不公布保證分析，汪喵星球、怪獸部落、卡默的官網
- * 都只有「符合 AAFCO」四個字，沒有粗蛋白、沒有每罐大卡。
- * 沒有那些數字，就沒辦法像貓罐頭那樣一款一款讀給人看。
+ * 2026-09-19 想收「狗主食罐」當類目，查品牌官網發現讀不到：
+ * 汪喵星球、怪獸部落的官網都只有「符合 AAFCO」四個字，
+ * 沒有粗蛋白、沒有每罐大卡，於是先做了這一頁，把算式給人。
  *
- * 但這一題還是值得回答，而且沒有人回答過：狗改吃罐頭，一天要幾罐、一個月多少錢。
+ * 2026-09-20 更正：讀不到的是品牌官網，不是台灣通路。
+ * 台灣通路的商品頁把成分表和保證分析整段打成文字，
+ * 12 款狗主食罐的粗蛋白、水分、代謝能全部找得到。
+ * 所以類目開了（/dog-wet-food），下面那個「為什麼還沒收」的段落也改掉了。
+ *
+ * 教訓：查不到資料的時候，先確認是「沒有這個資料」還是「我只查了一個地方」。
+ *
+ * 這一頁留著，因為它回答的是另一題：一天要幾罐、跟乾糧比貴多少。
  * 算式我們有，一罐幾大卡罐子背面有寫，讀者自己填就算得出來。
  *
  * 乾糧那一邊的數字全部從我們自己讀過的那幾款算，不是抓來的。
  */
+
+/** 我們讀過的狗主食罐。下面那段「原本寫錯了」的款數從這裡算，不寫死 */
+const CANS = catalogOf("dog", "wet");
+const CANS_NO_CHICKEN_NAME = CANS.filter((p) => !/(?<!火)雞/.test(p.name));
+const CANS_HIDDEN = CANS_NO_CHICKEN_NAME.filter((p) => p.chicken?.status === "hidden");
+const WATER_LO = Math.min(...CANS.map((p) => p.spec.moisture ?? 100));
+const WATER_HI = Math.max(...CANS.map((p) => p.spec.moisture ?? 0));
 
 const DOGS = catalogOf("dog")
   .filter(recommendable)
@@ -59,7 +72,7 @@ export default function Page() {
       <p style={{ color: "var(--muted)", fontSize: 17, lineHeight: 1.9, margin: "0 0 18px", maxWidth: "42ch" }}>
         貓罐頭一天兩三罐，很多人就直覺以為狗也差不多。
         一隻 {KG} 公斤的狗一天要 <b style={{ color: "var(--ink)" }}>{DAY} 大卡</b>，
-        是四公斤成貓的三倍。罐頭有八成五是水，所以要的罐數會比你想的多很多。
+        是四公斤成貓的三倍。我們讀過的狗罐頭，水分從 {WATER_LO}% 到 {WATER_HI}%，所以要的罐數會比你想的多很多。
       </p>
 
       <div style={S.box}>
@@ -108,18 +121,18 @@ export default function Page() {
       <CanCalc species="dog" />
 
       <div style={{ ...S.box, marginTop: 30 }}>
-        <p style={{ margin: 0, fontWeight: 700, fontSize: 17 }}>為什麼我們還沒有收狗罐頭</p>
+        <p style={{ margin: 0, fontWeight: 700, fontSize: 17 }}>這一頁原本寫「我們讀不到狗罐頭的資料」</p>
         <p style={{ margin: "10px 0 0", fontSize: 14, color: "var(--muted)", lineHeight: 1.9 }}>
-          因為讀不到。貓罐頭我們一款一款讀成分表、算碳水、分主食副食，
-          是因為那些品牌有公布保證分析。狗罐頭這邊，我們查過的幾個台灣品牌官網
-          只寫「符合 AAFCO」四個字，粗蛋白多少、一罐幾大卡都沒有。
+          那是 2026-09-19 寫的，而且寫錯了。讀不到的是品牌官網，
+          官網確實只寫「符合 AAFCO」四個字。但台灣通路的商品頁把成分表和保證分析
+          整段打成文字，粗蛋白、水分、每 100 克幾大卡全部都有。
         </p>
         <p style={{ margin: "10px 0 0", fontSize: 14, color: "var(--muted)", lineHeight: 1.9 }}>
-          沒有那些數字，我們能做的只有把別人的行銷話術抄一遍。那不是這個網站在做的事。
-          所以先把算式給你，收得到資料再開這個類目。
+          隔天我們去那裡讀了 {CANS.length} 款，類目就開了。
+          裡面有一件事我們自己看了也意外：名字沒寫雞的 {CANS_NO_CHICKEN_NAME.length} 款，{CANS_HIDDEN.length} 款成分表裡有雞。
         </p>
-        <Link href="/dog-food" style={{ display: "inline-block", marginTop: 12, fontSize: 14, color: "var(--accent)", fontWeight: 600 }}>
-          先看我們讀過的狗飼料 →
+        <Link href="/dog-wet-food" style={{ display: "inline-block", marginTop: 12, fontSize: 14, color: "var(--accent)", fontWeight: 600 }}>
+          去看我們讀過的 {CANS.length} 款狗主食罐 →
         </Link>
       </div>
 

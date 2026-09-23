@@ -2,6 +2,7 @@ import blocked from "../data/no-affiliate.json";
 import dogFood from "../data/dog-food.json";
 import catFood from "../data/cat-food.json";
 import catWet from "../data/cat-wet-food.json";
+import dogWet from "../data/dog-wet-food.json";
 import litter from "../data/cat-litter.json";
 import treat from "../data/cat-treat.json";
 import { channelOf, type Channel } from "./channel";

@@ -28,7 +28,7 @@ import { chickenStatusOf } from "../lib/chicken";
  */
 type HcCase = { productId?: string; found?: string[] | string; verdict?: string; why?: string };
 const CHICKEN_CASES = new Map<string, HcCase>();
-for (const f of ["data/hidden-chicken.json", "data/cat-hidden-chicken.json", "data/cat-wet-hidden-chicken.json"]) {
+for (const f of ["data/hidden-chicken.json", "data/cat-hidden-chicken.json", "data/cat-wet-hidden-chicken.json", "data/dog-wet-hidden-chicken.json"]) {
   if (!existsSync(resolve(f))) continue;
   const j = JSON.parse(readFileSync(resolve(f), "utf8"));
   for (const c of [...(j.cases ?? []), ...(j.alsoMismatched ?? []), ...(j.clean ?? [])] as HcCase[]) {

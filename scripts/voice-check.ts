@@ -23,6 +23,7 @@ const DATA = [
   "data/dog-food.json", "data/hidden-chicken.json",
   "data/cat-food.json", "data/cat-hidden-chicken.json",
   "data/cat-wet-food.json", "data/cat-wet-hidden-chicken.json",
+  "data/dog-wet-food.json", "data/dog-wet-hidden-chicken.json",
 ];
 
 /**

@@ -29,6 +29,8 @@ export function stageOf(p: Product): string {
   const s = p.spec.lifeStage;
   const cat = p.species === "cat";
   if (s.includes("all")) return cat ? "成貓幼貓都能吃" : "幼犬到老犬都能吃";
+  // 「AAFCO 成幼犬」登記成 puppy|adult。以前這種會掉到最後一行變成「成犬」，幼犬的飼主就以為不能吃
+  if (s.includes("puppy") && s.includes("adult")) return cat ? "成貓幼貓都能吃" : "成犬幼犬都能吃";
   if (s.length === 1 && s[0] === "puppy") return cat ? "幼貓專用" : "幼犬專用";
   if (s.length === 1 && s[0] === "senior") return cat ? "老貓專用" : "高齡犬專用";
   if (s.includes("senior") && s.includes("adult")) return cat ? "7 歲以上成貓" : "成犬、高齡犬";

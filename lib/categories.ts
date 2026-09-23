@@ -12,7 +12,9 @@ import type { Form, Species } from "./types";
  * 類目會一直加，導覽列不能跟著一直變長。
  */
 
-export type CategorySlug = "dog-food" | "dog-treat" | "cat-food" | "cat-wet-food" | "cat-litter" | "cat-treat";
+export type CategorySlug =
+  | "dog-food" | "dog-wet-food" | "dog-treat"
+  | "cat-food" | "cat-wet-food" | "cat-litter" | "cat-treat";
 
 /**
  * 吃的那三個類目。貓砂不是吃的，裁決器那一套（過敏原、年紀、體型）對它沒有意義，
@@ -56,6 +58,20 @@ export const CATEGORIES: Category[] = [
     json: "data/dog-food.json",
     pitch: "過敏、軟便、變胖、幼犬老犬，先刪掉不適合的。",
     soonNote: "讀完的那幾款先整理在下面這頁，每一款什麼時候不要買都寫了。",
+  },
+  {
+    slug: "dog-wet-food",
+    species: "dog",
+    form: "wet",
+    zh: "狗主食罐",
+    short: "主食罐",
+    animal: "狗",
+    idPrefix: "dw",
+    subId: "dogwet",
+    csv: "data/dog-wet-food.csv",
+    json: "data/dog-wet-food.json",
+    pitch: "名字寫鹿肉、鱉肉、四種鮮魚的，成分表第一二項常常就是雞。一罐幾大卡也算給你看。",
+    soonNote: "讀完的那幾款先整理在下面這頁，哪幾款名字沒寫雞、成分表裡有雞，都標出來了。",
   },
   {
     slug: "dog-treat",

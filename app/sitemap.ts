@@ -32,6 +32,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE}/dog`, lastModified: now, changeFrequency: "weekly", priority: 0.8 },
     { url: `${BASE}/cat`, lastModified: now, changeFrequency: "weekly", priority: 0.8 },
     { url: `${BASE}/cat-food`, lastModified: now, changeFrequency: "weekly", priority: 0.9 },
+    { url: `${BASE}/dog-wet-food`, lastModified: now, changeFrequency: "weekly", priority: 0.9 },
     { url: `${BASE}/cat-wet-food`, lastModified: now, changeFrequency: "weekly", priority: 0.9 },
     { url: `${BASE}/cat-litter`, lastModified: now, changeFrequency: "weekly", priority: 0.9 },
     // 貓砂的招牌頁：照材質判能不能沖馬桶，跟 /check 同一個位置
@@ -56,12 +57,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE}/dog-food/hidden-chicken`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
     { url: `${BASE}/cat-food/hidden-chicken`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
     { url: `${BASE}/cat-wet-food/hidden-chicken`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
+    { url: `${BASE}/dog-wet-food/hidden-chicken`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
+    { url: `${BASE}/dog-wet-food/protein`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
     // 「副食罐可以當主食嗎」是台灣貓奴很常搜的問題
     { url: `${BASE}/cat-wet-food/complementary`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
     // 「一天吃多少」是有購買意圖的資訊型查詢，權重給高
     { url: `${BASE}/dog-food/how-much`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
     { url: `${BASE}/cat-food/how-much`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
     { url: `${BASE}/cat-wet-food/how-much`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
+    { url: `${BASE}/dog-wet-food/how-much`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
     { url: `${BASE}/dog-food/grain-free`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
     { url: `${BASE}/dog-food/elimination-diet`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
     // 每一款的商品頁：搜品名的人（「紐頓 T22 有雞嗎」）意圖最明確

@@ -45,7 +45,7 @@ interface P {
 }
 
 const FILES = [
-  "data/dog-food.json", "data/cat-food.json", "data/cat-wet-food.json",
+  "data/dog-food.json", "data/dog-wet-food.json", "data/cat-food.json", "data/cat-wet-food.json",
   "data/cat-litter.json", "data/cat-treat.json", "data/dog-treat.json",
 ];
 

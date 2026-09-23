@@ -5,6 +5,11 @@ import Decider from "@/components/Decider";
 import SiteHeader from "@/components/SiteHeader";
 import { S } from "@/components/styles";
 import { categoriesOf } from "@/lib/categories";
+import { catalogOf } from "@/lib/catalog";
+import { NAME_HAS_CHICKEN } from "@/lib/chicken";
+
+const CANS_UNNAMED = catalogOf("dog", "wet").filter((p) => !NAME_HAS_CHICKEN.test(p.name));
+const CANS_HIDDEN = CANS_UNNAMED.filter((p) => p.chicken?.status === "hidden");
 
 /**
  * 狗的動物頁。
@@ -19,9 +24,9 @@ import { categoriesOf } from "@/lib/categories";
  */
 
 export const metadata: Metadata = {
-  title: "狗飼料、狗零食怎麼選",
+  title: "狗飼料、狗主食罐、狗零食怎麼選",
   description:
-    "講一句你家狗的狀況，我們先刪掉不適合的。每一款的成分表都讀過，名字寫鴨肉、火雞、鮭魚但成分表裡有雞的都標出來了。零食照熱量算一天可以給幾支。",
+    "講一句你家狗的狀況，我們先刪掉不適合的。每一款的成分表都讀過，名字寫鴨肉、鹿肉、鱉肉但成分表裡有雞的都標出來了。罐頭算一天要幾罐，零食照熱量算一天可以給幾支。",
   alternates: { canonical: "/dog" },
 };
 
@@ -35,7 +40,7 @@ export default function Page() {
       </h1>
       <p style={{ color: "var(--muted)", fontSize: 17, lineHeight: 1.9, margin: "0 0 28px", maxWidth: "40ch" }}>
         講一句牠的狀況，我們先把不適合的刪掉，剩下的才給你看。
-        零食在下面，那個要算額度。
+        罐頭跟零食在下面，那兩個都要算份量。
       </p>
 
       <Decider defaultSpecies="dog" />
@@ -49,6 +54,11 @@ export default function Page() {
           <span style={kicker}>飼料</span>
           <h2 style={featureTitle}>主打低敏、單一口味，成分表裡還是有雞</h2>
           <p style={featureBody}>4 款逐筆核對，包含我們自己在推的那一款。</p>
+        </Link>
+        <Link href="/dog-wet-food/hidden-chicken" style={feature}>
+          <span style={kicker}>主食罐</span>
+          <h2 style={featureTitle}>名字寫鹿肉、鱉肉的狗罐頭，第一二項是雞</h2>
+          <p style={featureBody}>名字沒寫雞的 {CANS_UNNAMED.length} 款，{CANS_HIDDEN.length} 款成分表裡有雞。</p>
         </Link>
         <Link href="/dog-food/elimination-diet" style={feature}>
           <span style={kicker}>飼料</span>
@@ -65,7 +75,7 @@ export default function Page() {
       <p style={S.lbl}>先算一下</p>
       <div style={S.relRow}>
         <Link href="/dog-food/how-much" style={S.relLink}>狗一天吃多少飼料</Link>
-        <Link href="/dog-food/cans" style={S.relLink}>狗吃主食罐一天要幾罐</Link>
+        <Link href="/dog-wet-food/how-much" style={S.relLink}>狗一天要吃幾罐</Link>
         <Link href="/dog-food/grain-free" style={S.relLink}>無穀飼料要不要買</Link>
       </div>
 

@@ -3,6 +3,7 @@ import { litters } from "./litter";
 import { treatsOf } from "./treat";
 import cat from "@/data/cat-food.json";
 import catWet from "@/data/cat-wet-food.json";
+import dogWet from "@/data/dog-wet-food.json";
 import type { Constraint, Form, Merchant, Price, Product, ProteinSource, Situation, Species } from "./types";
 import { anchorOf, assumedCatKg, formOf, mer, recommendable, stageForAge } from "./engine";
 import { MIN_LIVE } from "./categories";
@@ -20,6 +21,7 @@ export const catalog = [
   ...(dog.products as unknown as Product[]),
   ...(cat.products as unknown as Product[]),
   ...(catWet.products as unknown as Product[]),
+  ...(dogWet.products as unknown as Product[]),
 ];
 
 /** 單一類目。form 沒給就是乾糧，舊的呼叫不用改 */

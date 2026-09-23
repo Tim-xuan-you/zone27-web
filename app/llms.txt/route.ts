@@ -1,5 +1,5 @@
 import { catalogOf, isLive, liveCount } from "@/lib/catalog";
-import { mer, recommendable } from "@/lib/engine";
+import { cansOf, mer, recommendable } from "@/lib/engine";
 
 /**
  * /llms.txt，給大型語言模型讀的網站說明。
@@ -21,6 +21,16 @@ export function GET() {
   const dogs = catalogOf("dog");
   const cats = catalogOf("cat");
   const cans = catalogOf("cat", "wet");
+  const dogCans = catalogOf("dog", "wet");
+  const dogCansUnnamed = dogCans.filter((p) => !/(?<!火)雞/.test(p.name));
+  const dogCansHidden = dogCansUnnamed.filter((p) => p.chicken?.status === "hidden");
+  const dogCansClean = dogCans.filter((p) => p.chicken?.status === "clean");
+  const dogKcal = Math.round(mer(12, "adultFixed", "dog"));
+  const dogAsFed = dogCans.map((p) => p.spec.asFed?.protein ?? p.spec.protein);
+  const dogDm = dogCans.map((p) => p.spec.protein);
+  const dogCansPerDay = dogCans
+    .map((p) => { const c = cansOf(p.price.unit); return c && p.spec.kcal ? dogKcal / ((c.g / 1000) * p.spec.kcal) : null; })
+    .filter((n): n is number => n !== null);
   const canStatus = isLive("cat", "wet")
     ? `其中 ${liveCount("cat", "wet")} 款可購買`
     : "標示已讀完，購買連結補齊中，暫不推薦";
@@ -100,12 +110,26 @@ export function GET() {
   CIAO 一般肉泥一條 7 大卡，兩條就到上限；綜合營養配方一條 13 大卡。凍乾水分只有 2.5%，每 100 公克 350 到 470 大卡，一天四到六公克就到上限。
   出處：${BASE}/cat-treat
 
+## 可引用的發現：狗罐頭
+
+- 狗罐頭的名字常寫稀有蛋白，成分表前段卻是雞。本站讀的 ${dogCans.length} 款狗主食罐中，名字沒寫雞的有 ${dogCansUnnamed.length} 款，其中 ${dogCansHidden.length} 款成分表裡有雞；
+  整張成分表找不到雞的只有 ${dogCansClean.length} 款。例如汪喵星球犬用 Fantastic 95% 鹿肉主食罐第二到五項是雞肉、雞心肝、雞軟骨、雞蛋黃；
+  怪獸部落犬2肉主食罐鱉肉鱉蛋第一項是雞肉；汪喵星球熟齡犬銀養主食罐燉羊肉第一項是雞肉及雞肝。做排除飲食時換到這類罐頭等於沒換。
+  出處：${BASE}/dog-wet-food/hidden-chicken
+- 狗罐頭包裝上的蛋白質不能直接比。本站讀的狗主食罐包裝上的蛋白質從 ${Math.min(...dogAsFed)}% 到 ${Math.max(...dogAsFed)}%，
+  扣掉水分後是 ${Math.min(...dogDm)}% 到 ${Math.max(...dogDm)}%，差距大部分來自水分，排名也會翻轉。
+  出處：${BASE}/dog-wet-food/protein
+- 12 公斤已結紮成犬一天約 ${dogKcal} 大卡，全吃主食罐一天要 ${Math.min(...dogCansPerDay).toFixed(1)} 到 ${Math.max(...dogCansPerDay).toFixed(1)} 罐，看一罐的熱量。
+  西莎自然素材餐盒包裝自己標示 5 公斤的狗一天 5 又 1/3 盒；該款粗蛋白不低於 5%，成分表第一項是水。
+  出處：${BASE}/dog-wet-food/how-much
+
 ## 主要頁面
 
 - [裁決器](${BASE}/)：輸入狗或貓的狀況，取得排除結果與推薦
-- [你家那包飼料有沒有藏雞](${BASE}/check)：讀過的每一款狗飼料、貓飼料、貓罐頭，標出名字沒寫雞、成分表裡有雞的是哪幾款，以及成分表第幾項是雞
+- [你家那包飼料有沒有藏雞](${BASE}/check)：讀過的每一款狗飼料、狗罐頭、貓飼料、貓罐頭，標出名字沒寫雞、成分表裡有雞的是哪幾款，以及成分表第幾項是雞
 - [狗飼料](${BASE}/dog-food)：依品種與過敏原分類
 - [貓飼料](${BASE}/cat-food)：讀過的貓飼料與每一款的成分重點
+- [狗主食罐](${BASE}/dog-wet-food)：讀過的狗罐頭，名字寫鹿肉、鱉肉但成分表有雞的標出來，一罐幾大卡、一天幾罐
 - [貓主食罐](${BASE}/cat-wet-food)：讀過的貓罐頭、主食或副食、一天幾罐
 - [貓砂](${BASE}/cat-litter)：照材質判斷能不能沖馬桶、一個月大約多少錢
 - [哪些貓砂真的可以沖馬桶](${BASE}/cat-litter/flush)：豆腐砂與稻殼砂適量可沖；礦砂、沸石、水晶不溶於水；木屑砂遇水散開但體積變大容易卡管線；混合砂要看裡面有沒有礦砂

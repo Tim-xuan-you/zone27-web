@@ -42,6 +42,11 @@ const EXAMPLES: Record<FoodSlug, string[]> = {
     "柯基快 8 歲了，有點胖，最近一直軟便",
     "拉不拉多，吃了雞肉就會癢，也不能吃羊",
   ],
+  "dog-wet-food": [
+    "柴犬 5 歲，對雞過敏，想找不含雞的主食罐",
+    "12 公斤的狗想全吃罐頭，每月預算 5000",
+    "老狗牙口不好，想改吃罐頭",
+  ],
   "cat-food": [
     "英短 3 歲，對雞肉過敏，一直抓脖子",
     "米克斯貓 5 公斤，有點胖，已結紮",
@@ -84,6 +89,10 @@ const PICKS: Record<FoodSlug, Pick[]> = {
     { label: "軟便", phrase: "軟便" }, { label: "有點胖", phrase: "有點胖" }, { label: "挑食", phrase: "挑食" },
     { label: "要無穀", phrase: "無穀" }, { label: "想省錢", phrase: "想省錢" },
   ],
+  "dog-wet-food": [
+    { label: "對雞過敏", phrase: "對雞肉過敏" }, { label: "對魚過敏", phrase: "對魚過敏" },
+    { label: "有點胖", phrase: "有點胖" }, { label: "想省錢", phrase: "想省錢" },
+  ],
   "cat-food": [
     { label: "對雞過敏", phrase: "對雞肉過敏" }, { label: "對魚過敏", phrase: "對魚過敏" },
     { label: "一直抓", phrase: "一直抓" }, { label: "軟便", phrase: "軟便" }, { label: "有點胖", phrase: "有點胖" },
@@ -110,6 +119,12 @@ const COMMON: Record<FoodSlug, { label: string; phrase: string }[]> = {
     { label: "幼犬", phrase: "幼犬" },
     { label: "老狗", phrase: "老狗" },
     { label: "老狗，預算有限", phrase: "老狗，想省錢" },
+    { label: "想省錢", phrase: "成犬，想省錢" },
+  ],
+  "dog-wet-food": [
+    { label: "對雞過敏的成犬", phrase: "成犬，對雞肉過敏" },
+    { label: "幼犬", phrase: "幼犬" },
+    { label: "熟齡犬", phrase: "老狗" },
     { label: "想省錢", phrase: "成犬，想省錢" },
   ],
   "cat-food": [
@@ -165,6 +180,7 @@ function without(text: string, phrase: string): string {
 
 const PLACEHOLDER: Record<FoodSlug, string> = {
   "dog-food": "例如：我家柴犬 5 歲，最近一直抓癢，換過兩種飼料都沒改善...",
+  "dog-wet-food": "例如：柴犬 5 歲，對雞過敏，想找不含雞的主食罐...",
   "cat-food": "例如：英短 3 歲，一直抓下巴，換過兩種雞肉的都沒改善...",
   "cat-wet-food": "例如：英短 3 歲，對雞肉過敏，想找不含雞的主食罐...",
 };
