@@ -65,9 +65,11 @@ export default function Home() {
         不適合的，剩下的才給你看。
       </p>
       {/* 第一次養的人不知道要點什麼，給他一條直接的路（2026-09-24） */}
-      <Link href="/cat/first-time" style={{ display: "inline-block", margin: "0 0 20px", fontSize: 15.5, fontWeight: 700, color: "var(--accent)" }}>
-        第一次養貓？先買哪幾樣，直接給你答案 →
-      </Link>
+      <p style={{ margin: "0 0 20px", fontSize: 15.5, fontWeight: 700, color: "var(--muted)" }}>
+        第一次養？
+        <Link href="/cat/first-time" style={{ color: "var(--accent)", marginLeft: 6 }}>貓要先買什麼 →</Link>
+        <Link href="/dog/first-time" style={{ color: "var(--accent)", marginLeft: 14 }}>狗要先買什麼 →</Link>
+      </p>
 
       <Decider />
 

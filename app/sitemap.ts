@@ -33,6 +33,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE}/cat`, lastModified: now, changeFrequency: "weekly", priority: 0.8 },
     // 「第一次養貓要準備什麼」是很多人搜的問題，而且新手一次要買好幾樣
     { url: `${BASE}/cat/first-time`, lastModified: now, changeFrequency: "weekly", priority: 0.9 },
+    { url: `${BASE}/dog/first-time`, lastModified: now, changeFrequency: "weekly", priority: 0.9 },
     { url: `${BASE}/cat-food`, lastModified: now, changeFrequency: "weekly", priority: 0.9 },
     { url: `${BASE}/dog-wet-food`, lastModified: now, changeFrequency: "weekly", priority: 0.9 },
     { url: `${BASE}/cat-wet-food`, lastModified: now, changeFrequency: "weekly", priority: 0.9 },
