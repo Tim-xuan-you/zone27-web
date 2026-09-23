@@ -261,9 +261,9 @@ export default function Page() {
       <p style={S.lbl}>要開始的話</p>
       <div style={S.landing}>
         <div>
-          <h2 style={{ margin: "0 0 6px", fontSize: 20 }}>講一句牠的狀況，我們刪給你看</h2>
+          <h2 style={{ margin: "0 0 6px", fontSize: 20 }}>點一下年紀和狀況，我們刪給你看</h2>
           <p style={{ margin: 0, fontSize: 15.5, color: "var(--muted)", lineHeight: 1.8 }}>
-            例如「柴犬五歲，一直抓癢，換過兩種雞肉飼料都沒改善」。
+            像是點「成犬」再點「對雞過敏」，不用打字。
             我們會順便算哪個規格夠你跑完八週。
           </p>
         </div>

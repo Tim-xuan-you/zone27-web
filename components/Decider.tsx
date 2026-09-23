@@ -215,6 +215,19 @@ export default function Decider({
   const [mentions, setMentions] = useState<Mention[]>([]);
   // 跑出這個答案的那一句話（分享用）。輸入框之後被改掉，分享出去的還是這一句
   const [asked, setAsked] = useState<{ text: string; sp: Species; fm: Form } | null>(null);
+  /*
+   * 打字框預設收起來（2026-09-24）。
+   *
+   * Tim：「我們這個裁決真的有用？我們沒有吃 API token 讓用戶 AI 查詢，做這種的是不是根本沒用處？」
+   * 這個框從來沒有用 AI，也不花錢，是瀏覽器裡的關鍵字比對。實測 30 句讀者會打的話讀得出 25 句。
+   * 但他看到的問題是對的：一個空白的大框放在最上面，看起來就是 AI 聊天，
+   * 讀者會打「皇家的好還是渴望好」這種我們答不了的比較題，然後覺得網站很爛。
+   * 手機上打中文本身也是門檻。
+   *
+   * 真的會改變答案的條件就那幾個：幾歲、對什麼過敏、胖不胖、腸胃、預算。按鈕全部涵蓋，
+   * 點了一定讀得懂。所以按鈕變成門面，打字框收到一行字後面，要打品名或講更多的人再打開。
+   */
+  const [typing, setTyping] = useState(false);
 
   /*
    * 朋友傳來的連結：/?q=柴犬 5 歲，對雞肉過敏&sp=dog&fm=dry
@@ -228,6 +241,8 @@ export default function Decider({
     const sp: Species = q.get("sp") === "cat" ? "cat" : q.get("sp") === "dog" ? "dog" : species;
     const fm: Form = q.get("fm") === "wet" ? "wet" : "dry";
     setSpecies(sp);
+    // 朋友傳來的是一整句話，按鈕不一定亮得起來，把那句話攤開給他看
+    setTyping(true);
     run(t, sp, fm);
     // 只在第一次載入時跑一次
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -265,7 +280,7 @@ export default function Decider({
       setEmpty(found.length === 0 && other.length === 0);
       setVerdict(null);
       setChips([]);
-      setMentions(found.map((p) => ({ p, text: "講一下牠的狀況（年紀、過敏、症狀），我們會告訴你這款適不適合。", tone: "faint" })));
+      setMentions(found.map((p) => ({ p, text: "再點一下上面的年紀和狀況，我們會告訴你這款適不適合。", tone: "faint" })));
       if ((found.length || other.length) && scroll) scrollTo(found.length ? "mentions" : "others");
       return;
     }
@@ -296,6 +311,21 @@ export default function Decider({
         block: "start",
       });
     });
+  }
+
+  function pickButton(pk: Pick) {
+    const on = text.includes(pk.phrase);
+    return (
+      <button
+        key={pk.label}
+        type="button"
+        aria-pressed={on}
+        onClick={() => toggle(pk)}
+        style={on ? { ...S.example, ...pickOn } : S.example}
+      >
+        {on ? "✓ " : ""}{pk.label}
+      </button>
+    );
   }
 
   function pick(sp: Species) {
@@ -358,56 +388,47 @@ export default function Decider({
         )}
       </div>
 
-      <div style={S.ask}>
-        <textarea
-          style={S.ta}
-          value={text}
-          onChange={(e) => setText(e.target.value)}
-          onKeyDown={(e) => {
-            // Enter 直接送出，Shift+Enter 才換行。
-            // 寫成 Ctrl+Enter 是工程師的習慣 —— 一般人按 Enter 沒反應會以為壞了。
-            if (e.key === "Enter" && !e.shiftKey) {
-              e.preventDefault();
-              run(text);
-            }
-          }}
-          placeholder={PLACEHOLDER[foodSlug(cat.slug)]}
-          rows={3}
-          aria-label={species === "cat" ? "描述你家的貓" : "描述你家的狗"}
-        />
-        <button style={S.go} onClick={() => run(text)}>裁決</button>
+      <div style={pickWrap}>
+        <span style={pickHead}>{species === "cat" ? "貓" : "狗"}多大了</span>
+        <div style={S.chipRow}>{AGE[species].map(pickButton)}</div>
+        <span style={{ ...pickHead, marginTop: 16 }}>有這些狀況嗎？可以多選，沒有就不用點</span>
+        <div style={S.chipRow}>{PICKS[foodSlug(cat.slug)].map(pickButton)}</div>
       </div>
 
-      <div style={pickWrap}>
-        <span style={pickHead}>點一下就好，可以多選</span>
-        <div style={S.chipRow}>
-          {[...AGE[species], ...PICKS[foodSlug(cat.slug)]].map((pk) => {
-            const on = text.includes(pk.phrase);
-            return (
-              <button
-                key={pk.label}
-                type="button"
-                aria-pressed={on}
-                onClick={() => toggle(pk)}
-                style={on ? { ...S.example, ...pickOn } : S.example}
-              >
-                {on ? "✓ " : ""}{pk.label}
-              </button>
-            );
-          })}
-        </div>
-      </div>
-      <p style={S.hint}>
-        也可以用講的，像「柴犬 5 歲，一直舔腳」，或直接打品名「紐頓 T22」。打完按 Enter。
-        {soonHint && !status.live && (
-          <>
-            <br />
-            <span style={{ color: "var(--faint)" }}>
-              {cat.zh}還在上架：{status.read} 款的成分表讀完了，購買連結還在補。
-            </span>
-          </>
-        )}
-      </p>
+      {typing ? (
+        <>
+          <div style={{ ...S.ask, marginTop: 16 }}>
+            <textarea
+              style={S.ta}
+              value={text}
+              autoFocus={!asked}
+              onChange={(e) => setText(e.target.value)}
+              onKeyDown={(e) => {
+                // Enter 直接送出，Shift+Enter 才換行。
+                // 寫成 Ctrl+Enter 是工程師的習慣，一般人按 Enter 沒反應會以為壞了。
+                if (e.key === "Enter" && !e.shiftKey) {
+                  e.preventDefault();
+                  run(text);
+                }
+              }}
+              placeholder={PLACEHOLDER[foodSlug(cat.slug)]}
+              rows={2}
+              aria-label={species === "cat" ? "描述你家的貓，或打品名" : "描述你家的狗，或打品名"}
+            />
+            <button style={S.go} onClick={() => run(text)}>刪給我看</button>
+          </div>
+          <p style={S.hint}>像「柴犬 5 歲，一直舔腳」，或直接打品名「紐頓 T22」。打完按 Enter。</p>
+        </>
+      ) : (
+        <button type="button" onClick={() => setTyping(true)} style={typeLink}>
+          想用打的，或直接打品名查 →
+        </button>
+      )}
+      {soonHint && !status.live && (
+        <p style={{ ...S.hint, color: "var(--faint)" }}>
+          {cat.zh}還在上架：{status.read} 款的成分表讀完了，購買連結還在補。
+        </p>
+      )}
 
       {!verdict && mentions.length === 0 && !empty && answersFor(cat.slug).length > 0 && (
         <div style={{ marginTop: 28 }}>
@@ -548,6 +569,11 @@ const otherRow: React.CSSProperties = {
 };
 
 const pickWrap: React.CSSProperties = { marginTop: 14 };
+/* 打字框收起來時那一行：看得出可以點，但不搶按鈕的位置 */
+const typeLink: React.CSSProperties = {
+  display: "inline-block", marginTop: 14, padding: "6px 0", background: "none", border: 0,
+  font: "inherit", fontSize: 14, color: "var(--accent)", fontWeight: 600, cursor: "pointer",
+};
 const pickHead: React.CSSProperties = { display: "block", fontSize: 12.5, color: "var(--muted)", marginBottom: 8 };
 const pickOn: React.CSSProperties = {
   background: "var(--accent-soft)", borderColor: "var(--accent)", color: "var(--accent)", fontWeight: 700,

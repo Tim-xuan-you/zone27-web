@@ -7,7 +7,7 @@ export const contentType = OG_CONTENT_TYPE;
 export default function Image() {
   return ogCard({
     kicker: "狗飼料、主食罐、零食怎麼選",
-    headline: "講一句牠的狀況，先刪掉不適合的",
+    headline: "點一下牠的狀況，先刪掉不適合的",
     sub: "我們一款一款讀過台灣架上的中文標示",
     tone: "accent",
   });

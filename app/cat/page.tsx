@@ -17,7 +17,7 @@ import { categoriesOf } from "@/lib/categories";
 export const metadata: Metadata = {
   title: "貓飼料、主食罐、貓砂、零食怎麼選",
   description:
-    "乾糧跟主食罐都可以問。講一句你家貓的狀況，我們先刪掉不適合的；每一款的成分表都讀過，名字跟內容對不上的也標出來了。貓砂照材質判能不能沖馬桶，零食照熱量算一天可以給幾條。",
+    "乾糧跟主食罐都可以問。點一下你家貓的年紀和狀況，我們先刪掉不適合的；每一款的成分表都讀過，名字跟內容對不上的也標出來了。貓砂照材質判能不能沖馬桶，零食照熱量算一天可以給幾條。",
   alternates: { canonical: "/cat" },
 };
 
@@ -30,7 +30,7 @@ export default function Page() {
         你家的貓，吃乾糧還是罐頭？
       </h1>
       <p style={{ color: "var(--muted)", fontSize: 17, lineHeight: 1.9, margin: "0 0 28px", maxWidth: "40ch" }}>
-        兩種都可以問。講一句牠的狀況，我們先把不適合的刪掉，剩下的才給你看。
+        兩種都可以問。點一下牠的年紀和狀況，我們先把不適合的刪掉，剩下的才給你看。
         貓砂跟零食在下面。
       </p>
 

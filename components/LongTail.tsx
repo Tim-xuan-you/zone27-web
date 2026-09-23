@@ -236,7 +236,7 @@ export default function LongTail({ sp, slug }: { sp: Species; slug: string[] }) 
       }}>
         <p style={{ margin: 0 }}>
           這一頁預設{ADULT[sp]}。你的{ANIMAL[sp]}如果是{sp === "cat" ? "幼貓" : "幼犬"}、高齡或有其他狀況，
-          <Link href="/" style={{ color: "var(--muted)" }}>回裁決器</Link>用講的比較快。
+          <Link href="/" style={{ color: "var(--muted)" }}>回裁決器</Link>點一下比較快。
         </p>
         <p style={{ margin: "8px 0 0" }}>
           價格是人工查的，點進賣場以當下的標價為準。

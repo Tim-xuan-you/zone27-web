@@ -63,7 +63,7 @@ export default function Page() {
         貓飼料怎麼選
       </h1>
       <p style={{ color: "var(--muted)", fontSize: 17, lineHeight: 1.9, margin: "0 0 28px", maxWidth: "42ch" }}>
-        把你家貓的狀況講一句，我們先把不適合的刪掉，剩下的才給你看。
+        點一下你家貓的年紀和狀況，我們先把不適合的刪掉，剩下的才給你看。
       </p>
 
       <Decider defaultSpecies="cat" soonHint={false} />

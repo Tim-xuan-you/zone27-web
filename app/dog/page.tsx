@@ -26,7 +26,7 @@ const CANS_HIDDEN = CANS_UNNAMED.filter((p) => p.chicken?.status === "hidden");
 export const metadata: Metadata = {
   title: "狗飼料、狗主食罐、狗零食怎麼選",
   description:
-    "講一句你家狗的狀況，我們先刪掉不適合的。每一款的成分表都讀過，名字寫鴨肉、鹿肉、鱉肉但成分表裡有雞的都標出來了。罐頭算一天要幾罐，零食照熱量算一天可以給幾支。",
+    "點一下你家狗的年紀和狀況，我們先刪掉不適合的。每一款的成分表都讀過，名字寫鴨肉、鹿肉、鱉肉但成分表裡有雞的都標出來了。罐頭算一天要幾罐，零食照熱量算一天可以給幾支。",
   alternates: { canonical: "/dog" },
 };
 
@@ -39,7 +39,7 @@ export default function Page() {
         你家的狗，現在在吃什麼？
       </h1>
       <p style={{ color: "var(--muted)", fontSize: 17, lineHeight: 1.9, margin: "0 0 28px", maxWidth: "40ch" }}>
-        講一句牠的狀況，我們先把不適合的刪掉，剩下的才給你看。
+        點一下牠的年紀和狀況，我們先把不適合的刪掉，剩下的才給你看。
         罐頭跟零食在下面，那兩個都要算份量。
       </p>
 

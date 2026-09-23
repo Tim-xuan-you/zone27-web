@@ -149,7 +149,7 @@ export default function Page() {
       <p style={S.lbl}>那要買哪一款</p>
       <div style={S.landing}>
         <div>
-          <h2 style={{ margin: "0 0 6px", fontSize: 20 }}>把狗的狀況講一句，我們刪給你看</h2>
+          <h2 style={{ margin: "0 0 6px", fontSize: 20 }}>點一下年紀和狀況，我們刪給你看</h2>
           <p style={{ margin: 0, fontSize: 15.5, color: "var(--muted)", lineHeight: 1.8 }}>
             我們會用剛剛同一個算式，告訴你哪個規格吃得完。
           </p>

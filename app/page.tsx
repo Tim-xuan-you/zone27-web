@@ -57,10 +57,10 @@ export default function Home() {
       <SiteHeader />
 
       <h1 style={{ fontSize: "clamp(28px,6vw,40px)", lineHeight: 1.45, margin: "0 0 16px" }}>
-        你家的毛孩怎麼了？<br />用講的就好
+        你家的毛孩怎麼了？<br />點幾下就好
       </h1>
       <p style={{ color: "var(--muted)", fontSize: 17, lineHeight: 1.9, margin: "0 0 28px", maxWidth: "40ch" }}>
-        光是低敏飼料，市面上就上百款。你把狀況講完，我們先幫你
+        光是低敏飼料，市面上就上百款。點一下年紀和狀況，我們先幫你
         <span style={{ color: "var(--cut)", fontWeight: 700 }}>刪掉</span>
         不適合的，剩下的才給你看。
       </p>

@@ -76,7 +76,7 @@ export default function Page() {
         {TITLE}
       </h1>
       <p style={{ color: "var(--muted)", fontSize: 17, lineHeight: 1.9, margin: "0 0 28px", maxWidth: "42ch" }}>
-        罐頭先翻到背面，看兩件事：是主食還是副食，第一項是不是雞湯。剩下的，把你家貓的狀況講一句，我們先刪掉不適合的。
+        罐頭先翻到背面，看兩件事：是主食還是副食，第一項是不是雞湯。剩下的，點一下你家貓的年紀和狀況，我們先刪掉不適合的。
       </p>
 
       <Decider defaultSpecies="cat" defaultForm="wet" soonHint={false} />

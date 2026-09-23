@@ -160,7 +160,7 @@ export default function ProductPage({ id, species, form = "dry" }: { id: string;
       <p style={S.lbl}>適不適合你家的{animal}</p>
       <div style={S.landing}>
         <div>
-          <h2 style={{ margin: "0 0 6px", fontSize: 20 }}>把牠的狀況講一句，我們刪給你看</h2>
+          <h2 style={{ margin: "0 0 6px", fontSize: 20 }}>點一下年紀和狀況，我們刪給你看</h2>
           <p style={{ margin: 0, fontSize: 15.5, color: "var(--muted)", lineHeight: 1.8 }}>
             過敏、年紀、胖瘦都算進去，這一款會不會被刪，一眼就知道。
           </p>

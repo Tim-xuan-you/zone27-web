@@ -175,7 +175,7 @@ export default function Page() {
       <p style={S.lbl}>那主食罐要買哪一款</p>
       <div style={S.landing}>
         <div>
-          <h2 style={{ margin: "0 0 6px", fontSize: 20 }}>把貓的狀況講一句，我們刪給你看</h2>
+          <h2 style={{ margin: "0 0 6px", fontSize: 20 }}>點一下年紀和狀況，我們刪給你看</h2>
           <p style={{ margin: 0, fontSize: 15.5, color: "var(--muted)", lineHeight: 1.8 }}>
             裁決器第一刀就是把副食罐刪掉，剩下的才照你家貓的狀況挑。
           </p>

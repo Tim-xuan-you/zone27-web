@@ -221,7 +221,7 @@ export default function Page() {
       <p style={S.lbl}>那要買什麼</p>
       <div style={S.landing}>
         <div>
-          <h2 style={{ margin: "0 0 6px", fontSize: 20 }}>把狗的狀況講一句，我們刪給你看</h2>
+          <h2 style={{ margin: "0 0 6px", fontSize: 20 }}>點一下年紀和狀況，我們刪給你看</h2>
           <p style={{ margin: 0, fontSize: 15.5, color: "var(--muted)", lineHeight: 1.8 }}>
             我們不會因為一款是無穀就加分，那個欄位在排序裡不佔任何權重。
           </p>

@@ -176,9 +176,9 @@ export default function Page() {
       <p style={S.lbl}>那要買什麼</p>
       <div style={S.landing}>
         <div>
-          <h2 style={{ margin: "0 0 6px", fontSize: 20 }}>把貓的狀況講一句，我們刪給你看</h2>
+          <h2 style={{ margin: "0 0 6px", fontSize: 20 }}>點一下年紀和狀況，我們刪給你看</h2>
           <p style={{ margin: 0, fontSize: 15.5, color: "var(--muted)", lineHeight: 1.8 }}>
-            例如「英短三歲，對雞肉過敏，想找主食罐」。
+            像是點「成貓」再點「對雞過敏」，不用打字。
           </p>
         </div>
         <Link style={S.btn} href="/cat-wet-food">去貓主食罐</Link>

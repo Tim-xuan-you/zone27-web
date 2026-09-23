@@ -108,6 +108,8 @@ const SYMPTOMS: Record<string, string> = {
   太胖: "體重", 過重: "體重", 減肥: "體重", 太瘦: "體重",
   有點胖: "體重", 胖胖: "體重", 圓滾滾: "體重", 肉肉的: "體重",
   過胖: "體重", 體重過重: "體重", 要控制體重: "體重", 瘦不下來: "體重",
+  // 2026-09-24：「結紮後變胖」讀不出來。結紮後變胖是台灣飼主最常講的一句
+  變胖: "體重", 胖了: "體重", 發福: "體重",
 
   腎: "腎臟", 腎指數: "腎臟", 控磷: "腎臟",
 
@@ -371,10 +373,21 @@ function avoidLabels(avoid: ProteinSource[]): string[] {
   return allFish ? ["魚", ...out] : out;
 }
 
+/**
+ * 「一個月預算 1000」「每個月花多少」的「個月」講的是錢，不是年紀。
+ *
+ * 2026-09-24 實測：「一個月預算1000」被讀成「幼犬」，推出來的是幼犬飼料。
+ * 前面是「每」，或後面幾個字內有預算、花、元、塊、錢、三位數以上的數字，就不當月齡。
+ */
+function moneyMonth(t: string, at: number, len: number): boolean {
+  if (t[at - 1] === "每") return true;
+  return /^[^，。,FF01？]{0,4}(預算|花|元|塊|錢|\$|\d{3,})/.test(t.slice(at + len));
+}
+
 function parseAge(t: string, species: Species): number | undefined {
   // 月齡優先 —— 「4 個月」是幼犬，不能當成 4 歲
   const mo = t.match(/(\d+)\s*個?月(?!.*歲)/) ?? t.match(/([零一兩二三四五六七八九十]+)\s*個月/);
-  if (mo) {
+  if (mo && !moneyMonth(t, mo.index ?? 0, mo[0].length)) {
     const n = /\d/.test(mo[1]) ? parseInt(mo[1], 10) : cnNum(mo[1]);
     if (n && n <= 24) return +(n / 12).toFixed(2);
   }
@@ -406,7 +419,7 @@ function ageLabel(t: string, years: number, species: Species): string {
 function parseBudget(t: string): number | undefined {
   const m =
     t.match(/預算[^0-9]{0,6}(\d{3,6})/) ??
-    t.match(/一個月[^0-9]{0,6}(\d{3,6})/) ??
+    t.match(/(?:一|每)個?月[^0-9]{0,6}(\d{3,6})/) ??
     t.match(/(\d{3,6})\s*(?:元|塊)(?:以內|以下|左右)/);
   return m ? parseInt(m[1], 10) : undefined;
 }
