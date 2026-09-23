@@ -14,6 +14,7 @@ import { readerNotes } from "@/lib/notes";
 import { S } from "./styles";
 import Share from "./Share";
 import Stamp from "./Stamp";
+import { STAMP, STAMP_LINE } from "@/lib/chicken";
 
 /**
  * 裁決結果。
@@ -152,9 +153,9 @@ export default function Result({
       <p style={S.lbl}>都不合適？</p>
       <div style={S.landing}>
         <div>
-          <h2 style={{ margin: "0 0 6px", fontSize: 20 }}>換個講法再跑一次</h2>
+          <h2 style={{ margin: "0 0 6px", fontSize: 20 }}>換個條件再試一次</h2>
           <p style={{ margin: 0, fontSize: 15.5, color: "var(--muted)", lineHeight: 1.8 }}>
-            多講一點通常就不一樣了，像是體重、現在吃什麼、症狀多久了。
+            多點一兩個狀況，或打牠幾公斤、現在吃哪一包，答案通常就不一樣了。
             出貨和庫存要問賣場，牠不舒服要看醫生，<Link href="/ask" style={{ color: "var(--accent)" }}>哪個問題該問誰</Link>寫在這裡。
           </p>
         </div>
@@ -826,12 +827,15 @@ function SpecChips({ p }: { p: Product }) {
     const c = cansOf(can ? unitOf(p, can) : p.price.unit);
     const perCan = p.spec.kcal && c ? Math.round((c.g / 1000) * p.spec.kcal) : null;
     return (
+      <>
       <div style={S.specRow}>
         <span style={S.spec}>蛋白質 {p.spec.asFed?.protein ?? p.spec.protein}%</span>
         {p.spec.moisture !== undefined && <span style={S.spec}>水分 {p.spec.moisture}%</span>}
         {perCan !== null && <span style={S.spec}>一{canWord(p)} {perCan} 大卡</span>}
         {p.spec.singleSource && <span style={S.specGood}>單一蛋白源</span>}
       </div>
+      <Words p={p} wet />
+      </>
     );
   }
   return (
@@ -842,7 +846,47 @@ function SpecChips({ p }: { p: Product }) {
         {p.spec.singleSource && <span style={S.specGood}>單一蛋白源</span>}
       </div>
       <MacroBar p={p} />
+      <Words p={p} />
     </>
+  );
+}
+
+/**
+ * 看不懂這些字？
+ *
+ * 2026-09-24 Tim：「第一次養狗、貓的人，專有名詞他都看得懂？」看不懂。
+ * 粗蛋白、碳水、單一蛋白源、灰分、藏雞，老手覺得有料，新手會被嚇跑。
+ * 所以每張卡片下面收一個小開關，只解釋這張卡片上出現的字，一個字一句白話。
+ * 預設收起來：老手不用看，新手點一下就懂，卡片不會因為這個變長。
+ */
+function Words({ p, wet = false }: { p: Product; wet?: boolean }) {
+  const st = p.chicken?.status;
+  const rows: [string, string][] = [
+    ...(st ? [[`「${STAMP[st].zh}」`, STAMP_LINE[st]] as [string, string]] : []),
+    ...(wet
+      ? [
+          ["蛋白質", "罐子上印的蛋白質比例。罐頭大部分是水，所以這個數字看起來比乾糧低很多，不能直接跟乾糧比。"],
+          ["水分", "罐頭裡水佔多少。水越多，同一罐吃進去的肉越少。"],
+        ] as [string, string][]
+      : [
+          ["粗蛋白", "飼料裡蛋白質佔多少。肉、豆子、穀物的蛋白質都算在裡面。"],
+          ["碳水", "澱粉這一類佔多少，多半來自穀物、馬鈴薯、豆子。"],
+          ["纖維、灰分、水分", "灰分是鈣、磷這些礦物質。這三樣加起來就是蛋白、脂肪、碳水以外剩下的。"],
+        ] as [string, string][]),
+    ...(p.spec.singleSource ? [["單一蛋白源", "肉只有一種。萬一過敏，比較容易查出是哪一種肉。"]] as [string, string][] : []),
+  ];
+  return (
+    <details style={{ marginTop: 10 }}>
+      <summary style={{ cursor: "pointer", fontSize: 12.5, color: "var(--accent)", fontWeight: 600 }}>看不懂這些字？</summary>
+      <dl style={{ margin: "8px 0 0", fontSize: 14, lineHeight: 1.8 }}>
+        {rows.map(([k, v]) => (
+          <div key={k} style={{ marginBottom: 6 }}>
+            <dt style={{ fontWeight: 700, display: "inline" }}>{k}：</dt>
+            <dd style={{ display: "inline", margin: 0, color: "var(--muted)" }}>{v}</dd>
+          </div>
+        ))}
+      </dl>
+    </details>
   );
 }
 
