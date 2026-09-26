@@ -432,9 +432,19 @@
       "price": {
         "unit": "1 顆",
         "checkedAt": "2026-09-26",
-        "merchants": []
-      },
-      "awaitingLink": true
+        "merchants": [
+          {
+            "id": "m1",
+            "label": "3C SHOP 數位生活",
+            "unit": "1顆",
+            "amount": 699,
+            "note": "一頁兩色，規格選石墨黑或冰雪白",
+            "affiliateUrl": "https://s.shopee.tw/70KR61nCot?share_channel_code=6",
+            "anchor": "safe",
+            "checkedAt": "2026-09-26"
+          }
+        ]
+      }
     },
     {
       "id": "ch-11",

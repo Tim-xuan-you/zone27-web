@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { S } from "./styles";
+import { readerNotes } from "@/lib/notes";
 import {
   DEVICES, TIER_TONE, anchorCharger, tierZh, chargers, deviceById, rank,
   type Device, type Fit,
@@ -196,7 +197,7 @@ function Row({ f, pick, compact, first }: { f: Fit; pick?: boolean; compact?: bo
       {pick && (m ? (
         <div style={S.buyRow}>
           <a href={`/go/${m.id}/${c.id}`} rel="nofollow sponsored" style={S.btnBuy}>去蝦皮看這一顆</a>
-          <p style={S.buyNote}>{m.label} · ${m.amount.toLocaleString()}</p>
+          <p style={S.buyNote}>{[m.label, "$" + m.amount.toLocaleString(),...readerNotes(m.note, { keepVariant: true })].join(" · ")}</p>
         </div>
       ) : (
         <p style={{ margin: "12px 0 0", fontSize: 14, color: "var(--faint)" }}>購買連結還在補。規格是官方寫的，先看有沒有適合你的</p>

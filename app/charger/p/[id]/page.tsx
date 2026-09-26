@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import SiteHeader from "@/components/SiteHeader";
 import { S } from "@/components/styles";
+import { readerNotes } from "@/lib/notes";
 import {
   DEVICES, TIER_TONE, anchorCharger, chargerById, chargers, fit, liveCharger, portsZh, tierZh,
 } from "@/lib/charger";
@@ -127,7 +128,7 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
       {m ? (
         <div style={S.buyRow}>
           <a href={`/go/${m.id}/${c.id}`} rel="nofollow sponsored" style={S.btnBuy}>去蝦皮看這一顆</a>
-          <p style={S.buyNote}>{m.label} · ${m.amount.toLocaleString()}{live.length > 1 ? ` · 另外 ${live.length - 1} 家` : ""}</p>
+          <p style={S.buyNote}>{[m.label, "$" + m.amount.toLocaleString(),...readerNotes(m.note, { keepVariant: true }), ...(live.length > 1 ? [`另外 ${live.length - 1} 家`] : [])].join(" · ")}</p>
         </div>
       ) : (
         <p style={{ ...note, marginTop: 18 }}>購買連結還在補。</p>
