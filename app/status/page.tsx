@@ -70,7 +70,7 @@ const SHOW = 6;
  */
 function pickCounts(sp: Species, form: Form = "dry"): Map<string, number> {
   const opened: Product[] = catalogOf(sp, form).map((p) =>
-    p.awaitingLink
+    p.awaitingLink || (!p.referenceOnly && !p.price.merchants.some((m) => !m.dead && !m.soldOut))
       ? {
           ...p,
           awaitingLink: false,
@@ -199,16 +199,22 @@ export default function Page() {
     tasks.set(t.id, { ...t, rank });
   };
   // 飼料、罐頭：補了會被推薦幾次
-  for (const p of catalog.filter((p) => p.awaitingLink)) {
+  // 產得出的那家賣完了、但我還查到別家可以試的，也留在這裡（2026-09-27 怪獸部落鴨肉）
+  const soldOnly = (p: Product) => !p.referenceOnly && p.price.merchants.length > 0 && p.price.merchants.every((m) => m.dead || m.soldOut) && p.price.merchants.some((m) => m.soldOut);
+  for (const p of catalog.filter((p) => p.awaitingLink || (soldOnly(p) && openPicks(p.id) > 0))) {
     const c = categoryOfId(p.id);
     const need = c ? opening.get(c.slug) ?? 0 : 0;
     const n = picks.get(p.id) ?? 0;
+    const sold = soldOnly(p);
     add({
       id: p.id, brand: p.brand, name: p.name, huntNote: p.huntNote, value: n,
       keyword: huntKeyword(p), shops: shopsFor(p.brand),
-      why: need > 0
-        ? <>{c?.zh}再補 {need} 款就開張{n > 0 ? `，這款補了會被推薦 ${n} 次` : ""}</>
-        : n > 0 ? `補了會被推薦 ${n} 次` : "目前的情況都輪不到它，不急",
+      why: <>
+        {sold && "產得出連結的那家賣完了，換一家試試。"}
+        {need > 0
+          ? <>{c?.zh}再補 {need} 款就開張{n > 0 ? `，這款補了會被推薦 ${n} 次` : ""}</>
+          : n > 0 ? `補了會被推薦 ${n} 次` : "目前的情況都輪不到它，不急"}
+      </>,
     });
   }
   // 查藏雞頁寫了沒有雞、但我們沒連結的
@@ -244,7 +250,7 @@ export default function Page() {
   // 我查好賣場、但上面都沒列到的
   for (const t of huntData.targets as { id: string; label: string; why: string }[]) {
     const x = byId.get(t.id);
-    if (x && (live(x).length > 0 || x.ms.some((m) => m.soldOut))) continue;
+    if (x && (live(x).length > 0 || (x.ms.some((m) => m.soldOut) && openPicks(t.id) === 0))) continue;
     add({
       id: t.id, brand: x?.brand ?? "", name: x?.name ?? t.label, why: t.why,
       keyword: x ? huntFrom(x.brand, x.name, x.searchAs) : t.label, shops: x ? shopsFor(x.brand) : [],
@@ -278,7 +284,8 @@ export default function Page() {
   }
   const backupList = [...backup.values()].sort((a, b) => b.n - a.n);
 
-  const unbuyable = catalog.filter((p) => !p.referenceOnly && !p.awaitingLink && (!buyable(p) || p.discontinued));
+  // 已經在「等你產連結」的不重複列
+  const unbuyable = catalog.filter((p) => !p.referenceOnly && !p.awaitingLink && (!buyable(p) || p.discontinued) && !tasks.has(p.id));
   const noIssues = catalog.filter((p) => !p.knownIssues?.trim());
   const oldest = Math.max(0, ...rows.map((r) => r.days));
   const cut = overallCutRate();
@@ -608,7 +615,7 @@ export default function Page() {
       <Drawer title="我這邊還沒做完的" count={`${unbuyable.length + noIssues.length} 款`}>
         <p style={{ ...lead, marginTop: 0 }}>這一段是 Claude 的功課，你不用動手。</p>
         <Line k="整款買不到">
-          {unbuyable.length === 0 ? "沒有" : unbuyable.map((p) => `${p.brand}｜${p.name}（${p.discontinued ? "停產" : "所有賣場都失效"}）`).join("、")}
+          {unbuyable.length === 0 ? "沒有" : unbuyable.map((p) => `${p.brand}｜${p.name}（${p.discontinued ? "停產" : p.price.merchants.some((m) => m.soldOut) ? "賣完了" : "所有賣場都失效"}）`).join("、")}
         </Line>
         <Line k="還沒寫缺點">
           {noIssues.length === 0 ? "都寫了" : noIssues.map((p) => `${p.brand}｜${p.name}`).join("、")}

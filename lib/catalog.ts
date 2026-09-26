@@ -66,8 +66,9 @@ export function shopLink(productId?: string): string | null {
 /** 這個類目能推薦的有幾款 */
 export function liveCount(species: Species, form: Form = "dry"): number {
   // 貓砂不在飼料的 catalog 裡（規格完全不同，見 lib/litter.ts），要另外數
-  if (form === "litter") return litters.filter((p) => p.price.merchants.some((m) => !m.dead)).length;
-  if (form === "treat") return treatsOf(species).filter((p) => p.price.merchants.some((m) => !m.dead)).length;
+  // 售完的不算能買（2026-09-27 補上）
+  if (form === "litter") return litters.filter((p) => p.price.merchants.some((m) => !m.dead && !m.soldOut)).length;
+  if (form === "treat") return treatsOf(species).filter((p) => p.price.merchants.some((m) => !m.dead && !m.soldOut)).length;
   return catalogOf(species, form).filter(recommendable).length;
 }
 

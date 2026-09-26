@@ -109,9 +109,13 @@ export function dedupeMerchants(ms: Merchant[]): Merchant[] {
   });
 }
 
-/** 這款還有沒有地方買 */
+/**
+ * 這款還有沒有地方買。
+ * 2026-09-27 以前只看失效、沒看售完：怪獸部落鴨肉唯一的那一家賣完了，卻還被當成買得到、掛上購買按鈕，
+ * 讀者點下去會被 /go/ 轉回首頁（那一段有擋售完）。飼料以前沒標過售完，所以一直沒發現
+ */
 export function buyable(p: Product): boolean {
-  return p.price.merchants.some((m) => !m.dead);
+  return p.price.merchants.some((m) => !m.dead && !m.soldOut);
 }
 
 /** 能不能真的推出去。對照款永遠不行 —— 它的工作是被刪掉。 */
@@ -905,7 +909,7 @@ export function unitPrice(p: Product, unit: string, amount: number): string | nu
 export function wetMonthly(p: Product, kcalPerDay: number): number | null {
   if (!p.spec.kcal) return null;
   let best: number | null = null;
-  for (const m of p.price.merchants.filter((x) => !x.dead)) {
+  for (const m of p.price.merchants.filter((x) => !x.dead && !x.soldOut)) {
     const kg = kgOf(unitOf(p, m));
     if (!kg) continue;
     const monthly = (m.amount / (kg * p.spec.kcal)) * kcalPerDay * 30;

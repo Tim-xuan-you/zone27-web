@@ -1006,7 +1006,8 @@
           "channel": "seller",
           "price": 53,
           "unit": "犬罐頭 1&2 種肉一頁，選「鴨肉」",
-          "url": "https://shopee.tw/product/20186300/18970210826"
+          "url": "https://shopee.tw/product/20186300/18970210826",
+          "soldOut": "2026-09-27 Tim 回報整頁售完"
         },
         {
           "shop": "貓狗罐罐屋",
@@ -1023,9 +1024,41 @@
           "price": 76,
           "unit": "單罐 鴨肉 165g 狗罐頭（大罐）",
           "url": "https://shopee.tw/product/569241620/12453968765"
+        },
+        {
+          "shop": "Otishsu 奧提斯許 寵物用品專賣店",
+          "shopId": "380479045",
+          "channel": "seller",
+          "price": 55,
+          "unit": "犬用一頁多口味，選「1種肉主食罐 犬用 純鴨肉 82g」",
+          "url": "https://shopee.tw/product/380479045/8714068609"
+        },
+        {
+          "shop": "米瑞拉 寵物用品專賣店",
+          "shopId": "397992294",
+          "channel": "seller",
+          "price": 55,
+          "unit": "犬用一頁多口味，選「1種肉主食罐 犬用 純鴨肉 82g」",
+          "url": "https://shopee.tw/product/397992294/8540814914"
+        },
+        {
+          "shop": "貓咖寵物館",
+          "shopId": "344160076",
+          "channel": "seller",
+          "price": null,
+          "unit": "82g 整箱 24 罐，選鴨肉；產了告訴我是一箱還是單罐",
+          "url": "https://shopee.tw/product/344160076/23931006334"
+        },
+        {
+          "shop": "圓肚肚~毛孩樂園",
+          "shopId": "26916285",
+          "channel": "seller",
+          "price": null,
+          "unit": "165g，寫現貨出清；選正常的「清燉鴨肉」，不要選 NG 凹罐",
+          "url": "https://shopee.tw/product/26916285/20069842060"
         }
       ],
-      "checkedAt": "2026-09-24"
+      "checkedAt": "2026-09-27"
     },
     {
       "id": "dw-02",

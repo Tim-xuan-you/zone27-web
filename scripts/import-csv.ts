@@ -182,6 +182,9 @@ function merchant(row: Row, n: number, line: number) {
     // 連結死掉不是刪掉那一列 —— 刪掉就沒有紀錄，下次又會重新收一次同一家。
     // 標記起來，引擎跳過，資料還在。
     ...(/^(1|true|yes|y|是|死)$/i.test((row[`${p}Dead`] ?? "").trim()) ? { dead: true } : {}),
+    // 售完：連結是好的，讀者暫時看不到，補貨就回來。
+    // 2026-09-27 才發現這裡一直沒認「sold」（貓砂、零食的匯入有）：怪獸部落鴨肉標了售完，卻被當成能買
+    ...((row[`${p}Dead`] ?? "").trim() === "sold" ? { soldOut: true } : {}),
     // 這一家自己的查價日期。備援的價格可能比整款的日期舊，要分開記
     ...(/^\d{4}-\d{2}-\d{2}$/.test(row[`${p}Checked`] ?? "") ? { checkedAt: row[`${p}Checked`] } : {}),
   };

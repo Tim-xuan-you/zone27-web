@@ -2,7 +2,7 @@
   "_meta": {
     "category": "dog-wet-food",
     "note": "由 data/dog-wet-food.csv 產生，不要直接改這個檔。改 CSV 之後跑 npm run data:import。",
-    "generatedAt": "2026-09-23",
+    "generatedAt": "2026-09-27",
     "count": 12,
     "pricePolicy": "人工複查，不爬蟲。checkedAt 誠實顯示於前端。"
   },
@@ -55,12 +55,23 @@
       },
       "price": {
         "unit": "82g",
-        "checkedAt": "2026-09-20",
-        "merchants": []
+        "checkedAt": "2026-09-27",
+        "merchants": [
+          {
+            "id": "m1",
+            "label": "RBB 寵物生活館（蝦皮優選）",
+            "unit": "82g",
+            "amount": 53,
+            "note": "一頁多口味，規格選「清蒸鴨肉82G」",
+            "affiliateUrl": "https://s.shopee.tw/30oIXLbJPY?share_channel_code=6",
+            "anchor": "safe",
+            "soldOut": true,
+            "checkedAt": "2026-09-27"
+          }
+        ]
       },
       "dealbreaker": "你的狗對鴨過敏。整罐的肉就是鴨肉和鴨肝，沒有第三種。",
       "knownIssues": "成分表的肉只有鴨肉、鴨肝兩項，是我們讀過的狗主食罐裡唯一一款整張成分表都找不到雞的。標示 AAFCO 成幼犬。",
-      "awaitingLink": true,
       "searchAs": "怪獸部落 犬1肉主食罐 鴨肉 82g",
       "chicken": {
         "status": "clean",
