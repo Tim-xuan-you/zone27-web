@@ -1,6 +1,6 @@
 {
   "checkedAt": "2026-09-19",
-  "total": 121,
+  "total": 122,
   "bad": 0,
   "rows": [
     {
@@ -1573,6 +1573,19 @@
       "status": 302,
       "finalUrl": "https://shopee.tw/opaanlp/60330807/47164469529",
       "item": "60330807/47164469529",
+      "verdict": "ok",
+      "note": "2026-09-26 貼進來時手動跟了一次轉址，沒有跑整批健檢"
+    },
+    {
+      "productId": "ch-02",
+      "brand": "Apple",
+      "name": "35W 雙 USB-C 埠小型電源轉接器",
+      "merchantId": "m1",
+      "label": "蝦皮直營 _ 生活超市",
+      "url": "https://s.shopee.tw/6fhatncWvq?share_channel_code=6",
+      "status": 302,
+      "finalUrl": "https://shopee.tw/opaanlp/50662979/51809610689",
+      "item": "50662979/51809610689",
       "verdict": "ok",
       "note": "2026-09-26 貼進來時手動跟了一次轉址，沒有跑整批健檢"
     }
