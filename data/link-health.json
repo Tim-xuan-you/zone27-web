@@ -1,6 +1,6 @@
 {
   "checkedAt": "2026-09-19",
-  "total": 118,
+  "total": 119,
   "bad": 0,
   "rows": [
     {
@@ -1534,6 +1534,19 @@
       "status": 302,
       "finalUrl": "https://shopee.tw/opaanlp/50662979/57659608508",
       "item": "50662979/57659608508",
+      "verdict": "ok",
+      "note": "2026-09-26 貼進來時手動跟了一次轉址，沒有跑整批健檢"
+    },
+    {
+      "productId": "ch-09",
+      "brand": "KINYO",
+      "name": "氮化鎵‧晶透快充摺疊充電器 60W",
+      "merchantId": "m1",
+      "label": "KINYO官方旗艦店_3C館",
+      "url": "https://s.shopee.tw/70KRG7TNlv?share_channel_code=6",
+      "status": 302,
+      "finalUrl": "https://shopee.tw/opaanlp/1322591005/44032940096",
+      "item": "1322591005/44032940096",
       "verdict": "ok",
       "note": "2026-09-26 貼進來時手動跟了一次轉址，沒有跑整批健檢"
     }

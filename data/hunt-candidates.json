@@ -1820,8 +1820,25 @@
           "price": 1590,
           "unit": "EP-T6010，廠商直送",
           "url": "https://shopee.tw/product/116309859/48559705791"
+        },
+        {
+          "shop": "TJ3C原廠配件專售-天贊通信",
+          "shopId": "51779333",
+          "channel": "seller",
+          "price": 1590,
+          "unit": "EP-T6010，寫聯強代理公司貨；通訊行，點開看有沒有門市、開發票",
+          "url": "https://shopee.tw/product/51779333/4358366704"
+        },
+        {
+          "shop": "keeponline 247",
+          "shopId": "835589381",
+          "channel": "seller",
+          "price": 1375,
+          "unit": "EP-T6010 盒裝；點開確認有寫開發票才產",
+          "url": "https://shopee.tw/product/835589381/40929847153"
         }
-      ]
+      ],
+      "note": "S26 Ultra 最快的答案現在是 ONPRO Q67 Duo（已經能買），這顆是給只買原廠的人，不急。"
     },
     {
       "id": "ch-08",
@@ -1852,8 +1869,25 @@
           "price": 1990,
           "unit": "EP-T6530 臺灣公司貨",
           "url": "https://shopee.tw/product/40469232/14179545969"
+        },
+        {
+          "shop": "全盛數碼科技",
+          "shopId": "7133513",
+          "channel": "seller",
+          "price": 1750,
+          "unit": "EP-T6530 公司貨；點開確認有寫開發票才產",
+          "url": "https://shopee.tw/product/7133513/21700473951"
+        },
+        {
+          "shop": "keeponline 247",
+          "shopId": "835589381",
+          "channel": "seller",
+          "price": 1682,
+          "unit": "EP-T6530 盒裝；點開確認有寫開發票才產",
+          "url": "https://shopee.tw/product/835589381/22709629962"
         }
-      ]
+      ],
+      "note": "蝦皮上有標「三星官方 65W」一顆 $89 到 $450 的，商城賣 $1,789，這種不到兩成的價錢一律不收。這顆本來就是對照組（S26 Ultra 插它不是最快），不急著補。"
     },
     {
       "id": "ch-09",

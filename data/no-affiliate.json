@@ -532,6 +532,54 @@
       "shop": "蝦皮直營 - Apple 產品旗艦館",
       "shopId": "188277742",
       "at": "2026-09-26"
+    },
+    {
+      "productId": "ch-07",
+      "shop": "NOKIA品牌專賣店",
+      "shopId": "228722839",
+      "at": "2026-09-26"
+    },
+    {
+      "productId": "ch-07",
+      "shop": "Best Choice旗艦店",
+      "shopId": "93709510",
+      "at": "2026-09-26"
+    },
+    {
+      "productId": "ch-07",
+      "shop": "mygood 買好。好買",
+      "shopId": "115069451",
+      "at": "2026-09-26"
+    },
+    {
+      "productId": "ch-07",
+      "shop": "蝦皮直營 - 3C家電館",
+      "shopId": "116309859",
+      "at": "2026-09-26"
+    },
+    {
+      "productId": "ch-08",
+      "shop": "NOKIA品牌專賣店",
+      "shopId": "228722839",
+      "at": "2026-09-26"
+    },
+    {
+      "productId": "ch-08",
+      "shop": "Best Choice旗艦店",
+      "shopId": "93709510",
+      "at": "2026-09-26"
+    },
+    {
+      "productId": "ch-08",
+      "shop": "三猩崛起商城",
+      "shopId": "40469232",
+      "at": "2026-09-26"
+    },
+    {
+      "productId": "ch-09",
+      "shop": "蝦皮直營 _ 生活超市",
+      "shopId": "50662979",
+      "at": "2026-09-26"
     }
   ]
 }

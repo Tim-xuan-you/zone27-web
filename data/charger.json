@@ -400,9 +400,19 @@
       "price": {
         "unit": "1 組（含線）",
         "checkedAt": "2026-09-26",
-        "merchants": []
-      },
-      "awaitingLink": true
+        "merchants": [
+          {
+            "id": "m1",
+            "label": "KINYO官方旗艦店_3C館",
+            "unit": "1組",
+            "amount": 599,
+            "note": "一頁兩色，規格選冰晶白或宇宙橘",
+            "affiliateUrl": "https://s.shopee.tw/70KRG7TNlv?share_channel_code=6",
+            "anchor": "safe",
+            "checkedAt": "2026-09-26"
+          }
+        ]
+      }
     },
     {
       "id": "ch-10",

@@ -330,8 +330,11 @@ export function rank(devices: Device[], together = true): Fit[] {
       b.score - a.score || b.fast - a.fast ||
       (a.fast === all ? 0 : b.watts - a.watts) ||
       (liveCharger(a.charger).length > 0 ? 0 : 1) - (liveCharger(b.charger).length > 0 ? 0 : 1) ||
-      (a.charger.listPrice ?? 1e9) - (b.charger.listPrice ?? 1e9));
+      priceOf(a.charger) - priceOf(b.charger));
 }
+
+/** 排順序用的價錢：有連結就用最便宜那一家的實際價錢，沒有才用官方建議售價 */
+const priceOf = (c: Charger): number => anchorCharger(c)?.amount ?? c.listPrice ?? 1e9;
 
 /* ------------------------------------------------------------------ */
 /* 買得到嗎                                                             */
