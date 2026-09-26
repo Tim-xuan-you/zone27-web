@@ -109,9 +109,20 @@
       "price": {
         "unit": "1 顆",
         "checkedAt": "2026-09-26",
-        "merchants": []
-      },
-      "awaitingLink": true
+        "merchants": [
+          {
+            "id": "m1",
+            "label": "蝦皮直營 _ 生活超市",
+            "unit": "1顆",
+            "amount": 1290,
+            "note": "",
+            "affiliateUrl": "https://s.shopee.tw/gQNgXv4k4?share_channel_code=6",
+            "anchor": "safe",
+            "checkedAt": "2026-09-26",
+            "soldOut": true
+          }
+        ]
+      }
     },
     {
       "id": "ch-04",

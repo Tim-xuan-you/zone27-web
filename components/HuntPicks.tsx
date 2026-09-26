@@ -139,9 +139,10 @@ export default function HuntPicks({ id }: { id: string }) {
     .filter((c) => !failedFor(id, c))
     .sort(
       (a, b) =>
-        // 已經證明這個牌子會開的排最前面，再來才是售完的往後、便宜的往前
-        brandWorks(b, id) - brandWorks(a, id) ||
+        // 售完的一律排最後（2026-09-26：生活超市產得出 Apple 40W 但賣完了，卻因為「這個牌子在這家產出過」排第一）
+        // 再來才是已經證明這個牌子會開的排前面、便宜的往前
         Number(Boolean(a.soldOut)) - Number(Boolean(b.soldOut)) ||
+        brandWorks(b, id) - brandWorks(a, id) ||
         (a.price ?? 1e9) - (b.price ?? 1e9),
     );
   // 一整排都是商城代表我查得不夠廣：商城通常比一般賣家貴一截

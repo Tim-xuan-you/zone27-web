@@ -1,6 +1,6 @@
 {
   "checkedAt": "2026-09-19",
-  "total": 116,
+  "total": 117,
   "bad": 0,
   "rows": [
     {
@@ -1510,6 +1510,19 @@
       "item": "26009838/45564467125",
       "verdict": "ok",
       "note": "2026-09-26 貼進來時手動跟了一次轉址，沒有跑整批健檢"
+    },
+    {
+      "productId": "ch-03",
+      "brand": "Apple",
+      "name": "40W 動態電源轉接器（最高輸出 60W）",
+      "merchantId": "m1",
+      "label": "蝦皮直營 _ 生活超市",
+      "url": "https://s.shopee.tw/gQNgXv4k4?share_channel_code=6",
+      "status": 302,
+      "finalUrl": "https://shopee.tw/opaanlp/50662979/55111202917",
+      "item": "50662979/55111202917",
+      "verdict": "ok",
+      "note": "2026-09-26 貼進來時手動跟了一次轉址；Tim 回報售完"
     }
   ]
 }

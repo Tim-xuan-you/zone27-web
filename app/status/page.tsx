@@ -229,12 +229,16 @@ export default function Page() {
   // 充電器：對幾台裝置是官方寫的最快，就先補哪一顆（iPhone 18 Pro、S26 Ultra 最快的那幾顆最搶手）
   for (const c of chargers) {
     const x = byId.get(c.id)!;
-    if (live(x).length > 0 || x.ms.some((m) => m.soldOut)) continue;
+    // 產得出來的那家賣完了，但還有別家可以試的，留在這裡；沒有別家可以試的才去「看補貨」
+    const sold = x.ms.some((m) => m.soldOut);
+    if (live(x).length > 0 || (sold && openPicks(c.id) === 0)) continue;
     const best = DEVICES.filter((d) => fit(c, [d]).got![0].tier === "fast");
     add({
       id: c.id, brand: c.brand, name: c.name, value: best.length * 5,
       keyword: c.searchAs ?? huntFrom(c.brand, c.name), shops: shopsFor(c.brand),
-      why: `${c.back}。單獨插最快的：${best.map((d) => d.zh).join("、") || "沒有"}`,
+      why: sold
+        ? `產得出連結的那家賣完了，換一家試試。${c.back}`
+        : `${c.back}。單獨插最快的：${best.map((d) => d.zh).join("、") || "沒有"}`,
     });
   }
   // 我查好賣場、但上面都沒列到的
@@ -251,7 +255,7 @@ export default function Page() {
   /* ── 2. 有連結但賣完了：連結是好的，補貨就能開 ── */
   const soldOut = everything
     .map((x) => ({ ...x, sold: x.ms.filter((m) => m.soldOut) }))
-    .filter((x) => x.sold.length > 0 && live(x).length === 0);
+    .filter((x) => x.sold.length > 0 && live(x).length === 0 && !tasks.has(x.id)); // 已經在「等你產連結」的不重複列
 
   /* ── 3. 賣場名字還沒跟 Tim 核對的 ── */
   const links = linkIndex();
@@ -357,6 +361,9 @@ export default function Page() {
           </Line>
           <Line k="截圖要拍到">
             規格的完整名稱、價錢、運費（免運、限宅配、超取限幾包）。罐頭看清楚是一罐還是一箱幾罐
+          </Line>
+          <Line k="充電器">
+            Apple、三星這種原廠的最常被仿，只找商城、蝦皮直營、有實體門市或開發票的店，個人賣家不收。其他品牌（ONPRO、KINYO）一般賣家、優選都可以。比官方便宜超過兩成的不收，寫二手、拆機、近全新的也不收
           </Line>
           <Line k="我查好的賣場">
             便宜的排前面。產不出連結就跟我說是哪一家，我只擋這一款的那一家，同一家別款照樣列
