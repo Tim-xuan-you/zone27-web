@@ -88,6 +88,17 @@ export function ShareIcon(p: P) {
   );
 }
 
+/** 充電器：一顆插頭朝上的充電器，中間一道閃電。跟其他圖示一樣，線條、不填色（2026-09-26） */
+export function ChargerIcon({ size = 18 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+      <path d="M9 3.5v4M15 3.5v4" />
+      <path d="M7.5 7.5h9A1.5 1.5 0 0 1 18 9v9.5a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V9a1.5 1.5 0 0 1 1.5-1.5Z" />
+      <path d="M12.8 10.4 10.6 14h2.8l-2.2 3.6" />
+    </svg>
+  );
+}
+
 /** 類目用哪一個：罐頭看形態，乾糧看動物 */
 export function CategoryIcon({ species, form, size }: { species: "dog" | "cat"; form: Form; size?: number }) {
   if (form === "treat") return <TreatIcon size={size} />;

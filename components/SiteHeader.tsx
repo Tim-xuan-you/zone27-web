@@ -19,7 +19,7 @@ import type { Species } from "@/lib/types";
  * 第二排只有在那個動物有兩個以上的類目時才出現。
  */
 
-type Current = CategorySlug | Species | "how-we-choose" | "ask";
+type Current = CategorySlug | Species | "charger" | "how-we-choose" | "ask";
 
 export default function SiteHeader({ current }: { current?: Current }) {
   // 現在在哪一個動物底下：類目頁算那個類目的動物，動物頁算自己
@@ -30,6 +30,8 @@ export default function SiteHeader({ current }: { current?: Current }) {
 
   const items: { href: string; label: string; on: boolean }[] = [
     ...ANIMALS.map((a) => ({ href: animalHref(a.species), label: a.zh, on: species === a.species })),
+    // 2026-09-26 第一個不是寵物的類目。跟狗、貓並排：先選你要買的是哪一種東西
+    { href: "/charger", label: "充電器", on: current === "charger" },
     { href: "/how-we-choose", label: "我們怎麼挑", on: current === "how-we-choose" },
     { href: "/ask", label: "問我們", on: current === "ask" },
   ];

@@ -16,6 +16,7 @@ import { CHANNEL_ZH, isMall } from "@/lib/channel";
 import { channelStats } from "@/lib/channel-stats";
 import { litters } from "@/lib/litter";
 import { treats } from "@/lib/treat";
+import { CHARGER_SUB_ID, DEVICES, chargers, fit } from "@/lib/charger";
 import HuntPicks, { openPicks } from "@/components/HuntPicks";
 import huntData from "@/data/hunt-candidates.json";
 import { productHref } from "@/lib/labels";
@@ -160,6 +161,7 @@ export default function Page() {
     ...catalog.map((p) => ({ id: p.id, brand: p.brand, name: p.name, searchAs: p.searchAs, ms: p.price.merchants })),
     ...litters.map((p) => ({ id: p.id, brand: p.brand, name: p.name, searchAs: p.searchAs, ms: p.price.merchants as Merchant[] })),
     ...treats.map((p) => ({ id: p.id, brand: p.brand, name: p.name, searchAs: p.searchAs, ms: p.price.merchants as Merchant[] })),
+    ...chargers.map((p) => ({ id: p.id, brand: p.brand, name: p.name, searchAs: p.searchAs, ms: p.price.merchants })),
   ];
   const byId = new Map(everything.map((x) => [x.id, x]));
   const live = (x: Item) => x.ms.filter((m) => !m.dead && !m.soldOut);
@@ -224,6 +226,17 @@ export default function Page() {
     if (live(x).length > 0 || x.ms.some((m) => m.soldOut)) continue;
     add({ id: p.id, brand: p.brand, name: p.name, keyword: huntFrom(p.brand, p.name, p.searchAs), shops: shopsFor(p.brand) });
   }
+  // 充電器：對幾台裝置是官方寫的最快，就先補哪一顆（iPhone 18 Pro、S26 Ultra 最快的那幾顆最搶手）
+  for (const c of chargers) {
+    const x = byId.get(c.id)!;
+    if (live(x).length > 0 || x.ms.some((m) => m.soldOut)) continue;
+    const best = DEVICES.filter((d) => fit(c, [d]).got![0].tier === "fast");
+    add({
+      id: c.id, brand: c.brand, name: c.name, value: best.length * 5,
+      keyword: c.searchAs ?? huntFrom(c.brand, c.name), shops: shopsFor(c.brand),
+      why: `${c.back}。單獨插最快的：${best.map((d) => d.zh).join("、") || "沒有"}`,
+    });
+  }
   // 我查好賣場、但上面都沒列到的
   for (const t of huntData.targets as { id: string; label: string; why: string }[]) {
     const x = byId.get(t.id);
@@ -278,7 +291,7 @@ export default function Page() {
     <div key={t.id} style={box}>
       <div style={head}>
         <div style={{ minWidth: 0 }}>
-          <span style={catTag}>{categoryOfId(t.id)?.zh ?? "其他"}</span>
+          <span style={catTag}>{catZh(t.id)}</span>
           {t.brand && <span style={{ fontSize: 12.5, color: "var(--muted)" }}>{t.brand}</span>}
           <b style={{ display: "block", fontSize: 17, lineHeight: 1.5, marginTop: 2 }}>{t.name}</b>
         </div>
@@ -446,7 +459,7 @@ export default function Page() {
             <div key={x.id} style={box}>
               <div style={head}>
                 <div style={{ minWidth: 0 }}>
-                  <span style={catTag}>{categoryOfId(x.id)?.zh ?? "其他"}</span>
+                  <span style={catTag}>{catZh(x.id)}</span>
                   <span style={{ fontSize: 12.5, color: "var(--muted)" }}>{x.brand}</span>
                   <b style={{ display: "block", fontSize: 17, lineHeight: 1.5, marginTop: 2 }}>{x.name}</b>
                 </div>
@@ -661,11 +674,14 @@ function linkIndex() {
   return { groups, unchecked, urls: new Set(all.map((x) => x.m.affiliateUrl)).size };
 }
 
+/** 卡片左上角那個類目名。充電器不在寵物的類目表裡 */
+const catZh = (id: string) => (id.startsWith("ch-") ? "充電器" : categoryOfId(id)?.zh ?? "其他");
+
 function SubIds({ id }: { id: string }) {
   return (
     <p className="mono" style={{ margin: "10px 0 0", fontSize: 14 }}>
       <span style={{ color: "var(--faint)", fontSize: 12.5 }}>Sub id 1 </span><b>{shopeeSubId(id)}</b>
-      <span style={{ color: "var(--faint)", fontSize: 12.5, marginLeft: 16 }}>Sub id 2 </span><b>{categoryOfId(id)?.subId ?? CATEGORY_SUB_ID}</b>
+      <span style={{ color: "var(--faint)", fontSize: 12.5, marginLeft: 16 }}>Sub id 2 </span><b>{id.startsWith("ch-") ? CHARGER_SUB_ID : categoryOfId(id)?.subId ?? CATEGORY_SUB_ID}</b>
     </p>
   );
 }

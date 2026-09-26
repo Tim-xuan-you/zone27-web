@@ -1565,6 +1565,385 @@
       "note": "2026-09-24 查過：比價站上蝦皮幾乎沒人賣，只有一筆 $1 的佔位商品。先放著當資料款。",
       "candidates": [],
       "checkedAt": "2026-09-24"
+    },
+    {
+      "id": "ch-01",
+      "label": "Apple 20W USB-C 電源轉接器（充電器）",
+      "why": "iPhone 16 以前、iPhone Air、17e 用它就是最快，最便宜的那一顆",
+      "note": "充電器只給商城和蝦皮直營：蝦皮上個人賣家的原廠充電器，很多寫拆機、近全新、9 成新，價錢也低到不合理。充電器出問題是會燒起來的，這一類不賭。",
+      "checkedAt": "2026-09-26",
+      "candidates": [
+        {
+          "shop": "蝦皮直營 - 3C家電館",
+          "shopId": "116309859",
+          "channel": "mall",
+          "price": 549,
+          "unit": "MWVV3TA/A 白",
+          "url": "https://shopee.tw/product/116309859/25190687909"
+        },
+        {
+          "shop": "蝦皮直營 - Apple 產品旗艦館",
+          "shopId": "188277742",
+          "channel": "mall",
+          "price": 590,
+          "unit": "20W",
+          "url": "https://shopee.tw/product/188277742/40767418311"
+        },
+        {
+          "shop": "蝦皮直營 _ 生活超市",
+          "shopId": "50662979",
+          "channel": "mall",
+          "price": 590,
+          "unit": "MWVV3TA/A 白",
+          "url": "https://shopee.tw/product/50662979/56965415962"
+        }
+      ]
+    },
+    {
+      "id": "ch-02",
+      "label": "Apple 35W 雙 USB-C 埠小型電源轉接器（充電器）",
+      "why": "兩孔一起插各 17.5W 的那一顆，招牌頁會拿它當例子",
+      "note": "充電器只給商城和蝦皮直營：蝦皮上個人賣家的原廠充電器，很多寫拆機、近全新、9 成新，價錢也低到不合理。充電器出問題是會燒起來的，這一類不賭。",
+      "checkedAt": "2026-09-26",
+      "candidates": [
+        {
+          "shop": "蝦皮直營 - 3C家電館",
+          "shopId": "116309859",
+          "channel": "mall",
+          "price": 1690,
+          "unit": "MW2H3TA/A（小型，插腳可收）",
+          "url": "https://shopee.tw/product/116309859/27554283189"
+        },
+        {
+          "shop": "蝦皮直營 - Apple 產品旗艦館",
+          "shopId": "188277742",
+          "channel": "mall",
+          "price": 1790,
+          "unit": "小型那一款",
+          "url": "https://shopee.tw/product/188277742/40718338725"
+        },
+        {
+          "shop": "蝦皮直營 _ 生活超市",
+          "shopId": "50662979",
+          "channel": "mall",
+          "price": 1790,
+          "unit": "小型那一款",
+          "url": "https://shopee.tw/product/50662979/51809610689"
+        }
+      ]
+    },
+    {
+      "id": "ch-03",
+      "label": "Apple 40W 動態電源轉接器（最高輸出 60W）（充電器）",
+      "why": "iPhone 18 Pro 最快的兩顆之一，這個月最多人要買的",
+      "note": "充電器只給商城和蝦皮直營：蝦皮上個人賣家的原廠充電器，很多寫拆機、近全新、9 成新，價錢也低到不合理。充電器出問題是會燒起來的，這一類不賭。",
+      "checkedAt": "2026-09-26",
+      "candidates": [
+        {
+          "shop": "蝦皮直營 - Apple 產品旗艦館",
+          "shopId": "188277742",
+          "channel": "mall",
+          "price": 1290,
+          "unit": "MGKQ4J/A",
+          "url": "https://shopee.tw/product/188277742/47554522087"
+        },
+        {
+          "shop": "蝦皮直營 _ 生活超市",
+          "shopId": "50662979",
+          "channel": "mall",
+          "price": 1290,
+          "unit": "MGKQ4J/A 白",
+          "url": "https://shopee.tw/product/50662979/55111202917"
+        },
+        {
+          "shop": "蝦皮直營 - 3C家電館",
+          "shopId": "116309859",
+          "channel": "mall",
+          "price": 1290,
+          "unit": "MGKQ4J/A 白",
+          "url": "https://shopee.tw/product/116309859/56361351270"
+        },
+        {
+          "shop": "GS 3C 手機平板配件 商城旗艦店",
+          "shopId": "3042750",
+          "channel": "mall",
+          "price": 1290,
+          "unit": "公司貨",
+          "url": "https://shopee.tw/product/3042750/41724623754"
+        },
+        {
+          "shop": "馬尼行動通訊商城",
+          "shopId": "26009838",
+          "channel": "mall",
+          "price": 1280,
+          "unit": "公司貨，一頁多款，選 40W 動態",
+          "url": "https://shopee.tw/product/26009838/40470497617"
+        }
+      ]
+    },
+    {
+      "id": "ch-04",
+      "label": "Apple 70W USB-C 電源轉接器（充電器）",
+      "why": "MacBook Air 要 70W 才能快充",
+      "note": "充電器只給商城和蝦皮直營：蝦皮上個人賣家的原廠充電器，很多寫拆機、近全新、9 成新，價錢也低到不合理。充電器出問題是會燒起來的，這一類不賭。",
+      "checkedAt": "2026-09-26",
+      "candidates": [
+        {
+          "shop": "蝦皮直營 _ 生活超市",
+          "shopId": "50662979",
+          "channel": "mall",
+          "price": 1790,
+          "unit": "MHXY4TA/A",
+          "url": "https://shopee.tw/product/50662979/57659608508"
+        },
+        {
+          "shop": "蝦皮直營 - Apple 產品旗艦館",
+          "shopId": "188277742",
+          "channel": "mall",
+          "price": 1790,
+          "unit": "MHXY4TA/A",
+          "url": "https://shopee.tw/product/188277742/53957411283"
+        }
+      ]
+    },
+    {
+      "id": "ch-05",
+      "label": "Apple 140W USB-C 電源轉接器（充電器）",
+      "why": "16 吋 MacBook Pro 快充要的那一顆",
+      "note": "充電器只給商城和蝦皮直營：蝦皮上個人賣家的原廠充電器，很多寫拆機、近全新、9 成新，價錢也低到不合理。充電器出問題是會燒起來的，這一類不賭。",
+      "checkedAt": "2026-09-26",
+      "candidates": [
+        {
+          "shop": "蝦皮直營 - 3C家電館",
+          "shopId": "116309859",
+          "channel": "mall",
+          "price": 2490,
+          "unit": "A2452，廠商直送",
+          "url": "https://shopee.tw/product/116309859/48461355042"
+        },
+        {
+          "shop": "蝦皮直營 _ 生活超市",
+          "shopId": "50662979",
+          "channel": "mall",
+          "price": 2990,
+          "unit": "MHY14TA/A",
+          "url": "https://shopee.tw/product/50662979/54309599634"
+        },
+        {
+          "shop": "蝦皮直營 - Apple 產品旗艦館",
+          "shopId": "188277742",
+          "channel": "mall",
+          "price": 2990,
+          "unit": "MHY14TA/A",
+          "url": "https://shopee.tw/product/188277742/47507431313"
+        }
+      ]
+    },
+    {
+      "id": "ch-06",
+      "label": "三星 45W 快充旅充組 EP-T4511（充電器）",
+      "why": "S26 Ultra 以前的三星旗艦用它就是超快速充電 2.0",
+      "note": "充電器只給商城和蝦皮直營：蝦皮上個人賣家的原廠充電器，很多寫拆機、近全新、9 成新，價錢也低到不合理。充電器出問題是會燒起來的，這一類不賭。",
+      "checkedAt": "2026-09-26",
+      "candidates": [
+        {
+          "shop": "蝦皮直營 - 3C家電館",
+          "shopId": "116309859",
+          "channel": "mall",
+          "price": 750,
+          "unit": "EP-T4511（旅充頭＋線），注意不是 T4510",
+          "url": "https://shopee.tw/product/116309859/40464973356"
+        },
+        {
+          "shop": "大摩DAMO",
+          "shopId": "91461954",
+          "channel": "mall",
+          "price": 1690,
+          "unit": "EP-T4511 含 1.8m 線",
+          "url": "https://shopee.tw/product/91461954/25785725821"
+        }
+      ]
+    },
+    {
+      "id": "ch-07",
+      "label": "三星 60W 快充旅充頭 EP-T6010（充電器）",
+      "why": "S26 Ultra 超快速充電 3.0 要的就是這一顆",
+      "note": "充電器只給商城和蝦皮直營：蝦皮上個人賣家的原廠充電器，很多寫拆機、近全新、9 成新，價錢也低到不合理。充電器出問題是會燒起來的，這一類不賭。",
+      "checkedAt": "2026-09-26",
+      "candidates": [
+        {
+          "shop": "NOKIA品牌專賣店",
+          "shopId": "228722839",
+          "channel": "mall",
+          "price": 1445,
+          "unit": "EP-T6010",
+          "url": "https://shopee.tw/product/228722839/55658405671"
+        },
+        {
+          "shop": "Best Choice旗艦店",
+          "shopId": "93709510",
+          "channel": "mall",
+          "price": 1445,
+          "unit": "EP-T6010 盒裝",
+          "url": "https://shopee.tw/product/93709510/55708057054"
+        },
+        {
+          "shop": "mygood 買好。好買",
+          "shopId": "115069451",
+          "channel": "mall",
+          "price": 1499,
+          "unit": "EP-T6010",
+          "url": "https://shopee.tw/product/115069451/56459561339"
+        },
+        {
+          "shop": "蝦皮直營 - 3C家電館",
+          "shopId": "116309859",
+          "channel": "mall",
+          "price": 1590,
+          "unit": "EP-T6010，廠商直送",
+          "url": "https://shopee.tw/product/116309859/48559705791"
+        }
+      ]
+    },
+    {
+      "id": "ch-08",
+      "label": "三星 65W 三孔快充旅充頭 EP-T6530（充電器）",
+      "why": "對照組：三星自己的 65W，給 S26 Ultra 只有 45W",
+      "note": "充電器只給商城和蝦皮直營：蝦皮上個人賣家的原廠充電器，很多寫拆機、近全新、9 成新，價錢也低到不合理。充電器出問題是會燒起來的，這一類不賭。",
+      "checkedAt": "2026-09-26",
+      "candidates": [
+        {
+          "shop": "NOKIA品牌專賣店",
+          "shopId": "228722839",
+          "channel": "mall",
+          "price": 1789,
+          "unit": "EP-T6530",
+          "url": "https://shopee.tw/product/228722839/40258831078"
+        },
+        {
+          "shop": "Best Choice旗艦店",
+          "shopId": "93709510",
+          "channel": "mall",
+          "price": 1789,
+          "unit": "EP-T6530 盒裝",
+          "url": "https://shopee.tw/product/93709510/29311612436"
+        },
+        {
+          "shop": "三猩崛起商城",
+          "shopId": "40469232",
+          "channel": "mall",
+          "price": 1990,
+          "unit": "EP-T6530 臺灣公司貨",
+          "url": "https://shopee.tw/product/40469232/14179545969"
+        }
+      ]
+    },
+    {
+      "id": "ch-09",
+      "label": "KINYO 氮化鎵‧晶透快充摺疊充電器 60W（充電器）",
+      "why": "招牌頁的例子：寫 AVS，AVS 那一檔只有 40W",
+      "note": "充電器只給商城和蝦皮直營：蝦皮上個人賣家的原廠充電器，很多寫拆機、近全新、9 成新，價錢也低到不合理。充電器出問題是會燒起來的，這一類不賭。",
+      "checkedAt": "2026-09-26",
+      "candidates": [
+        {
+          "shop": "KINYO官方旗艦店_3C館",
+          "shopId": "1322591005",
+          "channel": "mall",
+          "price": 599,
+          "unit": "APDCB 60W（含線）",
+          "url": "https://shopee.tw/product/1322591005/44032940096"
+        },
+        {
+          "shop": "蝦皮直營 _ 生活超市",
+          "shopId": "50662979",
+          "channel": "mall",
+          "price": 599,
+          "unit": "60W",
+          "url": "https://shopee.tw/product/50662979/44768281571"
+        }
+      ]
+    },
+    {
+      "id": "ch-10",
+      "label": "ONPRO Q67 Duo AVS（充電器）",
+      "why": "iPhone 18 Pro 跟 S26 Ultra 單孔都最快的那一顆，比 Apple 便宜",
+      "note": "充電器只給商城和蝦皮直營：蝦皮上個人賣家的原廠充電器，很多寫拆機、近全新、9 成新，價錢也低到不合理。充電器出問題是會燒起來的，這一類不賭。",
+      "checkedAt": "2026-09-26",
+      "candidates": [
+        {
+          "shop": "Kimi極美職人",
+          "shopId": "65830979",
+          "channel": "mall",
+          "price": 689,
+          "unit": "Q67 Duo",
+          "url": "https://shopee.tw/product/65830979/27045389422"
+        },
+        {
+          "shop": "3C SHOP 數位生活",
+          "shopId": "109025657",
+          "channel": "mall",
+          "price": 699,
+          "unit": "Q67 Duo",
+          "url": "https://shopee.tw/product/109025657/57214465622"
+        },
+        {
+          "shop": "GS 3C 手機平板配件 商城旗艦店",
+          "shopId": "3042750",
+          "channel": "mall",
+          "price": 699,
+          "unit": "Q67 Duo",
+          "url": "https://shopee.tw/product/3042750/55164886964"
+        },
+        {
+          "shop": "馬尼行動通訊商城",
+          "shopId": "26009838",
+          "channel": "mall",
+          "price": 699,
+          "unit": "一頁多款，選 Q67 Duo",
+          "url": "https://shopee.tw/product/26009838/45564467125"
+        }
+      ]
+    },
+    {
+      "id": "ch-11",
+      "label": "ONPRO Q48 AVS（充電器）",
+      "why": "iPhone 17 一整代用它就是最快，老實寫 40W 的那一顆",
+      "note": "充電器只給商城和蝦皮直營：蝦皮上個人賣家的原廠充電器，很多寫拆機、近全新、9 成新，價錢也低到不合理。充電器出問題是會燒起來的，這一類不賭。",
+      "checkedAt": "2026-09-26",
+      "candidates": [
+        {
+          "shop": "3c共和國",
+          "shopId": "3712151",
+          "channel": "mall",
+          "price": 499,
+          "unit": "Q48",
+          "url": "https://shopee.tw/product/3712151/44183075421"
+        },
+        {
+          "shop": "3C SHOP 數位生活",
+          "shopId": "109025657",
+          "channel": "mall",
+          "price": 499,
+          "unit": "Q48",
+          "url": "https://shopee.tw/product/109025657/50564467737"
+        },
+        {
+          "shop": "Q哥 旗艦商城",
+          "shopId": "1982863",
+          "channel": "mall",
+          "price": 499,
+          "unit": "Q48",
+          "url": "https://shopee.tw/product/1982863/53315131327"
+        },
+        {
+          "shop": "ONPRO超急速充電 官方旗艦館",
+          "shopId": "60330807",
+          "channel": "mall",
+          "price": 549,
+          "unit": "Q48，品牌自己的館",
+          "url": "https://shopee.tw/product/60330807/47164469529"
+        }
+      ]
     }
   ]
 }

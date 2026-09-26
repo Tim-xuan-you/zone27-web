@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     template: "%s · ZONE 27",
   },
   description:
-    "點一下狗或貓的年紀和狀況，我們先幫你刪掉不適合的，剩下的才給你看。每一款都寫清楚什麼時候不要買。",
+    "先選你要買的：狗的、貓的、充電器。每一款的包裝背面我們都讀過，先刪掉不適合你的，剩下的才給你看；每一款都寫清楚什麼時候不要買。",
   openGraph: { type: "website", locale: "zh_TW", siteName: "ZONE 27" },
   robots: { index: true, follow: true },
 };
