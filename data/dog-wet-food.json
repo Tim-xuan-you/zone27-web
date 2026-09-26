@@ -640,16 +640,26 @@
         "merchants": [
           {
             "id": "m1",
-            "label": "汪喵星球官方商城",
-            "unit": "165g",
-            "amount": 78,
-            "note": "規格選「鮮嫩雞肉 165g」",
-            "affiliateUrl": "https://s.shopee.tw/2BFBYsVDW3?share_channel_code=6",
+            "label": "毛孩寵物鋪",
+            "unit": "80g",
+            "amount": 47,
+            "note": "一頁多款，品項選「幼母犬營養罐鮮嫩雞肉」、規格選 80G",
+            "affiliateUrl": "https://s.shopee.tw/8KpouD7k0G?share_channel_code=6",
             "anchor": "safe",
             "checkedAt": "2026-09-27"
           },
           {
             "id": "m2",
+            "label": "汪喵星球官方商城",
+            "unit": "165g",
+            "amount": 78,
+            "note": "規格選「鮮嫩雞肉 165g」",
+            "affiliateUrl": "https://s.shopee.tw/2BFBYsVDW3?share_channel_code=6",
+            "anchor": "value",
+            "checkedAt": "2026-09-27"
+          },
+          {
+            "id": "m3",
             "label": "汪喵星球官方商城",
             "unit": "80g",
             "amount": 48,
