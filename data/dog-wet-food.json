@@ -562,12 +562,22 @@
       },
       "price": {
         "unit": "80g",
-        "checkedAt": "2026-09-20",
-        "merchants": []
+        "checkedAt": "2026-09-27",
+        "merchants": [
+          {
+            "id": "m1",
+            "label": "毛孩寵物鋪",
+            "unit": "80g",
+            "amount": 49,
+            "note": "一頁多款，品項選「熟齡銀養罐滋補羊肉」、規格選 80G",
+            "affiliateUrl": "https://s.shopee.tw/BU7AQ98TG?share_channel_code=6",
+            "anchor": "safe",
+            "checkedAt": "2026-09-27"
+          }
+        ]
       },
       "dealbreaker": "你的狗對雞過敏。名字寫燉羊肉，成分表第一項是雞肉及雞肝，羊肉排第二。",
       "knownIssues": "名字是燉羊肉，第一項卻是雞肉及雞肝。另外有鵪鶉蛋。品牌標的纖維是 5%，跟同系列其他口味的 0.5% 差了十倍，我們照品牌公布的數字登記，但這個數字看起來不對，不要拿它來比較。標示是熟齡犬（5 到 7 歲以上）。",
-      "awaitingLink": true,
       "searchAs": "汪喵星球 熟齡犬銀養主食罐 燉羊肉 80g",
       "chicken": {
         "status": "hidden",
