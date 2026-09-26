@@ -636,12 +636,32 @@
       },
       "price": {
         "unit": "165g",
-        "checkedAt": "2026-09-20",
-        "merchants": []
+        "checkedAt": "2026-09-27",
+        "merchants": [
+          {
+            "id": "m1",
+            "label": "汪喵星球官方商城",
+            "unit": "165g",
+            "amount": 78,
+            "note": "規格選「鮮嫩雞肉 165g」",
+            "affiliateUrl": "https://s.shopee.tw/2BFBYsVDW3?share_channel_code=6",
+            "anchor": "safe",
+            "checkedAt": "2026-09-27"
+          },
+          {
+            "id": "m2",
+            "label": "汪喵星球官方商城",
+            "unit": "80g",
+            "amount": 48,
+            "note": "規格選「鮮嫩雞肉 80g」",
+            "affiliateUrl": "https://s.shopee.tw/2BFBYsVDW3?share_channel_code=6",
+            "anchor": "value",
+            "checkedAt": "2026-09-27"
+          }
+        ]
       },
       "dealbreaker": "你的狗對雞過敏。整罐的肉就是雞肉、雞肝、雞蛋黃。",
       "knownIssues": "肉的部分只有雞，名字也寫了雞。這一款標的是幼犬跟懷孕哺乳的母犬，成犬吃的話熱量偏高。",
-      "awaitingLink": true,
       "searchAs": "汪喵星球 幼母犬營養主食罐 雞肉 165g",
       "chicken": {
         "status": "chicken"
