@@ -1780,8 +1780,49 @@
           "price": 1690,
           "unit": "EP-T4511 含 1.8m 線",
           "url": "https://shopee.tw/product/91461954/25785725821"
+        },
+        {
+          "shop": "ee7 Mobile 1館 三星授權經銷",
+          "shopId": "76752995",
+          "channel": "mall",
+          "price": 1088,
+          "unit": "T4511 附 5A 線，寫三星授權經銷",
+          "url": "https://shopee.tw/product/76752995/40683270203"
+        },
+        {
+          "shop": "ee7 Mobile 3館",
+          "shopId": "107140437",
+          "channel": "mall",
+          "price": 999,
+          "unit": "T4511 附 5A 線",
+          "url": "https://shopee.tw/product/107140437/55215388634"
+        },
+        {
+          "shop": "傑昇通信",
+          "shopId": "26522371",
+          "channel": "mall",
+          "price": 990,
+          "unit": "EP-T4511 旅充頭＋線，有實體門市",
+          "url": "https://shopee.tw/product/26522371/51600860960"
+        },
+        {
+          "shop": "mygood 買好。好買",
+          "shopId": "115069451",
+          "channel": "mall",
+          "price": 999,
+          "unit": "EP-T4511 盒裝（60W 那款在這家不行，這款沒試過）",
+          "url": "https://shopee.tw/product/115069451/27518798658"
+        },
+        {
+          "shop": "聯遠通訊3C",
+          "shopId": "8045130",
+          "channel": "mall",
+          "price": 1090,
+          "unit": "T4511 原廠公司貨，一頁多款",
+          "url": "https://shopee.tw/product/8045130/24304903411"
         }
-      ]
+      ],
+      "note": "蝦皮上「三星 ITFIT 45W」是三星合作的副牌，跟 EP-T4511 不是同一顆，不要選到。"
     },
     {
       "id": "ch-07",
