@@ -1,6 +1,6 @@
 {
   "checkedAt": "2026-09-19",
-  "total": 113,
+  "total": 114,
   "bad": 0,
   "rows": [
     {
@@ -1471,6 +1471,19 @@
       "item": "250476251/46314328781",
       "verdict": "ok",
       "note": ""
+    },
+    {
+      "productId": "ch-05",
+      "brand": "Apple",
+      "name": "140W USB-C 電源轉接器",
+      "merchantId": "m1",
+      "label": "蝦皮直營 _ 生活超市",
+      "url": "https://s.shopee.tw/3VkYupFJW3?share_channel_code=6",
+      "status": 302,
+      "finalUrl": "https://shopee.tw/opaanlp/50662979/54309599634",
+      "item": "50662979/54309599634",
+      "verdict": "ok",
+      "note": "2026-09-26 貼進來時手動跟了一次轉址，沒有跑整批健檢"
     }
   ]
 }

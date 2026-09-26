@@ -10,16 +10,28 @@
       "name": "20W USB-C 電源轉接器",
       "model": "MWVV3TA/A",
       "totalW": 20,
-      "ports": [{ "id": "C", "kind": "C", "w": 20 }],
+      "ports": [
+        {
+          "id": "C",
+          "kind": "C",
+          "w": 20
+        }
+      ],
       "combos": [],
       "listPrice": 590,
       "back": "只有 20W，iPhone 17 以後的新機要 40W 以上才是最快",
       "dealbreaker": "你的是 iPhone 17、iPhone 18 Pro、iPhone Duo 或任何一台 MacBook Air、Pro。20W 充得進去，但不是官方寫的最快速度",
       "knownIssues": "一個孔、20W。iPhone 16 以前、iPhone Air、iPhone 17e 用它就是官方寫的快速充電（30 分鐘左右到 50%）。",
       "searchAs": "Apple 20W USB-C 電源轉接器",
-      "refs": ["https://www.apple.com/tw/shop/product/mwvv3ta/a/20w-usb-c-%E9%9B%BB%E6%BA%90%E8%BD%89%E6%8E%A5%E5%99%A8"],
+      "refs": [
+        "https://www.apple.com/tw/shop/product/mwvv3ta/a/20w-usb-c-%E9%9B%BB%E6%BA%90%E8%BD%89%E6%8E%A5%E5%99%A8"
+      ],
       "checkedAt": "2026-09-26",
-      "price": { "unit": "1 顆", "checkedAt": "2026-09-26", "merchants": [] },
+      "price": {
+        "unit": "1 顆",
+        "checkedAt": "2026-09-26",
+        "merchants": []
+      },
       "awaitingLink": true
     },
     {
@@ -28,8 +40,30 @@
       "name": "35W 雙 USB-C 埠小型電源轉接器",
       "model": "MW2H3TA/A",
       "totalW": 35,
-      "ports": [{ "id": "C1", "kind": "C", "w": 35 }, { "id": "C2", "kind": "C", "w": 35 }],
-      "combos": [{ "use": ["C1", "C2"], "w": { "C1": 17.5, "C2": 17.5 } }],
+      "ports": [
+        {
+          "id": "C1",
+          "kind": "C",
+          "w": 35
+        },
+        {
+          "id": "C2",
+          "kind": "C",
+          "w": 35
+        }
+      ],
+      "combos": [
+        {
+          "use": [
+            "C1",
+            "C2"
+          ],
+          "w": {
+            "C1": 17.5,
+            "C2": 17.5
+          }
+        }
+      ],
       "listPrice": 1790,
       "back": "兩台一起插，Mac 跟 iPhone 各只有 17.5W",
       "dealbreaker": "你想同時充筆電跟手機。Apple 自己寫的：接 Mac 筆電加 iPhone，每一台最多 17.5W",
@@ -40,7 +74,11 @@
         "https://support.apple.com/zh-tw/111805"
       ],
       "checkedAt": "2026-09-26",
-      "price": { "unit": "1 顆", "checkedAt": "2026-09-26", "merchants": [] },
+      "price": {
+        "unit": "1 顆",
+        "checkedAt": "2026-09-26",
+        "merchants": []
+      },
       "awaitingLink": true
     },
     {
@@ -49,7 +87,14 @@
       "name": "40W 動態電源轉接器（最高輸出 60W）",
       "model": "MGKQ4J/A",
       "totalW": 60,
-      "ports": [{ "id": "C", "kind": "C", "w": 60, "avs": 60 }],
+      "ports": [
+        {
+          "id": "C",
+          "kind": "C",
+          "w": 60,
+          "avs": 60
+        }
+      ],
       "combos": [],
       "listPrice": 1290,
       "back": "名字寫 40W，其實最高 60W，而且有 AVS",
@@ -61,7 +106,11 @@
         "https://support.apple.com/en-us/102574"
       ],
       "checkedAt": "2026-09-26",
-      "price": { "unit": "1 顆", "checkedAt": "2026-09-26", "merchants": [] },
+      "price": {
+        "unit": "1 顆",
+        "checkedAt": "2026-09-26",
+        "merchants": []
+      },
       "awaitingLink": true
     },
     {
@@ -70,16 +119,28 @@
       "name": "70W USB-C 電源轉接器",
       "model": "MHXY4TA/A",
       "totalW": 70,
-      "ports": [{ "id": "C", "kind": "C", "w": 70 }],
+      "ports": [
+        {
+          "id": "C",
+          "kind": "C",
+          "w": 70
+        }
+      ],
       "combos": [],
       "listPrice": 1790,
       "back": "70W 沒有寫 AVS，iPhone 18 Pro 插它不是最快",
       "dealbreaker": "你主要是充 iPhone 18 Pro。70W 比 60W 大，但規格上沒寫 AVS，Apple 要的是 AVS",
       "knownIssues": "Apple 建議搭 14 吋 MacBook Pro 或 MacBook Air。MacBook Air 要 70W 以上才能快速充電，這一顆剛好夠。一個孔。",
       "searchAs": "Apple 70W USB-C 電源轉接器",
-      "refs": ["https://www.apple.com/tw/shop/product/mhxy4ta/a/70w-usb-c-%E9%9B%BB%E6%BA%90%E8%BD%89%E6%8E%A5%E5%99%A8"],
+      "refs": [
+        "https://www.apple.com/tw/shop/product/mhxy4ta/a/70w-usb-c-%E9%9B%BB%E6%BA%90%E8%BD%89%E6%8E%A5%E5%99%A8"
+      ],
       "checkedAt": "2026-09-26",
-      "price": { "unit": "1 顆", "checkedAt": "2026-09-26", "merchants": [] },
+      "price": {
+        "unit": "1 顆",
+        "checkedAt": "2026-09-26",
+        "merchants": []
+      },
       "awaitingLink": true
     },
     {
@@ -88,17 +149,39 @@
       "name": "140W USB-C 電源轉接器",
       "model": "MHY14TA/A",
       "totalW": 140,
-      "ports": [{ "id": "C", "kind": "C", "w": 140 }],
+      "ports": [
+        {
+          "id": "C",
+          "kind": "C",
+          "w": 140
+        }
+      ],
       "combos": [],
       "listPrice": 2990,
       "back": "16 吋 MacBook Pro 要 140W 才能快充，線也要 240W 的",
       "dealbreaker": "你沒有 16 吋 MacBook Pro。其他裝置用不到 140W，一個孔、比較大顆",
       "knownIssues": "Apple 寫的：搭 MagSafe 3 連接線或 240W USB-C 充電連接線，16 吋 MacBook Pro 約 30 分鐘到 50%。規格上沒寫 AVS。",
       "searchAs": "Apple 140W USB-C 電源轉接器",
-      "refs": ["https://www.apple.com/tw/shop/product/mhy14ta/a/140w-usb-c-%E9%9B%BB%E6%BA%90%E8%BD%89%E6%8E%A5%E5%99%A8"],
+      "refs": [
+        "https://www.apple.com/tw/shop/product/mhy14ta/a/140w-usb-c-%E9%9B%BB%E6%BA%90%E8%BD%89%E6%8E%A5%E5%99%A8"
+      ],
       "checkedAt": "2026-09-26",
-      "price": { "unit": "1 顆", "checkedAt": "2026-09-26", "merchants": [] },
-      "awaitingLink": true
+      "price": {
+        "unit": "1 顆",
+        "checkedAt": "2026-09-26",
+        "merchants": [
+          {
+            "id": "m1",
+            "label": "蝦皮直營 _ 生活超市",
+            "unit": "1顆",
+            "amount": 2990,
+            "note": "",
+            "affiliateUrl": "https://s.shopee.tw/3VkYupFJW3?share_channel_code=6",
+            "anchor": "safe",
+            "checkedAt": "2026-09-26"
+          }
+        ]
+      }
     },
     {
       "id": "ch-06",
@@ -106,7 +189,14 @@
       "name": "45W 快充旅充組（單孔 Type C）",
       "model": "EP-T4511",
       "totalW": 45,
-      "ports": [{ "id": "C", "kind": "C", "w": 45, "pps": 45 }],
+      "ports": [
+        {
+          "id": "C",
+          "kind": "C",
+          "w": 45,
+          "pps": 45
+        }
+      ],
       "combos": [],
       "weightG": 82.57,
       "sizeMm": "43.5 × 60.8 × 28",
@@ -114,9 +204,15 @@
       "dealbreaker": "你的是 Galaxy S26 Ultra。它給得到超快速充電 2.0（45W），不是 3.0（60W）",
       "knownIssues": "盒子裡附一條 5A 的 C 對 C 線。PD 跟 PPS 都是 45W。",
       "searchAs": "三星 45W 快充旅充組 EP-T4511",
-      "refs": ["https://www.samsung.com/tw/mobile-accessories/45w-power-adapter-black-ep-t4511xbtgtw/"],
+      "refs": [
+        "https://www.samsung.com/tw/mobile-accessories/45w-power-adapter-black-ep-t4511xbtgtw/"
+      ],
       "checkedAt": "2026-09-26",
-      "price": { "unit": "1 組（含線）", "checkedAt": "2026-09-26", "merchants": [] },
+      "price": {
+        "unit": "1 組（含線）",
+        "checkedAt": "2026-09-26",
+        "merchants": []
+      },
       "awaitingLink": true
     },
     {
@@ -125,7 +221,14 @@
       "name": "60W 快充旅充頭（單孔 Type C）",
       "model": "EP-T6010",
       "totalW": 60,
-      "ports": [{ "id": "C", "kind": "C", "w": 60, "pps": 60 }],
+      "ports": [
+        {
+          "id": "C",
+          "kind": "C",
+          "w": 60,
+          "pps": 60
+        }
+      ],
       "combos": [],
       "weightG": 104.2,
       "sizeMm": "46.0 × 64.2 × 28.0",
@@ -138,7 +241,11 @@
         "https://www.samsung.com/hk/mobile-accessories/65w-power-adapter-trio-black-ep-t6530nbeggb/"
       ],
       "checkedAt": "2026-09-26",
-      "price": { "unit": "1 顆", "checkedAt": "2026-09-26", "merchants": [] },
+      "price": {
+        "unit": "1 顆",
+        "checkedAt": "2026-09-26",
+        "merchants": []
+      },
       "awaitingLink": true
     },
     {
@@ -148,15 +255,81 @@
       "model": "EP-T6530",
       "totalW": 65,
       "ports": [
-        { "id": "C1", "kind": "C", "w": 65, "pps": 45 },
-        { "id": "C2", "kind": "C", "w": 25, "pps": 25 },
-        { "id": "A", "kind": "A", "w": 15 }
+        {
+          "id": "C1",
+          "kind": "C",
+          "w": 65,
+          "pps": 45
+        },
+        {
+          "id": "C2",
+          "kind": "C",
+          "w": 25,
+          "pps": 25
+        },
+        {
+          "id": "A",
+          "kind": "A",
+          "w": 15
+        }
       ],
       "combos": [
-        { "use": ["C1", "C2"], "w": { "C1": 40, "C2": 25 }, "pps": { "C1": 25, "C2": 25 } },
-        { "use": ["C1", "A"], "w": { "C1": 50, "A": 15 }, "pps": { "C1": 25 } },
-        { "use": ["C2", "A"], "w": { "C2": 25, "A": 15 }, "pps": { "C2": 25 } },
-        { "use": ["C1", "C2", "A"], "w": { "C1": 35, "C2": 25, "A": 5 }, "pps": { "C1": 25, "C2": 25 } }
+        {
+          "use": [
+            "C1",
+            "C2"
+          ],
+          "w": {
+            "C1": 40,
+            "C2": 25
+          },
+          "pps": {
+            "C1": 25,
+            "C2": 25
+          }
+        },
+        {
+          "use": [
+            "C1",
+            "A"
+          ],
+          "w": {
+            "C1": 50,
+            "A": 15
+          },
+          "pps": {
+            "C1": 25
+          }
+        },
+        {
+          "use": [
+            "C2",
+            "A"
+          ],
+          "w": {
+            "C2": 25,
+            "A": 15
+          },
+          "pps": {
+            "C2": 25
+          }
+        },
+        {
+          "use": [
+            "C1",
+            "C2",
+            "A"
+          ],
+          "w": {
+            "C1": 35,
+            "C2": 25,
+            "A": 5
+          },
+          "pps": {
+            "C1": 25,
+            "C2": 25
+          }
+        }
       ],
       "weightG": 150,
       "sizeMm": "52 × 30 × 87.3",
@@ -169,7 +342,11 @@
         "https://www.samsung.com/hk/mobile-accessories/65w-power-adapter-trio-black-ep-t6530nbeggb/"
       ],
       "checkedAt": "2026-09-26",
-      "price": { "unit": "1 顆", "checkedAt": "2026-09-26", "merchants": [] },
+      "price": {
+        "unit": "1 顆",
+        "checkedAt": "2026-09-26",
+        "merchants": []
+      },
       "awaitingLink": true
     },
     {
@@ -178,7 +355,15 @@
       "name": "氮化鎵‧晶透快充摺疊充電器 60W",
       "model": "APDCB-460",
       "totalW": 60,
-      "ports": [{ "id": "C", "kind": "C", "w": 60, "avs": 40, "pps": 55 }],
+      "ports": [
+        {
+          "id": "C",
+          "kind": "C",
+          "w": 60,
+          "avs": 40,
+          "pps": 55
+        }
+      ],
       "combos": [],
       "listPrice": 799,
       "weightG": 68,
@@ -187,9 +372,15 @@
       "dealbreaker": "你買它是為了讓 iPhone 18 Pro 最快。官方規格的 AVS 是 15V 2.67A、20V 2A，算下來最多 40W，Apple 要的是 60W 的 AVS",
       "knownIssues": "PD 一般模式到 60W（20V 3A），iPhone 17、iPad Pro 這種只看瓦數的裝置可以拿滿。PPS 是 5 到 11V、5A。盒子裡附一條 60W 的 C 對 C 線。",
       "searchAs": "KINYO 氮化鎵 晶透快充 摺疊充電器 60W AVS",
-      "refs": ["https://www.kinyo.tw/products/apdcb-460"],
+      "refs": [
+        "https://www.kinyo.tw/products/apdcb-460"
+      ],
       "checkedAt": "2026-09-26",
-      "price": { "unit": "1 組（含線）", "checkedAt": "2026-09-26", "merchants": [] },
+      "price": {
+        "unit": "1 組（含線）",
+        "checkedAt": "2026-09-26",
+        "merchants": []
+      },
       "awaitingLink": true
     },
     {
@@ -199,10 +390,33 @@
       "model": "Q67 Duo",
       "totalW": 67,
       "ports": [
-        { "id": "C1", "kind": "C", "w": 67, "avs": 60, "pps": 60 },
-        { "id": "C2", "kind": "C", "w": 67, "avs": 60, "pps": 60 }
+        {
+          "id": "C1",
+          "kind": "C",
+          "w": 67,
+          "avs": 60,
+          "pps": 60
+        },
+        {
+          "id": "C2",
+          "kind": "C",
+          "w": 67,
+          "avs": 60,
+          "pps": 60
+        }
       ],
-      "combos": [{ "use": ["C1", "C2"], "w": { "C1": 45, "C2": 20 } }],
+      "combos": [
+        {
+          "use": [
+            "C1",
+            "C2"
+          ],
+          "w": {
+            "C1": 45,
+            "C2": 20
+          }
+        }
+      ],
       "listPrice": 849,
       "weightG": 80,
       "sizeMm": "33.5 × 38 × 52.5",
@@ -211,9 +425,15 @@
       "dealbreaker": "你要同時充筆電跟 iPhone 18 Pro 而且兩台都要最快。兩孔一起插只有 45W＋20W，官方也沒寫那時候還有沒有 AVS",
       "knownIssues": "官方寫的：單孔最高 67W，支援 iPhone AVS 60W 快充、三星 60W 超快速充電 3.0（要 5A 的線）。兩孔同時用是 45W＋20W，機器降載時會變 30W＋20W，C2 也不支援三星 3.0。",
       "searchAs": "ONPRO Q67 Duo AVS",
-      "refs": ["https://onpro.com.tw/product/q67/"],
+      "refs": [
+        "https://onpro.com.tw/product/q67/"
+      ],
       "checkedAt": "2026-09-26",
-      "price": { "unit": "1 顆", "checkedAt": "2026-09-26", "merchants": [] },
+      "price": {
+        "unit": "1 顆",
+        "checkedAt": "2026-09-26",
+        "merchants": []
+      },
       "awaitingLink": true
     },
     {
@@ -222,7 +442,15 @@
       "name": "Q48 AVS 氮化鎵超急速快充",
       "model": "Q48",
       "totalW": 48,
-      "ports": [{ "id": "C", "kind": "C", "w": 48, "avs": 48, "pps": 45 }],
+      "ports": [
+        {
+          "id": "C",
+          "kind": "C",
+          "w": 48,
+          "avs": 48,
+          "pps": 45
+        }
+      ],
       "combos": [],
       "avsNote": "官方沒寫 AVS 那一檔幾瓦，這裡填的是整顆的上限 48W",
       "listPrice": 699,
@@ -233,9 +461,15 @@
       "dealbreaker": "你的是 iPhone 18 Pro 或 iPhone Duo。整顆最多 48W，到不了 Apple 要的 60W",
       "knownIssues": "官方寫得很老實：支援 iPhone 40W 快充、三星 45W 超快速充電 2.0，沒有說 60W。iPhone 17 一整代拿它就是最快（Apple 要 40W 以上）。",
       "searchAs": "ONPRO Q48 AVS",
-      "refs": ["https://onpro.com.tw/product/q48/"],
+      "refs": [
+        "https://onpro.com.tw/product/q48/"
+      ],
       "checkedAt": "2026-09-26",
-      "price": { "unit": "1 顆", "checkedAt": "2026-09-26", "merchants": [] },
+      "price": {
+        "unit": "1 顆",
+        "checkedAt": "2026-09-26",
+        "merchants": []
+      },
       "awaitingLink": true
     }
   ]

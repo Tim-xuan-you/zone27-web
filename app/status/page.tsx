@@ -269,7 +269,8 @@ export default function Page() {
   }
   for (const x of everything) {
     const l = live(x);
-    if (l.length > 0 && l.every((m) => isMall(m.label))) addBackup(x, `只有商城：${[...new Set(l.map((m) => m.label))].join("、")}`);
+    // 充電器本來就只給商城和蝦皮直營（個人賣家的原廠充電器太多來路不明），不算缺
+    if (!x.id.startsWith("ch-") && l.length > 0 && l.every((m) => isMall(m.label))) addBackup(x, `只有商城：${[...new Set(l.map((m) => m.label))].join("、")}`);
   }
   const backupList = [...backup.values()].sort((a, b) => b.n - a.n);
 
@@ -511,7 +512,7 @@ export default function Page() {
               <div key={p.id + m.id} style={line}>
                 <div style={{ flex: 1, minWidth: 190 }}>
                   <span style={{ display: "block", fontSize: 12.5, color: "var(--muted)" }}>
-                    <Link href={productHref(p)} style={{ color: "inherit" }}>{p.id}</Link> · {p.brand}
+                    <Link href={hrefOf(p)} style={{ color: "inherit" }}>{p.id}</Link> · {p.brand}
                     {/* 主要＝卡片上那個按鈕；備援＝收在「其他規格與價格」裡，主要的壞了就自動頂上 */}
                     <b style={{ marginLeft: 8, color: m.dead ? "var(--cut)" : roleOf(p, m) === "主要" ? "var(--keep)" : "var(--muted)" }}>
                       {m.dead ? "失效（讀者看不到）" : roleOf(p, m)}
@@ -642,7 +643,11 @@ export default function Page() {
 }
 
 /** 這一條在這一款裡的角色：第一條還能買的是主要，其他是備援 */
-function roleOf(p: Product, m: Merchant): "主要" | "備援" {
+/** 所有分潤連結那張表裡的一款：寵物的商品，或充電器 */
+type Linked = Pick<Product, "id" | "brand" | "name" | "price">;
+const hrefOf = (p: Linked) => (p.id.startsWith("ch-") ? `/charger/p/${p.id}` : productHref(p as Product));
+
+function roleOf(p: Linked, m: Merchant): "主要" | "備援" {
   const first = p.price.merchants.find((x) => !x.dead);
   return first && first.affiliateUrl === m.affiliateUrl && (first.unit ?? "") === (m.unit ?? "") ? "主要" : "備援";
 }
@@ -657,7 +662,8 @@ function roleOf(p: Product, m: Merchant): "主要" | "備援" {
 function linkIndex() {
   type HealthRow = { url: string; item: string | null; verdict: string };
   const byUrl = new Map((health.rows as HealthRow[]).map((r) => [r.url, r]));
-  const all = catalog.flatMap((p) => p.price.merchants.map((m) => ({ p, m, h: byUrl.get(m.affiliateUrl) })));
+  // 充電器也算：蝦皮後台說哪一條無效，一樣要在這裡找得到（2026-09-26）
+  const all = [...catalog, ...chargers as Linked[]].flatMap((p: Linked) => p.price.merchants.map((m) => ({ p, m, h: byUrl.get(m.affiliateUrl) })));
   const stores = new Map<string, typeof all>();
   for (const x of all) stores.set(x.m.label, [...(stores.get(x.m.label) ?? []), x]);
   const groups = [...stores].sort((a, b) => a[0].localeCompare(b[0], "zh-Hant"));

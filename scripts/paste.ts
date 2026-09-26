@@ -95,11 +95,13 @@ interface Row {
 }
 
 // df- 狗飼料、cf- 貓飼料、cw- 貓主食罐。前綴從 lib/categories 讀，加類目不用改這裡
-const RE_ID = new RegExp(`^((?:${CATEGORIES.map((c) => c.idPrefix).join("|")})-\\d+)$`, "i");
+// ch- 充電器不在寵物的類目表裡（那張表綁物種），另外加（2026-09-26）
+const RE_ID = new RegExp(`^((?:${[...CATEGORIES.map((c) => c.idPrefix), "ch"].join("|")})-\\d+)$`, "i");
 const RE_URL = /^https?:\/\/\S+$/i;
 // 罐頭整箱寫成「80g×24」「85g x 12入」，後面那段可有可無
 // 貓砂論公升（7L、13L），所以 L 也要認得（2026-09-19）
-const RE_UNIT = /^\d+(?:\.\d+)?\s*(?:kg|g|公斤|公克|克|磅|lb|lbs|oz|L|公升)(?:\s*[×xX*]\s*\d+\s*(?:入|罐|包)?)?$/i;
+// 充電器一顆一顆賣，規格寫「1顆」「1組」（2026-09-26）
+const RE_UNIT = /^(?:\d+(?:\.\d+)?\s*(?:kg|g|公斤|公克|克|磅|lb|lbs|oz|L|公升)(?:\s*[×xX*]\s*\d+\s*(?:入|罐|包)?)?|\d+\s*(?:顆|組|個))$/i;
 const RE_PCT = /^\d+(?:\.\d+)?\s*%$/;
 
 /** 「85g x 12入」→「85g×12」。寫法統一，網站才算得出每罐多少錢、一箱吃幾天 */
@@ -196,6 +198,10 @@ async function main() {
   /* ---- 依商品分組 ---- */
   const byProduct = new Map<string, Row[]>();
   for (const r of rows) byProduct.set(r.productId, [...(byProduct.get(r.productId) ?? []), r]);
+
+  /* ---- 充電器另外處理：資料是 data/charger.json，不是 CSV ---- */
+  const chargerEntries = [...byProduct].filter(([id]) => id.startsWith("ch-"));
+  for (const [id] of chargerEntries) byProduct.delete(id);
 
   /* ---- 寫回 CSV：編號前綴決定是哪一份（df- 狗、cf- 貓、cw- 貓罐頭） ---- */
   const today = todayTW();
@@ -318,6 +324,53 @@ async function main() {
     outputs.push([path, table.map((r) => r.map(escape).join(",")).join("\r\n") + "\r\n"]);
   }
 
+  // 充電器：跟上面同一套規矩（新的在前、舊的往後當備援、永遠不刪、失效和售完留著）
+  let chargerOut: string | null = null;
+  if (chargerEntries.length) {
+    const path = resolve(ROOT, "data/charger.json");
+    const doc = JSON.parse(readFileSync(path, "utf8"));
+    type M = {
+      id: string; label: string; unit?: string; amount: number; note: string; affiliateUrl: string;
+      anchor: "safe" | "value"; dead?: boolean; soldOut?: boolean; checkedAt?: string;
+    };
+    for (const [id, list] of chargerEntries) {
+      const p = doc.products.find((x: { id: string }) => x.id === id);
+      if (!p) { missing.push(id); continue; }
+      const existing: M[] = p.price.merchants;
+      const same = (m: M, r: Row) => m.affiliateUrl.split("?")[0] === r.url.split("?")[0] && (m.unit ?? "") === r.unit;
+      const front: M[] = [], back: M[] = [];
+      for (const r of list) {
+        const flags = r.note;
+        const backup = /備援/.test(flags), dead = /失效/.test(flags), revive = /恢復/.test(flags);
+        const sold = /售完/.test(flags), restock = /補貨/.test(flags);
+        const note = flags
+          .split("·")
+          .map((x) => x.replace(/備援|失效|恢復|售完|補貨/g, "").replace(/[【】]/g, "").trim())
+          .filter(Boolean)
+          .join(" · ");
+        const old = existing.find((m) => same(m, r));
+        const m: M = {
+          id: "", label: r.label, unit: r.unit, amount: r.amount, note: note || old?.note || "",
+          affiliateUrl: r.url, anchor: "safe", checkedAt: today,
+          ...(dead || (!revive && old?.dead) ? { dead: true } : {}),
+          ...(sold || (!restock && old?.soldOut) ? { soldOut: true } : {}),
+        };
+        if ((dead || sold) && old) { Object.assign(old, m); continue; }
+        if (sold) { back.push(m); continue; }
+        (backup ? back : front).push(m);
+      }
+      const keep = existing.filter((m) => !list.some((r) => same(m, r)) || (m.dead && list.some((r) => same(m, r) && /失效/.test(r.note))));
+      const merged = [...front, ...keep, ...back].map((m, i) => ({ ...m, id: `m${i + 1}` }));
+      p.price.merchants = merged;
+      p.price.checkedAt = today;
+      delete p.awaitingLink;
+      const live = merged.filter((m) => !m.dead && !m.soldOut);
+      touched.push(`${id}（${new Set(live.map((m) => m.label)).size} 家、${live.length} 條能買${keep.length ? `，原本的 ${keep.length} 條留著` : ""}）`);
+    }
+    chargerOut = JSON.stringify(doc, null, 2) + "\n";
+    outputs.push([path, ""]);
+  }
+
   if (missing.length) {
     console.error(`\n這幾個商品編號找不到：${missing.join("、")}`);
     console.error(CATEGORIES.map((c) => `${c.idPrefix}- 開頭的在 ${c.csv}`).join("，") + "。");
@@ -326,7 +379,10 @@ async function main() {
     process.exit(1);
   }
 
-  for (const [path, out] of outputs) writeFileSync(path, "\uFEFF" + out, "utf8");
+  for (const [path, out] of outputs) {
+    if (path.endsWith("charger.json")) { writeFileSync(path, chargerOut!, "utf8"); continue; }
+    writeFileSync(path, "\uFEFF" + out, "utf8");
+  }
 
   console.log(`\n更新了 ${touched.length} 款：${touched.join("、")}`);
   console.log(`查價日期一併改成 ${today}\n`);
@@ -336,7 +392,8 @@ async function main() {
   // 原本 spawn npx，Windows 上 npx.cmd 叫不起來（ENOENT），
   // 而 shell:true 會噴 Node 的棄用警告。匯入腳本本來就是 top-level 執行，
   // 直接 import 進來跑最乾淨。
-  await import("./import-csv");
+  // 只貼了充電器的話，不用跑寵物的匯入（充電器的 JSON 就是網站直接讀的那一份）
+  if (outputs.some(([path]) => !path.endsWith("charger.json"))) await import("./import-csv");
   // 貼的是貓砂的話，那一份要用貓砂的匯入（欄位不一樣）
   if (outputs.some(([path]) => path.includes("cat-litter"))) await import("./import-litter");
   if (outputs.some(([path]) => path.includes("treat"))) await import("./import-treat");

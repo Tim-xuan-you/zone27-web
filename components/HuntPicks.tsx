@@ -6,6 +6,9 @@ import catFood from "@/data/cat-food.json";
 import catWet from "@/data/cat-wet-food.json";
 import litterData from "@/data/cat-litter.json";
 import treatData from "@/data/cat-treat.json";
+import dogTreatData from "@/data/dog-treat.json";
+import dogWet from "@/data/dog-wet-food.json";
+import chargerData from "@/data/charger.json";
 import { CHANNEL_ZH, channelOf, type Channel } from "@/lib/channel";
 
 /**
@@ -42,7 +45,10 @@ const KNOWN_IDS = new Set(Object.keys((storeReg as { stores: Record<string, unkn
 
 /* 商品編號 → 牌子。用來看「同一個牌子在這一家是不是已經失敗過好幾款」 */
 const BRAND = new Map<string, string>();
-for (const src of [dogFood, catFood, catWet, litterData, treatData]) {
+/* 我們所有的資料。以前漏了狗罐頭、狗零食、充電器，那幾類在這一家產出過幾款就算不到（2026-09-26 補上） */
+const SOURCES = [dogFood, catFood, catWet, dogWet, litterData, treatData, dogTreatData, chargerData] as { products: unknown[] }[];
+
+for (const src of SOURCES) {
   for (const p of src.products as { id: string; brand: string }[]) BRAND.set(p.id, p.brand);
 }
 const brandKey = (brand: string) => brand.split(/[（(s]/)[0].trim();
@@ -58,7 +64,7 @@ const brandKey = (brand: string) => brand.split(/[（(s]/)[0].trim();
  */
 function shopRecord(c: Candidate): { ok: number; fail: number } {
   const pairs = new Set<string>();
-  for (const src of [dogFood, catFood, catWet, litterData, treatData]) {
+  for (const src of SOURCES) {
     for (const p of src.products as { id: string; price: { merchants: { label: string; dead?: boolean; soldOut?: boolean }[] } }[]) {
       for (const m of p.price.merchants) {
         if (m.dead || m.soldOut || m.label !== c.shop) continue;
@@ -85,7 +91,7 @@ function brandWorks(c: Candidate, id: string): number {
   if (!brand) return 0;
   const key = brandKey(brand);
   let n = 0;
-  for (const src of [dogFood, catFood, catWet, litterData, treatData]) {
+  for (const src of SOURCES) {
     for (const p of src.products as { id: string; brand: string; price: { merchants: { label: string; dead?: boolean }[] } }[]) {
       if (p.id === id || brandKey(p.brand) !== key) continue;
       if (p.price.merchants.some((m) => !m.dead && m.label === c.shop)) n++;
@@ -139,7 +145,8 @@ export default function HuntPicks({ id }: { id: string }) {
         (a.price ?? 1e9) - (b.price ?? 1e9),
     );
   // 一整排都是商城代表我查得不夠廣：商城通常比一般賣家貴一截
-  const allMall = open.length > 0 && open.every((c) => (c.channel ?? channelOf(c.shop)) === "mall");
+  // 充電器是故意只列商城和直營的，不用提醒（2026-09-26）
+  const allMall = !id.startsWith("ch-") && open.length > 0 && open.every((c) => (c.channel ?? channelOf(c.shop)) === "mall");
   const gone = [
     ...PAIRS.filter((x) => x.productId === id).map((x) => `${x.shop}（${x.note ?? "這一款產不出連結"}）`),
     ...(t.failed ?? []).map((f) => `${f.shop}（${f.reason}）`),
