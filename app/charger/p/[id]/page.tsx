@@ -128,7 +128,24 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
       {m ? (
         <div style={S.buyRow}>
           <a href={`/go/${m.id}/${c.id}`} rel="nofollow sponsored" style={S.btnBuy}>去蝦皮看這一顆</a>
-          <p style={S.buyNote}>{[m.label, "$" + m.amount.toLocaleString(),...readerNotes(m.note, { keepVariant: true }), ...(live.length > 1 ? [`另外 ${live.length - 1} 家`] : [])].join(" · ")}</p>
+          <p style={S.buyNote}>{[m.label, "$" + m.amount.toLocaleString(), ...readerNotes(m.note, { keepVariant: true })].join(" · ")}</p>
+          {/* 其他賣場也列出來：有的是組合（像多附一條 60W 的線），貴一點但剛好是讀者要的 */}
+          {live.length > 1 && (
+            <div style={{ ...listWrap, marginTop: 6 }}>
+              <p style={{ margin: 0, padding: "10px 16px 0", fontSize: 12.5, fontWeight: 700, color: "var(--faint)" }}>其他賣場</p>
+              {live.filter((x) => x !== m).map((x) => (
+                <a key={x.id} href={`/go/${x.id}/${c.id}`} rel="nofollow sponsored" style={otherShop}>
+                  <span style={{ minWidth: 0 }}>
+                    <b style={{ display: "block", fontSize: 14 }}>{x.label}</b>
+                    {readerNotes(x.note, { keepVariant: true }).length > 0 && (
+                      <span style={{ display: "block", fontSize: 12.5, color: "var(--muted)", lineHeight: 1.7 }}>{readerNotes(x.note, { keepVariant: true }).join(" · ")}</span>
+                    )}
+                  </span>
+                  <span className="mono" style={{ fontSize: 14, whiteSpace: "nowrap" }}>${x.amount.toLocaleString()} ›</span>
+                </a>
+              ))}
+            </div>
+          )}
         </div>
       ) : (
         <p style={{ ...note, marginTop: 18 }}>購買連結還在補。</p>
@@ -175,4 +192,8 @@ const comboRow: React.CSSProperties = {
 };
 const dealBox: React.CSSProperties = {
   marginTop: 28, background: "var(--cut-soft)", border: "1px solid var(--cut)", borderRadius: 14, padding: "16px 20px",
+};
+const otherShop: React.CSSProperties = {
+  display: "flex", justifyContent: "space-between", alignItems: "center", gap: 12,
+  padding: "10px 16px 12px", textDecoration: "none", color: "inherit",
 };

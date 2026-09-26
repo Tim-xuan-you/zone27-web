@@ -1,6 +1,6 @@
 {
   "checkedAt": "2026-09-19",
-  "total": 115,
+  "total": 116,
   "bad": 0,
   "rows": [
     {
@@ -1495,6 +1495,19 @@
       "status": 302,
       "finalUrl": "https://shopee.tw/opaanlp/109025657/57214465622",
       "item": "109025657/57214465622",
+      "verdict": "ok",
+      "note": "2026-09-26 貼進來時手動跟了一次轉址，沒有跑整批健檢"
+    },
+    {
+      "productId": "ch-10",
+      "brand": "ONPRO",
+      "name": "Q67 Duo AVS 氮化鎵超急速快充",
+      "merchantId": "m1",
+      "label": "馬尼行動通訊商城",
+      "url": "https://s.shopee.tw/7KxHUdlw8z?share_channel_code=6",
+      "status": 302,
+      "finalUrl": "https://shopee.tw/opaanlp/26009838/45564467125",
+      "item": "26009838/45564467125",
       "verdict": "ok",
       "note": "2026-09-26 貼進來時手動跟了一次轉址，沒有跑整批健檢"
     }
