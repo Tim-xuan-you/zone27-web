@@ -4,7 +4,7 @@ import SiteHeader from "@/components/SiteHeader";
 import ChargerPicker from "@/components/ChargerPicker";
 import ReadList from "@/components/ReadList";
 import { S } from "@/components/styles";
-import { buyableCharger, chargers, portsZh } from "@/lib/charger";
+import { anchorCharger, buyableCharger, chargers, portsZh } from "@/lib/charger";
 
 /**
  * 充電器類目。第一個不是寵物的類目（2026-09-26）。
@@ -15,9 +15,9 @@ import { buyableCharger, chargers, portsZh } from "@/lib/charger";
  */
 
 export const metadata: Metadata = {
-  title: "充電器怎麼選：你那幾台插上去，各拿到幾瓦",
+  title: "充電器怎麼選：你的手機買哪一顆充最快",
   description:
-    "包裝寫 65W，三個孔一起插是 35W＋25W＋5W。iPhone 18 Pro 要 60W 的 AVS，Galaxy S26 Ultra 要 PPS 60W。點你要充的裝置，我們照官方規格算每一顆充電器插上去各拿到幾瓦。",
+    "點你的手機，直接告訴你買哪一顆充最快、多少錢。iPhone 18 Pro、iPhone 17、Galaxy S26 Ultra、MacBook 都有；家裡那顆 65W 能不能用也一起講。",
   alternates: { canonical: "/charger" },
 };
 
@@ -31,7 +31,7 @@ export default function Page() {
         充電器怎麼選
       </h1>
       <p style={{ color: "var(--muted)", fontSize: 17, lineHeight: 1.9, margin: "0 0 28px", maxWidth: "42ch" }}>
-        包裝正面寫的瓦數，常常不是你拿到的瓦數。點你要充的那幾台，我們照官方規格算，每一顆插上去各拿到幾瓦。
+        點你的手機，直接告訴你買哪一顆充最快、多少錢。
       </p>
 
       <ChargerPicker />
@@ -44,7 +44,7 @@ export default function Page() {
 
       <p style={S.lbl}>先看這個</p>
       <ReadList items={[
-        { href: "/charger/iphone-18-pro", title: "iPhone 18 Pro 要哪一顆充電器才會最快", line: "Apple 要 60W 的 AVS。寫 AVS 的，也要看那一檔幾瓦" },
+        { href: "/charger/iphone-18-pro", title: "iPhone 18 Pro 要哪一顆充電器才會最快", line: "家裡那顆 65W 能不能用、哪一顆 15 分鐘充到一半" },
       ]} />
 
       <p style={S.lbl}>我們讀過的 {chargers.length} 顆</p>
@@ -56,15 +56,14 @@ export default function Page() {
               <span style={{ display: "block", fontSize: 15.5, fontWeight: 700, lineHeight: 1.5 }}>{c.name}</span>
               <span style={{ display: "block", fontSize: 12.5, color: "var(--faint)", marginTop: 2 }}>{c.back}</span>
             </span>
-            <span className="mono" style={{ fontSize: 14, fontWeight: 700, whiteSpace: "nowrap" }}>{c.totalW}W</span>
+            <span className="mono" style={{ fontSize: 14, fontWeight: 700, whiteSpace: "nowrap" }}>{anchorCharger(c) ? `${anchorCharger(c)!.amount.toLocaleString()}` : `${c.totalW}W`}</span>
           </Link>
         ))}
       </div>
 
       <footer style={S.foot}>
         <p style={{ margin: 0 }}>
-          規格全部取自品牌官網（Apple、三星、KINYO、ONPRO），查核日期 {chargers[0].checkedAt}。
-          我們沒有儀器、不做實測，官方沒寫的就寫沒寫。以你手上那一顆的包裝為準。
+          數字來自 Apple、三星和各品牌官網，{chargers[0].checkedAt} 查的。以你手上那一顆的包裝為準。
         </p>
       </footer>
     </main>

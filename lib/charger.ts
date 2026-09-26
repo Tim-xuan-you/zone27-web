@@ -85,8 +85,10 @@ export interface Device {
   noFast?: boolean;
   /** 線也要對。官方有寫的才填 */
   cable?: string;
-  /** 官方原文的重點，給讀者看為什麼 */
+  /** 官方原文的重點（細節裡才給看） */
   line: string;
+  /** 充最快的時候，一句白話的「多快」。官方有寫時間的才填 */
+  claim?: string;
   refs: string[];
 }
 
@@ -96,33 +98,33 @@ export interface Device {
  */
 export const DEVICES: Device[] = [
   {
-    id: "ip18pro", zh: "iPhone 18 Pro／Pro Max", group: "iPhone", fastW: 60, needs: "avs", okW: 20,
-    cable: "線要能跑 60W 以上（盒子裡附的那條可以）",
+    id: "ip18pro", claim: "約 15 分鐘充到一半", zh: "iPhone 18 Pro／Pro Max", group: "iPhone", fastW: 60, needs: "avs", okW: 20,
+    cable: "用盒子裡附的那條就可以",
     line: "約 15 分鐘到 50%，要 60W 以上、支援可調式電壓供電（AVS）的轉接器",
     refs: ["https://www.apple.com/tw/iphone-18-pro/specs/", "https://support.apple.com/en-us/102574"],
   },
   {
-    id: "ipduo", zh: "iPhone Duo", group: "iPhone", fastW: 60, okW: 20,
+    id: "ipduo", claim: "約 20 分鐘充到一半", zh: "iPhone Duo", group: "iPhone", fastW: 60, okW: 20,
     line: "約 20 分鐘到 50%，要 60W 以上的轉接器",
     refs: ["https://www.apple.com/tw/iphone-duo/specs/"],
   },
   {
-    id: "ip17", zh: "iPhone 17／17 Pro／17 Pro Max", group: "iPhone", fastW: 40, okW: 20,
+    id: "ip17", claim: "約 20 分鐘充到一半", zh: "iPhone 17／17 Pro／17 Pro Max", group: "iPhone", fastW: 40, okW: 20,
     line: "約 20 分鐘到 50%，要 40W 以上的轉接器",
     refs: ["https://www.apple.com/tw/iphone-17/specs/", "https://support.apple.com/en-us/102574"],
   },
   {
-    id: "ipair", zh: "iPhone Air／17e", group: "iPhone", fastW: 20, okW: 20,
+    id: "ipair", claim: "約 30 分鐘充到一半", zh: "iPhone Air／17e", group: "iPhone", fastW: 20, okW: 20,
     line: "30 分鐘到 50%，要 20W 以上的轉接器",
     refs: ["https://www.apple.com/tw/iphone-air/specs/", "https://www.apple.com/tw/iphone-17e/specs/"],
   },
   {
-    id: "ip16", zh: "iPhone 16 或更早", group: "iPhone", fastW: 20, okW: 20,
+    id: "ip16", claim: "約 30 分鐘充到一半", zh: "iPhone 16 或更早", group: "iPhone", fastW: 20, okW: 20,
     line: "約 30 分鐘到 50%，要 20W 以上的轉接器（iPhone 12 以後）",
     refs: ["https://support.apple.com/zh-tw/102574"],
   },
   {
-    id: "ipadpro", zh: "iPad Pro（M5）", group: "iPad", fastW: 60, okW: 20,
+    id: "ipadpro", claim: "約 30 分鐘充到一半", zh: "iPad Pro（M5）", group: "iPad", fastW: 60, okW: 20,
     line: "約 30 分鐘到 50%，要 60W 以上的轉接器",
     refs: ["https://www.apple.com/tw/ipad-pro/specs/"],
   },
@@ -137,7 +139,7 @@ export const DEVICES: Device[] = [
     refs: ["https://www.apple.com/tw/macbook-neo/specs/"],
   },
   {
-    id: "mba", zh: "MacBook Air（M5）", group: "Mac", fastW: 70, okW: 35, laptop: true,
+    id: "mba", claim: "約 30 分鐘充到一半", zh: "MacBook Air（M5）", group: "Mac", fastW: 70, okW: 35, laptop: true,
     line: "70W 以上才能快速充電；盒子裡附的是 35W 雙孔、40W 動態或 70W",
     refs: ["https://www.apple.com/tw/macbook-air/specs/"],
   },
@@ -147,14 +149,14 @@ export const DEVICES: Device[] = [
     refs: ["https://www.apple.com/tw/macbook-pro/specs/"],
   },
   {
-    id: "mbp16", zh: "MacBook Pro 16 吋", group: "Mac", fastW: 140, okW: 140, laptop: true,
+    id: "mbp16", claim: "約 30 分鐘充到一半", zh: "MacBook Pro 16 吋", group: "Mac", fastW: 140, okW: 140, laptop: true,
     cable: "用 USB-C 充要 240W 的線，或用 MagSafe 3 連接線",
     line: "140W 以上才能快速充電，盒子裡附的就是 140W",
     refs: ["https://www.apple.com/tw/macbook-pro/specs/"],
   },
   {
-    id: "s26u", zh: "Galaxy S26 Ultra", group: "Galaxy", fastW: 60, needs: "pps", okW: 20,
-    cable: "線要 5A 的（三星、ONPRO 官網都有寫）",
+    id: "s26u", claim: "約 30 分鐘充到 75%", zh: "Galaxy S26 Ultra", group: "Galaxy", fastW: 60, needs: "pps", okW: 20,
+    cable: "線要用 5A 的",
     line: "超快速充電 3.0 最高 60W，約 30 分鐘到 75%，要支援 PPS 60W 的轉接器",
     refs: [
       "https://www.samsung.com/tw/smartphones/galaxy-s26-ultra/",
@@ -172,7 +174,15 @@ export const deviceById = (id: string): Device | undefined => DEVICES.find((d) =
 /** fast：官方寫的最快速度；ok：正常充；slow：比基本門檻小，會充很久；none：這個孔充不了它 */
 export type Tier = "fast" | "ok" | "slow" | "none";
 
-export const TIER_ZH: Record<Tier, string> = { fast: "最快", ok: "能充，不是最快", slow: "會慢", none: "不建議" };
+/*
+ * 2026-09-26 Tim：「好多用詞、寫法，都有看沒有懂！很多人沒研究這些，就只是想要能快速充電。
+ * 充電器就那點錢，直接我這款手機，推薦我去買哪一個能充最快。」
+ *
+ * 所以讀者看到的一律是白話：充最快、慢一點、很慢，理由也用白話（「約 15 分鐘充到一半」「少了新快充」）。
+ * AVS、PPS、幾伏幾安這些放在 tech，只有點開「想看細節」的人看得到。
+ * 「官方寫的」也不要每一行都講：來源在頁尾寫一次就好，每一行都講反而像我們自己沒把握。
+ */
+export const TIER_ZH: Record<Tier, string> = { fast: "充最快", ok: "慢一點", slow: "很慢", none: "不能用" };
 export const TIER_TONE: Record<Tier, "keep" | "muted" | "warn" | "cut"> = { fast: "keep", ok: "muted", slow: "warn", none: "cut" };
 /** 畫面上那兩三個字。官方沒寫快充的裝置，最好的情況只能叫「夠用」 */
 export const tierZh = (d: Device, t: Tier): string => (t === "fast" && d.noFast ? "夠用" : TIER_ZH[t]);
@@ -182,7 +192,10 @@ export interface Got {
   port: string;
   w: number;
   tier: Tier;
+  /** 白話，給每個人看 */
   why: string;
+  /** 技術上的原因，細節裡才給看 */
+  tech: string;
 }
 
 /** 某個孔在「這幾個孔一起插」的時候，官方寫的上限。null 代表官方沒寫這個組合 */
@@ -197,34 +210,42 @@ function limitsOf(c: Charger, used: string[]): { w: number; pps?: number; avs?: 
   return used.map((id) => ({ w: combo.w[id] ?? 0, pps: combo.pps?.[id], avs: combo.avs?.[id] }));
 }
 
-function judge(d: Device, kind: PortKind, lim: { w: number; pps?: number; avs?: number }, alone: boolean): { tier: Tier; why: string } {
+function judge(d: Device, kind: PortKind, lim: { w: number; pps?: number; avs?: number }, alone: boolean): { tier: Tier; why: string; tech: string } {
   const w = lim.w;
+  // 一起插的時候，分到的比單獨插少，白話講這件事就好
+  const shared = alone ? "" : `一起插只分到 ${w}W，`;
   // USB-A 沒有 USB PD，筆電充不動；手機充得進去但很慢
   if (kind === "A") {
     return d.laptop
-      ? { tier: "none", why: "USB-A 孔沒有 USB PD，筆電不要插這個孔" }
-      : { tier: "slow", why: `USB-A 孔最多 ${w}W，而且沒有 USB PD` };
+      ? { tier: "none", why: "這個孔不能充筆電", tech: "USB-A 孔沒有 USB PD" }
+      : { tier: "slow", why: "這個孔比較舊，充很慢", tech: `USB-A 孔最多 ${w}W，沒有 USB PD` };
   }
+  const fastWhy = d.claim ?? "瓦數夠";
   if (d.needs === "avs") {
-    if (lim.avs !== undefined && lim.avs >= d.fastW && w >= d.fastW) return { tier: "fast", why: `${w}W，AVS 到 ${lim.avs}W，Apple 寫的最快` };
+    if (lim.avs !== undefined && lim.avs >= d.fastW && w >= d.fastW) return { tier: "fast", why: fastWhy, tech: `${w}W，AVS 到 ${lim.avs}W` };
     if (w >= d.okW) {
-      const avs = lim.avs === undefined
-        ? (alone ? "規格上沒寫 AVS" : "官方沒寫同時插的時候還有沒有 AVS")
-        : `AVS 最多 ${lim.avs}W`;
-      return { tier: "ok", why: `${w}W，但${/^[A-Z]/.test(avs) ? " " : ""}${avs}；Apple 要 ${d.fastW}W 的 AVS 才是最快` };
+      const tech = lim.avs === undefined
+        ? (alone ? `${w}W，規格上沒寫 AVS` : `${w}W，官方沒寫同時插的時候還有沒有 AVS`)
+        : `${w}W，AVS 最多 ${lim.avs}W，Apple 要 ${d.fastW}W 的 AVS`;
+      const why = lim.avs === undefined ? "少了 iPhone 18 Pro 要的新快充" : `有新快充，但只給到 ${lim.avs}W`;
+      return { tier: "ok", why: shared + why, tech };
     }
   } else if (d.needs === "pps") {
-    if (lim.pps !== undefined && lim.pps >= d.fastW) return { tier: "fast", why: `PPS ${lim.pps}W，超快速充電 3.0` };
+    if (lim.pps !== undefined && lim.pps >= d.fastW) return { tier: "fast", why: fastWhy, tech: `PPS ${lim.pps}W，超快速充電 3.0` };
     if (w >= d.okW) {
-      const pps = lim.pps === undefined ? (alone ? "規格上沒寫 PPS" : "官方沒寫同時插的時候 PPS 剩多少") : `PPS 只到 ${lim.pps}W`;
-      return { tier: "ok", why: `${w}W，但${/^[A-Z]/.test(pps) ? " " : ""}${pps}；三星要 PPS ${d.fastW}W 才是超快速充電 3.0` };
+      const tech = lim.pps === undefined ? (alone ? `${w}W，規格上沒寫 PPS` : `${w}W，官方沒寫同時插的時候 PPS 剩多少`) : `${w}W，PPS 只到 ${lim.pps}W，三星要 PPS ${d.fastW}W`;
+      return { tier: "ok", why: shared + "不是超快速充電 3.0", tech };
     }
   } else {
-    if (w >= d.fastW && d.noFast) return { tier: "fast", why: `${w}W，比盒子裡附的 ${d.okW}W 大；官方沒寫再大會不會更快` };
-    if (w >= d.fastW) return { tier: "fast", why: `${w}W，官方寫的最快` };
-    if (w >= d.okW) return { tier: "ok", why: `${w}W，要 ${d.fastW}W 以上才是最快` };
+    if (w >= d.fastW && d.noFast) return { tier: "fast", why: "比盒子附的那顆大，夠了", tech: `${w}W，盒子附的是 ${d.okW}W，官方沒寫再大會不會更快` };
+    if (w >= d.fastW) return { tier: "fast", why: shared ? shared + "還是夠" : fastWhy, tech: `${w}W，最快要 ${d.fastW}W` };
+    if (w >= d.okW) return { tier: "ok", why: shared ? shared + "沒那麼快" : "瓦數不夠，沒那麼快", tech: `${w}W，最快要 ${d.fastW}W` };
   }
-  return { tier: "slow", why: `只有 ${w}W，比${d.laptop ? "盒子裡附的" : "官方基本的"} ${d.okW}W 還小` };
+  return {
+    tier: "slow",
+    why: shared ? shared + "很慢" : d.laptop ? "太小，筆電充很慢" : "太小，充很慢",
+    tech: `${w}W，${d.laptop ? "盒子附的" : "基本要"} ${d.okW}W`,
+  };
 }
 
 const SCORE: Record<Tier, number> = { fast: 3, ok: 2, slow: 1, none: 0 };

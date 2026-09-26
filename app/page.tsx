@@ -99,7 +99,7 @@ export default function Home() {
       <p style={S.lbl}>我們翻背面翻到的</p>
       <ReadList items={[
         { href: "/check", kicker: "狗貓飼料", title: "你家那包，有沒有藏雞？", line: <>名字沒寫雞的 {CHECK.unnamed} 款，{CHECK.hidden} 款成分表裡有雞</> },
-        { href: "/charger/iphone-18-pro", kicker: "充電器", title: "iPhone 18 Pro 要哪一顆充電器才會最快", line: "Apple 要 60W 的 AVS，家裡那顆 65W 規格上不一定有" },
+        { href: "/charger/iphone-18-pro", kicker: "充電器", title: "iPhone 18 Pro 要哪一顆充電器才會最快", line: "家裡那顆 65W 插上去，不一定最快" },
       ]} />
 
     </main>
