@@ -522,6 +522,16 @@
         "merchants": [
           {
             "id": "m1",
+            "label": "ONPRO超急速充電 官方旗艦館",
+            "unit": "1顆",
+            "amount": 549,
+            "note": "",
+            "affiliateUrl": "https://s.shopee.tw/7fa843mjk0?share_channel_code=6",
+            "anchor": "safe",
+            "checkedAt": "2026-09-26"
+          },
+          {
+            "id": "m2",
             "label": "3C SHOP 數位生活",
             "unit": "1顆",
             "amount": 499,
