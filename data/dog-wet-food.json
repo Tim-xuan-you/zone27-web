@@ -3,7 +3,7 @@
     "category": "dog-wet-food",
     "note": "由 data/dog-wet-food.csv 產生，不要直接改這個檔。改 CSV 之後跑 npm run data:import。",
     "generatedAt": "2026-09-27",
-    "count": 12,
+    "count": 13,
     "pricePolicy": "人工複查，不爬蟲。checkedAt 誠實顯示於前端。"
   },
   "products": [
@@ -59,12 +59,22 @@
         "merchants": [
           {
             "id": "m1",
+            "label": "貓咖寵物館",
+            "unit": "82g×24",
+            "amount": 1150,
+            "note": "一箱 24 罐，規格選「清燉鴨肉*24」",
+            "affiliateUrl": "https://s.shopee.tw/8V9G2Cv7SH?share_channel_code=6",
+            "anchor": "safe",
+            "checkedAt": "2026-09-27"
+          },
+          {
+            "id": "m2",
             "label": "【 RBB ！】寵物生活館",
             "unit": "82g",
             "amount": 53,
             "note": "一頁多口味，規格選「清蒸鴨肉82G」",
             "affiliateUrl": "https://s.shopee.tw/30oIXLbJPY?share_channel_code=6",
-            "anchor": "safe",
+            "anchor": "value",
             "soldOut": true,
             "checkedAt": "2026-09-27"
           }
@@ -817,6 +827,63 @@
       "searchAs": "西莎 自然素材 健康野菜放牧雞 85g",
       "chicken": {
         "status": "chicken"
+      }
+    },
+    {
+      "id": "dw-13",
+      "species": "dog",
+      "form": "wet",
+      "brand": "怪獸部落",
+      "name": "犬1肉主食罐 黑豬肉",
+      "spec": {
+        "protein": 56.1,
+        "fat": 29.8,
+        "carb": 6,
+        "omega3": 0.4,
+        "phosphorus": 0,
+        "complete": true,
+        "moisture": 71.5,
+        "asFed": {
+          "protein": 16,
+          "fat": 8.5,
+          "fiber": 0.3,
+          "ash": 2
+        },
+        "carbBasis": "computed",
+        "proteinSources": [
+          "pork"
+        ],
+        "singleSource": true,
+        "pulses": "none",
+        "grainFree": true,
+        "lifeStage": [
+          "puppy",
+          "adult"
+        ],
+        "bodySize": [
+          "small",
+          "medium",
+          "large"
+        ],
+        "prescription": false,
+        "kcal": 1340
+      },
+      "reports": {
+        "total": 0,
+        "palatability": 0,
+        "looseStool": 0
+      },
+      "price": {
+        "unit": "82g",
+        "checkedAt": "2026-09-27",
+        "merchants": []
+      },
+      "dealbreaker": "你的狗對豬肉過敏。整罐的肉只有黑豬肉一種。",
+      "knownIssues": "成分表的肉只有黑豬肉一種，找不到雞，跟同系列的鴨肉一樣適合對雞過敏的狗。販售頁把碳水化合物寫成 52%，但其他數字加起來只剩不到 2%，應該是打錯，我們用算的。磷沒有標。標示 AAFCO 成幼犬。",
+      "awaitingLink": true,
+      "searchAs": "怪獸部落 犬1肉主食罐 黑豬肉 82g",
+      "chicken": {
+        "status": "clean"
       }
     }
   ]
