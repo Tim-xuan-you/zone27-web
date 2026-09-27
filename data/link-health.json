@@ -1,7 +1,7 @@
 {
   "checkedAt": "2026-09-27",
   "filledAt": "2026-09-27",
-  "total": 194,
+  "total": 195,
   "bad": 0,
   "rows": [
     {
@@ -2716,6 +2716,20 @@
       "status": 200,
       "finalUrl": "https://shopee.tw/opaanlp/71458/7678583325",
       "item": "71458/7678583325",
+      "affiliate": "an_16322830031",
+      "verdict": "ok",
+      "note": ""
+    },
+    {
+      "productId": "dw-06",
+      "brand": "陪心寵糧",
+      "name": "SUPER小白主食罐 雞魚＋野莓",
+      "merchantId": "m1",
+      "label": "🍜貓三頓🍜",
+      "url": "https://s.shopee.tw/20vn0Vcqsp?share_channel_code=6",
+      "status": 200,
+      "finalUrl": "https://shopee.tw/opaanlp/381728354/26679336202",
+      "item": "381728354/26679336202",
       "affiliate": "an_16322830031",
       "verdict": "ok",
       "note": ""

@@ -474,12 +474,22 @@
         "merchants": [
           {
             "id": "m1",
+            "label": "🍜貓三頓🍜",
+            "unit": "80g×24",
+            "amount": 999,
+            "note": "一箱 24 罐。賣場把這個口味寫成「鮮魚 x 野莓」，就是這一款（整個系列只有一個野莓），規格選「80gX24罐」",
+            "affiliateUrl": "https://s.shopee.tw/20vn0Vcqsp?share_channel_code=6",
+            "anchor": "safe",
+            "checkedAt": "2026-09-28"
+          },
+          {
+            "id": "m2",
             "label": "優品電購商城",
             "unit": "80g",
             "amount": 52,
             "note": "一頁多口味，規格選「狗罐-雞魚x野莓 80g」",
             "affiliateUrl": "https://s.shopee.tw/2BFDCocDXq?share_channel_code=6",
-            "anchor": "safe",
+            "anchor": "value",
             "soldOut": true,
             "checkedAt": "2026-09-28"
           }
