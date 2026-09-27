@@ -172,12 +172,13 @@ export default function Page() {
       <p style={S.lbl}>那要買什麼</p>
       <div style={S.landing}>
         <div>
-          <h2 style={{ margin: "0 0 6px", fontSize: 20 }}>點一下年紀和狀況，我們刪給你看</h2>
+          <h2 style={{ margin: "0 0 6px", fontSize: 20 }}>不含雞的成犬飼料，已經幫你挑好</h2>
           <p style={{ margin: 0, fontSize: 15.5, color: "var(--muted)", lineHeight: 1.8 }}>
-            像是點「成犬」再點「對雞過敏」，不用打字。
+            {/* 2026-09-27：以前這裡叫人去裁決器自己點「成犬」「對雞過敏」，現在直接給答案頁（問題在哪一頁冒出來，答案就在哪一頁） */}
+            幼犬或高齡的，到裁決器點年紀，再點「對雞過敏」。
           </p>
         </div>
-        <Link style={S.btn} href="/dog-food">去裁決器</Link>
+        <Link style={S.btn} href="/dog-food/no-chicken">看不含雞的飼料</Link>
       </div>
 
       <p style={S.lbl}>相關的</p>
