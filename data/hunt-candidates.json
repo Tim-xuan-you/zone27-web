@@ -160,7 +160,7 @@
       "candidates": [
         {
           "channel": "mall",
-          "shop": "國際貓家貓奴網",
+          "shop": "國際貓家貓奴網（蝦皮商城）",
           "shopId": "27658670",
           "price": 450,
           "unit": "黃標 精裝組 6.8kg 一箱",
@@ -252,7 +252,7 @@
         },
         {
           "channel": "seller",
-          "shop": "罐罐富翁 I'm a rich p",
+          "shop": "罐罐富翁（蝦皮優選）",
           "shopId": "650744926",
           "price": 2831,
           "unit": "10 磅",
@@ -260,7 +260,7 @@
         },
         {
           "channel": "seller",
-          "shop": "小BU的寵物商城",
+          "shop": "小BU的米其林指南（蝦皮優選）",
           "shopId": "230717106",
           "price": 2689,
           "unit": "10 磅",
@@ -1012,7 +1012,7 @@
         },
         {
           "channel": "seller",
-          "shop": "晴空sky",
+          "shop": "晴空小舖sky（蝦皮優選）",
           "shopId": "742205",
           "price": 750,
           "unit": "盒裝，頁面寫迷你到大型都有，選「11-22kg」",
@@ -1053,7 +1053,7 @@
         },
         {
           "channel": "seller",
-          "shop": "晴空sky",
+          "shop": "晴空小舖sky（蝦皮優選）",
           "shopId": "742205",
           "price": 750,
           "unit": "盒裝，頁面寫迷你到大型都有，選「22kg 以上」",
@@ -1208,7 +1208,7 @@
           "url": "https://shopee.tw/product/11610684/21672717777"
         },
         {
-          "shop": "RBB 寵物生活館",
+          "shop": "【 RBB ！】寵物生活館",
           "shopId": "20186300",
           "channel": "seller",
           "price": 53,
@@ -1666,7 +1666,7 @@
           "url": "https://shopee.tw/product/1655658654/48964536907"
         },
         {
-          "shop": "蝦皮直營 _ 生活超市",
+          "shop": "蝦皮直營（官方直營）",
           "shopId": "50662979",
           "channel": "mall",
           "price": 46,
@@ -1763,7 +1763,7 @@
           "soldOut": "2026-09-27 Tim 截圖：整頁售完"
         },
         {
-          "shop": "毛孩寵物鋪-汪喵食衣住行",
+          "shop": "毛孩寵物鋪",
           "shopId": "1447238100",
           "known": true,
           "channel": "seller",
@@ -1806,7 +1806,7 @@
           "url": "https://shopee.tw/product/1149044588/57310311968"
         },
         {
-          "shop": "毛孩寵物鋪-汪喵食衣住行",
+          "shop": "毛孩寵物鋪",
           "shopId": "1447238100",
           "known": true,
           "channel": "seller",
@@ -1832,7 +1832,7 @@
       "note": "我們登記的是 165g。官方商城那一頁有 80g 跟 165g，選 165g；80g 的也可以，產了告訴我大小。",
       "candidates": [
         {
-          "shop": "毛孩寵物鋪-汪喵食衣住行",
+          "shop": "毛孩寵物鋪",
           "shopId": "1447238100",
           "known": true,
           "channel": "seller",
@@ -1891,7 +1891,7 @@
           "url": "https://shopee.tw/product/9271076/28806003857"
         },
         {
-          "shop": "蝦皮直營 _ 生活超市",
+          "shop": "蝦皮直營（官方直營）",
           "shopId": "50662979",
           "known": true,
           "channel": "mall",
@@ -1900,7 +1900,7 @@
           "url": "https://shopee.tw/product/50662979/43781101481"
         },
         {
-          "shop": "Lazy Cat 悠懶貓",
+          "shop": "Lazy Cat 悠懶貓（蝦皮商城）",
           "shopId": "270668052",
           "known": true,
           "channel": "mall",
@@ -1926,7 +1926,7 @@
           "url": "https://shopee.tw/product/2675393/17195358065"
         },
         {
-          "shop": "蝦皮直營 _ 生活超市",
+          "shop": "蝦皮直營（官方直營）",
           "shopId": "50662979",
           "known": true,
           "channel": "mall",
@@ -1935,7 +1935,7 @@
           "url": "https://shopee.tw/product/50662979/48950002539"
         },
         {
-          "shop": "Cesar西莎 官方旗艦店",
+          "shop": "Cesar西莎 官方旗艦店（蝦皮商城）",
           "shopId": "217228489",
           "known": true,
           "channel": "mall",
@@ -2019,7 +2019,7 @@
           "url": "https://shopee.tw/product/16208712/7577182335"
         },
         {
-          "shop": "蝦皮直營 _ 生活超市",
+          "shop": "蝦皮直營（官方直營）",
           "shopId": "50662979",
           "known": true,
           "channel": "mall",
@@ -2187,7 +2187,7 @@
           "url": "https://shopee.tw/product/188277742/40767418311"
         },
         {
-          "shop": "蝦皮直營 _ 生活超市",
+          "shop": "蝦皮直營（官方直營）",
           "shopId": "50662979",
           "channel": "mall",
           "price": 590,
@@ -2252,7 +2252,7 @@
           "url": "https://shopee.tw/product/188277742/40718338725"
         },
         {
-          "shop": "蝦皮直營 _ 生活超市",
+          "shop": "蝦皮直營（官方直營）",
           "shopId": "50662979",
           "channel": "mall",
           "price": 1790,
@@ -2276,7 +2276,7 @@
           "url": "https://shopee.tw/product/188277742/47554522087"
         },
         {
-          "shop": "蝦皮直營 _ 生活超市",
+          "shop": "蝦皮直營（官方直營）",
           "shopId": "50662979",
           "channel": "mall",
           "price": 1290,
@@ -2341,7 +2341,7 @@
       "checkedAt": "2026-09-26",
       "candidates": [
         {
-          "shop": "蝦皮直營 _ 生活超市",
+          "shop": "蝦皮直營（官方直營）",
           "shopId": "50662979",
           "channel": "mall",
           "price": 1790,
@@ -2373,7 +2373,7 @@
           "url": "https://shopee.tw/product/116309859/48461355042"
         },
         {
-          "shop": "蝦皮直營 _ 生活超市",
+          "shop": "蝦皮直營（官方直營）",
           "shopId": "50662979",
           "channel": "mall",
           "price": 2990,
@@ -2576,7 +2576,7 @@
           "url": "https://shopee.tw/product/1322591005/44032940096"
         },
         {
-          "shop": "蝦皮直營 _ 生活超市",
+          "shop": "蝦皮直營（官方直營）",
           "shopId": "50662979",
           "channel": "mall",
           "price": 599,
@@ -2770,7 +2770,7 @@
       "checkedAt": "2026-09-27",
       "candidates": [
         {
-          "shop": "毛孩寵物鋪-汪喵食衣住行",
+          "shop": "毛孩寵物鋪",
           "shopId": "1447238100",
           "channel": "seller",
           "price": 48,
@@ -2803,7 +2803,7 @@
       "checkedAt": "2026-09-27",
       "candidates": [
         {
-          "shop": "毛孩寵物鋪-汪喵食衣住行",
+          "shop": "毛孩寵物鋪",
           "shopId": "1447238100",
           "channel": "seller",
           "price": 48,
@@ -2836,7 +2836,7 @@
       "checkedAt": "2026-09-27",
       "candidates": [
         {
-          "shop": "毛孩寵物鋪-汪喵食衣住行",
+          "shop": "毛孩寵物鋪",
           "shopId": "1447238100",
           "channel": "seller",
           "price": 48,
