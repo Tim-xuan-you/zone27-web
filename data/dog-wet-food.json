@@ -1202,6 +1202,18 @@
             "note": "一頁多款，品項選「95%鮮肉罐鱉蛋雞肉」、規格選 80G",
             "affiliateUrl": "https://s.shopee.tw/6VOBzDuhLR?share_channel_code=6",
             "anchor": "value",
+            "checkedAt": "2026-09-27",
+            "sharedPage": true
+          },
+          {
+            "id": "m4",
+            "label": "熊熊寵物用品生活館",
+            "unit": "80g",
+            "amount": 40,
+            "note": "一頁多口味，選項選「雞肉鱉蛋(毛髮好亮麗)」、規格選「小罐80g」",
+            "affiliateUrl": "https://s.shopee.tw/60RvOIwbMM?share_channel_code=6",
+            "anchor": "value",
+            "soldOut": true,
             "checkedAt": "2026-09-27"
           }
         ]

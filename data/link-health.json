@@ -1,7 +1,7 @@
 {
   "checkedAt": "2026-09-19",
   "filledAt": "2026-09-27",
-  "total": 174,
+  "total": 175,
   "bad": 0,
   "rows": [
     {
@@ -2263,6 +2263,19 @@
       "status": 200,
       "finalUrl": "https://shopee.tw/opaanlp/1447238100/29974136550",
       "item": "1447238100/29974136550",
+      "verdict": "ok",
+      "note": ""
+    },
+    {
+      "productId": "dw-16",
+      "brand": "汪喵星球",
+      "name": "犬用 Fantastic 95% 鮮肉主食罐 鱉蛋雞肉",
+      "merchantId": "m4",
+      "label": "熊熊寵物用品生活館",
+      "url": "https://s.shopee.tw/60RvOIwbMM?share_channel_code=6",
+      "status": 200,
+      "finalUrl": "https://shopee.tw/opaanlp/3629645/1409206645",
+      "item": "3629645/1409206645",
       "verdict": "ok",
       "note": ""
     }
