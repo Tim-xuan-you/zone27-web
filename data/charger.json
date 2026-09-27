@@ -23,6 +23,7 @@
       "dealbreaker": "你的是 iPhone 17、iPhone 18 Pro、iPhone Duo、iPad Pro 或 MacBook。插得進去，但慢",
       "knownIssues": "一個孔、20W。iPhone 16 以前、iPhone Air、iPhone 17e 用它就是官方寫的快速充電（30 分鐘左右到 50%）。",
       "searchAs": "Apple 20W USB-C 電源轉接器",
+      "huntNote": "2026-09-27 查到的 7 家都產不出來。它不是任何一台的答案：插它最快的（iPhone 16 以前、Air、17e、iPad Air、MacBook Neo），Q48 一樣最快又便宜。先不找",
       "refs": [
         "https://www.apple.com/tw/shop/product/mwvv3ta/a/20w-usb-c-%E9%9B%BB%E6%BA%90%E8%BD%89%E6%8E%A5%E5%99%A8"
       ],
@@ -279,6 +280,7 @@
       "dealbreaker": "你用的是 iPhone 18 Pro。插得進去，但少了 iPhone 18 Pro 要的新快充",
       "knownIssues": "三星官網寫的：超快速充電 3.0 適用 Galaxy S26 Ultra 以後的機種。PPS 5 到 20V、3A。盒子裡沒有線。",
       "searchAs": "三星 60W 快充旅充頭 EP-T6010",
+      "huntNote": "2026-09-27 查到的 6 家都產不出來。S26 Ultra 插它最快，但 Q67 Duo 一樣最快、價錢差不多一半，已經買得到。先不找",
       "refs": [
         "https://www.samsung.com/tw/mobile-accessories/60w-power-adapter-black-ep-t6010nbtgtw/",
         "https://www.samsung.com/hk/mobile-accessories/65w-power-adapter-trio-black-ep-t6530nbeggb/"
@@ -380,6 +382,7 @@
       "dealbreaker": "你的是 Galaxy S26 Ultra。三星官網自己寫，這顆只到超快速充電 2.0，S26 Ultra 要 3.0 得用 60W 那顆",
       "knownIssues": "C1 單獨插 PD 65W、PPS 45W；C2 最多 25W；USB-A 最多 15W。兩個 C 孔一起插，PPS 都只剩 25W。",
       "searchAs": "三星 65W 三孔快充旅充頭 EP-T6530",
+      "huntNote": "2026-09-27 查到的 5 家都產不出來。S26 Ultra 插它只有慢一點，插它最快的那幾台都有更便宜的。先不找",
       "refs": [
         "https://www.samsung.com/tw/mobile-accessories/65w-power-adapter-trio-black-ep-t6530nbtgtw/",
         "https://www.samsung.com/hk/mobile-accessories/65w-power-adapter-trio-black-ep-t6530nbeggb/"
