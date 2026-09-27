@@ -3,7 +3,8 @@ import Link from "next/link";
 import SiteHeader from "@/components/SiteHeader";
 import { S } from "@/components/styles";
 import { readerNotes } from "@/lib/notes";
-import { TIER_TONE, anchorCharger, chargerById, chargers, deviceById, fit, rank, tierZh } from "@/lib/charger";
+import { TIER_TONE, anchorCharger, chargerById, chargers, deviceById, fit, rank, splitBuy, tierZh } from "@/lib/charger";
+import ChargerSplit from "@/components/ChargerSplit";
 
 /**
  * 招牌頁：iPhone 18 Pro 要哪一顆充電器才會最快。
@@ -35,6 +36,10 @@ export default function Page() {
   const kinyo = chargerById("ch-09")!;
   const q67 = chargerById("ch-10")!;
   const pair = q67.combos[0];
+  // 跟筆電一起充：直接給答案，不叫人再去別頁點一次（2026-09-27 Tim：點了沒幫我解決問題）
+  const mba = deviceById("mba")!;
+  const both = rank([ip, mba]).find((f) => f.got && f.fast === 2);
+  const apart = splitBuy([ip, mba]);
   const withAvs = chargers.filter((c) => c.ports.some((p) => p.avs !== undefined)).length;
 
   return (
@@ -96,9 +101,20 @@ export default function Page() {
 
       <p style={S.lbl}>兩台一起充呢？</p>
       <p style={body}>
-        雙孔的充電器，兩台一起插，每台分到的就變少。{q67.brand} {q67.name}單獨插 iPhone 是最快的，
-        兩台一起插變成 {pair.w.C1}W 加 {pair.w.C2}W，iPhone 就沒那麼快了。
-        要跟筆電一起充，<Link href="/charger?d=ip18pro,mba" style={{ color: "var(--accent)", fontWeight: 700 }}>點你的裝置算一次</Link>。
+        雙孔的充電器，兩台一起插，每台分到的就變少。{q67.brand} {q67.name} 單獨插 iPhone 是最快的，兩台一起插變成 {pair.w.C1}W 加 {pair.w.C2}W，iPhone 就沒那麼快了。
+      </p>
+      <p style={body}>
+        {both ? (
+          <>
+            要跟 {mba.zh}一起插都最快，買{" "}
+            <Link href={`/charger/p/${both.charger.id}`} style={{ color: "var(--accent)", fontWeight: 700 }}>{both.charger.brand} {both.charger.name}</Link>。
+          </>
+        ) : apart ? (
+          <>
+            要跟 {mba.zh}一起充，我們讀過的這幾顆，沒有一顆能讓兩台一起插都最快。
+            <ChargerSplit groups={apart} />
+          </>
+        ) : null}
       </p>
 
       <p style={S.lbl}>線也要對</p>

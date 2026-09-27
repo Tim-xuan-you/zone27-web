@@ -353,3 +353,20 @@ export function portsZh(c: Charger): string {
   const n = (k: PortKind) => c.ports.filter((p) => p.kind === k).length;
   return [n("C") && `${n("C")} 個 USB-C`, n("A") && `${n("A")} 個 USB-A`].filter(Boolean).join("、");
 }
+
+/**
+ * 一起插沒有一顆能讓全部都最快：每一台各自挑最便宜的最快那顆，同一顆的併在一起。
+ * 兩支 iPhone 17 就是「買兩顆 Q48，一台插一顆」，不要寫成「iPhone 17 用 Q48，iPhone 17 用 Q48」。
+ * 有一台沒有任何一顆能讓它最快，回 null（就不要叫人分開買）。
+ */
+export function splitBuy(devices: Device[]): { charger: Charger; devices: Device[] }[] | null {
+  const out: { charger: Charger; devices: Device[] }[] = [];
+  for (const d of devices) {
+    const f = rank([d], true).find((x) => x.fast === 1);
+    if (!f) return null;
+    const g = out.find((x) => x.charger.id === f.charger.id);
+    if (g) g.devices.push(d);
+    else out.push({ charger: f.charger, devices: [d] });
+  }
+  return out;
+}

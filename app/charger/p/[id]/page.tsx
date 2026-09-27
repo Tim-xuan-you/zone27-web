@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import SiteHeader from "@/components/SiteHeader";
 import { S } from "@/components/styles";
 import { readerNotes } from "@/lib/notes";
+import ChargerPair from "@/components/ChargerPair";
 import {
   DEVICES, TIER_TONE, anchorCharger, chargerById, chargers, fit, liveCharger, portsZh, tierZh,
   type Got,
@@ -47,6 +48,10 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
   const m = anchorCharger(c);
   const live = liveCharger(c);
   const multi = c.ports.length > 1;
+  // 只有一個孔的頁面：買得到的雙孔，便宜的在前
+  const duos = chargers
+    .filter((x) => x.ports.length > 1 && liveCharger(x).length > 0)
+    .sort((a, b) => (anchorCharger(a)?.amount ?? 1e9) - (anchorCharger(b)?.amount ?? 1e9));
   const w = (n?: number) => (n === undefined ? "沒寫" : `${n}W`);
 
   // 每一台單獨插上去的結果，照等級分組
@@ -108,14 +113,28 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
           </div>
         ))}
       </div>
-      <p style={{ ...note, marginTop: 10 }}>
-        兩台以上要一起充？<Link href="/charger" style={{ color: "var(--accent)", fontWeight: 700 }}>點你的裝置算一次</Link>。
-      </p>
+      {/* 2026-09-27 Tim：以前這裡是「兩台以上要一起充？點你的裝置算一次」連回 /charger，點了沒幫上忙。
+          現在就地算：有兩個孔的，選兩台直接看結果。
+          只有一個孔的，「不要買」那一格已經講了只有一個孔，就不再講一次，直接接著列買得到的雙孔（便宜的在前） */}
+      {multi && <ChargerPair chargerId={c.id} />}
 
       <div style={dealBox}>
         <p style={{ margin: 0, fontSize: 15.5, lineHeight: 1.85 }}>
           <b style={{ color: "var(--cut)" }}>什麼時候不要買：</b>{c.dealbreaker}
         </p>
+        {!multi && duos.length > 0 && (
+          <p style={{ margin: "8px 0 0", fontSize: 15.5, lineHeight: 1.85 }}>
+            要一次充兩台，看這{duos.length > 1 ? "幾" : "一"}顆：
+            {duos.map((x, i) => (
+              <span key={x.id}>
+                {i ? "、" : ""}
+                <Link href={`/charger/p/${x.id}`} style={{ color: "var(--accent)", fontWeight: 700 }}>{x.brand} {x.name}</Link>
+                {anchorCharger(x) ? `（$${anchorCharger(x)!.amount.toLocaleString()}）` : ""}
+              </span>
+            ))}
+            。
+          </p>
+        )}
       </div>
 
       {/* 想研究的人才點開：每個孔幾瓦、同時插怎麼分、每一台的技術原因 */}

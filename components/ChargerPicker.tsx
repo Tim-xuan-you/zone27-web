@@ -5,9 +5,10 @@ import { useEffect, useMemo, useState } from "react";
 import { S } from "./styles";
 import { readerNotes } from "@/lib/notes";
 import {
-  DEVICES, TIER_TONE, anchorCharger, chargers, deviceById, rank, tierZh,
+  DEVICES, TIER_TONE, anchorCharger, chargers, deviceById, rank, splitBuy, tierZh,
   type Device, type Fit,
 } from "@/lib/charger";
+import ChargerSplit from "./ChargerSplit";
 
 /**
  * 充電器挑選器。
@@ -25,10 +26,15 @@ import {
  */
 
 const PHONES = DEVICES.filter((d) => d.group === "iPhone" || d.group === "Galaxy");
-const OTHERS = DEVICES.filter((d) => d.group === "iPad" || d.group === "Mac");
 
 export default function ChargerPicker() {
-  const [ids, setIds] = useState<string[]>([]);
+  /*
+   * 第一支手機一次一支（換一支就是換）；「還要一起充的」另外記，手機、平板、筆電都可以，
+   * 也可以跟第一支同一個型號（兩支 iPhone 17 很常見）。
+   * 2026-09-27 以前第二段只有平板、筆電，按鈕寫「要充平板或筆電？」，要算兩支手機的人找不到路
+   */
+  const [phone, setPhone] = useState("");
+  const [extras, setExtras] = useState<string[]>([]);
   const [together, setTogether] = useState(true);
   const [more, setMore] = useState(false);
 
@@ -37,18 +43,20 @@ export default function ChargerPicker() {
     const d = new URLSearchParams(window.location.search).get("d");
     if (!d) return;
     const list = d.split(",").filter((x) => deviceById(x)).slice(0, 4);
-    setIds(list);
-    if (list.some((x) => OTHERS.some((o) => o.id === x))) setMore(true);
+    const first = list.find((x) => PHONES.some((p) => p.id === x)) ?? "";
+    const rest = list.filter((x, i) => !(x === first && i === list.indexOf(first)));
+    setPhone(first);
+    setExtras(rest);
+    if (rest.length) setMore(true);
   }, []);
 
+  const ids = [phone, ...extras].filter(Boolean);
   const devices = ids.map((i) => deviceById(i)!);
   const fits = useMemo(() => (devices.length ? rank(devices, together) : []), [ids.join(","), together]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // 手機一次一支（換一支就是換），平板、筆電可以多選
-  const pickPhone = (id: string) =>
-    setIds((xs) => (xs.includes(id) ? xs.filter((x) => x !== id) : [id, ...xs.filter((x) => !PHONES.some((p) => p.id === x))]));
+  const pickPhone = (id: string) => setPhone((p) => (p === id ? "" : id));
   const pickOther = (id: string) =>
-    setIds((xs) => (xs.includes(id) ? xs.filter((x) => x !== id) : xs.length >= 4 ? xs : [...xs, id]));
+    setExtras((xs) => (xs.includes(id) ? xs.filter((x) => x !== id) : xs.length >= 3 ? xs : [...xs, id]));
 
   const all = devices.length;
   const winners = fits.filter((f) => f.got && f.fast === all);
@@ -57,9 +65,7 @@ export default function ChargerPicker() {
   const rest = fits.filter((f) => !shown.includes(f));
 
   /* 一起插沒有一顆全部最快：每一台各自挑一顆 */
-  const split = !top && together && all > 1
-    ? devices.map((d) => ({ d, f: rank([d], true).find((x) => x.fast === 1) }))
-    : [];
+  const split = !top && together && all > 1 ? splitBuy(devices) : null;
 
   const chip = (d: Device, on: boolean, onClick: () => void) => (
     <button key={d.id} type="button" aria-pressed={on} onClick={onClick} style={on ? { ...S.example, ...pickOn } : S.example}>
@@ -70,14 +76,14 @@ export default function ChargerPicker() {
   return (
     <div>
       <p style={ask}>你的手機是哪一支？</p>
-      <div style={S.chipRow}>{PHONES.map((d) => chip(d, ids.includes(d.id), () => pickPhone(d.id)))}</div>
+      <div style={S.chipRow}>{PHONES.map((d) => chip(d, phone === d.id, () => pickPhone(d.id)))}</div>
 
       {!more ? (
-        <button type="button" onClick={() => setMore(true)} style={moreLink}>要充平板或筆電？ →</button>
+        <button type="button" onClick={() => setMore(true)} style={moreLink}>要一起充兩台以上？ →</button>
       ) : (
         <>
-          <p style={{ ...ask, fontSize: 15.5, marginTop: 14 }}>平板、筆電（可以多選）</p>
-          <div style={S.chipRow}>{OTHERS.map((d) => chip(d, ids.includes(d.id), () => pickOther(d.id)))}</div>
+          <p style={{ ...ask, fontSize: 15.5, marginTop: 14 }}>還要一起充的（手機、平板、筆電都可以，可以多選）</p>
+          <div style={S.chipRow}>{DEVICES.map((d) => chip(d, extras.includes(d.id), () => pickOther(d.id)))}</div>
         </>
       )}
 
@@ -121,18 +127,9 @@ export default function ChargerPicker() {
               <p style={{ margin: 0, fontWeight: 700, fontSize: 17, lineHeight: 1.6 }}>
                 沒有一顆能讓這{all > 1 ? "幾台" : "一台"}{all > 1 && together ? "一起插" : ""}都充最快
               </p>
-              {split.length > 0 && split.every((x) => x.f) && (
+              {split && (
                 <p style={{ margin: "8px 0 0", fontSize: 15.5, lineHeight: 1.85 }}>
-                  要都最快，就分開兩顆：
-                  {split.map((x, i) => (
-                    <span key={x.d.id}>
-                      {i ? "，" : ""}{x.d.zh}{" 用 "}
-                      <Link href={`/charger/p/${x.f!.charger.id}`} style={{ color: "var(--accent)", fontWeight: 700 }}>
-                        {x.f!.charger.brand} {x.f!.charger.name}
-                      </Link>
-                    </span>
-                  ))}
-                  。不然就一台一台輪流插。
+                  <ChargerSplit groups={split} />
                 </p>
               )}
               {fits[0]?.got && (
@@ -148,7 +145,7 @@ export default function ChargerPicker() {
 
           {devices.some((d) => d.cable) && (
             <p style={{ ...S.hint, marginTop: 12 }}>
-              線也要對：{devices.filter((d) => d.cable).map((d) => `${d.zh} ${d.cable}`).join("；")}。
+              線也要對：{[...new Set(devices.filter((d) => d.cable).map((d) => `${d.zh} ${d.cable}`))].join("；")}。
             </p>
           )}
 
@@ -189,8 +186,8 @@ function Answer({ f, one }: { f: Fit; one?: boolean }) {
           </p>
         ) : (
           <div style={{ margin: "8px 0 0", fontSize: 15.5, lineHeight: 1.8 }}>
-            {f.got.map((g) => (
-              <div key={g.device.id}>
+            {f.got.map((g, i) => (
+              <div key={i}>
                 {g.device.zh}：<b style={{ color: `var(--${TIER_TONE[g.tier]})` }}>{tierZh(g.device, g.tier)}</b>
                 <span style={{ color: "var(--muted)" }}>，{g.why}</span>
               </div>
