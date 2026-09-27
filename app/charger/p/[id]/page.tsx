@@ -131,8 +131,7 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
         ))}
       </div>
       {/* 2026-09-27 Tim：以前這裡是「兩台以上要一起充？點你的裝置算一次」連回 /charger，點了沒幫上忙。
-          現在就地算：有兩個孔的，選兩台直接看結果。
-          只有一個孔的，「不要買」那一格已經講了只有一個孔，就不再講一次，直接接著列買得到的雙孔（便宜的在前） */}
+          現在就地算：有兩個孔的，選兩台直接看結果。只有一個孔的，「不要買」那一格已經講了只有一個孔，就不再講一次，直接接著列買得到的雙孔（便宜的在前） */}
       {multi && <ChargerPair chargerId={c.id} />}
 
       <div style={dealBox}>

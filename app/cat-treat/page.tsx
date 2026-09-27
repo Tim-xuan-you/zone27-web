@@ -77,8 +77,7 @@ export default function Page() {
         零食一天<br />可以給幾條
       </h1>
       <p style={{ color: "var(--muted)", fontSize: 17, lineHeight: 1.9, margin: "0 0 18px", maxWidth: "42ch" }}>
-        包裝上不會寫。獸醫的通則是零食不超過一天熱量的一成，
-        一隻 {DEFAULT_CAT_KG} 公斤的成貓一天大約 {DAY} 大卡，
+        包裝上不會寫。獸醫的通則是零食不超過一天熱量的一成，一隻 {DEFAULT_CAT_KG} 公斤的成貓一天大約 {DAY} 大卡，
         <b style={{ color: "var(--ink)" }}> 零食的上限就是 {CAP} 大卡</b>。
         {SPREAD && PUREE && (
           <>
@@ -92,10 +91,7 @@ export default function Page() {
         <div style={{ ...S.box, borderColor: "var(--warn)", background: "var(--warn-soft)" }}>
           <p style={{ margin: 0, fontWeight: 700, fontSize: 17 }}>寫著「綜合營養」的那一款，熱量快兩倍</p>
           <p style={{ margin: "8px 0 0", fontSize: 14, lineHeight: 1.9 }}>
-            同一個牌子的肉泥，一般口味一條 {SPREAD.plain.spec.kcalPer} 大卡，
-            綜合營養配方一條 {SPREAD.complete.spec.kcalPer} 大卡。
-            差別在後者加了礦物質、維生素和牛磺酸，可以當正餐吃。
-            你要是把它當零食加在正餐之外，額度會用得快一倍。
+            同一個牌子的肉泥，一般口味一條 {SPREAD.plain.spec.kcalPer} 大卡，綜合營養配方一條 {SPREAD.complete.spec.kcalPer} 大卡。差別在後者加了礦物質、維生素和牛磺酸，可以當正餐吃。你要是把它當零食加在正餐之外，額度會用得快一倍。
           </p>
           <Link href={`/cat-treat/p/${SPREAD.complete.id}`} style={{ display: "inline-block", marginTop: 10, fontSize: 14, color: "var(--accent)", fontWeight: 600 }}>
             看這一款怎麼算 →
@@ -120,9 +116,7 @@ export default function Page() {
         <div style={{ ...S.box, marginTop: 14 }}>
           <p style={{ margin: 0, fontWeight: 700, fontSize: 17 }}>凍乾能給的量比你想的少很多</p>
           <p style={{ margin: "8px 0 0", fontSize: 14, color: "var(--muted)", lineHeight: 1.9 }}>
-            凍乾把水抽掉了，水分只剩 {DRIED.spec.moisture}%，每 100 公克 {DRIED.spec.kcalPer100g} 大卡。
-            同樣 {CAP} 大卡的額度，換算下來一天只有 {DRIED_LIMIT.grams} 公克。
-            抓一把就超過了。這種零食要秤，不要用抓的。
+            凍乾把水抽掉了，水分只剩 {DRIED.spec.moisture}%，每 100 公克 {DRIED.spec.kcalPer100g} 大卡。同樣 {CAP} 大卡的額度，換算下來一天只有 {DRIED_LIMIT.grams} 公克。抓一把就超過了。這種零食要秤，不要用抓的。
           </p>
         </div>
       )}
@@ -133,13 +127,10 @@ export default function Page() {
             對雞過敏的話，{CHICKEN_BRAND[0]} 這一排要整排看過
           </p>
           <p style={{ margin: "8px 0 0", fontSize: 14, lineHeight: 1.9 }}>
-            我們讀過 {CHICKEN_BRAND[0]} 的 {CHICKEN_BRAND[1].total} 款，
-            其中 <b>{CHICKEN_BRAND[1].chicken} 款有雞</b>。
-            賣場一頁十幾種規格，名字寫「鮭魚＋雞肉」「雞肉＋日本蟹肉」的，括號裡一樣有雞。
+            我們讀過 {CHICKEN_BRAND[0]} 的 {CHICKEN_BRAND[1].total} 款，其中 <b>{CHICKEN_BRAND[1].chicken} 款有雞</b>。賣場一頁十幾種規格，名字寫「鮭魚＋雞肉」「雞肉＋日本蟹肉」的，括號裡一樣有雞。
           </p>
           <p style={{ margin: "8px 0 0", fontSize: 14, lineHeight: 1.9 }}>
-            這個牌子有把雞寫出來。但一排掃過去，人只會看到前面那兩個字。
-            買之前把括號看完。
+            這個牌子有把雞寫出來。但一排掃過去，人只會看到前面那兩個字。買之前把括號看完。
           </p>
           <Link href="/check?sp=cat" style={{ display: "inline-block", marginTop: 10, fontSize: 14, color: "var(--accent)", fontWeight: 600 }}>
             查飼料有沒有藏雞 →
@@ -206,8 +197,7 @@ export default function Page() {
 
       <footer style={S.foot}>
         <p style={{ margin: 0 }}>
-          熱量照包裝與品牌官網。一成是獸醫營養學的通則，不是法規。
-          貓在減重、有慢性病，或一天吃的正餐本來就不夠，請照獸醫的指示。
+          熱量照包裝與品牌官網。一成是獸醫營養學的通則，不是法規。貓在減重、有慢性病，或一天吃的正餐本來就不夠，請照獸醫的指示。
         </p>
       </footer>
     </main>

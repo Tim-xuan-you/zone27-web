@@ -83,8 +83,7 @@ export default function Page() {
 
       <p style={S.lbl}>家裡那顆 65W、70W 可以用嗎？</p>
       <p style={body}>
-        可以充，只是沒這麼快。iPhone 18 Pro 這次用了一種新的快充，充電器的盒子上會寫「AVS」，而且要給到 60W。
-        我們看過的 {chargers.length} 顆，只有 {withAvs} 顆寫了 AVS。瓦數再大也不算：Apple 列給 iPhone 18 Pro 最快的，也只有自己的 40W 動態那一顆，70W、140W 都不在裡面。
+        可以充，只是沒這麼快。iPhone 18 Pro 這次用了一種新的快充，充電器的盒子上會寫「AVS」，而且要給到 60W。我們看過的 {chargers.length} 顆，只有 {withAvs} 顆寫了 AVS。瓦數再大也不算：Apple 列給 iPhone 18 Pro 最快的，也只有自己的 40W 動態那一顆，70W、140W 都不在裡面。
       </p>
 
       <p style={S.lbl}>寫了 AVS 就一定最快嗎？</p>
@@ -94,8 +93,7 @@ export default function Page() {
       <div style={caseBox}>
         <p style={{ margin: 0, fontWeight: 700, lineHeight: 1.7 }}>{kinyo.brand} {kinyo.name}</p>
         <p style={{ margin: "6px 0 0", fontSize: 15.5, lineHeight: 1.85 }}>
-          賣場標題寫支援 iPhone 18。規格表翻到背面，新快充最多 40W，iPhone 18 Pro 最快要 60W。
-          插得進去，但不是 15 分鐘那個速度。
+          賣場標題寫支援 iPhone 18。規格表翻到背面，新快充最多 40W，iPhone 18 Pro 最快要 60W。插得進去，但不是 15 分鐘那個速度。
         </p>
       </div>
 
@@ -148,8 +146,7 @@ export default function Page() {
 
       <footer style={S.foot}>
         <p style={{ margin: 0 }}>
-          充電時間跟條件來自 Apple 的 iPhone 18 Pro 規格和「為 iPhone 快速充電」說明，充電器的數字來自各品牌官網，{chargers[0].checkedAt} 查的。
-          沒那麼快的會慢多少，Apple 沒寫，我們也不猜。
+          充電時間跟條件來自 Apple 的 iPhone 18 Pro 規格和「為 iPhone 快速充電」說明，充電器的數字來自各品牌官網，{chargers[0].checkedAt} 查的。沒那麼快的會慢多少，Apple 沒寫，我們也不猜。
         </p>
       </footer>
     </main>

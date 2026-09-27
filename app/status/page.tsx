@@ -500,8 +500,7 @@ export default function Page() {
         <>
           <H id="names" n={links.unchecked.length} unit="家">賣場名字要核對</H>
           <p style={lead}>
-            這些名字是我從截圖讀的，可能讀錯字（萬倍富曾經被寫成萬信富）。讀者會拿這個名字去蝦皮搜，錯一個字就找不到。
-            點開對一下賣場名稱，跟我說「都對」或哪一家要改。
+            這些名字是我從截圖讀的，可能讀錯字（萬倍富曾經被寫成萬信富）。讀者會拿這個名字去蝦皮搜，錯一個字就找不到。點開對一下賣場名稱，跟我說「都對」或哪一家要改。
           </p>
           <div style={{ ...box, padding: "6px 22px" }}>
             {links.unchecked.map((g, i) => (
@@ -523,8 +522,7 @@ export default function Page() {
         <details style={{ ...more, marginTop: 40 }}>
           <summary style={moreSum}>有空再做：補第二家、補便宜的一家（{backupList.length} 款）</summary>
           <p style={{ ...lead, marginTop: 12 }}>
-            現在買得到，不急。只剩一家的，那一家賣完就沒地方買；只有商城的，同一包常常貴一截（臭味滾 7L 商城 $223，一般賣家 $100）。
-            被推薦越多次的排越前面。
+            現在買得到，不急。只剩一家的，那一家賣完就沒地方買；只有商城的，同一包常常貴一截（臭味滾 7L 商城 $223，一般賣家 $100）。被推薦越多次的排越前面。
           </p>
           {backupList.map(({ x, reasons, n }) => (
             <div key={x.id} style={box}>
@@ -559,12 +557,10 @@ export default function Page() {
             <li>找到了，點那一條的「點開看」。打不開、顯示無效或賣完，就跟我說「這一條無效」，或直接貼另一家的新連結。</li>
           </ol>
           <p style={{ margin: "10px 0 0", fontSize: 14, lineHeight: 1.85 }}>
-            <b>你給過的連結永遠不刪。</b>新的放最前面，原本的往後當備援；主要那一條壞了，備援自己頂上。
-            確定無效的才標「失效」：讀者看不到，這裡還留著。
+            <b>你給過的連結永遠不刪。</b>新的放最前面，原本的往後當備援；主要那一條壞了，備援自己頂上。確定無效的才標「失效」：讀者看不到，這裡還留著。
           </p>
           <p style={{ margin: "10px 0 0", fontSize: 14, color: "var(--muted)", lineHeight: 1.85 }}>
-            自己點開檢查沒關係，但不要從這裡下單，多數分潤計畫不算自己買的。
-            連結健檢最後一次跑是 {health.checkedAt}，商品還在不在要自己點。
+            自己點開檢查沒關係，但不要從這裡下單，多數分潤計畫不算自己買的。連結健檢最後一次跑是 {health.checkedAt}，商品還在不在要自己點。
           </p>
         </div>
         {links.groups.map(([label, items]) => (

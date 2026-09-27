@@ -88,8 +88,7 @@ export default function Page() {
           {data._meta.tally}
         </p>
         <p style={{ margin: "12px 0 0", fontSize: 15.5, lineHeight: 1.9, color: "var(--muted)" }}>
-          罐頭要有湯汁，雞湯香，貓也愛喝，是很常見的湯底。
-          包裝正面寫的是口味，湯底寫在背面第一行，字很小。
+          罐頭要有湯汁，雞湯香，貓也愛喝，是很常見的湯底。包裝正面寫的是口味，湯底寫在背面第一行，字很小。
         </p>
         <p style={{ margin: "12px 0 0", fontSize: 15.5, lineHeight: 1.9, color: "var(--muted)" }}>
           對大部分的貓來說這沒什麼。<b style={{ color: "var(--ink)" }}>只有正在查過敏原的時候，這件事會讓你白忙好幾個月</b>：
@@ -197,8 +196,7 @@ export default function Page() {
         fontSize: 12.5, color: "var(--faint)", lineHeight: 1.9,
       }}>
         <p style={{ margin: 0 }}>
-          成分資料取自台灣通路與品牌台灣官網的中文標示，每一筆都寫了查核日期。
-          配方會改版，以你手上那一罐的標示為準。
+          成分資料取自台灣通路與品牌台灣官網的中文標示，每一筆都寫了查核日期。配方會改版，以你手上那一罐的標示為準。
         </p>
       </footer>
     </main>

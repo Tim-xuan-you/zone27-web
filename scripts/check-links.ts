@@ -62,7 +62,13 @@ interface Row {
   finalUrl: string | null;
   /** 蝦皮的「賣場編號/商品編號」。拿來比對分潤後台說無效的是不是這一條 */
   item: string | null;
-  verdict: "ok" | "redirected-home" | "not-found" | "unreachable";
+  /**
+   * 這條連結帶的分潤帳號（網址上的 utm_source／mmp_pid，像 an_16322830031）。
+   * 2026-09-27 Tim：「怕給到您的連結不是分潤連結，就白忙一場了！」
+   * 一般的分享連結不會帶這個，讀者買了也不算他的。所以每一條都要看得到這個帳號，而且是同一個
+   */
+  affiliate?: string | null;
+  verdict: "ok" | "redirected-home" | "not-found" | "unreachable" | "not-affiliate";
   note: string;
 }
 
@@ -98,7 +104,18 @@ function bare(u: string): string {
   try { const x = new URL(u); return x.origin + x.pathname; } catch { return u; }
 }
 
-async function check(url: string): Promise<Pick<Row, "status" | "finalUrl" | "item" | "verdict" | "note">> {
+/** 網址上的分潤帳號。沒有就是 null（那就不是分潤連結） */
+function affiliateOf(u: string): string | null {
+  try {
+    const q = new URL(u).searchParams;
+    const id = q.get("utm_source") ?? q.get("mmp_pid") ?? "";
+    return /^an_\d+$/.test(id) && (q.get("utm_medium") ?? "affiliates") === "affiliates" ? id : null;
+  } catch {
+    return null;
+  }
+}
+
+async function check(url: string): Promise<Pick<Row, "status" | "finalUrl" | "item" | "verdict" | "note" | "affiliate">> {
   const ctrl = new AbortController();
   const timer = setTimeout(() => ctrl.abort(), TIMEOUT_MS);
   try {
@@ -114,27 +131,32 @@ async function check(url: string): Promise<Pick<Row, "status" | "finalUrl" | "it
     });
     const finalUrl = bare(res.url || url);
     const item = itemOf(res.url || url);
+    const affiliate = affiliateOf(res.url || url);
+    if (item && !affiliate) {
+      return { status: res.status, finalUrl, item, affiliate, verdict: "not-affiliate", note: "網址上沒有分潤帳號：這條是一般分享連結，讀者買了不算分潤" };
+    }
 
     if (res.status === 404 || res.status === 410) {
-      return { status: res.status, finalUrl, item, verdict: "not-found", note: "商品頁不存在了" };
+      return { status: res.status, finalUrl, item, affiliate, verdict: "not-found", note: "商品頁不存在了" };
     }
     if (landedOnHome(finalUrl)) {
       return {
         status: res.status,
         finalUrl,
         item,
+        affiliate,
         verdict: "redirected-home",
         note: "被丟到首頁或搜尋頁 —— 通常代表商品已下架",
       };
     }
     // 有轉到商品頁，但蝦皮對程式回 403。連結本身是通的，商品頁內容我們不看（見檔頭）
     if (item && res.status === 403) {
-      return { status: res.status, finalUrl, item, verdict: "ok", note: "有轉到商品頁（蝦皮不讓程式看內容，要自己點開確認）" };
+      return { status: res.status, finalUrl, item, affiliate, verdict: "ok", note: "有轉到商品頁（蝦皮不讓程式看內容，要自己點開確認）" };
     }
     if (!res.ok) {
-      return { status: res.status, finalUrl, item, verdict: "unreachable", note: `回應 ${res.status}` };
+      return { status: res.status, finalUrl, item, affiliate, verdict: "unreachable", note: `回應 ${res.status}` };
     }
-    return { status: res.status, finalUrl, item, verdict: "ok", note: "" };
+    return { status: res.status, finalUrl, item, affiliate, verdict: "ok", note: "" };
   } catch (e) {
     const msg = e instanceof Error ? e.message : String(e);
     return { status: null, finalUrl: null, item: null, verdict: "unreachable", note: msg.slice(0, 120) };
@@ -192,7 +214,30 @@ async function main() {
     if (!cached && i < targets.length - 1) await sleep(DELAY_MS);
   }
 
-  const bad = rows.filter((r) => r.verdict !== "ok");
+  /*
+   * 兩個人工看不出來的錯：
+   *   1. 帳號不一樣：大部分連結是同一個分潤帳號，有一條不一樣，就是貼錯了（別人的連結、別的帳號）
+   *   2. 賣場對不上：連結落在的賣場編號，跟 data/stores.json 登記的店名不一樣（貼到別款、別家的連結）
+   */
+  const counts = new Map<string, number>();
+  for (const r of rows) if (r.affiliate) counts.set(r.affiliate, (counts.get(r.affiliate) ?? 0) + 1);
+  const mine = [...counts].sort((a, b) => b[1] - a[1])[0]?.[0];
+  const stores = existsSync(resolve(ROOT, "data/stores.json"))
+    ? (JSON.parse(readFileSync(resolve(ROOT, "data/stores.json"), "utf8")) as { stores: Record<string, { name: string }> }).stores
+    : {};
+  for (const r of rows) {
+    if (r.verdict !== "ok") continue;
+    if (mine && r.affiliate && r.affiliate !== mine) {
+      r.verdict = "not-affiliate";
+      r.note = `分潤帳號是 ${r.affiliate}，其他連結都是 ${mine}：這條可能不是你的帳號產的`;
+      continue;
+    }
+    const shop = r.item?.split("/")[0];
+    const reg = shop ? stores[shop]?.name : undefined;
+    if (reg && reg !== r.label) r.note = `連結落在「${reg}」，資料寫的是「${r.label}」，確認是不是貼錯`;
+  }
+
+  const bad = rows.filter((r) => r.verdict !== "ok" || /確認是不是貼錯/.test(r.note));
   writeFileSync(
     OUT,
     JSON.stringify(

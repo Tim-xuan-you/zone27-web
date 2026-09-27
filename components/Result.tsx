@@ -154,9 +154,7 @@ export default function Result({
       )}
 
       {/* 這裡曾經是「把狀況傳給我們，我們的人會看」——
-          一個一人網站守不住的承諾，而且按鈕還是回首頁。
-          改成告訴他下一步自己怎麼走：換個講法、或者去問真正答得了的人。
-          零人力，而且比一個三天才回的訊息管道有用。 */}
+          一個一人網站守不住的承諾，而且按鈕還是回首頁。改成告訴他下一步自己怎麼走：換個講法、或者去問真正答得了的人。零人力，而且比一個三天才回的訊息管道有用。 */}
       {/* 停下來的時候（還在上架、要先看醫生）這一塊不對題：我們根本沒給選項，談不上合不合適 */}
       {!verdict.stop && (<>
       <p style={S.lbl}>都不合適？</p>
@@ -164,8 +162,7 @@ export default function Result({
         <div>
           <h2 style={{ margin: "0 0 6px", fontSize: 20 }}>換個條件再試一次</h2>
           <p style={{ margin: 0, fontSize: 15.5, color: "var(--muted)", lineHeight: 1.8 }}>
-            多點一兩個狀況，或打牠幾公斤、現在吃哪一包，答案通常就不一樣了。
-            出貨和庫存要問賣場，牠不舒服要看醫生，<Link href="/ask" style={{ color: "var(--accent)" }}>哪個問題該問誰</Link>寫在這裡。
+            多點一兩個狀況，或打牠幾公斤、現在吃哪一包，答案通常就不一樣了。出貨和庫存要問賣場，牠不舒服要看醫生，<Link href="/ask" style={{ color: "var(--accent)" }}>哪個問題該問誰</Link>寫在這裡。
           </p>
         </div>
         <Link style={S.btn} href={backHref}>改條件再挑一次</Link>
@@ -212,7 +209,7 @@ function Cascade({ verdict }: { verdict: Verdict }) {
       <CutBar verdict={verdict} />
       <div style={S.cascTop}>
         <span style={S.bignum} className="mono">{verdict.startCount}</span>
-        <span style={S.cascCap}>款進入裁決</span>
+        <span style={S.cascCap}>款一起比</span>
       </div>
       {verdict.cuts.map((c, i) => (
         <div key={i} style={S.cutRow}>
@@ -299,7 +296,7 @@ function Answer({
         </h2>
 
         <div style={S.priceRow}>
-          <span style={S.price} className="mono">${safe.amount}</span>
+          <span style={S.price} className="mono">${safe.amount.toLocaleString()}</span>
           <span style={S.perKg} className="mono">
             {unitOf(p, safe)}{up && ` · ${up}`}
           </span>
@@ -341,9 +338,7 @@ function Answer({
       )}
 
       {/*
-        只有一家賣的時候，每一家的明細就是上面那張表再列一次。
-        同樣的數字出現兩次，讀者會以為兩個不一樣，回頭去對，反而更亂（2026-09-13 Tim）。
-        所以只有一家就不放明細，只剩「先知道這件事」。
+        只有一家賣的時候，每一家的明細就是上面那張表再列一次。同樣的數字出現兩次，讀者會以為兩個不一樣，回頭去對，反而更亂（2026-09-13 Tim）。所以只有一家就不放明細，只剩「先知道這件事」。
       */}
       {(stores.length > 1 || p.knownIssues) && (
         <details style={S.detailBlock}>
@@ -425,8 +420,7 @@ function Trial({
   return (
     <div style={tBox}>
       <Step n={1} title="前 7 到 10 天慢慢換">
-        第 1–3 天新的加四分之一，第 4–6 天一半，第 7–10 天四分之三，之後才全換。
-        一次全換掉幾乎一定會軟便。那是換糧造成的，不是牠對這款過敏。
+        第 1–3 天新的加四分之一，第 4–6 天一半，第 7–10 天四分之三，之後才全換。一次全換掉幾乎一定會軟便。那是換糧造成的，不是牠對這款過敏。
       </Step>
 
       <Step n={2} title={`多久看得出來：${t.needLabel}`}>
@@ -450,9 +444,7 @@ function Trial({
         <Step n={3} title={`這包大約吃 ${t.anchorDays} 天`}>
           {t.needsTwoBags ? (
             <>
-              週期要 {t.needDays} 天，但一包開封放超過 {FRESH_DAYS} 天油脂會氧化，
-              所以這個長度本來就要分兩次買。重點是<b>不要買太小的</b>，
-              還沒看出結果就斷糧，你會以為是這款沒用。
+              週期要 {t.needDays} 天，但一包開封放超過 {FRESH_DAYS} 天油脂會氧化，所以這個長度本來就要分兩次買。重點是<b>不要買太小的</b>，還沒看出結果就斷糧，你會以為是這款沒用。
             </>
           ) : (
             <>週期要 {t.needDays} 天。這包的長度剛好夠你判斷。</>
@@ -470,13 +462,11 @@ function Trial({
       )}
 
       <Step n={hasStep3 ? 4 : 3} title="這段期間不要給零食">
-        一根雞肉零食就毀了整個測試。{cat ? "肉泥、凍乾、逗貓用的小零食、人的食物" : "潔牙骨、人的食物、公園裡別人給的"}，都算。
-        要測就測乾淨的，不然跑完八週你還是不知道答案。
+        一根雞肉零食就毀了整個測試。{cat ? "肉泥、凍乾、逗貓用的小零食、人的食物" : "潔牙骨、人的食物、公園裡別人給的"}，都算。要測就測乾淨的，不然跑完八週你還是不知道答案。
       </Step>
 
       <Step n={hasStep3 ? 5 : 4} title="什麼情況要停" last>
-        連續軟便超過三天、抓得比以前更兇、開始吐。
-        這時候該看醫生，不是再換下一款飼料。
+        連續軟便超過三天、抓得比以前更兇、開始吐。這時候該看醫生，不是再換下一款飼料。
         {cat && (
           <>
             <br />
@@ -499,8 +489,7 @@ function Trial({
           {wet ? "想自己算一天幾罐、一個月多少錢 →" : "想自己算一天幾克、一個月多少錢 →"}
         </Link>
         <br />
-        我們不是獸醫，上面是一般的換糧做法，不是診斷。
-        牠一直不舒服的話，帶去看醫生比換飼料重要。
+        我們不是獸醫，上面是一般的換糧做法，不是診斷。牠一直不舒服的話，帶去看醫生比換飼料重要。
       </p>
     </div>
   );
@@ -575,7 +564,7 @@ function Alt({ p, dogKg, stage, multi, said }: { p: Product; dogKg?: number; sta
           <Link href={productHref(p)} style={nameLink}>{p.name}</Link>
         </h3>
         <div style={S.priceRow}>
-          <span style={{ ...S.price, fontSize: 22 }} className="mono">${safe.amount}</span>
+          <span style={{ ...S.price, fontSize: 22 }} className="mono">${safe.amount.toLocaleString()}</span>
           <span style={S.perKg} className="mono">
             {unitOf(p, safe)}{up && ` · ${up}`}
           </span>
@@ -635,7 +624,7 @@ export function ProductCard({ p }: { p: Product }) {
     <article style={S.card}>
       <div style={S.cardH}>
         <div style={S.priceRow}>
-          <span style={{ ...S.price, fontSize: 26 }} className="mono">${safe.amount}</span>
+          <span style={{ ...S.price, fontSize: 26 }} className="mono">${safe.amount.toLocaleString()}</span>
           <span style={S.perKg} className="mono">
             {unitOf(p, safe)}{up && ` · ${up}`}
           </span>
@@ -787,8 +776,7 @@ function Stores({ p, dogKg, stage }: { p: Product; dogKg?: number; stage?: Stage
 
       {anyTooLong && (
         <p style={S.freshWarn}>
-          ⚠️ 標記的規格，你的{p.species === "cat" ? "貓" : "狗"}要吃超過 {FRESH_DAYS} 天才吃得完。開封後的乾飼料油脂會氧化，
-          放久了會越來越不愛吃，很多人以為是這牌子不好，其實只是放太久了。
+          ⚠️ 標記的規格，你的{p.species === "cat" ? "貓" : "狗"}要吃超過 {FRESH_DAYS} 天才吃得完。開封後的乾飼料油脂會氧化，放久了會越來越不愛吃，很多人以為是這牌子不好，其實只是放太久了。
         </p>
       )}
 

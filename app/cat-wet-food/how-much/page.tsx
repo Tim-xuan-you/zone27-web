@@ -182,8 +182,7 @@ export default function Page() {
         fontSize: 12.5, color: "var(--faint)", lineHeight: 1.9,
       }}>
         <p style={{ margin: 0 }}>
-          這一頁的算式跟商品卡上的「一天大約幾罐」是同一個函式，不會給你兩種答案。
-          估算不是餵食指示，牠的體態和你的獸醫才是依據。
+          這一頁的算式跟商品卡上的「一天大約幾罐」是同一個函式，不會給你兩種答案。估算不是餵食指示，牠的體態和你的獸醫才是依據。
         </p>
       </footer>
     </main>

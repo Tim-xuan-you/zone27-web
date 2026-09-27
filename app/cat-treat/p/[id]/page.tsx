@@ -74,8 +74,7 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
             </p>
             {p.spec.completeFood && (
               <p style={{ margin: "10px 0 0", fontSize: 14, color: "var(--muted)", lineHeight: 1.9, paddingTop: 10, borderTop: "1px solid var(--line)" }}>
-                這一款是綜合營養食，當正餐餵就不受這個上限，照正餐的份量算。
-                上面的數字是「加在正餐之外」的算法。
+                這一款是綜合營養食，當正餐餵就不受這個上限，照正餐的份量算。上面的數字是「加在正餐之外」的算法。
               </p>
             )}
           </>

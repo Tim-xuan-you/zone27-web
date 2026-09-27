@@ -52,9 +52,7 @@ export default function Page() {
         一支潔牙骨<br />佔掉一天多少額度
       </h1>
       <p style={{ color: "var(--muted)", fontSize: 17, lineHeight: 1.9, margin: "0 0 18px", maxWidth: "42ch" }}>
-        潔牙骨是為了健康才買的，所以沒有人把它當零食算。
-        但一支 25 到 142 大卡，比整包肉乾還高。
-        一隻 {KG} 公斤結紮的成犬一天 {DAY} 大卡，
+        潔牙骨是為了健康才買的，所以沒有人把它當零食算。但一支 25 到 142 大卡，比整包肉乾還高。一隻 {KG} 公斤結紮的成犬一天 {DAY} 大卡，
         <b style={{ color: "var(--ink)" }}> 零食的上限是 {CAP} 大卡</b>。
       </p>
 
@@ -64,8 +62,7 @@ export default function Page() {
             照品牌自己標的體重算，{OVER} 款一支就超過一整天的額度
           </p>
           <p style={{ margin: "10px 0 0", fontSize: 14, lineHeight: 1.9 }}>
-            每一款潔牙骨都會標「適用幾公斤的狗」。我們拿那個範圍裡<b>最輕的那隻</b>來算，
-            因為牠的額度最小。結果是這樣：
+            每一款潔牙骨都會標「適用幾公斤的狗」。我們拿那個範圍裡<b>最輕的那隻</b>來算，因為牠的額度最小。結果是這樣：
           </p>
           <div style={{ marginTop: 12 }}>
             {LOW_END.map(({ p, low }) => (
@@ -88,8 +85,7 @@ export default function Page() {
             ))}
           </div>
           <p style={{ margin: "14px 0 0", fontSize: 14, lineHeight: 1.9 }}>
-            品牌在同一張標籤上寫「每餵一支，請把正餐扣掉 N 大卡」。
-            所以他們知道。問題是幾乎沒有人真的去扣。
+            品牌在同一張標籤上寫「每餵一支，請把正餐扣掉 N 大卡」。所以他們知道。問題是幾乎沒有人真的去扣。
           </p>
         </div>
       )}
@@ -97,14 +93,10 @@ export default function Page() {
       <div style={{ ...S.box, marginTop: 14, borderColor: "var(--warn)", background: "var(--warn-soft)" }}>
         <p style={{ margin: 0, fontWeight: 700, fontSize: 17 }}>潔牙骨不是肉做的</p>
         <p style={{ margin: "10px 0 0", fontSize: 14, lineHeight: 1.9 }}>
-          它長得像肉骨頭，顏色是綠的，很多人以為是某種肉乾。
-          成分表第一項是<b>小麥麵粉</b>，第二項是甘油，第三項是小麥麩質。
-          整張表沒有一項是肉。排在第八的「天然禽肉風味」是風味劑。
+          它長得像肉骨頭，顏色是綠的，很多人以為是某種肉乾。成分表第一項是<b>小麥麵粉</b>，第二項是甘油，第三項是小麥麩質。整張表沒有一項是肉。排在第八的「天然禽肉風味」是風味劑。
         </p>
         <p style={{ margin: "10px 0 0", fontSize: 14, lineHeight: 1.9 }}>
-          這不代表它沒用。潔牙骨靠的是質地跟咀嚼時間，不是靠成分。
-          但你要是為了「補充蛋白質」在給，那買錯東西了。
-          對小麥或禽肉過敏的狗也要留意。
+          這不代表它沒用。潔牙骨靠的是質地跟咀嚼時間，不是靠成分。但你要是為了「補充蛋白質」在給，那買錯東西了。對小麥或禽肉過敏的狗也要留意。
         </p>
       </div>
 
@@ -124,9 +116,7 @@ export default function Page() {
       <div style={{ ...S.box, marginTop: 14 }}>
         <p style={{ margin: 0, fontWeight: 700, fontSize: 17 }}>超過了怎麼辦</p>
         <p style={{ margin: "10px 0 0", fontSize: 14, color: "var(--muted)", lineHeight: 1.9 }}>
-          不是叫你不要給。潔牙骨對牙結石是有數據的，那是它的價值。
-          做法是把正餐扣掉同樣的熱量，或者隔天給一次。
-          最怕的是正餐照舊、潔牙骨照給，一年下來體重就上去了。
+          不是叫你不要給。潔牙骨對牙結石是有數據的，那是它的價值。做法是把正餐扣掉同樣的熱量，或者隔天給一次。最怕的是正餐照舊、潔牙骨照給，一年下來體重就上去了。
         </p>
         <Link href="/dog-food/how-much" style={{ display: "inline-block", marginTop: 10, fontSize: 14, color: "var(--accent)", fontWeight: 600 }}>
           算一天該吃多少乾糧 →
@@ -190,8 +180,7 @@ export default function Page() {
 
       <footer style={S.foot}>
         <p style={{ margin: 0 }}>
-          熱量照品牌官網公布的數字。一成是獸醫營養學的通則，不是法規。
-          狗在減重、有慢性病，或一天吃的正餐本來就不夠，請照獸醫的指示。
+          熱量照品牌官網公布的數字。一成是獸醫營養學的通則，不是法規。狗在減重、有慢性病，或一天吃的正餐本來就不夠，請照獸醫的指示。
         </p>
       </footer>
     </main>

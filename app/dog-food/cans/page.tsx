@@ -91,14 +91,11 @@ export default function Page() {
       <div style={{ ...S.box, marginTop: 14, borderColor: "var(--warn)", background: "var(--warn-soft)" }}>
         <p style={{ margin: 0, fontWeight: 700, fontSize: 17 }}>先看罐子上有沒有寫「完全」兩個字</p>
         <p style={{ margin: "10px 0 0", fontSize: 14, lineHeight: 1.9 }}>
-          蝦皮上寫「狗主食罐」的，很多是賣場自己打的。
-          真正能當正餐的會標「完全寵物食品」，或寫符合 AAFCO 成犬標準。
-          沒寫的那種，肉再多也只是配菜，長期單吃會缺鈣和微量元素。
+          蝦皮上寫「狗主食罐」的，很多是賣場自己打的。真正能當正餐的會標「完全寵物食品」，或寫符合 AAFCO 成犬標準。沒寫的那種，肉再多也只是配菜，長期單吃會缺鈣和微量元素。
         </p>
         <p style={{ margin: "10px 0 0", fontSize: 14, lineHeight: 1.9 }}>
           舉一個實際的：有一款台灣賣得很好的「99% 純肉犬罐」，品牌公布的成分表第二項是
-          禽肉副產物，後面還有蒟蒻粉、植物纖維和食用色素紅色。
-          狗是紅綠色盲，那個顏色是加給人看的。
+          禽肉副產物，後面還有蒟蒻粉、植物纖維和食用色素紅色。狗是紅綠色盲，那個顏色是加給人看的。
         </p>
       </div>
 
@@ -113,8 +110,7 @@ export default function Page() {
         <Row k="最貴的一款">每公斤 ${HIGH.toLocaleString()}　一個月約 ${dryMonth(HIGH).toLocaleString()}</Row>
       </div>
       <p style={{ fontSize: 14, color: "var(--faint)", lineHeight: 1.9, margin: "12px 0 0" }}>
-        乾糧照每公斤 {KCAL_PER_KG.toLocaleString()} 大卡換算，包裝上有寫的照包裝。
-        我們收的都是中高價位那一段，賣場的便宜乾糧會比這個低不少。
+        乾糧照每公斤 {KCAL_PER_KG.toLocaleString()} 大卡換算，包裝上有寫的照包裝。我們收的都是中高價位那一段，賣場的便宜乾糧會比這個低不少。
       </p>
 
       <p style={S.lbl}>算你家的</p>
@@ -123,13 +119,11 @@ export default function Page() {
       <div style={{ ...S.box, marginTop: 30 }}>
         <p style={{ margin: 0, fontWeight: 700, fontSize: 17 }}>這一頁原本寫「我們讀不到狗罐頭的資料」</p>
         <p style={{ margin: "10px 0 0", fontSize: 14, color: "var(--muted)", lineHeight: 1.9 }}>
-          那是 2026-09-19 寫的，而且寫錯了。讀不到的是品牌官網，
-          官網確實只寫「符合 AAFCO」四個字。但台灣通路的商品頁把成分表和保證分析
+          那是 2026-09-19 寫的，而且寫錯了。讀不到的是品牌官網，官網確實只寫「符合 AAFCO」四個字。但台灣通路的商品頁把成分表和保證分析
           整段打成文字，粗蛋白、水分、每 100 克幾大卡全部都有。
         </p>
         <p style={{ margin: "10px 0 0", fontSize: 14, color: "var(--muted)", lineHeight: 1.9 }}>
-          隔天我們去那裡讀了 {CANS.length} 款，類目就開了。
-          裡面有一件事我們自己看了也意外：名字沒寫雞的 {CANS_NO_CHICKEN_NAME.length} 款，{CANS_HIDDEN.length} 款成分表裡有雞。
+          隔天我們去那裡讀了 {CANS.length} 款，類目就開了。裡面有一件事我們自己看了也意外：名字沒寫雞的 {CANS_NO_CHICKEN_NAME.length} 款，{CANS_HIDDEN.length} 款成分表裡有雞。
         </p>
         <Link href="/dog-wet-food" style={{ display: "inline-block", marginTop: 12, fontSize: 14, color: "var(--accent)", fontWeight: 600 }}>
           去看我們讀過的 {CANS.length} 款狗主食罐 →
@@ -149,8 +143,7 @@ export default function Page() {
 
       <footer style={S.foot}>
         <p style={{ margin: 0 }}>
-          這一頁是估算，不是餵食指示。真正該看的是體態，還有獸醫怎麼說。
-          幼犬、懷孕、哺乳、慢性病的狗都不適用上面的係數。
+          這一頁是估算，不是餵食指示。真正該看的是體態，還有獸醫怎麼說。幼犬、懷孕、哺乳、慢性病的狗都不適用上面的係數。
         </p>
       </footer>
     </main>

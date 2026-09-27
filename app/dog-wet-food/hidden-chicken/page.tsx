@@ -216,8 +216,7 @@ export default function Page() {
         fontSize: 12.5, color: "var(--faint)", lineHeight: 1.9,
       }}>
         <p style={{ margin: 0 }}>
-          成分資料取自台灣通路的中文標示，每一筆都寫了查核日期。
-          配方會改版，以你手上那一罐的標示為準。
+          成分資料取自台灣通路的中文標示，每一筆都寫了查核日期。配方會改版，以你手上那一罐的標示為準。
         </p>
       </footer>
     </main>

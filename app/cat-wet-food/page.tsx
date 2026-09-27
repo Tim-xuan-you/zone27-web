@@ -96,8 +96,7 @@ export default function Page() {
         fontSize: 12.5, color: "var(--faint)", lineHeight: 1.9,
       }}>
         <p style={{ margin: 0 }}>
-          標示資料取自台灣通路與品牌台灣官網的中文標示。
-          配方會改版，以你手上那一罐的標示為準。
+          標示資料取自台灣通路與品牌台灣官網的中文標示。配方會改版，以你手上那一罐的標示為準。
         </p>
       </footer>
     </main>

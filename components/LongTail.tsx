@@ -173,8 +173,7 @@ export default function LongTail({ sp, slug }: { sp: Species; slug: string[] }) 
             borderRadius: 14, padding: "18px 22px",
           }}>
             <p style={{ margin: 0, fontSize: 15.5, lineHeight: 1.95 }}>
-              說真的，<b>沒有。</b>{p.breed.zh}這個條件沒有刪掉任何一款，
-              以「避{p.allergen.zh}」來說，{p.breed.zh}跟其他品種的選擇是一樣的。
+              說真的，<b>沒有。</b>{p.breed.zh}這個條件沒有刪掉任何一款，以「避{p.allergen.zh}」來說，{p.breed.zh}跟其他品種的選擇是一樣的。
             </p>
             <p style={{ margin: "12px 0 0", fontSize: 15.5, color: "var(--muted)", lineHeight: 1.9 }}>
               品種真正會影響的是<b>吃多少</b>和<b>該買哪個包裝</b>，那個下面算給你看。
@@ -205,8 +204,7 @@ export default function LongTail({ sp, slug }: { sp: Species; slug: string[] }) 
               borderRadius: 14, boxShadow: "var(--sh)", padding: "20px 22px",
             }}>
               <p style={{ margin: "0 0 12px", fontSize: 15.5, lineHeight: 1.95 }}>
-                成年{p.breed.zh}的典型體重大約 <b>{kg} 公斤</b>，
-                照獸醫的能量公式算，已結紮的話一天大約吃 <b>{g} 克</b>
+                成年{p.breed.zh}的典型體重大約 <b>{kg} 公斤</b>，照獸醫的能量公式算，已結紮的話一天大約吃 <b>{g} 克</b>
                 {pick.spec.kcal ? `（照這一款的熱量 ${pick.spec.kcal.toLocaleString()} 大卡算）` : "乾飼料"}。
               </p>
               <p style={{ margin: "0 0 12px", fontSize: 15.5, lineHeight: 1.95 }}>
@@ -215,8 +213,7 @@ export default function LongTail({ sp, slug }: { sp: Species; slug: string[] }) 
                 {monthly !== null && <>一個月大約 <b>${monthly.toLocaleString()}</b>。</>}
               </p>
               <p style={{ margin: 0, fontSize: 14, color: "var(--muted)", lineHeight: 1.9 }}>
-                體重是典型值，不是標準，真正該看的是體態。
-                想用你家的實際體重算，
+                體重是典型值，不是標準，真正該看的是體態。想用你家的實際體重算，
                 <Link href={`${base}/how-much`} style={{ color: "var(--accent)" }}>這裡可以自己輸入</Link>。
               </p>
             </div>

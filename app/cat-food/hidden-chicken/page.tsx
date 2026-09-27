@@ -86,8 +86,7 @@ export default function Page() {
       <div style={box}>
         <p style={{ margin: 0, fontSize: 15.5, lineHeight: 1.9 }}>
           <b>貓飼料的名字，幾乎都是口味。</b>
-          鮭魚、鮪魚、鴨肉寫在包裝最大的字，雞肉排在成分表前面、字很小。
-          雞是最便宜也最常見的肉，出現在各種口味裡一點都不奇怪。
+          鮭魚、鮪魚、鴨肉寫在包裝最大的字，雞肉排在成分表前面、字很小。雞是最便宜也最常見的肉，出現在各種口味裡一點都不奇怪。
         </p>
         <p style={{ margin: "12px 0 0", fontSize: 15.5, lineHeight: 1.9, color: "var(--muted)" }}>
           對大部分的貓來說這沒什麼。<b style={{ color: "var(--ink)" }}>只有正在查過敏原的時候，這件事會讓你白忙好幾個月</b>：
@@ -226,8 +225,7 @@ export default function Page() {
         fontSize: 12.5, color: "var(--faint)", lineHeight: 1.9,
       }}>
         <p style={{ margin: 0 }}>
-          成分資料取自台灣代理商的中文標示，每一筆都寫了查核日期。
-          配方會改版，以你手上那一包的包裝標示為準。
+          成分資料取自台灣代理商的中文標示，每一筆都寫了查核日期。配方會改版，以你手上那一包的包裝標示為準。
         </p>
       </footer>
     </main>

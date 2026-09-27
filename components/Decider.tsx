@@ -145,8 +145,7 @@ const COMMON: Record<FoodSlug, { label: string; phrase: string }[]> = {
 };
 
 /* 裁決器只服務吃正餐的那三個類目。貓砂看的是沖不沖得下去、一個月多少錢；
-   貓零食看的是一天可以給幾條。兩個都有自己的規則，不會渲染這個元件；
-   萬一被指到，就當貓乾糧處理，不要讓型別到處擴散 */
+   貓零食看的是一天可以給幾條。兩個都有自己的規則，不會渲染這個元件；萬一被指到，就當貓乾糧處理，不要讓型別到處擴散 */
 const NOT_FOOD: Form[] = ["litter", "treat"];
 const foodCategoriesOf = (sp: Species) => categoriesOf(sp).filter((c) => !NOT_FOOD.includes(c.form));
 const foodSlug = (s: CategorySlug): FoodSlug =>
@@ -543,8 +542,7 @@ export default function Decider({
       )}
 
       {/*
-        2026-09-27 Tim 打了一款零食，以前這裡回「這款我們讀過，不過它不走裁決器，裁決器是給正餐用的⋯⋯」，
-        他說完全看不懂。讀者打品名就是想知道這一款怎麼樣，所以跟飼料一樣，直接給那一款的答案。
+        2026-09-27 Tim 打了一款零食，以前這裡回「這款我們讀過，不過它不走裁決器，裁決器是給正餐用的⋯⋯」，他說完全看不懂。讀者打品名就是想知道這一款怎麼樣，所以跟飼料一樣，直接給那一款的答案。
       */}
       {others.length > 0 && (
         <div id="others" style={{ marginTop: 28 }}>

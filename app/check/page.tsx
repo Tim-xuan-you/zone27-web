@@ -71,8 +71,7 @@ export default function Page() {
       </div>
 
       <p style={{ marginTop: 28, fontSize: 12.5, color: "var(--faint)", lineHeight: 1.9 }}>
-        成分照台灣代理商的中文標示和品牌官網。配方會改版，以你手上那一包的包裝為準。
-        我們只讀了這 {st.total} 款，沒列出來的不代表沒有雞。
+        成分照台灣代理商的中文標示和品牌官網。配方會改版，以你手上那一包的包裝為準。我們只讀了這 {st.total} 款，沒列出來的不代表沒有雞。
       </p>
     </main>
   );

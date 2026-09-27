@@ -45,8 +45,7 @@ const FEWEST = WITH_KCAL[0];
 const MOST = WITH_KCAL[WITH_KCAL.length - 1];
 
 /* 西莎自然素材：包裝上自己標的餵食量。
-   5 公斤的狗一天 5⅓ 盒 → 換算到 12 公斤照 MER 的比例，不是照體重直接乘。
-   體重乘 2.4 倍，熱量需求只乘 1.9 倍（代謝率跟體重的 0.75 次方成正比）。 */
+   5 公斤的狗一天 5⅓ 盒 → 換算到 12 公斤照 MER 的比例，不是照體重直接乘。體重乘 2.4 倍，熱量需求只乘 1.9 倍（代謝率跟體重的 0.75 次方成正比）。 */
 const CESAR_KG = 5;
 const CESAR_BOX = 16 / 3;
 const KCAL_RATIO = mer(KG, "adultFixed", "dog") / mer(CESAR_KG, "adultFixed", "dog");
@@ -85,8 +84,7 @@ export default function Page() {
           一天要幾罐 ＝ <b>一天的熱量</b> ÷ <b>一罐幾大卡</b>
         </p>
         <p style={{ margin: "10px 0 0", fontSize: 14, color: "var(--muted)", lineHeight: 1.9 }}>
-          下面的罐數是拿我們讀過的那幾款實際算的。每一罐幾大卡是品牌公布的代謝能乘上淨重，
-          不是我們估的。品牌沒公布代謝能的那幾款，這一頁就沒有它們。
+          下面的罐數是拿我們讀過的那幾款實際算的。每一罐幾大卡是品牌公布的代謝能乘上淨重，不是我們估的。品牌沒公布代謝能的那幾款，這一頁就沒有它們。
         </p>
       </div>
 
@@ -111,8 +109,7 @@ export default function Page() {
         ))}
       </div>
       <p style={{ fontSize: 14, color: "var(--faint)", lineHeight: 1.9, margin: "12px 0 0" }}>
-        一天 {MOST.cans.toFixed(1)} 罐不是打錯字。那一款一罐 {MOST.p.price.unit}、{MOST.kc} 大卡，
-        水分 {MOST.p.spec.moisture}%。體重大的狗吃小罐，數字就是這樣。
+        一天 {MOST.cans.toFixed(1)} 罐不是打錯字。那一款一罐 {MOST.p.price.unit}、{MOST.kc} 大卡，水分 {MOST.p.spec.moisture}%。體重大的狗吃小罐，數字就是這樣。
       </p>
 
       <p style={S.lbl}>有一款不用我們算，包裝上寫了</p>
@@ -122,26 +119,21 @@ export default function Page() {
           <b>「依據愛犬體重，5 公斤愛犬 1 日建議食用 5 又 1/3 盒。」</b>
         </p>
         <p style={{ margin: "12px 0 0", fontSize: 15.5, lineHeight: 1.9 }}>
-          一盒 85 公克。5 又 1/3 盒是 453 公克，這是給一隻 5 公斤的狗。
-          換算到 {KG} 公斤，大約是一天 <b>{CESAR_AT_12} 盒</b>。
+          一盒 85 公克。5 又 1/3 盒是 453 公克，這是給一隻 5 公斤的狗。換算到 {KG} 公斤，大約是一天 <b>{CESAR_AT_12} 盒</b>。
         </p>
         <p style={{ margin: "12px 0 0", fontSize: 14, color: "var(--muted)", lineHeight: 1.9 }}>
-          換算照代謝率算：體重變 {Math.round((KG / CESAR_KG) * 10) / 10} 倍，熱量需求只變 {Math.round(KCAL_RATIO * 10) / 10} 倍，所以不能照體重直接乘。
-          這一款的粗蛋白是不低於 5%，成分表第一項是水。要吃那麼多盒，原因就在這裡。
+          換算照代謝率算：體重變 {Math.round((KG / CESAR_KG) * 10) / 10} 倍，熱量需求只變 {Math.round(KCAL_RATIO * 10) / 10} 倍，所以不能照體重直接乘。這一款的粗蛋白是不低於 5%，成分表第一項是水。要吃那麼多盒，原因就在這裡。
         </p>
       </div>
 
       <p style={S.lbl}>跟乾糧比</p>
       <p style={{ fontSize: 15.5, color: "var(--muted)", lineHeight: 1.9, margin: "0 0 14px" }}>
         同一隻 {KG} 公斤的狗，吃乾糧一天 <b style={{ color: "var(--ink)" }}>{DRY_G} 公克</b>，
-        大概是一個馬克杯的量。吃罐頭是 {FEWEST.cans.toFixed(1)} 到 {MOST.cans.toFixed(1)} 罐。
-        份量差這麼多，原因是水：罐頭有七成到將近九成是水，你買的重量大部分是水的重量。
+        大概是一個馬克杯的量。吃罐頭是 {FEWEST.cans.toFixed(1)} 到 {MOST.cans.toFixed(1)} 罐。份量差這麼多，原因是水：罐頭有七成到將近九成是水，你買的重量大部分是水的重量。
       </p>
       <div style={S.box}>
         <p style={{ margin: 0, fontSize: 15.5, lineHeight: 1.9 }}>
-          所以全吃罐頭一定比乾糧貴很多。原因在水，換哪個牌子都一樣。
-          大部分的人最後會走混餵：乾糧當底，罐頭拌一點。
-          混餵的比例怎麼抓，用下面的計算機。
+          所以全吃罐頭一定比乾糧貴很多。原因在水，換哪個牌子都一樣。大部分的人最後會走混餵：乾糧當底，罐頭拌一點。混餵的比例怎麼抓，用下面的計算機。
         </p>
       </div>
 
@@ -168,9 +160,7 @@ export default function Page() {
 
       <footer style={S.foot}>
         <p style={{ margin: 0 }}>
-          這一頁是估算，不是餵食指示。真正該看的是體態，還有獸醫怎麼說。
-          幼犬、懷孕、哺乳、慢性病的狗都不適用上面的係數。
-          每一罐的熱量照品牌公布的代謝能算，配方會改版，以你手上那一罐的標示為準。
+          這一頁是估算，不是餵食指示。真正該看的是體態，還有獸醫怎麼說。幼犬、懷孕、哺乳、慢性病的狗都不適用上面的係數。每一罐的熱量照品牌公布的代謝能算，配方會改版，以你手上那一罐的標示為準。
         </p>
       </footer>
     </main>

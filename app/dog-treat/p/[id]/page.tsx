@@ -77,8 +77,7 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
             </p>
             {p.spec.brandPerDay && (
               <p style={{ margin: "10px 0 0", fontSize: 14, color: "var(--muted)", lineHeight: 1.9, paddingTop: 10, borderTop: "1px solid var(--line)" }}>
-                品牌自己寫一天 {p.spec.brandPerDay} 支，而且要把正餐扣掉 {p.spec.kcalPer} 大卡。
-                扣了就沒問題，沒扣就是多出來的。
+                品牌自己寫一天 {p.spec.brandPerDay} 支，而且要把正餐扣掉 {p.spec.kcalPer} 大卡。扣了就沒問題，沒扣就是多出來的。
               </p>
             )}
           </>

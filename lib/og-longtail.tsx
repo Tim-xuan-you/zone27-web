@@ -20,7 +20,7 @@ import type { Species } from "./types";
 const CHARSET =
   [...BREEDS, ...CAT_BREEDS].map((b) => b.zh).join("") +
   [...ALLERGENS, ...CAT_ALLERGENS].map((a) => a.zh).join("") +
-  "飼料怎麼選過敏不含的狗貓先幫你刪掉款剩下附排除理由與購買時機建議進入裁決留下沒有一符合器0123456789，、。";
+  "飼料怎麼選過敏不含的狗貓先幫你刪掉款剩下附排除理由與購買時機建議一起比留下沒有一符合0123456789，、。";
 
 export function longtailParams(segments: 1 | 2, sp: Species = "dog") {
   // 類目還沒開張就不產生長尾頁，分享卡也一樣
@@ -49,8 +49,8 @@ export async function longtailCard(slug: string[], sp: Species = "dog") {
     kicker,
     headline: titleOf(p, sp),
     sub: v.survivors.length > 0
-      ? `${v.startCount} 款進入裁決，刪掉 ${cut} 款，剩下 ${v.survivors.length} 款`
-      : `${v.startCount} 款進入裁決，沒有一款符合`,
+      ? `${v.startCount} 款一起比，刪掉 ${cut} 款，剩下 ${v.survivors.length} 款`
+      : `${v.startCount} 款一起比，沒有一款符合`,
     fontText: CHARSET,
   });
 }

@@ -95,8 +95,7 @@ export default function Page() {
         第一次養狗，<br />先買這幾樣
       </h1>
       <p style={{ color: "var(--muted)", fontSize: 17, lineHeight: 1.9, margin: "0 0 12px", maxWidth: "42ch" }}>
-        剛帶回家的那幾天，真的要做決定的只有兩件事：吃什麼、零食要不要給。
-        每一樣直接給你一個答案，其他的照清單買就好。
+        剛帶回家的那幾天，真的要做決定的只有兩件事：吃什麼、零食要不要給。每一樣直接給你一個答案，其他的照清單買就好。
       </p>
 
       {/* ---------------- 1. 吃什麼 ---------------- */}
@@ -148,15 +147,13 @@ export default function Page() {
         </div>
       )}
       <p style={note}>
-        原本在收容所或前飼主那裡吃的那一包，第一個禮拜先不要換，環境已經變了，飼料再換容易拉肚子。
-        要換的時候新舊混著吃，大約一個禮拜換完。
+        原本在收容所或前飼主那裡吃的那一包，第一個禮拜先不要換，環境已經變了，飼料再換容易拉肚子。要換的時候新舊混著吃，大約一個禮拜換完。
       </p>
 
       <div style={{ ...S.box, marginTop: 14 }}>
         <p style={{ margin: 0, fontWeight: 700, fontSize: 17 }}>罐頭要不要買？可以不用</p>
         <p style={{ margin: "8px 0 0", fontSize: 15.5, lineHeight: 1.9 }}>
-          幼犬乾糧的營養本來就是完整的，只吃乾糧沒問題。想給罐頭，挑包裝寫<b>「主食罐」</b>的，
-          當配菜拌一點就好。
+          幼犬乾糧的營養本來就是完整的，只吃乾糧沒問題。想給罐頭，挑包裝寫<b>「主食罐」</b>的，當配菜拌一點就好。
         </p>
         <Link href="/dog-wet-food" style={{ ...link, display: "inline-block", marginTop: 8, marginLeft: 0 }}>我們讀過的狗主食罐 →</Link>
       </div>
@@ -166,8 +163,7 @@ export default function Page() {
       <div style={S.box}>
         <p style={{ margin: 0, fontWeight: 700, fontSize: 17 }}>前幾個月可以先不買</p>
         <p style={{ margin: "8px 0 0", fontSize: 15.5, lineHeight: 1.9 }}>
-          零食不是必需品。要訓練牠坐下、上廁所的時候，拿平常的飼料一顆一顆當獎勵就可以。
-          零食會吃掉正餐的份量，一天有上限。
+          零食不是必需品。要訓練牠坐下、上廁所的時候，拿平常的飼料一顆一顆當獎勵就可以。零食會吃掉正餐的份量，一天有上限。
         </p>
         <Link href="/dog-treat" style={{ ...link, display: "inline-block", marginTop: 8, marginLeft: 0 }}>每一款零食佔掉一天多少額度 →</Link>
       </div>
@@ -181,15 +177,13 @@ export default function Page() {
         </li>
         {CHEWS.length > 0 && (
           <li style={{ marginBottom: 10 }}>
-            <b>潔牙骨當成點心天天給。</b>潔牙骨一支的熱量很高。
-            我們讀的 {CHEWS.length} 款潔牙骨，照品牌自己標的適用體重算，有 {CHEW_OVER} 款一支就超過那隻狗一整天的零食額度。
+            <b>潔牙骨當成點心天天給。</b>潔牙骨一支的熱量很高。我們讀的 {CHEWS.length} 款潔牙骨，照品牌自己標的適用體重算，有 {CHEW_OVER} 款一支就超過那隻狗一整天的零食額度。
             <Link href="/dog-treat" style={link}>算給你看 →</Link>
           </li>
         )}
         {CANS.length > 0 && (
           <li>
-            <b>以為一罐罐頭就是一餐。</b>一罐看起來像一餐，其實差很遠。
-            一隻 12 公斤的成犬全吃罐頭，一天要 {Math.min(...CANS).toFixed(1)} 到 {Math.max(...CANS).toFixed(1)} 罐。
+            <b>以為一罐罐頭就是一餐。</b>一罐看起來像一餐，其實差很遠。一隻 12 公斤的成犬全吃罐頭，一天要 {Math.min(...CANS).toFixed(1)} 到 {Math.max(...CANS).toFixed(1)} 罐。
             <Link href="/dog-wet-food/how-much" style={link}>一天要幾罐 →</Link>
           </li>
         )}
@@ -210,9 +204,7 @@ export default function Page() {
 
       <p style={S.lbl}>這幾件要問獸醫</p>
       <p style={{ margin: 0, fontSize: 15.5, lineHeight: 1.9 }}>
-        打疫苗、驅蟲、什麼時候可以出門散步、什麼時候結紮，這些我們不講，每隻狗的狀況不一樣。
-        另外，狗依法要辦寵物登記（植入晶片），沒辦會被罰。
-        帶回家之後，先找一間離家近的獸醫，這幾件一起問、一起辦。
+        打疫苗、驅蟲、什麼時候可以出門散步、什麼時候結紮，這些我們不講，每隻狗的狀況不一樣。另外，狗依法要辦寵物登記（植入晶片），沒辦會被罰。帶回家之後，先找一間離家近的獸醫，這幾件一起問、一起辦。
       </p>
 
       <p style={S.lbl}>之後有狀況的話</p>

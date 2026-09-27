@@ -109,8 +109,7 @@ export default function Page() {
         第一次養貓，<br />先買這幾樣
       </h1>
       <p style={{ color: "var(--muted)", fontSize: 17, lineHeight: 1.9, margin: "0 0 12px", maxWidth: "42ch" }}>
-        剛帶回家的那幾天，真的要做決定的只有三件事：吃什麼、在哪裡上廁所、零食要不要給。
-        每一樣直接給你一個答案，其他的照清單買就好。
+        剛帶回家的那幾天，真的要做決定的只有三件事：吃什麼、在哪裡上廁所、零食要不要給。每一樣直接給你一個答案，其他的照清單買就好。
       </p>
       <p style={{ color: "var(--faint)", fontSize: 14, lineHeight: 1.8, margin: "0 0 8px" }}>
         下面的份量照一隻 {KITTEN_KG} 公斤、4 個月大左右的幼貓算。
@@ -143,16 +142,14 @@ export default function Page() {
         />
       )}
       <p style={note}>
-        原本在收容所或前飼主那裡吃的那一包，第一個禮拜先不要換，環境已經變了，飼料再換容易拉肚子。
-        要換的時候新舊混著吃，大約一個禮拜換完。
+        原本在收容所或前飼主那裡吃的那一包，第一個禮拜先不要換，環境已經變了，飼料再換容易拉肚子。要換的時候新舊混著吃，大約一個禮拜換完。
         <Link href="/cat-food/how-much" style={link}>照體重和月齡算一天吃多少 →</Link>
       </p>
 
       <div style={{ ...S.box, marginTop: 14 }}>
         <p style={{ margin: 0, fontWeight: 700, fontSize: 17 }}>罐頭要不要買？可以不用</p>
         <p style={{ margin: "8px 0 0", fontSize: 15.5, lineHeight: 1.9 }}>
-          幼貓乾糧的營養本來就是完整的，只吃乾糧沒問題。想給罐頭，一定要挑包裝寫<b>「主食罐」</b>的。
-          寫「副食罐」的是點心，只有肉和湯，長骨頭需要的鈣不夠。
+          幼貓乾糧的營養本來就是完整的，只吃乾糧沒問題。想給罐頭，一定要挑包裝寫<b>「主食罐」</b>的。寫「副食罐」的是點心，只有肉和湯，長骨頭需要的鈣不夠。
         </p>
         {WET && (
           <p style={{ margin: "10px 0 0", fontSize: 15.5, lineHeight: 1.9 }}>
@@ -183,8 +180,7 @@ export default function Page() {
       <div style={S.box}>
         <p style={{ margin: 0, fontWeight: 700, fontSize: 17 }}>前幾個月可以先不買</p>
         <p style={{ margin: "8px 0 0", fontSize: 15.5, lineHeight: 1.9 }}>
-          零食不是必需品。等牠大一點，要剪指甲、要訓練的時候再買就好。
-          給的時候記得零食會吃掉正餐的份量，一天有上限。
+          零食不是必需品。等牠大一點，要剪指甲、要訓練的時候再買就好。給的時候記得零食會吃掉正餐的份量，一天有上限。
         </p>
         <Link href="/cat-treat" style={{ ...link, display: "inline-block", marginTop: 8 }}>每一款零食一天可以給幾條，算好的在這裡 →</Link>
       </div>
@@ -193,8 +189,7 @@ export default function Page() {
       <p style={S.lbl}>新手最常買錯的三件事</p>
       <ol style={{ paddingLeft: 20, margin: 0, fontSize: 15.5, lineHeight: 1.95 }}>
         <li style={{ marginBottom: 10 }}>
-          <b>把副食罐當正餐。</b>看起來整塊肉、湯很多，很像比較好的罐頭。
-          我們讀到的副食罐，鈣不到主食罐的四十分之一，幼貓天天吃會缺鈣。
+          <b>把副食罐當正餐。</b>看起來整塊肉、湯很多，很像比較好的罐頭。我們讀到的副食罐，鈣不到主食罐的四十分之一，幼貓天天吃會缺鈣。
           <Link href="/cat-wet-food/complementary" style={link}>怎麼分辨 →</Link>
         </li>
         <li style={{ marginBottom: 10 }}>
@@ -225,9 +220,7 @@ export default function Page() {
 
       <p style={S.lbl}>這幾件要問獸醫</p>
       <p style={{ margin: 0, fontSize: 15.5, lineHeight: 1.9 }}>
-        打疫苗、驅蟲、什麼時候結紮、要不要做健康檢查，這些我們不講，每隻貓的狀況不一樣。
-        另外，貓從 2025 年起也要辦寵物登記（植入晶片），2026 年開始沒辦會被罰。
-        帶回家之後，先找一間離家近的獸醫，這幾件一起問、一起辦。
+        打疫苗、驅蟲、什麼時候結紮、要不要做健康檢查，這些我們不講，每隻貓的狀況不一樣。另外，貓從 2025 年起也要辦寵物登記（植入晶片），2026 年開始沒辦會被罰。帶回家之後，先找一間離家近的獸醫，這幾件一起問、一起辦。
       </p>
 
       <p style={S.lbl}>之後有狀況的話</p>

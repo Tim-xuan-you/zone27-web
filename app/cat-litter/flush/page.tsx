@@ -102,8 +102,7 @@ export default function Page() {
       </div>
 
       <p style={{ marginTop: 28, fontSize: 12.5, color: "var(--faint)", lineHeight: 1.9 }}>
-        材質照包裝與品牌官網。這一頁講的是「沖下去會不會卡」，不是在講哪一款比較好用。
-        我們只讀了這 {litters.length} 款，沒列出來的不代表可以沖。
+        材質照包裝與品牌官網。這一頁講的是「沖下去會不會卡」，不是在講哪一款比較好用。我們只讀了這 {litters.length} 款，沒列出來的不代表可以沖。
       </p>
     </main>
   );

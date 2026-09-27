@@ -86,9 +86,7 @@ export default function Page() {
           一天克數 = MER ÷ 熱量密度
         </div>
         <p style={{ margin: "14px 0 0", fontSize: 14, color: "var(--muted)", lineHeight: 1.9 }}>
-          RER 是靜止能量需求，MER 是維持能量需求。
-          代謝率跟的是體重的 0.75 次方，
-          所以體重翻倍，食量不會跟著翻倍。
+          RER 是靜止能量需求，MER 是維持能量需求。代謝率跟的是體重的 0.75 次方，所以體重翻倍，食量不會跟著翻倍。
         </p>
       </div>
 
@@ -108,19 +106,16 @@ export default function Page() {
         </table>
       </div>
       <p style={{ margin: "14px 0 0", fontSize: 14, color: "var(--muted)", lineHeight: 1.9 }}>
-        這幾個數字取自一般獸醫營養學教材的區間中間值。工作犬、活動量特別大的狗會更高，
-        真的要精準就問你的獸醫。
+        這幾個數字取自一般獸醫營養學教材的區間中間值。工作犬、活動量特別大的狗會更高，真的要精準就問你的獸醫。
       </p>
 
       <p style={S.lbl}>「體重乘以 2%」為什麼不夠好</p>
       <div style={box}>
         <p style={{ margin: 0, fontSize: 15.5, lineHeight: 1.95 }}>
-          那個算法好記，但<b>偏高</b>。10 公斤的狗照 2% 算是 200 克，
-          用能量公式算大約 165 克，<b>差了兩成，長期會胖</b>。
+          那個算法好記，但<b>偏高</b>。10 公斤的狗照 2% 算是 200 克，用能量公式算大約 165 克，<b>差了兩成，長期會胖</b>。
         </p>
         <p style={{ margin: "12px 0 0", fontSize: 15.5, color: "var(--muted)", lineHeight: 1.95 }}>
-          而且體重越大差越多，因為代謝率跟體重不是線性關係。
-          小型犬每公斤要吃得比大型犬多，這件事 2% 完全表達不出來。
+          而且體重越大差越多，因為代謝率跟體重不是線性關係。小型犬每公斤要吃得比大型犬多，這件事 2% 完全表達不出來。
         </p>
       </div>
 
@@ -128,13 +123,10 @@ export default function Page() {
       <div style={{ ...box, borderColor: "var(--warn)", background: "var(--warn-soft)" }}>
         <p style={{ margin: 0, fontSize: 15.5, lineHeight: 1.95 }}>
           <b>這包你的狗要吃超過 {FRESH_DAYS} 天，就不要買。</b>
-          乾飼料開封後油脂會氧化，放久了狗會越來越不愛吃，
-          很多人以為是這牌子不好，其實只是放太久了。
+          乾飼料開封後油脂會氧化，放久了狗會越來越不愛吃，很多人以為是這牌子不好，其實只是放太久了。
         </p>
         <p style={{ margin: "12px 0 0", fontSize: 15.5, color: "var(--muted)", lineHeight: 1.95 }}>
-          大包每公斤比較便宜是真的，但便宜的前提是吃得完。
-          這也是為什麼我們在推薦規格的時候，不會推超過 {FRESH_DAYS} 天的那一包，
-          就算它每公斤最划算。
+          大包每公斤比較便宜是真的，但便宜的前提是吃得完。這也是為什麼我們在推薦規格的時候，不會推超過 {FRESH_DAYS} 天的那一包，就算它每公斤最划算。
         </p>
       </div>
 
@@ -169,8 +161,7 @@ export default function Page() {
         fontSize: 12.5, color: "var(--faint)", lineHeight: 1.9,
       }}>
         <p style={{ margin: 0 }}>
-          這一頁的算式跟商品頁上的「這包大約吃 N 天」是同一個函式，不會給你兩種答案。
-          估算不是餵食指示，牠的體態和你的獸醫才是依據。
+          這一頁的算式跟商品頁上的「這包大約吃 N 天」是同一個函式，不會給你兩種答案。估算不是餵食指示，牠的體態和你的獸醫才是依據。
         </p>
       </footer>
     </main>

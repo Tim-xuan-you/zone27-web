@@ -86,12 +86,10 @@ export default function Page() {
       <p style={S.lbl}>網路上的算式，很多是照狗算的</p>
       <div style={box}>
         <p style={{ margin: 0, fontSize: 15.5, lineHeight: 1.95 }}>
-          算式一樣，<b>係數差很多</b>。已結紮的成犬乘 1.6，已結紮的成貓只乘 1.2。
-          同樣 4 公斤，照狗的係數算會多餵三成，一年下來就是一隻圓滾滾的貓。
+          算式一樣，<b>係數差很多</b>。已結紮的成犬乘 1.6，已結紮的成貓只乘 1.2。同樣 4 公斤，照狗的係數算會多餵三成，一年下來就是一隻圓滾滾的貓。
         </p>
         <p style={{ margin: "12px 0 0", fontSize: 15.5, color: "var(--muted)", lineHeight: 1.95 }}>
-          台灣的家貓大多結紮、大多住室內，活動量本來就小。
-          包裝背面的餵食表通常是給一般成貓的，結紮的貓照表餵，多半會偏多。
+          台灣的家貓大多結紮、大多住室內，活動量本來就小。包裝背面的餵食表通常是給一般成貓的，結紮的貓照表餵，多半會偏多。
         </p>
       </div>
 
@@ -103,9 +101,7 @@ export default function Page() {
           一天克數 = MER ÷ 熱量密度
         </div>
         <p style={{ margin: "14px 0 0", fontSize: 14, color: "var(--muted)", lineHeight: 1.9 }}>
-          RER 是靜止能量需求，MER 是維持能量需求，狗跟貓用同一條公式。
-          熱量密度取 {KCAL_PER_KG.toLocaleString()} 大卡／公斤當中間值，貓乾糧實際上從 3,400 到 4,400 都有。
-          我們讀過的那幾款有公布熱量的，推薦時會照那一款自己的熱量算。
+          RER 是靜止能量需求，MER 是維持能量需求，狗跟貓用同一條公式。熱量密度取 {KCAL_PER_KG.toLocaleString()} 大卡／公斤當中間值，貓乾糧實際上從 3,400 到 4,400 都有。我們讀過的那幾款有公布熱量的，推薦時會照那一款自己的熱量算。
         </p>
       </div>
 
@@ -125,15 +121,13 @@ export default function Page() {
         </table>
       </div>
       <p style={{ margin: "14px 0 0", fontSize: 14, color: "var(--muted)", lineHeight: 1.9 }}>
-        成貓、幼貓、減重這幾格取自世界小動物獸醫協會（WSAVA）的建議，高齡那一格是我們取的中間值。
-        高齡貓的差異很大，有的越老越瘦反而要吃多一點，真的要精準就問你的獸醫。
+        成貓、幼貓、減重這幾格取自世界小動物獸醫協會（WSAVA）的建議，高齡那一格是我們取的中間值。高齡貓的差異很大，有的越老越瘦反而要吃多一點，真的要精準就問你的獸醫。
       </p>
 
       <p style={S.lbl}>乾濕混餵的話</p>
       <div style={box}>
         <p style={{ margin: 0, fontSize: 15.5, lineHeight: 1.95 }}>
-          上面算的是<b>全部熱量都從乾飼料來</b>。有餵罐頭或主食餐包的，
-          先把那部分的熱量從總量扣掉（包裝背面有寫），剩下的才換成乾飼料。
+          上面算的是<b>全部熱量都從乾飼料來</b>。有餵罐頭或主食餐包的，先把那部分的熱量從總量扣掉（包裝背面有寫），剩下的才換成乾飼料。
         </p>
         <p style={{ margin: "12px 0 0", fontSize: 15.5, color: "var(--muted)", lineHeight: 1.95 }}>
           很多貓變胖是這樣來的：乾飼料照原本的量，罐頭另外加，等於一天多吃一餐。
@@ -144,12 +138,10 @@ export default function Page() {
       <div style={{ ...box, borderColor: "var(--warn)", background: "var(--warn-soft)" }}>
         <p style={{ margin: 0, fontSize: 15.5, lineHeight: 1.95 }}>
           <b>一隻貓吃得很少，大包裝很容易放超過 {FRESH_DAYS} 天。</b>
-          {EX_KG} 公斤的貓一天大約 {EX_G} 克，{FRESH_DAYS} 天吃不到 {MAX_BAG} 公斤。
-          5.4 公斤那種大包，一隻貓要吃快三個月。
+          {EX_KG} 公斤的貓一天大約 {EX_G} 克，{FRESH_DAYS} 天吃不到 {MAX_BAG} 公斤。5.4 公斤那種大包，一隻貓要吃快三個月。
         </p>
         <p style={{ margin: "12px 0 0", fontSize: 15.5, color: "var(--muted)", lineHeight: 1.95 }}>
-          開封後的乾飼料油脂會氧化，放久了貓會越來越不愛吃，很多人以為是牠挑嘴，其實只是放太久了。
-          只養一隻的話，2 公斤以下的包裝最剛好。
+          開封後的乾飼料油脂會氧化，放久了貓會越來越不愛吃，很多人以為是牠挑嘴，其實只是放太久了。只養一隻的話，2 公斤以下的包裝最剛好。
         </p>
       </div>
 
@@ -184,8 +176,7 @@ export default function Page() {
         fontSize: 12.5, color: "var(--faint)", lineHeight: 1.9,
       }}>
         <p style={{ margin: 0 }}>
-          這一頁的算式跟商品卡上的「這包大約吃 N 天」是同一個函式，不會給你兩種答案。
-          估算不是餵食指示，牠的體態和你的獸醫才是依據。
+          這一頁的算式跟商品卡上的「這包大約吃 N 天」是同一個函式，不會給你兩種答案。估算不是餵食指示，牠的體態和你的獸醫才是依據。
         </p>
       </footer>
     </main>

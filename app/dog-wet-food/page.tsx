@@ -87,8 +87,7 @@ export default function Page() {
         {TITLE}
       </h1>
       <p style={{ color: "var(--muted)", fontSize: 17, lineHeight: 1.9, margin: "0 0 28px", maxWidth: "42ch" }}>
-        我們讀的這 {all.length} 款狗罐頭，全部自稱主食罐。
-        坑在別的地方：名字寫鹿肉、鱉肉的，成分表前兩項常常是雞。
+        我們讀的這 {all.length} 款狗罐頭，全部自稱主食罐。坑在別的地方：名字寫鹿肉、鱉肉的，成分表前兩項常常是雞。
       </p>
 
       <Decider lockSpecies defaultSpecies="dog" defaultForm="wet" soonHint={false} />
@@ -123,8 +122,7 @@ export default function Page() {
         fontSize: 12.5, color: "var(--faint)", lineHeight: 1.9,
       }}>
         <p style={{ margin: 0 }}>
-          標示資料取自台灣通路與品牌台灣官網的中文標示。
-          配方會改版，以你手上那一罐的標示為準。
+          標示資料取自台灣通路與品牌台灣官網的中文標示。配方會改版，以你手上那一罐的標示為準。
         </p>
       </footer>
     </main>

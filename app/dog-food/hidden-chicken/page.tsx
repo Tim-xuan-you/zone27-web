@@ -84,8 +84,7 @@ export default function Page() {
       <div style={box}>
         <p style={{ margin: 0, fontSize: 15.5, lineHeight: 1.9 }}>
           <b>商品名上的那塊肉是口味，不是成分清單。</b>
-          原廠的配方名跟台灣通路掛的品名常常對不上。同一款飼料，有的賣場老實寫「火雞+雞肉」，
-          有的就只留「火雞」兩個字。你在哪一家看到，決定你會不會踩到。
+          原廠的配方名跟台灣通路掛的品名常常對不上。同一款飼料，有的賣場老實寫「火雞+雞肉」，有的就只留「火雞」兩個字。你在哪一家看到，決定你會不會踩到。
         </p>
         <p style={{ margin: "12px 0 0", fontSize: 15.5, lineHeight: 1.9, color: "var(--muted)" }}>
           另一個常見的誤會：<b style={{ color: "var(--ink)" }}>「無穀」不等於「無雞」</b>。
@@ -161,8 +160,7 @@ export default function Page() {
       <div style={box}>
         <p style={{ margin: 0, fontSize: 15.5, lineHeight: 1.9 }}>
           含雞肉本身不是缺點。上面幾款有的品質很好，一隻不對雞過敏的狗吃了完全沒問題。
-          <b>我們在講的是名字跟內容物對不上這件事</b>。只有當你正在排查過敏原、
-          或已經確定你的狗對雞有反應的時候，這才是問題。
+          <b>我們在講的是名字跟內容物對不上這件事</b>。只有當你正在排查過敏原、或已經確定你的狗對雞有反應的時候，這才是問題。
         </p>
         <p style={{ margin: "12px 0 0", fontSize: 15.5, lineHeight: 1.9, color: "var(--muted)" }}>
           發現寫錯或資料過期，直接跟我們說，我們會改並且標日期。成分表會改版，我們不會假裝這一頁永遠是對的。
@@ -195,8 +193,7 @@ export default function Page() {
         fontSize: 12.5, color: "var(--faint)", lineHeight: 1.9,
       }}>
         <p style={{ margin: 0 }}>
-          成分資料取自品牌官網與通路商品頁，每一筆都寫了查核日期。
-          配方會改版，以你手上那一包的包裝標示為準。
+          成分資料取自品牌官網與通路商品頁，每一筆都寫了查核日期。配方會改版，以你手上那一包的包裝標示為準。
         </p>
       </footer>
     </main>

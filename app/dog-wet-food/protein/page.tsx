@@ -73,8 +73,7 @@ export default function Page() {
         罐子上的蛋白質差三倍，<br />大部分是水
       </h1>
       <p style={{ color: "var(--muted)", fontSize: 17, lineHeight: 1.9, margin: "0 0 18px", maxWidth: "42ch" }}>
-        兩罐並排，一罐寫蛋白質 {AF_HI.asFed}%，一罐寫 {AF_LO.asFed}%。
-        直覺會選前面那一罐。先別急，翻過去看水分那一行。
+        兩罐並排，一罐寫蛋白質 {AF_HI.asFed}%，一罐寫 {AF_LO.asFed}%。直覺會選前面那一罐。先別急，翻過去看水分那一行。
       </p>
 
       <div style={S.box}>
@@ -82,8 +81,7 @@ export default function Page() {
           罐子上差 {AF_RATIO} 倍，扣掉水分只差 {DM_RATIO} 倍。
         </p>
         <p style={{ margin: "12px 0 0", fontSize: 15.5, lineHeight: 1.9, color: "var(--muted)" }}>
-          這 {ROWS.length} 款的水分從 {W_LO}% 到 {W_HI}%。水多的那一罐，每一口吃進去的肉就少，
-          罐子上的蛋白質自然低。把水拿掉，只看剩下的乾物質，才是在比配方本身。
+          這 {ROWS.length} 款的水分從 {W_LO}% 到 {W_HI}%。水多的那一罐，每一口吃進去的肉就少，罐子上的蛋白質自然低。把水拿掉，只看剩下的乾物質，才是在比配方本身。
         </p>
       </div>
 
@@ -96,8 +94,7 @@ export default function Page() {
           水分 {DM_HI.water}%，{rankWater(DM_HI) === 1 ? "是最高的" : `排第 ${rankWater(DM_HI)} 高`}。扣掉水分，蛋白質是 <b>{DM_HI.dm}%</b>，排第一。
         </p>
         <p style={{ margin: "12px 0 0", fontSize: 14, lineHeight: 1.9, color: "var(--muted)" }}>
-          蛋白質比例高，不代表一罐很營養：它的脂肪也很低，一罐熱量很少，
-          一隻中型犬要吃很多罐才夠一天。比例是比例，份量是份量，兩件事分開看。
+          蛋白質比例高，不代表一罐很營養：它的脂肪也很低，一罐熱量很少，一隻中型犬要吃很多罐才夠一天。比例是比例，份量是份量，兩件事分開看。
         </p>
       </div>
 
@@ -126,8 +123,7 @@ export default function Page() {
         ))}
       </div>
       <p style={{ fontSize: 14, color: "var(--faint)", lineHeight: 1.9, margin: "12px 0 0" }}>
-        標「大概」的那幾款，品牌公布的是「蛋白質最少多少、水分最多多少」這種範圍，不是實測值。
-        拿範圍去除，算出來只能當參考。
+        標「大概」的那幾款，品牌公布的是「蛋白質最少多少、水分最多多少」這種範圍，不是實測值。拿範圍去除，算出來只能當參考。
       </p>
 
       <p style={S.lbl}>最低的那一款，兩種算法都最低</p>
@@ -140,8 +136,7 @@ export default function Page() {
         </p>
         {LO_IS_CESAR ? (
           <p style={{ margin: "12px 0 0", fontSize: 14, lineHeight: 1.9 }}>
-            它標的是「100% 營養完整均衡」，這一點我們沒有理由懷疑。
-            只是要吃到一天的量，份量會很驚人。
+            它標的是「100% 營養完整均衡」，這一點我們沒有理由懷疑。只是要吃到一天的量，份量會很驚人。
             <Link href="/dog-wet-food/how-much" style={{ color: "var(--accent)" }}>品牌自己標了一天幾盒 →</Link>
           </p>
         ) : DM_LO.p.knownIssues && (
@@ -155,12 +150,10 @@ export default function Page() {
           <b>找到蛋白質和水分兩行。</b>罐頭一定會寫水分，沒寫的那一罐根本沒辦法比，先放下。
         </li>
         <li style={{ marginBottom: 8 }}>
-          <b>蛋白質 ÷（100 − 水分）。</b>水分 80% 就除以 20，水分 75% 就除以 25。
-          罐子上寫 10%、水分 80% 的，扣掉水分是 50%。
+          <b>蛋白質 ÷（100 − 水分）。</b>水分 80% 就除以 20，水分 75% 就除以 25。罐子上寫 10%、水分 80% 的，扣掉水分是 50%。
         </li>
         <li>
-          <b>比完比例，再看一罐幾大卡。</b>比例高、熱量低的罐頭一天要吃很多罐，
-          最後花的錢跟你想的不一樣。
+          <b>比完比例，再看一罐幾大卡。</b>比例高、熱量低的罐頭一天要吃很多罐，最後花的錢跟你想的不一樣。
         </li>
       </ol>
 
@@ -183,8 +176,7 @@ export default function Page() {
 
       <footer style={S.foot}>
         <p style={{ margin: 0 }}>
-          數字取自台灣通路商品頁上的中文標示。蛋白質是粗蛋白，不是可消化蛋白，
-          品質好壞要看成分表，這一頁只比份量。配方會改版，以你手上那一罐的標示為準。
+          數字取自台灣通路商品頁上的中文標示。蛋白質是粗蛋白，不是可消化蛋白，品質好壞要看成分表，這一頁只比份量。配方會改版，以你手上那一罐的標示為準。
         </p>
       </footer>
     </main>
