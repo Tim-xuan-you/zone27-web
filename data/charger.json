@@ -567,6 +567,66 @@
           }
         ]
       }
+    },
+    {
+      "id": "ch-12",
+      "brand": "台達電 Innergie",
+      "name": "C10 Duo 100W 雙孔 USB-C 充電器（摺疊版）",
+      "model": "C10 Duo II",
+      "totalW": 100,
+      "ports": [
+        {
+          "id": "C1",
+          "kind": "C",
+          "w": 100,
+          "pps": 63
+        },
+        {
+          "id": "C2",
+          "kind": "C",
+          "w": 100,
+          "pps": 63
+        }
+      ],
+      "combos": [
+        {
+          "use": [
+            "C1",
+            "C2"
+          ],
+          "w": {
+            "C1": 65,
+            "C2": 30
+          }
+        },
+        {
+          "use": [
+            "C1",
+            "C2"
+          ],
+          "w": {
+            "C1": 45,
+            "C2": 45
+          }
+        }
+      ],
+      "listPrice": 2490,
+      "weightG": 230,
+      "sizeMm": "67 × 56 × 30.4",
+      "back": "MacBook Air、MacBook Pro 14 吋插它都充最快，還多一個孔可以同時充手機",
+      "dealbreaker": "你要充 16 吋 MacBook Pro（要 140W），或是要 iPhone 18 Pro 充最快（官網沒寫 AVS）",
+      "knownIssues": "官方寫的：單孔最高 100W；兩孔一起插，充電器看兩邊要多少，自動切成 65W＋30W 或 45W＋45W；PPS 5–21V 3A（最多 63W）。官網沒寫 AVS。台達電是台灣的牌子，這一顆有摺疊插腳。",
+      "searchAs": "台達 Innergie C10 Duo 摺疊版",
+      "refs": [
+        "https://innergie.com/tw/product/c10-duoii-100w-usbc-power-adapter-fold/"
+      ],
+      "checkedAt": "2026-09-27",
+      "price": {
+        "unit": "1 顆",
+        "checkedAt": "2026-09-27",
+        "merchants": []
+      },
+      "awaitingLink": true
     }
   ]
 }

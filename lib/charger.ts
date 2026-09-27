@@ -202,15 +202,22 @@ export interface Got {
 }
 
 /** 某個孔在「這幾個孔一起插」的時候，官方寫的上限。null 代表官方沒寫這個組合 */
-function limitsOf(c: Charger, used: string[]): { w: number; pps?: number; avs?: number }[] | null {
+/**
+ * 這幾個孔一起插，每個孔各剩多少。回傳每一種官方寫的分配（沒寫就是 null）。
+ *
+ * 2026-09-27：台達 C10 Duo 兩孔一起插，官方寫「65W＋30W／30W＋65W／45W＋45W」，
+ * 由充電器看兩邊要多少自動切換。以前一組孔只能記一種分配，現在一組孔可以記好幾種，
+ * 挑對這幾台最好的那一種（充電器自己就是這樣切的）。
+ */
+function limitsOf(c: Charger, used: string[]): { w: number; pps?: number; avs?: number }[][] | null {
   if (used.length === 1) {
     const p = c.ports.find((x) => x.id === used[0])!;
-    return [{ w: p.w, pps: p.pps, avs: p.avs }];
+    return [[{ w: p.w, pps: p.pps, avs: p.avs }]];
   }
   const key = [...used].sort().join("+");
-  const combo = c.combos.find((k) => [...k.use].sort().join("+") === key);
-  if (!combo) return null;
-  return used.map((id) => ({ w: combo.w[id] ?? 0, pps: combo.pps?.[id], avs: combo.avs?.[id] }));
+  const combos = c.combos.filter((k) => [...k.use].sort().join("+") === key);
+  if (!combos.length) return null;
+  return combos.map((combo) => used.map((id) => ({ w: combo.w[id] ?? 0, pps: combo.pps?.[id], avs: combo.avs?.[id] })));
 }
 
 function judge(d: Device, kind: PortKind, lim: { w: number; pps?: number; avs?: number }, alone: boolean): { tier: Tier; why: string; tech: string } {
@@ -297,14 +304,16 @@ export function fit(c: Charger, devices: Device[], together = true): Fit {
   let bestScore = -1;
   let unknown = false;
   for (const arr of arrangements(devices.length, c.ports.map((p) => p.id))) {
-    const lims = limitsOf(c, arr);
-    if (!lims) { unknown = true; continue; }
-    const got = devices.map((d, i) => {
-      const port = c.ports.find((p) => p.id === arr[i])!;
-      return { device: d, port: port.id, w: lims[i].w, ...judge(d, port.kind, lims[i], false) };
-    });
-    const s = got.reduce((a, g) => a + SCORE[g.tier] * 10 + g.w / 100, 0);
-    if (s > bestScore) { bestScore = s; best = got; }
+    const modes = limitsOf(c, arr);
+    if (!modes) { unknown = true; continue; }
+    for (const lims of modes) {
+      const got = devices.map((d, i) => {
+        const port = c.ports.find((p) => p.id === arr[i])!;
+        return { device: d, port: port.id, w: lims[i].w, ...judge(d, port.kind, lims[i], false) };
+      });
+      const s = got.reduce((a, g) => a + SCORE[g.tier] * 10 + g.w / 100, 0);
+      if (s > bestScore) { bestScore = s; best = got; }
+    }
   }
   if (!best) return { charger: c, got: null, gap: unknown ? "官方沒寫這樣一起插，每個孔各剩幾瓦" : "插不下", fast: 0, score: -1, watts: 0 };
   return summarize(c, best);

@@ -2861,6 +2861,31 @@
           "soldOut": "2026-09-27 Tim 產了連結，整頁售完"
         }
       ]
+    },
+    {
+      "id": "ch-12",
+      "label": "台達電 Innergie C10 Duo 100W 摺疊版（充電器）",
+      "why": "MacBook Air、MacBook Pro 14 吋插它都充最快，比 Apple 便宜、多一個孔",
+      "checkedAt": "2026-09-27",
+      "note": "要摺疊版（C10 Duo II），不是轉換版。一般賣家開一千出頭的比官方便宜四成以上、有的寫近全新，不收；商城和官方旗艦店不受「便宜兩成」的限制。",
+      "candidates": [
+        {
+          "shop": "好買好物",
+          "shopId": "35720891",
+          "channel": "mall",
+          "price": 1680,
+          "unit": "規格選「C10 Duo (摺疊版),充電器單品」（同一家也有附線的組合，比較貴）",
+          "url": "https://shopee.tw/product/35720891/28204211462"
+        },
+        {
+          "shop": "台達電子Innergie官方旗艦店",
+          "shopId": "992256455",
+          "channel": "mall",
+          "price": 2490,
+          "unit": "官方旗艦店，摺疊版",
+          "url": "https://shopee.tw/product/992256455/25028042203"
+        }
+      ]
     }
   ]
 }
