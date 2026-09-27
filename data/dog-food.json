@@ -3,7 +3,7 @@
     "category": "dog-food",
     "note": "由 data/dog-food.csv 產生，不要直接改這個檔。改 CSV 之後跑 npm run data:import。",
     "generatedAt": "2026-09-27",
-    "count": 15,
+    "count": 16,
     "pricePolicy": "人工複查，不爬蟲。checkedAt 誠實顯示於前端。"
   },
   "products": [
@@ -1049,6 +1049,74 @@
       "searchAs": "歐睿健 Orijen 小型成犬 11種鮮雞魚",
       "chicken": {
         "status": "chicken"
+      }
+    },
+    {
+      "id": "df-16",
+      "species": "dog",
+      "brand": "Blackwood 柏萊富",
+      "name": "功能性全齡 護膚亮毛配方（羊肉＋糙米）",
+      "spec": {
+        "protein": 24,
+        "fat": 14,
+        "carb": 41,
+        "omega3": 1,
+        "phosphorus": 0,
+        "proteinSources": [
+          "lamb",
+          "salmon"
+        ],
+        "singleSource": false,
+        "pulses": "none",
+        "grainFree": false,
+        "lifeStage": [
+          "all"
+        ],
+        "bodySize": [
+          "small",
+          "medium",
+          "large"
+        ],
+        "prescription": false
+      },
+      "reports": {
+        "total": 0,
+        "palatability": 0,
+        "looseStool": 0
+      },
+      "price": {
+        "unit": "2kg",
+        "checkedAt": "2026-09-27",
+        "merchants": [
+          {
+            "id": "m1",
+            "label": "萬倍富寵物用品店（蝦皮商城）",
+            "unit": "2.2kg",
+            "amount": 1120,
+            "note": "規格選「2.2KG」",
+            "affiliateUrl": "https://s.shopee.tw/1BMfdDpo6s?share_channel_code=6",
+            "anchor": "safe",
+            "soldOut": true,
+            "checkedAt": "2026-09-27"
+          },
+          {
+            "id": "m2",
+            "label": "萬倍富寵物用品店（蝦皮商城）",
+            "unit": "6.8kg",
+            "amount": 2320,
+            "note": "規格選「6.8KG」",
+            "affiliateUrl": "https://s.shopee.tw/1BMfdDpo6s?share_channel_code=6",
+            "anchor": "value",
+            "soldOut": true,
+            "checkedAt": "2026-09-27"
+          }
+        ]
+      },
+      "dealbreaker": "你的狗對羊肉或鮭魚過敏。第一項是濃縮羊肉，第四項是濃縮鮭魚。",
+      "knownIssues": "肉是羊和鮭魚，整張成分表找不到雞，油脂用菜籽油。同牌子的「特調全齡犬配方」名字寫羊肉＋糙米＋雞肉，那一款有雞，別拿錯。有糙米、小米、高粱、燕麥，不是無穀。官網沒寫灰分和磷，碳水是我們用其他數字推算的（灰分當 7%）。",
+      "searchAs": "柏萊富 護膚亮毛 羊肉 糙米",
+      "chicken": {
+        "status": "clean"
       }
     }
   ]

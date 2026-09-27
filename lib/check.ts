@@ -1,6 +1,6 @@
 import type { Product, ProteinSource } from "./types";
 import { catalog, catalogOf, constraintsFor } from "./catalog";
-import { adjudicate, anchorOf, formOf, pricePerKg, recommendable, unitOf } from "./engine";
+import { adjudicate, anchorOf, formOf, pricePerKg, recommendable, unitOf, inStock } from "./engine";
 import { categoryOf } from "./categories";
 import { meatsFrom, meatsOf, productHref } from "./labels";
 import { chickenStatusOf, nameMeatsOf, NAME_HAS_CHICKEN } from "./chicken";
@@ -90,7 +90,9 @@ function altsFor(p: Pick<Product, "id" | "species" | "brand"> & { form: "dry" | 
   const rest = clean
     .filter((x) => x.id !== v.pick?.id && !sameBrand.some((s) => s.id === x.id))
     .sort((a, b) => (perKgOf(a) ?? 1e9) - (perKgOf(b) ?? 1e9));
-  const ordered = [...sameBrand, ...first.filter((x) => !sameBrand.some((s) => s.id === x.id)), ...rest];
+  const all = [...sameBrand, ...first.filter((x) => !sameBrand.some((s) => s.id === x.id)), ...rest];
+  // 有貨的排前面（2026-09-27）：全部賣完的那幾款照樣可以列，但不要擠掉有貨的
+  const ordered = [...all.filter(inStock), ...all.filter((x) => !inStock(x))];
   return ordered.slice(0, 3).map((x) => ({
     id: x.id, brand: x.brand, name: x.name, href: productHref(x), per: form === "dry" ? perKgOf(x) : null,
   }));
@@ -132,6 +134,9 @@ function readOnly(): CheckItem[] {
   return (extra.items as Extra[]).map((x) => {
     // 補成完整商品之後，這裡那一筆要刪掉。忘了刪就在建置時擋下來，同一款不能出現兩次
     if (ids.has(x.id)) throw new Error(`check-extra.json 的 ${x.id} 跟商品資料撞號`);
+    // 2026-09-27：planId 那一款建成商品之後，這一筆也要拿掉，不然查藏雞頁會出現兩次
+    const plan = (x as { planId?: string }).planId;
+    if (plan && ids.has(plan)) throw new Error(`check-extra.json 的 ${x.id} 已經建成商品 ${plan}，這一筆要拿掉`);
     const proteins = x.proteins as ProteinSource[];
     const status = chickenStatusOf(x.name, proteins, [x.verdict, ...x.found].join(" "));
     return {

@@ -1,7 +1,7 @@
 {
   "checkedAt": "2026-09-19",
   "filledAt": "2026-09-27",
-  "total": 169,
+  "total": 171,
   "bad": 0,
   "rows": [
     {
@@ -2198,6 +2198,32 @@
       "status": 200,
       "finalUrl": "https://shopee.tw/opaanlp/3629645/1409206645",
       "item": "3629645/1409206645",
+      "verdict": "ok",
+      "note": ""
+    },
+    {
+      "productId": "df-16",
+      "brand": "Blackwood 柏萊富",
+      "name": "功能性全齡 護膚亮毛配方（羊肉＋糙米）",
+      "merchantId": "m1",
+      "label": "萬倍富寵物用品店（蝦皮商城）",
+      "url": "https://s.shopee.tw/1BMfdDpo6s?share_channel_code=6",
+      "status": 200,
+      "finalUrl": "https://shopee.tw/opaanlp/8730825/273268240",
+      "item": "8730825/273268240",
+      "verdict": "ok",
+      "note": ""
+    },
+    {
+      "productId": "df-16",
+      "brand": "Blackwood 柏萊富",
+      "name": "功能性全齡 護膚亮毛配方（羊肉＋糙米）",
+      "merchantId": "m2",
+      "label": "萬倍富寵物用品店（蝦皮商城）",
+      "url": "https://s.shopee.tw/1BMfdDpo6s?share_channel_code=6",
+      "status": 200,
+      "finalUrl": "https://shopee.tw/opaanlp/8730825/273268240",
+      "item": "8730825/273268240",
       "verdict": "ok",
       "note": ""
     }

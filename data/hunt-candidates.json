@@ -265,7 +265,8 @@
           "shopId": "8730825",
           "price": 1120,
           "unit": "護膚亮毛 羊肉＋糙米，比價站寫 2.2KG，點開看是不是新包裝 2kg",
-          "url": "https://shopee.tw/product/8730825/273268240"
+          "url": "https://shopee.tw/product/8730825/273268240",
+          "soldOut": "2026-09-27 Tim 截圖：2.2KG、6.8KG 都售完（這一頁產得出來）"
         },
         {
           "channel": "mall",
@@ -290,6 +291,22 @@
           "price": 1050,
           "unit": "4.5 磅（2kg）",
           "url": "https://shopee.tw/product/372967113/15155896903"
+        },
+        {
+          "channel": "seller",
+          "shop": "🐾萌寵派對🐾",
+          "shopId": "744753630",
+          "price": 1350,
+          "unit": "新包裝，選「護膚亮毛（羊肉＋糙米）4.5 磅／2kg」",
+          "url": "https://shopee.tw/product/744753630/21538361282"
+        },
+        {
+          "channel": "seller",
+          "shop": "萌寵汪星人",
+          "shopId": "372720605",
+          "price": 1350,
+          "unit": "選「功能性全齡護膚亮毛配方 4.5 磅／2kg」",
+          "url": "https://shopee.tw/product/372720605/16392918371"
         }
       ],
       "checkedAt": "2026-09-27"
