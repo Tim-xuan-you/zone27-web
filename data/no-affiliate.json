@@ -1072,6 +1072,18 @@
       "shop": "好買好物",
       "shopId": "35720891",
       "at": "2026-09-27"
+    },
+    {
+      "productId": "ch-12",
+      "shop": "qwert1357",
+      "shopId": "70632131",
+      "at": "2026-09-27"
+    },
+    {
+      "productId": "ch-12",
+      "shop": "小松鼠 Little squirrel",
+      "shopId": "59983609",
+      "at": "2026-09-27"
     }
   ]
 }
