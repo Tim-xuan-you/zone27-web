@@ -95,8 +95,8 @@ interface Row {
 }
 
 // df- 狗飼料、cf- 貓飼料、cw- 貓主食罐。前綴從 lib/categories 讀，加類目不用改這裡
-// ch- 充電器不在寵物的類目表裡（那張表綁物種），另外加（2026-09-26）
-const RE_ID = new RegExp(`^((?:${[...CATEGORIES.map((c) => c.idPrefix), "ch"].join("|")})-\\d+)$`, "i");
+// ch- 充電器、pb- 行動電源不在寵物的類目表裡（那張表綁物種），另外加（2026-09-26、2026-09-27）
+const RE_ID = new RegExp(`^((?:${[...CATEGORIES.map((c) => c.idPrefix), "ch", "pb"].join("|")})-\\d+)$`, "i");
 const RE_URL = /^https?:\/\/\S+$/i;
 // 罐頭整箱寫成「80g×24」「85g x 12入」，後面那段可有可無
 // 貓砂論公升（7L、13L），所以 L 也要認得（2026-09-19）
@@ -201,8 +201,12 @@ async function main() {
   for (const r of rows) byProduct.set(r.productId, [...(byProduct.get(r.productId) ?? []), r]);
 
   /* ---- 充電器另外處理：資料是 data/charger.json，不是 CSV ---- */
-  const chargerEntries = [...byProduct].filter(([id]) => id.startsWith("ch-"));
-  for (const [id] of chargerEntries) byProduct.delete(id);
+  // 行動電源（pb-）跟充電器同一套：資料是 JSON，網站直接讀
+  const JSON_FILES = { "ch-": "data/charger.json", "pb-": "data/powerbank.json" } as const;
+  const jsonEntries = (Object.keys(JSON_FILES) as (keyof typeof JSON_FILES)[]).map((prefix) => ({
+    prefix, file: JSON_FILES[prefix], entries: [...byProduct].filter(([id]) => id.startsWith(prefix)),
+  })).filter((x) => x.entries.length > 0);
+  for (const g of jsonEntries) for (const [id] of g.entries) byProduct.delete(id);
 
   /* ---- 寫回 CSV：編號前綴決定是哪一份（df- 狗、cf- 貓、cw- 貓罐頭） ---- */
   const today = todayTW();
@@ -335,9 +339,9 @@ async function main() {
   }
 
   // 充電器：跟上面同一套規矩（新的在前、舊的往後當備援、永遠不刪、失效和售完留著）
-  let chargerOut: string | null = null;
-  if (chargerEntries.length) {
-    const path = resolve(ROOT, "data/charger.json");
+  const jsonOut = new Map<string, string>();
+  for (const { file, entries: chargerEntries } of jsonEntries) {
+    const path = resolve(ROOT, file);
     const doc = JSON.parse(readFileSync(path, "utf8"));
     type M = {
       id: string; label: string; unit?: string; amount: number; note: string; affiliateUrl: string;
@@ -379,7 +383,7 @@ async function main() {
       const live = merged.filter((m) => !m.dead && !m.soldOut);
       touched.push(`${id}（${new Set(live.map((m) => m.label)).size} 家、${live.length} 條能買${keep.length ? `，原本的 ${keep.length} 條留著` : ""}）`);
     }
-    chargerOut = JSON.stringify(doc, null, 2) + "\n";
+    jsonOut.set(path, JSON.stringify(doc, null, 2) + "\n");
     outputs.push([path, ""]);
   }
 
@@ -392,7 +396,7 @@ async function main() {
   }
 
   for (const [path, out] of outputs) {
-    if (path.endsWith("charger.json")) { writeFileSync(path, chargerOut!, "utf8"); continue; }
+    if (jsonOut.has(path)) { writeFileSync(path, jsonOut.get(path)!, "utf8"); continue; }
     writeFileSync(path, "\uFEFF" + out, "utf8");
   }
 
@@ -415,7 +419,7 @@ async function main() {
   // 而 shell:true 會噴 Node 的棄用警告。匯入腳本本來就是 top-level 執行，
   // 直接 import 進來跑最乾淨。
   // 只貼了充電器的話，不用跑寵物的匯入（充電器的 JSON 就是網站直接讀的那一份）
-  if (outputs.some(([path]) => !path.endsWith("charger.json"))) await import("./import-csv");
+  if (outputs.some(([path]) => !jsonOut.has(path))) await import("./import-csv");
   // 貼的是貓砂的話，那一份要用貓砂的匯入（欄位不一樣）
   if (outputs.some(([path]) => path.includes("cat-litter"))) await import("./import-litter");
   if (outputs.some(([path]) => path.includes("treat"))) await import("./import-treat");

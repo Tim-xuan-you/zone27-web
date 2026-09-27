@@ -16,7 +16,8 @@ import { CHANNEL_ZH, isMall } from "@/lib/channel";
 import { channelStats } from "@/lib/channel-stats";
 import { litters } from "@/lib/litter";
 import { treats } from "@/lib/treat";
-import { CHARGER_SUB_ID, DEVICES, chargers, fit } from "@/lib/charger";
+import { CHARGER_SUB_ID, DEVICES, chargers, fit, itemHref } from "@/lib/charger";
+import { POWERBANK_SUB_ID, powerbanks } from "@/lib/powerbank";
 import HuntPicks, { openPicks, pageProven, parkedWhy } from "@/components/HuntPicks";
 import huntData from "@/data/hunt-candidates.json";
 import { daysBetween, todayTW } from "@/lib/date";
@@ -166,6 +167,7 @@ export default function Page() {
     ...litters.map((p) => ({ id: p.id, brand: p.brand, name: p.name, searchAs: p.searchAs, ms: p.price.merchants as Merchant[] })),
     ...treats.map((p) => ({ id: p.id, brand: p.brand, name: p.name, searchAs: p.searchAs, ms: p.price.merchants as Merchant[] })),
     ...chargers.map((p) => ({ id: p.id, brand: p.brand, name: p.name, searchAs: p.searchAs, ms: p.price.merchants })),
+    ...powerbanks.map((p) => ({ id: p.id, brand: p.brand, name: p.name, searchAs: p.searchAs, ms: p.price.merchants })),
   ];
   const byId = new Map(everything.map((x) => [x.id, x]));
   const live = (x: Item) => x.ms.filter((m) => !m.dead && !m.soldOut);
@@ -238,7 +240,7 @@ export default function Page() {
     add({ id: p.id, brand: p.brand, name: p.name, keyword: huntFrom(p.brand, p.name, p.searchAs), shops: shopsFor(p.brand) });
   }
   // 充電器：對幾台裝置是官方寫的最快，就先補哪一顆（iPhone 18 Pro、S26 Ultra 最快的那幾顆最搶手）
-  for (const c of chargers) {
+  for (const c of [...chargers, ...powerbanks]) {
     const x = byId.get(c.id)!;
     // 產得出來的那家賣完了，但還有別家可以試的，留在這裡；沒有別家可以試的才去「看補貨」
     const sold = x.ms.some((m) => m.soldOut);
@@ -299,7 +301,7 @@ export default function Page() {
   for (const x of everything) {
     const l = live(x);
     // 充電器本來就只給商城和蝦皮直營（個人賣家的原廠充電器太多來路不明），不算缺
-    if (!x.id.startsWith("ch-") && l.length > 0 && l.every((m) => isMall(m.label))) addBackup(x, `只有商城：${[...new Set(l.map((m) => m.label))].join("、")}`);
+    if (!x.id.startsWith("ch-") && !x.id.startsWith("pb-") && l.length > 0 && l.every((m) => isMall(m.label))) addBackup(x, `只有商城：${[...new Set(l.map((m) => m.label))].join("、")}`);
   }
   const backupList = [...backup.values()].sort((a, b) => b.n - a.n);
 
@@ -428,13 +430,13 @@ export default function Page() {
                   </b>
                   <span className="mono" style={{ fontSize: 12.5, color: "var(--faint)", whiteSpace: "nowrap" }}>{t.id}</span>
                 </div>
-                <p style={{ margin: "2px 0 0", fontSize: 13.5, color: "var(--muted)", lineHeight: 1.8 }}>{w}</p>
+                <p style={{ margin: "2px 0 0", fontSize: 14, color: "var(--muted)", lineHeight: 1.8 }}>{w}</p>
                 {/* 賣家會陸續加入分潤，先不找的每 30 天我要再查一次（2026-09-27 Tim：「充電器都不用處理沒關係？」） */}
                 {(() => {
                   const d = /d{4}-d{2}-d{2}/.exec(String(w))?.[0];
                   const age = d ? daysBetween(d, todayTW()) : null;
                   return age !== null && age >= 30 ? (
-                    <p style={{ margin: "2px 0 0", fontSize: 13.5, color: "var(--cut)", fontWeight: 700 }}>{age} 天前查的，我該再查一次</p>
+                    <p style={{ margin: "2px 0 0", fontSize: 14, color: "var(--cut)", fontWeight: 700 }}>{age} 天前查的，我該再查一次</p>
                   ) : null;
                 })()}
               </div>
@@ -711,7 +713,7 @@ export default function Page() {
 /** 這一條在這一款裡的角色：第一條還能買的是主要，其他是備援 */
 /** 所有分潤連結那張表裡的一款：寵物的商品，或充電器 */
 type Linked = Pick<Product, "id" | "brand" | "name" | "price">;
-const hrefOf = (p: Linked) => (p.id.startsWith("ch-") ? `/charger/p/${p.id}` : productHref(p as Product));
+const hrefOf = (p: Linked) => (p.id.startsWith("ch-") || p.id.startsWith("pb-") ? itemHref(p.id) : productHref(p as Product));
 
 function roleOf(p: Linked, m: Merchant): "主要" | "備援" {
   const first = p.price.merchants.find((x) => !x.dead);
@@ -729,7 +731,7 @@ function linkIndex() {
   type HealthRow = { url: string; item: string | null; verdict: string };
   const byUrl = new Map((health.rows as HealthRow[]).map((r) => [r.url, r]));
   // 充電器也算：蝦皮後台說哪一條無效，一樣要在這裡找得到（2026-09-26）
-  const all = [...catalog, ...chargers as Linked[]].flatMap((p: Linked) => p.price.merchants.map((m) => ({ p, m, h: byUrl.get(m.affiliateUrl) })));
+  const all = [...catalog, ...chargers as Linked[], ...powerbanks as Linked[]].flatMap((p: Linked) => p.price.merchants.map((m) => ({ p, m, h: byUrl.get(m.affiliateUrl) })));
   const stores = new Map<string, typeof all>();
   for (const x of all) stores.set(x.m.label, [...(stores.get(x.m.label) ?? []), x]);
   const groups = [...stores].sort((a, b) => a[0].localeCompare(b[0], "zh-Hant"));
@@ -747,13 +749,13 @@ function linkIndex() {
 }
 
 /** 卡片左上角那個類目名。充電器不在寵物的類目表裡 */
-const catZh = (id: string) => (id.startsWith("ch-") ? "充電器" : categoryOfId(id)?.zh ?? "其他");
+const catZh = (id: string) => (id.startsWith("ch-") ? "充電器" : id.startsWith("pb-") ? "行動電源" : categoryOfId(id)?.zh ?? "其他");
 
 function SubIds({ id }: { id: string }) {
   return (
     <p className="mono" style={{ margin: "10px 0 0", fontSize: 14 }}>
       <span style={{ color: "var(--faint)", fontSize: 12.5 }}>Sub id 1 </span><b>{shopeeSubId(id)}</b>
-      <span style={{ color: "var(--faint)", fontSize: 12.5, marginLeft: 16 }}>Sub id 2 </span><b>{id.startsWith("ch-") ? CHARGER_SUB_ID : categoryOfId(id)?.subId ?? CATEGORY_SUB_ID}</b>
+      <span style={{ color: "var(--faint)", fontSize: 12.5, marginLeft: 16 }}>Sub id 2 </span><b>{id.startsWith("ch-") ? CHARGER_SUB_ID : id.startsWith("pb-") ? POWERBANK_SUB_ID : categoryOfId(id)?.subId ?? CATEGORY_SUB_ID}</b>
     </p>
   );
 }

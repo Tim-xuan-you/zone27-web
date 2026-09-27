@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 import { litters } from "@/lib/litter";
 import { treatsOf } from "@/lib/treat";
 import { chargers } from "@/lib/charger";
+import { powerbanks } from "@/lib/powerbank";
 import { catalog, isLive } from "@/lib/catalog";
 import { productHref } from "@/lib/labels";
 import { allPaths } from "@/lib/slugs";
@@ -44,6 +45,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE}/charger/iphone-18-pro`, lastModified: now, changeFrequency: "weekly", priority: 0.95 },
     ...chargers.map((c) => ({
       url: `${BASE}/charger/p/${c.id}`, lastModified: now, changeFrequency: "weekly" as const, priority: 0.7,
+    })),
+    { url: `${BASE}/power-bank`, lastModified: now, changeFrequency: "weekly", priority: 0.9 },
+    ...powerbanks.map((p) => ({
+      url: `${BASE}/power-bank/p/${p.id}`, lastModified: now, changeFrequency: "weekly" as const, priority: 0.7,
     })),
     // 貓砂的招牌頁：照材質判能不能沖馬桶，跟 /check 同一個位置
     { url: `${BASE}/cat-litter/flush`, lastModified: now, changeFrequency: "weekly", priority: 0.95 },

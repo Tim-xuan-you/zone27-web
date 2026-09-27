@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { anchorCharger, type Charger, type Device } from "@/lib/charger";
+import { anchorCharger, itemHref, type Charger, type Device } from "@/lib/charger";
 
 const NUM = ["", "一", "兩", "三", "四"];
 // 英文、數字後面接中文才空一格；「（M5）用」這種不空
@@ -15,7 +15,7 @@ export default function ChargerSplit({ groups, here }: { groups: { charger: Char
       many ? "這款" : "這一顆"
     ) : (
       <>
-        <Link href={`/charger/p/${c.id}`} style={{ color: "var(--accent)", fontWeight: 700 }}>{c.brand} {c.name}</Link>
+        <Link href={itemHref(c.id)} style={{ color: "var(--accent)", fontWeight: 700 }}>{c.brand} {c.name}</Link>
         {anchorCharger(c) ? `（$${anchorCharger(c)!.amount.toLocaleString()}）` : ""}
       </>
     );

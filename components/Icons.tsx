@@ -99,6 +99,17 @@ export function ChargerIcon({ size = 18 }: { size?: number }) {
   );
 }
 
+/** 行動電源：一顆直立的電池，上面一小截是頭，中間一道閃電。跟其他圖示一樣，線條、不填色（2026-09-27） */
+export function PowerBankIcon({ size = 18 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+      <path d="M10 3h4" />
+      <rect x="7" y="4.5" width="10" height="16" rx="2" />
+      <path d="M12.8 9.2 10.6 12.8h2.8l-2.2 3.6" />
+    </svg>
+  );
+}
+
 /** 類目用哪一個：罐頭看形態，乾糧看動物 */
 export function CategoryIcon({ species, form, size }: { species: "dog" | "cat"; form: Form; size?: number }) {
   if (form === "treat") return <TreatIcon size={size} />;

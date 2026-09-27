@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { DEVICES, TIER_TONE, anchorCharger, chargerById, deviceById, fit, rank, splitBuy, tierZh } from "@/lib/charger";
+import { DEVICES, TIER_TONE, anchorCharger, deviceById, fit, itemHref, rank, splitBuy, tierZh, type Charger } from "@/lib/charger";
 import ChargerSplit from "./ChargerSplit";
 
 /**
@@ -16,8 +16,7 @@ import ChargerSplit from "./ChargerSplit";
  * 不能兩台都最快的時候，直接說該買哪一顆（或分開兩顆），不要讓人再去找。
  * 同一個型號可以選兩次（兩支 iPhone 17 很常見），所以用兩個下拉選單，不用按鈕。
  */
-export default function ChargerPair({ chargerId }: { chargerId: string }) {
-  const c = chargerById(chargerId)!;
+export default function ChargerPair({ c, list }: { c: Charger; list: Charger[] }) {
   const [a, setA] = useState("");
   const [b, setB] = useState("");
   const da = deviceById(a), db = deviceById(b);
@@ -26,8 +25,8 @@ export default function ChargerPair({ chargerId }: { chargerId: string }) {
   const allFast = here?.got && here.fast === 2;
 
   // 這一顆不能兩台都最快：換哪一顆可以；一顆都沒有就分開買
-  const better = pair && !allFast ? rank(pair, true).find((f) => f.got && f.fast === 2) : undefined;
-  const split = pair && !allFast && !better ? splitBuy(pair) : null;
+  const better = pair && !allFast ? rank(pair, true, list).find((f) => f.got && f.fast === 2) : undefined;
+  const split = pair && !allFast && !better ? splitBuy(pair, list) : null;
 
   const select = (v: string, set: (x: string) => void, label: string) => (
     <label style={{ display: "block", flex: 1, minWidth: 150 }}>
@@ -65,7 +64,7 @@ export default function ChargerPair({ chargerId }: { chargerId: string }) {
               {better ? (
                 <>
                   要兩台一起插都最快，換這顆：
-                  <Link href={`/charger/p/${better.charger.id}`} style={link}>{better.charger.brand} {better.charger.name}</Link>
+                  <Link href={itemHref(better.charger.id)} style={link}>{better.charger.brand} {better.charger.name}</Link>
                   {anchorCharger(better.charger) ? `（$${anchorCharger(better.charger)!.amount.toLocaleString()}）` : ""}
                 </>
               ) : (

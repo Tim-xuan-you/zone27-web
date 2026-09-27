@@ -69,6 +69,11 @@ export const chargers = data.products as unknown as Charger[];
 export const chargerById = (id: string): Charger | undefined => chargers.find((c) => c.id === id);
 export const CHARGER_SUB_ID = "charger";
 
+/**
+ * 商品頁網址。充電器是 ch-，行動電源是 pb-（2026-09-27 起，行動電源沿用充電器這一套：有電池的充電器）
+ */
+export const itemHref = (id: string): string => (id.startsWith("pb-") ? `/power-bank/p/${id}` : `/charger/p/${id}`);
+
 /* ------------------------------------------------------------------ */
 /* 裝置：官方寫要幾瓦才是最快                                           */
 /* ------------------------------------------------------------------ */
@@ -334,9 +339,9 @@ function summarize(c: Charger, got: Got[]): Fit {
  * 同一級裡：全部都最快的，買得到的、便宜的在前（多花錢買更大的瓦數沒有用）；
  * 還沒到最快的，拿到瓦數多的在前（60W 沒 AVS 還是比 20W 快）。
  */
-export function rank(devices: Device[], together = true): Fit[] {
+export function rank(devices: Device[], together = true, list: Charger[] = chargers): Fit[] {
   const all = devices.length;
-  return chargers
+  return list
     .map((c) => fit(c, devices, together))
     .sort((a, b) =>
       b.score - a.score || b.fast - a.fast ||
@@ -365,8 +370,10 @@ export function anchorCharger(c: Charger): Merchant | undefined {
 
 /** 這一顆的孔：「2 個 USB-C」「2 個 USB-C、1 個 USB-A」 */
 export function portsZh(c: Charger): string {
-  const n = (k: PortKind) => c.ports.filter((p) => p.kind === k).length;
-  return [n("C") && `${n("C")} 個 USB-C`, n("A") && `${n("A")} 個 USB-A`].filter(Boolean).join("、");
+  // 行動電源的自帶線也記成一個 C 孔，這裡分開講（2026-09-27）
+  const n = (k: PortKind) => c.ports.filter((p) => p.kind === k && p.id !== "自帶線").length;
+  const cable = c.ports.some((p) => p.id === "自帶線");
+  return [n("C") && `${n("C")} 個 USB-C`, n("A") && `${n("A")} 個 USB-A`, cable && "自帶線"].filter(Boolean).join("、");
 }
 
 /**
@@ -374,10 +381,10 @@ export function portsZh(c: Charger): string {
  * 兩支 iPhone 17 就是「買兩顆 Q48，一台插一顆」，不要寫成「iPhone 17 用 Q48，iPhone 17 用 Q48」。
  * 有一台沒有任何一顆能讓它最快，回 null（就不要叫人分開買）。
  */
-export function splitBuy(devices: Device[]): { charger: Charger; devices: Device[] }[] | null {
+export function splitBuy(devices: Device[], list: Charger[] = chargers): { charger: Charger; devices: Device[] }[] | null {
   const out: { charger: Charger; devices: Device[] }[] = [];
   for (const d of devices) {
-    const f = rank([d], true).find((x) => x.fast === 1);
+    const f = rank([d], true, list).find((x) => x.fast === 1);
     if (!f) return null;
     const g = out.find((x) => x.charger.id === f.charger.id);
     if (g) g.devices.push(d);
@@ -393,12 +400,12 @@ export function splitBuy(devices: Device[]): { charger: Charger; devices: Device
  * 2026-09-27：原廠 20W、三星 45W／60W／65W 的連結全部產不出來，商品頁停在「購買連結還在補」。
  * 搜「Apple 20W 充電器」進來的人看到這句就走了。答案其實有（Q48 一樣最快又便宜），要直接給。
  */
-export function stockedAlternatives(c: Charger): { charger: Charger; devices: Device[] }[] {
+export function stockedAlternatives(c: Charger, list: Charger[] = chargers): { charger: Charger; devices: Device[] }[] {
   const out: { charger: Charger; devices: Device[] }[] = [];
   // 看三星充電器的多半是三星手機的人，看 Apple 的多半是 iPhone：自家的手機就算插它不是最快也列進來、排最前面
   const home = /Samsung|三星/.test(c.brand) ? "Galaxy" : /Apple/.test(c.brand) ? "iPhone" : null;
   for (const d of DEVICES.filter((x) => x.group === home || fit(c, [x]).got![0].tier === "fast")) {
-    const f = rank([d]).find((x) => x.fast === 1 && x.charger.id !== c.id && inStockCharger(x.charger));
+    const f = rank([d], true, list).find((x) => x.fast === 1 && x.charger.id !== c.id && inStockCharger(x.charger));
     if (!f) continue;
     const g = out.find((x) => x.charger.id === f.charger.id);
     if (g) g.devices.push(d);

@@ -1,0 +1,217 @@
+{
+  "_meta": {
+    "note": "行動電源（2026-09-27 開）。沿用充電器的資料格式（有電池的充電器），多了電池那幾個欄位。只寫官網讀到的，研究筆記在 docs/POWER-BANK-RESEARCH.md。",
+    "fields": "cellMah／cellV／cellWh：包裝上的電池（3.7V）；rated5vMah：背面的額定容量（5V）；conversionPct：官方寫的轉換率；cable：自帶線"
+  },
+  "products": [
+    {
+      "id": "pb-01",
+      "brand": "小米 Xiaomi",
+      "name": "自帶線行動電源 10000 67W",
+      "model": "PB1067",
+      "totalW": 67,
+      "ports": [
+        {
+          "id": "自帶線",
+          "kind": "C",
+          "w": 67
+        },
+        {
+          "id": "C",
+          "kind": "C",
+          "w": 67
+        },
+        {
+          "id": "A",
+          "kind": "A",
+          "w": 22.5
+        }
+      ],
+      "combos": [],
+      "cellMah": 10000,
+      "cellWh": 39.48,
+      "rated5vMah": 6000,
+      "cable": "自帶 USB-C 線",
+      "input": "自帶線或 USB-C 最高 65W（20V⎓3.25A）",
+      "weightG": 247,
+      "sizeMm": "115 × 66 × 26（不含自帶線）",
+      "back": "寫 10000mAh，背面寫手機拿得到的是 6000mAh（5V）；iPhone 17 插它充最快",
+      "dealbreaker": "你的手機是 iPhone 18 Pro，要充最快（官網沒寫 AVS）；或是要充 MacBook Air 最快（要 70W，這顆最高 67W）",
+      "knownIssues": "官方寫的：三個 3400mAh 電池單元，額定能量 39.48Wh（11.61V 3400mAh），額定容量 6000mAh（5V/3A）。自帶線和 USB-C 孔最高 20V⎓3.35A（67W，USB PD）；11V⎓6.1A 是小米自己的快充。USB-A 最高 22.5W（10V⎓2.25A）。沒寫 PPS、AVS。沒寫幾個孔一起用怎麼分。自己充電最高 65W。",
+      "searchAs": "小米 自帶線行動電源 10000 67W",
+      "refs": [
+        "https://www.mi.com/tw/product/xiaomi-67w-power-bank-10000-integrated-cable/specs/"
+      ],
+      "checkedAt": "2026-09-27",
+      "price": {
+        "unit": "1 顆",
+        "checkedAt": "2026-09-27",
+        "merchants": []
+      },
+      "awaitingLink": true,
+      "listPrice": 899
+    },
+    {
+      "id": "pb-02",
+      "brand": "小米 Xiaomi",
+      "name": "行動電源 10000 22.5W Lite",
+      "model": "P16ZM",
+      "totalW": 22.5,
+      "ports": [
+        {
+          "id": "C",
+          "kind": "C",
+          "w": 20
+        },
+        {
+          "id": "A",
+          "kind": "A",
+          "w": 22.5
+        }
+      ],
+      "combos": [],
+      "cellMah": 10000,
+      "cellV": 3.7,
+      "cellWh": 37,
+      "rated5vMah": 5500,
+      "conversionPct": 74,
+      "input": "USB-C：5V⎓3A／9V⎓2.5A",
+      "sizeMm": "148.4 × 73 × 15",
+      "back": "包裝寫 10000mAh，背面寫轉換率 74%：手機拿得到的是 5500mAh（5V）",
+      "dealbreaker": "你的手機是 iPhone 17 以後或 S26 Ultra，想充最快：USB-C 最多只給 20W",
+      "knownIssues": "官方寫的：電池功率（額定／一般）35.15Wh／37Wh，9500mAh／10000mAh；額定容量 5500mAh（5V/3A）；轉換率 74%（5V/3A）。USB-C、USB-A 都寫最高 22.5W，但那是 10V⎓2.25A，不是 USB PD；iPhone 用的 USB PD 最高 9V⎓2.23A（20W）。三個孔一起用，總共 5V⎓3A（15W）。沒寫 PPS。",
+      "searchAs": "小米行動電源 10000 22.5W Lite",
+      "refs": [
+        "https://www.mi.com/tw/product/xiaomi-power-bank-10000mah-22w-lite/specs/"
+      ],
+      "checkedAt": "2026-09-27",
+      "price": {
+        "unit": "1 顆",
+        "checkedAt": "2026-09-27",
+        "merchants": []
+      },
+      "awaitingLink": true,
+      "listPrice": 365
+    },
+    {
+      "id": "pb-03",
+      "brand": "小米 Xiaomi",
+      "name": "自帶線行動電源 20000 22.5W",
+      "model": "PB2020MI",
+      "totalW": 22.5,
+      "ports": [
+        {
+          "id": "自帶線",
+          "kind": "C",
+          "w": 20
+        },
+        {
+          "id": "C",
+          "kind": "C",
+          "w": 20
+        },
+        {
+          "id": "A",
+          "kind": "A",
+          "w": 22.5
+        }
+      ],
+      "combos": [],
+      "cellMah": 20000,
+      "cellV": 3.7,
+      "cellWh": 74,
+      "rated5vMah": 13000,
+      "cable": "自帶 USB-C 線",
+      "input": "自帶線或 USB-C：5V⎓3A／9V⎓2.5A",
+      "weightG": 342,
+      "sizeMm": "128 × 73 × 32",
+      "back": "包裝寫 20000mAh，背面寫的額定容量是 13000mAh（5V）；74Wh，可以帶上飛機",
+      "dealbreaker": "你的手機是 iPhone 17 以後或 S26 Ultra，想充最快：最多只給 20W；或是嫌重，342 公克",
+      "knownIssues": "官方寫的：電池 20000mAh 3.7V 74Wh，額定容量 13000mAh（5V）。自帶線、USB-C、USB-A 都寫最高 22.5W，但那是 10V⎓2.25A，不是 USB PD；iPhone 用的 USB PD 最高 9V⎓2.23A（20W）。多個孔一起用，總共 5V⎓3A（15W）。沒寫 PPS。",
+      "searchAs": "小米 自帶線行動電源 20000 22.5W",
+      "refs": [
+        "https://www.mi.com/tw/product/xiaomi-power-bank-20000/specs/"
+      ],
+      "checkedAt": "2026-09-27",
+      "price": {
+        "unit": "1 顆",
+        "checkedAt": "2026-09-27",
+        "merchants": []
+      },
+      "awaitingLink": true,
+      "listPrice": 649
+    },
+    {
+      "id": "pb-04",
+      "brand": "Anker",
+      "name": "Nano 行動電源 10000mAh 45W 自帶伸縮線",
+      "model": "A1638",
+      "totalW": 45,
+      "ports": [
+        {
+          "id": "自帶線",
+          "kind": "C",
+          "w": 45
+        },
+        {
+          "id": "C",
+          "kind": "C",
+          "w": 45
+        },
+        {
+          "id": "A",
+          "kind": "A",
+          "w": 22.5
+        }
+      ],
+      "combos": [
+        {
+          "use": [
+            "自帶線",
+            "C"
+          ],
+          "w": {
+            "自帶線": 15,
+            "C": 7.5
+          }
+        },
+        {
+          "use": [
+            "自帶線",
+            "C",
+            "A"
+          ],
+          "w": {
+            "自帶線": 7.5,
+            "C": 7.5,
+            "A": 7.5
+          }
+        }
+      ],
+      "cellMah": 10000,
+      "cellV": 3.7,
+      "cellWh": 37,
+      "cable": "自帶 USB-C 伸縮線 70 公分",
+      "input": "最高 30W",
+      "weightG": 231,
+      "bsmi": "R45351",
+      "listPrice": 1690,
+      "back": "一台插最高 45W，iPhone 17 插它充最快；線跟孔一起插，總共只剩 22.5W",
+      "dealbreaker": "你常常兩台一起充：自帶線加 USB-C 孔一起插，總共只有 22.5W（線 15W、孔 7.5W）",
+      "knownIssues": "官方寫的：10,000mAh／37Wh，231 公克。自帶線、USB-C 孔最高 45W（20V⎓2.25A），USB-A 最高 22.5W；官方寫 iPhone 17 系列最高 40W 快充。線加孔一起用 22.5W（線 15W、孔 7.5W），三個一起用各 7.5W。沒寫 PPS。自己充電最高 30W。",
+      "searchAs": "Anker A1638 10000mAh 45W 伸縮線",
+      "refs": [
+        "https://www.anker.com/products/a1638-10k-45w-power-bank",
+        "https://anker.com.sg/products/anker-nano-power-bank-10000mah-45w-with-built-in-retractable-usb-c-cable-a1638",
+        "https://www.anker.tw/ANKER/moreinfo_177811.htm"
+      ],
+      "checkedAt": "2026-09-27",
+      "price": {
+        "unit": "1 顆",
+        "checkedAt": "2026-09-27",
+        "merchants": []
+      },
+      "awaitingLink": true
+    }
+  ]
+}

@@ -9,6 +9,7 @@ import treatData from "@/data/cat-treat.json";
 import dogTreatData from "@/data/dog-treat.json";
 import dogWet from "@/data/dog-wet-food.json";
 import chargerData from "@/data/charger.json";
+import powerbankData from "@/data/powerbank.json";
 import linkHealth from "@/data/link-health.json";
 import { CHANNEL_ZH, channelOf, type Channel } from "@/lib/channel";
 
@@ -48,7 +49,7 @@ const KNOWN_IDS = new Set(Object.keys((storeReg as { stores: Record<string, unkn
 /* 商品編號 → 牌子。用來看「同一個牌子在這一家是不是已經失敗過好幾款」 */
 const BRAND = new Map<string, string>();
 /* 我們所有的資料。以前漏了狗罐頭、狗零食、充電器，那幾類在這一家產出過幾款就算不到（2026-09-26 補上） */
-const SOURCES = [dogFood, catFood, catWet, dogWet, litterData, treatData, dogTreatData, chargerData] as { products: unknown[] }[];
+const SOURCES = [dogFood, catFood, catWet, dogWet, litterData, treatData, dogTreatData, chargerData, powerbankData] as { products: unknown[] }[];
 
 for (const src of SOURCES) {
   for (const p of src.products as { id: string; brand: string }[]) BRAND.set(p.id, p.brand);
@@ -206,7 +207,7 @@ export default function HuntPicks({ id }: { id: string }) {
     );
   // 一整排都是商城代表我查得不夠廣：商城通常比一般賣家貴一截
   // 充電器是故意只列商城和直營的，不用提醒（2026-09-26）
-  const allMall = !id.startsWith("ch-") && open.length > 0 && open.every((c) => (c.channel ?? channelOf(c.shop)) === "mall");
+  const allMall = !id.startsWith("ch-") && !id.startsWith("pb-") && open.length > 0 && open.every((c) => (c.channel ?? channelOf(c.shop)) === "mall");
   const gone = [
     ...PAIRS.filter((x) => x.productId === id).map((x) => `${x.shop}（${x.note ?? "這一款產不出連結"}）`),
     ...(t.failed ?? []).map((f) => `${f.shop}（${f.reason}）`),

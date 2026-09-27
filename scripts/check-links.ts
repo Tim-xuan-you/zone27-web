@@ -172,7 +172,7 @@ async function main() {
     price: { merchants: { id: string; label: string; affiliateUrl: string; dead?: boolean }[] };
   };
   // 充電器不在寵物的類目表裡，要另外加（2026-09-27 以前整批健檢會把充電器的紀錄洗掉）
-  const products: P[] = [...new Set([...CATEGORIES.map((c) => resolve(ROOT, c.json)), resolve(ROOT, "data/charger.json")])]
+  const products: P[] = [...new Set([...CATEGORIES.map((c) => resolve(ROOT, c.json)), resolve(ROOT, "data/charger.json"), resolve(ROOT, "data/powerbank.json")])]
     .filter((path) => existsSync(path))
     .flatMap((path) => (JSON.parse(readFileSync(path, "utf8")) as { products: P[] }).products);
 

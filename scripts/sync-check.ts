@@ -73,7 +73,7 @@ for (const cat of CATEGORIES) {
 const ledgerPath = resolve(ROOT, "data/link-ledger.json");
 if (existsSync(ledgerPath)) {
   const ledger = JSON.parse(readFileSync(ledgerPath, "utf8")) as { urls: string[] };
-  const files = [...new Set(CATEGORIES.map((c) => resolve(ROOT, c.csv)))].concat(resolve(ROOT, "data/charger.json"));
+  const files = [...new Set(CATEGORIES.map((c) => resolve(ROOT, c.csv)))].concat(resolve(ROOT, "data/charger.json"), resolve(ROOT, "data/powerbank.json"));
   const text = files.filter((p) => existsSync(p)).map((p) => readFileSync(p, "utf8")).join("\n");
   for (const u of ledger.urls.filter((x) => !text.includes(x))) {
     problems.push(`帳本裡有、資料裡找不到的連結：${u}（Tim 給過的連結不能不見。去 git 紀錄找它原本掛在哪一款，用 data:paste 補回去，寫【備援】）`);

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import SiteHeader from "@/components/SiteHeader";
-import { CatIcon, ChargerIcon, DogIcon } from "@/components/Icons";
+import { CatIcon, ChargerIcon, PowerBankIcon, DogIcon } from "@/components/Icons";
 import ReadList from "@/components/ReadList";
 import { S } from "@/components/styles";
 import { animalHref, categoriesOf } from "@/lib/categories";
@@ -68,13 +68,14 @@ export default function Home() {
         每一款的包裝背面我們都讀過：飼料看成分表，充電器看每個孔幾瓦。名字寫得再好聽，背面才算數。
       </p>
 
-      {/* 先說要買什麼，進去只看那一種（2026-09-24 狗貓分開，2026-09-26 加充電器） */}
+      {/* 先說要買什麼，進去只看那一種（2026-09-24 狗貓分開，2026-09-26 加充電器，2026-09-27 加行動電源） */}
       <p style={S.lbl}>先選你要買的</p>
       <div style={doors}>
         {[
           { href: animalHref("dog"), icon: <DogIcon size={26} />, title: "養狗的", line: categoriesOf("dog").map((c) => c.short).join("、") },
           { href: animalHref("cat"), icon: <CatIcon size={26} />, title: "養貓的", line: categoriesOf("cat").map((c) => c.short).join("、") },
           { href: "/charger", icon: <ChargerIcon size={26} />, title: "充電器", line: "iPhone、iPad、MacBook、Galaxy" },
+          { href: "/power-bank", icon: <PowerBankIcon size={26} />, title: "行動電源", line: "手機插它多快、能不能帶上飛機" },
         ].map((d, i) => (
           <Link key={d.href} href={d.href} style={{ ...door, borderTop: i ? "1px solid var(--line)" : 0 }}>
             <span style={doorIcon}>{d.icon}</span>

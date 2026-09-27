@@ -2886,6 +2886,106 @@
           "url": "https://shopee.tw/product/992256455/25028042203"
         }
       ]
+    },
+    {
+      "id": "pb-01",
+      "label": "小米 自帶線行動電源 10000 67W（行動電源）",
+      "why": "iPhone 17、iPad Pro 插它都充最快，官方價 $899",
+      "note": "行動電源會燒起來，照充電器的規矩：官方、商城、寫公司貨開發票的才收；二手、福利品、寫 CCC（對岸版）、比官方便宜兩成以上的不收。",
+      "checkedAt": "2026-09-27",
+      "candidates": [
+        {
+          "channel": "mall",
+          "shop": "小米官方旗艦店",
+          "shopId": "15199365",
+          "price": 899,
+          "unit": "官方旗艦店，選顏色就好",
+          "url": "https://shopee.tw/product/15199365/45556665055"
+        }
+      ]
+    },
+    {
+      "id": "pb-02",
+      "label": "小米 行動電源 10000 22.5W Lite（行動電源）",
+      "why": "最便宜的一顆，官方 $365；iPhone 16 以前、Air 插它最快",
+      "note": "行動電源會燒起來，照充電器的規矩：官方、商城、寫公司貨開發票的才收；二手、福利品、寫 CCC（對岸版）、比官方便宜兩成以上的不收。",
+      "checkedAt": "2026-09-27",
+      "candidates": [
+        {
+          "channel": "mall",
+          "shop": "小米官方旗艦店",
+          "shopId": "15199365",
+          "price": 365,
+          "unit": "官方旗艦店",
+          "url": "https://shopee.tw/product/15199365/26167942367"
+        },
+        {
+          "channel": "seller",
+          "shop": "科捷小米3C生活館",
+          "shopId": "41580811",
+          "price": 399,
+          "unit": "寫台灣小米公司貨",
+          "url": "https://shopee.tw/product/41580811/28718826214"
+        }
+      ]
+    },
+    {
+      "id": "pb-03",
+      "label": "小米 自帶線行動電源 20000 22.5W（行動電源）",
+      "why": "兩萬毫安、自帶線，官方 $649",
+      "note": "行動電源會燒起來，照充電器的規矩：官方、商城、寫公司貨開發票的才收；二手、福利品、寫 CCC（對岸版）、比官方便宜兩成以上的不收。",
+      "checkedAt": "2026-09-27",
+      "candidates": [
+        {
+          "channel": "mall",
+          "shop": "小米官方旗艦店",
+          "shopId": "15199365",
+          "price": 649,
+          "unit": "官方旗艦店，選顏色就好",
+          "url": "https://shopee.tw/product/15199365/28185430628"
+        }
+      ]
+    },
+    {
+      "id": "pb-04",
+      "label": "Anker Nano 行動電源 10000mAh 45W 自帶伸縮線 A1638（行動電源）",
+      "why": "iPhone 17 插它充最快（官方寫 40W），自帶伸縮線",
+      "note": "行動電源會燒起來，照充電器的規矩：官方、商城、寫公司貨開發票的才收；二手、福利品、寫 CCC（對岸版）、比官方便宜兩成以上的不收。 有一家標題寫「CCC＋WH」，是對岸版，沒列。",
+      "checkedAt": "2026-09-27",
+      "candidates": [
+        {
+          "channel": "seller",
+          "shop": "ss_selectshop 網路商城",
+          "shopId": "24403885",
+          "price": 1690,
+          "unit": "寫公司貨，選顏色",
+          "url": "https://shopee.tw/product/24403885/46851649359"
+        },
+        {
+          "channel": "seller",
+          "shop": "你好大家好通訊",
+          "shopId": "36334206",
+          "price": 1499,
+          "unit": "選顏色",
+          "url": "https://shopee.tw/product/36334206/48067236655"
+        },
+        {
+          "channel": "seller",
+          "shop": "慕電選物「MUDE」",
+          "shopId": "1489651675",
+          "price": 1521,
+          "unit": "寫原廠正品，選顏色",
+          "url": "https://shopee.tw/product/1489651675/46209972003"
+        },
+        {
+          "channel": "mall",
+          "shop": "Anker 品牌旗艦館",
+          "shopId": "67574794",
+          "price": 2680,
+          "unit": "這一頁是加充電器的組合，點進去看有沒有單買的選項",
+          "url": "https://shopee.tw/product/67574794/45315145549"
+        }
+      ]
     }
   ]
 }

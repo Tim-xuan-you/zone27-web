@@ -5,8 +5,8 @@ import { useEffect, useMemo, useState } from "react";
 import { S } from "./styles";
 import { readerNotes } from "@/lib/notes";
 import {
-  DEVICES, TIER_TONE, anchorCharger, chargers, deviceById, inStockCharger, rank, splitBuy, tierZh,
-  type Device, type Fit,
+  DEVICES, TIER_TONE, anchorCharger, chargers, deviceById, inStockCharger, itemHref, rank, splitBuy, tierZh,
+  type Charger, type Device, type Fit,
 } from "@/lib/charger";
 import ChargerSplit from "./ChargerSplit";
 
@@ -27,7 +27,7 @@ import ChargerSplit from "./ChargerSplit";
 
 const PHONES = DEVICES.filter((d) => d.group === "iPhone" || d.group === "Galaxy");
 
-export default function ChargerPicker() {
+export default function ChargerPicker({ list = chargers, kind = "charger" }: { list?: Charger[]; kind?: "charger" | "powerbank" } = {}) {
   /*
    * 第一支手機一次一支（換一支就是換）；「還要一起充的」另外記，手機、平板、筆電都可以，
    * 也可以跟第一支同一個型號（兩支 iPhone 17 很常見）。
@@ -52,7 +52,7 @@ export default function ChargerPicker() {
 
   const ids = [phone, ...extras].filter(Boolean);
   const devices = ids.map((i) => deviceById(i)!);
-  const fits = useMemo(() => (devices.length ? rank(devices, together) : []), [ids.join(","), together]); // eslint-disable-line react-hooks/exhaustive-deps
+  const fits = useMemo(() => (devices.length ? rank(devices, together, list) : []), [ids.join(","), together]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const pickPhone = (id: string) => setPhone((p) => (p === id ? "" : id));
   const pickOther = (id: string) =>
@@ -67,7 +67,7 @@ export default function ChargerPicker() {
   const rest = fits.filter((f) => !shown.includes(f));
 
   /* 一起插沒有一顆全部最快：每一台各自挑一顆 */
-  const split = !top && together && all > 1 ? splitBuy(devices) : null;
+  const split = !top && together && all > 1 ? splitBuy(devices, list) : null;
 
   const chip = (d: Device, on: boolean, onClick: () => void) => (
     <button key={d.id} type="button" aria-pressed={on} onClick={onClick} style={on ? { ...S.example, ...pickOn } : S.example}>
@@ -114,7 +114,7 @@ export default function ChargerPicker() {
                     return (
                       <span key={w.charger.id}>
                         {i ? "、" : ""}
-                        <Link href={`/charger/p/${w.charger.id}`} style={{ color: "var(--accent)", fontWeight: 700 }}>
+                        <Link href={itemHref(w.charger.id)} style={{ color: "var(--accent)", fontWeight: 700 }}>
                           {w.charger.brand} {w.charger.name}
                         </Link>
                         {m ? `（$${m.amount.toLocaleString()}）` : ""}
@@ -143,7 +143,7 @@ export default function ChargerPicker() {
             </div>
           )}
 
-          {all === 1 && <OldOne d={devices[0]} />}
+          {all === 1 && kind === "charger" && <OldOne d={devices[0]} />}
 
           {devices.some((d) => d.cable) && (
             <p style={{ ...S.hint, marginTop: 12 }}>
@@ -176,7 +176,7 @@ function Answer({ f, one }: { f: Fit; one?: boolean }) {
     <div style={card}>
       <span style={{ display: "block", fontSize: 12.5, color: "var(--muted)" }}>{c.brand}</span>
       <span style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", gap: 12 }}>
-        <Link href={`/charger/p/${c.id}`} style={{ fontSize: 20, fontWeight: 700, lineHeight: 1.5, color: "inherit", textDecoration: "none" }}>
+        <Link href={itemHref(c.id)} style={{ fontSize: 20, fontWeight: 700, lineHeight: 1.5, color: "inherit", textDecoration: "none" }}>
           {c.name}
         </Link>
         {m && <span className="mono" style={{ fontSize: 20, fontWeight: 800, whiteSpace: "nowrap" }}>${m.amount.toLocaleString()}</span>}
@@ -238,7 +238,7 @@ function Brief({ f, first }: { f: Fit; first?: boolean }) {
   const c = f.charger;
   const worst = f.got?.reduce((a, g) => (TIER_RANK[g.tier] < TIER_RANK[a.tier] ? g : a));
   return (
-    <Link href={`/charger/p/${c.id}`} style={{ display: "block", padding: "12px 16px", borderTop: first ? 0 : "1px solid var(--line)", textDecoration: "none", color: "inherit" }}>
+    <Link href={itemHref(c.id)} style={{ display: "block", padding: "12px 16px", borderTop: first ? 0 : "1px solid var(--line)", textDecoration: "none", color: "inherit" }}>
       <span style={{ display: "flex", justifyContent: "space-between", gap: 12 }}>
         <span style={{ minWidth: 0 }}>
           <span style={{ display: "block", fontSize: 12.5, color: "var(--muted)" }}>{c.brand}</span>

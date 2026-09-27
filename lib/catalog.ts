@@ -8,6 +8,7 @@ import type { Constraint, Form, Merchant, Price, Product, ProteinSource, Situati
 import { anchorOf, assumedCatKg, formOf, mer, recommendable, stageForAge } from "./engine";
 import { MIN_LIVE } from "./categories";
 import { chargers } from "./charger";
+import { powerbanks } from "./powerbank";
 
 /**
  * 目錄。資料在 repo 裡的 JSON，建置時直接讀 —— 沒有執行期依賴，
@@ -43,7 +44,7 @@ export function byId(id: string): Product | undefined {
  * 讀者按了購買會被丟回首頁 —— 賣場拿不到點擊，我們拿不到分潤。
  */
 export function merchantFor(sku: string, merchantId: string): Merchant | undefined {
-  const all: { id: string; price: Price }[] = [...catalog, ...litters, ...treatsOf("cat"), ...treatsOf("dog"), ...chargers];
+  const all: { id: string; price: Price }[] = [...catalog, ...litters, ...treatsOf("cat"), ...treatsOf("dog"), ...chargers, ...powerbanks];
   const m = all.find((p) => p.id === sku)?.price.merchants.find((x) => x.id === merchantId);
   // 售完的也送過去（2026-09-27 起）：連結是好的，可能已經補貨；網站不寫賣完（庫存天天在變）
   return m;
