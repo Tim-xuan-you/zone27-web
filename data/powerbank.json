@@ -265,9 +265,19 @@
       "price": {
         "unit": "1 顆",
         "checkedAt": "2026-09-27",
-        "merchants": []
+        "merchants": [
+          {
+            "id": "m1",
+            "label": "蝦皮直營 _ 生活超市",
+            "unit": "1顆",
+            "amount": 479,
+            "note": "規格選顏色，黑、白都是這個價錢",
+            "affiliateUrl": "https://s.shopee.tw/6q12fRbzum?share_channel_code=6",
+            "anchor": "safe",
+            "checkedAt": "2026-09-27"
+          }
+        ]
       },
-      "awaitingLink": true,
       "listPrice": 479
     },
     {

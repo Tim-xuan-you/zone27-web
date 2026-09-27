@@ -1,7 +1,7 @@
 {
   "checkedAt": "2026-09-27",
   "filledAt": "2026-09-27",
-  "total": 187,
+  "total": 188,
   "bad": 13,
   "rows": [
     {
@@ -2618,6 +2618,20 @@
       "status": 200,
       "finalUrl": "https://shopee.tw/opaanlp/50662979/42080595017",
       "item": "50662979/42080595017",
+      "affiliate": "an_16322830031",
+      "verdict": "ok",
+      "note": ""
+    },
+    {
+      "productId": "pb-05",
+      "brand": "威剛 ADATA",
+      "name": "C100 行動電源 10000mAh 20W",
+      "merchantId": "m1",
+      "label": "蝦皮直營 _ 生活超市",
+      "url": "https://s.shopee.tw/6q12fRbzum?share_channel_code=6",
+      "status": 200,
+      "finalUrl": "https://shopee.tw/opaanlp/50662979/26930660110",
+      "item": "50662979/26930660110",
       "affiliate": "an_16322830031",
       "verdict": "ok",
       "note": ""
