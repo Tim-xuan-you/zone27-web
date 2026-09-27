@@ -373,6 +373,17 @@
             "affiliateUrl": "https://s.shopee.tw/2gBTgfpHK7?share_channel_code=6",
             "anchor": "value",
             "checkedAt": "2026-09-27"
+          },
+          {
+            "id": "m3",
+            "label": "蝦皮直營 _ 生活超市",
+            "unit": "85g",
+            "amount": 57,
+            "note": "一頁多口味，規格選「厚切肉塊_鮭+鮪」",
+            "affiliateUrl": "https://s.shopee.tw/3VkagCm6dK?share_channel_code=6",
+            "anchor": "value",
+            "soldOut": true,
+            "checkedAt": "2026-09-27"
           }
         ]
       },
