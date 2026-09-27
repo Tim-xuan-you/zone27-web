@@ -1,7 +1,7 @@
 {
   "checkedAt": "2026-09-19",
   "filledAt": "2026-09-27",
-  "total": 159,
+  "total": 164,
   "bad": 0,
   "rows": [
     {
@@ -2068,6 +2068,71 @@
       "status": 200,
       "finalUrl": "https://shopee.tw/opaanlp/20186300/18970210826",
       "item": "20186300/18970210826",
+      "verdict": "ok",
+      "note": ""
+    },
+    {
+      "productId": "df-01",
+      "brand": "ACANA 愛肯拿",
+      "name": "單一蛋白低敏無穀 美膚羊肉+蘋果",
+      "merchantId": "m4",
+      "label": "獅子王寵物（蝦皮優選）",
+      "url": "https://s.shopee.tw/3B7ESUSXfM?share_channel_code=6",
+      "status": 200,
+      "finalUrl": "https://shopee.tw/opaanlp/11121228/27612994325",
+      "item": "11121228/27612994325",
+      "verdict": "ok",
+      "note": ""
+    },
+    {
+      "productId": "df-01",
+      "brand": "ACANA 愛肯拿",
+      "name": "單一蛋白低敏無穀 美膚羊肉+蘋果",
+      "merchantId": "m5",
+      "label": "獅子王寵物（蝦皮優選）",
+      "url": "https://s.shopee.tw/3B7ESUSXfM?share_channel_code=6",
+      "status": 200,
+      "finalUrl": "https://shopee.tw/opaanlp/11121228/27612994325",
+      "item": "11121228/27612994325",
+      "verdict": "ok",
+      "note": ""
+    },
+    {
+      "productId": "df-01",
+      "brand": "ACANA 愛肯拿",
+      "name": "單一蛋白低敏無穀 美膚羊肉+蘋果",
+      "merchantId": "m6",
+      "label": "獅子王寵物（蝦皮優選）",
+      "url": "https://s.shopee.tw/3B7ESUSXfM?share_channel_code=6",
+      "status": 200,
+      "finalUrl": "https://shopee.tw/opaanlp/11121228/27612994325",
+      "item": "11121228/27612994325",
+      "verdict": "ok",
+      "note": ""
+    },
+    {
+      "productId": "ct-04",
+      "brand": "汪喵星球",
+      "name": "太空小零嘴 長盈虱目魚",
+      "merchantId": "m1",
+      "label": "汪喵星球官方商城",
+      "url": "https://s.shopee.tw/LnYM8fN8y?share_channel_code=6",
+      "status": 200,
+      "finalUrl": "https://shopee.tw/opaanlp/329265193/6963023829",
+      "item": "329265193/6963023829",
+      "verdict": "ok",
+      "note": ""
+    },
+    {
+      "productId": "ct-04",
+      "brand": "汪喵星球",
+      "name": "太空小零嘴 長盈虱目魚",
+      "merchantId": "m2",
+      "label": "毛孩寵物鋪",
+      "url": "https://s.shopee.tw/W6yYRejo1?share_channel_code=6",
+      "status": 200,
+      "finalUrl": "https://shopee.tw/opaanlp/1447238100/29574128530",
+      "item": "1447238100/29574128530",
       "verdict": "ok",
       "note": ""
     }

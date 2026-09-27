@@ -153,7 +153,7 @@
       "alsoFor": "dog",
       "brand": "汪喵星球",
       "name": "太空小零嘴 長盈虱目魚",
-      "checkedAt": "2026-09-19",
+      "checkedAt": "2026-09-27",
       "note": "蛋白質 89%，幾乎全是魚。凍乾很輕，一天四五克就到零食上限了",
       "searchAs": "汪喵星球 太空小零嘴 虱目魚 凍乾",
       "spec": {
@@ -170,8 +170,31 @@
       },
       "price": {
         "unit": "50g",
-        "checkedAt": "2026-09-19",
-        "merchants": []
+        "checkedAt": "2026-09-27",
+        "merchants": [
+          {
+            "id": "m1",
+            "label": "汪喵星球官方商城",
+            "unit": "50g",
+            "amount": 300,
+            "note": "一頁多口味，規格選「長盈虱目魚 50g」",
+            "affiliateUrl": "https://s.shopee.tw/LnYM8fN8y?share_channel_code=6",
+            "anchor": "safe",
+            "soldOut": true,
+            "checkedAt": "2026-09-27"
+          },
+          {
+            "id": "m2",
+            "label": "毛孩寵物鋪",
+            "unit": "50g",
+            "amount": 300,
+            "note": "一頁多口味，規格選「長盈虱目魚」",
+            "affiliateUrl": "https://s.shopee.tw/W6yYRejo1?share_channel_code=6",
+            "anchor": "value",
+            "soldOut": true,
+            "checkedAt": "2026-09-27"
+          }
+        ]
       }
     },
     {
