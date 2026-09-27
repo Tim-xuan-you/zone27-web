@@ -1,30 +1,19 @@
 import type { Metadata } from "next";
-import { Noto_Sans_TC, Noto_Serif_TC, IBM_Plex_Mono } from "next/font/google";
+import { preload } from "react-dom";
 import "./globals.css";
+/*
+ * 字型自己放（public/fonts/），建置時不連 Google。
+ * 2026-09-27 以前用 next/font/google，每次建置要下載 228 個字型檔，抓失敗一個整個建置就掛
+ * （本機三次、Vercel 一次）。字型、字重、CSS 變數名稱都跟以前一樣：
+ *   標題用思源宋體（Noto Serif TC 600／700／900）：同時給到權威感與人味，純無襯線讀起來太像後台
+ *   內文思源黑體（Noto Sans TC 400／500／700），數字用 IBM Plex Mono（400／500／600）
+ * 要換字重：改 scripts/fonts-selfhost.mjs 再跑一次，會重寫 fonts.css、fonts-preload.json 和字型檔。
+ * fonts.css 放在 globals.css 後面，變數才會蓋過 Tailwind 預設的 --font-sans 那幾個。
+ */
+import "./fonts.css";
+import fontPreload from "./fonts-preload.json";
 import PageReport from "@/components/PageReport";
 import { Analytics } from "@vercel/analytics/next";
-
-const sans = Noto_Sans_TC({
-  subsets: ["latin"],
-  weight: ["400", "500", "700"],
-  variable: "--font-sans",
-  display: "swap",
-});
-
-/* 標題用襯線 —— 同時給到權威感與人味。純無襯線讀起來太像後台。 */
-const serif = Noto_Serif_TC({
-  subsets: ["latin"],
-  weight: ["600", "700", "900"],
-  variable: "--font-serif",
-  display: "swap",
-});
-
-const mono = IBM_Plex_Mono({
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
-  variable: "--font-mono",
-  display: "swap",
-});
 
 export const metadata: Metadata = {
   alternates: { canonical: "/" },
@@ -40,11 +29,10 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  // 拉丁字母那幾塊先載（黑體、宋體各一塊，Mono 三個字重各一塊），跟以前 next/font 預先載入的是同一批
+  for (const href of fontPreload) preload(href, { as: "font", type: "font/woff2", crossOrigin: "" });
   return (
-    <html
-      lang="zh-Hant-TW"
-      className={`${sans.variable} ${serif.variable} ${mono.variable}`}
-    >
+    <html lang="zh-Hant-TW">
       <body>
         {children}
         <PageReport />
