@@ -3,7 +3,6 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import SiteHeader from "@/components/SiteHeader";
 import { S } from "@/components/styles";
-import SoldHint from "@/components/SoldHint";
 import { readerNotes } from "@/lib/notes";
 import ChargerPair from "@/components/ChargerPair";
 import {
@@ -83,7 +82,6 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
       {m ? (
         <div style={S.buyRow}>
           <a href={`/go/${m.id}/${c.id}`} rel="nofollow sponsored" style={S.btnBuy}>去蝦皮看這一顆 · ${m.amount.toLocaleString()}</a>
-          <SoldHint m={m} />
           <p style={S.buyNote}>{[m.label, ...readerNotes(m.note, { keepVariant: true })].join(" · ")}</p>
           {/* 其他賣場也列出來：有的是組合（像多附一條 60W 的線），貴一點但可能剛好是讀者要的 */}
           {live.length > 1 && (
@@ -111,7 +109,7 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
       {alts.length > 0 && (
         <div style={altBox}>
           <p style={{ margin: 0, fontSize: 15.5, fontWeight: 700, lineHeight: 1.7 }}>
-            {m ? "不想等補貨的話，現在買得到、插上去最快的是這幾顆：" : "現在買得到、插上去最快的是這幾顆："}
+            {m ? "一樣最快的還有這幾顆：" : "現在買得到、插上去最快的是這幾顆："}
           </p>
           {alts.map((a) => (
             <p key={a.charger.id} style={{ margin: "8px 0 0", fontSize: 15.5, lineHeight: 1.8 }}>

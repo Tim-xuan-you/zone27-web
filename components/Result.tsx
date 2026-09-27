@@ -14,7 +14,6 @@ import { readerNotes } from "@/lib/notes";
 import { S } from "./styles";
 import Share from "./Share";
 import Stamp from "./Stamp";
-import SoldHint from "./SoldHint";
 import { STAMP, STAMP_LINE } from "@/lib/chicken";
 
 /**
@@ -324,7 +323,6 @@ function Answer({
             <span style={S.buyNote}>{buyNote(safe)}</span>
           </div>
         )}
-        <SoldHint m={safe} />
         {safe && <ReportLine p={p} where={whereOf(storeOf(p, safe), checkedOf(p, safe))} />}
         <SizeTable p={p} weightKg={dogKg} stage={stage} said={said} />
         <Timing p={p} />
@@ -391,7 +389,6 @@ function SecondPick({ alt }: { alt: NonNullable<Verdict["alt"]> }) {
           {buyLabel(safe, true)}
         </a>
       )}
-      <SoldHint m={safe} style={{ marginTop: 0 }} />
     </div>
   );
 }
@@ -592,7 +589,6 @@ function Alt({ p, dogKg, stage, multi, said }: { p: Product; dogKg?: number; sta
             </a>
           </div>
         )}
-        <SoldHint m={safe} />
         {safe && <ReportLine p={p} where={whereOf(storeOf(p, safe), checkedOf(p, safe))} />}
       </div>
 
@@ -657,7 +653,6 @@ export function ProductCard({ p }: { p: Product }) {
             <span style={S.buyNote}>{buyNote(safe)}</span>
           </div>
         )}
-        <SoldHint m={safe} />
         {safe && <ReportLine p={p} where={whereOf(storeOf(p, safe), checkedOf(p, safe))} />}
         <SizeTable p={p} />
         <Timing p={p} />
@@ -725,7 +720,6 @@ function Stores({ p, dogKg, stage }: { p: Product; dogKg?: number; stage?: Stage
               >前往賣場</a>
             )}
           </div>
-          {store.options.every((o) => o.soldOut) && <SoldHint m={store.options[0]} style={{ marginTop: 2 }} />}
 
           <div style={S.optList}>
             {store.options.map((o, i) => {

@@ -166,7 +166,7 @@ function Row({ x }: { x: CheckItem }) {
 
         <div style={{ display: "flex", flexWrap: "wrap", gap: 10, alignItems: "center", marginTop: 14 }}>
           {x.status === "clean" && x.buyId ? (
-            <a href={`/go/${x.buyId}/${x.id}`} rel="nofollow sponsored" style={buy}>{x.buySold ? "去蝦皮看補貨了沒" : "去蝦皮看"}</a>
+            <a href={`/go/${x.buyId}/${x.id}`} rel="nofollow sponsored" style={buy}>去蝦皮看</a>
           ) : null}
           {/* 只讀了成分表的那幾款沒有商品頁 */}
           {x.href && <Link href={x.href} style={{ fontSize: 14, color: "var(--accent)", fontWeight: 600 }}>看這一款的完整說明 →</Link>}

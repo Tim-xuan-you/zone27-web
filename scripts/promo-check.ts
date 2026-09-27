@@ -26,6 +26,8 @@ const PROMO: [RegExp, string][] = [
   [/買一送一|加購價|限時|特價|檔期|下殺|新客首購|首購組|新客專屬/, "限時活動"],
   [/鑑賞期|天鑑賞|正品保障|安心退/, "平台保障"],
   [/兩包組更便宜|組合更便宜/, "要跟著價錢變的話"],
+  // 2026-09-27 Tim：「上次看是賣完的，有需要寫？」不用。庫存天天在變，寫了常常是錯的，還會讓人不點
+  [/看的時候賣完了|上次看是賣完|看補貨了沒|不想等補貨/, "庫存"],
 ];
 
 function walk(dir: string, exts: RegExp): string[] {
@@ -56,7 +58,10 @@ const problems: string[] = [];
 for (const f of files) {
   const raw = readFileSync(f, "utf8");
   const text = f.endsWith(".html") ? visibleText(raw) : raw;
+  // 維護台（/status）讀者看不到，那裡本來就要講賣完、看補貨
+  const internal = /[\\/]status\.(html|body)$/.test(f);
   for (const [re, kind] of PROMO) {
+    if (internal && kind === "庫存") continue;
     const m = text.match(re);
     if (!m || m.index === undefined) continue;
     const at = m.index;

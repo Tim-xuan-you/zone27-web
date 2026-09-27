@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { S } from "./styles";
-import SoldHint from "./SoldHint";
 import { readerNotes } from "@/lib/notes";
 import {
   DEVICES, TIER_TONE, anchorCharger, chargers, deviceById, rank, splitBuy, tierZh,
@@ -200,7 +199,6 @@ function Answer({ f, one }: { f: Fit; one?: boolean }) {
         <div style={S.buyRow}>
           <a href={`/go/${m.id}/${c.id}`} rel="nofollow sponsored" style={S.btnBuy}>去蝦皮看這一顆</a>
           <p style={S.buyNote}>{[m.label, ...readerNotes(m.note, { keepVariant: true })].join(" · ")}</p>
-          <SoldHint m={m} />
         </div>
       ) : (
         <p style={{ margin: "12px 0 0", fontSize: 14, color: "var(--faint)" }}>購買連結還在補</p>

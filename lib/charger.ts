@@ -343,7 +343,7 @@ const priceOf = (c: Charger): number => anchorCharger(c)?.amount ?? c.listPrice 
 /* 買得到嗎                                                             */
 /* ------------------------------------------------------------------ */
 
-/** 讀者看得到的賣場：有貨的優先；全部賣完就給賣完的（畫面會寫上次看是賣完的，2026-09-27 起） */
+/** 讀者看得到的賣場：有貨的優先；全部賣完就給賣完的（2026-09-27 起，網站不寫賣完） */
 export const liveCharger = (c: Charger): Merchant[] => onePerShop(showable(c.price.merchants).filter((m) => !m.dead));
 /** 現在有貨。排順序時有貨的在前 */
 export const inStockCharger = (c: Charger): boolean => c.price.merchants.some((m) => !m.dead && !m.soldOut);

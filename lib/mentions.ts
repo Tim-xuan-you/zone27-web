@@ -113,7 +113,7 @@ function treatAnswer(p: TreatProduct): { line: string; warn: boolean } {
     parts.push(lim ? `${who}一天最多 ${lim.label}` : "品牌沒公布熱量");
   }
   const m = anchorTreat(p);
-  parts.push(m ? (m.soldOut ? "上次看是賣完的" : `一包 ${m.amount.toLocaleString()}`) : "購買連結還在補");
+  parts.push(m ? `一包 $${m.amount.toLocaleString()}` : "購買連結還在補");
   return { line: parts.join("，"), warn };
 }
 
@@ -122,8 +122,7 @@ function litterAnswer(p: LitterProduct): { line: string; warn: boolean } {
   const m = anchorLitter(p);
   const mc = m ? monthlyCost(p, m) : null;
   const parts = [MATERIAL_ZH[p.spec.material], FLUSH[p.spec.flushable].zh];
-  parts.push(mc ? `一隻貓一個月大約 ${mc.cost.toLocaleString()}` : m ? `一包 ${m.amount.toLocaleString()}` : "購買連結還在補");
-  if (m?.soldOut) parts.push("上次看是賣完的");
+  parts.push(mc ? `一隻貓一個月大約 $${mc.cost.toLocaleString()}` : m ? `一包 $${m.amount.toLocaleString()}` : "購買連結還在補");
   return { line: parts.join("，"), warn: false };
 }
 

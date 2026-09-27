@@ -4,7 +4,6 @@ import { notFound } from "next/navigation";
 import SiteHeader from "@/components/SiteHeader";
 
 import { S } from "@/components/styles";
-import SoldHint from "@/components/SoldHint";
 import Share from "@/components/Share";
 import { CONTACT } from "@/lib/contact";
 import {
@@ -108,7 +107,6 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
             </p>
           )}
           <a href={`/go/${m.id}/${p.id}`} rel="nofollow sponsored" style={S.buy}>去蝦皮看這一包</a>
-          <SoldHint m={m} />
           <p style={{ margin: "10px 0 0", fontSize: 12.5, color: "var(--faint)" }}>
             在 {m.label}{m.note ? ` · ${m.note}` : ""}
           </p>

@@ -115,7 +115,7 @@ export function dedupeMerchants(ms: Merchant[]): Merchant[] {
  * 讀者點下去會被 /go/ 轉回首頁（那一段有擋售完）。飼料以前沒標過售完，所以一直沒發現
  */
 export function buyable(p: Product): boolean {
-  // 賣完的也算：連結是好的，讀者點進去可能已經補貨（畫面會寫上次看是賣完的）
+  // 賣完的也算：連結是好的，讀者點進去可能已經補貨。網站不寫賣完，庫存天天在變，寫了常常是錯的
   return p.price.merchants.some((m) => !m.dead);
 }
 
@@ -475,7 +475,7 @@ export function adjudicate(pool: Product[], situation: Situation): Verdict {
     };
   }
 
-  // 有貨的優先：留下來的裡面只要有一款有貨，就從有貨的裡面挑。全部賣完才從賣完的挑（畫面會寫上次看是賣完的）
+  // 有貨的優先：留下來的裡面只要有一款有貨，就從有貨的裡面挑。全部賣完才從賣完的挑
   const stocked = alive.filter(inStock);
   const choosePool = stocked.length > 0 ? stocked : alive;
   const { pick, reason } = choose(choosePool, situation);

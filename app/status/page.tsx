@@ -472,7 +472,7 @@ export default function Page() {
       {soldOut.length > 0 && (
         <>
           <H id="sold-out" n={soldOut.length}>賣完了，看補貨了沒</H>
-          <p style={lead}>這幾款每一家都賣完了。讀者照樣點得到，按鈕下面寫著「我們哪天看是賣完的」。看到補貨跟我說一聲，我把日期改掉。</p>
+          <p style={lead}>這幾款每一家都賣完了。讀者照樣點得到，網站不寫賣完（庫存天天在變，點進去蝦皮自己會顯示）。看到補貨跟我說一聲。</p>
           <div style={{ ...box, padding: "6px 22px" }}>
             {/* 同一家、同規格、同價錢的只列一行：那是同一頁產了好幾條連結（2026-09-27 Tim：「這有甚麼差別？」沒有差別） */}
             {soldOut.flatMap((p) => {
