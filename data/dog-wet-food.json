@@ -727,12 +727,22 @@
         "merchants": [
           {
             "id": "m1",
+            "label": "寵物迷 Petmily",
+            "unit": "156g",
+            "amount": 90,
+            "note": "一頁多口味，規格選「吮掌回味雞胸肉156g」",
+            "affiliateUrl": "https://s.shopee.tw/3g403YgOkI?share_channel_code=6",
+            "anchor": "safe",
+            "checkedAt": "2026-09-27"
+          },
+          {
+            "id": "m2",
             "label": "Pamago帕瑪毛孩購物",
             "unit": "156g",
             "amount": 72,
             "note": "一頁多口味，規格選「吮回味雞胸肉156g」",
             "affiliateUrl": "https://s.shopee.tw/3VkZrFh25F?share_channel_code=6",
-            "anchor": "safe",
+            "anchor": "value",
             "checkedAt": "2026-09-27"
           }
         ]
