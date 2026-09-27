@@ -20,7 +20,7 @@
     "data:stage": "tsx scripts/stage-check.ts",
     "seo:indexnow": "tsx scripts/indexnow.ts",
     "voice:check": "tsx scripts/voice-check.ts",
-    "postbuild": "tsx scripts/outbound-check.ts && tsx scripts/promo-check.ts && tsx scripts/spec-check.ts && tsx scripts/route-check.ts",
+    "postbuild": "tsx scripts/outbound-check.ts && tsx scripts/promo-check.ts && tsx scripts/spec-check.ts && tsx scripts/route-check.ts && tsx scripts/sync-check.ts",
     "outbound:check": "tsx scripts/outbound-check.ts",
     "promo:check": "tsx scripts/promo-check.ts",
     "litter:import": "tsx scripts/import-litter.ts",
@@ -28,7 +28,8 @@
     "ui:check": "tsx scripts/ui-check.ts",
     "spec:check": "tsx scripts/spec-check.ts",
     "route:check": "tsx scripts/route-check.ts",
-    "asks:report": "tsx scripts/asks-report.ts"
+    "asks:report": "tsx scripts/asks-report.ts",
+    "sync:check": "tsx scripts/sync-check.ts"
   },
   "dependencies": {
     "@supabase/ssr": "^0.10.3",

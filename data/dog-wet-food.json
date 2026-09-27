@@ -59,7 +59,7 @@
         "merchants": [
           {
             "id": "m1",
-            "label": "RBB 寵物生活館（蝦皮優選）",
+            "label": "【 RBB ！】寵物生活館",
             "unit": "82g",
             "amount": 53,
             "note": "一頁多口味，規格選「清蒸鴨肉82G」",
@@ -572,7 +572,8 @@
             "note": "一頁多款，品項選「熟齡銀養罐滋補羊肉」、規格選 80G",
             "affiliateUrl": "https://s.shopee.tw/BU7AQ98TG?share_channel_code=6",
             "anchor": "safe",
-            "checkedAt": "2026-09-27"
+            "checkedAt": "2026-09-27",
+            "sharedPage": true
           }
         ]
       },
@@ -646,7 +647,8 @@
             "note": "一頁多款，品項選「幼母犬營養罐鮮嫩雞肉」、規格選 80G",
             "affiliateUrl": "https://s.shopee.tw/8KpouD7k0G?share_channel_code=6",
             "anchor": "safe",
-            "checkedAt": "2026-09-27"
+            "checkedAt": "2026-09-27",
+            "sharedPage": true
           },
           {
             "id": "m2",
@@ -721,12 +723,22 @@
       },
       "price": {
         "unit": "156g",
-        "checkedAt": "2026-09-20",
-        "merchants": []
+        "checkedAt": "2026-09-27",
+        "merchants": [
+          {
+            "id": "m1",
+            "label": "Pamago帕瑪毛孩購物",
+            "unit": "156g",
+            "amount": 72,
+            "note": "一頁多口味，規格選「吮回味雞胸肉156g」",
+            "affiliateUrl": "https://s.shopee.tw/3VkZrFh25F?share_channel_code=6",
+            "anchor": "safe",
+            "checkedAt": "2026-09-27"
+          }
+        ]
       },
       "dealbreaker": "你的狗對雞過敏。第一項是去骨去皮雞胸肉，第二項是雞湯。",
       "knownIssues": "脂肪最少 1.4%，是我們讀過的狗主食罐裡最低的；水分最多 85%。成分第三項是葵花籽油、第四項是馬鈴薯澱粉。品牌沒有公布代謝能。碳水是我們用減法算的。",
-      "awaitingLink": true,
       "searchAs": "唯美味 WERUVA 狗狗主食罐 吮掌回味雞胸肉 156g",
       "chicken": {
         "status": "chicken"
