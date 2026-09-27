@@ -124,10 +124,10 @@ function brandFails(c: Candidate, id: string): number {
 const failedFor = (id: string, c: Candidate): Pair | undefined =>
   PAIRS.find((x) => x.productId === id && ((c.shopId && x.shopId === c.shopId) || x.shop === c.shop));
 
-/** 這一款還有幾家可以試（試過產不出來的不算）。維護台用來決定要不要另外給搜尋按鈕 */
+/** 這一款還有幾家可以試（試過產不出來的、已經知道賣完的都不算）。維護台用來決定要不要另外給搜尋按鈕、要不要移到「看補貨」 */
 export function openPicks(id: string): number {
   const t = HUNT.get(id);
-  return t ? t.candidates.filter((c) => !failedFor(id, c)).length : 0;
+  return t ? t.candidates.filter((c) => !failedFor(id, c) && !c.soldOut).length : 0;
 }
 
 export default function HuntPicks({ id }: { id: string }) {

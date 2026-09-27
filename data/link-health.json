@@ -1,6 +1,6 @@
 {
   "checkedAt": "2026-09-19",
-  "total": 122,
+  "total": 127,
   "bad": 0,
   "rows": [
     {
@@ -1588,6 +1588,71 @@
       "item": "50662979/51809610689",
       "verdict": "ok",
       "note": "2026-09-26 貼進來時手動跟了一次轉址，沒有跑整批健檢"
+    },
+    {
+      "productId": "dw-01",
+      "brand": "怪獸部落",
+      "name": "犬1肉主食罐 鴨肉",
+      "merchantId": "m1",
+      "label": "RBB 寵物生活館（蝦皮優選）",
+      "url": "https://s.shopee.tw/30oIXLbJPY?share_channel_code=6",
+      "status": 302,
+      "finalUrl": "https://shopee.tw/opaanlp/20186300/18970210826",
+      "item": "20186300/18970210826",
+      "verdict": "ok",
+      "note": "2026-09-27 貼進來時手動跟了一次轉址，沒有跑整批健檢；Tim 回報整頁售完"
+    },
+    {
+      "productId": "dw-09",
+      "brand": "汪喵星球",
+      "name": "熟齡犬銀養主食罐 燉羊肉",
+      "merchantId": "m1",
+      "label": "毛孩寵物鋪",
+      "url": "https://s.shopee.tw/BU7AQ98TG?share_channel_code=6",
+      "status": 302,
+      "finalUrl": "https://shopee.tw/opaanlp/1447238100/29974136550",
+      "item": "1447238100/29974136550",
+      "verdict": "ok",
+      "note": "2026-09-27 貼進來時手動跟了一次轉址，沒有跑整批健檢"
+    },
+    {
+      "productId": "dw-10",
+      "brand": "汪喵星球",
+      "name": "幼母犬營養主食罐 雞肉",
+      "merchantId": "m1",
+      "label": "汪喵星球官方商城",
+      "url": "https://s.shopee.tw/2BFBYsVDW3?share_channel_code=6",
+      "status": 302,
+      "finalUrl": "https://shopee.tw/opaanlp/329265193/7863578571",
+      "item": "329265193/7863578571",
+      "verdict": "ok",
+      "note": "2026-09-27 貼進來時手動跟了一次轉址，沒有跑整批健檢"
+    },
+    {
+      "productId": "dw-10",
+      "brand": "汪喵星球",
+      "name": "幼母犬營養主食罐 雞肉",
+      "merchantId": "m1",
+      "label": "毛孩寵物鋪",
+      "url": "https://s.shopee.tw/8KpouD7k0G?share_channel_code=6",
+      "status": 302,
+      "finalUrl": "https://shopee.tw/opaanlp/1447238100/29974136550",
+      "item": "1447238100/29974136550",
+      "verdict": "ok",
+      "note": "2026-09-27 貼進來時手動跟了一次轉址，沒有跑整批健檢"
+    },
+    {
+      "productId": "ch-03",
+      "brand": "Apple",
+      "name": "40W 動態電源轉接器（最高輸出 60W）",
+      "merchantId": "m1",
+      "label": "蝦皮直營 _ 生活超市",
+      "url": "https://s.shopee.tw/1qcLB5WVZD?share_channel_code=6",
+      "status": 302,
+      "finalUrl": "https://shopee.tw/opaanlp/50662979/55111202917",
+      "item": "50662979/55111202917",
+      "verdict": "ok",
+      "note": "2026-09-27 貼進來時手動跟了一次轉址，沒有跑整批健檢；跟 9/26 那條是同一頁，一樣售完"
     }
   ]
 }
