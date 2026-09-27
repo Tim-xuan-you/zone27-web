@@ -225,7 +225,13 @@ async function main() {
   const stores = existsSync(resolve(ROOT, "data/stores.json"))
     ? (JSON.parse(readFileSync(resolve(ROOT, "data/stores.json"), "utf8")) as { stores: Record<string, { name: string }> }).stores
     : {};
+  // 舊紀錄的賣場名字照現在的資料更新，上一次比對的結果也重算。
+  // 2026-09-28：生活超市以前叫「蝦皮直營（官方直營）」，改名以後舊紀錄一直報「確認是不是貼錯」，其實沒貼錯
+  // 用「商品＋網址」對：貼新連結的時候 m1、m2 會往後挪，merchantId 對不準
+  const labelNow = new Map(all.map((t) => [`${t.productId}|${t.url}`, t.label]));
   for (const r of rows) {
+    r.label = labelNow.get(`${r.productId}|${r.url}`) ?? r.label;
+    if (/確認是不是貼錯/.test(r.note)) r.note = "";
     if (r.verdict !== "ok") continue;
     if (mine && r.affiliate && r.affiliate !== mine) {
       r.verdict = "not-affiliate";

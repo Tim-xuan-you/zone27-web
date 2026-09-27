@@ -2,7 +2,7 @@
   "_meta": {
     "category": "cat-wet-food",
     "note": "由 data/cat-wet-food.csv 產生，不要直接改這個檔。改 CSV 之後跑 npm run data:import。",
-    "generatedAt": "2026-09-27",
+    "generatedAt": "2026-09-28",
     "count": 12,
     "pricePolicy": "人工複查，不爬蟲。checkedAt 誠實顯示於前端。"
   },
@@ -449,12 +449,22 @@
       },
       "price": {
         "unit": "82g",
-        "checkedAt": "2026-09-12",
-        "merchants": []
+        "checkedAt": "2026-09-28",
+        "merchants": [
+          {
+            "id": "m1",
+            "label": "塔塔寵物網",
+            "unit": "82g",
+            "amount": 59,
+            "note": "規格選「成貓 完美體重,鮭魚燴蔬菜 主食罐 82g」",
+            "affiliateUrl": "https://s.shopee.tw/BU8nWF8tm?share_channel_code=6",
+            "anchor": "safe",
+            "checkedAt": "2026-09-28"
+          }
+        ]
       },
       "dealbreaker": "你的貓對雞或豬過敏。名字寫鮭魚，第一項是雞湯、第二項是豬肝，鮭魚排第四。",
       "knownIssues": "含小麥筋質、米澱粉、米。纖維最多 4% 是這裡最高的，減重配方靠纖維撐飽足感。後面還有雞肉、鮪魚、水解雞香料。一罐 67 大卡。包裝沒寫灰分，碳水算不出來。",
-      "awaitingLink": true,
       "searchAs": "希爾思 成貓 完美體重 鮭魚 主食罐 82g",
       "chicken": {
         "status": "hidden",

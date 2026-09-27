@@ -1,8 +1,8 @@
 {
   "checkedAt": "2026-09-27",
   "filledAt": "2026-09-27",
-  "total": 192,
-  "bad": 13,
+  "total": 193,
+  "bad": 0,
   "rows": [
     {
       "productId": "df-01",
@@ -121,56 +121,56 @@
       "brand": "FirstMate 第一饗宴",
       "name": "無穀低敏 野生海魚全犬",
       "merchantId": "m1",
-      "label": "蝦皮直營（官方直營）",
+      "label": "蝦皮直營 _ 生活超市",
       "url": "https://s.shopee.tw/80CUGQ3z8S?share_channel_code=6",
       "status": 200,
       "finalUrl": "https://shopee.tw/opaanlp/50662979/27140313504",
       "item": "50662979/27140313504",
       "affiliate": "an_16322830031",
       "verdict": "ok",
-      "note": "連結落在「蝦皮直營 _ 生活超市」，資料寫的是「蝦皮直營（官方直營）」，確認是不是貼錯"
+      "note": ""
     },
     {
       "productId": "df-03",
       "brand": "FirstMate 第一饗宴",
       "name": "無穀低敏 野生海魚全犬",
       "merchantId": "m2",
-      "label": "蝦皮直營（官方直營）",
+      "label": "蝦皮直營 _ 生活超市",
       "url": "https://s.shopee.tw/9AOReYUTFr?share_channel_code=6",
       "status": 200,
       "finalUrl": "https://shopee.tw/opaanlp/50662979/26790257387",
       "item": "50662979/26790257387",
       "affiliate": "an_16322830031",
       "verdict": "ok",
-      "note": "連結落在「蝦皮直營 _ 生活超市」，資料寫的是「蝦皮直營（官方直營）」，確認是不是貼錯"
+      "note": ""
     },
     {
       "productId": "df-03",
       "brand": "FirstMate 第一饗宴",
       "name": "無穀低敏 野生海魚全犬",
       "merchantId": "m3",
-      "label": "蝦皮直營（官方直營）",
+      "label": "蝦皮直營 _ 生活超市",
       "url": "https://s.shopee.tw/9zxYe4srBV?share_channel_code=6",
       "status": 200,
       "finalUrl": "https://shopee.tw/opaanlp/50662979/40814489178",
       "item": "50662979/40814489178",
       "affiliate": "an_16322830031",
       "verdict": "ok",
-      "note": "連結落在「蝦皮直營 _ 生活超市」，資料寫的是「蝦皮直營（官方直營）」，確認是不是貼錯"
+      "note": ""
     },
     {
       "productId": "df-03",
       "brand": "FirstMate 第一饗宴",
       "name": "無穀低敏 野生海魚全犬",
       "merchantId": "m4",
-      "label": "蝦皮直營（官方直營）",
+      "label": "蝦皮直營 _ 生活超市",
       "url": "https://s.shopee.tw/112jvWftHl?share_channel_code=6",
       "status": 200,
       "finalUrl": "https://shopee.tw/opaanlp/50662979/41064442988",
       "item": "50662979/41064442988",
       "affiliate": "an_16322830031",
       "verdict": "ok",
-      "note": "連結落在「蝦皮直營 _ 生活超市」，資料寫的是「蝦皮直營（官方直營）」，確認是不是貼錯"
+      "note": ""
     },
     {
       "productId": "df-04",
@@ -905,14 +905,14 @@
       "brand": "Greenies 健綠",
       "name": "潔牙骨 迷你犬（Teenie）",
       "merchantId": "m2",
-      "label": "蝦皮直營（官方直營）",
+      "label": "蝦皮直營 _ 生活超市",
       "url": "https://s.shopee.tw/2VrrrzAEbq?share_channel_code=6",
       "status": 200,
       "finalUrl": "https://shopee.tw/opaanlp/50662979/42961988776",
       "item": "50662979/42961988776",
       "affiliate": "an_16322830031",
       "verdict": "ok",
-      "note": "連結落在「蝦皮直營 _ 生活超市」，資料寫的是「蝦皮直營（官方直營）」，確認是不是貼錯"
+      "note": ""
     },
     {
       "productId": "dt-02",
@@ -933,14 +933,14 @@
       "brand": "Greenies 健綠",
       "name": "潔牙骨 小型犬（Petite）",
       "merchantId": "m2",
-      "label": "蝦皮直營（官方直營）",
+      "label": "蝦皮直營 _ 生活超市",
       "url": "https://s.shopee.tw/2VrrrzAEbq?share_channel_code=6",
       "status": 200,
       "finalUrl": "https://shopee.tw/opaanlp/50662979/42961988776",
       "item": "50662979/42961988776",
       "affiliate": "an_16322830031",
       "verdict": "ok",
-      "note": "連結落在「蝦皮直營 _ 生活超市」，資料寫的是「蝦皮直營（官方直營）」，確認是不是貼錯"
+      "note": ""
     },
     {
       "productId": "cf-01",
@@ -2095,28 +2095,28 @@
       "brand": "Ever Clean 藍鑽",
       "name": "藍標 4倍淨味貓砂（無香）",
       "merchantId": "m1",
-      "label": "蝦皮直營（官方直營）",
+      "label": "蝦皮直營 _ 生活超市",
       "url": "https://s.shopee.tw/AKagYBra4s",
       "status": 200,
       "finalUrl": "https://shopee.tw/opaanlp/50662979/46561606654",
       "item": "50662979/46561606654",
       "affiliate": "an_16322830031",
       "verdict": "ok",
-      "note": "連結落在「蝦皮直營 _ 生活超市」，資料寫的是「蝦皮直營（官方直營）」，確認是不是貼錯"
+      "note": ""
     },
     {
       "productId": "cl-07",
       "brand": "Ever Clean 藍鑽",
       "name": "藍標 4倍淨味貓砂（無香）",
       "merchantId": "m2",
-      "label": "蝦皮直營（官方直營）",
+      "label": "蝦皮直營 _ 生活超市",
       "url": "https://s.shopee.tw/60RhNwssSr",
       "status": 200,
       "finalUrl": "https://shopee.tw/opaanlp/50662979/46561606654",
       "item": "50662979/46561606654",
       "affiliate": "an_16322830031",
       "verdict": "ok",
-      "note": "連結落在「蝦皮直營 _ 生活超市」，資料寫的是「蝦皮直營（官方直營）」，確認是不是貼錯"
+      "note": ""
     },
     {
       "productId": "cl-13",
@@ -2410,7 +2410,7 @@
       "item": "50662979/51809610689",
       "affiliate": "an_16322830031",
       "verdict": "ok",
-      "note": "連結落在「蝦皮直營（官方直營）」，資料寫的是「蝦皮直營 _ 生活超市」，確認是不是貼錯"
+      "note": ""
     },
     {
       "productId": "ch-03",
@@ -2424,7 +2424,7 @@
       "item": "50662979/55111202917",
       "affiliate": "an_16322830031",
       "verdict": "ok",
-      "note": "連結落在「蝦皮直營（官方直營）」，資料寫的是「蝦皮直營 _ 生活超市」，確認是不是貼錯"
+      "note": ""
     },
     {
       "productId": "ch-03",
@@ -2438,7 +2438,7 @@
       "item": "50662979/55111202917",
       "affiliate": "an_16322830031",
       "verdict": "ok",
-      "note": "連結落在「蝦皮直營（官方直營）」，資料寫的是「蝦皮直營 _ 生活超市」，確認是不是貼錯"
+      "note": ""
     },
     {
       "productId": "ch-04",
@@ -2452,7 +2452,7 @@
       "item": "50662979/57659608508",
       "affiliate": "an_16322830031",
       "verdict": "ok",
-      "note": "連結落在「蝦皮直營（官方直營）」，資料寫的是「蝦皮直營 _ 生活超市」，確認是不是貼錯"
+      "note": ""
     },
     {
       "productId": "ch-05",
@@ -2466,7 +2466,7 @@
       "item": "50662979/54309599634",
       "affiliate": "an_16322830031",
       "verdict": "ok",
-      "note": "連結落在「蝦皮直營（官方直營）」，資料寫的是「蝦皮直營 _ 生活超市」，確認是不是貼錯"
+      "note": ""
     },
     {
       "productId": "ch-09",
@@ -2688,6 +2688,20 @@
       "status": 200,
       "finalUrl": "https://shopee.tw/opaanlp/1322591005/41511441589",
       "item": "1322591005/41511441589",
+      "affiliate": "an_16322830031",
+      "verdict": "ok",
+      "note": ""
+    },
+    {
+      "productId": "cw-06",
+      "brand": "Hill's 希爾思",
+      "name": "成貓 完美體重 鮭魚 主食罐",
+      "merchantId": "m1",
+      "label": "塔塔寵物網",
+      "url": "https://s.shopee.tw/BU8nWF8tm?share_channel_code=6",
+      "status": 200,
+      "finalUrl": "https://shopee.tw/opaanlp/1025157313/51517818856",
+      "item": "1025157313/51517818856",
       "affiliate": "an_16322830031",
       "verdict": "ok",
       "note": ""
