@@ -153,12 +153,22 @@
       },
       "price": {
         "unit": "165g",
-        "checkedAt": "2026-09-20",
-        "merchants": []
+        "checkedAt": "2026-09-27",
+        "merchants": [
+          {
+            "id": "m1",
+            "label": "貓咖寵物館",
+            "unit": "82g×24",
+            "amount": 1150,
+            "note": "一箱 24 罐，口味選「羊肉嫩雞*24」",
+            "affiliateUrl": "https://s.shopee.tw/40gr3XOiwS?share_channel_code=6",
+            "anchor": "safe",
+            "checkedAt": "2026-09-27"
+          }
+        ]
       },
       "dealbreaker": "你的狗對雞過敏。雞腿肉、雞胸肉、雞心肝三項，名字上就寫了。",
       "knownIssues": "名字誠實，雞寫在標題上。第一項是澳洲草飼羊肉，接著才是雞。標示 AAFCO 成幼犬。",
-      "awaitingLink": true,
       "searchAs": "怪獸部落 犬2肉主食罐 羊雞肉 165g",
       "chicken": {
         "status": "chicken"
@@ -583,7 +593,8 @@
             "affiliateUrl": "https://s.shopee.tw/1AiDmJ3xT?share_channel_code=6",
             "anchor": "value",
             "soldOut": true,
-            "checkedAt": "2026-09-27"
+            "checkedAt": "2026-09-27",
+            "sharedPage": true
           }
         ]
       },
@@ -1214,7 +1225,8 @@
             "affiliateUrl": "https://s.shopee.tw/60RvOIwbMM?share_channel_code=6",
             "anchor": "value",
             "soldOut": true,
-            "checkedAt": "2026-09-27"
+            "checkedAt": "2026-09-27",
+            "sharedPage": true
           }
         ]
       },
