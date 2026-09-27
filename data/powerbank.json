@@ -327,10 +327,20 @@
       "checkedAt": "2026-09-27",
       "price": {
         "unit": "1 顆",
-        "checkedAt": "2026-09-27",
-        "merchants": []
+        "checkedAt": "2026-09-28",
+        "merchants": [
+          {
+            "id": "m1",
+            "label": "KINYO官方旗艦店_3C館",
+            "unit": "1顆",
+            "amount": 699,
+            "note": "規格選「10000mAh/砂棕」，同一頁也有 20000mAh 的",
+            "affiliateUrl": "https://s.shopee.tw/8pm75uqtXn?share_channel_code=6",
+            "anchor": "safe",
+            "checkedAt": "2026-09-28"
+          }
+        ]
       },
-      "awaitingLink": true,
       "listPrice": 799
     },
     {
@@ -380,10 +390,20 @@
       "checkedAt": "2026-09-27",
       "price": {
         "unit": "1 顆",
-        "checkedAt": "2026-09-27",
-        "merchants": []
+        "checkedAt": "2026-09-28",
+        "merchants": [
+          {
+            "id": "m1",
+            "label": "KINYO官方旗艦店_3C館",
+            "unit": "1顆",
+            "amount": 899,
+            "note": "規格選 20000mAh（軍綠色或白色），同一頁也有 10000mAh 的",
+            "affiliateUrl": "https://s.shopee.tw/8pm75uqtXn?share_channel_code=6",
+            "anchor": "safe",
+            "checkedAt": "2026-09-28"
+          }
+        ]
       },
-      "awaitingLink": true,
       "listPrice": 990
     },
     {

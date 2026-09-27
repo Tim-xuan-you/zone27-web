@@ -1,7 +1,7 @@
 {
   "checkedAt": "2026-09-27",
   "filledAt": "2026-09-27",
-  "total": 189,
+  "total": 191,
   "bad": 13,
   "rows": [
     {
@@ -2646,6 +2646,34 @@
       "status": 200,
       "finalUrl": "https://shopee.tw/opaanlp/1322591005/25389007655",
       "item": "1322591005/25389007655",
+      "affiliate": "an_16322830031",
+      "verdict": "ok",
+      "note": ""
+    },
+    {
+      "productId": "pb-06",
+      "brand": "KINYO",
+      "name": "超能充 自帶線輕儲能行動電源 10000mAh",
+      "merchantId": "m1",
+      "label": "KINYO官方旗艦店_3C館",
+      "url": "https://s.shopee.tw/8pm75uqtXn?share_channel_code=6",
+      "status": 200,
+      "finalUrl": "https://shopee.tw/opaanlp/1322591005/29780416923",
+      "item": "1322591005/29780416923",
+      "affiliate": "an_16322830031",
+      "verdict": "ok",
+      "note": ""
+    },
+    {
+      "productId": "pb-07",
+      "brand": "KINYO",
+      "name": "超能充 自帶線輕儲能行動電源 20000mAh",
+      "merchantId": "m1",
+      "label": "KINYO官方旗艦店_3C館",
+      "url": "https://s.shopee.tw/8pm75uqtXn?share_channel_code=6",
+      "status": 200,
+      "finalUrl": "https://shopee.tw/opaanlp/1322591005/29780416923",
+      "item": "1322591005/29780416923",
       "affiliate": "an_16322830031",
       "verdict": "ok",
       "note": ""
