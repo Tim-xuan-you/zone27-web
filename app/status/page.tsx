@@ -240,7 +240,7 @@ export default function Page() {
     if (live(x).length > 0 || (sold && openPicks(c.id) === 0)) continue;
     const best = DEVICES.filter((d) => fit(c, [d]).got![0].tier === "fast");
     add({
-      id: c.id, brand: c.brand, name: c.name, value: best.length * 5,
+      id: c.id, brand: c.brand, name: c.name, huntNote: c.huntNote, value: best.length * 5,
       keyword: c.searchAs ?? huntFrom(c.brand, c.name), shops: shopsFor(c.brand),
       why: sold
         ? `產得出連結的那家賣完了，換一家試試。${c.back}`

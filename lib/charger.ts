@@ -55,6 +55,8 @@ export interface Charger {
   dealbreaker: string;
   knownIssues?: string;
   searchAs?: string;
+  /** 找過找不到、或不值得找：維護台排到最後，寫明原因 */
+  huntNote?: string;
   /** 研究來源。只留在資料檔，不連出去 */
   refs: string[];
   checkedAt: string;
