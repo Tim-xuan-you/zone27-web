@@ -240,7 +240,7 @@
       "id": "cf-17",
       "label": "Instinct 原點 鮭魚無穀全貓配方",
       "why": "查藏雞頁「沒有雞」的一款。同牌子的鴨肉第 3 項就是雞肉粉",
-      "note": "查到的賣場整家都產不出連結（含原點官方旗艦館以外的三家）。先放著。",
+      "note": "即期品、寫雞肉鮭魚的合併頁不收。東東中永和、rose30611、美狗貓原點皇極之前整家試過都不行，不列。",
       "candidates": [
         {
           "shop": "Instinct 原點旗艦店（官方直營）",
@@ -249,9 +249,58 @@
           "unit": "10磅",
           "url": "https://shopee.tw/product/234961811/12860610874",
           "channel": "mall"
+        },
+        {
+          "channel": "seller",
+          "shop": "罐罐富翁 I'm a rich p",
+          "shopId": "650744926",
+          "price": 2831,
+          "unit": "10 磅",
+          "url": "https://shopee.tw/product/650744926/29713562679"
+        },
+        {
+          "channel": "seller",
+          "shop": "小BU的寵物商城",
+          "shopId": "230717106",
+          "price": 2689,
+          "unit": "10 磅",
+          "url": "https://shopee.tw/product/230717106/44718369459"
+        },
+        {
+          "channel": "mall",
+          "shop": "Instinct 原點旗艦店（官方直營）",
+          "shopId": "234961811",
+          "price": 1640,
+          "unit": "4.5 磅單包。跟產不出來的 10 磅是不同頁，可以試一次",
+          "url": "https://shopee.tw/product/234961811/14918671574"
+        },
+        {
+          "channel": "seller",
+          "shop": "咪兔",
+          "shopId": "21762889",
+          "price": 1300,
+          "unit": "4.5 磅／10 磅一頁",
+          "url": "https://shopee.tw/product/21762889/26208875162"
+        },
+        {
+          "channel": "seller",
+          "shop": "胖皮狗貓用品健康倉庫",
+          "shopId": "404651275",
+          "price": 1480,
+          "unit": "4.5 磅（效期 2027-04）",
+          "url": "https://shopee.tw/product/404651275/25692796490"
+        },
+        {
+          "channel": "seller",
+          "shop": "🐰兔寶寵物",
+          "shopId": "730057",
+          "price": 1500,
+          "unit": "4.5 磅／10 磅一頁",
+          "url": "https://shopee.tw/product/730057/1990156327"
         }
       ],
-      "failed": []
+      "failed": [],
+      "checkedAt": "2026-09-27"
     },
     {
       "id": "df-16",

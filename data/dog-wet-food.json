@@ -175,7 +175,8 @@
             "affiliateUrl": "https://s.shopee.tw/4B0HFqO5bV?share_channel_code=6",
             "anchor": "value",
             "soldOut": true,
-            "checkedAt": "2026-09-27"
+            "checkedAt": "2026-09-27",
+            "sharedPage": true
           },
           {
             "id": "m3",
@@ -186,7 +187,8 @@
             "affiliateUrl": "https://s.shopee.tw/4B0HFqO5bV?share_channel_code=6",
             "anchor": "value",
             "soldOut": true,
-            "checkedAt": "2026-09-27"
+            "checkedAt": "2026-09-27",
+            "sharedPage": true
           }
         ]
       },
@@ -246,12 +248,22 @@
       },
       "price": {
         "unit": "165g",
-        "checkedAt": "2026-09-20",
-        "merchants": []
+        "checkedAt": "2026-09-27",
+        "merchants": [
+          {
+            "id": "m1",
+            "label": "貓咖寵物館",
+            "unit": "82g×24",
+            "amount": 1150,
+            "note": "一箱 24 罐，口味選「鱉肉鱉蛋*24」",
+            "affiliateUrl": "https://s.shopee.tw/3g40fLFLwY?share_channel_code=6",
+            "anchor": "safe",
+            "checkedAt": "2026-09-27"
+          }
+        ]
       },
       "dealbreaker": "你的狗對雞過敏。名字寫鱉肉鱉蛋，成分表第一項是雞肉，後面還有雞心肝。",
       "knownIssues": "鱉是狗很少吃到的肉，常被拿來換口味或做排除飲食，但這一罐第一項是雞肉，鱉排第二。另外還有鯉魚。鱉肉、鱉蛋、鯉魚我們沒有另外開分類，要避開這幾種請直接看成分表。標示 AAFCO 成幼犬。",
-      "awaitingLink": true,
       "searchAs": "怪獸部落 犬2肉主食罐 鱉肉鱉蛋 165g",
       "chicken": {
         "status": "hidden",
