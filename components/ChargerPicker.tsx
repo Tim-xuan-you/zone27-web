@@ -5,7 +5,7 @@ import { useEffect, useMemo, useState } from "react";
 import { S } from "./styles";
 import { readerNotes } from "@/lib/notes";
 import {
-  DEVICES, TIER_TONE, anchorCharger, chargers, deviceById, rank, splitBuy, tierZh,
+  DEVICES, TIER_TONE, anchorCharger, chargers, deviceById, inStockCharger, rank, splitBuy, tierZh,
   type Device, type Fit,
 } from "@/lib/charger";
 import ChargerSplit from "./ChargerSplit";
@@ -62,6 +62,8 @@ export default function ChargerPicker() {
   const winners = fits.filter((f) => f.got && f.fast === all);
   const top = winners[0];
   const shown = top ? winners : fits.slice(0, 1);
+  // 「一樣最快的還有」只列現在買得到的，最多 3 顆（2026-09-27 走一遍網站：iPhone 17 列了 8 顆，含買不到的三星）
+  const also = winners.slice(1).filter((w) => inStockCharger(w.charger)).slice(0, 3);
   const rest = fits.filter((f) => !shown.includes(f));
 
   /* 一起插沒有一顆全部最快：每一台各自挑一顆 */
@@ -104,10 +106,10 @@ export default function ChargerPicker() {
             <>
               <p style={S.lbl}>買這顆</p>
               <Answer f={top} one={all === 1} />
-              {winners.length > 1 && (
+              {also.length > 0 && (
                 <p style={{ margin: "12px 0 0", fontSize: 15.5, lineHeight: 1.85 }}>
                   <span style={{ color: "var(--muted)" }}>一樣最快的還有：</span>
-                  {winners.slice(1).map((w, i) => {
+                  {also.map((w, i) => {
                     const m = anchorCharger(w.charger);
                     return (
                       <span key={w.charger.id}>
