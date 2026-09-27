@@ -204,6 +204,17 @@
             "anchor": "value",
             "soldOut": true,
             "checkedAt": "2026-09-28"
+          },
+          {
+            "id": "m4",
+            "label": "毛孩寵物鋪",
+            "unit": "50g",
+            "amount": 300,
+            "note": "一頁多口味，規格選「長盈虱目魚」",
+            "affiliateUrl": "https://s.shopee.tw/5q8VaPKJIj?share_channel_code=6",
+            "anchor": "value",
+            "soldOut": true,
+            "checkedAt": "2026-09-28"
           }
         ]
       }
