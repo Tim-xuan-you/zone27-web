@@ -1,7 +1,7 @@
 {
   "checkedAt": "2026-09-19",
   "filledAt": "2026-09-27",
-  "total": 164,
+  "total": 165,
   "bad": 0,
   "rows": [
     {
@@ -2133,6 +2133,19 @@
       "status": 200,
       "finalUrl": "https://shopee.tw/opaanlp/1447238100/29574128530",
       "item": "1447238100/29574128530",
+      "verdict": "ok",
+      "note": ""
+    },
+    {
+      "productId": "dw-05",
+      "brand": "狗狗說",
+      "name": "犬用主食罐 藍罐 四種鮮魚＋鷹嘴豆",
+      "merchantId": "m1",
+      "label": "熊熊寵物用品生活館",
+      "url": "https://s.shopee.tw/2Vs2wlGHLl?share_channel_code=6",
+      "status": 200,
+      "finalUrl": "https://shopee.tw/opaanlp/3629645/50804612189",
+      "item": "3629645/50804612189",
       "verdict": "ok",
       "note": ""
     }

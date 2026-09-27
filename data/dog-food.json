@@ -84,7 +84,8 @@
             "note": "隔日到貨 · 正品保障 · 超商限兩包",
             "affiliateUrl": "https://s.shopee.tw/3B7ESUSXfM?share_channel_code=6",
             "anchor": "value",
-            "checkedAt": "2026-09-27"
+            "checkedAt": "2026-09-27",
+            "sharedPage": true
           },
           {
             "id": "m5",
@@ -94,7 +95,8 @@
             "note": "超商限一包",
             "affiliateUrl": "https://s.shopee.tw/3B7ESUSXfM?share_channel_code=6",
             "anchor": "value",
-            "checkedAt": "2026-09-27"
+            "checkedAt": "2026-09-27",
+            "sharedPage": true
           },
           {
             "id": "m6",
@@ -104,7 +106,8 @@
             "note": "限宅配 · 開封後要密封防潮",
             "affiliateUrl": "https://s.shopee.tw/3B7ESUSXfM?share_channel_code=6",
             "anchor": "value",
-            "checkedAt": "2026-09-27"
+            "checkedAt": "2026-09-27",
+            "sharedPage": true
           }
         ]
       },

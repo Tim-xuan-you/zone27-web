@@ -335,12 +335,22 @@
       },
       "price": {
         "unit": "165g",
-        "checkedAt": "2026-09-20",
-        "merchants": []
+        "checkedAt": "2026-09-27",
+        "merchants": [
+          {
+            "id": "m1",
+            "label": "熊熊寵物用品生活館",
+            "unit": "165g",
+            "amount": 68,
+            "note": "一頁多口味，品項選「藍罐-四種鮮魚×鷹嘴豆165g」，規格選「現貨」",
+            "affiliateUrl": "https://s.shopee.tw/2Vs2wlGHLl?share_channel_code=6",
+            "anchor": "safe",
+            "checkedAt": "2026-09-27"
+          }
+        ]
       },
       "dealbreaker": "你的狗對雞過敏。名字寫四種鮮魚，成分表裡有雞肝、雞油、雞心三項。",
       "knownIssues": "四種魚是鮪魚、鬼頭刀魚、旗魚、鰹魚，排在最前面沒錯。但雞肝、雞油、雞心也都在成分表裡，名字上一個字都沒提。鷹嘴豆是豆類。品牌沒有公布代謝能。標示沒寫適用年齡，我們先當成成犬。",
-      "awaitingLink": true,
       "searchAs": "狗狗說 犬用主食罐 藍罐 四種鮮魚 鷹嘴豆 165g",
       "chicken": {
         "status": "hidden",
