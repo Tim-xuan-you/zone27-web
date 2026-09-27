@@ -124,7 +124,8 @@ function parseLine(raw: string, line: number, carryId: string): Row | { error: s
   for (const p of parts) {
     // 【超商限兩包】這種直接當備註，不要混進賣場名稱
     const bracket = p.match(/^【(.+)】$/);
-    if (bracket) { note = note ? note + " · " + bracket[1] : bracket[1]; continue; }
+    // 【最少買 2 罐】【規格選…】連著寫的，拆成兩段（2026-09-27 以前會黏成一句）
+    if (bracket) { const b = bracket[1].split(/】\s*【/).join(" · "); note = note ? note + " · " + b : b; continue; }
     if (!productId && RE_ID.test(p)) { productId = p.toLowerCase(); continue; }
     if (!url && RE_URL.test(p)) { url = p; continue; }
     if (!unit && RE_UNIT.test(p)) { unit = normUnit(p); continue; }

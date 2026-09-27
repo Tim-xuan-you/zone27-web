@@ -1,6 +1,6 @@
 {
   "checkedAt": "2026-09-19",
-  "total": 129,
+  "total": 130,
   "bad": 0,
   "rows": [
     {
@@ -1677,6 +1677,19 @@
       "status": 302,
       "finalUrl": "https://shopee.tw/opaanlp/9271076/28806003857",
       "item": "9271076/28806003857",
+      "verdict": "ok",
+      "note": "2026-09-27 貼進來時手動跟了一次轉址，沒有跑整批健檢"
+    },
+    {
+      "productId": "dw-11",
+      "brand": "唯美味 WERUVA",
+      "name": "狗狗主食罐 吮掌回味雞胸肉",
+      "merchantId": "m1",
+      "label": "Lazy Cat 悠懶貓（蝦皮商城）",
+      "url": "https://s.shopee.tw/40gqSAf84O?share_channel_code=6",
+      "status": 302,
+      "finalUrl": "https://shopee.tw/opaanlp/270668052/3880830800",
+      "item": "270668052/3880830800",
       "verdict": "ok",
       "note": "2026-09-27 貼進來時手動跟了一次轉址，沒有跑整批健檢"
     }

@@ -727,16 +727,26 @@
         "merchants": [
           {
             "id": "m1",
-            "label": "寵物迷 Petmily",
+            "label": "Lazy Cat 悠懶貓（蝦皮商城）",
             "unit": "156g",
-            "amount": 90,
-            "note": "一頁多口味，規格選「吮掌回味雞胸肉156g」",
-            "affiliateUrl": "https://s.shopee.tw/3g403YgOkI?share_channel_code=6",
+            "amount": 89,
+            "note": "最少買 2 罐，不同口味可以混搭 · 一頁多口味，規格選「吮掌回味雞胸肉156g」",
+            "affiliateUrl": "https://s.shopee.tw/40gqSAf84O?share_channel_code=6",
             "anchor": "safe",
             "checkedAt": "2026-09-27"
           },
           {
             "id": "m2",
+            "label": "寵物迷 Petmily",
+            "unit": "156g",
+            "amount": 90,
+            "note": "一頁多口味，規格選「吮掌回味雞胸肉156g」",
+            "affiliateUrl": "https://s.shopee.tw/3g403YgOkI?share_channel_code=6",
+            "anchor": "value",
+            "checkedAt": "2026-09-27"
+          },
+          {
+            "id": "m3",
             "label": "Pamago帕瑪毛孩購物",
             "unit": "156g",
             "amount": 72,
