@@ -179,7 +179,7 @@ function Answer({ f, one }: { f: Fit; one?: boolean }) {
         <Link href={itemHref(c.id)} style={{ fontSize: 20, fontWeight: 700, lineHeight: 1.5, color: "inherit", textDecoration: "none" }}>
           {c.name}
         </Link>
-        {m && <span className="mono" style={{ fontSize: 20, fontWeight: 800, whiteSpace: "nowrap" }}>${m.amount.toLocaleString()}</span>}
+        {m && <span className="mono" style={{ fontSize: 20, fontWeight: 800, whiteSpace: "nowrap" }}>${m.amount.toLocaleString()}{/組/.test(m.unit ?? "") && <span style={{ fontSize: 14, fontWeight: 400 }}> 一組</span>}</span>}
       </span>
       {f.got && (
         one ? (
@@ -199,7 +199,7 @@ function Answer({ f, one }: { f: Fit; one?: boolean }) {
       )}
       {m ? (
         <div style={S.buyRow}>
-          <a href={`/go/${m.id}/${c.id}`} rel="nofollow sponsored" style={S.btnBuy}>去蝦皮看這一顆</a>
+          <a href={`/go/${m.id}/${c.id}`} rel="nofollow sponsored" style={S.btnBuy}>去蝦皮看這一{/組/.test(m.unit ?? "") ? "組" : "顆"}</a>
           <p style={S.buyNote}>{[m.label, ...readerNotes(m.note, { keepVariant: true })].join(" · ")}</p>
         </div>
       ) : (

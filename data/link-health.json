@@ -1,7 +1,7 @@
 {
   "checkedAt": "2026-09-27",
   "filledAt": "2026-09-27",
-  "total": 182,
+  "total": 183,
   "bad": 13,
   "rows": [
     {
@@ -2548,6 +2548,20 @@
       "status": 200,
       "finalUrl": "https://shopee.tw/opaanlp/992256455/25028042203",
       "item": "992256455/25028042203",
+      "affiliate": "an_16322830031",
+      "verdict": "ok",
+      "note": ""
+    },
+    {
+      "productId": "pb-04",
+      "brand": "Anker",
+      "name": "Nano 行動電源 10000mAh 45W 自帶伸縮線",
+      "merchantId": "m1",
+      "label": "Anker 品牌旗艦館",
+      "url": "https://s.shopee.tw/4fwXzTEYMg?share_channel_code=6",
+      "status": 200,
+      "finalUrl": "https://shopee.tw/opaanlp/67574794/45315145549",
+      "item": "67574794/45315145549",
       "affiliate": "an_16322830031",
       "verdict": "ok",
       "note": ""

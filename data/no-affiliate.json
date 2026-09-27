@@ -1084,6 +1084,30 @@
       "shop": "小松鼠 Little squirrel",
       "shopId": "59983609",
       "at": "2026-09-27"
+    },
+    {
+      "productId": "ch-12",
+      "shop": "萊恩生活小舖",
+      "shopId": "3887793",
+      "at": "2026-09-27"
+    },
+    {
+      "productId": "pb-04",
+      "shop": "你好大家好通訊",
+      "shopId": "36334206",
+      "at": "2026-09-27"
+    },
+    {
+      "productId": "pb-04",
+      "shop": "慕電選物「MUDE」",
+      "shopId": "1489651675",
+      "at": "2026-09-27"
+    },
+    {
+      "productId": "pb-04",
+      "shop": "ss_selectshop 網路商城",
+      "shopId": "24403885",
+      "at": "2026-09-27"
     }
   ]
 }

@@ -209,9 +209,19 @@
       "price": {
         "unit": "1 顆",
         "checkedAt": "2026-09-27",
-        "merchants": []
-      },
-      "awaitingLink": true
+        "merchants": [
+          {
+            "id": "m1",
+            "label": "Anker 品牌旗艦館",
+            "unit": "1組",
+            "amount": 2680,
+            "note": "這一頁是組合：A1638 加一顆 A121A 三孔充電器 · 規格選「新芽綠+A121A三孔充電器」，黑、白是充電器的顏色",
+            "affiliateUrl": "https://s.shopee.tw/4fwXzTEYMg?share_channel_code=6",
+            "anchor": "safe",
+            "checkedAt": "2026-09-27"
+          }
+        ]
+      }
     }
   ]
 }

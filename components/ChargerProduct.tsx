@@ -65,7 +65,7 @@ export default function ChargerProduct({ c, list, kind = "charger", battery }: {
 
       {m ? (
         <div style={S.buyRow}>
-          <a href={`/go/${m.id}/${c.id}`} rel="nofollow sponsored" style={S.btnBuy}>去蝦皮看這一顆 · ${m.amount.toLocaleString()}</a>
+          <a href={`/go/${m.id}/${c.id}`} rel="nofollow sponsored" style={S.btnBuy}>去蝦皮看這一{/組/.test(m.unit ?? "") ? "組" : "顆"} · ${m.amount.toLocaleString()}</a>
           <p style={S.buyNote}>{[m.label, ...readerNotes(m.note, { keepVariant: true })].join(" · ")}</p>
           {/* 其他賣場也列出來：有的是組合（像多附一條 60W 的線），貴一點但可能剛好是讀者要的 */}
           {live.length > 1 && (
