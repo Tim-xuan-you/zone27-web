@@ -57,8 +57,7 @@ export default function Page() {
         你家那包飼料，<br />有沒有藏雞？
       </h1>
       <p style={{ color: "var(--muted)", fontSize: 17, lineHeight: 1.9, margin: "0 0 8px", maxWidth: "42ch" }}>
-        名字寫鮭魚、鴨肉、牛肉的，不一定沒有雞。我們讀過的 {st.total} 款裡，名字沒寫雞的有 {st.unnamed} 款，
-        其中 <b style={{ color: "var(--cut)" }}>{st.hidden} 款成分表裡有雞</b>，另外 {st.unsure} 款只寫「禽肉」或「動物蛋白」，沒講是哪一種。
+        名字寫鮭魚、鴨肉、牛肉的，不一定沒有雞。我們讀過的 {st.total} 款裡，名字沒寫雞的有 {st.unnamed} 款，其中 <b style={{ color: "var(--cut)" }}>{st.hidden} 款成分表裡有雞</b>，另外 {st.unsure} 款只寫「禽肉」或「動物蛋白」，沒講是哪一種。
       </p>
       <p style={{ color: "var(--faint)", fontSize: 14, lineHeight: 1.8, margin: "0 0 12px" }}>
         打名字查，點開看是成分表第幾項。
