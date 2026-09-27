@@ -1693,7 +1693,8 @@
           "channel": "seller",
           "price": 40,
           "unit": "80g／165g 一頁，選「鹿肉 80g」",
-          "url": "https://shopee.tw/product/3629645/1409206645"
+          "url": "https://shopee.tw/product/3629645/1409206645",
+          "soldOut": "2026-09-27 Tim 截圖：整頁售完"
         },
         {
           "shop": "毛孩寵物鋪-汪喵食衣住行",
@@ -2717,6 +2718,15 @@
           "price": 49,
           "unit": "口味選「草飼牛肉 80g」（165g 也有，放牧鹿 165g 是 $75）",
           "url": "https://shopee.tw/product/329265193/6063571507"
+        },
+        {
+          "shop": "熊熊寵物用品生活館",
+          "shopId": "3629645",
+          "channel": "seller",
+          "price": 40,
+          "unit": "選項選「牛肉(免疫力)」、規格選「小罐80g」",
+          "url": "https://shopee.tw/product/3629645/1409206645",
+          "soldOut": "2026-09-27 Tim 截圖：整頁售完（鹿肉在這一頁產得出來）"
         }
       ]
     },
@@ -2741,6 +2751,15 @@
           "price": 49,
           "unit": "口味選「田園火雞 80g」（165g 也有，放牧鹿 165g 是 $75）",
           "url": "https://shopee.tw/product/329265193/6063571507"
+        },
+        {
+          "shop": "熊熊寵物用品生活館",
+          "shopId": "3629645",
+          "channel": "seller",
+          "price": 40,
+          "unit": "選項選「火雞肉(心血管保健)」、規格選「小罐80g」",
+          "url": "https://shopee.tw/product/3629645/1409206645",
+          "soldOut": "2026-09-27 Tim 截圖：整頁售完（鹿肉在這一頁產得出來）"
         }
       ]
     },
@@ -2765,6 +2784,15 @@
           "price": 49,
           "unit": "口味選「鱉蛋雞肉 80g」（165g 也有，放牧鹿 165g 是 $75）",
           "url": "https://shopee.tw/product/329265193/6063571507"
+        },
+        {
+          "shop": "熊熊寵物用品生活館",
+          "shopId": "3629645",
+          "channel": "seller",
+          "price": 40,
+          "unit": "選項選「雞肉鱉蛋(毛髮好亮麗)」、規格選「小罐80g」",
+          "url": "https://shopee.tw/product/3629645/1409206645",
+          "soldOut": "2026-09-27 Tim 截圖：整頁售完（鹿肉在這一頁產得出來）"
         }
       ]
     }

@@ -571,6 +571,17 @@
             "affiliateUrl": "https://s.shopee.tw/BU8Q5IQcU?share_channel_code=6",
             "anchor": "value",
             "checkedAt": "2026-09-27"
+          },
+          {
+            "id": "m4",
+            "label": "熊熊寵物用品生活館",
+            "unit": "80g",
+            "amount": 40,
+            "note": "一頁多口味，選項選「鹿肉(關節好骨力)」、規格選「小罐80g」",
+            "affiliateUrl": "https://s.shopee.tw/1AiDmJ3xT?share_channel_code=6",
+            "anchor": "value",
+            "soldOut": true,
+            "checkedAt": "2026-09-27"
           }
         ]
       },
