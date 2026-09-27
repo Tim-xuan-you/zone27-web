@@ -77,7 +77,8 @@
             "affiliateUrl": "https://s.shopee.tw/30oIXLbJPY?share_channel_code=6",
             "anchor": "value",
             "soldOut": true,
-            "checkedAt": "2026-09-27"
+            "checkedAt": "2026-09-27",
+            "sharedPage": true
           },
           {
             "id": "m3",
@@ -88,7 +89,8 @@
             "affiliateUrl": "https://s.shopee.tw/8AWPdawO8F?share_channel_code=6",
             "anchor": "value",
             "soldOut": true,
-            "checkedAt": "2026-09-27"
+            "checkedAt": "2026-09-27",
+            "sharedPage": true
           }
         ]
       },
@@ -907,6 +909,18 @@
             "note": "一箱 24 罐，規格選「神農黑豬肉*24」",
             "affiliateUrl": "https://s.shopee.tw/6q125cx4Ts?share_channel_code=6",
             "anchor": "safe",
+            "checkedAt": "2026-09-27",
+            "sharedPage": true
+          },
+          {
+            "id": "m2",
+            "label": "【 RBB ！】寵物生活館",
+            "unit": "82g",
+            "amount": 53,
+            "note": "一頁多口味，規格選「神農黑豬肉82G」",
+            "affiliateUrl": "https://s.shopee.tw/70KSHvwR8x?share_channel_code=6",
+            "anchor": "value",
+            "soldOut": true,
             "checkedAt": "2026-09-27",
             "sharedPage": true
           }

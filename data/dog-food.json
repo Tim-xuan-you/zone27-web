@@ -41,7 +41,7 @@
       },
       "price": {
         "unit": "2kg",
-        "checkedAt": "2026-09-08",
+        "checkedAt": "2026-09-27",
         "merchants": [
           {
             "id": "m1",
@@ -75,6 +75,36 @@
             "anchor": "value",
             "checkedAt": "2026-09-08",
             "sharedPage": true
+          },
+          {
+            "id": "m4",
+            "label": "獅子王寵物（蝦皮優選）",
+            "unit": "2kg",
+            "amount": 1200,
+            "note": "隔日到貨 · 正品保障 · 超商限兩包",
+            "affiliateUrl": "https://s.shopee.tw/3B7ESUSXfM?share_channel_code=6",
+            "anchor": "value",
+            "checkedAt": "2026-09-27"
+          },
+          {
+            "id": "m5",
+            "label": "獅子王寵物（蝦皮優選）",
+            "unit": "6kg",
+            "amount": 2640,
+            "note": "超商限一包",
+            "affiliateUrl": "https://s.shopee.tw/3B7ESUSXfM?share_channel_code=6",
+            "anchor": "value",
+            "checkedAt": "2026-09-27"
+          },
+          {
+            "id": "m6",
+            "label": "獅子王寵物（蝦皮優選）",
+            "unit": "11.4kg",
+            "amount": 4380,
+            "note": "限宅配 · 開封後要密封防潮",
+            "affiliateUrl": "https://s.shopee.tw/3B7ESUSXfM?share_channel_code=6",
+            "anchor": "value",
+            "checkedAt": "2026-09-27"
           }
         ]
       },

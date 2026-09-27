@@ -65,10 +65,25 @@ for (const cat of CATEGORIES) {
   }
 }
 
+/*
+ * 2026-09-27：Tim 給過的連結永遠不刪。data:paste 以前會把「標售完、原本就有」的連結丟掉，
+ * 跑一次少一條、再跑一次加回來，建置照樣過。帳本（data/link-ledger.json）只會變多，
+ * 這裡比對：帳本有、資料裡找不到的，就是被弄丟了。
+ */
+const ledgerPath = resolve(ROOT, "data/link-ledger.json");
+if (existsSync(ledgerPath)) {
+  const ledger = JSON.parse(readFileSync(ledgerPath, "utf8")) as { urls: string[] };
+  const files = [...new Set(CATEGORIES.map((c) => resolve(ROOT, c.csv)))].concat(resolve(ROOT, "data/charger.json"));
+  const text = files.filter((p) => existsSync(p)).map((p) => readFileSync(p, "utf8")).join("\n");
+  for (const u of ledger.urls.filter((x) => !text.includes(x))) {
+    problems.push(`帳本裡有、資料裡找不到的連結：${u}（Tim 給過的連結不能不見。去 git 紀錄找它原本掛在哪一款，用 data:paste 補回去，寫【備援】）`);
+  }
+}
+
 if (problems.length) {
-  console.error(`\n✗ CSV 跟網站讀的 JSON 對不上（${problems.length} 處）。CSV 改了但匯入沒寫進去，讀者會點到轉回首頁的按鈕：\n`);
+  console.error(`\n✗ 連結資料有問題（${problems.length} 處）。CSV 改了沒匯入，讀者會點到轉回首頁的按鈕；帳本對不上，就是有連結被弄丟了：\n`);
   for (const p of problems) console.error("  " + p);
   console.error(`\n跑 npm run data:import（貓砂、零食是 import-litter、import-treat），看它報什麼錯，修好再 build。\n`);
   process.exit(1);
 }
-console.log(`✓ CSV 跟 JSON 對得上：${checked} 款，每一款的賣場數都一樣`);
+console.log(`✓ CSV 跟 JSON 對得上：${checked} 款，每一款的賣場數都一樣；帳本裡的連結一條都沒少`);

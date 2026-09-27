@@ -261,6 +261,8 @@ async function main() {
       const same = (s: Slot, m: Row) => s.url.split("?")[0] === m.url.split("?")[0] && s.unit === m.unit;
 
       const front: Slot[] = [], back: Slot[] = [];
+      // 標失效、售完的舊紀錄是「原地更新」，下面合併時要留著
+      const inPlace = new Set<Slot>();
       let revived = 0, killed = 0;
       for (const m of list) {
         const flags = m.note;
@@ -285,12 +287,17 @@ async function main() {
         if (dead) killed++;
         if (revive || restock) revived++;
         // 標失效或售完的留在原本的位置，不要往前擠掉還買得到的那幾家
-        if ((dead || sold) && old) { Object.assign(old, slot); continue; }
+        if ((dead || sold) && old) { Object.assign(old, slot); inPlace.add(old); continue; }
         // 沒有舊紀錄的售完連結放最後面，不要擠掉還買得到的那幾家
         if (sold) { back.push(slot); continue; }
         (backup ? back : front).push(slot);
       }
-      const keep = existing.filter((s) => !list.some((m) => same(s, m)) || (s.dead === "1" && list.some((m) => same(s, m) && /失效/.test(m.note))));
+      /*
+       * 2026-09-27 修：以前這裡只留「這次沒貼到的」和「標失效的」，漏了「標售完、原本就有的」。
+       * 結果貼過一次售完的連結，下一次跑 paste 就被丟掉，再下一次又加回來，一次有一次沒有
+       * （怪獸部落黑豬肉、鴨肉的 RBB 連結就這樣閃掉）。原地更新過的一律留著。
+       */
+      const keep = existing.filter((s) => inPlace.has(s) || !list.some((m) => same(s, m)));
       const merged = [...front, ...keep, ...back];
 
       if (merged.length > SLOTS.length) {
@@ -342,6 +349,7 @@ async function main() {
       const existing: M[] = p.price.merchants;
       const same = (m: M, r: Row) => m.affiliateUrl.split("?")[0] === r.url.split("?")[0] && (m.unit ?? "") === r.unit;
       const front: M[] = [], back: M[] = [];
+      const inPlace = new Set<M>();
       for (const r of list) {
         const flags = r.note;
         const backup = /備援/.test(flags), dead = /失效/.test(flags), revive = /恢復/.test(flags);
@@ -358,11 +366,12 @@ async function main() {
           ...(dead || (!revive && old?.dead) ? { dead: true } : {}),
           ...(sold || (!restock && old?.soldOut) ? { soldOut: true } : {}),
         };
-        if ((dead || sold) && old) { Object.assign(old, m); continue; }
+        if ((dead || sold) && old) { Object.assign(old, m); inPlace.add(old); continue; }
         if (sold) { back.push(m); continue; }
         (backup ? back : front).push(m);
       }
-      const keep = existing.filter((m) => !list.some((r) => same(m, r)) || (m.dead && list.some((r) => same(m, r) && /失效/.test(r.note))));
+      // 原地更新過的（標失效、售完）一律留著，理由同上面 CSV 那一段
+      const keep = existing.filter((m) => inPlace.has(m) || !list.some((r) => same(m, r)));
       const merged = [...front, ...keep, ...back].map((m, i) => ({ ...m, id: `m${i + 1}` }));
       p.price.merchants = merged;
       p.price.checkedAt = today;
@@ -385,6 +394,16 @@ async function main() {
   for (const [path, out] of outputs) {
     if (path.endsWith("charger.json")) { writeFileSync(path, chargerOut!, "utf8"); continue; }
     writeFileSync(path, "\uFEFF" + out, "utf8");
+  }
+
+  // \u6BCF\u4E00\u689D\u8CBC\u904E\u7684\u9023\u7D50\u8A18\u9032\u5E33\u672C\uFF08data/link-ledger.json\uFF09\uFF0C\u5EFA\u7F6E\u6642 sync-check \u6703\u6BD4\u5C0D\uFF0C\u8CC7\u6599\u88E1\u5C11\u4E00\u689D\u5C31\u64CB\u4E0B\u4F86
+  const LEDGER = resolve(ROOT, "data/link-ledger.json");
+  if (existsSync(LEDGER)) {
+    const ledger = JSON.parse(readFileSync(LEDGER, "utf8")) as { urls: string[] };
+    const all = new Set(ledger.urls);
+    for (const r of rows) all.add(r.url.split("?")[0]);
+    ledger.urls = [...all].sort();
+    writeFileSync(LEDGER, JSON.stringify(ledger, null, 2) + "\n", "utf8");
   }
 
   console.log(`\n更新了 ${touched.length} 款：${touched.join("、")}`);
