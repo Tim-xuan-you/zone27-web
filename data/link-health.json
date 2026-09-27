@@ -1,7 +1,7 @@
 {
   "checkedAt": "2026-09-19",
   "filledAt": "2026-09-27",
-  "total": 166,
+  "total": 168,
   "bad": 0,
   "rows": [
     {
@@ -2159,6 +2159,32 @@
       "status": 200,
       "finalUrl": "https://shopee.tw/opaanlp/1447238100/29974136550",
       "item": "1447238100/29974136550",
+      "verdict": "ok",
+      "note": ""
+    },
+    {
+      "productId": "dw-08",
+      "brand": "汪喵星球",
+      "name": "犬用 Fantastic 95% 鮮肉主食罐 鹿肉",
+      "merchantId": "m2",
+      "label": "汪喵星球官方商城",
+      "url": "https://s.shopee.tw/BU8Q5IQcU?share_channel_code=6",
+      "status": 200,
+      "finalUrl": "https://shopee.tw/opaanlp/329265193/6063571507",
+      "item": "329265193/6063571507",
+      "verdict": "ok",
+      "note": ""
+    },
+    {
+      "productId": "dw-08",
+      "brand": "汪喵星球",
+      "name": "犬用 Fantastic 95% 鮮肉主食罐 鹿肉",
+      "merchantId": "m3",
+      "label": "汪喵星球官方商城",
+      "url": "https://s.shopee.tw/BU8Q5IQcU?share_channel_code=6",
+      "status": 200,
+      "finalUrl": "https://shopee.tw/opaanlp/329265193/6063571507",
+      "item": "329265193/6063571507",
       "verdict": "ok",
       "note": ""
     }

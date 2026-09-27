@@ -551,6 +551,26 @@
             "anchor": "safe",
             "checkedAt": "2026-09-27",
             "sharedPage": true
+          },
+          {
+            "id": "m2",
+            "label": "汪喵星球官方商城",
+            "unit": "80g",
+            "amount": 49,
+            "note": "一頁多口味，口味選「放牧鹿 80g」",
+            "affiliateUrl": "https://s.shopee.tw/BU8Q5IQcU?share_channel_code=6",
+            "anchor": "value",
+            "checkedAt": "2026-09-27"
+          },
+          {
+            "id": "m3",
+            "label": "汪喵星球官方商城",
+            "unit": "165g",
+            "amount": 75,
+            "note": "一頁多口味，口味選「放牧鹿 165g」",
+            "affiliateUrl": "https://s.shopee.tw/BU8Q5IQcU?share_channel_code=6",
+            "anchor": "value",
+            "checkedAt": "2026-09-27"
           }
         ]
       },
