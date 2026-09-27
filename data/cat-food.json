@@ -3,7 +3,7 @@
     "category": "cat-food",
     "note": "由 data/cat-food.csv 產生，不要直接改這個檔。改 CSV 之後跑 npm run data:import。",
     "generatedAt": "2026-09-27",
-    "count": 17,
+    "count": 18,
     "pricePolicy": "人工複查，不爬蟲。checkedAt 誠實顯示於前端。"
   },
   "products": [
@@ -1213,6 +1213,63 @@
       "dealbreaker": "你的貓對魚過敏。整包的肉只有鱒魚、鮭魚和鯡魚，沒有第二種蛋白質可以退。",
       "knownIssues": "肉全部是魚，油脂用菜籽油和鮭魚油，香料寫的是天然素食香料，成分表裡找不到雞。豌豆、扁豆、鷹嘴豆排在第 4 到 6 項。紐頓沒有公布灰分，碳水是用灰分 8% 推估的。",
       "searchAs": "紐頓 Nutram T24 無穀 鮭魚 鱒魚 挑嘴全齡貓",
+      "chicken": {
+        "status": "clean"
+      }
+    },
+    {
+      "id": "cf-17",
+      "species": "cat",
+      "brand": "Instinct 原點",
+      "name": "鮭魚無穀全貓配方",
+      "spec": {
+        "protein": 42,
+        "fat": 18,
+        "carb": 20,
+        "omega3": 1.5,
+        "phosphorus": 0,
+        "proteinSources": [
+          "salmon",
+          "fish"
+        ],
+        "singleSource": false,
+        "pulses": "high",
+        "grainFree": true,
+        "lifeStage": [
+          "all"
+        ],
+        "bodySize": [
+          "small",
+          "medium",
+          "large"
+        ],
+        "prescription": false,
+        "kcal": 4470
+      },
+      "reports": {
+        "total": 0,
+        "palatability": 0,
+        "looseStool": 0
+      },
+      "price": {
+        "unit": "10磅",
+        "checkedAt": "2026-09-27",
+        "merchants": [
+          {
+            "id": "m1",
+            "label": "小BU的米其林指南（蝦皮優選）",
+            "unit": "10磅",
+            "amount": 2689,
+            "note": "規格選「10磅」",
+            "affiliateUrl": "https://s.shopee.tw/6L4m2bHzIo?share_channel_code=6",
+            "anchor": "safe",
+            "checkedAt": "2026-09-27"
+          }
+        ]
+      },
+      "dealbreaker": "你的貓對魚過敏。整包的肉只有鮭魚、鯡魚和白魚（鱈魚、比目魚、石斑魚），沒有第二種蛋白質可以退。",
+      "knownIssues": "肉全部是魚，油脂用菜籽油，成分表裡找不到雞。同一個牌子的鴨肉無穀全貓，第 3 項就是雞肉粉，鮭魚這一款沒有。豌豆排第 4 項。原點沒有公布灰分和磷，碳水是用灰分 8% 推估的。",
+      "searchAs": "原點 Instinct 鮭魚 無穀 全貓",
       "chicken": {
         "status": "clean"
       }

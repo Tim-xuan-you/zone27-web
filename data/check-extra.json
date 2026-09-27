@@ -204,32 +204,6 @@
       ]
     },
     {
-      "id": "ck-11",
-      "planId": "cf-17",
-      "species": "cat",
-      "form": "dry",
-      "brand": "Instinct 原點",
-      "name": "鮭魚無穀全貓配方",
-      "alias": "原點 鮭魚 無穀",
-      "proteins": [
-        "salmon",
-        "whitefish",
-        "fish"
-      ],
-      "found": [
-        "第 1 項：鮭魚",
-        "第 2、3 項：油鯡魚粉、白魚粉（鱈魚、比目魚、石斑魚）",
-        "油脂：菜籽油"
-      ],
-      "verdict": "肉全部是魚。同一個牌子的「鴨肉無穀全貓」第 3 項就是雞肉粉，鮭魚這一款沒有。",
-      "refs": [
-        {
-          "label": "Instinct 原點台灣官網",
-          "url": "https://www.instinct.tw/%E8%B2%93%E5%92%AA%E9%A3%BC%E6%96%99"
-        }
-      ]
-    },
-    {
       "id": "ck-12",
       "species": "cat",
       "form": "dry",

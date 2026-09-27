@@ -1,7 +1,7 @@
 {
   "checkedAt": "2026-09-27",
   "filledAt": "2026-09-27",
-  "total": 183,
+  "total": 184,
   "bad": 13,
   "rows": [
     {
@@ -2562,6 +2562,20 @@
       "status": 200,
       "finalUrl": "https://shopee.tw/opaanlp/67574794/45315145549",
       "item": "67574794/45315145549",
+      "affiliate": "an_16322830031",
+      "verdict": "ok",
+      "note": ""
+    },
+    {
+      "productId": "cf-17",
+      "brand": "Instinct 原點",
+      "name": "鮭魚無穀全貓配方",
+      "merchantId": "m1",
+      "label": "小BU的米其林指南（蝦皮優選）",
+      "url": "https://s.shopee.tw/6L4m2bHzIo?share_channel_code=6",
+      "status": 200,
+      "finalUrl": "https://shopee.tw/opaanlp/230717106/44718369459",
+      "item": "230717106/44718369459",
       "affiliate": "an_16322830031",
       "verdict": "ok",
       "note": ""
