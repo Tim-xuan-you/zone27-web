@@ -1064,14 +1064,13 @@
       "id": "dw-02",
       "label": "怪獸部落 犬2肉主食罐 羊雞肉（狗主食罐）",
       "why": "",
-      "note": "只找到兩家，都是犬用一頁多口味，規格選「2種肉 羊肉雞肉 165克」。",
       "candidates": [
         {
           "shop": "貓咖寵物館",
           "shopId": "344160076",
           "channel": "seller",
           "price": 1150,
-          "unit": "82g 一箱 24 罐，規格選「羊肉嫩雞*24」。跟鴨肉產得出來的是同一頁",
+          "unit": "82g 一箱 24 罐，規格選「羊肉嫩雞*24」",
           "url": "https://shopee.tw/product/344160076/23931006334"
         },
         {
@@ -1089,6 +1088,15 @@
           "price": 86,
           "unit": "選「2種肉 羊肉雞肉 165克」",
           "url": "https://shopee.tw/product/11610684/21672717777"
+        },
+        {
+          "channel": "seller",
+          "shop": "【 RBB ！】寵物生活館",
+          "shopId": "20186300",
+          "price": 53,
+          "unit": "82g 一頁多口味，選「羊肉佐嫩雞82G」",
+          "url": "https://shopee.tw/product/20186300/18970210826",
+          "soldOut": "2026-09-27 Tim 回報整頁售完"
         }
       ],
       "checkedAt": "2026-09-27"
@@ -1097,14 +1105,13 @@
       "id": "dw-03",
       "label": "怪獸部落 犬2肉主食罐 鱉肉鱉蛋（狗主食罐）",
       "why": "名字寫鱉肉、第一項是雞，是狗罐藏雞頁的主角",
-      "note": "比價站上賣犬用鱉肉鱉蛋的很少。圓肚肚有 NG 凹罐的規格，要選正常的；奧提斯許、米瑞拉那兩頁寫「養殖鱉肉」，點開看是不是鱉肉鱉蛋（2 種肉）再產。",
       "candidates": [
         {
           "shop": "貓咖寵物館",
           "shopId": "344160076",
           "channel": "seller",
           "price": 1150,
-          "unit": "82g 一箱 24 罐，規格選「鱉肉鱉蛋*24」。跟鴨肉產得出來的是同一頁",
+          "unit": "82g 一箱 24 罐，規格選「鱉肉鱉蛋*24」",
           "url": "https://shopee.tw/product/344160076/23931006334"
         },
         {
@@ -1154,6 +1161,15 @@
           "price": null,
           "unit": "犬用一頁多口味，看有沒有鱉肉鱉蛋",
           "url": "https://shopee.tw/product/397992294/8540814914"
+        },
+        {
+          "channel": "seller",
+          "shop": "【 RBB ！】寵物生活館",
+          "shopId": "20186300",
+          "price": 53,
+          "unit": "82g 一頁多口味，選「鱉肉與鱉蛋82G」",
+          "url": "https://shopee.tw/product/20186300/18970210826",
+          "soldOut": "2026-09-27 Tim 回報整頁售完"
         }
       ],
       "checkedAt": "2026-09-27"
@@ -1162,7 +1178,7 @@
       "id": "dw-04",
       "label": "狗狗說 犬用主食罐 紫罐 鮮雞燉羊＋山藥（狗主食罐）",
       "why": "",
-      "note": "驕傲貓狗、熊好命、貓狗得來速、有才、貓狗超有事、火箭貓狗、貓狗好時光這幾家標題寫法一模一樣，很可能是同一個賣家的分店，一家產不出來其他的大概也不行，所以只列有才。紫罐是「鮮雞燉羊＋山藥」，不要選到綠、橘、藍。",
+      "note": "驕傲貓狗、熊好命、貓狗得來速、有才、貓狗超有事、火箭貓狗、貓狗好時光這幾家標題寫法一模一樣，很可能是同一個賣家的分店，一家產不出來其他的大概也不行，所以只列有才。紫罐是「鮮雞燉羊＋山藥」，不要選到綠、橘、藍。 標題一模一樣的「快速到貨」分店（有才、熊好命、驕傲貓狗、大尾巴、毛寵星人、萌寵要當家…）是同一批人開的，有才（狗狗說）、熊好命（陪心）都產不出來，不列。",
       "candidates": [
         {
           "shop": "貓貓龍寵物",
@@ -1236,6 +1252,38 @@
           "price": 65,
           "unit": "一頁多口味，選（紫）鮮雞燉羊＋山藥；二館那一家不行，這是另一家",
           "url": "https://shopee.tw/product/14671498/23816435630"
+        },
+        {
+          "channel": "seller",
+          "shop": "熊熊寵物用品生活館",
+          "shopId": "3629645",
+          "price": 65,
+          "unit": "165g，全品項一頁，選「(紫)鮮雞燉羊+山藥」",
+          "url": "https://shopee.tw/product/3629645/50804612189"
+        },
+        {
+          "channel": "seller",
+          "shop": "dogdogbus 狗狗巴士",
+          "shopId": "131327191",
+          "price": 65,
+          "unit": "165g，6 種口味一頁，選「(紫)鮮雞燉羊+山藥」",
+          "url": "https://shopee.tw/product/131327191/23616496221"
+        },
+        {
+          "channel": "seller",
+          "shop": "lazycat66（MJ寵物）",
+          "shopId": "72076637",
+          "price": 65,
+          "unit": "165g，6 種口味一頁，選「(紫)鮮雞燉羊+山藥」",
+          "url": "https://shopee.tw/product/72076637/23116456575"
+        },
+        {
+          "channel": "seller",
+          "shop": "harrypet 哈利寵物",
+          "shopId": "73110940",
+          "price": 66,
+          "unit": "165g，一頁多口味，選「(紫)鮮雞燉羊+山藥」",
+          "url": "https://shopee.tw/product/73110940/23816479246"
         }
       ],
       "checkedAt": "2026-09-27"
@@ -1270,9 +1318,41 @@
           "price": 65,
           "unit": "跟紫罐同一頁，要確認有沒有藍罐「四種鮮魚」",
           "url": "https://shopee.tw/product/368996320/22516503898"
+        },
+        {
+          "channel": "seller",
+          "shop": "熊熊寵物用品生活館",
+          "shopId": "3629645",
+          "price": 65,
+          "unit": "165g，全品項一頁，選「(藍)四種鮮魚×鷹嘴豆」",
+          "url": "https://shopee.tw/product/3629645/50804612189"
+        },
+        {
+          "channel": "seller",
+          "shop": "dogdogbus 狗狗巴士",
+          "shopId": "131327191",
+          "price": 65,
+          "unit": "165g，6 種口味一頁，選「(藍)四種鮮魚×鷹嘴豆」",
+          "url": "https://shopee.tw/product/131327191/23616496221"
+        },
+        {
+          "channel": "seller",
+          "shop": "lazycat66（MJ寵物）",
+          "shopId": "72076637",
+          "price": 65,
+          "unit": "165g，6 種口味一頁，選「(藍)四種鮮魚×鷹嘴豆」",
+          "url": "https://shopee.tw/product/72076637/23116456575"
+        },
+        {
+          "channel": "seller",
+          "shop": "harrypet 哈利寵物",
+          "shopId": "73110940",
+          "price": 66,
+          "unit": "165g，一頁多口味，選「(藍)四種鮮魚×鷹嘴豆」",
+          "url": "https://shopee.tw/product/73110940/23816479246"
         }
       ],
-      "checkedAt": "2026-09-24"
+      "checkedAt": "2026-09-27"
     },
     {
       "id": "dw-06",
@@ -1295,9 +1375,57 @@
           "price": 55,
           "unit": "狗罐 80g 一頁多口味，選「雞魚 野莓」",
           "url": "https://shopee.tw/product/98068625/17771566659"
+        },
+        {
+          "channel": "seller",
+          "shop": "LULUMI寵物館",
+          "shopId": "184663561",
+          "price": 1008,
+          "url": "https://shopee.tw/product/184663561/19504681352",
+          "unit": "狗罐 80g 一箱 24 罐，選「雞魚×野莓」"
+        },
+        {
+          "channel": "seller",
+          "shop": "🍜貓三頓🍜",
+          "shopId": "381728354",
+          "price": 999,
+          "url": "https://shopee.tw/product/381728354/26679336202",
+          "unit": "犬罐 80g 一箱 24 罐，先確認有這個口味，選「雞魚×野莓」"
+        },
+        {
+          "channel": "seller",
+          "shop": "Chiui 犬貓愛玩購",
+          "shopId": "588834908",
+          "price": 950,
+          "url": "https://shopee.tw/product/588834908/22206600213",
+          "unit": "犬罐 80g 一箱 24 罐，先確認有這個口味，選「雞魚×野莓」"
+        },
+        {
+          "channel": "seller",
+          "shop": "克飛姆寵物百貨",
+          "shopId": "8501422",
+          "price": 45,
+          "url": "https://shopee.tw/product/8501422/3872194705",
+          "unit": "狗主食罐 80g 單罐，選「雞魚×野莓」"
+        },
+        {
+          "channel": "seller",
+          "shop": "優品電購商城",
+          "shopId": "71458",
+          "price": 52,
+          "url": "https://shopee.tw/product/71458/7678583325",
+          "unit": "狗罐 80g 單罐，選「雞魚×野莓」"
+        },
+        {
+          "channel": "mall",
+          "shop": "WANG寵物精品館",
+          "shopId": "5087546",
+          "price": 1045,
+          "url": "https://shopee.tw/product/5087546/13862965094",
+          "unit": "犬罐 80g 一箱 24 罐，選「雞魚×野莓」"
         }
       ],
-      "checkedAt": "2026-09-24"
+      "checkedAt": "2026-09-27"
     },
     {
       "id": "dw-07",
@@ -1360,6 +1488,54 @@
           "price": 42,
           "unit": "一頁多口味，選雞鵪鶉＋黑木耳 80g",
           "url": "https://shopee.tw/product/1527771224/44026771725"
+        },
+        {
+          "channel": "seller",
+          "shop": "LULUMI寵物館",
+          "shopId": "184663561",
+          "price": 1008,
+          "url": "https://shopee.tw/product/184663561/19504681352",
+          "unit": "狗罐 80g 一箱 24 罐，選「雞鵪鶉×黑木耳」"
+        },
+        {
+          "channel": "seller",
+          "shop": "🍜貓三頓🍜",
+          "shopId": "381728354",
+          "price": 999,
+          "url": "https://shopee.tw/product/381728354/26679336202",
+          "unit": "犬罐 80g 一箱 24 罐，先確認有這個口味，選「雞鵪鶉×黑木耳」"
+        },
+        {
+          "channel": "seller",
+          "shop": "Chiui 犬貓愛玩購",
+          "shopId": "588834908",
+          "price": 950,
+          "url": "https://shopee.tw/product/588834908/22206600213",
+          "unit": "犬罐 80g 一箱 24 罐，先確認有這個口味，選「雞鵪鶉×黑木耳」"
+        },
+        {
+          "channel": "seller",
+          "shop": "克飛姆寵物百貨",
+          "shopId": "8501422",
+          "price": 45,
+          "url": "https://shopee.tw/product/8501422/3872194705",
+          "unit": "狗主食罐 80g 單罐，選「雞鵪鶉×黑木耳」"
+        },
+        {
+          "channel": "seller",
+          "shop": "優品電購商城",
+          "shopId": "71458",
+          "price": 52,
+          "url": "https://shopee.tw/product/71458/7678583325",
+          "unit": "狗罐 80g 單罐，選「雞鵪鶉×黑木耳」"
+        },
+        {
+          "channel": "mall",
+          "shop": "WANG寵物精品館",
+          "shopId": "5087546",
+          "price": 1045,
+          "url": "https://shopee.tw/product/5087546/13862965094",
+          "unit": "犬罐 80g 一箱 24 罐，選「雞鵪鶉×黑木耳」"
         }
       ],
       "checkedAt": "2026-09-27"
@@ -1368,7 +1544,6 @@
       "id": "dw-08",
       "label": "汪喵星球 犬用 Fantastic 95% 鮮肉主食罐 鹿肉（狗主食罐）",
       "why": "名字寫鹿肉、第 2 到 5 項是雞",
-      "note": "毛孩寵物鋪跟汪喵星球官方商城你之前都產得出汪喵的連結，先試這兩家。",
       "candidates": [
         {
           "shop": "熊熊寵物用品生活館",
@@ -2279,7 +2454,7 @@
           "shopId": "344160076",
           "channel": "seller",
           "price": 1080,
-          "unit": "82g 一箱 24 罐，規格選「神農黑豬肉*24」。跟鴨肉產得出來的是同一頁",
+          "unit": "82g 一箱 24 罐，規格選「神農黑豬肉*24」",
           "url": "https://shopee.tw/product/344160076/23931006334"
         },
         {
@@ -2297,9 +2472,18 @@
           "price": 45,
           "unit": "單罐 82g 黑豬肉（同一家另有 12 罐組 $520）",
           "url": "https://shopee.tw/product/724574149/19552713633"
+        },
+        {
+          "channel": "seller",
+          "shop": "【 RBB ！】寵物生活館",
+          "shopId": "20186300",
+          "price": 53,
+          "unit": "82g 一頁多口味，選「神農黑豬肉82G」",
+          "url": "https://shopee.tw/product/20186300/18970210826",
+          "soldOut": "2026-09-27 Tim 回報整頁售完"
         }
       ],
-      "note": "Otishsu、米瑞拉那一頁鴨肉產不出來，黑豬肉在同一頁，不用試。cherryyaya $30 寫低價出售，可能是快到期的，不收。"
+      "note": "cherryyaya $30 寫低價出售，可能是快到期的，不收。"
     }
   ]
 }

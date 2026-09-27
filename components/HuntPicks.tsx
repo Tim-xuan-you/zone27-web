@@ -9,6 +9,7 @@ import treatData from "@/data/cat-treat.json";
 import dogTreatData from "@/data/dog-treat.json";
 import dogWet from "@/data/dog-wet-food.json";
 import chargerData from "@/data/charger.json";
+import linkHealth from "@/data/link-health.json";
 import { CHANNEL_ZH, channelOf, type Channel } from "@/lib/channel";
 
 /**
@@ -120,9 +121,61 @@ function brandFails(c: Candidate, id: string): number {
   ).length;
 }
 
-/** 這一款在這一家試過產不出來？（同一家在別款不受影響） */
-const failedFor = (id: string, c: Candidate): Pair | undefined =>
-  PAIRS.find((x) => x.productId === id && ((c.shopId && x.shopId === c.shopId) || x.shop === c.shop));
+/**
+ * 同一個商品頁（賣場編號/商品編號）。
+ *
+ * 2026-09-27：分潤是賣家對「一個商品頁」開的，頁裡的口味、規格一起開或一起不開。
+ * 貓咖寵物館那一頁鴨肉產得出來，同一頁的羊雞、鱉肉、黑豬肉就幾乎一定產得出來；
+ * 狗狗說紫罐在 PAW&TAIL 那一頁產不出來，藍罐在同一頁也不用試了。
+ * 以前只看「這一家」「這個牌子」，看不出是同一頁，候選照樣一家一家試。
+ *
+ * 產得出來的那一頁：我們的分潤連結跟一次轉址就知道落在哪一頁（npm run links:fill，存在 data/link-health.json）。
+ * 產不出來的那一頁：Tim 回報失敗的那一家，在候選清單裡的商品頁。
+ */
+const pageOf = (url: string): string | null => {
+  const m = url.match(/\/(?:opaanlp|product)\/(\d+)\/(\d+)/);
+  return m ? `${m[1]}/${m[2]}` : null;
+};
+const NAME = new Map<string, string>();
+for (const src of SOURCES) for (const p of src.products as { id: string; name: string }[]) NAME.set(p.id, p.name);
+const PAGE_OK = new Map<string, Set<string>>();
+{
+  const itemOfUrl = new Map((linkHealth.rows as { url: string; item: string | null }[]).map((r) => [r.url, r.item]));
+  for (const src of SOURCES) {
+    for (const p of src.products as { id: string; price: { merchants: { affiliateUrl: string; dead?: boolean }[] } }[]) {
+      for (const m of p.price.merchants) {
+        const item = !m.dead && itemOfUrl.get(m.affiliateUrl);
+        if (item) PAGE_OK.set(item, (PAGE_OK.get(item) ?? new Set()).add(p.id));
+      }
+    }
+  }
+}
+const PAGE_FAIL = new Map<string, Set<string>>();
+for (const x of PAIRS) {
+  for (const c of HUNT.get(x.productId)?.candidates ?? []) {
+    if (!((x.shopId && c.shopId === x.shopId) || c.shop === x.shop)) continue;
+    const item = pageOf(c.url);
+    if (item) PAGE_FAIL.set(item, (PAGE_FAIL.get(item) ?? new Set()).add(x.productId));
+  }
+}
+const others = (map: Map<string, Set<string>>, id: string, c: Candidate) =>
+  [...(map.get(pageOf(c.url) ?? "") ?? [])].filter((x) => x !== id);
+/** 同一頁已經產得出來的別款 */
+const pageWorks = (id: string, c: Candidate) => others(PAGE_OK, id, c);
+
+/** 這一款在這一家試過產不出來？（同一家在別款不受影響；同一頁別款產不出來的，這一款也當作不行） */
+const failedFor = (id: string, c: Candidate): Pair | undefined => {
+  const hit = PAIRS.find((x) => x.productId === id && ((c.shopId && x.shopId === c.shopId) || x.shop === c.shop));
+  if (hit) return hit;
+  const same = others(PAGE_FAIL, id, c).filter((x) => !pageWorks(id, c).length);
+  return same.length ? { productId: id, shop: c.shop, shopId: c.shopId, note: `同一頁的${same.map((x) => NAME.get(x) ?? x).join("、")}產不出來` } : undefined;
+};
+
+/** 這一款有沒有「同一頁已經產得出來」的候選（還沒賣完的）。維護台把這種排到最上面：最不會白試 */
+export function pageProven(id: string): boolean {
+  const t = HUNT.get(id);
+  return Boolean(t?.candidates.some((c) => !c.soldOut && !failedFor(id, c) && pageWorks(id, c).length > 0));
+}
 
 /** 這一款還有幾家可以試（試過產不出來的、已經知道賣完的都不算）。維護台用來決定要不要另外給搜尋按鈕、要不要移到「看補貨」 */
 export function openPicks(id: string): number {
@@ -142,6 +195,8 @@ export default function HuntPicks({ id }: { id: string }) {
         // 售完的一律排最後（2026-09-26：生活超市產得出 Apple 40W 但賣完了，卻因為「這個牌子在這家產出過」排第一）
         // 再來才是已經證明這個牌子會開的排前面、便宜的往前
         Number(Boolean(a.soldOut)) - Number(Boolean(b.soldOut)) ||
+        // 同一頁別款已經產得出來的，最不會白試（2026-09-27 貓咖寵物館）
+        Number(pageWorks(id, b).length > 0) - Number(pageWorks(id, a).length > 0) ||
         brandWorks(b, id) - brandWorks(a, id) ||
         (a.price ?? 1e9) - (b.price ?? 1e9),
     );
@@ -151,13 +206,20 @@ export default function HuntPicks({ id }: { id: string }) {
   const gone = [
     ...PAIRS.filter((x) => x.productId === id).map((x) => `${x.shop}（${x.note ?? "這一款產不出連結"}）`),
     ...(t.failed ?? []).map((f) => `${f.shop}（${f.reason}）`),
+    // 沒試過、但同一頁別款產不出來的
+    ...t.candidates
+      .filter((c) => !PAIRS.some((x) => x.productId === id && ((c.shopId && x.shopId === c.shopId) || x.shop === c.shop)))
+      .flatMap((c) => { const x = failedFor(id, c); return x ? [`${c.shop}（${x.note}）`] : []; }),
   ];
   // 一家一列。最值得先試的排前面，只攤開 3 家，其他收起來（2026-09-24：一張卡片 6 家太長）
-  const pick = (c: Candidate) => (
+  const pick = (c: Candidate) => {
+    // 「同一頁產得出來」最強，有它就不用再疊「用過」「這個牌子產出過」「這家幾成幾敗」（同一件事講四次）
+    const page = pageWorks(id, c);
+    return (
     <a key={c.url} href={c.url} target="_blank" rel="noopener noreferrer" style={row}>
       <span style={{ minWidth: 0 }}>
         <b style={{ fontSize: 14 }}>{c.shop}</b>
-        {(c.known || (c.shopId && KNOWN_IDS.has(c.shopId))) && (
+        {!page.length && (c.known || (c.shopId && KNOWN_IDS.has(c.shopId))) && (
           <span style={{ fontSize: 12.5, color: "var(--keep)", background: "var(--keep-soft)", borderRadius: 8, padding: "2px 7px", marginLeft: 8 }}>
             用過，產得出連結
           </span>
@@ -165,14 +227,19 @@ export default function HuntPicks({ id }: { id: string }) {
         <span style={{ ...chip, ...CH_STYLE[c.channel ?? channelOf(c.shop)] }}>
           {CHANNEL_ZH[c.channel ?? channelOf(c.shop)]}
         </span>
-        {brandWorks(c, id) > 0 && (
+        {page.length > 0 && (
+          <span style={{ ...chip, color: "var(--keep)", background: "var(--keep-soft)", fontWeight: 700 }}>
+            同一頁的{page.map((x) => NAME.get(x) ?? x).join("、")}產得出來
+          </span>
+        )}
+        {!page.length && brandWorks(c, id) > 0 && (
           <span style={{ ...chip, color: "var(--keep)", background: "var(--keep-soft)" }}>
             這個牌子在這家產出過 {brandWorks(c, id)} 款
           </span>
         )}
         {(() => {
           const r = shopRecord(c);
-          if (r.ok + r.fail === 0) return null;
+          if (page.length || r.ok + r.fail === 0) return null;
           const good = r.ok > r.fail;
           return (
             <span style={{ ...chip, color: good ? "var(--muted)" : "var(--cut)", background: good ? "var(--sunken)" : "var(--cut-soft)" }}>
@@ -193,7 +260,8 @@ export default function HuntPicks({ id }: { id: string }) {
         {c.price === null ? "看頁面" : "$" + c.price.toLocaleString()} ›
       </span>
     </a>
-  );
+    );
+  };
   return (
     <div style={{ marginTop: 10 }}>
       {/* 「便宜的排前面、產不出來跟我說」寫在維護台最上面的規矩裡一次就好，這裡只留日期（2026-09-24 Tim：後台重複太多） */}
@@ -222,7 +290,7 @@ export default function HuntPicks({ id }: { id: string }) {
       )}
       {gone.length > 0 && (
         <p style={{ margin: "10px 0 0", fontSize: 12.5, color: "var(--faint)", lineHeight: 1.85 }}>
-          試過的：{gone.join("、")}
+          不用試了：{gone.join("、")}
         </p>
       )}
     </div>

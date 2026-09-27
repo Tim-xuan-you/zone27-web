@@ -149,12 +149,12 @@ async function main() {
     id: string; brand: string; name: string;
     price: { merchants: { id: string; label: string; affiliateUrl: string; dead?: boolean }[] };
   };
-  const products: P[] = CATEGORIES
-    .map((c) => resolve(ROOT, c.json))
+  // 充電器不在寵物的類目表裡，要另外加（2026-09-27 以前整批健檢會把充電器的紀錄洗掉）
+  const products: P[] = [...new Set([...CATEGORIES.map((c) => resolve(ROOT, c.json)), resolve(ROOT, "data/charger.json")])]
     .filter((path) => existsSync(path))
     .flatMap((path) => (JSON.parse(readFileSync(path, "utf8")) as { products: P[] }).products);
 
-  const targets = products.flatMap((p) =>
+  const all = products.flatMap((p) =>
     p.price.merchants
       .filter((m) => !m.dead) // 已經標死的不用再問
       .map((m) => ({
@@ -163,10 +163,20 @@ async function main() {
       })),
   );
 
+  /*
+   * --missing：只問還沒問過的新連結，舊的紀錄留著（npm run links:fill）。
+   * 維護台要知道每一條連結指到哪一個商品頁（賣場編號/商品編號），
+   * 才看得出「這個候選跟已經產得出來的是同一頁」。新貼的連結跑這個就好，一條一次請求。
+   */
+  const MISSING = process.argv.includes("--missing");
+  const before = existsSync(OUT) ? (JSON.parse(readFileSync(OUT, "utf8")) as { checkedAt: string; rows: Row[] }) : null;
+  const known = new Set((before?.rows ?? []).map((r) => r.url));
+  const targets = MISSING ? all.filter((t) => !known.has(t.url)) : all;
+
   console.log(`要檢查 ${targets.length} 條連結，每條之間停 ${DELAY_MS / 1000} 秒。`);
   console.log(`預估 ${Math.ceil((targets.length * DELAY_MS) / 1000 / 60)} 分鐘。\n`);
 
-  const rows: Row[] = [];
+  const rows: Row[] = MISSING ? [...(before?.rows ?? [])] : [];
   // 同一條連結（同一頁的大小包）只問一次，對蝦皮客氣一點
   const seen = new Map<string, Awaited<ReturnType<typeof check>>>();
   for (let i = 0; i < targets.length; i++) {
@@ -186,7 +196,11 @@ async function main() {
   writeFileSync(
     OUT,
     JSON.stringify(
-      { checkedAt: new Date().toISOString().slice(0, 10), total: rows.length, bad: bad.length, rows },
+      {
+        checkedAt: MISSING && before ? before.checkedAt : new Date().toISOString().slice(0, 10),
+        ...(MISSING ? { filledAt: new Date().toISOString().slice(0, 10) } : {}),
+        total: rows.length, bad: bad.length, rows,
+      },
       null,
       2,
     ) + "\n",

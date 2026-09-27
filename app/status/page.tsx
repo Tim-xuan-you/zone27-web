@@ -17,7 +17,7 @@ import { channelStats } from "@/lib/channel-stats";
 import { litters } from "@/lib/litter";
 import { treats } from "@/lib/treat";
 import { CHARGER_SUB_ID, DEVICES, chargers, fit } from "@/lib/charger";
-import HuntPicks, { openPicks } from "@/components/HuntPicks";
+import HuntPicks, { openPicks, pageProven } from "@/components/HuntPicks";
 import huntData from "@/data/hunt-candidates.json";
 import { productHref } from "@/lib/labels";
 
@@ -193,6 +193,7 @@ export default function Page() {
     const need = c ? opening.get(c.slug) ?? 0 : 0;
     const rank =
       (t.huntNote ? -1000 : 0) +            // 找過找不到的排最後
+      (pageProven(t.id) ? 300 : 0) +         // 同一頁別款已經產得出來：幾乎不會白試（2026-09-27 貓咖寵物館）
       (openPicks(t.id) > 0 ? 200 : 0) +     // 我已經查好賣場的，開了就能做
       (need > 0 ? 100 : 0) +                // 補了就能讓一個類目開張
       (t.value ?? 0);
@@ -373,7 +374,7 @@ export default function Page() {
             Apple、三星這種原廠的最常被仿，只找商城、蝦皮直營、有實體門市或開發票的店，個人賣家不收。其他品牌（ONPRO、KINYO）一般賣家、優選都可以。比官方便宜超過兩成的不收，寫二手、拆機、近全新的也不收
           </Line>
           <Line k="我查好的賣場">
-            便宜的排前面。產不出連結就跟我說是哪一家，我只擋這一款的那一家，同一家別款照樣列
+            同一頁別款已經產得出來的排最前面，再來是便宜的。產不出連結就跟我說是哪一家：那一頁的別款也不會再列，同一家別頁照樣列
           </Line>
           <Line k="做完之後">
             連結和截圖貼給 Claude。補好的會從這一頁自己消失

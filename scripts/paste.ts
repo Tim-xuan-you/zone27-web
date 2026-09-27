@@ -314,10 +314,12 @@ async function main() {
       // 連結來了，就不再是「等連結」的狀態
       if (awaitCol >= 0) r[awaitCol] = "";
       // 一家賣場常常有好幾個規格，「家」跟「規格」分開數才不會誤會
-      const live = merged.filter((s) => s.dead !== "1");
+      // 售完（dead = sold）不算能買，另外數（2026-09-27：兩條都售完卻印「3 條能買」）
+      const live = merged.filter((s) => s.dead !== "1" && s.dead !== "sold");
+      const sold = merged.filter((s) => s.dead === "sold").length;
       const stores = new Set(live.map((s) => s.label)).size;
       touched.push(
-        `${id}（${stores} 家、${live.length} 條能買` +
+        `${id}（${stores} 家、${live.length} 條能買${sold ? `、${sold} 條售完` : ""}` +
         `${keep.some((s) => s.dead !== "1") ? `，原本的 ${keep.filter((s) => s.dead !== "1").length} 條留著當備援` : ""}` +
         `${killed ? `，${killed} 條標失效` : ""}${revived ? `，${revived} 條恢復` : ""}）`,
       );
