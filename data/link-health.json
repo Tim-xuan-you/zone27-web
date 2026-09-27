@@ -1,7 +1,7 @@
 {
   "checkedAt": "2026-09-27",
   "filledAt": "2026-09-27",
-  "total": 188,
+  "total": 189,
   "bad": 13,
   "rows": [
     {
@@ -2632,6 +2632,20 @@
       "status": 200,
       "finalUrl": "https://shopee.tw/opaanlp/50662979/26930660110",
       "item": "50662979/26930660110",
+      "affiliate": "an_16322830031",
+      "verdict": "ok",
+      "note": ""
+    },
+    {
+      "productId": "pb-09",
+      "brand": "KINYO",
+      "name": "PD 65W 大容量商務極速充 19200mAh",
+      "merchantId": "m1",
+      "label": "KINYO官方旗艦店_3C館",
+      "url": "https://s.shopee.tw/AAHUfDfiKJ?share_channel_code=6",
+      "status": 200,
+      "finalUrl": "https://shopee.tw/opaanlp/1322591005/25389007655",
+      "item": "1322591005/25389007655",
       "affiliate": "an_16322830031",
       "verdict": "ok",
       "note": ""

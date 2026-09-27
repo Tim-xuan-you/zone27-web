@@ -518,9 +518,19 @@
       "price": {
         "unit": "1 顆",
         "checkedAt": "2026-09-27",
-        "merchants": []
+        "merchants": [
+          {
+            "id": "m1",
+            "label": "KINYO官方旗艦店_3C館",
+            "unit": "1顆",
+            "amount": 1580,
+            "note": "規格選「KPB2802B 大容量商務極速充」 · 9/28 起限時特賣",
+            "affiliateUrl": "https://s.shopee.tw/AAHUfDfiKJ?share_channel_code=6",
+            "anchor": "safe",
+            "checkedAt": "2026-09-27"
+          }
+        ]
       },
-      "awaitingLink": true,
       "listPrice": 1780
     }
   ]
