@@ -258,6 +258,18 @@
             "note": "一箱 24 罐，口味選「鱉肉鱉蛋*24」",
             "affiliateUrl": "https://s.shopee.tw/3g40fLFLwY?share_channel_code=6",
             "anchor": "safe",
+            "checkedAt": "2026-09-27",
+            "sharedPage": true
+          },
+          {
+            "id": "m2",
+            "label": "【 RBB ！】寵物生活館",
+            "unit": "82g",
+            "amount": 53,
+            "note": "一頁多口味，規格選「鱉肉與鱉蛋82G」",
+            "affiliateUrl": "https://s.shopee.tw/3qNQreEibb?share_channel_code=6",
+            "anchor": "value",
+            "soldOut": true,
             "checkedAt": "2026-09-27"
           }
         ]
