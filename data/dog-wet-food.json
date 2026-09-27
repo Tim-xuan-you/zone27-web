@@ -65,7 +65,8 @@
             "note": "一箱 24 罐，規格選「清燉鴨肉*24」",
             "affiliateUrl": "https://s.shopee.tw/8V9G2Cv7SH?share_channel_code=6",
             "anchor": "safe",
-            "checkedAt": "2026-09-27"
+            "checkedAt": "2026-09-27",
+            "sharedPage": true
           },
           {
             "id": "m2",
@@ -77,11 +78,22 @@
             "anchor": "value",
             "soldOut": true,
             "checkedAt": "2026-09-27"
+          },
+          {
+            "id": "m3",
+            "label": "【 RBB ！】寵物生活館",
+            "unit": "82g",
+            "amount": 53,
+            "note": "一頁多口味，規格選「清蒸鴨肉82G」",
+            "affiliateUrl": "https://s.shopee.tw/8AWPdawO8F?share_channel_code=6",
+            "anchor": "value",
+            "soldOut": true,
+            "checkedAt": "2026-09-27"
           }
         ]
       },
       "dealbreaker": "你的狗對鴨過敏。整罐的肉就是鴨肉和鴨肝，沒有第三種。",
-      "knownIssues": "成分表的肉只有鴨肉、鴨肝兩項，是我們讀過的狗主食罐裡唯一一款整張成分表都找不到雞的。標示 AAFCO 成幼犬。",
+      "knownIssues": "成分表的肉只有鴨肉、鴨肝兩項，整張成分表找不到雞。同系列的黑豬肉也沒有雞。標示 AAFCO 成幼犬。",
       "searchAs": "怪獸部落 犬1肉主食罐 鴨肉 82g",
       "chicken": {
         "status": "clean",
@@ -886,11 +898,22 @@
       "price": {
         "unit": "82g",
         "checkedAt": "2026-09-27",
-        "merchants": []
+        "merchants": [
+          {
+            "id": "m1",
+            "label": "貓咖寵物館",
+            "unit": "82g×24",
+            "amount": 1080,
+            "note": "一箱 24 罐，規格選「神農黑豬肉*24」",
+            "affiliateUrl": "https://s.shopee.tw/6q125cx4Ts?share_channel_code=6",
+            "anchor": "safe",
+            "checkedAt": "2026-09-27",
+            "sharedPage": true
+          }
+        ]
       },
       "dealbreaker": "你的狗對豬肉過敏。整罐的肉只有黑豬肉一種。",
       "knownIssues": "成分表的肉只有黑豬肉一種，找不到雞，跟同系列的鴨肉一樣適合對雞過敏的狗。販售頁把碳水化合物寫成 52%，但其他數字加起來只剩不到 2%，應該是打錯，我們用算的。磷沒有標。標示 AAFCO 成幼犬。",
-      "awaitingLink": true,
       "searchAs": "怪獸部落 犬1肉主食罐 黑豬肉 82g",
       "chicken": {
         "status": "clean"
