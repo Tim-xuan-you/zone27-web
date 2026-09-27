@@ -14,3 +14,14 @@ export function showable(ms: Merchant[]): Merchant[] {
   const sold = ms.filter((m) => !m.dead);
   return sold.length > 0 ? sold : ms;
 }
+
+/** 同一家、同規格、同價錢只留第一條（新的在前）。同一頁產了好幾條連結，讀者只該看到一次 */
+export function onePerShop(ms: Merchant[]): Merchant[] {
+  const seen = new Set<string>();
+  return ms.filter((m) => {
+    const k = `${m.label}|${m.unit ?? ""}|${m.amount}`;
+    if (seen.has(k)) return false;
+    seen.add(k);
+    return true;
+  });
+}

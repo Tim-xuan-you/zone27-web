@@ -1,6 +1,6 @@
 import data from "@/data/charger.json";
 import type { Merchant, Price } from "./types";
-import { showable } from "./stock";
+import { onePerShop, showable } from "./stock";
 
 /**
  * 充電器。2026-09-26 開的第八個類目，第一個不是寵物的。
@@ -344,7 +344,7 @@ const priceOf = (c: Charger): number => anchorCharger(c)?.amount ?? c.listPrice 
 /* ------------------------------------------------------------------ */
 
 /** 讀者看得到的賣場：有貨的優先；全部賣完就給賣完的（畫面會寫上次看是賣完的，2026-09-27 起） */
-export const liveCharger = (c: Charger): Merchant[] => showable(c.price.merchants).filter((m) => !m.dead);
+export const liveCharger = (c: Charger): Merchant[] => onePerShop(showable(c.price.merchants).filter((m) => !m.dead));
 /** 現在有貨。排順序時有貨的在前 */
 export const inStockCharger = (c: Charger): boolean => c.price.merchants.some((m) => !m.dead && !m.soldOut);
 export const buyableCharger = (c: Charger): boolean => liveCharger(c).length > 0;
