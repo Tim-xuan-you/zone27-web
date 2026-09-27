@@ -7,7 +7,7 @@ import SoldHint from "@/components/SoldHint";
 import { readerNotes } from "@/lib/notes";
 import ChargerPair from "@/components/ChargerPair";
 import {
-  DEVICES, TIER_TONE, anchorCharger, chargerById, chargers, fit, liveCharger, portsZh, tierZh,
+  DEVICES, TIER_TONE, anchorCharger, chargerById, chargers, fit, inStockCharger, liveCharger, portsZh, stockedAlternatives, tierZh,
   type Got,
 } from "@/lib/charger";
 
@@ -54,6 +54,7 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
     .filter((x) => x.ports.length > 1 && liveCharger(x).length > 0)
     .sort((a, b) => (anchorCharger(a)?.amount ?? 1e9) - (anchorCharger(b)?.amount ?? 1e9));
   const w = (n?: number) => (n === undefined ? "沒寫" : `${n}W`);
+  const alts = inStockCharger(c) ? [] : stockedAlternatives(c);
 
   // 每一台單獨插上去的結果，照等級分組
   const each: Got[] = DEVICES.map((d) => fit(c, [d]).got![0]);
@@ -103,7 +104,23 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
           )}
         </div>
       ) : (
-        <p style={{ ...note, marginTop: 18 }}>購買連結還在補。</p>
+        <p style={{ ...note, marginTop: 18 }}>這一顆還沒有購買連結。</p>
+      )}
+
+      {/* 買不到（沒連結、或上次看是賣完的）：直接給現在買得到、一樣最快的，不要停在「還在補」 */}
+      {alts.length > 0 && (
+        <div style={altBox}>
+          <p style={{ margin: 0, fontSize: 15.5, fontWeight: 700, lineHeight: 1.7 }}>
+            {m ? "不想等補貨的話，現在買得到、插上去最快的是這幾顆：" : "現在買得到、插上去最快的是這幾顆："}
+          </p>
+          {alts.map((a) => (
+            <p key={a.charger.id} style={{ margin: "8px 0 0", fontSize: 15.5, lineHeight: 1.8 }}>
+              <Link href={`/charger/p/${a.charger.id}`} style={{ color: "var(--accent)", fontWeight: 700 }}>{a.charger.brand} {a.charger.name}</Link>
+              {anchorCharger(a.charger) ? `（$${anchorCharger(a.charger)!.amount.toLocaleString()}）` : ""}
+              <span style={{ display: "block", fontSize: 13.5, color: "var(--muted)" }}>{a.devices.map((d) => d.zh).join("、")}</span>
+            </p>
+          ))}
+        </div>
       )}
 
       <p style={S.lbl}>你的手機插它會怎樣</p>
@@ -245,6 +262,9 @@ const listWrap: React.CSSProperties = {
 };
 const comboRow: React.CSSProperties = {
   display: "flex", flexWrap: "wrap", justifyContent: "space-between", gap: "4px 12px", padding: "12px 16px", fontSize: 15.5,
+};
+const altBox: React.CSSProperties = {
+  marginTop: 14, background: "var(--accent-soft)", borderRadius: 14, padding: "16px 18px",
 };
 const dealBox: React.CSSProperties = {
   marginTop: 24, background: "var(--cut-soft)", border: "1px solid var(--cut)", borderRadius: 14, padding: "16px 20px",

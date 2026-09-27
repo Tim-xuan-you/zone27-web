@@ -376,3 +376,25 @@ export function splitBuy(devices: Device[]): { charger: Charger; devices: Device
   }
   return out;
 }
+
+/**
+ * 這一顆買不到（沒有連結，或上次看是賣完的）的時候，插它最快的那幾台，現在買得到、一樣最快的是哪幾顆。
+ * 同一顆的裝置併在一起，裝置多的排前面。
+ *
+ * 2026-09-27：原廠 20W、三星 45W／60W／65W 的連結全部產不出來，商品頁停在「購買連結還在補」。
+ * 搜「Apple 20W 充電器」進來的人看到這句就走了。答案其實有（Q48 一樣最快又便宜），要直接給。
+ */
+export function stockedAlternatives(c: Charger): { charger: Charger; devices: Device[] }[] {
+  const out: { charger: Charger; devices: Device[] }[] = [];
+  // 看三星充電器的多半是三星手機的人，看 Apple 的多半是 iPhone：自家的手機就算插它不是最快也列進來、排最前面
+  const home = /Samsung|三星/.test(c.brand) ? "Galaxy" : /Apple/.test(c.brand) ? "iPhone" : null;
+  for (const d of DEVICES.filter((x) => x.group === home || fit(c, [x]).got![0].tier === "fast")) {
+    const f = rank([d]).find((x) => x.fast === 1 && x.charger.id !== c.id && inStockCharger(x.charger));
+    if (!f) continue;
+    const g = out.find((x) => x.charger.id === f.charger.id);
+    if (g) g.devices.push(d);
+    else out.push({ charger: f.charger, devices: [d] });
+  }
+  const mine = (g: { devices: Device[] }) => (g.devices.some((d) => d.group === home) ? 1 : 0);
+  return out.sort((a, b) => mine(b) - mine(a) || b.devices.length - a.devices.length);
+}

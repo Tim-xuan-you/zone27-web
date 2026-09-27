@@ -19,6 +19,7 @@ import { treats } from "@/lib/treat";
 import { CHARGER_SUB_ID, DEVICES, chargers, fit } from "@/lib/charger";
 import HuntPicks, { openPicks, pageProven, parkedWhy } from "@/components/HuntPicks";
 import huntData from "@/data/hunt-candidates.json";
+import { daysBetween, todayTW } from "@/lib/date";
 
 /** 我查過候選賣場的（不管成敗）。沒在這裡的就是我還沒找 */
 const HUNT_TRIED = new Set((huntData.targets as { id: string; candidates: unknown[] }[]).filter((t) => t.candidates.length > 0).map((t) => t.id));
@@ -428,6 +429,14 @@ export default function Page() {
                   <span className="mono" style={{ fontSize: 12.5, color: "var(--faint)", whiteSpace: "nowrap" }}>{t.id}</span>
                 </div>
                 <p style={{ margin: "2px 0 0", fontSize: 13.5, color: "var(--muted)", lineHeight: 1.8 }}>{w}</p>
+                {/* 賣家會陸續加入分潤，先不找的每 30 天我要再查一次（2026-09-27 Tim：「充電器都不用處理沒關係？」） */}
+                {(() => {
+                  const d = /d{4}-d{2}-d{2}/.exec(String(w))?.[0];
+                  const age = d ? daysBetween(d, todayTW()) : null;
+                  return age !== null && age >= 30 ? (
+                    <p style={{ margin: "2px 0 0", fontSize: 13.5, color: "var(--cut)", fontWeight: 700 }}>{age} 天前查的，我該再查一次</p>
+                  ) : null;
+                })()}
               </div>
             ))}
           </div>
