@@ -1169,11 +1169,31 @@
       "price": {
         "unit": "80g",
         "checkedAt": "2026-09-27",
-        "merchants": []
+        "merchants": [
+          {
+            "id": "m1",
+            "label": "汪喵星球官方商城",
+            "unit": "80g",
+            "amount": 46,
+            "note": "一頁多口味，口味選「鱉蛋雞肉 80g」",
+            "affiliateUrl": "https://s.shopee.tw/6L4lmuvKgO?share_channel_code=6",
+            "anchor": "safe",
+            "checkedAt": "2026-09-27"
+          },
+          {
+            "id": "m2",
+            "label": "汪喵星球官方商城",
+            "unit": "165g",
+            "amount": 72,
+            "note": "一頁多口味，口味選「鱉蛋雞肉 165g」",
+            "affiliateUrl": "https://s.shopee.tw/6L4lmuvKgO?share_channel_code=6",
+            "anchor": "value",
+            "checkedAt": "2026-09-27"
+          }
+        ]
       },
       "dealbreaker": "你的狗對雞過敏。第一項就是雞肉，名字也寫了。",
       "knownIssues": "名字誠實，雞寫在標題上：雞肉、雞心肝、雞軟骨排前三項，鱉蛋排第四。販售頁沒寫適用年齡，我們先當成成犬。",
-      "awaitingLink": true,
       "searchAs": "汪喵星球 犬用 Fantastic 95% 鮮肉主食罐 鱉蛋雞肉 80g",
       "chicken": {
         "status": "chicken"
