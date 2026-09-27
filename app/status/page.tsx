@@ -463,12 +463,20 @@ export default function Page() {
       {soldOut.length > 0 && (
         <>
           <H id="sold-out" n={soldOut.length}>賣完了，看補貨了沒</H>
-          <p style={lead}>連結是好的，讀者暫時看不到。看到有貨跟我說一聲，就放回去。</p>
+          <p style={lead}>這幾款每一家都賣完了。讀者照樣點得到，按鈕下面寫著「我們哪天看是賣完的」。看到補貨跟我說一聲，我把日期改掉。</p>
           <div style={{ ...box, padding: "6px 22px" }}>
-            {soldOut.flatMap((p) => p.sold.map((m) => ({ p, m }))).map(({ p, m }, i) => (
+            {/* 同一家、同規格、同價錢的只列一行：那是同一頁產了好幾條連結（2026-09-27 Tim：「這有甚麼差別？」沒有差別） */}
+            {soldOut.flatMap((p) => {
+              const groups = new Map<string, typeof p.sold>();
+              for (const m of p.sold) {
+                const k = `${m.label}|${m.unit ?? ""}|${m.amount}`;
+                groups.set(k, [...(groups.get(k) ?? []), m]);
+              }
+              return [...groups.values()].map((ms) => ({ p, m: ms[0], n: ms.length }));
+            }).map(({ p, m, n }, i) => (
               <div key={p.id + m.id} style={{ ...line, borderTop: i ? "1px solid var(--line)" : 0 }}>
                 <div style={{ flex: 1, minWidth: 180 }}>
-                  <span style={{ display: "block", fontSize: 12.5, color: "var(--muted)" }}>{p.brand} · {m.label}</span>
+                  <span style={{ display: "block", fontSize: 12.5, color: "var(--muted)" }}>{p.brand} · {m.label}{n > 1 ? ` · 同一頁 ${n} 條連結` : ""}</span>
                   {p.name}
                 </div>
                 <span className="mono" style={{ fontSize: 12.5, whiteSpace: "nowrap" }}>{m.unit} · ${m.amount}</span>
