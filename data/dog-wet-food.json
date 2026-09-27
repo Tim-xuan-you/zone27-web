@@ -470,12 +470,23 @@
       },
       "price": {
         "unit": "80g",
-        "checkedAt": "2026-09-20",
-        "merchants": []
+        "checkedAt": "2026-09-28",
+        "merchants": [
+          {
+            "id": "m1",
+            "label": "優品電購商城",
+            "unit": "80g",
+            "amount": 52,
+            "note": "一頁多口味，規格選「狗罐-雞魚x野莓 80g」",
+            "affiliateUrl": "https://s.shopee.tw/2BFDCocDXq?share_channel_code=6",
+            "anchor": "safe",
+            "soldOut": true,
+            "checkedAt": "2026-09-28"
+          }
+        ]
       },
       "dealbreaker": "你的狗對雞過敏。第一項是雞肉，後面還有雞肝、雞油、雞心。",
       "knownIssues": "標的是最低值和最高值，不是實測：蛋白質 11% 是最少、水分 82% 是最多。魚的部分是白身鮪魚。成分裡有寒天與蒟蒻。",
-      "awaitingLink": true,
       "searchAs": "陪心寵糧 SUPER小白主食罐 雞魚 野莓 80g",
       "chicken": {
         "status": "chicken"
